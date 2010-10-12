@@ -1,5 +1,11 @@
 2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gtk2/rbgtkitemfactory.c (ifact_initialize): fix wrong GType
+	conversion type.
+	"[ruby-gnome2-devel-en] Problem with rbgtkitemfactory.c on 64bit
+	platforms"
+	Reported by Grant McLean and Steve Wills. Thanks!!!
+
 	* ext/gtk2/extconf.rb: cleanup.
 
 	* ext/gtk2/extconf.rb: keep backward compatibility around GDK key

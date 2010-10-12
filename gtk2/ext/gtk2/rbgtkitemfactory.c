@@ -29,7 +29,7 @@ ifact_initialize(self, type, path, accel)
 {
     VALUE obj = rb_eval_string("eval('self', binding)");
     G_RELATIVE(obj, self);
-    RBGTK_INITIALIZE(self, gtk_item_factory_new(FIX2INT(type), RVAL2CSTR(path),
+    RBGTK_INITIALIZE(self, gtk_item_factory_new(NUM2UINT(type), RVAL2CSTR(path),
                                                 RVAL2ACCEL(accel)));
    
     return Qnil;
