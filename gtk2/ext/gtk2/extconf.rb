@@ -39,19 +39,17 @@ target = PKGConfig.variable(package_id, "target")
 $defs << "-DRUBY_GTK2_TARGET=\\\"#{target}\\\""
 STDOUT.print(target, "\n")
 
-gdkincl = nil
-gdkkeysyms_compat = false
-tmpincl = $CFLAGS.gsub(/-D\w+/, '').split(/-I/) + ['/usr/include']
-tmpincl.each do |i|
-  i.strip!
+gdk_include_path = nil
+include_paths = $CFLAGS.gsub(/-D\w+/, '').split(/-I/) + ['/usr/include']
+include_paths.each do |path|
+  path.strip!
 
-  if FileTest.exist?(i + "/gdk/gdkkeysyms.h")
-    gdkincl = i + "/gdk"
-    gdkkeysyms_compat = true if FileTest.exist?(i + "/gdk/gdkkeysyms-compat.h")  
+  if FileTest.exist?("#{path}/gdk/gdkkeysyms.h")
+    gdk_include_path = Pathname("#{path}/gdk")
     break
   end
 end
-raise "can't find gdkkeysyms.h" if gdkincl.nil?
+raise "can't find gdkkeysyms.h" if gdk_include_path.nil?
 
 gtk_header = "gtk/gtk.h"
 have_func('gtk_plug_get_type', gtk_header)
@@ -186,10 +184,11 @@ end
 
 rbgdkkeysyms_h_path = Pathname("rbgdkkeysyms.h")
 gdkkeysyms_h_paths = []
-gdkkeysyms_h_paths << Pathname(gdkincl) + "gdkkeysyms.h"
-gdkkeysyms_h_paths << Pathname(gdkincl) + "gdkkeysyms-compat.h" if gdkkeysyms_compat
+gdkkeysyms_h_paths << gdk_include_path + "gdkkeysyms.h"
+gdkkeysyms_h_paths << gdk_include_path + "gdkkeysyms-compat.h"
 rbgdkkeysyms_h_path.open("w") do |rbgdkkeysyms_h|
   gdkkeysyms_h_paths.each do |path|
+    next unless path.exist?
     path.each_line do |line|
       if /^#define\s+(GDK_\w+)\s+\d+/ =~ line
         define_line = "rb_define_const(mGdkKeyval, \"#{$1}\", INT2FIX(#{$1}));"

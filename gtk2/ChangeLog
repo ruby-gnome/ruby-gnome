@@ -1,5 +1,7 @@
 2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gtk2/extconf.rb: cleanup.
+
 	* ext/gtk2/extconf.rb: keep backward compatibility around GDK key
 	symbols introduced at GTK+ 2.20.
 	"[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
