@@ -1,3 +1,10 @@
+2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/extconf.rb: keep backward compatibility around GDK key
+	symbols introduced at GTK+ 2.20.
+	"[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
+	Patch by Vincent Carmona. Thanks!!!
+
 2010-10-08  Guillaume Cottenceau
 
 	* fix some uses of rb_str_new* and StringValuePtr to use

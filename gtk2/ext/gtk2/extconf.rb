@@ -40,12 +40,14 @@ $defs << "-DRUBY_GTK2_TARGET=\\\"#{target}\\\""
 STDOUT.print(target, "\n")
 
 gdkincl = nil
+gdkkeysyms_compat = false
 tmpincl = $CFLAGS.gsub(/-D\w+/, '').split(/-I/) + ['/usr/include']
 tmpincl.each do |i|
   i.strip!
 
   if FileTest.exist?(i + "/gdk/gdkkeysyms.h")
     gdkincl = i + "/gdk"
+    gdkkeysyms_compat = true if FileTest.exist?(i + "/gdk/gdkkeysyms-compat.h")  
     break
   end
 end
@@ -183,12 +185,16 @@ rbgtkinits_c_path.open("w") do |rbgtkinits_c|
 end
 
 rbgdkkeysyms_h_path = Pathname("rbgdkkeysyms.h")
+gdkkeysyms_h_paths = []
+gdkkeysyms_h_paths << Pathname(gdkincl) + "gdkkeysyms.h"
+gdkkeysyms_h_paths << Pathname(gdkincl) + "gdkkeysyms-compat.h" if gdkkeysyms_compat
 rbgdkkeysyms_h_path.open("w") do |rbgdkkeysyms_h|
-  gdkkeysyms_h_path = Pathname(gdkincl) + "gdkkeysyms.h"
-  gdkkeysyms_h_path.each_line do |line|
-    if /^#define\s+(GDK_\w+)\s+\d+/ =~ line
-      define_line = "rb_define_const(mGdkKeyval, \"#{$1}\", INT2FIX(#{$1}));"
-      rbgdkkeysyms_h.puts(define_line)
+  gdkkeysyms_h_paths.each do |path|
+    path.each_line do |line|
+      if /^#define\s+(GDK_\w+)\s+\d+/ =~ line
+        define_line = "rb_define_const(mGdkKeyval, \"#{$1}\", INT2FIX(#{$1}));"
+        rbgdkkeysyms_h.puts(define_line)
+      end
     end
   end
 end
