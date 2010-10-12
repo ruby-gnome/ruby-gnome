@@ -10,6 +10,11 @@ WRITE ME.
 
 === Changes
 
+==== All
+
+  * Support String encoding.
+    [Guillaume Cottenceau]
+
 ==== Ruby/GTK2
 
   * Improvements:
@@ -41,6 +46,7 @@ WRITE ME.
   * U.Nakamura
   * kdmsnr
   * Mamoru Tasaka
+  * Guillaume Cottenceau
   * Vincent Carmona
 
 == Ruby-GNOME2 0.90.2: 2010-09-26

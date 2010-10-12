@@ -1,5 +1,8 @@
 2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: All: Support String encoding.
+	Work by Guillaume Cottenceau.
+
 	* NEWS: Ruby/GTK2: keep backward compatibility around GDK key
 	symbols introduced at GTK+ 2.20.
 	"[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
