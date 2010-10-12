@@ -22,6 +22,10 @@ WRITE ME.
       symbols introduced at GTK+ 2.20.
       "[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
       [Vincent Carmona]
+  * Bug fixes:
+    * fix GType conversion in Gtk::ItemFactory.new on 64bit
+      platform.
+      [Grant McLean, Steve Wills, Kouhei Sutou]
 
 ==== Ruby/RSVG2
 
@@ -48,6 +52,8 @@ WRITE ME.
   * Mamoru Tasaka
   * Guillaume Cottenceau
   * Vincent Carmona
+  * Grant McLean
+  * Steve Wills
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 

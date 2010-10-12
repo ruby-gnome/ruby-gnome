@@ -1,5 +1,9 @@
 2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GTK2: fix GType conversion in Gtk::ItemFactory.new on
+	64bit platform.
+	Reported by Grant McLean and Steve Wills. Thanks!!!
+
 	* NEWS: All: Support String encoding.
 	Work by Guillaume Cottenceau.
 
