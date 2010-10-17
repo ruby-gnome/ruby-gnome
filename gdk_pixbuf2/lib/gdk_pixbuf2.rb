@@ -36,6 +36,16 @@ module Gdk
   end
   class Pixbuf
     LOG_DOMAIN = "GdkPixbuf"
+
+    class << self
+      def cairo_available?
+        if Gdk.respond_to?(:cairo_available?)
+          Gdk.cairo_available?
+        else
+          false
+        end
+      end
+    end
   end
 end
 

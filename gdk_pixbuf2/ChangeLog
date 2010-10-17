@@ -1,3 +1,9 @@
+2010-10-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile, ext/gdk_pixbuf2/rbgdk-pixbuf.c, lib/gdk_pixbuf2.rb:
+	move GDK and cairo related code to Ruby/GTK2.
+	Patch by Andrea Dallera. Thanks!!!
+
 2010-10-08  Guillaume Cottenceau
 
 	* RVAL2CSTR2 is deprecated, replace with RVAL2CSTR_ACCEPT_NIL

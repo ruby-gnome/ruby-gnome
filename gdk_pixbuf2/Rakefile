@@ -38,7 +38,6 @@ spec = Gem::Specification.new do |s|
   s.homepage = "http://ruby-gnome2.sourceforge.jp/"
   s.version = version
   s.platform = Gem::Platform::RUBY
-  s.add_dependency("cairo", ">= 1.10.0")
   compatible_version = version.split(/\./)[0, 3].join(".")
   s.add_dependency("glib2", ">= #{compatible_version}")
   s.extensions = FileList["ext/#{package_name}/extconf.rb"]
