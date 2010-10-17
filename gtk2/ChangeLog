@@ -1,3 +1,11 @@
+2010-10-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/rbgtkitemfactory.c (ifact_initialize): Use NUM2ULONG()
+	instead of NUM2UINT() because GType is unsigned long.
+	"[ruby-gnome2-devel-en] Problem with rbgtkitemfactory.c on 64bit
+	platforms"
+	Reported by Steve Wills. Thanks!!!
+
 2010-10-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/rbgtkitemfactory.c (ifact_initialize): fix wrong GType
