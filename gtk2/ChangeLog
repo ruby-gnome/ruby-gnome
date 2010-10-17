@@ -1,5 +1,9 @@
 2010-10-17  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gtk2/rbgdkcairo.c: move GDK and cairo related code from
+	Ruby/GdkPixbuf2.
+	Patch by Andrea Dallera. Thanks!!!
+
 	* ext/gtk2/rbgtkitemfactory.c (ifact_initialize): Use NUM2ULONG()
 	instead of NUM2UINT() because GType is unsigned long.
 	"[ruby-gnome2-devel-en] Problem with rbgtkitemfactory.c on 64bit

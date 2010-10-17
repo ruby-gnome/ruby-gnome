@@ -42,6 +42,7 @@ spec = Gem::Specification.new do |s|
   compatible_version = version.split(/\./)[0, 3].join(".")
   s.add_dependency("glib2", ">= #{compatible_version}")
   s.add_dependency("pango", ">= #{compatible_version}")
+  s.add_dependency("gdk_pixbuf2", ">= #{compatible_version}")
   s.add_dependency("atk", "= #{compatible_version}")
   s.extensions = FileList["ext/#{package_name}/extconf.rb"]
   s.require_paths = ["lib"]
