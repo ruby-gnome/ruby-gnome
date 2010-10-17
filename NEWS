@@ -22,10 +22,20 @@ WRITE ME.
       symbols introduced at GTK+ 2.20.
       "[ruby-gnome2-devel-en] Constants names change in Gdk::KeyVal"
       [Vincent Carmona]
+    * move gdk-pixbuf and cairo related methods from Ruby/GdkPixbuf2.
+      "[ruby-gnome2-devel-en] gtk2 dependency to gdkpixbuf2"
+      [Andrea Dallera, Kouhei Sutou]
   * Bug fixes:
     * fix GType conversion in Gtk::ItemFactory.new on 64bit
       platform.
       [Grant McLean, Steve Wills, Kouhei Sutou]
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements:
+    * move gdk-pixbuf and cairo related methods to Ruby/GTK2.
+      "[ruby-gnome2-devel-en] gtk2 dependency to gdkpixbuf2"
+      [Andrea Dallera, Kouhei Sutou]
 
 ==== Ruby/RSVG2
 
@@ -54,6 +64,7 @@ WRITE ME.
   * Vincent Carmona
   * Grant McLean
   * Steve Wills
+  * Andrea Dallera
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 
