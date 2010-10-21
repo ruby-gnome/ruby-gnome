@@ -15,6 +15,12 @@ WRITE ME.
   * Support String encoding.
     [Guillaume Cottenceau]
 
+==== Ruby/GLib2
+
+  * Improvements:
+    * declare argument types.
+      [Nobuyoshi Nakada, Kouhei Sutou]
+
 ==== Ruby/GTK2
 
   * Improvements:
@@ -65,6 +71,7 @@ WRITE ME.
   * Grant McLean
   * Steve Wills
   * Andrea Dallera
+  * Nobuyoshi Nakada
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 

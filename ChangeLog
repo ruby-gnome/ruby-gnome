@@ -1,3 +1,8 @@
+2010-10-21  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: declare argument types.
+	Reported by Nobuyoshi Nakada. Thanks!!!
+
 2010-10-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2, Ruby/GdkPixbuf2: move gdk-pixbuf and cairo
