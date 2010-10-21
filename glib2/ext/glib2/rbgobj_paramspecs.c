@@ -15,39 +15,40 @@
 #include "rbgprivate.h"
 
 #define DEF_NUMERIC_PSPEC_METHODS_FUNC(pspec_type, typename, from_ruby, to_ruby, pspec_cast) \
-static VALUE \
-typename##_initialize(self, name, nick, blurb, minimum, maximum, default_value, flags) \
-   VALUE self, name, nick, blurb, minimum, maximum, default_value, flags; \
-{ \
-    GParamSpec* pspec; \
-    pspec = g_param_spec_##typename(StringValuePtr(name), \
-                                    StringValuePtr(nick), \
-                                    StringValuePtr(blurb), \
-                                    from_ruby(minimum), \
-                                    from_ruby(maximum), \
-                                    from_ruby(default_value), \
-                                    NUM2UINT(flags)); \
-    rbgobj_param_spec_initialize(self, pspec); \
-    return Qnil; \
-} \
-\
-static \
-VALUE typename##_minimum(self) \
-{ \
-    return to_ruby(pspec_cast(RVAL2GOBJ(self))->minimum); \
-} \
-\
-static \
-VALUE typename##_maximum(self) \
-{ \
-    return to_ruby(pspec_cast(RVAL2GOBJ(self))->maximum); \
-} \
-\
-static \
-VALUE typename##_range(self) \
-{ \
-    pspec_type* pspec = pspec_cast(RVAL2GOBJ(self)); \
-    return rb_range_new(pspec->minimum, pspec->maximum, 0); \
+static VALUE                                                            \
+typename##_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,  \
+                      VALUE minimum, VALUE maximum, VALUE default_value, \
+                      VALUE flags)                                      \
+{                                                                       \
+    GParamSpec* pspec;                                                  \
+    pspec = g_param_spec_##typename(StringValuePtr(name),               \
+                                    StringValuePtr(nick),               \
+                                    StringValuePtr(blurb),              \
+                                    from_ruby(minimum),                 \
+                                    from_ruby(maximum),                 \
+                                    from_ruby(default_value),           \
+                                    NUM2UINT(flags));                   \
+    rbgobj_param_spec_initialize(self, pspec);                          \
+    return Qnil;                                                        \
+}                                                                       \
+                                                                        \
+static VALUE                                                            \
+typename##_minimum(VALUE self)                                          \
+{                                                                       \
+    return to_ruby(pspec_cast(RVAL2GOBJ(self))->minimum);               \
+}                                                                       \
+                                                                        \
+static VALUE                                                            \
+typename##_maximum(VALUE self)                                          \
+{                                                                       \
+    return to_ruby(pspec_cast(RVAL2GOBJ(self))->maximum);               \
+}                                                                       \
+                                                                        \
+static VALUE                                                            \
+typename##_range(VALUE self)                                            \
+{                                                                       \
+    pspec_type* pspec = pspec_cast(RVAL2GOBJ(self));                    \
+    return rb_range_new(pspec->minimum, pspec->maximum, 0);             \
 }
 
 DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecChar, char, NUM2INT, INT2FIX, G_PARAM_SPEC_CHAR)
@@ -62,23 +63,21 @@ DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecFloat, float, NUM2DBL, rb_float_new, G_
 DEF_NUMERIC_PSPEC_METHODS_FUNC(GParamSpecDouble, double, NUM2DBL, rb_float_new, G_PARAM_SPEC_DOUBLE)
 
 static VALUE
-float_epsilon(self)
-    VALUE self;
+float_epsilon(VALUE self)
 {
     return rb_float_new(G_PARAM_SPEC_FLOAT(RVAL2GOBJ(self))->epsilon);
 }
 
 static VALUE
-double_epsilon(self)
-    VALUE self;
+double_epsilon(VALUE self)
 {
     return rb_float_new(G_PARAM_SPEC_DOUBLE(RVAL2GOBJ(self))->epsilon);
 }
 
 
 static VALUE
-boolean_initialize(self, name, nick, blurb, default_value, flags)
-   VALUE self, name, nick, blurb, default_value, flags;
+boolean_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                   VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_boolean(StringValuePtr(name),
@@ -91,8 +90,8 @@ boolean_initialize(self, name, nick, blurb, default_value, flags)
 }
 
 static VALUE
-unichar_initialize(self, name, nick, blurb, default_value, flags)
-   VALUE self, name, nick, blurb, default_value, flags;
+unichar_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                   VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_unichar(StringValuePtr(name),
@@ -105,8 +104,8 @@ unichar_initialize(self, name, nick, blurb, default_value, flags)
 }
 
 static VALUE
-enum_initialize(self, name, nick, blurb, enum_type, default_value, flags)
-   VALUE self, name, nick, blurb, enum_type, default_value, flags;
+enum_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                VALUE enum_type, VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
     GType gtype = rbgobj_gtype_get(enum_type);
@@ -122,8 +121,8 @@ enum_initialize(self, name, nick, blurb, enum_type, default_value, flags)
 }
 
 static VALUE
-flags_initialize(self, name, nick, blurb, flags_type, default_value, flags)
-   VALUE self, name, nick, blurb, flags_type, default_value, flags;
+flags_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                 VALUE flags_type, VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
     GType gtype = rbgobj_gtype_get(flags_type);
@@ -139,8 +138,8 @@ flags_initialize(self, name, nick, blurb, flags_type, default_value, flags)
 }
 
 static VALUE
-string_initialize(self, name, nick, blurb, default_value, flags)
-   VALUE self, name, nick, blurb, default_value, flags;
+string_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                  VALUE default_value, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_string(StringValuePtr(name),
@@ -153,8 +152,8 @@ string_initialize(self, name, nick, blurb, default_value, flags)
 }
 
 static VALUE
-param_initialize(self, name, nick, blurb, param_type, flags)
-   VALUE self, name, nick, blurb, param_type, flags;
+param_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                 VALUE param_type, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_param(StringValuePtr(name),
@@ -167,8 +166,8 @@ param_initialize(self, name, nick, blurb, param_type, flags)
 }
 
 static VALUE
-boxed_initialize(self, name, nick, blurb, boxed_type, flags)
-   VALUE self, name, nick, blurb, boxed_type, flags;
+boxed_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                 VALUE boxed_type, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_boxed(StringValuePtr(name),
@@ -181,8 +180,7 @@ boxed_initialize(self, name, nick, blurb, boxed_type, flags)
 }
 
 static VALUE
-pointer_initialize(self, name, nick, blurb, flags)
-   VALUE self, name, nick, blurb, flags;
+pointer_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_pointer(StringValuePtr(name),
@@ -194,8 +192,8 @@ pointer_initialize(self, name, nick, blurb, flags)
 }
 
 static VALUE
-value_array_initialize(self, name, nick, blurb, element_spec, flags)
-   VALUE self, name, nick, blurb, element_spec, flags;
+value_array_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                       VALUE element_spec, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_value_array(StringValuePtr(name),
@@ -208,8 +206,8 @@ value_array_initialize(self, name, nick, blurb, element_spec, flags)
 }
 
 static VALUE
-object_initialize(self, name, nick, blurb, object_type, flags)
-   VALUE self, name, nick, blurb, object_type, flags;
+object_initialize(VALUE self, VALUE name, VALUE nick, VALUE blurb,
+                  VALUE object_type, VALUE flags)
 {
     GParamSpec* pspec;
     pspec = g_param_spec_object(StringValuePtr(name),
@@ -222,7 +220,7 @@ object_initialize(self, name, nick, blurb, object_type, flags)
 }
 
 void
-Init_gobject_gparamspecs()
+Init_gobject_gparamspecs(void)
 {
     VALUE cParamSpec = GTYPE2CLASS(G_TYPE_PARAM);
     VALUE c;
