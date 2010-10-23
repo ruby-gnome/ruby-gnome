@@ -1,5 +1,7 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: RVAL2CSTR2 and CSTR2RVAL2 are deprecated.
+
 	* NEWS: Ruby/GIO2: Imported as an experimental library.
 	Implemented by Nikolai Weibull. Thanks!!!
 
