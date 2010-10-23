@@ -2,11 +2,11 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.90.3: 2010-XX-XX
+== Ruby-GNOME2 0.90.3: 2010-10-23
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
-WRITE ME.
+Support String encoding in Ruby 1.9.
 
 === Changes
 
@@ -20,6 +20,8 @@ WRITE ME.
   * Improvements:
     * declare argument types.
       [Nobuyoshi Nakada, Kouhei Sutou]
+    * support String encoding.
+      [Guillaume Cottenceau, Neil Roberts, Kouhei Sutou]
 
 ==== Ruby/GTK2
 
@@ -72,6 +74,7 @@ WRITE ME.
   * Steve Wills
   * Andrea Dallera
   * Nobuyoshi Nakada
+  * Neil Roberts
 
 == Ruby-GNOME2 0.90.2: 2010-09-26
 
