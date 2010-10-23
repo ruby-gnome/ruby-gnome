@@ -6,9 +6,9 @@
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
-Support String encoding in Ruby 1.9.
-
-RVAL2CSTR2 and CSTR2RVAL2 are deprecated.
+  * Support String encoding in Ruby 1.9.
+  * RVAL2CSTR2 and CSTR2RVAL2 are deprecated.
+  * Ruby/GIO2 is imported as an experimental library.
 
 === Changes
 

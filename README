@@ -41,6 +41,7 @@ use from Ruby 1.8.6, 1.8.7 and 1.9.1.
   * Ruby/GStreamer:       GStreamer 0.10.x or later
   * Ruby/GtkSourceView2:  GtkSourceView 2.0.0 or later
   * Ruby/GooCanvas:       GooCanvas 0.8.0 or later
+  * Ruby/GIO2:            GIO 2.16.x or later
 
 === Deprecated
 
