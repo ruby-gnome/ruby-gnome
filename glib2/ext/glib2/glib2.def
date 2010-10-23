@@ -89,5 +89,10 @@ EXPORTS
 	rbgobj_fund_define_fundamental
 	rbgobj_gc_mark_gvalue
 	rbgobj_gc_mark_instance
+	rbglib_num_to_uint64
+	rbglib_uint64_to_num
+	rbglib_num_to_int64
+	rbglib_int64_to_num
 
 	g_connect_flags_get_type
+	g_poll_fd_get_type

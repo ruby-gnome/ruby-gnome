@@ -1,5 +1,7 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/glib2.def: add missing exported symbols.
+
 	* lib/mkmf-gnome2.rb: ignore nonexistent directory.
 
 	* ext/glib2/rbglib.c, ext/glib2/rbglib.h:
