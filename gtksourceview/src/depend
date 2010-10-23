@@ -1,3 +1,5 @@
 install:
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../ruby-gtksourceview.pc $(libdir)/pkgconfig
+	if test -n "$(pkgconfigdir)"; then				\
+	  $(MAKEDIRS) $(pkgconfigdir);					\
+	  $(INSTALL_DATA) ../ruby-gtksourceview.pc $(pkgconfigdir);	\
+	fi

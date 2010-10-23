@@ -1,4 +1,8 @@
-install:
+install-so:
 	$(INSTALL_DATA) $(srcdir)/rbart.h $(RUBYARCHDIR)
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ../ruby-libart2.pc $(libdir)/pkgconfig
+
+install:
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ../ruby-libart2.pc $(pkgconfigdir);	\
+	fi
