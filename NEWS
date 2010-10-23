@@ -2,6 +2,24 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.4: 2010-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+WRITE ME
+
+=== Changes
+
+==== Ruby/Libglade2
+
+  * Improvements
+    * Don't install *.pc by default.
+      [OBATA Akio, Kouhei Sutou]
+
+=== Thanks
+
+  * OBATA Akio
+
 == Ruby-GNOME2 0.90.3: 2010-10-23
 
 NOTE: 0.90.x releases are for 1.0.0 major release.

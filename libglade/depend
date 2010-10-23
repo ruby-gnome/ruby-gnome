@@ -9,5 +9,7 @@ $(BINDIR)/$(GLADE_CREATOR): $(srcdir)/bin/$(GLADE_CREATOR)
 	$(INSTALL_SCRIPT) $(srcdir)/bin/$(GLADE_CREATOR) $(BINDIR)
 
 install: $(BINDIR) $(BINDIR)/$(GLADE_CREATOR)
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ruby-libglade2.pc $(libdir)/pkgconfig
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-libglade2.pc $(pkgconfigdir);		\
+	fi
