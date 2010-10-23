@@ -1,3 +1,8 @@
+2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gio2/giomodule.c: remove needless g_io_module_load() and
+	g_io_module_unload() bindings.
+
 2010-10-08  Guillaume Cottenceau
 
 	* RVAL2CSTR2 is deprecated, replace with RVAL2CSTR_ACCEPT_NIL

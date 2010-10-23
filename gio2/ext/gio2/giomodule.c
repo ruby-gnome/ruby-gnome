@@ -44,22 +44,6 @@ iomodule_scan_all_in_directory(VALUE self, VALUE dirname)
         return self;
 }
 
-static VALUE
-iomodule_load(VALUE self)
-{
-        g_io_module_load(_SELF(self));
-
-        return self;
-}
-
-static VALUE
-iomodule_unload(VALUE self)
-{
-        g_io_module_unload(_SELF(self));
-
-        return self;
-}
-
 /* NOTE: No point in implementing g_io_module_query. */
 
 void
@@ -70,8 +54,6 @@ Init_giomodule(VALUE glib)
         iomodule = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
 
         rb_define_method(iomodule, "initialize", iomodule_initialize, 1);
-        rb_define_method(iomodule, "load", iomodule_load, 0);
-        rb_define_method(iomodule, "unload", iomodule_unload, 0);
 
         iomodules = rb_define_module_under(glib, "IOModules");
 

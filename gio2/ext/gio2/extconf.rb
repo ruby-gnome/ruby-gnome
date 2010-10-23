@@ -24,19 +24,22 @@ package_id = "gio-2.0"
 
 require 'mkmf-gnome2'
 
-setup_win32(module_name, base_dir)
+win32 = setup_win32(module_name, base_dir)
 
 defines = '-DRUBY_GIO2_COMPILATION'
 
 PKGConfig.have_package(package_id) or exit 1
-PKGConfig.have_package('gio-unix-2.0') and defines += ' -DHAVE_GIO_UNIX'
+unless win32
+  PKGConfig.have_package('gio-unix-2.0') and defines += ' -DHAVE_GIO_UNIX'
+end
 PKGConfig.have_package('gobject-2.0') or exit 1
 
 have_func('rb_exec_recursive')
 
-[["glib2#{version_suffix}", "glib2"]].each do |directory, library_name|
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{library_name}/#{RUBY_VERSION}"
-  add_depend_package(library_name, "#{directory}/ext/#{library_name}",
+["glib2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
                      top_dir.to_s,
                      :top_build_dir => top_build_dir.to_s,
                      :target_build_dir => build_dir)
