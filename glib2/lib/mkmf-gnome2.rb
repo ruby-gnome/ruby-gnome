@@ -90,6 +90,7 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     unless File.exist?(target_build_dir_full_path)
       target_build_dir_full_path = File.join(topdir, target_srcdir)
     end
+    next unless File.exist?(target_build_dir_full_path)
     $INCFLAGS = "-I#{target_build_dir_full_path} #{$INCFLAGS}"
 
     if /cygwin|mingw/ =~ RUBY_PLATFORM
