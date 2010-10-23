@@ -1,8 +1,8 @@
-Ruby/GIO
-========
+Ruby/GIO2
+=========
 
 
-Ruby/GIO is a Ruby binding of gio-2.0.x.
+Ruby/GIO2 is a Ruby binding of gio-2.0.x.
 
 Requirements
 ------------
@@ -22,7 +22,7 @@ Install
 Copying
 -------
 
-	Copyright (c) 2008-2009 Ruby-GNOME2 Project Team
+	Copyright (c) 2008-2010 Ruby-GNOME2 Project Team
 
 	This program is free software.
 	You can distribute/modify this program under the terms of

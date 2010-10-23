@@ -1,5 +1,7 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* README: Ruby/GIO -> Ruby/GIO2.
+
 	* ext/gio2/giomodule.c: remove needless g_io_module_load() and
 	g_io_module_unload() bindings.
 
