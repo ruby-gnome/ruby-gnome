@@ -23,6 +23,11 @@ Support String encoding in Ruby 1.9.
     * support String encoding.
       [Guillaume Cottenceau, Neil Roberts, Kouhei Sutou]
 
+==== Ruby/GIO2
+
+  * Imported as an experimental library.
+    [Nikolai Weibull]
+
 ==== Ruby/GTK2
 
   * Improvements:

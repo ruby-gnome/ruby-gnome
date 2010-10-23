@@ -1,5 +1,8 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GIO2: Imported as an experimental library.
+	Implemented by Nikolai Weibull. Thanks!!!
+
 	* Rakefile: enable Ruby/GIO2.
 
 	* NEWS: Ruby/GLib2: support String encoding.
