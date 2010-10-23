@@ -44,15 +44,15 @@ extern void Init_glib_keyfile();
 extern void Init_glib_bookmark_file();
 
 gchar *
-rbg_rval2cstr(VALUE str)
+rbg_rval2cstr(VALUE *str)
 {
-    StringValue(str);
+    StringValue(*str);
 #ifdef HAVE_RUBY_ENCODING_H
-    if (rb_enc_get(str) != rb_utf8_encoding()) {
-        str = rb_str_export_to_enc(str, rb_utf8_encoding());
+    if (rb_enc_get(*str) != rb_utf8_encoding()) {
+        str = rb_str_export_to_enc(*str, rb_utf8_encoding());
     }
 #endif
-    return RSTRING_PTR(str);
+    return RSTRING_PTR(*str);
 }
 
 const gchar *
@@ -72,9 +72,9 @@ rbg_string_value_ptr(ptr)
 }
 
 gchar *
-rbg_rval2cstr_accept_nil(VALUE str)
+rbg_rval2cstr_accept_nil(VALUE *str)
 {
-    return NIL_P(str) ? NULL : RVAL2CSTR(str);
+    return NIL_P(*str) ? NULL : RVAL2CSTR(*str);
 }
 
 VALUE

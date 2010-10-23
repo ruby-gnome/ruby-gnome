@@ -1,3 +1,10 @@
+2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbglib.c, ext/glib2/rbglib.h:
+	fix alived string may be GCed in RVAL2CSTR and
+	RVAL2CSTR_ACCEPT_NIL problem.
+	Suggested by Neil Roberts. Thanks!!!
+
 2010-10-21  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbgobj_paramspecs.c: add missing type declarations.
