@@ -1,5 +1,5 @@
 install:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
-	  $(INSTALL_DATA) ruby-gdkpixbuf2.pc $(pkgconfigdir);	\
+	  $(INSTALL_DATA) ruby-gdk-pixbuf2.pc $(pkgconfigdir);	\
 	fi

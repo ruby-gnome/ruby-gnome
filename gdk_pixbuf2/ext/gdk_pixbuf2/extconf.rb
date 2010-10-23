@@ -57,5 +57,5 @@ end
                      :top_build_dir => top_build_dir.to_s,
                      :target_build_dir => build_dir)
 end
-create_pkg_config_file("Ruby/GdkPixbuf2", package_id)
+create_pkg_config_file("Ruby/GdkPixbuf2", package_id, nil, "ruby-gdk-pixbuf2")
 create_makefile(module_name)
