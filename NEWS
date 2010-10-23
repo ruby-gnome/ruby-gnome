@@ -10,6 +10,12 @@ WRITE ME
 
 === Changes
 
+==== Ruby/GIO2
+
+  * Bug fixes
+    * Remove needless cairo dependency.
+      [OBATA Akio, Kouhei Sutou]
+
 ==== Ruby/Libglade2
 
   * Improvements

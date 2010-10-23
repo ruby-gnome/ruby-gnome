@@ -1,5 +1,8 @@
 2010-10-23  Kouhei Sutou  <kou@clear-code.com>
 
+	* NEWS: Ruby/GIO2: Remove needless cairo dependency.
+	Reported by OBATA Akio. Thanks!!!
+
 	* NEWS: Ruby/Libglade2: Don't install *.pc by default.
 	Reported by OBATA Akio. Thanks!!!
 
