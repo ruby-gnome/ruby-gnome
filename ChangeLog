@@ -1,5 +1,7 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: enable Ruby/GIO2.
+
 	* NEWS: Ruby/GLib2: support String encoding.
 	Patch by Guillaume Cottenceau. Thanks!!!
 	Suggested by Neil Roberts. Thanks!!!

@@ -63,7 +63,7 @@ end
 
 namespace :gem do
   namespace :win32 do
-    packages = ["glib2", "atk", "pango", "gtk2", "gdk_pixbuf2",
+    packages = ["glib2", "gio2", "atk", "pango", "gtk2", "gdk_pixbuf2",
                 "rsvg2", "poppler"]
 
     desc "build all Windows gems"
@@ -123,7 +123,7 @@ task :dist => [:dist_gtk2, :dist_gnome2]
 base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
               "README", "Rakefile",
               "exec_make.rb", "extconf.rb", "run-test.rb"]
-gtk2_dirs = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
+gtk2_dirs = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
 gtk2_base_name = "ruby-gtk2"
 desc "make Ruby/GTK2 package"
 task :dist_gtk2 do
