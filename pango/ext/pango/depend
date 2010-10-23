@@ -3,5 +3,7 @@ install-so:
 	$(INSTALL_DATA) rbpangoversion.h $(RUBYARCHDIR)
 
 install:
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ruby-pango.pc $(libdir)/pkgconfig
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-pango.pc $(pkgconfigdir);	\
+	fi

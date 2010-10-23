@@ -1,5 +1,8 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: All: Don't install *.pc by default. Set pkgconfigdir make
+	varialbe like 'make pkgconfigdir=/usr/lib/pkgconfig'.
+
 	* NEWS: RVAL2CSTR2 and CSTR2RVAL2 are deprecated.
 
 	* NEWS: Ruby/GIO2: Imported as an experimental library.

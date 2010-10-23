@@ -15,15 +15,15 @@ NOTE: 0.90.x releases are for 1.0.0 major release.
 ==== All
 
   * Support String encoding.
-    [Guillaume Cottenceau]
+    [Guillaume Cottenceau, Neil Roberts, Kouhei Sutou]
+  * Don't install *.pc by default. Set pkgconfigdir make
+    varialbe like 'make pkgconfigdir=/usr/lib/pkgconfig'.
 
 ==== Ruby/GLib2
 
   * Improvements:
     * declare argument types.
       [Nobuyoshi Nakada, Kouhei Sutou]
-    * support String encoding.
-      [Guillaume Cottenceau, Neil Roberts, Kouhei Sutou]
 
 ==== Ruby/GIO2
 

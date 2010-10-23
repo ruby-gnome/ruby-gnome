@@ -6,5 +6,7 @@ install-so:
 	$(INSTALL_DATA) glib-enum-types.h $(RUBYARCHDIR)
 
 install:
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ruby-glib2.pc $(libdir)/pkgconfig
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-glib2.pc $(pkgconfigdir);	\
+	fi

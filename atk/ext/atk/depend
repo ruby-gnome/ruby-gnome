@@ -2,7 +2,8 @@ install-so:
 	$(INSTALL_DATA) $(srcdir)/rbatk.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) rbatkversion.h $(RUBYARCHDIR)
 
-
 install:
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ruby-atk.pc $(libdir)/pkgconfig
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-atk.pc $(pkgconfigdir);		\
+	fi

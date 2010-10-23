@@ -6,5 +6,7 @@ install-so:
 	$(INSTALL_DATA) $(srcdir)/rbgtkmacros.h $(RUBYARCHDIR)
 
 install:
-	$(MAKEDIRS) $(libdir)/pkgconfig
-	$(INSTALL_DATA) ruby-gtk2.pc $(libdir)/pkgconfig
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-gtk2.pc $(pkgconfigdir);		\
+	fi
