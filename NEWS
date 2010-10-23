@@ -51,6 +51,8 @@ NOTE: 0.90.x releases are for 1.0.0 major release.
     * move gdk-pixbuf and cairo related methods to Ruby/GTK2.
       "[ruby-gnome2-devel-en] gtk2 dependency to gdkpixbuf2"
       [Andrea Dallera, Kouhei Sutou]
+    * change .pc filename from ruby-gdkpixbuf2 to
+      ruby-gdk-pixbuf2.
 
 ==== Ruby/RSVG2
 

@@ -1,5 +1,8 @@
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GdkPixbuf2: change .pc filename from ruby-gdkpixbuf2 to
+	ruby-gdk-pixbuf2.
+
 	* NEWS: All: Don't install *.pc by default. Set pkgconfigdir make
 	varialbe like 'make pkgconfigdir=/usr/lib/pkgconfig'.
 
