@@ -10,6 +10,12 @@ WRITE ME
 
 === Changes
 
+==== Ruby/GLib2
+
+  * Bug fixes
+    * add missing '*' for String type conversion. [#3093789]
+      [tmtms, Kouhei Sutou]
+
 ==== Ruby/GIO2
 
   * Bug fixes
@@ -25,6 +31,7 @@ WRITE ME
 === Thanks
 
   * OBATA Akio
+  * tmtms
 
 == Ruby-GNOME2 0.90.3: 2010-10-23
 
