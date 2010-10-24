@@ -1,3 +1,8 @@
+2010-10-24  Kouhei Sutou  <kou@clear-code.com>
+
+	* ext/glib2/rbglib.c (rbg_rval2cstr): add missing '*'.
+	Reported by tmtms. Thanks!!!
+
 2010-10-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib.h: 0.90.3 -> 0.90.4.
