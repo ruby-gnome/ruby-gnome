@@ -1,3 +1,7 @@
+2010-10-24  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: fill 0.90.4 release note.
+
 2010-10-24  Kouhei Sutou  <kou@clear-code.com>
 
 	* NEWS: Ruby/GLib2: add missing '*' for String type
