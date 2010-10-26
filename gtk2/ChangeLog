@@ -1,3 +1,7 @@
+2010-10-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: "=" -> ">=" for depended atk version.
+
 2010-10-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/rbgdkcairo.c: move GDK and cairo related code from
