@@ -2,6 +2,28 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.5: 2010-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+WRITE ME.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * glib-mkenums.rb can work with Ruby 1.9 on LANG=C.
+      [Kouhei Sutou]
+
+  * Bug fixes
+    * fix pkg-config gem dependency.
+      [Kouhei Sutou]
+
+=== Thanks
+
+  * ...
+
 == Ruby-GNOME2 0.90.4: 2010-10-24
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
