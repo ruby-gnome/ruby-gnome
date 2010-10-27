@@ -96,6 +96,7 @@ GType #{@enum_name}_get_type (void);
     def self.parse(data, g_type_prefix, options={})
       options ||= {}
       enums = []
+      data.force_encoding("utf-8") if data.respond_to?(:force_encoding)
       data.scan(/^\s*typedef\s+enum\s*
                 \{?\s*(.*?)
                 \}\s*(\w+);/mx){|constants, name|
