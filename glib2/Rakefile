@@ -35,7 +35,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
   s.extensions = FileList["ext/#{package_name}/extconf.rb"]
   s.require_paths = ["lib"]
-  s.add_development_dependency("pkg-config", ">= 0")
+  s.add_dependency("pkg-config", ">= 0")
   s.files = FileList["ChangeLog", "README", "Rakefile", "extconf.rb",
                      "lib/**/*.rb", "{ext,sample,test,test-unit}/**/*"]
 end

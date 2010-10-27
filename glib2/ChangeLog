@@ -1,3 +1,7 @@
+2010-10-27  Kouhei Sutou  <kou@clear-code.com>
+
+	* Rakefile: depend on pkg-config as not development library.
+
 2010-10-24  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib.h: 0.90.4 -> 0.90.5.
