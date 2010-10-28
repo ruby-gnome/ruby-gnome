@@ -1,3 +1,7 @@
+2010-10-28  Kouhei Sutou  <kou@clear-code.com>
+
+	* NEWS: All: add --with-pkg-config-dir option to extconf.rb for *.pc.
+
 2010-10-27  Kouhei Sutou  <kou@clear-code.com>
 
 	* NEWS: add 0.90.5 entry.

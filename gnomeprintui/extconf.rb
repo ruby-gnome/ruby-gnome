@@ -62,5 +62,12 @@ create_makefile_at_srcdir(module_name, (base_dir + "src").to_s,
                   "libgnomeprintui/gnome-print-paper-selector.h"])
   end
 end
+pkg_config_dir = with_config("pkg-config-dir")
+if pkg_config_dir.is_a?(String)
+  File.open((base_dir + "src" + "Makefile").to_s, "ab") do |makefile|
+    makefile.puts
+    makefile.puts("pkgconfigdir=#{pkg_config_dir}")
+  end
+end
 
 create_top_makefile

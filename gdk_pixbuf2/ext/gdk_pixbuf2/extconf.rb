@@ -59,3 +59,11 @@ end
 end
 create_pkg_config_file("Ruby/GdkPixbuf2", package_id, nil, "ruby-gdk-pixbuf2.pc")
 create_makefile(module_name)
+
+pkg_config_dir = with_config("pkg-config-dir")
+if pkg_config_dir.is_a?(String)
+  File.open("Makefile", "ab") do |makefile|
+    makefile.puts
+    makefile.puts("pkgconfigdir=#{pkg_config_dir}")
+  end
+end

@@ -77,3 +77,11 @@ unless have_header("librsvg/#{enum_type_prefix}.h")
   glib_mkenums(enum_type_prefix, headers, "RSVG_TYPE_", ["librsvg/rsvg.h"])
 end
 create_makefile(module_name)
+
+pkg_config_dir = with_config("pkg-config-dir")
+if pkg_config_dir.is_a?(String)
+  File.open("Makefile", "ab") do |makefile|
+    makefile.puts
+    makefile.puts("pkgconfigdir=#{pkg_config_dir}")
+  end
+end

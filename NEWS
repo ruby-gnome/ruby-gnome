@@ -2,13 +2,18 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.90.5: 2010-XX-XX
+== Ruby-GNOME2 0.90.5: 2010-10-28
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
-WRITE ME.
+A build system improvements release.
 
 === Changes
+
+==== All
+
+  * Improvements
+    * add --with-pkg-config-dir option to extconf.rb for *.pc.
 
 ==== Ruby/GLib2
 

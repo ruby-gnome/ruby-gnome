@@ -77,6 +77,12 @@ rbbonobouiinits.c:;    $(RUBY) $(srcdir)/makeinits.rb $(srcdir)/*.c > $@
 allclean: clean
 	rm -rf *.a
 "
+    pkg_config_dir = with_config("pkg-config-dir")
+    if pkg_config_dir.is_a?(String)
+      mfile.puts
+      mfile.puts("pkgconfigdir=#{pkg_config_dir}")
+    end
+
     mfile.close
   ensure
     Dir.chdir ".."

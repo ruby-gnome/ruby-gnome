@@ -53,3 +53,10 @@ end
 make_version_header("LIBGLADE", package_id, ".")
 create_pkg_config_file("Ruby/Libglade2", package_id)
 create_makefile(module_name)
+pkg_config_dir = with_config("pkg-config-dir")
+if pkg_config_dir.is_a?(String)
+  File.open("Makefile", "ab") do |makefile|
+    makefile.puts
+    makefile.puts("pkgconfigdir=#{pkg_config_dir}")
+  end
+end
