@@ -1,3 +1,7 @@
+2010-10-28  Kouhei Sutou  <kou@clear-code.com>
+
+	* ext/glib2/rbglib.h: 0.90.5 -> 0.90.6.
+
 2010-10-27  Kouhei Sutou  <kou@clear-code.com>
 
 	* lib/glib-mkenums.rb: work on LANG=C environment.
