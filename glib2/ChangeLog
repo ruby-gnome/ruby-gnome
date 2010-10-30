@@ -1,3 +1,8 @@
+2010-10-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbgobj_type.c (rbgobj_gtype_new): fix GType
+	conversion. GType is unsigned long not unsigned int.
+
 2010-10-28  Kouhei Sutou  <kou@clear-code.com>
 
 	* ext/glib2/rbglib.h: 0.90.5 -> 0.90.6.

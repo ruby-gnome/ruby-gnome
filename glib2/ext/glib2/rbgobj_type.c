@@ -411,7 +411,7 @@ rbgobj_gtype_new(gtype)
     GType gtype;
 {
     VALUE result = rb_obj_alloc(rbgobj_cType);
-    VALUE arg = UINT2NUM(gtype);
+    VALUE arg = ULONG2NUM(gtype);
     rb_obj_call_init(result, 1, &arg);
     return result;
 }
