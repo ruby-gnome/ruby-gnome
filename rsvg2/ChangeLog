@@ -1,3 +1,7 @@
+2010-11-01  Kouhei Sutou  <kou@clear-code.com>
+
+	* Rakefile: add missing libxml dependency.
+
 2010-09-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: fix dependencies.

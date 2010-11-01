@@ -73,7 +73,7 @@ namespace :win32 do
     packages = ["glib", "atk", "gdk-pixbuf", "pango", "gtk+",
                 "librsvg", "libcroco"]
     dependencies = ["gettext-runtime", "zlib", "freetype", "expat",
-                    "fontconfig", "cairo", "libpng"]
+                    "fontconfig", "cairo", "libpng", "libxml"]
     GNOME2Win32BinaryDownloader.download(:packages => packages,
                                          :dependencies => dependencies)
   end
