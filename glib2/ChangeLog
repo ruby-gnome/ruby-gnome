@@ -1,3 +1,7 @@
+2010-11-04  Nikolai Weibull
+
+	* lib/glib2.rb: Use ::File to access Ruby File class.
+
 2010-10-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbgobj_type.c (rbgobj_gtype_new): fix GType
