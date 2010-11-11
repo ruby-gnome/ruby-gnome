@@ -23,9 +23,12 @@
 #define _SELF(value) G_THREADED_SOCKET_SERVICE(RVAL2GOBJ(value))
 
 static VALUE
-threadedsocketservice_initialize(VALUE self)
+threadedsocketservice_initialize(VALUE self, VALUE max_threads)
 {
-        G_INITIALIZE(self, g_socket_service_new());
+        G_INITIALIZE(self,
+                     g_threaded_socket_service_new(RVAL2TYPE_WITH_DEFAULT(max_threads,
+                                                                          RVAL2GINT,
+                                                                          10)));
 
         return Qnil;
 }
@@ -35,5 +38,5 @@ Init_gthreadedsocketservice(VALUE glib)
 {
         VALUE threadedsocketservice = G_DEF_CLASS(G_TYPE_THREADED_SOCKET_SERVICE, "ThreadedSocketService", glib);
 
-        rb_define_method(threadedsocketservice, "initialize", threadedsocketservice_initialize, 0);
+        rb_define_method(threadedsocketservice, "initialize", threadedsocketservice_initialize, -1);
 }

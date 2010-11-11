@@ -170,6 +170,9 @@ rbgio_str_vector_to_ary(const gchar * const *vector)
 {
         int i, n;
         VALUE ary;
+
+        if (vector == NULL)
+             return Qnil;
  
         for (i = n = 0; vector[i] != NULL; i++)
                 n++;

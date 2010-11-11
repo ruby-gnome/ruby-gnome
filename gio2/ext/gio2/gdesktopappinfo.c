@@ -77,8 +77,6 @@ Init_gdesktopappinfo(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE desktopappinfo = G_DEF_CLASS(G_TYPE_DESKTOP_APP_INFO, "DesktopAppInfo", glib);
 
-        rb_define_const(desktopappinfo, "LOOKUP_EXTENSION_POINT_NAME", CSTR2RVAL(G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME));
-
         rb_define_singleton_method(desktopappinfo, "new_from_filename", desktopappinfo_new_from_filename, 1);
         rb_define_singleton_method(desktopappinfo, "new_from_keyfile", desktopappinfo_new_from_keyfile, 1);
         rb_define_singleton_method(desktopappinfo, "set_desktop_env", desktopappinfo_set_desktop_env, 1);

@@ -1423,7 +1423,7 @@ file_start_mountable(int argc, VALUE *argv, VALUE self)
         GMountOperation *start_operation;
         GCancellable *cancellable;
 
-        rb_scan_args(argc, argv, "02&", &rbflags, &rbstart_operation, &rbcancellable, &block);
+        rb_scan_args(argc, argv, "03&", &rbflags, &rbstart_operation, &rbcancellable, &block);
         flags = RVAL2GDRIVESTARTFLAGSDEFAULT(rbflags);
         start_operation = RVAL2GMOUNTOPERATION(rbstart_operation);
         cancellable = RVAL2GCANCELLABLE(rbcancellable);

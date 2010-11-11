@@ -103,7 +103,7 @@ ioscheduler_push_job(int argc, VALUE *argv, VALUE self)
         gint io_priority;
         GCancellable *cancellable;
 
-        rb_scan_args(argc, argv, "01", &rbio_priority, &rbcancellable);
+        rb_scan_args(argc, argv, "02", &rbio_priority, &rbcancellable);
         io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
         cancellable = RVAL2GCANCELLABLE(rbcancellable);
         block = rb_block_proc();

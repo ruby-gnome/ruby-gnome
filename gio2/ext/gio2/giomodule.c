@@ -57,7 +57,7 @@ Init_giomodule(VALUE glib)
 
         iomodules = rb_define_module_under(glib, "IOModules");
 
-        rb_define_module_function(iomodule, "load_all_in_directory", iomodule_load_all_in_directory, 1);
-        rb_define_module_function(iomodule, "scan_all_in_directory", iomodule_scan_all_in_directory, 1);
+        rb_define_module_function(iomodules, "load_all_in_directory", iomodule_load_all_in_directory, 1);
+        rb_define_module_function(iomodules, "scan_all_in_directory", iomodule_scan_all_in_directory, 1);
 
 }

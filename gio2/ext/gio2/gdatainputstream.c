@@ -254,19 +254,22 @@ datainputstream_read_line_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-datainputstream_read_until(int argc, VALUE *argv, VALUE self)
+datainputstream_read_upto(int argc, VALUE *argv, VALUE self)
 {
         VALUE stop_chars, cancellable;
+        const char *stop_chars;
         gsize length;
         GError *error;
         char *string;
 
-        rb_scan_args(argc, argv, "11", &stop_chars, &cancellable);
-        string = g_data_input_stream_read_until(_SELF(self),
-                                                RVAL2CSTR(stop_chars),
-                                                &length,
-                                                RVAL2GCANCELLABLE(cancellable),
-                                                &error);
+        rb_scan_args(argc, argv, "11", &rbstop_chars, &cancellable);
+        stop_chars = RVAL2CSTR(rbstop_chars);
+        string = g_data_input_stream_read_upto(_SELF(self),
+                                               stop_chars,
+                                               RSTRING_LEN(rbstop_chars),
+                                               &length,
+                                               RVAL2GCANCELLABLE(cancellable),
+                                               &error);
         if (error != NULL)
                 rbgio_raise_error(error);
 
@@ -274,7 +277,7 @@ datainputstream_read_until(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-datainputstream_read_until_async(int argc, VALUE *argv, VALUE self)
+datainputstream_read_upto_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbstop_chars, rbcancellable, rbio_priority, block;
         const char *stop_chars;
@@ -286,27 +289,28 @@ datainputstream_read_until_async(int argc, VALUE *argv, VALUE self)
         io_priority = RVAL2IOPRIORITYDEFAULT(rbio_priority);
         cancellable = RVAL2GCANCELLABLE(rbcancellable);
         SAVE_BLOCK(block);
-        g_data_input_stream_read_until_async(_SELF(self),
-                                             stop_chars,
-                                             io_priority,
-                                             cancellable,
-                                             rbgio_async_ready_callback,
-                                             (gpointer)block);
+        g_data_input_stream_read_upto_async(_SELF(self),
+                                            stop_chars,
+                                            RSTRING_LEN(rbstop_chars),
+                                            io_priority,
+                                            cancellable,
+                                            rbgio_async_ready_callback,
+                                            (gpointer)block);
 
         return self;
 }
 
 static VALUE
-datainputstream_read_until_finish(VALUE self, VALUE result)
+datainputstream_read_upto_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         gsize length;
         char *string;
 
-        string = g_data_input_stream_read_until_finish(_SELF(self),
-                                                       RVAL2GASYNCRESULT(result),
-                                                       &length,
-                                                       &error);
+        string = g_data_input_stream_read_upto_finish(_SELF(self),
+                                                      RVAL2GASYNCRESULT(result),
+                                                      &length,
+                                                      &error);
         if (error != NULL)
                 rbgio_raise_error(error);
 
@@ -335,7 +339,7 @@ Init_gdatainputstream(VALUE glib)
         rb_define_method(datainputstream, "read_line", datainputstream_read_line, -1);
         rb_define_method(datainputstream, "read_line_async", datainputstream_read_line_async, -1);
         rb_define_method(datainputstream, "read_line_finish", datainputstream_read_line_finish, 1);
-        rb_define_method(datainputstream, "read_until", datainputstream_read_until, -1);
-        rb_define_method(datainputstream, "read_until_async", datainputstream_read_until_async, -1);
-        rb_define_method(datainputstream, "read_until_finish", datainputstream_read_until_finish, 1);
+        rb_define_method(datainputstream, "read_upto", datainputstream_read_upto, -1);
+        rb_define_method(datainputstream, "read_upto_async", datainputstream_read_upto_async, -1);
+        rb_define_method(datainputstream, "read_upto_finish", datainputstream_read_upto_finish, 1);
 }

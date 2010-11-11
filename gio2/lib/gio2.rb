@@ -12,6 +12,8 @@ rescue LoadError
 end
 
 class GLib::DataInputStream
+  include Enumerable
+
   def each
     while line = read_line
       yield line
@@ -55,6 +57,8 @@ if GLib.const_defined? :DesktopAppInfo
 end
 
 module GLib::File
+  include Enumerable
+
   def eql?(other)
     self === other and self == other
   end
@@ -72,7 +76,10 @@ module GLib::File
 end
 
 class GLib::FileEnumerator
+  include Enumerable
+
   def each(cancellable = nil)
+    return self.enum_for unless block_given?
     while file = next_file(cancellable)
       yield file
     end
@@ -80,9 +87,9 @@ class GLib::FileEnumerator
     self
   end
 
+  # TODO: Return Enumerator unless block_given?
   def each_async(num_files, io_priority = GLib::PRIORITY_DEFAULT, cancellable = nil, &block)
     each_async_loop num_files, io_priority, cancellable, block
-    self
   end
 
 private

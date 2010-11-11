@@ -290,8 +290,7 @@ Init_gunixmounts(G_GNUC_UNUSED VALUE glib)
         /* TODO: This doesn’t follow the naming conventions, but it seems
          * overkill to have GLib::Unix just for mount_path_system_internal?. */
         rb_define_singleton_method(unixmount, "mount_path_system_internal?", unix_is_mount_path_system_internal, 1);
-
-        rb_define_method(unixmount, "at", unixmount_at, 1);
+        rb_define_singleton_method(unixmount, "at", unixmount_at, 1);
 
         rb_undef_alloc_func(unixmount);
         rbgobj_boxed_not_copy_obj(G_TYPE_UNIX_MOUNT_ENTRY);

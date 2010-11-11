@@ -399,7 +399,7 @@ socket_speaks_ipv4(VALUE self)
 void
 Init_gsocket(VALUE glib)
 {
-        VALUE socket = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "Socket", glib);
+        VALUE socket = G_DEF_CLASS(G_TYPE_SOCKET, "Socket", glib);
 
         G_DEF_CLASS(G_TYPE_SOCKET_FAMILY, "Family", socket);
         G_DEF_CONSTANTS(socket, G_TYPE_SOCKET_FAMILY, "G_SOCKET_");

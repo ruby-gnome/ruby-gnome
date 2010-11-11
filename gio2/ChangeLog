@@ -1,3 +1,7 @@
+2010-11-11  Nikolai Weibull
+
+	* *: Fix various minor bugs.
+
 2010-10-23  Kouhei Sutou  <kou@clear-code.com>
 
 	* Rakefile: remove needless cairo dependency.

@@ -76,7 +76,7 @@ Init_gbufferedoutputstream(VALUE glib)
         rb_define_method(bufferedoutputstream, "buffer_size", bufferedoutputstream_get_buffer_size, 0);
         rb_define_method(bufferedoutputstream, "set_buffer_size", bufferedoutputstream_set_buffer_size, 1);
         G_DEF_SETTER(bufferedoutputstream, "buffer_size");
-        rb_define_method(bufferedoutputstream, "auto_grow", bufferedoutputstream_get_auto_grow, 0);
+        rb_define_method(bufferedoutputstream, "auto_grow?", bufferedoutputstream_get_auto_grow, 0);
         rb_define_method(bufferedoutputstream, "set_auto_grow", bufferedoutputstream_set_auto_grow, 1);
         G_DEF_SETTER(bufferedoutputstream, "auto_grow");
 }

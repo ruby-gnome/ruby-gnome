@@ -172,8 +172,8 @@ fileinfo_get_attribute_string(VALUE self, VALUE attribute)
 static VALUE
 fileinfo_get_attribute_stringv(VALUE self, VALUE attribute)
 {
-        return STRVECTOR2ARY_FREE(g_file_info_get_attribute_stringv(_SELF(self),
-                                                                    RVAL2CSTR(attribute)));
+        return STRVECTOR2ARY(g_file_info_get_attribute_stringv(_SELF(self),
+                                                               RVAL2CSTR(attribute)));
 }
 
 static VALUE
@@ -570,7 +570,8 @@ Init_gfileinfo(VALUE glib)
         rb_define_method(fileinfo, "copy_into", fileinfo_copy_into, 1);
         rb_define_method(fileinfo, "has_attribute?", fileinfo_has_attribute, 1);
         rb_define_method(fileinfo, "has_namespace?", fileinfo_has_namespace, 1);
-        rb_define_method(fileinfo, "attributes", fileinfo_list_attributes, -1);
+        rb_define_method(fileinfo, "list_attributes", fileinfo_list_attributes, -1);
+        rb_define_alias(fileinfo, "attributes", "list_attributes");
         rb_define_method(fileinfo, "get_attribute_type", fileinfo_get_attribute_type, 1);
         rb_define_method(fileinfo, "remove_attribute", fileinfo_remove_attribute, 1);
         rb_define_method(fileinfo, "get_attribute_as_string", fileinfo_get_attribute_as_string, 1);

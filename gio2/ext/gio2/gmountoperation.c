@@ -152,7 +152,7 @@ Init_gmountoperation(VALUE glib)
         rb_define_method(mountoperation, "password", mountoperation_get_password, 0);
         rb_define_method(mountoperation, "set_password", mountoperation_set_password, 1);
         G_DEF_SETTER(mountoperation, "password");
-        rb_define_method(mountoperation, "anonymous", mountoperation_get_anonymous, 0);
+        rb_define_method(mountoperation, "anonymous?", mountoperation_get_anonymous, 0);
         rb_define_method(mountoperation, "set_anonymous", mountoperation_set_anonymous, 1);
         G_DEF_SETTER(mountoperation, "anonymous");
         rb_define_method(mountoperation, "domain", mountoperation_get_domain, 0);
