@@ -75,7 +75,6 @@ contenttype_guess(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
               rbdata;
         const char *filename;
         const guchar *data;
-        gsize data_size;
         gboolean result_uncertain;
         char *type;
 
@@ -87,16 +86,10 @@ contenttype_guess(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
         filename = RVAL2CSTR_ACCEPT_NIL(rbfilename);
         data = (guchar *)RVAL2CSTR_ACCEPT_NIL(rbdata);
-        if (data != NULL) {
-                StringValue(rbdata);
-                data_size = RSTRING_LEN(rbdata);
-        } else {
-                data_size = 0;
-        }
 
         type = g_content_type_guess(filename,
                                     data,
-                                    data_size,
+                                    (gsize)((data != NULL) ? RSTRING_LEN(rbdata) : 0),
                                     &result_uncertain);
 
         return rb_assoc_new(CSTR2RVAL_FREE(type), CBOOL2RVAL(result_uncertain));

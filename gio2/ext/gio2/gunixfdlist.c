@@ -98,7 +98,7 @@ void
 Init_gunixfdlist(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixfdlist = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFdList", glib);
+        VALUE unixfdlist = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFDList", glib);
 
         rb_define_method(unixfdlist, "initialize", unixfdlist_initialize, -1);
         rb_define_method(unixfdlist, "length", unixfdlist_get_length, 0);

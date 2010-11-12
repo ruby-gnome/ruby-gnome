@@ -7,3 +7,23 @@ Other
 -----
 
 When we use GOBJ2RVAL on properties of objects, should we call G_CHILD_ADD?
+
+g_unix_socket_address_new_abstract is deprecated
+
+Need to document GLib::Socket
+
+Glib::FileAttribute should be an object so that we can use | on them
+
+GLib::InputStream#read_all can read bytes /and/ return error at the same time
+
+GLib::OutputStream#write_all can write bytes /and/ return error at the same
+time
+
+GConverterFlags
+
+GFileAttributeInfoList should be renamed
+
+Remove implementation of methods that only fetch or set properties (and thus
+are automatically generated anyway)
+
+Update to 2.26

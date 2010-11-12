@@ -64,4 +64,8 @@ Init_gioerror(VALUE glib)
         rbgio_define_error(io, "WouldMergeError", G_IO_ERROR_WOULD_MERGE, error);
         rbgio_define_error(io, "FailedHandledError", G_IO_ERROR_FAILED_HANDLED, error);
         rbgio_define_error(io, "TooManyOpenFilesError", G_IO_ERROR_TOO_MANY_OPEN_FILES, error);
+        rbgio_define_error(io, "NotInitializedError", G_IO_ERROR_NOT_INITIALIZED, error);
+        rbgio_define_error(io, "AddressInUseError", G_IO_ERROR_ADDRESS_IN_USE, error);
+        rbgio_define_error(io, "PartialInputError", G_IO_ERROR_PARTIAL_INPUT, error);
+        rbgio_define_error(io, "InvalidDataError", G_IO_ERROR_INVALID_DATA, error);
 }

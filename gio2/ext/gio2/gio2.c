@@ -37,6 +37,12 @@ Init_gio2(void)
 {
         VALUE glib = mGLib;
 
+        G_DEF_CLASS(G_TYPE_DATA_STREAM_BYTE_ORDER, "DataStreamByteOrder", glib);
+        G_DEF_CONSTANTS(glib, G_TYPE_DATA_STREAM_BYTE_ORDER, "G_");
+
+        G_DEF_CLASS(G_TYPE_DATA_STREAM_NEWLINE_TYPE, "DataStreamNewlineType", glib);
+        G_DEF_CONSTANTS(glib, G_TYPE_DATA_STREAM_NEWLINE_TYPE, "G_");
+
         rb_define_module_function(glib, "gio_has_unix?", gio_has_unix, 0);
 
         Init_util();

@@ -231,6 +231,8 @@ Init_gfileattribute(VALUE glib)
         rb_define_const(fileattribute, "GVFS_BACKEND", CSTR2RVAL(G_FILE_ATTRIBUTE_GVFS_BACKEND));
         rb_define_const(fileattribute, "SELINUX_CONTEXT", CSTR2RVAL(G_FILE_ATTRIBUTE_SELINUX_CONTEXT));
         rb_define_const(fileattribute, "TRASH_ITEM_COUNT", CSTR2RVAL(G_FILE_ATTRIBUTE_TRASH_ITEM_COUNT));
+        rb_define_const(fileattribute, "TRASH_DELETION_DATE", CSTR2RVAL(G_FILE_ATTRIBUTE_TRASH_DELETION_DATE));
+        rb_define_const(fileattribute, "TRASH_ORIG_PATH", CSTR2RVAL(G_FILE_ATTRIBUTE_TRASH_ORIG_PATH));
 
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_TYPE, "Type", fileattribute);
         G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_TYPE, "G_FILE_ATTRIBUTE_");

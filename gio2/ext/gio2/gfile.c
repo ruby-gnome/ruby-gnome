@@ -1679,16 +1679,14 @@ file_replace_contents(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcontents, etag, make_backup, flags, cancellable;
         const char *contents;
-        gsize length;
         char *new_etag;
         GError *error = NULL;
 
         rb_scan_args(argc, argv, "14", &rbcontents, &etag, &make_backup, &flags, &cancellable);
         contents = RVAL2CSTR(rbcontents);
-        length = RSTRING_LEN(rbcontents);
         if (!g_file_replace_contents(_SELF(self),
                                      contents,
-                                     length,
+                                     (gsize)RSTRING_LEN(rbcontents),
                                      RVAL2CSTR_ACCEPT_NIL(etag),
                                      RVAL2CBOOL(make_backup),
                                      RVAL2GFILECREATEFLAGSDEFAULT(flags),
@@ -1939,6 +1937,9 @@ Init_gfile(VALUE glib)
 
         G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "MonitorFlags", file);
         G_DEF_CONSTANTS(file, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_");
+
+        G_DEF_CLASS(G_TYPE_FILE_TYPE, "Type", file);
+        G_DEF_CONSTANTS(file, G_TYPE_FILE_TYPE, "G_FILE_");
 
         G_DEF_CLASS(G_TYPE_FILESYSTEM_PREVIEW_TYPE, "FilesystemPreviewType", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_FILESYSTEM_PREVIEW_TYPE, "G_");

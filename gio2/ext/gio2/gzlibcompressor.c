@@ -43,5 +43,8 @@ Init_gzlibcompressor(VALUE glib)
 {
         VALUE zlibcompressor = G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR, "ZlibCompressor", glib);
 
+        G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR_FORMAT, "Format", zlibcompressor);
+        G_DEF_CONSTANTS(zlibcompressor, G_TYPE_ZLIB_COMPRESSOR_FORMAT, "G_ZLIB_");
+
         rb_define_method(zlibcompressor, "initialize", zlibcompressor_initialize, -1);
 }

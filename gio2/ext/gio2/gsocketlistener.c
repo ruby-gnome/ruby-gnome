@@ -100,17 +100,21 @@ socketlistener_add_any_inet_port(int argc, VALUE *argv, VALUE self)
 static VALUE
 socketlistener_accept(int argc, VALUE *argv, VALUE self)
 {
-        VALUE source_object, cancellable;
+        VALUE cancellable;
+        GObject *source_object;
         GError *error = NULL;
         GSocketConnection *connection;
 
-        rb_scan_args(argc, argv, "02", &source_object, &cancellable);
-        connection = g_socket_listener_accept(_SELF(self), RVAL2GOBJ(source_object),
-                                              RVAL2GCANCELLABLE(cancellable), &error);
+        rb_scan_args(argc, argv, "01", &cancellable);
+        connection = g_socket_listener_accept(_SELF(self),
+                                              &source_object,
+                                              RVAL2GCANCELLABLE(cancellable),
+                                              &error);
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL_UNREF(connection);
+        return rb_assoc_new(GOBJ2RVAL_UNREF(connection),
+                            GOBJ2RVAL(source_object));
 }
 
 static VALUE
@@ -131,39 +135,41 @@ socketlistener_accept_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept_finish(int argc, VALUE *argv, VALUE self)
+socketlistener_accept_finish(VALUE self, VALUE result)
 {
-        VALUE result, source_object;
+        GObject *source_object;
         GError *error = NULL;
         GSocketConnection *connection;
 
-        rb_scan_args(argc, argv, "11", &result, &source_object);
         connection = g_socket_listener_accept_finish(_SELF(self),
                                                      RVAL2GASYNCRESULT(result),
-                                                     RVAL2GOBJ(source_object),
+                                                     &source_object,
                                                      &error);
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL_UNREF(connection);
+        return rb_assoc_new(GOBJ2RVAL_UNREF(connection),
+                            GOBJ2RVAL(source_object));
 }
 
 static VALUE
 socketlistener_accept_socket(int argc, VALUE *argv, VALUE self)
 {
-        VALUE source_object, cancellable;
+        VALUE cancellable;
+        GObject *source_object;
         GError *error = NULL;
         GSocket *socket;
 
-        rb_scan_args(argc, argv, "02", &source_object, &cancellable);
+        rb_scan_args(argc, argv, "01", &cancellable);
         socket = g_socket_listener_accept_socket(_SELF(self),
-                                                 RVAL2GOBJ(source_object),
+                                                 &source_object,
                                                  RVAL2GCANCELLABLE(cancellable),
                                                  &error);
         if (socket == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL_UNREF(socket);
+        return rb_assoc_new(GOBJ2RVAL_UNREF(socket),
+                            GOBJ2RVAL(source_object));
 }
 
 static VALUE
@@ -184,21 +190,21 @@ socketlistener_accept_socket_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept_socket_finish(int argc, VALUE *argv, VALUE self)
+socketlistener_accept_socket_finish(VALUE self, VALUE result)
 {
-        VALUE result, source_object;
+        GObject *source_object;
         GError *error = NULL;
         GSocket *socket;
 
-        rb_scan_args(argc, argv, "11", &result, &source_object);
         socket = g_socket_listener_accept_socket_finish(_SELF(self),
                                                         RVAL2GASYNCRESULT(result),
-                                                        RVAL2GOBJ(source_object),
+                                                        &source_object,
                                                         &error);
         if (socket == NULL)
                 rbgio_raise_error(error);
 
-        return GOBJ2RVAL_UNREF(socket);
+        return rb_assoc_new(GOBJ2RVAL_UNREF(socket),
+                            GOBJ2RVAL(source_object));
 }
 
 static VALUE
@@ -229,10 +235,10 @@ Init_gsocketlistener(VALUE glib)
         rb_define_method(socketlistener, "add_any_inet_port", socketlistener_add_any_inet_port, -1);
         rb_define_method(socketlistener, "accept", socketlistener_accept, -1);
         rb_define_method(socketlistener, "accept_async", socketlistener_accept_async, -1);
-        rb_define_method(socketlistener, "accept_finish", socketlistener_accept_finish, -1);
+        rb_define_method(socketlistener, "accept_finish", socketlistener_accept_finish, 1);
         rb_define_method(socketlistener, "accept_socket", socketlistener_accept_socket, -1);
         rb_define_method(socketlistener, "accept_socket_async", socketlistener_accept_socket_async, -1);
-        rb_define_method(socketlistener, "accept_socket_finish", socketlistener_accept_socket_finish, -1);
+        rb_define_method(socketlistener, "accept_socket_finish", socketlistener_accept_socket_finish, 1);
         rb_define_method(socketlistener, "close", socketlistener_close, 0);
         rb_define_method(socketlistener, "set_backlog", socketlistener_set_backlog, 1);
         G_DEF_SETTER(socketlistener, "backlog");

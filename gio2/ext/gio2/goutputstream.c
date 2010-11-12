@@ -33,21 +33,17 @@
 static VALUE
 outputstream_write(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbbuffer, rbcancellable;
+        VALUE rbbuffer, cancellable;
         const char *buffer;
-        gsize count;
-        GCancellable *cancellable;
         GError *error = NULL;
         gssize bytes_written;
 
-        rb_scan_args(argc, argv, "11", &rbbuffer, &rbcancellable);
+        rb_scan_args(argc, argv, "11", &rbbuffer, &cancellable);
         buffer = RVAL2CSTR(rbbuffer);
-        count = RSTRING_LEN(rbbuffer);
-        cancellable = RVAL2GCANCELLABLE(rbcancellable);
         bytes_written = g_output_stream_write(_SELF(self),
                                               buffer,
-                                              count,
-                                              cancellable,
+                                              (gsize)RSTRING_LEN(rbbuffer),
+                                              RVAL2GCANCELLABLE(cancellable),
                                               &error);
         if (bytes_written == -1)
                 rbgio_raise_error(error);
@@ -58,22 +54,18 @@ outputstream_write(int argc, VALUE *argv, VALUE self)
 static VALUE
 outputstream_write_all(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbbuffer, rbcancellable;
+        VALUE rbbuffer, cancellable;
         const char *buffer;
-        gsize count;
         gsize bytes_written;
-        GCancellable *cancellable;
         GError *error = NULL;
 
-        rb_scan_args(argc, argv, "11", &rbbuffer, &rbcancellable);
+        rb_scan_args(argc, argv, "11", &rbbuffer, &cancellable);
         buffer = RVAL2CSTR(rbbuffer);
-        count = RSTRING_LEN(rbbuffer);
-        cancellable = RVAL2GCANCELLABLE(rbcancellable);
         if (!g_output_stream_write_all(_SELF(self),
                                        buffer,
-                                       count,
+                                       (gsize)RSTRING_LEN(rbbuffer),
                                        &bytes_written,
-                                       cancellable,
+                                       RVAL2GCANCELLABLE(cancellable),
                                        &error))
                 rbgio_raise_error(error);
 
