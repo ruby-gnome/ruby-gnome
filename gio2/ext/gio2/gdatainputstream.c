@@ -256,7 +256,7 @@ datainputstream_read_line_finish(VALUE self, VALUE result)
 static VALUE
 datainputstream_read_upto(int argc, VALUE *argv, VALUE self)
 {
-        VALUE stop_chars, cancellable;
+        VALUE rbstop_chars, cancellable;
         const char *stop_chars;
         gsize length;
         GError *error;

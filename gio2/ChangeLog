@@ -1,3 +1,7 @@
+2010-11-12  Nikolai Weibull
+
+	* *: Fix two compilation issues introduced in yesterdays bugfixing.
+
 2010-11-11  Nikolai Weibull
 
 	* *: Fix various minor bugs.

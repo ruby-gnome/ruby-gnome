@@ -172,8 +172,8 @@ fileinfo_get_attribute_string(VALUE self, VALUE attribute)
 static VALUE
 fileinfo_get_attribute_stringv(VALUE self, VALUE attribute)
 {
-        return STRVECTOR2ARY(g_file_info_get_attribute_stringv(_SELF(self),
-                                                               RVAL2CSTR(attribute)));
+        return STRVECTOR2ARY((const gchar * const *)g_file_info_get_attribute_stringv(_SELF(self),
+                                                                                     RVAL2CSTR(attribute)));
 }
 
 static VALUE
