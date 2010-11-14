@@ -1,3 +1,7 @@
+2010-11-14  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/pdfcrop.rb: add a sample to crop PDF.
+
 2010-10-08  Guillaume Cottenceau
 
 	* RVAL2CSTR2 is deprecated, replace with RVAL2CSTR_ACCEPT_NIL
