@@ -21,6 +21,9 @@
 
 #include "rbgst.h"
 #include "rbgst-private.h"
+#ifdef HAVE_GST_PBUTILS
+#  include <gst/pbutils/missing-plugins.h>
+#endif
 
 /* Class: Gst::Message
  * Lightweight objects to signal the application of pipeline events.
@@ -56,6 +59,10 @@ static VALUE rb_cGstMessageLatency;
 static VALUE rb_cGstMessageAsyncStart;
 static VALUE rb_cGstMessageAsyncDone;
 static VALUE rb_cGstMessageAny;
+#ifdef HAVE_GST_PBUTILS
+static VALUE rb_cGstMissingMessage;
+static VALUE rb_cGstMissingURISourceMessage;
+#endif
 
 static VALUE
 get_superclass(void)
@@ -484,6 +491,35 @@ element_initialize(VALUE self, VALUE src, VALUE structure)
     return Qnil;
 }
 
+#ifdef HAVE_GST_PBUTILS
+static VALUE
+missing_message_get_installer_detail(VALUE self)
+{
+    gchar *detail;
+    detail = gst_missing_plugin_message_get_installer_detail(SELF(self));
+    return CSTR2RVAL_FREE(detail);
+}
+
+static VALUE
+missing_message_get_description(VALUE self)
+{
+    gchar *description;
+    description = gst_missing_plugin_message_get_description(SELF(self));
+    return CSTR2RVAL_FREE(description);
+}
+
+static VALUE
+missing_uri_source_message_initialize(VALUE self, VALUE element, VALUE protocol)
+{
+    GstMessage *message;
+
+    message = gst_missing_uri_source_message_new(RVAL2GST_ELEMENT(element),
+                                                 RVAL2CSTR(protocol));
+    G_INITIALIZE(self, message);
+    return Qnil;
+}
+#endif /* HAVE_GST_PBUTILS */
+
 static VALUE
 segment_start_initialize(VALUE self, VALUE src, VALUE format, VALUE position)
 {
@@ -620,6 +656,7 @@ Init_gst_message(void)
     DEFINE_MESSAGE(AsyncStart);
     DEFINE_MESSAGE(AsyncDone);
     DEFINE_MESSAGE(Any);
+
 #undef DEFINE_MESSAGE
 
     rb_cGstMessageType = G_DEF_CLASS(GST_TYPE_MESSAGE_TYPE,
@@ -702,6 +739,20 @@ Init_gst_message(void)
 
     rb_define_method(rb_cGstMessageElement, "initialize",
                      element_initialize, 2);
+#ifdef HAVE_GST_PBUTILS
+    rb_cGstMissingMessage =
+        rb_define_class_under(mGst, "MissingMessage", rb_cGstMessage);
+    rb_define_method(rb_cGstMissingMessage, "installer_detail",
+                     missing_message_get_installer_detail, 0);
+    rb_define_method(rb_cGstMissingMessage, "description",
+                     missing_message_get_description, 0);
+
+    rb_cGstMissingURISourceMessage =
+        rb_define_class_under(mGst, "MissingURISourceMessage",
+                              rb_cGstMissingMessage);
+    rb_define_method(rb_cGstMissingURISourceMessage, "initialize",
+                     missing_uri_source_message_initialize, 2);
+#endif
 
     rb_define_method(rb_cGstMessageSegmentStart, "initialize",
                      segment_start_initialize, 3);

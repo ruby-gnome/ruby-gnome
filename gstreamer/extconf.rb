@@ -37,6 +37,10 @@ if have_library("gstinterfaces-0.10") and
   $CFLAGS += " -DHAVE_GST_OVERLAY"
 end
 
+if PKGConfig.have_package("gstreamer-pbutils-0.10")
+  $CFLAGS += " -DHAVE_GST_PBUTILS"
+end
+
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"

@@ -93,6 +93,18 @@ class TestMessage < Test::Unit::TestCase
     end
   end
 
+  def test_missing_message_installer_detail
+    pipeline = Gst::Pipeline.new
+    message = Gst::MissingURISourceMessage.new(pipeline, "http")
+    assert_match(/HTTP/, message.installer_detail)
+  end
+
+  def test_missing_message_description
+    pipeline = Gst::Pipeline.new
+    message = Gst::MissingURISourceMessage.new(pipeline, "http")
+    assert_match(/HTTP/, message.description)
+  end
+
   def test_message_segment_start
     format = Gst::Format::DEFAULT
     position = 100
