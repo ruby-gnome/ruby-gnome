@@ -2,6 +2,29 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.6: 2010-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+WRITE ME.
+
+=== Changes
+
+==== All
+
+  * ...
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * add Gst::MissingURISourceMessage.
+      [Kouhei Sutou, Vincent Carmona]
+
+=== Thanks
+
+  * Vincent Carmona
+  * ...
+
 == Ruby-GNOME2 0.90.5: 2010-10-28
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
