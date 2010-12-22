@@ -20,9 +20,18 @@ WRITE ME.
     * add Gst::MissingURISourceMessage.
       [Kouhei Sutou, Vincent Carmona]
 
+==== Ruby/Pango
+
+  * Fixes
+    * rename Pango::LayoutIter#at_last_line! to
+      at_last_line? because at_last_line is a predicate
+      method. (at_last_line! still exists for backward compatibility.)
+      [Kouhei Sutou, mrkn]
+
 === Thanks
 
   * Vincent Carmona
+  * mrkn
   * ...
 
 == Ruby-GNOME2 0.90.5: 2010-10-28
