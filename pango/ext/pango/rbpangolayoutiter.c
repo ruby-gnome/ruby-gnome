@@ -187,7 +187,9 @@ Init_pango_layout_iter()
     rb_define_method(pIter, "next_char!", layout_iter_next_char, 0);
     rb_define_method(pIter, "next_cluster!", layout_iter_next_cluster, 0);
     rb_define_method(pIter, "next_line!", layout_iter_next_line, 0);
-    rb_define_method(pIter, "at_last_line!", layout_iter_at_last_line, 0);
+    rb_define_method(pIter, "at_last_line?", layout_iter_at_last_line, 0);
+    /* for backword compatibility. :< */
+    rb_define_alias(pIter, "at_last_line!", "at_last_line?");
     rb_define_method(pIter, "index", layout_iter_get_index, 0);
     rb_define_method(pIter, "baseline", layout_iter_get_baseline, 0);
     rb_define_method(pIter, "run", layout_iter_get_run, 0);
