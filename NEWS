@@ -18,7 +18,7 @@ WRITE ME.
 
   * Improvements
     * add Gst::MissingURISourceMessage.
-      [Kouhei Sutou, Vincent Carmona]
+      [Vincent Carmona, Kouhei Sutou]
 
 ==== Ruby/Pango
 
@@ -26,12 +26,19 @@ WRITE ME.
     * rename Pango::LayoutIter#at_last_line! to
       at_last_line? because at_last_line is a predicate
       method. (at_last_line! still exists for backward compatibility.)
-      [Kouhei Sutou, mrkn]
+      [mrkn, Kouhei Sutou]
+
+==== Ruby/GtkMozEmbed
+
+  * Fixes
+    * support "2.0b7" style module version. #3141244
+      [reandr, Kouhei Sutou]
 
 === Thanks
 
   * Vincent Carmona
   * mrkn
+  * reandr
   * ...
 
 == Ruby-GNOME2 0.90.5: 2010-10-28

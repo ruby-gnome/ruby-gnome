@@ -1,6 +1,12 @@
+2011-01-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GtkMozEmbed: support "2.0b7" style module
+	version. #3141244
+	Reported by reandr. Thanks!!!
+
 2010-12-22  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS Ruby/Pango: rename Pango::LayoutIter#at_last_line! to
+	* NEWS: Ruby/Pango: rename Pango::LayoutIter#at_last_line! to
 	at_last_line? because at_last_line is a predicate
 	method. (at_last_line! still exists for backward compatibility.)
 	Reported by mrkn. Thanks!!!
