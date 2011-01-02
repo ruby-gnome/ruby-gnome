@@ -9,6 +9,7 @@
 # license of Ruby-GNOME2.
 #
 
+require 'English'
 require 'mkmf'
 begin
   require 'pkg-config'
@@ -239,8 +240,17 @@ end
 # This is used for the library which doesn't support version info.
 def make_version_header(app_name, pkgname, dir = "src")
   version = PKGConfig.modversion(pkgname).split(/\./)
+  version = "2.0b7".split(/\./)
   (0..2).each do |v|
     version[v] = "0" unless version[v]
+    if /\A(\d+)/ =~ version[v]
+      number = $1
+      tag = $POSTMATCH
+      unless tag.empty?
+        version[v] = number
+        version[3] = tag
+      end
+    end
   end
   filename = "rb#{app_name.downcase}version.h"
 
@@ -251,6 +261,12 @@ def make_version_header(app_name, pkgname, dir = "src")
   FileUtils.mkdir_p(dir)
   out = File.open(File.join(dir, filename), "w")
 
+  version_definitions = []
+  ["MAJOR", "MINOR", "MICRO", "TAG"].each_with_index do |type, i|
+    _version = version[i]
+    next if _version.nil?
+    version_definitions << "#define #{app_name}_#{type}_VERSION (#{_version})"
+  end
   out.print %Q[/* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /************************************************
 
@@ -263,9 +279,7 @@ def make_version_header(app_name, pkgname, dir = "src")
 #ifndef __RB#{app_name}_VERSION_H__
 #define __RB#{app_name}_VERSION_H__
 
-#define #{app_name}_MAJOR_VERSION (#{version[0]})
-#define #{app_name}_MINOR_VERSION (#{version[1]})
-#define #{app_name}_MICRO_VERSION (#{version[2]})
+#{version_definitions.join("\n")}
 
 #define #{app_name}_CHECK_VERSION(major,minor,micro)    \\
     (#{app_name}_MAJOR_VERSION > (major) || \\
