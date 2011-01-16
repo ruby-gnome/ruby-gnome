@@ -37,6 +37,9 @@ Init_gio2(void)
 {
         VALUE glib = mGLib;
 
+        G_DEF_CLASS(G_TYPE_FILESYSTEM_PREVIEW_TYPE, "FilesystemPreviewType", glib);
+        G_DEF_CONSTANTS(glib, G_TYPE_FILESYSTEM_PREVIEW_TYPE, "G_");
+
         G_DEF_CLASS(G_TYPE_DATA_STREAM_BYTE_ORDER, "DataStreamByteOrder", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_DATA_STREAM_BYTE_ORDER, "G_");
 
@@ -61,13 +64,14 @@ Init_gio2(void)
         Init_gconverteroutputstream(glib);
         Init_gdatainputstream(glib);
         Init_gdesktopappinfo(glib);
-        Init_gfileattributematcher(glib);
         Init_gdataoutputstream(glib);
         Init_gdrive(glib);
         Init_gemblem(glib);
         Init_gemblemedicon(glib);
         Init_gfile(glib);
         Init_gfileattribute(glib);
+        Init_gfileattributeinfo(glib);
+        Init_gfileattributematcher(glib);
         Init_gfiledescriptorbased(glib);
         Init_gfileenumerator(glib);
         Init_gfileicon(glib);

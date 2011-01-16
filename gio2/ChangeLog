@@ -1,3 +1,8 @@
+2011-01-16  Nikolai Weibull
+
+	* ext/gio2/gfileattribute.c: Split into files for each separate class
+	and update names to match the rules of Ruby-GNOME2.
+
 2010-11-12  Nikolai Weibull
 
 	* *: Fix two compilation issues introduced in yesterdays bugfixing.

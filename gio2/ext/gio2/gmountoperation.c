@@ -142,6 +142,7 @@ Init_gmountoperation(VALUE glib)
 
         G_DEF_CLASS(G_TYPE_ASK_PASSWORD_FLAGS, "AskPasswordFlags", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_ASK_PASSWORD_FLAGS, "G_");
+
         G_DEF_CLASS(G_TYPE_PASSWORD_SAVE, "PasswordSave", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_PASSWORD_SAVE, "G_");
 

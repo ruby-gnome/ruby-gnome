@@ -84,8 +84,14 @@ GType g_file_attribute_matcher_get_type(void);
 #define GFILEATTRIBUTETYPE2RVAL(value) \
         GENUM2RVAL((value), G_TYPE_FILE_ATTRIBUTE_TYPE)
 
+#define GFILEATTRIBUTEINFO2RVAL(object) \
+        BOXED2RVAL(object, G_TYPE_FILE_ATTRIBUTE_INFO)
+
+#define G_TYPE_FILE_ATTRIBUTE_INFO (g_file_attribute_info_get_type())
+GType g_file_attribute_info_get_type(void);
+
 #define G_TYPE_FILE_ATTRIBUTE_INFO_LIST (g_file_attribute_info_list_get_type())
-GType g_file_attribute_info_list_get_type();
+GType g_file_attribute_info_list_get_type(void);
 
 #define GFILEATTRIBUTEINFOLIST2RVAL(object) \
         BOXED2RVAL(object, G_TYPE_FILE_ATTRIBUTE_INFO_LIST)
@@ -278,6 +284,8 @@ G_GNUC_INTERNAL void Init_gemblem(VALUE glib);
 G_GNUC_INTERNAL void Init_gemblemedicon(VALUE glib);
 G_GNUC_INTERNAL void Init_gfile(VALUE glib);
 G_GNUC_INTERNAL void Init_gfileattribute(VALUE glib);
+G_GNUC_INTERNAL void Init_gfileattributeinfo(VALUE glib);
+G_GNUC_INTERNAL void Init_fileattributeinfolist(VALUE glib);
 G_GNUC_INTERNAL void Init_gfileattributematcher(VALUE glib);
 G_GNUC_INTERNAL void Init_gfiledescriptorbased(VALUE glib);
 G_GNUC_INTERNAL void Init_gfileenumerator(VALUE glib);

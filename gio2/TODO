@@ -21,8 +21,6 @@ time
 
 GConverterFlags
 
-GFileAttributeInfoList should be renamed
-
 Remove implementation of methods that only fetch or set properties (and thus
 are automatically generated anyway)
 

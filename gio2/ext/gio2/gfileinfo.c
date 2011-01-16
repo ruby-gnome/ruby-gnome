@@ -562,9 +562,6 @@ Init_gfileinfo(VALUE glib)
 {
         VALUE fileinfo = G_DEF_CLASS(G_TYPE_FILE_INFO, "FileInfo", glib);
 
-        G_DEF_CLASS(G_TYPE_FILE_TYPE, "FileType", glib);
-        G_DEF_CONSTANTS(glib, G_TYPE_FILE_TYPE, "G_FILE_");
-
         rb_define_method(fileinfo, "initialize", fileinfo_initialize, 0);
         rb_define_method(fileinfo, "dup", fileinfo_dup, 0);
         rb_define_method(fileinfo, "copy_into", fileinfo_copy_into, 1);

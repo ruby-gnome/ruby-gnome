@@ -256,6 +256,7 @@ Init_gmount(VALUE glib)
 
         G_DEF_CLASS(G_TYPE_MOUNT_MOUNT_FLAGS, "MountFlags", mount);
         G_DEF_CONSTANTS(mount, G_TYPE_MOUNT_MOUNT_FLAGS, "G_MOUNT_");
+
         G_DEF_CLASS(G_TYPE_MOUNT_UNMOUNT_FLAGS, "UnmountFlags", mount);
         G_DEF_CONSTANTS(mount, G_TYPE_MOUNT_UNMOUNT_FLAGS, "G_MOUNT_");
 

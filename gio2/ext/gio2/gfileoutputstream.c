@@ -87,9 +87,7 @@ fileoutputstream_get_etag(VALUE self)
 void
 Init_gfileoutputstream(VALUE glib)
 {
-        VALUE fileoutputstream = G_DEF_CLASS(G_TYPE_FILE_OUTPUT_STREAM,
-                                             "FileOutputStream",
-                                             glib);
+        VALUE fileoutputstream = G_DEF_CLASS(G_TYPE_FILE_OUTPUT_STREAM, "FileOutputStream", glib);
 
         rb_undef_alloc_func(fileoutputstream);
 

@@ -1941,9 +1941,6 @@ Init_gfile(VALUE glib)
         G_DEF_CLASS(G_TYPE_FILE_TYPE, "Type", file);
         G_DEF_CONSTANTS(file, G_TYPE_FILE_TYPE, "G_FILE_");
 
-        G_DEF_CLASS(G_TYPE_FILESYSTEM_PREVIEW_TYPE, "FilesystemPreviewType", glib);
-        G_DEF_CONSTANTS(glib, G_TYPE_FILESYSTEM_PREVIEW_TYPE, "G_");
-
         rb_define_singleton_method(file, "new_for_path", file_new_for_path, 1);
         rb_define_singleton_method(file, "new_for_uri", file_new_for_uri, 1);
         rb_define_singleton_method(file, "new_for_commandline_arg", file_new_for_commandline_arg, 1);

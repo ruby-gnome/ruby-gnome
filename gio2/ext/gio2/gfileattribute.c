@@ -20,141 +20,10 @@
 
 #include "gio2.h"
 
-static GFileAttributeInfo *
-fileattributeinfo_copy(const GFileAttributeInfo *info)
-{
-        return (GFileAttributeInfo *)info;
-}
-
-static void
-fileattributeinfo_free(G_GNUC_UNUSED GFileAttributeInfo *info)
-{
-        return;
-}
-
-static GType
-g_file_attribute_info_get_type(void)
-{
-        static GType our_type = 0;
-
-        if (our_type == 0)
-                our_type = g_boxed_type_register_static("GFileAttributeInfo",
-                                                        (GBoxedCopyFunc)fileattributeinfo_copy,
-                                                        (GBoxedFreeFunc)fileattributeinfo_free);
-
-        return our_type;
-}
-
-#define G_TYPE_FILE_ATTRIBUTE_INFO (g_file_attribute_info_get_type())
-
-#define RVAL2GFILEATTRIBUTEINFO(object) \
-        ((GFileAttributeInfo *)(RVAL2BOXED(object, G_TYPE_FILE_ATTRIBUTE_INFO)))
-
-#define GFILEATTRIBUTEINFO2RVAL(object) \
-        BOXED2RVAL(object, G_TYPE_FILE_ATTRIBUTE_INFO)
-
-#define _SELF(value) RVAL2GFILEATTRIBUTEINFO(value)
-
-#define GFILEATTRIBUTEINFOFLAGS2RVAL(value) \
-        GFLAGS2RVAL((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
-
-#define RVAL2GFILEATTRIBUTEINFOFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
-
-#define RVAL2GFILEATTRIBUTEINFOFLAGSDEFAULT(value) \
-        RVAL2TYPE_WITH_DEFAULT((value), \
-                               RVAL2GFILEATTRIBUTEINFOFLAGS, \
-                               G_FILE_ATTRIBUTE_INFO_NONE)
-
-static VALUE
-fileattributeinfo_name(VALUE self)
-{
-        return CSTR2RVAL(_SELF(self)->name);
-}
-
-static VALUE
-fileattributeinfo_type(VALUE self)
-{
-        return GFILEATTRIBUTETYPE2RVAL(_SELF(self)->type);
-}
-
-static VALUE
-fileattributeinfo_flags(VALUE self)
-{
-        return GFILEATTRIBUTEINFOFLAGS2RVAL(_SELF(self)->flags);
-}
-
-#undef _SELF
-
-GType
-g_file_attribute_info_list_get_type(void)
-{
-        static GType our_type = 0;
-        if (our_type == 0)
-                our_type = g_boxed_type_register_static("GFileAttributeInfoList",
-                                                        (GBoxedCopyFunc)g_file_attribute_info_list_ref,
-                                                        (GBoxedFreeFunc)g_file_attribute_info_list_unref);
-        return our_type;
-}
-
-#define RVAL2GFILEATTRIBUTEINFOLIST(object) \
-        ((GFileAttributeInfoList *)(RVAL2BOXED(object, G_TYPE_FILE_ATTRIBUTE_INFO_LIST)))
-
-#define _SELF(value) RVAL2GFILEATTRIBUTEINFOLIST(value)
-
-static VALUE
-fileattributeinfolist_initialize(VALUE self)
-{
-        G_INITIALIZE(self, g_file_attribute_info_list_new());
-
-        return Qnil;
-}
-
-static VALUE
-fileattributeinfolist_dup(VALUE self)
-{
-        return GFILEATTRIBUTEINFOLIST2RVAL(g_file_attribute_info_list_dup(_SELF(self)));
-}
-
-static VALUE
-fileattributeinfolist_lookup(VALUE self, VALUE name)
-{
-        /* TODO: How do we deal with the const? */
-        return GFILEATTRIBUTEINFO2RVAL((GFileAttributeInfo *)g_file_attribute_info_list_lookup(_SELF(self),
-                                                                                               RVAL2CSTR(name)));
-}
-
-static VALUE
-fileattributeinfolist_add(int argc, VALUE *argv, VALUE self)
-{
-        VALUE name, type, flags;
-
-        rb_scan_args(argc, argv, "21", &name, &type, &flags);
-
-        g_file_attribute_info_list_add(_SELF(self),
-                                       RVAL2CSTR(name),
-                                       RVAL2GFILEATTRIBUTETYPE(type),
-                                       RVAL2GFILEATTRIBUTEINFOFLAGSDEFAULT(flags));
-
-        return self;
-}
-
-static VALUE
-fileattributeinfolist_each(VALUE self)
-{
-        GFileAttributeInfoList *list = RVAL2GFILEATTRIBUTEINFOLIST(self);
-        int i;
-
-        for (i = 0; i < list->n_infos; i++)
-                rb_yield(GFILEATTRIBUTEINFO2RVAL(&list->infos[i]));
-
-        return self;
-}
-
 void
 Init_gfileattribute(VALUE glib)
 {
-        VALUE fileattribute, fileattributeinfo, fileattributeinfolist;
+        VALUE fileattribute;
 
         fileattribute = rb_define_module_under(glib, "FileAttribute");
 
@@ -237,29 +106,6 @@ Init_gfileattribute(VALUE glib)
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_TYPE, "Type", fileattribute);
         G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_TYPE, "G_FILE_ATTRIBUTE_");
 
-        G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "InfoFlags", fileattribute);
-        G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_");
-
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_STATUS, "Status", fileattribute);
         G_DEF_CONSTANTS(fileattribute, G_TYPE_FILE_ATTRIBUTE_STATUS, "G_FILE_ATTRIBUTE_");
-
-        fileattributeinfo = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO, "Info", fileattribute);
-
-        rb_undef_alloc_func(fileattributeinfo);
-        rbgobj_boxed_not_copy_obj(G_TYPE_FILE_ATTRIBUTE_INFO);
-
-        rb_define_method(fileattributeinfo, "name", fileattributeinfo_name, 0);
-        rb_define_method(fileattributeinfo, "type", fileattributeinfo_type, 0);
-        rb_define_method(fileattributeinfo, "flags", fileattributeinfo_flags, 0);
-
-        fileattributeinfolist = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_LIST, "InfoList", fileattributeinfo);
-
-        rb_include_module(fileattributeinfolist, rb_mEnumerable);
-
-        rb_define_method(fileattributeinfolist, "initialize", fileattributeinfolist_initialize, 0);
-        rb_define_method(fileattributeinfolist, "dup", fileattributeinfolist_dup, 0);
-        rb_define_method(fileattributeinfolist, "lookup", fileattributeinfolist_lookup, 1);
-        rb_define_alias(fileattributeinfolist, "[]", "lookup");
-        rb_define_method(fileattributeinfolist, "add", fileattributeinfolist_add, 3);
-        rb_define_method(fileattributeinfolist, "each", fileattributeinfolist_each, 0);
 }
