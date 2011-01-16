@@ -36,26 +36,6 @@ unixinputstream_initialize(int argc, VALUE *argv, VALUE self)
 
         return Qnil;
 }
-
-static VALUE
-unixinputstream_set_close_fd(VALUE self, VALUE close_fd)
-{
-        g_unix_input_stream_set_close_fd(_SELF(self), RVAL2CBOOL(close_fd));
-
-        return self;
-}
-
-static VALUE
-unixinputstream_get_close_fd(VALUE self)
-{
-        return CBOOL2RVAL(g_unix_input_stream_get_close_fd(_SELF(self)));
-}
-
-static VALUE
-unixinputstream_get_fd(VALUE self)
-{
-        return FD2RVAL(g_unix_input_stream_get_fd(_SELF(self)));
-}
 #endif
 
 void
@@ -65,9 +45,5 @@ Init_gunixinputstream(G_GNUC_UNUSED VALUE glib)
         VALUE unixinputstream = G_DEF_CLASS(G_TYPE_UNIX_INPUT_STREAM, "UnixInputStream", glib);
 
         rb_define_method(unixinputstream, "initialize", unixinputstream_initialize, -1);
-        rb_define_method(unixinputstream, "set_close_fd", unixinputstream_set_close_fd, 1);
-        G_DEF_SETTER(unixinputstream, "close_fd");
-        rb_define_method(unixinputstream, "close_fd?", unixinputstream_get_close_fd, 0);
-        rb_define_method(unixinputstream, "fd", unixinputstream_get_fd, 0);
 #endif
 }

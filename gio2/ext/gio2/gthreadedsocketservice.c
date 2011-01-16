@@ -20,8 +20,6 @@
 
 #include "gio2.h"
 
-#define _SELF(value) G_THREADED_SOCKET_SERVICE(RVAL2GOBJ(value))
-
 static VALUE
 threadedsocketservice_initialize(VALUE self, VALUE max_threads)
 {

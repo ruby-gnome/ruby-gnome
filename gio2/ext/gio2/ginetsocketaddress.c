@@ -20,8 +20,6 @@
 
 #include "gio2.h"
 
-#define _SELF(value) G_INET_SOCKET_ADDRESS(RVAL2GOBJ(value))
-
 static VALUE
 inetsocketaddress_initialize(VALUE self, VALUE address, VALUE port)
 {
@@ -31,24 +29,10 @@ inetsocketaddress_initialize(VALUE self, VALUE address, VALUE port)
         return Qnil;
 }
 
-static VALUE
-inetsocketaddress_get_address(VALUE self)
-{
-        return GOBJ2RVAL(g_inet_socket_address_get_address(_SELF(self)));
-}
-
-static VALUE
-inetsocketaddress_get_port(VALUE self)
-{
-        return GUINT162RVAL(g_inet_socket_address_get_port(_SELF(self)));
-}
-
 void
 Init_ginetsocketaddress(VALUE glib)
 {
         VALUE inetsocketaddress = G_DEF_CLASS(G_TYPE_INET_SOCKET_ADDRESS, "InetSocketAddress", glib);
 
         rb_define_method(inetsocketaddress, "initialize", inetsocketaddress_initialize, 2);
-        rb_define_method(inetsocketaddress, "address", inetsocketaddress_get_address, 0);
-        rb_define_method(inetsocketaddress, "port", inetsocketaddress_get_port, 0);
 }

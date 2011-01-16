@@ -20,29 +20,8 @@
 
 #include "gio2.h"
 
-#define _SELF(value) G_TCP_CONNECTION(RVAL2GOBJ(value))
-
-static VALUE
-tcpconnection_set_graceful_disconnect(VALUE self, VALUE graceful_disconnect)
-{
-        g_tcp_connection_set_graceful_disconnect(_SELF(self),
-                                                 RVAL2CBOOL(graceful_disconnect));
-
-        return self;
-}
-
-static VALUE
-tcpconnection_get_graceful_disconnect(VALUE self)
-{
-        return CBOOL2RVAL(g_tcp_connection_get_graceful_disconnect(_SELF(self)));
-}
-
 void
 Init_gtcpconnection(VALUE glib)
 {
-        VALUE tcpconnection = G_DEF_CLASS(G_TYPE_TCP_CONNECTION, "TcpConnection", glib);
-
-        rb_define_method(tcpconnection, "set_graceful_disconnect", tcpconnection_set_graceful_disconnect, 1);
-        G_DEF_SETTER(tcpconnection, "graceful_disconnect");
-        rb_define_method(tcpconnection, "graceful_disconnect?", tcpconnection_get_graceful_disconnect, 0);
+        (void)G_DEF_CLASS(G_TYPE_TCP_CONNECTION, "TcpConnection", glib);
 }

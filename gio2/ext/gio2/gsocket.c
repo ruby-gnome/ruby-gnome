@@ -298,60 +298,7 @@ socket_condition_wait(int argc, VALUE *argv, VALUE self)
         return self;
 }
 
-static VALUE
-socket_set_listen_backlog(VALUE self, VALUE backlog)
-{
-        g_socket_set_listen_backlog(_SELF(self), RVAL2GINT(backlog));
-
-        return self;
-}
-
-static VALUE
-socket_get_listen_backlog(VALUE self)
-{
-        return GINT2RVAL(g_socket_get_listen_backlog(_SELF(self)));
-}
-
-static VALUE
-socket_get_blocking(VALUE self)
-{
-        return CBOOL2RVAL(g_socket_get_blocking(_SELF(self)));
-}
-
-static VALUE
-socket_set_blocking(VALUE self, VALUE blocking)
-{
-        g_socket_set_blocking(_SELF(self), RVAL2CBOOL(blocking));
-
-        return self;
-}
-
-static VALUE
-socket_get_keepalive(VALUE self)
-{
-        return CBOOL2RVAL(g_socket_get_keepalive(_SELF(self)));
-}
-
-static VALUE
-socket_set_keepalive(VALUE self, VALUE keepalive)
-{
-        g_socket_set_keepalive(_SELF(self), RVAL2CBOOL(keepalive));
-
-        return self;
-}
-
-static VALUE
-socket_get_family(VALUE self)
-{
-        return GSOCKETFAMILY2RVAL(g_socket_get_family(_SELF(self)));
-}
-
-static VALUE
-socket_get_fd(VALUE self)
-{
-        return FD2RVAL(g_socket_get_fd(_SELF(self)));
-}
-
+/* TODO: Need to make sure that this isn’t overridden. */
 static VALUE
 socket_get_local_address(VALUE self)
 {
@@ -366,12 +313,6 @@ socket_get_local_address(VALUE self)
 }
 
 static VALUE
-socket_get_protocol(VALUE self)
-{
-        return GSOCKETPROTOCOL2RVAL(g_socket_get_protocol(_SELF(self)));
-}
-
-static VALUE
 socket_get_remote_address(VALUE self)
 {
         GError *error = NULL;
@@ -382,12 +323,6 @@ socket_get_remote_address(VALUE self)
                 rbgio_raise_error(error);
 
         return GOBJ2RVAL_UNREF(address);
-}
-
-static VALUE
-socket_get_socket_type(VALUE self)
-{
-        return GSOCKETTYPE2RVAL(g_socket_get_socket_type(_SELF(self)));
 }
 
 static VALUE
@@ -432,20 +367,7 @@ Init_gsocket(VALUE glib)
         rb_define_method(socket, "create_source", socket_create_source, -1);
         rb_define_method(socket, "condition_check", socket_condition_check, 1);
         rb_define_method(socket, "condition_wait", socket_condition_wait, -1);
-        rb_define_method(socket, "set_listen_backlog", socket_set_listen_backlog, 1);
-        G_DEF_SETTER(socket, "listen_backlog");
-        rb_define_method(socket, "listen_backlog", socket_get_listen_backlog, 0);
-        rb_define_method(socket, "blocking?", socket_get_blocking, 0);
-        rb_define_method(socket, "set_blocking", socket_set_blocking, 1);
-        G_DEF_SETTER(socket, "blocking");
-        rb_define_method(socket, "keepalive?", socket_get_keepalive, 0);
-        rb_define_method(socket, "set_keepalive", socket_set_keepalive, 1);
-        G_DEF_SETTER(socket, "keepalive");
-        rb_define_method(socket, "family", socket_get_family, 0);
-        rb_define_method(socket, "fd", socket_get_fd, 0);
         rb_define_method(socket, "local_address", socket_get_local_address, 0);
-        rb_define_method(socket, "protocol", socket_get_protocol, 0);
         rb_define_method(socket, "remote_address", socket_get_remote_address, 0);
-        rb_define_method(socket, "socket_type", socket_get_socket_type, 0);
         rb_define_method(socket, "speaks_ipv4?", socket_speaks_ipv4, 0);
 }

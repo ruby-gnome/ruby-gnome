@@ -42,21 +42,6 @@ unixsocketaddress_new_abstract(G_GNUC_UNUSED VALUE self, VALUE path)
 }
 
 static VALUE
-unixsocketaddress_get_is_abstract(VALUE self)
-{
-        return CBOOL2RVAL(g_unix_socket_address_get_is_abstract(_SELF(self)));
-}
-
-static VALUE
-unixsocketaddress_get_path(VALUE self)
-{
-        return rb_str_new(g_unix_socket_address_get_path(_SELF(self)),
-                          g_unix_socket_address_get_path_len(_SELF(self)));
-}
-
-/* TODO: get_path_len is pointless in Ruby, right? */
-
-static VALUE
 unixsocketaddress_abstract_names_supported(G_GNUC_UNUSED VALUE self)
 {
         return CBOOL2RVAL(g_unix_socket_address_abstract_names_supported());
@@ -76,7 +61,5 @@ Init_gunixsocketaddress(G_GNUC_UNUSED VALUE glib)
         rb_define_singleton_method(unixsocketaddress, "abstract_names_supported?", unixsocketaddress_abstract_names_supported, 0);
 
         rb_define_method(unixsocketaddress, "initialize", unixsocketaddress_initialize, 1);
-        rb_define_method(unixsocketaddress, "abstract?", unixsocketaddress_get_is_abstract, 0);
-        rb_define_method(unixsocketaddress, "path", unixsocketaddress_get_path, 0);
 #endif
 }

@@ -39,44 +39,10 @@ bufferedoutputstream_initialize(int argc, VALUE *argv, VALUE self)
         return Qnil;
 }
 
-static VALUE
-bufferedoutputstream_get_buffer_size(VALUE self)
-{
-        return GSIZE2RVAL(g_buffered_output_stream_get_buffer_size(_SELF(self)));
-}
-
-static VALUE
-bufferedoutputstream_set_buffer_size(VALUE self, VALUE size)
-{
-        g_buffered_output_stream_set_buffer_size(_SELF(self), RVAL2GSIZE(size));
-
-        return self;
-}
-
-static VALUE
-bufferedoutputstream_get_auto_grow(VALUE self)
-{
-        return CBOOL2RVAL(g_buffered_output_stream_get_auto_grow(_SELF(self)));
-}
-
-static VALUE
-bufferedoutputstream_set_auto_grow(VALUE self, VALUE grow)
-{
-        g_buffered_output_stream_set_auto_grow(_SELF(self), RVAL2CBOOL(grow));
-
-        return self;
-}
-
 void
 Init_gbufferedoutputstream(VALUE glib)
 {
         VALUE bufferedoutputstream = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
 
         rb_define_method(bufferedoutputstream, "initialize", bufferedoutputstream_initialize, -1);
-        rb_define_method(bufferedoutputstream, "buffer_size", bufferedoutputstream_get_buffer_size, 0);
-        rb_define_method(bufferedoutputstream, "set_buffer_size", bufferedoutputstream_set_buffer_size, 1);
-        G_DEF_SETTER(bufferedoutputstream, "buffer_size");
-        rb_define_method(bufferedoutputstream, "auto_grow?", bufferedoutputstream_get_auto_grow, 0);
-        rb_define_method(bufferedoutputstream, "set_auto_grow", bufferedoutputstream_set_auto_grow, 1);
-        G_DEF_SETTER(bufferedoutputstream, "auto_grow");
 }

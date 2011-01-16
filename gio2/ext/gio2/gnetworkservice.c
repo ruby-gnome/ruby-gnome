@@ -34,31 +34,10 @@ networkservice_initialize(VALUE self, VALUE service, VALUE protocol, VALUE domai
         return Qnil;
 }
 
-static VALUE
-networkservice_get_service(VALUE self)
-{
-        return CSTR2RVAL(g_network_service_get_service(_SELF(self)));
-}
-
-static VALUE
-networkservice_get_protocol(VALUE self)
-{
-        return CSTR2RVAL(g_network_service_get_protocol(_SELF(self)));
-}
-
-static VALUE
-networkservice_get_domain(VALUE self)
-{
-        return CSTR2RVAL(g_network_service_get_domain(_SELF(self)));
-}
-
 void
 Init_gnetworkservice(VALUE glib)
 {
         VALUE networkservice = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", glib);
 
         rb_define_method(networkservice, "initialize", networkservice_initialize, 3);
-        rb_define_method(networkservice, "service", networkservice_get_service, 0);
-        rb_define_method(networkservice, "protocol", networkservice_get_protocol, 0);
-        rb_define_method(networkservice, "domain", networkservice_get_domain, 0);
 }

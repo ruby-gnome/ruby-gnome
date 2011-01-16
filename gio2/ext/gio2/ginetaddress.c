@@ -98,66 +98,6 @@ inetaddress_to_string(VALUE self)
         return CSTR2RVAL_FREE(g_inet_address_to_string(_SELF(self)));
 }
 
-static VALUE
-inetaddress_get_family(VALUE self)
-{
-        return GSOCKETFAMILY2RVAL(g_inet_address_get_family(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_any(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_any(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_loopback(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_loopback(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_link_local(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_link_local(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_site_local(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_site_local(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_multicast(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_multicast(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_mc_link_local(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_mc_link_local(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_mc_node_local(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_mc_node_local(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_mc_site_local(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_mc_site_local(_SELF(self)));
-}
-
-static VALUE
-inetaddress_get_is_mc_global(VALUE self)
-{
-        return CBOOL2RVAL(g_inet_address_get_is_mc_global(_SELF(self)));
-}
-
 void
 Init_ginetaddress(VALUE glib)
 {
@@ -175,14 +115,4 @@ Init_ginetaddress(VALUE glib)
         rb_define_method(inetaddress, "to_string", inetaddress_to_string, 0);
         rb_define_alias(inetaddress, "to_str", "to_string");
         rb_define_alias(inetaddress, "to_s", "to_string");
-        rb_define_method(inetaddress, "family", inetaddress_get_family, 0);
-        rb_define_method(inetaddress, "any?", inetaddress_get_is_any, 0);
-        rb_define_method(inetaddress, "loopback?", inetaddress_get_is_loopback, 0);
-        rb_define_method(inetaddress, "link_local?", inetaddress_get_is_link_local, 0);
-        rb_define_method(inetaddress, "site_local?", inetaddress_get_is_site_local, 0);
-        rb_define_method(inetaddress, "multicast?", inetaddress_get_is_multicast, 0);
-        rb_define_method(inetaddress, "mc_link_local?", inetaddress_get_is_mc_link_local, 0);
-        rb_define_method(inetaddress, "mc_node_local?", inetaddress_get_is_mc_node_local, 0);
-        rb_define_method(inetaddress, "mc_site_local?", inetaddress_get_is_mc_site_local, 0);
-        rb_define_method(inetaddress, "mc_global?", inetaddress_get_is_mc_global, 0);
 }

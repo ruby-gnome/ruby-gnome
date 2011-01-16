@@ -20,15 +20,7 @@
 
 #include "gio2.h"
 
-#define _SELF(value) RVAL2GSOCKETADDRESS(value)
-
 /* TODO: new_from_native? */
-
-static VALUE
-socketaddress_get_family(VALUE self)
-{
-        return GSOCKETFAMILY2RVAL(g_socket_address_get_family(_SELF(self)));
-}
 
 /* TODO: to_native? */
 
@@ -40,6 +32,4 @@ Init_gsocketaddress(VALUE glib)
         VALUE socketaddress = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "SocketAddress", glib);
 
         rb_undef_alloc_func(socketaddress);
-
-        rb_define_method(socketaddress, "family", socketaddress_get_family, 0);
 }

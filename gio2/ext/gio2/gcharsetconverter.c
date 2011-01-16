@@ -40,20 +40,6 @@ charsetconverter_initialize(VALUE self, VALUE to, VALUE from)
 }
 
 static VALUE
-charsetconverter_set_use_fallback(VALUE self, VALUE use_fallback)
-{
-        g_charset_converter_set_use_fallback(_SELF(self), RVAL2CBOOL(use_fallback));
-
-        return self;
-}
-
-static VALUE
-charsetconverter_get_use_fallback(VALUE self)
-{
-        return CBOOL2RVAL(g_charset_converter_get_use_fallback(_SELF(self)));
-}
-
-static VALUE
 charsetconverter_get_num_fallbacks(VALUE self)
 {
         return GUINT2RVAL(g_charset_converter_get_num_fallbacks(_SELF(self)));
@@ -65,8 +51,5 @@ Init_gcharsetconverter(VALUE glib)
         VALUE charsetconverter = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", glib);
 
         rb_define_method(charsetconverter, "initialize", charsetconverter_initialize, 2);
-        rb_define_method(charsetconverter, "set_use_fallback", charsetconverter_set_use_fallback, 1);
-        G_DEF_SETTER(charsetconverter, "use_fallback");
-        rb_define_method(charsetconverter, "use_fallback?", charsetconverter_get_use_fallback, 0);
         rb_define_method(charsetconverter, "num_fallbacks", charsetconverter_get_num_fallbacks, 0);
 }

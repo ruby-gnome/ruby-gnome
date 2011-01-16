@@ -22,9 +22,6 @@
 
 #define _SELF(value) G_DATA_INPUT_STREAM(RVAL2GOBJ(value))
 
-#define GDATASTREAMNEWLINETYPE2RVAL(value) \
-        RVAL2GENUM((value), G_TYPE_DATA_STREAM_NEWLINE_TYPE)
-
 #define RVAL2GDATASTREAMNEWLINETYPE(value) \
         GENUM2RVAL((value), G_TYPE_DATA_STREAM_NEWLINE_TYPE)
 
@@ -46,36 +43,6 @@ datainputstream_initialize(int argc, VALUE *argv, VALUE self)
                                                      RVAL2GDATASTREAMNEWLINETYPE(newline_type));
 
         return Qnil;
-}
-
-static VALUE
-datainputstream_get_byte_order(VALUE self)
-{
-        return GDATASTREAMBYTEORDER2RVAL(g_data_input_stream_get_byte_order(_SELF(self)));
-}
-
-static VALUE
-datainputstream_set_byte_order(VALUE self, VALUE value)
-{
-        g_data_input_stream_set_byte_order(_SELF(self),
-                                           RVAL2GDATASTREAMBYTEORDER(value));
-
-        return self;
-}
-
-static VALUE
-datainputstream_set_newline_type(VALUE self, VALUE value)
-{
-        g_data_input_stream_set_newline_type(_SELF(self),
-                                             RVAL2GDATASTREAMNEWLINETYPE(value));
-
-        return self;
-}
-
-static VALUE
-datainputstream_get_newline_type(VALUE self)
-{
-        return GDATASTREAMNEWLINETYPE2RVAL(g_data_input_stream_get_newline_type(_SELF(self)));
 }
 
 static VALUE
@@ -323,12 +290,14 @@ Init_gdatainputstream(VALUE glib)
         VALUE datainputstream = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", glib);
 
         rb_define_method(datainputstream, "initialize", datainputstream_initialize, -1);
+        /*
         rb_define_method(datainputstream, "byte_order", datainputstream_get_byte_order, 0);
         rb_define_method(datainputstream, "set_byte_order", datainputstream_set_byte_order, 1);
         G_DEF_SETTER(datainputstream, "byte_order");
         rb_define_method(datainputstream, "set_newline_type", datainputstream_set_newline_type, 1);
         G_DEF_SETTER(datainputstream, "newline_type");
         rb_define_method(datainputstream, "newline_type", datainputstream_get_newline_type, 0);
+        */
         rb_define_method(datainputstream, "read_byte", datainputstream_read_byte, -1);
         rb_define_method(datainputstream, "read_int16", datainputstream_read_int16, -1);
         rb_define_method(datainputstream, "read_uint16", datainputstream_read_uint16, -1);

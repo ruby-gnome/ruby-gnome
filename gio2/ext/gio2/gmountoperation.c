@@ -40,90 +40,6 @@ mountoperation_initialize(VALUE self)
 }
 
 static VALUE
-mountoperation_get_username(VALUE self)
-{
-        return CSTR2RVAL(g_mount_operation_get_username(_SELF(self)));
-}
-
-static VALUE
-mountoperation_set_username(VALUE self, VALUE value)
-{
-        g_mount_operation_set_username(_SELF(self), RVAL2CSTR(value));
-
-        return self;
-}
-
-static VALUE
-mountoperation_get_password(VALUE self)
-{
-        return CSTR2RVAL(g_mount_operation_get_password(_SELF(self)));
-}
-
-static VALUE
-mountoperation_set_password(VALUE self, VALUE value)
-{
-        g_mount_operation_set_password(_SELF(self), RVAL2CSTR(value));
-
-        return self;
-}
-
-static VALUE
-mountoperation_get_anonymous(VALUE self)
-{
-        return CBOOL2RVAL(g_mount_operation_get_anonymous(_SELF(self)));
-}
-
-static VALUE
-mountoperation_set_anonymous(VALUE self, VALUE value)
-{
-        g_mount_operation_set_anonymous(_SELF(self), RVAL2CBOOL(value));
-
-        return self;
-}
-
-static VALUE
-mountoperation_get_domain(VALUE self)
-{
-        return CSTR2RVAL(g_mount_operation_get_domain(_SELF(self)));
-}
-
-static VALUE
-mountoperation_set_domain(VALUE self, VALUE value)
-{
-        g_mount_operation_set_domain(_SELF(self), RVAL2CSTR(value));
-
-        return self;
-}
-
-static VALUE
-mountoperation_get_password_save(VALUE self)
-{
-        return GPASSWORDSAVE2RVAL(g_mount_operation_get_password_save(_SELF(self)));
-}
-
-static VALUE
-mountoperation_set_password_save(VALUE self, VALUE value)
-{
-        g_mount_operation_set_password_save(_SELF(self), RVAL2GPASSWORDSAVE(value));
-
-        return self;
-}
-
-static VALUE
-mountoperation_get_choice(VALUE self)
-{
-        return INT2NUM(g_mount_operation_get_choice(_SELF(self)));
-}
-
-static VALUE
-mountoperation_set_choice(VALUE self, VALUE value)
-{
-        g_mount_operation_set_choice(_SELF(self), NUM2INT(value));
-
-        return self;
-}
-
-static VALUE
 mountoperation_reply(VALUE self, VALUE value)
 {
         g_mount_operation_reply(_SELF(self), RVAL2GMOUNTOPERATIONRESULT(value));
@@ -147,23 +63,5 @@ Init_gmountoperation(VALUE glib)
         G_DEF_CONSTANTS(glib, G_TYPE_PASSWORD_SAVE, "G_");
 
         rb_define_method(mountoperation, "initialize", mountoperation_initialize, 0);
-        rb_define_method(mountoperation, "username", mountoperation_get_username, 0);
-        rb_define_method(mountoperation, "set_username", mountoperation_set_username, 1);
-        G_DEF_SETTER(mountoperation, "username");
-        rb_define_method(mountoperation, "password", mountoperation_get_password, 0);
-        rb_define_method(mountoperation, "set_password", mountoperation_set_password, 1);
-        G_DEF_SETTER(mountoperation, "password");
-        rb_define_method(mountoperation, "anonymous?", mountoperation_get_anonymous, 0);
-        rb_define_method(mountoperation, "set_anonymous", mountoperation_set_anonymous, 1);
-        G_DEF_SETTER(mountoperation, "anonymous");
-        rb_define_method(mountoperation, "domain", mountoperation_get_domain, 0);
-        rb_define_method(mountoperation, "set_domain", mountoperation_set_domain, 1);
-        G_DEF_SETTER(mountoperation, "domain");
-        rb_define_method(mountoperation, "password_save", mountoperation_get_password_save, 0);
-        rb_define_method(mountoperation, "set_password_save", mountoperation_set_password_save, 1);
-        G_DEF_SETTER(mountoperation, "password_save");
-        rb_define_method(mountoperation, "choice", mountoperation_get_choice, 0);
-        rb_define_method(mountoperation, "set_choice", mountoperation_set_choice, 1);
-        G_DEF_SETTER(mountoperation, "choice");
         rb_define_method(mountoperation, "reply", mountoperation_reply, 1);
 }

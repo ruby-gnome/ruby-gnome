@@ -20,37 +20,10 @@
 
 #include "gio2.h"
 
-#define _SELF(value) G_FILTER_OUTPUT_STREAM(RVAL2GOBJ(value))
-
-static VALUE
-filteroutputstream_get_base_stream(VALUE self)
-{
-        return GOBJ2RVAL(g_filter_output_stream_get_base_stream(_SELF(self)));
-}
-
-static VALUE
-filteroutputstream_get_close_base_stream(VALUE self)
-{
-        return CBOOL2RVAL(g_filter_output_stream_get_close_base_stream(_SELF(self)));
-}
-
-static VALUE
-filteroutputstream_set_close_base_stream(VALUE self, VALUE close_base)
-{
-        g_filter_output_stream_set_close_base_stream(_SELF(self), RVAL2CBOOL(close_base));
-
-        return self;
-}
-
 void
 Init_gfilteroutputstream(VALUE glib)
 {
         VALUE filteroutputstream = G_DEF_CLASS(G_TYPE_FILTER_OUTPUT_STREAM, "FilterOutputStream", glib);
 
         rb_undef_alloc_func(filteroutputstream);
-
-        rb_define_method(filteroutputstream, "base_stream", filteroutputstream_get_base_stream, 0);
-        rb_define_method(filteroutputstream, "close_base_stream?", filteroutputstream_get_close_base_stream, 0);
-        rb_define_method(filteroutputstream, "set_close_base_stream", filteroutputstream_set_close_base_stream, 1);
-        G_DEF_SETTER(filteroutputstream, "close_base_stream");
 }

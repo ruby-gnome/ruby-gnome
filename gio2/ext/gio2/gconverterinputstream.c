@@ -32,17 +32,10 @@ converterinputstream_initialize(VALUE self, VALUE base_stream, VALUE converter)
         return Qnil;
 }
 
-static VALUE
-converterinputstream_get_converter(VALUE self)
-{
-        return GOBJ2RVAL(g_converter_input_stream_get_converter(_SELF(self)));
-}
-
 void
 Init_gconverterinputstream(VALUE glib)
 {
         VALUE converterinputstream = G_DEF_CLASS(G_TYPE_CONVERTER_INPUT_STREAM, "ConverterInputStream", glib);
 
         rb_define_method(converterinputstream, "initialize", converterinputstream_initialize, 2);
-        rb_define_method(converterinputstream, "converter", converterinputstream_get_converter, 0);
 }

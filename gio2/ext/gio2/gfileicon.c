@@ -30,17 +30,10 @@ fileicon_initialize(VALUE self, VALUE file)
         return Qnil;
 }
 
-static VALUE
-fileicon_get_file(VALUE self)
-{
-        return GOBJ2RVAL(g_file_icon_get_file(_SELF(self)));
-}
-
 void
 Init_gfileicon(VALUE glib)
 {
         VALUE fileicon = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", glib);
 
         rb_define_method(fileicon, "initialize", fileicon_initialize, 1);
-        rb_define_method(fileicon, "file", fileicon_get_file, 0);
 }

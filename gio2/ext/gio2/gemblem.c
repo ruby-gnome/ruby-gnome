@@ -20,11 +20,6 @@
 
 #include "gio2.h"
 
-#define _SELF(value) RVAL2GEMBLEM(value)
-
-#define GEMBLEMORIGIN2RVAL(value) \
-        GENUM2RVAL((value), G_TYPE_EMBLEM_ORIGIN)
-
 #define RVAL2GEMBLEMORIGIN(value) \
         RVAL2GENUM((value), G_TYPE_EMBLEM_ORIGIN)
 
@@ -45,18 +40,6 @@ emblem_initialize(int argc, VALUE *argv, VALUE self)
         return Qnil;
 }
 
-static VALUE
-emblem_get_icon(VALUE self)
-{
-        return GOBJ2RVAL(g_emblem_get_icon(_SELF(self)));
-}
-
-static VALUE
-emblem_get_origin(VALUE self)
-{
-        return GEMBLEMORIGIN2RVAL(g_emblem_get_origin(_SELF(self)));
-}
-
 void
 Init_gemblem(VALUE glib)
 {
@@ -66,6 +49,4 @@ Init_gemblem(VALUE glib)
         G_DEF_CONSTANTS(emblem, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");
 
         rb_define_method(emblem, "initialize", emblem_initialize, -1);
-        rb_define_method(emblem, "icon", emblem_get_icon, 0);
-        rb_define_method(emblem, "origin", emblem_get_origin, 0);
 }

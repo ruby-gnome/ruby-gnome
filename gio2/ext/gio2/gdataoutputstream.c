@@ -40,21 +40,6 @@ dataoutputstream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_get_byte_order(VALUE self)
-{
-        return GDATASTREAMBYTEORDER2RVAL(g_data_output_stream_get_byte_order(_SELF(self)));
-}
-
-static VALUE
-dataoutputstream_set_byte_order(VALUE self, VALUE value)
-{
-        g_data_output_stream_set_byte_order(_SELF(self),
-                                            RVAL2GDATASTREAMBYTEORDER(value));
-
-        return self;
-}
-
-static VALUE
 dataoutputstream_put_byte(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
@@ -188,9 +173,6 @@ Init_gdataoutputstream(VALUE glib)
         VALUE dataoutputstream = G_DEF_CLASS(G_TYPE_DATA_OUTPUT_STREAM, "DataOutputStream", glib);
 
         rb_define_method(dataoutputstream, "initialize", dataoutputstream_initialize, -1);
-        rb_define_method(dataoutputstream, "byte_order", dataoutputstream_get_byte_order, 0);
-        rb_define_method(dataoutputstream, "set_byte_order", dataoutputstream_set_byte_order, 1);
-        G_DEF_SETTER(dataoutputstream, "byte_order");
         rb_define_method(dataoutputstream, "put_byte", dataoutputstream_put_byte, -1);
         rb_define_method(dataoutputstream, "put_int16", dataoutputstream_put_int16, -1);
         rb_define_method(dataoutputstream, "put_uint16", dataoutputstream_put_uint16, -1);

@@ -32,18 +32,6 @@ networkaddress_initialize(VALUE self, VALUE hostname, VALUE port)
 }
 
 static VALUE
-networkaddress_get_hostname(VALUE self)
-{
-        return CSTR2RVAL(g_network_address_get_hostname(_SELF(self)));
-}
-
-static VALUE
-networkaddress_get_port(VALUE self)
-{
-        return GUINT162RVAL(g_network_address_get_port(_SELF(self)));
-}
-
-static VALUE
 networkaddress_parse(G_GNUC_UNUSED VALUE self, VALUE host_and_port, VALUE default_port)
 {
         GError *error = NULL;
@@ -66,6 +54,4 @@ Init_gnetworkaddress(VALUE glib)
         rb_define_singleton_method(networkaddress, "parse", networkaddress_parse, 2);
 
         rb_define_method(networkaddress, "initialize", networkaddress_initialize, 2);
-        rb_define_method(networkaddress, "hostname", networkaddress_get_hostname, 0);
-        rb_define_method(networkaddress, "port", networkaddress_get_port, 0);
 }

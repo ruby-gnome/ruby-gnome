@@ -28,20 +28,6 @@ filemonitor_cancel(VALUE self)
         return CBOOL2RVAL(g_file_monitor_cancel(_SELF(self)));
 }
 
-static VALUE
-filemonitor_is_cancelled(VALUE self)
-{
-        return CBOOL2RVAL(g_file_monitor_is_cancelled(_SELF(self)));
-}
-
-static VALUE
-filemonitor_set_rate_limit(VALUE self, VALUE rate_limit)
-{
-        g_file_monitor_set_rate_limit(_SELF(self), FIX2INT(rate_limit));
-
-        return self;
-}
-
 void
 Init_gfilemonitor(VALUE glib)
 {
@@ -56,8 +42,5 @@ Init_gfilemonitor(VALUE glib)
         rb_undef_alloc_func(filemonitor);
 
         rb_define_method(filemonitor, "cancel", filemonitor_cancel, 0);
-        rb_define_method(filemonitor, "cancelled?", filemonitor_is_cancelled, 0);
-        rb_define_method(filemonitor, "set_rate_limit", filemonitor_set_rate_limit, 1);
-        G_DEF_SETTER(filemonitor, "rate_limit");
         /* TODO: Do we need #emit_event? */
 }

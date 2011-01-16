@@ -187,62 +187,6 @@ socketclient_connect_to_service_finish(VALUE self, VALUE result)
         return connection_finish_method(g_socket_client_connect_to_service_finish, self, result);
 }
 
-static VALUE
-socketclient_set_family(VALUE self, VALUE family)
-{
-        g_socket_client_set_family(_SELF(self), RVAL2GSOCKETFAMILY(family));
-
-        return self;
-}
-
-static VALUE
-socketclient_set_local_address(VALUE self, VALUE address)
-{
-        g_socket_client_set_local_address(_SELF(self), RVAL2GSOCKETADDRESS(address));
-
-        return self;
-}
-
-static VALUE
-socketclient_set_protocol(VALUE self, VALUE protocol)
-{
-        g_socket_client_set_protocol(_SELF(self), RVAL2GSOCKETPROTOCOL(protocol));
-
-        return self;
-}
-
-static VALUE
-socketclient_set_socket_type(VALUE self, VALUE type)
-{
-        g_socket_client_set_socket_type(_SELF(self), RVAL2GSOCKETTYPE(type));
-
-        return self;
-}
-
-static VALUE
-socketclient_get_family(VALUE self)
-{
-        return GSOCKETFAMILY2RVAL(g_socket_client_get_family(_SELF(self)));
-}
-
-static VALUE
-socketclient_get_local_address(VALUE self)
-{
-        return GOBJ2RVAL(g_socket_client_get_local_address(_SELF(self)));
-}
-
-static VALUE
-socketclient_get_protocol(VALUE self)
-{
-        return GSOCKETPROTOCOL2RVAL(g_socket_client_get_protocol(_SELF(self)));
-}
-
-static VALUE
-socketclient_get_socket_type(VALUE self)
-{
-        return GSOCKETTYPE2RVAL(g_socket_client_get_socket_type(_SELF(self)));
-}
-
 void
 Init_gsocketclient(VALUE glib)
 {
@@ -258,16 +202,4 @@ Init_gsocketclient(VALUE glib)
         rb_define_method(socketclient, "connect_to_service", socketclient_connect_to_service, -1);
         rb_define_method(socketclient, "connect_to_service_async", socketclient_connect_to_service_async, -1);
         rb_define_method(socketclient, "connect_to_service_finish", socketclient_connect_to_service_finish, 1);
-        rb_define_method(socketclient, "set_family", socketclient_set_family, 1);
-        G_DEF_SETTER(socketclient, "family");
-        rb_define_method(socketclient, "set_local_address", socketclient_set_local_address, 1);
-        G_DEF_SETTER(socketclient, "local_address");
-        rb_define_method(socketclient, "set_protocol", socketclient_set_protocol, 1);
-        G_DEF_SETTER(socketclient, "protocol");
-        rb_define_method(socketclient, "set_socket_type", socketclient_set_socket_type, 1);
-        G_DEF_SETTER(socketclient, "socket_type");
-        rb_define_method(socketclient, "family", socketclient_get_family, 0);
-        rb_define_method(socketclient, "local_address", socketclient_get_local_address, 0);
-        rb_define_method(socketclient, "protocol", socketclient_get_protocol, 0);
-        rb_define_method(socketclient, "socket_type", socketclient_get_socket_type, 0);
 }

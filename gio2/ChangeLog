@@ -2,6 +2,8 @@
 
 	* ext/gio2/gfileattribute.c: Split into files for each separate class
 	and update names to match the rules of Ruby-GNOME2.
+	* ext/gio2/*: Remove methods for getting and setting properties that
+	are automatically generated.
 
 2010-11-12  Nikolai Weibull
 

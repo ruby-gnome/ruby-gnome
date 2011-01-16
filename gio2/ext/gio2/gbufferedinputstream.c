@@ -40,20 +40,6 @@ bufferedinputstream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-bufferedinputstream_get_buffer_size(VALUE self)
-{
-        return GSIZE2RVAL(g_buffered_input_stream_get_buffer_size(_SELF(self)));
-}
-
-static VALUE
-bufferedinputstream_set_buffer_size(VALUE self, VALUE size)
-{
-        g_buffered_input_stream_set_buffer_size(_SELF(self), RVAL2GSIZE(size));
-
-        return self;
-}
-
-static VALUE
 bufferedinputstream_get_available(VALUE self)
 {
         return GSIZE2RVAL(g_buffered_input_stream_get_available(_SELF(self)));
@@ -171,9 +157,6 @@ Init_gbufferedinputstream(VALUE glib)
         VALUE bufferedinputstream = G_DEF_CLASS(G_TYPE_BUFFERED_INPUT_STREAM, "BufferedInputStream", glib);
 
         rb_define_method(bufferedinputstream, "initialize", bufferedinputstream_initialize, -1);
-        rb_define_method(bufferedinputstream, "buffer_size", bufferedinputstream_get_buffer_size, 0);
-        rb_define_method(bufferedinputstream, "set_buffer_size", bufferedinputstream_set_buffer_size, 1);
-        G_DEF_SETTER(bufferedinputstream, "buffer_size");
         rb_define_method(bufferedinputstream, "available", bufferedinputstream_get_available, 0);
         rb_define_method(bufferedinputstream, "peek_buffer", bufferedinputstream_peek_buffer, 0);
         rb_define_method(bufferedinputstream, "peek", bufferedinputstream_peek, 2);

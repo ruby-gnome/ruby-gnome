@@ -41,14 +41,6 @@ unixfdmessage_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-unixfdmessage_get_fd_list(VALUE self)
-{
-        /* TODO: Should we relate the return value with self?  It’s apparently
-         * valid as long as self is valid. */
-        return GOBJ2RVAL(g_unix_fd_message_get_fd_list(_SELF(self)));
-}
-
-static VALUE
 unixfdmessage_append_fd(VALUE self, VALUE fd)
 {
         GError *error = NULL;
@@ -73,7 +65,6 @@ Init_gunixfdmessage(G_GNUC_UNUSED VALUE glib)
         VALUE unixfdmessage = G_DEF_CLASS(G_TYPE_UNIX_FD_MESSAGE, "UnixFDMessage", glib);
 
         rb_define_method(unixfdmessage, "initialize", unixfdmessage_initialize, -1);
-        rb_define_method(unixfdmessage, "fd_list", unixfdmessage_get_fd_list, 0);
         rb_define_method(unixfdmessage, "append_fd", unixfdmessage_append_fd, 1);
         rb_define_alias(unixfdmessage, "<<", "append_fd");
         rb_define_method(unixfdmessage, "steal_fds", unixfdmessage_steal_fds, 0);
