@@ -45,7 +45,6 @@ fileinfo_dup(VALUE self)
         return GOBJ2RVAL_UNREF(g_file_info_dup(_SELF(self)));
 }
 
-/* TODO: Does this make sense from the Ruby side? */
 static VALUE
 fileinfo_copy_into(VALUE self, VALUE other)
 {
@@ -242,8 +241,6 @@ fileinfo_get_attribute_value(VALUE self, VALUE attribute)
         return file_attribute_to_value(type, value);
 }
 
-/* TODO: Do we need set_attribute? */
-
 static VALUE
 fileinfo_set_attribute_string(VALUE self, VALUE attribute, VALUE value)
 {
@@ -323,8 +320,6 @@ fileinfo_set_attribute_object(VALUE self, VALUE attribute, VALUE value)
 
         return self;
 }
-
-/* TODO: How do we implement set_attribute_value? */
 
 static VALUE
 fileinfo_clear_status(VALUE self)

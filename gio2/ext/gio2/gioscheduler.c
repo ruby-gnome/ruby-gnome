@@ -184,11 +184,9 @@ Init_gioscheduler(VALUE glib)
 {
         VALUE ioschedulerjob = G_DEF_CLASS(G_TYPE_IO_SCHEDULER_JOB, "IOSchedulerJob", glib);
 
-        /* TODO: These don’t follow naming scheme exactly, but seems redundant
-         * to add GLib::IOScheduler.  Perhaps rename them to push and
-         * cancel_all. */
-        rb_define_singleton_method(ioschedulerjob, "push_job", ioscheduler_push_job, -1);
-        rb_define_singleton_method(ioschedulerjob, "cancel_all_jobs", ioscheduler_cancel_all_jobs, 0);
+        VALUE ioscheduler = rb_define_module_under(glib, "IOScheduler");
+        rb_define_singleton_method(ioscheduler, "push_job", ioscheduler_push_job, -1);
+        rb_define_singleton_method(ioscheduler, "cancel_all_jobs", ioscheduler_cancel_all_jobs, 0);
 
         rb_define_method(ioschedulerjob, "send_to_mainloop", ioschedulerjob_send_to_mainloop, 0);
         rb_define_method(ioschedulerjob, "send_to_mainloop_async", ioschedulerjob_send_to_mainloop_async, 0);

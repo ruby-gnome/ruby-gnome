@@ -239,6 +239,5 @@ Init_gasyncinitable(VALUE glib)
         rb_define_method(asyncinitable, "init_async", asyncinitable_init_async, -1);
         rb_define_method(asyncinitable, "init_finish", asyncinitable_init_finish, 1);
         rb_define_method(asyncinitable, "initialize", asyncinitable_initialize, -1);
-        /* TODO: Ruby name? */
         rb_define_method(asyncinitable, "initialize_finish", asyncinitable_initialize_finish, 1);
 }

@@ -27,7 +27,6 @@ Init_gioerror(VALUE glib)
 {
         VALUE io, error;
         
-        /* TODO: Is this naming scheme correct/the best? */
         io = rb_define_module_under(glib, "IO");
 
         error = rbgio_define_domain_error(io, "Error", G_IO_ERROR, "GIOErrorEnum", rb_eIOError);

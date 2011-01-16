@@ -66,8 +66,6 @@ bufferedinputstream_peek(VALUE self, VALUE rboffset, VALUE rbcount)
                                                           RSTRING_PTR(result),
                                                           offset,
                                                           count);
-        if (bytes_peeked == (gsize)-1)
-                rb_raise(rb_eIOError, "cannot peek"); /* TODO: Better class and message */
 
         rb_str_set_len(result, bytes_peeked);
         rb_str_resize(result, bytes_peeked);

@@ -50,7 +50,6 @@ icon_equal(VALUE self, VALUE other)
 static VALUE
 icon_to_string(VALUE self)
 {
-        /* TODO: Should we raise if it returns NULL? */
         return CSTR2RVAL_FREE(g_icon_to_string(_SELF(self)));
 }
 
@@ -64,6 +63,5 @@ Init_gicon(VALUE glib)
         rb_define_method(icon, "hash", icon_hash, 0);
         rb_define_method(icon, "==", icon_equal, 1);
         rb_define_method(icon, "to_string", icon_to_string, 0);
-        rb_define_alias(icon, "to_str", "to_string");
         rb_define_alias(icon, "to_s", "to_string");
 }

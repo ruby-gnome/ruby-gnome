@@ -9,6 +9,7 @@
 	.new from these classes, but I don’t know of a way of doing so.  Using
 	rb_undef_alloc_func is incorrect, as it will make subclasses
 	unallocatable.
+	* ext/gio2/*: Fix some TODOs.
 
 2010-11-12  Nikolai Weibull
 

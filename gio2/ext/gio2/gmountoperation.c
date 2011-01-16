@@ -52,7 +52,6 @@ Init_gmountoperation(VALUE glib)
 {
         VALUE mountoperation = G_DEF_CLASS(G_TYPE_MOUNT_OPERATION, "MountOperation", glib);
 
-        /* TODO: Are these necessary? */
         G_DEF_CLASS(G_TYPE_MOUNT_OPERATION_RESULT, "Result", mountoperation);
         G_DEF_CONSTANTS(mountoperation, G_TYPE_MOUNT_OPERATION_RESULT, "G_MOUNT_OPERATION_");
 
