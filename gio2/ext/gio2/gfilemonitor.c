@@ -39,8 +39,6 @@ Init_gfilemonitor(VALUE glib)
         G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "Flags", filemonitor);
         G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
 
-        rb_undef_alloc_func(filemonitor);
-
         rb_define_method(filemonitor, "cancel", filemonitor_cancel, 0);
         /* TODO: Do we need #emit_event? */
 }

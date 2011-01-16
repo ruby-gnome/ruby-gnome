@@ -74,8 +74,6 @@ Init_gvfs(VALUE glib)
         rb_define_singleton_method(vfs, "default", vfs_get_default, 0);
         rb_define_singleton_method(vfs, "local", vfs_get_local, 0);
 
-        rb_undef_alloc_func(vfs);
-
         rb_define_method(vfs, "file_for_path", vfs_get_file_for_path, 1);
         rb_define_method(vfs, "file_for_uri", vfs_get_file_for_uri, 1);
         rb_define_method(vfs, "parse_name", vfs_parse_name, 1);

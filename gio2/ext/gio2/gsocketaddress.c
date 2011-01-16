@@ -29,7 +29,5 @@
 void
 Init_gsocketaddress(VALUE glib)
 {
-        VALUE socketaddress = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "SocketAddress", glib);
-
-        rb_undef_alloc_func(socketaddress);
+        (void)G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "SocketAddress", glib);
 }

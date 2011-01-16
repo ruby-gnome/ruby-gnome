@@ -23,7 +23,5 @@
 void
 Init_gfilteroutputstream(VALUE glib)
 {
-        VALUE filteroutputstream = G_DEF_CLASS(G_TYPE_FILTER_OUTPUT_STREAM, "FilterOutputStream", glib);
-
-        rb_undef_alloc_func(filteroutputstream);
+        (void)G_DEF_CLASS(G_TYPE_FILTER_OUTPUT_STREAM, "FilterOutputStream", glib);
 }

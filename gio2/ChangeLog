@@ -5,6 +5,10 @@
 	* ext/gio2/*: Remove methods for getting and setting properties that
 	are automatically generated.
 	* lib/gio2.rb: Make GLib::UnixFDList Enumerable.
+	* ext/gio2/*: Don’t use rb_undef_alloc_func.  We would like to remove
+	.new from these classes, but I don’t know of a way of doing so.  Using
+	rb_undef_alloc_func is incorrect, as it will make subclasses
+	unallocatable.
 
 2010-11-12  Nikolai Weibull
 

@@ -89,8 +89,6 @@ Init_gfileiostream(VALUE glib)
 {
         VALUE fileiostream = G_DEF_CLASS(G_TYPE_FILE_IO_STREAM, "FileIOStream", glib);
 
-        rb_undef_alloc_func(fileiostream);
-
         rb_define_method(fileiostream, "etag", fileiostream_get_etag, 0);
         rb_define_method(fileiostream, "query_info", fileiostream_query_info, -1);
         rb_define_method(fileiostream, "query_info_async", fileiostream_query_info_async, -1);

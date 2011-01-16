@@ -108,8 +108,6 @@ Init_ginetaddress(VALUE glib)
         rb_define_singleton_method(inetaddress, "new_any", inetaddress_new_any, 1);
         rb_define_singleton_method(inetaddress, "new_loopback", inetaddress_new_loopback, 1);
 
-        rb_undef_alloc_func(inetaddress);
-
         rb_define_method(inetaddress, "to_bytes", inetaddress_to_bytes, 0);
         rb_define_method(inetaddress, "get_native_size", inetaddress_get_native_size, 0);
         rb_define_method(inetaddress, "to_string", inetaddress_to_string, 0);

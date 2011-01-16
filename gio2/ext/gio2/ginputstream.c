@@ -322,8 +322,6 @@ Init_ginputstream(VALUE glib)
 
         s_cReadAsyncResult = rb_define_class_under(inputstream, "ReadAsyncResult", rb_cObject);
         
-        rb_undef_alloc_func(inputstream);
-
         rb_define_method(inputstream, "read", inputstream_read, -1);
         rb_define_method(inputstream, "read_all", inputstream_read_all, -1);
         rb_define_method(inputstream, "skip", inputstream_skip, -1);

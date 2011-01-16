@@ -292,7 +292,6 @@ Init_gunixmounts(G_GNUC_UNUSED VALUE glib)
         rb_define_singleton_method(unixmount, "mount_path_system_internal?", unix_is_mount_path_system_internal, 1);
         rb_define_singleton_method(unixmount, "at", unixmount_at, 1);
 
-        rb_undef_alloc_func(unixmount);
         rbgobj_boxed_not_copy_obj(G_TYPE_UNIX_MOUNT_ENTRY);
 
         rb_define_method(unixmount, "compare", unixmount_compare, 1);
@@ -311,7 +310,6 @@ Init_gunixmounts(G_GNUC_UNUSED VALUE glib)
 
         rb_include_module(unixmountpoint, rb_mComparable);
 
-        rb_undef_alloc_func(unixmountpoint);
         rbgobj_boxed_not_copy_obj(G_TYPE_UNIX_MOUNT_POINT);
 
         rb_define_method(unixmountpoint, "compare", unixmountpoint_compare, 1);

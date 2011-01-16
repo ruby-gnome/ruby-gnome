@@ -73,8 +73,6 @@ Init_gsocketcontrolmessage(VALUE glib)
 
         rb_define_singleton_method(socketcontrolmessage, "deserialize", socketcontrolmessage_deserialize, 3);
 
-        rb_undef_alloc_func(socketcontrolmessage);
-
         rb_define_method(socketcontrolmessage, "level", socketcontrolmessage_get_level, 0);
         rb_define_method(socketcontrolmessage, "msg_type", socketcontrolmessage_get_msg_type, 0);
         rb_define_method(socketcontrolmessage, "size", socketcontrolmessage_get_size, 0);

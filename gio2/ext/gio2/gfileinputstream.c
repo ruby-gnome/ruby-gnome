@@ -84,8 +84,6 @@ Init_gfileinputstream(VALUE glib)
 {
         VALUE fileinputstream = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM, "FileInputStream", glib);
 
-        rb_undef_alloc_func(fileinputstream);
-
         rb_define_method(fileinputstream, "query_info", fileinputstream_query_info, -1);
         rb_define_method(fileinputstream, "query_info_async", fileinputstream_query_info_async, -1);
         rb_define_method(fileinputstream, "query_info_finish", fileinputstream_query_info_finish, 1);

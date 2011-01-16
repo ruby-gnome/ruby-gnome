@@ -65,8 +65,6 @@ Init_gvolumemonitor(VALUE glib)
 
         rb_define_const(volumemonitor, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VOLUME_MONITOR_EXTENSION_POINT_NAME));
 
-        rb_undef_alloc_func(volumemonitor);
-
         rb_define_singleton_method(volumemonitor, "get", volumemonitor_get, 0);
 
         rb_define_method(volumemonitor, "connected_drives", volumemonitor_get_connected_drives, 0);

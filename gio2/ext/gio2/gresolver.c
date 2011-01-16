@@ -209,8 +209,6 @@ Init_gresolver(VALUE glib)
         rb_define_singleton_method(resolver, "default", resolver_get_default, 0);
         rb_define_singleton_method(resolver, "set_default", resolver_set_default, 1);
 
-        rb_undef_alloc_func(resolver);
-
         /* TODO: Taint result of these methods? */
         rb_define_method(resolver, "lookup_by_name", resolver_lookup_by_name, 2);
         rb_define_method(resolver, "lookup_by_name_async", resolver_lookup_by_name_async, -1);

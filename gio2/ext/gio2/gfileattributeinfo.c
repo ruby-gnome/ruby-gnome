@@ -81,7 +81,6 @@ Init_gfileattributeinfo(VALUE glib)
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "Flags", fileattributeinfo);
         G_DEF_CONSTANTS(fileattributeinfo, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_INFO_");
 
-        rb_undef_alloc_func(fileattributeinfo);
         rbgobj_boxed_not_copy_obj(G_TYPE_FILE_ATTRIBUTE_INFO);
 
         rb_define_method(fileattributeinfo, "name", fileattributeinfo_name, 0);

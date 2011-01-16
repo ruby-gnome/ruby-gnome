@@ -96,8 +96,6 @@ Init_giostream(VALUE glib)
 {
         VALUE iostream = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", glib);
 
-        rb_undef_alloc_func(iostream);
-
         rb_define_method(iostream, "close", iostream_close, 1);
         rb_define_method(iostream, "close_async", iostream_close_async, -1);
         rb_define_method(iostream, "close_finish", iostream_close_finish, 1);

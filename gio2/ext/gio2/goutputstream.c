@@ -311,8 +311,6 @@ Init_goutputstream(VALUE glib)
         G_DEF_CLASS(G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "SpliceFlags", outputstream);
         G_DEF_CONSTANTS(outputstream, G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "G_OUTPUT_STREAM_");
 
-        rb_undef_alloc_func(outputstream);
-
         rb_define_method(outputstream, "write", outputstream_write, -1);
         rb_define_method(outputstream, "write_all", outputstream_write_all, -1);
         rb_define_method(outputstream, "splice", outputstream_splice, -1);

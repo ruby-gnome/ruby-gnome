@@ -151,8 +151,6 @@ Init_gfileenumerator(VALUE glib)
 {
         VALUE fileenumerator = G_DEF_CLASS(G_TYPE_FILE_ENUMERATOR, "FileEnumerator", glib);
 
-        rb_undef_alloc_func(fileenumerator);
-
         rb_define_method(fileenumerator, "next_file", fileenumerator_next_file, -1);
         rb_define_method(fileenumerator, "close", fileenumerator_close, -1);
         rb_define_method(fileenumerator, "next_files_async", fileenumerator_next_files_async, -1);
