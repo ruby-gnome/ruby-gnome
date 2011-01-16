@@ -146,3 +146,14 @@ module GLib::SocketConnectable
     end
   end
 end
+
+class GLib::UnixFDList
+  include Enumerable
+
+  def each
+    i = 0
+    while i < length
+      yield self[i]
+    end
+  end
+end
