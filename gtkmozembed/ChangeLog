@@ -4,9 +4,9 @@
 
 	* src/: -> ext/gtkmozembed/.
 
-	* extconf.rb: -> ext/gstreamer/extconf.rb
+	* extconf.rb: -> ext/gtkmozembed/extconf.rb
 
-	* ext/gstreamer/extconf.rb: support directory structure change.
+	* ext/gtkmozembed/extconf.rb: support directory structure change.
 
 	* extconf.rb: add.
 
