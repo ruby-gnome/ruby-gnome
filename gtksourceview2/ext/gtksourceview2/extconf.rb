@@ -4,9 +4,9 @@ extconf.rb for Ruby/GtkSourceView2 extension library
 
 require 'pathname'
 
-base_dir = Pathname(__FILE__).dirname.expand_path
-top_dir = base_dir.parent.expand_path
-top_build_dir = Pathname(".").parent.expand_path
+base_dir = Pathname(__FILE__).dirname.parent.parent.expand_path
+top_dir = base_dir.parent
+top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
 mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
 version_suffix = ""
@@ -44,17 +44,16 @@ have_func('gtk_source_language_manager_guess_language', "gtksourceview/gtksource
                      :target_build_dir => build_dir)
 end
 
-make_version_header("GTKSOURCEVIEW2", package_id)
+make_version_header("GTKSOURCEVIEW2", package_id, ".")
 
 create_pkg_config_file("Ruby/GtkSourceView2", package_id)
-create_makefile_at_srcdir(module_name, (base_dir + "src").to_s,
-                          "-DRUBY_GTKSOURCEVIEW2_COMPILATION")
+$defs << "-DRUBY_GTKSOURCEVIEW2_COMPILATION"
+create_makefile(module_name)
 pkg_config_dir = with_config("pkg-config-dir")
 if pkg_config_dir.is_a?(String)
-  File.open((base_dir + "src" + "Makefile").to_s, "ab") do |makefile|
+  File.open("Makefile", "ab") do |makefile|
     makefile.puts
     makefile.puts("pkgconfigdir=#{pkg_config_dir}")
   end
 end
-create_top_makefile
 

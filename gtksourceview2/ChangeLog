@@ -1,3 +1,17 @@
+2011-01-22  Masaaki Aoyagi
+
+	* src/lib/: -> lib/.
+
+	* src/: -> ext/gtksourceview2/.
+
+	* extconf.rb: -> ext/gtksourceview2/extconf.rb
+
+	* ext/gtksourceview2/extconf.rb: support directory structure change.
+
+	* extconf.rb: add.
+
+	* Rakefile: add.
+
 2010-09-28  Kouhei Sutou  <kou@cozmixng.org>
 
 	* test/run-test.rb: fix path.
