@@ -1,3 +1,9 @@
+2011-01-21  Masaaki Aoyagi
+
+	* lib/gnome2-raketask.rb: add.
+
+	* Rakefile: change to use gnome2-raketask.rb.
+
 2011-01-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/mkmf-gnome2.rb: support "2.0b7" style module
