@@ -1,3 +1,17 @@
+2011-01-22  Masaaki Aoyagi
+
+	* src/lib/: -> lib/.
+
+	* src/: -> ext/vte/.
+
+	* extconf.rb: -> ext/vte/extconf.rb
+
+	* ext/vte/extconf.rb: support directory structure change.
+
+	* extconf.rb: add.
+
+	* Rakefile: add.
+
 2010-09-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* extconf.rb: support Ruby/GLib2 directory structure change.
