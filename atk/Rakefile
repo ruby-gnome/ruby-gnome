@@ -1,75 +1,13 @@
 # -*- ruby -*-
 
-require 'pathname'
-require 'find'
-require 'rubygems'
-require 'rake/extensiontask'
+require './../glib2/lib/gnome2-raketask'
 
-@top_dir = Pathname(__FILE__).dirname.parent.expand_path
-@rb_glib2_dir = @top_dir + "glib2"
-
-task :default => :build
-
-def version
-  @version ||= ENV["VERSION"] || guess_version
+package = GNOME2Package.new do |_package|
+  _package.summary = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
+  _package.description = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
+  _package.dependency.gem.runtime = ["glib2"]
+  _package.win32.packages = ["glib", "atk"]
+  _package.win32.dependencies = ["gettext-runtime"]
 end
+package.define_tasks
 
-def guess_version
-  versions = {}
-  rbglib_h_path = @rb_glib2_dir + "ext" + "glib2" + "rbglib.h"
-  rbglib_h_path.open do |rbglib_h|
-    rbglib_h.each_line do |line|
-      if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
-        versions[$1.downcase] = $2.to_i
-      end
-    end
-  end
-  ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
-end
-
-package_name = "atk"
-
-spec = Gem::Specification.new do |s|
-  s.name = package_name
-  s.summary = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
-  s.description = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
-  s.author = "The Ruby-GNOME2 Proejct Team"
-  s.email = "ruby-gnome2-devel-en@lists.sourceforge.net"
-  s.homepage = "http://ruby-gnome2.sourceforge.jp/"
-  s.version = version
-  s.platform = Gem::Platform::RUBY
-  compatible_version = version.split(/\./)[0, 3].join(".")
-  s.add_dependency("glib2", ">= #{compatible_version}")
-  s.extensions = FileList["ext/#{package_name}/extconf.rb"]
-  s.require_paths = ["lib"]
-  s.files = FileList["ChangeLog", "README", "Rakefile", "extconf.rb",
-                     "lib/**/*.rb", "ext/**/*"]
-end
-
-Rake::GemPackageTask.new(spec) do |pkg|
-end
-
-Rake::ExtensionTask.new(package_name, spec) do |ext|
-  ext.cross_compile = true
-  ext.cross_compiling do |spec|
-    if /mingw|mswin/ =~ spec.platform.to_s
-      win32_dir = File.join("vendor", "local")
-      win32_files = []
-      Find.find(win32_dir) do |file|
-        next if /\.zip\z/ =~ file
-        win32_files << file
-      end
-      spec.files += win32_files
-    end
-  end
-end
-
-namespace :win32 do
-  desc "download Windows binaries"
-  task :download do
-    $LOAD_PATH.unshift((@rb_glib2_dir + "lib").to_s)
-    require 'gnome2-win32-binary-downloader'
-    GNOME2Win32BinaryDownloader.download(:packages => ["glib", "atk"],
-                                         :dependencies => ["gettext-runtime"])
-  end
-end
