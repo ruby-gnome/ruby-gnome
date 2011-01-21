@@ -4,9 +4,9 @@ extconf.rb for Ruby/GtkMozEmbed extention library
 
 require 'pathname'
 
-base_dir = Pathname(__FILE__).dirname.expand_path
-top_dir = base_dir.parent.expand_path
-top_build_dir = Pathname(".").parent.expand_path
+base_dir = Pathname(__FILE__).dirname.parent.parent.expand_path
+top_dir = base_dir.parent
+top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
 mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
 version_suffix = ""
@@ -86,12 +86,11 @@ else
   exit 1
 end
 
-make_version_header("GTKMOZEMBED", package_id)
+make_version_header("GTKMOZEMBED", package_id, ".")
 
 create_pkg_config_file('Ruby/GtkMozEmbed', package_id)
-
-create_makefile_at_srcdir(module_name, (base_dir + "src").to_s,
-                          "-DRUBY_GTKMOZEMBED_COMPILATION") do
+$defs << "-DRUBY_GTKMOZEMBED_COMPILATION"
+create_makefile_at_srcdir(module_name, (base_dir + "ext" + module_name).to_s) do
   enum_type_prefix = "gtkmozembed-enum-types"
   include_paths = PKGConfig.cflags_only_I(package_id)
   include_paths = include_paths.split.collect do |path|
@@ -107,10 +106,9 @@ create_makefile_at_srcdir(module_name, (base_dir + "src").to_s,
 end
 pkg_config_dir = with_config("pkg-config-dir")
 if pkg_config_dir.is_a?(String)
-  File.open((base_dir + "src" + "Makefile").to_s, "ab") do |makefile|
+  File.open("Makefile", "ab") do |makefile|
     makefile.puts
     makefile.puts("pkgconfigdir=#{pkg_config_dir}")
   end
 end
 
-create_top_makefile

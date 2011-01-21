@@ -1,0 +1,13 @@
+# -*- ruby -*-
+
+require './../glib2/lib/gnome2-raketask'
+
+package = GNOME2Package.new do |_package|
+  _package.summary = "Ruby/GtkMozEmbed is a Ruby binding of GtkMozEmbed a widget embedding a Mozilla Gecko renderer."
+  _package.description = "Ruby/GtkMozEmbed is a Ruby binding of GtkMozEmbed a widget embedding a Mozilla Gecko renderer."
+  _package.dependency.gem.runtime = ["gtk2", "pango"]
+  _package.win32.packages = []
+  _package.win32.dependencies = []
+end
+package.define_tasks
+
