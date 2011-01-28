@@ -4,14 +4,14 @@ extconf.rb for Ruby/GooCanvas extension library
 
 require 'pathname'
 
-base_dir = Pathname(__FILE__).dirname.expand_path
+base_dir = Pathname(__FILE__).dirname.parent.parent.expand_path
 top_dir = base_dir.parent.expand_path
-top_build_dir = Pathname(".").parent.expand_path
+top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
 mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
 version_suffix = ""
 unless mkmf_gnome2_dir.exist?
-  if /(-\d+\.\d+\.\d+)\z/ =~ base_dir.basename.to_s
+  if /(-\d+\.\d+\.\d+)(?:\.\d+)?\z/ =~ base_dir.basename.to_s
     version_suffix = $1
     mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + 'lib'
   end
@@ -52,16 +52,16 @@ check_cairo(options) or exit(false)
 end
 
 
-make_version_header("GOO_CANVAS", package_id)
+make_version_header("GOO_CANVAS", package_id, ".")
 
 create_pkg_config_file("Ruby/GooCanvas", package_id)
-create_makefile_at_srcdir(module_name, (base_dir + "src").to_s,
-                          "-DRUBY_GOO_CANVAS_COMPILATION")
+$defs << "-DRUBY_GOO_CANVAS_COMPILATION"
+create_makefile(module_name)
 pkg_config_dir = with_config("pkg-config-dir")
 if pkg_config_dir.is_a?(String)
-  File.open((base_dir + "src" + "Makefile").to_s, "ab") do |makefile|
+  File.open("Makefile", "ab") do |makefile|
     makefile.puts
     makefile.puts("pkgconfigdir=#{pkg_config_dir}")
   end
 end
-create_top_makefile
+
