@@ -344,7 +344,7 @@ def check_cairo(options={})
   have_rb_cairo_h = have_header('rb_cairo.h')
   unless have_rb_cairo_h
     cairo_gem_spec = Gem.source_index.find_name("cairo").last
-    $CFLAGS += " -I#{cairo_gem_spec && cairo_gem_spec.full_gem_path}/ext/cairo "
+    $CFLAGS += " -I#{cairo_gem_spec.full_gem_path}/ext/cairo " if cairo_gem_spec
     have_rb_cairo_h = have_header('rb_cairo.h')
   end
 
