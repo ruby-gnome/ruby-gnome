@@ -1,3 +1,7 @@
+2011-01-28  Masaaki Aoyagi
+
+	* lib/mkmf-gnome2.rb: fix check_cairo.
+
 2011-01-21  Masaaki Aoyagi
 
 	* lib/gnome2-raketask.rb: add.

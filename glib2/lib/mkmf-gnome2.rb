@@ -343,21 +343,9 @@ def check_cairo(options={})
   $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo" if rcairo_source_dir
   have_rb_cairo_h = have_header('rb_cairo.h')
   unless have_rb_cairo_h
-    begin
-      require 'rubygems'
-      gem 'cairo'
-      require 'cairo'
-      rcairo_src_gem_path_re =
-        /\A#{Regexp.escape(Gem.dir)}\/gems\/cairo-[\d.]+\/ext\/cairo\z/
-      $LOAD_PATH.each do |path|
-        if rcairo_src_gem_path_re =~ path
-          $CFLAGS += " -I#{path} "
-          have_rb_cairo_h = have_header('rb_cairo.h')
-          break
-        end
-      end
-    rescue LoadError
-    end
+    cairo_gem_spec = Gem.source_index.find_name("cairo").last
+    $CFLAGS += " -I#{cairo_gem_spec && cairo_gem_spec.full_gem_path}/ext/cairo "
+    have_rb_cairo_h = have_header('rb_cairo.h')
   end
 
   if have_rb_cairo_h
