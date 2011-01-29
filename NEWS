@@ -2,23 +2,47 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.90.6: 2010-XX-XX
+== Ruby-GNOME2 0.90.6: 2011-01-29
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
-WRITE ME.
+Removed deprecated packages.
 
 === Changes
 
 ==== All
 
-  * ...
+  * remove all deprecated packages.
+    [Masaaki Aoyagi]
+  * all supported packages support RubyGems.
+    [Masaaki Aoyagi]
+
+==== Ruby/GLib2
+
+  * Imrpovements
+    * add gnome2-raketask.rb that is a utility library to
+      define Rake tasks for Ruby-GNOME2 packages.
+      [Masaaki Aoyagi, Kouhei Sutou]
+
+  * Fixes
+    * fix GType conversion.
+      [Kouhei Sutou]
+    * fix rcairo installed by RubyGems detection.
+      [Masaaki Aoyagi]
+
+==== Ruby/GIO2
+
+  * Improvements
+    * support GIO 2.26.
+      [Nikolai Weibull]
 
 ==== Ruby/GStreamer
 
   * Improvements
     * add Gst::MissingURISourceMessage.
       [Vincent Carmona, Kouhei Sutou]
+    * support RubyGems.
+      [Masaaki Aoyagi]
 
 ==== Ruby/Pango
 
@@ -33,13 +57,34 @@ WRITE ME.
   * Fixes
     * support "2.0b7" style module version. #3141244
       [reandr, Kouhei Sutou]
+    * support RubyGems.
+      [Masaaki Aoyagi]
+
+==== Ruby/GooCanvas
+
+  * Improvements
+    * support RubyGems.
+      [Masaaki Aoyagi]
+
+==== Ruby/GtkSourceView2
+
+  * Improvements
+    * support RubyGems.
+      [Masaaki Aoyagi]
+
+==== Ruby/VTEn
+
+  * Improvements
+    * support RubyGems.
+      [Masaaki Aoyagi]
 
 === Thanks
 
   * Vincent Carmona
   * mrkn
   * reandr
-  * ...
+  * Nikolai Weibull
+  * Masaaki Aoyagi
 
 == Ruby-GNOME2 0.90.5: 2010-10-28
 
@@ -63,10 +108,6 @@ A build system improvements release.
   * Bug fixes
     * fix pkg-config gem dependency.
       [Kouhei Sutou]
-
-=== Thanks
-
-  * ...
 
 == Ruby-GNOME2 0.90.4: 2010-10-24
 

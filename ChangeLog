@@ -1,3 +1,7 @@
+2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: update 0.90.6 entry.
+
 2011-01-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkMozEmbed: support "2.0b7" style module
