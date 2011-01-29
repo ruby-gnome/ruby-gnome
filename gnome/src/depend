@@ -1,5 +1,0 @@
-install:
-	if test -n "$(pkgconfigdir)"; then			\
-	  $(MAKEDIRS) $(pkgconfigdir);				\
-	  $(INSTALL_DATA) ../ruby-gnome2.pc $(pkgconfigdir);	\
-	fi
