@@ -1,8 +1,0 @@
-install-so:
-	$(INSTALL_DATA) rblibgnomeprintversion.h $(RUBYARCHDIR)
-
-install:
-	if test -n "$(pkgconfigdir)"; then				\
-	  $(MAKEDIRS) $(pkgconfigdir);					\
-	  $(INSTALL_DATA) ../ruby-gnomeprint2.pc $(pkgconfigdir);	\
-	fi
