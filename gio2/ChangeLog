@@ -1,3 +1,9 @@
+2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gio2/gdatainputstream.c: disable read_upto related methods
+	with GIO 2.24 because GIO 2.24 has those definition in *.c but no those
+	declarations in *.h.
+
 2011-01-22  Masaaki Aoyagi
 
 	* Rakefile: change to use gnome2-raketask.rb.

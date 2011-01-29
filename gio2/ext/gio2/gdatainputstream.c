@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby" -*- */
 /*
  * Ruby/GIO: a Ruby binding of gio-2.0.x.
- * Copyright (C) 2008-2009  Ruby-GNOME2 Project Team
+ * Copyright (C) 2008-2011  Ruby-GNOME2 Project Team
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -220,6 +220,7 @@ datainputstream_read_line_finish(VALUE self, VALUE result)
         return CSTR2RVAL_TAINTED_FREE(line, length);
 }
 
+#if GLIB_CHECK_VERSION(2, 26, 0)
 static VALUE
 datainputstream_read_upto(int argc, VALUE *argv, VALUE self)
 {
@@ -283,6 +284,7 @@ datainputstream_read_upto_finish(VALUE self, VALUE result)
 
         return CSTR2RVAL_TAINTED_FREE(string, length);
 }
+#endif
 
 void
 Init_gdatainputstream(VALUE glib)
@@ -308,7 +310,9 @@ Init_gdatainputstream(VALUE glib)
         rb_define_method(datainputstream, "read_line", datainputstream_read_line, -1);
         rb_define_method(datainputstream, "read_line_async", datainputstream_read_line_async, -1);
         rb_define_method(datainputstream, "read_line_finish", datainputstream_read_line_finish, 1);
+#if GLIB_CHECK_VERSION(2, 26, 0)
         rb_define_method(datainputstream, "read_upto", datainputstream_read_upto, -1);
         rb_define_method(datainputstream, "read_upto_async", datainputstream_read_upto_async, -1);
         rb_define_method(datainputstream, "read_upto_finish", datainputstream_read_upto_finish, 1);
+#endif
 }
