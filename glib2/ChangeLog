@@ -1,3 +1,9 @@
+2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/mkmf-gnome2.rb:
+	- add load error check.
+	- remove needless rb_cairo.h check.
+
 2011-01-28  Masaaki Aoyagi
 
 	* lib/mkmf-gnome2.rb: fix check_cairo.
