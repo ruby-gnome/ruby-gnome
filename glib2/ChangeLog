@@ -1,3 +1,9 @@
+2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/gnome2-win32-binary-downloader.rb
+	(GNOME2Win32BinaryDownloader#click_zip_link): override existing
+	files without prompting.
+
 2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/mkmf-gnome2.rb:

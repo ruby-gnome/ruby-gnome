@@ -86,7 +86,7 @@ class GNOME2Win32BinaryDownloader
       open(zip.filename, "wb") do |file|
         file.print(zip.body)
       end
-      system("unzip '#{zip.filename}'")
+      system("unzip", "-o", zip.filename)
     end
   end
 end
