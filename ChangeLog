@@ -1,5 +1,7 @@
 2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: follow variable name change.
+
 	* Rakefile: add gem:build and gem:push tasks.
 
 	* Rakefile: remove deprecated packages.

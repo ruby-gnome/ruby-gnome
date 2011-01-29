@@ -142,14 +142,14 @@ namespace :gem do
 
     desc "clean all Windows gems build"
     task :clean do
-      packages.each do |package|
+      gnome2_packages.each do |package|
         rm_rf(File.join(package, "tmp"))
       end
     end
 
     desc "download DLL for Windows all gems"
     task :download do
-      packages.each do |package|
+      gnome2_packages.each do |package|
         Dir.chdir(package) do
           sh("rake", "win32:download")
         end
@@ -158,7 +158,7 @@ namespace :gem do
 
     desc "push all Windows gems"
     task :push do
-      packages.each do |package|
+      gnome2_packages.each do |package|
         sh("gem", "push",
            *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
       end
