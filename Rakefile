@@ -61,14 +61,79 @@ task :build => ["Makefile"] do
   sh("make")
 end
 
-namespace :gem do
-  namespace :win32 do
-    packages = ["glib2", "gio2", "atk", "pango", "gtk2", "gdk_pixbuf2",
-                "rsvg2", "poppler"]
+desc "clean all packages"
+task :clean do
+  sh("make", "clean") if File.exist?("Makefile")
+end
 
+desc "more clean all packages"
+task :distclean do
+  sh("make", "distclean") if File.exist?("Makefile")
+end
+
+desc "run tests for all packages"
+task :test => [:build] do
+  ruby("run-test.rb")
+end
+
+desc "make all packages"
+task :dist => [:dist_gtk2, :dist_gnome2]
+
+base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
+              "README", "Rakefile",
+              "exec_make.rb", "extconf.rb", "run-test.rb"]
+gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
+gtk2_base_name = "ruby-gtk2"
+desc "make Ruby/GTK2 package"
+task :dist_gtk2 do
+  package(gtk2_base_name, base_files + gtk2_packages)
+end
+
+gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer", "gtkmozembed",
+                                   "gtksourceview2", "poppler", "rsvg2", "vte"]
+gnome2_base_name = "ruby-gnome2-all"
+desc "make Ruby/GNOME2 package"
+task :dist_gnome2 do
+  package(gnome2_base_name, base_files + gnome2_packages)
+end
+
+desc "releae Ruby-GNOME2 packages"
+task :release => [:dist] do
+  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
+  project_id = "ruby-gnome2"
+  project_name = "Ruby-GNOME 2"
+  package_name = "ruby-gnome2"
+  release_name = "ruby-gnome2-#{version}"
+  archive_names = [gtk2_base_name, gnome2_base_name].collect do |base_name|
+    archive_name(base_name)
+  end
+  ruby("misc/release.rb", sf_user_name, project_id, project_name,
+       package_name, release_name, "README:1", "NEWS",
+       *archive_names)
+end
+
+namespace :gem do
+  desc "build all gems"
+  task :build do
+    gnome2_packages.each do |package|
+      Dir.chdir(package) do
+        sh("rake", "gem")
+      end
+    end
+  end
+
+  desc "push all gems"
+  task :push do
+    packages.each do |package|
+      sh("gem", "push",
+         *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
+    end
+  end
+
+  namespace :win32 do
     desc "build all Windows gems"
     task :build do
-      packages.each do |package|
+      gnome2_packages.each do |package|
         Dir.chdir(package) do
           sh("rake", "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
         end
@@ -91,7 +156,7 @@ namespace :gem do
       end
     end
 
-    desc "push all Windows gem"
+    desc "push all Windows gems"
     task :push do
       packages.each do |package|
         sh("gem", "push",
@@ -99,58 +164,6 @@ namespace :gem do
       end
     end
   end
-end
-
-
-desc "clean all packages"
-task :clean do
-  sh("make", "clean") if File.exist?("Makefile")
-end
-
-desc "more clean all packages"
-task :distclean do
-  sh("make", "distclean") if File.exist?("Makefile")
-end
-
-desc "run tests for all packages"
-task :test => [:build] do
-  ruby("run-test.rb")
-end
-
-desc "make all packages"
-task :dist => [:dist_gtk2, :dist_gnome2]
-
-base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
-              "README", "Rakefile",
-              "exec_make.rb", "extconf.rb", "run-test.rb"]
-gtk2_dirs = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
-gtk2_base_name = "ruby-gtk2"
-desc "make Ruby/GTK2 package"
-task :dist_gtk2 do
-  package(gtk2_base_name, base_files + gtk2_dirs)
-end
-
-gnome2_dirs = gtk2_dirs + ["goocanvas", "gstreamer", "gtkmozembed",
-                           "gtksourceview2", "poppler", "rsvg2", "vte"]
-gnome2_base_name = "ruby-gnome2-all"
-desc "make Ruby/GNOME2 package"
-task :dist_gnome2 do
-  package(gnome2_base_name, base_files + gnome2_dirs)
-end
-
-desc "releae Ruby-GNOME2 packages"
-task :release => [:dist] do
-  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
-  project_id = "ruby-gnome2"
-  project_name = "Ruby-GNOME 2"
-  package_name = "ruby-gnome2"
-  release_name = "ruby-gnome2-#{version}"
-  archive_names = [gtk2_base_name, gnome2_base_name].collect do |base_name|
-    archive_name(base_name)
-  end
-  ruby("misc/release.rb", sf_user_name, project_id, project_name,
-       package_name, release_name, "README:1", "NEWS",
-       *archive_names)
 end
 
 def guess_copy_source_repository_uri

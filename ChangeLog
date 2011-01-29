@@ -1,5 +1,7 @@
 2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add gem:build and gem:push tasks.
+
 	* Rakefile: remove deprecated packages.
 
 	* NEWS: update 0.90.6 entry.
