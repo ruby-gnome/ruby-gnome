@@ -1,5 +1,9 @@
 2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gio2/gunixsocketaddress.c (Init_gunixsocketaddress): disable
+	G_TYPE_UNIX_SOCKET_ADDRESS_TYPE on GIO 2.24 because it was appeared
+	in GIO 2.26.
+
 	* ext/gio2/gdatainputstream.c: disable read_upto related methods
 	with GIO 2.24 because GIO 2.24 has those definition in *.c but no those
 	declarations in *.h.
