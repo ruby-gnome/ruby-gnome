@@ -130,13 +130,8 @@ task :dist_gtk2 do
   package(gtk2_base_name, base_files + gtk2_dirs)
 end
 
-gnome2_dirs = gtk2_dirs + ["bonobo", "bonoboui", "gconf", "goocanvas", "gnome",
-                           "gnomecanvas", "gnomeprint", "gnomeprintui",
-                           "gnomevfs", "gstreamer", "gtkglext",
-                           "gtkhtml2", "gtkmozembed",
-                           "gtksourceview", "gtksourceview2",
-                           "libart", "libglade",
-                           "panel-applet", "poppler", "rsvg2", "vte"]
+gnome2_dirs = gtk2_dirs + ["goocanvas", "gstreamer", "gtkmozembed",
+                           "gtksourceview2", "poppler", "rsvg2", "vte"]
 gnome2_base_name = "ruby-gnome2-all"
 desc "make Ruby/GNOME2 package"
 task :dist_gnome2 do
