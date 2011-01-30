@@ -24,6 +24,29 @@ package_id = "librsvg-2.0"
 
 require 'mkmf-gnome2'
 
+["glib2", "gdk_pixbuf2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
+
+rcairo_options = {}
+rcairo_source_dir_names = ["rcairo"]
+if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+  rcairo_source_dir_names.unshift("rcairo.win32")
+end
+rcairo_source_dir_names.each do |rcairo_source_dir_name|
+  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
+  if rcairo_source_dir.exist?
+    rcairo_options[:rcairo_source_dir] = rcairo_source_dir.to_s
+    break
+  end
+end
+check_cairo(rcairo_options)
+
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
@@ -39,30 +62,7 @@ have_func("rsvg_handle_get_pixbuf_sub", rsvg_header)
 have_header("librsvg/rsvg-gz.h")
 have_type("RsvgDimensionData", "librsvg/rsvg.h")
 
-if have_header("librsvg/rsvg-cairo.h")
-  options = {}
-  rcairo_source_dir_names = ["rcairo"]
-  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-    rcairo_source_dir_names.unshift("rcairo.win32")
-  end
-  rcairo_source_dir_names.each do |rcairo_source_dir_name|
-    rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
-    if rcairo_source_dir.exist?
-      options[:rcairo_source_dir] = rcairo_source_dir.to_s
-      break
-    end
-  end
-  check_cairo(options)
-end
-
-["glib2"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
-end
+have_header("librsvg/rsvg-cairo.h")
 
 create_pkg_config_file("Ruby/RSVG", package_id, nil, "ruby-rsvg2.pc")
 

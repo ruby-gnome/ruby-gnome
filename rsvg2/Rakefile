@@ -5,9 +5,9 @@ require './../glib2/lib/gnome2-raketask'
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/RSVG is a Ruby binding of librsvg-2.x."
   _package.description = "Ruby/RSVG is a Ruby binding of librsvg-2.x."
-  _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "glib2"]
-  _package.win32.packages = ["glib", "atk", "gdk-pixbuf", "pango", "gtk+", "librsvg", "libcroco"]
-  _package.win32.dependencies = ["gettext-runtime", "zlib", "freetype", "expat", "fontconfig", "cairo", "libpng", "libxml"]
+  _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "gdk_pixbuf2"]
+  _package.win32.packages = ["librsvg", "libcroco"]
+  _package.win32.dependencies = ["libxml2"]
 end
 package.define_tasks
 
