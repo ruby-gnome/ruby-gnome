@@ -100,9 +100,11 @@ class GNOME2Package
         if /mingw|mswin/ =~ spec.platform.to_s
           win32_dir = File.join("vendor", "local")
           win32_files = []
-          Find.find(win32_dir) do |file|
-            next if /\.zip\z/ =~ file
-            win32_files << file
+          if File.exist?(win32_dir)
+            Find.find(win32_dir) do |file|
+              next if /\.zip\z/ =~ file
+              win32_files << file
+            end
           end
           spec.files += win32_files
         end
