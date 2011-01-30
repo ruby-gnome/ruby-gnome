@@ -124,7 +124,7 @@ namespace :gem do
 
   desc "push all gems"
   task :push do
-    packages.each do |package|
+    gnome2_packages.each do |package|
       sh("gem", "push",
          *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
     end
