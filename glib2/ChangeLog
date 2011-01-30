@@ -1,5 +1,8 @@
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (setup_win32): use rcairo's
+	vendor/local/lib/pkgconfig if it exists.
+
 	* lib/mkmf-gnome2.rb (setup_win32): don't override 'prefix=' in *.pc.
 
 	* lib/mkmf-gnome2.rb (add_depend_package): add dependency

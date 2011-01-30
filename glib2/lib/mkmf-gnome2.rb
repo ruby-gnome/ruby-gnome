@@ -69,7 +69,7 @@ def setup_win32(target_name, base_dir=nil)
   end
 end
 
-#add_depend_package("glib2", "glib/src", "/...../ruby-gnome2")
+#add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   [top_srcdir, $configure_args['--topdir']].each do |topdir|
     topdir = File.expand_path(topdir)
@@ -344,38 +344,34 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
 end
 
 def check_cairo(options={})
-  return false unless PKGConfig.have_package('cairo')
-
   rcairo_source_dir = options[:rcairo_source_dir]
   if rcairo_source_dir and !File.exist?(rcairo_source_dir)
     rcairo_source_dir = nil
   end
-  $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo" if rcairo_source_dir
-  have_rb_cairo_h = have_header('rb_cairo.h')
-  unless have_rb_cairo_h
+  if rcairo_source_dir.nil?
     begin
       require 'rubygems'
       cairo_gem_spec = Gem.source_index.find_name("cairo").last
       if cairo_gem_spec
-        $CFLAGS += " -I#{cairo_gem_spec.full_gem_path}/ext/cairo"
-        have_rb_cairo_h = have_header('rb_cairo.h')
+        rcairo_source_dir = cairo_gem_spec.full_gem_path
       end
     rescue LoadError
     end
   end
+  return false if rcairo_source_dir.nil?
 
-  if have_rb_cairo_h
-    if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-      options = {}
-      build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
-      if File.exist?(File.join(rcairo_source_dir, build_dir))
-        options[:target_build_dir] = build_dir
-      end
-      add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
-      $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
+  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+    options = {}
+    build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
+    if File.exist?(File.join(rcairo_source_dir, build_dir))
+      options[:target_build_dir] = build_dir
     end
+    add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
+    $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
   end
-  have_rb_cairo_h
+
+  $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo"
+  PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
 end
 
 add_include_path = Proc.new do |dir_variable|
