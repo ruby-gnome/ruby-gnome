@@ -4,6 +4,8 @@
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 
+require 'find'
+
 require 'rubygems'
 require 'rake/extensiontask'
 
