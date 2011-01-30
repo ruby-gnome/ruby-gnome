@@ -7,8 +7,8 @@
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
 Removed deprecated packages. All supported packages support
-RubyGems. All supported packages expect Ruby/GStreamer
-support also Windows binary bundled gem.
+RubyGems. All supported packages expect Ruby/VTE and
+Ruby/GStreamer support also Windows binary bundled gem.
 
 === Changes
 
