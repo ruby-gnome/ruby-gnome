@@ -63,9 +63,11 @@ class GNOME2Win32BinaryDownloader
   end
 
   def download_dependency(dependency)
-    dependencies_page = agent.get("#{URL_BASE}/dependencies")
+    escaped_dependency = Regexp.escape(dependency)
+    dependencies_url = "#{URL_BASE}/dependencies"
+    dependencies_page = agent.get(dependencies_url)
     latest_version = dependencies_page.links.collect do |link|
-      if /\A#{Regexp.escape(dependency)}_([\d\.\-]+)_win32\.zip\z/ =~ link.href
+      if /\A#{escaped_dependency}_([\d\.\-]+)_win32\.zip\z/ =~ link.href
         version = $1
         [version.split(/[\.\-]/).collect {|component| component.to_i}, version]
       else
@@ -74,8 +76,16 @@ class GNOME2Win32BinaryDownloader
     end.sort_by do |normalized_version, version|
       normalized_version
     end.last[1]
+
+    if latest_version.nil?
+      message = "can't find dependency package: " +
+        "<#{dependency}>:<#{dependencies_url}>"
+      raise message
+    end
+    escaped_latest_version = Regexp.escape(latest_version)
     dependencies_page.links.each do |link|
-      if /\A#{Regexp.escape(dependency)}(?:-dev)?_#{Regexp.escape(latest_version)}_win32.zip/ =~ link.href
+      case link.href
+      when /\A#{escaped_dependency}(?:-dev)?_#{escaped_latest_version}_win32.zip/
         click_zip_link(link)
       end
     end
