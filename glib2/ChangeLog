@@ -1,5 +1,8 @@
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gnome2-win32-binary-downloader.rb: override "prefix=" for
+	downloaded *.pc.
+
 	* lib/gnome2-raketask.rb: add missing "require 'find'".
 
 	* lib/gnome2-win32-binary-downloader.rb
