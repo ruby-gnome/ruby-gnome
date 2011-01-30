@@ -131,9 +131,10 @@ namespace :gem do
   end
 
   namespace :win32 do
+    win32_gnome2_packages = gnome2_packages - ["gstreamer"]
     desc "build all Windows gems"
     task :build do
-      gnome2_packages.each do |package|
+      win32_gnome2_packages.each do |package|
         Dir.chdir(package) do
           sh("rake", "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
         end
@@ -142,14 +143,14 @@ namespace :gem do
 
     desc "clean all Windows gems build"
     task :clean do
-      gnome2_packages.each do |package|
+      win32_gnome2_packages.each do |package|
         rm_rf(File.join(package, "tmp"))
       end
     end
 
     desc "download DLL for Windows all gems"
     task :download do
-      gnome2_packages.each do |package|
+      win32_gnome2_packages.each do |package|
         Dir.chdir(package) do
           sh("rake", "win32:download")
         end
@@ -158,7 +159,7 @@ namespace :gem do
 
     desc "push all Windows gems"
     task :push do
-      gnome2_packages.each do |package|
+      win32_gnome2_packages.each do |package|
         sh("gem", "push",
            *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
       end
