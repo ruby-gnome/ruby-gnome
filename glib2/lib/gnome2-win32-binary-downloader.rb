@@ -28,7 +28,8 @@ class GNOME2Win32BinaryDownloader
   end
 
   def download_package(package)
-    version_page = agent.get("#{URL_BASE}/#{package}")
+    version_page_url = "#{URL_BASE}/#{package}"
+    version_page = agent.get(version_page_url)
     latest_version_link = version_page.links.sort_by do |link|
       if /\A(\d+\.\d+)\/\z/ =~ link.href
         $1.split(/\./).collect {|component| component.to_i}
@@ -40,7 +41,9 @@ class GNOME2Win32BinaryDownloader
     escaped_package = Regexp.escape(package)
     latest_version_page = latest_version_link.click
     latest_version = latest_version_page.links.collect do |link|
-      if /#{escaped_package}_([\d\.\-]+)_win32\.zip\z/ =~ link.href
+      case link.href
+      when /#{escaped_package}_([\d\.\-]+)_win32\.zip\z/,
+           /#{escaped_package}-([\d\.\-]+)\.zip\z/ # old
         version = $1
         normalized_version = version.split(/[\.\-]/).collect do |component|
           component.to_i
@@ -53,10 +56,14 @@ class GNOME2Win32BinaryDownloader
       normalized_version
     end.last[1]
 
+    if latest_version.nil?
+      raise "can't find package: <#{package}>:<#{version_page_url}>"
+    end
     escaped_latest_version = Regexp.escape(latest_version)
     latest_version_page.links.each do |link|
       case link.href
-      when /#{escaped_package}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/
+      when /#{escaped_package}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/,
+           /#{escaped_package}(?:-dev)?-#{escaped_latest_version}\.zip\z/ # old
         click_zip_link(link)
       end
     end
