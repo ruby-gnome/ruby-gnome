@@ -5,8 +5,8 @@ require './../glib2/lib/gnome2-raketask'
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GooCanvas is a Ruby binding of GooCanvas."
   _package.description = "Ruby/GooCanvas is a Ruby binding of GooCanvas."
-  _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "glib2"]
-  _package.win32.packages = []
+  _package.dependency.gem.runtime = ["gtk2"]
+  _package.win32.packages = ["goocanvas"]
   _package.win32.dependencies = []
   _package.post_install_message = "This library is experimental."
 end
