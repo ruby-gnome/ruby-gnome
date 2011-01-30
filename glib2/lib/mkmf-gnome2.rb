@@ -94,12 +94,23 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     next unless File.exist?(target_build_dir_full_path)
     $INCFLAGS = "-I#{target_build_dir_full_path} #{$INCFLAGS}"
 
-    if /cygwin|mingw/ =~ RUBY_PLATFORM
-      $libs << " -lruby-#{target_name}"
-      $LDFLAGS << " -L#{target_build_dir_full_path}"
-    elsif /mswin32/ =~ RUBY_PLATFORM
-      $DLDFLAGS << " /libpath:#{target_build_dir_full_path}"
-      $libs << " libruby-#{target_name}.lib"
+    case RUBY_PLATFORM
+    when /cygwin|mingw|mswin32/
+      case RUBY_PLATFORM
+      when /cygwin|mingw/
+        $LDFLAGS << " -L#{target_build_dir_full_path}"
+        $libs << " -lruby-#{target_name}"
+      when /mswin32/
+        $DLDFLAGS << " /libpath:#{target_build_dir_full_path}"
+        $libs << " libruby-#{target_name}.lib"
+      end
+      target_base_dir = Pathname.new(target_source_dir_full_path).parent.parent
+      target_binary_base_dir = target_base_dir + "vendor" + "local"
+      if target_binary_base_dir.exist?
+        $INCFLAGS = "-I#{target_binary_base_dir}/include #{$INCFLAGS}"
+        target_pkg_config_dir = target_binary_base_dir + "lib" + "pkgconfig"
+        PKGConfig.add_path(target_pkg_config_dir.to_s)
+      end
     end
   end
 end
