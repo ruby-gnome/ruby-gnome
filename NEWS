@@ -74,7 +74,7 @@ Ruby/GStreamer support also Windows binary bundled gem.
     * support RubyGems.
       [Masaaki Aoyagi]
 
-==== Ruby/VTEn
+==== Ruby/VTE
 
   * Improvements
     * support RubyGems.
