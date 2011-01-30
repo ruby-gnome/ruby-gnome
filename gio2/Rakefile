@@ -6,8 +6,8 @@ package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GIO2 is a Ruby binding of gio-2.x."
   _package.description = "Ruby/GIO2 is a Ruby binding of gio-2.x."
   _package.dependency.gem.runtime = ["glib2"]
-  _package.win32.packages = ["glib"]
-  _package.win32.dependencies = ["gettext-runtime"]
+  _package.win32.packages = []
+  _package.win32.dependencies = []
   _package.post_install_message = "This library is experimental."
 end
 package.define_tasks
