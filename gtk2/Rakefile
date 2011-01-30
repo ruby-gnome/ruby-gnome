@@ -5,11 +5,11 @@ require './../glib2/lib/gnome2-raketask'
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
   _package.description = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
-  _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"],
-              "glib2", "pango", "gdk_pixbuf2", "atk"]
-  _package.win32.packages = ["glib", "atk", "gdk-pixbuf", "pango", "gtk+"]
-  _package.win32.dependencies = ["gettext-runtime", "zlib", "freetype",
-              "expat", "fontconfig", "cairo", "libpng"]
+  _package.dependency.gem.runtime = ["atk",
+                                     "pango",
+                                     "gdk_pixbuf2"]
+  _package.win32.packages = ["gtk+"]
+  _package.win32.dependencies = []
 end
 package.define_tasks
 

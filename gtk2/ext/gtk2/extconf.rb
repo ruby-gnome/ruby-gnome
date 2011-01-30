@@ -25,6 +25,29 @@ package_id = "gtk+-2.0"
 
 require 'mkmf-gnome2'
 
+["glib2", "atk", "pango", "gdk_pixbuf2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
+
+rcairo_options = {}
+rcairo_source_dir_names = ["rcairo"]
+if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+  rcairo_source_dir_names.unshift("rcairo.win32")
+end
+rcairo_source_dir_names.each do |rcairo_source_dir_name|
+  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
+  if rcairo_source_dir.exist?
+    rcairo_options[:rcairo_source_dir] = rcairo_source_dir.to_s
+    break
+  end
+end
+check_cairo(rcairo_options)
+
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package('gthread-2.0')
@@ -70,29 +93,6 @@ if target != "win32" and PKGConfig.have_package('gtk+-unix-print-2.0')
 end
 
 have_func("rb_errinfo")
-
-options = {}
-rcairo_source_dir_names = ["rcairo"]
-if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-  rcairo_source_dir_names.unshift("rcairo.win32")
-end
-rcairo_source_dir_names.each do |rcairo_source_dir_name|
-  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
-  if rcairo_source_dir.exist?
-    options[:rcairo_source_dir] = rcairo_source_dir.to_s
-    break
-  end
-end
-check_cairo(options)
-
-["glib2", "pango"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
-end
 
 create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome2_version)
 
