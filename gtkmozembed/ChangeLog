@@ -1,3 +1,9 @@
+2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtkmozembed/extconf.rb: add missing dependency.
+
+	* Rakefile: remove needless dependency.
+
 2011-01-22  Masaaki Aoyagi
 
 	* src/lib/: -> lib/.

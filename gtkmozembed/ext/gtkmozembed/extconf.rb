@@ -29,6 +29,28 @@ package_ids = ["libxul-embedding-unstable",
 
 require 'mkmf-gnome2'
 
+["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
+rcairo_options = {}
+rcairo_source_dir_names = ["rcairo"]
+if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+  rcairo_source_dir_names.unshift("rcairo.win32")
+end
+rcairo_source_dir_names.each do |rcairo_source_dir_name|
+  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
+  if rcairo_source_dir.exist?
+    rcairo_options[:rcairo_source_dir] = rcairo_source_dir.to_s
+    break
+  end
+end
+check_cairo(rcairo_options)
+
 setup_win32(module_name, base_dir)
 
 package_id = nil
@@ -65,15 +87,6 @@ if mozilla_path
 else
   $stderr.puts "${package_id}.pc cannot be found."
   exit 1
-end
-
-["glib2", "gtk2"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
 end
 
 if have_library("xpcomglue")
