@@ -59,9 +59,11 @@ def setup_win32(target_name, base_dir=nil)
       base_dir ||= Pathname($0).dirname.parent.parent.expand_path
       base_dir = Pathname(base_dir) if base_dir.is_a?(String)
       binary_base_dir = base_dir + "vendor" + "local"
-      $CFLAGS += " -I#{binary_base_dir}/include"
-      pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
-      PKGConfig.add_path(pkg_config_dir.to_s)
+      if binary_base_dir.exist?
+        $CFLAGS += " -I#{binary_base_dir}/include"
+        pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
+        PKGConfig.add_path(pkg_config_dir.to_s)
+      end
       true
     else
       false

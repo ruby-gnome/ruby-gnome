@@ -1,5 +1,7 @@
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (setup_win32): add vendor/local/ existence check.
+
 	* lib/gnome2-win32-binary-downloader.rb
 	(GNOME2Win32BinaryDownloader#download_package): support old Win32
 	binary URL for goocanvas.
