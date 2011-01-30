@@ -1,13 +1,4 @@
 require 'glib2'
-begin
-  begin
-    require 'cairo'
-  rescue LoadError
-    require 'rubygems'
-    require 'cairo'
-  end
-rescue LoadError
-end
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
