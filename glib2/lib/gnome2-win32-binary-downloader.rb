@@ -37,11 +37,15 @@ class GNOME2Win32BinaryDownloader
       end
     end.last
 
+    escaped_package = Regexp.escape(package)
     latest_version_page = latest_version_link.click
     latest_version = latest_version_page.links.collect do |link|
-      if /_([\d\.\-]+)_win32\.zip\z/ =~ link.href
+      if /#{escaped_package}_([\d\.\-]+)_win32\.zip\z/ =~ link.href
         version = $1
-        [version.split(/[\.\-]/).collect {|component| component.to_i}, version]
+        normalized_version = version.split(/[\.\-]/).collect do |component|
+          component.to_i
+        end
+        [normalized_version, version]
       else
         [[-1], nil]
       end
@@ -49,8 +53,10 @@ class GNOME2Win32BinaryDownloader
       normalized_version
     end.last[1]
 
+    escaped_latest_version = Regexp.escape(latest_version)
     latest_version_page.links.each do |link|
-      if /_#{Regexp.escape(latest_version)}_win32\.zip\z/ =~ link.href
+      case link.href
+      when /#{escaped_package}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/
         click_zip_link(link)
       end
     end

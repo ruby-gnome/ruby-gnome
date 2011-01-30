@@ -1,5 +1,9 @@
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gnome2-win32-binary-downloader.rb
+	(GNOME2Win32BinaryDownloader#download_package): just handle
+	"PACKAGE_VERSION-win32.zip" and "PACKAGE-dev_VERSION-win32.zip".
+
 	* lib/mkmf-gnome2.rb (setup_win32): use rcairo's
 	vendor/local/lib/pkgconfig if it exists.
 
