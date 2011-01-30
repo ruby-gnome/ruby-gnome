@@ -24,6 +24,29 @@ package_id = "gtksourceview-2.0"
 
 require 'mkmf-gnome2'
 
+["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
+
+rcairo_options = {}
+rcairo_source_dir_names = ["rcairo"]
+if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+  rcairo_source_dir_names.unshift("rcairo.win32")
+end
+rcairo_source_dir_names.each do |rcairo_source_dir_name|
+  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
+  if rcairo_source_dir.exist?
+    rcairo_options[:rcairo_source_dir] = rcairo_source_dir.to_s
+    break
+  end
+end
+check_cairo(rcairo_options)
+
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit(false)
@@ -34,15 +57,6 @@ have_func('gtk_source_print_compositor_get_type', "gtksourceview/gtksourceprintc
 # 2.4
 have_func('gtk_source_view_get_mark_category_background', "gtksourceview/gtksourceview.h")
 have_func('gtk_source_language_manager_guess_language', "gtksourceview/gtksourcelanguagemanager.h")
-
-["glib2", "gtk2"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
-end
 
 make_version_header("GTKSOURCEVIEW2", package_id, ".")
 
