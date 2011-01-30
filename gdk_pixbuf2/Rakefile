@@ -6,9 +6,7 @@ package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
   _package.description = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
   _package.dependency.gem.runtime = ["glib2"]
-  _package.win32.packages = ["glib", "atk", "gdk-pixbuf", "pango", "gtk+"]
-  _package.win32.dependencies = ["gettext-runtime", "zlib", "freetype", "expat",
-                    "fontconfig", "cairo", "libpng"]
+  _package.win32.packages = ["gdk-pixbuf"]
+  _package.win32.dependencies = ["zlib", "libpng"]
 end
 package.define_tasks
-

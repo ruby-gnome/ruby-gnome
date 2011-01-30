@@ -1,5 +1,8 @@
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile, ext/gdk_pixbuf2/extconf.rb: share depended packages
+	vendor/local/.
+
 	* lib/gdk_pixbuf2.rb, ext/gdk_pixbuf2/extconf.rb: remove cairo
 	dependency.
 
