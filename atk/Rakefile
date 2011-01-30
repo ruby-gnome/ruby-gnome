@@ -6,8 +6,8 @@ package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
   _package.description = "Ruby/ATK is a Ruby binding of ATK-1.0.x."
   _package.dependency.gem.runtime = ["glib2"]
-  _package.win32.packages = ["glib", "atk"]
-  _package.win32.dependencies = ["gettext-runtime"]
+  _package.win32.packages = ["atk"]
+  _package.win32.dependencies = []
 end
 package.define_tasks
 

@@ -24,6 +24,15 @@ package_id = "atk"
 
 require 'mkmf-gnome2'
 
+["glib2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
+
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
@@ -41,15 +50,6 @@ have_func('atk_role_get_localized_name', atk_header)
 have_func('atk_text_clip_type_get_type', atk_header)
 
 have_func('atk_text_free_ranges', atk_header)
-
-["glib2"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
-end
 
 add_distcleanfile("rbatkinits.c")
 
