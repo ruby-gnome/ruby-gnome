@@ -7,7 +7,7 @@
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
 Removed deprecated packages. All supported packages support
-RubyGems. All supported packages expect Ruby/VTE,
+RubyGems. All supported packages except Ruby/VTE,
 Ruby/GStreamer and Ruby/GtkMozEmbed support also Windows
 binary bundled gem.
 
@@ -57,11 +57,12 @@ binary bundled gem.
 
 ==== Ruby/GtkMozEmbed
 
+  * Improvements
+    * support RubyGems.
+      [Masaaki Aoyagi]
   * Fixes
     * support "2.0b7" style module version. #3141244
       [reandr, Kouhei Sutou]
-    * support RubyGems.
-      [Masaaki Aoyagi]
 
 ==== Ruby/GooCanvas
 
