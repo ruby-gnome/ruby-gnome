@@ -33,25 +33,24 @@ require 'mkmf-gnome2'
                      :target_build_dir => build_dir)
 end
 
+rcairo_options = {}
+rcairo_source_dir_names = ["rcairo"]
+if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+  rcairo_source_dir_names.unshift("rcairo.win32")
+end
+rcairo_source_dir_names.each do |rcairo_source_dir_name|
+  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
+  if rcairo_source_dir.exist?
+    rcairo_options[:rcairo_source_dir] = rcairo_source_dir.to_s
+    break
+  end
+end
+check_cairo(rcairo_options)
+
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
-
-if PKGConfig.have_package('poppler-cairo')
-  options = {}
-  rcairo_source_dir_names = ["rcairo"]
-  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-    rcairo_source_dir_names.unshift("rcairo.win32")
-  end
-  rcairo_source_dir_names.each do |rcairo_source_dir_name|
-    rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
-    if rcairo_source_dir.exist?
-      options[:rcairo_source_dir] = rcairo_source_dir.to_s
-      break
-    end
-  end
-  check_cairo(options)
-end
+PKGConfig.have_package('poppler-cairo')
 
 unless have_macro("POPPLER_MAJOR_VERSION", ["poppler.h"])
   make_version_header("POPPLER", package_id, ".")
