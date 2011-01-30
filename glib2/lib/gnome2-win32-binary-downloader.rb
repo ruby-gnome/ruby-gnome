@@ -43,6 +43,7 @@ class GNOME2Win32BinaryDownloader
     latest_version = latest_version_page.links.collect do |link|
       case link.href
       when /#{escaped_package}_([\d\.\-]+)_win32\.zip\z/,
+           /#{escaped_package}-([\d\.\-]+)-win32\.zip\z/, # old
            /#{escaped_package}-([\d\.\-]+)\.zip\z/ # old
         version = $1
         normalized_version = version.split(/[\.\-]/).collect do |component|
@@ -63,6 +64,7 @@ class GNOME2Win32BinaryDownloader
     latest_version_page.links.each do |link|
       case link.href
       when /#{escaped_package}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/,
+           /#{escaped_package}(?:-dev)?-#{escaped_latest_version}-win32\.zip\z/, # old
            /#{escaped_package}(?:-dev)?-#{escaped_latest_version}\.zip\z/ # old
         click_zip_link(link)
       end

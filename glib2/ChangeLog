@@ -2,6 +2,10 @@
 
 	* lib/gnome2-win32-binary-downloader.rb
 	(GNOME2Win32BinaryDownloader#download_package): support old Win32
+	binary URL for goocanvas.
+
+	* lib/gnome2-win32-binary-downloader.rb
+	(GNOME2Win32BinaryDownloader#download_package): support old Win32
 	binary URL for gtksourceview.
 
 	* lib/gnome2-win32-binary-downloader.rb
