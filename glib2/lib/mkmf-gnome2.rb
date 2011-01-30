@@ -62,7 +62,6 @@ def setup_win32(target_name, base_dir=nil)
       $CFLAGS += " -I#{binary_base_dir}/include"
       pkg_config_dir = binary_base_dir + "lib" + "pkgconfig"
       PKGConfig.add_path(pkg_config_dir.to_s)
-      PKGConfig.set_override_variable("prefix", binary_base_dir.to_s)
       true
     else
       false
