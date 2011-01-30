@@ -1,3 +1,7 @@
+2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: doesn't support gem for Windows.
+
 2011-01-22  Masaaki Aoyagi
 
 	* src/lib/: -> lib/.

@@ -6,6 +6,7 @@ package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.dependency.gem.runtime = ["glib2"]
+  # TODO: use http://code.google.com/p/ossbuild/downloads/list ???
   _package.win32.packages = []
   _package.win32.dependencies = []
   _package.post_install_message = "This library is experimental."
