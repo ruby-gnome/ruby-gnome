@@ -5,11 +5,11 @@ require './../glib2/lib/gnome2-raketask'
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/Poppler is a Ruby binding of poppler-glib."
   _package.description = "Ruby/Poppler is a Ruby binding of poppler-glib."
-  _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "glib2", "gtk2", "gdk_pixbuf2"]
-  _package.win32.packages = ["glib", "atk", "gdk-pixbuf", "pango", "gtk+"]
-  _package.win32.dependencies = ["gettext-runtime", "zlib", "freetype", "expat",
-                    "fontconfig", "cairo", "libpng", "poppler", "jpeg"]
-  # need libpng_1.2 and jpeg_7.
+  _package.dependency.gem.runtime = ["gtk2"]
+  _package.win32.packages = []
+  _package.win32.dependencies = ["poppler",
+                                 ["libpng", "1.2.40-1"],
+                                 ["jpeg", "7-1"]]
 end
 package.define_tasks
 
