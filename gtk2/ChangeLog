@@ -1,3 +1,8 @@
+2011-01-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* Rakefile: create default gtkrc to use "MS-Windows" GTK+ theme.
+	Reported by ashbb. Thanks!!!
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile, ext/gtk2/extconf.rb: share depended packages

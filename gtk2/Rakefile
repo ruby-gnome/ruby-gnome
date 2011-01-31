@@ -13,3 +13,14 @@ package = GNOME2Package.new do |_package|
 end
 package.define_tasks
 
+namespace :win32 do
+  desc "create default gtkrc"
+  task :gtkrc do
+    gtkrc_path = File.join("vendor", "local", "etc", "gtk-2.0", "gtkrc")
+    mkdir_p(File.dirname(gtkrc_path))
+    File.open(gtkrc_path, "w") do |gtkrc|
+      gtkrc.puts('gtk-theme-name = "MS-Windows"')
+    end
+  end
+  task :download => :gtkrc
+end
