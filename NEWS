@@ -2,6 +2,25 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.7: 2011-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+TODO: WRITE ME.
+
+=== Changes
+
+==== Ruby/GTK2
+
+  * Improvments
+    * use "MS-Windows" GTK+ theme by default on Windows.
+      [ashbb, Kouhei Sutou]
+
+=== Thanks
+
+  * ashbb
+  * ...
+
 == Ruby-GNOME2 0.90.6: 2011-01-29
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
