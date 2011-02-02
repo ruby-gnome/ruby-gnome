@@ -10,6 +10,13 @@ TODO: WRITE ME.
 
 === Changes
 
+==== Ruby/GLib2
+
+  * Improvments
+    * force remove "-Wl,--noundefined" linker option because
+      Ruby-GNOME2 packages doesn't support the option.
+      [Dobai-Pataky Bálint, Kouhei Sutou]
+
 ==== Ruby/GTK2
 
   * Improvments
@@ -19,7 +26,7 @@ TODO: WRITE ME.
 === Thanks
 
   * ashbb
-  * ...
+  * Dobai-Pataky Bálint
 
 == Ruby-GNOME2 0.90.6: 2011-01-29
 
