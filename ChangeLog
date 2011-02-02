@@ -1,5 +1,7 @@
 2011-02-02  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: fill 0.90.7 entry.
+
 	* NEWS: Ruby/GLib2: force remove "-Wl,--noundefined" linker option
 	because Ruby-GNOME2 packages doesn't support the option.
 	Reported by Dobai-Pataky Bálint. Thanks!!!
