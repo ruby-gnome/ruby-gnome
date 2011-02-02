@@ -12,14 +12,14 @@ A package fix release of 0.90.6.
 
 ==== Ruby/GLib2
 
-  * Improvments
+  * Improvements
     * force remove "-Wl,--noundefined" linker option because
       Ruby-GNOME2 packages doesn't support the option.
       [Dobai-Pataky Bálint, Kouhei Sutou]
 
 ==== Ruby/GTK2
 
-  * Improvments
+  * Improvements
     * use "MS-Windows" GTK+ theme by default on Windows.
       [ashbb, Kouhei Sutou]
 
