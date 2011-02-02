@@ -1,3 +1,8 @@
+2011-02-02  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/mkmf-gnome2.rb: remove "-Wl,--no-undefined" linker flag.
+	Reported by Dobai-Pataky Bálint.
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib.h: 0.90.6 -> 0.90.7.
