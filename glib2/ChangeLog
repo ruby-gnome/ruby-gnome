@@ -1,5 +1,8 @@
 2011-02-02  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gnome2-raketask.rb (GNOME2Package#define_gem_tasks):
+	has_rdoc = false.
+
 	* ext/glib2/rbglib.h: 0.90.7 -> 0.90.8.
 
 	* lib/mkmf-gnome2.rb: remove "-Wl,--no-undefined" linker flag.

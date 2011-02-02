@@ -86,6 +86,7 @@ class GNOME2Package
           "ChangeLog", "README", "Rakefile", "extconf.rb",
           "lib/**/*.rb", "{ext,sample,test,test-unit}/**/*"]
       s.post_install_message  = @post_install_message
+      s.has_rdoc              = false
       @dependency_configuration.apply(s)
     end
 
