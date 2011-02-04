@@ -13,16 +13,14 @@
 #define _SELF(s) (ATK_RELATION_SET(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkrelset_initialize(self)
-    VALUE self;
+rbatkrelset_initialize(VALUE self)
 {
     G_INITIALIZE(self, atk_relation_set_new());
     return Qnil;
 }
 
 static VALUE
-rbatkrelset_contains(self, relationship)
-    VALUE self, relationship;
+rbatkrelset_contains(VALUE self, VALUE relationship)
 {
     return CBOOL2RVAL(atk_relation_set_contains(
                           _SELF(self),
@@ -30,31 +28,27 @@ rbatkrelset_contains(self, relationship)
 }
 
 static VALUE
-rbatkrelset_remove(self, relation)
-    VALUE self, relation;
+rbatkrelset_remove(VALUE self, VALUE relation)
 {
     atk_relation_set_remove(_SELF(self), ATK_RELATION(RVAL2GOBJ(relation)));
     return self;
 }
 
 static VALUE
-rbatkrelset_add(self, relation)
-    VALUE self, relation;
+rbatkrelset_add(VALUE self, VALUE relation)
 {
     atk_relation_set_add(_SELF(self), ATK_RELATION(RVAL2GOBJ(relation)));
     return self;
 }
 
 static VALUE
-rbatkrelset_get_n_relations(self)
-    VALUE self;
+rbatkrelset_get_n_relations(VALUE self)
 {
     return INT2NUM(atk_relation_set_get_n_relations(_SELF(self)));
 }
 
 static VALUE
-rbatkrelset_get_relation(self, i)
-    VALUE self, i;
+rbatkrelset_get_relation(VALUE self, VALUE i)
 {
     if (rb_obj_is_kind_of(i, GTYPE2CLASS(ATK_TYPE_RELATION_TYPE))){
         return GOBJ2RVAL(atk_relation_set_get_relation_by_type(
@@ -67,8 +61,7 @@ rbatkrelset_get_relation(self, i)
 
 #if ATK_CHECK_VERSION(1,9,0)
 static VALUE
-rbatkrelset_add_relation(self, relationship, obj)
-    VALUE self, relationship, obj;
+rbatkrelset_add_relation(VALUE self, VALUE relationship, VALUE obj)
 {
     atk_relation_set_add_relation_by_type(_SELF(self), 
                                           RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE), 
