@@ -14,8 +14,7 @@
 #define _SELF(s) (ATK_DOCUMENT(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_document_get_document_type(self)
-    VALUE self;
+rbatk_document_get_document_type(VALUE self)
 {
     return CSTR2RVAL(atk_document_get_document_type(_SELF(self)));
 }
@@ -23,8 +22,7 @@ rbatk_document_get_document_type(self)
 /*
 How can I implement this?
 static VALUE
-rbatk_document_get_document(self)
-    VALUE self;
+rbatk_document_get_document(VALUE self)
 {
     return GOBJ2RVAL(atk_document_get_document(_SELF(self)));
 }
@@ -32,16 +30,14 @@ rbatk_document_get_document(self)
 
 #if ATK_CHECK_VERSION(1,12,0)
 static VALUE
-rbatk_document_get_attribute_value(self, name)
-    VALUE self, name;
+rbatk_document_get_attribute_value(VALUE self, VALUE name)
 {
     return CSTR2RVAL(atk_document_get_attribute_value(_SELF(self), 
                                                       (const gchar*)RVAL2CSTR(name)));
 }
 
 static VALUE
-rbatk_document_set_attribute_value(self, name, value)
-    VALUE self, name, value;
+rbatk_document_set_attribute_value(VALUE self, VALUE name, VALUE value)
 {
     gboolean ret = atk_document_set_attribute_value(_SELF(self),
                                                     (const gchar*)RVAL2CSTR(name),
@@ -54,8 +50,7 @@ rbatk_document_set_attribute_value(self, name, value)
 }
 
 static VALUE
-rbatk_document_get_attributes(self)
-    VALUE self;
+rbatk_document_get_attributes(VALUE self)
 {
     AtkAttributeSet* list = atk_document_get_attributes(_SELF(self));
     VALUE ary = rb_ary_new();
@@ -68,8 +63,7 @@ rbatk_document_get_attributes(self)
 }
 
 static VALUE
-rbatk_document_get_locale(self)
-    VALUE self;
+rbatk_document_get_locale(VALUE self)
 {
     return CSTR2RVAL(atk_document_get_locale(_SELF(self)));
 }
