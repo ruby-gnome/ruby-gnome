@@ -39,8 +39,7 @@ gdk_pixdata_get_type (void)
 }
 /*****************************************/
 static VALUE
-pixdata_s_from_pixbuf(self, pixbuf, use_rle)
-    VALUE self, pixbuf, use_rle;
+pixdata_s_from_pixbuf(VALUE self, VALUE pixbuf, VALUE use_rle)
 {
     GdkPixdata pixdata;
     gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RVAL2CBOOL(use_rle));
@@ -53,8 +52,7 @@ pixdata_s_from_pixbuf(self, pixbuf, use_rle)
 }
 
 static VALUE
-pixdata_to_pixbuf(self, copy_pixels)
-    VALUE self, copy_pixels;
+pixdata_to_pixbuf(VALUE self, VALUE copy_pixels)
 {
     GError* error = NULL;
     GdkPixbuf* ret = gdk_pixbuf_from_pixdata(_SELF(self), RVAL2CBOOL(copy_pixels), &error);
@@ -64,8 +62,7 @@ pixdata_to_pixbuf(self, copy_pixels)
 }
 
 static VALUE
-pixdata_serialize(self)
-    VALUE self;
+pixdata_serialize(VALUE self)
 {
     guint stream_length;
     gint i;
@@ -78,8 +75,7 @@ pixdata_serialize(self)
 }
 
 static VALUE
-pixdata_s_deserialize(self, stream)
-    VALUE self, stream;
+pixdata_s_deserialize(VALUE self, VALUE stream)
 {
     GdkPixdata pixdata;
     gboolean ret;
@@ -104,8 +100,7 @@ pixdata_s_deserialize(self, stream)
 }
 
 static VALUE
-pixdata_to_csource(self, name, dump_type)
-    VALUE self, name, dump_type;
+pixdata_to_csource(VALUE self, VALUE name, VALUE dump_type)
 {
     GString* str = gdk_pixdata_to_csource(_SELF(self), RVAL2CSTR(name), FIX2INT(dump_type));
     VALUE ret = CSTR2RVAL(str->str);
@@ -115,15 +110,13 @@ pixdata_to_csource(self, name, dump_type)
 
 /* GdkPixdata */
 static VALUE
-pixdata_magic(self)
-    VALUE self;
+pixdata_magic(VALUE self)
 {
     return UINT2NUM(_SELF(self)->magic);
 }
 
 static VALUE
-pixdata_length(self)
-    VALUE self;
+pixdata_length(VALUE self)
 {
     gint32 length = _SELF(self)->length;
 
@@ -133,36 +126,31 @@ pixdata_length(self)
 }
 
 static VALUE
-pixdata_pixdata_type(self)
-    VALUE self;
+pixdata_pixdata_type(VALUE self)
 {
     return UINT2NUM(_SELF(self)->pixdata_type);
 }
 
 static VALUE
-pixdata_rowstride(self)
-    VALUE self;
+pixdata_rowstride(VALUE self)
 {
     return INT2NUM(_SELF(self)->rowstride);
 }
 
 static VALUE
-pixdata_width(self)
-    VALUE self;
+pixdata_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-pixdata_height(self)
-    VALUE self;
+pixdata_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-pixdata_pixel_data(self)
-    VALUE self;
+pixdata_pixel_data(VALUE self)
 {
     gint i;
     guint8* ret = _SELF(self)->pixel_data;
