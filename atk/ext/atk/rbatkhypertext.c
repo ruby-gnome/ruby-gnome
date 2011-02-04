@@ -13,22 +13,19 @@
 #define _SELF(s) (ATK_HYPERTEXT(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_ht_get_link(self, link_index)
-    VALUE self, link_index;
+rbatk_ht_get_link(VALUE self, VALUE link_index)
 {
     return GOBJ2RVAL(atk_hypertext_get_link(_SELF(self), NUM2INT(link_index)));
 }
 
 static VALUE
-rbatk_ht_get_n_links(self)
-    VALUE self;
+rbatk_ht_get_n_links(VALUE self)
 {
     return INT2NUM(atk_hypertext_get_n_links(_SELF(self)));
 }
 
 static VALUE
-rbatk_ht_get_link_index(self, char_index)
-    VALUE self, char_index;
+rbatk_ht_get_link_index(VALUE self, VALUE char_index)
 {
     return INT2NUM(atk_hypertext_get_link_index(_SELF(self), NUM2INT(char_index)));
 }
