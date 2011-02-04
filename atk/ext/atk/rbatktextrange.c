@@ -49,29 +49,25 @@ atk_text_range_get_type(void)
 /**********************************/
 /* Struct accessors */
 static VALUE
-atktextrange_bounds(self)
-    VALUE self;
+atktextrange_bounds(VALUE self)
 {
     return BOXED2RVAL(&_SELF(self)->bounds, ATK_TYPE_TEXT_RECTANGLE);
 }
 
 static VALUE
-atktextrange_start_offset(self)
-    VALUE self;
+atktextrange_start_offset(VALUE self)
 {
     return INT2NUM(_SELF(self)->start_offset);
 }
 
 static VALUE
-atktextrange_end_offset(self)
-    VALUE self;
+atktextrange_end_offset(VALUE self)
 {
     return INT2NUM(_SELF(self)->end_offset);
 }
 
 static VALUE
-atktextrange_content(self)
-    VALUE self;
+atktextrange_content(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->content);
 }
