@@ -18,10 +18,7 @@
 /* File opening */
 /* Image Data in Memory */
 static VALUE
-initialize_loader(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+initialize_loader(int argc, VALUE *argv, VALUE self)
 {
     GdkPixbufLoader* loader;
     GError* error = NULL;
@@ -52,8 +49,7 @@ initialize_loader(argc, argv, self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-loader_get_format(self)
-    VALUE self;
+loader_get_format(VALUE self)
 {
     GdkPixbufFormat* format = gdk_pixbuf_loader_get_format(_SELF(self));
     return BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT);
@@ -61,9 +57,7 @@ loader_get_format(self)
 #endif
 
 static VALUE
-loader_write(self, data)
-    VALUE self;
-    VALUE data;
+loader_write(VALUE self, VALUE data)
 {
     GError *error = NULL;
     gboolean res;
@@ -76,9 +70,7 @@ loader_write(self, data)
 }
 
 static VALUE
-last_write(self, data)
-    VALUE self;
-    VALUE data;
+last_write(VALUE self, VALUE data)
 {
     GError *error = NULL;
     gboolean res;
@@ -97,8 +89,7 @@ last_write(self, data)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-loader_set_size(self, width, height)
-    VALUE self, width, height;
+loader_set_size(VALUE self, VALUE width, VALUE height)
 {
     gdk_pixbuf_loader_set_size(_SELF(self), NUM2INT(width), NUM2INT(height));
     return self;
@@ -106,8 +97,7 @@ loader_set_size(self, width, height)
 #endif
 
 static VALUE
-loader_close(self)
-    VALUE self;
+loader_close(VALUE self)
 {
     GError *error = NULL;
     gboolean res;
@@ -122,16 +112,14 @@ loader_close(self)
 /****************************************************/
 /* Creating image */
 static VALUE
-get_pixbuf(self)
-    VALUE self;
+get_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_loader_get_pixbuf(_SELF(self)));
 }
 
 /* Creating animation */
 static VALUE
-get_animation(self)
-    VALUE self;
+get_animation(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_loader_get_animation(_SELF(self)));
 }
