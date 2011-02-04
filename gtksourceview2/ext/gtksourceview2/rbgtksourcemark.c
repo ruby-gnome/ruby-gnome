@@ -24,8 +24,7 @@
  * Returns: a newly created Gtk::SourceMark object.
  */
 static VALUE
-sourcemark_new (self, name, category)
-	VALUE self, name, category;
+sourcemark_new(VALUE self, VALUE name, VALUE category)
 {
 	G_INITIALIZE (self,
 		      gtk_source_mark_new (RVAL2CSTR(name), RVAL2CSTR(category)));
@@ -42,10 +41,7 @@ const gchar*        gtk_source_mark_get_category        (GtkSourceMark *mark);
  * Returns: the next Gtk::SourceMark after the mark.
  */
 static VALUE
-sourcemark_next (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcemark_next(int argc, VALUE *argv, VALUE self)
 {
     VALUE category;
 
@@ -61,10 +57,7 @@ sourcemark_next (argc, argv, self)
  * Returns: the previous Gtk::SourceMark before the mark.
  */
 static VALUE
-sourcemark_prev (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcemark_prev(int argc, VALUE *argv, VALUE self)
 {
     VALUE category;
 
