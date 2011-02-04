@@ -29,8 +29,7 @@ const gchar*        gtk_source_style_scheme_get_filename
  * Returns: a list of authors for the given style scheme.
  */
 static VALUE
-scheme_get_authors (self)
-	VALUE self;
+scheme_get_authors(VALUE self)
 {
 	VALUE ary;
  	const gchar * const * authors =
@@ -54,8 +53,7 @@ scheme_get_authors (self)
  * Returns: Gtk::SourceStyle
  */
 static VALUE
-scheme_get_style(self, style_name)
-    VALUE self, style_name;
+scheme_get_style(VALUE self, VALUE style_name)
 {
     return GOBJ2RVAL(gtk_source_style_scheme_get_style(_SELF(self),
                                                        RVAL2CSTR(style_name)));
