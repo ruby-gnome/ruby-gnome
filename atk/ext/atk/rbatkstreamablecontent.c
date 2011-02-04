@@ -14,22 +14,19 @@
 #define _SELF(s) (ATK_STREAMABLE_CONTENT(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkst_get_n_mime_types(self)
-     VALUE self;
+rbatkst_get_n_mime_types(VALUE self)
 {
     return INT2NUM(atk_streamable_content_get_n_mime_types(_SELF(self)));
 }
 
 static VALUE
-rbatkst_get_mime_type(self, i)
-     VALUE self, i;
+rbatkst_get_mime_type(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_streamable_content_get_mime_type(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatkst_get_stream(self, mime_type)
-     VALUE self, mime_type;
+rbatkst_get_stream(VALUE self, VALUE mime_type)
 {
     GIOChannel* io = atk_streamable_content_get_stream(_SELF(self), RVAL2CSTR(mime_type));
     if (!io)
