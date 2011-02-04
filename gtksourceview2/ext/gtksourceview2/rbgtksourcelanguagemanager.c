@@ -21,8 +21,7 @@
  * Returns: a newly created Gtk::SourceLanguageManager object.
  */
 static VALUE
-slm_new (self)
-	VALUE self;
+slm_new(VALUE self)
 {
 	G_INITIALIZE (self, gtk_source_language_manager_new ());
 	return Qnil;
@@ -35,8 +34,7 @@ slm_new (self)
  * Returns: a Gtk::SourceLanguageManager
  */
 static VALUE
-slm_get_default(self)
-    VALUE self;
+slm_get_default(VALUE self)
 {
     GtkSourceLanguageManager* slm = gtk_source_language_manager_get_default();
     GType gtype = G_TYPE_FROM_INSTANCE(slm);
@@ -58,8 +56,7 @@ slm_get_default(self)
  * Returns: self.
  */
 static VALUE
-slm_set_search_path (self, dirs)
-	VALUE self, dirs;
+slm_set_search_path(VALUE self, VALUE dirs)
 {
     gchar** gdirs = (gchar**)NULL;
 	gint i;
@@ -89,8 +86,7 @@ slm_set_search_path (self, dirs)
  * language manager.
  */
 static VALUE
-slm_get_search_path (self)
-	VALUE self;
+slm_get_search_path(VALUE self)
 {
 	VALUE ary;
  	const gchar * const * dirs =
@@ -110,8 +106,7 @@ slm_get_search_path (self)
  * Returns: a list of languages ids for the given language manager
  */
 static VALUE
-slm_get_language_ids (self)
-	VALUE self;
+slm_get_language_ids(VALUE self)
 {
 	VALUE ary;
  	const gchar * const * ids =
@@ -138,8 +133,7 @@ slm_get_language_ids (self)
  * with the given id.
  */
 static VALUE
-slm_get_language (self, id)
-	VALUE self, id;
+slm_get_language(VALUE self, VALUE id)
 {
 	return
 	    GOBJ2RVAL (gtk_source_language_manager_get_language
@@ -158,8 +152,7 @@ slm_get_language (self, id)
  * with the given filename or content_type.
  */
 static VALUE
-slm_guess_language (self, filename, content_type)
-	VALUE self, filename, content_type;
+slm_guess_language(VALUE self, VALUE filename, VALUE content_type)
 {
 	return GOBJ2RVAL (gtk_source_language_manager_guess_language
 	                     (_SELF (self),
