@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_EDITABLE_TEXT(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_edit_set_run_attributes(self, attributes, start_offset, end_offset)
-     VALUE self, attributes, start_offset, end_offset;
+rbatk_edit_set_run_attributes(VALUE self, VALUE attributes, VALUE start_offset, VALUE end_offset)
 {
     long i;
     gboolean ret;
@@ -35,16 +34,14 @@ rbatk_edit_set_run_attributes(self, attributes, start_offset, end_offset)
 }
 
 static VALUE
-rbatk_edit_set_text_contents(self, str)
-    VALUE self, str;
+rbatk_edit_set_text_contents(VALUE self, VALUE str)
 {
     atk_editable_text_set_text_contents(_SELF(self), RVAL2CSTR(str));
     return self;
 }
 
 static VALUE
-rbatk_edit_insert_text(self, str, position)
-    VALUE self, str, position;
+rbatk_edit_insert_text(VALUE self, VALUE str, VALUE position)
 {
     gint pos = NUM2INT(position);
 
@@ -54,32 +51,28 @@ rbatk_edit_insert_text(self, str, position)
 }
 
 static VALUE
-rbatk_edit_copy_text(self, start_pos, end_pos)
-    VALUE self, start_pos, end_pos;
+rbatk_edit_copy_text(VALUE self, VALUE start_pos, VALUE end_pos)
 {
     atk_editable_text_copy_text(_SELF(self), NUM2INT(start_pos), NUM2INT(end_pos));
     return self;
 }
 
 static VALUE
-rbatk_edit_cut_text(self, start_pos, end_pos)
-    VALUE self, start_pos, end_pos;
+rbatk_edit_cut_text(VALUE self, VALUE start_pos, VALUE end_pos)
 {
     atk_editable_text_cut_text(_SELF(self), NUM2INT(start_pos), NUM2INT(end_pos));
     return self;
 }
 
 static VALUE
-rbatk_edit_delete_text(self, start_pos, end_pos)
-    VALUE self, start_pos, end_pos;
+rbatk_edit_delete_text(VALUE self, VALUE start_pos, VALUE end_pos)
 {
     atk_editable_text_delete_text(_SELF(self), NUM2INT(start_pos), NUM2INT(end_pos));
     return self;
 }
 
 static VALUE
-rbatk_edit_paste_text(self, position)
-    VALUE self, position;
+rbatk_edit_paste_text(VALUE self, VALUE position)
 {
     atk_editable_text_paste_text(_SELF(self), NUM2INT(position));
     return self;
