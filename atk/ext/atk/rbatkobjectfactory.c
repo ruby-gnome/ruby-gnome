@@ -13,22 +13,19 @@
 #define _SELF(s) (ATK_OBJECT_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkfact_create_accessible(self, obj)
-    VALUE self, obj;
+rbatkfact_create_accessible(VALUE self, VALUE obj)
 {
     return GOBJ2RVAL(atk_object_factory_create_accessible(_SELF(self), RVAL2GOBJ(obj)));
 }
 
 static VALUE
-rbatkfact_get_accessible_type(self)
-    VALUE self;
+rbatkfact_get_accessible_type(VALUE self)
 {
     return GTYPE2CLASS(atk_object_factory_get_accessible_type(_SELF(self)));
 }
 
 static VALUE
-rbatkfact_invalidate(self)
-    VALUE self;
+rbatkfact_invalidate(VALUE self)
 {
     atk_object_factory_invalidate(_SELF(self));
     return self;
