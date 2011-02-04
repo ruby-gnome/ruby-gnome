@@ -14,8 +14,7 @@
 #define _SELF(s) (ATK_NO_OP_OBJECT_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_no_op_object_factory_initialize(self)
-    VALUE self;
+rbatk_no_op_object_factory_initialize(VALUE self)
 {
     G_INITIALIZE(self, atk_no_op_object_factory_new());
     return Qnil;
