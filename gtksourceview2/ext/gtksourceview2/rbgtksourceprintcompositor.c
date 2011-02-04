@@ -25,8 +25,7 @@
  * Returns: the new print compositor object.
  */
 static VALUE
-sprintcompositor_initialize (self, val)
-    VALUE self, val;
+sprintcompositor_initialize(VALUE self, VALUE val)
 {
     if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_TYPE_SOURCE_BUFFER))) {
        G_INITIALIZE(self,
@@ -101,68 +100,59 @@ gint                gtk_source_print_compositor_get_n_pages
 */
 
 static VALUE
-sprintcompositor_get_top_margin(self, unit)
-    VALUE self, unit;
+sprintcompositor_get_top_margin(VALUE self, VALUE unit)
 {
     return DBL2NUM(gtk_source_print_compositor_get_top_margin(_SELF(self), RVAL2UNIT (unit)));
 }
 
 static VALUE
-sprintcompositor_set_top_margin(self, top, unit)
-    VALUE self, top, unit;
+sprintcompositor_set_top_margin(VALUE self, VALUE top, VALUE unit)
 {
     gtk_source_print_compositor_set_top_margin(_SELF(self), NUM2DBL(top), RVAL2UNIT (unit));
     return self;
 }
 
 static VALUE
-sprintcompositor_get_bottom_margin(self, unit)
-    VALUE self, unit;
+sprintcompositor_get_bottom_margin(VALUE self, VALUE unit)
 {
     return DBL2NUM(gtk_source_print_compositor_get_bottom_margin(_SELF(self), RVAL2UNIT (unit)));
 }
 
 static VALUE
-sprintcompositor_set_bottom_margin(self, bottom, unit)
-    VALUE self, bottom, unit;
+sprintcompositor_set_bottom_margin(VALUE self, VALUE bottom, VALUE unit)
 {
     gtk_source_print_compositor_set_bottom_margin(_SELF(self), NUM2DBL(bottom), RVAL2UNIT (unit));
     return self;
 }
 
 static VALUE
-sprintcompositor_get_left_margin(self, unit)
-    VALUE self, unit;
+sprintcompositor_get_left_margin(VALUE self, VALUE unit)
 {
     return DBL2NUM(gtk_source_print_compositor_get_left_margin(_SELF(self), RVAL2UNIT (unit)));
 }
 
 static VALUE
-sprintcompositor_set_left_margin(self, left, unit)
-    VALUE self, left, unit;
+sprintcompositor_set_left_margin(VALUE self, VALUE left, VALUE unit)
 {
     gtk_source_print_compositor_set_left_margin(_SELF(self), NUM2DBL(left), RVAL2UNIT (unit));
     return self;
 }
 
 static VALUE
-sprintcompositor_get_right_margin(self, unit)
-    VALUE self, unit;
+sprintcompositor_get_right_margin(VALUE self, VALUE unit)
 {
     return DBL2NUM(gtk_source_print_compositor_get_right_margin(_SELF(self), RVAL2UNIT (unit)));
 }
 
 static VALUE
-sprintcompositor_set_right_margin(self, right, unit)
-    VALUE self, right, unit;
+sprintcompositor_set_right_margin(VALUE self, VALUE right, VALUE unit)
 {
     gtk_source_print_compositor_set_right_margin(_SELF(self), NUM2DBL(right), RVAL2UNIT (unit));
     return self;
 }
 
 static VALUE
-sprintcompositor_set_header_format(self, separator, left, center, right)
-    VALUE self, separator, left, center, right;
+sprintcompositor_set_header_format(VALUE self, VALUE separator, VALUE left, VALUE center, VALUE right)
 {
     gtk_source_print_compositor_set_header_format(_SELF(self),
                                            RVAL2CBOOL(separator),
@@ -173,8 +163,7 @@ sprintcompositor_set_header_format(self, separator, left, center, right)
 }
 
 static VALUE
-sprintcompositor_set_footer_format(self, separator, left, center, right)
-    VALUE self, separator, left, center, right;
+sprintcompositor_set_footer_format(VALUE self, VALUE separator, VALUE left, VALUE center, VALUE right)
 {
     gtk_source_print_compositor_set_footer_format(_SELF(self),
                                            RVAL2CBOOL(separator),
@@ -185,23 +174,20 @@ sprintcompositor_set_footer_format(self, separator, left, center, right)
 }
 
 static VALUE
-sprintcompositor_paginate (self, context)
-    VALUE self, context;
+sprintcompositor_paginate(VALUE self, VALUE context)
 {
     return CBOOL2RVAL (gtk_source_print_compositor_paginate (_SELF (self),
                                         GTK_PRINT_CONTEXT (RVAL2GOBJ (context))));
 }
 
 static VALUE
-sprintcompositor_get_pagination_progress (self)
-    VALUE self;
+sprintcompositor_get_pagination_progress(VALUE self)
 {
     return DBL2NUM (gtk_source_print_compositor_get_pagination_progress (_SELF (self)));
 }
 
 static VALUE
-sprintcompositor_draw_page (self, context, page_nr)
-    VALUE self, context, page_nr;
+sprintcompositor_draw_page(VALUE self, VALUE context, VALUE page_nr)
 {
     gtk_source_print_compositor_draw_page (_SELF (self),
                                            GTK_PRINT_CONTEXT (RVAL2GOBJ (context)),
