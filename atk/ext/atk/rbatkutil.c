@@ -26,8 +26,7 @@ void        atk_remove_global_event_listener
 */
 
 static VALUE
-rbatk_focus_tracker_notify(self, obj)
-    VALUE self, obj;
+rbatk_focus_tracker_notify(VALUE self, VALUE obj)
 {
     atk_focus_tracker_notify(ATK_OBJECT(RVAL2GOBJ(obj)));
     return self;
@@ -45,8 +44,7 @@ key_snoop_func(AtkKeyEventStruct* event, gpointer func)
 }
 
 static VALUE
-rbatk_add_key_event_listener(self)
-    VALUE self;
+rbatk_add_key_event_listener(VALUE self)
 {
     guint ret;
     VALUE func = rb_block_proc();
@@ -56,39 +54,34 @@ rbatk_add_key_event_listener(self)
 }
 
 static VALUE
-rbatk_remove_key_event_listener(self, id)
-    VALUE self, id;
+rbatk_remove_key_event_listener(VALUE self, VALUE id)
 {
     atk_remove_key_event_listener(NUM2UINT(id));
     return self;
 }
 
 static VALUE
-rbatk_get_root(self)
-    VALUE self;
+rbatk_get_root(VALUE self)
 {
     return GOBJ2RVAL(atk_get_root());
 }
 
 #if ATK_CHECK_VERSION(1,6,0)
 static VALUE
-rbatk_get_focus_object(self)
-    VALUE self;
+rbatk_get_focus_object(VALUE self)
 {
     return GOBJ2RVAL(atk_get_focus_object());
 }
 #endif
 
 static VALUE
-rbatk_get_toolkit_name(self)
-    VALUE self;
+rbatk_get_toolkit_name(VALUE self)
 {
     return CSTR2RVAL(atk_get_toolkit_name());
 }
 
 static VALUE
-rbatk_get_toolkit_version(self)
-    VALUE self;
+rbatk_get_toolkit_version(VALUE self)
 {
     return CSTR2RVAL(atk_get_toolkit_version());
 }
