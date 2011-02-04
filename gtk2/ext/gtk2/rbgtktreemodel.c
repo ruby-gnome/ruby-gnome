@@ -29,7 +29,7 @@ treemodel_get_n_columns(self)
 
 static VALUE
 treemodel_get_column_type(self, index)
-    VALUE self;
+    VALUE self, index;
 {
     return GTYPE2CLASS(gtk_tree_model_get_column_type(_SELF(self), 
                                                       NUM2INT(index)));

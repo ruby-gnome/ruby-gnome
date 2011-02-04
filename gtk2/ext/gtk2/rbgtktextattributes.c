@@ -165,7 +165,7 @@ txt_attr_initialize(self)
 
 static VALUE
 txt_attr_copy_values(self, dest)
-    VALUE self;
+    VALUE self, dest;
 {
     gtk_text_attributes_copy_values(_SELF(self), _SELF(dest));
     return self;

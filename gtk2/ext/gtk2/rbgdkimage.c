@@ -41,7 +41,7 @@ gdkimage_get_colormap(self)
 
 static VALUE
 gdkimage_set_colormap(self, colormap)
-    VALUE self;
+    VALUE self, colormap;
 {
     gdk_image_set_colormap(_SELF(self), RVAL2GOBJ(colormap));
     return self;

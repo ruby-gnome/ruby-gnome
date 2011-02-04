@@ -352,7 +352,7 @@ idle_add(self)
 
 static VALUE
 idle_add_priority(self, priority)
-    VALUE self;
+    VALUE self, priority;
 {
     VALUE func, rb_id;
     callback_info_t *info;

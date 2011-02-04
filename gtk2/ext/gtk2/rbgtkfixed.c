@@ -51,7 +51,7 @@ fixed_get_has_window(self)
 
 static VALUE
 fixed_set_has_window(self, has_window)
-    VALUE self;
+    VALUE self, has_window;
 {
     gtk_fixed_set_has_window(_SELF(self), RVAL2CBOOL(has_window));
     return self;

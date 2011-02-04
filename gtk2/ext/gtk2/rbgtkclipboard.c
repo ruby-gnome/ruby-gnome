@@ -87,6 +87,7 @@ static void
 clipboard_get_func(clipboard, selection_data, info, func)
     GtkClipboard *clipboard;
     GtkSelectionData* selection_data;
+    guint info;
     gpointer func;
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),

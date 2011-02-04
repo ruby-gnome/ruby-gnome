@@ -47,7 +47,7 @@ align_get_padding(self)
 }
 static VALUE
 align_set_padding(self, top, bottom, left, right)
-    VALUE self;
+    VALUE self, top, bottom, left, right;
 {
     gtk_alignment_set_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
                               NUM2UINT(top), NUM2UINT(bottom),

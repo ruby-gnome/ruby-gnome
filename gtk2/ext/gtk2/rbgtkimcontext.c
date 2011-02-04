@@ -106,7 +106,7 @@ imcontext_get_surrounding(self)
 
 static VALUE
 imcontext_delete_surrounding(self, offset, n_chars)
-    VALUE self;
+    VALUE self, offset, n_chars;
 {
     return CBOOL2RVAL(gtk_im_context_delete_surrounding(_SELF(self), NUM2INT(offset),
                                                         NUM2INT(n_chars)));

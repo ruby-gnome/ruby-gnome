@@ -1,3 +1,27 @@
+2011-02-04  Masaaki Aoyagi
+
+	* ext/gtk2/rbgdkdisplay.c: fix declaration.
+
+	* ext/gtk2/rbgdkimage.c: fix declaration.
+
+	* ext/gtk2/rbgtkalignment.c: fix declaration.
+
+	* ext/gtk2/rbgtkclipboard.c: fix declaration.
+
+	* ext/gtk2/rbgtkfixed.c: fix declaration.
+
+	* ext/gtk2/rbgtkimcontext.c: fix declaration.
+
+	* ext/gtk2/rbgtkmain.c: fix declaration.
+
+	* ext/gtk2/rbgtktextattributes.c: fix declaration.
+
+	* ext/gtk2/rbgtktreemodel.c: fix declaration.
+
+	* ext/gtk2/rbgtktreeview.c: fix declaration.
+
+	* ext/gtk2/rbgtkwidget.c: fix declaration.
+
 2011-01-31  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile: create default gtkrc to use "MS-Windows" GTK+ theme.

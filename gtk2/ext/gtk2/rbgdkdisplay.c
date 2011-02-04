@@ -264,7 +264,7 @@ gdkdisplay_set_double_click_distance(self, distance)
 }
 
 static VALUE
-gdkdisplay_get_double_click_distance(self, distance)
+gdkdisplay_get_double_click_distance(self)
     VALUE self;
 {
     return UINT2NUM(_SELF(self)->double_click_distance);

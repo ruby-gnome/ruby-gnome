@@ -559,7 +559,7 @@ treeview_get_drag_dest_row(self)
 
 static VALUE
 treeview_get_dest_row_at_pos(self, drag_x, drag_y)
-    VALUE self;
+    VALUE self, drag_x, drag_y;
 {
     GtkTreePath* path;
     GtkTreeViewDropPosition pos;

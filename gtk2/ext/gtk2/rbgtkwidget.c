@@ -469,7 +469,7 @@ widget_get_direction(self)
 
 static VALUE
 widget_s_set_default_direction(self, dir)
-    VALUE self;
+    VALUE self, dir;
 {
     gtk_widget_set_default_direction(RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
     return self;
