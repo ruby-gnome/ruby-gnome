@@ -20,10 +20,7 @@
  * Returns: locations of start and end of match.
  */
 static VALUE
-forward_search (argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
+forward_search(int argc, VALUE *argv, VALUE self)
 {
 	GtkTextIter m_start, m_end;
 	VALUE str, flags, limit;
@@ -61,10 +58,7 @@ forward_search (argc, argv, self)
  * Returns: locations of start and end of match.
  */
 static VALUE
-backward_search (argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
+backward_search(int argc, VALUE *argv, VALUE self)
 {
 	GtkTextIter m_start, m_end;
 	VALUE str, flags, limit;
