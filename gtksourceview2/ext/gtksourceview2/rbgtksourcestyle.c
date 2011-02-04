@@ -16,8 +16,7 @@
 #define _SELF(self) (GTK_SOURCE_STYLE(RVAL2GOBJ(self)))
 
 static VALUE
-sourcestyle_copy (self)
-	VALUE self;
+sourcestyle_copy(VALUE self)
 {
 	return GOBJ2RVAL (gtk_source_style_copy (_SELF (self)));
 }
