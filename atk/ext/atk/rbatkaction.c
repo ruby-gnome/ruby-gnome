@@ -14,52 +14,45 @@
 #define _SELF(s) (ATK_ACTION(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_action_do_action(self, i)
-    VALUE self, i;
+rbatk_action_do_action(VALUE self, VALUE i)
 {
     return CBOOL2RVAL(atk_action_do_action(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_action_get_n_actions(self)
-    VALUE self;
+rbatk_action_get_n_actions(VALUE self)
 {
     return INT2NUM(atk_action_get_n_actions(_SELF(self)));
 }
 
 static VALUE
-rbatk_action_get_description(self, i)
-    VALUE self, i;
+rbatk_action_get_description(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_action_get_description(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_action_get_name(self, i)
-    VALUE self, i;
+rbatk_action_get_name(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_action_get_name(_SELF(self), NUM2INT(i)));
 }
 
 #ifdef HAVE_ATK_ACTION_GET_LOCALIZED_NAME
 static VALUE
-rbatk_action_get_localized_name(self, i)
-    VALUE self, i;
+rbatk_action_get_localized_name(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_action_get_localized_name(_SELF(self), NUM2INT(i)));
 }
 #endif
 
 static VALUE
-rbatk_action_get_keybinding(self, i)
-    VALUE self, i;
+rbatk_action_get_keybinding(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_action_get_keybinding(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_action_set_description(self, i, desc)
-    VALUE self, i, desc;
+rbatk_action_set_description(VALUE self, VALUE i, VALUE desc)
 {
     return CBOOL2RVAL(atk_action_set_description(_SELF(self), NUM2INT(i), RVAL2CSTR(desc)));
 }
