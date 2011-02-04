@@ -14,8 +14,7 @@
 #define _SELF(s) (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(s)))
 
 static VALUE
-simpleanim_initialize(self, width, height, rate)
-    VALUE self, width, height, rate;
+simpleanim_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
 {
     GdkPixbufSimpleAnim* ret = gdk_pixbuf_simple_anim_new(NUM2INT(width), NUM2INT(height), NUM2DBL(rate));
     G_INITIALIZE(self, ret);
@@ -23,8 +22,7 @@ simpleanim_initialize(self, width, height, rate)
 }
 
 static VALUE
-simpleanim_add_frame(self, pixbuf)
-    VALUE self, pixbuf;
+simpleanim_add_frame(VALUE self, VALUE pixbuf)
 {
     gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GOBJ(pixbuf));
     return self;
