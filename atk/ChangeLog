@@ -1,3 +1,7 @@
+2011-02-05  Masaaki Aoyagi
+
+	* ext/atk/*.c: change to ANSI C style.
+
 2011-02-04  Masaaki Aoyagi
 
 	* ext/atk/rbatkstateset.c: fix declaration.
