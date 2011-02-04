@@ -73,7 +73,7 @@ gi_geometry(self)
 
 static VALUE
 gi_set_geometry(self, width, x_offset, y_offset)
-    VALUE self;
+    VALUE self, width, x_offset, y_offset;
 {
     PangoGlyphGeometry geo = _SELF(self)->geometry;
 
