@@ -1,3 +1,7 @@
+2011-02-05  Masaaki Aoyagi
+
+	* ext/gdk_pixbuf2/*.c: change to ANSI C style.
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile, ext/gdk_pixbuf2/extconf.rb: share depended packages
