@@ -14,15 +14,13 @@
 #define _SELF(s) (ATK_GOBJECT_ACCESSIBLE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_gobjectaccessible_s_for_object(self, obj)
-    VALUE self, obj;
+rbatk_gobjectaccessible_s_for_object(VALUE self, VALUE obj)
 {
     return GOBJ2RVAL(atk_gobject_accessible_for_object(RVAL2GOBJ(obj)));
 }
 
 static VALUE
-rbatk_gobjectaccessible_get_object(self)
-    VALUE self;
+rbatk_gobjectaccessible_get_object(VALUE self)
 {
     return GOBJ2RVAL(atk_gobject_accessible_get_object(_SELF(self)));
 }
