@@ -29,8 +29,7 @@ gboolean            gtk_source_language_get_hidden      (GtkSourceLanguage *lang
  * Returns: the localized metadata for the given name.
  */
 static VALUE
-sourcelanguage_get_metadata (self, name)
-	VALUE self, name;
+sourcelanguage_get_metadata(VALUE self, VALUE name)
 {
 	return
 		CSTR2RVAL (gtk_source_language_get_metadata
@@ -41,8 +40,7 @@ sourcelanguage_get_metadata (self, name)
  * Returns: a list of mime types for the given language, as an array of strings.
  */
 static VALUE
-sourcelanguage_get_mime_types (self)
-	VALUE self;
+sourcelanguage_get_mime_types(VALUE self)
 {
 	VALUE ary;
  	char **types = gtk_source_language_get_mime_types (_SELF (self));
@@ -61,8 +59,7 @@ sourcelanguage_get_mime_types (self)
  * Returns: a list of globs for the given language, as an array of strings.
  */
 static VALUE
-sourcelanguage_get_globs (self)
-	VALUE self;
+sourcelanguage_get_globs(VALUE self)
 {
 	VALUE ary;
  	char **globs = gtk_source_language_get_globs (_SELF (self));
@@ -82,8 +79,7 @@ sourcelanguage_get_globs (self)
  * Returns: the localized style name of the given id.
  */
 static VALUE
-sourcelanguage_get_style_name (self, style_id)
-	VALUE self, style_id;
+sourcelanguage_get_style_name(VALUE self, VALUE style_id)
 {
 	return
 		CSTR2RVAL (gtk_source_language_get_style_name
@@ -94,8 +90,7 @@ sourcelanguage_get_style_name (self, style_id)
  * Returns: the styles defined by the language.
  */
 static VALUE
-sourcelanguage_get_style_ids (self)
-	VALUE self;
+sourcelanguage_get_style_ids(VALUE self)
 {
 	VALUE ary;
  	gchar **ids = gtk_source_language_get_style_ids (_SELF (self));
