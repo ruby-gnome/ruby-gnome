@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_SELECTION(RVAL2GOBJ(s)))
 
 static VALUE
-rbatksel_add_selection(self, i)
-    VALUE self, i;
+rbatksel_add_selection(VALUE self, VALUE i)
 {
     gboolean ret = atk_selection_add_selection(_SELF(self), NUM2INT(i));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't add selection");
@@ -22,8 +21,7 @@ rbatksel_add_selection(self, i)
 }
 
 static VALUE
-rbatksel_clear_selection(self)
-    VALUE self;
+rbatksel_clear_selection(VALUE self)
 {
     gboolean ret = atk_selection_clear_selection(_SELF(self));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't clear selection");
@@ -31,29 +29,25 @@ rbatksel_clear_selection(self)
 }
 
 static VALUE
-rbatksel_ref_selection(self, i)
-    VALUE self, i;
+rbatksel_ref_selection(VALUE self, VALUE i)
 {
     return GOBJ2RVAL(atk_selection_ref_selection(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatksel_get_selection_count(self)
-    VALUE self;
+rbatksel_get_selection_count(VALUE self)
 {
     return INT2NUM(atk_selection_get_selection_count(_SELF(self)));
 }
 
 static VALUE
-rbatksel_is_child_selected(self, i)
-    VALUE self, i;
+rbatksel_is_child_selected(VALUE self, VALUE i)
 {
     return CBOOL2RVAL(atk_selection_is_child_selected(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatksel_remove_selection(self, i)
-    VALUE self, i;
+rbatksel_remove_selection(VALUE self, VALUE i)
 {
     gboolean ret = atk_selection_remove_selection(_SELF(self), NUM2INT(i));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't remove selection");
@@ -61,8 +55,7 @@ rbatksel_remove_selection(self, i)
 }
 
 static VALUE
-rbatksel_select_all_selection(self)
-    VALUE self;
+rbatksel_select_all_selection(VALUE self)
 {
     return CBOOL2RVAL(atk_selection_select_all_selection(_SELF(self)));
 }
