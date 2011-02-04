@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_REGISTRY(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkregistry_set_factory_type(self, type, factory_type)
-    VALUE self, type, factory_type;
+rbatkregistry_set_factory_type(VALUE self, VALUE type, VALUE factory_type)
 {
     atk_registry_set_factory_type(_SELF(self),
                                   CLASS2GTYPE(type),
@@ -23,23 +22,20 @@ rbatkregistry_set_factory_type(self, type, factory_type)
 }
 
 static VALUE
-rbatkregistry_get_factory_type(self, type)
-    VALUE self, type;
+rbatkregistry_get_factory_type(VALUE self, VALUE type)
 {
     return GTYPE2CLASS(atk_registry_get_factory_type(_SELF(self), CLASS2GTYPE(type)));
 }
 
 static VALUE
-rbatkregistry_get_factory(self, type)
-    VALUE self, type;
+rbatkregistry_get_factory(VALUE self, VALUE type)
 {
     return GOBJ2RVAL(atk_registry_get_factory(_SELF(self),
                                               CLASS2GTYPE(type)));
 }
 
 static VALUE
-rbatkregistry_s_get_default_registry(self)
-    VALUE self;
+rbatkregistry_s_get_default_registry(VALUE self)
 {
     return GOBJ2RVAL(atk_get_default_registry());
 }
