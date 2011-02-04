@@ -26,22 +26,19 @@ AtkObject*  atk_object_get_parent           (AtkObject *accessible);
 */
 
 static VALUE
-rbatkobj_get_n_accessible_children(self)
-    VALUE self;
+rbatkobj_get_n_accessible_children(VALUE self)
 {
     return INT2NUM(atk_object_get_n_accessible_children(_SELF(self)));
 }
 
 static VALUE
-rbatkobj_ref_accessible_child(self, i)
-    VALUE self, i;
+rbatkobj_ref_accessible_child(VALUE self, VALUE i)
 {
     return GOBJ2RVAL(atk_object_ref_accessible_child(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatkobj_ref_releation_set(self)
-    VALUE self;
+rbatkobj_ref_releation_set(VALUE self)
 {
     return GOBJ2RVAL(atk_object_ref_relation_set(_SELF(self)));
 }
@@ -53,15 +50,13 @@ AtkRole     atk_object_get_role             (AtkObject *accessible);
 */
 
 static VALUE
-rbatkobj_ref_state_set(self)
-    VALUE self;
+rbatkobj_ref_state_set(VALUE self)
 {
     return GOBJ2RVAL(atk_object_ref_state_set(_SELF(self)));
 }
 
 static VALUE
-rbatkobj_get_index_in_parent(self)
-    VALUE self;
+rbatkobj_get_index_in_parent(VALUE self)
 {
     return INT2NUM(atk_object_get_index_in_parent(_SELF(self)));
 }
@@ -86,8 +81,7 @@ void        atk_object_remove_property_change_handler
 */
 
 static VALUE
-rbatkobj_notify_state_change(self, state, value)
-    VALUE self, state, value;
+rbatkobj_notify_state_change(VALUE self, VALUE state, VALUE value)
 {
     atk_object_notify_state_change(_SELF(self), 
                                    RVAL2GENUM(state, ATK_TYPE_STATE_TYPE),
@@ -102,8 +96,7 @@ void        atk_object_initialize           (AtkObject *accessible,
 
 #ifdef HAVE_ATK_OBJECT_ADD_RELATIONSHIP
 static VALUE
-rbatkobj_add_relationship(self, relationship, target)
-    VALUE self, relationship, target;
+rbatkobj_add_relationship(VALUE self, VALUE relationship, VALUE target)
 {
     return CBOOL2RVAL(atk_object_add_relationship(
                           _SELF(self), 
@@ -114,8 +107,7 @@ rbatkobj_add_relationship(self, relationship, target)
 
 #ifdef HAVE_ATK_OBJECT_REMOVE_RELATIONSHIP
 static VALUE
-rbatkobj_remove_relationship(self, relationship, target)
-    VALUE self, relationship, target;
+rbatkobj_remove_relationship(VALUE self, VALUE relationship, VALUE target)
 {
     return CBOOL2RVAL(atk_object_remove_relationship(
                           _SELF(self), 
@@ -129,8 +121,7 @@ G_CONST_RETURN gchar* atk_role_get_name     (AtkRole role);
 */
 
 static VALUE
-rbatkrole_get_localized_name(self)
-    VALUE self;
+rbatkrole_get_localized_name(VALUE self)
 {
 #ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
     return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
@@ -141,8 +132,7 @@ rbatkrole_get_localized_name(self)
 }
 
 static VALUE
-rbatkrole_s_for_name(self, name)
-    VALUE self, name;
+rbatkrole_s_for_name(VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_role_for_name(RVAL2CSTR(name)), ATK_TYPE_ROLE);
 }
