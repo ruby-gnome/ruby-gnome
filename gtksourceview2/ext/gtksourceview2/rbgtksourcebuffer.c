@@ -33,10 +33,7 @@
  * Returns: a newly created Gtk::SourceBuffer object.
  */
 static VALUE
-sourcebuffer_new (argc, argv, self)
-	int argc;
-	VALUE *argv;
-	VALUE self;
+sourcebuffer_new(int argc, VALUE *argv, VALUE self)
 {
 	VALUE val;
 
@@ -99,8 +96,7 @@ gboolean            gtk_source_buffer_can_undo          (GtkSourceBuffer *buffer
  * Returns: self.
  */
 static VALUE
-sourcebuffer_redo (self)
-	VALUE self;
+sourcebuffer_redo(VALUE self)
 {
 	gtk_source_buffer_redo (_SELF (self));
 	return self;
@@ -120,8 +116,7 @@ sourcebuffer_redo (self)
  * Returns: self.
  */
 static VALUE
-sourcebuffer_undo (self)
-	VALUE self;
+sourcebuffer_undo(VALUE self)
 {
 	gtk_source_buffer_undo (_SELF (self));
 	return self;
@@ -143,8 +138,7 @@ sourcebuffer_undo (self)
  * Returns: self
  */
 static VALUE
-sourcebuffer_begin_not_undoable_action(self)
-    VALUE self;
+sourcebuffer_begin_not_undoable_action(VALUE self)
 {
     gtk_source_buffer_begin_not_undoable_action (_SELF (self));
 
@@ -166,8 +160,7 @@ sourcebuffer_begin_not_undoable_action(self)
  * Returns: self
  */
 static VALUE
-sourcebuffer_end_not_undoable_action(self)
-    VALUE self;
+sourcebuffer_end_not_undoable_action(VALUE self)
 {
     gtk_source_buffer_end_not_undoable_action (_SELF (self));
     return self;
@@ -189,8 +182,7 @@ sourcebuffer_end_not_undoable_action(self)
  * Returns: the return value of the provided block.
  */
 static VALUE
-sourcebuffer_not_undoable_action (self)
-	VALUE self;
+sourcebuffer_not_undoable_action(VALUE self)
 {
 	VALUE block, ret;
 
@@ -232,9 +224,7 @@ sourcebuffer_not_undoable_action (self)
  * Returns: a new Gtk::SourceMark object, owned by the buffer.
  */
 static VALUE
-sourcebuffer_create_source_mark (argc, argv, self)
-	int argc;
-	VALUE *argv, self;
+sourcebuffer_create_source_mark(int argc, VALUE *argv, VALUE self)
 {
 	VALUE name, category, where;
 
@@ -250,10 +240,7 @@ sourcebuffer_create_source_mark (argc, argv, self)
 }
 
 static VALUE
-sourcebuffer_get_source_marks_at_line (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcebuffer_get_source_marks_at_line(int argc, VALUE *argv, VALUE self)
 {
     GSList *list, *p;
     VALUE line, category;
@@ -277,10 +264,7 @@ sourcebuffer_get_source_marks_at_line (argc, argv, self)
 }
 
 static VALUE
-sourcebuffer_get_source_marks_at_iter (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcebuffer_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
 {
     GSList *list, *p;
     VALUE iter, category;
@@ -304,10 +288,7 @@ sourcebuffer_get_source_marks_at_iter (argc, argv, self)
 }
 
 static VALUE
-sourcebuffer_remove_source_marks (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcebuffer_remove_source_marks(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, category;
 
@@ -322,10 +303,7 @@ sourcebuffer_remove_source_marks (argc, argv, self)
 }
 
 static VALUE
-sourcebuffer_forward_iter_to_source_mark (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcebuffer_forward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 {
     VALUE iter, category;
 
@@ -338,10 +316,7 @@ sourcebuffer_forward_iter_to_source_mark (argc, argv, self)
 }
 
 static VALUE
-sourcebuffer_backward_iter_to_source_mark (argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sourcebuffer_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 {
     VALUE iter, category;
 
@@ -356,8 +331,7 @@ sourcebuffer_backward_iter_to_source_mark (argc, argv, self)
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
 static VALUE
-sourcebuffer_ensure_highlight (self, start, end)
-    VALUE self, start, end;
+sourcebuffer_ensure_highlight(VALUE self, VALUE start, VALUE end)
 {
     gtk_source_buffer_ensure_highlight (_SELF (self), RVAL2ITR (start), RVAL2ITR (end));
 
