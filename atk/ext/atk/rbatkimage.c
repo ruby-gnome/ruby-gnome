@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_IMAGE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkimage_get_image_position(self, coord_type)
-    VALUE self, coord_type;
+rbatkimage_get_image_position(VALUE self, VALUE coord_type)
 {
     gint x, y;
     atk_image_get_image_position(_SELF(self), &x, &y, 
@@ -23,15 +22,13 @@ rbatkimage_get_image_position(self, coord_type)
 }
 
 static VALUE
-rbatkimage_get_image_description(self)
-    VALUE self;
+rbatkimage_get_image_description(VALUE self)
 {
     return CSTR2RVAL(atk_image_get_image_description(_SELF(self)));
 }
 
 static VALUE
-rbatkimage_set_image_description(self, description)
-    VALUE self, description;
+rbatkimage_set_image_description(VALUE self, VALUE description)
 {
     gboolean ret = atk_image_set_image_description(_SELF(self),
                                                    RVAL2CSTR(description));
@@ -40,8 +37,7 @@ rbatkimage_set_image_description(self, description)
 }
 
 static VALUE
-rbatkimage_get_image_size(self)
-    VALUE self;
+rbatkimage_get_image_size(VALUE self)
 {
     gint width, height;
     atk_image_get_image_size(_SELF(self), &width, &height);
