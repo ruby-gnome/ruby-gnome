@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_IMPLEMENTOR(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkimpl_ref_accessible(self)
-    VALUE self;
+rbatkimpl_ref_accessible(VALUE self)
 {
     return GOBJ2RVAL(atk_implementor_ref_accessible(_SELF(self)));
 }
