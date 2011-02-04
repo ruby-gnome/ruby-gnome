@@ -14,31 +14,27 @@
 #define _SELF(s) (ATK_STATE_SET(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkstateset_initialize(self)
-    VALUE self;
+rbatkstateset_initialize(VALUE self)
 {
     G_INITIALIZE(self, atk_state_set_new());
     return Qnil;
 }
 
 static VALUE
-rbatkstateset_is_empty(self)
-    VALUE self;
+rbatkstateset_is_empty(VALUE self)
 {
     return CBOOL2RVAL(atk_state_set_is_empty(_SELF(self)));
 }
 
 static VALUE
-rbatkstateset_add_state(self, type)
-    VALUE self, type;
+rbatkstateset_add_state(VALUE self, VALUE type)
 {
     return CBOOL2RVAL(atk_state_set_add_state(_SELF(self), 
                                               RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
 }
 
 static VALUE
-rbatkstateset_add_states(self, types)
-    VALUE self, types;
+rbatkstateset_add_states(VALUE self, VALUE types)
 {
     gint i;
     gint n_types = RARRAY_LEN(types);
@@ -56,24 +52,21 @@ rbatkstateset_add_states(self, types)
 }
 
 static VALUE
-rbatkstateset_clear_states(self)
-    VALUE self;
+rbatkstateset_clear_states(VALUE self)
 {
     atk_state_set_clear_states(_SELF(self));
     return self;
 }
 
 static VALUE
-rbatkstateset_contains_state(self, type)
-    VALUE self, type;
+rbatkstateset_contains_state(VALUE self, VALUE type)
 {
     return CBOOL2RVAL(atk_state_set_contains_state(_SELF(self), 
                                                    RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
 }
 
 static VALUE
-rbatkstateset_contains_states(self, types)
-    VALUE self, types;
+rbatkstateset_contains_states(VALUE self, VALUE types)
 {
     gint i;
     gboolean ret;
@@ -93,30 +86,26 @@ rbatkstateset_contains_states(self, types)
 }
 
 static VALUE
-rbatkstateset_remove_state(self, type)
-    VALUE self, type;
+rbatkstateset_remove_state(VALUE self, VALUE type)
 {
     return CBOOL2RVAL(atk_state_set_remove_state(_SELF(self), 
                                                  RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
 }
 
 static VALUE
-rbatkstateset_and_sets(self, compare_set)
-    VALUE self, compare_set;
+rbatkstateset_and_sets(VALUE self, VALUE compare_set)
 {
     return GOBJ2RVAL(atk_state_set_and_sets(_SELF(self), _SELF(compare_set)));
 }
 
 static VALUE
-rbatkstateset_or_sets(self, compare_set)
-    VALUE self, compare_set;
+rbatkstateset_or_sets(VALUE self, VALUE compare_set)
 {
     return GOBJ2RVAL(atk_state_set_or_sets(_SELF(self), _SELF(compare_set)));
 }
 
 static VALUE
-rbatkstateset_xor_sets(self, compare_set)
-    VALUE self, compare_set;
+rbatkstateset_xor_sets(VALUE self, VALUE compare_set)
 {
     return GOBJ2RVAL(atk_state_set_xor_sets(_SELF(self), _SELF(compare_set)));
 }
