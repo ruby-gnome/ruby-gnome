@@ -697,6 +697,7 @@ static VALUE ioc_puts(int argc, VALUE* argv, VALUE self);
 static VALUE
 ioc_puts_ary(ary, out, recur)
     VALUE ary, out;
+    int recur;
 {
     VALUE tmp;
     long i;
