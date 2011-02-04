@@ -14,99 +14,85 @@
 #define _SELF(s) (ATK_TABLE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_table_ref_at(self, row, column)
-    VALUE self, row, column;
+rbatk_table_ref_at(VALUE self, VALUE row, VALUE column)
 {
     return GOBJ2RVAL(atk_table_ref_at(_SELF(self), NUM2INT(row), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_get_index_at(self, row, column)
-    VALUE self, row, column;
+rbatk_table_get_index_at(VALUE self, VALUE row, VALUE column)
 {
     return INT2NUM(atk_table_get_index_at(_SELF(self), NUM2INT(row), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_get_column_at_index(self, index_)
-    VALUE self, index_;
+rbatk_table_get_column_at_index(VALUE self, VALUE index_)
 {
     return INT2NUM(atk_table_get_column_at_index(_SELF(self), NUM2INT(index_)));
 }
 
 static VALUE
-rbatk_table_get_row_at_index(self, index_)
-    VALUE self, index_;
+rbatk_table_get_row_at_index(VALUE self, VALUE index_)
 {
     return INT2NUM(atk_table_get_row_at_index(_SELF(self), NUM2INT(index_)));
 }
 
 static VALUE
-rbatk_table_get_n_columns(self)
-    VALUE self;
+rbatk_table_get_n_columns(VALUE self)
 {
     return INT2NUM(atk_table_get_n_columns(_SELF(self)));
 }
 
 static VALUE
-rbatk_table_get_n_rows(self)
-    VALUE self;
+rbatk_table_get_n_rows(VALUE self)
 {
     return INT2NUM(atk_table_get_n_rows(_SELF(self)));
 }
 
 static VALUE
-rbatk_table_get_column_extent_at(self, row, column)
-    VALUE self, row, column;
+rbatk_table_get_column_extent_at(VALUE self, VALUE row, VALUE column)
 {
     return INT2NUM(atk_table_get_column_extent_at(_SELF(self), NUM2INT(row), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_get_row_extent_at(self, row, column)
-    VALUE self, row, column;
+rbatk_table_get_row_extent_at(VALUE self, VALUE row, VALUE column)
 {
     return INT2NUM(atk_table_get_row_extent_at(_SELF(self), NUM2INT(row), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_get_caption(self)
-    VALUE self;
+rbatk_table_get_caption(VALUE self)
 {
     return GOBJ2RVAL(atk_table_get_caption(_SELF(self)));
 }
 
 static VALUE
-rbatk_table_get_column_description(self, column)
-    VALUE self, column;
+rbatk_table_get_column_description(VALUE self, VALUE column)
 {
     return CSTR2RVAL(atk_table_get_column_description(_SELF(self), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_get_row_description(self, row)
-    VALUE self, row;
+rbatk_table_get_row_description(VALUE self, VALUE row)
 {
     return CSTR2RVAL(atk_table_get_row_description(_SELF(self), NUM2INT(row)));
 }
 
 static VALUE
-rbatk_table_get_column_header(self, column)
-    VALUE self, column;
+rbatk_table_get_column_header(VALUE self, VALUE column)
 {
     return GOBJ2RVAL(atk_table_get_column_header(_SELF(self), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_get_row_header(self, row)
-    VALUE self, row;
+rbatk_table_get_row_header(VALUE self, VALUE row)
 {
     return GOBJ2RVAL(atk_table_get_row_header(_SELF(self), NUM2INT(row)));
 }
 
 static VALUE
-rbatk_table_get_summary(self)
-    VALUE self;
+rbatk_table_get_summary(VALUE self)
 {
     return GOBJ2RVAL(atk_table_get_summary(_SELF(self)));
 }
@@ -120,48 +106,42 @@ rbatk_table_set_caption(self, caption)
 }
 
 static VALUE
-rbatk_table_set_row_description(self, row, description)
-    VALUE self, row, description;
+rbatk_table_set_row_description(VALUE self, VALUE row, VALUE description)
 {
     atk_table_set_row_description(_SELF(self), NUM2INT(row), RVAL2CSTR(description));
     return self;
 }
 
 static VALUE
-rbatk_table_set_column_description(self, column, description)
-    VALUE self, column, description;
+rbatk_table_set_column_description(VALUE self, VALUE column, VALUE description)
 {
     atk_table_set_column_description(_SELF(self), NUM2INT(column), RVAL2CSTR(description));
     return self;
 }
 
 static VALUE
-rbatk_table_set_row_header(self, row, header)
-    VALUE self, row, header;
+rbatk_table_set_row_header(VALUE self, VALUE row, VALUE header)
 {
     atk_table_set_row_header(_SELF(self), NUM2INT(row), ATK_OBJECT(RVAL2GOBJ(header)));
     return self;
 }
 
 static VALUE
-rbatk_table_set_column_header(self, column, header)
-    VALUE self, column, header;
+rbatk_table_set_column_header(VALUE self, VALUE column, VALUE header)
 {
     atk_table_set_column_header(_SELF(self), NUM2INT(column), ATK_OBJECT(RVAL2GOBJ(header)));
     return self;
 }
 
 static VALUE
-rbatk_table_set_summary(self, accessible)
-    VALUE self, accessible;
+rbatk_table_set_summary(VALUE self, VALUE accessible)
 {
     atk_table_set_summary(_SELF(self), ATK_OBJECT(RVAL2GOBJ(accessible)));
     return self;
 }
 
 static VALUE
-rbatk_table_get_selected_columns(self)
-    VALUE self;
+rbatk_table_get_selected_columns(VALUE self)
 {
     gint ret;
     gint* selected;
@@ -178,8 +158,7 @@ rbatk_table_get_selected_columns(self)
 }
 
 static VALUE
-rbatk_table_get_selected_rows(self)
-    VALUE self;
+rbatk_table_get_selected_rows(VALUE self)
 {
     gint ret;
     gint* selected;
@@ -196,29 +175,25 @@ rbatk_table_get_selected_rows(self)
 }
 
 static VALUE
-rbatk_table_is_column_selected(self, column)
-    VALUE self, column;
+rbatk_table_is_column_selected(VALUE self, VALUE column)
 {
     return CBOOL2RVAL(atk_table_is_column_selected(_SELF(self), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_is_row_selected(self, row)
-    VALUE self, row;
+rbatk_table_is_row_selected(VALUE self, VALUE row)
 {
     return CBOOL2RVAL(atk_table_is_row_selected(_SELF(self), NUM2INT(row)));
 }
 
 static VALUE
-rbatk_table_is_selected(self, row, column)
-    VALUE self, row, column;
+rbatk_table_is_selected(VALUE self, VALUE row, VALUE column)
 {
     return CBOOL2RVAL(atk_table_is_selected(_SELF(self), NUM2INT(row), NUM2INT(column)));
 }
 
 static VALUE
-rbatk_table_add_column_selection(self, column)
-    VALUE self, column;
+rbatk_table_add_column_selection(VALUE self, VALUE column)
 {
     gboolean ret = atk_table_add_column_selection(_SELF(self), NUM2INT(column));
     if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
@@ -226,8 +201,7 @@ rbatk_table_add_column_selection(self, column)
 }
 
 static VALUE
-rbatk_table_add_row_selection(self, row)
-    VALUE self, row;
+rbatk_table_add_row_selection(VALUE self, VALUE row)
 {
     gboolean ret = atk_table_add_row_selection(_SELF(self), NUM2INT(row));
     if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
@@ -235,8 +209,7 @@ rbatk_table_add_row_selection(self, row)
 }
 
 static VALUE
-rbatk_table_remove_column_selection(self, column)
-    VALUE self, column;
+rbatk_table_remove_column_selection(VALUE self, VALUE column)
 {
     gboolean ret = atk_table_remove_column_selection(_SELF(self), NUM2INT(column));
     if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
@@ -244,8 +217,7 @@ rbatk_table_remove_column_selection(self, column)
 }
 
 static VALUE
-rbatk_table_remove_row_selection(self, row)
-    VALUE self, row;
+rbatk_table_remove_row_selection(VALUE self, VALUE row)
 {
     gboolean ret = atk_table_remove_row_selection(_SELF(self), NUM2INT(row));
     if (! ret) rb_raise(rb_eRuntimeError, "not implement this interface");
