@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_STATE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkstate_s_type_register(self, name)
-    VALUE self, name;
+rbatkstate_s_type_register(VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_state_type_register(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
 }
@@ -25,8 +24,7 @@ G_CONST_RETURN gchar* atk_state_type_get_name
 */
 
 static VALUE
-rbatkstate_s_for_name(self, name)
-    VALUE self, name;
+rbatkstate_s_for_name(VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_state_type_for_name(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
 }
