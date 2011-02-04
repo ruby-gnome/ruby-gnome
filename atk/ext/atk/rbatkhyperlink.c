@@ -13,60 +13,52 @@
 #define _SELF(s) (ATK_HYPERLINK(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_hl_get_uri(self, i)
-    VALUE self, i;
+rbatk_hl_get_uri(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_hyperlink_get_uri(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_hl_get_object(self, i)
-    VALUE self, i;
+rbatk_hl_get_object(VALUE self, VALUE i)
 {
     return GOBJ2RVAL(atk_hyperlink_get_object(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_hl_get_end_index(self)
-    VALUE self;
+rbatk_hl_get_end_index(VALUE self)
 {
     return INT2NUM(atk_hyperlink_get_end_index(_SELF(self)));
 }
 
 static VALUE
-rbatk_hl_get_start_index(self)
-    VALUE self;
+rbatk_hl_get_start_index(VALUE self)
 {
     return INT2NUM(atk_hyperlink_get_start_index(_SELF(self)));
 }
 
 static VALUE
-rbatk_hl_is_valid(self)
-    VALUE self;
+rbatk_hl_is_valid(VALUE self)
 {
     return CBOOL2RVAL(atk_hyperlink_is_valid(_SELF(self)));
 }
 
 #ifdef HAVE_ATK_HYPERLINK_IS_INLINE
 static VALUE
-rbatk_hl_is_inline(self)
-    VALUE self;
+rbatk_hl_is_inline(VALUE self)
 {
     return CBOOL2RVAL(atk_hyperlink_is_inline(_SELF(self)));
 }
 #endif
 
 static VALUE
-rbatk_hl_get_n_anchors(self)
-    VALUE self;
+rbatk_hl_get_n_anchors(VALUE self)
 {
     return INT2NUM(atk_hyperlink_get_n_anchors(_SELF(self)));
 }
 
 #ifdef HAVE_ATK_HYPERLINK_IS_SELECTED_LINK
 static VALUE
-rbatk_hl_is_selected_link(self)
-    VALUE self;
+rbatk_hl_is_selected_link(VALUE self)
 {
     return CBOOL2RVAL(atk_hyperlink_is_selected_link(_SELF(self)));
 }
