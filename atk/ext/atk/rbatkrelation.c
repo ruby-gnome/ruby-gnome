@@ -13,8 +13,7 @@
 #define _SELF(s) (ATK_RELATION(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkrel_s_type_register(self, name)
-    VALUE self, name;
+rbatkrel_s_type_register(VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_relation_type_register(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
@@ -25,16 +24,14 @@ G_CONST_RETURN gchar* atk_relation_type_get_name
 */
 
 static VALUE
-rbatkrelation_s_for_name(self, name)
-    VALUE self, name;
+rbatkrelation_s_for_name(VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
 
 
 static VALUE
-rbatkrel_initialize(self, targets, relationship)
-    VALUE self, targets, relationship;
+rbatkrel_initialize(VALUE self, VALUE targets, VALUE relationship)
 {
     gint i;
     gint len = RARRAY_LEN(targets);
@@ -53,15 +50,13 @@ rbatkrel_initialize(self, targets, relationship)
 }
 
 static VALUE
-rbatkrel_get_relation_type(self)
-    VALUE self;
+rbatkrel_get_relation_type(VALUE self)
 {
     return GENUM2RVAL(atk_relation_get_relation_type(_SELF(self)), ATK_TYPE_RELATION_TYPE);
 }
 
 static VALUE
-rbatkrel_get_target(self)
-    VALUE self;
+rbatkrel_get_target(VALUE self)
 {
     gint i;
     GPtrArray* garray = atk_relation_get_target(_SELF(self));
@@ -76,8 +71,7 @@ rbatkrel_get_target(self)
 
 #if ATK_CHECK_VERSION(1,9,0)
 static VALUE
-rbatkrel_add_target(self, obj)
-    VALUE self, obj;
+rbatkrel_add_target(VALUE self, VALUE obj)
 {
     atk_relation_add_target(_SELF(self), ATK_OBJECT(RVAL2GOBJ(obj)));
     return self;
