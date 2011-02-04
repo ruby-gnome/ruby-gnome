@@ -21,8 +21,7 @@
  * Returns: a newly created Gtk::SourceStyleSchemeManager object.
  */
 static VALUE
-sssm_new (self)
-	VALUE self;
+sssm_new(VALUE self)
 {
 	G_INITIALIZE (self, gtk_source_style_scheme_manager_new ());
 	return Qnil;
@@ -35,8 +34,7 @@ sssm_new (self)
  * Returns: a Gtk::SourceStyleSchemeManager
  */
 static VALUE
-sssm_get_default(self)
-    VALUE self;
+sssm_get_default(VALUE self)
 {
     GtkSourceStyleSchemeManager* sssm = gtk_source_style_scheme_manager_get_default();
     GType gtype = G_TYPE_FROM_INSTANCE(sssm);
@@ -58,8 +56,7 @@ sssm_get_default(self)
  * Returns: self.
  */
 static VALUE
-sssm_set_search_path (self, dirs)
-	VALUE self, dirs;
+sssm_set_search_path(VALUE self, VALUE dirs)
 {
     gchar** gdirs = (gchar**)NULL;
 	gint i;
@@ -91,8 +88,7 @@ sssm_set_search_path (self, dirs)
  * Returns: self.
  */
 static VALUE
-sssm_append_search_path (self, path)
-	VALUE self, path;
+sssm_append_search_path(VALUE self, VALUE path)
 {
 	gtk_source_style_scheme_manager_append_search_path (_SELF (self), RVAL2CSTR(path));
 	return self;
@@ -106,8 +102,7 @@ sssm_append_search_path (self, path)
  * Returns: self.
  */
 static VALUE
-sssm_prepend_search_path (self, path)
-	VALUE self, path;
+sssm_prepend_search_path(VALUE self, VALUE path)
 {
 	gtk_source_style_scheme_manager_prepend_search_path (_SELF (self), RVAL2CSTR(path));
 	return self;
@@ -118,8 +113,7 @@ sssm_prepend_search_path (self, path)
  * style scheme manager.
  */
 static VALUE
-sssm_get_search_path (self)
-	VALUE self;
+sssm_get_search_path(VALUE self)
 {
 	VALUE ary;
  	const gchar * const * dirs =
@@ -139,8 +133,7 @@ sssm_get_search_path (self)
  * Returns: a list of style scheme ids for the given style scheme manager
  */
 static VALUE
-sssm_get_scheme_ids (self)
-	VALUE self;
+sssm_get_scheme_ids(VALUE self)
 {
 	VALUE ary;
  	const gchar * const * ids =
@@ -167,8 +160,7 @@ sssm_get_scheme_ids (self)
  * associated with the given id.
  */
 static VALUE
-sssm_get_scheme (self, scheme_id)
-	VALUE self, scheme_id;
+sssm_get_scheme(VALUE self, VALUE scheme_id)
 {
 	return
 	    GOBJ2RVAL (gtk_source_style_scheme_manager_get_scheme
@@ -184,8 +176,7 @@ sssm_get_scheme (self, scheme_id)
  * Returns: self.
  */
 static VALUE
-sssm_force_rescan (self)
-	VALUE self;
+sssm_force_rescan(VALUE self)
 {
 	gtk_source_style_scheme_manager_force_rescan(_SELF (self));
 	return self;
