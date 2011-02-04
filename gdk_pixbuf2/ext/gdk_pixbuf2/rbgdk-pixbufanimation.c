@@ -14,8 +14,7 @@
 #define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
 
 static VALUE
-animation_initialize(self, filename)
-    VALUE self, filename;
+animation_initialize(VALUE self, VALUE filename)
 {
     GdkPixbufAnimation* ret;
     GError* error = NULL;
@@ -29,24 +28,19 @@ animation_initialize(self, filename)
 }
 
 static VALUE
-animation_get_width(self)
-    VALUE self;
+animation_get_width(VALUE self)
 {
     return INT2NUM(gdk_pixbuf_animation_get_width(_SELF(self)));
 }
 
 static VALUE
-animation_get_height(self)
-    VALUE self;
+animation_get_height(VALUE self)
 {
     return INT2NUM(gdk_pixbuf_animation_get_height(_SELF(self)));
 }
 
 static VALUE
-animation_get_iter(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+animation_get_iter(int argc, VALUE *argv, VALUE self)
 {
     VALUE start_time_sec, start_time_usec;
     GTimeVal* time = NULL;
@@ -66,24 +60,19 @@ animation_get_iter(argc, argv, self)
 }
 
 static VALUE
-animation_is_static_image(self)
-    VALUE self;
+animation_is_static_image(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_animation_is_static_image(_SELF(self)));
 }
 
 static VALUE
-animation_get_static_image(self)
-    VALUE self;
+animation_get_static_image(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_animation_get_static_image(_SELF(self)));
 }
 
 static VALUE
-animation_iter_advance(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+animation_iter_advance(int argc, VALUE *argv, VALUE self)
 {
     VALUE current_time_sec, current_time_usec;
     GTimeVal* time = NULL;
@@ -104,22 +93,19 @@ animation_iter_advance(argc, argv, self)
 }
 
 static VALUE
-animation_iter_get_delay_time(self)
-    VALUE self;
+animation_iter_get_delay_time(VALUE self)
 {
     return INT2NUM(gdk_pixbuf_animation_iter_get_delay_time(RVAL2ITR(self)));
 }
 
 static VALUE
-animation_iter_on_currently_loading_frame(self)
-    VALUE self;
+animation_iter_on_currently_loading_frame(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_animation_iter_on_currently_loading_frame(RVAL2ITR(self)));
 }
 
 static VALUE
-animation_iter_get_pixbuf(self)
-    VALUE self;
+animation_iter_get_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_animation_iter_get_pixbuf(RVAL2ITR(self)));
 }
