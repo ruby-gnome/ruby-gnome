@@ -30,29 +30,25 @@ static ID id_pixdata;
 /****************************************************/
 /* The GdkPixbuf Structure */
 static VALUE
-get_colorspace(self)
-    VALUE self;
+get_colorspace(VALUE self)
 {
     return GENUM2RVAL(gdk_pixbuf_get_colorspace(_SELF(self)), GDK_TYPE_COLORSPACE);
 }
 
 static VALUE
-get_n_channels(self)
-    VALUE self;
+get_n_channels(VALUE self)
 {
     return INT2FIX(gdk_pixbuf_get_n_channels(_SELF(self)));
 }
 
 static VALUE
-get_has_alpha(self)
-    VALUE self;
+get_has_alpha(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_get_has_alpha(_SELF(self)));
 }
 
 static VALUE
-get_bits_per_sample(self)
-    VALUE self;
+get_bits_per_sample(VALUE self)
 {
     return INT2FIX(gdk_pixbuf_get_bits_per_sample(_SELF(self)));
 }
@@ -107,29 +103,25 @@ set_pixels(VALUE self, VALUE pixels)
 }
 
 static VALUE
-get_width(self)
-    VALUE self;
+get_width(VALUE self)
 {
     return INT2FIX(gdk_pixbuf_get_width(_SELF(self)));
 }
 
 static VALUE
-get_height(self)
-    VALUE self;
+get_height(VALUE self)
 {
     return INT2FIX(gdk_pixbuf_get_height(_SELF(self)));
 }
 
 static VALUE
-get_rowstride(self)
-    VALUE self;
+get_rowstride(VALUE self)
 {
     return INT2FIX(gdk_pixbuf_get_rowstride(_SELF(self)));
 }
 
 static VALUE
-get_option(self, key)
-    VALUE self, key;
+get_option(VALUE self, VALUE key)
 {
     const gchar* ret = gdk_pixbuf_get_option(_SELF(self), RVAL2CSTR(key));
     return ret ? CSTR2RVAL(ret) : Qnil;
@@ -139,10 +131,7 @@ get_option(self, key)
 /* File opening */
 /* Image Data in Memory */
 static VALUE
-initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+initialize(int argc, VALUE *argv, VALUE self)
 {
     GdkPixbuf* buf;
     GError* error = NULL;
@@ -288,8 +277,7 @@ initialize(argc, argv, self)
 }
 
 static VALUE
-copy(self)
-    VALUE self;
+copy(VALUE self)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_copy(_SELF(self));
@@ -302,8 +290,7 @@ copy(self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
 static VALUE
-get_file_info(self, filename)
-    VALUE self, filename;
+get_file_info(VALUE self, VALUE filename)
 {
     gint width, height;
 
@@ -406,10 +393,7 @@ save_to_buffer(int argc, VALUE *argv, VALUE self)
 /****************************************************/
 /* Scaling */
 static VALUE
-scale_simple(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+scale_simple(int argc, VALUE *argv, VALUE self)
 {
     GdkPixbuf* dest;
     VALUE dest_width, dest_height, interp_type, ret;
@@ -434,10 +418,7 @@ scale_simple(argc, argv, self)
 }
 
 static VALUE
-scale(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+scale(int argc, VALUE *argv, VALUE self)
 {
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
@@ -460,10 +441,7 @@ scale(argc, argv, self)
 }
 
 static VALUE
-composite_simple(self, dest_width, dest_height, interp_type, overall_alpha,
-                 check_size, color1, color2)
-    VALUE self, dest_width, dest_height, interp_type, overall_alpha,
-    check_size, color1, color2;
+composite_simple(VALUE self, VALUE dest_width, VALUE dest_height, VALUE interp_type, VALUE overall_alpha, VALUE check_size, VALUE color1, VALUE color2)
 {
     GdkPixbuf* dest;
     VALUE ret;
@@ -486,10 +464,7 @@ composite_simple(self, dest_width, dest_height, interp_type, overall_alpha,
 }
 
 static VALUE
-composite(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+composite(int argc, VALUE *argv, VALUE self)
 {
     VALUE ret;
     VALUE args[16];
@@ -538,8 +513,7 @@ composite(argc, argv, self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
 static VALUE
-rotate_simple(self, angle)
-    VALUE self, angle;
+rotate_simple(VALUE self, VALUE angle)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GENUM(angle, GDK_TYPE_PIXBUF_ROTATION));
@@ -551,8 +525,7 @@ rotate_simple(self, angle)
 }
 
 static VALUE
-flip(self, horizontal)
-    VALUE self, horizontal;
+flip(VALUE self, VALUE horizontal)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_flip(_SELF(self), RVAL2CBOOL(horizontal));
@@ -565,8 +538,7 @@ flip(self, horizontal)
 #endif
 
 static VALUE
-add_alpha(self, substitute_color, r, g, b)
-    VALUE self, substitute_color, r, g, b;
+add_alpha(VALUE self, VALUE substitute_color, VALUE r, VALUE g, VALUE b)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_add_alpha(_SELF(self),
@@ -580,8 +552,7 @@ add_alpha(self, substitute_color, r, g, b)
 }
 
 static VALUE
-copy_area(self, src_x, src_y, width, height, dest, dest_x, dest_y)
-    VALUE self, src_x, src_y, width, height, dest, dest_x, dest_y;
+copy_area(VALUE self, VALUE src_x, VALUE src_y, VALUE width, VALUE height, VALUE dest, VALUE dest_x, VALUE dest_y)
 {
     gdk_pixbuf_copy_area(_SELF(self), NUM2INT(src_x), NUM2INT(src_y),
                          NUM2INT(width), NUM2INT(height),
@@ -590,8 +561,7 @@ copy_area(self, src_x, src_y, width, height, dest, dest_x, dest_y)
 }
 
 static VALUE
-saturate_and_pixelate(self, staturation, pixelate)
-    VALUE self, staturation, pixelate;
+saturate_and_pixelate(VALUE self, VALUE staturation, VALUE pixelate)
 {
     GdkPixbuf* dest = gdk_pixbuf_copy(_SELF(self));
     gdk_pixbuf_saturate_and_pixelate(_SELF(self), dest, 
@@ -600,8 +570,7 @@ saturate_and_pixelate(self, staturation, pixelate)
 }
 
 static VALUE
-fill(self, pixel)
-    VALUE self, pixel;
+fill(VALUE self, VALUE pixel)
 {
     gdk_pixbuf_fill(_SELF(self), NUM2UINT(pixel));
     return self;
@@ -610,15 +579,13 @@ fill(self, pixel)
 /* From Module Interface */
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-get_formats(self)
-    VALUE self;
+get_formats(VALUE self)
 {
     return GSLIST2ARY2(gdk_pixbuf_get_formats(), GDK_TYPE_PIXBUF_FORMAT);
 }
 
 static VALUE
-set_option(self, key, value)
-    VALUE self, key, value;
+set_option(VALUE self, VALUE key, VALUE value)
 {
 #if HAVE_GDK_PIXBUF_SET_OPTION
     return CBOOL2RVAL(gdk_pixbuf_set_option(_SELF(self), 
