@@ -51,22 +51,19 @@ GSList*     gdk_pixbuf_get_formats          (void);
 */
 
 static VALUE
-get_name(self)
-    VALUE self;
+get_name(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_pixbuf_format_get_name(_SELF(self)));
 }
 
 static VALUE
-get_description(self)
-    VALUE self;
+get_description(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_pixbuf_format_get_description(_SELF(self)));
 }
     
 static VALUE
-get_mime_types(self)
-    VALUE self;
+get_mime_types(VALUE self)
 {
     gint i = 0;
     gchar** mime_types = gdk_pixbuf_format_get_mime_types(_SELF(self));
@@ -80,8 +77,7 @@ get_mime_types(self)
 }
 
 static VALUE
-get_extensions(self)
-    VALUE self;
+get_extensions(VALUE self)
 {
     gint i = 0;
     gchar** extensions = gdk_pixbuf_format_get_extensions(_SELF(self));
@@ -96,23 +92,20 @@ get_extensions(self)
 }
 
 static VALUE
-is_writable(self)
-    VALUE self;
+is_writable(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_format_is_writable(_SELF(self)));
 }
 
 /* Structure */
 static VALUE
-get_domain(self)
-    VALUE self;
+get_domain(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->domain);
 }
 
 static VALUE
-get_signature(self)
-    VALUE self;
+get_signature(VALUE self)
 {
     GdkPixbufModulePattern* signature = _SELF(self)->signature;
 
@@ -130,27 +123,23 @@ get_signature(self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
 static VALUE
-is_scalable(self)
-    VALUE self;
+is_scalable(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_format_is_scalable(_SELF(self)));
 }
 static VALUE
-is_disabled(self)
-    VALUE self;
+is_disabled(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_format_is_disabled(_SELF(self)));
 }
 static VALUE
-set_disabled(self, disabled)
-    VALUE self, disabled;
+set_disabled(VALUE self, VALUE disabled)
 {
     gdk_pixbuf_format_set_disabled(_SELF(self), RVAL2CBOOL(disabled));
     return self;
 }
 static VALUE
-get_license(self)
-    VALUE self;
+get_license(VALUE self)
 {
     return CSTR2RVAL(gdk_pixbuf_format_get_license(_SELF(self)));
 }
