@@ -49,8 +49,7 @@ atk_text_rectangle_get_type(void)
 /**********************************/
 
 static VALUE
-atktextrect_initialize(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+atktextrect_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     AtkTextRectangle new;
 
@@ -65,68 +64,59 @@ atktextrect_initialize(self, x, y, width, height)
 
 /* Struct accessors */
 static VALUE
-atktextrect_x(self)
-    VALUE self;
+atktextrect_x(VALUE self)
 {
     return INT2NUM(_SELF(self)->x);
 }
 
 static VALUE
-atktextrect_y(self)
-    VALUE self;
+atktextrect_y(VALUE self)
 {
     return INT2NUM(_SELF(self)->y);
 }
 
 static VALUE
-atktextrect_w(self)
-    VALUE self;
+atktextrect_w(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-atktextrect_h(self)
-    VALUE self;
+atktextrect_h(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-atktextrect_set_x(self, x)
-    VALUE self, x;
+atktextrect_set_x(VALUE self, VALUE x)
 {
     _SELF(self)->x = NUM2INT(x);
     return self;
 }
 
 static VALUE
-atktextrect_set_y(self, y)
-    VALUE self, y;
+atktextrect_set_y(VALUE self, VALUE y)
 {
     _SELF(self)->y = NUM2INT(y);
     return self;
 }
 
 static VALUE
-atktextrect_set_w(self, width)
-    VALUE self, width;
+atktextrect_set_w(VALUE self, VALUE width)
 {
     _SELF(self)->width = NUM2INT(width);
     return self;
 }
 
 static VALUE
-atktextrect_set_h(self, height)
-    VALUE self, height;
+atktextrect_set_h(VALUE self, VALUE height)
 {
     _SELF(self)->height = NUM2INT(height);
     return self;
 }
 
 static VALUE
-atktextrect_to_a(self)
-    VALUE self;
+atktextrect_to_a(VALUE self)
 {
   AtkTextRectangle* a = _SELF(self);
   return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
