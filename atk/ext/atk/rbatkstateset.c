@@ -65,7 +65,7 @@ rbatkstateset_clear_states(self)
 
 static VALUE
 rbatkstateset_contains_state(self, type)
-    VALUE self;
+    VALUE self, type;
 {
     return CBOOL2RVAL(atk_state_set_contains_state(_SELF(self), 
                                                    RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));

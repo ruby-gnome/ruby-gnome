@@ -1,3 +1,7 @@
+2011-02-04  Masaaki Aoyagi
+
+	* ext/atk/rbatkstateset.c: fix declaration.
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile, ext/atk/extconf.rb: share depended packages
