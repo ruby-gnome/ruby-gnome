@@ -14,24 +14,21 @@
 #define _SELF(self) (PANGO_FONT_FAMILY(RVAL2GOBJ(self)))
 
 static VALUE
-font_family_get_name(self)
-    VALUE self;
+font_family_get_name(VALUE self)
 {
     return CSTR2RVAL(pango_font_family_get_name(_SELF(self)));
 }
 
 #ifdef HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
 static VALUE
-font_family_is_monospace(self)
-    VALUE self;
+font_family_is_monospace(VALUE self)
 {
     return CBOOL2RVAL(pango_font_family_is_monospace(_SELF(self)));
 }
 #endif
 
 static VALUE
-font_family_list_faces(self)
-    VALUE self;
+font_family_list_faces(VALUE self)
 {
     int n_faces;
     PangoFontFace** faces;
