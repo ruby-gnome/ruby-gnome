@@ -17,10 +17,7 @@
 #define _SELF(s) (GTK_LABEL(RVAL2GOBJ(s)))
 
 static VALUE
-label_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+label_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, with_mnemonic;
     GtkWidget* widget = NULL;
@@ -37,18 +34,14 @@ label_initialize(argc, argv, self)
 }
 
 static VALUE
-label_set_text_only(self, text)
-    VALUE self, text;
+label_set_text_only(VALUE self, VALUE text)
 {
     gtk_label_set_text(_SELF(self), RVAL2CSTR(text));
     return text;
 }
 
 static VALUE
-label_set_text(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+label_set_text(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, with_mnemonic;
 
@@ -62,18 +55,14 @@ label_set_text(argc, argv, self)
 }
 
 static VALUE
-label_set_markup_only(self, text)
-    VALUE self, text;
+label_set_markup_only(VALUE self, VALUE text)
 {
     gtk_label_set_markup(_SELF(self), RVAL2CSTR(text));
     return text;
 }
 
 static VALUE
-label_set_markup(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+label_set_markup(int argc, VALUE *argv, VALUE self)
 {
     VALUE str, with_mnemonic;
     rb_scan_args(argc, argv, "02", &str, &with_mnemonic);
@@ -87,8 +76,7 @@ label_set_markup(argc, argv, self)
 }
 
 static VALUE
-label_get_layout_offsets(self)
-    VALUE self;
+label_get_layout_offsets(VALUE self)
 { 
     gint x, y;
     gtk_label_get_layout_offsets(_SELF(self), &x, &y);
@@ -96,30 +84,26 @@ label_get_layout_offsets(self)
 }
 
 static VALUE
-label_get_text(self)
-    VALUE self;
+label_get_text(VALUE self)
 {
     return CSTR2RVAL(gtk_label_get_text(_SELF(self)));
 }
 
 static VALUE
-label_select_region(self, start_offset, end_offset)
-    VALUE self, start_offset, end_offset;
+label_select_region(VALUE self, VALUE start_offset, VALUE end_offset)
 {
     gtk_label_select_region(_SELF(self), NUM2INT(start_offset), NUM2INT(end_offset));
     return self;
 }
 
 static VALUE
-label_get_layout(self)
-    VALUE self;
+label_get_layout(VALUE self)
 {
     return GOBJ2RVAL(gtk_label_get_layout(_SELF(self)));
 }
 
 static VALUE
-label_get_selection_bounds(self)
-    VALUE self;
+label_get_selection_bounds(VALUE self)
 {
     gint start, end;
     gboolean ret = gtk_label_get_selection_bounds(_SELF(self), &start, &end);
