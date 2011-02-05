@@ -19,8 +19,7 @@ static ID id_items_internal;
 
 /*****************************************/
 static GCompletion*
-completion_copy(comp)
-    GCompletion* comp;
+completion_copy(GCompletion *comp)
 {
   GCompletion* new_comp;
   g_return_val_if_fail (comp != NULL, NULL);
@@ -66,8 +65,7 @@ comp_func(compdata)
 }
 
 static VALUE
-comp_initialize(self)
-    VALUE self;
+comp_initialize(VALUE self)
 {
     VALUE block = Qnil;
 
@@ -85,8 +83,7 @@ comp_initialize(self)
 }
 
 static VALUE
-comp_add_items(self, items)
-    VALUE self, items;
+comp_add_items(VALUE self, VALUE items)
 {
     gint i, len;
     GList* list = (GList*)NULL;
@@ -106,8 +103,7 @@ comp_add_items(self, items)
 }
 
 static VALUE
-comp_remove_items(self, items)
-    VALUE self, items;
+comp_remove_items(VALUE self, VALUE items)
 {
     gint i, len;
     GList* list = (GList*)NULL;
@@ -127,8 +123,7 @@ comp_remove_items(self, items)
 }
 
 static VALUE
-comp_clear_items(self)
-    VALUE self;
+comp_clear_items(VALUE self)
 {
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
     rb_funcall(items_internal, id_clear, 0);
@@ -137,15 +132,13 @@ comp_clear_items(self)
 }
 
 static VALUE
-comp_items(self)
-    VALUE self;
+comp_items(VALUE self)
 {
     return rb_ivar_get(self, id_items_internal);
 }
 
 static VALUE
-comp_complete(self, prefix)
-    VALUE self, prefix;
+comp_complete(VALUE self, VALUE prefix)
 {
     gchar* new_prefix;
     VALUE ary = rb_ary_new();
