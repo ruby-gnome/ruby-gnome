@@ -1,3 +1,7 @@
+2011-02-05  Masaaki Aoyagi
+
+	* ext/gtkmozembed/*.c: change to ANSI C style.
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtkmozembed/extconf.rb: add missing dependency.
