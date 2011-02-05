@@ -14,16 +14,14 @@
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 
 static VALUE
-txt_tt_initialize(self)
-    VALUE self;
+txt_tt_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_text_tag_table_new());
     return Qnil;
 }
 
 static VALUE
-txt_tt_add(self, tag)
-    VALUE self, tag;
+txt_tt_add(VALUE self, VALUE tag)
 {
     G_CHILD_ADD(self, tag);
     gtk_text_tag_table_add(_SELF(self), RVAL2TAG(tag));
@@ -31,8 +29,7 @@ txt_tt_add(self, tag)
 }
 
 static VALUE
-txt_tt_remove(self, tag)
-    VALUE self, tag;
+txt_tt_remove(VALUE self, VALUE tag)
 {
     G_CHILD_REMOVE(self, tag);
     gtk_text_tag_table_remove(_SELF(self), RVAL2TAG(tag));
@@ -40,8 +37,7 @@ txt_tt_remove(self, tag)
 }
 
 static VALUE
-txt_tt_lookup(self, name)
-    VALUE self, name;
+txt_tt_lookup(VALUE self, VALUE name)
 {
     VALUE ret = Qnil;
     GtkTextTag* tag = gtk_text_tag_table_lookup(_SELF(self), RVAL2CSTR(name));
@@ -53,16 +49,13 @@ txt_tt_lookup(self, name)
 }
 
 static gboolean
-txt_tt_foreach_func(tag, func)
-    GtkTextTag *tag;
-    gpointer func;
+txt_tt_foreach_func(GtkTextTag *tag, gpointer func)
 {
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 1, GOBJ2RVAL(tag)));
 }
 
 static VALUE
-txt_tt_foreach(self)
-    VALUE self;
+txt_tt_foreach(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     gtk_text_tag_table_foreach(_SELF(self), 
@@ -72,8 +65,7 @@ txt_tt_foreach(self)
 }
 
 static VALUE
-txt_tt_get_size(self)
-    VALUE self;
+txt_tt_get_size(VALUE self)
 {
     return INT2NUM(gtk_text_tag_table_get_size(_SELF(self)));
 }
