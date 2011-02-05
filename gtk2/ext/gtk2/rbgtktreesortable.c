@@ -15,16 +15,14 @@
 #define _SELF(s)	(GTK_TREE_SORTABLE(RVAL2GOBJ(s)))
 
 static VALUE
-treesortable_sort_column_changed(self)
-    VALUE self;
+treesortable_sort_column_changed(VALUE self)
 {
     gtk_tree_sortable_sort_column_changed(_SELF(self));
     return self;
 }
 
 static VALUE
-treesortable_get_sort_column_id(self)
-    VALUE self;
+treesortable_get_sort_column_id(VALUE self)
 {
     gint sort_column_id;
     GtkSortType order;
@@ -43,10 +41,7 @@ treesortable_get_sort_column_id(self)
 }
 
 static VALUE
-treesortable_set_sort_column_id(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+treesortable_set_sort_column_id(int argc, VALUE *argv, VALUE self)
 {
     gint sort_column_id;
     GtkSortType order;
@@ -64,10 +59,7 @@ treesortable_set_sort_column_id(argc, argv, self)
 }
 
 static gint
-sort_func(model, a, b, func)
-    GtkTreeModel *model;
-    GtkTreeIter *a, *b;
-    gpointer func;
+sort_func(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer func)
 {
     a->user_data3 = model;
     b->user_data3 = model;
@@ -76,8 +68,7 @@ sort_func(model, a, b, func)
 }
 
 static VALUE
-treesortable_set_sort_func(self, sort_column_id)
-    VALUE self, sort_column_id;
+treesortable_set_sort_func(VALUE self, VALUE sort_column_id)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -88,8 +79,7 @@ treesortable_set_sort_func(self, sort_column_id)
 }
 
 static VALUE
-treesortable_set_default_sort_func(self)
-    VALUE self;
+treesortable_set_default_sort_func(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -100,8 +90,7 @@ treesortable_set_default_sort_func(self)
 }
 
 static VALUE
-treesortable_has_default_sort_func(self)
-    VALUE self;
+treesortable_has_default_sort_func(VALUE self)
 {
     return RVAL2CBOOL(gtk_tree_sortable_has_default_sort_func(_SELF(self)));
 }
