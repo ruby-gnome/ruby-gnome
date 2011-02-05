@@ -12,16 +12,14 @@
 #include "global.h"
 
 static VALUE
-rbgwingrp_initialize(self)
-	VALUE self;
+rbgwingrp_initialize(VALUE self)
 {
 	G_INITIALIZE(self, gtk_window_group_new());
 	return Qnil;
 }
 
 static VALUE
-rbgwingrp_add_window(self, window)
-	VALUE self, window;
+rbgwingrp_add_window(VALUE self, VALUE window)
 {
 	gtk_window_group_add_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
                                     GTK_WINDOW(RVAL2GOBJ(window)));
@@ -29,8 +27,7 @@ rbgwingrp_add_window(self, window)
 }
 
 static VALUE
-rbgwingrp_remove_window(self, window)
-	VALUE self, window;
+rbgwingrp_remove_window(VALUE self, VALUE window)
 {
 	gtk_window_group_remove_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
                                        GTK_WINDOW(RVAL2GOBJ(window)));
