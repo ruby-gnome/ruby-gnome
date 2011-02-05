@@ -13,8 +13,7 @@
 #define _SELF(s) ((GtkIconSource*)RVAL2BOXED(s, GTK_TYPE_ICON_SOURCE))
 
 static VALUE
-icon_source_initialize(self)
-    VALUE self;
+icon_source_initialize(VALUE self)
 {
     GtkIconSource *icon_source;
 
@@ -24,30 +23,26 @@ icon_source_initialize(self)
 }
 
 static VALUE
-icon_source_get_direction(self)
-    VALUE self;
+icon_source_get_direction(VALUE self)
 {
     return GENUM2RVAL(gtk_icon_source_get_direction(_SELF(self)), 
                       GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
-icon_source_get_direction_wildcarded(self)
-    VALUE self;
+icon_source_get_direction_wildcarded(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_source_get_direction_wildcarded(_SELF(self)));
 }
 
 static VALUE
-icon_source_get_filename(self)
-    VALUE self;
+icon_source_get_filename(VALUE self)
 {
     return CSTR2RVAL(gtk_icon_source_get_filename(_SELF(self)));
 }
 
 static VALUE
-icon_source_get_pixbuf(self)
-    VALUE self;
+icon_source_get_pixbuf(VALUE self)
 {
     GdkPixbuf *pixbuf;
     pixbuf = gtk_icon_source_get_pixbuf(_SELF(self));
@@ -55,36 +50,31 @@ icon_source_get_pixbuf(self)
 }
 
 static VALUE
-icon_source_get_size(self)
-    VALUE self;
+icon_source_get_size(VALUE self)
 {
     return GENUM2RVAL(gtk_icon_source_get_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE
-icon_source_get_size_wildcarded(self)
-    VALUE self;
+icon_source_get_size_wildcarded(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_source_get_size_wildcarded(_SELF(self)));
 }
 
 static VALUE
-icon_source_get_state(self)
-    VALUE self;
+icon_source_get_state(VALUE self)
 {
     return GENUM2RVAL(gtk_icon_source_get_state(_SELF(self)), GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE
-icon_source_get_state_wildcarded(self)
-    VALUE self;
+icon_source_get_state_wildcarded(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_source_get_state_wildcarded(_SELF(self)));
 }
 
 static VALUE
-icon_source_set_direction(self, direction)
-    VALUE self, direction;
+icon_source_set_direction(VALUE self, VALUE direction)
 {
     gtk_icon_source_set_direction(_SELF(self),
                                   RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION));
@@ -92,56 +82,49 @@ icon_source_set_direction(self, direction)
 }
 
 static VALUE
-icon_source_set_direction_wildcarded(self, setting)
-    VALUE self, setting;
+icon_source_set_direction_wildcarded(VALUE self, VALUE setting)
 {
     gtk_icon_source_set_direction_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-icon_source_set_filename(self, filename)
-    VALUE self, filename;
+icon_source_set_filename(VALUE self, VALUE filename)
 {
     gtk_icon_source_set_filename(_SELF(self), RVAL2CSTR(filename));
     return self;
 }
 
 static VALUE
-icon_source_set_pixbuf(self, pixbuf)
-    VALUE self, pixbuf;
+icon_source_set_pixbuf(VALUE self, VALUE pixbuf)
 {
     gtk_icon_source_set_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
 }
 
 static VALUE
-icon_source_set_size(self, size)
-    VALUE self, size;
+icon_source_set_size(VALUE self, VALUE size)
 {
     gtk_icon_source_set_size(_SELF(self), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
 static VALUE
-icon_source_set_size_wildcarded(self, setting)
-    VALUE self, setting;
+icon_source_set_size_wildcarded(VALUE self, VALUE setting)
 {
     gtk_icon_source_set_size_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-icon_source_set_state(self, state)
-    VALUE self, state;
+icon_source_set_state(VALUE self, VALUE state)
 {
     gtk_icon_source_set_state(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE));
     return self;
 }
 
 static VALUE
-icon_source_set_state_wildcarded(self, setting)
-    VALUE self, setting;
+icon_source_set_state_wildcarded(VALUE self, VALUE setting)
 {
     gtk_icon_source_set_state_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
