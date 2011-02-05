@@ -17,10 +17,7 @@
 #define _SELF(self) (GTK_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-button_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+button_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget = NULL;
@@ -47,40 +44,35 @@ button_initialize(argc, argv, self)
 }
 
 static VALUE
-button_pressed(self)
-    VALUE self;
+button_pressed(VALUE self)
 {
     gtk_button_pressed(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-button_released(self)
-    VALUE self;
+button_released(VALUE self)
 {
     gtk_button_released(_SELF(self));
     return self;
 }
 
 static VALUE
-button_clicked(self)
-    VALUE self;
+button_clicked(VALUE self)
 {
     gtk_button_clicked(_SELF(self));
     return self;
 }
 
 static VALUE
-button_enter(self)
-    VALUE self;
+button_enter(VALUE self)
 {
     gtk_button_enter(_SELF(self));
     return self;
 }
 
 static VALUE
-button_leave(self)
-    VALUE self;
+button_leave(VALUE self)
 {
     gtk_button_leave(_SELF(self));
     return self;
@@ -88,16 +80,14 @@ button_leave(self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-button_set_alignment(self, xalign, yalign)
-    VALUE self, xalign, yalign;
+button_set_alignment(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_button_set_alignment(_SELF(self), NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
 
 static VALUE
-button_get_alignment(self)
-    VALUE self;
+button_get_alignment(VALUE self)
 {
     gfloat xalign, yalign;
     gtk_button_get_alignment(_SELF(self), &xalign, &yalign);
