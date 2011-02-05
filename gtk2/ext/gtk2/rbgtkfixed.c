@@ -17,16 +17,14 @@
 #define _SELF(self) (GTK_FIXED(RVAL2GOBJ(self)))
 
 static VALUE
-fixed_initialize(self)
-    VALUE self;
+fixed_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_fixed_new());
     return Qnil;
 }
 
 static VALUE
-fixed_put(self, win, x, y)
-    VALUE self, win, x, y;
+fixed_put(VALUE self, VALUE win, VALUE x, VALUE y)
 {
     gtk_fixed_put(_SELF(self), GTK_WIDGET(RVAL2GOBJ(win)), 
                   NUM2INT(x), NUM2INT(y));
@@ -34,8 +32,7 @@ fixed_put(self, win, x, y)
 }
 
 static VALUE
-fixed_move(self, win, x, y)
-    VALUE self, win, x, y;
+fixed_move(VALUE self, VALUE win, VALUE x, VALUE y)
 {
     gtk_fixed_move(_SELF(self), GTK_WIDGET(RVAL2GOBJ(win)), 
                    NUM2INT(x), NUM2INT(y));
@@ -43,15 +40,13 @@ fixed_move(self, win, x, y)
 }
 
 static VALUE
-fixed_get_has_window(self)
-    VALUE self;
+fixed_get_has_window(VALUE self)
 {
     return CBOOL2RVAL(gtk_fixed_get_has_window(_SELF(self)));
 }
 
 static VALUE
-fixed_set_has_window(self, has_window)
-    VALUE self, has_window;
+fixed_set_has_window(VALUE self, VALUE has_window)
 {
     gtk_fixed_set_has_window(_SELF(self), RVAL2CBOOL(has_window));
     return self;
