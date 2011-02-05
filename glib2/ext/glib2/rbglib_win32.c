@@ -16,38 +16,33 @@
 
 #ifdef G_OS_WIN32
 static VALUE
-rbglib_m_win32_error_message(self, error)
-    VALUE self, error;
+rbglib_m_win32_error_message(VALUE self, VALUE error)
 {
     return CSTR2RVAL_FREE(g_win32_error_message(NUM2INT(error)));
 }
 
 static VALUE
-rbglib_m_win32_locale(self)
-    VALUE self;
+rbglib_m_win32_locale(VALUE self)
 {
     return CSTR2RVAL_FREE(g_win32_getlocale());
 }
 
 static VALUE
-rbglib_m_win32_locale_deprecated(self)
-  VALUE self;
+rbglib_m_win32_locale_deprecated(VALUE self)
 {
 	rb_warn("GLib.win32_locale() is deprecated. Use GLib::Win32.locale instead");
 	return rbglib_m_win32_locale(self);
 }
 
 static VALUE
-rbglib_m_win32_get_package_installation_directory(self, package, dll_name)
-  VALUE self, package, dll_name;
+rbglib_m_win32_get_package_installation_directory(VALUE self, VALUE package, VALUE dll_name)
 {
 	return CSTR2RVAL_FREE(g_win32_get_package_installation_directory(RVAL2CSTR(package), 
 	                                                            RVAL2CSTR(dll_name)));
 }
 
 static VALUE
-rbglib_m_get_package_installation_subdirectory(self, package, dll_name, subdir)
-  VALUE self, package, dll_name, subdir;
+rbglib_m_get_package_installation_subdirectory(VALUE self, VALUE package, VALUE dll_name, VALUE subdir)
 {
 	return CSTR2RVAL_FREE(g_win32_get_package_installation_subdirectory(RVAL2CSTR(package), 
 	                                                                RVAL2CSTR(dll_name),
@@ -56,8 +51,7 @@ rbglib_m_get_package_installation_subdirectory(self, package, dll_name, subdir)
 
 #if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
-rbglib_m_get_windows_version(self)
-  VALUE self;
+rbglib_m_get_windows_version(VALUE self)
 {
 	return UINT2NUM(g_win32_get_windows_version());
 }
@@ -65,15 +59,13 @@ rbglib_m_get_windows_version(self)
 
 #if GLIB_CHECK_VERSION(2,8,0)
 static VALUE
-rbglib_m_win32_locale_filename_from_utf8(self, utf8_filename)
-    VALUE self, utf8_filename;
+rbglib_m_win32_locale_filename_from_utf8(VALUE self, VALUE utf8_filename)
 {
     return CSTR2RVAL_FREE(g_win32_locale_filename_from_utf8(RVAL2CSTR(utf8_filename)));
 }
 
 static VALUE
-rbglib_m_win32_locale_filename_from_utf8_deprecated(self)
-  VALUE self;
+rbglib_m_win32_locale_filename_from_utf8_deprecated(VALUE self)
 {
 	rb_warn("GLib.win32_locale_filename_from_utf8() is deprecated. Use GLib::Win32.locale_filename_from_utf8 instead");
 	return rbglib_m_win32_locale_filename_from_utf8(self);
