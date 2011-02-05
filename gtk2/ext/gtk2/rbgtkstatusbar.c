@@ -17,16 +17,14 @@
 #define _SELF(self) (GTK_STATUSBAR(RVAL2GOBJ(self)))
 
 static VALUE
-statusbar_initialize(self)
-     VALUE self;
+statusbar_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_statusbar_new());
     return Qnil;
 }
 
 static VALUE
-statusbar_get_context_id(self, text)
-    VALUE self, text;
+statusbar_get_context_id(VALUE self, VALUE text)
 {
 
     return INT2FIX(gtk_statusbar_get_context_id(_SELF(self),
@@ -34,16 +32,14 @@ statusbar_get_context_id(self, text)
 }
 
 static VALUE
-statusbar_push(self, id, text)
-    VALUE self, id, text;
+statusbar_push(VALUE self, VALUE id, VALUE text)
 {
     return INT2FIX(gtk_statusbar_push(_SELF(self), 
                                       NUM2INT(id), RVAL2CSTR(text)));
 }
     
 static VALUE
-statusbar_pop(self, id)
-    VALUE self, id;
+statusbar_pop(VALUE self, VALUE id)
 {
     gtk_statusbar_pop(_SELF(self), NUM2INT(id));
     return self;
@@ -51,24 +47,21 @@ statusbar_pop(self, id)
 }
 
 static VALUE
-statusbar_remove(self, cid, mid)
-     VALUE self, cid, mid;
+statusbar_remove(VALUE self, VALUE cid, VALUE mid)
 {
     gtk_statusbar_remove(_SELF(self), NUM2INT(cid), NUM2INT(mid)); 
     return self;
 }
 
 static VALUE
-statusbar_set_has_resize_grip(self, setting)
-     VALUE self, setting;
+statusbar_set_has_resize_grip(VALUE self, VALUE setting)
 {
     gtk_statusbar_set_has_resize_grip(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-statusbar_get_has_resize_grip(self)
-     VALUE self;
+statusbar_get_has_resize_grip(VALUE self)
 {
     return CBOOL2RVAL(gtk_statusbar_get_has_resize_grip(_SELF(self)));
 }
