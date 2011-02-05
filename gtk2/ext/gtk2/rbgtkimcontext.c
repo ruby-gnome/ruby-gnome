@@ -13,16 +13,14 @@
 #define _SELF(self) (GTK_IM_CONTEXT(RVAL2GOBJ(self)))
 
 static VALUE 
-imcontext_set_client_window(self, gdkwindow)
-    VALUE self, gdkwindow;
+imcontext_set_client_window(VALUE self, VALUE gdkwindow)
 {
     gtk_im_context_set_client_window(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)));
     return self;
 }
 
 static VALUE
-imcontext_get_preedit_string(self)
-    VALUE self;
+imcontext_get_preedit_string(VALUE self)
 {
     gchar* str;
     PangoAttrList* attrs;
@@ -34,39 +32,34 @@ imcontext_get_preedit_string(self)
 }
 
 static VALUE
-imcontext_filter_keypress(self, event)
-    VALUE self, event;
+imcontext_filter_keypress(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_im_context_filter_keypress(_SELF(self), (GdkEventKey*)RVAL2GEV(event)));
 }
 
 static VALUE
-imcontext_focus_in(self)
-    VALUE self;
+imcontext_focus_in(VALUE self)
 {
     gtk_im_context_focus_in(_SELF(self));
     return self;
 }
 
 static VALUE
-imcontext_focus_out(self)
-    VALUE self;
+imcontext_focus_out(VALUE self)
 {
     gtk_im_context_focus_out(_SELF(self));
     return self;
 }
 
 static VALUE
-imcontext_reset(self)
-    VALUE self;
+imcontext_reset(VALUE self)
 {
     gtk_im_context_reset(_SELF(self));
     return self;
 }
 
 static VALUE
-imcontext_set_cursor_location(self, area)
-    VALUE self, area;
+imcontext_set_cursor_location(VALUE self, VALUE area)
 {
     gtk_im_context_set_cursor_location(
         _SELF(self), 
@@ -75,16 +68,14 @@ imcontext_set_cursor_location(self, area)
 }
 
 static VALUE
-imcontext_set_use_preedit(self, use_preedit)
-    VALUE self, use_preedit;
+imcontext_set_use_preedit(VALUE self, VALUE use_preedit)
 {
     gtk_im_context_set_use_preedit(_SELF(self), RVAL2CBOOL(use_preedit));
     return self;
 }
 
 static VALUE
-imcontext_set_surrounding(self, text, cursor_index)
-    VALUE self, text, cursor_index;
+imcontext_set_surrounding(VALUE self, VALUE text, VALUE cursor_index)
 {
     StringValue(text);
     gtk_im_context_set_surrounding(_SELF(self),
@@ -94,8 +85,7 @@ imcontext_set_surrounding(self, text, cursor_index)
 }
 
 static VALUE
-imcontext_get_surrounding(self)
-    VALUE self;
+imcontext_get_surrounding(VALUE self)
 {
     gchar* text;
     gint cursor_index;
@@ -105,8 +95,7 @@ imcontext_get_surrounding(self)
 }
 
 static VALUE
-imcontext_delete_surrounding(self, offset, n_chars)
-    VALUE self, offset, n_chars;
+imcontext_delete_surrounding(VALUE self, VALUE offset, VALUE n_chars)
 {
     return CBOOL2RVAL(gtk_im_context_delete_surrounding(_SELF(self), NUM2INT(offset),
                                                         NUM2INT(n_chars)));
