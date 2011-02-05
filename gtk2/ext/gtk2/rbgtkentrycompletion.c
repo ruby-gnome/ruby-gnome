@@ -15,26 +15,20 @@
 #define _SELF(self) (GTK_ENTRY_COMPLETION(RVAL2GOBJ(self)))
 
 static VALUE
-entryc_initialize(self)
-    VALUE self;
+entryc_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_entry_completion_new());
     return Qnil;
 }
 
 static VALUE
-entryc_get_entry(self)
-    VALUE self;
+entryc_get_entry(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_completion_get_entry(_SELF(self)));
 }
 
 static gboolean
-entryc_match_func(completion, key, iter, func)
-    GtkEntryCompletion* completion;
-    const gchar* key;
-    GtkTreeIter* iter;
-    gpointer func;
+entryc_match_func(GtkEntryCompletion *completion, const gchar *key, GtkTreeIter *iter, gpointer func)
 {
     iter->user_data3 = gtk_entry_completion_get_model(completion);
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(completion),
@@ -42,8 +36,7 @@ entryc_match_func(completion, key, iter, func)
 }
 
 static VALUE
-entryc_set_match_func(self)
-    VALUE self;
+entryc_set_match_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -54,8 +47,7 @@ entryc_set_match_func(self)
 }
 
 static VALUE
-entryc_complete(self)
-    VALUE self;
+entryc_complete(VALUE self)
 {
     gtk_entry_completion_complete(_SELF(self));
     return self;
@@ -63,8 +55,7 @@ entryc_complete(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-entryc_insert_prefix(self)
-    VALUE self;
+entryc_insert_prefix(VALUE self)
 {
     gtk_entry_completion_insert_prefix(_SELF(self));
     return self;
@@ -72,32 +63,28 @@ entryc_insert_prefix(self)
 #endif
 
 static VALUE
-entryc_insert_action_text(self, index, text)
-    VALUE self, index, text;
+entryc_insert_action_text(VALUE self, VALUE index, VALUE text)
 {
     gtk_entry_completion_insert_action_text(_SELF(self), NUM2INT(index), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-entryc_insert_action_markup(self, index, markup)
-    VALUE self, index, markup;
+entryc_insert_action_markup(VALUE self, VALUE index, VALUE markup)
 {
     gtk_entry_completion_insert_action_markup(_SELF(self), NUM2INT(index), RVAL2CSTR(markup));
     return self;
 }
 
 static VALUE
-entryc_delete_action(self, index)
-    VALUE self, index;
+entryc_delete_action(VALUE self, VALUE index)
 {
     gtk_entry_completion_delete_action(_SELF(self), NUM2INT(index));
     return self;
 }
 
 static VALUE
-entryc_set_text_column(self, column)
-    VALUE self, column;
+entryc_set_text_column(VALUE self, VALUE column)
 {
     gtk_entry_completion_set_text_column(_SELF(self), NUM2INT(column));
     return self;
