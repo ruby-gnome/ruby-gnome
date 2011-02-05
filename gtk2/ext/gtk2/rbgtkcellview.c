@@ -19,10 +19,7 @@ static ID id_model;
 static ID id_text;
 
 static VALUE
-cview_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cview_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE text;
     VALUE with_markup = Qnil;
@@ -55,8 +52,7 @@ cview_initialize(argc, argv, self)
 }
 
 static VALUE
-cview_set_model(self, model)
-    VALUE self, model;
+cview_set_model(VALUE self, VALUE model)
 {
     G_CHILD_SET(self, id_model, model);
     gtk_cell_view_set_model(_SELF(self), 
@@ -65,8 +61,7 @@ cview_set_model(self, model)
 }
 
 static VALUE
-cview_set_displayed_row(self, path)
-    VALUE self, path;
+cview_set_displayed_row(VALUE self, VALUE path)
 {
     gtk_cell_view_set_displayed_row(_SELF(self),  
                                     NIL_P(path) ? (GtkTreePath*)NULL :
@@ -75,15 +70,13 @@ cview_set_displayed_row(self, path)
 }
 
 static VALUE
-cview_get_displayed_row(self)
-    VALUE self;
+cview_get_displayed_row(VALUE self)
 {
     return GTKTREEPATH2RVAL(gtk_cell_view_get_displayed_row(_SELF(self)));
 }
 
 static VALUE
-cview_get_size_of_row(self, path)
-    VALUE self, path;
+cview_get_size_of_row(VALUE self, VALUE path)
 {
     GtkRequisition req;
     gboolean ret = gtk_cell_view_get_size_of_row(_SELF(self),  
@@ -102,8 +95,7 @@ void        gtk_cell_view_set_background_color
 */
 
 static VALUE
-cview_get_cell_renderers(self)
-    VALUE self;
+cview_get_cell_renderers(VALUE self)
 {
     return GLIST2ARYF(gtk_cell_view_get_cell_renderers(_SELF(self)));
 }
