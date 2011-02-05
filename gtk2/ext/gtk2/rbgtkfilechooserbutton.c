@@ -14,10 +14,7 @@
 #if GTK_CHECK_VERSION(2,6,0)
 
 static VALUE
-filechooserbutton_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+filechooserbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, action, backend;
     GtkWidget* widget;
