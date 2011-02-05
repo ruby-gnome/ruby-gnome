@@ -20,40 +20,35 @@
 #define _SELF(self) (RVAL2GOBJ(self))
 
 static VALUE
-tooltip_set_markup(self, markup)
-    VALUE self, markup;
+tooltip_set_markup(VALUE self, VALUE markup)
 {
     gtk_tooltip_set_markup(_SELF(self), RVAL2CSTR(markup));
     return self;
 }
 
 static VALUE
-tooltip_set_text(self, text)
-    VALUE self, text;
+tooltip_set_text(VALUE self, VALUE text)
 {
     gtk_tooltip_set_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-tooltip_set_icon(self, icon)
-    VALUE self, icon;
+tooltip_set_icon(VALUE self, VALUE icon)
 {
     gtk_tooltip_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon)));
     return self;
 }
 
 static VALUE
-tooltip_set_icon_from_stock(self, stock_id, size)
-    VALUE self, stock_id, size;
+tooltip_set_icon_from_stock(VALUE self, VALUE stock_id, VALUE size)
 {
     gtk_tooltip_set_icon_from_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
 static VALUE
-tooltip_set_custom(self, custom_widget)
-    VALUE self, custom_widget;
+tooltip_set_custom(VALUE self, VALUE custom_widget)
 {
     gtk_tooltip_set_custom(_SELF(self), GTK_WIDGET(RVAL2GOBJ(custom_widget)));
     return self;
