@@ -51,24 +51,21 @@ gtk_bindingset_get_type(void)
 #define _SELF(s) (GtkBindingSet*)(RVAL2BOXED(s, GTK_TYPE_BINDING_SET))
 
 static VALUE
-binding_initialize(self, set_name)
-    VALUE self, set_name;
+binding_initialize(VALUE self, VALUE set_name)
 {
     G_INITIALIZE(self, gtk_binding_set_new(RVAL2CSTR(set_name)));
     return Qnil;
 }
 
 static VALUE
-binding_s_find(self, set_name)
-    VALUE self, set_name;
+binding_s_find(VALUE self, VALUE set_name)
 {
     return BOXED2RVAL(gtk_binding_set_find(RVAL2CSTR(set_name)), 
                       GTK_TYPE_BINDING_SET);
 }
 
 static VALUE
-binding_activate(self, keyval, modifiers, object)
-    VALUE self, keyval, modifiers, object;
+binding_activate(VALUE self, VALUE keyval, VALUE modifiers, VALUE object)
 {
     return CBOOL2RVAL(gtk_binding_set_activate(_SELF(self), NUM2UINT(keyval),
                                                RVAL2MOD(modifiers),
@@ -76,8 +73,7 @@ binding_activate(self, keyval, modifiers, object)
 }
 
 static VALUE
-binding_entry_clear(self, keyval, modifiers)
-    VALUE self, keyval, modifiers;
+binding_entry_clear(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_clear(_SELF(self), NUM2UINT(keyval),
                             RVAL2MOD(modifiers));
@@ -143,8 +139,7 @@ binding_entry_add_signal(argc, argv, self)
 }
 
 static VALUE
-binding_add_path(self, path_type, path_pattern, priority)
-    VALUE self, path_type, path_pattern, priority;
+binding_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority)
 {
     gtk_binding_set_add_path(_SELF(self), RVAL2GENUM(path_type, GTK_TYPE_PATH_TYPE),
                              RVAL2CSTR(path_pattern),
@@ -153,8 +148,7 @@ binding_add_path(self, path_type, path_pattern, priority)
 }
 
 static VALUE
-binding_entry_remove(self, keyval, modifiers)
-    VALUE self, keyval, modifiers;
+binding_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
     return self;
@@ -162,8 +156,7 @@ binding_entry_remove(self, keyval, modifiers)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-binding_entry_skip(self, keyval, modifiers)
-    VALUE self, keyval, modifiers;
+binding_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_skip(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
     return self;
