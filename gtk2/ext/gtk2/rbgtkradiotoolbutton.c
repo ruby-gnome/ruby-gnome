@@ -18,10 +18,7 @@
 static VALUE gRToolButton;
 
 static VALUE
-rbtn_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_or_stock_id, stock_id;
     GtkToolItem *widget;
@@ -57,16 +54,14 @@ rbtn_initialize(argc, argv, self)
 }
 
 static VALUE
-rbtn_get_group(self)
-    VALUE self;
+rbtn_get_group(VALUE self)
 {
     /* Owned by GTK+ */
     return GSLIST2ARY(gtk_radio_tool_button_get_group(_SELF(self)));
 }
 
 static VALUE
-rbtn_set_group(self, group)
-    VALUE self, group;
+rbtn_set_group(VALUE self, VALUE group)
 {
     GSList* list = NULL;
     if (TYPE(group) == T_ARRAY){
