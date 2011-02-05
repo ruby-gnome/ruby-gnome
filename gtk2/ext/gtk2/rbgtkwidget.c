@@ -19,25 +19,20 @@
 static VALUE style_prop_func_table;
 
 static VALUE
-widget_get_flags(self)
-    VALUE self;
+widget_get_flags(VALUE self)
 {
     return GFLAGS2RVAL(GTK_WIDGET_FLAGS(_SELF(self)), GTK_TYPE_WIDGET_FLAGS);
 }
 
 static VALUE
-widget_set_flags(self, flag)
-    VALUE self;
-    VALUE flag;
+widget_set_flags(VALUE self, VALUE flag)
 {
     GTK_WIDGET_SET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
     return self;
 }
 
 static VALUE
-widget_unset_flags(self, flag)
-    VALUE self;
-    VALUE flag;
+widget_unset_flags(VALUE self, VALUE flag)
 {
     GTK_WIDGET_UNSET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
     return self;
@@ -45,96 +40,84 @@ widget_unset_flags(self, flag)
 
 
 static VALUE
-widget_unparent(self)
-    VALUE self;
+widget_unparent(VALUE self)
 {
     gtk_widget_unparent(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_show(self)
-    VALUE self;
+widget_show(VALUE self)
 {
     gtk_widget_show(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_show_now(self)
-    VALUE self;
+widget_show_now(VALUE self)
 {
     gtk_widget_show_now(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_hide(self)
-    VALUE self;
+widget_hide(VALUE self)
 {
     gtk_widget_hide(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_show_all(self)
-    VALUE self;
+widget_show_all(VALUE self)
 {
     gtk_widget_show_all(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_hide_all(self)
-    VALUE self;
+widget_hide_all(VALUE self)
 {
     gtk_widget_hide_all(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_map(self)
-    VALUE self;
+widget_map(VALUE self)
 {
     gtk_widget_map(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_unmap(self)
-    VALUE self;
+widget_unmap(VALUE self)
 {
     gtk_widget_unmap(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_realize(self)
-    VALUE self;
+widget_realize(VALUE self)
 {
     gtk_widget_realize(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_unrealize(self)
-    VALUE self;
+widget_unrealize(VALUE self)
 {
     gtk_widget_unrealize(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_queue_draw(self)
-    VALUE self;
+widget_queue_draw(VALUE self)
 {
     gtk_widget_queue_draw(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_queue_resize(self)
-    VALUE self;
+widget_queue_resize(VALUE self)
 {
     gtk_widget_queue_resize(_SELF(self));
     return self;
@@ -142,8 +125,7 @@ widget_queue_resize(self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-widget_queue_resize_no_redraw(self)
-    VALUE self;
+widget_queue_resize_no_redraw(VALUE self)
 {
     gtk_widget_queue_resize_no_redraw(_SELF(self));
     return self;
@@ -153,8 +135,7 @@ widget_queue_resize_no_redraw(self)
 /* Note this method is not
    gtk_widget_get_size_request */
 static VALUE
-widget_size_request(self)
-    VALUE self;
+widget_size_request(VALUE self)
 {
     GtkRequisition req;
     gtk_widget_size_request(_SELF(self), &req);
@@ -162,8 +143,7 @@ widget_size_request(self)
 }
 
 static VALUE
-widget_get_child_requisition(self)
-    VALUE self;
+widget_get_child_requisition(VALUE self)
 {
     GtkRequisition req;
 
@@ -172,16 +152,14 @@ widget_get_child_requisition(self)
 }
 
 static VALUE
-widget_size_allocate(self, alloc)
-    VALUE self, alloc;
+widget_size_allocate(VALUE self, VALUE alloc)
 {
     gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
     return self;
 }
 
 static VALUE
-widget_add_accelerator(self, sig, accel, key, mod, flag)
-	VALUE self, sig, accel, key, mod, flag;
+widget_add_accelerator(VALUE self, VALUE sig, VALUE accel, VALUE key, VALUE mod, VALUE flag)
 {
     gtk_widget_add_accelerator(_SELF(self),
                                RVAL2CSTR(sig),
@@ -193,8 +171,7 @@ widget_add_accelerator(self, sig, accel, key, mod, flag)
 }
 
 static VALUE
-widget_remove_accelerator(self, accel, key, mod)
-    VALUE self, accel, key, mod;
+widget_remove_accelerator(VALUE self, VALUE accel, VALUE key, VALUE mod)
 {
     return CBOOL2RVAL(gtk_widget_remove_accelerator(_SELF(self),
                                                     GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
@@ -203,8 +180,7 @@ widget_remove_accelerator(self, accel, key, mod)
 }
 
 static VALUE
-widget_set_accel_path(self, accel_path, accel_group)
-    VALUE self, accel_path, accel_group;
+widget_set_accel_path(VALUE self, VALUE accel_path, VALUE accel_group)
 {
     gtk_widget_set_accel_path(_SELF(self), RVAL2CSTR(accel_path), 
                               GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)));
@@ -212,46 +188,40 @@ widget_set_accel_path(self, accel_path, accel_group)
 }
 
 static VALUE
-widget_list_accel_closures(self)
-    VALUE self;
+widget_list_accel_closures(VALUE self)
 {
     return GLIST2ARY2F(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
 }
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-widget_can_activate_accel(self, signal_id)
-    VALUE self, signal_id;
+widget_can_activate_accel(VALUE self, VALUE signal_id)
 {
     return CBOOL2RVAL(gtk_widget_can_activate_accel(_SELF(self), NUM2UINT(signal_id)));
 }
 #endif
 
 static VALUE
-widget_event(self, event)
-    VALUE self, event;
+widget_event(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_widget_event(_SELF(self), RVAL2GEV(event)));
 }
 
 static VALUE
-widget_activate(self)
-    VALUE self;
+widget_activate(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_activate(_SELF(self)));
 }
 
 static VALUE
-widget_reparent(self, parent)
-    VALUE self, parent;
+widget_reparent(VALUE self, VALUE parent)
 {
     gtk_widget_reparent(_SELF(self), _SELF(parent));
     return self;
 }
 
 static VALUE
-widget_intersect(self, area)
-    VALUE self, area;
+widget_intersect(VALUE self, VALUE area)
 {
     GdkRectangle intersection;
     gboolean ret = gtk_widget_intersect(_SELF(self),
@@ -261,39 +231,34 @@ widget_intersect(self, area)
 }
 
 static VALUE
-widget_is_focus(self)
-    VALUE self;
+widget_is_focus(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_is_focus(_SELF(self)));
 }
 
 static VALUE
-widget_grab_focus(self)
-    VALUE self;
+widget_grab_focus(VALUE self)
 {
     gtk_widget_grab_focus(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_grab_default(self)
-    VALUE self;
+widget_grab_default(VALUE self)
 {
     gtk_widget_grab_default(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_set_state(self, state)
-    VALUE self, state;
+widget_set_state(VALUE self, VALUE state)
 {
     gtk_widget_set_state(_SELF(self), RVAL2GTKSTATETYPE(state));
     return self;
 }
 
 static VALUE
-widget_set_parent_window(self, parent_window)
-    VALUE self, parent_window;
+widget_set_parent_window(VALUE self, VALUE parent_window)
 {
     gtk_widget_set_parent_window(_SELF(self), 
                                  GDK_WINDOW(RVAL2GOBJ(parent_window)));
@@ -301,59 +266,51 @@ widget_set_parent_window(self, parent_window)
 }
 
 static VALUE
-widget_get_parent_window(self)
-    VALUE self;
+widget_get_parent_window(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_parent_window(_SELF(self)));
 }
 
 static VALUE
-widget_add_events(self, events)
-    VALUE self, events;
+widget_add_events(VALUE self, VALUE events)
 {
     gtk_widget_add_events(_SELF(self), NUM2INT(events));
     return self;
 }
 
 static VALUE
-widget_get_toplevel(self)
-    VALUE self;
+widget_get_toplevel(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_toplevel(_SELF(self)));
 }
 
 static VALUE
-widget_get_ancestor(self, klass)
-    VALUE self, klass;
+widget_get_ancestor(VALUE self, VALUE klass)
 {
     return GOBJ2RVAL(gtk_widget_get_ancestor(_SELF(self), CLASS2GTYPE(klass)));
 }
 
 static VALUE
-widget_get_colormap(self)
-    VALUE self;
+widget_get_colormap(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_colormap(_SELF(self)));
 }
 
 static VALUE
-widget_set_colormap(self, colormap)
-    VALUE self, colormap;
+widget_set_colormap(VALUE self, VALUE colormap)
 {
     gtk_widget_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
 
 static VALUE
-widget_get_visual(self)
-    VALUE self;
+widget_get_visual(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_visual(_SELF(self)));
 }
 
 static VALUE
-widget_get_pointer(self)
-    VALUE self;
+widget_get_pointer(VALUE self)
 {
     int x, y;
 
@@ -362,15 +319,13 @@ widget_get_pointer(self)
 }
 
 static VALUE
-widget_is_ancestor(self, ancestor)
-    VALUE self, ancestor;
+widget_is_ancestor(VALUE self, VALUE ancestor)
 {
     return CBOOL2RVAL(gtk_widget_is_ancestor(_SELF(self), _SELF(ancestor)));
 }
 
 static VALUE
-widget_translate_coordinates(self, dest_widget, src_x, src_y)
-    VALUE self, dest_widget, src_x, src_y;
+widget_translate_coordinates(VALUE self, VALUE dest_widget, VALUE src_x, VALUE src_y)
 {
     gint dest_x, dest_y;
     gboolean ret;
@@ -385,106 +340,92 @@ widget_translate_coordinates(self, dest_widget, src_x, src_y)
 }
 
 static VALUE
-widget_hide_on_delete(self)
-	VALUE self;
+widget_hide_on_delete(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_hide_on_delete(_SELF(self)));
 }
 
 static VALUE
-widget_ensure_style(self)
-    VALUE self;
+widget_ensure_style(VALUE self)
 {
     gtk_widget_ensure_style(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_reset_rc_styles(self)
-    VALUE self;
+widget_reset_rc_styles(VALUE self)
 {
     gtk_widget_reset_rc_styles(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_s_push_colormap(self, cmap)
-    VALUE self, cmap;
+widget_s_push_colormap(VALUE self, VALUE cmap)
 {
     gtk_widget_push_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return cmap;
 }
 
 static VALUE
-widget_s_pop_colormap(self)
-    VALUE self;
+widget_s_pop_colormap(VALUE self)
 {
     gtk_widget_pop_colormap();
     return self;
 }
 
 static VALUE
-widget_s_set_default_colormap(self, cmap)
-    VALUE self, cmap;
+widget_s_set_default_colormap(VALUE self, VALUE cmap)
 {
     gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return cmap;
 }
 
 static VALUE
-widget_s_get_default_style(self)
-    VALUE self;
+widget_s_get_default_style(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_style());
 }
 
 static VALUE
-widget_s_get_default_colormap(self)
-    VALUE self;
+widget_s_get_default_colormap(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_colormap());
 }
 
 static VALUE
-widget_s_get_default_visual(self)
-    VALUE self;
+widget_s_get_default_visual(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_visual());
 }
 
 static VALUE
-widget_set_direction(self, dir)
-    VALUE self, dir;
+widget_set_direction(VALUE self, VALUE dir)
 {
     gtk_widget_set_direction(_SELF(self), RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
     return self;
 }
 
 static VALUE
-widget_get_direction(self)
-    VALUE self;
+widget_get_direction(VALUE self)
 {
     return GENUM2RVAL(gtk_widget_get_direction(_SELF(self)), GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
-widget_s_set_default_direction(self, dir)
-    VALUE self, dir;
+widget_s_set_default_direction(VALUE self, VALUE dir)
 {
     gtk_widget_set_default_direction(RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
     return self;
 }
 
 static VALUE
-widget_s_get_default_direction(self)
-    VALUE self;
+widget_s_get_default_direction(VALUE self)
 {
     return GENUM2RVAL(gtk_widget_get_default_direction(), GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
-widget_shape_combine_mask(self, shape_mask, offset_x, offset_y)
-    VALUE self, shape_mask, offset_x, offset_y;
+widget_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
     gtk_widget_shape_combine_mask(_SELF(self),
                                   GDK_BITMAP(RVAL2GOBJ(shape_mask)),
@@ -495,8 +436,7 @@ widget_shape_combine_mask(self, shape_mask, offset_x, offset_y)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-widget_input_shape_combine_mask(self, shape_mask, offset_x, offset_y)
-    VALUE self, shape_mask, offset_x, offset_y;
+widget_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
     gtk_widget_input_shape_combine_mask(_SELF(self),
                                         GDK_BITMAP(RVAL2GOBJ(shape_mask)),
@@ -507,8 +447,7 @@ widget_input_shape_combine_mask(self, shape_mask, offset_x, offset_y)
 #endif
 
 static VALUE
-widget_path(self)
-    VALUE self;
+widget_path(VALUE self)
 {
     guint path_length;
     gchar *path;
@@ -525,8 +464,7 @@ widget_path(self)
 }
 
 static VALUE
-widget_class_path(self)
-    VALUE self;
+widget_class_path(VALUE self)
 {
     guint path_length;
     gchar *path;
@@ -543,15 +481,13 @@ widget_class_path(self)
 }
 
 static VALUE
-widget_get_composite_name(self)
-    VALUE self;
+widget_get_composite_name(VALUE self)
 {
     return CSTR2RVAL(gtk_widget_get_composite_name(_SELF(self)));
 }
 
 static VALUE
-widget_modify_style(self, style)
-    VALUE self, style;
+widget_modify_style(VALUE self, VALUE style)
 {
     gtk_widget_modify_style(_SELF(self),
                             GTK_RC_STYLE(RVAL2GOBJ(style)));
@@ -559,15 +495,13 @@ widget_modify_style(self, style)
 }
 
 static VALUE
-widget_get_modifier_style(self)
-    VALUE self;
+widget_get_modifier_style(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_modifier_style(_SELF(self)));
 }
 
 static VALUE
-widget_modify_fg(self, state, color)
-    VALUE self, state, color;
+widget_modify_fg(VALUE self, VALUE state, VALUE color)
 {
     gtk_widget_modify_fg(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
@@ -575,8 +509,7 @@ widget_modify_fg(self, state, color)
 }
 
 static VALUE
-widget_modify_bg(self, state, color)
-    VALUE self, state, color;
+widget_modify_bg(VALUE self, VALUE state, VALUE color)
 {
     gtk_widget_modify_bg(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
@@ -584,8 +517,7 @@ widget_modify_bg(self, state, color)
 }
 
 static VALUE
-widget_modify_text(self, state, color)
-    VALUE self, state, color;
+widget_modify_text(VALUE self, VALUE state, VALUE color)
 {
     gtk_widget_modify_text(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
@@ -593,8 +525,7 @@ widget_modify_text(self, state, color)
 }
 
 static VALUE
-widget_modify_base(self, state, color)
-    VALUE self, state, color;
+widget_modify_base(VALUE self, VALUE state, VALUE color)
 {
     gtk_widget_modify_base(_SELF(self), RVAL2GTKSTATETYPE(state),
                          RVAL2GDKCOLOR(color));
@@ -602,8 +533,7 @@ widget_modify_base(self, state, color)
 }
 
 static VALUE
-widget_modify_font(self, font_desc)
-    VALUE self, font_desc;
+widget_modify_font(VALUE self, VALUE font_desc)
 {
     gtk_widget_modify_font(_SELF(self), 
                            (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
@@ -612,8 +542,7 @@ widget_modify_font(self, font_desc)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-widget_modify_cursor(self, primary, seconday)
-    VALUE self, primary, seconday;
+widget_modify_cursor(VALUE self, VALUE primary, VALUE seconday)
 {
     gtk_widget_modify_cursor(_SELF(self), 
                              RVAL2BOXED(primary, GDK_TYPE_COLOR),
@@ -623,24 +552,19 @@ widget_modify_cursor(self, primary, seconday)
 #endif
 
 static VALUE
-widget_create_pango_context(self)
-    VALUE self;
+widget_create_pango_context(VALUE self)
 {
     return GOBJ2RVALU(gtk_widget_create_pango_context(_SELF(self)));
 }
 
 static VALUE
-widget_get_pango_context(self)
-    VALUE self;
+widget_get_pango_context(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_pango_context(_SELF(self)));
 }
 
 static VALUE
-widget_create_pango_layout(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+widget_create_pango_layout(int argc, VALUE *argv, VALUE self)
 {
     VALUE text;
     rb_scan_args(argc, argv, "01", &text);
@@ -648,10 +572,7 @@ widget_create_pango_layout(argc, argv, self)
 }
 
 static VALUE
-widget_render_icon(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+widget_render_icon(int argc, VALUE *argv, VALUE self)
 {
     VALUE stock_id, size, detail;
     rb_scan_args(argc, argv, "21", &stock_id, &size, &detail);
@@ -661,24 +582,21 @@ widget_render_icon(argc, argv, self)
 }
 
 static VALUE
-widget_s_pop_composite_child(self)
-    VALUE self;
+widget_s_pop_composite_child(VALUE self)
 {
     gtk_widget_pop_composite_child();
     return self;
 }
 
 static VALUE
-widget_s_push_composite_child(self)
-    VALUE self;
+widget_s_push_composite_child(VALUE self)
 {
     gtk_widget_push_composite_child();
     return self;
 }
 
 static VALUE
-widget_queue_draw_area(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+widget_queue_draw_area(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     gtk_widget_queue_draw_area(_SELF(self), NUM2INT(x), NUM2INT(y),
                                NUM2INT(width), NUM2INT(height));
@@ -686,40 +604,35 @@ widget_queue_draw_area(self, x, y, width, height)
 }
 
 static VALUE
-widget_reset_shapes(self)
-    VALUE self;
+widget_reset_shapes(VALUE self)
 {
     gtk_widget_reset_shapes(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_set_double_buffered(self, double_buffered)
-    VALUE self, double_buffered;
+widget_set_double_buffered(VALUE self, VALUE double_buffered)
 {
     gtk_widget_set_double_buffered(_SELF(self), RVAL2CBOOL(double_buffered));
     return self;
 }
 
 static VALUE
-widget_set_redraw_on_allocate(self, redraw_on_allocate)
-    VALUE self, redraw_on_allocate;
+widget_set_redraw_on_allocate(VALUE self, VALUE redraw_on_allocate)
 {
     gtk_widget_set_redraw_on_allocate(_SELF(self), RVAL2CBOOL(redraw_on_allocate));
     return self;
 }
 
 static VALUE
-widget_set_composite_name(self, name)
-    VALUE self, name;
+widget_set_composite_name(VALUE self, VALUE name)
 {
     gtk_widget_set_composite_name(_SELF(self), RVAL2CSTR(name));
     return self;
 }
 
 static VALUE
-widget_set_scroll_adjustments(self, h, v)
-    VALUE self, h, v;
+widget_set_scroll_adjustments(VALUE self, VALUE h, VALUE v)
 {
     return CBOOL2RVAL(gtk_widget_set_scroll_adjustments(_SELF(self),
                                                         GTK_ADJUSTMENT(_SELF(h)),
@@ -727,8 +640,7 @@ widget_set_scroll_adjustments(self, h, v)
 }
 
 static VALUE
-widget_mnemonic_activate(self, group_cycling)
-    VALUE self, group_cycling;
+widget_mnemonic_activate(VALUE self, VALUE group_cycling)
 {
     return CBOOL2RVAL(gtk_widget_mnemonic_activate(_SELF(self), RVAL2CBOOL(group_cycling)));
 }
@@ -741,10 +653,7 @@ widget_mnemonic_activate(self, group_cycling)
  * end
  */
 static gboolean
-rc_property_parser(pspec, rc_string, property_value)
-    const GParamSpec *pspec;
-    const GString *rc_string;
-    GValue *property_value;
+rc_property_parser(const GParamSpec *pspec, const GString *rc_string, GValue *property_value)
 {
     VALUE spec = GOBJ2RVAL((gpointer)pspec);
     VALUE func = rb_hash_aref(style_prop_func_table, spec);
@@ -760,8 +669,7 @@ rc_property_parser(pspec, rc_string, property_value)
 }
 
 static VALUE
-widget_s_install_style_property(self, spec)
-    VALUE self, spec;
+widget_s_install_style_property(VALUE self, VALUE spec)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkWidgetClass* gclass;
@@ -785,8 +693,7 @@ widget_s_install_style_property(self, spec)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-widget_s_find_style_property(self, property_name)
-     VALUE self, property_name;
+widget_s_find_style_property(VALUE self, VALUE property_name)
 {
     GtkWidgetClass* oclass;
     const char* name;
@@ -813,10 +720,7 @@ widget_s_find_style_property(self, property_name)
 }
 
 static VALUE
-widget_s_style_properties(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+widget_s_style_properties(int argc, VALUE *argv, VALUE self)
 {
     GtkWidgetClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
     guint n_properties;
@@ -844,8 +748,7 @@ widget_s_style_properties(argc, argv, self)
 #endif
 
 static VALUE
-widget_region_intersect(self, region)
-    VALUE self, region;
+widget_region_intersect(VALUE self, VALUE region)
 {
     return BOXED2RVAL(gtk_widget_region_intersect(_SELF(self), 
                                                   (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)), 
@@ -853,8 +756,7 @@ widget_region_intersect(self, region)
 }
 
 static VALUE
-widget_send_expose(self, event)
-    VALUE self, event;
+widget_send_expose(VALUE self, VALUE event)
 {
     return INT2NUM(gtk_widget_send_expose(_SELF(self), RVAL2GEV(event)));
 }
@@ -869,8 +771,7 @@ void        gtk_widget_style_get_valist     (GtkWidget *widget,
 */
 
 static VALUE
-widget_style_get_property(self, prop_name)
-    VALUE self, prop_name;
+widget_style_get_property(VALUE self, VALUE prop_name)
 {
     GParamSpec* pspec = NULL;
     const char* name;
@@ -898,98 +799,85 @@ widget_style_get_property(self, prop_name)
 }
 
 static VALUE
-widget_get_accessible(self)
-    VALUE self;
+widget_get_accessible(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self));
 }
 
 static VALUE
-widget_child_focus(self, direction)
-    VALUE self, direction;
+widget_child_focus(VALUE self, VALUE direction)
 {
     return CBOOL2RVAL(gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-widget_error_bell(self)
-    VALUE self;
+widget_error_bell(VALUE self)
 {
     gtk_widget_error_bell(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_keynav_failed(self, direction)
-    VALUE self, direction;
+widget_keynav_failed(VALUE self, VALUE direction)
 {
     return CBOOL2RVAL(gtk_widget_keynav_failed(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
 #endif
 
 static VALUE
-widget_child_notify(self, child_property)
-    VALUE self, child_property;
+widget_child_notify(VALUE self, VALUE child_property)
 {
     gtk_widget_child_notify(_SELF(self), RVAL2CSTR(child_property));
     return self;
 }
 
 static VALUE
-widget_freeze_child_notify(self)
-    VALUE self;
+widget_freeze_child_notify(VALUE self)
 {
     gtk_widget_freeze_child_notify(_SELF(self));
     return self;
 }
 
 static VALUE
-widget_get_child_visible(self)
-    VALUE self;
+widget_get_child_visible(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_get_child_visible(_SELF(self)));
 }
 
 static VALUE
-widget_get_settings(self)
-    VALUE self;
+widget_get_settings(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_settings(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-widget_get_clipboard(self, selection)
-    VALUE self, selection;
+widget_get_clipboard(VALUE self, VALUE selection)
 {
     return CLIPBOARD2RVAL(gtk_widget_get_clipboard(_SELF(self), RVAL2ATOM(selection)));
 }
 
 static VALUE
-widget_get_display(self)
-    VALUE self;
+widget_get_display(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_display(_SELF(self)));
 }
 
 static VALUE
-widget_get_root_window(self)
-    VALUE self;
+widget_get_root_window(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_root_window(_SELF(self)));
 }
 
 static VALUE
-widget_get_screen(self)
-    VALUE self;
+widget_get_screen(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_screen(_SELF(self)));
 }
 
 static VALUE
-widget_has_screen(self)
-    VALUE self;
+widget_has_screen(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_has_screen(_SELF(self)));
 }
@@ -999,8 +887,7 @@ widget_has_screen(self)
   Note this method is not gtk_widget_size_request()
 */
 static VALUE
-widget_get_size_request(self)
-    VALUE self;
+widget_get_size_request(VALUE self)
 {
     gint width, height;
     gtk_widget_get_size_request(_SELF(self), &width, &height);
@@ -1008,24 +895,21 @@ widget_get_size_request(self)
 }
 
 static VALUE
-widget_set_child_visible(self, is_visible)
-    VALUE self, is_visible;
+widget_set_child_visible(VALUE self, VALUE is_visible)
 {
     gtk_widget_set_child_visible(_SELF(self), RVAL2CBOOL(is_visible));
     return self;
 }
 
 static VALUE
-widget_set_size_request(self, width, height)
-    VALUE self, width, height;
+widget_set_size_request(VALUE self, VALUE width, VALUE height)
 {
     gtk_widget_set_size_request(_SELF(self), NUM2INT(width), NUM2INT(height));
     return self;
 }
 
 static VALUE
-widget_thaw_child_notify(self)
-    VALUE self;
+widget_thaw_child_notify(VALUE self)
 {
     gtk_widget_thaw_child_notify(_SELF(self));
     return self;
@@ -1033,38 +917,33 @@ widget_thaw_child_notify(self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-widget_set_no_show_all(self, no_show_all)
-    VALUE self, no_show_all;
+widget_set_no_show_all(VALUE self, VALUE no_show_all)
 {
     gtk_widget_set_no_show_all(_SELF(self), RVAL2CBOOL(no_show_all));
     return self;
 }
 
 static VALUE
-widget_get_no_show_all(self)
-    VALUE self;
+widget_get_no_show_all(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_get_no_show_all(_SELF(self)));
 }
 
 static VALUE
-widget_list_mnemonic_labels(self)
-    VALUE self;
+widget_list_mnemonic_labels(VALUE self)
 {
     return GLIST2ARYF(gtk_widget_list_mnemonic_labels(_SELF(self)));
 }
 
 static VALUE
-widget_add_mnemonic_label(self, label)
-    VALUE self, label;
+widget_add_mnemonic_label(VALUE self, VALUE label)
 {
     gtk_widget_add_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
     return self;
 }
 
 static VALUE
-widget_remove_mnemonic_label(self, label)
-    VALUE self, label;
+widget_remove_mnemonic_label(VALUE self, VALUE label)
 {
     gtk_widget_remove_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
     return self;
@@ -1073,23 +952,20 @@ widget_remove_mnemonic_label(self, label)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-widget_set_tooltip_window(self, custom_window)
-    VALUE self, custom_window;
+widget_set_tooltip_window(VALUE self, VALUE custom_window)
 {
     gtk_widget_set_tooltip_window(_SELF(self), GTK_WINDOW(RVAL2GOBJ(custom_window)));
     return self;
 }
 
 static VALUE
-widget_get_tooltip_window(self)
-    VALUE self;
+widget_get_tooltip_window(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_tooltip_window(_SELF(self)));
 }
 
 static VALUE
-widget_trigger_tooltip_query(self)
-    VALUE self;
+widget_trigger_tooltip_query(VALUE self)
 {
     gtk_widget_trigger_tooltip_query(_SELF(self));
     return self;
@@ -1099,23 +975,20 @@ widget_trigger_tooltip_query(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-widget_get_action(self)
-    VALUE self;
+widget_get_action(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_action(_SELF(self)));
 }
 
 static VALUE
-widget_is_composited(self)
-    VALUE self;
+widget_is_composited(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_is_composited(_SELF(self)));
 }
 #endif
 
 static VALUE
-widget_window(self)
-    VALUE self;
+widget_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->window);
 }
@@ -1129,8 +1002,7 @@ widget_set_window(VALUE self, VALUE window)
 
 #define DEFINE_IS_WIDGET(STATE) \
 static VALUE \
-widget_ ## STATE (self) \
-    VALUE self; \
+widget_ ## STATE (VALUE self) \
 { \
     return( GTK_WIDGET_ ## STATE (_SELF(self))? Qtrue: Qfalse ); \
 }
@@ -1147,15 +1019,13 @@ DEFINE_IS_WIDGET(RC_STYLE);
 DEFINE_IS_WIDGET(DOUBLE_BUFFERED);
 
 static VALUE
-widget_get_allocation(self)
-    VALUE self;
+widget_get_allocation(VALUE self)
 {
     return BOXED2RVAL(&(_SELF(self)->allocation), GTK_TYPE_ALLOCATION);
 }
 
 static VALUE
-widget_set_allocation(self, x,y,w,h)
-    VALUE self, x,y,w,h;
+widget_set_allocation(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
 {
     GtkAllocation *a = &(_SELF(self)->allocation);
     a->x      = NUM2INT(x);
@@ -1166,16 +1036,14 @@ widget_set_allocation(self, x,y,w,h)
 }
 
 static VALUE
-widget_get_requisition(self)
-    VALUE self;
+widget_get_requisition(VALUE self)
 {
     GtkRequisition req = _SELF(self)->requisition;
     return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
 }
 
 static VALUE
-widget_set_requisition(self, w, h)
-    VALUE self, w, h;
+widget_set_requisition(VALUE self, VALUE w, VALUE h)
 {
     GtkRequisition *r = &(_SELF(self)->requisition);
     r->width  = NUM2INT(w);
@@ -1184,32 +1052,26 @@ widget_set_requisition(self, w, h)
 }
 
 static VALUE
-widget_state(self)
-    VALUE self;
+widget_state(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->state, GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE
-widget_saved_state(self)
-    VALUE self;
+widget_saved_state(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE
-widget_signal_size_request(num, values)
-    guint num;
-    const GValue* values;
+widget_signal_size_request(guint num, const GValue *values)
 {
     GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), 
                        rb_ary_new3(2, INT2NUM(req->width), INT2NUM(req->height)));
 }
 static VALUE
-widget_signal_size_allocate(num, values)
-    guint num;
-    const GValue* values;
+widget_signal_size_allocate(guint num, const GValue *values)
 {
     GtkAllocation* alloc = (GtkAllocation*)g_value_get_boxed(&values[1]);
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
