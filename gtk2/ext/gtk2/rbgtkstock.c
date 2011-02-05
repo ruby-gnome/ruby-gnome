@@ -22,9 +22,7 @@
 #define CSTR2SYM(str) ID2SYM(rb_intern(str))
 
 static VALUE
-stock_m_add(argc, argv, klass)
-    int argc;
-    VALUE *argv, klass;
+stock_m_add(int argc, VALUE *argv, VALUE klass)
 {
     VALUE stock_id, label, modifier, keyval, translation_domain;
     GtkStockItem item;
@@ -41,8 +39,7 @@ stock_m_add(argc, argv, klass)
 }
 
 static VALUE
-stock_m_lookup(klass, stock_id)
-    VALUE klass, stock_id;
+stock_m_lookup(VALUE klass, VALUE stock_id)
 {
     GtkStockItem item;
 
@@ -59,8 +56,7 @@ stock_m_lookup(klass, stock_id)
 }
 
 static VALUE
-stock_m_list_ids(klass)
-    VALUE klass;
+stock_m_list_ids(VALUE klass)
 {
     GSList *ids = gtk_stock_list_ids();
     GSList *l;
@@ -84,9 +80,7 @@ translate_func(path, func)
 }
 
 static VALUE
-stock_m_set_translate_func(klass, domain)
-    VALUE klass;
-    VALUE domain;
+stock_m_set_translate_func(VALUE klass, VALUE domain)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(klass, func);
