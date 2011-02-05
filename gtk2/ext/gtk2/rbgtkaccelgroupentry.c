@@ -42,8 +42,7 @@ struct _GtkAccelGroupEntry
 };
 */
 static VALUE
-agentry_initialize(self)
-    VALUE self;
+agentry_initialize(VALUE self)
 {
     GtkAccelGroupEntry key;
     G_INITIALIZE(self, &key);
@@ -51,22 +50,19 @@ agentry_initialize(self)
 }
 
 static VALUE
-agentry_get_accel_key(self)
-    VALUE self;
+agentry_get_accel_key(VALUE self)
 {
     return BOXED2RVAL(&_SELF(self)->key, GTK_TYPE_ACCEL_KEY);
 }
 
 static VALUE
-agentry_get_closure(self)
-    VALUE self;
+agentry_get_closure(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->closure, G_TYPE_CLOSURE);
 }
 
 static VALUE
-agentry_get_accel_path(self)
-    VALUE self;
+agentry_get_accel_path(VALUE self)
 {
     const gchar *quark_str = g_quark_to_string(_SELF(self)->accel_path_quark);
     return quark_str ? CSTR2RVAL(quark_str) : Qnil;
