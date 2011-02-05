@@ -19,9 +19,7 @@
 VALUE rb_cGdkColor = Qnil;
 
 static VALUE
-gdkcolor_initialize(self, red, green, blue)
-    VALUE self;
-    VALUE red, green, blue;
+gdkcolor_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
     GdkColor c;
     c.pixel = 0;
@@ -35,9 +33,7 @@ gdkcolor_initialize(self, red, green, blue)
 }
 
 static VALUE
-gdkcolor_s_parse(self, name)
-    VALUE self;
-    VALUE name;
+gdkcolor_s_parse(VALUE self, VALUE name)
 {
     GdkColor c;
     if (! gdk_color_parse(RVAL2CSTR(name), &c)) {
@@ -47,64 +43,53 @@ gdkcolor_s_parse(self, name)
 }
 
 static VALUE
-gdkcolor_pixel(self)
-    VALUE self;
+gdkcolor_pixel(VALUE self)
 {
     return INT2NUM(_SELF(self)->pixel);
 }
 
 static VALUE
-gdkcolor_red(self)
-    VALUE self;
+gdkcolor_red(VALUE self)
 {
 
     return INT2FIX(_SELF(self)->red);
 }
 
 static VALUE
-gdkcolor_set_red(self, red)
-    VALUE self;
-    VALUE red;
+gdkcolor_set_red(VALUE self, VALUE red)
 {
     _SELF(self)->red = NUM2INT(red);
     return self;
 }
 
 static VALUE
-gdkcolor_green(self)
-    VALUE self;
+gdkcolor_green(VALUE self)
 {
     return INT2FIX(_SELF(self)->green);
 }
 
 static VALUE
-gdkcolor_set_green(self, green)
-    VALUE self;
-    VALUE green;
+gdkcolor_set_green(VALUE self, VALUE green)
 {
     _SELF(self)->green = NUM2INT(green);
     return self;
 }
 
 static VALUE
-gdkcolor_blue(self)
-    VALUE self;
+gdkcolor_blue(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue);
 }
 
 static VALUE
-gdkcolor_set_blue(self, blue)
-    VALUE self;
-    VALUE blue;
+gdkcolor_set_blue(VALUE self, VALUE blue)
 {
     _SELF(self)->blue = NUM2INT(blue);
     return self;
 }
 
 static VALUE
-gdkcolor_to_a(self)
-    VALUE self;
+gdkcolor_to_a(VALUE self)
 {
     GdkColor *c = _SELF(self);
     return rb_ary_new3(3, INT2FIX(c->red), 
@@ -112,8 +97,7 @@ gdkcolor_to_a(self)
 }
 
 static VALUE
-gdkcolor_equal(self, other)
-    VALUE self, other;
+gdkcolor_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(gdk_color_equal(_SELF(self), _SELF(other)));
 }
