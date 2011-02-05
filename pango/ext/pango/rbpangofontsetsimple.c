@@ -17,24 +17,21 @@
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
 
 static VALUE
-fontset_simple_initialize(self, lang)
-    VALUE self, lang;
+fontset_simple_initialize(VALUE self, VALUE lang)
 {
     G_INITIALIZE(self, pango_fontset_simple_new(RVAL2LANG(lang)));
     return Qnil;
 }
 
 static VALUE
-fontset_simple_append(self, font)
-    VALUE self, font;
+fontset_simple_append(VALUE self, VALUE font)
 {
     pango_fontset_simple_append(_SELF(self), PANGO_FONT(RVAL2GOBJ(font)));
     return self;
 }
 
 static VALUE
-fontset_simple_size(self)
-    VALUE self;
+fontset_simple_size(VALUE self)
 {
     return INT2NUM(pango_fontset_simple_size(_SELF(self)));
 }
