@@ -25,15 +25,13 @@ static VALUE type_to_prop_setter_table;
 static VALUE type_to_prop_getter_table;
 
 static VALUE
-cont_is_resize_container(self)
-    VALUE self;
+cont_is_resize_container(VALUE self)
 {
     return CBOOL2RVAL(GTK_IS_RESIZE_CONTAINER(_SELF(self)));
 }
 
 static VALUE
-cont_remove(self, other)
-    VALUE self, other;
+cont_remove(VALUE self, VALUE other)
 {
     G_CHILD_REMOVE(self, other);
     gtk_container_remove(_SELF(self), GTK_WIDGET(RVAL2GOBJ(other)));
@@ -41,18 +39,14 @@ cont_remove(self, other)
 }
 
 static VALUE
-cont_check_resize(self)
-    VALUE self;
+cont_check_resize(VALUE self)
 {
     gtk_container_check_resize(_SELF(self));
     return self;
 }
 
 static VALUE
-cont_foreach(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cont_foreach(int argc, VALUE *argv, VALUE self)
 {
     VALUE callback;
 
@@ -65,10 +59,7 @@ cont_foreach(argc, argv, self)
 }
 
 static VALUE
-cont_forall(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cont_forall(int argc, VALUE *argv, VALUE self)
 {
     VALUE callback;
 
@@ -81,15 +72,13 @@ cont_forall(argc, argv, self)
 }
 
 static VALUE
-cont_get_children(self)
-    VALUE self;
+cont_get_children(VALUE self)
 {
    return GLIST2ARYF(gtk_container_get_children(_SELF(self)));
 }
 
 static VALUE
-cont_set_reallocate_redraws(self, needs_redraws)
-    VALUE self, needs_redraws;
+cont_set_reallocate_redraws(VALUE self, VALUE needs_redraws)
 {
     gtk_container_set_reallocate_redraws(_SELF(self), RVAL2CBOOL(needs_redraws));
     return self;
@@ -97,16 +86,14 @@ cont_set_reallocate_redraws(self, needs_redraws)
 
 
 static VALUE
-cont_set_focus_child(self, child)
-    VALUE self, child;
+cont_set_focus_child(VALUE self, VALUE child)
 {
     gtk_container_set_focus_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
 static VALUE
-cont_set_focus_vadjustment(self, adjustment)
-    VALUE self, adjustment;
+cont_set_focus_vadjustment(VALUE self, VALUE adjustment)
 {
     gtk_container_set_focus_vadjustment(_SELF(self),
                                         NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
@@ -114,8 +101,7 @@ cont_set_focus_vadjustment(self, adjustment)
 }
 
 static VALUE
-cont_set_focus_hadjustment(self, adjustment)
-    VALUE self, adjustment;
+cont_set_focus_hadjustment(VALUE self, VALUE adjustment)
 {
     gtk_container_set_focus_hadjustment(_SELF(self),
                                         NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
@@ -123,32 +109,28 @@ cont_set_focus_hadjustment(self, adjustment)
 }
 
 static VALUE
-cont_get_focus_vadjustment(self)
-    VALUE self;
+cont_get_focus_vadjustment(VALUE self)
 {
     GtkAdjustment* adj = gtk_container_get_focus_vadjustment(_SELF(self));
     return adj ? GOBJ2RVAL(adj) : Qnil;
 }
 
 static VALUE
-cont_get_focus_hadjustment(self)
-    VALUE self;
+cont_get_focus_hadjustment(VALUE self)
 {
     GtkAdjustment* adj = gtk_container_get_focus_hadjustment(_SELF(self));
     return adj ? GOBJ2RVAL(adj) : Qnil;
 }
 
 static VALUE
-cont_get_resize_children(self)
-    VALUE self;
+cont_get_resize_children(VALUE self)
 {
     gtk_container_resize_children(_SELF(self));
     return self;
 }
 
 static VALUE
-cont_get_child_type(self)
-    VALUE self;
+cont_get_child_type(VALUE self)
 {
     return GTYPE2CLASS(gtk_container_child_type(_SELF(self)));
 }
@@ -165,10 +147,7 @@ void        gtk_container_child_set         (GtkContainer *container,
 */
 
 void
-rbgtkcontainer_register_child_property_setter(gtype, name, func)
-    GType gtype;
-    const char* name;
-    RValueToGValueFunc func;
+rbgtkcontainer_register_child_property_setter(GType gtype, const char *name, RValueToGValueFunc func)
 {
     GObjectClass* oclass;
     GParamSpec* pspec;
@@ -189,10 +168,7 @@ rbgtkcontainer_register_child_property_setter(gtype, name, func)
 }
 
 void
-rbgtkcontainer_register_child_property_getter(gtype, name, func)
-    GType gtype;
-    const char* name;
-    GValueToRValueFunc func;
+rbgtkcontainer_register_child_property_getter(GType gtype, const char *name, GValueToRValueFunc func)
 {
     GObjectClass* oclass;
     GParamSpec* pspec;
@@ -211,8 +187,7 @@ rbgtkcontainer_register_child_property_getter(gtype, name, func)
 }
 
 static VALUE
-cont_child_get_property(self, child, prop_name)
-    VALUE self, child, prop_name;
+cont_child_get_property(VALUE self, VALUE child, VALUE prop_name)
 {
     GParamSpec* pspec;
     const char* name;
@@ -306,10 +281,7 @@ cont_child_set_property(self, child, prop_name, val)
 }
 
 static VALUE
-cont_add(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cont_add(int argc, VALUE *argv, VALUE self)
 {
     VALUE other, properties;
     GtkWidget *child;
@@ -353,8 +325,7 @@ void        gtk_container_child_set_valist  (GtkContainer *container,
 */
 
 static VALUE
-cont_propagate_expose(self, child, event)
-    VALUE self, child, event;
+cont_propagate_expose(VALUE self, VALUE child, VALUE event)
 {
     gtk_container_propagate_expose(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                    (GdkEventExpose *)RVAL2GEV(event));
@@ -362,8 +333,7 @@ cont_propagate_expose(self, child, event)
 }
 
 static VALUE
-cont_get_focus_chain(self)
-    VALUE self;
+cont_get_focus_chain(VALUE self)
 {
     gboolean ret;
     GList *glist = NULL;
@@ -372,8 +342,7 @@ cont_get_focus_chain(self)
 }
 
 static VALUE
-cont_set_focus_chain(self, focusable_widgets) 
-    VALUE self, focusable_widgets;
+cont_set_focus_chain(VALUE self, VALUE focusable_widgets)
 {
     int i;
     GList *glist = NULL;
@@ -389,16 +358,14 @@ cont_set_focus_chain(self, focusable_widgets)
 }
 
 static VALUE
-cont_unset_focus_chain(self)
-    VALUE self;
+cont_unset_focus_chain(VALUE self)
 {
     gtk_container_unset_focus_chain(_SELF(self));
     return self;
 }
 
 static VALUE
-cont_s_child_property(self, property_name)
-     VALUE self, property_name;
+cont_s_child_property(VALUE self, VALUE property_name)
 {
     GObjectClass* oclass;
     const char* name;
@@ -425,10 +392,7 @@ cont_s_child_property(self, property_name)
 }
 
 static VALUE
-cont_s_install_child_property(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+cont_s_install_child_property(int argc, VALUE *argv, VALUE self)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkContainerClass* gclass;
@@ -452,10 +416,7 @@ cont_s_install_child_property(argc, argv, self)
 }
 
 static VALUE
-cont_s_child_properties(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+cont_s_child_properties(int argc, VALUE *argv, VALUE self)
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
     guint n_properties;
@@ -487,10 +448,7 @@ static GQuark q_ruby_setter;
 static GQuark q_ruby_getter;
 
 static VALUE
-cont_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cont_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE params_hash;
     GObject* gobj;
