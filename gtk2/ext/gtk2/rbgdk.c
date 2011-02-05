@@ -27,23 +27,20 @@ void        gdk_parse_args                  (gint *argc,
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdk_s_get_display_arg_name(self)
-    VALUE self;
+gdk_s_get_display_arg_name(VALUE self)
 {
     return CSTR2RVAL(gdk_get_display_arg_name());
 }
 #endif
 
 static VALUE
-gdk_s_set_locale(self)
-    VALUE self;
+gdk_s_set_locale(VALUE self)
 {
     return CSTR2RVAL(gdk_set_locale());
 }
 
 static VALUE
-gdk_s_set_sm_client_id(self, id)
-    VALUE self, id;
+gdk_s_set_sm_client_id(VALUE self, VALUE id)
 {
     gdk_set_sm_client_id(NIL_P(id) ? NULL : RVAL2CSTR(id));
     return self;
@@ -73,23 +70,20 @@ gdk_s_notify_startup_complete(int argc, VALUE *argv, VALUE self)
 #endif
 
 static VALUE
-gdk_s_get_program_class(self)
-    VALUE self;
+gdk_s_get_program_class(VALUE self)
 {
     return CSTR2RVAL(gdk_get_program_class());
 }
 
 static VALUE
-gdk_s_set_program_class(self, program_class)
-    VALUE self, program_class;
+gdk_s_set_program_class(VALUE self, VALUE program_class)
 {
     gdk_set_program_class(RVAL2CSTR(program_class));
     return self;
 }
 
 static VALUE
-gdk_s_get_display(self)
-    VALUE self;
+gdk_s_get_display(VALUE self)
 {
     return CSTR2RVAL(gdk_get_display());
 }
@@ -103,9 +97,7 @@ static VALUE rb_x_error;
 static VALUE rb_x_io_error;
 
 static int
-rbgdk_x_error(display, error) 
-    Display* display;
-    XErrorEvent* error;
+rbgdk_x_error(Display *display, XErrorEvent *error)
 {
      gchar buf[64];
                                                                                 
@@ -118,8 +110,7 @@ rbgdk_x_error(display, error)
 }
 
 static int
-rbgdk_x_io_error(display) 
-    Display* display;
+rbgdk_x_io_error(Display *display)
 {
     int errno_saved = errno;
     const gchar* disp;
@@ -143,8 +134,7 @@ rbgdk_x_io_error(display)
 #endif 
 
 static VALUE
-gdk_s_set_x_error_handler(self)
-    VALUE self;
+gdk_s_set_x_error_handler(VALUE self)
 {
 #ifdef HAVE_XGETERRORTEXT
     rb_x_error = rb_block_proc();
@@ -157,8 +147,7 @@ gdk_s_set_x_error_handler(self)
 }
 
 static VALUE
-gdk_s_set_x_io_error_handler(self)
-    VALUE self;
+gdk_s_set_x_io_error_handler(VALUE self)
 {
 #ifdef HAVE_XGETERRORTEXT
     rb_x_io_error = rb_block_proc();
@@ -171,44 +160,38 @@ gdk_s_set_x_io_error_handler(self)
 }
 
 static VALUE
-gdk_s_flush(self)
-    VALUE self;
+gdk_s_flush(VALUE self)
 {
     gdk_flush();
     return self;
 }
 
 static VALUE
-gdk_s_screen_width(self)
-    VALUE self;
+gdk_s_screen_width(VALUE self)
 {
     return INT2NUM(gdk_screen_width());
 }
 
 static VALUE
-gdk_s_screen_width_mm(self)
-    VALUE self;
+gdk_s_screen_width_mm(VALUE self)
 {
     return INT2NUM(gdk_screen_width_mm());
 }
 
 static VALUE
-gdk_s_screen_height(self)
-   VALUE self;
+gdk_s_screen_height(VALUE self)
 {
     return INT2NUM(gdk_screen_height());
 }
 
 static VALUE
-gdk_s_screen_height_mm(self)
-    VALUE self;
+gdk_s_screen_height_mm(VALUE self)
 {
     return INT2NUM(gdk_screen_height_mm());
 }
 
 static VALUE
-gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time)
-    VALUE self, win, owner_events, event_mask, confine_to, cursor, time;
+gdk_s_pointer_grab(VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
 {
     return GENUM2RVAL(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
                      RVAL2CBOOL(owner_events),
@@ -219,16 +202,14 @@ gdk_s_pointer_grab(self, win, owner_events, event_mask, confine_to, cursor, time
 }
 
 static VALUE
-gdk_s_pointer_ungrab(self, time)
-    VALUE self, time;
+gdk_s_pointer_ungrab(VALUE self, VALUE time)
 {
     gdk_pointer_ungrab(NUM2INT(time));
     return self;
 }
 
 static VALUE
-gdk_s_keyboard_grab(self, win, owner_events, time)
-    VALUE self, win, owner_events, time;
+gdk_s_keyboard_grab(VALUE self, VALUE win, VALUE owner_events, VALUE time)
 {
     return GENUM2RVAL(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), 
                                         RVAL2CBOOL(owner_events), NUM2INT(time)), 
@@ -236,55 +217,48 @@ gdk_s_keyboard_grab(self, win, owner_events, time)
 }
 
 static VALUE
-gdk_s_keyboard_ungrab(self, time)
-    VALUE self, time;
+gdk_s_keyboard_ungrab(VALUE self, VALUE time)
 {
     gdk_keyboard_ungrab(NUM2INT(time));
     return self;
 }
 
 static VALUE
-gdk_s_pointer_is_grabbed(self)
-    VALUE self;
+gdk_s_pointer_is_grabbed(VALUE self)
 {
     return CBOOL2RVAL(gdk_pointer_is_grabbed());
 }
 
 static VALUE
-gdk_s_set_double_click_time(self, msec)
-    VALUE self, msec;
+gdk_s_set_double_click_time(VALUE self, VALUE msec)
 {
     gdk_set_double_click_time(NUM2UINT(msec));
     return self;
 }
 
 static VALUE
-gdk_s_beep(self)
-    VALUE self;
+gdk_s_beep(VALUE self)
 {
     gdk_beep();
     return self;
 }
 
 static VALUE
-gdk_s_error_trap_push(self)
-    VALUE self;
+gdk_s_error_trap_push(VALUE self)
 {
     gdk_error_trap_push();
     return self;
 }
 
 static VALUE
-gdk_s_error_trap_pop(self)
-    VALUE self;
+gdk_s_error_trap_pop(VALUE self)
 {
     gdk_error_trap_pop();
     return self;
 }
 
 static VALUE
-gdk_s_windowing_x11(self)
-    VALUE self;
+gdk_s_windowing_x11(VALUE self)
 {
 #ifdef GDK_WINDOWING_X11
     return Qtrue;
@@ -294,8 +268,7 @@ gdk_s_windowing_x11(self)
 }
 
 static VALUE
-gdk_s_windowing_win32(self)
-    VALUE self;
+gdk_s_windowing_win32(VALUE self)
 {
 #ifdef GDK_WINDOWING_WIN32
     return Qtrue;
@@ -305,8 +278,7 @@ gdk_s_windowing_win32(self)
 }
 
 static VALUE
-gdk_s_windowing_fb(self)
-    VALUE self;
+gdk_s_windowing_fb(VALUE self)
 {
 #ifdef GDK_WINDOWING_FB
     return Qtrue;
@@ -316,8 +288,7 @@ gdk_s_windowing_fb(self)
 }
 
 static VALUE
-gdk_s_windowing_quartz(self)
-    VALUE self;
+gdk_s_windowing_quartz(VALUE self)
 {
 #ifdef GDK_WINDOWING_QUARTZ
     return Qtrue;
@@ -327,8 +298,7 @@ gdk_s_windowing_quartz(self)
 }
 
 static VALUE
-gdk_s_windowing_directfb(self)
-    VALUE self;
+gdk_s_windowing_directfb(VALUE self)
 {
 #ifdef GDK_WINDOWING_DIRECTFB
     return Qtrue;
@@ -338,8 +308,7 @@ gdk_s_windowing_directfb(self)
 }
 
 static VALUE
-gdk_m_target(self)
-    VALUE self;
+gdk_m_target(VALUE self)
 {
     return CSTR2RVAL(RUBY_GTK2_TARGET);
 }
