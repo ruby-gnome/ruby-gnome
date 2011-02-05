@@ -17,16 +17,14 @@
 #define _SELF(self) (GTK_CALENDAR(RVAL2GOBJ(self)))
 
 static VALUE
-cal_init(self)
-    VALUE self;
+cal_init(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_calendar_new());
     return Qnil;
 }
 
 static VALUE
-cal_select_month(self, month, year)
-    VALUE self, month, year;
+cal_select_month(VALUE self, VALUE month, VALUE year)
 {
     gint ret = gtk_calendar_select_month(_SELF(self),
                                          NUM2INT(month)-1,
@@ -35,40 +33,35 @@ cal_select_month(self, month, year)
 }
 
 static VALUE
-cal_select_day(self, day)
-    VALUE self, day;
+cal_select_day(VALUE self, VALUE day)
 {
     gtk_calendar_select_day(_SELF(self), NUM2INT(day));
     return self;
 }
 
 static VALUE
-cal_mark_day(self, day)
-    VALUE self, day;
+cal_mark_day(VALUE self, VALUE day)
 {
     gtk_calendar_mark_day(_SELF(self), NUM2INT(day));
     return self;
 }
 
 static VALUE
-cal_unmark_day(self, day)
-    VALUE self, day;
+cal_unmark_day(VALUE self, VALUE day)
 {
     gtk_calendar_unmark_day(_SELF(self), NUM2INT(day));
     return self;
 }
 
 static VALUE
-cal_clear_marks(self)
-    VALUE self;
+cal_clear_marks(VALUE self)
 {
     gtk_calendar_clear_marks(_SELF(self));
     return self;
 }
 
 static VALUE
-cal_get_date(self)
-    VALUE self;
+cal_get_date(VALUE self)
 {
     VALUE ret;
     guint year, month, day;
@@ -82,26 +75,21 @@ cal_get_date(self)
 }
 
 static VALUE
-cal_freeze(self)
-    VALUE self;
+cal_freeze(VALUE self)
 {
     gtk_calendar_freeze(_SELF(self));
     return self;
 }
 
 static VALUE
-cal_thaw(self)
-    VALUE self;
+cal_thaw(VALUE self)
 {
     gtk_calendar_thaw(_SELF(self));
     return self;
 }
 
 static VALUE
-cal_get_display_options(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cal_get_display_options(int argc, VALUE *argv, VALUE self)
 {
     VALUE flags;
     rb_scan_args(argc, argv, "01", &flags);
@@ -124,8 +112,7 @@ cal_get_display_options(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-cal_set_display_options(self, flags)
-    VALUE self, flags;
+cal_set_display_options(VALUE self, VALUE flags)
 {
     gtk_calendar_set_display_options(_SELF(self), 
                                      RVAL2GFLAGS(flags, 
