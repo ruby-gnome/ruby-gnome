@@ -18,8 +18,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-menu_initialize(self)
-    VALUE self;
+menu_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_menu_new());
     return Qnil;
@@ -27,8 +26,7 @@ menu_initialize(self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-menu_set_screen(self, screen)
-    VALUE self, screen;
+menu_set_screen(VALUE self, VALUE screen)
 {
     gtk_menu_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
@@ -36,8 +34,7 @@ menu_set_screen(self, screen)
 #endif
 
 static VALUE
-menu_reorder_child(self, child, position)
-    VALUE self, child, position;
+menu_reorder_child(VALUE self, VALUE child, VALUE position)
 {
     gtk_menu_reorder_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                            NUM2INT(position));
@@ -46,8 +43,7 @@ menu_reorder_child(self, child, position)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-menu_attach(self, child, left_attach, right_attach, top_attach, bottom_attach)
-    VALUE self, child, left_attach, right_attach, top_attach, bottom_attach;
+menu_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
     gtk_menu_attach(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
                     NUM2UINT(left_attach), NUM2UINT(right_attach), 
@@ -79,8 +75,7 @@ menu_pos_func(menu, px, py, push_in, data)
 
 /* the proc should return [x, y, push_in] */
 static VALUE
-menu_popup(self, pshell, pitem, button, activate_time)
-    VALUE self, pshell, pitem, button, activate_time;
+menu_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_time)
 {
     GtkWidget *gpshell = NULL;
     GtkWidget *gpitem = NULL;
@@ -108,8 +103,7 @@ menu_popup(self, pshell, pitem, button, activate_time)
 }
 
 static VALUE
-menu_set_accel_group(self, accel_group)
-    VALUE self, accel_group;
+menu_set_accel_group(VALUE self, VALUE accel_group)
 {
     gtk_menu_set_accel_group(_SELF(self), 
                              GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)));
@@ -117,46 +111,40 @@ menu_set_accel_group(self, accel_group)
 }
 
 static VALUE
-menu_get_accel_group(self)
-    VALUE self;
+menu_get_accel_group(VALUE self)
 {
     return GOBJ2RVAL(gtk_menu_get_accel_group(_SELF(self)));
 }
 
 static VALUE
-menu_set_accel_path(self, accel_path)
-    VALUE self, accel_path;
+menu_set_accel_path(VALUE self, VALUE accel_path)
 {
     gtk_menu_set_accel_path(_SELF(self), RVAL2CSTR(accel_path));
     return self;
 }
 
 static VALUE
-menu_get_tearoff_state(self)
-    VALUE self;
+menu_get_tearoff_state(VALUE self)
 {
     return CBOOL2RVAL(gtk_menu_get_tearoff_state(_SELF(self)));
 }
 
 static VALUE
-menu_popdown(self)
-    VALUE self;
+menu_popdown(VALUE self)
 {
     gtk_menu_popdown(_SELF(self));
     return self;
 }
 
 static VALUE
-menu_reposition(self)
-    VALUE self;
+menu_reposition(VALUE self)
 {
     gtk_menu_reposition(_SELF(self));
     return self;
 }
 
 static VALUE
-menu_get_active(self)
-    VALUE self;
+menu_get_active(VALUE self)
 {
     GtkWidget *mitem = gtk_menu_get_active(_SELF(self));
 
@@ -164,16 +152,14 @@ menu_get_active(self)
 }
 
 static VALUE
-menu_set_active(self, active)
-    VALUE self, active;
+menu_set_active(VALUE self, VALUE active)
 {
     gtk_menu_set_active(_SELF(self), NUM2INT(active));
     return self;
 }
 
 static VALUE
-menu_set_tearoff_state(self, torn_off)
-    VALUE self, torn_off;
+menu_set_tearoff_state(VALUE self, VALUE torn_off)
 {
     gtk_menu_set_tearoff_state(_SELF(self), RVAL2CBOOL(torn_off));
     return self;
@@ -181,17 +167,14 @@ menu_set_tearoff_state(self, torn_off)
 
 static VALUE menu_detacher;
 static void
-detach_func(attach_widget, menu)
-    GtkWidget* attach_widget;
-    GtkMenu* menu;
+detach_func(GtkWidget *attach_widget, GtkMenu *menu)
 {
     rb_funcall((VALUE)menu_detacher, id_call, 2, 
                GOBJ2RVAL(attach_widget), GOBJ2RVAL(menu));    
 }
 
 static VALUE
-menu_attach_to_widget(self, attach_widget)
-    VALUE self, attach_widget;
+menu_attach_to_widget(VALUE self, VALUE attach_widget)
 {
     menu_detacher = rb_block_proc();
     G_RELATIVE(self, menu_detacher);
@@ -202,24 +185,21 @@ menu_attach_to_widget(self, attach_widget)
 }
 
 static VALUE
-menu_detach(self)
-    VALUE self;
+menu_detach(VALUE self)
 {
     gtk_menu_detach(_SELF(self));
     return self;
 }
 
 static VALUE
-menu_get_attach_widget(self)
-    VALUE self;
+menu_get_attach_widget(VALUE self)
 {
     return GOBJ2RVAL(gtk_menu_get_attach_widget(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-menu_s_get_for_attach_widget(self, widget)
-    VALUE self, widget;
+menu_s_get_for_attach_widget(VALUE self, VALUE widget)
 {
     /* Owned by GTK+ */
     return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
@@ -228,8 +208,7 @@ menu_s_get_for_attach_widget(self, widget)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-menu_set_monitor(self, monitor_num)
-    VALUE self, monitor_num;
+menu_set_monitor(VALUE self, VALUE monitor_num)
 {
     gtk_menu_set_monitor(_SELF(self), NUM2INT(monitor_num));
     return self;
