@@ -24,16 +24,14 @@ typedef struct {
 } pspec_holder;
 
 static void
-pspec_mark(holder)
-    pspec_holder* holder;
+pspec_mark(pspec_holder *holder)
 {
     if (holder->instance)
         rbgobj_instance_call_cinfo_mark(holder->instance);
 }
 
 static void
-pspec_free(holder)
-    pspec_holder* holder;
+pspec_free(pspec_holder *holder)
 {
     if (holder->instance){
         rbgobj_instance_call_cinfo_free(holder->instance);
@@ -52,9 +50,7 @@ rbgobj_get_param_spec(VALUE obj)
 }
 
 void
-rbgobj_param_spec_initialize(self, pspec)
-    VALUE self;
-    GParamSpec* pspec;
+rbgobj_param_spec_initialize(VALUE self, GParamSpec *pspec)
 {
     pspec_holder* holder;
     Data_Get_Struct(self, pspec_holder, holder);
@@ -221,8 +217,7 @@ value_validate_ensure(struct validate_arg* arg)
 }
 
 static VALUE
-value_validate(self, obj)
-    VALUE self, obj;
+value_validate(VALUE self, VALUE obj)
 {
     struct validate_arg arg;
     GValue value = {0,};
@@ -274,8 +269,7 @@ value_convert(int argc, VALUE* argv, VALUE self)
 }
 
 static VALUE
-values_compare(self, a, b)
-    VALUE self, a, b;
+values_compare(VALUE self, VALUE a, VALUE b)
 {
     GParamSpec* pspec = rbgobj_get_param_spec(self);
     GType type = G_PARAM_SPEC_VALUE_TYPE(pspec);
@@ -300,8 +294,7 @@ values_compare(self, a, b)
 
 
 static VALUE
-get_ref_count(self)
-    VALUE self;
+get_ref_count(VALUE self)
 {
     return INT2NUM(G_PARAM_SPEC(rbgobj_get_param_spec(self))->ref_count);
 }
@@ -309,8 +302,7 @@ get_ref_count(self)
 
 #define param_is_flag(flag) \
     static VALUE \
-    param_is_##flag(self) \
-        VALUE self; \
+    param_is_##flag(VALUE self) \
     { \
         GParamSpec* pspec = G_PARAM_SPEC(rbgobj_get_param_spec(self)); \
         return CBOOL2RVAL(pspec->flags & flag); \
