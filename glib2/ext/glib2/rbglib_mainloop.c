@@ -45,31 +45,27 @@ ml_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ml_run(self)
-    VALUE self;
+ml_run(VALUE self)
 {
     g_main_loop_run(_SELF(self));
     return self;
 }
 
 static VALUE
-ml_quit(self)
-    VALUE self;
+ml_quit(VALUE self)
 {
     g_main_loop_quit(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-ml_is_running(self)
-    VALUE self;
+ml_is_running(VALUE self)
 {
     return CBOOL2RVAL(g_main_loop_is_running(_SELF(self)));
 }
 
 static VALUE
-ml_get_context(self)
-    VALUE self;
+ml_get_context(VALUE self)
 {
     return BOXED2RVAL(g_main_loop_get_context(_SELF(self)), G_TYPE_MAIN_CONTEXT);
 }
