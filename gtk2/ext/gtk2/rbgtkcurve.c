@@ -15,32 +15,28 @@
 #include "global.h"
 
 static VALUE
-curve_initialize(self)
-    VALUE self;
+curve_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_curve_new());
     return Qnil;
 }
 
 static VALUE
-curve_reset(self)
-    VALUE self;
+curve_reset(VALUE self)
 {
     gtk_curve_reset(GTK_CURVE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-curve_set_gamma(self, gamma)
-    VALUE self, gamma;
+curve_set_gamma(VALUE self, VALUE gamma)
 {
     gtk_curve_set_gamma(GTK_CURVE(RVAL2GOBJ(self)), NUM2DBL(gamma));
     return self;
 }
 
 static VALUE
-curve_set_range(self, min_x, max_x, min_y, max_y)
-    VALUE self, min_x, max_x, min_y, max_y;
+curve_set_range(VALUE self, VALUE min_x, VALUE max_x, VALUE min_y, VALUE max_y)
 {
     gtk_curve_set_range(GTK_CURVE(RVAL2GOBJ(self)),
 			NUM2DBL(min_x), NUM2DBL(max_x),
@@ -49,8 +45,7 @@ curve_set_range(self, min_x, max_x, min_y, max_y)
 }
 
 static VALUE
-curve_set_vector(self, length, vector)
-    VALUE self, length, vector;
+curve_set_vector(VALUE self, VALUE length, VALUE vector)
 {
     gint len = NUM2INT(length);
     gfloat *c_vec;
@@ -66,8 +61,7 @@ curve_set_vector(self, length, vector)
 }
 
 static VALUE
-curve_get_vector(self, length)
-    VALUE self, length;
+curve_get_vector(VALUE self, VALUE length)
 {
     gint len = NUM2INT(length);
     gfloat *c_vec;
