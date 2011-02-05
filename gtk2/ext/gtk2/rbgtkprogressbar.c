@@ -15,16 +15,14 @@
 #include "global.h"
 
 static VALUE
-pbar_initialize(self)
-    VALUE self;
+pbar_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_progress_bar_new());
     return Qnil;
 }
 
 static VALUE
-pbar_pulse(self)
-    VALUE self;
+pbar_pulse(VALUE self)
 {
     gtk_progress_bar_pulse(GTK_PROGRESS_BAR(RVAL2GOBJ(self)));
     return self;
