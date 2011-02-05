@@ -15,29 +15,25 @@
 #define _SELF(i) ((GtkIconInfo*)RVAL2BOXED(i, GTK_TYPE_ICON_INFO))
 
 static VALUE
-iconinfo_get_base_size(self)
-    VALUE self;
+iconinfo_get_base_size(VALUE self)
 {
     return INT2NUM(gtk_icon_info_get_base_size(_SELF(self)));
 }
 
 static VALUE
-iconinfo_get_filename(self)
-    VALUE self;
+iconinfo_get_filename(VALUE self)
 {
     return CSTR2RVAL(gtk_icon_info_get_filename(_SELF(self)));
 }
 
 static VALUE
-iconinfo_get_builtin_pixbuf(self)
-    VALUE self;
+iconinfo_get_builtin_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(gtk_icon_info_get_builtin_pixbuf(_SELF(self)));
 }
 
 static VALUE
-iconinfo_load_icon(self)
-    VALUE self;
+iconinfo_load_icon(VALUE self)
 {
     GError* error = NULL;
     GdkPixbuf* pixbuf = gtk_icon_info_load_icon(_SELF(self), &error);
@@ -51,16 +47,14 @@ iconinfo_load_icon(self)
 }
 
 static VALUE
-iconinfo_set_raw_coordinates(self, raw_coordinates)
-    VALUE self, raw_coordinates;
+iconinfo_set_raw_coordinates(VALUE self, VALUE raw_coordinates)
 {
     gtk_icon_info_set_raw_coordinates(_SELF(self), RVAL2CBOOL(raw_coordinates));
     return self;
 }
 
 static VALUE
-iconinfo_get_embedded_rect(self)
-    VALUE self;
+iconinfo_get_embedded_rect(VALUE self)
 {
     GdkRectangle rectangle;
     gboolean ret = gtk_icon_info_get_embedded_rect(_SELF(self), &rectangle);
@@ -72,8 +66,7 @@ iconinfo_get_embedded_rect(self)
 }
 
 static VALUE
-iconinfo_get_attach_points(self)
-    VALUE self;
+iconinfo_get_attach_points(VALUE self)
 {
     GdkPoint* points;
     gint n_points, i;
@@ -91,8 +84,7 @@ iconinfo_get_attach_points(self)
 }
 
 static VALUE
-iconinfo_get_display_name(self)
-    VALUE self;
+iconinfo_get_display_name(VALUE self)
 {
     return CSTR2RVAL(gtk_icon_info_get_display_name(_SELF(self)));
 }
