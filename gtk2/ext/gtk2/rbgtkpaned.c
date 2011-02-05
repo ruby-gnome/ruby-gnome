@@ -19,24 +19,21 @@
 
 
 static VALUE
-paned_add1(self, child)
-    VALUE self, child;
+paned_add1(VALUE self, VALUE child)
 {
     gtk_paned_add1(_SELF(self), RVAL2WIDGET(child));
     return self;
 }
 
 static VALUE
-paned_add2(self, child)
-    VALUE self, child;
+paned_add2(VALUE self, VALUE child)
 {
     gtk_paned_add2(_SELF(self), RVAL2WIDGET(child));
     return self;
 }
 
 static VALUE
-paned_pack1(self, child, resize, shrink)
-    VALUE self, child, resize, shrink;
+paned_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 {
     gtk_paned_pack1(_SELF(self), RVAL2WIDGET(child),
                     RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
@@ -44,8 +41,7 @@ paned_pack1(self, child, resize, shrink)
 }
 
 static VALUE
-paned_pack2(self, child, resize, shrink)
-    VALUE self, child, resize, shrink;
+paned_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 {
     gtk_paned_pack2(_SELF(self), RVAL2WIDGET(child),
                     RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
@@ -53,45 +49,39 @@ paned_pack2(self, child, resize, shrink)
 }
 
 static VALUE
-paned_child1(self)
-    VALUE self;
+paned_child1(VALUE self)
 {
     GtkWidget *child = _SELF(self)->child1;
     return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
 static VALUE
-paned_child2(self)
-    VALUE self;
+paned_child2(VALUE self)
 {
     GtkWidget *child = _SELF(self)->child2;
     return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
 static VALUE
-paned_child1_resize(self)
-    VALUE self;
+paned_child1_resize(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child1_resize);
 }
 
 static VALUE
-paned_child1_shrink(self)
-    VALUE self;
+paned_child1_shrink(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child1_shrink);
 }
 
 static VALUE
-paned_child2_resize(self)
-    VALUE self;
+paned_child2_resize(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child2_resize);
 }
 
 static VALUE
-paned_child2_shrink(self)
-    VALUE self;
+paned_child2_shrink(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child2_shrink);
 }
