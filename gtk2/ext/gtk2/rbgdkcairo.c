@@ -24,8 +24,7 @@
 #define _SELF(self) RVAL2CRCONTEXT(self)
 
 static VALUE
-gdkdraw_cairo_set_source_color(self, color)
-    VALUE self, color;
+gdkdraw_cairo_set_source_color(VALUE self, VALUE color)
 {
     gdk_cairo_set_source_color(_SELF(self), RVAL2GDKCOLOR(color));
     rb_cairo_check_status(cairo_status(_SELF(self)));
@@ -49,8 +48,7 @@ gdkdraw_cairo_set_source_pixbuf(int argc, VALUE *argv, VALUE self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gdkdraw_cairo_set_source_pixmap(self, pixmap, pixmap_x, pixmap_y)
-    VALUE self, pixmap, pixmap_x, pixmap_y;
+gdkdraw_cairo_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
 {
     gdk_cairo_set_source_pixmap(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(pixmap)),
                                 NUM2DBL(pixmap_x), NUM2DBL(pixmap_y));
@@ -60,8 +58,7 @@ gdkdraw_cairo_set_source_pixmap(self, pixmap, pixmap_x, pixmap_y)
 #endif
 
 static VALUE
-gdkdraw_cairo_rectangle(self, rectangle)
-    VALUE self, rectangle;
+gdkdraw_cairo_rectangle(VALUE self, VALUE rectangle)
 {
     gdk_cairo_rectangle(_SELF(self), 
                         (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_RECTANGLE));
@@ -70,8 +67,7 @@ gdkdraw_cairo_rectangle(self, rectangle)
 }
 
 static VALUE
-gdkdraw_cairo_region(self, region)
-    VALUE self, region;
+gdkdraw_cairo_region(VALUE self, VALUE region)
 {
     gdk_cairo_region(_SELF(self), (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION));
     rb_cairo_check_status(cairo_status(_SELF(self)));
