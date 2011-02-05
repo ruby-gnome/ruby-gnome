@@ -16,10 +16,7 @@
 #define _SELF(self) GTK_FILE_CHOOSER_DIALOG(RVAL2GOBJ(self))
 
 static VALUE
-fchodiag_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+fchodiag_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, parent, action, back, button_ary;
     GtkWidget* dialog;
