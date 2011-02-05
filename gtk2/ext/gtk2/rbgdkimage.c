@@ -17,8 +17,7 @@
 #define _SELF(i) GDK_IMAGE(RVAL2GOBJ(i))
 
 static VALUE
-gdkimage_initialize(self, type, visual, w, h)
-    VALUE self, type, visual, w, h;
+gdkimage_initialize(VALUE self, VALUE type, VALUE visual, VALUE w, VALUE h)
 {
     GdkImage* image = gdk_image_new((GdkImageType)RVAL2GENUM(type, GDK_TYPE_IMAGE_TYPE),
                                     GDK_VISUAL(RVAL2GOBJ(visual)),
@@ -33,23 +32,20 @@ gdkimage_initialize(self, type, visual, w, h)
 }
 
 static VALUE
-gdkimage_get_colormap(self)
-    VALUE self;
+gdkimage_get_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_image_get_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkimage_set_colormap(self, colormap)
-    VALUE self, colormap;
+gdkimage_set_colormap(VALUE self, VALUE colormap)
 {
     gdk_image_set_colormap(_SELF(self), RVAL2GOBJ(colormap));
     return self;
 }
 
 static VALUE
-gdkimage_put_pixel(self, x, y, pix)
-    VALUE self, x, y, pix;
+gdkimage_put_pixel(VALUE self, VALUE x, VALUE y, VALUE pix)
 {
     gdk_image_put_pixel(_SELF(self),
                         NUM2INT(x), NUM2INT(y), NUM2INT(pix));
@@ -57,72 +53,62 @@ gdkimage_put_pixel(self, x, y, pix)
 }
 
 static VALUE
-gdkimage_get_pixel(self, x, y)
-    VALUE self, x, y;
+gdkimage_get_pixel(VALUE self, VALUE x, VALUE y)
 {
     return INT2NUM(gdk_image_get_pixel(_SELF(self),
                                        NUM2INT(x), NUM2INT(y)));
 }
 
 static VALUE
-gdkimage_image_type(self)
-    VALUE self;
+gdkimage_image_type(VALUE self)
 {
     return GENUM2RVAL((_SELF(self))->type, GDK_TYPE_IMAGE_TYPE);
 }
 
 static VALUE
-gdkimage_visual(self)
-    VALUE self;
+gdkimage_visual(VALUE self)
 {
     return GOBJ2RVAL((_SELF(self))->visual);
 }
 
 static VALUE
-gdkimage_byte_order(self)
-    VALUE self;
+gdkimage_byte_order(VALUE self)
 {
     return GENUM2RVAL((_SELF(self))->byte_order, GDK_TYPE_BYTE_ORDER);
 }
 
 static VALUE
-gdkimage_bits_per_pixel(self)
-    VALUE self;
+gdkimage_bits_per_pixel(VALUE self)
 {
     return INT2NUM((_SELF(self))->bits_per_pixel);
 }
 
 static VALUE
-gdkimage_width(self)
-    VALUE self;
+gdkimage_width(VALUE self)
 {
     return INT2NUM((_SELF(self))->width);
 }
 
 static VALUE
-gdkimage_height(self)
-    VALUE self;
+gdkimage_height(VALUE self)
 {
     return INT2NUM((_SELF(self))->height);
 }
 
 static VALUE
-gdkimage_depth(self)
-    VALUE self;
+gdkimage_depth(VALUE self)
 {
     return INT2NUM((_SELF(self))->depth);
 }
 
 static VALUE
-gdkimage_bpp(self)
-    VALUE self;
+gdkimage_bpp(VALUE self)
 {
     return INT2NUM((_SELF(self))->bpp);
 }
 
 static VALUE
-gdkimage_bpl(self)
-    VALUE self;
+gdkimage_bpl(VALUE self)
 {
     return INT2NUM((_SELF(self))->bpl);
 }
