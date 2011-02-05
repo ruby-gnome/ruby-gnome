@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-vbox_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+vbox_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE homogeneous, spacing;
 
