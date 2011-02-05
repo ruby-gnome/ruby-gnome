@@ -14,10 +14,7 @@
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
 static VALUE
-pixbuf_render_threshold_alpha(self, bitmap, src_x, src_y, dest_x, dest_y,
-                              width, height, alpha_threshold)
-    VALUE self, bitmap, src_x, src_y, dest_x, dest_y,
-    width, height, alpha_threshold;
+pixbuf_render_threshold_alpha(VALUE self, VALUE bitmap, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE alpha_threshold)
 {
     gdk_pixbuf_render_threshold_alpha(_SELF(self), GDK_BITMAP(RVAL2GOBJ(bitmap)),
                                       NUM2INT(src_x), NUM2INT(src_y),
@@ -28,10 +25,7 @@ pixbuf_render_threshold_alpha(self, bitmap, src_x, src_y, dest_x, dest_y,
 }
 
 static VALUE
-pixbuf_render_to_drawable(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+pixbuf_render_to_drawable(int argc, VALUE *argv, VALUE self)
 {
     VALUE gc, src_x, src_y, dest_x, dest_y, width, height,
         dither, x_dither, y_dither;
@@ -71,10 +65,7 @@ pixbuf_render_to_drawable(argc, argv, self)
 }
 
 static VALUE
-pixbuf_render_pixmap_and_mask(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+pixbuf_render_pixmap_and_mask(int argc, VALUE *argv, VALUE self)
 {
     VALUE colormap_or_alpha, alpha;
     GdkPixmap *pixmap;
@@ -102,10 +93,7 @@ pixbuf_render_pixmap_and_mask(argc, argv, self)
 }
 
 static VALUE
-pixbuf_s_from_drawable(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+pixbuf_s_from_drawable(int argc, VALUE *argv, VALUE self)
 {
     VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
     GdkPixbuf* buf;
@@ -132,10 +120,7 @@ pixbuf_s_from_drawable(argc, argv, self)
 }
  
 static VALUE
-pixbuf_s_from_image(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+pixbuf_s_from_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
     GdkPixbuf* buf;
