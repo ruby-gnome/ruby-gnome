@@ -40,8 +40,7 @@ gtk_target_list_get_type(void)
 /**********************************/
 
 static VALUE
-target_list_initialize(self, targets)
-     VALUE self, targets;
+target_list_initialize(VALUE self, VALUE targets)
 {
     Check_Type(targets, T_ARRAY);
     G_INITIALIZE(self, gtk_target_list_new(
@@ -51,8 +50,7 @@ target_list_initialize(self, targets)
 }
 
 static VALUE
-target_list_add(self, target, flags, info)
-    VALUE self, target, flags, info;
+target_list_add(VALUE self, VALUE target, VALUE flags, VALUE info)
 {
     gtk_target_list_add(_SELF(self), RVAL2ATOM(target),
                         FIX2UINT(flags), FIX2UINT(info));
@@ -60,8 +58,7 @@ target_list_add(self, target, flags, info)
 }
 
 static VALUE
-target_list_add_table(self, targets)
-    VALUE self, targets;
+target_list_add_table(VALUE self, VALUE targets)
 {
     gtk_target_list_add_table(_SELF(self),
                               rbgtk_get_target_entry(targets), 
@@ -71,24 +68,21 @@ target_list_add_table(self, targets)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-target_list_add_text_targets(self, info)
-    VALUE self, info;
+target_list_add_text_targets(VALUE self, VALUE info)
 {
     gtk_target_list_add_text_targets(_SELF(self), NUM2UINT(info));
     return self;
 }
 
 static VALUE
-target_list_add_image_targets(self, info, writable)
-    VALUE self, info, writable;
+target_list_add_image_targets(VALUE self, VALUE info, VALUE writable)
 {
     gtk_target_list_add_image_targets(_SELF(self), NUM2UINT(info), RVAL2CBOOL(writable));
     return self;
 }
 
 static VALUE
-target_list_add_uri_targets(self, info)
-    VALUE self, info;
+target_list_add_uri_targets(VALUE self, VALUE info)
 {
     gtk_target_list_add_uri_targets(_SELF(self), NUM2UINT(info));
     return self;
@@ -97,8 +91,7 @@ target_list_add_uri_targets(self, info)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-target_list_add_rich_text_targets(self, info, deserializable, buffer)
-    VALUE self, info, deserializable, buffer;
+target_list_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, VALUE buffer)
 {
     gtk_target_list_add_rich_text_targets(_SELF(self), NUM2UINT(info),
                                           RVAL2CBOOL(deserializable),
@@ -108,16 +101,14 @@ target_list_add_rich_text_targets(self, info, deserializable, buffer)
 #endif
 
 static VALUE
-target_list_remove(self, target)
-    VALUE self, target;
+target_list_remove(VALUE self, VALUE target)
 {
     gtk_target_list_remove(_SELF(self), RVAL2ATOM(target));
     return self;
 }
 
 static VALUE
-target_list_find(self, target)
-    VALUE self, target;
+target_list_find(VALUE self, VALUE target)
 {
     guint info;
     gboolean ret = gtk_target_list_find(_SELF(self), RVAL2ATOM(target),
