@@ -16,8 +16,7 @@
 #define _SELF(self) (GTK_TOGGLE_ACTION(RVAL2GOBJ(self)))
 
 static VALUE
-taction_initialize(self, name, label, tooltip, stock_id)
-    VALUE self, name, label, tooltip, stock_id;
+taction_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id)
 {
     const gchar *gstockid = NULL;
 
@@ -35,24 +34,21 @@ taction_initialize(self, name, label, tooltip, stock_id)
 }
 
 static VALUE
-taction_toggled(self)
-    VALUE self;
+taction_toggled(VALUE self)
 {
     gtk_toggle_action_toggled(_SELF(self));
     return self;
 }
 
 static VALUE
-taction_set_active(self, is_active)
-    VALUE self, is_active;
+taction_set_active(VALUE self, VALUE is_active)
 {
     gtk_toggle_action_set_active(_SELF(self), RVAL2CBOOL(is_active));
     return self;
 }
 
 static VALUE
-taction_get_active(self)
-    VALUE self;
+taction_get_active(VALUE self)
 {
     return CBOOL2RVAL(gtk_toggle_action_get_active(_SELF(self)));
 }
