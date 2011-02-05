@@ -19,10 +19,7 @@
 static ID id_buffer;
 
 static VALUE
-textview_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+textview_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE buffer;
     GtkWidget* widget;
@@ -40,8 +37,7 @@ textview_initialize(argc, argv, self)
 }
 
 static VALUE
-textview_set_buffer(self, buf)
-    VALUE self, buf;
+textview_set_buffer(VALUE self, VALUE buf)
 {
     G_CHILD_SET(self, id_buffer, buf);
     gtk_text_view_set_buffer(_SELF(self), 
@@ -50,8 +46,7 @@ textview_set_buffer(self, buf)
 }
 
 static VALUE
-textview_get_buffer(self)
-    VALUE self;
+textview_get_buffer(VALUE self)
 {
     VALUE buf = GOBJ2RVAL(gtk_text_view_get_buffer(_SELF(self)));
     G_CHILD_SET(self, id_buffer, buf);
@@ -60,8 +55,7 @@ textview_get_buffer(self)
 }
 
 static VALUE
-textview_scroll_to_mark(self, mark, within_margin, use_align, xalign, yalign)
-    VALUE self, mark, within_margin, use_align, xalign, yalign;
+textview_scroll_to_mark(VALUE self, VALUE mark, VALUE within_margin, VALUE use_align, VALUE xalign, VALUE yalign)
 {
     gtk_text_view_scroll_to_mark(_SELF(self), RVAL2MARK(mark), 
                                  NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
@@ -70,8 +64,7 @@ textview_scroll_to_mark(self, mark, within_margin, use_align, xalign, yalign)
 }
 
 static VALUE
-textview_scroll_to_iter(self, iter, within_margin, use_align, xalign, yalign)
-    VALUE self, iter, within_margin, use_align, xalign, yalign;
+textview_scroll_to_iter(VALUE self, VALUE iter, VALUE within_margin, VALUE use_align, VALUE xalign, VALUE yalign)
 {
     return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
                                                    NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
@@ -79,30 +72,26 @@ textview_scroll_to_iter(self, iter, within_margin, use_align, xalign, yalign)
 }
 
 static VALUE
-textview_scroll_mark_onscreen(self, mark)
-    VALUE self, mark;
+textview_scroll_mark_onscreen(VALUE self, VALUE mark)
 {
     gtk_text_view_scroll_mark_onscreen(_SELF(self), RVAL2MARK(mark));
     return self;
 }
 
 static VALUE
-textview_move_mark_onscreen(self, mark)
-    VALUE self, mark;
+textview_move_mark_onscreen(VALUE self, VALUE mark)
 {
     return CBOOL2RVAL(gtk_text_view_move_mark_onscreen(_SELF(self), RVAL2MARK(mark)));
 }
 
 static VALUE
-textview_place_cursor_onscreen(self)
-    VALUE self;
+textview_place_cursor_onscreen(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_view_place_cursor_onscreen(_SELF(self)));
 }
 
 static VALUE
-textview_get_visible_rect(self)
-    VALUE self;
+textview_get_visible_rect(VALUE self)
 {
     GdkRectangle rect;
     gtk_text_view_get_visible_rect(_SELF(self), &rect);
@@ -110,8 +99,7 @@ textview_get_visible_rect(self)
 }
 
 static VALUE
-textview_get_iter_location(self, iter)
-    VALUE self, iter;
+textview_get_iter_location(VALUE self, VALUE iter)
 {
     GdkRectangle rect;
     gtk_text_view_get_iter_location(_SELF(self), RVAL2ITR(iter), &rect);
@@ -119,8 +107,7 @@ textview_get_iter_location(self, iter)
 }
 
 static VALUE
-textview_get_line_at_y(self, y)
-    VALUE self, y;
+textview_get_line_at_y(VALUE self, VALUE y)
 {
     GtkTextIter target_iter;
     gint line_top;
@@ -129,8 +116,7 @@ textview_get_line_at_y(self, y)
 }
 
 static VALUE
-textview_get_line_yrange(self, iter)
-    VALUE self, iter;
+textview_get_line_yrange(VALUE self, VALUE iter)
 {
     int y, height;
     gtk_text_view_get_line_yrange(_SELF(self), RVAL2ITR(iter), &y, &height);
@@ -139,8 +125,7 @@ textview_get_line_yrange(self, iter)
 }
 
 static VALUE
-textview_get_iter_at_location(self, x, y)
-    VALUE self, x, y;
+textview_get_iter_at_location(VALUE self, VALUE x, VALUE y)
 {
     GtkTextIter iter;
     gtk_text_view_get_iter_at_location(_SELF(self), &iter, NUM2INT(x), NUM2INT(y));
@@ -149,8 +134,7 @@ textview_get_iter_at_location(self, x, y)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-textview_get_iter_at_position(self, x, y)
-    VALUE self, x, y;
+textview_get_iter_at_position(VALUE self, VALUE x, VALUE y)
 {
     GtkTextIter iter;
     gint trailing;
@@ -160,8 +144,7 @@ textview_get_iter_at_position(self, x, y)
 #endif
 
 static VALUE
-textview_buffer_to_window_coords(self, wintype, buffer_x, buffer_y)
-    VALUE self, wintype, buffer_x, buffer_y;
+textview_buffer_to_window_coords(VALUE self, VALUE wintype, VALUE buffer_x, VALUE buffer_y)
 {
     int window_x, window_y;
     gtk_text_view_buffer_to_window_coords(_SELF(self), 
@@ -172,8 +155,7 @@ textview_buffer_to_window_coords(self, wintype, buffer_x, buffer_y)
 }
 
 static VALUE
-textview_window_to_buffer_coords(self, wintype, window_x, window_y)
-    VALUE self, wintype, window_x, window_y;
+textview_window_to_buffer_coords(VALUE self, VALUE wintype, VALUE window_x, VALUE window_y)
 {
     int buffer_x, buffer_y;
     gtk_text_view_window_to_buffer_coords(_SELF(self),
@@ -184,8 +166,7 @@ textview_window_to_buffer_coords(self, wintype, window_x, window_y)
 }
 
 static VALUE
-textview_get_window(self, wintype)
-    VALUE self, wintype;
+textview_get_window(VALUE self, VALUE wintype)
 {
     GdkWindow* win = NULL;
     win = gtk_text_view_get_window(_SELF(self), 
@@ -194,16 +175,14 @@ textview_get_window(self, wintype)
 }
 
 static VALUE
-textview_get_window_type(self, gdkwin)
-    VALUE self, gdkwin;
+textview_get_window_type(VALUE self, VALUE gdkwin)
 {
     return GENUM2RVAL(gtk_text_view_get_window_type(_SELF(self), RVAL2GOBJ(gdkwin)), 
                       GTK_TYPE_TEXT_WINDOW_TYPE);
 }
 
 static VALUE
-textview_set_border_window_size(self, wintype, size)
-    VALUE self, wintype, size;
+textview_set_border_window_size(VALUE self, VALUE wintype, VALUE size)
 {
     gtk_text_view_set_border_window_size(_SELF(self), 
                                          RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE), 
@@ -212,8 +191,7 @@ textview_set_border_window_size(self, wintype, size)
 }
 
 static VALUE
-textview_get_border_window_size(self, wintype)
-    VALUE self, wintype;
+textview_get_border_window_size(VALUE self, VALUE wintype)
 {
     return INT2NUM(gtk_text_view_get_border_window_size(
                        _SELF(self), 
@@ -221,50 +199,43 @@ textview_get_border_window_size(self, wintype)
 }
 
 static VALUE
-textview_forward_display_line(self, iter)
-    VALUE self, iter;
+textview_forward_display_line(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_text_view_forward_display_line(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
-textview_backward_display_line(self, iter)
-    VALUE self, iter;
+textview_backward_display_line(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_text_view_backward_display_line(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
-textview_forward_display_line_end(self, iter)
-    VALUE self, iter;
+textview_forward_display_line_end(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_text_view_forward_display_line_end(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
-textview_backward_display_line_start(self, iter)
-    VALUE self, iter;
+textview_backward_display_line_start(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_text_view_backward_display_line_start(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
-textview_starts_display_line(self, iter)
-    VALUE self, iter;
+textview_starts_display_line(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_text_view_starts_display_line(_SELF(self), RVAL2ITR(iter)));
 }
 
 static VALUE
-textview_move_visually(self, iter, count)
-    VALUE self, iter, count;
+textview_move_visually(VALUE self, VALUE iter, VALUE count)
 {
     return CBOOL2RVAL(gtk_text_view_move_visually(_SELF(self), RVAL2ITR(iter), NUM2INT(count)));
 }
 
 static VALUE
-textview_add_child_at_anchor(self, child, anchor)
-    VALUE self, child, anchor;
+textview_add_child_at_anchor(VALUE self, VALUE child, VALUE anchor)
 {
     G_CHILD_ADD(self, child);
     gtk_text_view_add_child_at_anchor(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
@@ -273,8 +244,7 @@ textview_add_child_at_anchor(self, child, anchor)
 }
 
 static VALUE
-textview_add_child_in_window(self, child, which_window, xpos, ypos)
-    VALUE self, child, which_window, xpos, ypos;
+textview_add_child_in_window(VALUE self, VALUE child, VALUE which_window, VALUE xpos, VALUE ypos)
 {
     G_CHILD_ADD(self, child);
     gtk_text_view_add_child_in_window(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
@@ -284,8 +254,7 @@ textview_add_child_in_window(self, child, which_window, xpos, ypos)
 }
 
 static VALUE
-textview_move_child(self, child, xpos, ypos)
-    VALUE self, child, xpos, ypos;
+textview_move_child(VALUE self, VALUE child, VALUE xpos, VALUE ypos)
 {
     G_CHILD_ADD(self, child);
     gtk_text_view_move_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
@@ -294,8 +263,7 @@ textview_move_child(self, child, xpos, ypos)
 }
 
 static VALUE
-textview_get_default_attributes(self)
-    VALUE self;
+textview_get_default_attributes(VALUE self)
 {
     return BOXED2RVAL(gtk_text_view_get_default_attributes(_SELF(self)), 
                       GTK_TYPE_TEXT_ATTRIBUTES);
