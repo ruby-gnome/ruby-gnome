@@ -13,22 +13,19 @@
 #define _SELF(s) GDK_KEYMAP(RVAL2GOBJ(s))
 
 static VALUE
-gdkkeymap_s_get_default(self)
-     VALUE self;
+gdkkeymap_s_get_default(VALUE self)
 {
   return GOBJ2RVAL(gdk_keymap_get_default());
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkkeymap_s_get_for_display(self, display)
-    VALUE self, display;
+gdkkeymap_s_get_for_display(VALUE self, VALUE display)
 {
   return GOBJ2RVAL(gdk_keymap_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display))));
 }
 #endif
 static VALUE
-gdkkeymap_lookup_key(self, keycode, group, level)
-     VALUE self, keycode, group, level;
+gdkkeymap_lookup_key(VALUE self, VALUE keycode, VALUE group, VALUE level)
 {
   GdkKeymapKey key;
 
@@ -40,8 +37,7 @@ gdkkeymap_lookup_key(self, keycode, group, level)
 }
 
 static VALUE
-gdkkeymap_translate_keyboard_state(self, hardware_keycode, state, group)
-     VALUE self, hardware_keycode, state, group;
+gdkkeymap_translate_keyboard_state(VALUE self, VALUE hardware_keycode, VALUE state, VALUE group)
 {
   guint keyval;
   gint effective_group, level;
@@ -60,8 +56,7 @@ gdkkeymap_translate_keyboard_state(self, hardware_keycode, state, group)
 }
 
 static VALUE
-gdkkeymap_get_entries_for_keyval(self, keyval)
-     VALUE self, keyval;
+gdkkeymap_get_entries_for_keyval(VALUE self, VALUE keyval)
 {
   GdkKeymapKey* keys;
   gint n_keys;
@@ -86,8 +81,7 @@ gdkkeymap_get_entries_for_keyval(self, keyval)
 }
 
 static VALUE
-gdkkeymap_get_entries_for_keycode(self, hardware_keycode)
-     VALUE self, hardware_keycode;
+gdkkeymap_get_entries_for_keycode(VALUE self, VALUE hardware_keycode)
 {
   GdkKeymapKey* keys;
   guint* keyvals;
@@ -113,8 +107,7 @@ gdkkeymap_get_entries_for_keycode(self, hardware_keycode)
 }
 
 static VALUE
-gdkkeymap_get_direction(self)
-     VALUE self;
+gdkkeymap_get_direction(VALUE self)
 {
   return GENUM2RVAL(gdk_keymap_get_direction(_SELF(self)), PANGO_TYPE_DIRECTION);
 }
