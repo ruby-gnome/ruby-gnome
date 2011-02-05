@@ -16,8 +16,7 @@
 #define _SELF(self) (GTK_ABOUT_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-aboutdialog_initialize(self)
-    VALUE self;
+aboutdialog_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_about_dialog_new());
     return Qnil;
@@ -90,8 +89,7 @@ activate_link_func(about, link, func)
 }
 
 static VALUE
-aboutdialog_s_set_email_hook(self)
-    VALUE self;
+aboutdialog_s_set_email_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -100,8 +98,7 @@ aboutdialog_s_set_email_hook(self)
 }
 
 static VALUE
-aboutdialog_s_set_url_hook(self)
-    VALUE self;
+aboutdialog_s_set_url_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -118,8 +115,7 @@ typedef struct {
 #define ABOUT_PROP_NUM (15)
 
 static VALUE
-aboutdialog_s_show_about_dialog(self, parent, props)
-    VALUE self, parent, props;
+aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
 {
     int i;
     VALUE ary;
