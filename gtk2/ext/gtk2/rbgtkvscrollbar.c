@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-vscrollbar_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+vscrollbar_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1;
     GtkAdjustment *adj = NULL;
