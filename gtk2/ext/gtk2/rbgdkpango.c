@@ -13,10 +13,7 @@
 #include "rbpango.h"
 
 static VALUE
-gdkpango_s_context_get(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkpango_s_context_get(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen, ret;
     rb_scan_args(argc, argv, "01", &screen);
@@ -34,8 +31,7 @@ gdkpango_s_context_get(argc, argv, self)
 }
 
 static VALUE
-gdkpango_context_set_colormap(self, colormap)
-    VALUE self, colormap;
+gdkpango_context_set_colormap(VALUE self, VALUE colormap)
 {
     gdk_pango_context_set_colormap(PANGO_CONTEXT(RVAL2GOBJ(self)),
                                    GDK_COLORMAP(RVAL2GOBJ(self)));
@@ -43,38 +39,33 @@ gdkpango_context_set_colormap(self, colormap)
 }
 
 static VALUE
-gdkpango_attr_embossed_initialize(self, embossed)
-    VALUE self, embossed;
+gdkpango_attr_embossed_initialize(VALUE self, VALUE embossed)
 {
     DATA_PTR(self) = gdk_pango_attr_embossed_new(RVAL2CBOOL(embossed));
     return Qnil;
 }
 
 static VALUE
-gdkpango_attr_embossed_value(self)
-    VALUE self;
+gdkpango_attr_embossed_value(VALUE self)
 {
     return CBOOL2RVAL(((GdkPangoAttrEmbossed*)RVAL2ATTR(self))->embossed);
 }
 
 static VALUE
-gdkpango_attr_stipple_initialize(self, stipple)
-    VALUE self, stipple;
+gdkpango_attr_stipple_initialize(VALUE self, VALUE stipple)
 {
     DATA_PTR(self) = gdk_pango_attr_stipple_new(GDK_BITMAP(RVAL2GOBJ(stipple)));
     return Qnil;
 }
 
 static VALUE
-gdkpango_attr_stipple_value(self)
-    VALUE self;
+gdkpango_attr_stipple_value(VALUE self)
 {
     return GOBJ2RVAL(((GdkPangoAttrStipple*)RVAL2ATTR(self))->stipple);
 }
 
 static VALUE
-gdkpango_layout_get_clip_region(self, x_origin, y_origin, index_ranges)
-    VALUE self, x_origin, y_origin, index_ranges;
+gdkpango_layout_get_clip_region(VALUE self, VALUE x_origin, VALUE y_origin, VALUE index_ranges)
 {
     int i;
     gint len = RARRAY_LEN(index_ranges);
@@ -90,8 +81,7 @@ gdkpango_layout_get_clip_region(self, x_origin, y_origin, index_ranges)
 }
 
 static VALUE
-gdkpango_layout_line_get_clip_region(self, x_origin, y_origin, index_ranges)
-    VALUE self, x_origin, y_origin, index_ranges;
+gdkpango_layout_line_get_clip_region(VALUE self, VALUE x_origin, VALUE y_origin, VALUE index_ranges)
 {
     int i;
     gint len = RARRAY_LEN(index_ranges);
