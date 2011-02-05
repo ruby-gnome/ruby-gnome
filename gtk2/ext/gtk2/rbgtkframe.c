@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-frame_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+frame_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label;
     rb_scan_args(argc, argv, "01", &label);
@@ -27,8 +24,7 @@ frame_initialize(argc, argv, self)
 }
 
 static VALUE
-frame_set_label_align(self, xalign, yalign)
-    VALUE self, xalign, yalign;
+frame_set_label_align(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_frame_set_label_align(GTK_FRAME(RVAL2GOBJ(self)),
 			      NUM2DBL(xalign),
@@ -38,8 +34,7 @@ frame_set_label_align(self, xalign, yalign)
 }
 
 static VALUE
-frame_get_label_align(self)
-    VALUE self;
+frame_get_label_align(VALUE self)
 {
     gfloat xalign, yalign;
     gtk_frame_get_label_align(GTK_FRAME(RVAL2GOBJ(self)),
