@@ -15,25 +15,20 @@
 #define _SELF(self) GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))
 
 static VALUE
-textchild_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+textchild_initialize(int argc, VALUE *argv, VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_text_child_anchor_new());
     return Qnil;
 }
 
 static VALUE
-textchild_get_widgets(self)
-    VALUE self;
+textchild_get_widgets(VALUE self)
 {
     return GLIST2ARYF(gtk_text_child_anchor_get_widgets(_SELF(self)));
 }
 
 static VALUE
-textchild_get_deleted(self)
-    VALUE self;
+textchild_get_deleted(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_child_anchor_get_deleted(_SELF(self)));
 }
