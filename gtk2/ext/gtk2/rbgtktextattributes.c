@@ -16,14 +16,12 @@
 /***********************************************/
 #define ATTR_INT(name)\
 static VALUE \
-txt_attr_int_ ## name (self)\
-    VALUE self;\
+txt_attr_int_ ## name (VALUE self)\
 {\
     return INT2NUM(_SELF(self)->name);\
 }\
 static VALUE \
-txt_attr_int_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_attr_int_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = NUM2INT(val); \
     return self;\
@@ -46,14 +44,12 @@ txt_attr_bool_set_ ## name (self, val)\
 
 #define ATTR_FLAGS(name, gtype)\
 static VALUE \
-txt_attr_flags_ ## name (self)\
-    VALUE self;\
+txt_attr_flags_ ## name (VALUE self)\
 {\
     return GFLAGS2RVAL(_SELF(self)->name, gtype);\
 }\
 static VALUE \
-txt_attr_flags_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_attr_flags_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2GFLAGS(val, gtype);\
     return self;\
@@ -61,14 +57,12 @@ txt_attr_flags_set_ ## name (self, val)\
 
 #define ATTR_ENUM(name, gtype)\
 static VALUE \
-txt_attr_enums_ ## name (self)\
-    VALUE self;\
+txt_attr_enums_ ## name (VALUE self)\
 {\
     return GENUM2RVAL(_SELF(self)->name, gtype);\
 }\
 static VALUE \
-txt_attr_enums_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_attr_enums_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2GENUM(val, gtype);\
     return self;\
@@ -76,8 +70,7 @@ txt_attr_enums_set_ ## name (self, val)\
 
 #define ATTR_BOXED(name, gtype)\
 static VALUE \
-txt_attr_boxed_ ## name (self)\
-    VALUE self;\
+txt_attr_boxed_ ## name (VALUE self)\
 {\
     VALUE val; \
     if (_SELF(self)->name == NULL) return Qnil;\
@@ -86,8 +79,7 @@ txt_attr_boxed_ ## name (self)\
     return val;\
 }\
 static VALUE \
-txt_attr_boxed_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_attr_boxed_set_ ## name (VALUE self, VALUE val)\
 {\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
     _SELF(self)->name = RVAL2BOXED(val, gtype);\
@@ -100,15 +92,13 @@ txt_attr_boxed_set_ ## name (self, val)\
 
 /***********************************************/
 static VALUE
-txt_attr_boxed_appearance(self)
-    VALUE self;
+txt_attr_boxed_appearance(VALUE self)
 {
     GtkTextAppearance app = _SELF(self)->appearance;
     return BOXED2RVAL(&app, GTK_TYPE_TEXT_APPEARANCE);
 }
 static VALUE
-txt_attr_boxed_set_appearance(self, val)
-    VALUE self, val;
+txt_attr_boxed_set_appearance(VALUE self, VALUE val)
 {
     GtkTextAppearance* app = (GtkTextAppearance*)RVAL2BOXED(val, GTK_TYPE_TEXT_APPEARANCE);
     _SELF(self)->appearance = *app;
@@ -120,14 +110,12 @@ ATTR_ENUM(direction, GTK_TYPE_DIRECTION_TYPE);
 ATTR_BOXED(font, PANGO_TYPE_FONT_DESCRIPTION);
 
 static VALUE
-txt_attr_double_font_scale(self)
-    VALUE self;
+txt_attr_double_font_scale(VALUE self)
 {
     return rb_float_new(_SELF(self)->font_scale);
 }
 static VALUE
-txt_attr_double_set_font_scale(self, val)
-    VALUE self, val;
+txt_attr_double_set_font_scale(VALUE self, VALUE val)
 {
     _SELF(self)->font_scale = NUM2DBL(val);
     return self;
@@ -153,8 +141,7 @@ ATTR_BOOL(realized);
 /***********************************************/
 
 static VALUE
-txt_attr_initialize(self)
-    VALUE self;
+txt_attr_initialize(VALUE self)
 {
     GtkTextAttributes *attr;
 
@@ -164,8 +151,7 @@ txt_attr_initialize(self)
 }
 
 static VALUE
-txt_attr_copy_values(self, dest)
-    VALUE self, dest;
+txt_attr_copy_values(VALUE self, VALUE dest)
 {
     gtk_text_attributes_copy_values(_SELF(self), _SELF(dest));
     return self;
