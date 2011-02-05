@@ -77,10 +77,7 @@ GdkWindow*  gdk_window_foreign_new_for_display
 */
 
 static VALUE
-rbx11_xid_table_lookup(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rbx11_xid_table_lookup(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg[2];
     GdkPixmap* win = NULL;
@@ -130,8 +127,7 @@ guint32     gdk_x11_get_server_time         (GdkWindow *window);
 */
 
 static VALUE
-rbx11_net_wm_supports(self, property)
-    VALUE self, property;
+rbx11_net_wm_supports(VALUE self, VALUE property)
 {
     return CBOOL2RVAL(gdk_net_wm_supports(RVAL2ATOM(property)));
 }
@@ -182,8 +178,7 @@ Window      gdk_x11_get_default_root_xwindow
 */
 
 static VALUE
-rbx11_get_default_screen(self)
-    VALUE self;
+rbx11_get_default_screen(VALUE self)
 {
     return INT2NUM(gdk_x11_get_default_screen());
 }
@@ -192,8 +187,7 @@ Display*    gdk_x11_get_default_xdisplay    (void);
 */
 
 static VALUE
-rbx11_grab_server(self)
-    VALUE self;
+rbx11_grab_server(VALUE self)
 {
     gdk_x11_grab_server();
     return Qnil;
@@ -211,8 +205,7 @@ Screen*     gdk_x11_screen_get_xscreen      (GdkScreen *screen);
 */
 
 static VALUE
-rbx11_ungrab_server(self)
-    VALUE self;
+rbx11_ungrab_server(VALUE self)
 {
     gdk_x11_ungrab_server();
     return Qnil;
