@@ -18,8 +18,7 @@
 #endif /* HAVE_XREADBITMAPFILEDATA */
 
 static VALUE
-gdkpmap_initialize(self, win, w, h, depth)
-    VALUE self, win, w, h, depth;
+gdkpmap_initialize(VALUE self, VALUE win, VALUE w, VALUE h, VALUE depth)
 {
 	G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
                                           NUM2INT(w), NUM2INT(h), 
@@ -28,10 +27,7 @@ gdkpmap_initialize(self, win, w, h, depth)
 }
 
 static VALUE
-gdkpmap_create_from_data(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkpmap_create_from_data(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, data, w, h, depth, fg, bg, ret;
 
@@ -52,8 +48,7 @@ gdkpmap_create_from_data(argc, argv, self)
 }
 
 static VALUE
-gdkpmap_create_from_xpm(self, win, color, fname)
-    VALUE self, win, color, fname;
+gdkpmap_create_from_xpm(VALUE self, VALUE win, VALUE color, VALUE fname)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
@@ -67,8 +62,7 @@ gdkpmap_create_from_xpm(self, win, color, fname)
 }
 
 static VALUE
-gdkpmap_create_from_xpm_d(self, win, tcolor, data)
-    VALUE self, win, tcolor, data;
+gdkpmap_create_from_xpm_d(VALUE self, VALUE win, VALUE tcolor, VALUE data)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
@@ -87,8 +81,7 @@ gdkpmap_create_from_xpm_d(self, win, tcolor, data)
 }
 
 static VALUE
-gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
-    VALUE self, win, colormap, tcolor, fname;
+gdkpmap_colormap_create_from_xpm(VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE fname)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
@@ -104,8 +97,7 @@ gdkpmap_colormap_create_from_xpm(self, win, colormap, tcolor, fname)
 }
 
 static VALUE
-gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
-    VALUE self, win, colormap, tcolor, data;
+gdkpmap_colormap_create_from_xpm_d(VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE data)
 {
     GdkPixmap *new;
     GdkBitmap *mask;
@@ -128,8 +120,7 @@ gdkpmap_colormap_create_from_xpm_d(self, win, colormap, tcolor, data)
 
 #ifdef HAVE_XREADBITMAPFILEDATA
 static VALUE
-gdkpmap_create_from_xbm(self, win, fname)
-    VALUE self, win, fname;
+gdkpmap_create_from_xbm(VALUE self, VALUE win, VALUE fname)
 {
     GdkBitmap *new;
     unsigned char *data;
@@ -155,10 +146,7 @@ gdkpmap_create_from_xbm(self, win, fname)
  */
 
 static VALUE
-gdkpmap_foreign_new(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkpmap_foreign_new(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg[5];
     GdkPixmap* win = NULL;
@@ -196,10 +184,7 @@ gdkpmap_foreign_new(argc, argv, self)
 }
 
 static VALUE
-gdkpmap_lookup(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkpmap_lookup(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg[2];
     GdkPixmap* win = NULL;
