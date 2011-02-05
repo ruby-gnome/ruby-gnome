@@ -50,44 +50,35 @@ box_pack_start_or_end(argc, argv, self, start)
 }
 
 static VALUE
-box_pack_start(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+box_pack_start(int argc, VALUE *argv, VALUE self)
 {
     box_pack_start_or_end(argc, argv, self, 1);
     return self;
 }
 
 static VALUE
-box_pack_end(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+box_pack_end(int argc, VALUE *argv, VALUE self)
 {
     box_pack_start_or_end(argc, argv, self, 0);
     return self;
 }
 
 static VALUE
-box_pack_start_defaults(self, widget)
-    VALUE self, widget;
+box_pack_start_defaults(VALUE self, VALUE widget)
 {
     gtk_box_pack_start_defaults(_SELF(self), RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-box_pack_end_defaults(self, widget)
-    VALUE self, widget;
+box_pack_end_defaults(VALUE self, VALUE widget)
 {
     gtk_box_pack_end_defaults(_SELF(self), RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-box_reorder_child(self, child, pos)
-    VALUE self, child, pos;
+box_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
     gtk_box_reorder_child(_SELF(self),
                           RVAL2WIDGET(child), NUM2INT(pos));
@@ -95,8 +86,7 @@ box_reorder_child(self, child, pos)
 }
 
 static VALUE
-box_query_child_packing(self, child)
-	VALUE self, child;
+box_query_child_packing(VALUE self, VALUE child)
 {
     gboolean expand, fill;
     guint padding;
@@ -117,8 +107,7 @@ box_query_child_packing(self, child)
 }
 
 static VALUE
-box_set_child_packing(self, child, expand, fill, padding, pack_type)
-	VALUE self, child, expand, fill, padding, pack_type;
+box_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE padding, VALUE pack_type)
 {
     gtk_box_set_child_packing(_SELF(self), 
                               RVAL2WIDGET(child),
