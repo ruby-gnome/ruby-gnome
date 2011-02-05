@@ -61,16 +61,14 @@ GtkRecentFilter* gtk_recent_chooser_get_filter
 
 */
 static VALUE
-rc_set_show_numbers(self, val)
-    VALUE self, val;
+rc_set_show_numbers(VALUE self, VALUE val)
 {
     gtk_recent_chooser_set_show_numbers(_SELF(self), RVAL2CBOOL(val));
     return self;
 }
 
 static VALUE
-rc_get_show_numbers(self)
-    VALUE self;
+rc_get_show_numbers(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_chooser_get_show_numbers(_SELF(self)));
 }
@@ -82,8 +80,7 @@ struct callback_arg
 };
 
 static VALUE
-invoke_callback(data)
-    VALUE data;
+invoke_callback(VALUE data)
 {
     struct callback_arg *arg = (struct callback_arg *)data;
     return rb_funcall(arg->callback, id_call, 1, arg->a, arg->b);
@@ -97,10 +94,7 @@ remove_callback_reference(callback)
 }
 
 static gint
-sort_func(a, b, func)
-    GtkRecentInfo* a;
-    GtkRecentInfo* b;
-    gpointer func;
+sort_func(GtkRecentInfo *a, GtkRecentInfo *b, gpointer func)
 {
     struct callback_arg arg;
 
@@ -111,8 +105,7 @@ sort_func(a, b, func)
 }
 
 static VALUE
-rc_set_sort_func(self)
-    VALUE self;
+rc_set_sort_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_CHILD_ADD(mGtk, func);
@@ -122,8 +115,7 @@ rc_set_sort_func(self)
 }
 
 static VALUE
-rc_set_current_uri(self, uri)
-    VALUE self, uri;
+rc_set_current_uri(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gboolean ret = gtk_recent_chooser_set_current_uri(_SELF(self),
@@ -134,23 +126,20 @@ rc_set_current_uri(self, uri)
 }
 
 static VALUE
-rc_get_current_uri(self)
-    VALUE self;
+rc_get_current_uri(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_chooser_get_current_uri(_SELF(self)));
 }
 
 static VALUE
-rc_get_current_item(self)
-    VALUE self;
+rc_get_current_item(VALUE self)
 {
     return BOXED2RVAL(gtk_recent_chooser_get_current_item(_SELF(self)),
                       GTK_TYPE_RECENT_INFO);
 }
 
 static VALUE
-rc_select_uri(self, uri)
-    VALUE self, uri;
+rc_select_uri(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gboolean ret = gtk_recent_chooser_select_uri(_SELF(self),
@@ -161,32 +150,28 @@ rc_select_uri(self, uri)
 }
 
 static VALUE
-rc_unselect_uri(self, uri)
-    VALUE self, uri;
+rc_unselect_uri(VALUE self, VALUE uri)
 {
     gtk_recent_chooser_unselect_uri(_SELF(self), RVAL2CSTR(uri));
     return self;
 }
 
 static VALUE
-rc_select_all(self)
-    VALUE self;
+rc_select_all(VALUE self)
 {
     gtk_recent_chooser_select_all(_SELF(self));
     return self;
 }
 
 static VALUE
-rc_unselect_all(self)
-    VALUE self;
+rc_unselect_all(VALUE self)
 {
     gtk_recent_chooser_unselect_all(_SELF(self));
     return self;
 }
 
 static VALUE
-rc_get_items(self)
-    VALUE self;
+rc_get_items(VALUE self)
 {
     GList* list = gtk_recent_chooser_get_items(_SELF(self));
     VALUE ary = rb_ary_new();
@@ -200,8 +185,7 @@ rc_get_items(self)
 }
     
 static VALUE
-rc_get_uris(self)
-    VALUE self;
+rc_get_uris(VALUE self)
 {
     int i;
     gsize size;
@@ -215,8 +199,7 @@ rc_get_uris(self)
 }
 
 static VALUE
-rc_add_filter(self, filter)
-    VALUE self, filter;
+rc_add_filter(VALUE self, VALUE filter)
 {
     gtk_recent_chooser_add_filter(_SELF(self), 
                                   GTK_RECENT_FILTER(RVAL2GOBJ(filter)));
@@ -224,8 +207,7 @@ rc_add_filter(self, filter)
 }
 
 static VALUE
-rc_remove_filter(self, filter)
-    VALUE self, filter;
+rc_remove_filter(VALUE self, VALUE filter)
 {
     gtk_recent_chooser_remove_filter(_SELF(self),
                                      GTK_RECENT_FILTER(RVAL2GOBJ(filter)));
@@ -233,8 +215,7 @@ rc_remove_filter(self, filter)
 }
 
 static VALUE
-rc_list_filters(self)
-    VALUE self;
+rc_list_filters(VALUE self)
 {
     return GSLIST2ARYF(gtk_recent_chooser_list_filters(_SELF(self)));
 }
