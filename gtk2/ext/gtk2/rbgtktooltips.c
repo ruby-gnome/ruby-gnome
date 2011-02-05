@@ -20,32 +20,28 @@
 #define _SELF(self) (GTK_TOOLTIPS(RVAL2GOBJ(self)))
 
 static VALUE
-ttips_initialize(self)
-    VALUE self;
+ttips_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_tooltips_new());
     return Qnil;
 }
 
 static VALUE
-ttips_enable(self)
-    VALUE self;
+ttips_enable(VALUE self)
 {
     gtk_tooltips_enable(_SELF(self));
     return self;
 }
 
 static VALUE
-ttips_disable(self)
-    VALUE self;
+ttips_disable(VALUE self)
 {
     gtk_tooltips_disable(_SELF(self));
     return self;
 }
 
 static VALUE
-ttips_set_tip(self, win, text, priv)
-    VALUE self, win, text, priv;
+ttips_set_tip(VALUE self, VALUE win, VALUE text, VALUE priv)
 {
     gtk_tooltips_set_tip(_SELF(self),
 			 GTK_WIDGET(RVAL2GOBJ(win)),
@@ -56,8 +52,7 @@ ttips_set_tip(self, win, text, priv)
 }
 
 static VALUE
-ttips_s_data_get(self, widget)
-    VALUE self, widget;
+ttips_s_data_get(VALUE self, VALUE widget)
 {
     GtkTooltipsData* data = gtk_tooltips_data_get(GTK_WIDGET(RVAL2GOBJ(widget)));
 
@@ -66,8 +61,7 @@ ttips_s_data_get(self, widget)
 }
 
 static VALUE
-ttips_force_window(self)
-    VALUE self;
+ttips_force_window(VALUE self)
 {
     gtk_tooltips_force_window(_SELF(self));
     return self;
@@ -75,8 +69,7 @@ ttips_force_window(self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-ttips_s_get_info_from_tip_window(self, window)
-    VALUE self, window;
+ttips_s_get_info_from_tip_window(VALUE self, VALUE window)
 {
     GtkTooltips* tooltips;
     GtkWidget* current_widget;
