@@ -15,16 +15,14 @@
 static VALUE prop_func_table;
 
 static VALUE
-settings_s_get_default(self)
-    VALUE self;
+settings_s_get_default(VALUE self)
 {
     return GOBJ2RVAL(gtk_settings_get_default());
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-settings_s_get_for_screen(self, screen)
-    VALUE self, screen;
+settings_s_get_for_screen(VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_settings_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
@@ -38,10 +36,7 @@ settings_s_get_for_screen(self, screen)
  * end
  */
 static gboolean
-rc_property_parser(pspec, rc_string, property_value)
-    const GParamSpec *pspec;
-    const GString *rc_string;
-    GValue *property_value;
+rc_property_parser(const GParamSpec *pspec, const GString *rc_string, GValue *property_value)
 {
     VALUE spec = GOBJ2RVAL((gpointer)pspec);
     VALUE func = rb_hash_aref(prop_func_table, spec);
@@ -57,8 +52,7 @@ rc_property_parser(pspec, rc_string, property_value)
 }
 
 static VALUE
-settings_s_install_property(self, spec)
-    VALUE self, spec;
+settings_s_install_property(VALUE self, VALUE spec)
 {
     GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
     if (rb_block_given_p()){
@@ -72,8 +66,7 @@ settings_s_install_property(self, spec)
 }
 
 static VALUE
-settings_rc_property_parse_color(self, spec, str)
-    VALUE self, spec, str;
+settings_rc_property_parse_color(VALUE self, VALUE spec, VALUE str)
 {
     gboolean ret; 
     GValue prop = {0,};
@@ -90,8 +83,7 @@ settings_rc_property_parse_color(self, spec, str)
 }
 
 static VALUE
-settings_rc_property_parse_enum(self, spec, str)
-    VALUE self, spec, str;
+settings_rc_property_parse_enum(VALUE self, VALUE spec, VALUE str)
 {
     gboolean ret; 
     GValue prop = {0,};
@@ -109,8 +101,7 @@ settings_rc_property_parse_enum(self, spec, str)
 }
 
 static VALUE
-settings_rc_property_parse_flags(self, spec, str)
-    VALUE self, spec, str;
+settings_rc_property_parse_flags(VALUE self, VALUE spec, VALUE str)
 {
     gboolean ret; 
     GValue prop = {0,};
@@ -128,8 +119,7 @@ settings_rc_property_parse_flags(self, spec, str)
 }
 
 static VALUE
-settings_rc_property_parse_requisition(self, spec, str)
-    VALUE self, spec, str;
+settings_rc_property_parse_requisition(VALUE self, VALUE spec, VALUE str)
 {
     gboolean ret; 
     GValue prop = {0,};
@@ -148,8 +138,7 @@ settings_rc_property_parse_requisition(self, spec, str)
 }
 
 static VALUE
-settings_rc_property_parse_border(self, spec, str)
-    VALUE self, spec, str;
+settings_rc_property_parse_border(VALUE self, VALUE spec, VALUE str)
 {
     gboolean ret; 
     GValue prop = {0,};
@@ -168,8 +157,7 @@ settings_rc_property_parse_border(self, spec, str)
 }
 
 static VALUE
-settings_set_property_value(self, name, value, origin)
-    VALUE self, name, value, origin;
+settings_set_property_value(VALUE self, VALUE name, VALUE value, VALUE origin)
 {
     GtkSettingsValue svalue = { NULL, { 0, }, };
     g_value_init(&svalue.value, RVAL2GTYPE(value));
