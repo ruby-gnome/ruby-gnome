@@ -13,16 +13,14 @@
 #define _SELF(self) (GTK_IM_MULTICONTEXT(RVAL2GOBJ(self)))
 
 static VALUE 
-immulti_initialize(self)
-    VALUE self;
+immulti_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_im_multicontext_new());
     return Qnil;
 }
 
 static VALUE
-immulti_append_menuitems(self, menushell)
-    VALUE self, menushell;
+immulti_append_menuitems(VALUE self, VALUE menushell)
 {
     gtk_im_multicontext_append_menuitems(_SELF(self), RVAL2GOBJ(menushell));
     return self;
