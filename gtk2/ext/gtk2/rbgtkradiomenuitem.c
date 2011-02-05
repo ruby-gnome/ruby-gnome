@@ -16,8 +16,7 @@
 #include "global.h"
 
 static GSList*
-ary2gslist(ary)
-    VALUE ary;
+ary2gslist(VALUE ary)
 {
     long i;
     GSList *glist = NULL;
@@ -32,10 +31,7 @@ ary2gslist(ary)
 }
 
 static VALUE
-rmitem_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rmitem_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkWidget *widget;
@@ -79,16 +75,14 @@ rmitem_initialize(argc, argv, self)
 }
 
 static VALUE
-rmitem_get_group(self)
-    VALUE self;
+rmitem_get_group(VALUE self)
 {
     /* Owened by GTK+ */
     return GSLIST2ARY(gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
 }
 
 static VALUE
-rmitem_set_group(self, grp_ary)
-    VALUE self, grp_ary;
+rmitem_set_group(VALUE self, VALUE grp_ary)
 {
     GtkRadioMenuItem *rmitem2add, *rmitem_orig;
     GSList *group;
