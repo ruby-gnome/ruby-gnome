@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-hscale_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+hscale_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
