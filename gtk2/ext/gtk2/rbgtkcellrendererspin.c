@@ -16,8 +16,7 @@
 #define _SELF(s) (GTK_CELL_RENDERER_SPIN(RVAL2GOBJ(s)))
 
 static VALUE
-crspin_initialize(self)
-    VALUE self;
+crspin_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_spin_new());
     return Qnil;
