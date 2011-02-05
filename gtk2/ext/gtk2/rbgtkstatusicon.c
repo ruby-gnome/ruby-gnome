@@ -16,8 +16,7 @@
 #define _SELF(w) (GTK_STATUS_ICON(RVAL2GOBJ(w)))
 
 static VALUE
-si_initialize(self)
-    VALUE self;
+si_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_status_icon_new());
     return Qnil;
@@ -58,23 +57,20 @@ gboolean    gtk_status_icon_get_blinking    (GtkStatusIcon *status_icon);
 */
 
 static VALUE
-si_set_tooltip(self, tooltip_text)
-    VALUE self, tooltip_text;
+si_set_tooltip(VALUE self, VALUE tooltip_text)
 {
     gtk_status_icon_set_tooltip(_SELF(self), RVAL2CSTR(tooltip_text));
     return self;
 }
 
 static VALUE
-si_is_embedded(self)
-    VALUE self;
+si_is_embedded(VALUE self)
 {
     return CBOOL2RVAL(gtk_status_icon_is_embedded(_SELF(self)));
 }
 
 static VALUE
-si_position_menu(self, menu)
-    VALUE self, menu;
+si_position_menu(VALUE self, VALUE menu)
 {
     gint x, y;
     gboolean push_in;
@@ -85,8 +81,7 @@ si_position_menu(self, menu)
 }
 
 static VALUE
-si_get_geometry(self)
-    VALUE self;
+si_get_geometry(VALUE self)
 {
     GdkScreen* screen;
     GdkRectangle area;
