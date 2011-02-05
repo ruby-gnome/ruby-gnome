@@ -16,14 +16,12 @@
 
 #define ATTR_FLOAT(name)\
 static VALUE \
-matrix_get_ ## name (self)\
-    VALUE self;\
+matrix_get_ ## name (VALUE self)\
 {\
     return rb_float_new(_SELF(self)->name);\
 }\
 static VALUE \
-matrix_set_ ## name (self, val)\
-    VALUE self, val;\
+matrix_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = NUM2DBL(val);\
     return self;\
@@ -34,10 +32,7 @@ matrix_set_ ## name (self, val)\
     rb_define_method(matrix, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
 
 static VALUE
-matrix_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+matrix_initialize(int argc, VALUE *argv, VALUE self)
 {
     PangoMatrix matrix = PANGO_MATRIX_INIT;
     VALUE xx, xy, yx, yy, x0, y0;
@@ -57,24 +52,21 @@ matrix_initialize(argc, argv, self)
 }
 
 static VALUE
-matrix_translate(self, tx, ty)
-    VALUE self, tx, ty;
+matrix_translate(VALUE self, VALUE tx, VALUE ty)
 {
     pango_matrix_translate(_SELF(self), NUM2DBL(tx), NUM2DBL(ty));
     return self;
 }
 
 static VALUE
-matrix_scale(self, scale_x, scale_y)
-    VALUE self, scale_x, scale_y;
+matrix_scale(VALUE self, VALUE scale_x, VALUE scale_y)
 {
     pango_matrix_scale(_SELF(self), NUM2DBL(scale_x), NUM2DBL(scale_y));
     return self;
 }
 
 static VALUE
-matrix_rotate(self, degrees)
-    VALUE self, degrees;
+matrix_rotate(VALUE self, VALUE degrees)
 {
     pango_matrix_rotate(_SELF(self), NUM2DBL(degrees));
     return self;
@@ -89,8 +81,7 @@ matrix_get_gravity(VALUE self)
 #endif
 
 static VALUE
-matrix_concat(self, new_matrix)
-    VALUE self, new_matrix;
+matrix_concat(VALUE self, VALUE new_matrix)
 {
     pango_matrix_concat(_SELF(self), _SELF(new_matrix));
     return self;
@@ -98,8 +89,7 @@ matrix_concat(self, new_matrix)
 
 #if PANGO_CHECK_VERSION(1,12,0)
 static VALUE
-matrix_get_font_scale_factor(self)
-    VALUE self;
+matrix_get_font_scale_factor(VALUE self)
 {
     return rb_float_new(pango_matrix_get_font_scale_factor(_SELF(self)));
 }
@@ -113,8 +103,7 @@ ATTR_FLOAT(x0);
 ATTR_FLOAT(y0);
 
 static VALUE
-matrix_to_a(self)
-    VALUE self;
+matrix_to_a(VALUE self)
 {
     PangoMatrix* matrix = _SELF(self);
     return rb_ary_new3(6, INT2NUM(matrix->xx), INT2NUM(matrix->xy), INT2NUM(matrix->yx),
