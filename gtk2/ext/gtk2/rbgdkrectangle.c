@@ -20,8 +20,7 @@
 #define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 
 static VALUE
-gdkrect_initialize(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+gdkrect_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     GdkRectangle new;
 
@@ -35,8 +34,7 @@ gdkrect_initialize(self, x, y, width, height)
 }
 
 static VALUE
-gdkrect_intersect(self, other)
-    VALUE self, other;
+gdkrect_intersect(VALUE self, VALUE other)
 {
     GdkRectangle dest;
     gboolean ret = gdk_rectangle_intersect(_SELF(self), _SELF(other), &dest);
@@ -44,8 +42,7 @@ gdkrect_intersect(self, other)
 }
 
 static VALUE
-gdkrect_union(self, other)
-    VALUE self, other;
+gdkrect_union(VALUE self, VALUE other)
 {
     GdkRectangle dest;
     gdk_rectangle_union(_SELF(self), _SELF(other), &dest);
@@ -54,68 +51,59 @@ gdkrect_union(self, other)
 
 /* Struct accessors */
 static VALUE
-gdkrect_x(self)
-    VALUE self;
+gdkrect_x(VALUE self)
 {
     return INT2NUM(_SELF(self)->x);
 }
 
 static VALUE
-gdkrect_y(self)
-    VALUE self;
+gdkrect_y(VALUE self)
 {
     return INT2NUM(_SELF(self)->y);
 }
 
 static VALUE
-gdkrect_w(self)
-    VALUE self;
+gdkrect_w(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-gdkrect_h(self)
-    VALUE self;
+gdkrect_h(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-gdkrect_set_x(self, x)
-    VALUE self, x;
+gdkrect_set_x(VALUE self, VALUE x)
 {
     _SELF(self)->x = NUM2INT(x);
     return self;
 }
 
 static VALUE
-gdkrect_set_y(self, y)
-    VALUE self, y;
+gdkrect_set_y(VALUE self, VALUE y)
 {
     _SELF(self)->y = NUM2INT(y);
     return self;
 }
 
 static VALUE
-gdkrect_set_w(self, width)
-    VALUE self, width;
+gdkrect_set_w(VALUE self, VALUE width)
 {
     _SELF(self)->width = NUM2INT(width);
     return self;
 }
 
 static VALUE
-gdkrect_set_h(self, height)
-    VALUE self, height;
+gdkrect_set_h(VALUE self, VALUE height)
 {
     _SELF(self)->height = NUM2INT(height);
     return self;
 }
 
 static VALUE
-gdkrect_to_a(self)
-    VALUE self;
+gdkrect_to_a(VALUE self)
 {
   GdkRectangle* a = _SELF(self);
   return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
