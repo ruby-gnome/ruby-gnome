@@ -29,10 +29,7 @@ gdk_region_get_type(void)
 }
 /**********************************/
 static VALUE
-gdkregion_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkregion_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE points_or_rectangle, fill_rule;
     GdkRegion* region;
@@ -69,8 +66,7 @@ gdkregion_initialize(argc, argv, self)
 }
 
 static VALUE
-gdkregion_get_rectangles(self)
-    VALUE self;
+gdkregion_get_rectangles(VALUE self)
 {
     GdkRectangle* rectangles;
     gint n_rect, i;
@@ -86,17 +82,14 @@ gdkregion_get_rectangles(self)
 }
 
 static void
-gdkregion_span_func(span, func)
-    GdkSpan* span;
-    gpointer func;
+gdkregion_span_func(GdkSpan *span, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 3, 
                INT2NUM(span->x), INT2NUM(span->y), INT2NUM(span->width));
 }
 
 static VALUE
-gdkregion_spans_intersect_foreach(self, spans, sorted)
-    VALUE self, spans, sorted;
+gdkregion_spans_intersect_foreach(VALUE self, VALUE spans, VALUE sorted)
 {
     int i;
     GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY_LEN(spans));
@@ -115,8 +108,7 @@ gdkregion_spans_intersect_foreach(self, spans, sorted)
 }
 
 static VALUE
-gdkregion_get_clipbox(self)
-    VALUE self;
+gdkregion_get_clipbox(VALUE self)
 {
     GdkRectangle rect;
     gdk_region_get_clipbox(_SELF(self), &rect);
@@ -124,15 +116,13 @@ gdkregion_get_clipbox(self)
 }
 
 static VALUE
-gdkregion_empty(self)
-    VALUE self;
+gdkregion_empty(VALUE self)
 {
     return CBOOL2RVAL(gdk_region_empty(_SELF(self)));
 }
 
 static VALUE
-gdkregion_equal(self, obj)
-    VALUE self, obj;
+gdkregion_equal(VALUE self, VALUE obj)
 {
     if (!rb_obj_is_instance_of(obj, GTYPE2CLASS(GDK_TYPE_REGION))) {
         return Qnil;
@@ -141,16 +131,14 @@ gdkregion_equal(self, obj)
 }
 
 static VALUE
-gdkregion_point_in(self, x, y)
-    VALUE self, x, y;
+gdkregion_point_in(VALUE self, VALUE x, VALUE y)
 {
     return CBOOL2RVAL(gdk_region_point_in(_SELF(self), NUM2INT(x),
                                           NUM2INT(y)));
 }
 
 static VALUE
-gdkregion_rect_in(self, rect)
-    VALUE self, rect;
+gdkregion_rect_in(VALUE self, VALUE rect)
 {
     return GENUM2RVAL(gdk_region_rect_in(
                           _SELF(self),
@@ -159,32 +147,28 @@ gdkregion_rect_in(self, rect)
 }
 
 static VALUE
-gdkregion_offset(self, dx, dy)
-    VALUE self, dx, dy;
+gdkregion_offset(VALUE self, VALUE dx, VALUE dy)
 {
     gdk_region_offset(_SELF(self), NUM2INT(dx), NUM2INT(dy));
     return self;
 }
 
 static VALUE
-gdkregion_shrink(self, dx, dy)
-    VALUE self, dx, dy;
+gdkregion_shrink(VALUE self, VALUE dx, VALUE dy)
 {
     gdk_region_shrink(_SELF(self), NUM2INT(dx), NUM2INT(dy));
     return self;
 }
 
 static VALUE
-gdkregion_intersect(self, region)
-    VALUE self, region;
+gdkregion_intersect(VALUE self, VALUE region)
 {
     gdk_region_intersect(_SELF(self), _SELF(region));
     return self;
 }
 
 static VALUE
-gdkregion_union(self, other)
-    VALUE self, other;
+gdkregion_union(VALUE self, VALUE other)
 {
     if (RVAL2GTYPE(other) == GDK_TYPE_RECTANGLE){
         gdk_region_union_with_rect(_SELF(self),
@@ -196,16 +180,14 @@ gdkregion_union(self, other)
 }
 
 static VALUE
-gdkregion_subtract(self, region)
-    VALUE self, region;
+gdkregion_subtract(VALUE self, VALUE region)
 {
     gdk_region_subtract(_SELF(self), _SELF(region));
     return self;
 }
 
 static VALUE
-gdkregion_xor(self, region)
-    VALUE self, region;
+gdkregion_xor(VALUE self, VALUE region)
 {
     gdk_region_xor(_SELF(self), _SELF(region));
     return self;
