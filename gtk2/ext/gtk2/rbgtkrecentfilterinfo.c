@@ -49,8 +49,7 @@ gtk_recent_filter_info_get_type(void)
 #define _SELF(w) ((GtkRecentFilterInfo*)RVAL2BOXED(w, GTK_TYPE_RECENT_FILTER_INFO))
 
 static VALUE
-rf_initialize(self)
-    VALUE self;
+rf_initialize(VALUE self)
 {   
     GtkRecentFilterInfo finfo;
     G_INITIALIZE(self, &finfo);
@@ -58,15 +57,13 @@ rf_initialize(self)
 }
 
 static VALUE
-rf_get_contains(self)
-    VALUE self;
+rf_get_contains(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->contains, GTK_TYPE_RECENT_FILTER_FLAGS);
 }
 
 static VALUE
-rf_set_contains(self, contains)
-    VALUE self, contains;
+rf_set_contains(VALUE self, VALUE contains)
 {
     _SELF(self)->contains = RVAL2GFLAGS(contains, GTK_TYPE_RECENT_FILTER_FLAGS);
     return self;
@@ -74,14 +71,12 @@ rf_set_contains(self, contains)
 
 #define FINFO_STR(name)\
 static VALUE \
-rf_get_ ## name (self)\
-    VALUE self;\
+rf_get_ ## name (VALUE self)\
 {\
     return CSTR2RVAL(_SELF(self)->name);\
 }\
 static VALUE \
-rf_set_ ## name (self, val)\
-    VALUE self, val;\
+rf_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2CSTR(val);\
     return self;\
@@ -92,8 +87,7 @@ FINFO_STR(display_name);
 FINFO_STR(mime_type);
 
 static VALUE
-rf_get_applications(self)
-    VALUE self;
+rf_get_applications(VALUE self)
 {
     const gchar** apps = _SELF(self)->applications;
     VALUE ary = rb_ary_new();
@@ -107,8 +101,7 @@ rf_get_applications(self)
 }
 
 static VALUE
-rf_set_applications(self, applications)
-    VALUE self, applications;
+rf_set_applications(VALUE self, VALUE applications)
 {
     gint i;
     gint len = RARRAY_LEN(applications);
@@ -123,8 +116,7 @@ rf_set_applications(self, applications)
 }
 
 static VALUE
-rf_get_groups(self)
-    VALUE self;
+rf_get_groups(VALUE self)
 {
     const gchar** grps = _SELF(self)->groups;
     VALUE ary = rb_ary_new();
@@ -138,8 +130,7 @@ rf_get_groups(self)
 }
 
 static VALUE
-rf_set_groups(self, groups)
-    VALUE self, groups;
+rf_set_groups(VALUE self, VALUE groups)
 {
     gint i;
     gint len = RARRAY_LEN(groups);
@@ -154,15 +145,13 @@ rf_set_groups(self, groups)
 }
 
 static VALUE
-rf_get_age(self)
-    VALUE self;
+rf_get_age(VALUE self)
 {
     return INT2NUM(_SELF(self)->age);
 }
 
 static VALUE
-rf_set_age(self, age)
-    VALUE self, age;
+rf_set_age(VALUE self, VALUE age)
 {
     _SELF(self)->age = NUM2INT(age);
     return self;
