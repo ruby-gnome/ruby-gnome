@@ -13,10 +13,7 @@
 #define _SELF(s) GTK_INVISIBLE(RVAL2GOBJ(s))
 
 static VALUE
-invisible_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+invisible_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen;
 
@@ -37,16 +34,14 @@ invisible_initialize(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-invisible_set_screen(self, screen)
-    VALUE self, screen;
+invisible_set_screen(VALUE self, VALUE screen)
 {
     gtk_invisible_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
 
 static VALUE
-invisible_get_screen(self)
-    VALUE self;
+invisible_get_screen(VALUE self)
 {
     return GOBJ2RVAL(gtk_invisible_get_screen(_SELF(self)));
 }
