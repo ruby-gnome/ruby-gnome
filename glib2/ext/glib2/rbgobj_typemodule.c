@@ -14,30 +14,26 @@
 #include "rbgprivate.h"
 
 static VALUE
-use(self)
-   VALUE self;
+use(VALUE self)
 {
     return CBOOL2RVAL(g_type_module_use(G_TYPE_MODULE(RVAL2GOBJ(self))));
 }
 
 static VALUE
-unuse(self)
-   VALUE self;
+unuse(VALUE self)
 {
     g_type_module_unuse(G_TYPE_MODULE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-get_name(self)
-   VALUE self;
+get_name(VALUE self)
 {
     return rb_str_new2(G_TYPE_MODULE(RVAL2GOBJ(self))->name);
 }
 
 static VALUE
-set_name(self, name)
-   VALUE self, name;
+set_name(VALUE self, VALUE name)
 {
     g_type_module_set_name(G_TYPE_MODULE(RVAL2GOBJ(self)), StringValuePtr(name));
     return name;
