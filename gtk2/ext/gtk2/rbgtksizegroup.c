@@ -14,24 +14,21 @@
 #define _SELF(self) (GTK_SIZE_GROUP(RVAL2GOBJ(self)))
 
 static VALUE
-sizegrp_initialize(self, mode)
-    VALUE self, mode;
+sizegrp_initialize(VALUE self, VALUE mode)
 {
     G_INITIALIZE(self, gtk_size_group_new(RVAL2GENUM(mode, GTK_TYPE_SIZE_GROUP_MODE)));
     return Qnil;
 }
 
 static VALUE
-sizegrp_add_widget(self, widget)
-    VALUE self, widget;
+sizegrp_add_widget(VALUE self, VALUE widget)
 {
     gtk_size_group_add_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
     return self;
 }
 
 static VALUE
-sizegrp_remove_widget(self, widget)
-    VALUE self, widget;
+sizegrp_remove_widget(VALUE self, VALUE widget)
 {
     gtk_size_group_remove_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
     return self;
@@ -47,8 +44,7 @@ gboolean    gtk_size_group_get_ignore_hidden
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-sizegrp_get_widgets(self)
-    VALUE self;
+sizegrp_get_widgets(VALUE self)
 {
     return GSLIST2ARY(gtk_size_group_get_widgets(_SELF(self)));
 }
