@@ -17,8 +17,7 @@
 #define RVAL2RENDERER(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))
 
 static VALUE
-layout_pack_start(self, cell, expand)
-    VALUE self, cell, expand;
+layout_pack_start(VALUE self, VALUE cell, VALUE expand)
 {
     gtk_cell_layout_pack_start(_SELF(self), RVAL2RENDERER(cell),
                                RVAL2CBOOL(expand));
@@ -26,8 +25,7 @@ layout_pack_start(self, cell, expand)
 }
 
 static VALUE
-layout_pack_end(self, cell, expand)
-    VALUE self, cell, expand;
+layout_pack_end(VALUE self, VALUE cell, VALUE expand)
 {
     gtk_cell_layout_pack_end(_SELF(self), RVAL2RENDERER(cell),
                              RVAL2CBOOL(expand));
@@ -35,8 +33,7 @@ layout_pack_end(self, cell, expand)
 }
 
 static VALUE
-layout_reorder(self, cell, position)
-    VALUE self, cell, position;
+layout_reorder(VALUE self, VALUE cell, VALUE position)
 {
     gtk_cell_layout_reorder(_SELF(self), RVAL2RENDERER(cell),
                             NUM2INT(position));
@@ -44,8 +41,7 @@ layout_reorder(self, cell, position)
 }
 
 static VALUE
-layout_clear(self)
-    VALUE self;
+layout_clear(VALUE self)
 {
     gtk_cell_layout_clear(_SELF(self));
     return self;
@@ -82,8 +78,7 @@ layout_data_func(layout, cell, tree_model, iter, func)
 }
 
 static VALUE
-layout_set_cell_data_func(self, cell)
-    VALUE self, cell;
+layout_set_cell_data_func(VALUE self, VALUE cell)
 {
     if (rb_block_given_p()) {
         VALUE func = rb_block_proc();
@@ -107,8 +102,7 @@ layout_clear_attributes(self, cell)
 }
 
 static VALUE
-layout_set_attributes(self, cell, attrs)
-    VALUE self, cell, attrs;
+layout_set_attributes(VALUE self, VALUE cell, VALUE attrs)
 {
     gint i;
     VALUE ary;
