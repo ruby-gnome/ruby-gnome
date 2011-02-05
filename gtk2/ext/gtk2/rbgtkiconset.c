@@ -13,10 +13,7 @@
 #define _SELF(s) ((GtkIconSet*)RVAL2BOXED(s, GTK_TYPE_ICON_SET))
 
 static VALUE
-icon_set_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+icon_set_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkIconSet *icon_set;
     VALUE pixbuf;
@@ -33,16 +30,14 @@ icon_set_initialize(argc, argv, self)
 }
 
 static VALUE
-icon_set_add_source(self, source)
-    VALUE self, source;
+icon_set_add_source(VALUE self, VALUE source)
 {
     gtk_icon_set_add_source(_SELF(self), RVAL2BOXED(source, GTK_TYPE_ICON_SOURCE));
     return self;
 }
 
 static VALUE
-icon_set_get_sizes(self)
-    VALUE self;
+icon_set_get_sizes(VALUE self)
 {
     GtkIconSize *sizes;
     gint n_sizes;
@@ -57,10 +52,7 @@ icon_set_get_sizes(self)
 }
 
 static VALUE
-icon_set_render_icon(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+icon_set_render_icon(int argc, VALUE *argv, VALUE self)
 {
     VALUE style, direction, state, size, widget, detail;
 
