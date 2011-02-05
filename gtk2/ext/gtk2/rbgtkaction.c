@@ -17,10 +17,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-action_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+action_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE name, label, tooltip, stock_id;
     const gchar *stock = NULL;
@@ -40,15 +37,13 @@ action_initialize(argc, argv, self)
 }
 
 static VALUE
-action_is_sensitive(self)
-    VALUE self;
+action_is_sensitive(VALUE self)
 {
     return CBOOL2RVAL(gtk_action_is_sensitive(_SELF(self)));
 }
 
 static VALUE
-action_is_visible(self)
-    VALUE self;
+action_is_visible(VALUE self)
 {
     return CBOOL2RVAL(gtk_action_is_visible(_SELF(self)));
 }
@@ -60,24 +55,21 @@ gboolean    gtk_action_get_visible          (GtkAction *action);
 */
 
 static VALUE
-action_activate(self)
-    VALUE self;
+action_activate(VALUE self)
 {
     gtk_action_activate(_SELF(self));
     return self;
 }
 
 static VALUE
-action_create_icon(self, icon_size)
-    VALUE self, icon_size;
+action_create_icon(VALUE self, VALUE icon_size)
 {
     return GOBJ2RVAL(gtk_action_create_icon(_SELF(self), 
                                             RVAL2GENUM(icon_size, GTK_TYPE_ICON_SIZE)));
 }
 
 static VALUE
-action_create_menu_item(self)
-    VALUE self;
+action_create_menu_item(VALUE self)
 {
     return GOBJ2RVAL(gtk_action_create_menu_item(_SELF(self)));
 }
@@ -91,78 +83,68 @@ action_create_menu(VALUE self)
 #endif
 
 static VALUE
-action_create_tool_item(self)
-    VALUE self;
+action_create_tool_item(VALUE self)
 {
     return GOBJ2RVAL(gtk_action_create_tool_item(_SELF(self)));
 }
 
 static VALUE
-action_connect_proxy(self, proxy)
-    VALUE self, proxy;
+action_connect_proxy(VALUE self, VALUE proxy)
 {
     gtk_action_connect_proxy(_SELF(self), RVAL2WIDGET(proxy));
     return self;
 }
 
 static VALUE
-action_disconnect_proxy(self, proxy)
-    VALUE self, proxy;
+action_disconnect_proxy(VALUE self, VALUE proxy)
 {
     gtk_action_disconnect_proxy(_SELF(self), RVAL2WIDGET(proxy));
     return self;
 }
 
 static VALUE
-action_get_proxies(self)
-    VALUE self;
+action_get_proxies(VALUE self)
 {
     /* Owned by GTK+ */
     return GSLIST2ARY(gtk_action_get_proxies(_SELF(self)));
 }
 
 static VALUE
-action_connect_accelerator(self)
-    VALUE self;
+action_connect_accelerator(VALUE self)
 {
     gtk_action_connect_accelerator(_SELF(self));
     return self;
 }
 
 static VALUE
-action_disconnect_accelerator(self)
-    VALUE self;
+action_disconnect_accelerator(VALUE self)
 {
     gtk_action_disconnect_accelerator(_SELF(self));
     return self;
 }
 
 static VALUE
-action_block_activate_from(self, proxy)
-    VALUE self, proxy;
+action_block_activate_from(VALUE self, VALUE proxy)
 {
     gtk_action_block_activate_from(_SELF(self), RVAL2WIDGET(proxy));
     return self;
 }
 
 static VALUE
-action_unblock_activate_from(self, proxy)
-    VALUE self, proxy;
+action_unblock_activate_from(VALUE self, VALUE proxy)
 {
     gtk_action_unblock_activate_from(_SELF(self), RVAL2WIDGET(proxy));
     return self;
 }
 
 static VALUE
-action_set_accel_path(self, accel_path)
-    VALUE self, accel_path;
+action_set_accel_path(VALUE self, VALUE accel_path)
 {
     gtk_action_set_accel_path(_SELF(self), RVAL2CSTR(accel_path));
     return self;
 }
 static VALUE
-action_set_accel_group(self, accel_group)
-    VALUE self, accel_group;
+action_set_accel_group(VALUE self, VALUE accel_group)
 {
     gtk_action_set_accel_group(_SELF(self), RVAL2GOBJ(accel_group));
     return self;
@@ -174,8 +156,7 @@ action_set_accel_group(self, accel_group)
    Use GLib::Object#set_property("sensitive", val) instead.
  */
 static VALUE
-action_set_sensitive(self, sensitive)
-    VALUE self, sensitive;
+action_set_sensitive(VALUE self, VALUE sensitive)
 {
     gtk_action_set_sensitive(_SELF(self), RVAL2CBOOL(sensitive));
     return self;
@@ -186,16 +167,14 @@ action_set_sensitive(self, sensitive)
    Use GLib::Object#set_property("visible", val) instead.
 */
 static VALUE
-action_set_visible(self, visible)
-    VALUE self, visible;
+action_set_visible(VALUE self, VALUE visible)
 {
     gtk_action_set_visible(_SELF(self), RVAL2CBOOL(visible));
     return self;
 }
 
 static VALUE
-action_get_accel_path(self)
-    VALUE self;
+action_get_accel_path(VALUE self)
 {
     return CSTR2RVAL(gtk_action_get_accel_path(_SELF(self)));
 }
@@ -203,8 +182,7 @@ action_get_accel_path(self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-action_get_accel_closure(self)
-    VALUE self;
+action_get_accel_closure(VALUE self)
 {
     return BOXED2RVAL(gtk_action_get_accel_closure(_SELF(self)), G_TYPE_CLOSURE);
 }
