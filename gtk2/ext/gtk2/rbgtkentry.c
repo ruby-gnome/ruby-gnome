@@ -17,23 +17,20 @@
 #define _SELF(self) (GTK_ENTRY(RVAL2GOBJ(self)))
 
 static VALUE
-entry_initialize(self)
-    VALUE self;
+entry_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_entry_new());
     return Qnil;
 }
 
 static VALUE
-entry_get_layout(self)
-    VALUE self;
+entry_get_layout(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_get_layout(_SELF(self)));
 }
 
 static VALUE
-entry_get_layout_offsets(self)
-    VALUE self;
+entry_get_layout_offsets(VALUE self)
 {
     int x, y;
     gtk_entry_get_layout_offsets(_SELF(self), &x, &y);
@@ -42,31 +39,27 @@ entry_get_layout_offsets(self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-entry_set_completion(self, completion)
-    VALUE self, completion;
+entry_set_completion(VALUE self, VALUE completion)
 {
     gtk_entry_set_completion(_SELF(self), GTK_ENTRY_COMPLETION(RVAL2GOBJ(completion)));
     return self;
 }
 
 static VALUE
-entry_get_completion(self)
-    VALUE self;
+entry_get_completion(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_get_completion(_SELF(self)));
 }
 #endif
 
 static VALUE
-entry_layout_index_to_text_index(self, layout_index)
-    VALUE self, layout_index;
+entry_layout_index_to_text_index(VALUE self, VALUE layout_index)
 {
     return INT2NUM(gtk_entry_layout_index_to_text_index(_SELF(self), NUM2INT(layout_index)));
 }
 
 static VALUE
-entry_text_index_to_layout_index(self, text_index)
-    VALUE self, text_index;
+entry_text_index_to_layout_index(VALUE self, VALUE text_index)
 {
     return INT2NUM(gtk_entry_text_index_to_layout_index(_SELF(self), NUM2INT(text_index)));
 }
