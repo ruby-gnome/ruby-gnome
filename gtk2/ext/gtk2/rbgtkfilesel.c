@@ -17,10 +17,7 @@
 #define _SELF(self) GTK_FILE_SELECTION(RVAL2GOBJ(self))
 
 static VALUE
-fsel_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+fsel_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title;
     rb_scan_args(argc, argv, "01", &title);
@@ -29,32 +26,28 @@ fsel_initialize(argc, argv, self)
 }
 
 static VALUE
-fsel_complete(self, pattern)
-    VALUE self, pattern;
+fsel_complete(VALUE self, VALUE pattern)
 {
     gtk_file_selection_complete(_SELF(self), RVAL2CSTR(pattern));
     return self;
 }
 
 static VALUE
-fsel_show_fileop_buttons(self)
-    VALUE self;
+fsel_show_fileop_buttons(VALUE self)
 {
     gtk_file_selection_show_fileop_buttons(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-fsel_hide_fileop_buttons(self)
-    VALUE self;
+fsel_hide_fileop_buttons(VALUE self)
 {
     gtk_file_selection_hide_fileop_buttons(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-fsel_get_selections(self)
-    VALUE self;
+fsel_get_selections(VALUE self)
 {
     gchar** ptr = gtk_file_selection_get_selections(_SELF(self));
     gchar** selections = ptr;
@@ -70,65 +63,56 @@ fsel_get_selections(self)
 }
 
 static VALUE
-fsel_fileop_dialog(self)
-    VALUE self;
+fsel_fileop_dialog(VALUE self)
 {
     GtkWidget* widget = _SELF(self)->fileop_dialog;
     return widget ? GOBJ2RVAL(widget) : Qnil;
 }
 
 static VALUE
-fsel_dir_list(self)
-    VALUE self;
+fsel_dir_list(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->dir_list);
 }
 
 static VALUE
-fsel_file_list(self)
-    VALUE self;
+fsel_file_list(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->file_list);
 }
 
 static VALUE
-fsel_ok_button(self)
-    VALUE self;
+fsel_ok_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->ok_button);
 }
 
 static VALUE
-fsel_cancel_button(self)
-    VALUE self;
+fsel_cancel_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->cancel_button);
 }
 
 static VALUE
-fsel_history_pulldown(self)
-    VALUE self;
+fsel_history_pulldown(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->history_pulldown);
 }
 
 static VALUE
-fsel_fileop_c_dir(self)
-    VALUE self;
+fsel_fileop_c_dir(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->fileop_c_dir);
 }
 
 static VALUE
-fsel_fileop_del_file(self)
-    VALUE self;
+fsel_fileop_del_file(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->fileop_del_file);
 }
 
 static VALUE
-fsel_fileop_ren_file(self)
-    VALUE self;
+fsel_fileop_ren_file(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->fileop_ren_file);
 }
