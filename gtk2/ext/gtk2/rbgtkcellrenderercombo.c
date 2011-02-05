@@ -14,8 +14,7 @@
 #if GTK_CHECK_VERSION(2,6,0)
 
 static VALUE
-crcombo_initialize(self)
-    VALUE self;
+crcombo_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_combo_new());
     return Qnil;
