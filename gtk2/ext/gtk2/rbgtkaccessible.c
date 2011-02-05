@@ -12,8 +12,7 @@
 #include "global.h"
 
 static VALUE
-access_connect_widget_destroyed(self)
-     VALUE self;
+access_connect_widget_destroyed(VALUE self)
 {
     gtk_accessible_connect_widget_destroyed(GTK_ACCESSIBLE(RVAL2GOBJ(self)));
     return self;
