@@ -19,10 +19,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-gtkdrag_selection_owner_set(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gtkdrag_selection_owner_set(int argc, VALUE *argv, VALUE self)
 {
     gboolean ret;
 
@@ -46,8 +43,7 @@ gtkdrag_selection_owner_set(argc, argv, self)
 }
 
 static VALUE
-gtkdrag_selection_add_target(self, widget, selection, target, info)
-    VALUE self, widget, selection, target, info;
+gtkdrag_selection_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE info)
 {
     gtk_selection_add_target(RVAL2WIDGET(widget), RVAL2ATOM(selection),
                              RVAL2ATOM(target), NUM2INT(info));
@@ -55,8 +51,7 @@ gtkdrag_selection_add_target(self, widget, selection, target, info)
 }
 
 static VALUE
-gtkdrag_selection_add_targets(self, widget, selection, targets)
-    VALUE self, widget, selection, targets;
+gtkdrag_selection_add_targets(VALUE self, VALUE widget, VALUE selection, VALUE targets)
 {
     gtk_selection_add_targets(RVAL2WIDGET(widget), 
                               RVAL2ATOM(selection),
@@ -65,16 +60,14 @@ gtkdrag_selection_add_targets(self, widget, selection, targets)
 }
 
 static VALUE
-gtkdrag_selection_clear_targets(self, widget, selection)
-    VALUE self, widget, selection;
+gtkdrag_selection_clear_targets(VALUE self, VALUE widget, VALUE selection)
 {
     gtk_selection_clear_targets(RVAL2WIDGET(widget), RVAL2ATOM(selection));
     return self;
 }
 
 static VALUE
-gtkdrag_selection_convert(self, widget, selection, target, time)
-    VALUE self, widget, selection, target, time;
+gtkdrag_selection_convert(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
 {
     gboolean ret = gtk_selection_convert(RVAL2WIDGET(widget), 
                                          RVAL2ATOM(selection), RVAL2ATOM(target),
@@ -83,8 +76,7 @@ gtkdrag_selection_convert(self, widget, selection, target, time)
 }
 
 static VALUE
-gtkdrag_selection_remove_all(self, widget)
-    VALUE self, widget;
+gtkdrag_selection_remove_all(VALUE self, VALUE widget)
 {
     gtk_selection_remove_all(RVAL2WIDGET(widget));
     return self;
@@ -92,8 +84,7 @@ gtkdrag_selection_remove_all(self, widget)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-targets_include_image(self, targets, writable)
-     VALUE self, targets, writable;
+targets_include_image(VALUE self, VALUE targets, VALUE writable)
 {
   gint i;
   gint len = RARRAY_LEN(targets);
@@ -107,8 +98,7 @@ targets_include_image(self, targets, writable)
 }
 
 static VALUE
-targets_include_text(self, targets)
-     VALUE self, targets;
+targets_include_text(VALUE self, VALUE targets)
 {
   gint i;
   gint len = RARRAY_LEN(targets);
@@ -120,8 +110,7 @@ targets_include_text(self, targets)
 }
 
 static VALUE
-targets_include_uri(self, targets)
-     VALUE self, targets;
+targets_include_uri(VALUE self, VALUE targets)
 {
   gint i;
   gint len = RARRAY_LEN(targets);
@@ -135,8 +124,7 @@ targets_include_uri(self, targets)
 }
 
 static VALUE
-targets_include_rich_text(self, targets, buffer)
-     VALUE self, targets, buffer;
+targets_include_rich_text(VALUE self, VALUE targets, VALUE buffer)
 {
   gint i;
   gint len = RARRAY_LEN(targets);
