@@ -17,10 +17,7 @@
 #define _SELF(self) (GTK_TABLE(RVAL2GOBJ(self)))
 
 static VALUE
-tbl_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+tbl_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE row, col, homogeneous;
 
@@ -32,18 +29,14 @@ tbl_initialize(argc, argv, self)
 }
 
 static VALUE
-tbl_resize(self, rows, columns)
-    VALUE self, rows, columns;
+tbl_resize(VALUE self, VALUE rows, VALUE columns)
 {
     gtk_table_resize(_SELF(self), NUM2UINT(rows), NUM2UINT(columns));
     return self;
 }
 
 static VALUE
-tbl_attach(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+tbl_attach(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, left, right, top, bottom;
     VALUE arg0, arg1, arg2, arg3;
@@ -72,9 +65,7 @@ tbl_attach(argc, argv, self)
 }
 
 static VALUE
-tbl_attach_defaults(self, widget, left_attach, right_attach, top_attach, 
-                    bottom_attach)
-    VALUE self, widget, left_attach, right_attach, top_attach, bottom_attach;
+tbl_attach_defaults(VALUE self, VALUE widget, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
     gtk_table_attach_defaults(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
                               NUM2UINT(left_attach), NUM2UINT(right_attach),
@@ -84,75 +75,65 @@ tbl_attach_defaults(self, widget, left_attach, right_attach, top_attach,
 }
 
 static VALUE
-tbl_set_row_spacing(self, row, spc)
-    VALUE self, row, spc;
+tbl_set_row_spacing(VALUE self, VALUE row, VALUE spc)
 {
     gtk_table_set_row_spacing(_SELF(self), NUM2UINT(row), NUM2UINT(spc));
     return self;
 }
 
 static VALUE
-tbl_get_row_spacing(self, row)
-    VALUE self, row;
+tbl_get_row_spacing(VALUE self, VALUE row)
 {
     return UINT2NUM(gtk_table_get_row_spacing(_SELF(self), NUM2UINT(row)));
 }
 
 static VALUE
-tbl_set_col_spacing(self, col, spc)
-    VALUE self, col, spc;
+tbl_set_col_spacing(VALUE self, VALUE col, VALUE spc)
 {
     gtk_table_set_col_spacing(_SELF(self), NUM2UINT(col), NUM2UINT(spc));
     return self;
 }
 
 static VALUE
-tbl_get_col_spacing(self, col)
-    VALUE self, col;
+tbl_get_col_spacing(VALUE self, VALUE col)
 {
     return UINT2NUM(gtk_table_get_col_spacing(_SELF(self), NUM2UINT(col)));
 }
 
 static VALUE
-tbl_set_row_spacings(self, spc)
-    VALUE self, spc;
+tbl_set_row_spacings(VALUE self, VALUE spc)
 {
     gtk_table_set_row_spacings(_SELF(self), NUM2UINT(spc));
     return self;
 }
 
 static VALUE
-tbl_set_col_spacings(self, spc)
-    VALUE self, spc;
+tbl_set_col_spacings(VALUE self, VALUE spc)
 {
     gtk_table_set_col_spacings(_SELF(self), NUM2UINT(spc));
     return self;
 }
 
 static VALUE
-tbl_get_row_spacings(self)
-    VALUE self;
+tbl_get_row_spacings(VALUE self)
 {
     return UINT2NUM(_SELF(self)->row_spacing);
 }
 
 static VALUE
-tbl_get_col_spacings(self)
-    VALUE self;
+tbl_get_col_spacings(VALUE self)
 {
     return UINT2NUM(_SELF(self)->column_spacing);
 }
 
 static VALUE
-tbl_get_default_row_spacing(self)
-    VALUE self;
+tbl_get_default_row_spacing(VALUE self)
 {
     return UINT2NUM(gtk_table_get_default_row_spacing(_SELF(self)));
 }
 
 static VALUE
-tbl_get_default_col_spacing(self)
-    VALUE self;
+tbl_get_default_col_spacing(VALUE self)
 {
     return UINT2NUM(gtk_table_get_default_col_spacing(_SELF(self)));
 }
