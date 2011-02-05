@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-vscale_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+vscale_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
