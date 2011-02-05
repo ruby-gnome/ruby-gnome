@@ -33,25 +33,20 @@ rbgtk_clipboard_get_type()
 }
 
 GtkClipboard*
-rbgtk_get_clipboard(obj)
-    VALUE obj;
+rbgtk_get_clipboard(VALUE obj)
 {
     return GTK_CLIPBOARD(RVAL2GOBJ(obj));
 }
 
 VALUE
-rbgtk_make_clipboard(gobj)
-    GtkClipboard* gobj;
+rbgtk_make_clipboard(GtkClipboard *gobj)
 {
     return GOBJ2RVAL(gobj);
 }
 #endif
 
 static VALUE
-clipboard_get(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+clipboard_get(int argc, VALUE *argv, VALUE self)
 {
     GtkClipboard *clipboard;
 
@@ -73,8 +68,7 @@ clipboard_get(argc, argv, self)
 }
 
 static VALUE
-clipboard_get_display(self)
-    VALUE self;
+clipboard_get_display(VALUE self)
 {
 #if GTK_CHECK_VERSION(2,2,0)
     return GOBJ2RVAL(gtk_clipboard_get_display(_SELF(self)));
@@ -84,19 +78,14 @@ clipboard_get_display(self)
 }
 
 static void
-clipboard_get_func(clipboard, selection_data, info, func)
-    GtkClipboard *clipboard;
-    GtkSelectionData* selection_data;
-    guint info;
-    gpointer func;
+clipboard_get_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, guint info, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
 }
 
 static VALUE
-clipboard_set(self, targets)
-    VALUE self, targets;
+clipboard_set(VALUE self, VALUE targets)
 {
     const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
     VALUE func = rb_block_proc();
@@ -118,8 +107,7 @@ gboolean    gtk_clipboard_set_with_owner    (GtkClipboard *clipboard,
                                              GObject *owner);
 
 static VALUE
-clipboard_get_owner(self)
-    VALUE self;
+clipboard_get_owner(VALUE self)
 {
     GObject *gobj;
     gobj = gtk_clipboard_get_owner(_SELF(self));
@@ -128,16 +116,14 @@ clipboard_get_owner(self)
 */
 
 static VALUE
-clipboard_clear(self)
-    VALUE self;
+clipboard_clear(VALUE self)
 {
     gtk_clipboard_clear(_SELF(self));
     return self;
 }
 
 static VALUE
-clipboard_set_text(self, text)
-    VALUE self, text;
+clipboard_set_text(VALUE self, VALUE text)
 {
     StringValue(text);
     gtk_clipboard_set_text(_SELF(self), RVAL2CSTR(text), RSTRING_LEN(text));
@@ -146,8 +132,7 @@ clipboard_set_text(self, text)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-clipboard_set_image(self, pixbuf)
-    VALUE self, pixbuf;
+clipboard_set_image(VALUE self, VALUE pixbuf)
 {
     gtk_clipboard_set_image(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
@@ -155,18 +140,14 @@ clipboard_set_image(self, pixbuf)
 #endif
 
 static void
-clipboard_received_func(clipboard, selection_data, func)
-    GtkClipboard *clipboard;
-    GtkSelectionData* selection_data;
-    gpointer func;
+clipboard_received_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
 }
 
 static VALUE
-clipboard_request_contents(self, target)
-    VALUE self, target;
+clipboard_request_contents(VALUE self, VALUE target)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -189,8 +170,7 @@ clipboard_text_received_func(GtkClipboard *clipboard, const gchar *text,
 }
 
 static VALUE
-clipboard_request_text(self)
-    VALUE self;
+clipboard_request_text(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -202,18 +182,14 @@ clipboard_request_text(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static void
-clipboard_image_received_func(clipboard, pixbuf, func)
-    GtkClipboard* clipboard;
-    GdkPixbuf* pixbuf;
-    gpointer func;
+clipboard_image_received_func(GtkClipboard *clipboard, GdkPixbuf *pixbuf, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
                GOBJ2RVAL(pixbuf));
 }
 
 static VALUE
-clipboard_request_image(self)
-    VALUE self;
+clipboard_request_image(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -226,11 +202,7 @@ clipboard_request_image(self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static void
-clipboard_target_received_func(clipboard, atoms, n_atoms, func)
-    GtkClipboard* clipboard;
-    GdkAtom* atoms;
-    gint n_atoms;
-    gpointer func;
+clipboard_target_received_func(GtkClipboard *clipboard, GdkAtom *atoms, gint n_atoms, gpointer func)
 {
     gint i;
     VALUE ary = rb_ary_new();
@@ -242,8 +214,7 @@ clipboard_target_received_func(clipboard, atoms, n_atoms, func)
 }
 
 static VALUE
-clipboard_request_targets(self)
-    VALUE self;
+clipboard_request_targets(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -257,20 +228,14 @@ clipboard_request_targets(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static void
-clipboard_rich_text_received_func(clipboard, format, text, length, func)
-    GtkClipboard* clipboard;
-    GdkAtom format;
-    const guint8 *text;
-    gsize length;
-    gpointer func;
+clipboard_rich_text_received_func(GtkClipboard *clipboard, GdkAtom format, const guint8 *text, gsize length, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 3, CLIPBOARD2RVAL(clipboard), 
                BOXED2RVAL(format, GDK_TYPE_ATOM), rb_str_new((char*)text, length));
 }
 
 static VALUE
-clipboard_request_rich_text(self, buffer)
-    VALUE self, buffer;
+clipboard_request_rich_text(VALUE self, VALUE buffer)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -283,8 +248,7 @@ clipboard_request_rich_text(self, buffer)
 #endif
 
 static VALUE
-clipboard_wait_for_contents(self, target)
-    VALUE self, target;
+clipboard_wait_for_contents(VALUE self, VALUE target)
 {
     return BOXED2RVAL(gtk_clipboard_wait_for_contents(
                           _SELF(self), 
@@ -293,8 +257,7 @@ clipboard_wait_for_contents(self, target)
 }
 
 static VALUE
-clipboard_wait_for_text(self)
-    VALUE self;
+clipboard_wait_for_text(VALUE self)
 {
     gchar *str;
     str = gtk_clipboard_wait_for_text(_SELF(self));
@@ -303,8 +266,7 @@ clipboard_wait_for_text(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-clipboard_wait_for_image(self)
-    VALUE self;
+clipboard_wait_for_image(VALUE self)
 {
     GdkPixbuf* pixbuf = gtk_clipboard_wait_for_image(_SELF(self));
     return GOBJ2RVAL(pixbuf);
@@ -313,8 +275,7 @@ clipboard_wait_for_image(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-clipboard_wait_for_rich_text(self, buffer)
-    VALUE self, buffer;
+clipboard_wait_for_rich_text(VALUE self, VALUE buffer)
 {
     GdkAtom format;
     gsize length;
@@ -333,16 +294,14 @@ clipboard_wait_for_rich_text(self, buffer)
 #endif
 
 static VALUE
-clipboard_wait_is_text_available(self)
-    VALUE self;
+clipboard_wait_is_text_available(VALUE self)
 {
     return CBOOL2RVAL(gtk_clipboard_wait_is_text_available(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-clipboard_wait_is_image_available(self)
-    VALUE self;
+clipboard_wait_is_image_available(VALUE self)
 {
     return CBOOL2RVAL(gtk_clipboard_wait_is_image_available(_SELF(self)));
 }
@@ -350,8 +309,7 @@ clipboard_wait_is_image_available(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-clipboard_wait_is_rich_text_available(self, buffer)
-    VALUE self, buffer;
+clipboard_wait_is_rich_text_available(VALUE self, VALUE buffer)
 {
     return CBOOL2RVAL(gtk_clipboard_wait_is_rich_text_available(_SELF(self), GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
 }
@@ -359,8 +317,7 @@ clipboard_wait_is_rich_text_available(self, buffer)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-clipboard_wait_for_targets(self)
-    VALUE self;
+clipboard_wait_for_targets(VALUE self)
 {
     gint i;
     VALUE ary = Qnil;
@@ -388,15 +345,13 @@ clipboard_wait_for_targets(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-clipboard_wait_is_target_available(self, target)
-    VALUE self, target;
+clipboard_wait_is_target_available(VALUE self, VALUE target)
 {
     return CBOOL2RVAL(gtk_clipboard_wait_is_target_available(_SELF(self), RVAL2ATOM(target)));
 }
 
 static VALUE
-clipboard_set_can_store(self, targets)
-    VALUE self, targets;
+clipboard_set_can_store(VALUE self, VALUE targets)
 {
     gint n_targets = 0;
     GtkTargetEntry* entries = (GtkTargetEntry*)NULL;
@@ -410,8 +365,7 @@ clipboard_set_can_store(self, targets)
 }
 
 static VALUE
-clipboard_store(self)
-    VALUE self;
+clipboard_store(VALUE self)
 {
     gtk_clipboard_store(_SELF(self));
     return self;
