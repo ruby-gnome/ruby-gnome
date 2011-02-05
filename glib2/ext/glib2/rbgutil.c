@@ -19,8 +19,7 @@ static ID id_to_a;
 static ID id_allocate;
 
 void
-rbgutil_set_properties(self, hash)
-    VALUE self, hash;
+rbgutil_set_properties(VALUE self, VALUE hash)
 {
     int i;
     VALUE ary;
@@ -269,15 +268,13 @@ rbgutil_gslist2ary_boxed_and_free(GSList *const list, GType gtype)
 }
 
 VALUE
-rbgutil_def_setters(klass)
-    VALUE klass;
+rbgutil_def_setters(VALUE klass)
 {
     return rb_funcall(mGLib, id_add_one_arg_setter, 1, klass);
 }
 
 VALUE
-rbgutil_sym_g2r_func(from)
-    const GValue *from;
+rbgutil_sym_g2r_func(const GValue *from)
 {
     const gchar *str = g_value_get_string(from);
     return str ? ID2SYM(rb_intern(str)) : Qnil;
