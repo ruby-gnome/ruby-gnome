@@ -15,15 +15,13 @@
 #define _SELF(r) (RVAL2GENUM(r, PANGO_TYPE_SCRIPT))
 
 static VALUE
-rbpango_s_script_for_unichar(self, ch)
-    VALUE self, ch;
+rbpango_s_script_for_unichar(VALUE self, VALUE ch)
 {
     return GENUM2RVAL(pango_script_for_unichar(NUM2UINT(ch)), PANGO_TYPE_SCRIPT);
 }
 
 static VALUE
-rbpango_script_get_sample_language(self)
-    VALUE self;
+rbpango_script_get_sample_language(VALUE self)
 {
     PangoLanguage* lang = pango_script_get_sample_language(_SELF(self));
     return BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE);
