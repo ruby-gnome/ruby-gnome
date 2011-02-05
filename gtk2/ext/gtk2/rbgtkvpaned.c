@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-vpaned_initialize(self)
-    VALUE self;
+vpaned_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_vpaned_new());
     return Qnil;
