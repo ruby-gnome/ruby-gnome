@@ -14,10 +14,7 @@
 #if GTK_CHECK_VERSION(2,4,0)
 #define _SELF(self) (GTK_TOOL_BUTTON(RVAL2GOBJ(self)))
 static VALUE
-toolbutton_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+toolbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE obj, label;
     GtkToolItem* item;
