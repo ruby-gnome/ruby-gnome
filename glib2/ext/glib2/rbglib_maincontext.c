@@ -393,8 +393,7 @@ ruby_source_set_priority (VALUE self, VALUE priority)
 #endif
 
 static VALUE
-source_remove(self, tag)
-    VALUE self, tag;
+source_remove(VALUE self, VALUE tag)
 {
     VALUE callback;
     callback = G_GET_RELATIVE(mGLibSource, id__callbacks__, tag);
@@ -405,8 +404,7 @@ source_remove(self, tag)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-source_current_source(self)
-    VALUE self;
+source_current_source(VALUE self)
 {
     return BOXED2RVAL(g_main_current_source, G_TYPE_SOURCE);
 }
@@ -442,8 +440,7 @@ g_main_context_get_type(void)
 #define _SELF(s) ((GMainContext*)RVAL2BOXED(s, G_TYPE_MAIN_CONTEXT))
 
 static VALUE
-mc_initialize(self)
-    VALUE self;
+mc_initialize(VALUE self)
 {
     GMainContext *context;
 
@@ -464,29 +461,25 @@ mc_initialize(self)
 }
 
 static VALUE
-mc_s_default(self)
-    VALUE self;
+mc_s_default(VALUE self)
 {
     return BOXED2RVAL(g_main_context_default(), G_TYPE_MAIN_CONTEXT);
 }
 
 static VALUE
-mc_iteration(self, may_block)
-    VALUE self, may_block;
+mc_iteration(VALUE self, VALUE may_block)
 {
     return CBOOL2RVAL(g_main_context_iteration(_SELF(self), RVAL2CBOOL(may_block)));
 }
 
 static VALUE
-mc_pending(self)
-    VALUE self;
+mc_pending(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_pending(_SELF(self)));
 }
 
 static VALUE
-mc_find_source(self, source_id)
-    VALUE self, source_id;
+mc_find_source(VALUE self, VALUE source_id)
 {
     GSource* src = g_main_context_find_source_by_id(_SELF(self), NUM2UINT(source_id));
     return BOXED2RVAL(src, G_TYPE_SOURCE);
@@ -503,23 +496,20 @@ GSource*    g_main_context_find_source_by_funcs_user_data
 */
 
 static VALUE
-mc_wakeup(self)
-    VALUE self;
+mc_wakeup(VALUE self)
 {
     g_main_context_wakeup(_SELF(self));
     return self;
 }
 
 static VALUE
-mc_acquire(self)
-    VALUE self;
+mc_acquire(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_acquire(_SELF(self)));
 }
 
 static VALUE
-mc_release(self)
-    VALUE self;
+mc_release(VALUE self)
 {
     g_main_context_release(_SELF(self));
     return self;
@@ -527,8 +517,7 @@ mc_release(self)
 
 #if GLIB_CHECK_VERSION(2,10,0)
 static VALUE
-mc_is_owner(self)
-    VALUE self;
+mc_is_owner(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_is_owner(_SELF(self)));
 }
@@ -541,8 +530,7 @@ gboolean    g_main_context_wait             (GMainContext *context,
 */
 
 static VALUE
-mc_prepare(self)
-    VALUE self;
+mc_prepare(VALUE self)
 {
     gint priority;
     gboolean ret = g_main_context_prepare(_SELF(self), &priority);
@@ -551,8 +539,7 @@ mc_prepare(self)
 }
 
 static VALUE
-mc_query(self, max_priority)
-    VALUE self, max_priority;
+mc_query(VALUE self, VALUE max_priority)
 {
     gint i, timeout_;
     VALUE ary;
@@ -577,8 +564,7 @@ mc_query(self, max_priority)
 
 /* How can I implement this?
 static VALUE
-mc_check(self, max_priority)
-    VALUE self, max_priority;
+mc_check(VALUE self, VALUE max_priority)
 {
     gint i, timeout_;
     VALUE ary;
@@ -607,8 +593,7 @@ mc_check(self, max_priority)
 */
 
 static VALUE
-mc_dispatch(self)
-    VALUE self;
+mc_dispatch(VALUE self)
 {
     g_main_context_dispatch(_SELF(self));
     return self;
@@ -616,10 +601,7 @@ mc_dispatch(self)
 
 /* How can I get "self" or something like it as key .... 
 static gint
-poll_func(ufds, nfsd, timeout_)
-    GPollFD* ufds;
-    guint nfsd;
-    gint timeout_;
+poll_func(GPollFD *ufds, guint nfsd, gint timeout_)
 {
     VALUE func = rb_ivar_get(self, id_poll_func);
     if NIL_P(func) return -1;
@@ -629,8 +611,7 @@ poll_func(ufds, nfsd, timeout_)
 }
 
 static VALUE
-mc_set_poll_func(self)
-    VALUE self;
+mc_set_poll_func(VALUE self)
 {
     rb_ivar_set(self, id_poll_func, rb_block_proc());
     g_main_context_set_poll_func(_SELF(self), (GPollFunc)poll_func);
@@ -644,8 +625,7 @@ GPollFunc   g_main_context_get_poll_func    (GMainContext *context);
 */
 
 static VALUE
-mc_add_poll(self, fd, priority)
-    VALUE self, fd, priority;
+mc_add_poll(VALUE self, VALUE fd, VALUE priority)
 {
     g_main_context_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD),
                             NUM2INT(priority));
@@ -653,8 +633,7 @@ mc_add_poll(self, fd, priority)
 }
 
 static VALUE
-mc_remove_poll(self, fd)
-    VALUE self, fd;
+mc_remove_poll(VALUE self, VALUE fd)
 {
     g_main_context_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
     return self;
@@ -662,8 +641,7 @@ mc_remove_poll(self, fd)
 
 #ifdef HAVE_G_MAIN_DEPTH
 static VALUE
-mc_s_depth(self)
-    VALUE self;
+mc_s_depth(VALUE self)
 {
     return INT2NUM(g_main_depth());
 }
@@ -671,15 +649,13 @@ mc_s_depth(self)
 
 
 static VALUE
-timeout_source_new(self, interval)
-    VALUE self, interval;
+timeout_source_new(VALUE self, VALUE interval)
 {
     return BOXED2RVAL(g_timeout_source_new(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
-timeout_source_new_seconds(self, interval)
-    VALUE self, interval;
+timeout_source_new_seconds(VALUE self, VALUE interval)
 {
     return BOXED2RVAL(g_timeout_source_new_seconds(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
@@ -736,17 +712,13 @@ timeout_add_seconds(int argc, VALUE *argv, VALUE self)
 #endif
 
 static VALUE
-idle_source_new(self)
-    VALUE self;
+idle_source_new(VALUE self)
 {
     return BOXED2RVAL(g_idle_source_new(), G_TYPE_SOURCE);
 }
 
 static VALUE
-idle_add(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+idle_add(gint argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, func, rb_id;
     callback_info_t *info;
@@ -776,8 +748,7 @@ idle_add(argc, argv, self)
 }
 
 static VALUE
-idle_remove(self, func)
-    VALUE self, func;
+idle_remove(VALUE self, VALUE func)
 {
     callback_info_t *info;
 
@@ -789,8 +760,7 @@ idle_remove(self, func)
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-child_watch_source_new(self, pid)
-    VALUE self, pid;
+child_watch_source_new(VALUE self, VALUE pid)
 {
     return BOXED2RVAL(g_child_watch_source_new((GPid)NUM2INT(pid)), G_TYPE_SOURCE);
 }
@@ -805,8 +775,7 @@ child_watch_func(pid, status, func)
 }
 
 static VALUE
-child_watch_add(self, pid)
-    VALUE self, pid;
+child_watch_add(VALUE self, VALUE pid)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
