@@ -14,8 +14,7 @@
 static VALUE gthreads;
 
 static VALUE
-gt_init(self)
-    VALUE self;
+gt_init(VALUE self)
 {
 #ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED
@@ -26,8 +25,7 @@ gt_init(self)
 }
 
 static VALUE
-gt_supported(self)
-    VALUE self;
+gt_supported(VALUE self)
 {
 #ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED
