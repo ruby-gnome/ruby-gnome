@@ -37,8 +37,7 @@ gdk_timecoord_get_type(void)
 /**********************************/
 
 static VALUE
-timecoord_initialize(self, time, axes)
-    VALUE self, time, axes;
+timecoord_initialize(VALUE self, VALUE time, VALUE axes)
 {
     GdkTimeCoord coord;
     int i;
@@ -58,23 +57,20 @@ timecoord_initialize(self, time, axes)
 }
 
 static VALUE
-timecoord_time(self)
-    VALUE self;
+timecoord_time(VALUE self)
 {
     return UINT2NUM(_SELF(self)->time);
 }
 
 static VALUE
-timecoord_set_time(self, time)
-    VALUE self, time;
+timecoord_set_time(VALUE self, VALUE time)
 {
     _SELF(self)->time = NUM2UINT(time);
     return self;
 }
 
 static VALUE
-timecoord_axes(self)
-    VALUE self;
+timecoord_axes(VALUE self)
 {
     VALUE ary = rb_ary_new();
     int i;
@@ -85,8 +81,7 @@ timecoord_axes(self)
 }
 
 static VALUE
-timecoord_set_axes(self, axes)
-    VALUE self, axes;
+timecoord_set_axes(VALUE self, VALUE axes)
 {
     int i;
     GdkTimeCoord* coord = _SELF(self);
