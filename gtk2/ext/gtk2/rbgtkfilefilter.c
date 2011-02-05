@@ -17,39 +17,34 @@
 #define _SELF(self) GTK_FILE_FILTER(RVAL2GOBJ(self))
 
 static VALUE
-ffil_initialize(self)
-    VALUE self;
+ffil_initialize(VALUE self)
 {
   RBGTK_INITIALIZE(self, gtk_file_filter_new());
   return Qnil;
 }
 
 static VALUE
-ffil_set_name(self, name)
-     VALUE self, name;
+ffil_set_name(VALUE self, VALUE name)
 {
   gtk_file_filter_set_name(_SELF(self), RVAL2CSTR(name));
   return self;
 }
 
 static VALUE
-ffil_get_name(self)
-     VALUE self;
+ffil_get_name(VALUE self)
 {
   return CSTR2RVAL(gtk_file_filter_get_name(_SELF(self)));
 }
 
 static VALUE
-ffil_add_mime_type(self, mime)
-     VALUE self, mime;
+ffil_add_mime_type(VALUE self, VALUE mime)
 {
   gtk_file_filter_add_mime_type(_SELF(self), RVAL2CSTR(mime));
   return self;
 }
 
 static VALUE
-ffil_add_pattern(self, pattern)
-     VALUE self, pattern;
+ffil_add_pattern(VALUE self, VALUE pattern)
 {
   gtk_file_filter_add_pattern(_SELF(self), RVAL2CSTR(pattern));
   return self;
@@ -57,9 +52,7 @@ ffil_add_pattern(self, pattern)
 
 /* Should return true/false */
 static gboolean
-filter_func(info, func)
-    const GtkFileFilterInfo* info;
-    gpointer func;
+filter_func(const GtkFileFilterInfo *info, gpointer func)
 {
     return CBOOL2RVAL(rb_funcall((VALUE)func, 5, 
                                  GFLAGS2RVAL(info->contains, GTK_TYPE_FILE_FILTER_FLAGS), 
@@ -69,8 +62,7 @@ filter_func(info, func)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-ffil_add_pixbuf_formats(self)
-    VALUE self;
+ffil_add_pixbuf_formats(VALUE self)
 {
     gtk_file_filter_add_pixbuf_formats(_SELF(self));
     return self;
@@ -78,8 +70,7 @@ ffil_add_pixbuf_formats(self)
 #endif
 
 static VALUE
-ffil_add_custom(self, needed)
-    VALUE self, needed;
+ffil_add_custom(VALUE self, VALUE needed)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -89,15 +80,13 @@ ffil_add_custom(self, needed)
 }
 
 static VALUE
-ffil_get_needed(self)
-    VALUE self;
+ffil_get_needed(VALUE self)
 {
     return GFLAGS2RVAL(gtk_file_filter_get_needed(_SELF(self)), GTK_TYPE_FILE_FILTER_FLAGS);
 }
 
 static VALUE
-ffil_filter(self, contains, filename, uri, display_name, mime_type)
-    VALUE self, contains, filename, uri, display_name, mime_type;
+ffil_filter(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display_name, VALUE mime_type)
 {
     GtkFileFilterInfo info;
     info.contains = RVAL2GFLAGS(contains, GTK_TYPE_FILE_FILTER_FLAGS);
