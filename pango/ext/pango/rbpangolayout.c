@@ -15,8 +15,7 @@
 #define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
 
 static VALUE
-layout_initialize(self, context)
-    VALUE self, context;
+layout_initialize(VALUE self, VALUE context)
 {
     G_INITIALIZE(self, pango_layout_new(RVAL2CONTEXT(context)));
     return Qnil;
@@ -29,40 +28,33 @@ layout_copy(VALUE self)
 }
 
 static VALUE
-layout_get_context(self)
-    VALUE self;
+layout_get_context(VALUE self)
 {
     return GOBJ2RVAL(pango_layout_get_context(_SELF(self)));
 }
 
 static VALUE
-layout_context_changed(self)
-    VALUE self;
+layout_context_changed(VALUE self)
 {
     pango_layout_context_changed(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-layout_set_text(self, text)
-    VALUE self, text;
+layout_set_text(VALUE self, VALUE text)
 {
     pango_layout_set_text(_SELF(self), RVAL2CSTR(text), RSTRING_LEN(text));
     return self;
 }
 
 static VALUE
-layout_get_text(self)
-    VALUE self;
+layout_get_text(VALUE self)
 {
     return CSTR2RVAL(pango_layout_get_text(_SELF(self)));
 }
 
 static VALUE
-layout_set_markup(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+layout_set_markup(int argc, VALUE *argv, VALUE self)
 {
     VALUE markup, accel_marker;
     gunichar accel_char = 0;
@@ -83,16 +75,14 @@ layout_set_markup(argc, argv, self)
 }
 
 static VALUE
-layout_set_markup_eq(self, markup)
-    VALUE self, markup;
+layout_set_markup_eq(VALUE self, VALUE markup)
 {
     pango_layout_set_markup(_SELF(self), RVAL2CSTR(markup), RSTRING_LEN(markup));
     return markup;
 }
 
 static VALUE
-layout_set_attributes(self, attrs)
-    VALUE self, attrs;
+layout_set_attributes(VALUE self, VALUE attrs)
 {
     pango_layout_set_attributes(_SELF(self), 
                                 (PangoAttrList*)(RVAL2BOXED(attrs, PANGO_TYPE_ATTR_LIST)));
@@ -100,8 +90,7 @@ layout_set_attributes(self, attrs)
 }
 
 static VALUE
-layout_get_attributes(self)
-    VALUE self;
+layout_get_attributes(VALUE self)
 {
     return BOXED2RVAL(pango_layout_get_attributes(_SELF(self)), PANGO_TYPE_ATTR_LIST);
 }
@@ -129,8 +118,7 @@ layout_set_font_description(VALUE self, VALUE rb_desc)
 
 #ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
 static VALUE
-layout_get_font_description(self)
-    VALUE self;
+layout_get_font_description(VALUE self)
 {
     const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
     return BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION);
@@ -138,130 +126,113 @@ layout_get_font_description(self)
 #endif
 
 static VALUE
-layout_set_width(self, width)
-    VALUE self, width;
+layout_set_width(VALUE self, VALUE width)
 {
     pango_layout_set_width(_SELF(self), NUM2INT(width));
     return self;
 }
 
 static VALUE
-layout_get_width(self)
-    VALUE self;
+layout_get_width(VALUE self)
 {
     return INT2NUM(pango_layout_get_width(_SELF(self)));
 }
 
 static VALUE
-layout_set_wrap(self, wrap)
-    VALUE self, wrap;
+layout_set_wrap(VALUE self, VALUE wrap)
 {
     pango_layout_set_wrap(_SELF(self), RVAL2GENUM(wrap, PANGO_TYPE_WRAP_MODE));
     return self;
 }
 
 static VALUE
-layout_get_wrap(self)
-    VALUE self;
+layout_get_wrap(VALUE self)
 {
     return GENUM2RVAL(pango_layout_get_wrap(_SELF(self)), PANGO_TYPE_WRAP_MODE);
 }
 
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
 static VALUE
-layout_set_ellipsize(self, ellipsize)
-    VALUE self, ellipsize;
+layout_set_ellipsize(VALUE self, VALUE ellipsize)
 {
     pango_layout_set_ellipsize(_SELF(self), RVAL2GENUM(ellipsize, 
                                                        PANGO_TYPE_ELLIPSIZE_MODE));
     return self;
 }
 static VALUE
-layout_get_ellipsize(self)
-    VALUE self;
+layout_get_ellipsize(VALUE self)
 {
     return GENUM2RVAL(pango_layout_get_ellipsize(_SELF(self)), PANGO_TYPE_ELLIPSIZE_MODE);
 }
 #endif
 
 static VALUE
-layout_set_indent(self, indent)
-    VALUE self, indent;
+layout_set_indent(VALUE self, VALUE indent)
 {
     pango_layout_set_indent(_SELF(self), NUM2INT(indent));
     return self;
 }
 
 static VALUE
-layout_get_indent(self)
-    VALUE self;
+layout_get_indent(VALUE self)
 {
     return INT2NUM(pango_layout_get_indent(_SELF(self)));
 }
 
 static VALUE
-layout_get_spacing(self)
-    VALUE self;
+layout_get_spacing(VALUE self)
 {
     return INT2NUM(pango_layout_get_spacing(_SELF(self)));
 }
 
 static VALUE
-layout_set_spacing(self, spacing)
-    VALUE self, spacing;
+layout_set_spacing(VALUE self, VALUE spacing)
 {
     pango_layout_set_spacing(_SELF(self), NUM2INT(spacing));
     return self;
 }
 
 static VALUE
-layout_set_justify(self, justify)
-    VALUE self, justify;
+layout_set_justify(VALUE self, VALUE justify)
 {
     pango_layout_set_justify(_SELF(self), RVAL2CBOOL(justify));
     return self;
 }
 static VALUE
-layout_get_justify(self)
-    VALUE self;
+layout_get_justify(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_justify(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-layout_set_auto_dir(self, auto_dir)
-    VALUE self, auto_dir;
+layout_set_auto_dir(VALUE self, VALUE auto_dir)
 {
     pango_layout_set_auto_dir(_SELF(self), RVAL2CBOOL(auto_dir));
     return self;
 }
 static VALUE
-layout_get_auto_dir(self)
-    VALUE self;
+layout_get_auto_dir(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_auto_dir(_SELF(self)));
 }
 #endif
 
 static VALUE
-layout_set_alignment(self, align)
-    VALUE self, align;
+layout_set_alignment(VALUE self, VALUE align)
 {
     pango_layout_set_alignment(_SELF(self), RVAL2GENUM(align, PANGO_TYPE_ALIGNMENT));
     return self;
 }
 
 static VALUE
-layout_get_alignment(self)
-    VALUE self;
+layout_get_alignment(VALUE self)
 {
     return GENUM2RVAL(pango_layout_get_alignment(_SELF(self)), PANGO_TYPE_ALIGNMENT);
 }
 
 static VALUE
-layout_set_tabs(self, tabs)
-    VALUE self,tabs;
+layout_set_tabs(VALUE self, VALUE tabs)
 {
     pango_layout_set_tabs(_SELF(self), 
                           (PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY));
@@ -269,8 +240,7 @@ layout_set_tabs(self, tabs)
 }
 
 static VALUE
-layout_get_tabs(self)
-    VALUE self;
+layout_get_tabs(VALUE self)
 {
     VALUE ret = Qnil;
     PangoTabArray* tabs = pango_layout_get_tabs(_SELF(self));
@@ -283,23 +253,20 @@ layout_get_tabs(self)
 }
 
 static VALUE
-layout_set_single_paragraph_mode(self, setting)
-    VALUE self, setting;
+layout_set_single_paragraph_mode(VALUE self, VALUE setting)
 {
     pango_layout_set_single_paragraph_mode(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-layout_get_single_paragraph_mode(self)
-    VALUE self;
+layout_get_single_paragraph_mode(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_single_paragraph_mode(_SELF(self)));
 }
 
 static VALUE
-layout_get_log_attrs(self)
-    VALUE self;
+layout_get_log_attrs(VALUE self)
 {
     PangoLogAttr* attrs;
     gint i, n_attrs;
@@ -318,8 +285,7 @@ layout_get_log_attrs(self)
 }
 
 static VALUE
-layout_xy_to_index(self, x, y)
-    VALUE self, x, y;
+layout_xy_to_index(VALUE self, VALUE x, VALUE y)
 {
     int index, trailing;
     gboolean ret = pango_layout_xy_to_index(_SELF(self), 
@@ -330,8 +296,7 @@ layout_xy_to_index(self, x, y)
 }
 
 static VALUE
-layout_index_to_pos(self, index)
-    VALUE self, index;
+layout_index_to_pos(VALUE self, VALUE index)
 {
     PangoRectangle pos;
     pango_layout_index_to_pos(_SELF(self), NUM2INT(index), &pos);
@@ -339,8 +304,7 @@ layout_index_to_pos(self, index)
 }
 
 static VALUE
-layout_get_cursor_pos(self, index)
-    VALUE self, index;
+layout_get_cursor_pos(VALUE self, VALUE index)
 {
     PangoRectangle strong_pos, weak_pos;
     pango_layout_get_cursor_pos(_SELF(self), NUM2INT(index), &strong_pos, &weak_pos);
@@ -349,8 +313,7 @@ layout_get_cursor_pos(self, index)
 }
 
 static VALUE
-layout_move_cursor_visually(self, strong, old_index, old_trailing, direction)
-    VALUE self, strong, old_index, old_trailing, direction;
+layout_move_cursor_visually(VALUE self, VALUE strong, VALUE old_index, VALUE old_trailing, VALUE direction)
 {
     int new_index, new_trailing;
     pango_layout_move_cursor_visually(_SELF(self), RVAL2CBOOL(strong),
@@ -361,10 +324,7 @@ layout_move_cursor_visually(self, strong, old_index, old_trailing, direction)
 }
 
 static VALUE
-layout_get_extents(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+layout_get_extents(int argc, VALUE *argv, VALUE self)
 {
     VALUE ink_rect, logical_rect;
     PangoRectangle rink, rlog;
@@ -403,8 +363,7 @@ layout_get_extents(argc, argv, self)
 }
 
 static VALUE
-layout_extents(self)
-    VALUE self;
+layout_extents(VALUE self)
 {
     PangoRectangle rink = {0, 0, 0, 0};
     PangoRectangle rlog = {0, 0, 0, 0};
@@ -415,10 +374,7 @@ layout_extents(self)
 }
 
 static VALUE
-layout_get_pixel_extents(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+layout_get_pixel_extents(int argc, VALUE *argv, VALUE self)
 {
     VALUE ink_rect, logical_rect;
     PangoRectangle rink, rlog;
@@ -457,8 +413,7 @@ layout_get_pixel_extents(argc, argv, self)
 }
 
 static VALUE
-layout_pixel_extents(self)
-    VALUE self;
+layout_pixel_extents(VALUE self)
 {
     PangoRectangle rink = {0, 0, 0, 0};
     PangoRectangle rlog = {0, 0, 0, 0};
@@ -469,8 +424,7 @@ layout_pixel_extents(self)
 }
 
 static VALUE
-layout_get_size(self)
-    VALUE self;
+layout_get_size(VALUE self)
 {
     int width, height;
     pango_layout_get_size(_SELF(self), &width, &height);
@@ -478,8 +432,7 @@ layout_get_size(self)
 }
 
 static VALUE
-layout_get_pixel_size(self)
-    VALUE self;
+layout_get_pixel_size(VALUE self)
 {
     int width, height;
     pango_layout_get_pixel_size(_SELF(self), &width, &height);
@@ -487,30 +440,26 @@ layout_get_pixel_size(self)
 }
 
 static VALUE
-layout_get_line_count(self)
-    VALUE self;
+layout_get_line_count(VALUE self)
 {
     return INT2NUM(pango_layout_get_line_count(_SELF(self)));
 }
 
 static VALUE
-layout_get_line(self, line)
-    VALUE self, line;
+layout_get_line(VALUE self, VALUE line)
 {
     return BOXED2RVAL(pango_layout_get_line(_SELF(self), NUM2INT(line)), PANGO_TYPE_LAYOUT_LINE);
 }
 
 static VALUE
-layout_get_lines(self)
-    VALUE self;
+layout_get_lines(VALUE self)
 {
     return GSLIST2ARY2(pango_layout_get_lines(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
 }
 
 
 static VALUE
-layout_get_iter(self)
-    VALUE self;
+layout_get_iter(VALUE self)
 {
     return BOXED2RVAL(pango_layout_get_iter(_SELF(self)), 
                       PANGO_TYPE_LAYOUT_ITER);
