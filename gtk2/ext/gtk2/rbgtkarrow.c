@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-arrow_initialize(self, arrow_t, shadow_t)
-    VALUE self, arrow_t, shadow_t;
+arrow_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
     RBGTK_INITIALIZE(self, gtk_arrow_new(RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
                                          RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE)));
@@ -24,8 +23,7 @@ arrow_initialize(self, arrow_t, shadow_t)
 }
 
 static VALUE
-arrow_set(self, arrow_t, shadow_t)
-    VALUE self, arrow_t, shadow_t;
+arrow_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
     gtk_arrow_set(GTK_ARROW(RVAL2GOBJ(self)),
 		  RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
