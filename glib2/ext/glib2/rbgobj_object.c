@@ -25,8 +25,7 @@ static GQuark RUBY_GOBJECT_OBJ_KEY;
 
 /* deperecated */
 void
-rbgobj_add_abstract_but_create_instance_class(gtype)
-    GType gtype;
+rbgobj_add_abstract_but_create_instance_class(GType gtype)
 {
 }
 
@@ -82,16 +81,13 @@ gobj_s_allocate(klass)
 
 /* deprecated */
 VALUE
-rbgobj_create_object(klass)
-    VALUE klass;
+rbgobj_create_object(VALUE klass)
 {
     return gobj_s_allocate(klass);
 }
 
 void
-rbgobj_gobject_initialize(obj, cobj)
-    VALUE obj;
-    gpointer cobj;
+rbgobj_gobject_initialize(VALUE obj, gpointer cobj)
 {
     gobj_holder* holder = g_object_get_qdata((GObject*)cobj, RUBY_GOBJECT_OBJ_KEY);
     if (holder)
@@ -136,8 +132,7 @@ rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc)
 }
 
 GObject*
-rbgobj_get_gobject(obj)
-    VALUE obj;
+rbgobj_get_gobject(VALUE obj)
 {
     gobj_holder* holder;
 
@@ -168,8 +163,7 @@ dummy_init(argc, argv, self)
 }
 
 void
-rbgobj_init_object_class(klass)
-    VALUE klass;
+rbgobj_init_object_class(VALUE klass)
 {
     rbgobj_define_property_accessors(klass);
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
@@ -218,10 +212,7 @@ gobj_mark(gpointer ptr)
 }
 
 static VALUE
-gobj_s_gobject_new(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gobj_s_gobject_new(int argc, VALUE *argv, VALUE self)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     VALUE params_hash;
@@ -318,9 +309,7 @@ gobj_new_ensure(struct param_setup_arg* arg)
 }
 
 GObject*
-rbgobj_gobject_new(gtype, params_hash)
-    GType gtype;
-    VALUE params_hash;
+rbgobj_gobject_new(GType gtype, VALUE params_hash)
 {
     GObject* result;
 
@@ -381,8 +370,7 @@ gobj_s_install_property(int argc, VALUE* argv, VALUE self)
 }
 
 static VALUE
-gobj_s_property(self, property_name)
-     VALUE self, property_name;
+gobj_s_property(VALUE self, VALUE property_name)
 {
     GObjectClass* oclass;
     const char* name;
@@ -437,10 +425,7 @@ static VALUE type_to_prop_setter_table;
 static VALUE type_to_prop_getter_table;
 
 void
-rbgobj_register_property_setter(gtype, name, func)
-    GType gtype;
-    const char* name;
-    RValueToGValueFunc func;
+rbgobj_register_property_setter(GType gtype, const char *name, RValueToGValueFunc func)
 {
     GObjectClass* oclass;
     GParamSpec* pspec;
@@ -461,10 +446,7 @@ rbgobj_register_property_setter(gtype, name, func)
 }
 
 void
-rbgobj_register_property_getter(gtype, name, func)
-    GType gtype;
-    const char* name;
-    GValueToRValueFunc func;
+rbgobj_register_property_getter(GType gtype, const char *name, GValueToRValueFunc func)
 {
     GObjectClass* oclass;
     GParamSpec* pspec;
@@ -483,8 +465,7 @@ rbgobj_register_property_getter(gtype, name, func)
 }
 
 static VALUE
-gobj_set_property(self, prop_name, val)
-    VALUE self, prop_name, val;
+gobj_set_property(VALUE self, VALUE prop_name, VALUE val)
 {
     GParamSpec* pspec;
     const char* name;
@@ -531,8 +512,7 @@ gobj_set_property(self, prop_name, val)
 }
 
 static VALUE
-gobj_get_property(self, prop_name)
-    VALUE self, prop_name;
+gobj_get_property(VALUE self, VALUE prop_name)
 {
     GParamSpec* pspec;
     const char* name;
@@ -578,8 +558,7 @@ gobj_get_property(self, prop_name)
 static VALUE gobj_thaw_notify(VALUE self);
 
 static VALUE
-gobj_freeze_notify(self)
-    VALUE self;
+gobj_freeze_notify(VALUE self)
 {
     g_object_freeze_notify(RVAL2GOBJ(self));
     if (rb_block_given_p()) {
@@ -589,24 +568,21 @@ gobj_freeze_notify(self)
 }
 
 static VALUE
-gobj_notify(self, property_name)
-    VALUE self, property_name;
+gobj_notify(VALUE self, VALUE property_name)
 {
     g_object_notify(RVAL2GOBJ(self), StringValuePtr(property_name));
     return self;
 }
 
 static VALUE
-gobj_thaw_notify(self)
-    VALUE self;
+gobj_thaw_notify(VALUE self)
 {
     g_object_thaw_notify(RVAL2GOBJ(self));
     return self;
 }
 
 static VALUE
-gobj_is_destroyed(self)
-    VALUE self;
+gobj_is_destroyed(VALUE self)
 {
     gobj_holder* holder;
 
@@ -619,8 +595,7 @@ gobj_is_destroyed(self)
 }
 
 static VALUE
-gobj_inspect(self)
-    VALUE self;
+gobj_inspect(VALUE self)
 {
     gobj_holder* holder;
     const char *class_name;
@@ -643,10 +618,7 @@ gobj_inspect(self)
 }
 
 static VALUE
-gobj_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gobj_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE params_hash;
     GObject* gobj;
@@ -670,8 +642,7 @@ gobj_initialize(argc, argv, self)
 }
 
 static VALUE
-gobj_ref_count(self)
-    VALUE self;
+gobj_ref_count(VALUE self)
 {
     gobj_holder* holder;
     Data_Get_Struct(self, gobj_holder, holder);
