@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-bin_child(self)
-    VALUE self;
+bin_child(VALUE self)
 {
     GtkWidget *child = gtk_bin_get_child(RVAL2GOBJ(self));
     return child ? GOBJ2RVAL(child) : Qnil;
