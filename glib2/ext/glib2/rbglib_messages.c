@@ -67,16 +67,14 @@ rbglib_log_handler(log_domain, log_level, message, user_data)
 
 /* Use Internal only */
 static VALUE
-rbglib_m_log_cancel_handler(self)
-    VALUE self;
+rbglib_m_log_cancel_handler(VALUE self)
 {
     log_canceled = TRUE;
     return Qnil;
 }
 
 static VALUE
-rbglib_m_log_set_handler(self, domain, levels)
-    VALUE self, domain, levels;
+rbglib_m_log_set_handler(VALUE self, VALUE domain, VALUE levels)
 {
     guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                          NUM2INT(levels),
@@ -85,8 +83,7 @@ rbglib_m_log_set_handler(self, domain, levels)
 }
 
 static VALUE
-rbglib_m_log_remove_handler(self, domain, handler_id)
-    VALUE self, domain, handler_id;
+rbglib_m_log_remove_handler(VALUE self, VALUE domain, VALUE handler_id)
 {
     g_log_remove_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                          NUM2UINT(handler_id));
@@ -95,23 +92,20 @@ rbglib_m_log_remove_handler(self, domain, handler_id)
 }
 
 static VALUE
-rbglib_m_log_set_always_fatal(self, fatal_mask)
-    VALUE self, fatal_mask;
+rbglib_m_log_set_always_fatal(VALUE self, VALUE fatal_mask)
 {
     return INT2NUM(g_log_set_always_fatal(NUM2INT(fatal_mask)));
 }
 
 static VALUE
-rbglib_m_log_set_fatal_mask(self, domain, fatal_mask)
-    VALUE self, domain, fatal_mask;
+rbglib_m_log_set_fatal_mask(VALUE self, VALUE domain, VALUE fatal_mask)
 {
     return INT2NUM(g_log_set_fatal_mask(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                         NUM2INT(fatal_mask)));
 }
 
 static VALUE
-rbglib_m_log(self, domain, level, str)
-    VALUE self, domain, level, str;
+rbglib_m_log(VALUE self, VALUE domain, VALUE level, VALUE str)
 {
     g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), RVAL2CSTR(str), NULL);
     return Qnil;
