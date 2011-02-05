@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-hbox_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+hbox_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE homogeneous, spacing;
 
