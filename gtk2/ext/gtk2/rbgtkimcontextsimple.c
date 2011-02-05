@@ -13,16 +13,14 @@
 #define _SELF(self) (GTK_IM_CONTEXT_SIMPLE(RVAL2GOBJ(self)))
 
 static VALUE 
-imcsimple_initialize(self)
-    VALUE self;
+imcsimple_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_im_context_simple_new());
     return Qnil;
 }
 
 static VALUE
-imcsimple_add_table(self, data, max_seq_len, n_seqs)
-    VALUE self, data, max_seq_len, n_seqs;
+imcsimple_add_table(VALUE self, VALUE data, VALUE max_seq_len, VALUE n_seqs)
 {
     int i;
     guint16* gdata = ALLOCA_N(guint16, RARRAY_LEN(data));
