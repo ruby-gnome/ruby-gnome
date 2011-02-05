@@ -18,10 +18,7 @@ static ID id_child_model;
 static ID id_root;
 
 static VALUE
-treemodelfilter_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+treemodelfilter_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE child_model, root;
     GtkTreeModel* widget;
@@ -56,8 +53,7 @@ visible_func(model, iter, func)
 }
 
 static VALUE
-treemodelfilter_set_visible_func(self)
-    VALUE self;
+treemodelfilter_set_visible_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -91,10 +87,7 @@ modify_func(model, iter, value, column, func)
  * end
  */
 static VALUE
-treemodelfilter_set_modify_func(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+treemodelfilter_set_modify_func(int argc, VALUE *argv, VALUE self)
 {
     VALUE func = rb_block_proc();
     gint i;
@@ -117,23 +110,20 @@ treemodelfilter_set_modify_func(argc, argv, self)
 }
 
 static VALUE
-treemodelfilter_set_visible_column(self, column)
-    VALUE self, column;
+treemodelfilter_set_visible_column(VALUE self, VALUE column)
 {
     gtk_tree_model_filter_set_visible_column(_SELF(self), NUM2INT(column));
     return self;
 }
 
 static VALUE
-treemodelfilter_get_model(self)
-    VALUE self;
+treemodelfilter_get_model(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_model_filter_get_model(_SELF(self)));
 }
 
 static VALUE
-treemodelfilter_convert_child_iter_to_iter(self, child_iter)
-    VALUE self, child_iter;
+treemodelfilter_convert_child_iter_to_iter(VALUE self, VALUE child_iter)
 {
     GtkTreeIter filter_iter;
     GtkTreeModelFilter* modelfilter = _SELF(self);
@@ -144,8 +134,7 @@ treemodelfilter_convert_child_iter_to_iter(self, child_iter)
 }
 
 static VALUE
-treemodelfilter_convert_iter_to_child_iter(self, filtered_iter)
-    VALUE self, filtered_iter;
+treemodelfilter_convert_iter_to_child_iter(VALUE self, VALUE filtered_iter)
 {
     GtkTreeIter child_iter;
     GtkTreeModelFilter* modelfilter = _SELF(self);
@@ -156,16 +145,14 @@ treemodelfilter_convert_iter_to_child_iter(self, filtered_iter)
 } 
 
 static VALUE
-treemodelfilter_convert_child_path_to_path(self, child_path)
-    VALUE self, child_path;
+treemodelfilter_convert_child_path_to_path(VALUE self, VALUE child_path)
 {
     return GTKTREEPATH2RVAL(gtk_tree_model_filter_convert_child_path_to_path(
                              _SELF(self),
                              RVAL2GTKTREEPATH(child_path)));
 }
 static VALUE
-treemodelfilter_convert_path_to_child_path(self, filter_path)
-    VALUE self, filter_path;
+treemodelfilter_convert_path_to_child_path(VALUE self, VALUE filter_path)
 {
     return GTKTREEPATH2RVAL(gtk_tree_model_filter_convert_path_to_child_path(
                              _SELF(self),
@@ -173,16 +160,14 @@ treemodelfilter_convert_path_to_child_path(self, filter_path)
 }
 
 static VALUE
-treemodelfilter_refilter(self)
-    VALUE self;
+treemodelfilter_refilter(VALUE self)
 {
     gtk_tree_model_filter_refilter(_SELF(self));
     return self;
 }
 
 static VALUE
-treemodelfilter_clear_cache(self)
-    VALUE self;
+treemodelfilter_clear_cache(VALUE self)
 {
     gtk_tree_model_filter_clear_cache(_SELF(self));
     return self;
