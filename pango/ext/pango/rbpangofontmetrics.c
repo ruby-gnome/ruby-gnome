@@ -14,55 +14,47 @@
 #define _SELF(self) ((PangoFontMetrics*)RVAL2BOXED(self, PANGO_TYPE_FONT_METRICS))
 
 static VALUE
-font_metrics_get_ascent(self)
-    VALUE self;
+font_metrics_get_ascent(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_ascent(_SELF(self)));
 }
 
 static VALUE
-font_metrics_get_descent(self)
-    VALUE self;
+font_metrics_get_descent(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_descent(_SELF(self)));
 }
 
 static VALUE
-font_metrics_get_approximate_char_width(self)
-    VALUE self;
+font_metrics_get_approximate_char_width(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_approximate_char_width(_SELF(self)));
 }
 
 static VALUE
-font_metrics_get_approximate_digit_width(self)
-    VALUE self;
+font_metrics_get_approximate_digit_width(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_approximate_digit_width(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
-font_metrics_get_underline_thickness(self)
-    VALUE self;
+font_metrics_get_underline_thickness(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_underline_thickness(_SELF(self)));
 }
 static VALUE
-font_metrics_get_underline_position(self)
-    VALUE self;
+font_metrics_get_underline_position(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_underline_position(_SELF(self)));
 }
 static VALUE
-font_metrics_get_strikethrough_thickness(self)
-    VALUE self;
+font_metrics_get_strikethrough_thickness(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_strikethrough_thickness(_SELF(self)));
 }
 static VALUE
-font_metrics_get_strikethrough_position(self)
-    VALUE self;
+font_metrics_get_strikethrough_position(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_strikethrough_position(_SELF(self)));
 }
