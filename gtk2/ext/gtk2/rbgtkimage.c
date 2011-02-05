@@ -24,10 +24,7 @@ GtkImageType gtk_image_get_storage_type     (GtkImage *image);
 */
 
 static VALUE
-image_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+image_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GType gtype;
@@ -68,10 +65,7 @@ image_initialize(argc, argv, self)
 }
 
 static VALUE
-image_set(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+image_set(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GType gtype;
@@ -125,8 +119,7 @@ gint        gtk_image_get_pixel_size        (GtkImage *image);
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-image_clear(self)
-    VALUE self;
+image_clear(VALUE self)
 {
     gtk_image_clear(_SELF(self));
     return self;
