@@ -17,8 +17,7 @@
 
 #if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
-rbglib_m_language_names(self)
-    VALUE self;
+rbglib_m_language_names(VALUE self)
 {
     const gchar * const *languages;
     const gchar *language;
