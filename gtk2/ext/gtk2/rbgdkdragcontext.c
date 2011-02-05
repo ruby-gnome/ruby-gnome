@@ -13,36 +13,31 @@
 #define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
 
 static VALUE
-gdkdragcontext_protocol(self)
-    VALUE self;
+gdkdragcontext_protocol(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->protocol, GDK_TYPE_DRAG_PROTOCOL);
 }
 
 static VALUE
-gdkdragcontext_is_source(self)
-    VALUE self;
+gdkdragcontext_is_source(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->is_source);
 }
 
 static VALUE
-gdkdragcontext_source_window(self)
-    VALUE self;
+gdkdragcontext_source_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->source_window);
 }
 
 static VALUE
-gdkdragcontext_dest_window(self)
-    VALUE self;
+gdkdragcontext_dest_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->dest_window);
 }
 
 static VALUE
-gdkdragcontext_targets(self)
-    VALUE self;
+gdkdragcontext_targets(VALUE self)
 {
     GList *list = _SELF(self)->targets, *cur;
     VALUE ary = rb_ary_new();
@@ -54,46 +49,38 @@ gdkdragcontext_targets(self)
 }
 
 static VALUE
-gdkdragcontext_actions(self)
-    VALUE self;
+gdkdragcontext_actions(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->actions, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
-gdkdragcontext_suggested_action(self)
-    VALUE self;
+gdkdragcontext_suggested_action(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->suggested_action, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
-gdkdragcontext_action(self)
-    VALUE self;
+gdkdragcontext_action(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->action, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
-gdkdragcontext_start_time(self)
-    VALUE self;
+gdkdragcontext_start_time(VALUE self)
 {
     return UINT2NUM(_SELF(self)->start_time);
 }
 
 static VALUE
-gdkdragcontext_initialize(self)
-    VALUE self;
+gdkdragcontext_initialize(VALUE self)
 {   
     G_INITIALIZE(self, gdk_drag_context_new());
     return Qnil;
 }
 
 static VALUE
-gdkdragcontext_s_get_protocol(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkdragcontext_s_get_protocol(int argc, VALUE *argv, VALUE self)
 {
     VALUE xid;
     GdkDragProtocol prot;
@@ -119,41 +106,34 @@ gdkdragcontext_s_get_protocol(argc, argv, self)
 
 /* Instance Methods */
 static VALUE
-gdkdragcontext_get_selection(self)
-    VALUE self;
+gdkdragcontext_get_selection(VALUE self)
 {
     return BOXED2RVAL(gdk_drag_get_selection(_SELF(self)), GDK_TYPE_ATOM);
 }
 
 static VALUE
-gdkdragcontext_drag_abort(self, time)
-    VALUE self, time;
+gdkdragcontext_drag_abort(VALUE self, VALUE time)
 {
     gdk_drag_abort(_SELF(self), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_drop_reply(self, ok, time)
-    VALUE self, ok, time;
+gdkdragcontext_drop_reply(VALUE self, VALUE ok, VALUE time)
 {
     gdk_drop_reply(_SELF(self), RVAL2CBOOL(ok), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_drag_drop(self, time)
-    VALUE self, time;
+gdkdragcontext_drag_drop(VALUE self, VALUE time)
 {
     gdk_drag_drop(_SELF(self), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_find_window(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkdragcontext_find_window(int argc, VALUE *argv, VALUE self)
 {
     VALUE drag_window, x_root, y_root;
     GdkWindow *dest_window;
@@ -184,8 +164,7 @@ gdkdragcontext_find_window(argc, argv, self)
 }
 
 static VALUE
-gdkdragcontext_s_drag_begin(self, window, targets)
-    VALUE self, window, targets;
+gdkdragcontext_s_drag_begin(VALUE self, VALUE window, VALUE targets)
 {
     GList* list = NULL;
     VALUE ret;
@@ -201,10 +180,7 @@ gdkdragcontext_s_drag_begin(self, window, targets)
 }
 
 static VALUE
-gdkdragcontext_drag_motion(self, dest_window, protocol, x_root, y_root, 
-                           suggested_action, possible_actions, time)
-    VALUE self, dest_window, protocol, x_root, y_root, 
-  		  suggested_action, possible_actions, time;
+gdkdragcontext_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE x_root, VALUE y_root, VALUE suggested_action, VALUE possible_actions, VALUE time)
 {
     gboolean ret = gdk_drag_motion(_SELF(self), 
                                    GDK_WINDOW(RVAL2GOBJ(dest_window)), 
@@ -217,16 +193,14 @@ gdkdragcontext_drag_motion(self, dest_window, protocol, x_root, y_root,
 }
 
 static VALUE
-gdkdragcontext_drop_finish(self, success, time)
-    VALUE self, success, time;
+gdkdragcontext_drop_finish(VALUE self, VALUE success, VALUE time)
 {
     gdk_drop_finish(_SELF(self), RVAL2CBOOL(success), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_drag_status(self, action, time)
-    VALUE self, action, time;
+gdkdragcontext_drag_status(VALUE self, VALUE action, VALUE time)
 {
     gdk_drag_status(_SELF(self), 
                     RVAL2GFLAGS(action, GDK_TYPE_DRAG_ACTION), NUM2UINT(time));
@@ -235,8 +209,7 @@ gdkdragcontext_drag_status(self, action, time)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gdkdragcontext_drag_drop_succeeded(self)
-    VALUE self;
+gdkdragcontext_drag_drop_succeeded(VALUE self)
 {
     return CBOOL2RVAL(gdk_drag_drop_succeeded(_SELF(self)));
 }
