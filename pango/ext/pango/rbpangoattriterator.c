@@ -28,15 +28,13 @@ pango_attr_iter_get_type(void)
 /**********************************/
 
 static VALUE
-attriterator_next(self)
-    VALUE self;
+attriterator_next(VALUE self)
 {
     return CBOOL2RVAL(pango_attr_iterator_next(_SELF(self)));
 }
 
 static VALUE
-attriterator_range(self)
-    VALUE self;
+attriterator_range(VALUE self)
 {
     gint start = 0;
     gint end = 0;
@@ -45,10 +43,7 @@ attriterator_range(self)
 }
 
 static VALUE
-attriterator_get(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+attriterator_get(int argc, VALUE *argv, VALUE self)
 {
     VALUE type, ret;
     PangoAttribute* attr;
@@ -72,8 +67,7 @@ attriterator_get(argc, argv, self)
 }
 
 static VALUE
-attriterator_get_font(self)
-    VALUE self;
+attriterator_get_font(VALUE self)
 {
     PangoFontDescription* desc;
     PangoLanguage* lang;
@@ -100,8 +94,7 @@ attriterator_get_font(self)
 
 #ifdef HAVE_PANGO_ATTR_ITERATOR_GET_ATTRS
 static VALUE
-attriterator_get_attrs(self)
-    VALUE self;
+attriterator_get_attrs(VALUE self)
 {
     GSList* list = pango_attr_iterator_get_attrs(_SELF(self));
     GSList* base = list;
