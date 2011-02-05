@@ -16,10 +16,7 @@
 #define _SELF(self) (GTK_RECENT_CHOOSER_WIDGET(RVAL2GOBJ(self)))
 
 static VALUE
-rcw_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rcw_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE manager;
     GtkWidget* widget;
