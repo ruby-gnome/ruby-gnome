@@ -23,9 +23,7 @@ static VALUE action_table;
 static guint action_id = 0;
 
 static VALUE
-ifact_initialize(self, type, path, accel)
-    VALUE self;
-    VALUE type, path, accel;
+ifact_initialize(VALUE self, VALUE type, VALUE path, VALUE accel)
 {
     VALUE obj = rb_eval_string("eval('self', binding)");
     G_RELATIVE(obj, self);
@@ -36,10 +34,7 @@ ifact_initialize(self, type, path, accel)
 }
 
 static VALUE
-ifact_construct(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+ifact_construct(int argc, VALUE *argv, VALUE self)
 {
     VALUE type, path, accel;
     GtkItemFactory* ifact = _SELF(self);
@@ -52,8 +47,7 @@ ifact_construct(argc, argv, self)
 }
  
 static VALUE
-ifact_s_from_widget(self, widget)
-    VALUE self, widget;
+ifact_s_from_widget(VALUE self, VALUE widget)
 {
     VALUE obj = GOBJ2RVAL(gtk_item_factory_from_widget(RVAL2WIDGET(widget)));
     G_RELATIVE(obj, self);
@@ -61,15 +55,13 @@ ifact_s_from_widget(self, widget)
 }
 
 static VALUE
-ifact_s_path_from_widget(self, widget)
-    VALUE self, widget;
+ifact_s_path_from_widget(VALUE self, VALUE widget)
 {
     return CSTR2RVAL(gtk_item_factory_path_from_widget(RVAL2WIDGET(widget)));
 }
 
 static VALUE
-ifact_get_item(self, path)
-    VALUE self, path;
+ifact_get_item(VALUE self, VALUE path)
 {
     VALUE obj = Qnil;
     GtkWidget* widget = gtk_item_factory_get_item(_SELF(self), RVAL2CSTR(path));
@@ -81,8 +73,7 @@ ifact_get_item(self, path)
 }
 
 static VALUE
-ifact_get_widget(self, path)
-    VALUE self, path;
+ifact_get_widget(VALUE self, VALUE path)
 {
     VALUE obj = Qnil;
     GtkWidget* widget = gtk_item_factory_get_widget(_SELF(self), RVAL2CSTR(path));
@@ -103,8 +94,7 @@ GtkWidget*  gtk_item_factory_get_item_by_action
 */
 
 static int
-menuitem_type_check(item_type)
-    char *item_type;
+menuitem_type_check(char *item_type)
 {
     if (item_type == NULL || strcmp(item_type, "<Branch>") == 0 
         || (strcmp(item_type, "<LastBranch>") == 0)
@@ -115,10 +105,7 @@ menuitem_type_check(item_type)
 }
 
 static void
-items_exec_callback_wrap(callback_data, action_id, widget)
-    VALUE callback_data;
-    guint action_id;
-    GtkWidget* widget;
+items_exec_callback_wrap(VALUE callback_data, guint action_id, GtkWidget *widget)
 {
     VALUE iter, data;
     VALUE action = rb_hash_aref(action_table, UINT2NUM(action_id));
@@ -173,10 +160,7 @@ create_factory_entry(entry, self, path, item_type, accel, extdata, func, data)
 }  
 
 static VALUE
-ifact_create_item(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+ifact_create_item(int argc, VALUE *argv, VALUE self)
 {
     VALUE path, type, accel, extdata, data, func;
     GtkItemFactoryEntry *entry;
@@ -194,8 +178,7 @@ ifact_create_item(argc, argv, self)
 }
 
 static VALUE
-ifact_create_items(self, ary)
-    VALUE self, ary;
+ifact_create_items(VALUE self, VALUE ary)
 {
     VALUE entry, path, accel, type, func, data, extdata;
     GtkItemFactoryEntry *entries;
@@ -226,8 +209,7 @@ ifact_create_items(self, ary)
 
 
 static VALUE
-ifact_delete_item(self, path)
-    VALUE self, path;
+ifact_delete_item(VALUE self, VALUE path)
 {
     gtk_item_factory_delete_item(_SELF(self), RVAL2CSTR(path));
     return self;
@@ -243,8 +225,7 @@ void        gtk_item_factory_delete_entries (GtkItemFactory *ifactory,
 */
 
 static VALUE
-ifact_popup(self, x, y, mouse_button, time)
-    VALUE self, x, y, mouse_button, time;
+ifact_popup(VALUE self, VALUE x, VALUE y, VALUE mouse_button, VALUE time)
 {
     gtk_item_factory_popup(_SELF(self), NUM2UINT(x), NUM2UINT(y), NUM2UINT(mouse_button),
                            NUM2UINT(time));
