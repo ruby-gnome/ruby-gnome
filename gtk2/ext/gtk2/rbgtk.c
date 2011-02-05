@@ -32,9 +32,7 @@ remove_from_windows(GtkWidget *window, VALUE obj)
 }
 
 void
-rbgtk_initialize_gtkobject(obj, gtkobj)
-    VALUE obj;
-    GtkObject *gtkobj;
+rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj)
 {
     gtkobj = g_object_ref(gtkobj);
     gtk_object_sink(gtkobj);
@@ -54,9 +52,7 @@ rbgtk_initialize_gtkobject(obj, gtkobj)
 }
 
 void
-exec_callback(widget, proc)
-    GtkWidget *widget;
-    gpointer proc;
+exec_callback(GtkWidget *widget, gpointer proc)
 {
     rb_funcall((VALUE)proc, id_call, 1, GOBJ2RVAL(widget));
 }
@@ -70,8 +66,7 @@ exec_callback(widget, proc)
 #define USE_POLL_FUNC
 
 static VALUE
-gtk_m_events_pending(self)
-    VALUE self;
+gtk_m_events_pending(VALUE self)
 {
    return CBOOL2RVAL(gtk_events_pending());
 }
