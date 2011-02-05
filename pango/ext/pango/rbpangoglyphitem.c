@@ -17,8 +17,7 @@
 /**********************************/
 #ifndef HAVE_PANGO_GLYPH_ITEM_GET_TYPE
 static PangoGlyphItem*
-glyph_item_copy(ref)
-    const PangoGlyphItem* ref;
+glyph_item_copy(const PangoGlyphItem *ref)
 {
   PangoGlyphItem* new_ref;
   g_return_val_if_fail (ref != NULL, NULL);
@@ -54,32 +53,28 @@ pango_glyph_item_get_type(void)
 /**********************************/
 
 static VALUE
-glyph_item_get_item(self)
-    VALUE self;
+glyph_item_get_item(VALUE self)
 {
     PangoItem* item = _SELF(self)->item;
     return BOXED2RVAL(item, PANGO_TYPE_ITEM);
 }
 
 static VALUE
-glyph_item_get_glyphs(self)
-    VALUE self;
+glyph_item_get_glyphs(VALUE self)
 {
     PangoGlyphString* glyphs = _SELF(self)->glyphs;
     return BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING);
 }
 
 static VALUE
-glyph_item_split(self, text, split_index)
-    VALUE self, text, split_index;
+glyph_item_split(VALUE self, VALUE text, VALUE split_index)
 {
     return BOXED2RVAL(pango_glyph_item_split(_SELF(self), RVAL2CSTR(text),
                                              NUM2INT(split_index)), PANGO_TYPE_GLYPH_ITEM);
 }
 
 static VALUE
-glyph_item_apply_attrs(self, text, attrs)
-    VALUE self, text, attrs;
+glyph_item_apply_attrs(VALUE self, VALUE text, VALUE attrs)
 {
     GSList* list = pango_glyph_item_apply_attrs(_SELF(self), RVAL2CSTR(text),
                                                 (PangoAttrList*)RVAL2BOXED(attrs, PANGO_TYPE_ATTR_LIST));
@@ -98,8 +93,7 @@ glyph_item_apply_attrs(self, text, attrs)
 
 #if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
-glyph_item_letter_space(self, text, log_attrs, letter_spacing)
-    VALUE self, text, log_attrs, letter_spacing;
+glyph_item_letter_space(VALUE self, VALUE text, VALUE log_attrs, VALUE letter_spacing)
 {
     pango_glyph_item_letter_space(_SELF(self), RVAL2CSTR(text),
                                   (PangoLogAttr*)RVAL2BOXED(log_attrs, PANGO_TYPE_LOG_ATTR),
