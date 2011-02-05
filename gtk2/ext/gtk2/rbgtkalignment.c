@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-align_initialize(self, xalign, yalign, xscale, yscale)
-    VALUE self, xalign, yalign, xscale, yscale;
+align_initialize(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
 {
     RBGTK_INITIALIZE(self, gtk_alignment_new(NUM2DBL(xalign),
                                              NUM2DBL(yalign),
@@ -26,8 +25,7 @@ align_initialize(self, xalign, yalign, xscale, yscale)
 }
 
 static VALUE
-align_set(self, xalign, yalign, xscale, yscale)
-    VALUE self, xalign, yalign, xscale, yscale;
+align_set(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
 {
     gtk_alignment_set(GTK_ALIGNMENT(RVAL2GOBJ(self)),
 		      NUM2DBL(xalign), NUM2DBL(yalign),
@@ -36,8 +34,7 @@ align_set(self, xalign, yalign, xscale, yscale)
 }
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-align_get_padding(self)
-    VALUE self;
+align_get_padding(VALUE self)
 {
     guint top, bottom, left, right;
     gtk_alignment_get_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
@@ -46,8 +43,7 @@ align_get_padding(self)
                        UINT2NUM(left), UINT2NUM(right));
 }
 static VALUE
-align_set_padding(self, top, bottom, left, right)
-    VALUE self, top, bottom, left, right;
+align_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
 {
     gtk_alignment_set_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
                               NUM2UINT(top), NUM2UINT(bottom),
