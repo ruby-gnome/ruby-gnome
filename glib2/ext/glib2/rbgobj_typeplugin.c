@@ -14,16 +14,14 @@
 #include "rbgprivate.h"
 
 static VALUE
-use(self)
-   VALUE self;
+use(VALUE self)
 {
     g_type_plugin_use(G_TYPE_PLUGIN(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-unuse(self)
-   VALUE self;
+unuse(VALUE self)
 {
     g_type_plugin_unuse(G_TYPE_PLUGIN(RVAL2GOBJ(self)));
     return self;
