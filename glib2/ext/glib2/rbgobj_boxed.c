@@ -63,16 +63,14 @@ rbgobj_boxed_s_allocate(klass)
 }
 
 static VALUE
-rbgobj_boxed_init(self)
-    VALUE self;
+rbgobj_boxed_init(VALUE self)
 {
     rb_raise(rb_eTypeError, "can't initialize %s",
              rb_class2name(CLASS_OF(self)));
 }
 
 static VALUE
-rbgobj_boxed_inspect(self)
-    VALUE self;
+rbgobj_boxed_inspect(VALUE self)
 {
     boxed_holder* holder;
     gchar* s;
@@ -93,8 +91,7 @@ rbgobj_boxed_inspect(self)
 }
 
 static VALUE
-rbgobj_boxed_init_copy(self, orig)
-    VALUE self, orig;
+rbgobj_boxed_init_copy(VALUE self, VALUE orig)
 {
     boxed_holder* holder1;
     boxed_holder* holder2;
@@ -119,8 +116,7 @@ rbgobj_boxed_init_copy(self, orig)
 
 /* deprecated */
 VALUE
-rbgobj_boxed_create(klass)
-    VALUE klass;
+rbgobj_boxed_create(VALUE klass)
 {
     return rbgobj_boxed_s_allocate(klass);
 }
@@ -128,9 +124,7 @@ rbgobj_boxed_create(klass)
 /**********************************************************************/
 
 void
-rbgobj_boxed_initialize(obj, boxed)
-    VALUE obj;
-    gpointer boxed;
+rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 { 
     boxed_holder* holder;
     Data_Get_Struct(obj, boxed_holder, holder);
@@ -139,9 +133,7 @@ rbgobj_boxed_initialize(obj, boxed)
 }
 
 gpointer
-rbgobj_boxed_get(obj, gtype)
-    VALUE obj;
-    GType gtype;
+rbgobj_boxed_get(VALUE obj, GType gtype)
 {
     boxed_holder* holder;
 
@@ -161,9 +153,7 @@ rbgobj_boxed_get(obj, gtype)
 }
 
 VALUE
-rbgobj_make_boxed(p, gtype)
-    gpointer p;
-    GType gtype;
+rbgobj_make_boxed(gpointer p, GType gtype)
 {
     const RGObjClassInfo* cinfo;
     VALUE result;
@@ -189,8 +179,7 @@ rbgobj_make_boxed(p, gtype)
 }
 
 void
-rbgobj_boxed_not_copy_obj(gtype)
-    GType gtype;
+rbgobj_boxed_not_copy_obj(GType gtype)
 {
     RGObjClassInfo* cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
     cinfo->flags |= RBGOBJ_BOXED_NOT_COPY;
