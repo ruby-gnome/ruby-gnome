@@ -22,25 +22,20 @@ language_s_default(VALUE self)
 }
 
 static VALUE
-language_initialize(self, language)
-    VALUE self, language;
+language_initialize(VALUE self, VALUE language)
 {
     G_INITIALIZE(self, pango_language_from_string(RVAL2CSTR(language)));
     return Qnil;
 }
 
 static VALUE
-language_s_to_string(self, language)
-    VALUE self, language;
+language_s_to_string(VALUE self, VALUE language)
 {
     return CSTR2RVAL(pango_language_to_string(RVAL2CSTR(language)));
 }
 
 static VALUE
-language_matches(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+language_matches(int argc, VALUE *argv, VALUE self)
 {
     VALUE range_list;
 
@@ -51,8 +46,7 @@ language_matches(argc, argv, self)
 }
 
 static VALUE
-language_to_str(self)
-    VALUE self;
+language_to_str(VALUE self)
 {
     return CSTR2RVAL(pango_language_to_string(_SELF(self)));
 }
@@ -60,8 +54,7 @@ language_to_str(self)
 #if PANGO_CHECK_VERSION(1,4,0)
 /* Moved from Pango::Script */
 static VALUE
-language_includes_script(self, script)
-    VALUE self, script;
+language_includes_script(VALUE self, VALUE script)
 {
     return CBOOL2RVAL(pango_language_includes_script(_SELF(self), 
                                                      RVAL2GENUM(script, PANGO_TYPE_SCRIPT)));
