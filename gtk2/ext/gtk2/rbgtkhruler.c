@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-hruler_initialize(self)
-    VALUE self;
+hruler_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hruler_new());
     return Qnil;
