@@ -17,24 +17,21 @@
 #define _SELF(s) (GTK_MISC(RVAL2GOBJ(s)))
 
 static VALUE
-misc_set_align(self, xalign, yalign)
-    VALUE self, xalign, yalign;
+misc_set_align(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_misc_set_alignment(_SELF(self), NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
 
 static VALUE
-misc_set_padding(self, xpad, ypad)
-    VALUE self, xpad, ypad;
+misc_set_padding(VALUE self, VALUE xpad, VALUE ypad)
 {
     gtk_misc_set_padding(_SELF(self), NUM2DBL(xpad), NUM2DBL(ypad));
     return self;
 }
 
 static VALUE
-misc_get_align(self)
-    VALUE self;
+misc_get_align(VALUE self)
 {
     gfloat xalign, yalign;
     gtk_misc_get_alignment(_SELF(self), &xalign, &yalign);
@@ -43,8 +40,7 @@ misc_get_align(self)
 }
 
 static VALUE
-misc_get_padding(self)
-    VALUE self;
+misc_get_padding(VALUE self)
 {
     gint xpad, ypad;
     gtk_misc_get_padding(_SELF(self), &xpad, &ypad);
