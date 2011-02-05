@@ -42,26 +42,21 @@ g_key_file_get_type(void)
 #define _SELF(self) ((GKeyFile*)(RVAL2BOXED(self, G_TYPE_KEY_FILE)))
 
 static VALUE
-keyfile_initialize(self)
-    VALUE self;
+keyfile_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_key_file_new());
     return Qnil;
 }
 
 static VALUE
-keyfile_set_list_separator(self, sep)
-    VALUE self, sep;
+keyfile_set_list_separator(VALUE self, VALUE sep)
 {
     g_key_file_set_list_separator(_SELF(self), NUM2INT(sep));
     return self;
 }
 
 static VALUE
-keyfile_load_from_file(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+keyfile_load_from_file(int argc, VALUE *argv, VALUE self)
 {
     VALUE file, flags;
     GError* error = NULL;
@@ -84,10 +79,7 @@ keyfile_load_from_file(argc, argv, self)
 }
 
 static VALUE
-keyfile_load_from_data(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+keyfile_load_from_data(int argc, VALUE *argv, VALUE self)
 {
     VALUE data, flags;
     GError* error = NULL;
@@ -112,10 +104,7 @@ keyfile_load_from_data(argc, argv, self)
 }
 
 static VALUE
-keyfile_load_from_data_dirs(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+keyfile_load_from_data_dirs(int argc, VALUE *argv, VALUE self)
 {
     VALUE file, flags;
     GError* error = NULL;
@@ -189,8 +178,7 @@ keyfile_load_from_dirs(int argc, VALUE *argv, VALUE self)
 #endif
 
 static VALUE
-keyfile_to_data(self)
-    VALUE self;
+keyfile_to_data(VALUE self)
 {
     GError* error = NULL;
     gchar* data = g_key_file_to_data(_SELF(self), NULL, &error);
@@ -201,15 +189,13 @@ keyfile_to_data(self)
 }
 
 static VALUE
-keyfile_get_start_group(self)
-    VALUE self;
+keyfile_get_start_group(VALUE self)
 {
     return CSTR2RVAL(g_key_file_get_start_group(_SELF(self)));
 }
 
 static VALUE
-keyfile_get_groups(self)
-    VALUE self;
+keyfile_get_groups(VALUE self)
 {
     gsize length;
     int i;
@@ -226,8 +212,7 @@ keyfile_get_groups(self)
 }
 
 static VALUE
-keyfile_get_keys(self, group_name)
-    VALUE self, group_name;
+keyfile_get_keys(VALUE self, VALUE group_name)
 {
     gsize length;
     int i;
@@ -249,16 +234,14 @@ keyfile_get_keys(self, group_name)
 }
 
 static VALUE
-keyfile_has_group(self, group_name)
-    VALUE self, group_name;
+keyfile_has_group(VALUE self, VALUE group_name)
 {
     return CBOOL2RVAL(g_key_file_has_group(_SELF(self), 
                                            (const gchar*)RVAL2CSTR(group_name)));
 }
 
 static VALUE
-keyfile_has_key(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_has_key(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gboolean ret = g_key_file_has_key(_SELF(self), 
@@ -272,8 +255,7 @@ keyfile_has_key(self, group_name, key)
 }
 
 static VALUE
-keyfile_get_value(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_value(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gchar* ret = g_key_file_get_value(_SELF(self), 
@@ -287,8 +269,7 @@ keyfile_get_value(self, group_name, key)
 }
 
 static VALUE
-keyfile_get_string(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_string(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gchar* ret = g_key_file_get_string(_SELF(self), 
@@ -302,10 +283,7 @@ keyfile_get_string(self, group_name, key)
 }
 
 static VALUE
-keyfile_get_locale_string(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+keyfile_get_locale_string(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_name, key, locale;
     GError* error = NULL;
@@ -325,8 +303,7 @@ keyfile_get_locale_string(argc, argv, self)
 }
 
 static VALUE
-keyfile_get_boolean(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_boolean(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gboolean ret = g_key_file_get_boolean(_SELF(self), 
@@ -340,8 +317,7 @@ keyfile_get_boolean(self, group_name, key)
 }
 
 static VALUE
-keyfile_get_integer(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_integer(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gint ret = g_key_file_get_integer(_SELF(self), 
@@ -356,8 +332,7 @@ keyfile_get_integer(self, group_name, key)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_get_double(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_double(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gdouble ret = g_key_file_get_double(_SELF(self), 
@@ -372,8 +347,7 @@ keyfile_get_double(self, group_name, key)
 #endif
 
 static VALUE
-keyfile_get_string_list(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_string_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gint i;
@@ -396,10 +370,7 @@ keyfile_get_string_list(self, group_name, key)
 }
 
 static VALUE
-keyfile_get_locale_string_list(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+keyfile_get_locale_string_list(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_name, key, locale;
     GError* error = NULL;
@@ -428,8 +399,7 @@ keyfile_get_locale_string_list(argc, argv, self)
 }
 
 static VALUE
-keyfile_get_boolean_list(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_boolean_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gint i;
@@ -450,8 +420,7 @@ keyfile_get_boolean_list(self, group_name, key)
 }
 
 static VALUE
-keyfile_get_integer_list(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_integer_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gint i;
@@ -473,8 +442,7 @@ keyfile_get_integer_list(self, group_name, key)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_get_double_list(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_double_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gint i;
@@ -496,8 +464,7 @@ keyfile_get_double_list(self, group_name, key)
 #endif
 
 static VALUE
-keyfile_get_comment(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_get_comment(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gchar* ret = g_key_file_get_comment(_SELF(self), 
@@ -511,8 +478,7 @@ keyfile_get_comment(self, group_name, key)
 }
 
 static VALUE
-keyfile_set_value(self, group_name, key, value)
-    VALUE self, group_name, key, value;
+keyfile_set_value(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_value(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                          (const gchar*)RVAL2CSTR(key),
@@ -521,8 +487,7 @@ keyfile_set_value(self, group_name, key, value)
 }
 
 static VALUE
-keyfile_set_string(self, group_name, key, string)
-    VALUE self, group_name, key, string;
+keyfile_set_string(VALUE self, VALUE group_name, VALUE key, VALUE string)
 {
     g_key_file_set_string(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                          (const gchar*)RVAL2CSTR(key),
@@ -531,8 +496,7 @@ keyfile_set_string(self, group_name, key, string)
 }
 
 static VALUE
-keyfile_set_locale_string(self, group_name, key, locale, locale_string)
-    VALUE self, group_name, key, locale, locale_string;
+keyfile_set_locale_string(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE locale_string)
 {
     g_key_file_set_locale_string(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                                  (const gchar*)RVAL2CSTR(key),
@@ -542,8 +506,7 @@ keyfile_set_locale_string(self, group_name, key, locale, locale_string)
 }
 
 static VALUE
-keyfile_set_boolean(self, group_name, key, value)
-    VALUE self, group_name, key, value;
+keyfile_set_boolean(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_boolean(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                            (const gchar*)RVAL2CSTR(key),
@@ -552,8 +515,7 @@ keyfile_set_boolean(self, group_name, key, value)
 }
 
 static VALUE
-keyfile_set_integer(self, group_name, key, value)
-    VALUE self, group_name, key, value;
+keyfile_set_integer(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_integer(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                            (const gchar*)RVAL2CSTR(key),
@@ -563,8 +525,7 @@ keyfile_set_integer(self, group_name, key, value)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_set_double(self, group_name, key, value)
-    VALUE self, group_name, key, value;
+keyfile_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_double(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                           (const gchar*)RVAL2CSTR(key),
@@ -574,8 +535,7 @@ keyfile_set_double(self, group_name, key, value)
 #endif
 
 static VALUE
-keyfile_set_string_list(self, group_name, key, list)
-    VALUE self, group_name, key, list;
+keyfile_set_string_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
     gint len = RARRAY_LEN(list);
     gchar** glist = ALLOCA_N(gchar*, len);
@@ -593,8 +553,7 @@ keyfile_set_string_list(self, group_name, key, list)
 }
 
 static VALUE
-keyfile_set_locale_string_list(self, group_name, key, locale, list)
-    VALUE self, group_name, key, locale, list;
+keyfile_set_locale_string_list(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE list)
 {
     gint len = RARRAY_LEN(list);
     gchar** glist = ALLOCA_N(gchar*, len);
@@ -613,8 +572,7 @@ keyfile_set_locale_string_list(self, group_name, key, locale, list)
 }
 
 static VALUE
-keyfile_set_boolean_list(self, group_name, key, list)
-    VALUE self, group_name, key, list;
+keyfile_set_boolean_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
     gint len = RARRAY_LEN(list);
     gboolean* glist = ALLOCA_N(gboolean, len);
@@ -632,8 +590,7 @@ keyfile_set_boolean_list(self, group_name, key, list)
 }
 
 static VALUE
-keyfile_set_integer_list(self, group_name, key, list)
-    VALUE self, group_name, key, list;
+keyfile_set_integer_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
     gint len = RARRAY_LEN(list);
     gint* glist = ALLOCA_N(gint, len);
@@ -652,8 +609,7 @@ keyfile_set_integer_list(self, group_name, key, list)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_set_double_list(self, group_name, key, list)
-    VALUE self, group_name, key, list;
+keyfile_set_double_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
     gint len = RARRAY_LEN(list);
     gdouble* glist = ALLOCA_N(gdouble, len);
@@ -672,8 +628,7 @@ keyfile_set_double_list(self, group_name, key, list)
 #endif
 
 static VALUE
-keyfile_set_comment(self, group_name, key, comment)
-    VALUE self, group_name, key, comment;
+keyfile_set_comment(VALUE self, VALUE group_name, VALUE key, VALUE comment)
 {
     GError* error = NULL;
     g_key_file_set_comment(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
@@ -686,8 +641,7 @@ keyfile_set_comment(self, group_name, key, comment)
 }
 
 static VALUE
-keyfile_remove_group(self, group_name)
-    VALUE self, group_name;
+keyfile_remove_group(VALUE self, VALUE group_name)
 {
     GError* error = NULL;
     g_key_file_remove_group(_SELF(self), (const gchar*)RVAL2CSTR(group_name), &error);
@@ -698,8 +652,7 @@ keyfile_remove_group(self, group_name)
 }
 
 static VALUE
-keyfile_remove_key(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_remove_key(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     g_key_file_remove_key(_SELF(self), 
@@ -714,8 +667,7 @@ keyfile_remove_key(self, group_name, key)
 
 
 static VALUE
-keyfile_remove_comment(self, group_name, key)
-    VALUE self, group_name, key;
+keyfile_remove_comment(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     g_key_file_remove_comment(_SELF(self), 
