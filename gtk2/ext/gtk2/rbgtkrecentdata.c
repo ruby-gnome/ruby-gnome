@@ -48,8 +48,7 @@ gtk_recent_data_get_type(void)
 #define _SELF(w) ((GtkRecentData*)RVAL2BOXED(w, GTK_TYPE_RECENT_DATA))
 
 static VALUE
-rd_initialize(self)
-    VALUE self;
+rd_initialize(VALUE self)
 {   
     GtkRecentData data;
     G_INITIALIZE(self, &data);
@@ -58,14 +57,12 @@ rd_initialize(self)
 
 #define RD_STR(name)\
 static VALUE \
-rd_get_ ## name (self)\
-    VALUE self;\
+rd_get_ ## name (VALUE self)\
 {\
     return CSTR2RVAL(_SELF(self)->name);\
 }\
 static VALUE \
-rd_set_ ## name (self, val)\
-    VALUE self, val;\
+rd_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2CSTR(val);\
     return self;\
@@ -78,8 +75,7 @@ RD_STR(app_name);
 RD_STR(app_exec);
 
 static VALUE
-rd_get_groups(self)
-    VALUE self;
+rd_get_groups(VALUE self)
 {
     gchar** grps = _SELF(self)->groups;
     VALUE ary = rb_ary_new();
@@ -93,8 +89,7 @@ rd_get_groups(self)
 }
 
 static VALUE
-rd_set_groups(self, groups)
-    VALUE self, groups;
+rd_set_groups(VALUE self, VALUE groups)
 {
     gint i;
     gint len = RARRAY_LEN(groups);
@@ -109,15 +104,13 @@ rd_set_groups(self, groups)
 }
 
 static VALUE
-rd_get_is_private(self)
-    VALUE self;
+rd_get_is_private(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->is_private);
 }
 
 static VALUE
-rd_set_is_private(self, is_private)
-    VALUE self, is_private;
+rd_set_is_private(VALUE self, VALUE is_private)
 {
     _SELF(self)->is_private = RVAL2CBOOL(is_private);
     return self;
