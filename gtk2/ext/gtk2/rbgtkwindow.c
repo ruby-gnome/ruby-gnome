@@ -17,10 +17,7 @@
 #define _SELF(s) (GTK_WINDOW(RVAL2GOBJ(s)))
 
 static VALUE
-gwin_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gwin_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg;
     GtkWindowType tp = GTK_WINDOW_TOPLEVEL;
@@ -45,8 +42,7 @@ gwin_initialize(argc, argv, self)
 }
 
 static VALUE
-gwin_set_wmclass(self, wmclass_name, wmclass_class)
-    VALUE self, wmclass_name, wmclass_class;
+gwin_set_wmclass(VALUE self, VALUE wmclass_name, VALUE wmclass_class)
 {
     gtk_window_set_wmclass(_SELF(self),
                            NIL_P(wmclass_name)?NULL:RVAL2CSTR(wmclass_name),
@@ -55,8 +51,7 @@ gwin_set_wmclass(self, wmclass_name, wmclass_class)
 }
 
 static VALUE
-gwin_add_accel_group(self, accel)
-    VALUE self, accel;
+gwin_add_accel_group(VALUE self, VALUE accel)
 {
     gtk_window_add_accel_group(_SELF(self),
                                GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
@@ -64,8 +59,7 @@ gwin_add_accel_group(self, accel)
 }
 
 static VALUE
-gwin_remove_accel_group(self, accel)
-    VALUE self, accel;
+gwin_remove_accel_group(VALUE self, VALUE accel)
 {
     gtk_window_remove_accel_group(_SELF(self),
                                   GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
@@ -73,22 +67,19 @@ gwin_remove_accel_group(self, accel)
 }
 
 static VALUE
-gwin_activate_focus(self)
-    VALUE self;
+gwin_activate_focus(VALUE self)
 {
     return CBOOL2RVAL(gtk_window_activate_focus(_SELF(self)));
 }
 
 static VALUE
-gwin_activate_default(self)
-    VALUE self;
+gwin_activate_default(VALUE self)
 {
     return CBOOL2RVAL(gtk_window_activate_default(_SELF(self)));
 }
 
 static VALUE
-gwin_active_focus(self)
-    VALUE self;
+gwin_active_focus(VALUE self)
 {
     rb_warning("Gtk::Window#active_focus is deprecated. Use Gtk::Window#activate_focus");
     gtk_window_activate_focus(_SELF(self));
@@ -96,8 +87,7 @@ gwin_active_focus(self)
 }
 
 static VALUE
-gwin_active_default(self)
-    VALUE self;
+gwin_active_default(VALUE self)
 {
     rb_warning("Gtk::Window#active_default is deprecated. Use Gtk::Window#activate_default");
     gtk_window_activate_default(_SELF(self));
@@ -105,8 +95,7 @@ gwin_active_default(self)
 }
 
 static VALUE
-gwin_set_default_size(self, w, h)
-    VALUE self, w, h;
+gwin_set_default_size(VALUE self, VALUE w, VALUE h)
 {
     gtk_window_set_default_size(_SELF(self),
                                 NUM2INT(w), NUM2INT(h));
@@ -114,8 +103,7 @@ gwin_set_default_size(self, w, h)
 }
 
 static VALUE
-gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
-    VALUE self, geometry_widget, geometry, geom_mask;
+gwin_set_geometry_hints(VALUE self, VALUE geometry_widget, VALUE geometry, VALUE geom_mask)
 {
     gtk_window_set_geometry_hints(_SELF(self),
                                   GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
@@ -125,31 +113,27 @@ gwin_set_geometry_hints(self, geometry_widget, geometry, geom_mask)
 }
 
 static VALUE
-gwin_set_gravity(self, gravity)
-    VALUE self, gravity;
+gwin_set_gravity(VALUE self, VALUE gravity)
 {
     gtk_window_set_gravity(_SELF(self), RVAL2GENUM(gravity, GDK_TYPE_GRAVITY));
     return self;
 }
 
 static VALUE
-gwin_get_gravity(self)
-    VALUE self;
+gwin_get_gravity(VALUE self)
 {
     return GENUM2RVAL(gtk_window_get_gravity(_SELF(self)), GDK_TYPE_GRAVITY);
 }
 
 static VALUE
-gwin_set_transient_for(self, parent)
-    VALUE self, parent;
+gwin_set_transient_for(VALUE self, VALUE parent)
 {
     gtk_window_set_transient_for(_SELF(self), _SELF(parent));
     return self;
 }
 
 static VALUE
-gwin_set_destroy_with_parent(self, setting)
-    VALUE self, setting;
+gwin_set_destroy_with_parent(VALUE self, VALUE setting)
 {
     gtk_window_set_destroy_with_parent(_SELF(self), RVAL2CBOOL(setting));
     return self;
@@ -164,8 +148,7 @@ gboolean    gtk_window_has_toplevel_focus   (GtkWindow *window);
 */
 
 static VALUE
-gwin_s_list_toplevels(self)
-    VALUE self;
+gwin_s_list_toplevels(VALUE self)
 {
     GList* list = gtk_window_list_toplevels();
     VALUE ret = GLIST2ARY(list);
@@ -175,24 +158,21 @@ gwin_s_list_toplevels(self)
 }
 
 static VALUE
-gwin_add_mnemonic(self, keyval, target)
-    VALUE self, keyval, target;
+gwin_add_mnemonic(VALUE self, VALUE keyval, VALUE target)
 {
     gtk_window_add_mnemonic(_SELF(self), NUM2INT(keyval), GTK_WIDGET(RVAL2GOBJ(target)));
     return self;
 }
 
 static VALUE
-gwin_remove_mnemonic(self, keyval, target)
-    VALUE self, keyval, target;
+gwin_remove_mnemonic(VALUE self, VALUE keyval, VALUE target)
 {
     gtk_window_remove_mnemonic(_SELF(self), NUM2INT(keyval), GTK_WIDGET(RVAL2GOBJ(target)));
     return self;
 }
 
 static VALUE
-gwin_mnemonic_activate(self, keyval, modifier)
-    VALUE self, keyval, modifier;
+gwin_mnemonic_activate(VALUE self, VALUE keyval, VALUE modifier)
 {
     return CBOOL2RVAL(gtk_window_mnemonic_activate(_SELF(self), 
                                         NUM2INT(keyval), 
@@ -200,15 +180,13 @@ gwin_mnemonic_activate(self, keyval, modifier)
 }
 
 static VALUE
-gwin_get_focus(self)
-    VALUE self;
+gwin_get_focus(VALUE self)
 {
     return GOBJ2RVAL(gtk_window_get_focus(_SELF(self)));
 }
 
 static VALUE
-gwin_set_focus(self, win)
-    VALUE self, win;
+gwin_set_focus(VALUE self, VALUE win)
 {
     gtk_window_set_focus(_SELF(self), 
                          NIL_P(win) ? NULL : GTK_WIDGET(RVAL2GOBJ(win)));
@@ -216,8 +194,7 @@ gwin_set_focus(self, win)
 }
 
 static VALUE
-gwin_set_default(self, win)
-    VALUE self, win;
+gwin_set_default(VALUE self, VALUE win)
 {
     gtk_window_set_default(_SELF(self), 
                            NIL_P(win) ? NULL : GTK_WIDGET(RVAL2GOBJ(win)));
@@ -226,10 +203,7 @@ gwin_set_default(self, win)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gwin_present(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gwin_present(int argc, VALUE *argv, VALUE self)
 {
     VALUE timestamp;
     if (rb_scan_args(argc, argv, "01", &timestamp) == 1) {
@@ -241,8 +215,7 @@ gwin_present(argc, argv, self)
 }
 #else
 static VALUE
-gwin_present(self)
-    VALUE self;
+gwin_present(VALUE self)
 {
     gtk_window_present(_SELF(self));
     return self;
@@ -250,48 +223,42 @@ gwin_present(self)
 #endif
 
 static VALUE
-gwin_iconify(self)
-    VALUE self;
+gwin_iconify(VALUE self)
 {
     gtk_window_iconify(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_deiconify(self)
-    VALUE self;
+gwin_deiconify(VALUE self)
 {
     gtk_window_deiconify(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_stick(self)
-    VALUE self;
+gwin_stick(VALUE self)
 {
     gtk_window_stick(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_unstick(self)
-    VALUE self;
+gwin_unstick(VALUE self)
 {
     gtk_window_unstick(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_maximize(self)
-    VALUE self;
+gwin_maximize(VALUE self)
 {
     gtk_window_maximize(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_unmaximize(self)
-    VALUE self;
+gwin_unmaximize(VALUE self)
 {
     gtk_window_unmaximize(_SELF(self));
     return self;
@@ -299,15 +266,13 @@ gwin_unmaximize(self)
 
 #if GTK_CHECK_VERSION(2,2,0) 
 static VALUE
-gwin_fullscreen(self)
-    VALUE self;
+gwin_fullscreen(VALUE self)
 {
     gtk_window_fullscreen(_SELF(self));
     return self;
 }
 static VALUE
-gwin_unfullscreen(self)
-    VALUE self;
+gwin_unfullscreen(VALUE self)
 {
     gtk_window_unfullscreen(_SELF(self));
     return self;
@@ -315,15 +280,13 @@ gwin_unfullscreen(self)
 #endif
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-gwin_set_keep_above(self, setting)
-    VALUE self, setting;
+gwin_set_keep_above(VALUE self, VALUE setting)
 {
     gtk_window_set_keep_above(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 static VALUE
-gwin_set_keep_below(self, setting)
-    VALUE self, setting;
+gwin_set_keep_below(VALUE self, VALUE setting)
 {
     gtk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
@@ -331,8 +294,7 @@ gwin_set_keep_below(self, setting)
 #endif
 
 static VALUE
-gwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
-    VALUE self, edge, button, root_x, root_y, timestamp;
+gwin_begin_resize_drag(VALUE self, VALUE edge, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
 {
     gtk_window_begin_resize_drag(_SELF(self), RVAL2GENUM(edge, GDK_TYPE_WINDOW_EDGE),
                                  NUM2INT(button), NUM2INT(root_x),
@@ -341,8 +303,7 @@ gwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
 }
 
 static VALUE
-gwin_begin_move_drag(self, button, root_x, root_y, timestamp)
-    VALUE self, button, root_x, root_y, timestamp;
+gwin_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
 {
     gtk_window_begin_move_drag(_SELF(self), 
                                NUM2INT(button), NUM2INT(root_x),
@@ -351,16 +312,14 @@ gwin_begin_move_drag(self, button, root_x, root_y, timestamp)
 }
 
 static VALUE
-gwin_set_decorated(self, setting)
-    VALUE self, setting;
+gwin_set_decorated(VALUE self, VALUE setting)
 {
     gtk_window_set_decorated(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-gwin_set_frame_dimensions(self, left, top, right, bottom)
-    VALUE self, left, top, right, bottom;
+gwin_set_frame_dimensions(VALUE self, VALUE left, VALUE top, VALUE right, VALUE bottom)
 {
     gtk_window_set_frame_dimensions(_SELF(self), NUM2INT(left),
                                     NUM2INT(top), NUM2INT(right),
@@ -369,16 +328,14 @@ gwin_set_frame_dimensions(self, left, top, right, bottom)
 }
 
 static VALUE
-gwin_set_has_frame(self, setting)
-    VALUE self, setting;
+gwin_set_has_frame(VALUE self, VALUE setting)
 {
     gtk_window_set_has_frame(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-gwin_set_mnemonic_modifier(self, modifier)
-    VALUE self, modifier;
+gwin_set_mnemonic_modifier(VALUE self, VALUE modifier)
 {
     gtk_window_set_mnemonic_modifier(_SELF(self), 
                                      RVAL2GFLAGS(modifier, GDK_TYPE_MODIFIER_TYPE));
@@ -386,16 +343,14 @@ gwin_set_mnemonic_modifier(self, modifier)
 }
 
 static VALUE
-gwin_set_role(self, role)
-    VALUE self, role;
+gwin_set_role(VALUE self, VALUE role)
 {
     gtk_window_set_role(_SELF(self), RVAL2CSTR(role));
     return self;
 }
 
 static VALUE
-gwin_set_type_hint(self, hint)
-    VALUE self, hint;
+gwin_set_type_hint(VALUE self, VALUE hint)
 {
     gtk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
     return self;
@@ -428,22 +383,19 @@ void        gtk_window_set_deletable        (GtkWindow *window,
 
 
 static VALUE
-gwin_get_decorated(self)
-    VALUE self;
+gwin_get_decorated(VALUE self)
 {
     return CBOOL2RVAL(gtk_window_get_decorated(_SELF(self)));
 }
 
 static VALUE
-gwin_s_get_default_icon_list(self)
-    VALUE self;
+gwin_s_get_default_icon_list(VALUE self)
 {
     return GLIST2ARYF(gtk_window_get_default_icon_list());
 }
 
 static VALUE
-gwin_get_default_size(self)
-    VALUE self;
+gwin_get_default_size(VALUE self)
 {
     int width, height;
     gtk_window_get_default_size(_SELF(self), &width, &height);
@@ -451,15 +403,13 @@ gwin_get_default_size(self)
 }
 
 static VALUE
-gwin_get_destroy_with_parent(self)
-    VALUE self;
+gwin_get_destroy_with_parent(VALUE self)
 {
     return gtk_window_get_destroy_with_parent(_SELF(self)) ? Qtrue :  Qfalse;
 }
 
 static VALUE
-gwin_get_frame_dimensions(self)
-    VALUE self;
+gwin_get_frame_dimensions(VALUE self)
 {
     int left, top, right, bottom;
     gtk_window_get_frame_dimensions(_SELF(self), &left, &top, &right, &bottom);
@@ -471,29 +421,25 @@ gwin_get_frame_dimensions(self)
 }
 
 static VALUE
-gwin_get_has_frame(self)
-    VALUE self;
+gwin_get_has_frame(VALUE self)
 {
     return CBOOL2RVAL(gtk_window_get_has_frame(_SELF(self)));
 }
 
 static VALUE
-gwin_get_icon_list(self)
-    VALUE self;
+gwin_get_icon_list(VALUE self)
 {
     return GLIST2ARYF(gtk_window_get_icon_list(_SELF(self)));
 }
 
 static VALUE
-gwin_get_mnemonic_modifier(self)
-    VALUE self;
+gwin_get_mnemonic_modifier(VALUE self)
 {
     return GFLAGS2RVAL(gtk_window_get_mnemonic_modifier(_SELF(self)), GDK_TYPE_MODIFIER_TYPE);
 }
 
 static VALUE
-gwin_get_position(self)
-    VALUE self;
+gwin_get_position(VALUE self)
 {
     int root_x, root_y;
     gtk_window_get_position(_SELF(self), &root_x, &root_y);
@@ -501,16 +447,14 @@ gwin_get_position(self)
 }
 
 static VALUE
-gwin_get_role(self)
-    VALUE self;
+gwin_get_role(VALUE self)
 {
     const gchar* role = gtk_window_get_role(_SELF(self));
     return role ? CSTR2RVAL(role) : Qnil;
 }
 
 static VALUE
-gwin_get_size(self)
-    VALUE self;
+gwin_get_size(VALUE self)
 {
     int width, height;
     gtk_window_get_size(_SELF(self), &width, &height);
@@ -518,63 +462,55 @@ gwin_get_size(self)
 }
 
 static VALUE
-gwin_get_transient_for(self)
-    VALUE self;
+gwin_get_transient_for(VALUE self)
 {
     GtkWindow* window = gtk_window_get_transient_for(_SELF(self));
     return window ? GOBJ2RVAL(window) : Qnil;
 }
 
 static VALUE
-gwin_get_type_hint(self)
-    VALUE self;
+gwin_get_type_hint(VALUE self)
 {
     return GENUM2RVAL(gtk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gwin_get_group(self)
-    VALUE self;
+gwin_get_group(VALUE self)
 {
     return GOBJ2RVAL(gtk_window_get_group(_SELF(self)));
 }
 #endif
 
 static VALUE
-gwin_move(self, x, y)
-    VALUE self, x, y;
+gwin_move(VALUE self, VALUE x, VALUE y)
 {
     gtk_window_move(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-gwin_parse_geometry(self, geometry)
-    VALUE self, geometry;
+gwin_parse_geometry(VALUE self, VALUE geometry)
 {
     return CBOOL2RVAL(gtk_window_parse_geometry(_SELF(self), RVAL2CSTR(geometry)));
 }
 
 static VALUE
-gwin_reshow_with_initial_size(self)
-    VALUE self;
+gwin_reshow_with_initial_size(VALUE self)
 {
     gtk_window_reshow_with_initial_size(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_resize(self, width, height)
-    VALUE self, width, height;
+gwin_resize(VALUE self, VALUE width, VALUE height)
 {
     gtk_window_resize(_SELF(self), NUM2INT(width), NUM2INT(height));
     return self;
 }
 
 static VALUE
-gwin_s_set_default_icon_list(self, list)
-    VALUE self, list;
+gwin_s_set_default_icon_list(VALUE self, VALUE list)
 {
     int i;
     GList *glist = NULL;
@@ -589,8 +525,7 @@ gwin_s_set_default_icon_list(self, list)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gwin_s_set_default_icon(self, icon_or_filename)
-    VALUE self, icon_or_filename;
+gwin_s_set_default_icon(VALUE self, VALUE icon_or_filename)
 {
     if (TYPE(icon_or_filename) == T_STRING){
         GError* err;
@@ -611,8 +546,7 @@ gwin_s_set_default_icon(self, icon_or_filename)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gwin_s_set_default_icon_name(self, name)
-    VALUE self, name;
+gwin_s_set_default_icon_name(VALUE self, VALUE name)
 {
     gtk_window_set_default_icon_name(RVAL2CSTR(name));
     return self;
@@ -620,8 +554,7 @@ gwin_s_set_default_icon_name(self, name)
 #endif
 
 static VALUE
-gwin_set_icon(self, icon_or_filename)
-    VALUE self, icon_or_filename;
+gwin_set_icon(VALUE self, VALUE icon_or_filename)
 {
     if (TYPE(icon_or_filename) == T_STRING){
 #if GTK_CHECK_VERSION(2,2,0)
@@ -641,8 +574,7 @@ gwin_set_icon(self, icon_or_filename)
 }
 
 static VALUE
-gwin_set_icon_list(self, list)
-    VALUE self, list;
+gwin_set_icon_list(VALUE self, VALUE list)
 {
     int i;
     GList *glist = NULL;
@@ -656,8 +588,7 @@ gwin_set_icon_list(self, list)
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gwin_s_set_auto_startup_notification(self, setting)
-    VALUE self, setting;
+gwin_s_set_auto_startup_notification(VALUE self, VALUE setting)
 {
     gtk_window_set_auto_startup_notification(RVAL2CBOOL(setting));
     return self;
@@ -666,32 +597,28 @@ gwin_s_set_auto_startup_notification(self, setting)
 
 /* They are not public methods.
 static VALUE
-gwin_decorated_window_init(self)
-    VALUE self;
+gwin_decorated_window_init(VALUE self)
 {
     gtk_decorated_window_init(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_decorated_window_calculate_frame_size(self)
-    VALUE self;
+gwin_decorated_window_calculate_frame_size(VALUE self)
 {
     gtk_decorated_window_calculate_frame_size(_SELF(self));
     return self;
 }
 
 static VALUE
-gwin_decorated_window_set_title(self, title)
-    VALUE self, title;
+gwin_decorated_window_set_title(VALUE self, VALUE title)
 {
     gtk_decorated_window_set_title(_SELF(self), RVAL2CSTR(title));
     return self;
 }
 
 static VALUE
-gwin_decorated_window_move_resize_window(self)
-    VALUE self;
+gwin_decorated_window_move_resize_window(VALUE self)
 {
     int x, y, width, height;
     gtk_decorated_window_move_resize_window(_SELF(self), &x, &y, &width, &height);
