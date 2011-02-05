@@ -19,39 +19,34 @@
 static VALUE gColorSel;
 
 static VALUE
-colorsel_initialize(self)
-    VALUE self;
+colorsel_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_color_selection_new());
     return Qnil;
 }
 
 static VALUE
-colorsel_get_previous_alpha(self)
-    VALUE self;
+colorsel_get_previous_alpha(VALUE self)
 {
     return INT2NUM(gtk_color_selection_get_previous_alpha(_SELF(self)));
 }
 
 static VALUE
-colorsel_set_previous_alpha(self, alpha)
-    VALUE self, alpha;
+colorsel_set_previous_alpha(VALUE self, VALUE alpha)
 {
     gtk_color_selection_set_previous_alpha(_SELF(self), NUM2INT(alpha));
     return self;
 }
 
 static VALUE
-colorsel_set_previous_color(self, color)
-    VALUE self, color;
+colorsel_set_previous_color(VALUE self, VALUE color)
 {
     gtk_color_selection_set_previous_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-colorsel_get_previous_color(self)
-    VALUE self;
+colorsel_get_previous_color(VALUE self)
 {
     GdkColor color;
     gtk_color_selection_get_previous_color(_SELF(self), &color);
@@ -59,15 +54,13 @@ colorsel_get_previous_color(self)
 }
 
 static VALUE
-colorsel_is_adjusting(self)
-    VALUE self;
+colorsel_is_adjusting(VALUE self)
 {
     return CBOOL2RVAL(gtk_color_selection_is_adjusting(_SELF(self)));
 }
 
 static VALUE
-colorsel_s_palette_from_string(self, str)
-    VALUE self, str;
+colorsel_s_palette_from_string(VALUE self, VALUE str)
 {
     GdkColor* gcolors;
     gint i, n_colors;
@@ -86,10 +79,7 @@ colorsel_s_palette_from_string(self, str)
 }
 
 static VALUE
-colorsel_s_palette_to_string(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+colorsel_s_palette_to_string(int argc, VALUE *argv, VALUE self)
 {
     GdkColor* gcolors;
     GdkColor* gcolor;
@@ -115,10 +105,7 @@ colorsel_s_palette_to_string(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static void
-screen_func(screen, colors, n_colors)
-    GdkScreen* screen;
-    const GdkColor* colors;
-    gint n_colors;
+screen_func(GdkScreen *screen, const GdkColor *colors, gint n_colors)
 {
     int i;
     VALUE func = rb_cvar_get(gColorSel, rb_intern("__palette_proc__"));
@@ -131,8 +118,7 @@ screen_func(screen, colors, n_colors)
 }
 
 static VALUE
-colorsel_s_set_change_palette_hook(self)
-    VALUE self;
+colorsel_s_set_change_palette_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
 
