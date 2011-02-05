@@ -165,8 +165,7 @@ rbgobj_ruby_object_from_instance_with_unref(gpointer instance)
 /**********************************************************************/
 
 void
-rbgobj_add_relative(obj, relative)
-    VALUE obj, relative;
+rbgobj_add_relative(VALUE obj, VALUE relative)
 {
     VALUE hash = Qnil;
 
@@ -181,8 +180,7 @@ rbgobj_add_relative(obj, relative)
 }
 
 void
-rbgobj_invalidate_relatives(obj)
-    VALUE obj;
+rbgobj_invalidate_relatives(VALUE obj)
 {
     if (RVAL2CBOOL(rb_ivar_defined(obj, id_relatives)))
         rb_ivar_set(obj, id_relatives, Qnil);
@@ -191,9 +189,7 @@ rbgobj_invalidate_relatives(obj)
 }
 
 void
-rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
-    VALUE obj, relative, hash_key;
-    ID    obj_ivar_id;
+rbgobj_add_relative_removable(VALUE obj, VALUE relative, ID obj_ivar_id, VALUE hash_key)
 {
     VALUE hash = Qnil;
 
@@ -208,9 +204,7 @@ rbgobj_add_relative_removable(obj, relative, obj_ivar_id, hash_key)
 }
 
 VALUE
-rbgobj_get_relative_removable(obj, obj_ivar_id, hash_key)
-    VALUE obj, hash_key;
-    ID    obj_ivar_id;
+rbgobj_get_relative_removable(VALUE obj, ID obj_ivar_id, VALUE hash_key)
 {
     VALUE hash = Qnil;
 
@@ -224,9 +218,7 @@ rbgobj_get_relative_removable(obj, obj_ivar_id, hash_key)
 }
 
 void
-rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
-    VALUE obj, hash_key;
-    ID    obj_ivar_id;
+rbgobj_remove_relative(VALUE obj, ID obj_ivar_id, VALUE hash_key)
 {
     VALUE hash = Qnil;
 
@@ -241,9 +233,7 @@ rbgobj_remove_relative(obj, obj_ivar_id, hash_key)
 }
 
 void
-rbgobj_remove_relative_all(obj, obj_ivar_id)
-    VALUE obj;
-    ID    obj_ivar_id;
+rbgobj_remove_relative_all(VALUE obj, ID obj_ivar_id)
 {
     rb_ivar_set(obj, obj_ivar_id, Qnil);
 }
@@ -255,8 +245,7 @@ static GHashTable* prop_exclude_list;
 #define IS_FLAG(bitmask, flag) (((bitmask) & (flag)) == (flag))
 
 void
-rbgobj_define_property_accessors(klass)
-    VALUE klass;
+rbgobj_define_property_accessors(VALUE klass)
 {
     GType gtype;
     GParamSpec** pspecs = NULL;
