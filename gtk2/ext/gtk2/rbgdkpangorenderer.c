@@ -16,10 +16,7 @@
 #define _SELF(s) (GDK_PANGO_RENDERER(RVAL2GOBJ(s)))
 
 static VALUE
-prenderer_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+prenderer_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen;
     GdkScreen* gscreen;
@@ -38,10 +35,7 @@ prenderer_initialize(argc, argv, self)
 }
 
 static VALUE
-prenderer_s_get_default(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+prenderer_s_get_default(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen;
     GdkScreen* gscreen;
@@ -57,16 +51,14 @@ prenderer_s_get_default(argc, argv, self)
 }
 
 static VALUE
-prenderer_s_default(self)
-    VALUE self;
+prenderer_s_default(VALUE self)
 {
     GdkScreen* gscreen = gdk_screen_get_default();
     return GOBJ2RVAL(gdk_pango_renderer_get_default(gscreen));
 }
 
 static VALUE
-prenderer_set_drawable(self, drawable)
-    VALUE self, drawable;
+prenderer_set_drawable(VALUE self, VALUE drawable)
 {
     gdk_pango_renderer_set_drawable(_SELF(self), 
                                     GDK_DRAWABLE(RVAL2GOBJ(drawable)));
@@ -74,8 +66,7 @@ prenderer_set_drawable(self, drawable)
 }
 
 static VALUE
-prenderer_set_gc(self, gc)
-    VALUE self, gc;
+prenderer_set_gc(VALUE self, VALUE gc)
 {
     gdk_pango_renderer_set_gc(_SELF(self), 
                               NIL_P(gc) ? NULL : GDK_GC(RVAL2GOBJ(gc)));
@@ -83,8 +74,7 @@ prenderer_set_gc(self, gc)
 }
 
 static VALUE
-prenderer_set_stipple(self, part, stipple)
-    VALUE self, part, stipple;
+prenderer_set_stipple(VALUE self, VALUE part, VALUE stipple)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
@@ -96,8 +86,7 @@ prenderer_set_stipple(self, part, stipple)
 }
 
 static VALUE
-prenderer_set_override_color(self, part, color)
-    VALUE self, part, color;
+prenderer_set_override_color(VALUE self, VALUE part, VALUE color)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     gdk_pango_renderer_set_override_color(_SELF(self), 
