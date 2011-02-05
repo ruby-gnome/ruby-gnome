@@ -17,10 +17,7 @@
 static ID id_equal;
 
 static VALUE
-treepath_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+treepath_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE path;
     GtkTreePath* widget;
@@ -47,8 +44,7 @@ treepath_initialize(argc, argv, self)
 }
 
 static VALUE
-treepath_to_string(self)
-    VALUE self;
+treepath_to_string(VALUE self)
 {
     gchar* s = gtk_tree_path_to_string(_SELF(self));
     VALUE result = CSTR2RVAL(s);
@@ -64,31 +60,27 @@ Deprecated
 */
 
 static VALUE
-treepath_append_index(self, index)
-    VALUE self, index;
+treepath_append_index(VALUE self, VALUE index)
 {
     gtk_tree_path_append_index(_SELF(self), NUM2INT(index));
     return self;
 }
 
 static VALUE
-treepath_prepend_index(self, index)
-    VALUE self, index;
+treepath_prepend_index(VALUE self, VALUE index)
 {
     gtk_tree_path_prepend_index(_SELF(self), NUM2INT(index));
     return self;
 }
 
 static VALUE
-treepath_get_depth(self)
-    VALUE self;
+treepath_get_depth(VALUE self)
 {
     return INT2NUM(gtk_tree_path_get_depth(_SELF(self)));
 }
 
 static VALUE
-treepath_get_indices(self)
-    VALUE self;
+treepath_get_indices(VALUE self)
 {
     VALUE ary;
     gint i, length;
@@ -110,8 +102,7 @@ treepath_get_indices(self)
 }
 
 static VALUE
-treepath_compare(self, other)
-    VALUE self, other;
+treepath_compare(VALUE self, VALUE other)
 {
     return INT2NUM(gtk_tree_path_compare(_SELF(self), _SELF(other)));
 }
@@ -127,45 +118,39 @@ treepath_equal(VALUE self, VALUE other)
 }
 
 static VALUE
-treepath_next(self)
-    VALUE self;
+treepath_next(VALUE self)
 {
     gtk_tree_path_next(_SELF(self));
     return self;
 }
 
 static VALUE
-treepath_prev(self)
-    VALUE self;
+treepath_prev(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_path_prev(_SELF(self)));
 }
 
 static VALUE
-treepath_up(self)
-    VALUE self;
+treepath_up(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_path_up(_SELF(self)));
 }
 
 static VALUE
-treepath_down(self)
-    VALUE self;
+treepath_down(VALUE self)
 {
     gtk_tree_path_down(_SELF(self));
     return Qtrue;
 }
 
 static VALUE
-treepath_is_ancestor(self, descendant)
-    VALUE self, descendant;
+treepath_is_ancestor(VALUE self, VALUE descendant)
 {
     return CBOOL2RVAL(gtk_tree_path_is_ancestor(_SELF(self), _SELF(descendant)));
 }
 
 static VALUE
-treepath_is_descendant(self, ancestor)
-    VALUE self, ancestor;
+treepath_is_descendant(VALUE self, VALUE ancestor)
 {
     return CBOOL2RVAL(gtk_tree_path_is_descendant(_SELF(self), _SELF(ancestor)));
 }
