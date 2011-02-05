@@ -14,10 +14,7 @@
 #if GTK_CHECK_VERSION(2,4,0)
 
 static VALUE
-fchowidget_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+fchowidget_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE action, back;
     GtkWidget* widget;
