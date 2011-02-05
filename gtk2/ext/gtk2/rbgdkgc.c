@@ -19,8 +19,7 @@ static VALUE gdkGC;
 static VALUE gdkDrawable;
 
 static VALUE
-gdkgc_initialize(self, win)
-    VALUE self, win;
+gdkgc_initialize(VALUE self, VALUE win)
 {
     G_INITIALIZE(self, gdk_gc_new(GDK_DRAWABLE(RVAL2GOBJ(win))));
     return Qnil;
@@ -38,40 +37,35 @@ void        gdk_gc_get_values               (GdkGC *gc,
 */
 
 static VALUE
-gdkgc_set_foreground(self, color)
-    VALUE self, color;
+gdkgc_set_foreground(VALUE self, VALUE color)
 {
     gdk_gc_set_foreground(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-gdkgc_set_background(self, color)
-    VALUE self, color;
+gdkgc_set_background(VALUE self, VALUE color)
 {
     gdk_gc_set_background(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-gdkgc_set_rgb_fg_color(self, color)
-    VALUE self, color;
+gdkgc_set_rgb_fg_color(VALUE self, VALUE color)
 {
     gdk_gc_set_rgb_fg_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-gdkgc_set_rgb_bg_color(self, color)
-    VALUE self, color;
+gdkgc_set_rgb_bg_color(VALUE self, VALUE color)
 {
     gdk_gc_set_rgb_bg_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-gdkgc_set_function(self, func)
-    VALUE self, func;
+gdkgc_set_function(VALUE self, VALUE func)
 {
     GdkFunction f;
     f = (GdkFunction)(RVAL2GENUM(func, GDK_TYPE_FUNCTION));
@@ -83,56 +77,49 @@ gdkgc_set_function(self, func)
 }
 
 static VALUE
-gdkgc_set_fill(self, fill)
-    VALUE self, fill;
+gdkgc_set_fill(VALUE self, VALUE fill)
 {
     gdk_gc_set_fill(_SELF(self), RVAL2GENUM(fill, GDK_TYPE_FILL));
     return self;
 }
 
 static VALUE
-gdkgc_set_tile(self, tile)
-    VALUE self, tile;
+gdkgc_set_tile(VALUE self, VALUE tile)
 {
     gdk_gc_set_tile(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(tile))); 
     return self;
 }
 
 static VALUE
-gdkgc_set_stipple(self, stipple)
-    VALUE self, stipple;
+gdkgc_set_stipple(VALUE self, VALUE stipple)
 {
     gdk_gc_set_stipple(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(stipple))); 
     return self;
 }
 
 static VALUE
-gdkgc_set_ts_origin(self, x, y)
-    VALUE self, x, y;
+gdkgc_set_ts_origin(VALUE self, VALUE x, VALUE y)
 {
     gdk_gc_set_ts_origin(_SELF(self), NUM2INT(x), NUM2INT(y)); 
     return self;
 }
 
 static VALUE
-gdkgc_set_clip_origin(self, x, y)
-    VALUE self, x, y;
+gdkgc_set_clip_origin(VALUE self, VALUE x, VALUE y)
 {
     gdk_gc_set_clip_origin(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-gdkgc_set_clip_mask(self, mask)
-    VALUE self, mask;
+gdkgc_set_clip_mask(VALUE self, VALUE mask)
 {
     gdk_gc_set_clip_mask(_SELF(self), GDK_BITMAP(RVAL2GOBJ(mask)));
     return self;
 }
 
 static VALUE
-gdkgc_set_clip_rectangle(self, rectangle)
-    VALUE self, rectangle;
+gdkgc_set_clip_rectangle(VALUE self, VALUE rectangle)
 {
     gdk_gc_set_clip_rectangle(_SELF(self), 
                               (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_RECTANGLE));
@@ -140,8 +127,7 @@ gdkgc_set_clip_rectangle(self, rectangle)
 }
 
 static VALUE
-gdkgc_set_clip_region(self, region)
-    VALUE self, region;
+gdkgc_set_clip_region(VALUE self, VALUE region)
 {
     gdk_gc_set_clip_region(_SELF(self), 
                            (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION));
@@ -149,24 +135,21 @@ gdkgc_set_clip_region(self, region)
 }
 
 static VALUE
-gdkgc_set_subwindow(self, mode)
-    VALUE self, mode;
+gdkgc_set_subwindow(VALUE self, VALUE mode)
 {
     gdk_gc_set_subwindow(_SELF(self), RVAL2GENUM(mode, GDK_TYPE_SUBWINDOW_MODE));
     return self;
 }
 
 static VALUE
-gdkgc_set_exposures(self, exposures)
-    VALUE self, exposures;
+gdkgc_set_exposures(VALUE self, VALUE exposures)
 {
     gdk_gc_set_exposures(_SELF(self), RVAL2CBOOL(exposures));
     return self;
 }
 
 static VALUE
-gdkgc_set_line_attributes(self, line_width, line_style, cap_style, join_style)
-    VALUE self, line_width, line_style, cap_style, join_style;
+gdkgc_set_line_attributes(VALUE self, VALUE line_width, VALUE line_style, VALUE cap_style, VALUE join_style)
 {
     gdk_gc_set_line_attributes(_SELF(self), NUM2INT(line_width),
                                RVAL2GENUM(line_style, GDK_TYPE_LINE_STYLE), 
@@ -176,8 +159,7 @@ gdkgc_set_line_attributes(self, line_width, line_style, cap_style, join_style)
 }
 
 static VALUE
-gdkgc_set_dashes(self, dash_offset, dash_list)
-    VALUE self, dash_offset, dash_list;
+gdkgc_set_dashes(VALUE self, VALUE dash_offset, VALUE dash_list)
 {
     gint8 *buf;
     int   i;
@@ -196,8 +178,7 @@ gdkgc_set_dashes(self, dash_offset, dash_list)
 }
 
 static VALUE
-gdkgc_copy(self, dst)
-    VALUE self, dst;
+gdkgc_copy(VALUE self, VALUE dst)
 {
     if (RVAL2CBOOL(rb_obj_is_kind_of(dst, gdkDrawable))) {
         VALUE args[1];
@@ -209,16 +190,14 @@ gdkgc_copy(self, dst)
 }
 
 static VALUE
-gdkgc_set_colormap(self, colormap)
-    VALUE self, colormap;
+gdkgc_set_colormap(VALUE self, VALUE colormap)
 {
     gdk_gc_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-gdkgc_get_foreground(self)
-    VALUE self;
+gdkgc_get_foreground(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -227,8 +206,7 @@ gdkgc_get_foreground(self)
 }
 
 static VALUE
-gdkgc_get_background(self)
-    VALUE self;
+gdkgc_get_background(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -237,8 +215,7 @@ gdkgc_get_background(self)
 }
 
 static VALUE
-gdkgc_get_function(self)
-    VALUE self;
+gdkgc_get_function(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -247,8 +224,7 @@ gdkgc_get_function(self)
 }
 
 static VALUE
-gdkgc_get_fill(self)
-    VALUE self;
+gdkgc_get_fill(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -257,8 +233,7 @@ gdkgc_get_fill(self)
 }
 
 static VALUE
-gdkgc_get_tile(self)
-    VALUE self;
+gdkgc_get_tile(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -267,8 +242,7 @@ gdkgc_get_tile(self)
 }
 
 static VALUE
-gdkgc_get_stipple(self)
-    VALUE self;
+gdkgc_get_stipple(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -277,8 +251,7 @@ gdkgc_get_stipple(self)
 }    
 
 static VALUE
-gdkgc_get_ts_origin(self)
-    VALUE self;
+gdkgc_get_ts_origin(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -288,8 +261,7 @@ gdkgc_get_ts_origin(self)
 }
  
 static VALUE
-gdkgc_get_clip_origin(self)
-    VALUE self;
+gdkgc_get_clip_origin(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -299,8 +271,7 @@ gdkgc_get_clip_origin(self)
 }
 
 static VALUE
-gdkgc_get_clip_mask(self)
-    VALUE self;
+gdkgc_get_clip_mask(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -309,8 +280,7 @@ gdkgc_get_clip_mask(self)
 }
 
 static VALUE
-gdkgc_get_subwindow(self)
-    VALUE self;
+gdkgc_get_subwindow(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -319,8 +289,7 @@ gdkgc_get_subwindow(self)
 }
 
 static VALUE
-gdkgc_get_exposures(self)
-    VALUE self;
+gdkgc_get_exposures(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -329,8 +298,7 @@ gdkgc_get_exposures(self)
 }
 
 static VALUE
-gdkgc_get_line_attributes(self)
-    VALUE self;
+gdkgc_get_line_attributes(VALUE self)
 {
     GdkGCValues val;
     gdk_gc_get_values(_SELF(self), &val);
@@ -342,15 +310,13 @@ gdkgc_get_line_attributes(self)
 }
 
 static VALUE
-gdkgc_get_colormap(self)
-    VALUE self;
+gdkgc_get_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_gc_get_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkgc_offset(self, x, y)
-    VALUE self, x, y;
+gdkgc_offset(VALUE self, VALUE x, VALUE y)
 {
     gdk_gc_offset(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
@@ -358,8 +324,7 @@ gdkgc_offset(self, x, y)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkgc_screen(self)
-    VALUE self;
+gdkgc_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_gc_get_screen(_SELF(self)));
 }
