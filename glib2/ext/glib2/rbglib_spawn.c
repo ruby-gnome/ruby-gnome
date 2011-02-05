@@ -26,8 +26,7 @@ child_setup(func)
 }
 
 static VALUE
-rbglib_m_spawn_async_with_pipes(self, working_directory, argv, envp, flags)
-    VALUE self, working_directory, argv, envp, flags;
+rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -90,8 +89,7 @@ rbglib_m_spawn_async_with_pipes(self, working_directory, argv, envp, flags)
 }
 
 static VALUE
-rbglib_m_spawn_async(self, working_directory, argv, envp, flags)
-    VALUE self, working_directory, argv, envp, flags;
+rbglib_m_spawn_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -149,8 +147,7 @@ rbglib_m_spawn_async(self, working_directory, argv, envp, flags)
 }
 
 static VALUE
-rbglib_m_spawn_sync(self, working_directory, argv, envp, flags)
-    VALUE self, working_directory, argv, envp, flags;
+rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -231,8 +228,7 @@ rbglib_m_spawn_sync(self, working_directory, argv, envp, flags)
 }
 
 static VALUE
-rbglib_m_spawn_command_line_sync(self, str)
-    VALUE self, str;
+rbglib_m_spawn_command_line_sync(VALUE self, VALUE str)
 {
     GError *err = NULL;
     const gchar *command_line;
@@ -269,8 +265,7 @@ rbglib_m_spawn_command_line_sync(self, str)
 }
 
 static VALUE
-rbglib_m_spawn_command_line_async(self, str)
-    VALUE self, str;
+rbglib_m_spawn_command_line_async(VALUE self, VALUE str)
 {
     GError *err = NULL;
     const gchar *command_line;
@@ -286,8 +281,7 @@ rbglib_m_spawn_command_line_async(self, str)
 
 #ifdef HAVE_G_SPAWN_CLOSE_PID
 static VALUE
-rbglib_m_spawn_close_pid(self, pid)
-    VALUE self, pid;
+rbglib_m_spawn_close_pid(VALUE self, VALUE pid)
 {
     g_spawn_close_pid(NUM2INT(pid));
     return Qnil;
