@@ -15,16 +15,14 @@
 
 /* Methods */
 static VALUE
-device_s_list(self)
-    VALUE self;
+device_s_list(VALUE self)
 {
     /* Owned by GDK */
     return GLIST2ARY(gdk_devices_list());
 }
 
 static VALUE
-device_s_set_extension_events(self, window, mask, mode)
-    VALUE self, window, mask, mode;
+device_s_set_extension_events(VALUE self, VALUE window, VALUE mask, VALUE mode)
 {
     gdk_input_set_extension_events(GDK_WINDOW(RVAL2GOBJ(window)),
                                    NUM2INT(mask), FIX2INT(mode));
@@ -33,23 +31,20 @@ device_s_set_extension_events(self, window, mask, mode)
 
 
 static VALUE
-device_set_source(self, source)
-    VALUE self, source;
+device_set_source(VALUE self, VALUE source)
 {
     gdk_device_set_source(_SELF(self), RVAL2GENUM(source, GDK_TYPE_INPUT_SOURCE));
     return self;
 }
 
 static VALUE
-device_set_mode(self, mode)
-    VALUE self, mode;
+device_set_mode(VALUE self, VALUE mode)
 {
     return CBOOL2RVAL(gdk_device_set_mode(_SELF(self), RVAL2GENUM(mode, GDK_TYPE_INPUT_MODE)));
 }
 
 static VALUE
-device_set_key(self, index, keyval, modifiers)
-    VALUE self, index, keyval, modifiers;
+device_set_key(VALUE self, VALUE index, VALUE keyval, VALUE modifiers)
 {
     gdk_device_set_key(_SELF(self), NUM2UINT(index), NUM2UINT(keyval),
                        RVAL2GFLAGS(modifiers, GDK_TYPE_MODIFIER_TYPE));
@@ -57,8 +52,7 @@ device_set_key(self, index, keyval, modifiers)
 }
 
 static VALUE
-device_set_axis_use(self, index, use)
-    VALUE self, index, use;
+device_set_axis_use(VALUE self, VALUE index, VALUE use)
 {
     gdk_device_set_axis_use(_SELF(self), NUM2UINT(index), 
                             RVAL2GENUM(use, GDK_TYPE_AXIS_USE));
@@ -66,15 +60,13 @@ device_set_axis_use(self, index, use)
 }
 
 static VALUE
-device_s_get_core_pointer(self)
-    VALUE self;
+device_s_get_core_pointer(VALUE self)
 {
     return GOBJ2RVAL(gdk_device_get_core_pointer());
 }
 
 static VALUE
-device_get_state(self, window)
-    VALUE self, window;
+device_get_state(VALUE self, VALUE window)
 {
     gdouble axes[2];
     GdkModifierType mask;
@@ -86,8 +78,7 @@ device_get_state(self, window)
 }
 
 static VALUE
-device_get_history(self, window, start, stop)
-    VALUE self, window, start, stop;
+device_get_history(VALUE self, VALUE window, VALUE start, VALUE stop)
 {
     gboolean ret;
     GdkTimeCoord** events;
@@ -108,8 +99,7 @@ device_get_history(self, window, start, stop)
 }
 
 static VALUE
-device_get_axis(self, axes, use)
-    VALUE self, axes, use;
+device_get_axis(VALUE self, VALUE axes, VALUE use)
 {
     gdouble value;
     gboolean ret;
@@ -133,36 +123,31 @@ device_get_axis(self, axes, use)
 
 /* Accessor */
 static VALUE
-device_name(self)
-    VALUE self;
+device_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->name);
 }
 
 static VALUE
-device_source(self)
-    VALUE self;
+device_source(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->source, GDK_TYPE_INPUT_SOURCE);
 }
 
 static VALUE
-device_mode(self)
-    VALUE self;
+device_mode(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->mode, GDK_TYPE_INPUT_MODE);
 }
 
 static VALUE
-device_has_cursor(self)
-    VALUE self;
+device_has_cursor(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->has_cursor);
 }
 
 static VALUE
-device_axes(self)
-    VALUE self;
+device_axes(VALUE self)
 {
     gint i;
     VALUE ary = rb_ary_new();
@@ -176,8 +161,7 @@ device_axes(self)
 }
 
 static VALUE
-device_keys(self)
-    VALUE self;
+device_keys(VALUE self)
 {
     gint i;
     VALUE ary = rb_ary_new();
