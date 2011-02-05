@@ -48,31 +48,27 @@ gdouble            gtk_range_get_fill_level                (GtkRange      *range
 */
 
 static VALUE
-range_get_value(self)
-    VALUE self;
+range_get_value(VALUE self)
 {
     return rb_float_new(gtk_range_get_value(_SELF(self)));
 }
 
 static VALUE
-range_set_increments(self, step, page)
-    VALUE self, step, page;
+range_set_increments(VALUE self, VALUE step, VALUE page)
 {
     gtk_range_set_increments(_SELF(self), NUM2DBL(step), NUM2DBL(page));
     return self;
 }
 
 static VALUE
-range_set_range(self, min, max)
-    VALUE self, min, max;
+range_set_range(VALUE self, VALUE min, VALUE max)
 {
     gtk_range_set_range(_SELF(self), NUM2DBL(min), NUM2DBL(max));
     return self;
 }
 
 static VALUE
-range_set_value(self, value)
-    VALUE self, value;
+range_set_value(VALUE self, VALUE value)
 {
     gtk_range_set_value(_SELF(self), NUM2DBL(value));
     return self;
