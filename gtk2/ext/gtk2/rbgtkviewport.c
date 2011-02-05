@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-vport_initialize(self, hadj, vadj)
-    VALUE self, hadj, vadj;
+vport_initialize(VALUE self, VALUE hadj, VALUE vadj)
 {
     GtkAdjustment *h_adj = GTK_ADJUSTMENT(RVAL2GOBJ(hadj));
     GtkAdjustment *v_adj = GTK_ADJUSTMENT(RVAL2GOBJ(vadj));
