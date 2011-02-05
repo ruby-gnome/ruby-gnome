@@ -20,16 +20,14 @@ static gboolean is_compat_240;
 static ID id_pixbuf;
 
 static VALUE
-get_buffer(self)
-    VALUE self;
+get_buffer(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_iter_get_buffer(_SELF(self)));
 }
 
 #define def_gint_getter(__name__) \
 static VALUE \
-get_##__name__(self) \
-    VALUE self; \
+get_##__name__(VALUE self) \
 { \
     return INT2NUM(gtk_text_iter_get_##__name__(_SELF(self))); \
 }
@@ -42,8 +40,7 @@ def_gint_getter(visible_line_offset)
 def_gint_getter(visible_line_index)
 
 static VALUE
-get_char(self)
-    VALUE self;
+get_char(VALUE self)
 {
     gchar buf[10];
     gint len = g_unichar_to_utf8(gtk_text_iter_get_char(_SELF(self)), buf);
@@ -52,36 +49,31 @@ get_char(self)
 }
 
 static VALUE
-get_slice(self, rhs)
-    VALUE self, rhs;
+get_slice(VALUE self, VALUE rhs)
 {
     return CSTR2RVAL(gtk_text_iter_get_slice(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
-get_text(self, rhs)
-    VALUE self, rhs;
+get_text(VALUE self, VALUE rhs)
 {
     return CSTR2RVAL(gtk_text_iter_get_text(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
-get_visible_slice(self, rhs)
-    VALUE self, rhs;
+get_visible_slice(VALUE self, VALUE rhs)
 {
     return CSTR2RVAL(gtk_text_iter_get_visible_slice(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
-get_visible_text(self, rhs)
-    VALUE self, rhs;
+get_visible_text(VALUE self, VALUE rhs)
 {
     return CSTR2RVAL(gtk_text_iter_get_visible_text(_SELF(self), _SELF(rhs)));
 }
 
 static VALUE
-get_pixbuf(self)
-    VALUE self;
+get_pixbuf(VALUE self)
 {
     GdkPixbuf* pixbuf = gtk_text_iter_get_pixbuf(_SELF(self));
     VALUE ret = Qnil;
@@ -93,72 +85,62 @@ get_pixbuf(self)
 }
 
 static VALUE
-get_marks(self)
-    VALUE self;
+get_marks(VALUE self)
 {
     return GSLIST2ARYF(gtk_text_iter_get_marks(_SELF(self)));
 }
 
 static VALUE
-get_toggled_tags(self, toggled_on)
-    VALUE self, toggled_on;
+get_toggled_tags(VALUE self, VALUE toggled_on)
 {
     return GSLIST2ARYF(gtk_text_iter_get_toggled_tags(_SELF(self), RVAL2CBOOL(toggled_on)));
 }
 
 static VALUE
-get_child_anchor(self)
-    VALUE self;
+get_child_anchor(VALUE self)
 {
     GtkTextChildAnchor* anchor = gtk_text_iter_get_child_anchor(_SELF(self));
     return anchor ? GOBJ2RVAL(anchor) : Qnil;
 }
 
 static VALUE
-begins_tag(self, tag)
-    VALUE self, tag;
+begins_tag(VALUE self, VALUE tag)
 {
     return CBOOL2RVAL(gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
-ends_tag(self, tag)
-    VALUE self, tag;
+ends_tag(VALUE self, VALUE tag)
 {
     return CBOOL2RVAL(gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
-toggles_tag(self, tag)
-    VALUE self, tag;
+toggles_tag(VALUE self, VALUE tag)
 {
     return CBOOL2RVAL(gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
-has_tag(self, tag)
-    VALUE self, tag;
+has_tag(VALUE self, VALUE tag)
 {
     return CBOOL2RVAL(gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag)));
 }
 
 static VALUE
-get_tags(self)
-    VALUE self;
+get_tags(VALUE self)
 {
     return GSLIST2ARYF(gtk_text_iter_get_tags(_SELF(self)));
 }
 
 static VALUE
-editable(self, default_setting)
-    VALUE self, default_setting;
+editable(VALUE self, VALUE default_setting)
 {
     return CBOOL2RVAL(gtk_text_iter_editable(_SELF(self), RVAL2CBOOL(default_setting)));
 }
 
 static VALUE
-can_insert(self, default_setting)
-    VALUE self, default_setting;
+can_insert(VALUE self, VALUE default_setting)
 {
     return CBOOL2RVAL(gtk_text_iter_can_insert(_SELF(self), RVAL2CBOOL(default_setting)));
 }
@@ -166,8 +148,7 @@ can_insert(self, default_setting)
     
 #define def_predicate(__name__) \
 static VALUE \
-__name__(self) \
-    VALUE self; \
+__name__(VALUE self) \
 { \
     return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self)));   \
 }
@@ -185,8 +166,7 @@ def_gint_getter(chars_in_line)
 def_gint_getter(bytes_in_line)
 
 static VALUE
-get_attributes(self)
-    VALUE self;
+get_attributes(VALUE self)
 {
     GtkTextAttributes attr;
     
@@ -198,8 +178,7 @@ get_attributes(self)
 }
     
 static VALUE
-get_language(self)
-    VALUE self;
+get_language(VALUE self)
 {
     return CSTR2RVAL(pango_language_to_string(gtk_text_iter_get_language(_SELF(self))));
 }
@@ -210,16 +189,14 @@ def_predicate(is_start)
 
 #define def_move(__name__) \
 static VALUE \
-__name__(self) \
-    VALUE self; \
+__name__(VALUE self) \
 { \
     return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self))); \
 }
 
 #define def_move_gint(__name__) \
 static VALUE \
-__name__(self, i) \
-    VALUE self, i; \
+__name__(VALUE self, VALUE i) \
 { \
     return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self), NUM2INT(i))); \
 }
@@ -264,8 +241,7 @@ def_move_gint(backward_cursor_positions)
 def_move(forward_to_line_end)
 
 static VALUE
-forward_to_end(self)
-    VALUE self;
+forward_to_end(VALUE self)
 {
     gtk_text_iter_forward_to_end(_SELF(self));
     return self;
@@ -273,8 +249,7 @@ forward_to_end(self)
 
 #define def_gint_setter(__name__) \
 static VALUE \
-set_##__name__(self, val) \
-    VALUE self, val; \
+set_##__name__(VALUE self, VALUE val) \
 { \
     gtk_text_iter_set_##__name__(_SELF(self), NUM2INT(val)); \
     return val; \
@@ -289,10 +264,7 @@ def_gint_setter(visible_line_offset)
 def_gint_setter(visible_line_index)
 
 static VALUE
-forward_to_tag_toggle(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+forward_to_tag_toggle(int argc, VALUE *argv, VALUE self)
 {
     VALUE tag;
 
@@ -302,10 +274,7 @@ forward_to_tag_toggle(argc, argv, self)
 }
 
 static VALUE
-backward_to_tag_toggle(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+backward_to_tag_toggle(int argc, VALUE *argv, VALUE self)
 {
     VALUE tag;
 
@@ -323,10 +292,7 @@ char_predicate_func(ch, func)
 }
 
 static VALUE
-forward_find_char(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+forward_find_char(int argc, VALUE *argv, VALUE self)
 {
     VALUE limit;
     volatile VALUE func = rb_block_proc();
@@ -339,10 +305,7 @@ forward_find_char(argc, argv, self)
 }
 
 static VALUE
-backward_find_char(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+backward_find_char(int argc, VALUE *argv, VALUE self)
 {
     VALUE limit;
     volatile VALUE func = rb_block_proc();
@@ -355,10 +318,7 @@ backward_find_char(argc, argv, self)
 }
 
 static VALUE
-forward_search(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+forward_search(int argc, VALUE *argv, VALUE self)
 {
     GtkTextIter m_start, m_end;
     VALUE str, flags, limit;
@@ -381,10 +341,7 @@ forward_search(argc, argv, self)
 }
 
 static VALUE
-backward_search(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+backward_search(int argc, VALUE *argv, VALUE self)
 {
     GtkTextIter m_start, m_end;
     VALUE str, flags, limit;
@@ -406,15 +363,13 @@ backward_search(argc, argv, self)
 }
 
 static VALUE
-equal(self, other)
-    VALUE self, other;
+equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(gtk_text_iter_equal(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-compare(self, rhs)
-    VALUE self, rhs;
+compare(VALUE self, VALUE rhs)
 {
     return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
 }
