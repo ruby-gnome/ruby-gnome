@@ -37,8 +37,7 @@ gdk_atom_get_type (void)
 
 
 GdkAtom
-get_gdkatom(atom)
-    VALUE atom;
+get_gdkatom(VALUE atom)
 {
     if (TYPE(atom) == T_STRING)
         return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
@@ -47,10 +46,7 @@ get_gdkatom(atom)
 /*****************************************/
 
 static VALUE
-gdkatom_s_intern(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkatom_s_intern(int argc, VALUE *argv, VALUE self)
 {
     VALUE name;
     VALUE exist;
@@ -66,8 +62,7 @@ GdkAtom gdk_atom_intern_static_string(const gchar *atom_name);
  */
 
 static VALUE
-gdkatom_initialize(self, num)
-    VALUE self, num;
+gdkatom_initialize(VALUE self, VALUE num)
 {
     guint atom = FIX2INT(num);
     if (atom == 0){
@@ -82,22 +77,19 @@ gdkatom_initialize(self, num)
 }
 
 static VALUE
-gdkatom_name(self)
-    VALUE self;
+gdkatom_name(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_atom_name(_SELF(self)));
 }
 
 static VALUE
-gdkatom_to_i(self)
-    VALUE self;
+gdkatom_to_i(VALUE self)
 {
     return UINT2NUM(GPOINTER_TO_UINT(_SELF(self)));
 }
 
 static VALUE
-gdkatom_eq(self, other)
-    VALUE self, other;
+gdkatom_eq(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(_SELF(self) == _SELF(other));
 }
