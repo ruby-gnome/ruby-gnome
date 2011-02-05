@@ -18,38 +18,33 @@
 #define ICON_INFO2RVAL(info) (BOXED2RVAL(info, GTK_TYPE_ICON_INFO))
 
 static VALUE
-it_initialize(self)
-    VALUE self;
+it_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_icon_theme_new());
     return Qnil;
 }
 
 static VALUE
-it_get_default(self)
-    VALUE self;
+it_get_default(VALUE self)
 {
     return GOBJ2RVAL(gtk_icon_theme_get_default());
 }
 
 static VALUE
-it_get_for_screen(self, screen)
-    VALUE self, screen;
+it_get_for_screen(VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_icon_theme_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
 
 static VALUE
-it_set_screen(self, screen)
-    VALUE self, screen;
+it_set_screen(VALUE self, VALUE screen)
 {
     gtk_icon_theme_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
 
 static VALUE
-it_set_search_path(self, paths)
-    VALUE self, paths;
+it_set_search_path(VALUE self, VALUE paths)
 {
     gchar** gpaths;
     gint size, i;
@@ -68,8 +63,7 @@ it_set_search_path(self, paths)
 }
 
 static VALUE
-it_get_search_path(self)
-    VALUE self;
+it_get_search_path(VALUE self)
 {
     gchar** path;
     gint size, i;
@@ -86,24 +80,21 @@ it_get_search_path(self)
 }
 
 static VALUE
-it_append_search_path(self, path)
-    VALUE self, path;
+it_append_search_path(VALUE self, VALUE path)
 {
     gtk_icon_theme_append_search_path(_SELF(self), RVAL2CSTR(path));
     return self;
 }
 
 static VALUE
-it_prepend_search_path(self, path)
-    VALUE self, path;
+it_prepend_search_path(VALUE self, VALUE path)
 {
     gtk_icon_theme_prepend_search_path(_SELF(self), RVAL2CSTR(path));
     return self;
 }
 
 static VALUE
-it_set_custom_theme(self, theme_name)
-    VALUE self, theme_name;
+it_set_custom_theme(VALUE self, VALUE theme_name)
 {
     gtk_icon_theme_set_custom_theme(_SELF(self), 
                                     NIL_P(theme_name) ? NULL : RVAL2CSTR(theme_name));
@@ -111,16 +102,14 @@ it_set_custom_theme(self, theme_name)
 }
 
 static VALUE
-it_has_icon(self, icon_name)
-    VALUE self, icon_name;
+it_has_icon(VALUE self, VALUE icon_name)
 {
     return CBOOL2RVAL(gtk_icon_theme_has_icon(_SELF(self), 
                                               RVAL2CSTR(icon_name)));
 }
 
 static VALUE
-it_lookup_icon(self, icon_name, size, flags)
-    VALUE self, icon_name, size, flags;
+it_lookup_icon(VALUE self, VALUE icon_name, VALUE size, VALUE flags)
 {
     GtkIconInfo* info;
 
@@ -132,8 +121,7 @@ it_lookup_icon(self, icon_name, size, flags)
 }
 
 static VALUE
-it_load_icon(self, icon_name, size, flags)
-    VALUE self, icon_name, size, flags;
+it_load_icon(VALUE self, VALUE icon_name, VALUE size, VALUE flags)
 {
     GError *error = NULL;
     GdkPixbuf *pixbuf;
@@ -163,8 +151,7 @@ it_list_icons(int argc, VALUE *argv, VALUE self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-it_get_icon_sizes(self, icon_name)
-    VALUE self, icon_name;
+it_get_icon_sizes(VALUE self, VALUE icon_name)
 {
     VALUE ary = rb_ary_new();
 
@@ -180,22 +167,19 @@ it_get_icon_sizes(self, icon_name)
 #endif
 
 static VALUE
-it_get_example_icon_name(self)
-    VALUE self;
+it_get_example_icon_name(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_icon_theme_get_example_icon_name(_SELF(self)));
 }
 
 static VALUE
-it_rescan_if_needed(self)
-    VALUE self;
+it_rescan_if_needed(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_theme_rescan_if_needed(_SELF(self)));
 }
 
 static VALUE
-it_s_add_builtin_icon(self, icon_name, size, pixbuf)
-    VALUE self, icon_name, size, pixbuf;
+it_s_add_builtin_icon(VALUE self, VALUE icon_name, VALUE size, VALUE pixbuf)
 {
     gtk_icon_theme_add_builtin_icon(RVAL2CSTR(icon_name), NUM2INT(size),
                                     GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
