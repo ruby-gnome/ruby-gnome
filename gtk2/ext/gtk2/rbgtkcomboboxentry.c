@@ -14,10 +14,7 @@
 #if GTK_CHECK_VERSION(2,4,0)
 
 static VALUE
-comboboxentry_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+comboboxentry_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model_or_false, text_column;
     GtkWidget* widget;
