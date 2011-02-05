@@ -18,8 +18,7 @@ static VALUE gerror_table;
 static VALUE generic_error;
 
 VALUE
-rbgerr_gerror2exception(error)
-    GError *error;
+rbgerr_gerror2exception(GError *error)
 {
     VALUE exc = Qnil;
     VALUE klass = Qnil;
@@ -43,12 +42,7 @@ rbgerr_gerror2exception(error)
 }
 
 VALUE
-rbgerr_define_gerror(domain, name, module, parent, gtype)
-    GQuark domain;
-    const gchar* name;
-    VALUE module;
-    VALUE parent;
-    VALUE gtype;
+rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE parent, VALUE gtype)
 {
     VALUE klass = rb_define_class_under(module, name, parent);
     rb_funcall(klass, rbgutil_id_module_eval, 1, CSTR2RVAL("def code; @code; end\n"));
