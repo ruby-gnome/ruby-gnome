@@ -16,10 +16,7 @@
 #define _SELF(self) (GTK_RECENT_CHOOSER_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-rcd_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rcd_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, parent, button_ary;
     GtkWidget* dialog;
