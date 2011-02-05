@@ -40,15 +40,13 @@ PangoFontDescription* pango_font_description_copy_static
 */
 
 static VALUE
-font_desc_hash(self)
-    VALUE self;
+font_desc_hash(VALUE self)
 {
     return UINT2NUM(pango_font_description_hash(_SELF(self)));
 }
 
 static VALUE
-font_desc_equal(self, other)
-    VALUE self, other;
+font_desc_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(pango_font_description_equal(_SELF(self), _SELF(other)));
 }
@@ -59,8 +57,7 @@ void        pango_font_descriptions_free    (PangoFontDescription **descs,
 */
 
 static VALUE
-font_desc_set_family(self, family)
-    VALUE self, family;
+font_desc_set_family(VALUE self, VALUE family)
 {
     pango_font_description_set_family(_SELF(self), RVAL2CSTR(family));
     return self;
@@ -72,38 +69,33 @@ void        pango_font_description_set_family_static
 */
 
 static VALUE
-font_desc_get_family(self)
-    VALUE self;
+font_desc_get_family(VALUE self)
 {
     return CSTR2RVAL(pango_font_description_get_family(_SELF(self)));
 }
 
 static VALUE
-font_desc_set_style(self, style)
-    VALUE self, style;
+font_desc_set_style(VALUE self, VALUE style)
 {
     pango_font_description_set_style(_SELF(self), RVAL2GENUM(style, PANGO_TYPE_STYLE));
     return self;
 }
 
 static VALUE
-font_desc_get_style(self)
-    VALUE self;
+font_desc_get_style(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_style(_SELF(self)), PANGO_TYPE_STYLE);
 }
 
 static VALUE
-font_desc_set_variant(self, variant)
-    VALUE self, variant;
+font_desc_set_variant(VALUE self, VALUE variant)
 {
     pango_font_description_set_variant(_SELF(self), RVAL2GENUM(variant, PANGO_TYPE_VARIANT));
     return self;
 }
 
 static VALUE
-font_desc_get_variant(self)
-    VALUE self;
+font_desc_get_variant(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_variant(_SELF(self)), PANGO_TYPE_VARIANT);
 }
@@ -117,54 +109,47 @@ font_desc_set_weight(VALUE self, VALUE weight)
 }
 
 static VALUE
-font_desc_get_weight(self)
-    VALUE self;
+font_desc_get_weight(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_weight(_SELF(self)), PANGO_TYPE_WEIGHT);
 }
 
 static VALUE
-font_desc_set_stretch(self, stretch)
-    VALUE self, stretch;
+font_desc_set_stretch(VALUE self, VALUE stretch)
 {
     pango_font_description_set_stretch(_SELF(self), RVAL2GENUM(stretch, PANGO_TYPE_STRETCH));
     return self;
 }
 
 static VALUE
-font_desc_get_stretch(self)
-    VALUE self;
+font_desc_get_stretch(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_stretch(_SELF(self)), PANGO_TYPE_STRETCH);
 }
 
 static VALUE
-font_desc_set_size(self, size)
-    VALUE self, size;
+font_desc_set_size(VALUE self, VALUE size)
 {
     pango_font_description_set_size(_SELF(self), NUM2INT(size));
     return self;
 }
 
 static VALUE
-font_desc_get_size(self)
-    VALUE self;
+font_desc_get_size(VALUE self)
 {
     return INT2NUM(pango_font_description_get_size(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,8,0)
 static VALUE
-font_desc_set_absolute_size(self, size)
-    VALUE self, size;
+font_desc_set_absolute_size(VALUE self, VALUE size)
 {
     pango_font_description_set_absolute_size(_SELF(self), NUM2INT(size));
     return self;
 }
 
 static VALUE
-font_desc_get_size_is_absolute(self)
-    VALUE self;
+font_desc_get_size_is_absolute(VALUE self)
 {
     return CBOOL2RVAL(pango_font_description_get_size_is_absolute(_SELF(self)));
 }
@@ -186,23 +171,20 @@ font_desc_set_gravity(VALUE self, VALUE gravity)
 #endif
 
 static VALUE
-font_desc_get_set_fields(self)
-    VALUE self;
+font_desc_get_set_fields(VALUE self)
 {
     return GFLAGS2RVAL(pango_font_description_get_set_fields(_SELF(self)), PANGO_TYPE_FONT_MASK);
 }
 
 static VALUE
-font_desc_unset_fields(self, to_unset)
-    VALUE self, to_unset;
+font_desc_unset_fields(VALUE self, VALUE to_unset)
 {
     pango_font_description_unset_fields(_SELF(self), RVAL2GFLAGS(to_unset, PANGO_TYPE_FONT_MASK));
     return self;
 }
 
 static VALUE
-font_desc_merge(self, desc_to_merge, replace_existing)
-    VALUE self, desc_to_merge, replace_existing;
+font_desc_merge(VALUE self, VALUE desc_to_merge, VALUE replace_existing)
 {
     pango_font_description_merge(_SELF(self), _SELF(desc_to_merge),
                                  RVAL2CBOOL(replace_existing));
@@ -217,8 +199,7 @@ void        pango_font_description_merge_static
 */
 
 static VALUE
-font_desc_better_match(self, old_match, new_match)
-    VALUE self, old_match, new_match;
+font_desc_better_match(VALUE self, VALUE old_match, VALUE new_match)
 {
     return CBOOL2RVAL(pango_font_description_better_match(_SELF(self), 
                                                           _SELF(old_match),
@@ -226,15 +207,13 @@ font_desc_better_match(self, old_match, new_match)
 }
 
 static VALUE
-font_desc_to_string(self)
-    VALUE self;
+font_desc_to_string(VALUE self)
 {
     return CSTR2RVAL(pango_font_description_to_string(_SELF(self)));
 }
 
 static VALUE
-font_desc_to_filename(self)
-    VALUE self;
+font_desc_to_filename(VALUE self)
 {
     return CSTR2RVAL(pango_font_description_to_filename(_SELF(self)));
 }
