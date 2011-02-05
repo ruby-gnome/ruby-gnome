@@ -20,8 +20,7 @@
 #define _SELF(self) (GTK_ADJUSTMENT(RVAL2GOBJ(self)))
 
 static VALUE
-adj_initialize(self, value, lower, upper, step_inc, page_inc, page_size)
-    VALUE self, value, lower, upper, step_inc, page_inc, page_size;
+adj_initialize(VALUE self, VALUE value, VALUE lower, VALUE upper, VALUE step_inc, VALUE page_inc, VALUE page_size)
 {
     RBGTK_INITIALIZE(self, gtk_adjustment_new(NUM2DBL(value),
                                               NUM2DBL(lower),
@@ -33,32 +32,28 @@ adj_initialize(self, value, lower, upper, step_inc, page_inc, page_size)
 }
 
 static VALUE
-adj_clamp_page(self, lower, upper)
-    VALUE self, lower, upper;
+adj_clamp_page(VALUE self, VALUE lower, VALUE upper)
 {
     gtk_adjustment_clamp_page(_SELF(self), NUM2DBL(lower), NUM2DBL(upper));
     return self;
 }
 
 static VALUE
-adj_changed(self)
-    VALUE self;
+adj_changed(VALUE self)
 {
     gtk_adjustment_changed(_SELF(self));
     return self;
 }
 
 static VALUE
-adj_value_changed(self)
-    VALUE self;
+adj_value_changed(VALUE self)
 {
     gtk_adjustment_value_changed(_SELF(self));
     return self;
 }
 
 static VALUE
-adj_set_value(self, value)
-    VALUE self, value;
+adj_set_value(VALUE self, VALUE value)
 {
     gtk_adjustment_set_value(_SELF(self),
 			     NUM2DBL(value));
@@ -66,65 +61,56 @@ adj_set_value(self, value)
 }
 
 static VALUE
-adj_get_value(self)
-    VALUE self;
+adj_get_value(VALUE self)
 {
     return rb_float_new(_SELF(self)->value);
 }
 
 static VALUE
-adj_get_lower(self)
-    VALUE self;
+adj_get_lower(VALUE self)
 {
     return rb_float_new(_SELF(self)->lower);
 }
 
 static VALUE
-adj_get_upper(self)
-    VALUE self;
+adj_get_upper(VALUE self)
 {
     return rb_float_new(_SELF(self)->upper);
 }
 
 static VALUE
-adj_get_step_increment(self)
-    VALUE self;
+adj_get_step_increment(VALUE self)
 {
     return rb_float_new(_SELF(self)->step_increment);
 }
 
 static VALUE
-adj_set_step_increment(self, inc)
-    VALUE self, inc;
+adj_set_step_increment(VALUE self, VALUE inc)
 {
     _SELF(self)->step_increment = NUM2DBL(inc);
     return self;
 }
 
 static VALUE
-adj_get_page_increment(self)
-    VALUE self;
+adj_get_page_increment(VALUE self)
 {
     return rb_float_new(_SELF(self)->page_increment);
 }
 
 static VALUE
-adj_set_page_increment(self, inc)
-    VALUE self, inc;
+adj_set_page_increment(VALUE self, VALUE inc)
 {
     return _SELF(self)->page_increment = NUM2DBL(inc);
 }
 
 static VALUE
-adj_get_page_size(self)
-    VALUE self;
+adj_get_page_size(VALUE self)
 {
     return rb_float_new(_SELF(self)->page_size);
 }
 
 static VALUE
-adj_set_page_size(self, size)
-    VALUE self, size;
+adj_set_page_size(VALUE self, VALUE size)
 {
     return _SELF(self)->page_size = NUM2DBL(size);
 }
