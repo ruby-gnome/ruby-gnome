@@ -12,10 +12,7 @@
 #include "global.h"
 
 static VALUE
-gdkcursor_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkcursor_initialize(int argc, VALUE *argv, VALUE self)
 {
     GdkCursor* cursor = NULL;
 
@@ -64,32 +61,28 @@ gdkcursor_initialize(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkcursor_get_display(self)
-    VALUE self;
+gdkcursor_get_display(VALUE self)
 {
     return GOBJ2RVAL(gdk_cursor_get_display((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
 #endif
 
 static VALUE
-gdkcursor_is_pixmap(self)
-    VALUE self;
+gdkcursor_is_pixmap(VALUE self)
 {
     return CBOOL2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
                       GDK_CURSOR_IS_PIXMAP);
 }
 
 static VALUE
-gdkcursor_cursor_type(self)
-    VALUE self;
+gdkcursor_cursor_type(VALUE self)
 {
     return GENUM2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR))->type, GDK_TYPE_CURSOR_TYPE);
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gdkcursor_get_image(self)
-    VALUE self;
+gdkcursor_get_image(VALUE self)
 {
     return GOBJ2RVAL(gdk_cursor_get_image((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
