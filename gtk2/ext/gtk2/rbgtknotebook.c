@@ -19,18 +19,14 @@
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
 
 static VALUE
-note_initialize(self)
-    VALUE self;
+note_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_notebook_new());
     return Qnil;
 }
 
 static VALUE
-note_append_page(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+note_append_page(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, label;
 
@@ -44,10 +40,7 @@ note_append_page(argc, argv, self)
 }
 
 static VALUE
-note_append_page_menu(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+note_append_page_menu(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, tab_label, menu_label;
     
@@ -61,10 +54,7 @@ note_append_page_menu(argc, argv, self)
 }
 
 static VALUE
-note_prepend_page(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+note_prepend_page(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, label;
 
@@ -76,10 +66,7 @@ note_prepend_page(argc, argv, self)
 }
 
 static VALUE
-note_prepend_page_menu(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+note_prepend_page_menu(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, tab_label, menu_label;
 
@@ -93,10 +80,7 @@ note_prepend_page_menu(argc, argv, self)
 }
 
 static VALUE
-note_insert_page(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+note_insert_page(int argc, VALUE *argv, VALUE self)
 {
     VALUE pos, child, label;
 
@@ -109,10 +93,7 @@ note_insert_page(argc, argv, self)
 }
 
 static VALUE
-note_insert_page_menu(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+note_insert_page_menu(int argc, VALUE *argv, VALUE self)
 {
     VALUE pos, child, tab_label, menu_label;
 
@@ -126,40 +107,35 @@ note_insert_page_menu(argc, argv, self)
 }
 
 static VALUE
-note_remove_page(self, pos)
-    VALUE self, pos;
+note_remove_page(VALUE self, VALUE pos)
 {
     gtk_notebook_remove_page(_SELF(self), NUM2INT(pos));
     return self;
 }
 
 static VALUE
-note_page_num(self, child)
-    VALUE self, child;
+note_page_num(VALUE self, VALUE child)
 {
     return INT2FIX(gtk_notebook_page_num(_SELF(self),
                                          RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_next_page(self)
-    VALUE self;
+note_next_page(VALUE self)
 {
     gtk_notebook_next_page(_SELF(self));
     return self;
 }
 
 static VALUE
-note_prev_page(self)
-    VALUE self;
+note_prev_page(VALUE self)
 {
     gtk_notebook_prev_page(_SELF(self));
     return self;
 }
 
 static VALUE
-note_reorder_child(self, child, pos)
-    VALUE self, child, pos;
+note_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
     gtk_notebook_reorder_child(_SELF(self), RVAL2WIDGET(child),
                                NUM2INT(pos));
@@ -167,16 +143,14 @@ note_reorder_child(self, child, pos)
 }
 
 static VALUE
-note_get_menu_label(self, child)
-    VALUE self, child;
+note_get_menu_label(VALUE self, VALUE child)
 {
     return GOBJ2RVAL(gtk_notebook_get_menu_label(_SELF(self),
                                                  RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_get_nth_page(self, page_num)
-    VALUE self, page_num;
+note_get_nth_page(VALUE self, VALUE page_num)
 {
     GtkWidget *page = gtk_notebook_get_nth_page(_SELF(self),
                                                 NUM2INT(page_num));
@@ -185,24 +159,21 @@ note_get_nth_page(self, page_num)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-note_get_n_pages(self)
-    VALUE self;
+note_get_n_pages(VALUE self)
 {
     return INT2NUM(gtk_notebook_get_n_pages(_SELF(self)));
 }
 #endif
 
 static VALUE
-note_get_tab_label(self, child)
-    VALUE self, child;
+note_get_tab_label(VALUE self, VALUE child)
 {
     return GOBJ2RVAL(gtk_notebook_get_tab_label(_SELF(self),
                                                 RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_query_tab_label_packing(self, child)
-    VALUE self, child;
+note_query_tab_label_packing(VALUE self, VALUE child)
 {
     gboolean expand, fill;
     GtkPackType pack_type;
@@ -219,8 +190,7 @@ note_query_tab_label_packing(self, child)
 }
 
 static VALUE
-note_set_menu_label(self, child, label)
-    VALUE self, child, label;
+note_set_menu_label(VALUE self, VALUE child, VALUE label)
 {
     gtk_notebook_set_menu_label(_SELF(self),
                                 RVAL2WIDGET(child),
@@ -229,8 +199,7 @@ note_set_menu_label(self, child, label)
 }
 
 static VALUE
-note_set_menu_label_text(self, child, text)
-    VALUE self, child, text;
+note_set_menu_label_text(VALUE self, VALUE child, VALUE text)
 {
     gtk_notebook_set_menu_label_text(_SELF(self),
                                      RVAL2WIDGET(child),
@@ -239,8 +208,7 @@ note_set_menu_label_text(self, child, text)
 }
 
 static VALUE
-note_set_tab_label(self, child, label)
-    VALUE self, child, label;
+note_set_tab_label(VALUE self, VALUE child, VALUE label)
 {
     gtk_notebook_set_tab_label(_SELF(self),
                                RVAL2WIDGET(child),
@@ -249,8 +217,7 @@ note_set_tab_label(self, child, label)
 }
 
 static VALUE
-note_set_tab_label_packing(self, child, expand, fill, pack_type)
-    VALUE self, child, expand, fill, pack_type;
+note_set_tab_label_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE pack_type)
 {
     gtk_notebook_set_tab_label_packing(_SELF(self),
                                        RVAL2WIDGET(child),
@@ -260,8 +227,7 @@ note_set_tab_label_packing(self, child, expand, fill, pack_type)
 }
 
 static VALUE
-note_set_tab_label_text(self, child, text)
-    VALUE self, child, text;
+note_set_tab_label_text(VALUE self, VALUE child, VALUE text)
 {
     gtk_notebook_set_tab_label_text(_SELF(self),
                                     RVAL2WIDGET(child),
@@ -270,16 +236,14 @@ note_set_tab_label_text(self, child, text)
 }
 
 static VALUE
-note_get_menu_label_text(self, child)
-    VALUE self, child;
+note_get_menu_label_text(VALUE self, VALUE child)
 {
     return CSTR2RVAL(gtk_notebook_get_menu_label_text(_SELF(self), 
                                                       RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_get_tab_label_text(self, child)
-    VALUE self, child;
+note_get_tab_label_text(VALUE self, VALUE child)
 {
     return CSTR2RVAL(gtk_notebook_get_tab_label_text(_SELF(self), 
                                                      RVAL2WIDGET(child)));
@@ -287,15 +251,13 @@ note_get_tab_label_text(self, child)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-note_get_tab_reorderable(self, child)
-    VALUE self, child;
+note_get_tab_reorderable(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_notebook_get_tab_reorderable(_SELF(self), 
                                                        GTK_WIDGET(RVAL2GOBJ(child))));
 }
 static VALUE
-note_set_tab_reorderable(self, child, reorderable)
-    VALUE self, child, reorderable;
+note_set_tab_reorderable(VALUE self, VALUE child, VALUE reorderable)
 {
     gtk_notebook_set_tab_reorderable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                      RVAL2CBOOL(reorderable));
@@ -303,15 +265,13 @@ note_set_tab_reorderable(self, child, reorderable)
 }
 
 static VALUE
-note_get_tab_detachable(self, child)
-    VALUE self, child;
+note_get_tab_detachable(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_notebook_get_tab_detachable(_SELF(self), 
                                                       GTK_WIDGET(RVAL2GOBJ(child))));
 }
 static VALUE
-note_set_tab_detachable(self, child, detachable)
-    VALUE self, child, detachable;
+note_set_tab_detachable(VALUE self, VALUE child, VALUE detachable)
 {
     gtk_notebook_set_tab_detachable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                      RVAL2CBOOL(detachable));
@@ -333,8 +293,7 @@ creation_func(source, page, x, y, func)
 }
 
 static VALUE
-note_set_window_creation_hook(self)
-    VALUE self;
+note_set_window_creation_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -375,9 +334,7 @@ gtk_notebookpage_get_type(void)
 }
 
 static VALUE
-signal_g2r_func(num, values)
-    guint num;
-    const GValue* values;
+signal_g2r_func(guint num, const GValue *values)
 {
     GtkNotebookPageData npp;
     npp.parent = GVAL2RVAL(&values[0]);
