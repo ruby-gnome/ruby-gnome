@@ -16,10 +16,7 @@
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
 
 static VALUE
-rcontext_itemize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rcontext_itemize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3, arg4, arg5, arg6;
     GList* list;
@@ -61,16 +58,14 @@ GList*      pango_reorder_items             (GList *logical_items);
 
 #ifdef PANGO_ENABLE_BACKEND
 static VALUE
-rcontext_initialize(self)
-    VALUE self;
+rcontext_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_context_new());
     return Qnil;
 }
 
 static VALUE
-rcontext_set_font_map(self, font_map)
-    VALUE self, font_map;
+rcontext_set_font_map(VALUE self, VALUE font_map)
 {
     pango_context_set_font_map(_SELF(self), PANGO_FONT_MAP(RVAL2GOBJ(font_map)));
     return self;
@@ -78,8 +73,7 @@ rcontext_set_font_map(self, font_map)
 
 #if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
-rcontext_get_font_map(self)
-    VALUE self;
+rcontext_get_font_map(VALUE self)
 {
     return GOBJ2RVAL(pango_context_get_font_map(_SELF(self)));
 }
@@ -87,32 +81,28 @@ rcontext_get_font_map(self)
 #endif /* PANGO_ENABLE_BACKEND */
 
 static VALUE
-rcontext_get_font_description(self)
-    VALUE self;
+rcontext_get_font_description(VALUE self)
 {
     PangoFontDescription* ret = pango_context_get_font_description(_SELF(self));
     return BOXED2RVAL(ret, PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 static VALUE
-rcontext_set_font_description(self, desc)
-    VALUE self, desc;
+rcontext_set_font_description(VALUE self, VALUE desc)
 {
     pango_context_set_font_description(_SELF(self), RVAL2DESC(desc));
     return self;
 }
 
 static VALUE
-rcontext_get_language(self)
-    VALUE self;
+rcontext_get_language(VALUE self)
 {
     PangoLanguage* ret = pango_context_get_language(_SELF(self));
     return BOXED2RVAL(ret, PANGO_TYPE_LANGUAGE);
 }
 
 static VALUE
-rcontext_set_language(self, lang)
-    VALUE self, lang;
+rcontext_set_language(VALUE self, VALUE lang)
 {
     pango_context_set_language(_SELF(self), 
                                RVAL2LANG(lang));
@@ -120,15 +110,13 @@ rcontext_set_language(self, lang)
 }
 
 static VALUE
-rcontext_get_base_dir(self)
-    VALUE self;
+rcontext_get_base_dir(VALUE self)
 {
     return GENUM2RVAL(pango_context_get_base_dir(_SELF(self)), PANGO_TYPE_DIRECTION);
 }
 
 static VALUE
-rcontext_set_base_dir(self, direction)
-    VALUE self, direction;
+rcontext_set_base_dir(VALUE self, VALUE direction)
 {
     pango_context_set_base_dir(_SELF(self), RVAL2GENUM(direction, PANGO_TYPE_DIRECTION));
     return self;
@@ -164,16 +152,14 @@ rcontext_set_gravity_hint(VALUE self, VALUE gravity_hint)
 
 #if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
-rcontext_get_matrix(self)
-    VALUE self;
+rcontext_get_matrix(VALUE self)
 {
     const PangoMatrix* matrix = pango_context_get_matrix(_SELF(self));
     return BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX);
 }
 
 static VALUE
-rcontext_set_matrix(self, matrix)
-    VALUE self, matrix;
+rcontext_set_matrix(VALUE self, VALUE matrix)
 {
     pango_context_set_matrix(_SELF(self), 
                              (PangoMatrix*)RVAL2BOXED(matrix, PANGO_TYPE_MATRIX));
@@ -182,25 +168,20 @@ rcontext_set_matrix(self, matrix)
 #endif
 
 static VALUE
-rcontext_load_font(self, desc)
-    VALUE self, desc;
+rcontext_load_font(VALUE self, VALUE desc)
 {
     return GOBJ2RVAL(pango_context_load_font(_SELF(self), RVAL2DESC(desc)));
 }
 
 static VALUE
-rcontext_load_fontset(self, desc, lang)
-    VALUE self, desc, lang;
+rcontext_load_fontset(VALUE self, VALUE desc, VALUE lang)
 {
     return GOBJ2RVAL(pango_context_load_fontset(_SELF(self),
                                                 RVAL2DESC(desc), RVAL2LANG(lang)));
 }
 
 static VALUE
-rcontext_get_metrics(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rcontext_get_metrics(int argc, VALUE *argv, VALUE self)
 {
     VALUE desc, lang;
 
@@ -237,8 +218,7 @@ rcontext_list_families(self)
 #if PANGO_CHECK_VERSION(1,10,0)
 #  if HAVE_RB_CAIRO_H
 static VALUE
-rcontext_set_font_options(self, options)
-    VALUE self, options;
+rcontext_set_font_options(VALUE self, VALUE options)
 {
     if (NIL_P(options))
         pango_cairo_context_set_font_options(_SELF(self), NULL);
@@ -249,8 +229,7 @@ rcontext_set_font_options(self, options)
 }
 
 static VALUE
-rcontext_get_font_options(self)
-    VALUE self;
+rcontext_get_font_options(VALUE self)
 {
     const cairo_font_options_t *options;
     options = pango_cairo_context_get_font_options(_SELF(self));
@@ -261,16 +240,14 @@ rcontext_get_font_options(self)
 }
 
 static VALUE
-rcontext_set_resolution(self, dpi)
-    VALUE self, dpi;
+rcontext_set_resolution(VALUE self, VALUE dpi)
 {
     pango_cairo_context_set_resolution(_SELF(self), NUM2DBL(dpi));
     return self;
 }
 
 static VALUE
-rcontext_get_resolution(self)
-    VALUE self;
+rcontext_get_resolution(VALUE self)
 {
     return rb_float_new(pango_cairo_context_get_resolution(_SELF(self)));
 }
@@ -279,8 +256,7 @@ rcontext_get_resolution(self)
 
 
 static VALUE
-rcontext_list_families_old(self)
-    VALUE self;
+rcontext_list_families_old(VALUE self)
 {
     rb_warn("Deprecated. Use Pango::Context#families instead.");
     return rcontext_list_families(self);
