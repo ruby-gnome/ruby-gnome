@@ -18,8 +18,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-mshell_append(self, child)
-    VALUE self, child;
+mshell_append(VALUE self, VALUE child)
 {
     gtk_menu_shell_append(_SELF(self),RVAL2WIDGET(child));
     G_CHILD_ADD(self, child);
@@ -27,8 +26,7 @@ mshell_append(self, child)
 }
 
 static VALUE
-mshell_prepend(self, child)
-    VALUE self, child;
+mshell_prepend(VALUE self, VALUE child)
 {
     gtk_menu_shell_prepend(_SELF(self), RVAL2WIDGET(child));
     G_CHILD_ADD(self, child);
@@ -36,8 +34,7 @@ mshell_prepend(self, child)
 }
 
 static VALUE
-mshell_insert(self, child, pos)
-    VALUE self, child, pos;
+mshell_insert(VALUE self, VALUE child, VALUE pos)
 {
     gtk_menu_shell_insert(_SELF(self), RVAL2WIDGET(child),
                           NUM2INT(pos));
@@ -46,16 +43,14 @@ mshell_insert(self, child, pos)
 }
 
 static VALUE
-mshell_deactivate(self)
-    VALUE self;
+mshell_deactivate(VALUE self)
 {
     gtk_menu_shell_deactivate(_SELF(self));
     return self;
 }
 
 static VALUE
-mshell_select_item(self, menu_item)
-    VALUE self, menu_item;
+mshell_select_item(VALUE self, VALUE menu_item)
 {
     gtk_menu_shell_select_item(_SELF(self), RVAL2WIDGET(menu_item));
     return self;
@@ -63,8 +58,7 @@ mshell_select_item(self, menu_item)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-mshell_select_first(self, search_sensitive)
-    VALUE self, search_sensitive;
+mshell_select_first(VALUE self, VALUE search_sensitive)
 {
     gtk_menu_shell_select_first(_SELF(self), RVAL2CBOOL(search_sensitive));
     return self;
@@ -72,16 +66,14 @@ mshell_select_first(self, search_sensitive)
 #endif
 
 static VALUE
-mshell_deselect(self)
-    VALUE self;
+mshell_deselect(VALUE self)
 {
     gtk_menu_shell_deselect(_SELF(self));
     return self;
 }
 
 static VALUE
-mshell_activate_item(self, menu_item, force_deactivate)
-    VALUE self, menu_item, force_deactivate;
+mshell_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
 {
     gtk_menu_shell_activate_item(_SELF(self), RVAL2WIDGET(menu_item), 
                                  RVAL2CBOOL(force_deactivate));
@@ -90,8 +82,7 @@ mshell_activate_item(self, menu_item, force_deactivate)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-mshell_cancel(self)
-    VALUE self;
+mshell_cancel(VALUE self)
 {
     gtk_menu_shell_cancel(_SELF(self));
     return self;
