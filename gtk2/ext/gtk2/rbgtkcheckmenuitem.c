@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-cmitem_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cmitem_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget = NULL;
@@ -39,8 +36,7 @@ cmitem_initialize(argc, argv, self)
 }
 
 static VALUE
-cmitem_toggled(self)
-    VALUE self;
+cmitem_toggled(VALUE self)
 {
     gtk_check_menu_item_toggled(GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self)));
     return self;
