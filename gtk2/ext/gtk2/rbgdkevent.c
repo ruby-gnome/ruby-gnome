@@ -25,8 +25,7 @@ static VALUE gdkevents[34];
 /***********************************************/
 
 VALUE
-make_gdkevent(ev)
-    GdkEvent *ev;
+make_gdkevent(GdkEvent *ev)
 {
     VALUE obj;
     if (ev == NULL) return Qnil;
@@ -37,8 +36,7 @@ make_gdkevent(ev)
 }
 
 GdkEvent*
-get_gdkevent(event)
-    VALUE event;
+get_gdkevent(VALUE event)
 {
     return NIL_P(event) ? NULL : RVAL2BOXED(event, GDK_TYPE_EVENT);
 }
@@ -46,14 +44,12 @@ get_gdkevent(event)
 /***********************************************/
 #define ATTR_STR(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return CSTR2RVAL(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = RVAL2CSTR(val);\
     return self;\
@@ -61,14 +57,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_INT(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return INT2NUM(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = NUM2INT(val);\
     return self;\
@@ -76,14 +70,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_UINT(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return UINT2NUM(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = NUM2UINT(val);\
     return self;\
@@ -91,14 +83,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_FLOAT(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return rb_float_new(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = NUM2DBL(val);\
     return self;\
@@ -106,14 +96,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_GOBJ(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return GOBJ2RVAL(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     GdkEvent *event;\
     event = get_gdkevent(self);\
@@ -127,14 +115,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_BOOL(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return CBOOL2RVAL(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = RVAL2CBOOL(val);\
     return self;\
@@ -142,15 +128,13 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_ATOM(type, name)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     GdkAtom atom = get_gdkevent(self)->type.name;\
     return BOXED2RVAL(atom, GDK_TYPE_ATOM);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = RVAL2ATOM(val);\
     return self;\
@@ -158,14 +142,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_FLAGS(type, name, gtype)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return GFLAGS2RVAL(get_gdkevent(self)->type.name, gtype);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = RVAL2GFLAGS(val, gtype);\
     return self;\
@@ -173,14 +155,12 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_ENUM(type, name, gtype)\
 static VALUE \
-gdkevent ## type ## _ ## name (self)\
-    VALUE self;\
+gdkevent ## type ## _ ## name (VALUE self)\
 {\
     return GENUM2RVAL(get_gdkevent(self)->type.name, gtype);\
 }\
 static VALUE \
-gdkevent ## type ## _set_ ## name (self, val)\
-    VALUE self, val;\
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
     get_gdkevent(self)->type.name = RVAL2GENUM(val, gtype);\
     return self;\
@@ -188,8 +168,7 @@ gdkevent ## type ## _set_ ## name (self, val)\
 
 #define ATTR_AXES(type, gdkklass) \
 static VALUE \
-gdkevent ##type ## _axes(self)\
-    VALUE self;\
+gdkevent ##type ## _axes(VALUE self)\
 {\
     gdkklass type = get_gdkevent(self)->type;\
     return type.axes ? rb_ary_new3(2, \
@@ -197,8 +176,7 @@ gdkevent ##type ## _axes(self)\
                        rb_float_new(type.axes[1])) : Qnil;\
 } \
 static VALUE \
-gdkevent ## type ## _set_axes(self, x, y)\
-    VALUE self, x, y;\
+gdkevent ## type ## _set_axes(VALUE self, VALUE x, VALUE y)\
 {\
     gdkklass val = get_gdkevent(self)->type;\
     val.axes[0] = NUM2DBL(x);\
@@ -215,10 +193,7 @@ gdkevent ## type ## _set_axes(self, x, y)\
 #if GTK_CHECK_VERSION(2,2,0)
 #define GDKEVENT_INIT(type, default_gtype) \
 static VALUE \
-gdkevent ## type ## _initialize(argc, argv, self)\
-    int argc;\
-    VALUE *argv;\
-    VALUE self;\
+gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
 {\
     VALUE type;\
     GdkEventType gtype;\
@@ -236,10 +211,7 @@ gdkevent ## type ## _initialize(argc, argv, self)\
 #else
 #define GDKEVENT_INIT(type, default_gtype) \
 static VALUE \
-gdkevent ## type ## _initialize(argc, argv, self)\
-    int argc;\
-    VALUE *argv;\
-    VALUE self;\
+gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
 {\
     rb_raise(rb_eRuntimeError, "Gdk::Event.new is not supported in this environment.");\
     return Qnil;\
@@ -253,29 +225,25 @@ gdkevent ## type ## _initialize(argc, argv, self)\
 
 /* GdkEvent Singleton Methods */
 static VALUE
-gdkevent_s_events_pending(self)
-    VALUE self;
+gdkevent_s_events_pending(VALUE self)
 {
     return CBOOL2RVAL(gdk_events_pending());
 }
 
 static VALUE
-gdkevent_s_peek(self)
-    VALUE self;
+gdkevent_s_peek(VALUE self)
 {
     return make_gdkevent(gdk_event_peek());
 }
 
 static VALUE
-gdkevent_s_get(self)
-    VALUE self;
+gdkevent_s_get(VALUE self)
 {
     return make_gdkevent(gdk_event_get());
 }
 
 static VALUE
-gdkevent_s_get_graphics_expose(self, window)
-    VALUE self, window;
+gdkevent_s_get_graphics_expose(VALUE self, VALUE window)
 {
     return make_gdkevent(gdk_event_get_graphics_expose(GDK_WINDOW(RVAL2GOBJ(window))));
 }
@@ -283,8 +251,7 @@ gdkevent_s_get_graphics_expose(self, window)
 /* GdkEvent */
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkevent_initialize(self, type)
-    VALUE self, type;
+gdkevent_initialize(VALUE self, VALUE type)
 {
     GdkEventType gtype = RVAL2GENUM(type, GDK_TYPE_EVENT_TYPE);
     if (RBASIC(self)->klass != gdkevents[gtype])
@@ -296,15 +263,13 @@ gdkevent_initialize(self, type)
 #endif
 
 static VALUE
-gdkevent_type(self)
-    VALUE self;
+gdkevent_type(VALUE self)
 {
     return GENUM2RVAL(get_gdkevent(self)->type, GDK_TYPE_EVENT_TYPE);
 }
 
 static VALUE
-gdkevent_put(self)
-    VALUE self;
+gdkevent_put(VALUE self)
 {
     gdk_event_put(get_gdkevent(self));
     return self;
@@ -317,8 +282,7 @@ gboolean    gdk_event_get_state             (GdkEvent *event,
 */
 
 static VALUE
-gdkevent_get_axis(self, axis_use)
-    VALUE self, axis_use;
+gdkevent_get_axis(VALUE self, VALUE axis_use)
 {
     gdouble value;
     gboolean ret = gdk_event_get_axis(get_gdkevent(self), 
@@ -327,8 +291,7 @@ gdkevent_get_axis(self, axis_use)
 }
 
 static VALUE
-gdkevent_get_coords(self)
-    VALUE self;
+gdkevent_get_coords(VALUE self)
 {
     gdouble x_win, y_win;
     gboolean ret = gdk_event_get_coords(get_gdkevent(self), &x_win, &y_win);
@@ -337,8 +300,7 @@ gdkevent_get_coords(self)
 }
 
 static VALUE
-gdkevent_get_root_coords(self)
-    VALUE self;
+gdkevent_get_root_coords(VALUE self)
 {
     gdouble x_root, y_root;
     gboolean ret = gdk_event_get_root_coords(get_gdkevent(self), &x_root, &y_root);
@@ -347,16 +309,13 @@ gdkevent_get_root_coords(self)
 }
 
 static void
-handler_func(event, func)
-    GdkEvent* event;
-    gpointer func;
+handler_func(GdkEvent *event, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 1, make_gdkevent(event));
 }
 
 static VALUE
-gdkevent_s_handler_set(self)
-    VALUE self;
+gdkevent_s_handler_set(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -366,31 +325,27 @@ gdkevent_s_handler_set(self)
 }
 
 static VALUE
-gdkevent_s_get_show_events(self)
-    VALUE self;
+gdkevent_s_get_show_events(VALUE self)
 {
     return CBOOL2RVAL(gdk_get_show_events());
 }
 
 static VALUE
-gdkevent_s_set_show_events(self, show_events)
-    VALUE self, show_events;
+gdkevent_s_set_show_events(VALUE self, VALUE show_events)
 {
     gdk_set_show_events(RVAL2CBOOL(show_events));
     return self;
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkevent_set_screen(self, screen)
-    VALUE self, screen;
+gdkevent_set_screen(VALUE self, VALUE screen)
 {
     gdk_event_set_screen(get_gdkevent(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
 
 static VALUE
-gdkevent_screen(self)
-    VALUE self;
+gdkevent_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_event_get_screen(get_gdkevent(self)));
 }
@@ -400,10 +355,7 @@ gdkevent_screen(self)
   type: String, Integer, Gdk::Color.
  */
 static VALUE
-gdkevent_s_setting_get(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gdkevent_s_setting_get(int argc, VALUE *argv, VALUE self)
 {
     VALUE name, type;
     GType gtype;
@@ -481,15 +433,13 @@ gdkeventmotion_request_motions(VALUE self)
 
 /* GdkEventExpose */
 static VALUE
-gdkeventexpose_area(self)
-    VALUE self;
+gdkeventexpose_area(VALUE self)
 {
     return BOXED2RVAL(&get_gdkevent(self)->expose.area, GDK_TYPE_RECTANGLE);
 }
  
 static VALUE
-gdkeventexpose_set_area(self, rect)
-    VALUE self, rect;
+gdkeventexpose_set_area(VALUE self, VALUE rect)
 {
     GdkRectangle* grect = (GdkRectangle*)RVAL2BOXED(rect, GDK_TYPE_RECTANGLE);
     GdkEventExpose event = get_gdkevent(self)->expose;
@@ -501,14 +451,12 @@ gdkeventexpose_set_area(self, rect)
 }
 
 static VALUE
-gdkeventexpose_region(self)
-    VALUE self;
+gdkeventexpose_region(VALUE self)
 {
     return BOXED2RVAL(get_gdkevent(self)->expose.region, GDK_TYPE_REGION);
 }
 static VALUE
-gdkeventexpose_set_region(self, region)
-    VALUE self, region;
+gdkeventexpose_set_region(VALUE self, VALUE region)
 {
     get_gdkevent(self)->expose.region = RVAL2BOXED(region, GDK_TYPE_REGION);
     return self;
@@ -572,15 +520,13 @@ ATTR_ATOM(client, message_type);
 GDKEVENT_INIT(client, GDK_CLIENT_EVENT);
 
 static VALUE
-gdkeventclient_data_format(self)
-    VALUE self;
+gdkeventclient_data_format(VALUE self)
 {
     return INT2NUM(get_gdkevent(self)->client.data_format);
 }
 
 static VALUE
-gdkeventclient_data(self)
-    VALUE self;
+gdkeventclient_data(VALUE self)
 {
     int i;
     VALUE ary = Qnil;
@@ -605,10 +551,7 @@ gdkeventclient_data(self)
 }
 
 static VALUE
-gdkeventclient_send_client_message(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkeventclient_send_client_message(int argc, VALUE *argv, VALUE self)
 {
     VALUE xid, display;
     rb_scan_args(argc, argv, "11", &xid, &display);
@@ -629,26 +572,21 @@ gdkeventclient_send_client_message(argc, argv, self)
 }
 
 static VALUE
-gdkeventclient_send_clientmessage_toall(self)
-    VALUE self;
+gdkeventclient_send_clientmessage_toall(VALUE self)
 {
     gdk_event_send_clientmessage_toall(get_gdkevent(self));
     return self;
 }
 
 static GdkFilterReturn
-filter_func(xevent, event, func)
-    GdkXEvent* xevent;
-    GdkEvent* event;
-    gpointer func;
+filter_func(GdkXEvent *xevent, GdkEvent *event, gpointer func)
 {
     VALUE ret = rb_funcall((VALUE)func, id_call, 2, LONG2NUM((glong)xevent), make_gdkevent(event));
     return RVAL2GENUM(ret, GDK_TYPE_FILTER_RETURN);
 }
 
 static VALUE
-gdkevent_s_add_client_message_filter(self, message_type)
-    VALUE self, message_type;
+gdkevent_s_add_client_message_filter(VALUE self, VALUE message_type)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
