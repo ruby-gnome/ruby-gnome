@@ -18,18 +18,14 @@
 #include "global.h"
 
 static void
-exec_input(data, source, condition)
-    gpointer data;
-    gint source;
-    GdkInputCondition condition;
+exec_input(gpointer data, gint source, GdkInputCondition condition)
 {
     rb_funcall((VALUE)data, id_call, 1, 
                GFLAGS2RVAL(condition, GDK_TYPE_INPUT_CONDITION));
 }
 
 static VALUE
-input_add(self, filedescriptor, gdk_input_condition)
-    VALUE self, filedescriptor, gdk_input_condition;
+input_add(VALUE self, VALUE filedescriptor, VALUE gdk_input_condition)
 {
     VALUE id;
     VALUE func;
@@ -45,8 +41,7 @@ input_add(self, filedescriptor, gdk_input_condition)
 }
 
 static VALUE
-input_remove(self, id)
-    VALUE self, id;
+input_remove(VALUE self, VALUE id)
 {
     gdk_input_remove(NUM2INT(id));
     G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
