@@ -21,10 +21,7 @@ static VALUE s_string, s_bool, s_double, s_length, s_int;
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-ps_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+ps_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GtkPrintSettings* settings = NULL;
