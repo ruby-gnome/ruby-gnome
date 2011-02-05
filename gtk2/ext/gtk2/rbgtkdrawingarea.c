@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-darea_initialize(self)
-    VALUE self;
+darea_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_drawing_area_new());
     return Qnil;
