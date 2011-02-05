@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-hbbox_initialize(self)
-    VALUE self;
+hbbox_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hbutton_box_new());
     return Qnil;
