@@ -17,8 +17,7 @@
 /**********************************/
 #if !PANGO_CHECK_VERSION(1,9,0)
 static PangoLayoutLine*
-layout_line_copy(ref)
-    PangoLayoutLine* ref;
+layout_line_copy(PangoLayoutLine *ref)
 {
   g_return_val_if_fail (ref != NULL, NULL);
   pango_layout_line_ref(ref);
@@ -40,8 +39,7 @@ pango_layout_line_get_type(void)
 /**********************************/
 
 static VALUE
-layout_line_get_extents(self)
-    VALUE self;
+layout_line_get_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -52,8 +50,7 @@ layout_line_get_extents(self)
 }
 
 static VALUE
-layout_line_get_pixel_extents(self)
-    VALUE self;
+layout_line_get_pixel_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -64,8 +61,7 @@ layout_line_get_pixel_extents(self)
 }
 
 static VALUE
-layout_line_index_to_x(self, index, trailing)
-    VALUE self, index, trailing;
+layout_line_index_to_x(VALUE self, VALUE index, VALUE trailing)
 {
     int x_pos;
     pango_layout_line_index_to_x(_SELF(self), NUM2INT(index), 
@@ -74,8 +70,7 @@ layout_line_index_to_x(self, index, trailing)
 }
 
 static VALUE
-layout_line_x_to_index(self, x_pos)
-    VALUE self, x_pos;
+layout_line_x_to_index(VALUE self, VALUE x_pos)
 {
     int index, trailing;
     
@@ -85,8 +80,7 @@ layout_line_x_to_index(self, x_pos)
 }
 
 static VALUE
-layout_line_get_x_ranges(self, start_index, end_index)
-    VALUE self, start_index, end_index;
+layout_line_get_x_ranges(VALUE self, VALUE start_index, VALUE end_index)
 {
     int* ranges;
     int i, n_ranges;
@@ -106,45 +100,39 @@ layout_line_get_x_ranges(self, start_index, end_index)
 
 /* Structure members */
 static VALUE
-layout_line_get_layout(self)
-    VALUE self;
+layout_line_get_layout(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->layout);
 }
 
 static VALUE
-layout_line_set_layout(self, val)
-    VALUE self, val;
+layout_line_set_layout(VALUE self, VALUE val)
 {
     _SELF(self)->layout = PANGO_LAYOUT(RVAL2GOBJ(val));
     return self;
 }
 
 static VALUE
-layout_line_get_start_index(self)
-    VALUE self;
+layout_line_get_start_index(VALUE self)
 {
     return INT2NUM(_SELF(self)->start_index);
 }
 
 static VALUE
-layout_line_set_start_index(self, val)
-    VALUE self, val;
+layout_line_set_start_index(VALUE self, VALUE val)
 {
     _SELF(self)->start_index = NUM2INT(val);
     return self;
 }
 
 static VALUE
-layout_line_get_length(self)
-    VALUE self;
+layout_line_get_length(VALUE self)
 {
     return INT2NUM(_SELF(self)->length);
 }
 
 static VALUE
-layout_line_set_length(self, val)
-    VALUE self, val;
+layout_line_set_length(VALUE self, VALUE val)
 {
     _SELF(self)->length = NUM2INT(val);
     return self;
@@ -152,8 +140,7 @@ layout_line_set_length(self, val)
 
 #if PANGO_CHECK_VERSION(1,2,0)
 static VALUE
-layout_line_get_runs(self)
-    VALUE self;
+layout_line_get_runs(VALUE self)
 {
     GSList* list = _SELF(self)->runs;
     VALUE ary = rb_ary_new();
@@ -172,8 +159,7 @@ layout_line_get_runs(self)
 #endif
 
 static VALUE
-layout_line_set_runs(self, ary)
-    VALUE self, ary;
+layout_line_set_runs(VALUE self, VALUE ary)
 {
     int i, len;
     GSList* list = NULL;
@@ -195,30 +181,26 @@ layout_line_set_runs(self, ary)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-layout_line_is_paragraph_start(self)
-    VALUE self;
+layout_line_is_paragraph_start(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->is_paragraph_start);
 }
 
 static VALUE
-layout_line_set_paragraph_start(self, val)
-    VALUE self, val;
+layout_line_set_paragraph_start(VALUE self, VALUE val)
 {
     _SELF(self)->is_paragraph_start = RVAL2CBOOL(val);
     return self;
 }
 
 static VALUE
-layout_line_get_resolved_dir(self)
-    VALUE self;
+layout_line_get_resolved_dir(VALUE self)
 {
     return UINT2NUM(_SELF(self)->resolved_dir);
 }
 
 static VALUE
-layout_line_set_resolved_dir(self, val)
-    VALUE self, val;
+layout_line_set_resolved_dir(VALUE self, VALUE val)
 {
     _SELF(self)->resolved_dir = NUM2UINT(val);
     return self;
