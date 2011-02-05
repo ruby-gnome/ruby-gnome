@@ -16,8 +16,7 @@
 #define _SELF(s) (GTK_CELL_RENDERER_ACCEL(RVAL2GOBJ(s)))
 
 static VALUE
-craccel_initialize(self)
-    VALUE self;
+craccel_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_accel_new());
     return Qnil;
