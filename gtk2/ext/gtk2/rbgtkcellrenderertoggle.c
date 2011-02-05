@@ -14,8 +14,7 @@
 #define _SELF(s) (GTK_CELL_RENDERER_TOGGLE(RVAL2GOBJ(s)))
 
 static VALUE
-crtoggle_initialize(self)
-    VALUE self;
+crtoggle_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_toggle_new());
     return Qnil;
