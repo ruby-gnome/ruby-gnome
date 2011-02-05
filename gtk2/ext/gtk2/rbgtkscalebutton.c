@@ -22,10 +22,7 @@ static VALUE
 scalebutton_set_icons(VALUE self, VALUE icons);
 
 static VALUE
-scalebutton_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+scalebutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3, arg4, arg5;
     GtkWidget *widget;
@@ -54,16 +51,14 @@ scalebutton_initialize(argc, argv, self)
 }
 
 static VALUE
-scalebutton_set_adjustment(self, adjustment)
-    VALUE self, adjustment;
+scalebutton_set_adjustment(VALUE self, VALUE adjustment)
 {
     gtk_scale_button_set_adjustment(_SELF(self), RVAL2GOBJ(adjustment));
     return self;
 }
 
 static VALUE
-scalebutton_set_icons(self, icons)
-    VALUE self, icons;
+scalebutton_set_icons(VALUE self, VALUE icons)
 {
     int i;
     gchar **icons_c = g_new0(gchar*, RARRAY_LEN(icons) + 1);
@@ -76,23 +71,20 @@ scalebutton_set_icons(self, icons)
 }
 
 static VALUE
-scalebutton_set_value(self, value)
-    VALUE self, value;
+scalebutton_set_value(VALUE self, VALUE value)
 {
     gtk_scale_button_set_value(_SELF(self), NUM2DBL(value));
     return self;
 }
 
 static VALUE
-scalebutton_get_adjustment(self)
-    VALUE self;
+scalebutton_get_adjustment(VALUE self)
 {
     return GOBJ2RVAL(gtk_scale_button_get_adjustment(_SELF(self)));
 }
 
 static VALUE
-scalebutton_get_value(self)
-    VALUE self;
+scalebutton_get_value(VALUE self)
 {
     return rb_float_new(gtk_scale_button_get_value(_SELF(self)));
 }
