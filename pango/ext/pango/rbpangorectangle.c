@@ -15,8 +15,7 @@
 
 /**********************************/
 static PangoRectangle*
-pango_rectangle_copy(ref)
-    const PangoRectangle* ref;
+pango_rectangle_copy(const PangoRectangle *ref)
 {
   PangoRectangle* new_ref;
   g_return_val_if_fail (ref != NULL, NULL);
@@ -39,8 +38,7 @@ pango_rectangle_get_type(void)
 /**********************************/
 
 static VALUE
-pango_rectangle_initialize(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+pango_rectangle_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     PangoRectangle new;
 
@@ -55,66 +53,57 @@ pango_rectangle_initialize(self, x, y, width, height)
 
 
 static VALUE
-pango_rectangle_x(self)
-    VALUE self;
+pango_rectangle_x(VALUE self)
 {
     return INT2NUM(_SELF(self)->x);
 }
 
 static VALUE
-pango_rectangle_y(self)
-    VALUE self;
+pango_rectangle_y(VALUE self)
 {
     return INT2NUM(_SELF(self)->y);
 }
 
 static VALUE
-pango_rectangle_w(self)
-    VALUE self;
+pango_rectangle_w(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-pango_rectangle_h(self)
-    VALUE self;
+pango_rectangle_h(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-pango_rectangle_set_x(self, x)
-    VALUE self, x;
+pango_rectangle_set_x(VALUE self, VALUE x)
 {
     _SELF(self)->x = NUM2INT(x);
     return self;
 }
 
 static VALUE
-pango_rectangle_set_y(self, y)
-    VALUE self, y;
+pango_rectangle_set_y(VALUE self, VALUE y)
 {
     _SELF(self)->y = NUM2INT(y);
     return self;
 }
 static VALUE
-pango_rectangle_set_w(self, width)
-    VALUE self, width;
+pango_rectangle_set_w(VALUE self, VALUE width)
 {
     _SELF(self)->width = NUM2INT(width);
     return self;
 }
 
 static VALUE
-pango_rectangle_set_h(self, height)
-    VALUE self, height;
+pango_rectangle_set_h(VALUE self, VALUE height)
 {
     _SELF(self)->height = NUM2INT(height);
     return self;
 }
 static VALUE
-pango_rectangle_to_a(self)
-    VALUE self;
+pango_rectangle_to_a(VALUE self)
 {
   PangoRectangle* a = _SELF(self);
   return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
@@ -122,32 +111,28 @@ pango_rectangle_to_a(self)
 }
 
 static VALUE
-pango_rectangle_ascent(self)
-    VALUE self;
+pango_rectangle_ascent(VALUE self)
 {
     PangoRectangle* r =_SELF(self);
     return INT2NUM(PANGO_ASCENT(*r));
 }
 
 static VALUE
-pango_rectangle_descent(self)
-    VALUE self;
+pango_rectangle_descent(VALUE self)
 {
     PangoRectangle* r =_SELF(self);
     return INT2NUM(PANGO_DESCENT(*r));
 }
 
 static VALUE
-pango_rectangle_lbearing(self)
-    VALUE self;
+pango_rectangle_lbearing(VALUE self)
 {
     PangoRectangle* r =_SELF(self);
     return INT2NUM(PANGO_LBEARING(*r));
 }
 
 static VALUE
-pango_rectangle_rbearing(self)
-    VALUE self;
+pango_rectangle_rbearing(VALUE self)
 {
     PangoRectangle* r =_SELF(self);
     return INT2NUM(PANGO_RBEARING(*r));
