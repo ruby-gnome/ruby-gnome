@@ -14,30 +14,26 @@
 #define _SELF(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
 
 static VALUE
-treemodel_get_flags(self)
-    VALUE self;
+treemodel_get_flags(VALUE self)
 {
     return GFLAGS2RVAL(gtk_tree_model_get_flags(_SELF(self)), GTK_TYPE_TREE_MODEL_FLAGS);
 }
 
 static VALUE
-treemodel_get_n_columns(self)
-    VALUE self;
+treemodel_get_n_columns(VALUE self)
 {
     return INT2NUM(gtk_tree_model_get_n_columns(_SELF(self)));
 }
 
 static VALUE
-treemodel_get_column_type(self, index)
-    VALUE self, index;
+treemodel_get_column_type(VALUE self, VALUE index)
 {
     return GTYPE2CLASS(gtk_tree_model_get_column_type(_SELF(self), 
                                                       NUM2INT(index)));
 }
 
 static VALUE
-treemodel_get_iter_first(self)
-    VALUE self;
+treemodel_get_iter_first(VALUE self)
 {
     VALUE val = Qnil;
     GtkTreeIter iter;
@@ -54,8 +50,7 @@ treemodel_get_iter_first(self)
 }
 
 static VALUE
-treemodel_get_iter(self, path)
-    VALUE self, path;
+treemodel_get_iter(VALUE self, VALUE path)
 {
     VALUE val = Qnil;
     GtkTreeIter iter;
@@ -80,8 +75,7 @@ treemodel_get_iter(self, path)
 }
 
 static VALUE
-treemodel_get_value(self, iter, column)
-    VALUE self, iter, column;
+treemodel_get_value(VALUE self, VALUE iter, VALUE column)
 {
     GValue value = {0, };
     VALUE ret = Qnil;
@@ -107,11 +101,7 @@ void        gtk_tree_model_get_valist (GtkTreeModel *tree_model,
 */
 
 static gboolean
-treemodel_foreach_func(model, path, iter, func)
-    GtkTreeModel* model;
-    GtkTreePath* path;
-    GtkTreeIter* iter;
-    gpointer func;
+treemodel_foreach_func(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer func)
 {
     iter->user_data3 = model;
     rb_yield(rb_ary_new3(3, GOBJ2RVAL(model), GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter)));
@@ -119,8 +109,7 @@ treemodel_foreach_func(model, path, iter, func)
 }
 
 static VALUE
-treemodel_foreach(self)
-    VALUE self;
+treemodel_foreach(VALUE self)
 {
     gtk_tree_model_foreach(_SELF(self), 
                            (GtkTreeModelForeachFunc)treemodel_foreach_func, 
@@ -129,40 +118,35 @@ treemodel_foreach(self)
 }
 
 static VALUE
-treemodel_row_changed(self, path, iter)
-    VALUE self, path, iter;
+treemodel_row_changed(VALUE self, VALUE path, VALUE iter)
 {
     gtk_tree_model_row_changed(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter));
     return self;
 }
 
 static VALUE
-treemodel_row_inserted(self, path, iter)
-    VALUE self, path, iter;
+treemodel_row_inserted(VALUE self, VALUE path, VALUE iter)
 {
     gtk_tree_model_row_inserted(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter));
     return self;
 }
 
 static VALUE
-treemodel_row_has_child_toggled(self, path, iter)
-    VALUE self, path, iter;
+treemodel_row_has_child_toggled(VALUE self, VALUE path, VALUE iter)
 {
     gtk_tree_model_row_has_child_toggled(_SELF(self), RVAL2GTKTREEPATH(path), RVAL2GTKTREEITER(iter));
     return self;
 }
 
 static VALUE
-treemodel_row_deleted(self, path)
-    VALUE self, path;
+treemodel_row_deleted(VALUE self, VALUE path)
 {
     gtk_tree_model_row_deleted(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treemodel_rows_reordered(self, path, iter, new_orders)
-    VALUE self, path, iter, new_orders;
+treemodel_rows_reordered(VALUE self, VALUE path, VALUE iter, VALUE new_orders)
 {
     gint i, len;
     gint* orders;
@@ -181,8 +165,7 @@ treemodel_rows_reordered(self, path, iter, new_orders)
 }
 
 static VALUE
-treemodel_iter_is_valid(self, iter)
-    VALUE self, iter;
+treemodel_iter_is_valid(VALUE self, VALUE iter)
 {
     return Qtrue;
 }
@@ -201,9 +184,7 @@ signal_func(num, values)
 }
 
 static VALUE
-signal_rows_reordered_func(num, values)
-    guint num;
-    const GValue* values;
+signal_rows_reordered_func(guint num, const GValue *values)
 {
     GtkTreeModel* model = g_value_get_object(&values[0]);
     GtkTreePath* path = g_value_get_boxed(&values[1]);
