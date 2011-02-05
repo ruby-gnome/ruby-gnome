@@ -15,10 +15,7 @@
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
-gdkselection_owner_set(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkselection_owner_set(int argc, VALUE *argv, VALUE self)
 {
     VALUE owner, selection, time, send_event;
     int ret;
@@ -45,10 +42,7 @@ gdkselection_owner_set(argc, argv, self)
 }
 
 static VALUE
-gdkselection_owner_get(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkselection_owner_get(int argc, VALUE *argv, VALUE self)
 {
     VALUE selection;
 
@@ -68,8 +62,7 @@ gdkselection_owner_get(argc, argv, self)
 }
 
 static VALUE
-gdkselection_convert(self, requestor, selection, target, time)
-    VALUE self, requestor, selection, target, time;
+gdkselection_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
 {
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
                           RVAL2ATOM(selection), 
@@ -78,8 +71,7 @@ gdkselection_convert(self, requestor, selection, target, time)
 }
 
 static VALUE
-gdkselection_property_get(self, requestor)
-    VALUE self, requestor;
+gdkselection_property_get(VALUE self, VALUE requestor)
 {
     guchar *data;
     GdkAtom prop_type;
@@ -96,10 +88,7 @@ gdkselection_property_get(self, requestor)
 }
 
 static VALUE
-gdkselection_send_notify(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkselection_send_notify(int argc, VALUE *argv, VALUE self)
 {
     VALUE requestor, selection, target, property, time;
 
