@@ -17,8 +17,7 @@
 #define _SELF(s) GDK_WINDOW(RVAL2GOBJ(s))
 
 static VALUE
-gdkwin_initialize(self, parent, attributes, attributes_mask)
-    VALUE self, parent, attributes, attributes_mask;
+gdkwin_initialize(VALUE self, VALUE parent, VALUE attributes, VALUE attributes_mask)
 {
     GdkWindow* win;
     win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent), 
@@ -32,23 +31,20 @@ gdkwin_initialize(self, parent, attributes, attributes_mask)
 }
 
 static VALUE
-gdkwin_destroy(self)
-    VALUE self;
+gdkwin_destroy(VALUE self)
 {
     gdk_window_destroy(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-gdkwin_get_window_type(self)
-    VALUE self;
+gdkwin_get_window_type(VALUE self)
 {
     return GENUM2RVAL(gdk_window_get_window_type(_SELF(self)), GDK_TYPE_WINDOW_TYPE);
 }
 
 static VALUE
-gdkwin_s_at_pointer(self)
-    VALUE self;
+gdkwin_s_at_pointer(VALUE self)
 {
     gint x, y;
     GdkWindow* win = gdk_window_at_pointer(&x, &y);
@@ -56,117 +52,102 @@ gdkwin_s_at_pointer(self)
 }
 
 static VALUE
-gdkwin_show(self)
-    VALUE self;
+gdkwin_show(VALUE self)
 {
     gdk_window_show(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_show_unraised(self)
-    VALUE self;
+gdkwin_show_unraised(VALUE self)
 {
     gdk_window_show_unraised(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_hide(self)
-    VALUE self;
+gdkwin_hide(VALUE self)
 {
     gdk_window_hide(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-gdkwin_is_visible(self)
-    VALUE self;
+gdkwin_is_visible(VALUE self)
 {
     return CBOOL2RVAL(gdk_window_is_visible(_SELF(self)));
 }
 
 static VALUE
-gdkwin_is_viewable(self)
-    VALUE self;
+gdkwin_is_viewable(VALUE self)
 {
     return CBOOL2RVAL(gdk_window_is_viewable(_SELF(self)));
 }
 
 static VALUE
-gdkwin_get_state(self)
-    VALUE self;
+gdkwin_get_state(VALUE self)
 {
     return GENUM2RVAL(gdk_window_get_state(_SELF(self)), GDK_TYPE_WINDOW_STATE);
 }
 
 static VALUE
-gdkwin_withdraw(self)
-    VALUE self;
+gdkwin_withdraw(VALUE self)
 {
     gdk_window_withdraw(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-gdkwin_iconify(self)
-    VALUE self;
+gdkwin_iconify(VALUE self)
 {
     gdk_window_iconify(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_deiconify(self)
-    VALUE self;
+gdkwin_deiconify(VALUE self)
 {
     gdk_window_deiconify(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_stick(self)
-    VALUE self;
+gdkwin_stick(VALUE self)
 {
     gdk_window_stick(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_unstick(self)
-    VALUE self;
+gdkwin_unstick(VALUE self)
 {
     gdk_window_unstick(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_maximize(self)
-    VALUE self;
+gdkwin_maximize(VALUE self)
 {
     gdk_window_maximize(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_unmaximize(self)
-    VALUE self;
+gdkwin_unmaximize(VALUE self)
 {
     gdk_window_unmaximize(_SELF(self));
     return self;
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkwin_fullscreen(self)
-    VALUE self;
+gdkwin_fullscreen(VALUE self)
 {
     gdk_window_fullscreen(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_unfullscreen(self)
-    VALUE self;
+gdkwin_unfullscreen(VALUE self)
 {
     gdk_window_unfullscreen(_SELF(self));
     return self;
@@ -174,16 +155,14 @@ gdkwin_unfullscreen(self)
 #endif
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-gdkwin_set_keep_above(self, setting)
-    VALUE self, setting;
+gdkwin_set_keep_above(VALUE self, VALUE setting)
 {
     gdk_window_set_keep_above(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-gdkwin_set_keep_below(self, setting)
-    VALUE self, setting;
+gdkwin_set_keep_below(VALUE self, VALUE setting)
 {
     gdk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
@@ -191,32 +170,28 @@ gdkwin_set_keep_below(self, setting)
 #endif
 
 static VALUE
-gdkwin_move(self, x, y)
-    VALUE self, x, y;
+gdkwin_move(VALUE self, VALUE x, VALUE y)
 {
     gdk_window_move(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-gdkwin_resize(self, w, h)
-    VALUE self, w, h;
+gdkwin_resize(VALUE self, VALUE w, VALUE h)
 {
     gdk_window_resize(_SELF(self), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
 static VALUE
-gdkwin_move_resize(self, x, y, w, h)
-    VALUE self, x, y, w, h;
+gdkwin_move_resize(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
 {
     gdk_window_move_resize(_SELF(self), NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
     return self;
 }
 
 static VALUE
-gdkwin_scroll(self, dx, dy)
-    VALUE self, dx, dy;
+gdkwin_scroll(VALUE self, VALUE dx, VALUE dy)
 {
     gdk_window_scroll(_SELF(self), NUM2INT(dx), NUM2INT(dy));
     return self;
@@ -224,8 +199,7 @@ gdkwin_scroll(self, dx, dy)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gdkwin_move_region(self, region, dx, dy)
-    VALUE self, region, dx, dy;
+gdkwin_move_region(VALUE self, VALUE region, VALUE dx, VALUE dy)
 {
     gdk_window_move_region(_SELF(self),
                            (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION),
@@ -236,26 +210,21 @@ gdkwin_move_region(self, region, dx, dy)
 #endif
 
 static VALUE
-gdkwin_reparent(self, new_parent, x, y)
-    VALUE self, new_parent, x, y;
+gdkwin_reparent(VALUE self, VALUE new_parent, VALUE x, VALUE y)
 {
     gdk_window_reparent(_SELF(self), _SELF(new_parent), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-gdkwin_clear(self)
-    VALUE self;
+gdkwin_clear(VALUE self)
 {
     gdk_window_clear(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_clear_area(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkwin_clear_area(int argc, VALUE *argv, VALUE self)
 {
     VALUE gen_expose, x, y, w, h;
     rb_scan_args(argc, argv, "41", &x, &y, &w, &h, &gen_expose);
@@ -275,40 +244,35 @@ gdkwin_clear_area(argc, argv, self)
 */
 
 static VALUE
-gdkwin_raise(self)
-    VALUE self;
+gdkwin_raise(VALUE self)
 {
     gdk_window_raise(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_lower(self)
-    VALUE self;
+gdkwin_lower(VALUE self)
 {
     gdk_window_lower(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_focus(self, timestamp)
-    VALUE self, timestamp;
+gdkwin_focus(VALUE self, VALUE timestamp)
 {
     gdk_window_focus(_SELF(self), NUM2UINT(timestamp));
     return self;
 }
 
 static VALUE
-gdkwin_register_dnd(self)
-    VALUE self;
+gdkwin_register_dnd(VALUE self)
 {
     gdk_window_register_dnd(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
-    VALUE self, edge, button, root_x, root_y, timestamp;
+gdkwin_begin_resize_drag(VALUE self, VALUE edge, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
 {
     gdk_window_begin_resize_drag(_SELF(self),
                                  RVAL2GENUM(edge, GDK_TYPE_WINDOW_EDGE),
@@ -319,8 +283,7 @@ gdkwin_begin_resize_drag(self, edge, button, root_x, root_y, timestamp)
 }
 
 static VALUE
-gdkwin_begin_move_drag(self, button, root_x, root_y, timestamp)
-    VALUE self, button, root_x, root_y, timestamp;
+gdkwin_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
 {
     gdk_window_begin_move_drag(_SELF(self), NUM2INT(button),
                                NUM2INT(root_x), NUM2INT(root_y),
@@ -329,8 +292,7 @@ gdkwin_begin_move_drag(self, button, root_x, root_y, timestamp)
 }
 
 static VALUE
-gdkwin_s_constrain_size(self, geometry, flags, w, h)
-    VALUE self, geometry, flags, w, h;
+gdkwin_s_constrain_size(VALUE self, VALUE geometry, VALUE flags, VALUE w, VALUE h)
 {
     gint new_width, new_height;
     gdk_window_constrain_size((GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
@@ -349,8 +311,7 @@ gdkwin_beep(VALUE self)
 #endif
 
 static VALUE
-gdkwin_begin_paint(self, area)
-    VALUE self, area;
+gdkwin_begin_paint(VALUE self, VALUE area)
 {
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
         gdk_window_begin_paint_rect(_SELF(self), 
@@ -363,16 +324,14 @@ gdkwin_begin_paint(self, area)
 }
 
 static VALUE
-gdkwin_end_paint(self)
-    VALUE self;
+gdkwin_end_paint(VALUE self)
 {
     gdk_window_end_paint(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_invalidate(self, area, invalidate_children)
-    VALUE self, area, invalidate_children;
+gdkwin_invalidate(VALUE self, VALUE area, VALUE invalidate_children)
 {
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_REGION))){
         gdk_window_invalidate_region(_SELF(self),
@@ -387,9 +346,7 @@ gdkwin_invalidate(self, area, invalidate_children)
 }
 
 static gboolean
-invalidate_child_func_wrap(window, func)
-    GdkWindow* window;
-    VALUE func;
+invalidate_child_func_wrap(GdkWindow *window, VALUE func)
 {
     VALUE result = rb_funcall(func, id_call, 1, GOBJ2RVAL(window));
     return RVAL2CBOOL(result);
@@ -398,8 +355,7 @@ invalidate_child_func_wrap(window, func)
 typedef gboolean (*ChildFunc) (GdkWindow*, gpointer);
 
 static VALUE
-gdkwin_invalidate_maybe_recurse(self, region)
-    VALUE self, region;
+gdkwin_invalidate_maybe_recurse(VALUE self, VALUE region)
 {
     VALUE func = (VALUE)NULL;
     if (rb_block_given_p()){
@@ -414,56 +370,49 @@ gdkwin_invalidate_maybe_recurse(self, region)
 }
 
 static VALUE
-gdkwin_get_update_area(self)
-    VALUE self;
+gdkwin_get_update_area(VALUE self)
 {
     GdkRegion* ret = gdk_window_get_update_area(_SELF(self));
     return BOXED2RVAL(ret, GDK_TYPE_REGION); 
 }
 
 static VALUE
-gdkwin_freeze_updates(self)
-    VALUE self;
+gdkwin_freeze_updates(VALUE self)
 {
     gdk_window_freeze_updates(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_thaw_updates(self)
-    VALUE self;
+gdkwin_thaw_updates(VALUE self)
 {
     gdk_window_thaw_updates(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_s_process_all_updates(self)
-    VALUE self;
+gdkwin_s_process_all_updates(VALUE self)
 {
     gdk_window_process_all_updates();
     return self;
 }
 
 static VALUE
-gdkwin_process_updates(self, update_children)
-    VALUE self, update_children;
+gdkwin_process_updates(VALUE self, VALUE update_children)
 {
     gdk_window_process_updates(_SELF(self), RVAL2CBOOL(update_children));
     return self;
 }
 
 static VALUE
-gdkwin_s_set_debug_updates(self, setting)
-    VALUE self, setting;
+gdkwin_s_set_debug_updates(VALUE self, VALUE setting)
 {
     gdk_window_set_debug_updates(RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-gdkwin_get_internal_paint_info(self)
-    VALUE self;
+gdkwin_get_internal_paint_info(VALUE self)
 {
     GdkDrawable* real_drawable;
     gint x_offset, y_offset;
@@ -476,16 +425,14 @@ gdkwin_get_internal_paint_info(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gdkwin_configure_finished(self)
-    VALUE self;
+gdkwin_configure_finished(VALUE self)
 {
     gdk_window_configure_finished(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_enable_synchronized_configure(self)
-    VALUE self;
+gdkwin_enable_synchronized_configure(VALUE self)
 {
     gdk_window_enable_synchronized_configure(_SELF(self));
 
@@ -497,16 +444,14 @@ gdkwin_enable_synchronized_configure(self)
 #endif
 
 static VALUE
-gdkwin_set_user_data(self, user_data)
-    VALUE self, user_data;
+gdkwin_set_user_data(VALUE self, VALUE user_data)
 {
     gdk_window_set_user_data(_SELF(self), (gpointer)RVAL2GOBJ(user_data));
     return self;
 }
 
 static VALUE
-gdkwin_set_override_redirect(self, override_redirect)
-    VALUE self, override_redirect;
+gdkwin_set_override_redirect(VALUE self, VALUE override_redirect)
 {
     gdk_window_set_override_redirect(_SELF(self), 
                                      RVAL2CBOOL(override_redirect));
@@ -515,8 +460,7 @@ gdkwin_set_override_redirect(self, override_redirect)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-gdkwin_set_accept_focus(self, accept_focus)
-    VALUE self, accept_focus;
+gdkwin_set_accept_focus(VALUE self, VALUE accept_focus)
 {
     gdk_window_set_accept_focus(_SELF(self), RVAL2CBOOL(accept_focus));
     return self;
@@ -525,8 +469,7 @@ gdkwin_set_accept_focus(self, accept_focus)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gdkwin_set_focus_on_map(self, focus_on_map)
-    VALUE self, focus_on_map;
+gdkwin_set_focus_on_map(VALUE self, VALUE focus_on_map)
 {
     gdk_window_set_focus_on_map(_SELF(self), RVAL2CBOOL(focus_on_map));
     return self;
@@ -546,8 +489,7 @@ gdkwin_set_focus_on_map(self, focus_on_map)
 */
 
 static VALUE
-gdkwin_shape_combine_mask(self, shape_mask, offset_x, offset_y)
-    VALUE self, shape_mask, offset_x, offset_y;
+gdkwin_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
     gdk_window_shape_combine_mask(_SELF(self), 
                                   GDK_BITMAP(RVAL2GOBJ(shape_mask)), 
@@ -556,8 +498,7 @@ gdkwin_shape_combine_mask(self, shape_mask, offset_x, offset_y)
 }
 
 static VALUE
-gdkwin_shape_combine_region(self, shape_region, offset_x, offset_y)
-    VALUE self, shape_region, offset_x, offset_y;
+gdkwin_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
 {
     gdk_window_shape_combine_region(_SELF(self),
                                     NIL_P(shape_region) ? NULL : (GdkRegion*)RVAL2BOXED(shape_region, GDK_TYPE_REGION),
@@ -566,16 +507,14 @@ gdkwin_shape_combine_region(self, shape_region, offset_x, offset_y)
 }
 
 static VALUE
-gdkwin_set_child_shapes(self)
-    VALUE self;
+gdkwin_set_child_shapes(VALUE self)
 {
     gdk_window_set_child_shapes(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_merge_child_shapes(self)
-    VALUE self;
+gdkwin_merge_child_shapes(VALUE self)
 {
     gdk_window_merge_child_shapes(_SELF(self));
     return self;
@@ -583,8 +522,7 @@ gdkwin_merge_child_shapes(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gdkwin_input_shape_combine_mask(self, mask, x, y)
-    VALUE self, mask, x, y;
+gdkwin_input_shape_combine_mask(VALUE self, VALUE mask, VALUE x, VALUE y)
 {
     gdk_window_input_shape_combine_mask(_SELF(self),
                                         GDK_BITMAP(RVAL2GOBJ(mask)),
@@ -593,8 +531,7 @@ gdkwin_input_shape_combine_mask(self, mask, x, y)
 }
 
 static VALUE
-gdkwin_input_shape_combine_region(self, shape_region, offset_x, offset_y)
-    VALUE self, shape_region, offset_x, offset_y;
+gdkwin_input_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
 {
     gdk_window_input_shape_combine_region(_SELF(self),
                                           (GdkRegion*)RVAL2BOXED(shape_region, GDK_TYPE_REGION),
@@ -604,16 +541,14 @@ gdkwin_input_shape_combine_region(self, shape_region, offset_x, offset_y)
 }
 
 static VALUE
-gdkwin_set_child_input_shapes(self)
-    VALUE self;
+gdkwin_set_child_input_shapes(VALUE self)
 {
     gdk_window_set_child_input_shapes(_SELF(self));
     return self;
 }
 
 static VALUE
-gdkwin_merge_child_input_shapes(self)
-    VALUE self;
+gdkwin_merge_child_input_shapes(VALUE self)
 {
     gdk_window_merge_child_input_shapes(_SELF(self));
     return self;
@@ -622,8 +557,7 @@ gdkwin_merge_child_input_shapes(self)
 #endif
 
 static VALUE
-gdkwin_set_static_gravities(self, use_static)
-    VALUE self, use_static;
+gdkwin_set_static_gravities(VALUE self, VALUE use_static)
 {
     gboolean ret = gdk_window_set_static_gravities(_SELF(self),
                                                    RVAL2CBOOL(use_static));
@@ -638,24 +572,21 @@ gdkwin_set_static_gravities(self, use_static)
 */
 
 static VALUE
-gdkwin_set_title(self, title)
-    VALUE self, title;
+gdkwin_set_title(VALUE self, VALUE title)
 {
     gdk_window_set_title(_SELF(self),RVAL2CSTR(title));
     return self;
 }
 
 static VALUE
-gdkwin_set_background(self, color)
-    VALUE self, color;
+gdkwin_set_background(VALUE self, VALUE color)
 {
     gdk_window_set_background(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-gdkwin_set_back_pixmap(self, pixmap, parent_relative)
-    VALUE self, pixmap, parent_relative;
+gdkwin_set_back_pixmap(VALUE self, VALUE pixmap, VALUE parent_relative)
 {
     gdk_window_set_back_pixmap(_SELF(self), 
                                GDK_PIXMAP(RVAL2GOBJ(pixmap)),
@@ -665,8 +596,7 @@ gdkwin_set_back_pixmap(self, pixmap, parent_relative)
 
 #if !GTK_CHECK_VERSION(2, 18, 0)
 static VALUE
-gdkwin_set_cursor(self, cursor)
-    VALUE self, cursor;
+gdkwin_set_cursor(VALUE self, VALUE cursor)
 {
     gdk_window_set_cursor(_SELF(self), 
                           (GdkCursor*)(NIL_P(cursor) ? NULL : RVAL2BOXED(cursor, GDK_TYPE_CURSOR)));
@@ -680,8 +610,7 @@ gdkwin_set_cursor(self, cursor)
 */
 
 static VALUE
-gdkwin_get_user_data(self)
-    VALUE self;
+gdkwin_get_user_data(VALUE self)
 {
     GObject *data = NULL;
     gdk_window_get_user_data(_SELF(self), (gpointer)&data);
@@ -689,8 +618,7 @@ gdkwin_get_user_data(self)
 }
 
 static VALUE
-gdkwin_get_geometry(self)
-    VALUE self;
+gdkwin_get_geometry(VALUE self)
 {
     gint x, y, w, h, d;
     gdk_window_get_geometry(_SELF(self), &x, &y, &w, &h, &d);
@@ -699,8 +627,7 @@ gdkwin_get_geometry(self)
 }
 
 static VALUE
-gdkwin_set_geometry_hints(self, geometry, geom_mask)
-    VALUE self, geometry, geom_mask;
+gdkwin_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 {
     gdk_window_set_geometry_hints(_SELF(self), 
                                   NIL_P(geometry) ? (GdkGeometry*)NULL : (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
@@ -709,8 +636,7 @@ gdkwin_set_geometry_hints(self, geometry, geom_mask)
 }
 
 static VALUE
-gdkwin_set_icon_list(self, pixbufs)
-    VALUE self, pixbufs;
+gdkwin_set_icon_list(VALUE self, VALUE pixbufs)
 {
     int i;
     GList *glist = NULL;
@@ -725,16 +651,14 @@ gdkwin_set_icon_list(self, pixbufs)
 }
 
 static VALUE
-gdkwin_set_modal_hint(self, modal)
-    VALUE self, modal;
+gdkwin_set_modal_hint(VALUE self, VALUE modal)
 {
     gdk_window_set_modal_hint(_SELF(self), RVAL2CBOOL(modal));
     return self;
 }
 
 static VALUE
-gdkwin_set_type_hint(self, hint)
-    VALUE self, hint;
+gdkwin_set_type_hint(VALUE self, VALUE hint)
 {
     gdk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
     return self;
@@ -742,8 +666,7 @@ gdkwin_set_type_hint(self, hint)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gdkwin_get_type_hint(self)
-    VALUE self;
+gdkwin_get_type_hint(VALUE self)
 {
     return GENUM2RVAL(gdk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
@@ -751,16 +674,14 @@ gdkwin_get_type_hint(self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkwin_set_skip_taskbar_hint(self, hint)
-    VALUE self, hint;
+gdkwin_set_skip_taskbar_hint(VALUE self, VALUE hint)
 {
     gdk_window_set_skip_taskbar_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
 
 static VALUE
-gdkwin_set_skip_pager_hint(self, hint)
-    VALUE self, hint;
+gdkwin_set_skip_pager_hint(VALUE self, VALUE hint)
 {
     gdk_window_set_skip_pager_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
@@ -769,8 +690,7 @@ gdkwin_set_skip_pager_hint(self, hint)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gdkwin_set_urgency_hint(self, hint)
-    VALUE self, hint;
+gdkwin_set_urgency_hint(VALUE self, VALUE hint)
 {
     gdk_window_set_urgency_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
@@ -778,8 +698,7 @@ gdkwin_set_urgency_hint(self, hint)
 #endif
 
 static VALUE
-gdkwin_get_position(self)
-    VALUE self;
+gdkwin_get_position(VALUE self)
 {
     gint x, y;
     gdk_window_get_position(_SELF(self), &x, &y);
@@ -787,8 +706,7 @@ gdkwin_get_position(self)
 }
 
 static VALUE
-gdkwin_get_root_origin(self)
-    VALUE self;
+gdkwin_get_root_origin(VALUE self)
 {
     int x, y;
     gdk_window_get_root_origin(_SELF(self), &x, &y);
@@ -796,8 +714,7 @@ gdkwin_get_root_origin(self)
 }
 
 static VALUE
-gdkwin_get_frame_extents(self)
-    VALUE self;
+gdkwin_get_frame_extents(VALUE self)
 {
     GdkRectangle rect;
     gdk_window_get_frame_extents(_SELF(self), &rect);
@@ -812,8 +729,7 @@ gdkwin_get_frame_extents(self)
 */
 
 static VALUE
-gdkwin_get_origin(self)
-    VALUE self;
+gdkwin_get_origin(VALUE self)
 {
     gint x, y;
     gdk_window_get_origin(_SELF(self), &x, &y);
@@ -828,8 +744,7 @@ gdkwin_get_origin(self)
 */
 
 static VALUE
-gdkwin_get_pointer(self)
-    VALUE self;
+gdkwin_get_pointer(VALUE self)
 {
     gint x, y;
     GdkModifierType state;
@@ -838,22 +753,19 @@ gdkwin_get_pointer(self)
 }
 
 static VALUE
-gdkwin_get_parent(self)
-    VALUE self;
+gdkwin_get_parent(VALUE self)
 {
     return GOBJ2RVAL(gdk_window_get_parent(_SELF(self)));
 }
 
 static VALUE
-gdkwin_get_toplevel(self)
-    VALUE self;
+gdkwin_get_toplevel(VALUE self)
 {
     return GOBJ2RVAL(gdk_window_get_toplevel(_SELF(self)));
 }
 
 static VALUE
-gdkwin_get_children(self)
-    VALUE self;
+gdkwin_get_children(VALUE self)
 {
     /* Don't use gdk_window_get_children() here */
     GList* list = gdk_window_peek_children(_SELF(self));
@@ -866,23 +778,20 @@ gdkwin_get_children(self)
 }
 
 static VALUE
-gdkwin_get_events(self)
-    VALUE self;
+gdkwin_get_events(VALUE self)
 {
     return GFLAGS2RVAL(gdk_window_get_events(_SELF(self)), GDK_TYPE_EVENT_MASK);
 }
 
 static VALUE
-gdkwin_set_events(self, mask)
-    VALUE self, mask;
+gdkwin_set_events(VALUE self, VALUE mask)
 {
     gdk_window_set_events(_SELF(self), RVAL2GFLAGS(mask, GDK_TYPE_EVENT_MASK));
     return self;
 }
 
 static VALUE
-gdkwin_set_icon(self, icon, pixmap, mask)
-    VALUE self, icon, pixmap, mask;
+gdkwin_set_icon(VALUE self, VALUE icon, VALUE pixmap, VALUE mask)
 {
     gdk_window_set_icon(_SELF(self), NIL_P(icon) ? NULL :_SELF(icon),
                         NIL_P(pixmap) ? NULL : GDK_PIXMAP(RVAL2GOBJ(pixmap)),
@@ -891,32 +800,28 @@ gdkwin_set_icon(self, icon, pixmap, mask)
 }
 
 static VALUE
-gdkwin_set_icon_name(self, name)
-    VALUE self, name;
+gdkwin_set_icon_name(VALUE self, VALUE name)
 {
     gdk_window_set_icon_name(_SELF(self), RVAL2CSTR(name));
     return self;
 }
 
 static VALUE
-gdkwin_set_transient_for(self, parent)
-    VALUE self, parent;
+gdkwin_set_transient_for(VALUE self, VALUE parent)
 {
     gdk_window_set_transient_for(_SELF(self), _SELF(parent));
     return self;
 }
 
 static VALUE
-gdkwin_set_role(self, role)
-    VALUE self, role;
+gdkwin_set_role(VALUE self, VALUE role)
 {
     gdk_window_set_role(_SELF(self), RVAL2CSTR(role));
     return self;
 }
 
 static VALUE
-gdkwin_set_group(self, leader)
-    VALUE self, leader;
+gdkwin_set_group(VALUE self, VALUE leader)
 {
     gdk_window_set_group(_SELF(self), _SELF(leader));
     return self;
@@ -924,24 +829,21 @@ gdkwin_set_group(self, leader)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-gdkwin_get_group(self)
-    VALUE self;
+gdkwin_get_group(VALUE self)
 {
     return GOBJ2RVAL(gdk_window_get_group(_SELF(self)));
 }
 #endif
 
 static VALUE
-gdkwin_set_decorations(self, decor)
-    VALUE self, decor;
+gdkwin_set_decorations(VALUE self, VALUE decor)
 {
     gdk_window_set_decorations(_SELF(self), RVAL2GFLAGS(decor, GDK_TYPE_WM_DECORATION));
     return self;
 }
 
 static VALUE
-gdkwin_get_decorations(self)
-    VALUE self;
+gdkwin_get_decorations(VALUE self)
 {
     GdkWMDecoration decorations;
     gboolean ret = gdk_window_get_decorations(_SELF(self), &decorations);
@@ -949,8 +851,7 @@ gdkwin_get_decorations(self)
 }
 
 static VALUE
-gdkwin_set_functions(self, func)
-    VALUE self, func;
+gdkwin_set_functions(VALUE self, VALUE func)
 {
     gdk_window_set_functions(_SELF(self), RVAL2GFLAGS(func, GDK_TYPE_WM_FUNCTION));
     return self;
@@ -980,15 +881,13 @@ gdkwin_set_startup_id(VALUE self, VALUE startup_id)
 #endif
 
 static VALUE
-gdkwin_s_get_toplevels(self)
-    VALUE self;
+gdkwin_s_get_toplevels(VALUE self)
 {
     return GLIST2ARYF(gdk_window_get_toplevels());
 }
 
 static VALUE
-gdkwin_s_get_default_root_window(self)
-    VALUE self;
+gdkwin_s_get_default_root_window(VALUE self)
 {
     return GOBJ2RVAL(gdk_get_default_root_window());
 }
@@ -1000,10 +899,7 @@ GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 
 /* From X Window System Interaction */
 static VALUE
-gdkwin_foreign_new(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkwin_foreign_new(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg[2];
     GdkWindow * win = NULL;
@@ -1032,10 +928,7 @@ gdkwin_foreign_new(argc, argv, self)
 }
 
 static VALUE
-gdkwin_lookup(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkwin_lookup(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg[2];
     GdkWindow * win = NULL;
@@ -1065,8 +958,7 @@ gdkwin_lookup(argc, argv, self)
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
-gdkwin_get_server_time(self)
-    VALUE self;
+gdkwin_get_server_time(VALUE self)
 {
     return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
 }
@@ -1082,8 +974,7 @@ gdkwin_set_user_time(VALUE self, VALUE time)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gdkwin_move_to_current_desktop(self)
-    VALUE self;
+gdkwin_move_to_current_desktop(VALUE self)
 {
     gdk_x11_window_move_to_current_desktop(_SELF(self));
     return self;
