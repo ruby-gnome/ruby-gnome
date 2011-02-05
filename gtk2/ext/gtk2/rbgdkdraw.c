@@ -24,8 +24,7 @@
 #define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
 static VALUE
-gdkdraw_get_visual(self)
-    VALUE self;
+gdkdraw_get_visual(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self));
 }
@@ -54,15 +53,13 @@ gdkdraw_get_colormap(VALUE self)
 }
 
 static VALUE
-gdkdraw_get_depth(self)
-    VALUE self;
+gdkdraw_get_depth(VALUE self)
 {
     return INT2NUM(gdk_drawable_get_depth(_SELF(self)));
 }
 
 static VALUE
-gdkdraw_get_size(self)
-    VALUE self;
+gdkdraw_get_size(VALUE self)
 {
     gint width, height;
     gdk_drawable_get_size(_SELF(self), &width, &height);
@@ -70,23 +67,20 @@ gdkdraw_get_size(self)
 }
 
 static VALUE
-gdkdraw_get_clip_region(self)
-    VALUE self;
+gdkdraw_get_clip_region(VALUE self)
 {
     return BOXED2RVAL(gdk_drawable_get_clip_region(_SELF(self)), GDK_TYPE_REGION);
 }
 
 static VALUE
-gdkdraw_get_visible_region(self)
-    VALUE self;
+gdkdraw_get_visible_region(VALUE self)
 {
     return BOXED2RVAL(gdk_drawable_get_visible_region(_SELF(self)), GDK_TYPE_REGION);
 }
 
 
 static VALUE
-gdkdraw_draw_point(self, gc, x, y)
-    VALUE self, gc, x, y;
+gdkdraw_draw_point(VALUE self, VALUE gc, VALUE x, VALUE y)
 {
     gdk_draw_point(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                    NUM2INT(x), NUM2INT(y));
@@ -94,8 +88,7 @@ gdkdraw_draw_point(self, gc, x, y)
 }
 
 static VALUE
-gdkdraw_draw_points(self, gc, pnts)
-    VALUE self, gc, pnts;
+gdkdraw_draw_points(VALUE self, VALUE gc, VALUE pnts)
 {
     GdkPoint *points;
     int i;
@@ -117,8 +110,7 @@ gdkdraw_draw_points(self, gc, pnts)
 }
 
 static VALUE
-gdkdraw_draw_line(self, gc, x1, y1, x2, y2)
-    VALUE self, gc, x1, y1, x2, y2;
+gdkdraw_draw_line(VALUE self, VALUE gc, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
     gdk_draw_line(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                   NUM2INT(x1), NUM2INT(y1),
@@ -127,8 +119,7 @@ gdkdraw_draw_line(self, gc, x1, y1, x2, y2)
 }
 
 static VALUE
-gdkdraw_draw_lines(self, gc, pnts)
-    VALUE self, gc, pnts;
+gdkdraw_draw_lines(VALUE self, VALUE gc, VALUE pnts)
 {
     GdkPoint *points;
     int i;
@@ -151,10 +142,7 @@ gdkdraw_draw_lines(self, gc, pnts)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkdraw_draw_pixbuf(self, gc, pixbuf, src_x, src_y, dest_x, dest_y, 
-                    width, height, dither, x_dither, y_dither)
-    VALUE self, gc, pixbuf, src_x, src_y, dest_x, dest_y; 
-    VALUE width, height, dither, x_dither, y_dither;
+gdkdraw_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE dither, VALUE x_dither, VALUE y_dither)
 {
     gdk_draw_pixbuf(_SELF(self),
                     GDK_GC(RVAL2GOBJ(gc)),
@@ -169,8 +157,7 @@ gdkdraw_draw_pixbuf(self, gc, pixbuf, src_x, src_y, dest_x, dest_y,
 #endif
 
 static VALUE
-gdkdraw_draw_segs(self, gc, segs)
-    VALUE self, gc, segs;
+gdkdraw_draw_segs(VALUE self, VALUE gc, VALUE segs)
 {
     GdkSegment *segments;
     int i;
@@ -193,8 +180,7 @@ gdkdraw_draw_segs(self, gc, segs)
 }
 
 static VALUE
-gdkdraw_draw_rect(self, gc, filled, x, y, w, h)
-    VALUE self, gc, filled, x, y, w, h;
+gdkdraw_draw_rect(VALUE self, VALUE gc, VALUE filled, VALUE x, VALUE y, VALUE w, VALUE h)
 {
     gdk_draw_rectangle(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                        RVAL2CBOOL(filled),
@@ -204,8 +190,7 @@ gdkdraw_draw_rect(self, gc, filled, x, y, w, h)
 }
 
 static VALUE
-gdkdraw_draw_arc(self, gc, filled, x, y, w, h, a1, a2)
-    VALUE self, gc, filled, x, y, w, h, a1, a2;
+gdkdraw_draw_arc(VALUE self, VALUE gc, VALUE filled, VALUE x, VALUE y, VALUE w, VALUE h, VALUE a1, VALUE a2)
 {
     gdk_draw_arc(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                  RVAL2CBOOL(filled),
@@ -216,8 +201,7 @@ gdkdraw_draw_arc(self, gc, filled, x, y, w, h, a1, a2)
 }
 
 static VALUE
-gdkdraw_draw_poly(self, gc, filled, pnts)
-    VALUE self, gc, filled, pnts;
+gdkdraw_draw_poly(VALUE self, VALUE gc, VALUE filled, VALUE pnts)
 {
     GdkPoint *points;
     int i;
@@ -244,8 +228,7 @@ gdkdraw_draw_poly(self, gc, filled, pnts)
   trapezoids = [[y1, x11, x21, y2, x12, x22], ...]
  */
 static VALUE
-gdkdraw_draw_trapezoids(self, gc, trapezoids)
-    VALUE self, gc, trapezoids;
+gdkdraw_draw_trapezoids(VALUE self, VALUE gc, VALUE trapezoids)
 {
     GdkTrapezoid *gtrapezoids;
     gint i, len;
@@ -273,8 +256,7 @@ gdkdraw_draw_trapezoids(self, gc, trapezoids)
 #endif
 
 static VALUE
-gdkdraw_glyphs(self, gc, font, x, y, glyphs)
-    VALUE self, gc, font, x, y, glyphs;
+gdkdraw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
     gdk_draw_glyphs(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), PANGO_FONT(RVAL2GOBJ(font)),
                     NUM2INT(x), NUM2INT(y), 
@@ -284,8 +266,7 @@ gdkdraw_glyphs(self, gc, font, x, y, glyphs)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gdkdraw_glyphs_transformed(self, gc, matrix, font, x, y, glyphs)
-    VALUE self, gc, matrix, font, x, y, glyphs;
+gdkdraw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
     gdk_draw_glyphs_transformed(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
                                 NIL_P(matrix) ? (PangoMatrix*)NULL : (PangoMatrix*)(RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)),
@@ -297,10 +278,7 @@ gdkdraw_glyphs_transformed(self, gc, matrix, font, x, y, glyphs)
 #endif
 
 static VALUE
-gdkdraw_layout_line(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkdraw_layout_line(int argc, VALUE *argv, VALUE self)
 {
     VALUE gc, x, y, line, fg, bg;
 
@@ -316,10 +294,7 @@ gdkdraw_layout_line(argc, argv, self)
 }
 
 static VALUE
-gdkdraw_layout(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkdraw_layout(int argc, VALUE *argv, VALUE self)
 {
     VALUE gc, x, y, layout, fg, bg;
 
@@ -334,8 +309,7 @@ gdkdraw_layout(argc, argv, self)
 }
 
 static VALUE
-gdkdraw_draw_drawable(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
-    VALUE self, gc, src, xsrc, ysrc, xdst, ydst, w, h;
+gdkdraw_draw_drawable(VALUE self, VALUE gc, VALUE src, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
     gdk_draw_drawable(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), _SELF(src),
                       NUM2INT(xsrc), NUM2INT(ysrc),
@@ -345,8 +319,7 @@ gdkdraw_draw_drawable(self, gc, src, xsrc, ysrc, xdst, ydst, w, h)
 }
 
 static VALUE
-gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
-    VALUE self, gc, image, xsrc, ysrc, xdst, ydst, w, h;
+gdkdraw_draw_image(VALUE self, VALUE gc, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
     gdk_draw_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
                    GDK_IMAGE(RVAL2GOBJ(image)),
@@ -357,8 +330,7 @@ gdkdraw_draw_image(self, gc, image, xsrc, ysrc, xdst, ydst, w, h)
 }
 
 static VALUE
-gdkdraw_get_image(self, x, y, w, h)
-    VALUE self, x, y, w, h;
+gdkdraw_get_image(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
 {
     return GOBJ2RVAL(gdk_drawable_get_image(_SELF(self), 
                                             NUM2INT(x), NUM2INT(y), 
@@ -367,8 +339,7 @@ gdkdraw_get_image(self, x, y, w, h)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-gdkdraw_copy_to_image(self, image, xsrc, ysrc, xdst, ydst, w, h)
-    VALUE self, image, xsrc, ysrc, xdst, ydst, w, h;
+gdkdraw_copy_to_image(VALUE self, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
     return GOBJ2RVAL(gdk_drawable_copy_to_image(_SELF(self), 
                                                 GDK_IMAGE(RVAL2GOBJ(image)),
@@ -380,8 +351,7 @@ gdkdraw_copy_to_image(self, image, xsrc, ysrc, xdst, ydst, w, h)
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
-gdkdraw_get_xid(self)
-    VALUE self;
+gdkdraw_get_xid(VALUE self)
 {
     return ULONG2NUM(GDK_DRAWABLE_XID(_SELF(self)));
 }
@@ -389,15 +359,13 @@ gdkdraw_get_xid(self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkdraw_get_display(self)
-    VALUE self;
+gdkdraw_get_display(VALUE self)
 {
     return GOBJ2RVAL(gdk_drawable_get_display(_SELF(self)));
 }
 
 static VALUE
-gdkdraw_get_screen(self)
-    VALUE self;
+gdkdraw_get_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
 }
@@ -406,8 +374,7 @@ gdkdraw_get_screen(self)
 #if GTK_CHECK_VERSION(2,8,0)
 #  ifdef HAVE_RB_CAIRO_H
 static VALUE
-gdkdraw_cairo_create(self)
-    VALUE self;
+gdkdraw_cairo_create(VALUE self)
 {
     VALUE rb_cr;
     cairo_t *cr;
