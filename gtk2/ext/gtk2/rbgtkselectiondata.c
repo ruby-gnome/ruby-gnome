@@ -59,9 +59,7 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
 }
 
 void
-rbgtk_atom2selectiondata_free(type, dat)
-    GdkAtom type;
-    void* dat;
+rbgtk_atom2selectiondata_free(GdkAtom type, void *dat)
 {
     if (type == GDK_SELECTION_TYPE_INTEGER ||
         type == GDK_SELECTION_TYPE_ATOM) {
@@ -73,37 +71,32 @@ rbgtk_atom2selectiondata_free(type, dat)
 /************************************************************************/
 
 static VALUE
-gtkselectiondata_selection(self)
-    VALUE self;
+gtkselectiondata_selection(VALUE self)
 {
     GdkAtom selection = _SELF(self)->selection;
     return BOXED2RVAL(&selection, GDK_TYPE_ATOM);
 }
 
 static VALUE
-gtkselectiondata_target(self)
-    VALUE self;
+gtkselectiondata_target(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->target, GDK_TYPE_ATOM);
 }
 
 static VALUE
-gtkselectiondata_type(self)
-    VALUE self;
+gtkselectiondata_type(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->type, GDK_TYPE_ATOM);
 }
 
 static VALUE
-gtkselectiondata_format(self)
-    VALUE self;
+gtkselectiondata_format(VALUE self)
 {
     return INT2NUM(_SELF(self)->format);
 }
 
 static VALUE
-gtkselectiondata_data(self)
-    VALUE self;
+gtkselectiondata_data(VALUE self)
 {
     return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const char*)_SELF(self)->data,
                                                    _SELF(self)->length));
@@ -111,8 +104,7 @@ gtkselectiondata_data(self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gtkselectiondata_display(self)
-    VALUE self;
+gtkselectiondata_display(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->display, GDK_TYPE_DISPLAY);
 }
@@ -120,10 +112,7 @@ gtkselectiondata_display(self)
 
 /* Instance Methods */
 static VALUE
-gtkselectiondata_set(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gtkselectiondata_set(int argc, VALUE *argv, VALUE self)
 {
     void* dat;
     VALUE type, src;
@@ -146,8 +135,7 @@ gtkselectiondata_set(argc, argv, self)
 }
     
 static VALUE
-gtkselectiondata_set_text(self, str)
-    VALUE self, str;
+gtkselectiondata_set_text(VALUE self, VALUE str)
 {
     gboolean ret;
     StringValue(str);
@@ -162,8 +150,7 @@ gtkselectiondata_set_text(self, str)
 }
 
 static VALUE
-gtkselectiondata_get_text(self)
-    VALUE self;
+gtkselectiondata_get_text(VALUE self)
 {
     VALUE ret = Qnil;
     guchar* text = gtk_selection_data_get_text(_SELF(self));
@@ -176,8 +163,7 @@ gtkselectiondata_get_text(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gtkselectiondata_set_pixbuf(self, pixbuf)
-    VALUE self, pixbuf;
+gtkselectiondata_set_pixbuf(VALUE self, VALUE pixbuf)
 {
     gboolean ret = gtk_selection_data_set_pixbuf(_SELF(self), 
                                                  GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
@@ -188,15 +174,13 @@ gtkselectiondata_set_pixbuf(self, pixbuf)
 }
 
 static VALUE
-gtkselectiondata_get_pixbuf(self)
-    VALUE self;
+gtkselectiondata_get_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(gtk_selection_data_get_pixbuf(_SELF(self)));
 }
 
 static VALUE
-gtkselectiondata_set_uris(self, uris)
-    VALUE self, uris;
+gtkselectiondata_set_uris(VALUE self, VALUE uris)
 {
     gboolean ret;
     gchar** guris;
@@ -223,8 +207,7 @@ gtkselectiondata_set_uris(self, uris)
 }
 
 static VALUE
-gtkselectiondata_get_uris(self)
-    VALUE self;
+gtkselectiondata_get_uris(VALUE self)
 {
     VALUE ary = rb_ary_new();
     gchar** uris = gtk_selection_data_get_uris(_SELF(self));
@@ -242,8 +225,7 @@ gtkselectiondata_get_uris(self)
 #endif
 
 static VALUE
-gtkselectiondata_get_targets(self)
-    VALUE self;
+gtkselectiondata_get_targets(VALUE self)
 {
     GdkAtom* targets;
     gint n_atoms;
@@ -262,30 +244,26 @@ gtkselectiondata_get_targets(self)
 }
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gtkselectiondata_targets_include_image(self, writable)
-    VALUE self, writable;
+gtkselectiondata_targets_include_image(VALUE self, VALUE writable)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_image(_SELF(self), RVAL2CBOOL(writable)));
 }
 #endif
 
 static VALUE
-gtkselectiondata_targets_include_text(self)
-    VALUE self;
+gtkselectiondata_targets_include_text(VALUE self)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_text(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gtkselectiondata_targets_include_uri(self)
-    VALUE self;
+gtkselectiondata_targets_include_uri(VALUE self)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_uri(_SELF(self)));
 }
 static VALUE
-gtkselectiondata_targets_include_rich_text(self, buffer)
-    VALUE self, buffer;
+gtkselectiondata_targets_include_rich_text(VALUE self, VALUE buffer)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_rich_text(_SELF(self),
                                                                    GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
