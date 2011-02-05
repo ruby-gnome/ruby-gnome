@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-eventbox_initialize(self)
-    VALUE self;
+eventbox_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_event_box_new());
     return Qnil;
