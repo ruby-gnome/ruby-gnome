@@ -18,24 +18,21 @@
  * Item
  */
 static VALUE
-item_select(self)
-    VALUE self;
+item_select(VALUE self)
 {
     gtk_item_select(GTK_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-item_deselect(self)
-    VALUE self;
+item_deselect(VALUE self)
 {
     gtk_item_deselect(GTK_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-item_toggle(self)
-    VALUE self;
+item_toggle(VALUE self)
 {
     gtk_item_toggle(GTK_ITEM(RVAL2GOBJ(self)));
     return self;
