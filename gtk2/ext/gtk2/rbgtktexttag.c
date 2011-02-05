@@ -12,10 +12,7 @@
 #include "global.h"
 
 static VALUE
-initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE name;
     rb_scan_args(argc, argv, "01", &name);
@@ -24,23 +21,20 @@ initialize(argc, argv, self)
 }
 
 static VALUE
-get_priority(self)
-    VALUE self;
+get_priority(VALUE self)
 {
     return INT2NUM(gtk_text_tag_get_priority(GTK_TEXT_TAG(RVAL2GOBJ(self))));
 }
 
 static VALUE
-set_priority(self, priority)
-    VALUE self, priority;
+set_priority(VALUE self, VALUE priority)
 {
     gtk_text_tag_set_priority(GTK_TEXT_TAG(RVAL2GOBJ(self)), NUM2INT(priority));
     return priority;
 }
 
 static VALUE
-event(self, event_object, event, iter)
-    VALUE self, event_object, event, iter;
+event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
 {
     gboolean ret = gtk_text_tag_event(GTK_TEXT_TAG(RVAL2GOBJ(self)), 
                                       RVAL2GOBJ(event_object),
