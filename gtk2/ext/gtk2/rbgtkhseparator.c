@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-hsep_initialize(self)
-    VALUE self;
+hsep_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hseparator_new());
     return Qnil;
