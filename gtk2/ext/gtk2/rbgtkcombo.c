@@ -33,10 +33,7 @@ combo_set_popdown_strings(self, ary)
 }
 
 static VALUE
-combo_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+combo_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE ary;
     GtkWidget* widget = NULL; 
@@ -54,8 +51,7 @@ combo_initialize(argc, argv, self)
 }
 
 static VALUE
-combo_set_val_in_list(self, val, ok)
-    VALUE self, val, ok;
+combo_set_val_in_list(VALUE self, VALUE val, VALUE ok)
 {
     gtk_combo_set_value_in_list(GTK_COMBO(RVAL2GOBJ(self)),
 				RVAL2CBOOL(val), RVAL2CBOOL(ok));
@@ -63,8 +59,7 @@ combo_set_val_in_list(self, val, ok)
 }
 
 static VALUE
-combo_set_use_arrows(self, val)
-    VALUE self, val;
+combo_set_use_arrows(VALUE self, VALUE val)
 {
     gtk_combo_set_use_arrows(GTK_COMBO(RVAL2GOBJ(self)),
 			     RVAL2CBOOL(val));
@@ -72,8 +67,7 @@ combo_set_use_arrows(self, val)
 }
 
 static VALUE
-combo_set_use_arrows_always(self, val)
-    VALUE self, val;
+combo_set_use_arrows_always(VALUE self, VALUE val)
 {
     gtk_combo_set_use_arrows_always(GTK_COMBO(RVAL2GOBJ(self)),
                                     RVAL2CBOOL(val));
@@ -81,16 +75,14 @@ combo_set_use_arrows_always(self, val)
 }
 
 static VALUE
-combo_disable_activate(self)
-    VALUE self;
+combo_disable_activate(VALUE self)
 {
     gtk_combo_disable_activate(GTK_COMBO(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-combo_entry(self)
-    VALUE self;
+combo_entry(VALUE self)
 {
     return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->entry);
 }
