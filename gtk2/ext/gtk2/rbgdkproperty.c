@@ -19,10 +19,7 @@
 #include "global.h"
 
 static VALUE
-gdkprop_text_property_to_text_list(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkprop_text_property_to_text_list(int argc, VALUE *argv, VALUE self)
 {
     gint num, i;
     gchar** list;
@@ -69,10 +66,7 @@ gdkprop_text_property_to_text_list(argc, argv, self)
 }
 
 static VALUE
-gdkprop_text_property_to_utf8_list(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, VALUE self)
 {
     gint num, i;
     gchar** list;
@@ -121,10 +115,7 @@ gdkprop_text_property_to_utf8_list(argc, argv, self)
 }
 
 static VALUE
-gdkprop_string_to_compound_text(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkprop_string_to_compound_text(int argc, VALUE *argv, VALUE self)
 {
     gint num;
     GdkAtom encoding;
@@ -169,17 +160,13 @@ gdkprop_string_to_compound_text(argc, argv, self)
 }
 
 static VALUE
-gdkprop_utf8_to_string_target(self, str)
-    VALUE self, str;
+gdkprop_utf8_to_string_target(VALUE self, VALUE str)
 {
     return CSTR2RVAL((const char*)gdk_utf8_to_string_target(RVAL2CSTR(str)));
 }
 
 static VALUE
-gdkprop_utf8_to_compound_text(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkprop_utf8_to_compound_text(int argc, VALUE *argv, VALUE self)
 {
     GdkAtom encoding;
     gint format;
@@ -227,10 +214,7 @@ gdkprop_utf8_to_compound_text(argc, argv, self)
 
 
 static VALUE
-gdkprop_change(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkprop_change(int argc, VALUE *argv, VALUE self)
 {
     int        fmt, len;
     void*      dat;
@@ -253,10 +237,7 @@ gdkprop_change(argc, argv, self)
 }
 
 static VALUE
-gdkprop_get(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gdkprop_get(int argc, VALUE *argv, VALUE self)
 {
     /* for argument processing */
     GdkAtom     rtype;
@@ -314,8 +295,7 @@ gdkprop_get(argc, argv, self)
 }
 
 static VALUE
-gdkprop_delete(self, win, property)
-    VALUE self, win, property;
+gdkprop_delete(VALUE self, VALUE win, VALUE property)
 {
     gdk_property_delete(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property));
     return self;
