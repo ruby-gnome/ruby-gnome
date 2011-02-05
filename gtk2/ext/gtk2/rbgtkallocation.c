@@ -34,8 +34,7 @@ gtk_allocation_get_type(void)
 #define _SELF(r) ((GtkAllocation*)RVAL2BOXED(r, GTK_TYPE_ALLOCATION))
 
 static VALUE
-alloc_initialize(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+alloc_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     GtkAllocation new;
 
@@ -49,8 +48,7 @@ alloc_initialize(self, x, y, width, height)
 }
 
 static VALUE
-alloc_intersect(self, other)
-    VALUE self, other;
+alloc_intersect(VALUE self, VALUE other)
 {
     GtkAllocation dest;
     gboolean ret = gdk_rectangle_intersect(_SELF(self), _SELF(other), &dest);
@@ -58,8 +56,7 @@ alloc_intersect(self, other)
 }
 
 static VALUE
-alloc_union(self, other)
-    VALUE self, other;
+alloc_union(VALUE self, VALUE other)
 {
     GtkAllocation dest;
     gdk_rectangle_union(_SELF(self), _SELF(other), &dest);
@@ -68,68 +65,59 @@ alloc_union(self, other)
 
 /* Struct accessors */
 static VALUE
-alloc_x(self)
-    VALUE self;
+alloc_x(VALUE self)
 {
     return INT2NUM(_SELF(self)->x);
 }
 
 static VALUE
-alloc_y(self)
-    VALUE self;
+alloc_y(VALUE self)
 {
     return INT2NUM(_SELF(self)->y);
 }
 
 static VALUE
-alloc_w(self)
-    VALUE self;
+alloc_w(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-alloc_h(self)
-    VALUE self;
+alloc_h(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-alloc_set_x(self, x)
-    VALUE self, x;
+alloc_set_x(VALUE self, VALUE x)
 {
     _SELF(self)->x = NUM2INT(x);
     return self;
 }
 
 static VALUE
-alloc_set_y(self, y)
-    VALUE self, y;
+alloc_set_y(VALUE self, VALUE y)
 {
     _SELF(self)->y = NUM2INT(y);
     return self;
 }
 
 static VALUE
-alloc_set_w(self, width)
-    VALUE self, width;
+alloc_set_w(VALUE self, VALUE width)
 {
     _SELF(self)->width = NUM2INT(width);
     return self;
 }
 
 static VALUE
-alloc_set_h(self, height)
-    VALUE self, height;
+alloc_set_h(VALUE self, VALUE height)
 {
     _SELF(self)->height = NUM2INT(height);
     return self;
 }
 
 static VALUE
-alloc_to_a(self)
-    VALUE self;
+alloc_to_a(VALUE self)
 {
   GtkAllocation* a = _SELF(self);
   return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
@@ -137,8 +125,7 @@ alloc_to_a(self)
 }
 
 static VALUE
-alloc_to_rect(self)
-    VALUE self;
+alloc_to_rect(VALUE self)
 {
     return BOXED2RVAL(_SELF(self), GDK_TYPE_RECTANGLE);
 }
