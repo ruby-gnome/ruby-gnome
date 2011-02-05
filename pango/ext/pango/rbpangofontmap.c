@@ -17,8 +17,7 @@
 
 /*
 static VALUE
-font_map_initialize(self)
-    VALUE self;
+font_map_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_ft2_font_map_new());
     return Qnil;
@@ -26,8 +25,7 @@ font_map_initialize(self)
 */
 
 static VALUE
-font_map_load_font(self, context, desc)
-    VALUE self, context, desc;
+font_map_load_font(VALUE self, VALUE context, VALUE desc)
 {
     return GOBJ2RVAL(pango_font_map_load_font(_SELF(self), 
                                               PANGO_CONTEXT(RVAL2GOBJ(context)),
@@ -35,8 +33,7 @@ font_map_load_font(self, context, desc)
 }
 
 static VALUE
-font_map_load_fontset(self, context, desc, lang)
-    VALUE self, context, desc, lang;
+font_map_load_fontset(VALUE self, VALUE context, VALUE desc, VALUE lang)
 {
     return GOBJ2RVAL(pango_font_map_load_fontset(_SELF(self),
                                                  PANGO_CONTEXT(RVAL2GOBJ(context)),
@@ -45,8 +42,7 @@ font_map_load_fontset(self, context, desc, lang)
 }
 
 static VALUE
-font_map_list_families(self)
-    VALUE self;
+font_map_list_families(VALUE self)
 {
     int n_families;
     PangoFontFamily** families;
@@ -68,8 +64,7 @@ font_map_list_families(self)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-font_map_get_shape_engine_type(self)
-    VALUE self;
+font_map_get_shape_engine_type(VALUE self)
 {
     return CSTR2RVAL(pango_font_map_get_shape_engine_type(_SELF(self)));
 }
