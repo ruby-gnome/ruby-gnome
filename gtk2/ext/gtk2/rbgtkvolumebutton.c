@@ -17,8 +17,7 @@
 #if GTK_CHECK_VERSION(2,12,0)
 
 static VALUE
-volumebutton_initialize(self)
-    VALUE self;
+volumebutton_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_volume_button_new());
     return Qnil;
