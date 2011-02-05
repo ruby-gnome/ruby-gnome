@@ -16,10 +16,7 @@
 #define _SELF(self) (GTK_RECENT_CHOOSER_MENU(RVAL2GOBJ(self)))
 
 static VALUE
-rcm_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rcm_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE manager;
     GtkWidget* menu;
