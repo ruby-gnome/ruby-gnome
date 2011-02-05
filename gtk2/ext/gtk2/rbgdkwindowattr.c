@@ -51,14 +51,12 @@ attr_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
 
 #define ATTR_STR(name)\
 static VALUE \
-attr_get_ ## name (self)\
-    VALUE self;\
+attr_get_ ## name (VALUE self)\
 {\
     return CSTR2RVAL(_SELF(self)->name);\
 }\
 static VALUE \
-attr_set_ ## name (self, val)\
-    VALUE self, val;\
+attr_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2CSTR(val);\
     return self;\
@@ -66,14 +64,12 @@ attr_set_ ## name (self, val)\
 
 #define ATTR_INT(name)\
 static VALUE \
-attr_get_ ## name (self)\
-    VALUE self;\
+attr_get_ ## name (VALUE self)\
 {\
     return INT2NUM(_SELF(self)->name);\
 }\
 static VALUE \
-attr_set_ ## name (self, val)\
-    VALUE self, val;\
+attr_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = NUM2INT(val);\
     return self;\
@@ -87,70 +83,60 @@ ATTR_INT(width);
 ATTR_INT(height);
 
 static VALUE
-attr_get_wclass(self)
-    VALUE self;
+attr_get_wclass(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->wclass, GDK_TYPE_WINDOW_CLASS);
 }
 static VALUE
-attr_set_wclass(self, val)
-    VALUE self, val;
+attr_set_wclass(VALUE self, VALUE val)
 {
     _SELF(self)->wclass = RVAL2GENUM(val, GDK_TYPE_WINDOW_CLASS);
     return self;
 }
 
 static VALUE
-attr_get_visual(self)
-    VALUE self;
+attr_get_visual(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->visual);
 }
 static VALUE
-attr_set_visual(self, val)
-    VALUE self, val;
+attr_set_visual(VALUE self, VALUE val)
 {
     _SELF(self)->visual = GDK_VISUAL(RVAL2GOBJ(val));
     return self;
 }
 
 static VALUE
-attr_get_colormap(self)
-    VALUE self;
+attr_get_colormap(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->colormap);
 }
 static VALUE
-attr_set_colormap(self, val)
-    VALUE self, val;
+attr_set_colormap(VALUE self, VALUE val)
 {
     _SELF(self)->colormap = GDK_COLORMAP(RVAL2GOBJ(val));
     return self;
 }
 
 static VALUE
-attr_get_window_type(self)
-    VALUE self;
+attr_get_window_type(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->window_type, GDK_TYPE_WINDOW_TYPE);
 }
 static VALUE
-attr_set_window_type(self, val)
-    VALUE self, val;
+attr_set_window_type(VALUE self, VALUE val)
 {
     _SELF(self)->window_type = RVAL2GENUM(val, GDK_TYPE_WINDOW_TYPE);
     return self;
 }
 
 static VALUE
-attr_get_cursor(self)
-    VALUE self;
+attr_get_cursor(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->cursor, GDK_TYPE_CURSOR);
 }
 static VALUE
-attr_set_cursor(self, val)
-    VALUE self, val;
+attr_set_cursor(VALUE self, VALUE val)
 {
     _SELF(self)->cursor = (GdkCursor*)(RVAL2BOXED(val, GDK_TYPE_CURSOR));
     return self;
@@ -160,14 +146,12 @@ ATTR_STR(wmclass_name);
 ATTR_STR(wmclass_class);
 
 static VALUE
-attr_get_override_redirect(self)
-    VALUE self;
+attr_get_override_redirect(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->override_redirect);
 }
 static VALUE
-attr_set_override_redirect(self, val)
-    VALUE self, val;
+attr_set_override_redirect(VALUE self, VALUE val)
 {
     _SELF(self)->override_redirect = RVAL2CBOOL(val);
     return self;
