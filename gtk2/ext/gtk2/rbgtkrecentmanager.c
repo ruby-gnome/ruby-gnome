@@ -17,40 +17,33 @@
 
 
 static VALUE
-rm_initialize(self)
-    VALUE self;
+rm_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_recent_manager_new());
     return Qnil;
 }
 
 static VALUE
-rm_s_get_default(self)
-    VALUE self;
+rm_s_get_default(VALUE self)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_default());
 }
 
 static VALUE
-rm_s_get_for_screen(self, screen)
-    VALUE self, screen;
+rm_s_get_for_screen(VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
 
 static VALUE
-rm_set_screen(self, screen)
-    VALUE self, screen;
+rm_set_screen(VALUE self, VALUE screen)
 {
     gtk_recent_manager_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
 
 static VALUE
-rm_add_item(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rm_add_item(int argc, VALUE *argv, VALUE self)
 {
     VALUE uri, data;
     gboolean ret;
@@ -69,8 +62,7 @@ rm_add_item(argc, argv, self)
 }
 
 static VALUE
-rm_remove_item(self, uri)
-    VALUE self, uri;
+rm_remove_item(VALUE self, VALUE uri)
 {
     GError* error = NULL;
     gboolean ret = gtk_recent_manager_remove_item(_SELF(self), RVAL2CSTR(uri),
@@ -81,8 +73,7 @@ rm_remove_item(self, uri)
 }
 
 static VALUE
-rm_lookup_item(self, uri)
-    VALUE self, uri;
+rm_lookup_item(VALUE self, VALUE uri)
 {
     GError* error = NULL;
     GtkRecentInfo* info = gtk_recent_manager_lookup_item(_SELF(self), RVAL2CSTR(uri),
@@ -92,15 +83,13 @@ rm_lookup_item(self, uri)
 }
 
 static VALUE
-rm_has_item(self, uri)
-    VALUE self, uri;
+rm_has_item(VALUE self, VALUE uri)
 {
     return CBOOL2RVAL(gtk_recent_manager_has_item(_SELF(self), RVAL2CSTR(uri)));
 }
 
 static VALUE
-rm_move_item(self, uri, new_uri)
-    VALUE self, uri, new_uri;
+rm_move_item(VALUE self, VALUE uri, VALUE new_uri)
 {
     GError* error = NULL;
     gboolean ret = gtk_recent_manager_move_item(_SELF(self),
@@ -118,15 +107,13 @@ void        gtk_recent_manager_set_limit    (GtkRecentManager *manager,
 */
 
 static VALUE
-rm_get_items(self)
-    VALUE self;
+rm_get_items(VALUE self)
 {
     return GLIST2ARY2F(gtk_recent_manager_get_items(_SELF(self)), GTK_TYPE_RECENT_INFO);
 }
 
 static VALUE
-rm_purge_items(self)
-    VALUE self;
+rm_purge_items(VALUE self)
 {
     GError* error = NULL;
     gint ret = gtk_recent_manager_purge_items(_SELF(self), &error);
