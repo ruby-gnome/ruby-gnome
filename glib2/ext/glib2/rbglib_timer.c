@@ -32,8 +32,7 @@ struct _GTimer
 };
 
 static GTimer*
-timer_copy(timer)
-    GTimer* timer;
+timer_copy(GTimer *timer)
 {
   GTimer* new_timer;
   g_return_val_if_fail (timer != NULL, NULL);
@@ -60,24 +59,21 @@ g_timer_get_type(void)
 #define _SELF(s) ((GTimer*)RVAL2BOXED(s, G_TYPE_TIMER))
 
 static VALUE
-timer_initialize(self)
-    VALUE self;
+timer_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_timer_new());
     return Qnil;
 }
 
 static VALUE
-timer_start(self)
-    VALUE self;
+timer_start(VALUE self)
 {
     g_timer_start(_SELF(self));
     return self;
 }
 
 static VALUE
-timer_stop(self)
-    VALUE self;
+timer_stop(VALUE self)
 {
     g_timer_stop(_SELF(self));
     return self;
@@ -85,8 +81,7 @@ timer_stop(self)
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-timer_continue(self)
-    VALUE self;
+timer_continue(VALUE self)
 {
     g_timer_continue(_SELF(self));
     return self;
@@ -94,8 +89,7 @@ timer_continue(self)
 #endif
 
 static VALUE
-timer_elapsed(self)
-    VALUE self;
+timer_elapsed(VALUE self)
 {
     gulong microseconds;
     gdouble ret = g_timer_elapsed(_SELF(self), &microseconds);
@@ -104,8 +98,7 @@ timer_elapsed(self)
 }
 
 static VALUE
-timer_reset(self)
-    VALUE self;
+timer_reset(VALUE self)
 {
     g_timer_reset(_SELF(self));
     return self;
