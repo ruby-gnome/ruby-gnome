@@ -18,8 +18,7 @@ VALUE rbgobj_mInterface;
 VALUE mMetaInterface;
 
 static VALUE
-interface_s_append_features(self, klass)
-     VALUE self, klass;
+interface_s_append_features(VALUE self, VALUE klass)
 {
     if (!rb_obj_is_kind_of(klass, cInstantiatable))
         rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
@@ -29,8 +28,7 @@ interface_s_append_features(self, klass)
 #if GLIB_CHECK_VERSION(2,4,0)
 
 static VALUE
-interface_s_install_property(self, pspec_obj)
-    VALUE self, pspec_obj;
+interface_s_install_property(VALUE self, VALUE pspec_obj)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     gpointer ginterface;
@@ -49,8 +47,7 @@ interface_s_install_property(self, pspec_obj)
 }
 
 static VALUE
-interface_s_property(self, property_name)
-    VALUE self, property_name;
+interface_s_property(VALUE self, VALUE property_name)
 {
     gpointer ginterface;
     const char* name;
