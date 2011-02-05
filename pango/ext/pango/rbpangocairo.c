@@ -26,30 +26,26 @@
 #define RVAL2LINE(v) ((PangoLayoutLine*)RVAL2BOXED(v, PANGO_TYPE_LAYOUT_LINE))
 
 static VALUE
-font_map_create(klass)
-    VALUE klass;
+font_map_create(VALUE klass)
 {
     return GOBJ2RVAL(pango_cairo_font_map_new());
 }
 
 static VALUE
-font_map_get_default(klass)
-    VALUE klass;
+font_map_get_default(VALUE klass)
 {
     return GOBJ2RVAL(pango_cairo_font_map_get_default());
 }
 
 static VALUE
-font_map_set_resolution(self, dpi)
-    VALUE self, dpi;
+font_map_set_resolution(VALUE self, VALUE dpi)
 {
     pango_cairo_font_map_set_resolution(_SELF(self), NUM2DBL(dpi));
     return self;
 }
 
 static VALUE
-font_map_get_resolution(self)
-    VALUE self;
+font_map_get_resolution(VALUE self)
 {
     return rb_float_new(pango_cairo_font_map_get_resolution(_SELF(self)));
 }
@@ -61,8 +57,7 @@ font_map_create_context(VALUE self)
 }
 
 static VALUE
-update_context(self, context)
-    VALUE self, context;
+update_context(VALUE self, VALUE context)
 {
     pango_cairo_update_context(RVAL2CRCONTEXT(self), RVAL2CONTEXT(context));
     return self;
@@ -76,8 +71,7 @@ create_layout(VALUE self)
 }
 
 static VALUE
-update_layout(self, layout)
-    VALUE self, layout;
+update_layout(VALUE self, VALUE layout)
 {
     pango_cairo_update_layout(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
     return self;
@@ -85,8 +79,7 @@ update_layout(self, layout)
 
 /* Rendering */
 static VALUE
-show_glyph_string(self, font, glyphs)
-    VALUE self, font, glyphs;
+show_glyph_string(VALUE self, VALUE font, VALUE glyphs)
 {
     pango_cairo_show_glyph_string(RVAL2CRCONTEXT(self),
                                   RVAL2FONT(font),
@@ -95,16 +88,14 @@ show_glyph_string(self, font, glyphs)
 }
 
 static VALUE
-show_layout_line(self, line)
-    VALUE self, line;
+show_layout_line(VALUE self, VALUE line)
 {
     pango_cairo_show_layout_line(RVAL2CRCONTEXT(self), RVAL2LINE(line));
     return self;
 }
 
 static VALUE
-show_layout(self, layout)
-    VALUE self, layout;
+show_layout(VALUE self, VALUE layout)
 {
     pango_cairo_show_layout(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
     return self;
@@ -112,8 +103,7 @@ show_layout(self, layout)
 
 #if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
-show_error_underline(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+show_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     pango_cairo_show_error_underline(RVAL2CRCONTEXT(self), 
                                      NUM2DBL(x), NUM2DBL(y), 
@@ -124,8 +114,7 @@ show_error_underline(self, x, y, width, height)
 
 /* Rendering to a path */
 static VALUE
-glyph_string_path(self, font, glyphs)
-    VALUE self, font, glyphs;
+glyph_string_path(VALUE self, VALUE font, VALUE glyphs)
 {
     pango_cairo_glyph_string_path(RVAL2CRCONTEXT(self),
                                   RVAL2FONT(font),
@@ -134,16 +123,14 @@ glyph_string_path(self, font, glyphs)
 }
 
 static VALUE
-layout_line_path(self, line)
-    VALUE self, line;
+layout_line_path(VALUE self, VALUE line)
 {
     pango_cairo_layout_line_path(RVAL2CRCONTEXT(self), RVAL2LINE(line));
     return self;
 }
 
 static VALUE
-layout_path(self, layout)
-    VALUE self, layout;
+layout_path(VALUE self, VALUE layout)
 {
     pango_cairo_layout_path(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
     return self;
@@ -151,8 +138,7 @@ layout_path(self, layout)
 
 #if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
-error_underline_path(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+error_underline_path(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     pango_cairo_error_underline_path(RVAL2CRCONTEXT(self), 
                                      NUM2DBL(x), NUM2DBL(y), 
