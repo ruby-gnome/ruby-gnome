@@ -16,10 +16,7 @@
 #define _SELF(self) (GTK_MENU_TOOL_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-menutoolbutton_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+menutoolbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkToolItem* item;
 
@@ -47,10 +44,7 @@ menutoolbutton_initialize(argc, argv, self)
 }
 
 static VALUE
-menutoolbutton_set_arrow_tooltip(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+menutoolbutton_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
 {
     VALUE tooltips, tip_text, tip_private;
 
