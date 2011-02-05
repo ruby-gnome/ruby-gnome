@@ -12,8 +12,7 @@
 #include "global.h"
 
 static VALUE
-smitem_initialize(self)
-    VALUE self;
+smitem_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_separator_menu_item_new());
     return Qnil;
