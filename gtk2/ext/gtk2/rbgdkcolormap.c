@@ -20,8 +20,7 @@
 #define _SELF(self) (GDK_COLORMAP(RVAL2GOBJ(self)))
 
 static VALUE
-gdkcmap_initialize(self, visual, allocate)
-    VALUE self, visual, allocate;
+gdkcmap_initialize(VALUE self, VALUE visual, VALUE allocate)
 {
     GdkColormap *cmap  = gdk_colormap_new(GDK_VISUAL(RVAL2GOBJ(visual)),
                                           RVAL2CBOOL(allocate));
@@ -30,8 +29,7 @@ gdkcmap_initialize(self, visual, allocate)
 }
 
 static VALUE
-gdkcmap_s_get_system(self)
-    VALUE self;
+gdkcmap_s_get_system(VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_system());
 }
@@ -48,8 +46,7 @@ gint        gdk_colormap_alloc_colors       (GdkColormap *colormap,
 */
 
 static VALUE
-gdkcmap_alloc_color(self, color, writeable, best_match)
-    VALUE self, color, writeable, best_match;
+gdkcmap_alloc_color(VALUE self, VALUE color, VALUE writeable, VALUE best_match)
 {
     gboolean result;
     GdkColor *c = RVAL2GDKCOLOR(color);
@@ -61,16 +58,14 @@ gdkcmap_alloc_color(self, color, writeable, best_match)
 /* Don't implement Gdk::Colormap#free_colors.
    Because it should be pair with Gdk::Colormap#alloc_colors */
 static VALUE
-gdkcmap_free_color(self, color)
-    VALUE self, color;
+gdkcmap_free_color(VALUE self, VALUE color)
 {
     gdk_colormap_free_colors(_SELF(self), RVAL2GDKCOLOR(color), 1);
     return self;
 }
 
 static VALUE
-gdkcmap_query_color(self, pixel)
-    VALUE self, pixel;
+gdkcmap_query_color(VALUE self, VALUE pixel)
 {
     GdkColor color;
     gdk_colormap_query_color(_SELF(self), NUM2ULONG(pixel), &color);
@@ -78,24 +73,21 @@ gdkcmap_query_color(self, pixel)
 }
 
 static VALUE
-gdkcmap_get_visual(self)
-    VALUE self;
+gdkcmap_get_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_visual(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkcmap_get_screen(self)
-    VALUE self;
+gdkcmap_get_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_screen(_SELF(self)));
 }
 #endif
 
 static VALUE
-gdkcmap_colors(self)
-    VALUE self;
+gdkcmap_colors(VALUE self)
 {
     GdkColormap *cmap;
     GdkColor *colors;
