@@ -33,8 +33,7 @@ dialog_add_button(self, button_text, response_id)
 }
 
 VALUE
-rbgtk_dialog_add_buttons_internal(self, button_ary)
-    VALUE self, button_ary;
+rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary)
 {
     int i;
     GObject* obj = RVAL2GOBJ(self);
@@ -51,10 +50,7 @@ rbgtk_dialog_add_buttons_internal(self, button_ary)
 }    
 
 static VALUE
-dialog_add_buttons(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+dialog_add_buttons(int argc, VALUE *argv, VALUE self)
 {
     VALUE button_ary;
     rb_scan_args(argc, argv, "*", &button_ary);
@@ -63,10 +59,7 @@ dialog_add_buttons(argc, argv, self)
 }    
 
 static VALUE
-dialog_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+dialog_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, parent, flags, button_ary;
     rb_scan_args(argc, argv, "03*", &title, &parent, &flags, &button_ary);
@@ -98,8 +91,7 @@ dialog_initialize(argc, argv, self)
 }
 
 static VALUE
-dialog_run(self)
-    VALUE self;
+dialog_run(VALUE self)
 {
     if (rb_block_given_p()){
         VALUE ret = INT2NUM(gtk_dialog_run(_SELF(self)));
@@ -111,16 +103,14 @@ dialog_run(self)
 }
 
 static VALUE
-dialog_response(self, response_id)
-    VALUE self, response_id;
+dialog_response(VALUE self, VALUE response_id)
 {
     gtk_dialog_response(_SELF(self), NUM2INT(response_id));
     return self;
 }
 
 static VALUE
-dialog_add_action_widget(self, child, response_id)
-    VALUE self, child, response_id;
+dialog_add_action_widget(VALUE self, VALUE child, VALUE response_id)
 {
     gtk_dialog_add_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
                                  NUM2INT(response_id));
@@ -128,16 +118,14 @@ dialog_add_action_widget(self, child, response_id)
 }
 
 static VALUE
-dialog_set_default_response(self, response_id)
-    VALUE self, response_id;
+dialog_set_default_response(VALUE self, VALUE response_id)
 {
     gtk_dialog_set_default_response(_SELF(self), NUM2INT(response_id));
     return self;
 }
 
 static VALUE
-dialog_set_response_sensitive(self, response_id, setting)
-    VALUE self, response_id, setting;
+dialog_set_response_sensitive(VALUE self, VALUE response_id, VALUE setting)
 {
     gtk_dialog_set_response_sensitive(_SELF(self), NUM2INT(response_id), RVAL2CBOOL(setting));
     return self;
@@ -145,8 +133,7 @@ dialog_set_response_sensitive(self, response_id, setting)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-dialog_s_alternative_dialog_button_order(self, screen)
-    VALUE self, screen;
+dialog_s_alternative_dialog_button_order(VALUE self, VALUE screen)
 {
     gboolean ret = gtk_alternative_dialog_button_order(NIL_P(screen) ? NULL : 
                                                        GDK_SCREEN(RVAL2GOBJ(screen)));
@@ -161,8 +148,7 @@ void        gtk_dialog_set_alternative_button_order
 */
 
 static VALUE
-dialog_set_alternative_button_order(self, new_order)
-    VALUE self, new_order;
+dialog_set_alternative_button_order(VALUE self, VALUE new_order)
 {
     gint i;
     gint len = RARRAY_LEN(new_order);
@@ -180,23 +166,20 @@ dialog_set_alternative_button_order(self, new_order)
 #endif
 
 static VALUE
-dialog_vbox(self)
-    VALUE self;
+dialog_vbox(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->vbox);
 }
 
 static VALUE
-dialog_action_area(self)
-    VALUE self;
+dialog_action_area(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->action_area);
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-dialog_get_response_for_widget(self, widget)
-    VALUE self, widget;
+dialog_get_response_for_widget(VALUE self, VALUE widget)
 {
     return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GOBJ(widget)));
 }
