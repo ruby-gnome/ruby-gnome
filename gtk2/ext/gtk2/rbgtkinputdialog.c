@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-idiag_initialize(self)
-    VALUE self;
+idiag_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_input_dialog_new());
     return Qnil;
