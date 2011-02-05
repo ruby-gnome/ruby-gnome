@@ -16,8 +16,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 GtkTargetEntry*
-rbgtk_get_target_entry(targets)
-	VALUE targets;
+rbgtk_get_target_entry(VALUE targets)
 {
     VALUE ary;
     VALUE e_target, e_flags, e_info;
@@ -46,8 +45,7 @@ rbgtk_get_target_entry(targets)
 }
 
 static VALUE
-gtkdrag_dest_set(self, widget, flags, targets, actions)
-    VALUE self, widget, flags, targets, actions;
+gtkdrag_dest_set(VALUE self, VALUE widget, VALUE flags, VALUE targets, VALUE actions)
 {
     int num;
     GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
@@ -67,8 +65,7 @@ gtkdrag_dest_set(self, widget, flags, targets, actions)
 }
 
 static VALUE
-gtkdrag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinates)
-    VALUE self, widget, proxy_window, protocol, use_coordinates;
+gtkdrag_dest_set_proxy(VALUE self, VALUE widget, VALUE proxy_window, VALUE protocol, VALUE use_coordinates)
 {
     gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
                             GDK_WINDOW(RVAL2GOBJ(proxy_window)),
@@ -78,18 +75,14 @@ gtkdrag_dest_set_proxy(self, widget, proxy_window, protocol, use_coordinates)
 }
 
 static VALUE
-gtkdrag_dest_unset(self, widget)
-    VALUE self,widget;
+gtkdrag_dest_unset(VALUE self, VALUE widget)
 {
     gtk_drag_dest_unset(RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-gtkdrag_dest_find_target(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gtkdrag_dest_find_target(int argc, VALUE *argv, VALUE self)
 {
     VALUE widget, context, target_list;
     GdkAtom ret;
@@ -103,16 +96,14 @@ gtkdrag_dest_find_target(argc, argv, self)
 }
 
 static VALUE
-gtkdrag_dest_get_target_list(self, widget)
-    VALUE self, widget;
+gtkdrag_dest_get_target_list(VALUE self, VALUE widget)
 {
     GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
     return BOXED2RVAL(list, GTK_TYPE_TARGET_LIST);
 }
 
 static VALUE
-gtkdrag_dest_set_target_list(self, widget, target_list)
-    VALUE self, widget, target_list;
+gtkdrag_dest_set_target_list(VALUE self, VALUE widget, VALUE target_list)
 {
     gtk_drag_dest_set_target_list(
         RVAL2WIDGET(widget), 
@@ -124,22 +115,19 @@ gtkdrag_dest_set_target_list(self, widget, target_list)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gtkdrag_dest_add_text_targets(self, widget)
-    VALUE self, widget;
+gtkdrag_dest_add_text_targets(VALUE self, VALUE widget)
 {
     gtk_drag_dest_add_text_targets(RVAL2WIDGET(widget));
     return self;
 }
 static VALUE
-gtkdrag_dest_add_image_targets(self, widget)
-    VALUE self, widget;
+gtkdrag_dest_add_image_targets(VALUE self, VALUE widget)
 {
     gtk_drag_dest_add_image_targets(RVAL2WIDGET(widget));
     return self;
 }
 static VALUE
-gtkdrag_dest_add_uri_targets(self, widget)
-    VALUE self, widget;
+gtkdrag_dest_add_uri_targets(VALUE self, VALUE widget)
 {
     gtk_drag_dest_add_uri_targets(RVAL2WIDGET(widget));
     return self;
@@ -148,24 +136,21 @@ gtkdrag_dest_add_uri_targets(self, widget)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gtkdrag_dest_set_track_motion(self, widget, track_motion)
-    VALUE self, widget, track_motion;
+gtkdrag_dest_set_track_motion(VALUE self, VALUE widget, VALUE track_motion)
 {
     gtk_drag_dest_set_track_motion(RVAL2WIDGET(widget), RVAL2CBOOL(track_motion));
     return self;
 }
 
 static VALUE
-gtkdrag_dest_get_track_motion(self, widget)
-    VALUE self, widget;
+gtkdrag_dest_get_track_motion(VALUE self, VALUE widget)
 {
     return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2WIDGET(widget)));
 }
 #endif
 
 static VALUE
-gtkdrag_finish(self, context, success, del, time)
-    VALUE self, context, success, del, time;
+gtkdrag_finish(VALUE self, VALUE context, VALUE success, VALUE del, VALUE time)
 {
     gtk_drag_finish(RVAL2DC(context), RVAL2CBOOL(success),
                     RVAL2CBOOL(del), NUM2UINT(time));
@@ -173,8 +158,7 @@ gtkdrag_finish(self, context, success, del, time)
 }
 
 static VALUE
-gtkdrag_get_data(self, widget, context, target, time)
-    VALUE self, widget, context, target, time;
+gtkdrag_get_data(VALUE self, VALUE widget, VALUE context, VALUE target, VALUE time)
 {
     gtk_drag_get_data(RVAL2WIDGET(widget), RVAL2DC(context), RVAL2ATOM(target),
                       NUM2UINT(time));
@@ -182,31 +166,27 @@ gtkdrag_get_data(self, widget, context, target, time)
 }
 
 static VALUE
-gtkdrag_get_source_widget(self, context)
-    VALUE self, context;
+gtkdrag_get_source_widget(VALUE self, VALUE context)
 {
     return GOBJ2RVAL(gtk_drag_get_source_widget(RVAL2DC(context)));
 }
 
 static VALUE
-gtkdrag_highlight(self, widget)
-    VALUE self, widget;
+gtkdrag_highlight(VALUE self, VALUE widget)
 {
     gtk_drag_highlight(RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-gtkdrag_unhighlight(self, widget)
-    VALUE self, widget;
+gtkdrag_unhighlight(VALUE self, VALUE widget)
 {
     gtk_drag_unhighlight(RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-gtkdrag_begin(self, widget, target_list, actions, button, event)
-    VALUE self, widget, target_list, actions, button, event;
+gtkdrag_begin(VALUE self, VALUE widget, VALUE target_list, VALUE actions, VALUE button, VALUE event)
 {
     return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(widget),
                                     RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST),
@@ -216,10 +196,7 @@ gtkdrag_begin(self, widget, target_list, actions, button, event)
 }
 
 static VALUE
-gtkdrag_set_icon(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gtkdrag_set_icon(int argc, VALUE *argv, VALUE self)
 {
     VALUE context, obj, pixmap = Qnil, mask = Qnil, hot_x, hot_y;
 
@@ -252,8 +229,7 @@ gtkdrag_set_icon(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gtkdrag_set_icon_name(self, context, name, hot_x, hot_y)
-    VALUE self, context, name, hot_x, hot_y;
+gtkdrag_set_icon_name(VALUE self, VALUE context, VALUE name, VALUE hot_x, VALUE hot_y)
 {
     gtk_drag_set_icon_name(RVAL2DC(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
     return self;
@@ -261,16 +237,14 @@ gtkdrag_set_icon_name(self, context, name, hot_x, hot_y)
 #endif
 
 static VALUE
-gtkdrag_set_icon_default(self, context)
-    VALUE self, context;
+gtkdrag_set_icon_default(VALUE self, VALUE context)
 {
     gtk_drag_set_icon_default(RVAL2DC(context));
     return self;
 }
 
 static VALUE
-gtkdrag_check_threshold(self, widget, start_x, start_y, current_x, current_y)
-    VALUE self, widget, start_x, start_y, current_x, current_y;
+gtkdrag_check_threshold(VALUE self, VALUE widget, VALUE start_x, VALUE start_y, VALUE current_x, VALUE current_y)
 {
     return CBOOL2RVAL(gtk_drag_check_threshold(RVAL2WIDGET(widget), 
                                                NUM2INT(start_x), NUM2INT(start_y),
@@ -278,8 +252,7 @@ gtkdrag_check_threshold(self, widget, start_x, start_y, current_x, current_y)
 }
 
 static VALUE
-gtkdrag_source_set(self, widget, flags, targets, actions)
-    VALUE self, widget, flags, targets, actions;
+gtkdrag_source_set(VALUE self, VALUE widget, VALUE flags, VALUE targets, VALUE actions)
 {
     gtk_drag_source_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
                         rbgtk_get_target_entry(targets), 
@@ -289,10 +262,7 @@ gtkdrag_source_set(self, widget, flags, targets, actions)
 }
 
 static VALUE
-gtkdrag_source_set_icon(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gtkdrag_source_set_icon(int argc, VALUE *argv, VALUE self)
 {
     VALUE widget, obj, pixmap = Qnil, mask = Qnil;
 
@@ -315,8 +285,7 @@ gtkdrag_source_set_icon(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gtkdrag_source_set_icon_name(self, widget, icon_name)
-    VALUE self, widget, icon_name;
+gtkdrag_source_set_icon_name(VALUE self, VALUE widget, VALUE icon_name)
 {
     gtk_drag_source_set_icon_name(RVAL2WIDGET(widget), RVAL2CSTR(icon_name));
     return self;
@@ -324,8 +293,7 @@ gtkdrag_source_set_icon_name(self, widget, icon_name)
 #endif
 
 static VALUE
-gtkdrag_source_unset(self, widget)
-    VALUE self, widget;
+gtkdrag_source_unset(VALUE self, VALUE widget)
 {
     gtk_drag_source_unset(RVAL2WIDGET(widget));
     return self;
@@ -333,8 +301,7 @@ gtkdrag_source_unset(self, widget)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-gtkdrag_source_set_target_list(self, widget, targetlist)
-    VALUE self, widget, targetlist;
+gtkdrag_source_set_target_list(VALUE self, VALUE widget, VALUE targetlist)
 {
     GtkTargetList* tlist = NULL;
     if (! NIL_P(targetlist))
@@ -345,8 +312,7 @@ gtkdrag_source_set_target_list(self, widget, targetlist)
 }
 
 static VALUE
-gtkdrag_source_get_target_list(self, widget)
-    VALUE self, widget;
+gtkdrag_source_get_target_list(VALUE self, VALUE widget)
 {
     GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
     return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);
@@ -355,22 +321,19 @@ gtkdrag_source_get_target_list(self, widget)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gtkdrag_source_add_text_targets(self, widget)
-    VALUE self, widget;
+gtkdrag_source_add_text_targets(VALUE self, VALUE widget)
 {
     gtk_drag_source_add_text_targets(RVAL2WIDGET(widget));
     return self;
 }
 static VALUE
-gtkdrag_source_add_image_targets(self, widget)
-    VALUE self, widget;
+gtkdrag_source_add_image_targets(VALUE self, VALUE widget)
 {
     gtk_drag_source_add_image_targets(RVAL2WIDGET(widget));
     return self;
 }
 static VALUE
-gtkdrag_source_add_uri_targets(self, widget)
-    VALUE self, widget;
+gtkdrag_source_add_uri_targets(VALUE self, VALUE widget)
 {
     gtk_drag_source_add_uri_targets(RVAL2WIDGET(widget));
     return self;
