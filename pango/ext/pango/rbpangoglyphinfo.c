@@ -39,31 +39,27 @@ pango_glyph_info_get_type(void)
 /**********************************/
 
 static VALUE
-gi_initialize(self)
-    VALUE self;
+gi_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_new0(PangoGlyphInfo, 1));
     return Qnil;
 }
 
 static VALUE
-gi_glyph(self)
-    VALUE self;
+gi_glyph(VALUE self)
 {
     return UINT2NUM(_SELF(self)->glyph);
 }
 
 static VALUE
-gi_set_glyph(self, val)
-    VALUE self, val;
+gi_set_glyph(VALUE self, VALUE val)
 {
     _SELF(self)->glyph = NUM2UINT(val);
     return self;
 }
 
 static VALUE
-gi_geometry(self)
-    VALUE self;
+gi_geometry(VALUE self)
 {
     PangoGlyphGeometry geo = _SELF(self)->geometry;
 
@@ -72,8 +68,7 @@ gi_geometry(self)
 }
 
 static VALUE
-gi_set_geometry(self, width, x_offset, y_offset)
-    VALUE self, width, x_offset, y_offset;
+gi_set_geometry(VALUE self, VALUE width, VALUE x_offset, VALUE y_offset)
 {
     PangoGlyphGeometry geo = _SELF(self)->geometry;
 
@@ -88,15 +83,13 @@ gi_set_geometry(self, width, x_offset, y_offset)
   This method may be changed in the future following Pango implementation.
  */
 static VALUE
-gi_attr_is_cluster_start(self)
-    VALUE self;
+gi_attr_is_cluster_start(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->attr.is_cluster_start);
 }
 
 static VALUE
-gi_attr_set_is_cluster_start(self, val)
-    VALUE self, val;
+gi_attr_set_is_cluster_start(VALUE self, VALUE val)
 {
     _SELF(self)->attr.is_cluster_start = RVAL2CBOOL(val);
     return self;
