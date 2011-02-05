@@ -43,10 +43,7 @@ create_button(group, label, use_underline)
 }
 
 static VALUE
-rbtn_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_or_label, label_or_use_underline, use_underline;
     GtkWidget *widget;
@@ -66,8 +63,7 @@ rbtn_initialize(argc, argv, self)
 }
 
 static VALUE
-rbtn_group(self)
-    VALUE self;
+rbtn_group(VALUE self)
 {
     /* Owened by GTK+ */
     return GSLIST2ARY(gtk_radio_button_get_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
