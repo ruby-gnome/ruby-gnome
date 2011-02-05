@@ -21,22 +21,19 @@
 static ID id_new;
 
 static VALUE
-gdkscreen_default(self)
-    VALUE self;
+gdkscreen_default(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_default());
 }
 
 static VALUE
-gdkscreen_get_default_colormap(self)
-    VALUE self;
+gdkscreen_get_default_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_default_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_set_default_colormap(self, colormap)
-    VALUE self, colormap;
+gdkscreen_set_default_colormap(VALUE self, VALUE colormap)
 {
     gdk_screen_set_default_colormap(_SELF(self),
                                     GDK_COLORMAP(RVAL2GOBJ(colormap)));
@@ -44,44 +41,38 @@ gdkscreen_set_default_colormap(self, colormap)
 }
 
 static VALUE
-gdkscreen_get_system_colormap(self)
-    VALUE self;
+gdkscreen_get_system_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_system_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_system_visual(self)
-    VALUE self;
+gdkscreen_get_system_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_system_visual(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_rgb_colormap(self)
-    VALUE self;
+gdkscreen_get_rgb_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgb_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_rgb_visual(self)
-    VALUE self;
+gdkscreen_get_rgb_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgb_visual(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gdkscreen_get_rgba_colormap(self)
-    VALUE self;
+gdkscreen_get_rgba_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgba_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_rgba_visual(self)
-    VALUE self;
+gdkscreen_get_rgba_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgba_visual(_SELF(self)));
 }
@@ -89,75 +80,64 @@ gdkscreen_get_rgba_visual(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gdkscreen_is_composited(self)
-    VALUE self;
+gdkscreen_is_composited(VALUE self)
 {
     return CBOOL2RVAL(gdk_screen_is_composited(_SELF(self)));
 }
 #endif
 
 static VALUE
-gdkscreen_get_root_window(self)
-    VALUE self;
+gdkscreen_get_root_window(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_root_window(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_display(self)
-    VALUE self;
+gdkscreen_get_display(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_display(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_number(self)
-    VALUE self;
+gdkscreen_number(VALUE self)
 {
       return INT2NUM(gdk_screen_get_number(_SELF(self)));
 }
 static VALUE
-gdkscreen_width(self)
-    VALUE self;
+gdkscreen_width(VALUE self)
 {
       return INT2NUM(gdk_screen_get_width(_SELF(self)));
 }
 static VALUE
-gdkscreen_height(self)
-    VALUE self;
+gdkscreen_height(VALUE self)
 {
       return INT2NUM(gdk_screen_get_height(_SELF(self)));
 }
 static VALUE
-gdkscreen_width_mm(self)
-    VALUE self;
+gdkscreen_width_mm(VALUE self)
 {
       return INT2NUM(gdk_screen_get_width_mm(_SELF(self)));
 }
 static VALUE
-gdkscreen_height_mm(self)
-    VALUE self;
+gdkscreen_height_mm(VALUE self)
 {
       return INT2NUM(gdk_screen_get_height_mm(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_list_visuals(self)
-    VALUE self;
+gdkscreen_list_visuals(VALUE self)
 {
     return GLIST2ARYF(gdk_screen_list_visuals(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_toplevel_windows(self)
-    VALUE self;
+gdkscreen_get_toplevel_windows(VALUE self)
 {
     return GLIST2ARYF(gdk_screen_get_toplevel_windows(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_make_display_name(self)
-    VALUE self;
+gdkscreen_make_display_name(VALUE self)
 {
     gchar* name = gdk_screen_make_display_name(_SELF(self));
     VALUE ret = CSTR2RVAL(name);
@@ -166,15 +146,13 @@ gdkscreen_make_display_name(self)
 }
 
 static VALUE
-gdkscreen_n_monitors(self)
-    VALUE self;
+gdkscreen_n_monitors(VALUE self)
 {
       return INT2NUM(gdk_screen_get_n_monitors(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_monitor_geometry(self, num)
-    VALUE self, num;
+gdkscreen_monitor_geometry(VALUE self, VALUE num)
 {
       GdkRectangle rect;
       gdk_screen_get_monitor_geometry(_SELF(self), NUM2INT(num), &rect);
@@ -182,10 +160,7 @@ gdkscreen_monitor_geometry(self, num)
 }
 
 static VALUE
-gdkscreen_get_monitor(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gdkscreen_get_monitor(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     VALUE ret;
@@ -204,8 +179,7 @@ gdkscreen_get_monitor(argc, argv, self)
 }
 
 static VALUE
-gdkscreen_broadcast_client_message(self, event)
-    VALUE self, event;
+gdkscreen_broadcast_client_message(VALUE self, VALUE event)
 {
     gdk_screen_broadcast_client_message(_SELF(self), RVAL2GEV(event));
     return self;
@@ -215,10 +189,7 @@ gdkscreen_broadcast_client_message(self, event)
   type: String, Integer, Gdk::Color.
  */
 static VALUE
-gdkscreen_get_setting(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gdkscreen_get_setting(int argc, VALUE *argv, VALUE self)
 {
     VALUE name, type;
     GType gtype;
@@ -242,15 +213,13 @@ gdkscreen_get_setting(argc, argv, self)
 #if GTK_CHECK_VERSION(2,10,0)
 #ifdef HAVE_RB_CAIRO_H
 static VALUE
-gdkscreen_get_font_options(self)
-    VALUE self;
+gdkscreen_get_font_options(VALUE self)
 {
     return CRFONTOPTIONS2RVAL((cairo_font_options_t *)gdk_screen_get_font_options(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_set_font_options(self, options)
-    VALUE self, options;
+gdkscreen_set_font_options(VALUE self, VALUE options)
 {
     gdk_screen_set_font_options(_SELF(self), 
                                 (const cairo_font_options_t *)RVAL2CRFONTOPTIONS(options));
@@ -265,15 +234,13 @@ gdouble     gdk_screen_get_resolution       (GdkScreen *screen);
  */
 
 static VALUE
-gdkscreen_get_active_window(self)
-    VALUE self;
+gdkscreen_get_active_window(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_active_window(_SELF(self)));
 }
 
 static VALUE
-gdkscreen_get_window_stack(self)
-    VALUE self;
+gdkscreen_get_window_stack(VALUE self)
 {
     GList* list = gdk_screen_get_window_stack(_SELF(self));
     VALUE ary = rb_ary_new();
@@ -298,8 +265,7 @@ child_setup(func)
 }
 
 static VALUE
-gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
-    VALUE self, working_directory, argv, envp, flags;
+gdkscreen_spawn_on_screen(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -358,8 +324,7 @@ gdkscreen_spawn_on_screen(self, working_directory, argv, envp, flags)
 }
 
 static VALUE
-gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
-    VALUE self, working_directory, argv, envp, flags;
+gdkscreen_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -422,8 +387,7 @@ gdkscreen_spawn_on_screen_with_pipes(self, working_directory, argv, envp, flags)
 }
 
 static VALUE
-gdkscreen_spawn_command_line_on_screen(self, command_line)
-    VALUE self, command_line;
+gdkscreen_spawn_command_line_on_screen(VALUE self, VALUE command_line)
 {
     GError *err = NULL;
     VALUE ret;
@@ -439,28 +403,24 @@ gdkscreen_spawn_command_line_on_screen(self, command_line)
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>
 static VALUE
-gdkscreen_xnumber(self)
-    VALUE self;
+gdkscreen_xnumber(VALUE self)
 {
     return INT2NUM(GDK_SCREEN_XNUMBER(_SELF(self)));
 }
 static VALUE
-gdkscreen_supports_net_wm_hint(self, property)
-    VALUE self, property;
+gdkscreen_supports_net_wm_hint(VALUE self, VALUE property)
 {
     return CBOOL2RVAL(gdk_x11_screen_supports_net_wm_hint(_SELF(self),
                                                           RVAL2ATOM(property)));
 }
 
 static VALUE
-gdkscreen_get_window_manager_name(self)
-    VALUE self;
+gdkscreen_get_window_manager_name(VALUE self)
 {
     return CSTR2RVAL(gdk_x11_screen_get_window_manager_name(_SELF(self)));
 }
 static VALUE
-gdkscreen_get_screen_number(self)
-    VALUE self;
+gdkscreen_get_screen_number(VALUE self)
 {
     return INT2NUM(gdk_x11_screen_get_screen_number(_SELF(self)));
 }
