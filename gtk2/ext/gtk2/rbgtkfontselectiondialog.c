@@ -15,10 +15,7 @@
 #define _SELF(self) (GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-fsd_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+fsd_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title;
     rb_scan_args(argc, argv, "01", &title);
@@ -27,61 +24,53 @@ fsd_initialize(argc, argv, self)
 }
 
 static VALUE
-fsd_get_font_name(self)
-    VALUE self;
+fsd_get_font_name(VALUE self)
 {
     gchar* name = gtk_font_selection_dialog_get_font_name(_SELF(self));
     return name ? CSTR2RVAL(name) : Qnil;
 }
 
 static VALUE
-fsd_set_font_name(self, fontname)
-    VALUE self, fontname;
+fsd_set_font_name(VALUE self, VALUE fontname)
 {
     return CBOOL2RVAL(gtk_font_selection_dialog_set_font_name(_SELF(self),
                                                               RVAL2CSTR(fontname)));
 }
 
 static VALUE
-fsd_get_preview_text(self)
-    VALUE self;
+fsd_get_preview_text(VALUE self)
 {
     const gchar* text = gtk_font_selection_dialog_get_preview_text(_SELF(self));
     return text ? CSTR2RVAL(text) : Qnil;
 }
 
 static VALUE
-fsd_set_preview_text(self, text)
-    VALUE self, text;
+fsd_set_preview_text(VALUE self, VALUE text)
 {
     gtk_font_selection_dialog_set_preview_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-fsd_get_font_selection(self)
-    VALUE self;
+fsd_get_font_selection(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->fontsel);
 }
 
 static VALUE
-fsd_get_ok_button(self)
-    VALUE self;
+fsd_get_ok_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->ok_button);
 }
 
 static VALUE
-fsd_get_cancel_button(self)
-    VALUE self;
+fsd_get_cancel_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->cancel_button);
 }
 
 static VALUE
-fsd_get_apply_button(self)
-    VALUE self;
+fsd_get_apply_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->apply_button);
 }
