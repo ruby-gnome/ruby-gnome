@@ -16,10 +16,7 @@
 #define _SELF(self) (GTK_LINK_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-lb_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+lb_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE uri, label;
     GtkWidget *widget = NULL;
@@ -35,17 +32,13 @@ lb_initialize(argc, argv, self)
 }
 
 static void
-link_func(button, link, func)
-    GtkLinkButton* button;
-    const gchar* link;
-    gpointer func;
+link_func(GtkLinkButton *button, const gchar *link, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(button), CSTR2RVAL(link));
 }
 
 static VALUE
-lb_set_uri_hook(self)
-    VALUE self;
+lb_set_uri_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
