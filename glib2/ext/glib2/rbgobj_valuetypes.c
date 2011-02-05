@@ -17,9 +17,7 @@
 
 
 VALUE
-rbgobj_ptr_new(type, ptr)
-    GType type;
-    gpointer ptr;
+rbgobj_ptr_new(GType type, gpointer ptr)
 {
 #ifdef RBGOBJ_USE_DLPTR
     return rb_dlptr_new2(GTYPE2CLASS(type), 0, NULL);
@@ -29,8 +27,7 @@ rbgobj_ptr_new(type, ptr)
 }
 
 gpointer
-rbgobj_ptr2cptr(ptr)
-    VALUE ptr;
+rbgobj_ptr2cptr(VALUE ptr)
 {
 #ifdef RBGOBJ_USE_DLPTR
     return rb_dlptr2cptr(ptr);
