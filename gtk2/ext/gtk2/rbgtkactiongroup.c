@@ -20,8 +20,7 @@ static ID id_toggle_action_procs;
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-actiongroup_initialize(self, name)
-    VALUE self, name;
+actiongroup_initialize(VALUE self, VALUE name)
 {
     G_INITIALIZE(self, gtk_action_group_new(RVAL2CSTR(name)));
     return Qnil;
@@ -38,24 +37,19 @@ void        gtk_action_group_set_visible    (GtkActionGroup *action_group,
 */
 
 static VALUE
-actiongroup_get_action(self, action_name)
-    VALUE self, action_name;
+actiongroup_get_action(VALUE self, VALUE action_name)
 {
     return GOBJ2RVAL(gtk_action_group_get_action(_SELF(self), RVAL2CSTR(action_name)));
 }
 
 static VALUE
-actiongroup_list_actions(self)
-    VALUE self;
+actiongroup_list_actions(VALUE self)
 {
     return GLIST2ARYF(gtk_action_group_list_actions(_SELF(self)));
 }
 
 static VALUE
-actiongroup_add_action(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+actiongroup_add_action(int argc, VALUE *argv, VALUE self)
 {
     VALUE action, accelerator;
 
@@ -70,8 +64,7 @@ actiongroup_add_action(argc, argv, self)
 }
 
 static VALUE
-actiongroup_remove_action(self, action)
-    VALUE self, action;
+actiongroup_remove_action(VALUE self, VALUE action)
 {
     gtk_action_group_remove_action(_SELF(self), GTK_ACTION(RVAL2GOBJ(action)));
     G_CHILD_REMOVE(self, action);
@@ -79,9 +72,7 @@ actiongroup_remove_action(self, action)
 }
 
 static void
-activate_action(action, self)
-    GtkAction* action;
-    VALUE self;
+activate_action(GtkAction *action, VALUE self)
 {
     VALUE action_procs = rb_ivar_get(self, id_action_procs);
     VALUE proc = rb_hash_aref(action_procs, CSTR2RVAL(gtk_action_get_name(action)));
@@ -90,8 +81,7 @@ activate_action(action, self)
 }
 
 static VALUE
-actiongroup_add_actions(self, entries)
-    VALUE self, entries;
+actiongroup_add_actions(VALUE self, VALUE entries)
 {
     int i;
     VALUE action_procs;
@@ -148,9 +138,7 @@ actiongroup_add_actions(self, entries)
 }
 
 static void
-activate_toggle_action(action, self)
-    GtkAction* action;
-    VALUE self;
+activate_toggle_action(GtkAction *action, VALUE self)
 {
     VALUE action_procs = rb_ivar_get(self, id_toggle_action_procs);
     VALUE proc = rb_hash_aref(action_procs, CSTR2RVAL(gtk_action_get_name(action)));
@@ -159,8 +147,7 @@ activate_toggle_action(action, self)
 }
 
 static VALUE
-actiongroup_add_toggle_actions(self, entries)
-    VALUE self, entries;
+actiongroup_add_toggle_actions(VALUE self, VALUE entries)
 {
     int i;
     VALUE toggle_action_procs;
@@ -219,20 +206,14 @@ actiongroup_add_toggle_actions(self, entries)
 }
 
 static void
-activate_radio_action(action, current, func)
-    GtkAction* action;
-    GtkRadioAction* current;
-    VALUE func;
+activate_radio_action(GtkAction *action, GtkRadioAction *current, VALUE func)
 {
     if (! NIL_P(func))
         rb_funcall(func, id_call, 2, GOBJ2RVAL(action), GOBJ2RVAL(current));
 }
 
 static VALUE
-actiongroup_add_radio_actions(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+actiongroup_add_radio_actions(int argc, VALUE *argv, VALUE self)
 {
     VALUE entries, value, proc;
     int i;
@@ -302,8 +283,7 @@ translate_func(path, func)
 }
 
 static VALUE
-actiongroup_set_translate_func(self)
-    VALUE self;
+actiongroup_set_translate_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -314,8 +294,7 @@ actiongroup_set_translate_func(self)
 }
 
 static VALUE
-actiongroup_set_translation_domain(self, domain)
-    VALUE self, domain;
+actiongroup_set_translation_domain(VALUE self, VALUE domain)
 {
     gtk_action_group_set_translation_domain(_SELF(self), 
                                             NIL_P(domain) ? (const gchar*)NULL : RVAL2CSTR(domain));
@@ -324,8 +303,7 @@ actiongroup_set_translation_domain(self, domain)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-actiongroup_translate_string(self, str)
-    VALUE self, str;
+actiongroup_translate_string(VALUE self, VALUE str)
 {
     return CSTR2RVAL(gtk_action_group_translate_string(_SELF(self), RVAL2CSTR(str)));
 }
