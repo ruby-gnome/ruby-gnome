@@ -16,16 +16,14 @@
 #define _SELF(self) GTK_SOCKET(RVAL2GOBJ(self))
 
 static VALUE
-socket_initialize(self)
-    VALUE self;
+socket_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_socket_new());
     return Qnil;
 }
 
 static VALUE
-socket_add_id(self, wid)
-    VALUE self, wid;
+socket_add_id(VALUE self, VALUE wid)
 {
     gtk_socket_add_id(_SELF(self),
 #ifdef GDK_NATIVE_WINDOW_POINTER
@@ -38,15 +36,13 @@ socket_add_id(self, wid)
 }
 
 static VALUE
-socket_plug_window(self)
-    VALUE self;
+socket_plug_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->plug_window);
 }
 
 static VALUE
-socket_get_socket_id(self)
-    VALUE self;
+socket_get_socket_id(VALUE self)
 {
     GdkNativeWindow id =  gtk_socket_get_id(_SELF(self));
 #ifdef GDK_NATIVE_WINDOW_POINTER
