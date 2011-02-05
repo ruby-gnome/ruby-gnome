@@ -14,46 +14,38 @@
 #if GTK_CHECK_VERSION(2,4,0)
 #define _SELF(self) (GTK_TOOL_ITEM(RVAL2GOBJ(self)))
 static VALUE
-toolitem_initialize(self)
-    VALUE self;
+toolitem_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_tool_item_new());
     return Qnil;
 }
 
 static VALUE
-toolitem_set_homogeneous(self, homogeneous)
-    VALUE self, homogeneous;
+toolitem_set_homogeneous(VALUE self, VALUE homogeneous)
 {
     gtk_tool_item_set_homogeneous(_SELF(self), RVAL2CBOOL(homogeneous));
     return self;
 }
 static VALUE
-toolitem_get_homogeneous(self)
-    VALUE self;
+toolitem_get_homogeneous(VALUE self)
 {
     return CBOOL2RVAL(gtk_tool_item_get_homogeneous(_SELF(self)));
 }
 
 static VALUE
-toolitem_set_expand(self, expand)
-    VALUE self, expand;
+toolitem_set_expand(VALUE self, VALUE expand)
 {
     gtk_tool_item_set_expand(_SELF(self), RVAL2CBOOL(expand));
     return self;
 }
 static VALUE
-toolitem_get_expand(self)
-    VALUE self;
+toolitem_get_expand(VALUE self)
 {
     return CBOOL2RVAL(gtk_tool_item_get_expand(_SELF(self)));
 }
 
 static VALUE
-toolitem_set_tooltip(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+toolitem_set_tooltip(int argc, VALUE *argv, VALUE self)
 {
     VALUE tooltip, tip_text, tip_private;
 
@@ -66,64 +58,55 @@ toolitem_set_tooltip(argc, argv, self)
 }
 
 static VALUE
-toolitem_set_use_drag_window(self, use_drag_window)
-    VALUE self, use_drag_window;
+toolitem_set_use_drag_window(VALUE self, VALUE use_drag_window)
 {
     gtk_tool_item_set_use_drag_window(_SELF(self), RVAL2CBOOL(use_drag_window));
     return self;
 }
 static VALUE
-toolitem_get_use_drag_window(self)
-    VALUE self;
+toolitem_get_use_drag_window(VALUE self)
 {
     return CBOOL2RVAL(gtk_tool_item_get_use_drag_window(_SELF(self)));
 }
 
 static VALUE
-toolitem_get_icon_size(self)
-    VALUE self;
+toolitem_get_icon_size(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_icon_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE
-toolitem_get_orientation(self)
-    VALUE self;
+toolitem_get_orientation(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_orientation(_SELF(self)), GTK_TYPE_ORIENTATION);
 }
 
 static VALUE
-toolitem_get_toolbar_style(self)
-    VALUE self;
+toolitem_get_toolbar_style(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_toolbar_style(_SELF(self)), GTK_TYPE_TOOLBAR_STYLE);
 }
 
 static VALUE
-toolitem_get_relief_style(self)
-    VALUE self;
+toolitem_get_relief_style(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
 }
 
 static VALUE
-toolitem_retrieve_proxy_menu_item(self)
-    VALUE self;
+toolitem_retrieve_proxy_menu_item(VALUE self)
 {
     return GOBJ2RVAL(gtk_tool_item_retrieve_proxy_menu_item(_SELF(self)));
 }
 
 static VALUE
-toolitem_get_proxy_menu_item(self, menu_item_id)
-    VALUE self, menu_item_id;
+toolitem_get_proxy_menu_item(VALUE self, VALUE menu_item_id)
 {
     return GOBJ2RVAL(gtk_tool_item_get_proxy_menu_item(_SELF(self), RVAL2CSTR(menu_item_id)));
 }
 
 static VALUE
-toolitem_set_proxy_menu_item(self, menu_item_id, menu_item)
-    VALUE self, menu_item_id, menu_item;
+toolitem_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
 {
     gtk_tool_item_set_proxy_menu_item(_SELF(self), RVAL2CSTR(menu_item_id),
                                       GTK_WIDGET(RVAL2GOBJ(menu_item)));
@@ -147,8 +130,7 @@ gboolean    gtk_tool_item_get_is_important  (GtkToolItem *tool_item);
 */
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-toolitem_rebuild_menu(self)
-    VALUE self;
+toolitem_rebuild_menu(VALUE self)
 {
     gtk_tool_item_rebuild_menu(_SELF(self));
     return self;
