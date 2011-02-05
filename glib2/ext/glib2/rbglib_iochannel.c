@@ -34,10 +34,7 @@ ioc_error(status, err)
 }
 
 static VALUE
-ioc_initialize(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_initialize(gint argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
 
@@ -80,10 +77,7 @@ ioc_close(self)
 }
 
 static VALUE
-ioc_s_open(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_s_open(gint argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     VALUE rio;
@@ -114,8 +108,7 @@ ioc_s_open(argc, argv, self)
 }
 
 static VALUE
-ioc_get_fd(self)
-    VALUE self;
+ioc_get_fd(VALUE self)
 {
 #ifdef G_OS_UNIX
     return INT2NUM(g_io_channel_unix_get_fd(_SELF(self)));
@@ -131,10 +124,7 @@ void        g_io_channel_init               (GIOChannel *channel);
 
 
 static VALUE
-ioc_read_chars(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_read_chars(gint argc, VALUE *argv, VALUE self)
 {
     VALUE count, ret;
     gchar* buf;
@@ -173,8 +163,7 @@ ioc_read_chars(argc, argv, self)
 }
 
 static VALUE
-ioc_read_unichar(self)
-    VALUE self;
+ioc_read_unichar(VALUE self)
 {
     gunichar thechar;
     GError* err = NULL;
@@ -186,8 +175,7 @@ ioc_read_unichar(self)
 }
 
 static VALUE
-ioc_getuc(self)
-    VALUE self;
+ioc_getuc(VALUE self)
 {
     gunichar thechar;
     GError* err = NULL;
@@ -205,8 +193,7 @@ ioc_getuc(self)
 }
 
 static VALUE
-ioc_each_char(self)
-    VALUE self;
+ioc_each_char(VALUE self)
 {
     if (!rb_block_given_p()) {
         rb_raise(rb_eArgError, "called without a block");
@@ -227,10 +214,7 @@ ioc_each_char(self)
 }
 
 static VALUE
-ioc_read_line(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_read_line(gint argc, VALUE *argv, VALUE self)
 {
     gchar* str;
     VALUE line_term, ret;
@@ -265,10 +249,7 @@ ioc_read_line(argc, argv, self)
 }
 
 static VALUE
-ioc_gets(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_gets(gint argc, VALUE *argv, VALUE self)
 {
     gchar* str;
     VALUE line_term, ret;
@@ -323,10 +304,7 @@ ioc_set_line_term(args)
 }
 
 static VALUE
-ioc_each_line(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_each_line(gint argc, VALUE *argv, VALUE self)
 {
     gchar* str;
     VALUE line_term;
@@ -378,8 +356,7 @@ GIOStatus   g_io_channel_read_line_string   (GIOChannel *channel,
 
 /* Use GLib::IOChannel#read instead.
 static VALUE
-ioc_read_to_end(self)
-    VALUE self;
+ioc_read_to_end(VALUE self)
 {
     gchar* str;
     gsize length;
@@ -423,8 +400,7 @@ ioc_write_chars(self, buf)
 static ID id_unpack;
 
 static VALUE
-ioc_write_unichar(self, thechar)
-    VALUE self, thechar;
+ioc_write_unichar(VALUE self, VALUE thechar)
 {
     GError* err = NULL;
     GIOStatus status;
@@ -446,8 +422,7 @@ ioc_write_unichar(self, thechar)
 }
 
 static VALUE
-ioc_flush(self)
-    VALUE self;
+ioc_flush(VALUE self)
 {
     GError* err = NULL;
     GIOStatus status =  g_io_channel_flush(_SELF(self), &err);
@@ -456,10 +431,7 @@ ioc_flush(self)
 }
 
 static VALUE
-ioc_seek(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_seek(gint argc, VALUE *argv, VALUE self)
 {
     VALUE ofs, type;
     GIOStatus status;
@@ -478,8 +450,7 @@ ioc_seek(argc, argv, self)
 }
 
 static VALUE
-ioc_seek_pos(self, pos)
-    VALUE self, pos;
+ioc_seek_pos(VALUE self, VALUE pos)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_seek_position(_SELF(self), NUM2INT(pos),
@@ -489,10 +460,7 @@ ioc_seek_pos(self, pos)
 }
 
 static VALUE
-ioc_shutdown(argc, argv, self)
-    gint argc;
-    VALUE* argv;
-    VALUE self;
+ioc_shutdown(gint argc, VALUE *argv, VALUE self)
 {
     VALUE flush;
     GError* err = NULL;
@@ -512,8 +480,7 @@ ioc_shutdown(argc, argv, self)
 }
 
 static VALUE
-ioc_create_watch(self, condition)
-    VALUE self, condition;
+ioc_create_watch(VALUE self, VALUE condition)
 {
     return BOXED2RVAL(g_io_create_watch(_SELF(self), NUM2INT(condition)), 
                       G_TYPE_SOURCE);
@@ -531,8 +498,7 @@ io_func(source, condition, func)
 }
 
 static VALUE
-ioc_add_watch(self, condition)
-    VALUE self, condition;
+ioc_add_watch(VALUE self, VALUE condition)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -550,37 +516,32 @@ guint       g_io_add_watch_full             (GIOChannel *channel,
 */
 
 static VALUE
-ioc_get_buffer_size(self)
-    VALUE self;
+ioc_get_buffer_size(VALUE self)
 {
     return UINT2NUM(g_io_channel_get_buffer_size(_SELF(self)));
 }
 
 static VALUE
-ioc_set_buffer_size(self, buffer_size)
-    VALUE self, buffer_size;
+ioc_set_buffer_size(VALUE self, VALUE buffer_size)
 {
     g_io_channel_set_buffer_size(_SELF(self), NUM2UINT(buffer_size));
     return self;
 }
 
 static VALUE
-ioc_get_buffer_condition(self)
-    VALUE self;
+ioc_get_buffer_condition(VALUE self)
 {
     return INT2NUM(g_io_channel_get_buffer_condition(_SELF(self)));
 }
 
 static VALUE
-ioc_get_flags(self)
-    VALUE self;
+ioc_get_flags(VALUE self)
 {
     return INT2NUM(g_io_channel_get_flags(_SELF(self)));
 }
 
 static VALUE
-ioc_set_flags(self, flags)
-    VALUE self, flags;
+ioc_set_flags(VALUE self, VALUE flags)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_set_flags(_SELF(self), 
@@ -591,8 +552,7 @@ ioc_set_flags(self, flags)
 
 /* Use them with GLib::IOChannel#gets, #readline, #readlines 
 static VALUE
-ioc_get_line_term(self)
-    VALUE self;
+ioc_get_line_term(VALUE self)
 {
     gint length;
     const gchar* ret = g_io_channel_get_line_term(_SELF(self), &length);
@@ -607,8 +567,7 @@ ioc_get_line_term(self)
 }    
 
 static VALUE
-ioc_set_line_term(self, line_term)
-    VALUE self, line_term;
+ioc_set_line_term(VALUE self, VALUE line_term)
 {
     StringValue(line_term);
     g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
@@ -618,30 +577,26 @@ ioc_set_line_term(self, line_term)
 */
 
 static VALUE
-ioc_get_buffered(self)
-    VALUE self;
+ioc_get_buffered(VALUE self)
 {
     return CBOOL2RVAL(g_io_channel_get_buffered(_SELF(self)));
 }
 
 static VALUE
-ioc_set_buffered(self, buffered)
-    VALUE self, buffered;
+ioc_set_buffered(VALUE self, VALUE buffered)
 {
     g_io_channel_set_buffered(_SELF(self), RVAL2CBOOL(buffered));
     return self;
 }
 
 static VALUE
-ioc_get_encoding(self)
-    VALUE self;
+ioc_get_encoding(VALUE self)
 {
     return CSTR2RVAL(g_io_channel_get_encoding(_SELF(self)));
 }
 
 static VALUE
-ioc_set_encoding(self, encoding)
-    VALUE self, encoding;
+ioc_set_encoding(VALUE self, VALUE encoding)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_set_encoding(_SELF(self), 
@@ -673,8 +628,7 @@ void        g_io_channel_close              (GIOChannel *channel);
 */
 
 static VALUE
-ioc_error_s_from_errno(self, errno_)
-    VALUE self, errno_;
+ioc_error_s_from_errno(VALUE self, VALUE errno_)
 {
     return INT2NUM(g_io_channel_error_from_errno(NUM2INT(errno_)));
 }
@@ -683,10 +637,7 @@ ioc_error_s_from_errno(self, errno_)
  * Stolen some convenient methods from io.c
  */
 static VALUE
-ioc_printf(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+ioc_printf(int argc, VALUE *argv, VALUE self)
 {
     ioc_write_chars(self, rb_f_sprintf(argc, argv));
     return Qnil;
@@ -713,10 +664,7 @@ ioc_puts_ary(ary, out, recur)
 }
 
 static VALUE
-ioc_puts(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+ioc_puts(int argc, VALUE *argv, VALUE self)
 {
     int i;
     VALUE line;
@@ -757,10 +705,7 @@ ioc_puts(argc, argv, self)
 }
 
 static VALUE
-ioc_print(argc, argv, out)
-    int argc;
-    VALUE *argv;
-    VALUE out;
+ioc_print(int argc, VALUE *argv, VALUE out)
 {
     int i;
     VALUE line;
