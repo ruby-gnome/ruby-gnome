@@ -15,23 +15,20 @@
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
 static VALUE
-gdkdisplaymanager_get(self)
-    VALUE self;
+gdkdisplaymanager_get(VALUE self)
 {
     return GOBJ2RVAL(gdk_display_manager_get());
 }
 
 static VALUE
-gdkdisplaymanager_list_displays(self)
-    VALUE self;
+gdkdisplaymanager_list_displays(VALUE self)
 {
     return GSLIST2ARYF(gdk_display_manager_list_displays(_SELF(self)));
 }
 
 /* Move to Gdk::Display.
 static VALUE
-gdkdisplaymanager_get_core_pointer(self)
-    VALUE self;
+gdkdisplaymanager_get_core_pointer(VALUE self)
 {
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
