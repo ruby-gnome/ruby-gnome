@@ -39,22 +39,19 @@ pango_log_attr_get_type(void)
 
 #define ATTR_BOOL(name)\
 static VALUE \
-log_get_ ## name (self)\
-    VALUE self;\
+log_get_ ## name (VALUE self)\
 {\
     return CBOOL2RVAL(_SELF(self)->name);\
 }\
 static VALUE \
-log_set_ ## name (self, val)\
-    VALUE self, val;\
+log_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
 }
 
 static VALUE
-log_initialize(self)
-    VALUE self;
+log_initialize(VALUE self)
 {
     PangoLogAttr log;
     G_INITIALIZE(self, &log);
