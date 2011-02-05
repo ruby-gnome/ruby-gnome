@@ -15,8 +15,7 @@
 
 #ifndef GTK_TYPE_TREE_ROW_REFERENCE
 static GtkTreeRowReference*
-treerowref_copy(ref)
-    const GtkTreeRowReference* ref;
+treerowref_copy(const GtkTreeRowReference *ref)
 {
     return (GtkTreeRowReference*)ref;
 }
@@ -33,8 +32,7 @@ rbgtk_tree_row_reference_get_type()
 }
 
 GtkTreeRowReference *
-rbgtk_get_tree_row_reference(obj)
-    VALUE obj;
+rbgtk_get_tree_row_reference(VALUE obj)
 {
     return (GtkTreeRowReference*)RVAL2BOXED(obj, GTK_TYPE_TREE_ROW_REFERENCE);
 }
@@ -51,10 +49,7 @@ static ID id_model;
 static ID id_path;
 
 static VALUE
-treerowref_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+treerowref_initialize(int argc, VALUE *argv, VALUE self)
 {
   VALUE proxy, model, path;
   GtkTreeRowReference* ref;
@@ -82,8 +77,7 @@ treerowref_initialize(argc, argv, self)
 
 
 static VALUE
-treerowref_get_path(self)
-    VALUE self;
+treerowref_get_path(VALUE self)
 {
     VALUE ret = GTKTREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
     G_CHILD_SET(self, id_path, ret);
@@ -92,8 +86,7 @@ treerowref_get_path(self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-treerowref_get_model(self)
-    VALUE self;
+treerowref_get_model(VALUE self)
 {
     VALUE ret = GOBJ2RVAL(gtk_tree_row_reference_get_model(_SELF(self)));
     G_CHILD_SET(self, id_model, ret);
@@ -102,31 +95,27 @@ treerowref_get_model(self)
 #endif
 
 static VALUE
-treerowref_valid(self)
-    VALUE self;
+treerowref_valid(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_row_reference_valid(_SELF(self)));
 }
 
 static VALUE
-treerowref_s_inserted(self, proxy, path)
-    VALUE self, proxy, path;
+treerowref_s_inserted(VALUE self, VALUE proxy, VALUE path)
 {
     gtk_tree_row_reference_inserted(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treerowref_s_deleted(self, proxy, path)
-    VALUE self, proxy, path;
+treerowref_s_deleted(VALUE self, VALUE proxy, VALUE path)
 {
     gtk_tree_row_reference_deleted(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treerowref_s_reordered(self, proxy, path, iter, new_orders)
-    VALUE self, proxy, path, iter, new_orders;
+treerowref_s_reordered(VALUE self, VALUE proxy, VALUE path, VALUE iter, VALUE new_orders)
 {
     gint i, len;
     gint* orders;
