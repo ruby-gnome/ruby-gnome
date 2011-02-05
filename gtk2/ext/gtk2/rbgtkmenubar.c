@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-mbar_initialize(self)
-    VALUE self;
+mbar_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_menu_bar_new());
     return Qnil;
