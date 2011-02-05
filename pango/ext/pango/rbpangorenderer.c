@@ -15,8 +15,7 @@
 #define _SELF(self) (PANGO_RENDERER(RVAL2GOBJ(self)))
 
 static VALUE
-renderer_draw_layout(self, layout, x, y)
-    VALUE self, layout, x, y;
+renderer_draw_layout(VALUE self, VALUE layout, VALUE x, VALUE y)
 {
     pango_renderer_draw_layout(_SELF(self), 
                                PANGO_LAYOUT(RVAL2GOBJ(layout)),
@@ -25,8 +24,7 @@ renderer_draw_layout(self, layout, x, y)
 }
 
 static VALUE
-renderer_draw_layout_line(self, line, x, y)
-    VALUE self, line, x, y;
+renderer_draw_layout_line(VALUE self, VALUE line, VALUE x, VALUE y)
 {
     pango_renderer_draw_layout_line(_SELF(self),  
                                     (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
@@ -35,8 +33,7 @@ renderer_draw_layout_line(self, line, x, y)
 }
 
 static VALUE
-renderer_draw_glyphs(self, font, glyphs, x, y)
-    VALUE self, font, glyphs, x, y;
+renderer_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
 {
     pango_renderer_draw_glyphs(_SELF(self), 
                                PANGO_FONT(RVAL2GOBJ(self)),
@@ -46,8 +43,7 @@ renderer_draw_glyphs(self, font, glyphs, x, y)
 }
 
 static VALUE
-renderer_draw_rectangle(self, part, x, y, width, height)
-    VALUE self, part, x, y, width, height;
+renderer_draw_rectangle(VALUE self, VALUE part, VALUE x, VALUE y, VALUE width, VALUE height)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_rectangle(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
@@ -60,8 +56,7 @@ renderer_draw_rectangle(self, part, x, y, width, height)
 }
 
 static VALUE
-renderer_draw_error_underline(self, x, y, width, height)
-    VALUE self, x, y, width, height;
+renderer_draw_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     pango_renderer_draw_error_underline(_SELF(self),
                                         NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
@@ -69,8 +64,7 @@ renderer_draw_error_underline(self, x, y, width, height)
 }
 
 static VALUE
-renderer_draw_trapezoid(self, part, y1, x11, x21, y2, x12, x22)
-    VALUE self, part, y1, x11, x21, y2, x12, x22;
+renderer_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, VALUE y2, VALUE x12, VALUE x22)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_trapezoid(_SELF(self), 
@@ -86,8 +80,7 @@ renderer_draw_trapezoid(self, part, y1, x11, x21, y2, x12, x22)
 }
 
 static VALUE
-renderer_draw_glyph(self, font, glyph, x, y)
-    VALUE self, font, glyph, x, y;
+renderer_draw_glyph(VALUE self, VALUE font, VALUE glyph, VALUE x, VALUE y)
 {
     pango_renderer_draw_glyph(_SELF(self), PANGO_FONT(RVAL2GOBJ(self)),
                               NUM2INT(glyph), NUM2INT(x), NUM2INT(y));
@@ -95,16 +88,14 @@ renderer_draw_glyph(self, font, glyph, x, y)
 }
 
 static VALUE
-renderer_deactivate(self)
-    VALUE self;
+renderer_deactivate(VALUE self)
 {
     pango_renderer_deactivate(_SELF(self));
     return self;
 }
 
 static VALUE
-renderer_activate(self)
-    VALUE self;
+renderer_activate(VALUE self)
 {
     pango_renderer_activate(_SELF(self));
     if (rb_block_given_p()) {
@@ -114,8 +105,7 @@ renderer_activate(self)
 }
 
 static VALUE
-renderer_part_changed(self, part)
-    VALUE self, part;
+renderer_part_changed(VALUE self, VALUE part)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_part_changed(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
@@ -126,8 +116,7 @@ renderer_part_changed(self, part)
 }
 
 static VALUE
-renderer_set_color(self, part, color)
-    VALUE self, part, color;
+renderer_set_color(VALUE self, VALUE part, VALUE color)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_set_color(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
@@ -140,8 +129,7 @@ renderer_set_color(self, part, color)
 }
 
 static VALUE
-renderer_get_color(self, part)
-    VALUE self, part;
+renderer_get_color(VALUE self, VALUE part)
 {
 #if HAVE_PANGO_RENDER_PART_GET_TYPE
     PangoColor* color = pango_renderer_get_color(_SELF(self),
@@ -153,8 +141,7 @@ renderer_get_color(self, part)
 }
 
 static VALUE
-renderer_set_matrix(self, matrix)
-    VALUE self, matrix;
+renderer_set_matrix(VALUE self, VALUE matrix)
 {
     pango_renderer_set_matrix(_SELF(self), 
                               (PangoMatrix*)(NIL_P(matrix) ? NULL : RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)));
@@ -162,8 +149,7 @@ renderer_set_matrix(self, matrix)
 }
 
 static VALUE
-renderer_get_matrix(self)
-    VALUE self;
+renderer_get_matrix(VALUE self)
 {
     const PangoMatrix* matrix = pango_renderer_get_matrix(_SELF(self));
     return BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX);
