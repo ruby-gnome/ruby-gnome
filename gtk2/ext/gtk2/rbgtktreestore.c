@@ -14,10 +14,7 @@
 #define _SELF(s) (GTK_TREE_STORE(RVAL2GOBJ(s)))
 
 static VALUE
-tstore_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+tstore_initialize(int argc, VALUE *argv, VALUE self)
 {
     gint cnt;
     GtkTreeStore* store;
@@ -38,10 +35,7 @@ tstore_initialize(argc, argv, self)
 }
 
 static VALUE
-tstore_set_column_types(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+tstore_set_column_types(int argc, VALUE *argv, VALUE self)
 {
     gint cnt;
     GType* buf;
@@ -58,8 +52,7 @@ tstore_set_column_types(argc, argv, self)
 }
 
 static VALUE
-tstore_set_value(self, iter, column, value)
-    VALUE self, iter, column, value;
+tstore_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 {
     GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(column));
     GValue gval = {0,};
@@ -87,8 +80,7 @@ tstore_set_value(self, iter, column, value)
 */
     
 static VALUE
-tstore_remove(self, iter)
-    VALUE self, iter;
+tstore_remove(VALUE self, VALUE iter)
 {
     G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
@@ -100,10 +92,7 @@ tstore_remove(self, iter)
 }
 
 static VALUE
-tstore_insert(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+tstore_insert(int argc, VALUE *argv, VALUE self)
 {
     VALUE parent, position, values, ret;
     GtkTreeIter iter;
@@ -189,8 +178,7 @@ tstore_insert(argc, argv, self)
 
 
 static VALUE
-tstore_insert_before(self, parent, sibling)
-    VALUE self, parent, sibling;
+tstore_insert_before(VALUE self, VALUE parent, VALUE sibling)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -205,8 +193,7 @@ tstore_insert_before(self, parent, sibling)
 }
 
 static VALUE
-tstore_insert_after(self, parent, sibling)
-    VALUE self, parent, sibling;
+tstore_insert_after(VALUE self, VALUE parent, VALUE sibling)
 { 
     VALUE ret;
     GtkTreeIter iter;
@@ -243,8 +230,7 @@ void        gtk_tree_store_insert_with_valuesv
 */
 
 static VALUE
-tstore_prepend(self, parent)
-    VALUE self, parent;
+tstore_prepend(VALUE self, VALUE parent)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -259,8 +245,7 @@ tstore_prepend(self, parent)
 }
 
 static VALUE
-tstore_append(self, parent)
-    VALUE self, parent;
+tstore_append(VALUE self, VALUE parent)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -275,23 +260,20 @@ tstore_append(self, parent)
 }
 
 static VALUE
-tstore_is_ancestor(self, iter, descendant)
-    VALUE self, iter, descendant;
+tstore_is_ancestor(VALUE self, VALUE iter, VALUE descendant)
 {
     return gtk_tree_store_is_ancestor(_SELF(self), RVAL2GTKTREEITER(iter), 
                                       RVAL2GTKTREEITER(descendant));
 }
 
 static VALUE
-tstore_iter_depth(self, iter)
-    VALUE self, iter;
+tstore_iter_depth(VALUE self, VALUE iter)
 {
     return INT2NUM(gtk_tree_store_iter_depth(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
 static VALUE
-tstore_clear(self)
-    VALUE self;
+tstore_clear(VALUE self)
 {
     G_CHILD_REMOVE_ALL(self);
     gtk_tree_store_clear(_SELF(self));
@@ -299,15 +281,13 @@ tstore_clear(self)
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-tstore_iter_is_valid(self, iter)
-    VALUE self, iter;
+tstore_iter_is_valid(VALUE self, VALUE iter)
 {
     return (NIL_P(iter)) ? Qfalse : 
         CBOOL2RVAL(gtk_tree_store_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 static VALUE
-tstore_reorder(self, parent, new_order)
-    VALUE self, parent, new_order;
+tstore_reorder(VALUE self, VALUE parent, VALUE new_order)
 {
     gint i;
     gint len = RARRAY_LEN(new_order);
@@ -322,23 +302,20 @@ tstore_reorder(self, parent, new_order)
     return self;
 }
 static VALUE
-tstore_swap(self, iter1, iter2)
-    VALUE self, iter1, iter2;
+tstore_swap(VALUE self, VALUE iter1, VALUE iter2)
 {
     gtk_tree_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
 static VALUE
-tstore_move_before(self, iter, position)
-    VALUE self, iter, position;
+tstore_move_before(VALUE self, VALUE iter, VALUE position)
 {
     gtk_tree_store_move_before(_SELF(self), RVAL2GTKTREEITER(iter), 
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 static VALUE
-tstore_move_after(self, iter, position)
-    VALUE self, iter, position;
+tstore_move_after(VALUE self, VALUE iter, VALUE position)
 {
     gtk_tree_store_move_after(_SELF(self), RVAL2GTKTREEITER(iter), 
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
