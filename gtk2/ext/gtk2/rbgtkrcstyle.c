@@ -14,31 +14,27 @@
 #define _SELF(rc) (GTK_RC_STYLE(RVAL2GOBJ(rc)))
 
 static VALUE
-rcstyle_initialize(self)
-    VALUE self;
+rcstyle_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_rc_style_new());
     return Qnil;
 }
 
 static VALUE
-rcstyle_name(self)
-    VALUE self;
+rcstyle_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->name);
 }
 
 static VALUE
-rcstyle_set_name(self, name)
-    VALUE self, name;
+rcstyle_set_name(VALUE self, VALUE name)
 {
     _SELF(self)->name = RVAL2CSTR(name);
     return self;
 }
 
 static VALUE
-rcstyle_bg_pixmap_name(self, idx)
-    VALUE self, idx;
+rcstyle_bg_pixmap_name(VALUE self, VALUE idx)
 {
     int i = NUM2INT(idx);
 
@@ -48,8 +44,7 @@ rcstyle_bg_pixmap_name(self, idx)
 }
 
 static VALUE
-rcstyle_set_bg_pixmap_name(self, idx, bg_pixmap_name)
-    VALUE self, idx, bg_pixmap_name;
+rcstyle_set_bg_pixmap_name(VALUE self, VALUE idx, VALUE bg_pixmap_name)
 {
     int i = NUM2INT(idx);
 
@@ -60,16 +55,14 @@ rcstyle_set_bg_pixmap_name(self, idx, bg_pixmap_name)
 }
     
 static VALUE
-rcstyle_font_desc(self)
-    VALUE self;
+rcstyle_font_desc(VALUE self)
 {
     PangoFontDescription* desc = _SELF(self)->font_desc;
     return BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 static VALUE
-rcstyle_set_font_desc(self, font_desc)
-    VALUE self, font_desc;
+rcstyle_set_font_desc(VALUE self, VALUE font_desc)
 {
     _SELF(self)->font_desc = (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION);
     return self;
@@ -96,8 +89,7 @@ rcstyle_set_color_flags(VALUE self, VALUE rb_state_type, VALUE flags)
 
 #define DEFINE_STYLE_COLOR(type) \
 static VALUE \
-rcstyle_set_ ## type(self, idx, r, g, b) \
-    VALUE self, idx, r, g, b; \
+rcstyle_set_ ## type(VALUE self, VALUE idx, VALUE r, VALUE g, VALUE b) \
 { \
   GdkColor *color; \
   int i = NUM2INT(idx); \
@@ -110,8 +102,7 @@ rcstyle_set_ ## type(self, idx, r, g, b) \
   return self;\
 } \
 static VALUE \
-rcstyle_ ## type(self, idx) \
-    VALUE self, idx; \
+rcstyle_ ## type(VALUE self, VALUE idx) \
 { \
   int i = NUM2INT(idx); \
  \
@@ -125,30 +116,26 @@ DEFINE_STYLE_COLOR(text);
 DEFINE_STYLE_COLOR(base);
 
 static VALUE
-rcstyle_xthickness(self)
-    VALUE self;
+rcstyle_xthickness(VALUE self)
 {
     return INT2NUM(_SELF(self)->xthickness);
 }
 
 static VALUE
-rcstyle_set_xthickness(self, xthickness)
-    VALUE self, xthickness;
+rcstyle_set_xthickness(VALUE self, VALUE xthickness)
 {
     _SELF(self)->xthickness = NUM2INT(xthickness);
     return self;
 }
 
 static VALUE
-rcstyle_ythickness(self)
-    VALUE self;
+rcstyle_ythickness(VALUE self)
 {
     return INT2NUM(_SELF(self)->ythickness);
 }
 
 static VALUE
-rcstyle_set_ythickness(self, ythickness)
-    VALUE self, ythickness;
+rcstyle_set_ythickness(VALUE self, VALUE ythickness)
 {
     _SELF(self)->ythickness = NUM2INT(ythickness);
     return self;
