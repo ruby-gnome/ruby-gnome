@@ -13,8 +13,7 @@
 #include "global.h"
 
 static VALUE
-fs_initialize(self)
-    VALUE self;
+fs_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_font_selection_new());
     return Qnil;
