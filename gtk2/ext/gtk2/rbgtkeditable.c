@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-edit_sel_region(self, start, end)
-    VALUE self, start, end;
+edit_sel_region(VALUE self, VALUE start, VALUE end)
 {
     gtk_editable_select_region(GTK_EDITABLE(RVAL2GOBJ(self)),
 			       NUM2INT(start), NUM2INT(end));
@@ -24,8 +23,7 @@ edit_sel_region(self, start, end)
 }
 
 static VALUE
-edit_get_sel_bounds(self)
-    VALUE self;
+edit_get_sel_bounds(VALUE self)
 {
     gint start, end;
     gboolean ret;
@@ -35,8 +33,7 @@ edit_get_sel_bounds(self)
 }
 
 static VALUE
-edit_insert_text(self, new_text, pos)
-    VALUE self, new_text, pos;
+edit_insert_text(VALUE self, VALUE new_text, VALUE pos)
 {
     gint p = NUM2INT(pos);
 
@@ -49,8 +46,7 @@ edit_insert_text(self, new_text, pos)
 }
 
 static VALUE
-edit_delete_text(self, start, end)
-    VALUE self, start, end;
+edit_delete_text(VALUE self, VALUE start, VALUE end)
 {
     gtk_editable_delete_text(GTK_EDITABLE(RVAL2GOBJ(self)),
 			     NUM2INT(start), NUM2INT(end));
@@ -58,8 +54,7 @@ edit_delete_text(self, start, end)
 }
 
 static VALUE
-edit_get_chars(self, start, end)
-    VALUE self, start, end;
+edit_get_chars(VALUE self, VALUE start, VALUE end)
 {
     return CSTR2RVAL_FREE(
     	gtk_editable_get_chars(GTK_EDITABLE(RVAL2GOBJ(self)),   /* check s */
@@ -67,23 +62,20 @@ edit_get_chars(self, start, end)
 }
 
 static VALUE
-edit_delete_selection(self)
-    VALUE self;
+edit_delete_selection(VALUE self)
 {
     gtk_editable_delete_selection(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-edit_get_position(self)
-    VALUE self;
+edit_get_position(VALUE self)
 {
     return INT2NUM(gtk_editable_get_position(GTK_EDITABLE(RVAL2GOBJ(self))));
 }
 
 static VALUE
-edit_set_position(self, position)
-    VALUE self, position;
+edit_set_position(VALUE self, VALUE position)
 {
     gtk_editable_set_position(GTK_EDITABLE(RVAL2GOBJ(self)),
 			      NUM2INT(position));
@@ -91,39 +83,34 @@ edit_set_position(self, position)
 }
 
 static VALUE
-edit_set_editable(self, editable)
-    VALUE self, editable;
+edit_set_editable(VALUE self, VALUE editable)
 {
     gtk_editable_set_editable(GTK_EDITABLE(RVAL2GOBJ(self)), RVAL2CBOOL(editable));
     return self;
 }
 
 static VALUE
-edit_get_editable(self)
-    VALUE self;
+edit_get_editable(VALUE self)
 {
     return CBOOL2RVAL(gtk_editable_get_editable(GTK_EDITABLE(RVAL2GOBJ(self))));
 }
 
 static VALUE
-edit_cut_clipboard(self)
-    VALUE self;
+edit_cut_clipboard(VALUE self)
 {
     gtk_editable_cut_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-edit_copy_clipboard(self)
-    VALUE self;
+edit_copy_clipboard(VALUE self)
 {
     gtk_editable_copy_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-edit_paste_clipboard(self)
-    VALUE self;
+edit_paste_clipboard(VALUE self)
 {
     gtk_editable_paste_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
     return self;
