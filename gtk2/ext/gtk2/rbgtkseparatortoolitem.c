@@ -14,8 +14,7 @@
 #if GTK_CHECK_VERSION(2,4,0)
 
 static VALUE
-separatortoolitem_initialize(self)
-    VALUE self;
+separatortoolitem_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_separator_tool_item_new());
     return Qnil;
