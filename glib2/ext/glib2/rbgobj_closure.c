@@ -31,9 +31,7 @@ struct _GRClosure
 };
 
 static VALUE
-rclosure_default_g2r_func(num, values)
-    guint num;
-    const GValue* values;
+rclosure_default_g2r_func(guint num, const GValue *values)
 {
     int i;
     VALUE args = rb_ary_new2(num);
@@ -283,8 +281,7 @@ Init_rclosure()
 /**********************************************************************/
 
 static VALUE
-closure_initialize(self)
-    VALUE self;
+closure_initialize(VALUE self)
 {
     GClosure* closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
     G_INITIALIZE(self, closure);
@@ -293,24 +290,21 @@ closure_initialize(self)
 }
 
 static VALUE
-closure_in_marshal(self)
-    VALUE self;
+closure_in_marshal(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return CBOOL2RVAL(closure->in_marshal);
 }
 
 static VALUE
-closure_is_invalid(self)
-    VALUE self;
+closure_is_invalid(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return CBOOL2RVAL(closure->is_invalid);
 }
 
 static VALUE
-closure_invalidate(self)
-    VALUE self;
+closure_invalidate(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     g_closure_invalidate(closure);
