@@ -15,23 +15,20 @@
 #include "global.h"
 
 static VALUE
-gamma_initialize(self)
-    VALUE self;
+gamma_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_gamma_curve_new());
     return Qnil;
 }
 
 static VALUE
-gamma_gamma(self)
-    VALUE self;
+gamma_gamma(VALUE self)
 {
     return rb_float_new(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->gamma);
 }
 
 static VALUE
-gamma_curve(self)
-    VALUE self;
+gamma_curve(VALUE self)
 {
     return GOBJ2RVAL(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->curve);
 }
