@@ -17,10 +17,7 @@
 #define _SELF(self) (GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)))
 
 static VALUE
-scwin_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+scwin_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GtkAdjustment *h_adj = NULL;
@@ -36,8 +33,7 @@ scwin_initialize(argc, argv, self)
 }
 
 static VALUE
-scwin_set_policy(self, hpolicy, vpolicy)
-    VALUE self, hpolicy, vpolicy;
+scwin_set_policy(VALUE self, VALUE hpolicy, VALUE vpolicy)
 {
     gtk_scrolled_window_set_policy(_SELF(self),
                                    RVAL2GENUM(hpolicy, GTK_TYPE_POLICY_TYPE),
@@ -46,8 +42,7 @@ scwin_set_policy(self, hpolicy, vpolicy)
 }
 
 static VALUE
-scwin_get_policy(self)
-    VALUE self;
+scwin_get_policy(VALUE self)
 {
     GtkPolicyType hpolicy, vpolicy;
 
@@ -58,8 +53,7 @@ scwin_get_policy(self)
 }
 
 static VALUE
-scwin_add_with_viewport(self, other)
-    VALUE self, other;
+scwin_add_with_viewport(VALUE self, VALUE other)
 {
     gtk_scrolled_window_add_with_viewport(_SELF(self),
                                           GTK_WIDGET(RVAL2GOBJ(other)));
@@ -69,15 +63,13 @@ scwin_add_with_viewport(self, other)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-scwin_get_hscrollbar(self)
-    VALUE self;
+scwin_get_hscrollbar(VALUE self)
 {
     return GOBJ2RVAL(gtk_scrolled_window_get_hscrollbar(_SELF(self)));
 }
 
 static VALUE
-scwin_get_vscrollbar(self)
-    VALUE self;
+scwin_get_vscrollbar(VALUE self)
 {
     return GOBJ2RVAL(gtk_scrolled_window_get_vscrollbar(_SELF(self)));
 }
@@ -85,8 +77,7 @@ scwin_get_vscrollbar(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-scwin_set_placement(self, corner_type)
-    VALUE self, corner_type;
+scwin_set_placement(VALUE self, VALUE corner_type)
 {
     gtk_scrolled_window_set_placement(_SELF(self), 
                                       RVAL2GENUM(corner_type, GTK_TYPE_CORNER_TYPE));
@@ -94,16 +85,14 @@ scwin_set_placement(self, corner_type)
 }
 
 static VALUE
-scwin_unset_placement(self)
-    VALUE self;
+scwin_unset_placement(VALUE self)
 {
     gtk_scrolled_window_unset_placement(_SELF(self));
     return self;
 }
 
 static VALUE
-scwin_get_placement(self)
-    VALUE self;
+scwin_get_placement(VALUE self)
 {
     return GENUM2RVAL(gtk_scrolled_window_get_placement(_SELF(self)), 
                       GTK_TYPE_CORNER_TYPE);
