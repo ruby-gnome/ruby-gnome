@@ -38,8 +38,7 @@ g_poll_fd_get_type(void)
 #define _SELF(s) ((GPollFD*)RVAL2BOXED(s, G_TYPE_POLL_FD))
 
 static VALUE
-poll_initialize(self, fd, events, revents)
-    VALUE self, fd, events, revents;
+poll_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
 {
     GPollFD gfd;
     gfd.fd = NUM2INT(fd);
@@ -51,43 +50,37 @@ poll_initialize(self, fd, events, revents)
 }
 
 static VALUE
-poll_set_fd(self, fd)
-    VALUE self, fd;
+poll_set_fd(VALUE self, VALUE fd)
 {
     _SELF(self)->fd = fd;
     return self;
 }
 static VALUE
-poll_fd(self)
-    VALUE self;
+poll_fd(VALUE self)
 {
     return INT2NUM(_SELF(self)->fd);
 }
 
 static VALUE
-poll_set_events(self, events)
-    VALUE self, events;
+poll_set_events(VALUE self, VALUE events)
 {
     _SELF(self)->events = events;
     return self;
 }
 static VALUE
-poll_events(self)
-    VALUE self;
+poll_events(VALUE self)
 {
     return INT2NUM(_SELF(self)->events);
 }
 
 static VALUE
-poll_set_revents(self, revents)
-    VALUE self, revents;
+poll_set_revents(VALUE self, VALUE revents)
 {
     _SELF(self)->revents = revents;
     return self;
 }
 static VALUE
-poll_revents(self)
-    VALUE self;
+poll_revents(VALUE self)
 {
     return INT2NUM(_SELF(self)->revents);
 }
