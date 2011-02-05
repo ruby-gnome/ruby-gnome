@@ -16,15 +16,13 @@
 static ID id_call;
 
 static VALUE
-fontset_get_font(self, wc)
-    VALUE self, wc;
+fontset_get_font(VALUE self, VALUE wc)
 {
     return GOBJ2RVAL(pango_fontset_get_font(_SELF(self), NUM2UINT(wc)));
 }
 
 static VALUE
-fontset_get_metrics(self)
-    VALUE self;
+fontset_get_metrics(VALUE self)
 {
     return BOXED2RVAL(pango_fontset_get_metrics(_SELF(self)), PANGO_TYPE_FONT_METRICS);
 }
@@ -41,8 +39,7 @@ fontset_each(fontset, font, func)
 }
 
 static VALUE
-fontset_foreach(self)
-    VALUE self;
+fontset_foreach(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
