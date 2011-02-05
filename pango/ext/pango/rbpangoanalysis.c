@@ -38,8 +38,7 @@ pango_analysis_get_type(void)
 /**********************************/
 
 static VALUE
-ana_initialize(self)
-    VALUE self;
+ana_initialize(VALUE self)
 {
     PangoAnalysis ana = { NULL, NULL, NULL, 0 };
     G_INITIALIZE(self, &ana);
@@ -48,15 +47,13 @@ ana_initialize(self)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-ana_set_shape_engine(self, engine)
-    VALUE self, engine;
+ana_set_shape_engine(VALUE self, VALUE engine)
 {
     _SELF(self)->shape_engine = PANGO_ENGINE_SHAPE(RVAL2GOBJ(engine));
     return self;
 }
 static VALUE
-ana_get_shape_engine(self)
-    VALUE self;
+ana_get_shape_engine(VALUE self)
 {
     VALUE ret;
     if (_SELF(self)->shape_engine){
@@ -72,15 +69,13 @@ ana_get_shape_engine(self)
 }
 
 static VALUE
-ana_set_lang_engine(self, engine)
-    VALUE self, engine;
+ana_set_lang_engine(VALUE self, VALUE engine)
 {
     _SELF(self)->lang_engine = PANGO_ENGINE_LANG(RVAL2GOBJ(engine));
     return self;
 }
 static VALUE
-ana_get_lang_engine(self)
-    VALUE self;
+ana_get_lang_engine(VALUE self)
 {
     VALUE ret;
     if (_SELF(self)->lang_engine){
@@ -97,53 +92,46 @@ ana_get_lang_engine(self)
 #endif
 
 static VALUE
-ana_set_font(self, font)
-    VALUE self, font;
+ana_set_font(VALUE self, VALUE font)
 {
     _SELF(self)->font = PANGO_FONT(RVAL2GOBJ(font));
     return self;
 }
 
 static VALUE
-ana_get_font(self)
-    VALUE self;
+ana_get_font(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->font);
 }
 
 static VALUE
-ana_set_level(self, level)
-    VALUE self, level;
+ana_set_level(VALUE self, VALUE level)
 {
     _SELF(self)->level = NUM2UINT(level);
     return self;
 }
 
 static VALUE
-ana_get_level(self)
-    VALUE self;
+ana_get_level(VALUE self)
 {
     return UINT2NUM(_SELF(self)->level);
 }
 
 static VALUE
-ana_set_language(self, lang)
-    VALUE self, lang;
+ana_set_language(VALUE self, VALUE lang)
 {
     _SELF(self)->language = RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE);
     return self;
 }
 
 static VALUE
-ana_get_language(self)
-    VALUE self;
+ana_get_language(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
 }
 
 static VALUE
-ana_set_extra_attrs(self, attrs)
-    VALUE self, attrs;
+ana_set_extra_attrs(VALUE self, VALUE attrs)
 {
     gint i;
     gint len = RARRAY_LEN(attrs);
@@ -158,8 +146,7 @@ ana_set_extra_attrs(self, attrs)
 }
 
 static VALUE
-ana_get_extra_attrs(self)
-    VALUE self;
+ana_get_extra_attrs(VALUE self)
 {
     VALUE ary = rb_ary_new();
     GSList* list = _SELF(self)->extra_attrs;
