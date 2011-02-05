@@ -18,10 +18,7 @@
 
 
 static VALUE
-rgb_draw_rgb_image(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+rgb_draw_rgb_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 
@@ -49,8 +46,7 @@ rgb_draw_rgb_image(argc, argv, self)
 }
 
 static VALUE
-rgb_draw_indexed_image(self, win, gc, x, y, w, h, dither, buf, rowstride, colors)
-    VALUE self, win, gc, x, y, w, h, dither, buf, rowstride, colors;
+rgb_draw_indexed_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride, VALUE colors)
 {
     GdkRgbCmap* cmap;
     guint32* gcolors;
@@ -79,8 +75,7 @@ rgb_draw_indexed_image(self, win, gc, x, y, w, h, dither, buf, rowstride, colors
 }
 
 static VALUE
-rgb_draw_gray_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
-    VALUE self, win, gc, x, y, w, h, dither, buf, rowstride;
+rgb_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride)
 {
     gdk_draw_gray_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
                         NUM2INT(x), NUM2INT(y),
@@ -92,10 +87,7 @@ rgb_draw_gray_image(self, win, gc, x, y, w, h, dither, buf, rowstride)
 }
 
 static VALUE
-rgb_draw_rgb_32_image(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+rgb_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 
@@ -121,8 +113,7 @@ rgb_draw_rgb_32_image(argc, argv, self)
 }
 
 static VALUE
-rgb_find_color(self, colormap, color)
-    VALUE self, colormap, color;
+rgb_find_color(VALUE self, VALUE colormap, VALUE color)
 {
     gdk_rgb_find_color(GDK_COLORMAP(RVAL2GOBJ(colormap)),
                        RVAL2GDKCOLOR(color));
@@ -130,45 +121,39 @@ rgb_find_color(self, colormap, color)
 }
 
 static VALUE
-rgb_set_install(self, install)
-    VALUE self, install;
+rgb_set_install(VALUE self, VALUE install)
 {
     gdk_rgb_set_install(RVAL2CBOOL(install));
     return self;
 }
 
 static VALUE
-rgb_set_min_colors(self, min_colors)
-    VALUE self, min_colors;
+rgb_set_min_colors(VALUE self, VALUE min_colors)
 {
     gdk_rgb_set_min_colors(NUM2INT(min_colors));
     return self;
 }
 
 static VALUE
-rgb_get_visual(self)
-    VALUE self;
+rgb_get_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_visual());
 }
 
 static VALUE
-rgb_get_cmap(self)
-    VALUE self;
+rgb_get_cmap(VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_colormap());
 }
 
 static VALUE
-rgb_ditherable(self)
-    VALUE self;
+rgb_ditherable(VALUE self)
 {
     return CBOOL2RVAL(gdk_rgb_ditherable());
 }
 
 static VALUE
-rgb_set_verbose(self, verbose)
-    VALUE self, verbose;
+rgb_set_verbose(VALUE self, VALUE verbose)
 {
     gdk_rgb_set_verbose(RVAL2CBOOL(verbose));
     return self;
