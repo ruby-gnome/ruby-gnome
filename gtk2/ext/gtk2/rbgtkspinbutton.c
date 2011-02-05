@@ -17,10 +17,7 @@
 #define _SELF(self) (GTK_SPIN_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-sbtn_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+sbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
@@ -44,8 +41,7 @@ sbtn_initialize(argc, argv, self)
 }
 
 static VALUE
-sbtn_configure(self, adj, climb_rate, digits)
-    VALUE self, adj, climb_rate, digits;
+sbtn_configure(VALUE self, VALUE adj, VALUE climb_rate, VALUE digits)
 {
     gtk_spin_button_configure(_SELF(self), GTK_ADJUSTMENT(RVAL2GOBJ(adj)),
                               NUM2DBL(climb_rate), NUM2UINT(digits));
@@ -53,16 +49,14 @@ sbtn_configure(self, adj, climb_rate, digits)
 }
 
 static VALUE
-sbtn_set_increments(self, step, page)
-    VALUE self, step, page;
+sbtn_set_increments(VALUE self, VALUE step, VALUE page)
 {
     gtk_spin_button_set_increments(_SELF(self), NUM2DBL(step), NUM2DBL(page));
     return self;
 }
 
 static VALUE
-sbtn_set_range(self, min, max)
-    VALUE self, min, max;
+sbtn_set_range(VALUE self, VALUE min, VALUE max)
 {
     gtk_spin_button_set_range(_SELF(self), NUM2DBL(min), NUM2DBL(max));
     return self;
@@ -70,15 +64,13 @@ sbtn_set_range(self, min, max)
 
 
 static VALUE
-sbtn_get_value_as_int(self)
-    VALUE self;
+sbtn_get_value_as_int(VALUE self)
 {
     return INT2NUM(gtk_spin_button_get_value_as_int(_SELF(self)));
 }
 
 static VALUE
-sbtn_spin(self, direction, increment)
-    VALUE self, direction, increment;
+sbtn_spin(VALUE self, VALUE direction, VALUE increment)
 {
     gtk_spin_button_spin(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_SPIN_TYPE), 
                          NUM2DBL(increment));
@@ -86,16 +78,14 @@ sbtn_spin(self, direction, increment)
 }
 
 static VALUE
-sbtn_update(self)
-    VALUE self;
+sbtn_update(VALUE self)
 {
     gtk_spin_button_update(_SELF(self));
     return self;
 }
 
 static VALUE
-sbtn_get_increments(self)
-    VALUE self;
+sbtn_get_increments(VALUE self)
 {
     gdouble step, page;
     gtk_spin_button_get_increments(_SELF(self), &step, &page);
@@ -104,8 +94,7 @@ sbtn_get_increments(self)
 }
 
 static VALUE
-sbtn_get_range(self)
-    VALUE self;
+sbtn_get_range(VALUE self)
 {
     gdouble min, max;
     gtk_spin_button_get_range(_SELF(self), &min, &max);
