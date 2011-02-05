@@ -16,74 +16,63 @@
 #define _SELF(s) (GTK_ASSISTANT(RVAL2GOBJ(s)))
 
 static VALUE
-ass_initialize(self)
-    VALUE self;
+ass_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_assistant_new());
     return Qnil;
 }
 
 static VALUE
-ass_get_current_page(self)
-    VALUE self;
+ass_get_current_page(VALUE self)
 {
     return INT2NUM(gtk_assistant_get_current_page(_SELF(self)));
 }
 
 static VALUE
-ass_set_current_page(self, page_num)
-    VALUE self, page_num;
+ass_set_current_page(VALUE self, VALUE page_num)
 {
     gtk_assistant_set_current_page(_SELF(self), NUM2INT(page_num));
     return self;
 }
 
 static VALUE
-ass_get_n_pages(self)
-    VALUE self;
+ass_get_n_pages(VALUE self)
 {
     return INT2NUM(gtk_assistant_get_n_pages(_SELF(self)));
 }
 
 static VALUE
-ass_get_nth_page(self, page_num)
-    VALUE self, page_num;
+ass_get_nth_page(VALUE self, VALUE page_num)
 {
     return GOBJ2RVAL(gtk_assistant_get_nth_page(_SELF(self), NUM2INT(page_num)));
 }
 
 static VALUE
-ass_prepend_page(self, page)
-    VALUE self, page;
+ass_prepend_page(VALUE self, VALUE page)
 {
     return INT2NUM(gtk_assistant_prepend_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
-ass_append_page(self, page)
-    VALUE self, page;
+ass_append_page(VALUE self, VALUE page)
 {
     return INT2NUM(gtk_assistant_append_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
-ass_insert_page(self, page, position)
-    VALUE self, page, position;
+ass_insert_page(VALUE self, VALUE page, VALUE position)
 {
     return INT2NUM(gtk_assistant_insert_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), NUM2INT(position)));
 }
 
 static gint
-ass_page_func(current_page, func)
-    gint current_page;
-    gpointer func;
+ass_page_func(gint current_page, gpointer func)
 {
     return NUM2INT(rb_funcall((VALUE)func, id_call, 1, INT2NUM(current_page)));
 }
 
 static VALUE
-ass_set_forward_page_func(self)
-    VALUE self;
+ass_set_forward_page_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -92,99 +81,86 @@ ass_set_forward_page_func(self)
 }
 
 static VALUE
-ass_set_page_type(self, page, type)
-    VALUE self, page, type;
+ass_set_page_type(VALUE self, VALUE page, VALUE type)
 {
     gtk_assistant_set_page_type(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2GENUM(type, GTK_TYPE_ASSISTANT_PAGE_TYPE));
     return self;
 }
 
 static VALUE
-ass_get_page_type(self, page)
-    VALUE self, page;
+ass_get_page_type(VALUE self, VALUE page)
 {
     return GENUM2RVAL(gtk_assistant_get_page_type(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))), GTK_TYPE_ASSISTANT_PAGE_TYPE);
 }
 
 static VALUE
-ass_set_page_title(self, page, title)
-    VALUE self, page, title;
+ass_set_page_title(VALUE self, VALUE page, VALUE title)
 {
     gtk_assistant_set_page_title(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2CSTR(title));
     return self;
 }
 
 static VALUE
-ass_get_page_title(self, page)
-    VALUE self, page;
+ass_get_page_title(VALUE self, VALUE page)
 {
     return CSTR2RVAL(gtk_assistant_get_page_title(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
-ass_set_page_header_image(self, page, header_image)
-    VALUE self, page, header_image;
+ass_set_page_header_image(VALUE self, VALUE page, VALUE header_image)
 {
     gtk_assistant_set_page_header_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), GDK_PIXBUF(RVAL2GOBJ(header_image)));
     return self;
 }
 
 static VALUE
-ass_get_page_header_image(self, page)
-    VALUE self, page;
+ass_get_page_header_image(VALUE self, VALUE page)
 {
     return GOBJ2RVAL(gtk_assistant_get_page_header_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
-ass_set_page_side_image(self, page, side_image)
-    VALUE self, page, side_image;
+ass_set_page_side_image(VALUE self, VALUE page, VALUE side_image)
 {
     gtk_assistant_set_page_side_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), GDK_PIXBUF(RVAL2GOBJ(side_image)));
     return self;
 }
 
 static VALUE
-ass_get_page_side_image(self, page)
-    VALUE self, page;
+ass_get_page_side_image(VALUE self, VALUE page)
 {
     return GOBJ2RVAL(gtk_assistant_get_page_side_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
-ass_set_page_complete(self, page, complete)
-    VALUE self, page, complete;
+ass_set_page_complete(VALUE self, VALUE page, VALUE complete)
 {
     gtk_assistant_set_page_complete(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2CBOOL(complete));
     return self;
 }
 
 static VALUE
-ass_get_page_complete(self, page)
-    VALUE self, page;
+ass_get_page_complete(VALUE self, VALUE page)
 {
     return CBOOL2RVAL(gtk_assistant_get_page_complete(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
 }
 
 static VALUE
-ass_add_action_widget(self, child)
-    VALUE self, child;
+ass_add_action_widget(VALUE self, VALUE child)
 {
     gtk_assistant_add_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
 static VALUE
-ass_remove_action_widget(self, child)
-    VALUE self, child;
+ass_remove_action_widget(VALUE self, VALUE child)
 {
     gtk_assistant_remove_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
 static VALUE
-ass_update_buttons_state(self)
-    VALUE self;
+ass_update_buttons_state(VALUE self)
 {
     gtk_assistant_update_buttons_state(_SELF(self));
     return self;
