@@ -19,10 +19,7 @@ static ID id_model;
 static ID id_selection;
 
 static VALUE
-treeview_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+treeview_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model;
     GtkWidget *widget;
@@ -40,8 +37,7 @@ treeview_initialize(argc, argv, self)
 }
 
 static VALUE
-treeview_get_selection(self)
-    VALUE self;
+treeview_get_selection(VALUE self)
 {
     VALUE ret = GOBJ2RVAL(gtk_tree_view_get_selection(_SELF(self)));
     G_CHILD_SET(self, id_selection, ret);
@@ -49,16 +45,14 @@ treeview_get_selection(self)
 }
 
 static VALUE
-treeview_columns_autosize(self)
-    VALUE self;
+treeview_columns_autosize(VALUE self)
 {
     gtk_tree_view_columns_autosize(_SELF(self));
     return self;
 }
 
 static VALUE
-treeview_append_column(self, column)
-    VALUE self, column;
+treeview_append_column(VALUE self, VALUE column)
 {
     G_CHILD_ADD(self, column);
     return INT2NUM(gtk_tree_view_append_column(_SELF(self), 
@@ -66,8 +60,7 @@ treeview_append_column(self, column)
 }
 
 static VALUE
-treeview_remove_column(self, column)
-    VALUE self, column;
+treeview_remove_column(VALUE self, VALUE column)
 {
     G_CHILD_REMOVE(self, column);
     return INT2NUM(gtk_tree_view_remove_column(_SELF(self), 
@@ -89,10 +82,7 @@ cell_data_func(column, cell, model, iter, func)
 }
 
 static VALUE
-treeview_insert_column(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+treeview_insert_column(int argc, VALUE *argv, VALUE self)
 {
     VALUE args[4];
 
@@ -161,22 +151,19 @@ treeview_insert_column(argc, argv, self)
 }
 
 static VALUE
-treeview_get_column(self, num)
-    VALUE self, num;
+treeview_get_column(VALUE self, VALUE num)
 {
     return GOBJ2RVAL(gtk_tree_view_get_column(_SELF(self), NUM2INT(num)));
 }
 
 static VALUE
-treeview_get_columns(self)
-    VALUE self;
+treeview_get_columns(VALUE self)
 {
     return GLIST2ARYF(gtk_tree_view_get_columns(_SELF(self)));
 }
 
 static VALUE
-treeview_move_column_after(self, column, base_column)
-    VALUE self, column, base_column;
+treeview_move_column_after(VALUE self, VALUE column, VALUE base_column)
 {
     gtk_tree_view_move_column_after(_SELF(self), TREEVIEW_COL(column),
                                     NIL_P(base_column) ? NULL : TREEVIEW_COL(base_column));
@@ -197,8 +184,7 @@ column_drop_func(treeview, column, prev_column, next_column, func)
 }
 
 static VALUE
-treeview_set_column_drag_function(self)
-    VALUE self;
+treeview_set_column_drag_function(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -209,16 +195,14 @@ treeview_set_column_drag_function(self)
 }
 
 static VALUE
-treeview_scroll_to_point(self, x, y)
-    VALUE self, x, y;
+treeview_scroll_to_point(VALUE self, VALUE x, VALUE y)
 {
     gtk_tree_view_scroll_to_point(_SELF(self), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-treeview_scroll_to_cell(self, path, column, use_align, row_align, col_align)
-    VALUE self, path, column, use_align, row_align, col_align;
+treeview_scroll_to_cell(VALUE self, VALUE path, VALUE column, VALUE use_align, VALUE row_align, VALUE col_align)
 {
     gtk_tree_view_scroll_to_cell(_SELF(self),
                                  NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
@@ -229,8 +213,7 @@ treeview_scroll_to_cell(self, path, column, use_align, row_align, col_align)
 }
 
 static VALUE
-treeview_set_cursor(self, path, focus_column, start_editing)
-    VALUE self, path, focus_column, start_editing;
+treeview_set_cursor(VALUE self, VALUE path, VALUE focus_column, VALUE start_editing)
 {
     gtk_tree_view_set_cursor(_SELF(self), RVAL2GTKTREEPATH(path),
                              NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
@@ -239,8 +222,7 @@ treeview_set_cursor(self, path, focus_column, start_editing)
 }
 
 static VALUE
-treeview_get_cursor(self)
-    VALUE self;
+treeview_get_cursor(VALUE self)
 {
     GtkTreePath* path;
     GtkTreeViewColumn* focus_column;
@@ -251,8 +233,7 @@ treeview_get_cursor(self)
 }
 
 static VALUE
-treeview_row_activated(self, path, column)
-    VALUE self, path, column;
+treeview_row_activated(VALUE self, VALUE path, VALUE column)
 {
     gtk_tree_view_row_activated(_SELF(self), RVAL2GTKTREEPATH(path),
                                 TREEVIEW_COL(column));
@@ -260,24 +241,21 @@ treeview_row_activated(self, path, column)
 }
 
 static VALUE
-treeview_expand_all(self)
-    VALUE self;
+treeview_expand_all(VALUE self)
 {
     gtk_tree_view_expand_all(_SELF(self));
     return self;
 }
 
 static VALUE
-treeview_collapse_all(self)
-    VALUE self;
+treeview_collapse_all(VALUE self)
 {
     gtk_tree_view_collapse_all(_SELF(self));
     return self;
 }
 
 static VALUE
-treeview_expand_row(self, path, open_all)
-    VALUE self, path, open_all;
+treeview_expand_row(VALUE self, VALUE path, VALUE open_all)
 {
     return CBOOL2RVAL(gtk_tree_view_expand_row(_SELF(self), 
                                                RVAL2GTKTREEPATH(path),
@@ -286,8 +264,7 @@ treeview_expand_row(self, path, open_all)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-treeview_expand_to_path(self, path)
-    VALUE self, path;
+treeview_expand_to_path(VALUE self, VALUE path)
 {
     gtk_tree_view_expand_to_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
@@ -295,8 +272,7 @@ treeview_expand_to_path(self, path)
 #endif
 
 static VALUE
-treeview_collapse_row(self, path)
-    VALUE self, path;
+treeview_collapse_row(VALUE self, VALUE path)
 {
     return CBOOL2RVAL(gtk_tree_view_collapse_row(_SELF(self), 
                                                  RVAL2GTKTREEPATH(path)));
@@ -313,8 +289,7 @@ mapping_func(treeview, path, func)
 }
 
 static VALUE
-treeview_map_expanded_rows(self)
-    VALUE self;
+treeview_map_expanded_rows(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -325,16 +300,14 @@ treeview_map_expanded_rows(self)
 }
 
 static VALUE
-treeview_row_expanded(self, path)
-    VALUE self, path;
+treeview_row_expanded(VALUE self, VALUE path)
 {
     return CBOOL2RVAL(gtk_tree_view_row_expanded(_SELF(self), 
                                                  RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
-treeview_get_path_at_pos(self, x, y)
-    VALUE self, x, y;
+treeview_get_path_at_pos(VALUE self, VALUE x, VALUE y)
 {
     GtkTreePath* path;
     GtkTreeViewColumn* column;
@@ -351,8 +324,7 @@ treeview_get_path_at_pos(self, x, y)
 }
 
 static VALUE
-treeview_get_cell_area(self, path, column)
-    VALUE self, path, column;
+treeview_get_cell_area(VALUE self, VALUE path, VALUE column)
 {
     GdkRectangle rect;
     gtk_tree_view_get_cell_area(_SELF(self), 
@@ -363,8 +335,7 @@ treeview_get_cell_area(self, path, column)
 }
 
 static VALUE
-treeview_get_background_area(self, path, column)
-    VALUE self, path, column;
+treeview_get_background_area(VALUE self, VALUE path, VALUE column)
 {
     GdkRectangle rect;
     gtk_tree_view_get_background_area(_SELF(self), 
@@ -375,8 +346,7 @@ treeview_get_background_area(self, path, column)
 }
 
 static VALUE
-treeview_get_visible_rect(self)
-    VALUE self;
+treeview_get_visible_rect(VALUE self)
 {
     GdkRectangle rect;
     gtk_tree_view_get_visible_rect(_SELF(self), &rect);
@@ -385,8 +355,7 @@ treeview_get_visible_rect(self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-treeview_get_visible_range(self)
-    VALUE self;
+treeview_get_visible_range(VALUE self)
 {
     GtkTreePath* start_path;
     GtkTreePath* end_path;
@@ -399,15 +368,13 @@ treeview_get_visible_range(self)
 #endif
 
 static VALUE
-treeview_get_bin_window(self)
-    VALUE self;
+treeview_get_bin_window(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_view_get_bin_window(_SELF(self)));
 }
 
 static VALUE
-treeview_widget_to_tree_coords(self, wx, wy)
-    VALUE self, wx, wy;
+treeview_widget_to_tree_coords(VALUE self, VALUE wx, VALUE wy)
 {
     gint tx, ty;
     gtk_tree_view_widget_to_tree_coords(_SELF(self), 
@@ -417,8 +384,7 @@ treeview_widget_to_tree_coords(self, wx, wy)
 }
 
 static VALUE
-treeview_tree_to_widget_coords(self, tx, ty)
-    VALUE self, tx, ty;
+treeview_tree_to_widget_coords(VALUE self, VALUE tx, VALUE ty)
 {
     gint wx, wy;
     gtk_tree_view_tree_to_widget_coords(_SELF(self),
@@ -429,8 +395,7 @@ treeview_tree_to_widget_coords(self, tx, ty)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-treeview_convert_bin_window_to_tree_coords(self, bx, by)
-    VALUE self, bx, by;
+treeview_convert_bin_window_to_tree_coords(VALUE self, VALUE bx, VALUE by)
 {
     gint tx, ty;
     gtk_tree_view_convert_bin_window_to_tree_coords(_SELF(self),
@@ -439,8 +404,7 @@ treeview_convert_bin_window_to_tree_coords(self, bx, by)
     return rb_ary_new3(2, INT2NUM(tx), INT2NUM(ty));
 }
 static VALUE
-treeview_convert_bin_window_to_widget_coords(self, bx, by)
-    VALUE self, bx, by;
+treeview_convert_bin_window_to_widget_coords(VALUE self, VALUE bx, VALUE by)
 {
     gint wx, wy;
     gtk_tree_view_convert_bin_window_to_widget_coords(_SELF(self),
@@ -450,8 +414,7 @@ treeview_convert_bin_window_to_widget_coords(self, bx, by)
 }
 
 static VALUE
-treeview_convert_tree_to_bin_window_coords(self, tx, ty)
-    VALUE self, tx, ty;
+treeview_convert_tree_to_bin_window_coords(VALUE self, VALUE tx, VALUE ty)
 {
     gint bx, by;
     gtk_tree_view_convert_tree_to_bin_window_coords(_SELF(self),
@@ -460,8 +423,7 @@ treeview_convert_tree_to_bin_window_coords(self, tx, ty)
     return rb_ary_new3(2, INT2NUM(bx), INT2NUM(by));
 }
 static VALUE
-treeview_convert_tree_to_widget_coords(self, tx, ty)
-    VALUE self, tx, ty;
+treeview_convert_tree_to_widget_coords(VALUE self, VALUE tx, VALUE ty)
 {
     gint wx, wy;
     gtk_tree_view_convert_tree_to_widget_coords(_SELF(self),
@@ -471,8 +433,7 @@ treeview_convert_tree_to_widget_coords(self, tx, ty)
 }
 
 static VALUE
-treeview_convert_widget_to_bin_window_coords(self, wx, wy)
-    VALUE self, wx, wy;
+treeview_convert_widget_to_bin_window_coords(VALUE self, VALUE wx, VALUE wy)
 {
     gint bx, by;
     gtk_tree_view_convert_widget_to_bin_window_coords(_SELF(self),
@@ -481,8 +442,7 @@ treeview_convert_widget_to_bin_window_coords(self, wx, wy)
     return rb_ary_new3(2, INT2NUM(bx), INT2NUM(by));
 }
 static VALUE
-treeview_convert_widget_to_tree_coords(self, wx, wy)
-    VALUE self, wx, wy;
+treeview_convert_widget_to_tree_coords(VALUE self, VALUE wx, VALUE wy)
 {
     gint tx, ty;
     gtk_tree_view_convert_widget_to_tree_coords(_SELF(self),
@@ -493,8 +453,7 @@ treeview_convert_widget_to_tree_coords(self, wx, wy)
 #endif
 
 static VALUE
-treeview_enable_model_drag_dest(self, targets, actions)
-    VALUE self, targets, actions;
+treeview_enable_model_drag_dest(VALUE self, VALUE targets, VALUE actions)
 {
     const GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
     int num = RARRAY_LEN(targets);
@@ -505,8 +464,7 @@ treeview_enable_model_drag_dest(self, targets, actions)
 }
 
 static VALUE
-treeview_enable_model_drag_source(self, start_button_mask, targets, actions)
-        VALUE self, start_button_mask, targets, actions;
+treeview_enable_model_drag_source(VALUE self, VALUE start_button_mask, VALUE targets, VALUE actions)
 {
     GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
     if (entries){
@@ -521,24 +479,21 @@ treeview_enable_model_drag_source(self, start_button_mask, targets, actions)
 }
 
 static VALUE
-treeview_unset_rows_drag_source(self)
-    VALUE self;
+treeview_unset_rows_drag_source(VALUE self)
 {
     gtk_tree_view_unset_rows_drag_source(_SELF(self));
     return self;
 }
 
 static VALUE
-treeview_unset_rows_drag_dest(self)
-    VALUE self;
+treeview_unset_rows_drag_dest(VALUE self)
 {
     gtk_tree_view_unset_rows_drag_dest(_SELF(self));
     return self;
 }
 
 static VALUE
-treeview_set_drag_dest_row(self, path, pos)
-    VALUE self, path, pos;
+treeview_set_drag_dest_row(VALUE self, VALUE path, VALUE pos)
 {
     gtk_tree_view_set_drag_dest_row(_SELF(self), 
                                     NIL_P(path)?NULL:RVAL2GTKTREEPATH(path),
@@ -547,8 +502,7 @@ treeview_set_drag_dest_row(self, path, pos)
 }
 
 static VALUE
-treeview_get_drag_dest_row(self)
-    VALUE self;
+treeview_get_drag_dest_row(VALUE self)
 {
     GtkTreePath* path = NULL;
     GtkTreeViewDropPosition pos;
@@ -558,8 +512,7 @@ treeview_get_drag_dest_row(self)
 }
 
 static VALUE
-treeview_get_dest_row_at_pos(self, drag_x, drag_y)
-    VALUE self, drag_x, drag_y;
+treeview_get_dest_row_at_pos(VALUE self, VALUE drag_x, VALUE drag_y)
 {
     GtkTreePath* path;
     GtkTreeViewDropPosition pos;
@@ -573,8 +526,7 @@ treeview_get_dest_row_at_pos(self, drag_x, drag_y)
 }
 
 static VALUE
-treeview_create_row_drag_icon(self, path)
-    VALUE self, path;
+treeview_create_row_drag_icon(VALUE self, VALUE path)
 {
     return GOBJ2RVAL(gtk_tree_view_create_row_drag_icon(_SELF(self),
                                                         RVAL2GTKTREEPATH(path)));
@@ -601,8 +553,7 @@ search_equal_func(model, column, key, iter, func)
 }
 
 static VALUE
-treeview_set_search_equal_func(self)
-    VALUE self;
+treeview_set_search_equal_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -618,9 +569,7 @@ treeview_set_search_equal_func(self)
  * Optional Signals
  */
 static VALUE
-treeview_signal_func(num, values)
-    guint num;
-    const GValue* values;
+treeview_signal_func(guint num, const GValue *values)
 {
     GtkTreeView* view = g_value_get_object(&values[0]);
     GtkTreeIter* iter = g_value_get_boxed(&values[1]);
@@ -631,8 +580,7 @@ treeview_signal_func(num, values)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-treeview_set_cursor_on_cell(self, path, focus_column, focus_cell, start_editing)
-    VALUE self, path, focus_column, focus_cell, start_editing;
+treeview_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_cell, VALUE start_editing)
 {
     gtk_tree_view_set_cursor_on_cell(_SELF(self), RVAL2GTKTREEPATH(path),
                                      NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
@@ -665,10 +613,7 @@ GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
 
 #if GTK_CHECK_VERSION(2,6,0)
 static gboolean
-row_separator_func(model, iter, func)
-    GtkTreeModel* model;
-    GtkTreeIter* iter;
-    gpointer* func;
+row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer *func)
 {
     VALUE ret;
     iter->user_data3 = model;
@@ -678,8 +623,7 @@ row_separator_func(model, iter, func)
 }
 
 static VALUE
-treeview_set_row_separator_func(self)
-    VALUE self;
+treeview_set_row_separator_func(VALUE self)
 {
     VALUE func = rb_block_proc();
 
@@ -694,15 +638,13 @@ treeview_set_row_separator_func(self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-treeview_get_search_entry(self)
-    VALUE self;
+treeview_get_search_entry(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_view_get_search_entry(_SELF(self)));
 }
 
 static VALUE
-treeview_set_search_entry(self, entry)
-    VALUE self, entry;
+treeview_set_search_entry(VALUE self, VALUE entry)
 {
     gtk_tree_view_set_search_entry(_SELF(self), RVAL2GOBJ(entry));
     return self;
@@ -750,8 +692,7 @@ remove_callback_reference(gpointer data)
 
 
 static VALUE
-treeview_set_search_position_func(self)
-    VALUE self;
+treeview_set_search_position_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_CHILD_ADD(mGtk, func);
