@@ -13,15 +13,13 @@
 #define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
 
 static VALUE
-accel_valid(self, keyval, modifiers)
-    VALUE self, keyval, modifiers;
+accel_valid(VALUE self, VALUE keyval, VALUE modifiers)
 {
     return CBOOL2RVAL(gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)));
 }
 
 static VALUE
-accel_parse(self, accelerator)
-    VALUE self, accelerator;
+accel_parse(VALUE self, VALUE accelerator)
 {
     guint key;
     GdkModifierType mods;
@@ -30,32 +28,28 @@ accel_parse(self, accelerator)
 }
 
 static VALUE
-accel_name(self, key, mods)
-    VALUE self, key, mods;
+accel_name(VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-accel_get_label(self, key, mods)
-    VALUE self, key, mods;
+accel_get_label(VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2MOD(mods)));
 }
 #endif
 
 static VALUE
-accel_set_default_mod_mask(self, default_mod_mask)
-    VALUE self, default_mod_mask;
+accel_set_default_mod_mask(VALUE self, VALUE default_mod_mask)
 {
     gtk_accelerator_set_default_mod_mask(RVAL2MOD(default_mod_mask));
     return self;
 }
 
 static VALUE
-accel_get_default_mod_mask(self)
-    VALUE self;
+accel_get_default_mod_mask(VALUE self)
 {
     return GFLAGS2RVAL(gtk_accelerator_get_default_mod_mask(), GDK_TYPE_MODIFIER_TYPE);
 }
