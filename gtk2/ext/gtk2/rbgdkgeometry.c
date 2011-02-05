@@ -42,8 +42,7 @@ gdk_geometry_get_type(void)
 #define _SELF(g) ((GdkGeometry*)RVAL2BOXED(g, GDK_TYPE_GEOMETRY))
 
 static VALUE
-geo_initialize(self)
-    VALUE self;
+geo_initialize(VALUE self)
 {
     GdkGeometry g;
     G_INITIALIZE(self, &g);
@@ -51,10 +50,7 @@ geo_initialize(self)
 }
 
 static VALUE
-geo_set(self, min_width, min_height, max_width,	max_height,
-		base_width, base_height, width_inc, height_inc,	min_aspect, max_aspect, gravity)
-     VALUE self, min_width, min_height, max_width, max_height,
-     base_width, base_height, width_inc, height_inc, min_aspect, max_aspect, gravity;
+geo_set(VALUE self, VALUE min_width, VALUE min_height, VALUE max_width, VALUE max_height, VALUE base_width, VALUE base_height, VALUE width_inc, VALUE height_inc, VALUE min_aspect, VALUE max_aspect, VALUE gravity)
 {
     GdkGeometry *geo = _SELF(self);
     geo->min_width = NUM2INT(min_width);
@@ -73,165 +69,143 @@ geo_set(self, min_width, min_height, max_width,	max_height,
 }
 
 static VALUE
-geo_min_width(self)
-    VALUE self;
+geo_min_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->min_width);
 }
 
 static VALUE
-geo_min_height(self)
-    VALUE self;
+geo_min_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->min_height);
 }
 
 static VALUE
-geo_max_width(self)
-    VALUE self;
+geo_max_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->max_width);
 }
 
 static VALUE
-geo_max_height(self)
-    VALUE self;
+geo_max_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->max_height);
 }
 
 static VALUE
-geo_base_width(self)
-    VALUE self;
+geo_base_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->base_width);
 }
 
 static VALUE
-geo_base_height(self)
-    VALUE self;
+geo_base_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->base_height);
 }
 
 static VALUE
-geo_width_inc(self)
-    VALUE self;
+geo_width_inc(VALUE self)
 {
     return INT2NUM(_SELF(self)->width_inc);
 }
 
 static VALUE
-geo_height_inc(self)
-    VALUE self;
+geo_height_inc(VALUE self)
 {
     return INT2NUM(_SELF(self)->height_inc);
 }
 
 static VALUE
-geo_min_aspect(self)
-    VALUE self;
+geo_min_aspect(VALUE self)
 {
     return rb_float_new(_SELF(self)->min_aspect);
 }
 
 static VALUE
-geo_max_aspect(self)
-    VALUE self;
+geo_max_aspect(VALUE self)
 {
     return rb_float_new(_SELF(self)->max_aspect);
 }
 
 static VALUE
-geo_win_gravity(self)
-    VALUE self;
+geo_win_gravity(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->win_gravity, GDK_TYPE_GRAVITY);
 }
 
 static VALUE
-geo_set_min_width(self, min_width)
-    VALUE self, min_width;
+geo_set_min_width(VALUE self, VALUE min_width)
 {
     _SELF(self)->min_width = NUM2INT(min_width);
     return self;
 }
 
 static VALUE
-geo_set_min_height(self, min_height)
-    VALUE self, min_height;
+geo_set_min_height(VALUE self, VALUE min_height)
 {
     _SELF(self)->min_height = NUM2INT(min_height);
     return self;
 }
 
 static VALUE
-geo_set_max_width(self, max_width)
-    VALUE self, max_width;
+geo_set_max_width(VALUE self, VALUE max_width)
 {
     _SELF(self)->max_width = NUM2INT(max_width);
     return self;
 }
 
 static VALUE
-geo_set_max_height(self, max_height)
-    VALUE self, max_height;
+geo_set_max_height(VALUE self, VALUE max_height)
 {
     _SELF(self)->max_height = NUM2INT(max_height);
     return self;
 }
 
 static VALUE
-geo_set_base_width(self, base_width)
-    VALUE self, base_width;
+geo_set_base_width(VALUE self, VALUE base_width)
 {
     _SELF(self)->base_width = NUM2INT(base_width);
     return self;
 }
 
 static VALUE
-geo_set_base_height(self, base_height)
-    VALUE self, base_height;
+geo_set_base_height(VALUE self, VALUE base_height)
 {
     _SELF(self)->base_height = NUM2INT(base_height);
     return self;
 }
 
 static VALUE
-geo_set_width_inc(self, width_inc)
-    VALUE self, width_inc;
+geo_set_width_inc(VALUE self, VALUE width_inc)
 {
     _SELF(self)->width_inc = NUM2INT(width_inc);
     return self;
 }
 
 static VALUE
-geo_set_height_inc(self, height_inc)
-    VALUE self, height_inc;
+geo_set_height_inc(VALUE self, VALUE height_inc)
 {
     _SELF(self)->height_inc = NUM2INT(height_inc);
     return self;
 }
 
 static VALUE
-geo_set_min_aspect(self, min_aspect)
-    VALUE self, min_aspect;
+geo_set_min_aspect(VALUE self, VALUE min_aspect)
 {
     _SELF(self)->min_aspect = NUM2DBL(min_aspect);
     return self;
 }
 
 static VALUE
-geo_set_max_aspect(self, max_aspect)
-    VALUE self, max_aspect;
+geo_set_max_aspect(VALUE self, VALUE max_aspect)
 {
     _SELF(self)->max_aspect = NUM2DBL(max_aspect);
     return self;
 }
 
 static VALUE
-geo_set_win_gravity(self, gravity)
-    VALUE self, gravity;
+geo_set_win_gravity(VALUE self, VALUE gravity)
 {
     _SELF(self)->win_gravity = RVAL2GENUM(gravity, GDK_TYPE_GRAVITY);
     return self;
