@@ -16,8 +16,7 @@
 #define RECT2RVAL(r) (BOXED2RVAL(r, GDK_TYPE_RECTANGLE))
 
 static VALUE
-cellrenderer_get_size(self, widget, cell_area)
-    VALUE self, widget, cell_area;
+cellrenderer_get_size(VALUE self, VALUE widget, VALUE cell_area)
 {
     GdkRectangle ret;
 
@@ -28,9 +27,7 @@ cellrenderer_get_size(self, widget, cell_area)
 }
 
 static VALUE
-cellrenderer_render(self, window, widget, background_area, cell_area, 
-                    expose_area, flags)
-    VALUE self, window, widget, background_area, cell_area, expose_area, flags;
+cellrenderer_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE cell_area, VALUE expose_area, VALUE flags)
 {
     gtk_cell_renderer_render(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)),
                              GTK_WIDGET(RVAL2GOBJ(widget)),
@@ -42,9 +39,7 @@ cellrenderer_render(self, window, widget, background_area, cell_area,
 }
 
 static VALUE
-cellrenderer_activate(self, event, widget, path, background_area, 
-                      cell_area, flags)
-    VALUE self, event, widget, path, background_area, cell_area, flags;
+cellrenderer_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
 {
     gboolean ret =
     gtk_cell_renderer_activate(_SELF(self), (GdkEvent*)RVAL2GEV(event),
@@ -56,9 +51,7 @@ cellrenderer_activate(self, event, widget, path, background_area,
 }
 
 static VALUE
-cellrenderer_start_editing(self, event, widget, path, background_area, 
-                           cell_area, flags)
-    VALUE self, event, widget, path, background_area, cell_area, flags;
+cellrenderer_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
 {
     GtkCellEditable* edit =
     gtk_cell_renderer_start_editing(_SELF(self), (GdkEvent*)RVAL2GEV(event),
@@ -72,8 +65,7 @@ cellrenderer_start_editing(self, event, widget, path, background_area,
 #if GTK_CHECK_VERSION(2,4,0)
 #ifndef GTK_DISABLE_DEPRECATED
 static VALUE
-cellrenderer_editing_canceled(self)
-    VALUE self;
+cellrenderer_editing_canceled(VALUE self)
 {
     gtk_cell_renderer_editing_canceled(_SELF(self));
     return self;
@@ -83,8 +75,7 @@ cellrenderer_editing_canceled(self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-cellrenderer_stop_editing(self, canceled)
-    VALUE self, canceled;
+cellrenderer_stop_editing(VALUE self, VALUE canceled)
 {
     gtk_cell_renderer_stop_editing(_SELF(self), RVAL2CBOOL(canceled));
     return self;
@@ -92,8 +83,7 @@ cellrenderer_stop_editing(self, canceled)
 #endif
 
 static VALUE
-cellrenderer_get_fixed_size(self)
-    VALUE self;
+cellrenderer_get_fixed_size(VALUE self)
 {
     int width, height;
     gtk_cell_renderer_get_fixed_size(_SELF(self), &width, &height);
@@ -101,8 +91,7 @@ cellrenderer_get_fixed_size(self)
 }
 
 static VALUE
-cellrenderer_set_fixed_size(self, width, height)
-    VALUE self, width, height;
+cellrenderer_set_fixed_size(VALUE self, VALUE width, VALUE height)
 {
     gtk_cell_renderer_set_fixed_size(_SELF(self), NUM2INT(width), 
                                      NUM2INT(height));
