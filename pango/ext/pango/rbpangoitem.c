@@ -15,14 +15,12 @@
 
 #define ATTR_INT(name)\
 static VALUE \
-item_int_ ## name (self)\
-    VALUE self;\
+item_int_ ## name (VALUE self)\
 {\
     return INT2NUM(_SELF(self)->name);\
 }\
 static VALUE \
-item_int_set_ ## name (self, val)\
-    VALUE self, val;\
+item_int_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = NUM2INT(val); \
     return self;\
@@ -49,16 +47,14 @@ pango_item_get_type(void)
 /**********************************/
 
 static VALUE
-item_initialize(self)
-    VALUE self;
+item_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_item_new());
     return Qnil;
 }
 
 static VALUE
-item_split(self, split_index, split_offset)
-    VALUE self, split_index, split_offset;
+item_split(VALUE self, VALUE split_index, VALUE split_offset)
 {
     return BOXED2RVAL(pango_item_split(_SELF(self), 
                                        NUM2INT(split_index), 
@@ -75,16 +71,14 @@ ATTR_INT(num_chars);
 
 
 static VALUE
-item_get_analysis(self)
-    VALUE self;
+item_get_analysis(VALUE self)
 {
     PangoAnalysis ana = _SELF(self)->analysis;
     return BOXED2RVAL(&ana, PANGO_TYPE_ANALYSIS);
 }
 
 static VALUE
-item_set_analysis(self, val)
-    VALUE self, val;
+item_set_analysis(VALUE self, VALUE val)
 {
     PangoAnalysis* ana = (PangoAnalysis*)RVAL2BOXED(val, PANGO_TYPE_ANALYSIS);
     _SELF(self)->analysis = *ana;
