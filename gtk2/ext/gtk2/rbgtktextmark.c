@@ -15,8 +15,7 @@
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-initialize(self, name, left_gravity)
-    VALUE self, name, left_gravity;
+initialize(VALUE self, VALUE name, VALUE left_gravity)
 {
     if (NIL_P(name))
         G_INITIALIZE(self, gtk_text_mark_new(NULL, RVAL2CBOOL(left_gravity)));
@@ -27,44 +26,38 @@ initialize(self, name, left_gravity)
 #endif
 
 static VALUE
-set_visible(self, setting)
-    VALUE self, setting;
+set_visible(VALUE self, VALUE setting)
 {
     gtk_text_mark_set_visible(_SELF(self), RVAL2CBOOL(setting));
     return setting;
 }
 
 static VALUE
-get_visible(self)
-    VALUE self;
+get_visible(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_mark_get_visible(_SELF(self)));
 }
 
 static VALUE
-get_name(self)
-    VALUE self;
+get_name(VALUE self)
 {
     return CSTR2RVAL(gtk_text_mark_get_name(_SELF(self)));
 }
 
 static VALUE
-get_deleted(self)
-    VALUE self;
+get_deleted(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_mark_get_deleted(_SELF(self)));
 }
 
 static VALUE
-get_buffer(self)
-    VALUE self;
+get_buffer(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_mark_get_buffer(_SELF(self)));
 }
 
 static VALUE
-get_left_gravity(self)
-    VALUE self;
+get_left_gravity(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_mark_get_left_gravity(_SELF(self)));
 }
