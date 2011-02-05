@@ -15,10 +15,7 @@
 #define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
 
 static VALUE
-tvc_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+tvc_initialize(int argc, VALUE *argv, VALUE self)
 {
     int i;
     int col;
@@ -57,8 +54,7 @@ tvc_initialize(argc, argv, self)
 }
 
 static VALUE
-tvc_pack_start(self, cell, expand)
-    VALUE self, cell, expand;
+tvc_pack_start(VALUE self, VALUE cell, VALUE expand)
 {
     G_CHILD_ADD(self, cell);
     gtk_tree_view_column_pack_start(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
@@ -66,8 +62,7 @@ tvc_pack_start(self, cell, expand)
 }
 
 static VALUE
-tvc_pack_end(self, cell, expand)
-    VALUE self, cell, expand;
+tvc_pack_end(VALUE self, VALUE cell, VALUE expand)
 {
     G_CHILD_ADD(self, cell);
     gtk_tree_view_column_pack_end(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
@@ -75,8 +70,7 @@ tvc_pack_end(self, cell, expand)
 }
 
 static VALUE
-tvc_clear(self)
-    VALUE self;
+tvc_clear(VALUE self)
 {
     G_CHILD_REMOVE_ALL(self);
     gtk_tree_view_column_clear(_SELF(self));
@@ -84,15 +78,13 @@ tvc_clear(self)
 }
 
 static VALUE
-tvc_get_cell_renderers(self)
-    VALUE self;
+tvc_get_cell_renderers(VALUE self)
 {
     return GLIST2ARYF(gtk_tree_view_column_get_cell_renderers(_SELF(self)));
 }
 
 static VALUE
-tvc_add_attribute(self, cell, attribute, column)
-    VALUE self, cell, attribute, column;
+tvc_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
 {
     const gchar *name;
     if (SYMBOL_P(attribute)) {
@@ -106,8 +98,7 @@ tvc_add_attribute(self, cell, attribute, column)
 }
 
 static VALUE
-tvc_set_attributes(self, renderer, attributes)
-    VALUE self, renderer, attributes;
+tvc_set_attributes(VALUE self, VALUE renderer, VALUE attributes)
 {
     GtkTreeViewColumn *tvc;
     GtkCellRenderer *grenderer;
@@ -136,12 +127,7 @@ tvc_set_attributes(self, renderer, attributes)
 }
 
 static void
-cell_data_func(tree_column, cell, model, iter, func)
-    GtkTreeViewColumn* tree_column;
-    GtkCellRenderer*   cell;
-    GtkTreeModel*      model;
-    GtkTreeIter*       iter;
-    gpointer           func;
+cell_data_func(GtkTreeViewColumn *tree_column, GtkCellRenderer *cell, GtkTreeModel *model, GtkTreeIter *iter, gpointer func)
 {
     iter->user_data3 = model;
     rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(tree_column),
@@ -151,8 +137,7 @@ cell_data_func(tree_column, cell, model, iter, func)
 
 
 static VALUE
-tvc_set_cell_data_func(self, renderer)
-    VALUE self, renderer;
+tvc_set_cell_data_func(VALUE self, VALUE renderer)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -163,39 +148,34 @@ tvc_set_cell_data_func(self, renderer)
 }
 
 static VALUE
-tvc_clear_attributes(self, cell)
-    VALUE self, cell;
+tvc_clear_attributes(VALUE self, VALUE cell)
 {
     gtk_tree_view_column_clear_attributes(_SELF(self), RVAL2CELLRENDERER(cell));
     return self;
 }
 
 static VALUE
-tvc_set_spacing(self, spacing)
-    VALUE self, spacing;
+tvc_set_spacing(VALUE self, VALUE spacing)
 {
     gtk_tree_view_column_set_spacing(_SELF(self), NUM2INT(spacing));
     return self;
 }
 
 static VALUE
-tvc_get_spacing(self)
-    VALUE self;
+tvc_get_spacing(VALUE self)
 {
     return INT2NUM(gtk_tree_view_column_get_spacing(_SELF(self)));
 }
 
 static VALUE
-tvc_clicked(self)
-    VALUE self;
+tvc_clicked(VALUE self)
 {
     gtk_tree_view_column_clicked(_SELF(self));
     return self;
 }
 
 static VALUE
-tvc_set_sort_column_id(self, sort_column_id)
-    VALUE self, sort_column_id;
+tvc_set_sort_column_id(VALUE self, VALUE sort_column_id)
 {
     gtk_tree_view_column_set_sort_column_id(_SELF(self), 
                                             NUM2INT(sort_column_id));
@@ -203,15 +183,13 @@ tvc_set_sort_column_id(self, sort_column_id)
 }
 
 static VALUE
-tvc_get_sort_column_id(self)
-    VALUE self;
+tvc_get_sort_column_id(VALUE self)
 {
     return INT2NUM(gtk_tree_view_column_get_sort_column_id(_SELF(self)));
 }
 
 static VALUE
-tvc_cell_set_cell_data(self, model, iter, is_expander, is_expanded)
-    VALUE self, model, iter, is_expander, is_expanded;
+tvc_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, VALUE is_expanded)
 {
     gtk_tree_view_column_cell_set_cell_data(_SELF(self), 
                                             GTK_TREE_MODEL(RVAL2GOBJ(model)),
@@ -222,8 +200,7 @@ tvc_cell_set_cell_data(self, model, iter, is_expander, is_expanded)
 }
 
 static VALUE
-tvc_cell_get_size(self)
-    VALUE self;
+tvc_cell_get_size(VALUE self)
 {
     GdkRectangle cell_area;
     gint x_offset, y_offset, width, height;
@@ -260,8 +237,7 @@ tvc_cell_is_visible(self)
 #if GTK_CHECK_VERSION(2,2,0)
 
 static VALUE
-tvc_focus_cell(self, renderer)
-    VALUE self, renderer;
+tvc_focus_cell(VALUE self, VALUE renderer)
 {
     gtk_tree_view_column_focus_cell(_SELF(self), RVAL2CELLRENDERER(renderer));
 
@@ -272,8 +248,7 @@ tvc_focus_cell(self, renderer)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-tvc_queue_resize(self)
-    VALUE self;
+tvc_queue_resize(VALUE self)
 {
     gtk_tree_view_column_queue_resize(_SELF(self));
     return self;
@@ -282,8 +257,7 @@ tvc_queue_resize(self)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-tvc_get_tree_view(self)
-    VALUE self;
+tvc_get_tree_view(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_view_column_get_tree_view(_SELF(self)));
 }
