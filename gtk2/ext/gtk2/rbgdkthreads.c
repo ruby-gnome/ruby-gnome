@@ -13,8 +13,7 @@
 
 #ifdef   G_THREADS_ENABLED
 static VALUE
-rbgdk_threads_init(self)
-    VALUE self;
+rbgdk_threads_init(VALUE self)
 {
 #ifndef GDK_WINDOWING_WIN32
     if (!g_thread_supported()){
@@ -26,24 +25,21 @@ rbgdk_threads_init(self)
 }
 
 static VALUE
-rbgdk_threads_enter(self)
-    VALUE self;
+rbgdk_threads_enter(VALUE self)
 {
     gdk_threads_enter();
     return self;
 }
 
 static VALUE
-rbgdk_threads_leave(self)
-    VALUE self;
+rbgdk_threads_leave(VALUE self)
 {
     gdk_threads_leave();
     return self;
 }
 
 static VALUE
-rbgdk_threads_synchronize(self)
-    VALUE self;
+rbgdk_threads_synchronize(VALUE self)
 {
     VALUE func = rb_block_proc();
     gdk_threads_enter();
