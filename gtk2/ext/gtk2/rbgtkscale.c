@@ -18,15 +18,13 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-rbscale_get_layout(self)
-    VALUE self;
+rbscale_get_layout(VALUE self)
 {
     return GOBJ2RVAL(gtk_scale_get_layout(_SELF(self)));
 }
 
 static VALUE
-rbscale_get_layout_offsets(self)
-    VALUE self;
+rbscale_get_layout_offsets(VALUE self)
 {
     gint x, y;
     gtk_scale_get_layout_offsets(_SELF(self), &x, &y);
