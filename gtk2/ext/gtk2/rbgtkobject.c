@@ -26,8 +26,7 @@ GtkObject*  gtk_object_new                  (GtkType type,
 */
 
 static VALUE
-gobj_get_type_name(self)
-    VALUE self;
+gobj_get_type_name(VALUE self)
 {
     return CSTR2RVAL(GTK_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
 }
@@ -79,32 +78,28 @@ void        gtk_object_remove_no_notify_by_id
 */
 
 static VALUE
-gobj_destroy(self)
-    VALUE self;
+gobj_destroy(VALUE self)
 {
     gtk_object_destroy(GTK_OBJECT(RVAL2GOBJ(self)));
     return Qnil;
 }
 
 static VALUE
-gobj_get_flags(self)
-    VALUE self;
+gobj_get_flags(VALUE self)
 {
     /* _GtkObject.flags is int32 */
     return(INT2FIX(GTK_OBJECT_FLAGS(RVAL2GOBJ(self))));
 }
 
 static VALUE
-gobj_set_flags(self, flags)
-    VALUE self, flags;
+gobj_set_flags(VALUE self, VALUE flags)
 {
     GTK_OBJECT_SET_FLAGS(RVAL2GOBJ(self), NUM2INT(flags));
     return self;
 }
 
 static VALUE
-gobj_unset_flags(self, flags)
-    VALUE self, flags;
+gobj_unset_flags(VALUE self, VALUE flags)
 {
     GTK_OBJECT_UNSET_FLAGS(RVAL2GOBJ(self), NUM2INT(flags));
     return self;
@@ -112,8 +107,7 @@ gobj_unset_flags(self, flags)
 
 /* Move from Bindings */
 static VALUE
-gobj_bindings_activate(self, keyval, modifiers)
-    VALUE self, keyval, modifiers;
+gobj_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
 {
      return CBOOL2RVAL(gtk_bindings_activate(GTK_OBJECT(RVAL2GOBJ(self)), 
                                              NUM2UINT(keyval),
@@ -122,8 +116,7 @@ gobj_bindings_activate(self, keyval, modifiers)
 
 /* Move from Bindings */
 static VALUE
-gobj_s_binding_set(self)
-    VALUE self;
+gobj_s_binding_set(VALUE self)
 {
     GType gtype;
     gpointer gclass;
