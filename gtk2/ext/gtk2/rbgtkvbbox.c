@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-vbbox_initialize(self)
-    VALUE self;
+vbbox_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_vbutton_box_new());
     return Qnil;
