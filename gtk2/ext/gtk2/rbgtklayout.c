@@ -18,10 +18,7 @@
 #define RVAL2ADJ(a) (GTK_ADJUSTMENT(RVAL2GOBJ(a)))
 
 static VALUE
-layout_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+layout_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE hadjustment, vadjustment;
     GtkWidget* layout;
@@ -36,8 +33,7 @@ layout_initialize(argc, argv, self)
 }
 
 static VALUE
-layout_put(self, widget, x, y)
-    VALUE self, widget, x, y;
+layout_put(VALUE self, VALUE widget, VALUE x, VALUE y)
 {
     gtk_layout_put(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
 		   NUM2INT(x), NUM2INT(y));
@@ -45,8 +41,7 @@ layout_put(self, widget, x, y)
 }
 
 static VALUE
-layout_move(self, widget, x,  y)
-    VALUE self, widget, x, y;
+layout_move(VALUE self, VALUE widget, VALUE x, VALUE y)
 {
     gtk_layout_move(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
 		    NUM2INT(x), NUM2INT(y));
@@ -54,16 +49,14 @@ layout_move(self, widget, x,  y)
 }
 
 static VALUE
-layout_set_size(self, width, height)
-    VALUE self, width, height;
+layout_set_size(VALUE self, VALUE width, VALUE height)
 {
     gtk_layout_set_size(_SELF(self), NUM2UINT(width), NUM2UINT(height));
     return self;
 }
 
 static VALUE
-layout_get_size(self)
-    VALUE self;
+layout_get_size(VALUE self)
 {
     guint width, height;
     gtk_layout_get_size(_SELF(self), &width, &height);
@@ -71,8 +64,7 @@ layout_get_size(self)
 }
 
 static VALUE
-layout_get_bin_window(self)
-    VALUE self;
+layout_get_bin_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->bin_window);
 }
