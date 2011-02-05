@@ -14,23 +14,20 @@
 #define _SELF(self) (PANGO_FONT_FACE(RVAL2GOBJ(self)))
 
 static VALUE
-font_face_get_face_name(self)
-    VALUE self;
+font_face_get_face_name(VALUE self)
 {
     return CSTR2RVAL(pango_font_face_get_face_name(_SELF(self)));
 }
 
 static VALUE
-font_face_describe(self)
-    VALUE self;
+font_face_describe(VALUE self)
 {
     return BOXED2RVAL(pango_font_face_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-font_face_list_sizes(self)
-    VALUE self;
+font_face_list_sizes(VALUE self)
 {
     int n_sizes;
     int* sizes;
