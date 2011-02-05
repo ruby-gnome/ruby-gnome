@@ -15,8 +15,7 @@
 #define _SELF(s) (GTK_CELL_RENDERER_PIXBUF(RVAL2GOBJ(s)))
 
 static VALUE
-crpixbuf_initialize(self)
-    VALUE self;
+crpixbuf_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_pixbuf_new());
     return Qnil;
