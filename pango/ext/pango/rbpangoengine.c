@@ -17,8 +17,7 @@
 
 /* FIXME
 static VALUE
-rbpango_s_engine_list(self)
-    VALUE self;
+rbpango_s_engine_list(VALUE self)
 {
     PangoEngineInfo* engines = g_new(PangoEngineInfo, 1);
     int i, n;
@@ -34,8 +33,7 @@ rbpango_s_engine_list(self)
 }
 
 static VALUE
-rbpango_s_engine_create(self, id)
-    VALUE self, id;
+rbpango_s_engine_create(VALUE self, VALUE id)
 {
     return GOBJ2RVAL(script_engine_create(RVAL2CSTR(id)));
 }
