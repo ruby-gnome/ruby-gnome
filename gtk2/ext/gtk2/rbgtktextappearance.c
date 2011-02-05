@@ -39,14 +39,12 @@ gtk_text_appearance_get_type(void)
 /***********************************************/
 #define ATTR_INT(name)\
 static VALUE \
-txt_app_int_ ## name (self)\
-    VALUE self;\
+txt_app_int_ ## name (VALUE self)\
 {\
     return INT2NUM(_SELF(self)->name);\
 }\
 static VALUE \
-txt_app_int_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_app_int_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = NUM2INT(val); \
     return self;\
@@ -54,14 +52,12 @@ txt_app_int_set_ ## name (self, val)\
 
 #define ATTR_BOOL(name)\
 static VALUE \
-txt_app_bool_ ## name (self)\
-    VALUE self;\
+txt_app_bool_ ## name (VALUE self)\
 {\
     return CBOOL2RVAL(_SELF(self)->name);\
 }\
 static VALUE \
-txt_app_bool_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_app_bool_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
@@ -69,14 +65,12 @@ txt_app_bool_set_ ## name (self, val)\
 
 #define ATTR_ENUM(name, gtype)\
 static VALUE \
-txt_app_enums_ ## name (self)\
-    VALUE self;\
+txt_app_enums_ ## name (VALUE self)\
 {\
     return GENUM2RVAL(_SELF(self)->name, gtype);\
 }\
 static VALUE \
-txt_app_enums_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_app_enums_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2GENUM(val, gtype);\
     return self;\
@@ -84,8 +78,7 @@ txt_app_enums_set_ ## name (self, val)\
 
 #define ATTR_GOBJ(name)\
 static VALUE \
-txt_app_gobj_ ## name (self)\
-    VALUE self;\
+txt_app_gobj_ ## name (VALUE self)\
 {\
     VALUE val; \
     if (_SELF(self)->name == NULL) return Qnil;\
@@ -94,8 +87,7 @@ txt_app_gobj_ ## name (self)\
     return val; \
 }\
 static VALUE \
-txt_app_gobj_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_app_gobj_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2GOBJ(val);\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
@@ -104,16 +96,14 @@ txt_app_gobj_set_ ## name (self, val)\
 
 #define ATTR_COLOR(name)\
 static VALUE \
-txt_app_color_ ## name (self)\
-    VALUE self;\
+txt_app_color_ ## name (VALUE self)\
 {\
     VALUE val = BOXED2RVAL(&_SELF(self)->name, GDK_TYPE_COLOR);\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
     return val;\
 }\
 static VALUE \
-txt_app_color_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_app_color_set_ ## name (VALUE self, VALUE val)\
 {\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
     _SELF(self)->name = *RVAL2GDKCOLOR(val);	\
@@ -137,8 +127,7 @@ ATTR_BOOL(inside_selection);
 ATTR_BOOL(is_text);
 
 static VALUE
-txt_app_initialize(self)
-    VALUE self;
+txt_app_initialize(VALUE self)
 {
     GtkTextAppearance* app = ALLOC(GtkTextAppearance);
     memset(app, 0, sizeof(GtkTextAppearance));
