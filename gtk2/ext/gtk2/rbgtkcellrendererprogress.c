@@ -14,8 +14,7 @@
 #if GTK_CHECK_VERSION(2,6,0)
 
 static VALUE
-crprogress_initialize(self)
-    VALUE self;
+crprogress_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_progress_new());
     return Qnil;
