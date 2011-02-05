@@ -29,32 +29,28 @@ pango_coverage_get_type(void)
 /**********************************/
 
 static VALUE
-coverage_initialize(self)
-    VALUE self;
+coverage_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_coverage_new());
     return Qnil;
 }
 
 static VALUE
-coverage_get_level(self, index_)
-    VALUE self, index_;
+coverage_get_level(VALUE self, VALUE index_)
 {
     return GENUM2RVAL(pango_coverage_get(_SELF(self), NUM2INT(index_)), 
                       PANGO_TYPE_COVERAGE_LEVEL);
 }
 
 static VALUE
-coverage_max(self, other)
-    VALUE self, other;
+coverage_max(VALUE self, VALUE other)
 {
     pango_coverage_max(_SELF(self), _SELF(other));
     return self;
 }
 
 static VALUE
-coverage_set(self, index_, level)
-    VALUE self, index_, level;
+coverage_set(VALUE self, VALUE index_, VALUE level)
 {
     pango_coverage_set(_SELF(self), NUM2INT(index_), 
                        RVAL2GENUM(level, PANGO_TYPE_COVERAGE_LEVEL));
@@ -62,8 +58,7 @@ coverage_set(self, index_, level)
 }
 
 static VALUE
-coverage_to_bytes(self)
-    VALUE self;
+coverage_to_bytes(VALUE self)
 {
     guchar* bytes;
     int n_bytes;
@@ -77,8 +72,7 @@ coverage_to_bytes(self)
 }
 
 static VALUE
-coverage_s_from_bytes(self, bytes)
-    VALUE self, bytes;
+coverage_s_from_bytes(VALUE self, VALUE bytes)
 {
     StringValue(bytes);
     return BOXED2RVAL(pango_coverage_from_bytes((guchar*)RVAL2CSTR(bytes), 
