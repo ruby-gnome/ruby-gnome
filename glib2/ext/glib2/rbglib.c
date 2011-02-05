@@ -65,8 +65,7 @@ rbg_rval_inspect(VALUE object)
 }
 
 char *
-rbg_string_value_ptr(ptr)
-    volatile VALUE *ptr;
+rbg_string_value_ptr(volatile VALUE *ptr)
 {
     return rb_string_value_ptr(ptr);
 }
@@ -248,8 +247,7 @@ Init_mem()
 #endif
 
 static VALUE
-rbg_s_os_win32(self)
-    VALUE self;
+rbg_s_os_win32(VALUE self)
 {
 #ifdef G_OS_WIN32
     return Qtrue;
@@ -259,8 +257,7 @@ rbg_s_os_win32(self)
 }
 
 static VALUE
-rbg_s_os_beos(self)
-    VALUE self;
+rbg_s_os_beos(VALUE self)
 {
 #ifdef G_OS_BEOS
     return Qtrue;
@@ -270,8 +267,7 @@ rbg_s_os_beos(self)
 }
 
 static VALUE
-rbg_s_os_unix(self)
-    VALUE self;
+rbg_s_os_unix(VALUE self)
 {
 #ifdef G_OS_UNIX
     return Qtrue;
