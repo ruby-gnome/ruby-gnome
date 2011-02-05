@@ -16,8 +16,7 @@
 #define _SELF(self) (GTK_RADIO_ACTION(RVAL2GOBJ(self)))
 
 static VALUE
-raction_initialize(self, name, label, tooltip, stock_id, value)
-    VALUE self, name, label, tooltip, stock_id, value;
+raction_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id, VALUE value)
 {
     const gchar *gstock = NULL;
 
@@ -35,16 +34,14 @@ raction_initialize(self, name, label, tooltip, stock_id, value)
 }
 
 static VALUE
-raction_get_group(self)
-    VALUE self;
+raction_get_group(VALUE self)
 {
     /* Owned by GTK+ */
     return GSLIST2ARY(gtk_radio_action_get_group(_SELF(self)));
 }
 
 static VALUE
-raction_set_group(self, group)
-    VALUE self, group;
+raction_set_group(VALUE self, VALUE group)
 {
     long i;
     GSList *glist = NULL;
@@ -64,8 +61,7 @@ raction_set_group(self, group)
 
 #if ! GTK_CHECK_VERSION(2,10,0)
 static VALUE
-raction_get_current_value(self)
-    VALUE self;
+raction_get_current_value(VALUE self)
 {
     return INT2NUM(gtk_radio_action_get_current_value(_SELF(self)));
 }
