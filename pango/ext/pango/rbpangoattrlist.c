@@ -16,40 +16,35 @@ static ID id_call;
 #define _SELF(self) ((PangoAttrList*)RVAL2BOXED(self, PANGO_TYPE_ATTR_LIST))
 
 static VALUE
-attrlist_initialize(self)
-    VALUE self;
+attrlist_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_attr_list_new());
     return Qnil;
 }
 
 static VALUE
-attrlist_insert(self, attr)
-    VALUE self, attr;
+attrlist_insert(VALUE self, VALUE attr)
 {
     pango_attr_list_insert(_SELF(self), RVAL2ATTR(attr));
     return self;
 }
 
 static VALUE
-attrlist_insert_before(self, attr)
-    VALUE self, attr;
+attrlist_insert_before(VALUE self, VALUE attr)
 {
     pango_attr_list_insert_before(_SELF(self), RVAL2ATTR(attr));
     return self;
 }
 
 static VALUE
-attrlist_change(self, attr)
-    VALUE self, attr;
+attrlist_change(VALUE self, VALUE attr)
 {
     pango_attr_list_change(_SELF(self), RVAL2ATTR(attr));
     return self;
 }
 
 static VALUE
-attrlist_splice(self, other, pos, len)
-    VALUE self, other, pos, len;
+attrlist_splice(VALUE self, VALUE other, VALUE pos, VALUE len)
 {
     pango_attr_list_splice(_SELF(self), _SELF(other), NUM2INT(pos), NUM2INT(len));
     return self;
@@ -65,8 +60,7 @@ filter_func(attr, data)
 }
 
 static VALUE
-attrlist_filter(self)
-    VALUE self;
+attrlist_filter(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -78,8 +72,7 @@ attrlist_filter(self)
 #endif
 
 static VALUE
-attrlist_get_iterator(self)
-    VALUE self;
+attrlist_get_iterator(VALUE self)
 {
     return BOXED2RVAL(pango_attr_list_get_iterator(_SELF(self)), PANGO_TYPE_ATTR_ITERATOR);
 }
