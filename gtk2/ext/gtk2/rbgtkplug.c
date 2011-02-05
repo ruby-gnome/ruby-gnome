@@ -15,10 +15,7 @@
 #ifdef HAVE_GTK_PLUG_GET_TYPE
 
 static VALUE
-plug_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+plug_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE socket_id;
     GdkNativeWindow id;
@@ -46,8 +43,7 @@ GdkDisplay *display,
 */
 
 static VALUE
-plug_construct(self, socket_id)
-    VALUE self, socket_id;
+plug_construct(VALUE self, VALUE socket_id)
 {
 #ifdef GDK_NATIVE_WINDOW_POINTER
     gtk_plug_construct(GTK_PLUG(RVAL2GOBJ(self)), GUINT_TO_POINTER(NUM2ULONG(socket_id)));
@@ -58,8 +54,7 @@ plug_construct(self, socket_id)
 }
 
 static VALUE
-plug_get_id(self)
-    VALUE self;
+plug_get_id(VALUE self)
 {
     GdkNativeWindow id = gtk_plug_get_id(GTK_PLUG(RVAL2GOBJ(self)));
 #ifdef GDK_NATIVE_WINDOW_POINTER
