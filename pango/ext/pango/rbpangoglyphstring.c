@@ -14,26 +14,21 @@
 #define _SELF(self) ((PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)))
 
 static VALUE
-rglyph_initialize(self)
-    VALUE self;
+rglyph_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_glyph_string_new());
     return Qnil;
 }
 
 static VALUE
-rglyph_set_size(self, len)
-    VALUE self, len;
+rglyph_set_size(VALUE self, VALUE len)
 {
     pango_glyph_string_set_size(_SELF(self), NUM2INT(len));
     return self;
 }
 
 static VALUE
-rglyph_extents(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rglyph_extents(int argc, VALUE *argv, VALUE self)
 {
     VALUE font, start_index, end_index;
     PangoRectangle ink_rect;
@@ -58,16 +53,14 @@ rglyph_extents(argc, argv, self)
 
 #if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
-rglyph_get_width(self)
-    VALUE self;
+rglyph_get_width(VALUE self)
 {
     return INT2NUM(pango_glyph_string_get_width(_SELF(self)));
 }
 #endif
 
 static VALUE
-rglyph_index_to_x(self, text, analysis, index, trailing)
-    VALUE self, text, analysis, index, trailing;
+rglyph_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE trailing)
 {
     int x_pos;
     StringValue(text);
@@ -82,8 +75,7 @@ rglyph_index_to_x(self, text, analysis, index, trailing)
 }
 
 static VALUE
-rglyph_x_to_index(self, text, analysis, x_pos)
-    VALUE self, text, analysis, x_pos;
+rglyph_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
 {
     int index;
     int trailing;
@@ -98,8 +90,7 @@ rglyph_x_to_index(self, text, analysis, x_pos)
 }
 
 static VALUE
-rglyph_get_logical_widgths(self, text, embedding_level)
-    VALUE self, text, embedding_level;
+rglyph_get_logical_widgths(VALUE self, VALUE text, VALUE embedding_level)
 {
     int* logical_widths = NULL;
     int len, array_len, i;
@@ -126,8 +117,7 @@ rglyph_get_logical_widgths(self, text, embedding_level)
 }
 
 static VALUE
-rglyph_get_glyphs(self)
-    VALUE self;
+rglyph_get_glyphs(VALUE self)
 {
     int i;
     PangoGlyphInfo** glyphs = &_SELF(self)->glyphs;
