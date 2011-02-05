@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-tbtn_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+tbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget;
@@ -46,8 +43,7 @@ tbtn_initialize(argc, argv, self)
 }
 
 static VALUE
-tbtn_set_mode(self, mode)
-    VALUE self, mode;
+tbtn_set_mode(VALUE self, VALUE mode)
 {
     gtk_toggle_button_set_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)),
 			       RVAL2CBOOL(mode));
@@ -55,15 +51,13 @@ tbtn_set_mode(self, mode)
 }
 
 static VALUE
-tbtn_get_mode(self)
-    VALUE self;
+tbtn_get_mode(VALUE self)
 {
     return CBOOL2RVAL(gtk_toggle_button_get_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self))));
 }
 
 static VALUE
-tbtn_toggled(self)
-    VALUE self;
+tbtn_toggled(VALUE self)
 {
     gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)));
     return self;
