@@ -44,8 +44,7 @@ struct _GtkAccelKey
 */
 
 static VALUE
-accel_key_initialize(self)
-    VALUE self;
+accel_key_initialize(VALUE self)
 {
     GtkAccelKey key;
     G_INITIALIZE(self, &key);
@@ -53,45 +52,39 @@ accel_key_initialize(self)
 }
 
 static VALUE
-accel_key_get_key(self)
-    VALUE self;
+accel_key_get_key(VALUE self)
 {
     return UINT2NUM(_SELF(self)->accel_key);
 }
 
 static VALUE
-accel_key_get_mods(self)
-    VALUE self;
+accel_key_get_mods(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->accel_mods, GDK_TYPE_MODIFIER_TYPE);
 }
 
 static VALUE
-accel_key_get_flags(self)
-    VALUE self;
+accel_key_get_flags(VALUE self)
 {
     return INT2FIX(_SELF(self)->accel_flags);
 }
 
 static VALUE
-accel_key_set_key(self, key)
-    VALUE self, key;
+accel_key_set_key(VALUE self, VALUE key)
 {
     _SELF(self)->accel_key = NUM2UINT(key);
     return self;
 }
 
 static VALUE
-accel_key_set_mods(self, mods)
-    VALUE self, mods;
+accel_key_set_mods(VALUE self, VALUE mods)
 {
     _SELF(self)->accel_mods = RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE);
     return self;
 }
 
 static VALUE
-accel_key_set_flags(self, flags)
-    VALUE self, flags;
+accel_key_set_flags(VALUE self, VALUE flags)
 {
     _SELF(self)->accel_flags = FIX2INT(flags);
     return self;
