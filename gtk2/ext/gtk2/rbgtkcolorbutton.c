@@ -14,10 +14,7 @@
 #if GTK_CHECK_VERSION(2,4,0)
 
 static VALUE
-colorbutton_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+colorbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE color;
     GtkWidget* widget;
