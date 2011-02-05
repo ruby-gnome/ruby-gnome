@@ -19,10 +19,7 @@
 #define _SELF(s) (GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
-cdialog_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cdialog_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title;
     rb_scan_args(argc, argv, "01", &title);
@@ -31,29 +28,25 @@ cdialog_initialize(argc, argv, self)
 }
 
 static VALUE
-cdialog_get_colorsel(self)
-    VALUE self;
+cdialog_get_colorsel(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->colorsel);
 }
 
 static VALUE
-cdialog_get_ok_button(self)
-    VALUE self;
+cdialog_get_ok_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->ok_button);
 }
 
 static VALUE
-cdialog_get_cancel_button(self)
-    VALUE self;
+cdialog_get_cancel_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->cancel_button);
 }
 
 static VALUE
-cdialog_get_help_button(self)
-    VALUE self;
+cdialog_get_help_button(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->help_button);
 }
