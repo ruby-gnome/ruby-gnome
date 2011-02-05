@@ -20,8 +20,7 @@
 #define _SELF(self) (GDK_VISUAL(RVAL2GOBJ(self)))
 
 static VALUE
-gdkvisual_s_query_depths(self)
-    VALUE self;
+gdkvisual_s_query_depths(VALUE self)
 {
     gint *depth;
     gint count;
@@ -37,8 +36,7 @@ gdkvisual_s_query_depths(self)
 }
 
 static VALUE
-gdkvisual_s_query_visual_types(self)
-    VALUE self;
+gdkvisual_s_query_visual_types(VALUE self)
 {
     GdkVisualType *visual_types;
     gint count;
@@ -54,8 +52,7 @@ gdkvisual_s_query_visual_types(self)
 }
 
 static VALUE
-gdkvisual_s_list_visuals(self)
-    VALUE self;
+gdkvisual_s_list_visuals(VALUE self)
 {
     GList *list = gdk_list_visuals(), *cur;
     VALUE ary = rb_ary_new();
@@ -68,51 +65,44 @@ gdkvisual_s_list_visuals(self)
 }
 
 static VALUE
-gdkvisual_s_get_best_depth(self)
-    VALUE self;
+gdkvisual_s_get_best_depth(VALUE self)
 {
     return INT2NUM(gdk_visual_get_best_depth());
 }
 
 static VALUE
-gdkvisual_s_get_best_type(self)
-    VALUE self;
+gdkvisual_s_get_best_type(VALUE self)
 {
     return INT2NUM(gdk_visual_get_best_type());
 }
 
 static VALUE
-gdkvisual_s_get_system(self)
-    VALUE self;
+gdkvisual_s_get_system(VALUE self)
 {
     return GOBJ2RVAL(gdk_visual_get_system());
 }
 
 static VALUE
-gdkvisual_s_get_best(self)
-    VALUE self;
+gdkvisual_s_get_best(VALUE self)
 {
     return GOBJ2RVAL(gdk_visual_get_best());
 }
 
 static VALUE
-gdkvisual_s_get_best_with_depth(self, depth)
-    VALUE self, depth;
+gdkvisual_s_get_best_with_depth(VALUE self, VALUE depth)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_depth(NUM2INT(depth)));
 }
 
 static VALUE
-gdkvisual_s_get_best_with_type(self, type)
-    VALUE self, type;
+gdkvisual_s_get_best_with_type(VALUE self, VALUE type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_depth(
                                     (GdkVisualType)GENUM2RVAL(type, GDK_TYPE_VISUAL_TYPE)));
 }
 
 static VALUE
-gdkvisual_s_get_best_with_both(self, depth, type)
-    VALUE self, depth, type;
+gdkvisual_s_get_best_with_both(VALUE self, VALUE depth, VALUE type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_both(
                                     NUM2INT(depth),
@@ -121,8 +111,7 @@ gdkvisual_s_get_best_with_both(self, depth, type)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkvisual_get_screen(self)
-    VALUE self;
+gdkvisual_get_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_visual_get_screen(_SELF(self)));
 }
@@ -130,99 +119,85 @@ gdkvisual_get_screen(self)
 
 /* Structure accessors */
 static VALUE
-gdkvisual_type(self)
-    VALUE self;
+gdkvisual_type(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->type, GDK_TYPE_VISUAL_TYPE);
 }
 
 static VALUE
-gdkvisual_depth(self)
-    VALUE self;
+gdkvisual_depth(VALUE self)
 {
     return INT2FIX(_SELF(self)->depth);
 }
 
 static VALUE
-gdkvisual_byte_order(self)
-    VALUE self;
+gdkvisual_byte_order(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->byte_order, GDK_TYPE_BYTE_ORDER);
 }
 
 static VALUE
-gdkvisual_colormap_size(self)
-    VALUE self;
+gdkvisual_colormap_size(VALUE self)
 {
     return INT2FIX(_SELF(self)->colormap_size);
 }
 
 static VALUE
-gdkvisual_bits_per_rgb(self)
-    VALUE self;
+gdkvisual_bits_per_rgb(VALUE self)
 {
     return INT2FIX(_SELF(self)->bits_per_rgb);
 }
 
 static VALUE
-gdkvisual_red_mask(self)
-    VALUE self;
+gdkvisual_red_mask(VALUE self)
 {
     return INT2FIX(_SELF(self)->red_mask);
 }
 
 static VALUE
-gdkvisual_red_shift(self)
-    VALUE self;
+gdkvisual_red_shift(VALUE self)
 {
     return INT2FIX(_SELF(self)->red_shift);
 }
 
 static VALUE
-gdkvisual_red_prec(self)
-    VALUE self;
+gdkvisual_red_prec(VALUE self)
 {
     return INT2FIX(_SELF(self)->red_prec);
 }
 
 static VALUE
-gdkvisual_green_mask(self)
-    VALUE self;
+gdkvisual_green_mask(VALUE self)
 {
     return INT2FIX(_SELF(self)->green_mask);
 }
 
 static VALUE
-gdkvisual_green_shift(self)
-    VALUE self;
+gdkvisual_green_shift(VALUE self)
 {
     return INT2FIX(_SELF(self)->green_shift);
 }
 
 static VALUE
-gdkvisual_green_prec(self)
-    VALUE self;
+gdkvisual_green_prec(VALUE self)
 {
     return INT2FIX(_SELF(self)->green_prec);
 }
 
 static VALUE
-gdkvisual_blue_mask(self)
-    VALUE self;
+gdkvisual_blue_mask(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue_mask);
 }
 
 static VALUE
-gdkvisual_blue_shift(self)
-    VALUE self;
+gdkvisual_blue_shift(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue_shift);
 }
 
 static VALUE
-gdkvisual_blue_prec(self)
-    VALUE self;
+gdkvisual_blue_prec(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue_prec);
 }
