@@ -17,10 +17,7 @@
 #if GTK_CHECK_VERSION(2,12,0)
 
 static VALUE
-recentaction_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+recentaction_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE  name, label, tooltip, stock_id, manager;
     rb_scan_args(argc, argv, "23", &name, &label, &tooltip, &stock_id, &manager);
