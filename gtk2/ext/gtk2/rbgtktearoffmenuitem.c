@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-tmitem_initialize(self)
-    VALUE self;
+tmitem_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_tearoff_menu_item_new());
     return Qnil;
