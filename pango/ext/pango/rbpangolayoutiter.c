@@ -16,8 +16,7 @@
 /**********************************/
 #ifndef HAVE_PANGO_LAYOUT_ITER_GET_TYPE
 static PangoLayoutIter*
-layout_iter_copy(ref)
-    const PangoLayoutIter* ref;
+layout_iter_copy(const PangoLayoutIter *ref)
 {
 #if PANGO_CHECK_VERSION(1,6,0)
   PangoLayoutIter* new_ref;
@@ -47,72 +46,62 @@ pango_layout_iter_get_type(void)
 /**********************************/
 
 static VALUE
-layout_iter_next_run(self)
-    VALUE self;
+layout_iter_next_run(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_run(_SELF(self)));
 }
 
 static VALUE
-layout_iter_next_char(self)
-    VALUE self;
+layout_iter_next_char(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_char(_SELF(self)));
 }
 
 static VALUE
-layout_iter_next_cluster(self)
-    VALUE self;
+layout_iter_next_cluster(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_cluster(_SELF(self)));
 }
 
 static VALUE
-layout_iter_next_line(self)
-    VALUE self;
+layout_iter_next_line(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_line(_SELF(self)));
 }
 
 static VALUE
-layout_iter_at_last_line(self)
-    VALUE self;
+layout_iter_at_last_line(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_at_last_line(_SELF(self)));
 }
 
 static VALUE
-layout_iter_get_index(self)
-    VALUE self;
+layout_iter_get_index(VALUE self)
 {
     return INT2NUM(pango_layout_iter_get_index(_SELF(self)));
 }
 
 static VALUE
-layout_iter_get_baseline(self)
-    VALUE self;
+layout_iter_get_baseline(VALUE self)
 {
     return INT2NUM(pango_layout_iter_get_baseline(_SELF(self)));
 }
 
 static VALUE
-layout_iter_get_run(self)
-    VALUE self;
+layout_iter_get_run(VALUE self)
 {
     PangoLayoutRun* run = pango_layout_iter_get_run(_SELF(self));
     return BOXED2RVAL(run, PANGO_TYPE_GLYPH_ITEM);
 }
 
 static VALUE
-layout_iter_get_line(self)
-    VALUE self;
+layout_iter_get_line(VALUE self)
 {
     return BOXED2RVAL(pango_layout_iter_get_line(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
 }
 
 static VALUE
-layout_iter_get_char_extents(self)
-    VALUE self;
+layout_iter_get_char_extents(VALUE self)
 {
     PangoRectangle logical_rect;
     
@@ -121,8 +110,7 @@ layout_iter_get_char_extents(self)
 }
 
 static VALUE
-layout_iter_get_cluster_extents(self)
-    VALUE self;
+layout_iter_get_cluster_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -133,8 +121,7 @@ layout_iter_get_cluster_extents(self)
 }
 
 static VALUE
-layout_iter_get_run_extents(self)
-    VALUE self;
+layout_iter_get_run_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -145,8 +132,7 @@ layout_iter_get_run_extents(self)
 }
 
 static VALUE
-layout_iter_get_line_yrange(self)
-    VALUE self;
+layout_iter_get_line_yrange(VALUE self)
 {
     int y0, y1;
     pango_layout_iter_get_line_yrange(_SELF(self), &y0, &y1);
@@ -154,8 +140,7 @@ layout_iter_get_line_yrange(self)
 }
 
 static VALUE
-layout_iter_get_line_extents(self)
-    VALUE self;
+layout_iter_get_line_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -165,8 +150,7 @@ layout_iter_get_line_extents(self)
                         BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
 }
 static VALUE
-layout_iter_get_layout_extents(self)
-    VALUE self;
+layout_iter_get_layout_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
