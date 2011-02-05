@@ -14,8 +14,7 @@
 #define _SELF(self) ((PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR))
 
 static VALUE
-color_initialize(self, red, green, blue)
-    VALUE self, red, green, blue;
+color_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
     PangoColor c;
     c.red = NUM2INT(red);
@@ -27,63 +26,52 @@ color_initialize(self, red, green, blue)
 }
 
 static VALUE
-color_parse(self, spec)
-    VALUE self, spec;
+color_parse(VALUE self, VALUE spec)
 {
     return CBOOL2RVAL(pango_color_parse(_SELF(self), RVAL2CSTR(spec)));
 }
 
 static VALUE
-color_red(self)
-    VALUE self;
+color_red(VALUE self)
 {
     return INT2FIX(_SELF(self)->red);
 }
 
 static VALUE
-color_set_red(self, red)
-    VALUE self;
-    VALUE red;
+color_set_red(VALUE self, VALUE red)
 {
     _SELF(self)->red = NUM2INT(red);
     return self;
 }
 
 static VALUE
-color_green(self)
-    VALUE self;
+color_green(VALUE self)
 {
     return INT2FIX(_SELF(self)->green);
 }
 
 static VALUE
-color_set_green(self, green)
-    VALUE self;
-    VALUE green;
+color_set_green(VALUE self, VALUE green)
 {
     _SELF(self)->green = NUM2INT(green);
     return self;
 }
 
 static VALUE
-color_blue(self)
-    VALUE self;
+color_blue(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue);
 }
 
 static VALUE
-color_set_blue(self, blue)
-    VALUE self;
-    VALUE blue;
+color_set_blue(VALUE self, VALUE blue)
 {
     _SELF(self)->blue = NUM2INT(blue);
     return self;
 }
 
 static VALUE
-color_to_a(self)
-    VALUE self;
+color_to_a(VALUE self)
 {
     PangoColor *c = _SELF(self);
     return rb_ary_new3(3, INT2FIX(c->red), 
@@ -91,8 +79,7 @@ color_to_a(self)
 }
 
 static VALUE
-color_equal(self, other)
-	VALUE self, other;
+color_equal(VALUE self, VALUE other)
 {
     PangoColor* c1 = _SELF(self);
     PangoColor* c2 = _SELF(other);
