@@ -16,10 +16,7 @@
 static ID id_to_a, id_size;
 
 static VALUE
-lstore_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+lstore_initialize(int argc, VALUE *argv, VALUE self)
 {
     gint cnt;
     GtkListStore* store;
@@ -40,10 +37,7 @@ lstore_initialize(argc, argv, self)
 }
 
 static VALUE
-lstore_set_column_types(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+lstore_set_column_types(int argc, VALUE *argv, VALUE self)
 {
     gint cnt;
     GType* buf;
@@ -60,8 +54,7 @@ lstore_set_column_types(argc, argv, self)
 }
 
 static VALUE
-lstore_set_value(self, iter, column, value)
-    VALUE self, iter, column, value;
+lstore_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 {
     GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(column));
     GValue gval = {0,};
@@ -188,8 +181,7 @@ lstore_set_valuesv(VALUE self, VALUE iter, VALUE values)
 */
     
 static VALUE
-lstore_remove(self, iter)
-    VALUE self, iter;
+lstore_remove(VALUE self, VALUE iter)
 {
     G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
@@ -204,10 +196,7 @@ lstore_remove(self, iter)
   Gtk::ListStore#insert(pos, val1 => 0, val2 => 2, ... )
  */
 static VALUE
-lstore_insert(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+lstore_insert(int argc, VALUE *argv, VALUE self)
 {
     VALUE position, values, ret;
     GtkTreeIter iter;
@@ -260,8 +249,7 @@ lstore_insert(argc, argv, self)
 }
 
 static VALUE
-lstore_insert_before(self, sibling)
-    VALUE self, sibling;
+lstore_insert_before(VALUE self, VALUE sibling)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -275,8 +263,7 @@ lstore_insert_before(self, sibling)
 }
 
 static VALUE
-lstore_insert_after(self, sibling)
-    VALUE self, sibling;
+lstore_insert_after(VALUE self, VALUE sibling)
 { 
     VALUE ret;
     GtkTreeIter iter;
@@ -290,8 +277,7 @@ lstore_insert_after(self, sibling)
 }
 
 static VALUE
-lstore_prepend(self)
-    VALUE self;
+lstore_prepend(VALUE self)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -305,8 +291,7 @@ lstore_prepend(self)
 }
 
 static VALUE
-lstore_append(self)
-    VALUE self;
+lstore_append(VALUE self)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -320,8 +305,7 @@ lstore_append(self)
 }
 
 static VALUE
-lstore_clear(self)
-    VALUE self;
+lstore_clear(VALUE self)
 {
     G_CHILD_REMOVE_ALL(self);
     gtk_list_store_clear(_SELF(self));
@@ -330,16 +314,14 @@ lstore_clear(self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-lstore_iter_is_valid(self, iter)
-    VALUE self, iter;
+lstore_iter_is_valid(VALUE self, VALUE iter)
 {
     return (NIL_P(iter)) ? Qfalse :
         CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
 static VALUE
-lstore_reorder(self, new_order)
-    VALUE self, new_order;
+lstore_reorder(VALUE self, VALUE new_order)
 {
     gint i;
     gint len = RARRAY_LEN(new_order);
@@ -354,23 +336,20 @@ lstore_reorder(self, new_order)
     return self;
 }
 static VALUE
-lstore_swap(self, iter1, iter2)
-    VALUE self, iter1, iter2;
+lstore_swap(VALUE self, VALUE iter1, VALUE iter2)
 {
     gtk_list_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
 static VALUE
-lstore_move_before(self, iter, position)
-    VALUE self, iter, position;
+lstore_move_before(VALUE self, VALUE iter, VALUE position)
 {
     gtk_list_store_move_before(_SELF(self), RVAL2GTKTREEITER(iter), 
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 static VALUE
-lstore_move_after(self, iter, position)
-    VALUE self, iter, position;
+lstore_move_after(VALUE self, VALUE iter, VALUE position)
 {
     gtk_list_store_move_after(_SELF(self), RVAL2GTKTREEITER(iter), 
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
