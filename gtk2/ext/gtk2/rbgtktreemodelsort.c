@@ -16,8 +16,7 @@
 static ID id_model;
 
 static VALUE
-tmodelsort_initialize(self, model)
-    VALUE self, model;
+tmodelsort_initialize(VALUE self, VALUE model)
 {
     G_CHILD_SET(self, id_model, model);
     G_INITIALIZE(self, 
@@ -26,8 +25,7 @@ tmodelsort_initialize(self, model)
 }
 
 static VALUE
-tmodelsort_convert_child_path_to_path(self, child_path)
-    VALUE self, child_path;
+tmodelsort_convert_child_path_to_path(VALUE self, VALUE child_path)
 {
     return GTKTREEPATH2RVAL(gtk_tree_model_sort_convert_child_path_to_path(
                              _SELF(self),
@@ -35,8 +33,7 @@ tmodelsort_convert_child_path_to_path(self, child_path)
 }
 
 static VALUE
-tmodelsort_convert_child_iter_to_iter(self, child_iter)
-    VALUE self, child_iter;
+tmodelsort_convert_child_iter_to_iter(VALUE self, VALUE child_iter)
 {
     GtkTreeIter sort_iter;
     GtkTreeModelSort* modelsort = _SELF(self);
@@ -47,8 +44,7 @@ tmodelsort_convert_child_iter_to_iter(self, child_iter)
 }
 
 static VALUE
-tmodelsort_convert_path_to_child_path(self, sorted_path)
-    VALUE self, sorted_path;
+tmodelsort_convert_path_to_child_path(VALUE self, VALUE sorted_path)
 {
     return GTKTREEPATH2RVAL(gtk_tree_model_sort_convert_path_to_child_path(
                              _SELF(self),
@@ -56,8 +52,7 @@ tmodelsort_convert_path_to_child_path(self, sorted_path)
 }
 
 static VALUE
-tmodelsort_convert_iter_to_child_iter(self, sorted_iter)
-    VALUE self, sorted_iter;
+tmodelsort_convert_iter_to_child_iter(VALUE self, VALUE sorted_iter)
 {
     GtkTreeIter child_iter;
     GtkTreeModelSort* modelsort = _SELF(self);
@@ -68,16 +63,14 @@ tmodelsort_convert_iter_to_child_iter(self, sorted_iter)
 } 
 
 static VALUE
-tmodelsort_reset_default_sort_func(self)
-    VALUE self;
+tmodelsort_reset_default_sort_func(VALUE self)
 {
     gtk_tree_model_sort_reset_default_sort_func(_SELF(self));
     return self;
 }
 
 static VALUE
-tmodelsort_clear_cache(self)
-    VALUE self;
+tmodelsort_clear_cache(VALUE self)
 {
     gtk_tree_model_sort_clear_cache(_SELF(self));
     return self;
@@ -85,8 +78,7 @@ tmodelsort_clear_cache(self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-tmodelsort_iter_is_valid(self, iter)
-    VALUE self, iter;
+tmodelsort_iter_is_valid(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_tree_model_sort_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
