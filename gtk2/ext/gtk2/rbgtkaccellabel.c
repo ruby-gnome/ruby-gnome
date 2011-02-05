@@ -13,23 +13,20 @@
 #include "global.h"
 
 static VALUE
-alabel_initialize(self, string)
-    VALUE self, string;
+alabel_initialize(VALUE self, VALUE string)
 {
     RBGTK_INITIALIZE(self, gtk_accel_label_new(RVAL2CSTR(string)));
     return Qnil;
 }
 
 static VALUE
-alabel_get_accel_width(self)
-	 VALUE self;
+alabel_get_accel_width(VALUE self)
 {
     return INT2NUM(gtk_accel_label_get_accel_width(GTK_ACCEL_LABEL(RVAL2GOBJ(self))));
 }
 
 static VALUE
-alabel_refetch(self)
-	 VALUE self;
+alabel_refetch(VALUE self)
 {
     gtk_accel_label_refetch(GTK_ACCEL_LABEL(RVAL2GOBJ(self)));
     return Qfalse; // always returns false
