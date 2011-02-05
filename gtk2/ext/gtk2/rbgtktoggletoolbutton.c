@@ -15,10 +15,7 @@
 
 #define _SELF(self) (GTK_TOGGLE_TOOL_BUTTON(RVAL2GOBJ(self)))
 static VALUE
-toggletoolbutton_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+toggletoolbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE stock_id;
     GtkToolItem* item;
@@ -39,16 +36,14 @@ toggletoolbutton_initialize(argc, argv, self)
 }
 
 static VALUE
-toggletoolbutton_set_active(self, is_active)
-    VALUE self, is_active;
+toggletoolbutton_set_active(VALUE self, VALUE is_active)
 {
     gtk_toggle_tool_button_set_active(_SELF(self), RVAL2CBOOL(is_active));
     return self;
 }
 
 static VALUE
-toggletoolbutton_get_active(self)
-    VALUE self;
+toggletoolbutton_get_active(VALUE self)
 {
     return CBOOL2RVAL(gtk_toggle_tool_button_get_active(_SELF(self)));
 }
