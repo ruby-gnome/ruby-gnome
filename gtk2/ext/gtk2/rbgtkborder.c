@@ -18,14 +18,12 @@
 
 #define ATTR_INT(name)\
 static VALUE \
-border_int_ ## name (self)\
-    VALUE self;\
+border_int_ ## name (VALUE self)\
 {\
     return INT2NUM(_SELF(self)->name);\
 }\
 static VALUE \
-border_int_set_ ## name (self, val)\
-    VALUE self, val;\
+border_int_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = NUM2INT(val); \
     return self;\
@@ -41,8 +39,7 @@ ATTR_INT(bottom);
     rb_define_method(gt, G_STRINGIFY(set_ ## name), border_ ## type ## _set_## name, 1);
 
 static VALUE
-border_initialize(self, left, right, top, bottom)
-    VALUE self, left, right, top, bottom;
+border_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 {
     GtkBorder border;
     border.left = NUM2INT(left);
@@ -55,8 +52,7 @@ border_initialize(self, left, right, top, bottom)
 }
 
 static VALUE
-border_to_a(self)
-    VALUE self;
+border_to_a(VALUE self)
 {
     GtkBorder* border = _SELF(self);
     return rb_ary_new3(4, INT2NUM(border->left), INT2NUM(border->right),
