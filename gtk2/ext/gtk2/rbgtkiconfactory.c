@@ -13,16 +13,14 @@
 #define _SELF(s) (GTK_ICON_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
-ifactory_initialize(self)
-    VALUE self;
+ifactory_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_icon_factory_new());
     return Qnil;
 }
 
 static VALUE
-ifactory_add(self, id, icon_set)
-    VALUE self, id, icon_set;
+ifactory_add(VALUE self, VALUE id, VALUE icon_set)
 {
     gtk_icon_factory_add(_SELF(self), RVAL2CSTR(id),
                          (GtkIconSet*)RVAL2BOXED(icon_set, GTK_TYPE_ICON_SET));
@@ -30,16 +28,14 @@ ifactory_add(self, id, icon_set)
 }
 
 static VALUE
-ifactory_add_default(self)
-    VALUE self;
+ifactory_add_default(VALUE self)
 {
     gtk_icon_factory_add_default(_SELF(self));
     return self;
 }
 
 static VALUE
-ifactory_lookup(self, id)
-    VALUE self, id;
+ifactory_lookup(VALUE self, VALUE id)
 {
     GtkIconSet *icon_set;
 
@@ -48,8 +44,7 @@ ifactory_lookup(self, id)
 }
 
 static VALUE
-ifactory_lookup_default(self, id)
-    VALUE self, id;
+ifactory_lookup_default(VALUE self, VALUE id)
 {
     GtkIconSet *icon_set;
 
@@ -58,8 +53,7 @@ ifactory_lookup_default(self, id)
 }
 
 static VALUE
-ifactory_remove_default(self)
-    VALUE self;
+ifactory_remove_default(VALUE self)
 {
     gtk_icon_factory_remove_default(_SELF(self));
     return self;
