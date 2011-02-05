@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-aframe_initialize(self, label, xalign, yalign, ratio, obey_child)
-    VALUE self, label, xalign, yalign, ratio, obey_child;
+aframe_initialize(VALUE self, VALUE label, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child)
 {
     RBGTK_INITIALIZE(self, gtk_aspect_frame_new(NIL_P(label)?NULL:RVAL2CSTR(label),
                                                 NUM2DBL(xalign),
@@ -27,8 +26,7 @@ aframe_initialize(self, label, xalign, yalign, ratio, obey_child)
 }
 
 static VALUE
-aframe_set(self, xalign, yalign, ratio, obey_child)
-    VALUE self, xalign, yalign, ratio, obey_child;
+aframe_set(VALUE self, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child)
 {
     gtk_aspect_frame_set(GTK_ASPECT_FRAME(RVAL2GOBJ(self)),
 			 NUM2DBL(xalign), NUM2DBL(yalign),
