@@ -62,23 +62,20 @@ gtk_m_function2(gpointer proc)
 
 
 static VALUE
-gtk_m_set_locale(self)
-    VALUE self;
+gtk_m_set_locale(VALUE self)
 {
     return CSTR2RVAL(gtk_set_locale());
 }
 
 static VALUE
-gtk_m_disable_setlocale(self)
-    VALUE self;
+gtk_m_disable_setlocale(VALUE self)
 {
     gtk_disable_setlocale();
     return Qnil;
 }
 
 static VALUE
-gtk_m_get_default_language(self)
-    VALUE self;
+gtk_m_get_default_language(VALUE self)
 {
     return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
 }
@@ -181,45 +178,39 @@ gtk_exit()
 */
 
 static VALUE
-gtk_m_main(self)
-    VALUE self;
+gtk_m_main(VALUE self)
 {
     gtk_main();
     return Qnil;
 }
 
 static VALUE
-gtk_m_main_level(self)
-    VALUE self;
+gtk_m_main_level(VALUE self)
 {
     return INT2FIX(gtk_main_level());
 }
 
 static VALUE
-gtk_m_main_quit(self)
-    VALUE self;
+gtk_m_main_quit(VALUE self)
 {
     gtk_main_quit();
     return Qnil;
 }
 
 static VALUE
-gtk_m_main_iteration(self)
-    VALUE self;
+gtk_m_main_iteration(VALUE self)
 {
     return CBOOL2RVAL(gtk_main_iteration());
 }
 
 static VALUE
-gtk_m_main_iteration_do(self, blocking)
-    VALUE self, blocking;
+gtk_m_main_iteration_do(VALUE self, VALUE blocking)
 {
     return CBOOL2RVAL(gtk_main_iteration_do(RVAL2CBOOL(blocking)));
 }
 
 static VALUE
-gtk_m_main_do_event(self, event)
-    VALUE self, event;
+gtk_m_main_do_event(VALUE self, VALUE event)
 {
     gtk_main_do_event(RVAL2GEV(event));
     return event;
@@ -231,31 +222,27 @@ gtk_false()
 */
 
 static VALUE
-gtk_m_grab_add(self, widget)
-    VALUE self, widget;
+gtk_m_grab_add(VALUE self, VALUE widget)
 {
     gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
     return Qnil;
 }
 
 static VALUE
-gtk_m_get_current(self)
-    VALUE self;
+gtk_m_get_current(VALUE self)
 {
     return GOBJ2RVAL(gtk_grab_get_current());
 }
 
 static VALUE
-gtk_m_grab_remove(self, widget)
-    VALUE self, widget;
+gtk_m_grab_remove(VALUE self, VALUE widget)
 {
     gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
     return Qnil;
 }
 
 static VALUE
-gtk_m_init_add(self)
-    VALUE self;
+gtk_m_init_add(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
 
@@ -265,8 +252,7 @@ gtk_m_init_add(self)
 }
 
 static VALUE
-gtk_m_quit_add(self, main_level)
-    VALUE self, main_level;
+gtk_m_quit_add(VALUE self, VALUE main_level)
 {
     volatile VALUE func = rb_block_proc();
     VALUE rb_id;
@@ -285,8 +271,7 @@ gtk_m_quit_add(self, main_level)
 }
 
 static VALUE
-gtk_m_quit_remove(self, quit_handler_id)
-    VALUE self, quit_handler_id;
+gtk_m_quit_remove(VALUE self, VALUE quit_handler_id)
 {
     gtk_quit_remove(NUM2UINT(quit_handler_id));
     G_REMOVE_RELATIVE(self, id__quit_callbacks__, quit_handler_id);
@@ -301,8 +286,7 @@ gtk_timeout_add_full()
 */
 
 static VALUE
-timeout_add(self, interval)
-    VALUE self, interval;
+timeout_add(VALUE self, VALUE interval)
 {
     VALUE func, rb_id;
     callback_info_t *info;
@@ -321,8 +305,7 @@ timeout_add(self, interval)
 }
 
 static VALUE
-timeout_remove(self, id)
-    VALUE self, id;
+timeout_remove(VALUE self, VALUE id)
 {
     gtk_timeout_remove(NUM2UINT(id));
     G_REMOVE_RELATIVE(self, id__timeout_callbacks__, id);
@@ -330,8 +313,7 @@ timeout_remove(self, id)
 }
 
 static VALUE
-idle_add(self)
-    VALUE self;
+idle_add(VALUE self)
 {
     VALUE func, rb_id;
     callback_info_t *info;
@@ -351,8 +333,7 @@ idle_add(self)
 }
 
 static VALUE
-idle_add_priority(self, priority)
-    VALUE self, priority;
+idle_add_priority(VALUE self, VALUE priority)
 {
     VALUE func, rb_id;
     callback_info_t *info;
@@ -371,8 +352,7 @@ idle_add_priority(self, priority)
 }
 
 static VALUE
-idle_remove(self, id)
-    VALUE self, id;
+idle_remove(VALUE self, VALUE id)
 {
     gtk_idle_remove(NUM2UINT(id));
     G_REMOVE_RELATIVE(self, id__idle_callbacks__, id);
@@ -401,8 +381,7 @@ gtk_m_key_snoop_func(grab_widget, event, func)
 }
 
 static VALUE
-gtk_m_key_snooper_install(self)
-    VALUE self;
+gtk_m_key_snooper_install(VALUE self)
 {
     VALUE func = rb_block_proc();
     VALUE id = INT2FIX(gtk_key_snooper_install(
@@ -413,8 +392,7 @@ gtk_m_key_snooper_install(self)
 }
 
 static VALUE
-gtk_m_key_snooper_remove(self, id)
-    VALUE self, id;
+gtk_m_key_snooper_remove(VALUE self, VALUE id)
 {
     gtk_key_snooper_remove(NUM2UINT(id));
     G_REMOVE_RELATIVE(self, id__snooper_callbacks__, id);
@@ -422,22 +400,19 @@ gtk_m_key_snooper_remove(self, id)
 }
 
 static VALUE
-gtk_m_get_current_event(self)
-    VALUE self;
+gtk_m_get_current_event(VALUE self)
 {
     return GEV2RVAL(gtk_get_current_event());
 }
 
 static VALUE
-gtk_m_get_current_event_time(self)
-    VALUE self;
+gtk_m_get_current_event_time(VALUE self)
 {
     return INT2NUM(gtk_get_current_event_time());
 }
 
 static VALUE
-gtk_m_get_current_event_state(self)
-    VALUE self;
+gtk_m_get_current_event_state(VALUE self)
 {
     GdkModifierType state;
     gboolean ret = gtk_get_current_event_state(&state);
@@ -445,10 +420,7 @@ gtk_m_get_current_event_state(self)
 }
 
 static VALUE
-gtk_m_get_event_widget(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gtk_m_get_event_widget(int argc, VALUE *argv, VALUE self)
 {
     VALUE event;
     rb_scan_args(argc, argv, "01", &event);
@@ -457,8 +429,7 @@ gtk_m_get_event_widget(argc, argv, self)
 }
 
 static VALUE
-gtk_m_propagate_event(self, widget, event)
-    VALUE self, widget, event;
+gtk_m_propagate_event(VALUE self, VALUE widget, VALUE event)
 {
     gtk_propagate_event(GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2GEV(event));
     return Qnil;
@@ -466,8 +437,7 @@ gtk_m_propagate_event(self, widget, event)
 
 /* From Version Information */
 static VALUE
-gtk_m_check_version(self, major, minor, micro)
-    VALUE self, major, minor, micro;
+gtk_m_check_version(VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     const gchar *ret;
     ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
@@ -475,8 +445,7 @@ gtk_m_check_version(self, major, minor, micro)
 }
 
 static VALUE
-gtk_m_check_version_q(self, major, minor, micro)
-    VALUE self, major, minor, micro;
+gtk_m_check_version_q(VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     const gchar *ret;
     ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
