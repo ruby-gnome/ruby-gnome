@@ -17,10 +17,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-combobox_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+combobox_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model_or_false;
     GtkWidget* widget;
@@ -57,8 +54,7 @@ void        gtk_combo_box_set_active        (GtkComboBox *combo_box,
 */
 
 static VALUE
-combobox_get_active_iter(self)
-    VALUE self;
+combobox_get_active_iter(VALUE self)
 {
     GtkTreeIter iter;
     VALUE val = Qnil;
@@ -71,8 +67,7 @@ combobox_get_active_iter(self)
 }
 
 static VALUE
-combobox_set_active_iter(self, iter)
-    VALUE self, iter;
+combobox_set_active_iter(VALUE self, VALUE iter)
 {
     gtk_combo_box_set_active_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
@@ -86,32 +81,28 @@ void        gtk_combo_box_set_model         (GtkComboBox *combo_box,
 
 
 static VALUE
-combobox_append_text(self, text)
-    VALUE self, text;
+combobox_append_text(VALUE self, VALUE text)
 {
     gtk_combo_box_append_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-combobox_insert_text(self, position, text)
-    VALUE self, position, text;
+combobox_insert_text(VALUE self, VALUE position, VALUE text)
 {
     gtk_combo_box_insert_text(_SELF(self), NUM2INT(position), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-combobox_prepend_text(self, text)
-    VALUE self, text;
+combobox_prepend_text(VALUE self, VALUE text)
 {
     gtk_combo_box_prepend_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-combobox_remove_text(self, position)
-    VALUE self, position;
+combobox_remove_text(VALUE self, VALUE position)
 {
     gtk_combo_box_remove_text(_SELF(self), NUM2INT(position));
     return self;
@@ -119,16 +110,14 @@ combobox_remove_text(self, position)
     
 
 static VALUE
-combobox_popup(self)
-    VALUE self;
+combobox_popup(VALUE self)
 {
     gtk_combo_box_popup(_SELF(self));
     return self;
 }
 
 static VALUE
-combobox_popdown(self)
-    VALUE self;
+combobox_popdown(VALUE self)
 {
     gtk_combo_box_popdown(_SELF(self));
     return self;
@@ -150,15 +139,13 @@ gint        gtk_combo_box_get_row_span_column
  */
 
 static VALUE
-combobox_get_active_text(self)
-    VALUE self;
+combobox_get_active_text(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_combo_box_get_active_text(_SELF(self)));
 }
 
 static VALUE
-combobox_get_popup_accessible(self)
-    VALUE self;
+combobox_get_popup_accessible(VALUE self)
 {
     return GOBJ2RVAL(gtk_combo_box_get_popup_accessible(_SELF(self)));
 }
@@ -169,10 +156,7 @@ GtkTreeViewRowSeparatorFunc gtk_combo_box_get_row_separator_func
 */
 
 static gboolean
-row_separator_func(model, iter, func)
-    GtkTreeModel* model;
-    GtkTreeIter* iter;
-    gpointer* func;
+row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer *func)
 {  
     iter->user_data3 = model;
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(model),
@@ -180,8 +164,7 @@ row_separator_func(model, iter, func)
 }
 
 static VALUE
-combobox_set_row_separator_func(self)
-    VALUE self;
+combobox_set_row_separator_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -196,8 +179,7 @@ combobox_set_row_separator_func(self)
    call GLib::Object.set_property.
 */
 static VALUE
-combobox_set_focus_on_click(self, val)
-    VALUE self, val;
+combobox_set_focus_on_click(VALUE self, VALUE val)
 {
     gtk_combo_box_set_focus_on_click(_SELF(self), RVAL2CBOOL(val));
     return self;
