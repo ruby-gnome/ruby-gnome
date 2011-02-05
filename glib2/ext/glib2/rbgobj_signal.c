@@ -24,10 +24,7 @@ VALUE rbgobj_signal_wrap(guint sig_id);
 static VALUE signal_func_table;
 
 void
-rbgobj_set_signal_func(klass, sig_name, func)
-    VALUE klass;
-    gchar* sig_name; 
-    GValToRValSignalFunc func;
+rbgobj_set_signal_func(VALUE klass, gchar *sig_name, GValToRValSignalFunc func)
 {
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
     guint signal_id = g_signal_lookup(sig_name, CLASS2GTYPE(klass));
@@ -292,8 +289,7 @@ gobj_sig_connect_after(argc, argv, self)
 
 #if 0
 static VALUE
-gobj_sig_get_invocation_hint(self)
-     VALUE self;
+gobj_sig_get_invocation_hint(VALUE self)
 {
     GSignalInvocationHint* hint;
     hint = g_signal_get_invocation_hint(RVAL2GOBJ(self));
@@ -448,8 +444,7 @@ gobj_sig_handler_block(self, id)
 }
 
 static VALUE
-gobj_sig_handler_unblock(self, id)
-    VALUE self, id;
+gobj_sig_handler_unblock(VALUE self, VALUE id)
 {
     g_signal_handler_unblock(RVAL2GOBJ(self), NUM2ULONG(id));
     return self;
@@ -654,8 +649,7 @@ Init_signal_misc()
 /**********************************************************************/
 
 VALUE
-rbgobj_signal_wrap(sig_id)
-    guint sig_id;
+rbgobj_signal_wrap(guint sig_id)
 {
     VALUE result;
     GSignalQuery* query;
