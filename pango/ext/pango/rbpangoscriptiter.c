@@ -15,8 +15,7 @@
 
 /**********************************/
 static PangoScriptIter*
-rbpango_script_iter_copy(ref)
-    PangoScriptIter* ref;
+rbpango_script_iter_copy(PangoScriptIter *ref)
 {
 /*
   PangoScriptIter* new_ref = pango_script_iter_new("", 0);
@@ -44,8 +43,7 @@ pango_script_iter_get_type(void)
 #define _SELF(r) ((PangoScriptIter*)RVAL2BOXED(r, PANGO_TYPE_SCRIPT_ITER))
 
 static VALUE
-rbpango_scriptiter_initialize(self, text)
-    VALUE self, text;
+rbpango_scriptiter_initialize(VALUE self, VALUE text)
 {
     PangoScriptIter* iter;
 
@@ -56,8 +54,7 @@ rbpango_scriptiter_initialize(self, text)
 }
 
 static VALUE
-rbpango_scriptiter_get_range(self)
-    VALUE self;
+rbpango_scriptiter_get_range(VALUE self)
 {
     G_CONST_RETURN char* start;
     G_CONST_RETURN char* end;
@@ -70,8 +67,7 @@ rbpango_scriptiter_get_range(self)
 }
 
 static VALUE
-rbpango_scriptiter_next(self)
-    VALUE self;
+rbpango_scriptiter_next(VALUE self)
 {
     return CBOOL2RVAL(pango_script_iter_next(_SELF(self)));
 }
