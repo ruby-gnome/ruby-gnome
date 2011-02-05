@@ -16,8 +16,7 @@
  */
 
 static VALUE
-rpango_reorder_items(self, logical_items)
-    VALUE self, logical_items;
+rpango_reorder_items(VALUE self, VALUE logical_items)
 {
     int i;
     GList *glist = NULL;
@@ -37,15 +36,13 @@ rpango_reorder_items(self, logical_items)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-rpango_unichar_direction(self, ch)
-    VALUE self, ch;
+rpango_unichar_direction(VALUE self, VALUE ch)
 {
     return GENUM2RVAL(pango_unichar_direction(NUM2UINT(ch)), PANGO_TYPE_DIRECTION);
 }
 
 static VALUE
-rpango_find_base_dir(self, text)
-    VALUE self, text;
+rpango_find_base_dir(VALUE self, VALUE text)
 {
     StringValue(text);
     return GENUM2RVAL(pango_find_base_dir(RVAL2CSTR(text), RSTRING_LEN(text)), 
@@ -54,8 +51,7 @@ rpango_find_base_dir(self, text)
 #endif
 
 static VALUE
-rpango_break(self, text, analysis)
-    VALUE self, text, analysis;
+rpango_break(VALUE self, VALUE text, VALUE analysis)
 {
     gint i, len;
     glong attrs_len;
@@ -82,8 +78,7 @@ rpango_break(self, text, analysis)
 }
 
 static VALUE
-rpango_get_log_attrs(self, text, level, language)
-    VALUE self, text, level, language;
+rpango_get_log_attrs(VALUE self, VALUE text, VALUE level, VALUE language)
 {
     gint i, len;
     glong attrs_len;
@@ -110,8 +105,7 @@ rpango_get_log_attrs(self, text, level, language)
 }
 
 static VALUE
-rpango_find_paragraph_boundary(self, text)
-     VALUE self, text;
+rpango_find_paragraph_boundary(VALUE self, VALUE text)
 {
     gint paragraph_delimiter_index, next_paragraph_start;
     
@@ -132,8 +126,7 @@ void        pango_default_break             (const gchar *text,
 */
 
 static VALUE
-rpango_shape(self, text, analysis)
-    VALUE self, text, analysis;
+rpango_shape(VALUE self, VALUE text, VALUE analysis)
 {
     VALUE ret;
     PangoGlyphString* glyphs = pango_glyph_string_new();
@@ -146,10 +139,7 @@ rpango_shape(self, text, analysis)
 
 /* This method is from rbpangoattribute.c */
 static VALUE
-rpango_parse_markup(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rpango_parse_markup(int argc, VALUE *argv, VALUE self)
 {
     VALUE markup_text, accel_marker;
     PangoAttrList *pattr_list;
@@ -187,8 +177,7 @@ rpango_parse_markup(argc, argv, self)
 }
 
 static VALUE
-rpango_pixels(self, pixels)
-    VALUE self, pixels;
+rpango_pixels(VALUE self, VALUE pixels)
 {
     return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
 }
