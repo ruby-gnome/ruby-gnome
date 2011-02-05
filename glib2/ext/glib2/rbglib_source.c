@@ -15,8 +15,7 @@ static ID id_call;
 
 /*****************************************/
 static void
-source_free(source)
-    GSource* source;
+source_free(GSource *source)
 {
     g_source_unref(source);
     g_source_destroy(source);
@@ -42,8 +41,7 @@ GSource*    g_source_new                    (GSourceFuncs *source_funcs,
 */
 
 static VALUE
-source_attach(self, context)
-    VALUE self, context;
+source_attach(VALUE self, VALUE context)
 {
     return UINT2NUM(g_source_attach(_SELF(self), 
                                     RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT)));
@@ -51,53 +49,46 @@ source_attach(self, context)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-source_is_destroyed(self)
-    VALUE self;
+source_is_destroyed(VALUE self)
 {
     return CBOOL2RVAL(g_source_is_destroyed(_SELF(self)));
 }
 #endif
 
 static VALUE
-source_set_priority(self, priority)
-    VALUE self, priority;
+source_set_priority(VALUE self, VALUE priority)
 {
     g_source_set_priority(_SELF(self), NUM2INT(priority));
     return self;
 }
 
 static VALUE
-source_get_priority(self)
-    VALUE self;
+source_get_priority(VALUE self)
 {
     return INT2NUM(g_source_get_priority(_SELF(self)));
 }
 
 static VALUE
-source_set_can_recurse(self, can_recurse)
-    VALUE self, can_recurse;
+source_set_can_recurse(VALUE self, VALUE can_recurse)
 {
     g_source_set_can_recurse(_SELF(self), RVAL2CBOOL(can_recurse));
     return self;
 }
 
 static VALUE
-source_get_can_recurse(self)
-    VALUE self;
+source_get_can_recurse(VALUE self)
 {
     return CBOOL2RVAL(g_source_get_can_recurse(_SELF(self)));
 }
 
 static VALUE
-source_get_id(self)
-    VALUE self;
+source_get_id(VALUE self)
 {
     return UINT2NUM(g_source_get_id(_SELF(self)));
 }
 
 static VALUE
-source_get_context(self)
-    VALUE self;
+source_get_context(VALUE self)
 {
     GMainContext* context = g_source_get_context(_SELF(self));
     return BOXED2RVAL(context, G_TYPE_MAIN_CONTEXT);
@@ -111,8 +102,7 @@ source_func(func)
 }
 
 static VALUE
-source_set_callback(self)
-    VALUE self;
+source_set_callback(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -130,24 +120,21 @@ void        g_source_set_callback_indirect  (GSource *source,
 */
 
 static VALUE
-source_add_poll(self, fd)
-    VALUE self, fd;
+source_add_poll(VALUE self, VALUE fd)
 {
     g_source_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
     return self;
 }
 
 static VALUE
-source_remove_poll(self, fd)
-    VALUE self, fd;
+source_remove_poll(VALUE self, VALUE fd)
 {
     g_source_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
     return self;
 }
 
 static VALUE
-source_get_current_time(self)
-    VALUE self;
+source_get_current_time(VALUE self)
 {
     GTimeVal timeval;
     g_source_get_current_time(_SELF(self), &timeval);
