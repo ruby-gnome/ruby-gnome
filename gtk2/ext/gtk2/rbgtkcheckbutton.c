@@ -15,10 +15,7 @@
 #include "global.h"
 
 static VALUE
-cbtn_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+cbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget;
