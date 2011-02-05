@@ -16,17 +16,14 @@ static VALUE type_to_klass;
 
 /***********************************************/
 void
-pango_add_attribute(attr_type, klass)
-    int attr_type;
-    VALUE klass;
+pango_add_attribute(int attr_type, VALUE klass)
 {
     rb_hash_aset(type_to_klass, INT2FIX(attr_type), klass);
 }
 
 /* This is for Attributes which has PangoAttrType. */
 VALUE
-pango_get_attribute_klass(attr_type)
-    VALUE attr_type;
+pango_get_attribute_klass(VALUE attr_type)
 {
     VALUE type = Qnil;
     if (TYPE(attr_type) == T_STRING){
@@ -51,8 +48,7 @@ pango_get_attribute_klass(attr_type)
 }
 
 VALUE
-pango_make_attribute(attr)
-    PangoAttribute* attr;
+pango_make_attribute(PangoAttribute *attr)
 {
     if (attr == NULL) return Qnil;
     return Data_Wrap_Struct(rb_hash_aref(type_to_klass, INT2FIX(attr->klass->type)), 0, 
@@ -61,8 +57,7 @@ pango_make_attribute(attr)
 }
 
 PangoAttribute*
-pango_get_attribute(attr)
-    VALUE attr;
+pango_get_attribute(VALUE attr)
 {
     PangoAttribute *gattr;
 
@@ -77,8 +72,7 @@ pango_get_attribute(attr)
 
 /***********************************************/
 static VALUE
-attr_s_allocate(klass)
-    VALUE klass;
+attr_s_allocate(VALUE klass)
 {
     /* Don't define destroy method here.
        return Data_Wrap_Struct(klass, 0, pango_attribute_destroy, 0);
@@ -90,10 +84,7 @@ attr_s_allocate(klass)
 #define attr_s_new rb_class_new_instance
 #else
 static VALUE
-attr_s_new(argc, argv, klass)
-    int argc;
-    VALUE* argv;
-    VALUE klass;
+attr_s_new(int argc, VALUE *argv, VALUE klass)
 {
     VALUE obj = attr_s_allocate(klass);
     rb_obj_call_init(obj, argc, argv);
@@ -114,15 +105,13 @@ gboolean    pango_parse_markup              (const char *markup_text,
 */
 
 static VALUE
-attr_s_type_register(self, name)
-    VALUE self, name;
+attr_s_type_register(VALUE self, VALUE name)
 {
     return INT2NUM(pango_attr_type_register(RVAL2CSTR(name)));
 }
 
 static VALUE
-attr_equal(self, other)
-    VALUE self, other;
+attr_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(pango_attribute_equal(RVAL2ATTR(self), RVAL2ATTR(other)));
 }
@@ -132,8 +121,7 @@ attr_equal(self, other)
  */
 /* PangoAttribute */
 static VALUE
-attr_start_index(self)
-    VALUE self;
+attr_start_index(VALUE self)
 {
     return UINT2NUM(RVAL2ATTR(self)->start_index);
 }
@@ -146,8 +134,7 @@ attr_set_start_index(VALUE self, VALUE value)
 }
 
 static VALUE
-attr_end_index(self)
-    VALUE self;
+attr_end_index(VALUE self)
 {
     return UINT2NUM(RVAL2ATTR(self)->end_index);
 }
@@ -161,24 +148,21 @@ attr_set_end_index(VALUE self, VALUE value)
 
 /* PangoAttrString */
 static VALUE
-attr_string_value(self)
-    VALUE self;
+attr_string_value(VALUE self)
 {
     return CSTR2RVAL(((PangoAttrString*)RVAL2ATTR(self))->value);
 }
 
 /* PangoAttrLanguage */
 static VALUE
-attr_language_value(self)
-    VALUE self;
+attr_language_value(VALUE self)
 {
     return BOXED2RVAL(((PangoAttrLanguage*)RVAL2ATTR(self))->value, PANGO_TYPE_LANGUAGE);
 }
 
 /* PangoAttrColor */
 static VALUE
-attr_color_value(self)
-    VALUE self;
+attr_color_value(VALUE self)
 {
     PangoColor color = ((PangoAttrColor*)RVAL2ATTR(self))->color;
     return BOXED2RVAL(&color, PANGO_TYPE_COLOR);
@@ -186,32 +170,28 @@ attr_color_value(self)
 
 /* PangoAttrInt */
 static VALUE
-attr_int_value(self)
-    VALUE self;
+attr_int_value(VALUE self)
 {
     return INT2NUM(((PangoAttrInt*)RVAL2ATTR(self))->value);
 }
 
 /* PangoAttrFloat */
 static VALUE
-attr_float_value(self)
-    VALUE self;
+attr_float_value(VALUE self)
 {
     return rb_float_new(((PangoAttrFloat*)RVAL2ATTR(self))->value);
 }
 
 /* PangoAttrBool(This is Ruby/Pango's original class) */
 static VALUE
-attr_bool_value(self)
-    VALUE self;
+attr_bool_value(VALUE self)
 {
     return CBOOL2RVAL(((PangoAttrInt*)RVAL2ATTR(self))->value);
 }
 
 /* PangoAttrFontDesc */
 static VALUE
-attr_fontdesc_value(self)
-    VALUE self;
+attr_fontdesc_value(VALUE self)
 {
     return BOXED2RVAL(((PangoAttrFontDesc*)RVAL2ATTR(self))->desc, PANGO_TYPE_FONT_DESCRIPTION);
 }
@@ -234,8 +214,7 @@ attr_shape_logical_rect(self)
 }
 
 static VALUE
-attr_shape_value(self)
-    VALUE self;
+attr_shape_value(VALUE self)
 {
     return rb_ary_new3(2, attr_shape_ink_rect(self), attr_shape_logical_rect(self));
 }
@@ -245,8 +224,7 @@ attr_shape_value(self)
  */
 #define MAKE_ATTRINT_INIT(klassname, funcname)\
 static VALUE \
-attr_ ## klassname ## _initialize(self, val)\
-    VALUE self, val;\
+attr_ ## klassname ## _initialize(VALUE self, VALUE val)\
 {\
     DATA_PTR(self) = pango_attr_ ## funcname ## _new(NUM2INT(val));\
     return Qnil;\
@@ -254,16 +232,14 @@ attr_ ## klassname ## _initialize(self, val)\
 
 #define MAKE_ATTRENUM_INIT(klassname, funcname, type)\
 static VALUE \
-attr_ ## klassname ## _initialize(self, val)\
-    VALUE self, val;\
+attr_ ## klassname ## _initialize(VALUE self, VALUE val)\
 {\
     DATA_PTR(self) = pango_attr_ ## funcname ## _new(RVAL2GENUM(val, type));\
     return Qnil;\
 }
 
 static VALUE
-attr_AttrLanguage_initialize(self, lang)
-    VALUE self, lang;
+attr_AttrLanguage_initialize(VALUE self, VALUE lang)
 {
     DATA_PTR(self) = pango_attr_language_new(
                      (PangoLanguage*)RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE));
@@ -271,8 +247,7 @@ attr_AttrLanguage_initialize(self, lang)
 }
 
 static VALUE
-attr_AttrFamily_initialize(self, family)
-    VALUE self, family;
+attr_AttrFamily_initialize(VALUE self, VALUE family)
 {
     DATA_PTR(self) = pango_attr_family_new(RVAL2CSTR(family));
     return Qnil;
@@ -284,16 +259,14 @@ MAKE_ATTRENUM_INIT(AttrStretch, stretch, PANGO_TYPE_STRETCH);
 MAKE_ATTRENUM_INIT(AttrWeight, weight, PANGO_TYPE_WEIGHT); 
 
 static VALUE
-attr_AttrSize_initialize(self, size)
-    VALUE self, size;
+attr_AttrSize_initialize(VALUE self, VALUE size)
 {
     DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
     return Qnil;
 }
 #if PANGO_CHECK_VERSION(1,8,1)
 static VALUE
-attr_AttrAbsoluteSize_initialize(self, size)
-    VALUE self, size;
+attr_AttrAbsoluteSize_initialize(VALUE self, VALUE size)
 {
     DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(size));
     return Qnil;
@@ -317,8 +290,7 @@ attr_AttrGravityHint_initialize(VALUE self, VALUE gravity_hint)
 #endif
 
 static VALUE
-attr_AttrFontDescription_initialize(self, fontdescription)
-    VALUE self, fontdescription;
+attr_AttrFontDescription_initialize(VALUE self, VALUE fontdescription)
 {
     DATA_PTR(self) = pango_attr_font_desc_new(
         (PangoFontDescription*)RVAL2BOXED(fontdescription, 
@@ -328,32 +300,28 @@ attr_AttrFontDescription_initialize(self, fontdescription)
 }
 
 static VALUE
-attr_AttrForeground_initialize(self, r, g, b)
-    VALUE self, r, g, b;
+attr_AttrForeground_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 {
     DATA_PTR(self) = pango_attr_foreground_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
     return Qnil;
 }
 
 static VALUE
-attr_AttrBackground_initialize(self, r, g, b)
-    VALUE self, r, g, b;
+attr_AttrBackground_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 {
     DATA_PTR(self) = pango_attr_background_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
     return Qnil;
 }
 
 static VALUE
-attr_AttrStrikethrough_initialize(self, strikethrough)
-    VALUE self, strikethrough;
+attr_AttrStrikethrough_initialize(VALUE self, VALUE strikethrough)
 {
     DATA_PTR(self) = pango_attr_strikethrough_new(RVAL2CBOOL(strikethrough));
     return Qnil;
 }
 #if HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
 static VALUE
-attr_AttrStrikethroughColor_initialize(self, r, g, b)
-    VALUE self, r, g, b;
+attr_AttrStrikethroughColor_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 {
     DATA_PTR(self) = pango_attr_strikethrough_color_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
     return Qnil;
@@ -363,8 +331,7 @@ attr_AttrStrikethroughColor_initialize(self, r, g, b)
 MAKE_ATTRENUM_INIT(AttrUnderline, underline, PANGO_TYPE_UNDERLINE); 
 #if HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
 static VALUE
-attr_AttrUnderlineColor_initialize(self, r, g, b)
-    VALUE self, r, g, b;
+attr_AttrUnderlineColor_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 {
     DATA_PTR(self) = pango_attr_underline_color_new(FIX2UINT(r), FIX2UINT(g), FIX2UINT(b));
     return Qnil;
@@ -372,10 +339,7 @@ attr_AttrUnderlineColor_initialize(self, r, g, b)
 #endif
 
 static VALUE
-attr_AttrShape_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+attr_AttrShape_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE ink_rect, logical_rect, data;
     
@@ -404,8 +368,7 @@ attr_AttrShape_initialize(argc, argv, self)
 }
 
 static VALUE
-attr_AttrScale_initialize(self, scale)
-    VALUE self, scale;
+attr_AttrScale_initialize(VALUE self, VALUE scale)
 {
     DATA_PTR(self) = pango_attr_scale_new(NUM2DBL(scale));
     return Qnil;
@@ -413,8 +376,7 @@ attr_AttrScale_initialize(self, scale)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-attr_AttrFallback_initialize(self, enable_fallback)
-    VALUE self, enable_fallback;
+attr_AttrFallback_initialize(VALUE self, VALUE enable_fallback)
 {
     DATA_PTR(self) = pango_attr_fallback_new(RVAL2CBOOL(enable_fallback));
     return Qnil;
