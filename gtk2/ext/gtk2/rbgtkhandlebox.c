@@ -15,16 +15,14 @@
 #include "global.h"
 
 static VALUE
-hb_initialize(self)
-    VALUE self;
+hb_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_handle_box_new());
     return Qnil;
 }
 
 static VALUE
-hb_child_detached(self)
-    VALUE self;
+hb_child_detached(VALUE self)
 {
     return CBOOL2RVAL(GTK_HANDLE_BOX(RVAL2GOBJ(self))->child_detached);
 }
