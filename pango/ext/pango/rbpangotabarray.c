@@ -14,10 +14,7 @@
 #define _SELF(self) ((PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY))
 
 static VALUE
-rtab_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rtab_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE size, positions_in_pixels, attr_ary;
     PangoTabArray *array;
@@ -48,23 +45,20 @@ PangoTabArray* pango_tab_array_new_with_positions
                                              ...);
 */
 static VALUE
-rtab_get_size(self)
-    VALUE self;
+rtab_get_size(VALUE self)
 {
     return INT2NUM(pango_tab_array_get_size(_SELF(self)));
 }
 
 static VALUE
-rtab_resize(self, size)
-    VALUE self, size;
+rtab_resize(VALUE self, VALUE size)
 {
     pango_tab_array_resize(_SELF(self), NUM2INT(size));
     return self;
 }
 
 static VALUE
-rtab_set_tab(self, tab_index, align, location)
-    VALUE self, tab_index, align, location;
+rtab_set_tab(VALUE self, VALUE tab_index, VALUE align, VALUE location)
 {
     pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), RVAL2GENUM(align, PANGO_TYPE_TAB_ALIGN),
                             NUM2INT(location));
@@ -72,8 +66,7 @@ rtab_set_tab(self, tab_index, align, location)
 }
 
 static VALUE
-rtab_get_tab(self, tab_index)
-    VALUE self, tab_index;
+rtab_get_tab(VALUE self, VALUE tab_index)
 {
     PangoTabAlign align;
     gint location;
@@ -83,8 +76,7 @@ rtab_get_tab(self, tab_index)
 }
 
 static VALUE
-rtab_get_tabs(self)
-    VALUE self;
+rtab_get_tabs(VALUE self)
 {
     PangoTabAlign* aligns;
     gint* locations;
@@ -102,8 +94,7 @@ rtab_get_tabs(self)
 }
 
 static VALUE
-rtab_get_positions_in_pixels(self)
-    VALUE self;
+rtab_get_positions_in_pixels(VALUE self)
 {
     return CBOOL2RVAL(pango_tab_array_get_positions_in_pixels(_SELF(self)));
 }
