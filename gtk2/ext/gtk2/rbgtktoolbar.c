@@ -19,18 +19,14 @@
 #define N_RVAL2WIDGET(w)  (NIL_P(w) ? NULL : GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-tbar_initialize(self)
-    VALUE self;
+tbar_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_toolbar_new());
     return Qnil;
 }
 
 static VALUE
-tbar_append(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+tbar_append(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget* ret = NULL;
     VALUE type = Qnil;
@@ -82,10 +78,7 @@ tbar_append(argc, argv, self)
 }
 
 static VALUE
-tbar_prepend(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+tbar_prepend(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget* ret = NULL;
     VALUE type = Qnil;
@@ -136,10 +129,7 @@ tbar_prepend(argc, argv, self)
 }
 
 static VALUE
-tbar_insert(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+tbar_insert(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget* ret = NULL;
     VALUE type = Qnil;
@@ -201,36 +191,31 @@ tbar_insert(argc, argv, self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-tbar_get_item_index(self, item)
-    VALUE self, item;
+tbar_get_item_index(VALUE self, VALUE item)
 {
     return INT2NUM(gtk_toolbar_get_item_index(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(item))));
 }
 
 static VALUE
-tbar_get_n_items(self)
-    VALUE self;
+tbar_get_n_items(VALUE self)
 {
     return INT2NUM(gtk_toolbar_get_n_items(_SELF(self)));
 }
 
 static VALUE
-tbar_get_nth_item(self, n)
-    VALUE self, n;
+tbar_get_nth_item(VALUE self, VALUE n)
 {
     return GOBJ2RVAL(gtk_toolbar_get_nth_item(_SELF(self), NUM2INT(n)));
 }
 
 static VALUE
-tbar_get_drop_index(self, x, y)
-    VALUE self, x, y;
+tbar_get_drop_index(VALUE self, VALUE x, VALUE y)
 {
     return INT2NUM(gtk_toolbar_get_drop_index(_SELF(self), NUM2INT(x), NUM2INT(y)));
 }
 
 static VALUE
-tbar_set_drop_highlight_item(self, item, index)
-    VALUE self, item, index;
+tbar_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
 {
     gtk_toolbar_set_drop_highlight_item(_SELF(self), 
                                         GTK_TOOL_ITEM(RVAL2GOBJ(item)), 
@@ -244,86 +229,75 @@ gboolean    gtk_toolbar_get_show_arrow      (GtkToolbar *toolbar);
 */
 
 static VALUE
-tbar_get_relief_style(self)
-    VALUE self;
+tbar_get_relief_style(VALUE self)
 {
     return GENUM2RVAL(gtk_toolbar_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
 }
 #endif
 
 static VALUE
-tbar_append_space(self)
-    VALUE self;
+tbar_append_space(VALUE self)
 {
     gtk_toolbar_append_space(_SELF(self));
     return self;
 }
 
 static VALUE
-tbar_prepend_space(self)
-    VALUE self;
+tbar_prepend_space(VALUE self)
 {
     gtk_toolbar_prepend_space(_SELF(self));
     return self;
 }
 
 static VALUE
-tbar_insert_space(self, pos)
-    VALUE self, pos;
+tbar_insert_space(VALUE self, VALUE pos)
 {
     gtk_toolbar_insert_space(_SELF(self), NUM2INT(pos));
     return self;
 }
 
 static VALUE
-tbar_set_tooltips(self, enable)
-    VALUE self, enable;
+tbar_set_tooltips(VALUE self, VALUE enable)
 {
     gtk_toolbar_set_tooltips(_SELF(self), RVAL2CBOOL(enable));
     return self;
 }
 
 static VALUE
-tbar_set_icon_size(self, size)
-    VALUE self, size;
+tbar_set_icon_size(VALUE self, VALUE size)
 {
     gtk_toolbar_set_icon_size(_SELF(self), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
 static VALUE
-tbar_get_icon_size(self)
-    VALUE self;
+tbar_get_icon_size(VALUE self)
 {
     return GENUM2RVAL(gtk_toolbar_get_icon_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE
-tbar_get_tooltips(self)
-    VALUE self;
+tbar_get_tooltips(VALUE self)
 {
     return CBOOL2RVAL(gtk_toolbar_get_tooltips(_SELF(self)));
 }
 
 static VALUE
-tbar_remove_space(self, position)
-    VALUE self, position;
+tbar_remove_space(VALUE self, VALUE position)
 {
     gtk_toolbar_remove_space(_SELF(self), NUM2INT(position));
     return self;
 }
 
 static VALUE
-tbar_unset_icon_size(self)
-    VALUE self;
+tbar_unset_icon_size(VALUE self)
 {
     gtk_toolbar_unset_icon_size(_SELF(self));
     return self;
 }
 
 static VALUE
-tbar_unset_style(self)
-    VALUE self;
+tbar_unset_style(VALUE self)
 {
     gtk_toolbar_unset_style(_SELF(self));
     return self;
