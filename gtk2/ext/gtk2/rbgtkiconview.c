@@ -19,10 +19,7 @@ static ID id_model;
 static ID id_select_path;
 
 static VALUE
-iview_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+iview_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model;
     rb_scan_args(argc, argv, "01", &model);
@@ -58,17 +55,13 @@ iview_get_path_at_pos(VALUE self, VALUE x, VALUE y)
 }
 
 static void
-iview_foreach_func(iview, path, func)
-    GtkIconView* iview;
-    GtkTreePath* path;
-    gpointer* func;
+iview_foreach_func(GtkIconView *iview, GtkTreePath *path, gpointer *func)
 {
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(iview), GTKTREEPATH2RVAL(path));
 }
 
 static VALUE
-iview_selected_foreach(self)
-    VALUE self;
+iview_selected_foreach(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -114,8 +107,7 @@ gboolean    gtk_icon_view_get_reorderable   (GtkIconView *icon_view);
 */
 
 static VALUE
-iview_select_path(self, path)
-    VALUE self, path;
+iview_select_path(VALUE self, VALUE path)
 {
     G_CHILD_SET(self, id_select_path, path);
     gtk_icon_view_select_path(_SELF(self), RVAL2GTKTREEPATH(path));
@@ -123,8 +115,7 @@ iview_select_path(self, path)
 }
 
 static VALUE
-iview_unselect_path(self, path)
-       VALUE self, path;
+iview_unselect_path(VALUE self, VALUE path)
 {
     G_CHILD_UNSET(self, id_select_path);
     gtk_icon_view_unselect_path(_SELF(self), RVAL2GTKTREEPATH(path));
@@ -132,15 +123,13 @@ iview_unselect_path(self, path)
 }
  
 static VALUE
-iview_path_is_selected(self, path)
-       VALUE self, path;
+iview_path_is_selected(VALUE self, VALUE path)
 {
     return CBOOL2RVAL(gtk_icon_view_path_is_selected(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
-iview_get_selected_items(self)
-    VALUE self;
+iview_get_selected_items(VALUE self)
 {
     GList* list = gtk_icon_view_get_selected_items(_SELF(self));
     VALUE ret = GLIST2ARY2(list, GTK_TYPE_TREE_PATH);
@@ -150,24 +139,21 @@ iview_get_selected_items(self)
 }
 
 static VALUE
-iview_select_all(self)
-    VALUE self;
+iview_select_all(VALUE self)
 {
     gtk_icon_view_select_all(_SELF(self));
     return self;
 }
 
 static VALUE
-iview_unselect_all(self)
-    VALUE self;
+iview_unselect_all(VALUE self)
 {
     gtk_icon_view_unselect_all(_SELF(self));
     return self;
 }
  
 static VALUE
-iview_item_activated(self, path)
-       VALUE self, path;
+iview_item_activated(VALUE self, VALUE path)
 {
     gtk_icon_view_item_activated(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
@@ -176,15 +162,13 @@ iview_item_activated(self, path)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-iview_create_drag_icon(self, path)
-       VALUE self, path;
+iview_create_drag_icon(VALUE self, VALUE path)
 {
     return GOBJ2RVAL(gtk_icon_view_create_drag_icon(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
-iview_enable_model_drag_dest(self, targets, actions)
-    VALUE self, targets, actions;
+iview_enable_model_drag_dest(VALUE self, VALUE targets, VALUE actions)
 {
     gtk_icon_view_enable_model_drag_dest(_SELF(self),
                                          rbgtk_get_target_entry(targets),
@@ -194,8 +178,7 @@ iview_enable_model_drag_dest(self, targets, actions)
 }
 
 static VALUE
-iview_enable_model_drag_source(self, flags, targets, actions)
-    VALUE self, flags, targets, actions;
+iview_enable_model_drag_source(VALUE self, VALUE flags, VALUE targets, VALUE actions)
 {
     gtk_icon_view_enable_model_drag_source(_SELF(self),
                                            RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
@@ -206,8 +189,7 @@ iview_enable_model_drag_source(self, flags, targets, actions)
 }
 
 static VALUE
-iview_cursor(self)
-    VALUE self;
+iview_cursor(VALUE self)
 {
     GtkTreePath* path;
     GtkCellRenderer* cell;
@@ -216,8 +198,7 @@ iview_cursor(self)
 }
 
 static VALUE
-iview_get_dest_item_at_pos(self, drag_x, drag_y)
-    VALUE self, drag_x, drag_y;
+iview_get_dest_item_at_pos(VALUE self, VALUE drag_x, VALUE drag_y)
 {
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
@@ -227,8 +208,7 @@ iview_get_dest_item_at_pos(self, drag_x, drag_y)
 }
 
 static VALUE
-iview_drag_dest_item(self)
-    VALUE self;
+iview_drag_dest_item(VALUE self)
 {
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
@@ -238,8 +218,7 @@ iview_drag_dest_item(self)
 }
 
 static VALUE
-iview_get_item_at_pos(self, x, y)
-    VALUE self, x, y;
+iview_get_item_at_pos(VALUE self, VALUE x, VALUE y)
 {
     GtkTreePath* path;
     GtkCellRenderer* cell;
@@ -248,8 +227,7 @@ iview_get_item_at_pos(self, x, y)
 }
 
 static VALUE
-iview_visible_range(self)
-    VALUE self;
+iview_visible_range(VALUE self)
 {
     GtkTreePath* start_path;
     GtkTreePath* end_path;
@@ -261,8 +239,7 @@ iview_visible_range(self)
 }
 
 static VALUE
-iview_scroll_to_path(self, path, use_align, row_align, col_align)
-    VALUE self, path, use_align, row_align, col_align;
+iview_scroll_to_path(VALUE self, VALUE path, VALUE use_align, VALUE row_align, VALUE col_align)
 {
     gtk_icon_view_scroll_to_path(_SELF(self),
                                  RVAL2GTKTREEPATH(path),
@@ -273,8 +250,7 @@ iview_scroll_to_path(self, path, use_align, row_align, col_align)
 }
 
 static VALUE
-iview_set_cursor(self, path, cell, start_editing)
-    VALUE self, path, cell, start_editing;
+iview_set_cursor(VALUE self, VALUE path, VALUE cell, VALUE start_editing)
 {
     gtk_icon_view_set_cursor(_SELF(self), RVAL2GTKTREEPATH(path),
                              NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RVAL2CBOOL(start_editing));
@@ -282,8 +258,7 @@ iview_set_cursor(self, path, cell, start_editing)
 }
 
 static VALUE
-iview_set_drag_dest_item(self, path, pos)
-    VALUE self, path, pos;
+iview_set_drag_dest_item(VALUE self, VALUE path, VALUE pos)
 {
     gtk_icon_view_set_drag_dest_item(_SELF(self),
                                      NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
@@ -292,16 +267,14 @@ iview_set_drag_dest_item(self, path, pos)
 }
 
 static VALUE
-iview_unset_model_drag_dest(self)
-    VALUE self;
+iview_unset_model_drag_dest(VALUE self)
 {
     gtk_icon_view_unset_model_drag_dest(_SELF(self));
     return self;
 }
 
 static VALUE
-iview_unset_model_drag_source(self)
-    VALUE self;
+iview_unset_model_drag_source(VALUE self)
 {
     gtk_icon_view_unset_model_drag_source(_SELF(self));
     return self;
