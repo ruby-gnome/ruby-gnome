@@ -17,10 +17,7 @@
 #define _SELF(s) (GTK_MENU_ITEM(RVAL2GOBJ(s)))
 
 static VALUE
-mitem_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+mitem_initialize(int argc, VALUE *argv, VALUE self)
 {
     const gchar *label = NULL;
     VALUE rb_label, use_underline;
@@ -45,16 +42,14 @@ mitem_initialize(argc, argv, self)
 }
 
 static VALUE
-mitem_set_right_justified(self, right_justified)
-    VALUE self, right_justified;
+mitem_set_right_justified(VALUE self, VALUE right_justified)
 {
     gtk_menu_item_set_right_justified(_SELF(self), RVAL2CBOOL(right_justified));
     return self;
 }
 
 static VALUE
-mitem_set_submenu(self, child)
-    VALUE self, child;
+mitem_set_submenu(VALUE self, VALUE child)
 {
     GtkMenuItem *item;
     GtkWidget *submenu;
@@ -70,16 +65,14 @@ mitem_set_submenu(self, child)
 }
 
 static VALUE
-mitem_set_accel_path(self, accel_path)
-    VALUE self, accel_path;
+mitem_set_accel_path(VALUE self, VALUE accel_path)
 {
     gtk_menu_item_set_accel_path(_SELF(self), RVAL2CSTR(accel_path));
     return self;
 }
 
 static VALUE
-mitem_remove_submenu(self)
-    VALUE self;
+mitem_remove_submenu(VALUE self)
 {
     GtkMenuItem *item;
     GtkWidget *submenu;
@@ -94,32 +87,28 @@ mitem_remove_submenu(self)
 }
 
 static VALUE
-mitem_select(self)
-    VALUE self;
+mitem_select(VALUE self)
 {
     gtk_menu_item_select(_SELF(self));
     return self;
 }
 
 static VALUE
-mitem_deselect(self)
-    VALUE self;
+mitem_deselect(VALUE self)
 {
     gtk_menu_item_deselect(_SELF(self));
     return self;
 }
 
 static VALUE
-mitem_activate(self)
-    VALUE self;
+mitem_activate(VALUE self)
 {
     gtk_menu_item_activate(_SELF(self));
     return self;
 }
 
 static VALUE
-mitem_toggle_size_request(self)
-    VALUE self;
+mitem_toggle_size_request(VALUE self)
 {
     gint requisition;
     gtk_menu_item_toggle_size_request(_SELF(self), &requisition);
@@ -127,23 +116,20 @@ mitem_toggle_size_request(self)
 }
 
 static VALUE
-mitem_toggle_size_allocate(self, allocation)
-    VALUE self, allocation;
+mitem_toggle_size_allocate(VALUE self, VALUE allocation)
 {
     gtk_menu_item_toggle_size_allocate(_SELF(self), NUM2INT(allocation));
     return self;
 }
 
 static VALUE
-mitem_get_right_justified(self)
-    VALUE self;
+mitem_get_right_justified(VALUE self)
 {
     return CBOOL2RVAL(gtk_menu_item_get_right_justified(_SELF(self)));
 }
 
 static VALUE
-mitem_get_submenu(self)
-    VALUE self;
+mitem_get_submenu(VALUE self)
 {
     GtkWidget* submenu = gtk_menu_item_get_submenu(_SELF(self));
     return submenu ? GOBJ2RVAL(submenu) : Qnil;
