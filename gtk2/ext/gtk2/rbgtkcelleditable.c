@@ -14,8 +14,7 @@
 #define _SELF(s) (GTK_CELL_EDITABLE(RVAL2GOBJ(s)))
 
 static VALUE
-celledit_start_editing(self, event)
-     VALUE self, event;
+celledit_start_editing(VALUE self, VALUE event)
 {
     gtk_cell_editable_start_editing(_SELF(self), 
                                     NIL_P(event) ? NULL : RVAL2GEV(event));
@@ -23,16 +22,14 @@ celledit_start_editing(self, event)
 }
 
 static VALUE
-celledit_editing_done(self)
-     VALUE self;
+celledit_editing_done(VALUE self)
 {
     gtk_cell_editable_editing_done(_SELF(self));
     return self;
 }
 
 static VALUE
-celledit_remove_widget(self)
-     VALUE self;
+celledit_remove_widget(VALUE self)
 {
     gtk_cell_editable_remove_widget(_SELF(self));
     return self;
