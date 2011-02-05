@@ -12,8 +12,7 @@
 #include "rbgprivate.h"
 
 static VALUE
-shell_parse(self, command_line)
-    VALUE self, command_line;
+shell_parse(VALUE self, VALUE command_line)
 {
     gint argc, i;
     gchar** argv;
@@ -34,15 +33,13 @@ shell_parse(self, command_line)
 }
 
 static VALUE
-shell_quote(self, unquoted_string)
-    VALUE self, unquoted_string;
+shell_quote(VALUE self, VALUE unquoted_string)
 {
     return CSTR2RVAL_FREE(g_shell_quote((const gchar*)RVAL2CSTR(unquoted_string)));
 }
 
 static VALUE
-shell_unquote(self, quoted_string)
-    VALUE self, quoted_string;
+shell_unquote(VALUE self, VALUE quoted_string)
 {
     GError* err = NULL;
     gchar* str = g_shell_unquote((const gchar*)RVAL2CSTR(quoted_string), &err);
