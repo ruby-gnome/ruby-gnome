@@ -17,8 +17,7 @@
 #define _SELF(self) (GTK_UI_MANAGER(RVAL2GOBJ(self)))
 
 static VALUE
-rbuimanager_initialize(self)
-    VALUE self;
+rbuimanager_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_ui_manager_new());
     return Qnil;
@@ -31,8 +30,7 @@ gboolean    gtk_ui_manager_get_add_tearoffs (GtkUIManager *self);
 */
 
 static VALUE
-rbuimanager_insert_action_group(self, action_group, pos)
-    VALUE self, action_group, pos;
+rbuimanager_insert_action_group(VALUE self, VALUE action_group, VALUE pos)
 {
     gtk_ui_manager_insert_action_group(_SELF(self), RVAL2GOBJ(action_group), NUM2INT(pos));
     G_CHILD_ADD(self, action_group);
@@ -40,8 +38,7 @@ rbuimanager_insert_action_group(self, action_group, pos)
 }
 
 static VALUE
-rbuimanager_remove_action_group(self, action_group)
-    VALUE self, action_group;
+rbuimanager_remove_action_group(VALUE self, VALUE action_group)
 {
     gtk_ui_manager_remove_action_group(_SELF(self), RVAL2GOBJ(action_group));
     G_CHILD_REMOVE(self, action_group);
@@ -49,23 +46,20 @@ rbuimanager_remove_action_group(self, action_group)
 }
 
 static VALUE
-rbuimanager_get_action_groups(self)
-    VALUE self;
+rbuimanager_get_action_groups(VALUE self)
 {
     /* Owned by GTK+ */
     return GLIST2ARY(gtk_ui_manager_get_action_groups(_SELF(self)));
 }
 
 static VALUE
-rbuimanager_get_accel_group(self)
-    VALUE self;
+rbuimanager_get_accel_group(VALUE self)
 {
     return GOBJ2RVAL(gtk_ui_manager_get_accel_group(_SELF(self)));
 }
 
 static VALUE
-rbuimanager_get_widget(self, path)
-    VALUE self, path;
+rbuimanager_get_widget(VALUE self, VALUE path)
 {
     GtkWidget* widget = gtk_ui_manager_get_widget(_SELF(self), RVAL2CSTR(path));
     if (! widget)
@@ -75,25 +69,20 @@ rbuimanager_get_widget(self, path)
 }
 
 static VALUE
-rbuimanager_get_toplevels(self, types)
-    VALUE self, types;
+rbuimanager_get_toplevels(VALUE self, VALUE types)
 {
     return GSLIST2ARYF(gtk_ui_manager_get_toplevels(_SELF(self), 
                                                     RVAL2GFLAGS(types, GTK_TYPE_UI_MANAGER_ITEM_TYPE)));
 }
     
 static VALUE
-rbuimanager_get_action(self, path)
-    VALUE self, path;
+rbuimanager_get_action(VALUE self, VALUE path)
 {
     return GOBJ2RVAL(gtk_ui_manager_get_action(_SELF(self), RVAL2CSTR(path)));
 }
 
 static VALUE
-rbuimanager_add_ui(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+rbuimanager_add_ui(int argc, VALUE *argv, VALUE self)
 {
     GError* error = NULL;
     guint ret;
@@ -133,15 +122,13 @@ rbuimanager_add_ui(argc, argv, self)
 }
 
 static VALUE
-rbuimanager_new_merge_id(self)
-    VALUE self;
+rbuimanager_new_merge_id(VALUE self)
 {
     return UINT2NUM(gtk_ui_manager_new_merge_id(_SELF(self)));
 }
 
 static VALUE
-rbuimanager_remove_ui(self, merge_id)
-    VALUE self, merge_id;
+rbuimanager_remove_ui(VALUE self, VALUE merge_id)
 {
     gtk_ui_manager_remove_ui(_SELF(self), NUM2UINT(merge_id));
     return self;
@@ -152,8 +139,7 @@ gchar*      gtk_ui_manager_get_ui           (GtkUIManager *self);
 */
 
 static VALUE
-rbuimanager_ensure_update(self)
-    VALUE self;
+rbuimanager_ensure_update(VALUE self)
 {
     gtk_ui_manager_ensure_update(_SELF(self));
     return self;
