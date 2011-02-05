@@ -66,8 +66,7 @@
  *
  */
 static VALUE
-moz_initialize(self)
-    VALUE self;
+moz_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_moz_embed_new());
     return Qnil;
@@ -89,8 +88,7 @@ moz_initialize(self)
  *
  */
 static VALUE
-moz_set_profile_path(self, profile_path, profile_name)
-    VALUE self, profile_path, profile_name;
+moz_set_profile_path(VALUE self, VALUE profile_path, VALUE profile_name)
 {
     gtk_moz_embed_set_profile_path(RVAL2CSTR(profile_path), 
                                    RVAL2CSTR(profile_name));
@@ -115,8 +113,7 @@ moz_set_profile_path(self, profile_path, profile_name)
  *
  */
 static VALUE
-moz_set_comp_path(self, path)
-    VALUE self, path;
+moz_set_comp_path(VALUE self, VALUE path)
 {
     gtk_moz_embed_set_comp_path(RVAL2CSTR(path));
     return Qnil;
@@ -167,8 +164,7 @@ moz_load_url(self, url)
  *
  */
 static VALUE
-moz_stop_load(self)
-    VALUE self;
+moz_stop_load(VALUE self)
 {
     gtk_moz_embed_stop_load(_SELF(self));
     return self;
@@ -183,8 +179,7 @@ moz_stop_load(self)
  *
  */
 static VALUE
-moz_can_go_back(self)
-    VALUE self;
+moz_can_go_back(VALUE self)
 {
     return CBOOL2RVAL(gtk_moz_embed_can_go_back(_SELF(self)));
 }
@@ -198,8 +193,7 @@ moz_can_go_back(self)
  *
  */
 static VALUE
-moz_can_go_forward(self)
-    VALUE self;
+moz_can_go_forward(VALUE self)
 {
     return CBOOL2RVAL(gtk_moz_embed_can_go_forward(_SELF(self)));
 }
@@ -213,8 +207,7 @@ moz_can_go_forward(self)
  *
  */
 static VALUE
-moz_go_back(self)
-    VALUE self;
+moz_go_back(VALUE self)
 {
     gtk_moz_embed_go_back(_SELF(self));
     return self;
@@ -229,8 +222,7 @@ moz_go_back(self)
  *
  */
 static VALUE
-moz_go_forward(self)
-    VALUE self;
+moz_go_forward(VALUE self)
 {
     gtk_moz_embed_go_forward(_SELF(self));
     return self;
@@ -245,8 +237,7 @@ moz_go_forward(self)
  *
  */
 static VALUE
-moz_get_location(self)
-    VALUE self;
+moz_get_location(VALUE self)
 {
     char* url = gtk_moz_embed_get_location(_SELF(self));
     return CSTR2RVAL(url);
@@ -263,8 +254,7 @@ moz_get_location(self)
  *
  */
 static VALUE
-moz_get_link_message(self)
-    VALUE self;
+moz_get_link_message(VALUE self)
 {
     char *msg = gtk_moz_embed_get_link_message(_SELF(self));
     return CSTR2RVAL(msg);
@@ -280,8 +270,7 @@ moz_get_link_message(self)
  *
  */
 static VALUE
-moz_get_js_status(self)
-    VALUE self;
+moz_get_js_status(VALUE self)
 {
     char *msg = gtk_moz_embed_get_js_status(_SELF(self));
     return CSTR2RVAL(msg);
@@ -297,8 +286,7 @@ moz_get_js_status(self)
  *
  */
 static VALUE
-moz_get_title(self)
-    VALUE self;
+moz_get_title(VALUE self)
 {
     char *title = gtk_moz_embed_get_title(_SELF(self));
     return CSTR2RVAL(title);
@@ -317,8 +305,7 @@ moz_get_title(self)
  *
  */
 static VALUE
-moz_reload(self, flags)
-    VALUE self, flags;
+moz_reload(VALUE self, VALUE flags)
 {
     gtk_moz_embed_reload(_SELF(self), 
         RVAL2GFLAGS(flags, GTK_TYPE_MOZ_EMBED_RELOAD_FLAGS));
@@ -337,8 +324,7 @@ moz_reload(self, flags)
  */
 
 static VALUE
-moz_set_chrome_mask(self, flags)
-    VALUE self, flags;
+moz_set_chrome_mask(VALUE self, VALUE flags)
 {
     gtk_moz_embed_set_chrome_mask(_SELF(self), 
         RVAL2GFLAGS(flags, GTK_TYPE_MOZ_EMBED_CHROME_FLAGS));
@@ -354,8 +340,7 @@ moz_set_chrome_mask(self, flags)
  *
  */
 static VALUE
-moz_get_chrome_mask(self)
-    VALUE self;
+moz_get_chrome_mask(VALUE self)
 {
     guint32 mask = gtk_moz_embed_get_chrome_mask(_SELF(self));
     return GFLAGS2RVAL(mask, GTK_TYPE_MOZ_EMBED_CHROME_FLAGS);
@@ -377,8 +362,7 @@ moz_get_chrome_mask(self)
  *
  */
 static VALUE
-moz_render_data(self, data, base_uri, mime_type)
-    VALUE self, data, base_uri, mime_type;
+moz_render_data(VALUE self, VALUE data, VALUE base_uri, VALUE mime_type)
 {
     gtk_moz_embed_render_data(_SELF(self),
                               RSTRING_PTR(data),
@@ -431,8 +415,7 @@ static gboolean stream_open = FALSE;
  * 
  */
 static VALUE
-moz_open_stream(self, base_uri, mime_type)
-    VALUE self, base_uri, mime_type;
+moz_open_stream(VALUE self, VALUE base_uri, VALUE mime_type)
 {
     gchar *bu = RVAL2CSTR(base_uri);
     
@@ -458,8 +441,7 @@ moz_open_stream(self, base_uri, mime_type)
  * Returns: self.
  */
 static VALUE
-moz_append_data(self, data)
-    VALUE self, data;
+moz_append_data(VALUE self, VALUE data)
 {
     if(!stream_open) 
         rb_raise(rb_eRuntimeError, 
@@ -482,8 +464,7 @@ moz_append_data(self, data)
  *
  */
 static VALUE
-moz_close_stream(self)
-    VALUE self;
+moz_close_stream(VALUE self)
 {
     if(!stream_open) 
         rb_raise(rb_eRuntimeError, 
@@ -507,11 +488,7 @@ moz_close_stream(self)
 static gulong new_win_sig = 0;
 
 static void
-moz_custom_new_window_cb(embed, retval, chromemask, func)
-    GtkMozEmbed *embed;
-    GtkMozEmbed **retval;
-    guint chromemask;
-    VALUE func;
+moz_custom_new_window_cb(GtkMozEmbed *embed, GtkMozEmbed **retval, guint chromemask, VALUE func)
 {
     VALUE new_moz = 
         rb_funcall(func, rb_intern("call"), 2,
@@ -531,8 +508,7 @@ moz_custom_new_window_cb(embed, retval, chromemask, func)
  * Returns: self.
  */
 static VALUE
-set_on_new_window_block(self)
-    VALUE self;
+set_on_new_window_block(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func); 
@@ -552,8 +528,7 @@ set_on_new_window_block(self)
  * Returns: self.
  */
 static VALUE
-clear_on_new_window_block(self)
-    VALUE self;
+clear_on_new_window_block(VALUE self)
 {
     GObject *moz = RVAL2GOBJ(self);
 
