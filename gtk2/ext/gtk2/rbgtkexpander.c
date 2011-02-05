@@ -16,10 +16,7 @@
 #define _SELF(self) (GTK_EXPANDER(RVAL2GOBJ(self)))
 
 static VALUE
-expander_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+expander_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, with_mnemonic;
     GtkWidget* widget = NULL;
