@@ -17,67 +17,58 @@
 
 
 static VALUE
-ri_get_uri(self)
-    VALUE self;
+ri_get_uri(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_uri(_SELF(self)));
 }
 
 static VALUE
-ri_get_display_name(self)
-    VALUE self;
+ri_get_display_name(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_display_name(_SELF(self)));
 }
 
 static VALUE
-ri_get_description(self)
-    VALUE self;
+ri_get_description(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_description(_SELF(self)));
 }
 
 static VALUE
-ri_get_mime_type(self)
-    VALUE self;
+ri_get_mime_type(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_mime_type(_SELF(self)));
 }
 
 static VALUE
-ri_get_added(self)
-    VALUE self;
+ri_get_added(VALUE self)
 {
     time_t t = gtk_recent_info_get_added(_SELF(self));
     return rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t));
 }
 
 static VALUE
-ri_get_modified(self)
-    VALUE self;
+ri_get_modified(VALUE self)
 {
     time_t t = gtk_recent_info_get_modified(_SELF(self));
     return rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t));
 }
 
 static VALUE
-ri_get_visited(self)
-    VALUE self;
+ri_get_visited(VALUE self)
 {
     time_t t = gtk_recent_info_get_visited(_SELF(self));
     return rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t));
 }
 
 static VALUE
-ri_get_private_hint(self)
-    VALUE self;
+ri_get_private_hint(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_info_get_private_hint(_SELF(self)));
 }
 
 static VALUE
-ri_get_application_info(self, app_name)
-    VALUE self, app_name;
+ri_get_application_info(VALUE self, VALUE app_name)
 {
     const gchar *app_exec;
     guint count;
@@ -97,8 +88,7 @@ ri_get_application_info(self, app_name)
 }    
 
 static VALUE
-ri_get_applications(self)
-    VALUE self;
+ri_get_applications(VALUE self)
 {
     gint i;
     gsize length;
@@ -112,15 +102,13 @@ ri_get_applications(self)
 }
 
 static VALUE
-ri_last_application(self)
-    VALUE self;
+ri_last_application(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_last_application(_SELF(self)));
 }
 
 static VALUE
-ri_get_groups(self)
-    VALUE self;
+ri_get_groups(VALUE self)
 {
     gint i;
     gsize length;
@@ -134,66 +122,57 @@ ri_get_groups(self)
 }
 
 static VALUE
-ri_has_group(self, group_name)
-    VALUE self, group_name;
+ri_has_group(VALUE self, VALUE group_name)
 {
     return CBOOL2RVAL(gtk_recent_info_has_group(_SELF(self), 
                                                 RVAL2CSTR(group_name)));
 }
 
 static VALUE
-ri_has_application(self, app_name)
-    VALUE self, app_name;
+ri_has_application(VALUE self, VALUE app_name)
 {
     return CBOOL2RVAL(gtk_recent_info_has_application(_SELF(self), 
                                                 RVAL2CSTR(app_name)));
 }
 
 static VALUE
-ri_get_icon(self, size)
-    VALUE self, size;
+ri_get_icon(VALUE self, VALUE size)
 {
     return GOBJ2RVAL(gtk_recent_info_get_icon(_SELF(self), NUM2INT(size)));
 }
 
 static VALUE
-ri_get_short_name(self)
-    VALUE self;
+ri_get_short_name(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_short_name(_SELF(self)));
 }
 
 static VALUE
-ri_get_uri_display(self)
-    VALUE self;
+ri_get_uri_display(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_uri_display(_SELF(self)));
 }
 
 static VALUE
-ri_get_age(self)
-    VALUE self;
+ri_get_age(VALUE self)
 {
     return INT2NUM(gtk_recent_info_get_age(_SELF(self)));
 }
 
 static VALUE
-ri_is_local(self)
-    VALUE self;
+ri_is_local(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_info_is_local(_SELF(self)));
 }
 
 static VALUE
-ri_exist(self)
-    VALUE self;
+ri_exist(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_info_exists(_SELF(self)));
 }
 
 static VALUE
-ri_match(self, other)
-    VALUE self, other;
+ri_match(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(gtk_recent_info_match(_SELF(self), _SELF(other)));
 }
