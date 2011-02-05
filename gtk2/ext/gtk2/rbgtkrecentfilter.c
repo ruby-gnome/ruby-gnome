@@ -16,71 +16,62 @@
 #define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))
 
 static VALUE
-rf_initialize(self)
-     VALUE self;
+rf_initialize(VALUE self)
 {
   RBGTK_INITIALIZE(self, gtk_recent_filter_new());
   return Qnil;
 }
 
 static VALUE
-rf_get_name(self)
-     VALUE self;
+rf_get_name(VALUE self)
 {
   return CSTR2RVAL(gtk_recent_filter_get_name(_SELF(self)));
 }
 
 static VALUE
-rf_set_name(self, name)
-     VALUE self, name;
+rf_set_name(VALUE self, VALUE name)
 {
   gtk_recent_filter_set_name(_SELF(self), RVAL2CSTR(name));
   return self;
 }
 
 static VALUE
-rf_add_mime_type(self, mime_type)
-     VALUE self, mime_type;
+rf_add_mime_type(VALUE self, VALUE mime_type)
 {
   gtk_recent_filter_add_mime_type(_SELF(self), RVAL2CSTR(mime_type));
   return self;
 }
 
 static VALUE
-rf_add_pattern(self, pattern)
-     VALUE self, pattern;
+rf_add_pattern(VALUE self, VALUE pattern)
 {
   gtk_recent_filter_add_pattern(_SELF(self), RVAL2CSTR(pattern));
   return self;
 }
 
 static VALUE
-rf_add_pixbuf_formats(self)
-     VALUE self;
+rf_add_pixbuf_formats(VALUE self)
 {
   gtk_recent_filter_add_pixbuf_formats(_SELF(self));
   return self;
 }
 
 static VALUE
-rf_add_application(self, application)
-     VALUE self, application;
+rf_add_application(VALUE self, VALUE application)
 {
   gtk_recent_filter_add_application(_SELF(self), RVAL2CSTR(application));
   return self;
 }
 
 static VALUE
-rf_add_group(self, group)
-     VALUE self, group;
+rf_add_group(VALUE self, VALUE group)
 {
   gtk_recent_filter_add_group(_SELF(self), RVAL2CSTR(group));
   return self;
 }
 
 static VALUE
-rf_add_age(self, days)
-     VALUE self, days;
+rf_add_age(VALUE self, VALUE days)
 {
   gtk_recent_filter_add_age(_SELF(self), NUM2INT(days));
   return self;
@@ -101,9 +92,7 @@ invoke_callback(VALUE arg_)
 }
 
 static gboolean
-filter_func(info, func)
-     const GtkRecentFilterInfo* info;
-     gpointer func;
+filter_func(const GtkRecentFilterInfo *info, gpointer func)
 {
     struct callback_arg arg;
 
@@ -122,8 +111,7 @@ remove_callback_reference(data)
 }
 
 static VALUE
-rf_add_custom(self, needed)
-     VALUE self, needed;
+rf_add_custom(VALUE self, VALUE needed)
 {
   VALUE func = rb_block_proc();
   G_CHILD_ADD(mGtk, func);
@@ -137,16 +125,14 @@ rf_add_custom(self, needed)
 }
 
 static VALUE
-rf_get_needed(self)
-     VALUE self;
+rf_get_needed(VALUE self)
 {
   return GFLAGS2RVAL(gtk_recent_filter_get_needed(_SELF(self)), GTK_TYPE_RECENT_FILTER_FLAGS);
 }
 
 
 static VALUE
-rf_filter_filter(self, filter_info)
-    VALUE self, filter_info;
+rf_filter_filter(VALUE self, VALUE filter_info)
 {
     return CBOOL2RVAL(gtk_recent_filter_filter(_SELF(self),
                                                (GtkRecentFilterInfo*)RVAL2BOXED(filter_info, GTK_TYPE_RECENT_FILTER_INFO)));
