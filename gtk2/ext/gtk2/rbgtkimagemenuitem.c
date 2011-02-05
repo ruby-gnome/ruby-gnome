@@ -12,10 +12,7 @@
 #include "global.h"
 
 static VALUE
-imitem_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+imitem_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline_or_accel_group;
     GtkWidget *widget = NULL;
