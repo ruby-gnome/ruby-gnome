@@ -17,32 +17,28 @@
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
 
 static VALUE
-omenu_initialize(self)
-    VALUE self;
+omenu_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_option_menu_new());
     return Qnil;
 }
 
 static VALUE
-omenu_remove_menu(self)
-    VALUE self;
+omenu_remove_menu(VALUE self)
 {
     gtk_option_menu_remove_menu(GTK_OPTION_MENU(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-omenu_set_history(self, index)
-    VALUE self, index;
+omenu_set_history(VALUE self, VALUE index)
 {
     gtk_option_menu_set_history(GTK_OPTION_MENU(RVAL2GOBJ(self)), NUM2INT(index));
     return self;
 }
 
 static VALUE
-omenu_get_history(self)
-    VALUE self;
+omenu_get_history(VALUE self)
 {
     return INT2NUM(gtk_option_menu_get_history(GTK_OPTION_MENU(RVAL2GOBJ(self))));
 }
