@@ -15,8 +15,7 @@
 #include "global.h"
 
 static VALUE
-vsep_initialize(self)
-    VALUE self;
+vsep_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_vseparator_new());
     return Qnil;
