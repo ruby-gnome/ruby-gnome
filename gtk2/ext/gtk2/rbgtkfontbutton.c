@@ -14,10 +14,7 @@
 #if GTK_CHECK_VERSION(2,4,0)
 
 static VALUE
-fontbutton_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+fontbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE fontname;
     GtkWidget* widget;
