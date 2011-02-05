@@ -14,10 +14,7 @@
 #define _SELF(s) (GTK_MESSAGE_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
-mdiag_initialize(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+mdiag_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE parent, flags, type, buttons, message;
     GtkWidget* w;
@@ -46,8 +43,7 @@ GtkWidget*  gtk_message_dialog_new_with_markup
 */
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-mdiag_set_markup(self, str)
-    VALUE self, str;
+mdiag_set_markup(VALUE self, VALUE str)
 {
     gtk_message_dialog_set_markup(_SELF(self), RVAL2CSTR(str));
     return self;
@@ -61,16 +57,14 @@ void        gtk_message_dialog_set_image    (GtkMessageDialog *dialog,
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-mdiag_format_secondary_text(self, text)
-    VALUE self, text;
+mdiag_format_secondary_text(VALUE self, VALUE text)
 {
     gtk_message_dialog_format_secondary_text(_SELF(self), RVAL2CSTR(text), NULL);
     return self;
 }
 
 static VALUE
-mdiag_format_secondary_markup(self, markup)
-    VALUE self, markup;
+mdiag_format_secondary_markup(VALUE self, VALUE markup)
 {
     gtk_message_dialog_format_secondary_markup(_SELF(self), RVAL2CSTR(markup), NULL);
     return self;
