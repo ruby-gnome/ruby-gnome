@@ -80,10 +80,7 @@ void        gtk_about_dialog_set_wrap_license
 */
 
 static void
-activate_link_func(about, link, func)
-    GtkAboutDialog* about;
-    const gchar* link;
-    gpointer func;
+activate_link_func(GtkAboutDialog *about, const gchar *link, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(about), CSTR2RVAL(link));
 }
