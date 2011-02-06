@@ -71,9 +71,7 @@ stock_m_list_ids(VALUE klass)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static gchar*
-translate_func(path, func)
-    const gchar* path;
-    gpointer func;
+translate_func(const gchar *path, gpointer func)
 {
     VALUE ret = rb_funcall((VALUE)func, id_call, 1, CSTR2RVAL(path));
     return RVAL2CSTR(ret);
