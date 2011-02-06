@@ -19,8 +19,7 @@ static VALUE gRButton;
 #define _GROUP(s) (NIL_P(s) ? NULL : GTK_RADIO_BUTTON(RVAL2GOBJ(s)))
 
 static GtkWidget*
-create_button(group, label, use_underline)
-    VALUE group, label, use_underline;
+create_button(VALUE group, VALUE label, VALUE use_underline)
 {
     GtkWidget* widget = NULL;
 
