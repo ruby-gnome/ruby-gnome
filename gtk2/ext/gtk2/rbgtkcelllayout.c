@@ -48,8 +48,7 @@ layout_clear(VALUE self)
 }
 
 static VALUE
-layout_add_attribute(self, cell, attribute, column)
-    VALUE self, cell, attribute, column;
+layout_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
 {
     const gchar *name;
 
@@ -65,12 +64,7 @@ layout_add_attribute(self, cell, attribute, column)
 }
 
 static void
-layout_data_func(layout, cell, tree_model, iter, func)
-    GtkCellLayout *layout;
-    GtkCellRenderer *cell;
-    GtkTreeModel *tree_model;
-    GtkTreeIter *iter;
-    gpointer func;
+layout_data_func(GtkCellLayout *layout, GtkCellRenderer *cell, GtkTreeModel *tree_model, GtkTreeIter *iter, gpointer func)
 {
     iter->user_data3 = tree_model;
     rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(layout), GOBJ2RVAL(cell),
@@ -94,8 +88,7 @@ layout_set_cell_data_func(VALUE self, VALUE cell)
 }
 
 static VALUE
-layout_clear_attributes(self, cell)
-    VALUE self, cell;
+layout_clear_attributes(VALUE self, VALUE cell)
 {
     gtk_cell_layout_clear_attributes(_SELF(self), RVAL2RENDERER(cell));
     return self;
