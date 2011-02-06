@@ -45,23 +45,20 @@ rbgobj_ptr2cptr(VALUE ptr)
 }
 
 static VALUE
-ptr_s_gtype(klass)
-    VALUE klass;
+ptr_s_gtype(VALUE klass)
 {
     return rbgobj_gtype_new(rbgobj_lookup_class(klass)->gtype);
 }
 
 static VALUE
-ptr_gtype(self)
-    VALUE self;
+ptr_gtype(VALUE self)
 {
     return ptr_s_gtype(CLASS_OF(self));
 }
 
 #ifndef RBGOBJ_USE_DLPTR
 static VALUE
-ptr_inspect(self)
-    VALUE self;
+ptr_inspect(VALUE self)
 {
     gpointer ptr;
     gchar* s;
@@ -81,8 +78,7 @@ ptr_inspect(self)
 }
 
 static VALUE
-ptr_eql(self, other)
-    VALUE self, other;
+ptr_eql(VALUE self, VALUE other)
 {
     gpointer ptr1, ptr2;
     if (!rb_obj_is_kind_of(other, GTYPE2CLASS(G_TYPE_POINTER)))
@@ -93,8 +89,7 @@ ptr_eql(self, other)
 }
 
 static VALUE
-ptr_hash(self)
-    VALUE self;
+ptr_hash(VALUE self)
 {
     gpointer ptr;
     Data_Get_Struct(self, void, ptr);
