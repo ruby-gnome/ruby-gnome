@@ -19,8 +19,7 @@
 static ID id_to_a;
 
 static VALUE
-dialog_add_button(self, button_text, response_id)
-    VALUE self, button_text, response_id;
+dialog_add_button(VALUE self, VALUE button_text, VALUE response_id)
 {
     const gchar *name;
     if (SYMBOL_P(button_text)) {
