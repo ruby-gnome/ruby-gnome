@@ -332,8 +332,7 @@ rbgobj_init_enum_class(VALUE klass)
 }
 
 static VALUE
-enum_s_range(self)
-    VALUE self;
+enum_s_range(VALUE self)
 {
     GEnumClass* gclass = g_type_class_ref(CLASS2GTYPE(self));
     VALUE result = rb_range_new(INT2NUM(gclass->minimum),
