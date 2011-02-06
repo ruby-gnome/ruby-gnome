@@ -17,8 +17,7 @@
 #ifndef GTK_DISABLE_DEPRECATED /* Since 2.4 */
 
 static VALUE
-combo_set_popdown_strings(self, ary)
-    VALUE self, ary;
+combo_set_popdown_strings(VALUE self, VALUE ary)
 {
     int i;
     GList *glist = NULL;
