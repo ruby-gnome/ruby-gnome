@@ -171,9 +171,7 @@ treemodel_iter_is_valid(VALUE self, VALUE iter)
 }
 
 static VALUE
-signal_func(num, values)
-    guint num;
-    const GValue* values;
+signal_func(guint num, const GValue *values)
 {
     GtkTreeModel* model = g_value_get_object(&values[0]);
     GtkTreePath* path = g_value_get_boxed(&values[1]);
