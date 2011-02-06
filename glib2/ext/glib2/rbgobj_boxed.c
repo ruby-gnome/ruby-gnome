@@ -43,8 +43,7 @@ boxed_free(boxed_holder *holder)
 /**********************************************************************/
 
 static VALUE
-rbgobj_boxed_s_allocate(klass)
-    VALUE klass;
+rbgobj_boxed_s_allocate(VALUE klass)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
     boxed_holder* holder;
