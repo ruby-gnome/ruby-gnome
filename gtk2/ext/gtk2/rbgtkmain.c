@@ -29,8 +29,7 @@ typedef struct _callback_info_t
 
 
 static VALUE
-gtk_m_function_body(data)
-    VALUE data;
+gtk_m_function_body(VALUE data)
 {
     callback_info_t *info = (callback_info_t *)data;
     VALUE ret = rb_funcall(info->callback, id_call, 0);
@@ -41,8 +40,7 @@ gtk_m_function_body(data)
 }
 
 static gboolean
-gtk_m_function(data)
-    gpointer data;
+gtk_m_function(gpointer data)
 { 
     return RVAL2CBOOL(G_PROTECT_CALLBACK(gtk_m_function_body, data));
 }
@@ -369,10 +367,7 @@ gtk_input_remove()
 */
 
 static gint
-gtk_m_key_snoop_func(grab_widget, event, func)
-    GtkWidget* grab_widget;
-    GdkEventKey* event;
-    gpointer func;
+gtk_m_key_snoop_func(GtkWidget *grab_widget, GdkEventKey *event, gpointer func)
 {
     VALUE ret = rb_funcall((VALUE)func, id_call, 2, 
                            GOBJ2RVAL(grab_widget), 
