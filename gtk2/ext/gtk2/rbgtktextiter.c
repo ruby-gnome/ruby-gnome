@@ -284,9 +284,7 @@ backward_to_tag_toggle(int argc, VALUE *argv, VALUE self)
 }
 
 static gboolean
-char_predicate_func(ch, func)
-    guint32 ch;
-    gpointer func;
+char_predicate_func(guint32 ch, gpointer func)
 {
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 1, UINT2NUM(ch)));
 }
