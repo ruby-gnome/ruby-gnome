@@ -198,16 +198,14 @@ attr_fontdesc_value(VALUE self)
 
 /* PangoAttrShape */
 static VALUE
-attr_shape_ink_rect(self)
-    VALUE self;
+attr_shape_ink_rect(VALUE self)
 {
     PangoRectangle rect = ((PangoAttrShape*)RVAL2ATTR(self))->ink_rect;
     return BOXED2RVAL(&rect, PANGO_TYPE_RECTANGLE);
 }
 
 static VALUE
-attr_shape_logical_rect(self)
-    VALUE self;
+attr_shape_logical_rect(VALUE self)
 {
     PangoRectangle rect = ((PangoAttrShape*)RVAL2ATTR(self))->logical_rect;
     return BOXED2RVAL(&rect, PANGO_TYPE_RECTANGLE);
