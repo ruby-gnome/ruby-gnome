@@ -18,11 +18,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static void
-box_pack_start_or_end(argc, argv, self, start)
-    int argc;
-    VALUE *argv;
-    VALUE self;
-    int start;
+box_pack_start_or_end(int argc, VALUE *argv, VALUE self, int start)
 {
     VALUE arg0, arg1, arg2, arg3;
     gint expand, fill, padding;
