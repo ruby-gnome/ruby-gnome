@@ -37,8 +37,7 @@ style_attached(VALUE self)
 }
 
 static VALUE
-style_copy(self)
-    VALUE self;
+style_copy(VALUE self)
 {
     return GOBJ2RVAL(gtk_style_copy(_SELF(self)));
 }
