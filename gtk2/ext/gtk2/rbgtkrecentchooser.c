@@ -87,8 +87,7 @@ invoke_callback(VALUE data)
 }
 
 static void
-remove_callback_reference(callback)
-    gpointer callback;
+remove_callback_reference(gpointer callback)
 {
     G_CHILD_REMOVE(mGtk, (VALUE)callback);
 }
