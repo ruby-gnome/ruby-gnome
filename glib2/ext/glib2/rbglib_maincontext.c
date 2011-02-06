@@ -411,8 +411,7 @@ source_current_source(VALUE self)
 #endif
 
 static gboolean
-invoke_source_func(data)
-    gpointer data;
+invoke_source_func(gpointer data)
 {
     callback_info_t *info = (callback_info_t *)data;
     gboolean ret;
@@ -766,10 +765,7 @@ child_watch_source_new(VALUE self, VALUE pid)
 }
 
 static void
-child_watch_func(pid, status, func)
-    GPid pid;
-    gint status;
-    gpointer func;
+child_watch_func(GPid pid, gint status, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, INT2NUM((long)pid), INT2NUM(status));
 }
