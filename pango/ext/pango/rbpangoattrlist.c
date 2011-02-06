@@ -52,9 +52,7 @@ attrlist_splice(VALUE self, VALUE other, VALUE pos, VALUE len)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static gboolean
-filter_func(attr, data)
-    PangoAttribute* attr;
-    gpointer data;
+filter_func(PangoAttribute *attr, gpointer data)
 {
     return CBOOL2RVAL(rb_funcall((VALUE)data, id_call, 1, ATTR2RVAL(attr)));
 }
