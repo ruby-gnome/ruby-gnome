@@ -47,8 +47,7 @@ g_completion_get_type(void)
 
 /* data should be [self, data] */
 static gchar*
-comp_func(compdata)
-    gpointer compdata;
+comp_func(gpointer compdata)
 {
     VALUE ret;
     VALUE self = RARRAY_PTR((VALUE)compdata)[0];
