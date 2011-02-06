@@ -1,3 +1,7 @@
+2011-02-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/rbgtktreeview.c (row_separator_func): fix type.
+
 2011-02-05  Masaaki Aoyagi
 
 	* ext/gtk2/*.c: change to ANSI C style.

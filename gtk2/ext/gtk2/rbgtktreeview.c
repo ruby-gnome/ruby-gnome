@@ -613,7 +613,7 @@ GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
 
 #if GTK_CHECK_VERSION(2,6,0)
 static gboolean
-row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer *func)
+row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer func)
 {
     VALUE ret;
     iter->user_data3 = model;
@@ -629,7 +629,7 @@ treeview_set_row_separator_func(VALUE self)
 
     G_RELATIVE(self, func);
     gtk_tree_view_set_row_separator_func(_SELF(self), 
-                                         (GtkTreeViewRowSeparatorFunc)row_separator_func, 
+                                         row_separator_func, 
                                          (gpointer)func, 
                                          (GtkDestroyNotify)NULL);
     return self;
