@@ -64,8 +64,7 @@ holder_free(gobj_holder *holder)
 }
 
 static VALUE
-gobj_s_allocate(klass)
-    VALUE klass;
+gobj_s_allocate(VALUE klass)
 {
     gobj_holder* holder;
     VALUE result;
@@ -150,10 +149,7 @@ rbgobj_get_gobject(VALUE obj)
 }
 
 static VALUE
-dummy_init(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+dummy_init(int argc, VALUE *argv, VALUE self)
 {
     GType gtype = CLASS2GTYPE(CLASS_OF(self));
     if (G_TYPE_IS_ABSTRACT(gtype))
@@ -173,8 +169,7 @@ rbgobj_init_object_class(VALUE klass)
 /**********************************************************************/
 
 static gboolean
-is_gtkobject(gobj)
-    GObject* gobj;
+is_gtkobject(GObject *gobj)
 {
     static GType gtype_gtkobject = G_TYPE_INVALID;
     if (!gtype_gtkobject)
@@ -252,9 +247,7 @@ struct param_setup_arg {
 };
 
 static VALUE
-_params_setup(arg, param_setup_arg)
-    VALUE arg;
-    struct param_setup_arg* param_setup_arg;
+_params_setup(VALUE arg, struct param_setup_arg *param_setup_arg)
 {
     guint index;
     VALUE name, val;
