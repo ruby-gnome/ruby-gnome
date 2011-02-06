@@ -98,8 +98,7 @@ rbatk_table_get_summary(VALUE self)
 }
 
 static VALUE
-rbatk_table_set_caption(self, caption)
-    VALUE self, caption;
+rbatk_table_set_caption(VALUE self, VALUE caption)
 {
     atk_table_set_caption(_SELF(self), ATK_OBJECT(RVAL2GOBJ(caption)));
     return self;
