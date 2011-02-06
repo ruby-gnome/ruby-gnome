@@ -53,11 +53,7 @@ menu_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALU
 #endif
 
 static void
-menu_pos_func(menu, px, py, push_in, data)
-    GtkMenu *menu;
-    gint *px, *py;
-    gboolean *push_in;
-    gpointer data;
+menu_pos_func(GtkMenu *menu, gint *px, gint *py, gboolean *push_in, gpointer data)
 {
     VALUE arr = rb_funcall((VALUE)data, id_call, 4, GOBJ2RVAL(menu), 
                            INT2FIX(*px), INT2FIX(*py), 
