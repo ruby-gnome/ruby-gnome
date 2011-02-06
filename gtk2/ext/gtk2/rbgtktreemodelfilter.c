@@ -40,10 +40,7 @@ treemodelfilter_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static gboolean
-visible_func(model, iter, func)
-    GtkTreeModel* model;
-    GtkTreeIter* iter;
-    gpointer func;
+visible_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer func)
 {
     VALUE ret;
 
@@ -64,12 +61,7 @@ treemodelfilter_set_visible_func(VALUE self)
 }
 
 static void
-modify_func(model, iter, value, column, func)
-    GtkTreeModel* model;
-    GtkTreeIter* iter;
-    GValue* value;
-    gint column;
-    gpointer func;
+modify_func(GtkTreeModel *model, GtkTreeIter *iter, GValue *value, gint column, gpointer func)
 {
     VALUE ret;
     iter->user_data3 = model;
