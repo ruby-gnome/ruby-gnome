@@ -81,10 +81,7 @@ binding_entry_clear(VALUE self, VALUE keyval, VALUE modifiers)
 }
 
 static VALUE
-binding_entry_add_signal(argc, argv, self)
-     int argc; 
-     VALUE* argv;
-     VALUE self;
+binding_entry_add_signal(int argc, VALUE *argv, VALUE self)
 {
     VALUE keyval, modifiers, signame, rest;
     long i;
