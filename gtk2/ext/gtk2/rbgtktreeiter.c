@@ -123,8 +123,7 @@ treeiter_parent(VALUE self)
 }
 
 static VALUE
-treeiter_set_value(self, column, value)
-    VALUE self, column, value;
+treeiter_set_value(VALUE self, VALUE column, VALUE value)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
