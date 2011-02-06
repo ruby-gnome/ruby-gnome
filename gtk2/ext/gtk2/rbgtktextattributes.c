@@ -29,14 +29,12 @@ txt_attr_int_set_ ## name (VALUE self, VALUE val)\
 
 #define ATTR_BOOL(name)\
 static VALUE \
-txt_attr_bool_ ## name (self)\
-    VALUE self;\
+txt_attr_bool_ ## name (VALUE self)\
 {\
     return CBOOL2RVAL(_SELF(self)->name);\
 }\
 static VALUE \
-txt_attr_bool_set_ ## name (self, val)\
-    VALUE self, val;\
+txt_attr_bool_set_ ## name (VALUE self, VALUE val)\
 {\
     _SELF(self)->name = RVAL2CBOOL(val);\
     return self;\
