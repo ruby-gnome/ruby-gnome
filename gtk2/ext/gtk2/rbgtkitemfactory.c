@@ -118,9 +118,7 @@ items_exec_callback_wrap(VALUE callback_data, guint action_id, GtkWidget *widget
 }
 
 static void
-create_factory_entry(entry, self, path, item_type, accel, extdata, func, data)
-    GtkItemFactoryEntry* entry;
-    VALUE self, path, item_type, accel, extdata, func, data;
+create_factory_entry(GtkItemFactoryEntry *entry, VALUE self, VALUE path, VALUE item_type, VALUE accel, VALUE extdata, VALUE func, VALUE data)
 {
     VALUE action;
 
