@@ -24,10 +24,7 @@
 static ID id_tagtable;
 
 static VALUE
-txt_initialize(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+txt_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE table;
     rb_scan_args(argc, argv, "01", &table);
@@ -41,29 +38,25 @@ txt_initialize(argc, argv, self)
 }
 
 static VALUE
-txt_get_line_count(self)
-    VALUE self;
+txt_get_line_count(VALUE self)
 {
     return INT2NUM(gtk_text_buffer_get_line_count(_SELF(self)));
 }
 
 static VALUE
-txt_get_char_count(self)
-    VALUE self;
+txt_get_char_count(VALUE self)
 {
     return INT2NUM(gtk_text_buffer_get_char_count(_SELF(self)));
 }
 
 static VALUE
-txt_get_tag_table(self)
-    VALUE self;
+txt_get_tag_table(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_buffer_get_tag_table(_SELF(self)));
 }
 
 static VALUE
-txt_set_text(self, text)
-    VALUE self, text;
+txt_set_text(VALUE self, VALUE text)
 {
     StringValue(text);
     gtk_text_buffer_set_text(_SELF(self), RVAL2CSTR(text), RSTRING_LEN(text));
@@ -72,8 +65,7 @@ txt_set_text(self, text)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-txt_backspace(self, iter, interactive, default_editable)
-    VALUE self, iter, interactive, default_editable;
+txt_backspace(VALUE self, VALUE iter, VALUE interactive, VALUE default_editable)
 {
     return CBOOL2RVAL(gtk_text_buffer_backspace(_SELF(self), RVAL2ITR(iter),
                                                 RVAL2CBOOL(interactive),
@@ -82,8 +74,7 @@ txt_backspace(self, iter, interactive, default_editable)
 #endif
 
 static VALUE
-txt_insert_at_cursor(self, text)
-    VALUE self, text;
+txt_insert_at_cursor(VALUE self, VALUE text)
 {
     StringValue(text);
     gtk_text_buffer_insert_at_cursor(_SELF(self),
@@ -92,8 +83,7 @@ txt_insert_at_cursor(self, text)
 }
 
 static VALUE
-txt_insert_interactive(self, iter, text, editable)
-    VALUE self, iter, text, editable;
+txt_insert_interactive(VALUE self, VALUE iter, VALUE text, VALUE editable)
 {
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive(_SELF(self),
                                                          RVAL2ITR(iter),
@@ -103,8 +93,7 @@ txt_insert_interactive(self, iter, text, editable)
 }
 
 static VALUE
-txt_insert_interactive_at_cursor(self, text, editable)
-    VALUE self, text, editable;
+txt_insert_interactive_at_cursor(VALUE self, VALUE text, VALUE editable)
 {
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
                                                                    RVAL2CSTR(text),
@@ -113,8 +102,7 @@ txt_insert_interactive_at_cursor(self, text, editable)
 }
 
 static VALUE
-txt_insert_range(self, iter, start, end)
-    VALUE self, iter, start, end;
+txt_insert_range(VALUE self, VALUE iter, VALUE start, VALUE end)
 {
     gtk_text_buffer_insert_range(_SELF(self), RVAL2ITR(iter),
                                  RVAL2ITR(start), RVAL2ITR(end));
@@ -122,8 +110,7 @@ txt_insert_range(self, iter, start, end)
 }
 
 static VALUE
-txt_insert_range_interactive(self, iter, start, end, editable)
-    VALUE self, iter, start, end, editable;
+txt_insert_range_interactive(VALUE self, VALUE iter, VALUE start, VALUE end, VALUE editable)
 {
     return CBOOL2RVAL(gtk_text_buffer_insert_range_interactive(_SELF(self),
                                                                RVAL2ITR(iter),
@@ -133,8 +120,7 @@ txt_insert_range_interactive(self, iter, start, end, editable)
 }
 
 static VALUE
-txt_delete(self, start, end)
-    VALUE self, start, end;
+txt_delete(VALUE self, VALUE start, VALUE end)
 {
     gtk_text_buffer_delete(GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
                            RVAL2ITR(start), RVAL2ITR(end));
@@ -142,8 +128,7 @@ txt_delete(self, start, end)
 }
 
 static VALUE
-txt_delete_interactive(self, start, end, editable)
-    VALUE self, start, end, editable;
+txt_delete_interactive(VALUE self, VALUE start, VALUE end, VALUE editable)
 {
     return CBOOL2RVAL(gtk_text_buffer_delete_interactive(_SELF(self),
                                                          RVAL2ITR(start),
@@ -152,10 +137,7 @@ txt_delete_interactive(self, start, end, editable)
 }
 
 static VALUE
-txt_get_text(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+txt_get_text(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, include_hidden_chars;
     GtkTextIter start_iter, end_iter;
@@ -181,17 +163,13 @@ txt_get_text(argc, argv, self)
 }
 
 static VALUE
-txt_get_text_all(self)
-    VALUE self;
+txt_get_text_all(VALUE self)
 {
     return txt_get_text(0, NULL, self);
 }
 
 static VALUE
-txt_get_slice(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+txt_get_slice(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, include_hidden_chars;
     GtkTextIter start_iter, end_iter;
@@ -217,15 +195,13 @@ txt_get_slice(argc, argv, self)
 }
 
 static VALUE
-txt_get_slice_all(self)
-    VALUE self;
+txt_get_slice_all(VALUE self)
 {
     return txt_get_slice(0, NULL, self);
 }
 
 static VALUE
-txt_insert_pixbuf(self, iter, pixbuf)
-    VALUE self, iter, pixbuf;
+txt_insert_pixbuf(VALUE self, VALUE iter, VALUE pixbuf)
 {
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, pixbuf);
@@ -238,8 +214,7 @@ txt_insert_pixbuf(self, iter, pixbuf)
 }
 
 static VALUE
-txt_insert_child_anchor(self, iter, anchor)
-    VALUE self, iter, anchor;
+txt_insert_child_anchor(VALUE self, VALUE iter, VALUE anchor)
 {
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, anchor);
@@ -251,8 +226,7 @@ txt_insert_child_anchor(self, iter, anchor)
 }
 
 static VALUE
-txt_create_child_anchor(self, iter)
-    VALUE self, iter;
+txt_create_child_anchor(VALUE self, VALUE iter)
 {
     VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2ITR(iter)));
     G_CHILD_ADD(self, ret);
@@ -260,8 +234,7 @@ txt_create_child_anchor(self, iter)
 }
 
 static VALUE
-txt_create_mark(self, name, where, left_gravity)
-    VALUE self, name, where, left_gravity;
+txt_create_mark(VALUE self, VALUE name, VALUE where, VALUE left_gravity)
 {
     VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
                                                       NIL_P(name) ? NULL : RVAL2CSTR(name),
@@ -273,8 +246,7 @@ txt_create_mark(self, name, where, left_gravity)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-txt_add_mark(self, mark, where)
-    VALUE self, mark, where;
+txt_add_mark(VALUE self, VALUE mark, VALUE where)
 {
     gtk_text_buffer_add_mark(_SELF(self), RVAL2MARK(mark), RVAL2ITR(where));
     return self;
@@ -282,8 +254,7 @@ txt_add_mark(self, mark, where)
 #endif
 
 static VALUE
-txt_delete_mark(self, mark)
-    VALUE self, mark;
+txt_delete_mark(VALUE self, VALUE mark)
 {
     if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK))){
         G_CHILD_REMOVE(self, mark);
@@ -296,31 +267,27 @@ txt_delete_mark(self, mark)
 }
 
 static VALUE
-txt_get_mark(self, name)
-    VALUE self, name;
+txt_get_mark(VALUE self, VALUE name)
 {
     return GOBJ2RVAL(gtk_text_buffer_get_mark(_SELF(self), RVAL2CSTR(name)));
 }
 
 /*
 static VALUE
-txt_get_insert(self)
-    VALUE self;
+txt_get_insert(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_buffer_get_insert(_SELF(self)));
 }
 */
 
 static VALUE
-txt_get_selection_bound(self)
-    VALUE self;
+txt_get_selection_bound(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_buffer_get_selection_bound(_SELF(self)));
 }
 
 static VALUE
-txt_place_cursor(self, where)
-    VALUE self, where;
+txt_place_cursor(VALUE self, VALUE where)
 {
     gtk_text_buffer_place_cursor(_SELF(self), RVAL2ITR(where));
     return self;
@@ -328,8 +295,7 @@ txt_place_cursor(self, where)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-txt_select_range(self, ins, bound)
-    VALUE self, ins, bound;
+txt_select_range(VALUE self, VALUE ins, VALUE bound)
 {
     gtk_text_buffer_select_range(_SELF(self), RVAL2ITR(ins), RVAL2ITR(bound));
     return self;
@@ -337,8 +303,7 @@ txt_select_range(self, ins, bound)
 #endif
 
 static VALUE
-txt_get_iter_at_child_anchor(self, anchor)
-    VALUE self, anchor;
+txt_get_iter_at_child_anchor(VALUE self, VALUE anchor)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_child_anchor(_SELF(self), &iter, RVAL2ANCHOR(anchor));
@@ -346,23 +311,20 @@ txt_get_iter_at_child_anchor(self, anchor)
 }
 
 static VALUE
-txt_get_modified(self)
-    VALUE self;
+txt_get_modified(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_buffer_get_modified(_SELF(self)));
 }
 
 static VALUE
-txt_set_modified(self, setting)
-    VALUE self, setting;
+txt_set_modified(VALUE self, VALUE setting)
 {
     gtk_text_buffer_set_modified(_SELF(self), RVAL2CBOOL(setting));
     return setting;
 }
 
 static VALUE
-txt_add_selection_clipboard(self, clipboard)
-    VALUE self, clipboard;
+txt_add_selection_clipboard(VALUE self, VALUE clipboard)
 {
     G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_add_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
@@ -370,8 +332,7 @@ txt_add_selection_clipboard(self, clipboard)
 }
 
 static VALUE
-txt_remove_selection_clipboard(self, clipboard)
-    VALUE self, clipboard;
+txt_remove_selection_clipboard(VALUE self, VALUE clipboard)
 {
     G_CHILD_REMOVE(self, clipboard);
     gtk_text_buffer_remove_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
@@ -380,8 +341,7 @@ txt_remove_selection_clipboard(self, clipboard)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-txt_deserialize(self, content_buffer, format, iter, data)
-    VALUE self, content_buffer, format, iter, data;
+txt_deserialize(VALUE self, VALUE content_buffer, VALUE format, VALUE iter, VALUE data)
 {
     GError* error = NULL;
     gboolean ret;
@@ -398,8 +358,7 @@ txt_deserialize(self, content_buffer, format, iter, data)
 }
 
 static VALUE
-txt_deserialize_get_can_create_tags(self, format)
-    VALUE self, format;
+txt_deserialize_get_can_create_tags(VALUE self, VALUE format)
 {
     return CBOOL2RVAL(gtk_text_buffer_deserialize_get_can_create_tags(_SELF(self), 
                                                                       RVAL2ATOM(format)));
@@ -407,8 +366,7 @@ txt_deserialize_get_can_create_tags(self, format)
 }
 
 static VALUE
-txt_deserialize_set_can_create_tags(self, format, can_create_tags)
-    VALUE self, format, can_create_tags;
+txt_deserialize_set_can_create_tags(VALUE self, VALUE format, VALUE can_create_tags)
 {
     gtk_text_buffer_deserialize_set_can_create_tags(_SELF(self),
                                                     RVAL2ATOM(format),
@@ -422,8 +380,7 @@ GtkTargetList* gtk_text_buffer_get_copy_target_list
 */
 
 static VALUE
-txt_get_deserialize_formats(self)
-    VALUE self;
+txt_get_deserialize_formats(VALUE self)
 {
     gint i;
     gint n_formats;
@@ -442,8 +399,7 @@ GtkTargetList* gtk_text_buffer_get_paste_target_list
 */
 
 static VALUE
-txt_get_serialize_formats(self)
-    VALUE self;
+txt_get_serialize_formats(VALUE self)
 {
     gint i;
     gint n_formats;
@@ -472,15 +428,7 @@ invoke_callback(VALUE data)
 }
 
 static gboolean
-deserialize_func(register_buffer, content_buffer, iter, data, length, create_tags, func, error)
-    GtkTextBuffer* register_buffer;
-    GtkTextBuffer* content_buffer;
-    GtkTextIter* iter;
-    const guint8 *data;
-    gsize length;
-    gboolean create_tags;
-    gpointer func;
-    GError** error;
+deserialize_func(GtkTextBuffer *register_buffer, GtkTextBuffer *content_buffer, GtkTextIter *iter, const guint8 *data, gsize length, gboolean create_tags, gpointer func, GError **error)
 {
     VALUE result;
     VALUE argv[5];
@@ -507,8 +455,7 @@ remove_callback_reference(gpointer callback)
 }
 
 static VALUE
-txt_register_deserialize_format(self, mime_type)
-    VALUE self, mime_type;
+txt_register_deserialize_format(VALUE self, VALUE mime_type)
 {
     VALUE block = rb_block_proc();
     GdkAtom atom;
@@ -522,21 +469,14 @@ txt_register_deserialize_format(self, mime_type)
 }
 
 static VALUE
-txt_register_deserialize_target(self, tagset_name)
-    VALUE self, tagset_name;
+txt_register_deserialize_target(VALUE self, VALUE tagset_name)
 {
     return ATOM2RVAL(gtk_text_buffer_register_deserialize_tagset(_SELF(self),
                                                                  (const gchar*)(NIL_P(tagset_name) ? NULL : RVAL2CSTR(tagset_name))));
 }
 
 static guint8*
-serialize_func(register_buffer, content_buffer, start, end, length, func)
-    GtkTextBuffer* register_buffer;
-    GtkTextBuffer* content_buffer;
-    GtkTextIter* start;
-    GtkTextIter* end;
-    gsize* length;
-    gpointer func;
+serialize_func(GtkTextBuffer *register_buffer, GtkTextBuffer *content_buffer, GtkTextIter *start, GtkTextIter *end, gsize *length, gpointer func)
 {
     VALUE result;
     VALUE argv[4];
@@ -559,8 +499,7 @@ serialize_func(register_buffer, content_buffer, start, end, length, func)
 }
 
 static VALUE
-txt_register_serialize_format(self, mime_type)
-    VALUE self, mime_type;
+txt_register_serialize_format(VALUE self, VALUE mime_type)
 {
     VALUE block = rb_block_proc();
     GdkAtom atom;
@@ -574,16 +513,14 @@ txt_register_serialize_format(self, mime_type)
 }
 
 static VALUE
-txt_register_serialize_target(self, tagset_name)
-    VALUE self, tagset_name;
+txt_register_serialize_target(VALUE self, VALUE tagset_name)
 {
     return ATOM2RVAL(gtk_text_buffer_register_serialize_tagset(_SELF(self),
                                                                NIL_P(tagset_name) ? NULL : RVAL2CSTR(tagset_name)));
 }
 
 static VALUE
-txt_serialize(self, content_buffer, format, start, end)
-    VALUE self, content_buffer, format, start, end;
+txt_serialize(VALUE self, VALUE content_buffer, VALUE format, VALUE start, VALUE end)
 {
     gsize length;
     guint8* ret = gtk_text_buffer_serialize(_SELF(self), _SELF(self),
@@ -594,16 +531,14 @@ txt_serialize(self, content_buffer, format, start, end)
 }
 
 static VALUE
-txt_unregister_deserialize_format(self, format)
-    VALUE self, format;
+txt_unregister_deserialize_format(VALUE self, VALUE format)
 {
     gtk_text_buffer_unregister_deserialize_format(_SELF(self), RVAL2ATOM(format));
     return self;
 }
 
 static VALUE
-txt_unregister_serialize_format(self, format)
-    VALUE self, format;
+txt_unregister_serialize_format(VALUE self, VALUE format)
 {
     gtk_text_buffer_unregister_serialize_format(_SELF(self), RVAL2ATOM(format));
     return self;
@@ -611,8 +546,7 @@ txt_unregister_serialize_format(self, format)
 #endif
 
 static VALUE
-txt_cut_clipboard(self, clipboard, default_editable)
-    VALUE self, clipboard, default_editable;
+txt_cut_clipboard(VALUE self, VALUE clipboard, VALUE default_editable)
 {
     G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard), RVAL2CBOOL(default_editable));
@@ -620,8 +554,7 @@ txt_cut_clipboard(self, clipboard, default_editable)
 }
 
 static VALUE
-txt_copy_clipboard(self, clipboard)
-    VALUE self, clipboard;
+txt_copy_clipboard(VALUE self, VALUE clipboard)
 {
     G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_copy_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
@@ -629,8 +562,7 @@ txt_copy_clipboard(self, clipboard)
 }
 
 static VALUE
-txt_paste_clipboard(self, clipboard, location, default_editable)
-    VALUE self, clipboard, location, default_editable;
+txt_paste_clipboard(VALUE self, VALUE clipboard, VALUE location, VALUE default_editable)
 {
     G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard),
@@ -640,8 +572,7 @@ txt_paste_clipboard(self, clipboard, location, default_editable)
 }
 
 static VALUE
-txt_get_selection_bounds(self)
-    VALUE self;
+txt_get_selection_bounds(VALUE self)
 {
     GtkTextIter start, end;
     
@@ -655,10 +586,7 @@ gboolean    gtk_text_buffer_get_has_selection
 */
 
 static VALUE
-txt_delete_selection(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE  self;
+txt_delete_selection(int argc, VALUE *argv, VALUE self)
 {
     VALUE interactive, default_editable;
     rb_scan_args(argc, argv, "20", &interactive, &default_editable); 
@@ -667,16 +595,14 @@ txt_delete_selection(argc, argv, self)
 }
 
 static VALUE
-txt_end_user_action(self)
-    VALUE self;
+txt_end_user_action(VALUE self)
 {
     gtk_text_buffer_end_user_action(_SELF(self));
     return self;
 }
 
 static VALUE
-txt_begin_user_action(self)
-    VALUE self;
+txt_begin_user_action(VALUE self)
 {
     gtk_text_buffer_begin_user_action(_SELF(self));
     if (rb_block_given_p())
@@ -685,8 +611,7 @@ txt_begin_user_action(self)
 }
 
 static VALUE
-txt_get_start_iter(self)
-    VALUE self;
+txt_get_start_iter(VALUE self)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_start_iter(_SELF(self), &iter);
@@ -694,8 +619,7 @@ txt_get_start_iter(self)
 }
 
 static VALUE
-txt_get_end_iter(self)
-    VALUE self;
+txt_get_end_iter(VALUE self)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_end_iter(_SELF(self), &iter);
@@ -703,8 +627,7 @@ txt_get_end_iter(self)
 }
 
 static VALUE
-txt_move_mark(self, mark, where)
-    VALUE self, mark, where;
+txt_move_mark(VALUE self, VALUE mark, VALUE where)
 {
     if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK)))
         gtk_text_buffer_move_mark(_SELF(self), RVAL2MARK(mark), RVAL2ITR(where));
@@ -714,8 +637,7 @@ txt_move_mark(self, mark, where)
 }
 
 static VALUE
-txt_create_tag(self, tag_name, properties)
-    VALUE self, tag_name, properties;
+txt_create_tag(VALUE self, VALUE tag_name, VALUE properties)
 {
     GtkTextTag *tag;
     VALUE ret;
@@ -733,10 +655,7 @@ txt_create_tag(self, tag_name, properties)
 }
 
 static VALUE
-txt_insert(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+txt_insert(int argc, VALUE *argv, VALUE self)
 {
     VALUE where, value, tags;
     gint start_offset;
@@ -787,10 +706,7 @@ txt_insert(argc, argv, self)
 }
 
 static VALUE
-txt_insert_with_tags(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+txt_insert_with_tags(int argc, VALUE *argv, VALUE self)
 {
     if (RVAL2CBOOL(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
@@ -799,8 +715,7 @@ txt_insert_with_tags(argc, argv, self)
 }
 
 static VALUE
-txt_apply_tag(self, tag, start, end)
-    VALUE self, tag, start, end;
+txt_apply_tag(VALUE self, VALUE tag, VALUE start, VALUE end)
 {
     if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
         gtk_text_buffer_apply_tag(_SELF(self), RVAL2TAG(tag), RVAL2ITR(start), RVAL2ITR(end));
@@ -811,8 +726,7 @@ txt_apply_tag(self, tag, start, end)
 }
 
 static VALUE
-txt_remove_tag(self, tag, start, end)
-    VALUE self, tag, start, end;
+txt_remove_tag(VALUE self, VALUE tag, VALUE start, VALUE end)
 {
     if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
         gtk_text_buffer_remove_tag(_SELF(self), RVAL2TAG(tag), RVAL2ITR(start), RVAL2ITR(end));
@@ -823,16 +737,14 @@ txt_remove_tag(self, tag, start, end)
 }
 
 static VALUE
-txt_remove_all_tags(self, start, end)
-    VALUE self, start, end;
+txt_remove_all_tags(VALUE self, VALUE start, VALUE end)
 {
     gtk_text_buffer_remove_all_tags(_SELF(self), RVAL2ITR(start), RVAL2ITR(end));
     return self;
 }
 
 static VALUE
-txt_get_iter_at_line_offset(self, line_number, char_offset)
-    VALUE self, line_number, char_offset;
+txt_get_iter_at_line_offset(VALUE self, VALUE line_number, VALUE char_offset)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_line_offset(_SELF(self), &iter, NUM2INT(line_number), NUM2INT(char_offset));
@@ -840,8 +752,7 @@ txt_get_iter_at_line_offset(self, line_number, char_offset)
 }
 
 static VALUE
-txt_get_iter_at_line_index(self, line_number, byte_index)
-    VALUE self, line_number, byte_index;
+txt_get_iter_at_line_index(VALUE self, VALUE line_number, VALUE byte_index)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_line_index(_SELF(self), &iter, NUM2INT(line_number), NUM2INT(byte_index));
@@ -849,8 +760,7 @@ txt_get_iter_at_line_index(self, line_number, byte_index)
 }
 
 static VALUE
-txt_get_iter_at_offset(self, char_offset)
-    VALUE self, char_offset;
+txt_get_iter_at_offset(VALUE self, VALUE char_offset)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_offset(_SELF(self), &iter, NUM2INT(char_offset));
@@ -858,8 +768,7 @@ txt_get_iter_at_offset(self, char_offset)
 }
 
 static VALUE
-txt_get_iter_at_line(self, line_number)
-    VALUE self, line_number;
+txt_get_iter_at_line(VALUE self, VALUE line_number)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_line(_SELF(self), &iter, NUM2INT(line_number));
@@ -867,8 +776,7 @@ txt_get_iter_at_line(self, line_number)
 }
 
 static VALUE
-txt_get_bounds(self)
-    VALUE self;
+txt_get_bounds(VALUE self)
 {
     GtkTextIter start, end;
     VALUE result;
@@ -882,8 +790,7 @@ txt_get_bounds(self)
 }
 
 static VALUE
-txt_get_iter_at_mark(self, mark)
-    VALUE self, mark;
+txt_get_iter_at_mark(VALUE self, VALUE mark)
 {
     GtkTextIter iter;
     gtk_text_buffer_get_iter_at_mark(_SELF(self), &iter, RVAL2MARK(mark));
