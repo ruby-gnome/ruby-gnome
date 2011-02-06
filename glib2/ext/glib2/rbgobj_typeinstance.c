@@ -21,22 +21,19 @@ typedef void (*ClassInfoCallbackFunc) (gpointer instance,
 				       gpointer user_data);
 
 static VALUE
-instantiatable_s_allocate(klass)
-     VALUE klass;
+instantiatable_s_allocate(VALUE klass)
 {
      rb_raise(rb_eTypeError, "abstract class");
 }
 
 static VALUE
-instantiatable_get_gtype(self)
-    VALUE self;
+instantiatable_get_gtype(VALUE self)
 {
     return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_instance_from_ruby_object(self)));
 }
 
 static VALUE
-instantiatable_clone(self)
-    VALUE self;
+instantiatable_clone(VALUE self)
 {
     rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
 }
