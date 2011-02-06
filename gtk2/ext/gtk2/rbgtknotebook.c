@@ -279,12 +279,7 @@ note_set_tab_detachable(VALUE self, VALUE child, VALUE detachable)
 }
 
 static GtkNotebook*
-creation_func(source, page, x, y, func)
-    GtkNotebook *source;
-    GtkWidget *page;
-    gint x;
-    gint y;
-    gpointer func;
+creation_func(GtkNotebook *source, GtkWidget *page, gint x, gint y, gpointer func)
 {
     VALUE ret;
     ret = rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(source), GOBJ2RVAL(page),
