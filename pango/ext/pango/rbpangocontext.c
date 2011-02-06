@@ -194,8 +194,7 @@ rcontext_get_metrics(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rcontext_list_families(self)
-    VALUE self;
+rcontext_list_families(VALUE self)
 {
     int n_families;
     PangoFontFamily** families;
