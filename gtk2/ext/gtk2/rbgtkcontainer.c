@@ -231,8 +231,7 @@ cont_child_get_property(VALUE self, VALUE child, VALUE prop_name)
 }
 
 static VALUE
-cont_child_set_property(self, child, prop_name, val)
-    VALUE self, child, prop_name, val;
+cont_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
 {
     GParamSpec* pspec;
     const char* name;
