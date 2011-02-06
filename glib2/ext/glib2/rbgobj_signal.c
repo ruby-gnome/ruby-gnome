@@ -200,10 +200,7 @@ gobj_s_signal(VALUE self, VALUE name)
 }
 
 static VALUE
-gobj_sig_has_handler_pending(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gobj_sig_has_handler_pending(int argc, VALUE *argv, VALUE self)
 {
     VALUE sig, may_be_blocked;
     const char* sig_name;
@@ -226,11 +223,7 @@ gobj_sig_has_handler_pending(argc, argv, self)
 }
 
 static VALUE
-gobj_sig_connect_impl(after, argc, argv, self)
-    gboolean after;
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
 {
     VALUE sig, rest;
     int i;
@@ -270,19 +263,13 @@ gobj_sig_connect_impl(after, argc, argv, self)
 }
 
 static VALUE
-gobj_sig_connect(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gobj_sig_connect(int argc, VALUE *argv, VALUE self)
 {
     return gobj_sig_connect_impl(FALSE, argc, argv, self);
 }
 
 static VALUE
-gobj_sig_connect_after(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gobj_sig_connect_after(int argc, VALUE *argv, VALUE self)
 {
     return gobj_sig_connect_impl(TRUE, argc, argv, self);
 }
@@ -362,10 +349,7 @@ emit_ensure(struct emit_arg* arg)
 }
 
 static VALUE
-gobj_sig_emit(argc, argv, self)
-    int argc;
-    VALUE *argv;
-    VALUE self;
+gobj_sig_emit(int argc, VALUE *argv, VALUE self)
 {
     VALUE sig;
     const char* sig_name;
@@ -398,8 +382,7 @@ gobj_sig_emit(argc, argv, self)
 }
 
 static VALUE
-gobj_sig_emit_stop(self, sig)
-    VALUE self, sig;
+gobj_sig_emit_stop(VALUE self, VALUE sig)
 {
     gpointer instance = RVAL2GOBJ(self);
     const char* sig_name;
@@ -423,8 +406,7 @@ gobj_sig_emit_stop(self, sig)
 static VALUE gobj_sig_handler_unblock(VALUE self, VALUE id);
 
 static VALUE
-_sig_handler_block_ensure(arg)
-    VALUE arg;
+_sig_handler_block_ensure(VALUE arg)
 {
     VALUE self = RARRAY_PTR(arg)[0];
     VALUE id   = RARRAY_PTR(arg)[1];
@@ -433,8 +415,7 @@ _sig_handler_block_ensure(arg)
 }
 
 static VALUE
-gobj_sig_handler_block(self, id)
-    VALUE self, id;
+gobj_sig_handler_block(VALUE self, VALUE id)
 {
     g_signal_handler_block(RVAL2GOBJ(self), NUM2ULONG(id));
     if (rb_block_given_p())
@@ -451,16 +432,14 @@ gobj_sig_handler_unblock(VALUE self, VALUE id)
 }
 
 static VALUE
-gobj_sig_handler_disconnect(self, id)
-    VALUE self, id;
+gobj_sig_handler_disconnect(VALUE self, VALUE id)
 {
     g_signal_handler_disconnect(RVAL2GOBJ(self), NUM2ULONG(id));
     return self;
 }
 
 static VALUE
-gobj_sig_handler_is_connected(self, id)
-     VALUE self, id;
+gobj_sig_handler_is_connected(VALUE self, VALUE id)
 {
     return CBOOL2RVAL(g_signal_handler_is_connected(RVAL2GOBJ(self), NUM2ULONG(id)));
 }
@@ -535,10 +514,7 @@ chain_from_overridden_body(struct emit_arg* arg)
 }
 
 static VALUE
-gobj_sig_chain_from_overridden(argc, argv, self)
-    int argc;
-    VALUE* argv;
-    VALUE self;
+gobj_sig_chain_from_overridden(int argc, VALUE *argv, VALUE self)
 {
     struct emit_arg arg;
 
@@ -563,8 +539,7 @@ gobj_sig_chain_from_overridden(argc, argv, self)
 }
 
 static VALUE
-gobj_s_method_added(klass, id)
-    VALUE klass, id;
+gobj_s_method_added(VALUE klass, VALUE id)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
     const char* name = rb_id2name(SYM2ID(id));
@@ -660,8 +635,7 @@ rbgobj_signal_wrap(guint sig_id)
 }
 
 static VALUE
-query_signal_id(self)
-    VALUE self;
+query_signal_id(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -669,8 +643,7 @@ query_signal_id(self)
 }
 
 static VALUE
-query_signal_name(self)
-    VALUE self;
+query_signal_name(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -678,8 +651,7 @@ query_signal_name(self)
 }
 
 static VALUE
-query_itype(self)
-    VALUE self;
+query_itype(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -687,8 +659,7 @@ query_itype(self)
 }
 
 static VALUE
-query_owner(self)
-    VALUE self;
+query_owner(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -696,8 +667,7 @@ query_owner(self)
 }
 
 static VALUE
-query_return_type(self)
-    VALUE self;
+query_return_type(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -705,8 +675,7 @@ query_return_type(self)
 }
 
 static VALUE
-query_signal_flags(self)
-    VALUE self;
+query_signal_flags(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -714,8 +683,7 @@ query_signal_flags(self)
 }
 
 static VALUE
-query_param_types(self)
-    VALUE self;
+query_param_types(VALUE self)
 {
     GSignalQuery* query;
     VALUE result;
@@ -730,8 +698,7 @@ query_param_types(self)
 }
 
 static VALUE
-query_inspect(self)
-    VALUE self;
+query_inspect(VALUE self)
 {
     GSignalQuery* query;
     gchar* s;
@@ -753,8 +720,7 @@ query_inspect(self)
 
 #define query_is_flag(flag) \
     static VALUE \
-    query_is_##flag(self) \
-        VALUE self; \
+    query_is_##flag(VALUE self) \
     { \
         GSignalQuery* query; \
         Data_Get_Struct(self, GSignalQuery, query); \
