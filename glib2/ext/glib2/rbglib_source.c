@@ -95,8 +95,7 @@ source_get_context(VALUE self)
 }
 
 static gboolean
-source_func(func)
-    gpointer func;
+source_func(gpointer func)
 {
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 0));
 }
