@@ -148,8 +148,7 @@ moz_set_comp_path(VALUE self, VALUE path)
  */
 
 static VALUE
-moz_load_url(self, url)
-    VALUE self, url;
+moz_load_url(VALUE self, VALUE url)
 {
     gtk_moz_embed_load_url(_SELF(self), RVAL2CSTR(url));
     return self;
