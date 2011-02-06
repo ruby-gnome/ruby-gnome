@@ -68,12 +68,7 @@ treeview_remove_column(VALUE self, VALUE column)
 }  
 
 static void
-cell_data_func(column, cell, model, iter, func)
-    GtkTreeViewColumn* column;
-    GtkCellRenderer* cell;
-    GtkTreeModel* model;
-    GtkTreeIter* iter;
-    gpointer func;
+cell_data_func(GtkTreeViewColumn *column, GtkCellRenderer *cell, GtkTreeModel *model, GtkTreeIter *iter, gpointer func)
 {
     iter->user_data3 = model;
     rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(column),
@@ -171,12 +166,7 @@ treeview_move_column_after(VALUE self, VALUE column, VALUE base_column)
 }
 
 static gboolean
-column_drop_func(treeview, column, prev_column, next_column, func)
-    GtkTreeView* treeview;
-    GtkTreeViewColumn* column;
-    GtkTreeViewColumn* prev_column;
-    GtkTreeViewColumn* next_column;
-    gpointer func;
+column_drop_func(GtkTreeView *treeview, GtkTreeViewColumn *column, GtkTreeViewColumn *prev_column, GtkTreeViewColumn *next_column, gpointer func)
 {
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(treeview),
                       GOBJ2RVAL(column), GOBJ2RVAL(prev_column), 
@@ -279,10 +269,7 @@ treeview_collapse_row(VALUE self, VALUE path)
 }
 
 static void
-mapping_func(treeview, path, func)
-    GtkTreeView* treeview;
-    GtkTreePath* path;
-    gpointer func;
+mapping_func(GtkTreeView *treeview, GtkTreePath *path, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(treeview),
                GTKTREEPATH2RVAL(path));
@@ -539,12 +526,7 @@ treeview_create_row_drag_icon(VALUE self, VALUE path)
 */
 
 static gboolean
-search_equal_func(model, column, key, iter, func)
-    GtkTreeModel* model;
-    gint column;
-    const gchar* key;
-    GtkTreeIter* iter;
-    gpointer func;
+search_equal_func(GtkTreeModel *model, gint column, const gchar *key, GtkTreeIter *iter, gpointer func)
 {
     iter->user_data3 = model;
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4, 
@@ -671,10 +653,7 @@ invoke_callback(VALUE data)
 }
 
 static void
-search_position_func(tree_view, search_dialog, func)
-    GtkTreeView* tree_view;
-    GtkWidget* search_dialog;
-    gpointer func;
+search_position_func(GtkTreeView *tree_view, GtkWidget *search_dialog, gpointer func)
 {
     struct callback_arg arg;
 
