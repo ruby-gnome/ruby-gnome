@@ -16,9 +16,7 @@ static ID id_call;
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
 
 static void
-ioc_error(status, err)
-    GIOStatus status;
-    GError* err;
+ioc_error(GIOStatus status, GError *err)
 {
     if (err != NULL) RAISE_GERROR(err);
 
@@ -66,8 +64,7 @@ ioc_initialize(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_close(self)
-    VALUE self;
+ioc_close(VALUE self)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_shutdown(_SELF(self), TRUE, &err);
@@ -288,8 +285,7 @@ ioc_gets(gint argc, VALUE *argv, VALUE self)
 
 /* Internal use only */
 static VALUE
-ioc_set_line_term(args)
-    VALUE args;
+ioc_set_line_term(VALUE args)
 {
     VALUE self = RARRAY_PTR(args)[0];
     VALUE doit = RARRAY_PTR(args)[1];
@@ -376,8 +372,7 @@ ioc_read_to_end(VALUE self)
 */
 
 static VALUE
-ioc_write_chars(self, buf)
-    VALUE self, buf;
+ioc_write_chars(VALUE self, VALUE buf)
 {
     gssize count;
     gsize bytes_written;
@@ -487,10 +482,7 @@ ioc_create_watch(VALUE self, VALUE condition)
 }
 
 static gboolean
-io_func(source, condition, func)
-    GIOChannel* source;
-    GIOCondition condition;
-    gpointer func;
+io_func(GIOChannel *source, GIOCondition condition, gpointer func)
 {
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 2, 
                             BOXED2RVAL(source, G_TYPE_IO_CHANNEL), 
@@ -646,9 +638,7 @@ ioc_printf(int argc, VALUE *argv, VALUE self)
 static VALUE ioc_puts(int argc, VALUE* argv, VALUE self);
 
 static VALUE
-ioc_puts_ary(ary, out, recur)
-    VALUE ary, out;
-    int recur;
+ioc_puts_ary(VALUE ary, VALUE out, int recur)
 {
     VALUE tmp;
     long i;
