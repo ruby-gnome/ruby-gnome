@@ -104,8 +104,7 @@ filter_func(const GtkRecentFilterInfo *info, gpointer func)
 }
 
 static void
-remove_callback_reference(data)
-     gpointer data;
+remove_callback_reference(gpointer data)
 {
     G_CHILD_REMOVE(mGtk, (VALUE)data);
 }
