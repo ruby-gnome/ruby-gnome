@@ -256,8 +256,7 @@ gdkscreen_get_window_stack(VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static void
-child_setup(func)
-    gpointer func;
+child_setup(gpointer func)
 {
     if (! NIL_P(func)){
         rb_funcall((VALUE)func, id_call, 0);
