@@ -29,10 +29,7 @@ fontset_get_metrics(VALUE self)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static gboolean
-fontset_each(fontset, font, func)
-    PangoFontset* fontset;
-    PangoFont* font;
-    gpointer func;
+fontset_each(PangoFontset *fontset, PangoFont *font, gpointer func)
 {
     return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 
                             2, GOBJ2RVAL(fontset), GOBJ2RVAL(font)));
