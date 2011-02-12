@@ -1,3 +1,8 @@
+2011-02-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/goocanvas/depend: fix .pc path. #3178294
+	Reported by OBATA Akio. Thanks!!!
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ./: support gem for Windows build.

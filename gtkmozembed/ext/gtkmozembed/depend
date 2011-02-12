@@ -1,6 +1,6 @@
 install:
-	if test -n "$(pkgconfigdir)"; then				\
-	  $(MAKEDIRS) $(pkgconfigdir);					\
-	  $(INSTALL_DATA) ../ruby-gtkmozembed.pc $(pkgconfigdir);	\
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-gtkmozembed.pc $(pkgconfigdir);	\
 	fi
 
