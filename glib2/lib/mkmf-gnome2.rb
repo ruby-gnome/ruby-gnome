@@ -364,19 +364,20 @@ def check_cairo(options={})
     rescue LoadError
     end
   end
-  return false if rcairo_source_dir.nil?
 
-  if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
-    options = {}
-    build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
-    if File.exist?(File.join(rcairo_source_dir, build_dir))
-      options[:target_build_dir] = build_dir
+  unless rcairo_source_dir.nil?
+    if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+      options = {}
+      build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
+      if File.exist?(File.join(rcairo_source_dir, build_dir))
+        options[:target_build_dir] = build_dir
+      end
+      add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
+      $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
     end
-    add_depend_package("cairo", "ext/cairo", rcairo_source_dir, options)
-    $defs << "-DRUBY_CAIRO_PLATFORM_WIN32"
+    $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo"
   end
 
-  $CFLAGS += " -I#{rcairo_source_dir}/ext/cairo"
   PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
 end
 
