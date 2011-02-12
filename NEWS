@@ -13,7 +13,7 @@ WRITE ME.
 ==== Ruby/GLib2
 
   * Fixes
-    * fix non-gem rcairo detection.
+    * fix non-gem rcairo detection. #3178228
       [OBATA Akio, Kouhei Sutou]
 
 === Thanks
