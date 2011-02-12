@@ -16,6 +16,30 @@ WRITE ME.
     * fix non-gem rcairo detection. #3178228
       [OBATA Akio, Kouhei Sutou]
 
+==== Ruby/GooCanvas
+
+  * Fixes
+    * fix pc install. #3178294
+      [OBATA Akio, Kouhei Sutou]
+
+==== Ruby/GStreamer
+
+  * Fixes
+    * fix pc install. #3178294
+      [OBATA Akio, Kouhei Sutou]
+
+==== Ruby/GtkMozEmbed
+
+  * Fixes
+    * fix pc install. #3178294
+      [OBATA Akio, Kouhei Sutou]
+
+==== Ruby/GtkSourceView2
+
+  * Fixes
+    * fix pc install. #3178294
+      [OBATA Akio, Kouhei Sutou]
+
 === Thanks
 
   * OBATA Akio
