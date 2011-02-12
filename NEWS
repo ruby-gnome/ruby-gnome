@@ -2,6 +2,25 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.8: 2011-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+WRITE ME.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * fix non-gem rcairo detection.
+      [OBATA Akio, Kouhei Sutou]
+
+=== Thanks
+
+  * OBATA Akio
+  * ...
+
 == Ruby-GNOME2 0.90.7: 2011-02-02
 
 NOTE: 0.90.x releases are for 1.0.0 major release.

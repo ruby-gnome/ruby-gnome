@@ -1,3 +1,8 @@
+2011-02-12  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: fix non-gem rcairo detection.
+	Patch by OBATA Akio. Thanks!!!
+
 2011-02-02  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: fill 0.90.7 entry.
