@@ -70,14 +70,14 @@ class TestGIOChannel < Test::Unit::TestCase
       3.times do 
 	assert_equal(v.unpack("U")[0], io.getc)
       end
-      assert_equal("\n"[0], io.getc)
+      assert_equal("\n".unpack("U")[0], io.getc)
     end
     assert_equal(nil, io.getc)
     io.close
   end
 
   def test_each_char
-    text = @content.split(//)
+    text = @content.split(//u)
     io = GLib::IOChannel.new(@file.path)
     i = 0
     io.each_char {|ch|
@@ -89,7 +89,7 @@ class TestGIOChannel < Test::Unit::TestCase
 
   def test_readchar
     io = GLib::IOChannel.new(@file.path)
-    text = @content.split(//)
+    text = @content.split(//u)
     text.each do |v|
       assert_equal(v.unpack("U")[0], io.readchar)
     end
@@ -196,18 +196,18 @@ class TestGIOChannel < Test::Unit::TestCase
     text = @content
     io = GLib::IOChannel.new(@file.path)
     io.seek(5)
-    assert_equal(text[5], io.getc)
+    assert_equal(text.unpack("U*")[5], io.getc)
     io.seek(6, GLib::IOChannel::SEEK_SET)
-    assert_equal(text[6], io.getc)
+    assert_equal(text.unpack("U*")[6], io.getc)
 
     io.seek(1, GLib::IOChannel::SEEK_CUR)
-    assert_equal(text[8], io.getc)
+    assert_equal(text.unpack("U*")[8], io.getc)
 
     io.pos = 0
-    assert_equal(text[0], io.getc)
+    assert_equal(text.unpack("U*")[0], io.getc)
 
     io.set_pos(2)
-    assert_equal(text[2], io.getc)
+    assert_equal(text.unpack("U*")[2], io.getc)
 
     io.close
   end
