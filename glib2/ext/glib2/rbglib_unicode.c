@@ -15,33 +15,27 @@
 static VALUE
 rbg_ucs4_to_rval_len(const gchar* ucs4, gsize len)
 {
-#ifdef HAVE_RUBY_ENCODING_H
-    rb_encoding *ucs4_encoding;
-#  if  G_BYTE_ORDER == G_LITTLE_ENDIAN
-    ucs4_encoding = rb_enc_find("UTF-32LE");
-#  else
-    ucs4_encoding = rb_enc_find("UTF-32BE");
-#  endif
-    return ucs4 ? rb_external_str_new_with_enc(ucs4, len, ucs4_encoding) : Qnil;
+    const gchar *ucs4_encoding;
+#if  G_BYTE_ORDER == G_LITTLE_ENDIAN
+    ucs4_encoding = "UTF-32LE";
 #else
-    return ucs4 ? rb_str_new(ucs4, len) : Qnil;
+    ucs4_encoding = "UTF-32BE";
 #endif
+
+    return CSTR2RVAL_LEN_ENC(ucs4, len, ucs4_encoding);
 }
 
 static VALUE
 rbg_utf16_to_rval_len(const gchar* utf16, gsize len)
 {
-#ifdef HAVE_RUBY_ENCODING_H
-    rb_encoding *utf16_encoding;
-#  if  G_BYTE_ORDER == G_LITTLE_ENDIAN
-    utf16_encoding = rb_enc_find("UTF-16LE");
-#  else
-    utf16_encoding = rb_enc_find("UTF-16BE");
-#  endif
-    return utf16 ? rb_external_str_new_with_enc(utf16, len, utf16_encoding) : Qnil;
+    const gchar *utf16_encoding;
+#if  G_BYTE_ORDER == G_LITTLE_ENDIAN
+    utf16_encoding = "UTF-16LE";
 #else
-    return utf16 ? rb_str_new(utf16, len) : Qnil;
+    utf16_encoding = "UTF-16BE";
 #endif
+
+    return CSTR2RVAL_LEN_ENC(utf16, len, utf16_encoding);
 }
 
 static VALUE

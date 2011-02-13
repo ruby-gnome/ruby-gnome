@@ -1,5 +1,8 @@
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib_unicode.c: use CSTR2RVAL_ENC() and
+	CSTR2RVAL_LEN_ENC().
+
 	* ext/glib2/rbglib.[ch] (CSTR2RVAL_ENC, CSTR2RVAL_LEN_ENC): add.
 
 	* ext/glib2/rbglib_unicode.c, test/test_unicode.rb: set UTF-16 and
