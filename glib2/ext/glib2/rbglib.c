@@ -115,7 +115,16 @@ rbg_cstr2rval_len_with_encoding(const gchar* str, gsize len,
         return Qnil;
 
 #ifdef HAVE_RUBY_ENCODING_H
-    return rb_external_str_new_with_enc(str, len, rb_enc_find(encoding));
+    {
+        rb_encoding *rb_encoding;
+
+        if (encoding) {
+            rb_encoding = rb_enc_find(encoding);
+        } else {
+            rb_encoding = rb_utf8_encoding();
+        }
+        return rb_external_str_new_with_enc(str, len, rb_encoding);
+    }
 #else
     return rb_str_new(str, len);
 #endif

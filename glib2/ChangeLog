@@ -1,5 +1,8 @@
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.c (rbg_cstr2rval_len_with_encoding): use UTF-8
+	as the default encoding.
+
 	* ext/glib2/rbglib.h: fix a typo.
 
 	* ext/glib2/rbglib_unicode.c: use CSTR2RVAL_ENC() and
