@@ -213,7 +213,7 @@ class TestGLibUnicode < Test::Unit::TestCase
 
   def test_utf8_validate
     assert(GLib::UTF8.validate("あ"))
-    assert(!GLib::UTF8.validate("あ"[1..-1]))
+    assert(!GLib::UTF8.validate(binary("あ")[1..-1]))
   end
 
   def test_utf8_upcase
@@ -365,5 +365,12 @@ class TestGLibUnicode < Test::Unit::TestCase
     require 'uconv'
   rescue LoadError
     omit("Need uconv to run this test.")
+  end
+
+  def binary(string)
+    if string.respond_to?(:force_encoding)
+      string.force_encoding("ascii-8bit")
+    end
+    string
   end
 end

@@ -1,3 +1,8 @@
+2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/test_unicode.rb (TestGLibUnicode#test_utf8_validate):
+	support Ruby 1.9.
+
 2011-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* lib/mkmf-gnome2.rb (#check_cairo): re-support non-gem rcairo
