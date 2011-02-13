@@ -1,5 +1,7 @@
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.h: fix a typo.
+
 	* ext/glib2/rbglib_unicode.c: use CSTR2RVAL_ENC() and
 	CSTR2RVAL_LEN_ENC().
 

@@ -50,7 +50,7 @@ typedef int GPid;
 #define RVAL2CSTR2(v) (RVAL2CSTR_ACCEPT_NIL(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
 #define CSTR2RVAL_LEN(s, l) (rbg_cstr2rval_len(s, l))
-#define CSTR2RVAL_ENC(s, e) (rbg_cstr2rval_with_encoding(s, l))
+#define CSTR2RVAL_ENC(s, e) (rbg_cstr2rval_with_encoding(s, e))
 #define CSTR2RVAL_LEN_ENC(s, l, e) (rbg_cstr2rval_len_with_encoding(s, l, e))
 #define CSTR2RVAL_FREE(s) (rbg_cstr2rval_with_free(s))
 #define CSTR2RVAL2(s) (CSTR2RVAL_FREE(s))
