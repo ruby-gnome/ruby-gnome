@@ -6,7 +6,7 @@ require 'glib2'
 require 'tempfile'
 require 'nkf'
 
-$KCODE = "U"
+$KCODE = "U" unless defined?(:Encoding)
 
 class TestGIOChannel < Test::Unit::TestCase
   def setup

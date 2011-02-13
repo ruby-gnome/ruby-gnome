@@ -1,5 +1,7 @@
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/test_iochannel.rb: don't set $KCODE on Ruby 1.9.
+
 	* ext/glib2/rbglib_iochannel.c: set encoding.
 
 	* ext/glib2/rbglib.c (rbg_cstr2rval_len_with_encoding): use UTF-8
