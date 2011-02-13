@@ -88,7 +88,7 @@ rbg_cstr2rval_len(const gchar* str, gsize len)
 #ifdef HAVE_RUBY_ENCODING_H
     return str ? rb_external_str_new_with_enc(str, len, rb_utf8_encoding()) : Qnil;
 #else
-    return str ? rb_str_new2(str) : Qnil;
+    return str ? rb_str_new(str, len) : Qnil;
 #endif
 }
 
