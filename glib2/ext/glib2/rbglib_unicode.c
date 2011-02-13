@@ -13,6 +13,38 @@
 #include "rbglib.h"
 
 static VALUE
+rbg_ucs4_to_rval_len(const gchar* ucs4, gsize len)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+    rb_encoding *ucs4_encoding;
+#  if  G_BYTE_ORDER == G_LITTLE_ENDIAN
+    ucs4_encoding = rb_enc_find("UTF-32LE");
+#  else
+    ucs4_encoding = rb_enc_find("UTF-32BE");
+#  endif
+    return ucs4 ? rb_external_str_new_with_enc(ucs4, len, ucs4_encoding) : Qnil;
+#else
+    return ucs4 ? rb_str_new(ucs4, len) : Qnil;
+#endif
+}
+
+static VALUE
+rbg_utf16_to_rval_len(const gchar* utf16, gsize len)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+    rb_encoding *utf16_encoding;
+#  if  G_BYTE_ORDER == G_LITTLE_ENDIAN
+    utf16_encoding = rb_enc_find("UTF-16LE");
+#  else
+    utf16_encoding = rb_enc_find("UTF-16BE");
+#  endif
+    return utf16 ? rb_external_str_new_with_enc(utf16, len, utf16_encoding) : Qnil;
+#else
+    return utf16 ? rb_str_new(utf16, len) : Qnil;
+#endif
+}
+
+static VALUE
 rbglib_m_charset(VALUE self)
 {
     const char *charset;
@@ -103,7 +135,7 @@ rbglib_m_unicode_canonical_ordering(VALUE self, VALUE rb_ucs4)
     len = RSTRING_LEN(rb_ucs4);
     ucs4 = g_memdup(original_str, len);
     g_unicode_canonical_ordering(ucs4, len);
-    normalized_ucs4 = rb_str_new((const char *)ucs4, len);
+    normalized_ucs4 = rbg_ucs4_to_rval_len((const char *)ucs4, len);
     g_free(ucs4);
     return normalized_ucs4;
 }
@@ -116,7 +148,8 @@ rbglib_m_unicode_canonical_decomposition(VALUE self, VALUE unichar)
     gsize len;
 
     ucs4 = g_unicode_canonical_decomposition(NUM2UINT(unichar), &len);
-    normalized_ucs4 = rb_str_new((const char *)ucs4, len * sizeof(gunichar));
+    normalized_ucs4 = rbg_ucs4_to_rval_len((const char *)ucs4,
+                                           len * sizeof(gunichar));
     g_free(ucs4);
     return normalized_ucs4;
 }
@@ -321,7 +354,8 @@ rbglib_m_utf8_to_utf16(VALUE self, VALUE rb_utf8)
     if (error)
         RAISE_GERROR(error);
 
-    result = rb_str_new((char *)utf16, items_written * sizeof(*utf16));
+    result = rbg_utf16_to_rval_len((char *)utf16,
+                                   items_written * sizeof(*utf16));
     g_free(utf16);
     return result;
 }
@@ -349,7 +383,7 @@ rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, VALUE self)
             RAISE_GERROR(error);
     }
 
-    result = rb_str_new((char *)ucs4, items_written * sizeof(*ucs4));
+    result = rbg_ucs4_to_rval_len((char *)ucs4, items_written * sizeof(*ucs4));
     g_free(ucs4);
     return result;
 }
@@ -371,7 +405,7 @@ rbglib_m_utf16_to_ucs4(VALUE self, VALUE rb_utf16)
     if (error)
         RAISE_GERROR(error);
 
-    result = rb_str_new((char *)ucs4, items_written * sizeof(*ucs4));
+    result = rbg_ucs4_to_rval_len((char *)ucs4, items_written * sizeof(*ucs4));
     g_free(ucs4);
     return result;
 }
@@ -415,7 +449,8 @@ rbglib_m_ucs4_to_utf16(VALUE self, VALUE rb_ucs4)
     if (error)
         RAISE_GERROR(error);
 
-    result = rb_str_new((char *)utf16, items_written * sizeof(*utf16));
+    result = rbg_utf16_to_rval_len((char *)utf16,
+                                   items_written * sizeof(*utf16));
     g_free(utf16);
     return result;
 }

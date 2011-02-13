@@ -288,10 +288,10 @@ class TestGLibUnicode < Test::Unit::TestCase
                  GLib::UTF8.to_ucs4("あいうえお"))
 
     assert_raise(GLib::ConvertError) do
-      GLib::UTF8.to_ucs4("あいうえお"[1..-1])
+      GLib::UTF8.to_ucs4(binary("あいうえお")[1..-1])
     end
     assert_nothing_raised do
-      GLib::UTF8.to_ucs4("あいうえお"[1..-1], true)
+      GLib::UTF8.to_ucs4(binary("あいうえお")[1..-1], true)
     end
   end
 
@@ -311,7 +311,7 @@ class TestGLibUnicode < Test::Unit::TestCase
                  GLib::UCS4.to_utf16(utf8_to_utf32("あいうえお")))
 
     assert_raise(GLib::ConvertError) do
-      GLib::UCS4.to_utf16(utf8_to_utf32("あいうえお")[1..-1])
+      GLib::UCS4.to_utf16(binary(utf8_to_utf32("あいうえお"))[1..-1])
     end
   end
 
