@@ -128,33 +128,43 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
     gsize bytes_read;
     GError* err = NULL;
     GIOStatus status;
+    GIOChannel *channel;
 
     rb_scan_args(argc, argv, "01", &count);
 
-    if (NIL_P(count)){
+    channel = _SELF(self);
+    if (NIL_P(count)) {
         gsize length;
-        status = g_io_channel_read_to_end(_SELF(self), &buf,
-                                          &length, &err);
 
-        if (status == G_IO_STATUS_EOF){
+        status = g_io_channel_read_to_end(channel, &buf, &length, &err);
+
+        if (status == G_IO_STATUS_EOF) {
             ret = CSTR2RVAL("");
         } else {
             ioc_error(status, err);
         }
-        ret = buf ? rb_str_new(buf, length) : CSTR2RVAL("");
-        g_free(buf);
+        if (buf) {
+            ret = CSTR2RVAL_LEN(buf, length);
+            g_free(buf);
+        } else {
+            ret = CSTR2RVAL("");
+        }
     } else {
         buf = ALLOCA_N(gchar, count);
         memset(buf, '\0', count);
-        
-        status = g_io_channel_read_chars(_SELF(self), buf, NUM2UINT(count),
+
+        status = g_io_channel_read_chars(channel, buf, NUM2UINT(count),
                                          &bytes_read, &err);
-        if (status == G_IO_STATUS_EOF){
+        if (status == G_IO_STATUS_EOF) {
             ret = CSTR2RVAL("");
         } else {
             ioc_error(status, err);
         }
-        ret = buf ? CSTR2RVAL(buf) : CSTR2RVAL("");
+        if (buf) {
+            ret = CSTR2RVAL_LEN(buf, bytes_read);
+        } else {
+            ret = CSTR2RVAL("");
+        }
     }
     return ret;
 }
@@ -306,7 +316,7 @@ ioc_each_line(gint argc, VALUE *argv, VALUE self)
     VALUE line_term;
     GIOStatus status;
     GError* err = NULL;
-
+    GIOChannel *channel;
     const gchar* old_line_term = NULL;
     gint old_line_term_len;
 
@@ -316,27 +326,32 @@ ioc_each_line(gint argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &line_term);
 
-    if (! NIL_P(line_term)){
+    channel = _SELF(self);
+    if (!NIL_P(line_term)) {
         StringValue(line_term);
 
-        old_line_term = g_io_channel_get_line_term(_SELF(self), &old_line_term_len);
-        g_io_channel_set_line_term(_SELF(self), RVAL2CSTR(line_term),
+        old_line_term = g_io_channel_get_line_term(channel, &old_line_term_len);
+        g_io_channel_set_line_term(channel, RVAL2CSTR(line_term),
                                    RSTRING_LEN(line_term));
     }
 
-    while (TRUE){
-        status = g_io_channel_read_line(_SELF(self), &str, NULL, NULL, &err);
-        if (status == G_IO_STATUS_EOF){
+    while (TRUE) {
+        status = g_io_channel_read_line(channel, &str, NULL, NULL, &err);
+        if (status == G_IO_STATUS_EOF) {
             break;
         } else {
             VALUE rstr;
             ioc_error(status, err);
-            rstr = str ? CSTR2RVAL(str) : CSTR2RVAL("");
+            if (str) {
+                rstr = CSTR2RVAL(str);
+            } else {
+                rstr = CSTR2RVAL("");
+            }
             g_free(str);
-            rb_ensure(rb_yield, rstr, ioc_set_line_term, 
-                      rb_ary_new3(3, self, 
+            rb_ensure(rb_yield, rstr, ioc_set_line_term,
+                      rb_ary_new3(3, self,
                                   NIL_P(line_term) ? Qfalse :  Qtrue,
-                                  old_line_term ? rb_str_new(old_line_term, old_line_term_len) : Qnil));
+                                  CSTR2RVAL(old_line_term)));
         }
     }
     return self;
@@ -591,11 +606,14 @@ static VALUE
 ioc_set_encoding(VALUE self, VALUE encoding)
 {
     GError* err = NULL;
-    GIOStatus status = g_io_channel_set_encoding(_SELF(self), 
-                                                 encoding ? RVAL2CSTR(encoding) : NULL, &err);
+    GIOStatus status;
+
+    status = g_io_channel_set_encoding(_SELF(self),
+                                       RVAL2CSTR_ACCEPT_NIL(encoding),
+                                       &err);
     ioc_error(status, err);
     return self;
-} 
+}
 
 /* Don't we need them ?
 gboolean    g_io_channel_get_close_on_unref (GIOChannel *channel);
