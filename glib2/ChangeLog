@@ -1,5 +1,7 @@
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib_unicode.c: set UTF-8 encoding.
+
 	* test/test_unicode.rb: don't require Uconv on Ruby 1.9.
 
 	* ext/glib2/rbglib.[ch] (CSTR2RVAL_LEN): add.

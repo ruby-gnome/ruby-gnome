@@ -17,7 +17,7 @@ rbglib_m_charset(VALUE self)
 {
     const char *charset;
     g_get_charset(&charset);
-    return rb_str_new2(charset);
+    return CSTR2RVAL(charset);
 }
 
 #define DEF_IS_UNICHAR(name)                                    \
@@ -203,7 +203,7 @@ rbglib_m_utf8_strreverse(VALUE self, VALUE rb_utf8)
 
     utf8 = StringValueCStr(rb_utf8);
     reversed_utf8 = g_utf8_strreverse(utf8, RSTRING_LEN(rb_utf8));
-    result = rb_str_new2(reversed_utf8);
+    result = CSTR2RVAL(reversed_utf8);
     g_free(reversed_utf8);
     return result;
 }
@@ -224,7 +224,7 @@ rbglib_m_utf8_strup(VALUE self, VALUE rb_utf8)
 
     utf8 = StringValueCStr(rb_utf8);
     upcased_utf8 = g_utf8_strup(utf8, RSTRING_LEN(rb_utf8));
-    result = rb_str_new2(upcased_utf8);
+    result = CSTR2RVAL(upcased_utf8);
     g_free(upcased_utf8);
     return result;
 }
@@ -237,7 +237,7 @@ rbglib_m_utf8_strdown(VALUE self, VALUE rb_utf8)
 
     utf8 = StringValueCStr(rb_utf8);
     downcased_utf8 = g_utf8_strdown(utf8, RSTRING_LEN(rb_utf8));
-    result = rb_str_new2(downcased_utf8);
+    result = CSTR2RVAL(downcased_utf8);
     g_free(downcased_utf8);
     return result;
 }
@@ -250,7 +250,7 @@ rbglib_m_utf8_casefold(VALUE self, VALUE rb_utf8)
 
     utf8 = StringValueCStr(rb_utf8);
     casefolded_utf8 = g_utf8_casefold(utf8, RSTRING_LEN(rb_utf8));
-    result = rb_str_new2(casefolded_utf8);
+    result = CSTR2RVAL(casefolded_utf8);
     g_free(casefolded_utf8);
     return result;
 }
@@ -269,7 +269,7 @@ rbglib_m_utf8_normalize(int argc, VALUE *argv, VALUE self)
 
     utf8 = StringValueCStr(rb_utf8);
     normalized_utf8 = g_utf8_normalize(utf8, RSTRING_LEN(rb_utf8), mode);
-    result = rb_str_new2(normalized_utf8);
+    result = CSTR2RVAL(normalized_utf8);
     g_free(normalized_utf8);
     return result;
 }
@@ -299,7 +299,7 @@ rbglib_m_utf8_collate_key(int argc, VALUE *argv, VALUE self)
 #endif
         key = g_utf8_collate_key(utf8, len);
 
-    result = rb_str_new2(key);
+    result = CSTR2RVAL(key);
     g_free(key);
     return result;
 }
@@ -393,7 +393,7 @@ rbglib_m_utf16_to_utf8(VALUE self, VALUE rb_utf16)
     if (error)
         RAISE_GERROR(error);
 
-    result = rb_str_new(utf8, items_written * sizeof(*utf8));
+    result = CSTR2RVAL_LEN(utf8, items_written * sizeof(*utf8));
     g_free(utf8);
     return result;
 }
@@ -437,7 +437,7 @@ rbglib_m_ucs4_to_utf8(VALUE self, VALUE rb_ucs4)
     if (error)
         RAISE_GERROR(error);
 
-    result = rb_str_new(utf8, items_written);
+    result = CSTR2RVAL_LEN(utf8, items_written);
     g_free(utf8);
     return result;
 }
@@ -449,7 +449,7 @@ rbglib_m_unichar_to_utf8(VALUE self, VALUE unichar)
     gint len;
 
     len = g_unichar_to_utf8(NUM2UINT(unichar), utf8);
-    return rb_str_new(utf8, len);
+    return CSTR2RVAL_LEN(utf8, len);
 }
 
 void
