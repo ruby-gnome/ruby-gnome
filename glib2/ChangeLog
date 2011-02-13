@@ -1,5 +1,7 @@
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.[ch] (CSTR2RVAL_LEN): add.
+
 	* test/test_unicode.rb (TestGLibUnicode#test_utf8_validate):
 	support Ruby 1.9.
 

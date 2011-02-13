@@ -49,6 +49,7 @@ typedef int GPid;
 #define RVAL2CSTR_ACCEPT_NIL(v) (rbg_rval2cstr_accept_nil(&v))
 #define RVAL2CSTR2(v) (RVAL2CSTR_ACCEPT_NIL(v))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
+#define CSTR2RVAL_LEN(s, l) (rbg_cstr2rval_len(s, l))
 #define CSTR2RVAL_FREE(s) (rbg_cstr2rval_with_free(s))
 #define CSTR2RVAL2(s) (CSTR2RVAL_FREE(s))
 
@@ -82,7 +83,8 @@ extern const gchar *rbg_rval_inspect(VALUE object);
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr); /* no longer used */
 extern gchar *rbg_rval2cstr(VALUE *str);
 extern gchar *rbg_rval2cstr_accept_nil(VALUE *str);
-extern VALUE rbg_cstr2rval(const char* str);
+extern VALUE rbg_cstr2rval(const gchar* str);
+extern VALUE rbg_cstr2rval_len(const gchar* str, gsize len);
 extern VALUE rbg_cstr2rval_with_free(gchar* str);
 
 extern VALUE rbg_filename_to_ruby_free(gchar *filename);

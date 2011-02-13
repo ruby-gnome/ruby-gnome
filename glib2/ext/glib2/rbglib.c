@@ -77,10 +77,16 @@ rbg_rval2cstr_accept_nil(VALUE *str)
 }
 
 VALUE
-rbg_cstr2rval(const char* str)
+rbg_cstr2rval(const gchar* str)
+{
+    return CSTR2RVAL_LEN(str, strlen(str));
+}
+
+VALUE
+rbg_cstr2rval_len(const gchar* str, gsize len)
 {
 #ifdef HAVE_RUBY_ENCODING_H
-    return str ? rb_external_str_new_with_enc(str, strlen(str), rb_utf8_encoding()) : Qnil;
+    return str ? rb_external_str_new_with_enc(str, len, rb_utf8_encoding()) : Qnil;
 #else
     return str ? rb_str_new2(str) : Qnil;
 #endif
