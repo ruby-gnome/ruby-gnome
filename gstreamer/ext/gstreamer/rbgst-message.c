@@ -127,7 +127,11 @@ instance2robj(gpointer instance)
         klass = rb_cGstMessageApplication;
         break;
       case GST_MESSAGE_ELEMENT:
-        klass = rb_cGstMessageElement;
+        if (gst_is_missing_plugin_message(message)) {
+            klass = rb_cGstMissingMessage;
+        } else {
+            klass = rb_cGstMessageElement;
+        }
         break;
       case GST_MESSAGE_SEGMENT_START:
         klass = rb_cGstMessageSegmentStart;
