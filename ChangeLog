@@ -1,3 +1,8 @@
+2011-02-17  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GStreamer: improve missing mesage.
+	Patch by Vincent Carmona. Thanks!!!
+
 2011-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GooCanvas, Ruby/GStreamer, Ruby/GtkMozEmbed,

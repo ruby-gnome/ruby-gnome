@@ -24,6 +24,10 @@ WRITE ME.
 
 ==== Ruby/GStreamer
 
+  * Improvements
+    * improve missing message.
+      [Vincent Carmona]
+
   * Fixes
     * fix pc install. #3178294
       [OBATA Akio, Kouhei Sutou]
@@ -43,6 +47,7 @@ WRITE ME.
 === Thanks
 
   * OBATA Akio
+  * Vincent Carmona
   * ...
 
 == Ruby-GNOME2 0.90.7: 2011-02-02
