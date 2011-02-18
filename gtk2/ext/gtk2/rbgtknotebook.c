@@ -298,6 +298,24 @@ note_set_window_creation_hook(VALUE self)
 }    
 #endif
 
+#if GTK_CHECK_VERSION(2,20,0)
+static VALUE
+note_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
+{
+    gtk_notebook_set_action_widget(_SELF(self),
+                                   RVAL2WIDGET(widget),
+                                   RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
+    return self;
+}
+
+static VALUE
+note_get_action_widget(VALUE self, VALUE pack_type)
+{
+    return GOBJ2RVAL(gtk_notebook_get_action_widget(_SELF(self),
+                                                    RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE)));
+}
+#endif
+
 /***********************************************/
 /*
  * Gtk::NotebookPage
@@ -426,6 +444,10 @@ Init_gtk_notebook()
     rb_define_method(gNotebook, "get_tab_detachable", note_get_tab_detachable, 1);
     rb_define_method(gNotebook, "set_tab_detachable", note_set_tab_detachable, 2);
     rb_define_singleton_method(gNotebook, "set_window_creation_hook", note_set_window_creation_hook, 0);
+#endif
+#if GTK_CHECK_VERSION(2,20,0)
+    rb_define_method(gNotebook, "set_action_widget", note_set_action_widget, 2);
+    rb_define_method(gNotebook, "get_action_widget", note_get_action_widget, 1);
 #endif
     /* GtkNotebookTab */
     rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);

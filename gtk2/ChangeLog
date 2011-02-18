@@ -1,3 +1,13 @@
+2011-02-19  Masaaki Aoyagi
+
+	* ext/gtk2/rbgtkspinner.c: add.
+
+	* ext/gtk2/rbgtkcellrendererspinner.c: add.
+
+	* ext/gtk2/rbgtknotebook.c: add methods.
+	Gtk::Notebook#set_action_widget
+	Gtk::Notebook#get_action_widget
+
 2011-02-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/rbgtktreeview.c (row_separator_func): fix type.
