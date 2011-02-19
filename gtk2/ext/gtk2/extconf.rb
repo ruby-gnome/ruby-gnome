@@ -112,7 +112,7 @@ class InitCreator
     except_targets = ["Init_gtk2()", "Init_gtk_gdk()", "Init_gtk_gtk()"]
     @targets.each do |target|
       target.each_line do |line|
-        if /^(Init_.*\(\))(.*)/ =~ line
+        if /^(Init_.*\((?:void)?\))(.*)/ =~ line
           init = $1
           unless except_targets.include?(init)
             flag = $2
@@ -134,7 +134,7 @@ class InitCreator
     print_data(inits, "GTK_DISABLE_DEPRECATED", "ifndef", true)
     print_data(inits, "GTK_ENABLE_BROKEN", "ifdef", true)
 
-    print "void Init_gtk_inits()\n"
+    print "void Init_gtk_inits(void)\n"
     print "{\n"
     print_data(inits, "", nil)
     print_data(inits, "GTK_DISABLE_DEPRECATED", "ifndef")

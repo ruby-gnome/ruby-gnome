@@ -1,3 +1,8 @@
+2011-02-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/extconf.rb (InitCreator#run): support 'void' as
+	argument declaration.
+
 2011-02-19  Masaaki Aoyagi
 
 	* ext/gtk2/rbgtkspinner.c: add.
