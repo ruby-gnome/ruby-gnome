@@ -12,6 +12,7 @@
 require 'glib2'
 require 'atk'
 require 'pango'
+require 'gdk_pixbuf2'
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
@@ -23,8 +24,6 @@ begin
 rescue LoadError
   require "gtk2.so"
 end
-
-require 'gdk_pixbuf2'
 
 module Gdk
   LOG_DOMAIN = "Gdk"

@@ -1,3 +1,8 @@
+2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/gtk2/base.rb: require 'gdk_pixbuf2' before require 'gtk2'.
+	Patch by id:kenhys. Thanks!!!
+
 2011-02-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/extconf.rb (InitCreator#run): support 'void' as
