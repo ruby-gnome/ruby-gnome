@@ -70,7 +70,7 @@ A package fix release of 0.90.6.
 ==== Ruby/GLib2
 
   * Improvements
-    * force remove "-Wl,--noundefined" linker option because
+    * force remove "-Wl,--no-undefined" linker option because
       Ruby-GNOME2 packages doesn't support the option.
       [Dobai-Pataky Bálint, Kouhei Sutou]
 
