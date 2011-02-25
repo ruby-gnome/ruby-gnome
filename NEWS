@@ -16,6 +16,12 @@ WRITE ME.
     * fix non-gem rcairo detection. #3178228
       [OBATA Akio, Kouhei Sutou]
 
+==== Ruby/GTK2
+
+  * Fixes
+    * fix require order.
+      [id:kenhys]
+
 ==== Ruby/GooCanvas
 
   * Fixes
@@ -48,6 +54,7 @@ WRITE ME.
 
   * OBATA Akio
   * Vincent Carmona
+  * id:kenhys
   * ...
 
 == Ruby-GNOME2 0.90.7: 2011-02-02

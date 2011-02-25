@@ -1,3 +1,8 @@
+2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: fix require order.
+	Patch by id:kenhys. Thanks!!!
+
 2011-02-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GStreamer: improve missing mesage.
