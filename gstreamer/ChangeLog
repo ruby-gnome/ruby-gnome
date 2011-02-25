@@ -1,3 +1,8 @@
+2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gstreamer/rbgstquerytype.c (rb_gst_querytype_is_equal):
+	suppress warnings.
+
 2011-02-17  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gstreamer/rbgst-message.c: use coreresponding message class.

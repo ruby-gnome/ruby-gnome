@@ -127,7 +127,7 @@ static VALUE
 rb_gst_querytype_is_equal (VALUE self, VALUE other_query)
 {
 	GstQueryType *q1, *q2;
-	gchar *n1, *n2;
+	const gchar *n1, *n2;
 
 	if (NIL_P (other_query))
 		return Qfalse;
