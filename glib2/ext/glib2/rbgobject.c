@@ -63,6 +63,7 @@ rbgobj_initialize_object(VALUE obj, gpointer cobj)
         break;
     default:
         rbgobj_convert_initialize(type, obj, cobj);
+        break;
     }
 }
 
