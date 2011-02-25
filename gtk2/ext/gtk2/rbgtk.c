@@ -26,9 +26,13 @@ static ID id__windows__;
 static void
 remove_from_windows(GtkWidget *window, VALUE obj)
 {
-    VALUE klass;
+    VALUE klass, windows;
+
     klass = rb_obj_class(obj);
-    rb_hash_delete(rb_ivar_get(klass, id__windows__), obj);
+    windows = rb_ivar_get(klass, id__windows__);
+    if (!NIL_P(windows)) {
+        rb_hash_delete(windows, obj);
+    }
 }
 
 void
