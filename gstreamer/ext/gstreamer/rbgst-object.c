@@ -21,7 +21,6 @@
  */
 
 #include "rbgst.h"
-#include "rbgprivate.h"
 
 #define SELF(self) (RVAL2GST_OBJ(self))
 

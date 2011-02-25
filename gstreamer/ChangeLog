@@ -1,5 +1,8 @@
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gstreamer/rbgst-object.c: don't use rbgprivate.h. [#3188442]
+	Reported by Mamoru Tasaka. Thanks!!!
+
 	* test/run-test.rb: fix load-path.
 
 	* ext/gstreamer/rbgstformat.c (rb_gst_format_is_equal): suppress
