@@ -43,7 +43,6 @@ extern void rbgobj_define_action_methods(VALUE klass);
 
 extern void rbgobj_param_spec_initialize(VALUE self, GParamSpec* pspec);
 extern void rbgobj_boxed_initialize(VALUE obj, gpointer boxed);
-extern void rbgobj_gobject_initialize(VALUE obj, gpointer cobj);
 
 extern GParamSpec* rbgobj_get_param_spec(VALUE obj);
 extern GObject* rbgobj_get_gobject(VALUE obj);

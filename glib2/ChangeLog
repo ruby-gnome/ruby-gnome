@@ -1,5 +1,8 @@
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbgobject.h, ext/glib2/rbgprivate.h
+	(rbgobj_gobject_initialize): export.
+
 	* ext/glib2/rbgobject.c (rbgobj_initialize_object): add missing break.
 
 2011-02-13  Kouhei Sutou  <kou@cozmixng.org>
