@@ -127,7 +127,7 @@ static VALUE
 rb_gst_format_is_equal (VALUE self, VALUE other_format)
 {
 	GstFormat *f1, *f2;
-	gchar *n1, *n2;
+	const gchar *n1, *n2;
 
 	if (NIL_P (other_format))
 		return Qfalse;
