@@ -15,8 +15,8 @@ require 'glib-test-init'
 $LOAD_PATH.unshift(File.join(glib_dir, "ext", "glib2"))
 $LOAD_PATH.unshift(File.join(glib_dir, "lib"))
 
-$LOAD_PATH.unshift(File.join(base_dir, "src"))
-$LOAD_PATH.unshift(File.join(base_dir, "src", "lib"))
+$LOAD_PATH.unshift(File.join(base_dir, "ext", "gstreamer"))
+$LOAD_PATH.unshift(File.join(base_dir, "lib"))
 require "gst"
 
 $LOAD_PATH.unshift(File.join(base_dir, "test"))

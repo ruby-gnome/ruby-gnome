@@ -1,5 +1,7 @@
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/run-test.rb: fix load-path.
+
 	* ext/gstreamer/rbgstformat.c (rb_gst_format_is_equal): suppress
 	warnings.
 
