@@ -1,5 +1,8 @@
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GTK2: [#3046538] fix crash by GC at exit.
+	Reported by Vincent Carmona. Thanks!!!
+
 	* NEWS: Ruby/GTK2: fix require order.
 	Patch by id:kenhys. Thanks!!!
 

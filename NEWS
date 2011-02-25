@@ -21,6 +21,8 @@ WRITE ME.
   * Fixes
     * fix require order.
       [id:kenhys]
+    * [#3046538] fix crash by GC at exit.
+      [Vincent Carmona, Kouhei Sutou]
 
 ==== Ruby/GooCanvas
 
