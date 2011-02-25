@@ -13,7 +13,7 @@ WRITE ME.
 ==== Ruby/GLib2
 
   * Fixes
-    * fix non-gem rcairo detection. #3178228
+    * fix non-gem rcairo detection. [#3178228]
       [OBATA Akio, Kouhei Sutou]
 
 ==== Ruby/GTK2
@@ -27,7 +27,7 @@ WRITE ME.
 ==== Ruby/GooCanvas
 
   * Fixes
-    * fix pc install. #3178294
+    * fix pc install. [#3178294]
       [OBATA Akio, Kouhei Sutou]
 
 ==== Ruby/GStreamer
@@ -37,19 +37,21 @@ WRITE ME.
       [Vincent Carmona]
 
   * Fixes
-    * fix pc install. #3178294
+    * fix pc install. [#3178294]
       [OBATA Akio, Kouhei Sutou]
+    * don't use rbgprivate.h. [#3188442]
+      [Mamoru Tasaka, Kouhei Sutou]
 
 ==== Ruby/GtkMozEmbed
 
   * Fixes
-    * fix pc install. #3178294
+    * fix pc install. [#3178294]
       [OBATA Akio, Kouhei Sutou]
 
 ==== Ruby/GtkSourceView2
 
   * Fixes
-    * fix pc install. #3178294
+    * fix pc install. [#3178294]
       [OBATA Akio, Kouhei Sutou]
 
 === Thanks
@@ -57,6 +59,7 @@ WRITE ME.
   * OBATA Akio
   * Vincent Carmona
   * id:kenhys
+  * Mamoru Tasaka
   * ...
 
 == Ruby-GNOME2 0.90.7: 2011-02-02

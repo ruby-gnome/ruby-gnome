@@ -1,5 +1,8 @@
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GStreamer: [#3188442] don't use rbgprivate.h.
+	Reported by Mamoru Tasaka. Thanks!!!
+
 	* NEWS: Ruby/GTK2: [#3046538] fix crash by GC at exit.
 	Reported by Vincent Carmona. Thanks!!!
 
