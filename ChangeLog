@@ -1,3 +1,11 @@
+2011-02-26  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/Pango: fix 'make distclean' cleans needed a file.
+	Patch by Vincent Carmona. Thanks!!!
+
+	* NEWS: Ruby/ATK: fix 'make distclean' cleans needed a file.
+	Patch by Vincent Carmona. Thanks!!!
+
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GStreamer: [#3188442] don't use rbgprivate.h.

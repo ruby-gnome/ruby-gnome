@@ -16,6 +16,18 @@ WRITE ME.
     * fix non-gem rcairo detection. [#3178228]
       [OBATA Akio, Kouhei Sutou]
 
+==== Ruby/Atk
+
+  * Fixes
+    * fix 'make distclean' cleans needed a file.
+      [Vincent Carmona]
+
+==== Ruby/Pango
+
+  * Fixes
+    * fix 'make distclean' cleans needed a file.
+      [Vincent Carmona]
+
 ==== Ruby/GTK2
 
   * Fixes
