@@ -65,8 +65,6 @@ have_func("pango_attr_iterator_get_attrs", pango_header)
 have_func("pango_itemize_with_base_dir", pango_header)
 have_func("pango_font_family_is_monospace", pango_header)
 
-add_distcleanfile("rbpangoinits.c")
-
 make_version_header("PANGO", "pango", ".")
 
 create_pkg_config_file("Ruby/Pango", package_id)
