@@ -51,8 +51,6 @@ have_func('atk_text_clip_type_get_type', atk_header)
 
 have_func('atk_text_free_ranges', atk_header)
 
-add_distcleanfile("rbatkinits.c")
-
 make_version_header("ATK", package_id, ".")
 
 create_pkg_config_file("Ruby/ATK", package_id)
