@@ -1,3 +1,9 @@
+2011-02-28  Vincent Carmona
+
+	* sample/gtk-demo/main.rb: Add gtk-demo directory to $: to fix
+	bugs with ruby1.9.
+	* sample/gtk-demo/textview.rb: add coding header.
+
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/rbgtk.c (remove_from_windows): add nil check for GC

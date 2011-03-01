@@ -35,6 +35,8 @@ WRITE ME.
       [id:kenhys]
     * [#3046538] fix crash by GC at exit.
       [Vincent Carmona, Kouhei Sutou]
+    * gtk-demo samples with ruby 1.9 (excepted cairo ones).
+      [Vincent Carmona]
 
 ==== Ruby/GooCanvas
 

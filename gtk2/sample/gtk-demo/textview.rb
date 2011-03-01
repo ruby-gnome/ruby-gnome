@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #

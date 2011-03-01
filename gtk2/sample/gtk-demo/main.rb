@@ -10,6 +10,8 @@
 
 require 'gtk2'
 
+$:.unshift(File.dirname(__FILE__))
+
 module Demo
 
   class Main < Gtk::Window
