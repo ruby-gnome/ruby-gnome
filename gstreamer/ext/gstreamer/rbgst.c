@@ -80,6 +80,10 @@ Init_gst_classes (void)
     extern void Init_gst_mediatype (void);
 #endif
 
+#ifdef HAVE_GST_PBUTILS
+    extern void Init_gst_install_plugins (void);
+#endif
+
     Init_gst_bin ();
     Init_gst_bus();
     Init_gst_caps ();
@@ -125,6 +129,10 @@ Init_gst_classes (void)
 
 #ifdef HAVE_MEDIA_INFO
     Init_gst_mediatype ();
+#endif
+
+#ifdef HAVE_GST_PBUTILS
+    Init_gst_install_plugins ();
 #endif
 }
 

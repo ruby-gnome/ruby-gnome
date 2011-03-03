@@ -49,6 +49,8 @@ WRITE ME.
   * Improvements
     * improve missing message.
       [Vincent Carmona]
+    * add Gst::InstallPlugins.
+      [Vincent Carmona, Kouhei Sutou]
 
   * Fixes
     * fix pc install. [#3178294]

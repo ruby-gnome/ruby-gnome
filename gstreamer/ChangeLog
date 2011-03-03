@@ -1,3 +1,9 @@
+2011-03-03  Vincent Carmona
+
+	* ext/gstreamer/rbgst-install-plugins.c: new file.
+	* ext/gstreamer/rbgst.c: Init install plugins.
+	* test/test_install-plugins.rb: new file.
+
 2011-02-25  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gstreamer/rbgst-object.c: don't use rbgprivate.h. [#3188442]

@@ -1,3 +1,7 @@
+2011-03-03  Vincent Carmona
+
+	* NEWS: Ruby/GStreamer: support install plugins.
+
 2011-02-28  Vincent Carmona
 
 	* NEWS: Ruby/GTK2: gtk-demo samples work with ruby 1.9.
