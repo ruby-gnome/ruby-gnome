@@ -2,6 +2,8 @@
 
 	* NEWS: Ruby/GStreamer: support install plugins.
 
+	* NEWS: fix 'make distclean' does not removed pkg-config files.
+
 2011-02-28  Vincent Carmona
 
 	* NEWS: Ruby/GTK2: gtk-demo samples work with ruby 1.9.

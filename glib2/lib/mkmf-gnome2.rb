@@ -143,6 +143,8 @@ def create_pkg_config_file(package_name, c_package,
     pc_file.puts("Description: Ruby bindings for #{description}") if description
     pc_file.printf("Version: #{version}")
   end
+
+  add_distcleanfile(pc_file_name)
 end
 
 def ruby_gnome2_version(glib_source_directory=nil)

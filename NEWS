@@ -10,6 +10,10 @@ WRITE ME.
 
 === Changes
 
+==== All
+  * Fixes
+    * 'make distclean' does not removed pkg-config files.
+
 ==== Ruby/GLib2
 
   * Fixes
