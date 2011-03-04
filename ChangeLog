@@ -1,3 +1,8 @@
+2011-03-04  Kouhei Sutou  <kou@clear-code.com>
+
+	* NEWS: Ruby/VTE: fix pc install. #3199587
+	Reported by OBATA Akio. Thanks!!!
+
 2011-03-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: add 0.90.9 entry.
