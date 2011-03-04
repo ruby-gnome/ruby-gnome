@@ -1,3 +1,9 @@
+2011-03-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbglib_win32.c
+	(rbglib_m_win32_locale_filename_from_utf8_deprecated): add missing
+	argument.
+
 2011-03-03  Vincent Carmona
 
 	* glib2/lib/mkmf-gnome2.rb: clean pkg-config files.

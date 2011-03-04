@@ -65,10 +65,11 @@ rbglib_m_win32_locale_filename_from_utf8(VALUE self, VALUE utf8_filename)
 }
 
 static VALUE
-rbglib_m_win32_locale_filename_from_utf8_deprecated(VALUE self)
+rbglib_m_win32_locale_filename_from_utf8_deprecated(VALUE self,
+                                                    VALUE utf8_filename)
 {
 	rb_warn("GLib.win32_locale_filename_from_utf8() is deprecated. Use GLib::Win32.locale_filename_from_utf8 instead");
-	return rbglib_m_win32_locale_filename_from_utf8(self);
+	return rbglib_m_win32_locale_filename_from_utf8(self, utf8_filename);
 }
 
 #endif
