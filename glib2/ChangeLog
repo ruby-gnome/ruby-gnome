@@ -1,5 +1,7 @@
 2011-03-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.h: 0.90.7 -> 0.90.8.
+
 	* ext/glib2/rbglib_win32.c
 	(rbglib_m_win32_locale_filename_from_utf8_deprecated): add missing
 	argument.
