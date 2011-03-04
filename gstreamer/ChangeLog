@@ -1,3 +1,8 @@
+2011-03-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gstreamer/rbgst-install-plugins.c (return_table): remove
+	unused variable.
+
 2011-03-03  Vincent Carmona
 
 	* ext/gstreamer/rbgst-install-plugins.c: new file.

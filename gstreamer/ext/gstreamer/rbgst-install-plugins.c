@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- * Copyright (C) 2010 Ruby-GNOME2 Project Team
+ * Copyright (C) 2011 Ruby-GNOME2 Project Team
  *
  * This file is part of Ruby/GStreamer.
  *
@@ -25,7 +25,6 @@
 #include <gst/pbutils/pbutils-enumtypes.h>
 #include <gst/pbutils/install-plugins.h>
 
-static RGConvertTable return_table = {0};
 static RGConvertTable context_table = {0};
 static VALUE mGstInstallPlugins;
 static VALUE rb_cGstInstallPluginsReturn;
@@ -184,7 +183,7 @@ Init_gst_install_plugins(void)
     RG_DEF_CONVERSION(&context_table);
     rb_cGstInstallPluginsContext = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_CONTEXT,
                                                "InstallPluginsContext", mGst);
-    rb_define_method(rb_cGstInstallPluginsContext, "initialize", 
+    rb_define_method(rb_cGstInstallPluginsContext, "initialize",
                      context_initialize, 0);
     rb_define_method(rb_cGstInstallPluginsContext, "set_xid",
                      context_set_xid, 1);
