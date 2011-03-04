@@ -3,6 +3,7 @@
 	* ext/gstreamer/rbgst-install-plugins.c: remove unused variable.
 	* ext/gstreamer/rbgst-message.c: change Gst::MissingMessage superclass
 	GstMessage -> GstMessageElement.
+	* sample/install-plugins.rb: added.
 
 2011-03-04  Kouhei Sutou  <kou@cozmixng.org>
 
