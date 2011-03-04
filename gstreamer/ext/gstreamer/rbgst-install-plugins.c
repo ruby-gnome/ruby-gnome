@@ -165,7 +165,6 @@ void
 Init_gst_install_plugins(void)
 {
     mGstInstallPlugins = rb_define_module_under(mGst, "InstallPlugins");
-    rb_iv_set(mGstInstallPlugins, "async_blocks", rb_ary_new());
 
     rb_cGstInstallPluginsReturn = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_RETURN,
                                               "InstallPluginsReturn", mGst);
