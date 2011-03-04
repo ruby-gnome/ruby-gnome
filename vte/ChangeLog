@@ -1,3 +1,8 @@
+2011-03-04  Kouhei Sutou  <kou@clear-code.com>
+
+	* ext/vte/depend: fix .pc path. #3199587
+	Reported by OBATA Akio. Thanks!!!
+
 2011-01-22  Masaaki Aoyagi
 
 	* src/lib/: -> lib/.

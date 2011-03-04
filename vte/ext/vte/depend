@@ -1,5 +1,5 @@
 install:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
-	  $(INSTALL_DATA) ../ruby-vte.pc $(pkgconfigdir);	\
+	  $(INSTALL_DATA) ruby-vte.pc $(pkgconfigdir);		\
 	fi
