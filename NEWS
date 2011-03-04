@@ -2,6 +2,18 @@
 
 = NEWS
 
+== Ruby-GNOME2 0.90.9: 2011-XX-XX
+
+NOTE: 0.90.x releases are for 1.0.0 major release.
+
+=== Changes
+
+...
+
+=== Thanks
+
+  * ...
+
 == Ruby-GNOME2 0.90.8: 2011-03-04
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
@@ -81,7 +93,6 @@ A bug fix release of 0.90.7.
   * Vincent Carmona
   * id:kenhys
   * Mamoru Tasaka
-  * ...
 
 == Ruby-GNOME2 0.90.7: 2011-02-02
 

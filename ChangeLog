@@ -1,3 +1,7 @@
+2011-03-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: add 0.90.9 entry.
+
 2011-03-03  Vincent Carmona
 
 	* NEWS: Ruby/GStreamer: support install plugins.
