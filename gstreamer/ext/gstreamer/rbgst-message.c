@@ -745,7 +745,7 @@ Init_gst_message(void)
                      element_initialize, 2);
 #ifdef HAVE_GST_PBUTILS
     rb_cGstMissingMessage =
-        rb_define_class_under(mGst, "MissingMessage", rb_cGstMessage);
+        rb_define_class_under(mGst, "MissingMessage", rb_cGstMessageElement);
     rb_define_method(rb_cGstMissingMessage, "installer_detail",
                      missing_message_get_installer_detail, 0);
     rb_define_method(rb_cGstMissingMessage, "description",
