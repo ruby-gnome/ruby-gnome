@@ -1,3 +1,8 @@
+2011-03-06  Vincent Carmona
+
+	* sample/misc/bindings.rb: use String#each_line instead of String#each
+	to fix bugs with ruby1.9.
+
 2011-02-28  Vincent Carmona
 
 	* sample/gtk-demo/main.rb: Add gtk-demo directory to $: to fix

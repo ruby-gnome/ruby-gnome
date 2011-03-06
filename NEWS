@@ -10,6 +10,12 @@ WRITE ME
 
 === Changes
 
+==== Ruby/GTK2
+
+  * Fixes
+    * fix misc/bindings.rb sample (ruby 1.9).
+      [Vincent Carmona]
+
 ==== Ruby/VTE
 
   * Fixes

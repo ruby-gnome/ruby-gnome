@@ -48,7 +48,7 @@ class Pager < Gtk::TextView
   end
 
   def load
-    open(@path).read.each do |line|
+    open(@path).read.each_line do |line|
       @buffer.insert_at_cursor(line)
     end
     @buffer.place_cursor(@buffer.start_iter)
