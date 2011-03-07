@@ -16,6 +16,12 @@ WRITE ME
     * fix misc/bindings.rb sample (ruby 1.9).
       [Vincent Carmona]
 
+==== Ruby/GStreamer
+
+  * Improvements
+    * add Gst::Registry.update method.
+      [Vincent Carmona]
+
 ==== Ruby/VTE
 
   * Fixes

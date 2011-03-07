@@ -30,6 +30,12 @@ rb_gst_registry_get_default(VALUE self)
     return RGST_REGISTRY_NEW(gst_registry_get_default());
 }
 
+static VALUE
+rb_gst_update_registry(VALUE self)
+{
+    return CBOOL2RVAL(gst_update_registry());
+}
+
 /*
  * Method: plugins
  *
@@ -263,6 +269,7 @@ Init_gst_registry (void)
 	VALUE c = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
 
 	rb_define_singleton_method(c, "default", rb_gst_registry_get_default, 0);
+	rb_define_singleton_method(c, "update", rb_gst_update_registry, 0);
 	
 	rb_define_method(c, "plugins", rb_gst_registry_get_plugins, 0);
 	rb_define_method(c, "each_plugin", rb_gst_registry_each_plugin, 0);

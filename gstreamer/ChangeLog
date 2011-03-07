@@ -1,3 +1,7 @@
+2011-03-07  Vincent Carmona
+
+	* ext/gstreamer/rbgstregistry.c: add update class method.
+
 2011-03-04  Vincent Carmona
 
 	* ext/gstreamer/rbgst-install-plugins.c: remove unused variable.
