@@ -1,3 +1,8 @@
+2011-03-03  Vincent Carmona
+
+	*  NEWS: All: Fix a bug in version numbers.
+	[ruby-gnome2-devel-en] reported by Grant Schoep. Thanks!!!
+
 2011-03-07  Vincent Carmona
 
 	* NEWS: Ruby/GStreamer: add Gst::Registry.update method.

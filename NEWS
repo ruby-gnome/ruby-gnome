@@ -10,6 +10,12 @@ WRITE ME
 
 === Changes
 
+==== All
+
+  * Fixes
+    * Fix a bug in version numbers.
+      [Grant Schoep, Vincent Carmona]
+
 ==== Ruby/GTK2
 
   * Fixes
@@ -31,6 +37,7 @@ WRITE ME
 === Thanks
 
   * OBATA Akio
+  * Grant Schoep
   * ...
 
 == Ruby-GNOME2 0.90.8: 2011-03-04

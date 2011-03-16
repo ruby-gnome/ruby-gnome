@@ -258,7 +258,6 @@ end
 # This is used for the library which doesn't support version info.
 def make_version_header(app_name, pkgname, dir = "src")
   version = PKGConfig.modversion(pkgname).split(/\./)
-  version = "2.0b7".split(/\./)
   (0..2).each do |v|
     version[v] = "0" unless version[v]
     if /\A(\d+)/ =~ version[v]
