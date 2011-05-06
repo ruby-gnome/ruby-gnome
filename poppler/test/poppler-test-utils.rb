@@ -44,4 +44,11 @@ module PopplerTestUtils
       omit("Require Poppler >= #{major}.#{minor}.#{micro}")
     end
   end
+
+  def only_old_poppler_version(major, minor, micro=nil)
+    micro ||= 0
+    if later_version?(major, minor, micro)
+      omit("Require Poppler < #{major}.#{minor}.#{micro}")
+    end
+  end
 end

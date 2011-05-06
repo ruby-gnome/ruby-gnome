@@ -11,6 +11,8 @@ class TestPage < Test::Unit::TestCase
   end
 
   def test_render_to_pixbuf
+    only_old_poppler_version(0, 17, 0)
+
     document = Poppler::Document.new(image_pdf)
     page = document[0]
     width, height = page.size
@@ -24,6 +26,7 @@ class TestPage < Test::Unit::TestCase
 
   def test_render_to_pixbuf_for_printing
     only_poppler_version(0, 7, 2)
+    only_old_poppler_version(0, 17, 0)
 
     document = Poppler::Document.new(image_pdf)
     page = document[0]

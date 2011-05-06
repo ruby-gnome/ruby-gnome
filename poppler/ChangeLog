@@ -1,3 +1,10 @@
+2011-05-06  Kouhei Sutou  <kou@cozmixng.org>
+
+	* test/poppler-test-utils.rb: ignore tests for GdkPixbuf
+	integration on Poppler >= 0.17.0 because Poppler >= 0.17.0 drops
+	GdkPixbuf support. #3292118
+	Reported by Mamoru Tasaka. Thanks!!!
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile, ext/poppler/extconf.rb: share depended packages
