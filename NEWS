@@ -34,10 +34,17 @@ WRITE ME
     * [#3199587] fix pc install.
       [OBATA Akio, Kouhei Sutou]
 
+==== Ruby/Poppler
+
+  * Fixes
+    * [#3292118] don't run needless tests.
+      [Mamoru Tasaka, Kouhei Sutou]
+
 === Thanks
 
   * OBATA Akio
   * Grant Schoep
+  * Mamoru Tasaka
   * ...
 
 == Ruby-GNOME2 0.90.8: 2011-03-04
