@@ -6,7 +6,7 @@
   $Author: ktou $
   $Date: 2007/09/08 12:49:10 $
 
-  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (C) 2002-2011 Ruby-GNOME2 Project Team
   Copyright (C) 1998-2000 Yukihiro Matsumoto,
                           Daisuke Kanda,
                           Hiroshi Igarashi
@@ -55,6 +55,7 @@ gwin_add_accel_group(VALUE self, VALUE accel)
 {
     gtk_window_add_accel_group(_SELF(self),
                                GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
+    G_CHILD_ADD(self, accel);
     return self;
 }
 
@@ -63,6 +64,7 @@ gwin_remove_accel_group(VALUE self, VALUE accel)
 {
     gtk_window_remove_accel_group(_SELF(self),
                                   GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
+    G_CHILD_REMOVE(self, accel);
     return self;
 }
 

@@ -1,3 +1,10 @@
+2011-05-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/rbgtkwindow.c (gwin_add_accel_group)
+	(gwin_remove_accel_group): add missing reference to accel group.
+	[#3305589]
+	Reported by Piotr Korzuszek. Thanks!!!
+
 2011-03-06  Vincent Carmona
 
 	* sample/misc/bindings.rb: use String#each_line instead of String#each
