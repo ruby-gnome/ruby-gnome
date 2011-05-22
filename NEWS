@@ -21,6 +21,9 @@ WRITE ME
   * Fixes
     * fix misc/bindings.rb sample (ruby 1.9).
       [Vincent Carmona]
+    * [#3305589] fix Gtk::Window#add_accel_group misses
+      a reference to accel group.
+      [Piotr Korzuszek, Kouhei Sutou]
 
 ==== Ruby/GStreamer
 
@@ -45,6 +48,7 @@ WRITE ME
   * OBATA Akio
   * Grant Schoep
   * Mamoru Tasaka
+  * Piotr Korzuszek
   * ...
 
 == Ruby-GNOME2 0.90.8: 2011-03-04

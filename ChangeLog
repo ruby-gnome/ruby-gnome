@@ -1,3 +1,9 @@
+2011-05-22  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: [#3305589] fix Gtk::Window#add_accel_group misses
+	a reference to accel group.
+	Reported by Piotr Korzuszek. Thanks!!!
+
 2011-05-06  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/Popper: [#3292118] don't run needless tests.
