@@ -1,3 +1,8 @@
+2011-05-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GtkSourceView2: support Windows.
+	Reported by S.Kitagawa. Thanks!!
+
 2011-05-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: [#3305589] fix Gtk::Window#add_accel_group misses

@@ -43,12 +43,19 @@ WRITE ME
     * [#3292118] don't run needless tests.
       [Mamoru Tasaka, Kouhei Sutou]
 
+==== Ruby/GtkSourceView2
+
+  * Improvements
+    * support Windows.
+      [S.Kitagawa]
+
 === Thanks
 
   * OBATA Akio
   * Grant Schoep
   * Mamoru Tasaka
   * Piotr Korzuszek
+  * S.Kitagawa
   * ...
 
 == Ruby-GNOME2 0.90.8: 2011-03-04
