@@ -1,3 +1,8 @@
+2011-05-23  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/gtksourceview2.rb: supported Windows.
+	Reported by S.Kitagawa. Thanks!!!
+
 2011-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtksourceview2/depend: fix .pc path. #3178294
