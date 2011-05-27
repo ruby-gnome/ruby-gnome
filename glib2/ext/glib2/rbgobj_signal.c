@@ -24,7 +24,7 @@ VALUE rbgobj_signal_wrap(guint sig_id);
 static VALUE signal_func_table;
 
 void
-rbgobj_set_signal_func(VALUE klass, gchar *sig_name, GValToRValSignalFunc func)
+rbgobj_set_signal_func(VALUE klass, const gchar *sig_name, GValToRValSignalFunc func)
 {
     VALUE obj = Data_Wrap_Struct(rb_cData, NULL, NULL, func);
     guint signal_id = g_signal_lookup(sig_name, CLASS2GTYPE(klass));

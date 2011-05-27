@@ -175,7 +175,7 @@ extern GType rbgobj_gtype_get(VALUE obj);
 
 /* rbgobj_signal.c */
 typedef VALUE (*GValToRValSignalFunc)(guint num,const GValue* values);
-extern void rbgobj_set_signal_func(VALUE klass, gchar* sig_name, GValToRValSignalFunc func);
+extern void rbgobj_set_signal_func(VALUE klass, const gchar *sig_name, GValToRValSignalFunc func);
 extern GValToRValSignalFunc rbgobj_get_signal_func(guint signal_id);
 extern VALUE rbgobj_signal_wrap(guint sig_id);
 
