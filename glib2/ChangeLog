@@ -1,7 +1,7 @@
 2011-06-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib_iochannel.c: [backward incompatible]
-	GLib::IOChannel.write returns written byte not self.
+	GLib::IOChannel#write returns written byte not self.
 
 2011-06-03  Kouhei Sutou  <kou@cozmixng.org>
 
