@@ -20,6 +20,8 @@ WRITE ME
 
   * Improvements
     * Support GLib::IOChannel.new(fd) and GLib::IOChannel#fd on Windows.
+    * GLib::IOChannel#write returns written byte not self.
+      [backward incompatible]
 
 ==== Ruby/GTK2
 

@@ -1,6 +1,11 @@
+2011-06-04  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: GLib::IOChannel#write returns written byte not
+	self. [backward incompatible]
+
 2011-06-03  Kouhei Sutou  <kou@cozmixng.org>
 
-	* NEWS Ruby/GLib2: support GLib::IOChannel.new(fd) and
+	* NEWS: Ruby/GLib2: support GLib::IOChannel.new(fd) and
 	GLib::IOChannel#fd on Windows.
 
 2011-05-23  Kouhei Sutou  <kou@cozmixng.org>
