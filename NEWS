@@ -16,6 +16,11 @@ WRITE ME
     * Fix a bug in version numbers.
       [Grant Schoep, Vincent Carmona]
 
+==== Ruby/GLib2
+
+  * Improvements
+    * Support GLib::IOChannel.new(fd) and GLib::IOChannel#fd on Windows.
+
 ==== Ruby/GTK2
 
   * Fixes
