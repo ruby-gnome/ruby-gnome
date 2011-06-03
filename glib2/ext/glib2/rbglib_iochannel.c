@@ -413,7 +413,7 @@ ioc_write_chars(VALUE self, VALUE buf)
     status = g_io_channel_write_chars(_SELF(self), RVAL2CSTR(buf), count, &bytes_written, &err);
 
     ioc_error(status, err);
-    return self;
+    return UINT2NUM(bytes_written);
 }
 
 static ID id_unpack;
