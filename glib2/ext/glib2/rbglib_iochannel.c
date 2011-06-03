@@ -41,12 +41,16 @@ ioc_initialize(gint argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &arg1, &arg2);
 
     if (TYPE(arg1) != T_STRING){
-#ifdef G_OS_UNIX
+        gint fd;
         if (TYPE(arg1) == T_FIXNUM){
-            io = g_io_channel_unix_new(NUM2INT(arg1));
+            fd = NUM2INT(arg1);
         } else {
-            io = g_io_channel_unix_new(NUM2INT(rb_funcall(arg1, rb_intern("to_i"), 0)));
+            fd = NUM2INT(rb_funcall(arg1, rb_intern("to_i"), 0));
         }
+#ifdef G_OS_UNIX
+        io = g_io_channel_unix_new(fd);
+#elif defined(G_OS_WIN32)
+        io = g_io_channel_win32_new_fd(fd);
 #else
         rb_raise(rb_eRuntimeError, "GLib::IOChannel.new(fd) is supported on UNIX environment only");
 #endif
@@ -86,7 +90,9 @@ ioc_s_open(gint argc, VALUE *argv, VALUE self)
 #ifdef G_OS_UNIX
         io = g_io_channel_unix_new(NUM2INT(arg1));
 #else
-        rb_raise(rb_eRuntimeError, "GLib::IOChannel.new(fd) is supported on UNIX environment only");
+        rb_raise(rb_eRuntimeError,
+                 "GLib::IOChannel.new(fd) is supported on "
+                 "UNIX and Windows environment only");
 #endif
     } else {
         GError* err = NULL;
@@ -109,8 +115,11 @@ ioc_get_fd(VALUE self)
 {
 #ifdef G_OS_UNIX
     return INT2NUM(g_io_channel_unix_get_fd(_SELF(self)));
+#elif defined(G_OS_WIN32)
+    return INT2NUM(g_io_channel_win32_get_fd(_SELF(self)));
 #else
-    rb_warn("GLib::IOChannel#fd is supported on UNIX environment only.");
+    rb_warn("GLib::IOChannel#fd is supported on "
+            "UNIX and Windows environment only.");
     return Qnil;
 #endif
 }
