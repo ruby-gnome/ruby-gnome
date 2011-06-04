@@ -1,5 +1,8 @@
 2011-06-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (add_depend_package): support gem installed
+	depend package.
+
 	* ext/glib2/rbglib_iochannel.c: [backward incompatible]
 	GLib::IOChannel#write returns written byte not self.
 

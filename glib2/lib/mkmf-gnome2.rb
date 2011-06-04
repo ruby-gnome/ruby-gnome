@@ -77,12 +77,22 @@ end
 
 #add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
+  begin
+    require 'rubygems'
+    gem_spec = Gem.source_index.find_name(target_name).last
+    if gem_spec
+      target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
+      target_build_dir = target_source_dir
+      add_depend_package_path(target_name,
+                              target_source_dir,
+                              target_build_dir)
+    end
+  rescue LoadError
+  end
+
   [top_srcdir, $configure_args['--topdir']].each do |topdir|
     topdir = File.expand_path(topdir)
     target_source_dir_full_path = File.join(topdir, target_srcdir)
-    if File.exist?(target_source_dir_full_path)
-      $INCFLAGS = "-I#{target_source_dir_full_path} #{$INCFLAGS}"
-    end
 
     top_build_dir = options[:top_build_dir] || topdir
     target_build_dir = options[:target_build_dir] || target_srcdir
@@ -96,26 +106,38 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     unless File.exist?(target_build_dir_full_path)
       target_build_dir_full_path = File.join(topdir, target_srcdir)
     end
-    next unless File.exist?(target_build_dir_full_path)
-    $INCFLAGS = "-I#{target_build_dir_full_path} #{$INCFLAGS}"
+    add_depend_package_path(target_name,
+                            target_source_dir_full_path,
+                            target_build_dir_full_path)
+  end
+end
 
+def add_depend_package_path(target_name, target_source_dir, target_build_dir)
+  if File.exist?(target_source_dir)
+    $INCFLAGS = "-I#{target_source_dir} #{$INCFLAGS}"
+  end
+
+  return unless File.exist?(target_build_dir)
+  if target_source_dir != target_build_dir
+    $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
+  end
+
+  case RUBY_PLATFORM
+  when /cygwin|mingw|mswin32/
     case RUBY_PLATFORM
-    when /cygwin|mingw|mswin32/
-      case RUBY_PLATFORM
-      when /cygwin|mingw/
-        $LDFLAGS << " -L#{target_build_dir_full_path}"
-        $libs << " -lruby-#{target_name}"
-      when /mswin32/
-        $DLDFLAGS << " /libpath:#{target_build_dir_full_path}"
-        $libs << " libruby-#{target_name}.lib"
-      end
-      target_base_dir = Pathname.new(target_source_dir_full_path).parent.parent
-      target_binary_base_dir = target_base_dir + "vendor" + "local"
-      if target_binary_base_dir.exist?
-        $INCFLAGS = "-I#{target_binary_base_dir}/include #{$INCFLAGS}"
-        target_pkg_config_dir = target_binary_base_dir + "lib" + "pkgconfig"
-        PKGConfig.add_path(target_pkg_config_dir.to_s)
-      end
+    when /cygwin|mingw/
+      $LDFLAGS << " -L#{target_build_dir}"
+      $libs << " -lruby-#{target_name}"
+    when /mswin32/
+      $DLDFLAGS << " /libpath:#{target_build_dir}"
+      $libs << " libruby-#{target_name}.lib"
+    end
+    target_base_dir = Pathname.new(target_source_dir).parent.parent
+    target_binary_base_dir = target_base_dir + "vendor" + "local"
+    if target_binary_base_dir.exist?
+      $INCFLAGS = "-I#{target_binary_base_dir}/include #{$INCFLAGS}"
+      target_pkg_config_dir = target_binary_base_dir + "lib" + "pkgconfig"
+      PKGConfig.add_path(target_pkg_config_dir.to_s)
     end
   end
 end
