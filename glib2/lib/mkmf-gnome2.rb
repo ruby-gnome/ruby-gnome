@@ -90,7 +90,10 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   rescue LoadError
   end
 
-  [top_srcdir, $configure_args['--topdir']].each do |topdir|
+  [top_srcdir,
+   File.join(top_srcdir, target_name),
+   $configure_args['--topdir'],
+   File.join($configure_args['--topdir'], target_name)].each do |topdir|
     topdir = File.expand_path(topdir)
     target_source_dir_full_path = File.join(topdir, target_srcdir)
 

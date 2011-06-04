@@ -1,5 +1,20 @@
 2011-06-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/mkmf-gnome2.rb (add_depend_package): don't require parent
+	directory for target_srcdir. target_srcdir can be relative path
+	from target package root directory.
+
+	e.g.:
+	  add_depend_package("glib2", "ext/glib2",
+	                     "/path/to/ruby-gnome2-root-dir"))
+          before: NG
+          after: OK
+
+	  add_depend_package("glib2", "glib2/ext/glib2",
+	                     "/path/to/ruby-gnome2-root-dir"))
+          before: OK
+          after: OK
+
 	* lib/mkmf-gnome2.rb (add_depend_package): support gem installed
 	depend package.
 
