@@ -15,6 +15,7 @@ WRITE ME
   * Fixes
     * Fix a bug in version numbers.
       [Grant Schoep, Vincent Carmona]
+    * Support 'bundle install' .
 
 ==== Ruby/GLib2
 

@@ -1,5 +1,7 @@
 2011-06-04  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: All: support 'bundle install'.
+
 	* NEWS: Ruby/GLib2: GLib::IOChannel#write returns written byte not
 	self. [backward incompatible]
 
