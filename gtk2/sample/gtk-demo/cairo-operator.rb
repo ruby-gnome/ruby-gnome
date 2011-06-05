@@ -68,7 +68,7 @@ module Demo
         operators << name if /^OPERATOR_/ =~ name
       end
       operators.sort.each_with_index do |name, i|
-        combo.append_text(name)
+        combo.append_text(name.to_s)
         combo.set_active(i) if Cairo.const_get(name) == @operator
       end
 

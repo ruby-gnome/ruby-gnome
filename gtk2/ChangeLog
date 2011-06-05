@@ -1,7 +1,12 @@
 2011-06-05  Kouhei Sutou  <kou@cozmixng.org>
 
+	* sample/gtk-demo/cairo-operator.rb
+	(Demo::CairoOperator#operator_selector): support Ruby 1.9.
+	Reported by Jon. Thanks!!!
+
 	* sample/misc/cairo-pong.rb: use Gdk.cairo_available? to check
 	cairo support availability.
+	Reported by Jon. Thanks!!!
 
 2011-05-22  Kouhei Sutou  <kou@cozmixng.org>
 
