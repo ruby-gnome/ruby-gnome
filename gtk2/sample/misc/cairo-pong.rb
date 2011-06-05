@@ -12,7 +12,7 @@
 
 require "gtk2"
 
-unless Gdk::Drawable.instance_methods.include?("create_cairo_context")
+unless Gdk.cairo_available?
   raise "GTK+ 2.8.0 or later and cairo support are required."
 end
 

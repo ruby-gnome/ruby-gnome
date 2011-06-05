@@ -1,3 +1,8 @@
+2011-06-05  Kouhei Sutou  <kou@cozmixng.org>
+
+	* sample/misc/cairo-pong.rb: use Gdk.cairo_available? to check
+	cairo support availability.
+
 2011-05-22  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/gtk2/rbgtkwindow.c (gwin_add_accel_group)
