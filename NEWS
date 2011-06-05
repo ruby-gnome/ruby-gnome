@@ -32,6 +32,9 @@ WRITE ME
     * [#3305589] fix Gtk::Window#add_accel_group misses
       a reference to accel group.
       [Piotr Korzuszek, Kouhei Sutou]
+    * Support cairo related samples in Ruby 1.9.
+      [Jon, Kouhei Sutou]
+
 
 ==== Ruby/GStreamer
 
@@ -64,6 +67,7 @@ WRITE ME
   * Mamoru Tasaka
   * Piotr Korzuszek
   * S.Kitagawa
+  * Jon
   * ...
 
 == Ruby-GNOME2 0.90.8: 2011-03-04

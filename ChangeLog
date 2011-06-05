@@ -1,3 +1,8 @@
+2011-06-05  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: Support cairo related samples in Ruby 1.9.
+	Reported by Jon. Thanks!!!
+
 2011-06-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: All: support 'bundle install'.
