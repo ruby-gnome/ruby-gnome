@@ -92,7 +92,6 @@ class GNOME2Package
     end
 
     Gem::PackageTask.new(@spec) do |pkg|
-      pkg.need_tar = true
     end
   end
 
