@@ -22,7 +22,13 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "poppler"
 package_id = "poppler-glib"
 
-require 'mkmf-gnome2'
+begin
+  require 'mkmf-gnome2'
+rescue LoadError
+  require 'rubygems'
+  gem 'glib2'
+  require 'mkmf-gnome2'
+end
 
 ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"].each do |package|
   directory = "#{package}#{version_suffix}"

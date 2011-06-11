@@ -22,7 +22,13 @@ $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 module_name = "gst"
 package_id = "gstreamer-0.10"
 
-require 'mkmf-gnome2'
+begin
+  require 'mkmf-gnome2'
+rescue LoadError
+  require 'rubygems'
+  gem 'glib2'
+  require 'mkmf-gnome2'
+end
 
 setup_win32(module_name, base_dir)
 
