@@ -1,5 +1,9 @@
 2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib_error.c (rbgerr_gerror2exception): add missing
+	parentheses. [#3312572]
+	Patch by Evan Phoenix. Thanks!!!
+
 	* ext/glib2/rbglib.h: 0.90.9 -> 1.0.0.
 
 	* lib/gnome2-raketask.rb: suppress deprecation warnings.
