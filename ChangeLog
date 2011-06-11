@@ -1,5 +1,8 @@
 2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GLib2: [#3312572] added missing parentheses.
+	Patch by Evan Phoenix. Thanks!!!
+
 	* Rakefile: add pkg/ and vendor/ to needless path list.
 
 	* NEWS: fill 0.90.9 release note.

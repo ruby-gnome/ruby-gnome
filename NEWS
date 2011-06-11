@@ -2,6 +2,23 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.0.0: 2011-XX-XX
+
+This is the first major release!!!
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * [#3312572] added missing parentheses.
+      [Evan Phoenix]
+
+=== Thanks
+
+  * Evan Phoenix
+  * ...
+
 == Ruby-GNOME2 0.90.9: 2011-06-11
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
