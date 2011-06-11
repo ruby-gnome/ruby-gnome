@@ -1,5 +1,7 @@
 2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/gnome2-raketask.rb: suppress deprecation warnings.
+
 	* Rakefile, test/: use test-unit 2 gem. don't bundle it.
 
 2011-06-04  Kouhei Sutou  <kou@cozmixng.org>

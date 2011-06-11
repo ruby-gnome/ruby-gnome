@@ -10,6 +10,8 @@ require 'rubygems'
 require 'rake/extensiontask'
 
 class GNOME2Package
+  include Rake::DSL
+
   attr_accessor :name, :summary, :description, :author, :email, :homepage, :post_install_message
   def initialize
     initialize_variables
@@ -86,11 +88,11 @@ class GNOME2Package
           "ChangeLog", "README", "Rakefile", "extconf.rb",
           "lib/**/*.rb", "{ext,sample,test,test-unit}/**/*"]
       s.post_install_message  = @post_install_message
-      s.has_rdoc              = false
       @dependency_configuration.apply(s)
     end
 
-    Rake::GemPackageTask.new(@spec) do |pkg|
+    Gem::PackageTask.new(@spec) do |pkg|
+      pkg.need_tar = true
     end
   end
 
