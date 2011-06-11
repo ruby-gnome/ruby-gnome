@@ -1,5 +1,7 @@
 2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.h: 0.90.9 -> 1.0.0.
+
 	* lib/gnome2-raketask.rb: suppress deprecation warnings.
 
 	* Rakefile, test/: use test-unit 2 gem. don't bundle it.
