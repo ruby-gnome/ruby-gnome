@@ -1,5 +1,7 @@
 2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add pkg/ and vendor/ to needless path list.
+
 	* NEWS: fill 0.90.9 release note.
 
 2011-06-05  Kouhei Sutou  <kou@cozmixng.org>
