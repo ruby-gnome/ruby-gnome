@@ -1,3 +1,7 @@
+2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: fill 0.90.9 release note.
+
 2011-06-05  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: Support cairo related samples in Ruby 1.9.

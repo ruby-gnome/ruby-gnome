@@ -2,11 +2,12 @@
 
 = NEWS
 
-== Ruby-GNOME2 0.90.9: 2011-XX-XX
+== Ruby-GNOME2 0.90.9: 2011-06-11
 
 NOTE: 0.90.x releases are for 1.0.0 major release.
 
-WRITE ME
+This is the last release of 0.90.x series. The next release
+will be 1.0.0!
 
 === Changes
 
@@ -34,7 +35,6 @@ WRITE ME
       [Piotr Korzuszek, Kouhei Sutou]
     * Support cairo related samples in Ruby 1.9.
       [Jon, Kouhei Sutou]
-
 
 ==== Ruby/GStreamer
 
@@ -68,7 +68,6 @@ WRITE ME
   * Piotr Korzuszek
   * S.Kitagawa
   * Jon
-  * ...
 
 == Ruby-GNOME2 0.90.8: 2011-03-04
 
