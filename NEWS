@@ -8,6 +8,12 @@ This is the first major release!!!
 
 === Changes
 
+==== Document
+
+  * Fixes
+    * updated deprecated list in README.
+      [Michal Suchanek, Kouhei Sutou]
+
 ==== Ruby/GLib2
 
   * Fixes
@@ -17,6 +23,7 @@ This is the first major release!!!
 === Thanks
 
   * Evan Phoenix
+  * Michal Suchanek
   * ...
 
 == Ruby-GNOME2 0.90.9: 2011-06-11

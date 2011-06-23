@@ -1,5 +1,8 @@
 2011-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Document: updated deprecated list in README.
+	Reported by Michal Suchanek. Thanks!!!
+
 	* README: update deprecated package list.
 	Reported by Michal Suchanek. Thanks!!!
 
