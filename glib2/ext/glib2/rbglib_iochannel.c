@@ -646,6 +646,20 @@ GIOError    g_io_channel_seek               (GIOChannel *channel,
 void        g_io_channel_close              (GIOChannel *channel);
 */
 
+#ifdef G_OS_WIN32
+static VALUE
+ioc_win32_socket_initialize(VALUE self, VALUE socket)
+{
+    GIOChannel *io = NULL;
+
+    rb_secure(4);
+    io = g_io_channel_win32_new_socket(NUM2INT(arg1));
+    G_INITIALIZE(self, io);
+
+    return Qnil;
+}
+#endif
+
 static VALUE
 ioc_error_s_from_errno(VALUE self, VALUE errno_)
 {
@@ -800,6 +814,19 @@ Init_glib_io_channel()
     rb_define_method(io, "set_encoding", ioc_set_encoding, 1);
 
     G_DEF_SETTERS(io);
+
+#ifdef G_OS_WIN32
+    {
+        /* GIOWin32Channel */
+        VALUE io_channel_win32_socket;
+        io_channel_win32_socket =
+            rb_define_class_under(mGLib,
+                                  "IOChannelWin32Socket",
+                                  io);
+        rb_define_method(io_channel_win32_socket, "initialize",
+                         ioc_win32_socket_initialize, 1);
+    }
+#endif
 
     /* GSeekType */
     rb_define_const(io, "SEEK_CUR", INT2NUM(G_SEEK_CUR));

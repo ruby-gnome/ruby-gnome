@@ -1,3 +1,7 @@
+2011-06-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbglib_iochannel.c: bind g_io_channel_win32_new_socket().
+
 2011-06-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib_error.c (rbgerr_gerror2exception): add missing
