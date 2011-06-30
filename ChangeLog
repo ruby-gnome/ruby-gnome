@@ -1,3 +1,8 @@
+2011-06-30  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: bind g_io_channel_win32_new_socket() as
+	GLib::IOChannelWin32Socket.
+
 2011-06-23  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Document: updated deprecated list in README.

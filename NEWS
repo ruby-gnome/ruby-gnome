@@ -16,6 +16,10 @@ This is the first major release!!!
 
 ==== Ruby/GLib2
 
+  * Improvements
+    * bind g_io_channel_win32_new_socket() as GLib::IOChannelWin32Socket.
+      [Kouhei Sutou]
+
   * Fixes
     * [#3312572] added missing parentheses.
       [Evan Phoenix]
