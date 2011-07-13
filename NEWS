@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 1.0.0: 2011-XX-XX
+== Ruby-GNOME2 1.0.0: 2011-07-13
 
 This is the first major release!!!
 
@@ -28,7 +28,6 @@ This is the first major release!!!
 
   * Evan Phoenix
   * Michal Suchanek
-  * ...
 
 == Ruby-GNOME2 0.90.9: 2011-06-11
 
