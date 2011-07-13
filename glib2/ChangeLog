@@ -1,3 +1,8 @@
+2011-07-13  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbglib_iochannel.c (ioc_win32_socket_initialize): fix
+	variable name.
+
 2011-06-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib_iochannel.c: bind g_io_channel_win32_new_socket().

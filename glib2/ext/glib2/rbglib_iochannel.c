@@ -653,7 +653,8 @@ ioc_win32_socket_initialize(VALUE self, VALUE socket)
     GIOChannel *io = NULL;
 
     rb_secure(4);
-    io = g_io_channel_win32_new_socket(NUM2INT(arg1));
+    /* TODO: support IO object */
+    io = g_io_channel_win32_new_socket(NUM2INT(socket));
     G_INITIALIZE(self, io);
 
     return Qnil;
