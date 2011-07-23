@@ -32,7 +32,8 @@ extern void   Init_pangorenderer();
 extern void   Init_pango_script();
 extern void   Init_pango_script_iter();
 extern void   Init_pango_array();
-void Init_pango_inits()
+void
+Init_pango_inits()
 {
    Init_pango_analysis();
    Init_pango_attribute();
