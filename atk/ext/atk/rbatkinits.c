@@ -24,7 +24,8 @@ extern void   Init_atk_text_range();
 extern void   Init_atk_text_rectangle();
 extern void   Init_atk_util();
 extern void   Init_atk_value();
-void Init_atk_inits()
+void
+Init_atk_inits()
 {
    Init_atk_action();
    Init_atk_component();
