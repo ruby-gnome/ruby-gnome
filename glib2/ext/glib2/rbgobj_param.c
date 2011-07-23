@@ -376,7 +376,8 @@ Init_gobject_gparam_spec()
 
 /**********************************************************************/
 
-void Init_gobject_gparam()
+void
+Init_gobject_gparam()
 {
     Init_gobject_gparam_spec();
 }

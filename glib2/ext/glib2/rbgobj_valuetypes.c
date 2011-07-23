@@ -204,7 +204,8 @@ value_transform_any_ruby(const GValue *src_value,
     g_value_set_ruby_value(dest_value, GVAL2RVAL(src_value));
 }
 
-GType rbgobj_ruby_value_get_type()
+GType
+rbgobj_ruby_value_get_type()
 {
   static GType our_type = 0;
 

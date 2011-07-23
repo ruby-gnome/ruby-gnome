@@ -52,7 +52,8 @@ strv_from_ruby(VALUE from, GValue* to)
     g_value_set_boxed(to, gstrv);
 }
 
-void Init_gobject_gstrv()
+void
+Init_gobject_gstrv()
 {
     /* GStrv is treated as Array */
     rbgobj_register_g2r_func(G_TYPE_STRV, strv_to_ruby);

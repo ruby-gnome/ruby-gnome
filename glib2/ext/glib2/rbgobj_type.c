@@ -708,8 +708,8 @@ type_instance_size(VALUE self)
 }
 
 
-static inline
-void _def_fundamental_type(VALUE ary, GType gtype, const char* name)
+static inline void
+_def_fundamental_type(VALUE ary, GType gtype, const char* name)
 {
     VALUE c = rbgobj_gtype_new(gtype);
     rb_define_const(rbgobj_cType, name, c);
@@ -798,7 +798,8 @@ Init_type()
 
 /**********************************************************************/
 
-void Init_gobject_gtype()
+void
+Init_gobject_gtype()
 {
     g_type_init();
     Init_typemap();

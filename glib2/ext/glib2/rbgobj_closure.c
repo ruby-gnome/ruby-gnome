@@ -323,7 +323,8 @@ Init_closure()
 
 /**********************************************************************/
 
-void Init_gobject_gclosure()
+void
+Init_gobject_gclosure()
 {
     Init_rclosure();
     Init_closure();

@@ -51,7 +51,8 @@ value_array_from_ruby(VALUE from, GValue* to)
     g_value_set_boxed(to, array);
 }
 
-void Init_gobject_value_array()
+void
+Init_gobject_value_array()
 {
     /* ValueArray is treated as Array */
     rbgobj_register_g2r_func(G_TYPE_VALUE_ARRAY, value_array_to_ruby);
