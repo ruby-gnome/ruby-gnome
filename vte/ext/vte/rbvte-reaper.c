@@ -20,8 +20,10 @@
 
 #include "rbvte.h"
 
+#define RG_TARGET_NAMESPACE cReaper
+
 static VALUE
-reaper_get(VALUE self)
+rg_m_get(VALUE self)
 {
     return GOBJ2RVAL(vte_reaper_get());
 }
@@ -29,11 +31,11 @@ reaper_get(VALUE self)
 void
 Init_vte_reaper(VALUE mVte)
 {
-    VALUE cReaper;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cReaper = G_DEF_CLASS(VTE_TYPE_REAPER, "Reaper", mVte);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_REAPER, "Reaper", mVte);
 
-    rb_define_module_function(cReaper, "get", reaper_get, 0);
+    RG_DEF_MODFUNC(get, 0);
 
-    G_DEF_SETTERS(cReaper);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

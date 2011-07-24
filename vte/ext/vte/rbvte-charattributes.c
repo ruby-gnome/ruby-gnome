@@ -20,10 +20,12 @@
 
 #include "rbvte.h"
 
+#define RG_TARGET_NAMESPACE cCharAttributes
+
 static ID id_row, id_column, id_fore, id_back, id_underline, id_strikethrough;
 
 static VALUE
-ca_initialize(VALUE self, VALUE row, VALUE column, VALUE fore, VALUE back,
+rg_initialize(VALUE self, VALUE row, VALUE column, VALUE fore, VALUE back,
               VALUE underline, VALUE strikethrough)
 {
     rb_ivar_set(self, id_row, row);
@@ -36,13 +38,13 @@ ca_initialize(VALUE self, VALUE row, VALUE column, VALUE fore, VALUE back,
 }
 
 static VALUE
-ca_get_underline(VALUE self)
+rg_underline_p(VALUE self)
 {
     return rb_ivar_get(self, id_underline);
 }
 
 static VALUE
-ca_get_strikethrough(VALUE self)
+rg_strikethrough_p(VALUE self)
 {
     return rb_ivar_get(self, id_strikethrough);
 }
@@ -50,7 +52,7 @@ ca_get_strikethrough(VALUE self)
 void
 Init_vte_charattributes(VALUE mVte)
 {
-    VALUE cCharAttributes;
+    VALUE RG_TARGET_NAMESPACE;
 
     id_row = rb_intern("@row");
     id_column = rb_intern("@column");
@@ -59,17 +61,16 @@ Init_vte_charattributes(VALUE mVte)
     id_underline = rb_intern("@underline");
     id_strikethrough = rb_intern("@strikethrough");
 
-    cCharAttributes = rb_define_class_under(mVte, "CharAttributes", rb_cObject);
+    RG_TARGET_NAMESPACE = rb_define_class_under(mVte, "CharAttributes", rb_cObject);
 
-    rb_define_method(cCharAttributes, "initialize", ca_initialize, 6);
-    rb_attr(cCharAttributes, rb_intern("row"), TRUE, FALSE, TRUE);
-    rb_attr(cCharAttributes, rb_intern("column"), TRUE, FALSE, TRUE);
-    rb_attr(cCharAttributes, rb_intern("fore"), TRUE, FALSE, TRUE);
-    rb_attr(cCharAttributes, rb_intern("back"), TRUE, FALSE, TRUE);
-    rb_define_alias(cCharAttributes, "foreground", "fore");
-    rb_define_alias(cCharAttributes, "background", "back");
-    rb_define_method(cCharAttributes, "underline?", ca_get_underline, 0);
-    rb_define_method(cCharAttributes, "strikethrough?",
-                     ca_get_strikethrough, 0);
+    RG_DEF_METHOD(initialize, 6);
+    RG_DEF_ATTR("row", TRUE, FALSE, TRUE);
+    RG_DEF_ATTR("column", TRUE, FALSE, TRUE);
+    RG_DEF_ATTR("fore", TRUE, FALSE, TRUE);
+    RG_DEF_ATTR("back", TRUE, FALSE, TRUE);
+    RG_DEF_ALIAS("foreground", "fore");
+    RG_DEF_ALIAS("background", "back");
+    RG_DEF_METHOD_P(underline, 0);
+    RG_DEF_METHOD_P(strikethrough, 0);
 }
 

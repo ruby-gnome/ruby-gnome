@@ -20,8 +20,10 @@
 
 #include "rbvte.h"
 
+#define RG_TARGET_NAMESPACE cTerminalAccessible
+
 static VALUE
-ta_initialize(VALUE self, VALUE terminal)
+rg_initialize(VALUE self, VALUE terminal)
 {
     G_INITIALIZE(self, vte_terminal_accessible_new(RVAL2TERM(terminal)));
     return Qnil;
@@ -30,12 +32,12 @@ ta_initialize(VALUE self, VALUE terminal)
 void
 Init_vte_access(VALUE mVte)
 {
-    VALUE cTerminalAccessible;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cTerminalAccessible = G_DEF_CLASS(VTE_TYPE_TERMINAL_ACCESSIBLE,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_TERMINAL_ACCESSIBLE,
                                       "TerminalAccessible", mVte);
 
-    rb_define_method(cTerminalAccessible, "initialize", ta_initialize, 1);
+    RG_DEF_METHOD(initialize, 1);
 
-    G_DEF_SETTERS(cTerminalAccessible);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

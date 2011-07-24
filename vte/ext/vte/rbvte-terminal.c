@@ -20,6 +20,8 @@
 
 #include "rbvte.h"
 
+#define RG_TARGET_NAMESPACE cTerminal
+
 static ID id_new, id_call;
 
 static char **
@@ -80,14 +82,14 @@ attrary2rval(GArray *attrs)
 }
 
 static VALUE
-term_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, vte_terminal_new());
     return Qnil;
 }
 
 static VALUE
-term_fork_command(int argc, VALUE *argv, VALUE self)
+rg_fork_command(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_command, rb_command_argv, rb_envv, rb_directory;
     VALUE lastlog, utmp, wtmp;
@@ -116,7 +118,7 @@ term_fork_command(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-term_fork_pty(int argc, VALUE *argv, VALUE self)
+rg_fork_pty(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_envv, rb_directory, lastlog, utmp, wtmp;
     char **envv;
@@ -138,7 +140,7 @@ term_fork_pty(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-term_feed(VALUE self, VALUE data)
+rg_feed(VALUE self, VALUE data)
 {
     glong length;
 
@@ -152,7 +154,7 @@ term_feed(VALUE self, VALUE data)
 }
 
 static VALUE
-term_feed_child(VALUE self, VALUE data)
+rg_feed_child(VALUE self, VALUE data)
 {
     glong length;
 
@@ -166,7 +168,7 @@ term_feed_child(VALUE self, VALUE data)
 }
 
 static VALUE
-term_feed_child_binary(VALUE self, VALUE data)
+rg_feed_child_binary(VALUE self, VALUE data)
 {
     glong length;
 
@@ -181,117 +183,117 @@ term_feed_child_binary(VALUE self, VALUE data)
 }
 
 static VALUE
-term_copy_clipboard(VALUE self)
+rg_copy_clipboard(VALUE self)
 {
     vte_terminal_copy_clipboard(RVAL2TERM(self));
     return Qnil;
 }
 
 static VALUE
-term_paste_clipboard(VALUE self)
+rg_paste_clipboard(VALUE self)
 {
     vte_terminal_paste_clipboard(RVAL2TERM(self));
     return Qnil;
 }
 
 static VALUE
-term_copy_primary(VALUE self)
+rg_copy_primary(VALUE self)
 {
     vte_terminal_copy_primary(RVAL2TERM(self));
     return Qnil;
 }
 
 static VALUE
-term_paste_primary(VALUE self)
+rg_paste_primary(VALUE self)
 {
     vte_terminal_paste_primary(RVAL2TERM(self));
     return Qnil;
 }
 
 static VALUE
-term_set_size(VALUE self, VALUE columns, VALUE rows)
+rg_set_size(VALUE self, VALUE columns, VALUE rows)
 {
     vte_terminal_set_size(RVAL2TERM(self), NUM2LONG(columns), NUM2LONG(rows));
     return Qnil;
 }
 
 static VALUE
-term_set_audible_bell(VALUE self, VALUE is_audible)
+rg_set_audible_bell(VALUE self, VALUE is_audible)
 {
     vte_terminal_set_audible_bell(RVAL2TERM(self), RVAL2CBOOL(is_audible));
     return Qnil;
 }
 
 static VALUE
-term_get_audible_bell(VALUE self)
+rg_audible_bell_p(VALUE self)
 {
     return CBOOL2RVAL(vte_terminal_get_audible_bell(RVAL2TERM(self)));
 }
 
 static VALUE
-term_set_visible_bell(VALUE self, VALUE is_visible)
+rg_set_visible_bell(VALUE self, VALUE is_visible)
 {
     vte_terminal_set_visible_bell(RVAL2TERM(self), RVAL2CBOOL(is_visible));
     return Qnil;
 }
 
 static VALUE
-term_get_visible_bell(VALUE self)
+rg_visible_bell_p(VALUE self)
 {
     return CBOOL2RVAL(vte_terminal_get_visible_bell(RVAL2TERM(self)));
 }
 
 static VALUE
-term_set_scroll_background(VALUE self, VALUE scroll)
+rg_set_scroll_background(VALUE self, VALUE scroll)
 {
     vte_terminal_set_scroll_background(RVAL2TERM(self), RVAL2CBOOL(scroll));
     return Qnil;
 }
 
 static VALUE
-term_set_scroll_on_output(VALUE self, VALUE scroll)
+rg_set_scroll_on_output(VALUE self, VALUE scroll)
 {
     vte_terminal_set_scroll_on_output(RVAL2TERM(self), RVAL2CBOOL(scroll));
     return Qnil;
 }
 
 static VALUE
-term_set_scroll_on_keystroke(VALUE self, VALUE scroll)
+rg_set_scroll_on_keystroke(VALUE self, VALUE scroll)
 {
     vte_terminal_set_scroll_on_keystroke(RVAL2TERM(self), RVAL2CBOOL(scroll));
     return Qnil;
 }
 
 static VALUE
-term_set_color_dim(VALUE self, VALUE dim)
+rg_set_color_dim(VALUE self, VALUE dim)
 {
     vte_terminal_set_color_dim(RVAL2TERM(self), RVAL2COLOR(dim));
     return Qnil;
 }
 
 static VALUE
-term_set_color_bold(VALUE self, VALUE bold)
+rg_set_color_bold(VALUE self, VALUE bold)
 {
     vte_terminal_set_color_bold(RVAL2TERM(self), RVAL2COLOR(bold));
     return Qnil;
 }
 
 static VALUE
-term_set_color_foreground(VALUE self, VALUE foreground)
+rg_set_color_foreground(VALUE self, VALUE foreground)
 {
     vte_terminal_set_color_foreground(RVAL2TERM(self), RVAL2COLOR(foreground));
     return Qnil;
 }
 
 static VALUE
-term_set_color_background(VALUE self, VALUE background)
+rg_set_color_background(VALUE self, VALUE background)
 {
     vte_terminal_set_color_background(RVAL2TERM(self), RVAL2COLOR(background));
     return Qnil;
 }
 
 static VALUE
-term_set_color_cursor(VALUE self, VALUE cursor)
+rg_set_color_cursor(VALUE self, VALUE cursor)
 {
     vte_terminal_set_color_cursor(RVAL2TERM(self),
                                   NIL_P(cursor) ? NULL : RVAL2COLOR(cursor));
@@ -299,7 +301,7 @@ term_set_color_cursor(VALUE self, VALUE cursor)
 }
 
 static VALUE
-term_set_color_highlight(VALUE self, VALUE highlight)
+rg_set_color_highlight(VALUE self, VALUE highlight)
 {
     vte_terminal_set_color_highlight(RVAL2TERM(self),
                                      NIL_P(highlight) ?
@@ -308,7 +310,7 @@ term_set_color_highlight(VALUE self, VALUE highlight)
 }
 
 static VALUE
-term_set_colors(VALUE self, VALUE foreground, VALUE background,
+rg_set_colors(VALUE self, VALUE foreground, VALUE background,
                 VALUE rb_palette)
 {
     glong i, len;
@@ -336,14 +338,14 @@ term_set_colors(VALUE self, VALUE foreground, VALUE background,
 }
 
 static VALUE
-term_set_default_colors(VALUE self)
+rg_set_default_colors(VALUE self)
 {
     vte_terminal_set_default_colors(RVAL2TERM(self));
     return Qnil;
 }
 
 static VALUE
-term_set_background_image(VALUE self, VALUE image_or_path)
+rg_set_background_image(VALUE self, VALUE image_or_path)
 {
     if (RVAL2CBOOL(rb_obj_is_kind_of(image_or_path, rb_cString))) {
         vte_terminal_set_background_image_file(RVAL2TERM(self),
@@ -357,14 +359,14 @@ term_set_background_image(VALUE self, VALUE image_or_path)
 }
 
 static VALUE
-term_set_background_tint_color(VALUE self, VALUE color)
+rg_set_background_tint_color(VALUE self, VALUE color)
 {
     vte_terminal_set_background_tint_color(RVAL2TERM(self), RVAL2COLOR(color));
     return Qnil;
 }
 
 static VALUE
-term_set_background_saturation(VALUE self, VALUE saturation)
+rg_set_background_saturation(VALUE self, VALUE saturation)
 {
     vte_terminal_set_background_saturation(RVAL2TERM(self),
                                            NUM2DBL(saturation));
@@ -372,7 +374,7 @@ term_set_background_saturation(VALUE self, VALUE saturation)
 }
 
 static VALUE
-term_set_background_transparent(VALUE self, VALUE transparent)
+rg_set_background_transparent(VALUE self, VALUE transparent)
 {
     vte_terminal_set_background_transparent(RVAL2TERM(self),
                                             RVAL2CBOOL(transparent));
@@ -380,7 +382,7 @@ term_set_background_transparent(VALUE self, VALUE transparent)
 }
 
 static VALUE
-term_set_cursor_blinks(VALUE self, VALUE blink)
+rg_set_cursor_blinks(VALUE self, VALUE blink)
 {
 #if VTE_CHECK_VERSION(0, 18, 0)
     VteTerminalCursorBlinkMode mode;
@@ -395,7 +397,7 @@ term_set_cursor_blinks(VALUE self, VALUE blink)
 
 #if VTE_CHECK_VERSION(0, 18, 0)
 static VALUE
-term_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
+rg_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 {
     VteTerminalCursorBlinkMode mode;
 
@@ -405,7 +407,7 @@ term_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 }
 
 static VALUE
-term_get_cursor_blink_mode(VALUE self)
+rg_cursor_blink_mode(VALUE self)
 {
     VteTerminalCursorBlinkMode mode;
 
@@ -416,7 +418,7 @@ term_get_cursor_blink_mode(VALUE self)
 
 #if VTE_CHECK_VERSION(0, 19, 1)
 static VALUE
-term_set_cursor_shape(VALUE self, VALUE rb_shape)
+rg_set_cursor_shape(VALUE self, VALUE rb_shape)
 {
     VteTerminalCursorShape shape;
 
@@ -426,7 +428,7 @@ term_set_cursor_shape(VALUE self, VALUE rb_shape)
 }
 
 static VALUE
-term_get_cursor_shape(VALUE self)
+rg_cursor_shape(VALUE self)
 {
     VteTerminalCursorShape shape;
 
@@ -435,34 +437,34 @@ term_get_cursor_shape(VALUE self)
 }
 
 static VALUE
-term_get_pty(VALUE self)
+rg_pty(VALUE self)
 {
     return INT2NUM(vte_terminal_get_pty(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_child_exit_status(VALUE self)
+rg_child_exit_status(VALUE self)
 {
     return INT2NUM(vte_terminal_get_child_exit_status(RVAL2TERM(self)));
 }
 #endif
 
 static VALUE
-term_set_scrollback_lines(VALUE self, VALUE lines)
+rg_set_scrollback_lines(VALUE self, VALUE lines)
 {
     vte_terminal_set_scrollback_lines(RVAL2TERM(self), NUM2LONG(lines));
     return Qnil;
 }
 
 static VALUE
-term_im_append_menuitems(VALUE self, VALUE menushell)
+rg_im_append_menuitems(VALUE self, VALUE menushell)
 {
     vte_terminal_im_append_menuitems(RVAL2TERM(self), RVAL2GOBJ(menushell));
     return Qnil;
 }
 
 static VALUE
-term_set_font(int argc, VALUE *argv, VALUE self)
+rg_set_font(int argc, VALUE *argv, VALUE self)
 {
     VALUE font_desc_or_name, rb_antialias;
     VteTerminalAntiAlias antialias = VTE_ANTI_ALIAS_USE_DEFAULT;
@@ -494,7 +496,7 @@ term_set_font(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-term_get_font(VALUE self)
+rg_font(VALUE self)
 {
     PangoFontDescription *font_desc;
     font_desc = (PangoFontDescription *)vte_terminal_get_font(RVAL2TERM(self));
@@ -502,32 +504,32 @@ term_get_font(VALUE self)
 }
 
 static VALUE
-term_get_using_xft(VALUE self)
+rg_using_xft_p(VALUE self)
 {
     return CBOOL2RVAL(vte_terminal_get_using_xft(RVAL2TERM(self)));
 }
 
 static VALUE
-term_set_allow_bold(VALUE self, VALUE allow_bold)
+rg_set_allow_bold(VALUE self, VALUE allow_bold)
 {
     vte_terminal_set_allow_bold(RVAL2TERM(self), RVAL2CBOOL(allow_bold));
     return Qnil;
 }
 
 static VALUE
-term_get_allow_bold(VALUE self)
+rg_allow_bold_p(VALUE self)
 {
     return CBOOL2RVAL(vte_terminal_get_allow_bold(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_has_selection(VALUE self)
+rg_has_selection_p(VALUE self)
 {
     return CBOOL2RVAL(vte_terminal_get_has_selection(RVAL2TERM(self)));
 }
 
 static VALUE
-term_set_word_chars(VALUE self, VALUE word_chars)
+rg_set_word_chars(VALUE self, VALUE word_chars)
 {
     vte_terminal_set_word_chars(RVAL2TERM(self),
                                 NIL_P(word_chars) ?
@@ -536,40 +538,40 @@ term_set_word_chars(VALUE self, VALUE word_chars)
 }
 
 static VALUE
-term_is_word_char(VALUE self, VALUE c)
+rg_word_char_p(VALUE self, VALUE c)
 {
     return CBOOL2RVAL(vte_terminal_is_word_char(RVAL2TERM(self), NUM2UINT(c)));
 }
 
 static VALUE
-term_set_backspace_binding(VALUE self, VALUE binding)
+rg_set_backspace_binding(VALUE self, VALUE binding)
 {
     vte_terminal_set_backspace_binding(RVAL2TERM(self), RVAL2EB(binding));
     return Qnil;
 }
 
 static VALUE
-term_set_delete_binding(VALUE self, VALUE binding)
+rg_set_delete_binding(VALUE self, VALUE binding)
 {
     vte_terminal_set_delete_binding(RVAL2TERM(self), RVAL2EB(binding));
     return Qnil;
 }
 
 static VALUE
-term_get_mouse_autohide(VALUE self)
+rg_mouse_autohide_p(VALUE self)
 {
     return CBOOL2RVAL(vte_terminal_get_mouse_autohide(RVAL2TERM(self)));
 }
 
 static VALUE
-term_set_mouse_autohide(VALUE self, VALUE setting)
+rg_set_mouse_autohide(VALUE self, VALUE setting)
 {
     vte_terminal_set_mouse_autohide(RVAL2TERM(self), RVAL2CBOOL(setting));
     return Qnil;
 }
 
 static VALUE
-term_reset(VALUE self, VALUE full, VALUE clear_history)
+rg_reset(VALUE self, VALUE full, VALUE clear_history)
 {
     vte_terminal_reset(RVAL2TERM(self), RVAL2CBOOL(full),
                        RVAL2CBOOL(clear_history));
@@ -594,7 +596,7 @@ term_is_selected_cb(VteTerminal *terminal, glong column, glong row,
 }
 
 static VALUE
-term_get_text(int argc, VALUE *argv, VALUE self)
+rg_get_text(int argc, VALUE *argv, VALUE self)
 {
     VALUE get_attrs, include_trailing_spaces, proc, rb_text;
     GArray *attrs = NULL;
@@ -627,7 +629,7 @@ term_get_text(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-term_get_text_range(int argc, VALUE *argv, VALUE self)
+rg_get_text_range(int argc, VALUE *argv, VALUE self)
 {
     VALUE start_row, start_col, end_row, end_col, get_attrs, proc, rb_text;
     GArray *attrs = NULL;
@@ -661,7 +663,7 @@ term_get_text_range(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-term_get_cursor_position(VALUE self)
+rg_cursor_position(VALUE self)
 {
     glong column, row;
     vte_terminal_get_cursor_position(RVAL2TERM(self), &column, &row);
@@ -669,20 +671,20 @@ term_get_cursor_position(VALUE self)
 }
 
 static VALUE
-term_match_clear_all(VALUE self)
+rg_match_clear_all(VALUE self)
 {
     vte_terminal_match_clear_all(RVAL2TERM(self));
     return Qnil;
 }
 
 static VALUE
-term_match_add(VALUE self, VALUE match)
+rg_match_add(VALUE self, VALUE match)
 {
     return INT2NUM(vte_terminal_match_add(RVAL2TERM(self), RVAL2CSTR(match)));
 }
 
 static VALUE
-term_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
+rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 {
     vte_terminal_match_set_cursor(RVAL2TERM(self), NUM2INT(tag),
                                   RVAL2GOBJ(cursor));
@@ -690,7 +692,7 @@ term_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 }
 
 static VALUE
-term_match_set_cursor_type(VALUE self, VALUE tag, VALUE cursor_type)
+rg_match_set_cursor_type(VALUE self, VALUE tag, VALUE cursor_type)
 {
     vte_terminal_match_set_cursor_type(RVAL2TERM(self), NUM2INT(tag),
                                        RVAL2CT(cursor_type));
@@ -698,14 +700,14 @@ term_match_set_cursor_type(VALUE self, VALUE tag, VALUE cursor_type)
 }
 
 static VALUE
-term_match_remove(VALUE self, VALUE tag)
+rg_match_remove(VALUE self, VALUE tag)
 {
     vte_terminal_match_remove(RVAL2TERM(self), NUM2INT(tag));
     return Qnil;
 }
 
 static VALUE
-term_match_check(VALUE self, VALUE column, VALUE row)
+rg_match_check(VALUE self, VALUE column, VALUE row)
 {
     char *string;
     int tag;
@@ -723,45 +725,45 @@ term_match_check(VALUE self, VALUE column, VALUE row)
 }
 
 static VALUE
-term_set_emulation(VALUE self, VALUE emulation)
+rg_set_emulation(VALUE self, VALUE emulation)
 {
     vte_terminal_set_emulation(RVAL2TERM(self), RVAL2CSTR(emulation));
     return Qnil;
 }
 
 static VALUE
-term_get_emulation(VALUE self)
+rg_emulation(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_emulation(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_default_emulation(VALUE self)
+rg_default_emulation(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_default_emulation(RVAL2TERM(self)));
 }
 
 static VALUE
-term_set_encoding(VALUE self, VALUE encoding)
+rg_set_encoding(VALUE self, VALUE encoding)
 {
     vte_terminal_set_encoding(RVAL2TERM(self), RVAL2CSTR(encoding));
     return Qnil;
 }
 
 static VALUE
-term_get_encoding(VALUE self)
+rg_encoding(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_encoding(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_status_line(VALUE self)
+rg_status_line(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_status_line(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_padding(VALUE self)
+rg_padding(VALUE self)
 {
     int xpad, ypad;
     vte_terminal_get_padding(RVAL2TERM(self), &xpad, &ypad);
@@ -769,200 +771,177 @@ term_get_padding(VALUE self)
 }
 
 static VALUE
-term_set_pty(VALUE self, VALUE pty_master)
+rg_set_pty(VALUE self, VALUE pty_master)
 {
     vte_terminal_set_pty(RVAL2TERM(self), NUM2INT(pty_master));
     return Qnil;
 }
 
 static VALUE
-term_get_adjustment(VALUE self)
+rg_adjustment(VALUE self)
 {
     return GOBJ2RVAL(vte_terminal_get_adjustment(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_char_width(VALUE self)
+rg_char_width(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_char_width(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_char_height(VALUE self)
+rg_char_height(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_char_height(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_char_descent(VALUE self)
+rg_char_descent(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_char_descent(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_char_ascent(VALUE self)
+rg_char_ascent(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_char_ascent(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_row_count(VALUE self)
+rg_row_count(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_row_count(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_column_count(VALUE self)
+rg_column_count(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_column_count(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_window_title(VALUE self)
+rg_window_title(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_window_title(RVAL2TERM(self)));
 }
 
 static VALUE
-term_get_icon_title(VALUE self)
+rg_icon_title(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_icon_title(RVAL2TERM(self)));
 }
 
-
 void
 Init_vte_terminal(VALUE mVte)
 {
-    VALUE cTerminal;
+    VALUE RG_TARGET_NAMESPACE;
 
     id_new = rb_intern("new");
     id_call = rb_intern("call");
 
-    cTerminal = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
 
-    rb_define_method(cTerminal, "initialize", term_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 
-    rb_define_method(cTerminal, "fork_command", term_fork_command, -1);
-    rb_define_method(cTerminal, "fork_pty", term_fork_pty, -1);
+    RG_DEF_METHOD(fork_command, -1);
+    RG_DEF_METHOD(fork_pty, -1);
 
-    rb_define_method(cTerminal, "feed", term_feed, 1);
-    rb_define_method(cTerminal, "feed_child", term_feed_child, 1);
-    rb_define_method(cTerminal, "feed_child_binary", term_feed_child_binary, 1);
+    RG_DEF_METHOD(feed, 1);
+    RG_DEF_METHOD(feed_child, 1);
+    RG_DEF_METHOD(feed_child_binary, 1);
 
-    rb_define_method(cTerminal, "copy_clipboard", term_copy_clipboard, 0);
-    rb_define_method(cTerminal, "paste_clipboard", term_paste_clipboard, 0);
-    rb_define_method(cTerminal, "copy_primary", term_copy_primary, 0);
-    rb_define_method(cTerminal, "paste_primary", term_paste_primary, 0);
+    RG_DEF_METHOD(copy_clipboard, 0);
+    RG_DEF_METHOD(paste_clipboard, 0);
+    RG_DEF_METHOD(copy_primary, 0);
+    RG_DEF_METHOD(paste_primary, 0);
 
-    rb_define_method(cTerminal, "set_size", term_set_size, 2);
+    RG_DEF_METHOD(set_size, 2);
 
-    rb_define_method(cTerminal, "set_audible_bell", term_set_audible_bell, 1);
-    rb_define_method(cTerminal, "audible_bell?", term_get_audible_bell, 0);
-    rb_define_method(cTerminal, "set_visible_bell", term_set_visible_bell, 1);
-    rb_define_method(cTerminal, "visible_bell?", term_get_visible_bell, 0);
+    RG_DEF_METHOD(set_audible_bell, 1);
+    RG_DEF_METHOD_P(audible_bell, 0);
+    RG_DEF_METHOD(set_visible_bell, 1);
+    RG_DEF_METHOD_P(visible_bell, 0);
 
-    rb_define_method(cTerminal, "set_scroll_background",
-                     term_set_scroll_background, 1);
-    rb_define_method(cTerminal, "set_scroll_on_output",
-                     term_set_scroll_on_output, 1);
-    rb_define_method(cTerminal, "set_scroll_on_keystroke",
-                     term_set_scroll_on_keystroke, 1);
+    RG_DEF_METHOD(set_scroll_background, 1);
+    RG_DEF_METHOD(set_scroll_on_output, 1);
+    RG_DEF_METHOD(set_scroll_on_keystroke, 1);
 
-    rb_define_method(cTerminal, "set_color_dim", term_set_color_dim, 1);
-    rb_define_method(cTerminal, "set_color_bold", term_set_color_bold, 1);
-    rb_define_method(cTerminal, "set_color_foreground",
-                     term_set_color_foreground, 1);
-    rb_define_method(cTerminal, "set_color_background",
-                     term_set_color_background, 1);
-    rb_define_method(cTerminal, "set_color_cursor", term_set_color_cursor, 1);
-    rb_define_method(cTerminal, "set_color_highlight",
-                     term_set_color_highlight, 1);
-    rb_define_method(cTerminal, "set_colors", term_set_colors, 3);
-    rb_define_method(cTerminal, "set_default_colors",
-                     term_set_default_colors, 0);
-    rb_define_method(cTerminal, "set_background_image",
-                     term_set_background_image, 1);
-    rb_define_method(cTerminal, "set_background_tint_color",
-                     term_set_background_tint_color, 1);
-    rb_define_method(cTerminal, "set_background_saturation",
-                     term_set_background_saturation, 1);
-    rb_define_method(cTerminal, "set_background_transparent",
-                     term_set_background_transparent, 1);
-    rb_define_method(cTerminal, "set_cursor_blinks", term_set_cursor_blinks, 1);
+    RG_DEF_METHOD(set_color_dim, 1);
+    RG_DEF_METHOD(set_color_bold, 1);
+    RG_DEF_METHOD(set_color_foreground, 1);
+    RG_DEF_METHOD(set_color_background, 1);
+    RG_DEF_METHOD(set_color_cursor, 1);
+    RG_DEF_METHOD(set_color_highlight, 1);
+    RG_DEF_METHOD(set_colors, 3);
+    RG_DEF_METHOD(set_default_colors, 0);
+    RG_DEF_METHOD(set_background_image, 1);
+    RG_DEF_METHOD(set_background_tint_color, 1);
+    RG_DEF_METHOD(set_background_saturation, 1);
+    RG_DEF_METHOD(set_background_transparent, 1);
+    RG_DEF_METHOD(set_cursor_blinks, 1);
 #if VTE_CHECK_VERSION(0, 18, 0)
-    rb_define_method(cTerminal, "set_cursor_blink_mode",
-		     term_set_cursor_blink_mode, 1);
-    rb_define_method(cTerminal, "cursor_blink_mode",
-		     term_get_cursor_blink_mode, 0);
+    RG_DEF_METHOD(set_cursor_blink_mode, 1);
+    RG_DEF_METHOD(cursor_blink_mode, 0);
 #endif
 #if VTE_CHECK_VERSION(0, 19, 1)
-    rb_define_method(cTerminal, "set_cursor_shape", term_set_cursor_shape, 1);
-    rb_define_method(cTerminal, "cursor_shape", term_get_cursor_shape, 0);
-    rb_define_method(cTerminal, "pty", term_get_pty, 0);
-    rb_define_method(cTerminal, "child_exit_status",
-		     term_get_child_exit_status, 0);
+    RG_DEF_METHOD(set_cursor_shape, 1);
+    RG_DEF_METHOD(cursor_shape, 0);
+    RG_DEF_METHOD(pty, 0);
+    RG_DEF_METHOD(child_exit_status, 0);
 #endif
-    rb_define_method(cTerminal, "set_scrollback_lines",
-                     term_set_scrollback_lines, 1);
+    RG_DEF_METHOD(set_scrollback_lines, 1);
 
-    rb_define_method(cTerminal, "im_append_menuitems",
-                     term_im_append_menuitems, 1);
+    RG_DEF_METHOD(im_append_menuitems, 1);
 
-    rb_define_method(cTerminal, "set_font", term_set_font, -1);
-    rb_define_method(cTerminal, "font", term_get_font, 0);
-    rb_define_method(cTerminal, "using_xft?", term_get_using_xft, 0);
-    rb_define_method(cTerminal, "set_allow_bold", term_set_allow_bold, 1);
-    rb_define_method(cTerminal, "allow_bold?", term_get_allow_bold, 0);
-    rb_define_method(cTerminal, "has_selection?", term_get_has_selection, 0);
-    rb_define_alias(cTerminal, "have_selection?", "has_selection?");
-    rb_define_method(cTerminal, "set_word_chars", term_set_word_chars, 1);
-    rb_define_method(cTerminal, "word_char?", term_is_word_char, 1);
-    rb_define_method(cTerminal, "set_backspace_binding",
-                     term_set_backspace_binding, 1);
-    rb_define_method(cTerminal, "set_delete_binding",
-                     term_set_delete_binding, 1);
-    rb_define_method(cTerminal, "mouse_autohide?", term_get_mouse_autohide, 0);
-    rb_define_method(cTerminal, "set_mouse_autohide",
-                     term_set_mouse_autohide, 1);
+    RG_DEF_METHOD(set_font, -1);
+    RG_DEF_METHOD(font, 0);
+    RG_DEF_METHOD_P(using_xft, 0);
+    RG_DEF_METHOD(set_allow_bold, 1);
+    RG_DEF_METHOD_P(allow_bold, 0);
+    RG_DEF_METHOD_P(has_selection, 0);
+    RG_DEF_ALIAS("have_selection?", "has_selection?");
+    RG_DEF_METHOD(set_word_chars, 1);
+    RG_DEF_METHOD_P(word_char, 1);
+    RG_DEF_METHOD(set_backspace_binding, 1);
+    RG_DEF_METHOD(set_delete_binding, 1);
+    RG_DEF_METHOD_P(mouse_autohide, 0);
+    RG_DEF_METHOD(set_mouse_autohide, 1);
 
-    rb_define_method(cTerminal, "reset", term_reset, 2);
+    RG_DEF_METHOD(reset, 2);
 
-    rb_define_method(cTerminal, "get_text", term_get_text, -1);
-    rb_define_method(cTerminal, "get_text_range", term_get_text_range, -1);
+    RG_DEF_METHOD(get_text, -1);
+    RG_DEF_METHOD(get_text_range, -1);
 
-    rb_define_method(cTerminal, "cursor_position", term_get_cursor_position, 0);
+    RG_DEF_METHOD(cursor_position, 0);
 
-    rb_define_method(cTerminal, "match_clear_all", term_match_clear_all, 0);
-    rb_define_method(cTerminal, "match_add", term_match_add, 1);
-    rb_define_method(cTerminal, "match_set_cursor",
-                     term_match_set_cursor, 2);
-    rb_define_method(cTerminal, "match_set_cursor_type",
-                     term_match_set_cursor_type, 2);
-    rb_define_method(cTerminal, "match_remove", term_match_remove, 1);
-    rb_define_method(cTerminal, "match_check", term_match_check, 2);
+    RG_DEF_METHOD(match_clear_all, 0);
+    RG_DEF_METHOD(match_add, 1);
+    RG_DEF_METHOD(match_set_cursor, 2);
+    RG_DEF_METHOD(match_set_cursor_type, 2);
+    RG_DEF_METHOD(match_remove, 1);
+    RG_DEF_METHOD(match_check, 2);
 
-    rb_define_method(cTerminal, "set_emulation", term_set_emulation, 1);
-    rb_define_method(cTerminal, "emulation", term_get_emulation, 0);
-    rb_define_method(cTerminal, "default_emulation",
-                     term_get_default_emulation, 0);
+    RG_DEF_METHOD(set_emulation, 1);
+    RG_DEF_METHOD(emulation, 0);
+    RG_DEF_METHOD(default_emulation, 0);
 
-    rb_define_method(cTerminal, "set_encoding", term_set_encoding, 1);
-    rb_define_method(cTerminal, "encoding", term_get_encoding, 0);
+    RG_DEF_METHOD(set_encoding, 1);
+    RG_DEF_METHOD(encoding, 0);
 
-    rb_define_method(cTerminal, "status_line", term_get_status_line, 0);
-    rb_define_method(cTerminal, "padding", term_get_padding, 0);
+    RG_DEF_METHOD(status_line, 0);
+    RG_DEF_METHOD(padding, 0);
 
-    rb_define_method(cTerminal, "set_pty", term_set_pty, 1);
+    RG_DEF_METHOD(set_pty, 1);
 
-    rb_define_method(cTerminal, "adjustment", term_get_adjustment, 0);
-    rb_define_method(cTerminal, "char_width", term_get_char_width, 0);
-    rb_define_method(cTerminal, "char_height", term_get_char_height, 0);
-    rb_define_method(cTerminal, "char_descent", term_get_char_descent, 0);
-    rb_define_method(cTerminal, "char_ascent", term_get_char_ascent, 0);
-    rb_define_method(cTerminal, "row_count", term_get_row_count, 0);
-    rb_define_method(cTerminal, "column_count", term_get_column_count, 0);
-    rb_define_method(cTerminal, "window_title", term_get_window_title, 0);
-    rb_define_method(cTerminal, "icon_title", term_get_icon_title, 0);
+    RG_DEF_METHOD(adjustment, 0);
+    RG_DEF_METHOD(char_width, 0);
+    RG_DEF_METHOD(char_height, 0);
+    RG_DEF_METHOD(char_descent, 0);
+    RG_DEF_METHOD(char_ascent, 0);
+    RG_DEF_METHOD(row_count, 0);
+    RG_DEF_METHOD(column_count, 0);
+    RG_DEF_METHOD(window_title, 0);
+    RG_DEF_METHOD(icon_title, 0);
 
-    G_DEF_SETTERS(cTerminal);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

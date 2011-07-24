@@ -20,30 +20,32 @@
 
 #include "rbvte.h"
 
+#define RG_TARGET_NAMESPACE mVte
+
 void
 Init_vte(void)
 {
-    VALUE mVte;
+    VALUE RG_TARGET_NAMESPACE;
 
-    mVte = rb_define_module("Vte");
+    RG_TARGET_NAMESPACE = rb_define_module("Vte");
 
-    rb_define_const(mVte, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(VTE_MAJOR_VERSION),
                                 INT2FIX(VTE_MINOR_VERSION),
                                 INT2FIX(VTE_MICRO_VERSION)));
 
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING, "TerminalEraseBinding", mVte);
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING, "TerminalEraseBinding", RG_TARGET_NAMESPACE);
 #if VTE_CHECK_VERSION(0, 18, 0)
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE, "TerminalCursorBlinkMode", mVte);
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE, "TerminalCursorBlinkMode", RG_TARGET_NAMESPACE);
 #endif
 #if VTE_CHECK_VERSION(0, 19, 1)
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE, "TerminalCursorShape", mVte);
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE, "TerminalCursorShape", RG_TARGET_NAMESPACE);
 #endif
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS, "TerminalAntiAlias", mVte);
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS, "TerminalAntiAlias", RG_TARGET_NAMESPACE);
 
-    Init_vte_access(mVte);
-    Init_vte_reaper(mVte);
-    Init_vte_terminal(mVte);
-    Init_vte_charattributes(mVte);
+    Init_vte_access(RG_TARGET_NAMESPACE);
+    Init_vte_reaper(RG_TARGET_NAMESPACE);
+    Init_vte_terminal(RG_TARGET_NAMESPACE);
+    Init_vte_charattributes(RG_TARGET_NAMESPACE);
 }
