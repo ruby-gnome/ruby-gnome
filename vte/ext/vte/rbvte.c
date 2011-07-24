@@ -33,7 +33,17 @@ Init_vte(void)
                                 INT2FIX(VTE_MINOR_VERSION),
                                 INT2FIX(VTE_MICRO_VERSION)));
 
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING, "TerminalEraseBinding", mVte);
+#if VTE_CHECK_VERSION(0, 18, 0)
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE, "TerminalCursorBlinkMode", mVte);
+#endif
+#if VTE_CHECK_VERSION(0, 19, 1)
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE, "TerminalCursorShape", mVte);
+#endif
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS, "TerminalAntiAlias", mVte);
+
     Init_vte_access(mVte);
     Init_vte_reaper(mVte);
     Init_vte_terminal(mVte);
+    Init_vte_charattributes(mVte);
 }

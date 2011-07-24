@@ -20,10 +20,7 @@
 
 #include "rbvte.h"
 
-static VALUE cCharAttributes;
 static ID id_new, id_call;
-static ID id_row, id_column, id_fore, id_back, id_underline, id_strikethrough;
-
 
 static char **
 rval2cstrary(VALUE ary)
@@ -61,15 +58,16 @@ static VALUE
 attrary2rval(GArray *attrs)
 {
     long i, len;
-    VALUE rb_attrs;
+    VALUE rb_attrs, rb_class;
 
     len = attrs->len;
     rb_attrs = rb_ary_new2(len);
+    rb_class = rb_const_get(rb_const_get(rb_cObject, rb_intern("Vte")), rb_intern("CharAttributes"));
 
     for (i = 0; i < len; i++) {
         VteCharAttributes *attr;
         attr = &g_array_index(attrs, VteCharAttributes, i);
-        rb_ary_push(rb_attrs, rb_funcall(cCharAttributes, id_new, 6,
+        rb_ary_push(rb_attrs, rb_funcall(rb_class, id_new, 6,
                                          LONG2NUM(attr->row),
                                          LONG2NUM(attr->column),
                                          COLOR2RVAL(&(attr->fore)),
@@ -81,35 +79,6 @@ attrary2rval(GArray *attrs)
     return rb_attrs;
 }
 
-
-
-static VALUE
-ca_initialize(VALUE self, VALUE row, VALUE column, VALUE fore, VALUE back,
-              VALUE underline, VALUE strikethrough)
-{
-    rb_ivar_set(self, id_row, row);
-    rb_ivar_set(self, id_column, column);
-    rb_ivar_set(self, id_fore, fore);
-    rb_ivar_set(self, id_back, back);
-    rb_ivar_set(self, id_underline, underline);
-    rb_ivar_set(self, id_strikethrough, strikethrough);
-    return Qnil;
-}
-
-static VALUE
-ca_get_underline(VALUE self)
-{
-    return rb_ivar_get(self, id_underline);
-}
-
-static VALUE
-ca_get_strikethrough(VALUE self)
-{
-    return rb_ivar_get(self, id_strikethrough);
-}
-
-
-
 static VALUE
 term_initialize(VALUE self)
 {
@@ -864,51 +833,12 @@ term_get_icon_title(VALUE self)
 void
 Init_vte_terminal(VALUE mVte)
 {
-    VALUE cTerminal, cTerminalEraseBinding, cTerminalAntiAlias;
-#if VTE_CHECK_VERSION(0, 18, 0)
-    VALUE cTerminalCursorBlinkMode;
-#endif
-#if VTE_CHECK_VERSION(0, 19, 1)
-    VALUE cTerminalCursorShape;
-#endif
+    VALUE cTerminal;
 
     id_new = rb_intern("new");
     id_call = rb_intern("call");
 
-    id_row = rb_intern("@row");
-    id_column = rb_intern("@column");
-    id_fore = rb_intern("@fore");
-    id_back = rb_intern("@back");
-    id_underline = rb_intern("@underline");
-    id_strikethrough = rb_intern("@strikethrough");
-
     cTerminal = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
-    cTerminalEraseBinding = G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING,
-                                        "TerminalEraseBinding", mVte);
-#if VTE_CHECK_VERSION(0, 18, 0)
-    cTerminalCursorBlinkMode = G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE,
-					   "TerminalCursorBlinkMode", mVte);
-#endif
-#if VTE_CHECK_VERSION(0, 19, 1)
-    cTerminalCursorShape = G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE,
-				       "TerminalCursorShape", mVte);
-#endif
-    cTerminalAntiAlias = G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS,
-                                     "TerminalAntiAlias", mVte);
-
-    cCharAttributes = rb_define_class_under(mVte, "CharAttributes", rb_cObject);
-
-    rb_define_method(cCharAttributes, "initialize", ca_initialize, 6);
-    rb_attr(cCharAttributes, rb_intern("row"), TRUE, FALSE, TRUE);
-    rb_attr(cCharAttributes, rb_intern("column"), TRUE, FALSE, TRUE);
-    rb_attr(cCharAttributes, rb_intern("fore"), TRUE, FALSE, TRUE);
-    rb_attr(cCharAttributes, rb_intern("back"), TRUE, FALSE, TRUE);
-    rb_define_alias(cCharAttributes, "foreground", "fore");
-    rb_define_alias(cCharAttributes, "background", "back");
-    rb_define_method(cCharAttributes, "underline?", ca_get_underline, 0);
-    rb_define_method(cCharAttributes, "strikethrough?",
-                     ca_get_strikethrough, 0);
-
 
     rb_define_method(cTerminal, "initialize", term_initialize, 0);
 

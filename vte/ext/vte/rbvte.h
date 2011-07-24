@@ -24,5 +24,6 @@
 extern void Init_vte_access(VALUE mVte);
 extern void Init_vte_reaper(VALUE mVte);
 extern void Init_vte_terminal(VALUE mVte);
+extern void Init_vte_charattributes(VALUE mVte);
 
 #endif
