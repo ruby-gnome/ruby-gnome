@@ -1,3 +1,10 @@
+2011-07-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/rbgtkcellrendererspinner.c, ext/gtk2/rbgtkspinner.c:
+	don't expand "$Date$" because it may include non LANG=C
+	characters. #3383158
+	Reported by Antonio Terceiro. Thanks!!!
+
 2011-06-05  Kouhei Sutou  <kou@cozmixng.org>
 
 	* sample/gtk-demo/cairo-operator.rb

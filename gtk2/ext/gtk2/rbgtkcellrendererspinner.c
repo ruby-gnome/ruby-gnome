@@ -3,9 +3,6 @@
 
   rbgtkcellrendererspinner.c -
 
-  $Author$
-  $Date$
-
   Copyright (C) 2011 Ruby-GNOME2 Project Team
 ************************************************/
 
