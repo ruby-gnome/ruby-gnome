@@ -2,6 +2,26 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.0.1: 20XX-XX-XX
+
+TODO: WRITE ME.
+
+This is a bug fix release of 1.0.0.
+
+=== Changes
+
+==== Ruby/GTK2
+
+  * Fixes
+    * [#3383158] removed non LANG=C characters to be
+      buildable on LANG=C environment.
+      [Antonio Terceiro, Kouhei Sutou]
+
+=== Thanks
+
+  * Antonio Terceiro
+  * ...
+
 == Ruby-GNOME2 1.0.0: 2011-07-13
 
 This is the first major release!!!

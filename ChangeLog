@@ -1,3 +1,9 @@
+2011-07-31  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: [#3383158] removed non LANG=C characters to be
+	buildable on LANG=C environment.
+	Reported by Antonio Terceiro. Thanks!!!
+
 2011-06-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GLib2: bind g_io_channel_win32_new_socket() as
