@@ -10,6 +10,12 @@ This is a bug fix release of 1.0.0.
 
 === Changes
 
+==== Ruby/GLib2
+
+  * Improvements
+    * GLib::IOChannel.open supports Windows.
+      [OBATA Akio, Kouhei Sutou]
+
 ==== Ruby/GTK2
 
   * Fixes
@@ -20,6 +26,7 @@ This is a bug fix release of 1.0.0.
 === Thanks
 
   * Antonio Terceiro
+  * OBATA Akio
   * ...
 
 == Ruby-GNOME2 1.0.0: 2011-07-13
