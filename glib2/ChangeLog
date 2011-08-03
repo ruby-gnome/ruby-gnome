@@ -1,3 +1,9 @@
+2011-08-03  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/glib2/rbglib_iochannel.c (ioc_s_open): add missing Windows
+	support.
+	Reported by OBATA Akio. Thanks!!!
+
 2011-07-13  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/glib2/rbglib_iochannel.c (ioc_win32_socket_initialize): fix

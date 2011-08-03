@@ -89,6 +89,8 @@ ioc_s_open(gint argc, VALUE *argv, VALUE self)
     if (TYPE(arg1) == T_FIXNUM){
 #ifdef G_OS_UNIX
         io = g_io_channel_unix_new(NUM2INT(arg1));
+#elif defined(G_OS_WIN32)
+        io = g_io_channel_win32_new_fd(fd);
 #else
         rb_raise(rb_eRuntimeError,
                  "GLib::IOChannel.new(fd) is supported on "
