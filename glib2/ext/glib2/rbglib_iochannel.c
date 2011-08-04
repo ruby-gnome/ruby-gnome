@@ -653,10 +653,12 @@ static VALUE
 ioc_win32_socket_initialize(VALUE self, VALUE socket)
 {
     GIOChannel *io = NULL;
+    int fd;
 
     rb_secure(4);
     /* TODO: support IO object */
-    io = g_io_channel_win32_new_socket(NUM2INT(socket));
+    fd = NUM2INT(socket);
+    io = g_io_channel_win32_new_socket(rb_w32_get_osfhandle(fd));
     G_INITIALIZE(self, io);
 
     return Qnil;
