@@ -15,6 +15,10 @@ This is a bug fix release of 1.0.0.
   * Improvements
     * GLib::IOChannel.open supports Windows.
       [OBATA Akio, Kouhei Sutou]
+  * Fixes
+    * GLib::IOChannelWin32Socket.new uses raw socket handle
+      not file descriptor.
+      [NAKAMURA Usaku, Kouhei Sutou]
 
 ==== Ruby/GTK2
 
@@ -27,6 +31,7 @@ This is a bug fix release of 1.0.0.
 
   * Antonio Terceiro
   * OBATA Akio
+  * NAKAMURA Usaku
   * ...
 
 == Ruby-GNOME2 1.0.0: 2011-07-13
