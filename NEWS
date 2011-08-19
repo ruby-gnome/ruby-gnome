@@ -27,11 +27,18 @@ This is a bug fix release of 1.0.0.
       buildable on LANG=C environment.
       [Antonio Terceiro, Kouhei Sutou]
 
+==== Ruby/GooCanvas
+
+  * Improvements
+    * Supported binary bundled gem.
+      [HAYASHI Kentaro]
+
 === Thanks
 
   * Antonio Terceiro
   * OBATA Akio
   * NAKAMURA Usaku
+  * HAYASHI Kentaro
   * ...
 
 == Ruby-GNOME2 1.0.0: 2011-07-13

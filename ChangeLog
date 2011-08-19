@@ -1,3 +1,8 @@
+2011-08-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GooCanvas: Supported binary bundled gem.
+	Patch by HAYASHI Kentaro. Thanks!!!
+
 2011-08-04  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GLib2: GLib::IOChannelWin32Socket.new uses raw socket
