@@ -1,3 +1,8 @@
+2011-08-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* lib/goocanvas.rb: support binary bundled gem.
+	Patch by HAYASHI Kentaro. Thanks!!!
+
 2011-02-12  Kouhei Sutou  <kou@cozmixng.org>
 
 	* ext/goocanvas/depend: fix .pc path. #3178294
