@@ -54,10 +54,14 @@ ffil_add_pattern(VALUE self, VALUE pattern)
 static gboolean
 filter_func(const GtkFileFilterInfo *info, gpointer func)
 {
-    return CBOOL2RVAL(rb_funcall((VALUE)func, 5, 
-                                 GFLAGS2RVAL(info->contains, GTK_TYPE_FILE_FILTER_FLAGS), 
-                                 CSTR2RVAL(info->filename), CSTR2RVAL(info->uri), 
-                                 CSTR2RVAL(info->display_name), CSTR2RVAL(info->mime_type)));
+    return CBOOL2RVAL(rb_funcall((VALUE)func,
+                                 id_call,
+                                 5,
+                                 GFLAGS2RVAL(info->contains, GTK_TYPE_FILE_FILTER_FLAGS),
+                                 CSTR2RVAL(info->filename),
+                                 CSTR2RVAL(info->uri),
+                                 CSTR2RVAL(info->display_name),
+                                 CSTR2RVAL(info->mime_type)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
