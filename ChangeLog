@@ -1,3 +1,8 @@
+2011-08-25  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GTK2: Fixed Gtk::FileFilter#add_custom crash.
+	Reported by Jeff Moore. Thanks!!!
+
 2011-08-19  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GooCanvas: Supported binary bundled gem.

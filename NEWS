@@ -26,6 +26,8 @@ This is a bug fix release of 1.0.0.
     * [#3383158] removed non LANG=C characters to be
       buildable on LANG=C environment.
       [Antonio Terceiro, Kouhei Sutou]
+    * Fixed Gtk::FileFilter#add_custom crash.
+      [Jeff Moore, Kouhei Sutou]
 
 ==== Ruby/GooCanvas
 
@@ -39,6 +41,7 @@ This is a bug fix release of 1.0.0.
   * OBATA Akio
   * NAKAMURA Usaku
   * HAYASHI Kentaro
+  * Jeff Moore
   * ...
 
 == Ruby-GNOME2 1.0.0: 2011-07-13
