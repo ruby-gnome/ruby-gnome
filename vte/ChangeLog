@@ -1,3 +1,17 @@
+2011-08-28  Masaaki Aoyagi
+
+	* ext/vte/rbvte-access.c: -> ext/vte/rbvte-terminalaccessible.c
+
+2011-07-24  Masaaki Aoyagi
+
+	* ext/vte/*:
+	- divide by namespace.
+	- apply naming rules.
+
+2011-07-23  Masaaki Aoyagi
+
+	* ext/vte/*.c: change file header comment.
+
 2011-03-04  Kouhei Sutou  <kou@clear-code.com>
 
 	* ext/vte/depend: fix .pc path. #3199587
