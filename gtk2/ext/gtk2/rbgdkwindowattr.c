@@ -58,7 +58,7 @@ attr_get_ ## name (VALUE self)\
 static VALUE \
 attr_set_ ## name (VALUE self, VALUE val)\
 {\
-    _SELF(self)->name = RVAL2CSTR(val);\
+    _SELF(self)->name = (gchar *)RVAL2CSTR(val);\
     return self;\
 }
 

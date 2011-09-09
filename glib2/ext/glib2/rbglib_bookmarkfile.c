@@ -83,7 +83,7 @@ bf_load_from_data_dirs(VALUE self, VALUE file)
     gchar* full_path;
 
     ret = g_bookmark_file_load_from_data_dirs(_SELF(self), 
-                                              (const gchar*)RVAL2CSTR(file),
+                                              RVAL2CSTR(file),
                                               &full_path, &error);
 
     if (! ret) RAISE_GERROR(error);
@@ -117,7 +117,7 @@ static VALUE
 bf_has_item(VALUE self, VALUE uri)
 {
     return CBOOL2RVAL(g_bookmark_file_has_item(_SELF(self),
-                                               (const gchar *)RVAL2CSTR(uri))); 
+                                               RVAL2CSTR(uri))); 
 }
 
 static VALUE
@@ -125,8 +125,8 @@ bf_has_group(VALUE self, VALUE uri, VALUE group)
 {
     GError* error = NULL;
     return CBOOL2RVAL(g_bookmark_file_has_group(_SELF(self),
-                                                (const gchar *)RVAL2CSTR(uri),
-                                                (const gchar *)RVAL2CSTR(group),
+                                                RVAL2CSTR(uri),
+                                                RVAL2CSTR(group),
                                                 &error));
 }
 	                                           
@@ -135,8 +135,8 @@ bf_has_application(VALUE self, VALUE uri, VALUE name)
 {
     GError* error = NULL;
     return CBOOL2RVAL(g_bookmark_file_has_application(_SELF(self),
-                                                      (const gchar *)RVAL2CSTR(uri),
-                                                      (const gchar *)RVAL2CSTR(name),
+                                                      RVAL2CSTR(uri),
+                                                      RVAL2CSTR(name),
                                                       &error));
 }
 	                                           
@@ -168,7 +168,7 @@ bf_get_title(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gchar* ret = g_bookmark_file_get_title(_SELF(self),
-                                           (const gchar *)RVAL2CSTR(uri),
+                                           RVAL2CSTR(uri),
                                            &error);
     if (error) RAISE_GERROR(error);
     return CSTR2RVAL_FREE(ret);
@@ -179,7 +179,7 @@ bf_get_description(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gchar* ret = g_bookmark_file_get_description(_SELF(self),
-                                                 (const gchar *)RVAL2CSTR(uri),
+                                                 RVAL2CSTR(uri),
                                                  &error);
     if (error) RAISE_GERROR(error);
     return CSTR2RVAL_FREE(ret);
@@ -190,7 +190,7 @@ bf_get_mime_type(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gchar* ret = g_bookmark_file_get_mime_type(_SELF(self),
-                                               (const gchar *)RVAL2CSTR(uri),
+                                               RVAL2CSTR(uri),
                                                &error);
     if (error) RAISE_GERROR(error);
     return CSTR2RVAL_FREE(ret);
@@ -201,7 +201,7 @@ bf_get_is_private(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_get_is_private(_SELF(self),
-                                                  (const gchar *)RVAL2CSTR(uri),
+                                                  RVAL2CSTR(uri),
                                                   &error);
     if (error) RAISE_GERROR(error);
     return CBOOL2RVAL(ret);
@@ -214,7 +214,7 @@ bf_get_icon(VALUE self, VALUE uri)
     gchar* mime_type;
     GError *error = NULL;
     gboolean ret = g_bookmark_file_get_icon(_SELF(self),
-                                            (const gchar *)RVAL2CSTR(uri),
+                                            RVAL2CSTR(uri),
                                             &href, &mime_type,
                                             &error);
     if (!ret){
@@ -229,7 +229,7 @@ bf_get_added(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     time_t ret = g_bookmark_file_get_added(_SELF(self),
-                                           (const gchar *)RVAL2CSTR(uri),
+                                           RVAL2CSTR(uri),
                                            &error);
     if (!ret) RAISE_GERROR(error);
 
@@ -241,7 +241,7 @@ bf_get_modified(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     time_t ret = g_bookmark_file_get_modified(_SELF(self),
-                                              (const gchar *)RVAL2CSTR(uri),
+                                              RVAL2CSTR(uri),
                                               &error);
     if (!ret) RAISE_GERROR(error);
 
@@ -253,7 +253,7 @@ bf_get_visited(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     time_t ret = g_bookmark_file_get_visited(_SELF(self),
-                                             (const gchar *)RVAL2CSTR(uri),
+                                             RVAL2CSTR(uri),
                                              &error);
     if (!ret) RAISE_GERROR(error);
 
@@ -268,7 +268,7 @@ bf_get_groups(VALUE self, VALUE uri)
     gsize i;
     GError* error = NULL;
     gchar** ret = g_bookmark_file_get_groups(_SELF(self),
-                                             (const gchar *)RVAL2CSTR(uri),
+                                             RVAL2CSTR(uri),
                                              &length, &error);
     if (error) RAISE_GERROR(error);
   
@@ -290,7 +290,7 @@ bf_get_applications(VALUE self, VALUE uri)
     gsize i;
     GError* error = NULL;
     gchar** ret = g_bookmark_file_get_applications(_SELF(self),
-                                                   (const gchar *)RVAL2CSTR(uri),
+                                                   RVAL2CSTR(uri),
                                                    &length, &error);
     if (error) RAISE_GERROR(error);
   
@@ -313,8 +313,8 @@ bf_get_app_info(VALUE self, VALUE uri, VALUE name)
     GError* error = NULL;
 
     gboolean ret = g_bookmark_file_get_app_info(_SELF(self),
-                                                (const gchar *)RVAL2CSTR(uri),
-                                                (const gchar *)RVAL2CSTR(name),
+                                                RVAL2CSTR(uri),
+                                                RVAL2CSTR(name),
                                                 &exec, &count, &stamp, &error);
     if (!ret) RAISE_GERROR(error);
     
@@ -325,8 +325,8 @@ static VALUE
 bf_set_title(VALUE self, VALUE uri, VALUE title)
 {
     g_bookmark_file_set_title(_SELF(self),
-                              (const gchar *)RVAL2CSTR(uri),
-                              (const gchar *)RVAL2CSTR(title));
+                              RVAL2CSTR(uri),
+                              RVAL2CSTR(title));
     return self;
 }
 
@@ -334,8 +334,8 @@ static VALUE
 bf_set_description(VALUE self, VALUE uri, VALUE description)
 {
     g_bookmark_file_set_description(_SELF(self),
-                                    (const gchar *)RVAL2CSTR(uri),
-                                    (const gchar *)RVAL2CSTR(description));
+                                    RVAL2CSTR(uri),
+                                    RVAL2CSTR(description));
     return self;
 }
 
@@ -343,8 +343,8 @@ static VALUE
 bf_set_mime_type(VALUE self, VALUE uri, VALUE mime_type)
 {
     g_bookmark_file_set_mime_type(_SELF(self),
-                                  (const gchar *)RVAL2CSTR(uri),
-                                  (const gchar *)RVAL2CSTR(mime_type));
+                                  RVAL2CSTR(uri),
+                                  RVAL2CSTR(mime_type));
     return self;
 }
 
@@ -352,7 +352,7 @@ static VALUE
 bf_set_is_private(VALUE self, VALUE uri, VALUE is_private)
 {
     g_bookmark_file_set_is_private(_SELF(self),
-                                   (const gchar *)RVAL2CSTR(uri),
+                                   RVAL2CSTR(uri),
                                    RVAL2CBOOL(is_private));
     return self;
 }
@@ -361,9 +361,9 @@ static VALUE
 bf_set_icon(VALUE self, VALUE uri, VALUE href, VALUE mime_type)
 {
     g_bookmark_file_set_icon(_SELF(self),
-                             (const gchar *)RVAL2CSTR(uri),
-                             (const gchar *)RVAL2CSTR(href),
-                             (const gchar *)RVAL2CSTR(mime_type));
+                             RVAL2CSTR(uri),
+                             RVAL2CSTR(href),
+                             RVAL2CSTR(mime_type));
     return self;
 }
 
@@ -371,25 +371,21 @@ static VALUE
 bf_set_added(VALUE self, VALUE uri, VALUE time)
 {
     g_bookmark_file_set_added(_SELF(self), 
-                              (const gchar *)RVAL2CSTR(uri),
+                              RVAL2CSTR(uri),
                               (time_t)NUM2LONG(rb_Integer(time)));
     return self;
 }
 
 static VALUE
-bf_set_groups(VALUE self, VALUE uri, VALUE groups)
+bf_set_groups(VALUE self, VALUE uri, VALUE rbgroups)
 {
-    gint len = RARRAY_LEN(groups);
-    gchar** glist = ALLOCA_N(gchar*, len);
-    gint i;
-
-    for (i = 0; i < len; i++){
-        glist[i] = RVAL2CSTR(RARRAY_PTR(groups)[i]);
-    }
+    VALUE ary = rb_ary_to_ary(rbgroups);
+    const gchar **groups = RVAL2STRV(ary);
     
-    g_bookmark_file_set_groups(_SELF(self),
-                               (const gchar *)RVAL2CSTR(uri),
-                               (const gchar **)glist, len);
+    g_bookmark_file_set_groups(_SELF(self), RVAL2CSTR(uri), groups, RARRAY_LEN(ary));
+
+    g_free(groups);
+
     return self;
 }
 
@@ -397,7 +393,7 @@ static VALUE
 bf_set_modified(VALUE self, VALUE uri, VALUE time)
 {
     g_bookmark_file_set_modified(_SELF(self), 
-                                 (const gchar *)RVAL2CSTR(uri),
+                                 RVAL2CSTR(uri),
                                  (time_t)NUM2LONG(rb_Integer(time)));
     return self;
 }
@@ -406,7 +402,7 @@ static VALUE
 bf_set_visited(VALUE self, VALUE uri, VALUE time)
 {
     g_bookmark_file_set_visited(_SELF(self), 
-                                (const gchar *)RVAL2CSTR(uri),
+                                RVAL2CSTR(uri),
                                 (time_t)NUM2LONG(rb_Integer(time)));
     return self;
 }
@@ -416,9 +412,9 @@ bf_set_app_info(VALUE self, VALUE uri, VALUE name, VALUE exec, VALUE count, VALU
 {
     GError* error = NULL;
     gboolean ret = g_bookmark_file_set_app_info(_SELF(self),
-                                                (const gchar *)RVAL2CSTR(uri),
-                                                (const gchar *)RVAL2CSTR(name),
-                                                (const gchar *)RVAL2CSTR(exec),
+                                                RVAL2CSTR(uri),
+                                                RVAL2CSTR(name),
+                                                RVAL2CSTR(exec),
                                                 NUM2INT(count),
                                                 (time_t)NUM2LONG(rb_Integer(stamp)),
                                                 &error);
@@ -432,8 +428,8 @@ static VALUE
 bf_add_group(VALUE self, VALUE uri, VALUE group)
 {
     g_bookmark_file_add_group(_SELF(self),
-                              (const gchar *)RVAL2CSTR(uri),
-                              (const gchar *)RVAL2CSTR(group));
+                              RVAL2CSTR(uri),
+                              RVAL2CSTR(group));
     return self;
 }
 
@@ -441,9 +437,9 @@ static VALUE
 bf_add_application(VALUE self, VALUE uri, VALUE name, VALUE exec)
 {
     g_bookmark_file_add_application(_SELF(self),
-                                    (const gchar *)RVAL2CSTR(uri),
-                                    (const gchar *)RVAL2CSTR(name),
-                                    (const gchar *)RVAL2CSTR(exec));
+                                    RVAL2CSTR(uri),
+                                    RVAL2CSTR(name),
+                                    RVAL2CSTR(exec));
     return self;
 }
 
@@ -452,8 +448,8 @@ bf_remove_group(VALUE self, VALUE uri, VALUE group)
 {
     GError* error = NULL;
     gboolean ret = g_bookmark_file_remove_group(_SELF(self),
-                                                (const gchar *)RVAL2CSTR(uri),
-                                                (const gchar *)RVAL2CSTR(group),
+                                                RVAL2CSTR(uri),
+                                                RVAL2CSTR(group),
                                                 &error);
     if (! ret) RAISE_GERROR(error);
 
@@ -465,8 +461,8 @@ bf_remove_application(VALUE self, VALUE uri, VALUE name)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_remove_application(_SELF(self),
-                                                      (const gchar *)RVAL2CSTR(uri),
-                                                      (const gchar *)RVAL2CSTR(name),
+                                                      RVAL2CSTR(uri),
+                                                      RVAL2CSTR(name),
                                                       &error);
     if (! ret) RAISE_GERROR(error);
 
@@ -479,7 +475,7 @@ bf_remove_item(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_remove_item(_SELF(self),
-                                               (const gchar *)RVAL2CSTR(uri),
+                                               RVAL2CSTR(uri),
                                                &error);
     if (! ret) RAISE_GERROR(error);
 
@@ -491,8 +487,8 @@ bf_move_item(VALUE self, VALUE old_uri, VALUE new_uri)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_move_item(_SELF(self),
-                                             (const gchar *)RVAL2CSTR(old_uri),
-                                             (const gchar *)RVAL2CSTR(new_uri),
+                                             RVAL2CSTR(old_uri),
+                                             RVAL2CSTR(new_uri),
                                              &error);
     if (! ret) RAISE_GERROR(error);
 

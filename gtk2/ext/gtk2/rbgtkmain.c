@@ -87,7 +87,7 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
 {
     gint i, gargc;
     VALUE argary;
-    gchar** gargv;
+    char** gargv;
     VALUE progname;
 
     if (_initialized)
@@ -107,16 +107,13 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
     
     gargv = ALLOCA_N(char *, gargc + 1);
     progname = rb_gv_get("$0");
-    gargv[0] = RVAL2CSTR(progname);
+    gargv[0] = (char *)RVAL2CSTR(progname);
 
-    for (i = 0; i < gargc; i++) {
-        if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING) {
-            gargv[i+1] = RVAL2CSTR(RARRAY_PTR(argary)[i]);
-        }
-        else {
-            gargv[i+1] = g_strdup("");
-        }
-    }
+    for (i = 0; i < gargc; i++)
+        if (TYPE(RARRAY_PTR(argary)[i]) == T_STRING)
+            gargv[i+1] = (char *)RVAL2CSTR(RARRAY_PTR(argary)[i]);
+        else
+            gargv[i+1] = (char *)"";
     gargc++;
 
     {

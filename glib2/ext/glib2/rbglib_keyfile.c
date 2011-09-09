@@ -70,7 +70,7 @@ keyfile_load_from_file(int argc, VALUE *argv, VALUE self)
     }
 
     ret = g_key_file_load_from_file(_SELF(self), 
-                                    (const gchar*)RVAL2CSTR(file),
+                                    RVAL2CSTR(file),
                                     gflags, &error);
 
     if (! ret) RAISE_GERROR(error);
@@ -137,38 +137,27 @@ keyfile_load_from_dirs(int argc, VALUE *argv, VALUE self)
     GError* error = NULL;
     gboolean success;
     const gchar *file;
-    gchar **search_dirs;
+    const gchar **search_dirs;
     gchar* full_path;
     GKeyFileFlags flags;
 
     rb_scan_args(argc, argv, "12", &rb_file, &rb_search_dirs, &rb_flags);
 
     file = RVAL2CSTR(rb_file);
-    if (NIL_P(rb_search_dirs)) {
-	search_dirs = NULL;
-    }
-    else {
-	long i, len;
-
-	Check_Type(rb_search_dirs, T_ARRAY);
-	len = RARRAY_LEN(rb_search_dirs);
-	search_dirs = ALLOCA_N(gchar *, len + 1);
-	for (i = 0; i < len; i++) {
-	    search_dirs[i] = RVAL2CSTR(RARRAY_PTR(rb_search_dirs)[i]);
-	}
-	search_dirs[i] = NULL;
-    }
+    search_dirs = RVAL2STRV_ACCEPT_NIL(rb_search_dirs);
     flags = G_KEY_FILE_KEEP_COMMENTS | G_KEY_FILE_KEEP_TRANSLATIONS;
     if (!NIL_P(rb_flags))
         flags = RVAL2GFLAGS(rb_flags, G_TYPE_KEY_FILE_FLAGS);
 
-    if (search_dirs)
+    if (search_dirs != NULL)
 	success = g_key_file_load_from_dirs(_SELF(self), file,
-					    (const gchar **)search_dirs,
+					    search_dirs,
 					    &full_path, flags, &error);
     else
 	success = g_key_file_load_from_data_dirs(_SELF(self), file,
 						 &full_path, flags, &error);
+
+    g_free(search_dirs);
 
     if (!success)
 	RAISE_GERROR(error);
@@ -535,38 +524,36 @@ keyfile_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
 #endif
 
 static VALUE
-keyfile_set_string_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
+keyfile_set_string_list(VALUE self, VALUE group_name, VALUE key, VALUE rblist)
 {
-    gint len = RARRAY_LEN(list);
-    gchar** glist = ALLOCA_N(gchar*, len);
-    gint i;
-
-    for (i = 0; i < len; i++){
-        glist[i] = RVAL2CSTR(RARRAY_PTR(list)[i]);
-    }
+    VALUE ary = rb_ary_to_ary(rblist);
+    const gchar **list = RVAL2STRV(ary);
 
     g_key_file_set_string_list(_SELF(self), 
-                               (const gchar*)RVAL2CSTR(group_name),
-                               (const gchar*)RVAL2CSTR(key),
-                               (const gchar**)glist, len);
+                               RVAL2CSTR(group_name),
+                               RVAL2CSTR(key),
+                               list,
+                               RARRAY_LEN(ary));
+
+    g_free(list);
+
     return self;
 }
 
 static VALUE
-keyfile_set_locale_string_list(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE list)
+keyfile_set_locale_string_list(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE rblist)
 {
-    gint len = RARRAY_LEN(list);
-    gchar** glist = ALLOCA_N(gchar*, len);
-    gint i;
+    VALUE ary = rb_ary_to_ary(rblist);
+    const gchar **list = RVAL2STRV(ary);
 
-    for (i = 0; i < len; i++){
-        glist[i] = RVAL2CSTR(RARRAY_PTR(list)[i]);
-    }
+    g_key_file_set_locale_string_list(_SELF(self),
+                                      RVAL2CSTR(group_name),
+                                      RVAL2CSTR(key),
+                                      RVAL2CSTR(locale),
+                                      list,
+                                      RARRAY_LEN(ary));
 
-    g_key_file_set_locale_string_list(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
-                                      (const gchar*)RVAL2CSTR(key),
-                                      (const gchar*)RVAL2CSTR(locale),
-                                      (const gchar**)glist, len);
+    g_free(list);
 
     return self;
 }

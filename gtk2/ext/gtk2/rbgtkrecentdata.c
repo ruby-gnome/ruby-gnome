@@ -64,7 +64,7 @@ rd_get_ ## name (VALUE self)\
 static VALUE \
 rd_set_ ## name (VALUE self, VALUE val)\
 {\
-    _SELF(self)->name = RVAL2CSTR(val);\
+    _SELF(self)->name = (gchar *)RVAL2CSTR(val);\
     return self;\
 }
 
@@ -91,14 +91,7 @@ rd_get_groups(VALUE self)
 static VALUE
 rd_set_groups(VALUE self, VALUE groups)
 {
-    gint i;
-    gint len = RARRAY_LEN(groups);
-    gchar** grps = g_new(gchar*, len + 1);
-    for (i = 0; i < len; i++) {
-        grps[i] = RVAL2CSTR(RARRAY_PTR(groups)[i]);
-    }
-    grps[len] = NULL;
-    _SELF(self)->groups = grps;
+    _SELF(self)->groups = RVAL2STRV_DUP(groups);
 
     return self;
 }

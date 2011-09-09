@@ -59,6 +59,12 @@ typedef int GPid;
 #define CSTRFILENAME2RVAL_FREE(s) (rbg_filename_to_ruby_free(s))
 #define CSTRFILENAMEARRAY2RVAL_FREE(s) (rbg_filename_gslist_to_array_free(s))
 
+#define RVAL2STRV(ary) rbg_rval2strv(ary)
+#define RVAL2STRV_ACCEPT_NIL(ary) rbg_rval2strv_accept_nil(ary)
+#define RVAL2STRV_DUP(ary) rbg_rval2strv_dup(ary)
+
+#define RVAL2ARGV(ary) rbg_rval2argv(ary)
+
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
 #define GERROR2RVAL(error) (rbgerr_gerror2exception(error))
@@ -83,8 +89,8 @@ RUBY_GLIB2_VAR VALUE mGLib;
 extern const gchar *rbg_rval_inspect(VALUE object);
 
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr); /* no longer used */
-extern gchar *rbg_rval2cstr(VALUE *str);
-extern gchar *rbg_rval2cstr_accept_nil(VALUE *str);
+extern const gchar *rbg_rval2cstr(VALUE *str);
+extern const gchar *rbg_rval2cstr_accept_nil(VALUE *str);
 extern VALUE rbg_cstr2rval(const gchar* str);
 extern VALUE rbg_cstr2rval_len(const gchar* str, gsize len);
 extern VALUE rbg_cstr2rval_with_encoding(const gchar* str,
@@ -96,6 +102,11 @@ extern VALUE rbg_cstr2rval_with_free(gchar* str);
 extern VALUE rbg_filename_to_ruby_free(gchar *filename);
 extern gchar *rbg_filename_from_ruby(VALUE filename);
 extern VALUE rbg_filename_gslist_to_array_free(GSList *list);
+
+const gchar **rbg_rval2strv(VALUE ary);
+const gchar **rbg_rval2strv_accept_nil(VALUE ary);
+gchar **rbg_rval2strv_dup(VALUE ary);
+const gchar **rbg_rval2argv(VALUE ary);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);

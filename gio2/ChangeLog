@@ -2,6 +2,7 @@
 
 	* Rakefile, ext/gio2/extconf.rb: share depended packages
 	vendor/local/.
+	* ext/gio2/*.c: Fix all RVAL2CSTR calls.
 
 2011-01-29  Kouhei Sutou  <kou@cozmixng.org>
 

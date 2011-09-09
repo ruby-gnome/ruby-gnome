@@ -33,15 +33,15 @@ static VALUE
 rbatk_document_get_attribute_value(VALUE self, VALUE name)
 {
     return CSTR2RVAL(atk_document_get_attribute_value(_SELF(self), 
-                                                      (const gchar*)RVAL2CSTR(name)));
+                                                      RVAL2CSTR(name)));
 }
 
 static VALUE
 rbatk_document_set_attribute_value(VALUE self, VALUE name, VALUE value)
 {
     gboolean ret = atk_document_set_attribute_value(_SELF(self),
-                                                    (const gchar*)RVAL2CSTR(name),
-                                                    (const gchar*)RVAL2CSTR(value));
+                                                    RVAL2CSTR(name),
+                                                    RVAL2CSTR(value));
 
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set attribute value: %s, %s", 
                         RVAL2CSTR(name), RVAL2CSTR(value));

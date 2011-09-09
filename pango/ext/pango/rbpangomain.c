@@ -55,8 +55,8 @@ rpango_break(VALUE self, VALUE text, VALUE analysis)
 {
     gint i, len;
     glong attrs_len;
-    PangoLogAttr* attrs;
-    gchar* gtext;
+    PangoLogAttr *attrs;
+    const gchar *gtext;
     VALUE ret;
 
     StringValue(text);
@@ -65,9 +65,9 @@ rpango_break(VALUE self, VALUE text, VALUE analysis)
     attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
     attrs = g_new0(PangoLogAttr, attrs_len);
 
-    pango_break((const gchar*)gtext, len,
-                        NIL_P(analysis) ? NULL : RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
-                        attrs, attrs_len);
+    pango_break(gtext, len,
+                NIL_P(analysis) ? NULL : RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
+                attrs, attrs_len);
 
     ret = rb_ary_new();
     for (i = 0; i < attrs_len; i++){
@@ -82,8 +82,8 @@ rpango_get_log_attrs(VALUE self, VALUE text, VALUE level, VALUE language)
 {
     gint i, len;
     glong attrs_len;
-    PangoLogAttr* attrs;
-    gchar* gtext;
+    PangoLogAttr *attrs;
+    const gchar *gtext;
     VALUE ret;
 
     StringValue(text);
@@ -92,7 +92,7 @@ rpango_get_log_attrs(VALUE self, VALUE text, VALUE level, VALUE language)
     attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
     attrs = g_new0(PangoLogAttr, attrs_len);
 
-    pango_get_log_attrs((const gchar*)gtext, len, NUM2INT(level),
+    pango_get_log_attrs(gtext, len, NUM2INT(level),
                         RVAL2BOXED(language, PANGO_TYPE_LANGUAGE),
                         attrs, attrs_len);
 

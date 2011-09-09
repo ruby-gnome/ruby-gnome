@@ -122,9 +122,9 @@ create_factory_entry(GtkItemFactoryEntry *entry, VALUE self, VALUE path, VALUE i
 {
     VALUE action;
 
-    entry->path = NIL_P(path) ? NULL : RVAL2CSTR(path);
-    entry->item_type = NIL_P(item_type) ? g_strdup("<Branch>") : RVAL2CSTR(item_type);
-    entry->accelerator = NIL_P(accel) ? NULL : RVAL2CSTR(accel);
+    entry->path = (gchar *)(NIL_P(path) ? NULL : RVAL2CSTR(path));
+    entry->item_type = (gchar *)(NIL_P(item_type) ? "<Branch>" : RVAL2CSTR(item_type));
+    entry->accelerator = (gchar *)(NIL_P(accel) ? NULL : RVAL2CSTR(accel));
         
     if (menuitem_type_check(entry->item_type) == 0) {
         entry->callback = NULL;

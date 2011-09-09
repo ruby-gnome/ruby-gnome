@@ -1080,7 +1080,7 @@ file_set_attribute(int argc, VALUE *argv, VALUE self)
         gint32 gint32_value;
         guint64 guint64_value;
         gint64 gint64_value;
-        char **stringv_value = NULL;
+        const char **stringv_value = NULL;
         GFileQueryInfoFlags flags;
         GCancellable *cancellable;
         GError *error = NULL;
@@ -1094,7 +1094,7 @@ file_set_attribute(int argc, VALUE *argv, VALUE self)
         switch (type) {
         case G_FILE_ATTRIBUTE_TYPE_STRING:
         case G_FILE_ATTRIBUTE_TYPE_BYTE_STRING:
-                value = RVAL2CSTR(rbvalue);
+                value = (gpointer)RVAL2CSTR(rbvalue);
                 break;
         case G_FILE_ATTRIBUTE_TYPE_BOOLEAN:
                 gboolean_value = RVAL2CBOOL(rbvalue);
@@ -1120,7 +1120,8 @@ file_set_attribute(int argc, VALUE *argv, VALUE self)
                 value = RVAL2GOBJ(rbvalue);
                 break;
         case G_FILE_ATTRIBUTE_TYPE_STRINGV:
-                value = stringv_value = ARY2STRVECTOR(rbvalue);
+                stringv_value = RVAL2STRV(rbvalue);
+                value = (gpointer)stringv_value;
                 break;
         case G_FILE_ATTRIBUTE_TYPE_INVALID:
         default:

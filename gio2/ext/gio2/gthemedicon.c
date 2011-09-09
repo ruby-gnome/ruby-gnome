@@ -26,14 +26,13 @@
 static VALUE
 themedicon_initialize(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbiconnames, with_default_fallbacks;
-        char **iconnames;
+        VALUE iconnames, with_default_fallbacks;
         GIcon *icon;
 
-        rb_scan_args(argc, argv, "11", &rbiconnames, &with_default_fallbacks);
+        rb_scan_args(argc, argv, "11", &iconnames, &with_default_fallbacks);
 
-        if (TYPE(rbiconnames) != T_ARRAY) {
-                const char *iconname = RVAL2CSTR(rbiconnames);
+        if (TYPE(iconnames) != T_ARRAY) {
+                const char *iconname = RVAL2CSTR(iconnames);
 
                 icon = RVAL2CBOOL(with_default_fallbacks) ?
                         g_themed_icon_new_with_default_fallbacks(iconname) :
@@ -48,11 +47,7 @@ themedicon_initialize(int argc, VALUE *argv, VALUE self)
                 rb_raise(rb_eArgError,
                          "only one argument allowed when first argument is an Array");
 
-        iconnames = ARY2STRVECTOR(rbiconnames);
-
-        icon = g_themed_icon_new_from_names(iconnames, -1);
-
-        g_free(iconnames);
+        icon = g_themed_icon_new_from_names(RVAL2STRV_DUP(iconnames), -1);
 
         G_INITIALIZE(self, icon);
 

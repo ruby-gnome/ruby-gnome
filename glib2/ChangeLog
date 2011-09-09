@@ -2,6 +2,7 @@
 
 	* lib/mkmf-gnome2.rb: Use new RubyGems APIs.
 	* ext/glib2/*.c: Fix all warnings generated with gcc 4.4.5.
+	* ext/glib2/*.c: Fix all RVAL2CSTR calls.
 
 2011-08-04  Kouhei Sutou  <kou@cozmixng.org>
 

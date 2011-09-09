@@ -51,7 +51,7 @@ gdkevent ## type ## _ ## name (VALUE self)\
 static VALUE \
 gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
-    get_gdkevent(self)->type.name = RVAL2CSTR(val);\
+    get_gdkevent(self)->type.name = (gchar *)RVAL2CSTR(val);\
     return self;\
 }
 

@@ -46,7 +46,7 @@ g_completion_get_type(void)
 #define _SELF(s) ((GCompletion*)RVAL2BOXED(s, G_TYPE_COMPLETION))
 
 /* data should be [self, data] */
-static gchar*
+static gchar *
 comp_func(gpointer compdata)
 {
     VALUE ret;
@@ -60,7 +60,7 @@ comp_func(gpointer compdata)
     } else {
         ret = rb_funcall(func, id_call, 1, data);
     }
-    return RVAL2CSTR(ret);
+    return (gchar *)RVAL2CSTR(ret);
 }
 
 static VALUE

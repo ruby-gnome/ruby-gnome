@@ -273,11 +273,11 @@ actiongroup_add_radio_actions(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-static gchar*
+static gchar *
 translate_func(const gchar *path, gpointer func)
 {
     VALUE ret = rb_funcall((VALUE)func, id_call, 1, CSTR2RVAL(path));
-    return RVAL2CSTR(ret);
+    return (gchar *)RVAL2CSTR(ret);
 }
 
 static VALUE

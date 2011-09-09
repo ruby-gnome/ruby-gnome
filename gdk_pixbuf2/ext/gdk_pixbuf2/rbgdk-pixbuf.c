@@ -252,17 +252,15 @@ initialize(int argc, VALUE *argv, VALUE self)
                 buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
             }
         } else if (TYPE(arg1) == T_ARRAY) {
-            int i;
-            gchar** data = ALLOCA_N(gchar*, RARRAY_LEN(arg1));
-            for (i=0; i < RARRAY_LEN(arg1); i++) {
-		data[i] = RVAL2CSTR(RARRAY_PTR(arg1)[i]);
-            }
-            buf = gdk_pixbuf_new_from_xpm_data((const gchar**)data);
-            if (buf == NULL){
+            const gchar **data = RVAL2STRV(arg1);
+            buf = gdk_pixbuf_new_from_xpm_data(data);
+            if (buf == NULL) {
                 rb_gc();
-                buf = gdk_pixbuf_new_from_xpm_data((const gchar**)data);
-                if (buf == NULL) NOMEM_ERROR(&error);
+                buf = gdk_pixbuf_new_from_xpm_data(data);
             }
+            g_free(data);
+            if (buf == NULL)
+                NOMEM_ERROR(&error);
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
         }
@@ -302,7 +300,7 @@ get_file_info(VALUE self, VALUE filename)
 #endif
 
 static VALUE
-save_to(VALUE self, gchar *filename, gchar *type, VALUE options)
+save_to(VALUE self, const gchar *filename, const gchar *type, VALUE options)
 {
     VALUE result = self;
     GError *error = NULL;
@@ -328,10 +326,10 @@ save_to(VALUE self, gchar *filename, gchar *type, VALUE options)
                 const_key = rb_id2name(SYM2ID(key));
                 keys[i] = (gchar *)const_key;
             } else {
-                keys[i] = RVAL2CSTR(key);
+                keys[i] = (gchar *)RVAL2CSTR(key);
             }
             value = rb_funcall(RARRAY_PTR(RARRAY_PTR(ary)[i])[1], to_s, 0);
-            values[i] = RVAL2CSTR(value);
+            values[i] = (gchar *)RVAL2CSTR(value);
         }
         keys[len] = NULL;
         values[len] = NULL;

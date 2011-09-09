@@ -21,7 +21,7 @@ gwin_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg;
     GtkWindowType tp = GTK_WINDOW_TOPLEVEL;
-    gchar* title = NULL;
+    const gchar *title = NULL;
     GtkWidget* window = NULL;
 
     if (rb_scan_args(argc, argv, "01", &arg) == 1) {
@@ -34,7 +34,7 @@ gwin_initialize(int argc, VALUE *argv, VALUE self)
     }
     window = gtk_window_new(tp);
 
-    if (title)
+    if (title != NULL)
         gtk_window_set_title(GTK_WINDOW(window), title);
 
     RBGTK_INITIALIZE(self, window);

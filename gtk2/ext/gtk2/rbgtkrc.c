@@ -116,16 +116,15 @@ rc_get_default_files(VALUE self)
 }
 
 static VALUE
-rc_set_default_files(VALUE self, VALUE filenames)
+rc_set_default_files(VALUE self, VALUE rbfilenames)
 {
-    int i;
-    gchar** gfiles = g_new(gchar*, RARRAY_LEN(filenames) + 1);
-    for (i = 0; i < RARRAY_LEN(filenames); i++) {
-        gfiles[i] = RVAL2CSTR(RARRAY_PTR(filenames)[i]);
-    }
-    gfiles[RARRAY_LEN(filenames)] = NULL;
-    gtk_rc_set_default_files(gfiles);
-    return filenames;
+    gchar **filenames = (gchar **)RVAL2STRV(rbfilenames);
+
+    gtk_rc_set_default_files(filenames);
+
+    g_free(filenames);
+
+    return rbfilenames;
 }
 /*
 guint       gtk_rc_parse_color              (GScanner *scanner,

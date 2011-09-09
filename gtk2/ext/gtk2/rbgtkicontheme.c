@@ -192,28 +192,19 @@ it_choose_icon(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_icon_names, rb_size, rb_flags;
     gint size;
-    gchar **icon_names;
+    const gchar **icon_names;
     GtkIconLookupFlags flags;
     GtkIconInfo *info;
 
     rb_scan_args(argc, argv, "21", &rb_icon_names, &rb_size, &rb_flags);
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(rb_icon_names, rb_cString))) {
-	icon_names = ALLOCA_N(gchar *, 2);
+	icon_names = ALLOCA_N(const gchar *, 2);
 	icon_names[0] = RVAL2CSTR(rb_icon_names);
 	icon_names[1] = NULL;
     }
     else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_icon_names, rb_cArray))) {
-	VALUE *elements;
-	long i, len;
-
-	len = RARRAY_LEN(rb_icon_names);
-	icon_names = ALLOCA_N(gchar *, len + 1);
-	elements = RARRAY_PTR(rb_icon_names);
-	for (i = 0; i < len; i++) {
-	    icon_names[i] = RVAL2CSTR(elements[i]);
-	}
-	icon_names[i] = NULL;
+        icon_names = RVAL2STRV(rb_icon_names);
     }
     else {
 	rb_raise(rb_eArgError,
@@ -233,7 +224,7 @@ it_choose_icon(int argc, VALUE *argv, VALUE self)
     }
 
     info = gtk_icon_theme_choose_icon(_SELF(self),
-				      (const gchar **)icon_names,
+				      icon_names,
 				      size, flags);
     return ICON_INFO2RVAL(info);
 }

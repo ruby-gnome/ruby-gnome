@@ -30,10 +30,10 @@ stock_m_add(int argc, VALUE *argv, VALUE klass)
     rb_scan_args(argc, argv, "23", &stock_id, &label, &modifier, &keyval, &translation_domain);
     Check_Symbol(stock_id);
     item.stock_id = (gchar *)SYM2CSTR(stock_id);
-    item.label = RVAL2CSTR(label);
+    item.label = (gchar *)RVAL2CSTR(label);
     item.modifier = NIL_P(modifier) ? 0 : NUM2UINT(modifier);
     item.keyval = NIL_P(keyval) ? 0 : NUM2UINT(keyval);
-    item.translation_domain = NIL_P(translation_domain) ? NULL : RVAL2CSTR(translation_domain);
+    item.translation_domain = NIL_P(translation_domain) ? NULL : (gchar *)RVAL2CSTR(translation_domain);
     gtk_stock_add(&item, 1);
     return Qnil;
 }
@@ -70,11 +70,11 @@ stock_m_list_ids(VALUE klass)
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
-static gchar*
+static gchar *
 translate_func(const gchar *path, gpointer func)
 {
     VALUE ret = rb_funcall((VALUE)func, id_call, 1, CSTR2RVAL(path));
-    return RVAL2CSTR(ret);
+    return (gchar *)RVAL2CSTR(ret);
 }
 
 static VALUE

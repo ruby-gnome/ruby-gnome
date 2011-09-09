@@ -33,7 +33,7 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
         fmt = sizeof(int) * 8;
         len = 1;
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
-        dat = RVAL2CSTR(src);
+        dat = (void *)RVAL2CSTR(src);
 	if (NIL_P(size)) {
 	    fmt = sizeof(char) * 8;
 	    len = RSTRING_LEN(src);
@@ -45,7 +45,7 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
         guchar* str = (guchar*)dat;
         gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, &str, &len);
     } else if(type != Qnil && size != Qnil && src != Qnil) {
-    	dat = RVAL2CSTR(src);
+    	dat = (void *)RVAL2CSTR(src);
 	fmt = NUM2INT(size);
 	len = (RSTRING_LEN(src) * sizeof(char) / fmt);
     } else {
@@ -183,23 +183,11 @@ static VALUE
 gtkselectiondata_set_uris(VALUE self, VALUE uris)
 {
     gboolean ret;
-    gchar** guris;
-    int i, n_targets;
+    gchar **guris;
     
-    Check_Type(uris, T_ARRAY);
-    n_targets = RARRAY_LEN(uris);
- 
-    guris = g_new(gchar*, n_targets + 1);
-
-    for (i = 0; i < n_targets; i++) {
-        guris[i] = RVAL2CSTR(RARRAY_PTR(uris)[i]);
-    }
-    guris[n_targets] = NULL;
-
+    guris = (gchar **)RVAL2STRV(uris);
     ret = gtk_selection_data_set_uris(_SELF(self), guris);
-
-    g_strfreev(guris);
-
+    g_free(guris);
     if (!ret) 
         rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");
 

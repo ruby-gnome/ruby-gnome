@@ -36,9 +36,9 @@ rbgtk_get_target_entry(VALUE targets)
         e_flags = rb_ary_entry(ary, 1);
         e_info = rb_ary_entry(ary, 2);
         
-        entries[i].target = NIL_P(e_target) ? NULL:RVAL2CSTR(e_target);
-        entries[i].flags = NIL_P(e_flags) ? 0:RVAL2GFLAGS(e_flags, GTK_TYPE_TARGET_FLAGS);
-        entries[i].info = NIL_P(e_info) ? 0:NUM2INT(e_info);
+        entries[i].target = NIL_P(e_target) ? NULL : (char *)RVAL2CSTR(e_target);
+        entries[i].flags = NIL_P(e_flags) ? 0 : RVAL2GFLAGS(e_flags, GTK_TYPE_TARGET_FLAGS);
+        entries[i].info = NIL_P(e_info) ? 0 : NUM2INT(e_info);
 
     }
     return entries;

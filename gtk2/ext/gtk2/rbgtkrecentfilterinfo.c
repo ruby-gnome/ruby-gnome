@@ -103,14 +103,10 @@ rf_get_applications(VALUE self)
 static VALUE
 rf_set_applications(VALUE self, VALUE applications)
 {
-    gint i;
-    gint len = RARRAY_LEN(applications);
-    gchar** apps = g_new(gchar*, len + 1);
-    for (i = 0; i < len; i++) {
-        apps[i] = RVAL2CSTR(RARRAY_PTR(applications)[i]);
-    }
-    apps[len] = NULL;
-    _SELF(self)->applications = (const gchar**)apps;
+    /* NOTE: This can’t be right.  What guarantees that the entries in
+     * applications will be around?  It should be RVAL2STRV_DUP and use
+     * g_strfreev in free above. */
+    _SELF(self)->applications = RVAL2STRV(applications);
 
     return self;
 }
@@ -132,14 +128,7 @@ rf_get_groups(VALUE self)
 static VALUE
 rf_set_groups(VALUE self, VALUE groups)
 {
-    gint i;
-    gint len = RARRAY_LEN(groups);
-    gchar** grps = g_new(gchar*, len + 1);
-    for (i = 0; i < len; i++) {
-        grps[i] = RVAL2CSTR(RARRAY_PTR(groups)[i]);
-    }
-    grps[len] = NULL;
-    _SELF(self)->groups = (const gchar**)grps;
+    _SELF(self)->groups = RVAL2STRV(groups);
 
     return self;
 }

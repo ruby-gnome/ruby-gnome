@@ -31,9 +31,8 @@ rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv,
     gboolean ret;
     GPid child_pid;
     VALUE func = Qnil;
-    gint gargc, genc, i;
-    gchar** gargv = (gchar**)NULL;
-    gchar** genvp = (gchar**)NULL;
+    gchar **gargv;
+    gchar **genvp;
     gint standard_input, standard_output, standard_error;
 
     if (rb_block_given_p()) {
@@ -41,36 +40,8 @@ rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv,
         G_RELATIVE(self, func);
     }
 
-    if (! NIL_P(argv)){
-        Check_Type(argv, T_ARRAY);
-        gargc = RARRAY_LEN(argv);
-        gargv = ALLOCA_N(gchar *, gargc + 1);
-        for (i = 0; i < gargc; i++) {
-            if (TYPE(RARRAY_PTR(argv)[i]) == T_STRING) {
-                gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
-            }
-            else {
-                gargv[i] = g_strdup("");
-            }
-        }
-        gargv[gargc] = (gchar*)NULL;
-    }
-
-    if (! NIL_P(envp)){
-        Check_Type(envp, T_ARRAY);
-        genc = RARRAY_LEN(envp);
-        genvp = ALLOCA_N(gchar*, genc + 1);
-        for (i = 0; i < genc; i++) {
-            if (TYPE(RARRAY_PTR(envp)[i]) == T_STRING) {
-                genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
-            }
-            else {
-                genvp[i] = g_strdup("");
-            }
-        }
-        genvp[genc] = (gchar*)NULL;
-    }
-
+    gargv = (gchar **)RVAL2ARGV(argv);
+    genvp = (gchar **)RVAL2ARGV(envp);
     ret = g_spawn_async_with_pipes(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                                    gargv, genvp, NUM2INT(flags),
                                    (GSpawnChildSetupFunc)child_setup, 
@@ -78,8 +49,10 @@ rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv,
                                    &child_pid, 
                                    &standard_input, &standard_output,
                                    &standard_error, &err);
-    
-    if (! ret) RAISE_GERROR(err);
+    g_free(gargv);
+    g_free(genvp);
+    if (!ret)
+        RAISE_GERROR(err);
     
     return rb_ary_new3(4, INT2NUM((gint)child_pid), 
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_input)),
@@ -94,54 +67,25 @@ rbglib_m_spawn_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp
     gboolean ret;
     GPid child_pid;
     VALUE func = Qnil;
-    gint gargc, genc, i;
-    gchar** gargv = (gchar**)NULL;
-    gchar** genvp = (gchar**)NULL;
+    gchar **gargv;
+    gchar **genvp;
 
     if (rb_block_given_p()) {
         func = rb_block_proc();
         G_RELATIVE(self, func);
     }
 
-    if (! NIL_P(argv)){
-        Check_Type(argv, T_ARRAY);
-        gargc = RARRAY_LEN(argv);
-        gargv = ALLOCA_N(gchar*, gargc + 1);
-        for (i = 0; i < gargc; i++) {
-            if (TYPE(RARRAY_PTR(argv)[i]) == T_STRING) {
-                gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
-            }
-            else {
-                gargv[i] = g_strdup("");
-            }
-        }
-        gargv[gargc] = (gchar*)NULL;
-    }
-
-    if (! NIL_P(envp)){
-        Check_Type(envp, T_ARRAY);
-        genc = RARRAY_LEN(envp);
-        genvp = ALLOCA_N(gchar*, genc + 1);
-        for (i = 0; i < genc; i++) {
-            if (TYPE(RARRAY_PTR(envp)[i]) == T_STRING) {
-                genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
-            }
-            else {
-                genvp[i] = g_strdup("");
-            }
-        }
-        genvp[genc] = (gchar*)NULL;
-    }
-
+    gargv = (gchar **)RVAL2ARGV(argv);
+    genvp = (gchar **)RVAL2ARGV(envp);
     ret = g_spawn_async(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                         gargv, genvp, NUM2INT(flags),
                         (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                         &child_pid, &err);
-
-    if (! ret){
+    g_free(gargv);
+    g_free(genvp);
+    if (!ret)
         RAISE_GERROR(err);
-    }
-    
+
     return INT2NUM((int)child_pid);
 }
 
@@ -151,9 +95,8 @@ rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp,
     GError *err = NULL;
     gboolean ret;
     VALUE func = Qnil;
-    gint gargc, genc, i;
-    gchar** gargv = (gchar**)NULL;
-    gchar** genvp = (gchar**)NULL;
+    gchar** gargv;
+    gchar** genvp;
     gchar *standard_output = NULL, *standard_error = NULL;
     gint exit_status;
     VALUE std_out, std_err;
@@ -163,46 +106,17 @@ rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp,
         G_RELATIVE(self, func);
     }
 
-    if (! NIL_P(argv)){
-        Check_Type(argv, T_ARRAY);
-        gargc = RARRAY_LEN(argv);
-        gargv = ALLOCA_N(gchar*, gargc + 1);
-        for (i = 0; i < gargc; i++) {
-            if (TYPE(RARRAY_PTR(argv)[i]) == T_STRING) {
-                gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
-            }
-            else {
-                gargv[i] = g_strdup("");
-            }
-        }
-        gargv[gargc] = (gchar*)NULL;
-    }
-
-    if (! NIL_P(envp)){
-        Check_Type(envp, T_ARRAY);
-        genc = RARRAY_LEN(envp);
-        genvp = ALLOCA_N(gchar*, genc + 1);
-        for (i = 0; i < genc; i++) {
-            if (TYPE(RARRAY_PTR(envp)[i]) == T_STRING) {
-                genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
-            }
-            else {
-                genvp[i] = g_strdup("");
-            }
-        }
-        genvp[genc] = (gchar*)NULL;
-    }
-
+    gargv = (gchar **)RVAL2ARGV(argv);
+    genvp = (gchar **)RVAL2ARGV(envp);
     ret = g_spawn_sync(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                        gargv, genvp, NUM2INT(flags),
                        (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                        &standard_output, &standard_error,
                        &exit_status, &err);
-
-
-    if (! ret){
+    g_free(gargv);
+    g_free(genvp);
+    if (!ret)
         RAISE_GERROR(err);
-    }
 
     if (standard_output) {
         std_out = CSTR2RVAL(standard_output);

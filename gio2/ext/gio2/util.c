@@ -198,26 +198,6 @@ rbgio_str_vector_to_ary_free(gchar **vector)
                          rbgio_str_vector_to_ary_free_ensure, (VALUE)vector);
 }
 
-char **
-rbgio_ary_to_str_vector(VALUE ary)
-{
-        int i, n;
-        char **strings;
-
-        ary = rb_ary_to_ary(ary);
-        n = RARRAY_LEN(ary);
-
-        for (i = 0; i < n; i++)
-                StringValue(RARRAY_PTR(ary)[i]);
-
-        strings = g_new(char *, n + 1);
-        for (i = 0; i < n; i++)
-                strings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
-        strings[n] = NULL;
-
-        return strings;
-}
-
 struct async_ready_callback_data
 {
         GAsyncResult *result;

@@ -43,7 +43,7 @@ extern void Init_glib_unicode();
 extern void Init_glib_keyfile();
 extern void Init_glib_bookmark_file();
 
-gchar *
+const gchar *
 rbg_rval2cstr(VALUE *str)
 {
     StringValue(*str);
@@ -70,7 +70,7 @@ rbg_string_value_ptr(volatile VALUE *ptr)
     return rb_string_value_ptr(ptr);
 }
 
-gchar *
+const gchar *
 rbg_rval2cstr_accept_nil(VALUE *str)
 {
     return NIL_P(*str) ? NULL : RVAL2CSTR(*str);
@@ -238,6 +238,73 @@ rbg_filename_gslist_to_array_free(GSList *list)
     return ary;
 }
 
+const gchar **
+rbg_rval2strv(VALUE ary)
+{
+        int i, n;
+        const gchar **strings;
+
+        ary = rb_ary_to_ary(ary);
+        n = RARRAY_LEN(ary);
+
+        for (i = 0; i < n; i++)
+                StringValue(RARRAY_PTR(ary)[i]);
+
+        strings = g_new(const gchar *, n + 1);
+        for (i = 0; i < n; i++)
+                strings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+        strings[n] = NULL;
+
+        return strings;
+}
+
+const gchar **
+rbg_rval2strv_accept_nil(VALUE ary)
+{
+        return NIL_P(ary) ? NULL : rbg_rval2strv(ary);
+}
+
+gchar **
+rbg_rval2strv_dup(VALUE ary)
+{
+        int i, n;
+        gchar **strings;
+
+        ary = rb_ary_to_ary(ary);
+        n = RARRAY_LEN(ary);
+
+        for (i = 0; i < n; i++)
+                StringValue(RARRAY_PTR(ary)[i]);
+
+        strings = g_new(gchar *, n + 1);
+        for (i = 0; i < n; i++)
+                strings[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(ary)[i]));
+        strings[n] = NULL;
+
+        return strings;
+}
+
+const gchar **
+rbg_rval2argv(VALUE ary)
+{
+        int i, n;
+        const gchar **strings;
+
+        if (NIL_P(ary))
+                return NULL;
+
+        ary = rb_ary_to_ary(ary);
+        n = RARRAY_LEN(ary);
+
+        strings = g_new(const gchar *, n + 1);
+        for (i = 0; i < n; i++)
+                strings[i] = TYPE(RARRAY_PTR(ary)[i]) == T_STRING ?
+                        RVAL2CSTR(RARRAY_PTR(ary)[i]) :
+                        "";
+        strings[n] = NULL;
+
+        return strings;
+}
 
 #if 0
 /*

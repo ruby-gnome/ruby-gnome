@@ -24,7 +24,7 @@ combo_set_popdown_strings(VALUE self, VALUE ary)
 
     Check_Type(ary, T_ARRAY);
     for (i=0; i<RARRAY_LEN(ary); i++) {
-        glist = g_list_append(glist, RVAL2CSTR(RARRAY_PTR(ary)[i]));
+        glist = g_list_append(glist, (gpointer)RVAL2CSTR(RARRAY_PTR(ary)[i]));
     }
     gtk_combo_set_popdown_strings(GTK_COMBO(RVAL2GOBJ(self)), glist);
     g_list_free(glist);

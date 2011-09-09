@@ -36,8 +36,8 @@ rmitem_initialize(int argc, VALUE *argv, VALUE self)
     VALUE arg1, arg2, arg3;
     GtkWidget *widget;
     GSList *list = NULL;
-    char *label = NULL;
-    char *mnemonic = NULL;
+    const gchar *label = NULL;
+    const gchar *mnemonic = NULL;
     
     if (rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3) > 0 &&
         TYPE(arg1) == T_STRING) {

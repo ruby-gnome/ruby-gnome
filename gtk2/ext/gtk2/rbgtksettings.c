@@ -163,7 +163,7 @@ settings_set_property_value(VALUE self, VALUE name, VALUE value, VALUE origin)
     g_value_init(&svalue.value, RVAL2GTYPE(value));
     rbgobj_rvalue_to_gvalue(value, &svalue.value);
 
-    svalue.origin = RVAL2CSTR(origin);
+    svalue.origin = (char *)RVAL2CSTR(origin);
     gtk_settings_set_property_value(GTK_SETTINGS(RVAL2GOBJ(self)), 
                                     RVAL2CSTR(name), &svalue);
     g_value_unset(&svalue.value);

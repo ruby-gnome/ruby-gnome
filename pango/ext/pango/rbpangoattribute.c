@@ -27,7 +27,7 @@ pango_get_attribute_klass(VALUE attr_type)
 {
     VALUE type = Qnil;
     if (TYPE(attr_type) == T_STRING){
-        char* strtype = RVAL2CSTR(attr_type);
+        const char *strtype = RVAL2CSTR(attr_type);
         if (strcmp(strtype, "Attribute") == 0){
             type = pattr;
         } else if (strcmp(strtype, "AttrString") == 0){

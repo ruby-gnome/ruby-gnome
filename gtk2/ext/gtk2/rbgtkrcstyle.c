@@ -29,7 +29,7 @@ rcstyle_name(VALUE self)
 static VALUE
 rcstyle_set_name(VALUE self, VALUE name)
 {
-    _SELF(self)->name = RVAL2CSTR(name);
+    _SELF(self)->name = g_strdup(RVAL2CSTR(name));
     return self;
 }
 
@@ -50,7 +50,7 @@ rcstyle_set_bg_pixmap_name(VALUE self, VALUE idx, VALUE bg_pixmap_name)
 
     if (i < 0 || 5 < i)
         rb_raise(rb_eArgError, "state out of range");
-    _SELF(self)->bg_pixmap_name[i] = RVAL2CSTR(bg_pixmap_name);
+    _SELF(self)->bg_pixmap_name[i] = g_strdup(RVAL2CSTR(bg_pixmap_name));
     return self;
 }
     

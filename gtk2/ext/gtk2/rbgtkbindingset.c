@@ -113,7 +113,7 @@ binding_entry_add_signal(int argc, VALUE *argv, VALUE self)
             arg->d.long_data = 1;
         } else if (rb_respond_to (param, rb_intern("to_str"))) {
 	    arg->arg_type = G_TYPE_STRING;
-            arg->d.string_data = RVAL2CSTR(param);
+            arg->d.string_data = (gchar *)RVAL2CSTR(param);
         } else {
             rb_raise(rb_eTypeError, 
                      "can not convert %s into String, Numeric, "

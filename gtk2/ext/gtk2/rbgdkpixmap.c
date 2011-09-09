@@ -50,72 +50,67 @@ gdkpmap_create_from_data(int argc, VALUE *argv, VALUE self)
 static VALUE
 gdkpmap_create_from_xpm(VALUE self, VALUE win, VALUE color, VALUE fname)
 {
-    GdkPixmap *new;
+    GdkPixmap *result;
     GdkBitmap *mask;
 
-    new = gdk_pixmap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)), &mask,
-				     RVAL2GDKCOLOR(color), RVAL2CSTR(fname));
-    if (!new) {
-		rb_raise(rb_eArgError, "Pixmap not created from %s", RVAL2CSTR(fname));
-    }
-    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
+    result = gdk_pixmap_create_from_xpm(GDK_WINDOW(RVAL2GOBJ(win)),
+                                        &mask,
+                                        RVAL2GDKCOLOR(color),
+                                        RVAL2CSTR(fname));
+    if (result == NULL)
+        rb_raise(rb_eArgError, "Pixmap not created from %s", RVAL2CSTR(fname));
+
+    return rb_assoc_new(GOBJ2RVAL(result), GOBJ2RVAL(mask));
 }
 
 static VALUE
 gdkpmap_create_from_xpm_d(VALUE self, VALUE win, VALUE tcolor, VALUE data)
 {
-    GdkPixmap *new;
+    GdkPixmap *result;
     GdkBitmap *mask;
-    int i;
-    gchar **buf;
+    const gchar **buf = RVAL2STRV(data);
 
-    Check_Type(data, T_ARRAY);
-    buf = ALLOCA_N(char*, RARRAY_LEN(data));
-    for (i=0; i < RARRAY_LEN(data); i++) {
-        buf[i] = RVAL2CSTR(RARRAY_PTR(data)[i]);
-    }
-    new = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
-				       &mask, RVAL2GDKCOLOR(tcolor), buf);
+    result = gdk_pixmap_create_from_xpm_d(GDK_WINDOW(RVAL2GOBJ(win)),
+                                          &mask,
+                                          RVAL2GDKCOLOR(tcolor),
+                                          (gchar **)buf);
 
-    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
+    g_free(buf);
+
+    return rb_assoc_new(GOBJ2RVAL(result), GOBJ2RVAL(mask));
 }
 
 static VALUE
 gdkpmap_colormap_create_from_xpm(VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE fname)
 {
-    GdkPixmap *new;
+    GdkPixmap *result;
     GdkBitmap *mask;
 
-    new = gdk_pixmap_colormap_create_from_xpm(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)), 
-                                              GDK_COLORMAP(RVAL2GOBJ(colormap)),
-                                              &mask, RVAL2GDKCOLOR(tcolor),
-                                              RVAL2CSTR(fname));
-    if (!new) {
-		rb_raise(rb_eArgError, "Pixmap not created from %s", RVAL2CSTR(fname));
-    }
-    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
+    result = gdk_pixmap_colormap_create_from_xpm(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)), 
+                                                 GDK_COLORMAP(RVAL2GOBJ(colormap)),
+                                                 &mask,
+                                                 RVAL2GDKCOLOR(tcolor),
+                                                 RVAL2CSTR(fname));
+    if (result == NULL)
+        rb_raise(rb_eArgError, "Pixmap not created from %s", RVAL2CSTR(fname));
+
+    return rb_assoc_new(GOBJ2RVAL(result), GOBJ2RVAL(mask));
 }
 
 static VALUE
 gdkpmap_colormap_create_from_xpm_d(VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE data)
 {
-    GdkPixmap *new;
+    GdkPixmap *result;
     GdkBitmap *mask;
-    int i;
-    gchar **buf;
+    const gchar **buf = RVAL2STRV(data);
 
-    Check_Type(data, T_ARRAY);
-    buf = ALLOCA_N(char*, RARRAY_LEN(data));
-    for (i=0; i<RARRAY_LEN(data); i++) {
-	buf[i] = RVAL2CSTR(RARRAY_PTR(data)[i]);
-    }
+    result = gdk_pixmap_colormap_create_from_xpm_d(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
+                                                   GDK_COLORMAP(RVAL2GOBJ(colormap)),
+                                                   &mask,
+                                                   RVAL2GDKCOLOR(tcolor),
+                                                   (gchar **)buf);
 
-    new = gdk_pixmap_colormap_create_from_xpm_d(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
-                                                GDK_COLORMAP(RVAL2GOBJ(colormap)),
-                                                &mask, RVAL2GDKCOLOR(tcolor),
-						buf);
-
-    return rb_assoc_new(GOBJ2RVAL(new),GOBJ2RVAL(mask));
+    return rb_assoc_new(GOBJ2RVAL(result), GOBJ2RVAL(mask));
 }
 
 #ifdef HAVE_XREADBITMAPFILEDATA
