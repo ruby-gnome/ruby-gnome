@@ -67,7 +67,7 @@ gaccelgrp_query(VALUE self, VALUE key, VALUE mods)
 {
     GtkAccelGroupEntry *entries;
     guint n_entries;
-    int cnt;
+    guint cnt;
     VALUE result;
 
     entries = gtk_accel_group_query(_SELF(self), NUM2UINT(key),

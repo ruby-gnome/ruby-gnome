@@ -119,11 +119,13 @@ tstore_insert(int argc, VALUE *argv, VALUE self)
         
         if(TYPE(values)==T_ARRAY) {
             for(i=0; i<size; i++) {
-                c_columns[i] = i;
-                GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
-                                                             c_columns[i]);
-        
+                GType gtype;
                 GValue gval = {0,};
+
+                c_columns[i] = i;
+                gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
+                                                       c_columns[i]);
+        
                 g_value_init(&gval, gtype);
                 rbgobj_rvalue_to_gvalue(rb_ary_shift(values), &gval);
                 c_values[i] = gval;
@@ -133,12 +135,13 @@ tstore_insert(int argc, VALUE *argv, VALUE self)
             r_columns = rb_funcall(values, rb_intern("keys"), 0);
             
             for(i=0; i<size; i++) {
-                c_columns[i] = NUM2INT (rb_ary_entry(r_columns, i));
-                
-                GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
-                                                             c_columns[i]);
-                
+                GType gtype;
                 GValue gval = {0,};
+
+                c_columns[i] = NUM2INT (rb_ary_entry(r_columns, i));
+                gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
+                                                       c_columns[i]);
+                
                 g_value_init(&gval, gtype);
                 rbgobj_rvalue_to_gvalue(rb_hash_aref(values, INT2NUM(c_columns[i])), &gval);
                 c_values[i] = gval;

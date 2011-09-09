@@ -288,7 +288,7 @@ gdkscreen_spawn_on_screen(VALUE self, VALUE working_directory, VALUE argv, VALUE
                 gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
-                gargv[i] = "";
+                gargv[i] = g_strdup("");
             }
         }
         gargv[gargc] = (gchar*)NULL;
@@ -303,7 +303,7 @@ gdkscreen_spawn_on_screen(VALUE self, VALUE working_directory, VALUE argv, VALUE
                 genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
-                genvp[i] = "";
+                genvp[i] = g_strdup("");
             }
         }
         genvp[genc] = (gchar*)NULL;
@@ -348,7 +348,7 @@ gdkscreen_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE 
                 gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
-                gargv[i] = "";
+                gargv[i] = g_strdup("");
             }
         }
         gargv[gargc] = (gchar*)NULL;
@@ -363,7 +363,7 @@ gdkscreen_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE 
                 genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
-                genvp[i] = "";
+                genvp[i] = g_strdup("");
             }
         }
         genvp[genc] = (gchar*)NULL;

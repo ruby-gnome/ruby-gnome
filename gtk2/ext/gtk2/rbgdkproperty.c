@@ -246,7 +246,8 @@ gdkprop_get(int argc, VALUE *argv, VALUE self)
     VALUE win, property, type, offset=INT2FIX(0), length=INT2FIX(9999), delete;
     
     /* for inner processing */
-    int		i;
+    gint		i;
+    size_t j;
     VALUE	ret = 0;
     
     if(6 == argc)
@@ -279,12 +280,12 @@ gdkprop_get(int argc, VALUE *argv, VALUE self)
          ret = rb_ary_new();
 
          if(rtype != GDK_SELECTION_TYPE_ATOM){
-           for(i = 0; i < (rlen/sizeof(unsigned long)); i++){
-             rb_ary_push(ret, INT2FIX(((unsigned long*)rdat)[i]));
+           for(j = 0; j < (rlen/sizeof(unsigned long)); j++){
+             rb_ary_push(ret, INT2FIX(((unsigned long*)rdat)[j]));
            }
          } else {
-           for(i = 0; i < (rlen/sizeof(unsigned long)); i++){
-             rb_ary_push(ret, BOXED2RVAL((GdkAtom)((unsigned long*)rdat)[i], GDK_TYPE_ATOM));
+           for(j = 0; j < (rlen/sizeof(unsigned long)); j++){
+             rb_ary_push(ret, BOXED2RVAL((GdkAtom)((unsigned long*)rdat)[j], GDK_TYPE_ATOM));
            }
          }
         break;

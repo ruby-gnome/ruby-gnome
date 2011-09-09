@@ -186,7 +186,7 @@ rc_get_items(VALUE self)
 static VALUE
 rc_get_uris(VALUE self)
 {
-    int i;
+    gsize i;
     gsize size;
     gchar** uris = gtk_recent_chooser_get_uris(_SELF(self), &size);
     VALUE ary = rb_ary_new();

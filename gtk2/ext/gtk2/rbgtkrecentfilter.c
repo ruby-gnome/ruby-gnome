@@ -94,12 +94,13 @@ invoke_callback(VALUE arg_)
 static gboolean
 filter_func(const GtkRecentFilterInfo *info, gpointer func)
 {
+    VALUE result;
     struct callback_arg arg;
 
     arg.callback = (VALUE)func;
     arg.info = BOXED2RVAL((gpointer)info, GTK_TYPE_RECENT_FILTER_INFO);
   
-    VALUE result = G_PROTECT_CALLBACK(invoke_callback, &arg);
+    result = G_PROTECT_CALLBACK(invoke_callback, &arg);
     return NIL_P(rb_errinfo()) ? TRUE : RVAL2CBOOL(result);
 }
 

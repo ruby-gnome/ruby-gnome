@@ -114,7 +114,7 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
             gargv[i+1] = RVAL2CSTR(RARRAY_PTR(argary)[i]);
         }
         else {
-            gargv[i+1] = "";
+            gargv[i+1] = g_strdup("");
         }
     }
     gargc++;

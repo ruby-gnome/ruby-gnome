@@ -90,7 +90,7 @@ ri_get_application_info(VALUE self, VALUE app_name)
 static VALUE
 ri_get_applications(VALUE self)
 {
-    gint i;
+    gsize i;
     gsize length;
     gchar** str = gtk_recent_info_get_applications(_SELF(self), &length);
     VALUE ary = rb_ary_new();
@@ -110,7 +110,7 @@ ri_last_application(VALUE self)
 static VALUE
 ri_get_groups(VALUE self)
 {
-    gint i;
+    gsize i;
     gsize length;
     gchar** str = gtk_recent_info_get_groups(_SELF(self), &length);
     VALUE ary = rb_ary_new();

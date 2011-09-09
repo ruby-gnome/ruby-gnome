@@ -137,10 +137,6 @@ treerowref_s_reordered(VALUE self, VALUE proxy, VALUE path, VALUE iter, VALUE ne
 void 
 Init_gtk_treerowreference()
 {
-    id_proxy = rb_intern("proxy");
-    id_model = rb_intern("model");
-    id_path = rb_intern("path");
-
     VALUE gTreeref = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   
     rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
@@ -153,5 +149,9 @@ Init_gtk_treerowreference()
     rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
     rb_define_singleton_method(gTreeref, "deleted", treerowref_s_deleted, 2);
     rb_define_singleton_method(gTreeref, "reordered", treerowref_s_reordered, 4);
+
+    id_proxy = rb_intern("proxy");
+    id_model = rb_intern("model");
+    id_path = rb_intern("path");
 }
 

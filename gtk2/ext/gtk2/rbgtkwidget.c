@@ -727,7 +727,7 @@ widget_s_style_properties(int argc, VALUE *argv, VALUE self)
     GParamSpec** props;
     VALUE inherited_too;
     VALUE ary;
-    int i;
+    guint i;
 
     if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
         inherited_too = Qtrue;

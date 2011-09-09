@@ -83,7 +83,7 @@ activate_action(GtkAction *action, VALUE self)
 static VALUE
 actiongroup_add_actions(VALUE self, VALUE entries)
 {
-    int i;
+    guint i;
     VALUE action_procs;
     guint n_entries = (guint)RARRAY_LEN(entries);
     GtkActionEntry* gentries = g_new0(GtkActionEntry, n_entries);
@@ -149,7 +149,7 @@ activate_toggle_action(GtkAction *action, VALUE self)
 static VALUE
 actiongroup_add_toggle_actions(VALUE self, VALUE entries)
 {
-    int i;
+    guint i;
     VALUE toggle_action_procs;
     guint n_entries = (guint)RARRAY_LEN(entries);
     GtkToggleActionEntry* gentries = g_new0(GtkToggleActionEntry, n_entries);
@@ -216,7 +216,7 @@ static VALUE
 actiongroup_add_radio_actions(int argc, VALUE *argv, VALUE self)
 {
     VALUE entries, value, proc;
-    int i;
+    guint i;
     guint n_entries;
     GtkRadioActionEntry* gentries;
 

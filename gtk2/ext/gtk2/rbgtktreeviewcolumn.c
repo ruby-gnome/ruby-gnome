@@ -229,7 +229,7 @@ tvc_cell_get_size(VALUE self)
 }
 
 static VALUE
-tvc_cell_is_visible(self)
+tvc_cell_is_visible(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_view_column_cell_is_visible(_SELF(self)));
 }
