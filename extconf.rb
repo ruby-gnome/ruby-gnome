@@ -16,7 +16,7 @@ priorlibs = ["glib2", "gio2", "gdk_pixbuf2", "pango", "atk", "gtk2"]
 #
 # detect sub-directories
 #
-$ruby = File.join(Config::CONFIG['bindir'], Config::CONFIG['RUBY_INSTALL_NAME'] + Config::CONFIG['EXEEXT'])
+$ruby = File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'])
 $ruby = arg_config("--ruby", $ruby)
 
 rm = "rm -f"
