@@ -58,7 +58,7 @@ rbatkrel_get_relation_type(VALUE self)
 static VALUE
 rbatkrel_get_target(VALUE self)
 {
-    gint i;
+    guint i;
     GPtrArray* garray = atk_relation_get_target(_SELF(self));
     VALUE ary = rb_ary_new();
 
