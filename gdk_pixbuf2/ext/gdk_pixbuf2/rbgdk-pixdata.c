@@ -65,7 +65,7 @@ static VALUE
 pixdata_serialize(VALUE self)
 {
     guint stream_length;
-    gint i;
+    guint i;
     guint8* ret = gdk_pixdata_serialize(_SELF(self), &stream_length);
     VALUE ary = rb_ary_new2(stream_length);
     for (i = 0; i < stream_length; i++) {
