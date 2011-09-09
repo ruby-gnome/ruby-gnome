@@ -230,7 +230,7 @@ rbgobj_ruby_value_get_type()
           G_TYPE_PARAM,
           G_TYPE_OBJECT,
       };
-      int i;
+      size_t i;
 
       our_type = g_boxed_type_register_static(
           "VALUE",

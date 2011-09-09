@@ -52,7 +52,7 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
 
     if (! NIL_P(gtype)){
         GEnumClass* gclass = g_type_class_ref(gtype);
-        int i;
+        guint i;
 
         for (i = 0; i < gclass->n_values; i++) {
             GEnumValue* entry = &(gclass->values[i]);

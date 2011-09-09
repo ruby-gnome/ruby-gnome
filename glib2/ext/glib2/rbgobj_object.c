@@ -184,7 +184,7 @@ gobj_mark(gpointer ptr)
     guint n_properties;
     GParamSpec** properties;
     GValue gval = {0,};
-    int i;
+    guint i;
 
     properties = g_object_class_list_properties(G_OBJECT_GET_CLASS(gobj), &n_properties);
 
@@ -292,7 +292,7 @@ gobj_new_body(struct param_setup_arg* arg)
 static VALUE
 gobj_new_ensure(struct param_setup_arg* arg)
 {
-    int i;
+    guint i;
     g_type_class_unref(arg->gclass);
     for (i = 0; i < arg->param_size; i++) {
         if (G_IS_VALUE(&arg->params[i].value))
@@ -396,7 +396,7 @@ gobj_s_properties(int argc, VALUE* argv, VALUE self)
     GParamSpec** props;
     VALUE inherited_too;
     VALUE ary;
-    int i;
+    guint i;
 
     if (rb_scan_args(argc, argv, "01", &inherited_too) == 0)
         inherited_too = Qtrue;

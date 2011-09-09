@@ -119,10 +119,13 @@ mainloop(void)
 static void
 queue_callback_request(CallbackRequest *request)
 {
+    ssize_t written;
+
     g_async_queue_push(callback_request_queue, request);
-    write(callback_pipe_fds[1],
-          CALLBACK_PIPE_READY_MESSAGE,
-          CALLBACK_PIPE_READY_MESSAGE_SIZE);
+    /* TODO: Should result be checked? */
+    written = write(callback_pipe_fds[1],
+                    CALLBACK_PIPE_READY_MESSAGE,
+                    CALLBACK_PIPE_READY_MESSAGE_SIZE);
 }
 
 static VALUE

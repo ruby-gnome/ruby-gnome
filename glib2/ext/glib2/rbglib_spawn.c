@@ -44,13 +44,13 @@ rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv,
     if (! NIL_P(argv)){
         Check_Type(argv, T_ARRAY);
         gargc = RARRAY_LEN(argv);
-        gargv = ALLOCA_N(gchar*, gargc + 1);
+        gargv = ALLOCA_N(gchar *, gargc + 1);
         for (i = 0; i < gargc; i++) {
             if (TYPE(RARRAY_PTR(argv)[i]) == T_STRING) {
                 gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
-                gargv[i] = "";
+                gargv[i] = g_strdup("");
             }
         }
         gargv[gargc] = (gchar*)NULL;
@@ -65,7 +65,7 @@ rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv,
                 genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
-                genvp[i] = "";
+                genvp[i] = g_strdup("");
             }
         }
         genvp[genc] = (gchar*)NULL;
@@ -112,7 +112,7 @@ rbglib_m_spawn_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp
                 gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
-                gargv[i] = "";
+                gargv[i] = g_strdup("");
             }
         }
         gargv[gargc] = (gchar*)NULL;
@@ -127,7 +127,7 @@ rbglib_m_spawn_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp
                 genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
-                genvp[i] = "";
+                genvp[i] = g_strdup("");
             }
         }
         genvp[genc] = (gchar*)NULL;
@@ -172,7 +172,7 @@ rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp,
                 gargv[i] = RVAL2CSTR(RARRAY_PTR(argv)[i]);
             }
             else {
-                gargv[i] = "";
+                gargv[i] = g_strdup("");
             }
         }
         gargv[gargc] = (gchar*)NULL;
@@ -187,7 +187,7 @@ rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp,
                 genvp[i] = RVAL2CSTR(RARRAY_PTR(envp)[i]);
             }
             else {
-                genvp[i] = "";
+                genvp[i] = g_strdup("");
             }
         }
         genvp[genc] = (gchar*)NULL;

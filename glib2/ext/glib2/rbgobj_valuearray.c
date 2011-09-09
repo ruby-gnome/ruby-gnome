@@ -12,42 +12,46 @@
 #include "rbgprivate.h"
 
 static VALUE
-value_array_to_ruby(const GValue* from)
+value_array_to_ruby(const GValue *from)
 {
     VALUE ary;
-    int i;
-    GValueArray *val_array = (GValueArray*)g_value_get_boxed(from);
-    if (!val_array)
+    guint i;
+
+    GValueArray *array = (GValueArray *)g_value_get_boxed(from);
+    if (array == NULL)
         return Qnil;
   
     ary = rb_ary_new();
-    for (i = 0 ;  i < val_array->n_values ; i++) {
-        rb_ary_push(ary, GVAL2RVAL(g_value_array_get_nth(val_array, i)));
-    }
+    for (i = 0; i < array->n_values; i++)
+        rb_ary_push(ary, GVAL2RVAL(g_value_array_get_nth(array, i)));
+
     return ary;
 }
 
 static void
-value_array_from_ruby(VALUE from, GValue* to)
+value_array_from_ruby(const VALUE from, GValue *to)
 {
     int i;
-    GValueArray * array;
+    GValueArray *array;
 
     if (NIL_P(from)) {
         g_value_set_boxed(to, NULL);
+
         return;
     }
 
     Check_Type(from, T_ARRAY);
 
-    array = g_value_array_new(0);
+    array = g_value_array_new(RARRAY_LEN(from));
 
     for (i = 0; i < RARRAY_LEN(from); i++) {
-      GValue v = { 0, };
-      g_value_init(&v, RVAL2GTYPE(RARRAY_PTR(from)[i]));
-      rbgobj_rvalue_to_gvalue(RARRAY_PTR(from)[i], &v);
-      g_value_array_append(array, &v);
+        GValue v = { 0, };
+        g_value_init(&v, RVAL2GTYPE(RARRAY_PTR(from)[i]));
+        rbgobj_rvalue_to_gvalue(RARRAY_PTR(from)[i], &v);
+
+        g_value_array_append(array, &v);
     }
+
     g_value_set_boxed(to, array);
 }
 

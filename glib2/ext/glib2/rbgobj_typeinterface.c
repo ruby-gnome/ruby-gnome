@@ -88,7 +88,7 @@ interface_s_properties(int argc, VALUE* argv, VALUE self)
     GParamSpec** props;
     VALUE inherited_too;
     VALUE ary = rb_ary_new();
-    int i;
+    guint i;
     gpointer ginterface;
     GType gtype = CLASS2GTYPE(self);
 

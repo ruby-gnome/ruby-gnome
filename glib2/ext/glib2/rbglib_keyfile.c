@@ -198,7 +198,7 @@ static VALUE
 keyfile_get_groups(VALUE self)
 {
     gsize length;
-    int i;
+    gsize i;
     gchar** groups = g_key_file_get_groups(_SELF(self), &length);
     VALUE ary = rb_ary_new();
 
@@ -215,7 +215,7 @@ static VALUE
 keyfile_get_keys(VALUE self, VALUE group_name)
 {
     gsize length;
-    int i;
+    gsize i;
     GError* error = NULL;
     gchar** keys = g_key_file_get_keys(_SELF(self), 
                                        (const gchar*)RVAL2CSTR(group_name),
@@ -350,7 +350,7 @@ static VALUE
 keyfile_get_string_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
-    gint i;
+    gsize i;
     gsize length;
     GError* error = NULL;
     gchar** ret = g_key_file_get_string_list(_SELF(self), 
@@ -375,7 +375,7 @@ keyfile_get_locale_string_list(int argc, VALUE *argv, VALUE self)
     VALUE group_name, key, locale;
     GError* error = NULL;
     VALUE ary;
-    gint i;
+    gsize i;
     gsize length;
     gchar** ret;
 
@@ -402,7 +402,7 @@ static VALUE
 keyfile_get_boolean_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
-    gint i;
+    gsize i;
     gsize length;
     GError* error = NULL;
     gboolean* ret = g_key_file_get_boolean_list(_SELF(self), 
@@ -423,7 +423,7 @@ static VALUE
 keyfile_get_integer_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
-    gint i;
+    gsize i;
     gsize length;
     GError* error = NULL;
     gint* ret = g_key_file_get_integer_list(_SELF(self), 
@@ -445,7 +445,7 @@ static VALUE
 keyfile_get_double_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
-    gint i;
+    gsize i;
     gsize length;
     GError* error = NULL;
     gdouble* ret = g_key_file_get_double_list(_SELF(self), 

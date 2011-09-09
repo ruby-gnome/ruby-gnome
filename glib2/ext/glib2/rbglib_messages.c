@@ -29,7 +29,7 @@ static VALUE rbglib_log_handler_procs;
 static ID id_call;
 static gboolean log_canceled;
 
-static gchar*
+static const gchar *
 logmessage(GLogLevelFlags level)
 {
     if (level & G_LOG_LEVEL_ERROR){

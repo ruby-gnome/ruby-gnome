@@ -1,6 +1,7 @@
 2011-09-09  Nikolai Weibull <now@bitwi.se>
 
 	* lib/mkmf-gnome2.rb: Use new RubyGems APIs.
+	* ext/glib2/*.c: Fix all warnings generated with gcc 4.4.5.
 
 2011-08-04  Kouhei Sutou  <kou@cozmixng.org>
 

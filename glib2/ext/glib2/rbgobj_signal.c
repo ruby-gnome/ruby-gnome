@@ -80,7 +80,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     GClosure* class_closure;
     GType* param_types;
     guint n_params;
-    int i;
+    long i;
     guint sig;
 
     rb_scan_args(argc, argv, "4*", &signal_name, &signal_flags,
@@ -307,7 +307,7 @@ emit_body(struct emit_arg* arg)
     g_value_unset(&param);
 
     {
-        int i;
+        guint i;
         for (i = 0; i < arg->query.n_params; i++){
             GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
 
@@ -484,7 +484,7 @@ chain_from_overridden_body(struct emit_arg* arg)
 
     {
         GValue* params = arg->instance_and_params->values + 1;
-        int i;
+        guint i;
         for (i = 0; i < arg->query.n_params; i++) {
             GType gtype = arg->query.param_types[i] & ~G_SIGNAL_TYPE_STATIC_SCOPE;
             g_value_init(params + i, gtype);
@@ -526,7 +526,7 @@ gobj_sig_chain_from_overridden(int argc, VALUE *argv, VALUE self)
         g_signal_query(hint->signal_id, &arg.query);
     }
 
-    if (arg.query.n_params != argc)
+    if (arg.query.n_params != (guint)argc)
         rb_raise(rb_eArgError, "wrong number of arguments(%d for %d)",
                  argc, arg.query.n_params);
 
@@ -687,7 +687,7 @@ query_param_types(VALUE self)
 {
     GSignalQuery* query;
     VALUE result;
-    int i;
+    guint i;
     Data_Get_Struct(self, GSignalQuery, query);
 
     result = rb_ary_new2(query->n_params);
@@ -866,7 +866,7 @@ rbgobj_define_action_methods(VALUE klass)
     GString* source;
     guint n_ids;
     guint* ids;
-    int i;
+    guint i;
 
     if (gtype == G_TYPE_INTERFACE)
         return;
@@ -884,7 +884,7 @@ rbgobj_define_action_methods(VALUE klass)
             gchar* method_name = g_strdup(query.signal_name);
             gchar* p;
             GString* args;
-            int j;
+            guint j;
 
             for (p = method_name; *p; p++)
                 if (*p == '-')

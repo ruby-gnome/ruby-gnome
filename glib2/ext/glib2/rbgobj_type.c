@@ -192,7 +192,7 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
     if (G_TYPE_IS_INSTANTIATABLE(gtype)){
         GType* interfaces = NULL;
         guint n_interfaces = 0;
-        int i;
+        guint i;
 
         interfaces = g_type_interfaces(gtype, &n_interfaces);
         for (i = 0; i < n_interfaces; i++){
@@ -663,7 +663,7 @@ type_children(VALUE self)
     guint n_children;
     GType* types;
     VALUE result;
-    int i;
+    guint i;
 
     types = g_type_children(rbgobj_gtype_get(self), &n_children);
     result = rb_ary_new2(n_children);
@@ -680,7 +680,7 @@ type_interfaces(VALUE self)
     guint n_interfaces;
     GType* types;
     VALUE result;
-    int i;
+    guint i;
 
     types = g_type_interfaces(rbgobj_gtype_get(self), &n_interfaces);
     result = rb_ary_new2(n_interfaces);

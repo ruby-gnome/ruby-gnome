@@ -164,7 +164,7 @@ rbgobj_enum_add_constants(VALUE mod, GType enum_type,
                           const gchar *strip_prefix)
 {
     GEnumClass *gclass;
-    int i;
+    guint i;
     int prefix_len = strlen(strip_prefix);
 
     gclass = G_ENUM_CLASS(g_type_class_ref(enum_type));
@@ -190,7 +190,7 @@ rbgobj_flags_add_constants(VALUE mod, GType flags_type,
                            const gchar *strip_prefix)
 {
     GFlagsClass *gclass;
-    int i;
+    guint i;
     int prefix_len = strlen(strip_prefix);
 
     gclass = G_FLAGS_CLASS(g_type_class_ref(flags_type));
@@ -296,7 +296,7 @@ void
 rbgobj_init_enum_class(VALUE klass)
 {
     GEnumClass* gclass = g_type_class_ref(CLASS2GTYPE(klass));
-    int i;
+    guint i;
 
     for (i = 0; i < gclass->n_values; i++) {
         GEnumValue* entry = &(gclass->values[i]);
@@ -347,7 +347,7 @@ enum_s_values(VALUE self)
 {
     GEnumClass *gclass;
     VALUE result;
-    int i;
+    guint i;
 
     gclass = g_type_class_ref(CLASS2GTYPE(self));;
     result = rb_ary_new();
@@ -573,7 +573,7 @@ rbgobj_init_flags_class(VALUE klass)
 {
     GFlagsClass* gclass = g_type_class_ref(CLASS2GTYPE(klass));
     GString* source = g_string_new(NULL);
-    int i;
+    guint i;
 
     for (i = 0; i < gclass->n_values; i++) {
         GFlagsValue* entry = &(gclass->values[i]);
@@ -639,7 +639,7 @@ flags_s_values(VALUE klass)
 {
     GFlagsClass *gclass;
     VALUE result;
-    int i;
+    guint i;
 
     gclass = g_type_class_ref(CLASS2GTYPE(klass));
     result = rb_ary_new();
@@ -694,7 +694,7 @@ flags_initialize(int argc, VALUE* argv, VALUE self)
     }
 
     if (!p->info) {
-        int i;
+        guint i;
         for (i = 0; i < p->gclass->n_values; i++){
             GFlagsValue* val = &(p->gclass->values[i]);
             if (val->value == p->value){

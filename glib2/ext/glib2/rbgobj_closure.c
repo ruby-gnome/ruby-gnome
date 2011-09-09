@@ -33,7 +33,7 @@ struct _GRClosure
 static VALUE
 rclosure_default_g2r_func(guint num, const GValue *values)
 {
-    int i;
+    guint i;
     VALUE args = rb_ary_new2(num);
     for (i = 0; i < num; i++)
         rb_ary_store(args, i, GVAL2RVAL(&values[i]));

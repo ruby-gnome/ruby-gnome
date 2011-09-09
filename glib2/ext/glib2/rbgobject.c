@@ -250,7 +250,7 @@ rbgobj_define_property_accessors(VALUE klass)
 {
     GType gtype;
     GParamSpec** pspecs = NULL;
-    int i;
+    guint i;
     GString* source;
     guint n_properties = 0;
     gtype = CLASS2GTYPE(klass);
@@ -353,17 +353,17 @@ Init_gobject()
 
     /* Not defined properties. They are already used as methods of Object */
     prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);
-    g_hash_table_insert(prop_exclude_list, "class", "class");
-    g_hash_table_insert(prop_exclude_list, "clone", "clone");
-    g_hash_table_insert(prop_exclude_list, "dup", "dup");
-    g_hash_table_insert(prop_exclude_list, "extend", "extend");
-    g_hash_table_insert(prop_exclude_list, "freeze", "freeze");
-    g_hash_table_insert(prop_exclude_list, "hash", "hash");
-    g_hash_table_insert(prop_exclude_list, "method", "method");
-    g_hash_table_insert(prop_exclude_list, "methods", "methods");
-    g_hash_table_insert(prop_exclude_list, "object_id", "object_id");
-    g_hash_table_insert(prop_exclude_list, "taint", "taint");
-    g_hash_table_insert(prop_exclude_list, "untaint", "untaint");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"class", (gpointer)"class");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"clone", (gpointer)"clone");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"dup", (gpointer)"dup");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"extend", (gpointer)"extend");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"freeze", (gpointer)"freeze");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"hash", (gpointer)"hash");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"method", (gpointer)"method");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"methods", (gpointer)"methods");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"object_id", (gpointer)"object_id");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"taint", (gpointer)"taint");
+    g_hash_table_insert(prop_exclude_list, (gpointer)"untaint", (gpointer)"untaint");
 
     /* IDs */
     id_relatives = rb_intern("__relatives__");

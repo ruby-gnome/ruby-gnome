@@ -149,7 +149,7 @@ bf_get_size(VALUE self)
 static VALUE
 bf_get_uris(VALUE self)
 {
-    int i;
+    gsize i;
     gsize len;
     VALUE ary = rb_ary_new();
     gchar** ret = g_bookmark_file_get_uris(_SELF(self), &len);
@@ -265,7 +265,7 @@ bf_get_groups(VALUE self, VALUE uri)
 {
     gsize length;
     VALUE ary;
-    gint i;
+    gsize i;
     GError* error = NULL;
     gchar** ret = g_bookmark_file_get_groups(_SELF(self),
                                              (const gchar *)RVAL2CSTR(uri),
@@ -287,7 +287,7 @@ bf_get_applications(VALUE self, VALUE uri)
 {
     gsize length;
     VALUE ary;
-    gint i;
+    gsize i;
     GError* error = NULL;
     gchar** ret = g_bookmark_file_get_applications(_SELF(self),
                                                    (const gchar *)RVAL2CSTR(uri),
@@ -550,4 +550,3 @@ Init_glib_bookmark_file()
     rb_define_method(bf, "move_item", bf_move_item, 2);
 #endif
 }
-
