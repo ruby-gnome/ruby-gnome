@@ -79,23 +79,34 @@ fcho_get_filename(VALUE self)
 }
 
 static VALUE
-fcho_set_filename(VALUE self, VALUE name)
+fcho_set_filename(VALUE self, VALUE rbfilename)
 {
-    gboolean ret = gtk_file_chooser_set_filename(_SELF(self), RVAL2CSTRFILENAME(name));
-    if (! ret) rb_raise(rb_eRuntimeError, "Can't set filename");
+    gchar *filename = RVAL2CSTRFILENAME(rbfilename);
+    gboolean ret = gtk_file_chooser_set_filename(_SELF(self), filename);
+    g_free(filename);
+    if (!ret)
+        rb_raise(rb_eRuntimeError, "Can't set filename");
+
     return self;
 }
 
 static VALUE
-fcho_select_filename(VALUE self, VALUE filename)
+fcho_select_filename(VALUE self, VALUE rbfilename)
 {
-    return CBOOL2RVAL(gtk_file_chooser_select_filename(_SELF(self), RVAL2CSTRFILENAME(filename)));
+    gchar *filename = RVAL2CSTRFILENAME(rbfilename);
+    gboolean ret = gtk_file_chooser_select_filename(_SELF(self), filename);
+    g_free(filename);
+
+    return CBOOL2RVAL(ret);
 }
 
 static VALUE
-fcho_unselect_filename(VALUE self, VALUE filename)
+fcho_unselect_filename(VALUE self, VALUE rbfilename)
 {
-    gtk_file_chooser_unselect_filename(_SELF(self), RVAL2CSTRFILENAME(filename));
+    gchar *filename = RVAL2CSTRFILENAME(rbfilename);
+    gtk_file_chooser_unselect_filename(_SELF(self), filename);
+    g_free(filename);
+
     return self;
 }
 
@@ -233,20 +244,28 @@ fcho_list_filters(VALUE self)
 */
 
 static VALUE
-fcho_add_shortcut_folder(VALUE self, VALUE folder)
+fcho_add_shortcut_folder(VALUE self, VALUE rbfolder)
 {
+    gchar *folder = RVAL2CSTRFILENAME(rbfolder);
     GError *error = NULL;
-    if (! gtk_file_chooser_add_shortcut_folder(_SELF(self), RVAL2CSTRFILENAME(folder), &error))
+    gboolean ret = gtk_file_chooser_add_shortcut_folder(_SELF(self), folder, &error);
+    g_free(folder);
+    if (!ret)
         RAISE_GERROR(error);
+
     return self;
 }
 
 static VALUE
-fcho_remove_shortcut_folder(VALUE self, VALUE folder)
+fcho_remove_shortcut_folder(VALUE self, VALUE rbfolder)
 {
+    gchar *folder = RVAL2CSTRFILENAME(rbfolder);
     GError *error = NULL;
-    if (! gtk_file_chooser_remove_shortcut_folder(_SELF(self), RVAL2CSTRFILENAME(folder), &error))
+    gboolean ret = gtk_file_chooser_remove_shortcut_folder(_SELF(self), folder, &error);
+    g_free(folder);
+    if (!ret);
         RAISE_GERROR(error);
+
     return self;
 }
 

@@ -3,6 +3,8 @@
 	* ChangeLog: Fix date header for previous entry.
 	* lib/mkmf-gnome2.rb: Make last change backwards compatible with older
 	RubyGems.  I don’t like RubyGems.
+	* ext/glib2/rbglib.c (rbg_rval2cstr_filename): Fix allocation.
+	* ext/glib2/rbglib_bookmarkfile.c: Fix RVAL2CSTRFILENAME calls.
 
 2011-09-09  Nikolai Weibull  <now@bitwi.se>
 

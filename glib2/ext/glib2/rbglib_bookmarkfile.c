@@ -50,13 +50,15 @@ bf_initialize(VALUE self)
 }
 
 static VALUE
-bf_load_from_file(VALUE self, VALUE filename)
+bf_load_from_file(VALUE self, VALUE rbfilename)
 {
+    gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     GError* error = NULL;
-    gboolean ret = g_bookmark_file_load_from_file(_SELF(self),
-                                                  RVAL2CSTRFILENAME(filename),
-                                                  &error);
-    if (!ret) RAISE_GERROR(error);
+    gboolean ret = g_bookmark_file_load_from_file(_SELF(self), filename, &error);
+    g_free(filename);
+    if (!ret)
+        RAISE_GERROR(error);
+
     return self;
 }
 
@@ -103,13 +105,15 @@ bf_to_data(VALUE self)
 }
 
 static VALUE
-bf_to_file(VALUE self, VALUE filename)
+bf_to_file(VALUE self, VALUE rbfilename)
 {
+    gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     GError* error = NULL;
-    gboolean ret = g_bookmark_file_to_file(_SELF(self),
-                                           RVAL2CSTRFILENAME(filename),
-                                           &error);
-    if (!ret) RAISE_GERROR(error);
+    gboolean ret = g_bookmark_file_to_file(_SELF(self), filename, &error);
+    g_free(filename);
+    if (!ret)
+        RAISE_GERROR(error);
+
     return self;
 }
 

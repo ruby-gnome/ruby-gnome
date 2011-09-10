@@ -216,13 +216,13 @@ rbg_filename_from_ruby(VALUE filename)
         if (error != NULL)
             RAISE_GERROR(error);
     } else {
-        retval = RSTRING_PTR(filename);
+        retval = g_strdup(RSTRING_PTR(filename));
     }
 
     return retval;
 
 #else
-    return RVAL2CSTR(filename);
+    return g_strdup(RVAL2CSTR(filename));
 #endif
 }
 
