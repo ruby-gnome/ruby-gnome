@@ -113,7 +113,7 @@ GType g_file_attribute_info_list_get_type(void);
 #define RVAL2GMOUNT(value) G_MOUNT(RVAL2GOBJ(value))
 
 #define RVAL2GMOUNTMOUNTFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_MOUNT_MOUNT_FLAGS)
+        RVAL2GENUM((value), G_TYPE_MOUNT_MOUNT_FLAGS)
 #define RVAL2GMOUNTMOUNTFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \
                                RVAL2GMOUNTMOUNTFLAGS, \

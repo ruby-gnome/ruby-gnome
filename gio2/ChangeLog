@@ -1,3 +1,7 @@
+2011-09-09  Nikolai Weibull  <now@bitwi.se>
+
+	* ext/gio2/gio2.h: Fix RVAL2GMOUNTMOUNTFLAGS.
+
 2011-01-30  Kouhei Sutou  <kou@cozmixng.org>
 
 	* Rakefile, ext/gio2/extconf.rb: share depended packages
