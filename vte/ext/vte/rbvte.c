@@ -48,4 +48,5 @@ Init_vte(void)
     Init_vte_reaper(RG_TARGET_NAMESPACE);
     Init_vte_terminal(RG_TARGET_NAMESPACE);
     Init_vte_charattributes(RG_TARGET_NAMESPACE);
+    Init_vte_pty(RG_TARGET_NAMESPACE);
 }

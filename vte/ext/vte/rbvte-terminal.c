@@ -20,7 +20,11 @@
 
 #include "rbvte.h"
 
+#include <stdarg.h>
+#include <pwd.h>
+
 #define RG_TARGET_NAMESPACE cTerminal
+#define _SELF(s) (VTE_TERMINAL(RVAL2GOBJ(s)))
 
 static ID id_new, id_call;
 
@@ -88,6 +92,121 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
+#if VTE_CHECK_VERSION(0, 26, 0)
+static const char *
+rb_grn_inspect (VALUE object)
+{
+    VALUE inspected;
+
+    inspected = rb_funcall(object, rb_intern("inspect"), 0);
+    return StringValueCStr(inspected);
+}
+
+
+static void
+rb_grn_scan_options (VALUE options, ...)
+{
+    VALUE original_options = options;
+    VALUE available_keys;
+    const char *key;
+    VALUE *value;
+    va_list args;
+
+    options = rb_check_convert_type(options, T_HASH, "Hash", "to_hash");
+    if (NIL_P(options)) {
+        options = rb_hash_new();
+    } else if (options == original_options) {
+        options = rb_funcall(options, rb_intern("dup"), 0);
+    }
+
+    available_keys = rb_ary_new();
+    va_start(args, options);
+    key = va_arg(args, const char *);
+    while (key) {
+        VALUE rb_key;
+        value = va_arg(args, VALUE *);
+
+        rb_key = ID2SYM(rb_intern(key));
+        rb_ary_push(available_keys, rb_key);
+        *value = rb_funcall(options, rb_intern("delete"), 1, rb_key);
+
+        key = va_arg(args, const char *);
+    }
+    va_end(args);
+
+    if (RVAL2CBOOL(rb_funcall(options, rb_intern("empty?"), 0)))
+        return;
+
+    rb_raise(rb_eArgError,
+             "unexpected key(s) exist: %s: available keys: %s",
+             rb_grn_inspect(rb_funcall(options, rb_intern("keys"), 0)),
+             rb_grn_inspect(available_keys));
+}
+
+static VALUE
+fork_command_default_argv(void)
+{
+    struct passwd *pwd;
+    const char *shell = NULL;
+
+    pwd = getpwuid(getuid());
+    if (pwd != NULL)
+        shell = pwd->pw_shell;
+    if (shell == NULL)
+        shell = g_getenv("SHELL") ? g_getenv("SHELL") : "/bin/sh";
+
+    return rb_ary_new3(1, CSTR2RVAL(shell));
+}
+
+static VALUE
+fork_command_full(int argc, VALUE *argv, VALUE self)
+{
+    VALUE options, rb_pty_flags, rb_working_directory, rb_command_argv, rb_envv, rb_spawn_flags;
+    int pty_flags, spawn_flags;
+    char *working_directory;
+    char **command_argv;
+    char **envv;
+    GPid child_pid;
+    gboolean result;
+    GError *error = NULL;
+
+    rb_scan_args(argc, argv, "01", &options);
+    rb_grn_scan_options(options,
+                        "pty_flags", &rb_pty_flags,
+                        "working_directory", &rb_working_directory,
+                        "argv", &rb_command_argv,
+                        "envv", &rb_envv,
+                        "spawn_flags", &rb_spawn_flags,
+                        NULL);
+    pty_flags = NIL_P(rb_pty_flags) ?
+                VTE_PTY_DEFAULT :
+                RVAL2GFLAGS(rb_pty_flags, VTE_TYPE_PTY_FLAGS);
+    working_directory = NIL_P(rb_working_directory) ? NULL : RVAL2CSTR(rb_working_directory);
+    command_argv = rval2cstrary(NIL_P(rb_command_argv) ? fork_command_default_argv() : rb_command_argv);
+    envv = rval2cstrary(rb_envv);
+    spawn_flags = NIL_P(rb_spawn_flags) ?
+                G_SPAWN_CHILD_INHERITS_STDIN | G_SPAWN_SEARCH_PATH :
+                NUM2INT(rb_spawn_flags);
+
+    result = vte_terminal_fork_command_full(_SELF(self),
+                                            pty_flags,
+                                            working_directory,
+                                            command_argv,
+                                            envv,
+                                            spawn_flags,
+                                            NULL,
+                                            NULL,
+                                            &child_pid,
+                                            &error);
+    free_cstrary(command_argv);
+    free_cstrary(envv);
+    if (error)
+        RAISE_GERROR(error);
+
+    return INT2NUM(child_pid);
+}
+#endif
+
 static VALUE
 rg_fork_command(int argc, VALUE *argv, VALUE self)
 {
@@ -101,6 +220,15 @@ rg_fork_command(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "07", &rb_command, &rb_command_argv,
                  &rb_envv, &rb_directory, &lastlog, &utmp, &wtmp);
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+    if (argc == 0 || TYPE(rb_command) == T_HASH)
+        return fork_command_full(1, &rb_command, self);
+
+    rb_warn("'fork_commad(command, argv, envv, directory, lastlog, utmp, wtmp)' style"
+            " has been deprecated since version 0.26."
+            " Use 'fork_commad(options = {})' style.");
+#endif
 
     command = NIL_P(rb_command) ? NULL : RVAL2CSTR(rb_command);
     command_argv = rval2cstrary(rb_command_argv);
@@ -831,6 +959,139 @@ rg_icon_title(VALUE self)
     return CSTR2RVAL(vte_terminal_get_icon_title(RVAL2TERM(self)));
 }
 
+#if VTE_CHECK_VERSION(0, 17, 1)
+static VALUE
+rg_match_set_cursor_name(VALUE self, VALUE tag, VALUE cursor_name)
+{
+    vte_terminal_match_set_cursor_name(_SELF(self), NUM2INT(tag), RVAL2CSTR(cursor_name));
+
+    return self;
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+static VALUE
+rg_pty_new(VALUE self, VALUE flags)
+{
+    VtePty *result;
+    GError *error = NULL;
+
+    result = vte_terminal_pty_new(_SELF(self), RVAL2GFLAGS(flags, VTE_TYPE_PTY_FLAGS), &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return GOBJ2RVAL(result);
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+static VALUE
+rg_search_find_next(VALUE self)
+{
+    gboolean result;
+
+    result = vte_terminal_search_find_next(_SELF(self));
+
+    return CBOOL2RVAL(result);
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+static VALUE
+rg_search_find_previous(VALUE self)
+{
+    gboolean result;
+
+    result = vte_terminal_search_find_previous(_SELF(self));
+
+    return CBOOL2RVAL(result);
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+static VALUE
+rg_search_get_wrap_around_p(VALUE self)
+{
+    gboolean result;
+
+    result = vte_terminal_search_get_wrap_around(_SELF(self));
+
+    return CBOOL2RVAL(result);
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+static VALUE
+rg_search_set_wrap_around(VALUE self, VALUE wrap_around)
+{
+    vte_terminal_search_set_wrap_around(_SELF(self), RVAL2CBOOL(wrap_around));
+
+    return self;
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 16, 0)
+static VALUE
+rg_select_all(VALUE self)
+{
+    vte_terminal_select_all(_SELF(self));
+
+    return self;
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 16, 0)
+static VALUE
+rg_select_none(VALUE self)
+{
+    vte_terminal_select_none(_SELF(self));
+
+    return self;
+}
+#endif
+
+static VALUE
+rg_set_opacity(VALUE self, VALUE opacity)
+{
+    vte_terminal_set_opacity(_SELF(self), NUM2UINT(opacity));
+
+    return self;
+}
+
+#if VTE_CHECK_VERSION(0, 26, 0)
+static VALUE
+rg_watch_child(VALUE self, VALUE child_pid)
+{
+    vte_terminal_watch_child(_SELF(self), NUM2INT(child_pid));
+
+    return self;
+}
+#endif
+
+#if VTE_CHECK_VERSION(0, 24, 0)
+static VALUE
+rg_write_contents(int argc, VALUE *argv, VALUE self)
+{
+    VALUE stream, flags, rb_cancellable;
+    GCancellable *cancellable;
+    gboolean result;
+    GError *error = NULL;
+
+    rb_scan_args(argc, argv, "21", &stream, &flags, &rb_cancellable);
+    cancellable = NIL_P(rb_cancellable) ? NULL : RVAL2GOBJ(rb_cancellable);
+
+    result = vte_terminal_write_contents(_SELF(self),
+                                        RVAL2GOBJ(stream),
+                                        RVAL2GENUM(flags, VTE_TYPE_TERMINAL_WRITE_FLAGS),
+                                        cancellable,
+                                        &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return CBOOL2RVAL(result);
+}
+#endif
+
 void
 Init_vte_terminal(VALUE mVte)
 {
@@ -840,6 +1101,8 @@ Init_vte_terminal(VALUE mVte)
     id_call = rb_intern("call");
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
+
+    G_DEF_CLASS(VTE_TYPE_TERMINAL_WRITE_FLAGS, "WriteFlags", RG_TARGET_NAMESPACE);
 
     RG_DEF_METHOD(initialize, 0);
 
@@ -942,6 +1205,29 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(column_count, 0);
     RG_DEF_METHOD(window_title, 0);
     RG_DEF_METHOD(icon_title, 0);
+
+#if VTE_CHECK_VERSION(0, 17, 1)
+    RG_DEF_METHOD(match_set_cursor_name, 2);
+#endif
+#if VTE_CHECK_VERSION(0, 26, 0)
+    RG_DEF_METHOD(pty_new, 1);
+    RG_DEF_METHOD(search_find_next, 0);
+    RG_DEF_METHOD(search_find_previous, 0);
+    RG_DEF_METHOD_P(search_get_wrap_around, 0);
+    RG_DEF_METHOD(search_set_wrap_around, 1);
+    RG_DEF_ALIAS("search_wrap_around=", "search_set_wrap_around");
+#endif
+#if VTE_CHECK_VERSION(0, 16, 0)
+    RG_DEF_METHOD(select_all, 0);
+    RG_DEF_METHOD(select_none, 0);
+#endif
+    RG_DEF_METHOD(set_opacity, 1);
+#if VTE_CHECK_VERSION(0, 26, 0)
+    RG_DEF_METHOD(watch_child, 1);
+#endif
+#if VTE_CHECK_VERSION(0, 24, 0)
+    RG_DEF_METHOD(write_contents, -1);
+#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
