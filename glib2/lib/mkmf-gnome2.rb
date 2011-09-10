@@ -79,7 +79,9 @@ end
 def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
   begin
     require 'rubygems'
-    gem_spec = Gem::Specification.find_by_name(target_name).last
+    gem_spec = (Gem::Specification.respond_to?(:find_by_name) ?
+                Gem::Specification.find_by_name(target_name) :
+                Gem.source_index.find_name(target_name)).last
     if gem_spec
       target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
       target_build_dir = target_source_dir
@@ -383,7 +385,9 @@ def check_cairo(options={})
   if rcairo_source_dir.nil?
     begin
       require 'rubygems'
-      cairo_gem_spec = Gem::Specification.find_by_name('cairo').last
+      cairo_gem_spec = (Gem::Specification.respond_to?(:find_by_name) ?
+                        Gem::Specification.find_by_name('cairo') :
+                        Gem.source_index.find_name('cairo')).last
       if cairo_gem_spec
         rcairo_source_dir = cairo_gem_spec.full_gem_path
       end

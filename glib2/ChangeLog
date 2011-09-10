@@ -1,4 +1,10 @@
-2011-09-09  Nikolai Weibull <now@bitwi.se>
+2011-09-10  Nikolai Weibull  <now@bitwi.se>
+
+	* ChangeLog: Fix date header for previous entry.
+	* lib/mkmf-gnome2.rb: Make last change backwards compatible with older
+	RubyGems.  I don’t like RubyGems.
+
+2011-09-09  Nikolai Weibull  <now@bitwi.se>
 
 	* lib/mkmf-gnome2.rb: Use new RubyGems APIs.
 	* ext/glib2/*.c: Fix all warnings generated with gcc 4.4.5.
