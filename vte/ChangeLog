@@ -1,5 +1,11 @@
 2011-09-11  Masaaki Aoyagi
 
+	* ext/vte/rbvte-terminal.c: merge 'match_set_cursor*' methods.
+	* lib/vte.rb: add require "vte/deprecated".
+	* lib/vte/deprecated.rb: add.
+
+2011-09-11  Masaaki Aoyagi
+
 	* ext/vte/rbvte-terminal.c: not define method if property exist.
 
 2011-09-11  Masaaki Aoyagi

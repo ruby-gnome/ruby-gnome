@@ -816,16 +816,16 @@ rg_match_add(VALUE self, VALUE match)
 static VALUE
 rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 {
-    vte_terminal_match_set_cursor(RVAL2TERM(self), NUM2INT(tag),
-                                  RVAL2GOBJ(cursor));
-    return self;
-}
+    if (NIL_P(cursor) || RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR) {
+        vte_terminal_match_set_cursor(RVAL2TERM(self), NUM2INT(tag), RVAL2GOBJ(cursor));
+    } else if (RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR_TYPE) {
+        vte_terminal_match_set_cursor_type(RVAL2TERM(self), NUM2INT(tag), RVAL2CT(cursor));
+#if VTE_CHECK_VERSION(0, 17, 1)
+    } else {
+        vte_terminal_match_set_cursor_name(_SELF(self), NUM2INT(tag), RVAL2CSTR(cursor));
+#endif
+    }
 
-static VALUE
-rg_match_set_cursor_type(VALUE self, VALUE tag, VALUE cursor_type)
-{
-    vte_terminal_match_set_cursor_type(RVAL2TERM(self), NUM2INT(tag),
-                                       RVAL2CT(cursor_type));
     return self;
 }
 
@@ -966,16 +966,6 @@ rg_icon_title(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_icon_title(RVAL2TERM(self)));
 }
-
-#if VTE_CHECK_VERSION(0, 17, 1)
-static VALUE
-rg_match_set_cursor_name(VALUE self, VALUE tag, VALUE cursor_name)
-{
-    vte_terminal_match_set_cursor_name(_SELF(self), NUM2INT(tag), RVAL2CSTR(cursor_name));
-
-    return self;
-}
-#endif
 
 #if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
@@ -1190,7 +1180,6 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(match_clear_all, 0);
     RG_DEF_METHOD(match_add, 1);
     RG_DEF_METHOD(match_set_cursor, 2);
-    RG_DEF_METHOD(match_set_cursor_type, 2);
     RG_DEF_METHOD(match_remove, 1);
     RG_DEF_METHOD(match_check, 2);
 
@@ -1222,9 +1211,6 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(window_title, 0);
     RG_DEF_METHOD(icon_title, 0);
 
-#if VTE_CHECK_VERSION(0, 17, 1)
-    RG_DEF_METHOD(match_set_cursor_name, 2);
-#endif
 #if VTE_CHECK_VERSION(0, 26, 0)
     RG_DEF_METHOD(pty_new, 1);
     RG_DEF_METHOD(search_find_next, 0);
