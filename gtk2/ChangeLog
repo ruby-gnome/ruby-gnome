@@ -1,3 +1,11 @@
+2011-09-11  Kouhei Sutou  <kou@cozmixng.org>
+
+	* ext/gtk2/extconf.rb (InitCreator#print_data): fix wrong
+	initialization order bug. If "Init_gtk_gdk_gc()" is the first
+	initialize function, the previous implementation can't resolve
+	dependency order.
+	Reported by ashbb. Thanks!!!
+
 2011-09-10  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/gtk2/*.c: Fix all RVAL2CSTRFILENAME calls.

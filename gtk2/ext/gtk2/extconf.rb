@@ -136,6 +136,16 @@ class InitCreator
       end
     end
 
+    inits[""] = inits[""].sort_by do |value|
+      if value == "Init_gtk_gdk_draw()"
+        inits[""].size * 2
+      elsif value == "Init_gtk_gdk_gc()"
+        -inits[""].size
+      else
+        inits[""].index(value)
+      end
+    end
+
     print_data(inits, "", nil, true)
     print_data(inits, "GTK_DISABLE_DEPRECATED", "ifndef", true)
     print_data(inits, "GTK_ENABLE_BROKEN", "ifdef", true)
@@ -157,14 +167,13 @@ class InitCreator
       print "##{defs} #{type}\n" if defs
       sorted_array = array[type].dup
       dependencies.each do |key, values|
-        key_index = sorted_array.index(key)
-        values.each do |value|
-          value_index = sorted_array.index(value)
-          next if value_index.nil?
-          sorted_array.delete(value)
-          sorted_array[key_index - 1, 0] = value
-          key_index = sorted_array.index(key)
+        next unless sorted_array.include?(key)
+        sorted_array.delete(key)
+        value_indexes = values.collect do |value|
+          sorted_array.index(value)
         end
+        max_value_index = value_indexes.compact.max
+        sorted_array[max_value_index + 1, 0] = key
       end
       sorted_array.each do |val|
         print "#{extern_def}   #{val};\n"
