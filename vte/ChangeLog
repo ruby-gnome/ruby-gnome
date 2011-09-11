@@ -1,5 +1,9 @@
 2011-09-11  Masaaki Aoyagi
 
+	* ext/vte/rbvte-terminal.c: not define method if property exist.
+
+2011-09-11  Masaaki Aoyagi
+
 	* ext/vte/rbvte-terminal.c: change return value to self
 
 2011-09-11  Masaaki Aoyagi

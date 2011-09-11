@@ -564,11 +564,13 @@ rg_cursor_shape(VALUE self)
     return GENUM2RVAL(shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
 }
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
 static VALUE
 rg_pty(VALUE self)
 {
     return INT2NUM(vte_terminal_get_pty(RVAL2TERM(self)));
 }
+#endif
 
 static VALUE
 rg_child_exit_status(VALUE self)
@@ -852,6 +854,7 @@ rg_match_check(VALUE self, VALUE column, VALUE row)
     }
 }
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
 static VALUE
 rg_set_emulation(VALUE self, VALUE emulation)
 {
@@ -864,6 +867,7 @@ rg_emulation(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_emulation(RVAL2TERM(self)));
 }
+#endif
 
 static VALUE
 rg_default_emulation(VALUE self)
@@ -871,6 +875,7 @@ rg_default_emulation(VALUE self)
     return CSTR2RVAL(vte_terminal_get_default_emulation(RVAL2TERM(self)));
 }
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
 static VALUE
 rg_set_encoding(VALUE self, VALUE encoding)
 {
@@ -883,6 +888,7 @@ rg_encoding(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_encoding(RVAL2TERM(self)));
 }
+#endif
 
 static VALUE
 rg_status_line(VALUE self)
@@ -898,12 +904,14 @@ rg_padding(VALUE self)
     return rb_ary_new3(2, INT2NUM(xpad), INT2NUM(ypad));
 }
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
 static VALUE
 rg_set_pty(VALUE self, VALUE pty_master)
 {
     vte_terminal_set_pty(RVAL2TERM(self), NUM2INT(pty_master));
     return self;
 }
+#endif
 
 static VALUE
 rg_adjustment(VALUE self)
@@ -1149,7 +1157,9 @@ Init_vte_terminal(VALUE mVte)
 #if VTE_CHECK_VERSION(0, 19, 1)
     RG_DEF_METHOD(set_cursor_shape, 1);
     RG_DEF_METHOD(cursor_shape, 0);
+#if !VTE_CHECK_VERSION(0, 20, 0)
     RG_DEF_METHOD(pty, 0);
+#endif
     RG_DEF_METHOD(child_exit_status, 0);
 #endif
     RG_DEF_METHOD(set_scrollback_lines, 1);
@@ -1184,17 +1194,23 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(match_remove, 1);
     RG_DEF_METHOD(match_check, 2);
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
     RG_DEF_METHOD(set_emulation, 1);
     RG_DEF_METHOD(emulation, 0);
+#endif
     RG_DEF_METHOD(default_emulation, 0);
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
     RG_DEF_METHOD(set_encoding, 1);
     RG_DEF_METHOD(encoding, 0);
+#endif
 
     RG_DEF_METHOD(status_line, 0);
     RG_DEF_METHOD(padding, 0);
 
+#if !VTE_CHECK_VERSION(0, 20, 0)
     RG_DEF_METHOD(set_pty, 1);
+#endif
 
     RG_DEF_METHOD(adjustment, 0);
     RG_DEF_METHOD(char_width, 0);
