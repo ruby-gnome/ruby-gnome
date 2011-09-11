@@ -278,7 +278,7 @@ rg_feed(VALUE self, VALUE data)
         vte_terminal_feed(RVAL2TERM(self), RSTRING_PTR(data), length);
     }
 
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -292,7 +292,7 @@ rg_feed_child(VALUE self, VALUE data)
         vte_terminal_feed_child(RVAL2TERM(self), RSTRING_PTR(data), length);
     }
 
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -307,49 +307,49 @@ rg_feed_child_binary(VALUE self, VALUE data)
                                        RSTRING_PTR(data), length);
     }
 
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_copy_clipboard(VALUE self)
 {
     vte_terminal_copy_clipboard(RVAL2TERM(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_paste_clipboard(VALUE self)
 {
     vte_terminal_paste_clipboard(RVAL2TERM(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_copy_primary(VALUE self)
 {
     vte_terminal_copy_primary(RVAL2TERM(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_paste_primary(VALUE self)
 {
     vte_terminal_paste_primary(RVAL2TERM(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_size(VALUE self, VALUE columns, VALUE rows)
 {
     vte_terminal_set_size(RVAL2TERM(self), NUM2LONG(columns), NUM2LONG(rows));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_audible_bell(VALUE self, VALUE is_audible)
 {
     vte_terminal_set_audible_bell(RVAL2TERM(self), RVAL2CBOOL(is_audible));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -362,7 +362,7 @@ static VALUE
 rg_set_visible_bell(VALUE self, VALUE is_visible)
 {
     vte_terminal_set_visible_bell(RVAL2TERM(self), RVAL2CBOOL(is_visible));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -375,49 +375,49 @@ static VALUE
 rg_set_scroll_background(VALUE self, VALUE scroll)
 {
     vte_terminal_set_scroll_background(RVAL2TERM(self), RVAL2CBOOL(scroll));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_scroll_on_output(VALUE self, VALUE scroll)
 {
     vte_terminal_set_scroll_on_output(RVAL2TERM(self), RVAL2CBOOL(scroll));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_scroll_on_keystroke(VALUE self, VALUE scroll)
 {
     vte_terminal_set_scroll_on_keystroke(RVAL2TERM(self), RVAL2CBOOL(scroll));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_color_dim(VALUE self, VALUE dim)
 {
     vte_terminal_set_color_dim(RVAL2TERM(self), RVAL2COLOR(dim));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_color_bold(VALUE self, VALUE bold)
 {
     vte_terminal_set_color_bold(RVAL2TERM(self), RVAL2COLOR(bold));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_color_foreground(VALUE self, VALUE foreground)
 {
     vte_terminal_set_color_foreground(RVAL2TERM(self), RVAL2COLOR(foreground));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_color_background(VALUE self, VALUE background)
 {
     vte_terminal_set_color_background(RVAL2TERM(self), RVAL2COLOR(background));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -425,7 +425,7 @@ rg_set_color_cursor(VALUE self, VALUE cursor)
 {
     vte_terminal_set_color_cursor(RVAL2TERM(self),
                                   NIL_P(cursor) ? NULL : RVAL2COLOR(cursor));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -434,7 +434,7 @@ rg_set_color_highlight(VALUE self, VALUE highlight)
     vte_terminal_set_color_highlight(RVAL2TERM(self),
                                      NIL_P(highlight) ?
                                        NULL : RVAL2COLOR(highlight));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -462,14 +462,14 @@ rg_set_colors(VALUE self, VALUE foreground, VALUE background,
 
     vte_terminal_set_colors(RVAL2TERM(self), RVAL2COLOR(foreground),
                             RVAL2COLOR(background), palette, len);
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_default_colors(VALUE self)
 {
     vte_terminal_set_default_colors(RVAL2TERM(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -483,14 +483,14 @@ rg_set_background_image(VALUE self, VALUE image_or_path)
                                           RVAL2GOBJ(image_or_path));
     }
 
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_background_tint_color(VALUE self, VALUE color)
 {
     vte_terminal_set_background_tint_color(RVAL2TERM(self), RVAL2COLOR(color));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -498,7 +498,7 @@ rg_set_background_saturation(VALUE self, VALUE saturation)
 {
     vte_terminal_set_background_saturation(RVAL2TERM(self),
                                            NUM2DBL(saturation));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -506,7 +506,7 @@ rg_set_background_transparent(VALUE self, VALUE transparent)
 {
     vte_terminal_set_background_transparent(RVAL2TERM(self),
                                             RVAL2CBOOL(transparent));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -520,7 +520,7 @@ rg_set_cursor_blinks(VALUE self, VALUE blink)
 #else
     vte_terminal_set_cursor_blinks(RVAL2TERM(self), RVAL2CBOOL(blink));
 #endif
-    return Qnil;
+    return self;
 }
 
 #if VTE_CHECK_VERSION(0, 18, 0)
@@ -531,7 +531,7 @@ rg_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 
     mode = RVAL2GENUM(rb_mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
     vte_terminal_set_cursor_blink_mode(RVAL2TERM(self), mode);
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -552,7 +552,7 @@ rg_set_cursor_shape(VALUE self, VALUE rb_shape)
 
     shape = RVAL2GENUM(rb_shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
     vte_terminal_set_cursor_shape(RVAL2TERM(self), shape);
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -581,14 +581,14 @@ static VALUE
 rg_set_scrollback_lines(VALUE self, VALUE lines)
 {
     vte_terminal_set_scrollback_lines(RVAL2TERM(self), NUM2LONG(lines));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_im_append_menuitems(VALUE self, VALUE menushell)
 {
     vte_terminal_im_append_menuitems(RVAL2TERM(self), RVAL2GOBJ(menushell));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -620,7 +620,7 @@ rg_set_font(int argc, VALUE *argv, VALUE self)
             vte_terminal_set_font_full(term, font_desc, antialias);
     }
 
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -641,7 +641,7 @@ static VALUE
 rg_set_allow_bold(VALUE self, VALUE allow_bold)
 {
     vte_terminal_set_allow_bold(RVAL2TERM(self), RVAL2CBOOL(allow_bold));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -662,7 +662,7 @@ rg_set_word_chars(VALUE self, VALUE word_chars)
     vte_terminal_set_word_chars(RVAL2TERM(self),
                                 NIL_P(word_chars) ?
                                   NULL : RVAL2CSTR(word_chars));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -675,14 +675,14 @@ static VALUE
 rg_set_backspace_binding(VALUE self, VALUE binding)
 {
     vte_terminal_set_backspace_binding(RVAL2TERM(self), RVAL2EB(binding));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_set_delete_binding(VALUE self, VALUE binding)
 {
     vte_terminal_set_delete_binding(RVAL2TERM(self), RVAL2EB(binding));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -695,7 +695,7 @@ static VALUE
 rg_set_mouse_autohide(VALUE self, VALUE setting)
 {
     vte_terminal_set_mouse_autohide(RVAL2TERM(self), RVAL2CBOOL(setting));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -703,7 +703,7 @@ rg_reset(VALUE self, VALUE full, VALUE clear_history)
 {
     vte_terminal_reset(RVAL2TERM(self), RVAL2CBOOL(full),
                        RVAL2CBOOL(clear_history));
-    return Qnil;
+    return self;
 }
 
 static gboolean
@@ -802,7 +802,7 @@ static VALUE
 rg_match_clear_all(VALUE self)
 {
     vte_terminal_match_clear_all(RVAL2TERM(self));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -816,7 +816,7 @@ rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 {
     vte_terminal_match_set_cursor(RVAL2TERM(self), NUM2INT(tag),
                                   RVAL2GOBJ(cursor));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -824,14 +824,14 @@ rg_match_set_cursor_type(VALUE self, VALUE tag, VALUE cursor_type)
 {
     vte_terminal_match_set_cursor_type(RVAL2TERM(self), NUM2INT(tag),
                                        RVAL2CT(cursor_type));
-    return Qnil;
+    return self;
 }
 
 static VALUE
 rg_match_remove(VALUE self, VALUE tag)
 {
     vte_terminal_match_remove(RVAL2TERM(self), NUM2INT(tag));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -856,7 +856,7 @@ static VALUE
 rg_set_emulation(VALUE self, VALUE emulation)
 {
     vte_terminal_set_emulation(RVAL2TERM(self), RVAL2CSTR(emulation));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -875,7 +875,7 @@ static VALUE
 rg_set_encoding(VALUE self, VALUE encoding)
 {
     vte_terminal_set_encoding(RVAL2TERM(self), RVAL2CSTR(encoding));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -902,7 +902,7 @@ static VALUE
 rg_set_pty(VALUE self, VALUE pty_master)
 {
     vte_terminal_set_pty(RVAL2TERM(self), NUM2INT(pty_master));
-    return Qnil;
+    return self;
 }
 
 static VALUE

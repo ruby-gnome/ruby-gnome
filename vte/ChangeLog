@@ -1,5 +1,9 @@
 2011-09-11  Masaaki Aoyagi
 
+	* ext/vte/rbvte-terminal.c: change return value to self
+
+2011-09-11  Masaaki Aoyagi
+
 	* ext/vte/rbvte.c,rbvte-pty.c,rbvte-terminal.c:
 	- implement version 0.26.2(exclude regular expressions)
 
