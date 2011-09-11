@@ -35,13 +35,6 @@ Init_vte(void)
                                 INT2FIX(VTE_MINOR_VERSION),
                                 INT2FIX(VTE_MICRO_VERSION)));
 
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING, "TerminalEraseBinding", RG_TARGET_NAMESPACE);
-#if VTE_CHECK_VERSION(0, 18, 0)
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE, "TerminalCursorBlinkMode", RG_TARGET_NAMESPACE);
-#endif
-#if VTE_CHECK_VERSION(0, 19, 1)
-    G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE, "TerminalCursorShape", RG_TARGET_NAMESPACE);
-#endif
     G_DEF_CLASS(VTE_TYPE_TERMINAL_ANTI_ALIAS, "TerminalAntiAlias", RG_TARGET_NAMESPACE);
 
     Init_vte_access(RG_TARGET_NAMESPACE);

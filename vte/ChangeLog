@@ -1,5 +1,14 @@
 2011-09-11  Masaaki Aoyagi
 
+	* ext/vte/rbvte-terminal.c:
+	- add constants(EraseBinding,CursorBlinkMode,CursorShape).
+	* ext/vte/rbvte.c:
+	- delete deprecated constants(TerminalEraseBinding,TerminalCursorBlinkMode,TerminalCursorShape).
+	* lib/vte/deprecated.rb:
+	- define deprecated constants.
+
+2011-09-11  Masaaki Aoyagi
+
 	* ext/vte/rbvte-terminal.c: merge 'match_set_cursor*' methods.
 	* lib/vte.rb: add require "vte/deprecated".
 	* lib/vte/deprecated.rb: add.
