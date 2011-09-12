@@ -68,7 +68,7 @@ rglyph_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE tra
     pango_glyph_string_index_to_x(_SELF(self),
                                   /* NOTE: This is a bug in the signature of
                                    * pango_glyph_string_index_to_x */
-                                  (char *)RVAL2CSTR(text),
+                                  (char *)RSTRING_PTR(text),
                                   RSTRING_LEN(text),
                                   (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
                                   NUM2INT(index), RVAL2CBOOL(trailing),
@@ -86,7 +86,7 @@ rglyph_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
     pango_glyph_string_x_to_index(_SELF(self),
                                   /* NOTE: This is a bug in the signature of
                                    * pango_glyph_string_index_to_x */
-                                  (char *)RVAL2CSTR(text),
+                                  (char *)RSTRING_PTR(text),
                                   RSTRING_LEN(text),
                                   (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
                                   NUM2INT(x_pos),

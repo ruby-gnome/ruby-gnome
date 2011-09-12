@@ -48,7 +48,7 @@ rbpango_scriptiter_initialize(VALUE self, VALUE text)
     PangoScriptIter* iter;
 
     StringValue(text);
-    iter = pango_script_iter_new(RVAL2CSTR(text), RSTRING_LEN(text));
+    iter = pango_script_iter_new(RSTRING_PTR(text), RSTRING_LEN(text));
     G_INITIALIZE(self, iter);
     return Qnil;
 }

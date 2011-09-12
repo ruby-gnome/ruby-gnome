@@ -75,7 +75,7 @@ static VALUE
 coverage_s_from_bytes(VALUE self, VALUE bytes)
 {
     StringValue(bytes);
-    return BOXED2RVAL(pango_coverage_from_bytes((guchar*)RVAL2CSTR(bytes), 
+    return BOXED2RVAL(pango_coverage_from_bytes((guchar *)RSTRING_PTR(bytes), 
                                                 RSTRING_LEN(bytes)),
                       PANGO_TYPE_COVERAGE);
 }

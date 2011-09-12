@@ -1,3 +1,9 @@
+2011-09-12  Nikolai Weibull  <now@bitwi.se>
+
+	* ext/pango/*.c: Call StringValue() before calling
+	RSTRING_PTR()/RSTRING_LEN(); also use RSTRING_PTR() instead of
+	RVAL2CSTR() if StringValue() has already been called on the value.
+
 2011-09-09  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/pango/*.c: Fix all RVAL2CSTR calls.

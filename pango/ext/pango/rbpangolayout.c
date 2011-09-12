@@ -43,7 +43,10 @@ layout_context_changed(VALUE self)
 static VALUE
 layout_set_text(VALUE self, VALUE text)
 {
-    pango_layout_set_text(_SELF(self), RVAL2CSTR(text), RSTRING_LEN(text));
+    StringValue(text);
+
+    pango_layout_set_text(_SELF(self), RSTRING_PTR(text), RSTRING_LEN(text));
+
     return self;
 }
 
@@ -61,13 +64,15 @@ layout_set_markup(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &markup, &accel_marker);
 
+    StringValue(markup);
+
     if (NIL_P(accel_marker)){
         pango_layout_set_markup(_SELF(self),
-                                RVAL2CSTR(markup),
+                                RSTRING_PTR(markup),
                                 RSTRING_LEN(markup));
     } else {
         pango_layout_set_markup_with_accel(_SELF(self),
-                                           RVAL2CSTR(markup),
+                                           RSTRING_PTR(markup),
                                            RSTRING_LEN(markup),
                                            NUM2CHR(accel_marker), &accel_char);
     }
@@ -77,7 +82,10 @@ layout_set_markup(int argc, VALUE *argv, VALUE self)
 static VALUE
 layout_set_markup_eq(VALUE self, VALUE markup)
 {
-    pango_layout_set_markup(_SELF(self), RVAL2CSTR(markup), RSTRING_LEN(markup));
+    StringValue(markup);
+
+    pango_layout_set_markup(_SELF(self), RSTRING_PTR(markup), RSTRING_LEN(markup));
+
     return markup;
 }
 
