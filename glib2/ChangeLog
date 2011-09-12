@@ -1,6 +1,7 @@
 2011-09-12  Nikolai Weibull  <now@bitwi.se>
 
-	lib/glib2.rb (__add_one_arg_setter): Ruby 1.9-proof this method.
+	* lib/glib2.rb (__add_one_arg_setter): Ruby 1.9-proof this method.
+	* ext/glib2/rbglib.c: Fix coding style.
 
 2011-09-10  Nikolai Weibull  <now@bitwi.se>
 

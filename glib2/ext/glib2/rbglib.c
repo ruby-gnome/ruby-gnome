@@ -47,20 +47,20 @@ const gchar *
 rbg_rval2cstr(VALUE *str)
 {
     StringValue(*str);
+
 #ifdef HAVE_RUBY_ENCODING_H
-    if (rb_enc_get(*str) != rb_utf8_encoding()) {
+    if (rb_enc_get(*str) != rb_utf8_encoding())
         *str = rb_str_export_to_enc(*str, rb_utf8_encoding());
-    }
 #endif
+
     return RSTRING_PTR(*str);
 }
 
 const gchar *
 rbg_rval_inspect(VALUE object)
 {
-    VALUE inspected;
+    VALUE inspected = rb_funcall(object, id_inspect, 0);
 
-    inspected = rb_funcall(object, id_inspect, 0);
     return RVAL2CSTR(inspected);
 }
 
@@ -77,18 +77,15 @@ rbg_rval2cstr_accept_nil(VALUE *str)
 }
 
 VALUE
-rbg_cstr2rval(const gchar* str)
+rbg_cstr2rval(const gchar *str)
 {
-    if (!str)
-        return Qnil;
-
-    return CSTR2RVAL_LEN(str, strlen(str));
+    return str != NULL ? CSTR2RVAL_LEN(str, strlen(str)) : Qnil;
 }
 
 VALUE
-rbg_cstr2rval_len(const gchar* str, gsize len)
+rbg_cstr2rval_len(const gchar *str, gsize len)
 {
-    if (!str)
+    if (str == NULL)
         return Qnil;
 
 #ifdef HAVE_RUBY_ENCODING_H
@@ -99,32 +96,23 @@ rbg_cstr2rval_len(const gchar* str, gsize len)
 }
 
 VALUE
-rbg_cstr2rval_with_encoding(const gchar* str, const gchar *encoding)
+rbg_cstr2rval_with_encoding(const gchar *str, const gchar *encoding)
 {
-    if (!str)
-        return Qnil;
-
-    return CSTR2RVAL_LEN_ENC(str, strlen(str), encoding);
+    return str != NULL ? CSTR2RVAL_LEN_ENC(str, strlen(str), encoding) : Qnil;
 }
 
 VALUE
-rbg_cstr2rval_len_with_encoding(const gchar* str, gsize len,
+rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
                                 const gchar *encoding)
 {
-    if (!str)
+    if (str == NULL)
         return Qnil;
 
 #ifdef HAVE_RUBY_ENCODING_H
-    {
-        rb_encoding *rb_encoding;
-
-        if (encoding) {
-            rb_encoding = rb_enc_find(encoding);
-        } else {
-            rb_encoding = rb_utf8_encoding();
-        }
-        return rb_external_str_new_with_enc(str, len, rb_encoding);
-    }
+    return rb_external_str_new_with_enc(str, len,
+                                        encoding != NULL ?
+                                            rb_enc_find(encoding) :
+                                            rb_utf8_encoding());
 #else
     return rb_str_new(str, len);
 #endif
@@ -160,7 +148,6 @@ rbg_filename_to_ruby_free(gchar *filename)
 {
 #ifdef HAVE_RUBY_ENCODING_H
     gchar *filename_utf8;
-    GError *error = NULL;
     gsize written;
     VALUE rb_filename = Qnil;
 
@@ -169,6 +156,8 @@ rbg_filename_to_ruby_free(gchar *filename)
        
     /* convert filename to UTF-8 if needed */
     if (filename_encoding_if_not_utf8 != NULL) {
+        GError *error = NULL;
+
         filename_utf8 = g_filename_to_utf8(filename, -1, NULL, &written, &error);
         g_free(filename);
         if (error != NULL)
@@ -185,12 +174,9 @@ rbg_filename_to_ruby_free(gchar *filename)
 
     /* if needed, change encoding of Ruby String to filename encoding, so that
        upcoming File operations will work properly */
-    if (filename_encoding_if_not_utf8 != NULL) {
-        return rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8);
-    } else {
-        return rb_filename;
-    }
-
+    return filename_encoding_if_not_utf8 != NULL ?
+        rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8) :
+        rb_filename;
 #else
     return CSTR2RVAL_FREE(filename);
 #endif
@@ -200,18 +186,18 @@ gchar *
 rbg_filename_from_ruby(VALUE filename)
 {
 #ifdef HAVE_RUBY_ENCODING_H
-    GError *error = NULL;
     gchar *retval;
     gsize written;
 
     /* if needed, change encoding of Ruby String to UTF-8 */
     StringValue(filename);
-    if (rb_enc_get(filename) != rb_utf8_encoding()) {
+    if (rb_enc_get(filename) != rb_utf8_encoding())
         filename = rb_str_export_to_enc(filename, rb_utf8_encoding());
-    }
 
     /* convert it to filename encoding if needed */
     if (filename_encoding_if_not_utf8 != NULL) {
+        GError *error = NULL;
+
         retval = g_filename_from_utf8(RSTRING_PTR(filename), -1, NULL, &written, &error);
         if (error != NULL)
             RAISE_GERROR(error);
@@ -220,7 +206,6 @@ rbg_filename_from_ruby(VALUE filename)
     }
 
     return retval;
-
 #else
     return g_strdup(RVAL2CSTR(filename));
 #endif
@@ -229,81 +214,83 @@ rbg_filename_from_ruby(VALUE filename)
 VALUE
 rbg_filename_gslist_to_array_free(GSList *list)
 {
-    GSList *l;
     VALUE ary = rb_ary_new();
-    for (l = list; l != NULL; l = g_slist_next(l)) {
+    GSList *l;
+
+    for (l = list; l != NULL; l = g_slist_next(l))
         rb_ary_push(ary, rbg_filename_to_ruby_free(l->data));
-    }
+
     g_slist_free(list);
+
     return ary;
 }
 
 const gchar **
 rbg_rval2strv(VALUE ary)
 {
-        int i, n;
-        const gchar **strings;
+    int i, n;
+    const gchar **strings;
 
-        ary = rb_ary_to_ary(ary);
-        n = RARRAY_LEN(ary);
+    ary = rb_ary_to_ary(ary);
+    n = RARRAY_LEN(ary);
 
-        for (i = 0; i < n; i++)
-                StringValue(RARRAY_PTR(ary)[i]);
+    for (i = 0; i < n; i++)
+            StringValue(RARRAY_PTR(ary)[i]);
 
-        strings = g_new(const gchar *, n + 1);
-        for (i = 0; i < n; i++)
-                strings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
-        strings[n] = NULL;
+    strings = g_new(const gchar *, n + 1);
+    for (i = 0; i < n; i++)
+            strings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+    strings[n] = NULL;
 
-        return strings;
+    return strings;
 }
 
 const gchar **
 rbg_rval2strv_accept_nil(VALUE ary)
 {
-        return NIL_P(ary) ? NULL : rbg_rval2strv(ary);
+    return NIL_P(ary) ? NULL : rbg_rval2strv(ary);
 }
 
 gchar **
 rbg_rval2strv_dup(VALUE ary)
 {
-        int i, n;
-        gchar **strings;
+    int i, n;
+    gchar **strings;
 
-        ary = rb_ary_to_ary(ary);
-        n = RARRAY_LEN(ary);
+    ary = rb_ary_to_ary(ary);
+    n = RARRAY_LEN(ary);
 
-        for (i = 0; i < n; i++)
-                StringValue(RARRAY_PTR(ary)[i]);
+    for (i = 0; i < n; i++)
+            StringValue(RARRAY_PTR(ary)[i]);
 
-        strings = g_new(gchar *, n + 1);
-        for (i = 0; i < n; i++)
-                strings[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(ary)[i]));
-        strings[n] = NULL;
+    strings = g_new(gchar *, n + 1);
+    for (i = 0; i < n; i++)
+            strings[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(ary)[i]));
+    strings[n] = NULL;
 
-        return strings;
+    return strings;
 }
 
 const gchar **
 rbg_rval2argv(VALUE ary)
 {
-        int i, n;
-        const gchar **strings;
+    int i, n;
+    const gchar **strings;
 
-        if (NIL_P(ary))
-                return NULL;
+    if (NIL_P(ary))
+            return NULL;
 
-        ary = rb_ary_to_ary(ary);
-        n = RARRAY_LEN(ary);
+    ary = rb_ary_to_ary(ary);
+    n = RARRAY_LEN(ary);
 
-        strings = g_new(const gchar *, n + 1);
-        for (i = 0; i < n; i++)
-                strings[i] = TYPE(RARRAY_PTR(ary)[i]) == T_STRING ?
-                        RVAL2CSTR(RARRAY_PTR(ary)[i]) :
-                        "";
-        strings[n] = NULL;
+    strings = g_new(const gchar *, n + 1);
+    for (i = 0; i < n; i++)
+            strings[i] = TYPE(RARRAY_PTR(ary)[i]) == T_STRING ?
+                    RVAL2CSTR(RARRAY_PTR(ary)[i]) :
+                    "";
+    strings[n] = NULL;
 
-        return strings;
+    return strings;
 }
 
 #if 0
