@@ -387,6 +387,27 @@ rbg_strv2rval(const gchar **strings)
     return ary;
 }
 
+static VALUE
+rbg_strv2rval_free_body(VALUE strings)
+{
+    return STRV2RVAL((const gchar **)strings);
+}
+
+static VALUE
+rbg_strv2rval_free_ensure(VALUE strings)
+{
+    g_strfreev((gchar **)strings);
+    
+    return Qnil;
+}
+
+VALUE
+rbg_strv2rval_free(gchar **strings)
+{
+    return rb_ensure(rbg_strv2rval_free_body, (VALUE)strings,
+                     rbg_strv2rval_free_ensure, (VALUE)strings);
+}
+
 #if 0
 /*
 2004-04-15 Commented out by Masao.

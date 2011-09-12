@@ -14,37 +14,29 @@
 static VALUE
 shell_parse(VALUE self, VALUE command_line)
 {
-    gint argc, i;
-    gchar** argv;
-    GError* err = NULL;
-    VALUE ary;
+    gint argc;
+    gchar **argv;
+    GError *error = NULL;
 
-    gboolean ret = g_shell_parse_argv(RVAL2CSTR(command_line),
-                                      &argc, &argv, &err);
+    if (!g_shell_parse_argv(RVAL2CSTR(command_line), &argc, &argv, &error))
+        RAISE_GERROR(error);
 
-    if (! ret) RAISE_GERROR(err);
-
-    ary = rb_ary_new();
-    for (i = 0; i < argc; i++) {
-        rb_ary_push(ary, CSTR2RVAL(argv[i]));
-    }
-    g_strfreev (argv);
-    return ary;
+    return STRV2RVAL_FREE(argv);
 }
 
 static VALUE
 shell_quote(VALUE self, VALUE unquoted_string)
 {
-    return CSTR2RVAL_FREE(g_shell_quote((const gchar*)RVAL2CSTR(unquoted_string)));
+    return CSTR2RVAL_FREE(g_shell_quote(RVAL2CSTR(unquoted_string)));
 }
 
 static VALUE
 shell_unquote(VALUE self, VALUE quoted_string)
 {
-    GError* err = NULL;
-    gchar* str = g_shell_unquote((const gchar*)RVAL2CSTR(quoted_string), &err);
-
-    if (! str) RAISE_GERROR(err);
+    GError *error = NULL;
+    gchar *str = g_shell_unquote(RVAL2CSTR(quoted_string), &error);
+    if (str == NULL)
+        RAISE_GERROR(error);
 
     return CSTR2RVAL_FREE(str);
 }

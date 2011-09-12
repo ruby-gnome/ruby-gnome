@@ -342,22 +342,42 @@ enum_s_range(VALUE self)
     return result;
 }
 
+struct enum_s_values_body_args {
+    GEnumClass *gclass;
+    VALUE self;
+};
+
+static VALUE
+enum_s_values_body(VALUE value)
+{
+    struct enum_s_values_body_args *args = (struct enum_s_values_body_args *)value;
+    VALUE result = rb_ary_new();
+    guint i;
+
+    for (i = 0; i < args->gclass->n_values; i++)
+        rb_ary_push(result, make_enum(args->gclass->values[i].value, args->self));
+
+    return result;
+}
+
+static VALUE
+enum_s_values_ensure(VALUE gclass)
+{
+    g_type_class_unref((GEnumClass *)gclass);
+
+    return Qnil;
+}
+
 static VALUE
 enum_s_values(VALUE self)
 {
-    GEnumClass *gclass;
-    VALUE result;
-    guint i;
+    struct enum_s_values_body_args args = {
+        g_type_class_ref(CLASS2GTYPE(self)),
+        self
+    };
 
-    gclass = g_type_class_ref(CLASS2GTYPE(self));;
-    result = rb_ary_new();
-    for (i = 0; i < gclass->n_values; i++) {
-        GEnumValue *p = &(gclass->values[i]);
-        rb_ary_push(result, make_enum(p->value, self));
-    }
-
-    g_type_class_unref(gclass);
-    return result;
+    return rb_ensure(enum_s_values_body, (VALUE)&args,
+                     enum_s_values_ensure, (VALUE)args.gclass);
 }
 
 static VALUE

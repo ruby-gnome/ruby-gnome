@@ -9,6 +9,8 @@
 	* ext/glib2/rbgobj_strv.c: Use RVAL2STRV() and STRV2RVAL().
 	* ext/glib2/rbglib.c: Ensure that memory is freed.
 	* ext/glib2/rbglib.h: Add CSTRFILENAME2RVAL().
+	* ext/glib2/rbglib.c: Add rbg_strv2rval_free().
+	* ext/glib2/rbglib.h: Add RVAL2STRV_FREE().
 
 2011-09-10  Nikolai Weibull  <now@bitwi.se>
 

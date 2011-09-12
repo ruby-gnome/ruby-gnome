@@ -186,40 +186,21 @@ keyfile_get_start_group(VALUE self)
 static VALUE
 keyfile_get_groups(VALUE self)
 {
-    gsize length;
-    gsize i;
-    gchar** groups = g_key_file_get_groups(_SELF(self), &length);
-    VALUE ary = rb_ary_new();
-
-    for (i = 0; i < length; i++){
-        rb_ary_push(ary, CSTR2RVAL(groups[i]));
-    }
-
-    g_strfreev(groups);
-
-    return ary;
+    return STRV2RVAL_FREE(g_key_file_get_groups(_SELF(self), NULL));
 }
 
 static VALUE
 keyfile_get_keys(VALUE self, VALUE group_name)
 {
-    gsize length;
-    gsize i;
-    GError* error = NULL;
-    gchar** keys = g_key_file_get_keys(_SELF(self), 
-                                       (const gchar*)RVAL2CSTR(group_name),
-                                       &length, &error);
-    VALUE ary = rb_ary_new();
+    GError *error = NULL;
+    gchar **keys = g_key_file_get_keys(_SELF(self),
+                                       RVAL2CSTR(group_name),
+                                       NULL,
+                                       &error);
+    if (error != NULL)
+        RAISE_GERROR(error);
 
-    if (error) RAISE_GERROR(error);
-
-    for (i = 0; i < length; i++){
-        rb_ary_push(ary, CSTR2RVAL(keys[i]));
-    }
-
-    g_strfreev(keys);
-
-    return ary;
+    return STRV2RVAL_FREE(keys);
 }
 
 static VALUE
@@ -561,36 +542,44 @@ keyfile_set_locale_string_list(VALUE self, VALUE group_name, VALUE key, VALUE lo
 static VALUE
 keyfile_set_boolean_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
-    gint len = RARRAY_LEN(list);
-    gboolean* glist = ALLOCA_N(gboolean, len);
-    gint i;
+    VALUE ary;
+    long i, n;
+    gboolean *booleans;
 
-    for (i = 0; i < len; i++){
-        glist[i] = RVAL2CBOOL(RARRAY_PTR(list)[i]);
-    }
+    ary = rb_ary_to_ary(list);
+    n = RARRAY_LEN(ary);
+    booleans = ALLOCA_N(gboolean, n);
+    for (i = 0; i < n; i++)
+        booleans[i] = RVAL2CBOOL(RARRAY_PTR(ary)[i]);
 
     g_key_file_set_boolean_list(_SELF(self),
-                                (const gchar*)RVAL2CSTR(group_name),
-                                (const gchar*)RVAL2CSTR(key),
-                                glist, len);
+                                RVAL2CSTR(group_name),
+                                RVAL2CSTR(key),
+                                booleans,
+                                n);
+
     return self;
 }
 
 static VALUE
 keyfile_set_integer_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
-    gint len = RARRAY_LEN(list);
-    gint* glist = ALLOCA_N(gint, len);
-    gint i;
+    VALUE ary;
+    long i, n;
+    gint *ints;
 
-    for (i = 0; i < len; i++){
-        glist[i] = RVAL2CBOOL(RARRAY_PTR(list)[i]);
-    }
+    ary = rb_ary_to_ary(list);
+    n = RARRAY_LEN(ary);
+    ints = ALLOCA_N(gint, n);
+    for (i = 0; i < n; i++)
+        ints[i] = NUM2INT(RARRAY_PTR(ary)[i]);
 
     g_key_file_set_integer_list(_SELF(self),
-                                (const gchar*)RVAL2CSTR(group_name),
-                                (const gchar*)RVAL2CSTR(key),
-                                glist, len);
+                                RVAL2CSTR(group_name),
+                                RVAL2CSTR(key),
+                                ints,
+                                n);
+
     return self;
 }
 
@@ -598,18 +587,22 @@ keyfile_set_integer_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 static VALUE
 keyfile_set_double_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
 {
-    gint len = RARRAY_LEN(list);
-    gdouble* glist = ALLOCA_N(gdouble, len);
-    gint i;
-
-    for (i = 0; i < len; i++){
-        glist[i] = RVAL2CBOOL(RARRAY_PTR(list)[i]);
-    }
+    VALUE ary;
+    long i, n;
+    gdouble *doubles;
+    
+    ary = rb_ary_to_ary(list);
+    n = RARRAY_LEN(ary);
+    doubles = ALLOCA_N(gdouble, n);
+    for (i = 0; i < n; i++)
+        doubles[i] = NUM2DBL(RARRAY_PTR(ary)[i]);
 
     g_key_file_set_double_list(_SELF(self),
-                                (const gchar*)RVAL2CSTR(group_name),
-                                (const gchar*)RVAL2CSTR(key),
-                               glist, len);
+                               RVAL2CSTR(group_name),
+                               RVAL2CSTR(key),
+                               doubles,
+                               n);
+
     return self;
 }
 #endif
@@ -618,11 +611,14 @@ static VALUE
 keyfile_set_comment(VALUE self, VALUE group_name, VALUE key, VALUE comment)
 {
     GError* error = NULL;
-    g_key_file_set_comment(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
-                           (const gchar*)(NIL_P(key) ? NULL : RVAL2CSTR(key)),
-                           (const gchar*)RVAL2CSTR(comment), &error);
 
-    if (error) RAISE_GERROR(error);
+    g_key_file_set_comment(_SELF(self),
+                           RVAL2CSTR(group_name),
+                           RVAL2CSTR_ACCEPT_NIL(key),
+                           RVAL2CSTR(comment),
+                           &error);
+    if (error != NULL)
+        RAISE_GERROR(error);
 
     return self;
 }
@@ -631,9 +627,11 @@ static VALUE
 keyfile_remove_group(VALUE self, VALUE group_name)
 {
     GError* error = NULL;
-    g_key_file_remove_group(_SELF(self), (const gchar*)RVAL2CSTR(group_name), &error);
 
-    if (error) RAISE_GERROR(error);
+    g_key_file_remove_group(_SELF(self), RVAL2CSTR(group_name), &error);
+
+    if (error != NULL)
+        RAISE_GERROR(error);
 
     return self;
 }
@@ -642,12 +640,14 @@ static VALUE
 keyfile_remove_key(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
+
     g_key_file_remove_key(_SELF(self), 
-                          (const gchar*)RVAL2CSTR(group_name), 
-                          (const gchar*)RVAL2CSTR(key), 
+                          RVAL2CSTR(group_name), 
+                          RVAL2CSTR(key), 
                           &error);
 
-    if (error) RAISE_GERROR(error);
+    if (error != NULL)
+        RAISE_GERROR(error);
 
     return self;
 }
@@ -657,12 +657,14 @@ static VALUE
 keyfile_remove_comment(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
-    g_key_file_remove_comment(_SELF(self), 
-                          (const gchar*)RVAL2CSTR(group_name), 
-                          (const gchar*)RVAL2CSTR(key), 
-                          &error);
 
-    if (error) RAISE_GERROR(error);
+    g_key_file_remove_comment(_SELF(self), 
+                              RVAL2CSTR(group_name), 
+                              RVAL2CSTR(key), 
+                              &error);
+
+    if (error != NULL)
+        RAISE_GERROR(error);
 
     return self;
 }

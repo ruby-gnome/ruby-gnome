@@ -19,16 +19,7 @@
 static VALUE
 rbglib_m_language_names(VALUE self)
 {
-    const gchar * const *languages;
-    const gchar *language;
-    VALUE rb_languages = rb_ary_new();
-
-    languages = g_get_language_names();
-    for (language = *languages; *languages; language = *(++languages)) {
-        rb_ary_push(rb_languages, CSTR2RVAL(language));
-    }
-
-    return rb_languages;
+    return STRV2RVAL((const gchar **)g_get_language_names());
 }
 #endif
 

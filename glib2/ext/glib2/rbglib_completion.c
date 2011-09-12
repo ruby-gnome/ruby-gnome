@@ -88,7 +88,7 @@ comp_add_items(VALUE self, VALUE items)
     GList* list = (GList*)NULL;
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
 
-    Check_Type(items, T_ARRAY);
+    items = rb_ary_to_ary(items);
     len = RARRAY_LEN(items);
     for (i = 0; i < len; i ++){
         VALUE data = RARRAY_PTR(items)[i];
@@ -108,7 +108,7 @@ comp_remove_items(VALUE self, VALUE items)
     GList* list = (GList*)NULL;
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
 
-    Check_Type(items, T_ARRAY);
+    items = rb_ary_to_ary(items);
     len = RARRAY_LEN(items);
     for (i = 0; i < len; i ++){
         VALUE data = RARRAY_PTR(items)[i];

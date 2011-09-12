@@ -68,6 +68,7 @@ typedef int GPid;
 #define RVAL2ARGV(ary) rbg_rval2argv(ary)
 
 #define STRV2RVAL(strings) rbg_strv2rval(strings)
+#define STRV2RVAL_FREE(strings) rbg_strv2rval_free(strings)
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
@@ -114,6 +115,7 @@ gchar **rbg_rval2strv_dup(VALUE ary);
 gchar **rbg_rval2strv_dup_accept_nil(VALUE ary);
 const gchar **rbg_rval2argv(VALUE ary);
 VALUE rbg_strv2rval(const gchar **strings);
+VALUE rbg_strv2rval_free(gchar **strings);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);

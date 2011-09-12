@@ -153,18 +153,7 @@ bf_get_size(VALUE self)
 static VALUE
 bf_get_uris(VALUE self)
 {
-    gsize i;
-    gsize len;
-    VALUE ary = rb_ary_new();
-    gchar** ret = g_bookmark_file_get_uris(_SELF(self), &len);
-	
-    for (i = 0; i < len; i++){
-        rb_ary_push(ary, CSTR2RVAL(ret[i]));
-    }
-	
-    g_strfreev(ret);
-	
-    return ary;
+    return STRV2RVAL_FREE(g_bookmark_file_get_uris(_SELF(self), NULL));
 }
 
 static VALUE
