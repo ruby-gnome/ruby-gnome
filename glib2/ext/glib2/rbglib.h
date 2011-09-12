@@ -56,6 +56,7 @@ typedef int GPid;
 #define CSTR2RVAL2(s) (CSTR2RVAL_FREE(s))
 
 #define RVAL2CSTRFILENAME(v) (rbg_filename_from_ruby(v))
+#define CSTRFILENAME2RVAL(s) (rbg_filename_to_ruby(s))
 #define CSTRFILENAME2RVAL_FREE(s) (rbg_filename_to_ruby_free(s))
 #define CSTRFILENAMEARRAY2RVAL_FREE(s) (rbg_filename_gslist_to_array_free(s))
 
@@ -102,6 +103,7 @@ extern VALUE rbg_cstr2rval_len_with_encoding(const gchar* str, gsize len,
                                              const gchar *encoding);
 extern VALUE rbg_cstr2rval_with_free(gchar* str);
 
+VALUE rbg_filename_to_ruby(const gchar *filename);
 extern VALUE rbg_filename_to_ruby_free(gchar *filename);
 extern gchar *rbg_filename_from_ruby(VALUE filename);
 extern VALUE rbg_filename_gslist_to_array_free(GSList *list);

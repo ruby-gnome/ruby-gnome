@@ -144,12 +144,73 @@ static rb_encoding *filename_encoding_if_not_utf8;
 #endif
 
 VALUE
+rbg_filename_to_ruby_body(VALUE filename)
+{
+    return CSTR2RVAL((const gchar *)filename);
+}
+
+VALUE
+rbg_filename_to_ruby_ensure(VALUE filename)
+{
+    g_free((gchar *)filename);
+
+    return Qnil;
+}
+
+VALUE
+rbg_filename_to_ruby(const gchar *filename)
+{
+#ifdef HAVE_RUBY_ENCODING_H
+    gchar *filename_utf8;
+    gsize written;
+    GError *error = NULL;
+
+    if (filename == NULL)
+        return Qnil;
+       
+    if (filename_encoding_if_not_utf8 == NULL)
+        return CSTR2RVAL(filename);
+
+    filename_utf8 = g_filename_to_utf8(filename, -1, NULL, &written, &error);
+    if (error != NULL)
+        RAISE_GERROR(error);
+
+    return rb_ensure(rbg_filename_to_ruby_body, (VALUE)filename_utf8,
+                     rbg_filename_to_ruby_ensure, (VALUE)filename_utf8);
+#else
+    return CSTR2RVAL(filename);
+#endif
+}
+
+static VALUE
+rbg_filename_to_ruby_free_body(VALUE val)
+{
+    gchar *filename_utf8 = (gchar *)val;
+    VALUE rb_filename = rb_external_str_new_with_enc(filename_utf8,
+                                                     strlen(filename_utf8),
+                                                     rb_utf8_encoding());
+
+    /* if needed, change encoding of Ruby String to filename encoding, so that
+       upcoming File operations will work properly */
+    return filename_encoding_if_not_utf8 != NULL ?
+        rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8) :
+        rb_filename;
+}
+
+static VALUE
+rbg_filename_to_ruby_free_ensure(VALUE filename)
+{
+    g_free((gchar *)filename);
+
+    return Qnil;
+}
+
+VALUE
 rbg_filename_to_ruby_free(gchar *filename)
 {
 #ifdef HAVE_RUBY_ENCODING_H
     gchar *filename_utf8;
     gsize written;
-    VALUE rb_filename = Qnil;
 
     if (filename == NULL)
         return Qnil;
@@ -166,17 +227,8 @@ rbg_filename_to_ruby_free(gchar *filename)
         filename_utf8 = filename;
     }
 
-    /* create Ruby String in UTF-8 */
-    rb_filename = rb_external_str_new_with_enc(filename_utf8,
-                                               strlen(filename_utf8),
-                                               rb_utf8_encoding());
-    g_free(filename_utf8);
-
-    /* if needed, change encoding of Ruby String to filename encoding, so that
-       upcoming File operations will work properly */
-    return filename_encoding_if_not_utf8 != NULL ?
-        rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8) :
-        rb_filename;
+    return rb_ensure(rbg_filename_to_ruby_free_body, (VALUE)filename_utf8,
+                     rbg_filename_to_ruby_free_ensure, (VALUE)filename_utf8);
 #else
     return CSTR2RVAL_FREE(filename);
 #endif
@@ -188,6 +240,7 @@ rbg_filename_from_ruby(VALUE filename)
 #ifdef HAVE_RUBY_ENCODING_H
     gchar *retval;
     gsize written;
+    GError *error = NULL;
 
     /* if needed, change encoding of Ruby String to UTF-8 */
     StringValue(filename);
@@ -195,15 +248,12 @@ rbg_filename_from_ruby(VALUE filename)
         filename = rb_str_export_to_enc(filename, rb_utf8_encoding());
 
     /* convert it to filename encoding if needed */
-    if (filename_encoding_if_not_utf8 != NULL) {
-        GError *error = NULL;
+    if (filename_encoding_if_not_utf8 == NULL)
+        return g_strdup(RSTRING_PTR(filename));
 
-        retval = g_filename_from_utf8(RSTRING_PTR(filename), -1, NULL, &written, &error);
-        if (error != NULL)
-            RAISE_GERROR(error);
-    } else {
-        retval = g_strdup(RSTRING_PTR(filename));
-    }
+    retval = g_filename_from_utf8(RSTRING_PTR(filename), -1, NULL, &written, &error);
+    if (error != NULL)
+        RAISE_GERROR(error);
 
     return retval;
 #else
@@ -211,18 +261,37 @@ rbg_filename_from_ruby(VALUE filename)
 #endif
 }
 
-VALUE
-rbg_filename_gslist_to_array_free(GSList *list)
+static VALUE
+rbg_filename_gslist_to_array_free_body(VALUE list)
 {
     VALUE ary = rb_ary_new();
-    GSList *l;
+    GSList *p;
 
-    for (l = list; l != NULL; l = g_slist_next(l))
-        rb_ary_push(ary, rbg_filename_to_ruby_free(l->data));
+    for (p = (GSList *)list; p != NULL; p = g_slist_next(p))
+        rb_ary_push(ary, CSTRFILENAME2RVAL(p->data));
+
+    return ary;
+}
+
+static VALUE
+rbg_filename_gslist_to_array_free_ensure(VALUE val)
+{
+    GSList *list = (GSList *)val;
+    GSList *p;
+
+    for (p = list; p != NULL; p = g_slist_next(p))
+        g_free((gchar *)p->data);
 
     g_slist_free(list);
 
-    return ary;
+    return Qnil;
+}
+
+VALUE
+rbg_filename_gslist_to_array_free(GSList *list)
+{
+    return rb_ensure(rbg_filename_gslist_to_array_free_body, (VALUE)list,
+                     rbg_filename_gslist_to_array_free_ensure, (VALUE)list);
 }
 
 const gchar **
@@ -237,7 +306,7 @@ rbg_rval2strv(VALUE ary)
 
     astrings = ALLOCA_N(const gchar *, n);
     for (i = 0; i < n; i++)
-            astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+        astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
 
     strings = g_new(const gchar *, n + 1);
     MEMCPY(strings, astrings, const gchar *, n);
@@ -264,7 +333,7 @@ rbg_rval2strv_dup(VALUE ary)
 
     astrings = ALLOCA_N(const gchar *, n);
     for (i = 0; i < n; i++)
-            astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+        astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
 
     strings = g_new(gchar *, n + 1);
     for (i = 0; i < n; i++)
@@ -287,16 +356,16 @@ rbg_rval2argv(VALUE ary)
     const gchar **strings;
 
     if (NIL_P(ary))
-            return NULL;
+        return NULL;
 
     ary = rb_ary_to_ary(ary);
     n = RARRAY_LEN(ary);
 
     strings = g_new(const gchar *, n + 1);
     for (i = 0; i < n; i++)
-            strings[i] = TYPE(RARRAY_PTR(ary)[i]) == T_STRING ?
-                    RVAL2CSTR(RARRAY_PTR(ary)[i]) :
-                    "";
+        strings[i] = TYPE(RARRAY_PTR(ary)[i]) == T_STRING ?
+            RVAL2CSTR(RARRAY_PTR(ary)[i]) :
+            "";
     strings[n] = NULL;
 
     return strings;
