@@ -97,7 +97,8 @@ rbuimanager_add_ui(int argc, VALUE *argv, VALUE self)
 
         if (RVAL2CBOOL(buffer)){
             StringValue(buffer_or_filename);
-            ret = gtk_ui_manager_add_ui_from_string(_SELF(self), RVAL2CSTR(buffer_or_filename),
+            ret = gtk_ui_manager_add_ui_from_string(_SELF(self),
+                                                    RSTRING_PTR(buffer_or_filename),
                                                     RSTRING_LEN(buffer_or_filename),
                                                     &error);
         } else {

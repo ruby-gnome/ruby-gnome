@@ -57,7 +57,7 @@ static VALUE
 txt_set_text(VALUE self, VALUE text)
 {
     StringValue(text);
-    gtk_text_buffer_set_text(_SELF(self), RVAL2CSTR(text), RSTRING_LEN(text));
+    gtk_text_buffer_set_text(_SELF(self), RSTRING_PTR(text), RSTRING_LEN(text));
     return self;
 }
 
@@ -75,17 +75,18 @@ static VALUE
 txt_insert_at_cursor(VALUE self, VALUE text)
 {
     StringValue(text);
-    gtk_text_buffer_insert_at_cursor(_SELF(self),
-                                     RVAL2CSTR(text), RSTRING_LEN(text));
+    gtk_text_buffer_insert_at_cursor(_SELF(self), RSTRING_PTR(text), RSTRING_LEN(text));
     return self;
 }
 
 static VALUE
 txt_insert_interactive(VALUE self, VALUE iter, VALUE text, VALUE editable)
 {
+    StringValue(text);
+
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive(_SELF(self),
                                                          RVAL2ITR(iter),
-                                                         RVAL2CSTR(text),
+                                                         RSTRING_PTR(text),
                                                          RSTRING_LEN(text),
                                                          RVAL2CBOOL(editable)));
 }
@@ -93,8 +94,10 @@ txt_insert_interactive(VALUE self, VALUE iter, VALUE text, VALUE editable)
 static VALUE
 txt_insert_interactive_at_cursor(VALUE self, VALUE text, VALUE editable)
 {
+    StringValue(text);
+
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive_at_cursor(_SELF(self),
-                                                                   RVAL2CSTR(text),
+                                                                   RSTRING_PTR(text),
                                                                    RSTRING_LEN(text),
                                                                    RVAL2CBOOL(editable)));
 }
@@ -344,6 +347,7 @@ txt_deserialize(VALUE self, VALUE content_buffer, VALUE format, VALUE iter, VALU
     GError* error = NULL;
     gboolean ret;
 
+    /* TODO: Why not StringValue(data)? */
     Check_Type(data, T_STRING);
     ret = gtk_text_buffer_deserialize(_SELF(self), _SELF(content_buffer),
                                       RVAL2ATOM(format),
@@ -491,6 +495,7 @@ serialize_func(GtkTextBuffer *register_buffer, GtkTextBuffer *content_buffer, Gt
 
     /* This should return data as String */
     result = G_PROTECT_CALLBACK(invoke_callback, &arg);
+    /* TODO: Why not StringValue(result)? */
     Check_Type(result, T_STRING);
     *length = RSTRING_LEN(result);
     return (guint8*)(NIL_P(rb_errinfo()) ? RSTRING_PTR(result) : NULL);
@@ -674,7 +679,7 @@ txt_insert(int argc, VALUE *argv, VALUE self)
         start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
         StringValue(value);
         gtk_text_buffer_insert(_SELF(self), RVAL2ITR(where),
-                               RVAL2CSTR(value), RSTRING_LEN(value));
+                               RSTRING_PTR(value), RSTRING_LEN(value));
         
         if (RARRAY_LEN(tags) == 0)
             return self;

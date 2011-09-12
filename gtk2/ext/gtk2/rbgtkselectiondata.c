@@ -137,14 +137,10 @@ gtkselectiondata_set(int argc, VALUE *argv, VALUE self)
 static VALUE
 gtkselectiondata_set_text(VALUE self, VALUE str)
 {
-    gboolean ret;
     StringValue(str);
 
-    ret = gtk_selection_data_set_text(_SELF(self), RVAL2CSTR(str),
-                                      RSTRING_LEN(str));
-
-    if (!ret) 
-        rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");
+    if (!gtk_selection_data_set_text(_SELF(self), RSTRING_PTR(str), RSTRING_LEN(str)))
+        rb_raise(rb_eRuntimeError, "the selection wasn't successfully set");
 
     return self;
 }
@@ -152,23 +148,15 @@ gtkselectiondata_set_text(VALUE self, VALUE str)
 static VALUE
 gtkselectiondata_get_text(VALUE self)
 {
-    VALUE ret = Qnil;
-    guchar* text = gtk_selection_data_get_text(_SELF(self));
-    if (text) {
-        ret = CSTR2RVAL((const char*)text);
-        g_free(text);
-    }
-    return ret;
+    return CSTR2RVAL_FREE((gchar *)gtk_selection_data_get_text(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 gtkselectiondata_set_pixbuf(VALUE self, VALUE pixbuf)
 {
-    gboolean ret = gtk_selection_data_set_pixbuf(_SELF(self), 
-                                                 GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
-    if (!ret) 
-        rb_raise(rb_eRuntimeError, "the selection wasn't successfully.");
+    if (!gtk_selection_data_set_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf))))
+        rb_raise(rb_eRuntimeError, "the selection wasn't successfully set");
 
     return self;
 }

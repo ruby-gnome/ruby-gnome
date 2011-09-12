@@ -54,8 +54,9 @@ builder_add_from_string(VALUE self, VALUE string)
 {
     GError *error = NULL;
 
+    StringValue(string);
     if (gtk_builder_add_from_string(_SELF(self),
-                                    RVAL2CSTR(string),
+                                    RSTRING_PTR(string),
                                     RSTRING_LEN(string),
                                     &error) == 0)
         RAISE_GERROR(error);

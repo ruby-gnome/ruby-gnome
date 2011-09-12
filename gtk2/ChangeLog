@@ -2,6 +2,9 @@
 
 	* ext/gtk2/*.c: Remove methods that implement methods already
 	implemented as properties.
+	* ext/gtk2/*.c: Call StringValue() before calling
+	RSTRING_PTR()/RSTRING_LEN(); also use RSTRING_PTR() instead of
+	RVAL2CSTR() if StringValue() has already been called on the value.
 
 2011-09-11  Kouhei Sutou  <kou@cozmixng.org>
 
