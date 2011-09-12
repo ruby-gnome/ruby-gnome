@@ -140,14 +140,14 @@ GType g_file_attribute_info_list_get_type(void);
 #define RVAL2GSOCKETFAMILY(value) RVAL2GENUM((value), G_TYPE_SOCKET_FAMILY)
 
 #define GSOCKETPROTOCOL2RVAL(value) GENUM2RVAL((value), G_TYPE_SOCKET_PROTOCOL)
-#define RVAL2GSOCKETPROTOCOL(value) RVAL2GFLAGS((value), G_TYPE_SOCKET_PROTOCOL)
+#define RVAL2GSOCKETPROTOCOL(value) RVAL2GENUM((value), G_TYPE_SOCKET_PROTOCOL)
 #define RVAL2GSOCKETPROTOCOLDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \
                                RVAL2GSOCKETPROTOCOL, \
                                G_SOCKET_PROTOCOL_DEFAULT)
 
 #define GSOCKETTYPE2RVAL(value) GENUM2RVAL((value), G_TYPE_SOCKET_TYPE)
-#define RVAL2GSOCKETTYPE(value) RVAL2GFLAGS((value), G_TYPE_SOCKET_TYPE)
+#define RVAL2GSOCKETTYPE(value) RVAL2GENUM((value), G_TYPE_SOCKET_TYPE)
 
 #define GTIMEVAL2RVAL(value) rb_time_new((value)->tv_sec, (value)->tv_usec)
 

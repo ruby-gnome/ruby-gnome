@@ -176,7 +176,7 @@ Init_gvolume(VALUE glib)
         rb_define_method(volume, "uuid", volume_get_uuid, 0);
         rb_define_method(volume, "icon", volume_get_icon, 0);
         rb_define_method(volume, "drive", volume_get_drive, 0);
-        rb_define_method(volume, "mount", volume_get_mount, 0);
+        rb_define_method(volume, "get_mount", volume_get_mount, 0);
         rb_define_method(volume, "can_mount?", volume_can_mount, 0);
         rb_define_method(volume, "should_automount?", volume_should_automount, 0);
         rb_define_method(volume, "activation_root", volume_get_activation_root, 0);

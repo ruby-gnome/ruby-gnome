@@ -1,3 +1,11 @@
+2011-09-12  Nikolai Weibull  <now@bitwi.se>
+
+	* ext/gio2/gio2.h: Fix RVAL2GSOCKETPROTOCOL and RVAL2GSOCKETTYPE
+	* ext/gio2/gsocket.c: Fix #local_address and #remote_address
+	property-overriding methods
+	* ext/gio2/gvolume.c: Name doubly-named #mount method
+	#mount/#get_mount.
+
 2011-09-09  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/gio2/gio2.h: Fix RVAL2GMOUNTMOUNTFLAGS.

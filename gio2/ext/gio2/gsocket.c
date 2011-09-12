@@ -298,7 +298,6 @@ socket_condition_wait(int argc, VALUE *argv, VALUE self)
         return self;
 }
 
-/* TODO: Need to make sure that this isn’t overridden. */
 static VALUE
 socket_get_local_address(VALUE self)
 {
@@ -367,7 +366,9 @@ Init_gsocket(VALUE glib)
         rb_define_method(socket, "create_source", socket_create_source, -1);
         rb_define_method(socket, "condition_check", socket_condition_check, 1);
         rb_define_method(socket, "condition_wait", socket_condition_wait, -1);
+        rb_undef_method(socket, "local_address");
         rb_define_method(socket, "local_address", socket_get_local_address, 0);
+        rb_undef_method(socket, "remote_address");
         rb_define_method(socket, "remote_address", socket_get_remote_address, 0);
         rb_define_method(socket, "speaks_ipv4?", socket_speaks_ipv4, 0);
 }
