@@ -2,6 +2,8 @@
 
 	* lib/glib2.rb (__add_one_arg_setter): Ruby 1.9-proof this method.
 	* ext/glib2/rbglib.c: Fix coding style.
+	* ext/glib2/rbglib.c: Don’t use StringValue(RARRAY_PTR(ary)[i]), as
+	that changes the Array.
 
 2011-09-10  Nikolai Weibull  <now@bitwi.se>
 

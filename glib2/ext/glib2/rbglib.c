@@ -135,8 +135,8 @@ rbg_cstr2rval_with_free_ensure(VALUE str)
 VALUE
 rbg_cstr2rval_with_free(gchar *str)
 {
-    return str ? rb_ensure(rbg_cstr2rval_with_free_body, (VALUE)str,
-                           rbg_cstr2rval_with_free_ensure, (VALUE)str) : Qnil;
+    return str != NULL? rb_ensure(rbg_cstr2rval_with_free_body, (VALUE)str,
+                                  rbg_cstr2rval_with_free_ensure, (VALUE)str) : Qnil;
 }
 
 #ifdef HAVE_RUBY_ENCODING_H
@@ -229,17 +229,18 @@ const gchar **
 rbg_rval2strv(VALUE ary)
 {
     int i, n;
+    const gchar **astrings;
     const gchar **strings;
 
     ary = rb_ary_to_ary(ary);
     n = RARRAY_LEN(ary);
 
+    astrings = ALLOCA_N(const gchar *, n);
     for (i = 0; i < n; i++)
-            StringValue(RARRAY_PTR(ary)[i]);
+            astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
 
     strings = g_new(const gchar *, n + 1);
-    for (i = 0; i < n; i++)
-            strings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+    MEMCPY(strings, astrings, const gchar *, n);
     strings[n] = NULL;
 
     return strings;
@@ -255,17 +256,19 @@ gchar **
 rbg_rval2strv_dup(VALUE ary)
 {
     int i, n;
+    const gchar **astrings;
     gchar **strings;
 
     ary = rb_ary_to_ary(ary);
     n = RARRAY_LEN(ary);
 
+    astrings = ALLOCA_N(const gchar *, n);
     for (i = 0; i < n; i++)
-            StringValue(RARRAY_PTR(ary)[i]);
+            astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
 
     strings = g_new(gchar *, n + 1);
     for (i = 0; i < n; i++)
-            strings[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(ary)[i]));
+            strings[i] = g_strdup(astrings[i]);
     strings[n] = NULL;
 
     return strings;
