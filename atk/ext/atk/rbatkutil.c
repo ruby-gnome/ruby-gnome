@@ -105,7 +105,6 @@ Init_atk_util()
 #endif
     rb_define_singleton_method(util, "toolkit_name", rbatk_get_toolkit_name, 0);
     rb_define_singleton_method(util, "toolkit_version", rbatk_get_toolkit_version, 0);
-    rb_define_singleton_method(util, "toolkit_version", rbatk_get_toolkit_version, 0);
 
     /* AtkCoordType */
     coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", util);

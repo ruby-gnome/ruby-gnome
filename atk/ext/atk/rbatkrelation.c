@@ -33,40 +33,21 @@ rbatkrelation_s_for_name(VALUE self, VALUE name)
 static VALUE
 rbatkrel_initialize(VALUE self, VALUE targets, VALUE relationship)
 {
-    gint i;
-    gint len = RARRAY_LEN(targets);
-    AtkObject* objects = g_new(AtkObject, len);
+    VALUE ary = rb_ary_to_ary(targets);
+    long i;
+    long len = RARRAY_LEN(ary);
+    AtkObject **objects = g_new(AtkObject *, len);
 
-    for (i = 0; i < len; i++) {
-        objects = (AtkObject*)RARRAY_PTR(targets)[i];
-        objects++;
-    }
+    for (i = 0; i < len; i++)
+        objects[i] = RVAL2ATKOBJECT(RARRAY_PTR(targets)[i]);
 
-    G_INITIALIZE(self, atk_relation_new(&objects, len, 
+    G_INITIALIZE(self, atk_relation_new(objects,
+                                        len, 
                                         RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE)));
+
     g_free(objects);
 
     return Qnil;
-}
-
-static VALUE
-rbatkrel_get_relation_type(VALUE self)
-{
-    return GENUM2RVAL(atk_relation_get_relation_type(_SELF(self)), ATK_TYPE_RELATION_TYPE);
-}
-
-static VALUE
-rbatkrel_get_target(VALUE self)
-{
-    guint i;
-    GPtrArray* garray = atk_relation_get_target(_SELF(self));
-    VALUE ary = rb_ary_new();
-
-    for (i = 0; i < garray->len; i++){
-        rb_ary_push(ary, GOBJ2RVAL((AtkObject*)g_ptr_array_index(garray, i)));
-    }
-    g_ptr_array_free(garray, TRUE);
-    return ary;
 }
 
 #if ATK_CHECK_VERSION(1,9,0)
@@ -85,8 +66,6 @@ Init_atk_relation()
     VALUE type;
     rb_define_singleton_method(rel, "type_register", rbatkrel_s_type_register, 1);
     rb_define_method(rel, "initialize", rbatkrel_initialize, 2);
-    rb_define_method(rel, "relation_type", rbatkrel_get_relation_type, 0);
-    rb_define_method(rel, "target", rbatkrel_get_target, 0);
 #if ATK_CHECK_VERSION(1,9,0)
     rb_define_method(rel, "add_target", rbatkrel_add_target, 1);
 #endif

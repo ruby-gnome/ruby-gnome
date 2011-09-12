@@ -26,6 +26,8 @@
 #  define RUBY_ATK_VAR extern
 #endif
                                                                                 
+#define RVAL2ATKOBJECT(s) ATK_OBJECT(RVAL2GOBJ(s))
+
 extern void Init_atk_inits();
 extern GType atk_text_rectangle_get_type(void);
 extern GType atk_text_range_get_type(void);

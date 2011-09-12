@@ -228,7 +228,6 @@ Init_atk_table()
 {
     VALUE mTable = G_DEF_INTERFACE(ATK_TYPE_TABLE, "Table", mAtk);
 
-    rb_define_method(mTable, "set_caption", rbatk_table_set_caption, 1);
     rb_define_method(mTable, "ref_at", rbatk_table_ref_at, 2);
     rb_define_method(mTable, "get_index_at", rbatk_table_get_index_at, 2);
     rb_define_method(mTable, "get_column_at_index", rbatk_table_get_column_at_index, 1);

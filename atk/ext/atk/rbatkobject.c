@@ -11,7 +11,7 @@
 
 #include "rbatk.h"
 
-#define _SELF(s) (ATK_OBJECT(RVAL2GOBJ(s)))
+#define _SELF(s) RVAL2ATKOBJECT(s)
 
 /* How can I implement this? Since 1.10
 AtkObject*  atk_implementor_ref_accessible  (AtkImplementor *implementor);
