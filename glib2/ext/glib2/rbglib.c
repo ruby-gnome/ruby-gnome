@@ -274,6 +274,12 @@ rbg_rval2strv_dup(VALUE ary)
     return strings;
 }
 
+gchar **
+rbg_rval2strv_dup_accept_nil(VALUE ary)
+{
+    return NIL_P(ary) ? NULL : rbg_rval2strv_dup(ary);
+}
+
 const gchar **
 rbg_rval2argv(VALUE ary)
 {
@@ -294,6 +300,22 @@ rbg_rval2argv(VALUE ary)
     strings[n] = NULL;
 
     return strings;
+}
+
+VALUE
+rbg_strv2rval(const gchar **strings)
+{
+    VALUE ary;
+    const gchar **p;
+
+    if (strings == NULL)
+        return Qnil;
+
+    ary = rb_ary_new();
+    for (p = strings; *p != NULL; p++)
+        rb_ary_push(ary, CSTR2RVAL(*p));
+
+    return ary;
 }
 
 #if 0

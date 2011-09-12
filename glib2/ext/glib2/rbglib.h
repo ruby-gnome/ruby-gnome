@@ -62,8 +62,11 @@ typedef int GPid;
 #define RVAL2STRV(ary) rbg_rval2strv(ary)
 #define RVAL2STRV_ACCEPT_NIL(ary) rbg_rval2strv_accept_nil(ary)
 #define RVAL2STRV_DUP(ary) rbg_rval2strv_dup(ary)
+#define RVAL2STRV_DUP_ACCEPT_NIL(ary) rbg_rval2strv_dup_accept_nil(ary)
 
 #define RVAL2ARGV(ary) rbg_rval2argv(ary)
+
+#define STRV2RVAL(strings) rbg_strv2rval(strings)
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
@@ -106,7 +109,9 @@ extern VALUE rbg_filename_gslist_to_array_free(GSList *list);
 const gchar **rbg_rval2strv(VALUE ary);
 const gchar **rbg_rval2strv_accept_nil(VALUE ary);
 gchar **rbg_rval2strv_dup(VALUE ary);
+gchar **rbg_rval2strv_dup_accept_nil(VALUE ary);
 const gchar **rbg_rval2argv(VALUE ary);
+VALUE rbg_strv2rval(const gchar **strings);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);

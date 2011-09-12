@@ -4,6 +4,9 @@
 	* ext/glib2/rbglib.c: Fix coding style.
 	* ext/glib2/rbglib.c: Don’t use StringValue(RARRAY_PTR(ary)[i]), as
 	that changes the Array.
+	* ext/glib2/rbglib.c: Add rbg_strv2rval().
+	* ext/glib2/rbglib.h: Add RVAL2STRV and STRV2RVAL().
+	* ext/glib2/rbgobj_strv.c: Use RVAL2STRV() and STRV2RVAL().
 
 2011-09-10  Nikolai Weibull  <now@bitwi.se>
 
