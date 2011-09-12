@@ -1,4 +1,9 @@
-2011-09-09  Nikolai Weibull <now@bitwi.se>
+2011-09-12  Nikolai Weibull  <now@bitwi.se>
+
+	* ext/gdk_pixbuf2/*.c: Remove methods that implement methods already
+	implemented with properties.
+
+2011-09-09  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/gdk_pixbuf2/*.c: Fix all warnings generated with gcc 4.4.5.
 	* ext/gdk_pixbuf2/*.c: Fix all RVAL2CSTR calls.

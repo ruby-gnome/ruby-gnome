@@ -29,30 +29,6 @@ static ID id_pixdata;
 
 /****************************************************/
 /* The GdkPixbuf Structure */
-static VALUE
-get_colorspace(VALUE self)
-{
-    return GENUM2RVAL(gdk_pixbuf_get_colorspace(_SELF(self)), GDK_TYPE_COLORSPACE);
-}
-
-static VALUE
-get_n_channels(VALUE self)
-{
-    return INT2FIX(gdk_pixbuf_get_n_channels(_SELF(self)));
-}
-
-static VALUE
-get_has_alpha(VALUE self)
-{
-    return CBOOL2RVAL(gdk_pixbuf_get_has_alpha(_SELF(self)));
-}
-
-static VALUE
-get_bits_per_sample(VALUE self)
-{
-    return INT2FIX(gdk_pixbuf_get_bits_per_sample(_SELF(self)));
-}
-
 static int
 pixels_size(GdkPixbuf *pixbuf)
 {
@@ -75,7 +51,7 @@ get_pixels(VALUE self)
     int size;
 
     size = pixels_size(pixbuf);
-    return rb_str_new((const char*)gdk_pixbuf_get_pixels(pixbuf), size);
+    return rb_str_new((const char *)gdk_pixbuf_get_pixels(pixbuf), size);
 }
 
 static VALUE
@@ -99,25 +75,7 @@ set_pixels(VALUE self, VALUE pixels)
     memcpy(gdk_pixbuf_get_pixels(pixbuf),
            RSTRING_PTR(pixels), MIN(RSTRING_LEN(pixels), size));
 
-  return pixels;
-}
-
-static VALUE
-get_width(VALUE self)
-{
-    return INT2FIX(gdk_pixbuf_get_width(_SELF(self)));
-}
-
-static VALUE
-get_height(VALUE self)
-{
-    return INT2FIX(gdk_pixbuf_get_height(_SELF(self)));
-}
-
-static VALUE
-get_rowstride(VALUE self)
-{
-    return INT2FIX(gdk_pixbuf_get_rowstride(_SELF(self)));
+    return pixels;
 }
 
 static VALUE
@@ -623,15 +581,9 @@ Init_gdk_pixbuf2()
     /* 
      * The GdkPixbuf Structure 
      */
-    rb_define_method(gdkPixbuf, "colorspace", get_colorspace, 0);
-    rb_define_method(gdkPixbuf, "n_channels", get_n_channels, 0);
-    rb_define_method(gdkPixbuf, "has_alpha?", get_has_alpha, 0);
-    rb_define_method(gdkPixbuf, "bits_per_sample", get_bits_per_sample, 0);
+    rb_undef_method(gdkPixbuf, "pixels");
     rb_define_method(gdkPixbuf, "pixels", get_pixels, 0);
     rb_define_method(gdkPixbuf, "pixels=", set_pixels, 1);
-    rb_define_method(gdkPixbuf, "width", get_width, 0);
-    rb_define_method(gdkPixbuf, "height", get_height, 0);
-    rb_define_method(gdkPixbuf, "rowstride", get_rowstride, 0);
     rb_define_method(gdkPixbuf, "get_option", get_option, 1);
 
     /* GdkPixbufError */
