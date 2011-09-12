@@ -34,9 +34,9 @@ module GLib
 
   def __add_one_arg_setter(klass)
     #for Instance methods.
-    ary = klass.instance_methods(false)
+    ary = klass.instance_methods(false).map{ |m| m.to_sym }
     ary.each do |m|
-      if /^set_(.*)/ =~ m and not ary.include? "#{$1}=" and klass.instance_method(m).arity == 1
+      if /^set_(.*)/ =~ m and not ary.include? :"#{$1}=" and klass.instance_method(m).arity == 1
 	begin
           klass.module_eval("def #{$1}=(val); set_#{$1}(val); val; end\n")
         rescue SyntaxError
@@ -46,12 +46,12 @@ module GLib
     end
     #for Class methods/Module functions.
     if Object.method(:methods).arity == -1
-      ary = klass.methods(false)
+      ary = klass.methods(false).map{ |m| m.to_sym }
     else
-      ary = klass.methods
+      ary = klass.methods.map{ |m| m.to_sym }
     end
     ary.each do |m|
-      if /^set_(.*)/ =~ m and not ary.include? "#{$1}=" and klass.method(m).arity == 1
+      if /^set_(.*)/ =~ m and not ary.include? :"#{$1}=" and klass.method(m).arity == 1
 	begin
           klass.module_eval("def self.#{$1}=(val); set_#{$1}(val); val; end\n")
         rescue SyntaxError
