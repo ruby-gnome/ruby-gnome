@@ -63,7 +63,7 @@ set_pixels(VALUE self, VALUE pixels)
 
     size = pixels_size(pixbuf);
 
-    Check_Type(pixels, T_STRING);
+    StringValue(pixels);
     arg_size = RSTRING_LEN(pixels);
     if (arg_size != size)
       rb_raise(rb_eRangeError,

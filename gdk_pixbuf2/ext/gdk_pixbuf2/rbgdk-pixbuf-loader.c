@@ -60,31 +60,33 @@ static VALUE
 loader_write(VALUE self, VALUE data)
 {
     GError *error = NULL;
-    gboolean res;
   
-    res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data),
-                                  RSTRING_LEN(data), &error);
-    if (error)
+    StringValue(data);
+    if (!gdk_pixbuf_loader_write(_SELF(self),
+                                 (const guchar *)RSTRING_PTR(data),
+                                 RSTRING_LEN(data),
+                                 &error))
         RAISE_GERROR(error);
-    return CBOOL2RVAL(res);
+
+    return Qtrue;
 }
 
 static VALUE
 last_write(VALUE self, VALUE data)
 {
     GError *error = NULL;
-    gboolean res;
 
-    res = gdk_pixbuf_loader_write(_SELF(self), (const guchar*)RVAL2CSTR(data),
-                                  RSTRING_LEN(data), &error);
-    if (error)
+    StringValue(data);
+    if (!gdk_pixbuf_loader_write(_SELF(self),
+                                 (const guchar *)RSTRING_PTR(data),
+                                 RSTRING_LEN(data),
+                                 &error))
         RAISE_GERROR(error);
 
-    res = gdk_pixbuf_loader_close(_SELF(self), &error);
-    if (error)
+    if (!gdk_pixbuf_loader_close(_SELF(self), &error))
         RAISE_GERROR(error);
 
-    return CBOOL2RVAL(res);
+    return Qtrue;
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)

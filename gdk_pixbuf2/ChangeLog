@@ -2,6 +2,8 @@
 
 	* ext/gdk_pixbuf2/*.c: Remove methods that implement methods already
 	implemented with properties.
+	* ext/gdk_pixbuf2/*.c: call StringValue before calling
+	RSTRING_PTR()/RSTRING_LEN().
 
 2011-09-09  Nikolai Weibull  <now@bitwi.se>
 
