@@ -35,8 +35,7 @@ Init_gtk_cellrenderertext()
     
     rb_define_method(renderer, "initialize", crtext_initialize, 0);
     rb_define_method(renderer, "set_fixed_height_from_font", crtext_set_fixed_height_from_font, 1);
-
-    G_DEF_SETTERS(renderer);
+    G_DEF_SETTER(renderer, "fixed_height_from_font");
 }
 
 

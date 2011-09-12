@@ -138,6 +138,7 @@ Init_gtk_entry()
     rb_define_method(gEntry, "layout_offsets", entry_get_layout_offsets, 0);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gEntry, "set_completion", entry_set_completion, 1);
+    G_DEF_SETTER(gEntry, "completion");
     rb_define_method(gEntry, "completion", entry_get_completion, 0);
 #endif
     rb_define_method(gEntry, "layout_index_to_text_index", entry_layout_index_to_text_index, 1);
@@ -148,7 +149,6 @@ Init_gtk_entry()
 		     entry_get_cursor_hadjustment, 0);
     rb_define_method(gEntry, "set_cursor_hadjustment",
 		     entry_set_cursor_hadjustment, 1);
+    G_DEF_SETTER(gEntry, "cursor_hadjustment");
 #endif
-
-    G_DEF_SETTERS(gEntry);
 }

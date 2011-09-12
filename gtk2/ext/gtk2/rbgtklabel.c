@@ -147,6 +147,4 @@ Init_gtk_label()
     rb_define_method(gLabel, "select_region", label_select_region, 2);
     rb_define_method(gLabel, "layout", label_get_layout, 0);
     rb_define_method(gLabel, "selection_bounds", label_get_selection_bounds, 0);
-
-    G_DEF_SETTERS(gLabel);
 }

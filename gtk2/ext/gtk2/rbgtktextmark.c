@@ -38,11 +38,9 @@ get_visible(VALUE self)
     return CBOOL2RVAL(gtk_text_mark_get_visible(_SELF(self)));
 }
 
-static VALUE
-get_name(VALUE self)
-{
-    return CSTR2RVAL(gtk_text_mark_get_name(_SELF(self)));
-}
+/* Defined as Properties:
+const gchar *       gtk_text_mark_get_name              (GtkTextMark *mark);
+*/
 
 static VALUE
 get_deleted(VALUE self)
@@ -56,11 +54,9 @@ get_buffer(VALUE self)
     return GOBJ2RVAL(gtk_text_mark_get_buffer(_SELF(self)));
 }
 
-static VALUE
-get_left_gravity(VALUE self)
-{
-    return CBOOL2RVAL(gtk_text_mark_get_left_gravity(_SELF(self)));
-}
+/* Defined as Properties:
+gboolean            gtk_text_mark_get_left_gravity      (GtkTextMark *mark);
+*/
 
 void 
 Init_gtk_textmark()
@@ -70,11 +66,8 @@ Init_gtk_textmark()
     rb_define_method(gTextMark, "initialize", initialize, 2);
 #endif
     rb_define_method(gTextMark, "set_visible", set_visible, 1);
+    G_DEF_SETTER(gTextMark, "visible");
     rb_define_method(gTextMark, "visible?", get_visible, 0);
-    rb_define_method(gTextMark, "name", get_name, 0);
     rb_define_method(gTextMark, "deleted?", get_deleted, 0);
     rb_define_method(gTextMark, "buffer", get_buffer, 0);
-    rb_define_method(gTextMark, "left_gravity?", get_left_gravity, 0);
-
-    G_DEF_SETTERS(gTextMark);
 }

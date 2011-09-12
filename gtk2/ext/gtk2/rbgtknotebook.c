@@ -453,6 +453,5 @@ Init_gtk_notebook()
     rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
     rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
 
-    G_DEF_SETTERS(gNotebook);
     G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", (GValToRValSignalFunc)signal_g2r_func);
 }

@@ -256,31 +256,14 @@ tbar_insert_space(VALUE self, VALUE pos)
     return self;
 }
 
-static VALUE
-tbar_set_tooltips(VALUE self, VALUE enable)
-{
-    gtk_toolbar_set_tooltips(_SELF(self), RVAL2CBOOL(enable));
-    return self;
-}
-
-static VALUE
-tbar_set_icon_size(VALUE self, VALUE size)
-{
-    gtk_toolbar_set_icon_size(_SELF(self), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
-    return self;
-}
-
-static VALUE
-tbar_get_icon_size(VALUE self)
-{
-    return GENUM2RVAL(gtk_toolbar_get_icon_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
-}
-
-static VALUE
-tbar_get_tooltips(VALUE self)
-{
-    return CBOOL2RVAL(gtk_toolbar_get_tooltips(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_toolbar_set_tooltips            (GtkToolbar *toolbar,
+                                                         gboolean enable);
+void                gtk_toolbar_set_icon_size           (GtkToolbar *toolbar,
+                                                         GtkIconSize icon_size);
+GtkIconSize         gtk_toolbar_get_icon_size           (GtkToolbar *toolbar);
+gboolean            gtk_toolbar_get_tooltips            (GtkToolbar *toolbar);
+*/
 
 static VALUE
 tbar_remove_space(VALUE self, VALUE position)
@@ -323,15 +306,9 @@ Init_gtk_toolbar()
     rb_define_method(gToolbar, "append_space", tbar_append_space, 0);
     rb_define_method(gToolbar, "prepend_space", tbar_prepend_space, 0);
     rb_define_method(gToolbar, "insert_space", tbar_insert_space, 1);
-    rb_define_method(gToolbar, "set_tooltips", tbar_set_tooltips, 1);
-    rb_define_method(gToolbar, "set_icon_size", tbar_set_icon_size, 1);
-    rb_define_method(gToolbar, "icon_size", tbar_get_icon_size, 0);
-    rb_define_method(gToolbar, "tooltips?", tbar_get_tooltips, 0);
     rb_define_method(gToolbar, "remove_space", tbar_remove_space, 1);
     rb_define_method(gToolbar, "unset_icon_size", tbar_unset_icon_size, 0);
     rb_define_method(gToolbar, "unset_style", tbar_unset_style, 0);
-
-    G_DEF_SETTERS(gToolbar);
 
     /* GtkToolbarChildType */
     G_DEF_CLASS(GTK_TYPE_TOOLBAR_CHILD_TYPE, "ChildType", gToolbar);

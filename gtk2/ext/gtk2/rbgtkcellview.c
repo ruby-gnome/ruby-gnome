@@ -51,14 +51,11 @@ cview_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-cview_set_model(VALUE self, VALUE model)
-{
-    G_CHILD_SET(self, id_model, model);
-    gtk_cell_view_set_model(_SELF(self), 
-                            NIL_P(model) ? (GtkTreeModel*)NULL : GTK_TREE_MODEL(RVAL2GOBJ(model)));
-    return self;
-}
+/* Properties:
+void                gtk_cell_view_set_model             (GtkCellView *cell_view,
+                                                         GtkTreeModel *model);
+GtkTreeModel *      gtk_cell_view_get_model             (GtkCellView *cell_view);
+*/
 
 static VALUE
 cview_set_displayed_row(VALUE self, VALUE path)
@@ -111,13 +108,11 @@ Init_gtk_cellview()
     id_text = rb_intern("text");
 
     rb_define_method(cview, "initialize", cview_initialize, -1);
-    rb_define_method(cview, "set_model", cview_set_model, 1);
     rb_define_method(cview, "set_displayed_row", cview_set_displayed_row, 1);
+    G_DEF_SETTER(cview, "displayed_row");
     rb_define_method(cview, "displayed_row", cview_get_displayed_row, 0);
     rb_define_method(cview, "get_size_of_row", cview_get_size_of_row, 1);
     rb_define_method(cview, "cell_renderers", cview_get_cell_renderers, 0);
-
-    G_DEF_SETTERS(cview);
 #endif
 }
 

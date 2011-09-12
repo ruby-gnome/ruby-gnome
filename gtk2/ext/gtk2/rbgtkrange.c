@@ -83,8 +83,7 @@ Init_gtk_range()
   rb_define_method(gRange, "set_increments", range_set_increments, 2);
   rb_define_method(gRange, "set_range", range_set_range, 2);
   rb_define_method(gRange, "set_value", range_set_value, 1);
-
-  G_DEF_SETTERS(gRange);
+  G_DEF_SETTER(gRange, "value");
 
 #if GTK_CHECK_VERSION(2,10,0)
   /* GtkSensitivityType */

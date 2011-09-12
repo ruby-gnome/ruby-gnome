@@ -64,7 +64,7 @@ rbtn_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rbtn_group(VALUE self)
 {
-    /* Owened by GTK+ */
+    /* Owned by GTK+ */
     return GSLIST2ARY(gtk_radio_button_get_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
 }
 

@@ -227,9 +227,11 @@ Init_gtk_recent_chooser()
   VALUE gRecentChooser = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
   rb_define_method(gRecentChooser, "set_show_numbers", rc_set_show_numbers, 1);
+  G_DEF_SETTER(gRecentChooser, "show_numbers");
   rb_define_method(gRecentChooser, "show_numbers", rc_get_show_numbers, 0);
   rb_define_method(gRecentChooser, "set_sort_func", rc_set_sort_func, 0);
   rb_define_method(gRecentChooser, "set_current_uri", rc_set_current_uri, 1);
+  G_DEF_SETTER(gRecentChooser, "current_uri");
   rb_define_method(gRecentChooser, "current_uri", rc_get_current_uri, 0);
   rb_define_method(gRecentChooser, "current_item", rc_get_current_item, 0);
   rb_define_method(gRecentChooser, "select_uri", rc_select_uri, 1);
@@ -241,8 +243,6 @@ Init_gtk_recent_chooser()
   rb_define_method(gRecentChooser, "add_filter", rc_add_filter, 1);
   rb_define_method(gRecentChooser, "remove_filter", rc_remove_filter, 1);
   rb_define_method(gRecentChooser, "filters", rc_list_filters, 0);
-  
-  G_DEF_SETTERS(gRecentChooser);
   
   /* GtkRecentChooserError */
   G_DEF_ERROR(GTK_RECENT_CHOOSER_ERROR, "RecentChooserError", mGtk, rb_eRuntimeError,

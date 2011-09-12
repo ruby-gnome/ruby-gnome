@@ -138,19 +138,10 @@ iview_get_selected_items(VALUE self)
     return ret;
 }
 
-static VALUE
-iview_select_all(VALUE self)
-{
-    gtk_icon_view_select_all(_SELF(self));
-    return self;
-}
-
-static VALUE
-iview_unselect_all(VALUE self)
-{
-    gtk_icon_view_unselect_all(_SELF(self));
-    return self;
-}
+/* Defined as Signals
+void                gtk_icon_view_select_all            (GtkIconView *icon_view);
+void                gtk_icon_view_unselect_all          (GtkIconView *icon_view);
+*/
  
 static VALUE
 iview_item_activated(VALUE self, VALUE path)
@@ -298,8 +289,6 @@ Init_gtk_iconview()
     rb_define_method(iview, "unselect_path", iview_unselect_path, 1);
     rb_define_method(iview, "path_is_selected?", iview_path_is_selected, 1);
     rb_define_method(iview, "selected_items", iview_get_selected_items, 0);
-    rb_define_method(iview, "select_all", iview_select_all, 0);
-    rb_define_method(iview, "unselect_all", iview_unselect_all, 0);
     rb_define_method(iview, "item_activated", iview_item_activated, 1);
 #endif
 #if GTK_CHECK_VERSION(2,8,0)

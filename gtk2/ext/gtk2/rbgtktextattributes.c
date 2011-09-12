@@ -182,8 +182,6 @@ Init_txt_attr()
     rb_define_method(gTextAttributes, "set_invisible", txt_attr_bool_set_invisible, 1);
     rb_define_method(gTextAttributes, "bg_full_height?", txt_attr_bool_bg_full_height, 0);
     rb_define_method(gTextAttributes, "set_bg_full_height", txt_attr_bool_set_bg_full_height, 1);
-    rb_define_method(gTextAttributes, "bg_full_height?", txt_attr_bool_bg_full_height, 0);
-    rb_define_method(gTextAttributes, "set_bg_full_height", txt_attr_bool_set_bg_full_height, 1);
     rb_define_method(gTextAttributes, "editable?", txt_attr_bool_editable, 0);
     rb_define_method(gTextAttributes, "set_editable", txt_attr_bool_set_editable, 1);
     rb_define_method(gTextAttributes, "realized?", txt_attr_bool_realized, 0);

@@ -86,9 +86,11 @@ Init_gtk_radiotoolbutton()
     gRToolButton = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);
 
     rb_define_method(gRToolButton, "initialize", rbtn_initialize, -1);
+    rb_undef_method(gRToolButton, "group");
     rb_define_method(gRToolButton, "group", rbtn_get_group, 0);
+    rb_undef_method(gRToolButton, "set_group");
     rb_define_method(gRToolButton, "set_group", rbtn_set_group, 1);
-
-    G_DEF_SETTERS(gRToolButton);
+    rb_undef_method(gRToolButton, "group=");
+    G_DEF_SETTER(gRToolButton, "group");
 #endif
 }

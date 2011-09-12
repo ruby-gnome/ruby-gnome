@@ -138,8 +138,8 @@ Init_gtk_calendar()
     rb_define_method(gCalendar, "display_options", cal_get_display_options, -1);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gCalendar, "set_display_options", cal_set_display_options, 1);
+    G_DEF_SETTER(gCalendar, "display_options");
 #endif
-    G_DEF_SETTERS(gCalendar);
 
     G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", gCalendar);
     G_DEF_CONSTANTS(gCalendar, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");

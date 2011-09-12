@@ -53,18 +53,11 @@ statusbar_remove(VALUE self, VALUE cid, VALUE mid)
     return self;
 }
 
-static VALUE
-statusbar_set_has_resize_grip(VALUE self, VALUE setting)
-{
-    gtk_statusbar_set_has_resize_grip(_SELF(self), RVAL2CBOOL(setting));
-    return self;
-}
-
-static VALUE
-statusbar_get_has_resize_grip(VALUE self)
-{
-    return CBOOL2RVAL(gtk_statusbar_get_has_resize_grip(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_statusbar_set_has_resize_grip   (GtkStatusbar *statusbar,
+                                                         gboolean setting);
+gboolean            gtk_statusbar_get_has_resize_grip   (GtkStatusbar *statusbar);
+*/
 
 void 
 Init_gtk_statusbar()
@@ -76,8 +69,4 @@ Init_gtk_statusbar()
     rb_define_method(gStatusBar, "push", statusbar_push, 2);
     rb_define_method(gStatusBar, "pop", statusbar_pop, 1);
     rb_define_method(gStatusBar, "remove", statusbar_remove, 2);
-    rb_define_method(gStatusBar, "set_has_resize_grip", statusbar_set_has_resize_grip, 1);
-    rb_define_method(gStatusBar, "has_resize_grip?", statusbar_get_has_resize_grip, 0);
-
-    G_DEF_SETTERS(gStatusBar);
 }

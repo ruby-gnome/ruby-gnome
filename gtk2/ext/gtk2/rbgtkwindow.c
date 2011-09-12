@@ -114,32 +114,15 @@ gwin_set_geometry_hints(VALUE self, VALUE geometry_widget, VALUE geometry, VALUE
     return self;
 }
 
-static VALUE
-gwin_set_gravity(VALUE self, VALUE gravity)
-{
-    gtk_window_set_gravity(_SELF(self), RVAL2GENUM(gravity, GDK_TYPE_GRAVITY));
-    return self;
-}
-
-static VALUE
-gwin_get_gravity(VALUE self)
-{
-    return GENUM2RVAL(gtk_window_get_gravity(_SELF(self)), GDK_TYPE_GRAVITY);
-}
-
-static VALUE
-gwin_set_transient_for(VALUE self, VALUE parent)
-{
-    gtk_window_set_transient_for(_SELF(self), _SELF(parent));
-    return self;
-}
-
-static VALUE
-gwin_set_destroy_with_parent(VALUE self, VALUE setting)
-{
-    gtk_window_set_destroy_with_parent(_SELF(self), RVAL2CBOOL(setting));
-    return self;
-}
+/* Defined as Properties:
+void                gtk_window_set_gravity              (GtkWindow *window,
+                                                         GdkGravity gravity);
+GdkGravity          gtk_window_get_gravity              (GtkWindow *window);
+void                gtk_window_set_transient_for        (GtkWindow *window,
+                                                         GtkWindow *parent);
+void                gtk_window_set_destroy_with_parent  (GtkWindow *window,
+                                                         gboolean setting);
+*/
 
 /* Define as Properties.
 void        gtk_window_set_screen           (GtkWindow *window,
@@ -313,12 +296,10 @@ gwin_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VALUE
     return self;
 }
 
-static VALUE
-gwin_set_decorated(VALUE self, VALUE setting)
-{
-    gtk_window_set_decorated(_SELF(self), RVAL2CBOOL(setting));
-    return self;
-}
+/* Defined as Properties:
+void                gtk_window_set_decorated            (GtkWindow *window,
+                                                         gboolean setting);
+*/
 
 static VALUE
 gwin_set_frame_dimensions(VALUE self, VALUE left, VALUE top, VALUE right, VALUE bottom)
@@ -344,20 +325,11 @@ gwin_set_mnemonic_modifier(VALUE self, VALUE modifier)
     return self;
 }
 
-static VALUE
-gwin_set_role(VALUE self, VALUE role)
-{
-    gtk_window_set_role(_SELF(self), RVAL2CSTR(role));
-    return self;
-}
-
-static VALUE
-gwin_set_type_hint(VALUE self, VALUE hint)
-{
-    gtk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
-    return self;
-}
 /* Defined as Properties
+void                gtk_window_set_decorated            (GtkWindow *window,
+                                                         gboolean setting);
+void                gtk_window_set_type_hint            (GtkWindow *window,
+                                                         GdkWindowTypeHint hint);
 void        gtk_window_set_skip_taskbar_hint
                                             (GtkWindow *window,
                                              gboolean setting);
@@ -381,14 +353,9 @@ gboolean    gtk_window_get_deletable        (GtkWindow *window);
 
 void        gtk_window_set_deletable        (GtkWindow *window,
                                              gboolean setting);
+gboolean            gtk_window_get_decorated            (GtkWindow *window);
 */
 
-
-static VALUE
-gwin_get_decorated(VALUE self)
-{
-    return CBOOL2RVAL(gtk_window_get_decorated(_SELF(self)));
-}
 
 static VALUE
 gwin_s_get_default_icon_list(VALUE self)
@@ -404,11 +371,9 @@ gwin_get_default_size(VALUE self)
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
-static VALUE
-gwin_get_destroy_with_parent(VALUE self)
-{
-    return gtk_window_get_destroy_with_parent(_SELF(self)) ? Qtrue :  Qfalse;
-}
+/* Defined as Properties:
+gboolean            gtk_window_get_destroy_with_parent  (GtkWindow *window);
+*/
 
 static VALUE
 gwin_get_frame_dimensions(VALUE self)
@@ -448,12 +413,11 @@ gwin_get_position(VALUE self)
     return rb_ary_new3(2, INT2NUM(root_x), INT2NUM(root_y));
 }
 
-static VALUE
-gwin_get_role(VALUE self)
-{
-    const gchar* role = gtk_window_get_role(_SELF(self));
-    return role ? CSTR2RVAL(role) : Qnil;
-}
+/* Defined as Properties:
+const gchar *       gtk_window_get_role                 (GtkWindow *window);
+GtkWindow *         gtk_window_get_transient_for        (GtkWindow *window);
+GdkWindowTypeHint   gtk_window_get_type_hint            (GtkWindow *window);
+*/
 
 static VALUE
 gwin_get_size(VALUE self)
@@ -461,19 +425,6 @@ gwin_get_size(VALUE self)
     int width, height;
     gtk_window_get_size(_SELF(self), &width, &height);
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
-}
-
-static VALUE
-gwin_get_transient_for(VALUE self)
-{
-    GtkWindow* window = gtk_window_get_transient_for(_SELF(self));
-    return window ? GOBJ2RVAL(window) : Qnil;
-}
-
-static VALUE
-gwin_get_type_hint(VALUE self)
-{
-    return GENUM2RVAL(gtk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
 
 #if GTK_CHECK_VERSION(2,10,0)
@@ -650,14 +601,12 @@ Init_gtk_window()
     /* active_(focus|default) are deprecated. Use activate_* instead. */
     rb_define_method(gWindow, "active_focus", gwin_active_focus, 0);
     rb_define_method(gWindow, "active_default", gwin_active_default, 0);
+    rb_undef_method(gWindow, "activate_focus");
     rb_define_method(gWindow, "activate_focus", gwin_activate_focus, 0);
+    rb_undef_method(gWindow, "activate_default");
     rb_define_method(gWindow, "activate_default", gwin_activate_default, 0);
     rb_define_method(gWindow, "set_default_size", gwin_set_default_size, 2);
     rb_define_method(gWindow, "set_geometry_hints", gwin_set_geometry_hints, 3);
-    rb_define_method(gWindow, "set_gravity", gwin_set_gravity, 1);
-    rb_define_method(gWindow, "gravity", gwin_get_gravity, 0);
-    rb_define_method(gWindow, "set_transient_for", gwin_set_transient_for, 1);
-    rb_define_method(gWindow, "set_destroy_with_parent", gwin_set_destroy_with_parent, 1);
     rb_define_singleton_method(gWindow, "toplevels", gwin_s_list_toplevels, 0);
     rb_define_method(gWindow, "add_mnemonic", gwin_add_mnemonic, 2);
     rb_define_method(gWindow, "remove_mnemonic", gwin_remove_mnemonic, 2);
@@ -686,25 +635,17 @@ Init_gtk_window()
 #endif
     rb_define_method(gWindow, "begin_resize_drag", gwin_begin_resize_drag, 5);
     rb_define_method(gWindow, "begin_move_drag", gwin_begin_move_drag, 4);
-    rb_define_method(gWindow, "set_decorated", gwin_set_decorated, 1);
     rb_define_method(gWindow, "set_frame_dimensions", gwin_set_frame_dimensions, 4);
     rb_define_method(gWindow, "set_mnemonic_modifier", gwin_set_mnemonic_modifier, 1);
-    rb_define_method(gWindow, "set_role", gwin_set_role, 1);
-    rb_define_method(gWindow, "set_type_hint", gwin_set_type_hint, 1);
-    rb_define_method(gWindow, "decorated?", gwin_get_decorated, 0);
     rb_define_method(gWindow, "default_size", gwin_get_default_size, 0);
     rb_define_singleton_method(gWindow, "default_icon_list", gwin_s_get_default_icon_list, 0);
-    rb_define_method(gWindow, "destroy_with_parent?", gwin_get_destroy_with_parent, 0);
     rb_define_method(gWindow, "frame_dimensions", gwin_get_frame_dimensions, 0);
     rb_define_method(gWindow, "set_has_frame", gwin_set_has_frame, 1);
     rb_define_method(gWindow, "has_frame?", gwin_get_has_frame, 0);
     rb_define_method(gWindow, "icon_list", gwin_get_icon_list, 0);
     rb_define_method(gWindow, "mnemonic_modifier", gwin_get_mnemonic_modifier, 0);
     rb_define_method(gWindow, "position", gwin_get_position, 0);
-    rb_define_method(gWindow, "role", gwin_get_role, 0);
     rb_define_method(gWindow, "size", gwin_get_size, 0);
-    rb_define_method(gWindow, "transient_for", gwin_get_transient_for, 0);
-    rb_define_method(gWindow, "type_hint", gwin_get_type_hint, 0);
 #if GTK_CHECK_VERSION(2,10,0)
     rb_define_method(gWindow, "group", gwin_get_group, 0);
 #endif
@@ -719,6 +660,7 @@ Init_gtk_window()
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_singleton_method(gWindow, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
 #endif
+    rb_undef_method(gWindow, "set_icon");
     rb_define_method(gWindow, "set_icon", gwin_set_icon, 1);
     rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)

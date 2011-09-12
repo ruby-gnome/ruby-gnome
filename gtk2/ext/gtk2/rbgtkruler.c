@@ -16,12 +16,11 @@
 
 #define _SELF(self) (GTK_RULER(RVAL2GOBJ(self)))
 
-static VALUE
-ruler_set_metric(VALUE self, VALUE metric)
-{
-    gtk_ruler_set_metric(_SELF(self), RVAL2GENUM(metric, GTK_TYPE_METRIC_TYPE));
-    return self;
-}
+/* Defined as Properties
+void                gtk_ruler_set_metric                (GtkRuler *ruler,
+                                                         GtkMetricType metric);
+GtkMetricType       gtk_ruler_get_metric                (GtkRuler *ruler);
+*/
 
 static VALUE
 ruler_set_range(VALUE self, VALUE lower, VALUE upper, VALUE position, VALUE max_size)
@@ -29,12 +28,6 @@ ruler_set_range(VALUE self, VALUE lower, VALUE upper, VALUE position, VALUE max_
     gtk_ruler_set_range(_SELF(self), NUM2DBL(lower), NUM2DBL(upper),
 			NUM2DBL(position), NUM2DBL(max_size));
     return self;
-}
-
-static VALUE
-ruler_get_metric(VALUE self)
-{
-    return INT2FIX(gtk_ruler_get_metric(_SELF(self)));
 }
 
 static VALUE
@@ -65,12 +58,9 @@ Init_gtk_ruler()
 {
     VALUE gRuler = G_DEF_CLASS(GTK_TYPE_RULER, "Ruler", mGtk);
 
-    rb_define_method(gRuler, "set_metric", ruler_set_metric, 1);
     rb_define_method(gRuler, "set_range", ruler_set_range, 4);
-    rb_define_method(gRuler, "metric", ruler_get_metric, 0);
+    G_DEF_SETTER(gRuler, "range");
     rb_define_method(gRuler, "range", ruler_get_range, 0);
     rb_define_method(gRuler, "draw_ticks", ruler_draw_ticks, 0);
     rb_define_method(gRuler, "draw_pos", ruler_draw_pos, 0);
-
-    G_DEF_SETTERS(gRuler);
 }

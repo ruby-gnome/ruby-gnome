@@ -84,16 +84,18 @@ Init_gtk_curve()
     rb_define_method(gCurve, "initialize", curve_initialize, 0);
     rb_define_method(gCurve, "reset", curve_reset, 0);
     rb_define_method(gCurve, "set_gamma", curve_set_gamma, 1);
+    G_DEF_SETTER(gCurve, "gamma");
     rb_define_method(gCurve, "set_range", curve_set_range, 4);
     rb_define_method(gCurve, "set_vector", curve_set_vector, 2);
+    G_DEF_SETTER(gCurve, "vector");
+    /* NOTE: For backwards compatability. */
     rb_define_method(gCurve, "get_vector", curve_get_vector, 1);
+    rb_define_method(gCurve, "vector", curve_get_vector, 1);
 
     /* GtkCurveType(from standard constants) */
 
     G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", gCurve);
     G_DEF_CONSTANTS(gCurve, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
-
-    G_DEF_SETTERS(gCurve);
 }
 
 

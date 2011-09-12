@@ -146,7 +146,5 @@ Init_gtk_print_operation()
     /* GtkPrintOperationResult */
     G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_RESULT, "Result", gPrintOperation);
     G_DEF_CONSTANTS(gPrintOperation, GTK_TYPE_PRINT_OPERATION_RESULT, "GTK_PRINT_OPERATION_");
-
-    G_DEF_SETTERS(gPrintOperation);
 #endif
 }

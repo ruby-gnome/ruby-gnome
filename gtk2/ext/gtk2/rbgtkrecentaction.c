@@ -44,6 +44,5 @@ Init_gtk_recentaction()
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gRecentaction = G_DEF_CLASS(GTK_TYPE_RECENT_ACTION, "RecentAction", mGtk);
     rb_define_method(gRecentaction, "initialize", recentaction_initialize, -1);
-    G_DEF_SETTERS(gRecentaction);
 #endif
 }

@@ -32,20 +32,11 @@ invisible_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
-static VALUE
-invisible_set_screen(VALUE self, VALUE screen)
-{
-    gtk_invisible_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
-    return self;
-}
-
-static VALUE
-invisible_get_screen(VALUE self)
-{
-    return GOBJ2RVAL(gtk_invisible_get_screen(_SELF(self)));
-}
-#endif
+/* Defined as Properties
+void                gtk_invisible_set_screen            (GtkInvisible *invisible,
+                                                         GdkScreen *screen);
+GdkScreen *         gtk_invisible_get_screen            (GtkInvisible *invisible);
+*/
 
 void
 Init_invisible()
@@ -53,11 +44,4 @@ Init_invisible()
     VALUE gInvisible = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
 
     rb_define_method(gInvisible, "initialize", invisible_initialize, -1);
-
-#if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gInvisible, "set_screen", invisible_set_screen, 1);
-    rb_define_method(gInvisible, "screen", invisible_get_screen, 0);
-#endif
-
-    G_DEF_SETTERS(gInvisible);
 }

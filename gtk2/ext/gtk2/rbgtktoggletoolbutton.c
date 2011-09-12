@@ -35,18 +35,11 @@ toggletoolbutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-toggletoolbutton_set_active(VALUE self, VALUE is_active)
-{
-    gtk_toggle_tool_button_set_active(_SELF(self), RVAL2CBOOL(is_active));
-    return self;
-}
-
-static VALUE
-toggletoolbutton_get_active(VALUE self)
-{
-    return CBOOL2RVAL(gtk_toggle_tool_button_get_active(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_toggle_tool_button_set_active   (GtkToggleToolButton *button,
+                                                         gboolean is_active);
+gboolean            gtk_toggle_tool_button_get_active   (GtkToggleToolButton *button);
+*/
 
 #endif
 
@@ -57,9 +50,5 @@ Init_gtk_toggletoolbutton()
     VALUE gToggleToolButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_TOOL_BUTTON, "ToggleToolButton", mGtk);
 
     rb_define_method(gToggleToolButton, "initialize", toggletoolbutton_initialize, -1);
-    rb_define_method(gToggleToolButton, "set_active", toggletoolbutton_set_active, 1);
-    rb_define_method(gToggleToolButton, "active?", toggletoolbutton_get_active, 0);
-
-    G_DEF_SETTERS(gToggleToolButton);
 #endif
 }

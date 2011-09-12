@@ -41,12 +41,12 @@ mitem_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-mitem_set_right_justified(VALUE self, VALUE right_justified)
-{
-    gtk_menu_item_set_right_justified(_SELF(self), RVAL2CBOOL(right_justified));
-    return self;
-}
+/* Defined as Properties
+void                gtk_menu_item_set_right_justified   (GtkMenuItem *menu_item,
+                                                         gboolean right_justified);
+gboolean            gtk_menu_item_get_right_justified   (GtkMenuItem *menu_item);
+GtkWidget *         gtk_menu_item_get_submenu           (GtkMenuItem *menu_item);
+*/
 
 static VALUE
 mitem_set_submenu(VALUE self, VALUE child)
@@ -64,12 +64,10 @@ mitem_set_submenu(VALUE self, VALUE child)
     return self;
 }
 
-static VALUE
-mitem_set_accel_path(VALUE self, VALUE accel_path)
-{
-    gtk_menu_item_set_accel_path(_SELF(self), RVAL2CSTR(accel_path));
-    return self;
-}
+/* Defined as Properties
+void                gtk_menu_item_set_accel_path        (GtkMenuItem *menu_item,
+                                                         const gchar *accel_path);
+*/
 
 static VALUE
 mitem_remove_submenu(VALUE self)
@@ -86,26 +84,11 @@ mitem_remove_submenu(VALUE self)
     return self;
 }
 
-static VALUE
-mitem_select(VALUE self)
-{
-    gtk_menu_item_select(_SELF(self));
-    return self;
-}
-
-static VALUE
-mitem_deselect(VALUE self)
-{
-    gtk_menu_item_deselect(_SELF(self));
-    return self;
-}
-
-static VALUE
-mitem_activate(VALUE self)
-{
-    gtk_menu_item_activate(_SELF(self));
-    return self;
-}
+/* Defined as Signals
+void                gtk_menu_item_select                (GtkMenuItem *menu_item);
+void                gtk_menu_item_deselect              (GtkMenuItem *menu_item);
+void                gtk_menu_item_activate              (GtkMenuItem *menu_item);
+*/
 
 static VALUE
 mitem_toggle_size_request(VALUE self)
@@ -122,36 +105,15 @@ mitem_toggle_size_allocate(VALUE self, VALUE allocation)
     return self;
 }
 
-static VALUE
-mitem_get_right_justified(VALUE self)
-{
-    return CBOOL2RVAL(gtk_menu_item_get_right_justified(_SELF(self)));
-}
-
-static VALUE
-mitem_get_submenu(VALUE self)
-{
-    GtkWidget* submenu = gtk_menu_item_get_submenu(_SELF(self));
-    return submenu ? GOBJ2RVAL(submenu) : Qnil;
-}
-
 void 
 Init_gtk_menu_item()
 {
     VALUE gMenuItem = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
 
     rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
-    rb_define_method(gMenuItem, "set_right_justified", mitem_set_right_justified, 1);
+    rb_undef_method(gMenuItem, "set_submenu");
     rb_define_method(gMenuItem, "set_submenu", mitem_set_submenu, 1);
-    rb_define_method(gMenuItem, "set_accel_path", mitem_set_accel_path, 1);
     rb_define_method(gMenuItem, "remove_submenu", mitem_remove_submenu, 0);
-    rb_define_method(gMenuItem, "select", mitem_select, 0);
-    rb_define_method(gMenuItem, "deselect", mitem_deselect, 0);
-    rb_define_method(gMenuItem, "activate", mitem_activate, 0);
     rb_define_method(gMenuItem, "toggle_size_request", mitem_toggle_size_request, 0);
     rb_define_method(gMenuItem, "toggle_size_allocate", mitem_toggle_size_allocate, 1);
-    rb_define_method(gMenuItem, "right_justified?", mitem_get_right_justified, 0);
-    rb_define_method(gMenuItem, "submenu", mitem_get_submenu, 0);
-
-    G_DEF_SETTERS(gMenuItem);
 }

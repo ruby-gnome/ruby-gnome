@@ -154,18 +154,11 @@ tvc_clear_attributes(VALUE self, VALUE cell)
     return self;
 }
 
-static VALUE
-tvc_set_spacing(VALUE self, VALUE spacing)
-{
-    gtk_tree_view_column_set_spacing(_SELF(self), NUM2INT(spacing));
-    return self;
-}
-
-static VALUE
-tvc_get_spacing(VALUE self)
-{
-    return INT2NUM(gtk_tree_view_column_get_spacing(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_tree_view_column_set_spacing    (GtkTreeViewColumn *tree_column,
+                                                         gint spacing);
+gint                gtk_tree_view_column_get_spacing    (GtkTreeViewColumn *tree_column);
+*/
 
 static VALUE
 tvc_clicked(VALUE self)
@@ -174,19 +167,13 @@ tvc_clicked(VALUE self)
     return self;
 }
 
-static VALUE
-tvc_set_sort_column_id(VALUE self, VALUE sort_column_id)
-{
-    gtk_tree_view_column_set_sort_column_id(_SELF(self), 
-                                            NUM2INT(sort_column_id));
-    return self;
-}
-
-static VALUE
-tvc_get_sort_column_id(VALUE self)
-{
-    return INT2NUM(gtk_tree_view_column_get_sort_column_id(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_tree_view_column_set_sort_column_id
+                                                        (GtkTreeViewColumn *tree_column,
+                                                         gint sort_column_id);
+gint                gtk_tree_view_column_get_sort_column_id
+                                                        (GtkTreeViewColumn *tree_column);
+*/
 
 static VALUE
 tvc_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, VALUE is_expanded)
@@ -278,11 +265,7 @@ Init_gtk_treeviewcolumn()
     rb_define_method(tvc, "set_attributes", tvc_set_attributes, 2);
     rb_define_method(tvc, "set_cell_data_func", tvc_set_cell_data_func, 1);
     rb_define_method(tvc, "clear_attributes", tvc_clear_attributes, 1);
-    rb_define_method(tvc, "set_spacing", tvc_set_spacing, 1);
-    rb_define_method(tvc, "spacing", tvc_get_spacing, 0);
     rb_define_method(tvc, "clicked", tvc_clicked, 0);
-    rb_define_method(tvc, "set_sort_column_id", tvc_set_sort_column_id, 1);
-    rb_define_method(tvc, "sort_column_id", tvc_get_sort_column_id, 0);
     rb_define_method(tvc, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
     rb_define_method(tvc, "cell_size", tvc_cell_get_size, 0);
     rb_define_method(tvc, "cell_is_visible?", tvc_cell_is_visible, 0);
@@ -298,8 +281,4 @@ Init_gtk_treeviewcolumn()
     /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", tvc);
     G_DEF_CONSTANTS(tvc, GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "GTK_TREE_VIEW_COLUMN_");
-
-    G_DEF_SETTERS(tvc);
-
-    rb_undef_method(tvc, "cell_data_func=");
 }

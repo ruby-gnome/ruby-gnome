@@ -34,22 +34,9 @@ gslist2ary_free(GSList* list)
     return ary;
 }
 
-static VALUE
-fcho_set_action(VALUE self, VALUE action)
-{
-    gtk_file_chooser_set_action(
-        _SELF(self),
-        RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION));
-    return self;
-}
-
-static VALUE
-fcho_get_action(VALUE self)
-{
-    return GENUM2RVAL(gtk_file_chooser_get_action(_SELF(self)), GTK_TYPE_FILE_CHOOSER_ACTION);
-}
-
 /*  They are defined as properties
+    gtk_file_chooser_set_action(_SELF(self), RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION));
+    gtk_file_chooser_get_action(_SELF(self));
     gtk_file_chooser_set_local_only(_SELF(self), RVAL2CBOOL(local));
     gtk_file_chooser_get_local_only(_SELF(self));
     gtk_file_chooser_set_select_multiple(_SELF(self), RVAL2CBOOL(multiple));
@@ -320,8 +307,6 @@ Init_gtk_file_chooser()
     VALUE eFileSystemError;
 #endif
 
-    rb_define_method(gFileCho, "set_action", fcho_set_action, 1);
-    rb_define_method(gFileCho, "action", fcho_get_action, 0);
     rb_define_method(gFileCho, "set_current_name", fcho_set_current_name, 1);
     rb_define_method(gFileCho, "set_filename", fcho_set_filename, 1);
     rb_define_method(gFileCho, "filename", fcho_get_filename, 0);
@@ -390,4 +375,3 @@ Init_gtk_file_chooser()
 
 #endif
 }
-

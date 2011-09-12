@@ -50,13 +50,10 @@ scalebutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-scalebutton_set_adjustment(VALUE self, VALUE adjustment)
-{
-    gtk_scale_button_set_adjustment(_SELF(self), RVAL2GOBJ(adjustment));
-    return self;
-}
-
+/* Defined as Properties
+void                gtk_scale_button_set_adjustment     (GtkScaleButton *button,
+                                                         GtkAdjustment *adjustment);
+*/
 static VALUE
 scalebutton_set_icons(VALUE self, VALUE rbicons)
 {
@@ -76,17 +73,10 @@ scalebutton_set_value(VALUE self, VALUE value)
     return self;
 }
 
-static VALUE
-scalebutton_get_adjustment(VALUE self)
-{
-    return GOBJ2RVAL(gtk_scale_button_get_adjustment(_SELF(self)));
-}
-
-static VALUE
-scalebutton_get_value(VALUE self)
-{
-    return rb_float_new(gtk_scale_button_get_value(_SELF(self)));
-}
+/* Defined as Properties
+GtkAdjustment *     gtk_scale_button_get_adjustment     (GtkScaleButton *button);
+gdouble             gtk_scale_button_get_value          (GtkScaleButton *button);
+*/
 
 #endif
 
@@ -96,11 +86,9 @@ Init_gtk_scalebutton()
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gScaleButton = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
     rb_define_method(gScaleButton, "initialize", scalebutton_initialize, -1);
-    rb_define_method(gScaleButton, "set_adjustment", scalebutton_set_adjustment, 1);
+    rb_undef_method(gScaleButton, "set_icons");
     rb_define_method(gScaleButton, "set_icons", scalebutton_set_icons, 1);
+    rb_undef_method(gScaleButton, "set_value");
     rb_define_method(gScaleButton, "set_value", scalebutton_set_value, 1);
-    rb_define_method(gScaleButton, "adjustment", scalebutton_get_adjustment, 0);
-    rb_define_method(gScaleButton, "value", scalebutton_get_value, 0);
-    G_DEF_SETTERS(gScaleButton);
 #endif
 }

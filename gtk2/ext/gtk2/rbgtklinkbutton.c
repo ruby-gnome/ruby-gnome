@@ -55,7 +55,5 @@ Init_gtk_link_button()
 
     rb_define_method(button, "initialize", lb_initialize, -1);
     rb_define_singleton_method(button, "set_uri_hook", lb_set_uri_hook, 0);
-
-    G_DEF_SETTERS(button);
 #endif
 }

@@ -345,9 +345,9 @@ Init_gtk_actiongroup()
     rb_define_method(gActionGroup, "add_radio_actions", actiongroup_add_radio_actions, -1);
     rb_define_method(gActionGroup, "set_translate_func", actiongroup_set_translate_func, 0);
     rb_define_method(gActionGroup, "set_translation_domain", actiongroup_set_translation_domain, 1);
+    G_DEF_SETTER(gActionGroup, "translation_domain");
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_method(gActionGroup, "translate_string", actiongroup_translate_string, 1);
 #endif
-    G_DEF_SETTERS(gActionGroup);
 #endif
 }

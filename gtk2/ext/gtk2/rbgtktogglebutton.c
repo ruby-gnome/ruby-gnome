@@ -71,8 +71,7 @@ Init_gtk_toggle_button()
 
     rb_define_method(gTButton, "initialize", tbtn_initialize, -1);
     rb_define_method(gTButton, "set_mode", tbtn_set_mode, 1);
+    G_DEF_SETTER(gTButton, "mode");
     rb_define_method(gTButton, "mode?", tbtn_get_mode, 0);
     rb_define_method(gTButton, "toggled", tbtn_toggled, 0);
-
-    G_DEF_SETTERS(gTButton);
 }

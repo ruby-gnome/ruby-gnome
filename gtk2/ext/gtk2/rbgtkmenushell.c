@@ -80,14 +80,9 @@ mshell_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
-static VALUE
-mshell_cancel(VALUE self)
-{
-    gtk_menu_shell_cancel(_SELF(self));
-    return self;
-}
-#endif
+/* Defined as Signals
+void                gtk_menu_shell_cancel               (GtkMenuShell *menu_shell);
+*/
 
 /* Defined as properties
 void        gtk_menu_shell_set_take_focus   (GtkMenuShell *menu_shell,
@@ -110,9 +105,6 @@ Init_gtk_menu_shell()
 #endif
     rb_define_method(gMenuShell, "deselect", mshell_deselect, 0);
     rb_define_method(gMenuShell, "activate_item", mshell_activate_item, 2);
-#if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gMenuShell, "cancel", mshell_cancel, 0);
-#endif
     /* GtkMenuDirectionType */
     G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", gMenuShell);
     G_DEF_CONSTANTS(gMenuShell, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");

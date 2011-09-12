@@ -230,18 +230,13 @@ widget_intersect(VALUE self, VALUE area)
     return ret ? BOXED2RVAL(&intersection, GDK_TYPE_RECTANGLE) : Qnil;
 }
 
-static VALUE
-widget_is_focus(VALUE self)
-{
-    return CBOOL2RVAL(gtk_widget_is_focus(_SELF(self)));
-}
+/* Defined as Properties
+gboolean            gtk_widget_is_focus                 (GtkWidget *widget);
+*/
 
-static VALUE
-widget_grab_focus(VALUE self)
-{
-    gtk_widget_grab_focus(_SELF(self));
-    return self;
-}
+/* Defined as Signals
+void                gtk_widget_grab_focus               (GtkWidget *widget);
+*/
 
 static VALUE
 widget_grab_default(VALUE self)
@@ -610,12 +605,10 @@ widget_reset_shapes(VALUE self)
     return self;
 }
 
-static VALUE
-widget_set_double_buffered(VALUE self, VALUE double_buffered)
-{
-    gtk_widget_set_double_buffered(_SELF(self), RVAL2CBOOL(double_buffered));
-    return self;
-}
+/* Defined as Properties:
+void                gtk_widget_set_double_buffered      (GtkWidget *widget,
+                                                         gboolean double_buffered);
+*/
 
 static VALUE
 widget_set_redraw_on_allocate(VALUE self, VALUE redraw_on_allocate)
@@ -801,7 +794,7 @@ widget_style_get_property(VALUE self, VALUE prop_name)
 static VALUE
 widget_get_accessible(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self));
+    return GOBJ2RVAL(gtk_widget_get_accessible(_SELF(self)));
 }
 
 static VALUE
@@ -916,18 +909,11 @@ widget_thaw_child_notify(VALUE self)
 }
 
 #if GTK_CHECK_VERSION(2,4,0)
-static VALUE
-widget_set_no_show_all(VALUE self, VALUE no_show_all)
-{
-    gtk_widget_set_no_show_all(_SELF(self), RVAL2CBOOL(no_show_all));
-    return self;
-}
-
-static VALUE
-widget_get_no_show_all(VALUE self)
-{
-    return CBOOL2RVAL(gtk_widget_get_no_show_all(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_widget_set_no_show_all          (GtkWidget *widget,
+                                                         gboolean no_show_all);
+gboolean            gtk_widget_get_no_show_all          (GtkWidget *widget);
+*/
 
 static VALUE
 widget_list_mnemonic_labels(VALUE self)
@@ -987,16 +973,18 @@ widget_is_composited(VALUE self)
 }
 #endif
 
-static VALUE
-widget_window(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->window);
-}
+/* Defined as Properties:
+GdkWindow *         gtk_widget_get_window               (GtkWidget *widget);
+*/
 
 static VALUE
 widget_set_window(VALUE self, VALUE window)
 {
+#if GTK_CHECK_VERSION(2,18,0)
+    gtk_widget_set_window(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)));
+#else
     _SELF(self)->window = RVAL2GOBJ(window);
+#endif
     return self;
 }
 
@@ -1016,7 +1004,6 @@ DEFINE_IS_WIDGET(PARENT_SENSITIVE);
 DEFINE_IS_WIDGET(IS_SENSITIVE);
 DEFINE_IS_WIDGET(HAS_GRAB);
 DEFINE_IS_WIDGET(RC_STYLE);
-DEFINE_IS_WIDGET(DOUBLE_BUFFERED);
 
 static VALUE
 widget_get_allocation(VALUE self)
@@ -1125,8 +1112,6 @@ Init_gtk_widget()
     rb_define_singleton_method(gWidget, "style_properties", widget_s_style_properties, -1);
 #endif
     rb_define_method(gWidget, "intersect", widget_intersect, 1);
-    rb_define_method(gWidget, "focus?", widget_is_focus, 0);
-    rb_define_method(gWidget, "grab_focus", widget_grab_focus, 0);
     rb_define_method(gWidget, "grab_default", widget_grab_default, 0);
     rb_define_method(gWidget, "set_state", widget_set_state, 1);
     rb_define_method(gWidget, "set_parent_window", widget_set_parent_window, 1);
@@ -1168,7 +1153,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "render_icon", widget_render_icon, -1);
     rb_define_method(gWidget, "queue_draw_area", widget_queue_draw_area, 4);
     rb_define_method(gWidget, "reset_shapes", widget_reset_shapes, 0);
-    rb_define_method(gWidget, "set_double_buffered", widget_set_double_buffered, 1);
     rb_define_method(gWidget, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
     rb_define_method(gWidget, "set_composite_name", widget_set_composite_name, 1);
     rb_define_method(gWidget, "set_scroll_adjustments", widget_set_scroll_adjustments, 2);
@@ -1200,8 +1184,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "set_size_request", widget_set_size_request, 2);
     rb_define_method(gWidget, "thaw_child_notify", widget_thaw_child_notify, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gWidget, "set_no_show_all", widget_set_no_show_all, 1);
-    rb_define_method(gWidget, "no_show_all?", widget_get_no_show_all, 0);
     rb_define_method(gWidget, "mnemonic_labels", widget_list_mnemonic_labels, 0);
     rb_define_method(gWidget, "add_mnemonic_label", widget_add_mnemonic_label, 1);
     rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
@@ -1215,7 +1197,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "action", widget_get_action, 0);
     rb_define_method(gWidget, "composited?", widget_is_composited, 0);
 #endif
-    rb_define_method(gWidget, "window", widget_window, 0);
     rb_define_method(gWidget, "set_window", widget_set_window, 1);
     rb_define_method(gWidget, "allocation", widget_get_allocation, 0);
     rb_define_method(gWidget, "set_allocation", widget_set_allocation, 4);
@@ -1234,7 +1215,6 @@ Init_gtk_widget()
     rb_define_method(gWidget, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
     rb_define_method(gWidget, "has_grab?",    widget_HAS_GRAB, 0);
     rb_define_method(gWidget, "rc_style?",    widget_RC_STYLE, 0);
-    rb_define_method(gWidget, "double_buffered?",  widget_DOUBLE_BUFFERED, 0);
 
     /*
      * singleton methods

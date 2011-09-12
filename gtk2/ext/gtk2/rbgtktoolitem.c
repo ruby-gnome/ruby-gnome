@@ -145,11 +145,14 @@ Init_gtk_toolitem()
     VALUE gToolItem = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);
     rb_define_method(gToolItem, "initialize", toolitem_initialize, 0);
     rb_define_method(gToolItem, "set_homogeneous", toolitem_set_homogeneous, 1);
+    G_DEF_SETTER(gToolItem, "homogenous");
     rb_define_method(gToolItem, "homogeneous?", toolitem_get_homogeneous, 0);
     rb_define_method(gToolItem, "set_expand", toolitem_set_expand, 1);
+    G_DEF_SETTER(gToolItem, "expand");
     rb_define_method(gToolItem, "expand?", toolitem_get_expand, 0);
     rb_define_method(gToolItem, "set_tooltip", toolitem_set_tooltip, -1);
     rb_define_method(gToolItem, "set_use_drag_window", toolitem_set_use_drag_window, 1);
+    G_DEF_SETTER(gToolItem, "use_drag_window");
     rb_define_method(gToolItem, "use_drag_window?", toolitem_get_use_drag_window, 0);
     rb_define_method(gToolItem, "icon_size", toolitem_get_icon_size, 0);
     rb_define_method(gToolItem, "orientation", toolitem_get_orientation, 0);
@@ -161,6 +164,5 @@ Init_gtk_toolitem()
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_method(gToolItem, "rebuild_menu", toolitem_rebuild_menu, 0);
 #endif
-    G_DEF_SETTERS(gToolItem);
 #endif
 }

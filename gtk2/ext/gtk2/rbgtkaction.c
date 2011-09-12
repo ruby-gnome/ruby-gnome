@@ -51,7 +51,12 @@ action_is_visible(VALUE self)
 /* Defined as property.
 const gchar* gtk_action_get_name            (GtkAction *action);
 gboolean    gtk_action_get_sensitive        (GtkAction *action);
+void                gtk_action_set_sensitive            (GtkAction *action,
+                                                         gboolean
+                                                         sensitive);
 gboolean    gtk_action_get_visible          (GtkAction *action);
+void                gtk_action_set_visible              (GtkAction *action,
+                                                         gboolean visible);
 */
 
 static VALUE
@@ -143,6 +148,7 @@ action_set_accel_path(VALUE self, VALUE accel_path)
     gtk_action_set_accel_path(_SELF(self), RVAL2CSTR(accel_path));
     return self;
 }
+
 static VALUE
 action_set_accel_group(VALUE self, VALUE accel_group)
 {
@@ -151,28 +157,6 @@ action_set_accel_group(VALUE self, VALUE accel_group)
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
-/* This set "sensitive" value and call g_object_notify with "sensitive". 
-   If you want not to call g_object_notify,() 
-   Use GLib::Object#set_property("sensitive", val) instead.
- */
-static VALUE
-action_set_sensitive(VALUE self, VALUE sensitive)
-{
-    gtk_action_set_sensitive(_SELF(self), RVAL2CBOOL(sensitive));
-    return self;
-}
-
-/* This set "visible" value and call g_object_notify with "visible". 
-   If you want not to call g_object_notify(), 
-   Use GLib::Object#set_property("visible", val) instead.
-*/
-static VALUE
-action_set_visible(VALUE self, VALUE visible)
-{
-    gtk_action_set_visible(_SELF(self), RVAL2CBOOL(visible));
-    return self;
-}
-
 static VALUE
 action_get_accel_path(VALUE self)
 {
@@ -238,18 +222,16 @@ Init_gtk_action()
     rb_define_method(gAction, "block_activate_from", action_block_activate_from, 1);
     rb_define_method(gAction, "unblock_activate_from", action_unblock_activate_from, 1);
     rb_define_method(gAction, "set_accel_path", action_set_accel_path, 1);
+    G_DEF_SETTER(gAction, "accel_path");
     rb_define_method(gAction, "set_accel_group", action_set_accel_group, 1);
+    G_DEF_SETTER(gAction, "accel_group");
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gAction, "set_sensitive", action_set_sensitive, 1);
-    rb_define_method(gAction, "set_visible", action_set_visible, 1);
     rb_define_method(gAction, "accel_path", action_get_accel_path, 0);
 #endif
 
 #if GTK_CHECK_VERSION(2,8,0)
     rb_define_method(gAction, "accel_closure", action_get_accel_closure, 0);
 #endif
-
-    G_DEF_SETTERS(gAction);
 #endif
 }

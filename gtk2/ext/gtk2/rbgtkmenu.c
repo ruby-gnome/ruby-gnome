@@ -98,32 +98,14 @@ menu_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_t
     return self;
 }
 
-static VALUE
-menu_set_accel_group(VALUE self, VALUE accel_group)
-{
-    gtk_menu_set_accel_group(_SELF(self), 
-                             GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)));
-    return self;
-}
-
-static VALUE
-menu_get_accel_group(VALUE self)
-{
-    return GOBJ2RVAL(gtk_menu_get_accel_group(_SELF(self)));
-}
-
-static VALUE
-menu_set_accel_path(VALUE self, VALUE accel_path)
-{
-    gtk_menu_set_accel_path(_SELF(self), RVAL2CSTR(accel_path));
-    return self;
-}
-
-static VALUE
-menu_get_tearoff_state(VALUE self)
-{
-    return CBOOL2RVAL(gtk_menu_get_tearoff_state(_SELF(self)));
-}
+/* Defined as Properties
+gboolean            gtk_menu_get_tearoff_state          (GtkMenu *menu);
+void                gtk_menu_set_accel_group            (GtkMenu *menu,
+                                                         GtkAccelGroup *accel_group);
+GtkAccelGroup *     gtk_menu_get_accel_group            (GtkMenu *menu);
+void                gtk_menu_set_accel_path             (GtkMenu *menu,
+                                                         const gchar *accel_path);
+*/
 
 static VALUE
 menu_popdown(VALUE self)
@@ -139,28 +121,16 @@ menu_reposition(VALUE self)
     return self;
 }
 
-static VALUE
-menu_get_active(VALUE self)
-{
-    GtkWidget *mitem = gtk_menu_get_active(_SELF(self));
-
-    return (mitem == NULL) ? Qnil : GOBJ2RVAL(mitem);
-}
-
-static VALUE
-menu_set_active(VALUE self, VALUE active)
-{
-    gtk_menu_set_active(_SELF(self), NUM2INT(active));
-    return self;
-}
-
-static VALUE
-menu_set_tearoff_state(VALUE self, VALUE torn_off)
-{
-    gtk_menu_set_tearoff_state(_SELF(self), RVAL2CBOOL(torn_off));
-    return self;
-}
-
+/* Defined as Properties
+GtkWidget *         gtk_menu_get_active                 (GtkMenu *menu);
+void                gtk_menu_set_active                 (GtkMenu *menu,
+                                                         guint index_);
+void                gtk_menu_set_tearoff_state          (GtkMenu *menu,
+                                                         gboolean torn_off);
+void                gtk_menu_set_monitor                (GtkMenu *menu,
+                                                         gint monitor_num);
+gint                gtk_menu_get_monitor                (GtkMenu *menu);
+*/
 static VALUE menu_detacher;
 static void
 detach_func(GtkWidget *attach_widget, GtkMenu *menu)
@@ -187,11 +157,9 @@ menu_detach(VALUE self)
     return self;
 }
 
-static VALUE
-menu_get_attach_widget(VALUE self)
-{
-    return GOBJ2RVAL(gtk_menu_get_attach_widget(_SELF(self)));
-}
+/* Defined as Properties
+GtkWidget *         gtk_menu_get_attach_widget          (GtkMenu *menu);
+*/
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
@@ -202,14 +170,6 @@ menu_s_get_for_attach_widget(VALUE self, VALUE widget)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,4,0)
-static VALUE
-menu_set_monitor(VALUE self, VALUE monitor_num)
-{
-    gtk_menu_set_monitor(_SELF(self), NUM2INT(monitor_num));
-    return self;
-}
-#endif
 void 
 Init_gtk_menu()
 {
@@ -218,6 +178,7 @@ Init_gtk_menu()
     rb_define_method(gMenu, "initialize", menu_initialize, 0);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gMenu, "set_screen", menu_set_screen, 1);
+    G_DEF_SETTER(gMenu, "screen");
 #endif
     rb_define_method(gMenu, "reorder_child", menu_reorder_child, 2);
 #if GTK_CHECK_VERSION(2,4,0)
@@ -226,22 +187,9 @@ Init_gtk_menu()
     rb_define_method(gMenu, "popup", menu_popup, 4);
     rb_define_method(gMenu, "popdown", menu_popdown, 0);
     rb_define_method(gMenu, "reposition", menu_reposition, 0);
-    rb_define_method(gMenu, "set_accel_group", menu_set_accel_group, 1);
-    rb_define_method(gMenu, "accel_group", menu_get_accel_group, 0);
-    rb_define_method(gMenu, "set_accel_path", menu_set_accel_path, 1);
-    rb_define_method(gMenu, "tearoff_state?", menu_get_tearoff_state, 0);
-    rb_define_method(gMenu, "active", menu_get_active, 0);
-    rb_define_method(gMenu, "set_active", menu_set_active, 1);
-    rb_define_method(gMenu, "set_tearoff_state", menu_set_tearoff_state, 1);
     rb_define_method(gMenu, "detach", menu_detach, 0);
-    rb_define_method(gMenu, "attach_widget", menu_get_attach_widget, 0);
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_singleton_method(gMenu, "get_for_attach_widget", menu_s_get_for_attach_widget, 1);
 #endif
     rb_define_method(gMenu, "attach_to_widget", menu_attach_to_widget, 1);
-#if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gMenu, "set_monitor", menu_set_monitor, 1);
-#endif
-
-    G_DEF_SETTERS(gMenu);
 }

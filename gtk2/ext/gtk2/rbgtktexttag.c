@@ -50,9 +50,8 @@ Init_gtk_texttag()
     rb_define_method(gTextTag, "initialize", initialize, -1);
     rb_define_method(gTextTag, "priority", get_priority, 0);
     rb_define_method(gTextTag, "set_priority", set_priority, 1);
+    G_DEF_SETTER(gTextTag, "priority");
     rb_define_method(gTextTag, "event", event, 3);
-
-    G_DEF_SETTERS(gTextTag);
 
     /* GtkWrapMode */
     G_DEF_CLASS(GTK_TYPE_WRAP_MODE, "WrapMode", gTextTag);

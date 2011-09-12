@@ -108,20 +108,10 @@ combobox_remove_text(VALUE self, VALUE position)
     return self;
 }
     
-
-static VALUE
-combobox_popup(VALUE self)
-{
-    gtk_combo_box_popup(_SELF(self));
-    return self;
-}
-
-static VALUE
-combobox_popdown(VALUE self)
-{
-    gtk_combo_box_popdown(_SELF(self));
-    return self;
-}
+/* Defined as Signals
+void                gtk_combo_box_popup                 (GtkComboBox *combo_box);
+void                gtk_combo_box_popdown               (GtkComboBox *combo_box);
+*/
 
 #if GTK_CHECK_VERSION(2,6,0)
 /* Defined as Property
@@ -174,16 +164,10 @@ combobox_set_row_separator_func(VALUE self)
     return self;
 }
 
-/* This calls g_object_notify(combo, "focus_on_click");
-   If you want to set "focus_on_click" property only, 
-   call GLib::Object.set_property.
-*/
-static VALUE
-combobox_set_focus_on_click(VALUE self, VALUE val)
-{
-    gtk_combo_box_set_focus_on_click(_SELF(self), RVAL2CBOOL(val));
-    return self;
-}
+/* Defined as Properties
+void                gtk_combo_box_set_focus_on_click    (GtkComboBox *combo,
+                                                         gboolean focus_on_click);
+ */
 
 #endif
 #endif
@@ -203,20 +187,16 @@ Init_gtk_combobox()
     rb_define_method(gCombobox, "initialize", combobox_initialize, -1);
     rb_define_method(gCombobox, "active_iter", combobox_get_active_iter, 0);
     rb_define_method(gCombobox, "set_active_iter", combobox_set_active_iter, 1);
+    G_DEF_SETTER(gCombobox, "active_iter");
     rb_define_method(gCombobox, "append_text", combobox_append_text, 1);
     rb_define_method(gCombobox, "insert_text", combobox_insert_text, 2);
     rb_define_method(gCombobox, "prepend_text", combobox_prepend_text, 1);
     rb_define_method(gCombobox, "remove_text", combobox_remove_text, 1);
-    rb_define_method(gCombobox, "popup", combobox_popup, 0);
-    rb_define_method(gCombobox, "popdown", combobox_popdown, 0);
 
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_method(gCombobox, "active_text", combobox_get_active_text, 0);
     rb_define_method(gCombobox, "popup_accessible", combobox_get_popup_accessible, 0);
     rb_define_method(gCombobox, "set_row_separator_func", combobox_set_row_separator_func, 0);
-    rb_define_method(gCombobox, "set_focus_on_click", combobox_set_focus_on_click, 1);
 #endif
- 
-    G_DEF_SETTERS(gCombobox);
 #endif
 }

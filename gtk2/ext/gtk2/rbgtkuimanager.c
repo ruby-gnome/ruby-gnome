@@ -186,8 +186,6 @@ Init_gtk_uimanager()
     rb_define_method(gUI, "remove_ui", rbuimanager_remove_ui, 1);
     rb_define_method(gUI, "ensure_update", rbuimanager_ensure_update, 0);
 
-    G_DEF_SETTERS(gUI);
-                                                                                
     /* GtkUIManagerItemType */
     G_DEF_CLASS(GTK_TYPE_UI_MANAGER_ITEM_TYPE, "ItemType", gUI);
     G_DEF_CONSTANTS(gUI, GTK_TYPE_UI_MANAGER_ITEM_TYPE, "GTK_UI_MANAGER_");

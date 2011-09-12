@@ -382,6 +382,7 @@ Init_gtk_gdk_screen()
     rb_define_singleton_method(gdkScreen, "default", gdkscreen_default, 0);
     rb_define_method(gdkScreen, "default_colormap", gdkscreen_get_default_colormap, 0);
     rb_define_method(gdkScreen, "set_default_colormap", gdkscreen_set_default_colormap, 1);
+    G_DEF_SETTER(gdkScreen, "default_colormap");
     rb_define_method(gdkScreen, "system_colormap", gdkscreen_get_system_colormap, 0);
     rb_define_method(gdkScreen, "system_visual", gdkscreen_get_system_visual, 0);
     rb_define_method(gdkScreen, "rgb_colormap", gdkscreen_get_rgb_colormap, 0);
@@ -410,7 +411,9 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, -1);
 #if GTK_CHECK_VERSION(2,10,0)
 #ifdef HAVE_RB_CAIRO_H
+    rb_undef_method(gdkScreen, "font_options");
     rb_define_method(gdkScreen, "font_options", gdkscreen_get_font_options, 0);
+    rb_undef_method(gdkScreen, "set_font_options");
     rb_define_method(gdkScreen, "set_font_options", gdkscreen_set_font_options, 1);
 #endif
     rb_define_method(gdkScreen, "active_window", gdkscreen_get_active_window, 0);
@@ -429,7 +432,6 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "window_manager_name", gdkscreen_get_window_manager_name, 0);
     rb_define_method(gdkScreen, "screen_number", gdkscreen_get_screen_number, 0);
 #endif
-    G_DEF_SETTERS(gdkScreen);
 
   #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkScreenX11", "ScreenX11", mGdk);

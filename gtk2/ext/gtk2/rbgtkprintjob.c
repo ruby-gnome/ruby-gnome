@@ -141,11 +141,10 @@ Init_gtk_print_job()
     rb_define_method(gPrintJob, "initialize", pj_initialize, 4);
     rb_define_method(gPrintJob, "status", pj_get_status, 0);
     rb_define_method(gPrintJob, "set_source_file", pj_set_source_file, 1);
+    G_DEF_SETTER(gPrintJob, "source_file");
 #ifdef HAVE_RB_CAIRO_H
     rb_define_method(gPrintJob, "surface", pj_get_surface, 0);
 #endif
     rb_define_method(gPrintJob, "send", pj_send, 0);
-
-    G_DEF_SETTERS(gPrintJob);
 #endif
 }

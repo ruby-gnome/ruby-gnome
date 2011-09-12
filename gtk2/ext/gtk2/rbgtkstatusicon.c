@@ -54,6 +54,7 @@ gboolean    gtk_status_icon_get_visible     (GtkStatusIcon *status_icon);
 void        gtk_status_icon_set_blinking    (GtkStatusIcon *status_icon,
                                              gboolean blinking);
 gboolean    gtk_status_icon_get_blinking    (GtkStatusIcon *status_icon);
+gboolean            gtk_status_icon_is_embedded         (GtkStatusIcon *status_icon);
 */
 
 static VALUE
@@ -61,12 +62,6 @@ si_set_tooltip(VALUE self, VALUE tooltip_text)
 {
     gtk_status_icon_set_tooltip(_SELF(self), RVAL2CSTR(tooltip_text));
     return self;
-}
-
-static VALUE
-si_is_embedded(VALUE self)
-{
-    return CBOOL2RVAL(gtk_status_icon_is_embedded(_SELF(self)));
 }
 
 static VALUE
@@ -106,10 +101,8 @@ Init_gtk_status_icon()
 
     rb_define_method(si, "initialize", si_initialize, 0);
     rb_define_method(si, "set_tooltip", si_set_tooltip, 1);
-    rb_define_method(si, "embedded?", si_is_embedded, 0);
+    G_DEF_SETTER(si, "tooltip");
     rb_define_method(si, "position_menu", si_position_menu, 1);
     rb_define_method(si, "geometry", si_get_geometry, 0);
-
-    G_DEF_SETTERS(si);   
 #endif
 }

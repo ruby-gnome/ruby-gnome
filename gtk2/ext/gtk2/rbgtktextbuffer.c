@@ -49,11 +49,9 @@ txt_get_char_count(VALUE self)
     return INT2NUM(gtk_text_buffer_get_char_count(_SELF(self)));
 }
 
-static VALUE
-txt_get_tag_table(VALUE self)
-{
-    return GOBJ2RVAL(gtk_text_buffer_get_tag_table(_SELF(self)));
-}
+/* Defined as Properties:
+GtkTextTagTable *   gtk_text_buffer_get_tag_table       (GtkTextBuffer *buffer);
+*/
 
 static VALUE
 txt_set_text(VALUE self, VALUE text)
@@ -808,8 +806,8 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "initialize", txt_initialize, -1);
     rb_define_method(gTextBuffer, "line_count", txt_get_line_count, 0);
     rb_define_method(gTextBuffer, "char_count", txt_get_char_count, 0);
-    rb_define_method(gTextBuffer, "tag_table", txt_get_tag_table, 0);
 
+    rb_undef_method(gTextBuffer, "set_text");
     rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
     rb_define_method(gTextBuffer, "insert", txt_insert, -1);
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
@@ -826,6 +824,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "delete_interactive", txt_delete_interactive, 3);
 
     rb_define_method(gTextBuffer, "get_text", txt_get_text, -1);
+    rb_undef_method(gTextBuffer, "text");
     rb_define_method(gTextBuffer, "text", txt_get_text_all, 0);
     rb_define_method(gTextBuffer, "get_slice", txt_get_slice, -1);
     rb_define_method(gTextBuffer, "slice", txt_get_slice_all, 0);
@@ -852,6 +851,7 @@ Init_gtk_textbuffer()
 #endif
     rb_define_method(gTextBuffer, "modified?", txt_get_modified, 0);
     rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
+    G_DEF_SETTER(gTextBuffer, "modified");
 
     rb_define_method(gTextBuffer, "add_selection_clipboard", txt_add_selection_clipboard, 1);
     rb_define_method(gTextBuffer, "remove_selection_clipboard", txt_remove_selection_clipboard, 1);
@@ -894,7 +894,5 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "apply_tag", txt_apply_tag, 3);
     rb_define_method(gTextBuffer, "remove_tag", txt_remove_tag, 3);
     rb_define_method(gTextBuffer, "remove_all_tags", txt_remove_all_tags, 2);
-
-    G_DEF_SETTERS(gTextBuffer);
 }
 

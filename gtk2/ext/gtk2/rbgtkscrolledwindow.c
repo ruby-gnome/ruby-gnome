@@ -144,6 +144,6 @@ Init_gtk_scrolled_window()
     rb_define_method(gScrolledWin, "unset_placement", scwin_unset_placement, 0);
     rb_define_method(gScrolledWin, "placement", scwin_get_placement, 0);
     rb_define_method(gScrolledWin, "set_placement", scwin_set_placement, 1);
+    G_DEF_SETTER(gScrolledWin, "placement");
 #endif
-    G_DEF_SETTERS(gScrolledWin);
 }

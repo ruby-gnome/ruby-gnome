@@ -134,6 +134,7 @@ Init_gtk_recent_manager()
     rb_define_singleton_method(rm, "default", rm_s_get_default, 0);
     rb_define_singleton_method(rm, "get_for_screen", rm_s_get_for_screen, 1);
     rb_define_method(rm, "set_screen", rm_set_screen, 1);
+    G_DEF_SETTER(rm, "set_screen");
     rb_define_method(rm, "add_item", rm_add_item, -1);
     rb_define_method(rm, "remove_item", rm_remove_item, 1);
     rb_define_method(rm, "lookup_item", rm_lookup_item, 1);
@@ -141,8 +142,6 @@ Init_gtk_recent_manager()
     rb_define_method(rm, "move_item", rm_move_item, 2);
     rb_define_method(rm, "items", rm_get_items, 0);
     rb_define_method(rm, "purge_items", rm_purge_items, 0);
-
-    G_DEF_SETTERS(rm);   
 
     /* GtkRecentManagerError */
     G_DEF_ERROR(GTK_RECENT_MANAGER_ERROR, "RecentManagerError", mGtk, rb_eRuntimeError,

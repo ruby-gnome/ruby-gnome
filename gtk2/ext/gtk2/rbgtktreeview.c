@@ -222,13 +222,11 @@ treeview_get_cursor(VALUE self)
                        GOBJ2RVAL(focus_column));
 }
 
-static VALUE
-treeview_row_activated(VALUE self, VALUE path, VALUE column)
-{
-    gtk_tree_view_row_activated(_SELF(self), RVAL2GTKTREEPATH(path),
-                                TREEVIEW_COL(column));
-    return self;
-}
+/* Defined as Signals
+void                gtk_tree_view_row_activated         (GtkTreeView *tree_view,
+                                                         GtkTreePath *path,
+                                                         GtkTreeViewColumn *column);
+*/
 
 static VALUE
 treeview_expand_all(VALUE self)
@@ -730,7 +728,6 @@ Init_gtk_treeview()
     rb_define_method(gTv, "scroll_to_cell", treeview_scroll_to_cell, 5);
     rb_define_method(gTv, "set_cursor", treeview_set_cursor, 3);
     rb_define_method(gTv, "cursor", treeview_get_cursor, 0);
-    rb_define_method(gTv, "row_activated", treeview_row_activated, 2);
     rb_define_method(gTv, "expand_all", treeview_expand_all, 0);
     rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
     rb_define_method(gTv, "expand_row", treeview_expand_row, 2);

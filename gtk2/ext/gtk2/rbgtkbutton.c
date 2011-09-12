@@ -58,13 +58,6 @@ button_released(VALUE self)
 }
 
 static VALUE
-button_clicked(VALUE self)
-{
-    gtk_button_clicked(_SELF(self));
-    return self;
-}
-
-static VALUE
 button_enter(VALUE self)
 {
     gtk_button_enter(_SELF(self));
@@ -129,13 +122,12 @@ Init_gtk_button()
     rb_define_method(gButton, "initialize", button_initialize, -1);
     rb_define_method(gButton, "pressed", button_pressed, 0);
     rb_define_method(gButton, "released", button_released, 0);
-    rb_define_method(gButton, "clicked", button_clicked, 0);
     rb_define_method(gButton, "enter", button_enter, 0);
     rb_define_method(gButton, "leave", button_leave, 0);
 
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gButton, "set_alignment", button_set_alignment, 2);
+    G_DEF_SETTER(gButton, "alignment");
     rb_define_method(gButton, "alignment", button_get_alignment, 0);
 #endif
-    G_DEF_SETTERS(gButton);
 }

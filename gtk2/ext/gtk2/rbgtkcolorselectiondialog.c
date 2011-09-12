@@ -27,30 +27,6 @@ cdialog_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-cdialog_get_colorsel(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->colorsel);
-}
-
-static VALUE
-cdialog_get_ok_button(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->ok_button);
-}
-
-static VALUE
-cdialog_get_cancel_button(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->cancel_button);
-}
-
-static VALUE
-cdialog_get_help_button(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->help_button);
-}
-
 void 
 Init_gtk_color_selection_dialog()
 {
@@ -58,8 +34,6 @@ Init_gtk_color_selection_dialog()
                                         "ColorSelectionDialog", mGtk);
 
     rb_define_method(gColorSelDialog, "initialize", cdialog_initialize, -1);
-    rb_define_method(gColorSelDialog, "colorsel", cdialog_get_colorsel, 0);
-    rb_define_method(gColorSelDialog, "ok_button", cdialog_get_ok_button, 0);
-    rb_define_method(gColorSelDialog, "cancel_button", cdialog_get_cancel_button, 0);
-    rb_define_method(gColorSelDialog, "help_button", cdialog_get_help_button, 0);
+    /* NOTE: Backward compatibility */
+    rb_define_alias(gColorSelDialog, "colorsel", "color_selection");
 }

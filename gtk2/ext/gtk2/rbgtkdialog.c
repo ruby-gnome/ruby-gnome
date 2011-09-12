@@ -198,6 +198,7 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "add_buttons", dialog_add_buttons, -1);
     rb_define_method(gDialog, "add_action_widget", dialog_add_action_widget, 2);
     rb_define_method(gDialog, "set_default_response", dialog_set_default_response, 1);
+    G_DEF_SETTER(gDialog, "default_response");
 
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_singleton_method(gDialog, "alternative_dialog_button_order?", 
@@ -213,9 +214,7 @@ Init_gtk_dialog()
     rb_define_method(gDialog, "get_response", dialog_get_response_for_widget, 1);
     rb_define_method(gDialog, "get_response_for_widget", dialog_get_response_for_widget, 1);
 #endif
-   
-    G_DEF_SETTERS(gDialog);
-   
+
     /* GtkDialogFlags */
     G_DEF_CLASS(GTK_TYPE_DIALOG_FLAGS, "Flags", gDialog);
     G_DEF_CONSTANTS(gDialog, GTK_TYPE_DIALOG_FLAGS, "GTK_DIALOG_");

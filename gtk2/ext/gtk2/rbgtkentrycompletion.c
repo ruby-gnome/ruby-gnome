@@ -142,13 +142,11 @@ Init_gtk_entry_completion()
     rb_define_method(gEntryC, "insert_action_markup", entryc_insert_action_markup, 2);
     rb_define_method(gEntryC, "delete_action", entryc_delete_action, 1);
 
-    rb_undef_method(gEntryC, "text_column=");
+    rb_undef_method(gEntryC, "set_text_column");
     rb_define_method(gEntryC, "set_text_column", entryc_set_text_column, 1);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
     rb_define_method(gEntryC, "completion_prefix", entryc_get_completion_prefix, 0);
 #endif
-
-    G_DEF_SETTERS(gEntryC);
 #endif
 }

@@ -54,8 +54,7 @@ Init_gtk_option_menu()
     rb_define_method(gOptionMenu, "initialize", omenu_initialize, 0);
     rb_define_method(gOptionMenu, "remove_menu", omenu_remove_menu, 0);
     rb_define_method(gOptionMenu, "set_history", omenu_set_history, 1);
+    G_DEF_SETTER(gOptionMenu, "history");
     rb_define_method(gOptionMenu, "history", omenu_get_history, 0);
-
-    G_DEF_SETTERS(gOptionMenu);
 #endif
 }

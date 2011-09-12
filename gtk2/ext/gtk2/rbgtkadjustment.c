@@ -52,68 +52,26 @@ adj_value_changed(VALUE self)
     return self;
 }
 
-static VALUE
-adj_set_value(VALUE self, VALUE value)
-{
-    gtk_adjustment_set_value(_SELF(self),
-			     NUM2DBL(value));
-    return self;
-}
-
-static VALUE
-adj_get_value(VALUE self)
-{
-    return rb_float_new(_SELF(self)->value);
-}
-
-static VALUE
-adj_get_lower(VALUE self)
-{
-    return rb_float_new(_SELF(self)->lower);
-}
-
-static VALUE
-adj_get_upper(VALUE self)
-{
-    return rb_float_new(_SELF(self)->upper);
-}
-
-static VALUE
-adj_get_step_increment(VALUE self)
-{
-    return rb_float_new(_SELF(self)->step_increment);
-}
-
-static VALUE
-adj_set_step_increment(VALUE self, VALUE inc)
-{
-    _SELF(self)->step_increment = NUM2DBL(inc);
-    return self;
-}
-
-static VALUE
-adj_get_page_increment(VALUE self)
-{
-    return rb_float_new(_SELF(self)->page_increment);
-}
-
-static VALUE
-adj_set_page_increment(VALUE self, VALUE inc)
-{
-    return _SELF(self)->page_increment = NUM2DBL(inc);
-}
-
-static VALUE
-adj_get_page_size(VALUE self)
-{
-    return rb_float_new(_SELF(self)->page_size);
-}
-
-static VALUE
-adj_set_page_size(VALUE self, VALUE size)
-{
-    return _SELF(self)->page_size = NUM2DBL(size);
-}
+/* Properties:
+gdouble             gtk_adjustment_get_value            (GtkAdjustment *adjustment);
+void                gtk_adjustment_set_value            (GtkAdjustment *adjustment,
+                                                         gdouble value);
+gdouble             gtk_adjustment_get_lower            (GtkAdjustment *adjustment);
+gdouble             gtk_adjustment_get_page_increment   (GtkAdjustment *adjustment);
+gdouble             gtk_adjustment_get_page_size        (GtkAdjustment *adjustment);
+gdouble             gtk_adjustment_get_step_increment   (GtkAdjustment *adjustment);
+gdouble             gtk_adjustment_get_upper            (GtkAdjustment *adjustment);
+void                gtk_adjustment_set_lower            (GtkAdjustment *adjustment,
+                                                         gdouble lower);
+void                gtk_adjustment_set_page_increment   (GtkAdjustment *adjustment,
+                                                         gdouble page_increment);
+void                gtk_adjustment_set_page_size        (GtkAdjustment *adjustment,
+                                                         gdouble page_size);
+void                gtk_adjustment_set_step_increment   (GtkAdjustment *adjustment,
+                                                         gdouble step_increment);
+void                gtk_adjustment_set_upper            (GtkAdjustment *adjustment,
+                                                         gdouble upper);
+*/
 
 void 
 Init_gtk_adjustment()
@@ -121,19 +79,7 @@ Init_gtk_adjustment()
     VALUE gAdjustment = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);
 
     rb_define_method(gAdjustment, "initialize", adj_initialize, 6);
-    rb_define_method(gAdjustment, "set_value", adj_set_value, 1);
     rb_define_method(gAdjustment, "clamp_page", adj_clamp_page, 2);
     rb_define_method(gAdjustment, "changed", adj_changed, 0);
     rb_define_method(gAdjustment, "value_changed", adj_value_changed, 0);
-    rb_define_method(gAdjustment, "value", adj_get_value, 0);
-    rb_define_method(gAdjustment, "lower", adj_get_lower, 0);
-    rb_define_method(gAdjustment, "upper", adj_get_upper, 0);
-    rb_define_method(gAdjustment, "step_increment", adj_get_step_increment, 0);
-    rb_define_method(gAdjustment, "set_step_increment", adj_set_step_increment, 1);
-    rb_define_method(gAdjustment, "page_increment", adj_get_page_increment, 0);
-    rb_define_method(gAdjustment, "set_page_increment", adj_set_page_increment, 1);
-    rb_define_method(gAdjustment, "page_size", adj_get_page_size, 0);
-    rb_define_method(gAdjustment, "set_page_size", adj_set_page_size, 1);
-
-    G_DEF_SETTERS(gAdjustment);
 }

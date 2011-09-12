@@ -277,7 +277,9 @@ Init_gtk_textview()
     id_buffer = rb_intern("buffer");
 
     rb_define_method(cTextView, "initialize", textview_initialize, -1);
+    rb_undef_method(cTextView, "set_buffer");
     rb_define_method(cTextView, "set_buffer", textview_set_buffer, 1);
+    rb_undef_method(cTextView, "buffer");
     rb_define_method(cTextView, "buffer", textview_get_buffer, 0);
     rb_define_method(cTextView, "scroll_to_mark", textview_scroll_to_mark, 5);
     rb_define_method(cTextView, "scroll_to_iter", textview_scroll_to_iter, 5);
@@ -297,6 +299,7 @@ Init_gtk_textview()
     rb_define_method(cTextView, "get_window", textview_get_window, 1);
     rb_define_method(cTextView, "get_window_type", textview_get_window_type, 1);
     rb_define_method(cTextView, "set_border_window_size", textview_set_border_window_size, 2);
+    G_DEF_SETTER(cTextView, "border_window_size");
     rb_define_method(cTextView, "get_border_window_size", textview_get_border_window_size, 1);
     rb_define_method(cTextView, "forward_display_line", textview_forward_display_line, 1);
     rb_define_method(cTextView, "backward_display_line", textview_backward_display_line, 1);
@@ -308,8 +311,6 @@ Init_gtk_textview()
     rb_define_method(cTextView, "add_child_in_window", textview_add_child_in_window, 4);
     rb_define_method(cTextView, "move_child", textview_move_child, 3);
     rb_define_method(cTextView, "default_attributes", textview_get_default_attributes, 0);
-
-    G_DEF_SETTERS(cTextView);
 
     /* GtkTextWindowType */
     G_DEF_CLASS(GTK_TYPE_TEXT_WINDOW_TYPE, "WindowType", cTextView);

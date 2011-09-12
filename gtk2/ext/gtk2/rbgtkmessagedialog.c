@@ -55,21 +55,16 @@ void        gtk_message_dialog_set_image    (GtkMessageDialog *dialog,
                                              GtkWidget *image);
 */
 
-#if GTK_CHECK_VERSION(2,6,0)
-static VALUE
-mdiag_format_secondary_text(VALUE self, VALUE text)
-{
-    gtk_message_dialog_format_secondary_text(_SELF(self), RVAL2CSTR(text), NULL);
-    return self;
-}
-
-static VALUE
-mdiag_format_secondary_markup(VALUE self, VALUE markup)
-{
-    gtk_message_dialog_format_secondary_markup(_SELF(self), RVAL2CSTR(markup), NULL);
-    return self;
-}
-#endif
+/* Not needed in Ruby
+void                gtk_message_dialog_format_secondary_text
+                                                        (GtkMessageDialog *message_dialog,
+                                                         const gchar *message_format,
+                                                         ...);
+void                gtk_message_dialog_format_secondary_markup
+                                                        (GtkMessageDialog *message_dialog,
+                                                         const gchar *message_format,
+                                                         ...);
+*/
 
 void 
 Init_gtk_message_dialog()
@@ -79,12 +74,8 @@ Init_gtk_message_dialog()
     rb_define_method(gMessageDialog, "initialize", mdiag_initialize, -1);
 #if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(gMessageDialog, "set_markup", mdiag_set_markup, 1);
+    G_DEF_SETTER(gMessageDialog, "markup");
 #endif
-#if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gMessageDialog, "set_secondary_text", mdiag_format_secondary_text, 1);
-    rb_define_method(gMessageDialog, "set_secondary_markup", mdiag_format_secondary_markup, 1);
-#endif
-    G_DEF_SETTERS(gMessageDialog);
 
     /* GtkMessageType */
     G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", gMessageDialog);

@@ -160,12 +160,11 @@ Init_gtk_table()
     rb_define_method(gTable, "get_row_spacing", tbl_get_row_spacing, 1);
     rb_define_method(gTable, "get_column_spacing", tbl_get_col_spacing, 1);
     rb_define_method(gTable, "set_row_spacings", tbl_set_row_spacings, 1);
+    G_DEF_SETTER(gTable, "row_spacings");
     rb_define_method(gTable, "set_column_spacings", tbl_set_col_spacings, 1);
+    G_DEF_SETTER(gTable, "column_spacings");
     rb_define_method(gTable, "row_spacings", tbl_get_row_spacings, 0);
     rb_define_method(gTable, "column_spacings", tbl_get_col_spacings, 0);
     rb_define_method(gTable, "default_row_spacing", tbl_get_default_row_spacing, 0);
     rb_define_method(gTable, "default_column_spacing", tbl_get_default_col_spacing, 0);
-
-    G_DEF_SETTERS(gTable);
-
 }

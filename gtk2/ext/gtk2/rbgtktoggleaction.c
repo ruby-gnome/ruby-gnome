@@ -40,18 +40,11 @@ taction_toggled(VALUE self)
     return self;
 }
 
-static VALUE
-taction_set_active(VALUE self, VALUE is_active)
-{
-    gtk_toggle_action_set_active(_SELF(self), RVAL2CBOOL(is_active));
-    return self;
-}
-
-static VALUE
-taction_get_active(VALUE self)
-{
-    return CBOOL2RVAL(gtk_toggle_action_get_active(_SELF(self)));
-}
+/* Defined as Properties:
+void                gtk_toggle_action_set_active        (GtkToggleAction *action,
+                                                         gboolean is_active);
+gboolean            gtk_toggle_action_get_active        (GtkToggleAction *action);
+*/
 #endif
 
 void 
@@ -63,10 +56,6 @@ Init_gtk_toggle_action()
 
     rb_define_method(gToggleAction, "initialize", taction_initialize, 4);
     rb_define_method(gToggleAction, "toggled", taction_toggled, 0);
-    rb_define_method(gToggleAction, "set_active", taction_set_active, 1);
-    rb_define_method(gToggleAction, "active?", taction_get_active, 0);
-
-    G_DEF_SETTERS(gToggleAction);
 #endif
 }
 
