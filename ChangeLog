@@ -1,3 +1,9 @@
+2011-09-15  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GtkSourceView2: Fixed bundled binary directory path
+	on Windows.
+	Patch by HAYASHI Kentaro. Thanks!!!
+
 2011-09-11  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK2: Fixed initialization order.

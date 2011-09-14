@@ -37,6 +37,12 @@ This is a bug fix release of 1.0.0.
     * Supported binary bundled gem.
       [HAYASHI Kentaro]
 
+==== Ruby/GtkSourceView2
+
+  * Fixes
+    * Fixed bundled binary directory path on Windows.
+      [HAYASHI Kentaro]
+
 === Thanks
 
   * Antonio Terceiro
