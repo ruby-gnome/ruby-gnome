@@ -250,7 +250,7 @@ fcho_remove_shortcut_folder(VALUE self, VALUE rbfolder)
     GError *error = NULL;
     gboolean ret = gtk_file_chooser_remove_shortcut_folder(_SELF(self), folder, &error);
     g_free(folder);
-    if (!ret);
+    if (!ret)
         RAISE_GERROR(error);
 
     return self;

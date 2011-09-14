@@ -15,20 +15,10 @@
 
 /**********************************/
 #ifndef HAVE_PANGO_LAYOUT_ITER_GET_TYPE
-static PangoLayoutIter*
+static PangoLayoutIter *
 layout_iter_copy(const PangoLayoutIter *ref)
 {
-#if PANGO_CHECK_VERSION(1,6,0)
-  PangoLayoutIter* new_ref;
-  g_return_val_if_fail (ref != NULL, NULL);
-  /* This may be broken on pango-1.2.x, but 
-     for backward compatibility. */
-  new_ref = g_new(PangoLayoutIter, 1);
-  *new_ref = *ref;
-  return new_ref;
-#else
-  return (PangoLayoutIter*)ref;
-#endif
+  return (PangoLayoutIter *)ref;
 }
 
 GType

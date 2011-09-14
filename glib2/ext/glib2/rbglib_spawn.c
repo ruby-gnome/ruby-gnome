@@ -193,12 +193,16 @@ rbglib_m_spawn_command_line_async(VALUE self, VALUE str)
 }
 
 #ifdef HAVE_G_SPAWN_CLOSE_PID
+
+#define RVAL2GPID(value) ((GPid)NUM2INT(pid))
+
 static VALUE
 rbglib_m_spawn_close_pid(VALUE self, VALUE pid)
 {
-    g_spawn_close_pid(NUM2INT(pid));
+    g_spawn_close_pid(RVAL2GPID(pid));
     return Qnil;
 }
+
 #endif
 
 void

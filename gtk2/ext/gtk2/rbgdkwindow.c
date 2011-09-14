@@ -892,7 +892,6 @@ gdkwin_s_get_default_root_window(VALUE self)
 GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 */
 
-
 /* From X Window System Interaction */
 static VALUE
 gdkwin_foreign_new(int argc, VALUE *argv, VALUE self)
@@ -905,11 +904,12 @@ gdkwin_foreign_new(int argc, VALUE *argv, VALUE self)
     switch(argc)
     {
       case 1:
-    	win = gdk_window_foreign_new(NUM2UINT(arg[0]));
+    	win = gdk_window_foreign_new(RVAL2GDKNATIVEWINDOW(arg[0]));
 	break;
       case 2:
 #if GTK_CHECK_VERSION(2,2,0)
-    	win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+    	win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]),
+                                                 RVAL2GDKNATIVEWINDOW(arg[1])); 
 #else
     	win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
         rb_warn("Not supported in GTK+-2.0.x.");
@@ -934,11 +934,11 @@ gdkwin_lookup(int argc, VALUE *argv, VALUE self)
     switch(argc)
     {
       case 1:
-    	win = gdk_window_lookup(NUM2UINT(arg[0]));
+    	win = gdk_window_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
 	break;
       case 2:
 #if GTK_CHECK_VERSION(2,2,0)
-    	win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+    	win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
 #else
     	win = gdk_window_lookup(NUM2UINT(arg[1])); 
         rb_warn("Not supported in GTK+-2.0.x.");

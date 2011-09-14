@@ -31,6 +31,8 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
+have_func("rb_errinfo")
+
 ["glib2", "atk", "pango", "gdk_pixbuf2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
@@ -97,8 +99,6 @@ end
 if target != "win32" and PKGConfig.have_package('gtk+-unix-print-2.0')
   $defs.push("-DHAVE_GTK_UNIX_PRINT")
 end
-
-have_func("rb_errinfo")
 
 create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome2_version)
 

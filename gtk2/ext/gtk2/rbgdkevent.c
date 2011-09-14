@@ -81,6 +81,19 @@ gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
     return self;\
 }
 
+#define ATTR_GDKNATIVEWINDOW(type, name)\
+static VALUE \
+gdkevent ## type ## _ ## name (VALUE self)\
+{\
+    return GDKNATIVEWINDOW2RVAL(get_gdkevent(self)->type.name);\
+}\
+static VALUE \
+gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
+{\
+    get_gdkevent(self)->type.name = RVAL2GDKNATIVEWINDOW(val);\
+    return self;\
+}
+
 #define ATTR_FLOAT(type, name)\
 static VALUE \
 gdkevent ## type ## _ ## name (VALUE self)\
@@ -502,7 +515,7 @@ GDKEVENT_INIT(property, GDK_PROPERTY_NOTIFY);
 ATTR_ATOM(selection, selection);
 ATTR_ATOM(selection, target);
 ATTR_ATOM(selection, property);
-ATTR_UINT(selection, requestor);
+ATTR_GDKNATIVEWINDOW(selection, requestor);
 ATTR_INT(selection, time);
 
 /* GdkEventDND */
@@ -557,13 +570,13 @@ gdkeventclient_send_client_message(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &xid, &display);
     if (NIL_P(display)){
         return CBOOL2RVAL(gdk_event_send_client_message(
-                              get_gdkevent(self), NUM2INT(xid)));
+                              get_gdkevent(self), RVAL2GDKNATIVEWINDOW(xid)));
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
         return CBOOL2RVAL(gdk_event_send_client_message_for_display(
                               GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                               get_gdkevent(self),
-                              NUM2UINT(xid)));
+                              RVAL2GDKNATIVEWINDOW(xid)));
 #else
         rb_warn("this arguments number has been supported since 2.2");
         return Qfalse;
@@ -610,7 +623,7 @@ GDKEVENT_INIT(setting, GDK_SETTING);
 
 /* GdkEventOwnerChange */
 #if GTK_CHECK_VERSION(2,6,0)
-ATTR_UINT(owner_change, owner);
+ATTR_GDKNATIVEWINDOW(owner_change, owner);
 ATTR_ENUM(owner_change, reason, GDK_TYPE_OWNER_CHANGE);
 ATTR_ATOM(owner_change, selection);
 ATTR_UINT(owner_change, time);

@@ -84,24 +84,24 @@ gdkdragcontext_s_get_protocol(int argc, VALUE *argv, VALUE self)
 {
     VALUE xid;
     GdkDragProtocol prot;
-    guint32 ret;
+    GdkNativeWindow ret;
 
     if (argc == 1) {
         rb_scan_args(argc, argv, "10", &xid);
-        ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
+        ret = gdk_drag_get_protocol(RVAL2GDKNATIVEWINDOW(xid), &prot);
     } else {
 #if GTK_CHECK_VERSION(2,2,0)
         VALUE display;
         rb_scan_args(argc, argv, "20", &display, &xid);
         ret = gdk_drag_get_protocol_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
-                                                NUM2UINT(xid), &prot);
+                                                RVAL2GDKNATIVEWINDOW(xid), &prot);
 #else
         rb_warn("Not supported arguments for Gdk::Display in GTK+-2.0.x.");
         ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
 #endif
     }
 
-    return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), UINT2NUM(ret));
+    return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), GDKNATIVEWINDOW2RVAL(ret));
 }
 
 /* Instance Methods */

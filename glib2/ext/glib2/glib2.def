@@ -56,14 +56,25 @@ EXPORTS
 	g_value_set_ruby_value
 	g_key_file_get_type
 	rbg_rval_inspect
+	rbg_string_value_ptr
 	rbg_rval2cstr
 	rbg_rval2cstr_accept_nil
 	rbg_cstr2rval
+        rbg_cstr2rval_len
+        rbg_cstr2rval_with_encoding
+        rbg_cstr2rval_len_with_encoding
 	rbg_cstr2rval_with_free
+        rbg_filename_to_ruby
         rbg_filename_to_ruby_free
         rbg_filename_from_ruby
         rbg_filename_gslist_to_array_free
-	rbg_string_value_ptr
+        rbg_rval2strv
+        rbg_rval2strv_accept_nil
+        rbg_rval2strv_dup
+        rbg_rval2strv_dup_accept_nil
+        rbg_rval2argv
+        rbg_strv2rval
+        rbg_strv2rval_free
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
 	rbgutil_glist2ary

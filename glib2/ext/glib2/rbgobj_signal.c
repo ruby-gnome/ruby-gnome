@@ -79,8 +79,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
     VALUE signal_name, signal_flags, accumulator, return_type, params;
     GClosure* class_closure;
     GType* param_types;
-    guint n_params;
-    long i;
+    long i, n_params;
     guint sig;
 
     rb_scan_args(argc, argv, "4*", &signal_name, &signal_flags,
@@ -287,7 +286,7 @@ gobj_sig_get_invocation_hint(VALUE self)
 }
 #endif
 
-struct emit_arg{
+struct emit_arg {
     VALUE self;
     VALUE args;
 
@@ -370,7 +369,7 @@ gobj_sig_emit(int argc, VALUE *argv, VALUE self)
 
     g_signal_query(signal_id, &arg.query);
 
-    if (arg.query.n_params != RARRAY_LEN(arg.args))
+    if (arg.query.n_params != (guint)RARRAY_LEN(arg.args))
         rb_raise(rb_eArgError, "wrong number of arguments(%ld for %d)",
                  RARRAY_LEN(arg.args) + 1,
                  arg.query.n_params + 1);
