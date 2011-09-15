@@ -23,7 +23,11 @@ module GLib
         if new_const = constant_get(new_const)
           warn "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated. Use '#{new_const}'."
           const_set(deprecated_const, new_const)
+        else
+          super
         end
+      else
+        super
       end
     end
 
