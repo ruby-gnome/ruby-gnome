@@ -19,9 +19,6 @@
 #define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
 
 static VALUE
-scalebutton_set_icons(VALUE self, VALUE icons);
-
-static VALUE
 scalebutton_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3, arg4, arg5;
@@ -44,8 +41,13 @@ scalebutton_initialize(int argc, VALUE *argv, VALUE self)
     widget = gtk_scale_button_new(RVAL2GENUM(arg1, GTK_TYPE_ICON_SIZE), min, max, step, NULL);
     RBGTK_INITIALIZE(self, widget);
 
-    if (!NIL_P(arg5))
-        scalebutton_set_icons(self, arg5);
+    if (!NIL_P(arg5)) {
+        const gchar **icons = RVAL2STRV(arg5);
+
+        gtk_scale_button_set_icons(_SELF(self), icons);
+
+        g_free(icons);
+    }
 
     return Qnil;
 }
@@ -53,27 +55,10 @@ scalebutton_initialize(int argc, VALUE *argv, VALUE self)
 /* Defined as Properties
 void                gtk_scale_button_set_adjustment     (GtkScaleButton *button,
                                                          GtkAdjustment *adjustment);
-*/
-static VALUE
-scalebutton_set_icons(VALUE self, VALUE rbicons)
-{
-    const gchar **icons = RVAL2STRV(rbicons);
-
-    gtk_scale_button_set_icons(_SELF(self), icons);
-
-    g_free(icons);
-
-    return self;
-}
-
-static VALUE
-scalebutton_set_value(VALUE self, VALUE value)
-{
-    gtk_scale_button_set_value(_SELF(self), NUM2DBL(value));
-    return self;
-}
-
-/* Defined as Properties
+void                gtk_scale_button_set_icons          (GtkScaleButton *button,
+                                                         const gchar **icons);
+void                gtk_scale_button_set_value          (GtkScaleButton *button,
+                                                         gdouble value);
 GtkAdjustment *     gtk_scale_button_get_adjustment     (GtkScaleButton *button);
 gdouble             gtk_scale_button_get_value          (GtkScaleButton *button);
 */
@@ -86,9 +71,5 @@ Init_gtk_scalebutton()
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gScaleButton = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
     rb_define_method(gScaleButton, "initialize", scalebutton_initialize, -1);
-    rb_undef_method(gScaleButton, "set_icons");
-    rb_define_method(gScaleButton, "set_icons", scalebutton_set_icons, 1);
-    rb_undef_method(gScaleButton, "set_value");
-    rb_define_method(gScaleButton, "set_value", scalebutton_set_value, 1);
 #endif
 }

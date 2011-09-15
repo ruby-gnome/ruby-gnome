@@ -102,10 +102,6 @@ Init_gtk_radio_menu_item()
     VALUE gRMenuItem = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
 
     rb_define_method(gRMenuItem, "initialize", rmitem_initialize, -1);
-    rb_undef_method(gRMenuItem, "group");
-    rb_define_method(gRMenuItem, "group", rmitem_get_group, 0);
-    rb_undef_method(gRMenuItem, "set_group");
-    rb_define_method(gRMenuItem, "set_group", rmitem_set_group, 1);
-    rb_undef_method(gRMenuItem, "group=");
-    G_DEF_SETTER(gRMenuItem, "group");
+    G_REPLACE_GET_PROPERTY(gRMenuItem, "group", rmitem_get_group, 0);
+    G_REPLACE_SET_PROPERTY(gRMenuItem, "group", rmitem_set_group, 1);
 }

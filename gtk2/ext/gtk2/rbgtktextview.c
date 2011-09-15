@@ -277,10 +277,8 @@ Init_gtk_textview()
     id_buffer = rb_intern("buffer");
 
     rb_define_method(cTextView, "initialize", textview_initialize, -1);
-    rb_undef_method(cTextView, "set_buffer");
-    rb_define_method(cTextView, "set_buffer", textview_set_buffer, 1);
-    rb_undef_method(cTextView, "buffer");
-    rb_define_method(cTextView, "buffer", textview_get_buffer, 0);
+    G_REPLACE_SET_PROPERTY(cTextView, "buffer", textview_set_buffer, 1);
+    G_REPLACE_GET_PROPERTY(cTextView, "buffer", textview_get_buffer, 0);
     rb_define_method(cTextView, "scroll_to_mark", textview_scroll_to_mark, 5);
     rb_define_method(cTextView, "scroll_to_iter", textview_scroll_to_iter, 5);
     rb_define_method(cTextView, "scroll_mark_onscreen", textview_scroll_mark_onscreen, 1);

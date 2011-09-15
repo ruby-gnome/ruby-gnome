@@ -51,9 +51,8 @@ Init_gtk_frame()
     rb_define_method(gFrame, "initialize", frame_initialize, -1);
     rb_define_method(gFrame, "set_label_align", frame_set_label_align, 2);
     rb_define_method(gFrame, "label_align", frame_get_label_align, 0);
-
-	 rb_undef_method(gFrame, "shadow");
-	 rb_undef_method(gFrame, "shadow=");
-	 rb_undef_method(gFrame, "set_shadow");
+    rb_undef_method(gFrame, "shadow");
+    rb_undef_method(gFrame, "shadow=");
+    rb_undef_method(gFrame, "set_shadow");
 }
 

@@ -1,6 +1,11 @@
 2011-09-15  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/glib2/rbgobj_strv.c: Plug memory leak.
+	* ext/glib2/rbgutil.h: Add G_REPLACE_SET_PROPERTY(),
+	G_REPLACE_GET_PROPERTY(), and G_REPLACE_ACTION() macros for replacing
+	automatically defined property getters and setters and actions (from
+	G_SIGNAL_ACTION).  These are primarily useful for making it clear why
+	we’re undefining a method and then redefining it.
 
 2011-09-14  Nikolai Weibull  <now@bitwi.se>
 

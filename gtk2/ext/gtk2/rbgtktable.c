@@ -143,22 +143,18 @@ Init_gtk_table()
 {
     VALUE gTable = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
 
-    /* Undef properties, column/row-spacing confuse us ... */
-    rb_undef_method(gTable, "set_row_spacing");
-    rb_undef_method(gTable, "set_column_spacing");
-    rb_undef_method(gTable, "row_spacing=");
-    rb_undef_method(gTable, "column_spacing=");
-    rb_undef_method(gTable, "row_spacing");
-    rb_undef_method(gTable, "column_spacing");
-
     rb_define_method(gTable, "initialize", tbl_initialize, -1);
     rb_define_method(gTable, "resize", tbl_resize, 2);
     rb_define_method(gTable, "attach", tbl_attach, -1);
     rb_define_method(gTable, "attach_defaults", tbl_attach_defaults, 5);
-    rb_define_method(gTable, "set_row_spacing", tbl_set_row_spacing, 2);
-    rb_define_method(gTable, "set_column_spacing", tbl_set_col_spacing, 2);
+    G_REPLACE_SET_PROPERTY(gTable, "row_spacing", tbl_set_row_spacing, 2);
+    rb_undef_method(gTable, "row_spacing=");
+    G_REPLACE_SET_PROPERTY(gTable, "column_spacing", tbl_set_col_spacing, 2);
+    rb_undef_method(gTable, "column_spacing=");
     rb_define_method(gTable, "get_row_spacing", tbl_get_row_spacing, 1);
+    rb_undef_method(gTable, "row_spacing");
     rb_define_method(gTable, "get_column_spacing", tbl_get_col_spacing, 1);
+    rb_undef_method(gTable, "column_spacing");
     rb_define_method(gTable, "set_row_spacings", tbl_set_row_spacings, 1);
     G_DEF_SETTER(gTable, "row_spacings");
     rb_define_method(gTable, "set_column_spacings", tbl_set_col_spacings, 1);

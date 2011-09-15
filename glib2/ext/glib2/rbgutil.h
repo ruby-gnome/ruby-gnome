@@ -28,6 +28,20 @@ extern "C" {
     "def " name "=(val); set_" name "(val); val; end\n"))
 #define G_DEF_SETTERS(klass) rbgutil_def_setters(klass)
 
+#define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
+    rb_undef_method(klass, "set_" name); \
+    rb_define_method(klass, "set_" name, function, args); \
+    rb_undef_method(klass, name "="); \
+    G_DEF_SETTER(klass, name)
+
+#define G_REPLACE_GET_PROPERTY(klass, name, function, args) \
+    rb_undef_method(klass, name); \
+    rb_define_method(klass, name, function, args)
+
+#define G_REPLACE_ACTION(klass, name, function, args) \
+    rb_undef_method(klass, name); \
+    rb_define_method(klass, name, function, args)
+
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
 #define G_SET_SYMBOL_PROPERTY(gtype, name) \
      rbgobj_register_property_getter(gtype, name, rbgutil_sym_g2r_func)

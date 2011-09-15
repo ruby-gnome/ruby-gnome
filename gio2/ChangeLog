@@ -1,3 +1,7 @@
+2011-09-15  Nikolai Weibull  <now@bitwi.se>
+
+	* ext/gio2/gsocket.c: Use G_REPLACE_GET_PROPERTY().
+
 2011-09-12  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/gio2/gio2.h: Fix RVAL2GSOCKETPROTOCOL and RVAL2GSOCKETTYPE

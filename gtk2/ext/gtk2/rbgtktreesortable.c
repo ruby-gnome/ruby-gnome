@@ -107,9 +107,6 @@ Init_gtk_treesortable()
     rb_define_method(mts, "set_default_sort_func", treesortable_set_default_sort_func, 0);
     rb_define_method(mts, "has_default_sort_func?", treesortable_has_default_sort_func, 0);
 
-    G_DEF_SETTERS(mts);
-
-    rb_undef_method(mts, "sort_func=");
     rb_define_const(mts, "DEFAULT_SORT_COLUMN_ID", GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID);
 }
 

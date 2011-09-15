@@ -111,8 +111,7 @@ Init_gtk_menu_item()
     VALUE gMenuItem = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
 
     rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
-    rb_undef_method(gMenuItem, "set_submenu");
-    rb_define_method(gMenuItem, "set_submenu", mitem_set_submenu, 1);
+    G_REPLACE_SET_PROPERTY(gMenuItem, "submenu", mitem_set_submenu, 1);
     rb_define_method(gMenuItem, "remove_submenu", mitem_remove_submenu, 0);
     rb_define_method(gMenuItem, "toggle_size_request", mitem_toggle_size_request, 0);
     rb_define_method(gMenuItem, "toggle_size_allocate", mitem_toggle_size_allocate, 1);

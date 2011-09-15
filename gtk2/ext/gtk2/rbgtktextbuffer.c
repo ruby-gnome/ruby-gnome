@@ -812,8 +812,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "line_count", txt_get_line_count, 0);
     rb_define_method(gTextBuffer, "char_count", txt_get_char_count, 0);
 
-    rb_undef_method(gTextBuffer, "set_text");
-    rb_define_method(gTextBuffer, "set_text", txt_set_text, 1);
+    G_REPLACE_SET_PROPERTY(gTextBuffer, "text", txt_set_text, 1);
     rb_define_method(gTextBuffer, "insert", txt_insert, -1);
     rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
 #if GTK_CHECK_VERSION(2,6,0)
@@ -829,8 +828,7 @@ Init_gtk_textbuffer()
     rb_define_method(gTextBuffer, "delete_interactive", txt_delete_interactive, 3);
 
     rb_define_method(gTextBuffer, "get_text", txt_get_text, -1);
-    rb_undef_method(gTextBuffer, "text");
-    rb_define_method(gTextBuffer, "text", txt_get_text_all, 0);
+    G_REPLACE_GET_PROPERTY(gTextBuffer, "text", txt_get_text_all, 0);
     rb_define_method(gTextBuffer, "get_slice", txt_get_slice, -1);
     rb_define_method(gTextBuffer, "slice", txt_get_slice_all, 0);
 

@@ -79,7 +79,6 @@ void
 Init_gtk_radio_action()
 {
 #if GTK_CHECK_VERSION(2,4,0)
-
     VALUE gRadioAction = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
 
     rb_define_method(gRadioAction, "initialize", raction_initialize, 5);
@@ -87,12 +86,8 @@ Init_gtk_radio_action()
     /* Define as Property since 2.10 */
     rb_define_method(gRadioAction, "current_value", raction_get_current_value, 0);
 #endif
-    rb_undef_method(gRadioAction, "group");
-    rb_undef_method(gRadioAction, "set_group");
-    rb_define_method(gRadioAction, "group", raction_get_group, 0);
-    rb_define_method(gRadioAction, "set_group", raction_set_group, 1);
-
-    G_DEF_SETTERS(gRadioAction);
+    G_REPLACE_GET_PROPERTY(gRadioAction, "group", raction_get_group, 0);
+    G_REPLACE_SET_PROPERTY(gRadioAction, "group", raction_get_group, 1);
 #endif
 }
 

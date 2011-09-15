@@ -581,8 +581,7 @@ Init_gdk_pixbuf2()
     /* 
      * The GdkPixbuf Structure 
      */
-    rb_undef_method(gdkPixbuf, "pixels");
-    rb_define_method(gdkPixbuf, "pixels", get_pixels, 0);
+    G_REPLACE_GET_PROPERTY(gdkPixbuf, "pixels", get_pixels, 0);
     rb_define_method(gdkPixbuf, "pixels=", set_pixels, 1);
     rb_define_method(gdkPixbuf, "get_option", get_option, 1);
 

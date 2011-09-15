@@ -411,10 +411,8 @@ Init_gtk_gdk_screen()
     rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, -1);
 #if GTK_CHECK_VERSION(2,10,0)
 #ifdef HAVE_RB_CAIRO_H
-    rb_undef_method(gdkScreen, "font_options");
-    rb_define_method(gdkScreen, "font_options", gdkscreen_get_font_options, 0);
-    rb_undef_method(gdkScreen, "set_font_options");
-    rb_define_method(gdkScreen, "set_font_options", gdkscreen_set_font_options, 1);
+    G_REPLACE_GET_PROPERTY(gdkScreen, "font_options", gdkscreen_get_font_options, 0);
+    G_REPLACE_SET_PROPERTY(gdkScreen, "font_options", gdkscreen_set_font_options, 1);
 #endif
     rb_define_method(gdkScreen, "active_window", gdkscreen_get_active_window, 0);
     rb_define_method(gdkScreen, "window_stack", gdkscreen_get_window_stack, 0);

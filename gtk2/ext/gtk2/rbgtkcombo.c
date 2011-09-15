@@ -94,8 +94,7 @@ Init_gtk_combo()
     VALUE gCombo = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);
 
     rb_define_method(gCombo, "initialize", combo_initialize, -1);
-    rb_undef_method(gCombo, "set_value_in_list");
-    rb_define_method(gCombo, "set_value_in_list", combo_set_val_in_list, 2);
+    G_REPLACE_SET_PROPERTY(gCombo, "value_in_list", combo_set_val_in_list, 2);
     rb_define_method(gCombo, "set_use_arrows", combo_set_use_arrows, 1);
     rb_define_method(gCombo, "set_use_arrows_always", combo_set_use_arrows_always, 1);
     rb_define_method(gCombo, "set_popdown_strings", combo_set_popdown_strings, 1);

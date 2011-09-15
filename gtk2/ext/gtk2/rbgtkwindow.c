@@ -539,6 +539,7 @@ gwin_set_icon_list(VALUE self, VALUE list)
     g_list_free(glist);
     return list;
 }
+
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gwin_s_set_auto_startup_notification(VALUE self, VALUE setting)
@@ -601,10 +602,8 @@ Init_gtk_window()
     /* active_(focus|default) are deprecated. Use activate_* instead. */
     rb_define_method(gWindow, "active_focus", gwin_active_focus, 0);
     rb_define_method(gWindow, "active_default", gwin_active_default, 0);
-    rb_undef_method(gWindow, "activate_focus");
-    rb_define_method(gWindow, "activate_focus", gwin_activate_focus, 0);
-    rb_undef_method(gWindow, "activate_default");
-    rb_define_method(gWindow, "activate_default", gwin_activate_default, 0);
+    G_REPLACE_ACTION(gWindow, "activate_focus", gwin_activate_focus, 0);
+    G_REPLACE_ACTION(gWindow, "activate_default", gwin_activate_default, 0);
     rb_define_method(gWindow, "set_default_size", gwin_set_default_size, 2);
     rb_define_method(gWindow, "set_geometry_hints", gwin_set_geometry_hints, 3);
     rb_define_singleton_method(gWindow, "toplevels", gwin_s_list_toplevels, 0);
@@ -660,8 +659,7 @@ Init_gtk_window()
 #if GTK_CHECK_VERSION(2,6,0)
     rb_define_singleton_method(gWindow, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
 #endif
-    rb_undef_method(gWindow, "set_icon");
-    rb_define_method(gWindow, "set_icon", gwin_set_icon, 1);
+    G_REPLACE_SET_PROPERTY(gWindow, "icon", gwin_set_icon, 1);
     rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_singleton_method(gWindow, "set_auto_startup_notification", 
