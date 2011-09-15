@@ -1,3 +1,7 @@
+2011-09-15  Nikolai Weibull  <now@bitwi.se>
+
+	* ext/glib2/rbgobj_strv.c: Plug memory leak.
+
 2011-09-14  Nikolai Weibull  <now@bitwi.se>
 
 	* ext/glib2/rbglib_iochannel.c: Fix broken code under Win32.

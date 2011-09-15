@@ -14,15 +14,17 @@
 #if GLIB_CHECK_VERSION(2,6,0)
 
 static VALUE
-strv_to_ruby(const GValue* from)
+strv_to_ruby(const GValue *from)
 {
-    return STRV2RVAL((const gchar**)g_value_get_boxed(from));
+    return STRV2RVAL((const gchar **)g_value_get_boxed(from));
 }
 
 static void
 strv_from_ruby(VALUE from, GValue *to)
 {
-    g_value_set_boxed(to, RVAL2STRV(from));
+    const gchar **strings = RVAL2STRV(from);
+    g_value_set_boxed(to, strings);
+    g_free(strings);
 }
 
 void
