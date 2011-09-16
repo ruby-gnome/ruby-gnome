@@ -83,7 +83,7 @@ base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 GLib.prepend_environment_path(vendor_dir + "bin")
 begin
-  major, minor, micro, = RUBY_VERSION.split(/\./)
+  major, minor, _ = RUBY_VERSION.split(/\./)
   require "#{major}.#{minor}/glib2.so"
 rescue LoadError
   require 'glib2.so'

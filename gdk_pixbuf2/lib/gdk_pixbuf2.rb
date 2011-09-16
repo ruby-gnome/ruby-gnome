@@ -5,7 +5,7 @@ vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_environment_path(vendor_bin_dir)
 begin
-  major, minor, micro, = RUBY_VERSION.split(/\./)
+  major, minor, _ = RUBY_VERSION.split(/\./)
   require "#{major}.#{minor}/gdk_pixbuf2.so"
 rescue LoadError
   require "gdk_pixbuf2.so"

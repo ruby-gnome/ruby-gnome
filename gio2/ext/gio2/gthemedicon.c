@@ -75,7 +75,7 @@ Init_gthemedicon(VALUE glib)
 {
         VALUE themedicon = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
 
-        rb_define_method(themedicon, "initialize", themedicon_initialize, 1);
+        rb_define_method(themedicon, "initialize", themedicon_initialize, -1);
         rb_define_method(themedicon, "prepend_name", themedicon_prepend_name, 1);
         rb_define_method(themedicon, "append_name", themedicon_append_name, 1);
 }
