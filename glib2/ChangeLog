@@ -1,6 +1,7 @@
 2011-09-16  Nikolai Weibull  <now@bitwi.se>
 
 	* lib/glib2.rb: Remove unused variable.
+	* ext/glib2/rbglib.c: Don’t use ALLOCA_N() on user-supplied input.
 
 2011-09-15  Nikolai Weibull  <now@bitwi.se>
 

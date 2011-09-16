@@ -294,25 +294,48 @@ rbg_filename_gslist_to_array_free(GSList *list)
                      rbg_filename_gslist_to_array_free_ensure, (VALUE)list);
 }
 
-const gchar **
-rbg_rval2strv(VALUE ary)
-{
-    int i, n;
-    const gchar **astrings;
+struct rval2strv_args {
+    VALUE ary;
+    long n;
     const gchar **strings;
+};
 
-    ary = rb_ary_to_ary(ary);
-    n = RARRAY_LEN(ary);
+VALUE
+rbg_rval2strv_body(VALUE value)
+{
+    long i;
+    struct rval2strv_args *args = (struct rval2strv_args *)value;
 
-    astrings = ALLOCA_N(const gchar *, n);
-    for (i = 0; i < n; i++)
-        astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+    for (i = 0; i < args->n; i++)
+            args->strings[i] = RVAL2CSTR(RARRAY_PTR(args->ary)[i]);
+    args->strings[args->n] = NULL;
 
-    strings = g_new(const gchar *, n + 1);
-    MEMCPY(strings, astrings, const gchar *, n);
-    strings[n] = NULL;
+    return Qnil;
+}
 
-    return strings;
+VALUE
+rbg_rval2strv_rescue(VALUE value)
+{
+    struct rval2strv_args *args = (struct rval2strv_args *)value;
+
+    g_free(args->strings);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+const gchar **
+rbg_rval2strv(VALUE value)
+{
+    struct rval2strv_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.strings = g_new(const gchar *, args.n + 1);
+    
+    rb_rescue(rbg_rval2strv_body, (VALUE)&args,
+              rbg_rval2strv_rescue, (VALUE)&args);
+
+    return args.strings;
 }
 
 const gchar **
@@ -321,26 +344,48 @@ rbg_rval2strv_accept_nil(VALUE ary)
     return NIL_P(ary) ? NULL : rbg_rval2strv(ary);
 }
 
-gchar **
-rbg_rval2strv_dup(VALUE ary)
-{
-    int i, n;
-    const gchar **astrings;
+struct rval2strv_dup_args {
+    VALUE ary;
+    long n;
     gchar **strings;
+};
 
-    ary = rb_ary_to_ary(ary);
-    n = RARRAY_LEN(ary);
+VALUE
+rbg_rval2strv_dup_body(VALUE value)
+{
+    long i;
+    struct rval2strv_dup_args *args = (struct rval2strv_dup_args *)value;
 
-    astrings = ALLOCA_N(const gchar *, n);
-    for (i = 0; i < n; i++)
-        astrings[i] = RVAL2CSTR(RARRAY_PTR(ary)[i]);
+    for (i = 0; i < args->n; i++)
+            args->strings[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(args->ary)[i]));
+    args->strings[args->n] = NULL;
 
-    strings = g_new(gchar *, n + 1);
-    for (i = 0; i < n; i++)
-            strings[i] = g_strdup(astrings[i]);
-    strings[n] = NULL;
+    return Qnil;
+}
 
-    return strings;
+VALUE
+rbg_rval2strv_dup_rescue(VALUE value)
+{
+    struct rval2strv_dup_args *args = (struct rval2strv_dup_args *)value;
+
+    g_free(args->strings);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+gchar **
+rbg_rval2strv_dup(VALUE value)
+{
+    struct rval2strv_dup_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.strings = g_new(gchar *, args.n + 1);
+    
+    rb_rescue(rbg_rval2strv_dup_body, (VALUE)&args,
+              rbg_rval2strv_dup_rescue, (VALUE)&args);
+
+    return args.strings;
 }
 
 gchar **
