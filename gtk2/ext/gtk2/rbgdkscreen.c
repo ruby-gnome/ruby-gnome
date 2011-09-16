@@ -278,8 +278,8 @@ gdkscreen_spawn_on_screen(VALUE self, VALUE working_directory, VALUE argv, VALUE
         G_RELATIVE(self, func);
     }
 
-    gargv = (gchar **)RVAL2ARGV(argv);
-    genvp = (gchar **)RVAL2ARGV(envp);
+    gargv = (gchar **)RVAL2STRV(argv);
+    genvp = (gchar **)RVAL2STRV(envp);
     ret = gdk_spawn_on_screen(_SELF(self),
                               NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                               gargv, genvp, NUM2INT(flags),
@@ -309,8 +309,8 @@ gdkscreen_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE 
         G_RELATIVE(self, func);
     }
 
-    gargv = (gchar **)RVAL2ARGV(argv);
-    genvp = (gchar **)RVAL2ARGV(envp);
+    gargv = (gchar **)RVAL2STRV(argv);
+    genvp = (gchar **)RVAL2STRV(envp);
     ret = gdk_spawn_on_screen_with_pipes(_SELF(self),
                                          NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                                          gargv, genvp, NUM2INT(flags),

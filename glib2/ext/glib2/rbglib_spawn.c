@@ -40,8 +40,8 @@ rbglib_m_spawn_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv,
         G_RELATIVE(self, func);
     }
 
-    gargv = (gchar **)RVAL2ARGV(argv);
-    genvp = (gchar **)RVAL2ARGV(envp);
+    gargv = (gchar **)RVAL2STRV(argv);
+    genvp = (gchar **)RVAL2STRV(envp);
     ret = g_spawn_async_with_pipes(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                                    gargv, genvp, NUM2INT(flags),
                                    (GSpawnChildSetupFunc)child_setup, 
@@ -75,8 +75,8 @@ rbglib_m_spawn_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp
         G_RELATIVE(self, func);
     }
 
-    gargv = (gchar **)RVAL2ARGV(argv);
-    genvp = (gchar **)RVAL2ARGV(envp);
+    gargv = (gchar **)RVAL2STRV(argv);
+    genvp = (gchar **)RVAL2STRV(envp);
     ret = g_spawn_async(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                         gargv, genvp, NUM2INT(flags),
                         (GSpawnChildSetupFunc)child_setup, (gpointer)func,
@@ -106,8 +106,8 @@ rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp,
         G_RELATIVE(self, func);
     }
 
-    gargv = (gchar **)RVAL2ARGV(argv);
-    genvp = (gchar **)RVAL2ARGV(envp);
+    gargv = (gchar **)RVAL2STRV(argv);
+    genvp = (gchar **)RVAL2STRV(envp);
     ret = g_spawn_sync(NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
                        gargv, genvp, NUM2INT(flags),
                        (GSpawnChildSetupFunc)child_setup, (gpointer)func,

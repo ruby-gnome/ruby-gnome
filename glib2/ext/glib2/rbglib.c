@@ -394,28 +394,6 @@ rbg_rval2strv_dup_accept_nil(VALUE ary)
     return NIL_P(ary) ? NULL : rbg_rval2strv_dup(ary);
 }
 
-const gchar **
-rbg_rval2argv(VALUE ary)
-{
-    int i, n;
-    const gchar **strings;
-
-    if (NIL_P(ary))
-        return NULL;
-
-    ary = rb_ary_to_ary(ary);
-    n = RARRAY_LEN(ary);
-
-    strings = g_new(const gchar *, n + 1);
-    for (i = 0; i < n; i++)
-        strings[i] = TYPE(RARRAY_PTR(ary)[i]) == T_STRING ?
-            RVAL2CSTR(RARRAY_PTR(ary)[i]) :
-            "";
-    strings[n] = NULL;
-
-    return strings;
-}
-
 VALUE
 rbg_strv2rval(const gchar **strings)
 {

@@ -1,6 +1,7 @@
 2011-09-16  Nikolai Weibull  <now@bitwi.se>
 
 	* lib/gtk2.rb: Remove unused variable.
+	* gtk2/ext/gtk2/rbgdkscreen.c: Use RVAL2STRV() instead of RVAL2ARGV().
 
 2011-09-15  Nikolai Weibull  <now@bitwi.se>
 

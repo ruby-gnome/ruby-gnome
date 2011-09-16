@@ -2,6 +2,10 @@
 
 	* lib/glib2.rb: Remove unused variable.
 	* ext/glib2/rbglib.c: Don’t use ALLOCA_N() on user-supplied input.
+	* ext/glib2/rbglib.c, ext/glib2/rbglib.h, ext/glib2/glib2.def: Remove
+	rbg_rval2argv() and RVAL2ARGV().
+	* glib2/ext/glib2/rbglib_spawn.c: Use RVAL2STRV() instead of
+	RVAL2ARGV().
 
 2011-09-15  Nikolai Weibull  <now@bitwi.se>
 

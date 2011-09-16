@@ -65,8 +65,6 @@ typedef int GPid;
 #define RVAL2STRV_DUP(ary) rbg_rval2strv_dup(ary)
 #define RVAL2STRV_DUP_ACCEPT_NIL(ary) rbg_rval2strv_dup_accept_nil(ary)
 
-#define RVAL2ARGV(ary) rbg_rval2argv(ary)
-
 #define STRV2RVAL(strings) rbg_strv2rval(strings)
 #define STRV2RVAL_FREE(strings) rbg_strv2rval_free(strings)
 

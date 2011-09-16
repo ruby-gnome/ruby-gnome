@@ -72,7 +72,6 @@ EXPORTS
         rbg_rval2strv_accept_nil
         rbg_rval2strv_dup
         rbg_rval2strv_dup_accept_nil
-        rbg_rval2argv
         rbg_strv2rval
         rbg_strv2rval_free
 	rbgutil_id_module_eval		DATA
