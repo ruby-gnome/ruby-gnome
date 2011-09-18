@@ -1,5 +1,7 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* test/glib-test-init.rb: require "rubygems".
+
 	* ext/glib2/rbgutil_callback.c (queue_callback_request): suppress
 	a warning. (variable ‘written’ set but not used
 	[-Wunused-but-set-variable])
