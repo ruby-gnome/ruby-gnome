@@ -290,7 +290,7 @@ struct rval2strv_args {
     const gchar **strings;
 };
 
-VALUE
+static VALUE
 rbg_rval2strv_body(VALUE value)
 {
     long i;
@@ -303,7 +303,7 @@ rbg_rval2strv_body(VALUE value)
     return Qnil;
 }
 
-VALUE
+static VALUE
 rbg_rval2strv_rescue(VALUE value)
 {
     struct rval2strv_args *args = (struct rval2strv_args *)value;
@@ -321,7 +321,7 @@ rbg_rval2strv(VALUE value)
     args.ary = rb_ary_to_ary(value);
     args.n = RARRAY_LEN(args.ary);
     args.strings = g_new(const gchar *, args.n + 1);
-    
+
     rb_rescue(rbg_rval2strv_body, (VALUE)&args,
               rbg_rval2strv_rescue, (VALUE)&args);
 
@@ -340,7 +340,7 @@ struct rval2strv_dup_args {
     gchar **strings;
 };
 
-VALUE
+static VALUE
 rbg_rval2strv_dup_body(VALUE value)
 {
     long i;
@@ -353,7 +353,7 @@ rbg_rval2strv_dup_body(VALUE value)
     return Qnil;
 }
 
-VALUE
+static VALUE
 rbg_rval2strv_dup_rescue(VALUE value)
 {
     struct rval2strv_dup_args *args = (struct rval2strv_dup_args *)value;
@@ -371,7 +371,7 @@ rbg_rval2strv_dup(VALUE value)
     args.ary = rb_ary_to_ary(value);
     args.n = RARRAY_LEN(args.ary);
     args.strings = g_new(gchar *, args.n + 1);
-    
+
     rb_rescue(rbg_rval2strv_dup_body, (VALUE)&args,
               rbg_rval2strv_dup_rescue, (VALUE)&args);
 

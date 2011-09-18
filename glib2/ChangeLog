@@ -1,5 +1,7 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.c: don't export internal functions.
+
 	* ext/glib2/rbglib.c (rbg_filename_to_ruby_body)
 	(rbg_filename_to_ruby_ensure): don't define on Ruby 1.8.
 
