@@ -1,3 +1,7 @@
+2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: fill 1.0.1 changes.
+
 2011-09-15  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GtkSourceView2: Fixed bundled binary directory path

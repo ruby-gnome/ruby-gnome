@@ -2,9 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 1.0.1: 20XX-XX-XX
-
-TODO: WRITE ME.
+== Ruby-GNOME2 1.0.1: 2011-09-18
 
 This is a bug fix release of 1.0.0.
 
@@ -15,6 +13,10 @@ This is a bug fix release of 1.0.0.
   * Improvements
     * GLib::IOChannel.open supports Windows.
       [OBATA Akio, Kouhei Sutou]
+    * Added RVAL2STRV_FREE(), CSTRFILENAME2RVAL(),
+      RVAL2STRV, STRV2RVAL(), G_REPLACE_SET_PROPERTY(),
+      G_REPLACE_GET_PROPERTY() and G_REPLACE_ACTION().
+      [Nikolai Weibull]
   * Fixes
     * GLib::IOChannelWin32Socket.new uses raw socket handle
       not file descriptor.
@@ -51,7 +53,7 @@ This is a bug fix release of 1.0.0.
   * HAYASHI Kentaro
   * Jeff Moore
   * ashbb
-  * ...
+  * Nikolai Weibull
 
 == Ruby-GNOME2 1.0.0: 2011-07-13
 
