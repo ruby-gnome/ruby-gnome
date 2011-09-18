@@ -45,6 +45,10 @@ This is a bug fix release of 1.0.0.
     * Fixed bundled binary directory path on Windows.
       [HAYASHI Kentaro]
 
+==== Ruby/GtkMozEmbed
+
+  * Deprecated.
+
 === Thanks
 
   * Antonio Terceiro

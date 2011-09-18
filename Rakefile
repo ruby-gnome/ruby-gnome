@@ -89,7 +89,7 @@ task :dist_gtk2 do
   package(gtk2_base_name, base_files + gtk2_packages)
 end
 
-gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer", "gtkmozembed",
+gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer",
                                    "gtksourceview2", "poppler", "rsvg2", "vte"]
 gnome2_base_name = "ruby-gnome2-all"
 desc "make Ruby/GNOME2 package"
@@ -131,7 +131,7 @@ namespace :gem do
   end
 
   namespace :win32 do
-    win32_gnome2_packages = gnome2_packages - ["vte", "gtkmozembed", "gstreamer"]
+    win32_gnome2_packages = gnome2_packages - ["vte", "gstreamer"]
     desc "build all Windows gems"
     task :build do
       win32_gnome2_packages.each do |package|
