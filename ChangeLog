@@ -1,5 +1,8 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* NEWS: Ruby/GLib2: [#3411204] Supported RubyGems 1.8.3.
+	Reported by Tobias Pfeiffer. Thanks!!!
+
 	* release.rd: add a document about releasing.
 
 	* Rakefile: add gem:install and gem:uninstall task.
