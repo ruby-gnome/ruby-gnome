@@ -143,6 +143,7 @@ rbg_cstr2rval_with_free(gchar *str)
 static rb_encoding *filename_encoding_if_not_utf8;
 #endif
 
+#ifdef HAVE_RUBY_ENCODING_H
 static VALUE
 rbg_filename_to_ruby_body(VALUE filename)
 {
@@ -167,6 +168,7 @@ rbg_filename_to_ruby_ensure(VALUE filename)
 
     return Qnil;
 }
+#endif
 
 VALUE
 rbg_filename_to_ruby(const gchar *filename)
