@@ -123,7 +123,7 @@ queue_callback_request(CallbackRequest *request)
                     CALLBACK_PIPE_READY_MESSAGE_SIZE);
     if (written != CALLBACK_PIPE_READY_MESSAGE_SIZE) {
         rb_warn("couldn't write all callback pipe ready message: "
-                "message-size: %d, written: %d",
+                "message-size: %d, written: %zd",
                 CALLBACK_PIPE_READY_MESSAGE_SIZE,
                 written);
     }
