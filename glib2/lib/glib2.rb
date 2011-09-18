@@ -33,29 +33,39 @@ module GLib
   end
 
   def __add_one_arg_setter(klass)
-    #for Instance methods.
-    ary = klass.instance_methods(false)
-    ary.each do |m|
-      if /^set_(.*)/ =~ m and not ary.include? :"#{$1}=" and klass.instance_method(m).arity == 1
-	begin
-          klass.module_eval("def #{$1}=(val); set_#{$1}(val); val; end\n")
-        rescue SyntaxError
-          $stderr.print "Couldn't create #{klass}\##{$1}=(v).\n" if $DEBUG
+    # for Instance methods.
+    method_names = klass.instance_methods(false)
+    method_names.each do |method_name|
+      next if /\Aset_/ !~ method_name
+      property_name = $POSTMATCH
+      next if klass.method_defined?("#{property_name}=")
+      next if klass.instance_method(method_name).arity != 1
+      begin
+        klass.module_eval("def #{property_name}=(val); set_#{property_name}(val); val; end\n")
+      rescue SyntaxError
+        if $DEBUG
+          $stderr.puts "Couldn't create #{klass}\##{property_name}=(v)."
         end
       end
     end
-    #for Class methods/Module functions.
-    if Object.method(:methods).arity == -1
-      ary = klass.methods(false)
+
+    # for Class methods/Module functions.
+    if klass.method(:methods).arity == -1
+      method_names = klass.methods(false)
     else
-      ary = klass.methods
+      method_names = klass.methods
     end
-    ary.each do |m|
-      if /^set_(.*)/ =~ m and not ary.include? :"#{$1}=" and klass.method(m).arity == 1
-	begin
-          klass.module_eval("def self.#{$1}=(val); set_#{$1}(val); val; end\n")
-        rescue SyntaxError
-          $stderr.print "Couldn't create #{klass}\##{$1}=(v).\n" if $DEBUG
+    singleton_klass = (class << klass; self; end)
+    method_names.each do |method_name|
+      next if /\Aset_/ !~ method_name
+      property_name = $POSTMATCH
+      next if singleton_klass.method_defined?("#{property_name}=")
+      next if klass.method(method_name).arity != 1
+      begin
+        klass.module_eval("def self.#{property_name}=(val); set_#{property_name}(val); val; end\n")
+      rescue SyntaxError
+        if $DEBUG
+          $stderr.puts "Couldn't create #{klass}.#{property_name}=(v)."
         end
       end
     end
