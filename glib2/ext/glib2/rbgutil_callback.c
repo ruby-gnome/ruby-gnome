@@ -118,10 +118,15 @@ queue_callback_request(CallbackRequest *request)
     ssize_t written;
 
     g_async_queue_push(callback_request_queue, request);
-    /* TODO: Should result be checked? */
     written = write(callback_pipe_fds[1],
                     CALLBACK_PIPE_READY_MESSAGE,
                     CALLBACK_PIPE_READY_MESSAGE_SIZE);
+    if (written != CALLBACK_PIPE_READY_MESSAGE_SIZE) {
+        rb_warn("couldn't write all callback pipe ready message: "
+                "message-size: %d, written: %d",
+                CALLBACK_PIPE_READY_MESSAGE_SIZE,
+                written);
+    }
 }
 
 static VALUE
