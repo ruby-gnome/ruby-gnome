@@ -410,7 +410,7 @@ static VALUE
 rbg_strv2rval_free_ensure(VALUE strings)
 {
     g_strfreev((gchar **)strings);
-    
+
     return Qnil;
 }
 
