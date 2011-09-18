@@ -2,6 +2,22 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.0.3: 2011-09-19
+
+This is a bug fix release of 1.0.2.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * [#3411234] Supported RubyGems 1.8.6.
+      [Tobias Pfeiffer, Kouhei Sutou]
+
+=== Thanks
+
+  * Tobias Pfeiffer
+
 == Ruby-GNOME2 1.0.2: 2011-09-18
 
 This is a bug fix release of 1.0.1.
@@ -11,7 +27,7 @@ This is a bug fix release of 1.0.1.
 ==== Ruby/GLib2
 
   * Fixes
-    * [#3411204] Supported RubyGems 1.8.3.
+    * [#3411204] Supported RubyGems 1.8.6.
       [Tobias Pfeiffer, Kouhei Sutou]
 
 ==== Ruby/GTK2

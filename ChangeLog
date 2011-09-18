@@ -1,9 +1,14 @@
+2011-09-19  Kouhei Sutou  <kou@cozmixng.org>
+
+	* NEWS: Ruby/GLib2: [#3411234] Supported RubyGems 1.8.6.
+	Reported by Tobias Pfeiffer. Thanks!!!
+
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
 	* NEWS: Ruby/GTK+: Fixed the default theme on Windows.
 	Reported by ashbb. Thanks!!!
 
-	* NEWS: Ruby/GLib2: [#3411204] Supported RubyGems 1.8.3.
+	* NEWS: Ruby/GLib2: [#3411204] Supported RubyGems 1.8.6.
 	Reported by Tobias Pfeiffer. Thanks!!!
 
 	* release.rd: add a document about releasing.
