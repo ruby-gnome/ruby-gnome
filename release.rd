@@ -104,7 +104,7 @@ Here are confirmation steps:
 The following command uploads ruby-gtk2-X.Y.Z.tar.gz and
 ruby-gnome2-all-X.Y.Z.tar.gz to SF.net:
 
-  % rake release
+  % rake release SVN_USER=YOUR_SF_NET_USER_NAME
 
 === gem
 
