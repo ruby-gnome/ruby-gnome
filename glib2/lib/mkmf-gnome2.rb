@@ -81,7 +81,7 @@ def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
     require 'rubygems'
     gem_spec = (Gem::Specification.respond_to?(:find_by_name) ?
                 Gem::Specification.find_by_name(target_name) :
-                Gem.source_index.find_name(target_name)).last
+                Gem.source_index.find_name(target_name).last)
     if gem_spec
       target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
       target_build_dir = target_source_dir
