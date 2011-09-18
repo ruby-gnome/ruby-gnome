@@ -75,21 +75,28 @@ def setup_win32(target_name, base_dir=nil)
   end
 end
 
-#add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
-def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
+def find_gem_spec(package)
   begin
     require 'rubygems'
-    gem_spec = (Gem::Specification.respond_to?(:find_by_name) ?
-                Gem::Specification.find_by_name(target_name) :
-                Gem.source_index.find_name(target_name).last)
-    if gem_spec
-      target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
-      target_build_dir = target_source_dir
-      add_depend_package_path(target_name,
-                              target_source_dir,
-                              target_build_dir)
+    if Gem::Specification.respond_to?(:find_by_name)
+      Gem::Specification.find_by_name(package)
+    else
+      Gem.source_index.find_name(package).last
     end
   rescue LoadError
+    nil
+  end
+end
+
+#add_depend_package("glib2", "ext/glib2", "/...../ruby-gnome2")
+def add_depend_package(target_name, target_srcdir, top_srcdir, options={})
+  gem_spec = find_gem_spec(target_name)
+  if gem_spec
+    target_source_dir = File.join(gem_spec.full_gem_path, "ext/#{target_name}")
+    target_build_dir = target_source_dir
+    add_depend_package_path(target_name,
+                       target_source_dir,
+                       target_build_dir)
   end
 
   [top_srcdir,
@@ -383,16 +390,8 @@ def check_cairo(options={})
     rcairo_source_dir = nil
   end
   if rcairo_source_dir.nil?
-    begin
-      require 'rubygems'
-      cairo_gem_spec = (Gem::Specification.respond_to?(:find_by_name) ?
-                        Gem::Specification.find_by_name('cairo') :
-                        Gem.source_index.find_name('cairo')).last
-      if cairo_gem_spec
-        rcairo_source_dir = cairo_gem_spec.full_gem_path
-      end
-    rescue LoadError
-    end
+    cairo_gem_spec = find_gem_spec("cairo")
+    rcairo_source_dir = cairo_gem_spec.full_gem_path if cairo_gem_spec
   end
 
   unless rcairo_source_dir.nil?
