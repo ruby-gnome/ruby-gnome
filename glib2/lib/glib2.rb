@@ -34,7 +34,7 @@ module GLib
 
   def __add_one_arg_setter(klass)
     #for Instance methods.
-    ary = klass.instance_methods(false).map{ |m| m.to_sym }
+    ary = klass.instance_methods(false)
     ary.each do |m|
       if /^set_(.*)/ =~ m and not ary.include? :"#{$1}=" and klass.instance_method(m).arity == 1
 	begin
@@ -46,9 +46,9 @@ module GLib
     end
     #for Class methods/Module functions.
     if Object.method(:methods).arity == -1
-      ary = klass.methods(false).map{ |m| m.to_sym }
+      ary = klass.methods(false)
     else
-      ary = klass.methods.map{ |m| m.to_sym }
+      ary = klass.methods
     end
     ary.each do |m|
       if /^set_(.*)/ =~ m and not ary.include? :"#{$1}=" and klass.method(m).arity == 1

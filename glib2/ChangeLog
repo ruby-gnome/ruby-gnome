@@ -1,5 +1,8 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* lib/glib2.rb (GLib.__add_one_arg_setter): convert method names
+	to String not Symbol to work on Ruby 1.8.
+
 	* test/glib-test-init.rb: require "rubygems".
 
 	* ext/glib2/rbgutil_callback.c (queue_callback_request): suppress
