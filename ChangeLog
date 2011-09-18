@@ -1,5 +1,7 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add gem:install and gem:uninstall task.
+
 	* run-test.rb: Config -> RbConfig.
 
 	* run-test.rb: fix path.

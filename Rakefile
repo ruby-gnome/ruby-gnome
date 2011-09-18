@@ -130,6 +130,21 @@ namespace :gem do
     end
   end
 
+  desc "install all gems"
+  task :install do
+    gnome2_packages.each do |package|
+      sh("gem", "install", "--user-install",
+         *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
+    end
+  end
+
+  desc "uninstall all gems"
+  task :uninstall do
+    gnome2_packages.each do |package|
+      sh("gem", "uninstall", "--version", version, package)
+    end
+  end
+
   namespace :win32 do
     win32_gnome2_packages = gnome2_packages - ["vte", "gstreamer"]
     desc "build all Windows gems"
