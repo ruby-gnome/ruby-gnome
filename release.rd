@@ -124,6 +124,11 @@ The following command uploads */pkg/*-X.Y.Z-x86-mingw32.gem to rubygems.org:
 
   % rake tag
 
+=== Increments the version
+
+  % editor glib2/ext/glib2/rbglib.h
+  (increments RBGLIB_*_VERSION.)
+
 === Announces the current release
 
   (1) post release announce to
