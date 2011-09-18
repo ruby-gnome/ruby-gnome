@@ -119,13 +119,13 @@ rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
 }
 
 static VALUE
-rbg_cstr2rval_with_free_body(VALUE str)
+rbg_cstr2rval_free_body(VALUE str)
 {
     return CSTR2RVAL((const gchar *)str);
 }
 
 static VALUE
-rbg_cstr2rval_with_free_ensure(VALUE str)
+rbg_cstr2rval_free_ensure(VALUE str)
 {
     g_free((gchar *)str);
 
@@ -133,10 +133,17 @@ rbg_cstr2rval_with_free_ensure(VALUE str)
 }
 
 VALUE
+rbg_cstr2rval_free(gchar *str)
+{
+    return str != NULL? rb_ensure(rbg_cstr2rval_free_body, (VALUE)str,
+                                  rbg_cstr2rval_free_ensure, (VALUE)str) : Qnil;
+}
+
+/* just for backward compatibility. */
+VALUE
 rbg_cstr2rval_with_free(gchar *str)
 {
-    return str != NULL? rb_ensure(rbg_cstr2rval_with_free_body, (VALUE)str,
-                                  rbg_cstr2rval_with_free_ensure, (VALUE)str) : Qnil;
+    return rbg_cstr2rval_free(str);
 }
 
 #ifdef HAVE_RUBY_ENCODING_H

@@ -1,5 +1,8 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.c, ext/glib2/rbglib.h, ext/glib2/glib2.def:
+	rbg_cstr2rval_with_free() -> rbg_cstr2rval_free().
+
 	* ext/glib2/rbglib.c: don't export internal functions.
 
 	* ext/glib2/rbglib.c (rbg_filename_to_ruby_body)

@@ -63,6 +63,7 @@ EXPORTS
         rbg_cstr2rval_len
         rbg_cstr2rval_with_encoding
         rbg_cstr2rval_len_with_encoding
+	rbg_cstr2rval_free
 	rbg_cstr2rval_with_free
         rbg_filename_to_ruby
         rbg_filename_to_ruby_free
