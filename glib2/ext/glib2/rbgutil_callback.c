@@ -22,10 +22,6 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#ifndef HAVE_RB_ERRINFO
-#  define rb_errinfo() (ruby_errinfo)
-#endif
-
 #ifndef HAVE_RUBY_NATIVE_THREAD_P
 #  define ruby_native_thread_p() is_ruby_native_thread()
 #endif

@@ -11,6 +11,10 @@
 #include "rbgobject.h"
 #include "glib-enum-types.h"
 
+#ifndef HAVE_RB_ERRINFO
+#  define rb_errinfo() (ruby_errinfo)
+#endif
+
 G_BEGIN_DECLS
 
 typedef struct {
