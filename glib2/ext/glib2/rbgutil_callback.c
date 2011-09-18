@@ -12,12 +12,15 @@
 
 #include "rbgprivate.h"
 
-#ifdef HAVE_UNISTD_H
-#  include <unistd.h>
-#endif
-#ifdef HAVE_IO_H
-#  include <io.h>
-#  define pipe(phandles) _pipe(phandles, 128, _O_BINARY)
+#ifdef G_OS_WIN32
+#  ifdef HAVE_IO_H
+#    include <io.h>
+#    define pipe(phandles) _pipe(phandles, 128, _O_BINARY)
+#  endif
+#else
+#  ifdef HAVE_UNISTD_H
+#    include <unistd.h>
+#  endif
 #endif
 #include <fcntl.h>
 #include <errno.h>
