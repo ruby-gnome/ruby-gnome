@@ -1,5 +1,9 @@
 2011-09-18  Kouhei Sutou  <kou@cozmixng.org>
 
+	* run-test.rb: Config -> RbConfig.
+
+	* run-test.rb: fix path.
+
 	* README, NEWS, Rakefile: deprecated Ruby/GtkMozEmbed.
 
 	* NEWS: fill 1.0.1 changes.

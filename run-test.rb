@@ -6,8 +6,8 @@
 require "rbconfig"
 require "pathname"
 
-ruby = File.join(Config::CONFIG['bindir'],
-                 Config::CONFIG['RUBY_INSTALL_NAME'] +Config::CONFIG['EXEEXT'])
+ruby = File.join(RbConfig::CONFIG['bindir'],
+                 RbConfig::CONFIG['RUBY_INSTALL_NAME'] + RbConfig::CONFIG['EXEEXT'])
 
 # for creating a separating line
 def separator
@@ -21,15 +21,8 @@ base_dir = Pathname(File.dirname(__FILE__))
 Pathname.glob((base_dir + "*").to_s) do |dir|
   next unless dir.directory?
   dir = dir.expand_path
-  src_dir = dir + "src"
   ext_dir = dir + "ext" + dir.basename
-  if ext_dir.directory?
-    includes.concat(["-I", (src_dir + "lib").to_s, "-I", ext_dir.to_s])
-  elsif src_dir.directory?
-    includes.concat(["-I", (src_dir + "lib").to_s, "-I", src_dir.to_s])
-  else
-    includes.concat(["-I", (dir + "lib").to_s, "-I", dir.to_s])
-  end
+  includes.concat(["-I", (dir + "lib").to_s, "-I", ext_dir.to_s])
   next unless (dir + "test").directory?
   targets << dir
 end
