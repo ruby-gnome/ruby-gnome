@@ -143,13 +143,24 @@ rbg_cstr2rval_with_free(gchar *str)
 static rb_encoding *filename_encoding_if_not_utf8;
 #endif
 
-VALUE
+static VALUE
 rbg_filename_to_ruby_body(VALUE filename)
 {
-    return CSTR2RVAL((const gchar *)filename);
+    const gchar *filename_utf8 = (const gchar *)filename;
+    VALUE rb_filename;
+
+    rb_filename = rb_external_str_new_with_enc(filename_utf8,
+                                               strlen(filename_utf8),
+                                               rb_utf8_encoding());
+
+    /* if needed, change encoding of Ruby String to filename encoding, so that
+       upcoming File operations will work properly */
+    return filename_encoding_if_not_utf8 != NULL ?
+        rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8) :
+        rb_filename;
 }
 
-VALUE
+static VALUE
 rbg_filename_to_ruby_ensure(VALUE filename)
 {
     g_free((gchar *)filename);
@@ -167,7 +178,7 @@ rbg_filename_to_ruby(const gchar *filename)
 
     if (filename == NULL)
         return Qnil;
-       
+
     if (filename_encoding_if_not_utf8 == NULL)
         return CSTR2RVAL(filename);
 
@@ -182,29 +193,6 @@ rbg_filename_to_ruby(const gchar *filename)
 #endif
 }
 
-static VALUE
-rbg_filename_to_ruby_free_body(VALUE val)
-{
-    gchar *filename_utf8 = (gchar *)val;
-    VALUE rb_filename = rb_external_str_new_with_enc(filename_utf8,
-                                                     strlen(filename_utf8),
-                                                     rb_utf8_encoding());
-
-    /* if needed, change encoding of Ruby String to filename encoding, so that
-       upcoming File operations will work properly */
-    return filename_encoding_if_not_utf8 != NULL ?
-        rb_str_export_to_enc(rb_filename, filename_encoding_if_not_utf8) :
-        rb_filename;
-}
-
-static VALUE
-rbg_filename_to_ruby_free_ensure(VALUE filename)
-{
-    g_free((gchar *)filename);
-
-    return Qnil;
-}
-
 VALUE
 rbg_filename_to_ruby_free(gchar *filename)
 {
@@ -214,7 +202,7 @@ rbg_filename_to_ruby_free(gchar *filename)
 
     if (filename == NULL)
         return Qnil;
-       
+
     /* convert filename to UTF-8 if needed */
     if (filename_encoding_if_not_utf8 != NULL) {
         GError *error = NULL;
@@ -227,8 +215,8 @@ rbg_filename_to_ruby_free(gchar *filename)
         filename_utf8 = filename;
     }
 
-    return rb_ensure(rbg_filename_to_ruby_free_body, (VALUE)filename_utf8,
-                     rbg_filename_to_ruby_free_ensure, (VALUE)filename_utf8);
+    return rb_ensure(rbg_filename_to_ruby_body, (VALUE)filename_utf8,
+                     rbg_filename_to_ruby_ensure, (VALUE)filename_utf8);
 #else
     return CSTR2RVAL_FREE(filename);
 #endif
