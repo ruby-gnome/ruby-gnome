@@ -1,5 +1,7 @@
 2011-09-19  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/glib2/rbglib.h: 1.0.3 -> 1.0.4.
+
 	* lib/mkmf-gnome2.rb (check_cairo): really support RubyGems 1.8.6...
 	[#3411234]
 	Reported by Tobias Pfeiffer. Thanks!!!
