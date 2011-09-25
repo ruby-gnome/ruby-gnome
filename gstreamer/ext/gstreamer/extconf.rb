@@ -30,6 +30,15 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
+["glib2"].each do |package|
+  directory = "#{package}#{version_suffix}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  add_depend_package(package, "#{directory}/ext/#{package}",
+                     top_dir.to_s,
+                     :top_build_dir => top_build_dir.to_s,
+                     :target_build_dir => build_dir)
+end
+
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
@@ -45,15 +54,6 @@ end
 
 if PKGConfig.have_package("gstreamer-pbutils-0.10")
   $CFLAGS += " -DHAVE_GST_PBUTILS"
-end
-
-["glib2"].each do |package|
-  directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
-  add_depend_package(package, "#{directory}/ext/#{package}",
-                     top_dir.to_s,
-                     :top_build_dir => top_build_dir.to_s,
-                     :target_build_dir => build_dir)
 end
 
 create_pkg_config_file("Ruby/GStreamer", package_id)

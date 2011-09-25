@@ -1,5 +1,7 @@
 2011-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* ext/gstreamer/extconf.rb: fix dependency resolve order.
+
 	* ext/gstreamer/rbgst-element.c: don't include unistd.h on Windows.
 
 2011-03-07  Vincent Carmona
