@@ -247,7 +247,7 @@ rbgst_m_check_version(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro
 
 
 void
-Init_gst (void)
+Init_gstreamer (void)
 {
     mGst = rb_define_module ("Gst");
 

@@ -19,7 +19,7 @@ end
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
-module_name = "gst"
+module_name = "gstreamer"
 package_id = "gstreamer-0.10"
 
 begin
