@@ -1,5 +1,8 @@
 2011-09-25  Kouhei Sutou  <kou@cozmixng.org>
 
+	* Rakefile: add win32:pc task to generate *.pc files for GStreamer
+	package for Windows.
+
 	* lib/gst.rb, ext/gstreamer/rbgst.c, ext/gstreamer/extconf.rb:
 	change so filename to fit naming convention: gst.so -> gstreamer.so.
 
