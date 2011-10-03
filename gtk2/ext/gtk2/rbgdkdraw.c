@@ -142,26 +142,73 @@ gdkdraw_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y
 }
 #endif
 
-static VALUE
-gdkdraw_draw_segs(VALUE self, VALUE gc, VALUE segs)
-{
-    GdkSegment *segments;
-    int i;
+struct rbgdk_rval2gdksegments_args {
+    VALUE ary;
+    long n;
+    GdkSegment *result;
+};
 
-    Check_Type(segs, T_ARRAY);
-    segments = ALLOCA_N(GdkSegment,RARRAY_LEN(segs));
-    for (i = 0; i < RARRAY_LEN(segs); i++) {
-        Check_Type(RARRAY_PTR(segs)[i], T_ARRAY);
-        if (RARRAY_LEN(RARRAY_PTR(segs)[i]) < 4) {
-            rb_raise(rb_eArgError, "segment %d should be array of size 4", i);
-        }
-        segments[i].x1 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[0]);
-        segments[i].y1 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[1]);
-        segments[i].x2 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[2]);
-        segments[i].y2 = NUM2INT(RARRAY_PTR(RARRAY_PTR(segs)[i])[3]);
+static VALUE
+rbgdk_rval2gdksegments_body(VALUE value)
+{
+    long i;
+    struct rbgdk_rval2gdksegments_args *args = (struct rbgdk_rval2gdksegments_args *)value;
+
+    for (i = 0; i < args->n; i++) {
+        VALUE segments = rb_ary_to_ary(RARRAY_PTR(args->ary)[i]);
+
+        if (RARRAY_LEN(segments) != 2)
+            rb_raise(rb_eArgError, "segment %ld should be array of size 4", i);
+
+        args->result[i].x1 = NUM2INT(RARRAY_PTR(segments)[0]);
+        args->result[i].y1 = NUM2INT(RARRAY_PTR(segments)[1]);
+        args->result[i].x2 = NUM2INT(RARRAY_PTR(segments)[2]);
+        args->result[i].y2 = NUM2INT(RARRAY_PTR(segments)[3]);
     }
-    gdk_draw_segments(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                      segments, RARRAY_LEN(segs));
+
+    return Qnil;
+}
+
+static VALUE
+rbgdk_rval2gdksegments_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdksegments_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GdkSegment *
+rbgdk_rval2gdksegments(VALUE value, long *n)
+{
+    struct rbgdk_rval2gdksegments_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GdkSegment, args.n + 1);
+
+    rb_rescue(rbgdk_rval2gdksegments_body, (VALUE)&args,
+              rbgdk_rval2gdksegments_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GDKSEGMENTS(value, n) rbgdk_rval2gdksegments(value, n)
+
+static VALUE
+gdkdraw_draw_segs(VALUE self, VALUE rbgc, VALUE rbsegments)
+{
+    GdkDrawable *drawable = _SELF(self);
+    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    long n;
+    GdkSegment *segments = RVAL2GDKSEGMENTS(rbsegments, &n);
+
+    gdk_draw_segments(drawable, gc, segments, n);
+
+    g_free(segments);
+
     return self;
 }
 
