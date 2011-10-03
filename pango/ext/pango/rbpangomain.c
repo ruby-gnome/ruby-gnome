@@ -15,23 +15,49 @@
  * Rendering
  */
 
+struct rpango_reorder_items_args {
+    PangoItem *item;
+    VALUE ary;
+    long n;
+    GList *result;
+};
+
 static VALUE
-rpango_reorder_items(VALUE self, VALUE logical_items)
+rpango_reorder_items_body(VALUE value)
 {
-    int i;
-    GList *glist = NULL;
-    GList* ret;
+    struct rpango_reorder_items_args *args = (struct rpango_reorder_items_args *)value;
+    long i;
+    GList *result;
 
-    Check_Type(logical_items, T_ARRAY);
+    for (i = 0; i < args->n; i++)
+        args->result = g_list_append(args->result,
+                                     RVAL2BOXED(RARRAY_PTR(args->ary)[i],
+                                                PANGO_TYPE_ITEM));
 
-    for (i = 0; i < RARRAY_LEN(logical_items); i++){
-        glist = g_list_append(glist, RVAL2BOXED(RARRAY_PTR(logical_items)[i], PANGO_TYPE_ITEM));
-    }
+    result = pango_reorder_items(args->result);
+    g_list_free(args->result);
 
-    ret = pango_reorder_items(glist);
-    g_list_free(glist);
+    return GLIST2ARY2(result, PANGO_TYPE_ITEM);
+}
 
-    return GLIST2ARY2(ret, PANGO_TYPE_ITEM);
+static VALUE
+rpango_reorder_items_ensure(VALUE value)
+{
+    g_list_free(((struct rpango_reorder_items_args *)value)->result);
+
+    return Qnil;
+}
+
+static VALUE
+rpango_reorder_items(VALUE self, VALUE attrs)
+{
+    struct rpango_reorder_items_args args;
+    args.ary = rb_ary_to_ary(attrs);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    return rb_ensure(rpango_reorder_items_body, (VALUE)&args,
+                     rpango_reorder_items_ensure, (VALUE)&args);
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)
