@@ -31,21 +31,47 @@ dialog_add_button(VALUE self, VALUE button_text, VALUE response_id)
                                            RVAL2GENUM(response_id, GTK_TYPE_RESPONSE_TYPE)));
 }
 
-VALUE
-rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary)
+struct rbgtk_dialog_add_buttons_internal_args {
+    VALUE self;
+    VALUE buttons;
+};
+
+static VALUE
+rbgtk_dialog_add_buttons_internal_body(VALUE value)
 {
-    int i;
-    GObject* obj = RVAL2GOBJ(self);
-    if (RARRAY_PTR(button_ary)[0] != Qnil){
-        g_object_freeze_notify(obj);
-        for (i = 0; i < RARRAY_LEN(button_ary); i++) {
-            Check_Type(RARRAY_PTR(button_ary)[i], T_ARRAY);
-            dialog_add_button(self, RARRAY_PTR(RARRAY_PTR(button_ary)[i])[0],
-                              RARRAY_PTR(RARRAY_PTR(button_ary)[i])[1]);
-        }
-        g_object_thaw_notify(obj);
+    struct rbgtk_dialog_add_buttons_internal_args *args = (struct rbgtk_dialog_add_buttons_internal_args *)value;
+    long i;
+    long n = RARRAY_LEN(args->buttons);
+
+    for (i = 0; i < n; i++) {
+        VALUE button = rb_ary_to_ary(RARRAY_PTR(args->buttons)[i]);
+
+        dialog_add_button(args->self, RARRAY_PTR(button)[0], RARRAY_PTR(button)[1]);
     }
-    return self;
+
+    return args->self;
+}
+
+static VALUE
+rbgtk_dialog_add_buttons_internal_ensure(VALUE value)
+{
+    g_object_thaw_notify(RVAL2GOBJ(((struct rbgtk_dialog_add_buttons_internal_args *)value)->self));
+
+    return Qnil;
+}
+
+VALUE
+rbgtk_dialog_add_buttons_internal(VALUE self, VALUE buttons)
+{
+    struct rbgtk_dialog_add_buttons_internal_args args = { self, buttons };
+
+    if (NIL_P(RARRAY_PTR(buttons)[0]))
+        return self;
+
+    g_object_freeze_notify(RVAL2GOBJ(self));
+
+    return rb_ensure(rbgtk_dialog_add_buttons_internal_body, (VALUE)&args,
+                     rbgtk_dialog_add_buttons_internal_ensure, (VALUE)&args);
 }    
 
 static VALUE
