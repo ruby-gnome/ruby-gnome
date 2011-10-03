@@ -18,6 +18,11 @@
 #  include <gdk/gdkx.h>
 #endif
 
+#define RVAL2GDKPOINTS(value, n) rbgdk_rval2gdkpoints(value, n)
+#define RVAL2GDKATOMS(value, n) rbgdk_rval2gdkatoms(value, n)
+
+#define RVAL2GDKPIXBUFGLIST(value) rbgdk_rval2gdkpixbufglist(value)
+
 #define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
 
 #define GEV2RVAL(ev) (make_gdkevent(ev))
@@ -39,6 +44,11 @@ RUBY_GTK2_VAR VALUE rb_cGdkColor;
 typedef struct {
     GdkAtom atom;
 } GdkAtomData;
+
+GdkPoint *rbgdk_rval2gdkpoints(VALUE value, long *n);
+GdkAtom *rbgdk_rval2gdkatoms(VALUE value, long *n);
+
+GList *rbgdk_rval2gdkpixbufglist(VALUE value);
 
 extern GType gdk_windowattr_get_type(void);
 extern GType gdk_atom_get_type(void);
