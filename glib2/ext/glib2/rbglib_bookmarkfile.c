@@ -370,12 +370,14 @@ bf_set_added(VALUE self, VALUE uri, VALUE time)
 }
 
 static VALUE
-bf_set_groups(VALUE self, VALUE uri, VALUE rbgroups)
+bf_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
 {
-    VALUE ary = rb_ary_to_ary(rbgroups);
-    const gchar **groups = RVAL2STRV(ary);
-    
-    g_bookmark_file_set_groups(_SELF(self), RVAL2CSTR(uri), groups, RARRAY_LEN(ary));
+    GBookmarkFile *bookmark = _SELF(self);
+    const gchar *uri = RVAL2CSTR(rburi);
+    long n;
+    const gchar **groups = RVAL2STRS(rbgroups, &n);
+
+    g_bookmark_file_set_groups(bookmark, uri, groups, n);
 
     g_free(groups);
 

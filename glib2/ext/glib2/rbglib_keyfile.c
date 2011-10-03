@@ -505,16 +505,15 @@ keyfile_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
 #endif
 
 static VALUE
-keyfile_set_string_list(VALUE self, VALUE group_name, VALUE key, VALUE rblist)
+keyfile_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
-    VALUE ary = rb_ary_to_ary(rblist);
-    const gchar **list = RVAL2STRV(ary);
+    GKeyFile *key_file = _SELF(self);
+    const gchar *group_name = RVAL2CSTR(rbgroup_name);
+    const gchar *key = RVAL2CSTR(rbkey);
+    long n;
+    const gchar **list = RVAL2STRS(rblist, &n);
 
-    g_key_file_set_string_list(_SELF(self), 
-                               RVAL2CSTR(group_name),
-                               RVAL2CSTR(key),
-                               list,
-                               RARRAY_LEN(ary));
+    g_key_file_set_string_list(key_file, group_name, key, list, n);
 
     g_free(list);
 
@@ -522,17 +521,16 @@ keyfile_set_string_list(VALUE self, VALUE group_name, VALUE key, VALUE rblist)
 }
 
 static VALUE
-keyfile_set_locale_string_list(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE rblist)
+keyfile_set_locale_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblocale, VALUE rblist)
 {
-    VALUE ary = rb_ary_to_ary(rblist);
-    const gchar **list = RVAL2STRV(ary);
+    GKeyFile *key_file = _SELF(self);
+    const gchar *group_name = RVAL2CSTR(rbgroup_name);
+    const gchar *key = RVAL2CSTR(rbkey);
+    const gchar *locale = RVAL2CSTR(rblocale);
+    long n;
+    const gchar **list = RVAL2STRS(rblist, &n);
 
-    g_key_file_set_locale_string_list(_SELF(self),
-                                      RVAL2CSTR(group_name),
-                                      RVAL2CSTR(key),
-                                      RVAL2CSTR(locale),
-                                      list,
-                                      RARRAY_LEN(ary));
+    g_key_file_set_locale_string_list(key_file, group_name, key, locale, list, n);
 
     g_free(list);
 
@@ -540,68 +538,48 @@ keyfile_set_locale_string_list(VALUE self, VALUE group_name, VALUE key, VALUE lo
 }
 
 static VALUE
-keyfile_set_boolean_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
+keyfile_set_boolean_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
-    VALUE ary;
-    long i, n;
-    gboolean *booleans;
+    GKeyFile *key_file = _SELF(self);
+    const gchar *group_name = RVAL2CSTR(rbgroup_name);
+    const gchar *key = RVAL2CSTR(rbkey);
+    long n;
+    gboolean *list = RVAL2GBOOLEANS(rblist, &n);
 
-    ary = rb_ary_to_ary(list);
-    n = RARRAY_LEN(ary);
-    booleans = ALLOCA_N(gboolean, n);
-    for (i = 0; i < n; i++)
-        booleans[i] = RVAL2CBOOL(RARRAY_PTR(ary)[i]);
+    g_key_file_set_boolean_list(key_file, group_name, key, list, n);
 
-    g_key_file_set_boolean_list(_SELF(self),
-                                RVAL2CSTR(group_name),
-                                RVAL2CSTR(key),
-                                booleans,
-                                n);
+    g_free(list);
 
     return self;
 }
 
 static VALUE
-keyfile_set_integer_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
+keyfile_set_integer_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
-    VALUE ary;
-    long i, n;
-    gint *ints;
+    GKeyFile *key_file = _SELF(self);
+    const gchar *group_name = RVAL2CSTR(rbgroup_name);
+    const gchar *key = RVAL2CSTR(rbkey);
+    long n;
+    gint *list = RVAL2GINTS(rblist, &n);
 
-    ary = rb_ary_to_ary(list);
-    n = RARRAY_LEN(ary);
-    ints = ALLOCA_N(gint, n);
-    for (i = 0; i < n; i++)
-        ints[i] = NUM2INT(RARRAY_PTR(ary)[i]);
+    g_key_file_set_integer_list(key_file, group_name, key, list, n);
 
-    g_key_file_set_integer_list(_SELF(self),
-                                RVAL2CSTR(group_name),
-                                RVAL2CSTR(key),
-                                ints,
-                                n);
+    g_free(list);
 
     return self;
 }
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_set_double_list(VALUE self, VALUE group_name, VALUE key, VALUE list)
+keyfile_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
-    VALUE ary;
-    long i, n;
-    gdouble *doubles;
-    
-    ary = rb_ary_to_ary(list);
-    n = RARRAY_LEN(ary);
-    doubles = ALLOCA_N(gdouble, n);
-    for (i = 0; i < n; i++)
-        doubles[i] = NUM2DBL(RARRAY_PTR(ary)[i]);
+    GKeyFile *key_file = _SELF(self);
+    const gchar *group_name = RVAL2CSTR(rbgroup_name);
+    const gchar *key = RVAL2CSTR(rbkey);
+    long n;
+    gdouble *list = RVAL2GDOUBLES(rblist, &n);
 
-    g_key_file_set_double_list(_SELF(self),
-                               RVAL2CSTR(group_name),
-                               RVAL2CSTR(key),
-                               doubles,
-                               n);
+    g_key_file_set_double_list(key_file, group_name, key, list, n);
 
     return self;
 }
