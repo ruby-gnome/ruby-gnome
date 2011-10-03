@@ -118,7 +118,7 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         param_types = NULL;
     } else {
         n_params = RARRAY_LEN(params);
-        param_types = ALLOCA_N(GType, n_params);
+        param_types = g_new(GType, n_params);
         for (i = 0; i < n_params; i++)
             param_types[i] = rbgobj_gtype_get(RARRAY_PTR(params)[i]);
     }
@@ -133,6 +133,8 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
                         rbgobj_gtype_get(return_type),
                         n_params,
                         param_types);
+
+    g_free(param_types);
 
     if (!sig)
         rb_raise(rb_eRuntimeError, "g_signal_newv failed");
