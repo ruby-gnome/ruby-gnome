@@ -117,6 +117,8 @@ treeview_insert_column(int argc, VALUE *argv, VALUE self)
 
         Check_Type(args[3], T_HASH);
 
+        /* TODO: Should this really be done before we know that everything
+         * below worked without error? */
         G_CHILD_ADD(self, args[2]);
         G_CHILD_ADD(self, args[3]);
 
