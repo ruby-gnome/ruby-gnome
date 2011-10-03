@@ -40,22 +40,63 @@ raction_get_group(VALUE self)
     return GSLIST2ARY(gtk_radio_action_get_group(_SELF(self)));
 }
 
+struct rbgtk_rval2gtkradioactiongslist_args {
+    VALUE ary;
+    long n;
+    GSList *result;
+};
+
 static VALUE
-raction_set_group(VALUE self, VALUE group)
+rbgtk_rval2gtkradioactiongslist_body(VALUE value)
 {
     long i;
-    GSList *glist = NULL;
+    struct rbgtk_rval2gtkradioactiongslist_args *args = (struct rbgtk_rval2gtkradioactiongslist_args *)value;
 
-    if (TYPE(group) == T_ARRAY){
-        for (i = 0; i < RARRAY_LEN(group); i++) {
-            glist = g_slist_append(glist, RVAL2GOBJ(RARRAY_PTR(group)[i]));
-        }
-        gtk_radio_action_set_group(_SELF(group), glist);
-        g_slist_free(glist);
-    } else {
-        glist = gtk_radio_action_get_group(GTK_RADIO_ACTION(RVAL2GOBJ(group)));
-        gtk_radio_action_set_group(_SELF(group), glist);
-    }
+    for (i = 0; i < args->n; i++)
+        args->result = g_slist_append(args->result, GTK_RADIO_ACTION(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+
+    return Qnil;
+}
+
+static VALUE
+rbgtk_rval2gtkradioactiongslist_rescue(VALUE value)
+{
+    g_slist_free(((struct rbgtk_rval2gtkradioactiongslist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GSList *
+rbgtk_rval2gtkradioactiongslist(VALUE value)
+{
+    struct rbgtk_rval2gtkradioactiongslist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgtk_rval2gtkradioactiongslist_body, (VALUE)&args,
+              rbgtk_rval2gtkradioactiongslist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+#define RVAL2GTKRADIOACTIONGSLIST(value) rbgtk_rval2gtkradioactiongslist(value)
+
+static VALUE
+raction_set_group(VALUE self, VALUE rbgroup)
+{
+    GtkRadioAction *action = _SELF(self);
+
+    /* TODO: This might leak.  Use gtk_radio_action_join_group() in 3.0. */
+    if (TYPE(rbgroup) == T_ARRAY)
+        gtk_radio_action_set_group(action, RVAL2GTKRADIOACTIONGSLIST(rbgroup));
+    else if (NIL_P(rbgroup))
+        gtk_radio_action_set_group(action, NULL);
+    else
+        gtk_radio_action_set_group(action,
+                                   gtk_radio_action_get_group(GTK_RADIO_ACTION(RVAL2GOBJ(rbgroup))));
+
     return self;
 }
 
