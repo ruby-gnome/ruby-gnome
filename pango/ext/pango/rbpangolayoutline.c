@@ -158,23 +158,49 @@ layout_line_get_runs(VALUE self)
 }
 #endif
 
+struct layout_line_set_runs_args {
+    PangoLayoutLine *line;
+    VALUE ary;
+    long n;
+    GSList *result;
+};
+
 static VALUE
-layout_line_set_runs(VALUE self, VALUE ary)
+layout_line_set_runs_body(VALUE value)
 {
-    int i, len;
-    GSList* list = NULL;
+    struct layout_line_set_runs_args *args = (struct layout_line_set_runs_args *)value;
+    long i;
 
-    len = RARRAY_LEN(ary);
+    for (i = 0; i < args->n; i++)
+        args->result = g_slist_append(args->result,
+                                      RVAL2BOXED(RARRAY_PTR(args->ary)[i],
+                                                 PANGO_TYPE_GLYPH_ITEM));
 
-    for (i = 0; i < len; i++) {
-        list = g_slist_append(list, RVAL2BOXED(RARRAY_PTR(ary)[i], 
-                                               PANGO_TYPE_GLYPH_ITEM));
-    }
+    g_slist_free(args->line->runs);
+    args->line->runs = args->result;
 
-    if (_SELF(self)->runs) {
-        g_slist_free(_SELF(self)->runs);
-    }
-    _SELF(self)->runs = list;
+    return Qnil;
+}
+
+static VALUE
+layout_line_set_runs_rescue(VALUE value)
+{
+    g_slist_free(((struct layout_line_set_runs_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static VALUE
+layout_line_set_runs(VALUE self, VALUE attrs)
+{
+    struct layout_line_set_runs_args args;
+    args.line = _SELF(self);
+    args.ary = rb_ary_to_ary(attrs);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(layout_line_set_runs_body, (VALUE)&args,
+              layout_line_set_runs_rescue, (VALUE)&args);
 
     return self;
 }
