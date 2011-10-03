@@ -282,6 +282,7 @@ tstore_clear(VALUE self)
     gtk_tree_store_clear(_SELF(self));
     return self;
 }
+
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 tstore_iter_is_valid(VALUE self, VALUE iter)
@@ -289,27 +290,38 @@ tstore_iter_is_valid(VALUE self, VALUE iter)
     return (NIL_P(iter)) ? Qfalse : 
         CBOOL2RVAL(gtk_tree_store_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
+
 static VALUE
-tstore_reorder(VALUE self, VALUE parent, VALUE new_order)
+tstore_reorder(VALUE self, VALUE rbparent, VALUE rbnew_order)
 {
-    gint i;
-    gint len = RARRAY_LEN(new_order);
-    gint* gnew_order = g_new(gint, len);
+    GtkTreeStore *store = _SELF(self);
+    GtkTreeIter *parent = RVAL2GTKTREEITER(rbparent);
+    gint columns = gtk_tree_model_get_n_columns(GTK_TREE_MODEL(store));
+    long n;
+    gint *new_order = RVAL2GINTS(rbnew_order, &n);
 
-    for (i = 0; i < len; i++){
-        gnew_order[i] = NUM2INT(RARRAY_PTR(new_order)[i]);
+    if (n != columns) {
+        g_free(new_order);
+
+        rb_raise(rb_eArgError,
+                 "new order array must contain same number of elements as the number of columns in the store: %ld != %d",
+                 n, columns);
     }
+  
+    gtk_tree_store_reorder(store, parent, new_order);
 
-    gtk_tree_store_reorder(_SELF(self), RVAL2GTKTREEITER(parent), gnew_order);
-    g_free(gnew_order);
+    g_free(new_order);
+
     return self;
 }
+
 static VALUE
 tstore_swap(VALUE self, VALUE iter1, VALUE iter2)
 {
     gtk_tree_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
+
 static VALUE
 tstore_move_before(VALUE self, VALUE iter, VALUE position)
 {
@@ -317,6 +329,7 @@ tstore_move_before(VALUE self, VALUE iter, VALUE position)
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
+
 static VALUE
 tstore_move_after(VALUE self, VALUE iter, VALUE position)
 {

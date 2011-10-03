@@ -16,21 +16,32 @@ static VALUE
 imcsimple_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_im_context_simple_new());
+
     return Qnil;
 }
 
+/* TODO: Why are we taking a third argument?  Shouldn’t it be determined by the
+ * length of rbdata? */
 static VALUE
-imcsimple_add_table(VALUE self, VALUE data, VALUE max_seq_len, VALUE n_seqs)
+imcsimple_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seqs)
 {
-    int i;
-    guint16* gdata = ALLOCA_N(guint16, RARRAY_LEN(data));
-    
-    for (i = 0; i < RARRAY_LEN(data); i++) {
-        gdata[i] = NUM2INT(RARRAY_PTR(data)[i]);
-    }
-    
-    gtk_im_context_simple_add_table(_SELF(self), gdata,
-                                    NUM2INT(max_seq_len), NUM2INT(n_seqs));
+    GtkIMContextSimple *context_simple = _SELF(self);
+    gint max_seq_len = NUM2INT(rbmax_seq_len);
+    gint n_seqs = NUM2INT(rbn_seqs);
+    long n;
+    guint16 *data;
+
+    if (max_seq_len > GTK_MAX_COMPOSE_LEN)
+        rb_raise(rb_eArgError,
+                 "max_seq_len cannot be greater than GTK_MAX_COMPOSE_LEN: %d > %d",
+                 max_seq_len, GTK_MAX_COMPOSE_LEN);
+
+    data = RVAL2GUINT16S(rbdata, &n);
+
+    gtk_im_context_simple_add_table(context_simple, data, max_seq_len, n_seqs);
+
+    g_free(data);
+
     return self;
 }
 

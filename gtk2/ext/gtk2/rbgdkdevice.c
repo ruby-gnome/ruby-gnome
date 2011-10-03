@@ -99,26 +99,26 @@ device_get_history(VALUE self, VALUE window, VALUE start, VALUE stop)
 }
 
 static VALUE
-device_get_axis(VALUE self, VALUE axes, VALUE use)
+device_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
 {
+    GdkDevice *device = _SELF(self);
+    GdkAxisUse use = RVAL2GENUM(rbuse, GDK_TYPE_AXIS_USE);
+    long n;
+    gdouble *axes = RVAL2GDOUBLES(rbaxes, &n);
+    gint device_n_axes = gdk_device_get_n_axes(device);
     gdouble value;
-    gboolean ret;
-    gdouble* gaxes;
-    gint i;
-    gint len = RARRAY_LEN(axes);
+    gboolean found;
 
-    gaxes = g_new(gdouble, len);
+    if (n != device_n_axes)
+        rb_raise(rb_eArgError,
+                 "unexpected number of axes: %ld != %d",
+                 n, device_n_axes);
 
-    for (i = 0; i < len; i++){
-        gaxes[i] = RARRAY_PTR(axes)[i];
-    }
+    found = gdk_device_get_axis(device, axes, use, &value);
 
-    ret = gdk_device_get_axis(_SELF(self), gaxes, RVAL2GENUM(use, GDK_TYPE_AXIS_USE),
-                              &value);
+    g_free(axes);
 
-    g_free(gaxes);
-
-    return ret ? rb_float_new(value) : Qnil;
+    return found ? DBL2NUM(value) : Qnil;
 }
 
 /* Accessor */

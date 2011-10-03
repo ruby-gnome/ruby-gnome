@@ -37,21 +37,28 @@ gdk_timecoord_get_type(void)
 /**********************************/
 
 static VALUE
-timecoord_initialize(VALUE self, VALUE time, VALUE axes)
+timecoord_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
 {
-    GdkTimeCoord coord;
-    int i;
-    coord.time = NUM2UINT(time);
+    guint32 time = NUM2UINT(rbtime);
+    long n;
+    gdouble *axes = RVAL2GDOUBLES(rbaxes, &n);
+    GdkTimeCoord *coord;
 
-    if (RARRAY_LEN(axes) > GDK_MAX_TIMECOORD_AXES){
-        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY_LEN(axes));
+    if (n > GDK_MAX_TIMECOORD_AXES) {
+        g_free(axes);
+
+        rb_raise(rb_eArgError,
+                 "axes out of range: %ld (0..%d)",
+                 n, GDK_MAX_TIMECOORD_AXES);
     }
 
-    for (i = 0; i < RARRAY_LEN(axes); i++){
-        coord.axes[i] = NUM2DBL(RARRAY_PTR(axes)[i]);
-    }
+    coord = g_new(GdkTimeCoord, 1);
+    coord->time = time;
+    MEMCPY(coord->axes, axes, gdouble, n);
 
-    G_INITIALIZE(self, &coord);
+    g_free(axes);
+
+    G_INITIALIZE(self, coord);
 
     return Qnil;
 }
@@ -81,18 +88,21 @@ timecoord_axes(VALUE self)
 }
 
 static VALUE
-timecoord_set_axes(VALUE self, VALUE axes)
+timecoord_set_axes(VALUE self, VALUE rbaxes)
 {
-    int i;
-    GdkTimeCoord* coord = _SELF(self);
+    GdkTimeCoord *coord = _SELF(self);
+    VALUE axes = rb_ary_to_ary(rbaxes);
+    long i;
+    long n = RARRAY_LEN(axes);
 
-    if (RARRAY_LEN(axes) > GDK_MAX_TIMECOORD_AXES){
-        rb_raise(rb_eArgError, "axes: Out of range: %ld", RARRAY_LEN(axes));
-    }
+    if (n < 0 || n > GDK_MAX_TIMECOORD_AXES)
+        rb_raise(rb_eArgError,
+                 "axes out of range: %ld (0..%d)",
+                 n, GDK_MAX_TIMECOORD_AXES);
 
-    for (i = 0; i < RARRAY_LEN(axes); i++){
+    for (i = 0; i < n; i++)
         coord->axes[i] = NUM2DBL(RARRAY_PTR(axes)[i]);
-    }
+
     return self;
 }
 

@@ -46,31 +46,37 @@ rgb_draw_rgb_image(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rgb_draw_indexed_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride, VALUE colors)
+rgb_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
+                       VALUE rbwidth, VALUE rbheight, VALUE rbdither,
+                       VALUE rbbuf, VALUE rbrowstride, VALUE rbcolors)
 {
-    GdkRgbCmap* cmap;
-    guint32* gcolors;
-    gint i, n_colors;
+    GdkDrawable *drawable = RVAL2DRAW(win);
+    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    gint x = NUM2INT(rbx);
+    gint y = NUM2INT(rby);
+    gint width = NUM2INT(rbwidth);
+    gint height = NUM2INT(rbheight);
+    GdkRgbDither dither = RVAL2GENUM(rbdither, GDK_TYPE_RGB_DITHER);
+    const guchar *buf = (const guchar *)RVAL2CSTR(rbbuf);
+    gint rowstride = NUM2INT(rbrowstride);
+    long n;
+    guint32 *colors = RVAL2GUINT32S(rbcolors, &n);
+    GdkRgbCmap *cmap;
 
-    n_colors = RARRAY_LEN(colors);
+    if (n < 0 || n > 255) {
+        g_free(colors);
 
-    if (n_colors > 255)
         rb_raise(rb_eArgError, "colors: out of range (0 - 255)");
-
-    gcolors = g_new(guint32, n_colors);
-    for (i = 0; i < n_colors; i++) {
-        gcolors[i] = NUM2UINT(RARRAY_PTR(colors)[i]);
     }
 
-    cmap = gdk_rgb_cmap_new(gcolors, n_colors);
+    cmap = gdk_rgb_cmap_new(colors, n);
+
+    g_free(colors);
     
-    gdk_draw_indexed_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
-                           NUM2INT(x), NUM2INT(y),
-                           NUM2INT(w), NUM2INT(h),
-                           RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
-                           (guchar*)RVAL2CSTR(buf), 
-                           NUM2INT(rowstride), cmap);
+    gdk_draw_indexed_image(drawable, gc, x, y, width, height, dither, buf, rowstride, cmap);
+
     gdk_rgb_cmap_free(cmap);
+
     return self;
 }
 

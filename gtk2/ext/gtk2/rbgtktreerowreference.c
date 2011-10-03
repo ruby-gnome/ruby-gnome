@@ -115,22 +115,31 @@ treerowref_s_deleted(VALUE self, VALUE proxy, VALUE path)
 }
 
 static VALUE
-treerowref_s_reordered(VALUE self, VALUE proxy, VALUE path, VALUE iter, VALUE new_orders)
+treerowref_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VALUE rbnew_order)
 {
-    gint i, len;
-    gint* orders;
+    GObject *proxy = RVAL2GOBJ(rbproxy);
+    GtkTreePath *path = RVAL2GTKTREEPATH(rbpath);
+    GtkTreeIter *iter = RVAL2GTKTREEITER(rbiter);
+    /* TODO: How do we implement this check?
+    gint columns = gtk_tree_model_get_n_columns(proxy);
+    */
+    long n;
+    gint *new_order = RVAL2GINTS(rbnew_order, &n);
 
-    Check_Type(new_orders, T_ARRAY);
+    /*
+    if (n != columns) {
+        g_free(new_order);
 
-    len = RARRAY_LEN(new_orders);
-    orders = ALLOCA_N(gint, len);
-
-    for (i = 0; i < len; i++) {
-        orders[i] = RARRAY_PTR(new_orders)[i];
+        rb_raise(rb_eArgError,
+                 "new order array must contain same number of elements as the number of columns in the store: %ld != %d",
+                 n, columns);
     }
+    */
   
-    gtk_tree_row_reference_reordered(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path), 
-                                     RVAL2GTKTREEITER(iter), orders);
+    gtk_tree_row_reference_reordered(proxy, path, iter, new_order);
+
+    g_free(new_order);
+
     return self;
 }
 

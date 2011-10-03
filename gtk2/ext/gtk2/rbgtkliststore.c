@@ -321,18 +321,16 @@ lstore_iter_is_valid(VALUE self, VALUE iter)
 }
 
 static VALUE
-lstore_reorder(VALUE self, VALUE new_order)
+lstore_reorder(VALUE self, VALUE rbnew_order)
 {
-    gint i;
-    gint len = RARRAY_LEN(new_order);
-    gint* gnew_order = g_new(gint, len);
+    GtkListStore *store = _SELF(self);
+    long n;
+    gint *new_order = RVAL2GINTS(rbnew_order, &n);
 
-    for (i = 0; i < len; i++){
-        gnew_order[i] = NUM2INT(RARRAY_PTR(new_order)[i]);
-    }
+    gtk_list_store_reorder(store, new_order);
 
-    gtk_list_store_reorder(_SELF(self), gnew_order);
-    g_free(gnew_order);
+    g_free(new_order);
+
     return self;
 }
 static VALUE

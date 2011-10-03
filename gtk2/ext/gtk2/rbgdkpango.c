@@ -65,36 +65,51 @@ gdkpango_attr_stipple_value(VALUE self)
 }
 
 static VALUE
-gdkpango_layout_get_clip_region(VALUE self, VALUE x_origin, VALUE y_origin, VALUE index_ranges)
+gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, VALUE rbindex_ranges)
 {
-    int i;
-    gint len = RARRAY_LEN(index_ranges);
-    gint* ranges = g_new(gint, len);
+    PangoLayout *layout = PANGO_LAYOUT(RVAL2GOBJ(self));
+    gint x_origin = NUM2INT(rbx_origin);
+    gint y_origin = NUM2INT(rby_origin);
+    long n;
+    gint *index_ranges = RVAL2GINTS(rbindex_ranges, &n);
+    GdkRegion *result;
 
-    for (i = 0; i < len; i++) {
-        ranges[i] = RARRAY_PTR(index_ranges)[i];
+    if (n % 2 != 0) {
+        g_free(index_ranges);
+
+        rb_raise(rb_eArgError,
+                 "an even number of byte indexes must be given");
     }
-    return BOXED2RVAL(gdk_pango_layout_get_clip_region(PANGO_LAYOUT(RVAL2GOBJ(self)),
-                                                       NUM2INT(x_origin),
-                                                       NUM2INT(y_origin),
-                                                       ranges, len), GDK_TYPE_REGION);
+
+    result = gdk_pango_layout_get_clip_region(layout, x_origin, y_origin, index_ranges, n / 2);
+
+    g_free(index_ranges);
+
+    return BOXED2RVAL(result, GDK_TYPE_REGION);
 }
 
 static VALUE
-gdkpango_layout_line_get_clip_region(VALUE self, VALUE x_origin, VALUE y_origin, VALUE index_ranges)
+gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, VALUE rbindex_ranges)
 {
-    int i;
-    gint len = RARRAY_LEN(index_ranges);
-    gint* ranges = g_new(gint, len);
+    PangoLayoutLine *line = (PangoLayoutLine *)RVAL2BOXED(self, PANGO_TYPE_LAYOUT_LINE);
+    gint x_origin = NUM2INT(rbx_origin);
+    gint y_origin = NUM2INT(rby_origin);
+    long n;
+    gint *index_ranges = RVAL2GINTS(rbindex_ranges, &n);
+    GdkRegion *result;
 
-    for (i = 0; i < len; i++) {
-        ranges[i] = RARRAY_PTR(index_ranges)[i];
+    if (n % 2 != 0) {
+        g_free(index_ranges);
+
+        rb_raise(rb_eArgError,
+                 "an even number of byte indexes must be given");
     }
-    return BOXED2RVAL(gdk_pango_layout_line_get_clip_region(
-                          (PangoLayoutLine*)RVAL2BOXED(self, PANGO_TYPE_LAYOUT_LINE),
-                          NUM2INT(x_origin),
-                          NUM2INT(y_origin),
-                          ranges, len), GDK_TYPE_REGION);
+
+    result = gdk_pango_layout_line_get_clip_region(line, x_origin, y_origin, index_ranges, n / 2);
+
+    g_free(index_ranges);
+
+    return BOXED2RVAL(result, GDK_TYPE_REGION);
 }
 
 #if GTK_CHECK_VERSION(2, 12, 0)

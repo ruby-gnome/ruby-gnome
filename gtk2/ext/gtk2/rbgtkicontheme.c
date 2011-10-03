@@ -44,39 +44,27 @@ it_set_screen(VALUE self, VALUE screen)
 }
 
 static VALUE
-it_set_search_path(VALUE self, VALUE paths)
+it_set_search_path(VALUE self, VALUE rbpath)
 {
-    gchar** gpaths;
-    gint size, i;
+    GtkIconTheme *theme = _SELF(self);
+    long n;
+    const gchar **path = RVAL2STRS(rbpath, &n);
 
-    Check_Type(paths, T_ARRAY);
-    
-    size = RARRAY_LEN(paths);
-    gpaths = g_new(gchar*, size);
+    gtk_icon_theme_set_search_path(theme, path, n);
 
-    for (i = 0; i < size; i++) { 
-        gpaths[i] = (gchar*)(RARRAY_PTR(paths)[0]);
-    }
-    gtk_icon_theme_set_search_path(_SELF(self), (const gchar**)gpaths, size);
-    g_free(gpaths);
+    g_free(path);
+
     return self;
 }
 
 static VALUE
 it_get_search_path(VALUE self)
 {
-    gchar** path;
-    gint size, i;
+    gchar **path;
 
-    
-    VALUE ret = rb_ary_new();
-    gtk_icon_theme_get_search_path(_SELF(self), &path, &size);
+    gtk_icon_theme_get_search_path(_SELF(self), &path, NULL);
 
-    for (i = 0; i < size; i++){
-        rb_ary_push(ret, CSTR2RVAL(path[i]));
-    }
-    g_strfreev(path);
-    return ret;
+    return STRV2RVAL_FREE(path);
 }
 
 static VALUE

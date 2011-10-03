@@ -147,18 +147,16 @@ void        gtk_dialog_set_alternative_button_order
 */
 
 static VALUE
-dialog_set_alternative_button_order(VALUE self, VALUE new_order)
+dialog_set_alternative_button_order(VALUE self, VALUE rbnew_order)
 {
-    gint i;
-    gint len = RARRAY_LEN(new_order);
-    gint* gnew_order = g_new(gint, len);
+    GtkDialog *dialog = _SELF(self);
+    long n;
+    gint *new_order = RVAL2GINTS(rbnew_order, &n);
 
-    for (i = 0; i < len; i++){
-        gnew_order[i] = NUM2INT(RARRAY_PTR(new_order)[i]);
-    }
+    gtk_dialog_set_alternative_button_order_from_array(dialog, n, new_order);
 
-    gtk_dialog_set_alternative_button_order_from_array(_SELF(self), len, gnew_order);
-    g_free(gnew_order);
+    g_free(new_order);
+
     return self;
 }
 

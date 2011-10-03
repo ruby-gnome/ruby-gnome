@@ -159,20 +159,16 @@ gdkgc_set_line_attributes(VALUE self, VALUE line_width, VALUE line_style, VALUE 
 }
 
 static VALUE
-gdkgc_set_dashes(VALUE self, VALUE dash_offset, VALUE dash_list)
+gdkgc_set_dashes(VALUE self, VALUE rbdash_offset, VALUE rbdash_list)
 {
-    gint8 *buf;
-    int   i;
+    GdkGC *gc = _SELF(self);
+    gint dash_offset = NUM2INT(rbdash_offset);
+    long n;
+    gint8 *dash_list = RVAL2GINT8S(rbdash_list, &n);
 
-    Check_Type(dash_list, T_ARRAY);
+    gdk_gc_set_dashes(gc, dash_offset, dash_list, n);
 
-    buf = ALLOCA_N(gint8, RARRAY_LEN(dash_list));
-    for (i = 0; i < RARRAY_LEN(dash_list); i++) {
-        Check_Type(RARRAY_PTR(dash_list)[i], T_FIXNUM);
-        buf[i] = (gint8)NUM2CHR(RARRAY_PTR(dash_list)[i]);
-    }
-    gdk_gc_set_dashes(_SELF(self), NUM2INT(dash_offset),
-                      (gint8*)buf, RARRAY_LEN(dash_list));
+    g_free(dash_list);
 
     return self;
 }
