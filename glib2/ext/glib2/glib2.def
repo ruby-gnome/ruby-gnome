@@ -76,6 +76,12 @@ EXPORTS
         rbg_rval2strv_dup_accept_nil
         rbg_strv2rval
         rbg_strv2rval_free
+        rbg_rval2gbooleans
+        rbg_rval2gints
+        rbg_rval2gint8s
+        rbg_rval2guint16s
+        rbg_rval2guint32s
+        rbg_rval2gdoubles
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
 	rbgutil_glist2ary

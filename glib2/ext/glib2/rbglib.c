@@ -294,7 +294,7 @@ rbg_filename_gslist_to_array_free(GSList *list)
 struct rval2strv_args {
     VALUE ary;
     long n;
-    const gchar **strings;
+    const gchar **result;
 };
 
 static VALUE
@@ -304,8 +304,8 @@ rbg_rval2strv_body(VALUE value)
     struct rval2strv_args *args = (struct rval2strv_args *)value;
 
     for (i = 0; i < args->n; i++)
-            args->strings[i] = RVAL2CSTR(RARRAY_PTR(args->ary)[i]);
-    args->strings[args->n] = NULL;
+        args->result[i] = RVAL2CSTR(RARRAY_PTR(args->ary)[i]);
+    args->result[args->n] = NULL;
 
     return Qnil;
 }
@@ -313,38 +313,45 @@ rbg_rval2strv_body(VALUE value)
 static VALUE
 rbg_rval2strv_rescue(VALUE value)
 {
-    struct rval2strv_args *args = (struct rval2strv_args *)value;
-
-    g_free(args->strings);
+    g_free(((struct rval2strv_args *)value)->result);
 
     rb_exc_raise(rb_errinfo());
 }
 
 const gchar **
-rbg_rval2strv(VALUE value)
+rbg_rval2strv(VALUE value, long *n)
 {
     struct rval2strv_args args;
 
     args.ary = rb_ary_to_ary(value);
     args.n = RARRAY_LEN(args.ary);
-    args.strings = g_new(const gchar *, args.n + 1);
+    args.result = g_new(const gchar *, args.n + 1);
 
     rb_rescue(rbg_rval2strv_body, (VALUE)&args,
               rbg_rval2strv_rescue, (VALUE)&args);
 
-    return args.strings;
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
 }
 
 const gchar **
-rbg_rval2strv_accept_nil(VALUE ary)
+rbg_rval2strv_accept_nil(VALUE ary, long *n)
 {
-    return NIL_P(ary) ? NULL : rbg_rval2strv(ary);
+    if (!NIL_P(ary))
+        rbg_rval2strv(ary, n);
+
+    if (n != NULL)
+        *n = 0;
+
+    return NULL;
 }
 
 struct rval2strv_dup_args {
     VALUE ary;
     long n;
-    gchar **strings;
+    gchar **result;
 };
 
 static VALUE
@@ -354,8 +361,8 @@ rbg_rval2strv_dup_body(VALUE value)
     struct rval2strv_dup_args *args = (struct rval2strv_dup_args *)value;
 
     for (i = 0; i < args->n; i++)
-            args->strings[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(args->ary)[i]));
-    args->strings[args->n] = NULL;
+        args->result[i] = g_strdup(RVAL2CSTR(RARRAY_PTR(args->ary)[i]));
+    args->result[args->n] = NULL;
 
     return Qnil;
 }
@@ -363,32 +370,39 @@ rbg_rval2strv_dup_body(VALUE value)
 static VALUE
 rbg_rval2strv_dup_rescue(VALUE value)
 {
-    struct rval2strv_dup_args *args = (struct rval2strv_dup_args *)value;
-
-    g_free(args->strings);
+    g_free(((struct rval2strv_dup_args *)value)->result);
 
     rb_exc_raise(rb_errinfo());
 }
 
 gchar **
-rbg_rval2strv_dup(VALUE value)
+rbg_rval2strv_dup(VALUE value, long *n)
 {
     struct rval2strv_dup_args args;
 
     args.ary = rb_ary_to_ary(value);
     args.n = RARRAY_LEN(args.ary);
-    args.strings = g_new(gchar *, args.n + 1);
+    args.result = g_new(gchar *, args.n + 1);
 
     rb_rescue(rbg_rval2strv_dup_body, (VALUE)&args,
               rbg_rval2strv_dup_rescue, (VALUE)&args);
 
-    return args.strings;
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
 }
 
 gchar **
-rbg_rval2strv_dup_accept_nil(VALUE ary)
+rbg_rval2strv_dup_accept_nil(VALUE ary, long *n)
 {
-    return NIL_P(ary) ? NULL : rbg_rval2strv_dup(ary);
+    if (!NIL_P(ary))
+        rbg_rval2strv_dup(ary, n);
+
+    if (n != NULL)
+        *n = 0;
+
+    return NULL;
 }
 
 VALUE
@@ -426,6 +440,264 @@ rbg_strv2rval_free(gchar **strings)
 {
     return rb_ensure(rbg_strv2rval_free_body, (VALUE)strings,
                      rbg_strv2rval_free_ensure, (VALUE)strings);
+}
+
+struct rbg_rval2gbooleans_args {
+    VALUE ary;
+    long n;
+    gboolean *result;
+};
+
+static VALUE
+rbg_rval2gbooleans_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2gbooleans_args *args = (struct rbg_rval2gbooleans_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = RVAL2CBOOL(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gbooleans_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gbooleans_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+gboolean *
+rbg_rval2gbooleans(VALUE value, long *n)
+{
+    struct rbg_rval2gbooleans_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(gboolean, args.n + 1);
+
+    rb_rescue(rbg_rval2gbooleans_body, (VALUE)&args,
+              rbg_rval2gbooleans_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+struct rbg_rval2gints_args {
+    VALUE ary;
+    long n;
+    gint *result;
+};
+
+static VALUE
+rbg_rval2gints_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2gints_args *args = (struct rbg_rval2gints_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = NUM2INT(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gints_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gints_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+gint *
+rbg_rval2gints(VALUE value, long *n)
+{
+    struct rbg_rval2gints_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(gint, args.n + 1);
+
+    rb_rescue(rbg_rval2gints_body, (VALUE)&args,
+              rbg_rval2gints_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+struct rbg_rval2gint8s_args {
+    VALUE ary;
+    long n;
+    gint8 *result;
+};
+
+static VALUE
+rbg_rval2gint8s_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2gint8s_args *args = (struct rbg_rval2gint8s_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = NUM2CHR(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gint8s_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gint8s_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+gint8 *
+rbg_rval2gint8s(VALUE value, long *n)
+{
+    struct rbg_rval2gint8s_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(gint8, args.n + 1);
+
+    rb_rescue(rbg_rval2gint8s_body, (VALUE)&args,
+              rbg_rval2gint8s_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+struct rbg_rval2guint16s_args {
+    VALUE ary;
+    long n;
+    guint16 *result;
+};
+
+static VALUE
+rbg_rval2guint16s_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2guint16s_args *args = (struct rbg_rval2guint16s_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = NUM2UINT(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2guint16s_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2guint16s_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+guint16 *
+rbg_rval2guint16s(VALUE value, long *n)
+{
+    struct rbg_rval2guint16s_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(guint16, args.n + 1);
+
+    rb_rescue(rbg_rval2guint16s_body, (VALUE)&args,
+              rbg_rval2guint16s_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+struct rbg_rval2guint32s_args {
+    VALUE ary;
+    long n;
+    guint32 *result;
+};
+
+static VALUE
+rbg_rval2guint32s_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2guint32s_args *args = (struct rbg_rval2guint32s_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = NUM2UINT(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2guint32s_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2guint32s_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+guint32 *
+rbg_rval2guint32s(VALUE value, long *n)
+{
+    struct rbg_rval2guint32s_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(guint32, args.n + 1);
+
+    rb_rescue(rbg_rval2guint32s_body, (VALUE)&args,
+              rbg_rval2guint32s_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+struct rbg_rval2gdoubles_args {
+    VALUE ary;
+    long n;
+    gdouble *result;
+};
+
+static VALUE
+rbg_rval2gdoubles_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2gdoubles_args *args = (struct rbg_rval2gdoubles_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = NUM2DBL(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gdoubles_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gdoubles_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+gdouble *
+rbg_rval2gdoubles(VALUE value, long *n)
+{
+    struct rbg_rval2gdoubles_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(gdouble, args.n + 1);
+
+    rb_rescue(rbg_rval2gdoubles_body, (VALUE)&args,
+              rbg_rval2gdoubles_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
 }
 
 #if 0
