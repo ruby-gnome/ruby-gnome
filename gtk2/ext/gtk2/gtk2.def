@@ -23,6 +23,8 @@ EXPORTS
     notebookpage_copy
     rbgtk_atom2selectiondata
     rbgtk_atom2selectiondata_free
+    rbgtk_rval2gtktargetentries
+    rbgtk_rval2gtktargetentries_accept_nil
     rbgtk_get_target_entry
     rbgtk_initialize_gtkobject
     rbgtk_register_treeiter_set_value_func

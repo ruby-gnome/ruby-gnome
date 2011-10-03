@@ -97,7 +97,12 @@ extern void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data);
 /*
  * Gtk::Drag
  */
-extern GtkTargetEntry* rbgtk_get_target_entry(VALUE targets);
+#define RVAL2GTKTARGETENTRIES(value, n) rbgtk_rval2gtktargetentries(value, n)
+extern GtkTargetEntry *rbgtk_rval2gtktargetentries(VALUE value, long *n);
+#define RVAL2GTKTARGETENTRIES_ACCEPT_NIL(value, n) rbgtk_rval2gtktargetentries_accept_nil(value, n)
+GtkTargetEntry *rbgtk_rval2gtktargetentries_accept_nil(VALUE value, long *n);
+/* Only for backwards compatibility. */
+GtkTargetEntry *rbgtk_get_target_entry(VALUE targets);
 
 /*
  * Gtk::Container

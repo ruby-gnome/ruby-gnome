@@ -15,52 +15,88 @@
 #define RVAL2DC(c) (GDK_DRAG_CONTEXT(RVAL2GOBJ(c)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
-GtkTargetEntry*
-rbgtk_get_target_entry(VALUE targets)
-{
+struct rbgtk_rval2gtktargetentries_args {
     VALUE ary;
-    VALUE e_target, e_flags, e_info;
-    GtkTargetEntry *entries;
-    int i, n_targets;
-    
-    if (NIL_P(targets)) return NULL;
-    Check_Type(targets, T_ARRAY);
-    
-    n_targets = RARRAY_LEN(targets);
-    entries = ALLOC_N(GtkTargetEntry, n_targets);
-    
-    for (i = 0; i < n_targets; i++) {
-        ary = rb_ary_entry(targets, i);
-        Check_Type(ary, T_ARRAY);
-        e_target = rb_ary_entry(ary, 0);
-        e_flags = rb_ary_entry(ary, 1);
-        e_info = rb_ary_entry(ary, 2);
-        
-        entries[i].target = NIL_P(e_target) ? NULL : (char *)RVAL2CSTR(e_target);
-        entries[i].flags = NIL_P(e_flags) ? 0 : RVAL2GFLAGS(e_flags, GTK_TYPE_TARGET_FLAGS);
-        entries[i].info = NIL_P(e_info) ? 0 : NUM2INT(e_info);
+    long n;
+    GtkTargetEntry *result;
+};
 
+static VALUE
+rbgtk_rval2gtktargetentries_body(VALUE value)
+{
+    long i;
+    struct rbgtk_rval2gtktargetentries_args *args = (struct rbgtk_rval2gtktargetentries_args *)value;
+
+    for (i = 0; i < args->n; i++) {
+        VALUE entry = rb_ary_to_ary(RARRAY_PTR(args->ary)[i]);
+        VALUE flags = RARRAY_PTR(entry)[1];
+        VALUE info = RARRAY_PTR(entry)[2];
+
+        args->result[i].target = (gchar *)RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
+        args->result[i].flags = NIL_P(flags) ? 0 : RVAL2GFLAGS(flags, GTK_TYPE_TARGET_FLAGS);
+        args->result[i].info = NIL_P(info) ? 0 : NUM2INT(info);
     }
-    return entries;
+
+    return Qnil;
 }
 
 static VALUE
-gtkdrag_dest_set(VALUE self, VALUE widget, VALUE flags, VALUE targets, VALUE actions)
+rbgtk_rval2gtktargetentries_rescue(VALUE value)
 {
-    int num;
-    GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
-    if (entries){
-        num = RARRAY_LEN(targets);
-        
-        gtk_drag_dest_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GTK_TYPE_DEST_DEFAULTS), 
-                          entries, 
-                          num, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
-    }
-    else
-    {
-        gtk_drag_dest_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GTK_TYPE_DEST_DEFAULTS), 
-                          NULL, 0, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
-    }
+    g_free(((struct rbgtk_rval2gtktargetentries_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+GtkTargetEntry *
+rbgtk_rval2gtktargetentries(VALUE value, long *n)
+{
+    struct rbgtk_rval2gtktargetentries_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GtkTargetEntry, args.n + 1);
+
+    rb_rescue(rbgtk_rval2gtktargetentries_body, (VALUE)&args,
+              rbgtk_rval2gtktargetentries_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+GtkTargetEntry *
+rbgtk_rval2gtktargetentries_accept_nil(VALUE value, long *n)
+{
+    if (!NIL_P(value))
+        return rbgtk_rval2gtktargetentries(value, n);
+
+    *n = 0;
+
+    return NULL;
+}
+
+GtkTargetEntry *
+rbgtk_get_target_entry(VALUE targets)
+{
+    long n;
+
+    return RVAL2GTKTARGETENTRIES(targets, &n);
+}
+
+static VALUE
+gtkdrag_dest_set(VALUE self, VALUE rbwidget, VALUE rbflags, VALUE rbtargets, VALUE rbactions)
+{
+    GtkWidget *widget = RVAL2WIDGET(rbwidget);
+    GtkDestDefaults flags = RVAL2GFLAGS(rbflags, GTK_TYPE_DEST_DEFAULTS);
+    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(rbtargets, &n);
+
+    gtk_drag_dest_set(widget, flags, targets, n, actions);
+
+    g_free(targets);
+
     return self;
 }
 
@@ -252,12 +288,18 @@ gtkdrag_check_threshold(VALUE self, VALUE widget, VALUE start_x, VALUE start_y, 
 }
 
 static VALUE
-gtkdrag_source_set(VALUE self, VALUE widget, VALUE flags, VALUE targets, VALUE actions)
+gtkdrag_source_set(VALUE self, VALUE rbwidget, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
-    gtk_drag_source_set(RVAL2WIDGET(widget), RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
-                        rbgtk_get_target_entry(targets), 
-                        RARRAY_LEN(targets), 
-                        RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    GtkWidget *widget = RVAL2WIDGET(rbwidget);
+    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
+    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
+
+    gtk_drag_source_set(widget, start_button_mask, targets, n, actions);
+
+    g_free(targets);
+
     return self;
 }
 
