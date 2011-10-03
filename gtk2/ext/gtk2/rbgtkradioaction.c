@@ -128,7 +128,7 @@ Init_gtk_radio_action()
     rb_define_method(gRadioAction, "current_value", raction_get_current_value, 0);
 #endif
     G_REPLACE_GET_PROPERTY(gRadioAction, "group", raction_get_group, 0);
-    G_REPLACE_SET_PROPERTY(gRadioAction, "group", raction_get_group, 1);
+    G_REPLACE_SET_PROPERTY(gRadioAction, "group", raction_set_group, 1);
 #endif
 }
 
