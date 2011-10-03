@@ -253,31 +253,76 @@ gdkdraw_draw_poly(VALUE self, VALUE rbgc, VALUE rbfilled, VALUE rbpoints)
 /*
   trapezoids = [[y1, x11, x21, y2, x12, x22], ...]
  */
+struct rbgdk_rval2gdktrapezoids_args {
+    VALUE ary;
+    long n;
+    GdkTrapezoid *result;
+};
+
 static VALUE
-gdkdraw_draw_trapezoids(VALUE self, VALUE gc, VALUE trapezoids)
+rbgdk_rval2gdktrapezoids_body(VALUE value)
 {
-    GdkTrapezoid *gtrapezoids;
-    gint i, len;
+    long i;
+    struct rbgdk_rval2gdktrapezoids_args *args = (struct rbgdk_rval2gdktrapezoids_args *)value;
 
-    Check_Type(trapezoids, T_ARRAY);
+    for (i = 0; i < args->n; i++) {
+        VALUE trapezoids = rb_ary_to_ary(RARRAY_PTR(args->ary)[i]);
 
-    len = RARRAY_LEN(trapezoids);
+        if (RARRAY_LEN(trapezoids) != 6)
+            rb_raise(rb_eArgError, "trapezoid %ld should be array of size 6", i);
 
-    gtrapezoids = ALLOCA_N(GdkTrapezoid, len);
-    for (i = 0; i < len; i++) {
-        Check_Type(RARRAY_PTR(trapezoids)[i], T_ARRAY);
-        if (RARRAY_LEN(RARRAY_PTR(trapezoids)[i]) < 6) {
-            rb_raise(rb_eArgError, "trapezoids %d should be array of size 6", i);
-        }
-        gtrapezoids[i].y1 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[0]);
-        gtrapezoids[i].x11 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[1]);
-        gtrapezoids[i].x21 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[2]);
-        gtrapezoids[i].y2 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[3]);
-        gtrapezoids[i].x12 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[4]);
-        gtrapezoids[i].x22 = NUM2DBL(RARRAY_PTR(RARRAY_PTR(trapezoids)[i])[5]);
+        args->result[i].y1 = NUM2DBL(RARRAY_PTR(trapezoids)[0]);
+        args->result[i].x11 = NUM2DBL(RARRAY_PTR(trapezoids)[1]);
+        args->result[i].x21 = NUM2DBL(RARRAY_PTR(trapezoids)[2]);
+        args->result[i].y2 = NUM2DBL(RARRAY_PTR(trapezoids)[3]);
+        args->result[i].x12 = NUM2DBL(RARRAY_PTR(trapezoids)[4]);
+        args->result[i].x22 = NUM2DBL(RARRAY_PTR(trapezoids)[5]);
     }
-    gdk_draw_trapezoids(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), gtrapezoids, len);
-    return self; 
+
+    return Qnil;
+}
+
+static VALUE
+rbgdk_rval2gdktrapezoids_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdktrapezoids_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GdkTrapezoid *
+rbgdk_rval2gdktrapezoids(VALUE value, long *n)
+{
+    struct rbgdk_rval2gdktrapezoids_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GdkTrapezoid, args.n + 1);
+
+    rb_rescue(rbgdk_rval2gdktrapezoids_body, (VALUE)&args,
+              rbgdk_rval2gdktrapezoids_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GDKTRAPEZOIDS(value, n) rbgdk_rval2gdktrapezoids(value, n)
+
+static VALUE
+gdkdraw_draw_trapezoids(VALUE self, VALUE rbgc, VALUE rbtrapezoids)
+{
+    GdkDrawable *drawable = _SELF(self);
+    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    long n;
+    GdkTrapezoid *trapezoids = RVAL2GDKTRAPEZOIDS(rbtrapezoids, &n);
+
+    gdk_draw_trapezoids(drawable, gc, trapezoids, n);
+
+    g_free(trapezoids);
+
+    return self;
 }
 #endif
 
