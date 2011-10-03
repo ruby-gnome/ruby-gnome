@@ -130,18 +130,47 @@ ana_get_language(VALUE self)
     return BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
 }
 
+struct ana_set_extra_attrs_args {
+    PangoAnalysis *analysis;
+    VALUE ary;
+    long n;
+    GSList *result;
+};
+
+static VALUE
+ana_set_extra_attrs_body(VALUE value)
+{
+    struct ana_set_extra_attrs_args *args = (struct ana_set_extra_attrs_args *)value;
+    long i;
+
+    for (i = 0; i < args->n; i++)
+        args->result = g_slist_append(args->result, RVAL2ATTR(RARRAY_PTR(args->ary)[i]));
+
+    args->analysis->extra_attrs = args->result;
+
+    return Qnil;
+}
+
+static VALUE
+ana_set_extra_attrs_rescue(VALUE value)
+{
+    g_slist_free(((struct ana_set_extra_attrs_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
 static VALUE
 ana_set_extra_attrs(VALUE self, VALUE attrs)
 {
-    gint i;
-    gint len = RARRAY_LEN(attrs);
-    GSList* gattrs = NULL;
+    struct ana_set_extra_attrs_args args;
+    args.analysis = _SELF(self);
+    args.ary = rb_ary_to_ary(attrs);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
 
-    for (i = 0; i < len; i++){
-        gattrs = g_slist_append(gattrs, RVAL2ATTR(RARRAY_PTR(attrs)[i]));
-    }
+    rb_rescue(ana_set_extra_attrs_body, (VALUE)&args,
+              ana_set_extra_attrs_rescue, (VALUE)&args);
 
-    _SELF(self)->extra_attrs = gattrs;
     return self;
 }
 
