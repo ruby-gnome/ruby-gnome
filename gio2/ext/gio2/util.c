@@ -117,23 +117,45 @@ rbgio_fds_to_ary_free(gint *fds)
                          rbgio_fds_to_ary_free_ensure, (VALUE)fds);
 }
 
-GList *
-rbgio_gfile_ary_to_glist(VALUE ary)
+struct rbgio_gfile_ary_to_glist_args {
+    VALUE ary;
+    long n;
+    GList *result;
+};
+
+static VALUE
+rbgio_gfile_ary_to_glist_body(VALUE value)
 {
-        int i, n;
-        volatile GFile *file;
-        GList *list = NULL;
+    long i;
+    struct rbgio_gfile_ary_to_glist_args *args = (struct rbgio_gfile_ary_to_glist_args *)value;
 
-        ary = rb_ary_to_ary(ary);
-        n = RARRAY_LEN(ary);
+    for (i = 0; i < args->n; i++)
+            args->result = g_list_append(args->result, RVAL2GFILE(RARRAY_PTR(args->ary)[i]));
 
-        for (i = 0; i < n; i++)
-                file = RVAL2GFILE(RARRAY_PTR(ary)[i]);
+    return Qnil;
+}
 
-        for (i = 0; i < n; i++)
-                list = g_list_append(list, RVAL2GFILE(RARRAY_PTR(ary)[i]));
+static G_GNUC_NORETURN VALUE
+rbgio_gfile_ary_to_glist_rescue(VALUE value)
+{
+    g_list_free(((struct rbgio_gfile_ary_to_glist_args *)value)->result);
 
-        return list;
+    rb_exc_raise(rb_errinfo());
+}
+
+GList *
+rbgio_gfile_ary_to_glist(VALUE value)
+{
+    struct rbgio_gfile_ary_to_glist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgio_gfile_ary_to_glist_body, (VALUE)&args,
+              rbgio_gfile_ary_to_glist_rescue, (VALUE)&args);
+
+    return args.result;
 }
 
 GList *
@@ -163,39 +185,6 @@ rbgio_rval_to_gtimeval(VALUE value, GTimeVal *time)
                 time->tv_sec = RVAL2GLONG(value);
                 time->tv_usec = 0;
         }
-}
-
-VALUE
-rbgio_str_vector_to_ary(const gchar * const *vector)
-{
-        int i, n;
-        VALUE ary;
-
-        if (vector == NULL)
-             return Qnil;
- 
-        for (i = n = 0; vector[i] != NULL; i++)
-                n++;
-        ary = rb_ary_new2(n);
-        for (i = 0; i < n; i++)
-                RARRAY_PTR(ary)[i] = CSTR2RVAL(vector[i]);
-
-        return ary;
-}
-
-static VALUE
-rbgio_str_vector_to_ary_free_ensure(gchar **vector)
-{
-        g_strfreev(vector);
-
-        return Qnil;
-}
-
-VALUE
-rbgio_str_vector_to_ary_free(gchar **vector)
-{
-        return rb_ensure(rbgio_str_vector_to_ary, (VALUE)vector,
-                         rbgio_str_vector_to_ary_free_ensure, (VALUE)vector);
 }
 
 struct async_ready_callback_data
