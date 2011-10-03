@@ -49,7 +49,9 @@ unless win32
 end
 PKGConfig.have_package('gobject-2.0') or exit 1
 
-have_func('rb_exec_recursive')
+ruby_header = 'ruby.h'
+have_func 'rb_exec_recursive', ruby_header
+have_func 'rb_errinfo', ruby_header
 
 def try_compiler_option(opt, &block)
   checking_for "#{opt} option to compiler" do

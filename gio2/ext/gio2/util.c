@@ -20,10 +20,17 @@
 
 #include "gio2.h"
 
+
+#ifndef HAVE_RB_ERRINFO
+#  define rb_errinfo() (ruby_errinfo)
+#endif
+
+
 static ID s_id_enum_name;
 static ID s_id_errors;
 
 static VALUE s_errors;
+
 
 VALUE
 rbgio_cstr_to_rval_tainted(const char *string, gsize length)
