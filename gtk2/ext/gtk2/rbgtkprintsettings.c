@@ -500,21 +500,70 @@ ps_get_page_ranges(VALUE self)
     return rb_ranges;
 }
 
-static VALUE
-ps_set_page_ranges(VALUE self, VALUE rb_page_ranges)
-{
-    GtkPageRange *page_ranges;
-    gint i, num_ranges;
+struct rbgtk_rval2gtkpageranges_args {
+    VALUE ary;
+    long n;
+    GtkPageRange *result;
+};
 
-    num_ranges = RARRAY_LEN(rb_page_ranges);
-    page_ranges = ALLOCA_N(GtkPageRange, num_ranges);
-    for (i = 0; i < num_ranges; i++) {
-        VALUE page_range;
-        page_range = RARRAY_PTR(rb_page_ranges)[i];
-        page_ranges[i].start = NUM2INT(RARRAY_PTR(page_range)[0]);
-        page_ranges[i].end = NUM2INT(RARRAY_PTR(page_range)[1]);
+static VALUE
+rbgtk_rval2gtkpageranges_body(VALUE value)
+{
+    long i;
+    struct rbgtk_rval2gtkpageranges_args *args = (struct rbgtk_rval2gtkpageranges_args *)value;
+
+    for (i = 0; i < args->n; i++) {
+        VALUE ary = rb_ary_to_ary(RARRAY_PTR(args->ary)[i]);
+
+        if (RARRAY_LEN(ary) != 2)
+            rb_raise(rb_eArgError, "range %ld should be array of size 2", i);
+
+        args->result[i].start = NUM2INT(RARRAY_PTR(ary)[0]);
+        args->result[i].end = NUM2INT(RARRAY_PTR(ary)[1]);
     }
-    gtk_print_settings_set_page_ranges(_SELF(self), page_ranges, num_ranges);
+
+    return Qnil;
+}
+
+static VALUE
+rbgtk_rval2gtkpageranges_rescue(VALUE value)
+{
+    g_free(((struct rbgtk_rval2gtkpageranges_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GtkPageRange *
+rbgtk_rval2gtkpageranges(VALUE value, long *n)
+{
+    struct rbgtk_rval2gtkpageranges_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GtkPageRange, args.n + 1);
+
+    rb_rescue(rbgtk_rval2gtkpageranges_body, (VALUE)&args,
+              rbgtk_rval2gtkpageranges_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GTKPAGERANGES(value, n) rbgtk_rval2gtkpageranges(value, n)
+
+static VALUE
+ps_set_page_ranges(VALUE self, VALUE rbpage_ranges)
+{
+    GtkPrintSettings *settings = _SELF(self);
+    long n;
+    GtkPageRange *page_ranges = RVAL2GTKPAGERANGES(rbpage_ranges, &n);
+
+    gtk_print_settings_set_page_ranges(settings, page_ranges, n);
+
+    g_free(page_ranges);
+
     return self;
 }
 
