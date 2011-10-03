@@ -78,29 +78,72 @@ colorsel_s_palette_from_string(VALUE self, VALUE str)
     return ary;
 }
 
+struct rbgdk_rval2gdkcolors_args {
+    VALUE ary;
+    long n;
+    GdkColor *result;
+};
+
+static VALUE
+rbgdk_rval2gdkcolors_body(VALUE value)
+{
+    long i;
+    struct rbgdk_rval2gdkcolors_args *args = (struct rbgdk_rval2gdkcolors_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = *RVAL2GDKCOLOR(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbgdk_rval2gdkcolors_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdkcolors_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GdkColor *
+rbgdk_rval2gdkcolors(VALUE value, long *n)
+{
+    struct rbgdk_rval2gdkcolors_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GdkColor, args.n + 1);
+
+    rb_rescue(rbgdk_rval2gdkcolors_body, (VALUE)&args,
+              rbgdk_rval2gdkcolors_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GDKCOLORS(value, n) rbgdk_rval2gdkcolors(value, n)
+
 static VALUE
 colorsel_s_palette_to_string(int argc, VALUE *argv, VALUE self)
 {
-    GdkColor* gcolors;
-    GdkColor* gcolor;
-    VALUE colors;
-    gint i, len;
+    VALUE rbcolors;
+    long n;
+    GdkColor *colors;
+    gchar *palette;
 
-    if (argc > 1) {
-        rb_scan_args(argc, argv, "*", &colors);
-    } else {
-        rb_scan_args(argc, argv, "10", &colors);
-    }
+    if (argc > 1)
+        rb_scan_args(argc, argv, "*", &rbcolors);
+    else
+        rb_scan_args(argc, argv, "10", &rbcolors);
 
-    len = RARRAY_LEN(colors);
-    gcolors = ALLOCA_N(GdkColor, len);
+    colors = RVAL2GDKCOLORS(rbcolors, &n);
 
-    for (i = 0; i < len; i++) {
-        gcolor = RVAL2GDKCOLOR(RARRAY_PTR(colors)[i]);
-        gcolors[i] = *gcolor;
-    }
+    palette = gtk_color_selection_palette_to_string(colors, n);
 
-    return CSTR2RVAL(gtk_color_selection_palette_to_string((const GdkColor*)gcolors, len));
+    g_free(colors);
+
+    return CSTR2RVAL_FREE(palette);
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
