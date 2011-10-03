@@ -42,6 +42,9 @@ static VALUE
 entry_set_completion(VALUE self, VALUE completion)
 {
     gtk_entry_set_completion(_SELF(self), GTK_ENTRY_COMPLETION(RVAL2GOBJ(completion)));
+
+    G_CHILD_SET(self, rb_intern("completion"), completion);
+
     return self;
 }
 
