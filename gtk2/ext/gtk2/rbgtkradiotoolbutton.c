@@ -17,39 +17,77 @@
 
 static VALUE gRToolButton;
 
+struct rbgtk_rval2gtkradiotoolbuttongslist_args {
+    VALUE ary;
+    long n;
+    GSList *result;
+};
+
+static VALUE
+rbgtk_rval2gtkradiotoolbuttongslist_body(VALUE value)
+{
+    long i;
+    struct rbgtk_rval2gtkradiotoolbuttongslist_args *args = (struct rbgtk_rval2gtkradiotoolbuttongslist_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result = g_slist_append(args->result, GTK_RADIO_MENU_ITEM(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+
+    return Qnil;
+}
+
+static VALUE
+rbgtk_rval2gtkradiotoolbuttongslist_rescue(VALUE value)
+{
+    g_slist_free(((struct rbgtk_rval2gtkradiotoolbuttongslist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GSList *
+rbgtk_rval2gtkradiotoolbuttongslist(VALUE value)
+{
+    struct rbgtk_rval2gtkradiotoolbuttongslist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgtk_rval2gtkradiotoolbuttongslist_body, (VALUE)&args,
+              rbgtk_rval2gtkradiotoolbuttongslist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+#define RVAL2GTKRADIOTOOLBUTTONGSLIST(value) rbgtk_rval2gtkradiotoolbuttongslist(value)
+
 static VALUE
 rbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE group_or_stock_id, stock_id;
+    VALUE group_or_stock_id, rbstock_id;
     GtkToolItem *widget;
 
-    if (rb_scan_args(argc, argv, "02", &group_or_stock_id, &stock_id) > 0) {
-        GSList* list = NULL;
-        if (TYPE(group_or_stock_id) == T_ARRAY){
-            int i;
-            Check_Type(group_or_stock_id, T_ARRAY);
-            for (i = 0; i < RARRAY_LEN(group_or_stock_id); i++) {
-                list = g_slist_append(list, RVAL2GOBJ(RARRAY_PTR(group_or_stock_id)[i]));
-            }
-        } else if (rb_obj_is_kind_of(group_or_stock_id, gRToolButton)){
-            list = gtk_radio_tool_button_get_group(_SELF(group_or_stock_id));
-        } else {
-            list = NULL;
-        }
-        if (NIL_P(stock_id)){
-            widget = gtk_radio_tool_button_new(list);
-        } else {
-            if (TYPE(stock_id) == T_SYMBOL){
-                widget = gtk_radio_tool_button_new_from_stock(list, rb_id2name(SYM2ID(stock_id)));
-            } else {
-                widget = gtk_radio_tool_button_new_from_stock(list, RVAL2CSTR(stock_id));
-            }
-        }
+    if (rb_scan_args(argc, argv, "02", &group_or_stock_id, &rbstock_id) > 0) {
+        GSList *group = NULL;
+        const gchar *stock_id = TYPE(rbstock_id) == T_SYMBOL ?
+            rb_id2name(SYM2ID(rbstock_id)) :
+            RVAL2CSTR_ACCEPT_NIL(rbstock_id);
+
+        if (TYPE(group_or_stock_id) == T_ARRAY)
+            /* TODO: This has a potential for leaking. */
+            group = RVAL2GTKRADIOTOOLBUTTONGSLIST(group_or_stock_id);
+        else if (rb_obj_is_kind_of(group_or_stock_id, gRToolButton))
+            group = gtk_radio_tool_button_get_group(_SELF(group_or_stock_id));
+
+        if (stock_id == NULL)
+            widget = gtk_radio_tool_button_new(group);
+        else
+            widget = gtk_radio_tool_button_new_from_stock(group, stock_id);
     } else {
         widget = gtk_radio_tool_button_new(NULL);
     }
-    
+
     RBGTK_INITIALIZE(self, widget);
+
     return Qnil;
 }
 
@@ -61,19 +99,16 @@ rbtn_get_group(VALUE self)
 }
 
 static VALUE
-rbtn_set_group(VALUE self, VALUE group)
+rbtn_set_group(VALUE self, VALUE rbgroup)
 {
-    GSList* list = NULL;
-    if (TYPE(group) == T_ARRAY){
-        int i;
-        for (i = 0; i < RARRAY_LEN(group); i++){
-            list = g_slist_append(list, RVAL2GOBJ(RARRAY_PTR(group)[i]));
-        }
-    } else {
-        list = gtk_radio_tool_button_get_group(_SELF(group));
-    }
-    gtk_radio_tool_button_set_group(_SELF(self), list);
-        
+    GtkRadioToolButton *button = _SELF(self);
+    GSList *group = TYPE(rbgroup) == T_ARRAY ?
+        /* TODO: This might leak. */
+        RVAL2GTKRADIOTOOLBUTTONGSLIST(rbgroup) :
+        gtk_radio_tool_button_get_group(_SELF(rbgroup));
+
+    gtk_radio_tool_button_set_group(button, group);
+
     return self;
 }
 
