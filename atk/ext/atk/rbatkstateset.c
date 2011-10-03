@@ -33,21 +33,63 @@ rbatkstateset_add_state(VALUE self, VALUE type)
                                               RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
 }
 
+struct rval2atkstatetype_args {
+    VALUE ary;
+    long n;
+    AtkStateType *result;
+};
+
 static VALUE
-rbatkstateset_add_states(VALUE self, VALUE types)
+rval2atkstatetype_body(VALUE value)
 {
-    gint i;
-    gint n_types = RARRAY_LEN(types);
-    AtkStateType* atypes = g_new(AtkStateType, n_types);
+    long i;
+    struct rval2atkstatetype_args *args = (struct rval2atkstatetype_args *)value;
 
-    Check_Type(types, T_ARRAY);
+    for (i = 0; i < args->n; i++)
+            args->result[i] = RVAL2GENUM(RARRAY_PTR(args->ary)[i], ATK_TYPE_STATE_TYPE);
 
-    for (i = 0; i < n_types; i++) {
-        atypes[i] = RVAL2GENUM(RARRAY_PTR(types)[i], ATK_TYPE_STATE_TYPE);
-    }
+    return Qnil;
+}
 
-    atk_state_set_add_states(_SELF(self), atypes, n_types);
-    g_free(atypes);
+static VALUE
+rval2atkstatetype_rescue(VALUE value)
+{
+    g_free(((struct rval2atkstatetype_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static AtkStateType *
+rval2atkstatetype(VALUE value, long *n)
+{
+    struct rval2atkstatetype_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(AtkStateType, args.n + 1);
+
+    rb_rescue(rval2atkstatetype_body, (VALUE)&args,
+              rval2atkstatetype_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2ATKSTATETYPES(value, n) rval2atkstatetype(value, n)
+
+static VALUE
+rbatkstateset_add_states(VALUE self, VALUE rbtypes)
+{
+    AtkStateSet *set = _SELF(self);
+    long n;
+    AtkStateType *types = RVAL2ATKSTATETYPES(rbtypes, &n);
+
+    atk_state_set_add_states(set, types, n);
+
+    g_free(types);
+
     return self;
 }
 
@@ -66,23 +108,18 @@ rbatkstateset_contains_state(VALUE self, VALUE type)
 }
 
 static VALUE
-rbatkstateset_contains_states(VALUE self, VALUE types)
+rbatkstateset_contains_states(VALUE self, VALUE rbtypes)
 {
-    gint i;
-    gboolean ret;
-    gint n_types = RARRAY_LEN(types);
-    AtkStateType* atypes = g_new(AtkStateType, n_types);
+    AtkStateSet *set = _SELF(self);
+    long n;
+    AtkStateType *types = RVAL2ATKSTATETYPES(rbtypes, &n);
+    gboolean result;
 
-    Check_Type(types, T_ARRAY);
+    result = atk_state_set_contains_states(set, types, n);
 
-    for (i = 0; i < n_types; i++) {
-        atypes[i] = RVAL2GENUM(RARRAY_PTR(types)[i], ATK_TYPE_STATE_TYPE);
-    }
-    
-    ret = CBOOL2RVAL(atk_state_set_contains_states(_SELF(self), atypes, n_types));
+    g_free(types);
 
-    g_free(atypes);
-    return ret;
+    return CBOOL2RVAL(result);
 }
 
 static VALUE
