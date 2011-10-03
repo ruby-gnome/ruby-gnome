@@ -192,60 +192,93 @@ lstore_remove(VALUE self, VALUE iter)
 #endif
 }
 
+struct lstore_insert_args {
+    GtkListStore *store;
+    GtkTreeIter iter;
+    gint position;
+    VALUE ary;
+    long i;
+    long n;
+    gint *columns;
+    GValue *values;
+};
+
+static VALUE
+lstore_insert_body(VALUE value)
+{
+    struct lstore_insert_args *args = (struct lstore_insert_args *)value;
+    GtkTreeModel *model = GTK_TREE_MODEL(args->store);
+
+    for (args->i = 0; args->i < args->n; args->i++) {
+        VALUE ary = rb_ary_to_ary(RARRAY_PTR(args->ary)[args->i]);
+
+        args->columns[args->i] = NUM2INT(RARRAY_PTR(ary)[1]);
+        g_value_init(&args->values[args->i],
+                     gtk_tree_model_get_column_type(model, args->columns[args->i]));
+        rbgobj_rvalue_to_gvalue(RARRAY_PTR(ary)[0], &args->values[args->i]);
+    }
+
+    gtk_list_store_insert_with_valuesv(args->store,
+                                       &args->iter,
+                                       args->position,
+                                       args->columns,
+                                       args->values,
+                                       args->n);
+
+    return Qnil;
+}
+
+static VALUE
+lstore_insert_ensure(VALUE value)
+{
+    long i;
+    struct lstore_insert_args *args = (struct lstore_insert_args *)value;
+
+    for (i = 0; i < args->i; i++)
+        g_value_unset(&args->values[i]);
+
+    g_free(args->values);
+    g_free(args->columns);
+
+    return Qnil;
+}
+
 /*
   Gtk::ListStore#insert(pos, val1 => 0, val2 => 2, ... )
  */
 static VALUE
 lstore_insert(int argc, VALUE *argv, VALUE self)
 {
-    VALUE position, values, ret;
-    GtkTreeIter iter;
-    GtkListStore* store = _SELF(self);
+    VALUE position, values, result;
+    struct lstore_insert_args args = { _SELF(self) };
 
     rb_scan_args(argc, argv, "11", &position, &values);
+    args.position = NUM2INT(position);
 
     if (NIL_P(values)){
-        gtk_list_store_insert(store, &iter, NUM2INT(position));
+        gtk_list_store_insert(args.store, &args.iter, args.position);
     } else {
 #if GTK_CHECK_VERSION(2,6,0)
-        gint cnt, n_values;
-        gint* columns;
-        GType gtype;
-        GValue* gvalues;
-        VALUE ary = rb_funcall(values, id_to_a, 0);
+        args.ary = rb_funcall(values, id_to_a, 0);
+        args.n = RARRAY_LEN(args.ary);
+        args.columns = g_new(gint, args.n);
+        args.values = g_new0(GValue, args.n);
 
-        n_values = RARRAY_LEN(ary);
-        
-        gvalues = g_new(GValue, n_values);
-        columns = g_new(gint, n_values);
-        
-        for (cnt = 0; cnt < n_values; cnt++) {
-            Check_Type(RARRAY_PTR(ary)[cnt], T_ARRAY);
-            columns[cnt] = NUM2INT(RARRAY_PTR(RARRAY_PTR(ary)[cnt])[1]);
-            gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(store), columns[cnt]);
-            gvalues[cnt].g_type = 0;
-            g_value_init(&gvalues[cnt], gtype);
-            rbgobj_rvalue_to_gvalue(RARRAY_PTR(RARRAY_PTR(ary)[cnt])[0], &gvalues[cnt]);
-        }
-        
-        gtk_list_store_insert_with_valuesv(store, &iter, NUM2INT(position),
-                                           columns, gvalues, n_values);
-        
-        for (cnt = 0; cnt < n_values; cnt++) {
-            g_value_unset(&gvalues[cnt]);
-        }
-        g_free(gvalues);
-        g_free(columns);
+        rb_ensure(lstore_insert_body, (VALUE)&args,
+                  lstore_insert_ensure, (VALUE)&args);
 #else
-        gtk_list_store_insert(store, &iter, NUM2INT(position));
-        rb_warn("Ignored 2nd argument under this environment. Because it has been supported since GTK+-2.6. ");
+        gtk_list_store_insert(args.store, &args.iter, args.position);
+        rb_warn("Ignored 2nd argument under this environment, as it has been supported since GTK+-2.6.");
 #endif
     }
-    iter.user_data3 = store;
 
-    ret = GTKTREEITER2RVAL(&iter);
-    G_CHILD_ADD(self, ret);
-    return ret;
+    args.iter.user_data3 = args.store;
+
+    result = GTKTREEITER2RVAL(&args.iter);
+
+    G_CHILD_ADD(self, result);
+
+    return result;
 }
 
 static VALUE
