@@ -684,6 +684,8 @@ txt_insert(int argc, VALUE *argv, VALUE self)
         if (RARRAY_LEN(tags) == 0)
             return self;
 
+        /* TODO: Do we really want to do this before we know that everything
+         * below passed without any errors? */
         G_CHILD_ADD(self, tags);
         
         gtk_text_buffer_get_iter_at_offset(_SELF(self), &start, start_offset);
