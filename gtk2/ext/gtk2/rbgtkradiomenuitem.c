@@ -15,20 +15,48 @@
 
 #include "global.h"
 
-static GSList*
-ary2gslist(VALUE ary)
+struct rbgtk_rval2gtkradiomenuitemgslist_args {
+    VALUE ary;
+    long n;
+    GSList *result;
+};
+
+static VALUE
+rbgtk_rval2gtkradiomenuitemgslist_body(VALUE value)
 {
     long i;
-    GSList *glist = NULL;
+    struct rbgtk_rval2gtkradiomenuitemgslist_args *args = (struct rbgtk_rval2gtkradiomenuitemgslist_args *)value;
 
-    if (NIL_P(ary)) return NULL;
-    Check_Type(ary, T_ARRAY);
-    for (i=0; i<RARRAY_LEN(ary); i++) {
-        glist = g_slist_append(glist,RVAL2GOBJ(RARRAY_PTR(ary)[i]));
-    }
+    for (i = 0; i < args->n; i++)
+        args->result = g_slist_append(args->result, GTK_RADIO_MENU_ITEM(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
 
-    return glist;
+    return Qnil;
 }
+
+static VALUE
+rbgtk_rval2gtkradiomenuitemgslist_rescue(VALUE value)
+{
+    g_slist_free(((struct rbgtk_rval2gtkradiomenuitemgslist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GSList *
+rbgtk_rval2gtkradiomenuitemgslist(VALUE value)
+{
+    struct rbgtk_rval2gtkradiomenuitemgslist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgtk_rval2gtkradiomenuitemgslist_body, (VALUE)&args,
+              rbgtk_rval2gtkradiomenuitemgslist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+#define RVAL2GTKRADIOMENUITEMGSLIST(value) rbgtk_rval2gtkradiomenuitemgslist(value)
 
 static VALUE
 rmitem_initialize(int argc, VALUE *argv, VALUE self)
@@ -41,36 +69,37 @@ rmitem_initialize(int argc, VALUE *argv, VALUE self)
     
     if (rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3) > 0 &&
         TYPE(arg1) == T_STRING) {
-        if (NIL_P(arg2) || RVAL2CBOOL(arg2)){
+        if (NIL_P(arg2) || RVAL2CBOOL(arg2))
             mnemonic = RVAL2CSTR(arg1);
-        } else {
+        else
             label = RVAL2CSTR(arg1);
-        }
     } else {
         if (!NIL_P(arg2)) {
-            if (NIL_P(arg3) || RVAL2CBOOL(arg3)){
+            if (NIL_P(arg3) || RVAL2CBOOL(arg3))
                 mnemonic = RVAL2CSTR(arg2);
-            } else {
+            else
                 label = RVAL2CSTR(arg2);
-            }
         }
-        if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM))){
-            list = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1))->group;
-        } else if (TYPE(arg1) == T_ARRAY){
-            list = ary2gslist(arg1);
-        } else if (! NIL_P(arg1)){
+
+        if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM)))
+            list = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1)));
+        else if (TYPE(arg1) == T_ARRAY)
+            /* TODO: This might leak. */
+            list = RVAL2GTKRADIOMENUITEMGSLIST(arg1);
+        else if (!NIL_P(arg1))
             rb_raise(rb_eArgError, "invalid argument %s (expect Array or Gtk::RadioMenuItem)", 
-                     rb_class2name(CLASS_OF(label)));
-        }
+                     rb_class2name(CLASS_OF(arg1)));
     }
-    if (label) {
+
+    if (label != NULL)
         widget = gtk_radio_menu_item_new_with_label(list, label);
-    } else if (mnemonic){
+    else if (mnemonic != NULL)
         widget = gtk_radio_menu_item_new_with_mnemonic(list, mnemonic);
-    } else {
+    else
         widget = gtk_radio_menu_item_new(list);
-    }
+
     RBGTK_INITIALIZE(self, widget);
+
     return Qnil;
 }
 
