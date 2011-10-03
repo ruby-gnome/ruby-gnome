@@ -29,23 +29,51 @@ rbatkrelation_s_for_name(VALUE self, VALUE name)
     return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
 
+struct rval2atkobjects_args {
+    VALUE ary;
+    long n;
+    AtkObject **result;
+};
 
 static VALUE
-rbatkrel_initialize(VALUE self, VALUE targets, VALUE relationship)
+rval2atkobjects_body(VALUE value)
 {
-    VALUE ary = rb_ary_to_ary(targets);
     long i;
-    long len = RARRAY_LEN(ary);
-    AtkObject **objects = g_new(AtkObject *, len);
+    struct rval2atkobjects_args *args = (struct rval2atkobjects_args *)value;
 
-    for (i = 0; i < len; i++)
-        objects[i] = RVAL2ATKOBJECT(RARRAY_PTR(targets)[i]);
+    for (i = 0; i < args->n; i++)
+            args->result[i] = ATK_OBJECT(RVAL2GOBJ(RARRAY_PTR(args->ary)[i]));
 
-    G_INITIALIZE(self, atk_relation_new(objects,
-                                        len, 
-                                        RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE)));
+    return Qnil;
+}
 
-    g_free(objects);
+static VALUE
+rval2atkobjects_rescue(VALUE value)
+{
+    g_free(((struct rval2atkobjects_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static VALUE
+rbatkrel_initialize(VALUE self, VALUE targets, VALUE rbrelationship)
+{
+    AtkRelationType relationship = RVAL2GENUM(rbrelationship, ATK_TYPE_RELATION_TYPE);
+    struct rval2atkobjects_args args;
+    AtkRelation *relation;
+
+    args.ary = rb_ary_to_ary(targets);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(AtkObject *, args.n + 1);
+
+    rb_rescue(rval2atkobjects_body, (VALUE)&args,
+              rval2atkobjects_rescue, (VALUE)&args);
+
+    relation = atk_relation_new(args.result, args.n, relationship);
+
+    g_free(args.result);
+
+    G_INITIALIZE(self, relation);
 
     return Qnil;
 }
