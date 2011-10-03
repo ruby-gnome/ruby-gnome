@@ -82,22 +82,82 @@ gdkregion_span_func(GdkSpan *span, gpointer func)
                INT2NUM(span->x), INT2NUM(span->y), INT2NUM(span->width));
 }
 
+struct rbgdk_rval2gdkspans_args {
+    VALUE ary;
+    long n;
+    GdkSpan *result;
+};
+
 static VALUE
-gdkregion_spans_intersect_foreach(VALUE self, VALUE spans, VALUE sorted)
+rbgdk_rval2gdkspans_body(VALUE value)
 {
-    int i;
-    GdkSpan* gspans = ALLOCA_N(GdkSpan, RARRAY_LEN(spans));
-    volatile VALUE func = rb_block_proc();
+    long i;
+    struct rbgdk_rval2gdkspans_args *args = (struct rbgdk_rval2gdkspans_args *)value;
+
+    for (i = 0; i < args->n; i++) {
+        VALUE points = rb_ary_to_ary(RARRAY_PTR(args->ary)[i]);
+
+        if (RARRAY_LEN(points) != 2)
+            rb_raise(rb_eArgError, "point %ld should be array of size 3", i);
+
+        args->result[i].x = NUM2INT(RARRAY_PTR(points)[0]);
+        args->result[i].y = NUM2INT(RARRAY_PTR(points)[1]);
+        args->result[i].width = NUM2INT(RARRAY_PTR(points)[1]);
+    }
+
+    return Qnil;
+}
+
+static VALUE
+rbgdk_rval2gdkspans_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdkspans_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GdkSpan *
+rbgdk_rval2gdkspans(VALUE value, long *n)
+{
+    struct rbgdk_rval2gdkspans_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GdkSpan, args.n + 1);
+
+    rb_rescue(rbgdk_rval2gdkspans_body, (VALUE)&args,
+              rbgdk_rval2gdkspans_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GDKSPANS(value, n) rbgdk_rval2gdkspans(value, n)
+
+static VALUE
+gdkregion_spans_intersect_foreach(VALUE self, VALUE rbspans, VALUE rbsorted)
+{
+    GdkRegion *region = _SELF(self);
+    gboolean sorted = RVAL2CBOOL(rbsorted);
+    VALUE func = rb_block_proc();
+    long n;
+    GdkSpan *spans;
 
     G_RELATIVE(self, func);
-    for (i = 0; i < RARRAY_LEN(spans); i++) {
-        gspans[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(spans)[i])[0]);
-        gspans[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(spans)[i])[1]);
-        gspans[i].width = NUM2INT(RARRAY_PTR(RARRAY_PTR(spans)[i])[2]);
-    }
-    gdk_region_spans_intersect_foreach(_SELF(self),
-                                       gspans, RARRAY_LEN(spans), RVAL2CBOOL(sorted),
-                                       (GdkSpanFunc)gdkregion_span_func, (gpointer)func);
+
+    spans = RVAL2GDKSPANS(rbspans, &n);
+
+    gdk_region_spans_intersect_foreach(region,
+                                       spans,
+                                       n,
+                                       sorted,
+                                       (GdkSpanFunc)gdkregion_span_func,
+                                       (gpointer)func);
+
+    g_free(spans);
+
     return self;
 }
 
