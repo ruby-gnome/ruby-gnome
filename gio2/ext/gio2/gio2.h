@@ -168,6 +168,7 @@ GType g_file_attribute_info_list_get_type(void);
 /* Integer Type Conversion Macros */
 #define FD2RVAL(value) INT2FIX(value)
 #define RVAL2FD(value) FIX2INT(value)
+#define RVAL2FDS(value, n) RVAL2GINTS(value, n)
 
 #define GINT2RVAL(value) INT2NUM(value)
 #define RVAL2GINT(value) NUM2INT(value)
