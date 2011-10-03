@@ -463,17 +463,15 @@ gwin_resize(VALUE self, VALUE width, VALUE height)
 }
 
 static VALUE
-gwin_s_set_default_icon_list(VALUE self, VALUE list)
+gwin_s_set_default_icon_list(VALUE self, VALUE rblist)
 {
-    int i;
-    GList *glist = NULL;
-    Check_Type(list, T_ARRAY);
-    for (i = 0; i < RARRAY_LEN(list); i++){
-        glist = g_list_append(glist, RVAL2GOBJ(RARRAY_PTR(list)[i]));
-    }
-    gtk_window_set_default_icon_list(glist);
-    g_list_free(glist);
-    return list;
+    GList *list = RVAL2GDKPIXBUFGLIST(rblist);
+
+    gtk_window_set_default_icon_list(list);
+
+    g_list_free(list);
+
+    return rblist;
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
@@ -527,17 +525,17 @@ gwin_set_icon(VALUE self, VALUE icon_or_filename)
 }
 
 static VALUE
-gwin_set_icon_list(VALUE self, VALUE list)
+gwin_set_icon_list(VALUE self, VALUE rblist)
 {
-    int i;
-    GList *glist = NULL;
-    Check_Type(list, T_ARRAY);
-    for (i = 0; i < RARRAY_LEN(list); i++){
-        glist = g_list_append(glist, RVAL2GOBJ(RARRAY_PTR(list)[i]));
-    }
-    gtk_window_set_icon_list(_SELF(self), glist);
-    g_list_free(glist);
-    return list;
+    GtkWindow *window = _SELF(self);
+    GList *list = RVAL2GDKPIXBUFGLIST(rblist);
+
+    gtk_window_set_icon_list(window, list);
+
+    g_list_free(list);
+
+    /* TODO: Shouldn’t we return self? */
+    return rblist;
 }
 
 #if GTK_CHECK_VERSION(2,2,0)

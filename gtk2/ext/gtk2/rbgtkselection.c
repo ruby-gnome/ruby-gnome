@@ -84,57 +84,61 @@ gtkdrag_selection_remove_all(VALUE self, VALUE widget)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-targets_include_image(VALUE self, VALUE targets, VALUE writable)
+targets_include_image(VALUE self, VALUE rbtargets, VALUE rbwritable)
 {
-  gint i;
-  gint len = RARRAY_LEN(targets);
-  GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
+    gboolean writable = RVAL2CBOOL(rbwritable);
+    long n;
+    GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
+    gboolean result;
 
-  for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
-  }
+    result = gtk_targets_include_image(targets, n, writable);
 
-  return CBOOL2RVAL(gtk_targets_include_image(gtargets, len, RVAL2CBOOL(writable)));
+    g_free(targets);
+
+    return result;
 }
 
 static VALUE
-targets_include_text(VALUE self, VALUE targets)
+targets_include_text(VALUE self, VALUE rbtargets)
 {
-  gint i;
-  gint len = RARRAY_LEN(targets);
-  GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
-  for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
-  }
-  return CBOOL2RVAL(gtk_targets_include_text(gtargets, len));
+    long n;
+    GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
+    gboolean result;
+
+    result = gtk_targets_include_text(targets, n);
+
+    g_free(targets);
+
+    return result;
 }
 
 static VALUE
-targets_include_uri(VALUE self, VALUE targets)
+targets_include_uri(VALUE self, VALUE rbtargets)
 {
-  gint i;
-  gint len = RARRAY_LEN(targets);
-  GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
+    long n;
+    GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
+    gboolean result;
 
-  for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
-  }
+    result = gtk_targets_include_uri(targets, n);
 
-  return CBOOL2RVAL(gtk_targets_include_uri(gtargets, len));
+    g_free(targets);
+
+    return result;
 }
 
 static VALUE
-targets_include_rich_text(VALUE self, VALUE targets, VALUE buffer)
+targets_include_rich_text(VALUE self, VALUE rbtargets, VALUE rbbuffer)
 {
-  gint i;
-  gint len = RARRAY_LEN(targets);
-  GdkAtom* gtargets = ALLOCA_N(GdkAtom, len);
+    GtkTextBuffer *buffer = GTK_TEXT_BUFFER(RVAL2GOBJ(rbbuffer));
+    long n;
+    GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
+    gboolean result;
 
-  for (i = 0; i < len; i++){
-    gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
-  }
+    result = gtk_targets_include_rich_text(targets, n, buffer);
 
-  return CBOOL2RVAL(gtk_targets_include_rich_text(gtargets, len, RVAL2GOBJ(buffer)));
+    g_free(targets);
+
+    return result;
 }
 #endif
 

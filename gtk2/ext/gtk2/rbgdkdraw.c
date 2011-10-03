@@ -88,24 +88,17 @@ gdkdraw_draw_point(VALUE self, VALUE gc, VALUE x, VALUE y)
 }
 
 static VALUE
-gdkdraw_draw_points(VALUE self, VALUE gc, VALUE pnts)
+gdkdraw_draw_points(VALUE self, VALUE rbgc, VALUE rbpoints)
 {
-    GdkPoint *points;
-    int i;
+    GdkDrawable *drawable = _SELF(self);
+    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    long n;
+    GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
 
-    Check_Type(pnts, T_ARRAY);
-    points = ALLOCA_N(GdkPoint,RARRAY_LEN(pnts));
-    for (i = 0; i < RARRAY_LEN(pnts); i++) {
-        Check_Type(RARRAY_PTR(pnts)[i], T_ARRAY);
-        if (RARRAY_LEN(RARRAY_PTR(pnts)[i]) < 2) {
-            rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-        }
-        points[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[0]);
-        points[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[1]);
-    }
-    gdk_draw_points(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                    points,
-                    RARRAY_LEN(pnts));
+    gdk_draw_points(drawable, gc, points, n);
+
+    g_free(points);
+
     return self;
 }
 
@@ -119,24 +112,17 @@ gdkdraw_draw_line(VALUE self, VALUE gc, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 }
 
 static VALUE
-gdkdraw_draw_lines(VALUE self, VALUE gc, VALUE pnts)
+gdkdraw_draw_lines(VALUE self, VALUE rbgc, VALUE rbpoints)
 {
-    GdkPoint *points;
-    int i;
+    GdkDrawable *drawable = _SELF(self);
+    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    long n;
+    GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
 
-    Check_Type(pnts, T_ARRAY);
-    points = ALLOCA_N(GdkPoint,RARRAY_LEN(pnts));
-    for (i = 0; i < RARRAY_LEN(pnts); i++) {
-        Check_Type(RARRAY_PTR(pnts)[i], T_ARRAY);
-        if (RARRAY_LEN(RARRAY_PTR(pnts)[i]) < 2) {
-            rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-        }
-        points[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[0]);
-        points[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[1]);
-    }
-    gdk_draw_lines(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                   points,
-                   RARRAY_LEN(pnts));
+    gdk_draw_lines(drawable, gc, points, n);
+
+    g_free(points);
+
     return self;
 }
 
@@ -201,25 +187,18 @@ gdkdraw_draw_arc(VALUE self, VALUE gc, VALUE filled, VALUE x, VALUE y, VALUE w, 
 }
 
 static VALUE
-gdkdraw_draw_poly(VALUE self, VALUE gc, VALUE filled, VALUE pnts)
+gdkdraw_draw_poly(VALUE self, VALUE rbgc, VALUE rbfilled, VALUE rbpoints)
 {
-    GdkPoint *points;
-    int i;
+    GdkDrawable *drawable = _SELF(self);
+    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    gboolean filled = RVAL2CBOOL(rbfilled);
+    long n;
+    GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
 
-    Check_Type(pnts, T_ARRAY);
-    points = ALLOCA_N(GdkPoint,RARRAY_LEN(pnts));
-    for (i = 0; i < RARRAY_LEN(pnts); i++) {
-        Check_Type(RARRAY_PTR(pnts)[i], T_ARRAY);
-        if (RARRAY_LEN(RARRAY_PTR(pnts)[i]) < 2) {
-            rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-        }
-        points[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[0]);
-        points[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(pnts)[i])[1]);
-    }
-    gdk_draw_polygon(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                     RVAL2CBOOL(filled),
-                     points,
-                     RARRAY_LEN(pnts));
+    gdk_draw_polygon(drawable, gc, filled, points, n);
+
+    g_free(points);
+
     return self;
 }
 

@@ -231,20 +231,25 @@ style_paint_option(VALUE self, VALUE gdkwindow, VALUE state_type, VALUE shadow_t
 }
 
 static VALUE
-style_paint_polygon(VALUE self, VALUE gdkwindow, VALUE state_type, VALUE shadow_type, VALUE area, VALUE widget, VALUE detail, VALUE points, VALUE fill)
+style_paint_polygon(VALUE self, VALUE rbwindow, VALUE rbstate_type,
+                    VALUE rbshadow_type, VALUE rbarea, VALUE rbwidget,
+                    VALUE rbdetail, VALUE rbpoints, VALUE rbfill)
 {
-    int i;
-    GdkPoint* gpoints = g_new (GdkPoint, RARRAY_LEN(points));
+    GtkStyle *style = _SELF(self);
+    GdkWindow *window = GDK_WINDOW(RVAL2GOBJ(rbwindow));
+    GtkStateType state_type = RVAL2STATE(rbstate_type);
+    GtkShadowType shadow_type = RVAL2SHADOW(rbshadow_type);
+    GdkRectangle *area = RVAL2REC(rbarea);
+    GtkWidget *widget = GTK_WIDGET(RVAL2GOBJ(rbwidget));
+    const gchar *detail = RVAL2CSTR_ACCEPT_NIL(rbdetail);
+    gboolean fill = RVAL2CBOOL(rbfill);
+    long n;
+    GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
 
-    for (i = 0; i < RARRAY_LEN(points); i++){
-        gpoints[i].x = RARRAY_PTR(RARRAY_PTR(points)[i])[0];
-        gpoints[i].y = RARRAY_PTR(RARRAY_PTR(points)[i])[1];
-    }
-    gtk_paint_polygon(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)),
-                      RVAL2STATE(state_type), RVAL2SHADOW(shadow_type), RVAL2REC(area),
-                      GTK_WIDGET(RVAL2GOBJ(widget)), 
-                      NIL_P(detail) ? NULL : RVAL2CSTR(detail), gpoints,
-                      RARRAY_LEN(points), RVAL2CBOOL(fill));
+    gtk_paint_polygon(style, window, state_type, shadow_type, area, widget, detail, points, n, fill);
+
+    g_free(points);
+
     return self;
 }
 

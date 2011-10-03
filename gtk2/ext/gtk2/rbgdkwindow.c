@@ -632,17 +632,15 @@ gdkwin_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 }
 
 static VALUE
-gdkwin_set_icon_list(VALUE self, VALUE pixbufs)
+gdkwin_set_icon_list(VALUE self, VALUE rbpixbufs)
 {
-    int i;
-    GList *glist = NULL;
+    GdkWindow *window = _SELF(self);
+    GList *pixbufs = RVAL2GDKPIXBUFGLIST(rbpixbufs);
 
-    Check_Type(pixbufs, T_ARRAY);
-    for (i = 0; i < RARRAY_LEN(pixbufs); i++) {
-        glist = g_list_append(glist, GDK_PIXBUF(RVAL2GOBJ(RARRAY_PTR(pixbufs)[i])));
-    }
+    gdk_window_set_icon_list(window, pixbufs);
 
-    gdk_window_set_icon_list(_SELF(self), glist);
+    g_list_free(pixbufs);
+
     return self;
 }
 

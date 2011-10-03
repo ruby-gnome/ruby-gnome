@@ -31,28 +31,21 @@ gdk_region_get_type(void)
 static VALUE
 gdkregion_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE points_or_rectangle, fill_rule;
-    GdkRegion* region;
-    GdkPoint *gpoints;
-    int i;
+    VALUE points_or_rectangle, rbfill_rule;
+    GdkRegion *region;
 
-    rb_scan_args(argc, argv, "02", &points_or_rectangle, &fill_rule);
-    if (NIL_P(points_or_rectangle)){
+    rb_scan_args(argc, argv, "02", &points_or_rectangle, &rbfill_rule);
+    if (NIL_P(points_or_rectangle)) {
         region = gdk_region_new();
-    } else if (TYPE(points_or_rectangle) == T_ARRAY){
-        gpoints = ALLOCA_N(GdkPoint, RARRAY_LEN(points_or_rectangle));
+    } else if (TYPE(points_or_rectangle) == T_ARRAY) {
+        GdkFillRule fill_rule = RVAL2GENUM(rbfill_rule, GDK_TYPE_FILL_RULE);
+        long n;
+        GdkPoint *points = RVAL2GDKPOINTS(points_or_rectangle, &n);
 
-        for (i = 0; i < RARRAY_LEN(points_or_rectangle); i++) {
-            Check_Type(RARRAY_PTR(points_or_rectangle)[i], T_ARRAY);
-            if (RARRAY_LEN(RARRAY_PTR(points_or_rectangle)[i]) < 2) {
-                rb_raise(rb_eArgError, "point %d should be array of size 2", i);
-            }
-            gpoints[i].x = NUM2INT(RARRAY_PTR(RARRAY_PTR(points_or_rectangle)[i])[0]);
-            gpoints[i].y = NUM2INT(RARRAY_PTR(RARRAY_PTR(points_or_rectangle)[i])[1]);
-        }
-        region = gdk_region_polygon(gpoints, RARRAY_LEN(points_or_rectangle),
-                                    RVAL2GENUM(fill_rule, GDK_TYPE_FILL_RULE));
-    } else if (RVAL2GTYPE(points_or_rectangle) == GDK_TYPE_RECTANGLE){
+        region = gdk_region_polygon(points, n, fill_rule);
+
+        g_free(points);
+    } else if (RVAL2GTYPE(points_or_rectangle) == GDK_TYPE_RECTANGLE) {
         region = gdk_region_rectangle((GdkRectangle*)RVAL2BOXED(points_or_rectangle, 
                                                                 GDK_TYPE_RECTANGLE));
     } else {
@@ -62,6 +55,7 @@ gdkregion_initialize(int argc, VALUE *argv, VALUE self)
     }
 
     G_INITIALIZE(self, region);
+
     return Qnil;
 }
 

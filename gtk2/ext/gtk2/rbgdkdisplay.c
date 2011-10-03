@@ -323,18 +323,18 @@ gdkdisplay_supports_clipboard_persistence(VALUE self)
 }
 
 static VALUE
-gdkdisplay_store_clipboard(VALUE self, VALUE clipboard_window, VALUE time_, VALUE targets)
+gdkdisplay_store_clipboard(VALUE self, VALUE rbclipboard_window, VALUE rbtime_, VALUE rbtargets)
 {
-    gint i;
-    gint n_targets = RARRAY_LEN(targets);
-    GdkAtom* gtargets = g_new(GdkAtom, n_targets);
+    GdkDisplay *display = _SELF(self);
+    GdkWindow *clipboard_window = GDK_WINDOW(RVAL2GOBJ(rbclipboard_window));
+    guint32 time_ = NUM2UINT(rbtime_);
+    long n;
+    GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
 
-    for (i = 0; i < n_targets; i++){
-        gtargets[i] = RVAL2ATOM(RARRAY_PTR(targets)[i]);
-    }
+    gdk_display_store_clipboard(display, clipboard_window, time_, targets, n);
 
-    gdk_display_store_clipboard(_SELF(self), GDK_WINDOW(RVAL2GOBJ(clipboard_window)),
-                                NUM2UINT(time_), gtargets, n_targets);
+    g_free(targets);
+
     return self;
 }
 #endif
