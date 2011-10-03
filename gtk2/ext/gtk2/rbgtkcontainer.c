@@ -340,18 +340,58 @@ cont_get_focus_chain(VALUE self)
     return GLIST2ARYF(glist);
 }
 
-static VALUE
-cont_set_focus_chain(VALUE self, VALUE focusable_widgets)
-{
-    int i;
-    GList *glist = NULL;
+struct rval2gtkwidgetglist_args {
+    VALUE ary;
+    long n;
+    GList *result;
+};
 
-    Check_Type(focusable_widgets, T_ARRAY);
-    for (i = 0; i < RARRAY_LEN(focusable_widgets); i++) {
-        glist = g_list_append(glist, RVAL2GOBJ(RARRAY_PTR(focusable_widgets)[i]));
-    }
-    gtk_container_set_focus_chain(_SELF(self), glist);
-    g_list_free(glist);
+static VALUE
+rbg_rval2gtkwidgetglist_body(VALUE value)
+{
+    long i;
+    struct rval2gtkwidgetglist_args *args = (struct rval2gtkwidgetglist_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result = g_list_append(args->result, GTK_WIDGET(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gtkwidgetglist_rescue(VALUE value)
+{
+    g_list_free(((struct rval2gtkwidgetglist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GList *
+rbg_rval2gtkwidgetglist(VALUE value)
+{
+    struct rval2gtkwidgetglist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbg_rval2gtkwidgetglist_body, (VALUE)&args,
+              rbg_rval2gtkwidgetglist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+#define RVAL2GTKWIDGETGLIST(value) rbg_rval2gtkwidgetglist(value)
+
+static VALUE
+cont_set_focus_chain(VALUE self, VALUE rbfocusable_widgets)
+{
+    GtkContainer *container = _SELF(self);
+    GList *focusable_widgets = RVAL2GTKWIDGETGLIST(rbfocusable_widgets);
+
+    gtk_container_set_focus_chain(container, focusable_widgets);
+
+    g_list_free(focusable_widgets);
 
     return self;
 }
