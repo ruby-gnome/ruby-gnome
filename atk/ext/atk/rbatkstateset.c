@@ -10,6 +10,7 @@
 ************************************************/
 
 #include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_STATE_SET(RVAL2GOBJ(s)))
 

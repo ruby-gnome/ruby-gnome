@@ -9,6 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 #include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_EDITABLE_TEXT(RVAL2GOBJ(s)))
 
