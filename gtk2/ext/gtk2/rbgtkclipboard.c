@@ -73,7 +73,7 @@ clipboard_get_display(VALUE self)
 #if GTK_CHECK_VERSION(2,2,0)
     return GOBJ2RVAL(gtk_clipboard_get_display(_SELF(self)));
 #else
-	 return Qnil;
+    return Qnil;
 #endif
 }
 
@@ -84,19 +84,53 @@ clipboard_get_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, gu
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
 }
 
+struct clipboard_set_args {
+    VALUE self;
+    VALUE targets;
+    VALUE func;
+};
+
+static VALUE
+clipboard_set_body(VALUE value)
+{
+    struct clipboard_set_args *args = (struct clipboard_set_args *)value;
+    GtkClipboard *clipboard = _SELF(args->self);
+    long n;
+    GtkTargetEntry *targets;
+    targets = RVAL2GTKTARGETENTRIES(args->targets, &n);
+    gboolean result = gtk_clipboard_set_with_data(clipboard,
+                                                  targets,
+                                                  n,
+                                                  (GtkClipboardGetFunc)clipboard_get_func,
+                                                  (GtkClipboardClearFunc)NULL,
+                                                  (gpointer)args->func);
+
+    g_free(targets);
+
+    return CBOOL2RVAL(result);
+}
+
+static VALUE
+clipboard_set_rescue(VALUE value)
+{
+    struct clipboard_set_args *args = (struct clipboard_set_args *)value;
+
+    G_CHILD_REMOVE(args->self, args->func);
+
+    rb_exc_raise(rb_errinfo());
+}
+
 static VALUE
 clipboard_set(VALUE self, VALUE targets)
 {
-    const GtkTargetEntry* gtargets = (const GtkTargetEntry*)rbgtk_get_target_entry(targets);
-    VALUE func = rb_block_proc();
-    G_RELATIVE(self, func);
-    return CBOOL2RVAL(gtk_clipboard_set_with_data(_SELF(self), 
-                                                  gtargets,
-                                                  RARRAY_LEN(targets),
-                                                  (GtkClipboardGetFunc)clipboard_get_func,
-                                                  (GtkClipboardClearFunc)NULL,
-                                                  (gpointer)func));
+    struct clipboard_set_args args = { self, targets, rb_block_proc() };
+
+    G_CHILD_ADD(self, args.func);
+
+    return rb_rescue(clipboard_set_body, (VALUE)&args,
+                     clipboard_set_rescue, (VALUE)&args);
 }
+
 /*
 Do not implement this. Use Gtk::Clipboard#set_with_data instead.
 gboolean    gtk_clipboard_set_with_owner    (GtkClipboard *clipboard,
@@ -351,16 +385,16 @@ clipboard_wait_is_target_available(VALUE self, VALUE target)
 }
 
 static VALUE
-clipboard_set_can_store(VALUE self, VALUE targets)
+clipboard_set_can_store(VALUE self, VALUE rbtargets)
 {
-    gint n_targets = 0;
-    GtkTargetEntry* entries = (GtkTargetEntry*)NULL;
+    GtkClipboard *clipboard = _SELF(self);
+    long n = 0;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(rbtargets, &n);
 
-    if (!NIL_P(targets)){
-        n_targets = RARRAY_LEN(targets);
-        entries = rbgtk_get_target_entry(targets);
-    }
-    gtk_clipboard_set_can_store(_SELF(self), entries, n_targets);
+    gtk_clipboard_set_can_store(clipboard, targets, n);
+
+    g_free(targets);
+
     return self;
 }
 
@@ -368,6 +402,7 @@ static VALUE
 clipboard_store(VALUE self)
 {
     gtk_clipboard_store(_SELF(self));
+
     return self;
 }
 #endif

@@ -51,11 +51,17 @@ gtkdrag_selection_add_target(VALUE self, VALUE widget, VALUE selection, VALUE ta
 }
 
 static VALUE
-gtkdrag_selection_add_targets(VALUE self, VALUE widget, VALUE selection, VALUE targets)
+gtkdrag_selection_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
 {
-    gtk_selection_add_targets(RVAL2WIDGET(widget), 
-                              RVAL2ATOM(selection),
-                              rbgtk_get_target_entry(targets), RARRAY_LEN(targets));
+    GtkWidget *widget = RVAL2WIDGET(rbwidget);
+    GdkAtom selection = RVAL2ATOM(rbselection);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
+
+    gtk_selection_add_targets(widget, selection, targets, n);
+
+    g_free(targets);
+
     return self;
 }
 

@@ -159,23 +159,33 @@ iview_create_drag_icon(VALUE self, VALUE path)
 }
 
 static VALUE
-iview_enable_model_drag_dest(VALUE self, VALUE targets, VALUE actions)
+iview_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
 {
-    gtk_icon_view_enable_model_drag_dest(_SELF(self),
-                                         rbgtk_get_target_entry(targets),
-                                         RARRAY_LEN(targets),
-                                         RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    GtkIconView *icon_view = _SELF(self);
+    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
+
+    gtk_icon_view_enable_model_drag_dest(icon_view, targets, n, actions);
+
+    g_free(targets);
+
     return self;
 }
 
 static VALUE
-iview_enable_model_drag_source(VALUE self, VALUE flags, VALUE targets, VALUE actions)
+iview_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
-    gtk_icon_view_enable_model_drag_source(_SELF(self),
-                                           RVAL2GFLAGS(flags, GDK_TYPE_MODIFIER_TYPE),
-                                           rbgtk_get_target_entry(targets),
-                                           RARRAY_LEN(targets),
-                                           RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    GtkIconView *icon_view = _SELF(self);
+    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
+    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
+
+    gtk_icon_view_enable_model_drag_source(icon_view, start_button_mask, targets, n, actions);
+
+    g_free(targets);
+
     return self;
 }
 

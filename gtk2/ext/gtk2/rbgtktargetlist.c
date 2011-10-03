@@ -40,12 +40,16 @@ gtk_target_list_get_type(void)
 /**********************************/
 
 static VALUE
-target_list_initialize(VALUE self, VALUE targets)
+target_list_initialize(VALUE self, VALUE rbtargets)
 {
-    Check_Type(targets, T_ARRAY);
-    G_INITIALIZE(self, gtk_target_list_new(
-                     rbgtk_get_target_entry(targets), 
-                     RARRAY_LEN(targets)));
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
+    GtkTargetList *list = gtk_target_list_new(targets, n);
+
+    g_free(targets);
+
+    G_INITIALIZE(self, list);
+
     return Qnil;
 }
 
@@ -58,11 +62,16 @@ target_list_add(VALUE self, VALUE target, VALUE flags, VALUE info)
 }
 
 static VALUE
-target_list_add_table(VALUE self, VALUE targets)
+target_list_add_table(VALUE self, VALUE rbtargets)
 {
-    gtk_target_list_add_table(_SELF(self),
-                              rbgtk_get_target_entry(targets), 
-                              RARRAY_LEN(targets));
+    GtkTargetList *list = _SELF(self);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
+
+    gtk_target_list_add_table(list, targets, n);
+
+    g_free(targets);
+
     return self;
 }
 

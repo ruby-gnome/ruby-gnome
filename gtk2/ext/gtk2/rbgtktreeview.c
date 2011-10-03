@@ -438,28 +438,36 @@ treeview_convert_widget_to_tree_coords(VALUE self, VALUE wx, VALUE wy)
 #endif
 
 static VALUE
-treeview_enable_model_drag_dest(VALUE self, VALUE targets, VALUE actions)
+treeview_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
 {
-    const GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
-    int num = RARRAY_LEN(targets);
+    GtkTreeView *view = _SELF(self);
+    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
 
-    gtk_tree_view_enable_model_drag_dest(_SELF(self),  entries, 
-                                         num, RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+    gtk_tree_view_enable_model_drag_dest(view, targets, n, actions);
+
+    g_free(targets);
+
     return self;
 }
 
 static VALUE
-treeview_enable_model_drag_source(VALUE self, VALUE start_button_mask, VALUE targets, VALUE actions)
+treeview_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
-    GtkTargetEntry* entries = rbgtk_get_target_entry(targets);
-    if (entries){
-        gint num = RARRAY_LEN(targets);
-        
-        gtk_tree_view_enable_model_drag_source(_SELF(self), 
-                                               RVAL2GFLAGS(start_button_mask, GDK_TYPE_MODIFIER_TYPE), 
-                                               entries, num,
-                                               RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
-    }
+    GtkTreeView *view = _SELF(self);
+    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
+    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    long n;
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(rbtargets, &n);
+
+    if (targets == NULL)
+        return self;
+
+    gtk_tree_view_enable_model_drag_source(view, start_button_mask, targets, n, actions);
+
+    g_free(targets);
+
     return self;
 }
 
