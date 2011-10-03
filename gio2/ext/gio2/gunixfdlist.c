@@ -29,21 +29,22 @@ static VALUE
 unixfdlist_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbfds;
-        gint i, n_fds;
+        long n;
         gint *fds;
+        GUnixFDList *list;
 
         rb_scan_args(argc, argv, "0*", &rbfds);
-        n_fds = RARRAY_LEN(rbfds);
-        if (n_fds == 0) {
+        fds = RVAL2FDS(rbfds, &n);
+        if (n == 0) {
                 G_INITIALIZE(self, g_unix_fd_list_new());
                 return Qnil;
         }
 
-        fds = ALLOCA_N(gint, n_fds);
-        for (i = 0; i < n_fds; i++)
-                fds[0] = RVAL2FD(RARRAY_PTR(rbfds)[i]);
+        list = g_unix_fd_list_new_from_array(fds, n);
 
-        G_INITIALIZE(self, g_unix_fd_list_new_from_array(fds, n_fds));
+        g_free(fds);
+
+        G_INITIALIZE(self, list);
 
         return Qnil;
 }
