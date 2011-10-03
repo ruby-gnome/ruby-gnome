@@ -28,11 +28,42 @@ value_array_to_ruby(const GValue *from)
     return ary;
 }
 
+struct value_array_from_ruby_args {
+    VALUE ary;
+    long n;
+    GValueArray *result;
+};
+
+static VALUE
+value_array_from_ruby_body(VALUE value)
+{
+    long i;
+    struct value_array_from_ruby_args *args = (struct value_array_from_ruby_args *)value;
+
+    for (i = 0; i < args->n; i++) {
+        GValue v = { 0 };
+
+        g_value_init(&v, RVAL2GTYPE(RARRAY_PTR(args->ary)[i]));
+        rbgobj_rvalue_to_gvalue(RARRAY_PTR(args->ary)[i], &v);
+
+        g_value_array_append(args->result, &v);
+    }
+
+    return Qnil;
+}
+
+static VALUE
+value_array_from_ruby_rescue(VALUE value)
+{
+    g_value_array_free(((struct value_array_from_ruby_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
 static void
 value_array_from_ruby(const VALUE from, GValue *to)
 {
-    int i;
-    GValueArray *array;
+    struct value_array_from_ruby_args args;
 
     if (NIL_P(from)) {
         g_value_set_boxed(to, NULL);
@@ -40,19 +71,14 @@ value_array_from_ruby(const VALUE from, GValue *to)
         return;
     }
 
-    Check_Type(from, T_ARRAY);
+    args.ary = rb_ary_to_ary(from);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_value_array_new(args.n);
 
-    array = g_value_array_new(RARRAY_LEN(from));
+    rb_rescue(value_array_from_ruby_body, (VALUE)&args,
+              value_array_from_ruby_rescue, (VALUE)&args);
 
-    for (i = 0; i < RARRAY_LEN(from); i++) {
-        GValue v = { 0, };
-        g_value_init(&v, RVAL2GTYPE(RARRAY_PTR(from)[i]));
-        rbgobj_rvalue_to_gvalue(RARRAY_PTR(from)[i], &v);
-
-        g_value_array_append(array, &v);
-    }
-
-    g_value_set_boxed(to, array);
+    g_value_set_boxed(to, args.result);
 }
 
 void
