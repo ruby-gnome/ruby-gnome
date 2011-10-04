@@ -534,7 +534,7 @@ gwin_set_icon_list(VALUE self, VALUE rblist)
 
     g_list_free(list);
 
-    /* TODO: Shouldn’t we return self? */
+    /* TODO: Shouldn't we return self? */
     return rblist;
 }
 
