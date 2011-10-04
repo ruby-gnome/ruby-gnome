@@ -30,6 +30,10 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
+ruby_header = 'ruby.h'
+have_func 'rb_exec_recursive', ruby_header
+have_func 'rb_errinfo', ruby_header
+
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
@@ -48,10 +52,6 @@ unless win32
   PKGConfig.have_package('gio-unix-2.0') and defines += ' -DHAVE_GIO_UNIX'
 end
 PKGConfig.have_package('gobject-2.0') or exit 1
-
-ruby_header = 'ruby.h'
-have_func 'rb_exec_recursive', ruby_header
-have_func 'rb_errinfo', ruby_header
 
 def try_compiler_option(opt, &block)
   checking_for "#{opt} option to compiler" do

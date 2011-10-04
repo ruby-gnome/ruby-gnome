@@ -30,6 +30,9 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
+ruby_header = 'ruby.h'
+have_func 'rb_errinfo', ruby_header
+
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
@@ -42,9 +45,6 @@ end
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
-
-ruby_header = 'ruby.h'
-have_func 'rb_errinfo', ruby_header
 
 atk_header = "atk/atk.h"
 have_func('atk_action_get_localized_name', atk_header)
