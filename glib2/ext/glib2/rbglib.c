@@ -340,7 +340,7 @@ const gchar **
 rbg_rval2strv_accept_nil(VALUE ary, long *n)
 {
     if (!NIL_P(ary))
-        rbg_rval2strv(ary, n);
+        return rbg_rval2strv(ary, n);
 
     if (n != NULL)
         *n = 0;
