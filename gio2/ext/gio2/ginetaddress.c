@@ -41,7 +41,7 @@ inetaddress_new_from_bytes(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         family = RVAL2GSOCKETFAMILY(rbfamily);
 
         /* TODO: Should check encoding. */
-        /* TODO: We can’t pass bytes as such, as it will be NULL-terminated. */
+        /* TODO: We can't pass bytes as such, as it will be NULL-terminated. */
         /* TODO: Do we need to deal with G_SOCKET_FAMILY_UNIX? */
         switch (family) {
         case G_SOCKET_FAMILY_IPV4:

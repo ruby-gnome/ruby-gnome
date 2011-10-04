@@ -287,7 +287,7 @@ Init_gunixmounts(G_GNUC_UNUSED VALUE glib)
 
         rb_include_module(unixmount, rb_mComparable);
 
-        /* TODO: This doesn’t follow the naming conventions, but it seems
+        /* TODO: This doesn't follow the naming conventions, but it seems
          * overkill to have GLib::Unix just for mount_path_system_internal?. */
         rb_define_singleton_method(unixmount, "mount_path_system_internal?", unix_is_mount_path_system_internal, 1);
         rb_define_singleton_method(unixmount, "at", unixmount_at, 1);

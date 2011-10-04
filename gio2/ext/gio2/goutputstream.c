@@ -119,7 +119,7 @@ outputstream_close(int argc, VALUE *argv, VALUE self)
 }
 
 /* TODO: Does it make sense to use buffer and count?  We should probably
- * provide a better wrapper that simply pumps out buffer while count hasn’t
+ * provide a better wrapper that simply pumps out buffer while count hasn't
  * been reached, calling the callback with the bytes written, then with the
  * result. */
 static VALUE

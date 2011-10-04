@@ -20,7 +20,7 @@
 
 #include "gio2.h"
 
-/* NOTE: g_io_error_from_errno doesn’t make sense from Ruby. */
+/* NOTE: g_io_error_from_errno doesn't make sense from Ruby. */
 
 void
 Init_gioerror(VALUE glib)

@@ -47,8 +47,8 @@
 	* ext/gio2/*: Remove methods for getting and setting properties that
 	are automatically generated.
 	* lib/gio2.rb: Make GLib::UnixFDList Enumerable.
-	* ext/gio2/*: Don’t use rb_undef_alloc_func.  We would like to remove
-	.new from these classes, but I don’t know of a way of doing so.  Using
+	* ext/gio2/*: Don't use rb_undef_alloc_func.  We would like to remove
+	.new from these classes, but I don't know of a way of doing so.  Using
 	rb_undef_alloc_func is incorrect, as it will make subclasses
 	unallocatable.
 	* ext/gio2/*: Fix some TODOs.
@@ -86,7 +86,7 @@
 	variable that we need for rbgio_raise_error.
 
 	* ext/gio2/gfile.c: Do not undefine that which does not exist (File is
-	a module, not a class, so it doesn’t have an alloc function).
+	a module, not a class, so it doesn't have an alloc function).
 
 	* lib/gio2.rb: Fix class/module “typos”.
 

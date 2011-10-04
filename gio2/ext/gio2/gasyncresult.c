@@ -22,7 +22,7 @@
 
 #define _SELF(value) RVAL2GASYNCRESULT(value)
 
-/* NOTE: g_async_result_get_user_data isn’t of any use from Ruby. */
+/* NOTE: g_async_result_get_user_data isn't of any use from Ruby. */
 
 static VALUE
 asyncresult_get_source_object(VALUE self)

@@ -114,7 +114,7 @@ Init_gcontenttype(VALUE glib)
 
         /* TODO: Should wrap this in a class. */
         rb_define_module_function(contenttype, "equals?", contenttype_equals, 2);
-        /* TODO: This name isn’t great. */
+        /* TODO: This name isn't great. */
         rb_define_module_function(contenttype, "is_a?", contenttype_is_a, 2);
         rb_define_module_function(contenttype, "unknown?", contenttype_is_unknown, 1);
         rb_define_module_function(contenttype, "get_description", contenttype_get_description, 1);
