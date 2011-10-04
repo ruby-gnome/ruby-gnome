@@ -20,7 +20,7 @@ imcsimple_initialize(VALUE self)
     return Qnil;
 }
 
-/* TODO: Why are we taking a third argument?  Shouldn’t it be determined by the
+/* TODO: Why are we taking a third argument?  Shouldn't it be determined by the
  * length of rbdata? */
 static VALUE
 imcsimple_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seqs)

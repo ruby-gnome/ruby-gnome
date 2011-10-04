@@ -55,9 +55,9 @@ asyncinitable_init_finish(VALUE self, VALUE result)
         return self;
 }
 
-/* NOTE: We don’t implement g_async_initable_new_async. */
+/* NOTE: We don't implement g_async_initable_new_async. */
 
-/* NOTE: We don’t implement g_async_initable_new_valist_async. */
+/* NOTE: We don't implement g_async_initable_new_valist_async. */
 
 struct rbgio_gasyncinitable_new_async_data {
         GObjectClass *gclass;

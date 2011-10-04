@@ -148,7 +148,7 @@ socket_receive(int argc, VALUE *argv, VALUE self)
         if (read == -1)
                 rbgio_raise_error(error);
 
-        /* TODO: This is what Ruby does, but I can’t figure out why one needs
+        /* TODO: This is what Ruby does, but I can't figure out why one needs
          * both. */
         rb_str_set_len(result, read);
         rb_str_resize(result, read);

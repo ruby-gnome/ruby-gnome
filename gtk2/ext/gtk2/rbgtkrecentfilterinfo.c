@@ -103,7 +103,7 @@ rf_get_applications(VALUE self)
 static VALUE
 rf_set_applications(VALUE self, VALUE applications)
 {
-    /* NOTE: This can’t be right.  What guarantees that the entries in
+    /* NOTE: This can't be right.  What guarantees that the entries in
      * applications will be around?  It should be RVAL2STRV_DUP and use
      * g_strfreev in free above. */
     _SELF(self)->applications = RVAL2STRV(applications);

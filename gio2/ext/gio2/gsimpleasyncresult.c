@@ -40,13 +40,13 @@ simpleasyncresult_initialize(VALUE self, VALUE object)
         return Qnil;
 }
 
-/* NOTE: Can’t implement g_simple_async_result_new_error. */
+/* NOTE: Can't implement g_simple_async_result_new_error. */
 
-/* NOTE: Can’t implement g_simple_async_result_new_from_error. */
+/* NOTE: Can't implement g_simple_async_result_new_from_error. */
 
-/* NOTE: Can’t implement g_simple_async_result_set_op_res_gpointer. */
+/* NOTE: Can't implement g_simple_async_result_set_op_res_gpointer. */
 
-/* NOTE: Can’t implement g_simple_async_result_get_op_res_gpointer. */
+/* NOTE: Can't implement g_simple_async_result_get_op_res_gpointer. */
 
 static VALUE
 simpleasyncresult_set_op_res_gssize(VALUE self, VALUE op_res)
@@ -117,20 +117,20 @@ simpleasyncresult_complete_in_idle(VALUE self)
         return self;
 }
 
-/* TODO: Should we implement g_simple_async_result_run_in_thread?  I’d say no,
- * but I’m not sure. */
+/* TODO: Should we implement g_simple_async_result_run_in_thread?  I'd say no,
+ * but I'm not sure. */
 
-/* NOTE: Can’t implement g_simple_async_result_set_from_error. */
+/* NOTE: Can't implement g_simple_async_result_set_from_error. */
 
-/* NOTE: Can’t implement g_simple_async_result_propagate_error. */
+/* NOTE: Can't implement g_simple_async_result_propagate_error. */
 
-/* NOTE: Can’t implement g_simple_async_result_set_error. */
+/* NOTE: Can't implement g_simple_async_result_set_error. */
 
-/* NOTE: Can’t implement g_simple_async_result_set_error_va. */
+/* NOTE: Can't implement g_simple_async_result_set_error_va. */
 
-/* NOTE: Can’t implement g_simple_async_result_report_error_in_idle. */
+/* NOTE: Can't implement g_simple_async_result_report_error_in_idle. */
 
-/* NOTE: Can’t implement g_simple_async_result_report_gerror_in_idle. */
+/* NOTE: Can't implement g_simple_async_result_report_gerror_in_idle. */
 
 void
 Init_gsimpleasyncresult(VALUE glib)

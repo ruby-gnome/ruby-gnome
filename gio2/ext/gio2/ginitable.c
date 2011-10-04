@@ -157,9 +157,9 @@ rbgio_ginitable_new(GType type, VALUE parameters, VALUE cancellable)
         return object;
 }
 
-/* NOTE: We don’t implement g_initable_new. */
+/* NOTE: We don't implement g_initable_new. */
 
-/* NOTE: We don’t implement g_initable_new_valist. */
+/* NOTE: We don't implement g_initable_new_valist. */
 
 static VALUE
 initable_initialize(int argc, VALUE *argv, VALUE self)
