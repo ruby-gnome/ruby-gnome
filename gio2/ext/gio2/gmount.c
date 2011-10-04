@@ -206,7 +206,7 @@ mount_guess_content_type_finish(VALUE self, VALUE result)
         if (content_types == NULL)
                 rbgio_raise_error(error);
 
-        return STRVECTOR2ARY_FREE(content_types);
+        return STRV2RVAL_FREE(content_types);
 }
 
 static VALUE
@@ -224,7 +224,7 @@ mount_guess_content_type_sync(int argc, VALUE *argv, VALUE self)
         if (content_types == NULL)
                 rbgio_raise_error(error);
 
-        return STRVECTOR2ARY_FREE(content_types);
+        return STRV2RVAL_FREE(content_types);
 }
 
 static VALUE

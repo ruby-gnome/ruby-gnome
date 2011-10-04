@@ -152,7 +152,7 @@ volume_eject_with_operation_finish(VALUE self, VALUE result)
 static VALUE
 volume_enumerate_identifiers(VALUE self)
 {
-        return STRVECTOR2ARY_FREE(g_volume_enumerate_identifiers(_SELF(self)));
+        return STRV2RVAL_FREE(g_volume_enumerate_identifiers(_SELF(self)));
 }
 
 static VALUE

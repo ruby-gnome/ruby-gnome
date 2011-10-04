@@ -98,7 +98,7 @@ contenttype_guess(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 contenttype_guess_for_tree(G_GNUC_UNUSED VALUE self, VALUE root)
 {
-        return STRVECTOR2ARY_FREE(g_content_type_guess_for_tree(RVAL2GFILE(root)));
+        return STRV2RVAL_FREE(g_content_type_guess_for_tree(RVAL2GFILE(root)));
 }
 
 static VALUE

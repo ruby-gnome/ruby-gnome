@@ -80,8 +80,8 @@ fileinfo_list_attributes(int argc, VALUE *argv, VALUE self)
 
         rb_scan_args(argc, argv, "01", &name_space);
 
-        return STRVECTOR2ARY_FREE(g_file_info_list_attributes(_SELF(self),
-                                                              RVAL2FILEINFONAMESPACEDEFAULT(name_space)));
+        return STRV2RVAL_FREE(g_file_info_list_attributes(_SELF(self),
+                                                          RVAL2FILEINFONAMESPACEDEFAULT(name_space)));
 }
 
 static VALUE
@@ -124,7 +124,7 @@ file_attribute_to_value(GFileAttributeType type, gpointer value)
         case G_FILE_ATTRIBUTE_TYPE_OBJECT:
                 return GOBJ2RVAL((GObject *)value);
         case G_FILE_ATTRIBUTE_TYPE_STRINGV:
-                return STRVECTOR2ARY_FREE((char **)value);
+                return STRV2RVAL_FREE((gchar **)value);
         case G_FILE_ATTRIBUTE_TYPE_INVALID:
                 rb_raise(rb_eArgError, "invalid file attribute type");
                 break;
@@ -171,8 +171,8 @@ fileinfo_get_attribute_string(VALUE self, VALUE attribute)
 static VALUE
 fileinfo_get_attribute_stringv(VALUE self, VALUE attribute)
 {
-        return STRVECTOR2ARY((const gchar * const *)g_file_info_get_attribute_stringv(_SELF(self),
-                                                                                     RVAL2CSTR(attribute)));
+        return STRV2RVAL((const gchar **)g_file_info_get_attribute_stringv(_SELF(self),
+                                                                           RVAL2CSTR(attribute)));
 }
 
 static VALUE

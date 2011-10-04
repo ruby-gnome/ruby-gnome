@@ -61,7 +61,7 @@ vfs_is_active(VALUE self)
 static VALUE
 vfs_get_supported_uri_schemes(VALUE self)
 {
-        return STRVECTOR2ARY(g_vfs_get_supported_uri_schemes(_SELF(self)));
+        return STRV2RVAL(g_vfs_get_supported_uri_schemes(_SELF(self)));
 }
 
 void

@@ -227,9 +227,6 @@ GType g_file_attribute_info_list_get_type(void);
 #define GFILEARY2GLIST(ary) rbgio_gfile_ary_to_glist(ary)
 #define GFILEARY2GLIST_ACCEPT_NIL(ary) rbgio_gfile_ary_to_glist_accept_nil(ary)
 
-#define STRVECTOR2ARY(vector) rbgio_str_vector_to_ary(vector)
-#define STRVECTOR2ARY_FREE(vector) rbgio_str_vector_to_ary_free(vector)
-
 G_GNUC_INTERNAL VALUE rbgio_cstr_to_rval_tainted(const char *string,
                                                  gsize length);
 G_GNUC_INTERNAL VALUE rbgio_cstr_to_rval_tainted_free(char *string,
@@ -240,8 +237,6 @@ G_GNUC_INTERNAL VALUE rbgio_fds_to_ary_free(gint *fds);
 G_GNUC_INTERNAL GList *rbgio_gfile_ary_to_glist(VALUE ary);
 G_GNUC_INTERNAL GList *rbgio_gfile_ary_to_glist_accept_nil(VALUE ary);
 G_GNUC_INTERNAL void rbgio_rval_to_gtimeval(VALUE value, GTimeVal *time);
-G_GNUC_INTERNAL VALUE rbgio_str_vector_to_ary(const gchar * const *vector);
-G_GNUC_INTERNAL VALUE rbgio_str_vector_to_ary_free(gchar **vector);
 G_GNUC_INTERNAL void rbgio_async_ready_callback(GObject *source,
                                        GAsyncResult *result,
                                        gpointer data);

@@ -220,7 +220,7 @@ drive_stop_finish(VALUE self, VALUE result)
 static VALUE
 drive_enumerate_identifiers(VALUE self)
 {
-        return STRVECTOR2ARY_FREE(g_drive_enumerate_identifiers(_SELF(self)));
+        return STRV2RVAL_FREE(g_drive_enumerate_identifiers(_SELF(self)));
 }
 
 static VALUE

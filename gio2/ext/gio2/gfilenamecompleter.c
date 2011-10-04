@@ -47,8 +47,8 @@ filenamecompleter_get_completion_suffix(VALUE self, VALUE initial_text)
 static VALUE
 filenamecompleter_get_completions(VALUE self, VALUE initial_text)
 {
-        return STRVECTOR2ARY_FREE(g_filename_completer_get_completions(_SELF(self),
-                                                                       RVAL2CSTR(initial_text)));
+        return STRV2RVAL_FREE(g_filename_completer_get_completions(_SELF(self),
+                                                                   RVAL2CSTR(initial_text)));
 }
 
 static VALUE
