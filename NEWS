@@ -2,6 +2,22 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.0.4: 2011-XX-XX
+
+This is a bug fix release of 1.0.3.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * [GitHub#1] Fix GLib::Spawn regression.
+      [Geoff Youngs]
+
+=== Thanks
+
+  * Geoff Youngs
+
 == Ruby-GNOME2 1.0.3: 2011-09-19
 
 This is a bug fix release of 1.0.2.
