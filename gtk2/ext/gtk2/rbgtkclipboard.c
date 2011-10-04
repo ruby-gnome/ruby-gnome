@@ -96,8 +96,7 @@ clipboard_set_body(VALUE value)
     struct clipboard_set_args *args = (struct clipboard_set_args *)value;
     GtkClipboard *clipboard = _SELF(args->self);
     long n;
-    GtkTargetEntry *targets;
-    targets = RVAL2GTKTARGETENTRIES(args->targets, &n);
+    GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(args->targets, &n);
     gboolean result = gtk_clipboard_set_with_data(clipboard,
                                                   targets,
                                                   n,
