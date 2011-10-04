@@ -19,9 +19,13 @@ class TestGLibSpawn < Test::Unit::TestCase
   end
 
   def test_async_clear_environment
-    ruby = File.join(RbConfig::CONFIG['bindir'],
-                     RbConfig::CONFIG['RUBY_INSTALL_NAME'] +
-                       RbConfig::CONFIG['EXEEXT'])
+    if RbConfig.respond_to?(:ruby)
+      ruby = RbConfig.ruby
+    else
+      ruby = File.join(RbConfig::CONFIG['bindir'],
+                       RbConfig::CONFIG['RUBY_INSTALL_NAME'] +
+                         RbConfig::CONFIG['EXEEXT'])
+    end
     pid = GLib::Spawn.async(Dir.pwd, [ruby, '-e', 'exit 1 unless ENV.empty?'], [], GLib::Spawn::DO_NOT_REAP_CHILD)
     _, status = *Process.waitpid2(pid)
     assert status.success?
