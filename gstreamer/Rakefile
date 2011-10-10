@@ -84,10 +84,10 @@ namespace :win32 do
       pkg_config_path = (["gstreamer"] + depended_packages).collect do |package|
         "../#{package}/vendor/local/lib/pkgconfig"
       end
-      pkg_config_path << "#{rcairo_win32_path}/vendor/local/lib/pkgconfig"
       ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
         File.expand_path(path)
       end.join(":")
+      ENV["PKG_CONFIG_LIBDIR"] = "#{rcairo_win32_path}/vendor/local/lib/pkgconfig"
     end
 
     packages.each do |package|
