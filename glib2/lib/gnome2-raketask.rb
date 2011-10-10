@@ -7,6 +7,7 @@
 require 'find'
 
 require 'rubygems'
+require 'rubygems/package_task'
 require 'rake/extensiontask'
 
 class GNOME2Package
