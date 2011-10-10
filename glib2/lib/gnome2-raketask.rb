@@ -64,7 +64,7 @@ class GNOME2Package
     @name = ""
     @summary = ""
     @description = ""
-    @author = "The Ruby-GNOME2 Proejct Team"
+    @author = "The Ruby-GNOME2 Project Team"
     @email = "ruby-gnome2-devel-en@lists.sourceforge.net"
     @homepage = "http://ruby-gnome2.sourceforge.jp/"
   end
