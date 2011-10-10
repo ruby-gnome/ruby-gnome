@@ -1,19 +1,129 @@
 # -*- ruby -*-
 
 require './../glib2/lib/gnome2-raketask'
+require 'open-uri'
 
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.dependency.gem.runtime = ["glib2"]
-  # TODO: use http://code.google.com/p/ossbuild/downloads/list ???
   _package.win32.packages = []
-  _package.win32.dependencies = []
+  _package.win32.dependencies = ["libxml2"]
   _package.post_install_message = "This library is experimental."
 end
 package.define_tasks
 
 namespace :win32 do
+  dist_dir = Pathname.new("vendor/local").expand_path
+  license_dir = dist_dir + "share" + "license"
+  tmp_dir = Pathname.new("tmp").expand_path
+  download_dir = tmp_dir + "download"
+
+  packages = [
+    {
+      :name => "gstreamer",
+      :label => "GStreamer",
+      :version => "0.10.35",
+      :configure_args => [],
+    },
+    {
+      :name => "gst-plugins-base",
+      :label => "GStreamer plugins (base)",
+      :version => "0.10.35",
+      :configure_args => ["--disable-gnome_vfs"],
+    },
+    {
+      :name => "gst-plugins-good",
+      :label => "GStreamer plugins (good)",
+      :version => "0.10.30",
+      :configure_args => ["--disable-gconf"],
+    },
+    {
+      :name => "gst-plugins-bad",
+      :label => "GStreamer plugins (bad)",
+      :version => "0.10.22",
+      :configure_args => [],
+    },
+    {
+      :name => "gst-ffmpeg",
+      :label => "GStreamer ffmpeg",
+      :version => "0.10.12",
+      :configure_args => [],
+    },
+  ]
+
+  namespace :download do
+    binary_url_base = "http://gstreamer.freedesktop.org/src/"
+    packages.each do |package|
+      base = "#{package[:name]}-#{package[:version]}"
+      tar_gz = "#{base}.tar.gz"
+      tar_gz_url = "#{binary_url_base}#{package[:name]}/#{tar_gz}"
+      tar_gz_full_path = download_dir + tar_gz
+
+      desc "Download #{package[:label]} into #{download_dir}."
+      task package[:name] => tar_gz_full_path.to_s
+
+      directory tar_gz_full_path.dirname.to_s
+      file tar_gz_full_path.to_s do
+        open(tar_gz_url) do |downloaded_tar_gz|
+          tar_gz_full_path.open("wb") do |tar_gz_file|
+            tar_gz_file.print(downloaded_tar_gz.read)
+          end
+        end
+      end
+    end
+  end
+
+  namespace :build do
+    host = "i686-w64-mingw32"
+
+    task :prepare do
+      depended_packages = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
+      pkg_config_path = (["gstreamer"] + depended_packages).collect do |package|
+        "../#{package}/vendor/local/lib/pkgconfig"
+      end
+      rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
+      pkg_config_path << "#{rcairo_win32_path}/vendor/local/lib/pkgconfig"
+      ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
+        File.expand_path(path)
+      end.join(":")
+    end
+
+    packages.each do |package|
+      desc "Build #{package[:label]} and install it into #{dist_dir}."
+      task package[:name] => [:prepare, "win32:download:#{package[:name]}"] do
+        package_tmp_dir = tmp_dir + package[:name]
+        rm_rf(package_tmp_dir)
+        mkdir_p(package_tmp_dir)
+
+        base = "#{package[:name]}-#{package[:version]}"
+        tar_gz = "#{base}.tar.gz"
+        tar_gz_full_path = download_dir + tar_gz
+        Dir.chdir(package_tmp_dir.to_s) do
+          sh("tar", "xzf", tar_gz_full_path.to_s) or exit(false)
+        end
+
+        Dir.chdir((package_tmp_dir + base).to_s) do
+          sh("./configure",
+             "--prefix=#{dist_dir}",
+             "--host=#{host}",
+             *package[:configure_args]) or exit(false)
+          make_args = []
+          make_n_jobs = ENV["MAKE_N_JOBS"]
+          make_args << "-j#{make_n_jobs}" if make_n_jobs
+          sh("env", "GREP_OPTIONS=--text", "nice", "make") or exit(false)
+          sh("env", "GREP_OPTIONS=--text", "make", "install") or exit(false)
+
+          package_license_dir = license_dir + package[:name]
+          mkdir_p(package_license_dir)
+          files = ["AUTHORS", "COPYING"]
+          cp(files, package_license_dir)
+        end
+      end
+    end
+  end
+
+  # deprecated this. remove me.
   desc "create *.pc files"
   task :pc do
     require "pkg-config"
