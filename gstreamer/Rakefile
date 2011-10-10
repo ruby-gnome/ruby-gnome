@@ -111,8 +111,9 @@ namespace :win32 do
           make_args = []
           make_n_jobs = ENV["MAKE_N_JOBS"]
           make_args << "-j#{make_n_jobs}" if make_n_jobs
-          sh("env", "GREP_OPTIONS=--text", "nice", "make") or exit(false)
-          sh("env", "GREP_OPTIONS=--text", "make", "install") or exit(false)
+          ENV["GREP_OPTIONS"] = "--text"
+          sh("nice", "make", *make_args) or exit(false)
+          sh("make", "install") or exit(false)
 
           package_license_dir = license_dir + package[:name]
           mkdir_p(package_license_dir)
