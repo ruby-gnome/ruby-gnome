@@ -77,12 +77,13 @@ namespace :win32 do
   namespace :build do
     host = "i686-w64-mingw32"
 
+    rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
+    rcairo_win32_path = File.expand_path(rcairo_win32_path)
     task :prepare do
       depended_packages = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
       pkg_config_path = (["gstreamer"] + depended_packages).collect do |package|
         "../#{package}/vendor/local/lib/pkgconfig"
       end
-      rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
       pkg_config_path << "#{rcairo_win32_path}/vendor/local/lib/pkgconfig"
       ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
         File.expand_path(path)
@@ -103,8 +104,10 @@ namespace :win32 do
           sh("tar", "xzf", tar_gz_full_path.to_s) or exit(false)
         end
 
+        rcairo_include_path = "#{rcairo_win32_path}/vendor/local/include"
         Dir.chdir((package_tmp_dir + base).to_s) do
           sh("./configure",
+             "CPPFLAGS=-I#{rcairo_include_path}",
              "--prefix=#{dist_dir}",
              "--host=#{host}",
              *package[:configure_args]) or exit(false)
