@@ -30,6 +30,9 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
+ruby_header = "ruby.h"
+have_func("rb_errinfo", ruby_header)
+
 ["glib2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"

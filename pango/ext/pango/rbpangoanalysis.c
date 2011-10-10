@@ -10,6 +10,7 @@
 ************************************************/
 
 #include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(s) ((PangoAnalysis*)RVAL2BOXED(s, PANGO_TYPE_ANALYSIS))
 
