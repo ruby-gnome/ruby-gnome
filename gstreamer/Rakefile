@@ -42,7 +42,7 @@ namespace :win32 do
       :name => "gst-plugins-bad",
       :label => "GStreamer plugins (bad)",
       :version => "0.10.22",
-      :configure_args => [],
+      :configure_args => ["--disable-librfb"],
     },
     {
       :name => "gst-ffmpeg",
@@ -111,12 +111,15 @@ namespace :win32 do
              "--prefix=#{dist_dir}",
              "--host=#{host}",
              *package[:configure_args]) or exit(false)
-          make_args = []
+          common_make_args = []
+          common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
+          build_make_args = common_make_args.dup
+          install_make_args = common_make_args.dup
           make_n_jobs = ENV["MAKE_N_JOBS"]
-          make_args << "-j#{make_n_jobs}" if make_n_jobs
+          build_make_args << "-j#{make_n_jobs}" if make_n_jobs
           ENV["GREP_OPTIONS"] = "--text"
-          sh("nice", "make", *make_args) or exit(false)
-          sh("make", "install") or exit(false)
+          sh("nice", "make", *build_make_args) or exit(false)
+          sh("make", "install", *install_make_args) or exit(false)
 
           package_license_dir = license_dir + package[:name]
           mkdir_p(package_license_dir)
