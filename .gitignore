@@ -20,3 +20,5 @@ gtk2/ext/gtk2/ruby-gtk2.pc
 pango/ext/pango/rbpangoversion.h
 pango/ext/pango/ruby-pango.pc
 mkmf.log
+gstreamer/tmp/
+*/vendor/
