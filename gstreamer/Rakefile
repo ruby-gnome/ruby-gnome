@@ -24,7 +24,7 @@ namespace :win32 do
       :name => "gstreamer",
       :label => "GStreamer",
       :version => "0.10.35",
-      :configure_args => [],
+      :configure_args => ["--enable-check"],
     },
     {
       :name => "gst-plugins-base",
