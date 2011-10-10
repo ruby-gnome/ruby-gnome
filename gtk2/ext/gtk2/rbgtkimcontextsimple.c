@@ -36,7 +36,7 @@ imcsimple_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seq
                  "max_seq_len cannot be greater than GTK_MAX_COMPOSE_LEN: %d > %d",
                  max_seq_len, GTK_MAX_COMPOSE_LEN);
 
-    data = RVAL2GUINT16S(rbdata, &n);
+    data = RVAL2GUINT16S(rbdata, n);
 
     gtk_im_context_simple_add_table(context_simple, data, max_seq_len, n_seqs);
 

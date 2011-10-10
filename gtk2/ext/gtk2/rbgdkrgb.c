@@ -60,7 +60,7 @@ rgb_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
     const guchar *buf = (const guchar *)RVAL2CSTR(rbbuf);
     gint rowstride = NUM2INT(rbrowstride);
     long n;
-    guint32 *colors = RVAL2GUINT32S(rbcolors, &n);
+    guint32 *colors = RVAL2GUINT32S(rbcolors, n);
     GdkRgbCmap *cmap;
 
     if (n < 0 || n > 255) {

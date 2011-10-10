@@ -177,7 +177,7 @@ dialog_set_alternative_button_order(VALUE self, VALUE rbnew_order)
 {
     GtkDialog *dialog = _SELF(self);
     long n;
-    gint *new_order = RVAL2GINTS(rbnew_order, &n);
+    gint *new_order = RVAL2GINTS(rbnew_order, n);
 
     gtk_dialog_set_alternative_button_order_from_array(dialog, n, new_order);
 

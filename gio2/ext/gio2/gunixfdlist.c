@@ -34,7 +34,7 @@ unixfdlist_initialize(int argc, VALUE *argv, VALUE self)
         GUnixFDList *list;
 
         rb_scan_args(argc, argv, "0*", &rbfds);
-        fds = RVAL2FDS(rbfds, &n);
+        fds = RVAL2FDS(rbfds, n);
         if (n == 0) {
                 G_INITIALIZE(self, g_unix_fd_list_new());
                 return Qnil;

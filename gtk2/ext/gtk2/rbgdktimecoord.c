@@ -41,7 +41,7 @@ timecoord_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
 {
     guint32 time = NUM2UINT(rbtime);
     long n;
-    gdouble *axes = RVAL2GDOUBLES(rbaxes, &n);
+    gdouble *axes = RVAL2GDOUBLES(rbaxes, n);
     GdkTimeCoord *coord;
 
     if (n > GDK_MAX_TIMECOORD_AXES) {

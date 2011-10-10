@@ -298,7 +298,7 @@ tstore_reorder(VALUE self, VALUE rbparent, VALUE rbnew_order)
     GtkTreeIter *parent = RVAL2GTKTREEITER(rbparent);
     gint columns = gtk_tree_model_get_n_columns(GTK_TREE_MODEL(store));
     long n;
-    gint *new_order = RVAL2GINTS(rbnew_order, &n);
+    gint *new_order = RVAL2GINTS(rbnew_order, n);
 
     if (n != columns) {
         g_free(new_order);

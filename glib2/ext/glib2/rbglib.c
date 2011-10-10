@@ -319,11 +319,11 @@ rbg_rval2strv_rescue(VALUE value)
 }
 
 const gchar **
-rbg_rval2strv(VALUE value, long *n)
+rbg_rval2strv(volatile VALUE *value, long *n)
 {
     struct rval2strv_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(const gchar *, args.n + 1);
 
@@ -337,10 +337,10 @@ rbg_rval2strv(VALUE value, long *n)
 }
 
 const gchar **
-rbg_rval2strv_accept_nil(VALUE ary, long *n)
+rbg_rval2strv_accept_nil(volatile VALUE *value, long *n)
 {
-    if (!NIL_P(ary))
-        return rbg_rval2strv(ary, n);
+    if (!NIL_P(*value))
+        return rbg_rval2strv(value, n);
 
     if (n != NULL)
         *n = 0;
@@ -376,11 +376,11 @@ rbg_rval2strv_dup_rescue(VALUE value)
 }
 
 gchar **
-rbg_rval2strv_dup(VALUE value, long *n)
+rbg_rval2strv_dup(volatile VALUE *value, long *n)
 {
     struct rval2strv_dup_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(gchar *, args.n + 1);
 
@@ -394,10 +394,10 @@ rbg_rval2strv_dup(VALUE value, long *n)
 }
 
 gchar **
-rbg_rval2strv_dup_accept_nil(VALUE ary, long *n)
+rbg_rval2strv_dup_accept_nil(volatile VALUE *value, long *n)
 {
-    if (!NIL_P(ary))
-        rbg_rval2strv_dup(ary, n);
+    if (!NIL_P(*value))
+        rbg_rval2strv_dup(value, n);
 
     if (n != NULL)
         *n = 0;
@@ -469,11 +469,11 @@ rbg_rval2gbooleans_rescue(VALUE value)
 }
 
 gboolean *
-rbg_rval2gbooleans(VALUE value, long *n)
+rbg_rval2gbooleans(volatile VALUE *value, long *n)
 {
     struct rbg_rval2gbooleans_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(gboolean, args.n + 1);
 
@@ -512,11 +512,11 @@ rbg_rval2gints_rescue(VALUE value)
 }
 
 gint *
-rbg_rval2gints(VALUE value, long *n)
+rbg_rval2gints(volatile VALUE *value, long *n)
 {
     struct rbg_rval2gints_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(gint, args.n + 1);
 
@@ -555,11 +555,11 @@ rbg_rval2gint8s_rescue(VALUE value)
 }
 
 gint8 *
-rbg_rval2gint8s(VALUE value, long *n)
+rbg_rval2gint8s(volatile VALUE *value, long *n)
 {
     struct rbg_rval2gint8s_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(gint8, args.n + 1);
 
@@ -598,11 +598,11 @@ rbg_rval2guint16s_rescue(VALUE value)
 }
 
 guint16 *
-rbg_rval2guint16s(VALUE value, long *n)
+rbg_rval2guint16s(volatile VALUE *value, long *n)
 {
     struct rbg_rval2guint16s_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(guint16, args.n + 1);
 
@@ -641,11 +641,11 @@ rbg_rval2guint32s_rescue(VALUE value)
 }
 
 guint32 *
-rbg_rval2guint32s(VALUE value, long *n)
+rbg_rval2guint32s(volatile VALUE *value, long *n)
 {
     struct rbg_rval2guint32s_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(guint32, args.n + 1);
 
@@ -684,11 +684,11 @@ rbg_rval2gdoubles_rescue(VALUE value)
 }
 
 gdouble *
-rbg_rval2gdoubles(VALUE value, long *n)
+rbg_rval2gdoubles(volatile VALUE *value, long *n)
 {
     struct rbg_rval2gdoubles_args args;
 
-    args.ary = rb_ary_to_ary(value);
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
     args.n = RARRAY_LEN(args.ary);
     args.result = g_new(gdouble, args.n + 1);
 

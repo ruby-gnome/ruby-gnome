@@ -358,7 +358,7 @@ lstore_reorder(VALUE self, VALUE rbnew_order)
 {
     GtkListStore *store = _SELF(self);
     long n;
-    gint *new_order = RVAL2GINTS(rbnew_order, &n);
+    gint *new_order = RVAL2GINTS(rbnew_order, n);
 
     gtk_list_store_reorder(store, new_order);
 

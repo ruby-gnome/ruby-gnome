@@ -60,24 +60,24 @@ typedef int GPid;
 #define CSTRFILENAME2RVAL_FREE(s) (rbg_filename_to_ruby_free(s))
 #define CSTRFILENAMEARRAY2RVAL_FREE(s) (rbg_filename_gslist_to_array_free(s))
 
-#define RVAL2STRS(ary, n) rbg_rval2strv(ary, n)
-#define RVAL2STRS_ACCEPT_NIL(ary, n) rbg_rval2strv_accept_nil(ary, n)
-#define RVAL2STRV(ary) rbg_rval2strv(ary, NULL)
-#define RVAL2STRV_ACCEPT_NIL(ary) rbg_rval2strv_accept_nil(ary, NULL)
-#define RVAL2STRS_DUP(ary, n) rbg_rval2strv_dup(ary, n)
-#define RVAL2STRS_DUP_ACCEPT_NIL(ary, n) rbg_rval2strv_dup_accept_nil(ary, n)
-#define RVAL2STRV_DUP(ary) rbg_rval2strv_dup(ary, NULL)
-#define RVAL2STRV_DUP_ACCEPT_NIL(ary) rbg_rval2strv_dup_accept_nil(ary, NULL)
+#define RVAL2STRS(ary, n) rbg_rval2strv(&(ary), &(n))
+#define RVAL2STRS_ACCEPT_NIL(ary, n) rbg_rval2strv_accept_nil(&(ary), &(n))
+#define RVAL2STRV(ary) rbg_rval2strv(&(ary), NULL)
+#define RVAL2STRV_ACCEPT_NIL(ary) rbg_rval2strv_accept_nil(&(ary), NULL)
+#define RVAL2STRS_DUP(ary, n) rbg_rval2strv_dup(&(ary), &(n))
+#define RVAL2STRS_DUP_ACCEPT_NIL(ary, n) rbg_rval2strv_dup_accept_nil(&(ary), &(n))
+#define RVAL2STRV_DUP(ary) rbg_rval2strv_dup(&(ary), NULL)
+#define RVAL2STRV_DUP_ACCEPT_NIL(ary) rbg_rval2strv_dup_accept_nil(&(ary), NULL)
 
 #define STRV2RVAL(strings) rbg_strv2rval(strings)
 #define STRV2RVAL_FREE(strings) rbg_strv2rval_free(strings)
 
-#define RVAL2GBOOLEANS(ary, n) rbg_rval2gbooleans(ary, n)
-#define RVAL2GINTS(ary, n) rbg_rval2gints(ary, n)
-#define RVAL2GINT8S(ary, n) rbg_rval2gint8s(ary, n)
-#define RVAL2GUINT16S(ary, n) rbg_rval2guint16s(ary, n)
-#define RVAL2GUINT32S(ary, n) rbg_rval2guint32s(ary, n)
-#define RVAL2GDOUBLES(ary, n) rbg_rval2gdoubles(ary, n)
+#define RVAL2GBOOLEANS(ary, n) rbg_rval2gbooleans(&(ary), &(n))
+#define RVAL2GINTS(ary, n) rbg_rval2gints(&(ary), &(n))
+#define RVAL2GINT8S(ary, n) rbg_rval2gint8s(&(ary), &(n))
+#define RVAL2GUINT16S(ary, n) rbg_rval2guint16s(&(ary), &(n))
+#define RVAL2GUINT32S(ary, n) rbg_rval2guint32s(&(ary), &(n))
+#define RVAL2GDOUBLES(ary, n) rbg_rval2gdoubles(&(ary), &(n))
 
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
@@ -120,19 +120,19 @@ extern VALUE rbg_filename_to_ruby_free(gchar *filename);
 extern gchar *rbg_filename_from_ruby(VALUE filename);
 extern VALUE rbg_filename_gslist_to_array_free(GSList *list);
 
-const gchar **rbg_rval2strv(VALUE ary, long *n);
-const gchar **rbg_rval2strv_accept_nil(VALUE ary, long *n);
-gchar **rbg_rval2strv_dup(VALUE ary, long *n);
-gchar **rbg_rval2strv_dup_accept_nil(VALUE ary, long *n);
+const gchar **rbg_rval2strv(volatile VALUE *value, long *n);
+const gchar **rbg_rval2strv_accept_nil(volatile VALUE *value, long *n);
+gchar **rbg_rval2strv_dup(volatile VALUE *value, long *n);
+gchar **rbg_rval2strv_dup_accept_nil(volatile VALUE *value, long *n);
 VALUE rbg_strv2rval(const gchar **strings);
 VALUE rbg_strv2rval_free(gchar **strings);
 
-gboolean *rbg_rval2gbooleans(VALUE value, long *n);
-gint *rbg_rval2gints(VALUE value, long *n);
-gint8 *rbg_rval2gint8s(VALUE value, long *n);
-guint16 *rbg_rval2guint16s(VALUE value, long *n);
-guint32 *rbg_rval2guint32s(VALUE value, long *n);
-gdouble *rbg_rval2gdoubles(VALUE value, long *n);
+gboolean *rbg_rval2gbooleans(volatile VALUE *value, long *n);
+gint *rbg_rval2gints(volatile VALUE *value, long *n);
+gint8 *rbg_rval2gint8s(volatile VALUE *value, long *n);
+guint16 *rbg_rval2guint16s(volatile VALUE *value, long *n);
+guint32 *rbg_rval2guint32s(volatile VALUE *value, long *n);
+gdouble *rbg_rval2gdoubles(volatile VALUE *value, long *n);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);

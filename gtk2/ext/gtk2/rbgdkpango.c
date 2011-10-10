@@ -71,7 +71,7 @@ gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, 
     gint x_origin = NUM2INT(rbx_origin);
     gint y_origin = NUM2INT(rby_origin);
     long n;
-    gint *index_ranges = RVAL2GINTS(rbindex_ranges, &n);
+    gint *index_ranges = RVAL2GINTS(rbindex_ranges, n);
     GdkRegion *result;
 
     if (n % 2 != 0) {
@@ -95,7 +95,7 @@ gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_ori
     gint x_origin = NUM2INT(rbx_origin);
     gint y_origin = NUM2INT(rby_origin);
     long n;
-    gint *index_ranges = RVAL2GINTS(rbindex_ranges, &n);
+    gint *index_ranges = RVAL2GINTS(rbindex_ranges, n);
     GdkRegion *result;
 
     if (n % 2 != 0) {

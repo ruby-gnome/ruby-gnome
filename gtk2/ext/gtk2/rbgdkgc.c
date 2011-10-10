@@ -164,7 +164,7 @@ gdkgc_set_dashes(VALUE self, VALUE rbdash_offset, VALUE rbdash_list)
     GdkGC *gc = _SELF(self);
     gint dash_offset = NUM2INT(rbdash_offset);
     long n;
-    gint8 *dash_list = RVAL2GINT8S(rbdash_list, &n);
+    gint8 *dash_list = RVAL2GINT8S(rbdash_list, n);
 
     gdk_gc_set_dashes(gc, dash_offset, dash_list, n);
 

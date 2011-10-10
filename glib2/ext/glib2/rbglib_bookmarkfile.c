@@ -375,7 +375,7 @@ bf_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
     GBookmarkFile *bookmark = _SELF(self);
     const gchar *uri = RVAL2CSTR(rburi);
     long n;
-    const gchar **groups = RVAL2STRS(rbgroups, &n);
+    const gchar **groups = RVAL2STRS(rbgroups, n);
 
     g_bookmark_file_set_groups(bookmark, uri, groups, n);
 

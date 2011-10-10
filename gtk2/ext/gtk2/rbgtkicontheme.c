@@ -48,7 +48,7 @@ it_set_search_path(VALUE self, VALUE rbpath)
 {
     GtkIconTheme *theme = _SELF(self);
     long n;
-    const gchar **path = RVAL2STRS(rbpath, &n);
+    const gchar **path = RVAL2STRS(rbpath, n);
 
     gtk_icon_theme_set_search_path(theme, path, n);
 

@@ -104,7 +104,7 @@ device_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
     GdkDevice *device = _SELF(self);
     GdkAxisUse use = RVAL2GENUM(rbuse, GDK_TYPE_AXIS_USE);
     long n;
-    gdouble *axes = RVAL2GDOUBLES(rbaxes, &n);
+    gdouble *axes = RVAL2GDOUBLES(rbaxes, n);
     gint device_n_axes = gdk_device_get_n_axes(device);
     gdouble value;
     gboolean found;

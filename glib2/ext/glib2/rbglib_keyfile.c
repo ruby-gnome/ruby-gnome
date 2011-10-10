@@ -511,7 +511,7 @@ keyfile_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblis
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
     const gchar *key = RVAL2CSTR(rbkey);
     long n;
-    const gchar **list = RVAL2STRS(rblist, &n);
+    const gchar **list = RVAL2STRS(rblist, n);
 
     g_key_file_set_string_list(key_file, group_name, key, list, n);
 
@@ -528,7 +528,7 @@ keyfile_set_locale_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALU
     const gchar *key = RVAL2CSTR(rbkey);
     const gchar *locale = RVAL2CSTR(rblocale);
     long n;
-    const gchar **list = RVAL2STRS(rblist, &n);
+    const gchar **list = RVAL2STRS(rblist, n);
 
     g_key_file_set_locale_string_list(key_file, group_name, key, locale, list, n);
 
@@ -544,7 +544,7 @@ keyfile_set_boolean_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rbli
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
     const gchar *key = RVAL2CSTR(rbkey);
     long n;
-    gboolean *list = RVAL2GBOOLEANS(rblist, &n);
+    gboolean *list = RVAL2GBOOLEANS(rblist, n);
 
     g_key_file_set_boolean_list(key_file, group_name, key, list, n);
 
@@ -560,7 +560,7 @@ keyfile_set_integer_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rbli
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
     const gchar *key = RVAL2CSTR(rbkey);
     long n;
-    gint *list = RVAL2GINTS(rblist, &n);
+    gint *list = RVAL2GINTS(rblist, n);
 
     g_key_file_set_integer_list(key_file, group_name, key, list, n);
 
@@ -577,7 +577,7 @@ keyfile_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblis
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
     const gchar *key = RVAL2CSTR(rbkey);
     long n;
-    gdouble *list = RVAL2GDOUBLES(rblist, &n);
+    gdouble *list = RVAL2GDOUBLES(rblist, n);
 
     g_key_file_set_double_list(key_file, group_name, key, list, n);
 

@@ -153,7 +153,7 @@ treemodel_rows_reordered(VALUE self, VALUE rbpath, VALUE rbiter, VALUE rbnew_ord
     GtkTreeIter *iter = RVAL2GTKTREEITER(rbiter);
     gint columns = gtk_tree_model_get_n_columns(proxy);
     long n;
-    gint *new_order = RVAL2GINTS(rbnew_order, &n);
+    gint *new_order = RVAL2GINTS(rbnew_order, n);
 
     if (n != columns) {
         g_free(new_order);
