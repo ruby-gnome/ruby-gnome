@@ -85,9 +85,12 @@ class GNOME2Package
       s.version               = version
       s.extensions            = FileList["ext/#{@name}/extconf.rb"]
       s.require_paths         = ["lib"]
-      s.files                 = FileList[
-          "ChangeLog", "README", "Rakefile", "extconf.rb",
-          "lib/**/*.rb", "{ext,sample,test,test-unit}/**/*"]
+      files                   = FileList["ChangeLog", "README",
+                                         "Rakefile", "extconf.rb",
+                                         "lib/**/*.rb",
+                                         "{ext,sample,test,test-unit}/**/*"]
+      files.existing!
+      s.files                 = files
       s.post_install_message  = @post_install_message
       @dependency_configuration.apply(s)
     end
