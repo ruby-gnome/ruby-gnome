@@ -144,7 +144,7 @@ namespace :win32 do
             not File.exist?(file)
           end
           cp(package_license_files, package_license_dir)
-          bundled_packages = packages[:bundled_packages] || []
+          bundled_packages = package[:bundled_packages] || []
           bundled_packages.each do |bundled_package|
             bundled_package_license_dir = license_dir + bundled_package[:name]
             mkdir_p(bundled_package_license_dir)
