@@ -8,7 +8,7 @@ package = GNOME2Package.new do |_package|
   _package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.dependency.gem.runtime = ["glib2"]
   _package.win32.packages = ["libsoup"]
-  _package.win32.dependencies = ["libxml2"]
+  _package.win32.dependencies = ["libbzip2", "jpeg", "libxml2"]
   _package.post_install_message = "This library is experimental."
 end
 package.define_tasks
