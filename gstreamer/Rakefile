@@ -60,6 +60,15 @@ namespace :win32 do
                             "--target-os=mingw32 " +
                             "--arch=i686 " +
                             "--pkg-config=pkg-config"],
+      :bundled_packages => [
+        {
+          :name => "libav",
+          :path => "gst-libs/ext/libav",
+          :license_files => ["LICENSE", "CREDITS",
+                             "COPYING.GPLv2", "COPYING.GPLv3",
+                             "COPYING.LGPLv2.1", "COPYING.LGPLv3"],
+        }
+      ],
     },
   ]
 
@@ -130,8 +139,20 @@ namespace :win32 do
 
           package_license_dir = license_dir + package[:name]
           mkdir_p(package_license_dir)
-          files = ["AUTHORS", "COPYING"]
-          cp(files, package_license_dir)
+          package_license_files = ["AUTHORS", "COPYING", "COPYING.LIB"]
+          package_license_files = package_license_files.reject do |file|
+            not File.exist?(file)
+          end
+          cp(package_license_files, package_license_dir)
+          bundled_packages = packages[:bundled_packages] || []
+          bundled_packages.each do |bundled_package|
+            bundled_package_license_dir = license_dir + bundled_package[:name]
+            mkdir_p(bundled_package_license_dir)
+            license_files = bundled_package[:license_files].collect do |file|
+              File.join(bundled_package[:path], file)
+            end
+            cp(license_files, bundled_package_license_dir)
+          end
         end
       end
     end
