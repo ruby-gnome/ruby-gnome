@@ -158,39 +158,5 @@ namespace :win32 do
     end
   end
 
-  # deprecated this. remove me.
-  desc "create *.pc files"
-  task :pc do
-    require "pkg-config"
-    base_dir = File.expand_path(File.join("vendor", "local"))
-    pkgconfig_dir_path = File.join(base_dir, "lib", "pkgconfig")
-    mkdir_p(pkgconfig_dir_path)
-
-    gst_version_h = File.join(base_dir, "include",
-                              "gstreamer-0.10", "gst", "gstversion.h")
-    case File.read(gst_version_h)
-    when /^#define GST_VERSION_MICRO \((\d+)\)/
-      micro_version = $1.to_i
-    else
-      raise "can't detect GStreamer micro version from <#{gst_version_h}>."
-    end
-    win32_gstreamer_version = "0.10.#{micro_version}"
-
-    packages = ["gstreamer-0.10",
-                "gstreamer-pbutils-0.10",
-                "gstreamer-plugins-base-0.10"]
-    packages.each do |package|
-      package_config = PackageConfig.new(package)
-      linux_pc_path = package_config.pc_path
-      pc_path = File.join(pkgconfig_dir_path, "#{package}.pc")
-      File.open(pc_path, "w") do |pc_file|
-        linux_pc = File.read(linux_pc_path)
-        pc = linux_pc.gsub(/\Aprefix=.+$/) {"prefix=#{base_dir}"}
-        pc = pc.gsub(/^Version:.*$/, "Version: #{win32_gstreamer_version}")
-        pc_file.print(pc)
-      end
-    end
-  end
-  # task :download => :pc
   task :build => packages.collect {|package| "win32:build:#{package[:name]}"}
 end
