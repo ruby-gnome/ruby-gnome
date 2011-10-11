@@ -10,6 +10,13 @@ package = GNOME2Package.new do |_package|
   _package.win32.packages = ["libsoup"]
   _package.win32.dependencies = ["libbzip2", "jpeg", "libxml2"]
   _package.post_install_message = "This library is experimental."
+  _package.cross_compiling do |spec|
+    if /mingw|mswin/ =~ spec.platform.to_s
+      spec.add_runtime_dependency("cairo")
+      spec.add_runtime_dependency("pango", ">= #{_package.version}")
+      spec.add_runtime_dependency("gdk_pixbuf2", ">= #{_package.version}")
+    end
+  end
 end
 package.define_tasks
 
