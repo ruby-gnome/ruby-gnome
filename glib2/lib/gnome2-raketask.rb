@@ -22,13 +22,19 @@ class GNOME2Package
     @glib2_root = File.expand_path("#{@package_root}/../glib2")
     @packages = FileList["#{File.dirname(@package_root)}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
     @name = File.basename(@package_root)
+    @cross_compiling_hooks = []
     yield(self) if block_given?
+  end
+
+  def cross_compiling(&block)
+    @cross_compiling_hooks << block
   end
 
   def define_tasks
     task :default => :build
-    define_gem_tasks
+    define_spec
     define_win32_tasks
+    define_package_tasks
   end
 
   def ruby_gnome2_package?(name)
@@ -74,7 +80,7 @@ class GNOME2Package
     @win32_configuration = Win32Configuration.new(self)
   end
 
-  def define_gem_tasks
+  def define_spec
     @spec = Gem::Specification.new do |s|
       s.name                  = @name
       s.summary               = @summary
@@ -94,9 +100,6 @@ class GNOME2Package
       s.post_install_message  = @post_install_message
       @dependency_configuration.apply(s)
     end
-
-    Gem::PackageTask.new(@spec) do |pkg|
-    end
   end
 
   def define_win32_tasks
@@ -114,6 +117,14 @@ class GNOME2Package
           end
           spec.files += win32_files
         end
+        @cross_compiling_hooks.each do |hook|
+          hook.call(spec)
+        end
+      end
+    end
+
+    def define_package_tasks
+      Gem::PackageTask.new(@spec) do |pkg|
       end
     end
 
