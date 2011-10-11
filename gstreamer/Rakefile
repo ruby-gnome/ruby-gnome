@@ -33,33 +33,75 @@ namespace :win32 do
   rcairo_win32_include_path = "#{rcairo_win32_path}/vendor/local/include"
   rcairo_win32_lib_path = "#{rcairo_win32_path}/vendor/local/lib"
 
+  xiph_download_url_base = "http://downloads.xiph.org/releases"
+  freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
   packages = [
     {
+      :name => "ogg",
+      :download_base_url => "#{xiph_download_url_base}/ogg",
+      :label => "ogg",
+      :version => "1.3.0",
+      :configure_args => [],
+    },
+    {
+      :name => "vorbis",
+      :download_base_url => "#{xiph_download_url_base}/vorbis",
+      :label => "vorbis",
+      :version => "1.3.2",
+      :configure_args => [],
+    },
+    {
+      :name => "theora",
+      :download_base_url => "#{xiph_download_url_base}/theora",
+      :label => "theora",
+      :version => "1.1.1",
+      :configure_args => [],
+    },
+    # {
+    #   :name => "flac",
+    #   :download_base_url => "#{xiph_download_url_base}/flac",
+    #   :label => "flac",
+    #   :version => "1.2.1",
+    #   :configure_args => ["--disable-cpplibs"],
+    # },
+    {
+      :name => "speex",
+      :download_base_url => "#{xiph_download_url_base}/speex",
+      :label => "speex",
+      :version => "1.2rc1",
+      :configure_args => [],
+    },
+    {
       :name => "gstreamer",
+      :download_base_url => "#{freedesktop_download_url_base}/gstreamer",
       :label => "GStreamer",
       :version => "0.10.35",
       :configure_args => ["--enable-check"],
     },
     {
       :name => "gst-plugins-base",
+      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-base",
       :label => "GStreamer plugins (base)",
       :version => "0.10.35",
       :configure_args => ["--disable-gnome_vfs"],
     },
     {
       :name => "gst-plugins-good",
+      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
       :label => "GStreamer plugins (good)",
       :version => "0.10.30",
       :configure_args => ["--disable-gconf"],
     },
     {
       :name => "gst-plugins-bad",
+      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-bad",
       :label => "GStreamer plugins (bad)",
       :version => "0.10.22",
       :configure_args => ["--disable-librfb"],
     },
     {
       :name => "gst-ffmpeg",
+      :download_base_url => "#{freedesktop_download_url_base}/gst-ffmpeg",
       :label => "GStreamer ffmpeg",
       :version => "0.10.12",
       :configure_args => ["--with-ffmpeg-extra-configure=" +
@@ -80,11 +122,10 @@ namespace :win32 do
   ]
 
   namespace :download do
-    binary_url_base = "http://gstreamer.freedesktop.org/src/"
     packages.each do |package|
       base = "#{package[:name]}-#{package[:version]}"
       tar_gz = "#{base}.tar.gz"
-      tar_gz_url = "#{binary_url_base}#{package[:name]}/#{tar_gz}"
+      tar_gz_url = "#{package[:download_base_url]}/#{tar_gz}"
       tar_gz_full_path = download_dir + tar_gz
 
       desc "Download #{package[:label]} into #{download_dir}."
@@ -92,6 +133,7 @@ namespace :win32 do
 
       directory tar_gz_full_path.dirname.to_s
       file tar_gz_full_path.to_s do
+        rake_output_message "downloading... #{tar_gz_url}"
         open(tar_gz_url) do |downloaded_tar_gz|
           tar_gz_full_path.open("wb") do |tar_gz_file|
             tar_gz_file.print(downloaded_tar_gz.read)
@@ -129,8 +171,8 @@ namespace :win32 do
 
         Dir.chdir((package_tmp_dir + base).to_s) do
           sh("./configure",
-             "CPPFLAGS=-I#{rcairo_win32_include_path}",
-             "LDFLAGS=-L#{rcairo_win32_lib_path}",
+             "CPPFLAGS=-I#{rcairo_win32_include_path} -I#{dist_dir + 'include'}",
+             "LDFLAGS=-L#{rcairo_win32_lib_path} -L#{dist_dir + 'lib'}",
              "--prefix=#{dist_dir}",
              "--host=#{host}",
              *package[:configure_args]) or exit(false)
