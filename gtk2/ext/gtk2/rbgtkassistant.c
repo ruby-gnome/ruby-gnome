@@ -166,9 +166,17 @@ ass_update_buttons_state(VALUE self)
     return self;
 }
 
+static VALUE
+ass_commit(VALUE self)
+{
+    gtk_assistant_commit(_SELF(self));
+
+    return self;
+}
+
 #endif
 
-void 
+void
 Init_gtk_assistant()
 {
 #if GTK_CHECK_VERSION(2,10,0)
@@ -196,6 +204,7 @@ Init_gtk_assistant()
     rb_define_method(ass, "add_action_widget", ass_add_action_widget, 1);
     rb_define_method(ass, "remove_action_widget", ass_remove_action_widget, 1);
     rb_define_method(ass, "update_buttons_state", ass_update_buttons_state, 0);
+    rb_define_method(ass, "commit", ass_commit, 0);
 
     G_DEF_SETTERS(ass);
 
