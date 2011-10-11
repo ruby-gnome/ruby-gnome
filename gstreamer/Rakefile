@@ -14,10 +14,17 @@ end
 package.define_tasks
 
 namespace :win32 do
+  host = "i686-w64-mingw32"
+
   dist_dir = Pathname.new("vendor/local").expand_path
   license_dir = dist_dir + "share" + "license"
   tmp_dir = Pathname.new("tmp").expand_path
   download_dir = tmp_dir + "download"
+
+  rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
+  rcairo_win32_path = File.expand_path(rcairo_win32_path)
+  rcairo_win32_include_path = "#{rcairo_win32_path}/vendor/local/include"
+  rcairo_win32_lib_path = "#{rcairo_win32_path}/vendor/local/lib"
 
   packages = [
     {
@@ -48,7 +55,11 @@ namespace :win32 do
       :name => "gst-ffmpeg",
       :label => "GStreamer ffmpeg",
       :version => "0.10.12",
-      :configure_args => [],
+      :configure_args => ["--with-ffmpeg-extra-configure=" +
+                            "--cross-prefix=#{host}- " +
+                            "--target-os=mingw32 " +
+                            "--arch=i686 " +
+                            "--pkg-config=pkg-config"],
     },
   ]
 
@@ -75,10 +86,6 @@ namespace :win32 do
   end
 
   namespace :build do
-    host = "i686-w64-mingw32"
-
-    rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
-    rcairo_win32_path = File.expand_path(rcairo_win32_path)
     task :prepare do
       depended_packages = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
       pkg_config_path = (["gstreamer"] + depended_packages).collect do |package|
@@ -104,10 +111,10 @@ namespace :win32 do
           sh("tar", "xzf", tar_gz_full_path.to_s) or exit(false)
         end
 
-        rcairo_include_path = "#{rcairo_win32_path}/vendor/local/include"
         Dir.chdir((package_tmp_dir + base).to_s) do
           sh("./configure",
-             "CPPFLAGS=-I#{rcairo_include_path}",
+             "CPPFLAGS=-I#{rcairo_win32_include_path}",
+             "LDFLAGS=-L#{rcairo_win32_lib_path}",
              "--prefix=#{dist_dir}",
              "--host=#{host}",
              *package[:configure_args]) or exit(false)
