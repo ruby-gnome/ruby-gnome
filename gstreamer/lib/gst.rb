@@ -1,6 +1,20 @@
 require 'rational'
 require 'glib2'
-require 'gstreamer.so'
+
+base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
+vendor_dir = base_dir + "vendor" + "local"
+vendor_bin_dir = vendor_dir + "bin"
+GLib.prepend_environment_path(vendor_bin_dir)
+if vendor_bin_dir.exist?
+  require 'pango'
+  require 'gdk_pixbuf2'
+end
+begin
+  major, minor, _ = RUBY_VERSION.split(/\./)
+  require "#{major}.#{minor}/gstreamer.so"
+rescue LoadError
+  require "gstreamer.so"
+end
 
 Gst.init
 
