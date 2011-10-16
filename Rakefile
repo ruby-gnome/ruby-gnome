@@ -117,7 +117,7 @@ namespace :gem do
   task :build do
     gnome2_packages.each do |package|
       Dir.chdir(package) do
-        sh("rake", "gem")
+        ruby("-S", "rake", "gem")
       end
     end
   end
@@ -125,23 +125,23 @@ namespace :gem do
   desc "push all gems"
   task :push do
     gnome2_packages.each do |package|
-      sh("gem", "push",
-         *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
+      ruby("-S", "gem", "push",
+           *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
     end
   end
 
   desc "install all gems"
   task :install do
     gnome2_packages.each do |package|
-      sh("gem", "install", "--user-install",
-         *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
+      ruby("-S", "gem", "install", "--user-install",
+           *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
     end
   end
 
   desc "uninstall all gems"
   task :uninstall do
     gnome2_packages.each do |package|
-      sh("gem", "uninstall", "--version", version, package)
+      ruby("-S", "gem", "uninstall", "--version", version, package)
     end
   end
 
@@ -151,7 +151,8 @@ namespace :gem do
     task :build do
       win32_gnome2_packages.each do |package|
         Dir.chdir(package) do
-          sh("rake", "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
+          ruby("-S", "rake",
+               "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
         end
       end
     end
@@ -167,7 +168,7 @@ namespace :gem do
     task :download do
       win32_gnome2_packages.each do |package|
         Dir.chdir(package) do
-          sh("rake", "win32:download")
+          ruby("-S", "rake", "win32:download")
         end
       end
     end
@@ -175,8 +176,8 @@ namespace :gem do
     desc "push all Windows gems"
     task :push do
       win32_gnome2_packages.each do |package|
-        sh("gem", "push",
-           *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
+        ruby("-S", "gem", "push",
+             *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
       end
     end
   end
