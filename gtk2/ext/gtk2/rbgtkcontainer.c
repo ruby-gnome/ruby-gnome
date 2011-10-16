@@ -633,6 +633,7 @@ type_register(int argc, VALUE* argv, VALUE self)
 
     rb_scan_args(argc, argv, "03", &type_name, &info, &flags);
 
+    /* TODO: Replace this copy-paste job with the real thing in glib2. */
     {
         const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
         if (cinfo->klass == self)
@@ -662,6 +663,8 @@ type_register(int argc, VALUE* argv, VALUE self)
         GTypeQuery query;
         g_type_query(parent_type, &query);
 
+        /* TODO: This should not require a new GTypeInfo, as GLib doesn't
+         * retain a copy. */
         info = g_new0(GTypeInfo, 1);
         info->class_size     = query.class_size;
         info->base_init      = NULL;
