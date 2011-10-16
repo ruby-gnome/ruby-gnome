@@ -66,106 +66,115 @@ settings_s_install_property(VALUE self, VALUE spec)
 }
 
 static VALUE
-settings_rc_property_parse_color(VALUE self, VALUE spec, VALUE str)
+settings_rc_property_parse(VALUE self, VALUE rbspec, VALUE rbstring, GtkRcPropertyParser parser)
 {
-    gboolean ret; 
-    GValue prop = {0,};
-    VALUE val = Qnil;
-    GString* gstr = g_string_new(RVAL2CSTR(str));
-    g_value_init(&prop, GDK_TYPE_COLOR);
-    ret = gtk_rc_property_parse_color(G_PARAM_SPEC(RVAL2GOBJ(spec)), 
-                                      gstr, &prop);
-    if (ret) val = GVAL2RVAL(&prop);
+    GParamSpec *spec = RVAL2GOBJ(rbspec);
+    GString *string = g_string_new(RVAL2CSTR(rbstring));
+    GValue property = { 0, };
+    gboolean parsed;
 
-    g_string_free(gstr, TRUE);
-    g_value_unset(&prop);
-    return val;
+    g_value_init(&property, spec->value_type);
+
+    parsed = parser(spec, string, &property);
+
+    g_string_free(string, TRUE);
+
+    return parsed ? GVAL2RVAL_UNSET(&property) : Qnil;
 }
 
 static VALUE
-settings_rc_property_parse_enum(VALUE self, VALUE spec, VALUE str)
+settings_rc_property_parse_color(VALUE self, VALUE rbspec, VALUE rbstring)
 {
-    gboolean ret; 
-    GValue prop = {0,};
-    VALUE val = Qnil;
-    GString* gstr = g_string_new(RVAL2CSTR(str));
-    GParamSpec* gspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
-    g_value_init(&prop, gspec->value_type);
-    ret = gtk_rc_property_parse_enum(gspec, gstr, &prop);
-
-    if (ret) val = GVAL2RVAL(&prop);
-
-    g_string_free(gstr, TRUE);
-    g_value_unset(&prop);
-    return val;
+    return settings_rc_property_parse(self, rbspec, rbstring, gtk_rc_property_parse_color);
 }
 
 static VALUE
-settings_rc_property_parse_flags(VALUE self, VALUE spec, VALUE str)
+settings_rc_property_parse_enum(VALUE self, VALUE rbspec, VALUE rbstring)
 {
-    gboolean ret; 
-    GValue prop = {0,};
-    VALUE val = Qnil;
-    GString* gstr = g_string_new(RVAL2CSTR(str));
-    GParamSpec* gspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
-    g_value_init(&prop, gspec->value_type);
-    ret = gtk_rc_property_parse_flags(gspec, gstr, &prop);
-
-    if (ret) val = GVAL2RVAL(&prop);
-
-    g_string_free(gstr, TRUE);
-    g_value_unset(&prop);
-    return val;
+    return settings_rc_property_parse(self, rbspec, rbstring, gtk_rc_property_parse_enum);
 }
 
 static VALUE
-settings_rc_property_parse_requisition(VALUE self, VALUE spec, VALUE str)
+settings_rc_property_parse_flags(VALUE self, VALUE rbspec, VALUE rbstring)
 {
-    gboolean ret; 
-    GValue prop = {0,};
-    VALUE val = Qnil;
-    GString* gstr = g_string_new(RVAL2CSTR(str));
-    g_value_init(&prop, GTK_TYPE_REQUISITION);
-    ret = gtk_rc_property_parse_requisition(G_PARAM_SPEC(RVAL2GOBJ(spec)), 
-                                            gstr, &prop);
-    if (ret){
-        GtkRequisition* req = g_value_get_boxed(&prop);
-        val = rb_assoc_new(INT2NUM(req->width), INT2NUM(req->height));
-    }
-    g_string_free(gstr, TRUE);
-    g_value_unset(&prop);
-    return val;    
+    return settings_rc_property_parse(self, rbspec, rbstring, gtk_rc_property_parse_flags);
 }
 
 static VALUE
-settings_rc_property_parse_border(VALUE self, VALUE spec, VALUE str)
+settings_rc_property_parse_requisition(VALUE self, VALUE rbspec, VALUE rbstring)
 {
-    gboolean ret; 
-    GValue prop = {0,};
-    VALUE val = Qnil;
-    GString* gstr = g_string_new(RVAL2CSTR(str));
-    g_value_init(&prop, GTK_TYPE_BORDER);
-    ret = gtk_rc_property_parse_border(G_PARAM_SPEC(RVAL2GOBJ(spec)), 
-                                      gstr, &prop);
-    if (ret){
-        GtkBorder* border = g_value_get_boxed(&prop);
-        val = BOXED2RVAL(border, GTK_TYPE_BORDER);
-    }
-    g_string_free(gstr, TRUE);
-    g_value_unset(&prop);
-    return val;
+    GParamSpec *spec = RVAL2GOBJ(rbspec);
+    GString *string = g_string_new(RVAL2CSTR(rbstring));
+    GValue property = { 0, };
+    gboolean parsed;
+    GtkRequisition *requisition;
+    gint width;
+    gint height;
+
+    g_value_init(&property, GTK_TYPE_REQUISITION);
+
+    parsed = gtk_rc_property_parse_requisition(spec, string, &property);
+
+    g_string_free(string, TRUE);
+
+    if (!parsed)
+        return Qnil;
+
+    requisition = g_value_get_boxed(&property);
+    width = requisition->width;
+    height = requisition->height;
+
+    g_value_unset(&property);
+
+    return rb_assoc_new(INT2NUM(width), INT2NUM(height));
 }
 
 static VALUE
-settings_set_property_value(VALUE self, VALUE name, VALUE value, VALUE origin)
+settings_rc_property_parse_border_result(VALUE value)
 {
-    GtkSettingsValue svalue = { NULL, { 0, }, };
-    g_value_init(&svalue.value, RVAL2GTYPE(value));
-    rbgobj_rvalue_to_gvalue(value, &svalue.value);
+    return BOXED2RVAL(g_value_get_boxed((GValue *)value), GTK_TYPE_BORDER);
+}
 
-    svalue.origin = (char *)RVAL2CSTR(origin);
-    gtk_settings_set_property_value(GTK_SETTINGS(RVAL2GOBJ(self)), 
-                                    RVAL2CSTR(name), &svalue);
+static VALUE
+settings_rc_property_parse_border_ensure(VALUE value)
+{
+    g_value_unset((GValue *)value);
+
+    return Qnil;
+}
+
+static VALUE
+settings_rc_property_parse_border(VALUE self, VALUE rbspec, VALUE rbstring)
+{
+    GParamSpec *spec = RVAL2GOBJ(rbspec);
+    GString *string = g_string_new(RVAL2CSTR(rbstring));
+    GValue property = { 0, };
+    gboolean parsed;
+
+    g_value_init(&property, GTK_TYPE_BORDER);
+
+    parsed = gtk_rc_property_parse_border(spec, string, &property);
+
+    g_string_free(string, TRUE);
+
+    if (!parsed)
+        return Qnil;
+
+    return rb_ensure(settings_rc_property_parse_border_result, (VALUE)&property,
+                     settings_rc_property_parse_border_ensure, (VALUE)&property);
+}
+
+static VALUE
+settings_set_property_value(VALUE self, VALUE rbname, VALUE rbvalue, VALUE origin)
+{
+    GtkSettings *settings = GTK_SETTINGS(RVAL2GOBJ(self));
+    GtkSettingsValue svalue = { (gchar *)RVAL2CSTR(origin), { 0, } };
+    const gchar *name = RVAL2CSTR(rbname);
+    g_value_init(&svalue.value, RVAL2GTYPE(rbvalue));
+    rbgobj_rvalue_to_gvalue(rbvalue, &svalue.value);
+
+    gtk_settings_set_property_value(settings, name, &svalue);
+
     g_value_unset(&svalue.value);
 
     return self;
