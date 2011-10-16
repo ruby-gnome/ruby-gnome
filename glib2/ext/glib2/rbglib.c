@@ -111,6 +111,36 @@ rbg_cstr2rval_len(const gchar *str, gsize len)
 #endif
 }
 
+struct rbg_cstr2rval_len_free_args {
+    gchar *str;
+    gsize len;
+};
+
+static VALUE
+rbg_cstr2rval_len_free_body(VALUE value)
+{
+    struct rbg_cstr2rval_len_free_args *args = (struct rbg_cstr2rval_len_free_args *)value;
+
+    return CSTR2RVAL_LEN(args->str, args->len);
+}
+
+static VALUE
+rbg_cstr2rval_len_free_ensure(VALUE str)
+{
+    g_free((gchar *)str);
+
+    return Qnil;
+}
+
+VALUE
+rbg_cstr2rval_len_free(gchar *str, gsize len)
+{
+    struct rbg_cstr2rval_len_free_args args = { str, len };
+
+    return str != NULL ? rb_ensure(rbg_cstr2rval_len_free_body, (VALUE)&args,
+                                   rbg_cstr2rval_len_free_ensure, (VALUE)str) : Qnil;
+}
+
 VALUE
 rbg_cstr2rval_with_encoding(const gchar *str, const gchar *encoding)
 {

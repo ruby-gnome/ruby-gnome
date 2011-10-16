@@ -52,6 +52,7 @@ typedef int GPid;
 #define RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(v) (rbg_rval2cstr_accept_symbol_accept_nil(&(v)))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
 #define CSTR2RVAL_LEN(s, l) (rbg_cstr2rval_len(s, l))
+#define CSTR2RVAL_LEN_FREE(s, l) (rbg_cstr2rval_len_free(s, l))
 #define CSTR2RVAL_ENC(s, e) (rbg_cstr2rval_with_encoding(s, e))
 #define CSTR2RVAL_LEN_ENC(s, l, e) (rbg_cstr2rval_len_with_encoding(s, l, e))
 #define CSTR2RVAL_FREE(s) (rbg_cstr2rval_free(s))
@@ -116,6 +117,7 @@ extern const gchar *rbg_rval2cstr_accept_symbol_accept_nil(volatile VALUE *value
 
 extern VALUE rbg_cstr2rval(const gchar* str);
 extern VALUE rbg_cstr2rval_len(const gchar* str, gsize len);
+extern VALUE rbg_cstr2rval_len_free(gchar *str, gsize len);
 extern VALUE rbg_cstr2rval_with_encoding(const gchar* str,
                                          const gchar *encoding);
 extern VALUE rbg_cstr2rval_len_with_encoding(const gchar* str, gsize len,
