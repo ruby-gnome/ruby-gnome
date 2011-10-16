@@ -56,9 +56,10 @@ cancellable_get_fd(VALUE self)
 static VALUE
 cancellable_make_pollfd(VALUE self)
 {
+        GCancellable *cancellable = _SELF(self);
         GPollFD *gfd = g_new(GPollFD, 1);
 
-        g_cancellable_make_pollfd(_SELF(self), gfd);
+        g_cancellable_make_pollfd(cancellable, gfd);
 
         return BOXED2RVAL(gfd, G_TYPE_POLL_FD);
 }
