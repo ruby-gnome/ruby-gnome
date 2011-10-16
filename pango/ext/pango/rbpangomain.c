@@ -163,15 +163,31 @@ void        pango_default_break             (const gchar *text,
 */
 
 static VALUE
-rpango_shape(VALUE self, VALUE text, VALUE analysis)
+rpango_shape_result(VALUE value)
 {
-    VALUE ret;
-    PangoGlyphString* glyphs = pango_glyph_string_new();
-    StringValue(text);
-    pango_shape(RSTRING_PTR(text), RSTRING_LEN(text), RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS), glyphs);
-    ret = BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING);
-    pango_glyph_string_free (glyphs);
-    return ret;
+    return BOXED2RVAL((PangoGlyphString *)value, PANGO_TYPE_GLYPH_STRING);
+}
+
+static VALUE
+rpango_shape_ensure(VALUE value)
+{
+    pango_glyph_string_free((PangoGlyphString *)value);
+
+    return Qnil;
+}
+
+static VALUE
+rpango_shape(VALUE self, VALUE rbtext, VALUE rbanalysis)
+{
+    const gchar *text = RVAL2CSTR(rbtext);
+    long length = RSTRING_LEN(rbtext);
+    PangoAnalysis *analysis = RVAL2BOXED(rbanalysis, PANGO_TYPE_ANALYSIS);
+    PangoGlyphString *glyphs = pango_glyph_string_new();
+
+    pango_shape(text, length, analysis, glyphs);
+
+    return rb_ensure(rpango_shape_result, (VALUE)glyphs,
+                     rpango_shape_ensure, (VALUE)glyphs);
 }
 
 /* This method is from rbpangoattribute.c */
