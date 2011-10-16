@@ -43,20 +43,17 @@ static VALUE
 animation_get_iter(int argc, VALUE *argv, VALUE self)
 {
     VALUE start_time_sec, start_time_usec;
-    GTimeVal* time = NULL;
+    GTimeVal start_time;
 
     rb_scan_args(argc, argv, "02", &start_time_sec, &start_time_usec);
 
-    if (! NIL_P(start_time_sec)){
-        time = g_new(GTimeVal, 1);
-        time->tv_sec = NUM2LONG(start_time_sec);
-        if (NIL_P(start_time_usec)){
-            time->tv_usec = 0;
-        } else {
-            time->tv_usec = NUM2LONG(start_time_usec);
-        }
-    }
-    return GOBJ2RVAL(gdk_pixbuf_animation_get_iter(_SELF(self), time)); 
+    if (NIL_P(start_time_sec))
+        return GOBJ2RVAL(gdk_pixbuf_animation_get_iter(_SELF(self), NULL));
+
+    start_time.tv_sec = NUM2LONG(start_time_sec);
+    start_time.tv_usec = NIL_P(start_time_usec) ? 0 : NUM2LONG(start_time_usec);
+
+    return GOBJ2RVAL(gdk_pixbuf_animation_get_iter(_SELF(self), &start_time));
 }
 
 static VALUE
@@ -75,21 +72,17 @@ static VALUE
 animation_iter_advance(int argc, VALUE *argv, VALUE self)
 {
     VALUE current_time_sec, current_time_usec;
-    GTimeVal* time = NULL;
+    GTimeVal current_time;
 
     rb_scan_args(argc, argv, "02", &current_time_sec, &current_time_usec);
 
-    if (! NIL_P(current_time_sec)){
-        time = g_new(GTimeVal, 1);
-        time->tv_sec = NUM2LONG(current_time_sec);
-        if (NIL_P(current_time_usec)){
-            time->tv_usec = 0;
-        } else {
-            time->tv_usec = NUM2LONG(current_time_usec);
-        }
-    }
+    if (NIL_P(current_time_sec))
+        return GOBJ2RVAL(gdk_pixbuf_animation_iter_advance(_SELF(self), NULL));
 
-    return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), time));
+    current_time.tv_sec = NUM2LONG(current_time_sec);
+    current_time.tv_usec = NIL_P(current_time_usec) ? 0 : NUM2LONG(current_time_usec);
+
+    return GOBJ2RVAL(gdk_pixbuf_animation_iter_advance(_SELF(self), &current_time));
 }
 
 static VALUE
