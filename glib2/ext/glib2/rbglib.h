@@ -80,6 +80,9 @@ typedef int GPid;
 #define RVAL2GUINT32S(ary, n) rbg_rval2guint32s(&(ary), &(n))
 #define RVAL2GDOUBLES(ary, n) rbg_rval2gdoubles(&(ary), &(n))
 
+#define GINTS2RVAL(ary, n) rbg_gints2rval(ary, n)
+#define GINTS2RVAL_FREE(ary, n) rbg_gints2rval(ary, n)
+
 #define CBOOL2RVAL(b)   ((b) ? Qtrue : Qfalse)
 #define RVAL2CBOOL(b)   (RTEST(b))
 #define GERROR2RVAL(error) (rbgerr_gerror2exception(error))
@@ -135,6 +138,9 @@ guint8 *rbg_rval2guint8s(volatile VALUE *value, long *n);
 guint16 *rbg_rval2guint16s(volatile VALUE *value, long *n);
 guint32 *rbg_rval2guint32s(volatile VALUE *value, long *n);
 gdouble *rbg_rval2gdoubles(volatile VALUE *value, long *n);
+
+VALUE rbg_gints2rval(const gint *gints, long n);
+VALUE rbg_gints2rval_free(gint *gints, long n);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);

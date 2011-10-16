@@ -743,6 +743,48 @@ rbg_rval2gdoubles(volatile VALUE *value, long *n)
     return args.result;
 }
 
+VALUE
+rbg_gints2rval(const gint *gints, long n)
+{
+    long i;
+    VALUE ary = rb_ary_new();
+
+    for (i = 0; i < n; i++)
+        rb_ary_push(ary, INT2NUM(gints[i]));
+
+    return ary;
+}
+
+struct rbg_gints2rval_free_args {
+    gint *gints;
+    long n;
+};
+
+static VALUE
+rbg_gints2rval_free_body(VALUE value)
+{
+    struct rbg_gints2rval_free_args *args = (struct rbg_gints2rval_free_args *)value;
+
+    return rbg_gints2rval(args->gints, args->n);
+}
+
+static VALUE
+rbg_gints2rval_free_ensure(VALUE value)
+{
+    g_free(((struct rbg_gints2rval_free_args *)value)->gints);
+
+    return Qnil;
+}
+
+VALUE
+rbg_gints2rval_free(gint *gints, long n)
+{
+    struct rbg_gints2rval_free_args args = { gints, n };
+
+    return rb_ensure(rbg_gints2rval_free_body, (VALUE)&args,
+                     rbg_gints2rval_free_ensure, (VALUE)&args);
+}
+
 #if 0
 /*
 2004-04-15 Commented out by Masao.
