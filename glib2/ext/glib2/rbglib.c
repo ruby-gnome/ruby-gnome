@@ -76,6 +76,22 @@ rbg_rval2cstr_accept_nil(VALUE *str)
     return NIL_P(*str) ? NULL : RVAL2CSTR(*str);
 }
 
+/* TODO: How do we deal with encodings? */
+const gchar *
+rbg_rval2cstr_accept_symbol(volatile VALUE *value)
+{
+    if (!SYMBOL_P(*value))
+        return rbg_rval2cstr((VALUE *)value);
+
+    return rb_id2name(SYM2ID(*value));
+}
+
+const gchar *
+rbg_rval2cstr_accept_symbol_accept_nil(volatile VALUE *value)
+{
+    return NIL_P(value) ? NULL : rbg_rval2cstr_accept_symbol(value);
+}
+
 VALUE
 rbg_cstr2rval(const gchar *str)
 {

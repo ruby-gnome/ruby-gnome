@@ -45,9 +45,11 @@ typedef int GPid;
 
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))
 
-#define RVAL2CSTR(v) (rbg_rval2cstr(&v))
-#define RVAL2CSTR_ACCEPT_NIL(v) (rbg_rval2cstr_accept_nil(&v))
+#define RVAL2CSTR(v) (rbg_rval2cstr(&(v)))
+#define RVAL2CSTR_ACCEPT_NIL(v) (rbg_rval2cstr_accept_nil(&(v)))
 #define RVAL2CSTR2(v) (RVAL2CSTR_ACCEPT_NIL(v))
+#define RVAL2CSTR_ACCEPT_SYMBOL(v) (rbg_rval2cstr_accept_symbol(&(v)))
+#define RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(v) (rbg_rval2cstr_accept_symbol_accept_nil(&(v)))
 #define CSTR2RVAL(s) (rbg_cstr2rval(s))
 #define CSTR2RVAL_LEN(s, l) (rbg_cstr2rval_len(s, l))
 #define CSTR2RVAL_ENC(s, e) (rbg_cstr2rval_with_encoding(s, e))
@@ -109,6 +111,9 @@ extern const gchar *rbg_rval_inspect(VALUE object);
 extern gchar* rbg_string_value_ptr(volatile VALUE* ptr); /* no longer used */
 extern const gchar *rbg_rval2cstr(VALUE *str);
 extern const gchar *rbg_rval2cstr_accept_nil(VALUE *str);
+extern const gchar *rbg_rval2cstr_accept_symbol(volatile VALUE *value);
+extern const gchar *rbg_rval2cstr_accept_symbol_accept_nil(volatile VALUE *value);
+
 extern VALUE rbg_cstr2rval(const gchar* str);
 extern VALUE rbg_cstr2rval_len(const gchar* str, gsize len);
 extern VALUE rbg_cstr2rval_with_encoding(const gchar* str,
