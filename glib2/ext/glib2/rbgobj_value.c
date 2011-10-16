@@ -126,6 +126,27 @@ rbgobj_gvalue_to_rvalue(const GValue* value)
     }
 }
 
+static VALUE
+rbgobj_gvalue_to_rvalue_unset_body(VALUE value)
+{
+    return GVAL2RVAL((GValue *)value);
+}
+
+static VALUE
+rbgobj_gvalue_to_rvalue_unset_ensure(VALUE value)
+{
+    g_value_unset((GValue *)value);
+
+    return Qnil;
+}
+
+VALUE
+rbgobj_gvalue_to_rvalue_unset(GValue *value)
+{
+    return rb_ensure(rbgobj_gvalue_to_rvalue_unset_body, (VALUE)value,
+                     rbgobj_gvalue_to_rvalue_unset_ensure, (VALUE)value);
+}
+
 void
 rbgobj_initialize_gvalue(GValue *result, VALUE value)
 {

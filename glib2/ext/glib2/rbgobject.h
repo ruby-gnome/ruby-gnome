@@ -87,6 +87,7 @@ RUBY_GLIB2_VAR  ID rbgobj_id_children;
 #define GOBJ2RVAL_UNREF(gobj) (rbgobj_ruby_object_from_instance_with_unref(gobj))
 #define GOBJ2RVALU(gobj) GOBJ2RVAL_UNREF(gobj)
 #define GVAL2RVAL(v)    (rbgobj_gvalue_to_rvalue(v))
+#define GVAL2RVAL_UNSET(v) (rbgobj_gvalue_to_rvalue(v))
 
 #define RVAL2BOXED(obj, gtype)  (rbgobj_boxed_get(obj, gtype))
 #define BOXED2RVAL(cobj, gtype) (rbgobj_make_boxed(cobj, gtype))
@@ -188,6 +189,7 @@ extern void g_rclosure_set_tag(GClosure *closure, const gchar *tag);
 
 /* rbgobj_value.c */
 extern VALUE rbgobj_gvalue_to_rvalue(const GValue* value);
+extern VALUE rbgobj_gvalue_to_rvalue_unset(GValue *value);
 extern void rbgobj_rvalue_to_gvalue(VALUE val, GValue* result);
 extern void rbgobj_initialize_gvalue(GValue *result, VALUE value);
 
