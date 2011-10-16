@@ -75,26 +75,20 @@ pixdata_serialize(VALUE self)
 }
 
 static VALUE
-pixdata_s_deserialize(VALUE self, VALUE stream)
+pixdata_s_deserialize(VALUE self, VALUE rbstream)
 {
     GdkPixdata pixdata;
-    gboolean ret;
-    guint8 *gstream;
-    GError* error = NULL;
-    gint i, len;
+    long n;
+    guint8 *stream = RVAL2GUINT8S(rbstream, n);
+    GError *error = NULL;
 
-    len = RARRAY_LEN(stream);
-    gstream = g_new(guint8, len);
-    //   gstream = ALLOCA_N(guint8, len);
-    for (i = 0; i < len; i++){
-        gstream[i] = (guint8)NUM2UINT(RARRAY_PTR(stream)[i]);
-    }
-    ret = gdk_pixdata_deserialize(&pixdata, len, gstream, &error);
+    /* TODO: Should we really be creating a new array here?  As far as I can
+       tell, the data is copied. */
+    if (!gdk_pixdata_deserialize(&pixdata, n, stream, &error))
+        RAISE_GERROR(error);
 
     /* need to manage the returned value */
-    rb_ivar_set(ret, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, gstream));
-
-    if (ret != TRUE) RAISE_GERROR(error);
+    rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, stream));
 
     return PIXDATA2RVAL(&pixdata);
 }

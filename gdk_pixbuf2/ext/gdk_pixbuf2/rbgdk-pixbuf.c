@@ -186,21 +186,19 @@ initialize(int argc, VALUE *argv, VALUE self)
             buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
         }
 #endif
-    } else if (argc == 2){
-        int i;
-        int len = RARRAY_LEN(arg1); 
-        guint8 *gstream = g_new(guint8, len);
-        for (i = 0; i < len; i++){
-            gstream[i] = (guint8)NUM2UINT(RARRAY_PTR(arg1)[i]);
-        }      
-        buf = gdk_pixbuf_new_from_inline(len, gstream, RVAL2CBOOL(arg2), &error);
-        if (buf == NULL){
+    } else if (argc == 2) {
+        /* TODO: Is this really up to the caller to decide? */
+        gboolean copy_pixels = RVAL2CBOOL(arg2);
+        long n;
+        guint8 *data = RVAL2GUINT8S(arg1, n);
+        buf = gdk_pixbuf_new_from_inline(n, data, copy_pixels, &error);
+        if (buf == NULL) {
             rb_gc();
             error = NULL;
-            buf = gdk_pixbuf_new_from_inline(len, gstream, RVAL2CBOOL(arg2), &error);
+            buf = gdk_pixbuf_new_from_inline(n, data, copy_pixels, &error);
         }
         /* need to manage the returned value */
-        rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, gstream));
+        rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, data));
     } else if (argc == 1){
         if (TYPE(arg1) == T_STRING) {
             buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
