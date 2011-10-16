@@ -75,6 +75,7 @@ typedef int GPid;
 #define RVAL2GBOOLEANS(ary, n) rbg_rval2gbooleans(&(ary), &(n))
 #define RVAL2GINTS(ary, n) rbg_rval2gints(&(ary), &(n))
 #define RVAL2GINT8S(ary, n) rbg_rval2gint8s(&(ary), &(n))
+#define RVAL2GUINT8S(ary, n) rbg_rval2guint8s(&(ary), &(n))
 #define RVAL2GUINT16S(ary, n) rbg_rval2guint16s(&(ary), &(n))
 #define RVAL2GUINT32S(ary, n) rbg_rval2guint32s(&(ary), &(n))
 #define RVAL2GDOUBLES(ary, n) rbg_rval2gdoubles(&(ary), &(n))
@@ -130,6 +131,7 @@ VALUE rbg_strv2rval_free(gchar **strings);
 gboolean *rbg_rval2gbooleans(volatile VALUE *value, long *n);
 gint *rbg_rval2gints(volatile VALUE *value, long *n);
 gint8 *rbg_rval2gint8s(volatile VALUE *value, long *n);
+guint8 *rbg_rval2guint8s(volatile VALUE *value, long *n);
 guint16 *rbg_rval2guint16s(volatile VALUE *value, long *n);
 guint32 *rbg_rval2guint32s(volatile VALUE *value, long *n);
 gdouble *rbg_rval2gdoubles(volatile VALUE *value, long *n);

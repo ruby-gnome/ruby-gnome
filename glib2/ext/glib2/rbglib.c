@@ -571,6 +571,49 @@ rbg_rval2gint8s(volatile VALUE *value, long *n)
     return args.result;
 }
 
+struct rbg_rval2guint8s_args {
+    VALUE ary;
+    long n;
+    guint8 *result;
+};
+
+static VALUE
+rbg_rval2guint8s_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2guint8s_args *args = (struct rbg_rval2guint8s_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = NUM2UINT(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2guint8s_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2guint8s_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+guint8 *
+rbg_rval2guint8s(volatile VALUE *value, long *n)
+{
+    struct rbg_rval2guint8s_args args;
+
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(guint8, args.n + 1);
+
+    rb_rescue(rbg_rval2guint8s_body, (VALUE)&args,
+              rbg_rval2guint8s_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
 struct rbg_rval2guint16s_args {
     VALUE ary;
     long n;

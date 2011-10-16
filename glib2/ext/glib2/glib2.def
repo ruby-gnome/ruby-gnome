@@ -79,6 +79,7 @@ EXPORTS
         rbg_rval2gbooleans
         rbg_rval2gints
         rbg_rval2gint8s
+        rbg_rval2guint8s
         rbg_rval2guint16s
         rbg_rval2guint32s
         rbg_rval2gdoubles
