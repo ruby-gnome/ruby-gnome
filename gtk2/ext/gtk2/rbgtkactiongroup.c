@@ -74,65 +74,100 @@ actiongroup_remove_action(VALUE self, VALUE action)
 static void
 activate_action(GtkAction *action, VALUE self)
 {
-    VALUE action_procs = rb_ivar_get(self, id_action_procs);
-    VALUE proc = rb_hash_aref(action_procs, CSTR2RVAL(gtk_action_get_name(action)));
-    if (! NIL_P(proc))
+    VALUE proc = rb_hash_aref(rb_ivar_get(self, id_action_procs),
+                              CSTR2RVAL(gtk_action_get_name(action)));
+
+    if (!NIL_P(proc))
         rb_funcall(proc, id_call, 2, self, GOBJ2RVAL(action));
 }
 
+struct rbg_rval2gtkactionentries_args {
+    VALUE ary;
+    long n;
+    GtkActionEntry *result;
+    VALUE procs;
+};
+
 static VALUE
-actiongroup_add_actions(VALUE self, VALUE entries)
+rbg_rval2gtkactionentries_body(VALUE value)
 {
-    guint i;
-    VALUE action_procs;
-    guint n_entries = (guint)RARRAY_LEN(entries);
-    GtkActionEntry* gentries = g_new0(GtkActionEntry, n_entries);
+    long i;
+    struct rbg_rval2gtkactionentries_args *args = (struct rbg_rval2gtkactionentries_args *)value;
 
-    if (rb_ivar_defined(self, id_action_procs) == Qtrue){
-        action_procs = rb_ivar_get(self, id_action_procs);
-    } else {
-        action_procs = rb_hash_new();
-    }
+    for (i = 0; i < args->n; i++) {
+        RARRAY_PTR(args->ary)[i] = rb_ary_dup(rb_ary_to_ary(RARRAY_PTR(args->ary)[i]));
+        VALUE entry = RARRAY_PTR(args->ary)[i];
+        long n = RARRAY_LEN(entry);
 
-    for (i = 0; i < n_entries; i++){
-        VALUE entry;
-        int size;
+        args->result[i].callback = G_CALLBACK(activate_action);
 
-	entry = RARRAY_PTR(entries)[i];
-	size = RARRAY_LEN(entry);
-        if (size < 1)
-            rb_raise(rb_eArgError, "wrong array parameter");
+        if (n < 1 || n > 6)
+            rb_raise(rb_eArgError, "entry does not contain right number of entries %d (1..6)", n);
 
-        gentries[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
-        gentries[i].callback = G_CALLBACK(activate_action);
+        args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
 
-        if (size < 2) continue;
-
-        if (NIL_P(RARRAY_PTR(entry)[1])){
-            gentries[i].stock_id = NULL;
-        } else if (SYMBOL_P(RARRAY_PTR(entry)[1])){
-            gentries[i].stock_id = rb_id2name(SYM2ID(RARRAY_PTR(entry)[1]));
-        } else if (TYPE(RARRAY_PTR(entry)[1]) == T_STRING){
-            gentries[i].stock_id = RVAL2CSTR(RARRAY_PTR(entry)[1]);
-        } else{
-            rb_raise(rb_eArgError,
-		     "invalid argument %s (expect Symbol or String)",
-                     rb_class2name(CLASS_OF(RARRAY_PTR(entry)[1])));
+        switch (n) {
+        case 6:
+            /* TODO: Call #to_proc on entry 5? */
+            rb_hash_aset(args->procs, RARRAY_PTR(entry)[0], RARRAY_PTR(entry)[5]);
+        case 5:
+            args->result[i].tooltip = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[4]);
+        case 4:
+            args->result[i].accelerator = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[3]);
+        case 3:
+            args->result[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
+        case 2:
+            args->result[i].stock_id = RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(RARRAY_PTR(entry)[1]);
+            break;
         }
-
-        if (size < 3) continue;
-        gentries[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
-        if (size < 4) continue;
-        gentries[i].accelerator = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[3]);
-        if (size < 4) continue;
-        gentries[i].tooltip = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[4]);
-        if (size < 5) continue;
-        rb_hash_aset(action_procs, RARRAY_PTR(entry)[0], RARRAY_PTR(entry)[5]);
     }
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gtkactionentries_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gtkactionentries_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GtkActionEntry *
+rbg_rval2gtkactionentries(volatile VALUE *value, long *n, VALUE procs)
+{
+    struct rbg_rval2gtkactionentries_args args;
+
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new0(GtkActionEntry, args.n + 1);
+    args.procs = procs;
+
+    rb_rescue(rbg_rval2gtkactionentries_body, (VALUE)&args,
+              rbg_rval2gtkactionentries_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GTKACTIONENTRIES(value, n, procs) rbg_rval2gtkactionentries(&(value), &(n), procs)
+
+static VALUE
+actiongroup_add_actions(VALUE self, VALUE rbentries)
+{
+    GtkActionGroup *group = _SELF(self);
+    VALUE action_procs = rb_ivar_defined(self, id_action_procs) == Qtrue ?
+        rb_ivar_get(self, id_action_procs) :
+        rb_hash_new();
+    long n;
+    GtkActionEntry *entries = RVAL2GTKACTIONENTRIES(rbentries, n, action_procs);
+
     rb_ivar_set(self, id_action_procs, action_procs);
-    gtk_action_group_add_actions(_SELF(self), gentries, n_entries,
-				 (gpointer)self);
-    g_free(gentries);
+
+    gtk_action_group_add_actions(group, entries, n, (gpointer)self);
+
+    g_free(entries);
 
     return self;
 }
@@ -140,135 +175,208 @@ actiongroup_add_actions(VALUE self, VALUE entries)
 static void
 activate_toggle_action(GtkAction *action, VALUE self)
 {
-    VALUE action_procs = rb_ivar_get(self, id_toggle_action_procs);
-    VALUE proc = rb_hash_aref(action_procs, CSTR2RVAL(gtk_action_get_name(action)));
-    if (! NIL_P(proc))
+    VALUE proc = rb_hash_aref(rb_ivar_get(self, id_toggle_action_procs),
+                              CSTR2RVAL(gtk_action_get_name(action)));
+
+    if (!NIL_P(proc))
         rb_funcall(proc, id_call, 2, self, GOBJ2RVAL(action));
 }
 
+struct rbg_rval2gtktoggleactionentries_args {
+    VALUE ary;
+    long n;
+    GtkToggleActionEntry *result;
+    VALUE procs;
+};
+
 static VALUE
-actiongroup_add_toggle_actions(VALUE self, VALUE entries)
+rbg_rval2gtktoggleactionentries_body(VALUE value)
 {
-    guint i;
-    VALUE toggle_action_procs;
-    guint n_entries = (guint)RARRAY_LEN(entries);
-    GtkToggleActionEntry* gentries = g_new0(GtkToggleActionEntry, n_entries);
+    long i;
+    struct rbg_rval2gtktoggleactionentries_args *args = (struct rbg_rval2gtktoggleactionentries_args *)value;
 
-    if (rb_ivar_defined(self, id_toggle_action_procs) == Qtrue){
-        toggle_action_procs = rb_ivar_get(self, id_toggle_action_procs);
-    } else {
-        toggle_action_procs = rb_hash_new();
-    }
+    for (i = 0; i < args->n; i++) {
+        RARRAY_PTR(args->ary)[i] = rb_ary_dup(rb_ary_to_ary(RARRAY_PTR(args->ary)[i]));
+        VALUE entry = RARRAY_PTR(args->ary)[i];
+        long n = RARRAY_LEN(entry);
 
-    for (i = 0; i < n_entries; i++){
-        VALUE entry;
-	int size;
+        args->result[i].callback = G_CALLBACK(activate_toggle_action);
 
-	entry = RARRAY_PTR(entries)[i];
-	size = RARRAY_LEN(entry);
-        if (size < 1)
-            rb_raise(rb_eArgError, "wrong array parameter");
+        if (n < 1 || n > 7)
+            rb_raise(rb_eArgError, "entry does not contain right number of entries %d (1..7)", n);
 
-        gentries[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
-        gentries[i].callback = G_CALLBACK(activate_toggle_action);
+        args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
 
-        if (size < 2) continue;
-
-        if (NIL_P(RARRAY_PTR(entry)[1])){
-            gentries[i].stock_id = NULL;
-        } else if (SYMBOL_P(RARRAY_PTR(entry)[1])){
-            gentries[i].stock_id = rb_id2name(SYM2ID(RARRAY_PTR(entry)[1]));
-        } else if (TYPE(RARRAY_PTR(entry)[1]) == T_STRING){
-            gentries[i].stock_id = RVAL2CSTR(RARRAY_PTR(entry)[1]);
-        } else{
-            rb_raise(rb_eArgError, "invalid argument %s (expect Symbol or String)",
-                     rb_class2name(CLASS_OF(RARRAY_PTR(entry)[1])));
+        switch (n) {
+        case 7:
+            args->result[i].is_active = RVAL2CBOOL(RARRAY_PTR(entry)[6]);
+        case 6:
+            /* TODO: Call #to_proc on entry 5? */
+            rb_hash_aset(args->procs, RARRAY_PTR(entry)[0], RARRAY_PTR(entry)[5]);
+        case 5:
+            args->result[i].tooltip = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[4]);
+        case 4:
+            args->result[i].accelerator = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[3]);
+        case 3:
+            args->result[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
+        case 2:
+            args->result[i].stock_id = RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(RARRAY_PTR(entry)[1]);
+            break;
         }
-
-        if (size < 3) continue;
-        gentries[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
-        if (size < 4) continue;
-        gentries[i].accelerator = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[3]);
-        if (size < 4) continue;
-        gentries[i].tooltip = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[4]);
-        if (size < 5) continue;
-        rb_hash_aset(toggle_action_procs,
-		     RARRAY_PTR(entry)[0], RARRAY_PTR(entry)[5]);
-        if (size < 6) continue;
-        gentries[i].is_active = RVAL2CBOOL(RARRAY_PTR(entry)[6]);
     }
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gtktoggleactionentries_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gtktoggleactionentries_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GtkToggleActionEntry *
+rbg_rval2gtktoggleactionentries(volatile VALUE *value, long *n, VALUE procs)
+{
+    struct rbg_rval2gtktoggleactionentries_args args;
+
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new0(GtkToggleActionEntry, args.n + 1);
+    args.procs = procs;
+
+    rb_rescue(rbg_rval2gtktoggleactionentries_body, (VALUE)&args,
+              rbg_rval2gtktoggleactionentries_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GTKTOGGLEACTIONENTRIES(value, n, procs) rbg_rval2gtktoggleactionentries(&(value), &(n), procs)
+
+static VALUE
+actiongroup_add_toggle_actions(VALUE self, VALUE rbentries)
+{
+    GtkActionGroup *group = _SELF(self);
+    VALUE toggle_action_procs = rb_ivar_defined(self, id_toggle_action_procs) == Qtrue ?
+        rb_ivar_get(self, id_toggle_action_procs) :
+        rb_hash_new();
+    long n;
+    GtkToggleActionEntry *entries = RVAL2GTKTOGGLEACTIONENTRIES(rbentries, n, toggle_action_procs);
+
     rb_ivar_set(self, id_toggle_action_procs, toggle_action_procs);
-    gtk_action_group_add_toggle_actions(_SELF(self), gentries, n_entries,
-					(gpointer)self);
-    g_free(gentries);
+
+    gtk_action_group_add_toggle_actions(group, entries, n, (gpointer)self);
+
+    g_free(entries);
 
     return self;
 }
 
 static void
-activate_radio_action(GtkAction *action, GtkRadioAction *current, VALUE func)
+activate_radio_action(GtkAction *action, GtkRadioAction *current, VALUE proc)
 {
-    if (! NIL_P(func))
-        rb_funcall(func, id_call, 2, GOBJ2RVAL(action), GOBJ2RVAL(current));
+    if (!NIL_P(proc))
+        rb_funcall(proc, id_call, 2, GOBJ2RVAL(action), GOBJ2RVAL(current));
 }
+
+struct rbg_rval2gtkradioactionentries_args {
+    VALUE ary;
+    long n;
+    GtkRadioActionEntry *result;
+};
+
+static VALUE
+rbg_rval2gtkradioactionentries_body(VALUE value)
+{
+    long i;
+    struct rbg_rval2gtkradioactionentries_args *args = (struct rbg_rval2gtkradioactionentries_args *)value;
+
+    for (i = 0; i < args->n; i++) {
+        RARRAY_PTR(args->ary)[i] = rb_ary_dup(rb_ary_to_ary(RARRAY_PTR(args->ary)[i]));
+        VALUE entry = RARRAY_PTR(args->ary)[i];
+        long n = RARRAY_LEN(entry);
+
+        switch (n) {
+        case 6:
+            args->result[i].value = NUM2INT(RARRAY_PTR(entry)[5]);
+        case 5:
+            args->result[i].tooltip = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[4]);
+        case 4:
+            args->result[i].accelerator = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[3]);
+        case 3:
+            args->result[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
+        case 2:
+            args->result[i].stock_id = RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(RARRAY_PTR(entry)[1]);
+        case 1:
+            args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
+        default:
+            rb_raise(rb_eArgError, "entry does not contain right number of entries %d (1..6)", n);
+        }
+    }
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gtkradioactionentries_rescue(VALUE value)
+{
+    g_free(((struct rbg_rval2gtkradioactionentries_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GtkRadioActionEntry *
+rbg_rval2gtkradioactionentries(volatile VALUE *value, long *n)
+{
+    struct rbg_rval2gtkradioactionentries_args args;
+
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new0(GtkRadioActionEntry, args.n + 1);
+
+    rb_rescue(rbg_rval2gtkradioactionentries_body, (VALUE)&args,
+              rbg_rval2gtkradioactionentries_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+#define RVAL2GTKRADIOACTIONENTRIES(value, n) rbg_rval2gtkradioactionentries(&(value), &(n))
 
 static VALUE
 actiongroup_add_radio_actions(int argc, VALUE *argv, VALUE self)
 {
-    VALUE entries, value, proc;
-    guint i;
-    guint n_entries;
-    GtkRadioActionEntry* gentries;
+    GtkActionGroup *group = _SELF(self);
+    VALUE rbentries, rbvalue, proc;
+    long n;
+    GtkRadioActionEntry *entries;
+    gint value;
 
-    rb_scan_args(argc, argv, "12", &entries, &value, &proc);
+    rb_scan_args(argc, argv, "12", &rbentries, &rbvalue, &proc);
 
-    if (NIL_P(value)) value = -1;
-    if (NIL_P(proc) && rb_block_given_p()){
+    value = NIL_P(rbvalue) ? -1 : NUM2INT(rbvalue);
+
+    if (NIL_P(proc) && rb_block_given_p()) {
         proc = rb_block_proc();
+        /* TODO: How do we remove this proc when all the radio actions passed
+         * have been removed? */
         G_RELATIVE(self, proc);
     }
-    n_entries = (guint)RARRAY_LEN(entries);
-    gentries = g_new0(GtkRadioActionEntry, n_entries);
 
-    for (i = 0; i < n_entries; i++){
-        VALUE entry;
-	int size;
+    entries = RVAL2GTKRADIOACTIONENTRIES(rbentries, n);
 
-	entry = RARRAY_PTR(entries)[i];
-	size = RARRAY_LEN(entry);
-        if (size < 1)
-            rb_raise(rb_eArgError, "wrong array parameter");
-
-        gentries[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
-
-        if (size < 2) continue;
-
-        if (NIL_P(RARRAY_PTR(entry)[1])){
-            gentries[i].stock_id = NULL;
-        } else if (SYMBOL_P(RARRAY_PTR(entry)[1])){
-            gentries[i].stock_id = rb_id2name(SYM2ID(RARRAY_PTR(entry)[1]));
-        } else if (TYPE(RARRAY_PTR(entry)[1]) == T_STRING){
-            gentries[i].stock_id = RVAL2CSTR(RARRAY_PTR(entry)[1]);
-        } else{
-            rb_raise(rb_eArgError,
-		     "invalid argument %s (expect Symbol or String)",
-                     rb_class2name(CLASS_OF(RARRAY_PTR(entry)[1])));
-        }
-
-        if (size < 3) continue;
-        gentries[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
-        if (size < 4) continue;
-        gentries[i].accelerator = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[3]);
-        if (size < 4) continue;
-        gentries[i].tooltip = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[4]);
-        if (size < 5) continue;
-        gentries[i].value = NUM2INT(RARRAY_PTR(entry)[5]);
-    }
-    gtk_action_group_add_radio_actions(_SELF(self), gentries,
-				       n_entries, NUM2INT(value),
+    gtk_action_group_add_radio_actions(group,
+                                       entries,
+                                       n,
+                                       value,
                                        G_CALLBACK(activate_radio_action),
 				       (gpointer)proc);
-    g_free(gentries);
+
+    g_free(entries);
 
     return self;
 }
