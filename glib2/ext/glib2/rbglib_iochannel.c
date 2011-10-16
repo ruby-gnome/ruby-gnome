@@ -141,7 +141,6 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
     GIOChannel *channel = _SELF(self);
     GError *error = NULL;
     GIOStatus status;
-    VALUE result = Qnil;
 
     rb_scan_args(argc, argv, "01", &rbcount);
 
@@ -149,12 +148,7 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
         status = g_io_channel_read_to_end(channel, &buffer, &bytes_read, &error);
         ioc_error(status, error);
 
-        if (!buffer)
-            return CSTR2RVAL("");
-
-        result = CSTR2RVAL_LEN_FREE(buffer, bytes_read);
-
-        return result;
+        return buffer != NULL ? CSTR2RVAL_LEN_FREE(buffer, bytes_read) : CSTR2RVAL("");
     }
 
     count = NUM2UINT(rbcount);
@@ -163,14 +157,15 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
     memset(buffer, '\0', count);
 
     status = g_io_channel_read_chars(channel, buffer, count, &bytes_read, &error);
-    if (status == G_IO_STATUS_EOF)
-        result = CSTR2RVAL("");
-    else if (status != G_IO_STATUS_NORMAL)
-        ioc_error(status, error);
-    else
-        result = CSTR2RVAL_LEN_FREE(buffer, bytes_read);
+    if (status == G_IO_STATUS_NORMAL)
+        return CSTR2RVAL_LEN_FREE(buffer, bytes_read);
+    else if (status == G_IO_STATUS_EOF)
+        return CSTR2RVAL("");
 
-    return result;
+    ioc_error(status, error);
+
+    /* Not reached. */
+    return Qnil;
 }
 
 static VALUE
