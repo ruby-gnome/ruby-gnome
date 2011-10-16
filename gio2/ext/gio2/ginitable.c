@@ -105,6 +105,8 @@ rbgio_ginitable_new_ensure(struct rbgio_ginitable_new_data *data)
                 if (G_IS_VALUE(&data->parameters[i].value))
                         g_value_unset(&data->parameters[i].value);
 
+        g_free(data->parameters);
+
         return Qnil;
 }
 
@@ -146,7 +148,7 @@ rbgio_ginitable_new(GType type, VALUE parameters, VALUE cancellable)
         data.rbparameters = parameters;
         data.index = 0;
         data.n_parameters = RVAL2GUINT(rb_funcall(parameters, s_id_length, 0));
-        data.parameters = ALLOCA_N(GParameter, data.n_parameters);
+        data.parameters = g_new(GParameter, data.n_parameters);
         data.error = NULL;
 
         object = (GObject *)rb_ensure(rbgio_ginitable_new_body, (VALUE)&data,

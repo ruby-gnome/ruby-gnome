@@ -134,6 +134,8 @@ rbgio_gasyncinitable_new_async_ensure(struct rbgio_gasyncinitable_new_async_data
                 if (G_IS_VALUE(&data->parameters[i].value))
                         g_value_unset(&data->parameters[i].value);
 
+        g_free(data->parameters);
+
         return Qnil;
 }
 
@@ -180,7 +182,7 @@ rbgio_gasyncinitable_new_async(GType type,
         data.rbparameters = parameters;
         data.index = 0;
         data.n_parameters = RVAL2GUINT(rb_funcall(parameters, s_id_length, 0));
-        data.parameters = ALLOCA_N(GParameter, data.n_parameters);
+        data.parameters = g_new(GParameter, data.n_parameters);
 
         rb_ensure(rbgio_gasyncinitable_new_async_body, (VALUE)&data,
                   rbgio_gasyncinitable_new_async_ensure, (VALUE)&data);
