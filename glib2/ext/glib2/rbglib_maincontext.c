@@ -538,9 +538,9 @@ mc_prepare(VALUE self)
 }
 
 struct mc_query_body_args {
-    GPollFD *fds;
     gint timeout_;
-    gint ret;
+    GPollFD *fds;
+    gint n_fds;
 };
 
 static VALUE
@@ -550,9 +550,9 @@ mc_query_body(VALUE value)
     gint i;
     VALUE ary = rb_ary_new();
 
-    for (i = 0; i < args->ret; i++)
+    for (i = 0; i < args->n_fds; i++)
         rb_ary_push(ary, BOXED2RVAL(&args->fds[i], G_TYPE_POLL_FD));
-    
+
     return rb_assoc_new(INT2NUM(args->timeout_), ary);
 }
 
@@ -564,31 +564,29 @@ mc_query_ensure(VALUE value)
     return Qnil;
 }
 
+#define QUERY_DEFAULT_FDS 100
+
 static VALUE
-mc_query(VALUE self, VALUE max_priority)
+mc_query(VALUE self, VALUE rbmax_priority)
 {
+    GMainContext *context = _SELF(self);
+    gint max_priority = NUM2INT(rbmax_priority);
     gint timeout_;
+    GPollFD *fds;
+    gint n_fds;
     struct mc_query_body_args args;
-   
-    GPollFD *fds = g_new(GPollFD, 100);
-    gint ret = g_main_context_query(_SELF(self),
-                                    NUM2INT(max_priority), 
-                                    &timeout_,
-                                    fds,
-                                    100);
-    if (ret > 100) {
+
+    fds = g_new(GPollFD, QUERY_DEFAULT_FDS);
+    n_fds = g_main_context_query(context, max_priority, &timeout_, fds, QUERY_DEFAULT_FDS);
+    if (n_fds > QUERY_DEFAULT_FDS) {
         g_free(fds);
-        fds = g_new(GPollFD, ret);
-        g_main_context_query(_SELF(self),
-                             NUM2INT(max_priority),
-                             &timeout_,
-                             fds,
-                             ret);
+        fds = g_new(GPollFD, n_fds);
+        g_main_context_query(context, max_priority, &timeout_, fds, n_fds);
     }
 
-    args.fds = fds;
     args.timeout_ = timeout_;
-    args.ret = ret;
+    args.fds = fds;
+    args.n_fds = n_fds;
     return rb_ensure(mc_query_body, (VALUE)&args,
                      mc_query_ensure, (VALUE)fds);
 }
