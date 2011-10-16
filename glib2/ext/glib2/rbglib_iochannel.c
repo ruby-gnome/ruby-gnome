@@ -134,50 +134,47 @@ void        g_io_channel_init               (GIOChannel *channel);
 static VALUE
 ioc_read_chars(gint argc, VALUE *argv, VALUE self)
 {
-    VALUE count, ret;
-    gchar* buf;
+    VALUE rbcount;
+    gsize count;
+    gchar *buffer;
     gsize bytes_read;
-    GError* err = NULL;
+    GIOChannel *channel = _SELF(self);
+    GError *error = NULL;
     GIOStatus status;
-    GIOChannel *channel;
+    VALUE result = Qnil;
 
-    rb_scan_args(argc, argv, "01", &count);
+    rb_scan_args(argc, argv, "01", &rbcount);
 
-    channel = _SELF(self);
-    if (NIL_P(count)) {
-        gsize length;
+    if (NIL_P(rbcount)) {
+        status = g_io_channel_read_to_end(channel, &buffer, &bytes_read, &error);
+        ioc_error(status, error);
 
-        status = g_io_channel_read_to_end(channel, &buf, &length, &err);
+        if (!buffer)
+            return CSTR2RVAL("");
 
-        if (status == G_IO_STATUS_EOF) {
-            ret = CSTR2RVAL("");
-        } else {
-            ioc_error(status, err);
-        }
-        if (buf) {
-            ret = CSTR2RVAL_LEN(buf, length);
-            g_free(buf);
-        } else {
-            ret = CSTR2RVAL("");
-        }
-    } else {
-        buf = ALLOCA_N(gchar, count);
-        memset(buf, '\0', count);
+        result = CSTR2RVAL_LEN(buffer, bytes_read);
 
-        status = g_io_channel_read_chars(channel, buf, NUM2UINT(count),
-                                         &bytes_read, &err);
-        if (status == G_IO_STATUS_EOF) {
-            ret = CSTR2RVAL("");
-        } else {
-            ioc_error(status, err);
-        }
-        if (buf) {
-            ret = CSTR2RVAL_LEN(buf, bytes_read);
-        } else {
-            ret = CSTR2RVAL("");
-        }
+        g_free(buffer);
+
+        return result;
     }
-    return ret;
+
+    count = NUM2UINT(rbcount);
+
+    buffer = g_new(gchar, count);
+    memset(buffer, '\0', count);
+
+    status = g_io_channel_read_chars(channel, buffer, count, &bytes_read, &error);
+    if (status == G_IO_STATUS_EOF)
+        result = CSTR2RVAL("");
+    else if (status != G_IO_STATUS_NORMAL)
+        ioc_error(status, error);
+    else
+        result = CSTR2RVAL_LEN(buffer, bytes_read);
+
+    g_free(buffer);
+
+    return result;
 }
 
 static VALUE
