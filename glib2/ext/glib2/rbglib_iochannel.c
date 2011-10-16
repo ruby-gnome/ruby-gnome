@@ -152,9 +152,7 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
         if (!buffer)
             return CSTR2RVAL("");
 
-        result = CSTR2RVAL_LEN(buffer, bytes_read);
-
-        g_free(buffer);
+        result = CSTR2RVAL_LEN_FREE(buffer, bytes_read);
 
         return result;
     }
@@ -170,9 +168,7 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
     else if (status != G_IO_STATUS_NORMAL)
         ioc_error(status, error);
     else
-        result = CSTR2RVAL_LEN(buffer, bytes_read);
-
-    g_free(buffer);
+        result = CSTR2RVAL_LEN_FREE(buffer, bytes_read);
 
     return result;
 }
