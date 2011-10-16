@@ -92,7 +92,7 @@ rbuimanager_add_ui(int argc, VALUE *argv, VALUE self)
         VALUE buffer_or_filename;
         rb_scan_args(argc, argv, "10", &buffer_or_filename);
     
-        Check_Type(buffer_or_filename, T_STRING);
+        StringValue(buffer_or_filename);
         buffer = rb_funcall(buffer_or_filename, rb_intern("include?"), 1, CSTR2RVAL("<ui>"));
 
         if (RVAL2CBOOL(buffer)){

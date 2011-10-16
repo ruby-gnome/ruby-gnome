@@ -33,7 +33,7 @@ gdkpmap_create_from_data(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "43", &win, &data, &w, &h, &depth, &fg, &bg);
 
-    Check_Type(data, T_STRING);
+    StringValue(data);
     if (NIL_P(depth)){
         ret = GOBJ2RVAL(gdk_bitmap_create_from_data(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
                                                     RVAL2CSTR(data), NUM2INT(w), NUM2INT(h)));
@@ -122,7 +122,7 @@ gdkpmap_create_from_xbm(VALUE self, VALUE win, VALUE fname)
     unsigned int width, height;
     int x, y;
 
-    Check_Type(fname, T_STRING);
+    StringValue(fname);
     if (XReadBitmapFileData(RVAL2CSTR(fname), &width, &height, &data, &x, &y))
         rb_raise(rb_eArgError, "Bitmap not created from %s", RVAL2CSTR(fname));
 

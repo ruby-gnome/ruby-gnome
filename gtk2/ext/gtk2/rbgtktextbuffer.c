@@ -347,8 +347,7 @@ txt_deserialize(VALUE self, VALUE content_buffer, VALUE format, VALUE iter, VALU
     GError* error = NULL;
     gboolean ret;
 
-    /* TODO: Why not StringValue(data)? */
-    Check_Type(data, T_STRING);
+    StringValue(data);
     ret = gtk_text_buffer_deserialize(_SELF(self), _SELF(content_buffer),
                                       RVAL2ATOM(format),
                                       RVAL2ITR(iter),
@@ -495,8 +494,7 @@ serialize_func(GtkTextBuffer *register_buffer, GtkTextBuffer *content_buffer, Gt
 
     /* This should return data as String */
     result = G_PROTECT_CALLBACK(invoke_callback, &arg);
-    /* TODO: Why not StringValue(result)? */
-    Check_Type(result, T_STRING);
+    StringValue(result);
     *length = RSTRING_LEN(result);
     return (guint8*)(NIL_P(rb_errinfo()) ? RSTRING_PTR(result) : NULL);
 }
