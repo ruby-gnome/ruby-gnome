@@ -72,34 +72,97 @@ accumulator_func(GSignalInvocationHint* ihint,
     return continue_emission;
 }
 
+struct rval2gtypes_args {
+    VALUE ary;
+    long n;
+    GType *result;
+};
+
+static VALUE
+rbg_rval2gtypes_body(VALUE value)
+{
+    long i;
+    struct rval2gtypes_args *args = (struct rval2gtypes_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = rbgobj_gtype_get(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static VALUE
+rbg_rval2gtypes_rescue(VALUE value)
+{
+    g_free(((struct rval2gtypes_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GType *
+rbg_rval2gtypes(volatile VALUE *value, long *n)
+{
+    struct rval2gtypes_args args;
+
+    args.ary = *value = rb_ary_dup(rb_ary_to_ary(*value));
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GType, args.n + 1);
+
+    rb_rescue(rbg_rval2gtypes_body, (VALUE)&args,
+              rbg_rval2gtypes_rescue, (VALUE)&args);
+
+    if (n != NULL)
+        *n = args.n;
+
+    return args.result;
+}
+
+static GType *
+rbg_rval2gtypes_accept_nil(volatile VALUE *value, long *n)
+{
+    if (!NIL_P(*value))
+        return rbg_rval2gtypes(value, n);
+
+    if (n != NULL)
+        *n = 0;
+
+    return NULL;
+}
+
+#define RVAL2GTYPES(value, n) rbg_rval2gtypes(&(value), &(n))
+#define RVAL2GTYPES_ACCEPT_NIL(value, n) rbg_rval2gtypes_accept_nil(&(value), &(n))
+
 static VALUE
 gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
-    VALUE signal_name, signal_flags, accumulator, return_type, params;
-    GClosure* class_closure;
-    GType* param_types;
-    long i, n_params;
-    guint sig;
+    const RGObjClassInfo *cinfo = rbgobj_lookup_class(self);
+    VALUE rbsignal_name, rbsignal_flags, accumulator, rbreturn_type, params;
+    const gchar *signal_name;
+    GSignalFlags signal_flags;
+    GClosure *class_closure;
+    GType return_type;
+    GType *param_types;
+    long n_params;
+    guint signal;
 
-    rb_scan_args(argc, argv, "4*", &signal_name, &signal_flags,
-                 &accumulator, &return_type, &params);
+    rb_scan_args(argc, argv, "4*",
+                 &rbsignal_name, &rbsignal_flags, &accumulator, &rbreturn_type, &params);
 
     if (cinfo->klass != self)
-        rb_raise(rb_eTypeError, "%s isn't registerd class",
+        rb_raise(rb_eTypeError, "not a registered class: %s",
                  rb_class2name(self));
 
-    if (SYMBOL_P(signal_name))
-        signal_name = rb_str_new2(rb_id2name(SYM2ID(signal_name)));
-    else
-        StringValue(signal_name);
+    if (SYMBOL_P(rbsignal_name))
+        rbsignal_name = rb_str_new2(rb_id2name(SYM2ID(rbsignal_name)));
+    signal_name = RVAL2CSTR(rbsignal_name);
+
+    signal_flags = NUM2INT(rbsignal_flags);
 
     {
         VALUE factory;
         VALUE proc;
         ID method_id;
 
-        method_id = rb_to_id(rb_str_concat(rb_str_new2(default_handler_method_prefix), signal_name));
+        method_id = rb_to_id(rb_str_concat(rb_str_new2(default_handler_method_prefix), rbsignal_name));
 
         factory = rb_eval_string(
           "lambda{|klass, id|\n"
@@ -110,39 +173,33 @@ gobj_s_signal_new(int argc, VALUE* argv, VALUE self)
         proc = rb_funcall(factory, rb_intern("call"), 2, self, ID2SYM(method_id));
 
         class_closure = g_rclosure_new(proc, Qnil, NULL);
+        /* TODO: Should this be done even if something below it fails? */
         g_rclosure_attach(class_closure, self);
     }
 
-    if (NIL_P(params)) {
-        n_params = 0;
-        param_types = NULL;
-    } else {
-        n_params = RARRAY_LEN(params);
-        param_types = g_new(GType, n_params);
-        for (i = 0; i < n_params; i++)
-            param_types[i] = rbgobj_gtype_get(RARRAY_PTR(params)[i]);
-    }
+    return_type = rbgobj_gtype_get(rbreturn_type);
+    param_types = RVAL2GTYPES_ACCEPT_NIL(params, n_params);
 
-    sig = g_signal_newv(StringValuePtr(signal_name),
-                        cinfo->gtype,
-                        NUM2INT(signal_flags),
-                        class_closure,
-                        NIL_P(accumulator) ? NULL : accumulator_func,
-                        NIL_P(accumulator) ? NULL : (gpointer)accumulator,
-                        NULL, /* c_marshaller */
-                        rbgobj_gtype_get(return_type),
-                        n_params,
-                        param_types);
+    signal = g_signal_newv(signal_name,
+                           cinfo->gtype,
+                           signal_flags,
+                           class_closure,
+                           NIL_P(accumulator) ? NULL : accumulator_func,
+                           NIL_P(accumulator) ? NULL : (gpointer)accumulator,
+                           NULL, /* c_marshaller */
+                           return_type,
+                           n_params,
+                           param_types);
 
     g_free(param_types);
 
-    if (!sig)
+    if (!signal)
         rb_raise(rb_eRuntimeError, "g_signal_newv failed");
 
     if (!NIL_P(accumulator))
         G_RELATIVE(self, accumulator); /* FIXME */
 
-    return rbgobj_signal_wrap(sig);
+    return rbgobj_signal_wrap(signal);
 }
 
 static void
@@ -899,7 +956,7 @@ rbgobj_define_action_methods(VALUE klass)
                 source,
                 "def %s(%s)\n  signal_emit('%s'%s)\nend\n",
                 method_name,
-                (query.n_params > 0) ? args->str + 1 : "", // hack
+                (query.n_params > 0) ? args->str + 1 : "", // Skip initial ','
                 query.signal_name,
                 args->str);
 
