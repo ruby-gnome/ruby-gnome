@@ -95,30 +95,19 @@ rglyph_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
 }
 
 static VALUE
-rglyph_get_logical_widgths(VALUE self, VALUE text, VALUE embedding_level)
+rglyph_get_logical_widths(VALUE self, VALUE rbtext, VALUE rbembedding_level)
 {
-    int *logical_widths = NULL;
-    int len, array_len, i;
-    const char *gtext;
-    VALUE ret;
+    PangoGlyphString *glyphs = _SELF(self);
+    const char *text = RVAL2CSTR(rbtext);
+    long length = RSTRING_LEN(rbtext);
+    int embedding_level = NUM2INT(rbembedding_level);
+    glong n = g_utf8_strlen(text, length);
+    int *logical_widths = g_new(int, n);
 
-    gtext = RVAL2CSTR(text);
-    len = RSTRING_LEN(text);
-
-    array_len = g_utf8_strlen(gtext, len);
-
-    logical_widths = g_new(PangoGlyphUnit, array_len);
-
-    pango_glyph_string_get_logical_widths(_SELF(self), gtext, len,
-                                          NUM2INT(embedding_level),
+    pango_glyph_string_get_logical_widths(glyphs, text, length, embedding_level,
                                           logical_widths);
 
-    ret = rb_ary_new();
-    for (i = 0; i < array_len; i++){
-        rb_ary_push(ret, INT2NUM(logical_widths[i]));
-    }
-
-    return ret;
+    return GINTS2RVAL_FREE(logical_widths, n);
 }
 
 static VALUE
@@ -150,7 +139,7 @@ Init_pango_glyph_string()
 #endif
     rb_define_method(pGlyph, "index_to_x", rglyph_index_to_x, 4);
     rb_define_method(pGlyph, "x_to_index", rglyph_x_to_index, 3);
-    rb_define_method(pGlyph, "get_logical_widths", rglyph_get_logical_widgths, 2);
+    rb_define_method(pGlyph, "get_logical_widths", rglyph_get_logical_widths, 2);
     rb_define_method(pGlyph, "glyphs", rglyph_get_glyphs, 0);
 
     G_DEF_SETTERS(pGlyph);
