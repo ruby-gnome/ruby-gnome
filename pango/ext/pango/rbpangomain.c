@@ -76,56 +76,68 @@ rpango_find_base_dir(VALUE self, VALUE text)
 }
 #endif
 
-static VALUE
-rpango_break(VALUE self, VALUE text, VALUE analysis)
-{
-    gint i, len;
-    glong attrs_len;
+struct rbg_pangologattrs2rval_free_args {
     PangoLogAttr *attrs;
-    const gchar *gtext;
-    VALUE ret;
+    long n;
+};
 
-    gtext = StringValuePtr(text);
-    len = RSTRING_LEN(text);
-    attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
-    attrs = g_new0(PangoLogAttr, attrs_len);
+static VALUE
+rbg_pangologattrs2rval_free_body(VALUE value)
+{
+    struct rbg_pangologattrs2rval_free_args *args = (struct rbg_pangologattrs2rval_free_args *)value;
+    long i;
+    VALUE ary = rb_ary_new();
 
-    pango_break(gtext, len,
-                NIL_P(analysis) ? NULL : RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
-                attrs, attrs_len);
+    for (i = 0; i < args->n; i++)
+        rb_ary_push(ary, BOXED2RVAL(&args->attrs[i], PANGO_TYPE_LOG_ATTR));
 
-    ret = rb_ary_new();
-    for (i = 0; i < attrs_len; i++){
-        rb_ary_push(ret, BOXED2RVAL(&attrs[i], PANGO_TYPE_LOG_ATTR));
-    }
-    g_free(attrs);
-    return ret;
+    return ary;
 }
 
 static VALUE
-rpango_get_log_attrs(VALUE self, VALUE text, VALUE level, VALUE language)
+rbg_pangologattrs2rval_free_ensure(VALUE value)
 {
-    gint i, len;
-    glong attrs_len;
-    PangoLogAttr *attrs;
-    const gchar *gtext;
-    VALUE ret;
+    g_free(((struct rbg_pangologattrs2rval_free_args *)value)->attrs);
+}
 
-    gtext = StringValuePtr(text);
-    len = RSTRING_LEN(text);
-    attrs_len = g_utf8_strlen(gtext, (gssize)len) + 1l;
-    attrs = g_new0(PangoLogAttr, attrs_len);
+static VALUE
+rbg_pangologattrs2rval_free(PangoLogAttr *attrs, long n)
+{
+    struct rbg_pangologattrs2rval_free_args args = { attrs, n };
 
-    pango_get_log_attrs(gtext, len, NUM2INT(level),
-                        RVAL2BOXED(language, PANGO_TYPE_LANGUAGE),
-                        attrs, attrs_len);
+    return rb_ensure(rbg_pangologattrs2rval_free_body, (VALUE)&args,
+                     rbg_pangologattrs2rval_free_ensure, (VALUE)&args);
+}
 
-    ret = rb_ary_new();
-    for (i = 0; i < attrs_len; i++){
-        rb_ary_push(ret, BOXED2RVAL(&attrs[i], PANGO_TYPE_LOG_ATTR));
-    }
-    g_free(attrs);
-    return ret;
+#define PANGOLOGATTRS2RVAL_FREE(attrs, n) rbg_pangologattrs2rval_free(attrs, n)
+
+static VALUE
+rpango_break(VALUE self, VALUE rbtext, VALUE rbanalysis)
+{
+    const gchar *text = RVAL2CSTR(rbtext);
+    long length = RSTRING_LEN(rbtext);
+    PangoAnalysis *analysis = RVAL2BOXED(rbanalysis, PANGO_TYPE_ANALYSIS);
+    long n = g_utf8_strlen(text, length) + 1;
+    PangoLogAttr *attrs = g_new(PangoLogAttr, n);
+
+    pango_break(text, length, analysis, attrs, n);
+
+    return PANGOLOGATTRS2RVAL_FREE(attrs, n);
+}
+
+static VALUE
+rpango_get_log_attrs(VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
+{
+    const gchar *text = RVAL2CSTR(rbtext);
+    long length = RSTRING_LEN(rbtext);
+    int level = NUM2INT(rblevel);
+    PangoLanguage *language = RVAL2BOXED(rblanguage, PANGO_TYPE_LANGUAGE);
+    long n = g_utf8_strlen(text, length) + 1;
+    PangoLogAttr *attrs = g_new(PangoLogAttr, n);
+
+    pango_get_log_attrs(text, length, level, language, attrs, n);
+
+    return PANGOLOGATTRS2RVAL_FREE(attrs, n);
 }
 
 static VALUE
