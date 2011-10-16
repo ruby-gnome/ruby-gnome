@@ -428,6 +428,16 @@ gdkdraw_get_xid(VALUE self)
 }
 #endif
 
+#ifdef GDK_WINDOWING_WIN32
+static VALUE
+gdkdraw_get_handle(VALUE self)
+{
+    HGDIOBJ handle;
+    handle = gdk_win32_drawable_get_handle(_SELF(self));
+    return ULONG2NUM(GPOINTER_TO_UINT(handle));
+}
+#endif
+
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkdraw_get_display(VALUE self)
@@ -499,6 +509,9 @@ Init_gtk_gdk_draw()
 
 #ifdef GDK_WINDOWING_X11
     rb_define_method(gdkDrawable, "xid", gdkdraw_get_xid, 0);
+#endif
+#ifdef GDK_WINDOWING_WIN32
+    rb_define_method(gdkDrawable, "handle", gdkdraw_get_handle, 0);
 #endif
 #if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkDrawable, "display", gdkdraw_get_display, 0);

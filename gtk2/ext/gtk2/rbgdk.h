@@ -17,6 +17,9 @@
 #ifdef GDK_WINDOWING_X11
 #  include <gdk/gdkx.h>
 #endif
+#ifdef GDK_WINDOWING_WIN32
+#  include <gdk/gdkwin32.h>
+#endif
 
 #define RVAL2GDKPOINTS(value, n) rbgdk_rval2gdkpoints(value, n)
 #define RVAL2GDKATOMS(value, n) rbgdk_rval2gdkatoms(value, n)
