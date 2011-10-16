@@ -752,6 +752,8 @@ type_register(int argc, VALUE* argv, VALUE self)
         GTypeQuery query;
         g_type_query(parent_type, &query);
 
+        /* TODO: Why new?  g_type_register_static() doesn’t retain a copy, so
+         * this should be allocated on the stack. */
         info = g_new0(GTypeInfo, 1);
         info->class_size     = query.class_size;
         info->base_init      = NULL;
