@@ -10,7 +10,7 @@
 ************************************************/
 
 #include "rbpango.h"
-
+#include "rbpangoprivate.h"
 
 #define _SELF(r) ((PangoLayoutLine*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_LINE))
 
