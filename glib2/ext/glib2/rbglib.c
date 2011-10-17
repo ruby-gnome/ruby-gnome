@@ -916,8 +916,10 @@ rbg_s_os_unix(G_GNUC_UNUSED VALUE self)
 #endif
 }
 
-void 
-Init_glib2()
+extern void Init_glib2(void);
+
+void
+Init_glib2(void)
 {
 #ifdef HAVE_RUBY_ENCODING_H
     const gchar **filename_charsets;
