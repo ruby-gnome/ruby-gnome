@@ -77,12 +77,12 @@ animation_iter_advance(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "02", &current_time_sec, &current_time_usec);
 
     if (NIL_P(current_time_sec))
-        return GOBJ2RVAL(gdk_pixbuf_animation_iter_advance(_SELF(self), NULL));
+        return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), NULL));
 
     current_time.tv_sec = NUM2LONG(current_time_sec);
     current_time.tv_usec = NIL_P(current_time_usec) ? 0 : NUM2LONG(current_time_usec);
 
-    return GOBJ2RVAL(gdk_pixbuf_animation_iter_advance(_SELF(self), &current_time));
+    return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), &current_time));
 }
 
 static VALUE
