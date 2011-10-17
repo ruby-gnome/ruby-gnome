@@ -104,7 +104,7 @@ rbglib_m_log_set_fatal_mask(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE fatal_
 static VALUE
 rbglib_m_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
 {
-    g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), RVAL2CSTR(str), NULL);
+    g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), "%s", RVAL2CSTR(str));
     return Qnil;
 }
 
