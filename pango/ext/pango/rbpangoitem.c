@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoItem*)RVAL2BOXED(self, PANGO_TYPE_ITEM))
 
@@ -86,7 +86,7 @@ item_set_analysis(VALUE self, VALUE val)
 }
 
 void
-Init_pango_item()
+Init_pango_item(void)
 {
     VALUE pItem = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
     

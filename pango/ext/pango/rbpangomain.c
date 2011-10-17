@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 /*
  * Rendering
@@ -239,7 +239,7 @@ rpango_pixels(VALUE self, VALUE pixels)
 }
 
 void
-Init_pango_main()
+Init_pango_main(void)
 {
     rb_define_module_function(mPango, "reorder_items", rpango_reorder_items, 1);
 

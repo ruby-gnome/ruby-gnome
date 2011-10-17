@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_FONTSET(RVAL2GOBJ(self)))
 
@@ -48,7 +48,7 @@ fontset_foreach(VALUE self)
 #endif
 
 void
-Init_pango_fontset()
+Init_pango_fontset(void)
 {
     VALUE pFontSet = G_DEF_CLASS(PANGO_TYPE_FONTSET, "Fontset", mPango);
     

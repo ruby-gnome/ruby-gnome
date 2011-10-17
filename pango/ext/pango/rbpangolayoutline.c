@@ -9,7 +9,6 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
 #include "rbpangoprivate.h"
 
 #define _SELF(r) ((PangoLayoutLine*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_LINE))
@@ -234,7 +233,7 @@ layout_line_set_resolved_dir(VALUE self, VALUE val)
 #endif
 
 void
-Init_pango_layout_line()
+Init_pango_layout_line(void)
 {
     VALUE pLine = G_DEF_CLASS(PANGO_TYPE_LAYOUT_LINE, "LayoutLine", mPango);
 

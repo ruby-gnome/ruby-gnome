@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #ifdef PANGO_TYPE_ENGINE
 
@@ -47,7 +47,7 @@ PangoEngine* script_engine_create           (const char *id);
 #endif
 
 void
-Init_pango_engine()
+Init_pango_engine(void)
 {
 #ifdef PANGO_TYPE_ENGINE
     G_DEF_CLASS(PANGO_TYPE_ENGINE, "Engine", mPango);

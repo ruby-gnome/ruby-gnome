@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,6,0)
 #define _SELF(self) ((PangoMatrix*)(RVAL2BOXED(self, PANGO_TYPE_MATRIX)))
@@ -113,7 +113,7 @@ matrix_to_a(VALUE self)
 #endif
 
 void
-Init_pango_matrix()
+Init_pango_matrix(void)
 {
 #if PANGO_CHECK_VERSION(1,6,0)
     VALUE matrix = G_DEF_CLASS(PANGO_TYPE_MATRIX, "Matrix", mPango);

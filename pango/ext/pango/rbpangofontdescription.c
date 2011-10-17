@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoFontDescription*)RVAL2BOXED(self, PANGO_TYPE_FONT_DESCRIPTION))
 
@@ -219,7 +219,7 @@ font_desc_to_filename(VALUE self)
 }
 
 void
-Init_pango_font_description()
+Init_pango_font_description(void)
 {
     VALUE pFontDesc = G_DEF_CLASS(PANGO_TYPE_FONT_DESCRIPTION, "FontDescription", mPango);
 

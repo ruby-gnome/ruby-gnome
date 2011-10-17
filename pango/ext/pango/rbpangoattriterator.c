@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoAttrIterator*)RVAL2BOXED(self, PANGO_TYPE_ATTR_ITERATOR))
 
@@ -116,7 +116,7 @@ attriterator_get_attrs(VALUE self)
 #endif
 
 void
-Init_pango_attriterator()
+Init_pango_attriterator(void)
 {
     VALUE pAttriterator = G_DEF_CLASS(PANGO_TYPE_ATTR_ITERATOR, "AttrIterator", mPango);
     

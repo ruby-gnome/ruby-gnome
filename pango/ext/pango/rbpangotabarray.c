@@ -9,7 +9,7 @@
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY))
 
@@ -100,7 +100,7 @@ rtab_get_positions_in_pixels(VALUE self)
 }
 
 void
-Init_pango_array()
+Init_pango_array(void)
 {
     VALUE pTabArray = G_DEF_CLASS(PANGO_TYPE_TAB_ARRAY, "TabArray", mPango);
     rb_define_method(pTabArray, "initialize", rtab_initialize, -1);

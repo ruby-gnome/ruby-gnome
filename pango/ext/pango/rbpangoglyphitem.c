@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,2,0)
 #define _SELF(r) ((PangoGlyphItem*)RVAL2BOXED(r, PANGO_TYPE_GLYPH_ITEM))
@@ -104,7 +104,7 @@ glyph_item_letter_space(VALUE self, VALUE text, VALUE log_attrs, VALUE letter_sp
 #endif
 
 void
-Init_pango_glyph_item()
+Init_pango_glyph_item(void)
 {
 #if PANGO_CHECK_VERSION(1,2,0)
     VALUE pItem = G_DEF_CLASS(PANGO_TYPE_GLYPH_ITEM, "GlyphItem", mPango);

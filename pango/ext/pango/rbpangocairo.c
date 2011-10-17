@@ -10,7 +10,7 @@
   Copyright (C) 2006 Ruby-GNOME2 Project Team
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,10,0) && defined(HAVE_RB_CAIRO_H)
 #  define CAIRO_AVAILABLE 1
@@ -160,7 +160,7 @@ cairo_available_p(VALUE self)
 }
 
 void
-Init_pango_cairo()
+Init_pango_cairo(void)
 {
 #ifdef CAIRO_AVAILABLE
     VALUE pFontMap;

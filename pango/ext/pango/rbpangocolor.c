@@ -9,7 +9,7 @@
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR))
 
@@ -89,7 +89,7 @@ color_equal(VALUE self, VALUE other)
 }
 
 void
-Init_pango_color()
+Init_pango_color(void)
 {
     VALUE pColor = G_DEF_CLASS(PANGO_TYPE_COLOR, "Color", mPango);
     

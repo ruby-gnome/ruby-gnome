@@ -9,7 +9,7 @@
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(s) ((PangoRectangle*)RVAL2BOXED(s, PANGO_TYPE_RECTANGLE))
 
@@ -140,7 +140,7 @@ pango_rectangle_rbearing(VALUE self)
 
 
 void
-Init_pango_rectangle()
+Init_pango_rectangle(void)
 {
     VALUE pRectangle = G_DEF_CLASS(PANGO_TYPE_RECTANGLE, "Rectangle", mPango);
     rb_define_method(pRectangle, "initialize", pango_rectangle_initialize, 4);

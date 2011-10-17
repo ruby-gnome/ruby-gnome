@@ -9,7 +9,6 @@
   Copyright (C) 2003-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
 #include "rbpangoprivate.h"
 
 #define _SELF(s) ((PangoAnalysis*)RVAL2BOXED(s, PANGO_TYPE_ANALYSIS))
@@ -189,7 +188,7 @@ ana_get_extra_attrs(VALUE self)
 }
 
 void
-Init_pango_analysis()
+Init_pango_analysis(void)
 {
     VALUE pana = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
     

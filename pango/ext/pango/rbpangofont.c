@@ -9,7 +9,7 @@
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_FONT(RVAL2GOBJ(self)))
 
@@ -86,7 +86,7 @@ font_get_font_map(VALUE self)
 #endif
 
 void
-Init_pango_font()
+Init_pango_font(void)
 {
     VALUE pFont = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
     

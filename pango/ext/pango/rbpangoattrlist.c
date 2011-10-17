@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 static ID id_call;
 
@@ -76,7 +76,7 @@ attrlist_get_iterator(VALUE self)
 }
 
 void
-Init_pango_attrlist()
+Init_pango_attrlist(void)
 {
     VALUE pAttrlist = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
 

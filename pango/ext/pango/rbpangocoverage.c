@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoCoverage*)RVAL2BOXED(self, PANGO_TYPE_COVERAGE))
 
@@ -81,7 +81,7 @@ coverage_s_from_bytes(VALUE self, VALUE bytes)
 }
 
 void
-Init_pango_coverage()
+Init_pango_coverage(void)
 {
     VALUE pCoverage = G_DEF_CLASS(PANGO_TYPE_COVERAGE, "Coverage", mPango);
     

@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh 
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,8,0)
 #define _SELF(self) (PANGO_RENDERER(RVAL2GOBJ(self)))
@@ -158,7 +158,7 @@ renderer_get_matrix(VALUE self)
 #endif
 
 void
-Init_pangorenderer()
+Init_pangorenderer(void)
 {
 #if PANGO_CHECK_VERSION(1,8,0)
     VALUE renderer = G_DEF_CLASS(PANGO_TYPE_RENDERER, "Renderer", mPango);

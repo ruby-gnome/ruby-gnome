@@ -9,7 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(s) ((PangoLogAttr*)RVAL2BOXED(s, PANGO_TYPE_LOG_ATTR))
 
@@ -78,7 +78,7 @@ ATTR_BOOL(backspace_deletes_character);
 #endif
 
 void
-Init_pango_logattr()
+Init_pango_logattr(void)
 {
     VALUE logattr = G_DEF_CLASS(PANGO_TYPE_LOG_ATTR, "LogAttr", mPango);
     

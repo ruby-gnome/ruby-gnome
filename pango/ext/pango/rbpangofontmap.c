@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_FONT_MAP(RVAL2GOBJ(self)))
 #define RVAL2DESC(d) ((PangoFontDescription*)RVAL2BOXED(d, PANGO_TYPE_FONT_DESCRIPTION))
@@ -71,7 +71,7 @@ font_map_get_shape_engine_type(VALUE self)
 #endif
 
 void
-Init_pango_font_map()
+Init_pango_font_map(void)
 {
     VALUE pMap = G_DEF_CLASS(PANGO_TYPE_FONT_MAP, "FontMap", mPango);
     

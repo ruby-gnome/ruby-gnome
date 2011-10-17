@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,4,0)
 #define _SELF(r) (RVAL2GENUM(r, PANGO_TYPE_SCRIPT))
@@ -63,7 +63,7 @@ gboolean    pango_language_includes_script  (PangoLanguage *language,
 #endif
 
 void
-Init_pango_script()
+Init_pango_script(void)
 {
 #if PANGO_CHECK_VERSION(1,4,0)
     VALUE script = G_DEF_CLASS(PANGO_TYPE_SCRIPT, "Script", mPango);

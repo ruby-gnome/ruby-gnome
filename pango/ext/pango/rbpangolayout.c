@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_LAYOUT(RVAL2GOBJ(self)))
 #define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
@@ -474,7 +474,7 @@ layout_get_iter(VALUE self)
 }
 
 void
-Init_pango_layout()
+Init_pango_layout(void)
 {
     VALUE pLayout = G_DEF_CLASS(PANGO_TYPE_LAYOUT, "Layout", mPango);
 

@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_CONTEXT(RVAL2GOBJ(self)))
 #define RVAL2DESC(v) ((PangoFontDescription*)RVAL2BOXED(v, PANGO_TYPE_FONT_DESCRIPTION))
@@ -262,7 +262,7 @@ rcontext_list_families_old(VALUE self)
 }
 
 void
-Init_pango_context()
+Init_pango_context(void)
 {
     VALUE pContext = G_DEF_CLASS(PANGO_TYPE_CONTEXT, "Context", mPango);
 

@@ -9,7 +9,7 @@
   Copyright (C) 2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,4,0)
 
@@ -74,7 +74,7 @@ rbpango_scriptiter_next(VALUE self)
 #endif
 
 void
-Init_pango_script_iter()
+Init_pango_script_iter(void)
 {
 #if PANGO_CHECK_VERSION(1,4,0)
     VALUE scriter = G_DEF_CLASS(PANGO_TYPE_SCRIPT_ITER, "ScriptIter", mPango);

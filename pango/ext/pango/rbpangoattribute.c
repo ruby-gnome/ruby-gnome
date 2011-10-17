@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 VALUE pattr, attrstring, pattrint, pattrfloat, pattrcolor, pattrbool;
 static VALUE type_to_klass;
@@ -393,7 +393,7 @@ rb_hash_aset(type_to_klass, INT2FIX(gtype), tmpklass);\
 rb_define_method(tmpklass, "initialize", attr_## name ## _initialize , num);
 
 void
-Init_pango_attribute()
+Init_pango_attribute(void)
 {
     VALUE tmpklass;
     pattr = rb_define_class_under(mPango, "Attribute", rb_cData);

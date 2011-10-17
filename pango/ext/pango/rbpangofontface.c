@@ -9,7 +9,7 @@
   Copyright (C) 2002,2003 Masao Mutoh <mutoh@highway.ne.jp>
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_FONT_FACE(RVAL2GOBJ(self)))
 
@@ -48,7 +48,7 @@ font_face_list_sizes(VALUE self)
 #endif
 
 void
-Init_pango_font_face()
+Init_pango_font_face(void)
 {
     VALUE pFace = G_DEF_CLASS(PANGO_TYPE_FONT_FACE, "FontFace", mPango);
     

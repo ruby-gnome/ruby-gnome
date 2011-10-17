@@ -9,7 +9,7 @@
   Copyright (C) 2002,2003 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #ifdef PANGO_ENABLE_BACKEND
 
@@ -38,7 +38,7 @@ fontset_simple_size(VALUE self)
 
 #endif
 void
-Init_pango_fontset_simple()
+Init_pango_fontset_simple(void)
 {
 #ifdef PANGO_ENABLE_BACKEND
     VALUE pFSimple = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontsetSimple", mPango);

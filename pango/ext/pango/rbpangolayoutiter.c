@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(r) ((PangoLayoutIter*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_ITER))
 
@@ -151,7 +151,7 @@ layout_iter_get_layout_extents(VALUE self)
 }
 
 void
-Init_pango_layout_iter()
+Init_pango_layout_iter(void)
 {
     VALUE pIter = G_DEF_CLASS(PANGO_TYPE_LAYOUT_ITER, "LayoutIter", mPango);
 

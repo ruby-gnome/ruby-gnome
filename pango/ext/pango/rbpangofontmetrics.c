@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoFontMetrics*)RVAL2BOXED(self, PANGO_TYPE_FONT_METRICS))
 
@@ -60,7 +60,7 @@ font_metrics_get_strikethrough_position(VALUE self)
 }
 #endif
 void
-Init_pango_font_metrics()
+Init_pango_font_metrics(void)
 {
     VALUE pMetrics = G_DEF_CLASS(PANGO_TYPE_FONT_METRICS, "FontMetrics", mPango);
     

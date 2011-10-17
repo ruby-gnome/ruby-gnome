@@ -9,7 +9,7 @@
   Copyright (C) 2002-2005 Masao Mutoh 
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) (PANGO_FONT_FAMILY(RVAL2GOBJ(self)))
 
@@ -49,7 +49,7 @@ font_family_list_faces(VALUE self)
 }
 
 void
-Init_pango_font_family()
+Init_pango_font_family(void)
 {
     VALUE pFamily = G_DEF_CLASS(PANGO_TYPE_FONT_FAMILY, "FontFamily", mPango);
     

@@ -9,7 +9,7 @@
   Copyright (C) 2002-2006 Masao Mutoh
 ************************************************/
 
-#include "rbpango.h"
+#include "rbpangoprivate.h"
 
 #define _SELF(self) ((PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)))
 
@@ -127,7 +127,7 @@ rglyph_get_glyphs(VALUE self)
 }
 
 void
-Init_pango_glyph_string()
+Init_pango_glyph_string(void)
 {
     VALUE pGlyph = G_DEF_CLASS(PANGO_TYPE_GLYPH_STRING, "GlyphString", mPango);
 
