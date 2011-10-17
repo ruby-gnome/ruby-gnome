@@ -322,20 +322,20 @@ note_get_action_widget(VALUE self, VALUE pack_type)
  */
 typedef struct {
     VALUE parent;
-    GtkNotebookPage* page;
+    GtkNotebookPage *page;
 } GtkNotebookPageData;
 
-GtkNotebookPageData*
-notebookpage_copy (const GtkNotebookPage* page)
+static GtkNotebookPageData *
+notebookpage_copy(const GtkNotebookPage *page)
 {
-  GtkNotebookPageData* data;
+  GtkNotebookPageData *data;
   g_return_val_if_fail (page != NULL, NULL);
   data = g_new(GtkNotebookPageData, 1);
-  data->page = (GtkNotebookPage*)page;
+  data->page = (GtkNotebookPage *)page;
   return data;
 }
 
-GType
+static GType
 gtk_notebookpage_get_type(void)
 {
   static GType our_type = 0;

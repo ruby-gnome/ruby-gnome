@@ -12,7 +12,7 @@
 
 #define _SELF(s) ((GtkAccelGroupEntry*)RVAL2BOXED(s, GTK_TYPE_ACCEL_GROUP_ENTRY))
 
-static GtkAccelGroupEntry*
+static GtkAccelGroupEntry *
 agentry_copy(const GtkAccelGroupEntry *agentry)
 {
     GtkAccelGroupEntry *new_agentry;

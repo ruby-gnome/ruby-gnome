@@ -13,7 +13,7 @@
 #define _SELF(s) ((GtkAccelKey*)RVAL2BOXED(s, GTK_TYPE_ACCEL_KEY))
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 
-static GtkAccelKey*
+static GtkAccelKey *
 accel_key_copy(const GtkAccelKey *key)
 {
     GtkAccelKey *new_key;

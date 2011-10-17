@@ -72,13 +72,13 @@ extern GtkTreeRowReference* rbgtk_get_tree_row_reference(VALUE obj);
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
-extern GType gtk_allocation_get_type();
-extern GType gtk_accel_key_get_type();
-extern GType gtk_accel_group_entry_get_type();
-extern GType gtk_bindingset_get_type();
-extern GType gtk_text_appearance_get_type();
-extern GType gtk_recent_filter_info_get_type();
-extern GType gtk_recent_data_get_type();
+extern GType gtk_allocation_get_type(void);
+extern GType gtk_accel_key_get_type(void);
+extern GType gtk_accel_group_entry_get_type(void);
+extern GType gtk_bindingset_get_type(void);
+extern GType gtk_text_appearance_get_type(void);
+extern GType gtk_recent_filter_info_get_type(void);
+extern GType gtk_recent_data_get_type(void);
 
 /*
  * Gtk::TreeIter callback

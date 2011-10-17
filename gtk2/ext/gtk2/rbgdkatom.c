@@ -11,12 +11,13 @@
 
 
 #include "global.h"
+#include "rbgdk.h"
 
 #define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
 
 /*****************************************/
-GdkAtomData*
-gdk_atom_copy (const GdkAtom atom)
+static GdkAtomData *
+gdk_atom_copy(const GdkAtom atom)
 {
     GdkAtomData* data;
     data = g_new(GdkAtomData, 1);
@@ -25,7 +26,7 @@ gdk_atom_copy (const GdkAtom atom)
 }
 
 GType
-gdk_atom_get_type (void)
+gdk_atom_get_type(void)
 {
     static GType our_type = 0;
     if (our_type == 0)
