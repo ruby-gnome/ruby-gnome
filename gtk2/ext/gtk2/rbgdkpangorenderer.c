@@ -116,6 +116,8 @@ prenderer_set_override_color(G_GNUC_UNUSED VALUE self,
 }
 #endif
 
+#endif
+
 void
 Init_gtk_gdk_pangorenderer(void)
 {
