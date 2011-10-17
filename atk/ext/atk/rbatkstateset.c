@@ -51,7 +51,7 @@ rval2atkstatetype_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rval2atkstatetype_rescue(VALUE value)
 {
     g_free(((struct rval2atkstatetype_args *)value)->result);

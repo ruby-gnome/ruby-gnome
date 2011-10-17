@@ -57,7 +57,7 @@ rbatk_atkattributegslist_free(GSList *list)
     g_slist_free(list);
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbatk_rval2atkattributegslist_rescue(VALUE value)
 {
     rbatk_atkattributegslist_free(((struct rval2atkattributegslist_args *)value)->result);

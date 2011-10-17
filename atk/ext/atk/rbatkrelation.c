@@ -13,7 +13,7 @@
 #define _SELF(s) (ATK_RELATION(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkrel_s_type_register(VALUE self, VALUE name)
+rbatkrel_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_relation_type_register(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
@@ -24,7 +24,7 @@ G_CONST_RETURN gchar* atk_relation_type_get_name
 */
 
 static VALUE
-rbatkrelation_s_for_name(VALUE self, VALUE name)
+rbatkrelation_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
@@ -47,7 +47,7 @@ rval2atkobjects_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rval2atkobjects_rescue(VALUE value)
 {
     g_free(((struct rval2atkobjects_args *)value)->result);
