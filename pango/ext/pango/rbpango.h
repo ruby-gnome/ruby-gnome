@@ -72,21 +72,21 @@ RUBY_PANGO_VAR VALUE mPango;
 extern VALUE pango_make_attribute(PangoAttribute* attr);
 extern PangoAttribute* pango_get_attribute(VALUE attr);
 
-extern GType pango_item_get_type();
-extern GType pango_analysis_get_type();
-extern GType pango_log_attr_get_type();
-extern GType pango_layout_iter_get_type();
-extern GType pango_layout_line_get_type();
-extern GType pango_rectangle_get_type();
-extern GType pango_attr_iter_get_type();
-extern GType pango_coverage_get_type();
-extern GType pango_glyph_info_get_type();
+extern GType pango_item_get_type(void);
+extern GType pango_analysis_get_type(void);
+extern GType pango_log_attr_get_type(void);
+extern GType pango_layout_iter_get_type(void);
+extern GType pango_layout_line_get_type(void);
+extern GType pango_rectangle_get_type(void);
+extern GType pango_attr_iter_get_type(void);
+extern GType pango_coverage_get_type(void);
+extern GType pango_glyph_info_get_type(void);
 #ifndef HAVE_PANGO_GLYPH_ITEM_GET_TYPE
-extern GType pango_glyph_item_get_type();
+extern GType pango_glyph_item_get_type(void);
 #endif
 
 #if PANGO_CHECK_VERSION(1,4,0)
-extern GType pango_script_iter_get_type();
+extern GType pango_script_iter_get_type(void);
 #endif
 
 extern VALUE pango_get_attribute_klass(VALUE attr_type);
