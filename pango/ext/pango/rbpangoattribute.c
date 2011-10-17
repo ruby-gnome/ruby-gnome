@@ -317,7 +317,7 @@ attr_AttrStrikethrough_initialize(VALUE self, VALUE strikethrough)
     DATA_PTR(self) = pango_attr_strikethrough_new(RVAL2CBOOL(strikethrough));
     return Qnil;
 }
-#if HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
+#ifdef HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
 static VALUE
 attr_AttrStrikethroughColor_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 {
@@ -327,7 +327,7 @@ attr_AttrStrikethroughColor_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 #endif
 
 MAKE_ATTRENUM_INIT(AttrUnderline, underline, PANGO_TYPE_UNDERLINE); 
-#if HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
+#ifdef HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
 static VALUE
 attr_AttrUnderlineColor_initialize(VALUE self, VALUE r, VALUE g, VALUE b)
 {
@@ -458,12 +458,12 @@ Init_pango_attribute(void)
     /* PangoUnderline */
     G_DEF_CLASS(PANGO_TYPE_UNDERLINE, "Underline", tmpklass);
     G_DEF_CONSTANTS(tmpklass, PANGO_TYPE_UNDERLINE, "PANGO_UNDERLINE_");
-#if HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
+#ifdef HAVE_PANGO_ATTR_UNDERLINE_COLOR_NEW
     MAKE_ATTR(PANGO_ATTR_UNDERLINE_COLOR, AttrUnderlineColor, pattrcolor, 3);
 #endif
 
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH, AttrStrikethrough, pattrbool, 1);
-#if HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
+#ifdef HAVE_PANGO_ATTR_STRIKETHROUGH_COLOR_NEW
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH_COLOR, AttrStrikethroughColor, pattrcolor, 3);
 #endif
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);

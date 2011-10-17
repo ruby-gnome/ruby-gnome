@@ -152,7 +152,7 @@ error_underline_path(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 static VALUE
 cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
-#if CAIRO_AVAILABLE
+#ifdef CAIRO_AVAILABLE
     return Qtrue;
 #else
     return Qfalse;

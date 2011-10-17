@@ -45,7 +45,7 @@ renderer_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
 static VALUE
 renderer_draw_rectangle(VALUE self, VALUE part, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_rectangle(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                   NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
 #else
@@ -66,7 +66,7 @@ renderer_draw_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE h
 static VALUE
 renderer_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, VALUE y2, VALUE x12, VALUE x22)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_trapezoid(_SELF(self), 
                                   RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                   NUM2DBL(y1), NUM2DBL(x11), NUM2DBL(x21),
@@ -107,7 +107,7 @@ renderer_activate(VALUE self)
 static VALUE
 renderer_part_changed(VALUE self, VALUE part)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_part_changed(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
 #else
     pango_renderer_part_changed(_SELF(self), NUM2INT(part));
@@ -118,7 +118,7 @@ renderer_part_changed(VALUE self, VALUE part)
 static VALUE
 renderer_set_color(VALUE self, VALUE part, VALUE color)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_set_color(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                              (PangoColor*)(NIL_P(color) ? NULL : RVAL2BOXED(color, PANGO_TYPE_COLOR)));
 #else
@@ -131,7 +131,7 @@ renderer_set_color(VALUE self, VALUE part, VALUE color)
 static VALUE
 renderer_get_color(VALUE self, VALUE part)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     PangoColor* color = pango_renderer_get_color(_SELF(self),
                                                  RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
 #else
@@ -181,7 +181,7 @@ Init_pangorenderer(void)
     G_DEF_SETTERS(renderer);
 
     /* PangoRenderPart */
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     G_DEF_CLASS(PANGO_TYPE_RENDER_PART, "Part", renderer);
     G_DEF_CONSTANTS(renderer, PANGO_TYPE_RENDER_PART, "PANGO_RENDER_");
 #endif

@@ -215,7 +215,7 @@ rcontext_list_families(VALUE self)
 }
 
 #if PANGO_CHECK_VERSION(1,10,0)
-#  if HAVE_RB_CAIRO_H
+#  ifdef HAVE_RB_CAIRO_H
 static VALUE
 rcontext_set_font_options(VALUE self, VALUE options)
 {
@@ -297,7 +297,7 @@ Init_pango_context(void)
     rb_define_method(pContext, "families", rcontext_list_families, 0);
 
 #if PANGO_CHECK_VERSION(1,10,0)
-#  if HAVE_RB_CAIRO_H
+#  ifdef HAVE_RB_CAIRO_H
     rb_define_method(pContext, "set_font_options", rcontext_set_font_options, 1);
     rb_define_method(pContext, "font_options", rcontext_get_font_options, 0);
     rb_define_method(pContext, "set_resolution", rcontext_set_resolution, 1);
