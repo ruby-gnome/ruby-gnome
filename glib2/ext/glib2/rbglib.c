@@ -147,6 +147,7 @@ rbg_cstr2rval_with_encoding(const gchar *str, const gchar *encoding)
     return str != NULL ? CSTR2RVAL_LEN_ENC(str, strlen(str), encoding) : Qnil;
 }
 
+#ifdef HAVE_RUBY_ENCODING_H
 VALUE
 rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
                                 const gchar *encoding)
@@ -154,15 +155,22 @@ rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
     if (str == NULL)
         return Qnil;
 
-#ifdef HAVE_RUBY_ENCODING_H
     return rb_external_str_new_with_enc(str, len,
                                         encoding != NULL ?
                                             rb_enc_find(encoding) :
                                             rb_utf8_encoding());
-#else
-    return rb_str_new(str, len);
-#endif
 }
+#else
+VALUE
+rbg_cstr2rval_len_with_encoding(const gchar *str, gsize len,
+                                G_GNUC_UNUSED const gchar *encoding)
+{
+    if (str == NULL)
+        return Qnil;
+
+    return rb_str_new(str, len);
+}
+#endif
 
 static VALUE
 rbg_cstr2rval_free_body(VALUE str)
