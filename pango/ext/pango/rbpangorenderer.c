@@ -35,9 +35,9 @@ renderer_draw_layout_line(VALUE self, VALUE line, VALUE x, VALUE y)
 static VALUE
 renderer_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
 {
-    pango_renderer_draw_glyphs(_SELF(self), 
-                               PANGO_FONT(RVAL2GOBJ(self)),
-                               (PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)),
+    pango_renderer_draw_glyphs(_SELF(self),
+                               PANGO_FONT(RVAL2GOBJ(font)),
+                               (PangoGlyphString *)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)),
                                NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -82,7 +82,7 @@ renderer_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, 
 static VALUE
 renderer_draw_glyph(VALUE self, VALUE font, VALUE glyph, VALUE x, VALUE y)
 {
-    pango_renderer_draw_glyph(_SELF(self), PANGO_FONT(RVAL2GOBJ(self)),
+    pango_renderer_draw_glyph(_SELF(self), PANGO_FONT(RVAL2GOBJ(font)),
                               NUM2INT(glyph), NUM2INT(x), NUM2INT(y));
     return self;
 }
