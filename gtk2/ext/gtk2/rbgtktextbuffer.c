@@ -524,7 +524,7 @@ static VALUE
 txt_serialize(VALUE self, VALUE content_buffer, VALUE format, VALUE start, VALUE end)
 {
     gsize length;
-    guint8* ret = gtk_text_buffer_serialize(_SELF(self), _SELF(self),
+    guint8* ret = gtk_text_buffer_serialize(_SELF(self), _SELF(content_buffer),
                                             RVAL2ATOM(format),
                                             RVAL2ITR(start), RVAL2ITR(end),
                                             &length);
