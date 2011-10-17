@@ -244,7 +244,7 @@ copy(VALUE self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
 static VALUE
-get_file_info(VALUE self, VALUE filename)
+get_file_info(G_GNUC_UNUSED VALUE self, VALUE filename)
 {
     gint width, height;
 
@@ -533,22 +533,26 @@ fill(VALUE self, VALUE pixel)
 /* From Module Interface */
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-get_formats(VALUE self)
+get_formats(G_GNUC_UNUSED VALUE self)
 {
     return GSLIST2ARY2(gdk_pixbuf_get_formats(), GDK_TYPE_PIXBUF_FORMAT);
 }
 
+#ifdef HAVE_GDK_PIXBUF_SET_OPTION
 static VALUE
 set_option(VALUE self, VALUE key, VALUE value)
 {
-#if HAVE_GDK_PIXBUF_SET_OPTION
-    return CBOOL2RVAL(gdk_pixbuf_set_option(_SELF(self), 
+    return CBOOL2RVAL(gdk_pixbuf_set_option(_SELF(self),
                                             RVAL2CSTR(key), RVAL2CSTR(value)));
+}
 #else
+static VALUE
+set_option(G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE key, G_GNUC_UNUSED VALUE value)
+{
     rb_warning("not supported in this version of GTK+");
     return Qfalse;
-#endif
 }
+#endif
 #endif
 
 extern void Init_gdk_pixbuf2(void);

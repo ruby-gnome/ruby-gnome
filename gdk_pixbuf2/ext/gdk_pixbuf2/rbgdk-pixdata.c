@@ -39,7 +39,7 @@ gdk_pixdata_get_type (void)
 }
 /*****************************************/
 static VALUE
-pixdata_s_from_pixbuf(VALUE self, VALUE pixbuf, VALUE use_rle)
+pixdata_s_from_pixbuf(G_GNUC_UNUSED VALUE self, VALUE pixbuf, VALUE use_rle)
 {
     GdkPixdata pixdata;
     gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RVAL2CBOOL(use_rle));
