@@ -243,7 +243,7 @@ static VALUE
 layout_set_tabs(VALUE self, VALUE tabs)
 {
     pango_layout_set_tabs(_SELF(self), 
-                          (PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY));
+                          (PangoTabArray*)RVAL2BOXED(tabs, PANGO_TYPE_TAB_ARRAY));
     return self;
 }
 
