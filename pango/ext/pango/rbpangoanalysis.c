@@ -151,7 +151,7 @@ ana_set_extra_attrs_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 ana_set_extra_attrs_rescue(VALUE value)
 {
     g_slist_free(((struct ana_set_extra_attrs_args *)value)->result);

@@ -181,7 +181,7 @@ layout_line_set_runs_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 layout_line_set_runs_rescue(VALUE value)
 {
     g_slist_free(((struct layout_line_set_runs_args *)value)->result);
