@@ -250,7 +250,8 @@ static VALUE
 lstore_insert(int argc, VALUE *argv, VALUE self)
 {
     VALUE position, values, result;
-    struct lstore_insert_args args = { _SELF(self) };
+    struct lstore_insert_args args;
+    args.store = _SELF(self);
 
     rb_scan_args(argc, argv, "11", &position, &values);
     args.position = NUM2INT(position);
