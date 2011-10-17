@@ -357,7 +357,7 @@ struct emit_arg {
 static VALUE
 emit_body(struct emit_arg* arg)
 {
-    GValue param = { 0, };
+    GValue param = G_VALUE_INIT;
 
     g_value_init(&param, G_TYPE_FROM_INSTANCE(RVAL2GOBJ(arg->self)));
     rbgobj_rvalue_to_gvalue(arg->self, &param);
@@ -379,7 +379,7 @@ emit_body(struct emit_arg* arg)
 
     {
         gboolean use_ret = (arg->query.return_type != G_TYPE_NONE);
-        GValue return_value = {0,};
+        GValue return_value = G_VALUE_INIT;
 
         if (use_ret)
             g_value_init(&return_value,
@@ -552,7 +552,7 @@ chain_from_overridden_body(struct emit_arg* arg)
 
     {
         gboolean use_ret = (arg->query.return_type != G_TYPE_NONE);
-        GValue return_value = {0,};
+        GValue return_value = G_VALUE_INIT;
 
         if (use_ret)
             g_value_init(&return_value,
@@ -801,7 +801,7 @@ hook_func(GSignalInvocationHint* ihint,
           gpointer               data)
 {
     GClosure* closure = data;
-    GValue ret_val ={0,};
+    GValue ret_val =G_VALUE_INIT;
     gboolean ret;
 
     g_value_init(&ret_val, G_TYPE_BOOLEAN);

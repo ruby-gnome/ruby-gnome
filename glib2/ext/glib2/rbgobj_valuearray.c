@@ -41,7 +41,7 @@ value_array_from_ruby_body(VALUE value)
     struct value_array_from_ruby_args *args = (struct value_array_from_ruby_args *)value;
 
     for (i = 0; i < args->n; i++) {
-        GValue v = { 0 };
+        GValue v = G_VALUE_INIT;
 
         g_value_init(&v, RVAL2GTYPE(RARRAY_PTR(args->ary)[i]));
         rbgobj_rvalue_to_gvalue(RARRAY_PTR(args->ary)[i], &v);

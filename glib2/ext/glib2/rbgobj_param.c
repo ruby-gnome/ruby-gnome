@@ -160,7 +160,7 @@ get_owner(VALUE self)
 static VALUE
 value_default(VALUE self)
 {
-    GValue tmp = {0,};
+    GValue tmp = G_VALUE_INIT;
     VALUE result;
 
     g_value_init(&tmp,
@@ -220,7 +220,7 @@ static VALUE
 value_validate(VALUE self, VALUE obj)
 {
     struct validate_arg arg;
-    GValue value = {0,};
+    GValue value = G_VALUE_INIT;
 
     arg.pspec = rbgobj_get_param_spec(self);
     arg.value = &value;
@@ -240,8 +240,8 @@ value_convert(int argc, VALUE* argv, VALUE self)
     VALUE src, strict_validation;
     VALUE src_type;
     VALUE result = Qnil;
-    GValue src_value = {0,};
-    GValue dest_value = {0,};
+    GValue src_value = G_VALUE_INIT;
+    GValue dest_value = G_VALUE_INIT;
     gboolean b;
 
     rb_scan_args(argc, argv, "21", &src, &src_type, &strict_validation);
@@ -273,8 +273,8 @@ values_compare(VALUE self, VALUE a, VALUE b)
 {
     GParamSpec* pspec = rbgobj_get_param_spec(self);
     GType type = G_PARAM_SPEC_VALUE_TYPE(pspec);
-    GValue v1 = {0,};
-    GValue v2 = {0,};
+    GValue v1 = G_VALUE_INIT;
+    GValue v2 = G_VALUE_INIT;
     gint result;
 
     g_value_init(&v1, type);

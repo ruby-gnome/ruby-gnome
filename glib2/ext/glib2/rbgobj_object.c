@@ -183,7 +183,7 @@ gobj_mark(gpointer ptr)
     GObject* gobj = ptr;
     guint n_properties;
     GParamSpec** properties;
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     guint i;
 
     properties = g_object_class_list_properties(G_OBJECT_GET_CLASS(gobj), &n_properties);
@@ -476,7 +476,7 @@ gobj_set_property(VALUE self, VALUE prop_name, VALUE val)
     else {
         // FIXME: use rb_ensure to call g_value_unset()
         RValueToGValueFunc setter = NULL;
-        GValue gval = {0,};
+        GValue gval = G_VALUE_INIT;
 
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
 
@@ -523,7 +523,7 @@ gobj_get_property(VALUE self, VALUE prop_name)
     else {
         // FIXME: use rb_ensure to call g_value_unset()
         GValueToRValueFunc getter = NULL;
-        GValue gval = {0,};
+        GValue gval = G_VALUE_INIT;
         VALUE ret;
 
         {

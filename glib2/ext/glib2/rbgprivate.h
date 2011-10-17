@@ -15,6 +15,10 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
+#ifndef G_VALUE_INIT
+#  define G_VALUE_INIT { 0, { { 0 } } }
+#endif
+
 G_BEGIN_DECLS
 
 typedef struct {
