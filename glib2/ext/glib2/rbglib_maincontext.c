@@ -360,7 +360,9 @@ static GSourceFuncs source_funcs = {
     source_prepare,
     source_check,
     source_dispatch,
-    source_finalize
+    source_finalize,
+    NULL,
+    NULL
 };
 
 static GSource *
