@@ -130,7 +130,7 @@ rbg_rval2gtkactionentries_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gtkactionentries_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gtkactionentries_args *)value)->result);
@@ -238,7 +238,7 @@ rbg_rval2gtktoggleactionentries_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gtktoggleactionentries_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gtktoggleactionentries_args *)value)->result);
@@ -333,7 +333,7 @@ rbg_rval2gtkradioactionentries_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gtkradioactionentries_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gtkradioactionentries_args *)value)->result);

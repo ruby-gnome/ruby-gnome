@@ -169,7 +169,7 @@ rbgdk_rval2gdksegments_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdksegments_rescue(VALUE value)
 {
     g_free(((struct rbgdk_rval2gdksegments_args *)value)->result);
@@ -282,7 +282,7 @@ rbgdk_rval2gdktrapezoids_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdktrapezoids_rescue(VALUE value)
 {
     g_free(((struct rbgdk_rval2gdktrapezoids_args *)value)->result);
