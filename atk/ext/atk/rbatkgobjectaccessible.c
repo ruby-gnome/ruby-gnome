@@ -14,7 +14,7 @@
 #define _SELF(s) (ATK_GOBJECT_ACCESSIBLE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_gobjectaccessible_s_for_object(VALUE self, VALUE obj)
+rbatk_gobjectaccessible_s_for_object(G_GNUC_UNUSED VALUE self, VALUE obj)
 {
     return GOBJ2RVAL(atk_gobject_accessible_for_object(RVAL2GOBJ(obj)));
 }

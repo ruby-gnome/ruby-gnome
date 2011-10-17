@@ -35,7 +35,7 @@ rbatkregistry_get_factory(VALUE self, VALUE type)
 }
 
 static VALUE
-rbatkregistry_s_get_default_registry(VALUE self)
+rbatkregistry_s_get_default_registry(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(atk_get_default_registry());
 }

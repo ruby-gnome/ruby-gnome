@@ -266,7 +266,7 @@ rbatk_text_set_caret_offset(VALUE self, VALUE offset)
  * Atk::TextAttribute
  */
 static VALUE
-rbatk_tattr_s_register(VALUE self, VALUE name)
+rbatk_tattr_s_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_text_attribute_register(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
 }
@@ -277,7 +277,7 @@ G_CONST_RETURN gchar* atk_textattribute_type_get_name
 */
 
 static VALUE
-rbatk_tattr_s_for_name(VALUE self, VALUE name)
+rbatk_tattr_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_text_attribute_for_name(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
 }

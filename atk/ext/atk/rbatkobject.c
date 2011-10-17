@@ -121,7 +121,7 @@ G_CONST_RETURN gchar* atk_role_get_name     (AtkRole role);
 */
 
 static VALUE
-rbatkrole_get_localized_name(VALUE self)
+rbatkrole_get_localized_name(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
     return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
@@ -132,7 +132,7 @@ rbatkrole_get_localized_name(VALUE self)
 }
 
 static VALUE
-rbatkrole_s_for_name(VALUE self, VALUE name)
+rbatkrole_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_role_for_name(RVAL2CSTR(name)), ATK_TYPE_ROLE);
 }

@@ -61,27 +61,27 @@ rbatk_remove_key_event_listener(VALUE self, VALUE id)
 }
 
 static VALUE
-rbatk_get_root(VALUE self)
+rbatk_get_root(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(atk_get_root());
 }
 
 #if ATK_CHECK_VERSION(1,6,0)
 static VALUE
-rbatk_get_focus_object(VALUE self)
+rbatk_get_focus_object(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(atk_get_focus_object());
 }
 #endif
 
 static VALUE
-rbatk_get_toolkit_name(VALUE self)
+rbatk_get_toolkit_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(atk_get_toolkit_name());
 }
 
 static VALUE
-rbatk_get_toolkit_version(VALUE self)
+rbatk_get_toolkit_version(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(atk_get_toolkit_version());
 }
