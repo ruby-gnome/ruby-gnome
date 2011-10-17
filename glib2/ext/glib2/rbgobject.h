@@ -205,7 +205,7 @@ extern VALUE rbgobj_ptr_new(GType type, gpointer ptr);
 extern gpointer rbgobj_ptr2cptr(VALUE ptr);
 
 #define RBGOBJ_TYPE_RUBY_VALUE (rbgobj_ruby_value_get_type())
-extern GType rbgobj_ruby_value_get_type();
+extern GType rbgobj_ruby_value_get_type(void);
 extern VALUE g_value_get_ruby_value(const GValue* value);
 extern void g_value_set_ruby_value(GValue* value, VALUE ruby);
 

@@ -11,6 +11,7 @@
 **********************************************************************/
 
 #include "rbgprivate.h"
+#include "rbgobject.h"
 #ifdef RBGOBJ_USE_DLPTR
 #include "dl.h"
 #endif
