@@ -157,7 +157,7 @@ rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 void
-Init_glib_convert()
+Init_glib_convert(void)
 {
     VALUE cCharError = G_DEF_ERROR2(G_CONVERT_ERROR, "ConvertError", mGLib, rb_eIOError);
 
