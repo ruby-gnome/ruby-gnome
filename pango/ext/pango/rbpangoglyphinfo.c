@@ -15,13 +15,16 @@
 
 
 /**********************************/
-PangoGlyphInfo*
-pango_glyph_info_copy (const PangoGlyphInfo* info)
+static PangoGlyphInfo *
+pango_glyph_info_copy(const PangoGlyphInfo *info)
 {
-  PangoGlyphInfo* data;
-  g_return_val_if_fail (info != NULL, NULL);
+  PangoGlyphInfo *data;
+
+  g_return_val_if_fail(info != NULL, NULL);
+
   data = g_new(PangoGlyphInfo, 1);
   *data = *info;
+
   return data;
 }
 
