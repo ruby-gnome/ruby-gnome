@@ -42,7 +42,7 @@ timer_copy(GTimer *timer)
   return new_timer;
 }
 
-GType
+static GType
 g_timer_get_type(void)
 {
     static GType our_type = 0;

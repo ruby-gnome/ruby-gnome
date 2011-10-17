@@ -51,7 +51,7 @@ rbgutil_glist2ary(const GList *const list)
     return ary;
 }
 
-VALUE
+static VALUE
 rbgutil_glist2ary_and_free_body(VALUE data)
 {
     VALUE ary;
@@ -64,7 +64,7 @@ rbgutil_glist2ary_and_free_body(VALUE data)
     return ary;
 }
 
-VALUE
+static VALUE
 rbgutil_glist2ary_and_free_ensure(VALUE data)
 {
     g_list_free((GList *)data);
@@ -98,7 +98,7 @@ struct rbgutil_glist2ary_boxed_and_free_data
     GType gtype;
 };
 
-VALUE
+static VALUE
 rbgutil_glist2ary_boxed_and_free_body(VALUE data)
 {
     struct rbgutil_glist2ary_boxed_and_free_data *real;
@@ -113,7 +113,7 @@ rbgutil_glist2ary_boxed_and_free_body(VALUE data)
     return ary;
 }
 
-VALUE
+static VALUE
 rbgutil_glist2ary_boxed_and_free_ensure(VALUE data)
 {
     g_list_free(((struct rbgutil_glist2ary_boxed_and_free_data *)data)->list);
