@@ -15,7 +15,7 @@
 #define _SELF(self) GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))
 
 static VALUE
-textchild_initialize(int argc, VALUE *argv, VALUE self)
+textchild_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_text_child_anchor_new());
     return Qnil;
