@@ -14,7 +14,7 @@
 #include "rbglib.h"
 
 static VALUE
-rbglib_m_convert(VALUE self, VALUE str, VALUE to, VALUE from)
+rbglib_m_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
 {
     GError *err = NULL;
     gchar* ret;
@@ -34,7 +34,7 @@ rbglib_m_convert(VALUE self, VALUE str, VALUE to, VALUE from)
 }
 
 static VALUE
-rbglib_m_locale_to_utf8(VALUE self, VALUE str)
+rbglib_m_locale_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -53,7 +53,7 @@ rbglib_m_locale_to_utf8(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_locale_from_utf8(VALUE self, VALUE str)
+rbglib_m_locale_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -72,7 +72,7 @@ rbglib_m_locale_from_utf8(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_filename_to_utf8(VALUE self, VALUE str)
+rbglib_m_filename_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -91,7 +91,7 @@ rbglib_m_filename_to_utf8(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_filename_from_utf8(VALUE self, VALUE str)
+rbglib_m_filename_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -110,7 +110,7 @@ rbglib_m_filename_from_utf8(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_filename_to_uri(int argc, VALUE *argv, VALUE self)
+rbglib_m_filename_to_uri(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE filename, hostname, s;
     GError *err = NULL;
@@ -130,7 +130,7 @@ rbglib_m_filename_to_uri(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rbglib_m_filename_from_uri(VALUE self, VALUE str)
+rbglib_m_filename_from_uri(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s;
@@ -149,7 +149,7 @@ rbglib_m_filename_from_uri(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_utf8_validate(VALUE self, VALUE str)
+rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     rb_warning("GLib.utf8_validate is deprecated. Use GLib::UTF8.validate instead.");
     StringValue(str);
