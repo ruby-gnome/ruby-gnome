@@ -105,7 +105,7 @@ rbg_rval2gtkactionentries_body(VALUE value)
         args->result[i].callback = G_CALLBACK(activate_action);
 
         if (n < 1 || n > 6)
-            rb_raise(rb_eArgError, "entry does not contain right number of entries %d (1..6)", n);
+            rb_raise(rb_eArgError, "entry does not contain right number of entries %ld (1..6)", n);
 
         args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
 
@@ -209,7 +209,7 @@ rbg_rval2gtktoggleactionentries_body(VALUE value)
         args->result[i].callback = G_CALLBACK(activate_toggle_action);
 
         if (n < 1 || n > 7)
-            rb_raise(rb_eArgError, "entry does not contain right number of entries %d (1..7)", n);
+            rb_raise(rb_eArgError, "entry does not contain right number of entries %ld (1..7)", n);
 
         args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
 
@@ -322,7 +322,7 @@ rbg_rval2gtkradioactionentries_body(VALUE value)
         case 1:
             args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
         default:
-            rb_raise(rb_eArgError, "entry does not contain right number of entries %d (1..6)", n);
+            rb_raise(rb_eArgError, "entry does not contain right number of entries %ld (1..6)", n);
         }
     }
 
