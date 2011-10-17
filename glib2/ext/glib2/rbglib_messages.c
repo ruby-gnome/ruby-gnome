@@ -64,7 +64,7 @@ rbglib_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gcha
 
 /* Use Internal only */
 static VALUE
-rbglib_m_log_cancel_handler(VALUE self)
+rbglib_m_log_cancel_handler(G_GNUC_UNUSED VALUE self)
 {
     log_canceled = TRUE;
     return Qnil;
@@ -89,20 +89,20 @@ rbglib_m_log_remove_handler(VALUE self, VALUE domain, VALUE handler_id)
 }
 
 static VALUE
-rbglib_m_log_set_always_fatal(VALUE self, VALUE fatal_mask)
+rbglib_m_log_set_always_fatal(G_GNUC_UNUSED VALUE self, VALUE fatal_mask)
 {
     return INT2NUM(g_log_set_always_fatal(NUM2INT(fatal_mask)));
 }
 
 static VALUE
-rbglib_m_log_set_fatal_mask(VALUE self, VALUE domain, VALUE fatal_mask)
+rbglib_m_log_set_fatal_mask(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE fatal_mask)
 {
     return INT2NUM(g_log_set_fatal_mask(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                         NUM2INT(fatal_mask)));
 }
 
 static VALUE
-rbglib_m_log(VALUE self, VALUE domain, VALUE level, VALUE str)
+rbglib_m_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
 {
     g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), RVAL2CSTR(str), NULL);
     return Qnil;

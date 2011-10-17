@@ -101,7 +101,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 #endif
 
 static void
-restore_poll_func(VALUE data)
+restore_poll_func(G_GNUC_UNUSED VALUE data)
 {
     if (g_main_context_get_poll_func(NULL) == (GPollFunc)rg_poll) {
         g_main_context_set_poll_func(NULL, default_poll_func);
@@ -322,7 +322,9 @@ source_check(GSource *source)
 }
 
 static gboolean
-source_dispatch(GSource *source, GSourceFunc callback, gpointer user_data)
+source_dispatch(G_GNUC_UNUSED GSource *source,
+                G_GNUC_UNUSED GSourceFunc callback,
+                G_GNUC_UNUSED gpointer user_data)
 {
     TRAP_BEG;
     rb_thread_schedule();
@@ -378,7 +380,7 @@ ruby_source_new(void)
 }
 
 static VALUE
-ruby_source_set_priority (VALUE self, VALUE priority)
+ruby_source_set_priority(G_GNUC_UNUSED VALUE self, VALUE priority)
 {
     GSource *ruby_source = NULL;
 
@@ -393,7 +395,7 @@ ruby_source_set_priority (VALUE self, VALUE priority)
 #endif
 
 static VALUE
-source_remove(VALUE self, VALUE tag)
+source_remove(G_GNUC_UNUSED VALUE self, VALUE tag)
 {
     VALUE callback;
     callback = G_GET_RELATIVE(mGLibSource, id__callbacks__, tag);
@@ -404,7 +406,7 @@ source_remove(VALUE self, VALUE tag)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-source_current_source(VALUE self)
+source_current_source(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(g_main_current_source, G_TYPE_SOURCE);
 }
@@ -460,7 +462,7 @@ mc_initialize(VALUE self)
 }
 
 static VALUE
-mc_s_default(VALUE self)
+mc_s_default(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(g_main_context_default(), G_TYPE_MAIN_CONTEXT);
 }
@@ -678,20 +680,20 @@ mc_s_depth(VALUE self)
 
 
 static VALUE
-timeout_source_new(VALUE self, VALUE interval)
+timeout_source_new(G_GNUC_UNUSED VALUE self, VALUE interval)
 {
     return BOXED2RVAL(g_timeout_source_new(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
-timeout_source_new_seconds(VALUE self, VALUE interval)
+timeout_source_new_seconds(G_GNUC_UNUSED VALUE self, VALUE interval)
 {
     return BOXED2RVAL(g_timeout_source_new_seconds(NUM2UINT(interval)), G_TYPE_SOURCE);
 }
 #endif
 
 static VALUE
-timeout_add(int argc, VALUE *argv, VALUE self)
+timeout_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE interval, rb_priority, func, rb_id;
     gint priority;
@@ -715,7 +717,7 @@ timeout_add(int argc, VALUE *argv, VALUE self)
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
-timeout_add_seconds(int argc, VALUE *argv, VALUE self)
+timeout_add_seconds(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE interval, rb_priority, func, rb_id;
     gint priority;
@@ -741,13 +743,13 @@ timeout_add_seconds(int argc, VALUE *argv, VALUE self)
 #endif
 
 static VALUE
-idle_source_new(VALUE self)
+idle_source_new(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(g_idle_source_new(), G_TYPE_SOURCE);
 }
 
 static VALUE
-idle_add(gint argc, VALUE *argv, VALUE self)
+idle_add(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg1, arg2, func, rb_id;
     callback_info_t *info;
@@ -777,7 +779,7 @@ idle_add(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-idle_remove(VALUE self, VALUE func)
+idle_remove(G_GNUC_UNUSED VALUE self, VALUE func)
 {
     callback_info_t *info;
 
@@ -789,7 +791,7 @@ idle_remove(VALUE self, VALUE func)
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-child_watch_source_new(VALUE self, VALUE pid)
+child_watch_source_new(G_GNUC_UNUSED VALUE self, VALUE pid)
 {
     return BOXED2RVAL(g_child_watch_source_new((GPid)NUM2INT(pid)), G_TYPE_SOURCE);
 }
@@ -812,7 +814,7 @@ child_watch_add(VALUE self, VALUE pid)
 
 #ifndef HAVE_RB_THREAD_BLOCKING_REGION
 static void
-ruby_source_remove(VALUE data)
+ruby_source_remove(G_GNUC_UNUSED VALUE data)
 {
     if (ruby_source_id != 0) {
         g_source_remove(ruby_source_id);

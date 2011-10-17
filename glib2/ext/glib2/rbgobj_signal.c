@@ -47,10 +47,10 @@ static VALUE eNoSignalError;
 
 // FIXME: use rb_protect
 static gboolean
-accumulator_func(GSignalInvocationHint* ihint,
-                 GValue*                return_accu,
-                 const GValue*          handler_return,
-                 gpointer               data)
+accumulator_func(G_GNUC_UNUSED GSignalInvocationHint *ihint,
+                 GValue *return_accu,
+                 const GValue *handler_return,
+                 gpointer data)
 {
     VALUE proc = (VALUE)data;
     VALUE val = GVAL2RVAL(return_accu);

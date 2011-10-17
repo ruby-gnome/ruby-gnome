@@ -21,7 +21,7 @@ typedef void (*ClassInfoCallbackFunc) (gpointer instance,
 				       gpointer user_data);
 
 static VALUE
-instantiatable_s_allocate(VALUE klass)
+instantiatable_s_allocate(G_GNUC_UNUSED VALUE klass)
 {
      rb_raise(rb_eTypeError, "abstract class");
 }
@@ -73,13 +73,13 @@ each_cinfo(gpointer instance, ClassInfoCallbackFunc func, gpointer user_data)
 }
 
 static void
-call_cinfo_free(gpointer instance, const RGObjClassInfo *cinfo, gpointer user_data)
+call_cinfo_free(gpointer instance, const RGObjClassInfo *cinfo, G_GNUC_UNUSED gpointer user_data)
 {
     if (cinfo->free) cinfo->free(instance);
 }
 
 static void
-call_cinfo_mark(gpointer instance, const RGObjClassInfo *cinfo, gpointer user_data)
+call_cinfo_mark(gpointer instance, const RGObjClassInfo *cinfo, G_GNUC_UNUSED gpointer user_data)
 {
     if (cinfo->mark) cinfo->mark(instance);
 }

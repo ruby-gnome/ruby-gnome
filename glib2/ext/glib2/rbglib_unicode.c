@@ -39,18 +39,18 @@ rbg_utf16_to_rval_len(const gchar* utf16, gsize len)
 }
 
 static VALUE
-rbglib_m_charset(VALUE self)
+rbglib_m_charset(G_GNUC_UNUSED VALUE self)
 {
     const char *charset;
     g_get_charset(&charset);
     return CSTR2RVAL(charset);
 }
 
-#define DEF_IS_UNICHAR(name)                                    \
-static VALUE                                                    \
-rbglib_m_unichar_is ## name(VALUE self, VALUE unichar)          \
-{                                                               \
-    return CBOOL2RVAL(g_unichar_is ## name(NUM2UINT(unichar))); \
+#define DEF_IS_UNICHAR(name)                                         \
+static VALUE                                                         \
+rbglib_m_unichar_is ## name(G_GNUC_UNUSED VALUE self, VALUE unichar) \
+{                                                                    \
+    return CBOOL2RVAL(g_unichar_is ## name(NUM2UINT(unichar)));      \
 }
 
 DEF_IS_UNICHAR(alnum)
@@ -74,51 +74,51 @@ DEF_IS_UNICHAR(wide_cjk)
 #undef DEF_IS_UNICHAR
 
 static VALUE
-rbglib_m_unichar_toupper(VALUE self, VALUE unichar)
+rbglib_m_unichar_toupper(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return UINT2NUM(g_unichar_toupper(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_tolower(VALUE self, VALUE unichar)
+rbglib_m_unichar_tolower(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return UINT2NUM(g_unichar_tolower(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_totitle(VALUE self, VALUE unichar)
+rbglib_m_unichar_totitle(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return UINT2NUM(g_unichar_totitle(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_digit_value(VALUE self, VALUE unichar)
+rbglib_m_unichar_digit_value(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return INT2NUM(g_unichar_digit_value(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_xdigit_value(VALUE self, VALUE unichar)
+rbglib_m_unichar_xdigit_value(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return INT2NUM(g_unichar_xdigit_value(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_type(VALUE self, VALUE unichar)
+rbglib_m_unichar_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_type(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_TYPE);
 }
 
 static VALUE
-rbglib_m_unichar_break_type(VALUE self, VALUE unichar)
+rbglib_m_unichar_break_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_break_type(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_BREAK_TYPE);
 }
 
 static VALUE
-rbglib_m_unicode_canonical_ordering(VALUE self, VALUE rb_ucs4)
+rbglib_m_unicode_canonical_ordering(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 {
     VALUE normalized_ucs4;
     gchar *original_str;
@@ -135,7 +135,7 @@ rbglib_m_unicode_canonical_ordering(VALUE self, VALUE rb_ucs4)
 }
 
 static VALUE
-rbglib_m_unicode_canonical_decomposition(VALUE self, VALUE unichar)
+rbglib_m_unicode_canonical_decomposition(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     VALUE normalized_ucs4;
     gunichar *ucs4;
@@ -150,7 +150,7 @@ rbglib_m_unicode_canonical_decomposition(VALUE self, VALUE unichar)
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-rbglib_m_unichar_get_mirror_char(VALUE self, VALUE unichar)
+rbglib_m_unichar_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     gunichar mirrored_char;
 
@@ -164,33 +164,33 @@ rbglib_m_unichar_get_mirror_char(VALUE self, VALUE unichar)
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
-rbglib_m_unichar_combining_class(VALUE self, VALUE unichar)
+rbglib_m_unichar_combining_class(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return INT2NUM(g_unichar_combining_class(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_get_script(VALUE self, VALUE unichar)
+rbglib_m_unichar_get_script(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_get_script(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_SCRIPT);
 }
 
 static VALUE
-rbglib_m_unichar_ismark(VALUE self, VALUE unichar)
+rbglib_m_unichar_ismark(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return CBOOL2RVAL(g_unichar_ismark(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_iszerowidth(VALUE self, VALUE unichar)
+rbglib_m_unichar_iszerowidth(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return CBOOL2RVAL(g_unichar_iszerowidth(NUM2UINT(unichar)));
 }
 #endif
 
 static VALUE
-rbglib_m_utf8_get_char(int argc, VALUE *argv, VALUE self)
+rbglib_m_utf8_get_char(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE utf8, validate;
     gunichar result;
@@ -214,7 +214,7 @@ rbglib_m_utf8_get_char(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rbglib_m_utf8_strlen(VALUE self, VALUE rb_utf8)
+rbglib_m_utf8_strlen(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     gchar *utf8;
 
@@ -223,7 +223,7 @@ rbglib_m_utf8_strlen(VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_strreverse(VALUE self, VALUE rb_utf8)
+rbglib_m_utf8_strreverse(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *reversed_utf8;
@@ -236,7 +236,7 @@ rbglib_m_utf8_strreverse(VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_validate(VALUE self, VALUE str)
+rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     StringValue(str);
     return CBOOL2RVAL(g_utf8_validate(RSTRING_PTR(str), RSTRING_LEN(str),
@@ -244,7 +244,7 @@ rbglib_m_utf8_validate(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_utf8_strup(VALUE self, VALUE rb_utf8)
+rbglib_m_utf8_strup(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *upcased_utf8;
@@ -257,7 +257,7 @@ rbglib_m_utf8_strup(VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_strdown(VALUE self, VALUE rb_utf8)
+rbglib_m_utf8_strdown(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *downcased_utf8;
@@ -270,7 +270,7 @@ rbglib_m_utf8_strdown(VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_casefold(VALUE self, VALUE rb_utf8)
+rbglib_m_utf8_casefold(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *casefolded_utf8;
@@ -283,7 +283,7 @@ rbglib_m_utf8_casefold(VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_normalize(int argc, VALUE *argv, VALUE self)
+rbglib_m_utf8_normalize(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE rb_utf8, rb_mode, result;
     gchar *utf8, *normalized_utf8;
@@ -302,14 +302,14 @@ rbglib_m_utf8_normalize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rbglib_m_utf8_collate(VALUE self, VALUE utf8a, VALUE utf8b)
+rbglib_m_utf8_collate(G_GNUC_UNUSED VALUE self, VALUE utf8a, VALUE utf8b)
 {
     return INT2NUM(g_utf8_collate(StringValueCStr(utf8a),
                                   StringValueCStr(utf8b)));
 }
 
 static VALUE
-rbglib_m_utf8_collate_key(int argc, VALUE *argv, VALUE self)
+rbglib_m_utf8_collate_key(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE result, rb_utf8, for_filename;
     gchar *key, *utf8;
@@ -332,7 +332,7 @@ rbglib_m_utf8_collate_key(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rbglib_m_utf8_to_utf16(VALUE self, VALUE rb_utf8)
+rbglib_m_utf8_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8;
@@ -355,7 +355,7 @@ rbglib_m_utf8_to_utf16(VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, VALUE self)
+rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE result, rb_utf8, is_fast;
     gchar *utf8;
@@ -383,7 +383,7 @@ rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rbglib_m_utf16_to_ucs4(VALUE self, VALUE rb_utf16)
+rbglib_m_utf16_to_ucs4(G_GNUC_UNUSED VALUE self, VALUE rb_utf16)
 {
     VALUE result;
     gunichar *ucs4;
@@ -405,7 +405,7 @@ rbglib_m_utf16_to_ucs4(VALUE self, VALUE rb_utf16)
 }
 
 static VALUE
-rbglib_m_utf16_to_utf8(VALUE self, VALUE rb_utf16)
+rbglib_m_utf16_to_utf8(G_GNUC_UNUSED VALUE self, VALUE rb_utf16)
 {
     VALUE result;
     gchar *utf8;
@@ -427,7 +427,7 @@ rbglib_m_utf16_to_utf8(VALUE self, VALUE rb_utf16)
 }
 
 static VALUE
-rbglib_m_ucs4_to_utf16(VALUE self, VALUE rb_ucs4)
+rbglib_m_ucs4_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 {
     VALUE result;
     gunichar *ucs4;
@@ -450,7 +450,7 @@ rbglib_m_ucs4_to_utf16(VALUE self, VALUE rb_ucs4)
 }
 
 static VALUE
-rbglib_m_ucs4_to_utf8(VALUE self, VALUE rb_ucs4)
+rbglib_m_ucs4_to_utf8(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 {
     VALUE result;
     gunichar *ucs4;
@@ -472,7 +472,7 @@ rbglib_m_ucs4_to_utf8(VALUE self, VALUE rb_ucs4)
 }
 
 static VALUE
-rbglib_m_unichar_to_utf8(VALUE self, VALUE unichar)
+rbglib_m_unichar_to_utf8(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     gchar utf8[6];
     gint len;

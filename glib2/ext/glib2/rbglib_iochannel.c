@@ -78,7 +78,7 @@ ioc_close(VALUE self)
 }
 
 static VALUE
-ioc_s_open(gint argc, VALUE *argv, VALUE self)
+ioc_s_open(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg1, arg2;
     VALUE rio;
@@ -654,7 +654,7 @@ ioc_win32_socket_initialize(VALUE self, VALUE socket)
 #endif
 
 static VALUE
-ioc_error_s_from_errno(VALUE self, VALUE errno_)
+ioc_error_s_from_errno(G_GNUC_UNUSED VALUE self, VALUE errno_)
 {
     return INT2NUM(g_io_channel_error_from_errno(NUM2INT(errno_)));
 }

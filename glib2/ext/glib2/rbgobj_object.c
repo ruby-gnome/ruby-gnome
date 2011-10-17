@@ -25,12 +25,12 @@ static GQuark RUBY_GOBJECT_OBJ_KEY;
 
 /* deperecated */
 void
-rbgobj_add_abstract_but_create_instance_class(GType gtype)
+rbgobj_add_abstract_but_create_instance_class(G_GNUC_UNUSED GType gtype)
 {
 }
 
 static void
-weak_notify(gpointer data, GObject *where_the_object_was)
+weak_notify(gpointer data, G_GNUC_UNUSED GObject *where_the_object_was)
 {
     gobj_holder *holder = data;
 
@@ -651,7 +651,7 @@ static GQuark q_ruby_getter;
 // FIXME: use rb_protect
 static void
 get_prop_func(GObject* object,
-              guint property_id,
+              G_GNUC_UNUSED guint property_id,
               GValue* value,
               GParamSpec* pspec)
 {
@@ -677,7 +677,7 @@ get_prop_func(GObject* object,
 // FIXME: use rb_protect
 static void
 set_prop_func(GObject* object,
-              guint property_id,
+              G_GNUC_UNUSED guint property_id,
               const GValue* value,
               GParamSpec* pspec)
 {
@@ -699,7 +699,7 @@ set_prop_func(GObject* object,
 
 // FIXME: use rb_protect
 static void
-class_init_func(gpointer g_class_, gpointer class_data)
+class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
 {
     GObjectClass* g_class = G_OBJECT_CLASS(g_class_);
 

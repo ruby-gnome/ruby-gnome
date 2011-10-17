@@ -15,7 +15,7 @@
 
 #if GLIB_CHECK_VERSION(2,2,0)
 static VALUE
-rbglib_m_application_name(VALUE self)
+rbglib_m_application_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_application_name());
 }
@@ -29,7 +29,7 @@ rbglib_m_set_application_name(VALUE self, VALUE application_name)
 #endif
 
 static VALUE
-rbglib_m_prgname(VALUE self)
+rbglib_m_prgname(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_prgname());
 }
@@ -42,14 +42,14 @@ rbglib_m_set_prgname(VALUE self, VALUE prgname)
 }
 
 static VALUE
-rbglib_m_env(VALUE self, VALUE variable)
+rbglib_m_env(G_GNUC_UNUSED VALUE self, VALUE variable)
 {
     return CSTR2RVAL(g_getenv(RVAL2CSTR(variable)));
 }
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-rbglib_m_setenv(VALUE self, VALUE variable, VALUE value, VALUE overwrite)
+rbglib_m_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
 {
     return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable), 
                                NIL_P(value) ? NULL : RVAL2CSTR(value),
@@ -83,51 +83,51 @@ rbglib_m_listenv(VALUE self)
 #endif
 
 static VALUE
-rbglib_m_host_name(VALUE self)
+rbglib_m_host_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_host_name());
 }
 #endif
 
 static VALUE
-rbglib_m_user_name(VALUE self)
+rbglib_m_user_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_name());
 }
 
 static VALUE
-rbglib_m_real_name(VALUE self)
+rbglib_m_real_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_real_name());
 }
 
 #if GLIB_CHECK_VERSION(2, 6, 0)
 static VALUE
-rbglib_m_user_cache_dir(VALUE self)
+rbglib_m_user_cache_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_cache_dir());
 }
 
 static VALUE
-rbglib_m_user_data_dir(VALUE self)
+rbglib_m_user_data_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_data_dir());
 }
 
 static VALUE
-rbglib_m_user_config_dir(VALUE self)
+rbglib_m_user_config_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_config_dir());
 }
 
 static VALUE
-rbglib_m_system_data_dirs(VALUE self)
+rbglib_m_system_data_dirs(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_system_data_dirs());
 }
 
 static VALUE
-rbglib_m_system_config_dirs(VALUE self)
+rbglib_m_system_config_dirs(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_system_config_dirs());
 }
@@ -135,7 +135,7 @@ rbglib_m_system_config_dirs(VALUE self)
 
 #if GLIB_CHECK_VERSION(2, 14, 0)
 static VALUE
-rbglib_m_get_user_special_dir(VALUE self, VALUE directory)
+rbglib_m_get_user_special_dir(G_GNUC_UNUSED VALUE self, VALUE directory)
 {
     return CSTR2RVAL(g_get_user_special_dir(RVAL2GENUM(directory,
 						       G_TYPE_USER_DIRECTORY)));
@@ -143,19 +143,19 @@ rbglib_m_get_user_special_dir(VALUE self, VALUE directory)
 #endif
 
 static VALUE
-rbglib_m_home_dir(VALUE self)
+rbglib_m_home_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_home_dir());
 }
 
 static VALUE
-rbglib_m_tmp_dir(VALUE self)
+rbglib_m_tmp_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_tmp_dir());
 }
 
 static VALUE
-rbglib_m_current_dir(VALUE self)
+rbglib_m_current_dir(G_GNUC_UNUSED VALUE self)
 {
     gchar* dir = g_get_current_dir();
     VALUE ret = CSTR2RVAL(dir);
@@ -164,25 +164,25 @@ rbglib_m_current_dir(VALUE self)
 }
 
 static VALUE
-rbglib_m_path_is_absolute(VALUE self, VALUE fname)
+rbglib_m_path_is_absolute(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CBOOL2RVAL(g_path_is_absolute(RVAL2CSTR(fname)));
 }
 
 static VALUE
-rbglib_m_path_skip_root(VALUE self, VALUE fname)
+rbglib_m_path_skip_root(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CSTR2RVAL(g_path_skip_root(RVAL2CSTR(fname)));
 }
 
 static VALUE
-rbglib_m_path_get_basename(VALUE self, VALUE fname)
+rbglib_m_path_get_basename(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CSTR2RVAL(g_path_get_basename(RVAL2CSTR(fname)));
 }
 
 static VALUE
-rbglib_m_path_get_dirname(VALUE self, VALUE fname)
+rbglib_m_path_get_dirname(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CSTR2RVAL(g_path_get_dirname(RVAL2CSTR(fname)));
 }
@@ -200,7 +200,7 @@ gchar*      g_build_pathv                   (const gchar *separator,
 */
 
 static VALUE
-rbglib_m_find_program_in_path(VALUE self, VALUE program)
+rbglib_m_find_program_in_path(G_GNUC_UNUSED VALUE self, VALUE program)
 {
     gchar* path = g_find_program_in_path(RVAL2CSTR(program));
     VALUE ret = CSTR2RVAL(path);
@@ -209,25 +209,25 @@ rbglib_m_find_program_in_path(VALUE self, VALUE program)
 }
 
 static VALUE
-rbglib_m_bit_nth_lsf(VALUE self, VALUE mask, VALUE nth_bit)
+rbglib_m_bit_nth_lsf(G_GNUC_UNUSED VALUE self, VALUE mask, VALUE nth_bit)
 {
     return INT2NUM(g_bit_nth_lsf(NUM2ULONG(mask), NUM2INT(nth_bit)));
 }
 
 static VALUE
-rbglib_m_bit_nth_msf(VALUE self, VALUE mask, VALUE nth_bit)
+rbglib_m_bit_nth_msf(G_GNUC_UNUSED VALUE self, VALUE mask, VALUE nth_bit)
 {
     return INT2NUM(g_bit_nth_msf(NUM2ULONG(mask), NUM2INT(nth_bit)));
 }
 
 static VALUE
-rbglib_m_bit_storage(VALUE self, VALUE number)
+rbglib_m_bit_storage(G_GNUC_UNUSED VALUE self, VALUE number)
 {
     return UINT2NUM(g_bit_storage(NUM2ULONG(number)));
 }
 
 static VALUE
-rbglib_m_spaced_primes_closest(VALUE self, VALUE num)
+rbglib_m_spaced_primes_closest(G_GNUC_UNUSED VALUE self, VALUE num)
 {
     return UINT2NUM(g_spaced_primes_closest(NUM2UINT(num)));
 }
@@ -238,7 +238,7 @@ void        g_atexit                        (GVoidFunc func);
 */
 
 static VALUE
-rbglib_m_parse_debug_string(VALUE self, VALUE string, VALUE keys)
+rbglib_m_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
 {
     gint i, nkeys;
     VALUE ary;
@@ -271,7 +271,7 @@ void        g_nullify_pointer               (gpointer *nullify_location);
 */
 
 static VALUE
-rbglib_m_check_version(VALUE self, VALUE major, VALUE minor, VALUE micro)
+rbglib_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     return CBOOL2RVAL(glib_major_version > NUM2UINT(major) ||
                       (glib_major_version == NUM2UINT(major) && 

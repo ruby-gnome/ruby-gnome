@@ -122,9 +122,9 @@ typedef struct {
 } boxed_ruby_value_counter;
 
 static void
-boxed_ruby_value_counter_mark(gpointer       key,
-                              gpointer       value,
-                              gpointer       user_data)
+boxed_ruby_value_counter_mark(G_GNUC_UNUSED gpointer key,
+                              gpointer value,
+                              G_GNUC_UNUSED gpointer user_data)
 {
     boxed_ruby_value_counter* counter = value;
     if (counter->ref_count)

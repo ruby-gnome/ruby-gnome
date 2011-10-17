@@ -245,7 +245,7 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
 }
 
 static VALUE
-rbgobj_lookup_class_by_gtype_ensure(VALUE data)
+rbgobj_lookup_class_by_gtype_ensure(G_GNUC_UNUSED VALUE data)
 {
     rb_funcall(lookup_class_mutex, id_unlock, 0);
     return Qundef;

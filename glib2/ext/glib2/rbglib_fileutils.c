@@ -40,7 +40,7 @@ void        g_dir_close                     (GDir *dir);
 
 #if GLIB_CHECK_VERSION(2, 16, 0)
 static VALUE
-rbglib_m_format_size_for_display(VALUE self, VALUE size)
+rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     return CSTR2RVAL_FREE(g_format_size_for_display(NUM2INT(size)));
 }

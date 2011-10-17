@@ -141,7 +141,7 @@ rbglib_m_spawn_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp,
 }
 
 static VALUE
-rbglib_m_spawn_command_line_sync(VALUE self, VALUE str)
+rbglib_m_spawn_command_line_sync(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     const gchar *command_line;
@@ -178,7 +178,7 @@ rbglib_m_spawn_command_line_sync(VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_spawn_command_line_async(VALUE self, VALUE str)
+rbglib_m_spawn_command_line_async(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     const gchar *command_line;

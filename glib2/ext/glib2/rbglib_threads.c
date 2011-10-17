@@ -25,7 +25,7 @@ gt_init(VALUE self)
 }
 
 static VALUE
-gt_supported(VALUE self)
+gt_supported(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED

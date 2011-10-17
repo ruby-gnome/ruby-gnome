@@ -849,7 +849,7 @@ flags_lt(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_not(VALUE self, VALUE rhs)
+flags_not(VALUE self, G_GNUC_UNUSED VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     return rbgobj_make_flags((~ p->value) & p->gclass->mask,

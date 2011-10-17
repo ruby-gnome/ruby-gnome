@@ -17,7 +17,7 @@
 
 #if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
-rbglib_m_language_names(VALUE self)
+rbglib_m_language_names(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_language_names());
 }

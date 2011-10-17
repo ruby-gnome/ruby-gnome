@@ -156,7 +156,7 @@ rclosure_unref(GRClosure *rclosure)
 }
 
 static void
-rclosure_invalidate(gpointer data, GClosure* closure)
+rclosure_invalidate(G_GNUC_UNUSED gpointer data, GClosure *closure)
 {
     GRClosure *rclosure = (GRClosure*)closure;
 
@@ -264,7 +264,7 @@ g_rclosure_set_tag(GClosure *closure, const gchar *tag)
 }
 
 static void
-rclosure_end_proc(VALUE _)
+rclosure_end_proc(G_GNUC_UNUSED VALUE _)
 {
     rclosure_initialized = FALSE;
 }
