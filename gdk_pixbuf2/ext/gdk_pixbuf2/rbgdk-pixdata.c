@@ -17,7 +17,7 @@
 static ID id_pixdata;
 
 /*****************************************/
-GdkPixdata*
+static GdkPixdata *
 gdk_pixdata_copy(const GdkPixdata* src)
 {
   GdkPixdata* data;
@@ -27,8 +27,8 @@ gdk_pixdata_copy(const GdkPixdata* src)
   return data;
 }
 
-GType
-gdk_pixdata_get_type (void)
+static GType
+gdk_pixdata_get_type(void)
 {
   static GType our_type = 0;
   if (our_type == 0)
