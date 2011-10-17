@@ -95,9 +95,12 @@ rbg_rval2gtkactionentries_body(VALUE value)
     struct rbg_rval2gtkactionentries_args *args = (struct rbg_rval2gtkactionentries_args *)value;
 
     for (i = 0; i < args->n; i++) {
+        VALUE entry;
+        long n;
+
         RARRAY_PTR(args->ary)[i] = rb_ary_dup(rb_ary_to_ary(RARRAY_PTR(args->ary)[i]));
-        VALUE entry = RARRAY_PTR(args->ary)[i];
-        long n = RARRAY_LEN(entry);
+        entry = RARRAY_PTR(args->ary)[i];
+        n = RARRAY_LEN(entry);
 
         args->result[i].callback = G_CALLBACK(activate_action);
 
@@ -196,9 +199,12 @@ rbg_rval2gtktoggleactionentries_body(VALUE value)
     struct rbg_rval2gtktoggleactionentries_args *args = (struct rbg_rval2gtktoggleactionentries_args *)value;
 
     for (i = 0; i < args->n; i++) {
+        VALUE entry;
+        long n;
+
         RARRAY_PTR(args->ary)[i] = rb_ary_dup(rb_ary_to_ary(RARRAY_PTR(args->ary)[i]));
-        VALUE entry = RARRAY_PTR(args->ary)[i];
-        long n = RARRAY_LEN(entry);
+        entry = RARRAY_PTR(args->ary)[i];
+        n = RARRAY_LEN(entry);
 
         args->result[i].callback = G_CALLBACK(activate_toggle_action);
 
@@ -295,9 +301,12 @@ rbg_rval2gtkradioactionentries_body(VALUE value)
     struct rbg_rval2gtkradioactionentries_args *args = (struct rbg_rval2gtkradioactionentries_args *)value;
 
     for (i = 0; i < args->n; i++) {
+        VALUE entry;
+        long n;
+
         RARRAY_PTR(args->ary)[i] = rb_ary_dup(rb_ary_to_ary(RARRAY_PTR(args->ary)[i]));
-        VALUE entry = RARRAY_PTR(args->ary)[i];
-        long n = RARRAY_LEN(entry);
+        entry = RARRAY_PTR(args->ary)[i];
+        n = RARRAY_LEN(entry);
 
         switch (n) {
         case 6:
