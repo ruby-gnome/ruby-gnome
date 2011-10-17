@@ -104,7 +104,7 @@ gdkcolor_equal(VALUE self, VALUE other)
 
 #if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
-gdkcolor_to_string(VALUE self, VALUE other)
+gdkcolor_to_string(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_color_to_string(_SELF(self)));
 }
