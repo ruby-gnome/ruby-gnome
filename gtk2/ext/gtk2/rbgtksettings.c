@@ -70,7 +70,7 @@ settings_rc_property_parse(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstrin
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
-    GValue property = { 0, };
+    GValue property = G_VALUE_INIT;
     gboolean parsed;
 
     g_value_init(&property, spec->value_type);
@@ -105,7 +105,7 @@ settings_rc_property_parse_requisition(G_GNUC_UNUSED VALUE self, VALUE rbspec, V
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
-    GValue property = { 0, };
+    GValue property = G_VALUE_INIT;
     gboolean parsed;
     GtkRequisition *requisition;
     gint width;
@@ -148,7 +148,7 @@ settings_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE 
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
-    GValue property = { 0, };
+    GValue property = G_VALUE_INIT;
     gboolean parsed;
 
     g_value_init(&property, GTK_TYPE_BORDER);
@@ -168,7 +168,7 @@ static VALUE
 settings_set_property_value(VALUE self, VALUE rbname, VALUE rbvalue, VALUE origin)
 {
     GtkSettings *settings = GTK_SETTINGS(RVAL2GOBJ(self));
-    GtkSettingsValue svalue = { (gchar *)RVAL2CSTR(origin), { 0, } };
+    GtkSettingsValue svalue = { (gchar *)RVAL2CSTR(origin), G_VALUE_INIT };
     const gchar *name = RVAL2CSTR(rbname);
     g_value_init(&svalue.value, RVAL2GTYPE(rbvalue));
     rbgobj_rvalue_to_gvalue(rbvalue, &svalue.value);

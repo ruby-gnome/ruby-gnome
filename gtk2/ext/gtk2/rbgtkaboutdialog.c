@@ -138,7 +138,7 @@ aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
         if (strncmp(pd[i].name, "artists", strlen("artists")) == 0||
             strncmp(pd[i].name, "authors", strlen("authors")) == 0||
             strncmp(pd[i].name, "documenters", strlen("documenters")) == 0){
-            GValue gval = {0,};
+            GValue gval = G_VALUE_INIT;
             g_value_init(&gval, G_TYPE_STRV);
             rbgobj_rvalue_to_gvalue(RARRAY_PTR(RARRAY_PTR(ary)[i])[1], &gval);
 

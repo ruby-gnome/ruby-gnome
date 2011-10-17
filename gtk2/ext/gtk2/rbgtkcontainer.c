@@ -205,7 +205,7 @@ cont_child_get_property(VALUE self, VALUE child, VALUE prop_name)
         rb_raise(rb_eArgError, "No such property: %s", name);
     else {
         GValueToRValueFunc getter = NULL;
-        GValue gval = {0,};
+        GValue gval = G_VALUE_INIT;
         VALUE ret;
         
         {
@@ -249,7 +249,7 @@ cont_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
         rb_raise(rb_eArgError, "No such property: %s", name);
     else {
         RValueToGValueFunc setter = NULL;
-        GValue gval = {0,};
+        GValue gval = G_VALUE_INIT;
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
 
         {

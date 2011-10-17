@@ -42,7 +42,7 @@ buildable_set_buildable_property(VALUE self, VALUE rb_builder,
 {
     GtkBuilder *builder;
     const gchar *name;
-    GValue value = {0};
+    GValue value = G_VALUE_INIT;
 
     builder = RVAL2BUILDER(rb_builder);
     name = RVAL2CSTR(rb_name);

@@ -372,7 +372,7 @@ gdkevent_s_setting_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE name, type;
     GType gtype;
-    GValue val = {0,};
+    GValue val = G_VALUE_INIT;
     gboolean ret;
     VALUE value;
 

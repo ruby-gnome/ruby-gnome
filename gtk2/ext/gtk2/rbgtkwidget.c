@@ -781,7 +781,7 @@ widget_style_get_property(VALUE self, VALUE prop_name)
         rb_raise(rb_eval_string("GLib::NoPropertyError"), "No such property: %s", name);
     else {
         // FIXME: use rb_ensure to call g_value_unset()
-        GValue gval = {0,};
+        GValue gval = G_VALUE_INIT;
         VALUE ret;
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
         gtk_widget_style_get_property(GTK_WIDGET(RVAL2GOBJ(self)), name, &gval);

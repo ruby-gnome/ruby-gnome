@@ -26,6 +26,10 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
+#ifndef G_VALUE_INIT
+#  define G_VALUE_INIT { 0, { { 0 } } }
+#endif
+
 extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;

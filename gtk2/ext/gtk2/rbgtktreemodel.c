@@ -77,7 +77,7 @@ treemodel_get_iter(VALUE self, VALUE path)
 static VALUE
 treemodel_get_value(VALUE self, VALUE iter, VALUE column)
 {
-    GValue value = {0, };
+    GValue value = G_VALUE_INIT;
     VALUE ret = Qnil;
     gtk_tree_model_get_value(_SELF(self), RVAL2GTKTREEITER(iter), NUM2INT(column), &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){

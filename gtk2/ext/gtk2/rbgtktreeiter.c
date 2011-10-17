@@ -48,7 +48,7 @@ treeiter_next(VALUE self)
 static VALUE
 treeiter_get_value(VALUE self, VALUE column)
 {
-    GValue value = {0, };
+    GValue value = G_VALUE_INIT;
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
     VALUE ret = Qnil;
@@ -131,7 +131,7 @@ treeiter_set_value(VALUE self, VALUE column, VALUE value)
     VALUE obj = rb_hash_aref(treeiter_set_value_table, INT2NUM(G_TYPE_FROM_INSTANCE(model)));
     rbgtkiter_set_value_func func;
     GType gtype = gtk_tree_model_get_column_type(model, NUM2INT(column));
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
 
     if (NIL_P(obj))
         rb_raise(rb_eTypeError, "Gtk::TreeModel is invalid.");
@@ -189,8 +189,8 @@ treeiter_eql(VALUE self, VALUE other)
     }
 
     for (i = 0; i < num1; i++){
-        GValue gval1 = {0,};
-        GValue gval2 = {0,};
+        GValue gval1 = G_VALUE_INIT;
+        GValue gval2 = G_VALUE_INIT;
         VALUE ret1, ret2;
         gtk_tree_model_get_value(model1, iter1, i, &gval1);
         gtk_tree_model_get_value(model2, iter2, i, &gval2);

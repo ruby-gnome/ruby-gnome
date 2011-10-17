@@ -193,7 +193,7 @@ gdkscreen_get_setting(int argc, VALUE *argv, VALUE self)
 {
     VALUE name, type;
     GType gtype;
-    GValue val = {0,};
+    GValue val = G_VALUE_INIT;
     gboolean ret;
     VALUE value;
 
