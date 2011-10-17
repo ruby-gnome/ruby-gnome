@@ -90,7 +90,7 @@ rbg_rval2gtypes_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gtypes_rescue(VALUE value)
 {
     g_free(((struct rval2gtypes_args *)value)->result);

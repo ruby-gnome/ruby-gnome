@@ -20,7 +20,7 @@ typedef void (*ClassInfoCallbackFunc) (gpointer instance,
 				       const RGObjClassInfo *class_info,
 				       gpointer user_data);
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 instantiatable_s_allocate(G_GNUC_UNUSED VALUE klass)
 {
      rb_raise(rb_eTypeError, "abstract class");
@@ -32,7 +32,7 @@ instantiatable_get_gtype(VALUE self)
     return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_instance_from_ruby_object(self)));
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 instantiatable_clone(VALUE self)
 {
     rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));

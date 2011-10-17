@@ -61,7 +61,7 @@ rbgobj_boxed_s_allocate(VALUE klass)
     return result;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgobj_boxed_init(VALUE self)
 {
     rb_raise(rb_eTypeError, "can't initialize %s",

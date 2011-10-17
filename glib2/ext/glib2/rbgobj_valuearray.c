@@ -52,7 +52,7 @@ value_array_from_ruby_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 value_array_from_ruby_rescue(VALUE value)
 {
     g_value_array_free(((struct value_array_from_ruby_args *)value)->result);
