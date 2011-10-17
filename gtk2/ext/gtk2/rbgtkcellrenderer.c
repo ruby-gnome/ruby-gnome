@@ -99,7 +99,7 @@ cellrenderer_set_fixed_size(VALUE self, VALUE width, VALUE height)
 }
 
 void
-Init_gtk_cellrenderer()
+Init_gtk_cellrenderer(void)
 {
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
     

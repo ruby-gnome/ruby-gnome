@@ -22,7 +22,7 @@ eventbox_initialize(VALUE self)
 }
 
 void 
-Init_gtk_eventbox()
+Init_gtk_eventbox(void)
 {
     VALUE gEventBox = G_DEF_CLASS(GTK_TYPE_EVENT_BOX, "EventBox", mGtk);
 

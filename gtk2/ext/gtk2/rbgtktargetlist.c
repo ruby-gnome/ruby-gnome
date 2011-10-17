@@ -126,7 +126,7 @@ target_list_find(VALUE self, VALUE target)
 } 
 
 void
-Init_gtk_target_list()
+Init_gtk_target_list(void)
 {
     VALUE gTargetList = G_DEF_CLASS(GTK_TYPE_TARGET_LIST, "TargetList", mGtk);
 

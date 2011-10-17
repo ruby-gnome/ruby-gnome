@@ -60,7 +60,7 @@ gboolean            gtk_statusbar_get_has_resize_grip   (GtkStatusbar *statusbar
 */
 
 void 
-Init_gtk_statusbar()
+Init_gtk_statusbar(void)
 {
     VALUE gStatusBar = G_DEF_CLASS(GTK_TYPE_STATUSBAR, "Statusbar", mGtk);
 

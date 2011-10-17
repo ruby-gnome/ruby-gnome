@@ -20,7 +20,7 @@ fs_initialize(VALUE self)
 }
 
 void 
-Init_gtk_font_selection()
+Init_gtk_font_selection(void)
 {
     VALUE gFontSelection = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION, "FontSelection", mGtk);
 

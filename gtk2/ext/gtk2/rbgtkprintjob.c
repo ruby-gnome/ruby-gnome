@@ -132,7 +132,7 @@ pj_send(VALUE self)
 #endif
 
 void
-Init_gtk_print_job()
+Init_gtk_print_job(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
     gPrintJob = G_DEF_CLASS(GTK_TYPE_PRINT_JOB, "PrintJob", mGtk);

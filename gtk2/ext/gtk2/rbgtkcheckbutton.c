@@ -44,7 +44,7 @@ cbtn_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_check_button()
+Init_gtk_check_button(void)
 {
     VALUE gCButton = G_DEF_CLASS(GTK_TYPE_CHECK_BUTTON, "CheckButton", mGtk);
 

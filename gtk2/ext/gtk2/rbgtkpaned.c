@@ -87,7 +87,7 @@ paned_child2_shrink(VALUE self)
 }
 
 void 
-Init_gtk_paned()
+Init_gtk_paned(void)
 {
     VALUE gPaned = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
 

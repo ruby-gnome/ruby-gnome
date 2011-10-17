@@ -99,7 +99,7 @@ cview_get_cell_renderers(VALUE self)
 #endif
 
 void
-Init_gtk_cellview()
+Init_gtk_cellview(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE cview = G_DEF_CLASS(GTK_TYPE_CELL_VIEW, "CellView", mGtk);

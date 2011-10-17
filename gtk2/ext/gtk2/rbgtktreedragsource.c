@@ -13,7 +13,7 @@
 #include "global.h"
 
 void
-Init_gtk_treedragsource()
+Init_gtk_treedragsource(void)
 {
     G_DEF_INTERFACE(GTK_TYPE_TREE_DRAG_SOURCE, "TreeDragSource", mGtk);
 }

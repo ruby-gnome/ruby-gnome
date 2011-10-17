@@ -127,7 +127,7 @@ image_clear(VALUE self)
 #endif
 
 void 
-Init_gtk_image()
+Init_gtk_image(void)
 {
     VALUE gImage = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     rb_define_method(gImage, "initialize", image_initialize, -1);

@@ -44,7 +44,7 @@ frame_get_label_align(VALUE self)
 }
 
 void 
-Init_gtk_frame()
+Init_gtk_frame(void)
 {
     VALUE gFrame = G_DEF_CLASS(GTK_TYPE_FRAME, "Frame", mGtk);
 

@@ -39,7 +39,7 @@ pop_is_selected(VALUE self, VALUE page_number)
 #endif
 
 void
-Init_gtk_print_operation_preview()
+Init_gtk_print_operation_preview(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE gPrintOperationPreview = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_PREVIEW,

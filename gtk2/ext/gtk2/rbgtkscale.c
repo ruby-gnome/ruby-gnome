@@ -33,7 +33,7 @@ rbscale_get_layout_offsets(VALUE self)
 #endif
 
 void 
-Init_gtk_scale()
+Init_gtk_scale(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gScale = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);

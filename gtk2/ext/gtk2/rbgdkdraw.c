@@ -469,7 +469,7 @@ gdkdraw_cairo_create(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_draw()
+Init_gtk_gdk_draw(void)
 {
     VALUE gdkDrawable = G_DEF_CLASS(GDK_TYPE_DRAWABLE, "Drawable", mGdk);
 

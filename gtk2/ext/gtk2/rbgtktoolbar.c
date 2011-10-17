@@ -287,7 +287,7 @@ tbar_unset_style(VALUE self)
 }
 
 void 
-Init_gtk_toolbar()
+Init_gtk_toolbar(void)
 {
     VALUE gToolbar = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 

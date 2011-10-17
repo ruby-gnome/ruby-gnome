@@ -22,7 +22,7 @@ idiag_initialize(VALUE self)
 }
 
 void 
-Init_gtk_input_dialog()
+Init_gtk_input_dialog(void)
 {
     VALUE gInputDialog = G_DEF_CLASS(GTK_TYPE_INPUT_DIALOG, "InputDialog", mGtk);
     rb_define_method(gInputDialog, "initialize", idiag_initialize, 0);

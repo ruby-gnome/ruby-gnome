@@ -51,7 +51,7 @@ G_CONST_RETURN gchar* gtk_color_button_get_title
 #endif
 
 void 
-Init_gtk_colorbutton()
+Init_gtk_colorbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gColorbutton = G_DEF_CLASS(GTK_TYPE_COLOR_BUTTON, "ColorButton", mGtk);

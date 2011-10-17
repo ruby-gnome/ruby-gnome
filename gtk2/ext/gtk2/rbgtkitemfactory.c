@@ -252,7 +252,7 @@ void        gtk_item_factory_set_translate_func
 
 
 void 
-Init_gtk_itemfactory()
+Init_gtk_itemfactory(void)
 {
     VALUE gItemFactory = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
 

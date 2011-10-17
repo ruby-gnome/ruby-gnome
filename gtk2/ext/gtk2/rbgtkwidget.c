@@ -1065,7 +1065,7 @@ widget_signal_size_allocate(guint num, const GValue *values)
 }
 
 void 
-Init_gtk_widget()
+Init_gtk_widget(void)
 {
     VALUE gWidget = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
 

@@ -57,7 +57,7 @@ menutoolbutton_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_menutoolbutton()
+Init_gtk_menutoolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE gMenuToolButton = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);

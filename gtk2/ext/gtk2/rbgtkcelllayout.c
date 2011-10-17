@@ -114,7 +114,7 @@ layout_set_attributes(VALUE self, VALUE cell, VALUE attrs)
 #endif
 
 void
-Init_gtk_celllayout()
+Init_gtk_celllayout(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE layout = G_DEF_INTERFACE(GTK_TYPE_CELL_LAYOUT, "CellLayout", mGtk);

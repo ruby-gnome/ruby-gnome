@@ -48,7 +48,7 @@ misc_get_padding(VALUE self)
     return rb_ary_new3(2, INT2NUM(xpad), INT2NUM(ypad));
 }
 void 
-Init_gtk_misc()
+Init_gtk_misc(void)
 {
     VALUE gMisc = G_DEF_CLASS(GTK_TYPE_MISC, "Misc", mGtk);
 

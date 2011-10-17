@@ -27,7 +27,7 @@ immulti_append_menuitems(VALUE self, VALUE menushell)
 }
 
 void 
-Init_gtk_im_multicontext()
+Init_gtk_im_multicontext(void)
 {
     VALUE gIMMContext = G_DEF_CLASS(GTK_TYPE_IM_MULTICONTEXT, "IMMulticontext", mGtk);
 

@@ -118,7 +118,7 @@ fsel_fileop_ren_file(VALUE self)
 }
 
 void 
-Init_gtk_file_selection()
+Init_gtk_file_selection(void)
 {
     VALUE gFileSel = G_DEF_CLASS(GTK_TYPE_FILE_SELECTION, "FileSelection", mGtk);
 

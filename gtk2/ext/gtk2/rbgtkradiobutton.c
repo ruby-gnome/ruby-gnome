@@ -69,7 +69,7 @@ rbtn_group(VALUE self)
 }
 
 void 
-Init_gtk_radio_button()
+Init_gtk_radio_button(void)
 {
     gRButton = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);
 

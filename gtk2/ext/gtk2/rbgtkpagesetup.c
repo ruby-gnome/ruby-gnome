@@ -159,7 +159,7 @@ ps_get_page_height(VALUE self, VALUE unit)
 #endif
 
 void
-Init_gtk_page_setup()
+Init_gtk_page_setup(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE gPageSetup = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP, "PageSetup", mGtk);

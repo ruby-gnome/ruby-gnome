@@ -132,7 +132,7 @@ entry_set_cursor_hadjustment(VALUE self, VALUE adjustment)
 #endif
 
 void 
-Init_gtk_entry()
+Init_gtk_entry(void)
 {
     VALUE gEntry = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 

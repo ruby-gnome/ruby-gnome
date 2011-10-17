@@ -111,7 +111,7 @@ gdkrect_to_a(VALUE self)
 }
 
 void
-Init_gtk_gdk_rectangle()
+Init_gtk_gdk_rectangle(void)
 {
     VALUE gdkRectangle = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
 

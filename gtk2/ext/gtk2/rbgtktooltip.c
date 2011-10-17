@@ -57,7 +57,7 @@ tooltip_set_custom(VALUE self, VALUE custom_widget)
 #endif
 
 void 
-Init_gtk_tooltip()
+Init_gtk_tooltip(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gTooltip = G_DEF_CLASS(GTK_TYPE_TOOLTIP, "Tooltip", mGtk);

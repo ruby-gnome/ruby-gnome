@@ -446,7 +446,7 @@ gtk_m_check_version_q(VALUE self, VALUE major, VALUE minor, VALUE micro)
 
 
 void 
-Init_gtk_main()
+Init_gtk_main(void)
 {
     id__quit_callbacks__ = rb_intern("__quit_callbacks__");
     id__timeout_callbacks__ = rb_intern("__timeout_callbacks__");

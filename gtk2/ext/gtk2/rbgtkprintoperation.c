@@ -118,7 +118,7 @@ po_run_page_setup_dialog(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gtk_print_operation()
+Init_gtk_print_operation(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     gPrintOperation = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION, "PrintOperation", mGtk);

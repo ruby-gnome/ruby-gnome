@@ -85,7 +85,7 @@ tmodelsort_iter_is_valid(VALUE self, VALUE iter)
 #endif
 
 void 
-Init_gtk_tmodelsort()
+Init_gtk_tmodelsort(void)
 {
     VALUE gTMSort = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_SORT, "TreeModelSort", mGtk);
 

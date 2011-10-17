@@ -76,7 +76,7 @@ pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
 #endif
 
 void
-Init_gtk_print_unix_dialog()
+Init_gtk_print_unix_dialog(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
     VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,

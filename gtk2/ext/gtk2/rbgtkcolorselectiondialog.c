@@ -28,7 +28,7 @@ cdialog_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_color_selection_dialog()
+Init_gtk_color_selection_dialog(void)
 {
     VALUE gColorSelDialog = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 
                                         "ColorSelectionDialog", mGtk);

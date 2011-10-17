@@ -220,7 +220,7 @@ treeiter_to_string(VALUE self)
 #endif
 
 void 
-Init_gtk_treeiter()
+Init_gtk_treeiter(void)
 {
     VALUE gTreeIter = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
 

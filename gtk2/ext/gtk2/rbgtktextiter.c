@@ -384,7 +384,7 @@ void        gtk_text_iter_order             (GtkTextIter *first,
 */
 
 void
-Init_gtk_textiter()
+Init_gtk_textiter(void)
 {
     VALUE cTextIter = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
     rb_include_module(cTextIter, rb_mComparable);

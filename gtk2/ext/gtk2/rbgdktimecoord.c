@@ -107,7 +107,7 @@ timecoord_set_axes(VALUE self, VALUE rbaxes)
 }
 
 void
-Init_gtk_gdk_timecoord()
+Init_gtk_gdk_timecoord(void)
 {
     VALUE tc = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
 

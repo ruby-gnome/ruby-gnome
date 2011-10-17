@@ -60,7 +60,7 @@ void        gtk_file_chooser_button_set_focus_on_click
 #endif
 
 void 
-Init_gtk_filechooserbutton()
+Init_gtk_filechooserbutton(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE gFCButton = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_BUTTON, "FileChooserButton", mGtk);

@@ -18,7 +18,7 @@
  * constants
  */
 void 
-Init_gtk_const()
+Init_gtk_const(void)
 {
     /*
      * version information

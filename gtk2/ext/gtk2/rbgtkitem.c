@@ -39,7 +39,7 @@ item_toggle(VALUE self)
 }
 
 void 
-Init_gtk_item()
+Init_gtk_item(void)
 {
     VALUE gItem = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
     rb_define_method(gItem, "select", item_select, 0);

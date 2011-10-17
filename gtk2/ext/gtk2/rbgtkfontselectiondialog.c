@@ -76,7 +76,7 @@ fsd_get_apply_button(VALUE self)
 }
 
 void 
-Init_gtk_font_selection_dialog()
+Init_gtk_font_selection_dialog(void)
 {
     VALUE gFontSelectionDialog = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION_DIALOG, 
                                              "FontSelectionDialog", mGtk);

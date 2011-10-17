@@ -126,7 +126,7 @@ gboolean    gtk_entry_completion_get_popup_single_match
 #endif
 
 void 
-Init_gtk_entry_completion()
+Init_gtk_entry_completion(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gEntryC = G_DEF_CLASS(GTK_TYPE_ENTRY_COMPLETION, "EntryCompletion", mGtk);

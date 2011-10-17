@@ -22,7 +22,7 @@ vbbox_initialize(VALUE self)
 }
 
 void 
-Init_gtk_vbutton_box()
+Init_gtk_vbutton_box(void)
 {
     VALUE gVBBox = G_DEF_CLASS(GTK_TYPE_VBUTTON_BOX, "VButtonBox", mGtk);
 

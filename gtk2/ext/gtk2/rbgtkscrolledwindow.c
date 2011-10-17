@@ -127,7 +127,7 @@ GtkShadowType gtk_scrolled_window_get_shadow_type
 
 
 void 
-Init_gtk_scrolled_window()
+Init_gtk_scrolled_window(void)
 {
     VALUE gScrolledWin = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);
 

@@ -175,7 +175,7 @@ device_keys(VALUE self)
 }
 
 void 
-Init_gtk_gdk_device()
+Init_gtk_gdk_device(void)
 {
     VALUE dev = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
 

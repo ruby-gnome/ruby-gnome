@@ -117,7 +117,7 @@ edit_paste_clipboard(VALUE self)
 }
 
 void 
-Init_gtk_editable()
+Init_gtk_editable(void)
 {
     VALUE mEditable = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
 

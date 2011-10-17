@@ -717,7 +717,7 @@ void        gtk_tree_view_set_grid_lines    (GtkTreeView *tree_view,
 */
 
 void 
-Init_gtk_treeview()
+Init_gtk_treeview(void)
 {
     VALUE gTv = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
 

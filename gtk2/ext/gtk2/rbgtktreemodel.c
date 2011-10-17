@@ -208,7 +208,7 @@ signal_rows_reordered_func(guint num, const GValue *values)
 }
 
 void 
-Init_gtk_treemodel()
+Init_gtk_treemodel(void)
 {
     VALUE mTreeModel = G_DEF_INTERFACE(GTK_TYPE_TREE_MODEL, "TreeModel", mGtk);
 

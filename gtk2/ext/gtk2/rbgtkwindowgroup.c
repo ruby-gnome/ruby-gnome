@@ -36,7 +36,7 @@ rbgwingrp_remove_window(VALUE self, VALUE window)
   
 
 void 
-Init_gtk_windowgroup()
+Init_gtk_windowgroup(void)
 {
     VALUE gWindowGroup = G_DEF_CLASS(GTK_TYPE_WINDOW_GROUP, "WindowGroup", mGtk);
     rb_define_method(gWindowGroup, "initialize", rbgwingrp_initialize, 0);

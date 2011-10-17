@@ -978,7 +978,7 @@ gdkwin_move_to_current_desktop(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_window()
+Init_gtk_gdk_window(void)
 {
     GObjectClass *g_class;
     VALUE gdkWindow = G_DEF_CLASS(GDK_TYPE_WINDOW, "Window", mGdk);

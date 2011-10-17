@@ -340,7 +340,7 @@ tstore_move_after(VALUE self, VALUE iter, VALUE position)
 #endif
 
 void
-Init_gtk_tree_store()
+Init_gtk_tree_store(void)
 {
     VALUE ts = G_DEF_CLASS(GTK_TYPE_TREE_STORE, "TreeStore", mGtk);
 

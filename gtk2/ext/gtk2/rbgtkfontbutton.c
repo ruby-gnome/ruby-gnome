@@ -57,7 +57,7 @@ G_CONST_RETURN gchar* gtk_font_button_get_title
 #endif
 
 void 
-Init_gtk_fontbutton()
+Init_gtk_fontbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gFontbutton = G_DEF_CLASS(GTK_TYPE_FONT_BUTTON, "FontButton", mGtk);

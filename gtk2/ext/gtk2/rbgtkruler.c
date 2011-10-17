@@ -54,7 +54,7 @@ ruler_draw_pos(VALUE self)
 }
 
 void 
-Init_gtk_ruler()
+Init_gtk_ruler(void)
 {
     VALUE gRuler = G_DEF_CLASS(GTK_TYPE_RULER, "Ruler", mGtk);
 

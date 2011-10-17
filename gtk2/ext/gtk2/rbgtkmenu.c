@@ -171,7 +171,7 @@ menu_s_get_for_attach_widget(VALUE self, VALUE widget)
 #endif
 
 void 
-Init_gtk_menu()
+Init_gtk_menu(void)
 {
     VALUE gMenu = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 

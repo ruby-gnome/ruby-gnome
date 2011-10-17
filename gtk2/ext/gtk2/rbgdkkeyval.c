@@ -79,7 +79,7 @@ unicode_to_keyval(VALUE self, VALUE wc)
 }
 
 void
-Init_gtk_gdk_keyval()
+Init_gtk_gdk_keyval(void)
 {
     VALUE mGdkKeyval = rb_define_module_under(mGdk, "Keyval");
     rb_define_module_function(mGdkKeyval, "to_name", keyval_to_name, 1);

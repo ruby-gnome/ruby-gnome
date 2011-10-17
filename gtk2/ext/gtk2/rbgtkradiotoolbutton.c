@@ -115,7 +115,7 @@ rbtn_set_group(VALUE self, VALUE rbgroup)
 #endif
 
 void 
-Init_gtk_radiotoolbutton()
+Init_gtk_radiotoolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     gRToolButton = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);

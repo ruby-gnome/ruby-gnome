@@ -115,7 +115,7 @@ gdkselection_send_notify(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_gdk_selection()
+Init_gtk_gdk_selection(void)
 {
     VALUE mGdkSelection = rb_define_module_under(mGdk, "Selection");
 

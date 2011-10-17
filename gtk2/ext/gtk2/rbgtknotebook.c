@@ -406,7 +406,7 @@ void        gtk_notebook_set_tab_vborder    (GtkNotebook *notebook,
 /*****************************************/
 
 void 
-Init_gtk_notebook()
+Init_gtk_notebook(void)
 {
     VALUE gNotebook = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
     G_DEF_CLASS(GTK_TYPE_NOTEBOOK_PAGE, "NotebookPage", mGtk);

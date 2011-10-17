@@ -297,7 +297,7 @@ gboolean    gtk_file_chooser_get_do_overwrite_confirmation
 */
 
 void 
-Init_gtk_file_chooser()
+Init_gtk_file_chooser(void)
 {
 
 #if GTK_CHECK_VERSION(2,4,0)

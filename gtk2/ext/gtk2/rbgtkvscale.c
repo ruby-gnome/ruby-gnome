@@ -35,7 +35,7 @@ vscale_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_vscale()
+Init_gtk_vscale(void)
 {
     VALUE gVScale = G_DEF_CLASS(GTK_TYPE_VSCALE, "VScale", mGtk);
     rb_define_method(gVScale, "initialize", vscale_initialize, -1);

@@ -50,7 +50,7 @@ input_remove(VALUE self, VALUE id)
 
 
 void
-Init_gtk_gdk_input()
+Init_gtk_gdk_input(void)
 {
     VALUE mGdkInput = rb_define_module_under(mGdk, "Input");
 

@@ -59,7 +59,7 @@ psud_get_print_settings(VALUE self)
 #endif
 
 void
-Init_gtk_page_setup_unix_dialog()
+Init_gtk_page_setup_unix_dialog(void)
 {
 #if HAVE_GTK_UNIX_PRINT
     VALUE gPageSetupUnixDialog = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP_UNIX_DIALOG,

@@ -158,7 +158,7 @@ attr_set_override_redirect(VALUE self, VALUE val)
 }
 
 void 
-Init_gtk_gdk_windowattr()
+Init_gtk_gdk_windowattr(void)
 {
     VALUE gWindowAttr = G_DEF_CLASS(GDK_TYPE_WINDOW_ATTR, "WindowAttr", mGdk);
 

@@ -22,7 +22,7 @@ hsep_initialize(VALUE self)
 }
 
 void 
-Init_gtk_hseparator()
+Init_gtk_hseparator(void)
 {
     VALUE gHSeparator = G_DEF_CLASS(GTK_TYPE_HSEPARATOR, "HSeparator", mGtk);
     rb_define_method(gHSeparator, "initialize", hsep_initialize, 0);

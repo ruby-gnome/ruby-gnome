@@ -44,7 +44,7 @@ fchodiag_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_file_chooser_dialog()
+Init_gtk_file_chooser_dialog(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 

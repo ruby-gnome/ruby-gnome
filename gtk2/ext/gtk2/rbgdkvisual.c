@@ -203,7 +203,7 @@ gdkvisual_blue_prec(VALUE self)
 }
 
 void
-Init_gtk_gdk_visual()
+Init_gtk_gdk_visual(void)
 {
     VALUE gdkVisual = G_DEF_CLASS(GDK_TYPE_VISUAL, "Visual", mGdk);
 

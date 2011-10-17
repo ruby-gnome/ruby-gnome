@@ -88,7 +88,7 @@ combo_entry(VALUE self)
 #endif
 
 void 
-Init_gtk_combo()
+Init_gtk_combo(void)
 {
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE gCombo = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);

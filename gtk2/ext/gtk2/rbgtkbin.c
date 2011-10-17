@@ -22,7 +22,7 @@ bin_child(VALUE self)
 }
 
 void 
-Init_gtk_bin()
+Init_gtk_bin(void)
 {
     VALUE gBin = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);
 

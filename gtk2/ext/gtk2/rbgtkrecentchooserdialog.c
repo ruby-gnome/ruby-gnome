@@ -46,7 +46,7 @@ rcd_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_recent_chooser_dialog()
+Init_gtk_recent_chooser_dialog(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
   VALUE rcd = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_DIALOG, "RecentChooserDialog", mGtk);

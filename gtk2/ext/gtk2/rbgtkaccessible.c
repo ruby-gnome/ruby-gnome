@@ -19,7 +19,7 @@ access_connect_widget_destroyed(VALUE self)
 }
 
 void
-Init_gtk_accessible()
+Init_gtk_accessible(void)
 {
     VALUE gAccess = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
 

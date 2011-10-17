@@ -113,7 +113,7 @@ box_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE p
 }
 
 void 
-Init_gtk_box()
+Init_gtk_box(void)
 {
     VALUE gBox = G_DEF_CLASS(GTK_TYPE_BOX, "Box", mGtk);
 

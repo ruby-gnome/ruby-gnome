@@ -142,7 +142,7 @@ rcstyle_set_ythickness(VALUE self, VALUE ythickness)
 }
 
 void 
-Init_gtk_rcstyle()
+Init_gtk_rcstyle(void)
 {
     VALUE gRcStyle = G_DEF_CLASS(GTK_TYPE_RC_STYLE, "RcStyle", mGtk);
     rb_define_method(gRcStyle, "initialize", rcstyle_initialize, 0);

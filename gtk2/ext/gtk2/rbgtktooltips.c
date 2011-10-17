@@ -84,7 +84,7 @@ ttips_s_get_info_from_tip_window(VALUE self, VALUE window)
 #endif
 
 void 
-Init_gtk_tooltips()
+Init_gtk_tooltips(void)
 {
     VALUE gTooltips = G_DEF_CLASS(GTK_TYPE_TOOLTIPS, "Tooltips", mGtk);
 

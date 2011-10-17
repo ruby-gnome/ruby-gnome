@@ -34,7 +34,7 @@ fchowidget_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_file_chooser_widget()
+Init_gtk_file_chooser_widget(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 

@@ -46,7 +46,7 @@ omenu_get_history(VALUE self)
 #endif
 
 void 
-Init_gtk_option_menu()
+Init_gtk_option_menu(void)
 {
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE gOptionMenu = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);

@@ -407,7 +407,7 @@ clipboard_store(VALUE self)
 #endif
 
 void 
-Init_gtk_clipboard()
+Init_gtk_clipboard(void)
 {
     VALUE gClipboard = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 

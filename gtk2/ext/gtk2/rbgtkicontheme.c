@@ -227,7 +227,7 @@ it_list_contexts(VALUE self)
 #endif
 
 void
-Init_gtk_icon_theme()
+Init_gtk_icon_theme(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE it = G_DEF_CLASS(GTK_TYPE_ICON_THEME, "IconTheme", mGtk);

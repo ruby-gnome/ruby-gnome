@@ -672,7 +672,7 @@ ps_to_key_file(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gtk_print_settings()
+Init_gtk_print_settings(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE gPrintSettings;

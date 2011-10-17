@@ -165,7 +165,7 @@ guint       gtk_binding_parse_binding       (GScanner *scanner);
 */
 
 void 
-Init_gtk_bindings()
+Init_gtk_bindings(void)
 {
     VALUE gBinding = G_DEF_CLASS(GTK_TYPE_BINDING_SET, "BindingSet", mGtk);
     rb_define_method(gBinding, "initialize", binding_initialize, 1);

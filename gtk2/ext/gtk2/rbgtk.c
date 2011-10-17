@@ -79,7 +79,7 @@ gtk_m_events_pending(VALUE self)
  * Init
  */
 void 
-Init_gtk_gtk()
+Init_gtk_gtk(void)
 {
     id_call = rb_intern("call");
     id__windows__ = rb_intern("__windows__");

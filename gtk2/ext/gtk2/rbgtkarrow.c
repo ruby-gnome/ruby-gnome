@@ -32,7 +32,7 @@ arrow_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
 }
 
 void 
-Init_gtk_arrow()
+Init_gtk_arrow(void)
 {
     VALUE gArrow = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);
 

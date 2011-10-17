@@ -22,7 +22,7 @@ hb_initialize(VALUE self)
 }
 
 void 
-Init_gtk_handle_box()
+Init_gtk_handle_box(void)
 {
     VALUE gHandleBox = G_DEF_CLASS(GTK_TYPE_HANDLE_BOX, "HandleBox", mGtk);
 

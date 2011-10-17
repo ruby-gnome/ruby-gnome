@@ -137,7 +137,7 @@ ps_s_get_default(VALUE self)
 #endif
 
 void
-Init_gtk_paper_size()
+Init_gtk_paper_size(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE gPaperSize = G_DEF_CLASS(GTK_TYPE_PAPER_SIZE, "PaperSize", mGtk);

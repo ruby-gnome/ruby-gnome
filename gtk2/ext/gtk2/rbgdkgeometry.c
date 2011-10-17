@@ -212,7 +212,7 @@ geo_set_win_gravity(VALUE self, VALUE gravity)
 }
 
 void 
-Init_gtk_gdk_geometry()
+Init_gtk_gdk_geometry(void)
 {
     VALUE gdkGeometry = G_DEF_CLASS(GDK_TYPE_GEOMETRY, "Geometry", mGdk);
 

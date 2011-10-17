@@ -36,7 +36,7 @@ celledit_remove_widget(VALUE self)
 }
 
 void
-Init_gtk_celleditable()
+Init_gtk_celleditable(void)
 {
     VALUE celledit = G_DEF_INTERFACE(GTK_TYPE_CELL_EDITABLE, "CellEditable", mGtk);
 

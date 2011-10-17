@@ -44,7 +44,7 @@ gboolean            gtk_toggle_tool_button_get_active   (GtkToggleToolButton *bu
 #endif
 
 void 
-Init_gtk_toggletoolbutton()
+Init_gtk_toggletoolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gToggleToolButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_TOOL_BUTTON, "ToggleToolButton", mGtk);

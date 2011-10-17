@@ -70,7 +70,7 @@ layout_get_bin_window(VALUE self)
 }
 
 void
-Init_gtk_layout()
+Init_gtk_layout(void)
 {
     VALUE gLayout = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
 

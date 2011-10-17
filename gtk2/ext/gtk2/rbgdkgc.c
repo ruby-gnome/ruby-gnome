@@ -327,7 +327,7 @@ gdkgc_screen(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_gc()
+Init_gtk_gdk_gc(void)
 {
     gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
     gdkDrawable = rb_const_get(mGdk, rb_intern("Drawable"));

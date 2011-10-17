@@ -175,7 +175,7 @@ gaccelgrp_s_from_object(VALUE self, VALUE object)
 }
 
 void 
-Init_gtk_accel_group()
+Init_gtk_accel_group(void)
 {
     VALUE gAccelGroup = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
 

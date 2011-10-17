@@ -153,7 +153,7 @@ gobj_s_binding_set(VALUE self)
 
 
 void 
-Init_gtk_object()
+Init_gtk_object(void)
 {
     VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 

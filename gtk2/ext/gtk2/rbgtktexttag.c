@@ -44,7 +44,7 @@ event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
 }
 
 void
-Init_gtk_texttag()
+Init_gtk_texttag(void)
 {
     VALUE gTextTag = G_DEF_CLASS(GTK_TYPE_TEXT_TAG, "TextTag", mGtk);
     rb_define_method(gTextTag, "initialize", initialize, -1);

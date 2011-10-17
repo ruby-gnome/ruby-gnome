@@ -53,7 +53,7 @@ align_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
 #endif
 
 void 
-Init_gtk_alignment()
+Init_gtk_alignment(void)
 {
     VALUE gAlignment = G_DEF_CLASS(GTK_TYPE_ALIGNMENT, "Alignment", mGtk);
 

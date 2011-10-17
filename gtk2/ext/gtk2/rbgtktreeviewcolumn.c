@@ -252,7 +252,7 @@ tvc_get_tree_view(VALUE self)
 
 
 void
-Init_gtk_treeviewcolumn()
+Init_gtk_treeviewcolumn(void)
 {
     VALUE tvc = G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN, "TreeViewColumn", mGtk);
 

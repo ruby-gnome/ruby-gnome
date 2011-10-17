@@ -59,7 +59,7 @@ gboolean            gtk_text_mark_get_left_gravity      (GtkTextMark *mark);
 */
 
 void 
-Init_gtk_textmark()
+Init_gtk_textmark(void)
 {
     VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
 #if GTK_CHECK_VERSION(2,12,0)

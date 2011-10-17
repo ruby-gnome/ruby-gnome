@@ -35,7 +35,7 @@ hscale_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_hscale()
+Init_gtk_hscale(void)
 {
     VALUE gHScale = G_DEF_CLASS(GTK_TYPE_HSCALE, "HScale", mGtk);
     rb_define_method(gHScale, "initialize", hscale_initialize, -1);

@@ -303,7 +303,7 @@ gdkprop_delete(VALUE self, VALUE win, VALUE property)
 }
 
 void
-Init_gtk_gdk_property()
+Init_gtk_gdk_property(void)
 {
     VALUE gdkProperty = rb_define_module_under(mGdk, "Property");
 

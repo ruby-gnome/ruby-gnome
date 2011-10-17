@@ -28,7 +28,7 @@ hscrollbar_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_hscrollbar()
+Init_gtk_hscrollbar(void)
 {
     VALUE gHScrollbar = G_DEF_CLASS(GTK_TYPE_HSCROLLBAR, "HScrollbar", mGtk);
     rb_define_method(gHScrollbar, "initialize", hscrollbar_initialize, -1);

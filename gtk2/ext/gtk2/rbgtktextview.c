@@ -270,7 +270,7 @@ textview_get_default_attributes(VALUE self)
 }
 
 void
-Init_gtk_textview()
+Init_gtk_textview(void)
 {
     VALUE cTextView = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
 

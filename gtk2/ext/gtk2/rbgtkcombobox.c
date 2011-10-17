@@ -179,7 +179,7 @@ const gchar* gtk_combo_box_get_title        (GtkComboBox *combo_box);
  */
 
 void 
-Init_gtk_combobox()
+Init_gtk_combobox(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gCombobox = G_DEF_CLASS(GTK_TYPE_COMBO_BOX, "ComboBox", mGtk);

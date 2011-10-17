@@ -15,7 +15,7 @@
 #include "global.h"
 
 void 
-Init_gtk_scrollbar()
+Init_gtk_scrollbar(void)
 {
     G_DEF_CLASS(GTK_TYPE_SCROLLBAR, "Scrollbar", mGtk);
 }

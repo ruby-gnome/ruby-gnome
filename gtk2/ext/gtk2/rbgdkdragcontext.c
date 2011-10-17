@@ -255,7 +255,7 @@ gdkdragcontext_drag_drop_succeeded(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_dragcontext()
+Init_gtk_gdk_dragcontext(void)
 {
     VALUE gdkDragContext = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 

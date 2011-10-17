@@ -133,7 +133,7 @@ PangoWrapMode gtk_label_get_line_wrap_mode  (GtkLabel *label);
 */
 
 void 
-Init_gtk_label()
+Init_gtk_label(void)
 {
     VALUE gLabel = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
 

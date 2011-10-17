@@ -95,7 +95,7 @@ gdkatom_eq(VALUE self, VALUE other)
 }
 
 void
-Init_gtk_gdk_atom()
+Init_gtk_gdk_atom(void)
 {
     VALUE none;
     VALUE gdkAtom = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);

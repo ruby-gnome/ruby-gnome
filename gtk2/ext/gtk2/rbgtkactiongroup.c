@@ -441,7 +441,7 @@ action_group_mark(void *p)
 #endif
 
 void 
-Init_gtk_actiongroup()
+Init_gtk_actiongroup(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gActionGroup;

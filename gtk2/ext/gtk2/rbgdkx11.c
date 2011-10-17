@@ -233,7 +233,7 @@ G_CONST_RETURN gchar* gdk_x11_get_xatom_name_for_display
 */
 #endif
 void
-Init_gtk_gdk_x11()
+Init_gtk_gdk_x11(void)
 {
 #ifdef GDK_WINDOWING_X11
     VALUE mX11 = rb_define_module_under(mGdk, "X11");

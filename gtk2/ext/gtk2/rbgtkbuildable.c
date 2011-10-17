@@ -93,7 +93,7 @@ buildable_get_internal_child(VALUE self, VALUE builder, VALUE child_name)
 #endif
 
 void
-Init_gtk_buildable()
+Init_gtk_buildable(void)
 {
 #if GTK_CHECK_VERSION(2, 12, 0)
     VALUE cGtkBuildable;

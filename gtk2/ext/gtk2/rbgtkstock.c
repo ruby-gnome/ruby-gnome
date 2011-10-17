@@ -91,7 +91,7 @@ stock_m_set_translate_func(VALUE klass, VALUE domain)
 #endif
 
 void
-Init_gtk_stock()
+Init_gtk_stock(void)
 {
     VALUE mGtkStock = rb_define_module_under(mGtk, "Stock");
 

@@ -122,7 +122,7 @@ cal_set_display_options(VALUE self, VALUE flags)
 #endif
 
 void 
-Init_gtk_calendar()
+Init_gtk_calendar(void)
 {
     VALUE gCalendar = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);
 

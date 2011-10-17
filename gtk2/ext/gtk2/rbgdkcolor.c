@@ -111,7 +111,7 @@ gdkcolor_to_string(VALUE self, VALUE other)
 #endif
 
 void
-Init_gtk_gdk_color()
+Init_gtk_gdk_color(void)
 {
     rb_cGdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 

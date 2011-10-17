@@ -67,7 +67,7 @@ void                gtk_message_dialog_format_secondary_markup
 */
 
 void 
-Init_gtk_message_dialog()
+Init_gtk_message_dialog(void)
 {
     VALUE gMessageDialog = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
 

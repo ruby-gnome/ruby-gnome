@@ -117,7 +117,7 @@ void        gtk_radio_action_set_current_value
 */
 
 void 
-Init_gtk_radio_action()
+Init_gtk_radio_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gRadioAction = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);

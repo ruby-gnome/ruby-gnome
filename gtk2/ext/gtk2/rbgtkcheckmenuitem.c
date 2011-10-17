@@ -43,7 +43,7 @@ cmitem_toggled(VALUE self)
 }
 
 void 
-Init_gtk_check_menu_item()
+Init_gtk_check_menu_item(void)
 {
     VALUE gCMenuItem = G_DEF_CLASS(GTK_TYPE_CHECK_MENU_ITEM, "CheckMenuItem", mGtk);
 

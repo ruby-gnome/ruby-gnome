@@ -29,7 +29,7 @@ crtext_set_fixed_height_from_font(VALUE self, VALUE number_of_rows)
 }
 
 void
-Init_gtk_cellrenderertext()
+Init_gtk_cellrenderertext(void)
 {
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TEXT, "CellRendererText", mGtk);
     

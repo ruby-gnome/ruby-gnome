@@ -221,7 +221,7 @@ rc_list_filters(VALUE self)
 #endif
 
 void 
-Init_gtk_recent_chooser()
+Init_gtk_recent_chooser(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
   VALUE gRecentChooser = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);

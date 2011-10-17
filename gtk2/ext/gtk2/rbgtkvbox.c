@@ -27,7 +27,7 @@ vbox_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_vbox()
+Init_gtk_vbox(void)
 {
     VALUE gVBox = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
 

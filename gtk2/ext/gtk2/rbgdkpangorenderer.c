@@ -100,7 +100,7 @@ prenderer_set_override_color(VALUE self, VALUE part, VALUE color)
 #endif
 
 void
-Init_gtk_gdk_pangorenderer()
+Init_gtk_gdk_pangorenderer(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE renderer = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);

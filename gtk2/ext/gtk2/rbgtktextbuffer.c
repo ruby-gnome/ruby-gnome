@@ -802,7 +802,7 @@ txt_get_iter_at_mark(VALUE self, VALUE mark)
 
 
 void 
-Init_gtk_textbuffer()
+Init_gtk_textbuffer(void)
 {
     VALUE gTextBuffer = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
 

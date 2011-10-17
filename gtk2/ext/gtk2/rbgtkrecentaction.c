@@ -39,7 +39,7 @@ recentaction_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_recentaction()
+Init_gtk_recentaction(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gRecentaction = G_DEF_CLASS(GTK_TYPE_RECENT_ACTION, "RecentAction", mGtk);

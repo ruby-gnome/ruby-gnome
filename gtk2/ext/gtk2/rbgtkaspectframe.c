@@ -35,7 +35,7 @@ aframe_set(VALUE self, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child
 }
 
 void 
-Init_gtk_aspect_frame()
+Init_gtk_aspect_frame(void)
 {
     VALUE gAspectFrame = G_DEF_CLASS(GTK_TYPE_ASPECT_FRAME, "AspectFrame", mGtk);
 

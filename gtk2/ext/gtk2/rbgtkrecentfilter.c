@@ -140,7 +140,7 @@ rf_filter_filter(VALUE self, VALUE filter_info)
 #endif
 
 void 
-Init_gtk_recent_filter()
+Init_gtk_recent_filter(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE rf = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER, "RecentFilter", mGtk);

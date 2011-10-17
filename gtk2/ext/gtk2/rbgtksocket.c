@@ -55,7 +55,7 @@ socket_get_socket_id(VALUE self)
 #endif /* HAVE_GTK_SOCKET_GET_TYPE */
 
 void 
-Init_gtk_socket()
+Init_gtk_socket(void)
 {
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
     VALUE gSocket = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);

@@ -125,7 +125,7 @@ builder_get_type_from_name(VALUE self, VALUE name)
 #endif
 
 void
-Init_gtk_builder()
+Init_gtk_builder(void)
 {
 #if GTK_CHECK_VERSION(2, 12, 0)
     VALUE gBuilder;

@@ -91,7 +91,7 @@ gboolean    gtk_menu_shell_get_take_focus   (GtkMenuShell *menu_shell);
 */
 
 void 
-Init_gtk_menu_shell()
+Init_gtk_menu_shell(void)
 {
     VALUE gMenuShell = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);
 

@@ -94,7 +94,7 @@ si_get_geometry(VALUE self)
 #endif
 
 void 
-Init_gtk_status_icon()
+Init_gtk_status_icon(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE si = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);

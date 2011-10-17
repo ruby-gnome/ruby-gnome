@@ -46,7 +46,7 @@ imcsimple_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seq
 }
 
 void 
-Init_gtk_imcontext_simple()
+Init_gtk_imcontext_simple(void)
 {
     VALUE gIMContextS = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT_SIMPLE, "IMContextSimple", mGtk);
 

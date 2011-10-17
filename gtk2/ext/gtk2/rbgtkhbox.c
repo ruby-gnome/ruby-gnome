@@ -27,7 +27,7 @@ hbox_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_hbox()
+Init_gtk_hbox(void)
 {
     VALUE gHBox = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
 

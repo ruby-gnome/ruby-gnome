@@ -86,7 +86,7 @@ cairo_available_p(VALUE self)
 }
 
 void
-Init_gtk_gdk_cairo()
+Init_gtk_gdk_cairo(void)
 {
 #if CAIRO_AVAILABLE
     rb_define_method(rb_cCairo_Context, "set_source_gdk_color",

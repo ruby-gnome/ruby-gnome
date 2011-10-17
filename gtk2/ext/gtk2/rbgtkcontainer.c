@@ -724,7 +724,7 @@ cont_mark(void* p)
 /**********************************************************************/
 
 void 
-Init_gtk_container()
+Init_gtk_container(void)
 {
     VALUE gContainer;
 

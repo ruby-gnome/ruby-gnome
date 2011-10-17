@@ -114,7 +114,7 @@ gdkcmap_colors(VALUE self)
 }
 
 void
-Init_gtk_gdk_colormap()
+Init_gtk_gdk_colormap(void)
 {
     VALUE gdkColormap = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
 

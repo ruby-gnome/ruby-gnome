@@ -96,7 +96,7 @@ treesortable_has_default_sort_func(VALUE self)
 }
 
 void
-Init_gtk_treesortable()
+Init_gtk_treesortable(void)
 {
     VALUE mts = G_DEF_INTERFACE(GTK_TYPE_TREE_SORTABLE, "TreeSortable", mGtk);
 

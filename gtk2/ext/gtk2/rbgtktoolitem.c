@@ -139,7 +139,7 @@ toolitem_rebuild_menu(VALUE self)
 #endif
 
 void 
-Init_gtk_toolitem()
+Init_gtk_toolitem(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gToolItem = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);

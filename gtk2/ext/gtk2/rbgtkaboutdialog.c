@@ -175,7 +175,7 @@ aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
 #endif
 
 void 
-Init_gtk_aboutdialog()
+Init_gtk_aboutdialog(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE gAboutDialog = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);

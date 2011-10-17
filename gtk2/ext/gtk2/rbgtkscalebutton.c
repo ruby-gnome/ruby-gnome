@@ -66,7 +66,7 @@ gdouble             gtk_scale_button_get_value          (GtkScaleButton *button)
 #endif
 
 void 
-Init_gtk_scalebutton()
+Init_gtk_scalebutton(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gScaleButton = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);

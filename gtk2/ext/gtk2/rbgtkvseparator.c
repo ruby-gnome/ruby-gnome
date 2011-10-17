@@ -22,7 +22,7 @@ vsep_initialize(VALUE self)
 }
 
 void 
-Init_gtk_vseparator()
+Init_gtk_vseparator(void)
 {
     VALUE gVSeparator = G_DEF_CLASS(GTK_TYPE_VSEPARATOR, "VSeparator", mGtk);
     rb_define_method(gVSeparator, "initialize", vsep_initialize, 0);

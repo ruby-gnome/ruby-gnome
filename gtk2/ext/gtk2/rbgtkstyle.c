@@ -543,7 +543,7 @@ style_set_bg_pixmap(VALUE self, VALUE idx, VALUE bg_pixmap)
 }
 
 void 
-Init_gtk_style()
+Init_gtk_style(void)
 {
     VALUE gStyle = G_DEF_CLASS(GTK_TYPE_STYLE, "Style", mGtk);
 

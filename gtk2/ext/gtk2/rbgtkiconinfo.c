@@ -91,7 +91,7 @@ iconinfo_get_display_name(VALUE self)
 #endif
 
 void 
-Init_gtk_iconinfo()
+Init_gtk_iconinfo(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE ii = G_DEF_CLASS(GTK_TYPE_ICON_INFO, "IconInfo", mGtk);

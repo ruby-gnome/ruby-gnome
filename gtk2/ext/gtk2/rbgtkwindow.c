@@ -589,7 +589,7 @@ mark_toplevels(void* _)
 }
 
 void 
-Init_gtk_window()
+Init_gtk_window(void)
 {
     VALUE gWindow = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);
 

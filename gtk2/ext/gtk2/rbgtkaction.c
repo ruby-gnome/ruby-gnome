@@ -189,7 +189,7 @@ action_mark(void *p)
 #endif
 
 void
-Init_gtk_action()
+Init_gtk_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gAction;

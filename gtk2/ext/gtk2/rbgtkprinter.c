@@ -130,7 +130,7 @@ p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gtk_printer()
+Init_gtk_printer(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
     VALUE gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);

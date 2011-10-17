@@ -175,7 +175,7 @@ rc_get_theme_dir(VALUE self)
 }
 
 void 
-Init_gtk_rc()
+Init_gtk_rc(void)
 {
     VALUE mRC = rb_define_module_under(mGtk, "RC");
 

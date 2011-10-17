@@ -25,7 +25,7 @@ crspin_initialize(VALUE self)
 #endif
 
 void
-Init_gtk_cellrendererspin()
+Init_gtk_cellrendererspin(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_SPIN, "CellRendererSpin", mGtk);

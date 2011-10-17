@@ -22,7 +22,7 @@ vruler_initialize(VALUE self)
 }
 
 void 
-Init_gtk_vruler()
+Init_gtk_vruler(void)
 {
     VALUE gVRuler = G_DEF_CLASS(GTK_TYPE_VRULER, "VRuler", mGtk);
     rb_define_method(gVRuler, "initialize", vruler_initialize, 0);

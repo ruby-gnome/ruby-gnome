@@ -13,7 +13,7 @@
 #include "global.h"
 
 void
-Init_gtk_treedragdest()
+Init_gtk_treedragdest(void)
 {
     G_DEF_INTERFACE(GTK_TYPE_TREE_DRAG_DEST, "TreeDragDest", mGtk);
 }

@@ -383,7 +383,7 @@ gtkdrag_source_add_uri_targets(VALUE self, VALUE widget)
 #endif
 
 void
-Init_gtk_drag()
+Init_gtk_drag(void)
 {
     VALUE mGtkDrag = rb_define_module_under(mGtk, "Drag");
 

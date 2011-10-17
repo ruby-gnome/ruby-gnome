@@ -42,7 +42,7 @@ void        gtk_recent_chooser_menu_set_show_numbers
 #endif
 
 void 
-Init_gtk_recent_chooser_menu()
+Init_gtk_recent_chooser_menu(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
   VALUE rcm = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_MENU, "RecentChooserMenu", mGtk);

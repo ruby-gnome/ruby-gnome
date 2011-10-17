@@ -34,7 +34,7 @@ void        gtk_progress_bar_set_ellipsize  (GtkProgressBar *pbar,
 */
 
 void 
-Init_gtk_progress_bar()
+Init_gtk_progress_bar(void)
 {
     VALUE gProgressBar = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
 

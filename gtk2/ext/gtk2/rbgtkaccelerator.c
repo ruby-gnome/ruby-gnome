@@ -55,7 +55,7 @@ accel_get_default_mod_mask(VALUE self)
 }
 
 void
-Init_gtk_accelerator()
+Init_gtk_accelerator(void)
 {
     VALUE mGtkAccel = rb_define_module_under(mGtk, "Accelerator");
 

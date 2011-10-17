@@ -125,7 +125,7 @@ rm_purge_items(VALUE self)
 #endif
 
 void 
-Init_gtk_recent_manager()
+Init_gtk_recent_manager(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE rm = G_DEF_CLASS(GTK_TYPE_RECENT_MANAGER, "RecentManager", mGtk);

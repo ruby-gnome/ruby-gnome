@@ -34,7 +34,7 @@ textchild_get_deleted(VALUE self)
 }
 
 void
-Init_gtk_textchild()
+Init_gtk_textchild(void)
 {
     VALUE gTextChildAnchor = G_DEF_CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR, "TextChildAnchor", mGtk);
 

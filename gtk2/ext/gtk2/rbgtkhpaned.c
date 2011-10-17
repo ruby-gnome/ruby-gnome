@@ -22,7 +22,7 @@ hpaned_initialize(VALUE self)
 }
 
 void 
-Init_gtk_hpaned()
+Init_gtk_hpaned(void)
 {
     VALUE gHPaned = G_DEF_CLASS(GTK_TYPE_HPANED, "HPaned", mGtk);
 

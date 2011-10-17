@@ -131,7 +131,7 @@ alloc_to_rect(VALUE self)
 }
 
 void 
-Init_gtk_allocation()
+Init_gtk_allocation(void)
 {
     VALUE galloc;
 

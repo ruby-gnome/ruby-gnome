@@ -144,7 +144,7 @@ treerowref_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VA
 }
 
 void 
-Init_gtk_treerowreference()
+Init_gtk_treerowreference(void)
 {
     VALUE gTreeref = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   

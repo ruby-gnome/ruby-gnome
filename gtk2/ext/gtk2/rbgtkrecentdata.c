@@ -111,8 +111,8 @@ rd_set_is_private(VALUE self, VALUE is_private)
 
 #endif
 
-void 
-Init_gtk_recent_data() 
+void
+Init_gtk_recent_data(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE rd = G_DEF_CLASS(GTK_TYPE_RECENT_DATA, "RecentData", mGtk);

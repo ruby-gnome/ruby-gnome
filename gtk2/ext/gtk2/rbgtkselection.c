@@ -149,7 +149,7 @@ targets_include_rich_text(VALUE self, VALUE rbtargets, VALUE rbbuffer)
 #endif
 
 void
-Init_gtk_selection()
+Init_gtk_selection(void)
 {
     VALUE mSelection =  rb_define_module_under(mGtk, "Selection");
 

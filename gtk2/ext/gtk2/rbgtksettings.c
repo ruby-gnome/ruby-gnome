@@ -199,7 +199,7 @@ void        gtk_settings_set_double_property
 
 
 void 
-Init_gtk_settings()
+Init_gtk_settings(void)
 {
     VALUE gSettings = G_DEF_CLASS(GTK_TYPE_SETTINGS, "Settings", mGtk);
 

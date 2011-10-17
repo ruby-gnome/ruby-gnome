@@ -15,7 +15,6 @@ glib2/ext/glib2/glib-enum-types.c
 glib2/ext/glib2/glib-enum-types.h
 glib2/ext/glib2/ruby-glib2.pc
 gtk2/ext/gtk2/rbgdkkeysyms.h
-gtk2/ext/gtk2/rbgtkinits.c
 gtk2/ext/gtk2/ruby-gtk2.pc
 pango/ext/pango/rbpangoversion.h
 pango/ext/pango/ruby-pango.pc

@@ -21,7 +21,7 @@ crtoggle_initialize(VALUE self)
 }
 
 void
-Init_gtk_cellrenderertoggle()
+Init_gtk_cellrenderertoggle(void)
 {
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TOGGLE, "CellRendererToggle", mGtk);
     rb_define_method(renderer, "initialize", crtoggle_initialize, 0);

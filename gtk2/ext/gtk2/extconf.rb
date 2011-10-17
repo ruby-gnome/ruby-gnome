@@ -102,101 +102,6 @@ end
 
 create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome2_version)
 
-class InitCreator
-  def initialize(output)
-    @output = output
-    @targets = []
-  end
-
-  def <<(target)
-    @targets << target
-  end
-
-  def run
-    inits = Hash.new
-
-    except_targets = ["Init_gtk2()", "Init_gtk_gdk()", "Init_gtk_gtk()"]
-    @targets.each do |target|
-      target.each_line do |line|
-        if /^(Init_.*\((?:void)?\))(.*)/ =~ line
-          init = $1
-          unless except_targets.include?(init)
-            flag = $2
-            if flag.size > 0
-              if flag =~ /\/\*\s*(\w*)\s*\*\//
-                inits[$1] = Array.new unless inits[$1]
-                inits[$1] << init
-              end
-            else
-              inits[""] = Array.new unless inits[""]
-              inits[""] << init
-            end
-          end
-        end
-      end
-    end
-
-    inits[""] = inits[""].sort_by do |value|
-      if value == "Init_gtk_gdk_draw()"
-        inits[""].size * 2
-      elsif value == "Init_gtk_gdk_gc()"
-        -inits[""].size
-      else
-        inits[""].index(value)
-      end
-    end
-
-    print_data(inits, "", nil, true)
-    print_data(inits, "GTK_DISABLE_DEPRECATED", "ifndef", true)
-    print_data(inits, "GTK_ENABLE_BROKEN", "ifdef", true)
-
-    print "void Init_gtk_inits(void)\n"
-    print "{\n"
-    print_data(inits, "", nil)
-    print_data(inits, "GTK_DISABLE_DEPRECATED", "ifndef")
-    print_data(inits, "GTK_ENABLE_BROKEN", "ifdef")
-    print "}\n"
-  end
-
-  def print_data(array, type, defs, extern = false)
-    if array[type]
-      dependencies = {
-        "Init_gtk_gdk_gc()" => ["Init_gtk_gdk_draw()"],
-      }
-      extern_def = "extern void" if extern
-      print "##{defs} #{type}\n" if defs
-      sorted_array = array[type].dup
-      dependencies.each do |key, values|
-        next unless sorted_array.include?(key)
-        sorted_array.delete(key)
-        value_indexes = values.collect do |value|
-          sorted_array.index(value)
-        end
-        max_value_index = value_indexes.compact.max
-        sorted_array[max_value_index + 1, 0] = key
-      end
-      sorted_array.each do |val|
-        print "#{extern_def}   #{val};\n"
-      end
-      print "#endif\n" if defs
-    end
-  end
-
-  def print(*args)
-    @output.print(*args)
-  end
-end
-
-rbgtkinits_c_path = Pathname("rbgtkinits.c")
-rbgtkinits_c_path.open("w") do |rbgtkinits_c|
-  init_creator = InitCreator.new(rbgtkinits_c)
-  source_dir.each_entry do |entry|
-    next unless entry.extname == ".c"
-    init_creator << (source_dir + entry)
-  end
-  init_creator.run
-end
-
 rbgdkkeysyms_h_path = Pathname("rbgdkkeysyms.h")
 gdkkeysyms_h_paths = []
 gdkkeysyms_h_paths << gdk_include_path + "gdkkeysyms.h"
@@ -214,7 +119,6 @@ rbgdkkeysyms_h_path.open("w") do |rbgdkkeysyms_h|
 end
 
 add_distcleanfile("rbgdkkeysyms.h")
-add_distcleanfile("rbgtkinits.c")
 
 ensure_objs
 

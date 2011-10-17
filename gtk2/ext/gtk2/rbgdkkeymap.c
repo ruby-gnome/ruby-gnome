@@ -121,7 +121,7 @@ gdkkeymap_have_bidi_layouts(VALUE self)
 #endif
 
 void 
-Init_gtk_gdk_keymap()
+Init_gtk_gdk_keymap(void)
 {
     VALUE gdkKeymap = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
 

@@ -102,7 +102,7 @@ imcontext_delete_surrounding(VALUE self, VALUE offset, VALUE n_chars)
 }
 
 void 
-Init_gtk_imcontext()
+Init_gtk_imcontext(void)
 {
     VALUE gIMContext = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT, "IMContext", mGtk);
 

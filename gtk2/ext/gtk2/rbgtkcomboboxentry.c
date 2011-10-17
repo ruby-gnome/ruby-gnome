@@ -48,7 +48,7 @@ gint        gtk_combo_box_entry_get_text_column
 #endif
 
 void 
-Init_gtk_comboboxentry()
+Init_gtk_comboboxentry(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gComboboxentry = G_DEF_CLASS(GTK_TYPE_COMBO_BOX_ENTRY, "ComboBoxEntry", mGtk);

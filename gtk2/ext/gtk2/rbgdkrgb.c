@@ -166,7 +166,7 @@ rgb_set_verbose(VALUE self, VALUE verbose)
 }
 
 void
-Init_gtk_gdk_rgb()
+Init_gtk_gdk_rgb(void)
 {
     VALUE mGdkRgb = rb_define_module_under(mGdk, "RGB");
 

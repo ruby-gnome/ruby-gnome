@@ -33,7 +33,7 @@ alabel_refetch(VALUE self)
 }
 
 void
-Init_gtk_accel_label()
+Init_gtk_accel_label(void)
 {
   VALUE gAccelLabel = G_DEF_CLASS(GTK_TYPE_ACCEL_LABEL, "AccelLabel", mGtk);
 

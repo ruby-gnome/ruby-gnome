@@ -209,7 +209,7 @@ dialog_get_response_for_widget(VALUE self, VALUE widget)
 #endif
 
 void 
-Init_gtk_dialog()
+Init_gtk_dialog(void)
 {
     VALUE gDialog = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
 

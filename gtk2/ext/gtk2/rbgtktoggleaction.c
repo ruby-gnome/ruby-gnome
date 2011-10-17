@@ -48,7 +48,7 @@ gboolean            gtk_toggle_action_get_active        (GtkToggleAction *action
 #endif
 
 void 
-Init_gtk_toggle_action()
+Init_gtk_toggle_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 

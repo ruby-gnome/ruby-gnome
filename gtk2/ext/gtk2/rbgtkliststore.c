@@ -389,7 +389,7 @@ lstore_move_after(VALUE self, VALUE iter, VALUE position)
 #endif
 
 void
-Init_gtk_list_store()
+Init_gtk_list_store(void)
 {
     VALUE ls = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
 

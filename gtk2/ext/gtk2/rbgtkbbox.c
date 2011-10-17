@@ -32,7 +32,7 @@ bbox_get_child_secondary(VALUE self, VALUE child)
 #endif
 
 void 
-Init_gtk_button_box()
+Init_gtk_button_box(void)
 {
     VALUE gBBox = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
     rb_define_method(gBBox, "set_child_secondary", bbox_set_child_secondary, 2);

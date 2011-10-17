@@ -25,7 +25,7 @@ vport_initialize(VALUE self, VALUE hadj, VALUE vadj)
 }
 
 void 
-Init_gtk_viewport()
+Init_gtk_viewport(void)
 {
     VALUE gViewport = G_DEF_CLASS(GTK_TYPE_VIEWPORT, "Viewport", mGtk);
     rb_define_method(gViewport, "initialize", vport_initialize, 2);

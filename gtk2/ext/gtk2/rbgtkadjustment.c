@@ -74,7 +74,7 @@ void                gtk_adjustment_set_upper            (GtkAdjustment *adjustme
 */
 
 void 
-Init_gtk_adjustment()
+Init_gtk_adjustment(void)
 {
     VALUE gAdjustment = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);
 

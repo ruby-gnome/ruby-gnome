@@ -25,7 +25,7 @@ craccel_initialize(VALUE self)
 #endif
 
 void
-Init_gtk_cellrendereraccel()
+Init_gtk_cellrendereraccel(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_ACCEL, "CellRendererAccel", mGtk);

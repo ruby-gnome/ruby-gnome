@@ -75,7 +75,7 @@ range_set_value(VALUE self, VALUE value)
 }
 
 void 
-Init_gtk_range()
+Init_gtk_range(void)
 {
   VALUE gRange = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
 

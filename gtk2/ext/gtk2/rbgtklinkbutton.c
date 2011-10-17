@@ -48,7 +48,7 @@ lb_set_uri_hook(VALUE self)
 #endif 
 
 void 
-Init_gtk_link_button()
+Init_gtk_link_button(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE button = G_DEF_CLASS(GTK_TYPE_LINK_BUTTON, "LinkButton", mGtk);

@@ -67,7 +67,7 @@ plug_get_id(VALUE self)
 #endif /* HAVE_GTK_PLUG_GET_TYPE */
 
 void 
-Init_gtk_plug()
+Init_gtk_plug(void)
 {
 #ifdef HAVE_GTK_PLUG_GET_TYPE
     VALUE gPlug = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);

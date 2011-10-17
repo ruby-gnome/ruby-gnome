@@ -51,7 +51,7 @@ rbgdk_threads_synchronize(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_threads()
+Init_gtk_gdk_threads(void)
 {
 #ifdef   G_THREADS_ENABLED
     VALUE mGdkThreads = rb_define_module_under(mGdk, "Threads");

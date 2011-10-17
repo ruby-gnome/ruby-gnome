@@ -149,7 +149,7 @@ rf_set_age(VALUE self, VALUE age)
 #endif
 
 void 
-Init_gtk_recent_filter_info()
+Init_gtk_recent_filter_info(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE rf = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);

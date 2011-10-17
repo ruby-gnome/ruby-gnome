@@ -34,7 +34,7 @@ gamma_curve(VALUE self)
 }
 
 void 
-Init_gtk_gamma_curve()
+Init_gtk_gamma_curve(void)
 {
     VALUE gGamma = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
 

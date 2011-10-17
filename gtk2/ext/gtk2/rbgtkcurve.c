@@ -77,7 +77,7 @@ curve_get_vector(VALUE self, VALUE length)
 }
 
 void 
-Init_gtk_curve()
+Init_gtk_curve(void)
 {
     VALUE gCurve = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
 

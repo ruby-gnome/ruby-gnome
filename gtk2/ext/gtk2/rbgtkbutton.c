@@ -115,7 +115,7 @@ GtkPositionType gtk_button_get_image_position
 */
 
 void 
-Init_gtk_button()
+Init_gtk_button(void)
 {
     VALUE gButton = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
 

@@ -126,7 +126,7 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
 }
 
 void 
-Init_gtk_radio_menu_item()
+Init_gtk_radio_menu_item(void)
 {
     VALUE gRMenuItem = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
 

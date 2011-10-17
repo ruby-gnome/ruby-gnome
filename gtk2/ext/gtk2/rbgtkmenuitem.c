@@ -106,7 +106,7 @@ mitem_toggle_size_allocate(VALUE self, VALUE allocation)
 }
 
 void 
-Init_gtk_menu_item()
+Init_gtk_menu_item(void)
 {
     VALUE gMenuItem = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
 

@@ -104,7 +104,7 @@ ffil_filter(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display
 #endif
 
 void 
-Init_gtk_file_filter()
+Init_gtk_file_filter(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 

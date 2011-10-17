@@ -23,7 +23,7 @@ crcombo_initialize(VALUE self)
 #endif
 
 void
-Init_gtk_cellrenderercombo()
+Init_gtk_cellrenderercombo(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_COMBO, "CellRendererCombo", mGtk);

@@ -156,7 +156,7 @@ treepath_is_descendant(VALUE self, VALUE ancestor)
 }
 
 void 
-Init_gtk_treepath()
+Init_gtk_treepath(void)
 {
     VALUE gTreepath = G_DEF_CLASS(GTK_TYPE_TREE_PATH, "TreePath", mGtk);
 

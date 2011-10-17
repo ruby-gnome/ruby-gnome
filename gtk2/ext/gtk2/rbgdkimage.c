@@ -114,7 +114,7 @@ gdkimage_bpl(VALUE self)
 }
 
 void 
-Init_gtk_gdk_image()
+Init_gtk_gdk_image(void)
 {
     VALUE gdkImage = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 

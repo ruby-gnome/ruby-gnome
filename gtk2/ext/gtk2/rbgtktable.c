@@ -139,7 +139,7 @@ tbl_get_default_col_spacing(VALUE self)
 }
 
 void 
-Init_gtk_table()
+Init_gtk_table(void)
 {
     VALUE gTable = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
 

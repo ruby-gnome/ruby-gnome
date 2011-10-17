@@ -372,7 +372,7 @@ gdkscreen_get_screen_number(VALUE self)
 #endif
 
 void 
-Init_gtk_gdk_screen()
+Init_gtk_gdk_screen(void)
 {
 #if GTK_CHECK_VERSION(2,2,0)
     VALUE gdkScreen = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);

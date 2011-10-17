@@ -28,7 +28,7 @@ vscrollbar_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_vscrollbar()
+Init_gtk_vscrollbar(void)
 {
     VALUE gVScrollbar = G_DEF_CLASS(GTK_TYPE_VSCROLLBAR, "VScrollbar", mGtk);
     rb_define_method(gVScrollbar, "initialize", vscrollbar_initialize, -1);

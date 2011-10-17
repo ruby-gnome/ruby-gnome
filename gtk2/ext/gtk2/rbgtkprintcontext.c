@@ -90,7 +90,7 @@ pc_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
 #endif
 
 void
-Init_gtk_print_context()
+Init_gtk_print_context(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE gPrintContext = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,

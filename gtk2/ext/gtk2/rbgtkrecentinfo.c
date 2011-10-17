@@ -180,7 +180,7 @@ ri_match(VALUE self, VALUE other)
 #endif
 
 void 
-Init_gtk_recent_info()
+Init_gtk_recent_info(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE ri = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);

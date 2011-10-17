@@ -34,7 +34,7 @@ GtkPackDirection gtk_menu_bar_get_child_pack_direction
 */
 
 void 
-Init_gtk_menu_bar()
+Init_gtk_menu_bar(void)
 {
     VALUE gMenuBar = G_DEF_CLASS(GTK_TYPE_MENU_BAR, "MenuBar", mGtk);
     rb_define_method(gMenuBar, "initialize", mbar_initialize, 0);

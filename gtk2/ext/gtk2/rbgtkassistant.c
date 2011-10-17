@@ -177,7 +177,7 @@ ass_commit(VALUE self)
 #endif
 
 void
-Init_gtk_assistant()
+Init_gtk_assistant(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE ass = G_DEF_CLASS(GTK_TYPE_ASSISTANT, "Assistant", mGtk);

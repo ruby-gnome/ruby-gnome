@@ -65,7 +65,7 @@ tbtn_toggled(VALUE self)
 
 
 void 
-Init_gtk_toggle_button()
+Init_gtk_toggle_button(void)
 {
     VALUE gTButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);
 

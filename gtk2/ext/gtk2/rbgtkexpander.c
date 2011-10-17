@@ -55,7 +55,7 @@ GtkWidget*  gtk_expander_get_label_widget   (GtkExpander *expander);
 #endif
 
 void 
-Init_gtk_expander()
+Init_gtk_expander(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gExpander = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);

@@ -36,7 +36,7 @@ spinner_stop(VALUE self)
 #endif
 
 void 
-Init_gtk_spinner()
+Init_gtk_spinner(void)
 {
 #if GTK_CHECK_VERSION(2,20,0)
     VALUE gSpinner = G_DEF_CLASS(GTK_TYPE_SPINNER, "Spinner", mGtk);

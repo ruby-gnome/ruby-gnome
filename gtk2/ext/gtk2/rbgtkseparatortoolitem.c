@@ -30,7 +30,7 @@ gboolean    gtk_separator_tool_item_get_draw
 #endif
 
 void 
-Init_gtk_separatortoolitem()
+Init_gtk_separatortoolitem(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE st = G_DEF_CLASS(GTK_TYPE_SEPARATOR_TOOL_ITEM, "SeparatorToolItem", mGtk);

@@ -103,7 +103,7 @@ sbtn_get_range(VALUE self)
 }
 
 void 
-Init_gtk_spin_button()
+Init_gtk_spin_button(void)
 {
     VALUE gSButton = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);
 

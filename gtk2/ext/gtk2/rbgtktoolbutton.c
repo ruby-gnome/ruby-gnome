@@ -62,7 +62,7 @@ GtkWidget*  gtk_tool_button_get_label_widget
 #endif
 
 void 
-Init_gtk_toolbutton()
+Init_gtk_toolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE gToolbutton = G_DEF_CLASS(GTK_TYPE_TOOL_BUTTON, "ToolButton", mGtk);

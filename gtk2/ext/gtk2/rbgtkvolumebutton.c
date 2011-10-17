@@ -26,7 +26,7 @@ volumebutton_initialize(VALUE self)
 #endif
 
 void 
-Init_gtk_volumebutton()
+Init_gtk_volumebutton(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE gVolumeButton = G_DEF_CLASS(GTK_TYPE_VOLUME_BUTTON, "VolumeButton", mGtk);

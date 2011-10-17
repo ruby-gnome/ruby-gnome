@@ -182,7 +182,7 @@ void        (*GtkColorSelectionChangePaletteWithScreenFunc)
 */
 
 void 
-Init_gtk_color_selection()
+Init_gtk_color_selection(void)
 {
     gColorSel = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
 

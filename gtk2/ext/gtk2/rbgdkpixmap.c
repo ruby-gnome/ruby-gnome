@@ -208,7 +208,7 @@ gdkpmap_lookup(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_gdk_pixmap()
+Init_gtk_gdk_pixmap(void)
 {
     VALUE gdkPixmap = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
 

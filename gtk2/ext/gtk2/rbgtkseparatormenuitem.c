@@ -19,7 +19,7 @@ smitem_initialize(VALUE self)
 }
 
 void 
-Init_gtk_separator_menu_item()
+Init_gtk_separator_menu_item(void)
 {
     VALUE gSMenuItem = G_DEF_CLASS(GTK_TYPE_SEPARATOR_MENU_ITEM, "SeparatorMenuItem", mGtk);
 

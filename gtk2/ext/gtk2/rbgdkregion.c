@@ -249,7 +249,7 @@ gdkregion_xor(VALUE self, VALUE region)
 
 
 void
-Init_gtk_gdk_region()
+Init_gtk_gdk_region(void)
 {
     VALUE gdkRegion = G_DEF_CLASS(GDK_TYPE_REGION, "Region", mGdk);
 

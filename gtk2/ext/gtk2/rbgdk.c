@@ -448,7 +448,7 @@ gdk_m_target(VALUE self)
 }
 
 void
-Init_gtk_gdk()
+Init_gtk_gdk(void)
 {
     mGdk = rb_define_module("Gdk");
 

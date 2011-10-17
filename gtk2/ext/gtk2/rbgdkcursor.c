@@ -89,7 +89,7 @@ gdkcursor_get_image(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_cursor()
+Init_gtk_gdk_cursor(void)
 {
     VALUE gdkCursor = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 

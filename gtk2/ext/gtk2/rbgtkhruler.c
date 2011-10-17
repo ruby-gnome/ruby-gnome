@@ -22,7 +22,7 @@ hruler_initialize(VALUE self)
 }
 
 void 
-Init_gtk_hruler()
+Init_gtk_hruler(void)
 {
     VALUE gHRuler = G_DEF_CLASS(GTK_TYPE_HRULER, "HRuler", mGtk);
 
