@@ -70,8 +70,8 @@ txt_tt_get_size(VALUE self)
     return INT2NUM(gtk_text_tag_table_get_size(_SELF(self)));
 }
 
-void 
-Init_txt_tt()
+void
+Init_gtk_text_tag_table()
 {
     VALUE gTextTagTable = G_DEF_CLASS(GTK_TYPE_TEXT_TAG_TABLE, "TextTagTable", mGtk);
 

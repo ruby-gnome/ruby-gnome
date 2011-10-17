@@ -51,7 +51,7 @@ sizegrp_get_widgets(VALUE self)
 #endif
 
 void
-Init_sizegrp()
+Init_gtk_size_group(void)
 {
     VALUE gSizeGroup = G_DEF_CLASS(GTK_TYPE_SIZE_GROUP, "SizeGroup", mGtk);
 

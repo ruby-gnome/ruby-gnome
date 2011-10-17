@@ -115,7 +115,7 @@ accel_map_unlock_path(VALUE self, VALUE accel_path)
 #endif
 
 void
-Init_accel_map()
+Init_gtk_accel_map(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE mAccelMap = G_DEF_CLASS(GTK_TYPE_ACCEL_MAP, "AccelMap", mGtk);

@@ -131,7 +131,7 @@ icon_source_set_state_wildcarded(VALUE self, VALUE setting)
 }
 
 void
-Init_icon_source()
+Init_gtk_icon_source(void)
 {
     VALUE gIconSource = G_DEF_CLASS(GTK_TYPE_ICON_SOURCE, "IconSource", mGtk);
 

@@ -67,7 +67,7 @@ icon_set_render_icon(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_icon_set()
+Init_gtk_icon_set(void)
 {
     VALUE gIconSet = G_DEF_CLASS(GTK_TYPE_ICON_SET, "IconSet", mGtk);
 

@@ -65,7 +65,7 @@ icon_size_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 }
 
 void
-Init_icon_size()
+Init_gtk_icon_size(void)
 {
     VALUE mIconSize = rb_define_module_under(mGtk, "IconSize");
 

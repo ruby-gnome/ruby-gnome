@@ -156,7 +156,7 @@ txt_attr_copy_values(VALUE self, VALUE dest)
 }
 
 void
-Init_txt_attr()
+Init_gtk_text_attributes(void)
 {
     VALUE gTextAttributes = G_DEF_CLASS(GTK_TYPE_TEXT_ATTRIBUTES, "TextAttributes", mGtk);
   

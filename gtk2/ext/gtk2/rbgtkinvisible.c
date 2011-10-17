@@ -39,7 +39,7 @@ GdkScreen *         gtk_invisible_get_screen            (GtkInvisible *invisible
 */
 
 void
-Init_invisible()
+Init_gtk_invisible(void)
 {
     VALUE gInvisible = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
 

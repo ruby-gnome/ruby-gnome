@@ -23,7 +23,7 @@ agentry_copy(const GtkAccelGroupEntry *agentry)
 }
 
 GType
-gtk_accel_group_entry_get_type()
+gtk_accel_group_entry_get_type(void)
 {
     static GType our_type = 0;
     if(our_type == 0)
@@ -69,7 +69,7 @@ agentry_get_accel_path(VALUE self)
 }
 
 void
-Init_agentry()
+Init_gtk_accel_group_entry(void)
 {
     VALUE gAccelGroupEntry = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP_ENTRY, "AccelGroupEntry", mGtk);
 

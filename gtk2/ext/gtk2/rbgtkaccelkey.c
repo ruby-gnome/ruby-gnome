@@ -24,7 +24,7 @@ accel_key_copy(const GtkAccelKey *key)
 }
 
 GType
-gtk_accel_key_get_type()
+gtk_accel_key_get_type(void)
 {
     static GType our_type = 0;
     if(our_type == 0)
@@ -91,7 +91,7 @@ accel_key_set_flags(VALUE self, VALUE flags)
 }
 
 void
-Init_accel_key()
+Init_gtk_accel_key(void)
 {
     VALUE gAccelKey = G_DEF_CLASS(GTK_TYPE_ACCEL_KEY, "AccelKey", mGtk);
 

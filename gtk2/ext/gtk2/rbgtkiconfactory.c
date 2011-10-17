@@ -60,7 +60,7 @@ ifactory_remove_default(VALUE self)
 }
 
 void
-Init_icon_factory()
+Init_gtk_icon_factory(void)
 {
     VALUE gIconFactory = G_DEF_CLASS(GTK_TYPE_ICON_FACTORY, "IconFactory", mGtk);
 

@@ -137,7 +137,7 @@ txt_app_initialize(VALUE self)
 
 
 void
-Init_txt_appearance()
+Init_gtk_text_appearance(void)
 {
     VALUE gTextApp = G_DEF_CLASS(GTK_TYPE_TEXT_APPEARANCE, "TextAppearance", mGtk);
 
