@@ -13,7 +13,7 @@
 **********************************************************************/
 
 #include <glib/gtypes.h>
-#include "rbglib.h"
+#include "rbgprivate.h"
 
 static ID id_and;
 static ID id_rshift;
