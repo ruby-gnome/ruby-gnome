@@ -40,7 +40,7 @@ pango_analysis_get_type(void)
 static VALUE
 ana_initialize(VALUE self)
 {
-    PangoAnalysis ana = { NULL, NULL, NULL, 0 };
+    PangoAnalysis ana = { NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL };
     G_INITIALIZE(self, &ana);
     return Qnil;
 }
