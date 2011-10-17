@@ -130,7 +130,7 @@ rbgobj_init_interface(VALUE interf)
 }
 
 void
-Init_gobject_typeinterface()
+Init_gobject_typeinterface(void)
 {
     mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
     rb_define_method(mMetaInterface, "gtype", generic_s_gtype, 0);

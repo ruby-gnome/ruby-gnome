@@ -282,7 +282,7 @@ rbglib_m_check_version(VALUE self, VALUE major, VALUE minor, VALUE micro)
 }
 
 void
-Init_glib_utils()
+Init_glib_utils(void)
 {
     /* glib/gutils.h */
 #if GLIB_CHECK_VERSION(2, 14, 0)

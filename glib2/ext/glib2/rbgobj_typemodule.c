@@ -52,7 +52,7 @@ void     g_type_module_add_interface (GTypeModule           *module,
 #endif
 
 void
-Init_gobject_gtypemodule()
+Init_gobject_gtypemodule(void)
 {
     VALUE cTypeModule = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
     rb_define_method(cTypeModule, "use", use, 0);

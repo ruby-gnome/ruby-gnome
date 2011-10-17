@@ -24,7 +24,7 @@ rbglib_m_language_names(VALUE self)
 #endif
 
 void
-Init_glib_i18n()
+Init_glib_i18n(void)
 {
     /* glib/gi18n.h */
 #if GLIB_CHECK_VERSION(2,6,0)

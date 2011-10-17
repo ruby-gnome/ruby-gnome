@@ -649,7 +649,7 @@ keyfile_remove_comment(VALUE self, VALUE group_name, VALUE key)
 #endif
 
 void
-Init_glib_keyfile()
+Init_glib_keyfile(void)
 {
 #if GLIB_CHECK_VERSION(2,6,0)
     VALUE kf = G_DEF_CLASS(G_TYPE_KEY_FILE, "KeyFile", mGLib);   

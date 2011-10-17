@@ -98,7 +98,7 @@ ptr_hash(VALUE self)
 #endif
 
 static void
-Init_gtype_pointer()
+Init_gtype_pointer(void)
 {
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", mGLib);
     rb_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 1);
@@ -205,7 +205,7 @@ value_transform_any_ruby(const GValue *src_value,
 }
 
 GType
-rbgobj_ruby_value_get_type()
+rbgobj_ruby_value_get_type(void)
 {
   static GType our_type = 0;
 
@@ -267,7 +267,7 @@ ruby_value_r2g(VALUE from, GValue* to)
 }
 
 static void
-Init_boxed_ruby_value()
+Init_boxed_ruby_value(void)
 {
     boxed_ruby_value_table = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL, g_free);
 
@@ -284,7 +284,7 @@ Init_boxed_ruby_value()
 /**********************************************************************/
 
 void
-Init_gobject_gvaluetypes()
+Init_gobject_gvaluetypes(void)
 {
     Init_gtype_pointer();
     Init_boxed_ruby_value();

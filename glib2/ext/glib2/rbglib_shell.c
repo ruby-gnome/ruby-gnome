@@ -42,7 +42,7 @@ shell_unquote(VALUE self, VALUE quoted_string)
 }
 
 void
-Init_glib_shell()
+Init_glib_shell(void)
 {
     VALUE mShell = rb_define_module_under(mGLib, "Shell");
     VALUE cShellError = G_DEF_ERROR2(G_SHELL_ERROR, "ShellError", mGLib, rb_eRuntimeError);

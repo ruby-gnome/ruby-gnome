@@ -798,7 +798,7 @@ type_register(int argc, VALUE* argv, VALUE self)
 }
 
 static void
-Init_gobject_subclass()
+Init_gobject_subclass(void)
 {
     VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
     rb_define_singleton_method(cGObject, "type_register", type_register, -1);
@@ -810,7 +810,7 @@ Init_gobject_subclass()
 /**********************************************************************/
 
 void 
-Init_gobject_gobject()
+Init_gobject_gobject(void)
 {
     VALUE cGObject;
 

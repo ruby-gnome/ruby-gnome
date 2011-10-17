@@ -28,7 +28,7 @@ strv_from_ruby(VALUE from, GValue *to)
 }
 
 void
-Init_gobject_gstrv()
+Init_gobject_gstrv(void)
 {
     /* GStrv is treated as Array */
     rbgobj_register_g2r_func(G_TYPE_STRV, strv_to_ruby);

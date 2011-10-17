@@ -324,7 +324,7 @@ rbgobj_gc_mark_gvalue(GValue* value)
 /**********************************************************************/
 
 void
-Init_gobject_gvalue()
+Init_gobject_gvalue(void)
 {
     id_to_s = rb_intern("to_s");
     qRValueToGValueFunc = g_quark_from_static_string("__ruby_r2g_func__");

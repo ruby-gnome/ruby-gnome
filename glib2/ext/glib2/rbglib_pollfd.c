@@ -86,7 +86,7 @@ poll_revents(VALUE self)
 }
 
 void
-Init_glib_poll_fd()
+Init_glib_poll_fd(void)
 {
     VALUE fd = G_DEF_CLASS(G_TYPE_POLL_FD, "PollFD", mGLib); 
 

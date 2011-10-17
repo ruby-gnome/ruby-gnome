@@ -47,7 +47,7 @@ rbglib_m_format_size_for_display(VALUE self, VALUE size)
 #endif
 
 void
-Init_glib_fileutils()
+Init_glib_fileutils(void)
 {
     VALUE cFileError = G_DEF_ERROR2(G_FILE_ERROR, "FileError", mGLib, rb_eIOError);
 

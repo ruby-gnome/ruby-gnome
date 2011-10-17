@@ -206,7 +206,7 @@ rbglib_m_spawn_close_pid(VALUE self, VALUE pid)
 #endif
 
 void
-Init_glib_spawn()
+Init_glib_spawn(void)
 {
     VALUE mGSpawn = rb_define_module_under(mGLib, "Spawn");
     VALUE cSpawnError = G_DEF_ERROR2(G_SPAWN_ERROR, "SpawnError", mGLib, rb_eIOError);

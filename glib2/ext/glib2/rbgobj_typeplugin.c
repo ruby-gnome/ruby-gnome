@@ -39,7 +39,7 @@ void	g_type_plugin_complete_interface_info	(GTypePlugin     *plugin,
 #endif
 
 void
-Init_gobject_gtypeplugin()
+Init_gobject_gtypeplugin(void)
 {
     VALUE iTypePlugin = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", mGLib);
     rb_define_method(iTypePlugin, "use", use, 0);

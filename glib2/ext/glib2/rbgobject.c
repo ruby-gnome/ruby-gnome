@@ -328,29 +328,9 @@ rbgobj_define_property_accessors(VALUE klass)
 
 /**********************************************************************/
 
-void 
-Init_gobject()
+void
+Init_gobject(void)
 {
-    extern void Init_gobject_convert();
-    extern void Init_gobject_gtype();
-    extern void Init_gobject_typeinterface();
-    extern void Init_gobject_typeinstance();
-    extern void Init_gobject_gvalue();
-    extern void Init_gobject_gvaluetypes();
-    extern void Init_gobject_gboxed();
-#if GLIB_CHECK_VERSION(2,6,0)
-    extern void Init_gobject_gstrv();
-#endif
-    extern void Init_gobject_value_array();
-    extern void Init_gobject_genums();
-    extern void Init_gobject_gparam();
-    extern void Init_gobject_gparamspecs();
-    extern void Init_gobject_gclosure();
-    extern void Init_gobject_gobject();
-    extern void Init_gobject_gsignal();
-    extern void Init_gobject_gtypeplugin();
-    extern void Init_gobject_gtypemodule();
-
     /* Not defined properties. They are already used as methods of Object */
     prop_exclude_list = g_hash_table_new(g_str_hash, g_str_equal);
     g_hash_table_insert(prop_exclude_list, (gpointer)"class", (gpointer)"class");

@@ -219,7 +219,7 @@ boxed_from_ruby(VALUE from, GValue* to)
 /**********************************************************************/
 
 void
-Init_gobject_gboxed()
+Init_gobject_gboxed(void)
 {
     VALUE gBoxed;
 

@@ -270,7 +270,7 @@ rclosure_end_proc(VALUE _)
 }
 
 static void
-Init_rclosure()
+Init_rclosure(void)
 {
     id_call = rb_intern("call");
     id_closures = rb_intern("closures");
@@ -312,7 +312,7 @@ closure_invalidate(VALUE self)
 }
 
 static void
-Init_closure()
+Init_closure(void)
 {
     VALUE cClosure = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
     rb_define_method(cClosure, "initialize", closure_initialize, 0);
@@ -324,7 +324,7 @@ Init_closure()
 /**********************************************************************/
 
 void
-Init_gobject_gclosure()
+Init_gobject_gclosure(void)
 {
     Init_rclosure();
     Init_closure();

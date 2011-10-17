@@ -219,7 +219,7 @@ rbgutil_stop_callback_dispatch_thread(void)
 }
 
 void
-Init_gutil_callback()
+Init_gutil_callback(void)
 {
     id_exit_application = rb_intern("exit_application");
     rbgutil_eGLibCallbackNotInitializedError =

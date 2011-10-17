@@ -97,7 +97,7 @@ rbglib_m_win32_get_package_installation_directory_of_module(int argc,
 #endif
 
 void
-Init_glib_win32()
+Init_glib_win32(void)
 {
 #ifdef G_OS_WIN32
     /* glib/gwin32.h */

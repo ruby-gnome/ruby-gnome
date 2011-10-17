@@ -762,7 +762,7 @@ ioc_print(int argc, VALUE *argv, VALUE out)
 
 
 void
-Init_glib_io_channel()
+Init_glib_io_channel(void)
 {
     VALUE io = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
     VALUE ioc_error = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);

@@ -109,7 +109,7 @@ rbglib_m_log(VALUE self, VALUE domain, VALUE level, VALUE str)
 }
 
 void
-Init_glib_messages()
+Init_glib_messages(void)
 {
     VALUE mGLog = rb_define_module_under(mGLib, "Log");
 

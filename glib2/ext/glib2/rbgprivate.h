@@ -111,6 +111,26 @@ G_GNUC_INTERNAL void Init_glib_unicode(void);
 G_GNUC_INTERNAL void Init_glib_keyfile(void);
 G_GNUC_INTERNAL void Init_glib_bookmark_file(void);
 
+G_GNUC_INTERNAL void Init_gobject_convert(void);
+G_GNUC_INTERNAL void Init_gobject_gtype(void);
+G_GNUC_INTERNAL void Init_gobject_typeinterface(void);
+G_GNUC_INTERNAL void Init_gobject_typeinstance(void);
+G_GNUC_INTERNAL void Init_gobject_gvalue(void);
+G_GNUC_INTERNAL void Init_gobject_gvaluetypes(void);
+G_GNUC_INTERNAL void Init_gobject_gboxed(void);
+#if GLIB_CHECK_VERSION(2,6,0)
+G_GNUC_INTERNAL void Init_gobject_gstrv(void);
+#endif
+G_GNUC_INTERNAL void Init_gobject_value_array(void);
+G_GNUC_INTERNAL void Init_gobject_genums(void);
+G_GNUC_INTERNAL void Init_gobject_gparam(void);
+G_GNUC_INTERNAL void Init_gobject_gparamspecs(void);
+G_GNUC_INTERNAL void Init_gobject_gclosure(void);
+G_GNUC_INTERNAL void Init_gobject_gobject(void);
+G_GNUC_INTERNAL void Init_gobject_gsignal(void);
+G_GNUC_INTERNAL void Init_gobject_gtypeplugin(void);
+G_GNUC_INTERNAL void Init_gobject_gtypemodule(void);
+
 G_END_DECLS
 
 #endif

@@ -641,7 +641,7 @@ gobj_s_method_added(VALUE klass, VALUE id)
 }
 
 static void
-Init_signal_misc()
+Init_signal_misc(void)
 {
     signal_func_table = rb_hash_new();
     rb_global_variable(&signal_func_table);
@@ -866,7 +866,7 @@ signal_remove_emission_hook(VALUE self, VALUE hook_id)
 }
 
 static void
-Init_signal_class()
+Init_signal_class(void)
 {
     VALUE cSignalFlags, cSignalMatchType;
 
@@ -973,7 +973,7 @@ rbgobj_define_action_methods(VALUE klass)
 /**********************************************************************/
 
 void
-Init_gobject_gsignal()
+Init_gobject_gsignal(void)
 {
     Init_signal_class();
     Init_signal_misc();

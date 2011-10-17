@@ -40,7 +40,7 @@ gt_supported(VALUE self)
 }
 
 void
-Init_glib_threads()
+Init_glib_threads(void)
 {
     gthreads = rb_define_class_under(mGLib, "Thread", rb_cObject);
 

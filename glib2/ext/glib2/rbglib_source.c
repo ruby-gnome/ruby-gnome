@@ -149,7 +149,7 @@ gboolean    g_source_remove_by_user_data    (gpointer user_data);
 */
 
 void
-Init_glib_source()
+Init_glib_source(void)
 {
     VALUE src = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib); 
 

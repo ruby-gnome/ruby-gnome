@@ -76,7 +76,7 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
 }
 
 void
-Init_glib_error()
+Init_glib_error(void)
 {
     id_code = rb_intern("@code");
     id_domain = rb_intern("@domain");

@@ -491,7 +491,7 @@ enum_coerce(VALUE self, VALUE other)
 }
 
 static void
-Init_enum()
+Init_enum(void)
 {
     VALUE cEnum;
 
@@ -916,7 +916,7 @@ flags_nonzero_p(VALUE self)
 }
 
 static void
-Init_flags()
+Init_flags(void)
 {
     VALUE cFlags;
 
@@ -968,7 +968,7 @@ Init_flags()
 /**********************************************************************/
 
 void
-Init_gobject_genums()
+Init_gobject_genums(void)
 {
     id_module_eval = rb_intern("module_eval");
     id_new = rb_intern("new");

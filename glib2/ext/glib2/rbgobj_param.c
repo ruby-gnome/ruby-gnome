@@ -319,7 +319,7 @@ param_is_flag(G_PARAM_READWRITE)
 /**********************************************************************/
 
 static void
-Init_gobject_gparam_spec()
+Init_gobject_gparam_spec(void)
 {
     VALUE cParamSpec;
 
@@ -377,7 +377,7 @@ Init_gobject_gparam_spec()
 /**********************************************************************/
 
 void
-Init_gobject_gparam()
+Init_gobject_gparam(void)
 {
     Init_gobject_gparam_spec();
 }

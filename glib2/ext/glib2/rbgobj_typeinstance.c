@@ -106,7 +106,7 @@ rbgobj_gc_mark_instance(gpointer instance)
 /**********************************************************************/
 
 void
-Init_gobject_typeinstance()
+Init_gobject_typeinstance(void)
 {
     /* should be renamed to GLib::Instance? */
     cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);

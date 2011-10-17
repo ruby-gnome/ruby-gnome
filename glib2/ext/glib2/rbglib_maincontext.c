@@ -130,7 +130,7 @@ static guint ruby_source_id = 0;
 #endif
 
 static double
-timeofday()
+timeofday(void)
 {
     struct timeval tv;
 #if CHECK_RUBY_RELEASE_DATE(2009, 1, 7)
@@ -822,7 +822,7 @@ ruby_source_remove(VALUE data)
 #endif
 
 void
-Init_glib_main_context()
+Init_glib_main_context(void)
 {
     VALUE mc = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
 

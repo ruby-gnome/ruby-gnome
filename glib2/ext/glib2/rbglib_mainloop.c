@@ -71,7 +71,7 @@ ml_get_context(VALUE self)
 }
 
 void
-Init_glib_main_loop()
+Init_glib_main_loop(void)
 {
     VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
 

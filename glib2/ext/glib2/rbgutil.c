@@ -303,7 +303,7 @@ rbgutil_string_set_utf8_encoding(VALUE string)
 }
 
 void
-Init_gutil()
+Init_gutil(void)
 {
     rbgutil_id_module_eval = rb_intern("module_eval");
     id_set_property = rb_intern("set_property");
