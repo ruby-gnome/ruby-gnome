@@ -27,7 +27,7 @@ bookmarkfile_copy(const GBookmarkFile* file)
 }
 
 
-GType
+static GType
 g_bookmark_file_get_type(void)
 {
     static GType our_type = 0;
