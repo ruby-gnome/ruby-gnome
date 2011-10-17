@@ -188,7 +188,7 @@ gdkgc_copy(VALUE self, VALUE dst)
 static VALUE
 gdkgc_set_colormap(VALUE self, VALUE colormap)
 {
-    gdk_gc_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(self)));
+    gdk_gc_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
 

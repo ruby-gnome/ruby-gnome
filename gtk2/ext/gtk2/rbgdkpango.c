@@ -34,7 +34,7 @@ static VALUE
 gdkpango_context_set_colormap(VALUE self, VALUE colormap)
 {
     gdk_pango_context_set_colormap(PANGO_CONTEXT(RVAL2GOBJ(self)),
-                                   GDK_COLORMAP(RVAL2GOBJ(self)));
+                                   GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
 
