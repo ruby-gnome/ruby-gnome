@@ -29,7 +29,7 @@ completion_copy(GCompletion *comp)
   return new_comp;
 }
 
-GType
+static GType
 g_completion_get_type(void)
 {
     static GType our_type = 0;
