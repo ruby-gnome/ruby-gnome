@@ -200,6 +200,7 @@ Init_gtk2(void)
     Init_gtk_recent_chooser_dialog();
     Init_gtk_recent_chooser_menu();
     Init_gtk_recent_chooser_widget();
+    Init_gtk_recent_data();
     Init_gtk_recent_filter();
     Init_gtk_recent_filter_info();
     Init_gtk_recent_info();

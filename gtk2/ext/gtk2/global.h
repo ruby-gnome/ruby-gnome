@@ -200,6 +200,7 @@ G_GNUC_INTERNAL void Init_gtk_recent_chooser(void);
 G_GNUC_INTERNAL void Init_gtk_recent_chooser_dialog(void);
 G_GNUC_INTERNAL void Init_gtk_recent_chooser_menu(void);
 G_GNUC_INTERNAL void Init_gtk_recent_chooser_widget(void);
+G_GNUC_INTERNAL void Init_gtk_recent_data(void);
 G_GNUC_INTERNAL void Init_gtk_recent_filter(void);
 G_GNUC_INTERNAL void Init_gtk_recent_filter_info(void);
 G_GNUC_INTERNAL void Init_gtk_recent_info(void);
