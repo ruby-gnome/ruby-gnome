@@ -493,7 +493,7 @@ bf_move_item(VALUE self, VALUE old_uri, VALUE new_uri)
 #endif
 
 void
-Init_glib_bookmark_file()
+Init_glib_bookmark_file(void)
 {
 #if GLIB_CHECK_VERSION(2,12,0)
     VALUE bf = G_DEF_CLASS(G_TYPE_BOOKMARK_FILE, "BookmarkFile", mGLib);
