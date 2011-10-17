@@ -105,7 +105,7 @@ gboolean    pango_parse_markup              (const char *markup_text,
 */
 
 static VALUE
-attr_s_type_register(VALUE self, VALUE name)
+attr_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return INT2NUM(pango_attr_type_register(RVAL2CSTR(name)));
 }

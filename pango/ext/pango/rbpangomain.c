@@ -49,7 +49,7 @@ rpango_reorder_items_ensure(VALUE value)
 }
 
 static VALUE
-rpango_reorder_items(VALUE self, VALUE attrs)
+rpango_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
 {
     struct rpango_reorder_items_args args;
     args.ary = rb_ary_to_ary(attrs);
@@ -62,13 +62,13 @@ rpango_reorder_items(VALUE self, VALUE attrs)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-rpango_unichar_direction(VALUE self, VALUE ch)
+rpango_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
     return GENUM2RVAL(pango_unichar_direction(NUM2UINT(ch)), PANGO_TYPE_DIRECTION);
 }
 
 static VALUE
-rpango_find_base_dir(VALUE self, VALUE text)
+rpango_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     StringValue(text);
     return GENUM2RVAL(pango_find_base_dir(RSTRING_PTR(text), RSTRING_LEN(text)), 
@@ -114,7 +114,7 @@ rbg_pangologattrs2rval_free(PangoLogAttr *attrs, long n)
 #define PANGOLOGATTRS2RVAL_FREE(attrs, n) rbg_pangologattrs2rval_free(attrs, n)
 
 static VALUE
-rpango_break(VALUE self, VALUE rbtext, VALUE rbanalysis)
+rpango_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -128,7 +128,7 @@ rpango_break(VALUE self, VALUE rbtext, VALUE rbanalysis)
 }
 
 static VALUE
-rpango_get_log_attrs(VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
+rpango_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -143,7 +143,7 @@ rpango_get_log_attrs(VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
 }
 
 static VALUE
-rpango_find_paragraph_boundary(VALUE self, VALUE text)
+rpango_find_paragraph_boundary(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     gint paragraph_delimiter_index, next_paragraph_start;
     
@@ -179,7 +179,7 @@ rpango_shape_ensure(VALUE value)
 }
 
 static VALUE
-rpango_shape(VALUE self, VALUE rbtext, VALUE rbanalysis)
+rpango_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -194,7 +194,7 @@ rpango_shape(VALUE self, VALUE rbtext, VALUE rbanalysis)
 
 /* This method is from rbpangoattribute.c */
 static VALUE
-rpango_parse_markup(int argc, VALUE *argv, VALUE self)
+rpango_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE markup_text, accel_marker;
     PangoAttrList *pattr_list;
@@ -233,7 +233,7 @@ rpango_parse_markup(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rpango_pixels(VALUE self, VALUE pixels)
+rpango_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 {
     return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
 }

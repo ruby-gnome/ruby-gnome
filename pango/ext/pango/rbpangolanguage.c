@@ -16,7 +16,7 @@
 #define LANG2RVAL(lang) (BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE))
 
 static VALUE
-language_s_default(VALUE self)
+language_s_default(G_GNUC_UNUSED VALUE self)
 {
     return LANG2RVAL(pango_language_get_default());
 }
@@ -29,7 +29,7 @@ language_initialize(VALUE self, VALUE language)
 }
 
 static VALUE
-language_s_to_string(VALUE self, VALUE language)
+language_s_to_string(G_GNUC_UNUSED VALUE self, VALUE language)
 {
     return CSTR2RVAL(pango_language_to_string(RVAL2CSTR(language)));
 }

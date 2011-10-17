@@ -72,7 +72,7 @@ coverage_to_bytes(VALUE self)
 }
 
 static VALUE
-coverage_s_from_bytes(VALUE self, VALUE bytes)
+coverage_s_from_bytes(G_GNUC_UNUSED VALUE self, VALUE bytes)
 {
     StringValue(bytes);
     return BOXED2RVAL(pango_coverage_from_bytes((guchar *)RSTRING_PTR(bytes), 

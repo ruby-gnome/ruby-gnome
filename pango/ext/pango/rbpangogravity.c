@@ -13,13 +13,13 @@
 
 #if PANGO_CHECK_VERSION(1,16,0)
 static VALUE
-to_rotation(VALUE self, VALUE gravity)
+to_rotation(G_GNUC_UNUSED VALUE self, VALUE gravity)
 {
     return rb_float_new(pango_gravity_to_rotation(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
 }
 
 static VALUE
-is_vertical(VALUE self, VALUE gravity)
+is_vertical(G_GNUC_UNUSED VALUE self, VALUE gravity)
 {
     return CBOOL2RVAL(PANGO_GRAVITY_IS_VERTICAL(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
 }

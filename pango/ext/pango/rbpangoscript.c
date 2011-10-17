@@ -15,7 +15,7 @@
 #define _SELF(r) (RVAL2GENUM(r, PANGO_TYPE_SCRIPT))
 
 static VALUE
-rbpango_s_script_for_unichar(VALUE self, VALUE ch)
+rbpango_s_script_for_unichar(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
     return GENUM2RVAL(pango_script_for_unichar(NUM2UINT(ch)), PANGO_TYPE_SCRIPT);
 }
