@@ -429,7 +429,14 @@ invoke_callback(VALUE data)
 }
 
 static gboolean
-deserialize_func(GtkTextBuffer *register_buffer, GtkTextBuffer *content_buffer, GtkTextIter *iter, const guint8 *data, gsize length, gboolean create_tags, gpointer func, GError **error)
+deserialize_func(GtkTextBuffer *register_buffer,
+                 GtkTextBuffer *content_buffer,
+                 GtkTextIter *iter,
+                 const guint8 *data,
+                 gsize length,
+                 gboolean create_tags,
+                 gpointer func,
+                 G_GNUC_UNUSED GError **error)
 {
     VALUE result;
     VALUE argv[5];

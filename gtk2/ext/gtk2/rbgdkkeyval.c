@@ -16,32 +16,32 @@
 #include <gdk/gdkkeysyms.h>
 
 static VALUE
-keyval_to_name(VALUE self, VALUE keyval)
+keyval_to_name(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     gchar* name = gdk_keyval_name(NUM2UINT(keyval));
     return name ? CSTR2RVAL(name) : Qnil;
 }
 
 static VALUE
-keyval_from_name(VALUE self, VALUE keyval_name)
+keyval_from_name(G_GNUC_UNUSED VALUE self, VALUE keyval_name)
 {
     return UINT2NUM(gdk_keyval_from_name(RVAL2CSTR(keyval_name)));
 }
 
 static VALUE
-keyval_is_upper(VALUE self, VALUE keyval)
+keyval_is_upper(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return CBOOL2RVAL(gdk_keyval_is_upper(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_is_lower(VALUE self, VALUE keyval)
+keyval_is_lower(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return CBOOL2RVAL(gdk_keyval_is_lower(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_convert_case(VALUE self, VALUE symbol)
+keyval_convert_case(G_GNUC_UNUSED VALUE self, VALUE symbol)
 {
     guint upper, lower;
     gdk_keyval_convert_case(NUM2UINT(symbol), &lower, &upper);
@@ -49,25 +49,25 @@ keyval_convert_case(VALUE self, VALUE symbol)
 }
 
 static VALUE
-keyval_to_upper(VALUE self, VALUE keyval)
+keyval_to_upper(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return INT2NUM(gdk_keyval_to_upper(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_to_lower(VALUE self, VALUE keyval)
+keyval_to_lower(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return INT2NUM(gdk_keyval_to_lower(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_to_unicode(VALUE self, VALUE keyval)
+keyval_to_unicode(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return UINT2NUM(gdk_keyval_to_unicode(NUM2UINT(keyval)));
 }
 
 static VALUE
-unicode_to_keyval(VALUE self, VALUE wc)
+unicode_to_keyval(G_GNUC_UNUSED VALUE self, VALUE wc)
 {
     VALUE unicode;
     if (TYPE(wc) == T_STRING) {

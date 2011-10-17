@@ -29,7 +29,7 @@ gdkcmap_initialize(VALUE self, VALUE visual, VALUE allocate)
 }
 
 static VALUE
-gdkcmap_s_get_system(VALUE self)
+gdkcmap_s_get_system(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_system());
 }

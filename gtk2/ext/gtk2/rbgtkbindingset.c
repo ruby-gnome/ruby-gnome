@@ -31,7 +31,7 @@ gtk_bindingset_copy(const GtkBindingSet* bin)
 }
 
 static void
-gtk_bindingset_free(GtkBindingSet* bin)
+gtk_bindingset_free(G_GNUC_UNUSED GtkBindingSet* bin)
 {
     /* GtkBindingSet should not be freed */
 }
@@ -58,7 +58,7 @@ binding_initialize(VALUE self, VALUE set_name)
 }
 
 static VALUE
-binding_s_find(VALUE self, VALUE set_name)
+binding_s_find(G_GNUC_UNUSED VALUE self, VALUE set_name)
 {
     return BOXED2RVAL(gtk_binding_set_find(RVAL2CSTR(set_name)), 
                       GTK_TYPE_BINDING_SET);

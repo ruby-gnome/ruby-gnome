@@ -13,13 +13,13 @@
 #define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
 
 static VALUE
-accel_valid(VALUE self, VALUE keyval, VALUE modifiers)
+accel_valid(G_GNUC_UNUSED VALUE self, VALUE keyval, VALUE modifiers)
 {
     return CBOOL2RVAL(gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)));
 }
 
 static VALUE
-accel_parse(VALUE self, VALUE accelerator)
+accel_parse(G_GNUC_UNUSED VALUE self, VALUE accelerator)
 {
     guint key;
     GdkModifierType mods;
@@ -28,14 +28,14 @@ accel_parse(VALUE self, VALUE accelerator)
 }
 
 static VALUE
-accel_name(VALUE self, VALUE key, VALUE mods)
+accel_name(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-accel_get_label(VALUE self, VALUE key, VALUE mods)
+accel_get_label(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2MOD(mods)));
 }
@@ -49,7 +49,7 @@ accel_set_default_mod_mask(VALUE self, VALUE default_mod_mask)
 }
 
 static VALUE
-accel_get_default_mod_mask(VALUE self)
+accel_get_default_mod_mask(G_GNUC_UNUSED VALUE self)
 {
     return GFLAGS2RVAL(gtk_accelerator_get_default_mod_mask(), GDK_TYPE_MODIFIER_TYPE);
 }

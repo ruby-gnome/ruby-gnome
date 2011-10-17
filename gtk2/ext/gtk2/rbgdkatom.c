@@ -46,7 +46,7 @@ get_gdkatom(VALUE atom)
 /*****************************************/
 
 static VALUE
-gdkatom_s_intern(int argc, VALUE *argv, VALUE self)
+gdkatom_s_intern(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE name;
     VALUE exist;

@@ -22,7 +22,7 @@
 #define CSTR2SYM(str) ID2SYM(rb_intern(str))
 
 static VALUE
-stock_m_add(int argc, VALUE *argv, VALUE klass)
+stock_m_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE stock_id, label, modifier, keyval, translation_domain;
     GtkStockItem item;
@@ -39,7 +39,7 @@ stock_m_add(int argc, VALUE *argv, VALUE klass)
 }
 
 static VALUE
-stock_m_lookup(VALUE klass, VALUE stock_id)
+stock_m_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
 {
     GtkStockItem item;
 
@@ -56,7 +56,7 @@ stock_m_lookup(VALUE klass, VALUE stock_id)
 }
 
 static VALUE
-stock_m_list_ids(VALUE klass)
+stock_m_list_ids(G_GNUC_UNUSED VALUE self)
 {
     GSList *ids = gtk_stock_list_ids();
     GSList *l;

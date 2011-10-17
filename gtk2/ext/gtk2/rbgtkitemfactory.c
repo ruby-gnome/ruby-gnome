@@ -55,7 +55,7 @@ ifact_s_from_widget(VALUE self, VALUE widget)
 }
 
 static VALUE
-ifact_s_path_from_widget(VALUE self, VALUE widget)
+ifact_s_path_from_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     return CSTR2RVAL(gtk_item_factory_path_from_widget(RVAL2WIDGET(widget)));
 }
@@ -105,7 +105,7 @@ menuitem_type_check(char *item_type)
 }
 
 static void
-items_exec_callback_wrap(VALUE callback_data, guint action_id, GtkWidget *widget)
+items_exec_callback_wrap(G_GNUC_UNUSED VALUE callback_data, guint action_id, GtkWidget *widget)
 {
     VALUE iter, data;
     VALUE action = rb_hash_aref(action_table, UINT2NUM(action_id));

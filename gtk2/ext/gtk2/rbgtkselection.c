@@ -19,7 +19,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-gtkdrag_selection_owner_set(int argc, VALUE *argv, VALUE self)
+gtkdrag_selection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gboolean ret;
 
@@ -73,7 +73,7 @@ gtkdrag_selection_clear_targets(VALUE self, VALUE widget, VALUE selection)
 }
 
 static VALUE
-gtkdrag_selection_convert(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
+gtkdrag_selection_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
 {
     gboolean ret = gtk_selection_convert(RVAL2WIDGET(widget), 
                                          RVAL2ATOM(selection), RVAL2ATOM(target),
@@ -90,7 +90,7 @@ gtkdrag_selection_remove_all(VALUE self, VALUE widget)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-targets_include_image(VALUE self, VALUE rbtargets, VALUE rbwritable)
+targets_include_image(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable)
 {
     gboolean writable = RVAL2CBOOL(rbwritable);
     long n;
@@ -105,7 +105,7 @@ targets_include_image(VALUE self, VALUE rbtargets, VALUE rbwritable)
 }
 
 static VALUE
-targets_include_text(VALUE self, VALUE rbtargets)
+targets_include_text(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 {
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
@@ -119,7 +119,7 @@ targets_include_text(VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-targets_include_uri(VALUE self, VALUE rbtargets)
+targets_include_uri(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 {
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
@@ -133,7 +133,7 @@ targets_include_uri(VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-targets_include_rich_text(VALUE self, VALUE rbtargets, VALUE rbbuffer)
+targets_include_rich_text(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuffer)
 {
     GtkTextBuffer *buffer = GTK_TEXT_BUFFER(RVAL2GOBJ(rbbuffer));
     long n;

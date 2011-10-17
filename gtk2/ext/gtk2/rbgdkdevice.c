@@ -15,14 +15,14 @@
 
 /* Methods */
 static VALUE
-device_s_list(VALUE self)
+device_s_list(G_GNUC_UNUSED VALUE self)
 {
     /* Owned by GDK */
     return GLIST2ARY(gdk_devices_list());
 }
 
 static VALUE
-device_s_set_extension_events(VALUE self, VALUE window, VALUE mask, VALUE mode)
+device_s_set_extension_events(G_GNUC_UNUSED VALUE self, VALUE window, VALUE mask, VALUE mode)
 {
     gdk_input_set_extension_events(GDK_WINDOW(RVAL2GOBJ(window)),
                                    NUM2INT(mask), FIX2INT(mode));
@@ -60,7 +60,7 @@ device_set_axis_use(VALUE self, VALUE index, VALUE use)
 }
 
 static VALUE
-device_s_get_core_pointer(VALUE self)
+device_s_get_core_pointer(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_device_get_core_pointer());
 }

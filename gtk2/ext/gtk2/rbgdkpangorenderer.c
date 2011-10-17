@@ -35,7 +35,7 @@ prenderer_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-prenderer_s_get_default(int argc, VALUE *argv, VALUE self)
+prenderer_s_get_default(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE screen;
     GdkScreen* gscreen;
@@ -51,7 +51,7 @@ prenderer_s_get_default(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-prenderer_s_default(VALUE self)
+prenderer_s_default(G_GNUC_UNUSED VALUE self)
 {
     GdkScreen* gscreen = gdk_screen_get_default();
     return GOBJ2RVAL(gdk_pango_renderer_get_default(gscreen));
@@ -73,28 +73,45 @@ prenderer_set_gc(VALUE self, VALUE gc)
     return self;
 }
 
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
 static VALUE
 prenderer_set_stipple(VALUE self, VALUE part, VALUE stipple)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
     gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                    NIL_P(stipple) ? NULL : GDK_BITMAP(RVAL2GOBJ(stipple)));
-#else
-      rb_warning("Gdk::PangoRender#set_tipple is not supported (Require pango-1.8.1 or later");
-#endif
+
     return self;
 }
+#else
+static VALUE
+prenderer_set_stipple(G_GNUC_UNUSED VALUE self,
+                      G_GNUC_UNUSED VALUE part,
+                      G_GNUC_UNUSED VALUE stipple)
+{
+    rb_warning("Gdk::PangoRender#set_tipple is not supported (Require pango-1.8.1 or later");
 
+    return self;
+}
+#endif
+
+#ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
 static VALUE
 prenderer_set_override_color(VALUE self, VALUE part, VALUE color)
 {
-#if HAVE_PANGO_RENDER_PART_GET_TYPE
-    gdk_pango_renderer_set_override_color(_SELF(self), 
+    gdk_pango_renderer_set_override_color(_SELF(self),
                                           RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                           RVAL2GDKCOLOR(color));
+
+    return self;
+}
 #else
-      rb_warning("Gdk::PangoRender#set_override_color is not supported (Require pango-1.8.1 or later");
-#endif
+static VALUE
+prenderer_set_override_color(G_GNUC_UNUSED VALUE self,
+                             G_GNUC_UNUSED VALUE part,
+                             G_GNUC_UNUSED VALUE color)
+{
+    rb_warning("Gdk::PangoRender#set_override_color is not supported (Require pango-1.8.1 or later");
+
     return self;
 }
 #endif

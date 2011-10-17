@@ -25,13 +25,13 @@ it_initialize(VALUE self)
 }
 
 static VALUE
-it_get_default(VALUE self)
+it_get_default(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_icon_theme_get_default());
 }
 
 static VALUE
-it_get_for_screen(VALUE self, VALUE screen)
+it_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_icon_theme_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }

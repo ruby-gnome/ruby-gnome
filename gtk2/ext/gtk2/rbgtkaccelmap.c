@@ -30,7 +30,7 @@ accel_map_lookup_entry(VALUE self, VALUE path)
 }
 
 static VALUE
-accel_map_change_entry(VALUE self, VALUE path, VALUE key, VALUE mods, VALUE replace)
+accel_map_change_entry(G_GNUC_UNUSED VALUE self, VALUE path, VALUE key, VALUE mods, VALUE replace)
 {
     return CBOOL2RVAL(gtk_accel_map_change_entry(RVAL2CSTR(path), NUM2UINT(key),
                                                  RVAL2MOD(mods), RVAL2CBOOL(replace)));
@@ -94,7 +94,7 @@ void        gtk_accel_map_save_fd           (gint fd);
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-accel_map_get(VALUE self)
+accel_map_get(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_accel_map_get());
 }

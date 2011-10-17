@@ -347,7 +347,7 @@ gtk_notebookpage_get_type(void)
 }
 
 static VALUE
-signal_g2r_func(guint num, const GValue *values)
+signal_g2r_func(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkNotebookPageData npp;
     npp.parent = GVAL2RVAL(&values[0]);

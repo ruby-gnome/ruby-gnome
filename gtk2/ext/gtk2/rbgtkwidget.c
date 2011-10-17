@@ -355,7 +355,7 @@ widget_reset_rc_styles(VALUE self)
 }
 
 static VALUE
-widget_s_push_colormap(VALUE self, VALUE cmap)
+widget_s_push_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
 {
     gtk_widget_push_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return cmap;
@@ -369,26 +369,26 @@ widget_s_pop_colormap(VALUE self)
 }
 
 static VALUE
-widget_s_set_default_colormap(VALUE self, VALUE cmap)
+widget_s_set_default_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
 {
     gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return cmap;
 }
 
 static VALUE
-widget_s_get_default_style(VALUE self)
+widget_s_get_default_style(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_style());
 }
 
 static VALUE
-widget_s_get_default_colormap(VALUE self)
+widget_s_get_default_colormap(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_colormap());
 }
 
 static VALUE
-widget_s_get_default_visual(VALUE self)
+widget_s_get_default_visual(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_visual());
 }
@@ -414,7 +414,7 @@ widget_s_set_default_direction(VALUE self, VALUE dir)
 }
 
 static VALUE
-widget_s_get_default_direction(VALUE self)
+widget_s_get_default_direction(G_GNUC_UNUSED VALUE self)
 {
     return GENUM2RVAL(gtk_widget_get_default_direction(), GTK_TYPE_TEXT_DIRECTION);
 }
@@ -1051,14 +1051,14 @@ widget_saved_state(VALUE self)
 }
 
 static VALUE
-widget_signal_size_request(guint num, const GValue *values)
+widget_signal_size_request(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), 
                        rb_ary_new3(2, INT2NUM(req->width), INT2NUM(req->height)));
 }
 static VALUE
-widget_signal_size_allocate(guint num, const GValue *values)
+widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkAllocation* alloc = (GtkAllocation*)g_value_get_boxed(&values[1]);
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));

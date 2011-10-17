@@ -27,7 +27,7 @@ gdkpmap_initialize(VALUE self, VALUE win, VALUE w, VALUE h, VALUE depth)
 }
 
 static VALUE
-gdkpmap_create_from_data(int argc, VALUE *argv, VALUE self)
+gdkpmap_create_from_data(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE win, data, w, h, depth, fg, bg, ret;
 
@@ -48,7 +48,7 @@ gdkpmap_create_from_data(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkpmap_create_from_xpm(VALUE self, VALUE win, VALUE color, VALUE fname)
+gdkpmap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE color, VALUE fname)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -64,7 +64,7 @@ gdkpmap_create_from_xpm(VALUE self, VALUE win, VALUE color, VALUE fname)
 }
 
 static VALUE
-gdkpmap_create_from_xpm_d(VALUE self, VALUE win, VALUE tcolor, VALUE data)
+gdkpmap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE tcolor, VALUE data)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -81,7 +81,7 @@ gdkpmap_create_from_xpm_d(VALUE self, VALUE win, VALUE tcolor, VALUE data)
 }
 
 static VALUE
-gdkpmap_colormap_create_from_xpm(VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE fname)
+gdkpmap_colormap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE fname)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -98,7 +98,7 @@ gdkpmap_colormap_create_from_xpm(VALUE self, VALUE win, VALUE colormap, VALUE tc
 }
 
 static VALUE
-gdkpmap_colormap_create_from_xpm_d(VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE data)
+gdkpmap_colormap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE data)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -141,7 +141,7 @@ gdkpmap_create_from_xbm(VALUE self, VALUE win, VALUE fname)
  */
 
 static VALUE
-gdkpmap_foreign_new(int argc, VALUE *argv, VALUE self)
+gdkpmap_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg[5];
     GdkPixmap* win = NULL;
@@ -179,7 +179,7 @@ gdkpmap_foreign_new(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkpmap_lookup(int argc, VALUE *argv, VALUE self)
+gdkpmap_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg[2];
     GdkPixmap* win = NULL;

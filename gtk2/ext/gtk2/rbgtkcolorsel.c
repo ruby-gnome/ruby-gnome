@@ -60,7 +60,7 @@ colorsel_is_adjusting(VALUE self)
 }
 
 static VALUE
-colorsel_s_palette_from_string(VALUE self, VALUE str)
+colorsel_s_palette_from_string(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GdkColor* gcolors;
     gint i, n_colors;
@@ -125,7 +125,7 @@ rbgdk_rval2gdkcolors(VALUE value, long *n)
 #define RVAL2GDKCOLORS(value, n) rbgdk_rval2gdkcolors(value, n)
 
 static VALUE
-colorsel_s_palette_to_string(int argc, VALUE *argv, VALUE self)
+colorsel_s_palette_to_string(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE rbcolors;
     long n;

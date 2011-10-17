@@ -60,20 +60,20 @@ gtk_m_function2(gpointer proc)
 
 
 static VALUE
-gtk_m_set_locale(VALUE self)
+gtk_m_set_locale(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_set_locale());
 }
 
 static VALUE
-gtk_m_disable_setlocale(VALUE self)
+gtk_m_disable_setlocale(G_GNUC_UNUSED VALUE self)
 {
     gtk_disable_setlocale();
     return Qnil;
 }
 
 static VALUE
-gtk_m_get_default_language(VALUE self)
+gtk_m_get_default_language(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
 }
@@ -173,39 +173,39 @@ gtk_exit()
 */
 
 static VALUE
-gtk_m_main(VALUE self)
+gtk_m_main(G_GNUC_UNUSED VALUE self)
 {
     gtk_main();
     return Qnil;
 }
 
 static VALUE
-gtk_m_main_level(VALUE self)
+gtk_m_main_level(G_GNUC_UNUSED VALUE self)
 {
     return INT2FIX(gtk_main_level());
 }
 
 static VALUE
-gtk_m_main_quit(VALUE self)
+gtk_m_main_quit(G_GNUC_UNUSED VALUE self)
 {
     gtk_main_quit();
     return Qnil;
 }
 
 static VALUE
-gtk_m_main_iteration(VALUE self)
+gtk_m_main_iteration(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gtk_main_iteration());
 }
 
 static VALUE
-gtk_m_main_iteration_do(VALUE self, VALUE blocking)
+gtk_m_main_iteration_do(G_GNUC_UNUSED VALUE self, VALUE blocking)
 {
     return CBOOL2RVAL(gtk_main_iteration_do(RVAL2CBOOL(blocking)));
 }
 
 static VALUE
-gtk_m_main_do_event(VALUE self, VALUE event)
+gtk_m_main_do_event(G_GNUC_UNUSED VALUE self, VALUE event)
 {
     gtk_main_do_event(RVAL2GEV(event));
     return event;
@@ -217,20 +217,20 @@ gtk_false()
 */
 
 static VALUE
-gtk_m_grab_add(VALUE self, VALUE widget)
+gtk_m_grab_add(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
     return Qnil;
 }
 
 static VALUE
-gtk_m_get_current(VALUE self)
+gtk_m_get_current(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_grab_get_current());
 }
 
 static VALUE
-gtk_m_grab_remove(VALUE self, VALUE widget)
+gtk_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
     return Qnil;
@@ -392,19 +392,19 @@ gtk_m_key_snooper_remove(VALUE self, VALUE id)
 }
 
 static VALUE
-gtk_m_get_current_event(VALUE self)
+gtk_m_get_current_event(G_GNUC_UNUSED VALUE self)
 {
     return GEV2RVAL(gtk_get_current_event());
 }
 
 static VALUE
-gtk_m_get_current_event_time(VALUE self)
+gtk_m_get_current_event_time(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gtk_get_current_event_time());
 }
 
 static VALUE
-gtk_m_get_current_event_state(VALUE self)
+gtk_m_get_current_event_state(G_GNUC_UNUSED VALUE self)
 {
     GdkModifierType state;
     gboolean ret = gtk_get_current_event_state(&state);
@@ -412,7 +412,7 @@ gtk_m_get_current_event_state(VALUE self)
 }
 
 static VALUE
-gtk_m_get_event_widget(int argc, VALUE *argv, VALUE self)
+gtk_m_get_event_widget(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE event;
     rb_scan_args(argc, argv, "01", &event);
@@ -421,7 +421,7 @@ gtk_m_get_event_widget(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gtk_m_propagate_event(VALUE self, VALUE widget, VALUE event)
+gtk_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
 {
     gtk_propagate_event(GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2GEV(event));
     return Qnil;
@@ -429,7 +429,7 @@ gtk_m_propagate_event(VALUE self, VALUE widget, VALUE event)
 
 /* From Version Information */
 static VALUE
-gtk_m_check_version(VALUE self, VALUE major, VALUE minor, VALUE micro)
+gtk_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     const gchar *ret;
     ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
@@ -437,7 +437,7 @@ gtk_m_check_version(VALUE self, VALUE major, VALUE minor, VALUE micro)
 }
 
 static VALUE
-gtk_m_check_version_q(VALUE self, VALUE major, VALUE minor, VALUE micro)
+gtk_m_check_version_q(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     const gchar *ret;
     ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));

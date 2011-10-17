@@ -163,7 +163,7 @@ GtkWidget *         gtk_menu_get_attach_widget          (GtkMenu *menu);
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-menu_s_get_for_attach_widget(VALUE self, VALUE widget)
+menu_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     /* Owned by GTK+ */
     return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));

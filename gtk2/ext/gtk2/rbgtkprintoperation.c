@@ -95,7 +95,7 @@ page_setup_done_cb(GtkPageSetup *page_setup, gpointer data)
 }
 
 static VALUE
-po_run_page_setup_dialog(int argc, VALUE *argv, VALUE self)
+po_run_page_setup_dialog(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE parent, page_setup, settings;
     rb_scan_args(argc, argv, "03", &parent, &page_setup, &settings);

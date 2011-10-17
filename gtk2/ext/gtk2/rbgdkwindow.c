@@ -44,7 +44,7 @@ gdkwin_get_window_type(VALUE self)
 }
 
 static VALUE
-gdkwin_s_at_pointer(VALUE self)
+gdkwin_s_at_pointer(G_GNUC_UNUSED VALUE self)
 {
     gint x, y;
     GdkWindow* win = gdk_window_at_pointer(&x, &y);
@@ -292,7 +292,7 @@ gdkwin_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VAL
 }
 
 static VALUE
-gdkwin_s_constrain_size(VALUE self, VALUE geometry, VALUE flags, VALUE w, VALUE h)
+gdkwin_s_constrain_size(G_GNUC_UNUSED VALUE self, VALUE geometry, VALUE flags, VALUE w, VALUE h)
 {
     gint new_width, new_height;
     gdk_window_constrain_size((GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
@@ -875,13 +875,13 @@ gdkwin_set_startup_id(VALUE self, VALUE startup_id)
 #endif
 
 static VALUE
-gdkwin_s_get_toplevels(VALUE self)
+gdkwin_s_get_toplevels(G_GNUC_UNUSED VALUE self)
 {
     return GLIST2ARYF(gdk_window_get_toplevels());
 }
 
 static VALUE
-gdkwin_s_get_default_root_window(VALUE self)
+gdkwin_s_get_default_root_window(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_get_default_root_window());
 }
@@ -892,7 +892,7 @@ GdkPointerHooks* gdk_set_pointer_hooks      (const GdkPointerHooks *new_hooks);
 
 /* From X Window System Interaction */
 static VALUE
-gdkwin_foreign_new(int argc, VALUE *argv, VALUE self)
+gdkwin_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg[2];
     GdkWindow * win = NULL;
@@ -922,7 +922,7 @@ gdkwin_foreign_new(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkwin_lookup(int argc, VALUE *argv, VALUE self)
+gdkwin_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg[2];
     GdkWindow * win = NULL;

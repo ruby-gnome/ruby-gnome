@@ -21,7 +21,7 @@
 static ID id_new;
 
 static VALUE
-gdkscreen_default(VALUE self)
+gdkscreen_default(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_default());
 }
@@ -330,7 +330,7 @@ gdkscreen_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE 
 }
 
 static VALUE
-gdkscreen_spawn_command_line_on_screen(VALUE self, VALUE command_line)
+gdkscreen_spawn_command_line_on_screen(G_GNUC_UNUSED VALUE self, VALUE command_line)
 {
     GError *err = NULL;
     VALUE ret;

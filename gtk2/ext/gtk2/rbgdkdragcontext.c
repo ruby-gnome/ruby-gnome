@@ -80,7 +80,7 @@ gdkdragcontext_initialize(VALUE self)
 }
 
 static VALUE
-gdkdragcontext_s_get_protocol(int argc, VALUE *argv, VALUE self)
+gdkdragcontext_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE xid;
     GdkDragProtocol prot;
@@ -207,7 +207,7 @@ rbgdk_rval2gdkatomglist(VALUE value)
 #define RVAL2GDKATOMGLIST(value) rbgdk_rval2gdkatomglist(value)
 
 static VALUE
-gdkdragcontext_s_drag_begin(VALUE self, VALUE rbwindow, VALUE rbtargets)
+gdkdragcontext_s_drag_begin(G_GNUC_UNUSED VALUE self, VALUE rbwindow, VALUE rbtargets)
 {
     GdkWindow *window = GDK_WINDOW(RVAL2GOBJ(rbwindow));
     GList *targets = RVAL2GDKATOMGLIST(rbtargets);

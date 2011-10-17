@@ -93,7 +93,7 @@ pixbuf_render_pixmap_and_mask(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-pixbuf_s_from_drawable(int argc, VALUE *argv, VALUE self)
+pixbuf_s_from_drawable(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
     GdkPixbuf* buf;
@@ -120,7 +120,7 @@ pixbuf_s_from_drawable(int argc, VALUE *argv, VALUE self)
 }
  
 static VALUE
-pixbuf_s_from_image(int argc, VALUE *argv, VALUE self)
+pixbuf_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
     GdkPixbuf* buf;

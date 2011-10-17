@@ -13,7 +13,7 @@
 #include "rbpango.h"
 
 static VALUE
-gdkpango_s_context_get(int argc, VALUE *argv, VALUE self)
+gdkpango_s_context_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE screen, ret;
     rb_scan_args(argc, argv, "01", &screen);

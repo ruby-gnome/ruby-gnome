@@ -33,7 +33,7 @@ gdkcolor_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 }
 
 static VALUE
-gdkcolor_s_parse(VALUE self, VALUE name)
+gdkcolor_s_parse(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     GdkColor c;
     if (! gdk_color_parse(RVAL2CSTR(name), &c)) {

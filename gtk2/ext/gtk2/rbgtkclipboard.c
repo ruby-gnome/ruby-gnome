@@ -46,7 +46,7 @@ rbgtk_make_clipboard(GtkClipboard *gobj)
 #endif
 
 static VALUE
-clipboard_get(int argc, VALUE *argv, VALUE self)
+clipboard_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     GtkClipboard *clipboard;
 
@@ -78,7 +78,7 @@ clipboard_get_display(VALUE self)
 }
 
 static void
-clipboard_get_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, guint info, gpointer func)
+clipboard_get_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, G_GNUC_UNUSED guint info, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
                BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));

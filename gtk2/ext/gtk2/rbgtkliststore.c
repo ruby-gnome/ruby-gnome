@@ -100,7 +100,7 @@ collect_value(VALUE key, VALUE value, ValuesInfo *info)
 
 static void
 hash_to_values(VALUE hash, VALUE iter, GtkTreeModel *model,
-	       gint *g_columns, GValue *g_values, gint length)
+	       gint *g_columns, GValue *g_values, G_GNUC_UNUSED gint length)
 {
     ValuesInfo info;
 

@@ -18,7 +18,7 @@
 #include "global.h"
 
 static void
-exec_input(gpointer data, gint source, GdkInputCondition condition)
+exec_input(gpointer data, G_GNUC_UNUSED gint source, GdkInputCondition condition)
 {
     rb_funcall((VALUE)data, id_call, 1, 
                GFLAGS2RVAL(condition, GDK_TYPE_INPUT_CONDITION));

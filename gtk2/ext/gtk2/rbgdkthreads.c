@@ -39,7 +39,7 @@ rbgdk_threads_leave(VALUE self)
 }
 
 static VALUE
-rbgdk_threads_synchronize(VALUE self)
+rbgdk_threads_synchronize(G_GNUC_UNUSED VALUE self)
 {
     VALUE func = rb_block_proc();
     gdk_threads_enter();

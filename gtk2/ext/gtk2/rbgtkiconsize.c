@@ -11,7 +11,7 @@
 #include "global.h"
 
 static VALUE
-icon_size_lookup(VALUE self, VALUE size)
+icon_size_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     gint width, height;
 
@@ -23,7 +23,7 @@ icon_size_lookup(VALUE self, VALUE size)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-icon_size_lookup_for_settings(VALUE self, VALUE settings, VALUE size)
+icon_size_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
 {
     gint width, height;
 
@@ -37,7 +37,7 @@ icon_size_lookup_for_settings(VALUE self, VALUE settings, VALUE size)
 #endif
 
 static VALUE
-icon_size_register(VALUE self, VALUE name, VALUE width, VALUE height)
+icon_size_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
 {
     /* XXXX FIXME This should be GENUM2RVAL */
     return INT2FIX(gtk_icon_size_register(RVAL2CSTR(name),
@@ -46,20 +46,20 @@ icon_size_register(VALUE self, VALUE name, VALUE width, VALUE height)
 }
 
 static VALUE
-icon_size_register_alias(VALUE self, VALUE alias, VALUE target)
+icon_size_register_alias(G_GNUC_UNUSED VALUE self, VALUE alias, VALUE target)
 {
     gtk_icon_size_register_alias(RVAL2CSTR(alias), RVAL2GENUM(target, GTK_TYPE_ICON_SIZE));
     return Qnil;
 }
 
 static VALUE
-icon_size_from_name(VALUE self, VALUE name)
+icon_size_from_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return INT2FIX(gtk_icon_size_from_name(RVAL2CSTR(name)));
 }
 
 static VALUE
-icon_size_get_name(VALUE self, VALUE size)
+icon_size_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     return CSTR2RVAL(gtk_icon_size_get_name(RVAL2GENUM(size, GTK_TYPE_ICON_SIZE)));
 }

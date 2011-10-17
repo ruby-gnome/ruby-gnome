@@ -76,7 +76,7 @@ gdkdraw_cairo_region(VALUE self, VALUE region)
 #endif
 
 static VALUE
-cairo_available_p(VALUE self)
+cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
 #if CAIRO_AVAILABLE
     return Qtrue;

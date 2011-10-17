@@ -133,7 +133,7 @@ gboolean    gtk_window_has_toplevel_focus   (GtkWindow *window);
 */
 
 static VALUE
-gwin_s_list_toplevels(VALUE self)
+gwin_s_list_toplevels(G_GNUC_UNUSED VALUE self)
 {
     GList* list = gtk_window_list_toplevels();
     VALUE ret = GLIST2ARY(list);
@@ -358,7 +358,7 @@ gboolean            gtk_window_get_decorated            (GtkWindow *window);
 
 
 static VALUE
-gwin_s_get_default_icon_list(VALUE self)
+gwin_s_get_default_icon_list(G_GNUC_UNUSED VALUE self)
 {
     return GLIST2ARYF(gtk_window_get_default_icon_list());
 }
@@ -463,7 +463,7 @@ gwin_resize(VALUE self, VALUE width, VALUE height)
 }
 
 static VALUE
-gwin_s_set_default_icon_list(VALUE self, VALUE rblist)
+gwin_s_set_default_icon_list(G_GNUC_UNUSED VALUE self, VALUE rblist)
 {
     GList *list = RVAL2GDKPIXBUFGLIST(rblist);
 
@@ -579,7 +579,7 @@ gwin_decorated_window_move_resize_window(VALUE self)
 */
 
 static void
-mark_toplevels(void* _)
+mark_toplevels(G_GNUC_UNUSED void *_)
 {
     GList* list = gtk_window_list_toplevels();
     GList* p;

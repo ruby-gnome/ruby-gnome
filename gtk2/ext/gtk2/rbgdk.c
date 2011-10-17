@@ -161,14 +161,14 @@ rbgdk_rval2gdkpixbufglist(VALUE value)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdk_s_get_display_arg_name(VALUE self)
+gdk_s_get_display_arg_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_display_arg_name());
 }
 #endif
 
 static VALUE
-gdk_s_set_locale(VALUE self)
+gdk_s_set_locale(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_set_locale());
 }
@@ -204,7 +204,7 @@ gdk_s_notify_startup_complete(int argc, VALUE *argv, VALUE self)
 #endif
 
 static VALUE
-gdk_s_get_program_class(VALUE self)
+gdk_s_get_program_class(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_program_class());
 }
@@ -217,7 +217,7 @@ gdk_s_set_program_class(VALUE self, VALUE program_class)
 }
 
 static VALUE
-gdk_s_get_display(VALUE self)
+gdk_s_get_display(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_display());
 }
@@ -301,31 +301,31 @@ gdk_s_flush(VALUE self)
 }
 
 static VALUE
-gdk_s_screen_width(VALUE self)
+gdk_s_screen_width(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_width());
 }
 
 static VALUE
-gdk_s_screen_width_mm(VALUE self)
+gdk_s_screen_width_mm(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_width_mm());
 }
 
 static VALUE
-gdk_s_screen_height(VALUE self)
+gdk_s_screen_height(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_height());
 }
 
 static VALUE
-gdk_s_screen_height_mm(VALUE self)
+gdk_s_screen_height_mm(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_height_mm());
 }
 
 static VALUE
-gdk_s_pointer_grab(VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
+gdk_s_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
 {
     return GENUM2RVAL(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
                      RVAL2CBOOL(owner_events),
@@ -343,7 +343,7 @@ gdk_s_pointer_ungrab(VALUE self, VALUE time)
 }
 
 static VALUE
-gdk_s_keyboard_grab(VALUE self, VALUE win, VALUE owner_events, VALUE time)
+gdk_s_keyboard_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE time)
 {
     return GENUM2RVAL(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), 
                                         RVAL2CBOOL(owner_events), NUM2INT(time)), 
@@ -358,7 +358,7 @@ gdk_s_keyboard_ungrab(VALUE self, VALUE time)
 }
 
 static VALUE
-gdk_s_pointer_is_grabbed(VALUE self)
+gdk_s_pointer_is_grabbed(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_pointer_is_grabbed());
 }
@@ -392,7 +392,7 @@ gdk_s_error_trap_pop(VALUE self)
 }
 
 static VALUE
-gdk_s_windowing_x11(VALUE self)
+gdk_s_windowing_x11(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_X11
     return Qtrue;
@@ -402,7 +402,7 @@ gdk_s_windowing_x11(VALUE self)
 }
 
 static VALUE
-gdk_s_windowing_win32(VALUE self)
+gdk_s_windowing_win32(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_WIN32
     return Qtrue;
@@ -412,7 +412,7 @@ gdk_s_windowing_win32(VALUE self)
 }
 
 static VALUE
-gdk_s_windowing_fb(VALUE self)
+gdk_s_windowing_fb(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_FB
     return Qtrue;
@@ -422,7 +422,7 @@ gdk_s_windowing_fb(VALUE self)
 }
 
 static VALUE
-gdk_s_windowing_quartz(VALUE self)
+gdk_s_windowing_quartz(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_QUARTZ
     return Qtrue;
@@ -432,7 +432,7 @@ gdk_s_windowing_quartz(VALUE self)
 }
 
 static VALUE
-gdk_s_windowing_directfb(VALUE self)
+gdk_s_windowing_directfb(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_DIRECTFB
     return Qtrue;
@@ -442,7 +442,7 @@ gdk_s_windowing_directfb(VALUE self)
 }
 
 static VALUE
-gdk_m_target(VALUE self)
+gdk_m_target(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(RUBY_GTK2_TARGET);
 }

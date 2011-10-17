@@ -130,7 +130,7 @@ ps_get_default_right_margin(VALUE self, VALUE unit)
 }
 
 static VALUE
-ps_s_get_default(VALUE self)
+ps_s_get_default(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_paper_size_get_default());
 }

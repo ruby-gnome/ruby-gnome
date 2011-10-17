@@ -13,13 +13,13 @@
 #define _SELF(s) GDK_KEYMAP(RVAL2GOBJ(s))
 
 static VALUE
-gdkkeymap_s_get_default(VALUE self)
+gdkkeymap_s_get_default(G_GNUC_UNUSED VALUE self)
 {
   return GOBJ2RVAL(gdk_keymap_get_default());
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkkeymap_s_get_for_display(VALUE self, VALUE display)
+gdkkeymap_s_get_for_display(G_GNUC_UNUSED VALUE self, VALUE display)
 {
   return GOBJ2RVAL(gdk_keymap_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display))));
 }

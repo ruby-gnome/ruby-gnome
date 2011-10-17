@@ -118,7 +118,7 @@ gtkdrag_dest_unset(VALUE self, VALUE widget)
 }
 
 static VALUE
-gtkdrag_dest_find_target(int argc, VALUE *argv, VALUE self)
+gtkdrag_dest_find_target(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE widget, context, target_list;
     GdkAtom ret;
@@ -132,7 +132,7 @@ gtkdrag_dest_find_target(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gtkdrag_dest_get_target_list(VALUE self, VALUE widget)
+gtkdrag_dest_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
     return BOXED2RVAL(list, GTK_TYPE_TARGET_LIST);
@@ -179,7 +179,7 @@ gtkdrag_dest_set_track_motion(VALUE self, VALUE widget, VALUE track_motion)
 }
 
 static VALUE
-gtkdrag_dest_get_track_motion(VALUE self, VALUE widget)
+gtkdrag_dest_get_track_motion(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2WIDGET(widget)));
 }
@@ -202,7 +202,7 @@ gtkdrag_get_data(VALUE self, VALUE widget, VALUE context, VALUE target, VALUE ti
 }
 
 static VALUE
-gtkdrag_get_source_widget(VALUE self, VALUE context)
+gtkdrag_get_source_widget(G_GNUC_UNUSED VALUE self, VALUE context)
 {
     return GOBJ2RVAL(gtk_drag_get_source_widget(RVAL2DC(context)));
 }
@@ -222,7 +222,7 @@ gtkdrag_unhighlight(VALUE self, VALUE widget)
 }
 
 static VALUE
-gtkdrag_begin(VALUE self, VALUE widget, VALUE target_list, VALUE actions, VALUE button, VALUE event)
+gtkdrag_begin(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE target_list, VALUE actions, VALUE button, VALUE event)
 {
     return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(widget),
                                     RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST),
@@ -280,7 +280,7 @@ gtkdrag_set_icon_default(VALUE self, VALUE context)
 }
 
 static VALUE
-gtkdrag_check_threshold(VALUE self, VALUE widget, VALUE start_x, VALUE start_y, VALUE current_x, VALUE current_y)
+gtkdrag_check_threshold(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE start_x, VALUE start_y, VALUE current_x, VALUE current_y)
 {
     return CBOOL2RVAL(gtk_drag_check_threshold(RVAL2WIDGET(widget), 
                                                NUM2INT(start_x), NUM2INT(start_y),
@@ -354,7 +354,7 @@ gtkdrag_source_set_target_list(VALUE self, VALUE widget, VALUE targetlist)
 }
 
 static VALUE
-gtkdrag_source_get_target_list(VALUE self, VALUE widget)
+gtkdrag_source_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
     return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);

@@ -238,25 +238,25 @@ gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
 
 /* GdkEvent Singleton Methods */
 static VALUE
-gdkevent_s_events_pending(VALUE self)
+gdkevent_s_events_pending(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_events_pending());
 }
 
 static VALUE
-gdkevent_s_peek(VALUE self)
+gdkevent_s_peek(G_GNUC_UNUSED VALUE self)
 {
     return make_gdkevent(gdk_event_peek());
 }
 
 static VALUE
-gdkevent_s_get(VALUE self)
+gdkevent_s_get(G_GNUC_UNUSED VALUE self)
 {
     return make_gdkevent(gdk_event_get());
 }
 
 static VALUE
-gdkevent_s_get_graphics_expose(VALUE self, VALUE window)
+gdkevent_s_get_graphics_expose(G_GNUC_UNUSED VALUE self, VALUE window)
 {
     return make_gdkevent(gdk_event_get_graphics_expose(GDK_WINDOW(RVAL2GOBJ(window))));
 }
@@ -338,7 +338,7 @@ gdkevent_s_handler_set(VALUE self)
 }
 
 static VALUE
-gdkevent_s_get_show_events(VALUE self)
+gdkevent_s_get_show_events(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_get_show_events());
 }
@@ -368,7 +368,7 @@ gdkevent_screen(VALUE self)
   type: String, Integer, Gdk::Color.
  */
 static VALUE
-gdkevent_s_setting_get(int argc, VALUE *argv, VALUE self)
+gdkevent_s_setting_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE name, type;
     GType gtype;

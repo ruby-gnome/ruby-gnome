@@ -19,7 +19,7 @@
 #include "global.h"
 
 static VALUE
-gdkprop_text_property_to_text_list(int argc, VALUE *argv, VALUE self)
+gdkprop_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num, i;
     gchar** list;
@@ -66,7 +66,7 @@ gdkprop_text_property_to_text_list(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, VALUE self)
+gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num, i;
     gchar** list;
@@ -115,7 +115,7 @@ gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkprop_string_to_compound_text(int argc, VALUE *argv, VALUE self)
+gdkprop_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num;
     GdkAtom encoding;
@@ -160,13 +160,13 @@ gdkprop_string_to_compound_text(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkprop_utf8_to_string_target(VALUE self, VALUE str)
+gdkprop_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     return CSTR2RVAL((const char*)gdk_utf8_to_string_target(RVAL2CSTR(str)));
 }
 
 static VALUE
-gdkprop_utf8_to_compound_text(int argc, VALUE *argv, VALUE self)
+gdkprop_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     GdkAtom encoding;
     gint format;
@@ -237,7 +237,7 @@ gdkprop_change(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkprop_get(int argc, VALUE *argv, VALUE self)
+gdkprop_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     /* for argument processing */
     GdkAtom     rtype;

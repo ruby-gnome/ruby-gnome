@@ -158,7 +158,7 @@ dialog_set_response_sensitive(VALUE self, VALUE response_id, VALUE setting)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-dialog_s_alternative_dialog_button_order(VALUE self, VALUE screen)
+dialog_s_alternative_dialog_button_order(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     gboolean ret = gtk_alternative_dialog_button_order(NIL_P(screen) ? NULL : 
                                                        GDK_SCREEN(RVAL2GOBJ(screen)));

@@ -141,19 +141,19 @@ rgb_set_min_colors(VALUE self, VALUE min_colors)
 }
 
 static VALUE
-rgb_get_visual(VALUE self)
+rgb_get_visual(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_visual());
 }
 
 static VALUE
-rgb_get_cmap(VALUE self)
+rgb_get_cmap(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_colormap());
 }
 
 static VALUE
-rgb_ditherable(VALUE self)
+rgb_ditherable(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_rgb_ditherable());
 }

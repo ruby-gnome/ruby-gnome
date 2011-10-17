@@ -15,14 +15,14 @@
 static VALUE prop_func_table;
 
 static VALUE
-settings_s_get_default(VALUE self)
+settings_s_get_default(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_settings_get_default());
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-settings_s_get_for_screen(VALUE self, VALUE screen)
+settings_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_settings_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
@@ -66,7 +66,7 @@ settings_s_install_property(VALUE self, VALUE spec)
 }
 
 static VALUE
-settings_rc_property_parse(VALUE self, VALUE rbspec, VALUE rbstring, GtkRcPropertyParser parser)
+settings_rc_property_parse(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring, GtkRcPropertyParser parser)
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
@@ -101,7 +101,7 @@ settings_rc_property_parse_flags(VALUE self, VALUE rbspec, VALUE rbstring)
 }
 
 static VALUE
-settings_rc_property_parse_requisition(VALUE self, VALUE rbspec, VALUE rbstring)
+settings_rc_property_parse_requisition(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
@@ -144,7 +144,7 @@ settings_rc_property_parse_border_ensure(VALUE value)
 }
 
 static VALUE
-settings_rc_property_parse_border(VALUE self, VALUE rbspec, VALUE rbstring)
+settings_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));

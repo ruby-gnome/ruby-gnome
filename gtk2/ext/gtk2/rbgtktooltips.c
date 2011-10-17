@@ -52,7 +52,7 @@ ttips_set_tip(VALUE self, VALUE win, VALUE text, VALUE priv)
 }
 
 static VALUE
-ttips_s_data_get(VALUE self, VALUE widget)
+ttips_s_data_get(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTooltipsData* data = gtk_tooltips_data_get(GTK_WIDGET(RVAL2GOBJ(widget)));
 
@@ -69,7 +69,7 @@ ttips_force_window(VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-ttips_s_get_info_from_tip_window(VALUE self, VALUE window)
+ttips_s_get_info_from_tip_window(G_GNUC_UNUSED VALUE self, VALUE window)
 {
     GtkTooltips* tooltips;
     GtkWidget* current_widget;

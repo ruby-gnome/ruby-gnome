@@ -23,7 +23,7 @@ gdkdisplay_close(VALUE self)
 }
 
 static VALUE
-gdkdisplay_s_open(VALUE self, VALUE display_name)
+gdkdisplay_s_open(G_GNUC_UNUSED VALUE self, VALUE display_name)
 {
     GdkDisplay* gdisplay = gdk_display_open(RVAL2CSTR(display_name));
     if (! gdisplay) {
@@ -44,7 +44,7 @@ gdkdisplay_s_open(VALUE self, VALUE display_name)
 }
 
 static VALUE
-gdkdisplay_s_get_default(VALUE self)
+gdkdisplay_s_get_default(G_GNUC_UNUSED VALUE self)
 {
     GdkDisplay* gdisplay = gdk_display_get_default();
      if (! gdisplay)

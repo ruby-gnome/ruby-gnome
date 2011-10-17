@@ -506,7 +506,7 @@ cont_initialize(int argc, VALUE *argv, VALUE self)
 // FIXME: use rb_protect
 static void
 get_prop_func(GObject* object,
-              guint property_id,
+              G_GNUC_UNUSED guint property_id,
               GValue* value,
               GParamSpec* pspec)
 {
@@ -532,7 +532,7 @@ get_prop_func(GObject* object,
 // FIXME: use rb_protect
 static void
 set_prop_func(GObject* object,
-              guint property_id,
+              G_GNUC_UNUSED guint property_id,
               const GValue* value,
               GParamSpec* pspec)
 {
@@ -554,11 +554,11 @@ set_prop_func(GObject* object,
 
 // FIXME: use rb_protect
 static void
-get_child_prop_func(GtkContainer* container,
-                    GtkWidget*    child,
-                    guint         property_id,
-                    GValue*       value,
-                    GParamSpec*   pspec)
+get_child_prop_func(GtkContainer *container,
+                    GtkWidget *child,
+                    G_GNUC_UNUSED guint property_id,
+                    GValue *value,
+                    GParamSpec *pspec)
 {
     ID ruby_getter = (ID)g_param_spec_get_qdata(pspec, q_ruby_getter);
     if (!ruby_getter) {
@@ -581,11 +581,11 @@ get_child_prop_func(GtkContainer* container,
 
 // FIXME: use rb_protect
 static void
-set_child_prop_func(GtkContainer* container,
-                    GtkWidget*    child,
-                    guint         property_id,
-                    const GValue* value,
-                    GParamSpec*   pspec)
+set_child_prop_func(GtkContainer *container,
+                    GtkWidget *child,
+                    G_GNUC_UNUSED guint property_id,
+                    const GValue *value,
+                    GParamSpec *pspec)
 {
     ID ruby_setter = (ID)g_param_spec_get_qdata(pspec, q_ruby_setter);
     if (!ruby_setter) {
@@ -605,7 +605,7 @@ set_child_prop_func(GtkContainer* container,
 
 // FIXME: use rb_protect
 static void
-class_init_func(gpointer g_class, gpointer class_data)
+class_init_func(gpointer g_class, G_GNUC_UNUSED gpointer class_data)
 {
     GObjectClass* g_class1 = G_OBJECT_CLASS(g_class);
     GtkContainerClass* g_class2 = GTK_CONTAINER_CLASS(g_class);
@@ -710,7 +710,7 @@ type_register(int argc, VALUE* argv, VALUE self)
 /**********************************************************************/
 
 static void
-cont_mark_callback(GtkWidget* w, gpointer data)
+cont_mark_callback(GtkWidget *w, G_GNUC_UNUSED gpointer data)
 {
     rbgobj_gc_mark_instance(w);
 }

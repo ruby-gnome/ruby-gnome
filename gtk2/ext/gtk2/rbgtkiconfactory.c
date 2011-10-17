@@ -44,7 +44,7 @@ ifactory_lookup(VALUE self, VALUE id)
 }
 
 static VALUE
-ifactory_lookup_default(VALUE self, VALUE id)
+ifactory_lookup_default(G_GNUC_UNUSED VALUE self, VALUE id)
 {
     GtkIconSet *icon_set;
 

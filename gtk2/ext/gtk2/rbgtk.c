@@ -24,7 +24,7 @@ ID id_call;
 static ID id__windows__;
 
 static void
-remove_from_windows(GtkWidget *window, VALUE obj)
+remove_from_windows(G_GNUC_UNUSED GtkWidget *window, VALUE obj)
 {
     VALUE klass, windows;
 
@@ -70,7 +70,7 @@ exec_callback(GtkWidget *widget, gpointer proc)
 #define USE_POLL_FUNC
 
 static VALUE
-gtk_m_events_pending(VALUE self)
+gtk_m_events_pending(G_GNUC_UNUSED VALUE self)
 {
    return CBOOL2RVAL(gtk_events_pending());
 }

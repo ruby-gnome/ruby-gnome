@@ -559,7 +559,7 @@ treeview_set_search_equal_func(VALUE self)
  * Optional Signals
  */
 static VALUE
-treeview_signal_func(guint num, const GValue *values)
+treeview_signal_func(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkTreeView* view = g_value_get_object(&values[0]);
     GtkTreeIter* iter = g_value_get_boxed(&values[1]);

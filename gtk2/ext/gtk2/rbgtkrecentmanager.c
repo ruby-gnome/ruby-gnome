@@ -24,13 +24,13 @@ rm_initialize(VALUE self)
 }
 
 static VALUE
-rm_s_get_default(VALUE self)
+rm_s_get_default(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_default());
 }
 
 static VALUE
-rm_s_get_for_screen(VALUE self, VALUE screen)
+rm_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }

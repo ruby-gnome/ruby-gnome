@@ -91,7 +91,7 @@ gaccelgrp_disconnect(VALUE self, VALUE closure)
 }
 
 static VALUE
-gaccelgrp_s_from_accel_closure(VALUE self, VALUE closure)
+gaccelgrp_s_from_accel_closure(G_GNUC_UNUSED VALUE self, VALUE closure)
 {
     return GOBJ2RVAL(gtk_accel_group_from_accel_closure(
                          (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
@@ -160,7 +160,7 @@ gaccelgrp_unlock(VALUE self)
 
 
 static VALUE
-gaccelgrp_s_activate(VALUE self, VALUE obj, VALUE key, VALUE modtype)
+gaccelgrp_s_activate(G_GNUC_UNUSED VALUE self, VALUE obj, VALUE key, VALUE modtype)
 {
     return CBOOL2RVAL(gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
                                                 NUM2UINT(key),
@@ -168,7 +168,7 @@ gaccelgrp_s_activate(VALUE self, VALUE obj, VALUE key, VALUE modtype)
 }
 
 static VALUE
-gaccelgrp_s_from_object(VALUE self, VALUE object)
+gaccelgrp_s_from_object(G_GNUC_UNUSED VALUE self, VALUE object)
 {
     /* Owned by GTK+ */
     return GSLIST2ARY(gtk_accel_groups_from_object(RVAL2GOBJ(object)));

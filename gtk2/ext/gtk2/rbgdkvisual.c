@@ -20,7 +20,7 @@
 #define _SELF(self) (GDK_VISUAL(RVAL2GOBJ(self)))
 
 static VALUE
-gdkvisual_s_query_depths(VALUE self)
+gdkvisual_s_query_depths(G_GNUC_UNUSED VALUE self)
 {
     gint *depth;
     gint count;
@@ -36,7 +36,7 @@ gdkvisual_s_query_depths(VALUE self)
 }
 
 static VALUE
-gdkvisual_s_query_visual_types(VALUE self)
+gdkvisual_s_query_visual_types(G_GNUC_UNUSED VALUE self)
 {
     GdkVisualType *visual_types;
     gint count;
@@ -52,7 +52,7 @@ gdkvisual_s_query_visual_types(VALUE self)
 }
 
 static VALUE
-gdkvisual_s_list_visuals(VALUE self)
+gdkvisual_s_list_visuals(G_GNUC_UNUSED VALUE self)
 {
     GList *list = gdk_list_visuals(), *cur;
     VALUE ary = rb_ary_new();
@@ -65,44 +65,44 @@ gdkvisual_s_list_visuals(VALUE self)
 }
 
 static VALUE
-gdkvisual_s_get_best_depth(VALUE self)
+gdkvisual_s_get_best_depth(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_visual_get_best_depth());
 }
 
 static VALUE
-gdkvisual_s_get_best_type(VALUE self)
+gdkvisual_s_get_best_type(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_visual_get_best_type());
 }
 
 static VALUE
-gdkvisual_s_get_system(VALUE self)
+gdkvisual_s_get_system(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_visual_get_system());
 }
 
 static VALUE
-gdkvisual_s_get_best(VALUE self)
+gdkvisual_s_get_best(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_visual_get_best());
 }
 
 static VALUE
-gdkvisual_s_get_best_with_depth(VALUE self, VALUE depth)
+gdkvisual_s_get_best_with_depth(G_GNUC_UNUSED VALUE self, VALUE depth)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_depth(NUM2INT(depth)));
 }
 
 static VALUE
-gdkvisual_s_get_best_with_type(VALUE self, VALUE type)
+gdkvisual_s_get_best_with_type(G_GNUC_UNUSED VALUE self, VALUE type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_depth(
                                     (GdkVisualType)GENUM2RVAL(type, GDK_TYPE_VISUAL_TYPE)));
 }
 
 static VALUE
-gdkvisual_s_get_best_with_both(VALUE self, VALUE depth, VALUE type)
+gdkvisual_s_get_best_with_both(G_GNUC_UNUSED VALUE self, VALUE depth, VALUE type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_both(
                                     NUM2INT(depth),

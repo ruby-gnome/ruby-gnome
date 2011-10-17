@@ -101,7 +101,10 @@ void        gtk_tree_model_get_valist (GtkTreeModel *tree_model,
 */
 
 static gboolean
-treemodel_foreach_func(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer func)
+treemodel_foreach_func(GtkTreeModel *model,
+                       GtkTreePath *path,
+                       GtkTreeIter *iter,
+                       G_GNUC_UNUSED gpointer func)
 {
     iter->user_data3 = model;
     rb_yield(rb_ary_new3(3, GOBJ2RVAL(model), GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter)));
@@ -171,13 +174,13 @@ treemodel_rows_reordered(VALUE self, VALUE rbpath, VALUE rbiter, VALUE rbnew_ord
 }
 
 static VALUE
-treemodel_iter_is_valid(VALUE self, VALUE iter)
+treemodel_iter_is_valid(G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE iter)
 {
     return Qtrue;
 }
 
 static VALUE
-signal_func(guint num, const GValue *values)
+signal_func(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkTreeModel* model = g_value_get_object(&values[0]);
     GtkTreePath* path = g_value_get_boxed(&values[1]);
@@ -188,7 +191,7 @@ signal_func(guint num, const GValue *values)
 }
 
 static VALUE
-signal_rows_reordered_func(guint num, const GValue *values)
+signal_rows_reordered_func(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkTreeModel* model = g_value_get_object(&values[0]);
     GtkTreePath* path = g_value_get_boxed(&values[1]);

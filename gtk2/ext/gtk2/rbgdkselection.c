@@ -15,7 +15,7 @@
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
-gdkselection_owner_set(int argc, VALUE *argv, VALUE self)
+gdkselection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE owner, selection, time, send_event;
     int ret;
@@ -42,7 +42,7 @@ gdkselection_owner_set(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkselection_owner_get(int argc, VALUE *argv, VALUE self)
+gdkselection_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE selection;
 
@@ -71,7 +71,7 @@ gdkselection_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target,
 }
 
 static VALUE
-gdkselection_property_get(VALUE self, VALUE requestor)
+gdkselection_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 {
     guchar *data;
     GdkAtom prop_type;

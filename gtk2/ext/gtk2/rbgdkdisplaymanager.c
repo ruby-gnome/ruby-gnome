@@ -15,7 +15,7 @@
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
 static VALUE
-gdkdisplaymanager_get(VALUE self)
+gdkdisplaymanager_get(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_display_manager_get());
 }
