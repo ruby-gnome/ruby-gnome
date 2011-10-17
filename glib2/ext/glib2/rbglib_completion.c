@@ -164,7 +164,7 @@ void        g_completion_set_compare        (GCompletion *cmp,
 */
 
 void
-Init_glib_completion()
+Init_glib_completion(void)
 {
     VALUE comp = G_DEF_CLASS(G_TYPE_COMPLETION, "Completion", mGLib); 
 
