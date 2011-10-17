@@ -65,7 +65,7 @@ rbglib_m_unsetenv(VALUE self, VALUE variable)
 #endif
 
 #if GLIB_CHECK_VERSION(2,8,0)
-#if HAVE_G_LISTENV
+#ifdef HAVE_G_LISTENV
 static VALUE
 rbglib_m_listenv(VALUE self)
 {
@@ -302,7 +302,7 @@ Init_glib_utils(void)
     rb_define_module_function(mGLib, "unsetenv", rbglib_m_unsetenv, 1);
 #endif
 #if GLIB_CHECK_VERSION(2,8,0)
-#if HAVE_G_LISTENV
+#ifdef HAVE_G_LISTENV
     rb_define_module_function(mGLib, "listenv", rbglib_m_listenv, 0);
 #endif
     rb_define_module_function(mGLib, "host_name", rbglib_m_host_name, 0);
