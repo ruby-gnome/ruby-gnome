@@ -181,7 +181,7 @@ rbgdk_rval2gdkatomglist_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdkatomglist_rescue(VALUE value)
 {
     g_free(((struct rbgdk_rval2gdkatomglist_args *)value)->result);

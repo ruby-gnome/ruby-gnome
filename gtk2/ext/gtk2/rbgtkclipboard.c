@@ -109,7 +109,7 @@ clipboard_set_body(VALUE value)
     return CBOOL2RVAL(result);
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 clipboard_set_rescue(VALUE value)
 {
     struct clipboard_set_args *args = (struct clipboard_set_args *)value;

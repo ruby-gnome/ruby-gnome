@@ -50,7 +50,7 @@ rbgdk_rval2gdkpoints_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdkpoints_rescue(VALUE value)
 {
     g_free(((struct rbgdk_rval2gdkpoints_args *)value)->result);
@@ -93,7 +93,7 @@ rbgdk_rval2gdkatoms_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdkatoms_rescue(VALUE value)
 {
     g_free(((struct rbgdk_rval2gdkatoms_args *)value)->result);
@@ -136,7 +136,7 @@ rbgdk_rval2gdkpixbufglist_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdkpixbufglist_rescue(VALUE value)
 {
     g_list_free(((struct rval2gdkpixbufglist_args *)value)->result);

@@ -358,7 +358,7 @@ rbg_rval2gtkwidgetglist_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gtkwidgetglist_rescue(VALUE value)
 {
     g_list_free(((struct rval2gtkwidgetglist_args *)value)->result);

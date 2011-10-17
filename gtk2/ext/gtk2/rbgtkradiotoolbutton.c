@@ -35,7 +35,7 @@ rbgtk_rval2gtkradiotoolbuttongslist_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgtk_rval2gtkradiotoolbuttongslist_rescue(VALUE value)
 {
     g_slist_free(((struct rbgtk_rval2gtkradiotoolbuttongslist_args *)value)->result);

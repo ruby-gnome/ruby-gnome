@@ -108,7 +108,7 @@ rbgdk_rval2gdkspans_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgdk_rval2gdkspans_rescue(VALUE value)
 {
     g_free(((struct rbgdk_rval2gdkspans_args *)value)->result);

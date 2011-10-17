@@ -40,7 +40,7 @@ rbgtk_rval2gtktargetentries_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbgtk_rval2gtktargetentries_rescue(VALUE value)
 {
     g_free(((struct rbgtk_rval2gtktargetentries_args *)value)->result);

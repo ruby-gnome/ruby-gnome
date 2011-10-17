@@ -71,7 +71,7 @@ txt_tt_get_size(VALUE self)
 }
 
 void
-Init_gtk_text_tag_table()
+Init_gtk_text_tag_table(void)
 {
     VALUE gTextTagTable = G_DEF_CLASS(GTK_TYPE_TEXT_TAG_TABLE, "TextTagTable", mGtk);
 
