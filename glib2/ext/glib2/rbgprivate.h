@@ -86,6 +86,31 @@ extern gboolean rbgobj_convert_unref(GType type, gpointer instance);
 
 #define RubyGObjectHookModule "RubyGObjectHook__"
 
+G_GNUC_INTERNAL void Init_gutil(void);
+G_GNUC_INTERNAL void Init_gutil_callback(void);
+G_GNUC_INTERNAL void Init_glib_int64(void);
+G_GNUC_INTERNAL void Init_glib_error(void);
+G_GNUC_INTERNAL void Init_glib_threads(void);
+G_GNUC_INTERNAL void Init_glib_convert(void);
+G_GNUC_INTERNAL void Init_glib_messages(void);
+G_GNUC_INTERNAL void Init_glib_spawn(void);
+G_GNUC_INTERNAL void Init_glib_fileutils(void);
+G_GNUC_INTERNAL void Init_glib_utils(void);
+G_GNUC_INTERNAL void Init_glib_i18n(void);
+G_GNUC_INTERNAL void Init_glib_win32(void);
+G_GNUC_INTERNAL void Init_gobject(void);
+G_GNUC_INTERNAL void Init_glib_main_loop(void);
+G_GNUC_INTERNAL void Init_glib_main_context(void);
+G_GNUC_INTERNAL void Init_glib_source(void);
+G_GNUC_INTERNAL void Init_glib_poll_fd(void);
+G_GNUC_INTERNAL void Init_glib_io_channel(void);
+G_GNUC_INTERNAL void Init_glib_shell(void);
+G_GNUC_INTERNAL void Init_glib_completion(void);
+G_GNUC_INTERNAL void Init_glib_timer(void);
+G_GNUC_INTERNAL void Init_glib_unicode(void);
+G_GNUC_INTERNAL void Init_glib_keyfile(void);
+G_GNUC_INTERNAL void Init_glib_bookmark_file(void);
+
 G_END_DECLS
 
 #endif

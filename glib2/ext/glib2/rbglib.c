@@ -18,31 +18,6 @@ static ID id_inspect;
 
 VALUE mGLib;
 
-extern void Init_gutil();
-extern void Init_gutil_callback();
-extern void Init_glib_int64();
-extern void Init_glib_error();
-extern void Init_glib_threads();
-extern void Init_glib_convert();
-extern void Init_glib_messages();
-extern void Init_glib_spawn();
-extern void Init_glib_fileutils();
-extern void Init_glib_utils();
-extern void Init_glib_i18n();
-extern void Init_glib_win32();
-extern void Init_gobject();
-extern void Init_glib_main_loop();
-extern void Init_glib_main_context();
-extern void Init_glib_source();
-extern void Init_glib_poll_fd();
-extern void Init_glib_io_channel();
-extern void Init_glib_shell();
-extern void Init_glib_completion();
-extern void Init_glib_timer();
-extern void Init_glib_unicode();
-extern void Init_glib_keyfile();
-extern void Init_glib_bookmark_file();
-
 const gchar *
 rbg_rval2cstr(VALUE *str)
 {
