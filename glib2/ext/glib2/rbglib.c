@@ -364,7 +364,7 @@ rbg_rval2strv_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2strv_rescue(VALUE value)
 {
     g_free(((struct rval2strv_args *)value)->result);
@@ -421,7 +421,7 @@ rbg_rval2strv_dup_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2strv_dup_rescue(VALUE value)
 {
     g_free(((struct rval2strv_dup_args *)value)->result);
@@ -514,7 +514,7 @@ rbg_rval2gbooleans_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gbooleans_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gbooleans_args *)value)->result);
@@ -557,7 +557,7 @@ rbg_rval2gints_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gints_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gints_args *)value)->result);
@@ -600,7 +600,7 @@ rbg_rval2gint8s_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gint8s_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gint8s_args *)value)->result);
@@ -643,7 +643,7 @@ rbg_rval2guint8s_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2guint8s_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2guint8s_args *)value)->result);
@@ -686,7 +686,7 @@ rbg_rval2guint16s_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2guint16s_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2guint16s_args *)value)->result);
@@ -729,7 +729,7 @@ rbg_rval2guint32s_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2guint32s_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2guint32s_args *)value)->result);
@@ -772,7 +772,7 @@ rbg_rval2gdoubles_body(VALUE value)
     return Qnil;
 }
 
-static VALUE
+static G_GNUC_NORETURN VALUE
 rbg_rval2gdoubles_rescue(VALUE value)
 {
     g_free(((struct rbg_rval2gdoubles_args *)value)->result);
