@@ -913,6 +913,8 @@ gdkwin_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_warn("Not supported in GTK+-2.0.x.");
 #endif 
    	break;
+    default:
+        break;
     }
     if (win == NULL)
         return Qnil;
@@ -942,6 +944,8 @@ gdkwin_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_warn("Not supported in GTK+-2.0.x.");
 #endif
     	break;
+    default:
+        break;
     }
     if (win == NULL)
         return Qnil;

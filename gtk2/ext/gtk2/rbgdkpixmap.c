@@ -174,6 +174,8 @@ gdkpmap_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
             rb_warn("Not supported. GTK+-2.10.0 or later.");
 #endif
             break;
+        default:
+            break;
         }
     return win ? GOBJ2RVAL(win) : Qnil;
 }
@@ -199,6 +201,8 @@ gdkpmap_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_warn("Not supported in GTK+-2.0.x.");
 #endif
     	break;
+    default:
+        break;
     }
     if (win == NULL)
         return Qnil;

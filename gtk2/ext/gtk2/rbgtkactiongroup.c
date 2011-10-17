@@ -122,6 +122,8 @@ rbg_rval2gtkactionentries_body(VALUE value)
         case 2:
             args->result[i].stock_id = RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(RARRAY_PTR(entry)[1]);
             break;
+        default:
+            break;
         }
     }
 
@@ -227,6 +229,8 @@ rbg_rval2gtktoggleactionentries_body(VALUE value)
             args->result[i].label = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[2]);
         case 2:
             args->result[i].stock_id = RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(RARRAY_PTR(entry)[1]);
+            break;
+        default:
             break;
         }
     }
