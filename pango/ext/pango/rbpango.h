@@ -14,7 +14,7 @@
 #define PANGO_ENABLE_BACKEND
 #include <pango/pango.h>
 
-#if HAVE_FREETYPE2
+#ifdef HAVE_FREETYPE2
 #include <pango/pangofc-font.h>
 #endif
 
@@ -23,7 +23,7 @@
 
 #if PANGO_CHECK_VERSION(1,10,0)
 #include <pango/pangocairo.h>
-#  if HAVE_RB_CAIRO_H
+#  ifdef HAVE_RB_CAIRO_H
 #include <rb_cairo.h>
 #  endif
 #endif
