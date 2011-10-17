@@ -551,8 +551,10 @@ set_option(VALUE self, VALUE key, VALUE value)
 }
 #endif
 
-void 
-Init_gdk_pixbuf2()
+extern void Init_gdk_pixbuf2(void);
+
+void
+Init_gdk_pixbuf2(void)
 {
     VALUE mGdk = rb_define_module("Gdk");
     VALUE gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
