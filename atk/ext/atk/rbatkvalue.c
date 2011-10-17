@@ -16,7 +16,7 @@
 static VALUE
 rbatk_value_get_current_value(VALUE self)
 {
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     atk_value_get_current_value(_SELF(self), &gval);
 
     return GVAL2RVAL(&gval);
@@ -26,7 +26,7 @@ rbatk_value_get_current_value(VALUE self)
 static VALUE
 rbatk_value_get_maximum_value(VALUE self)
 {
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     atk_value_get_maximum_value(_SELF(self), &gval);
 
     return GVAL2RVAL(&gval);
@@ -35,7 +35,7 @@ rbatk_value_get_maximum_value(VALUE self)
 static VALUE
 rbatk_value_get_minimum_value(VALUE self)
 {
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     atk_value_get_minimum_value(_SELF(self), &gval);
 
     return GVAL2RVAL(&gval);
@@ -44,7 +44,7 @@ rbatk_value_get_minimum_value(VALUE self)
 static VALUE
 rbatk_value_set_current_value(VALUE self, VALUE value)
 {
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     g_value_init(&gval, RVAL2GTYPE(value));
 
     rbgobj_rvalue_to_gvalue(value, &gval);
