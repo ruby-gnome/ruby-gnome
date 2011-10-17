@@ -9,7 +9,7 @@
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_TEXT(RVAL2GOBJ(s)))
 
@@ -289,7 +289,7 @@ rbatk_tattr_get_value(VALUE self, VALUE index)
                                                   NUM2INT(index)));
 }
 void
-Init_atk_text()
+Init_atk_text(void)
 {
     VALUE tattr;
     VALUE mText = G_DEF_INTERFACE(ATK_TYPE_TEXT, "Text", mAtk);

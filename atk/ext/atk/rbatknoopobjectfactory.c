@@ -9,7 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_NO_OP_OBJECT_FACTORY(RVAL2GOBJ(s)))
 
@@ -21,7 +21,7 @@ rbatk_no_op_object_factory_initialize(VALUE self)
 }
 
 void
-Init_atk_noopobjectfactory()
+Init_atk_noopobjectfactory(void)
 {
     VALUE noop = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT_FACTORY, "NoOpObjectFactory", mAtk);
 

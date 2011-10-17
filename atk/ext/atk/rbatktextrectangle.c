@@ -19,7 +19,7 @@
                           Hiroshi Igarashi
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
 #define _SELF(r) ((AtkTextRectangle*)RVAL2BOXED(r, ATK_TYPE_TEXT_RECTANGLE))
@@ -125,7 +125,7 @@ atktextrect_to_a(VALUE self)
 #endif
 
 void
-Init_atk_text_rectangle()
+Init_atk_text_rectangle(void)
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
     VALUE rect = G_DEF_CLASS(ATK_TYPE_TEXT_RECTANGLE, "TextRectangle", mAtk);

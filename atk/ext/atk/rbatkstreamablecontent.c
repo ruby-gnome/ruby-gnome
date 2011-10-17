@@ -9,7 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_STREAMABLE_CONTENT(RVAL2GOBJ(s)))
 
@@ -37,7 +37,7 @@ rbatkst_get_stream(VALUE self, VALUE mime_type)
 
 
 void
-Init_atk_streamable_content()
+Init_atk_streamable_content(void)
 {
     VALUE mContent = G_DEF_INTERFACE(ATK_TYPE_STREAMABLE_CONTENT, "StreamableContent", mAtk);
 

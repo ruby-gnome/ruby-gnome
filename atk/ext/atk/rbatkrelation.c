@@ -8,7 +8,6 @@
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
 #include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_RELATION(RVAL2GOBJ(s)))
@@ -89,7 +88,7 @@ rbatkrel_add_target(VALUE self, VALUE obj)
 #endif
 
 void
-Init_atk_relation()
+Init_atk_relation(void)
 {
     VALUE rel = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
     VALUE type;

@@ -8,7 +8,7 @@
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_IMAGE(RVAL2GOBJ(s)))
 
@@ -45,7 +45,7 @@ rbatkimage_get_image_size(VALUE self)
 }
 
 void
-Init_atk_image()
+Init_atk_image(void)
 {
     VALUE image = G_DEF_INTERFACE(ATK_TYPE_IMAGE, "Image", mAtk);
 

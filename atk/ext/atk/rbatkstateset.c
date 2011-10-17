@@ -9,7 +9,6 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
 #include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_STATE_SET(RVAL2GOBJ(s)))
@@ -149,7 +148,7 @@ rbatkstateset_xor_sets(VALUE self, VALUE compare_set)
 }
 
 void
-Init_atk_state_set()
+Init_atk_state_set(void)
 {
     VALUE stateset = G_DEF_CLASS(ATK_TYPE_STATE_SET, "StateSet", mAtk);
 

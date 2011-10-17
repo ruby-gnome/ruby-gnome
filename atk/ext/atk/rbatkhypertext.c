@@ -8,7 +8,7 @@
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_HYPERTEXT(RVAL2GOBJ(s)))
 
@@ -31,7 +31,7 @@ rbatk_ht_get_link_index(VALUE self, VALUE char_index)
 }
 
 void
-Init_atk_hypertext()
+Init_atk_hypertext(void)
 {
     VALUE ht = G_DEF_INTERFACE(ATK_TYPE_HYPERTEXT, "Hypertext", mAtk);
 

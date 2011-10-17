@@ -9,7 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_DOCUMENT(RVAL2GOBJ(s)))
 
@@ -70,7 +70,7 @@ rbatk_document_get_locale(VALUE self)
 #endif
 
 void
-Init_atk_document()
+Init_atk_document(void)
 {
     VALUE mDoc = G_DEF_INTERFACE(ATK_TYPE_DOCUMENT, "Document", mAtk);
 

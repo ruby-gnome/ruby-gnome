@@ -8,7 +8,7 @@
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_OBJECT_FACTORY(RVAL2GOBJ(s)))
 
@@ -32,7 +32,7 @@ rbatkfact_invalidate(VALUE self)
 }
 
 void
-Init_atk_objectfactory()
+Init_atk_objectfactory(void)
 {
     VALUE fact = G_DEF_CLASS(ATK_TYPE_OBJECT_FACTORY, "ObjectFactory", mAtk);
     rb_define_method(fact, "create_accessible", rbatkfact_create_accessible, 0);

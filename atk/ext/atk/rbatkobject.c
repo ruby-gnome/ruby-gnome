@@ -9,7 +9,7 @@
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) RVAL2ATKOBJECT(s)
 
@@ -138,7 +138,7 @@ rbatkrole_s_for_name(VALUE self, VALUE name)
 }
 
 void
-Init_atk_object()
+Init_atk_object(void)
 {
     VALUE obj = G_DEF_CLASS(ATK_TYPE_OBJECT, "Object", mAtk);
     VALUE role;

@@ -8,7 +8,7 @@
 
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_SELECTION(RVAL2GOBJ(s)))
 
@@ -61,7 +61,7 @@ rbatksel_select_all_selection(VALUE self)
 }
 
 void
-Init_atk_selection()
+Init_atk_selection(void)
 {
     VALUE sel = G_DEF_INTERFACE(ATK_TYPE_SELECTION, "Selection", mAtk);
 

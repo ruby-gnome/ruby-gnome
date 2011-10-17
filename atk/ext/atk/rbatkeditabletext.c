@@ -8,7 +8,7 @@
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+
 #include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_EDITABLE_TEXT(RVAL2GOBJ(s)))
@@ -152,7 +152,7 @@ rbatk_edit_paste_text(VALUE self, VALUE position)
 }
 
 void
-Init_atk_editabletext()
+Init_atk_editabletext(void)
 {
     VALUE editable = G_DEF_INTERFACE(ATK_TYPE_EDITABLE_TEXT, "EditableText", mAtk);
 

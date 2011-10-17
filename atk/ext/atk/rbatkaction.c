@@ -9,7 +9,7 @@
   Copyright (C) 2004 Masao Mutoh 
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_ACTION(RVAL2GOBJ(s)))
 
@@ -58,7 +58,7 @@ rbatk_action_set_description(VALUE self, VALUE i, VALUE desc)
 }
 
 void
-Init_atk_action()
+Init_atk_action(void)
 {
     VALUE mAction = G_DEF_INTERFACE(ATK_TYPE_ACTION, "Action", mAtk);
 

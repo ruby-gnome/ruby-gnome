@@ -9,7 +9,7 @@
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_COMPONENT(RVAL2GOBJ(s)))
 
@@ -140,7 +140,7 @@ comp_get_alpha(VALUE self)
 #endif
 
 void
-Init_atk_component()
+Init_atk_component(void)
 {
     VALUE comp = G_DEF_INTERFACE(ATK_TYPE_COMPONENT, "Component", mAtk);
 /*

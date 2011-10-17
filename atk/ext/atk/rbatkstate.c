@@ -8,7 +8,7 @@
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_STATE(RVAL2GOBJ(s)))
 
@@ -30,7 +30,7 @@ rbatkstate_s_for_name(VALUE self, VALUE name)
 }
 
 void
-Init_atk_state()
+Init_atk_state(void)
 {
     VALUE state = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
     rb_define_singleton_method(state, "type_register", rbatkstate_s_type_register, 1);

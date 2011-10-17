@@ -8,7 +8,7 @@
 
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_REGISTRY(RVAL2GOBJ(s)))
 
@@ -41,7 +41,7 @@ rbatkregistry_s_get_default_registry(VALUE self)
 }
 
 void
-Init_atk_registry()
+Init_atk_registry(void)
 {
     VALUE registry = G_DEF_CLASS(ATK_TYPE_REGISTRY, "Registry", mAtk);
     rb_define_method(registry, "set_factory_type", rbatkregistry_set_factory_type, 2);

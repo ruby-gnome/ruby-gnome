@@ -9,7 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_VALUE(RVAL2GOBJ(s)))
 
@@ -57,7 +57,7 @@ rbatk_value_set_current_value(VALUE self, VALUE value)
 }
 
 void
-Init_atk_value()
+Init_atk_value(void)
 {
     VALUE mValue = G_DEF_INTERFACE(ATK_TYPE_VALUE, "Value", mAtk);
 

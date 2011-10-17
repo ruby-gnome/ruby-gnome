@@ -9,7 +9,7 @@
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_TABLE(RVAL2GOBJ(s)))
 
@@ -224,7 +224,7 @@ rbatk_table_remove_row_selection(VALUE self, VALUE row)
 }
 
 void
-Init_atk_table()
+Init_atk_table(void)
 {
     VALUE mTable = G_DEF_INTERFACE(ATK_TYPE_TABLE, "Table", mAtk);
 

@@ -8,7 +8,7 @@
 
   Copyright (C) 2003,2004 Masao Mutoh
 ************************************************/
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_HYPERLINK(RVAL2GOBJ(s)))
 
@@ -45,7 +45,7 @@ rbatk_hl_get_n_anchors(VALUE self)
 }
 
 void
-Init_atk_hyperlink()
+Init_atk_hyperlink(void)
 {
     VALUE hl = G_DEF_CLASS(ATK_TYPE_HYPERLINK, "Hyperlink", mAtk);
 

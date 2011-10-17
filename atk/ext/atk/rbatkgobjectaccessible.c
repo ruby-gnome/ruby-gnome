@@ -9,7 +9,7 @@
   Copyright (C) 2003 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #define _SELF(s) (ATK_GOBJECT_ACCESSIBLE(RVAL2GOBJ(s)))
 
@@ -26,7 +26,7 @@ rbatk_gobjectaccessible_get_object(VALUE self)
 }
 
 void
-Init_atk_gobjectaccessible()
+Init_atk_gobjectaccessible(void)
 {
     VALUE macc = G_DEF_CLASS(ATK_TYPE_GOBJECT_ACCESSIBLE, "GObjectAccessible", mAtk);
 

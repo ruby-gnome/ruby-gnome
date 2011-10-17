@@ -19,7 +19,7 @@
                           Hiroshi Igarashi
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
 #define _SELF(r) ((AtkTextRange*)RVAL2BOXED(r, ATK_TYPE_TEXT_RANGE))
@@ -74,7 +74,7 @@ atktextrange_content(VALUE self)
 #endif
 
 void
-Init_atk_text_range()
+Init_atk_text_range(void)
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
     VALUE range = G_DEF_CLASS(ATK_TYPE_TEXT_RANGE, "TextRange",  mAtk);

@@ -9,7 +9,7 @@
   Copyright (C) 2004 Masao Mutoh
 ************************************************/
 
-#include "rbatk.h"
+#include "rbatkprivate.h"
 
 static ID id_call;
 
@@ -87,7 +87,7 @@ rbatk_get_toolkit_version(VALUE self)
 }
 
 void
-Init_atk_util()
+Init_atk_util(void)
 {
     VALUE coord;
 
