@@ -13,7 +13,7 @@
 #define RVAL2BUILDER(obj) (GTK_BUILDER(RVAL2GOBJ(obj)))
 
 static VALUE
-buildable_get_name(VALUE self, VALUE name)
+buildable_get_name(VALUE self)
 {
     return CSTR2RVAL(gtk_buildable_get_name(_SELF(self)));
 }
