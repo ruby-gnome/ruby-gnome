@@ -98,6 +98,8 @@ static VALUE
 rbg_pangologattrs2rval_free_ensure(VALUE value)
 {
     g_free(((struct rbg_pangologattrs2rval_free_args *)value)->attrs);
+
+    return Qnil;
 }
 
 static VALUE
