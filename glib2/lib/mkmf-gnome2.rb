@@ -20,7 +20,7 @@ rescue LoadError
 end
 require 'glib-mkenums'
 
-$CFLAGS += ENV['CFLAGS'] if ENV['CFLAGS']
+$CFLAGS += " #{ENV['CFLAGS']}" if ENV['CFLAGS']
 
 def try_compiler_option(opt, &block)
   checking_for "#{opt} option to compiler" do
