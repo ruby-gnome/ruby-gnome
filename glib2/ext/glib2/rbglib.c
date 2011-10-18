@@ -905,7 +905,7 @@ Init_glib2(void)
     mGLib = rb_define_module("GLib");
 
     setlocale (LC_CTYPE, "");
-#if LC_MESSAGES
+#ifdef LC_MESSAGES
     setlocale (LC_MESSAGES, "");
 #endif
 
