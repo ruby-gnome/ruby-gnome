@@ -7,7 +7,6 @@ EXPORTS
     rbgdk_rval2gdkpoints
     rbgdk_rval2gdkatoms
     rbgdk_rval2gdkpixbufglist
-    gdk_atom_copy
     gdk_atom_get_type
     gdk_geometry_get_type
     gdk_region_get_type
@@ -16,11 +15,9 @@ EXPORTS
     get_gdkevent
     gtk_accel_group_entry_get_type
     gtk_accel_key_get_type
-    gtk_notebookpage_get_type
     gtk_target_list_get_type
     gtk_bindingset_get_type
     make_gdkevent
-    notebookpage_copy
     rbgtk_atom2selectiondata
     rbgtk_atom2selectiondata_free
     rbgtk_rval2gtktargetentries
