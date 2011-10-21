@@ -148,8 +148,7 @@ rclosure_unref(GRClosure *rclosure)
         g_list_free(rclosure->objects);
         rclosure->objects = NULL;
         if (!NIL_P(rclosure->rb_holder)) {
-            RDATA(rclosure->rb_holder)->dmark = NULL;
-            RDATA(rclosure->rb_holder)->dfree = NULL;
+            DATA_PTR(rclosure->rb_holder) = NULL;
             rclosure->rb_holder = Qnil;
         }
     }
@@ -185,6 +184,9 @@ gr_closure_holder_mark(GRClosure *rclosure)
 static void
 gr_closure_holder_free(GRClosure *rclosure)
 {
+    if (!rclosure)
+        return;
+
     if (rclosure->count > 0) {
         rclosure->count = 1;
 
