@@ -33,6 +33,30 @@
 extern "C" {
 #endif /* __cplusplus */
 
+#define RG_DEF_MODFUNC(method, argc) \
+        rb_define_module_function(RG_TARGET_NAMESPACE, #method, rg_m_ ## method, argc)
+#define RG_DEF_MODFUNC_P(method, argc) \
+        rb_define_module_function(RG_TARGET_NAMESPACE, #method"?", rg_m_ ## method ## _p, argc)
+#define RG_DEF_MODFUNC_OPERATOR(ope, func, argc) \
+        rb_define_module_function(RG_TARGET_NAMESPACE, ope, rg_m_operator_ ## func, argc)
+#define RG_DEF_SMETHOD(method, argc) \
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, #method, rg_s_ ## method, argc)
+#define RG_DEF_SMETHOD_P(method, argc) \
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, #method"?", rg_s_ ## method ## _p, argc)
+#define RG_DEF_SMETHOD_OPERATOR(ope, func, argc) \
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, ope, rg_s_operator_ ## func, argc)
+#define RG_DEF_METHOD(method, argc) \
+        rb_define_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
+#define RG_DEF_METHOD_P(method, argc) \
+        rb_define_method(RG_TARGET_NAMESPACE, #method"?", rg_ ## method ## _p, argc)
+#define RG_DEF_METHOD_BANG(method, argc) \
+        rb_define_method(RG_TARGET_NAMESPACE, #method"!", rg_ ## method ## _bang, argc)
+#define RG_DEF_METHOD_OPERATOR(ope, func, argc) \
+        rb_define_method(RG_TARGET_NAMESPACE, ope, rg_operator_ ## func, argc)
+#define RG_DEF_ATTR(attr, read, write, ex) \
+        rb_attr(RG_TARGET_NAMESPACE, rb_intern(attr), read, write, ex)
+#define RG_DEF_ALIAS(new, old) rb_define_alias(RG_TARGET_NAMESPACE, new, old)
+
 #define G_DEF_SETTER(klass, name) \
     rb_funcall(klass, rbgutil_id_module_eval, 1, rb_str_new2( \
     "def " name "=(val); set_" name "(val); val; end\n"))
