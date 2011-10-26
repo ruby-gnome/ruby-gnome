@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mAction
 #define _SELF(s) (ATK_ACTION(RVAL2GOBJ(s)))
 
 static VALUE
@@ -70,15 +71,15 @@ rbatk_action_set_description(VALUE self, VALUE i, VALUE desc)
 void
 Init_atk_action(void)
 {
-    VALUE mAction = G_DEF_INTERFACE(ATK_TYPE_ACTION, "Action", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_ACTION, "Action", mAtk);
 
-    rb_define_method(mAction, "do_action", rbatk_action_do_action, 1);
-    rb_define_method(mAction, "n_actions", rbatk_action_get_n_actions, 0);
-    rb_define_method(mAction, "get_description", rbatk_action_get_description, 1);
-    rb_define_method(mAction, "get_name", rbatk_action_get_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "do_action", rbatk_action_do_action, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_actions", rbatk_action_get_n_actions, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_description", rbatk_action_get_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_name", rbatk_action_get_name, 1);
 #ifdef HAVE_ATK_ACTION_GET_LOCALIZED_NAME
-    rb_define_method(mAction, "get_localized_name", rbatk_action_get_localized_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_localized_name", rbatk_action_get_localized_name, 1);
 #endif
-    rb_define_method(mAction, "get_keybinding", rbatk_action_get_keybinding, 1);
-    rb_define_method(mAction, "set_description", rbatk_action_set_description, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_keybinding", rbatk_action_get_keybinding, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_description", rbatk_action_set_description, 2);
 }

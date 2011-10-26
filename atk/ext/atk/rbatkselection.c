@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mSelection
 #define _SELF(s) (ATK_SELECTION(RVAL2GOBJ(s)))
 
 static VALUE
@@ -74,13 +75,13 @@ rbatksel_select_all_selection(VALUE self)
 void
 Init_atk_selection(void)
 {
-    VALUE sel = G_DEF_INTERFACE(ATK_TYPE_SELECTION, "Selection", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_SELECTION, "Selection", mAtk);
 
-    rb_define_method(sel, "add_selection", rbatksel_add_selection, 1);
-    rb_define_method(sel, "clear_selection", rbatksel_clear_selection, 0);
-    rb_define_method(sel, "ref_selection", rbatksel_ref_selection, 1);
-    rb_define_method(sel, "selection_count", rbatksel_get_selection_count, 0);
-    rb_define_method(sel, "child_selected?", rbatksel_is_child_selected, 1);
-    rb_define_method(sel, "remove_selection", rbatksel_remove_selection, 1);
-    rb_define_method(sel, "select_all_selection", rbatksel_select_all_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_selection", rbatksel_add_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_selection", rbatksel_clear_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_selection", rbatksel_ref_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection_count", rbatksel_get_selection_count, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_selected?", rbatksel_is_child_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_selection", rbatksel_remove_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_all_selection", rbatksel_select_all_selection, 0);
 }

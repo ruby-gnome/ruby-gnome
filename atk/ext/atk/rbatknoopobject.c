@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cNoOpObject
 #define _SELF(s) (ATK_NOOPOBJECT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -33,7 +34,7 @@ rbatk_no_op_object_initialize(VALUE self, VALUE gobj)
 void
 Init_atk_noopobject(void)
 {
-    VALUE noop = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT, "NoOpObject", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT, "NoOpObject", mAtk);
 
-    rb_define_method(noop, "initialize", rbatk_no_op_object_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatk_no_op_object_initialize, 1);
 }

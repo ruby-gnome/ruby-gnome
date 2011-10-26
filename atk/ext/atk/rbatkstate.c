@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cState
 #define _SELF(s) (ATK_STATE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -43,8 +44,8 @@ rbatkstate_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 void
 Init_atk_state(void)
 {
-    VALUE state = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
-    rb_define_singleton_method(state, "type_register", rbatkstate_s_type_register, 1);
-    rb_define_singleton_method(state, "for_name", rbatkstate_s_for_name, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", rbatkstate_s_type_register, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_name", rbatkstate_s_for_name, 1);
     G_DEF_CONSTANTS(mAtk, ATK_TYPE_STATE_TYPE, "ATK_");
 }

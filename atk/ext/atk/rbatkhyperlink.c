@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cHyperlink
 #define _SELF(s) (ATK_HYPERLINK(RVAL2GOBJ(s)))
 
 static VALUE
@@ -58,13 +59,13 @@ rbatk_hl_get_n_anchors(VALUE self)
 void
 Init_atk_hyperlink(void)
 {
-    VALUE hl = G_DEF_CLASS(ATK_TYPE_HYPERLINK, "Hyperlink", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_HYPERLINK, "Hyperlink", mAtk);
 
-    rb_define_method(hl, "get_uri", rbatk_hl_get_uri, 1);
-    rb_define_method(hl, "get_object", rbatk_hl_get_object, 1);
-    rb_define_method(hl, "valid?", rbatk_hl_is_valid, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_uri", rbatk_hl_get_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_object", rbatk_hl_get_object, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "valid?", rbatk_hl_is_valid, 0);
 #ifdef HAVE_ATK_HYPERLINK_IS_INLINE
-    rb_define_method(hl, "inline?", rbatk_hl_is_inline, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "inline?", rbatk_hl_is_inline, 0);
 #endif
-    rb_define_method(hl, "n_anchors", rbatk_hl_get_n_anchors, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_anchors", rbatk_hl_get_n_anchors, 0);
 }

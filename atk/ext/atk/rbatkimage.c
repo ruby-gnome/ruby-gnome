@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mImage
 #define _SELF(s) (ATK_IMAGE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -58,12 +59,12 @@ rbatkimage_get_image_size(VALUE self)
 void
 Init_atk_image(void)
 {
-    VALUE image = G_DEF_INTERFACE(ATK_TYPE_IMAGE, "Image", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_IMAGE, "Image", mAtk);
 
-    rb_define_method(image, "image_position", rbatkimage_get_image_position, 1);
-    rb_define_method(image, "image_description", rbatkimage_get_image_description, 0);
-    rb_define_method(image, "set_image_description", rbatkimage_set_image_description, 1);
-    rb_define_method(image, "image_size", rbatkimage_get_image_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "image_position", rbatkimage_get_image_position, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "image_description", rbatkimage_get_image_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_image_description", rbatkimage_set_image_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "image_size", rbatkimage_get_image_size, 0);
 
-    G_DEF_SETTERS(image);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

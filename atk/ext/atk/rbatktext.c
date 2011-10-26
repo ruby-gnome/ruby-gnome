@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mText
 #define _SELF(s) (ATK_TEXT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -302,49 +303,49 @@ void
 Init_atk_text(void)
 {
     VALUE tattr;
-    VALUE mText = G_DEF_INTERFACE(ATK_TYPE_TEXT, "Text", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_TEXT, "Text", mAtk);
 
-    rb_define_method(mText, "get_text", rbatk_text_get_text, 2);
-    rb_define_method(mText, "get_character_at_offset", rbatk_text_get_character_at_offset, 1);
-    rb_define_method(mText, "get_text_after_offset", rbatk_text_get_text_after_offset, 2);
-    rb_define_method(mText, "get_text_at_offset", rbatk_text_get_text_at_offset, 2);
-    rb_define_method(mText, "get_text_before_offset", rbatk_text_get_text_before_offset, 2);
-    rb_define_method(mText, "caret_offset", rbatk_text_get_caret_offset, 0);
-    rb_define_method(mText, "get_character_extents", rbatk_text_get_character_extents, 2);
-    rb_define_method(mText, "get_run_attributes", rbatk_text_get_run_attributes, 1);
-    rb_define_method(mText, "default_attributes", rbatk_text_get_default_attributes, 0);
-    rb_define_method(mText, "character_count", rbatk_text_get_character_count, 0);
-    rb_define_method(mText, "get_offset_at_point", rbatk_text_get_offset_at_point, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text", rbatk_text_get_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_character_at_offset", rbatk_text_get_character_at_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text_after_offset", rbatk_text_get_text_after_offset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text_at_offset", rbatk_text_get_text_at_offset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text_before_offset", rbatk_text_get_text_before_offset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "caret_offset", rbatk_text_get_caret_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_character_extents", rbatk_text_get_character_extents, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_run_attributes", rbatk_text_get_run_attributes, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_attributes", rbatk_text_get_default_attributes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "character_count", rbatk_text_get_character_count, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_offset_at_point", rbatk_text_get_offset_at_point, 3);
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
 #ifdef HAVE_ATK_TEXT_CLIP_TYPE_GET_TYPE
-    rb_define_method(mText, "get_bounded_ranges", rbatk_text_get_bounded_ranges, 4);
-    rb_define_method(mText, "get_range_extents", rbatk_text_get_range_extents, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_bounded_ranges", rbatk_text_get_bounded_ranges, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_range_extents", rbatk_text_get_range_extents, 3);
 #endif
 #endif
-    rb_define_method(mText, "n_selections", rbatk_text_get_n_selections, 0);
-    rb_define_method(mText, "get_selection", rbatk_text_get_selection, 1);
-    rb_define_method(mText, "add_selection", rbatk_text_add_selection, 2);
-    rb_define_method(mText, "remove_selection", rbatk_text_remove_selection, 1);
-    rb_define_method(mText, "set_selection", rbatk_text_set_selection, 3);
-    rb_define_method(mText, "set_caret_offset", rbatk_text_set_caret_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_selections", rbatk_text_get_n_selections, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_selection", rbatk_text_get_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_selection", rbatk_text_add_selection, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_selection", rbatk_text_remove_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_selection", rbatk_text_set_selection, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_caret_offset", rbatk_text_set_caret_offset, 1);
 
-    G_DEF_SETTERS(mText);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
     
     /* AtkTextBoundary */
 #ifdef ATK_TYPE_TEXT_BOUNDARY
-    G_DEF_CLASS(ATK_TYPE_TEXT_BOUNDARY, "Boundary", mText);
-    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_BOUNDARY, "ATK_TEXT_");
+    G_DEF_CLASS(ATK_TYPE_TEXT_BOUNDARY, "Boundary", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_TEXT_BOUNDARY, "ATK_TEXT_");
 #endif    
     /* AtkTextClipType */
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
 #ifdef HAVE_ATK_TEXT_CLIP_TYPE_GET_TYPE
-    G_DEF_CLASS(ATK_TYPE_TEXT_CLIP_TYPE, "ClipType", mText);
-    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_CLIP_TYPE, "ATK_TEXT_");
+    G_DEF_CLASS(ATK_TYPE_TEXT_CLIP_TYPE, "ClipType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_TEXT_CLIP_TYPE, "ATK_TEXT_");
 #endif
 #endif
 
-    tattr = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", mText);
-    G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
+    tattr = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
 
     rb_define_singleton_method(tattr, "type_register", rbatk_tattr_s_register, 1);
     rb_define_singleton_method(tattr, "for_name", rbatk_tattr_s_for_name, 1);

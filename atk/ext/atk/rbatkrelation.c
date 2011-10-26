@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cRelation
 #define _SELF(s) (ATK_RELATION(RVAL2GOBJ(s)))
 
 static VALUE
@@ -101,16 +102,16 @@ rbatkrel_add_target(VALUE self, VALUE obj)
 void
 Init_atk_relation(void)
 {
-    VALUE rel = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
     VALUE type;
-    rb_define_singleton_method(rel, "type_register", rbatkrel_s_type_register, 1);
-    rb_define_method(rel, "initialize", rbatkrel_initialize, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", rbatkrel_s_type_register, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatkrel_initialize, 2);
 #if ATK_CHECK_VERSION(1,9,0)
-    rb_define_method(rel, "add_target", rbatkrel_add_target, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_target", rbatkrel_add_target, 1);
 #endif
 
     /* AtkRelationType */
-    type = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", rel);
+    type = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", RG_TARGET_NAMESPACE);
     rb_define_singleton_method(type, "for_name", rbatkrelation_s_for_name, 1);
-    G_DEF_CONSTANTS(rel, ATK_TYPE_RELATION_TYPE, "ATK_");
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_RELATION_TYPE, "ATK_");
 }

@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mComponent
 #define _SELF(s) (ATK_COMPONENT(RVAL2GOBJ(s)))
 
 /*
@@ -152,27 +153,27 @@ comp_get_alpha(VALUE self)
 void
 Init_atk_component(void)
 {
-    VALUE comp = G_DEF_INTERFACE(ATK_TYPE_COMPONENT, "Component", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_COMPONENT, "Component", mAtk);
 /*
-    rb_define_method(comp, "add_focus_handler", comp_add_focus_handler, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_focus_handler", comp_add_focus_handler, 0);
 */
-    rb_define_method(comp, "contains?", comp_contains, 3);
-    rb_define_method(comp, "get_extents", comp_get_extents, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "contains?", comp_contains, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_extents", comp_get_extents, 1);
 #ifdef HAVE_ATK_COMPONENT_GET_LAYER
-    rb_define_method(comp, "layer", comp_get_layer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "layer", comp_get_layer, 0);
 #endif
 #ifdef HAVE_ATK_COMPONENT_GET_MDI_ZORDER
-    rb_define_method(comp, "mdi_zorder", comp_get_mdi_zorder, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mdi_zorder", comp_get_mdi_zorder, 0);
 #endif
-    rb_define_method(comp, "position", comp_get_position, 1);
-    rb_define_method(comp, "size", comp_get_size, 0);
-    rb_define_method(comp, "grab_focus", comp_grab_focus, 0);
-    rb_define_method(comp, "ref_accessible_at_point", comp_ref_accessible_at_point, 3);
-    rb_define_method(comp, "remove_focus_handler", comp_remove_focus_handler, 1);
-    rb_define_method(comp, "set_extents", comp_set_extents, 5);
-    rb_define_method(comp, "set_position", comp_set_position, 2);
-    rb_define_method(comp, "set_size", comp_set_size, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "position", comp_get_position, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", comp_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "grab_focus", comp_grab_focus, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_accessible_at_point", comp_ref_accessible_at_point, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_focus_handler", comp_remove_focus_handler, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_extents", comp_set_extents, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_position", comp_set_position, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", comp_set_size, 2);
 #if ATK_CHECK_VERSION(1,12,0)
-    rb_define_method(comp, "alpha", comp_get_alpha, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "alpha", comp_get_alpha, 0);
 #endif
 }

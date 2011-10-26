@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mValue
 #define _SELF(s) (ATK_VALUE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -69,12 +70,12 @@ rbatk_value_set_current_value(VALUE self, VALUE value)
 void
 Init_atk_value(void)
 {
-    VALUE mValue = G_DEF_INTERFACE(ATK_TYPE_VALUE, "Value", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_VALUE, "Value", mAtk);
 
-    rb_define_method(mValue, "current", rbatk_value_get_current_value, 0);
-    rb_define_method(mValue, "max", rbatk_value_get_maximum_value, 0);
-    rb_define_method(mValue, "min", rbatk_value_get_minimum_value, 0);
-    rb_define_method(mValue, "set_current", rbatk_value_set_current_value, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "current", rbatk_value_get_current_value, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "max", rbatk_value_get_maximum_value, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "min", rbatk_value_get_minimum_value, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_current", rbatk_value_set_current_value, 1);
 
-    G_DEF_SETTERS(mValue);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

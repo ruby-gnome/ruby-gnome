@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cObject
 #define _SELF(s) RVAL2ATKOBJECT(s)
 
 /* How can I implement this? Since 1.10
@@ -150,29 +151,29 @@ rbatkrole_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 void
 Init_atk_object(void)
 {
-    VALUE obj = G_DEF_CLASS(ATK_TYPE_OBJECT, "Object", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_OBJECT, "Object", mAtk);
     VALUE role;
 
-    rb_define_method(obj, "n_accessible_children", rbatkobj_get_n_accessible_children, 0);
-    rb_define_method(obj, "ref_accessible_child", rbatkobj_ref_accessible_child, 1);
-    rb_define_method(obj, "ref_relation_set", rbatkobj_ref_releation_set, 0);
-    rb_define_method(obj, "ref_state_set", rbatkobj_ref_state_set, 0);
-    rb_define_method(obj, "index_in_parent", rbatkobj_get_index_in_parent, 0);
-    rb_define_method(obj, "notify_state_change", rbatkobj_notify_state_change, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_accessible_children", rbatkobj_get_n_accessible_children, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_accessible_child", rbatkobj_ref_accessible_child, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_relation_set", rbatkobj_ref_releation_set, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_state_set", rbatkobj_ref_state_set, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "index_in_parent", rbatkobj_get_index_in_parent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "notify_state_change", rbatkobj_notify_state_change, 2);
 #ifdef HAVE_ATK_OBJECT_ADD_RELATIONSHIP
-    rb_define_method(obj, "add_relationship", rbatkobj_add_relationship, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_relationship", rbatkobj_add_relationship, 2);
 #endif
 #ifdef HAVE_ATK_OBJECT_REMOVE_RELATIONSHIP
-    rb_define_method(obj, "remove_relationship", rbatkobj_remove_relationship, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_relationship", rbatkobj_remove_relationship, 2);
 #endif
 
     /* AtkRole */
-    role = G_DEF_CLASS(ATK_TYPE_ROLE, "Role", obj);
+    role = G_DEF_CLASS(ATK_TYPE_ROLE, "Role", RG_TARGET_NAMESPACE);
     rb_define_method(role, "localized_name", rbatkrole_get_localized_name, 0);
     rb_define_singleton_method(role, "for_name", rbatkrole_s_for_name, 1);
-    G_DEF_CONSTANTS(obj, ATK_TYPE_ROLE, "ATK_");
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_ROLE, "ATK_");
 
     /* AtkLayer */
-    G_DEF_CLASS(ATK_TYPE_LAYER, "Layer", obj);
-    G_DEF_CONSTANTS(obj, ATK_TYPE_LAYER, "ATK_");
+    G_DEF_CLASS(ATK_TYPE_LAYER, "Layer", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_LAYER, "ATK_");
 }

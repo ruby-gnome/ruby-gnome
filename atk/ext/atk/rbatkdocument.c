@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mDocument
 #define _SELF(s) (ATK_DOCUMENT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -82,18 +83,18 @@ rbatk_document_get_locale(VALUE self)
 void
 Init_atk_document(void)
 {
-    VALUE mDoc = G_DEF_INTERFACE(ATK_TYPE_DOCUMENT, "Document", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_DOCUMENT, "Document", mAtk);
 
-    rb_define_method(mDoc, "document_type", rbatk_document_get_document_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "document_type", rbatk_document_get_document_type, 0);
 /*
-    rb_define_method(mDoc, "document", rbatk_document_get_document, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "document", rbatk_document_get_document, 0);
 */
 #if ATK_CHECK_VERSION(1,12,0)
-    rb_define_method(mDoc, "get_attribute_value", rbatk_document_get_attribute_value, 1);
-    rb_define_alias(mDoc, "[]", "get_attribute_value");
-    rb_define_method(mDoc, "set_attribute_value", rbatk_document_set_attribute_value, 2);
-    rb_define_alias(mDoc, "[]=", "set_attribute_value");
-    rb_define_method(mDoc, "attributes", rbatk_document_get_attributes, 0);
-    rb_define_method(mDoc, "locale", rbatk_document_get_locale, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_value", rbatk_document_get_attribute_value, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_attribute_value");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_value", rbatk_document_set_attribute_value, 2);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]=", "set_attribute_value");
+    rb_define_method(RG_TARGET_NAMESPACE, "attributes", rbatk_document_get_attributes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "locale", rbatk_document_get_locale, 0);
 #endif
 }

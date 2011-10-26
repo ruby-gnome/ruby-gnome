@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cUtil
 static ID id_call;
 
 /* How can I implement them?
@@ -101,27 +102,27 @@ Init_atk_util(void)
 {
     VALUE coord;
 
-    VALUE util = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
 
     id_call = rb_intern("call");
 
-    rb_define_singleton_method(util, "focus_tracker_notify", rbatk_focus_tracker_notify, 1);
-    rb_define_singleton_method(util, "add_key_event_listener", rbatk_add_key_event_listener, 0);
-    rb_define_singleton_method(util, "remove_key_event_listener", rbatk_remove_key_event_listener, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "focus_tracker_notify", rbatk_focus_tracker_notify, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "add_key_event_listener", rbatk_add_key_event_listener, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "remove_key_event_listener", rbatk_remove_key_event_listener, 1);
 
-    rb_define_singleton_method(util, "root", rbatk_get_root, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "root", rbatk_get_root, 0);
 #if ATK_CHECK_VERSION(1,6,0)
-    rb_define_singleton_method(util, "focus_object", rbatk_get_focus_object, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "focus_object", rbatk_get_focus_object, 0);
 #endif
-    rb_define_singleton_method(util, "toolkit_name", rbatk_get_toolkit_name, 0);
-    rb_define_singleton_method(util, "toolkit_version", rbatk_get_toolkit_version, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "toolkit_name", rbatk_get_toolkit_name, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "toolkit_version", rbatk_get_toolkit_version, 0);
 
     /* AtkCoordType */
-    coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", util);
-    G_DEF_CONSTANTS(util, ATK_TYPE_COORD_TYPE, "ATK_");
+    coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_COORD_TYPE, "ATK_");
 
     /* AtkKeyEventType */
-    coord = G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", util);
-    G_DEF_CONSTANTS(util, ATK_TYPE_KEY_EVENT_TYPE, "ATK_");
+    coord = G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_KEY_EVENT_TYPE, "ATK_");
 
 }

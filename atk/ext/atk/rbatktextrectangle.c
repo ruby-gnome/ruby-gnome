@@ -26,6 +26,7 @@
 #include "rbatkprivate.h"
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+#define RG_TARGET_NAMESPACE cTextRectangle
 #define _SELF(r) ((AtkTextRectangle*)RVAL2BOXED(r, ATK_TYPE_TEXT_RECTANGLE))
 
 /**********************************/
@@ -132,19 +133,19 @@ void
 Init_atk_text_rectangle(void)
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
-    VALUE rect = G_DEF_CLASS(ATK_TYPE_TEXT_RECTANGLE, "TextRectangle", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_RECTANGLE, "TextRectangle", mAtk);
 
-    rb_define_method(rect, "initialize", atktextrect_initialize, 4);
-    rb_define_method(rect, "x", atktextrect_x, 0);
-    rb_define_method(rect, "y", atktextrect_y, 0);
-    rb_define_method(rect, "width", atktextrect_w, 0);
-    rb_define_method(rect, "height", atktextrect_h, 0);
-    rb_define_method(rect, "set_x", atktextrect_set_x, 1);
-    rb_define_method(rect, "set_y", atktextrect_set_y, 1);
-    rb_define_method(rect, "set_width", atktextrect_set_w, 1);
-    rb_define_method(rect, "set_height", atktextrect_set_h, 1);
-    rb_define_method(rect, "to_a", atktextrect_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", atktextrect_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "x", atktextrect_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "y", atktextrect_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", atktextrect_w, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", atktextrect_h, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_x", atktextrect_set_x, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_y", atktextrect_set_y, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width", atktextrect_set_w, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_height", atktextrect_set_h, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", atktextrect_to_a, 0);
 
-    G_DEF_SETTERS(rect);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

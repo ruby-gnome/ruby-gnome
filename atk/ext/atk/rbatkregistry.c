@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cRegistry
 #define _SELF(s) (ATK_REGISTRY(RVAL2GOBJ(s)))
 
 static VALUE
@@ -54,9 +55,9 @@ rbatkregistry_s_get_default_registry(G_GNUC_UNUSED VALUE self)
 void
 Init_atk_registry(void)
 {
-    VALUE registry = G_DEF_CLASS(ATK_TYPE_REGISTRY, "Registry", mAtk);
-    rb_define_method(registry, "set_factory_type", rbatkregistry_set_factory_type, 2);
-    rb_define_method(registry, "get_factory_type", rbatkregistry_get_factory_type, 1);
-    rb_define_method(registry, "get_factory", rbatkregistry_get_factory, 1);
-    rb_define_singleton_method(registry, "default_registry", rbatkregistry_s_get_default_registry, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_REGISTRY, "Registry", mAtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_factory_type", rbatkregistry_set_factory_type, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_factory_type", rbatkregistry_get_factory_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_factory", rbatkregistry_get_factory, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_registry", rbatkregistry_s_get_default_registry, 0);
 }

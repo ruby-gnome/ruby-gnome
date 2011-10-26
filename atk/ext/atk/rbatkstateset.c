@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cStateSet
 #define _SELF(s) (ATK_STATE_SET(RVAL2GOBJ(s)))
 
 static VALUE
@@ -160,20 +161,20 @@ rbatkstateset_xor_sets(VALUE self, VALUE compare_set)
 void
 Init_atk_state_set(void)
 {
-    VALUE stateset = G_DEF_CLASS(ATK_TYPE_STATE_SET, "StateSet", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_STATE_SET, "StateSet", mAtk);
 
-    rb_define_method(stateset, "initialize", rbatkstateset_initialize, 0);
-    rb_define_method(stateset, "empty?", rbatkstateset_is_empty, 0);
-    rb_define_method(stateset, "add_state", rbatkstateset_add_state, 1);
-    rb_define_method(stateset, "add_states", rbatkstateset_add_states, 1);
-    rb_define_method(stateset, "clear_states", rbatkstateset_clear_states, 0);
-    rb_define_method(stateset, "contains_state", rbatkstateset_contains_state, 1);
-    rb_define_method(stateset, "contains_states", rbatkstateset_contains_states, 1);
-    rb_define_method(stateset, "remove_state", rbatkstateset_remove_state, 1);
-    rb_define_method(stateset, "and", rbatkstateset_and_sets, 1);
-    rb_define_alias(stateset, "&", "and");
-    rb_define_method(stateset, "or", rbatkstateset_or_sets, 1);
-    rb_define_alias(stateset, "|", "or");
-    rb_define_method(stateset, "xor", rbatkstateset_xor_sets, 1);
-    rb_define_alias(stateset, "^", "xor");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatkstateset_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "empty?", rbatkstateset_is_empty, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_state", rbatkstateset_add_state, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_states", rbatkstateset_add_states, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_states", rbatkstateset_clear_states, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "contains_state", rbatkstateset_contains_state, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "contains_states", rbatkstateset_contains_states, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_state", rbatkstateset_remove_state, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "and", rbatkstateset_and_sets, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "&", "and");
+    rb_define_method(RG_TARGET_NAMESPACE, "or", rbatkstateset_or_sets, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "|", "or");
+    rb_define_method(RG_TARGET_NAMESPACE, "xor", rbatkstateset_xor_sets, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "^", "xor");
 }

@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mEditableText
 #define _SELF(s) (ATK_EDITABLE_TEXT(RVAL2GOBJ(s)))
 
 struct rval2atkattributegslist_args {
@@ -164,15 +165,15 @@ rbatk_edit_paste_text(VALUE self, VALUE position)
 void
 Init_atk_editabletext(void)
 {
-    VALUE editable = G_DEF_INTERFACE(ATK_TYPE_EDITABLE_TEXT, "EditableText", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_EDITABLE_TEXT, "EditableText", mAtk);
 
-   rb_define_method(editable, "set_run_attributes", rbatk_edit_set_run_attributes, 3);
-   rb_define_method(editable, "set_text_contents", rbatk_edit_set_text_contents, 1);
-   rb_define_method(editable, "insert_text", rbatk_edit_insert_text, 2);
-   rb_define_method(editable, "copy_text", rbatk_edit_copy_text, 2);
-   rb_define_method(editable, "cut_text", rbatk_edit_cut_text, 2);
-   rb_define_method(editable, "delete_text", rbatk_edit_delete_text, 2);
-   rb_define_method(editable, "paste_text", rbatk_edit_paste_text, 1);
+   rb_define_method(RG_TARGET_NAMESPACE, "set_run_attributes", rbatk_edit_set_run_attributes, 3);
+   rb_define_method(RG_TARGET_NAMESPACE, "set_text_contents", rbatk_edit_set_text_contents, 1);
+   rb_define_method(RG_TARGET_NAMESPACE, "insert_text", rbatk_edit_insert_text, 2);
+   rb_define_method(RG_TARGET_NAMESPACE, "copy_text", rbatk_edit_copy_text, 2);
+   rb_define_method(RG_TARGET_NAMESPACE, "cut_text", rbatk_edit_cut_text, 2);
+   rb_define_method(RG_TARGET_NAMESPACE, "delete_text", rbatk_edit_delete_text, 2);
+   rb_define_method(RG_TARGET_NAMESPACE, "paste_text", rbatk_edit_paste_text, 1);
 
-   G_DEF_SETTERS(editable);
+   G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

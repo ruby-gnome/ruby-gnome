@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mTable
 #define _SELF(s) (ATK_TABLE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -236,37 +237,37 @@ rbatk_table_remove_row_selection(VALUE self, VALUE row)
 void
 Init_atk_table(void)
 {
-    VALUE mTable = G_DEF_INTERFACE(ATK_TYPE_TABLE, "Table", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_TABLE, "Table", mAtk);
 
-    rb_define_method(mTable, "ref_at", rbatk_table_ref_at, 2);
-    rb_define_method(mTable, "get_index_at", rbatk_table_get_index_at, 2);
-    rb_define_method(mTable, "get_column_at_index", rbatk_table_get_column_at_index, 1);
-    rb_define_method(mTable, "get_row_at_index", rbatk_table_get_row_at_index, 1);
-    rb_define_method(mTable, "n_columns", rbatk_table_get_n_columns, 0);
-    rb_define_method(mTable, "n_rows", rbatk_table_get_n_rows, 0);
-    rb_define_method(mTable, "get_column_extent_at", rbatk_table_get_column_extent_at, 2);
-    rb_define_method(mTable, "get_row_extent_at", rbatk_table_get_row_extent_at, 2);
-    rb_define_method(mTable, "caption", rbatk_table_get_caption, 0);
-    rb_define_method(mTable, "get_column_description", rbatk_table_get_column_description, 1);
-    rb_define_method(mTable, "get_row_description", rbatk_table_get_row_description, 1);
-    rb_define_method(mTable, "get_column_header", rbatk_table_get_column_header, 1);
-    rb_define_method(mTable, "get_row_header", rbatk_table_get_row_header, 1);
-    rb_define_method(mTable, "summary", rbatk_table_get_summary, 0);
-    rb_define_method(mTable, "set_caption", rbatk_table_set_caption, 1);
-    rb_define_method(mTable, "set_row_description", rbatk_table_set_row_description, 2);
-    rb_define_method(mTable, "set_column_description", rbatk_table_set_column_description, 2);
-    rb_define_method(mTable, "set_row_header", rbatk_table_set_row_header, 2);
-    rb_define_method(mTable, "set_column_header", rbatk_table_set_column_header, 2);
-    rb_define_method(mTable, "set_summary", rbatk_table_set_summary, 1);
-    rb_define_method(mTable, "selected_columns", rbatk_table_get_selected_columns, 0);
-    rb_define_method(mTable, "selected_rows", rbatk_table_get_selected_rows, 0);
-    rb_define_method(mTable, "column_selected?", rbatk_table_is_column_selected, 1);
-    rb_define_method(mTable, "row_selected?", rbatk_table_is_row_selected, 1);
-    rb_define_method(mTable, "selected?", rbatk_table_is_selected, 2);
-    rb_define_method(mTable, "add_column_selection", rbatk_table_add_column_selection, 1);
-    rb_define_method(mTable, "add_row_selection", rbatk_table_add_row_selection, 1);
-    rb_define_method(mTable, "remove_column_selection", rbatk_table_remove_column_selection, 1);
-    rb_define_method(mTable, "remove_row_selection", rbatk_table_remove_row_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_at", rbatk_table_ref_at, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_index_at", rbatk_table_get_index_at, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column_at_index", rbatk_table_get_column_at_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_row_at_index", rbatk_table_get_row_at_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_columns", rbatk_table_get_n_columns, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_rows", rbatk_table_get_n_rows, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column_extent_at", rbatk_table_get_column_extent_at, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_row_extent_at", rbatk_table_get_row_extent_at, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "caption", rbatk_table_get_caption, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column_description", rbatk_table_get_column_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_row_description", rbatk_table_get_row_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column_header", rbatk_table_get_column_header, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_row_header", rbatk_table_get_row_header, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "summary", rbatk_table_get_summary, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_caption", rbatk_table_set_caption, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_row_description", rbatk_table_set_row_description, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_column_description", rbatk_table_set_column_description, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_row_header", rbatk_table_set_row_header, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_column_header", rbatk_table_set_column_header, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_summary", rbatk_table_set_summary, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected_columns", rbatk_table_get_selected_columns, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected_rows", rbatk_table_get_selected_rows, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "column_selected?", rbatk_table_is_column_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "row_selected?", rbatk_table_is_row_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected?", rbatk_table_is_selected, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_column_selection", rbatk_table_add_column_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_row_selection", rbatk_table_add_row_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_column_selection", rbatk_table_remove_column_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_row_selection", rbatk_table_remove_row_selection, 1);
 
-    G_DEF_SETTERS(mTable);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

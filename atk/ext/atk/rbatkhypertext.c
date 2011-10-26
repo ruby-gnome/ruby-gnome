@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mHypertext
 #define _SELF(s) (ATK_HYPERTEXT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -44,9 +45,9 @@ rbatk_ht_get_link_index(VALUE self, VALUE char_index)
 void
 Init_atk_hypertext(void)
 {
-    VALUE ht = G_DEF_INTERFACE(ATK_TYPE_HYPERTEXT, "Hypertext", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_HYPERTEXT, "Hypertext", mAtk);
 
-    rb_define_method(ht, "get_link", rbatk_ht_get_link, 1);
-    rb_define_method(ht, "n_links", rbatk_ht_get_n_links, 0);
-    rb_define_method(ht, "link_index", rbatk_ht_get_link_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_link", rbatk_ht_get_link, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_links", rbatk_ht_get_n_links, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "link_index", rbatk_ht_get_link_index, 1);
 }

@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cRelationSet
 #define _SELF(s) (ATK_RELATION_SET(RVAL2GOBJ(s)))
 
 static VALUE
@@ -84,15 +85,15 @@ rbatkrelset_add_relation(VALUE self, VALUE relationship, VALUE obj)
 void
 Init_atk_relation_set(void)
 {
-    VALUE rel = G_DEF_CLASS(ATK_TYPE_RELATION_SET, "RelationSet", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION_SET, "RelationSet", mAtk);
 
-    rb_define_method(rel, "initialize", rbatkrelset_initialize, 0);
-    rb_define_method(rel, "contains?", rbatkrelset_contains, 1);
-    rb_define_method(rel, "remove", rbatkrelset_remove, 1);
-    rb_define_method(rel, "add", rbatkrelset_add, 1);
-    rb_define_method(rel, "n_relations", rbatkrelset_get_n_relations, 0);
-    rb_define_method(rel, "get_relation", rbatkrelset_get_relation, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatkrelset_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "contains?", rbatkrelset_contains, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", rbatkrelset_remove, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", rbatkrelset_add, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_relations", rbatkrelset_get_n_relations, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_relation", rbatkrelset_get_relation, 1);
 #if ATK_CHECK_VERSION(1,9,0)
-    rb_define_method(rel, "add_relation", rbatkrelset_add_relation, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_relation", rbatkrelset_add_relation, 2);
 #endif
 }

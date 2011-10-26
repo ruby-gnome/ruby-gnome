@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cNoOpObjectFactory
 #define _SELF(s) (ATK_NO_OP_OBJECT_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
@@ -33,7 +34,7 @@ rbatk_no_op_object_factory_initialize(VALUE self)
 void
 Init_atk_noopobjectfactory(void)
 {
-    VALUE noop = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT_FACTORY, "NoOpObjectFactory", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT_FACTORY, "NoOpObjectFactory", mAtk);
 
-    rb_define_method(noop, "initialize", rbatk_no_op_object_factory_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatk_no_op_object_factory_initialize, 0);
 }

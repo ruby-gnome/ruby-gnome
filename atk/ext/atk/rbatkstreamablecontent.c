@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mStreamableContent
 #define _SELF(s) (ATK_STREAMABLE_CONTENT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -49,9 +50,9 @@ rbatkst_get_stream(VALUE self, VALUE mime_type)
 void
 Init_atk_streamable_content(void)
 {
-    VALUE mContent = G_DEF_INTERFACE(ATK_TYPE_STREAMABLE_CONTENT, "StreamableContent", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_STREAMABLE_CONTENT, "StreamableContent", mAtk);
 
-    rb_define_method(mContent, "n_mime_types", rbatkst_get_n_mime_types, 0);
-    rb_define_method(mContent, "mime_type", rbatkst_get_mime_type, 1);
-    rb_define_method(mContent, "get_stream", rbatkst_get_stream, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_mime_types", rbatkst_get_n_mime_types, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", rbatkst_get_mime_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_stream", rbatkst_get_stream, 1);
 }

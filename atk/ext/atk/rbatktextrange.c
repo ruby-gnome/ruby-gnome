@@ -26,6 +26,7 @@
 #include "rbatkprivate.h"
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
+#define RG_TARGET_NAMESPACE cTextRange
 #define _SELF(r) ((AtkTextRange*)RVAL2BOXED(r, ATK_TYPE_TEXT_RANGE))
 
 /**********************************/
@@ -81,11 +82,11 @@ void
 Init_atk_text_range(void)
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
-    VALUE range = G_DEF_CLASS(ATK_TYPE_TEXT_RANGE, "TextRange",  mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_RANGE, "TextRange",  mAtk);
 
-    rb_define_method(range, "bounds", atktextrange_bounds, 0);
-    rb_define_method(range, "start_offset", atktextrange_start_offset, 0);
-    rb_define_method(range, "end_offset", atktextrange_end_offset, 0);
-    rb_define_method(range, "content", atktextrange_content, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bounds", atktextrange_bounds, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_offset", atktextrange_start_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "end_offset", atktextrange_end_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "content", atktextrange_content, 0);
 #endif
 }
