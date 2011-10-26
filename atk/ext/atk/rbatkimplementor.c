@@ -21,10 +21,11 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mImplementor
 #define _SELF(s) (ATK_IMPLEMENTOR(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkimpl_ref_accessible(VALUE self)
+rg_ref_accessible(VALUE self)
 {
     return GOBJ2RVAL(atk_implementor_ref_accessible(_SELF(self)));
 }
@@ -32,6 +33,6 @@ rbatkimpl_ref_accessible(VALUE self)
 void
 Init_atk_implementor(void)
 {
-    VALUE impl = G_DEF_INTERFACE(ATK_TYPE_IMPLEMENTOR, "Implementor", mAtk);
-    rb_define_method(impl, "ref_accessible", rbatkimpl_ref_accessible, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_IMPLEMENTOR, "Implementor", mAtk);
+    RG_DEF_METHOD(ref_accessible, 0);
 }

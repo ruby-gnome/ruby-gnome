@@ -21,10 +21,11 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mImage
 #define _SELF(s) (ATK_IMAGE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkimage_get_image_position(VALUE self, VALUE coord_type)
+rg_image_position(VALUE self, VALUE coord_type)
 {
     gint x, y;
     atk_image_get_image_position(_SELF(self), &x, &y, 
@@ -33,13 +34,13 @@ rbatkimage_get_image_position(VALUE self, VALUE coord_type)
 }
 
 static VALUE
-rbatkimage_get_image_description(VALUE self)
+rg_image_description(VALUE self)
 {
     return CSTR2RVAL(atk_image_get_image_description(_SELF(self)));
 }
 
 static VALUE
-rbatkimage_set_image_description(VALUE self, VALUE description)
+rg_set_image_description(VALUE self, VALUE description)
 {
     gboolean ret = atk_image_set_image_description(_SELF(self),
                                                    RVAL2CSTR(description));
@@ -48,7 +49,7 @@ rbatkimage_set_image_description(VALUE self, VALUE description)
 }
 
 static VALUE
-rbatkimage_get_image_size(VALUE self)
+rg_image_size(VALUE self)
 {
     gint width, height;
     atk_image_get_image_size(_SELF(self), &width, &height);
@@ -58,12 +59,12 @@ rbatkimage_get_image_size(VALUE self)
 void
 Init_atk_image(void)
 {
-    VALUE image = G_DEF_INTERFACE(ATK_TYPE_IMAGE, "Image", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_IMAGE, "Image", mAtk);
 
-    rb_define_method(image, "image_position", rbatkimage_get_image_position, 1);
-    rb_define_method(image, "image_description", rbatkimage_get_image_description, 0);
-    rb_define_method(image, "set_image_description", rbatkimage_set_image_description, 1);
-    rb_define_method(image, "image_size", rbatkimage_get_image_size, 0);
+    RG_DEF_METHOD(image_position, 1);
+    RG_DEF_METHOD(image_description, 0);
+    RG_DEF_METHOD(set_image_description, 1);
+    RG_DEF_METHOD(image_size, 0);
 
-    G_DEF_SETTERS(image);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

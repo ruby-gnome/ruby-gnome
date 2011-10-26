@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE mAtk
 VALUE mAtk;
 
 extern void Init_atk(void);
@@ -28,9 +29,9 @@ extern void Init_atk(void);
 void
 Init_atk(void)
 {
-    mAtk = rb_define_module("Atk");
+    RG_TARGET_NAMESPACE = rb_define_module("Atk");
 
-    rb_define_const(mAtk, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(ATK_MAJOR_VERSION),
                                 INT2FIX(ATK_MINOR_VERSION),

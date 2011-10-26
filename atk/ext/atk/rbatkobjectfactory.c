@@ -21,22 +21,23 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cObjectFactory
 #define _SELF(s) (ATK_OBJECT_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkfact_create_accessible(VALUE self, VALUE obj)
+rg_create_accessible(VALUE self, VALUE obj)
 {
     return GOBJ2RVAL(atk_object_factory_create_accessible(_SELF(self), RVAL2GOBJ(obj)));
 }
 
 static VALUE
-rbatkfact_get_accessible_type(VALUE self)
+rg_accessible_type(VALUE self)
 {
     return GTYPE2CLASS(atk_object_factory_get_accessible_type(_SELF(self)));
 }
 
 static VALUE
-rbatkfact_invalidate(VALUE self)
+rg_invalidate(VALUE self)
 {
     atk_object_factory_invalidate(_SELF(self));
     return self;
@@ -45,8 +46,8 @@ rbatkfact_invalidate(VALUE self)
 void
 Init_atk_objectfactory(void)
 {
-    VALUE fact = G_DEF_CLASS(ATK_TYPE_OBJECT_FACTORY, "ObjectFactory", mAtk);
-    rb_define_method(fact, "create_accessible", rbatkfact_create_accessible, 0);
-    rb_define_method(fact, "accessible_type", rbatkfact_get_accessible_type, 0);
-    rb_define_method(fact, "invalidate", rbatkfact_invalidate, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_OBJECT_FACTORY, "ObjectFactory", mAtk);
+    RG_DEF_METHOD(create_accessible, 0);
+    RG_DEF_METHOD(accessible_type, 0);
+    RG_DEF_METHOD(invalidate, 0);
 }

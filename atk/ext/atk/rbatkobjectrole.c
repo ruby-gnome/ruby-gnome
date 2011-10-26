@@ -1,7 +1,7 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2003  Masao Mutoh
+ *  Copyright (C) 2003,2004 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,20 +21,30 @@
 
 #include "rbatkprivate.h"
 
-#define RG_TARGET_NAMESPACE cNoOpObjectFactory
-#define _SELF(s) (ATK_NO_OP_OBJECT_FACTORY(RVAL2GOBJ(s)))
+#define RG_TARGET_NAMESPACE cRole
 
 static VALUE
-rg_initialize(VALUE self)
+rg_localized_name(G_GNUC_UNUSED VALUE self)
 {
-    G_INITIALIZE(self, atk_no_op_object_factory_new());
+#ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
+    return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
+#else
+    rb_warning("not supported in this version of ATK.");
     return Qnil;
+#endif
+}
+
+static VALUE
+rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
+{
+    return GENUM2RVAL(atk_role_for_name(RVAL2CSTR(name)), ATK_TYPE_ROLE);
 }
 
 void
-Init_atk_noopobjectfactory(void)
+Init_atk_object_role(VALUE cObject)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT_FACTORY, "NoOpObjectFactory", mAtk);
-
-    RG_DEF_METHOD(initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_ROLE, "Role", cObject);
+    RG_DEF_METHOD(localized_name, 0);
+    RG_DEF_SMETHOD(for_name, 1);
+    G_DEF_CONSTANTS(cObject, ATK_TYPE_ROLE, "ATK_");
 }

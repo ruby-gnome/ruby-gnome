@@ -21,10 +21,11 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cState
 #define _SELF(s) (ATK_STATE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkstate_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_state_type_register(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
 }
@@ -35,7 +36,7 @@ G_CONST_RETURN gchar* atk_state_type_get_name
 */
 
 static VALUE
-rbatkstate_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_state_type_for_name(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
 }
@@ -43,8 +44,8 @@ rbatkstate_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 void
 Init_atk_state(void)
 {
-    VALUE state = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
-    rb_define_singleton_method(state, "type_register", rbatkstate_s_type_register, 1);
-    rb_define_singleton_method(state, "for_name", rbatkstate_s_for_name, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
+    RG_DEF_SMETHOD(type_register, 1);
+    RG_DEF_SMETHOD(for_name, 1);
     G_DEF_CONSTANTS(mAtk, ATK_TYPE_STATE_TYPE, "ATK_");
 }
