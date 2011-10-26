@@ -44,7 +44,7 @@ GType
 atk_text_range_get_type(void)
 {
     static GType our_type = 0;
-                                                                                
+
     if (our_type == 0)
         our_type = g_boxed_type_register_static ("AtkTextRange",
                     (GBoxedCopyFunc)atk_text_range_copy,
@@ -54,25 +54,25 @@ atk_text_range_get_type(void)
 /**********************************/
 /* Struct accessors */
 static VALUE
-atktextrange_bounds(VALUE self)
+rg_bounds(VALUE self)
 {
     return BOXED2RVAL(&_SELF(self)->bounds, ATK_TYPE_TEXT_RECTANGLE);
 }
 
 static VALUE
-atktextrange_start_offset(VALUE self)
+rg_start_offset(VALUE self)
 {
     return INT2NUM(_SELF(self)->start_offset);
 }
 
 static VALUE
-atktextrange_end_offset(VALUE self)
+rg_end_offset(VALUE self)
 {
     return INT2NUM(_SELF(self)->end_offset);
 }
 
 static VALUE
-atktextrange_content(VALUE self)
+rg_content(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->content);
 }
@@ -84,9 +84,9 @@ Init_atk_text_range(void)
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_RANGE, "TextRange",  mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "bounds", atktextrange_bounds, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "start_offset", atktextrange_start_offset, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "end_offset", atktextrange_end_offset, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "content", atktextrange_content, 0);
+    RG_DEF_METHOD(bounds, 0);
+    RG_DEF_METHOD(start_offset, 0);
+    RG_DEF_METHOD(end_offset, 0);
+    RG_DEF_METHOD(content, 0);
 #endif
 }

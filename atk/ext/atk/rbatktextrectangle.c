@@ -44,7 +44,7 @@ GType
 atk_text_rectangle_get_type(void)
 {
     static GType our_type = 0;
-                                                                                
+
     if (our_type == 0)
         our_type = g_boxed_type_register_static ("AtkTextRectangle",
                     (GBoxedCopyFunc)atk_text_rectangle_copy,
@@ -54,7 +54,7 @@ atk_text_rectangle_get_type(void)
 /**********************************/
 
 static VALUE
-atktextrect_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
+rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     AtkTextRectangle new;
 
@@ -69,59 +69,59 @@ atktextrect_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 
 /* Struct accessors */
 static VALUE
-atktextrect_x(VALUE self)
+rg_x(VALUE self)
 {
     return INT2NUM(_SELF(self)->x);
 }
 
 static VALUE
-atktextrect_y(VALUE self)
+rg_y(VALUE self)
 {
     return INT2NUM(_SELF(self)->y);
 }
 
 static VALUE
-atktextrect_w(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-atktextrect_h(VALUE self)
+rg_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-atktextrect_set_x(VALUE self, VALUE x)
+rg_set_x(VALUE self, VALUE x)
 {
     _SELF(self)->x = NUM2INT(x);
     return self;
 }
 
 static VALUE
-atktextrect_set_y(VALUE self, VALUE y)
+rg_set_y(VALUE self, VALUE y)
 {
     _SELF(self)->y = NUM2INT(y);
     return self;
 }
 
 static VALUE
-atktextrect_set_w(VALUE self, VALUE width)
+rg_set_width(VALUE self, VALUE width)
 {
     _SELF(self)->width = NUM2INT(width);
     return self;
 }
 
 static VALUE
-atktextrect_set_h(VALUE self, VALUE height)
+rg_set_height(VALUE self, VALUE height)
 {
     _SELF(self)->height = NUM2INT(height);
     return self;
 }
 
 static VALUE
-atktextrect_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
   AtkTextRectangle* a = _SELF(self);
   return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
@@ -135,16 +135,16 @@ Init_atk_text_rectangle(void)
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_RECTANGLE, "TextRectangle", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", atktextrect_initialize, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "x", atktextrect_x, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "y", atktextrect_y, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "width", atktextrect_w, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "height", atktextrect_h, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x", atktextrect_set_x, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y", atktextrect_set_y, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_width", atktextrect_set_w, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_height", atktextrect_set_h, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_a", atktextrect_to_a, 0);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(x, 0);
+    RG_DEF_METHOD(y, 0);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(set_x, 1);
+    RG_DEF_METHOD(set_y, 1);
+    RG_DEF_METHOD(set_width, 1);
+    RG_DEF_METHOD(set_height, 1);
+    RG_DEF_METHOD(to_a, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif

@@ -25,14 +25,14 @@
 #define _SELF(s) (ATK_RELATION_SET(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkrelset_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, atk_relation_set_new());
     return Qnil;
 }
 
 static VALUE
-rbatkrelset_contains(VALUE self, VALUE relationship)
+rg_contains_p(VALUE self, VALUE relationship)
 {
     return CBOOL2RVAL(atk_relation_set_contains(
                           _SELF(self),
@@ -40,27 +40,27 @@ rbatkrelset_contains(VALUE self, VALUE relationship)
 }
 
 static VALUE
-rbatkrelset_remove(VALUE self, VALUE relation)
+rg_remove(VALUE self, VALUE relation)
 {
     atk_relation_set_remove(_SELF(self), ATK_RELATION(RVAL2GOBJ(relation)));
     return self;
 }
 
 static VALUE
-rbatkrelset_add(VALUE self, VALUE relation)
+rg_add(VALUE self, VALUE relation)
 {
     atk_relation_set_add(_SELF(self), ATK_RELATION(RVAL2GOBJ(relation)));
     return self;
 }
 
 static VALUE
-rbatkrelset_get_n_relations(VALUE self)
+rg_n_relations(VALUE self)
 {
     return INT2NUM(atk_relation_set_get_n_relations(_SELF(self)));
 }
 
 static VALUE
-rbatkrelset_get_relation(VALUE self, VALUE i)
+rg_get_relation(VALUE self, VALUE i)
 {
     if (rb_obj_is_kind_of(i, GTYPE2CLASS(ATK_TYPE_RELATION_TYPE))){
         return GOBJ2RVAL(atk_relation_set_get_relation_by_type(
@@ -73,7 +73,7 @@ rbatkrelset_get_relation(VALUE self, VALUE i)
 
 #if ATK_CHECK_VERSION(1,9,0)
 static VALUE
-rbatkrelset_add_relation(VALUE self, VALUE relationship, VALUE obj)
+rg_add_relation(VALUE self, VALUE relationship, VALUE obj)
 {
     atk_relation_set_add_relation_by_type(_SELF(self), 
                                           RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE), 
@@ -87,13 +87,13 @@ Init_atk_relation_set(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION_SET, "RelationSet", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatkrelset_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "contains?", rbatkrelset_contains, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove", rbatkrelset_remove, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add", rbatkrelset_add, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "n_relations", rbatkrelset_get_n_relations, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_relation", rbatkrelset_get_relation, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD_P(contains, 1);
+    RG_DEF_METHOD(remove, 1);
+    RG_DEF_METHOD(add, 1);
+    RG_DEF_METHOD(n_relations, 0);
+    RG_DEF_METHOD(get_relation, 1);
 #if ATK_CHECK_VERSION(1,9,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "add_relation", rbatkrelset_add_relation, 2);
+    RG_DEF_METHOD(add_relation, 2);
 #endif
 }

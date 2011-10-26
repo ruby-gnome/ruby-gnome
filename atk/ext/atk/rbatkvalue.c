@@ -25,7 +25,7 @@
 #define _SELF(s) (ATK_VALUE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_value_get_current_value(VALUE self)
+rg_current(VALUE self)
 {
     GValue gval = G_VALUE_INIT;
     atk_value_get_current_value(_SELF(self), &gval);
@@ -33,9 +33,8 @@ rbatk_value_get_current_value(VALUE self)
     return GVAL2RVAL(&gval);
 }
 
-
 static VALUE
-rbatk_value_get_maximum_value(VALUE self)
+rg_max(VALUE self)
 {
     GValue gval = G_VALUE_INIT;
     atk_value_get_maximum_value(_SELF(self), &gval);
@@ -44,7 +43,7 @@ rbatk_value_get_maximum_value(VALUE self)
 }
 
 static VALUE
-rbatk_value_get_minimum_value(VALUE self)
+rg_min(VALUE self)
 {
     GValue gval = G_VALUE_INIT;
     atk_value_get_minimum_value(_SELF(self), &gval);
@@ -53,7 +52,7 @@ rbatk_value_get_minimum_value(VALUE self)
 }
 
 static VALUE
-rbatk_value_set_current_value(VALUE self, VALUE value)
+rg_set_current(VALUE self, VALUE value)
 {
     GValue gval = G_VALUE_INIT;
     g_value_init(&gval, RVAL2GTYPE(value));
@@ -72,10 +71,10 @@ Init_atk_value(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_VALUE, "Value", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "current", rbatk_value_get_current_value, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "max", rbatk_value_get_maximum_value, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "min", rbatk_value_get_minimum_value, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_current", rbatk_value_set_current_value, 1);
+    RG_DEF_METHOD(current, 0);
+    RG_DEF_METHOD(max, 0);
+    RG_DEF_METHOD(min, 0);
+    RG_DEF_METHOD(set_current, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

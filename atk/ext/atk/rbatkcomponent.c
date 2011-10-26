@@ -32,7 +32,7 @@ focus_handler(AtkObject *aobj, gboolean bool)
                            GOBJ2RVAL(aobj), CBOOL2RVAL(bool));
 }
 static VALUE
-comp_add_focus_handler(VALUE self)
+rg_add_focus_handler(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -41,7 +41,7 @@ comp_add_focus_handler(VALUE self)
 */
 
 static VALUE
-comp_contains(VALUE self, VALUE x, VALUE y, VALUE coord_type)
+rg_contains_p(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 {
     return CBOOL2RVAL(atk_component_contains(_SELF(self),
                                              NUM2INT(x), NUM2INT(y),
@@ -49,7 +49,7 @@ comp_contains(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 }
 
 static VALUE
-comp_get_extents(VALUE self, VALUE coord_type)
+rg_get_extents(VALUE self, VALUE coord_type)
 {
     gint x, y, width, height; 
     atk_component_get_extents(_SELF(self), &x, &y, &width, &height,
@@ -59,7 +59,7 @@ comp_get_extents(VALUE self, VALUE coord_type)
 
 #ifdef HAVE_ATK_COMPONENT_GET_LAYER
 static VALUE
-comp_get_layer(VALUE self)
+rg_layer(VALUE self)
 {
     return GENUM2RVAL(atk_component_get_layer(_SELF(self)), ATK_TYPE_LAYER);
 }
@@ -67,14 +67,14 @@ comp_get_layer(VALUE self)
 
 #ifdef HAVE_ATK_COMPONENT_GET_MDI_ZORDER
 static VALUE
-comp_get_mdi_zorder(VALUE self)
+rg_mdi_zorder(VALUE self)
 {
     return INT2NUM(atk_component_get_mdi_zorder(_SELF(self)));
 }
 
 #endif
 static VALUE
-comp_get_position(VALUE self, VALUE coord_type)
+rg_position(VALUE self, VALUE coord_type)
 {
     gint x, y;
     atk_component_get_position(_SELF(self), &x, &y,
@@ -83,7 +83,7 @@ comp_get_position(VALUE self, VALUE coord_type)
 }
 
 static VALUE
-comp_get_size(VALUE self)
+rg_size(VALUE self)
 {
     gint width, height;
     atk_component_get_size(_SELF(self), &width, &height);
@@ -91,13 +91,13 @@ comp_get_size(VALUE self)
 }
 
 static VALUE
-comp_grab_focus(VALUE self)
+rg_grab_focus(VALUE self)
 {
     return CBOOL2RVAL(atk_component_grab_focus(_SELF(self)));
 }
 
 static VALUE
-comp_ref_accessible_at_point(VALUE self, VALUE x, VALUE y, VALUE coord_type)
+rg_ref_accessible_at_point(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 {
     return GOBJ2RVAL(atk_component_ref_accessible_at_point(
                          _SELF(self),
@@ -106,14 +106,14 @@ comp_ref_accessible_at_point(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 }
 
 static VALUE
-comp_remove_focus_handler(VALUE self, VALUE handler_id)
+rg_remove_focus_handler(VALUE self, VALUE handler_id)
 {
     atk_component_remove_focus_handler(_SELF(self), NUM2UINT(handler_id));
     return self;
 }
 
 static VALUE
-comp_set_extents(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height, VALUE coord_type)
+rg_set_extents(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height, VALUE coord_type)
 {
     gboolean ret = atk_component_set_extents(_SELF(self),
                                              NUM2INT(x), NUM2INT(y),
@@ -124,7 +124,7 @@ comp_set_extents(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height, VALUE 
 }
 
 static VALUE
-comp_set_position(VALUE self, VALUE x, VALUE y, VALUE coord_type)
+rg_set_position(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 {
     gboolean ret = atk_component_set_position(_SELF(self),
                                               NUM2INT(x), NUM2INT(y),
@@ -134,7 +134,7 @@ comp_set_position(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 }
 
 static VALUE
-comp_set_size(VALUE self, VALUE width, VALUE height)
+rg_set_size(VALUE self, VALUE width, VALUE height)
 {
     gboolean ret = atk_component_set_size(_SELF(self),
                                           NUM2INT(width), NUM2INT(height));
@@ -144,7 +144,7 @@ comp_set_size(VALUE self, VALUE width, VALUE height)
 
 #if ATK_CHECK_VERSION(1,12,0)
 static VALUE
-comp_get_alpha(VALUE self)
+rg_alpha(VALUE self)
 {
     return rb_float_new(atk_component_get_alpha(_SELF(self)));
 }
@@ -155,25 +155,25 @@ Init_atk_component(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_COMPONENT, "Component", mAtk);
 /*
-    rb_define_method(RG_TARGET_NAMESPACE, "add_focus_handler", comp_add_focus_handler, 0);
+    RG_DEF_METHOD(add_focus_handler, 0);
 */
-    rb_define_method(RG_TARGET_NAMESPACE, "contains?", comp_contains, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_extents", comp_get_extents, 1);
+    RG_DEF_METHOD_P(contains, 3);
+    RG_DEF_METHOD(get_extents, 1);
 #ifdef HAVE_ATK_COMPONENT_GET_LAYER
-    rb_define_method(RG_TARGET_NAMESPACE, "layer", comp_get_layer, 0);
+    RG_DEF_METHOD(layer, 0);
 #endif
 #ifdef HAVE_ATK_COMPONENT_GET_MDI_ZORDER
-    rb_define_method(RG_TARGET_NAMESPACE, "mdi_zorder", comp_get_mdi_zorder, 0);
+    RG_DEF_METHOD(mdi_zorder, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "position", comp_get_position, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", comp_get_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "grab_focus", comp_grab_focus, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_accessible_at_point", comp_ref_accessible_at_point, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_focus_handler", comp_remove_focus_handler, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_extents", comp_set_extents, 5);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_position", comp_set_position, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_size", comp_set_size, 2);
+    RG_DEF_METHOD(position, 1);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(grab_focus, 0);
+    RG_DEF_METHOD(ref_accessible_at_point, 3);
+    RG_DEF_METHOD(remove_focus_handler, 1);
+    RG_DEF_METHOD(set_extents, 5);
+    RG_DEF_METHOD(set_position, 2);
+    RG_DEF_METHOD(set_size, 2);
 #if ATK_CHECK_VERSION(1,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "alpha", comp_get_alpha, 0);
+    RG_DEF_METHOD(alpha, 0);
 #endif
 }

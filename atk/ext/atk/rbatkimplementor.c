@@ -25,7 +25,7 @@
 #define _SELF(s) (ATK_IMPLEMENTOR(RVAL2GOBJ(s)))
 
 static VALUE
-rbatkimpl_ref_accessible(VALUE self)
+rg_ref_accessible(VALUE self)
 {
     return GOBJ2RVAL(atk_implementor_ref_accessible(_SELF(self)));
 }
@@ -34,5 +34,5 @@ void
 Init_atk_implementor(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_IMPLEMENTOR, "Implementor", mAtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_accessible", rbatkimpl_ref_accessible, 0);
+    RG_DEF_METHOD(ref_accessible, 0);
 }

@@ -94,7 +94,7 @@ rbatk_rval2atkattributegslist(VALUE value)
 #define RVAL2ATKATTRIBUTEGSLIST(value) rbatk_rval2atkattributegslist(value)
 
 static VALUE
-rbatk_edit_set_run_attributes(VALUE self,
+rg_set_run_attributes(VALUE self,
                               VALUE attributes,
                               VALUE rbstart_offset,
                               VALUE rbend_offset)
@@ -118,14 +118,14 @@ rbatk_edit_set_run_attributes(VALUE self,
 }
 
 static VALUE
-rbatk_edit_set_text_contents(VALUE self, VALUE str)
+rg_set_text_contents(VALUE self, VALUE str)
 {
     atk_editable_text_set_text_contents(_SELF(self), RVAL2CSTR(str));
     return self;
 }
 
 static VALUE
-rbatk_edit_insert_text(VALUE self, VALUE str, VALUE position)
+rg_insert_text(VALUE self, VALUE str, VALUE position)
 {
     gint pos = NUM2INT(position);
 
@@ -135,28 +135,28 @@ rbatk_edit_insert_text(VALUE self, VALUE str, VALUE position)
 }
 
 static VALUE
-rbatk_edit_copy_text(VALUE self, VALUE start_pos, VALUE end_pos)
+rg_copy_text(VALUE self, VALUE start_pos, VALUE end_pos)
 {
     atk_editable_text_copy_text(_SELF(self), NUM2INT(start_pos), NUM2INT(end_pos));
     return self;
 }
 
 static VALUE
-rbatk_edit_cut_text(VALUE self, VALUE start_pos, VALUE end_pos)
+rg_cut_text(VALUE self, VALUE start_pos, VALUE end_pos)
 {
     atk_editable_text_cut_text(_SELF(self), NUM2INT(start_pos), NUM2INT(end_pos));
     return self;
 }
 
 static VALUE
-rbatk_edit_delete_text(VALUE self, VALUE start_pos, VALUE end_pos)
+rg_delete_text(VALUE self, VALUE start_pos, VALUE end_pos)
 {
     atk_editable_text_delete_text(_SELF(self), NUM2INT(start_pos), NUM2INT(end_pos));
     return self;
 }
 
 static VALUE
-rbatk_edit_paste_text(VALUE self, VALUE position)
+rg_paste_text(VALUE self, VALUE position)
 {
     atk_editable_text_paste_text(_SELF(self), NUM2INT(position));
     return self;
@@ -167,13 +167,13 @@ Init_atk_editabletext(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_EDITABLE_TEXT, "EditableText", mAtk);
 
-   rb_define_method(RG_TARGET_NAMESPACE, "set_run_attributes", rbatk_edit_set_run_attributes, 3);
-   rb_define_method(RG_TARGET_NAMESPACE, "set_text_contents", rbatk_edit_set_text_contents, 1);
-   rb_define_method(RG_TARGET_NAMESPACE, "insert_text", rbatk_edit_insert_text, 2);
-   rb_define_method(RG_TARGET_NAMESPACE, "copy_text", rbatk_edit_copy_text, 2);
-   rb_define_method(RG_TARGET_NAMESPACE, "cut_text", rbatk_edit_cut_text, 2);
-   rb_define_method(RG_TARGET_NAMESPACE, "delete_text", rbatk_edit_delete_text, 2);
-   rb_define_method(RG_TARGET_NAMESPACE, "paste_text", rbatk_edit_paste_text, 1);
+   RG_DEF_METHOD(set_run_attributes, 3);
+   RG_DEF_METHOD(set_text_contents, 1);
+   RG_DEF_METHOD(insert_text, 2);
+   RG_DEF_METHOD(copy_text, 2);
+   RG_DEF_METHOD(cut_text, 2);
+   RG_DEF_METHOD(delete_text, 2);
+   RG_DEF_METHOD(paste_text, 1);
 
    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -24,19 +24,19 @@
 #define RG_TARGET_NAMESPACE cAttribute
 
 static VALUE
-rbatk_tattr_s_register(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_text_attribute_register(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
 }
 
 static VALUE
-rbatk_tattr_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_text_attribute_for_name(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
 }
 
 static VALUE
-rbatk_tattr_get_value(VALUE self, VALUE index)
+rg_get_value(VALUE self, VALUE index)
 {
     return CSTR2RVAL(atk_text_attribute_get_value(RVAL2GENUM(self, ATK_TYPE_TEXT_ATTRIBUTE), 
                                                   NUM2INT(index)));
@@ -48,7 +48,7 @@ Init_atk_text_attribute(VALUE mText)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", mText);
     G_DEF_CONSTANTS(mText, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", rbatk_tattr_s_register, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_name", rbatk_tattr_s_for_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_value", rbatk_tattr_get_value, 1);   
+    RG_DEF_SMETHOD(type_register, 1);
+    RG_DEF_SMETHOD(for_name, 1);
+    RG_DEF_METHOD(get_value, 1);   
 }

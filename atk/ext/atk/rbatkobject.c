@@ -37,19 +37,19 @@ AtkObject*  atk_object_get_parent           (AtkObject *accessible);
 */
 
 static VALUE
-rbatkobj_get_n_accessible_children(VALUE self)
+rg_n_accessible_children(VALUE self)
 {
     return INT2NUM(atk_object_get_n_accessible_children(_SELF(self)));
 }
 
 static VALUE
-rbatkobj_ref_accessible_child(VALUE self, VALUE i)
+rg_ref_accessible_child(VALUE self, VALUE i)
 {
     return GOBJ2RVAL(atk_object_ref_accessible_child(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatkobj_ref_releation_set(VALUE self)
+rg_ref_relation_set(VALUE self)
 {
     return GOBJ2RVAL(atk_object_ref_relation_set(_SELF(self)));
 }
@@ -61,13 +61,13 @@ AtkRole     atk_object_get_role             (AtkObject *accessible);
 */
 
 static VALUE
-rbatkobj_ref_state_set(VALUE self)
+rg_ref_state_set(VALUE self)
 {
     return GOBJ2RVAL(atk_object_ref_state_set(_SELF(self)));
 }
 
 static VALUE
-rbatkobj_get_index_in_parent(VALUE self)
+rg_index_in_parent(VALUE self)
 {
     return INT2NUM(atk_object_get_index_in_parent(_SELF(self)));
 }
@@ -92,7 +92,7 @@ void        atk_object_remove_property_change_handler
 */
 
 static VALUE
-rbatkobj_notify_state_change(VALUE self, VALUE state, VALUE value)
+rg_notify_state_change(VALUE self, VALUE state, VALUE value)
 {
     atk_object_notify_state_change(_SELF(self), 
                                    RVAL2GENUM(state, ATK_TYPE_STATE_TYPE),
@@ -107,7 +107,7 @@ void        atk_object_initialize           (AtkObject *accessible,
 
 #ifdef HAVE_ATK_OBJECT_ADD_RELATIONSHIP
 static VALUE
-rbatkobj_add_relationship(VALUE self, VALUE relationship, VALUE target)
+rg_add_relationship(VALUE self, VALUE relationship, VALUE target)
 {
     return CBOOL2RVAL(atk_object_add_relationship(
                           _SELF(self), 
@@ -118,7 +118,7 @@ rbatkobj_add_relationship(VALUE self, VALUE relationship, VALUE target)
 
 #ifdef HAVE_ATK_OBJECT_REMOVE_RELATIONSHIP
 static VALUE
-rbatkobj_remove_relationship(VALUE self, VALUE relationship, VALUE target)
+rg_remove_relationship(VALUE self, VALUE relationship, VALUE target)
 {
     return CBOOL2RVAL(atk_object_remove_relationship(
                           _SELF(self), 
@@ -132,17 +132,17 @@ Init_atk_object(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_OBJECT, "Object", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "n_accessible_children", rbatkobj_get_n_accessible_children, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_accessible_child", rbatkobj_ref_accessible_child, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_relation_set", rbatkobj_ref_releation_set, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_state_set", rbatkobj_ref_state_set, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "index_in_parent", rbatkobj_get_index_in_parent, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "notify_state_change", rbatkobj_notify_state_change, 2);
+    RG_DEF_METHOD(n_accessible_children, 0);
+    RG_DEF_METHOD(ref_accessible_child, 1);
+    RG_DEF_METHOD(ref_relation_set, 0);
+    RG_DEF_METHOD(ref_state_set, 0);
+    RG_DEF_METHOD(index_in_parent, 0);
+    RG_DEF_METHOD(notify_state_change, 2);
 #ifdef HAVE_ATK_OBJECT_ADD_RELATIONSHIP
-    rb_define_method(RG_TARGET_NAMESPACE, "add_relationship", rbatkobj_add_relationship, 2);
+    RG_DEF_METHOD(add_relationship, 2);
 #endif
 #ifdef HAVE_ATK_OBJECT_REMOVE_RELATIONSHIP
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_relationship", rbatkobj_remove_relationship, 2);
+    RG_DEF_METHOD(remove_relationship, 2);
 #endif
 
     Init_atk_object_role(RG_TARGET_NAMESPACE);

@@ -25,7 +25,7 @@
 #define _SELF(s) (ATK_NOOPOBJECT(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_no_op_object_initialize(VALUE self, VALUE gobj)
+rg_initialize(VALUE self, VALUE gobj)
 {
     G_INITIALIZE(self, atk_no_op_object_new(RVAL2GOBJ(gobj)));
     return Qnil;
@@ -36,5 +36,5 @@ Init_atk_noopobject(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT, "NoOpObject", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatk_no_op_object_initialize, 1);
+    RG_DEF_METHOD(initialize, 1);
 }

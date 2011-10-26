@@ -25,33 +25,33 @@
 #define _SELF(s) (ATK_HYPERLINK(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_hl_get_uri(VALUE self, VALUE i)
+rg_get_uri(VALUE self, VALUE i)
 {
     return CSTR2RVAL(atk_hyperlink_get_uri(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_hl_get_object(VALUE self, VALUE i)
+rg_get_object(VALUE self, VALUE i)
 {
     return GOBJ2RVAL(atk_hyperlink_get_object(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatk_hl_is_valid(VALUE self)
+rg_valid_p(VALUE self)
 {
     return CBOOL2RVAL(atk_hyperlink_is_valid(_SELF(self)));
 }
 
 #ifdef HAVE_ATK_HYPERLINK_IS_INLINE
 static VALUE
-rbatk_hl_is_inline(VALUE self)
+rg_inline_p(VALUE self)
 {
     return CBOOL2RVAL(atk_hyperlink_is_inline(_SELF(self)));
 }
 #endif
 
 static VALUE
-rbatk_hl_get_n_anchors(VALUE self)
+rg_n_anchors(VALUE self)
 {
     return INT2NUM(atk_hyperlink_get_n_anchors(_SELF(self)));
 }
@@ -61,11 +61,11 @@ Init_atk_hyperlink(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_HYPERLINK, "Hyperlink", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "get_uri", rbatk_hl_get_uri, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_object", rbatk_hl_get_object, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "valid?", rbatk_hl_is_valid, 0);
+    RG_DEF_METHOD(get_uri, 1);
+    RG_DEF_METHOD(get_object, 1);
+    RG_DEF_METHOD_P(valid, 0);
 #ifdef HAVE_ATK_HYPERLINK_IS_INLINE
-    rb_define_method(RG_TARGET_NAMESPACE, "inline?", rbatk_hl_is_inline, 0);
+    RG_DEF_METHOD_P(inline, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "n_anchors", rbatk_hl_get_n_anchors, 0);
+    RG_DEF_METHOD(n_anchors, 0);
 }

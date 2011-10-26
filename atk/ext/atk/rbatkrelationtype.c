@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cType
 
 static VALUE
-rbatkrelation_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
@@ -33,6 +33,6 @@ void
 Init_atk_relation_type(VALUE cRelation)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", cRelation);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_name", rbatkrelation_s_for_name, 1);
+    RG_DEF_SMETHOD(for_name, 1);
     G_DEF_CONSTANTS(cRelation, ATK_TYPE_RELATION_TYPE, "ATK_");
 }

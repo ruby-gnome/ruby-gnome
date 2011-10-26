@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cRole
 
 static VALUE
-rbatkrole_get_localized_name(G_GNUC_UNUSED VALUE self)
+rg_localized_name(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
     return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
@@ -35,7 +35,7 @@ rbatkrole_get_localized_name(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbatkrole_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GENUM2RVAL(atk_role_for_name(RVAL2CSTR(name)), ATK_TYPE_ROLE);
 }
@@ -44,7 +44,7 @@ void
 Init_atk_object_role(VALUE cObject)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_ROLE, "Role", cObject);
-    rb_define_method(RG_TARGET_NAMESPACE, "localized_name", rbatkrole_get_localized_name, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_name", rbatkrole_s_for_name, 1);
+    RG_DEF_METHOD(localized_name, 0);
+    RG_DEF_SMETHOD(for_name, 1);
     G_DEF_CONSTANTS(cObject, ATK_TYPE_ROLE, "ATK_");
 }

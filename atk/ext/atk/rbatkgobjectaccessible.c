@@ -25,13 +25,13 @@
 #define _SELF(s) (ATK_GOBJECT_ACCESSIBLE(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_gobjectaccessible_s_for_object(G_GNUC_UNUSED VALUE self, VALUE obj)
+rg_s_for_object(G_GNUC_UNUSED VALUE self, VALUE obj)
 {
     return GOBJ2RVAL(atk_gobject_accessible_for_object(RVAL2GOBJ(obj)));
 }
 
 static VALUE
-rbatk_gobjectaccessible_get_object(VALUE self)
+rg_object(VALUE self)
 {
     return GOBJ2RVAL(atk_gobject_accessible_get_object(_SELF(self)));
 }
@@ -41,6 +41,6 @@ Init_atk_gobjectaccessible(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_GOBJECT_ACCESSIBLE, "GObjectAccessible", mAtk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_object", rbatk_gobjectaccessible_s_for_object, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "object", rbatk_gobjectaccessible_get_object, 0);
+    RG_DEF_SMETHOD(for_object, 1);
+    RG_DEF_METHOD(object, 0);
 }

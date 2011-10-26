@@ -25,7 +25,7 @@
 #define _SELF(s) (ATK_DOCUMENT(RVAL2GOBJ(s)))
 
 static VALUE
-rbatk_document_get_document_type(VALUE self)
+rg_document_type(VALUE self)
 {
     return CSTR2RVAL(atk_document_get_document_type(_SELF(self)));
 }
@@ -33,7 +33,7 @@ rbatk_document_get_document_type(VALUE self)
 /*
 How can I implement this?
 static VALUE
-rbatk_document_get_document(VALUE self)
+rg_document(VALUE self)
 {
     return GOBJ2RVAL(atk_document_get_document(_SELF(self)));
 }
@@ -41,14 +41,14 @@ rbatk_document_get_document(VALUE self)
 
 #if ATK_CHECK_VERSION(1,12,0)
 static VALUE
-rbatk_document_get_attribute_value(VALUE self, VALUE name)
+rg_get_attribute_value(VALUE self, VALUE name)
 {
     return CSTR2RVAL(atk_document_get_attribute_value(_SELF(self), 
                                                       RVAL2CSTR(name)));
 }
 
 static VALUE
-rbatk_document_set_attribute_value(VALUE self, VALUE name, VALUE value)
+rg_set_attribute_value(VALUE self, VALUE name, VALUE value)
 {
     gboolean ret = atk_document_set_attribute_value(_SELF(self),
                                                     RVAL2CSTR(name),
@@ -61,7 +61,7 @@ rbatk_document_set_attribute_value(VALUE self, VALUE name, VALUE value)
 }
 
 static VALUE
-rbatk_document_get_attributes(VALUE self)
+rg_attributes(VALUE self)
 {
     AtkAttributeSet* list = atk_document_get_attributes(_SELF(self));
     VALUE ary = rb_ary_new();
@@ -74,7 +74,7 @@ rbatk_document_get_attributes(VALUE self)
 }
 
 static VALUE
-rbatk_document_get_locale(VALUE self)
+rg_locale(VALUE self)
 {
     return CSTR2RVAL(atk_document_get_locale(_SELF(self)));
 }
@@ -85,16 +85,16 @@ Init_atk_document(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_DOCUMENT, "Document", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "document_type", rbatk_document_get_document_type, 0);
+    RG_DEF_METHOD(document_type, 0);
 /*
-    rb_define_method(RG_TARGET_NAMESPACE, "document", rbatk_document_get_document, 0);
+    RG_DEF_METHOD(document, 0);
 */
 #if ATK_CHECK_VERSION(1,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_value", rbatk_document_get_attribute_value, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_attribute_value");
-    rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_value", rbatk_document_set_attribute_value, 2);
-    rb_define_alias(RG_TARGET_NAMESPACE, "[]=", "set_attribute_value");
-    rb_define_method(RG_TARGET_NAMESPACE, "attributes", rbatk_document_get_attributes, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "locale", rbatk_document_get_locale, 0);
+    RG_DEF_METHOD(get_attribute_value, 1);
+    RG_DEF_ALIAS("[]", "get_attribute_value");
+    RG_DEF_METHOD(set_attribute_value, 2);
+    RG_DEF_ALIAS("[]=", "set_attribute_value");
+    RG_DEF_METHOD(attributes, 0);
+    RG_DEF_METHOD(locale, 0);
 #endif
 }

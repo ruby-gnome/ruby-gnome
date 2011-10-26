@@ -25,7 +25,7 @@
 #define _SELF(s) (ATK_SELECTION(RVAL2GOBJ(s)))
 
 static VALUE
-rbatksel_add_selection(VALUE self, VALUE i)
+rg_add_selection(VALUE self, VALUE i)
 {
     gboolean ret = atk_selection_add_selection(_SELF(self), NUM2INT(i));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't add selection");
@@ -33,7 +33,7 @@ rbatksel_add_selection(VALUE self, VALUE i)
 }
 
 static VALUE
-rbatksel_clear_selection(VALUE self)
+rg_clear_selection(VALUE self)
 {
     gboolean ret = atk_selection_clear_selection(_SELF(self));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't clear selection");
@@ -41,25 +41,25 @@ rbatksel_clear_selection(VALUE self)
 }
 
 static VALUE
-rbatksel_ref_selection(VALUE self, VALUE i)
+rg_ref_selection(VALUE self, VALUE i)
 {
     return GOBJ2RVAL(atk_selection_ref_selection(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatksel_get_selection_count(VALUE self)
+rg_selection_count(VALUE self)
 {
     return INT2NUM(atk_selection_get_selection_count(_SELF(self)));
 }
 
 static VALUE
-rbatksel_is_child_selected(VALUE self, VALUE i)
+rg_child_selected_p(VALUE self, VALUE i)
 {
     return CBOOL2RVAL(atk_selection_is_child_selected(_SELF(self), NUM2INT(i)));
 }
 
 static VALUE
-rbatksel_remove_selection(VALUE self, VALUE i)
+rg_remove_selection(VALUE self, VALUE i)
 {
     gboolean ret = atk_selection_remove_selection(_SELF(self), NUM2INT(i));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't remove selection");
@@ -67,7 +67,7 @@ rbatksel_remove_selection(VALUE self, VALUE i)
 }
 
 static VALUE
-rbatksel_select_all_selection(VALUE self)
+rg_select_all_selection(VALUE self)
 {
     return CBOOL2RVAL(atk_selection_select_all_selection(_SELF(self)));
 }
@@ -77,11 +77,11 @@ Init_atk_selection(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_SELECTION, "Selection", mAtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "add_selection", rbatksel_add_selection, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "clear_selection", rbatksel_clear_selection, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_selection", rbatksel_ref_selection, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "selection_count", rbatksel_get_selection_count, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "child_selected?", rbatksel_is_child_selected, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_selection", rbatksel_remove_selection, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "select_all_selection", rbatksel_select_all_selection, 0);
+    RG_DEF_METHOD(add_selection, 1);
+    RG_DEF_METHOD(clear_selection, 0);
+    RG_DEF_METHOD(ref_selection, 1);
+    RG_DEF_METHOD(selection_count, 0);
+    RG_DEF_METHOD_P(child_selected, 1);
+    RG_DEF_METHOD(remove_selection, 1);
+    RG_DEF_METHOD(select_all_selection, 0);
 }
