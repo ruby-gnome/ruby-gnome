@@ -21,20 +21,18 @@
 
 #include "rbatkprivate.h"
 
-#define RG_TARGET_NAMESPACE cNoOpObjectFactory
-#define _SELF(s) (ATK_NO_OP_OBJECT_FACTORY(RVAL2GOBJ(s)))
+#define RG_TARGET_NAMESPACE cType
 
 static VALUE
-rg_initialize(VALUE self)
+rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    G_INITIALIZE(self, atk_no_op_object_factory_new());
-    return Qnil;
+    return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
 
 void
-Init_atk_noopobjectfactory(void)
+Init_atk_relation_type(VALUE cRelation)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT_FACTORY, "NoOpObjectFactory", mAtk);
-
-    RG_DEF_METHOD(initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", cRelation);
+    RG_DEF_SMETHOD(for_name, 1);
+    G_DEF_CONSTANTS(cRelation, ATK_TYPE_RELATION_TYPE, "ATK_");
 }

@@ -21,6 +21,7 @@
 
 #include "rbatkprivate.h"
 
+#define RG_TARGET_NAMESPACE cUtil
 static ID id_call;
 
 /* How can I implement them?
@@ -36,7 +37,7 @@ void        atk_remove_global_event_listener
 */
 
 static VALUE
-rbatk_focus_tracker_notify(VALUE self, VALUE obj)
+rg_s_focus_tracker_notify(VALUE self, VALUE obj)
 {
     atk_focus_tracker_notify(ATK_OBJECT(RVAL2GOBJ(obj)));
     return self;
@@ -54,7 +55,7 @@ key_snoop_func(AtkKeyEventStruct* event, gpointer func)
 }
 
 static VALUE
-rbatk_add_key_event_listener(VALUE self)
+rg_s_add_key_event_listener(VALUE self)
 {
     guint ret;
     VALUE func = rb_block_proc();
@@ -64,34 +65,34 @@ rbatk_add_key_event_listener(VALUE self)
 }
 
 static VALUE
-rbatk_remove_key_event_listener(VALUE self, VALUE id)
+rg_s_remove_key_event_listener(VALUE self, VALUE id)
 {
     atk_remove_key_event_listener(NUM2UINT(id));
     return self;
 }
 
 static VALUE
-rbatk_get_root(G_GNUC_UNUSED VALUE self)
+rg_s_root(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(atk_get_root());
 }
 
 #if ATK_CHECK_VERSION(1,6,0)
 static VALUE
-rbatk_get_focus_object(G_GNUC_UNUSED VALUE self)
+rg_s_focus_object(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(atk_get_focus_object());
 }
 #endif
 
 static VALUE
-rbatk_get_toolkit_name(G_GNUC_UNUSED VALUE self)
+rg_s_toolkit_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(atk_get_toolkit_name());
 }
 
 static VALUE
-rbatk_get_toolkit_version(G_GNUC_UNUSED VALUE self)
+rg_s_toolkit_version(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(atk_get_toolkit_version());
 }
@@ -99,29 +100,27 @@ rbatk_get_toolkit_version(G_GNUC_UNUSED VALUE self)
 void
 Init_atk_util(void)
 {
-    VALUE coord;
-
-    VALUE util = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
 
     id_call = rb_intern("call");
 
-    rb_define_singleton_method(util, "focus_tracker_notify", rbatk_focus_tracker_notify, 1);
-    rb_define_singleton_method(util, "add_key_event_listener", rbatk_add_key_event_listener, 0);
-    rb_define_singleton_method(util, "remove_key_event_listener", rbatk_remove_key_event_listener, 1);
+    RG_DEF_SMETHOD(focus_tracker_notify, 1);
+    RG_DEF_SMETHOD(add_key_event_listener, 0);
+    RG_DEF_SMETHOD(remove_key_event_listener, 1);
 
-    rb_define_singleton_method(util, "root", rbatk_get_root, 0);
+    RG_DEF_SMETHOD(root, 0);
 #if ATK_CHECK_VERSION(1,6,0)
-    rb_define_singleton_method(util, "focus_object", rbatk_get_focus_object, 0);
+    RG_DEF_SMETHOD(focus_object, 0);
 #endif
-    rb_define_singleton_method(util, "toolkit_name", rbatk_get_toolkit_name, 0);
-    rb_define_singleton_method(util, "toolkit_version", rbatk_get_toolkit_version, 0);
+    RG_DEF_SMETHOD(toolkit_name, 0);
+    RG_DEF_SMETHOD(toolkit_version, 0);
 
     /* AtkCoordType */
-    coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", util);
-    G_DEF_CONSTANTS(util, ATK_TYPE_COORD_TYPE, "ATK_");
+    G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_COORD_TYPE, "ATK_");
 
     /* AtkKeyEventType */
-    coord = G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", util);
-    G_DEF_CONSTANTS(util, ATK_TYPE_KEY_EVENT_TYPE, "ATK_");
+    G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_KEY_EVENT_TYPE, "ATK_");
 
 }
