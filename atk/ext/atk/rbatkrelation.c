@@ -30,17 +30,6 @@ rbatkrel_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
     return GENUM2RVAL(atk_relation_type_register(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
 }
 
-/* We don't need them
-G_CONST_RETURN gchar* atk_relation_type_get_name
-                                            (AtkRelationType type);
-*/
-
-static VALUE
-rbatkrelation_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
-{
-    return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
-}
-
 struct rval2atkobjects_args {
     VALUE ary;
     long n;
@@ -103,15 +92,11 @@ void
 Init_atk_relation(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
-    VALUE type;
     rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", rbatkrel_s_type_register, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbatkrel_initialize, 2);
 #if ATK_CHECK_VERSION(1,9,0)
     rb_define_method(RG_TARGET_NAMESPACE, "add_target", rbatkrel_add_target, 1);
 #endif
 
-    /* AtkRelationType */
-    type = G_DEF_CLASS(ATK_TYPE_RELATION_TYPE, "Type", RG_TARGET_NAMESPACE);
-    rb_define_singleton_method(type, "for_name", rbatkrelation_s_for_name, 1);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_RELATION_TYPE, "ATK_");
+    Init_atk_relation_type(RG_TARGET_NAMESPACE);
 }

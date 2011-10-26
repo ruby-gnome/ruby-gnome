@@ -127,32 +127,10 @@ rbatkobj_remove_relationship(VALUE self, VALUE relationship, VALUE target)
 }
 #endif
 
-/* We don't need this.
-G_CONST_RETURN gchar* atk_role_get_name     (AtkRole role);
-*/
-
-static VALUE
-rbatkrole_get_localized_name(G_GNUC_UNUSED VALUE self)
-{
-#ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
-    return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
-#else
-    rb_warning("not supported in this version of ATK.");
-    return Qnil;
-#endif
-}
-
-static VALUE
-rbatkrole_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
-{
-    return GENUM2RVAL(atk_role_for_name(RVAL2CSTR(name)), ATK_TYPE_ROLE);
-}
-
 void
 Init_atk_object(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_OBJECT, "Object", mAtk);
-    VALUE role;
 
     rb_define_method(RG_TARGET_NAMESPACE, "n_accessible_children", rbatkobj_get_n_accessible_children, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "ref_accessible_child", rbatkobj_ref_accessible_child, 1);
@@ -167,11 +145,7 @@ Init_atk_object(void)
     rb_define_method(RG_TARGET_NAMESPACE, "remove_relationship", rbatkobj_remove_relationship, 2);
 #endif
 
-    /* AtkRole */
-    role = G_DEF_CLASS(ATK_TYPE_ROLE, "Role", RG_TARGET_NAMESPACE);
-    rb_define_method(role, "localized_name", rbatkrole_get_localized_name, 0);
-    rb_define_singleton_method(role, "for_name", rbatkrole_s_for_name, 1);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_ROLE, "ATK_");
+    Init_atk_object_role(RG_TARGET_NAMESPACE);
 
     /* AtkLayer */
     G_DEF_CLASS(ATK_TYPE_LAYER, "Layer", RG_TARGET_NAMESPACE);

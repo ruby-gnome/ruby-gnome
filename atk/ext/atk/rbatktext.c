@@ -273,36 +273,9 @@ rbatk_text_set_caret_offset(VALUE self, VALUE offset)
     void        atk_attribute_set_free          (AtkAttributeSet *attrib_set);
 */
 
-/*
- * Atk::TextAttribute
- */
-static VALUE
-rbatk_tattr_s_register(G_GNUC_UNUSED VALUE self, VALUE name)
-{
-    return GENUM2RVAL(atk_text_attribute_register(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
-}
-
-/* We don't need this.
-G_CONST_RETURN gchar* atk_textattribute_type_get_name
-                                            (AtkTextattributeType type);
-*/
-
-static VALUE
-rbatk_tattr_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
-{
-    return GENUM2RVAL(atk_text_attribute_for_name(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
-}
-
-static VALUE
-rbatk_tattr_get_value(VALUE self, VALUE index)
-{
-    return CSTR2RVAL(atk_text_attribute_get_value(RVAL2GENUM(self, ATK_TYPE_TEXT_ATTRIBUTE), 
-                                                  NUM2INT(index)));
-}
 void
 Init_atk_text(void)
 {
-    VALUE tattr;
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_TEXT, "Text", mAtk);
 
     rb_define_method(RG_TARGET_NAMESPACE, "get_text", rbatk_text_get_text, 2);
@@ -344,10 +317,5 @@ Init_atk_text(void)
 #endif
 #endif
 
-    tattr = G_DEF_CLASS(ATK_TYPE_TEXT_ATTRIBUTE, "Attribute", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_TEXT_ATTRIBUTE, "ATK_TEXT_");
-
-    rb_define_singleton_method(tattr, "type_register", rbatk_tattr_s_register, 1);
-    rb_define_singleton_method(tattr, "for_name", rbatk_tattr_s_for_name, 1);
-    rb_define_method(tattr, "get_value", rbatk_tattr_get_value, 1);   
+    Init_atk_text_attribute(RG_TARGET_NAMESPACE);
 }
