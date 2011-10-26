@@ -100,8 +100,6 @@ rbatk_get_toolkit_version(G_GNUC_UNUSED VALUE self)
 void
 Init_atk_util(void)
 {
-    VALUE coord;
-
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
 
     id_call = rb_intern("call");
@@ -118,11 +116,11 @@ Init_atk_util(void)
     rb_define_singleton_method(RG_TARGET_NAMESPACE, "toolkit_version", rbatk_get_toolkit_version, 0);
 
     /* AtkCoordType */
-    coord = G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(ATK_TYPE_COORD_TYPE, "CoordType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_COORD_TYPE, "ATK_");
 
     /* AtkKeyEventType */
-    coord = G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(ATK_TYPE_KEY_EVENT_TYPE, "KeyEventType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, ATK_TYPE_KEY_EVENT_TYPE, "ATK_");
 
 }
