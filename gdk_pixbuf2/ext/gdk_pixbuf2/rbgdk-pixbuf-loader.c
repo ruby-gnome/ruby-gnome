@@ -29,7 +29,7 @@
 /* File opening */
 /* Image Data in Memory */
 static VALUE
-initialize_loader(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GdkPixbufLoader* loader;
     GError* error = NULL;
@@ -53,14 +53,14 @@ initialize_loader(int argc, VALUE *argv, VALUE self)
         }
         if(error) RAISE_GERROR(error);
     }
-    
+
     G_INITIALIZE(self, loader);
     return Qnil;
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-loader_get_format(VALUE self)
+rg_format(VALUE self)
 {
     GdkPixbufFormat* format = gdk_pixbuf_loader_get_format(_SELF(self));
     return BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT);
@@ -68,10 +68,10 @@ loader_get_format(VALUE self)
 #endif
 
 static VALUE
-loader_write(VALUE self, VALUE data)
+rg_write(VALUE self, VALUE data)
 {
     GError *error = NULL;
-  
+
     StringValue(data);
     if (!gdk_pixbuf_loader_write(_SELF(self),
                                  (const guchar *)RSTRING_PTR(data),
@@ -83,7 +83,7 @@ loader_write(VALUE self, VALUE data)
 }
 
 static VALUE
-last_write(VALUE self, VALUE data)
+rg_last_write(VALUE self, VALUE data)
 {
     GError *error = NULL;
 
@@ -102,7 +102,7 @@ last_write(VALUE self, VALUE data)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-loader_set_size(VALUE self, VALUE width, VALUE height)
+rg_set_size(VALUE self, VALUE width, VALUE height)
 {
     gdk_pixbuf_loader_set_size(_SELF(self), NUM2INT(width), NUM2INT(height));
     return self;
@@ -110,33 +110,32 @@ loader_set_size(VALUE self, VALUE width, VALUE height)
 #endif
 
 static VALUE
-loader_close(VALUE self)
+rg_close(VALUE self)
 {
     GError *error = NULL;
     gboolean res;
-	
+
     res = gdk_pixbuf_loader_close(_SELF(self), &error);
     if(error)
         RAISE_GERROR(error);
-	
+
     return CBOOL2RVAL(res);
 }
 
 /****************************************************/
 /* Creating image */
 static VALUE
-get_pixbuf(VALUE self)
+rg_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_loader_get_pixbuf(_SELF(self)));
 }
 
 /* Creating animation */
 static VALUE
-get_animation(VALUE self)
+rg_animation(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_loader_get_animation(_SELF(self)));
 }
-
 
 void 
 Init_gdk_pixbuf_loader(VALUE mGdk)
@@ -148,18 +147,18 @@ Init_gdk_pixbuf_loader(VALUE mGdk)
     /* 
      * File Loading, Image Data in Memory
      */
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize_loader, -1);
+    RG_DEF_METHOD(initialize, -1);
 
     rb_undef_method(RG_TARGET_NAMESPACE, "dup");
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "format", loader_get_format, 0);
+    RG_DEF_METHOD(format, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "write", loader_write, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "last_write", last_write, 1);
+    RG_DEF_METHOD(write, 1);
+    RG_DEF_METHOD(last_write, 1);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_size", loader_set_size, 2);
+    RG_DEF_METHOD(set_size, 2);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "close", loader_close, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf", get_pixbuf, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "animation", get_animation, 0);
+    RG_DEF_METHOD(close, 0);
+    RG_DEF_METHOD(pixbuf, 0);
+    RG_DEF_METHOD(animation, 0);
 }

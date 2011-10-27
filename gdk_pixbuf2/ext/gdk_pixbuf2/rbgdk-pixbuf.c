@@ -66,7 +66,7 @@ get_pixels(VALUE self)
 }
 
 static VALUE
-set_pixels(VALUE self, VALUE pixels)
+rg_operator_set_pixels(VALUE self, VALUE pixels)
 {
     GdkPixbuf *pixbuf = _SELF(self);
     int size;
@@ -90,7 +90,7 @@ set_pixels(VALUE self, VALUE pixels)
 }
 
 static VALUE
-get_option(VALUE self, VALUE key)
+rg_get_option(VALUE self, VALUE key)
 {
     const gchar* ret = gdk_pixbuf_get_option(_SELF(self), RVAL2CSTR(key));
     return ret ? CSTR2RVAL(ret) : Qnil;
@@ -100,7 +100,7 @@ get_option(VALUE self, VALUE key)
 /* File opening */
 /* Image Data in Memory */
 static VALUE
-initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GdkPixbuf* buf;
     GError* error = NULL;
@@ -236,13 +236,13 @@ initialize(int argc, VALUE *argv, VALUE self)
     }
 
     if (error || ! buf) RAISE_GERROR(error);
-    
+
     G_INITIALIZE(self, buf);
     return Qnil;
 }
 
 static VALUE
-copy(VALUE self)
+rg_dup(VALUE self)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_copy(_SELF(self));
@@ -255,7 +255,7 @@ copy(VALUE self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
 static VALUE
-get_file_info(G_GNUC_UNUSED VALUE self, VALUE filename)
+rg_s_get_file_info(G_GNUC_UNUSED VALUE self, VALUE filename)
 {
     gint width, height;
 
@@ -324,7 +324,7 @@ save_to(VALUE self, const gchar *filename, const gchar *type, VALUE options)
 /****************************************************/
 /* File saving */
 static VALUE
-save(int argc, VALUE *argv, VALUE self)
+rg_save(int argc, VALUE *argv, VALUE self)
 {
     VALUE filename, type, options;
 
@@ -345,7 +345,7 @@ gboolean    gdk_pixbuf_save_to_callbackv    (GdkPixbuf *pixbuf,
 */
 
 static VALUE
-save_to_buffer(int argc, VALUE *argv, VALUE self)
+rg_save_to_buffer(int argc, VALUE *argv, VALUE self)
 {
     VALUE type, options;
 
@@ -358,7 +358,7 @@ save_to_buffer(int argc, VALUE *argv, VALUE self)
 /****************************************************/
 /* Scaling */
 static VALUE
-scale_simple(int argc, VALUE *argv, VALUE self)
+rg_scale(int argc, VALUE *argv, VALUE self)
 {
     GdkPixbuf* dest;
     VALUE dest_width, dest_height, interp_type, ret;
@@ -369,7 +369,7 @@ scale_simple(int argc, VALUE *argv, VALUE self)
 
     if (!NIL_P(interp_type))
         type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
-    
+
     dest = gdk_pixbuf_scale_simple(_SELF(self),
                                    NUM2INT(dest_width),
                                    NUM2INT(dest_height),
@@ -383,7 +383,7 @@ scale_simple(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-scale(int argc, VALUE *argv, VALUE self)
+rg_scale_bang(int argc, VALUE *argv, VALUE self)
 {
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
@@ -406,7 +406,7 @@ scale(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-composite_simple(VALUE self, VALUE dest_width, VALUE dest_height, VALUE interp_type, VALUE overall_alpha, VALUE check_size, VALUE color1, VALUE color2)
+rg_composite(VALUE self, VALUE dest_width, VALUE dest_height, VALUE interp_type, VALUE overall_alpha, VALUE check_size, VALUE color1, VALUE color2)
 {
     GdkPixbuf* dest;
     VALUE ret;
@@ -429,7 +429,7 @@ composite_simple(VALUE self, VALUE dest_width, VALUE dest_height, VALUE interp_t
 }
 
 static VALUE
-composite(int argc, VALUE *argv, VALUE self)
+rg_composite_bang(int argc, VALUE *argv, VALUE self)
 {
     VALUE ret;
     VALUE args[16];
@@ -443,8 +443,8 @@ composite(int argc, VALUE *argv, VALUE self)
 
     switch (argc) {
       case 11:
-	if (!NIL_P(args[9]))
-	    interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
+        if (!NIL_P(args[9]))
+            interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
 
         gdk_pixbuf_composite(_SELF(args[0]), _SELF(self), 
                              NUM2INT(args[1]), NUM2INT(args[2]),
@@ -455,8 +455,8 @@ composite(int argc, VALUE *argv, VALUE self)
         ret = self;
         break;
       case 16:
-	if (!NIL_P(args[9]))
-	    interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
+        if (!NIL_P(args[9]))
+            interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
 
         gdk_pixbuf_composite_color(_SELF(args[0]), _SELF(self),
                                    NUM2INT(args[1]), NUM2INT(args[2]),
@@ -470,15 +470,15 @@ composite(int argc, VALUE *argv, VALUE self)
         ret = self;
         break;
       default:
-	rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-	break;
+        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
+        break;
     }
     return ret;
 }
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
 static VALUE
-rotate_simple(VALUE self, VALUE angle)
+rg_rotate(VALUE self, VALUE angle)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GENUM(angle, GDK_TYPE_PIXBUF_ROTATION));
@@ -490,7 +490,7 @@ rotate_simple(VALUE self, VALUE angle)
 }
 
 static VALUE
-flip(VALUE self, VALUE horizontal)
+rg_flip(VALUE self, VALUE horizontal)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_flip(_SELF(self), RVAL2CBOOL(horizontal));
@@ -503,7 +503,7 @@ flip(VALUE self, VALUE horizontal)
 #endif
 
 static VALUE
-add_alpha(VALUE self, VALUE substitute_color, VALUE r, VALUE g, VALUE b)
+rg_add_alpha(VALUE self, VALUE substitute_color, VALUE r, VALUE g, VALUE b)
 {
     VALUE ret;
     GdkPixbuf* dest = gdk_pixbuf_add_alpha(_SELF(self),
@@ -517,7 +517,7 @@ add_alpha(VALUE self, VALUE substitute_color, VALUE r, VALUE g, VALUE b)
 }
 
 static VALUE
-copy_area(VALUE self, VALUE src_x, VALUE src_y, VALUE width, VALUE height, VALUE dest, VALUE dest_x, VALUE dest_y)
+rg_copy_area(VALUE self, VALUE src_x, VALUE src_y, VALUE width, VALUE height, VALUE dest, VALUE dest_x, VALUE dest_y)
 {
     gdk_pixbuf_copy_area(_SELF(self), NUM2INT(src_x), NUM2INT(src_y),
                          NUM2INT(width), NUM2INT(height),
@@ -526,7 +526,7 @@ copy_area(VALUE self, VALUE src_x, VALUE src_y, VALUE width, VALUE height, VALUE
 }
 
 static VALUE
-saturate_and_pixelate(VALUE self, VALUE staturation, VALUE pixelate)
+rg_saturate_and_pixelate(VALUE self, VALUE staturation, VALUE pixelate)
 {
     GdkPixbuf* dest = gdk_pixbuf_copy(_SELF(self));
     gdk_pixbuf_saturate_and_pixelate(_SELF(self), dest, 
@@ -535,7 +535,7 @@ saturate_and_pixelate(VALUE self, VALUE staturation, VALUE pixelate)
 }
 
 static VALUE
-fill(VALUE self, VALUE pixel)
+rg_fill_bang(VALUE self, VALUE pixel)
 {
     gdk_pixbuf_fill(_SELF(self), NUM2UINT(pixel));
     return self;
@@ -544,14 +544,14 @@ fill(VALUE self, VALUE pixel)
 /* From Module Interface */
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 static VALUE
-get_formats(G_GNUC_UNUSED VALUE self)
+rg_s_formats(G_GNUC_UNUSED VALUE self)
 {
     return GSLIST2ARY2(gdk_pixbuf_get_formats(), GDK_TYPE_PIXBUF_FORMAT);
 }
 
 #ifdef HAVE_GDK_PIXBUF_SET_OPTION
 static VALUE
-set_option(VALUE self, VALUE key, VALUE value)
+rg_set_option(VALUE self, VALUE key, VALUE value)
 {
     return CBOOL2RVAL(gdk_pixbuf_set_option(_SELF(self),
                                             RVAL2CSTR(key), RVAL2CSTR(value)));
@@ -575,10 +575,9 @@ Init_gdk_pixbuf2(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
     id_pixdata = rb_intern("pixdata");
-   
+
     /*
     gdk_rgb_init();*/ /* initialize it anyway */
-    
 
     /*
      * Initialization and Versions 
@@ -597,8 +596,8 @@ Init_gdk_pixbuf2(void)
      * The GdkPixbuf Structure 
      */
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "pixels", get_pixels, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixels=", set_pixels, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_option", get_option, 1);
+    RG_DEF_METHOD_OPERATOR("pixels=", set_pixels, 1);
+    RG_DEF_METHOD(get_option, 1);
 
     /* GdkPixbufError */
     G_DEF_ERROR(GDK_PIXBUF_ERROR, "PixbufError", mGdk, rb_eRuntimeError, GDK_TYPE_PIXBUF_ERROR);
@@ -614,30 +613,30 @@ Init_gdk_pixbuf2(void)
     /* 
      * File Loading, Image Data in Memory
      */
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "dup", copy, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(dup, 0);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_file_info", get_file_info, 1);
+    RG_DEF_SMETHOD(get_file_info, 1);
 #endif
 
     /*
      * File saving
      */
-    rb_define_method(RG_TARGET_NAMESPACE, "save", save, -1);
+    RG_DEF_METHOD(save, -1);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "save_to_buffer", save_to_buffer, -1);
+    RG_DEF_METHOD(save_to_buffer, -1);
 #endif
 
     /*
      * Scaling
      */
-    rb_define_method(RG_TARGET_NAMESPACE, "scale", scale_simple, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "scale!", scale, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "composite", composite_simple, 7);
-    rb_define_method(RG_TARGET_NAMESPACE, "composite!", composite, -1);
+    RG_DEF_METHOD(scale, -1);
+    RG_DEF_METHOD_BANG(scale, -1);
+    RG_DEF_METHOD(composite, 7);
+    RG_DEF_METHOD_BANG(composite, -1);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "rotate", rotate_simple, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "flip", flip, 1);
+    RG_DEF_METHOD(rotate, 1);
+    RG_DEF_METHOD(flip, 1);
 #endif
 
     /* GdkInterpType */
@@ -652,17 +651,17 @@ Init_gdk_pixbuf2(void)
     /*
      * Utilities
      */
-    rb_define_method(RG_TARGET_NAMESPACE, "add_alpha", add_alpha, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "copy_area", copy_area, 7);
-    rb_define_method(RG_TARGET_NAMESPACE, "saturate_and_pixelate", saturate_and_pixelate, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "fill!", fill, 1);
+    RG_DEF_METHOD(add_alpha, 4);
+    RG_DEF_METHOD(copy_area, 7);
+    RG_DEF_METHOD(saturate_and_pixelate, 2);
+    RG_DEF_METHOD_BANG(fill, 1);
 
     /*
      * Module Interface
      */
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "formats", get_formats, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_option", set_option, 2);
+    RG_DEF_SMETHOD(formats, 0);
+    RG_DEF_METHOD(set_option, 2);
 #endif
 
     Init_gdk_pixbuf_animation(mGdk);

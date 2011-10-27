@@ -51,7 +51,7 @@ gdk_pixdata_get_type(void)
 }
 /*****************************************/
 static VALUE
-pixdata_s_from_pixbuf(G_GNUC_UNUSED VALUE self, VALUE pixbuf, VALUE use_rle)
+rg_s_from_pixbuf(G_GNUC_UNUSED VALUE self, VALUE pixbuf, VALUE use_rle)
 {
     GdkPixdata pixdata;
     gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RVAL2CBOOL(use_rle));
@@ -64,7 +64,7 @@ pixdata_s_from_pixbuf(G_GNUC_UNUSED VALUE self, VALUE pixbuf, VALUE use_rle)
 }
 
 static VALUE
-pixdata_to_pixbuf(VALUE self, VALUE copy_pixels)
+rg_to_pixbuf(VALUE self, VALUE copy_pixels)
 {
     GError* error = NULL;
     GdkPixbuf* ret = gdk_pixbuf_from_pixdata(_SELF(self), RVAL2CBOOL(copy_pixels), &error);
@@ -74,7 +74,7 @@ pixdata_to_pixbuf(VALUE self, VALUE copy_pixels)
 }
 
 static VALUE
-pixdata_serialize(VALUE self)
+rg_serialize(VALUE self)
 {
     guint stream_length;
     guint i;
@@ -87,7 +87,7 @@ pixdata_serialize(VALUE self)
 }
 
 static VALUE
-pixdata_s_deserialize(VALUE self, VALUE rbstream)
+rg_s_deserialize(VALUE self, VALUE rbstream)
 {
     GdkPixdata pixdata;
     long n;
@@ -106,7 +106,7 @@ pixdata_s_deserialize(VALUE self, VALUE rbstream)
 }
 
 static VALUE
-pixdata_to_csource(VALUE self, VALUE name, VALUE dump_type)
+rg_to_csource(VALUE self, VALUE name, VALUE dump_type)
 {
     GString* str = gdk_pixdata_to_csource(_SELF(self), RVAL2CSTR(name), FIX2INT(dump_type));
     VALUE ret = CSTR2RVAL(str->str);
@@ -116,13 +116,13 @@ pixdata_to_csource(VALUE self, VALUE name, VALUE dump_type)
 
 /* GdkPixdata */
 static VALUE
-pixdata_magic(VALUE self)
+rg_magic(VALUE self)
 {
     return UINT2NUM(_SELF(self)->magic);
 }
 
 static VALUE
-pixdata_length(VALUE self)
+rg_length(VALUE self)
 {
     gint32 length = _SELF(self)->length;
 
@@ -132,31 +132,31 @@ pixdata_length(VALUE self)
 }
 
 static VALUE
-pixdata_pixdata_type(VALUE self)
+rg_pixdata_type(VALUE self)
 {
     return UINT2NUM(_SELF(self)->pixdata_type);
 }
 
 static VALUE
-pixdata_rowstride(VALUE self)
+rg_rowstride(VALUE self)
 {
     return INT2NUM(_SELF(self)->rowstride);
 }
 
 static VALUE
-pixdata_width(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-pixdata_height(VALUE self)
+rg_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-pixdata_pixel_data(VALUE self)
+rg_pixel_data(VALUE self)
 {
     gint i;
     guint8* ret = _SELF(self)->pixel_data;
@@ -169,7 +169,6 @@ pixdata_pixel_data(VALUE self)
     return ary;
 }
 
-
 void
 Init_gdk_pixdata(VALUE mGdk)
 {
@@ -177,18 +176,18 @@ Init_gdk_pixdata(VALUE mGdk)
 
     id_pixdata = rb_intern("pixdata");
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_pixbuf", pixdata_s_from_pixbuf, 2);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "deserialize", pixdata_s_deserialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_pixbuf", pixdata_to_pixbuf, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "serialize", pixdata_serialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_csource", pixdata_to_csource, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "magic", pixdata_magic, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "length", pixdata_length, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixdata_type", pixdata_pixdata_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "rowstride", pixdata_rowstride, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "width", pixdata_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "height", pixdata_height, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixel_data", pixdata_pixel_data, 0);
+    RG_DEF_SMETHOD(from_pixbuf, 2);
+    RG_DEF_SMETHOD(deserialize, 1);
+    RG_DEF_METHOD(to_pixbuf, 1);
+    RG_DEF_METHOD(serialize, 0);
+    RG_DEF_METHOD(to_csource, 2);
+    RG_DEF_METHOD(magic, 0);
+    RG_DEF_METHOD(length, 0);
+    RG_DEF_METHOD(pixdata_type, 0);
+    RG_DEF_METHOD(rowstride, 0);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(pixel_data, 0);
 
     rb_define_const(RG_TARGET_NAMESPACE, "PIXBUF_MAGIC_NUMBER", INT2NUM(GDK_PIXBUF_MAGIC_NUMBER));
     rb_define_const(RG_TARGET_NAMESPACE, "HEADER_LENGTH", INT2NUM(GDK_PIXDATA_HEADER_LENGTH));

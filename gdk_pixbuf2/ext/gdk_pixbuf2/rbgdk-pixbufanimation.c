@@ -25,7 +25,7 @@
 #define _SELF(s) (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(s)))
 
 static VALUE
-animation_initialize(VALUE self, VALUE filename)
+rg_initialize(VALUE self, VALUE filename)
 {
     GdkPixbufAnimation* ret;
     GError* error = NULL;
@@ -39,19 +39,19 @@ animation_initialize(VALUE self, VALUE filename)
 }
 
 static VALUE
-animation_get_width(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(gdk_pixbuf_animation_get_width(_SELF(self)));
 }
 
 static VALUE
-animation_get_height(VALUE self)
+rg_height(VALUE self)
 {
     return INT2NUM(gdk_pixbuf_animation_get_height(_SELF(self)));
 }
 
 static VALUE
-animation_get_iter(int argc, VALUE *argv, VALUE self)
+rg_get_iter(int argc, VALUE *argv, VALUE self)
 {
     VALUE start_time_sec, start_time_usec;
     GTimeVal start_time;
@@ -68,13 +68,13 @@ animation_get_iter(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-animation_is_static_image(VALUE self)
+rg_static_image_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_animation_is_static_image(_SELF(self)));
 }
 
 static VALUE
-animation_get_static_image(VALUE self)
+rg_static_image(VALUE self)
 {
     return GOBJ2RVAL(gdk_pixbuf_animation_get_static_image(_SELF(self)));
 }
@@ -84,10 +84,10 @@ Init_gdk_pixbuf_animation(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION, "PixbufAnimation", mGdk);    
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", animation_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "width", animation_get_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "height", animation_get_height, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_iter", animation_get_iter, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "static_image?", animation_is_static_image, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "static_image", animation_get_static_image, 0);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(get_iter, -1);
+    RG_DEF_METHOD_P(static_image, 0);
+    RG_DEF_METHOD(static_image, 0);
 }
