@@ -21,6 +21,8 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mContentType
+
 static VALUE
 contenttype_equals(G_GNUC_UNUSED VALUE self, VALUE arg1, VALUE arg2)
 {
@@ -111,19 +113,19 @@ contenttype_get_registered(G_GNUC_UNUSED VALUE self)
 void
 Init_gcontenttype(VALUE glib)
 {
-        VALUE contenttype = rb_define_module_under(glib, "ContentType");
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "ContentType");
 
         /* TODO: Should wrap this in a class. */
-        rb_define_module_function(contenttype, "equals?", contenttype_equals, 2);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "equals?", contenttype_equals, 2);
         /* TODO: This name isn't great. */
-        rb_define_module_function(contenttype, "is_a?", contenttype_is_a, 2);
-        rb_define_module_function(contenttype, "unknown?", contenttype_is_unknown, 1);
-        rb_define_module_function(contenttype, "get_description", contenttype_get_description, 1);
-        rb_define_module_function(contenttype, "get_mime_type", contenttype_get_mime_type, 1);
-        rb_define_module_function(contenttype, "get_icon", contenttype_get_icon, 1);
-        rb_define_module_function(contenttype, "can_be_executable?", contenttype_can_be_executable, 1);
-        rb_define_module_function(contenttype, "from_mime_type", contenttype_from_mime_type, 1);
-        rb_define_module_function(contenttype, "guess", contenttype_guess, -1);
-        rb_define_module_function(contenttype, "guess_for_tree", contenttype_guess_for_tree, 1);
-        rb_define_module_function(contenttype, "registered", contenttype_get_registered, 0);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "is_a?", contenttype_is_a, 2);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "unknown?", contenttype_is_unknown, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "get_description", contenttype_get_description, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "get_mime_type", contenttype_get_mime_type, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "get_icon", contenttype_get_icon, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "can_be_executable?", contenttype_can_be_executable, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "from_mime_type", contenttype_from_mime_type, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "guess", contenttype_guess, -1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "guess_for_tree", contenttype_guess_for_tree, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "registered", contenttype_get_registered, 0);
 }

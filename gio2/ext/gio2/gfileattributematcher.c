@@ -21,6 +21,8 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileAttributeMatcher
+
 GType
 g_file_attribute_matcher_get_type(void)
 {
@@ -78,14 +80,14 @@ fileattributematcher_enumerate_next(VALUE self)
 void
 Init_gfileattributematcher(VALUE glib)
 {
-        VALUE fileattributematcher = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_MATCHER, "FileAttributeMatcher", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_MATCHER, "FileAttributeMatcher", glib);
 
-        rb_define_method(fileattributematcher, "initialize", fileattributematcher_initialize, 1);
-        rb_define_method(fileattributematcher, "matches?", fileattributematcher_matches, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileattributematcher_initialize, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "matches?", fileattributematcher_matches, 1);
         /* TODO: Is this confusing when we have both #matches and
          * #matches_only?  What does #=~ call? */
-        rb_define_alias(fileattributematcher, "=~", "matches?");
-        rb_define_method(fileattributematcher, "matches_only?", fileattributematcher_matches_only, 1);
-        rb_define_method(fileattributematcher, "enumerate_namespace", fileattributematcher_enumerate_namespace, 1);
-        rb_define_method(fileattributematcher, "enumerate_next", fileattributematcher_enumerate_next, 0);
+        rb_define_alias(RG_TARGET_NAMESPACE, "=~", "matches?");
+        rb_define_method(RG_TARGET_NAMESPACE, "matches_only?", fileattributematcher_matches_only, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_namespace", fileattributematcher_enumerate_namespace, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_next", fileattributematcher_enumerate_next, 0);
 }

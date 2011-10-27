@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mInitable
 #define _SELF(value) G_INITABLE(RVAL2GOBJ(value))
 
 static VALUE
@@ -190,9 +191,9 @@ initable_initialize(int argc, VALUE *argv, VALUE self)
 void
 Init_ginitable(VALUE glib)
 {
-        VALUE initable = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", glib);
 
-        rb_define_module_function(initable, "new", initable_initialize, -1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "new", initable_initialize, -1);
 
-        rb_define_method(initable, "init", initable_init, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "init", initable_init, -1);
 }

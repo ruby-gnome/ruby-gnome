@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cDataInputStream
 #define _SELF(value) G_DATA_INPUT_STREAM(RVAL2GOBJ(value))
 
 #define RVAL2GDATASTREAMNEWLINETYPE(value) \
@@ -290,30 +291,30 @@ datainputstream_read_upto_finish(VALUE self, VALUE result)
 void
 Init_gdatainputstream(VALUE glib)
 {
-        VALUE datainputstream = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", glib);
 
-        rb_define_method(datainputstream, "initialize", datainputstream_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", datainputstream_initialize, -1);
         /*
-        rb_define_method(datainputstream, "byte_order", datainputstream_get_byte_order, 0);
-        rb_define_method(datainputstream, "set_byte_order", datainputstream_set_byte_order, 1);
-        G_DEF_SETTER(datainputstream, "byte_order");
-        rb_define_method(datainputstream, "set_newline_type", datainputstream_set_newline_type, 1);
-        G_DEF_SETTER(datainputstream, "newline_type");
-        rb_define_method(datainputstream, "newline_type", datainputstream_get_newline_type, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "byte_order", datainputstream_get_byte_order, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_byte_order", datainputstream_set_byte_order, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "byte_order");
+        rb_define_method(RG_TARGET_NAMESPACE, "set_newline_type", datainputstream_set_newline_type, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "newline_type");
+        rb_define_method(RG_TARGET_NAMESPACE, "newline_type", datainputstream_get_newline_type, 0);
         */
-        rb_define_method(datainputstream, "read_byte", datainputstream_read_byte, -1);
-        rb_define_method(datainputstream, "read_int16", datainputstream_read_int16, -1);
-        rb_define_method(datainputstream, "read_uint16", datainputstream_read_uint16, -1);
-        rb_define_method(datainputstream, "read_int32", datainputstream_read_int32, -1);
-        rb_define_method(datainputstream, "read_uint32", datainputstream_read_uint32, -1);
-        rb_define_method(datainputstream, "read_int64", datainputstream_read_int64, -1);
-        rb_define_method(datainputstream, "read_uint64", datainputstream_read_uint64, -1);
-        rb_define_method(datainputstream, "read_line", datainputstream_read_line, -1);
-        rb_define_method(datainputstream, "read_line_async", datainputstream_read_line_async, -1);
-        rb_define_method(datainputstream, "read_line_finish", datainputstream_read_line_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_byte", datainputstream_read_byte, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_int16", datainputstream_read_int16, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_uint16", datainputstream_read_uint16, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_int32", datainputstream_read_int32, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_uint32", datainputstream_read_uint32, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_int64", datainputstream_read_int64, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_uint64", datainputstream_read_uint64, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_line", datainputstream_read_line, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_line_async", datainputstream_read_line_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_line_finish", datainputstream_read_line_finish, 1);
 #if GLIB_CHECK_VERSION(2, 26, 0)
-        rb_define_method(datainputstream, "read_upto", datainputstream_read_upto, -1);
-        rb_define_method(datainputstream, "read_upto_async", datainputstream_read_upto_async, -1);
-        rb_define_method(datainputstream, "read_upto_finish", datainputstream_read_upto_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_upto", datainputstream_read_upto, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_upto_async", datainputstream_read_upto_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_upto_finish", datainputstream_read_upto_finish, 1);
 #endif
 }

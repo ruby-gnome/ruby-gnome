@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cEmblemedIcon
 #define _SELF(value) G_EMBLEMED_ICON(RVAL2GOBJ(value))
 
 static VALUE
@@ -54,11 +55,11 @@ emblemedicon_add_emblem(VALUE self, VALUE emblem)
 void
 Init_gemblemedicon(VALUE glib)
 {
-        VALUE emblemedicon = G_DEF_CLASS(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", glib);
 
-        rb_define_method(emblemedicon, "initialize", emblemedicon_initialize, 2);
-        rb_define_method(emblemedicon, "icon", emblemedicon_get_icon, 0);
-        rb_define_method(emblemedicon, "emblems", emblemedicon_get_emblems, 0);
-        rb_define_method(emblemedicon, "add_emblem", emblemedicon_add_emblem, 1);
-        rb_define_alias(emblemedicon, "<<", "add_emblem");
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", emblemedicon_initialize, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "icon", emblemedicon_get_icon, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "emblems", emblemedicon_get_emblems, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "add_emblem", emblemedicon_add_emblem, 1);
+        rb_define_alias(RG_TARGET_NAMESPACE, "<<", "add_emblem");
 }

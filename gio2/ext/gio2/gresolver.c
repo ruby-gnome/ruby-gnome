@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cResolver
 #define _SELF(value) G_RESOLVER(RVAL2GOBJ(value))
 
 static VALUE
@@ -203,27 +204,27 @@ resolver_lookup_service_finish(VALUE self, VALUE result)
 void
 Init_gresolver(VALUE glib)
 {
-        VALUE resolver, error;
+        VALUE RG_TARGET_NAMESPACE, error;
         
-        resolver = G_DEF_CLASS(G_TYPE_RESOLVER, "Resolver", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_RESOLVER, "Resolver", glib);
 
-        rb_define_singleton_method(resolver, "default", resolver_get_default, 0);
-        rb_define_singleton_method(resolver, "set_default", resolver_set_default, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", resolver_get_default, 0);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default", resolver_set_default, 1);
 
         /* TODO: Taint result of these methods? */
-        rb_define_method(resolver, "lookup_by_name", resolver_lookup_by_name, 2);
-        rb_define_method(resolver, "lookup_by_name_async", resolver_lookup_by_name_async, -1);
-        rb_define_method(resolver, "lookup_by_name_finish", resolver_lookup_by_name_finish, 1);
-        rb_define_method(resolver, "lookup_by_address", resolver_lookup_by_address, -1);
-        rb_define_method(resolver, "lookup_by_address_async", resolver_lookup_by_address_async, -1);
-        rb_define_method(resolver, "lookup_by_address_finish", resolver_lookup_by_address_finish, 1);
-        rb_define_method(resolver, "lookup_service", resolver_lookup_service, -1);
-        rb_define_method(resolver, "lookup_service_async", resolver_lookup_service_async, -1);
-        rb_define_method(resolver, "lookup_service_finish", resolver_lookup_service_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_by_name", resolver_lookup_by_name, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_by_name_async", resolver_lookup_by_name_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_by_name_finish", resolver_lookup_by_name_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_by_address", resolver_lookup_by_address, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_by_address_async", resolver_lookup_by_address_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_by_address_finish", resolver_lookup_by_address_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_service", resolver_lookup_service, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_service_async", resolver_lookup_service_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup_service_finish", resolver_lookup_service_finish, 1);
 
-        error = rbgio_define_domain_error(resolver, "Error", G_RESOLVER_ERROR, "GResolverErrorEnum", rb_eIOError);
+        error = rbgio_define_domain_error(RG_TARGET_NAMESPACE, "Error", G_RESOLVER_ERROR, "GResolverErrorEnum", rb_eIOError);
 
-        rbgio_define_error(resolver, "NotFoundError", G_RESOLVER_ERROR_NOT_FOUND, error);
-        rbgio_define_error(resolver, "TemporaryFailureError", G_RESOLVER_ERROR_TEMPORARY_FAILURE, error);
-        rbgio_define_error(resolver, "InternalError", G_RESOLVER_ERROR_INTERNAL, error);
+        rbgio_define_error(RG_TARGET_NAMESPACE, "NotFoundError", G_RESOLVER_ERROR_NOT_FOUND, error);
+        rbgio_define_error(RG_TARGET_NAMESPACE, "TemporaryFailureError", G_RESOLVER_ERROR_TEMPORARY_FAILURE, error);
+        rbgio_define_error(RG_TARGET_NAMESPACE, "InternalError", G_RESOLVER_ERROR_INTERNAL, error);
 }

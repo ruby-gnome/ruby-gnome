@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSocketService
 #define _SELF(value) G_SOCKET_SERVICE(RVAL2GOBJ(value))
 
 static VALUE
@@ -56,10 +57,10 @@ socketservice_is_active(VALUE self)
 void
 Init_gsocketservice(VALUE glib)
 {
-        VALUE socketservice = G_DEF_CLASS(G_TYPE_SOCKET_SERVICE, "SocketService", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_SERVICE, "SocketService", glib);
 
-        rb_define_method(socketservice, "initialize", socketservice_initialize, 0);
-        rb_define_method(socketservice, "start", socketservice_start, 0);
-        rb_define_method(socketservice, "stop", socketservice_stop, 0);
-        rb_define_method(socketservice, "active?", socketservice_is_active, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socketservice_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "start", socketservice_start, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "stop", socketservice_stop, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "active?", socketservice_is_active, 0);
 }

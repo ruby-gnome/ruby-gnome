@@ -24,6 +24,7 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixoutputstream.h>
 
+#define RG_TARGET_NAMESPACE cUnixOutputStream
 #define _SELF(value) G_UNIX_OUTPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
@@ -43,8 +44,8 @@ void
 Init_gunixoutputstream(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixoutputstream = G_DEF_CLASS(G_TYPE_UNIX_OUTPUT_STREAM, "UnixOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_OUTPUT_STREAM, "UnixOutputStream", glib);
 
-        rb_define_method(unixoutputstream, "initialize", unixoutputstream_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", unixoutputstream_initialize, -1);
 #endif
 }

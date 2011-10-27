@@ -24,6 +24,8 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixmounts.h>
 
+#define RG_TARGET_NAMESPACE mUnixMounts
+
 static GUnixMountEntry *
 unixmount_copy(const GUnixMountEntry *mount)
 {
@@ -282,7 +284,7 @@ void
 Init_gunixmounts(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixmount, unixmountpoint, unixmountpoints, unixmounts, unixmountmonitor;
+        VALUE unixmount, unixmountpoint, unixmountpoints, RG_TARGET_NAMESPACE, unixmountmonitor;
 
         unixmount = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_ENTRY, "UnixMount", glib);
 
@@ -330,10 +332,10 @@ Init_gunixmounts(G_GNUC_UNUSED VALUE glib)
         rb_define_module_function(unixmountpoints, "get", unixmountpoints_get, 0);
         rb_define_module_function(unixmountpoints, "changed_since?", unixmountpoints_changed_since, 1);
 
-        unixmounts = rb_define_module_under(glib, "UnixMounts");
+        RG_TARGET_NAMESPACE = rb_define_module_under(glib, "UnixMounts");
 
-        rb_define_module_function(unixmounts, "get", unixmounts_get, 0);
-        rb_define_module_function(unixmounts, "changed_since?", unixmounts_changed_since, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "get", unixmounts_get, 0);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "changed_since?", unixmounts_changed_since, 1);
 
         unixmountmonitor = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_MONITOR, "UnixMountMonitor", glib);
 

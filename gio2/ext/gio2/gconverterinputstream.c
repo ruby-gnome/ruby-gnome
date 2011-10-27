@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cConverterInputStream
 #define _SELF(value) G_CONVERTER_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
@@ -36,7 +37,7 @@ converterinputstream_initialize(VALUE self, VALUE base_stream, VALUE converter)
 void
 Init_gconverterinputstream(VALUE glib)
 {
-        VALUE converterinputstream = G_DEF_CLASS(G_TYPE_CONVERTER_INPUT_STREAM, "ConverterInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CONVERTER_INPUT_STREAM, "ConverterInputStream", glib);
 
-        rb_define_method(converterinputstream, "initialize", converterinputstream_initialize, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", converterinputstream_initialize, 2);
 }

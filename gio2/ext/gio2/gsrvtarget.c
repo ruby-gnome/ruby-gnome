@@ -24,6 +24,7 @@
 #define RVAL2GSRVTARGET(object) \
         ((GSrvTarget *)(RVAL2BOXED(object, G_TYPE_SRV_TARGET)))
 
+#define RG_TARGET_NAMESPACE cSrvTarget
 #define _SELF(value) RVAL2GSRVTARGET(value)
 
 static VALUE
@@ -68,11 +69,11 @@ srvtarget_get_weight(VALUE self)
 void
 Init_gsrvtarget(VALUE glib)
 {
-        VALUE srvtarget = G_DEF_CLASS(G_TYPE_SRV_TARGET, "SrvTarget", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SRV_TARGET, "SrvTarget", glib);
 
-        rb_define_method(srvtarget, "initialize", srvtarget_initialize, 4);
-        rb_define_method(srvtarget, "hostname", srvtarget_get_hostname, 0);
-        rb_define_method(srvtarget, "port", srvtarget_get_port, 0);
-        rb_define_method(srvtarget, "priority", srvtarget_get_priority, 0);
-        rb_define_method(srvtarget, "weight", srvtarget_get_weight, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", srvtarget_initialize, 4);
+        rb_define_method(RG_TARGET_NAMESPACE, "hostname", srvtarget_get_hostname, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "port", srvtarget_get_port, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "priority", srvtarget_get_priority, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "weight", srvtarget_get_weight, 0);
 }

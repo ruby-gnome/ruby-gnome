@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cOutputStream
 #define _SELF(value) RVAL2GOUTPUTSTREAM(value)
 
 #define RVAL2GOUTPUTSTREAMSPLICEFLAGS(value) \
@@ -307,28 +308,28 @@ outputstream_clear_pending(VALUE self)
 void
 Init_goutputstream(VALUE glib)
 {
-        VALUE outputstream = G_DEF_CLASS(G_TYPE_OUTPUT_STREAM, "OutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_OUTPUT_STREAM, "OutputStream", glib);
 
-        G_DEF_CLASS(G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "SpliceFlags", outputstream);
-        G_DEF_CONSTANTS(outputstream, G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "G_OUTPUT_STREAM_");
+        G_DEF_CLASS(G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "SpliceFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "G_OUTPUT_STREAM_");
 
-        rb_define_method(outputstream, "write", outputstream_write, -1);
-        rb_define_method(outputstream, "write_all", outputstream_write_all, -1);
-        rb_define_method(outputstream, "splice", outputstream_splice, -1);
-        rb_define_method(outputstream, "flush", outputstream_flush, -1);
-        rb_define_method(outputstream, "close", outputstream_close, -1);
-        rb_define_method(outputstream, "write_async", outputstream_write_async, -1);
-        rb_define_method(outputstream, "write_finish", outputstream_write_finish, 1);
-        rb_define_method(outputstream, "splice_async", outputstream_splice_async, -1);
-        rb_define_method(outputstream, "splice_finish", outputstream_splice_finish, 1);
-        rb_define_method(outputstream, "flush_async", outputstream_flush_async, -1);
-        rb_define_method(outputstream, "flush_finish", outputstream_flush_finish, 1);
-        rb_define_method(outputstream, "close_async", outputstream_close_async, -1);
-        rb_define_method(outputstream, "close_finish", outputstream_close_finish, 0);
-        rb_define_method(outputstream, "closing?", outputstream_is_closing, 0);
-        rb_define_method(outputstream, "closed?", outputstream_is_closed, 0);
-        rb_define_method(outputstream, "has_pending?", outputstream_has_pending, 0);
-        rb_define_method(outputstream, "set_pending", outputstream_set_pending, 0);
-        G_DEF_SETTER(outputstream, "pending");
-        rb_define_method(outputstream, "clear_pending", outputstream_clear_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "write", outputstream_write, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "write_all", outputstream_write_all, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "splice", outputstream_splice, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "flush", outputstream_flush, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close", outputstream_close, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "write_async", outputstream_write_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "write_finish", outputstream_write_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "splice_async", outputstream_splice_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "splice_finish", outputstream_splice_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "flush_async", outputstream_flush_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "flush_finish", outputstream_flush_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close_async", outputstream_close_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close_finish", outputstream_close_finish, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "closing?", outputstream_is_closing, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "closed?", outputstream_is_closed, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "has_pending?", outputstream_has_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_pending", outputstream_set_pending, 0);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "pending");
+        rb_define_method(RG_TARGET_NAMESPACE, "clear_pending", outputstream_clear_pending, 0);
 }

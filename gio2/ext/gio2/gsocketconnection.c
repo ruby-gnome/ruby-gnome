@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSocketConnection
 #define _SELF(value) G_SOCKET_CONNECTION(RVAL2GOBJ(value))
 
 static VALUE
@@ -62,12 +63,12 @@ socketconnectionfactory_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket
 void
 Init_gsocketconnection(VALUE glib)
 {
-        VALUE socketconnection, socketconnectionfactory;
+        VALUE RG_TARGET_NAMESPACE, socketconnectionfactory;
 
-        socketconnection = G_DEF_CLASS(G_TYPE_SOCKET_CONNECTION, "SocketConnection", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONNECTION, "SocketConnection", glib);
 
-        rb_define_method(socketconnection, "local_address", socketconnection_get_local_address, 0);
-        rb_define_method(socketconnection, "remote_address", socketconnection_get_remote_address, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "local_address", socketconnection_get_local_address, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "remote_address", socketconnection_get_remote_address, 0);
 
         /* TODO: Perhaps just move this to SocketConnection? */
         socketconnectionfactory = rb_define_module_under(glib, "SocketConnectionFactory");

@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cCancellable
 #define _SELF(value) RVAL2GCANCELLABLE(value)
 
 static VALUE
@@ -160,20 +161,20 @@ cancellable_cancel(VALUE self)
 void
 Init_gcancellable(VALUE glib)
 {
-        VALUE cancellable = G_DEF_CLASS(G_TYPE_CANCELLABLE, "Cancellable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CANCELLABLE, "Cancellable", glib);
 
-        rb_define_singleton_method(cancellable, "current", cancellable_get_current, 0);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "current", cancellable_get_current, 0);
 
-        rb_define_method(cancellable, "initialize", cancellable_initialize, 0);
-        rb_define_method(cancellable, "cancelled?", cancellable_is_cancelled, 0);
-        rb_define_method(cancellable, "raise_error_if_cancelled", cancellable_raise_error_if_cancelled, 0);
-        rb_define_method(cancellable, "fd", cancellable_get_fd, 0);
-        rb_define_method(cancellable, "make_pollfd", cancellable_make_pollfd, 0);
-        rb_define_method(cancellable, "release_fd", cancellable_release_fd, 0);
-        rb_define_method(cancellable, "pop_current", cancellable_pop_current, 0);
-        rb_define_method(cancellable, "push_current", cancellable_push_current, 0);
-        rb_define_method(cancellable, "reset", cancellable_reset, 0);
-        rb_define_method(cancellable, "connect", cancellable_connect, 0);
-        rb_define_method(cancellable, "disconnect", cancellable_disconnect, 1);
-        rb_define_method(cancellable, "cancel", cancellable_cancel, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", cancellable_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "cancelled?", cancellable_is_cancelled, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "raise_error_if_cancelled", cancellable_raise_error_if_cancelled, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "fd", cancellable_get_fd, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "make_pollfd", cancellable_make_pollfd, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "release_fd", cancellable_release_fd, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "pop_current", cancellable_pop_current, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "push_current", cancellable_push_current, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "reset", cancellable_reset, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect", cancellable_connect, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "disconnect", cancellable_disconnect, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "cancel", cancellable_cancel, 0);
 }

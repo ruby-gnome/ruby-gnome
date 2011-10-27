@@ -24,6 +24,7 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gdesktopappinfo.h>
 
+#define RG_TARGET_NAMESPACE cDesktopAppInfo
 #define _SELF(value) G_DESKTOP_APP_INFO(RVAL2GOBJ(value))
 
 #define RVAL2GKEYFILE(value) \
@@ -76,14 +77,14 @@ void
 Init_gdesktopappinfo(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE desktopappinfo = G_DEF_CLASS(G_TYPE_DESKTOP_APP_INFO, "DesktopAppInfo", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DESKTOP_APP_INFO, "DesktopAppInfo", glib);
 
-        rb_define_singleton_method(desktopappinfo, "new_from_filename", desktopappinfo_new_from_filename, 1);
-        rb_define_singleton_method(desktopappinfo, "new_from_keyfile", desktopappinfo_new_from_keyfile, 1);
-        rb_define_singleton_method(desktopappinfo, "set_desktop_env", desktopappinfo_set_desktop_env, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_filename", desktopappinfo_new_from_filename, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_keyfile", desktopappinfo_new_from_keyfile, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_desktop_env", desktopappinfo_set_desktop_env, 1);
 
-        rb_define_method(desktopappinfo, "initialize", desktopappinfo_initialize, 1);
-        rb_define_method(desktopappinfo, "filename", desktopappinfo_get_filename, 0);
-        rb_define_method(desktopappinfo, "hidden?", desktopappinfo_get_is_hidden, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", desktopappinfo_initialize, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "filename", desktopappinfo_get_filename, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "hidden?", desktopappinfo_get_is_hidden, 0);
 #endif
 }

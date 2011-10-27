@@ -21,6 +21,8 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cEmblem
+
 #define RVAL2GEMBLEMORIGIN(value) \
         RVAL2GENUM((value), G_TYPE_EMBLEM_ORIGIN)
 
@@ -44,10 +46,10 @@ emblem_initialize(int argc, VALUE *argv, VALUE self)
 void
 Init_gemblem(VALUE glib)
 {
-        VALUE emblem = G_DEF_CLASS(G_TYPE_EMBLEM, "Emblem", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEM, "Emblem", glib);
 
-        G_DEF_CLASS(G_TYPE_EMBLEM_ORIGIN, "Origin", emblem);
-        G_DEF_CONSTANTS(emblem, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");
+        G_DEF_CLASS(G_TYPE_EMBLEM_ORIGIN, "Origin", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");
 
-        rb_define_method(emblem, "initialize", emblem_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", emblem_initialize, -1);
 }

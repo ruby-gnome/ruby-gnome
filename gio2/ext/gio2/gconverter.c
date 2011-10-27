@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mConverter
 #define _SELF(value) G_CONVERTER(RVAL2GOBJ(value))
 
 #define RVAL2GCONVERTERFLAGS(value) \
@@ -111,8 +112,8 @@ converter_reset(VALUE self)
 void
 Init_gconverter(VALUE glib)
 {
-        VALUE converter = G_DEF_INTERFACE(G_TYPE_CONVERTER, "Converter", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_CONVERTER, "Converter", glib);
 
-        rb_define_method(converter, "convert", converter_convert, -1);
-        rb_define_method(converter, "reset", converter_reset, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "convert", converter_convert, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "reset", converter_reset, 0);
 }

@@ -24,6 +24,7 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixconnection.h>
 
+#define RG_TARGET_NAMESPACE cUnixConnection
 #define _SELF(value) G_UNIX_CONNECTION(RVAL2GOBJ(value))
 
 static VALUE
@@ -62,9 +63,9 @@ void
 Init_gunixconnection(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixconnection = G_DEF_CLASS(G_TYPE_UNIX_CONNECTION, "UnixConnection", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_CONNECTION, "UnixConnection", glib);
 
-        rb_define_method(unixconnection, "receive_fd", unixconnection_receive_fd, -1);
-        rb_define_method(unixconnection, "send_fd", unixconnection_send_fd, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "receive_fd", unixconnection_receive_fd, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "send_fd", unixconnection_send_fd, -1);
 #endif
 }

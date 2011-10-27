@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mDrive
 #define _SELF(value) G_DRIVE(RVAL2GOBJ(value))
 
 #define GDRIVESTARTSTOPTYPE2RVAL(value) \
@@ -233,36 +234,36 @@ drive_get_identifier(VALUE self, VALUE kind)
 void
 Init_gdrive(VALUE glib)
 {
-        VALUE drive = G_DEF_INTERFACE(G_TYPE_DRIVE, "Drive", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_DRIVE, "Drive", glib);
 
-        G_DEF_CLASS(G_TYPE_DRIVE_START_FLAGS, "StartFlags", drive);
-        G_DEF_CONSTANTS(drive, G_TYPE_DRIVE_START_FLAGS, "G_DRIVE_");
+        G_DEF_CLASS(G_TYPE_DRIVE_START_FLAGS, "StartFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DRIVE_START_FLAGS, "G_DRIVE_");
 
-        G_DEF_CLASS(G_TYPE_DRIVE_START_STOP_TYPE, "StartStopType", drive);
-        G_DEF_CONSTANTS(drive, G_TYPE_DRIVE_START_STOP_TYPE, "G_DRIVE_");
+        G_DEF_CLASS(G_TYPE_DRIVE_START_STOP_TYPE, "StartStopType", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DRIVE_START_STOP_TYPE, "G_DRIVE_");
 
-        rb_define_method(drive, "name", drive_get_name, 0);
-        rb_define_method(drive, "icon", drive_get_icon, 0);
-        rb_define_method(drive, "has_volumes?", drive_has_volumes, 0);
-        rb_define_method(drive, "volumes", drive_get_volumes, 0);
-        rb_define_method(drive, "can_eject?", drive_can_eject, 0);
-        rb_define_method(drive, "start_stop_type", drive_get_start_stop_type, 0);
-        rb_define_method(drive, "can_start?", drive_can_start, 0);
-        rb_define_method(drive, "can_start_degraded?", drive_can_start_degraded, 0);
-        rb_define_method(drive, "can_stop?", drive_can_stop, 0);
-        rb_define_method(drive, "can_poll_for_media?", drive_can_poll_for_media, 0);
-        rb_define_method(drive, "poll_for_media", drive_poll_for_media, -1);
-        rb_define_method(drive, "poll_for_media_finish", drive_poll_for_media_finish, 1);
-        rb_define_method(drive, "has_media?", drive_has_media, 0);
-        rb_define_method(drive, "media_check_automatic?", drive_is_media_check_automatic, 0);
-        rb_define_method(drive, "media_removable?", drive_is_media_removable, 0);
-        rb_define_method(drive, "eject_with_operation", drive_eject_with_operation, -1);
-        rb_define_method(drive, "eject_with_operation_finish", drive_eject_with_operation_finish, 1);
-        rb_define_method(drive, "start", drive_start, -1);
-        rb_define_method(drive, "start_finish", drive_start_finish, 1);
-        rb_define_method(drive, "stop", drive_stop, -1);
-        rb_define_method(drive, "stop_finish", drive_stop_finish, 1);
-        rb_define_method(drive, "enumerate_identifiers", drive_enumerate_identifiers, -1);
-        rb_define_alias(drive, "identifiers", "enumerate_identifiers");
-        rb_define_method(drive, "get_identifier", drive_get_identifier, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "name", drive_get_name, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "icon", drive_get_icon, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "has_volumes?", drive_has_volumes, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "volumes", drive_get_volumes, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_eject?", drive_can_eject, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "start_stop_type", drive_get_start_stop_type, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_start?", drive_can_start, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_start_degraded?", drive_can_start_degraded, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_stop?", drive_can_stop, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_poll_for_media?", drive_can_poll_for_media, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "poll_for_media", drive_poll_for_media, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "poll_for_media_finish", drive_poll_for_media_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "has_media?", drive_has_media, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "media_check_automatic?", drive_is_media_check_automatic, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "media_removable?", drive_is_media_removable, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation", drive_eject_with_operation, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation_finish", drive_eject_with_operation_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "start", drive_start, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "start_finish", drive_start_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "stop", drive_stop, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "stop_finish", drive_stop_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_identifiers", drive_enumerate_identifiers, -1);
+        rb_define_alias(RG_TARGET_NAMESPACE, "identifiers", "enumerate_identifiers");
+        rb_define_method(RG_TARGET_NAMESPACE, "get_identifier", drive_get_identifier, 1);
 }

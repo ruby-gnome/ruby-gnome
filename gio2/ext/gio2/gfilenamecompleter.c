@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFilenameCompleter
 #define _SELF(value) G_FILENAME_COMPLETER(RVAL2GOBJ(value))
 
 static VALUE
@@ -63,11 +64,11 @@ filenamecompleter_set_dirs_only(VALUE self, VALUE dirs_only)
 void
 Init_gfilenamecompleter(VALUE glib)
 {
-        VALUE filenamecompleter = G_DEF_CLASS(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", glib);
 
-        rb_define_method(filenamecompleter, "initialize", filenamecompleter_initialize, -1);
-        rb_define_method(filenamecompleter, "get_completion_suffix", filenamecompleter_get_completion_suffix, 1);
-        rb_define_method(filenamecompleter, "get_completions", filenamecompleter_get_completions, 1);
-        rb_define_method(filenamecompleter, "set_dirs_only", filenamecompleter_set_dirs_only, 1);
-        G_DEF_SETTER(filenamecompleter, "dirs_only");
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", filenamecompleter_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "get_completion_suffix", filenamecompleter_get_completion_suffix, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "get_completions", filenamecompleter_get_completions, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_dirs_only", filenamecompleter_set_dirs_only, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "dirs_only");
 }

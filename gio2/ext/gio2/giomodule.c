@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cIOModule
 #define _SELF(value) G_IO_MODULE(RVAL2GOBJ(value))
 
 static VALUE
@@ -50,11 +51,11 @@ iomodule_scan_all_in_directory(VALUE self, VALUE dirname)
 void
 Init_giomodule(VALUE glib)
 {
-        VALUE iomodule, iomodules;
+        VALUE RG_TARGET_NAMESPACE, iomodules;
 
-        iomodule = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
 
-        rb_define_method(iomodule, "initialize", iomodule_initialize, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", iomodule_initialize, 1);
 
         iomodules = rb_define_module_under(glib, "IOModules");
 

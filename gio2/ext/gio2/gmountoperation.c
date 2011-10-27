@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cMountOperation
 #define _SELF(value) RVAL2GMOUNTOPERATION(value)
 
 #define GPASSWORDSAVE2RVAL(value) \
@@ -51,10 +52,10 @@ mountoperation_reply(VALUE self, VALUE value)
 void
 Init_gmountoperation(VALUE glib)
 {
-        VALUE mountoperation = G_DEF_CLASS(G_TYPE_MOUNT_OPERATION, "MountOperation", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MOUNT_OPERATION, "MountOperation", glib);
 
-        G_DEF_CLASS(G_TYPE_MOUNT_OPERATION_RESULT, "Result", mountoperation);
-        G_DEF_CONSTANTS(mountoperation, G_TYPE_MOUNT_OPERATION_RESULT, "G_MOUNT_OPERATION_");
+        G_DEF_CLASS(G_TYPE_MOUNT_OPERATION_RESULT, "Result", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_MOUNT_OPERATION_RESULT, "G_MOUNT_OPERATION_");
 
         G_DEF_CLASS(G_TYPE_ASK_PASSWORD_FLAGS, "AskPasswordFlags", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_ASK_PASSWORD_FLAGS, "G_");
@@ -62,6 +63,6 @@ Init_gmountoperation(VALUE glib)
         G_DEF_CLASS(G_TYPE_PASSWORD_SAVE, "PasswordSave", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_PASSWORD_SAVE, "G_");
 
-        rb_define_method(mountoperation, "initialize", mountoperation_initialize, 0);
-        rb_define_method(mountoperation, "reply", mountoperation_reply, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", mountoperation_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "reply", mountoperation_reply, 1);
 }

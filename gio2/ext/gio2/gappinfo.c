@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mAppInfo
 #define _SELF(value) RVAL2GAPPINFO(value)
 
 #define RVAL2GAPPINFOCREATEFLAGS(value) \
@@ -282,38 +283,38 @@ appinfo_can_remove_supports_type(VALUE self)
 void
 Init_gappinfo(VALUE glib)
 {
-        VALUE appinfo = G_DEF_INTERFACE(G_TYPE_APP_INFO, "AppInfo", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_APP_INFO, "AppInfo", glib);
 
-        G_DEF_CLASS(G_TYPE_APP_INFO_CREATE_FLAGS, "CreateFlags", appinfo);
-        G_DEF_CONSTANTS(appinfo, G_TYPE_APP_INFO_CREATE_FLAGS, "G_APP_INFO_");
+        G_DEF_CLASS(G_TYPE_APP_INFO_CREATE_FLAGS, "CreateFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_APP_INFO_CREATE_FLAGS, "G_APP_INFO_");
 
-        rb_define_singleton_method(appinfo, "create_from_commandline", appinfo_create_from_commandline, -1);
-        rb_define_singleton_method(appinfo, "reset_type_associations", appinfo_reset_type_associations, -1);
-        rb_define_singleton_method(appinfo, "all", appinfo_get_all, 0);
-        rb_define_singleton_method(appinfo, "get_all_for_type", appinfo_get_all_for_type, 1);
-        rb_define_singleton_method(appinfo, "get_default_for_type", appinfo_get_default_for_type, -1);
-        rb_define_singleton_method(appinfo, "get_default_for_uri_scheme", appinfo_get_default_for_uri_scheme, 1);
-        rb_define_singleton_method(appinfo, "launch_default_for_uri", appinfo_launch_default_for_uri, 0);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "create_from_commandline", appinfo_create_from_commandline, -1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "reset_type_associations", appinfo_reset_type_associations, -1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "all", appinfo_get_all, 0);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_all_for_type", appinfo_get_all_for_type, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_default_for_type", appinfo_get_default_for_type, -1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_default_for_uri_scheme", appinfo_get_default_for_uri_scheme, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "launch_default_for_uri", appinfo_launch_default_for_uri, 0);
 
-        rb_define_method(appinfo, "dup", appinfo_dup, 0);
-        rb_define_method(appinfo, "equal?", appinfo_equal, 1);
-        rb_define_method(appinfo, "id", appinfo_get_id, 0);
-        rb_define_method(appinfo, "name", appinfo_get_name, 0);
-        rb_define_method(appinfo, "display_name", appinfo_get_display_name, 0);
-        rb_define_method(appinfo, "description", appinfo_get_description, 0);
-        rb_define_method(appinfo, "executable", appinfo_get_executable, 0);
-        rb_define_method(appinfo, "commandline", appinfo_get_commandline, 0);
-        rb_define_method(appinfo, "icon", appinfo_get_icon, 0);
-        rb_define_method(appinfo, "launch", appinfo_launch, -1);
-        rb_define_method(appinfo, "supports_files?", appinfo_supports_files, 0);
-        rb_define_method(appinfo, "supports_uris?", appinfo_supports_uris, 0);
-        rb_define_method(appinfo, "launch_uris", appinfo_launch_uris, -1);
-        rb_define_method(appinfo, "should_show?", appinfo_should_show, 0);
-        rb_define_method(appinfo, "can_delete?", appinfo_can_delete, 0);
-        rb_define_method(appinfo, "delete", appinfo_delete, 0);
-        rb_define_method(appinfo, "set_as_default_for_type", appinfo_set_as_default_for_type, 1);
-        rb_define_method(appinfo, "set_as_default_for_extension", appinfo_set_as_default_for_extension, 1);
-        rb_define_method(appinfo, "add_supports_type", appinfo_add_supports_type, 1);
-        rb_define_method(appinfo, "can_remove_supports_type?", appinfo_can_remove_supports_type, 1);
-        rb_define_method(appinfo, "remove_supports_type", appinfo_remove_supports_type, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "dup", appinfo_dup, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "equal?", appinfo_equal, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "id", appinfo_get_id, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "name", appinfo_get_name, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "display_name", appinfo_get_display_name, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "description", appinfo_get_description, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "executable", appinfo_get_executable, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "commandline", appinfo_get_commandline, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "icon", appinfo_get_icon, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "launch", appinfo_launch, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "supports_files?", appinfo_supports_files, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "supports_uris?", appinfo_supports_uris, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "launch_uris", appinfo_launch_uris, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "should_show?", appinfo_should_show, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_delete?", appinfo_can_delete, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "delete", appinfo_delete, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_as_default_for_type", appinfo_set_as_default_for_type, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_as_default_for_extension", appinfo_set_as_default_for_extension, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "add_supports_type", appinfo_add_supports_type, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_remove_supports_type?", appinfo_can_remove_supports_type, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "remove_supports_type", appinfo_remove_supports_type, 1);
 }

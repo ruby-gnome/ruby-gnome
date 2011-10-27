@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cZlibDecompressor
 #define _SELF(value) G_ZLIB_DECOMPRESSOR(RVAL2GOBJ(value))
 
 static VALUE
@@ -38,7 +39,7 @@ zlibdecompressor_initialize(int argc, VALUE *argv, VALUE self)
 void
 Init_gzlibdecompressor(VALUE glib)
 {
-        VALUE zlibdecompressor = G_DEF_CLASS(G_TYPE_ZLIB_DECOMPRESSOR, "ZlibDecompressor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_DECOMPRESSOR, "ZlibDecompressor", glib);
 
-        rb_define_method(zlibdecompressor, "initialize", zlibdecompressor_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", zlibdecompressor_initialize, -1);
 }

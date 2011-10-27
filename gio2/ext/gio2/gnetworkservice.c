@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cNetworkService
 #define _SELF(value) G_NETWORK_SERVICE(RVAL2GOBJ(value))
 
 static VALUE
@@ -38,7 +39,7 @@ networkservice_initialize(VALUE self, VALUE service, VALUE protocol, VALUE domai
 void
 Init_gnetworkservice(VALUE glib)
 {
-        VALUE networkservice = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", glib);
 
-        rb_define_method(networkservice, "initialize", networkservice_initialize, 3);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", networkservice_initialize, 3);
 }

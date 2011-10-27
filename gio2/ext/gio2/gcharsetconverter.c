@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cCharsetConverter
 #define _SELF(value) G_CHARSET_CONVERTER(RVAL2GOBJ(value))
 
 static VALUE
@@ -49,8 +50,8 @@ charsetconverter_get_num_fallbacks(VALUE self)
 void
 Init_gcharsetconverter(VALUE glib)
 {
-        VALUE charsetconverter = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", glib);
 
-        rb_define_method(charsetconverter, "initialize", charsetconverter_initialize, 2);
-        rb_define_method(charsetconverter, "num_fallbacks", charsetconverter_get_num_fallbacks, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", charsetconverter_initialize, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "num_fallbacks", charsetconverter_get_num_fallbacks, 0);
 }

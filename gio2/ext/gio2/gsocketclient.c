@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSocketClient
 #define _SELF(value) G_SOCKET_CLIENT(RVAL2GOBJ(value))
 
 static VALUE
@@ -191,16 +192,16 @@ socketclient_connect_to_service_finish(VALUE self, VALUE result)
 void
 Init_gsocketclient(VALUE glib)
 {
-        VALUE socketclient = G_DEF_CLASS(G_TYPE_SOCKET_CLIENT, "SocketClient", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CLIENT, "SocketClient", glib);
 
-        rb_define_method(socketclient, "initialize", socketclient_initialize, 0);
-        rb_define_method(socketclient, "connect", socketclient_connect, -1);
-        rb_define_method(socketclient, "connect_async", socketclient_connect_async, -1);
-        rb_define_method(socketclient, "connect_finish", socketclient_connect_finish, 1);
-        rb_define_method(socketclient, "connect_to_host", socketclient_connect_to_host, -1);
-        rb_define_method(socketclient, "connect_to_host_async", socketclient_connect_to_host_async, -1);
-        rb_define_method(socketclient, "connect_to_host_finish", socketclient_connect_to_host_finish, 1);
-        rb_define_method(socketclient, "connect_to_service", socketclient_connect_to_service, -1);
-        rb_define_method(socketclient, "connect_to_service_async", socketclient_connect_to_service_async, -1);
-        rb_define_method(socketclient, "connect_to_service_finish", socketclient_connect_to_service_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socketclient_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect", socketclient_connect, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_async", socketclient_connect_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_finish", socketclient_connect_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_host", socketclient_connect_to_host, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_host_async", socketclient_connect_to_host_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_host_finish", socketclient_connect_to_host_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_service", socketclient_connect_to_service, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_service_async", socketclient_connect_to_service_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_service_finish", socketclient_connect_to_service_finish, 1);
 }

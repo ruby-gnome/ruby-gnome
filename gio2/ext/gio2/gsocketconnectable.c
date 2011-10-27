@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mSocketConnectable
 #define _SELF(value) RVAL2GSOCKETCONNECTABLE(value)
 
 static VALUE
@@ -84,11 +85,11 @@ socketaddressenumerator_next_finish(VALUE self, VALUE result)
 void
 Init_gsocketconnectable(VALUE glib)
 {
-        VALUE socketconnectable, socketaddressenumerator;
+        VALUE RG_TARGET_NAMESPACE, socketaddressenumerator;
 
-        socketconnectable = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", glib);
+        RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", glib);
 
-        rb_define_method(socketconnectable, "enumerate", socketconnectable_enumerate, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "enumerate", socketconnectable_enumerate, 0);
 
         socketaddressenumerator = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS_ENUMERATOR, "SocketAddressEnumerator", glib);
 

@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSocketListener
 #define _SELF(value) G_SOCKET_LISTENER(RVAL2GOBJ(value))
 
 static VALUE
@@ -227,20 +228,20 @@ socketlistener_set_backlog(VALUE self, VALUE listen_backlog)
 void
 Init_gsocketlistener(VALUE glib)
 {
-        VALUE socketlistener = G_DEF_CLASS(G_TYPE_SOCKET_LISTENER, "SocketListener", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_LISTENER, "SocketListener", glib);
 
-        rb_define_method(socketlistener, "initialize", socketlistener_initialize, 0);
-        rb_define_method(socketlistener, "add_socket", socketlistener_add_socket, -1);
-        rb_define_method(socketlistener, "add_address", socketlistener_add_address, -1);
-        rb_define_method(socketlistener, "add_inet_port", socketlistener_add_inet_port, -1);
-        rb_define_method(socketlistener, "add_any_inet_port", socketlistener_add_any_inet_port, -1);
-        rb_define_method(socketlistener, "accept", socketlistener_accept, -1);
-        rb_define_method(socketlistener, "accept_async", socketlistener_accept_async, -1);
-        rb_define_method(socketlistener, "accept_finish", socketlistener_accept_finish, 1);
-        rb_define_method(socketlistener, "accept_socket", socketlistener_accept_socket, -1);
-        rb_define_method(socketlistener, "accept_socket_async", socketlistener_accept_socket_async, -1);
-        rb_define_method(socketlistener, "accept_socket_finish", socketlistener_accept_socket_finish, 1);
-        rb_define_method(socketlistener, "close", socketlistener_close, 0);
-        rb_define_method(socketlistener, "set_backlog", socketlistener_set_backlog, 1);
-        G_DEF_SETTER(socketlistener, "backlog");
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socketlistener_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "add_socket", socketlistener_add_socket, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "add_address", socketlistener_add_address, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "add_inet_port", socketlistener_add_inet_port, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "add_any_inet_port", socketlistener_add_any_inet_port, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept", socketlistener_accept, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept_async", socketlistener_accept_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept_finish", socketlistener_accept_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept_socket", socketlistener_accept_socket, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept_socket_async", socketlistener_accept_socket_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept_socket_finish", socketlistener_accept_socket_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close", socketlistener_close, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_backlog", socketlistener_set_backlog, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "backlog");
 }

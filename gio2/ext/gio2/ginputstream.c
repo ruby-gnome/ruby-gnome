@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cInputStream
 #define _SELF(value) RVAL2GINPUTSTREAM(value)
 
 static VALUE s_cReadAsyncResult;
@@ -319,22 +320,22 @@ inputstream_clear_pending(VALUE self)
 void
 Init_ginputstream(VALUE glib)
 {
-        VALUE inputstream = G_DEF_CLASS(G_TYPE_INPUT_STREAM, "InputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INPUT_STREAM, "InputStream", glib);
 
-        s_cReadAsyncResult = rb_define_class_under(inputstream, "ReadAsyncResult", rb_cObject);
+        s_cReadAsyncResult = rb_define_class_under(RG_TARGET_NAMESPACE, "ReadAsyncResult", rb_cObject);
         
-        rb_define_method(inputstream, "read", inputstream_read, -1);
-        rb_define_method(inputstream, "read_all", inputstream_read_all, -1);
-        rb_define_method(inputstream, "skip", inputstream_skip, -1);
-        rb_define_method(inputstream, "close", inputstream_close, -1);
-        rb_define_method(inputstream, "read_async", inputstream_read_async, -1);
-        rb_define_method(inputstream, "read_finish", inputstream_read_finish, 1);
-        rb_define_method(inputstream, "skip_async", inputstream_skip_async, -1);
-        rb_define_method(inputstream, "skip_finish", inputstream_skip_finish, 1);
-        rb_define_method(inputstream, "close_async", inputstream_close_async, -1);
-        rb_define_method(inputstream, "close_finish", inputstream_close_finish, 1);
-        rb_define_method(inputstream, "closed?", inputstream_is_closed, 0);
-        rb_define_method(inputstream, "has_pending?", inputstream_has_pending, 0);
-        rb_define_method(inputstream, "set_pending", inputstream_set_pending, 0);
-        rb_define_method(inputstream, "clear_pending", inputstream_clear_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "read", inputstream_read, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_all", inputstream_read_all, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "skip", inputstream_skip, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close", inputstream_close, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_async", inputstream_read_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_finish", inputstream_read_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "skip_async", inputstream_skip_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "skip_finish", inputstream_skip_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close_async", inputstream_close_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close_finish", inputstream_close_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "closed?", inputstream_is_closed, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "has_pending?", inputstream_has_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_pending", inputstream_set_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "clear_pending", inputstream_clear_pending, 0);
 }

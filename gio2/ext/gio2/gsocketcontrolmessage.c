@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSocketControlMessage
 #define _SELF(value) G_SOCKET_CONTROL_MESSAGE(RVAL2GOBJ(value))
 
 static VALUE
@@ -70,12 +71,12 @@ socketcontrolmessage_serialize(VALUE self)
 void
 Init_gsocketcontrolmessage(VALUE glib)
 {
-        VALUE socketcontrolmessage = G_DEF_CLASS(G_TYPE_SOCKET_CONTROL_MESSAGE, "SocketControlMessage", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONTROL_MESSAGE, "SocketControlMessage", glib);
 
-        rb_define_singleton_method(socketcontrolmessage, "deserialize", socketcontrolmessage_deserialize, 3);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "deserialize", socketcontrolmessage_deserialize, 3);
 
-        rb_define_method(socketcontrolmessage, "level", socketcontrolmessage_get_level, 0);
-        rb_define_method(socketcontrolmessage, "msg_type", socketcontrolmessage_get_msg_type, 0);
-        rb_define_method(socketcontrolmessage, "size", socketcontrolmessage_get_size, 0);
-        rb_define_method(socketcontrolmessage, "serialize", socketcontrolmessage_serialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "level", socketcontrolmessage_get_level, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "msg_type", socketcontrolmessage_get_msg_type, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "size", socketcontrolmessage_get_size, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "serialize", socketcontrolmessage_serialize, 0);
 }

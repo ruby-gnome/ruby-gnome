@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mAsyncResult
 #define _SELF(value) RVAL2GASYNCRESULT(value)
 
 /* NOTE: g_async_result_get_user_data isn't of any use from Ruby. */
@@ -34,7 +35,7 @@ asyncresult_get_source_object(VALUE self)
 void
 Init_gasyncresult(VALUE glib)
 {
-        VALUE asyncresult = G_DEF_INTERFACE(G_TYPE_ASYNC_RESULT, "AsyncResult", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_RESULT, "AsyncResult", glib);
 
-        rb_define_method(asyncresult, "source_object", asyncresult_get_source_object, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "source_object", asyncresult_get_source_object, 0);
 }

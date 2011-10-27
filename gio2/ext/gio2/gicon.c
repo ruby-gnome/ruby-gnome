@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mIcon
 #define _SELF(value) RVAL2GICON(value)
 
 static VALUE
@@ -57,12 +58,12 @@ icon_to_string(VALUE self)
 void
 Init_gicon(VALUE glib)
 {
-        VALUE icon = G_DEF_INTERFACE(G_TYPE_ICON, "Icon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ICON, "Icon", glib);
 
-        rb_define_singleton_method(icon, "new_for_string", icon_new_for_string, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_for_string", icon_new_for_string, 1);
 
-        rb_define_method(icon, "hash", icon_hash, 0);
-        rb_define_method(icon, "==", icon_equal, 1);
-        rb_define_method(icon, "to_string", icon_to_string, 0);
-        rb_define_alias(icon, "to_s", "to_string");
+        rb_define_method(RG_TARGET_NAMESPACE, "hash", icon_hash, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "==", icon_equal, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "to_string", icon_to_string, 0);
+        rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_string");
 }

@@ -24,6 +24,7 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixfdlist.h>
 
+#define RG_TARGET_NAMESPACE cUnixFDList
 #define _SELF(value) RVAL2GUNIXFDLIST(value)
 
 static VALUE
@@ -100,15 +101,15 @@ void
 Init_gunixfdlist(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixfdlist = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFDList", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFDList", glib);
 
-        rb_define_method(unixfdlist, "initialize", unixfdlist_initialize, -1);
-        rb_define_method(unixfdlist, "length", unixfdlist_get_length, 0);
-        rb_define_method(unixfdlist, "get", unixfdlist_get, 1);
-        rb_define_alias(unixfdlist, "[]", "get");
-        rb_define_method(unixfdlist, "peek_fds", unixfdlist_peek_fds, 0);
-        rb_define_method(unixfdlist, "steal_fds", unixfdlist_steal_fds, 0);
-        rb_define_method(unixfdlist, "append", unixfdlist_append, 1);
-        rb_define_alias(unixfdlist, "<<", "append");
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", unixfdlist_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "length", unixfdlist_get_length, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "get", unixfdlist_get, 1);
+        rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get");
+        rb_define_method(RG_TARGET_NAMESPACE, "peek_fds", unixfdlist_peek_fds, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "steal_fds", unixfdlist_steal_fds, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "append", unixfdlist_append, 1);
+        rb_define_alias(RG_TARGET_NAMESPACE, "<<", "append");
 #endif
 }

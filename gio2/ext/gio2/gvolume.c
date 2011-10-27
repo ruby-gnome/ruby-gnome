@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mVolume
 #define _SELF(value) G_VOLUME(RVAL2GOBJ(value))
 
 static VALUE
@@ -165,28 +166,28 @@ volume_get_identifier(VALUE self, VALUE kind)
 void
 Init_gvolume(VALUE glib)
 {
-        VALUE volume = G_DEF_INTERFACE(G_TYPE_VOLUME, "Volume", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_VOLUME, "Volume", glib);
 
-        rb_define_const(volume, "IDENTIFIER_KIND_HAL_UDI", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_HAL_UDI));
-        rb_define_const(volume, "IDENTIFIER_KIND_LABEL", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_LABEL));
-        rb_define_const(volume, "IDENTIFIER_KIND_NFS_MOUNT", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT));
-        rb_define_const(volume, "IDENTIFIER_KIND_UNIX_DEVICE", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE));
-        rb_define_const(volume, "IDENTIFIER_KIND_UUID", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_UUID));
+        rb_define_const(RG_TARGET_NAMESPACE, "IDENTIFIER_KIND_HAL_UDI", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_HAL_UDI));
+        rb_define_const(RG_TARGET_NAMESPACE, "IDENTIFIER_KIND_LABEL", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_LABEL));
+        rb_define_const(RG_TARGET_NAMESPACE, "IDENTIFIER_KIND_NFS_MOUNT", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT));
+        rb_define_const(RG_TARGET_NAMESPACE, "IDENTIFIER_KIND_UNIX_DEVICE", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE));
+        rb_define_const(RG_TARGET_NAMESPACE, "IDENTIFIER_KIND_UUID", CSTR2RVAL(G_VOLUME_IDENTIFIER_KIND_UUID));
 
-        rb_define_method(volume, "name", volume_get_name, 0);
-        rb_define_method(volume, "uuid", volume_get_uuid, 0);
-        rb_define_method(volume, "icon", volume_get_icon, 0);
-        rb_define_method(volume, "drive", volume_get_drive, 0);
-        rb_define_method(volume, "get_mount", volume_get_mount, 0);
-        rb_define_method(volume, "can_mount?", volume_can_mount, 0);
-        rb_define_method(volume, "should_automount?", volume_should_automount, 0);
-        rb_define_method(volume, "activation_root", volume_get_activation_root, 0);
-        rb_define_method(volume, "mount", volume_mount, -1);
-        rb_define_method(volume, "mount_finish", volume_mount_finish, 1);
-        rb_define_method(volume, "can_eject?", volume_can_eject, 0);
-        rb_define_method(volume, "eject_with_operation", volume_eject_with_operation, -1);
-        rb_define_method(volume, "eject_with_operation_finish", volume_eject_with_operation_finish, 1);
-        rb_define_method(volume, "enumerate_identifiers", volume_enumerate_identifiers, -1);
-        rb_define_alias(volume, "identifiers", "enumerate_identifiers");
-        rb_define_method(volume, "get_identifier", volume_get_identifier, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "name", volume_get_name, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "uuid", volume_get_uuid, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "icon", volume_get_icon, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "drive", volume_get_drive, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "get_mount", volume_get_mount, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_mount?", volume_can_mount, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "should_automount?", volume_should_automount, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "activation_root", volume_get_activation_root, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "mount", volume_mount, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "mount_finish", volume_mount_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_eject?", volume_can_eject, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation", volume_eject_with_operation, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation_finish", volume_eject_with_operation_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_identifiers", volume_enumerate_identifiers, -1);
+        rb_define_alias(RG_TARGET_NAMESPACE, "identifiers", "enumerate_identifiers");
+        rb_define_method(RG_TARGET_NAMESPACE, "get_identifier", volume_get_identifier, 1);
 }

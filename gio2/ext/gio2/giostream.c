@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cIOStream
 #define _SELF(value) G_IO_STREAM(RVAL2GOBJ(value))
 
 static VALUE
@@ -95,13 +96,13 @@ iostream_clear_pending(VALUE self)
 void
 Init_giostream(VALUE glib)
 {
-        VALUE iostream = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", glib);
 
-        rb_define_method(iostream, "close", iostream_close, 1);
-        rb_define_method(iostream, "close_async", iostream_close_async, -1);
-        rb_define_method(iostream, "close_finish", iostream_close_finish, 1);
-        rb_define_method(iostream, "has_pending?", iostream_has_pending, 0);
-        rb_define_method(iostream, "set_pending", iostream_set_pending, 0);
-        G_DEF_SETTER(iostream, "pending");
-        rb_define_method(iostream, "clear_pending", iostream_clear_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "close", iostream_close, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close_async", iostream_close_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close_finish", iostream_close_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "has_pending?", iostream_has_pending, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_pending", iostream_set_pending, 0);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "pending");
+        rb_define_method(RG_TARGET_NAMESPACE, "clear_pending", iostream_clear_pending, 0);
 }

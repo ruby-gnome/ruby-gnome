@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cBufferedInputStream
 #define _SELF(value) G_BUFFERED_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
@@ -153,14 +154,14 @@ bufferedinputstream_read_byte(int argc, VALUE *argv, VALUE self)
 void
 Init_gbufferedinputstream(VALUE glib)
 {
-        VALUE bufferedinputstream = G_DEF_CLASS(G_TYPE_BUFFERED_INPUT_STREAM, "BufferedInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_INPUT_STREAM, "BufferedInputStream", glib);
 
-        rb_define_method(bufferedinputstream, "initialize", bufferedinputstream_initialize, -1);
-        rb_define_method(bufferedinputstream, "available", bufferedinputstream_get_available, 0);
-        rb_define_method(bufferedinputstream, "peek_buffer", bufferedinputstream_peek_buffer, 0);
-        rb_define_method(bufferedinputstream, "peek", bufferedinputstream_peek, 2);
-        rb_define_method(bufferedinputstream, "fill", bufferedinputstream_fill, -1);
-        rb_define_method(bufferedinputstream, "fill_async", bufferedinputstream_fill_async, -1);
-        rb_define_method(bufferedinputstream, "fill_finish", bufferedinputstream_fill_finish, 1);
-        rb_define_method(bufferedinputstream, "read_byte", bufferedinputstream_read_byte, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", bufferedinputstream_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "available", bufferedinputstream_get_available, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "peek_buffer", bufferedinputstream_peek_buffer, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "peek", bufferedinputstream_peek, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "fill", bufferedinputstream_fill, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "fill_async", bufferedinputstream_fill_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "fill_finish", bufferedinputstream_fill_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "read_byte", bufferedinputstream_read_byte, -1);
 }

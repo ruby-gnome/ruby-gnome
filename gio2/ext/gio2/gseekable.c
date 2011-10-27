@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mSeekable
 #define _SELF(value) G_SEEKABLE(RVAL2GOBJ(value))
 
 #define RVAL2GSEEKTYPEDEFAULT(value) \
@@ -80,11 +81,11 @@ seekable_truncate(int argc, VALUE *argv, VALUE self)
 void
 Init_gseekable(VALUE glib)
 {
-        VALUE seekable = G_DEF_INTERFACE(G_TYPE_SEEKABLE, "Seekable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SEEKABLE, "Seekable", glib);
 
-        rb_define_method(seekable, "tell", seekable_tell, 0);
-        rb_define_method(seekable, "can_seek?", seekable_can_seek, 0);
-        rb_define_method(seekable, "seek", seekable_seek, -1);
-        rb_define_method(seekable, "can_truncate?", seekable_can_truncate, 0);
-        rb_define_method(seekable, "truncate", seekable_truncate, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "tell", seekable_tell, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_seek?", seekable_can_seek, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "seek", seekable_seek, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_truncate?", seekable_can_truncate, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "truncate", seekable_truncate, -1);
 }

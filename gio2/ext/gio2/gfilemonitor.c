@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileMonitor
 #define _SELF(value) G_FILE_MONITOR(RVAL2GOBJ(value))
 
 static VALUE
@@ -32,14 +33,14 @@ filemonitor_cancel(VALUE self)
 void
 Init_gfilemonitor(VALUE glib)
 {
-        VALUE filemonitor = G_DEF_CLASS(G_TYPE_FILE_MONITOR, "FileMonitor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_MONITOR, "FileMonitor", glib);
 
-        G_DEF_CLASS(G_TYPE_FILE_MONITOR_EVENT, "Event", filemonitor);
-        G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_EVENT, "G_FILE_MONITOR_");
+        G_DEF_CLASS(G_TYPE_FILE_MONITOR_EVENT, "Event", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_EVENT, "G_FILE_MONITOR_");
 
-        G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "Flags", filemonitor);
-        G_DEF_CONSTANTS(filemonitor, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
+        G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
 
-        rb_define_method(filemonitor, "cancel", filemonitor_cancel, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "cancel", filemonitor_cancel, 0);
         /* TODO: Do we need #emit_event? */
 }

@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mThemedIcon
 #define _SELF(value) G_THEMED_ICON(RVAL2GOBJ(value))
 
 /* TODO: Is this unnecessarily complicated? */
@@ -74,9 +75,9 @@ themedicon_append_name(VALUE self, VALUE iconname)
 void
 Init_gthemedicon(VALUE glib)
 {
-        VALUE themedicon = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
 
-        rb_define_method(themedicon, "initialize", themedicon_initialize, -1);
-        rb_define_method(themedicon, "prepend_name", themedicon_prepend_name, 1);
-        rb_define_method(themedicon, "append_name", themedicon_append_name, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", themedicon_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "prepend_name", themedicon_prepend_name, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "append_name", themedicon_append_name, 1);
 }

@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSimpleAsyncResult
 #define _SELF(value) G_SIMPLE_ASYNC_RESULT(RVAL2GOBJ(value))
 
 static VALUE
@@ -136,19 +137,19 @@ simpleasyncresult_complete_in_idle(VALUE self)
 void
 Init_gsimpleasyncresult(VALUE glib)
 {
-        VALUE simpleasyncresult = G_DEF_CLASS(G_TYPE_SIMPLE_ASYNC_RESULT, "SimpleAsyncResult", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SIMPLE_ASYNC_RESULT, "SimpleAsyncResult", glib);
 
-        rb_define_method(simpleasyncresult, "initialize", simpleasyncresult_initialize, 1);
-        rb_define_method(simpleasyncresult, "set_op_res_gssize", simpleasyncresult_set_op_res_gssize, 1);
-        G_DEF_SETTER(simpleasyncresult, "op_res_gssize");
-        rb_define_method(simpleasyncresult, "op_res_gssize", simpleasyncresult_get_op_res_gssize, 0);
-        rb_define_method(simpleasyncresult, "set_op_res_gboolean", simpleasyncresult_set_op_res_gboolean, 1);
-        G_DEF_SETTER(simpleasyncresult, "op_res_gboolean");
-        rb_define_method(simpleasyncresult, "op_res_gboolean", simpleasyncresult_get_op_res_gboolean, 0);
-        rb_define_method(simpleasyncresult, "source_tag", simpleasyncresult_get_source_tag, 0);
-        rb_define_method(simpleasyncresult, "valid?", simpleasyncresult_is_valid, 2);
-        rb_define_method(simpleasyncresult, "set_handle_cancellation", simpleasyncresult_set_handle_cancellation, 1);
-        G_DEF_SETTER(simpleasyncresult, "handle_cancellation");
-        rb_define_method(simpleasyncresult, "complete", simpleasyncresult_complete, 0);
-        rb_define_method(simpleasyncresult, "complete_in_idle", simpleasyncresult_complete_in_idle, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", simpleasyncresult_initialize, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_op_res_gssize", simpleasyncresult_set_op_res_gssize, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "op_res_gssize");
+        rb_define_method(RG_TARGET_NAMESPACE, "op_res_gssize", simpleasyncresult_get_op_res_gssize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_op_res_gboolean", simpleasyncresult_set_op_res_gboolean, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "op_res_gboolean");
+        rb_define_method(RG_TARGET_NAMESPACE, "op_res_gboolean", simpleasyncresult_get_op_res_gboolean, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "source_tag", simpleasyncresult_get_source_tag, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "valid?", simpleasyncresult_is_valid, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "set_handle_cancellation", simpleasyncresult_set_handle_cancellation, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "handle_cancellation");
+        rb_define_method(RG_TARGET_NAMESPACE, "complete", simpleasyncresult_complete, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "complete_in_idle", simpleasyncresult_complete_in_idle, 0);
 }

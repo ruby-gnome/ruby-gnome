@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mLoadableIcon
 #define _SELF(value) G_LOADABLE_ICON(RVAL2GOBJ(value))
 
 static VALUE
@@ -83,9 +84,9 @@ loadableicon_load_finish(VALUE self, VALUE result)
 void
 Init_gloadableicon(VALUE glib)
 {
-        VALUE loadableicon = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON, "LoadableIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON, "LoadableIcon", glib);
 
-        rb_define_method(loadableicon, "load", loadableicon_load, -1);
-        rb_define_method(loadableicon, "load_async", loadableicon_load_async, -1);
-        rb_define_method(loadableicon, "load_finish", loadableicon_load_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "load", loadableicon_load, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "load_async", loadableicon_load_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "load_finish", loadableicon_load_finish, 1);
 }

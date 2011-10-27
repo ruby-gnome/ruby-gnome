@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileIOStream
 #define _SELF(value) G_FILE_IO_STREAM(RVAL2GOBJ(value))
 
 static VALUE
@@ -88,10 +89,10 @@ fileiostream_query_info_finish(VALUE self, VALUE result)
 void
 Init_gfileiostream(VALUE glib)
 {
-        VALUE fileiostream = G_DEF_CLASS(G_TYPE_FILE_IO_STREAM, "FileIOStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_IO_STREAM, "FileIOStream", glib);
 
-        rb_define_method(fileiostream, "etag", fileiostream_get_etag, 0);
-        rb_define_method(fileiostream, "query_info", fileiostream_query_info, -1);
-        rb_define_method(fileiostream, "query_info_async", fileiostream_query_info_async, -1);
-        rb_define_method(fileiostream, "query_info_finish", fileiostream_query_info_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "etag", fileiostream_get_etag, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "query_info", fileiostream_query_info, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "query_info_async", fileiostream_query_info_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "query_info_finish", fileiostream_query_info_finish, 1);
 }

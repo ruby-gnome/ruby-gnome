@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mInetAddress
 #define _SELF(value) RVAL2GINETADDRESS(value)
 
 static VALUE
@@ -102,16 +103,16 @@ inetaddress_to_string(VALUE self)
 void
 Init_ginetaddress(VALUE glib)
 {
-        VALUE inetaddress = G_DEF_INTERFACE(G_TYPE_INET_ADDRESS, "InetAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INET_ADDRESS, "InetAddress", glib);
 
-        rb_define_singleton_method(inetaddress, "new_from_string", inetaddress_new_from_string, 1);
-        rb_define_singleton_method(inetaddress, "new_from_bytes", inetaddress_new_from_bytes, -1);
-        rb_define_singleton_method(inetaddress, "new_any", inetaddress_new_any, 1);
-        rb_define_singleton_method(inetaddress, "new_loopback", inetaddress_new_loopback, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_string", inetaddress_new_from_string, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_bytes", inetaddress_new_from_bytes, -1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_any", inetaddress_new_any, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_loopback", inetaddress_new_loopback, 1);
 
-        rb_define_method(inetaddress, "to_bytes", inetaddress_to_bytes, 0);
-        rb_define_method(inetaddress, "get_native_size", inetaddress_get_native_size, 0);
-        rb_define_method(inetaddress, "to_string", inetaddress_to_string, 0);
-        rb_define_alias(inetaddress, "to_str", "to_string");
-        rb_define_alias(inetaddress, "to_s", "to_string");
+        rb_define_method(RG_TARGET_NAMESPACE, "to_bytes", inetaddress_to_bytes, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "get_native_size", inetaddress_get_native_size, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "to_string", inetaddress_to_string, 0);
+        rb_define_alias(RG_TARGET_NAMESPACE, "to_str", "to_string");
+        rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_string");
 }

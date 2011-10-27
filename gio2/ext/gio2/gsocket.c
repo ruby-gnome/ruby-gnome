@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cSocket
 #define _SELF(value) RVAL2GSOCKET(value)
 
 #define RVAL2GIOCONDITION(value) RVAL2GFLAGS((value), G_TYPE_IO_CONDITION)
@@ -334,40 +335,40 @@ socket_speaks_ipv4(VALUE self)
 void
 Init_gsocket(VALUE glib)
 {
-        VALUE socket = G_DEF_CLASS(G_TYPE_SOCKET, "Socket", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET, "Socket", glib);
 
-        G_DEF_CLASS(G_TYPE_SOCKET_FAMILY, "Family", socket);
-        G_DEF_CONSTANTS(socket, G_TYPE_SOCKET_FAMILY, "G_SOCKET_");
+        G_DEF_CLASS(G_TYPE_SOCKET_FAMILY, "Family", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_FAMILY, "G_SOCKET_");
 
-        G_DEF_CLASS(G_TYPE_SOCKET_TYPE, "Type", socket);
-        G_DEF_CONSTANTS(socket, G_TYPE_SOCKET_TYPE, "G_SOCKET_");
+        G_DEF_CLASS(G_TYPE_SOCKET_TYPE, "Type", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_TYPE, "G_SOCKET_");
 
-        G_DEF_CLASS(G_TYPE_SOCKET_PROTOCOL, "Protocol", socket);
-        G_DEF_CONSTANTS(socket, G_TYPE_SOCKET_PROTOCOL, "G_SOCKET_");
+        G_DEF_CLASS(G_TYPE_SOCKET_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_PROTOCOL, "G_SOCKET_");
 
-        G_DEF_CLASS(G_TYPE_SOCKET_MSG_FLAGS, "MsgFlags", socket);
-        G_DEF_CONSTANTS(socket, G_TYPE_SOCKET_MSG_FLAGS, "G_SOCKET_");
+        G_DEF_CLASS(G_TYPE_SOCKET_MSG_FLAGS, "MsgFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_MSG_FLAGS, "G_SOCKET_");
 
-        rb_define_singleton_method(socket, "new_from_fd", socket_new_from_fd, 1);
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_fd", socket_new_from_fd, 1);
 
-        rb_define_method(socket, "initialize", socket_initialize, -1);
-        rb_define_method(socket, "bind", socket_bind, 2);
-        rb_define_method(socket, "listen", socket_listen, 0);
-        rb_define_method(socket, "accept", socket_accept, -1);
-        rb_define_method(socket, "connect", socket_connect, -1);
-        rb_define_method(socket, "check_connect_result", socket_check_connect_result, 0);
-        rb_define_method(socket, "receive", socket_receive, -1);
-        rb_define_method(socket, "receive_from", socket_receive_from, -1);
-        rb_define_method(socket, "send", socket_send, -1);
-        rb_define_method(socket, "send_to", socket_send_to, -1);
-        rb_define_method(socket, "close", socket_close, -1);
-        rb_define_method(socket, "closed?", socket_is_closed, 0);
-        rb_define_method(socket, "shutdown", socket_shutdown, 2);
-        rb_define_method(socket, "connected?", socket_is_connected, 0);
-        rb_define_method(socket, "create_source", socket_create_source, -1);
-        rb_define_method(socket, "condition_check", socket_condition_check, 1);
-        rb_define_method(socket, "condition_wait", socket_condition_wait, -1);
-        G_REPLACE_GET_PROPERTY(socket, "local_address", socket_get_local_address, 0);
-        G_REPLACE_GET_PROPERTY(socket, "remote_address", socket_get_remote_address, 0);
-        rb_define_method(socket, "speaks_ipv4?", socket_speaks_ipv4, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socket_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "bind", socket_bind, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "listen", socket_listen, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "accept", socket_accept, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "connect", socket_connect, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "check_connect_result", socket_check_connect_result, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "receive", socket_receive, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "receive_from", socket_receive_from, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "send", socket_send, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "send_to", socket_send_to, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "close", socket_close, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "closed?", socket_is_closed, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "shutdown", socket_shutdown, 2);
+        rb_define_method(RG_TARGET_NAMESPACE, "connected?", socket_is_connected, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "create_source", socket_create_source, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "condition_check", socket_condition_check, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "condition_wait", socket_condition_wait, -1);
+        G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "local_address", socket_get_local_address, 0);
+        G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "remote_address", socket_get_remote_address, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "speaks_ipv4?", socket_speaks_ipv4, 0);
 }

@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cAppLaunchContext
 #define _SELF(value) RVAL2GAPPLAUNCHCONTEXT(value)
 
 static VALUE
@@ -71,10 +72,10 @@ applaunchcontext_launch_failed(VALUE self, VALUE sn_id)
 void
 Init_gapplaunchcontext(VALUE glib)
 {
-        VALUE applaunchcontext = G_DEF_CLASS(G_TYPE_APP_LAUNCH_CONTEXT, "AppLaunchContext", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_APP_LAUNCH_CONTEXT, "AppLaunchContext", glib);
 
-        rb_define_method(applaunchcontext, "initialize", applaunchcontext_initialize, 0);
-        rb_define_method(applaunchcontext, "get_display", applaunchcontext_get_display, -1);
-        rb_define_method(applaunchcontext, "get_startup_notify_id", applaunchcontext_get_startup_notify_id, -1);
-        rb_define_method(applaunchcontext, "launch_failed", applaunchcontext_launch_failed, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", applaunchcontext_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "get_display", applaunchcontext_get_display, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "get_startup_notify_id", applaunchcontext_get_startup_notify_id, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "launch_failed", applaunchcontext_launch_failed, 1);
 }

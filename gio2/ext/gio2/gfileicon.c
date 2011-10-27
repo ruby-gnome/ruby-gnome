@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileIcon
 #define _SELF(value) G_FILE_ICON(RVAL2GOBJ(value))
 
 static VALUE
@@ -34,7 +35,7 @@ fileicon_initialize(VALUE self, VALUE file)
 void
 Init_gfileicon(VALUE glib)
 {
-        VALUE fileicon = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", glib);
 
-        rb_define_method(fileicon, "initialize", fileicon_initialize, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileicon_initialize, 1);
 }

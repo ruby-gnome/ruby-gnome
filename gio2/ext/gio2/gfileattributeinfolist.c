@@ -21,6 +21,8 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileAttributeInfoList
+
 #define RVAL2GFILEATTRIBUTEINFOFLAGS(value) \
         RVAL2GFLAGS((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
 
@@ -97,14 +99,14 @@ fileattributeinfolist_each(VALUE self)
 void
 Init_fileattributeinfolist(VALUE glib)
 {
-        VALUE fileattributeinfolist = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_LIST, "FileAttributeInfoList", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_LIST, "FileAttributeInfoList", glib);
 
-        rb_include_module(fileattributeinfolist, rb_mEnumerable);
+        rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-        rb_define_method(fileattributeinfolist, "initialize", fileattributeinfolist_initialize, 0);
-        rb_define_method(fileattributeinfolist, "dup", fileattributeinfolist_dup, 0);
-        rb_define_method(fileattributeinfolist, "lookup", fileattributeinfolist_lookup, 1);
-        rb_define_alias(fileattributeinfolist, "[]", "lookup");
-        rb_define_method(fileattributeinfolist, "add", fileattributeinfolist_add, 3);
-        rb_define_method(fileattributeinfolist, "each", fileattributeinfolist_each, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileattributeinfolist_initialize, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "dup", fileattributeinfolist_dup, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "lookup", fileattributeinfolist_lookup, 1);
+        rb_define_alias(RG_TARGET_NAMESPACE, "[]", "lookup");
+        rb_define_method(RG_TARGET_NAMESPACE, "add", fileattributeinfolist_add, 3);
+        rb_define_method(RG_TARGET_NAMESPACE, "each", fileattributeinfolist_each, 0);
 }

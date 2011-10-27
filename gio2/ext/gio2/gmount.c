@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mMount
 #define _SELF(value) RVAL2GMOUNT(value)
 
 static VALUE
@@ -253,33 +254,33 @@ mount_unshadow(VALUE self)
 void
 Init_gmount(VALUE glib)
 {
-        VALUE mount = G_DEF_INTERFACE(G_TYPE_MOUNT, "Mount", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_MOUNT, "Mount", glib);
 
-        G_DEF_CLASS(G_TYPE_MOUNT_MOUNT_FLAGS, "MountFlags", mount);
-        G_DEF_CONSTANTS(mount, G_TYPE_MOUNT_MOUNT_FLAGS, "G_MOUNT_");
+        G_DEF_CLASS(G_TYPE_MOUNT_MOUNT_FLAGS, "MountFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_MOUNT_MOUNT_FLAGS, "G_MOUNT_");
 
-        G_DEF_CLASS(G_TYPE_MOUNT_UNMOUNT_FLAGS, "UnmountFlags", mount);
-        G_DEF_CONSTANTS(mount, G_TYPE_MOUNT_UNMOUNT_FLAGS, "G_MOUNT_");
+        G_DEF_CLASS(G_TYPE_MOUNT_UNMOUNT_FLAGS, "UnmountFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_MOUNT_UNMOUNT_FLAGS, "G_MOUNT_");
 
-        rb_define_method(mount, "name", mount_get_name, 0);
-        rb_define_method(mount, "uuid", mount_get_uuid, 0);
-        rb_define_method(mount, "icon", mount_get_icon, 0);
-        rb_define_method(mount, "drive", mount_get_drive, 0);
-        rb_define_method(mount, "root", mount_get_root, 0);
-        rb_define_method(mount, "volume", mount_get_volume, 0);
-        rb_define_method(mount, "default_location", mount_get_default_location, 0);
-        rb_define_method(mount, "can_unmount?", mount_can_unmount, 0);
-        rb_define_method(mount, "unmount_with_operation", mount_unmount_with_operation, -1);
-        rb_define_method(mount, "unmount_with_operation_finish", mount_unmount_with_operation_finish, 1);
-        rb_define_method(mount, "remount", mount_remount, -1);
-        rb_define_method(mount, "remount_finish", mount_remount_finish, 1);
-        rb_define_method(mount, "can_eject?", mount_can_eject, 0);
-        rb_define_method(mount, "eject_with_operation", mount_eject_with_operation, -1);
-        rb_define_method(mount, "eject_with_operation_finish", mount_eject_with_operation_finish, 1);
-        rb_define_method(mount, "guess_content_type", mount_guess_content_type, -1);
-        rb_define_method(mount, "guess_content_type_finish", mount_guess_content_type_finish, 1);
-        rb_define_method(mount, "guess_content_type_sync", mount_guess_content_type_sync, -1);
-        rb_define_method(mount, "shadowed?", mount_is_shadowed, 0);
-        rb_define_method(mount, "shadow", mount_shadow, 0);
-        rb_define_method(mount, "unshadow", mount_unshadow, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "name", mount_get_name, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "uuid", mount_get_uuid, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "icon", mount_get_icon, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "drive", mount_get_drive, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "root", mount_get_root, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "volume", mount_get_volume, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "default_location", mount_get_default_location, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_unmount?", mount_can_unmount, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "unmount_with_operation", mount_unmount_with_operation, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "unmount_with_operation_finish", mount_unmount_with_operation_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "remount", mount_remount, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "remount_finish", mount_remount_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "can_eject?", mount_can_eject, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation", mount_eject_with_operation, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation_finish", mount_eject_with_operation_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "guess_content_type", mount_guess_content_type, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "guess_content_type_finish", mount_guess_content_type_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "guess_content_type_sync", mount_guess_content_type_sync, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "shadowed?", mount_is_shadowed, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "shadow", mount_shadow, 0);
+        rb_define_method(RG_TARGET_NAMESPACE, "unshadow", mount_unshadow, 0);
 }

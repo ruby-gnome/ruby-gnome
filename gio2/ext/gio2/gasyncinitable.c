@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mAsyncInitable
 #define _SELF(value) G_ASYNC_INITABLE(RVAL2GOBJ(value))
 
 static VALUE
@@ -237,10 +238,10 @@ asyncinitable_initialize_finish(VALUE self, VALUE result)
 void
 Init_gasyncinitable(VALUE glib)
 {
-        VALUE asyncinitable = G_DEF_INTERFACE(G_TYPE_ASYNC_INITABLE, "AsyncInitable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_INITABLE, "AsyncInitable", glib);
 
-        rb_define_method(asyncinitable, "init_async", asyncinitable_init_async, -1);
-        rb_define_method(asyncinitable, "init_finish", asyncinitable_init_finish, 1);
-        rb_define_method(asyncinitable, "initialize", asyncinitable_initialize, -1);
-        rb_define_method(asyncinitable, "initialize_finish", asyncinitable_initialize_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "init_async", asyncinitable_init_async, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "init_finish", asyncinitable_init_finish, 1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize", asyncinitable_initialize, -1);
+        rb_define_method(RG_TARGET_NAMESPACE, "initialize_finish", asyncinitable_initialize_finish, 1);
 }
