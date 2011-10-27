@@ -22,6 +22,7 @@
 #include "rbgdk-pixbuf.h"
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+#define RG_TARGET_NAMESPACE cPixbufSimpleAnim
 #define _SELF(s) (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(s)))
 
 static VALUE
@@ -44,9 +45,9 @@ void
 Init_gdk_pixbuf_simpleanim(VALUE mGdk)
 {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
-    VALUE anim = G_DEF_CLASS(GDK_TYPE_PIXBUF_SIMPLE_ANIM, "PixbufSimpleAnim", mGdk);    
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_SIMPLE_ANIM, "PixbufSimpleAnim", mGdk);    
 
-    rb_define_method(anim, "initialize", simpleanim_initialize, 3);
-    rb_define_method(anim, "add_frame", simpleanim_add_frame, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", simpleanim_initialize, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_frame", simpleanim_add_frame, 1);
 #endif
 }

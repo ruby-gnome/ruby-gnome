@@ -26,6 +26,7 @@
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
 #endif
 
+#define RG_TARGET_NAMESPACE cPixbufFormat
 #define _SELF(r) ((GdkPixbufFormat*)RVAL2BOXED(r, GDK_TYPE_PIXBUF_FORMAT))
 
 
@@ -159,23 +160,23 @@ void
 Init_gdk_pixbuf_format(VALUE mGdk)
 {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    VALUE format = G_DEF_CLASS(GDK_TYPE_PIXBUF_FORMAT, "PixbufFormat", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_FORMAT, "PixbufFormat", mGdk);
 
-    rb_define_method(format, "name", get_name, 0);
-    rb_define_method(format, "description", get_description, 0);
-    rb_define_method(format, "mime_types", get_mime_types, 0);
-    rb_define_method(format, "extensions", get_extensions, 0);
-    rb_define_method(format, "writable?", is_writable, 0);
-    rb_define_method(format, "domain", get_domain, 0);
-    rb_define_method(format, "signature", get_signature, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mime_types", get_mime_types, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "extensions", get_extensions, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "writable?", is_writable, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "domain", get_domain, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "signature", get_signature, 0);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
-    rb_define_method(format, "scalable?", is_scalable, 0);
-    rb_define_method(format, "disabled?", is_disabled, 0);
-    rb_define_method(format, "set_disabled", set_disabled, 1);
-    rb_define_method(format, "license", get_license, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "scalable?", is_scalable, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "disabled?", is_disabled, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_disabled", set_disabled, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "license", get_license, 0);
 
 #endif
-    G_DEF_SETTERS(format);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
 

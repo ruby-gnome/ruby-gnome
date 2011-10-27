@@ -22,6 +22,7 @@
 
 #include "rbgdk-pixbuf.h"
 
+#define RG_TARGET_NAMESPACE cPixbufLoader
 #define _SELF(s) GDK_PIXBUF_LOADER(RVAL2GOBJ(s))
 
 /****************************************************/
@@ -140,25 +141,25 @@ get_animation(VALUE self)
 void 
 Init_gdk_pixbuf_loader(VALUE mGdk)
 {
-    VALUE gdkPixbufLoader;
+    VALUE RG_TARGET_NAMESPACE;
     /* initialize it */
-    gdkPixbufLoader = G_DEF_CLASS(GDK_TYPE_PIXBUF_LOADER, "PixbufLoader", mGdk);    
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_LOADER, "PixbufLoader", mGdk);    
 
     /* 
      * File Loading, Image Data in Memory
      */
-    rb_define_method(gdkPixbufLoader, "initialize", initialize_loader, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize_loader, -1);
 
-    rb_undef_method(gdkPixbufLoader, "dup");
+    rb_undef_method(RG_TARGET_NAMESPACE, "dup");
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkPixbufLoader, "format", loader_get_format, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "format", loader_get_format, 0);
 #endif
-    rb_define_method(gdkPixbufLoader, "write", loader_write, 1);
-    rb_define_method(gdkPixbufLoader, "last_write", last_write, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "write", loader_write, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "last_write", last_write, 1);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkPixbufLoader, "set_size", loader_set_size, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", loader_set_size, 2);
 #endif
-    rb_define_method(gdkPixbufLoader, "close", loader_close, 0);
-    rb_define_method(gdkPixbufLoader, "pixbuf", get_pixbuf, 0);
-    rb_define_method(gdkPixbufLoader, "animation", get_animation, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "close", loader_close, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf", get_pixbuf, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "animation", get_animation, 0);
 }

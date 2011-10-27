@@ -21,6 +21,7 @@
 
 #include "rbgdk-pixbuf.h"
 
+#define RG_TARGET_NAMESPACE cPixbufAnimation
 #define _SELF(s) (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(s)))
 #define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
 
@@ -117,15 +118,15 @@ animation_iter_get_pixbuf(VALUE self)
 void
 Init_gdk_pixbuf_animation(VALUE mGdk)
 {
-    VALUE anim = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION, "PixbufAnimation", mGdk);    
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION, "PixbufAnimation", mGdk);    
     VALUE animiter = G_DEF_CLASS(GDK_TYPE_PIXBUF_ANIMATION_ITER, "PixbufAnimationIter", mGdk);    
 
-    rb_define_method(anim, "initialize", animation_initialize, 1);
-    rb_define_method(anim, "width", animation_get_width, 0);
-    rb_define_method(anim, "height", animation_get_height, 0);
-    rb_define_method(anim, "get_iter", animation_get_iter, -1);
-    rb_define_method(anim, "static_image?", animation_is_static_image, 0);
-    rb_define_method(anim, "static_image", animation_get_static_image, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", animation_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", animation_get_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", animation_get_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter", animation_get_iter, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "static_image?", animation_is_static_image, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "static_image", animation_get_static_image, 0);
     rb_define_method(animiter, "advance", animation_iter_advance, -1);
     rb_define_method(animiter, "delay_time", animation_iter_get_delay_time, 0);
     rb_define_method(animiter, "on_currently_loading_frame?", animation_iter_on_currently_loading_frame, 0);

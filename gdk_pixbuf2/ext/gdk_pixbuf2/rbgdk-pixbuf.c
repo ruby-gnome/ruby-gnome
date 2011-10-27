@@ -28,6 +28,7 @@
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
 #endif
 
+#define RG_TARGET_NAMESPACE cPixbuf
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
 #define NOMEM_ERROR(error) g_set_error(error,\
@@ -571,7 +572,7 @@ void
 Init_gdk_pixbuf2(void)
 {
     VALUE mGdk = rb_define_module("Gdk");
-    VALUE gdkPixbuf = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF, "Pixbuf", mGdk);    
 
     id_pixdata = rb_intern("pixdata");
    
@@ -585,83 +586,83 @@ Init_gdk_pixbuf2(void)
 /* Removed. This crashes Ruby/GTK on Windows + GTK+-2.4.x.
    Pointed out by Laurent.
 #ifdef HAVE_GDK_PIXBUF_VERSION
-    rb_define_const(gdkPixbuf, "VERSION", CSTR2RVAL(gdk_pixbuf_version));
+    rb_define_const(RG_TARGET_NAMESPACE, "VERSION", CSTR2RVAL(gdk_pixbuf_version));
 #endif
 */
-    rb_define_const(gdkPixbuf, "MAJOR", INT2FIX(GDK_PIXBUF_MAJOR));
-    rb_define_const(gdkPixbuf, "MINOR", INT2FIX(GDK_PIXBUF_MINOR));
-    rb_define_const(gdkPixbuf, "MICRO", INT2FIX(GDK_PIXBUF_MICRO));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAJOR", INT2FIX(GDK_PIXBUF_MAJOR));
+    rb_define_const(RG_TARGET_NAMESPACE, "MINOR", INT2FIX(GDK_PIXBUF_MINOR));
+    rb_define_const(RG_TARGET_NAMESPACE, "MICRO", INT2FIX(GDK_PIXBUF_MICRO));
 
     /* 
      * The GdkPixbuf Structure 
      */
-    G_REPLACE_GET_PROPERTY(gdkPixbuf, "pixels", get_pixels, 0);
-    rb_define_method(gdkPixbuf, "pixels=", set_pixels, 1);
-    rb_define_method(gdkPixbuf, "get_option", get_option, 1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "pixels", get_pixels, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixels=", set_pixels, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_option", get_option, 1);
 
     /* GdkPixbufError */
     G_DEF_ERROR(GDK_PIXBUF_ERROR, "PixbufError", mGdk, rb_eRuntimeError, GDK_TYPE_PIXBUF_ERROR);
 
     /* GdkColorspace */
-    G_DEF_CLASS(GDK_TYPE_COLORSPACE, "ColorSpace", gdkPixbuf);
-    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_COLORSPACE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_COLORSPACE, "ColorSpace", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_COLORSPACE, "GDK_");
 
     /* GdkPixbufAlphaMode */
-    G_DEF_CLASS(GDK_TYPE_PIXBUF_ALPHA_MODE, "AlphaMode", gdkPixbuf);
-    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ALPHA_MODE, "GDK_PIXBUF_");
+    G_DEF_CLASS(GDK_TYPE_PIXBUF_ALPHA_MODE, "AlphaMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_PIXBUF_ALPHA_MODE, "GDK_PIXBUF_");
 
     /* 
      * File Loading, Image Data in Memory
      */
-    rb_define_method(gdkPixbuf, "initialize", initialize, -1);
-    rb_define_method(gdkPixbuf, "dup", copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "dup", copy, 0);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
-    rb_define_singleton_method(gdkPixbuf, "get_file_info", get_file_info, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_file_info", get_file_info, 1);
 #endif
 
     /*
      * File saving
      */
-    rb_define_method(gdkPixbuf, "save", save, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "save", save, -1);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkPixbuf, "save_to_buffer", save_to_buffer, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "save_to_buffer", save_to_buffer, -1);
 #endif
 
     /*
      * Scaling
      */
-    rb_define_method(gdkPixbuf, "scale", scale_simple, -1);
-    rb_define_method(gdkPixbuf, "scale!", scale, -1);
-    rb_define_method(gdkPixbuf, "composite", composite_simple, 7);
-    rb_define_method(gdkPixbuf, "composite!", composite, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "scale", scale_simple, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "scale!", scale, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "composite", composite_simple, 7);
+    rb_define_method(RG_TARGET_NAMESPACE, "composite!", composite, -1);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
-    rb_define_method(gdkPixbuf, "rotate", rotate_simple, 1);
-    rb_define_method(gdkPixbuf, "flip", flip, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "rotate", rotate_simple, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "flip", flip, 1);
 #endif
 
     /* GdkInterpType */
-    G_DEF_CLASS(GDK_TYPE_INTERP_TYPE, "InterpType", gdkPixbuf);
-    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_INTERP_TYPE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_INTERP_TYPE, "InterpType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_INTERP_TYPE, "GDK_");
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
     /* GdkPixbufRotation */
-    G_DEF_CLASS(GDK_TYPE_PIXBUF_ROTATION, "GdkPixbufRotation", gdkPixbuf);
-    G_DEF_CONSTANTS(gdkPixbuf, GDK_TYPE_PIXBUF_ROTATION, "GDK_PIXBUF_");
+    G_DEF_CLASS(GDK_TYPE_PIXBUF_ROTATION, "GdkPixbufRotation", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_PIXBUF_ROTATION, "GDK_PIXBUF_");
 #endif
     /*
      * Utilities
      */
-    rb_define_method(gdkPixbuf, "add_alpha", add_alpha, 4);
-    rb_define_method(gdkPixbuf, "copy_area", copy_area, 7);
-    rb_define_method(gdkPixbuf, "saturate_and_pixelate", saturate_and_pixelate, 2);
-    rb_define_method(gdkPixbuf, "fill!", fill, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_alpha", add_alpha, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy_area", copy_area, 7);
+    rb_define_method(RG_TARGET_NAMESPACE, "saturate_and_pixelate", saturate_and_pixelate, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "fill!", fill, 1);
 
     /*
      * Module Interface
      */
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gdkPixbuf, "formats", get_formats, 0);
-    rb_define_method(gdkPixbuf, "set_option", set_option, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "formats", get_formats, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_option", set_option, 2);
 #endif
 
     Init_gdk_pixbuf_animation(mGdk);
