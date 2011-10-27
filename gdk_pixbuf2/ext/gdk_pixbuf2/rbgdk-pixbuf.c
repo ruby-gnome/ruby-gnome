@@ -666,6 +666,7 @@ Init_gdk_pixbuf2(void)
 #endif
 
     Init_gdk_pixbuf_animation(mGdk);
+    Init_gdk_pixbuf_animation_iter(mGdk);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
     Init_gdk_pixbuf_simpleanim(mGdk);
 #endif
