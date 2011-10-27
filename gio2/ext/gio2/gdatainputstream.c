@@ -294,14 +294,6 @@ Init_gdatainputstream(VALUE glib)
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", glib);
 
         rb_define_method(RG_TARGET_NAMESPACE, "initialize", datainputstream_initialize, -1);
-        /*
-        rb_define_method(RG_TARGET_NAMESPACE, "byte_order", datainputstream_get_byte_order, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_byte_order", datainputstream_set_byte_order, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "byte_order");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_newline_type", datainputstream_set_newline_type, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "newline_type");
-        rb_define_method(RG_TARGET_NAMESPACE, "newline_type", datainputstream_get_newline_type, 0);
-        */
         rb_define_method(RG_TARGET_NAMESPACE, "read_byte", datainputstream_read_byte, -1);
         rb_define_method(RG_TARGET_NAMESPACE, "read_int16", datainputstream_read_int16, -1);
         rb_define_method(RG_TARGET_NAMESPACE, "read_uint16", datainputstream_read_uint16, -1);
