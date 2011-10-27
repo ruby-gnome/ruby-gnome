@@ -34,7 +34,7 @@
         RVAL2TYPE_WITH_DEFAULT((value), RVAL2CSTR, "*")
 
 static VALUE
-fileinfo_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_file_info_new());
 
@@ -42,13 +42,13 @@ fileinfo_initialize(VALUE self)
 }
 
 static VALUE
-fileinfo_dup(VALUE self)
+rg_dup(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_file_info_dup(_SELF(self)));
 }
 
 static VALUE
-fileinfo_copy_into(VALUE self, VALUE other)
+rg_copy_into(VALUE self, VALUE other)
 {
         g_file_info_copy_into(_SELF(self), _SELF(other));
 
@@ -56,19 +56,19 @@ fileinfo_copy_into(VALUE self, VALUE other)
 }
 
 static VALUE
-fileinfo_has_attribute(VALUE self, VALUE attribute)
+rg_has_attribute_p(VALUE self, VALUE attribute)
 {
         return CBOOL2RVAL(g_file_info_has_attribute(_SELF(self), RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_has_namespace(VALUE self, VALUE namespace)
+rg_has_namespace_p(VALUE self, VALUE namespace)
 {
         return CBOOL2RVAL(g_file_info_has_namespace(_SELF(self), RVAL2CSTR(namespace)));
 }
 
 static VALUE
-fileinfo_set_attribute_status(VALUE self, VALUE attribute, VALUE status)
+rg_set_attribute_status(VALUE self, VALUE attribute, VALUE status)
 {
         return CBOOL2RVAL(g_file_info_set_attribute_status(_SELF(self),
                                                            RVAL2CSTR(attribute),
@@ -76,7 +76,7 @@ fileinfo_set_attribute_status(VALUE self, VALUE attribute, VALUE status)
 }
 
 static VALUE
-fileinfo_list_attributes(int argc, VALUE *argv, VALUE self)
+rg_list_attributes(int argc, VALUE *argv, VALUE self)
 {
         VALUE name_space;
 
@@ -87,13 +87,13 @@ fileinfo_list_attributes(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileinfo_get_attribute_type(VALUE self, VALUE attribute)
+rg_get_attribute_type(VALUE self, VALUE attribute)
 {
         return GFILEATTRIBUTETYPE2RVAL(g_file_info_get_attribute_type(_SELF(self), RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_remove_attribute(VALUE self, VALUE attribute)
+rg_remove_attribute(VALUE self, VALUE attribute)
 {
         g_file_info_remove_attribute(_SELF(self), RVAL2CSTR(attribute));
 
@@ -101,7 +101,7 @@ fileinfo_remove_attribute(VALUE self, VALUE attribute)
 }
 
 static VALUE
-fileinfo_get_attribute_as_string(VALUE self, VALUE attribute)
+rg_get_attribute_as_string(VALUE self, VALUE attribute)
 {
         return CSTR2RVAL_FREE(g_file_info_get_attribute_as_string(_SELF(self), RVAL2CSTR(attribute)));
 }
@@ -137,7 +137,7 @@ file_attribute_to_value(GFileAttributeType type, gpointer value)
 }
 
 static VALUE
-fileinfo_get_attribute_data(VALUE self, VALUE attribute)
+rg_get_attribute_data(VALUE self, VALUE attribute)
 {
         GFileAttributeType type;
         gpointer value;
@@ -157,77 +157,77 @@ fileinfo_get_attribute_data(VALUE self, VALUE attribute)
 }
 
 static VALUE
-fileinfo_get_attribute_status(VALUE self, VALUE attribute)
+rg_get_attribute_status(VALUE self, VALUE attribute)
 {
         return GFILEATTRIBUTESTATUS2RVAL(g_file_info_get_attribute_status(_SELF(self),
                                                                           RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_string(VALUE self, VALUE attribute)
+rg_get_attribute_string(VALUE self, VALUE attribute)
 {
         return CSTR2RVAL(g_file_info_get_attribute_string(_SELF(self),
                                                           RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_stringv(VALUE self, VALUE attribute)
+rg_get_attribute_stringv(VALUE self, VALUE attribute)
 {
         return STRV2RVAL((const gchar **)g_file_info_get_attribute_stringv(_SELF(self),
                                                                            RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_byte_string(VALUE self, VALUE attribute)
+rg_get_attribute_byte_string(VALUE self, VALUE attribute)
 {
         return CSTR2RVAL(g_file_info_get_attribute_byte_string(_SELF(self),
                                                                RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_boolean(VALUE self, VALUE attribute)
+rg_get_attribute_boolean(VALUE self, VALUE attribute)
 {
         return CBOOL2RVAL(g_file_info_get_attribute_boolean(_SELF(self),
                                                             RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_uint32(VALUE self, VALUE attribute)
+rg_get_attribute_uint32(VALUE self, VALUE attribute)
 {
         return GUINT322RVAL(g_file_info_get_attribute_uint32(_SELF(self),
                                                              RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_int32(VALUE self, VALUE attribute)
+rg_get_attribute_int32(VALUE self, VALUE attribute)
 {
         return GINT322RVAL(g_file_info_get_attribute_int32(_SELF(self),
                                                            RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_uint64(VALUE self, VALUE attribute)
+rg_get_attribute_uint64(VALUE self, VALUE attribute)
 {
         return GUINT642RVAL(g_file_info_get_attribute_uint64(_SELF(self),
                                                              RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_int64(VALUE self, VALUE attribute)
+rg_get_attribute_int64(VALUE self, VALUE attribute)
 {
         return GINT642RVAL(g_file_info_get_attribute_int64(_SELF(self),
                                                            RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_object(VALUE self, VALUE attribute)
+rg_get_attribute_object(VALUE self, VALUE attribute)
 {
         return GOBJ2RVAL(g_file_info_get_attribute_object(_SELF(self),
                                                           RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileinfo_get_attribute_value(VALUE self, VALUE attribute)
+rg_get_attribute_value(VALUE self, VALUE attribute)
 {
         GFileAttributeType type;
         gpointer value;
@@ -244,7 +244,7 @@ fileinfo_get_attribute_value(VALUE self, VALUE attribute)
 }
 
 static VALUE
-fileinfo_set_attribute_string(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_string(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_string(_SELF(self),
                                          RVAL2CSTR(attribute),
@@ -254,7 +254,7 @@ fileinfo_set_attribute_string(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_byte_string(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_byte_string(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_byte_string(_SELF(self),
                                               RVAL2CSTR(attribute),
@@ -264,7 +264,7 @@ fileinfo_set_attribute_byte_string(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_boolean(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_boolean(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_boolean(_SELF(self),
                                           RVAL2CSTR(attribute),
@@ -274,7 +274,7 @@ fileinfo_set_attribute_boolean(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_uint32(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_uint32(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_uint32(_SELF(self),
                                          RVAL2CSTR(attribute),
@@ -284,7 +284,7 @@ fileinfo_set_attribute_uint32(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_int32(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_int32(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_int32(_SELF(self),
                                         RVAL2CSTR(attribute),
@@ -294,7 +294,7 @@ fileinfo_set_attribute_int32(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_uint64(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_uint64(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_uint64(_SELF(self),
                                          RVAL2CSTR(attribute),
@@ -304,7 +304,7 @@ fileinfo_set_attribute_uint64(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_int64(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_int64(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_int64(_SELF(self),
                                         RVAL2CSTR(attribute),
@@ -314,7 +314,7 @@ fileinfo_set_attribute_int64(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_set_attribute_object(VALUE self, VALUE attribute, VALUE value)
+rg_set_attribute_object(VALUE self, VALUE attribute, VALUE value)
 {
         g_file_info_set_attribute_object(_SELF(self),
                                          RVAL2CSTR(attribute),
@@ -324,7 +324,7 @@ fileinfo_set_attribute_object(VALUE self, VALUE attribute, VALUE value)
 }
 
 static VALUE
-fileinfo_clear_status(VALUE self)
+rg_clear_status(VALUE self)
 {
         g_file_info_clear_status(_SELF(self));
 
@@ -332,67 +332,67 @@ fileinfo_clear_status(VALUE self)
 }
 
 static VALUE
-fileinfo_get_file_type(VALUE self)
+rg_file_type(VALUE self)
 {
         return GFILETYPE2RVAL(g_file_info_get_file_type(_SELF(self)));
 }
 
 static VALUE
-fileinfo_is_hidden(VALUE self)
+rg_hidden_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_info_get_is_hidden(_SELF(self)));
 }
 
 static VALUE
-fileinfo_is_backup(VALUE self)
+rg_backup_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_info_get_is_backup(_SELF(self)));
 }
 
 static VALUE
-fileinfo_is_symlink(VALUE self)
+rg_symlink_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_info_get_is_symlink(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_name(VALUE self)
+rg_name(VALUE self)
 {
         return CSTR2RVAL(g_file_info_get_name(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_display_name(VALUE self)
+rg_display_name(VALUE self)
 {
         return CSTR2RVAL(g_file_info_get_display_name(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_edit_name(VALUE self)
+rg_edit_name(VALUE self)
 {
         return CSTR2RVAL(g_file_info_get_edit_name(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_icon(VALUE self)
+rg_icon(VALUE self)
 {
         return GOBJ2RVAL(g_file_info_get_icon(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_content_type(VALUE self)
+rg_content_type(VALUE self)
 {
         return CSTR2RVAL(g_file_info_get_content_type(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_size(VALUE self)
+rg_size(VALUE self)
 {
         return GOFFSET2RVAL(g_file_info_get_size(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_modification_time(VALUE self)
+rg_modification_time(VALUE self)
 {
         GTimeVal time;
 
@@ -402,25 +402,25 @@ fileinfo_get_modification_time(VALUE self)
 }
 
 static VALUE
-fileinfo_get_symlink_target(VALUE self)
+rg_symlink_target(VALUE self)
 {
         return CSTR2RVAL(g_file_info_get_symlink_target(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_etag(VALUE self)
+rg_etag(VALUE self)
 {
         return CSTR2RVAL(g_file_info_get_etag(_SELF(self)));
 }
 
 static VALUE
-fileinfo_get_sort_order(VALUE self)
+rg_sort_order(VALUE self)
 {
         return GINT322RVAL(g_file_info_get_sort_order(_SELF(self)));
 }
 
 static VALUE
-fileinfo_set_attribute_mask(VALUE self, VALUE rbmask)
+rg_set_attribute_mask(VALUE self, VALUE rbmask)
 {
         gboolean should_unref;
         GFileAttributeMatcher *mask;
@@ -447,7 +447,7 @@ fileinfo_set_attribute_mask(VALUE self, VALUE rbmask)
 }
 
 static VALUE
-fileinfo_unset_attribute_mask(VALUE self)
+rg_unset_attribute_mask(VALUE self)
 {
         g_file_info_unset_attribute_mask(_SELF(self));
 
@@ -455,7 +455,7 @@ fileinfo_unset_attribute_mask(VALUE self)
 }
 
 static VALUE
-fileinfo_set_file_type(VALUE self, VALUE value)
+rg_set_file_type(VALUE self, VALUE value)
 {
         g_file_info_set_file_type(_SELF(self), RVAL2GFILETYPE(value));
 
@@ -463,7 +463,7 @@ fileinfo_set_file_type(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_is_hidden(VALUE self, VALUE value)
+rg_set_hidden(VALUE self, VALUE value)
 {
         g_file_info_set_is_hidden(_SELF(self), RVAL2CBOOL(value));
 
@@ -471,7 +471,7 @@ fileinfo_set_is_hidden(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_is_symlink(VALUE self, VALUE value)
+rg_set_symlink(VALUE self, VALUE value)
 {
         g_file_info_set_is_symlink(_SELF(self), RVAL2CBOOL(value));
 
@@ -479,7 +479,7 @@ fileinfo_set_is_symlink(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_name(VALUE self, VALUE value)
+rg_set_name(VALUE self, VALUE value)
 {
         g_file_info_set_name(_SELF(self), RVAL2CSTR(value));
 
@@ -487,7 +487,7 @@ fileinfo_set_name(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_display_name(VALUE self, VALUE value)
+rg_set_display_name(VALUE self, VALUE value)
 {
         g_file_info_set_display_name(_SELF(self), RVAL2CSTR(value));
 
@@ -495,7 +495,7 @@ fileinfo_set_display_name(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_edit_name(VALUE self, VALUE value)
+rg_set_edit_name(VALUE self, VALUE value)
 {
         g_file_info_set_edit_name(_SELF(self), RVAL2CSTR(value));
 
@@ -503,7 +503,7 @@ fileinfo_set_edit_name(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_icon(VALUE self, VALUE value)
+rg_set_icon(VALUE self, VALUE value)
 {
         g_file_info_set_icon(_SELF(self), RVAL2GICON(value));
 
@@ -511,7 +511,7 @@ fileinfo_set_icon(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_content_type(VALUE self, VALUE value)
+rg_set_content_type(VALUE self, VALUE value)
 {
         g_file_info_set_content_type(_SELF(self), RVAL2CSTR(value));
 
@@ -519,7 +519,7 @@ fileinfo_set_content_type(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_size(VALUE self, VALUE value)
+rg_set_size(VALUE self, VALUE value)
 {
         g_file_info_set_size(_SELF(self), RVAL2GOFFSET(value));
 
@@ -527,7 +527,7 @@ fileinfo_set_size(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_modification_time(VALUE self, VALUE rbtime)
+rg_set_modification_time(VALUE self, VALUE rbtime)
 {
         GTimeVal time;
 
@@ -539,7 +539,7 @@ fileinfo_set_modification_time(VALUE self, VALUE rbtime)
 }
 
 static VALUE
-fileinfo_set_symlink_target(VALUE self, VALUE value)
+rg_set_symlink_target(VALUE self, VALUE value)
 {
         g_file_info_set_symlink_target(_SELF(self), RVAL2CSTR(value));
 
@@ -547,7 +547,7 @@ fileinfo_set_symlink_target(VALUE self, VALUE value)
 }
 
 static VALUE
-fileinfo_set_sort_order(VALUE self, VALUE value)
+rg_set_sort_order(VALUE self, VALUE value)
 {
         g_file_info_set_sort_order(_SELF(self), RVAL2GINT32(value));
 
@@ -559,78 +559,78 @@ Init_gfileinfo(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_INFO, "FileInfo", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileinfo_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "dup", fileinfo_dup, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "copy_into", fileinfo_copy_into, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "has_attribute?", fileinfo_has_attribute, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "has_namespace?", fileinfo_has_namespace, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "list_attributes", fileinfo_list_attributes, -1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "attributes", "list_attributes");
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_type", fileinfo_get_attribute_type, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "remove_attribute", fileinfo_remove_attribute, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_as_string", fileinfo_get_attribute_as_string, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_data", fileinfo_get_attribute_data, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_status", fileinfo_get_attribute_status, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_string", fileinfo_get_attribute_string, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_stringv", fileinfo_get_attribute_stringv, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_byte_string", fileinfo_get_attribute_byte_string, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_boolean", fileinfo_get_attribute_boolean, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_uint32", fileinfo_get_attribute_uint32, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_int32", fileinfo_get_attribute_int32, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_uint64", fileinfo_get_attribute_uint64, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_int64", fileinfo_get_attribute_int64, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_object", fileinfo_get_attribute_object, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_attribute_value", fileinfo_get_attribute_value, 1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_attribute_value");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_status", fileinfo_set_attribute_status, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_string", fileinfo_set_attribute_string, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_byte_string", fileinfo_set_attribute_byte_string, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_boolean", fileinfo_set_attribute_boolean, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_uint32", fileinfo_set_attribute_uint32, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_int32", fileinfo_set_attribute_int32, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_uint64", fileinfo_set_attribute_uint64, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_int64", fileinfo_set_attribute_int64, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_object", fileinfo_set_attribute_object, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "clear_status", fileinfo_clear_status, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "file_type", fileinfo_get_file_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "hidden?", fileinfo_is_hidden, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "backup?", fileinfo_is_backup, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "symlink?", fileinfo_is_symlink, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "name", fileinfo_get_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "display_name", fileinfo_get_display_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "edit_name", fileinfo_get_edit_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "icon", fileinfo_get_icon, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "content_type", fileinfo_get_content_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "size", fileinfo_get_size, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "modification_time", fileinfo_get_modification_time, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "symlink_target", fileinfo_get_symlink_target, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "etag", fileinfo_get_etag, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "sort_order", fileinfo_get_sort_order, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_attribute_mask", fileinfo_set_attribute_mask, 1);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(dup, 0);
+        RG_DEF_METHOD(copy_into, 1);
+        RG_DEF_METHOD_P(has_attribute, 1);
+        RG_DEF_METHOD_P(has_namespace, 1);
+        RG_DEF_METHOD(list_attributes, -1);
+        RG_DEF_ALIAS("attributes", "list_attributes");
+        RG_DEF_METHOD(get_attribute_type, 1);
+        RG_DEF_METHOD(remove_attribute, 1);
+        RG_DEF_METHOD(get_attribute_as_string, 1);
+        RG_DEF_METHOD(get_attribute_data, 1);
+        RG_DEF_METHOD(get_attribute_status, 1);
+        RG_DEF_METHOD(get_attribute_string, 1);
+        RG_DEF_METHOD(get_attribute_stringv, 1);
+        RG_DEF_METHOD(get_attribute_byte_string, 1);
+        RG_DEF_METHOD(get_attribute_boolean, 1);
+        RG_DEF_METHOD(get_attribute_uint32, 1);
+        RG_DEF_METHOD(get_attribute_int32, 1);
+        RG_DEF_METHOD(get_attribute_uint64, 1);
+        RG_DEF_METHOD(get_attribute_int64, 1);
+        RG_DEF_METHOD(get_attribute_object, 1);
+        RG_DEF_METHOD(get_attribute_value, 1);
+        RG_DEF_ALIAS("[]", "get_attribute_value");
+        RG_DEF_METHOD(set_attribute_status, 2);
+        RG_DEF_METHOD(set_attribute_string, 2);
+        RG_DEF_METHOD(set_attribute_byte_string, 2);
+        RG_DEF_METHOD(set_attribute_boolean, 2);
+        RG_DEF_METHOD(set_attribute_uint32, 2);
+        RG_DEF_METHOD(set_attribute_int32, 2);
+        RG_DEF_METHOD(set_attribute_uint64, 2);
+        RG_DEF_METHOD(set_attribute_int64, 2);
+        RG_DEF_METHOD(set_attribute_object, 2);
+        RG_DEF_METHOD(clear_status, 0);
+        RG_DEF_METHOD(file_type, 0);
+        RG_DEF_METHOD_P(hidden, 0);
+        RG_DEF_METHOD_P(backup, 0);
+        RG_DEF_METHOD_P(symlink, 0);
+        RG_DEF_METHOD(name, 0);
+        RG_DEF_METHOD(display_name, 0);
+        RG_DEF_METHOD(edit_name, 0);
+        RG_DEF_METHOD(icon, 0);
+        RG_DEF_METHOD(content_type, 0);
+        RG_DEF_METHOD(size, 0);
+        RG_DEF_METHOD(modification_time, 0);
+        RG_DEF_METHOD(symlink_target, 0);
+        RG_DEF_METHOD(etag, 0);
+        RG_DEF_METHOD(sort_order, 0);
+        RG_DEF_METHOD(set_attribute_mask, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "attribute_mask");
-        rb_define_method(RG_TARGET_NAMESPACE, "unset_attribute_mask", fileinfo_unset_attribute_mask, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_file_type", fileinfo_set_file_type, 1);
+        RG_DEF_METHOD(unset_attribute_mask, 0);
+        RG_DEF_METHOD(set_file_type, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "file_type");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_hidden", fileinfo_set_is_hidden, 1);
+        RG_DEF_METHOD(set_hidden, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "hidden");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_symlink", fileinfo_set_is_symlink, 1);
+        RG_DEF_METHOD(set_symlink, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "symlink");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_name", fileinfo_set_name, 1);
+        RG_DEF_METHOD(set_name, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "name");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_display_name", fileinfo_set_display_name, 1);
+        RG_DEF_METHOD(set_display_name, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_name");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_edit_name", fileinfo_set_edit_name, 1);
+        RG_DEF_METHOD(set_edit_name, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "edit_name");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_icon", fileinfo_set_icon, 1);
+        RG_DEF_METHOD(set_icon, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "icon");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_content_type", fileinfo_set_content_type, 1);
+        RG_DEF_METHOD(set_content_type, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "content_type");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_size", fileinfo_set_size, 1);
+        RG_DEF_METHOD(set_size, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "size");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_modification_time", fileinfo_set_modification_time, 1);
+        RG_DEF_METHOD(set_modification_time, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "modification_time");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_symlink_target", fileinfo_set_symlink_target, 1);
+        RG_DEF_METHOD(set_symlink_target, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "symlink_target");
-        rb_define_method(RG_TARGET_NAMESPACE, "set_sort_order", fileinfo_set_sort_order, 1);
+        RG_DEF_METHOD(set_sort_order, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "sort_order");
 }

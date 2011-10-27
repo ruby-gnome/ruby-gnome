@@ -25,7 +25,7 @@
 #define _SELF(value) G_ZLIB_DECOMPRESSOR(RVAL2GOBJ(value))
 
 static VALUE
-zlibdecompressor_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE format;
 
@@ -41,5 +41,5 @@ Init_gzlibdecompressor(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_DECOMPRESSOR, "ZlibDecompressor", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", zlibdecompressor_initialize, -1);
+        RG_DEF_METHOD(initialize, -1);
 }

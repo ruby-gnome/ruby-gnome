@@ -61,7 +61,7 @@ static VALUE
 ioscheduler_source_callback_call(VALUE data)
 {
         static VALUE s_id_call;
- 
+
         if (s_id_call == 0)
                 s_id_call = rb_intern("call");
 
@@ -82,7 +82,7 @@ ioscheduler_source_callback_free(gpointer data)
 }
 
 static VALUE
-ioschedulerjob_send_to_mainloop(VALUE self)
+rg_send_to_mainloop(VALUE self)
 {
         VALUE block;
 
@@ -96,7 +96,7 @@ ioschedulerjob_send_to_mainloop(VALUE self)
 }
 
 static VALUE
-ioschedulerjob_send_to_mainloop_async(VALUE self)
+rg_send_to_mainloop_async(VALUE self)
 {
         VALUE block;
 
@@ -116,6 +116,6 @@ Init_gioschedulerjob(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_SCHEDULER_JOB, "IOSchedulerJob", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "send_to_mainloop", ioschedulerjob_send_to_mainloop, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "send_to_mainloop_async", ioschedulerjob_send_to_mainloop_async, 0);
+        RG_DEF_METHOD(send_to_mainloop, 0);
+        RG_DEF_METHOD(send_to_mainloop_async, 0);
 }

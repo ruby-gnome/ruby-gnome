@@ -25,7 +25,7 @@
 #define _SELF(value) RVAL2GAPPLAUNCHCONTEXT(value)
 
 static VALUE
-applaunchcontext_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_app_launch_context_new());
 
@@ -50,19 +50,19 @@ get_value_by(GetMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-applaunchcontext_get_display(int argc, VALUE *argv, VALUE self)
+rg_get_display(int argc, VALUE *argv, VALUE self)
 {
         return get_value_by(g_app_launch_context_get_display, argc, argv, self);
 }
 
 static VALUE
-applaunchcontext_get_startup_notify_id(int argc, VALUE *argv, VALUE self)
+rg_get_startup_notify_id(int argc, VALUE *argv, VALUE self)
 {
         return get_value_by(g_app_launch_context_get_startup_notify_id, argc, argv, self);
 }
 
 static VALUE
-applaunchcontext_launch_failed(VALUE self, VALUE sn_id)
+rg_launch_failed(VALUE self, VALUE sn_id)
 {
         g_app_launch_context_launch_failed(_SELF(self), RVAL2CSTR(sn_id));
 
@@ -74,8 +74,8 @@ Init_gapplaunchcontext(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_APP_LAUNCH_CONTEXT, "AppLaunchContext", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", applaunchcontext_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_display", applaunchcontext_get_display, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_startup_notify_id", applaunchcontext_get_startup_notify_id, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "launch_failed", applaunchcontext_launch_failed, 1);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(get_display, -1);
+        RG_DEF_METHOD(get_startup_notify_id, -1);
+        RG_DEF_METHOD(launch_failed, 1);
 }

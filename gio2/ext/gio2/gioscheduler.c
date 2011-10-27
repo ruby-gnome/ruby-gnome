@@ -35,7 +35,7 @@ ioscheduler_job_callback_call(VALUE data)
 {
         static VALUE s_id_call;
         struct ioscheduler_job_callback_data *real;
- 
+
         if (s_id_call == 0)
                 s_id_call = rb_intern("call");
 
@@ -65,7 +65,7 @@ ioscheduler_job_callback_free(gpointer data)
 }
 
 static VALUE
-ioscheduler_push_job(int argc, VALUE *argv, VALUE self)
+rg_s_push_job(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         gint io_priority;
@@ -86,7 +86,7 @@ ioscheduler_push_job(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioscheduler_cancel_all_jobs(VALUE self)
+rg_s_cancel_all_jobs(VALUE self)
 {
         g_io_scheduler_cancel_all_jobs();
 
@@ -97,6 +97,6 @@ void
 Init_gioscheduler(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IOScheduler");
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "push_job", ioscheduler_push_job, -1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "cancel_all_jobs", ioscheduler_cancel_all_jobs, 0);
+        RG_DEF_SMETHOD(push_job, -1);
+        RG_DEF_SMETHOD(cancel_all_jobs, 0);
 }

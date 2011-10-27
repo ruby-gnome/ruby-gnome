@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cInetSocketAddress
 
 static VALUE
-inetsocketaddress_initialize(VALUE self, VALUE address, VALUE port)
+rg_initialize(VALUE self, VALUE address, VALUE port)
 {
         G_INITIALIZE(self, g_inet_socket_address_new(RVAL2GINETADDRESS(address),
                                                      RVAL2GUINT16(port)));
@@ -37,5 +37,5 @@ Init_ginetsocketaddress(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INET_SOCKET_ADDRESS, "InetSocketAddress", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", inetsocketaddress_initialize, 2);
+        RG_DEF_METHOD(initialize, 2);
 }

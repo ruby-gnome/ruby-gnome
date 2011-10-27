@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE mSocketConnectionFactory
 
 static VALUE
-socketconnectionfactory_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
+rg_m_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
 {
         return GOBJ2RVAL_UNREF(g_socket_connection_factory_create_connection(RVAL2GSOCKET(socket)));
 }
@@ -35,5 +35,5 @@ Init_gsocketconnectionfactory(VALUE glib)
         /* TODO: Perhaps just move this to SocketConnection? */
         VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "SocketConnectionFactory");
 
-        rb_define_module_function(RG_TARGET_NAMESPACE, "create_connection", socketconnectionfactory_create_connection, 1);
+        RG_DEF_MODFUNC(create_connection, 1);
 }

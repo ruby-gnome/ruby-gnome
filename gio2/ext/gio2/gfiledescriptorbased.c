@@ -28,7 +28,7 @@
 #define _SELF(value) G_FILE_DESCRIPTOR_BASED(RVAL2GOBJ(value))
 
 static VALUE
-filedescriptorbased_get_fd(VALUE self)
+rg_fd(VALUE self)
 {
         return FD2RVAL(g_file_descriptor_based_get_fd(_SELF(self)));
 }
@@ -40,6 +40,6 @@ Init_gfiledescriptorbased(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE_DESCRIPTOR_BASED, "FileDescriptorBased", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "fd", filedescriptorbased_get_fd, 0);
+        RG_DEF_METHOD(fd, 0);
 #endif
 }

@@ -28,7 +28,7 @@
 #define _SELF(value) RVAL2GUNIXFDLIST(value)
 
 static VALUE
-unixfdlist_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbfds;
         long n;
@@ -52,13 +52,13 @@ unixfdlist_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-unixfdlist_get_length(VALUE self)
+rg_length(VALUE self)
 {
         return GINT2RVAL(g_unix_fd_list_get_length(_SELF(self)));
 }
 
 static VALUE
-unixfdlist_get(VALUE self, VALUE index)
+rg_get(VALUE self, VALUE index)
 {
         GError *error = NULL;
         gint fd;
@@ -72,19 +72,19 @@ unixfdlist_get(VALUE self, VALUE index)
 }
 
 static VALUE
-unixfdlist_peek_fds(VALUE self)
+rg_peek_fds(VALUE self)
 {
         return GFDS2ARY(g_unix_fd_list_peek_fds(_SELF(self), NULL));
 }
 
 static VALUE
-unixfdlist_steal_fds(VALUE self)
+rg_steal_fds(VALUE self)
 {
         return GFDS2ARY_FREE(g_unix_fd_list_steal_fds(_SELF(self), NULL));
 }
 
 static VALUE
-unixfdlist_append(VALUE self, VALUE fd)
+rg_append(VALUE self, VALUE fd)
 {
         GError *error = NULL;
         int index;
@@ -103,13 +103,13 @@ Init_gunixfdlist(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFDList", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", unixfdlist_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "length", unixfdlist_get_length, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "get", unixfdlist_get, 1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get");
-        rb_define_method(RG_TARGET_NAMESPACE, "peek_fds", unixfdlist_peek_fds, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "steal_fds", unixfdlist_steal_fds, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "append", unixfdlist_append, 1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "<<", "append");
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(length, 0);
+        RG_DEF_METHOD(get, 1);
+        RG_DEF_ALIAS("[]", "get");
+        RG_DEF_METHOD(peek_fds, 0);
+        RG_DEF_METHOD(steal_fds, 0);
+        RG_DEF_METHOD(append, 1);
+        RG_DEF_ALIAS("<<", "append");
 #endif
 }

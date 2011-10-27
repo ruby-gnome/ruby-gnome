@@ -50,61 +50,61 @@ g_unix_mount_point_get_type(void)
 }
 
 static VALUE
-unixmountpoint_compare(VALUE self, VALUE other)
+rg_compare(VALUE self, VALUE other)
 {
         return INT2FIX(g_unix_mount_point_compare(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-unixmountpoint_get_mount_path(VALUE self)
+rg_mount_path(VALUE self)
 {
         return CSTR2RVAL(g_unix_mount_point_get_mount_path(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_get_device_path(VALUE self)
+rg_device_path(VALUE self)
 {
         return CSTR2RVAL(g_unix_mount_point_get_device_path(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_get_fs_type(VALUE self)
+rg_fs_type(VALUE self)
 {
         return CSTR2RVAL(g_unix_mount_point_get_fs_type(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_is_readonly(VALUE self)
+rg_readonly_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_point_is_readonly(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_is_user_mountable(VALUE self)
+rg_user_mountable_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_point_is_user_mountable(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_is_loopback(VALUE self)
+rg_loopback_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_point_is_loopback(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_guess_icon(VALUE self)
+rg_guess_icon(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_unix_mount_point_guess_icon(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_guess_name(VALUE self)
+rg_guess_name(VALUE self)
 {
         return CSTR2RVAL_FREE(g_unix_mount_point_guess_name(_SELF(self)));
 }
 
 static VALUE
-unixmountpoint_guess_can_eject(VALUE self)
+rg_guess_can_eject_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_point_guess_can_eject(_SELF(self)));
 }
@@ -121,16 +121,16 @@ Init_gunixmountpoint(G_GNUC_UNUSED VALUE glib)
 
         rbgobj_boxed_not_copy_obj(G_TYPE_UNIX_MOUNT_POINT);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "compare", unixmountpoint_compare, 1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "<=>", "compare");
-        rb_define_method(RG_TARGET_NAMESPACE, "mount_path", unixmountpoint_get_mount_path, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "device_path", unixmountpoint_get_device_path, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "fs_type", unixmountpoint_get_fs_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "readonly?", unixmountpoint_is_readonly, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "user_mountable?", unixmountpoint_is_user_mountable, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "loopback?", unixmountpoint_is_loopback, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_icon", unixmountpoint_guess_icon, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_name", unixmountpoint_guess_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_can_eject?", unixmountpoint_guess_can_eject, 0);
+        RG_DEF_METHOD(compare, 1);
+        RG_DEF_ALIAS("<=>", "compare");
+        RG_DEF_METHOD(mount_path, 0);
+        RG_DEF_METHOD(device_path, 0);
+        RG_DEF_METHOD(fs_type, 0);
+        RG_DEF_METHOD_P(readonly, 0);
+        RG_DEF_METHOD_P(user_mountable, 0);
+        RG_DEF_METHOD_P(loopback, 0);
+        RG_DEF_METHOD(guess_icon, 0);
+        RG_DEF_METHOD(guess_name, 0);
+        RG_DEF_METHOD_P(guess_can_eject, 0);
 #endif
 }

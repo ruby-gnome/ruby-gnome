@@ -34,7 +34,7 @@
         RVAL2GENUM((value), G_TYPE_MOUNT_OPERATION_RESULT)
 
 static VALUE
-mountoperation_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_mount_operation_new());
 
@@ -42,7 +42,7 @@ mountoperation_initialize(VALUE self)
 }
 
 static VALUE
-mountoperation_reply(VALUE self, VALUE value)
+rg_reply(VALUE self, VALUE value)
 {
         g_mount_operation_reply(_SELF(self), RVAL2GMOUNTOPERATIONRESULT(value));
 
@@ -63,6 +63,6 @@ Init_gmountoperation(VALUE glib)
         G_DEF_CLASS(G_TYPE_PASSWORD_SAVE, "PasswordSave", glib);
         G_DEF_CONSTANTS(glib, G_TYPE_PASSWORD_SAVE, "G_");
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", mountoperation_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "reply", mountoperation_reply, 1);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(reply, 1);
 }

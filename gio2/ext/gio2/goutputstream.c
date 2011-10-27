@@ -33,7 +33,7 @@
                                G_OUTPUT_STREAM_SPLICE_NONE)
 
 static VALUE
-outputstream_write(int argc, VALUE *argv, VALUE self)
+rg_write(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbuffer, cancellable;
         const char *buffer;
@@ -54,7 +54,7 @@ outputstream_write(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-outputstream_write_all(int argc, VALUE *argv, VALUE self)
+rg_write_all(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbuffer, cancellable;
         const char *buffer;
@@ -75,7 +75,7 @@ outputstream_write_all(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-outputstream_splice(int argc, VALUE *argv, VALUE self)
+rg_splice(int argc, VALUE *argv, VALUE self)
 {
         VALUE source, flags, cancellable;
         GError *error = NULL;
@@ -109,13 +109,13 @@ cancellable_method(CancellableMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-outputstream_flush(int argc, VALUE *argv, VALUE self)
+rg_flush(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_method(g_output_stream_flush, argc, argv, self);
 }
 
 static VALUE
-outputstream_close(int argc, VALUE *argv, VALUE self)
+rg_close(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_method(g_output_stream_close, argc, argv, self);
 }
@@ -125,7 +125,7 @@ outputstream_close(int argc, VALUE *argv, VALUE self)
  * been reached, calling the callback with the bytes written, then with the
  * result. */
 static VALUE
-outputstream_write_async(int argc, VALUE *argv, VALUE self)
+rg_write_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbuffer, rbcount, rbio_priority, rbcancellable, block;
         const gchar *buffer;
@@ -166,13 +166,13 @@ ssize_finish_method(SSizeFinishMethod method, VALUE self, VALUE result)
 }
 
 static VALUE
-outputstream_write_finish(VALUE self, VALUE result)
+rg_write_finish(VALUE self, VALUE result)
 {
         return ssize_finish_method(g_output_stream_write_finish, self, result);
 }
 
 static VALUE
-outputstream_splice_async(int argc, VALUE *argv, VALUE self)
+rg_splice_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbsource, rbflags, rbio_priority, rbcancellable, block;
         GInputStream *source;
@@ -198,13 +198,13 @@ outputstream_splice_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-outputstream_splice_finish(VALUE self, VALUE result)
+rg_splice_finish(VALUE self, VALUE result)
 {
         return ssize_finish_method(g_output_stream_splice_finish, self, result);
 }
 
 static VALUE
-outputstream_flush_async(int argc, VALUE *argv, VALUE self)
+rg_flush_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -237,13 +237,13 @@ boolean_finish_method(BooleanFinishMethod method, VALUE self, VALUE result)
 }
 
 static VALUE
-outputstream_flush_finish(VALUE self, VALUE result)
+rg_flush_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_output_stream_flush_finish, self, result);
 }
 
 static VALUE
-outputstream_close_async(int argc, VALUE *argv, VALUE self)
+rg_close_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -263,31 +263,31 @@ outputstream_close_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-outputstream_close_finish(VALUE self, VALUE result)
+rg_close_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_output_stream_close_finish, self, result);
 }
 
 static VALUE
-outputstream_is_closing(VALUE self)
+rg_closing_p(VALUE self)
 {
         return CBOOL2RVAL(g_output_stream_is_closing(_SELF(self)));
 }
 
 static VALUE
-outputstream_is_closed(VALUE self)
+rg_closed_p(VALUE self)
 {
         return CBOOL2RVAL(g_output_stream_is_closed(_SELF(self)));
 }
 
 static VALUE
-outputstream_has_pending(VALUE self)
+rg_has_pending_p(VALUE self)
 {
         return CBOOL2RVAL(g_output_stream_has_pending(_SELF(self)));
 }
 
 static VALUE
-outputstream_set_pending(VALUE self)
+rg_set_pending(VALUE self)
 {
         GError *error = NULL;
 
@@ -298,7 +298,7 @@ outputstream_set_pending(VALUE self)
 }
 
 static VALUE
-outputstream_clear_pending(VALUE self)
+rg_clear_pending(VALUE self)
 {
         g_output_stream_clear_pending(_SELF(self));
 
@@ -313,23 +313,23 @@ Init_goutputstream(VALUE glib)
         G_DEF_CLASS(G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "SpliceFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "G_OUTPUT_STREAM_");
 
-        rb_define_method(RG_TARGET_NAMESPACE, "write", outputstream_write, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "write_all", outputstream_write_all, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "splice", outputstream_splice, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "flush", outputstream_flush, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close", outputstream_close, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "write_async", outputstream_write_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "write_finish", outputstream_write_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "splice_async", outputstream_splice_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "splice_finish", outputstream_splice_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "flush_async", outputstream_flush_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "flush_finish", outputstream_flush_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close_async", outputstream_close_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close_finish", outputstream_close_finish, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "closing?", outputstream_is_closing, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "closed?", outputstream_is_closed, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "has_pending?", outputstream_has_pending, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_pending", outputstream_set_pending, 0);
+        RG_DEF_METHOD(write, -1);
+        RG_DEF_METHOD(write_all, -1);
+        RG_DEF_METHOD(splice, -1);
+        RG_DEF_METHOD(flush, -1);
+        RG_DEF_METHOD(close, -1);
+        RG_DEF_METHOD(write_async, -1);
+        RG_DEF_METHOD(write_finish, 1);
+        RG_DEF_METHOD(splice_async, -1);
+        RG_DEF_METHOD(splice_finish, 1);
+        RG_DEF_METHOD(flush_async, -1);
+        RG_DEF_METHOD(flush_finish, 1);
+        RG_DEF_METHOD(close_async, -1);
+        RG_DEF_METHOD(close_finish, 0);
+        RG_DEF_METHOD_P(closing, 0);
+        RG_DEF_METHOD_P(closed, 0);
+        RG_DEF_METHOD_P(has_pending, 0);
+        RG_DEF_METHOD(set_pending, 0);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "pending");
-        rb_define_method(RG_TARGET_NAMESPACE, "clear_pending", outputstream_clear_pending, 0);
+        RG_DEF_METHOD(clear_pending, 0);
 }

@@ -28,7 +28,7 @@
 #define _SELF(value) G_UNIX_CONNECTION(RVAL2GOBJ(value))
 
 static VALUE
-unixconnection_receive_fd(int argc, VALUE *argv, VALUE self)
+rg_receive_fd(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -45,7 +45,7 @@ unixconnection_receive_fd(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-unixconnection_send_fd(int argc, VALUE *argv, VALUE self)
+rg_send_fd(int argc, VALUE *argv, VALUE self)
 {
         VALUE fd, cancellable;
         GError *error = NULL;
@@ -65,7 +65,7 @@ Init_gunixconnection(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_CONNECTION, "UnixConnection", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "receive_fd", unixconnection_receive_fd, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "send_fd", unixconnection_send_fd, -1);
+        RG_DEF_METHOD(receive_fd, -1);
+        RG_DEF_METHOD(send_fd, -1);
 #endif
 }

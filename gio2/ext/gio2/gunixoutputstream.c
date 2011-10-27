@@ -28,7 +28,7 @@
 #define _SELF(value) G_UNIX_OUTPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-unixoutputstream_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE fd, close_fd;
 
@@ -46,6 +46,6 @@ Init_gunixoutputstream(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_OUTPUT_STREAM, "UnixOutputStream", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", unixoutputstream_initialize, -1);
+        RG_DEF_METHOD(initialize, -1);
 #endif
 }

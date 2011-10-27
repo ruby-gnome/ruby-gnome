@@ -25,7 +25,7 @@
 #define _SELF(value) G_SOCKET_CONTROL_MESSAGE(RVAL2GOBJ(value))
 
 static VALUE
-socketcontrolmessage_deserialize(G_GNUC_UNUSED VALUE self, VALUE level, VALUE type, VALUE data)
+rg_s_deserialize(G_GNUC_UNUSED VALUE self, VALUE level, VALUE type, VALUE data)
 {
         StringValue(data);
         return GOBJ2RVAL(g_socket_control_message_deserialize(FIX2INT(level),
@@ -35,29 +35,29 @@ socketcontrolmessage_deserialize(G_GNUC_UNUSED VALUE self, VALUE level, VALUE ty
 }
 
 static VALUE
-socketcontrolmessage_get_level(VALUE self)
+rg_level(VALUE self)
 {
         return INT2FIX(g_socket_control_message_get_level(_SELF(self)));
 }
 
 static VALUE
-socketcontrolmessage_get_msg_type(VALUE self)
+rg_msg_type(VALUE self)
 {
         return INT2FIX(g_socket_control_message_get_msg_type(_SELF(self)));
 }
 
 static VALUE
-socketcontrolmessage_get_size(VALUE self)
+rg_size(VALUE self)
 {
         return GSIZE2RVAL(g_socket_control_message_get_size(_SELF(self)));
 }
 
 static VALUE
-socketcontrolmessage_serialize(VALUE self)
+rg_serialize(VALUE self)
 {
         gsize size;
         VALUE result;
- 
+
         /* TODO: Is tainting really necessary?  Where does the message come
          * from? */
         size = g_socket_control_message_get_size(_SELF(self));
@@ -73,10 +73,10 @@ Init_gsocketcontrolmessage(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONTROL_MESSAGE, "SocketControlMessage", glib);
 
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "deserialize", socketcontrolmessage_deserialize, 3);
+        RG_DEF_SMETHOD(deserialize, 3);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "level", socketcontrolmessage_get_level, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "msg_type", socketcontrolmessage_get_msg_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "size", socketcontrolmessage_get_size, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "serialize", socketcontrolmessage_serialize, 0);
+        RG_DEF_METHOD(level, 0);
+        RG_DEF_METHOD(msg_type, 0);
+        RG_DEF_METHOD(size, 0);
+        RG_DEF_METHOD(serialize, 0);
 }

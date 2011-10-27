@@ -25,7 +25,7 @@
 #define _SELF(value) G_FILE_ICON(RVAL2GOBJ(value))
 
 static VALUE
-fileicon_initialize(VALUE self, VALUE file)
+rg_initialize(VALUE self, VALUE file)
 {
         G_INITIALIZE(self, g_file_icon_new(RVAL2GFILE(file)));
 
@@ -37,5 +37,5 @@ Init_gfileicon(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileicon_initialize, 1);
+        RG_DEF_METHOD(initialize, 1);
 }

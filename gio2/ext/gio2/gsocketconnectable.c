@@ -25,7 +25,7 @@
 #define _SELF(value) RVAL2GSOCKETCONNECTABLE(value)
 
 static VALUE
-socketconnectable_enumerate(VALUE self)
+rg_enumerate(VALUE self)
 {
         return GOBJ2RVAL(g_socket_connectable_enumerate(_SELF(self)));
 }
@@ -37,5 +37,5 @@ Init_gsocketconnectable(VALUE glib)
 
         RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "enumerate", socketconnectable_enumerate, 0);
+        RG_DEF_METHOD(enumerate, 0);
 }

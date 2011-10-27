@@ -25,7 +25,7 @@
 #define _SELF(value) G_LOADABLE_ICON(RVAL2GOBJ(value))
 
 static VALUE
-loadableicon_load(int argc, VALUE *argv, VALUE self)
+rg_load(int argc, VALUE *argv, VALUE self)
 {
         VALUE size, cancellable;
         char *type;
@@ -45,7 +45,7 @@ loadableicon_load(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-loadableicon_load_async(int argc, VALUE *argv, VALUE self)
+rg_load_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbsize, rbcancellable, block;
         int size;
@@ -65,7 +65,7 @@ loadableicon_load_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-loadableicon_load_finish(VALUE self, VALUE result)
+rg_load_finish(VALUE self, VALUE result)
 {
         char *type;
         GError *error = NULL;
@@ -86,7 +86,7 @@ Init_gloadableicon(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON, "LoadableIcon", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "load", loadableicon_load, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "load_async", loadableicon_load_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "load_finish", loadableicon_load_finish, 1);
+        RG_DEF_METHOD(load, -1);
+        RG_DEF_METHOD(load_async, -1);
+        RG_DEF_METHOD(load_finish, 1);
 }

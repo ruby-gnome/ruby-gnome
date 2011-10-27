@@ -25,7 +25,7 @@
 #define _SELF(value) RVAL2GCANCELLABLE(value)
 
 static VALUE
-cancellable_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_cancellable_new());
 
@@ -33,13 +33,13 @@ cancellable_initialize(VALUE self)
 }
 
 static VALUE
-cancellable_is_cancelled(VALUE self)
+rg_cancelled_p(VALUE self)
 {
         return CBOOL2RVAL(g_cancellable_is_cancelled(_SELF(self)));
 }
 
 static VALUE
-cancellable_raise_error_if_cancelled(VALUE self)
+rg_raise_error_if_cancelled(VALUE self)
 {
         GError *error = NULL;
 
@@ -50,13 +50,13 @@ cancellable_raise_error_if_cancelled(VALUE self)
 }
 
 static VALUE
-cancellable_get_fd(VALUE self)
+rg_fd(VALUE self)
 {
         return FD2RVAL(g_cancellable_get_fd(_SELF(self)));
 }
 
 static VALUE
-cancellable_make_pollfd(VALUE self)
+rg_make_pollfd(VALUE self)
 {
         GCancellable *cancellable = _SELF(self);
         GPollFD *gfd = g_new(GPollFD, 1);
@@ -67,7 +67,7 @@ cancellable_make_pollfd(VALUE self)
 }
 
 G_GNUC_NORETURN static VALUE
-cancellable_release_fd(VALUE self)
+rg_release_fd(VALUE self)
 {
         /* TODO: How do we implement this?  Maybe not at all? */
         self = self;
@@ -80,13 +80,13 @@ cancellable_release_fd(VALUE self)
 }
 
 static VALUE
-cancellable_get_current(G_GNUC_UNUSED VALUE self)
+rg_s_current(G_GNUC_UNUSED VALUE self)
 {
         return GOBJ2RVAL(g_cancellable_get_current());
 }
 
 static VALUE
-cancellable_pop_current(VALUE self)
+rg_pop_current(VALUE self)
 {
         g_cancellable_pop_current(_SELF(self));
 
@@ -94,7 +94,7 @@ cancellable_pop_current(VALUE self)
 }
 
 static VALUE
-cancellable_push_current(VALUE self)
+rg_push_current(VALUE self)
 {
         g_cancellable_push_current(_SELF(self));
 
@@ -102,7 +102,7 @@ cancellable_push_current(VALUE self)
 }
 
 static VALUE
-cancellable_reset(VALUE self)
+rg_reset(VALUE self)
 {
         g_cancellable_reset(_SELF(self));
 
@@ -129,7 +129,7 @@ cancellable_connect_callback(gpointer block)
 }
 
 static VALUE
-cancellable_connect(VALUE self)
+rg_connect(VALUE self)
 {
         VALUE block;
 
@@ -143,7 +143,7 @@ cancellable_connect(VALUE self)
 }
 
 static VALUE
-cancellable_disconnect(VALUE self, VALUE handler_id)
+rg_disconnect(VALUE self, VALUE handler_id)
 {
         g_cancellable_disconnect(_SELF(self), RVAL2GULONG(handler_id));
 
@@ -151,7 +151,7 @@ cancellable_disconnect(VALUE self, VALUE handler_id)
 }
 
 static VALUE
-cancellable_cancel(VALUE self)
+rg_cancel(VALUE self)
 {
         g_cancellable_cancel(_SELF(self));
 
@@ -163,18 +163,18 @@ Init_gcancellable(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CANCELLABLE, "Cancellable", glib);
 
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "current", cancellable_get_current, 0);
+        RG_DEF_SMETHOD(current, 0);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", cancellable_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "cancelled?", cancellable_is_cancelled, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "raise_error_if_cancelled", cancellable_raise_error_if_cancelled, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "fd", cancellable_get_fd, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "make_pollfd", cancellable_make_pollfd, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "release_fd", cancellable_release_fd, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "pop_current", cancellable_pop_current, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "push_current", cancellable_push_current, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "reset", cancellable_reset, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect", cancellable_connect, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "disconnect", cancellable_disconnect, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "cancel", cancellable_cancel, 0);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD_P(cancelled, 0);
+        RG_DEF_METHOD(raise_error_if_cancelled, 0);
+        RG_DEF_METHOD(fd, 0);
+        RG_DEF_METHOD(make_pollfd, 0);
+        RG_DEF_METHOD(release_fd, 0);
+        RG_DEF_METHOD(pop_current, 0);
+        RG_DEF_METHOD(push_current, 0);
+        RG_DEF_METHOD(reset, 0);
+        RG_DEF_METHOD(connect, 0);
+        RG_DEF_METHOD(disconnect, 1);
+        RG_DEF_METHOD(cancel, 0);
 }

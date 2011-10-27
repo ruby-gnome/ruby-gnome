@@ -25,7 +25,7 @@
 #define _SELF(value) G_BUFFERED_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-bufferedinputstream_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbase_stream, size;
         GInputStream *base_stream, *stream;
@@ -42,13 +42,13 @@ bufferedinputstream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-bufferedinputstream_get_available(VALUE self)
+rg_available(VALUE self)
 {
         return GSIZE2RVAL(g_buffered_input_stream_get_available(_SELF(self)));
 }
 
 static VALUE
-bufferedinputstream_peek_buffer(VALUE self)
+rg_peek_buffer(VALUE self)
 {
         gsize size;
         const void *buffer;
@@ -59,7 +59,7 @@ bufferedinputstream_peek_buffer(VALUE self)
 }
 
 static VALUE
-bufferedinputstream_peek(VALUE self, VALUE rboffset, VALUE rbcount)
+rg_peek(VALUE self, VALUE rboffset, VALUE rbcount)
 {
         gsize offset = RVAL2GSIZE(rboffset);
         gsize count = RVAL2GSIZE(rbcount);
@@ -77,7 +77,7 @@ bufferedinputstream_peek(VALUE self, VALUE rboffset, VALUE rbcount)
 }
 
 static VALUE
-bufferedinputstream_fill(int argc, VALUE *argv, VALUE self)
+rg_fill(int argc, VALUE *argv, VALUE self)
 {
         VALUE count, cancellable;
         GError *error = NULL;
@@ -97,7 +97,7 @@ bufferedinputstream_fill(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-bufferedinputstream_fill_async(int argc, VALUE *argv, VALUE self)
+rg_fill_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcount, rbio_priority, rbcancellable, block;
         gssize count;
@@ -120,7 +120,7 @@ bufferedinputstream_fill_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-bufferedinputstream_fill_finish(VALUE self, VALUE result)
+rg_fill_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         gsize bytes_read;
@@ -135,7 +135,7 @@ bufferedinputstream_fill_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-bufferedinputstream_read_byte(int argc, VALUE *argv, VALUE self)
+rg_read_byte(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -156,12 +156,12 @@ Init_gbufferedinputstream(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_INPUT_STREAM, "BufferedInputStream", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", bufferedinputstream_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "available", bufferedinputstream_get_available, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "peek_buffer", bufferedinputstream_peek_buffer, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "peek", bufferedinputstream_peek, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "fill", bufferedinputstream_fill, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "fill_async", bufferedinputstream_fill_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "fill_finish", bufferedinputstream_fill_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "read_byte", bufferedinputstream_read_byte, -1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(available, 0);
+        RG_DEF_METHOD(peek_buffer, 0);
+        RG_DEF_METHOD(peek, 2);
+        RG_DEF_METHOD(fill, -1);
+        RG_DEF_METHOD(fill_async, -1);
+        RG_DEF_METHOD(fill_finish, 1);
+        RG_DEF_METHOD(read_byte, -1);
 }

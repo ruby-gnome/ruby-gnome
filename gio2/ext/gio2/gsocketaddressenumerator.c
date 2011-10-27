@@ -24,7 +24,7 @@
 #define _SELF(value) G_SOCKET_ADDRESS_ENUMERATOR(RVAL2GOBJ(value))
 
 static VALUE
-socketaddressenumerator_next(int argc, VALUE *argv, VALUE self)
+rg_next(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -41,7 +41,7 @@ socketaddressenumerator_next(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketaddressenumerator_next_async(int argc, VALUE *argv, VALUE self)
+rg_next_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcancellable, block;
         GCancellable *cancellable;
@@ -58,7 +58,7 @@ socketaddressenumerator_next_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketaddressenumerator_next_finish(VALUE self, VALUE result)
+rg_next_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GSocketAddress *address;
@@ -77,7 +77,7 @@ Init_gsocketaddressenumerator(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS_ENUMERATOR, "SocketAddressEnumerator", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "next", socketaddressenumerator_next, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "next_async", socketaddressenumerator_next_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "next_finish", socketaddressenumerator_next_finish, 1);
+        RG_DEF_METHOD(next, -1);
+        RG_DEF_METHOD(next_async, -1);
+        RG_DEF_METHOD(next_finish, 1);
 }

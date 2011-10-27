@@ -31,19 +31,19 @@
         ((GKeyFile *)(RVAL2BOXED((value), G_TYPE_KEY_FILE)))
 
 static VALUE
-desktopappinfo_new_from_filename(G_GNUC_UNUSED VALUE self, VALUE filename)
+rg_s_new_from_filename(G_GNUC_UNUSED VALUE self, VALUE filename)
 {
         return GOBJ2RVAL_UNREF(g_desktop_app_info_new_from_filename(RVAL2CSTR(filename)));
 }
 
 static VALUE
-desktopappinfo_new_from_keyfile(G_GNUC_UNUSED VALUE self, VALUE keyfile)
+rg_s_new_from_keyfile(G_GNUC_UNUSED VALUE self, VALUE keyfile)
 {
         return GOBJ2RVAL_UNREF(g_desktop_app_info_new_from_keyfile(RVAL2GKEYFILE(keyfile)));
 }
 
 static VALUE
-desktopappinfo_initialize(VALUE self, VALUE desktop_id)
+rg_initialize(VALUE self, VALUE desktop_id)
 {
         G_INITIALIZE(self, g_desktop_app_info_new(RVAL2CSTR(desktop_id)));
 
@@ -51,19 +51,19 @@ desktopappinfo_initialize(VALUE self, VALUE desktop_id)
 }
 
 static VALUE
-desktopappinfo_get_filename(VALUE self)
+rg_filename(VALUE self)
 {
         return CSTR2RVAL(g_desktop_app_info_get_filename(_SELF(self)));
 }
 
 static VALUE
-desktopappinfo_get_is_hidden(VALUE self)
+rg_hidden_p(VALUE self)
 {
         return CBOOL2RVAL(g_desktop_app_info_get_is_hidden(_SELF(self)));
 }
 
 static VALUE
-desktopappinfo_set_desktop_env(G_GNUC_UNUSED VALUE self, VALUE desktop_env)
+rg_s_set_desktop_env(G_GNUC_UNUSED VALUE self, VALUE desktop_env)
 {
         g_desktop_app_info_set_desktop_env(RVAL2CSTR(desktop_env));
 
@@ -79,12 +79,12 @@ Init_gdesktopappinfo(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DESKTOP_APP_INFO, "DesktopAppInfo", glib);
 
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_filename", desktopappinfo_new_from_filename, 1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_keyfile", desktopappinfo_new_from_keyfile, 1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_desktop_env", desktopappinfo_set_desktop_env, 1);
+        RG_DEF_SMETHOD(new_from_filename, 1);
+        RG_DEF_SMETHOD(new_from_keyfile, 1);
+        RG_DEF_SMETHOD(set_desktop_env, 1);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", desktopappinfo_initialize, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "filename", desktopappinfo_get_filename, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "hidden?", desktopappinfo_get_is_hidden, 0);
+        RG_DEF_METHOD(initialize, 1);
+        RG_DEF_METHOD(filename, 0);
+        RG_DEF_METHOD_P(hidden, 0);
 #endif
 }

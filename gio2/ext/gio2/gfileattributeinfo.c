@@ -57,19 +57,19 @@ g_file_attribute_info_get_type(void)
         GFLAGS2RVAL((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
 
 static VALUE
-fileattributeinfo_name(VALUE self)
+rg_name(VALUE self)
 {
         return CSTR2RVAL(_SELF(self)->name);
 }
 
 static VALUE
-fileattributeinfo_type(VALUE self)
+rg_type(VALUE self)
 {
         return GFILEATTRIBUTETYPE2RVAL(_SELF(self)->type);
 }
 
 static VALUE
-fileattributeinfo_flags(VALUE self)
+rg_flags(VALUE self)
 {
         return GFILEATTRIBUTEINFOFLAGS2RVAL(_SELF(self)->flags);
 }
@@ -86,7 +86,7 @@ Init_gfileattributeinfo(VALUE glib)
 
         rbgobj_boxed_not_copy_obj(G_TYPE_FILE_ATTRIBUTE_INFO);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "name", fileattributeinfo_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "type", fileattributeinfo_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "flags", fileattributeinfo_flags, 0);
+        RG_DEF_METHOD(name, 0);
+        RG_DEF_METHOD(type, 0);
+        RG_DEF_METHOD(flags, 0);
 }

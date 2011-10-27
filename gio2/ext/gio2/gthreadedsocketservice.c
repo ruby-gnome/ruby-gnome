@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cThreadedSocketService
 
 static VALUE
-threadedsocketservice_initialize(VALUE self, VALUE max_threads)
+rg_initialize(VALUE self, VALUE max_threads)
 {
         G_INITIALIZE(self,
                      g_threaded_socket_service_new(RVAL2TYPE_WITH_DEFAULT(max_threads,
@@ -39,5 +39,5 @@ Init_gthreadedsocketservice(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_THREADED_SOCKET_SERVICE, "ThreadedSocketService", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", threadedsocketservice_initialize, -1);
+        RG_DEF_METHOD(initialize, -1);
 }

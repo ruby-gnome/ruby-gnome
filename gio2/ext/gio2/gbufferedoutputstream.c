@@ -25,7 +25,7 @@
 #define _SELF(value) G_BUFFERED_OUTPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-bufferedoutputstream_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbase_stream, size;
         GOutputStream *base_stream, *stream;
@@ -46,5 +46,5 @@ Init_gbufferedoutputstream(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", bufferedoutputstream_initialize, -1);
+        RG_DEF_METHOD(initialize, -1);
 }

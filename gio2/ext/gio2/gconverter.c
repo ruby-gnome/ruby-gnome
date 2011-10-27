@@ -38,7 +38,7 @@
 /* TODO: Look at gconverteroutputstream for implementing this. */
 /* TODO: Actually, is there any point in implementing this? */
 static VALUE
-converter_convert(int argc, VALUE *argv, VALUE self)
+rg_convert(int argc, VALUE *argv, VALUE self)
 {
         VALUE input, rbflags;
         GConverter *converter;
@@ -102,7 +102,7 @@ converter_convert(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-converter_reset(VALUE self)
+rg_reset(VALUE self)
 {
         g_converter_reset(_SELF(self));
 
@@ -114,6 +114,6 @@ Init_gconverter(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_CONVERTER, "Converter", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "convert", converter_convert, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "reset", converter_reset, 0);
+        RG_DEF_METHOD(convert, -1);
+        RG_DEF_METHOD(reset, 0);
 }

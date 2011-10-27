@@ -25,7 +25,7 @@
 #define _SELF(value) G_SOCKET_LISTENER(RVAL2GOBJ(value))
 
 static VALUE
-socketlistener_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_socket_listener_new());
 
@@ -33,7 +33,7 @@ socketlistener_initialize(VALUE self)
 }
 
 static VALUE
-socketlistener_add_socket(int argc, VALUE *argv, VALUE self)
+rg_add_socket(int argc, VALUE *argv, VALUE self)
 {
         VALUE socket, source_object;
         GError *error = NULL;
@@ -47,7 +47,7 @@ socketlistener_add_socket(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_add_address(int argc, VALUE *argv, VALUE self)
+rg_add_address(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbaddress, type, protocol, source_object;
         GError *error = NULL;
@@ -67,7 +67,7 @@ socketlistener_add_address(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_add_inet_port(int argc, VALUE *argv, VALUE self)
+rg_add_inet_port(int argc, VALUE *argv, VALUE self)
 {
         VALUE port, source_object;
         GError *error = NULL;
@@ -83,7 +83,7 @@ socketlistener_add_inet_port(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_add_any_inet_port(int argc, VALUE *argv, VALUE self)
+rg_add_any_inet_port(int argc, VALUE *argv, VALUE self)
 {
         VALUE source_object;
         GError *error = NULL;
@@ -100,7 +100,7 @@ socketlistener_add_any_inet_port(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept(int argc, VALUE *argv, VALUE self)
+rg_accept(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GObject *source_object;
@@ -120,7 +120,7 @@ socketlistener_accept(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept_async(int argc, VALUE *argv, VALUE self)
+rg_accept_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcancellable, block;
         GCancellable *cancellable;
@@ -137,7 +137,7 @@ socketlistener_accept_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept_finish(VALUE self, VALUE result)
+rg_accept_finish(VALUE self, VALUE result)
 {
         GObject *source_object;
         GError *error = NULL;
@@ -155,7 +155,7 @@ socketlistener_accept_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-socketlistener_accept_socket(int argc, VALUE *argv, VALUE self)
+rg_accept_socket(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GObject *source_object;
@@ -175,7 +175,7 @@ socketlistener_accept_socket(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept_socket_async(int argc, VALUE *argv, VALUE self)
+rg_accept_socket_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcancellable, block;
         GCancellable *cancellable;
@@ -192,7 +192,7 @@ socketlistener_accept_socket_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketlistener_accept_socket_finish(VALUE self, VALUE result)
+rg_accept_socket_finish(VALUE self, VALUE result)
 {
         GObject *source_object;
         GError *error = NULL;
@@ -210,7 +210,7 @@ socketlistener_accept_socket_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-socketlistener_close(VALUE self)
+rg_close(VALUE self)
 {
         g_socket_listener_close(_SELF(self));
 
@@ -218,10 +218,10 @@ socketlistener_close(VALUE self)
 }
 
 static VALUE
-socketlistener_set_backlog(VALUE self, VALUE listen_backlog)
+rg_set_backlog(VALUE self, VALUE listen_backlog)
 {
         g_socket_listener_set_backlog(_SELF(self), FIX2INT(listen_backlog));
- 
+
         return self;
 }
 
@@ -230,18 +230,18 @@ Init_gsocketlistener(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_LISTENER, "SocketListener", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socketlistener_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "add_socket", socketlistener_add_socket, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "add_address", socketlistener_add_address, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "add_inet_port", socketlistener_add_inet_port, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "add_any_inet_port", socketlistener_add_any_inet_port, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept", socketlistener_accept, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept_async", socketlistener_accept_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept_finish", socketlistener_accept_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept_socket", socketlistener_accept_socket, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept_socket_async", socketlistener_accept_socket_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept_socket_finish", socketlistener_accept_socket_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close", socketlistener_close, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_backlog", socketlistener_set_backlog, 1);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(add_socket, -1);
+        RG_DEF_METHOD(add_address, -1);
+        RG_DEF_METHOD(add_inet_port, -1);
+        RG_DEF_METHOD(add_any_inet_port, -1);
+        RG_DEF_METHOD(accept, -1);
+        RG_DEF_METHOD(accept_async, -1);
+        RG_DEF_METHOD(accept_finish, 1);
+        RG_DEF_METHOD(accept_socket, -1);
+        RG_DEF_METHOD(accept_socket_async, -1);
+        RG_DEF_METHOD(accept_socket_finish, 1);
+        RG_DEF_METHOD(close, 0);
+        RG_DEF_METHOD(set_backlog, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "backlog");
 }

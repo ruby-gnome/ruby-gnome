@@ -25,7 +25,7 @@
 #define _SELF(value) G_IO_MODULE(RVAL2GOBJ(value))
 
 static VALUE
-iomodule_initialize(VALUE self, VALUE filename)
+rg_initialize(VALUE self, VALUE filename)
 {
         G_INITIALIZE(self, g_io_module_new(RVAL2CSTR(filename)));
 
@@ -41,5 +41,5 @@ Init_giomodule(VALUE glib)
 
         RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", iomodule_initialize, 1);
+        RG_DEF_METHOD(initialize, 1);
 }

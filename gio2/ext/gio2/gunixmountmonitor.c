@@ -28,7 +28,7 @@
 #define _SELF(value) G_UNIX_MOUNT_MONITOR(RVAL2GOBJ(value))
 
 static VALUE
-unixmountmonitor_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE limit_msec;
         GUnixMountMonitor *monitor;
@@ -44,7 +44,7 @@ unixmountmonitor_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-unixmountmonitor_set_rate_limit(VALUE self, VALUE limit_msec)
+rg_set_rate_limit(VALUE self, VALUE limit_msec)
 {
         g_unix_mount_monitor_set_rate_limit(_SELF(self), FIX2INT(limit_msec));
 
@@ -59,8 +59,8 @@ Init_gunixmountmonitor(G_GNUC_UNUSED VALUE glib)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_MONITOR, "UnixMountMonitor", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", unixmountmonitor_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_rate_limit", unixmountmonitor_set_rate_limit, 1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(set_rate_limit, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "rate_limit");
 #endif
 }

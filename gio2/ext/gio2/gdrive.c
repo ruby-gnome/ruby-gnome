@@ -28,67 +28,67 @@
         GENUM2RVAL((value), G_TYPE_DRIVE_START_STOP_TYPE)
 
 static VALUE
-drive_get_name(VALUE self)
+rg_name(VALUE self)
 {
         return CSTR2RVAL_FREE(g_drive_get_name(_SELF(self)));
 }
 
 static VALUE
-drive_get_icon(VALUE self)
+rg_icon(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_drive_get_icon(_SELF(self)));
 }
 
 static VALUE
-drive_has_volumes(VALUE self)
+rg_has_volumes_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_has_volumes(_SELF(self)));
 }
 
 static VALUE
-drive_get_volumes(VALUE self)
+rg_volumes(VALUE self)
 {
         return GLIST2ARY_FREE(g_drive_get_volumes(_SELF(self)));
 }
 
 static VALUE
-drive_can_eject(VALUE self)
+rg_can_eject_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_can_eject(_SELF(self)));
 }
 
 static VALUE
-drive_get_start_stop_type(VALUE self)
+rg_start_stop_type(VALUE self)
 {
         return GDRIVESTARTSTOPTYPE2RVAL(g_drive_get_start_stop_type(_SELF(self)));
 }
 
 static VALUE
-drive_can_start(VALUE self)
+rg_can_start_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_can_start(_SELF(self)));
 }
 
 static VALUE
-drive_can_start_degraded(VALUE self)
+rg_can_start_degraded_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_can_start_degraded(_SELF(self)));
 }
 
 static VALUE
-drive_can_stop(VALUE self)
+rg_can_stop_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_can_stop(_SELF(self)));
 }
 
 static VALUE
-drive_can_poll_for_media(VALUE self)
+rg_can_poll_for_media_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_can_poll_for_media(_SELF(self)));
 }
 
 static VALUE
-drive_poll_for_media(int argc, VALUE *argv, VALUE self)
+rg_poll_for_media(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcancellable, block;
         GCancellable *cancellable;
@@ -117,25 +117,25 @@ boolean_finish_method(BooleanFinishMethod method, VALUE self, VALUE result)
 }
 
 static VALUE
-drive_poll_for_media_finish(VALUE self, VALUE result)
+rg_poll_for_media_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_drive_poll_for_media_finish, self, result);
 }
 
 static VALUE
-drive_has_media(VALUE self)
+rg_has_media_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_has_media(_SELF(self)));
 }
 
 static VALUE
-drive_is_media_check_automatic(VALUE self)
+rg_media_check_automatic_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_is_media_check_automatic(_SELF(self)));
 }
 
 static VALUE
-drive_is_media_removable(VALUE self)
+rg_media_removable_p(VALUE self)
 {
         return CBOOL2RVAL(g_drive_is_media_removable(_SELF(self)));
 }
@@ -171,19 +171,19 @@ eject_stop_method(EjectStopMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-drive_eject_with_operation(int argc, VALUE *argv, VALUE self)
+rg_eject_with_operation(int argc, VALUE *argv, VALUE self)
 {
         return eject_stop_method(g_drive_eject_with_operation, argc, argv, self);
 }
 
 static VALUE
-drive_eject_with_operation_finish(VALUE self, VALUE result)
+rg_eject_with_operation_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_drive_eject_with_operation_finish, self, result);
 }
 
 static VALUE
-drive_start(int argc, VALUE *argv, VALUE self)
+rg_start(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbflags, rbmount_operation, rbcancellable, block;
         GDriveStartFlags flags;
@@ -202,31 +202,31 @@ drive_start(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-drive_start_finish(VALUE self, VALUE result)
+rg_start_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_drive_start_finish, self, result);
 }
 
 static VALUE
-drive_stop(int argc, VALUE *argv, VALUE self)
+rg_stop(int argc, VALUE *argv, VALUE self)
 {
         return eject_stop_method(g_drive_stop, argc, argv, self);
 }
 
 static VALUE
-drive_stop_finish(VALUE self, VALUE result)
+rg_stop_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_drive_stop_finish, self, result);
 }
 
 static VALUE
-drive_enumerate_identifiers(VALUE self)
+rg_enumerate_identifiers(VALUE self)
 {
         return STRV2RVAL_FREE(g_drive_enumerate_identifiers(_SELF(self)));
 }
 
 static VALUE
-drive_get_identifier(VALUE self, VALUE kind)
+rg_get_identifier(VALUE self, VALUE kind)
 {
         return CSTR2RVAL_FREE(g_drive_get_identifier(_SELF(self), RVAL2CSTR(kind)));
 }
@@ -242,28 +242,28 @@ Init_gdrive(VALUE glib)
         G_DEF_CLASS(G_TYPE_DRIVE_START_STOP_TYPE, "StartStopType", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DRIVE_START_STOP_TYPE, "G_DRIVE_");
 
-        rb_define_method(RG_TARGET_NAMESPACE, "name", drive_get_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "icon", drive_get_icon, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "has_volumes?", drive_has_volumes, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "volumes", drive_get_volumes, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_eject?", drive_can_eject, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "start_stop_type", drive_get_start_stop_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_start?", drive_can_start, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_start_degraded?", drive_can_start_degraded, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_stop?", drive_can_stop, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_poll_for_media?", drive_can_poll_for_media, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "poll_for_media", drive_poll_for_media, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "poll_for_media_finish", drive_poll_for_media_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "has_media?", drive_has_media, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "media_check_automatic?", drive_is_media_check_automatic, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "media_removable?", drive_is_media_removable, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation", drive_eject_with_operation, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "eject_with_operation_finish", drive_eject_with_operation_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "start", drive_start, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "start_finish", drive_start_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "stop", drive_stop, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "stop_finish", drive_stop_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_identifiers", drive_enumerate_identifiers, -1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "identifiers", "enumerate_identifiers");
-        rb_define_method(RG_TARGET_NAMESPACE, "get_identifier", drive_get_identifier, 1);
+        RG_DEF_METHOD(name, 0);
+        RG_DEF_METHOD(icon, 0);
+        RG_DEF_METHOD_P(has_volumes, 0);
+        RG_DEF_METHOD(volumes, 0);
+        RG_DEF_METHOD_P(can_eject, 0);
+        RG_DEF_METHOD(start_stop_type, 0);
+        RG_DEF_METHOD_P(can_start, 0);
+        RG_DEF_METHOD_P(can_start_degraded, 0);
+        RG_DEF_METHOD_P(can_stop, 0);
+        RG_DEF_METHOD_P(can_poll_for_media, 0);
+        RG_DEF_METHOD(poll_for_media, -1);
+        RG_DEF_METHOD(poll_for_media_finish, 1);
+        RG_DEF_METHOD_P(has_media, 0);
+        RG_DEF_METHOD_P(media_check_automatic, 0);
+        RG_DEF_METHOD_P(media_removable, 0);
+        RG_DEF_METHOD(eject_with_operation, -1);
+        RG_DEF_METHOD(eject_with_operation_finish, 1);
+        RG_DEF_METHOD(start, -1);
+        RG_DEF_METHOD(start_finish, 1);
+        RG_DEF_METHOD(stop, -1);
+        RG_DEF_METHOD(stop_finish, 1);
+        RG_DEF_METHOD(enumerate_identifiers, -1);
+        RG_DEF_ALIAS("identifiers", "enumerate_identifiers");
+        RG_DEF_METHOD(get_identifier, 1);
 }

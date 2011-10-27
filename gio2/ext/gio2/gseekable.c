@@ -28,19 +28,19 @@
         RVAL2TYPE_WITH_DEFAULT((value), NUM2INT, G_SEEK_CUR)
 
 static VALUE
-seekable_tell(VALUE self)
+rg_tell(VALUE self)
 {
         return GOFFSET2RVAL(g_seekable_tell(_SELF(self)));
 }
 
 static VALUE
-seekable_can_seek(VALUE self)
+rg_can_seek_p(VALUE self)
 {
         return CBOOL2RVAL(g_seekable_can_seek(_SELF(self)));
 }
 
 static VALUE
-seekable_seek(int argc, VALUE *argv, VALUE self)
+rg_seek(int argc, VALUE *argv, VALUE self)
 {
         VALUE offset, type, cancellable;
         GError *error = NULL;
@@ -57,13 +57,13 @@ seekable_seek(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-seekable_can_truncate(VALUE self)
+rg_can_truncate_p(VALUE self)
 {
         return CBOOL2RVAL(g_seekable_can_truncate(_SELF(self)));
 }
 
 static VALUE
-seekable_truncate(int argc, VALUE *argv, VALUE self)
+rg_truncate(int argc, VALUE *argv, VALUE self)
 {
         VALUE offset, cancellable;
         GError *error = NULL;
@@ -83,9 +83,9 @@ Init_gseekable(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SEEKABLE, "Seekable", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "tell", seekable_tell, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_seek?", seekable_can_seek, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "seek", seekable_seek, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_truncate?", seekable_can_truncate, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "truncate", seekable_truncate, -1);
+        RG_DEF_METHOD(tell, 0);
+        RG_DEF_METHOD_P(can_seek, 0);
+        RG_DEF_METHOD(seek, -1);
+        RG_DEF_METHOD_P(can_truncate, 0);
+        RG_DEF_METHOD(truncate, -1);
 }

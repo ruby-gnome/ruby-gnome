@@ -28,7 +28,7 @@
         RVAL2TYPE_WITH_DEFAULT((value), FIX2INT, -1)
 
 static VALUE
-zlibcompressor_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE format, level;
 
@@ -48,5 +48,5 @@ Init_gzlibcompressor(VALUE glib)
         G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR_FORMAT, "Format", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_ZLIB_COMPRESSOR_FORMAT, "G_ZLIB_");
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", zlibcompressor_initialize, -1);
+        RG_DEF_METHOD(initialize, -1);
 }

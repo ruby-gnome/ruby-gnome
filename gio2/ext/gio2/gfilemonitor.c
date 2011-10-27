@@ -25,7 +25,7 @@
 #define _SELF(value) G_FILE_MONITOR(RVAL2GOBJ(value))
 
 static VALUE
-filemonitor_cancel(VALUE self)
+rg_cancel(VALUE self)
 {
         return CBOOL2RVAL(g_file_monitor_cancel(_SELF(self)));
 }
@@ -41,6 +41,6 @@ Init_gfilemonitor(VALUE glib)
         G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "Flags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
 
-        rb_define_method(RG_TARGET_NAMESPACE, "cancel", filemonitor_cancel, 0);
+        RG_DEF_METHOD(cancel, 0);
         /* TODO: Do we need #emit_event? */
 }

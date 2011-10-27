@@ -25,7 +25,7 @@
 #define _SELF(value) G_CHARSET_CONVERTER(RVAL2GOBJ(value))
 
 static VALUE
-charsetconverter_initialize(VALUE self, VALUE to, VALUE from)
+rg_initialize(VALUE self, VALUE to, VALUE from)
 {
         GError *error = NULL;
         GCharsetConverter *converter;
@@ -42,7 +42,7 @@ charsetconverter_initialize(VALUE self, VALUE to, VALUE from)
 }
 
 static VALUE
-charsetconverter_get_num_fallbacks(VALUE self)
+rg_num_fallbacks(VALUE self)
 {
         return GUINT2RVAL(g_charset_converter_get_num_fallbacks(_SELF(self)));
 }
@@ -52,6 +52,6 @@ Init_gcharsetconverter(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", charsetconverter_initialize, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "num_fallbacks", charsetconverter_get_num_fallbacks, 0);
+        RG_DEF_METHOD(initialize, 2);
+        RG_DEF_METHOD(num_fallbacks, 0);
 }

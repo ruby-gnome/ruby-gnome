@@ -25,13 +25,13 @@
 #define _SELF(value) G_FILE_IO_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-fileiostream_get_etag(VALUE self)
+rg_etag(VALUE self)
 {
         return CSTR2RVAL(g_file_io_stream_get_etag(_SELF(self)));
 }
 
 static VALUE
-fileiostream_query_info(int argc, VALUE *argv, VALUE self)
+rg_query_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, cancellable;
         GError *error = NULL;
@@ -49,7 +49,7 @@ fileiostream_query_info(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileiostream_query_info_async(int argc, VALUE *argv, VALUE self)
+rg_query_info_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbio_priority, rbcancellable, block;
         const char *attributes;
@@ -72,7 +72,7 @@ fileiostream_query_info_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileiostream_query_info_finish(VALUE self, VALUE result)
+rg_query_info_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInfo *info;
@@ -91,8 +91,8 @@ Init_gfileiostream(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_IO_STREAM, "FileIOStream", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "etag", fileiostream_get_etag, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "query_info", fileiostream_query_info, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "query_info_async", fileiostream_query_info_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "query_info_finish", fileiostream_query_info_finish, 1);
+        RG_DEF_METHOD(etag, 0);
+        RG_DEF_METHOD(query_info, -1);
+        RG_DEF_METHOD(query_info_async, -1);
+        RG_DEF_METHOD(query_info_finish, 1);
 }

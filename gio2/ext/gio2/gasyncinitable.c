@@ -25,7 +25,7 @@
 #define _SELF(value) G_ASYNC_INITABLE(RVAL2GOBJ(value))
 
 static VALUE
-asyncinitable_init_async(int argc, VALUE *argv, VALUE self)
+rg_init_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -45,7 +45,7 @@ asyncinitable_init_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-asyncinitable_init_finish(VALUE self, VALUE result)
+rg_init_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
 
@@ -193,7 +193,7 @@ rbgio_gasyncinitable_new_async(GType type,
 }
 
 static VALUE
-asyncinitable_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         const RGObjClassInfo* info;
         VALUE io_priority, cancellable, parameters, block;
@@ -215,9 +215,8 @@ asyncinitable_initialize(int argc, VALUE *argv, VALUE self)
         return self;
 }
 
-
 static VALUE
-asyncinitable_initialize_finish(VALUE self, VALUE result)
+rg_initialize_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GObject *object;
@@ -240,8 +239,8 @@ Init_gasyncinitable(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_INITABLE, "AsyncInitable", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "init_async", asyncinitable_init_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "init_finish", asyncinitable_init_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", asyncinitable_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize_finish", asyncinitable_initialize_finish, 1);
+        RG_DEF_METHOD(init_async, -1);
+        RG_DEF_METHOD(init_finish, 1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(initialize_finish, 1);
 }

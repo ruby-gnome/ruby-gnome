@@ -48,7 +48,7 @@ g_file_attribute_info_list_get_type(void)
 #define _SELF(value) RVAL2GFILEATTRIBUTEINFOLIST(value)
 
 static VALUE
-fileattributeinfolist_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_file_attribute_info_list_new());
 
@@ -56,13 +56,13 @@ fileattributeinfolist_initialize(VALUE self)
 }
 
 static VALUE
-fileattributeinfolist_dup(VALUE self)
+rg_dup(VALUE self)
 {
         return GFILEATTRIBUTEINFOLIST2RVAL(g_file_attribute_info_list_dup(_SELF(self)));
 }
 
 static VALUE
-fileattributeinfolist_lookup(VALUE self, VALUE name)
+rg_lookup(VALUE self, VALUE name)
 {
         /* TODO: How do we deal with the const? */
         return GFILEATTRIBUTEINFO2RVAL((GFileAttributeInfo *)g_file_attribute_info_list_lookup(_SELF(self),
@@ -70,7 +70,7 @@ fileattributeinfolist_lookup(VALUE self, VALUE name)
 }
 
 static VALUE
-fileattributeinfolist_add(int argc, VALUE *argv, VALUE self)
+rg_add(int argc, VALUE *argv, VALUE self)
 {
         VALUE name, type, flags;
 
@@ -85,7 +85,7 @@ fileattributeinfolist_add(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileattributeinfolist_each(VALUE self)
+rg_each(VALUE self)
 {
         GFileAttributeInfoList *list = RVAL2GFILEATTRIBUTEINFOLIST(self);
         int i;
@@ -103,10 +103,10 @@ Init_fileattributeinfolist(VALUE glib)
 
         rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileattributeinfolist_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "dup", fileattributeinfolist_dup, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "lookup", fileattributeinfolist_lookup, 1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "[]", "lookup");
-        rb_define_method(RG_TARGET_NAMESPACE, "add", fileattributeinfolist_add, 3);
-        rb_define_method(RG_TARGET_NAMESPACE, "each", fileattributeinfolist_each, 0);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(dup, 0);
+        RG_DEF_METHOD(lookup, 1);
+        RG_DEF_ALIAS("[]", "lookup");
+        RG_DEF_METHOD(add, 3);
+        RG_DEF_METHOD(each, 0);
 }

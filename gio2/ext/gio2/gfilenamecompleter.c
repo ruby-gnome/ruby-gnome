@@ -25,7 +25,7 @@
 #define _SELF(value) G_FILENAME_COMPLETER(RVAL2GOBJ(value))
 
 static VALUE
-filenamecompleter_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE dirs_only;
         GFilenameCompleter *completer;
@@ -40,21 +40,21 @@ filenamecompleter_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-filenamecompleter_get_completion_suffix(VALUE self, VALUE initial_text)
+rg_get_completion_suffix(VALUE self, VALUE initial_text)
 {
         return CSTR2RVAL_FREE(g_filename_completer_get_completion_suffix(_SELF(self),
                                                                          RVAL2CSTR(initial_text)));
 }
 
 static VALUE
-filenamecompleter_get_completions(VALUE self, VALUE initial_text)
+rg_get_completions(VALUE self, VALUE initial_text)
 {
         return STRV2RVAL_FREE(g_filename_completer_get_completions(_SELF(self),
                                                                    RVAL2CSTR(initial_text)));
 }
 
 static VALUE
-filenamecompleter_set_dirs_only(VALUE self, VALUE dirs_only)
+rg_set_dirs_only(VALUE self, VALUE dirs_only)
 {
         g_filename_completer_set_dirs_only(_SELF(self), RVAL2CBOOL(dirs_only));
 
@@ -66,9 +66,9 @@ Init_gfilenamecompleter(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", filenamecompleter_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_completion_suffix", filenamecompleter_get_completion_suffix, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "get_completions", filenamecompleter_get_completions, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_dirs_only", filenamecompleter_set_dirs_only, 1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(get_completion_suffix, 1);
+        RG_DEF_METHOD(get_completions, 1);
+        RG_DEF_METHOD(set_dirs_only, 1);
         G_DEF_SETTER(RG_TARGET_NAMESPACE, "dirs_only");
 }

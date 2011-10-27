@@ -28,7 +28,7 @@
 #define _SELF(value) RVAL2GSRVTARGET(value)
 
 static VALUE
-srvtarget_initialize(VALUE self, VALUE hostname, VALUE port, VALUE priority, VALUE weight)
+rg_initialize(VALUE self, VALUE hostname, VALUE port, VALUE priority, VALUE weight)
 {
         /* TODO: Does this work with boxed? */
         /* TODO: hostname should be infected when returned. */
@@ -41,25 +41,25 @@ srvtarget_initialize(VALUE self, VALUE hostname, VALUE port, VALUE priority, VAL
 }
 
 static VALUE
-srvtarget_get_hostname(VALUE self)
+rg_hostname(VALUE self)
 {
         return CSTR2RVAL(g_srv_target_get_hostname(_SELF(self)));
 }
 
 static VALUE
-srvtarget_get_port(VALUE self)
+rg_port(VALUE self)
 {
         return GUINT162RVAL(g_srv_target_get_port(_SELF(self)));
 }
 
 static VALUE
-srvtarget_get_priority(VALUE self)
+rg_priority(VALUE self)
 {
         return GUINT162RVAL(g_srv_target_get_priority(_SELF(self)));
 }
 
 static VALUE
-srvtarget_get_weight(VALUE self)
+rg_weight(VALUE self)
 {
         return GUINT162RVAL(g_srv_target_get_weight(_SELF(self)));
 }
@@ -71,9 +71,9 @@ Init_gsrvtarget(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SRV_TARGET, "SrvTarget", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", srvtarget_initialize, 4);
-        rb_define_method(RG_TARGET_NAMESPACE, "hostname", srvtarget_get_hostname, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "port", srvtarget_get_port, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "priority", srvtarget_get_priority, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "weight", srvtarget_get_weight, 0);
+        RG_DEF_METHOD(initialize, 4);
+        RG_DEF_METHOD(hostname, 0);
+        RG_DEF_METHOD(port, 0);
+        RG_DEF_METHOD(priority, 0);
+        RG_DEF_METHOD(weight, 0);
 }

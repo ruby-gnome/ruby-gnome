@@ -37,7 +37,7 @@ g_file_attribute_matcher_get_type(void)
 #define _SELF(value) RVAL2GFILEATTRIBUTEMATCHER(value)
 
 static VALUE
-fileattributematcher_initialize(VALUE self, VALUE attributes)
+rg_initialize(VALUE self, VALUE attributes)
 {
         G_INITIALIZE(self, g_file_attribute_matcher_new(RVAL2CSTR(attributes)));
 
@@ -45,19 +45,19 @@ fileattributematcher_initialize(VALUE self, VALUE attributes)
 }
 
 static VALUE
-fileattributematcher_matches(VALUE self, VALUE attribute)
+rg_matches_p(VALUE self, VALUE attribute)
 {
         return CBOOL2RVAL(g_file_attribute_matcher_matches(_SELF(self), RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileattributematcher_matches_only(VALUE self, VALUE attribute)
+rg_matches_only_p(VALUE self, VALUE attribute)
 {
         return CBOOL2RVAL(g_file_attribute_matcher_matches_only(_SELF(self), RVAL2CSTR(attribute)));
 }
 
 static VALUE
-fileattributematcher_enumerate_namespace(VALUE self, VALUE ns)
+rg_enumerate_namespace(VALUE self, VALUE ns)
 {
         const char *match;
         gboolean matches_all = g_file_attribute_matcher_enumerate_namespace(_SELF(self),
@@ -72,7 +72,7 @@ fileattributematcher_enumerate_namespace(VALUE self, VALUE ns)
 }
 
 static VALUE
-fileattributematcher_enumerate_next(VALUE self)
+rg_enumerate_next(VALUE self)
 {
         return CSTR2RVAL(g_file_attribute_matcher_enumerate_next(_SELF(self)));
 }
@@ -82,12 +82,12 @@ Init_gfileattributematcher(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_MATCHER, "FileAttributeMatcher", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", fileattributematcher_initialize, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "matches?", fileattributematcher_matches, 1);
+        RG_DEF_METHOD(initialize, 1);
+        RG_DEF_METHOD_P(matches, 1);
         /* TODO: Is this confusing when we have both #matches and
          * #matches_only?  What does #=~ call? */
-        rb_define_alias(RG_TARGET_NAMESPACE, "=~", "matches?");
-        rb_define_method(RG_TARGET_NAMESPACE, "matches_only?", fileattributematcher_matches_only, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_namespace", fileattributematcher_enumerate_namespace, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "enumerate_next", fileattributematcher_enumerate_next, 0);
+        RG_DEF_ALIAS("=~", "matches?");
+        RG_DEF_METHOD_P(matches_only, 1);
+        RG_DEF_METHOD(enumerate_namespace, 1);
+        RG_DEF_METHOD(enumerate_next, 0);
 }

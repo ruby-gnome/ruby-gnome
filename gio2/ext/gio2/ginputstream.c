@@ -27,7 +27,7 @@
 static VALUE s_cReadAsyncResult;
 
 static VALUE
-inputstream_read(int argc, VALUE *argv, VALUE self)
+rg_read(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcount, cancellable, result;
         gsize count;
@@ -53,7 +53,7 @@ inputstream_read(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-inputstream_read_all(int argc, VALUE *argv, VALUE self)
+rg_read_all(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcount, cancellable, result;
         gsize count;
@@ -79,7 +79,7 @@ inputstream_read_all(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-inputstream_skip(int argc, VALUE *argv, VALUE self)
+rg_skip(int argc, VALUE *argv, VALUE self)
 {
         VALUE count, cancellable;
         GError *error = NULL;
@@ -97,7 +97,7 @@ inputstream_skip(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-inputstream_close(int argc, VALUE *argv, VALUE self)
+rg_close(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -171,7 +171,7 @@ read_async_callback(G_GNUC_UNUSED GObject *source,
 }
 
 static VALUE
-inputstream_read_async(int argc, VALUE *argv, VALUE self)
+rg_read_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcount, rbio_priority, rbcancellable, block, data;
         gsize count;
@@ -196,7 +196,7 @@ inputstream_read_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-inputstream_read_finish(VALUE self, VALUE rbresult)
+rg_read_finish(VALUE self, VALUE rbresult)
 {
         struct read_async_result *result;
         GError *error = NULL;
@@ -217,7 +217,7 @@ inputstream_read_finish(VALUE self, VALUE rbresult)
 }
 
 static VALUE
-inputstream_skip_async(int argc, VALUE *argv, VALUE self)
+rg_skip_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcount, rbio_priority, rbcancellable, block;
         gsize count;
@@ -240,7 +240,7 @@ inputstream_skip_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-inputstream_skip_finish(VALUE self, VALUE result)
+rg_skip_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         gssize skipped_bytes;
@@ -255,7 +255,7 @@ inputstream_skip_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-inputstream_close_async(int argc, VALUE *argv, VALUE self)
+rg_close_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -275,7 +275,7 @@ inputstream_close_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-inputstream_close_finish(VALUE self, VALUE result)
+rg_close_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         if (!g_input_stream_skip_finish(_SELF(self),
@@ -287,19 +287,19 @@ inputstream_close_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-inputstream_is_closed(VALUE self)
+rg_closed_p(VALUE self)
 {
         return CBOOL2RVAL(g_input_stream_is_closed(_SELF(self)));
 }
 
 static VALUE
-inputstream_has_pending(VALUE self)
+rg_has_pending_p(VALUE self)
 {
         return CBOOL2RVAL(g_input_stream_has_pending(_SELF(self)));
 }
 
 static VALUE
-inputstream_set_pending(VALUE self)
+rg_set_pending(VALUE self)
 {
         GError *error = NULL;
 
@@ -310,7 +310,7 @@ inputstream_set_pending(VALUE self)
 }
 
 static VALUE
-inputstream_clear_pending(VALUE self)
+rg_clear_pending(VALUE self)
 {
         g_input_stream_clear_pending(_SELF(self));
 
@@ -323,19 +323,19 @@ Init_ginputstream(VALUE glib)
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INPUT_STREAM, "InputStream", glib);
 
         s_cReadAsyncResult = rb_define_class_under(RG_TARGET_NAMESPACE, "ReadAsyncResult", rb_cObject);
-        
-        rb_define_method(RG_TARGET_NAMESPACE, "read", inputstream_read, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "read_all", inputstream_read_all, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "skip", inputstream_skip, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close", inputstream_close, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "read_async", inputstream_read_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "read_finish", inputstream_read_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "skip_async", inputstream_skip_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "skip_finish", inputstream_skip_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close_async", inputstream_close_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close_finish", inputstream_close_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "closed?", inputstream_is_closed, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "has_pending?", inputstream_has_pending, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_pending", inputstream_set_pending, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "clear_pending", inputstream_clear_pending, 0);
+
+        RG_DEF_METHOD(read, -1);
+        RG_DEF_METHOD(read_all, -1);
+        RG_DEF_METHOD(skip, -1);
+        RG_DEF_METHOD(close, -1);
+        RG_DEF_METHOD(read_async, -1);
+        RG_DEF_METHOD(read_finish, 1);
+        RG_DEF_METHOD(skip_async, -1);
+        RG_DEF_METHOD(skip_finish, 1);
+        RG_DEF_METHOD(close_async, -1);
+        RG_DEF_METHOD(close_finish, 1);
+        RG_DEF_METHOD_P(closed, 0);
+        RG_DEF_METHOD_P(has_pending, 0);
+        RG_DEF_METHOD(set_pending, 0);
+        RG_DEF_METHOD(clear_pending, 0);
 }

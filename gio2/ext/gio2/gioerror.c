@@ -29,7 +29,7 @@ void
 Init_gioerror(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE, error;
-        
+
         RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IO");
 
         error = rbgio_define_domain_error(RG_TARGET_NAMESPACE, "Error", G_IO_ERROR, "GIOErrorEnum", rb_eIOError);

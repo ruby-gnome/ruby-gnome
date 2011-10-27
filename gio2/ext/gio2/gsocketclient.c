@@ -25,7 +25,7 @@
 #define _SELF(value) G_SOCKET_CLIENT(RVAL2GOBJ(value))
 
 static VALUE
-socketclient_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_socket_client_new());
 
@@ -33,7 +33,7 @@ socketclient_initialize(VALUE self)
 }
 
 static VALUE
-socketclient_connect(int argc, VALUE *argv, VALUE self)
+rg_connect(int argc, VALUE *argv, VALUE self)
 {
         VALUE connectable, cancellable;
         GError *error = NULL;
@@ -51,7 +51,7 @@ socketclient_connect(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketclient_connect_async(int argc, VALUE *argv, VALUE self)
+rg_connect_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbconnectable, rbcancellable, block;
         GCancellable *cancellable;
@@ -88,13 +88,13 @@ connection_finish_method(ConnectionFinishMethod method, VALUE self, VALUE result
 }
 
 static VALUE
-socketclient_connect_finish(VALUE self, VALUE result)
+rg_connect_finish(VALUE self, VALUE result)
 {
         return connection_finish_method(g_socket_client_connect_finish, self, result);
 }
 
 static VALUE
-socketclient_connect_to_host(int argc, VALUE *argv, VALUE self)
+rg_connect_to_host(int argc, VALUE *argv, VALUE self)
 {
         VALUE host_and_port, default_port, cancellable;
         GError *error = NULL;
@@ -113,7 +113,7 @@ socketclient_connect_to_host(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketclient_connect_to_host_async(int argc, VALUE *argv, VALUE self)
+rg_connect_to_host_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbhost_and_port, rbdefault_port, rbcancellable, block;
         GCancellable *cancellable;
@@ -136,13 +136,13 @@ socketclient_connect_to_host_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketclient_connect_to_host_finish(VALUE self, VALUE result)
+rg_connect_to_host_finish(VALUE self, VALUE result)
 {
         return connection_finish_method(g_socket_client_connect_to_host_finish, self, result);
 }
 
 static VALUE
-socketclient_connect_to_service(int argc, VALUE *argv, VALUE self)
+rg_connect_to_service(int argc, VALUE *argv, VALUE self)
 {
         VALUE domain, service, cancellable;
         GError *error = NULL;
@@ -161,7 +161,7 @@ socketclient_connect_to_service(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketclient_connect_to_service_async(int argc, VALUE *argv, VALUE self)
+rg_connect_to_service_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbdomain, rbservice, rbcancellable, block;
         GCancellable *cancellable;
@@ -184,7 +184,7 @@ socketclient_connect_to_service_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socketclient_connect_to_service_finish(VALUE self, VALUE result)
+rg_connect_to_service_finish(VALUE self, VALUE result)
 {
         return connection_finish_method(g_socket_client_connect_to_service_finish, self, result);
 }
@@ -194,14 +194,14 @@ Init_gsocketclient(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CLIENT, "SocketClient", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socketclient_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect", socketclient_connect, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_async", socketclient_connect_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_finish", socketclient_connect_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_host", socketclient_connect_to_host, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_host_async", socketclient_connect_to_host_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_host_finish", socketclient_connect_to_host_finish, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_service", socketclient_connect_to_service, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_service_async", socketclient_connect_to_service_async, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect_to_service_finish", socketclient_connect_to_service_finish, 1);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(connect, -1);
+        RG_DEF_METHOD(connect_async, -1);
+        RG_DEF_METHOD(connect_finish, 1);
+        RG_DEF_METHOD(connect_to_host, -1);
+        RG_DEF_METHOD(connect_to_host_async, -1);
+        RG_DEF_METHOD(connect_to_host_finish, 1);
+        RG_DEF_METHOD(connect_to_service, -1);
+        RG_DEF_METHOD(connect_to_service_async, -1);
+        RG_DEF_METHOD(connect_to_service_finish, 1);
 }

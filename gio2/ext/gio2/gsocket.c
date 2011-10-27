@@ -29,7 +29,7 @@
 #define GIOCONDITION2RVAL(value) GENUM2RVAL((value), G_TYPE_IO_CONDITION)
 
 static VALUE
-socket_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE family, type, protocol;
         GError *error = NULL;
@@ -49,7 +49,7 @@ socket_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_new_from_fd(G_GNUC_UNUSED VALUE self, VALUE id)
+rg_s_new_from_fd(G_GNUC_UNUSED VALUE self, VALUE id)
 {
         GError *error = NULL;
         GSocket *socket;
@@ -62,7 +62,7 @@ socket_new_from_fd(G_GNUC_UNUSED VALUE self, VALUE id)
 }
 
 static VALUE
-socket_bind(VALUE self, VALUE address, VALUE allow_reuse)
+rg_bind(VALUE self, VALUE address, VALUE allow_reuse)
 {
         GError *error = NULL;
 
@@ -76,7 +76,7 @@ socket_bind(VALUE self, VALUE address, VALUE allow_reuse)
 }
 
 static VALUE
-socket_listen(VALUE self)
+rg_listen(VALUE self)
 {
         GError *error = NULL;
 
@@ -87,7 +87,7 @@ socket_listen(VALUE self)
 }
 
 static VALUE
-socket_accept(int argc, VALUE *argv, VALUE self)
+rg_accept(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -104,7 +104,7 @@ socket_accept(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_connect(int argc, VALUE *argv, VALUE self)
+rg_connect(int argc, VALUE *argv, VALUE self)
 {
         VALUE address, cancellable;
         GError *error = NULL;
@@ -121,7 +121,7 @@ socket_connect(int argc, VALUE *argv, VALUE self)
 
 /* TODO: This makes very little sense in Ruby.  How do we deal with it? */
 static VALUE
-socket_check_connect_result(VALUE self)
+rg_check_connect_result(VALUE self)
 {
         GError *error = NULL;
 
@@ -132,7 +132,7 @@ socket_check_connect_result(VALUE self)
 }
 
 static VALUE
-socket_receive(int argc, VALUE *argv, VALUE self)
+rg_receive(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbytes, cancellable, result;
         GError *error = NULL;
@@ -160,7 +160,7 @@ socket_receive(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_receive_from(int argc, VALUE *argv, VALUE self)
+rg_receive_from(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbbytes, cancellable, result;
         GSocketAddress *address;
@@ -188,7 +188,7 @@ socket_receive_from(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_send(int argc, VALUE *argv, VALUE self)
+rg_send(int argc, VALUE *argv, VALUE self)
 {
         VALUE buffer, cancellable;
         GError *error = NULL;
@@ -208,7 +208,7 @@ socket_send(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_send_to(int argc, VALUE *argv, VALUE self)
+rg_send_to(int argc, VALUE *argv, VALUE self)
 {
         VALUE address, buffer, cancellable;
         GError *error = NULL;
@@ -229,7 +229,7 @@ socket_send_to(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_close(VALUE self)
+rg_close(VALUE self)
 {
         GError *error = NULL;
 
@@ -240,13 +240,13 @@ socket_close(VALUE self)
 }
 
 static VALUE
-socket_is_closed(VALUE self)
+rg_closed_p(VALUE self)
 {
         return CBOOL2RVAL(g_socket_is_closed(_SELF(self)));
 }
 
 static VALUE
-socket_shutdown(VALUE self, VALUE shutdown_read, VALUE shutdown_write)
+rg_shutdown(VALUE self, VALUE shutdown_read, VALUE shutdown_write)
 {
         GError *error = NULL;
 
@@ -260,13 +260,13 @@ socket_shutdown(VALUE self, VALUE shutdown_read, VALUE shutdown_write)
 }
 
 static VALUE
-socket_is_connected(VALUE self)
+rg_connected_p(VALUE self)
 {
         return (g_socket_is_connected(_SELF(self)));
 }
 
 static VALUE
-socket_create_source(int argc, VALUE *argv, VALUE self)
+rg_create_source(int argc, VALUE *argv, VALUE self)
 {
         VALUE condition, cancellable;
 
@@ -278,14 +278,14 @@ socket_create_source(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-socket_condition_check(VALUE self, VALUE condition)
+rg_condition_check(VALUE self, VALUE condition)
 {
         return GIOCONDITION2RVAL(g_socket_condition_check(_SELF(self),
                                                           RVAL2GIOCONDITION(condition)));
 }
 
 static VALUE
-socket_condition_wait(int argc, VALUE *argv, VALUE self)
+rg_condition_wait(int argc, VALUE *argv, VALUE self)
 {
         VALUE condition, cancellable;
         GError *error = NULL;
@@ -327,7 +327,7 @@ socket_get_remote_address(VALUE self)
 }
 
 static VALUE
-socket_speaks_ipv4(VALUE self)
+rg_speaks_ipv4_p(VALUE self)
 {
         return CBOOL2RVAL(g_socket_speaks_ipv4(_SELF(self)));
 }
@@ -349,26 +349,26 @@ Init_gsocket(VALUE glib)
         G_DEF_CLASS(G_TYPE_SOCKET_MSG_FLAGS, "MsgFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_MSG_FLAGS, "G_SOCKET_");
 
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "new_from_fd", socket_new_from_fd, 1);
+        RG_DEF_SMETHOD(new_from_fd, 1);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socket_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "bind", socket_bind, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "listen", socket_listen, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "accept", socket_accept, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "connect", socket_connect, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "check_connect_result", socket_check_connect_result, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "receive", socket_receive, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "receive_from", socket_receive_from, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "send", socket_send, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "send_to", socket_send_to, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "close", socket_close, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "closed?", socket_is_closed, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "shutdown", socket_shutdown, 2);
-        rb_define_method(RG_TARGET_NAMESPACE, "connected?", socket_is_connected, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "create_source", socket_create_source, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "condition_check", socket_condition_check, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "condition_wait", socket_condition_wait, -1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(bind, 2);
+        RG_DEF_METHOD(listen, 0);
+        RG_DEF_METHOD(accept, -1);
+        RG_DEF_METHOD(connect, -1);
+        RG_DEF_METHOD(check_connect_result, 0);
+        RG_DEF_METHOD(receive, -1);
+        RG_DEF_METHOD(receive_from, -1);
+        RG_DEF_METHOD(send, -1);
+        RG_DEF_METHOD(send_to, -1);
+        RG_DEF_METHOD(close, -1);
+        RG_DEF_METHOD_P(closed, 0);
+        RG_DEF_METHOD(shutdown, 2);
+        RG_DEF_METHOD_P(connected, 0);
+        RG_DEF_METHOD(create_source, -1);
+        RG_DEF_METHOD(condition_check, 1);
+        RG_DEF_METHOD(condition_wait, -1);
         G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "local_address", socket_get_local_address, 0);
         G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "remote_address", socket_get_remote_address, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "speaks_ipv4?", socket_speaks_ipv4, 0);
+        RG_DEF_METHOD_P(speaks_ipv4, 0);
 }

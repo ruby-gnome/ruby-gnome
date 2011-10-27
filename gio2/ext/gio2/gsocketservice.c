@@ -25,7 +25,7 @@
 #define _SELF(value) G_SOCKET_SERVICE(RVAL2GOBJ(value))
 
 static VALUE
-socketservice_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_socket_service_new());
 
@@ -33,7 +33,7 @@ socketservice_initialize(VALUE self)
 }
 
 static VALUE
-socketservice_start(VALUE self)
+rg_start(VALUE self)
 {
         g_socket_service_start(_SELF(self));
 
@@ -41,7 +41,7 @@ socketservice_start(VALUE self)
 }
 
 static VALUE
-socketservice_stop(VALUE self)
+rg_stop(VALUE self)
 {
         g_socket_service_stop(_SELF(self));
 
@@ -49,7 +49,7 @@ socketservice_stop(VALUE self)
 }
 
 static VALUE
-socketservice_is_active(VALUE self)
+rg_active_p(VALUE self)
 {
         return CBOOL2RVAL(g_socket_service_is_active(_SELF(self)));
 }
@@ -59,8 +59,8 @@ Init_gsocketservice(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_SERVICE, "SocketService", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", socketservice_initialize, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "start", socketservice_start, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "stop", socketservice_stop, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "active?", socketservice_is_active, 0);
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(start, 0);
+        RG_DEF_METHOD(stop, 0);
+        RG_DEF_METHOD_P(active, 0);
 }

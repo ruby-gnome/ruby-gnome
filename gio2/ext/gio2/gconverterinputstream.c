@@ -25,7 +25,7 @@
 #define _SELF(value) G_CONVERTER_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-converterinputstream_initialize(VALUE self, VALUE base_stream, VALUE converter)
+rg_initialize(VALUE self, VALUE base_stream, VALUE converter)
 {
         G_INITIALIZE(self,
                      g_converter_input_stream_new(RVAL2GINPUTSTREAM(base_stream),
@@ -39,5 +39,5 @@ Init_gconverterinputstream(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CONVERTER_INPUT_STREAM, "ConverterInputStream", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", converterinputstream_initialize, 2);
+        RG_DEF_METHOD(initialize, 2);
 }

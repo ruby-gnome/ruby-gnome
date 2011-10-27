@@ -25,7 +25,7 @@
 #define _SELF(value) G_SOCKET_CONNECTION(RVAL2GOBJ(value))
 
 static VALUE
-socketconnection_get_local_address(VALUE self)
+rg_local_address(VALUE self)
 {
         GError *error = NULL;
         GSocketAddress *address;
@@ -38,7 +38,7 @@ socketconnection_get_local_address(VALUE self)
 }
 
 static VALUE
-socketconnection_get_remote_address(VALUE self)
+rg_remote_address(VALUE self)
 {
         GError *error = NULL;
         GSocketAddress *address;
@@ -61,6 +61,6 @@ Init_gsocketconnection(VALUE glib)
 
         RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONNECTION, "SocketConnection", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "local_address", socketconnection_get_local_address, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "remote_address", socketconnection_get_remote_address, 0);
+        RG_DEF_METHOD(local_address, 0);
+        RG_DEF_METHOD(remote_address, 0);
 }

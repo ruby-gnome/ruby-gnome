@@ -27,7 +27,7 @@
 /* NOTE: g_async_result_get_user_data isn't of any use from Ruby. */
 
 static VALUE
-asyncresult_get_source_object(VALUE self)
+rg_source_object(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_async_result_get_source_object(_SELF(self)));
 }
@@ -37,5 +37,5 @@ Init_gasyncresult(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_RESULT, "AsyncResult", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "source_object", asyncresult_get_source_object, 0);
+        RG_DEF_METHOD(source_object, 0);
 }

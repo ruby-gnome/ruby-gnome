@@ -33,7 +33,7 @@
                                G_APP_INFO_CREATE_NONE)
 
 static VALUE
-appinfo_create_from_commandline(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_create_from_commandline(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
         VALUE commandline, application_name, flags;
         GError *error = NULL;
@@ -51,7 +51,7 @@ appinfo_create_from_commandline(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-appinfo_reset_type_associations(VALUE self, VALUE content_type)
+rg_s_reset_type_associations(VALUE self, VALUE content_type)
 {
         g_app_info_reset_type_associations(RVAL2CSTR(content_type));
 
@@ -59,25 +59,25 @@ appinfo_reset_type_associations(VALUE self, VALUE content_type)
 }
 
 static VALUE
-appinfo_get_all_for_type(G_GNUC_UNUSED VALUE self, VALUE content_type)
+rg_s_get_all_for_type(G_GNUC_UNUSED VALUE self, VALUE content_type)
 {
         return GLIST2ARY_FREE(g_app_info_get_all_for_type(RVAL2CSTR(content_type)));
 }
 
 static VALUE
-appinfo_get_all(int argc, VALUE *argv, VALUE self)
+rg_s_all(int argc, VALUE *argv, VALUE self)
 {
         VALUE content_type;
 
         rb_scan_args(argc, argv, "01", &content_type);
         if (!NIL_P(content_type))
-                return appinfo_get_all_for_type(self, content_type);
+                return rg_s_get_all_for_type(self, content_type);
 
         return GLIST2ARY_FREE(g_app_info_get_all());
 }
 
 static VALUE
-appinfo_get_default_for_type(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_get_default_for_type(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
         VALUE content_type, must_support_uris;
 
@@ -88,13 +88,13 @@ appinfo_get_default_for_type(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-appinfo_get_default_for_uri_scheme(G_GNUC_UNUSED VALUE self, VALUE uri_scheme)
+rg_s_get_default_for_uri_scheme(G_GNUC_UNUSED VALUE self, VALUE uri_scheme)
 {
         return GOBJ2RVAL_UNREF(g_app_info_get_default_for_uri_scheme(RVAL2CSTR(uri_scheme)));
 }
 
 static VALUE
-appinfo_launch_default_for_uri(int argc, VALUE *argv, VALUE self)
+rg_s_launch_default_for_uri(int argc, VALUE *argv, VALUE self)
 {
         VALUE uri, launch_context;
         GError *error;
@@ -109,55 +109,55 @@ appinfo_launch_default_for_uri(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-appinfo_dup(VALUE self)
+rg_dup(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_app_info_dup(_SELF(self)));
 }
 
 static VALUE
-appinfo_equal(VALUE self, VALUE other)
+rg_equal_p(VALUE self, VALUE other)
 {
         return CBOOL2RVAL(g_app_info_equal(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-appinfo_get_id(VALUE self)
+rg_id(VALUE self)
 {
         return CSTR2RVAL(g_app_info_get_id(_SELF(self)));
 }
 
 static VALUE
-appinfo_get_name(VALUE self)
+rg_name(VALUE self)
 {
         return CSTR2RVAL(g_app_info_get_name(_SELF(self)));
 }
 
 static VALUE
-appinfo_get_display_name(VALUE self)
+rg_display_name(VALUE self)
 {
         return CSTR2RVAL(g_app_info_get_display_name(_SELF(self)));
 }
 
 static VALUE
-appinfo_get_description(VALUE self)
+rg_description(VALUE self)
 {
         return CSTR2RVAL(g_app_info_get_description(_SELF(self)));
 }
 
 static VALUE
-appinfo_get_executable(VALUE self)
+rg_executable(VALUE self)
 {
         return CSTR2RVAL(g_app_info_get_executable(_SELF(self)));
 }
 
 static VALUE
-appinfo_get_commandline(VALUE self)
+rg_commandline(VALUE self)
 {
         return CSTR2RVAL(g_app_info_get_commandline(_SELF(self)));
 }
 
 static VALUE
-appinfo_get_icon(VALUE self)
+rg_icon(VALUE self)
 {
         return GOBJ2RVAL(g_app_info_get_icon(_SELF(self)));
 }
@@ -189,49 +189,49 @@ launch_method(LaunchMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-appinfo_launch(int argc, VALUE *argv, VALUE self)
+rg_launch(int argc, VALUE *argv, VALUE self)
 {
         return launch_method(g_app_info_launch, argc, argv, self);
 }
 
 static VALUE
-appinfo_supports_files(VALUE self)
+rg_supports_files_p(VALUE self)
 {
         return CBOOL2RVAL(g_app_info_supports_files(_SELF(self)));
 }
 
 static VALUE
-appinfo_supports_uris(VALUE self)
+rg_supports_uris_p(VALUE self)
 {
         return CBOOL2RVAL(g_app_info_supports_uris(_SELF(self)));
 }
 
 static VALUE
-appinfo_launch_uris(int argc, VALUE *argv, VALUE self)
+rg_launch_uris(int argc, VALUE *argv, VALUE self)
 {
         return launch_method(g_app_info_launch_uris, argc, argv, self);
 }
 
 static VALUE
-appinfo_should_show(VALUE self)
+rg_should_show_p(VALUE self)
 {
         return CBOOL2RVAL(g_app_info_should_show(_SELF(self)));
 }
 
 static VALUE
-appinfo_can_delete(VALUE self)
+rg_can_delete_p(VALUE self)
 {
         return CBOOL2RVAL(g_app_info_can_delete(_SELF(self)));
 }
 
 static VALUE
-appinfo_delete(VALUE self)
+rg_delete(VALUE self)
 {
         return CBOOL2RVAL(g_app_info_delete(_SELF(self)));
 }
 
 static VALUE
-appinfo_set_as_default_for_type(VALUE self, VALUE value)
+rg_set_as_default_for_type(VALUE self, VALUE value)
 {
         GError *error = NULL;
 
@@ -242,7 +242,7 @@ appinfo_set_as_default_for_type(VALUE self, VALUE value)
 }
 
 static VALUE
-appinfo_set_as_default_for_extension(VALUE self, VALUE value)
+rg_set_as_default_for_extension(VALUE self, VALUE value)
 {
         GError *error = NULL;
 
@@ -253,7 +253,7 @@ appinfo_set_as_default_for_extension(VALUE self, VALUE value)
 }
 
 static VALUE
-appinfo_add_supports_type(VALUE self, VALUE value)
+rg_add_supports_type(VALUE self, VALUE value)
 {
         GError *error = NULL;
 
@@ -264,7 +264,7 @@ appinfo_add_supports_type(VALUE self, VALUE value)
 }
 
 static VALUE
-appinfo_remove_supports_type(VALUE self, VALUE value)
+rg_remove_supports_type(VALUE self, VALUE value)
 {
         GError *error = NULL;
 
@@ -275,7 +275,7 @@ appinfo_remove_supports_type(VALUE self, VALUE value)
 }
 
 static VALUE
-appinfo_can_remove_supports_type(VALUE self)
+rg_can_remove_supports_type_p(VALUE self)
 {
         return CBOOL2RVAL(g_app_info_can_remove_supports_type(_SELF(self)));
 }
@@ -288,33 +288,33 @@ Init_gappinfo(VALUE glib)
         G_DEF_CLASS(G_TYPE_APP_INFO_CREATE_FLAGS, "CreateFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_APP_INFO_CREATE_FLAGS, "G_APP_INFO_");
 
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "create_from_commandline", appinfo_create_from_commandline, -1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "reset_type_associations", appinfo_reset_type_associations, -1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "all", appinfo_get_all, 0);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_all_for_type", appinfo_get_all_for_type, 1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_default_for_type", appinfo_get_default_for_type, -1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_default_for_uri_scheme", appinfo_get_default_for_uri_scheme, 1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "launch_default_for_uri", appinfo_launch_default_for_uri, 0);
+        RG_DEF_SMETHOD(create_from_commandline, -1);
+        RG_DEF_SMETHOD(reset_type_associations, -1);
+        RG_DEF_SMETHOD(all, 0);
+        RG_DEF_SMETHOD(get_all_for_type, 1);
+        RG_DEF_SMETHOD(get_default_for_type, -1);
+        RG_DEF_SMETHOD(get_default_for_uri_scheme, 1);
+        RG_DEF_SMETHOD(launch_default_for_uri, 0);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "dup", appinfo_dup, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "equal?", appinfo_equal, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "id", appinfo_get_id, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "name", appinfo_get_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "display_name", appinfo_get_display_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "description", appinfo_get_description, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "executable", appinfo_get_executable, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "commandline", appinfo_get_commandline, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "icon", appinfo_get_icon, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "launch", appinfo_launch, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "supports_files?", appinfo_supports_files, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "supports_uris?", appinfo_supports_uris, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "launch_uris", appinfo_launch_uris, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "should_show?", appinfo_should_show, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_delete?", appinfo_can_delete, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "delete", appinfo_delete, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_as_default_for_type", appinfo_set_as_default_for_type, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "set_as_default_for_extension", appinfo_set_as_default_for_extension, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "add_supports_type", appinfo_add_supports_type, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "can_remove_supports_type?", appinfo_can_remove_supports_type, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "remove_supports_type", appinfo_remove_supports_type, 1);
+        RG_DEF_METHOD(dup, 0);
+        RG_DEF_METHOD_P(equal, 1);
+        RG_DEF_METHOD(id, 0);
+        RG_DEF_METHOD(name, 0);
+        RG_DEF_METHOD(display_name, 0);
+        RG_DEF_METHOD(description, 0);
+        RG_DEF_METHOD(executable, 0);
+        RG_DEF_METHOD(commandline, 0);
+        RG_DEF_METHOD(icon, 0);
+        RG_DEF_METHOD(launch, -1);
+        RG_DEF_METHOD_P(supports_files, 0);
+        RG_DEF_METHOD_P(supports_uris, 0);
+        RG_DEF_METHOD(launch_uris, -1);
+        RG_DEF_METHOD_P(should_show, 0);
+        RG_DEF_METHOD_P(can_delete, 0);
+        RG_DEF_METHOD(delete, 0);
+        RG_DEF_METHOD(set_as_default_for_type, 1);
+        RG_DEF_METHOD(set_as_default_for_extension, 1);
+        RG_DEF_METHOD(add_supports_type, 1);
+        RG_DEF_METHOD_P(can_remove_supports_type, 1);
+        RG_DEF_METHOD(remove_supports_type, 1);
 }

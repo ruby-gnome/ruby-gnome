@@ -53,67 +53,67 @@ g_unix_mount_entry_get_type(void)
 #define GUNIXMOUNTENTRY2RVAL(value) BOXED2RVAL((value), G_TYPE_UNIX_MOUNT_ENTRY)
 
 static VALUE
-unixmount_compare(VALUE self, VALUE other)
+rg_compare(VALUE self, VALUE other)
 {
         return INT2FIX(g_unix_mount_compare(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-unixmount_get_mount_path(VALUE self)
+rg_mount_path(VALUE self)
 {
         return CSTR2RVAL(g_unix_mount_get_mount_path(_SELF(self)));
 }
 
 static VALUE
-unixmount_get_device_path(VALUE self)
+rg_device_path(VALUE self)
 {
         return CSTR2RVAL(g_unix_mount_get_device_path(_SELF(self)));
 }
 
 static VALUE
-unixmount_get_fs_type(VALUE self)
+rg_fs_type(VALUE self)
 {
         return CSTR2RVAL(g_unix_mount_get_fs_type(_SELF(self)));
 }
 
 static VALUE
-unixmount_is_readonly(VALUE self)
+rg_readonly_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_is_readonly(_SELF(self)));
 }
 
 static VALUE
-unixmount_is_system_internal(VALUE self)
+rg_system_internal_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_is_system_internal(_SELF(self)));
 }
 
 static VALUE
-unixmount_guess_icon(VALUE self)
+rg_guess_icon(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_unix_mount_guess_icon(_SELF(self)));
 }
 
 static VALUE
-unixmount_guess_name(VALUE self)
+rg_guess_name(VALUE self)
 {
         return CSTR2RVAL_FREE(g_unix_mount_guess_name(_SELF(self)));
 }
 
 static VALUE
-unixmount_guess_can_eject(VALUE self)
+rg_guess_can_eject_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_guess_can_eject(_SELF(self)));
 }
 
 static VALUE
-unixmount_guess_should_display(VALUE self)
+rg_guess_should_display_p(VALUE self)
 {
         return CBOOL2RVAL(g_unix_mount_guess_should_display(_SELF(self)));
 }
 
 static VALUE
-unixmount_at(G_GNUC_UNUSED VALUE self, VALUE mount_path)
+rg_s_at(G_GNUC_UNUSED VALUE self, VALUE mount_path)
 {
         guint64 time_read;
         GUnixMountEntry *mount;
@@ -125,7 +125,7 @@ unixmount_at(G_GNUC_UNUSED VALUE self, VALUE mount_path)
 }
 
 static VALUE
-unix_is_mount_path_system_internal(G_GNUC_UNUSED VALUE self, VALUE mount_path)
+rg_s_mount_path_system_internal_p(G_GNUC_UNUSED VALUE self, VALUE mount_path)
 {
         return CBOOL2RVAL(g_unix_is_mount_path_system_internal(RVAL2CSTR(mount_path)));
 }
@@ -144,21 +144,21 @@ Init_gunixmount(G_GNUC_UNUSED VALUE glib)
 
         /* TODO: This doesn't follow the naming conventions, but it seems
          * overkill to have GLib::Unix just for mount_path_system_internal?. */
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "mount_path_system_internal?", unix_is_mount_path_system_internal, 1);
-        rb_define_singleton_method(RG_TARGET_NAMESPACE, "at", unixmount_at, 1);
+        RG_DEF_SMETHOD_P(mount_path_system_internal, 1);
+        RG_DEF_SMETHOD(at, 1);
 
         rbgobj_boxed_not_copy_obj(G_TYPE_UNIX_MOUNT_ENTRY);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "compare", unixmount_compare, 1);
-        rb_define_alias(RG_TARGET_NAMESPACE, "<=>", "compare");
-        rb_define_method(RG_TARGET_NAMESPACE, "mount_path", unixmount_get_mount_path, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "device_path", unixmount_get_device_path, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "fs_type", unixmount_get_fs_type, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "readonly?", unixmount_is_readonly, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "system_internal?", unixmount_is_system_internal, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_icon", unixmount_guess_icon, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_name", unixmount_guess_name, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_can_eject?", unixmount_guess_can_eject, 0);
-        rb_define_method(RG_TARGET_NAMESPACE, "guess_should_display?", unixmount_guess_should_display, 0);
+        RG_DEF_METHOD(compare, 1);
+        RG_DEF_ALIAS("<=>", "compare");
+        RG_DEF_METHOD(mount_path, 0);
+        RG_DEF_METHOD(device_path, 0);
+        RG_DEF_METHOD(fs_type, 0);
+        RG_DEF_METHOD_P(readonly, 0);
+        RG_DEF_METHOD_P(system_internal, 0);
+        RG_DEF_METHOD(guess_icon, 0);
+        RG_DEF_METHOD(guess_name, 0);
+        RG_DEF_METHOD_P(guess_can_eject, 0);
+        RG_DEF_METHOD_P(guess_should_display, 0);
 #endif
 }

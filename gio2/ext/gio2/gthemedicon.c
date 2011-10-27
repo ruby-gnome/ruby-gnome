@@ -26,7 +26,7 @@
 
 /* TODO: Is this unnecessarily complicated? */
 static VALUE
-themedicon_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE iconnames, with_default_fallbacks;
         GIcon *icon;
@@ -57,7 +57,7 @@ themedicon_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-themedicon_prepend_name(VALUE self, VALUE iconname)
+rg_prepend_name(VALUE self, VALUE iconname)
 {
         g_themed_icon_prepend_name(_SELF(self), RVAL2CSTR(iconname));
 
@@ -65,7 +65,7 @@ themedicon_prepend_name(VALUE self, VALUE iconname)
 }
 
 static VALUE
-themedicon_append_name(VALUE self, VALUE iconname)
+rg_append_name(VALUE self, VALUE iconname)
 {
         g_themed_icon_append_name(_SELF(self), RVAL2CSTR(iconname));
 
@@ -77,7 +77,7 @@ Init_gthemedicon(VALUE glib)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
 
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", themedicon_initialize, -1);
-        rb_define_method(RG_TARGET_NAMESPACE, "prepend_name", themedicon_prepend_name, 1);
-        rb_define_method(RG_TARGET_NAMESPACE, "append_name", themedicon_append_name, 1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(prepend_name, 1);
+        RG_DEF_METHOD(append_name, 1);
 }
