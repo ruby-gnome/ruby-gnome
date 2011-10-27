@@ -25,6 +25,7 @@
 #include "rbgobject.h"
 
 extern void Init_gdk_pixbuf_animation(VALUE mGLib);
+extern void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
 extern void Init_gdk_pixdata(VALUE mGLib);
 extern void Init_gdk_pixbuf_loader(VALUE mGLib);
 extern void Init_gdk_pixbuf_format(VALUE mGLib);
