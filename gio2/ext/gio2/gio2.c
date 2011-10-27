@@ -91,7 +91,9 @@ Init_gio2(void)
         Init_ginputstream(RG_TARGET_NAMESPACE);
         Init_gioerror(RG_TARGET_NAMESPACE);
         Init_giomodule(RG_TARGET_NAMESPACE);
+        Init_giomodules(RG_TARGET_NAMESPACE);
         Init_gioscheduler(RG_TARGET_NAMESPACE);
+        Init_gioschedulerjob(RG_TARGET_NAMESPACE);
         Init_giostream(RG_TARGET_NAMESPACE);
         Init_gloadableicon(RG_TARGET_NAMESPACE);
         Init_gmemoryinputstream(RG_TARGET_NAMESPACE);
@@ -108,7 +110,9 @@ Init_gio2(void)
         Init_gsocketaddress(RG_TARGET_NAMESPACE);
         Init_gsocketclient(RG_TARGET_NAMESPACE);
         Init_gsocketconnectable(RG_TARGET_NAMESPACE);
+        Init_gsocketaddressenumerator(RG_TARGET_NAMESPACE);
         Init_gsocketconnection(RG_TARGET_NAMESPACE);
+        Init_gsocketconnectionfactory(RG_TARGET_NAMESPACE);
         Init_gsocketcontrolmessage(RG_TARGET_NAMESPACE);
         Init_gsocketlistener(RG_TARGET_NAMESPACE);
         Init_gsocketservice(RG_TARGET_NAMESPACE);
@@ -120,7 +124,11 @@ Init_gio2(void)
         Init_gunixfdlist(RG_TARGET_NAMESPACE);
         Init_gunixfdmessage(RG_TARGET_NAMESPACE);
         Init_gunixinputstream(RG_TARGET_NAMESPACE);
+        Init_gunixmount(RG_TARGET_NAMESPACE);
         Init_gunixmounts(RG_TARGET_NAMESPACE);
+        Init_gunixmountpoint(RG_TARGET_NAMESPACE);
+        Init_gunixmountpoints(RG_TARGET_NAMESPACE);
+        Init_gunixmountmonitor(RG_TARGET_NAMESPACE);
         Init_gunixoutputstream(RG_TARGET_NAMESPACE);
         Init_gunixsocketaddress(RG_TARGET_NAMESPACE);
         Init_gvfs(RG_TARGET_NAMESPACE);

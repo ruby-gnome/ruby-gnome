@@ -21,25 +21,19 @@
 
 #include "gio2.h"
 
-#define RG_TARGET_NAMESPACE cIOModule
-#define _SELF(value) G_IO_MODULE(RVAL2GOBJ(value))
+#define RG_TARGET_NAMESPACE mSocketConnectionFactory
 
 static VALUE
-iomodule_initialize(VALUE self, VALUE filename)
+socketconnectionfactory_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
 {
-        G_INITIALIZE(self, g_io_module_new(RVAL2CSTR(filename)));
-
-        return Qnil;
+        return GOBJ2RVAL_UNREF(g_socket_connection_factory_create_connection(RVAL2GSOCKET(socket)));
 }
 
-/* NOTE: No point in implementing g_io_module_query. */
-
 void
-Init_giomodule(VALUE glib)
+Init_gsocketconnectionfactory(VALUE glib)
 {
-        VALUE RG_TARGET_NAMESPACE;
+        /* TODO: Perhaps just move this to SocketConnection? */
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "SocketConnectionFactory");
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
-
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", iomodule_initialize, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "create_connection", socketconnectionfactory_create_connection, 1);
 }

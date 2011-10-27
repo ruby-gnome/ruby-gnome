@@ -21,25 +21,38 @@
 
 #include "gio2.h"
 
-#define RG_TARGET_NAMESPACE cIOModule
-#define _SELF(value) G_IO_MODULE(RVAL2GOBJ(value))
+#ifdef HAVE_GIO_UNIX
+#include <gio/gunixmounts.h>
+
+#define RG_TARGET_NAMESPACE mUnixMountPoints
 
 static VALUE
-iomodule_initialize(VALUE self, VALUE filename)
+unixmountpoints_get(G_GNUC_UNUSED VALUE self)
 {
-        G_INITIALIZE(self, g_io_module_new(RVAL2CSTR(filename)));
+        guint64 time_read;
+        GList *mount_points;
 
-        return Qnil;
+        mount_points = g_unix_mount_points_get(&time_read);
+
+        return rb_assoc_new(GLIST2ARY_STR_FREE(mount_points),
+                            GUINT642RVAL(time_read));
 }
 
-/* NOTE: No point in implementing g_io_module_query. */
+static VALUE
+unixmountpoints_changed_since(G_GNUC_UNUSED VALUE self, VALUE time_read)
+{
+        return CBOOL2RVAL(g_unix_mount_points_changed_since(RVAL2GUINT64(time_read)));
+}
+
+#endif
 
 void
-Init_giomodule(VALUE glib)
+Init_gunixmountpoints(G_GNUC_UNUSED VALUE glib)
 {
-        VALUE RG_TARGET_NAMESPACE;
+#ifdef HAVE_GIO_UNIX
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "UnixMountPoints");
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
-
-        rb_define_method(RG_TARGET_NAMESPACE, "initialize", iomodule_initialize, 1);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "get", unixmountpoints_get, 0);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "changed_since?", unixmountpoints_changed_since, 1);
+#endif
 }
