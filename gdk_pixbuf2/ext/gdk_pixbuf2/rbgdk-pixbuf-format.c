@@ -26,8 +26,8 @@
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
 #endif
 
+#define RG_TARGET_NAMESPACE cPixbufFormat
 #define _SELF(r) ((GdkPixbufFormat*)RVAL2BOXED(r, GDK_TYPE_PIXBUF_FORMAT))
-
 
 /**********************************/
 static GdkPixbufFormat*
@@ -61,19 +61,19 @@ GSList*     gdk_pixbuf_get_formats          (void);
 */
 
 static VALUE
-get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_pixbuf_format_get_name(_SELF(self)));
 }
 
 static VALUE
-get_description(VALUE self)
+rg_description(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_pixbuf_format_get_description(_SELF(self)));
 }
-    
+
 static VALUE
-get_mime_types(VALUE self)
+rg_mime_types(VALUE self)
 {
     gint i = 0;
     gchar** mime_types = gdk_pixbuf_format_get_mime_types(_SELF(self));
@@ -87,7 +87,7 @@ get_mime_types(VALUE self)
 }
 
 static VALUE
-get_extensions(VALUE self)
+rg_extensions(VALUE self)
 {
     gint i = 0;
     gchar** extensions = gdk_pixbuf_format_get_extensions(_SELF(self));
@@ -102,20 +102,20 @@ get_extensions(VALUE self)
 }
 
 static VALUE
-is_writable(VALUE self)
+rg_writable_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_format_is_writable(_SELF(self)));
 }
 
 /* Structure */
 static VALUE
-get_domain(VALUE self)
+rg_domain(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->domain);
 }
 
 static VALUE
-get_signature(VALUE self)
+rg_signature(VALUE self)
 {
     GdkPixbufModulePattern* signature = _SELF(self)->signature;
 
@@ -133,23 +133,23 @@ get_signature(VALUE self)
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
 static VALUE
-is_scalable(VALUE self)
+rg_scalable_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_format_is_scalable(_SELF(self)));
 }
 static VALUE
-is_disabled(VALUE self)
+rg_disabled_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_pixbuf_format_is_disabled(_SELF(self)));
 }
 static VALUE
-set_disabled(VALUE self, VALUE disabled)
+rg_set_disabled(VALUE self, VALUE disabled)
 {
     gdk_pixbuf_format_set_disabled(_SELF(self), RVAL2CBOOL(disabled));
     return self;
 }
 static VALUE
-get_license(VALUE self)
+rg_license(VALUE self)
 {
     return CSTR2RVAL(gdk_pixbuf_format_get_license(_SELF(self)));
 }
@@ -159,23 +159,22 @@ void
 Init_gdk_pixbuf_format(VALUE mGdk)
 {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
-    VALUE format = G_DEF_CLASS(GDK_TYPE_PIXBUF_FORMAT, "PixbufFormat", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_FORMAT, "PixbufFormat", mGdk);
 
-    rb_define_method(format, "name", get_name, 0);
-    rb_define_method(format, "description", get_description, 0);
-    rb_define_method(format, "mime_types", get_mime_types, 0);
-    rb_define_method(format, "extensions", get_extensions, 0);
-    rb_define_method(format, "writable?", is_writable, 0);
-    rb_define_method(format, "domain", get_domain, 0);
-    rb_define_method(format, "signature", get_signature, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD(mime_types, 0);
+    RG_DEF_METHOD(extensions, 0);
+    RG_DEF_METHOD_P(writable, 0);
+    RG_DEF_METHOD(domain, 0);
+    RG_DEF_METHOD(signature, 0);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
-    rb_define_method(format, "scalable?", is_scalable, 0);
-    rb_define_method(format, "disabled?", is_disabled, 0);
-    rb_define_method(format, "set_disabled", set_disabled, 1);
-    rb_define_method(format, "license", get_license, 0);
+    RG_DEF_METHOD_P(scalable, 0);
+    RG_DEF_METHOD_P(disabled, 0);
+    RG_DEF_METHOD(set_disabled, 1);
+    RG_DEF_METHOD(license, 0);
 
 #endif
-    G_DEF_SETTERS(format);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
-

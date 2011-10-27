@@ -22,10 +22,11 @@
 #include "rbgdk-pixbuf.h"
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+#define RG_TARGET_NAMESPACE cPixbufSimpleAnim
 #define _SELF(s) (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(s)))
 
 static VALUE
-simpleanim_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
+rg_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
 {
     GdkPixbufSimpleAnim* ret = gdk_pixbuf_simple_anim_new(NUM2INT(width), NUM2INT(height), NUM2DBL(rate));
     G_INITIALIZE(self, ret);
@@ -33,7 +34,7 @@ simpleanim_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
 }
 
 static VALUE
-simpleanim_add_frame(VALUE self, VALUE pixbuf)
+rg_add_frame(VALUE self, VALUE pixbuf)
 {
     gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GOBJ(pixbuf));
     return self;
@@ -44,9 +45,9 @@ void
 Init_gdk_pixbuf_simpleanim(VALUE mGdk)
 {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
-    VALUE anim = G_DEF_CLASS(GDK_TYPE_PIXBUF_SIMPLE_ANIM, "PixbufSimpleAnim", mGdk);    
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_SIMPLE_ANIM, "PixbufSimpleAnim", mGdk);    
 
-    rb_define_method(anim, "initialize", simpleanim_initialize, 3);
-    rb_define_method(anim, "add_frame", simpleanim_add_frame, 1);
+    RG_DEF_METHOD(initialize, 3);
+    RG_DEF_METHOD(add_frame, 1);
 #endif
 }
