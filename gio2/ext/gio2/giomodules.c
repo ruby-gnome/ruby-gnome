@@ -21,30 +21,27 @@
 
 #include "gio2.h"
 
-#define RG_TARGET_NAMESPACE cBufferedOutputStream
-#define _SELF(value) G_BUFFERED_OUTPUT_STREAM(RVAL2GOBJ(value))
+#define RG_TARGET_NAMESPACE mIOModules
 
 static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+rg_m_load_all_in_directory(G_GNUC_UNUSED VALUE self, VALUE dirname)
 {
-        VALUE rbbase_stream, size;
-        GOutputStream *base_stream, *stream;
+        return GLIST2ARY_FREE(g_io_modules_load_all_in_directory(RVAL2CSTR(dirname)));
+}
 
-        rb_scan_args(argc, argv, "11", &rbbase_stream, &size);
-        base_stream = RVAL2GOUTPUTSTREAM(rbbase_stream);
+static VALUE
+rg_m_scan_all_in_directory(VALUE self, VALUE dirname)
+{
+        g_io_modules_scan_all_in_directory(RVAL2CSTR(dirname));
 
-        stream = NIL_P(size) ?
-                g_buffered_output_stream_new(base_stream) :
-                g_buffered_output_stream_new_sized(base_stream, RVAL2GSIZE(size));
-        G_INITIALIZE(self, stream);
-
-        return Qnil;
+        return self;
 }
 
 void
-Init_gbufferedoutputstream(VALUE glib)
+Init_giomodules(VALUE glib)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IOModules");
 
-        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_MODFUNC(load_all_in_directory, 1);
+        RG_DEF_MODFUNC(scan_all_in_directory, 1);
 }

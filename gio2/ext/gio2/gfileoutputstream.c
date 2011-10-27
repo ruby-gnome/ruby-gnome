@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileOutputStream
 #define _SELF(value) G_FILE_OUTPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-fileoutputstream_query_info(int argc, VALUE *argv, VALUE self)
+rg_query_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, cancellable;
         GError *error = NULL;
@@ -42,7 +43,7 @@ fileoutputstream_query_info(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileoutputstream_query_info_async(int argc, VALUE *argv, VALUE self)
+rg_query_info_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbio_priority, rbcancellable, block;
         const char *attributes;
@@ -65,7 +66,7 @@ fileoutputstream_query_info_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileoutputstream_query_info_finish(VALUE self, VALUE result)
+rg_query_info_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInfo *info;
@@ -80,7 +81,7 @@ fileoutputstream_query_info_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-fileoutputstream_get_etag(VALUE self)
+rg_etag(VALUE self)
 {
         return CSTR2RVAL(g_file_output_stream_get_etag(_SELF(self)));
 }
@@ -88,10 +89,10 @@ fileoutputstream_get_etag(VALUE self)
 void
 Init_gfileoutputstream(VALUE glib)
 {
-        VALUE fileoutputstream = G_DEF_CLASS(G_TYPE_FILE_OUTPUT_STREAM, "FileOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_OUTPUT_STREAM, "FileOutputStream", glib);
 
-        rb_define_method(fileoutputstream, "query_info", fileoutputstream_query_info, -1);
-        rb_define_method(fileoutputstream, "query_info_async", fileoutputstream_query_info_async, -1);
-        rb_define_method(fileoutputstream, "query_info_finish", fileoutputstream_query_info_finish, 1);
-        rb_define_method(fileoutputstream, "etag", fileoutputstream_get_etag, 0);
+        RG_DEF_METHOD(query_info, -1);
+        RG_DEF_METHOD(query_info_async, -1);
+        RG_DEF_METHOD(query_info_finish, 1);
+        RG_DEF_METHOD(etag, 0);
 }

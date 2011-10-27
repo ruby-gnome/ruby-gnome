@@ -21,9 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cMemoryOutputStream
+
 /* TODO: Take string argument? */
 static VALUE
-memoryoutputstream_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
         G_INITIALIZE(self, g_memory_output_stream_new(NULL,
                                                       0,
@@ -36,7 +38,7 @@ memoryoutputstream_initialize(VALUE self)
 void
 Init_gmemoryoutputstream(VALUE glib)
 {
-        VALUE memoryoutputstream = G_DEF_CLASS(G_TYPE_MEMORY_OUTPUT_STREAM, "MemoryOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MEMORY_OUTPUT_STREAM, "MemoryOutputStream", glib);
 
-        rb_define_method(memoryoutputstream, "initialize", memoryoutputstream_initialize, 0);
+        RG_DEF_METHOD(initialize, 0);
 }

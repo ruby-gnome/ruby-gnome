@@ -24,10 +24,11 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixfdmessage.h>
 
+#define RG_TARGET_NAMESPACE cUnixFDMessage
 #define _SELF(value) G_UNIX_FD_MESSAGE(RVAL2GOBJ(value))
 
 static VALUE
-unixfdmessage_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE fd_list;
         GSocketControlMessage *message;
@@ -42,7 +43,7 @@ unixfdmessage_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-unixfdmessage_append_fd(VALUE self, VALUE fd)
+rg_append_fd(VALUE self, VALUE fd)
 {
         GError *error = NULL;
 
@@ -53,7 +54,7 @@ unixfdmessage_append_fd(VALUE self, VALUE fd)
 }
 
 static VALUE
-unixfdmessage_steal_fds(VALUE self)
+rg_steal_fds(VALUE self)
 {
         return GFDS2ARY_FREE(g_unix_fd_message_steal_fds(_SELF(self), NULL));
 }
@@ -63,11 +64,11 @@ void
 Init_gunixfdmessage(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixfdmessage = G_DEF_CLASS(G_TYPE_UNIX_FD_MESSAGE, "UnixFDMessage", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_MESSAGE, "UnixFDMessage", glib);
 
-        rb_define_method(unixfdmessage, "initialize", unixfdmessage_initialize, -1);
-        rb_define_method(unixfdmessage, "append_fd", unixfdmessage_append_fd, 1);
-        rb_define_alias(unixfdmessage, "<<", "append_fd");
-        rb_define_method(unixfdmessage, "steal_fds", unixfdmessage_steal_fds, 0);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(append_fd, 1);
+        RG_DEF_ALIAS("<<", "append_fd");
+        RG_DEF_METHOD(steal_fds, 0);
 #endif
 }

@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cMemoryInputStream
 #define _SELF(value) G_MEMORY_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-memoryinputstream_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE data;
 
@@ -44,7 +45,7 @@ memoryinputstream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-memoryinputstream_add_data(VALUE self, VALUE data)
+rg_add_data(VALUE self, VALUE data)
 {
         StringValue(data);
         G_RELATIVE(self, data);
@@ -59,8 +60,8 @@ memoryinputstream_add_data(VALUE self, VALUE data)
 void
 Init_gmemoryinputstream(VALUE glib)
 {
-        VALUE memoryinputstream = G_DEF_CLASS(G_TYPE_MEMORY_INPUT_STREAM, "MemoryInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MEMORY_INPUT_STREAM, "MemoryInputStream", glib);
 
-        rb_define_method(memoryinputstream, "initialize", memoryinputstream_initialize, -1);
-        rb_define_method(memoryinputstream, "add_data", memoryinputstream_add_data, 1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(add_data, 1);
 }

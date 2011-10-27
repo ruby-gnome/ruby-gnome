@@ -21,6 +21,8 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mGLib
+
 void Init_gio2(void);
 
 static VALUE
@@ -36,96 +38,102 @@ gio_has_unix(G_GNUC_UNUSED VALUE self)
 void
 Init_gio2(void)
 {
-        VALUE glib = mGLib;
+        G_DEF_CLASS(G_TYPE_FILESYSTEM_PREVIEW_TYPE, "FilesystemPreviewType", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILESYSTEM_PREVIEW_TYPE, "G_");
 
-        G_DEF_CLASS(G_TYPE_FILESYSTEM_PREVIEW_TYPE, "FilesystemPreviewType", glib);
-        G_DEF_CONSTANTS(glib, G_TYPE_FILESYSTEM_PREVIEW_TYPE, "G_");
+        G_DEF_CLASS(G_TYPE_DATA_STREAM_BYTE_ORDER, "DataStreamByteOrder", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DATA_STREAM_BYTE_ORDER, "G_");
 
-        G_DEF_CLASS(G_TYPE_DATA_STREAM_BYTE_ORDER, "DataStreamByteOrder", glib);
-        G_DEF_CONSTANTS(glib, G_TYPE_DATA_STREAM_BYTE_ORDER, "G_");
+        G_DEF_CLASS(G_TYPE_DATA_STREAM_NEWLINE_TYPE, "DataStreamNewlineType", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DATA_STREAM_NEWLINE_TYPE, "G_");
 
-        G_DEF_CLASS(G_TYPE_DATA_STREAM_NEWLINE_TYPE, "DataStreamNewlineType", glib);
-        G_DEF_CONSTANTS(glib, G_TYPE_DATA_STREAM_NEWLINE_TYPE, "G_");
-
-        rb_define_module_function(glib, "gio_has_unix?", gio_has_unix, 0);
+        rb_define_module_function(RG_TARGET_NAMESPACE, "gio_has_unix?", gio_has_unix, 0);
 
         Init_util();
 
-        Init_gappinfo(glib);
-        Init_gapplaunchcontext(glib);
-        Init_gasyncinitable(glib);
-        Init_gasyncresult(glib);
-        Init_gbufferedinputstream(glib);
-        Init_gbufferedoutputstream(glib);
-        Init_gcancellable(glib);
-        Init_gcharsetconverter(glib);
-        Init_gcontenttype(glib);
-        Init_gconverter(glib);
-        Init_gconverterinputstream(glib);
-        Init_gconverteroutputstream(glib);
-        Init_gdatainputstream(glib);
-        Init_gdesktopappinfo(glib);
-        Init_gdataoutputstream(glib);
-        Init_gdrive(glib);
-        Init_gemblem(glib);
-        Init_gemblemedicon(glib);
-        Init_gfile(glib);
-        Init_gfileattribute(glib);
-        Init_gfileattributeinfo(glib);
-        Init_gfileattributematcher(glib);
-        Init_gfiledescriptorbased(glib);
-        Init_gfileenumerator(glib);
-        Init_gfileicon(glib);
-        Init_gfileinfo(glib);
-        Init_gfileinputstream(glib);
-        Init_gfileiostream(glib);
-        Init_gfilemonitor(glib);
-        Init_gfilenamecompleter(glib);
-        Init_gfileoutputstream(glib);
-        Init_gfilterinputstream(glib);
-        Init_gfilteroutputstream(glib);
-        Init_gicon(glib);
-        Init_ginetaddress(glib);
-        Init_ginetsocketaddress(glib);
-        Init_ginitable(glib);
-        Init_ginputstream(glib);
-        Init_gioerror(glib);
-        Init_giomodule(glib);
-        Init_gioscheduler(glib);
-        Init_giostream(glib);
-        Init_gloadableicon(glib);
-        Init_gmemoryinputstream(glib);
-        Init_gmemoryoutputstream(glib);
-        Init_gmount(glib);
-        Init_gmountoperation(glib);
-        Init_gnetworkaddress(glib);
-        Init_gnetworkservice(glib);
-        Init_goutputstream(glib);
-        Init_gresolver(glib);
-        Init_gseekable(glib);
-        Init_gsimpleasyncresult(glib);
-        Init_gsocket(glib);
-        Init_gsocketaddress(glib);
-        Init_gsocketclient(glib);
-        Init_gsocketconnectable(glib);
-        Init_gsocketconnection(glib);
-        Init_gsocketcontrolmessage(glib);
-        Init_gsocketlistener(glib);
-        Init_gsocketservice(glib);
-        Init_gsrvtarget(glib);
-        Init_gtcpconnection(glib);
-        Init_gthemedicon(glib);
-        Init_gthreadedsocketservice(glib);
-        Init_gunixconnection(glib);
-        Init_gunixfdlist(glib);
-        Init_gunixfdmessage(glib);
-        Init_gunixinputstream(glib);
-        Init_gunixmounts(glib);
-        Init_gunixoutputstream(glib);
-        Init_gunixsocketaddress(glib);
-        Init_gvfs(glib);
-        Init_gvolume(glib);
-        Init_gvolumemonitor(glib);
-        Init_gzlibcompressor(glib);
-        Init_gzlibdecompressor(glib);
+        Init_gappinfo(RG_TARGET_NAMESPACE);
+        Init_gapplaunchcontext(RG_TARGET_NAMESPACE);
+        Init_gasyncinitable(RG_TARGET_NAMESPACE);
+        Init_gasyncresult(RG_TARGET_NAMESPACE);
+        Init_gbufferedinputstream(RG_TARGET_NAMESPACE);
+        Init_gbufferedoutputstream(RG_TARGET_NAMESPACE);
+        Init_gcancellable(RG_TARGET_NAMESPACE);
+        Init_gcharsetconverter(RG_TARGET_NAMESPACE);
+        Init_gcontenttype(RG_TARGET_NAMESPACE);
+        Init_gconverter(RG_TARGET_NAMESPACE);
+        Init_gconverterinputstream(RG_TARGET_NAMESPACE);
+        Init_gconverteroutputstream(RG_TARGET_NAMESPACE);
+        Init_gdatainputstream(RG_TARGET_NAMESPACE);
+        Init_gdesktopappinfo(RG_TARGET_NAMESPACE);
+        Init_gdataoutputstream(RG_TARGET_NAMESPACE);
+        Init_gdrive(RG_TARGET_NAMESPACE);
+        Init_gemblem(RG_TARGET_NAMESPACE);
+        Init_gemblemedicon(RG_TARGET_NAMESPACE);
+        Init_gfile(RG_TARGET_NAMESPACE);
+        Init_gfileattribute(RG_TARGET_NAMESPACE);
+        Init_gfileattributeinfo(RG_TARGET_NAMESPACE);
+        Init_gfileattributematcher(RG_TARGET_NAMESPACE);
+        Init_gfiledescriptorbased(RG_TARGET_NAMESPACE);
+        Init_gfileenumerator(RG_TARGET_NAMESPACE);
+        Init_gfileicon(RG_TARGET_NAMESPACE);
+        Init_gfileinfo(RG_TARGET_NAMESPACE);
+        Init_gfileinputstream(RG_TARGET_NAMESPACE);
+        Init_gfileiostream(RG_TARGET_NAMESPACE);
+        Init_gfilemonitor(RG_TARGET_NAMESPACE);
+        Init_gfilenamecompleter(RG_TARGET_NAMESPACE);
+        Init_gfileoutputstream(RG_TARGET_NAMESPACE);
+        Init_gfilterinputstream(RG_TARGET_NAMESPACE);
+        Init_gfilteroutputstream(RG_TARGET_NAMESPACE);
+        Init_gicon(RG_TARGET_NAMESPACE);
+        Init_ginetaddress(RG_TARGET_NAMESPACE);
+        Init_ginetsocketaddress(RG_TARGET_NAMESPACE);
+        Init_ginitable(RG_TARGET_NAMESPACE);
+        Init_ginputstream(RG_TARGET_NAMESPACE);
+        Init_gioerror(RG_TARGET_NAMESPACE);
+        Init_giomodule(RG_TARGET_NAMESPACE);
+        Init_giomodules(RG_TARGET_NAMESPACE);
+        Init_gioscheduler(RG_TARGET_NAMESPACE);
+        Init_gioschedulerjob(RG_TARGET_NAMESPACE);
+        Init_giostream(RG_TARGET_NAMESPACE);
+        Init_gloadableicon(RG_TARGET_NAMESPACE);
+        Init_gmemoryinputstream(RG_TARGET_NAMESPACE);
+        Init_gmemoryoutputstream(RG_TARGET_NAMESPACE);
+        Init_gmount(RG_TARGET_NAMESPACE);
+        Init_gmountoperation(RG_TARGET_NAMESPACE);
+        Init_gnetworkaddress(RG_TARGET_NAMESPACE);
+        Init_gnetworkservice(RG_TARGET_NAMESPACE);
+        Init_goutputstream(RG_TARGET_NAMESPACE);
+        Init_gresolver(RG_TARGET_NAMESPACE);
+        Init_gseekable(RG_TARGET_NAMESPACE);
+        Init_gsimpleasyncresult(RG_TARGET_NAMESPACE);
+        Init_gsocket(RG_TARGET_NAMESPACE);
+        Init_gsocketaddress(RG_TARGET_NAMESPACE);
+        Init_gsocketclient(RG_TARGET_NAMESPACE);
+        Init_gsocketconnectable(RG_TARGET_NAMESPACE);
+        Init_gsocketaddressenumerator(RG_TARGET_NAMESPACE);
+        Init_gsocketconnection(RG_TARGET_NAMESPACE);
+        Init_gsocketconnectionfactory(RG_TARGET_NAMESPACE);
+        Init_gsocketcontrolmessage(RG_TARGET_NAMESPACE);
+        Init_gsocketlistener(RG_TARGET_NAMESPACE);
+        Init_gsocketservice(RG_TARGET_NAMESPACE);
+        Init_gsrvtarget(RG_TARGET_NAMESPACE);
+        Init_gtcpconnection(RG_TARGET_NAMESPACE);
+        Init_gthemedicon(RG_TARGET_NAMESPACE);
+        Init_gthreadedsocketservice(RG_TARGET_NAMESPACE);
+        Init_gunixconnection(RG_TARGET_NAMESPACE);
+        Init_gunixfdlist(RG_TARGET_NAMESPACE);
+        Init_gunixfdmessage(RG_TARGET_NAMESPACE);
+        Init_gunixinputstream(RG_TARGET_NAMESPACE);
+        Init_gunixmount(RG_TARGET_NAMESPACE);
+        Init_gunixmounts(RG_TARGET_NAMESPACE);
+        Init_gunixmountpoint(RG_TARGET_NAMESPACE);
+        Init_gunixmountpoints(RG_TARGET_NAMESPACE);
+        Init_gunixmountmonitor(RG_TARGET_NAMESPACE);
+        Init_gunixoutputstream(RG_TARGET_NAMESPACE);
+        Init_gunixsocketaddress(RG_TARGET_NAMESPACE);
+        Init_gvfs(RG_TARGET_NAMESPACE);
+        Init_gvolume(RG_TARGET_NAMESPACE);
+        Init_gvolumemonitor(RG_TARGET_NAMESPACE);
+        Init_gzlibcompressor(RG_TARGET_NAMESPACE);
+        Init_gzlibdecompressor(RG_TARGET_NAMESPACE);
 }

@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mIcon
 #define _SELF(value) RVAL2GICON(value)
 
 static VALUE
-icon_new_for_string(G_GNUC_UNUSED VALUE self, VALUE string)
+rg_s_new_for_string(G_GNUC_UNUSED VALUE self, VALUE string)
 {
         GError *error = NULL;
         GIcon *icon;
@@ -37,19 +38,19 @@ icon_new_for_string(G_GNUC_UNUSED VALUE self, VALUE string)
 }
 
 static VALUE
-icon_hash(VALUE self)
+rg_hash(VALUE self)
 {
         return GUINT2RVAL(g_icon_hash(_SELF(self)));
 }
 
 static VALUE
-icon_equal(VALUE self, VALUE other)
+rg_operator_icon_equal(VALUE self, VALUE other)
 {
         return CBOOL2RVAL(g_icon_equal(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-icon_to_string(VALUE self)
+rg_to_string(VALUE self)
 {
         return CSTR2RVAL_FREE(g_icon_to_string(_SELF(self)));
 }
@@ -57,12 +58,12 @@ icon_to_string(VALUE self)
 void
 Init_gicon(VALUE glib)
 {
-        VALUE icon = G_DEF_INTERFACE(G_TYPE_ICON, "Icon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ICON, "Icon", glib);
 
-        rb_define_singleton_method(icon, "new_for_string", icon_new_for_string, 1);
+        RG_DEF_SMETHOD(new_for_string, 1);
 
-        rb_define_method(icon, "hash", icon_hash, 0);
-        rb_define_method(icon, "==", icon_equal, 1);
-        rb_define_method(icon, "to_string", icon_to_string, 0);
-        rb_define_alias(icon, "to_s", "to_string");
+        RG_DEF_METHOD(hash, 0);
+        RG_DEF_METHOD_OPERATOR("==", icon_equal, 1);
+        RG_DEF_METHOD(to_string, 0);
+        RG_DEF_ALIAS("to_s", "to_string");
 }

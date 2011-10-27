@@ -21,30 +21,19 @@
 
 #include "gio2.h"
 
-#define RG_TARGET_NAMESPACE cBufferedOutputStream
-#define _SELF(value) G_BUFFERED_OUTPUT_STREAM(RVAL2GOBJ(value))
+#define RG_TARGET_NAMESPACE mSocketConnectionFactory
 
 static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+rg_m_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
 {
-        VALUE rbbase_stream, size;
-        GOutputStream *base_stream, *stream;
-
-        rb_scan_args(argc, argv, "11", &rbbase_stream, &size);
-        base_stream = RVAL2GOUTPUTSTREAM(rbbase_stream);
-
-        stream = NIL_P(size) ?
-                g_buffered_output_stream_new(base_stream) :
-                g_buffered_output_stream_new_sized(base_stream, RVAL2GSIZE(size));
-        G_INITIALIZE(self, stream);
-
-        return Qnil;
+        return GOBJ2RVAL_UNREF(g_socket_connection_factory_create_connection(RVAL2GSOCKET(socket)));
 }
 
 void
-Init_gbufferedoutputstream(VALUE glib)
+Init_gsocketconnectionfactory(VALUE glib)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
+        /* TODO: Perhaps just move this to SocketConnection? */
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "SocketConnectionFactory");
 
-        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_MODFUNC(create_connection, 1);
 }

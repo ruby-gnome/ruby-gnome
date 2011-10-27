@@ -21,6 +21,7 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mFile
 #define _SELF(value) RVAL2GFILE(value)
 
 #define RVAL2GFILECOPYFLAGS(value) \
@@ -57,79 +58,79 @@
         RVAL2TYPE_WITH_DEFAULT((value), RVAL2CSTR, "fs::*")
 
 static VALUE
-file_new_for_path(G_GNUC_UNUSED VALUE self, VALUE value)
+rg_s_new_for_path(G_GNUC_UNUSED VALUE self, VALUE value)
 {
         return GOBJ2RVAL_UNREF(g_file_new_for_path(RVAL2CSTR(value)));
 }
 
 static VALUE
-file_new_for_uri(G_GNUC_UNUSED VALUE self, VALUE value)
+rg_s_new_for_uri(G_GNUC_UNUSED VALUE self, VALUE value)
 {
         return GOBJ2RVAL_UNREF(g_file_new_for_uri(RVAL2CSTR(value)));
 }
 
 static VALUE
-file_new_for_commandline_arg(G_GNUC_UNUSED VALUE self, VALUE value)
+rg_s_new_for_commandline_arg(G_GNUC_UNUSED VALUE self, VALUE value)
 {
         return GOBJ2RVAL_UNREF(g_file_new_for_commandline_arg(RVAL2CSTR(value)));
 }
 
 static VALUE
-file_parse_name(G_GNUC_UNUSED VALUE self, VALUE value)
+rg_s_parse_name(G_GNUC_UNUSED VALUE self, VALUE value)
 {
         return GOBJ2RVAL_UNREF(g_file_parse_name(RVAL2CSTR(value)));
 }
 
 static VALUE
-file_dup(VALUE self)
+rg_dup(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_file_dup(_SELF(self)));
 }
 
 static VALUE
-file_hash(VALUE self)
+rg_hash(VALUE self)
 {
         return GUINT2RVAL(g_file_hash(_SELF(self)));
 }
 
 static VALUE
-file_equal(VALUE self, VALUE other)
+rg_operator_file_equal(VALUE self, VALUE other)
 {
         return CBOOL2RVAL(g_file_equal(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-file_get_basename(VALUE self)
+rg_basename(VALUE self)
 {
         return CSTR2RVAL_FREE(g_file_get_basename(_SELF(self)));
 }
 
 static VALUE
-file_get_path(VALUE self)
+rg_path(VALUE self)
 {
         return CSTR2RVAL_FREE(g_file_get_path(_SELF(self)));
 }
 
 static VALUE
-file_get_uri(VALUE self)
+rg_uri(VALUE self)
 {
         return CSTR2RVAL_FREE(g_file_get_uri(_SELF(self)));
 }
 
 static VALUE
-file_get_parse_name(VALUE self)
+rg_parse_name(VALUE self)
 {
         return CSTR2RVAL_FREE(g_file_get_parse_name(_SELF(self)));
 }
 
 static VALUE
-file_get_parent(VALUE self)
+rg_parent(VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_file_get_parent(_SELF(self)));
 }
 
 static VALUE
-file_has_parent(int argc, VALUE *argv, VALUE self)
+rg_has_parent_p(int argc, VALUE *argv, VALUE self)
 {
         VALUE parent;
 
@@ -138,13 +139,13 @@ file_has_parent(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_get_child(VALUE self, VALUE name)
+rg_get_child(VALUE self, VALUE name)
 {
         return GOBJ2RVAL_UNREF(g_file_get_child(_SELF(self), RVAL2CSTR(name)));
 }
 
 static VALUE
-file_get_child_for_display_name(VALUE self, VALUE name)
+rg_get_child_for_display_name(VALUE self, VALUE name)
 {
         GError *error = NULL;
         GFile *file = g_file_get_child_for_display_name(_SELF(self),
@@ -157,37 +158,37 @@ file_get_child_for_display_name(VALUE self, VALUE name)
 }
 
 static VALUE
-file_has_prefix(VALUE self, VALUE prefix)
+rg_has_prefix_p(VALUE self, VALUE prefix)
 {
         return CBOOL2RVAL(g_file_has_prefix(_SELF(self), _SELF(prefix)));
 }
 
 static VALUE
-file_get_relative_path(VALUE self, VALUE other)
+rg_get_relative_path(VALUE self, VALUE other)
 {
         return CSTR2RVAL_FREE(g_file_get_relative_path(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-file_resolve_relative_path(VALUE self, VALUE path)
+rg_resolve_relative_path(VALUE self, VALUE path)
 {
         return GOBJ2RVAL_UNREF(g_file_resolve_relative_path(_SELF(self), RVAL2CSTR(path)));
 }
 
 static VALUE
-file_is_native(VALUE self)
+rg_native_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_is_native(_SELF(self)));
 }
 
 static VALUE
-file_has_uri_scheme(VALUE self, VALUE scheme)
+rg_has_uri_scheme_p(VALUE self, VALUE scheme)
 {
         return CBOOL2RVAL(g_file_has_uri_scheme(_SELF(self), RVAL2CSTR(scheme)));
 }
 
 static VALUE
-file_get_uri_scheme(VALUE self)
+rg_uri_scheme(VALUE self)
 {
         return CSTR2RVAL_FREE(g_file_get_uri_scheme(_SELF(self)));
 }
@@ -215,7 +216,7 @@ file_input_stream_close(VALUE data)
 }
 
 static VALUE
-file_read(int argc, VALUE *argv, VALUE self)
+rg_read(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         struct file_input_stream_close_data data;
@@ -235,7 +236,7 @@ file_read(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_read_async(int argc, VALUE *argv, VALUE self)
+rg_read_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -255,7 +256,7 @@ file_read_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_read_finish(VALUE self, VALUE result)
+rg_read_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInputStream *stream;
@@ -318,19 +319,19 @@ create_method(CreateMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_append_to(int argc, VALUE *argv, VALUE self)
+rg_append_to(int argc, VALUE *argv, VALUE self)
 {
         return create_method(g_file_append_to, argc, argv, self);
 }
 
 static VALUE
-file_create(int argc, VALUE *argv, VALUE self)
+rg_create(int argc, VALUE *argv, VALUE self)
 {
         return create_method(g_file_create, argc, argv, self);
 }
 
 static VALUE
-file_replace(int argc, VALUE *argv, VALUE self)
+rg_replace(int argc, VALUE *argv, VALUE self)
 {
         VALUE etag, make_backup, flags, cancellable;
         struct file_output_stream_close_data data;
@@ -382,7 +383,7 @@ create_async_method(CreateAsyncMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_append_to_async(int argc, VALUE *argv, VALUE self)
+rg_append_to_async(int argc, VALUE *argv, VALUE self)
 {
         return create_async_method(g_file_append_to_async, argc, argv, self);
 }
@@ -403,19 +404,19 @@ write_finish_method(WriteFinishMethod method, VALUE self, VALUE result)
 }
 
 static VALUE
-file_append_to_finish(VALUE self, VALUE result)
+rg_append_to_finish(VALUE self, VALUE result)
 {
         return write_finish_method(g_file_append_to_finish, self, result);
 }
 
 static VALUE
-file_create_async(int argc, VALUE *argv, VALUE self)
+rg_create_async(int argc, VALUE *argv, VALUE self)
 {
         return create_async_method(g_file_create_async, argc, argv, self);
 }
 
 static VALUE
-file_create_finish(VALUE self, VALUE result)
+rg_create_finish(VALUE self, VALUE result)
 {
         return write_finish_method(g_file_create_finish, self, result);
 }
@@ -459,19 +460,19 @@ replace_async_method(ReplaceAsyncMethod method, int argc, VALUE *argv, VALUE sel
 }
 
 static VALUE
-file_replace_async(int argc, VALUE *argv, VALUE self)
+rg_replace_async(int argc, VALUE *argv, VALUE self)
 {
         return replace_async_method(g_file_replace_async, argc, argv, self);
 }
 
 static VALUE
-file_replace_finish(VALUE self, VALUE result)
+rg_replace_finish(VALUE self, VALUE result)
 {
         return write_finish_method(g_file_replace_finish, self, result);
 }
 
 static VALUE
-file_query_info(int argc, VALUE *argv, VALUE self)
+rg_query_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, flags, cancellable;
         GError *error = NULL;
@@ -490,7 +491,7 @@ file_query_info(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_query_info_async(int argc, VALUE *argv, VALUE self)
+rg_query_info_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbflags, rbio_priority, rbcancellable, block;
         const char *attributes;
@@ -516,7 +517,7 @@ file_query_info_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_query_info_finish(VALUE self, VALUE result)
+rg_query_info_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
 
@@ -528,7 +529,7 @@ file_query_info_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-file_query_exists(int argc, VALUE *argv, VALUE self)
+rg_query_exists_p(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
 
@@ -538,7 +539,7 @@ file_query_exists(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_query_file_type(int argc, VALUE *argv, VALUE self)
+rg_query_file_type(int argc, VALUE *argv, VALUE self)
 {
         VALUE flags, cancellable;
 
@@ -550,7 +551,7 @@ file_query_file_type(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_query_filesystem_info(int argc, VALUE *argv, VALUE self)
+rg_query_filesystem_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, cancellable;
         GError *error = NULL;
@@ -568,7 +569,7 @@ file_query_filesystem_info(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_query_filesystem_info_async(int argc, VALUE *argv, VALUE self)
+rg_query_filesystem_info_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbio_priority, rbcancellable, block;
         const char *attributes;
@@ -591,7 +592,7 @@ file_query_filesystem_info_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_query_filesystem_info_finish(VALUE self, VALUE result)
+rg_query_filesystem_info_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInfo *info;
@@ -606,7 +607,7 @@ file_query_filesystem_info_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-file_query_default_handler(int argc, VALUE *argv, VALUE self)
+rg_query_default_handler(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -623,7 +624,7 @@ file_query_default_handler(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_find_enclosing_mount(int argc, VALUE *argv, VALUE self)
+rg_find_enclosing_mount(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -640,7 +641,7 @@ file_find_enclosing_mount(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_find_enclosing_mount_async(int argc, VALUE *argv, VALUE self)
+rg_find_enclosing_mount_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -660,7 +661,7 @@ file_find_enclosing_mount_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_find_enclosing_mount_finish(VALUE self, VALUE result)
+rg_find_enclosing_mount_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
 
@@ -722,7 +723,7 @@ file_enumerator_each_ensure(VALUE data)
 }
 
 static VALUE
-file_enumerate_children(int argc, VALUE *argv, VALUE self)
+rg_enumerate_children(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, flags, cancellable;
         struct file_enumerator_each_data data;
@@ -748,7 +749,7 @@ file_enumerate_children(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_enumerate_children_async(int argc, VALUE *argv, VALUE self)
+rg_enumerate_children_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbflags, rbio_priority, rbcancellable, block;
         const char *attributes;
@@ -774,7 +775,7 @@ file_enumerate_children_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_enumerate_children_finish(VALUE self, VALUE result)
+rg_enumerate_children_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileEnumerator *enumerator;
@@ -789,7 +790,7 @@ file_enumerate_children_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-file_set_display_name(int argc, VALUE *argv, VALUE self)
+rg_set_display_name(int argc, VALUE *argv, VALUE self)
 {
         VALUE display_name, cancellable;
         GError *error = NULL;
@@ -808,7 +809,7 @@ file_set_display_name(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_display_name_async(int argc, VALUE *argv, VALUE self)
+rg_set_display_name_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbdisplay_name, rbio_priority, rbcancellable, block;
         const char *display_name;
@@ -831,7 +832,7 @@ file_set_display_name_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_display_name_finish(VALUE self, VALUE result)
+rg_set_display_name_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInfo *info;
@@ -861,13 +862,13 @@ cancellable_method(CancellableMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_delete(int argc, VALUE *argv, VALUE self)
+rg_delete(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_method(g_file_delete, argc, argv, self);
 }
 
 static VALUE
-file_trash(int argc, VALUE *argv, VALUE self)
+rg_trash(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_method(g_file_trash, argc, argv, self);
 }
@@ -946,13 +947,13 @@ copy_move_method(CopyMoveMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_copy(int argc, VALUE *argv, VALUE self)
+rg_copy(int argc, VALUE *argv, VALUE self)
 {
         return copy_move_method(g_file_copy, argc, argv, self);
 }
 
 static VALUE
-file_copy_async(int argc, VALUE *argv, VALUE self)
+rg_copy_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbdestination, rbflags, rbio_priority, rbcancellable, block;
         GFile *destination;
@@ -996,31 +997,31 @@ boolean_finish_method(BooleanFinishMethod method, VALUE self, VALUE result)
 }
 
 static VALUE
-file_copy_finish(VALUE self, VALUE result)
+rg_copy_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_copy_finish, self, result);
 }
 
 static VALUE
-file_move(int argc, VALUE *argv, VALUE self)
+rg_move(int argc, VALUE *argv, VALUE self)
 {
         return copy_move_method(g_file_move, argc, argv, self);
 }
 
 static VALUE
-file_make_directory(int argc, VALUE *argv, VALUE self)
+rg_make_directory(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_method(g_file_make_directory, argc, argv, self);
 }
 
 static VALUE
-file_make_directory_with_parents(int argc, VALUE *argv, VALUE self)
+rg_make_directory_with_parents(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_method(g_file_make_directory_with_parents, argc, argv, self);
 }
 
 static VALUE
-file_make_symbolic_link(int argc, VALUE *argv, VALUE self)
+rg_make_symbolic_link(int argc, VALUE *argv, VALUE self)
 {
         VALUE symlink_value, cancellable;
         GError *error = NULL;
@@ -1056,21 +1057,21 @@ query_attributes_method(QueryAttributesMethod method,
 }
 
 static VALUE
-file_query_settable_attributes(int argc, VALUE *argv, VALUE self)
+rg_query_settable_attributes(int argc, VALUE *argv, VALUE self)
 {
         return query_attributes_method(g_file_query_settable_attributes,
                                        argc, argv, self);
 }
 
 static VALUE
-file_query_writable_namespaces(int argc, VALUE *argv, VALUE self)
+rg_query_writable_namespaces(int argc, VALUE *argv, VALUE self)
 {
         return query_attributes_method(g_file_query_writable_namespaces,
                                         argc, argv, self);
 }
 
 static VALUE
-file_set_attribute(int argc, VALUE *argv, VALUE self)
+rg_set_attribute(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattribute, rbtype, rbvalue, rbflags, rbcancellable;
         const char *attribute;
@@ -1144,7 +1145,7 @@ file_set_attribute(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attributes_from_info(int argc, VALUE *argv, VALUE self)
+rg_set_attributes_from_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE info, flags, cancellable;
         GError *error = NULL;
@@ -1161,7 +1162,7 @@ file_set_attributes_from_info(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attributes_async(int argc, VALUE *argv, VALUE self)
+rg_set_attributes_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbinfo, rbflags, rbio_priority, rbcancellable, block;
         GFileInfo *info;
@@ -1187,7 +1188,7 @@ file_set_attributes_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attributes_finish(VALUE self, VALUE result)
+rg_set_attributes_finish(VALUE self, VALUE result)
 {
         GFileInfo *info;
         GError *error = NULL;
@@ -1202,7 +1203,7 @@ file_set_attributes_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-file_set_attribute_string(int argc, VALUE *argv, VALUE self)
+rg_set_attribute_string(int argc, VALUE *argv, VALUE self)
 {
         VALUE attribute, value, flags, cancellable;
         GError *error = NULL;
@@ -1220,7 +1221,7 @@ file_set_attribute_string(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attribute_byte_string(int argc, VALUE *argv, VALUE self)
+rg_set_attribute_byte_string(int argc, VALUE *argv, VALUE self)
 {
         VALUE attribute, value, flags, cancellable;
         GError *error = NULL;
@@ -1238,7 +1239,7 @@ file_set_attribute_byte_string(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attribute_uint32(int argc, VALUE *argv, VALUE self)
+rg_set_attribute_uint32(int argc, VALUE *argv, VALUE self)
 {
         VALUE attribute, value, flags, cancellable;
         GError *error = NULL;
@@ -1256,7 +1257,7 @@ file_set_attribute_uint32(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attribute_int32(int argc, VALUE *argv, VALUE self)
+rg_set_attribute_int32(int argc, VALUE *argv, VALUE self)
 {
         VALUE attribute, value, flags, cancellable;
         GError *error = NULL;
@@ -1274,7 +1275,7 @@ file_set_attribute_int32(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attribute_uint64(int argc, VALUE *argv, VALUE self)
+rg_set_attribute_uint64(int argc, VALUE *argv, VALUE self)
 {
         VALUE attribute, value, flags, cancellable;
         GError *error = NULL;
@@ -1292,7 +1293,7 @@ file_set_attribute_uint64(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_set_attribute_int64(int argc, VALUE *argv, VALUE self)
+rg_set_attribute_int64(int argc, VALUE *argv, VALUE self)
 {
         VALUE attribute, value, flags, cancellable;
         GError *error = NULL;
@@ -1340,13 +1341,13 @@ mount_method(MountMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_mount_mountable(int argc, VALUE *argv, VALUE self)
+rg_mount_mountable(int argc, VALUE *argv, VALUE self)
 {
         return mount_method(g_file_mount_mountable, argc, argv, self);
 }
 
 static VALUE
-file_mount_mountable_finish(VALUE self, VALUE result)
+rg_mount_mountable_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFile *file;
@@ -1392,33 +1393,33 @@ unmount_eject_stop_mountable_method(UnmountEjectStopMountableMethod method,
 }
 
 static VALUE
-file_unmount_mountable_with_operation(int argc, VALUE *argv, VALUE self)
+rg_unmount_mountable_with_operation(int argc, VALUE *argv, VALUE self)
 {
         return unmount_eject_stop_mountable_method(g_file_unmount_mountable_with_operation,
                                                    argc, argv, self);
 }
 
 static VALUE
-file_unmount_mountable_with_operation_finish(VALUE self, VALUE result)
+rg_unmount_mountable_with_operation_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_unmount_mountable_with_operation_finish, self, result);
 }
 
 static VALUE
-file_eject_mountable_with_operation(int argc, VALUE *argv, VALUE self)
+rg_eject_mountable_with_operation(int argc, VALUE *argv, VALUE self)
 {
         return unmount_eject_stop_mountable_method(g_file_eject_mountable_with_operation,
                                                    argc, argv, self);
 }
 
 static VALUE
-file_eject_mountable_with_operation_finish(VALUE self, VALUE result)
+rg_eject_mountable_with_operation_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_eject_mountable_with_operation_finish, self, result);
 }
 
 static VALUE
-file_start_mountable(int argc, VALUE *argv, VALUE self)
+rg_start_mountable(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbflags, rbstart_operation, rbcancellable, block;
         GDriveStartFlags flags;
@@ -1441,20 +1442,20 @@ file_start_mountable(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_start_mountable_finish(VALUE self, VALUE result)
+rg_start_mountable_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_start_mountable_finish, self, result);
 }
 
 static VALUE
-file_stop_mountable(int argc, VALUE *argv, VALUE self)
+rg_stop_mountable(int argc, VALUE *argv, VALUE self)
 {
         return unmount_eject_stop_mountable_method(g_file_stop_mountable,
                                                    argc, argv, self);
 }
 
 static VALUE
-file_stop_mountable_finish(VALUE self, VALUE result)
+rg_stop_mountable_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_stop_mountable_finish, self, result);
 }
@@ -1479,25 +1480,25 @@ cancellable_async_method(CancellableAsyncMethod method, int argc, VALUE *argv, V
 }
 
 static VALUE
-file_poll_mountable(int argc, VALUE *argv, VALUE self)
+rg_poll_mountable(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_async_method(g_file_poll_mountable, argc, argv, self);
 }
 
 static VALUE
-file_poll_mountable_finish(VALUE self, VALUE result)
+rg_poll_mountable_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_poll_mountable_finish, self, result);
 }
 
 static VALUE
-file_mount_enclosing_volume(int argc, VALUE *argv, VALUE self)
+rg_mount_enclosing_volume(int argc, VALUE *argv, VALUE self)
 {
         return mount_method(g_file_mount_enclosing_volume, argc, argv, self);
 }
 
 static VALUE
-file_mount_enclosing_volume_finish(VALUE self, VALUE result)
+rg_mount_enclosing_volume_finish(VALUE self, VALUE result)
 {
         return boolean_finish_method(g_file_mount_enclosing_volume_finish, self, result);
 }
@@ -1526,25 +1527,25 @@ monitor_method(MonitorMethod method, int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_monitor_directory(int argc, VALUE *argv, VALUE self)
+rg_monitor_directory(int argc, VALUE *argv, VALUE self)
 {
         return monitor_method(g_file_monitor_directory, argc, argv, self);
 }
 
 static VALUE
-file_monitor_file(int argc, VALUE *argv, VALUE self)
+rg_monitor_file(int argc, VALUE *argv, VALUE self)
 {
         return monitor_method(g_file_monitor_file, argc, argv, self);
 }
 
 static VALUE
-file_monitor(int argc, VALUE *argv, VALUE self)
+rg_monitor(int argc, VALUE *argv, VALUE self)
 {
         return monitor_method(g_file_monitor, argc, argv, self);
 }
 
 static VALUE
-file_load_contents(int argc, VALUE *argv, VALUE self)
+rg_load_contents(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         char *contents;
@@ -1566,13 +1567,13 @@ file_load_contents(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_load_contents_async(int argc, VALUE *argv, VALUE self)
+rg_load_contents_async(int argc, VALUE *argv, VALUE self)
 {
         return cancellable_async_method(g_file_load_contents_async, argc, argv, self);
 }
 
 static VALUE
-file_load_contents_finish(VALUE self, VALUE result)
+rg_load_contents_finish(VALUE self, VALUE result)
 {
         char *contents;
         gsize length;
@@ -1634,7 +1635,7 @@ load_partial_contents_async_read_more_callback(const char *file_contents,
 }
 
 static VALUE
-file_load_partial_contents_async(int argc, VALUE *argv, VALUE self)
+rg_load_partial_contents_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcancellable, rbuse_read_more_callback, block;
         GCancellable *cancellable;
@@ -1657,7 +1658,7 @@ file_load_partial_contents_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_load_partial_contents_finish(VALUE self, VALUE result)
+rg_load_partial_contents_finish(VALUE self, VALUE result)
 {
         char *contents;
         gsize length;
@@ -1677,7 +1678,7 @@ file_load_partial_contents_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-file_replace_contents(int argc, VALUE *argv, VALUE self)
+rg_replace_contents(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcontents, etag, make_backup, flags, cancellable;
         const char *contents;
@@ -1701,7 +1702,7 @@ file_replace_contents(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_replace_contents_async(int argc, VALUE *argv, VALUE self)
+rg_replace_contents_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbcontents, rbetag, rbmake_backup, rbflags, rbcancellable, block;
         const char *contents;
@@ -1733,7 +1734,7 @@ file_replace_contents_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_replace_contents_finish(VALUE self, VALUE result)
+rg_replace_contents_finish(VALUE self, VALUE result)
 {
         char *new_etag;
         GError *error = NULL;
@@ -1748,7 +1749,7 @@ file_replace_contents_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-file_copy_attributes(int argc, VALUE *argv, VALUE self)
+rg_copy_attributes(int argc, VALUE *argv, VALUE self)
 {
         VALUE destination, flags, cancellable;
         GError *error = NULL;
@@ -1787,7 +1788,7 @@ file_io_stream_close(VALUE data)
 }
 
 static VALUE
-file_create_readwrite(int argc, VALUE *argv, VALUE self)
+rg_create_readwrite(int argc, VALUE *argv, VALUE self)
 {
         VALUE flags, cancellable;
         struct file_io_stream_close_data data;
@@ -1810,7 +1811,7 @@ file_create_readwrite(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_create_readwrite_async(int argc, VALUE *argv, VALUE self)
+rg_create_readwrite_async(int argc, VALUE *argv, VALUE self)
 {
         return create_async_method(g_file_create_readwrite_async, argc, argv, self);
 }
@@ -1830,13 +1831,13 @@ readwrite_finish_method(ReadwriteFinishMethod method, VALUE self, VALUE result)
 }
 
 static VALUE
-file_create_readwrite_finish(VALUE self, VALUE result)
+rg_create_readwrite_finish(VALUE self, VALUE result)
 {
         return readwrite_finish_method(g_file_create_readwrite_finish, self, result);
 }
 
 static VALUE
-file_open_readwrite(int argc, VALUE *argv, VALUE self)
+rg_open_readwrite(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         struct file_io_stream_close_data data;
@@ -1858,7 +1859,7 @@ file_open_readwrite(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_open_readwrite_async(int argc, VALUE *argv, VALUE self)
+rg_open_readwrite_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -1875,13 +1876,13 @@ file_open_readwrite_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_open_readwrite_finish(VALUE self, VALUE result)
+rg_open_readwrite_finish(VALUE self, VALUE result)
 {
         return readwrite_finish_method(g_file_open_readwrite_finish, self, result);
 }
 
 static VALUE
-file_replace_readwrite(int argc, VALUE *argv, VALUE self)
+rg_replace_readwrite(int argc, VALUE *argv, VALUE self)
 {
         VALUE etag, make_backup, flags, cancellable;
         struct file_io_stream_close_data data;
@@ -1906,19 +1907,19 @@ file_replace_readwrite(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-file_replace_readwrite_async(int argc, VALUE *argv, VALUE self)
+rg_replace_readwrite_async(int argc, VALUE *argv, VALUE self)
 {
         return replace_async_method(g_file_replace_readwrite_async, argc, argv, self);
 }
 
 static VALUE
-file_replace_readwrite_finish(VALUE self, VALUE result)
+rg_replace_readwrite_finish(VALUE self, VALUE result)
 {
         return readwrite_finish_method(g_file_replace_readwrite_finish, self, result);
 }
 
 static VALUE
-file_supports_thread_contexts(VALUE self)
+rg_supports_thread_contexts_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_supports_thread_contexts(_SELF(self)));
 }
@@ -1926,133 +1927,133 @@ file_supports_thread_contexts(VALUE self)
 void
 Init_gfile(VALUE glib)
 {
-        VALUE file = G_DEF_INTERFACE(G_TYPE_FILE, "File", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE, "File", glib);
 
-        G_DEF_CLASS(G_TYPE_FILE_QUERY_INFO_FLAGS, "QueryInfoFlags", file);
-        G_DEF_CONSTANTS(file, G_TYPE_FILE_QUERY_INFO_FLAGS, "G_FILE_");
+        G_DEF_CLASS(G_TYPE_FILE_QUERY_INFO_FLAGS, "QueryInfoFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_QUERY_INFO_FLAGS, "G_FILE_");
 
-        G_DEF_CLASS(G_TYPE_FILE_CREATE_FLAGS, "CreateFlags", file);
-        G_DEF_CONSTANTS(file, G_TYPE_FILE_CREATE_FLAGS, "G_FILE_");
+        G_DEF_CLASS(G_TYPE_FILE_CREATE_FLAGS, "CreateFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_CREATE_FLAGS, "G_FILE_");
 
-        G_DEF_CLASS(G_TYPE_FILE_COPY_FLAGS, "CopyFlags", file);
-        G_DEF_CONSTANTS(file, G_TYPE_FILE_COPY_FLAGS, "G_FILE_");
+        G_DEF_CLASS(G_TYPE_FILE_COPY_FLAGS, "CopyFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_COPY_FLAGS, "G_FILE_");
 
-        G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "MonitorFlags", file);
-        G_DEF_CONSTANTS(file, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_");
+        G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "MonitorFlags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_");
 
-        G_DEF_CLASS(G_TYPE_FILE_TYPE, "Type", file);
-        G_DEF_CONSTANTS(file, G_TYPE_FILE_TYPE, "G_FILE_");
+        G_DEF_CLASS(G_TYPE_FILE_TYPE, "Type", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_TYPE, "G_FILE_");
 
-        rb_define_singleton_method(file, "new_for_path", file_new_for_path, 1);
-        rb_define_singleton_method(file, "new_for_uri", file_new_for_uri, 1);
-        rb_define_singleton_method(file, "new_for_commandline_arg", file_new_for_commandline_arg, 1);
-        rb_define_singleton_method(file, "parse_name", file_parse_name, 1);
+        RG_DEF_SMETHOD(new_for_path, 1);
+        RG_DEF_SMETHOD(new_for_uri, 1);
+        RG_DEF_SMETHOD(new_for_commandline_arg, 1);
+        RG_DEF_SMETHOD(parse_name, 1);
 
-        rb_define_method(file, "dup", file_dup, 0);
-        rb_define_method(file, "hash", file_hash, 0);
-        rb_define_method(file, "==", file_equal, 1);
-        rb_define_method(file, "basename", file_get_basename, 0);
-        rb_define_method(file, "path", file_get_path, 0);
-        rb_define_method(file, "uri", file_get_uri, 0);
-        rb_define_method(file, "parse_name", file_get_parse_name, 0);
-        rb_define_method(file, "parent", file_get_parent, 0);
-        rb_define_method(file, "has_parent?", file_has_parent, -1);
-        rb_define_method(file, "get_child", file_get_child, 1);
-        rb_define_method(file, "get_child_for_display_name", file_get_child_for_display_name, 1);
-        rb_define_method(file, "has_prefix?", file_has_prefix, 1);
-        rb_define_method(file, "get_relative_path", file_get_relative_path, 1);
-        rb_define_method(file, "resolve_relative_path", file_resolve_relative_path, 1);
-        rb_define_method(file, "native?", file_is_native, 0);
-        rb_define_method(file, "has_uri_scheme?", file_has_uri_scheme, 1);
-        rb_define_method(file, "uri_scheme", file_get_uri_scheme, 0);
-        rb_define_method(file, "read", file_read, -1);
-        rb_define_method(file, "read_async", file_read_async, -1);
-        rb_define_method(file, "read_finish", file_read_finish, 1);
-        rb_define_method(file, "append_to", file_append_to, -1);
-        rb_define_method(file, "create", file_create, -1);
-        rb_define_method(file, "replace", file_replace, -1);
-        rb_define_method(file, "append_to_async", file_append_to_async, -1);
-        rb_define_method(file, "append_to_finish", file_append_to_finish, 1);
-        rb_define_method(file, "create_async", file_create_async, -1);
-        rb_define_method(file, "create_finish", file_create_finish, 1);
-        rb_define_method(file, "replace_async", file_replace_async, -1);
-        rb_define_method(file, "replace_finish", file_replace_finish, 1);
-        rb_define_method(file, "query_info", file_query_info, -1);
-        rb_define_method(file, "query_info_async", file_query_info_async, -1);
-        rb_define_method(file, "query_info_finish", file_query_info_finish, 1);
-        rb_define_method(file, "query_exists?", file_query_exists, -1);
-        rb_define_alias(file, "exists?", "query_exists?");
-        rb_define_method(file, "query_file_type", file_query_file_type, -1);
-        rb_define_method(file, "query_filesystem_info", file_query_filesystem_info, -1);
-        rb_define_method(file, "query_filesystem_info_async", file_query_filesystem_info_async, -1);
-        rb_define_method(file, "query_filesystem_info_finish", file_query_filesystem_info_finish, 1);
-        rb_define_method(file, "query_default_handler", file_query_default_handler, -1);
-        rb_define_method(file, "find_enclosing_mount", file_find_enclosing_mount, -1);
-        rb_define_method(file, "find_enclosing_mount_async", file_find_enclosing_mount_async, -1);
-        rb_define_method(file, "find_enclosing_mount_finish", file_find_enclosing_mount_finish, 1);
-        rb_define_method(file, "enumerate_children", file_enumerate_children, -1);
-        rb_define_method(file, "enumerate_children_async", file_enumerate_children_async, -1);
-        rb_define_method(file, "enumerate_children_finish", file_enumerate_children_finish, 1);
-        rb_define_method(file, "set_display_name", file_set_display_name, -1);
-        G_DEF_SETTER(file, "display_name");
-        rb_define_method(file, "set_display_name_async", file_set_display_name_async, -1);
-        rb_define_method(file, "set_display_name_finish", file_set_display_name_finish, 1);
-        rb_define_method(file, "delete", file_delete, -1);
-        rb_define_method(file, "trash", file_trash, -1);
-        rb_define_method(file, "copy", file_copy, -1);
-        rb_define_method(file, "copy_async", file_copy_async, -1);
-        rb_define_method(file, "copy_finish", file_copy_finish, 1);
-        rb_define_method(file, "move", file_move, -1);
-        rb_define_method(file, "make_directory", file_make_directory, -1);
-        rb_define_method(file, "make_directory_with_parents", file_make_directory_with_parents, -1);
-        rb_define_method(file, "make_symbolic_link", file_make_symbolic_link, -1);
-        rb_define_method(file, "query_settable_attributes", file_query_settable_attributes, -1);
-        rb_define_method(file, "query_writable_namespaces", file_query_writable_namespaces, -1);
-        rb_define_method(file, "set_attribute", file_set_attribute, -1);
-        rb_define_method(file, "set_attributes_from_info", file_set_attributes_from_info, -1);
-        G_DEF_SETTER(file, "attributes_from_info");
-        rb_define_method(file, "set_attributes_async", file_set_attributes_async, -1);
-        rb_define_method(file, "set_attributes_finish", file_set_attributes_finish, 1);
-        rb_define_method(file, "set_attribute_string", file_set_attribute_string, -1);
-        rb_define_method(file, "set_attribute_byte_string", file_set_attribute_byte_string, -1);
-        rb_define_method(file, "set_attribute_uint32", file_set_attribute_uint32, -1);
-        rb_define_method(file, "set_attribute_int32", file_set_attribute_int32, -1);
-        rb_define_method(file, "set_attribute_uint64", file_set_attribute_uint64, -1);
-        rb_define_method(file, "set_attribute_int64", file_set_attribute_int64, -1);
-        rb_define_method(file, "mount_mountable", file_mount_mountable, -1);
-        rb_define_method(file, "mount_mountable_finish", file_mount_mountable_finish, 1);
-        rb_define_method(file, "unmount_mountable_with_operation", file_unmount_mountable_with_operation, -1);
-        rb_define_method(file, "unmount_mountable_with_operation_finish", file_unmount_mountable_with_operation_finish, 1);
-        rb_define_method(file, "eject_mountable_with_operation", file_eject_mountable_with_operation, -1);
-        rb_define_method(file, "eject_mountable_with_operation_finish", file_eject_mountable_with_operation_finish, 1);
-        rb_define_method(file, "start_mountable", file_start_mountable, -1);
-        rb_define_method(file, "start_mountable_finish", file_start_mountable_finish, 1);
-        rb_define_method(file, "stop_mountable", file_stop_mountable, -1);
-        rb_define_method(file, "stop_mountable_finish", file_stop_mountable_finish, 1);
-        rb_define_method(file, "poll_mountable", file_poll_mountable, -1);
-        rb_define_method(file, "poll_mountable_finish", file_poll_mountable_finish, 1);
-        rb_define_method(file, "mount_enclosing_volume", file_mount_enclosing_volume, -1);
-        rb_define_method(file, "mount_enclosing_volume_finish", file_mount_enclosing_volume_finish, 1);
-        rb_define_method(file, "monitor_directory", file_monitor_directory, -1);
-        rb_define_method(file, "monitor_file", file_monitor_file, -1);
-        rb_define_method(file, "monitor", file_monitor, -1);
-        rb_define_method(file, "load_contents", file_load_contents, -1);
-        rb_define_method(file, "load_contents_async", file_load_contents_async, -1);
-        rb_define_method(file, "load_contents_finish", file_load_contents_finish, 1);
-        rb_define_method(file, "load_partial_contents_async", file_load_partial_contents_async, -1);
-        rb_define_method(file, "load_partial_contents_finish", file_load_partial_contents_finish, 1);
-        rb_define_method(file, "replace_contents", file_replace_contents, -1);
-        rb_define_method(file, "replace_contents_async", file_replace_contents_async, -1);
-        rb_define_method(file, "replace_contents_finish", file_replace_contents_finish, 1);
-        rb_define_method(file, "copy_attributes", file_copy_attributes, -1);
-        rb_define_method(file, "create_readwrite", file_create_readwrite, -1);
-        rb_define_method(file, "create_readwrite_async", file_create_readwrite_async, -1);
-        rb_define_method(file, "create_readwrite_finish", file_create_readwrite_finish, 1);
-        rb_define_method(file, "open_readwrite", file_open_readwrite, -1);
-        rb_define_method(file, "open_readwrite_async", file_open_readwrite_async, -1);
-        rb_define_method(file, "open_readwrite_finish", file_open_readwrite_finish, 1);
-        rb_define_method(file, "replace_readwrite", file_replace_readwrite, -1);
-        rb_define_method(file, "replace_readwrite_async", file_replace_readwrite_async, -1);
-        rb_define_method(file, "replace_readwrite_finish", file_replace_readwrite_finish, 1);
-        rb_define_method(file, "supports_thread_contexts?", file_supports_thread_contexts, 0);
+        RG_DEF_METHOD(dup, 0);
+        RG_DEF_METHOD(hash, 0);
+        RG_DEF_METHOD_OPERATOR("==", file_equal, 1);
+        RG_DEF_METHOD(basename, 0);
+        RG_DEF_METHOD(path, 0);
+        RG_DEF_METHOD(uri, 0);
+        RG_DEF_METHOD(parse_name, 0);
+        RG_DEF_METHOD(parent, 0);
+        RG_DEF_METHOD_P(has_parent, -1);
+        RG_DEF_METHOD(get_child, 1);
+        RG_DEF_METHOD(get_child_for_display_name, 1);
+        RG_DEF_METHOD_P(has_prefix, 1);
+        RG_DEF_METHOD(get_relative_path, 1);
+        RG_DEF_METHOD(resolve_relative_path, 1);
+        RG_DEF_METHOD_P(native, 0);
+        RG_DEF_METHOD_P(has_uri_scheme, 1);
+        RG_DEF_METHOD(uri_scheme, 0);
+        RG_DEF_METHOD(read, -1);
+        RG_DEF_METHOD(read_async, -1);
+        RG_DEF_METHOD(read_finish, 1);
+        RG_DEF_METHOD(append_to, -1);
+        RG_DEF_METHOD(create, -1);
+        RG_DEF_METHOD(replace, -1);
+        RG_DEF_METHOD(append_to_async, -1);
+        RG_DEF_METHOD(append_to_finish, 1);
+        RG_DEF_METHOD(create_async, -1);
+        RG_DEF_METHOD(create_finish, 1);
+        RG_DEF_METHOD(replace_async, -1);
+        RG_DEF_METHOD(replace_finish, 1);
+        RG_DEF_METHOD(query_info, -1);
+        RG_DEF_METHOD(query_info_async, -1);
+        RG_DEF_METHOD(query_info_finish, 1);
+        RG_DEF_METHOD_P(query_exists, -1);
+        RG_DEF_ALIAS("exists?", "query_exists?");
+        RG_DEF_METHOD(query_file_type, -1);
+        RG_DEF_METHOD(query_filesystem_info, -1);
+        RG_DEF_METHOD(query_filesystem_info_async, -1);
+        RG_DEF_METHOD(query_filesystem_info_finish, 1);
+        RG_DEF_METHOD(query_default_handler, -1);
+        RG_DEF_METHOD(find_enclosing_mount, -1);
+        RG_DEF_METHOD(find_enclosing_mount_async, -1);
+        RG_DEF_METHOD(find_enclosing_mount_finish, 1);
+        RG_DEF_METHOD(enumerate_children, -1);
+        RG_DEF_METHOD(enumerate_children_async, -1);
+        RG_DEF_METHOD(enumerate_children_finish, 1);
+        RG_DEF_METHOD(set_display_name, -1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_name");
+        RG_DEF_METHOD(set_display_name_async, -1);
+        RG_DEF_METHOD(set_display_name_finish, 1);
+        RG_DEF_METHOD(delete, -1);
+        RG_DEF_METHOD(trash, -1);
+        RG_DEF_METHOD(copy, -1);
+        RG_DEF_METHOD(copy_async, -1);
+        RG_DEF_METHOD(copy_finish, 1);
+        RG_DEF_METHOD(move, -1);
+        RG_DEF_METHOD(make_directory, -1);
+        RG_DEF_METHOD(make_directory_with_parents, -1);
+        RG_DEF_METHOD(make_symbolic_link, -1);
+        RG_DEF_METHOD(query_settable_attributes, -1);
+        RG_DEF_METHOD(query_writable_namespaces, -1);
+        RG_DEF_METHOD(set_attribute, -1);
+        RG_DEF_METHOD(set_attributes_from_info, -1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "attributes_from_info");
+        RG_DEF_METHOD(set_attributes_async, -1);
+        RG_DEF_METHOD(set_attributes_finish, 1);
+        RG_DEF_METHOD(set_attribute_string, -1);
+        RG_DEF_METHOD(set_attribute_byte_string, -1);
+        RG_DEF_METHOD(set_attribute_uint32, -1);
+        RG_DEF_METHOD(set_attribute_int32, -1);
+        RG_DEF_METHOD(set_attribute_uint64, -1);
+        RG_DEF_METHOD(set_attribute_int64, -1);
+        RG_DEF_METHOD(mount_mountable, -1);
+        RG_DEF_METHOD(mount_mountable_finish, 1);
+        RG_DEF_METHOD(unmount_mountable_with_operation, -1);
+        RG_DEF_METHOD(unmount_mountable_with_operation_finish, 1);
+        RG_DEF_METHOD(eject_mountable_with_operation, -1);
+        RG_DEF_METHOD(eject_mountable_with_operation_finish, 1);
+        RG_DEF_METHOD(start_mountable, -1);
+        RG_DEF_METHOD(start_mountable_finish, 1);
+        RG_DEF_METHOD(stop_mountable, -1);
+        RG_DEF_METHOD(stop_mountable_finish, 1);
+        RG_DEF_METHOD(poll_mountable, -1);
+        RG_DEF_METHOD(poll_mountable_finish, 1);
+        RG_DEF_METHOD(mount_enclosing_volume, -1);
+        RG_DEF_METHOD(mount_enclosing_volume_finish, 1);
+        RG_DEF_METHOD(monitor_directory, -1);
+        RG_DEF_METHOD(monitor_file, -1);
+        RG_DEF_METHOD(monitor, -1);
+        RG_DEF_METHOD(load_contents, -1);
+        RG_DEF_METHOD(load_contents_async, -1);
+        RG_DEF_METHOD(load_contents_finish, 1);
+        RG_DEF_METHOD(load_partial_contents_async, -1);
+        RG_DEF_METHOD(load_partial_contents_finish, 1);
+        RG_DEF_METHOD(replace_contents, -1);
+        RG_DEF_METHOD(replace_contents_async, -1);
+        RG_DEF_METHOD(replace_contents_finish, 1);
+        RG_DEF_METHOD(copy_attributes, -1);
+        RG_DEF_METHOD(create_readwrite, -1);
+        RG_DEF_METHOD(create_readwrite_async, -1);
+        RG_DEF_METHOD(create_readwrite_finish, 1);
+        RG_DEF_METHOD(open_readwrite, -1);
+        RG_DEF_METHOD(open_readwrite_async, -1);
+        RG_DEF_METHOD(open_readwrite_finish, 1);
+        RG_DEF_METHOD(replace_readwrite, -1);
+        RG_DEF_METHOD(replace_readwrite_async, -1);
+        RG_DEF_METHOD(replace_readwrite_finish, 1);
+        RG_DEF_METHOD_P(supports_thread_contexts, 0);
 }

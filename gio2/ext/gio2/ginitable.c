@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mInitable
 #define _SELF(value) G_INITABLE(RVAL2GOBJ(value))
 
 static VALUE
-initable_init(int argc, VALUE *argv, VALUE self)
+rg_init(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -165,7 +166,7 @@ rbgio_ginitable_new(GType type, VALUE parameters, VALUE cancellable)
 /* NOTE: We don't implement g_initable_new_valist. */
 
 static VALUE
-initable_initialize(int argc, VALUE *argv, VALUE self)
+rg_m_new(int argc, VALUE *argv, VALUE self)
 {
         const RGObjClassInfo* info;
         VALUE cancellable, parameters;
@@ -190,9 +191,9 @@ initable_initialize(int argc, VALUE *argv, VALUE self)
 void
 Init_ginitable(VALUE glib)
 {
-        VALUE initable = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", glib);
 
-        rb_define_module_function(initable, "new", initable_initialize, -1);
+        RG_DEF_MODFUNC(new, -1);
 
-        rb_define_method(initable, "init", initable_init, -1);
+        RG_DEF_METHOD(init, -1);
 }

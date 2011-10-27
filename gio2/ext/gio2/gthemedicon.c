@@ -21,11 +21,12 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mThemedIcon
 #define _SELF(value) G_THEMED_ICON(RVAL2GOBJ(value))
 
 /* TODO: Is this unnecessarily complicated? */
 static VALUE
-themedicon_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE iconnames, with_default_fallbacks;
         GIcon *icon;
@@ -56,7 +57,7 @@ themedicon_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-themedicon_prepend_name(VALUE self, VALUE iconname)
+rg_prepend_name(VALUE self, VALUE iconname)
 {
         g_themed_icon_prepend_name(_SELF(self), RVAL2CSTR(iconname));
 
@@ -64,7 +65,7 @@ themedicon_prepend_name(VALUE self, VALUE iconname)
 }
 
 static VALUE
-themedicon_append_name(VALUE self, VALUE iconname)
+rg_append_name(VALUE self, VALUE iconname)
 {
         g_themed_icon_append_name(_SELF(self), RVAL2CSTR(iconname));
 
@@ -74,9 +75,9 @@ themedicon_append_name(VALUE self, VALUE iconname)
 void
 Init_gthemedicon(VALUE glib)
 {
-        VALUE themedicon = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
 
-        rb_define_method(themedicon, "initialize", themedicon_initialize, -1);
-        rb_define_method(themedicon, "prepend_name", themedicon_prepend_name, 1);
-        rb_define_method(themedicon, "append_name", themedicon_append_name, 1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(prepend_name, 1);
+        RG_DEF_METHOD(append_name, 1);
 }

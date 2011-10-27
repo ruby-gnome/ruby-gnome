@@ -21,11 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileInputStream
 #define _SELF(value) G_FILE_INPUT_STREAM(RVAL2GOBJ(value))
 
-
 static VALUE
-fileinputstream_query_info(int argc, VALUE *argv, VALUE self)
+rg_query_info(int argc, VALUE *argv, VALUE self)
 {
         VALUE attributes, cancellable;
         GError *error = NULL;
@@ -43,7 +43,7 @@ fileinputstream_query_info(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileinputstream_query_info_async(int argc, VALUE *argv, VALUE self)
+rg_query_info_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbattributes, rbio_priority, rbcancellable, block;
         const char *attributes;
@@ -66,7 +66,7 @@ fileinputstream_query_info_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileinputstream_query_info_finish(VALUE self, VALUE result)
+rg_query_info_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GFileInfo *info;
@@ -83,9 +83,9 @@ fileinputstream_query_info_finish(VALUE self, VALUE result)
 void
 Init_gfileinputstream(VALUE glib)
 {
-        VALUE fileinputstream = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM, "FileInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM, "FileInputStream", glib);
 
-        rb_define_method(fileinputstream, "query_info", fileinputstream_query_info, -1);
-        rb_define_method(fileinputstream, "query_info_async", fileinputstream_query_info_async, -1);
-        rb_define_method(fileinputstream, "query_info_finish", fileinputstream_query_info_finish, 1);
+        RG_DEF_METHOD(query_info, -1);
+        RG_DEF_METHOD(query_info_async, -1);
+        RG_DEF_METHOD(query_info_finish, 1);
 }

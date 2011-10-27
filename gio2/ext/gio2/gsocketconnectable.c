@@ -21,78 +21,21 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE mSocketConnectable
 #define _SELF(value) RVAL2GSOCKETCONNECTABLE(value)
 
 static VALUE
-socketconnectable_enumerate(VALUE self)
+rg_enumerate(VALUE self)
 {
         return GOBJ2RVAL(g_socket_connectable_enumerate(_SELF(self)));
-}
-
-#undef _SELF
-#define _SELF(value) G_SOCKET_ADDRESS_ENUMERATOR(RVAL2GOBJ(value))
-
-static VALUE
-socketaddressenumerator_next(int argc, VALUE *argv, VALUE self)
-{
-        VALUE cancellable;
-        GError *error = NULL;
-        GSocketAddress *address;
-
-        rb_scan_args(argc, argv, "01", &cancellable);
-        address = g_socket_address_enumerator_next(_SELF(self),
-                                                   RVAL2GCANCELLABLE(cancellable),
-                                                   &error);
-        if (error != NULL)
-                rbgio_raise_error(error);
-
-        return GOBJ2RVAL(address);
-}
-
-static VALUE
-socketaddressenumerator_next_async(int argc, VALUE *argv, VALUE self)
-{
-        VALUE rbcancellable, block;
-        GCancellable *cancellable;
-
-        rb_scan_args(argc, argv, "01&", &rbcancellable, &block);
-        cancellable = RVAL2GCANCELLABLE(rbcancellable);
-        SAVE_BLOCK(block);
-        g_socket_address_enumerator_next_async(_SELF(self),
-                                               cancellable,
-                                               rbgio_async_ready_callback,
-                                               (gpointer)block);
-
-        return self;
-}
-
-static VALUE
-socketaddressenumerator_next_finish(VALUE self, VALUE result)
-{
-        GError *error = NULL;
-        GSocketAddress *address;
-
-        address = g_socket_address_enumerator_next_finish(_SELF(self),
-                                                          RVAL2GASYNCRESULT(result),
-                                                          &error);
-        if (address == NULL)
-                rbgio_raise_error(error);
-
-        return GOBJ2RVAL(address);
 }
 
 void
 Init_gsocketconnectable(VALUE glib)
 {
-        VALUE socketconnectable, socketaddressenumerator;
+        VALUE RG_TARGET_NAMESPACE;
 
-        socketconnectable = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", glib);
+        RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", glib);
 
-        rb_define_method(socketconnectable, "enumerate", socketconnectable_enumerate, 0);
-
-        socketaddressenumerator = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS_ENUMERATOR, "SocketAddressEnumerator", glib);
-
-        rb_define_method(socketaddressenumerator, "next", socketaddressenumerator_next, -1);
-        rb_define_method(socketaddressenumerator, "next_async", socketaddressenumerator_next_async, -1);
-        rb_define_method(socketaddressenumerator, "next_finish", socketaddressenumerator_next_finish, 1);
+        RG_DEF_METHOD(enumerate, 0);
 }
