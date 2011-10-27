@@ -21,40 +21,7 @@
 
 #include "gio2.h"
 
-static GIOSchedulerJob *
-ioschedulerjob_copy(const GIOSchedulerJob *job)
-{
-        return (GIOSchedulerJob *)job;
-}
-
-static void
-ioschedulerjob_free(G_GNUC_UNUSED GIOSchedulerJob *job)
-{
-        return;
-}
-
-static GType
-g_io_scheduler_job_get_type(void)
-{
-        static GType our_type = 0;
-
-        if (our_type == 0)
-                our_type = g_boxed_type_register_static("GIOSchedulerJob",
-                                                        (GBoxedCopyFunc)ioschedulerjob_copy,
-                                                        (GBoxedFreeFunc)ioschedulerjob_free);
-
-        return our_type;
-}
-
-#define G_TYPE_IO_SCHEDULER_JOB (g_io_scheduler_job_get_type())
-
-#define RVAL2GIOSCHEDULERJOB(object) \
-        ((GIOSchedulerJob *)(RVAL2BOXED(object, G_TYPE_IO_SCHEDULER_JOB)))
-
-#define GIOSCHEDULERJOB2RVAL(object) \
-        BOXED2RVAL(object, G_TYPE_IO_SCHEDULER_JOB)
-
-#define _SELF(value) RVAL2GIOSCHEDULERJOB(value)
+#define RG_TARGET_NAMESPACE mIOScheduler
 
 struct ioscheduler_job_callback_data
 {
@@ -68,7 +35,7 @@ ioscheduler_job_callback_call(VALUE data)
 {
         static VALUE s_id_call;
         struct ioscheduler_job_callback_data *real;
- 
+
         if (s_id_call == 0)
                 s_id_call = rb_intern("call");
 
@@ -98,7 +65,7 @@ ioscheduler_job_callback_free(gpointer data)
 }
 
 static VALUE
-ioscheduler_push_job(int argc, VALUE *argv, VALUE self)
+rg_s_push_job(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         gint io_priority;
@@ -119,63 +86,9 @@ ioscheduler_push_job(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioscheduler_cancel_all_jobs(VALUE self)
+rg_s_cancel_all_jobs(VALUE self)
 {
         g_io_scheduler_cancel_all_jobs();
-
-        return self;
-}
-
-static VALUE
-ioscheduler_source_callback_call(VALUE data)
-{
-        static VALUE s_id_call;
- 
-        if (s_id_call == 0)
-                s_id_call = rb_intern("call");
-
-        return rb_funcall(USE_BLOCK_AND_SAVE(data), s_id_call, 0);
-}
-
-static gboolean
-ioscheduler_source_callback(gpointer data)
-{
-        return RVAL2CBOOL(G_PROTECT_CALLBACK(ioscheduler_source_callback_call,
-                                             data));
-}
-
-static void
-ioscheduler_source_callback_free(gpointer data)
-{
-        USE_BLOCK(data);
-}
-
-static VALUE
-ioschedulerjob_send_to_mainloop(VALUE self)
-{
-        VALUE block;
-
-        block = rb_block_proc();
-        SAVE_BLOCK(block);
-
-        return CBOOL2RVAL(g_io_scheduler_job_send_to_mainloop(_SELF(self),
-                                                              ioscheduler_source_callback,
-                                                              (gpointer)block,
-                                                              ioscheduler_source_callback_free));
-}
-
-static VALUE
-ioschedulerjob_send_to_mainloop_async(VALUE self)
-{
-        VALUE block;
-
-        block = rb_block_proc();
-        SAVE_BLOCK(block);
-
-        g_io_scheduler_job_send_to_mainloop_async(_SELF(self),
-                                                  ioscheduler_source_callback,
-                                                  (gpointer)block,
-                                                  ioscheduler_source_callback_free);
 
         return self;
 }
@@ -183,12 +96,7 @@ ioschedulerjob_send_to_mainloop_async(VALUE self)
 void
 Init_gioscheduler(VALUE glib)
 {
-        VALUE ioschedulerjob = G_DEF_CLASS(G_TYPE_IO_SCHEDULER_JOB, "IOSchedulerJob", glib);
-
-        VALUE ioscheduler = rb_define_module_under(glib, "IOScheduler");
-        rb_define_singleton_method(ioscheduler, "push_job", ioscheduler_push_job, -1);
-        rb_define_singleton_method(ioscheduler, "cancel_all_jobs", ioscheduler_cancel_all_jobs, 0);
-
-        rb_define_method(ioschedulerjob, "send_to_mainloop", ioschedulerjob_send_to_mainloop, 0);
-        rb_define_method(ioschedulerjob, "send_to_mainloop_async", ioschedulerjob_send_to_mainloop_async, 0);
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IOScheduler");
+        RG_DEF_SMETHOD(push_job, -1);
+        RG_DEF_SMETHOD(cancel_all_jobs, 0);
 }

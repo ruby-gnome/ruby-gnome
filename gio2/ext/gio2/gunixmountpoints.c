@@ -21,30 +21,38 @@
 
 #include "gio2.h"
 
-#define RG_TARGET_NAMESPACE cBufferedOutputStream
-#define _SELF(value) G_BUFFERED_OUTPUT_STREAM(RVAL2GOBJ(value))
+#ifdef HAVE_GIO_UNIX
+#include <gio/gunixmounts.h>
+
+#define RG_TARGET_NAMESPACE mUnixMountPoints
 
 static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+rg_m_get(G_GNUC_UNUSED VALUE self)
 {
-        VALUE rbbase_stream, size;
-        GOutputStream *base_stream, *stream;
+        guint64 time_read;
+        GList *mount_points;
 
-        rb_scan_args(argc, argv, "11", &rbbase_stream, &size);
-        base_stream = RVAL2GOUTPUTSTREAM(rbbase_stream);
+        mount_points = g_unix_mount_points_get(&time_read);
 
-        stream = NIL_P(size) ?
-                g_buffered_output_stream_new(base_stream) :
-                g_buffered_output_stream_new_sized(base_stream, RVAL2GSIZE(size));
-        G_INITIALIZE(self, stream);
-
-        return Qnil;
+        return rb_assoc_new(GLIST2ARY_STR_FREE(mount_points),
+                            GUINT642RVAL(time_read));
 }
 
-void
-Init_gbufferedoutputstream(VALUE glib)
+static VALUE
+rg_m_changed_since_p(G_GNUC_UNUSED VALUE self, VALUE time_read)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
+        return CBOOL2RVAL(g_unix_mount_points_changed_since(RVAL2GUINT64(time_read)));
+}
 
-        RG_DEF_METHOD(initialize, -1);
+#endif
+
+void
+Init_gunixmountpoints(G_GNUC_UNUSED VALUE glib)
+{
+#ifdef HAVE_GIO_UNIX
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "UnixMountPoints");
+
+        RG_DEF_MODFUNC(get, 0);
+        RG_DEF_MODFUNC_P(changed_since, 1);
+#endif
 }

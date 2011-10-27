@@ -24,10 +24,11 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixsocketaddress.h>
 
+#define RG_TARGET_NAMESPACE cUnixSocketAddress
 #define _SELF(value) G_UNIX_SOCKET_ADDRESS(RVAL2GOBJ(value))
 
 static VALUE
-unixsocketaddress_initialize(VALUE self, VALUE path)
+rg_initialize(VALUE self, VALUE path)
 {
         G_INITIALIZE(self, g_unix_socket_address_new(RVAL2CSTR(path)));
 
@@ -35,7 +36,7 @@ unixsocketaddress_initialize(VALUE self, VALUE path)
 }
 
 static VALUE
-unixsocketaddress_new_abstract(G_GNUC_UNUSED VALUE self, VALUE path)
+rg_s_new_abstract(G_GNUC_UNUSED VALUE self, VALUE path)
 {
         StringValue(path);
         return GOBJ2RVAL_UNREF(g_unix_socket_address_new_abstract(RSTRING_PTR(path),
@@ -43,7 +44,7 @@ unixsocketaddress_new_abstract(G_GNUC_UNUSED VALUE self, VALUE path)
 }
 
 static VALUE
-unixsocketaddress_abstract_names_supported(G_GNUC_UNUSED VALUE self)
+rg_s_abstract_names_supported_p(G_GNUC_UNUSED VALUE self)
 {
         return CBOOL2RVAL(g_unix_socket_address_abstract_names_supported());
 }
@@ -53,16 +54,16 @@ void
 Init_gunixsocketaddress(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixsocketaddress = G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS, "UnixSocketAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS, "UnixSocketAddress", glib);
 
 #  if GLIB_CHECK_VERSION(2, 26, 0)
-        G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS_TYPE, "Type", unixsocketaddress);
-        G_DEF_CONSTANTS(unixsocketaddress, G_TYPE_UNIX_SOCKET_ADDRESS_TYPE, "G_UNIX_SOCKET_ADDRESS_");
+        G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS_TYPE, "Type", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_UNIX_SOCKET_ADDRESS_TYPE, "G_UNIX_SOCKET_ADDRESS_");
 #  endif
 
-        rb_define_singleton_method(unixsocketaddress, "new_abstract", unixsocketaddress_new_abstract, 1);
-        rb_define_singleton_method(unixsocketaddress, "abstract_names_supported?", unixsocketaddress_abstract_names_supported, 0);
+        RG_DEF_SMETHOD(new_abstract, 1);
+        RG_DEF_SMETHOD_P(abstract_names_supported, 0);
 
-        rb_define_method(unixsocketaddress, "initialize", unixsocketaddress_initialize, 1);
+        RG_DEF_METHOD(initialize, 1);
 #endif
 }

@@ -21,6 +21,8 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileAttributeInfo
+
 static GFileAttributeInfo *
 fileattributeinfo_copy(const GFileAttributeInfo *info)
 {
@@ -55,19 +57,19 @@ g_file_attribute_info_get_type(void)
         GFLAGS2RVAL((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
 
 static VALUE
-fileattributeinfo_name(VALUE self)
+rg_name(VALUE self)
 {
         return CSTR2RVAL(_SELF(self)->name);
 }
 
 static VALUE
-fileattributeinfo_type(VALUE self)
+rg_type(VALUE self)
 {
         return GFILEATTRIBUTETYPE2RVAL(_SELF(self)->type);
 }
 
 static VALUE
-fileattributeinfo_flags(VALUE self)
+rg_flags(VALUE self)
 {
         return GFILEATTRIBUTEINFOFLAGS2RVAL(_SELF(self)->flags);
 }
@@ -75,16 +77,16 @@ fileattributeinfo_flags(VALUE self)
 void
 Init_gfileattributeinfo(VALUE glib)
 {
-        VALUE fileattributeinfo;
+        VALUE RG_TARGET_NAMESPACE;
 
-        fileattributeinfo = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO, "FileAttributeInfo", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO, "FileAttributeInfo", glib);
 
-        G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "Flags", fileattributeinfo);
-        G_DEF_CONSTANTS(fileattributeinfo, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_INFO_");
+        G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_INFO_");
 
         rbgobj_boxed_not_copy_obj(G_TYPE_FILE_ATTRIBUTE_INFO);
 
-        rb_define_method(fileattributeinfo, "name", fileattributeinfo_name, 0);
-        rb_define_method(fileattributeinfo, "type", fileattributeinfo_type, 0);
-        rb_define_method(fileattributeinfo, "flags", fileattributeinfo_flags, 0);
+        RG_DEF_METHOD(name, 0);
+        RG_DEF_METHOD(type, 0);
+        RG_DEF_METHOD(flags, 0);
 }

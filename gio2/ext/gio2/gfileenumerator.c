@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cFileEnumerator
 #define _SELF(value) G_FILE_ENUMERATOR(RVAL2GOBJ(value))
 
 static VALUE
-fileenumerator_next_file(int argc, VALUE *argv, VALUE self)
+rg_next_file(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -41,7 +42,7 @@ fileenumerator_next_file(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileenumerator_close(int argc, VALUE *argv, VALUE self)
+rg_close(int argc, VALUE *argv, VALUE self)
 {
         VALUE cancellable;
         GError *error = NULL;
@@ -54,7 +55,7 @@ fileenumerator_close(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileenumerator_next_files_async(int argc, VALUE *argv, VALUE self)
+rg_next_files_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbnum_files, rbio_priority, rbcancellable, block;
         int num_files;
@@ -77,7 +78,7 @@ fileenumerator_next_files_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileenumerator_next_files_finish(VALUE self, VALUE result)
+rg_next_files_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         GList *files = g_file_enumerator_next_files_finish(_SELF(self),
@@ -90,7 +91,7 @@ fileenumerator_next_files_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-fileenumerator_close_async(int argc, VALUE *argv, VALUE self)
+rg_close_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -110,7 +111,7 @@ fileenumerator_close_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-fileenumerator_close_finish(VALUE self, VALUE result)
+rg_close_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
         if (!g_file_enumerator_close_finish(_SELF(self),
@@ -122,19 +123,19 @@ fileenumerator_close_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-fileenumerator_is_closed(VALUE self)
+rg_closed_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_enumerator_is_closed(_SELF(self)));
 }
 
 static VALUE
-fileenumerator_has_pending(VALUE self)
+rg_has_pending_p(VALUE self)
 {
         return CBOOL2RVAL(g_file_enumerator_has_pending(_SELF(self)));
 }
 
 static VALUE
-fileenumerator_set_pending(VALUE self, VALUE pending)
+rg_set_pending(VALUE self, VALUE pending)
 {
         g_file_enumerator_set_pending(_SELF(self), RVAL2CBOOL(pending));
 
@@ -142,7 +143,7 @@ fileenumerator_set_pending(VALUE self, VALUE pending)
 }
 
 static VALUE
-fileenumerator_get_container(VALUE self)
+rg_container(VALUE self)
 {
         return GOBJ2RVAL(g_file_enumerator_get_container(_SELF(self)));
 }
@@ -150,17 +151,17 @@ fileenumerator_get_container(VALUE self)
 void
 Init_gfileenumerator(VALUE glib)
 {
-        VALUE fileenumerator = G_DEF_CLASS(G_TYPE_FILE_ENUMERATOR, "FileEnumerator", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ENUMERATOR, "FileEnumerator", glib);
 
-        rb_define_method(fileenumerator, "next_file", fileenumerator_next_file, -1);
-        rb_define_method(fileenumerator, "close", fileenumerator_close, -1);
-        rb_define_method(fileenumerator, "next_files_async", fileenumerator_next_files_async, -1);
-        rb_define_method(fileenumerator, "next_files_finish", fileenumerator_next_files_finish, 1);
-        rb_define_method(fileenumerator, "close_async", fileenumerator_close_async, -1);
-        rb_define_method(fileenumerator, "close_finish", fileenumerator_close_finish, 1);
-        rb_define_method(fileenumerator, "closed?", fileenumerator_is_closed, 0);
-        rb_define_method(fileenumerator, "has_pending?", fileenumerator_has_pending, 0);
-        rb_define_method(fileenumerator, "set_pending", fileenumerator_set_pending, 1);
-        G_DEF_SETTER(fileenumerator, "pending");
-        rb_define_method(fileenumerator, "container", fileenumerator_get_container, 0);
+        RG_DEF_METHOD(next_file, -1);
+        RG_DEF_METHOD(close, -1);
+        RG_DEF_METHOD(next_files_async, -1);
+        RG_DEF_METHOD(next_files_finish, 1);
+        RG_DEF_METHOD(close_async, -1);
+        RG_DEF_METHOD(close_finish, 1);
+        RG_DEF_METHOD_P(closed, 0);
+        RG_DEF_METHOD_P(has_pending, 0);
+        RG_DEF_METHOD(set_pending, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "pending");
+        RG_DEF_METHOD(container, 0);
 }

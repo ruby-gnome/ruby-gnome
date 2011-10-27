@@ -24,10 +24,11 @@
 #ifdef HAVE_GIO_UNIX
 #include <gio/gunixinputstream.h>
 
+#define RG_TARGET_NAMESPACE cUnixInputStream
 #define _SELF(value) G_UNIX_INPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-unixinputstream_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE fd, close_fd;
 
@@ -43,8 +44,8 @@ void
 Init_gunixinputstream(G_GNUC_UNUSED VALUE glib)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE unixinputstream = G_DEF_CLASS(G_TYPE_UNIX_INPUT_STREAM, "UnixInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_INPUT_STREAM, "UnixInputStream", glib);
 
-        rb_define_method(unixinputstream, "initialize", unixinputstream_initialize, -1);
+        RG_DEF_METHOD(initialize, -1);
 #endif
 }

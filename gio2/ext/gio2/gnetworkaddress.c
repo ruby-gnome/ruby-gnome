@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cNetworkAddress
 #define _SELF(value) G_NETWORK_ADDRESS(RVAL2GOBJ(value))
 
 static VALUE
-networkaddress_initialize(VALUE self, VALUE hostname, VALUE port)
+rg_initialize(VALUE self, VALUE hostname, VALUE port)
 {
         G_INITIALIZE(self, g_network_address_new(RVAL2CSTR(hostname),
                                                  RVAL2GUINT16(port)));
@@ -33,7 +34,7 @@ networkaddress_initialize(VALUE self, VALUE hostname, VALUE port)
 }
 
 static VALUE
-networkaddress_parse(G_GNUC_UNUSED VALUE self, VALUE host_and_port, VALUE default_port)
+rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE host_and_port, VALUE default_port)
 {
         GError *error = NULL;
         GSocketConnectable *connectable;
@@ -50,9 +51,9 @@ networkaddress_parse(G_GNUC_UNUSED VALUE self, VALUE host_and_port, VALUE defaul
 void
 Init_gnetworkaddress(VALUE glib)
 {
-        VALUE networkaddress = G_DEF_CLASS(G_TYPE_NETWORK_ADDRESS, "NetworkAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_ADDRESS, "NetworkAddress", glib);
 
-        rb_define_singleton_method(networkaddress, "parse", networkaddress_parse, 2);
+        RG_DEF_SMETHOD(parse, 2);
 
-        rb_define_method(networkaddress, "initialize", networkaddress_initialize, 2);
+        RG_DEF_METHOD(initialize, 2);
 }

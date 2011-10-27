@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cIOStream
 #define _SELF(value) G_IO_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-iostream_close(VALUE self, VALUE cancellable)
+rg_close(VALUE self, VALUE cancellable)
 {
         GError *error = NULL;
 
@@ -35,7 +36,7 @@ iostream_close(VALUE self, VALUE cancellable)
 }
 
 static VALUE
-iostream_close_async(int argc, VALUE *argv, VALUE self)
+rg_close_async(int argc, VALUE *argv, VALUE self)
 {
         VALUE rbio_priority, rbcancellable, block;
         int io_priority;
@@ -55,7 +56,7 @@ iostream_close_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-iostream_close_finish(VALUE self, VALUE result)
+rg_close_finish(VALUE self, VALUE result)
 {
         GError *error = NULL;
 
@@ -68,13 +69,13 @@ iostream_close_finish(VALUE self, VALUE result)
 }
 
 static VALUE
-iostream_has_pending(VALUE self)
+rg_has_pending_p(VALUE self)
 {
         return CBOOL2RVAL(g_io_stream_has_pending(_SELF(self)));
 }
 
 static VALUE
-iostream_set_pending(VALUE self)
+rg_set_pending(VALUE self)
 {
         GError *error = NULL;
 
@@ -85,7 +86,7 @@ iostream_set_pending(VALUE self)
 }
 
 static VALUE
-iostream_clear_pending(VALUE self)
+rg_clear_pending(VALUE self)
 {
         g_io_stream_clear_pending(_SELF(self));
 
@@ -95,13 +96,13 @@ iostream_clear_pending(VALUE self)
 void
 Init_giostream(VALUE glib)
 {
-        VALUE iostream = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", glib);
 
-        rb_define_method(iostream, "close", iostream_close, 1);
-        rb_define_method(iostream, "close_async", iostream_close_async, -1);
-        rb_define_method(iostream, "close_finish", iostream_close_finish, 1);
-        rb_define_method(iostream, "has_pending?", iostream_has_pending, 0);
-        rb_define_method(iostream, "set_pending", iostream_set_pending, 0);
-        G_DEF_SETTER(iostream, "pending");
-        rb_define_method(iostream, "clear_pending", iostream_clear_pending, 0);
+        RG_DEF_METHOD(close, 1);
+        RG_DEF_METHOD(close_async, -1);
+        RG_DEF_METHOD(close_finish, 1);
+        RG_DEF_METHOD_P(has_pending, 0);
+        RG_DEF_METHOD(set_pending, 0);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "pending");
+        RG_DEF_METHOD(clear_pending, 0);
 }

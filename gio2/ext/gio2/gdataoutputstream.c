@@ -21,10 +21,11 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cDataOutputStream
 #define _SELF(value) G_DATA_OUTPUT_STREAM(RVAL2GOBJ(value))
 
 static VALUE
-dataoutputstream_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
         VALUE base_stream,
               byte_order;
@@ -41,7 +42,7 @@ dataoutputstream_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_byte(int argc, VALUE *argv, VALUE self)
+rg_put_byte(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -57,7 +58,7 @@ dataoutputstream_put_byte(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_int16(int argc, VALUE *argv, VALUE self)
+rg_put_int16(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -73,7 +74,7 @@ dataoutputstream_put_int16(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_uint16(int argc, VALUE *argv, VALUE self)
+rg_put_uint16(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -89,7 +90,7 @@ dataoutputstream_put_uint16(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_int32(int argc, VALUE *argv, VALUE self)
+rg_put_int32(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -105,7 +106,7 @@ dataoutputstream_put_int32(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_uint32(int argc, VALUE *argv, VALUE self)
+rg_put_uint32(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -121,7 +122,7 @@ dataoutputstream_put_uint32(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_int64(int argc, VALUE *argv, VALUE self)
+rg_put_int64(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -137,7 +138,7 @@ dataoutputstream_put_int64(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_uint64(int argc, VALUE *argv, VALUE self)
+rg_put_uint64(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -153,7 +154,7 @@ dataoutputstream_put_uint64(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dataoutputstream_put_string(int argc, VALUE *argv, VALUE self)
+rg_put_string(int argc, VALUE *argv, VALUE self)
 {
         VALUE value, cancellable;
         GError *error = NULL;
@@ -171,15 +172,15 @@ dataoutputstream_put_string(int argc, VALUE *argv, VALUE self)
 void
 Init_gdataoutputstream(VALUE glib)
 {
-        VALUE dataoutputstream = G_DEF_CLASS(G_TYPE_DATA_OUTPUT_STREAM, "DataOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_OUTPUT_STREAM, "DataOutputStream", glib);
 
-        rb_define_method(dataoutputstream, "initialize", dataoutputstream_initialize, -1);
-        rb_define_method(dataoutputstream, "put_byte", dataoutputstream_put_byte, -1);
-        rb_define_method(dataoutputstream, "put_int16", dataoutputstream_put_int16, -1);
-        rb_define_method(dataoutputstream, "put_uint16", dataoutputstream_put_uint16, -1);
-        rb_define_method(dataoutputstream, "put_int32", dataoutputstream_put_int32, -1);
-        rb_define_method(dataoutputstream, "put_uint32", dataoutputstream_put_uint32, -1);
-        rb_define_method(dataoutputstream, "put_int64", dataoutputstream_put_int64, -1);
-        rb_define_method(dataoutputstream, "put_uint64", dataoutputstream_put_uint64, -1);
-        rb_define_method(dataoutputstream, "put_string", dataoutputstream_put_string, -1);
+        RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(put_byte, -1);
+        RG_DEF_METHOD(put_int16, -1);
+        RG_DEF_METHOD(put_uint16, -1);
+        RG_DEF_METHOD(put_int32, -1);
+        RG_DEF_METHOD(put_uint32, -1);
+        RG_DEF_METHOD(put_int64, -1);
+        RG_DEF_METHOD(put_uint64, -1);
+        RG_DEF_METHOD(put_string, -1);
 }

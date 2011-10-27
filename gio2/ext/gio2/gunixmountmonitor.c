@@ -21,30 +21,46 @@
 
 #include "gio2.h"
 
-#define RG_TARGET_NAMESPACE cBufferedOutputStream
-#define _SELF(value) G_BUFFERED_OUTPUT_STREAM(RVAL2GOBJ(value))
+#ifdef HAVE_GIO_UNIX
+#include <gio/gunixmounts.h>
+
+#define RG_TARGET_NAMESPACE cUnixMountMonitor
+#define _SELF(value) G_UNIX_MOUNT_MONITOR(RVAL2GOBJ(value))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-        VALUE rbbase_stream, size;
-        GOutputStream *base_stream, *stream;
+        VALUE limit_msec;
+        GUnixMountMonitor *monitor;
 
-        rb_scan_args(argc, argv, "11", &rbbase_stream, &size);
-        base_stream = RVAL2GOUTPUTSTREAM(rbbase_stream);
-
-        stream = NIL_P(size) ?
-                g_buffered_output_stream_new(base_stream) :
-                g_buffered_output_stream_new_sized(base_stream, RVAL2GSIZE(size));
-        G_INITIALIZE(self, stream);
+        rb_scan_args(argc, argv, "01", &limit_msec);
+        monitor = g_unix_mount_monitor_new();
+        if (!NIL_P(limit_msec))
+                g_unix_mount_monitor_set_rate_limit(monitor,
+                                                    FIX2INT(limit_msec));
+        G_INITIALIZE(self, monitor);
 
         return Qnil;
 }
 
-void
-Init_gbufferedoutputstream(VALUE glib)
+static VALUE
+rg_set_rate_limit(VALUE self, VALUE limit_msec)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
+        g_unix_mount_monitor_set_rate_limit(_SELF(self), FIX2INT(limit_msec));
+
+        return self;
+}
+
+#endif
+
+void
+Init_gunixmountmonitor(G_GNUC_UNUSED VALUE glib)
+{
+#ifdef HAVE_GIO_UNIX
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_MONITOR, "UnixMountMonitor", glib);
 
         RG_DEF_METHOD(initialize, -1);
+        RG_DEF_METHOD(set_rate_limit, 1);
+        G_DEF_SETTER(RG_TARGET_NAMESPACE, "rate_limit");
+#endif
 }

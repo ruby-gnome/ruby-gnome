@@ -21,40 +21,41 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cVolumeMonitor
 #define _SELF(value) G_VOLUME_MONITOR(RVAL2GOBJ(value))
 
 static VALUE
-volumemonitor_get(G_GNUC_UNUSED VALUE self)
+rg_s_get(G_GNUC_UNUSED VALUE self)
 {
         return GOBJ2RVAL_UNREF(g_volume_monitor_get());
 }
 
 static VALUE
-volumemonitor_get_connected_drives(VALUE self)
+rg_connected_drives(VALUE self)
 {
         return GLIST2ARY_FREE(g_volume_monitor_get_connected_drives(_SELF(self)));
 }
 
 static VALUE
-volumemonitor_get_volumes(VALUE self)
+rg_volumes(VALUE self)
 {
         return GLIST2ARY_FREE(g_volume_monitor_get_volumes(_SELF(self)));
 }
 
 static VALUE
-volumemonitor_get_mounts(VALUE self)
+rg_mounts(VALUE self)
 {
         return GLIST2ARY_FREE(g_volume_monitor_get_mounts(_SELF(self)));
 }
 
 static VALUE
-volumemonitor_get_mount_for_uuid(VALUE self, VALUE value)
+rg_get_mount_for_uuid(VALUE self, VALUE value)
 {
         return GOBJ2RVAL_UNREF(g_volume_monitor_get_mount_for_uuid(_SELF(self), RVAL2CSTR(value)));
 }
 
 static VALUE
-volumemonitor_get_volume_for_uuid(VALUE self, VALUE value)
+rg_get_volume_for_uuid(VALUE self, VALUE value)
 {
         return GOBJ2RVAL_UNREF(g_volume_monitor_get_volume_for_uuid(_SELF(self), RVAL2CSTR(value)));
 }
@@ -62,15 +63,15 @@ volumemonitor_get_volume_for_uuid(VALUE self, VALUE value)
 void
 Init_gvolumemonitor(VALUE glib)
 {
-        VALUE volumemonitor = G_DEF_CLASS(G_TYPE_VOLUME_MONITOR, "VolumeMonitor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VOLUME_MONITOR, "VolumeMonitor", glib);
 
-        rb_define_const(volumemonitor, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VOLUME_MONITOR_EXTENSION_POINT_NAME));
+        rb_define_const(RG_TARGET_NAMESPACE, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VOLUME_MONITOR_EXTENSION_POINT_NAME));
 
-        rb_define_singleton_method(volumemonitor, "get", volumemonitor_get, 0);
+        RG_DEF_SMETHOD(get, 0);
 
-        rb_define_method(volumemonitor, "connected_drives", volumemonitor_get_connected_drives, 0);
-        rb_define_method(volumemonitor, "volumes", volumemonitor_get_volumes, 0);
-        rb_define_method(volumemonitor, "mounts", volumemonitor_get_mounts, 0);
-        rb_define_method(volumemonitor, "get_mount_for_uuid", volumemonitor_get_mount_for_uuid, 0);
-        rb_define_method(volumemonitor, "get_volume_for_uuid", volumemonitor_get_volume_for_uuid, 0);
+        RG_DEF_METHOD(connected_drives, 0);
+        RG_DEF_METHOD(volumes, 0);
+        RG_DEF_METHOD(mounts, 0);
+        RG_DEF_METHOD(get_mount_for_uuid, 0);
+        RG_DEF_METHOD(get_volume_for_uuid, 0);
 }

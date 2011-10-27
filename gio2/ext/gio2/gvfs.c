@@ -21,46 +21,47 @@
 
 #include "gio2.h"
 
+#define RG_TARGET_NAMESPACE cVfs
 #define _SELF(value) G_VFS(RVAL2GOBJ(value))
 
 static VALUE
-vfs_get_file_for_path(VALUE self, VALUE path)
+rg_file_for_path(VALUE self, VALUE path)
 {
         return GOBJ2RVAL_UNREF(g_vfs_get_file_for_path(_SELF(self), RVAL2CSTR(path)));
 }
 
 static VALUE
-vfs_get_file_for_uri(VALUE self, VALUE uri)
+rg_file_for_uri(VALUE self, VALUE uri)
 {
         return GOBJ2RVAL_UNREF(g_vfs_get_file_for_uri(_SELF(self), RVAL2CSTR(uri)));
 }
 
 static VALUE
-vfs_parse_name(VALUE self, VALUE parse_name)
+rg_parse_name(VALUE self, VALUE parse_name)
 {
         return GOBJ2RVAL_UNREF(g_vfs_parse_name(_SELF(self), RVAL2CSTR(parse_name)));
 }
 
 static VALUE
-vfs_get_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
         return GOBJ2RVAL(g_vfs_get_default());
 }
 
 static VALUE
-vfs_get_local(G_GNUC_UNUSED VALUE self)
+rg_s_local(G_GNUC_UNUSED VALUE self)
 {
         return GOBJ2RVAL(g_vfs_get_local());
 }
 
 static VALUE
-vfs_is_active(VALUE self)
+rg_active_p(VALUE self)
 {
         return CBOOL2RVAL(g_vfs_is_active(_SELF(self)));
 }
 
 static VALUE
-vfs_get_supported_uri_schemes(VALUE self)
+rg_supported_uri_schemes(VALUE self)
 {
         return STRV2RVAL((const gchar **)g_vfs_get_supported_uri_schemes(_SELF(self)));
 }
@@ -68,16 +69,16 @@ vfs_get_supported_uri_schemes(VALUE self)
 void
 Init_gvfs(VALUE glib)
 {
-        VALUE vfs = G_DEF_CLASS(G_TYPE_VFS, "Vfs", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VFS, "Vfs", glib);
 
-        rb_define_const(vfs, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VFS_EXTENSION_POINT_NAME));
+        rb_define_const(RG_TARGET_NAMESPACE, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VFS_EXTENSION_POINT_NAME));
 
-        rb_define_singleton_method(vfs, "default", vfs_get_default, 0);
-        rb_define_singleton_method(vfs, "local", vfs_get_local, 0);
+        RG_DEF_SMETHOD(default, 0);
+        RG_DEF_SMETHOD(local, 0);
 
-        rb_define_method(vfs, "file_for_path", vfs_get_file_for_path, 1);
-        rb_define_method(vfs, "file_for_uri", vfs_get_file_for_uri, 1);
-        rb_define_method(vfs, "parse_name", vfs_parse_name, 1);
-        rb_define_method(vfs, "active?", vfs_is_active, 0);
-        rb_define_method(vfs, "supported_uri_schemes", vfs_get_supported_uri_schemes, 0);
+        RG_DEF_METHOD(file_for_path, 1);
+        RG_DEF_METHOD(file_for_uri, 1);
+        RG_DEF_METHOD(parse_name, 1);
+        RG_DEF_METHOD_P(active, 0);
+        RG_DEF_METHOD(supported_uri_schemes, 0);
 }
