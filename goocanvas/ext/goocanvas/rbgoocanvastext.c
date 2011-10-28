@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasText
+
 static VALUE
 rb_goo_canvas_text_new(VALUE self, VALUE parent, VALUE string,
                        VALUE x, VALUE y, VALUE width, VALUE anchor)
@@ -41,11 +43,11 @@ rb_goo_canvas_text_new(VALUE self, VALUE parent, VALUE string,
 void
 Init_goocanvastext(void)
 {
-    VALUE GooCanvasText;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasText = G_DEF_CLASS(GOO_TYPE_CANVAS_TEXT, "CanvasText", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_TEXT, "CanvasText", mGoo);
 
-    rb_define_method(GooCanvasText, "initialize", rb_goo_canvas_text_new, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_text_new, 6);
 
 #if 0
    GooCanvasItemModel* goo_canvas_text_model_new (GooCanvasItemModel *parent,

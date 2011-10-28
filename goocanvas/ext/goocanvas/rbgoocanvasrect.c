@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasRect
+
 static VALUE
 rb_goo_canvas_rect_new(VALUE self, VALUE parent, VALUE x, VALUE y,
                        VALUE width, VALUE height)
@@ -40,9 +42,9 @@ rb_goo_canvas_rect_new(VALUE self, VALUE parent, VALUE x, VALUE y,
 void
 Init_goocanvasrect(void)
 {
-    VALUE GooCanvasRect;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasRect = G_DEF_CLASS(GOO_TYPE_CANVAS_RECT, "CanvasRect", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_RECT, "CanvasRect", mGoo);
 
-    rb_define_method(GooCanvasRect, "initialize", rb_goo_canvas_rect_new, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_rect_new, 5);
 }

@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasPolyline
+
 static VALUE
 rb_goo_canvas_polyline_new(VALUE self, VALUE parent, VALUE close_path)
 {
@@ -84,13 +86,13 @@ rb_goo_canvas_points_get_num_points(VALUE self)
 void
 Init_goocanvaspolyline(void)
 {
-    VALUE GooCanvasPolyline;
+    VALUE RG_TARGET_NAMESPACE;
     VALUE GooCanvasPoints;
 
-    GooCanvasPolyline = G_DEF_CLASS(GOO_TYPE_CANVAS_POLYLINE,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_POLYLINE,
                                     "CanvasPolyline", mGoo);
 
-    rb_define_method(GooCanvasPolyline, "initialize",
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize",
                      rb_goo_canvas_polyline_new, 2);
 
     GooCanvasPoints = G_DEF_CLASS(GOO_TYPE_CANVAS_POINTS, "CanvasPoints", mGoo);

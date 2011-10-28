@@ -21,6 +21,7 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasItem
 #define SELF(self) RVAL2GCI(self)
 
 static VALUE
@@ -225,43 +226,43 @@ rb_goo_canvas_item_remove_child(VALUE self, VALUE child)
 void
 Init_goocanvasitem(void)
 {
-    VALUE GooCanvasItem;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasItem = G_DEF_CLASS(GOO_TYPE_CANVAS_ITEM, "CanvasItem", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_ITEM, "CanvasItem", mGoo);
 
-    rb_define_method(GooCanvasItem, "rotate", rb_goo_canvas_item_rotate, 3);
-    rb_define_method(GooCanvasItem, "translate", rb_goo_canvas_item_translate, 2);
-    rb_define_method(GooCanvasItem, "lower", rb_goo_canvas_item_lower, 1);
-    rb_define_method(GooCanvasItem, "raise", rb_goo_canvas_item_raise, 1);
-    rb_define_method(GooCanvasItem, "scale", rb_goo_canvas_item_scale, 2);
-    rb_define_method(GooCanvasItem, "skew_x", rb_goo_canvas_item_skew_x, 3);
-    rb_define_method(GooCanvasItem, "skew_y", rb_goo_canvas_item_skew_y, 3);
-    rb_define_method(GooCanvasItem, "set_simple_transform", rb_goo_canvas_item_set_simple_transform, 4);
-    rb_define_method(GooCanvasItem, "animate", rb_goo_canvas_item_animate, 8);
-    rb_define_method(GooCanvasItem, "stop_animation", rb_goo_canvas_item_stop_animation, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rotate", rb_goo_canvas_item_rotate, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "translate", rb_goo_canvas_item_translate, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "lower", rb_goo_canvas_item_lower, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "raise", rb_goo_canvas_item_raise, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "scale", rb_goo_canvas_item_scale, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "skew_x", rb_goo_canvas_item_skew_x, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "skew_y", rb_goo_canvas_item_skew_y, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_simple_transform", rb_goo_canvas_item_set_simple_transform, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "animate", rb_goo_canvas_item_animate, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "stop_animation", rb_goo_canvas_item_stop_animation, 0);
 
-    rb_define_method(GooCanvasItem, "set_style", rb_goo_canvas_item_set_style, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_style", rb_goo_canvas_item_set_style, 1);
 
-    rb_define_method(GooCanvasItem, "set_child_property", rb_goo_canvas_item_set_child_property, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_child_property", rb_goo_canvas_item_set_child_property, 3);
 
-    rb_define_method(GooCanvasItem, "canvas", rb_goo_canvas_item_get_canvas, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "canvas", rb_goo_canvas_item_get_canvas, 0);
 
-    rb_define_method(GooCanvasItem, "remove_child", rb_goo_canvas_item_remove_child, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_child", rb_goo_canvas_item_remove_child, 1);
 
-    rb_define_method(GooCanvasItem, "x1", rb_goo_canvas_bounds_x1, 0);
-    rb_define_method(GooCanvasItem, "x2", rb_goo_canvas_bounds_x2, 0);
-    rb_define_method(GooCanvasItem, "y1", rb_goo_canvas_bounds_y1, 0);
-    rb_define_method(GooCanvasItem, "y2", rb_goo_canvas_bounds_y2, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "x1", rb_goo_canvas_bounds_x1, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "x2", rb_goo_canvas_bounds_x2, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "y1", rb_goo_canvas_bounds_y1, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "y2", rb_goo_canvas_bounds_y2, 0);
 
     /* Enums */
-    G_DEF_CLASS(GOO_TYPE_CANVAS_ITEM_VISIBILITY, "Visibility", GooCanvasItem);
-    G_DEF_CONSTANTS(GooCanvasItem, GOO_TYPE_CANVAS_ITEM_VISIBILITY, "GOO_CANVAS_ITEM_");
-    G_DEF_CLASS(GOO_TYPE_CANVAS_ANIMATE_TYPE, "AnimateType", GooCanvasItem);
-    G_DEF_CONSTANTS(GooCanvasItem, GOO_TYPE_CANVAS_ANIMATE_TYPE, "GOO_CANVAS_");
+    G_DEF_CLASS(GOO_TYPE_CANVAS_ITEM_VISIBILITY, "Visibility", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GOO_TYPE_CANVAS_ITEM_VISIBILITY, "GOO_CANVAS_ITEM_");
+    G_DEF_CLASS(GOO_TYPE_CANVAS_ANIMATE_TYPE, "AnimateType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GOO_TYPE_CANVAS_ANIMATE_TYPE, "GOO_CANVAS_");
 
     
-    G_DEF_CLASS(GOO_TYPE_CANVAS_POINTER_EVENTS, "PointerEvents",GooCanvasItem);
-    G_DEF_CONSTANTS(GooCanvasItem, GOO_TYPE_CANVAS_POINTER_EVENTS,"GOO_CANVAS_");
+    G_DEF_CLASS(GOO_TYPE_CANVAS_POINTER_EVENTS, "PointerEvents",RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GOO_TYPE_CANVAS_POINTER_EVENTS,"GOO_CANVAS_");
    
 #if 0
    gint               goo_canvas_item_get_n_children (GooCanvasItem   *item);
@@ -355,5 +356,5 @@ Init_goocanvasitem(void)
                                   gdouble           y_offset);
 #endif
 
-    G_DEF_SETTERS(GooCanvasItem);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

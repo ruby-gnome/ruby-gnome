@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasImage
+
 static VALUE
 rb_goo_canvas_image_new(VALUE self, VALUE parent, VALUE pixbuf,
                         VALUE x, VALUE y)
@@ -39,8 +41,8 @@ rb_goo_canvas_image_new(VALUE self, VALUE parent, VALUE pixbuf,
 void
 Init_goocanvasimage(void)
 {
-    VALUE GooCanvasImage;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasImage = G_DEF_CLASS(GOO_TYPE_CANVAS_IMAGE, "CanvasImage", mGoo);
-    rb_define_method(GooCanvasImage, "initialize", rb_goo_canvas_image_new, 4);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_IMAGE, "CanvasImage", mGoo);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_image_new, 4);
 }

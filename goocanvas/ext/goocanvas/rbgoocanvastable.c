@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasTable
+
 static VALUE
 rb_goo_canvas_table_new(VALUE self, VALUE parent)
 {
@@ -34,9 +36,9 @@ rb_goo_canvas_table_new(VALUE self, VALUE parent)
 void
 Init_goocanvastable(void)
 {
-    VALUE GooCanvasTable;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasTable = G_DEF_CLASS(GOO_TYPE_CANVAS_TABLE, "CanvasTable", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_TABLE, "CanvasTable", mGoo);
 
-    rb_define_method(GooCanvasTable, "initialize", rb_goo_canvas_table_new, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_table_new, 1);
 }

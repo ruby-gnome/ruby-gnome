@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasStyle
+
 static VALUE
 rb_goo_canvas_style_new(VALUE self)
 {
@@ -50,13 +52,13 @@ rb_goo_canvas_style_set_fill_pattern(VALUE self, VALUE value)
 void
 Init_goocanvasstyle(void)
 {
-    VALUE GooCanvasStyle;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasStyle = G_DEF_CLASS(GOO_TYPE_CANVAS_STYLE, "CanvasStyle", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_STYLE, "CanvasStyle", mGoo);
 
-    rb_define_method(GooCanvasStyle, "initialize", rb_goo_canvas_style_new, 0);
-    rb_define_method(GooCanvasStyle, "set_fill_pattern",
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_style_new, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fill_pattern",
                      rb_goo_canvas_style_set_fill_pattern, 1);
     
-    G_DEF_SETTERS(GooCanvasStyle);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

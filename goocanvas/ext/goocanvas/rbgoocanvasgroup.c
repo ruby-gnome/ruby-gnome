@@ -21,6 +21,8 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasGroup
+
 static VALUE
 rb_goo_canvas_group_new(VALUE self, VALUE parent)
 {
@@ -34,9 +36,9 @@ rb_goo_canvas_group_new(VALUE self, VALUE parent)
 void
 Init_goocanvasgroup(void)
 {
-    VALUE GooCanvasGroup;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasGroup = G_DEF_CLASS(GOO_TYPE_CANVAS_GROUP, "CanvasGroup", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_GROUP, "CanvasGroup", mGoo);
 
-    rb_define_method(GooCanvasGroup, "initialize", rb_goo_canvas_group_new, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_group_new, 1);
 }
