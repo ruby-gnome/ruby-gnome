@@ -25,21 +25,21 @@
 #define _SELF(self) ((PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)))
 
 static VALUE
-rglyph_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_glyph_string_new());
     return Qnil;
 }
 
 static VALUE
-rglyph_set_size(VALUE self, VALUE len)
+rg_set_size(VALUE self, VALUE len)
 {
     pango_glyph_string_set_size(_SELF(self), NUM2INT(len));
     return self;
 }
 
 static VALUE
-rglyph_extents(int argc, VALUE *argv, VALUE self)
+rg_extents(int argc, VALUE *argv, VALUE self)
 {
     VALUE font, start_index, end_index;
     PangoRectangle ink_rect;
@@ -64,14 +64,14 @@ rglyph_extents(int argc, VALUE *argv, VALUE self)
 
 #if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
-rglyph_get_width(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(pango_glyph_string_get_width(_SELF(self)));
 }
 #endif
 
 static VALUE
-rglyph_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE trailing)
+rg_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE trailing)
 {
     int x_pos;
     StringValue(text);
@@ -88,7 +88,7 @@ rglyph_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE tra
 }
 
 static VALUE
-rglyph_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
+rg_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
 {
     int index;
     int trailing;
@@ -106,7 +106,7 @@ rglyph_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
 }
 
 static VALUE
-rglyph_get_logical_widths(VALUE self, VALUE rbtext, VALUE rbembedding_level)
+rg_get_logical_widths(VALUE self, VALUE rbtext, VALUE rbembedding_level)
 {
     PangoGlyphString *glyphs = _SELF(self);
     const char *text = RVAL2CSTR(rbtext);
@@ -122,7 +122,7 @@ rglyph_get_logical_widths(VALUE self, VALUE rbtext, VALUE rbembedding_level)
 }
 
 static VALUE
-rglyph_get_glyphs(VALUE self)
+rg_glyphs(VALUE self)
 {
     int i;
     PangoGlyphInfo** glyphs = &_SELF(self)->glyphs;
@@ -142,16 +142,16 @@ Init_pango_glyph_string(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_STRING, "GlyphString", mPango);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rglyph_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_size", rglyph_set_size, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "extents", rglyph_extents, -1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_size, 1);
+    RG_DEF_METHOD(extents, -1);
 #if PANGO_CHECK_VERSION(1,14,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "width", rglyph_get_width, 0);
+    RG_DEF_METHOD(width, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "index_to_x", rglyph_index_to_x, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "x_to_index", rglyph_x_to_index, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_logical_widths", rglyph_get_logical_widths, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "glyphs", rglyph_get_glyphs, 0);
+    RG_DEF_METHOD(index_to_x, 4);
+    RG_DEF_METHOD(x_to_index, 3);
+    RG_DEF_METHOD(get_logical_widths, 2);
+    RG_DEF_METHOD(glyphs, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

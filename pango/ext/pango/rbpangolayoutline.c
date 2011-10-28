@@ -49,7 +49,7 @@ pango_layout_line_get_type(void)
 /**********************************/
 
 static VALUE
-layout_line_get_extents(VALUE self)
+rg_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -60,7 +60,7 @@ layout_line_get_extents(VALUE self)
 }
 
 static VALUE
-layout_line_get_pixel_extents(VALUE self)
+rg_pixel_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -71,7 +71,7 @@ layout_line_get_pixel_extents(VALUE self)
 }
 
 static VALUE
-layout_line_index_to_x(VALUE self, VALUE index, VALUE trailing)
+rg_index_to_x(VALUE self, VALUE index, VALUE trailing)
 {
     int x_pos;
     pango_layout_line_index_to_x(_SELF(self), NUM2INT(index), 
@@ -80,17 +80,17 @@ layout_line_index_to_x(VALUE self, VALUE index, VALUE trailing)
 }
 
 static VALUE
-layout_line_x_to_index(VALUE self, VALUE x_pos)
+rg_x_to_index(VALUE self, VALUE x_pos)
 {
     int index, trailing;
-    
+
     gboolean ret = pango_layout_line_x_to_index(_SELF(self), NUM2INT(x_pos),
                                                 &index, &trailing);
     return rb_ary_new3(CBOOL2RVAL(ret), INT2NUM(index), INT2NUM(trailing));
 }
 
 static VALUE
-layout_line_get_x_ranges(VALUE self, VALUE start_index, VALUE end_index)
+rg_get_x_ranges(VALUE self, VALUE start_index, VALUE end_index)
 {
     int* ranges;
     int i, n_ranges;
@@ -110,39 +110,39 @@ layout_line_get_x_ranges(VALUE self, VALUE start_index, VALUE end_index)
 
 /* Structure members */
 static VALUE
-layout_line_get_layout(VALUE self)
+rg_layout(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->layout);
 }
 
 static VALUE
-layout_line_set_layout(VALUE self, VALUE val)
+rg_set_layout(VALUE self, VALUE val)
 {
     _SELF(self)->layout = PANGO_LAYOUT(RVAL2GOBJ(val));
     return self;
 }
 
 static VALUE
-layout_line_get_start_index(VALUE self)
+rg_start_index(VALUE self)
 {
     return INT2NUM(_SELF(self)->start_index);
 }
 
 static VALUE
-layout_line_set_start_index(VALUE self, VALUE val)
+rg_set_start_index(VALUE self, VALUE val)
 {
     _SELF(self)->start_index = NUM2INT(val);
     return self;
 }
 
 static VALUE
-layout_line_get_length(VALUE self)
+rg_length(VALUE self)
 {
     return INT2NUM(_SELF(self)->length);
 }
 
 static VALUE
-layout_line_set_length(VALUE self, VALUE val)
+rg_set_length(VALUE self, VALUE val)
 {
     _SELF(self)->length = NUM2INT(val);
     return self;
@@ -150,7 +150,7 @@ layout_line_set_length(VALUE self, VALUE val)
 
 #if PANGO_CHECK_VERSION(1,2,0)
 static VALUE
-layout_line_get_runs(VALUE self)
+rg_runs(VALUE self)
 {
     GSList* list = _SELF(self)->runs;
     VALUE ary = rb_ary_new();
@@ -201,7 +201,7 @@ layout_line_set_runs_rescue(VALUE value)
 }
 
 static VALUE
-layout_line_set_runs(VALUE self, VALUE attrs)
+rg_set_runs(VALUE self, VALUE attrs)
 {
     struct layout_line_set_runs_args args;
     args.line = _SELF(self);
@@ -217,26 +217,26 @@ layout_line_set_runs(VALUE self, VALUE attrs)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-layout_line_is_paragraph_start(VALUE self)
+rg_paragraph_start_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->is_paragraph_start);
 }
 
 static VALUE
-layout_line_set_paragraph_start(VALUE self, VALUE val)
+rg_set_paragraph_start(VALUE self, VALUE val)
 {
     _SELF(self)->is_paragraph_start = RVAL2CBOOL(val);
     return self;
 }
 
 static VALUE
-layout_line_get_resolved_dir(VALUE self)
+rg_resolved_dir(VALUE self)
 {
     return UINT2NUM(_SELF(self)->resolved_dir);
 }
 
 static VALUE
-layout_line_set_resolved_dir(VALUE self, VALUE val)
+rg_set_resolved_dir(VALUE self, VALUE val)
 {
     _SELF(self)->resolved_dir = NUM2UINT(val);
     return self;
@@ -248,27 +248,27 @@ Init_pango_layout_line(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT_LINE, "LayoutLine", mPango);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "extents", layout_line_get_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixel_extents", layout_line_get_pixel_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "index_to_x", layout_line_index_to_x, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "x_to_index", layout_line_x_to_index, 1); 
-    rb_define_method(RG_TARGET_NAMESPACE, "get_x_ranges", layout_line_get_x_ranges, 2); 
-    rb_define_method(RG_TARGET_NAMESPACE, "layout", layout_line_get_layout, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_layout", layout_line_set_layout, 1); 
-    rb_define_method(RG_TARGET_NAMESPACE, "start_index", layout_line_get_start_index, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_start_index", layout_line_set_start_index, 1); 
-    rb_define_method(RG_TARGET_NAMESPACE, "length", layout_line_get_length, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_length", layout_line_set_length, 1); 
+    RG_DEF_METHOD(extents, 0);
+    RG_DEF_METHOD(pixel_extents, 0);
+    RG_DEF_METHOD(index_to_x, 2);
+    RG_DEF_METHOD(x_to_index, 1); 
+    RG_DEF_METHOD(get_x_ranges, 2); 
+    RG_DEF_METHOD(layout, 0); 
+    RG_DEF_METHOD(set_layout, 1); 
+    RG_DEF_METHOD(start_index, 0); 
+    RG_DEF_METHOD(set_start_index, 1); 
+    RG_DEF_METHOD(length, 0); 
+    RG_DEF_METHOD(set_length, 1); 
 #if PANGO_CHECK_VERSION(1,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "runs", layout_line_get_runs, 0); 
+    RG_DEF_METHOD(runs, 0); 
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_runs", layout_line_set_runs, 1); 
+    RG_DEF_METHOD(set_runs, 1); 
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "paragraph_start?", layout_line_is_paragraph_start, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_paragraph_start", layout_line_set_paragraph_start, 1); 
-    rb_define_method(RG_TARGET_NAMESPACE, "resolved_dir", layout_line_get_resolved_dir, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_resolved_dir", layout_line_set_resolved_dir, 1); 
+    RG_DEF_METHOD_P(paragraph_start, 0); 
+    RG_DEF_METHOD(set_paragraph_start, 1); 
+    RG_DEF_METHOD(resolved_dir, 0); 
+    RG_DEF_METHOD(set_resolved_dir, 1); 
 #endif
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

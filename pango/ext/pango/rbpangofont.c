@@ -25,7 +25,7 @@
 #define _SELF(self) (PANGO_FONT(RVAL2GOBJ(self)))
 
 static VALUE
-font_find_shaper(VALUE self, VALUE language, VALUE ch)
+rg_find_shaper(VALUE self, VALUE language, VALUE ch)
 {
     return GOBJ2RVAL(pango_font_find_shaper(_SELF(self), 
                                             (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE),
@@ -33,7 +33,7 @@ font_find_shaper(VALUE self, VALUE language, VALUE ch)
 }
 
 static VALUE
-font_describe(int argc, VALUE *argv, VALUE self)
+rg_describe(int argc, VALUE *argv, VALUE self)
 {
     VALUE desc, absolute_size;
     rb_scan_args(argc, argv, "01", &absolute_size);
@@ -53,7 +53,7 @@ font_describe(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-font_get_coverage(VALUE self, VALUE language)
+rg_get_coverage(VALUE self, VALUE language)
 {
     PangoCoverage* c = pango_font_get_coverage(_SELF(self), 
                                                (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE));
@@ -61,7 +61,7 @@ font_get_coverage(VALUE self, VALUE language)
 }
 
 static VALUE
-font_get_glyph_extents(VALUE self, VALUE glyph)
+rg_get_glyph_extents(VALUE self, VALUE glyph)
 {
     PangoRectangle ink_rect, logical_rect;
     pango_font_get_glyph_extents(_SELF(self),
@@ -70,17 +70,17 @@ font_get_glyph_extents(VALUE self, VALUE glyph)
 
     return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
                         BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
-                    
+
 }
 
 static VALUE
-font_get_metrics(int argc, VALUE *argv, VALUE self)
+rg_metrics(int argc, VALUE *argv, VALUE self)
 {
     VALUE language;
     PangoLanguage* lang = NULL;
-    
+
     rb_scan_args(argc, argv, "01", &language);
-    
+
     if (!NIL_P(language))
         lang = (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE);
 
@@ -90,7 +90,7 @@ font_get_metrics(int argc, VALUE *argv, VALUE self)
 
 #if PANGO_CHECK_VERSION(1,9,0)
 static VALUE
-font_get_font_map(VALUE self)
+rg_font_map(VALUE self)
 {
     return GOBJ2RVAL(pango_font_get_font_map(_SELF(self)));
 }
@@ -100,15 +100,15 @@ void
 Init_pango_font(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "find_shaper", font_find_shaper, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "describe", font_describe, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_coverage", font_get_coverage, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_glyph_extents", font_get_glyph_extents, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "metrics", font_get_metrics, -1);
+
+    RG_DEF_METHOD(find_shaper, 2);
+    RG_DEF_METHOD(describe, -1);
+    RG_DEF_METHOD(get_coverage, 1);
+    RG_DEF_METHOD(get_glyph_extents, 1);
+    RG_DEF_METHOD(metrics, -1);
 
 #if PANGO_CHECK_VERSION(1,9,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "font_map", font_get_font_map, 0);
+    RG_DEF_METHOD(font_map, 0);
 #endif
 
     G_DEF_CLASS3("PangoXFont", "XFont", mPango);

@@ -61,7 +61,7 @@ rpango_reorder_items_ensure(VALUE value)
 }
 
 static VALUE
-rpango_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
+rg_m_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
 {
     struct rpango_reorder_items_args args;
     args.ary = rb_ary_to_ary(attrs);
@@ -74,13 +74,13 @@ rpango_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-rpango_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
+rg_m_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
     return GENUM2RVAL(pango_unichar_direction(NUM2UINT(ch)), PANGO_TYPE_DIRECTION);
 }
 
 static VALUE
-rpango_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
+rg_m_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     StringValue(text);
     return GENUM2RVAL(pango_find_base_dir(RSTRING_PTR(text), RSTRING_LEN(text)), 
@@ -126,7 +126,7 @@ rbg_pangologattrs2rval_free(PangoLogAttr *attrs, long n)
 #define PANGOLOGATTRS2RVAL_FREE(attrs, n) rbg_pangologattrs2rval_free(attrs, n)
 
 static VALUE
-rpango_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
+rg_m_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -140,7 +140,7 @@ rpango_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 }
 
 static VALUE
-rpango_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
+rg_m_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -155,10 +155,10 @@ rpango_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALU
 }
 
 static VALUE
-rpango_find_paragraph_boundary(G_GNUC_UNUSED VALUE self, VALUE text)
+rg_m_find_paragraph_boundary(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     gint paragraph_delimiter_index, next_paragraph_start;
-    
+
     StringValue(text);
     pango_find_paragraph_boundary(RSTRING_PTR(text), RSTRING_LEN(text),
                                   &paragraph_delimiter_index,
@@ -191,7 +191,7 @@ rpango_shape_ensure(VALUE value)
 }
 
 static VALUE
-rpango_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
+rg_m_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -206,7 +206,7 @@ rpango_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 
 /* This method is from rbpangoattribute.c */
 static VALUE
-rpango_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE markup_text, accel_marker;
     PangoAttrList *pattr_list;
@@ -245,7 +245,7 @@ rpango_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rpango_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
+rg_m_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 {
     return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
 }
@@ -253,18 +253,18 @@ rpango_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 void
 Init_pango_main(void)
 {
-    rb_define_module_function(RG_TARGET_NAMESPACE, "reorder_items", rpango_reorder_items, 1);
+    RG_DEF_MODFUNC(reorder_items, 1);
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "unichar_direction", rpango_unichar_direction, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "find_base_dir", rpango_find_base_dir, 1);
+    RG_DEF_MODFUNC(unichar_direction, 1);
+    RG_DEF_MODFUNC(find_base_dir, 1);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "break", rpango_break, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_log_attrs", rpango_get_log_attrs, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "shape", rpango_shape, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "parse_markup", rpango_parse_markup, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "pixels", rpango_pixels, 1);
+    RG_DEF_MODFUNC(break, 2);
+    RG_DEF_MODFUNC(get_log_attrs, 3);
+    RG_DEF_MODFUNC(find_paragraph_boundary, 1);
+    RG_DEF_MODFUNC(shape, 2);
+    RG_DEF_MODFUNC(parse_markup, -1);
+    RG_DEF_MODFUNC(pixels, 1);
 
     rb_define_const(RG_TARGET_NAMESPACE, "SCALE", INT2FIX(PANGO_SCALE));
 }

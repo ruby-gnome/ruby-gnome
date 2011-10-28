@@ -26,33 +26,33 @@
 #define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
 
 static VALUE
-layout_initialize(VALUE self, VALUE context)
+rg_initialize(VALUE self, VALUE context)
 {
     G_INITIALIZE(self, pango_layout_new(RVAL2CONTEXT(context)));
     return Qnil;
 }
 
 static VALUE
-layout_copy(VALUE self)
+rg_copy(VALUE self)
 {
     return GOBJ2RVAL_UNREF(pango_layout_copy(_SELF(self)));
 }
 
 static VALUE
-layout_get_context(VALUE self)
+rg_context(VALUE self)
 {
     return GOBJ2RVAL(pango_layout_get_context(_SELF(self)));
 }
 
 static VALUE
-layout_context_changed(VALUE self)
+rg_context_changed(VALUE self)
 {
     pango_layout_context_changed(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-layout_set_text(VALUE self, VALUE text)
+rg_set_text(VALUE self, VALUE text)
 {
     StringValue(text);
 
@@ -62,13 +62,13 @@ layout_set_text(VALUE self, VALUE text)
 }
 
 static VALUE
-layout_get_text(VALUE self)
+rg_text(VALUE self)
 {
     return CSTR2RVAL(pango_layout_get_text(_SELF(self)));
 }
 
 static VALUE
-layout_set_markup(int argc, VALUE *argv, VALUE self)
+rg_set_markup(int argc, VALUE *argv, VALUE self)
 {
     VALUE markup, accel_marker;
     gunichar accel_char = 0;
@@ -91,7 +91,7 @@ layout_set_markup(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-layout_set_markup_eq(VALUE self, VALUE markup)
+rg_operator_layout_set_markup_eq(VALUE self, VALUE markup)
 {
     StringValue(markup);
 
@@ -101,7 +101,7 @@ layout_set_markup_eq(VALUE self, VALUE markup)
 }
 
 static VALUE
-layout_set_attributes(VALUE self, VALUE attrs)
+rg_set_attributes(VALUE self, VALUE attrs)
 {
     pango_layout_set_attributes(_SELF(self), 
                                 (PangoAttrList*)(RVAL2BOXED(attrs, PANGO_TYPE_ATTR_LIST)));
@@ -109,35 +109,35 @@ layout_set_attributes(VALUE self, VALUE attrs)
 }
 
 static VALUE
-layout_get_attributes(VALUE self)
+rg_attributes(VALUE self)
 {
     return BOXED2RVAL(pango_layout_get_attributes(_SELF(self)), PANGO_TYPE_ATTR_LIST);
 }
 
 static VALUE
-layout_set_font_description(VALUE self, VALUE rb_desc)
+rg_set_font_description(VALUE self, VALUE rb_desc)
 {
     PangoFontDescription *desc;
     gboolean desc_created = FALSE;
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(rb_desc, rb_cString))) {
-	desc = pango_font_description_from_string(RVAL2CSTR(rb_desc));
-	desc_created = TRUE;
+        desc = pango_font_description_from_string(RVAL2CSTR(rb_desc));
+        desc_created = TRUE;
     } else {
-	desc = RVAL2BOXED(rb_desc, PANGO_TYPE_FONT_DESCRIPTION);
+        desc = RVAL2BOXED(rb_desc, PANGO_TYPE_FONT_DESCRIPTION);
     }
 
     pango_layout_set_font_description(_SELF(self), desc);
 
     if (desc_created)
-	pango_font_description_free(desc);
+        pango_font_description_free(desc);
 
     return self;
 }
 
 #ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
 static VALUE
-layout_get_font_description(VALUE self)
+rg_font_description(VALUE self)
 {
     const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
     return BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION);
@@ -145,113 +145,113 @@ layout_get_font_description(VALUE self)
 #endif
 
 static VALUE
-layout_set_width(VALUE self, VALUE width)
+rg_set_width(VALUE self, VALUE width)
 {
     pango_layout_set_width(_SELF(self), NUM2INT(width));
     return self;
 }
 
 static VALUE
-layout_get_width(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(pango_layout_get_width(_SELF(self)));
 }
 
 static VALUE
-layout_set_wrap(VALUE self, VALUE wrap)
+rg_set_wrap(VALUE self, VALUE wrap)
 {
     pango_layout_set_wrap(_SELF(self), RVAL2GENUM(wrap, PANGO_TYPE_WRAP_MODE));
     return self;
 }
 
 static VALUE
-layout_get_wrap(VALUE self)
+rg_wrap(VALUE self)
 {
     return GENUM2RVAL(pango_layout_get_wrap(_SELF(self)), PANGO_TYPE_WRAP_MODE);
 }
 
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
 static VALUE
-layout_set_ellipsize(VALUE self, VALUE ellipsize)
+rg_set_ellipsize(VALUE self, VALUE ellipsize)
 {
     pango_layout_set_ellipsize(_SELF(self), RVAL2GENUM(ellipsize, 
                                                        PANGO_TYPE_ELLIPSIZE_MODE));
     return self;
 }
 static VALUE
-layout_get_ellipsize(VALUE self)
+rg_ellipsize(VALUE self)
 {
     return GENUM2RVAL(pango_layout_get_ellipsize(_SELF(self)), PANGO_TYPE_ELLIPSIZE_MODE);
 }
 #endif
 
 static VALUE
-layout_set_indent(VALUE self, VALUE indent)
+rg_set_indent(VALUE self, VALUE indent)
 {
     pango_layout_set_indent(_SELF(self), NUM2INT(indent));
     return self;
 }
 
 static VALUE
-layout_get_indent(VALUE self)
+rg_indent(VALUE self)
 {
     return INT2NUM(pango_layout_get_indent(_SELF(self)));
 }
 
 static VALUE
-layout_get_spacing(VALUE self)
+rg_spacing(VALUE self)
 {
     return INT2NUM(pango_layout_get_spacing(_SELF(self)));
 }
 
 static VALUE
-layout_set_spacing(VALUE self, VALUE spacing)
+rg_set_spacing(VALUE self, VALUE spacing)
 {
     pango_layout_set_spacing(_SELF(self), NUM2INT(spacing));
     return self;
 }
 
 static VALUE
-layout_set_justify(VALUE self, VALUE justify)
+rg_set_justify(VALUE self, VALUE justify)
 {
     pango_layout_set_justify(_SELF(self), RVAL2CBOOL(justify));
     return self;
 }
 static VALUE
-layout_get_justify(VALUE self)
+rg_justify_p(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_justify(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-layout_set_auto_dir(VALUE self, VALUE auto_dir)
+rg_set_auto_dir(VALUE self, VALUE auto_dir)
 {
     pango_layout_set_auto_dir(_SELF(self), RVAL2CBOOL(auto_dir));
     return self;
 }
 static VALUE
-layout_get_auto_dir(VALUE self)
+rg_auto_dir_p(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_auto_dir(_SELF(self)));
 }
 #endif
 
 static VALUE
-layout_set_alignment(VALUE self, VALUE align)
+rg_set_alignment(VALUE self, VALUE align)
 {
     pango_layout_set_alignment(_SELF(self), RVAL2GENUM(align, PANGO_TYPE_ALIGNMENT));
     return self;
 }
 
 static VALUE
-layout_get_alignment(VALUE self)
+rg_alignment(VALUE self)
 {
     return GENUM2RVAL(pango_layout_get_alignment(_SELF(self)), PANGO_TYPE_ALIGNMENT);
 }
 
 static VALUE
-layout_set_tabs(VALUE self, VALUE tabs)
+rg_set_tabs(VALUE self, VALUE tabs)
 {
     pango_layout_set_tabs(_SELF(self), 
                           (PangoTabArray*)RVAL2BOXED(tabs, PANGO_TYPE_TAB_ARRAY));
@@ -259,7 +259,7 @@ layout_set_tabs(VALUE self, VALUE tabs)
 }
 
 static VALUE
-layout_get_tabs(VALUE self)
+rg_tabs(VALUE self)
 {
     VALUE ret = Qnil;
     PangoTabArray* tabs = pango_layout_get_tabs(_SELF(self));
@@ -272,20 +272,20 @@ layout_get_tabs(VALUE self)
 }
 
 static VALUE
-layout_set_single_paragraph_mode(VALUE self, VALUE setting)
+rg_set_single_paragraph_mode(VALUE self, VALUE setting)
 {
     pango_layout_set_single_paragraph_mode(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-layout_get_single_paragraph_mode(VALUE self)
+rg_single_paragraph_mode_p(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_single_paragraph_mode(_SELF(self)));
 }
 
 static VALUE
-layout_get_log_attrs(VALUE self)
+rg_log_attrs(VALUE self)
 {
     PangoLogAttr* attrs;
     gint i, n_attrs;
@@ -304,7 +304,7 @@ layout_get_log_attrs(VALUE self)
 }
 
 static VALUE
-layout_xy_to_index(VALUE self, VALUE x, VALUE y)
+rg_xy_to_index(VALUE self, VALUE x, VALUE y)
 {
     int index, trailing;
     gboolean ret = pango_layout_xy_to_index(_SELF(self), 
@@ -315,7 +315,7 @@ layout_xy_to_index(VALUE self, VALUE x, VALUE y)
 }
 
 static VALUE
-layout_index_to_pos(VALUE self, VALUE index)
+rg_index_to_pos(VALUE self, VALUE index)
 {
     PangoRectangle pos;
     pango_layout_index_to_pos(_SELF(self), NUM2INT(index), &pos);
@@ -323,7 +323,7 @@ layout_index_to_pos(VALUE self, VALUE index)
 }
 
 static VALUE
-layout_get_cursor_pos(VALUE self, VALUE index)
+rg_get_cursor_pos(VALUE self, VALUE index)
 {
     PangoRectangle strong_pos, weak_pos;
     pango_layout_get_cursor_pos(_SELF(self), NUM2INT(index), &strong_pos, &weak_pos);
@@ -332,7 +332,7 @@ layout_get_cursor_pos(VALUE self, VALUE index)
 }
 
 static VALUE
-layout_move_cursor_visually(VALUE self, VALUE strong, VALUE old_index, VALUE old_trailing, VALUE direction)
+rg_move_cursor_visually(VALUE self, VALUE strong, VALUE old_index, VALUE old_trailing, VALUE direction)
 {
     int new_index, new_trailing;
     pango_layout_move_cursor_visually(_SELF(self), RVAL2CBOOL(strong),
@@ -343,7 +343,7 @@ layout_move_cursor_visually(VALUE self, VALUE strong, VALUE old_index, VALUE old
 }
 
 static VALUE
-layout_get_extents(int argc, VALUE *argv, VALUE self)
+rg_get_extents(int argc, VALUE *argv, VALUE self)
 {
     VALUE ink_rect, logical_rect;
     PangoRectangle rink, rlog;
@@ -382,7 +382,7 @@ layout_get_extents(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-layout_extents(VALUE self)
+rg_extents(VALUE self)
 {
     PangoRectangle rink = {0, 0, 0, 0};
     PangoRectangle rlog = {0, 0, 0, 0};
@@ -393,7 +393,7 @@ layout_extents(VALUE self)
 }
 
 static VALUE
-layout_get_pixel_extents(int argc, VALUE *argv, VALUE self)
+rg_get_pixel_extents(int argc, VALUE *argv, VALUE self)
 {
     VALUE ink_rect, logical_rect;
     PangoRectangle rink, rlog;
@@ -432,7 +432,7 @@ layout_get_pixel_extents(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-layout_pixel_extents(VALUE self)
+rg_pixel_extents(VALUE self)
 {
     PangoRectangle rink = {0, 0, 0, 0};
     PangoRectangle rlog = {0, 0, 0, 0};
@@ -443,7 +443,7 @@ layout_pixel_extents(VALUE self)
 }
 
 static VALUE
-layout_get_size(VALUE self)
+rg_size(VALUE self)
 {
     int width, height;
     pango_layout_get_size(_SELF(self), &width, &height);
@@ -451,7 +451,7 @@ layout_get_size(VALUE self)
 }
 
 static VALUE
-layout_get_pixel_size(VALUE self)
+rg_pixel_size(VALUE self)
 {
     int width, height;
     pango_layout_get_pixel_size(_SELF(self), &width, &height);
@@ -459,26 +459,25 @@ layout_get_pixel_size(VALUE self)
 }
 
 static VALUE
-layout_get_line_count(VALUE self)
+rg_line_count(VALUE self)
 {
     return INT2NUM(pango_layout_get_line_count(_SELF(self)));
 }
 
 static VALUE
-layout_get_line(VALUE self, VALUE line)
+rg_get_line(VALUE self, VALUE line)
 {
     return BOXED2RVAL(pango_layout_get_line(_SELF(self), NUM2INT(line)), PANGO_TYPE_LAYOUT_LINE);
 }
 
 static VALUE
-layout_get_lines(VALUE self)
+rg_lines(VALUE self)
 {
     return GSLIST2ARY2(pango_layout_get_lines(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
 }
 
-
 static VALUE
-layout_get_iter(VALUE self)
+rg_iter(VALUE self)
 {
     return BOXED2RVAL(pango_layout_get_iter(_SELF(self)), 
                       PANGO_TYPE_LAYOUT_ITER);
@@ -489,59 +488,59 @@ Init_pango_layout(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT, "Layout", mPango);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", layout_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "copy", layout_copy, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "context", layout_get_context, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "context_changed", layout_context_changed, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_text", layout_set_text, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "text", layout_get_text, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", layout_set_markup, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "markup=", layout_set_markup_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_attributes", layout_set_attributes, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "attributes", layout_get_attributes, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_font_description", layout_set_font_description, 1);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(copy, 0);
+    RG_DEF_METHOD(context, 0);
+    RG_DEF_METHOD(context_changed, 0);
+    RG_DEF_METHOD(set_text, 1);
+    RG_DEF_METHOD(text, 0);
+    RG_DEF_METHOD(set_markup, -1);
+    RG_DEF_METHOD_OPERATOR("markup=", layout_set_markup_eq, 1);
+    RG_DEF_METHOD(set_attributes, 1);
+    RG_DEF_METHOD(attributes, 0);
+    RG_DEF_METHOD(set_font_description, 1);
 #ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
-    rb_define_method(RG_TARGET_NAMESPACE, "font_description", layout_get_font_description, 0);
+    RG_DEF_METHOD(font_description, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_width", layout_set_width, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "width", layout_get_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_wrap", layout_set_wrap, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "wrap", layout_get_wrap, 0);
+    RG_DEF_METHOD(set_width, 1);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(set_wrap, 1);
+    RG_DEF_METHOD(wrap, 0);
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
-    rb_define_method(RG_TARGET_NAMESPACE, "set_ellipsize", layout_set_ellipsize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "ellipsize", layout_get_ellipsize, 0);
+    RG_DEF_METHOD(set_ellipsize, 1);
+    RG_DEF_METHOD(ellipsize, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_indent", layout_set_indent, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "indent", layout_get_indent, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "spacing", layout_get_spacing, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_spacing", layout_set_spacing, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_justify", layout_set_justify, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "justify?", layout_get_justify, 0);
+    RG_DEF_METHOD(set_indent, 1);
+    RG_DEF_METHOD(indent, 0);
+    RG_DEF_METHOD(spacing, 0);
+    RG_DEF_METHOD(set_spacing, 1);
+    RG_DEF_METHOD(set_justify, 1);
+    RG_DEF_METHOD_P(justify, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_auto_dir", layout_set_auto_dir, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "auto_dir?", layout_get_auto_dir, 0);
+    RG_DEF_METHOD(set_auto_dir, 1);
+    RG_DEF_METHOD_P(auto_dir, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment", layout_set_alignment, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "alignment", layout_get_alignment, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tabs", layout_set_tabs, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "tabs", layout_get_tabs, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_single_paragraph_mode", layout_set_single_paragraph_mode, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "single_paragraph_mode?", layout_get_single_paragraph_mode, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "log_attrs", layout_get_log_attrs, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "xy_to_index", layout_xy_to_index, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "index_to_pos", layout_index_to_pos, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_cursor_pos", layout_get_cursor_pos, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "move_cursor_visually", layout_move_cursor_visually, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_extents", layout_get_extents, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "extents", layout_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_pixel_extents", layout_get_pixel_extents, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixel_extents", layout_pixel_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", layout_get_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixel_size", layout_get_pixel_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "line_count", layout_get_line_count, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_line", layout_get_line, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "lines", layout_get_lines, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "iter", layout_get_iter, 0);
+    RG_DEF_METHOD(set_alignment, 1);
+    RG_DEF_METHOD(alignment, 0);
+    RG_DEF_METHOD(set_tabs, 1);
+    RG_DEF_METHOD(tabs, 0);
+    RG_DEF_METHOD(set_single_paragraph_mode, 1);
+    RG_DEF_METHOD_P(single_paragraph_mode, 0);
+    RG_DEF_METHOD(log_attrs, 0);
+    RG_DEF_METHOD(xy_to_index, 2);
+    RG_DEF_METHOD(index_to_pos, 1);
+    RG_DEF_METHOD(get_cursor_pos, 1);
+    RG_DEF_METHOD(move_cursor_visually, 4);
+    RG_DEF_METHOD(get_extents, -1);
+    RG_DEF_METHOD(extents, 0);
+    RG_DEF_METHOD(get_pixel_extents, -1);
+    RG_DEF_METHOD(pixel_extents, 0);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(pixel_size, 0);
+    RG_DEF_METHOD(line_count, 0);
+    RG_DEF_METHOD(get_line, 1);
+    RG_DEF_METHOD(lines, 0);
+    RG_DEF_METHOD(iter, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

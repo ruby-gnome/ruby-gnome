@@ -28,7 +28,7 @@
 
 /*
 static VALUE
-font_map_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_ft2_font_map_new());
     return Qnil;
@@ -36,7 +36,7 @@ font_map_initialize(VALUE self)
 */
 
 static VALUE
-font_map_load_font(VALUE self, VALUE context, VALUE desc)
+rg_load_font(VALUE self, VALUE context, VALUE desc)
 {
     return GOBJ2RVAL(pango_font_map_load_font(_SELF(self), 
                                               PANGO_CONTEXT(RVAL2GOBJ(context)),
@@ -44,7 +44,7 @@ font_map_load_font(VALUE self, VALUE context, VALUE desc)
 }
 
 static VALUE
-font_map_load_fontset(VALUE self, VALUE context, VALUE desc, VALUE lang)
+rg_load_fontset(VALUE self, VALUE context, VALUE desc, VALUE lang)
 {
     return GOBJ2RVAL(pango_font_map_load_fontset(_SELF(self),
                                                  PANGO_CONTEXT(RVAL2GOBJ(context)),
@@ -53,7 +53,7 @@ font_map_load_fontset(VALUE self, VALUE context, VALUE desc, VALUE lang)
 }
 
 static VALUE
-font_map_list_families(VALUE self)
+rg_families(VALUE self)
 {
     int n_families;
     PangoFontFamily** families;
@@ -75,7 +75,7 @@ font_map_list_families(VALUE self)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-font_map_get_shape_engine_type(VALUE self)
+rg_shape_engine_type(VALUE self)
 {
     return CSTR2RVAL(pango_font_map_get_shape_engine_type(_SELF(self)));
 }
@@ -85,15 +85,15 @@ void
 Init_pango_font_map(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_MAP, "FontMap", mPango);
-    
-	 /*
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", font_map_initialize, 0);
-	 */
-    rb_define_method(RG_TARGET_NAMESPACE, "load_font", font_map_load_font, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_fontset", font_map_load_fontset, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "families", font_map_list_families, 0);
+
+     /*
+    RG_DEF_METHOD(initialize, 0);
+     */
+    RG_DEF_METHOD(load_font, 2);
+    RG_DEF_METHOD(load_fontset, 3);
+    RG_DEF_METHOD(families, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "shape_engine_type", font_map_get_shape_engine_type, 0);
+    RG_DEF_METHOD(shape_engine_type, 0);
 #endif
 
     G_DEF_CLASS3("PangoFcFontMap", "FcFontMap", mPango);
@@ -107,4 +107,3 @@ Init_pango_font_map(void)
     G_DEF_CLASS3("PangoATSUIFontMap", "ATSUIFontMap", mPango);
 #endif
 }
-

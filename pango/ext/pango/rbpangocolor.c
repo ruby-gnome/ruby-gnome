@@ -25,7 +25,7 @@
 #define _SELF(self) ((PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR))
 
 static VALUE
-color_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
+rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
     PangoColor c;
     c.red = NUM2INT(red);
@@ -37,52 +37,52 @@ color_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 }
 
 static VALUE
-color_parse(VALUE self, VALUE spec)
+rg_parse(VALUE self, VALUE spec)
 {
     return CBOOL2RVAL(pango_color_parse(_SELF(self), RVAL2CSTR(spec)));
 }
 
 static VALUE
-color_red(VALUE self)
+rg_red(VALUE self)
 {
     return INT2FIX(_SELF(self)->red);
 }
 
 static VALUE
-color_set_red(VALUE self, VALUE red)
+rg_set_red(VALUE self, VALUE red)
 {
     _SELF(self)->red = NUM2INT(red);
     return self;
 }
 
 static VALUE
-color_green(VALUE self)
+rg_green(VALUE self)
 {
     return INT2FIX(_SELF(self)->green);
 }
 
 static VALUE
-color_set_green(VALUE self, VALUE green)
+rg_set_green(VALUE self, VALUE green)
 {
     _SELF(self)->green = NUM2INT(green);
     return self;
 }
 
 static VALUE
-color_blue(VALUE self)
+rg_blue(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue);
 }
 
 static VALUE
-color_set_blue(VALUE self, VALUE blue)
+rg_set_blue(VALUE self, VALUE blue)
 {
     _SELF(self)->blue = NUM2INT(blue);
     return self;
 }
 
 static VALUE
-color_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     PangoColor *c = _SELF(self);
     return rb_ary_new3(3, INT2FIX(c->red), 
@@ -90,7 +90,7 @@ color_to_a(VALUE self)
 }
 
 static VALUE
-color_equal(VALUE self, VALUE other)
+rg_operator_color_equal(VALUE self, VALUE other)
 {
     PangoColor* c1 = _SELF(self);
     PangoColor* c2 = _SELF(other);
@@ -103,17 +103,17 @@ void
 Init_pango_color(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_COLOR, "Color", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", color_initialize, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "parse", color_parse, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "red", color_red, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_red", color_set_red, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "green", color_green, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_green", color_set_green, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "blue", color_blue, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_blue", color_set_blue, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_a", color_to_a, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", color_equal, 1);
+
+    RG_DEF_METHOD(initialize, 3);
+    RG_DEF_METHOD(parse, 1);
+    RG_DEF_METHOD(red, 0);
+    RG_DEF_METHOD(set_red, 1);
+    RG_DEF_METHOD(green, 0);
+    RG_DEF_METHOD(set_green, 1);
+    RG_DEF_METHOD(blue, 0);
+    RG_DEF_METHOD(set_blue, 1);
+    RG_DEF_METHOD(to_a, 0);
+    RG_DEF_METHOD_OPERATOR("==", color_equal, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

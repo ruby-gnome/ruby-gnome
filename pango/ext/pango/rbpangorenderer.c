@@ -26,7 +26,7 @@
 #define _SELF(self) (PANGO_RENDERER(RVAL2GOBJ(self)))
 
 static VALUE
-renderer_draw_layout(VALUE self, VALUE layout, VALUE x, VALUE y)
+rg_draw_layout(VALUE self, VALUE layout, VALUE x, VALUE y)
 {
     pango_renderer_draw_layout(_SELF(self), 
                                PANGO_LAYOUT(RVAL2GOBJ(layout)),
@@ -35,7 +35,7 @@ renderer_draw_layout(VALUE self, VALUE layout, VALUE x, VALUE y)
 }
 
 static VALUE
-renderer_draw_layout_line(VALUE self, VALUE line, VALUE x, VALUE y)
+rg_draw_layout_line(VALUE self, VALUE line, VALUE x, VALUE y)
 {
     pango_renderer_draw_layout_line(_SELF(self),  
                                     (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
@@ -44,7 +44,7 @@ renderer_draw_layout_line(VALUE self, VALUE line, VALUE x, VALUE y)
 }
 
 static VALUE
-renderer_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
+rg_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
 {
     pango_renderer_draw_glyphs(_SELF(self),
                                PANGO_FONT(RVAL2GOBJ(font)),
@@ -54,7 +54,7 @@ renderer_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
 }
 
 static VALUE
-renderer_draw_rectangle(VALUE self, VALUE part, VALUE x, VALUE y, VALUE width, VALUE height)
+rg_draw_rectangle(VALUE self, VALUE part, VALUE x, VALUE y, VALUE width, VALUE height)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_rectangle(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
@@ -67,7 +67,7 @@ renderer_draw_rectangle(VALUE self, VALUE part, VALUE x, VALUE y, VALUE width, V
 }
 
 static VALUE
-renderer_draw_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
+rg_draw_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     pango_renderer_draw_error_underline(_SELF(self),
                                         NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
@@ -75,7 +75,7 @@ renderer_draw_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE h
 }
 
 static VALUE
-renderer_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, VALUE y2, VALUE x12, VALUE x22)
+rg_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, VALUE y2, VALUE x12, VALUE x22)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_trapezoid(_SELF(self), 
@@ -91,7 +91,7 @@ renderer_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, 
 }
 
 static VALUE
-renderer_draw_glyph(VALUE self, VALUE font, VALUE glyph, VALUE x, VALUE y)
+rg_draw_glyph(VALUE self, VALUE font, VALUE glyph, VALUE x, VALUE y)
 {
     pango_renderer_draw_glyph(_SELF(self), PANGO_FONT(RVAL2GOBJ(font)),
                               NUM2INT(glyph), NUM2INT(x), NUM2INT(y));
@@ -99,24 +99,24 @@ renderer_draw_glyph(VALUE self, VALUE font, VALUE glyph, VALUE x, VALUE y)
 }
 
 static VALUE
-renderer_deactivate(VALUE self)
+rg_deactivate(VALUE self)
 {
     pango_renderer_deactivate(_SELF(self));
     return self;
 }
 
 static VALUE
-renderer_activate(VALUE self)
+rg_activate(VALUE self)
 {
     pango_renderer_activate(_SELF(self));
     if (rb_block_given_p()) {
-        rb_ensure(rb_yield, self, renderer_deactivate, self);
+        rb_ensure(rb_yield, self, rg_deactivate, self);
     }
     return self;
 }
 
 static VALUE
-renderer_part_changed(VALUE self, VALUE part)
+rg_part_changed(VALUE self, VALUE part)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_part_changed(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
@@ -127,7 +127,7 @@ renderer_part_changed(VALUE self, VALUE part)
 }
 
 static VALUE
-renderer_set_color(VALUE self, VALUE part, VALUE color)
+rg_set_color(VALUE self, VALUE part, VALUE color)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_set_color(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
@@ -140,7 +140,7 @@ renderer_set_color(VALUE self, VALUE part, VALUE color)
 }
 
 static VALUE
-renderer_get_color(VALUE self, VALUE part)
+rg_get_color(VALUE self, VALUE part)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     PangoColor* color = pango_renderer_get_color(_SELF(self),
@@ -152,7 +152,7 @@ renderer_get_color(VALUE self, VALUE part)
 }
 
 static VALUE
-renderer_set_matrix(VALUE self, VALUE matrix)
+rg_set_matrix(VALUE self, VALUE matrix)
 {
     pango_renderer_set_matrix(_SELF(self), 
                               (PangoMatrix*)(NIL_P(matrix) ? NULL : RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)));
@@ -160,7 +160,7 @@ renderer_set_matrix(VALUE self, VALUE matrix)
 }
 
 static VALUE
-renderer_get_matrix(VALUE self)
+rg_matrix(VALUE self)
 {
     const PangoMatrix* matrix = pango_renderer_get_matrix(_SELF(self));
     return BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX);
@@ -174,20 +174,20 @@ Init_pangorenderer(void)
 #if PANGO_CHECK_VERSION(1,8,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_RENDERER, "Renderer", mPango);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_layout", renderer_draw_layout, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_layout_line", renderer_draw_layout_line, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_glyphs", renderer_draw_glyphs, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_rectangle", renderer_draw_rectangle, 5);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_error_underline", renderer_draw_error_underline, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_trapezoid", renderer_draw_trapezoid, 7);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_glyph", renderer_draw_glyph, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "activate", renderer_activate, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "deactivate", renderer_deactivate, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "part_changed", renderer_part_changed, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_color", renderer_set_color, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_color", renderer_get_color, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_matrix", renderer_set_matrix, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "matrix", renderer_get_matrix, 0);
+    RG_DEF_METHOD(draw_layout, 3);
+    RG_DEF_METHOD(draw_layout_line, 3);
+    RG_DEF_METHOD(draw_glyphs, 4);
+    RG_DEF_METHOD(draw_rectangle, 5);
+    RG_DEF_METHOD(draw_error_underline, 4);
+    RG_DEF_METHOD(draw_trapezoid, 7);
+    RG_DEF_METHOD(draw_glyph, 4);
+    RG_DEF_METHOD(activate, 0);
+    RG_DEF_METHOD(deactivate, 0); 
+    RG_DEF_METHOD(part_changed, 1);
+    RG_DEF_METHOD(set_color, 2);
+    RG_DEF_METHOD(get_color, 1);
+    RG_DEF_METHOD(set_matrix, 1);
+    RG_DEF_METHOD(matrix, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

@@ -47,71 +47,71 @@ pango_layout_iter_get_type(void)
 /**********************************/
 
 static VALUE
-layout_iter_next_run(VALUE self)
+rg_next_run_bang(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_run(_SELF(self)));
 }
 
 static VALUE
-layout_iter_next_char(VALUE self)
+rg_next_char_bang(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_char(_SELF(self)));
 }
 
 static VALUE
-layout_iter_next_cluster(VALUE self)
+rg_next_cluster_bang(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_cluster(_SELF(self)));
 }
 
 static VALUE
-layout_iter_next_line(VALUE self)
+rg_next_line_bang(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_next_line(_SELF(self)));
 }
 
 static VALUE
-layout_iter_at_last_line(VALUE self)
+rg_at_last_line_p(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_iter_at_last_line(_SELF(self)));
 }
 
 static VALUE
-layout_iter_get_index(VALUE self)
+rg_index(VALUE self)
 {
     return INT2NUM(pango_layout_iter_get_index(_SELF(self)));
 }
 
 static VALUE
-layout_iter_get_baseline(VALUE self)
+rg_baseline(VALUE self)
 {
     return INT2NUM(pango_layout_iter_get_baseline(_SELF(self)));
 }
 
 static VALUE
-layout_iter_get_run(VALUE self)
+rg_run(VALUE self)
 {
     PangoLayoutRun* run = pango_layout_iter_get_run(_SELF(self));
     return BOXED2RVAL(run, PANGO_TYPE_GLYPH_ITEM);
 }
 
 static VALUE
-layout_iter_get_line(VALUE self)
+rg_line(VALUE self)
 {
     return BOXED2RVAL(pango_layout_iter_get_line(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
 }
 
 static VALUE
-layout_iter_get_char_extents(VALUE self)
+rg_char_extents(VALUE self)
 {
     PangoRectangle logical_rect;
-    
+
     pango_layout_iter_get_char_extents(_SELF(self), &logical_rect);
     return BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE);
 }
 
 static VALUE
-layout_iter_get_cluster_extents(VALUE self)
+rg_cluster_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -122,7 +122,7 @@ layout_iter_get_cluster_extents(VALUE self)
 }
 
 static VALUE
-layout_iter_get_run_extents(VALUE self)
+rg_run_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -133,7 +133,7 @@ layout_iter_get_run_extents(VALUE self)
 }
 
 static VALUE
-layout_iter_get_line_yrange(VALUE self)
+rg_line_yrange(VALUE self)
 {
     int y0, y1;
     pango_layout_iter_get_line_yrange(_SELF(self), &y0, &y1);
@@ -141,7 +141,7 @@ layout_iter_get_line_yrange(VALUE self)
 }
 
 static VALUE
-layout_iter_get_line_extents(VALUE self)
+rg_line_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -151,7 +151,7 @@ layout_iter_get_line_extents(VALUE self)
                         BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
 }
 static VALUE
-layout_iter_get_layout_extents(VALUE self)
+rg_layout_extents(VALUE self)
 {
     PangoRectangle ink_rect, logical_rect;
 
@@ -168,22 +168,22 @@ Init_pango_layout_iter(void)
 
     rbgobj_boxed_not_copy_obj(PANGO_TYPE_LAYOUT_ITER);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "next_run!", layout_iter_next_run, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "next_char!", layout_iter_next_char, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "next_cluster!", layout_iter_next_cluster, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "next_line!", layout_iter_next_line, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "at_last_line?", layout_iter_at_last_line, 0);
+    RG_DEF_METHOD_BANG(next_run, 0);
+    RG_DEF_METHOD_BANG(next_char, 0);
+    RG_DEF_METHOD_BANG(next_cluster, 0);
+    RG_DEF_METHOD_BANG(next_line, 0);
+    RG_DEF_METHOD_P(at_last_line, 0);
     /* for backword compatibility. :< */
-    rb_define_alias(RG_TARGET_NAMESPACE, "at_last_line!", "at_last_line?");
-    rb_define_method(RG_TARGET_NAMESPACE, "index", layout_iter_get_index, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "baseline", layout_iter_get_baseline, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run", layout_iter_get_run, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "line", layout_iter_get_line, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "char_extents", layout_iter_get_char_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "cluster_extents", layout_iter_get_cluster_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run_extents", layout_iter_get_run_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "line_yrange", layout_iter_get_line_yrange, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "line_extents", layout_iter_get_line_extents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout_extents", layout_iter_get_layout_extents, 0);
-   
+    RG_DEF_ALIAS("at_last_line!", "at_last_line?");
+    RG_DEF_METHOD(index, 0);
+    RG_DEF_METHOD(baseline, 0);
+    RG_DEF_METHOD(run, 0);
+    RG_DEF_METHOD(line, 0);
+    RG_DEF_METHOD(char_extents, 0);
+    RG_DEF_METHOD(cluster_extents, 0);
+    RG_DEF_METHOD(run_extents, 0);
+    RG_DEF_METHOD(line_yrange, 0);
+    RG_DEF_METHOD(line_extents, 0);
+    RG_DEF_METHOD(layout_extents, 0);
+
 }

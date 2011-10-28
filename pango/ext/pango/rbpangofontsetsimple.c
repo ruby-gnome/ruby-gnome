@@ -28,21 +28,21 @@
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
 
 static VALUE
-fontset_simple_initialize(VALUE self, VALUE lang)
+rg_initialize(VALUE self, VALUE lang)
 {
     G_INITIALIZE(self, pango_fontset_simple_new(RVAL2LANG(lang)));
     return Qnil;
 }
 
 static VALUE
-fontset_simple_append(VALUE self, VALUE font)
+rg_append(VALUE self, VALUE font)
 {
     pango_fontset_simple_append(_SELF(self), PANGO_FONT(RVAL2GOBJ(font)));
     return self;
 }
 
 static VALUE
-fontset_simple_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(pango_fontset_simple_size(_SELF(self)));
 }
@@ -53,9 +53,9 @@ Init_pango_fontset_simple(void)
 {
 #ifdef PANGO_ENABLE_BACKEND
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontsetSimple", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fontset_simple_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "append", fontset_simple_append, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", fontset_simple_size, 0);
+
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(append, 1);
+    RG_DEF_METHOD(size, 0);
 #endif
 }

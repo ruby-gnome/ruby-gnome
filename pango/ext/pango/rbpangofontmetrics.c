@@ -25,47 +25,47 @@
 #define _SELF(self) ((PangoFontMetrics*)RVAL2BOXED(self, PANGO_TYPE_FONT_METRICS))
 
 static VALUE
-font_metrics_get_ascent(VALUE self)
+rg_ascent(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_ascent(_SELF(self)));
 }
 
 static VALUE
-font_metrics_get_descent(VALUE self)
+rg_descent(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_descent(_SELF(self)));
 }
 
 static VALUE
-font_metrics_get_approximate_char_width(VALUE self)
+rg_approximate_char_width(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_approximate_char_width(_SELF(self)));
 }
 
 static VALUE
-font_metrics_get_approximate_digit_width(VALUE self)
+rg_approximate_digit_width(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_approximate_digit_width(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
-font_metrics_get_underline_thickness(VALUE self)
+rg_underline_thickness(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_underline_thickness(_SELF(self)));
 }
 static VALUE
-font_metrics_get_underline_position(VALUE self)
+rg_underline_position(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_underline_position(_SELF(self)));
 }
 static VALUE
-font_metrics_get_strikethrough_thickness(VALUE self)
+rg_strikethrough_thickness(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_strikethrough_thickness(_SELF(self)));
 }
 static VALUE
-font_metrics_get_strikethrough_position(VALUE self)
+rg_strikethrough_position(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_strikethrough_position(_SELF(self)));
 }
@@ -74,15 +74,15 @@ void
 Init_pango_font_metrics(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_METRICS, "FontMetrics", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "ascent", font_metrics_get_ascent, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "descent", font_metrics_get_descent, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "approximate_char_width", font_metrics_get_approximate_char_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "approximate_digit_width", font_metrics_get_approximate_digit_width, 0);
+
+    RG_DEF_METHOD(ascent, 0);
+    RG_DEF_METHOD(descent, 0);
+    RG_DEF_METHOD(approximate_char_width, 0);
+    RG_DEF_METHOD(approximate_digit_width, 0);
 #if PANGO_CHECK_VERSION(1,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "underline_thickness", font_metrics_get_underline_thickness, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "underline_position", font_metrics_get_underline_position, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "strikethrough_thickness", font_metrics_get_strikethrough_thickness, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "strikethrough_position", font_metrics_get_strikethrough_position, 0);
+    RG_DEF_METHOD(underline_thickness, 0);
+    RG_DEF_METHOD(underline_position, 0);
+    RG_DEF_METHOD(strikethrough_thickness, 0);
+    RG_DEF_METHOD(strikethrough_position, 0);
 #endif
 }

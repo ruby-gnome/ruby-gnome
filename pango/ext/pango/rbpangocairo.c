@@ -37,32 +37,32 @@
 #define RVAL2LINE(v) ((PangoLayoutLine*)RVAL2BOXED(v, PANGO_TYPE_LAYOUT_LINE))
 
 static VALUE
-font_map_create(VALUE klass)
+rg_s_create(VALUE klass)
 {
     return GOBJ2RVAL(pango_cairo_font_map_new());
 }
 
 static VALUE
-font_map_get_default(VALUE klass)
+rg_s_default(VALUE klass)
 {
     return GOBJ2RVAL(pango_cairo_font_map_get_default());
 }
 
 static VALUE
-font_map_set_resolution(VALUE self, VALUE dpi)
+rg_set_resolution(VALUE self, VALUE dpi)
 {
     pango_cairo_font_map_set_resolution(_SELF(self), NUM2DBL(dpi));
     return self;
 }
 
 static VALUE
-font_map_get_resolution(VALUE self)
+rg_resolution(VALUE self)
 {
     return rb_float_new(pango_cairo_font_map_get_resolution(_SELF(self)));
 }
 
 static VALUE
-font_map_create_context(VALUE self)
+rg_create_context(VALUE self)
 {
     return GOBJ2RVAL_UNREF(pango_cairo_font_map_create_context(_SELF(self)));
 }
@@ -179,12 +179,12 @@ Init_pango_cairo(void)
     /* Pango::CairoFontMap */
     RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "create", font_map_create, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", font_map_get_default, 0);
+    RG_DEF_SMETHOD(create, 0);
+    RG_DEF_SMETHOD(default, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_resolution", font_map_set_resolution, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "resolution", font_map_get_resolution, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "create_context", font_map_create_context, 0);
+    RG_DEF_METHOD(set_resolution, 1);
+    RG_DEF_METHOD(resolution, 0);
+    RG_DEF_METHOD(create_context, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

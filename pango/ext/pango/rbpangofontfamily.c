@@ -25,21 +25,21 @@
 #define _SELF(self) (PANGO_FONT_FAMILY(RVAL2GOBJ(self)))
 
 static VALUE
-font_family_get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL(pango_font_family_get_name(_SELF(self)));
 }
 
 #ifdef HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
 static VALUE
-font_family_is_monospace(VALUE self)
+rg_monospace_p(VALUE self)
 {
     return CBOOL2RVAL(pango_font_family_is_monospace(_SELF(self)));
 }
 #endif
 
 static VALUE
-font_family_list_faces(VALUE self)
+rg_faces(VALUE self)
 {
     int n_faces;
     PangoFontFace** faces;
@@ -63,12 +63,12 @@ void
 Init_pango_font_family(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_FAMILY, "FontFamily", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "name", font_family_get_name, 0);
+
+    RG_DEF_METHOD(name, 0);
 #ifdef HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
-    rb_define_method(RG_TARGET_NAMESPACE, "monospace?", font_family_is_monospace, 0);
+    RG_DEF_METHOD_P(monospace, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "faces", font_family_list_faces, 0);
+    RG_DEF_METHOD(faces, 0);
 
     G_DEF_CLASS3("PangoFcFamily", "FcFamily", mPango);
     G_DEF_CLASS3("PangoFT2Family", "FT2Family", mPango);
