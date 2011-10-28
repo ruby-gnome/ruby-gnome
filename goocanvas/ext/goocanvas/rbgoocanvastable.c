@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cCanvasTable
 
 static VALUE
-rb_goo_canvas_table_new(VALUE self, VALUE parent)
+rg_initialize(VALUE self, VALUE parent)
 {
     GooCanvasItem *item;
     item = goo_canvas_table_new(RVAL2GCI(parent), NULL);
@@ -40,5 +40,5 @@ Init_goocanvastable(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_TABLE, "CanvasTable", mGoo);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_table_new, 1);
+    RG_DEF_METHOD(initialize, 1);
 }

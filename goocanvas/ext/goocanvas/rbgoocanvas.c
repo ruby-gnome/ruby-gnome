@@ -34,14 +34,14 @@ rb_goo_canvas_initialize_item_object(VALUE obj, GooCanvasItem *item)
 }
 
 static VALUE
-rb_goo_canvas_new(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, goo_canvas_new());
     return Qnil;
 }
 
 static VALUE
-rb_goo_canvas_set_bounds(VALUE self, VALUE left, VALUE top,
+rg_set_bounds(VALUE self, VALUE left, VALUE top,
                          VALUE right, VALUE bottom)
 {
     goo_canvas_set_bounds(SELF(self), NUM2DBL(left), NUM2DBL(top),
@@ -50,7 +50,7 @@ rb_goo_canvas_set_bounds(VALUE self, VALUE left, VALUE top,
 }
 
 static VALUE
-rb_goo_canvas_get_root_item(VALUE self)
+rg_root_item(VALUE self)
 {
     VALUE root;
 
@@ -61,7 +61,7 @@ rb_goo_canvas_get_root_item(VALUE self)
 }
 
 static VALUE
-rb_goo_canvas_grab_focus(int argc, VALUE *argv, VALUE self)
+rg_grab_focus(int argc, VALUE *argv, VALUE self)
 {
     VALUE item;
 
@@ -75,7 +75,7 @@ rb_goo_canvas_grab_focus(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rb_goo_canvas_pointer_grab(VALUE self, VALUE item, VALUE event_mask, VALUE cursor, VALUE etime)
+rg_pointer_grab(VALUE self, VALUE item, VALUE event_mask, VALUE cursor, VALUE etime)
 {
     return GENUM2RVAL(
         goo_canvas_pointer_grab(SELF(self), RVAL2GCI(item),
@@ -86,7 +86,7 @@ rb_goo_canvas_pointer_grab(VALUE self, VALUE item, VALUE event_mask, VALUE curso
 }
 
 static VALUE
-rb_goo_canvas_pointer_ungrab(VALUE self, VALUE item, VALUE etime)
+rg_pointer_ungrab(VALUE self, VALUE item, VALUE etime)
 {
     goo_canvas_pointer_ungrab(SELF(self), RVAL2GCI(item),
                               NIL_P(etime) ? 0 : NUM2UINT(etime));
@@ -94,7 +94,7 @@ rb_goo_canvas_pointer_ungrab(VALUE self, VALUE item, VALUE etime)
 }
 
 static VALUE
-rb_goo_canvas_render(VALUE self, VALUE cr, VALUE rb_bounds, VALUE scale)
+rg_render(VALUE self, VALUE cr, VALUE rb_bounds, VALUE scale)
 {
     GooCanvasBounds bounds;
 
@@ -105,7 +105,7 @@ rb_goo_canvas_render(VALUE self, VALUE cr, VALUE rb_bounds, VALUE scale)
 }
 
 static VALUE
-rb_goo_canvas_scroll_to(VALUE self, VALUE left, VALUE top)
+rg_scroll_to(VALUE self, VALUE left, VALUE top)
 {
     goo_canvas_scroll_to(SELF(self), NUM2DBL(left), NUM2DBL(top));
     return self;
@@ -119,15 +119,14 @@ Init_goocanvas(void)
     mGoo = rb_define_module("Goo");
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS, "Canvas", mGoo);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_new, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_bounds", rb_goo_canvas_set_bounds, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "root_item", rb_goo_canvas_get_root_item, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "grab_focus", rb_goo_canvas_grab_focus, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pointer_grab", rb_goo_canvas_pointer_grab, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "pointer_ungrab",
-		     rb_goo_canvas_pointer_ungrab, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "render", rb_goo_canvas_render, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to", rb_goo_canvas_scroll_to, 2);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_bounds, 4);
+    RG_DEF_METHOD(root_item, 0);
+    RG_DEF_METHOD(grab_focus, -1);
+    RG_DEF_METHOD(pointer_grab, 4);
+    RG_DEF_METHOD(pointer_ungrab, 2);
+    RG_DEF_METHOD(render, 3);
+    RG_DEF_METHOD(scroll_to, 2);
 
     Init_goocanvasitem(); /* Goo::CanvasItem */
     Init_goocanvastext(); /* Goo::CanvasText */

@@ -25,7 +25,7 @@
 #define SELF(self) RVAL2GCI(self)
 
 static VALUE
-rb_goo_canvas_item_rotate(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
+rg_rotate(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
 {
     goo_canvas_item_rotate(SELF(self), NUM2DBL(degrees),
                            NUM2DBL(cx), NUM2DBL(cy));
@@ -33,35 +33,35 @@ rb_goo_canvas_item_rotate(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
 }
 
 static VALUE
-rb_goo_canvas_item_translate(VALUE self, VALUE tx, VALUE ty)
+rg_translate(VALUE self, VALUE tx, VALUE ty)
 {
     goo_canvas_item_translate(SELF(self), NUM2DBL(tx), NUM2DBL(ty));
     return self;
 }
 
 static VALUE
-rb_goo_canvas_item_lower(VALUE self, VALUE below)
+rg_lower(VALUE self, VALUE below)
 {
     goo_canvas_item_lower(SELF(self), SELF(below));
     return self;
 }
 
 static VALUE
-rb_goo_canvas_item_raise(VALUE self, VALUE above)
+rg_raise(VALUE self, VALUE above)
 {
     goo_canvas_item_raise(SELF(self), SELF(above));
     return self;
 }
 
 static VALUE
-rb_goo_canvas_item_scale(VALUE self, VALUE sx, VALUE sy)
+rg_scale(VALUE self, VALUE sx, VALUE sy)
 {
     goo_canvas_item_scale(SELF(self), NUM2DBL(sx), NUM2DBL(sy));
     return self;
 }
 
 static VALUE
-rb_goo_canvas_bounds_x1(VALUE self)
+rg_x1(VALUE self)
 {
     GooCanvasBounds bounds;
     goo_canvas_item_get_bounds(SELF(self), &bounds);
@@ -69,7 +69,7 @@ rb_goo_canvas_bounds_x1(VALUE self)
 }
 
 static VALUE
-rb_goo_canvas_bounds_x2(VALUE self)
+rg_x2(VALUE self)
 {
     GooCanvasBounds bounds;
     goo_canvas_item_get_bounds(SELF(self), &bounds);
@@ -77,7 +77,7 @@ rb_goo_canvas_bounds_x2(VALUE self)
 }
 
 static VALUE
-rb_goo_canvas_bounds_y1(VALUE self)
+rg_y1(VALUE self)
 {
     GooCanvasBounds bounds;
     goo_canvas_item_get_bounds(SELF(self), &bounds);
@@ -85,7 +85,7 @@ rb_goo_canvas_bounds_y1(VALUE self)
 }
 
 static VALUE
-rb_goo_canvas_bounds_y2(VALUE self)
+rg_y2(VALUE self)
 {
     GooCanvasBounds bounds;
     goo_canvas_item_get_bounds(SELF(self), &bounds);
@@ -93,7 +93,7 @@ rb_goo_canvas_bounds_y2(VALUE self)
 }
 
 static VALUE
-rb_goo_canvas_item_skew_x(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
+rg_skew_x(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
 {
     goo_canvas_item_skew_x(SELF(self), NUM2DBL(degrees),
                            NUM2DBL(cx), NUM2DBL(cy));
@@ -101,7 +101,7 @@ rb_goo_canvas_item_skew_x(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
 }
 
 static VALUE
-rb_goo_canvas_item_skew_y(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
+rg_skew_y(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
 {
     goo_canvas_item_skew_y(SELF(self), NUM2DBL(degrees),
                            NUM2DBL(cx), NUM2DBL(cy));
@@ -109,7 +109,7 @@ rb_goo_canvas_item_skew_y(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
 }
 
 static VALUE
-rb_goo_canvas_item_set_simple_transform(VALUE self, VALUE x, VALUE y,
+rg_set_simple_transform(VALUE self, VALUE x, VALUE y,
                                         VALUE scale, VALUE rotation)
 {
     goo_canvas_item_set_simple_transform(SELF(self), NUM2DBL(x), NUM2DBL(y),
@@ -118,7 +118,7 @@ rb_goo_canvas_item_set_simple_transform(VALUE self, VALUE x, VALUE y,
 }
 
 static VALUE
-rb_goo_canvas_item_animate(VALUE self, VALUE x, VALUE y, VALUE scale,
+rg_animate(VALUE self, VALUE x, VALUE y, VALUE scale,
                            VALUE degrees, VALUE absolute, VALUE duration,
                            VALUE step_time, VALUE type)
 {
@@ -135,21 +135,21 @@ rb_goo_canvas_item_animate(VALUE self, VALUE x, VALUE y, VALUE scale,
 }
 
 static VALUE
-rb_goo_canvas_item_stop_animation(VALUE self)
+rg_stop_animation(VALUE self)
 {
     goo_canvas_item_stop_animation(SELF(self));
     return self;
 }
 
 static VALUE
-rb_goo_canvas_item_set_style(VALUE self, VALUE style)
+rg_set_style(VALUE self, VALUE style)
 {
     goo_canvas_item_set_style(SELF(self), RVAL2GCS(style));
     return self;
 }
 
 static VALUE
-rb_goo_canvas_item_set_child_property(VALUE self, VALUE child,
+rg_set_child_property(VALUE self, VALUE child,
                                       VALUE prop_name, VALUE val)
 {
     GParamSpec* pspec;
@@ -206,13 +206,13 @@ rb_goo_canvas_item_set_child_property(VALUE self, VALUE child,
 }
 
 static VALUE
-rb_goo_canvas_item_get_canvas(VALUE self, VALUE tx, VALUE ty)
+rg_canvas(VALUE self, VALUE tx, VALUE ty)
 {
     return GOBJ2RVAL(goo_canvas_item_get_canvas(SELF(self)));
 }
 
 static VALUE
-rb_goo_canvas_item_remove_child(VALUE self, VALUE child)
+rg_remove_child(VALUE self, VALUE child)
 {
     gint child_num;
 
@@ -230,29 +230,29 @@ Init_goocanvasitem(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_ITEM, "CanvasItem", mGoo);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "rotate", rb_goo_canvas_item_rotate, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "translate", rb_goo_canvas_item_translate, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "lower", rb_goo_canvas_item_lower, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "raise", rb_goo_canvas_item_raise, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "scale", rb_goo_canvas_item_scale, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "skew_x", rb_goo_canvas_item_skew_x, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "skew_y", rb_goo_canvas_item_skew_y, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_simple_transform", rb_goo_canvas_item_set_simple_transform, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "animate", rb_goo_canvas_item_animate, 8);
-    rb_define_method(RG_TARGET_NAMESPACE, "stop_animation", rb_goo_canvas_item_stop_animation, 0);
+    RG_DEF_METHOD(rotate, 3);
+    RG_DEF_METHOD(translate, 2);
+    RG_DEF_METHOD(lower, 1);
+    RG_DEF_METHOD(raise, 1);
+    RG_DEF_METHOD(scale, 2);
+    RG_DEF_METHOD(skew_x, 3);
+    RG_DEF_METHOD(skew_y, 3);
+    RG_DEF_METHOD(set_simple_transform, 4);
+    RG_DEF_METHOD(animate, 8);
+    RG_DEF_METHOD(stop_animation, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_style", rb_goo_canvas_item_set_style, 1);
+    RG_DEF_METHOD(set_style, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_child_property", rb_goo_canvas_item_set_child_property, 3);
+    RG_DEF_METHOD(set_child_property, 3);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "canvas", rb_goo_canvas_item_get_canvas, 0);
+    RG_DEF_METHOD(canvas, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_child", rb_goo_canvas_item_remove_child, 1);
+    RG_DEF_METHOD(remove_child, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "x1", rb_goo_canvas_bounds_x1, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "x2", rb_goo_canvas_bounds_x2, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "y1", rb_goo_canvas_bounds_y1, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "y2", rb_goo_canvas_bounds_y2, 0);
+    RG_DEF_METHOD(x1, 0);
+    RG_DEF_METHOD(x2, 0);
+    RG_DEF_METHOD(y1, 0);
+    RG_DEF_METHOD(y2, 0);
 
     /* Enums */
     G_DEF_CLASS(GOO_TYPE_CANVAS_ITEM_VISIBILITY, "Visibility", RG_TARGET_NAMESPACE);
@@ -260,7 +260,6 @@ Init_goocanvasitem(void)
     G_DEF_CLASS(GOO_TYPE_CANVAS_ANIMATE_TYPE, "AnimateType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GOO_TYPE_CANVAS_ANIMATE_TYPE, "GOO_CANVAS_");
 
-    
     G_DEF_CLASS(GOO_TYPE_CANVAS_POINTER_EVENTS, "PointerEvents",RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GOO_TYPE_CANVAS_POINTER_EVENTS,"GOO_CANVAS_");
 

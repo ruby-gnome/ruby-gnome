@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cCanvasText
 
 static VALUE
-rb_goo_canvas_text_new(VALUE self, VALUE parent, VALUE string,
+rg_initialize(VALUE self, VALUE parent, VALUE string,
                        VALUE x, VALUE y, VALUE width, VALUE anchor)
 {
     GooCanvasItem *item;
@@ -47,5 +47,5 @@ Init_goocanvastext(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_TEXT, "CanvasText", mGoo);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_text_new, 6);
+    RG_DEF_METHOD(initialize, 6);
 }

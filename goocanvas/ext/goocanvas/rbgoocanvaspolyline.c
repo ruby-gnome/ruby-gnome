@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cCanvasPolyline
 
 static VALUE
-rb_goo_canvas_polyline_new(VALUE self, VALUE parent, VALUE close_path)
+rg_initialize(VALUE self, VALUE parent, VALUE close_path)
 {
     GooCanvasItem *item;
     item = goo_canvas_polyline_new(RVAL2GCI(parent), RTEST(close_path), 0, NULL);
@@ -41,6 +41,5 @@ Init_goocanvaspolyline(void)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_POLYLINE,
                                     "CanvasPolyline", mGoo);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize",
-                     rb_goo_canvas_polyline_new, 2);
+    RG_DEF_METHOD(initialize, 2);
 }

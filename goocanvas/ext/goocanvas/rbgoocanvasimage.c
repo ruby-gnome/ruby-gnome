@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cCanvasImage
 
 static VALUE
-rb_goo_canvas_image_new(VALUE self, VALUE parent, VALUE pixbuf,
+rg_initialize(VALUE self, VALUE parent, VALUE pixbuf,
                         VALUE x, VALUE y)
 {
     GooCanvasItem *item;
@@ -44,5 +44,5 @@ Init_goocanvasimage(void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_IMAGE, "CanvasImage", mGoo);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_image_new, 4);
+    RG_DEF_METHOD(initialize, 4);
 }

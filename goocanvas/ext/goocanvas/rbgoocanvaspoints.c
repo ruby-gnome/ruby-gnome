@@ -24,18 +24,18 @@
 #define RG_TARGET_NAMESPACE cCanvasPoints
 
 static VALUE
-rb_goo_canvas_points_new(VALUE self, VALUE num_points)
+rg_initialize(VALUE self, VALUE num_points)
 {
     G_INITIALIZE(self, goo_canvas_points_new(NUM2INT(num_points)));
     return Qnil;
 }
 
 static VALUE
-rb_goo_canvas_points_get(VALUE self, VALUE point)
+rg_operator_get(VALUE self, VALUE point)
 {
     int i;
     GooCanvasPoints *points;
-    
+
     i = NUM2INT(point);
     points = RVAL2GCPOINTS(self);
     if ((i < 0) || (i >= points->num_points))
@@ -46,11 +46,11 @@ rb_goo_canvas_points_get(VALUE self, VALUE point)
 }
 
 static VALUE
-rb_goo_canvas_points_set(VALUE self, VALUE point, VALUE new_coords)
+rg_operator_set(VALUE self, VALUE point, VALUE new_coords)
 {
     int i;
     GooCanvasPoints *points;
-    
+
     i = NUM2INT(point);
     points = RVAL2GCPOINTS(self);
     if ((i < 0) || (i >= points->num_points))
@@ -65,10 +65,10 @@ rb_goo_canvas_points_set(VALUE self, VALUE point, VALUE new_coords)
 }
 
 static VALUE
-rb_goo_canvas_points_get_num_points(VALUE self)
+rg_num_points(VALUE self)
 {
     GooCanvasPoints *points;
-    
+
     points = RVAL2GCPOINTS(self);
     return INT2NUM(points->num_points);
 }
@@ -80,9 +80,8 @@ Init_goocanvaspoints(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_POINTS, "CanvasPoints", mGoo);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_points_new, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "[]", rb_goo_canvas_points_get, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "[]=", rb_goo_canvas_points_set, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "num_points",
-                     rb_goo_canvas_points_get_num_points, 0);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD_OPERATOR("[]", get, 1);
+    RG_DEF_METHOD_OPERATOR("[]=", set, 2);
+    RG_DEF_METHOD(num_points, 0);
 }
