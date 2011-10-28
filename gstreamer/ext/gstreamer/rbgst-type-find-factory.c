@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cTypeFindFactory
 #define SELF(self) RVAL2GST_TYPE_FIND_FACTORY(self)
 
 /* Class: Gst::TypeFindFactory
@@ -36,22 +37,22 @@
  * Returns: an Array of Gst::TypeFindFactory objects.
  */
 static VALUE
-rb_gst_type_find_factory_get_list (void)
+rg_s_list (void)
 {
-	GList *list;
-	GList *orig;
-	VALUE arr;
+    GList *list;
+    GList *orig;
+    VALUE arr;
 
-	arr = rb_ary_new ();
-	orig = gst_type_find_factory_get_list();
-	for (list = orig; list != NULL; list = g_list_next (list)) {
-		GstTypeFindFactory *tff = GST_TYPE_FIND_FACTORY (list->data);
-		rb_ary_push (arr, RGST_TYPE_FIND_FACTORY_NEW (tff));
-	}
-	if (orig != NULL) {
-		g_list_free (orig);
-	}
-	return arr;
+    arr = rb_ary_new ();
+    orig = gst_type_find_factory_get_list();
+    for (list = orig; list != NULL; list = g_list_next (list)) {
+        GstTypeFindFactory *tff = GST_TYPE_FIND_FACTORY (list->data);
+        rb_ary_push (arr, RGST_TYPE_FIND_FACTORY_NEW (tff));
+    }
+    if (orig != NULL) {
+        g_list_free (orig);
+    }
+    return arr;
 }
 
 /*
@@ -63,7 +64,7 @@ rb_gst_type_find_factory_get_list (void)
  * associated with the type find factory.
  */
 static VALUE
-rb_gst_type_find_factory_get_extensions(VALUE self)
+rg_extensions(VALUE self)
 {
     VALUE ary;
     gchar **extensions;
@@ -90,9 +91,9 @@ rb_gst_type_find_factory_get_extensions(VALUE self)
  * Returns: the Gst::Caps object associated with this factory.
  */
 static VALUE
-rb_gst_type_find_factory_get_caps (VALUE self)
+rg_caps (VALUE self)
 {
-	return RGST_CAPS_NEW (gst_type_find_factory_get_caps (RGST_TYPE_FIND_FACTORY (self)));
+    return RGST_CAPS_NEW (gst_type_find_factory_get_caps (RGST_TYPE_FIND_FACTORY (self)));
 }
 
 #if 0   /* requires Gst::TypeFind */
@@ -105,20 +106,20 @@ rb_gst_type_find_factory_call_function (VALUE self, VALUE find)
 #endif
 
 static VALUE
-rb_gst_type_find_factory_to_s (VALUE self)
+rg_to_s (VALUE self)
 {
-	GstTypeFindFactory *factory = RGST_TYPE_FIND_FACTORY (self);
-	return rb_str_new_with_format ("TypeFind: %s", GST_PLUGIN_FEATURE_NAME (factory));
+    GstTypeFindFactory *factory = RGST_TYPE_FIND_FACTORY (self);
+    return rb_str_new_with_format ("TypeFind: %s", GST_PLUGIN_FEATURE_NAME (factory));
 }
 
 void
 Init_gst_typefindfactory (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_TYPE_FIND_FACTORY, "TypeFindFactory", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_TYPE_FIND_FACTORY, "TypeFindFactory", mGst);
 
-	rb_define_singleton_method(c, "list", rb_gst_type_find_factory_get_list, 0);
-	rb_define_method(c, "extensions", rb_gst_type_find_factory_get_extensions, 0);
-	rb_define_method(c, "caps", rb_gst_type_find_factory_get_caps, 0);
-	/*rb_define_method(c, "call_function", rb_gst_type_find_factory_call_function, 1);*/
-	rb_define_method(c, "to_s", rb_gst_type_find_factory_to_s, 0);
+    RG_DEF_SMETHOD(list, 0);
+    RG_DEF_METHOD(extensions, 0);
+    RG_DEF_METHOD(caps, 0);
+    /*rb_define_method(RG_TARGET_NAMESPACE, "call_function", rb_gst_type_find_factory_call_function, 1);*/
+    RG_DEF_METHOD(to_s, 0);
 }

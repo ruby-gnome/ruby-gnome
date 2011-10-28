@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cClock
 #define SELF(obj) (RVAL2GST_CLOCK(obj))
 
 /*  Class: Gst::Clock
@@ -32,7 +33,7 @@
  * Returns: the accuracy of the clock.
  */
 static VALUE
-get_resolution(VALUE self)
+rg_resolution(VALUE self)
 {
     return ULL2NUM(gst_clock_get_resolution(SELF(self)));
 }
@@ -46,7 +47,7 @@ get_resolution(VALUE self)
  * Returns: self.
  */
 static VALUE
-set_resolution(VALUE self, VALUE resolution)
+rg_set_resolution(VALUE self, VALUE resolution)
 {
     return ULL2NUM(gst_clock_set_resolution(SELF(self), NUM2ULL(resolution)));
 }
@@ -55,7 +56,7 @@ set_resolution(VALUE self, VALUE resolution)
  * Returns: the time of the clock (in nanoseconds).
  */
 static VALUE
-get_time(VALUE self)
+rg_time(VALUE self)
 {
     return ULL2NUM(gst_clock_get_time(SELF(self)));
 }
@@ -68,7 +69,7 @@ get_time(VALUE self)
  * false otherwise.
  */
 static VALUE
-equal_p(VALUE self, VALUE other_clock)
+rg_operator_equal_p(VALUE self, VALUE other_clock)
 {
     if (NIL_P(other_clock))
         return Qfalse;
@@ -83,9 +84,9 @@ equal_p(VALUE self, VALUE other_clock)
 void
 Init_gst_clock (void)
 {
-    VALUE rb_cGstClock, rb_mGstClockTime;
+    VALUE RG_TARGET_NAMESPACE, rb_mGstClockTime;
 
-    rb_cGstClock = G_DEF_CLASS(GST_TYPE_CLOCK, "Clock", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_CLOCK, "Clock", mGst);
 
     rb_define_const(mGst, "SECOND", LL2NUM(GST_SECOND));
     rb_define_const(mGst, "MSECOND", LL2NUM(GST_MSECOND));
@@ -95,15 +96,15 @@ Init_gst_clock (void)
     rb_mGstClockTime = rb_define_module_under(mGst, "ClockTime");
     rb_define_const(rb_mGstClockTime, "NONE", ULL2NUM(GST_CLOCK_TIME_NONE));
 
-    G_DEF_CLASS(GST_TYPE_CLOCK_FLAGS, "Flags", rb_cGstClock);
-    G_DEF_CONSTANTS(rb_cGstClock, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");
-    G_DEF_CLASS(GST_TYPE_CLOCK_RETURN, "Return", rb_cGstClock);
-    G_DEF_CONSTANTS(rb_cGstClock, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
+    G_DEF_CLASS(GST_TYPE_CLOCK_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_CLOCK_FLAGS, "GST_CLOCK_");
+    G_DEF_CLASS(GST_TYPE_CLOCK_RETURN, "Return", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
 
-    rb_define_method(rb_cGstClock, "resolution", get_resolution, 0);
-    rb_define_method(rb_cGstClock, "set_resolution", set_resolution, 1);
-    rb_define_method(rb_cGstClock, "time", get_time, 0);
-    rb_define_method(rb_cGstClock, "==", equal_p, 1);
+    RG_DEF_METHOD(resolution, 0);
+    RG_DEF_METHOD(set_resolution, 1);
+    RG_DEF_METHOD(time, 0);
+    RG_DEF_METHOD_OPERATOR("==", equal_p, 1);
 
-    G_DEF_SETTERS(rb_cGstClock);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

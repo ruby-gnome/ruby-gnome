@@ -21,10 +21,11 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cStructure
 #define SELF(obj) (RVAL2GST_STRUCT(obj))
 
 static VALUE
-s_parse(VALUE self, VALUE string)
+rg_s_parse(VALUE self, VALUE string)
 {
     GstStructure *structure;
     gchar *end;
@@ -35,7 +36,7 @@ s_parse(VALUE self, VALUE string)
 }
 
 static VALUE
-initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE name, fields;
     GstStructure *structure;
@@ -53,32 +54,32 @@ initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL(gst_structure_get_name(SELF(self)));
 }
 
 static VALUE
-set_name(VALUE self, VALUE name)
+rg_set_name(VALUE self, VALUE name)
 {
     gst_structure_set_name(SELF(self), RVAL2CSTR(name));
     return Qnil;
 }
 
 static VALUE
-has_name_p(VALUE self, VALUE name)
+rg_has_name_p(VALUE self, VALUE name)
 {
     return CBOOL2RVAL(gst_structure_has_name(SELF(self), RVAL2CSTR(name)));
 }
 
 static VALUE
-get_value(VALUE self, VALUE name)
+rg_operator_get_value(VALUE self, VALUE name)
 {
     return GVAL2RVAL(gst_structure_get_value(SELF(self), RVAL2CSTR(name)));
 }
 
 static VALUE
-set_value(VALUE self, VALUE name, VALUE rb_value)
+rg_operator_set_value(VALUE self, VALUE name, VALUE rb_value)
 {
     GValue value = {0};
 
@@ -90,7 +91,7 @@ set_value(VALUE self, VALUE name, VALUE rb_value)
 }
 
 static VALUE
-remove_fields(int argc, VALUE *argv, VALUE self)
+rg_remove(int argc, VALUE *argv, VALUE self)
 {
     int i;
     VALUE name, rest;
@@ -109,7 +110,7 @@ remove_fields(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-remove_all_fields(VALUE self)
+rg_remove_all(VALUE self)
 {
     gst_structure_remove_all_fields(SELF(self));
     return Qnil;
@@ -169,7 +170,7 @@ foreach_cb(GQuark field_id, const GValue *value, gpointer user_data)
 }
 
 static VALUE
-foreach(VALUE self)
+rg_each(VALUE self)
 {
     EachCallbackInfo info;
 
@@ -212,7 +213,7 @@ map_in_place_cb(GQuark field_id, GValue *value, gpointer user_data)
 }
 
 static VALUE
-map_in_place(VALUE self)
+rg_map_bang(VALUE self)
 {
     EachCallbackInfo info;
 
@@ -226,31 +227,31 @@ map_in_place(VALUE self)
 }
 
 static VALUE
-n_fields(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(gst_structure_n_fields(SELF(self)));
 }
 
 static VALUE
-empty_p(VALUE self)
+rg_empty_p(VALUE self)
 {
     return CBOOL2RVAL(gst_structure_n_fields(SELF(self)) == 0);
 }
 
 static VALUE
-nth_field_name(VALUE self, VALUE index)
+rg_nth_field_name(VALUE self, VALUE index)
 {
     return CSTR2RVAL(gst_structure_nth_field_name(SELF(self), NUM2INT(index)));
 }
 
 static VALUE
-has_field_p(VALUE self, VALUE name)
+rg_has_field_p(VALUE self, VALUE name)
 {
     return CBOOL2RVAL(gst_structure_has_field(SELF(self), RVAL2CSTR(name)));
 }
 
 static VALUE
-to_s(VALUE self)
+rg_to_s(VALUE self)
 {
     return CSTR2RVAL_FREE(gst_structure_to_string(SELF(self)));
 }
@@ -258,44 +259,44 @@ to_s(VALUE self)
 void
 Init_gst_structure(void)
 {
-    VALUE rb_cGstStructure;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstStructure = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
 
-    rb_include_module(rb_cGstStructure, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_singleton_method(rb_cGstStructure, "parse", s_parse, 1);
+    RG_DEF_SMETHOD(parse, 1);
 
-    rb_define_method(rb_cGstStructure, "initialize", initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 
-    rb_define_method(rb_cGstStructure, "name", get_name, 0);
-    rb_define_method(rb_cGstStructure, "set_name", set_name, 1);
-    rb_define_method(rb_cGstStructure, "has_name?", has_name_p, 1);
-    rb_define_alias(rb_cGstStructure, "have_name?", "has_name?");
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(set_name, 1);
+    RG_DEF_METHOD_P(has_name, 1);
+    RG_DEF_ALIAS("have_name?", "has_name?");
 
-    rb_define_method(rb_cGstStructure, "[]", get_value, 1);
-    rb_define_method(rb_cGstStructure, "[]=", set_value, 2);
+    RG_DEF_METHOD_OPERATOR("[]", get_value, 1);
+    RG_DEF_METHOD_OPERATOR("[]=", set_value, 2);
 
-    rb_define_method(rb_cGstStructure, "remove", remove_fields, -1);
-    rb_define_alias(rb_cGstStructure, "delete", "remove");
-    rb_define_method(rb_cGstStructure, "remove_all", remove_all_fields, 0);
-    rb_define_alias(rb_cGstStructure, "clear", "remove_all");
+    RG_DEF_METHOD(remove, -1);
+    RG_DEF_ALIAS("delete", "remove");
+    RG_DEF_METHOD(remove_all, 0);
+    RG_DEF_ALIAS("clear", "remove_all");
 
-    rb_define_method(rb_cGstStructure, "each", foreach, 0);
+    RG_DEF_METHOD(each, 0);
 
-    rb_define_method(rb_cGstStructure, "map!", map_in_place, 0);
-    rb_define_alias(rb_cGstStructure, "collect!", "map!");
+    RG_DEF_METHOD_BANG(map, 0);
+    RG_DEF_ALIAS("collect!", "map!");
 
-    rb_define_method(rb_cGstStructure, "size", n_fields, 0);
-    rb_define_alias(rb_cGstStructure, "length", "size");
-    rb_define_method(rb_cGstStructure, "empty?", empty_p, 0);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_ALIAS("length", "size");
+    RG_DEF_METHOD_P(empty, 0);
 
-    rb_define_method(rb_cGstStructure, "nth_field_name", nth_field_name, 1);
+    RG_DEF_METHOD(nth_field_name, 1);
 
-    rb_define_method(rb_cGstStructure, "has_field?", has_field_p, 1);
-    rb_define_alias(rb_cGstStructure, "have_field?", "has_field?");
+    RG_DEF_METHOD_P(has_field, 1);
+    RG_DEF_ALIAS("have_field?", "has_field?");
 
-    rb_define_method(rb_cGstStructure, "to_s", to_s, 0);
+    RG_DEF_METHOD(to_s, 0);
 
-    G_DEF_SETTERS(rb_cGstStructure);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

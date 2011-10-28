@@ -21,18 +21,20 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cRegistry
+
 /* Class: Gst::Registry
  * Abstract class for managing plugins. 
  */
 
 static VALUE
-rb_gst_registry_get_default(VALUE self)
+rg_s_default(VALUE self)
 {
     return RGST_REGISTRY_NEW(gst_registry_get_default());
 }
 
 static VALUE
-rb_gst_update_registry(VALUE self)
+rg_s_update(VALUE self)
 {
     return CBOOL2RVAL(gst_update_registry());
 }
@@ -45,7 +47,7 @@ rb_gst_update_registry(VALUE self)
  * Returns: an array of Gst::Plugin objects.
  */
 static VALUE
-rb_gst_registry_get_plugins(VALUE self)
+rg_plugins(VALUE self)
 {
     GList *list, *node;
     VALUE arr;
@@ -71,9 +73,9 @@ rb_gst_registry_get_plugins(VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_registry_each_plugin (VALUE self)
+rg_each_plugin (VALUE self)
 {
-	return rb_ary_yield (rb_gst_registry_get_plugins (self));
+    return rb_ary_yield (rb_gst_registry_get_plugins (self));
 }
 
 /*
@@ -88,7 +90,7 @@ rb_gst_registry_each_plugin (VALUE self)
  * Returns: an array of Gst::PluginFeature objects.
  */
 static VALUE
-rb_gst_registry_get_features(VALUE self, VALUE type_or_plugin_name)
+rg_get_features(VALUE self, VALUE type_or_plugin_name)
 {
     GList *list, *node;
     GType gtype;
@@ -126,9 +128,9 @@ rb_gst_registry_get_features(VALUE self, VALUE type_or_plugin_name)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_registry_each_feature (VALUE self, VALUE type)
+rg_each_feature (VALUE self, VALUE type)
 {
-	return rb_ary_yield (rb_gst_registry_get_features (self, type));
+    return rb_ary_yield (rb_gst_registry_get_features (self, type));
 }
 
 /*
@@ -139,18 +141,18 @@ rb_gst_registry_each_feature (VALUE self, VALUE type)
  * Returns: an array of strings.
  */
 static VALUE
-rb_gst_registry_get_paths (VALUE self)
+rg_paths (VALUE self)
 {
-	GList *list;
-	VALUE arr;
+    GList *list;
+    VALUE arr;
 
-	arr = rb_ary_new ();
-	for (list = gst_registry_get_path_list (RGST_REGISTRY (self));
-	     list != NULL;
-	     list = g_list_next (list))
-		rb_ary_push (arr, CSTR2RVAL ((gchar *) list->data)); 
-	g_list_free (list);
-	return arr;
+    arr = rb_ary_new ();
+    for (list = gst_registry_get_path_list (RGST_REGISTRY (self));
+         list != NULL;
+         list = g_list_next (list))
+        rb_ary_push (arr, CSTR2RVAL ((gchar *) list->data)); 
+    g_list_free (list);
+    return arr;
 }
 
 /*
@@ -162,9 +164,9 @@ rb_gst_registry_get_paths (VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_registry_each_path (VALUE self)
+rg_each_path (VALUE self)
 {
-	return rb_ary_yield (rb_gst_registry_get_paths (self));
+    return rb_ary_yield (rb_gst_registry_get_paths (self));
 }
 
 /*
@@ -178,7 +180,7 @@ rb_gst_registry_each_path (VALUE self)
  * Returns: nil.
  */
 static VALUE
-rb_gst_registry_add_path(VALUE self, VALUE path)
+rg_add_path(VALUE self, VALUE path)
 {
     gst_registry_add_path(RGST_REGISTRY(self), RVAL2CSTR(path));
     return Qnil;
@@ -193,7 +195,7 @@ rb_gst_registry_add_path(VALUE self, VALUE path)
  * Returns: true on success, false otherwise.
  */
 static VALUE
-rb_gst_registry_add_plugin(VALUE self, VALUE plugin)
+rg_add_plugin(VALUE self, VALUE plugin)
 {
     return CBOOL2RVAL(gst_registry_add_plugin(RGST_REGISTRY (self),
                                               RGST_PLUGIN (plugin)));
@@ -208,11 +210,11 @@ rb_gst_registry_add_plugin(VALUE self, VALUE plugin)
  * Returns: self.
  */
 static VALUE
-rb_gst_registry_remove_plugin (VALUE self, VALUE plugin)
+rg_remove_plugin (VALUE self, VALUE plugin)
 {
-	gst_registry_remove_plugin (RGST_REGISTRY (self),
-				    RGST_PLUGIN (plugin));
-	return self;
+    gst_registry_remove_plugin (RGST_REGISTRY (self),
+                    RGST_PLUGIN (plugin));
+    return self;
 }
 
 /*
@@ -225,13 +227,13 @@ rb_gst_registry_remove_plugin (VALUE self, VALUE plugin)
  * otherwise returns nil.
  */
 static VALUE
-rb_gst_registry_find_plugin (VALUE self, VALUE name)
+rg_find_plugin (VALUE self, VALUE name)
 {
-	GstPlugin *plugin = gst_registry_find_plugin (RGST_REGISTRY (self),
-						      RVAL2CSTR (name));
-	return plugin != NULL
-		? RGST_PLUGIN_NEW (plugin)
-		: Qnil;
+    GstPlugin *plugin = gst_registry_find_plugin (RGST_REGISTRY (self),
+                              RVAL2CSTR (name));
+    return plugin != NULL
+        ? RGST_PLUGIN_NEW (plugin)
+        : Qnil;
 }
 
 /*
@@ -248,39 +250,39 @@ rb_gst_registry_find_plugin (VALUE self, VALUE name)
  * named plugin feature is not found.
  */
 static VALUE
-rb_gst_registry_find_feature(VALUE self, VALUE name, VALUE type)
+rg_find_feature(VALUE self, VALUE name, VALUE type)
 {
-	GstPluginFeature *feature;
-	GType gtype;
-	
-	gtype = CLASS2GTYPE (type);
-	if (!is_valid_pluginfeature_type (gtype))
-		rb_raise (rb_eArgError, "Invalid feature type.");
-	feature = gst_registry_find_feature (RGST_REGISTRY (self),
-					     RVAL2CSTR (name),
-					     gtype);
-	return feature != NULL
-		? instanciate_pluginfeature (feature)
-		: Qnil;
+    GstPluginFeature *feature;
+    GType gtype;
+
+    gtype = CLASS2GTYPE (type);
+    if (!is_valid_pluginfeature_type (gtype))
+        rb_raise (rb_eArgError, "Invalid feature type.");
+    feature = gst_registry_find_feature (RGST_REGISTRY (self),
+                         RVAL2CSTR (name),
+                         gtype);
+    return feature != NULL
+        ? instanciate_pluginfeature (feature)
+        : Qnil;
 }
 
 void
 Init_gst_registry (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
 
-	rb_define_singleton_method(c, "default", rb_gst_registry_get_default, 0);
-	rb_define_singleton_method(c, "update", rb_gst_update_registry, 0);
-	
-	rb_define_method(c, "plugins", rb_gst_registry_get_plugins, 0);
-	rb_define_method(c, "each_plugin", rb_gst_registry_each_plugin, 0);
-	rb_define_method(c, "get_features", rb_gst_registry_get_features, 1);
-	rb_define_method(c, "each_feature", rb_gst_registry_each_feature, 1);
-	rb_define_method(c, "paths", rb_gst_registry_get_paths, 0);
-	rb_define_method(c, "each_path", rb_gst_registry_each_path, 0);
-	rb_define_method(c, "add_path",	rb_gst_registry_add_path, 1);
-	rb_define_method(c, "add_plugin", rb_gst_registry_add_plugin, 1);
-	rb_define_method(c, "remove_plugin", rb_gst_registry_remove_plugin, 1);
-	rb_define_method(c, "find_plugin", rb_gst_registry_find_plugin, 1);
-	rb_define_method(c, "find_feature", rb_gst_registry_find_feature, 2);
+    RG_DEF_SMETHOD(default, 0);
+    RG_DEF_SMETHOD(update, 0);
+
+    RG_DEF_METHOD(plugins, 0);
+    RG_DEF_METHOD(each_plugin, 0);
+    RG_DEF_METHOD(get_features, 1);
+    RG_DEF_METHOD(each_feature, 1);
+    RG_DEF_METHOD(paths, 0);
+    RG_DEF_METHOD(each_path, 0);
+    RG_DEF_METHOD(add_path, 1);
+    RG_DEF_METHOD(add_plugin, 1);
+    RG_DEF_METHOD(remove_plugin, 1);
+    RG_DEF_METHOD(find_plugin, 1);
+    RG_DEF_METHOD(find_feature, 2);
 }

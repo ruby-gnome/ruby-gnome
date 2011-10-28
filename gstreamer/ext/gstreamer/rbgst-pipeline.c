@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cPipeline
 #define SELF(obj) (RVAL2GST_PIPELINE(obj))
 
 /* Class: Gst::Pipeline
@@ -44,21 +45,21 @@
  * Returns: a newly constructed Gst::Pipeline.
  */
 static VALUE
-rb_gst_pipeline_new (int argc, VALUE *argv, VALUE self)
+rg_initialize (int argc, VALUE *argv, VALUE self)
 {
-	GstElement *bin;
-	VALUE name;
+    GstElement *bin;
+    VALUE name;
 
-	rb_scan_args (argc, argv, "01", &name);
+    rb_scan_args (argc, argv, "01", &name);
 
-	bin = gst_pipeline_new (NIL_P (name) ? NULL : RVAL2CSTR(name));
-	if (bin != NULL)
-		RBGST_INITIALIZE (self, bin);
-	return Qnil;
+    bin = gst_pipeline_new (NIL_P (name) ? NULL : RVAL2CSTR(name));
+    if (bin != NULL)
+        RBGST_INITIALIZE (self, bin);
+    return Qnil;
 }
 
 static VALUE
-rb_gst_pipeline_get_bus(VALUE self)
+rg_bus(VALUE self)
 {
     GstBus *bus;
     VALUE ret;
@@ -80,11 +81,11 @@ rb_gst_pipeline_get_bus(VALUE self)
 void
 Init_gst_pipeline(void)
 {
-    VALUE cPipeline;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cPipeline = G_DEF_CLASS(GST_TYPE_PIPELINE, "Pipeline", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_PIPELINE, "Pipeline", mGst);
 
-    rb_define_method(cPipeline, "initialize", rb_gst_pipeline_new, -1);
+    RG_DEF_METHOD(initialize, -1);
 
-    rb_define_method(cPipeline, "bus", rb_gst_pipeline_get_bus, 0);
+    RG_DEF_METHOD(bus, 0);
 }
