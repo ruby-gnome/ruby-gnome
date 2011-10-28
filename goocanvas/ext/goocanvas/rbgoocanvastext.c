@@ -48,14 +48,4 @@ Init_goocanvastext(void)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_TEXT, "CanvasText", mGoo);
 
     rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_goo_canvas_text_new, 6);
-
-#if 0
-   GooCanvasItemModel* goo_canvas_text_model_new (GooCanvasItemModel *parent,
-   					       const char         *string,
-   					       gdouble             x,
-   					       gdouble             y,
-   					       gdouble             width,
-   					       GtkAnchorType       anchor,
-   					       ...);
-#endif
 }
