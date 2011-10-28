@@ -28,15 +28,15 @@
 #define _SELF(self) (GTK_RULER(RVAL2GOBJ(self)))
 
 static VALUE
-ruler_set_range(VALUE self, VALUE lower, VALUE upper, VALUE position, VALUE max_size)
+rg_set_range(VALUE self, VALUE lower, VALUE upper, VALUE position, VALUE max_size)
 {
     gtk_ruler_set_range(_SELF(self), NUM2DBL(lower), NUM2DBL(upper),
-			NUM2DBL(position), NUM2DBL(max_size));
+                        NUM2DBL(position), NUM2DBL(max_size));
     return self;
 }
 
 static VALUE
-ruler_get_range(VALUE self)
+rg_range(VALUE self)
 {
     gdouble lower, upper, position, max_size;
     gtk_ruler_get_range(_SELF(self), &lower, &upper, &position, &max_size);
@@ -45,14 +45,14 @@ ruler_get_range(VALUE self)
 }
 
 static VALUE
-ruler_draw_ticks(VALUE self)
+rg_draw_ticks(VALUE self)
 {
     gtk_ruler_draw_ticks(_SELF(self));
     return self;
 }
 
 static VALUE
-ruler_draw_pos(VALUE self)
+rg_draw_pos(VALUE self)
 {
     gtk_ruler_draw_pos(_SELF(self));
     return self;
@@ -63,9 +63,9 @@ Init_gtk_ruler(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RULER, "Ruler", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_range", ruler_set_range, 4);
+    RG_DEF_METHOD(set_range, 4);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "range");
-    rb_define_method(RG_TARGET_NAMESPACE, "range", ruler_get_range, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_ticks", ruler_draw_ticks, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "draw_pos", ruler_draw_pos, 0);
+    RG_DEF_METHOD(range, 0);
+    RG_DEF_METHOD(draw_ticks, 0);
+    RG_DEF_METHOD(draw_pos, 0);
 }

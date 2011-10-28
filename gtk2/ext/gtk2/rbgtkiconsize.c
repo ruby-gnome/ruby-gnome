@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE mIconSize
 
 static VALUE
-icon_size_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
+rg_m_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     gint width, height;
 
@@ -36,7 +36,7 @@ icon_size_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-icon_size_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
+rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
 {
     gint width, height;
 
@@ -50,7 +50,7 @@ icon_size_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE si
 #endif
 
 static VALUE
-icon_size_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
+rg_m_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
 {
     /* XXXX FIXME This should be GENUM2RVAL */
     return INT2FIX(gtk_icon_size_register(RVAL2CSTR(name),
@@ -59,20 +59,20 @@ icon_size_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE heig
 }
 
 static VALUE
-icon_size_register_alias(G_GNUC_UNUSED VALUE self, VALUE alias, VALUE target)
+rg_m_register_alias(G_GNUC_UNUSED VALUE self, VALUE alias, VALUE target)
 {
     gtk_icon_size_register_alias(RVAL2CSTR(alias), RVAL2GENUM(target, GTK_TYPE_ICON_SIZE));
     return Qnil;
 }
 
 static VALUE
-icon_size_from_name(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_m_from_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return INT2FIX(gtk_icon_size_from_name(RVAL2CSTR(name)));
 }
 
 static VALUE
-icon_size_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
+rg_m_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     return CSTR2RVAL(gtk_icon_size_get_name(RVAL2GENUM(size, GTK_TYPE_ICON_SIZE)));
 }
@@ -82,15 +82,15 @@ Init_gtk_icon_size(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "IconSize");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "lookup", icon_size_lookup, 1);
+    RG_DEF_MODFUNC(lookup, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "lookup_for_settings", icon_size_lookup_for_settings, 2);
+    RG_DEF_MODFUNC(lookup_for_settings, 2);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "register", icon_size_register, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "register_alias", icon_size_register_alias, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "from_name", icon_size_from_name, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_name", icon_size_get_name, 1);
-    
+    RG_DEF_MODFUNC(register, 3);
+    RG_DEF_MODFUNC(register_alias, 2);
+    RG_DEF_MODFUNC(from_name, 1);
+    RG_DEF_MODFUNC(get_name, 1);
+
     /* GtkIconSize */
     G_DEF_CLASS(GTK_TYPE_ICON_SIZE, "IconSize", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_SIZE, "GTK_ICON_SIZE_");

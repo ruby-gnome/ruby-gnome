@@ -25,20 +25,20 @@
 #define RG_TARGET_NAMESPACE cAccelLabel
 
 static VALUE
-alabel_initialize(VALUE self, VALUE string)
+rg_initialize(VALUE self, VALUE string)
 {
     RBGTK_INITIALIZE(self, gtk_accel_label_new(RVAL2CSTR(string)));
     return Qnil;
 }
 
 static VALUE
-alabel_get_accel_width(VALUE self)
+rg_accel_width(VALUE self)
 {
     return INT2NUM(gtk_accel_label_get_accel_width(GTK_ACCEL_LABEL(RVAL2GOBJ(self))));
 }
 
 static VALUE
-alabel_refetch(VALUE self)
+rg_refetch(VALUE self)
 {
     gtk_accel_label_refetch(GTK_ACCEL_LABEL(RVAL2GOBJ(self)));
     return Qfalse; // always returns false
@@ -49,7 +49,7 @@ Init_gtk_accel_label(void)
 {
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_LABEL, "AccelLabel", mGtk);
 
-  rb_define_method(RG_TARGET_NAMESPACE, "initialize", alabel_initialize, 1);
-  rb_define_method(RG_TARGET_NAMESPACE, "accel_width", alabel_get_accel_width, 0);
-  rb_define_method(RG_TARGET_NAMESPACE, "refetch", alabel_refetch, 0);
+  RG_DEF_METHOD(initialize, 1);
+  RG_DEF_METHOD(accel_width, 0);
+  RG_DEF_METHOD(refetch, 0);
 }

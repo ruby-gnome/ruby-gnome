@@ -25,7 +25,7 @@
 #define _SELF(s) GTK_INVISIBLE(RVAL2GOBJ(s))
 
 static VALUE
-invisible_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen;
 
@@ -49,5 +49,5 @@ Init_gtk_invisible(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", invisible_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

@@ -20,7 +20,7 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define RG_TARGET_NAMESPACE cComboBox
@@ -28,7 +28,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-combobox_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model_or_false;
     GtkWidget* widget;
@@ -51,7 +51,7 @@ combobox_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-combobox_get_active_iter(VALUE self)
+rg_active_iter(VALUE self)
 {
     GtkTreeIter iter;
     VALUE val = Qnil;
@@ -64,36 +64,35 @@ combobox_get_active_iter(VALUE self)
 }
 
 static VALUE
-combobox_set_active_iter(VALUE self, VALUE iter)
+rg_set_active_iter(VALUE self, VALUE iter)
 {
     gtk_combo_box_set_active_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
 }
 
-
 static VALUE
-combobox_append_text(VALUE self, VALUE text)
+rg_append_text(VALUE self, VALUE text)
 {
     gtk_combo_box_append_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-combobox_insert_text(VALUE self, VALUE position, VALUE text)
+rg_insert_text(VALUE self, VALUE position, VALUE text)
 {
     gtk_combo_box_insert_text(_SELF(self), NUM2INT(position), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-combobox_prepend_text(VALUE self, VALUE text)
+rg_prepend_text(VALUE self, VALUE text)
 {
     gtk_combo_box_prepend_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-combobox_remove_text(VALUE self, VALUE position)
+rg_remove_text(VALUE self, VALUE position)
 {
     gtk_combo_box_remove_text(_SELF(self), NUM2INT(position));
     return self;
@@ -102,13 +101,13 @@ combobox_remove_text(VALUE self, VALUE position)
 #if GTK_CHECK_VERSION(2,6,0)
 
 static VALUE
-combobox_get_active_text(VALUE self)
+rg_active_text(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_combo_box_get_active_text(_SELF(self)));
 }
 
 static VALUE
-combobox_get_popup_accessible(VALUE self)
+rg_popup_accessible(VALUE self)
 {
     return GOBJ2RVAL(gtk_combo_box_get_popup_accessible(_SELF(self)));
 }
@@ -127,7 +126,7 @@ row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer *func)
 }
 
 static VALUE
-combobox_set_row_separator_func(VALUE self)
+rg_set_row_separator_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -146,19 +145,19 @@ Init_gtk_combobox(void)
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX, "ComboBox", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", combobox_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "active_iter", combobox_get_active_iter, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_active_iter", combobox_set_active_iter, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(active_iter, 0);
+    RG_DEF_METHOD(set_active_iter, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "active_iter");
-    rb_define_method(RG_TARGET_NAMESPACE, "append_text", combobox_append_text, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert_text", combobox_insert_text, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend_text", combobox_prepend_text, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_text", combobox_remove_text, 1);
+    RG_DEF_METHOD(append_text, 1);
+    RG_DEF_METHOD(insert_text, 2);
+    RG_DEF_METHOD(prepend_text, 1);
+    RG_DEF_METHOD(remove_text, 1);
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "active_text", combobox_get_active_text, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "popup_accessible", combobox_get_popup_accessible, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_row_separator_func", combobox_set_row_separator_func, 0);
+    RG_DEF_METHOD(active_text, 0);
+    RG_DEF_METHOD(popup_accessible, 0);
+    RG_DEF_METHOD(set_row_separator_func, 0);
 #endif
 #endif
 }

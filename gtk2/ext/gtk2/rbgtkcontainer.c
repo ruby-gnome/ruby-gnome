@@ -36,13 +36,13 @@ static VALUE type_to_prop_setter_table;
 static VALUE type_to_prop_getter_table;
 
 static VALUE
-cont_is_resize_container(VALUE self)
+rg_resize_container_p(VALUE self)
 {
     return CBOOL2RVAL(GTK_IS_RESIZE_CONTAINER(_SELF(self)));
 }
 
 static VALUE
-cont_remove(VALUE self, VALUE other)
+rg_remove(VALUE self, VALUE other)
 {
     G_CHILD_REMOVE(self, other);
     gtk_container_remove(_SELF(self), GTK_WIDGET(RVAL2GOBJ(other)));
@@ -50,14 +50,14 @@ cont_remove(VALUE self, VALUE other)
 }
 
 static VALUE
-cont_check_resize(VALUE self)
+rg_check_resize(VALUE self)
 {
     gtk_container_check_resize(_SELF(self));
     return self;
 }
 
 static VALUE
-cont_foreach(int argc, VALUE *argv, VALUE self)
+rg_each(int argc, VALUE *argv, VALUE self)
 {
     VALUE callback;
 
@@ -70,7 +70,7 @@ cont_foreach(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-cont_forall(int argc, VALUE *argv, VALUE self)
+rg_each_forall(int argc, VALUE *argv, VALUE self)
 {
     VALUE callback;
 
@@ -83,28 +83,27 @@ cont_forall(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-cont_get_children(VALUE self)
+rg_children(VALUE self)
 {
    return GLIST2ARYF(gtk_container_get_children(_SELF(self)));
 }
 
 static VALUE
-cont_set_reallocate_redraws(VALUE self, VALUE needs_redraws)
+rg_set_reallocate_redraws(VALUE self, VALUE needs_redraws)
 {
     gtk_container_set_reallocate_redraws(_SELF(self), RVAL2CBOOL(needs_redraws));
     return self;
 }
 
-
 static VALUE
-cont_set_focus_child(VALUE self, VALUE child)
+rg_set_focus_child(VALUE self, VALUE child)
 {
     gtk_container_set_focus_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
     return self;
 }
 
 static VALUE
-cont_set_focus_vadjustment(VALUE self, VALUE adjustment)
+rg_set_focus_vadjustment(VALUE self, VALUE adjustment)
 {
     gtk_container_set_focus_vadjustment(_SELF(self),
                                         NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
@@ -112,7 +111,7 @@ cont_set_focus_vadjustment(VALUE self, VALUE adjustment)
 }
 
 static VALUE
-cont_set_focus_hadjustment(VALUE self, VALUE adjustment)
+rg_set_focus_hadjustment(VALUE self, VALUE adjustment)
 {
     gtk_container_set_focus_hadjustment(_SELF(self),
                                         NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
@@ -120,28 +119,28 @@ cont_set_focus_hadjustment(VALUE self, VALUE adjustment)
 }
 
 static VALUE
-cont_get_focus_vadjustment(VALUE self)
+rg_focus_vadjustment(VALUE self)
 {
     GtkAdjustment* adj = gtk_container_get_focus_vadjustment(_SELF(self));
     return adj ? GOBJ2RVAL(adj) : Qnil;
 }
 
 static VALUE
-cont_get_focus_hadjustment(VALUE self)
+rg_focus_hadjustment(VALUE self)
 {
     GtkAdjustment* adj = gtk_container_get_focus_hadjustment(_SELF(self));
     return adj ? GOBJ2RVAL(adj) : Qnil;
 }
 
 static VALUE
-cont_get_resize_children(VALUE self)
+rg_resize_children(VALUE self)
 {
     gtk_container_resize_children(_SELF(self));
     return self;
 }
 
 static VALUE
-cont_get_child_type(VALUE self)
+rg_child_type(VALUE self)
 {
     return GTYPE2CLASS(gtk_container_child_type(_SELF(self)));
 }
@@ -198,7 +197,7 @@ rbgtkcontainer_register_child_property_getter(GType gtype, const char *name, GVa
 }
 
 static VALUE
-cont_child_get_property(VALUE self, VALUE child, VALUE prop_name)
+rg_child_get_property(VALUE self, VALUE child, VALUE prop_name)
 {
     GParamSpec* pspec;
     const char* name;
@@ -218,7 +217,7 @@ cont_child_get_property(VALUE self, VALUE child, VALUE prop_name)
         GValueToRValueFunc getter = NULL;
         GValue gval = G_VALUE_INIT;
         VALUE ret;
-        
+
         {
             VALUE table = rb_hash_aref(type_to_prop_getter_table,
                                        INT2FIX(pspec->owner_type));
@@ -242,7 +241,7 @@ cont_child_get_property(VALUE self, VALUE child, VALUE prop_name)
 }
 
 static VALUE
-cont_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
+rg_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
 {
     GParamSpec* pspec;
     const char* name;
@@ -291,7 +290,7 @@ cont_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
 }
 
 static VALUE
-cont_add(int argc, VALUE *argv, VALUE self)
+rg_add(int argc, VALUE *argv, VALUE self)
 {
     VALUE other, properties;
     GtkWidget *child;
@@ -308,13 +307,13 @@ cont_add(int argc, VALUE *argv, VALUE self)
         int i;
         VALUE ary;
         GObject* obj;
-                                                                                
+
         Check_Type(properties, T_HASH);
         ary = rb_funcall(properties, rb_intern("to_a"), 0);
         obj = RVAL2GOBJ(self);
-        
+
         for (i = 0; i < RARRAY_LEN(ary); i++) {
-            cont_child_set_property(self, other, 
+            rg_child_set_property(self, other, 
                        RARRAY_PTR(RARRAY_PTR(ary)[i])[0],
                        RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
         }
@@ -335,7 +334,7 @@ void        gtk_container_child_set_valist  (GtkContainer *container,
 */
 
 static VALUE
-cont_propagate_expose(VALUE self, VALUE child, VALUE event)
+rg_propagate_expose(VALUE self, VALUE child, VALUE event)
 {
     gtk_container_propagate_expose(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                    (GdkEventExpose *)RVAL2GEV(event));
@@ -343,7 +342,7 @@ cont_propagate_expose(VALUE self, VALUE child, VALUE event)
 }
 
 static VALUE
-cont_get_focus_chain(VALUE self)
+rg_focus_chain(VALUE self)
 {
     gboolean ret;
     GList *glist = NULL;
@@ -395,7 +394,7 @@ rbg_rval2gtkwidgetglist(VALUE value)
 #define RVAL2GTKWIDGETGLIST(value) rbg_rval2gtkwidgetglist(value)
 
 static VALUE
-cont_set_focus_chain(VALUE self, VALUE rbfocusable_widgets)
+rg_set_focus_chain(VALUE self, VALUE rbfocusable_widgets)
 {
     GtkContainer *container = _SELF(self);
     GList *focusable_widgets = RVAL2GTKWIDGETGLIST(rbfocusable_widgets);
@@ -408,14 +407,14 @@ cont_set_focus_chain(VALUE self, VALUE rbfocusable_widgets)
 }
 
 static VALUE
-cont_unset_focus_chain(VALUE self)
+rg_unset_focus_chain(VALUE self)
 {
     gtk_container_unset_focus_chain(_SELF(self));
     return self;
 }
 
 static VALUE
-cont_s_child_property(VALUE self, VALUE property_name)
+rg_s_child_property(VALUE self, VALUE property_name)
 {
     GObjectClass* oclass;
     const char* name;
@@ -442,7 +441,7 @@ cont_s_child_property(VALUE self, VALUE property_name)
 }
 
 static VALUE
-cont_s_install_child_property(int argc, VALUE *argv, VALUE self)
+rg_s_install_child_property(int argc, VALUE *argv, VALUE self)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkContainerClass* gclass;
@@ -466,7 +465,7 @@ cont_s_install_child_property(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-cont_s_child_properties(int argc, VALUE *argv, VALUE self)
+rg_s_child_properties(int argc, VALUE *argv, VALUE self)
 {
     GObjectClass* oclass = g_type_class_ref(CLASS2GTYPE(self));
     guint n_properties;
@@ -502,7 +501,7 @@ cont_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE params_hash;
     GObject* gobj;
-    
+
     rb_scan_args(argc, argv, "01", &params_hash);
 
     if (!NIL_P(params_hash))
@@ -635,7 +634,7 @@ class_init_func(gpointer g_class, G_GNUC_UNUSED gpointer class_data)
 }
 
 static VALUE
-type_register(int argc, VALUE* argv, VALUE self)
+rg_s_type_register(int argc, VALUE* argv, VALUE self)
 {
     VALUE type_name, flags;
     volatile VALUE class_init_proc = Qnil;
@@ -740,37 +739,37 @@ Init_gtk_container(void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_CONTAINER, "Container",
-					  mGtk, cont_mark, NULL);
-    rb_define_method(RG_TARGET_NAMESPACE, "resize_container?", cont_is_resize_container, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add", cont_add, -1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "<<", "add");
-    rb_define_method(RG_TARGET_NAMESPACE, "remove", cont_remove, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "check_resize", cont_check_resize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "each", cont_foreach, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "each_forall", cont_forall, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "children", cont_get_children, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_reallocate_redraws", cont_set_reallocate_redraws, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_child", cont_set_focus_child, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_vadjustment", cont_set_focus_vadjustment, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_hadjustment", cont_set_focus_hadjustment, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "focus_vadjustment", cont_get_focus_vadjustment, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "focus_hadjustment", cont_get_focus_hadjustment, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "resize_children", cont_get_resize_children, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "child_type", cont_get_child_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "child_get_property", cont_child_get_property, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "child_set_property", cont_child_set_property, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "propagate_expose", cont_propagate_expose, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "focus_chain", cont_get_focus_chain, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_chain", cont_set_focus_chain, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_focus_chain", cont_unset_focus_chain, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "child_property", cont_s_child_property, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "child_properties", cont_s_child_properties, -1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "install_child_property", cont_s_install_child_property, -1);
+                                                  mGtk, cont_mark, NULL);
+    RG_DEF_METHOD_P(resize_container, 0);
+    RG_DEF_METHOD(add, -1);
+    RG_DEF_ALIAS("<<", "add");
+    RG_DEF_METHOD(remove, 1);
+    RG_DEF_METHOD(check_resize, 0);
+    RG_DEF_METHOD(each, -1);
+    RG_DEF_METHOD(each_forall, -1);
+    RG_DEF_METHOD(children, 0);
+    RG_DEF_METHOD(set_reallocate_redraws, 1);
+    RG_DEF_METHOD(set_focus_child, 1);
+    RG_DEF_METHOD(set_focus_vadjustment, 1);
+    RG_DEF_METHOD(set_focus_hadjustment, 1);
+    RG_DEF_METHOD(focus_vadjustment, 0);
+    RG_DEF_METHOD(focus_hadjustment, 0);
+    RG_DEF_METHOD(resize_children, 0);
+    RG_DEF_METHOD(child_type, 0);
+    RG_DEF_METHOD(child_get_property, 2);
+    RG_DEF_METHOD(child_set_property, 3);
+    RG_DEF_METHOD(propagate_expose, 2);
+    RG_DEF_METHOD(focus_chain, 0);
+    RG_DEF_METHOD(set_focus_chain, 1);
+    RG_DEF_METHOD(unset_focus_chain, 0);
+    RG_DEF_SMETHOD(child_property, 1);
+    RG_DEF_SMETHOD(child_properties, -1);
+    RG_DEF_SMETHOD(install_child_property, -1);
 
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", type_register, -1);
+    RG_DEF_SMETHOD(type_register, -1);
 
     rb_global_variable(&proc_mod_eval);
     proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");

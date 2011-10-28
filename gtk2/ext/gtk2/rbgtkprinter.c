@@ -34,7 +34,7 @@ GType gtk_print_backend_get_type (void) G_GNUC_CONST;
 #define _SELF(s) (GTK_PRINTER(RVAL2GOBJ(s)))
 
 static VALUE
-p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
+rg_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
 {
     GtkPrinter *printer;
 
@@ -47,25 +47,25 @@ p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
 }
 
 static VALUE
-p_get_description(VALUE self)
+rg_description(VALUE self)
 {
     return CSTR2RVAL(gtk_printer_get_description(_SELF(self)));
 }
 
 static VALUE
-p_is_active(VALUE self)
+rg_active_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_printer_is_default(_SELF(self)));
 }
 
 static VALUE
-p_is_default(VALUE self)
+rg_default_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_printer_is_default(_SELF(self)));
 }
 
 static VALUE
-p_compare(VALUE self, VALUE other)
+rg_operator_p_compare(VALUE self, VALUE other)
 {
     if (rb_obj_is_kind_of(other, GTYPE2CLASS(GTK_TYPE_PRINTER))){
         return INT2NUM(gtk_printer_compare(_SELF(self), _SELF(other)));
@@ -114,7 +114,7 @@ remove_callback_reference(gpointer data)
 }
 
 static VALUE
-p_s_enumerate_printers(int argc, VALUE *argv, VALUE self)
+rg_s_each(int argc, VALUE *argv, VALUE self)
 {
     VALUE wait, block;
     rb_scan_args(argc, argv, "01", &wait);
@@ -137,13 +137,13 @@ Init_gtk_printer(void)
 
     G_DEF_CLASS(GTK_TYPE_PRINT_BACKEND, "PrintBackend", mGtk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "each", p_s_enumerate_printers, -1);
+    RG_DEF_SMETHOD(each, -1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", p_initialize, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "description", p_get_description, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "active?", p_is_active, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "default?", p_is_default, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "<=>", p_compare, 1);
+    RG_DEF_METHOD(initialize, 3);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD_P(active, 0);
+    RG_DEF_METHOD_P(default, 0);
+    RG_DEF_METHOD_OPERATOR("<=>", p_compare, 1);
 
     G_DEF_CLASS3("GtkPrintBackendCups", "PrintBackendCups", mGtk);
     G_DEF_CLASS3("GtkPrintBackendFile", "PrintBackendFile", mGtk);

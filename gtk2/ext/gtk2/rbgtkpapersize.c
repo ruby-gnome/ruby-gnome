@@ -30,7 +30,7 @@
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
 static VALUE
-ps_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkPaperSize *size;
 
@@ -59,7 +59,7 @@ ps_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ps_is_equal(VALUE self, VALUE other)
+rg_operator_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(RVAL2CBOOL(rb_equal(rb_obj_class(self), rb_obj_class(other))) &&
                       gtk_paper_size_is_equal(_SELF(self), _SELF(other)));
@@ -67,81 +67,80 @@ ps_is_equal(VALUE self, VALUE other)
 
 /* The width is always the shortest side, measure in mm */
 static VALUE
-ps_get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL(gtk_paper_size_get_name(_SELF(self)));
 }
 
 static VALUE
-ps_get_display_name(VALUE self)
+rg_display_name(VALUE self)
 {
     return CSTR2RVAL(gtk_paper_size_get_display_name(_SELF(self)));
 }
 
 static VALUE
-ps_get_ppd_name(VALUE self)
+rg_ppd_name(VALUE self)
 {
     return CSTR2RVAL(gtk_paper_size_get_ppd_name(_SELF(self)));
 }
 
 static VALUE
-ps_get_width(VALUE self, VALUE unit)
+rg_get_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_width(_SELF(self), RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_get_height(VALUE self, VALUE unit)
+rg_get_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_height(_SELF(self), RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_is_custom(VALUE self)
+rg_custom_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_paper_size_is_custom(_SELF(self)));
 }
 
 /* Only for custom sizes: */
 static VALUE
-ps_set_size(VALUE self, VALUE width, VALUE height, VALUE unit)
+rg_set_size(VALUE self, VALUE width, VALUE height, VALUE unit)
 {
     gtk_paper_size_set_size(_SELF(self), NUM2DBL(width), NUM2DBL(height),
                             RVAL2UNIT(unit));
     return self;
 }
 
-
 static VALUE
-ps_get_default_top_margin(VALUE self, VALUE unit)
+rg_get_default_top_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_top_margin(_SELF(self),
                                                               RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_get_default_bottom_margin(VALUE self, VALUE unit)
+rg_get_default_bottom_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_bottom_margin(_SELF(self),
                                                                  RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_get_default_left_margin(VALUE self, VALUE unit)
+rg_get_default_left_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_left_margin(_SELF(self),
                                                                RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_get_default_right_margin(VALUE self, VALUE unit)
+rg_get_default_right_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_right_margin(_SELF(self),
                                                                 RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_s_get_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_paper_size_get_default());
 }
@@ -153,7 +152,7 @@ Init_gtk_paper_size(void)
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAPER_SIZE, "PaperSize", mGtk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", ps_s_get_default, 0);
+    RG_DEF_SMETHOD(default, 0);
 
     rb_define_const(RG_TARGET_NAMESPACE, "A3", CSTR2RVAL(GTK_PAPER_NAME_A3));
     rb_define_const(RG_TARGET_NAMESPACE, "A4", CSTR2RVAL(GTK_PAPER_NAME_A4));
@@ -164,28 +163,24 @@ Init_gtk_paper_size(void)
                     CSTR2RVAL(GTK_PAPER_NAME_EXECUTIVE));
     rb_define_const(RG_TARGET_NAMESPACE, "LEGAL", CSTR2RVAL(GTK_PAPER_NAME_LEGAL));
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", ps_is_equal, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD_OPERATOR("==", equal, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "name", ps_get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "display_name", ps_get_display_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ppd_name", ps_get_ppd_name, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(display_name, 0);
+    RG_DEF_METHOD(ppd_name, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "get_width", ps_get_width, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_height", ps_get_height, 1);
+    RG_DEF_METHOD(get_width, 1);
+    RG_DEF_METHOD(get_height, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "custom?", ps_is_custom, 0);
+    RG_DEF_METHOD_P(custom, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_size", ps_set_size, 3);
+    RG_DEF_METHOD(set_size, 3);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "get_default_top_margin",
-                     ps_get_default_top_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_default_bottom_margin",
-                     ps_get_default_bottom_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_default_left_margin",
-                     ps_get_default_left_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_default_right_margin",
-                     ps_get_default_right_margin, 1);
+    RG_DEF_METHOD(get_default_top_margin, 1);
+    RG_DEF_METHOD(get_default_bottom_margin, 1);
+    RG_DEF_METHOD(get_default_left_margin, 1);
+    RG_DEF_METHOD(get_default_right_margin, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

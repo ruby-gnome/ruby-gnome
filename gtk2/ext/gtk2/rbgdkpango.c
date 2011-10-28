@@ -25,7 +25,7 @@
 #define RG_TARGET_NAMESPACE mPango
 
 static VALUE
-gdkpango_s_context_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE screen, ret;
     rb_scan_args(argc, argv, "01", &screen);
@@ -136,7 +136,7 @@ static VALUE
 gdkpango_attr_emboss_color_value(VALUE self)
 {
     return BOXED2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2ATTR(self))->color),
-		      PANGO_TYPE_COLOR);
+                      PANGO_TYPE_COLOR);
 }
 #endif
 
@@ -155,7 +155,7 @@ Init_gtk_gdk_pango(void)
     VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
     VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "context", gdkpango_s_context_get, -1);
+    RG_DEF_MODFUNC(context, -1);
 
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
     G_DEF_SETTER(context, "colormap");
@@ -179,7 +179,7 @@ Init_gtk_gdk_pango(void)
 #if GTK_CHECK_VERSION(2, 12, 0)
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossColor", pattr_color);
     rb_define_method(klass, "initialize",
-		     gdkpango_attr_emboss_color_initialize, 1);
+                     gdkpango_attr_emboss_color_initialize, 1);
     rb_define_method(klass, "value", gdkpango_attr_emboss_color_value, 0);
     tmpattr = gdk_pango_attr_emboss_color_new(&color);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);

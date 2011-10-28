@@ -29,7 +29,7 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-gtkdrag_selection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gboolean ret;
 
@@ -53,7 +53,7 @@ gtkdrag_selection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gtkdrag_selection_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE info)
+rg_m_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE info)
 {
     gtk_selection_add_target(RVAL2WIDGET(widget), RVAL2ATOM(selection),
                              RVAL2ATOM(target), NUM2INT(info));
@@ -61,7 +61,7 @@ gtkdrag_selection_add_target(VALUE self, VALUE widget, VALUE selection, VALUE ta
 }
 
 static VALUE
-gtkdrag_selection_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
+rg_m_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
 {
     GtkWidget *widget = RVAL2WIDGET(rbwidget);
     GdkAtom selection = RVAL2ATOM(rbselection);
@@ -76,14 +76,14 @@ gtkdrag_selection_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VAL
 }
 
 static VALUE
-gtkdrag_selection_clear_targets(VALUE self, VALUE widget, VALUE selection)
+rg_m_clear_targets(VALUE self, VALUE widget, VALUE selection)
 {
     gtk_selection_clear_targets(RVAL2WIDGET(widget), RVAL2ATOM(selection));
     return self;
 }
 
 static VALUE
-gtkdrag_selection_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
+rg_m_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
 {
     gboolean ret = gtk_selection_convert(RVAL2WIDGET(widget), 
                                          RVAL2ATOM(selection), RVAL2ATOM(target),
@@ -92,7 +92,7 @@ gtkdrag_selection_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selectio
 }
 
 static VALUE
-gtkdrag_selection_remove_all(VALUE self, VALUE widget)
+rg_m_remove_all(VALUE self, VALUE widget)
 {
     gtk_selection_remove_all(RVAL2WIDGET(widget));
     return self;
@@ -100,7 +100,7 @@ gtkdrag_selection_remove_all(VALUE self, VALUE widget)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-targets_include_image(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable)
+rg_m_include_image_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable)
 {
     gboolean writable = RVAL2CBOOL(rbwritable);
     long n;
@@ -115,7 +115,7 @@ targets_include_image(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritabl
 }
 
 static VALUE
-targets_include_text(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
+rg_m_include_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 {
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
@@ -129,7 +129,7 @@ targets_include_text(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-targets_include_uri(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
+rg_m_include_uri_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 {
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
@@ -143,7 +143,7 @@ targets_include_uri(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-targets_include_rich_text(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuffer)
+rg_m_include_rich_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuffer)
 {
     GtkTextBuffer *buffer = GTK_TEXT_BUFFER(RVAL2GOBJ(rbbuffer));
     long n;
@@ -163,17 +163,17 @@ Init_gtk_selection(void)
 {
     VALUE RG_TARGET_NAMESPACE =  rb_define_module_under(mGtk, "Selection");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "owner_set", gtkdrag_selection_owner_set, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "add_target", gtkdrag_selection_add_target, 4);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "add_targets", gtkdrag_selection_add_targets, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "clear_targets", gtkdrag_selection_clear_targets, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "convert", gtkdrag_selection_convert, 4);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "remove_all", gtkdrag_selection_remove_all, 1);
+    RG_DEF_MODFUNC(owner_set, 3);
+    RG_DEF_MODFUNC(add_target, 4);
+    RG_DEF_MODFUNC(add_targets, 3);
+    RG_DEF_MODFUNC(clear_targets, 2);
+    RG_DEF_MODFUNC(convert, 4);
+    RG_DEF_MODFUNC(remove_all, 1);
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "include_image?", targets_include_image, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "include_text?", targets_include_text, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "include_uri?", targets_include_uri, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "include_rich_text?", targets_include_rich_text, 2);
+    RG_DEF_MODFUNC_P(include_image, 2);
+    RG_DEF_MODFUNC_P(include_text, 1);
+    RG_DEF_MODFUNC_P(include_uri, 1);
+    RG_DEF_MODFUNC_P(include_rich_text, 2);
 #endif
 }

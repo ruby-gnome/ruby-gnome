@@ -25,7 +25,7 @@
 #define _SELF(s) ((GtkIconSet*)RVAL2BOXED(s, GTK_TYPE_ICON_SET))
 
 static VALUE
-icon_set_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkIconSet *icon_set;
     VALUE pixbuf;
@@ -42,14 +42,14 @@ icon_set_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-icon_set_add_source(VALUE self, VALUE source)
+rg_add_source(VALUE self, VALUE source)
 {
     gtk_icon_set_add_source(_SELF(self), RVAL2BOXED(source, GTK_TYPE_ICON_SOURCE));
     return self;
 }
 
 static VALUE
-icon_set_get_sizes(VALUE self)
+rg_sizes(VALUE self)
 {
     GtkIconSize *sizes;
     gint n_sizes;
@@ -64,7 +64,7 @@ icon_set_get_sizes(VALUE self)
 }
 
 static VALUE
-icon_set_render_icon(int argc, VALUE *argv, VALUE self)
+rg_render_icon(int argc, VALUE *argv, VALUE self)
 {
     VALUE style, direction, state, size, widget, detail;
 
@@ -83,9 +83,9 @@ Init_gtk_icon_set(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_SET, "IconSet", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", icon_set_initialize, -1);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "add_source", icon_set_add_source, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "sizes", icon_set_get_sizes, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "render_icon", icon_set_render_icon, -1);
+    RG_DEF_METHOD(initialize, -1);
+
+    RG_DEF_METHOD(add_source, 1);
+    RG_DEF_METHOD(sizes, 0);
+    RG_DEF_METHOD(render_icon, -1);
 }

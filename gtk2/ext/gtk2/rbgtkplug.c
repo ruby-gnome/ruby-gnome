@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cPlug
 
 static VALUE
-plug_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE socket_id;
     GdkNativeWindow id;
@@ -41,7 +41,7 @@ plug_initialize(int argc, VALUE *argv, VALUE self)
         id = NUM2UINT(socket_id);
 #endif
     }
-    
+
     RBGTK_INITIALIZE(self, gtk_plug_new(id));
     return Qnil;
 }
@@ -55,7 +55,7 @@ GdkDisplay *display,
 */
 
 static VALUE
-plug_construct(VALUE self, VALUE socket_id)
+rg_construct(VALUE self, VALUE socket_id)
 {
 #ifdef GDK_NATIVE_WINDOW_POINTER
     gtk_plug_construct(GTK_PLUG(RVAL2GOBJ(self)), GUINT_TO_POINTER(NUM2ULONG(socket_id)));
@@ -66,7 +66,7 @@ plug_construct(VALUE self, VALUE socket_id)
 }
 
 static VALUE
-plug_get_id(VALUE self)
+rg_id(VALUE self)
 {
     GdkNativeWindow id = gtk_plug_get_id(GTK_PLUG(RVAL2GOBJ(self)));
 #ifdef GDK_NATIVE_WINDOW_POINTER
@@ -83,9 +83,9 @@ Init_gtk_plug(void)
 {
 #ifdef HAVE_GTK_PLUG_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", plug_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "construct", plug_construct, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "id", plug_get_id, 0);
+
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(construct, 1);
+    RG_DEF_METHOD(id, 0);
 #endif
 }

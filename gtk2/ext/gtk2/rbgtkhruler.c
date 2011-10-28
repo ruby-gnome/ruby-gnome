@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cHRuler
 
 static VALUE
-hruler_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hruler_new());
     return Qnil;
@@ -38,5 +38,5 @@ Init_gtk_hruler(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HRULER, "HRuler", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", hruler_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

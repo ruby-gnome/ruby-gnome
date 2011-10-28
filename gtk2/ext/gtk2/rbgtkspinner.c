@@ -26,21 +26,21 @@
 #define _SELF(s) (GTK_SPINNER(RVAL2GOBJ(s)))
 
 static VALUE
-spinner_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_spinner_new());
     return Qnil;
 }
 
 static VALUE
-spinner_start(VALUE self)
+rg_start(VALUE self)
 {
     gtk_spinner_start(_SELF(self));
     return self;
 }
 
 static VALUE
-spinner_stop(VALUE self)
+rg_stop(VALUE self)
 {
     gtk_spinner_stop(_SELF(self));
     return self;
@@ -54,8 +54,8 @@ Init_gtk_spinner(void)
 #if GTK_CHECK_VERSION(2,20,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPINNER, "Spinner", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", spinner_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "start", spinner_start, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "stop", spinner_stop, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(start, 0);
+    RG_DEF_METHOD(stop, 0);
 #endif
 }

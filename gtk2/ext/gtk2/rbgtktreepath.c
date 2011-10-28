@@ -28,11 +28,11 @@
 static ID id_equal;
 
 static VALUE
-treepath_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE path;
     GtkTreePath* widget;
-    
+
     if (argc == 1) {
         path = argv[0];
         if (TYPE(path) == T_STRING){
@@ -49,13 +49,13 @@ treepath_initialize(int argc, VALUE *argv, VALUE self)
         for (i = 0; i < argc; i++)
             gtk_tree_path_append_index(widget, NUM2INT(argv[i]));
     }
-    
+
     G_INITIALIZE(self, widget);
     return Qnil;
 }
 
 static VALUE
-treepath_to_string(VALUE self)
+rg_to_str(VALUE self)
 {
     gchar* s = gtk_tree_path_to_string(_SELF(self));
     VALUE result = CSTR2RVAL(s);
@@ -71,27 +71,27 @@ Deprecated
 */
 
 static VALUE
-treepath_append_index(VALUE self, VALUE index)
+rg_append_index(VALUE self, VALUE index)
 {
     gtk_tree_path_append_index(_SELF(self), NUM2INT(index));
     return self;
 }
 
 static VALUE
-treepath_prepend_index(VALUE self, VALUE index)
+rg_prepend_index(VALUE self, VALUE index)
 {
     gtk_tree_path_prepend_index(_SELF(self), NUM2INT(index));
     return self;
 }
 
 static VALUE
-treepath_get_depth(VALUE self)
+rg_depth(VALUE self)
 {
     return INT2NUM(gtk_tree_path_get_depth(_SELF(self)));
 }
 
 static VALUE
-treepath_get_indices(VALUE self)
+rg_indices(VALUE self)
 {
     VALUE ary;
     gint i, length;
@@ -105,7 +105,7 @@ treepath_get_indices(VALUE self)
         for (i = 0; i < length; i++) {
             rb_ary_push(ary, INT2NUM(indices[i]));
         }
-    
+
         return ary;
     } else {
         return Qnil;
@@ -113,13 +113,13 @@ treepath_get_indices(VALUE self)
 }
 
 static VALUE
-treepath_compare(VALUE self, VALUE other)
+rg_operator_treepath_compare(VALUE self, VALUE other)
 {
     return INT2NUM(gtk_tree_path_compare(_SELF(self), _SELF(other)));
 }
 
 static VALUE
-treepath_equal(VALUE self, VALUE other)
+rg_operator_treepath_equal(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_funcall(CLASS_OF(self), id_equal, 1, CLASS_OF(other)))) {
         return Qfalse;
@@ -129,39 +129,39 @@ treepath_equal(VALUE self, VALUE other)
 }
 
 static VALUE
-treepath_next(VALUE self)
+rg_next_bang(VALUE self)
 {
     gtk_tree_path_next(_SELF(self));
     return self;
 }
 
 static VALUE
-treepath_prev(VALUE self)
+rg_prev_bang(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_path_prev(_SELF(self)));
 }
 
 static VALUE
-treepath_up(VALUE self)
+rg_up_bang(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_path_up(_SELF(self)));
 }
 
 static VALUE
-treepath_down(VALUE self)
+rg_down_bang(VALUE self)
 {
     gtk_tree_path_down(_SELF(self));
     return Qtrue;
 }
 
 static VALUE
-treepath_is_ancestor(VALUE self, VALUE descendant)
+rg_ancestor_p(VALUE self, VALUE descendant)
 {
     return CBOOL2RVAL(gtk_tree_path_is_ancestor(_SELF(self), _SELF(descendant)));
 }
 
 static VALUE
-treepath_is_descendant(VALUE self, VALUE ancestor)
+rg_descendant_p(VALUE self, VALUE ancestor)
 {
     return CBOOL2RVAL(gtk_tree_path_is_descendant(_SELF(self), _SELF(ancestor)));
 }
@@ -173,19 +173,19 @@ Init_gtk_treepath(void)
 
     id_equal = rb_intern("==");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", treepath_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_str", treepath_to_string, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_str");
-    rb_define_method(RG_TARGET_NAMESPACE, "append_index", treepath_append_index, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend_index", treepath_prepend_index, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "depth", treepath_get_depth, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "indices", treepath_get_indices, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "<=>", treepath_compare, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", treepath_equal, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "next!", treepath_next, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "prev!", treepath_prev, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "up!", treepath_up, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "down!", treepath_down, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ancestor?", treepath_is_ancestor, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "descendant?", treepath_is_descendant, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(to_str, 0);
+    RG_DEF_ALIAS("to_s", "to_str");
+    RG_DEF_METHOD(append_index, 1);
+    RG_DEF_METHOD(prepend_index, 1);
+    RG_DEF_METHOD(depth, 0);
+    RG_DEF_METHOD(indices, 0);
+    RG_DEF_METHOD_OPERATOR("<=>", treepath_compare, 1);
+    RG_DEF_METHOD_OPERATOR("==", treepath_equal, 1);
+    RG_DEF_METHOD_BANG(next, 0);
+    RG_DEF_METHOD_BANG(prev, 0);
+    RG_DEF_METHOD_BANG(up, 0);
+    RG_DEF_METHOD_BANG(down, 0);
+    RG_DEF_METHOD_P(ancestor, 1);
+    RG_DEF_METHOD_P(descendant, 1);
 }

@@ -28,7 +28,7 @@
 #define _SELF(i) GDK_IMAGE(RVAL2GOBJ(i))
 
 static VALUE
-gdkimage_initialize(VALUE self, VALUE type, VALUE visual, VALUE w, VALUE h)
+rg_initialize(VALUE self, VALUE type, VALUE visual, VALUE w, VALUE h)
 {
     GdkImage* image = gdk_image_new((GdkImageType)RVAL2GENUM(type, GDK_TYPE_IMAGE_TYPE),
                                     GDK_VISUAL(RVAL2GOBJ(visual)),
@@ -43,20 +43,20 @@ gdkimage_initialize(VALUE self, VALUE type, VALUE visual, VALUE w, VALUE h)
 }
 
 static VALUE
-gdkimage_get_colormap(VALUE self)
+rg_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_image_get_colormap(_SELF(self)));
 }
 
 static VALUE
-gdkimage_set_colormap(VALUE self, VALUE colormap)
+rg_set_colormap(VALUE self, VALUE colormap)
 {
     gdk_image_set_colormap(_SELF(self), RVAL2GOBJ(colormap));
     return self;
 }
 
 static VALUE
-gdkimage_put_pixel(VALUE self, VALUE x, VALUE y, VALUE pix)
+rg_put_pixel(VALUE self, VALUE x, VALUE y, VALUE pix)
 {
     gdk_image_put_pixel(_SELF(self),
                         NUM2INT(x), NUM2INT(y), NUM2INT(pix));
@@ -64,62 +64,62 @@ gdkimage_put_pixel(VALUE self, VALUE x, VALUE y, VALUE pix)
 }
 
 static VALUE
-gdkimage_get_pixel(VALUE self, VALUE x, VALUE y)
+rg_get_pixel(VALUE self, VALUE x, VALUE y)
 {
     return INT2NUM(gdk_image_get_pixel(_SELF(self),
                                        NUM2INT(x), NUM2INT(y)));
 }
 
 static VALUE
-gdkimage_image_type(VALUE self)
+rg_image_type(VALUE self)
 {
     return GENUM2RVAL((_SELF(self))->type, GDK_TYPE_IMAGE_TYPE);
 }
 
 static VALUE
-gdkimage_visual(VALUE self)
+rg_visual(VALUE self)
 {
     return GOBJ2RVAL((_SELF(self))->visual);
 }
 
 static VALUE
-gdkimage_byte_order(VALUE self)
+rg_byte_order(VALUE self)
 {
     return GENUM2RVAL((_SELF(self))->byte_order, GDK_TYPE_BYTE_ORDER);
 }
 
 static VALUE
-gdkimage_bits_per_pixel(VALUE self)
+rg_bits_per_pixel(VALUE self)
 {
     return INT2NUM((_SELF(self))->bits_per_pixel);
 }
 
 static VALUE
-gdkimage_width(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM((_SELF(self))->width);
 }
 
 static VALUE
-gdkimage_height(VALUE self)
+rg_height(VALUE self)
 {
     return INT2NUM((_SELF(self))->height);
 }
 
 static VALUE
-gdkimage_depth(VALUE self)
+rg_depth(VALUE self)
 {
     return INT2NUM((_SELF(self))->depth);
 }
 
 static VALUE
-gdkimage_bpp(VALUE self)
+rg_bpp(VALUE self)
 {
     return INT2NUM((_SELF(self))->bpp);
 }
 
 static VALUE
-gdkimage_bpl(VALUE self)
+rg_bpl(VALUE self)
 {
     return INT2NUM((_SELF(self))->bpl);
 }
@@ -129,20 +129,20 @@ Init_gtk_gdk_image(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkimage_initialize, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "colormap", gdkimage_get_colormap, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_colormap", gdkimage_set_colormap, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "put_pixel", gdkimage_put_pixel, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_pixel", gdkimage_get_pixel, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "image_type", gdkimage_image_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "visual", gdkimage_visual, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "byte_order", gdkimage_byte_order, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "bits_per_pixel", gdkimage_bits_per_pixel, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "width", gdkimage_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "height", gdkimage_height, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "depth", gdkimage_depth, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "bpp", gdkimage_bpp, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "bpl", gdkimage_bpl, 0);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(colormap, 0);
+    RG_DEF_METHOD(set_colormap, 1);
+    RG_DEF_METHOD(put_pixel, 3);
+    RG_DEF_METHOD(get_pixel, 2);
+    RG_DEF_METHOD(image_type, 0);
+    RG_DEF_METHOD(visual, 0);
+    RG_DEF_METHOD(byte_order, 0);
+    RG_DEF_METHOD(bits_per_pixel, 0);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(depth, 0);
+    RG_DEF_METHOD(bpp, 0);
+    RG_DEF_METHOD(bpl, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

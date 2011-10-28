@@ -51,7 +51,7 @@ gtk_target_list_get_type(void)
 /**********************************/
 
 static VALUE
-target_list_initialize(VALUE self, VALUE rbtargets)
+rg_initialize(VALUE self, VALUE rbtargets)
 {
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
@@ -65,7 +65,7 @@ target_list_initialize(VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-target_list_add(VALUE self, VALUE target, VALUE flags, VALUE info)
+rg_add(VALUE self, VALUE target, VALUE flags, VALUE info)
 {
     gtk_target_list_add(_SELF(self), RVAL2ATOM(target),
                         FIX2UINT(flags), FIX2UINT(info));
@@ -73,7 +73,7 @@ target_list_add(VALUE self, VALUE target, VALUE flags, VALUE info)
 }
 
 static VALUE
-target_list_add_table(VALUE self, VALUE rbtargets)
+rg_add_table(VALUE self, VALUE rbtargets)
 {
     GtkTargetList *list = _SELF(self);
     long n;
@@ -88,21 +88,21 @@ target_list_add_table(VALUE self, VALUE rbtargets)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-target_list_add_text_targets(VALUE self, VALUE info)
+rg_add_text_targets(VALUE self, VALUE info)
 {
     gtk_target_list_add_text_targets(_SELF(self), NUM2UINT(info));
     return self;
 }
 
 static VALUE
-target_list_add_image_targets(VALUE self, VALUE info, VALUE writable)
+rg_add_image_targets(VALUE self, VALUE info, VALUE writable)
 {
     gtk_target_list_add_image_targets(_SELF(self), NUM2UINT(info), RVAL2CBOOL(writable));
     return self;
 }
 
 static VALUE
-target_list_add_uri_targets(VALUE self, VALUE info)
+rg_add_uri_targets(VALUE self, VALUE info)
 {
     gtk_target_list_add_uri_targets(_SELF(self), NUM2UINT(info));
     return self;
@@ -111,7 +111,7 @@ target_list_add_uri_targets(VALUE self, VALUE info)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-target_list_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, VALUE buffer)
+rg_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, VALUE buffer)
 {
     gtk_target_list_add_rich_text_targets(_SELF(self), NUM2UINT(info),
                                           RVAL2CBOOL(deserializable),
@@ -121,14 +121,14 @@ target_list_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, 
 #endif
 
 static VALUE
-target_list_remove(VALUE self, VALUE target)
+rg_remove(VALUE self, VALUE target)
 {
     gtk_target_list_remove(_SELF(self), RVAL2ATOM(target));
     return self;
 }
 
 static VALUE
-target_list_find(VALUE self, VALUE target)
+rg_find(VALUE self, VALUE target)
 {
     guint info;
     gboolean ret = gtk_target_list_find(_SELF(self), RVAL2ATOM(target),
@@ -143,17 +143,17 @@ Init_gtk_target_list(void)
 
     rbgobj_boxed_not_copy_obj(GTK_TYPE_TARGET_LIST);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", target_list_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add", target_list_add, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_table", target_list_add_table, 1);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(add, 3);
+    RG_DEF_METHOD(add_table, 1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "add_text_targets", target_list_add_text_targets, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_image_targets", target_list_add_image_targets, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_uri_targets", target_list_add_uri_targets, 1);
+    RG_DEF_METHOD(add_text_targets, 1);
+    RG_DEF_METHOD(add_image_targets, 2);
+    RG_DEF_METHOD(add_uri_targets, 1);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "add_rich_text_targets", target_list_add_rich_text_targets, 3);
+    RG_DEF_METHOD(add_rich_text_targets, 3);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "remove", target_list_remove, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "find", target_list_find, 1);
+    RG_DEF_METHOD(remove, 1);
+    RG_DEF_METHOD(find, 1);
 }

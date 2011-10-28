@@ -25,14 +25,14 @@
 #define _SELF(self) (GTK_IM_MULTICONTEXT(RVAL2GOBJ(self)))
 
 static VALUE 
-immulti_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_im_multicontext_new());
     return Qnil;
 }
 
 static VALUE
-immulti_append_menuitems(VALUE self, VALUE menushell)
+rg_append_menuitems(VALUE self, VALUE menushell)
 {
     gtk_im_multicontext_append_menuitems(_SELF(self), RVAL2GOBJ(menushell));
     return self;
@@ -43,6 +43,6 @@ Init_gtk_im_multicontext(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_MULTICONTEXT, "IMMulticontext", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", immulti_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "append_menuitems", immulti_append_menuitems, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(append_menuitems, 1);
 }

@@ -38,34 +38,34 @@ GtkObject*  gtk_object_new                  (GtkType type,
 */
 
 static VALUE
-gobj_get_type_name(VALUE self)
+rg_type_name(VALUE self)
 {
     return CSTR2RVAL(GTK_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
 }
 
 static VALUE
-gobj_destroy(VALUE self)
+rg_destroy(VALUE self)
 {
     gtk_object_destroy(GTK_OBJECT(RVAL2GOBJ(self)));
     return Qnil;
 }
 
 static VALUE
-gobj_get_flags(VALUE self)
+rg_flags(VALUE self)
 {
     /* _GtkObject.flags is int32 */
     return(INT2FIX(GTK_OBJECT_FLAGS(RVAL2GOBJ(self))));
 }
 
 static VALUE
-gobj_set_flags(VALUE self, VALUE flags)
+rg_set_flags(VALUE self, VALUE flags)
 {
     GTK_OBJECT_SET_FLAGS(RVAL2GOBJ(self), NUM2INT(flags));
     return self;
 }
 
 static VALUE
-gobj_unset_flags(VALUE self, VALUE flags)
+rg_unset_flags(VALUE self, VALUE flags)
 {
     GTK_OBJECT_UNSET_FLAGS(RVAL2GOBJ(self), NUM2INT(flags));
     return self;
@@ -73,7 +73,7 @@ gobj_unset_flags(VALUE self, VALUE flags)
 
 /* Move from Bindings */
 static VALUE
-gobj_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
+rg_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
 {
      return CBOOL2RVAL(gtk_bindings_activate(GTK_OBJECT(RVAL2GOBJ(self)), 
                                              NUM2UINT(keyval),
@@ -82,7 +82,7 @@ gobj_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
 
 /* Move from Bindings */
 static VALUE
-gobj_s_binding_set(VALUE self)
+rg_s_binding_set(VALUE self)
 {
     GType gtype;
     gpointer gclass;
@@ -117,20 +117,19 @@ gobj_s_binding_set(VALUE self)
     return BOXED2RVAL(binding_set, GTK_TYPE_BINDING_SET);
 }
 
-
 void 
 Init_gtk_object(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "binding_set", gobj_s_binding_set, 0);
+    RG_DEF_SMETHOD(binding_set, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "type_name", gobj_get_type_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "flags", gobj_get_flags, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", gobj_set_flags, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_flags", gobj_unset_flags, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "destroy", gobj_destroy, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "bindings_activate", gobj_bindings_activate, 2);
+    RG_DEF_METHOD(type_name, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(set_flags, 1);
+    RG_DEF_METHOD(unset_flags, 1);
+    RG_DEF_METHOD(destroy, 0);
+    RG_DEF_METHOD(bindings_activate, 2);
 
     /* GtkObjectFlags */
     G_DEF_CLASS(GTK_TYPE_OBJECT_FLAGS, "Flags", RG_TARGET_NAMESPACE);

@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cCursor
 
 static VALUE
-gdkcursor_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GdkCursor* cursor = NULL;
 
@@ -64,37 +64,37 @@ gdkcursor_initialize(int argc, VALUE *argv, VALUE self)
                                             NIL_P(mask)?NULL:GDK_PIXMAP(RVAL2GOBJ(mask)), 
                                             RVAL2GDKCOLOR(fg),
                                             RVAL2GDKCOLOR(bg),
-					    NUM2INT(x), NUM2INT(y));
+                                            NUM2INT(x), NUM2INT(y));
     }
     G_INITIALIZE(self, cursor);
-       
+
     return Qnil;
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkcursor_get_display(VALUE self)
+rg_display(VALUE self)
 {
     return GOBJ2RVAL(gdk_cursor_get_display((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
 #endif
 
 static VALUE
-gdkcursor_is_pixmap(VALUE self)
+rg_pixmap_p(VALUE self)
 {
     return CBOOL2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
                       GDK_CURSOR_IS_PIXMAP);
 }
 
 static VALUE
-gdkcursor_cursor_type(VALUE self)
+rg_cursor_type(VALUE self)
 {
     return GENUM2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR))->type, GDK_TYPE_CURSOR_TYPE);
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-gdkcursor_get_image(VALUE self)
+rg_image(VALUE self)
 {
     return GOBJ2RVAL(gdk_cursor_get_image((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
@@ -105,14 +105,14 @@ Init_gtk_gdk_cursor(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkcursor_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "display", gdkcursor_get_display, 0);
+    RG_DEF_METHOD(display, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "pixmap?", gdkcursor_is_pixmap, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "cursor_type", gdkcursor_cursor_type, 0);
+    RG_DEF_METHOD_P(pixmap, 0);
+    RG_DEF_METHOD(cursor_type, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "image", gdkcursor_get_image, 0);
+    RG_DEF_METHOD(image, 0);
 #endif
 
     G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", RG_TARGET_NAMESPACE);

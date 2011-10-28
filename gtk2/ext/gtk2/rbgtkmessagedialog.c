@@ -25,7 +25,7 @@
 #define _SELF(s) (GTK_MESSAGE_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
-mdiag_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE parent, flags, type, buttons, message;
     GtkWidget* w;
@@ -54,7 +54,7 @@ GtkWidget*  gtk_message_dialog_new_with_markup
 */
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-mdiag_set_markup(VALUE self, VALUE str)
+rg_set_markup(VALUE self, VALUE str)
 {
     gtk_message_dialog_set_markup(_SELF(self), RVAL2CSTR(str));
     return self;
@@ -77,9 +77,9 @@ Init_gtk_message_dialog(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", mdiag_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", mdiag_set_markup, 1);
+    RG_DEF_METHOD(set_markup, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "markup");
 #endif
 

@@ -71,14 +71,14 @@ rbgtk_rval2gtkradiomenuitemgslist(VALUE value)
 #define RVAL2GTKRADIOMENUITEMGSLIST(value) rbgtk_rval2gtkradiomenuitemgslist(value)
 
 static VALUE
-rmitem_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkWidget *widget;
     GSList *list = NULL;
     const gchar *label = NULL;
     const gchar *mnemonic = NULL;
-    
+
     if (rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3) > 0 &&
         TYPE(arg1) == T_STRING) {
         if (NIL_P(arg2) || RVAL2CBOOL(arg2))
@@ -142,7 +142,7 @@ Init_gtk_radio_menu_item(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rmitem_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", rmitem_get_group, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", rmitem_set_group, 1);
 }

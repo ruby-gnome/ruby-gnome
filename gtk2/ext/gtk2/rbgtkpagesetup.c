@@ -30,27 +30,27 @@
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
 static VALUE
-ps_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_page_setup_new());
     return Qnil;
 }
 
 static VALUE
-ps_copy(VALUE self)
+rg_dup(VALUE self)
 {
     return GOBJ2RVALU(gtk_page_setup_copy(_SELF(self)));
 }
 
 static VALUE
-ps_get_orientation(VALUE self)
+rg_orientation(VALUE self)
 {
     return GENUM2RVAL(gtk_page_setup_get_orientation(_SELF(self)), 
                       GTK_TYPE_PAGE_ORIENTATION);
 }
 
 static VALUE
-ps_set_orientation(VALUE self, VALUE orientation)
+rg_set_orientation(VALUE self, VALUE orientation)
 {
     gtk_page_setup_set_orientation(_SELF(self), 
                                    RVAL2GENUM(orientation, GTK_TYPE_PAGE_ORIENTATION));
@@ -58,27 +58,27 @@ ps_set_orientation(VALUE self, VALUE orientation)
 }
 
 static VALUE
-ps_get_paper_size(VALUE self)
+rg_paper_size(VALUE self)
 {
     return BOXED2RVAL(gtk_page_setup_get_paper_size(_SELF(self)), GTK_TYPE_PAPER_SIZE);
 }
 
 static VALUE
-ps_set_paper_size(VALUE self, VALUE paper_size)
+rg_set_paper_size(VALUE self, VALUE paper_size)
 {
     gtk_page_setup_set_paper_size(_SELF(self), RVAL2SIZE(paper_size));
     return self;
 }
 
 static VALUE
-ps_get_top_margin(VALUE self, VALUE unit)
+rg_get_top_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_top_margin(_SELF(self),
                                                       RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_set_top_margin(VALUE self, VALUE margin, VALUE unit)
+rg_set_top_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_top_margin(_SELF(self), NUM2DBL(margin),
                                   RVAL2UNIT(unit));
@@ -86,14 +86,14 @@ ps_set_top_margin(VALUE self, VALUE margin, VALUE unit)
 }
 
 static VALUE
-ps_get_bottom_margin(VALUE self, VALUE unit)
+rg_get_bottom_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_bottom_margin(_SELF(self),
                                                          RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_set_bottom_margin(VALUE self, VALUE margin, VALUE unit)
+rg_set_bottom_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_bottom_margin(_SELF(self), NUM2DBL(margin),
                                      RVAL2UNIT(unit));
@@ -101,14 +101,14 @@ ps_set_bottom_margin(VALUE self, VALUE margin, VALUE unit)
 }
 
 static VALUE
-ps_get_left_margin(VALUE self, VALUE unit)
+rg_get_left_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_left_margin(_SELF(self),
                                                        RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_set_left_margin(VALUE self, VALUE margin, VALUE unit)
+rg_set_left_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_left_margin(_SELF(self), NUM2DBL(margin),
                                    RVAL2UNIT(unit));
@@ -116,14 +116,14 @@ ps_set_left_margin(VALUE self, VALUE margin, VALUE unit)
 }
 
 static VALUE
-ps_get_right_margin(VALUE self, VALUE unit)
+rg_get_right_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_right_margin(_SELF(self),
                                                         RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_set_right_margin(VALUE self, VALUE margin, VALUE unit)
+rg_set_right_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_right_margin(_SELF(self), NUM2DBL(margin),
                                     RVAL2UNIT(unit));
@@ -131,7 +131,7 @@ ps_set_right_margin(VALUE self, VALUE margin, VALUE unit)
 }
 
 static VALUE
-ps_set_paper_size_and_default_margins(VALUE self, VALUE size)
+rg_set_paper_size_and_default_margins(VALUE self, VALUE size)
 {
     gtk_page_setup_set_paper_size_and_default_margins(_SELF(self),
                                                       RVAL2SIZE(size));
@@ -140,14 +140,14 @@ ps_set_paper_size_and_default_margins(VALUE self, VALUE size)
 
 /* These take orientation, but not margins into consideration */
 static VALUE
-ps_get_paper_width(VALUE self, VALUE unit)
+rg_get_paper_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_paper_width(_SELF(self),
                                                        RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_get_paper_height(VALUE self, VALUE unit)
+rg_get_paper_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_paper_height(_SELF(self),
                                                         RVAL2UNIT(unit)));
@@ -155,14 +155,14 @@ ps_get_paper_height(VALUE self, VALUE unit)
 
 /* These take orientation, and margins into consideration */
 static VALUE
-ps_get_page_width(VALUE self, VALUE unit)
+rg_get_page_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_page_width(_SELF(self),
                                                       RVAL2UNIT(unit)));
 }
 
 static VALUE
-ps_get_page_height(VALUE self, VALUE unit)
+rg_get_page_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_page_height(_SELF(self),
                                                         RVAL2UNIT(unit)));
@@ -175,32 +175,31 @@ Init_gtk_page_setup(void)
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP, "PageSetup", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "dup", ps_copy, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(dup, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "orientation", ps_get_orientation, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_orientation", ps_set_orientation, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "paper_size", ps_get_paper_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_size", ps_set_paper_size, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_top_margin", ps_get_top_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_top_margin", ps_set_top_margin, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_bottom_margin", ps_get_bottom_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_bottom_margin", ps_set_bottom_margin, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_left_margin", ps_get_left_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_left_margin", ps_set_left_margin, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_right_margin", ps_get_right_margin, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_right_margin", ps_set_right_margin, 2);
+    RG_DEF_METHOD(orientation, 0);
+    RG_DEF_METHOD(set_orientation, 1);
+    RG_DEF_METHOD(paper_size, 0);
+    RG_DEF_METHOD(set_paper_size, 1);
+    RG_DEF_METHOD(get_top_margin, 1);
+    RG_DEF_METHOD(set_top_margin, 2);
+    RG_DEF_METHOD(get_bottom_margin, 1);
+    RG_DEF_METHOD(set_bottom_margin, 2);
+    RG_DEF_METHOD(get_left_margin, 1);
+    RG_DEF_METHOD(set_left_margin, 2);
+    RG_DEF_METHOD(get_right_margin, 1);
+    RG_DEF_METHOD(set_right_margin, 2);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_size_and_default_margins",
-                     ps_set_paper_size_and_default_margins, 1);
+    RG_DEF_METHOD(set_paper_size_and_default_margins, 1);
 
     /* These take orientation, but not margins into consideration */
-    rb_define_method(RG_TARGET_NAMESPACE, "get_paper_width", ps_get_paper_width, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_paper_height", ps_get_paper_height, 1);
+    RG_DEF_METHOD(get_paper_width, 1);
+    RG_DEF_METHOD(get_paper_height, 1);
 
     /* These take orientation, and margins into consideration */
-    rb_define_method(RG_TARGET_NAMESPACE, "get_page_width", ps_get_page_width, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_page_height", ps_get_page_height, 1);
+    RG_DEF_METHOD(get_page_width, 1);
+    RG_DEF_METHOD(get_page_height, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif

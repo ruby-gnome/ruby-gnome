@@ -27,13 +27,13 @@
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
 static VALUE
-gdkdisplaymanager_get(G_GNUC_UNUSED VALUE self)
+rg_s_get(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_display_manager_get());
 }
 
 static VALUE
-gdkdisplaymanager_list_displays(VALUE self)
+rg_displays(VALUE self)
 {
     return GSLIST2ARYF(gdk_display_manager_list_displays(_SELF(self)));
 }
@@ -53,7 +53,7 @@ Init_gtk_gdk_display_manager(void)
 #if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get", gdkdisplaymanager_get, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "displays", gdkdisplaymanager_list_displays, 0);
+    RG_DEF_SMETHOD(get, 0);
+    RG_DEF_METHOD(displays, 0);
 #endif
 }

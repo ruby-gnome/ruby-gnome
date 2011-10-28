@@ -26,20 +26,20 @@
 #define _SELF(self) GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))
 
 static VALUE
-textchild_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_text_child_anchor_new());
     return Qnil;
 }
 
 static VALUE
-textchild_get_widgets(VALUE self)
+rg_widgets(VALUE self)
 {
     return GLIST2ARYF(gtk_text_child_anchor_get_widgets(_SELF(self)));
 }
 
 static VALUE
-textchild_get_deleted(VALUE self)
+rg_deleted_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_child_anchor_get_deleted(_SELF(self)));
 }
@@ -49,7 +49,7 @@ Init_gtk_textchild(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR, "TextChildAnchor", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", textchild_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "widgets", textchild_get_widgets, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "deleted?", textchild_get_deleted, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(widgets, 0);
+    RG_DEF_METHOD_P(deleted, 0);
 }

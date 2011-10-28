@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cFrame
 
 static VALUE
-frame_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label;
     rb_scan_args(argc, argv, "01", &label);
@@ -36,21 +36,21 @@ frame_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-frame_set_label_align(VALUE self, VALUE xalign, VALUE yalign)
+rg_set_label_align(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_frame_set_label_align(GTK_FRAME(RVAL2GOBJ(self)),
-			      NUM2DBL(xalign),
-			      NUM2DBL(yalign));
+                              NUM2DBL(xalign),
+                              NUM2DBL(yalign));
 
     return self;
 }
 
 static VALUE
-frame_get_label_align(VALUE self)
+rg_label_align(VALUE self)
 {
     gfloat xalign, yalign;
     gtk_frame_get_label_align(GTK_FRAME(RVAL2GOBJ(self)),
-			      &xalign, &yalign);
+                              &xalign, &yalign);
 
     return rb_ary_new3(2, rb_float_new(xalign), rb_float_new(yalign));
 }
@@ -60,11 +60,10 @@ Init_gtk_frame(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FRAME, "Frame", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", frame_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_label_align", frame_set_label_align, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "label_align", frame_get_label_align, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_label_align, 2);
+    RG_DEF_METHOD(label_align, 0);
     rb_undef_method(RG_TARGET_NAMESPACE, "shadow");
     rb_undef_method(RG_TARGET_NAMESPACE, "shadow=");
     rb_undef_method(RG_TARGET_NAMESPACE, "set_shadow");
 }
-

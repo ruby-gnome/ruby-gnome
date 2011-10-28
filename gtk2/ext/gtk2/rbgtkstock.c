@@ -34,7 +34,7 @@
 #define CSTR2SYM(str) ID2SYM(rb_intern(str))
 
 static VALUE
-stock_m_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE stock_id, label, modifier, keyval, translation_domain;
     GtkStockItem item;
@@ -51,7 +51,7 @@ stock_m_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-stock_m_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
+rg_s_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
 {
     GtkStockItem item;
 
@@ -68,7 +68,7 @@ stock_m_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
 }
 
 static VALUE
-stock_m_list_ids(G_GNUC_UNUSED VALUE self)
+rg_s_ids(G_GNUC_UNUSED VALUE self)
 {
     GSList *ids = gtk_stock_list_ids();
     GSList *l;
@@ -90,7 +90,7 @@ translate_func(const gchar *path, gpointer func)
 }
 
 static VALUE
-stock_m_set_translate_func(VALUE klass, VALUE domain)
+rg_s_set_translate_func(VALUE klass, VALUE domain)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(klass, func);
@@ -108,11 +108,11 @@ Init_gtk_stock(void)
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Stock");
 
     rb_undef_method(RG_TARGET_NAMESPACE, "new");
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "add", stock_m_add, -1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lookup", stock_m_lookup, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "ids", stock_m_list_ids, 0);
+    RG_DEF_SMETHOD(add, -1);
+    RG_DEF_SMETHOD(lookup, 1);
+    RG_DEF_SMETHOD(ids, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_translate_func", stock_m_set_translate_func, 1);
+    RG_DEF_SMETHOD(set_translate_func, 1);
 #endif
 
     /* Stock IDs (not all are stock items; some are images only) */

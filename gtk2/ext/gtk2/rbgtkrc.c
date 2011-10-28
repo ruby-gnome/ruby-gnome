@@ -35,7 +35,7 @@ rc_scanner_new(VALUE self)
 */
 
 static VALUE
-rc_get_style(G_GNUC_UNUSED VALUE self, VALUE widget)
+rg_m_get_style(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkStyle* style = gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(widget)));
     GType gtype = G_OBJECT_TYPE(style);
@@ -47,7 +47,7 @@ rc_get_style(G_GNUC_UNUSED VALUE self, VALUE widget)
 }
 
 static VALUE
-rc_get_style_by_paths(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_get_style_by_paths(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE settings, widget_path, class_path, klass;
     GtkStyle* style;
@@ -73,27 +73,27 @@ rc_get_style_by_paths(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rc_parse(G_GNUC_UNUSED VALUE self, VALUE filename)
+rg_m_parse(G_GNUC_UNUSED VALUE self, VALUE filename)
 {
     gtk_rc_parse(RVAL2CSTR(filename));
     return filename;
 }
 
 static VALUE
-rc_parse_string(G_GNUC_UNUSED VALUE self, VALUE rc_string)
+rg_m_parse_string(G_GNUC_UNUSED VALUE self, VALUE rc_string)
 {
     gtk_rc_parse_string(RVAL2CSTR(rc_string));
     return rc_string;
 }
 
 static VALUE
-rc_reparse_all(G_GNUC_UNUSED VALUE self)
+rg_m_reparse_all(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gtk_rc_reparse_all());
 }
 
 static VALUE
-rc_reparse_all_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE force_load)
+rg_m_reparse_all_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE force_load)
 {
     return CBOOL2RVAL(gtk_rc_reparse_all_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)), 
                                                       RVAL2CBOOL(force_load)));
@@ -101,7 +101,7 @@ rc_reparse_all_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE forc
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-rc_reset_styles(G_GNUC_UNUSED VALUE self, VALUE settings)
+rg_m_reset_styles(G_GNUC_UNUSED VALUE self, VALUE settings)
 {
     gtk_rc_reset_styles(GTK_SETTINGS(RVAL2GOBJ(settings)));
     return settings;
@@ -109,14 +109,14 @@ rc_reset_styles(G_GNUC_UNUSED VALUE self, VALUE settings)
 #endif
 
 static VALUE
-rc_add_default_file(G_GNUC_UNUSED VALUE self, VALUE filename)
+rg_m_add_default_file(G_GNUC_UNUSED VALUE self, VALUE filename)
 {
     gtk_rc_add_default_file(RVAL2CSTR(filename));
     return filename;
 }
 
 static VALUE
-rc_get_default_files(G_GNUC_UNUSED VALUE self)
+rg_m_default_files(G_GNUC_UNUSED VALUE self)
 {
     gchar** files = gtk_rc_get_default_files();
     VALUE ary = rb_ary_new();
@@ -128,7 +128,7 @@ rc_get_default_files(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rc_set_default_files(G_GNUC_UNUSED VALUE self, VALUE rbfilenames)
+rg_m_set_default_files(G_GNUC_UNUSED VALUE self, VALUE rbfilenames)
 {
     gchar **filenames = (gchar **)RVAL2STRV(rbfilenames);
 
@@ -151,7 +151,7 @@ guint       gtk_rc_parse_priority           (GScanner *scanner,
 */
 
 static VALUE
-rc_find_module_in_path(G_GNUC_UNUSED VALUE self, VALUE module_file)
+rg_m_find_module_in_path(G_GNUC_UNUSED VALUE self, VALUE module_file)
 {
     return CSTR2RVAL_FREE(gtk_rc_find_module_in_path(RVAL2CSTR(module_file)));
 }
@@ -163,25 +163,25 @@ gchar*      gtk_rc_find_pixmap_in_path      (GtkSettings *settings,
 */
 
 static VALUE
-rc_get_module_dir(G_GNUC_UNUSED VALUE self)
+rg_m_module_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_rc_get_module_dir());
 }
 
 static VALUE
-rc_get_im_module_path(G_GNUC_UNUSED VALUE self)
+rg_m_im_module_path(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_rc_get_im_module_path());
 }
 
 static VALUE
-rc_get_im_module_file(G_GNUC_UNUSED VALUE self)
+rg_m_im_module_file(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_rc_get_im_module_file());
 }
 
 static VALUE
-rc_get_theme_dir(G_GNUC_UNUSED VALUE self)
+rg_m_theme_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_rc_get_theme_dir());
 }
@@ -191,23 +191,23 @@ Init_gtk_rc(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "RC");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_style", rc_get_style, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_style_by_paths", rc_get_style_by_paths, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "parse", rc_parse, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "parse_string", rc_parse_string, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "reparse_all", rc_reparse_all, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "reparse_all_for_settings", rc_reparse_all_for_settings, 2);
+    RG_DEF_MODFUNC(get_style, 1);
+    RG_DEF_MODFUNC(get_style_by_paths, -1);
+    RG_DEF_MODFUNC(parse, 1);
+    RG_DEF_MODFUNC(parse_string, 1);
+    RG_DEF_MODFUNC(reparse_all, 0);
+    RG_DEF_MODFUNC(reparse_all_for_settings, 2);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "reset_styles", rc_reset_styles, 1);
+    RG_DEF_MODFUNC(reset_styles, 1);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "add_default_file", rc_add_default_file, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "default_files", rc_get_default_files, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_default_files", rc_set_default_files, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "find_module_in_path", rc_find_module_in_path, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "module_dir", rc_get_module_dir, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "im_module_path", rc_get_im_module_path, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "im_module_file", rc_get_im_module_file, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "theme_dir", rc_get_theme_dir, 0);
+    RG_DEF_MODFUNC(add_default_file, 1);
+    RG_DEF_MODFUNC(default_files, 0);
+    RG_DEF_MODFUNC(set_default_files, 1);
+    RG_DEF_MODFUNC(find_module_in_path, 1);
+    RG_DEF_MODFUNC(module_dir, 0);
+    RG_DEF_MODFUNC(im_module_path, 0);
+    RG_DEF_MODFUNC(im_module_file, 0);
+    RG_DEF_MODFUNC(theme_dir, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

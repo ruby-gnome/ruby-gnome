@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cTextTag
 
 static VALUE
-initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE name;
     rb_scan_args(argc, argv, "01", &name);
@@ -33,20 +33,20 @@ initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-get_priority(VALUE self)
+rg_priority(VALUE self)
 {
     return INT2NUM(gtk_text_tag_get_priority(GTK_TEXT_TAG(RVAL2GOBJ(self))));
 }
 
 static VALUE
-set_priority(VALUE self, VALUE priority)
+rg_set_priority(VALUE self, VALUE priority)
 {
     gtk_text_tag_set_priority(GTK_TEXT_TAG(RVAL2GOBJ(self)), NUM2INT(priority));
     return priority;
 }
 
 static VALUE
-event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
+rg_event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
 {
     gboolean ret = gtk_text_tag_event(GTK_TEXT_TAG(RVAL2GOBJ(self)), 
                                       RVAL2GOBJ(event_object),
@@ -59,11 +59,11 @@ void
 Init_gtk_texttag(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_TAG, "TextTag", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "priority", get_priority, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_priority", set_priority, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(priority, 0);
+    RG_DEF_METHOD(set_priority, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "priority");
-    rb_define_method(RG_TARGET_NAMESPACE, "event", event, 3);
+    RG_DEF_METHOD(event, 3);
 
     /* GtkWrapMode */
     G_DEF_CLASS(GTK_TYPE_WRAP_MODE, "WrapMode", RG_TARGET_NAMESPACE);

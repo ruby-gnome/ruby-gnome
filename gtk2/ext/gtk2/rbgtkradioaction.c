@@ -18,7 +18,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *  MA  02110-1301  USA
  */
- 
+
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,4,0)
@@ -27,7 +27,7 @@
 #define _SELF(self) (GTK_RADIO_ACTION(RVAL2GOBJ(self)))
 
 static VALUE
-raction_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id, VALUE value)
+rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id, VALUE value)
 {
     const gchar *gstock = NULL;
 
@@ -113,12 +113,12 @@ raction_set_group(VALUE self, VALUE rbgroup)
 
 #if ! GTK_CHECK_VERSION(2,10,0)
 static VALUE
-raction_get_current_value(VALUE self)
+rg_current_value(VALUE self)
 {
     return INT2NUM(gtk_radio_action_get_current_value(_SELF(self)));
 }
 #endif
-    
+
 #endif
 
 void 
@@ -127,13 +127,12 @@ Init_gtk_radio_action(void)
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", raction_initialize, 5);
+    RG_DEF_METHOD(initialize, 5);
 #if ! GTK_CHECK_VERSION(2,10,0)
     /* Define as Property since 2.10 */
-    rb_define_method(RG_TARGET_NAMESPACE, "current_value", raction_get_current_value, 0);
+    RG_DEF_METHOD(current_value, 0);
 #endif
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_get_group, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_set_group, 1);
 #endif
 }
-

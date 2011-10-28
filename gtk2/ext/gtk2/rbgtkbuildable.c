@@ -28,20 +28,20 @@
 #define RVAL2BUILDER(obj) (GTK_BUILDER(RVAL2GOBJ(obj)))
 
 static VALUE
-buildable_get_name(VALUE self)
+rg_builder_name(VALUE self)
 {
     return CSTR2RVAL(gtk_buildable_get_name(_SELF(self)));
 }
 
 static VALUE
-buildable_set_name(VALUE self, VALUE name)
+rg_set_builder_name(VALUE self, VALUE name)
 {
     gtk_buildable_set_name(_SELF(self), RVAL2CSTR(name));
     return self;
 }
 
 static VALUE
-buildable_add_child(int argc, VALUE *argv, VALUE self)
+rg_add_child(int argc, VALUE *argv, VALUE self)
 {
     VALUE builder, child, type;
 
@@ -52,7 +52,7 @@ buildable_add_child(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-buildable_set_buildable_property(VALUE self, VALUE rb_builder,
+rg_set_buildable_property(VALUE self, VALUE rb_builder,
                                  VALUE rb_name, VALUE rb_value)
 {
     GtkBuilder *builder;
@@ -68,42 +68,42 @@ buildable_set_buildable_property(VALUE self, VALUE rb_builder,
 }
 
 static VALUE
-buildable_construct_child(VALUE self, VALUE builder, VALUE name)
+rg_construct_child(VALUE self, VALUE builder, VALUE name)
 {
     return GOBJ2RVAL(gtk_buildable_construct_child(_SELF(self),
-						   RVAL2BUILDER(builder),
-						   RVAL2CSTR(name)));
+                                                   RVAL2BUILDER(builder),
+                                                   RVAL2CSTR(name)));
 }
 
 /*
   customized buildable is not supported yet.
 
 gboolean  gtk_buildable_custom_tag_start       (GtkBuildable        *buildable,
-						GtkBuilder          *builder,
-						GObject             *child,
-						const gchar         *tagname,
-						GMarkupParser       *parser,
-						gpointer            *data);
+                        GtkBuilder          *builder,
+                        GObject             *child,
+                        const gchar         *tagname,
+                        GMarkupParser       *parser,
+                        gpointer            *data);
 void      gtk_buildable_custom_tag_end         (GtkBuildable        *buildable,
-						GtkBuilder          *builder,
-						GObject             *child,
-						const gchar         *tagname,
-						gpointer            *data);
+                        GtkBuilder          *builder,
+                        GObject             *child,
+                        const gchar         *tagname,
+                        gpointer            *data);
 void      gtk_buildable_custom_finished        (GtkBuildable        *buildable,
-						GtkBuilder          *builder,
-						GObject             *child,
-						const gchar         *tagname,
-						gpointer             data);
+                        GtkBuilder          *builder,
+                        GObject             *child,
+                        const gchar         *tagname,
+                        gpointer             data);
 void      gtk_buildable_parser_finished        (GtkBuildable        *buildable,
-						GtkBuilder          *builder);
+                        GtkBuilder          *builder);
 */
 
 static VALUE
-buildable_get_internal_child(VALUE self, VALUE builder, VALUE child_name)
+rg_get_internal_child(VALUE self, VALUE builder, VALUE child_name)
 {
     return GOBJ2RVAL(gtk_buildable_get_internal_child(_SELF(self),
-						      RVAL2BUILDER(builder),
-						      RVAL2CSTR(child_name)));
+                                                      RVAL2BUILDER(builder),
+                                                      RVAL2CSTR(child_name)));
 }
 #endif
 
@@ -115,15 +115,12 @@ Init_gtk_buildable(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUILDABLE, "Buildable", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "builder_name", buildable_get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_builder_name", buildable_set_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_child", buildable_add_child, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_buildable_property",
-                     buildable_set_buildable_property, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "construct_child",
-                     buildable_construct_child, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_internal_child",
-                     buildable_get_internal_child, 2);
+    RG_DEF_METHOD(builder_name, 0);
+    RG_DEF_METHOD(set_builder_name, 1);
+    RG_DEF_METHOD(add_child, -1);
+    RG_DEF_METHOD(set_buildable_property, 3);
+    RG_DEF_METHOD(construct_child, 2);
+    RG_DEF_METHOD(get_internal_child, 2);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif

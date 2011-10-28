@@ -26,35 +26,34 @@
 #define RG_TARGET_NAMESPACE cRecentManager
 #define _SELF(self) (GTK_RECENT_MANAGER(RVAL2GOBJ(self)))
 
-
 static VALUE
-rm_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_recent_manager_new());
     return Qnil;
 }
 
 static VALUE
-rm_s_get_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_default());
 }
 
 static VALUE
-rm_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
+rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
 
 static VALUE
-rm_set_screen(VALUE self, VALUE screen)
+rg_set_screen(VALUE self, VALUE screen)
 {
     gtk_recent_manager_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
 
 static VALUE
-rm_add_item(int argc, VALUE *argv, VALUE self)
+rg_add_item(int argc, VALUE *argv, VALUE self)
 {
     VALUE uri, data;
     gboolean ret;
@@ -73,18 +72,18 @@ rm_add_item(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rm_remove_item(VALUE self, VALUE uri)
+rg_remove_item(VALUE self, VALUE uri)
 {
     GError* error = NULL;
     gboolean ret = gtk_recent_manager_remove_item(_SELF(self), RVAL2CSTR(uri),
                                                   &error);
     if (! ret) RAISE_GERROR(error);
-    
+
     return self;
 }
 
 static VALUE
-rm_lookup_item(VALUE self, VALUE uri)
+rg_lookup_item(VALUE self, VALUE uri)
 {
     GError* error = NULL;
     GtkRecentInfo* info = gtk_recent_manager_lookup_item(_SELF(self), RVAL2CSTR(uri),
@@ -94,13 +93,13 @@ rm_lookup_item(VALUE self, VALUE uri)
 }
 
 static VALUE
-rm_has_item(VALUE self, VALUE uri)
+rg_has_item_p(VALUE self, VALUE uri)
 {
     return CBOOL2RVAL(gtk_recent_manager_has_item(_SELF(self), RVAL2CSTR(uri)));
 }
 
 static VALUE
-rm_move_item(VALUE self, VALUE uri, VALUE new_uri)
+rg_move_item(VALUE self, VALUE uri, VALUE new_uri)
 {
     GError* error = NULL;
     gboolean ret = gtk_recent_manager_move_item(_SELF(self),
@@ -112,13 +111,13 @@ rm_move_item(VALUE self, VALUE uri, VALUE new_uri)
 }
 
 static VALUE
-rm_get_items(VALUE self)
+rg_items(VALUE self)
 {
     return GLIST2ARY2F(gtk_recent_manager_get_items(_SELF(self)), GTK_TYPE_RECENT_INFO);
 }
 
 static VALUE
-rm_purge_items(VALUE self)
+rg_purge_items(VALUE self)
 {
     GError* error = NULL;
     gint ret = gtk_recent_manager_purge_items(_SELF(self), &error);
@@ -135,18 +134,18 @@ Init_gtk_recent_manager(void)
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_MANAGER, "RecentManager", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rm_initialize, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", rm_s_get_default, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_for_screen", rm_s_get_for_screen, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_screen", rm_set_screen, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_SMETHOD(default, 0);
+    RG_DEF_SMETHOD(get_for_screen, 1);
+    RG_DEF_METHOD(set_screen, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "set_screen");
-    rb_define_method(RG_TARGET_NAMESPACE, "add_item", rm_add_item, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_item", rm_remove_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "lookup_item", rm_lookup_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_item?", rm_has_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "move_item", rm_move_item, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "items", rm_get_items, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "purge_items", rm_purge_items, 0);
+    RG_DEF_METHOD(add_item, -1);
+    RG_DEF_METHOD(remove_item, 1);
+    RG_DEF_METHOD(lookup_item, 1);
+    RG_DEF_METHOD_P(has_item, 1);
+    RG_DEF_METHOD(move_item, 2);
+    RG_DEF_METHOD(items, 0);
+    RG_DEF_METHOD(purge_items, 0);
 
     /* GtkRecentManagerError */
     G_DEF_ERROR(GTK_RECENT_MANAGER_ERROR, "RecentManagerError", mGtk, rb_eRuntimeError,

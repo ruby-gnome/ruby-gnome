@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cImageMenuItem
 
 static VALUE
-imitem_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline_or_accel_group;
     GtkWidget *widget = NULL;
@@ -45,7 +45,7 @@ imitem_initialize(int argc, VALUE *argv, VALUE self)
                      rb_class2name(CLASS_OF(label)));
         }
     } else {
-	widget = gtk_image_menu_item_new();
+        widget = gtk_image_menu_item_new();
     }
 
     RBGTK_INITIALIZE(self, widget);
@@ -57,5 +57,5 @@ Init_gtk_image_menu_item(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE_MENU_ITEM, "ImageMenuItem", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", imitem_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

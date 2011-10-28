@@ -30,34 +30,34 @@
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-colorsel_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_color_selection_new());
     return Qnil;
 }
 
 static VALUE
-colorsel_get_previous_alpha(VALUE self)
+rg_previous_alpha(VALUE self)
 {
     return INT2NUM(gtk_color_selection_get_previous_alpha(_SELF(self)));
 }
 
 static VALUE
-colorsel_set_previous_alpha(VALUE self, VALUE alpha)
+rg_set_previous_alpha(VALUE self, VALUE alpha)
 {
     gtk_color_selection_set_previous_alpha(_SELF(self), NUM2INT(alpha));
     return self;
 }
 
 static VALUE
-colorsel_set_previous_color(VALUE self, VALUE color)
+rg_set_previous_color(VALUE self, VALUE color)
 {
     gtk_color_selection_set_previous_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
 static VALUE
-colorsel_get_previous_color(VALUE self)
+rg_previous_color(VALUE self)
 {
     GdkColor color;
     gtk_color_selection_get_previous_color(_SELF(self), &color);
@@ -65,27 +65,27 @@ colorsel_get_previous_color(VALUE self)
 }
 
 static VALUE
-colorsel_is_adjusting(VALUE self)
+rg_adjusting_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_color_selection_is_adjusting(_SELF(self)));
 }
 
 static VALUE
-colorsel_s_palette_from_string(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_s_palette_from_string(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GdkColor* gcolors;
     gint i, n_colors;
     VALUE ary = Qnil;
     gboolean ret = gtk_color_selection_palette_from_string(RVAL2CSTR(str), 
                                                            &gcolors, &n_colors);
-    
+
     if (ret) {
         ary = rb_ary_new();
         for (i = 0; i < n_colors; i++) {
             rb_ary_push(ary, GDKCOLOR2RVAL(&gcolors[i]));
         }
     }
-                                                                                
+
     return ary;
 }
 
@@ -136,7 +136,7 @@ rbgdk_rval2gdkcolors(VALUE value, long *n)
 #define RVAL2GDKCOLORS(value, n) rbgdk_rval2gdkcolors(value, n)
 
 static VALUE
-colorsel_s_palette_to_string(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_palette_to_string(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE rbcolors;
     long n;
@@ -172,7 +172,7 @@ screen_func(GdkScreen *screen, const GdkColor *colors, gint n_colors)
 }
 
 static VALUE
-colorsel_s_set_change_palette_hook(VALUE self)
+rg_s_set_change_palette_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
 
@@ -197,18 +197,18 @@ Init_gtk_color_selection(void)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", colorsel_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "previous_alpha", colorsel_get_previous_alpha, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_previous_alpha", colorsel_set_previous_alpha, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_previous_color", colorsel_set_previous_color, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "previous_color", colorsel_get_previous_color, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "adjusting?", colorsel_is_adjusting, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(previous_alpha, 0);
+    RG_DEF_METHOD(set_previous_alpha, 1);
+    RG_DEF_METHOD(set_previous_color, 1);
+    RG_DEF_METHOD(previous_color, 0);
+    RG_DEF_METHOD_P(adjusting, 0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "palette_to_string", colorsel_s_palette_to_string, -1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "palette_from_string", colorsel_s_palette_from_string, 1);
+    RG_DEF_SMETHOD(palette_to_string, -1);
+    RG_DEF_SMETHOD(palette_from_string, 1);
 
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_change_palette_hook", colorsel_s_set_change_palette_hook, 0);
+    RG_DEF_SMETHOD(set_change_palette_hook, 0);
 #endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);

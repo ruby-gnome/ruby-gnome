@@ -28,14 +28,14 @@
 #define _SELF(self) GTK_SOCKET(RVAL2GOBJ(self))
 
 static VALUE
-socket_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_socket_new());
     return Qnil;
 }
 
 static VALUE
-socket_add_id(VALUE self, VALUE wid)
+rg_add_id(VALUE self, VALUE wid)
 {
     gtk_socket_add_id(_SELF(self),
 #ifdef GDK_NATIVE_WINDOW_POINTER
@@ -48,13 +48,13 @@ socket_add_id(VALUE self, VALUE wid)
 }
 
 static VALUE
-socket_plug_window(VALUE self)
+rg_plug_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->plug_window);
 }
 
 static VALUE
-socket_get_socket_id(VALUE self)
+rg_id(VALUE self)
 {
     GdkNativeWindow id =  gtk_socket_get_id(_SELF(self));
 #ifdef GDK_NATIVE_WINDOW_POINTER
@@ -72,9 +72,9 @@ Init_gtk_socket(void)
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize",  socket_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "plug_window", socket_plug_window, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_id", socket_add_id, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "id", socket_get_socket_id, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(plug_window, 0);
+    RG_DEF_METHOD(add_id, 1);
+    RG_DEF_METHOD(id, 0);
 #endif
 }

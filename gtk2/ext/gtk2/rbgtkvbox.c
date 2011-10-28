@@ -27,14 +27,14 @@
 #define RG_TARGET_NAMESPACE cVBox
 
 static VALUE
-vbox_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE homogeneous, spacing;
 
     rb_scan_args(argc, argv, "02", &homogeneous, &spacing);
 
     RBGTK_INITIALIZE(self, gtk_vbox_new(RVAL2CBOOL(homogeneous),
-				  (NIL_P(spacing)?0:NUM2INT(spacing))));
+                      (NIL_P(spacing)?0:NUM2INT(spacing))));
     return Qnil;
 }
 
@@ -43,5 +43,5 @@ Init_gtk_vbox(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vbox_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

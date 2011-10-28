@@ -27,9 +27,8 @@
 #define RG_TARGET_NAMESPACE mRGB
 #define RVAL2DRAW(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
-
 static VALUE
-rgb_draw_rgb_image(int argc, VALUE *argv, VALUE self)
+rg_m_draw_rgb_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 
@@ -57,7 +56,7 @@ rgb_draw_rgb_image(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rgb_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
+rg_m_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
                        VALUE rbwidth, VALUE rbheight, VALUE rbdither,
                        VALUE rbbuf, VALUE rbrowstride, VALUE rbcolors)
 {
@@ -83,7 +82,7 @@ rgb_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
     cmap = gdk_rgb_cmap_new(colors, n);
 
     g_free(colors);
-    
+
     gdk_draw_indexed_image(drawable, gc, x, y, width, height, dither, buf, rowstride, cmap);
 
     gdk_rgb_cmap_free(cmap);
@@ -92,7 +91,7 @@ rgb_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
 }
 
 static VALUE
-rgb_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride)
+rg_m_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride)
 {
     gdk_draw_gray_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
                         NUM2INT(x), NUM2INT(y),
@@ -104,7 +103,7 @@ rgb_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, 
 }
 
 static VALUE
-rgb_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
+rg_m_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 
@@ -130,7 +129,7 @@ rgb_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rgb_find_color(VALUE self, VALUE colormap, VALUE color)
+rg_m_find_color(VALUE self, VALUE colormap, VALUE color)
 {
     gdk_rgb_find_color(GDK_COLORMAP(RVAL2GOBJ(colormap)),
                        RVAL2GDKCOLOR(color));
@@ -138,39 +137,39 @@ rgb_find_color(VALUE self, VALUE colormap, VALUE color)
 }
 
 static VALUE
-rgb_set_install(VALUE self, VALUE install)
+rg_m_set_install(VALUE self, VALUE install)
 {
     gdk_rgb_set_install(RVAL2CBOOL(install));
     return self;
 }
 
 static VALUE
-rgb_set_min_colors(VALUE self, VALUE min_colors)
+rg_m_set_min_colors(VALUE self, VALUE min_colors)
 {
     gdk_rgb_set_min_colors(NUM2INT(min_colors));
     return self;
 }
 
 static VALUE
-rgb_get_visual(G_GNUC_UNUSED VALUE self)
+rg_m_visual(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_visual());
 }
 
 static VALUE
-rgb_get_cmap(G_GNUC_UNUSED VALUE self)
+rg_m_colormap(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_colormap());
 }
 
 static VALUE
-rgb_ditherable(G_GNUC_UNUSED VALUE self)
+rg_m_ditherable_p(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_rgb_ditherable());
 }
 
 static VALUE
-rgb_set_verbose(VALUE self, VALUE verbose)
+rg_m_set_verbose(VALUE self, VALUE verbose)
 {
     gdk_rgb_set_verbose(RVAL2CBOOL(verbose));
     return self;
@@ -181,17 +180,17 @@ Init_gtk_gdk_rgb(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "RGB");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_rgb_image", rgb_draw_rgb_image, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_indexed_image", rgb_draw_indexed_image, 10);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_gray_image", rgb_draw_gray_image, 9);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_rgb_32_image", rgb_draw_rgb_32_image, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "find_color", rgb_find_color, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_install", rgb_set_install, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_min_colors", rgb_set_min_colors, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "visual", rgb_get_visual, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "colormap", rgb_get_cmap, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "ditherable?", rgb_ditherable, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_verbose", rgb_set_verbose, 1);
+    RG_DEF_MODFUNC(draw_rgb_image, -1);
+    RG_DEF_MODFUNC(draw_indexed_image, 10);
+    RG_DEF_MODFUNC(draw_gray_image, 9);
+    RG_DEF_MODFUNC(draw_rgb_32_image, -1);
+    RG_DEF_MODFUNC(find_color, 2);
+    RG_DEF_MODFUNC(set_install, 1);
+    RG_DEF_MODFUNC(set_min_colors, 0);
+    RG_DEF_MODFUNC(visual, 0);
+    RG_DEF_MODFUNC(colormap, 0);
+    RG_DEF_MODFUNC_P(ditherable, 0);
+    RG_DEF_MODFUNC(set_verbose, 1);
 
     /* GdkRgbDither */
     G_DEF_CLASS(GDK_TYPE_RGB_DITHER, "Dither", RG_TARGET_NAMESPACE);

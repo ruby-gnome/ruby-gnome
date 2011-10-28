@@ -29,13 +29,13 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-rbscale_get_layout(VALUE self)
+rg_layout(VALUE self)
 {
     return GOBJ2RVAL(gtk_scale_get_layout(_SELF(self)));
 }
 
 static VALUE
-rbscale_get_layout_offsets(VALUE self)
+rg_layout_offsets(VALUE self)
 {
     gint x, y;
     gtk_scale_get_layout_offsets(_SELF(self), &x, &y);
@@ -48,8 +48,8 @@ Init_gtk_scale(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout", rbscale_get_layout, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout_offsets", rbscale_get_layout_offsets, 0);
+    RG_DEF_METHOD(layout, 0);
+    RG_DEF_METHOD(layout_offsets, 0);
 #else
     G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
 #endif

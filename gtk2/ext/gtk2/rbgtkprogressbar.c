@@ -27,14 +27,14 @@
 #define RG_TARGET_NAMESPACE cProgressBar
 
 static VALUE
-pbar_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_progress_bar_new());
     return Qnil;
 }
 
 static VALUE
-pbar_pulse(VALUE self)
+rg_pulse(VALUE self)
 {
     gtk_progress_bar_pulse(GTK_PROGRESS_BAR(RVAL2GOBJ(self)));
     return self;
@@ -49,8 +49,8 @@ Init_gtk_progress_bar(void)
     G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR_ORIENTATION, "Orientation", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PROGRESS_BAR_ORIENTATION, "GTK_PROGRESS_");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", pbar_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pulse", pbar_pulse, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(pulse, 0);
 
     /* undef deprecated properties */
     rb_undef_method(RG_TARGET_NAMESPACE, "adjustment");

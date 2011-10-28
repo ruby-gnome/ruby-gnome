@@ -26,13 +26,13 @@
 #define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
 
 static VALUE
-accel_valid(G_GNUC_UNUSED VALUE self, VALUE keyval, VALUE modifiers)
+rg_s_valid(G_GNUC_UNUSED VALUE self, VALUE keyval, VALUE modifiers)
 {
     return CBOOL2RVAL(gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)));
 }
 
 static VALUE
-accel_parse(G_GNUC_UNUSED VALUE self, VALUE accelerator)
+rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE accelerator)
 {
     guint key;
     GdkModifierType mods;
@@ -41,28 +41,28 @@ accel_parse(G_GNUC_UNUSED VALUE self, VALUE accelerator)
 }
 
 static VALUE
-accel_name(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
+rg_s_to_name(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-accel_get_label(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
+rg_s_get_label(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2MOD(mods)));
 }
 #endif
 
 static VALUE
-accel_set_default_mod_mask(VALUE self, VALUE default_mod_mask)
+rg_s_set_default_mod_mask(VALUE self, VALUE default_mod_mask)
 {
     gtk_accelerator_set_default_mod_mask(RVAL2MOD(default_mod_mask));
     return self;
 }
 
 static VALUE
-accel_get_default_mod_mask(G_GNUC_UNUSED VALUE self)
+rg_s_default_mod_mask(G_GNUC_UNUSED VALUE self)
 {
     return GFLAGS2RVAL(gtk_accelerator_get_default_mod_mask(), GDK_TYPE_MODIFIER_TYPE);
 }
@@ -72,14 +72,14 @@ Init_gtk_accelerator(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Accelerator");
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "valid", accel_valid, 2);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "parse", accel_parse, 1);
+    RG_DEF_SMETHOD(valid, 2);
+    RG_DEF_SMETHOD(parse, 1);
     /* name is reserved by Ruby */
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "to_name", accel_name, 2);
+    RG_DEF_SMETHOD(to_name, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_label", accel_get_label, 2);
+    RG_DEF_SMETHOD(get_label, 2);
 #endif
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_mod_mask", accel_set_default_mod_mask, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_mod_mask", accel_get_default_mod_mask, 0);
+    RG_DEF_SMETHOD(set_default_mod_mask, 1);
+    RG_DEF_SMETHOD(default_mod_mask, 0);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

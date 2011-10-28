@@ -28,20 +28,20 @@
 #define _SELF(self) (GTK_ENTRY(RVAL2GOBJ(self)))
 
 static VALUE
-entry_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_entry_new());
     return Qnil;
 }
 
 static VALUE
-entry_get_layout(VALUE self)
+rg_layout(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_get_layout(_SELF(self)));
 }
 
 static VALUE
-entry_get_layout_offsets(VALUE self)
+rg_layout_offsets(VALUE self)
 {
     int x, y;
     gtk_entry_get_layout_offsets(_SELF(self), &x, &y);
@@ -50,7 +50,7 @@ entry_get_layout_offsets(VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-entry_set_completion(VALUE self, VALUE completion)
+rg_set_completion(VALUE self, VALUE completion)
 {
     gtk_entry_set_completion(_SELF(self), GTK_ENTRY_COMPLETION(RVAL2GOBJ(completion)));
 
@@ -60,33 +60,33 @@ entry_set_completion(VALUE self, VALUE completion)
 }
 
 static VALUE
-entry_get_completion(VALUE self)
+rg_completion(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_get_completion(_SELF(self)));
 }
 #endif
 
 static VALUE
-entry_layout_index_to_text_index(VALUE self, VALUE layout_index)
+rg_layout_index_to_text_index(VALUE self, VALUE layout_index)
 {
     return INT2NUM(gtk_entry_layout_index_to_text_index(_SELF(self), NUM2INT(layout_index)));
 }
 
 static VALUE
-entry_text_index_to_layout_index(VALUE self, VALUE text_index)
+rg_text_index_to_layout_index(VALUE self, VALUE text_index)
 {
     return INT2NUM(gtk_entry_text_index_to_layout_index(_SELF(self), NUM2INT(text_index)));
 }
 
 #if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
-entry_get_cursor_hadjustment(VALUE self)
+rg_cursor_hadjustment(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_get_cursor_hadjustment(_SELF(self)));
 }
 
 static VALUE
-entry_set_cursor_hadjustment(VALUE self, VALUE adjustment)
+rg_set_cursor_hadjustment(VALUE self, VALUE adjustment)
 {
     gtk_entry_set_cursor_hadjustment(_SELF(self), RVAL2GOBJ(adjustment));
     return self;
@@ -98,22 +98,20 @@ Init_gtk_entry(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", entry_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout", entry_get_layout, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout_offsets", entry_get_layout_offsets, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(layout, 0);
+    RG_DEF_METHOD(layout_offsets, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_completion", entry_set_completion, 1);
+    RG_DEF_METHOD(set_completion, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "completion");
-    rb_define_method(RG_TARGET_NAMESPACE, "completion", entry_get_completion, 0);
+    RG_DEF_METHOD(completion, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "layout_index_to_text_index", entry_layout_index_to_text_index, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "text_index_to_layout_index", entry_text_index_to_layout_index, 1);
+    RG_DEF_METHOD(layout_index_to_text_index, 1);
+    RG_DEF_METHOD(text_index_to_layout_index, 1);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "cursor_hadjustment",
-		     entry_get_cursor_hadjustment, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor_hadjustment",
-		     entry_set_cursor_hadjustment, 1);
+    RG_DEF_METHOD(cursor_hadjustment, 0);
+    RG_DEF_METHOD(set_cursor_hadjustment, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "cursor_hadjustment");
 #endif
 }

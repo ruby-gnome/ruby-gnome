@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cHScrollbar
 
 static VALUE
-hscrollbar_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1;
     GtkAdjustment *adj = NULL;
@@ -43,5 +43,5 @@ void
 Init_gtk_hscrollbar(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HSCROLLBAR, "HScrollbar", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", hscrollbar_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

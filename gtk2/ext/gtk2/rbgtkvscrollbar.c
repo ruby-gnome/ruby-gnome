@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cVScrollbar
 
 static VALUE
-vscrollbar_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1;
     GtkAdjustment *adj = NULL;
@@ -43,5 +43,5 @@ void
 Init_gtk_vscrollbar(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSCROLLBAR, "VScrollbar", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vscrollbar_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

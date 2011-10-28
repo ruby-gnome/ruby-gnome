@@ -33,20 +33,19 @@ Init_gtk_filesystemerror(void)
 
     /* GtkFileSystemError */
     RG_TARGET_NAMESPACE = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError",
-				    mGtk, rb_eRuntimeError);
+                                        mGtk, rb_eRuntimeError);
     rb_define_const(RG_TARGET_NAMESPACE, "NONEXISTENT",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
+                    INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
     rb_define_const(RG_TARGET_NAMESPACE, "NOT_FOLDER",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
+                    INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
     rb_define_const(RG_TARGET_NAMESPACE, "INVALID_URI",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
+                    INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
     rb_define_const(RG_TARGET_NAMESPACE, "BAD_FILENAME",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
+                    INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
     rb_define_const(RG_TARGET_NAMESPACE, "FAILED",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
+                    INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
     rb_define_const(RG_TARGET_NAMESPACE, "ALREADY_EXSITS",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
+                    INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
 #endif
 #endif
 }
-

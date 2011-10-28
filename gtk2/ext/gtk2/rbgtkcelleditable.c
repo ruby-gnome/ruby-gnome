@@ -25,7 +25,7 @@
 #define _SELF(s) (GTK_CELL_EDITABLE(RVAL2GOBJ(s)))
 
 static VALUE
-celledit_start_editing(VALUE self, VALUE event)
+rg_start_editing(VALUE self, VALUE event)
 {
     gtk_cell_editable_start_editing(_SELF(self), 
                                     NIL_P(event) ? NULL : RVAL2GEV(event));
@@ -33,14 +33,14 @@ celledit_start_editing(VALUE self, VALUE event)
 }
 
 static VALUE
-celledit_editing_done(VALUE self)
+rg_editing_done(VALUE self)
 {
     gtk_cell_editable_editing_done(_SELF(self));
     return self;
 }
 
 static VALUE
-celledit_remove_widget(VALUE self)
+rg_remove_widget(VALUE self)
 {
     gtk_cell_editable_remove_widget(_SELF(self));
     return self;
@@ -51,7 +51,7 @@ Init_gtk_celleditable(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_CELL_EDITABLE, "CellEditable", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "start_editing", celledit_start_editing, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "editing_done", celledit_editing_done, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_widget", celledit_remove_widget, 0);
+    RG_DEF_METHOD(start_editing, 1);
+    RG_DEF_METHOD(editing_done, 0);
+    RG_DEF_METHOD(remove_widget, 0);
 }

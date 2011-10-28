@@ -28,7 +28,7 @@
 #define _SELF(self) (GTK_ADJUSTMENT(RVAL2GOBJ(self)))
 
 static VALUE
-adj_initialize(VALUE self, VALUE value, VALUE lower, VALUE upper, VALUE step_inc, VALUE page_inc, VALUE page_size)
+rg_initialize(VALUE self, VALUE value, VALUE lower, VALUE upper, VALUE step_inc, VALUE page_inc, VALUE page_size)
 {
     RBGTK_INITIALIZE(self, gtk_adjustment_new(NUM2DBL(value),
                                               NUM2DBL(lower),
@@ -40,21 +40,21 @@ adj_initialize(VALUE self, VALUE value, VALUE lower, VALUE upper, VALUE step_inc
 }
 
 static VALUE
-adj_clamp_page(VALUE self, VALUE lower, VALUE upper)
+rg_clamp_page(VALUE self, VALUE lower, VALUE upper)
 {
     gtk_adjustment_clamp_page(_SELF(self), NUM2DBL(lower), NUM2DBL(upper));
     return self;
 }
 
 static VALUE
-adj_changed(VALUE self)
+rg_changed(VALUE self)
 {
     gtk_adjustment_changed(_SELF(self));
     return self;
 }
 
 static VALUE
-adj_value_changed(VALUE self)
+rg_value_changed(VALUE self)
 {
     gtk_adjustment_value_changed(_SELF(self));
     return self;
@@ -65,8 +65,8 @@ Init_gtk_adjustment(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", adj_initialize, 6);
-    rb_define_method(RG_TARGET_NAMESPACE, "clamp_page", adj_clamp_page, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "changed", adj_changed, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "value_changed", adj_value_changed, 0);
+    RG_DEF_METHOD(initialize, 6);
+    RG_DEF_METHOD(clamp_page, 2);
+    RG_DEF_METHOD(changed, 0);
+    RG_DEF_METHOD(value_changed, 0);
 }

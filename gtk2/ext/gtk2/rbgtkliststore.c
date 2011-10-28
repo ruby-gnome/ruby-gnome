@@ -27,7 +27,7 @@
 static ID id_to_a, id_size;
 
 static VALUE
-lstore_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     gint cnt;
     GtkListStore* store;
@@ -41,18 +41,18 @@ lstore_initialize(int argc, VALUE *argv, VALUE self)
     }
 
     store = gtk_list_store_newv(argc, buf);
- 
+
     G_INITIALIZE(self, store);
 
     return Qnil;
 }
 
 static VALUE
-lstore_set_column_types(int argc, VALUE *argv, VALUE self)
+rg_set_column_types(int argc, VALUE *argv, VALUE self)
 {
     gint cnt;
     GType* buf;
-  
+
     if (argc == 0) rb_raise(rb_eArgError, "need more than 1 class type.");
     buf = ALLOCA_N(GType, argc);
     for (cnt = 0; cnt < argc; cnt++) {
@@ -65,7 +65,7 @@ lstore_set_column_types(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-lstore_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
+rg_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 {
     GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(column));
     GValue gval = G_VALUE_INIT;
@@ -75,7 +75,7 @@ lstore_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 
     G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, value);
-    
+
     gtk_list_store_set_value(_SELF(self), RVAL2GTKTREEITER(iter), NUM2INT(column), &gval);
 
     g_value_unset(&gval);
@@ -111,7 +111,7 @@ collect_value(VALUE key, VALUE value, ValuesInfo *info)
 
 static void
 hash_to_values(VALUE hash, VALUE iter, GtkTreeModel *model,
-	       gint *g_columns, GValue *g_values, G_GNUC_UNUSED gint length)
+               gint *g_columns, GValue *g_values, G_GNUC_UNUSED gint length)
 {
     ValuesInfo info;
 
@@ -125,12 +125,12 @@ hash_to_values(VALUE hash, VALUE iter, GtkTreeModel *model,
 
 static void
 array_to_values(VALUE array, VALUE iter, GtkTreeModel *model,
-		gint *g_columns, GValue *g_values, gint length)
+                gint *g_columns, GValue *g_values, gint length)
 {
     gint i;
 
     for (i = 0; i < length; i++) {
-	GType g_type;
+        GType g_type;
 
         g_columns[i] = i;
         g_type = gtk_tree_model_get_column_type(model, i);
@@ -141,7 +141,7 @@ array_to_values(VALUE array, VALUE iter, GtkTreeModel *model,
 }
 
 static VALUE
-lstore_set_valuesv(VALUE self, VALUE iter, VALUE values)
+rg_set_values(VALUE self, VALUE iter, VALUE values)
 {
     GValue *g_values;
     GtkListStore *store;
@@ -162,17 +162,17 @@ lstore_set_valuesv(VALUE self, VALUE iter, VALUE values)
     store = _SELF(self);
     model = GTK_TREE_MODEL(store);
     if (RVAL2CBOOL(rb_obj_is_kind_of(values, rb_cHash))) {
-	hash_to_values(values, iter, model, g_columns, g_values, length);
+        hash_to_values(values, iter, model, g_columns, g_values, length);
     }
     else if (RVAL2CBOOL(rb_obj_is_kind_of(values, rb_cArray))) {
-	array_to_values(values, iter, model, g_columns, g_values, length);
+        array_to_values(values, iter, model, g_columns, g_values, length);
     }
     else {
-	rb_raise(rb_eArgError, "must be array or hash of values");
+        rb_raise(rb_eArgError, "must be array or hash of values");
     }
 
     gtk_list_store_set_valuesv(store, RVAL2GTKTREEITER(iter),
-			       g_columns, g_values, length);
+                               g_columns, g_values, length);
 
     for (i = 0; i < length; i++)
         g_value_unset(&g_values[i]);
@@ -190,9 +190,9 @@ lstore_set_valuesv(VALUE self, VALUE iter, VALUE values)
   GtkTreeIter *iter,
   va_list var_args);
 */
-    
+
 static VALUE
-lstore_remove(VALUE self, VALUE iter)
+rg_remove(VALUE self, VALUE iter)
 {
     G_CHILD_REMOVE(self, iter);
 #if GTK_CHECK_VERSION(2,2,0)
@@ -258,7 +258,7 @@ lstore_insert_ensure(VALUE value)
   Gtk::ListStore#insert(pos, val1 => 0, val2 => 2, ... )
  */
 static VALUE
-lstore_insert(int argc, VALUE *argv, VALUE self)
+rg_insert(int argc, VALUE *argv, VALUE self)
 {
     VALUE position, values, result;
     struct lstore_insert_args args;
@@ -294,7 +294,7 @@ lstore_insert(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-lstore_insert_before(VALUE self, VALUE sibling)
+rg_insert_before(VALUE self, VALUE sibling)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -308,7 +308,7 @@ lstore_insert_before(VALUE self, VALUE sibling)
 }
 
 static VALUE
-lstore_insert_after(VALUE self, VALUE sibling)
+rg_insert_after(VALUE self, VALUE sibling)
 { 
     VALUE ret;
     GtkTreeIter iter;
@@ -322,7 +322,7 @@ lstore_insert_after(VALUE self, VALUE sibling)
 }
 
 static VALUE
-lstore_prepend(VALUE self)
+rg_prepend(VALUE self)
 {
     VALUE ret;
     GtkTreeIter iter;
@@ -336,21 +336,21 @@ lstore_prepend(VALUE self)
 }
 
 static VALUE
-lstore_append(VALUE self)
+rg_append(VALUE self)
 {
     VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
     gtk_list_store_append(model, &iter);
     iter.user_data3 = model;
-    
+
     ret = GTKTREEITER2RVAL(&iter);
     G_CHILD_ADD(self, ret);
     return ret;
 }
 
 static VALUE
-lstore_clear(VALUE self)
+rg_clear(VALUE self)
 {
     G_CHILD_REMOVE_ALL(self);
     gtk_list_store_clear(_SELF(self));
@@ -359,14 +359,14 @@ lstore_clear(VALUE self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-lstore_iter_is_valid(VALUE self, VALUE iter)
+rg_iter_is_valid_p(VALUE self, VALUE iter)
 {
     return (NIL_P(iter)) ? Qfalse :
         CBOOL2RVAL(gtk_list_store_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
 static VALUE
-lstore_reorder(VALUE self, VALUE rbnew_order)
+rg_reorder(VALUE self, VALUE rbnew_order)
 {
     GtkListStore *store = _SELF(self);
     long n;
@@ -379,20 +379,20 @@ lstore_reorder(VALUE self, VALUE rbnew_order)
     return self;
 }
 static VALUE
-lstore_swap(VALUE self, VALUE iter1, VALUE iter2)
+rg_swap(VALUE self, VALUE iter1, VALUE iter2)
 {
     gtk_list_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
 static VALUE
-lstore_move_before(VALUE self, VALUE iter, VALUE position)
+rg_move_before(VALUE self, VALUE iter, VALUE position)
 {
     gtk_list_store_move_before(_SELF(self), RVAL2GTKTREEITER(iter), 
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
 static VALUE
-lstore_move_after(VALUE self, VALUE iter, VALUE position)
+rg_move_after(VALUE self, VALUE iter, VALUE position)
 {
     gtk_list_store_move_after(_SELF(self), RVAL2GTKTREEITER(iter), 
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
@@ -410,25 +410,25 @@ Init_gtk_list_store(void)
 
     rbgtk_register_treeiter_set_value_func(GTK_TYPE_LIST_STORE, 
                                            (rbgtkiter_set_value_func)&gtk_list_store_set_value);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", lstore_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_column_types", lstore_set_column_types, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_value", lstore_set_value, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove", lstore_remove, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert", lstore_insert, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert_before", lstore_insert_before, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert_after", lstore_insert_after, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend", lstore_prepend, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "append", lstore_append, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "clear", lstore_clear, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_column_types, -1);
+    RG_DEF_METHOD(set_value, 3);
+    RG_DEF_METHOD(remove, 1);
+    RG_DEF_METHOD(insert, -1);
+    RG_DEF_METHOD(insert_before, 1);
+    RG_DEF_METHOD(insert_after, 1);
+    RG_DEF_METHOD(prepend, 0);
+    RG_DEF_METHOD(append, 0);
+    RG_DEF_METHOD(clear, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "iter_is_valid?", lstore_iter_is_valid, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "reorder", lstore_reorder, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "swap", lstore_swap, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "move_before", lstore_move_before, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "move_after", lstore_move_after, 2);
+    RG_DEF_METHOD_P(iter_is_valid, 1);
+    RG_DEF_METHOD(reorder, 1);
+    RG_DEF_METHOD(swap, 2);
+    RG_DEF_METHOD(move_before, 2);
+    RG_DEF_METHOD(move_after, 2);
 #endif
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_values", lstore_set_valuesv, 2);
+    RG_DEF_METHOD(set_values, 2);
 #endif
 
 }

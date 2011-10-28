@@ -28,7 +28,7 @@
 #define _SELF(self) (GTK_TABLE(RVAL2GOBJ(self)))
 
 static VALUE
-tbl_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE row, col, homogeneous;
 
@@ -40,14 +40,14 @@ tbl_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-tbl_resize(VALUE self, VALUE rows, VALUE columns)
+rg_resize(VALUE self, VALUE rows, VALUE columns)
 {
     gtk_table_resize(_SELF(self), NUM2UINT(rows), NUM2UINT(columns));
     return self;
 }
 
 static VALUE
-tbl_attach(int argc, VALUE *argv, VALUE self)
+rg_attach(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, left, right, top, bottom;
     VALUE arg0, arg1, arg2, arg3;
@@ -76,7 +76,7 @@ tbl_attach(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-tbl_attach_defaults(VALUE self, VALUE widget, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
+rg_attach_defaults(VALUE self, VALUE widget, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
     gtk_table_attach_defaults(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
                               NUM2UINT(left_attach), NUM2UINT(right_attach),
@@ -93,7 +93,7 @@ tbl_set_row_spacing(VALUE self, VALUE row, VALUE spc)
 }
 
 static VALUE
-tbl_get_row_spacing(VALUE self, VALUE row)
+rg_get_row_spacing(VALUE self, VALUE row)
 {
     return UINT2NUM(gtk_table_get_row_spacing(_SELF(self), NUM2UINT(row)));
 }
@@ -106,45 +106,45 @@ tbl_set_col_spacing(VALUE self, VALUE col, VALUE spc)
 }
 
 static VALUE
-tbl_get_col_spacing(VALUE self, VALUE col)
+rg_get_column_spacing(VALUE self, VALUE col)
 {
     return UINT2NUM(gtk_table_get_col_spacing(_SELF(self), NUM2UINT(col)));
 }
 
 static VALUE
-tbl_set_row_spacings(VALUE self, VALUE spc)
+rg_set_row_spacings(VALUE self, VALUE spc)
 {
     gtk_table_set_row_spacings(_SELF(self), NUM2UINT(spc));
     return self;
 }
 
 static VALUE
-tbl_set_col_spacings(VALUE self, VALUE spc)
+rg_set_column_spacings(VALUE self, VALUE spc)
 {
     gtk_table_set_col_spacings(_SELF(self), NUM2UINT(spc));
     return self;
 }
 
 static VALUE
-tbl_get_row_spacings(VALUE self)
+rg_row_spacings(VALUE self)
 {
     return UINT2NUM(_SELF(self)->row_spacing);
 }
 
 static VALUE
-tbl_get_col_spacings(VALUE self)
+rg_column_spacings(VALUE self)
 {
     return UINT2NUM(_SELF(self)->column_spacing);
 }
 
 static VALUE
-tbl_get_default_row_spacing(VALUE self)
+rg_default_row_spacing(VALUE self)
 {
     return UINT2NUM(gtk_table_get_default_row_spacing(_SELF(self)));
 }
 
 static VALUE
-tbl_get_default_col_spacing(VALUE self)
+rg_default_column_spacing(VALUE self)
 {
     return UINT2NUM(gtk_table_get_default_col_spacing(_SELF(self)));
 }
@@ -154,24 +154,24 @@ Init_gtk_table(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tbl_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "resize", tbl_resize, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "attach", tbl_attach, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "attach_defaults", tbl_attach_defaults, 5);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(resize, 2);
+    RG_DEF_METHOD(attach, -1);
+    RG_DEF_METHOD(attach_defaults, 5);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "row_spacing", tbl_set_row_spacing, 2);
     rb_undef_method(RG_TARGET_NAMESPACE, "row_spacing=");
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "column_spacing", tbl_set_col_spacing, 2);
     rb_undef_method(RG_TARGET_NAMESPACE, "column_spacing=");
-    rb_define_method(RG_TARGET_NAMESPACE, "get_row_spacing", tbl_get_row_spacing, 1);
+    RG_DEF_METHOD(get_row_spacing, 1);
     rb_undef_method(RG_TARGET_NAMESPACE, "row_spacing");
-    rb_define_method(RG_TARGET_NAMESPACE, "get_column_spacing", tbl_get_col_spacing, 1);
+    RG_DEF_METHOD(get_column_spacing, 1);
     rb_undef_method(RG_TARGET_NAMESPACE, "column_spacing");
-    rb_define_method(RG_TARGET_NAMESPACE, "set_row_spacings", tbl_set_row_spacings, 1);
+    RG_DEF_METHOD(set_row_spacings, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "row_spacings");
-    rb_define_method(RG_TARGET_NAMESPACE, "set_column_spacings", tbl_set_col_spacings, 1);
+    RG_DEF_METHOD(set_column_spacings, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "column_spacings");
-    rb_define_method(RG_TARGET_NAMESPACE, "row_spacings", tbl_get_row_spacings, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "column_spacings", tbl_get_col_spacings, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "default_row_spacing", tbl_get_default_row_spacing, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "default_column_spacing", tbl_get_default_col_spacing, 0);
+    RG_DEF_METHOD(row_spacings, 0);
+    RG_DEF_METHOD(column_spacings, 0);
+    RG_DEF_METHOD(default_row_spacing, 0);
+    RG_DEF_METHOD(default_column_spacing, 0);
 }

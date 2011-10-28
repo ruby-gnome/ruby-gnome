@@ -30,21 +30,21 @@
  * Item
  */
 static VALUE
-item_select(VALUE self)
+rg_select(VALUE self)
 {
     gtk_item_select(GTK_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-item_deselect(VALUE self)
+rg_deselect(VALUE self)
 {
     gtk_item_deselect(GTK_ITEM(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-item_toggle(VALUE self)
+rg_toggle(VALUE self)
 {
     gtk_item_toggle(GTK_ITEM(RVAL2GOBJ(self)));
     return self;
@@ -54,7 +54,7 @@ void
 Init_gtk_item(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "select", item_select, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "deselect", item_deselect, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "toggle", item_toggle, 0);
+    RG_DEF_METHOD(select, 0);
+    RG_DEF_METHOD(deselect, 0);
+    RG_DEF_METHOD(toggle, 0);
 }

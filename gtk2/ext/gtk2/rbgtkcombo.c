@@ -29,7 +29,7 @@
 #define RG_TARGET_NAMESPACE cCombo
 
 static VALUE
-combo_set_popdown_strings(VALUE self, VALUE ary)
+rg_set_popdown_strings(VALUE self, VALUE ary)
 {
     int i;
     GList *glist = NULL;
@@ -44,7 +44,7 @@ combo_set_popdown_strings(VALUE self, VALUE ary)
 }
 
 static VALUE
-combo_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE ary;
     GtkWidget* widget = NULL; 
@@ -55,7 +55,7 @@ combo_initialize(int argc, VALUE *argv, VALUE self)
     RBGTK_INITIALIZE(self, widget);
 
     if (! NIL_P(ary)){
-        combo_set_popdown_strings(self, ary);
+        rg_set_popdown_strings(self, ary);
     }
 
     return Qnil;
@@ -65,20 +65,20 @@ static VALUE
 combo_set_val_in_list(VALUE self, VALUE val, VALUE ok)
 {
     gtk_combo_set_value_in_list(GTK_COMBO(RVAL2GOBJ(self)),
-				RVAL2CBOOL(val), RVAL2CBOOL(ok));
+                                RVAL2CBOOL(val), RVAL2CBOOL(ok));
     return self;
 }
 
 static VALUE
-combo_set_use_arrows(VALUE self, VALUE val)
+rg_set_use_arrows(VALUE self, VALUE val)
 {
     gtk_combo_set_use_arrows(GTK_COMBO(RVAL2GOBJ(self)),
-			     RVAL2CBOOL(val));
+                             RVAL2CBOOL(val));
     return self;
 }
 
 static VALUE
-combo_set_use_arrows_always(VALUE self, VALUE val)
+rg_set_use_arrows_always(VALUE self, VALUE val)
 {
     gtk_combo_set_use_arrows_always(GTK_COMBO(RVAL2GOBJ(self)),
                                     RVAL2CBOOL(val));
@@ -86,14 +86,14 @@ combo_set_use_arrows_always(VALUE self, VALUE val)
 }
 
 static VALUE
-combo_disable_activate(VALUE self)
+rg_disable_activate(VALUE self)
 {
     gtk_combo_disable_activate(GTK_COMBO(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-combo_entry(VALUE self)
+rg_entry(VALUE self)
 {
     return GOBJ2RVAL(GTK_COMBO(RVAL2GOBJ(self))->entry);
 }
@@ -105,16 +105,15 @@ Init_gtk_combo(void)
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", combo_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "value_in_list", combo_set_val_in_list, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_use_arrows", combo_set_use_arrows, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_use_arrows_always", combo_set_use_arrows_always, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_popdown_strings", combo_set_popdown_strings, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "disable_activate", combo_disable_activate, 0);
+    RG_DEF_METHOD(set_use_arrows, 1);
+    RG_DEF_METHOD(set_use_arrows_always, 1);
+    RG_DEF_METHOD(set_popdown_strings, 1);
+    RG_DEF_METHOD(disable_activate, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "entry", combo_entry, 0);
+    RG_DEF_METHOD(entry, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
-

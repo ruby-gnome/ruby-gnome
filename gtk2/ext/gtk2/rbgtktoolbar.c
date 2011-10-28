@@ -30,14 +30,14 @@
 #define N_RVAL2WIDGET(w)  (NIL_P(w) ? NULL : GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-tbar_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_toolbar_new());
     return Qnil;
 }
 
 static VALUE
-tbar_append(int argc, VALUE *argv, VALUE self)
+rg_append(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget* ret = NULL;
     VALUE type = Qnil;
@@ -73,7 +73,7 @@ tbar_append(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);
-        
+
         ret = gtk_toolbar_insert_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)),
                                        N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                        GTK_SIGNAL_FUNC(exec_callback),
@@ -89,7 +89,7 @@ tbar_append(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-tbar_prepend(int argc, VALUE *argv, VALUE self)
+rg_prepend(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget* ret = NULL;
     VALUE type = Qnil;
@@ -124,7 +124,7 @@ tbar_prepend(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);
-        
+
         ret = gtk_toolbar_insert_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)),
                                        N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                        GTK_SIGNAL_FUNC(exec_callback),
@@ -140,7 +140,7 @@ tbar_prepend(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-tbar_insert(int argc, VALUE *argv, VALUE self)
+rg_insert(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget* ret = NULL;
     VALUE type = Qnil;
@@ -177,7 +177,7 @@ tbar_insert(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "14", &pos, &stock_id, &ttext, &ptext, &func);
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);
-        
+
         ret = gtk_toolbar_insert_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)),
                                        N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                        GTK_SIGNAL_FUNC(exec_callback),
@@ -202,31 +202,31 @@ tbar_insert(int argc, VALUE *argv, VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-tbar_get_item_index(VALUE self, VALUE item)
+rg_item_index(VALUE self, VALUE item)
 {
     return INT2NUM(gtk_toolbar_get_item_index(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(item))));
 }
 
 static VALUE
-tbar_get_n_items(VALUE self)
+rg_n_items(VALUE self)
 {
     return INT2NUM(gtk_toolbar_get_n_items(_SELF(self)));
 }
 
 static VALUE
-tbar_get_nth_item(VALUE self, VALUE n)
+rg_nth_item(VALUE self, VALUE n)
 {
     return GOBJ2RVAL(gtk_toolbar_get_nth_item(_SELF(self), NUM2INT(n)));
 }
 
 static VALUE
-tbar_get_drop_index(VALUE self, VALUE x, VALUE y)
+rg_drop_index(VALUE self, VALUE x, VALUE y)
 {
     return INT2NUM(gtk_toolbar_get_drop_index(_SELF(self), NUM2INT(x), NUM2INT(y)));
 }
 
 static VALUE
-tbar_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
+rg_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
 {
     gtk_toolbar_set_drop_highlight_item(_SELF(self), 
                                         GTK_TOOL_ITEM(RVAL2GOBJ(item)), 
@@ -235,49 +235,49 @@ tbar_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
 }
 
 static VALUE
-tbar_get_relief_style(VALUE self)
+rg_relief_style(VALUE self)
 {
     return GENUM2RVAL(gtk_toolbar_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
 }
 #endif
 
 static VALUE
-tbar_append_space(VALUE self)
+rg_append_space(VALUE self)
 {
     gtk_toolbar_append_space(_SELF(self));
     return self;
 }
 
 static VALUE
-tbar_prepend_space(VALUE self)
+rg_prepend_space(VALUE self)
 {
     gtk_toolbar_prepend_space(_SELF(self));
     return self;
 }
 
 static VALUE
-tbar_insert_space(VALUE self, VALUE pos)
+rg_insert_space(VALUE self, VALUE pos)
 {
     gtk_toolbar_insert_space(_SELF(self), NUM2INT(pos));
     return self;
 }
 
 static VALUE
-tbar_remove_space(VALUE self, VALUE position)
+rg_remove_space(VALUE self, VALUE position)
 {
     gtk_toolbar_remove_space(_SELF(self), NUM2INT(position));
     return self;
 }
 
 static VALUE
-tbar_unset_icon_size(VALUE self)
+rg_unset_icon_size(VALUE self)
 {
     gtk_toolbar_unset_icon_size(_SELF(self));
     return self;
 }
 
 static VALUE
-tbar_unset_style(VALUE self)
+rg_unset_style(VALUE self)
 {
     gtk_toolbar_unset_style(_SELF(self));
     return self;
@@ -288,24 +288,24 @@ Init_gtk_toolbar(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tbar_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "item_index", tbar_get_item_index, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "n_items", tbar_get_n_items, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "nth_item", tbar_get_nth_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "drop_index", tbar_get_drop_index, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_drop_highlight_item", tbar_set_drop_highlight_item, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "relief_style", tbar_get_relief_style, 0);
+    RG_DEF_METHOD(item_index, 1);
+    RG_DEF_METHOD(n_items, 0);
+    RG_DEF_METHOD(nth_item, 1);
+    RG_DEF_METHOD(drop_index, 2);
+    RG_DEF_METHOD(set_drop_highlight_item, 2);
+    RG_DEF_METHOD(relief_style, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "append", tbar_append, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend", tbar_prepend, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert", tbar_insert, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "append_space", tbar_append_space, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend_space", tbar_prepend_space, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert_space", tbar_insert_space, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_space", tbar_remove_space, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_icon_size", tbar_unset_icon_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_style", tbar_unset_style, 0);
+    RG_DEF_METHOD(append, -1);
+    RG_DEF_METHOD(prepend, -1);
+    RG_DEF_METHOD(insert, -1);
+    RG_DEF_METHOD(append_space, 0);
+    RG_DEF_METHOD(prepend_space, 0);
+    RG_DEF_METHOD(insert_space, 1);
+    RG_DEF_METHOD(remove_space, 1);
+    RG_DEF_METHOD(unset_icon_size, 0);
+    RG_DEF_METHOD(unset_style, 0);
 
     /* GtkToolbarChildType */
     G_DEF_CLASS(GTK_TYPE_TOOLBAR_CHILD_TYPE, "ChildType", RG_TARGET_NAMESPACE);

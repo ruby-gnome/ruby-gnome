@@ -30,7 +30,7 @@
 static ID id_to_a;
 
 static VALUE
-dialog_add_button(VALUE self, VALUE button_text, VALUE response_id)
+rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
 {
     const gchar *name;
     if (SYMBOL_P(button_text)) {
@@ -57,7 +57,7 @@ rbgtk_dialog_add_buttons_internal_body(VALUE value)
     for (i = 0; i < n; i++) {
         VALUE button = rb_ary_to_ary(RARRAY_PTR(args->buttons)[i]);
 
-        dialog_add_button(args->self, RARRAY_PTR(button)[0], RARRAY_PTR(button)[1]);
+        rg_add_button(args->self, RARRAY_PTR(button)[0], RARRAY_PTR(button)[1]);
     }
 
     return args->self;
@@ -86,7 +86,7 @@ rbgtk_dialog_add_buttons_internal(VALUE self, VALUE buttons)
 }    
 
 static VALUE
-dialog_add_buttons(int argc, VALUE *argv, VALUE self)
+rg_add_buttons(int argc, VALUE *argv, VALUE self)
 {
     VALUE button_ary;
     rb_scan_args(argc, argv, "*", &button_ary);
@@ -95,7 +95,7 @@ dialog_add_buttons(int argc, VALUE *argv, VALUE self)
 }    
 
 static VALUE
-dialog_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, parent, flags, button_ary;
     rb_scan_args(argc, argv, "03*", &title, &parent, &flags, &button_ary);
@@ -109,7 +109,7 @@ dialog_initialize(int argc, VALUE *argv, VALUE self)
             gtk_window_set_title(GTK_WINDOW(dialog), RVAL2CSTR(title));
         if (! NIL_P(parent))
             gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(RVAL2GOBJ(parent)));
-        
+
         if (gflags & GTK_DIALOG_MODAL)
             gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         if (gflags & GTK_DIALOG_DESTROY_WITH_PARENT)
@@ -127,7 +127,7 @@ dialog_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-dialog_run(VALUE self)
+rg_run(VALUE self)
 {
     if (rb_block_given_p()){
         VALUE ret = INT2NUM(gtk_dialog_run(_SELF(self)));
@@ -139,14 +139,14 @@ dialog_run(VALUE self)
 }
 
 static VALUE
-dialog_response(VALUE self, VALUE response_id)
+rg_response(VALUE self, VALUE response_id)
 {
     gtk_dialog_response(_SELF(self), NUM2INT(response_id));
     return self;
 }
 
 static VALUE
-dialog_add_action_widget(VALUE self, VALUE child, VALUE response_id)
+rg_add_action_widget(VALUE self, VALUE child, VALUE response_id)
 {
     gtk_dialog_add_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
                                  NUM2INT(response_id));
@@ -154,14 +154,14 @@ dialog_add_action_widget(VALUE self, VALUE child, VALUE response_id)
 }
 
 static VALUE
-dialog_set_default_response(VALUE self, VALUE response_id)
+rg_set_default_response(VALUE self, VALUE response_id)
 {
     gtk_dialog_set_default_response(_SELF(self), NUM2INT(response_id));
     return self;
 }
 
 static VALUE
-dialog_set_response_sensitive(VALUE self, VALUE response_id, VALUE setting)
+rg_set_response_sensitive(VALUE self, VALUE response_id, VALUE setting)
 {
     gtk_dialog_set_response_sensitive(_SELF(self), NUM2INT(response_id), RVAL2CBOOL(setting));
     return self;
@@ -169,7 +169,7 @@ dialog_set_response_sensitive(VALUE self, VALUE response_id, VALUE setting)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-dialog_s_alternative_dialog_button_order(G_GNUC_UNUSED VALUE self, VALUE screen)
+rg_s_alternative_dialog_button_order_p(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     gboolean ret = gtk_alternative_dialog_button_order(NIL_P(screen) ? NULL : 
                                                        GDK_SCREEN(RVAL2GOBJ(screen)));
@@ -184,7 +184,7 @@ void        gtk_dialog_set_alternative_button_order
 */
 
 static VALUE
-dialog_set_alternative_button_order(VALUE self, VALUE rbnew_order)
+rg_set_alternative_button_order(VALUE self, VALUE rbnew_order)
 {
     GtkDialog *dialog = _SELF(self);
     long n;
@@ -200,20 +200,20 @@ dialog_set_alternative_button_order(VALUE self, VALUE rbnew_order)
 #endif
 
 static VALUE
-dialog_vbox(VALUE self)
+rg_vbox(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->vbox);
 }
 
 static VALUE
-dialog_action_area(VALUE self)
+rg_action_area(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->action_area);
 }
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-dialog_get_response_for_widget(VALUE self, VALUE widget)
+rg_get_response(VALUE self, VALUE widget)
 {
     return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GOBJ(widget)));
 }
@@ -226,28 +226,27 @@ Init_gtk_dialog(void)
 
     id_to_a = rb_intern("to_a");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", dialog_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "run", dialog_run, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "response", dialog_response, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_button", dialog_add_button, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_buttons", dialog_add_buttons, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_action_widget", dialog_add_action_widget, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_default_response", dialog_set_default_response, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(run, 0);
+    RG_DEF_METHOD(response, 1);
+    RG_DEF_METHOD(add_button, 2);
+    RG_DEF_METHOD(add_buttons, -1);
+    RG_DEF_METHOD(add_action_widget, 2);
+    RG_DEF_METHOD(set_default_response, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "default_response");
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "alternative_dialog_button_order?", 
-                               dialog_s_alternative_dialog_button_order, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_alternative_button_order", dialog_set_alternative_button_order, 1);
+    RG_DEF_SMETHOD_P(alternative_dialog_button_order, 1);
+    RG_DEF_METHOD(set_alternative_button_order, 1);
 #endif
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_response_sensitive", dialog_set_response_sensitive, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "vbox", dialog_vbox, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "action_area", dialog_action_area, 0);
+    RG_DEF_METHOD(set_response_sensitive, 2);
+    RG_DEF_METHOD(vbox, 0);
+    RG_DEF_METHOD(action_area, 0);
 
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "get_response", dialog_get_response_for_widget, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_response_for_widget", dialog_get_response_for_widget, 1);
+    RG_DEF_METHOD(get_response, 1);
+    RG_DEF_ALIAS("get_response_for_widget", "get_response");
 #endif
 
     /* GtkDialogFlags */

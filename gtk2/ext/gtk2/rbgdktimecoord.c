@@ -49,7 +49,7 @@ gdk_timecoord_get_type(void)
 /**********************************/
 
 static VALUE
-timecoord_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
+rg_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
 {
     guint32 time = NUM2UINT(rbtime);
     long n;
@@ -76,20 +76,20 @@ timecoord_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
 }
 
 static VALUE
-timecoord_time(VALUE self)
+rg_time(VALUE self)
 {
     return UINT2NUM(_SELF(self)->time);
 }
 
 static VALUE
-timecoord_set_time(VALUE self, VALUE time)
+rg_set_time(VALUE self, VALUE time)
 {
     _SELF(self)->time = NUM2UINT(time);
     return self;
 }
 
 static VALUE
-timecoord_axes(VALUE self)
+rg_axes(VALUE self)
 {
     VALUE ary = rb_ary_new();
     int i;
@@ -100,7 +100,7 @@ timecoord_axes(VALUE self)
 }
 
 static VALUE
-timecoord_set_axes(VALUE self, VALUE rbaxes)
+rg_set_axes(VALUE self, VALUE rbaxes)
 {
     GdkTimeCoord *coord = _SELF(self);
     VALUE axes = rb_ary_to_ary(rbaxes);
@@ -123,11 +123,11 @@ Init_gtk_gdk_timecoord(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", timecoord_initialize, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "time", timecoord_time, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_time", timecoord_set_time, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "axes", timecoord_axes, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_axes", timecoord_set_axes, 1);
+    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(time, 0);
+    RG_DEF_METHOD(set_time, 1);
+    RG_DEF_METHOD(axes, 0);
+    RG_DEF_METHOD(set_axes, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

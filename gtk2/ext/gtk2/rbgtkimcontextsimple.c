@@ -25,7 +25,7 @@
 #define _SELF(self) (GTK_IM_CONTEXT_SIMPLE(RVAL2GOBJ(self)))
 
 static VALUE 
-imcsimple_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_im_context_simple_new());
 
@@ -35,7 +35,7 @@ imcsimple_initialize(VALUE self)
 /* TODO: Why are we taking a third argument?  Shouldn't it be determined by the
  * length of rbdata? */
 static VALUE
-imcsimple_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seqs)
+rg_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seqs)
 {
     GtkIMContextSimple *context_simple = _SELF(self);
     gint max_seq_len = NUM2INT(rbmax_seq_len);
@@ -62,8 +62,8 @@ Init_gtk_imcontext_simple(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT_SIMPLE, "IMContextSimple", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", imcsimple_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_table", imcsimple_add_table, 3);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(add_table, 3);
 
     rb_define_const(RG_TARGET_NAMESPACE, "MAX_COMPOSE_LEN", GTK_MAX_COMPOSE_LEN);
 }

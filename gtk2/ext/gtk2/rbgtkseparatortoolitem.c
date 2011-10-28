@@ -20,13 +20,13 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define RG_TARGET_NAMESPACE cSeparatorToolItem
 
 static VALUE
-separatortoolitem_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_separator_tool_item_new());
     return Qnil;
@@ -39,6 +39,6 @@ Init_gtk_separatortoolitem(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR_TOOL_ITEM, "SeparatorToolItem", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", separatortoolitem_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 #endif
 }

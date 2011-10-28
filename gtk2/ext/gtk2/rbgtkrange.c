@@ -28,27 +28,27 @@
 #define _SELF(self) (GTK_RANGE(RVAL2GOBJ(self)))
 
 static VALUE
-range_get_value(VALUE self)
+rg_value(VALUE self)
 {
     return rb_float_new(gtk_range_get_value(_SELF(self)));
 }
 
 static VALUE
-range_set_increments(VALUE self, VALUE step, VALUE page)
+rg_set_increments(VALUE self, VALUE step, VALUE page)
 {
     gtk_range_set_increments(_SELF(self), NUM2DBL(step), NUM2DBL(page));
     return self;
 }
 
 static VALUE
-range_set_range(VALUE self, VALUE min, VALUE max)
+rg_set_range(VALUE self, VALUE min, VALUE max)
 {
     gtk_range_set_range(_SELF(self), NUM2DBL(min), NUM2DBL(max));
     return self;
 }
 
 static VALUE
-range_set_value(VALUE self, VALUE value)
+rg_set_value(VALUE self, VALUE value)
 {
     gtk_range_set_value(_SELF(self), NUM2DBL(value));
     return self;
@@ -59,10 +59,10 @@ Init_gtk_range(void)
 {
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
 
-  rb_define_method(RG_TARGET_NAMESPACE, "value", range_get_value, 0);
-  rb_define_method(RG_TARGET_NAMESPACE, "set_increments", range_set_increments, 2);
-  rb_define_method(RG_TARGET_NAMESPACE, "set_range", range_set_range, 2);
-  rb_define_method(RG_TARGET_NAMESPACE, "set_value", range_set_value, 1);
+  RG_DEF_METHOD(value, 0);
+  RG_DEF_METHOD(set_increments, 2);
+  RG_DEF_METHOD(set_range, 2);
+  RG_DEF_METHOD(set_value, 1);
   G_DEF_SETTER(RG_TARGET_NAMESPACE, "value");
 
 #if GTK_CHECK_VERSION(2,10,0)

@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cSeparatorMenuItem
 
 static VALUE
-smitem_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_separator_menu_item_new());
     return Qnil;
@@ -35,5 +35,5 @@ Init_gtk_separator_menu_item(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR_MENU_ITEM, "SeparatorMenuItem", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", smitem_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

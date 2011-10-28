@@ -28,7 +28,7 @@
 #define _SELF(s) (GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
-cdialog_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title;
     rb_scan_args(argc, argv, "01", &title);
@@ -42,7 +42,7 @@ Init_gtk_color_selection_dialog(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 
                                         "ColorSelectionDialog", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", cdialog_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
     /* NOTE: Backward compatibility */
-    rb_define_alias(RG_TARGET_NAMESPACE, "colorsel", "color_selection");
+    RG_DEF_ALIAS("colorsel", "color_selection");
 }

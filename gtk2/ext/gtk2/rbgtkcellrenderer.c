@@ -27,7 +27,7 @@
 #define RECT2RVAL(r) (BOXED2RVAL(r, GDK_TYPE_RECTANGLE))
 
 static VALUE
-cellrenderer_get_size(VALUE self, VALUE widget, VALUE cell_area)
+rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
 {
     GdkRectangle ret;
 
@@ -38,7 +38,7 @@ cellrenderer_get_size(VALUE self, VALUE widget, VALUE cell_area)
 }
 
 static VALUE
-cellrenderer_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE cell_area, VALUE expose_area, VALUE flags)
+rg_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE cell_area, VALUE expose_area, VALUE flags)
 {
     gtk_cell_renderer_render(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)),
                              GTK_WIDGET(RVAL2GOBJ(widget)),
@@ -50,7 +50,7 @@ cellrenderer_render(VALUE self, VALUE window, VALUE widget, VALUE background_are
 }
 
 static VALUE
-cellrenderer_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
+rg_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
 {
     gboolean ret =
     gtk_cell_renderer_activate(_SELF(self), (GdkEvent*)RVAL2GEV(event),
@@ -62,7 +62,7 @@ cellrenderer_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE b
 }
 
 static VALUE
-cellrenderer_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
+rg_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
 {
     GtkCellEditable* edit =
     gtk_cell_renderer_start_editing(_SELF(self), (GdkEvent*)RVAL2GEV(event),
@@ -76,7 +76,7 @@ cellrenderer_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VA
 #if GTK_CHECK_VERSION(2,4,0)
 #ifndef GTK_DISABLE_DEPRECATED
 static VALUE
-cellrenderer_editing_canceled(VALUE self)
+rg_editing_canceled(VALUE self)
 {
     gtk_cell_renderer_editing_canceled(_SELF(self));
     return self;
@@ -86,7 +86,7 @@ cellrenderer_editing_canceled(VALUE self)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-cellrenderer_stop_editing(VALUE self, VALUE canceled)
+rg_stop_editing(VALUE self, VALUE canceled)
 {
     gtk_cell_renderer_stop_editing(_SELF(self), RVAL2CBOOL(canceled));
     return self;
@@ -94,7 +94,7 @@ cellrenderer_stop_editing(VALUE self, VALUE canceled)
 #endif
 
 static VALUE
-cellrenderer_get_fixed_size(VALUE self)
+rg_fixed_size(VALUE self)
 {
     int width, height;
     gtk_cell_renderer_get_fixed_size(_SELF(self), &width, &height);
@@ -102,7 +102,7 @@ cellrenderer_get_fixed_size(VALUE self)
 }
 
 static VALUE
-cellrenderer_set_fixed_size(VALUE self, VALUE width, VALUE height)
+rg_set_fixed_size(VALUE self, VALUE width, VALUE height)
 {
     gtk_cell_renderer_set_fixed_size(_SELF(self), NUM2INT(width), 
                                      NUM2INT(height));
@@ -113,21 +113,21 @@ void
 Init_gtk_cellrenderer(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "get_size", cellrenderer_get_size, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "render", cellrenderer_render, 6);
-    rb_define_method(RG_TARGET_NAMESPACE, "activate", cellrenderer_activate, 6);
-    rb_define_method(RG_TARGET_NAMESPACE, "start_editing", cellrenderer_start_editing, 6);
+
+    RG_DEF_METHOD(get_size, 2);
+    RG_DEF_METHOD(render, 6);
+    RG_DEF_METHOD(activate, 6);
+    RG_DEF_METHOD(start_editing, 6);
 #if GTK_CHECK_VERSION(2,4,0)
 #ifndef GTK_DISABLE_DEPRECATED
-    rb_define_method(RG_TARGET_NAMESPACE, "editing_canceled", cellrenderer_editing_canceled, 0);
+    RG_DEF_METHOD(editing_canceled, 0);
 #endif
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "stop_editing", cellrenderer_stop_editing, 1);
+    RG_DEF_METHOD(stop_editing, 1);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "fixed_size", cellrenderer_get_fixed_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_fixed_size", cellrenderer_set_fixed_size, 2);
+    RG_DEF_METHOD(fixed_size, 0);
+    RG_DEF_METHOD(set_fixed_size, 2);
 
     /* GtkCellRendererState */
     G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_STATE, "State", RG_TARGET_NAMESPACE);

@@ -28,7 +28,7 @@
 #define _SELF(self) (GTK_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-button_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget = NULL;
@@ -47,7 +47,7 @@ button_initialize(int argc, VALUE *argv, VALUE self)
                      rb_class2name(CLASS_OF(label)));
         }
     } else {
-	widget = gtk_button_new();
+        widget = gtk_button_new();
     }
 
     RBGTK_INITIALIZE(self, widget); 
@@ -55,28 +55,28 @@ button_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-button_pressed(VALUE self)
+rg_pressed(VALUE self)
 {
     gtk_button_pressed(GTK_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-button_released(VALUE self)
+rg_released(VALUE self)
 {
     gtk_button_released(_SELF(self));
     return self;
 }
 
 static VALUE
-button_enter(VALUE self)
+rg_enter(VALUE self)
 {
     gtk_button_enter(_SELF(self));
     return self;
 }
 
 static VALUE
-button_leave(VALUE self)
+rg_leave(VALUE self)
 {
     gtk_button_leave(_SELF(self));
     return self;
@@ -84,14 +84,14 @@ button_leave(VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-button_set_alignment(VALUE self, VALUE xalign, VALUE yalign)
+rg_set_alignment(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_button_set_alignment(_SELF(self), NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
 
 static VALUE
-button_get_alignment(VALUE self)
+rg_alignment(VALUE self)
 {
     gfloat xalign, yalign;
     gtk_button_get_alignment(_SELF(self), &xalign, &yalign);
@@ -105,15 +105,15 @@ Init_gtk_button(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", button_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pressed", button_pressed, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "released", button_released, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "enter", button_enter, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "leave", button_leave, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(pressed, 0);
+    RG_DEF_METHOD(released, 0);
+    RG_DEF_METHOD(enter, 0);
+    RG_DEF_METHOD(leave, 0);
 
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment", button_set_alignment, 2);
+    RG_DEF_METHOD(set_alignment, 2);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "alignment");
-    rb_define_method(RG_TARGET_NAMESPACE, "alignment", button_get_alignment, 0);
+    RG_DEF_METHOD(alignment, 0);
 #endif
 }

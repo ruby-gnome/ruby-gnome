@@ -28,21 +28,21 @@
 #define _SELF(s) (GTK_MISC(RVAL2GOBJ(s)))
 
 static VALUE
-misc_set_align(VALUE self, VALUE xalign, VALUE yalign)
+rg_set_alignment(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_misc_set_alignment(_SELF(self), NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
 }
 
 static VALUE
-misc_set_padding(VALUE self, VALUE xpad, VALUE ypad)
+rg_set_padding(VALUE self, VALUE xpad, VALUE ypad)
 {
     gtk_misc_set_padding(_SELF(self), NUM2DBL(xpad), NUM2DBL(ypad));
     return self;
 }
 
 static VALUE
-misc_get_align(VALUE self)
+rg_alignment(VALUE self)
 {
     gfloat xalign, yalign;
     gtk_misc_get_alignment(_SELF(self), &xalign, &yalign);
@@ -51,7 +51,7 @@ misc_get_align(VALUE self)
 }
 
 static VALUE
-misc_get_padding(VALUE self)
+rg_padding(VALUE self)
 {
     gint xpad, ypad;
     gtk_misc_get_padding(_SELF(self), &xpad, &ypad);
@@ -63,8 +63,8 @@ Init_gtk_misc(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MISC, "Misc", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment", misc_set_align, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_padding", misc_set_padding, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "alignment", misc_get_align, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "padding", misc_get_padding, 0);
+    RG_DEF_METHOD(set_alignment, 2);
+    RG_DEF_METHOD(set_padding, 2);
+    RG_DEF_METHOD(alignment, 0);
+    RG_DEF_METHOD(padding, 0);
 }

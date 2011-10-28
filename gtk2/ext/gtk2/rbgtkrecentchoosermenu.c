@@ -27,11 +27,11 @@
 #define _SELF(self) (GTK_RECENT_CHOOSER_MENU(RVAL2GOBJ(self)))
 
 static VALUE
-rcm_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE manager;
     GtkWidget* menu;
-    
+
     rb_scan_args(argc, argv, "01", &manager);
 
     if (NIL_P(manager)){
@@ -51,6 +51,6 @@ Init_gtk_recent_chooser_menu(void)
 #if GTK_CHECK_VERSION(2,10,0)
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_MENU, "RecentChooserMenu", mGtk);
 
-  rb_define_method(RG_TARGET_NAMESPACE, "initialize", rcm_initialize, -1);
+  RG_DEF_METHOD(initialize, -1);
 #endif
 }

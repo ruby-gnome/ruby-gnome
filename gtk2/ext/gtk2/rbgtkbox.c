@@ -57,35 +57,35 @@ box_pack_start_or_end(int argc, VALUE *argv, VALUE self, int start)
 }
 
 static VALUE
-box_pack_start(int argc, VALUE *argv, VALUE self)
+rg_pack_start(int argc, VALUE *argv, VALUE self)
 {
     box_pack_start_or_end(argc, argv, self, 1);
     return self;
 }
 
 static VALUE
-box_pack_end(int argc, VALUE *argv, VALUE self)
+rg_pack_end(int argc, VALUE *argv, VALUE self)
 {
     box_pack_start_or_end(argc, argv, self, 0);
     return self;
 }
 
 static VALUE
-box_pack_start_defaults(VALUE self, VALUE widget)
+rg_pack_start_defaults(VALUE self, VALUE widget)
 {
     gtk_box_pack_start_defaults(_SELF(self), RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-box_pack_end_defaults(VALUE self, VALUE widget)
+rg_pack_end_defaults(VALUE self, VALUE widget)
 {
     gtk_box_pack_end_defaults(_SELF(self), RVAL2WIDGET(widget));
     return self;
 }
 
 static VALUE
-box_reorder_child(VALUE self, VALUE child, VALUE pos)
+rg_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
     gtk_box_reorder_child(_SELF(self),
                           RVAL2WIDGET(child), NUM2INT(pos));
@@ -93,7 +93,7 @@ box_reorder_child(VALUE self, VALUE child, VALUE pos)
 }
 
 static VALUE
-box_query_child_packing(VALUE self, VALUE child)
+rg_query_child_packing(VALUE self, VALUE child)
 {
     gboolean expand, fill;
     guint padding;
@@ -114,7 +114,7 @@ box_query_child_packing(VALUE self, VALUE child)
 }
 
 static VALUE
-box_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE padding, VALUE pack_type)
+rg_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE padding, VALUE pack_type)
 {
     gtk_box_set_child_packing(_SELF(self), 
                               RVAL2WIDGET(child),
@@ -128,11 +128,11 @@ Init_gtk_box(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BOX, "Box", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "pack_start", box_pack_start, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pack_end", box_pack_end, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pack_start_defaults", box_pack_start_defaults, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pack_end_defaults", box_pack_end_defaults, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "reorder_child", box_reorder_child, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "query_child_packing", box_query_child_packing, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_child_packing", box_set_child_packing, 5);
+    RG_DEF_METHOD(pack_start, -1);
+    RG_DEF_METHOD(pack_end, -1);
+    RG_DEF_METHOD(pack_start_defaults, 1);
+    RG_DEF_METHOD(pack_end_defaults, 1);
+    RG_DEF_METHOD(reorder_child, 2);
+    RG_DEF_METHOD(query_child_packing, 1);
+    RG_DEF_METHOD(set_child_packing, 5);
 }

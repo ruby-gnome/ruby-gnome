@@ -34,18 +34,18 @@ static VALUE action_table;
 static guint action_id = 0;
 
 static VALUE
-ifact_initialize(VALUE self, VALUE type, VALUE path, VALUE accel)
+rg_initialize(VALUE self, VALUE type, VALUE path, VALUE accel)
 {
     VALUE obj = rb_eval_string("eval('self', binding)");
     G_RELATIVE(obj, self);
     RBGTK_INITIALIZE(self, gtk_item_factory_new(NUM2ULONG(type), RVAL2CSTR(path),
                                                 RVAL2ACCEL(accel)));
-   
+
     return Qnil;
 }
 
 static VALUE
-ifact_construct(int argc, VALUE *argv, VALUE self)
+rg_construct(int argc, VALUE *argv, VALUE self)
 {
     VALUE type, path, accel;
     GtkItemFactory* ifact = _SELF(self);
@@ -56,9 +56,9 @@ ifact_construct(int argc, VALUE *argv, VALUE self)
                                RVAL2CSTR(path), RVAL2ACCEL(accel));
     return self;
 }
- 
+
 static VALUE
-ifact_s_from_widget(VALUE self, VALUE widget)
+rg_s_from_widget(VALUE self, VALUE widget)
 {
     VALUE obj = GOBJ2RVAL(gtk_item_factory_from_widget(RVAL2WIDGET(widget)));
     G_RELATIVE(obj, self);
@@ -66,13 +66,13 @@ ifact_s_from_widget(VALUE self, VALUE widget)
 }
 
 static VALUE
-ifact_s_path_from_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
+rg_s_path_from_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     return CSTR2RVAL(gtk_item_factory_path_from_widget(RVAL2WIDGET(widget)));
 }
 
 static VALUE
-ifact_get_item(VALUE self, VALUE path)
+rg_get_item(VALUE self, VALUE path)
 {
     VALUE obj = Qnil;
     GtkWidget* widget = gtk_item_factory_get_item(_SELF(self), RVAL2CSTR(path));
@@ -84,7 +84,7 @@ ifact_get_item(VALUE self, VALUE path)
 }
 
 static VALUE
-ifact_get_widget(VALUE self, VALUE path)
+rg_get_widget(VALUE self, VALUE path)
 {
     VALUE obj = Qnil;
     GtkWidget* widget = gtk_item_factory_get_widget(_SELF(self), RVAL2CSTR(path));
@@ -136,7 +136,7 @@ create_factory_entry(GtkItemFactoryEntry *entry, VALUE self, VALUE path, VALUE i
     entry->path = (gchar *)(NIL_P(path) ? NULL : RVAL2CSTR(path));
     entry->item_type = (gchar *)(NIL_P(item_type) ? "<Branch>" : RVAL2CSTR(item_type));
     entry->accelerator = (gchar *)(NIL_P(accel) ? NULL : RVAL2CSTR(accel));
-        
+
     if (menuitem_type_check(entry->item_type) == 0) {
         entry->callback = NULL;
     } else {
@@ -169,7 +169,7 @@ create_factory_entry(GtkItemFactoryEntry *entry, VALUE self, VALUE path, VALUE i
 }  
 
 static VALUE
-ifact_create_item(int argc, VALUE *argv, VALUE self)
+rg_create_item(int argc, VALUE *argv, VALUE self)
 {
     VALUE path, type, accel, extdata, data, func;
     GtkItemFactoryEntry *entry;
@@ -180,14 +180,14 @@ ifact_create_item(int argc, VALUE *argv, VALUE self)
     func = rb_rescue((VALUE(*)())rb_block_proc, 0, NULL, 0);
 
     create_factory_entry(entry, self, path, type, accel, extdata, func, data);
-    
+
     gtk_item_factory_create_item(_SELF(self), entry, (gpointer)self, 1);
     g_free(entry);
     return self;
 }
 
 static VALUE
-ifact_create_items(VALUE self, VALUE ary)
+rg_create_items(VALUE self, VALUE ary)
 {
     VALUE entry, path, accel, type, func, data, extdata;
     GtkItemFactoryEntry *entries;
@@ -216,9 +216,8 @@ ifact_create_items(VALUE self, VALUE ary)
     return self;
 }
 
-
 static VALUE
-ifact_delete_item(VALUE self, VALUE path)
+rg_delete_item(VALUE self, VALUE path)
 {
     gtk_item_factory_delete_item(_SELF(self), RVAL2CSTR(path));
     return self;
@@ -234,7 +233,7 @@ void        gtk_item_factory_delete_entries (GtkItemFactory *ifactory,
 */
 
 static VALUE
-ifact_popup(VALUE self, VALUE x, VALUE y, VALUE mouse_button, VALUE time)
+rg_popup(VALUE self, VALUE x, VALUE y, VALUE mouse_button, VALUE time)
 {
     gtk_item_factory_popup(_SELF(self), NUM2UINT(x), NUM2UINT(y), NUM2UINT(mouse_button),
                            NUM2UINT(time));
@@ -261,23 +260,22 @@ void        gtk_item_factory_set_translate_func
                                              GtkDestroyNotify notify);
 */
 
-
 void 
 Init_gtk_itemfactory(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_widget", ifact_s_from_widget, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "path_from_widget", ifact_s_path_from_widget, 1);
+    RG_DEF_SMETHOD(from_widget, 1);
+    RG_DEF_SMETHOD(path_from_widget, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ifact_initialize, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "construct", ifact_construct, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_item", ifact_get_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_widget", ifact_get_widget, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "create_item", ifact_create_item, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "create_items", ifact_create_items, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "delete_item", ifact_delete_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "popup", ifact_popup, 4);
+    RG_DEF_METHOD(initialize, 3);
+    RG_DEF_METHOD(construct, -1);
+    RG_DEF_METHOD(get_item, 1);
+    RG_DEF_METHOD(get_widget, 1);
+    RG_DEF_METHOD(create_item, -1);
+    RG_DEF_METHOD(create_items, 1);
+    RG_DEF_METHOD(delete_item, 1);
+    RG_DEF_METHOD(popup, 4);
 
     /* Ruby/GTK Original constants */
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
@@ -299,4 +297,3 @@ Init_gtk_itemfactory(void)
     action_table = rb_hash_new();
     rb_global_variable(&action_table);
 }
-

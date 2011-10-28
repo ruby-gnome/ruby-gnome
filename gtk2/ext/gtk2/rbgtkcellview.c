@@ -30,14 +30,14 @@ static ID id_model;
 static ID id_text;
 
 static VALUE
-cview_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE text;
     VALUE with_markup = Qnil;
     GtkWidget *widget = NULL;
 
     rb_scan_args(argc, argv, "02", &text, &with_markup);
-    
+
     if (NIL_P(text)) {
         widget = gtk_cell_view_new();
     } else {
@@ -63,7 +63,7 @@ cview_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-cview_set_displayed_row(VALUE self, VALUE path)
+rg_set_displayed_row(VALUE self, VALUE path)
 {
     gtk_cell_view_set_displayed_row(_SELF(self),  
                                     NIL_P(path) ? (GtkTreePath*)NULL :
@@ -72,13 +72,13 @@ cview_set_displayed_row(VALUE self, VALUE path)
 }
 
 static VALUE
-cview_get_displayed_row(VALUE self)
+rg_displayed_row(VALUE self)
 {
     return GTKTREEPATH2RVAL(gtk_cell_view_get_displayed_row(_SELF(self)));
 }
 
 static VALUE
-cview_get_size_of_row(VALUE self, VALUE path)
+rg_get_size_of_row(VALUE self, VALUE path)
 {
     GtkRequisition req;
     gboolean ret = gtk_cell_view_get_size_of_row(_SELF(self),  
@@ -97,7 +97,7 @@ void        gtk_cell_view_set_background_color
 */
 
 static VALUE
-cview_get_cell_renderers(VALUE self)
+rg_cell_renderers(VALUE self)
 {
     return GLIST2ARYF(gtk_cell_view_get_cell_renderers(_SELF(self)));
 }
@@ -112,15 +112,11 @@ Init_gtk_cellview(void)
     id_model = rb_intern("model");
     id_text = rb_intern("text");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", cview_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_displayed_row", cview_set_displayed_row, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_displayed_row, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "displayed_row");
-    rb_define_method(RG_TARGET_NAMESPACE, "displayed_row", cview_get_displayed_row, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_size_of_row", cview_get_size_of_row, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "cell_renderers", cview_get_cell_renderers, 0);
+    RG_DEF_METHOD(displayed_row, 0);
+    RG_DEF_METHOD(get_size_of_row, 1);
+    RG_DEF_METHOD(cell_renderers, 0);
 #endif
 }
-
-
- 
-

@@ -25,7 +25,7 @@
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
-gdkselection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE owner, selection, time, send_event;
     int ret;
@@ -52,7 +52,7 @@ gdkselection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gdkselection_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE selection;
 
@@ -72,7 +72,7 @@ gdkselection_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gdkselection_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
+rg_m_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
 {
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
                           RVAL2ATOM(selection), 
@@ -81,7 +81,7 @@ gdkselection_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target,
 }
 
 static VALUE
-gdkselection_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
+rg_m_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 {
     guchar *data;
     GdkAtom prop_type;
@@ -98,7 +98,7 @@ gdkselection_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 }
 
 static VALUE
-gdkselection_send_notify(int argc, VALUE *argv, VALUE self)
+rg_m_send_notify(int argc, VALUE *argv, VALUE self)
 {
     VALUE requestor, selection, target, property, time;
 
@@ -129,17 +129,17 @@ Init_gtk_gdk_selection(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Selection");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "owner_set", gdkselection_owner_set, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "owner_get", gdkselection_owner_get, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "convert", gdkselection_convert, 4);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "property_get", gdkselection_property_get, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "send_notify", gdkselection_send_notify, -1);
+    RG_DEF_MODFUNC(owner_set, -1);
+    RG_DEF_MODFUNC(owner_get, -1);
+    RG_DEF_MODFUNC(convert, 4);
+    RG_DEF_MODFUNC(property_get, 1);
+    RG_DEF_MODFUNC(send_notify, -1);
 
     /* Constants */
     rb_define_const(RG_TARGET_NAMESPACE, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
     rb_define_const(RG_TARGET_NAMESPACE, "SECONDARY", GATOM2RVAL(GDK_SELECTION_SECONDARY));
     rb_define_const(RG_TARGET_NAMESPACE, "CLIPBOARD", GATOM2RVAL(GDK_SELECTION_CLIPBOARD));
-    
+
     /* GdkSelectionType */
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));

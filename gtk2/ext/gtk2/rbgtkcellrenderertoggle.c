@@ -25,7 +25,7 @@
 #define _SELF(s) (GTK_CELL_RENDERER_TOGGLE(RVAL2GOBJ(s)))
 
 static VALUE
-crtoggle_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_toggle_new());
     return Qnil;
@@ -35,8 +35,5 @@ void
 Init_gtk_cellrenderertoggle(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TOGGLE, "CellRendererToggle", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", crtoggle_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }
-
-
- 

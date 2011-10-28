@@ -28,7 +28,7 @@
 #define _SELF(self) (GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)))
 
 static VALUE
-scwin_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GtkAdjustment *h_adj = NULL;
@@ -44,7 +44,7 @@ scwin_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-scwin_set_policy(VALUE self, VALUE hpolicy, VALUE vpolicy)
+rg_set_policy(VALUE self, VALUE hpolicy, VALUE vpolicy)
 {
     gtk_scrolled_window_set_policy(_SELF(self),
                                    RVAL2GENUM(hpolicy, GTK_TYPE_POLICY_TYPE),
@@ -53,7 +53,7 @@ scwin_set_policy(VALUE self, VALUE hpolicy, VALUE vpolicy)
 }
 
 static VALUE
-scwin_get_policy(VALUE self)
+rg_policy(VALUE self)
 {
     GtkPolicyType hpolicy, vpolicy;
 
@@ -64,7 +64,7 @@ scwin_get_policy(VALUE self)
 }
 
 static VALUE
-scwin_add_with_viewport(VALUE self, VALUE other)
+rg_add_with_viewport(VALUE self, VALUE other)
 {
     gtk_scrolled_window_add_with_viewport(_SELF(self),
                                           GTK_WIDGET(RVAL2GOBJ(other)));
@@ -74,13 +74,13 @@ scwin_add_with_viewport(VALUE self, VALUE other)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-scwin_get_hscrollbar(VALUE self)
+rg_hscrollbar(VALUE self)
 {
     return GOBJ2RVAL(gtk_scrolled_window_get_hscrollbar(_SELF(self)));
 }
 
 static VALUE
-scwin_get_vscrollbar(VALUE self)
+rg_vscrollbar(VALUE self)
 {
     return GOBJ2RVAL(gtk_scrolled_window_get_vscrollbar(_SELF(self)));
 }
@@ -88,7 +88,7 @@ scwin_get_vscrollbar(VALUE self)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-scwin_set_placement(VALUE self, VALUE corner_type)
+rg_set_placement(VALUE self, VALUE corner_type)
 {
     gtk_scrolled_window_set_placement(_SELF(self), 
                                       RVAL2GENUM(corner_type, GTK_TYPE_CORNER_TYPE));
@@ -96,39 +96,38 @@ scwin_set_placement(VALUE self, VALUE corner_type)
 }
 
 static VALUE
-scwin_unset_placement(VALUE self)
+rg_unset_placement(VALUE self)
 {
     gtk_scrolled_window_unset_placement(_SELF(self));
     return self;
 }
 
 static VALUE
-scwin_get_placement(VALUE self)
+rg_placement(VALUE self)
 {
     return GENUM2RVAL(gtk_scrolled_window_get_placement(_SELF(self)), 
                       GTK_TYPE_CORNER_TYPE);
 }
 #endif
 
-
 void 
 Init_gtk_scrolled_window(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", scwin_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_policy", scwin_set_policy, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "policy", scwin_get_policy, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_with_viewport", scwin_add_with_viewport, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_policy, 2);
+    RG_DEF_METHOD(policy, 0);
+    RG_DEF_METHOD(add_with_viewport, 1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "hscrollbar", scwin_get_hscrollbar, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "vscrollbar", scwin_get_vscrollbar, 0);
+    RG_DEF_METHOD(hscrollbar, 0);
+    RG_DEF_METHOD(vscrollbar, 0);
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_placement", scwin_unset_placement, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "placement", scwin_get_placement, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_placement", scwin_set_placement, 1);
+    RG_DEF_METHOD(unset_placement, 0);
+    RG_DEF_METHOD(placement, 0);
+    RG_DEF_METHOD(set_placement, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "placement");
 #endif
 }

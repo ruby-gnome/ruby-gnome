@@ -31,35 +31,35 @@
 #define _SELF(self) (RVAL2GOBJ(self))
 
 static VALUE
-tooltip_set_markup(VALUE self, VALUE markup)
+rg_set_markup(VALUE self, VALUE markup)
 {
     gtk_tooltip_set_markup(_SELF(self), RVAL2CSTR(markup));
     return self;
 }
 
 static VALUE
-tooltip_set_text(VALUE self, VALUE text)
+rg_set_text(VALUE self, VALUE text)
 {
     gtk_tooltip_set_text(_SELF(self), RVAL2CSTR(text));
     return self;
 }
 
 static VALUE
-tooltip_set_icon(VALUE self, VALUE icon)
+rg_set_icon(VALUE self, VALUE icon)
 {
     gtk_tooltip_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon)));
     return self;
 }
 
 static VALUE
-tooltip_set_icon_from_stock(VALUE self, VALUE stock_id, VALUE size)
+rg_set_icon_from_stock(VALUE self, VALUE stock_id, VALUE size)
 {
     gtk_tooltip_set_icon_from_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
 static VALUE
-tooltip_set_custom(VALUE self, VALUE custom_widget)
+rg_set_custom(VALUE self, VALUE custom_widget)
 {
     gtk_tooltip_set_custom(_SELF(self), GTK_WIDGET(RVAL2GOBJ(custom_widget)));
     return self;
@@ -72,11 +72,11 @@ Init_gtk_tooltip(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLTIP, "Tooltip", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", tooltip_set_markup, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_text", tooltip_set_text, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_icon", tooltip_set_icon, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_icon_from_stock", tooltip_set_icon_from_stock, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_custom", tooltip_set_custom, 1);
+    RG_DEF_METHOD(set_markup, 1);
+    RG_DEF_METHOD(set_text, 1);
+    RG_DEF_METHOD(set_icon, 1);
+    RG_DEF_METHOD(set_icon_from_stock, 2);
+    RG_DEF_METHOD(set_custom, 1);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

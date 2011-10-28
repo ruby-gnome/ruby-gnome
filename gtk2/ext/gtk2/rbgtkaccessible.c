@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cAccessible
 
 static VALUE
-access_connect_widget_destroyed(VALUE self)
+rg_connect_widget_destroyed(VALUE self)
 {
     gtk_accessible_connect_widget_destroyed(GTK_ACCESSIBLE(RVAL2GOBJ(self)));
     return self;
@@ -35,6 +35,5 @@ Init_gtk_accessible(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "connect_widget_destroyed", access_connect_widget_destroyed, 0);
+    RG_DEF_METHOD(connect_widget_destroyed, 0);
 }
-

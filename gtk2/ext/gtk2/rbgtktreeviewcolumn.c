@@ -26,7 +26,7 @@
 #define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
 
 static VALUE
-tvc_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     int i;
     int col;
@@ -65,7 +65,7 @@ tvc_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-tvc_pack_start(VALUE self, VALUE cell, VALUE expand)
+rg_pack_start(VALUE self, VALUE cell, VALUE expand)
 {
     G_CHILD_ADD(self, cell);
     gtk_tree_view_column_pack_start(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
@@ -73,7 +73,7 @@ tvc_pack_start(VALUE self, VALUE cell, VALUE expand)
 }
 
 static VALUE
-tvc_pack_end(VALUE self, VALUE cell, VALUE expand)
+rg_pack_end(VALUE self, VALUE cell, VALUE expand)
 {
     G_CHILD_ADD(self, cell);
     gtk_tree_view_column_pack_end(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
@@ -81,7 +81,7 @@ tvc_pack_end(VALUE self, VALUE cell, VALUE expand)
 }
 
 static VALUE
-tvc_clear(VALUE self)
+rg_clear(VALUE self)
 {
     G_CHILD_REMOVE_ALL(self);
     gtk_tree_view_column_clear(_SELF(self));
@@ -89,13 +89,13 @@ tvc_clear(VALUE self)
 }
 
 static VALUE
-tvc_get_cell_renderers(VALUE self)
+rg_cell_renderers(VALUE self)
 {
     return GLIST2ARYF(gtk_tree_view_column_get_cell_renderers(_SELF(self)));
 }
 
 static VALUE
-tvc_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
+rg_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
 {
     const gchar *name;
     if (SYMBOL_P(attribute)) {
@@ -109,7 +109,7 @@ tvc_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
 }
 
 static VALUE
-tvc_set_attributes(VALUE self, VALUE renderer, VALUE attributes)
+rg_set_attributes(VALUE self, VALUE renderer, VALUE attributes)
 {
     GtkTreeViewColumn *tvc;
     GtkCellRenderer *grenderer;
@@ -146,9 +146,8 @@ cell_data_func(GtkTreeViewColumn *tree_column, GtkCellRenderer *cell, GtkTreeMod
                GTKTREEITER2RVAL(iter));
 }
 
-
 static VALUE
-tvc_set_cell_data_func(VALUE self, VALUE renderer)
+rg_set_cell_data_func(VALUE self, VALUE renderer)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -159,21 +158,21 @@ tvc_set_cell_data_func(VALUE self, VALUE renderer)
 }
 
 static VALUE
-tvc_clear_attributes(VALUE self, VALUE cell)
+rg_clear_attributes(VALUE self, VALUE cell)
 {
     gtk_tree_view_column_clear_attributes(_SELF(self), RVAL2CELLRENDERER(cell));
     return self;
 }
 
 static VALUE
-tvc_clicked(VALUE self)
+rg_clicked(VALUE self)
 {
     gtk_tree_view_column_clicked(_SELF(self));
     return self;
 }
 
 static VALUE
-tvc_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, VALUE is_expanded)
+rg_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, VALUE is_expanded)
 {
     gtk_tree_view_column_cell_set_cell_data(_SELF(self), 
                                             GTK_TREE_MODEL(RVAL2GOBJ(model)),
@@ -184,7 +183,7 @@ tvc_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, V
 }
 
 static VALUE
-tvc_cell_get_size(VALUE self)
+rg_cell_size(VALUE self)
 {
     GdkRectangle cell_area;
     gint x_offset, y_offset, width, height;
@@ -213,7 +212,7 @@ tvc_cell_get_size(VALUE self)
 }
 
 static VALUE
-tvc_cell_is_visible(VALUE self)
+rg_cell_is_visible_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_view_column_cell_is_visible(_SELF(self)));
 }
@@ -221,7 +220,7 @@ tvc_cell_is_visible(VALUE self)
 #if GTK_CHECK_VERSION(2,2,0)
 
 static VALUE
-tvc_focus_cell(VALUE self, VALUE renderer)
+rg_focus_cell(VALUE self, VALUE renderer)
 {
     gtk_tree_view_column_focus_cell(_SELF(self), RVAL2CELLRENDERER(renderer));
 
@@ -232,7 +231,7 @@ tvc_focus_cell(VALUE self, VALUE renderer)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-tvc_queue_resize(VALUE self)
+rg_queue_resize(VALUE self)
 {
     gtk_tree_view_column_queue_resize(_SELF(self));
     return self;
@@ -241,39 +240,38 @@ tvc_queue_resize(VALUE self)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-tvc_get_tree_view(VALUE self)
+rg_tree_view(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_view_column_get_tree_view(_SELF(self)));
 }
 #endif
-
 
 void
 Init_gtk_treeviewcolumn(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN, "TreeViewColumn", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tvc_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pack_start", tvc_pack_start, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "pack_end", tvc_pack_end, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "clear", tvc_clear, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "cell_renderers", tvc_get_cell_renderers, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_attribute", tvc_add_attribute, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_attributes", tvc_set_attributes, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_cell_data_func", tvc_set_cell_data_func, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "clear_attributes", tvc_clear_attributes, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "clicked", tvc_clicked, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "cell_size", tvc_cell_get_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "cell_is_visible?", tvc_cell_is_visible, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(pack_start, 2);
+    RG_DEF_METHOD(pack_end, 2);
+    RG_DEF_METHOD(clear, 0);
+    RG_DEF_METHOD(cell_renderers, 0);
+    RG_DEF_METHOD(add_attribute, 3);
+    RG_DEF_METHOD(set_attributes, 2);
+    RG_DEF_METHOD(set_cell_data_func, 1);
+    RG_DEF_METHOD(clear_attributes, 1);
+    RG_DEF_METHOD(clicked, 0);
+    RG_DEF_METHOD(cell_set_cell_data, 4);
+    RG_DEF_METHOD(cell_size, 0);
+    RG_DEF_METHOD_P(cell_is_visible, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "focus_cell", tvc_focus_cell, 1);
+    RG_DEF_METHOD(focus_cell, 1);
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "queue_resize", tvc_queue_resize, 0);
+    RG_DEF_METHOD(queue_resize, 0);
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "tree_view", tvc_get_tree_view, 0);
+    RG_DEF_METHOD(tree_view, 0);
 #endif
     /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", RG_TARGET_NAMESPACE);

@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cInputDialog
 
 static VALUE
-idiag_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_input_dialog_new());
     return Qnil;
@@ -37,5 +37,5 @@ void
 Init_gtk_input_dialog(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_INPUT_DIALOG, "InputDialog", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", idiag_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

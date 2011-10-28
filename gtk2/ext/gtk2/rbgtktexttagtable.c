@@ -26,14 +26,14 @@
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 
 static VALUE
-txt_tt_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_text_tag_table_new());
     return Qnil;
 }
 
 static VALUE
-txt_tt_add(VALUE self, VALUE tag)
+rg_add(VALUE self, VALUE tag)
 {
     G_CHILD_ADD(self, tag);
     gtk_text_tag_table_add(_SELF(self), RVAL2TAG(tag));
@@ -41,7 +41,7 @@ txt_tt_add(VALUE self, VALUE tag)
 }
 
 static VALUE
-txt_tt_remove(VALUE self, VALUE tag)
+rg_remove(VALUE self, VALUE tag)
 {
     G_CHILD_REMOVE(self, tag);
     gtk_text_tag_table_remove(_SELF(self), RVAL2TAG(tag));
@@ -49,7 +49,7 @@ txt_tt_remove(VALUE self, VALUE tag)
 }
 
 static VALUE
-txt_tt_lookup(VALUE self, VALUE name)
+rg_lookup(VALUE self, VALUE name)
 {
     VALUE ret = Qnil;
     GtkTextTag* tag = gtk_text_tag_table_lookup(_SELF(self), RVAL2CSTR(name));
@@ -67,7 +67,7 @@ txt_tt_foreach_func(GtkTextTag *tag, gpointer func)
 }
 
 static VALUE
-txt_tt_foreach(VALUE self)
+rg_each(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     gtk_text_tag_table_foreach(_SELF(self), 
@@ -77,7 +77,7 @@ txt_tt_foreach(VALUE self)
 }
 
 static VALUE
-txt_tt_get_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(gtk_text_tag_table_get_size(_SELF(self)));
 }
@@ -87,12 +87,11 @@ Init_gtk_text_tag_table(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_TAG_TABLE, "TextTagTable", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", txt_tt_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add", txt_tt_add, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove", txt_tt_remove, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "lookup", txt_tt_lookup, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "lookup");
-    rb_define_method(RG_TARGET_NAMESPACE, "each", txt_tt_foreach, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", txt_tt_get_size, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(add, 1);
+    RG_DEF_METHOD(remove, 1);
+    RG_DEF_METHOD(lookup, 1);
+    RG_DEF_ALIAS("[]", "lookup");
+    RG_DEF_METHOD(each, 0);
+    RG_DEF_METHOD(size, 0);
 }
-

@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cVScale
 
 static VALUE
-vscale_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
@@ -50,5 +50,5 @@ void
 Init_gtk_vscale(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSCALE, "VScale", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vscale_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

@@ -30,7 +30,7 @@ static ID id_model;
 static ID id_select_path;
 
 static VALUE
-iview_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model;
     rb_scan_args(argc, argv, "01", &model);
@@ -45,7 +45,7 @@ iview_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-iview_get_path_at_pos(VALUE self, VALUE x, VALUE y)
+rg_get_path_at_pos(VALUE self, VALUE x, VALUE y)
 {
     return GTKTREEPATH2RVAL(gtk_icon_view_get_path_at_pos(_SELF(self), NUM2INT(x), NUM2INT(y)));
 }
@@ -57,7 +57,7 @@ iview_foreach_func(GtkIconView *iview, GtkTreePath *path, gpointer *func)
 }
 
 static VALUE
-iview_selected_foreach(VALUE self)
+rg_selected_each(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -68,7 +68,7 @@ iview_selected_foreach(VALUE self)
 }
 
 static VALUE
-iview_select_path(VALUE self, VALUE path)
+rg_select_path(VALUE self, VALUE path)
 {
     G_CHILD_SET(self, id_select_path, path);
     gtk_icon_view_select_path(_SELF(self), RVAL2GTKTREEPATH(path));
@@ -76,21 +76,21 @@ iview_select_path(VALUE self, VALUE path)
 }
 
 static VALUE
-iview_unselect_path(VALUE self, VALUE path)
+rg_unselect_path(VALUE self, VALUE path)
 {
     G_CHILD_UNSET(self, id_select_path);
     gtk_icon_view_unselect_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
- 
+
 static VALUE
-iview_path_is_selected(VALUE self, VALUE path)
+rg_path_is_selected_p(VALUE self, VALUE path)
 {
     return CBOOL2RVAL(gtk_icon_view_path_is_selected(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
-iview_get_selected_items(VALUE self)
+rg_selected_items(VALUE self)
 {
     GList* list = gtk_icon_view_get_selected_items(_SELF(self));
     VALUE ret = GLIST2ARY2(list, GTK_TYPE_TREE_PATH);
@@ -98,9 +98,9 @@ iview_get_selected_items(VALUE self)
     g_list_free(list);
     return ret;
 }
- 
+
 static VALUE
-iview_item_activated(VALUE self, VALUE path)
+rg_item_activated(VALUE self, VALUE path)
 {
     gtk_icon_view_item_activated(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
@@ -109,13 +109,13 @@ iview_item_activated(VALUE self, VALUE path)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-iview_create_drag_icon(VALUE self, VALUE path)
+rg_create_drag_icon(VALUE self, VALUE path)
 {
     return GOBJ2RVAL(gtk_icon_view_create_drag_icon(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
-iview_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
+rg_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
 {
     GtkIconView *icon_view = _SELF(self);
     GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
@@ -130,7 +130,7 @@ iview_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
 }
 
 static VALUE
-iview_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
+rg_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
     GtkIconView *icon_view = _SELF(self);
     GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
@@ -146,7 +146,7 @@ iview_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbta
 }
 
 static VALUE
-iview_cursor(VALUE self)
+rg_cursor(VALUE self)
 {
     GtkTreePath* path;
     GtkCellRenderer* cell;
@@ -155,7 +155,7 @@ iview_cursor(VALUE self)
 }
 
 static VALUE
-iview_get_dest_item_at_pos(VALUE self, VALUE drag_x, VALUE drag_y)
+rg_get_dest_item(VALUE self, VALUE drag_x, VALUE drag_y)
 {
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
@@ -165,7 +165,7 @@ iview_get_dest_item_at_pos(VALUE self, VALUE drag_x, VALUE drag_y)
 }
 
 static VALUE
-iview_drag_dest_item(VALUE self)
+rg_drag_dest_item(VALUE self)
 {
     GtkTreePath* path;
     GtkIconViewDropPosition pos;
@@ -175,7 +175,7 @@ iview_drag_dest_item(VALUE self)
 }
 
 static VALUE
-iview_get_item_at_pos(VALUE self, VALUE x, VALUE y)
+rg_get_item(VALUE self, VALUE x, VALUE y)
 {
     GtkTreePath* path;
     GtkCellRenderer* cell;
@@ -184,7 +184,7 @@ iview_get_item_at_pos(VALUE self, VALUE x, VALUE y)
 }
 
 static VALUE
-iview_visible_range(VALUE self)
+rg_visible_range(VALUE self)
 {
     GtkTreePath* start_path;
     GtkTreePath* end_path;
@@ -196,7 +196,7 @@ iview_visible_range(VALUE self)
 }
 
 static VALUE
-iview_scroll_to_path(VALUE self, VALUE path, VALUE use_align, VALUE row_align, VALUE col_align)
+rg_scroll_to_path(VALUE self, VALUE path, VALUE use_align, VALUE row_align, VALUE col_align)
 {
     gtk_icon_view_scroll_to_path(_SELF(self),
                                  RVAL2GTKTREEPATH(path),
@@ -207,7 +207,7 @@ iview_scroll_to_path(VALUE self, VALUE path, VALUE use_align, VALUE row_align, V
 }
 
 static VALUE
-iview_set_cursor(VALUE self, VALUE path, VALUE cell, VALUE start_editing)
+rg_set_cursor(VALUE self, VALUE path, VALUE cell, VALUE start_editing)
 {
     gtk_icon_view_set_cursor(_SELF(self), RVAL2GTKTREEPATH(path),
                              NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RVAL2CBOOL(start_editing));
@@ -215,7 +215,7 @@ iview_set_cursor(VALUE self, VALUE path, VALUE cell, VALUE start_editing)
 }
 
 static VALUE
-iview_set_drag_dest_item(VALUE self, VALUE path, VALUE pos)
+rg_set_drag_dest_item(VALUE self, VALUE path, VALUE pos)
 {
     gtk_icon_view_set_drag_dest_item(_SELF(self),
                                      NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
@@ -224,14 +224,14 @@ iview_set_drag_dest_item(VALUE self, VALUE path, VALUE pos)
 }
 
 static VALUE
-iview_unset_model_drag_dest(VALUE self)
+rg_unset_model_drag_dest(VALUE self)
 {
     gtk_icon_view_unset_model_drag_dest(_SELF(self));
     return self;
 }
 
 static VALUE
-iview_unset_model_drag_source(VALUE self)
+rg_unset_model_drag_source(VALUE self)
 {
     gtk_icon_view_unset_model_drag_source(_SELF(self));
     return self;
@@ -247,30 +247,30 @@ Init_gtk_iconview(void)
     id_model = rb_intern("model");
     id_select_path = rb_intern("select_path");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", iview_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_path_at_pos", iview_get_path_at_pos, 2);
-    rb_define_alias(RG_TARGET_NAMESPACE, "get_path", "get_path_at_pos");
-    rb_define_method(RG_TARGET_NAMESPACE, "selected_each", iview_selected_foreach, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "select_path", iview_select_path, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "unselect_path", iview_unselect_path, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "path_is_selected?", iview_path_is_selected, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "selected_items", iview_get_selected_items, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "item_activated", iview_item_activated, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(get_path_at_pos, 2);
+    RG_DEF_ALIAS("get_path", "get_path_at_pos");
+    RG_DEF_METHOD(selected_each, 0);
+    RG_DEF_METHOD(select_path, 1);
+    RG_DEF_METHOD(unselect_path, 1);
+    RG_DEF_METHOD_P(path_is_selected, 1);
+    RG_DEF_METHOD(selected_items, 0);
+    RG_DEF_METHOD(item_activated, 1);
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "create_drag_icon", iview_create_drag_icon, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "enable_model_drag_source", iview_enable_model_drag_source, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "cursor", iview_cursor, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_dest_item", iview_get_dest_item_at_pos, 2); 
-    rb_define_method(RG_TARGET_NAMESPACE, "drag_dest_item", iview_drag_dest_item, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_item", iview_get_item_at_pos, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "visible_range", iview_visible_range, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to_path", iview_scroll_to_path, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor", iview_set_cursor, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_drag_dest_item", iview_set_drag_dest_item, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_model_drag_dest", iview_unset_model_drag_dest, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "unset_model_drag_source", iview_unset_model_drag_source, 0);
+    RG_DEF_METHOD(create_drag_icon, 1);
+    RG_DEF_METHOD(enable_model_drag_dest, 2);
+    RG_DEF_METHOD(enable_model_drag_source, 3);
+    RG_DEF_METHOD(cursor, 0);
+    RG_DEF_METHOD(get_dest_item, 2); 
+    RG_DEF_METHOD(drag_dest_item, 0);
+    RG_DEF_METHOD(get_item, 2);
+    RG_DEF_METHOD(visible_range, 0);
+    RG_DEF_METHOD(scroll_to_path, 4);
+    RG_DEF_METHOD(set_cursor, 3);
+    RG_DEF_METHOD(set_drag_dest_item, 2);
+    RG_DEF_METHOD(unset_model_drag_dest, 0);
+    RG_DEF_METHOD(unset_model_drag_source, 0);
 
     /* GtkIconViewDropPosition */
     G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", RG_TARGET_NAMESPACE);

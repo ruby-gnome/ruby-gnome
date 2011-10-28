@@ -29,14 +29,14 @@
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-po_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_print_operation_new());
     return Qnil;
 }
 
 static VALUE
-po_run(int argc, VALUE *argv, VALUE self)
+rg_run(int argc, VALUE *argv, VALUE self)
 {
     VALUE action, parent, rb_result;
     GtkPrintOperationResult result;
@@ -59,7 +59,7 @@ po_run(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-po_get_error(VALUE self)
+rg_error(VALUE self)
 {
     GError *error = NULL;
     gtk_print_operation_get_error(_SELF(self), &error);
@@ -67,13 +67,13 @@ po_get_error(VALUE self)
 }
 
 static VALUE
-po_is_finished(VALUE self)
+rg_finished_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_print_operation_is_finished(_SELF(self)));
 }
 
 static VALUE
-po_cancel(VALUE self)
+rg_cancel(VALUE self)
 {
     gtk_print_operation_cancel(_SELF(self));
     return self;
@@ -107,7 +107,7 @@ page_setup_done_cb(GtkPageSetup *page_setup, gpointer data)
 }
 
 static VALUE
-po_run_page_setup_dialog(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_run_page_setup_dialog(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE parent, page_setup, settings;
     rb_scan_args(argc, argv, "03", &parent, &page_setup, &settings);
@@ -138,14 +138,13 @@ Init_gtk_print_operation(void)
     G_DEF_ERROR(GTK_PRINT_ERROR, "PrintError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_PRINT_ERROR);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", po_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run", po_run, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "error", po_get_error, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "finished?", po_is_finished, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "cancel", po_cancel, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(run, -1);
+    RG_DEF_METHOD(error, 0);
+    RG_DEF_METHOD_P(finished, 0);
+    RG_DEF_METHOD(cancel, 0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "run_page_setup_dialog",
-                               po_run_page_setup_dialog, -1);
+    RG_DEF_SMETHOD(run_page_setup_dialog, -1);
 
     /* GtkPrintStatus */
     G_DEF_CLASS(GTK_TYPE_PRINT_STATUS, "Status", RG_TARGET_NAMESPACE);

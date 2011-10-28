@@ -20,45 +20,45 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define RG_TARGET_NAMESPACE cToolItem
 #define _SELF(self) (GTK_TOOL_ITEM(RVAL2GOBJ(self)))
 
 static VALUE
-toolitem_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_tool_item_new());
     return Qnil;
 }
 
 static VALUE
-toolitem_set_homogeneous(VALUE self, VALUE homogeneous)
+rg_set_homogeneous(VALUE self, VALUE homogeneous)
 {
     gtk_tool_item_set_homogeneous(_SELF(self), RVAL2CBOOL(homogeneous));
     return self;
 }
 static VALUE
-toolitem_get_homogeneous(VALUE self)
+rg_homogeneous_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_tool_item_get_homogeneous(_SELF(self)));
 }
 
 static VALUE
-toolitem_set_expand(VALUE self, VALUE expand)
+rg_set_expand(VALUE self, VALUE expand)
 {
     gtk_tool_item_set_expand(_SELF(self), RVAL2CBOOL(expand));
     return self;
 }
 static VALUE
-toolitem_get_expand(VALUE self)
+rg_expand_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_tool_item_get_expand(_SELF(self)));
 }
 
 static VALUE
-toolitem_set_tooltip(int argc, VALUE *argv, VALUE self)
+rg_set_tooltip(int argc, VALUE *argv, VALUE self)
 {
     VALUE tooltip, tip_text, tip_private;
 
@@ -71,55 +71,55 @@ toolitem_set_tooltip(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-toolitem_set_use_drag_window(VALUE self, VALUE use_drag_window)
+rg_set_use_drag_window(VALUE self, VALUE use_drag_window)
 {
     gtk_tool_item_set_use_drag_window(_SELF(self), RVAL2CBOOL(use_drag_window));
     return self;
 }
 static VALUE
-toolitem_get_use_drag_window(VALUE self)
+rg_use_drag_window_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_tool_item_get_use_drag_window(_SELF(self)));
 }
 
 static VALUE
-toolitem_get_icon_size(VALUE self)
+rg_icon_size(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_icon_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE
-toolitem_get_orientation(VALUE self)
+rg_orientation(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_orientation(_SELF(self)), GTK_TYPE_ORIENTATION);
 }
 
 static VALUE
-toolitem_get_toolbar_style(VALUE self)
+rg_toolbar_style(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_toolbar_style(_SELF(self)), GTK_TYPE_TOOLBAR_STYLE);
 }
 
 static VALUE
-toolitem_get_relief_style(VALUE self)
+rg_relief_style(VALUE self)
 {
     return GENUM2RVAL(gtk_tool_item_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
 }
 
 static VALUE
-toolitem_retrieve_proxy_menu_item(VALUE self)
+rg_retrieve_proxy_menu_item(VALUE self)
 {
     return GOBJ2RVAL(gtk_tool_item_retrieve_proxy_menu_item(_SELF(self)));
 }
 
 static VALUE
-toolitem_get_proxy_menu_item(VALUE self, VALUE menu_item_id)
+rg_get_proxy_menu_item(VALUE self, VALUE menu_item_id)
 {
     return GOBJ2RVAL(gtk_tool_item_get_proxy_menu_item(_SELF(self), RVAL2CSTR(menu_item_id)));
 }
 
 static VALUE
-toolitem_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
+rg_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
 {
     gtk_tool_item_set_proxy_menu_item(_SELF(self), RVAL2CSTR(menu_item_id),
                                       GTK_WIDGET(RVAL2GOBJ(menu_item)));
@@ -128,7 +128,7 @@ toolitem_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-toolitem_rebuild_menu(VALUE self)
+rg_rebuild_menu(VALUE self)
 {
     gtk_tool_item_rebuild_menu(_SELF(self));
     return self;
@@ -141,26 +141,26 @@ Init_gtk_toolitem(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", toolitem_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_homogeneous", toolitem_set_homogeneous, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_homogeneous, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "homogenous");
-    rb_define_method(RG_TARGET_NAMESPACE, "homogeneous?", toolitem_get_homogeneous, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_expand", toolitem_set_expand, 1);
+    RG_DEF_METHOD_P(homogeneous, 0);
+    RG_DEF_METHOD(set_expand, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "expand");
-    rb_define_method(RG_TARGET_NAMESPACE, "expand?", toolitem_get_expand, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tooltip", toolitem_set_tooltip, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_use_drag_window", toolitem_set_use_drag_window, 1);
+    RG_DEF_METHOD_P(expand, 0);
+    RG_DEF_METHOD(set_tooltip, -1);
+    RG_DEF_METHOD(set_use_drag_window, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "use_drag_window");
-    rb_define_method(RG_TARGET_NAMESPACE, "use_drag_window?", toolitem_get_use_drag_window, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "icon_size", toolitem_get_icon_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "orientation", toolitem_get_orientation, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "toolbar_style", toolitem_get_toolbar_style, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "relief_style", toolitem_get_relief_style, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "retrieve_proxy_menu_item", toolitem_retrieve_proxy_menu_item, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_proxy_menu_item", toolitem_get_proxy_menu_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_proxy_menu_item", toolitem_set_proxy_menu_item, 2);
+    RG_DEF_METHOD_P(use_drag_window, 0);
+    RG_DEF_METHOD(icon_size, 0);
+    RG_DEF_METHOD(orientation, 0);
+    RG_DEF_METHOD(toolbar_style, 0);
+    RG_DEF_METHOD(relief_style, 0);
+    RG_DEF_METHOD(retrieve_proxy_menu_item, 0);
+    RG_DEF_METHOD(get_proxy_menu_item, 1);
+    RG_DEF_METHOD(set_proxy_menu_item, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "rebuild_menu", toolitem_rebuild_menu, 0);
+    RG_DEF_METHOD(rebuild_menu, 0);
 #endif
 #endif
 }

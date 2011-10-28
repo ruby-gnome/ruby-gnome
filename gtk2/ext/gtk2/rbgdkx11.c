@@ -90,26 +90,26 @@ GdkWindow*  gdk_window_foreign_new_for_display
 */
 
 static VALUE
-rbx11_xid_table_lookup(int argc, VALUE *argv, VALUE self)
+rg_m_xid_table_lookup(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg[2];
     GdkPixmap* win = NULL;
-    
+
     rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
 
     switch(argc)
     {
       case 1:
-    	win = gdk_xid_table_lookup(NUM2UINT(arg[0]));
-	break;
+        win = gdk_xid_table_lookup(NUM2UINT(arg[0]));
+        break;
       case 2:
 #if GTK_CHECK_VERSION(2,2,0)
-    	win = gdk_xid_table_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
+        win = gdk_xid_table_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
 #else
-    	win = gdk_xid_table_lookup(NUM2UINT(arg[1])); 
+        win = gdk_xid_table_lookup(NUM2UINT(arg[1])); 
         rb_warn("Not supported in GTK+-2.0.x.");
 #endif
-    	break;
+        break;
     }
     if (win == NULL)
         return Qnil;
@@ -140,7 +140,7 @@ guint32     gdk_x11_get_server_time         (GdkWindow *window);
 */
 
 static VALUE
-rbx11_net_wm_supports(VALUE self, VALUE property)
+rg_m_net_wm_supports_p(VALUE self, VALUE property)
 {
     return CBOOL2RVAL(gdk_net_wm_supports(RVAL2ATOM(property)));
 }
@@ -191,7 +191,7 @@ Window      gdk_x11_get_default_root_xwindow
 */
 
 static VALUE
-rbx11_get_default_screen(VALUE self)
+rg_m_default_screen(VALUE self)
 {
     return INT2NUM(gdk_x11_get_default_screen());
 }
@@ -200,7 +200,7 @@ Display*    gdk_x11_get_default_xdisplay    (void);
 */
 
 static VALUE
-rbx11_grab_server(VALUE self)
+rg_m_grab_server(VALUE self)
 {
     gdk_x11_grab_server();
     return Qnil;
@@ -218,7 +218,7 @@ Screen*     gdk_x11_screen_get_xscreen      (GdkScreen *screen);
 */
 
 static VALUE
-rbx11_ungrab_server(VALUE self)
+rg_m_ungrab_server(VALUE self)
 {
     gdk_x11_ungrab_server();
     return Qnil;
@@ -251,12 +251,12 @@ Init_gtk_gdk_x11(void)
 #ifdef GDK_WINDOWING_X11
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "X11");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "xid_table_lookup", rbx11_xid_table_lookup, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "net_wm_supports?", rbx11_net_wm_supports, 1);
+    RG_DEF_MODFUNC(xid_table_lookup, -1);
+    RG_DEF_MODFUNC_P(net_wm_supports, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "default_screen", rbx11_get_default_screen, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "grab_server", rbx11_grab_server, 0);
-                                                                                
-    rb_define_module_function(RG_TARGET_NAMESPACE, "ungrab_server", rbx11_ungrab_server, 0);
+    RG_DEF_MODFUNC(default_screen, 0);
+    RG_DEF_MODFUNC(grab_server, 0);
+
+    RG_DEF_MODFUNC(ungrab_server, 0);
 #endif
 }

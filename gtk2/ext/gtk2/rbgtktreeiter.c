@@ -33,7 +33,7 @@ rbgtk_register_treeiter_set_value_func(GType gtype, rbgtkiter_set_value_func fun
 }
 
 static VALUE
-treeiter_first(VALUE self)
+rg_first_bang(VALUE self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
@@ -43,7 +43,7 @@ treeiter_first(VALUE self)
 }
 
 static VALUE
-treeiter_next(VALUE self)
+rg_next_bang(VALUE self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
@@ -57,7 +57,7 @@ treeiter_next(VALUE self)
 }
 
 static VALUE
-treeiter_get_value(VALUE self, VALUE column)
+rg_get_value(VALUE self, VALUE column)
 {
     GValue value = G_VALUE_INIT;
     GtkTreeIter* iter = _SELF(self);
@@ -73,7 +73,7 @@ treeiter_get_value(VALUE self, VALUE column)
 }
 
 static VALUE
-treeiter_children(VALUE self)
+rg_first_child(VALUE self)
 {
     GtkTreeIter child;
     GtkTreeIter* iter = _SELF(self);
@@ -84,7 +84,7 @@ treeiter_children(VALUE self)
 }
 
 static VALUE
-treeiter_get_path(VALUE self)
+rg_path(VALUE self)
 {
     VALUE retval = Qnil;
     GtkTreeIter* iter = _SELF(self);
@@ -96,7 +96,7 @@ treeiter_get_path(VALUE self)
 }
 
 static VALUE
-treeiter_has_child(VALUE self)
+rg_has_child_p(VALUE self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
@@ -104,7 +104,7 @@ treeiter_has_child(VALUE self)
 }
 
 static VALUE
-treeiter_n_children(VALUE self)
+rg_n_children(VALUE self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
@@ -112,7 +112,7 @@ treeiter_n_children(VALUE self)
 }
 
 static VALUE
-treeiter_nth_child(VALUE self, VALUE n)
+rg_nth_child(VALUE self, VALUE n)
 {
     GtkTreeIter child;
     GtkTreeIter* iter = _SELF(self);
@@ -123,7 +123,7 @@ treeiter_nth_child(VALUE self, VALUE n)
 }
 
 static VALUE
-treeiter_parent(VALUE self)
+rg_parent(VALUE self)
 {
     GtkTreeIter parent;
     GtkTreeIter* iter = _SELF(self);
@@ -134,7 +134,7 @@ treeiter_parent(VALUE self)
 }
 
 static VALUE
-treeiter_set_value(VALUE self, VALUE column, VALUE value)
+rg_set_value(VALUE self, VALUE column, VALUE value)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
@@ -158,14 +158,14 @@ treeiter_set_value(VALUE self, VALUE column, VALUE value)
 }
 
 static VALUE
-treeiter_set_value_eql(VALUE self, VALUE column, VALUE value)
+rg_operator_treeiter_set_value_eql(VALUE self, VALUE column, VALUE value)
 {
-    treeiter_set_value(self, column, value);
+    rg_set_value(self, column, value);
     return value;
 }
 
 static VALUE
-treeiter_eql(VALUE self, VALUE other)
+rg_operator_treeiter_eql(VALUE self, VALUE other)
 {
     gint i, num1, num2;
     GtkTreeIter* iter1 = _SELF(self);
@@ -205,7 +205,7 @@ treeiter_eql(VALUE self, VALUE other)
         VALUE ret1, ret2;
         gtk_tree_model_get_value(model1, iter1, i, &gval1);
         gtk_tree_model_get_value(model2, iter2, i, &gval2);
-        
+
         ret1 = GVAL2RVAL(&gval1);
         ret2 = GVAL2RVAL(&gval2);
         g_value_unset(&gval1);
@@ -218,7 +218,7 @@ treeiter_eql(VALUE self, VALUE other)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-treeiter_to_string(VALUE self)
+rg_to_str(VALUE self)
 {
     GtkTreeIter* iter = _SELF(self);
     GtkTreeModel* model = (GtkTreeModel*)iter->user_data3;
@@ -235,21 +235,21 @@ Init_gtk_treeiter(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "first!", treeiter_first, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "next!", treeiter_next, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_value", treeiter_get_value, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_value");
-    rb_define_method(RG_TARGET_NAMESPACE, "first_child", treeiter_children, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "path", treeiter_get_path, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_child?", treeiter_has_child, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "n_children", treeiter_n_children, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "nth_child", treeiter_nth_child, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "parent", treeiter_parent, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_value", treeiter_set_value, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "[]=", treeiter_set_value_eql, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", treeiter_eql, 1);
+    RG_DEF_METHOD_BANG(first, 0);
+    RG_DEF_METHOD_BANG(next, 0);
+    RG_DEF_METHOD(get_value, 1);
+    RG_DEF_ALIAS("[]", "get_value");
+    RG_DEF_METHOD(first_child, 0);
+    RG_DEF_METHOD(path, 0);
+    RG_DEF_METHOD_P(has_child, 0);
+    RG_DEF_METHOD(n_children, 0);
+    RG_DEF_METHOD(nth_child, 1);
+    RG_DEF_METHOD(parent, 0);
+    RG_DEF_METHOD(set_value, 2);
+    RG_DEF_METHOD_OPERATOR("[]=", treeiter_set_value_eql, 2);
+    RG_DEF_METHOD_OPERATOR("==", treeiter_eql, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "to_str", treeiter_to_string, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_str");
+    RG_DEF_METHOD(to_str, 0);
+    RG_DEF_ALIAS("to_s", "to_str");
 #endif
 }

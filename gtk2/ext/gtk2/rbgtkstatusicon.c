@@ -27,7 +27,7 @@
 #define _SELF(w) (GTK_STATUS_ICON(RVAL2GOBJ(w)))
 
 static VALUE
-si_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_status_icon_new());
     return Qnil;
@@ -45,14 +45,14 @@ GtkStatusIcon* gtk_status_icon_new_from_icon_name
 */
 
 static VALUE
-si_set_tooltip(VALUE self, VALUE tooltip_text)
+rg_set_tooltip(VALUE self, VALUE tooltip_text)
 {
     gtk_status_icon_set_tooltip(_SELF(self), RVAL2CSTR(tooltip_text));
     return self;
 }
 
 static VALUE
-si_position_menu(VALUE self, VALUE menu)
+rg_position_menu(VALUE self, VALUE menu)
 {
     gint x, y;
     gboolean push_in;
@@ -63,7 +63,7 @@ si_position_menu(VALUE self, VALUE menu)
 }
 
 static VALUE
-si_get_geometry(VALUE self)
+rg_geometry(VALUE self)
 {
     GdkScreen* screen;
     GdkRectangle area;
@@ -86,10 +86,10 @@ Init_gtk_status_icon(void)
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", si_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tooltip", si_set_tooltip, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_tooltip, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "tooltip");
-    rb_define_method(RG_TARGET_NAMESPACE, "position_menu", si_position_menu, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "geometry", si_get_geometry, 0);
+    RG_DEF_METHOD(position_menu, 1);
+    RG_DEF_METHOD(geometry, 0);
 #endif
 }

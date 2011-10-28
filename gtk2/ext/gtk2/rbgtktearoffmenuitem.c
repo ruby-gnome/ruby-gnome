@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cTearoffMenuItem
 
 static VALUE
-tmitem_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_tearoff_menu_item_new());
     return Qnil;
@@ -37,5 +37,5 @@ void
 Init_gtk_tearoff_menu_item(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEAROFF_MENU_ITEM, "TearoffMenuItem", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tmitem_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

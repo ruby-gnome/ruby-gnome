@@ -26,7 +26,7 @@
 #define _SELF(s) (GTK_CELL_RENDERER_SPINNER(RVAL2GOBJ(s)))
 
 static VALUE
-crspinner_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_spinner_new());
     return Qnil;
@@ -39,7 +39,6 @@ Init_gtk_cellrendererspinner(void)
 {
 #if GTK_CHECK_VERSION(2,20,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_SPINNER, "CellRendererSpinner", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", crspinner_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 #endif
 }
-

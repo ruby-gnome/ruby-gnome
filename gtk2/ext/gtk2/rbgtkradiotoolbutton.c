@@ -20,7 +20,7 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define RG_TARGET_NAMESPACE cRadioToolButton
@@ -72,7 +72,7 @@ rbgtk_rval2gtkradiotoolbuttongslist(VALUE value)
 #define RVAL2GTKRADIOTOOLBUTTONGSLIST(value) rbgtk_rval2gtkradiotoolbuttongslist(value)
 
 static VALUE
-rbtn_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_or_stock_id, rbstock_id;
     GtkToolItem *widget;
@@ -131,7 +131,7 @@ Init_gtk_radiotoolbutton(void)
 #if GTK_CHECK_VERSION(2,4,0)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbtn_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", rbtn_get_group, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", rbtn_set_group, 1);
 #endif

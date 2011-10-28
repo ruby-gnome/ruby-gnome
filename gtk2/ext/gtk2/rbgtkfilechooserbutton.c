@@ -20,13 +20,13 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,6,0)
 
 #define RG_TARGET_NAMESPACE cFileChooserButton
 
 static VALUE
-filechooserbutton_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, action, backend;
     GtkWidget* widget;
@@ -58,6 +58,6 @@ Init_gtk_filechooserbutton(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_BUTTON, "FileChooserButton", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", filechooserbutton_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

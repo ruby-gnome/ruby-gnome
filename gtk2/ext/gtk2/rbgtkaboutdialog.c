@@ -20,14 +20,14 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,6,0)
 
 #define RG_TARGET_NAMESPACE cAboutDialog
 #define _SELF(self) (GTK_ABOUT_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-aboutdialog_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_about_dialog_new());
     return Qnil;
@@ -40,7 +40,7 @@ activate_link_func(GtkAboutDialog *about, const gchar *link, gpointer func)
 }
 
 static VALUE
-aboutdialog_s_set_email_hook(VALUE self)
+rg_s_set_email_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -49,14 +49,13 @@ aboutdialog_s_set_email_hook(VALUE self)
 }
 
 static VALUE
-aboutdialog_s_set_url_hook(VALUE self)
+rg_s_set_url_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_about_dialog_set_url_hook((GtkAboutDialogActivateLinkFunc)activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
-
 
 typedef struct {
     const char *name;
@@ -66,7 +65,7 @@ typedef struct {
 #define ABOUT_PROP_NUM (15)
 
 static VALUE
-aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
+rg_s_show(VALUE self, VALUE parent, VALUE props)
 {
     int i;
     VALUE ary;
@@ -75,7 +74,7 @@ aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
     Check_Type(props, T_HASH);
 
     ary = rb_funcall(props, rb_intern("to_a"), 0);
-    
+
     if (RARRAY_LEN(ary) > ABOUT_PROP_NUM)
         rb_raise(rb_eArgError, "Too many args.");
 
@@ -133,10 +132,10 @@ Init_gtk_aboutdialog(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", aboutdialog_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_email_hook", aboutdialog_s_set_email_hook, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_url_hook", aboutdialog_s_set_url_hook, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "show", aboutdialog_s_show_about_dialog, 2);
+    RG_DEF_SMETHOD(set_email_hook, 0);
+    RG_DEF_SMETHOD(set_url_hook, 0);
+    RG_DEF_SMETHOD(show, 2);
 #endif
 }

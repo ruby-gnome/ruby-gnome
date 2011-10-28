@@ -34,7 +34,7 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
     void* dat = NULL;
     gint fmt, len;
     GdkAtom ntype = RVAL2ATOM(type);
-    
+
     if(ntype == GDK_SELECTION_TYPE_INTEGER){
         int *i;
         i = ALLOC(int);
@@ -44,20 +44,20 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
         len = 1;
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
         dat = (void *)RVAL2CSTR(src);
-	if (NIL_P(size)) {
-	    fmt = sizeof(char) * 8;
-	    len = RSTRING_LEN(src);
-	} else {
-	    len = NUM2UINT(size);
-	    fmt = (RSTRING_LEN(src) / len) * 8;
-	}
+        if (NIL_P(size)) {
+            fmt = sizeof(char) * 8;
+            len = RSTRING_LEN(src);
+        } else {
+            len = NUM2UINT(size);
+            fmt = (RSTRING_LEN(src) / len) * 8;
+        }
     } else if(ntype == compound_text){
         guchar* str = (guchar*)dat;
         gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, &str, &len);
     } else if(type != Qnil && size != Qnil && src != Qnil) {
-    	dat = (void *)RVAL2CSTR(src);
-	fmt = NUM2INT(size);
-	len = (RSTRING_LEN(src) * sizeof(char) / fmt);
+        dat = (void *)RVAL2CSTR(src);
+        fmt = NUM2INT(size);
+        len = (RSTRING_LEN(src) * sizeof(char) / fmt);
     } else {
         rb_raise(rb_eArgError, "no supported type.");
     }
@@ -81,32 +81,32 @@ rbgtk_atom2selectiondata_free(GdkAtom type, void *dat)
 /************************************************************************/
 
 static VALUE
-gtkselectiondata_selection(VALUE self)
+rg_selection(VALUE self)
 {
     GdkAtom selection = _SELF(self)->selection;
     return BOXED2RVAL(&selection, GDK_TYPE_ATOM);
 }
 
 static VALUE
-gtkselectiondata_target(VALUE self)
+rg_target(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->target, GDK_TYPE_ATOM);
 }
 
 static VALUE
-gtkselectiondata_type(VALUE self)
+rg_type(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->type, GDK_TYPE_ATOM);
 }
 
 static VALUE
-gtkselectiondata_format(VALUE self)
+rg_format(VALUE self)
 {
     return INT2NUM(_SELF(self)->format);
 }
 
 static VALUE
-gtkselectiondata_data(VALUE self)
+rg_data(VALUE self)
 {
     return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const char*)_SELF(self)->data,
                                                    _SELF(self)->length));
@@ -114,7 +114,7 @@ gtkselectiondata_data(VALUE self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gtkselectiondata_display(VALUE self)
+rg_display(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->display, GDK_TYPE_DISPLAY);
 }
@@ -122,19 +122,19 @@ gtkselectiondata_display(VALUE self)
 
 /* Instance Methods */
 static VALUE
-gtkselectiondata_set(int argc, VALUE *argv, VALUE self)
+rg_set(int argc, VALUE *argv, VALUE self)
 {
     void* dat;
     VALUE type, src;
     gint fmt, len;
     GdkAtom ntype;
     VALUE size = Qnil;
-    
+
     if(3 == argc)
         rb_scan_args(argc, argv, "30", &type, &size, &src);
     else
         rb_scan_args(argc, argv, "20", &type, &src);
-    
+
     rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
 
     gtk_selection_data_set(_SELF(self), ntype, fmt, dat, len);
@@ -143,9 +143,9 @@ gtkselectiondata_set(int argc, VALUE *argv, VALUE self)
 
     return self;
 }
-    
+
 static VALUE
-gtkselectiondata_set_text(VALUE self, VALUE str)
+rg_set_text(VALUE self, VALUE str)
 {
     StringValue(str);
 
@@ -156,14 +156,14 @@ gtkselectiondata_set_text(VALUE self, VALUE str)
 }
 
 static VALUE
-gtkselectiondata_get_text(VALUE self)
+rg_text(VALUE self)
 {
     return CSTR2RVAL_FREE((gchar *)gtk_selection_data_get_text(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gtkselectiondata_set_pixbuf(VALUE self, VALUE pixbuf)
+rg_set_pixbuf(VALUE self, VALUE pixbuf)
 {
     if (!gtk_selection_data_set_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf))))
         rb_raise(rb_eRuntimeError, "the selection wasn't successfully set");
@@ -172,17 +172,17 @@ gtkselectiondata_set_pixbuf(VALUE self, VALUE pixbuf)
 }
 
 static VALUE
-gtkselectiondata_get_pixbuf(VALUE self)
+rg_pixbuf(VALUE self)
 {
     return GOBJ2RVAL(gtk_selection_data_get_pixbuf(_SELF(self)));
 }
 
 static VALUE
-gtkselectiondata_set_uris(VALUE self, VALUE uris)
+rg_set_uris(VALUE self, VALUE uris)
 {
     gboolean ret;
     gchar **guris;
-    
+
     guris = (gchar **)RVAL2STRV(uris);
     ret = gtk_selection_data_set_uris(_SELF(self), guris);
     g_free(guris);
@@ -193,7 +193,7 @@ gtkselectiondata_set_uris(VALUE self, VALUE uris)
 }
 
 static VALUE
-gtkselectiondata_get_uris(VALUE self)
+rg_uris(VALUE self)
 {
     VALUE ary = rb_ary_new();
     gchar** uris = gtk_selection_data_get_uris(_SELF(self));
@@ -211,7 +211,7 @@ gtkselectiondata_get_uris(VALUE self)
 #endif
 
 static VALUE
-gtkselectiondata_get_targets(VALUE self)
+rg_targets(VALUE self)
 {
     GdkAtom* targets;
     gint n_atoms;
@@ -230,26 +230,26 @@ gtkselectiondata_get_targets(VALUE self)
 }
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gtkselectiondata_targets_include_image(VALUE self, VALUE writable)
+rg_targets_include_image(VALUE self, VALUE writable)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_image(_SELF(self), RVAL2CBOOL(writable)));
 }
 #endif
 
 static VALUE
-gtkselectiondata_targets_include_text(VALUE self)
+rg_targets_include_text(VALUE self)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_text(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-gtkselectiondata_targets_include_uri(VALUE self)
+rg_targets_include_uri(VALUE self)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_uri(_SELF(self)));
 }
 static VALUE
-gtkselectiondata_targets_include_rich_text(VALUE self, VALUE buffer)
+rg_targets_include_rich_text(VALUE self, VALUE buffer)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_rich_text(_SELF(self),
                                                                    GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
@@ -265,34 +265,33 @@ Init_gtk_selectiondata(void)
 
     compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "selection", gtkselectiondata_selection, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "target", gtkselectiondata_target, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "type", gtkselectiondata_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "format", gtkselectiondata_format, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "data", gtkselectiondata_data, 0);
+    RG_DEF_METHOD(selection, 0);
+    RG_DEF_METHOD(target, 0);
+    RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(format, 0);
+    RG_DEF_METHOD(data, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "display", gtkselectiondata_display, 0);
+    RG_DEF_METHOD(display, 0);
 #endif 
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set", gtkselectiondata_set, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "text", gtkselectiondata_get_text, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_text", gtkselectiondata_set_text, 1);
+    RG_DEF_METHOD(set, -1);
+    RG_DEF_METHOD(text, 0);
+    RG_DEF_METHOD(set_text, 1);
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf", gtkselectiondata_get_pixbuf, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_pixbuf", gtkselectiondata_set_pixbuf, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "uris", gtkselectiondata_get_uris, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_uris", gtkselectiondata_set_uris, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "targets_include_image", gtkselectiondata_targets_include_image, 1);
+    RG_DEF_METHOD(pixbuf, 0);
+    RG_DEF_METHOD(set_pixbuf, 1);
+    RG_DEF_METHOD(uris, 0);
+    RG_DEF_METHOD(set_uris, 1);
+    RG_DEF_METHOD(targets_include_image, 1);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "targets", gtkselectiondata_get_targets, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "targets_include_text", gtkselectiondata_targets_include_text, 0);
+    RG_DEF_METHOD(targets, 0);
+    RG_DEF_METHOD(targets_include_text, 0);
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "targets_include_uri", gtkselectiondata_targets_include_uri, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "targets_include_rich_text", gtkselectiondata_targets_include_rich_text, 1);
+    RG_DEF_METHOD(targets_include_uri, 0);
+    RG_DEF_METHOD(targets_include_rich_text, 1);
 #endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 } 
-

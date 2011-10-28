@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cVButtonBox
 
 static VALUE
-vbbox_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_vbutton_box_new());
     return Qnil;
@@ -38,5 +38,5 @@ Init_gtk_vbutton_box(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VBUTTON_BOX, "VButtonBox", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vbbox_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

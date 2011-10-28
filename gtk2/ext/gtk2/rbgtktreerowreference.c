@@ -60,11 +60,11 @@ static ID id_model;
 static ID id_path;
 
 static VALUE
-treerowref_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
   VALUE proxy, model, path;
   GtkTreeRowReference* ref;
-    
+
   if (argc == 3){
     rb_scan_args(argc, argv, "3", &proxy, &model, &path);
     G_CHILD_SET(self, id_proxy, proxy);
@@ -81,14 +81,13 @@ treerowref_initialize(int argc, VALUE *argv, VALUE self)
 
   G_CHILD_SET(self, id_model, model);
   G_CHILD_SET(self, id_path, path);
-  
+
   G_INITIALIZE(self, ref);
   return Qnil;
 }
 
-
 static VALUE
-treerowref_get_path(VALUE self)
+rg_path(VALUE self)
 {
     VALUE ret = GTKTREEPATH2RVAL(gtk_tree_row_reference_get_path(_SELF(self)));
     G_CHILD_SET(self, id_path, ret);
@@ -97,7 +96,7 @@ treerowref_get_path(VALUE self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-treerowref_get_model(VALUE self)
+rg_model(VALUE self)
 {
     VALUE ret = GOBJ2RVAL(gtk_tree_row_reference_get_model(_SELF(self)));
     G_CHILD_SET(self, id_model, ret);
@@ -106,27 +105,27 @@ treerowref_get_model(VALUE self)
 #endif
 
 static VALUE
-treerowref_valid(VALUE self)
+rg_valid_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_tree_row_reference_valid(_SELF(self)));
 }
 
 static VALUE
-treerowref_s_inserted(VALUE self, VALUE proxy, VALUE path)
+rg_s_inserted(VALUE self, VALUE proxy, VALUE path)
 {
     gtk_tree_row_reference_inserted(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treerowref_s_deleted(VALUE self, VALUE proxy, VALUE path)
+rg_s_deleted(VALUE self, VALUE proxy, VALUE path)
 {
     gtk_tree_row_reference_deleted(RVAL2GOBJ(proxy), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treerowref_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VALUE rbnew_order)
+rg_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VALUE rbnew_order)
 {
     GObject *proxy = RVAL2GOBJ(rbproxy);
     GtkTreePath *path = RVAL2GTKTREEPATH(rbpath);
@@ -146,7 +145,7 @@ treerowref_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VA
                  n, columns);
     }
     */
-  
+
     gtk_tree_row_reference_reordered(proxy, path, iter, new_order);
 
     g_free(new_order);
@@ -158,20 +157,19 @@ void
 Init_gtk_treerowreference(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
-  
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", treerowref_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "path", treerowref_get_path, 0);
+
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(path, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "model", treerowref_get_model, 0);
+    RG_DEF_METHOD(model, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "valid?", treerowref_valid, 0);
-    
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "inserted", treerowref_s_inserted, 2);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "deleted", treerowref_s_deleted, 2);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "reordered", treerowref_s_reordered, 4);
+    RG_DEF_METHOD_P(valid, 0);
+
+    RG_DEF_SMETHOD(inserted, 2);
+    RG_DEF_SMETHOD(deleted, 2);
+    RG_DEF_SMETHOD(reordered, 4);
 
     id_proxy = rb_intern("proxy");
     id_model = rb_intern("model");
     id_path = rb_intern("path");
 }
-

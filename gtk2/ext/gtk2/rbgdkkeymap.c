@@ -25,19 +25,19 @@
 #define _SELF(s) GDK_KEYMAP(RVAL2GOBJ(s))
 
 static VALUE
-gdkkeymap_s_get_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
   return GOBJ2RVAL(gdk_keymap_get_default());
 }
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkkeymap_s_get_for_display(G_GNUC_UNUSED VALUE self, VALUE display)
+rg_s_for_display(G_GNUC_UNUSED VALUE self, VALUE display)
 {
   return GOBJ2RVAL(gdk_keymap_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display))));
 }
 #endif
 static VALUE
-gdkkeymap_lookup_key(VALUE self, VALUE keycode, VALUE group, VALUE level)
+rg_lookup_key(VALUE self, VALUE keycode, VALUE group, VALUE level)
 {
   GdkKeymapKey key;
 
@@ -49,7 +49,7 @@ gdkkeymap_lookup_key(VALUE self, VALUE keycode, VALUE group, VALUE level)
 }
 
 static VALUE
-gdkkeymap_translate_keyboard_state(VALUE self, VALUE hardware_keycode, VALUE state, VALUE group)
+rg_translate_keyboard_state(VALUE self, VALUE hardware_keycode, VALUE state, VALUE group)
 {
   guint keyval;
   gint effective_group, level;
@@ -68,7 +68,7 @@ gdkkeymap_translate_keyboard_state(VALUE self, VALUE hardware_keycode, VALUE sta
 }
 
 static VALUE
-gdkkeymap_get_entries_for_keyval(VALUE self, VALUE keyval)
+rg_get_entries_for_keyval(VALUE self, VALUE keyval)
 {
   GdkKeymapKey* keys;
   gint n_keys;
@@ -93,7 +93,7 @@ gdkkeymap_get_entries_for_keyval(VALUE self, VALUE keyval)
 }
 
 static VALUE
-gdkkeymap_get_entries_for_keycode(VALUE self, VALUE hardware_keycode)
+rg_get_entries_for_keycode(VALUE self, VALUE hardware_keycode)
 {
   GdkKeymapKey* keys;
   guint* keyvals;
@@ -119,14 +119,14 @@ gdkkeymap_get_entries_for_keycode(VALUE self, VALUE hardware_keycode)
 }
 
 static VALUE
-gdkkeymap_get_direction(VALUE self)
+rg_direction(VALUE self)
 {
   return GENUM2RVAL(gdk_keymap_get_direction(_SELF(self)), PANGO_TYPE_DIRECTION);
 }
 
 #if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
-gdkkeymap_have_bidi_layouts(VALUE self)
+rg_have_bidi_layouts_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_keymap_have_bidi_layouts(_SELF(self)));
 }
@@ -137,18 +137,17 @@ Init_gtk_gdk_keymap(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", gdkkeymap_s_get_default, 0);
+    RG_DEF_SMETHOD(default, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_display", gdkkeymap_s_get_for_display, 0);
+    RG_DEF_SMETHOD(for_display, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "lookup_key", gdkkeymap_lookup_key, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "translate_keyboard_state", gdkkeymap_translate_keyboard_state, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_entries_for_keyval", gdkkeymap_get_entries_for_keyval, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_entries_for_keycode", gdkkeymap_get_entries_for_keycode, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "direction", gdkkeymap_get_direction, 0);
+    RG_DEF_METHOD(lookup_key, 3);
+    RG_DEF_METHOD(translate_keyboard_state, 3);
+    RG_DEF_METHOD(get_entries_for_keyval, 1);
+    RG_DEF_METHOD(get_entries_for_keycode, 1);
+    RG_DEF_METHOD(direction, 0);
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "have_bidi_layouts?",
-		     gdkkeymap_have_bidi_layouts, 0);
+    RG_DEF_METHOD_P(have_bidi_layouts, 0);
 #endif
 
 #ifdef GDK_WINDOWING_X11

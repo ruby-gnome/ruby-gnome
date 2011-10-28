@@ -31,7 +31,7 @@
 #endif
 
 static VALUE
-pud_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget *dialog;
     VALUE title, parent;
@@ -45,7 +45,7 @@ pud_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-pud_add_custom_tab(VALUE self, VALUE child, VALUE tab_label)
+rg_add_custom_tab(VALUE self, VALUE child, VALUE tab_label)
 {
     gtk_print_unix_dialog_add_custom_tab(_SELF(self),
                                          RVAL2GOBJ(child),
@@ -54,7 +54,7 @@ pud_add_custom_tab(VALUE self, VALUE child, VALUE tab_label)
 }
 
 static VALUE
-pud_set_manual_capabilities(VALUE self, VALUE rb_capabilities)
+rg_set_manual_capability(VALUE self, VALUE rb_capabilities)
 {
     GtkPrintCapabilities capabilities;
 
@@ -71,12 +71,11 @@ Init_gtk_print_unix_dialog(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
                                          "PrintUnixDialog", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", pud_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_custom_tab", pud_add_custom_tab, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_manual_capability",
-                     pud_set_manual_capabilities, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "settings", "print_settings");
-    rb_define_alias(RG_TARGET_NAMESPACE, "set_settings", "set_print_settings");
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(add_custom_tab, 2);
+    RG_DEF_METHOD(set_manual_capability, 1);
+    RG_DEF_ALIAS("settings", "print_settings");
+    RG_DEF_ALIAS("set_settings", "set_print_settings");
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

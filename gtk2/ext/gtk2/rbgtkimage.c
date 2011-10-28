@@ -25,7 +25,7 @@
 #define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
 
 static VALUE
-image_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GType gtype;
@@ -66,7 +66,7 @@ image_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-image_set(int argc, VALUE *argv, VALUE self)
+rg_set(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GType gtype;
@@ -90,7 +90,7 @@ image_set(int argc, VALUE *argv, VALUE self)
                                      GDK_BITMAP(RVAL2GOBJ(arg2)));
         } else if (gtype == GDK_TYPE_PIXBUF){
             gtk_image_set_from_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(arg1)));
-            
+
         } else if (gtype == GDK_TYPE_PIXMAP){
             gtk_image_set_from_pixmap(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(arg1)),
                                       GDK_BITMAP(RVAL2GOBJ(arg2)));
@@ -110,7 +110,7 @@ image_set(int argc, VALUE *argv, VALUE self)
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-image_clear(VALUE self)
+rg_clear(VALUE self)
 {
     gtk_image_clear(_SELF(self));
     return self;
@@ -121,10 +121,10 @@ void
 Init_gtk_image(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", image_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set", image_set, -1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set, -1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "clear", image_clear, 0);
+    RG_DEF_METHOD(clear, 0);
 #endif
 
     /* GtkImageType */

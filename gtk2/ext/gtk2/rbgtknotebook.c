@@ -30,14 +30,14 @@
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
 
 static VALUE
-note_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_notebook_new());
     return Qnil;
 }
 
 static VALUE
-note_append_page(int argc, VALUE *argv, VALUE self)
+rg_append_page(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, label;
 
@@ -51,10 +51,10 @@ note_append_page(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-note_append_page_menu(int argc, VALUE *argv, VALUE self)
+rg_append_page_menu(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, tab_label, menu_label;
-    
+
     rb_scan_args(argc, argv, "12", &child, &tab_label, &menu_label);
     gtk_notebook_append_page_menu(_SELF(self),
                                   RVAL2WIDGET(child),
@@ -65,7 +65,7 @@ note_append_page_menu(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-note_prepend_page(int argc, VALUE *argv, VALUE self)
+rg_prepend_page(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, label;
 
@@ -77,7 +77,7 @@ note_prepend_page(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-note_prepend_page_menu(int argc, VALUE *argv, VALUE self)
+rg_prepend_page_menu(int argc, VALUE *argv, VALUE self)
 {
     VALUE child, tab_label, menu_label;
 
@@ -91,7 +91,7 @@ note_prepend_page_menu(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-note_insert_page(int argc, VALUE *argv, VALUE self)
+rg_insert_page(int argc, VALUE *argv, VALUE self)
 {
     VALUE pos, child, label;
 
@@ -104,7 +104,7 @@ note_insert_page(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-note_insert_page_menu(int argc, VALUE *argv, VALUE self)
+rg_insert_page_menu(int argc, VALUE *argv, VALUE self)
 {
     VALUE pos, child, tab_label, menu_label;
 
@@ -118,35 +118,35 @@ note_insert_page_menu(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-note_remove_page(VALUE self, VALUE pos)
+rg_remove_page(VALUE self, VALUE pos)
 {
     gtk_notebook_remove_page(_SELF(self), NUM2INT(pos));
     return self;
 }
 
 static VALUE
-note_page_num(VALUE self, VALUE child)
+rg_page_num(VALUE self, VALUE child)
 {
     return INT2FIX(gtk_notebook_page_num(_SELF(self),
                                          RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_next_page(VALUE self)
+rg_next_page(VALUE self)
 {
     gtk_notebook_next_page(_SELF(self));
     return self;
 }
 
 static VALUE
-note_prev_page(VALUE self)
+rg_prev_page(VALUE self)
 {
     gtk_notebook_prev_page(_SELF(self));
     return self;
 }
 
 static VALUE
-note_reorder_child(VALUE self, VALUE child, VALUE pos)
+rg_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
     gtk_notebook_reorder_child(_SELF(self), RVAL2WIDGET(child),
                                NUM2INT(pos));
@@ -154,14 +154,14 @@ note_reorder_child(VALUE self, VALUE child, VALUE pos)
 }
 
 static VALUE
-note_get_menu_label(VALUE self, VALUE child)
+rg_get_menu_label(VALUE self, VALUE child)
 {
     return GOBJ2RVAL(gtk_notebook_get_menu_label(_SELF(self),
                                                  RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_get_nth_page(VALUE self, VALUE page_num)
+rg_get_nth_page(VALUE self, VALUE page_num)
 {
     GtkWidget *page = gtk_notebook_get_nth_page(_SELF(self),
                                                 NUM2INT(page_num));
@@ -170,21 +170,21 @@ note_get_nth_page(VALUE self, VALUE page_num)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-note_get_n_pages(VALUE self)
+rg_n_pages(VALUE self)
 {
     return INT2NUM(gtk_notebook_get_n_pages(_SELF(self)));
 }
 #endif
 
 static VALUE
-note_get_tab_label(VALUE self, VALUE child)
+rg_get_tab_label(VALUE self, VALUE child)
 {
     return GOBJ2RVAL(gtk_notebook_get_tab_label(_SELF(self),
                                                 RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_query_tab_label_packing(VALUE self, VALUE child)
+rg_query_tab_label_packing(VALUE self, VALUE child)
 {
     gboolean expand, fill;
     GtkPackType pack_type;
@@ -201,7 +201,7 @@ note_query_tab_label_packing(VALUE self, VALUE child)
 }
 
 static VALUE
-note_set_menu_label(VALUE self, VALUE child, VALUE label)
+rg_set_menu_label(VALUE self, VALUE child, VALUE label)
 {
     gtk_notebook_set_menu_label(_SELF(self),
                                 RVAL2WIDGET(child),
@@ -210,7 +210,7 @@ note_set_menu_label(VALUE self, VALUE child, VALUE label)
 }
 
 static VALUE
-note_set_menu_label_text(VALUE self, VALUE child, VALUE text)
+rg_set_menu_label_text(VALUE self, VALUE child, VALUE text)
 {
     gtk_notebook_set_menu_label_text(_SELF(self),
                                      RVAL2WIDGET(child),
@@ -219,7 +219,7 @@ note_set_menu_label_text(VALUE self, VALUE child, VALUE text)
 }
 
 static VALUE
-note_set_tab_label(VALUE self, VALUE child, VALUE label)
+rg_set_tab_label(VALUE self, VALUE child, VALUE label)
 {
     gtk_notebook_set_tab_label(_SELF(self),
                                RVAL2WIDGET(child),
@@ -228,7 +228,7 @@ note_set_tab_label(VALUE self, VALUE child, VALUE label)
 }
 
 static VALUE
-note_set_tab_label_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE pack_type)
+rg_set_tab_label_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE pack_type)
 {
     gtk_notebook_set_tab_label_packing(_SELF(self),
                                        RVAL2WIDGET(child),
@@ -238,7 +238,7 @@ note_set_tab_label_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VA
 }
 
 static VALUE
-note_set_tab_label_text(VALUE self, VALUE child, VALUE text)
+rg_set_tab_label_text(VALUE self, VALUE child, VALUE text)
 {
     gtk_notebook_set_tab_label_text(_SELF(self),
                                     RVAL2WIDGET(child),
@@ -247,14 +247,14 @@ note_set_tab_label_text(VALUE self, VALUE child, VALUE text)
 }
 
 static VALUE
-note_get_menu_label_text(VALUE self, VALUE child)
+rg_get_menu_label_text(VALUE self, VALUE child)
 {
     return CSTR2RVAL(gtk_notebook_get_menu_label_text(_SELF(self), 
                                                       RVAL2WIDGET(child)));
 }
 
 static VALUE
-note_get_tab_label_text(VALUE self, VALUE child)
+rg_get_tab_label_text(VALUE self, VALUE child)
 {
     return CSTR2RVAL(gtk_notebook_get_tab_label_text(_SELF(self), 
                                                      RVAL2WIDGET(child)));
@@ -262,13 +262,13 @@ note_get_tab_label_text(VALUE self, VALUE child)
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
-note_get_tab_reorderable(VALUE self, VALUE child)
+rg_get_tab_reorderable(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_notebook_get_tab_reorderable(_SELF(self), 
                                                        GTK_WIDGET(RVAL2GOBJ(child))));
 }
 static VALUE
-note_set_tab_reorderable(VALUE self, VALUE child, VALUE reorderable)
+rg_set_tab_reorderable(VALUE self, VALUE child, VALUE reorderable)
 {
     gtk_notebook_set_tab_reorderable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                      RVAL2CBOOL(reorderable));
@@ -276,13 +276,13 @@ note_set_tab_reorderable(VALUE self, VALUE child, VALUE reorderable)
 }
 
 static VALUE
-note_get_tab_detachable(VALUE self, VALUE child)
+rg_get_tab_detachable(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_notebook_get_tab_detachable(_SELF(self), 
                                                       GTK_WIDGET(RVAL2GOBJ(child))));
 }
 static VALUE
-note_set_tab_detachable(VALUE self, VALUE child, VALUE detachable)
+rg_set_tab_detachable(VALUE self, VALUE child, VALUE detachable)
 {
     gtk_notebook_set_tab_detachable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                                      RVAL2CBOOL(detachable));
@@ -299,7 +299,7 @@ creation_func(GtkNotebook *source, GtkWidget *page, gint x, gint y, gpointer fun
 }
 
 static VALUE
-note_set_window_creation_hook(VALUE self)
+rg_s_set_window_creation_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -311,7 +311,7 @@ note_set_window_creation_hook(VALUE self)
 
 #if GTK_CHECK_VERSION(2,20,0)
 static VALUE
-note_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
+rg_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
 {
     gtk_notebook_set_action_widget(_SELF(self),
                                    RVAL2WIDGET(widget),
@@ -320,7 +320,7 @@ note_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
 }
 
 static VALUE
-note_get_action_widget(VALUE self, VALUE pack_type)
+rg_get_action_widget(VALUE self, VALUE pack_type)
 {
     return GOBJ2RVAL(gtk_notebook_get_action_widget(_SELF(self),
                                                     RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE)));
@@ -375,43 +375,43 @@ Init_gtk_notebook(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
     G_DEF_CLASS(GTK_TYPE_NOTEBOOK_PAGE, "NotebookPage", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", note_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "append_page", note_append_page, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "append_page_menu", note_append_page_menu, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend_page", note_prepend_page, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "prepend_page_menu", note_prepend_page_menu, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert_page", note_insert_page, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "insert_page_menu", note_insert_page_menu, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_page", note_remove_page, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "page_num", note_page_num, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "next_page", note_next_page, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "prev_page", note_prev_page, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "reorder_child", note_reorder_child, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_menu_label", note_get_menu_label, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_nth_page", note_get_nth_page, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(append_page, -1);
+    RG_DEF_METHOD(append_page_menu, -1);
+    RG_DEF_METHOD(prepend_page, -1);
+    RG_DEF_METHOD(prepend_page_menu, -1);
+    RG_DEF_METHOD(insert_page, -1);
+    RG_DEF_METHOD(insert_page_menu, -1);
+    RG_DEF_METHOD(remove_page, 1);
+    RG_DEF_METHOD(page_num, 1);
+    RG_DEF_METHOD(next_page, 0);
+    RG_DEF_METHOD(prev_page, 0);
+    RG_DEF_METHOD(reorder_child, 2);
+    RG_DEF_METHOD(get_menu_label, 1);
+    RG_DEF_METHOD(get_nth_page, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "n_pages", note_get_n_pages, 0);
+    RG_DEF_METHOD(n_pages, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_label", note_get_tab_label, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "query_tab_label_packing", note_query_tab_label_packing, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_menu_label", note_set_menu_label, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_menu_label_text", note_set_menu_label_text, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_label", note_set_tab_label, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_label_packing", note_set_tab_label_packing, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_label_text", note_set_tab_label_text, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_menu_label_text", note_get_menu_label_text, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_label_text", note_get_tab_label_text, 1);
+    RG_DEF_METHOD(get_tab_label, 1);
+    RG_DEF_METHOD(query_tab_label_packing, 1);
+    RG_DEF_METHOD(set_menu_label, 2);
+    RG_DEF_METHOD(set_menu_label_text, 2);
+    RG_DEF_METHOD(set_tab_label, 2);
+    RG_DEF_METHOD(set_tab_label_packing, 4);
+    RG_DEF_METHOD(set_tab_label_text, 2);
+    RG_DEF_METHOD(get_menu_label_text, 1);
+    RG_DEF_METHOD(get_tab_label_text, 1);
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_reorderable", note_get_tab_reorderable, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_reorderable", note_set_tab_reorderable, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_detachable", note_get_tab_detachable, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_detachable", note_set_tab_detachable, 2);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_window_creation_hook", note_set_window_creation_hook, 0);
+    RG_DEF_METHOD(get_tab_reorderable, 1);
+    RG_DEF_METHOD(set_tab_reorderable, 2);
+    RG_DEF_METHOD(get_tab_detachable, 1);
+    RG_DEF_METHOD(set_tab_detachable, 2);
+    RG_DEF_SMETHOD(set_window_creation_hook, 0);
 #endif
 #if GTK_CHECK_VERSION(2,20,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_action_widget", note_set_action_widget, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_action_widget", note_get_action_widget, 1);
+    RG_DEF_METHOD(set_action_widget, 2);
+    RG_DEF_METHOD(get_action_widget, 1);
 #endif
     /* GtkNotebookTab */
     rb_define_const(RG_TARGET_NAMESPACE, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);

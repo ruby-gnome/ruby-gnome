@@ -28,7 +28,7 @@
 #define _SELF(s) (GTK_LABEL(RVAL2GOBJ(s)))
 
 static VALUE
-label_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, with_mnemonic;
     GtkWidget* widget = NULL;
@@ -45,14 +45,14 @@ label_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-label_set_text_only(VALUE self, VALUE text)
+rg_operator_label_set_text_only(VALUE self, VALUE text)
 {
     gtk_label_set_text(_SELF(self), RVAL2CSTR(text));
     return text;
 }
 
 static VALUE
-label_set_text(int argc, VALUE *argv, VALUE self)
+rg_set_text(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, with_mnemonic;
 
@@ -66,14 +66,14 @@ label_set_text(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-label_set_markup_only(VALUE self, VALUE text)
+rg_operator_label_set_markup_only(VALUE self, VALUE text)
 {
     gtk_label_set_markup(_SELF(self), RVAL2CSTR(text));
     return text;
 }
 
 static VALUE
-label_set_markup(int argc, VALUE *argv, VALUE self)
+rg_set_markup(int argc, VALUE *argv, VALUE self)
 {
     VALUE str, with_mnemonic;
     rb_scan_args(argc, argv, "02", &str, &with_mnemonic);
@@ -87,7 +87,7 @@ label_set_markup(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-label_get_layout_offsets(VALUE self)
+rg_layout_offsets(VALUE self)
 { 
     gint x, y;
     gtk_label_get_layout_offsets(_SELF(self), &x, &y);
@@ -95,26 +95,26 @@ label_get_layout_offsets(VALUE self)
 }
 
 static VALUE
-label_get_text(VALUE self)
+rg_text(VALUE self)
 {
     return CSTR2RVAL(gtk_label_get_text(_SELF(self)));
 }
 
 static VALUE
-label_select_region(VALUE self, VALUE start_offset, VALUE end_offset)
+rg_select_region(VALUE self, VALUE start_offset, VALUE end_offset)
 {
     gtk_label_select_region(_SELF(self), NUM2INT(start_offset), NUM2INT(end_offset));
     return self;
 }
 
 static VALUE
-label_get_layout(VALUE self)
+rg_layout(VALUE self)
 {
     return GOBJ2RVAL(gtk_label_get_layout(_SELF(self)));
 }
 
 static VALUE
-label_get_selection_bounds(VALUE self)
+rg_selection_bounds(VALUE self)
 {
     gint start, end;
     gboolean ret = gtk_label_get_selection_bounds(_SELF(self), &start, &end);
@@ -126,14 +126,14 @@ Init_gtk_label(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", label_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "text", label_get_text, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_text", label_set_text, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "text=", label_set_text_only, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", label_set_markup, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "markup=", label_set_markup_only, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout_offsets", label_get_layout_offsets, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "select_region", label_select_region, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "layout", label_get_layout, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "selection_bounds", label_get_selection_bounds, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(text, 0);
+    RG_DEF_METHOD(set_text, -1);
+    RG_DEF_METHOD_OPERATOR("text=", label_set_text_only, 1);
+    RG_DEF_METHOD(set_markup, -1);
+    RG_DEF_METHOD_OPERATOR("markup=", label_set_markup_only, 1);
+    RG_DEF_METHOD(layout_offsets, 0);
+    RG_DEF_METHOD(select_region, 2);
+    RG_DEF_METHOD(layout, 0);
+    RG_DEF_METHOD(selection_bounds, 0);
 }

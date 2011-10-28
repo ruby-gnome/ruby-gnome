@@ -20,13 +20,13 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
 #define RG_TARGET_NAMESPACE cFontButton
 
 static VALUE
-fontbutton_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE fontname;
     GtkWidget* widget;
@@ -50,6 +50,6 @@ Init_gtk_fontbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_BUTTON, "FontButton", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fontbutton_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

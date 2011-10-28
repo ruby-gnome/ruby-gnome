@@ -26,7 +26,7 @@
 #define RG_TARGET_NAMESPACE mThreads
 
 static VALUE
-rbgdk_threads_init(VALUE self)
+rg_m_init(VALUE self)
 {
 #ifndef GDK_WINDOWING_WIN32
     if (!g_thread_supported()){
@@ -38,21 +38,21 @@ rbgdk_threads_init(VALUE self)
 }
 
 static VALUE
-rbgdk_threads_enter(VALUE self)
+rg_m_enter(VALUE self)
 {
     gdk_threads_enter();
     return self;
 }
 
 static VALUE
-rbgdk_threads_leave(VALUE self)
+rg_m_leave(VALUE self)
 {
     gdk_threads_leave();
     return self;
 }
 
 static VALUE
-rbgdk_threads_synchronize(G_GNUC_UNUSED VALUE self)
+rg_m_synchronize(G_GNUC_UNUSED VALUE self)
 {
     VALUE func = rb_block_proc();
     gdk_threads_enter();
@@ -69,9 +69,9 @@ Init_gtk_gdk_threads(void)
 #ifdef   G_THREADS_ENABLED
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Threads");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "init",  rbgdk_threads_init, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "enter", rbgdk_threads_enter, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "leave", rbgdk_threads_leave, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "synchronize", rbgdk_threads_synchronize, 0);
+    RG_DEF_MODFUNC(init, 0);
+    RG_DEF_MODFUNC(enter, 0);
+    RG_DEF_MODFUNC(leave, 0);
+    RG_DEF_MODFUNC(synchronize, 0);
 #endif
 }

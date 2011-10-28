@@ -29,28 +29,28 @@
 #define RG_TARGET_NAMESPACE cOptionMenu
 
 static VALUE
-omenu_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_option_menu_new());
     return Qnil;
 }
 
 static VALUE
-omenu_remove_menu(VALUE self)
+rg_remove_menu(VALUE self)
 {
     gtk_option_menu_remove_menu(GTK_OPTION_MENU(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-omenu_set_history(VALUE self, VALUE index)
+rg_set_history(VALUE self, VALUE index)
 {
     gtk_option_menu_set_history(GTK_OPTION_MENU(RVAL2GOBJ(self)), NUM2INT(index));
     return self;
 }
 
 static VALUE
-omenu_get_history(VALUE self)
+rg_history(VALUE self)
 {
     return INT2NUM(gtk_option_menu_get_history(GTK_OPTION_MENU(RVAL2GOBJ(self))));
 }
@@ -63,10 +63,10 @@ Init_gtk_option_menu(void)
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", omenu_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_menu", omenu_remove_menu, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_history", omenu_set_history, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(remove_menu, 0);
+    RG_DEF_METHOD(set_history, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "history");
-    rb_define_method(RG_TARGET_NAMESPACE, "history", omenu_get_history, 0);
+    RG_DEF_METHOD(history, 0);
 #endif
 }

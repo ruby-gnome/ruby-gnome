@@ -54,7 +54,7 @@ struct _GtkAccelGroupEntry
 };
 */
 static VALUE
-agentry_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GtkAccelGroupEntry key;
     G_INITIALIZE(self, &key);
@@ -62,19 +62,19 @@ agentry_initialize(VALUE self)
 }
 
 static VALUE
-agentry_get_accel_key(VALUE self)
+rg_accel_key(VALUE self)
 {
     return BOXED2RVAL(&_SELF(self)->key, GTK_TYPE_ACCEL_KEY);
 }
 
 static VALUE
-agentry_get_closure(VALUE self)
+rg_closure(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->closure, G_TYPE_CLOSURE);
 }
 
 static VALUE
-agentry_get_accel_path(VALUE self)
+rg_accel_path(VALUE self)
 {
     const gchar *quark_str = g_quark_to_string(_SELF(self)->accel_path_quark);
     return quark_str ? CSTR2RVAL(quark_str) : Qnil;
@@ -85,9 +85,9 @@ Init_gtk_accel_group_entry(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP_ENTRY, "AccelGroupEntry", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", agentry_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "accel_key", agentry_get_accel_key, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "closure", agentry_get_closure, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "accel_path", agentry_get_accel_path, 0);
+    RG_DEF_METHOD(accel_key, 0);
+    RG_DEF_METHOD(closure, 0);
+    RG_DEF_METHOD(accel_path, 0);
 }

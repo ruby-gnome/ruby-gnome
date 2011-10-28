@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE cHandleBox
 
 static VALUE
-hb_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_handle_box_new());
     return Qnil;
@@ -38,7 +38,7 @@ Init_gtk_handle_box(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HANDLE_BOX, "HandleBox", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", hb_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
     rb_undef_method(RG_TARGET_NAMESPACE, "shadow");
     rb_undef_method(RG_TARGET_NAMESPACE, "shadow=");
     rb_undef_method(RG_TARGET_NAMESPACE, "set_shadow");
