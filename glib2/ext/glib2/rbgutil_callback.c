@@ -174,6 +174,22 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
 
     return request.result;
 }
+
+#ifdef HAVE_RUBY_THREAD_HAS_GVL_P
+extern int ruby_thread_has_gvl_p(void);
+#endif
+
+#ifdef HAVE_RB_THREAD_CALL_WITH_GVL
+extern void *rb_thread_call_with_gvl(void *(*func)(void *), void *data1);
+
+static void *
+invoke_callback_with_gvl(void *arg)
+{
+    CallbackRequest *req = (CallbackRequest*)arg;
+    return (void *)rbgutil_protect(req->function, req->argument);
+}
+#endif
+
 #endif
 
 /**********************************************************************/
@@ -182,7 +198,18 @@ VALUE
 rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 {
 #ifdef HAVE_NATIVETHREAD
-    if (!ruby_native_thread_p()) {
+#ifdef HAVE_RUBY_THREAD_HAS_GVL_P
+    if (ruby_thread_has_gvl_p())
+        return rbgutil_protect(func, arg);
+#endif
+    if (ruby_native_thread_p()) {
+#ifdef HAVE_RB_THREAD_CALL_WITH_GVL
+        CallbackRequest req;
+        req.function = func;
+        req.argument = arg;
+        return (VALUE)rb_thread_call_with_gvl(invoke_callback_with_gvl, &req);
+#endif
+    } else {
         return invoke_callback_in_ruby_thread(func, arg);
     }
 #endif
