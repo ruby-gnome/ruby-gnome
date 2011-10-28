@@ -22,6 +22,8 @@
 
 #include "rbgtksourcemain.h"
 
+#define RG_TARGET_NAMESPACE cSourceBuffer
+
 /* Class: Gtk::SourceBuffer
  * Text buffer object for Gtk::SourceView.
  */
@@ -44,59 +46,32 @@
  * Returns: a newly created Gtk::SourceBuffer object.
  */
 static VALUE
-sourcebuffer_new(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-	VALUE val;
+    VALUE val;
 
-	rb_scan_args (argc, argv, "01", &val);
-	if (NIL_P (val)) {
-		G_INITIALIZE (self, gtk_source_buffer_new (NULL));
-	} else
-	    if (rb_obj_is_kind_of
-		(val, GTYPE2CLASS (GTK_TYPE_TEXT_TAG_TABLE))) {
-		G_INITIALIZE (self,
-			      gtk_source_buffer_new (GTK_TEXT_TAG_TABLE
-						     (RVAL2GOBJ (val))));
-	} else
-	    if (rb_obj_is_kind_of
-		(val, GTYPE2CLASS (GTK_TYPE_SOURCE_LANGUAGE))) {
-		G_INITIALIZE (self,
-			      gtk_source_buffer_new_with_language
-			      (GTK_SOURCE_LANGUAGE (RVAL2GOBJ (val))));
-	} else {
-		rb_raise (rb_eArgError,
-			  "invalid argument %s (expect nil, Gtk::TextTagTable or Gtk::SourceLanguage)",
-			  rb_class2name (CLASS_OF (val)));
-	}
-	return Qnil;
+    rb_scan_args (argc, argv, "01", &val);
+    if (NIL_P (val)) {
+        G_INITIALIZE (self, gtk_source_buffer_new (NULL));
+    } else
+        if (rb_obj_is_kind_of
+        (val, GTYPE2CLASS (GTK_TYPE_TEXT_TAG_TABLE))) {
+        G_INITIALIZE (self,
+                  gtk_source_buffer_new (GTK_TEXT_TAG_TABLE
+                             (RVAL2GOBJ (val))));
+    } else
+        if (rb_obj_is_kind_of
+        (val, GTYPE2CLASS (GTK_TYPE_SOURCE_LANGUAGE))) {
+        G_INITIALIZE (self,
+                  gtk_source_buffer_new_with_language
+                  (GTK_SOURCE_LANGUAGE (RVAL2GOBJ (val))));
+    } else {
+        rb_raise (rb_eArgError,
+              "invalid argument %s (expect nil, Gtk::TextTagTable or Gtk::SourceLanguage)",
+              rb_class2name (CLASS_OF (val)));
+    }
+    return Qnil;
 }
-
-/* Defined as properties.
-void                gtk_source_buffer_set_highlight_syntax
-                                                        (GtkSourceBuffer *buffer,
-                                                         gboolean highlight);
-gboolean            gtk_source_buffer_get_highlight_syntax
-                                                        (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_language      (GtkSourceBuffer *buffer,
-                                                         GtkSourceLanguage *language);
-GtkSourceLanguage*  gtk_source_buffer_get_language      (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_highlight_matching_brackets
-                                                        (GtkSourceBuffer *buffer,
-                                                         gboolean highlight);
-gboolean            gtk_source_buffer_get_highlight_matching_brackets
-                                                        (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_style_scheme  (GtkSourceBuffer *buffer,
-                                                         GtkSourceStyleScheme *scheme);
-GtkSourceStyleScheme* gtk_source_buffer_get_style_scheme
-                                                        (GtkSourceBuffer *buffer);
-gint                gtk_source_buffer_get_max_undo_levels
-                                                        (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_max_undo_levels
-                                                        (GtkSourceBuffer *buffer,
-                                                         gint max_undo_levels);
-gboolean            gtk_source_buffer_can_redo          (GtkSourceBuffer *buffer);
-gboolean            gtk_source_buffer_can_undo          (GtkSourceBuffer *buffer);
-*/
 
 /*
  * Method: redo!
@@ -107,10 +82,10 @@ gboolean            gtk_source_buffer_can_undo          (GtkSourceBuffer *buffer
  * Returns: self.
  */
 static VALUE
-sourcebuffer_redo(VALUE self)
+rg_redo_bang(VALUE self)
 {
-	gtk_source_buffer_redo (_SELF (self));
-	return self;
+    gtk_source_buffer_redo (_SELF (self));
+    return self;
 }
 
 /*
@@ -127,10 +102,10 @@ sourcebuffer_redo(VALUE self)
  * Returns: self.
  */
 static VALUE
-sourcebuffer_undo(VALUE self)
+rg_undo_bang(VALUE self)
 {
-	gtk_source_buffer_undo (_SELF (self));
-	return self;
+    gtk_source_buffer_undo (_SELF (self));
+    return self;
 }
 
 /*
@@ -149,14 +124,14 @@ sourcebuffer_undo(VALUE self)
  * Returns: self
  */
 static VALUE
-sourcebuffer_begin_not_undoable_action(VALUE self)
+rg_begin_not_undoable_action(VALUE self)
 {
     gtk_source_buffer_begin_not_undoable_action (_SELF (self));
 
     if (rb_block_given_p()) {
-	VALUE block = rb_block_proc ();
-	rb_funcall (block, rb_intern ("call"), 0);
-	gtk_source_buffer_end_not_undoable_action (_SELF (self));
+        VALUE block = rb_block_proc ();
+        rb_funcall (block, rb_intern ("call"), 0);
+        gtk_source_buffer_end_not_undoable_action (_SELF (self));
     }
     return self;
 }
@@ -171,12 +146,11 @@ sourcebuffer_begin_not_undoable_action(VALUE self)
  * Returns: self
  */
 static VALUE
-sourcebuffer_end_not_undoable_action(VALUE self)
+rg_end_not_undoable_action(VALUE self)
 {
     gtk_source_buffer_end_not_undoable_action (_SELF (self));
     return self;
 }
-
 
 /*
  * Method: not_undoable_action { ... }
@@ -193,15 +167,15 @@ sourcebuffer_end_not_undoable_action(VALUE self)
  * Returns: the return value of the provided block.
  */
 static VALUE
-sourcebuffer_not_undoable_action(VALUE self)
+rg_not_undoable_action(VALUE self)
 {
-	VALUE block, ret;
+    VALUE block, ret;
 
-	block = rb_block_proc ();
-	gtk_source_buffer_begin_not_undoable_action (_SELF (self));
-	ret = rb_funcall (block, rb_intern ("call"), 0);
-	gtk_source_buffer_end_not_undoable_action (_SELF (self));
-	return ret;
+    block = rb_block_proc ();
+    gtk_source_buffer_begin_not_undoable_action (_SELF (self));
+    ret = rb_funcall (block, rb_intern ("call"), 0);
+    gtk_source_buffer_end_not_undoable_action (_SELF (self));
+    return ret;
 }
 
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
@@ -235,23 +209,23 @@ sourcebuffer_not_undoable_action(VALUE self)
  * Returns: a new Gtk::SourceMark object, owned by the buffer.
  */
 static VALUE
-sourcebuffer_create_source_mark(int argc, VALUE *argv, VALUE self)
+rg_create_source_mark(int argc, VALUE *argv, VALUE self)
 {
-	VALUE name, category, where;
+    VALUE name, category, where;
 
-	if (argc == 2)
-		rb_scan_args (argc, argv, "21", &where, &category, &name);
-	else
-		rb_scan_args (argc, argv, "30", &name, &category, &where);
+    if (argc == 2)
+        rb_scan_args (argc, argv, "21", &where, &category, &name);
+    else
+        rb_scan_args (argc, argv, "30", &name, &category, &where);
 
-	return GOBJ2RVAL (gtk_source_buffer_create_source_mark (_SELF (self),
-							   RVAL2CSTR (name),
-							   RVAL2CSTR (category),
-							   RVAL2ITR (where)));
+    return GOBJ2RVAL (gtk_source_buffer_create_source_mark (_SELF (self),
+                               RVAL2CSTR (name),
+                               RVAL2CSTR (category),
+                               RVAL2ITR (where)));
 }
 
 static VALUE
-sourcebuffer_get_source_marks_at_line(int argc, VALUE *argv, VALUE self)
+rg_get_source_marks_at_line(int argc, VALUE *argv, VALUE self)
 {
     GSList *list, *p;
     VALUE line, category;
@@ -275,7 +249,7 @@ sourcebuffer_get_source_marks_at_line(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-sourcebuffer_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
+rg_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
 {
     GSList *list, *p;
     VALUE iter, category;
@@ -299,7 +273,7 @@ sourcebuffer_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-sourcebuffer_remove_source_marks(int argc, VALUE *argv, VALUE self)
+rg_remove_source_marks(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, category;
 
@@ -314,7 +288,7 @@ sourcebuffer_remove_source_marks(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-sourcebuffer_forward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
+rg_forward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 {
     VALUE iter, category;
 
@@ -327,7 +301,7 @@ sourcebuffer_forward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-sourcebuffer_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
+rg_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 {
     VALUE iter, category;
 
@@ -342,7 +316,7 @@ sourcebuffer_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
 static VALUE
-sourcebuffer_ensure_highlight(VALUE self, VALUE start, VALUE end)
+rg_ensure_highlight(VALUE self, VALUE start, VALUE end)
 {
     gtk_source_buffer_ensure_highlight (_SELF (self), RVAL2ITR (start), RVAL2ITR (end));
 
@@ -352,35 +326,25 @@ sourcebuffer_ensure_highlight(VALUE self, VALUE start, VALUE end)
 void
 Init_gtk_sourcebuffer ()
 {
-	VALUE cbuffer =
-	    G_DEF_CLASS (GTK_TYPE_SOURCE_BUFFER, "SourceBuffer", mGtk);
+    VALUE RG_TARGET_NAMESPACE =
+        G_DEF_CLASS (GTK_TYPE_SOURCE_BUFFER, "SourceBuffer", mGtk);
 
-	rb_define_method (cbuffer, "initialize", sourcebuffer_new, -1);
-	rb_define_method (cbuffer, "redo!", sourcebuffer_redo, 0);
-	rb_define_method (cbuffer, "undo!", sourcebuffer_undo, 0);
-	rb_define_method (cbuffer, "begin_not_undoable_action",
-			          sourcebuffer_begin_not_undoable_action, 0);
-	rb_define_method (cbuffer, "end_not_undoable_action",
-			          sourcebuffer_end_not_undoable_action, 0);
-	rb_define_method (cbuffer, "not_undoable_action",
-			          sourcebuffer_not_undoable_action, 0);
-	rb_define_alias (cbuffer, "non_undoable_action", "not_undoable_action");
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD_BANG(redo, 0);
+    RG_DEF_METHOD_BANG(undo, 0);
+    RG_DEF_METHOD(begin_not_undoable_action, 0);
+    RG_DEF_METHOD(end_not_undoable_action, 0);
+    RG_DEF_METHOD(not_undoable_action, 0);
+    RG_DEF_ALIAS("non_undoable_action", "not_undoable_action");
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-    rb_define_method (cbuffer, "create_source_mark",
-                      sourcebuffer_create_source_mark, -1);
-    rb_define_method (cbuffer, "get_source_marks_at_line",
-                      sourcebuffer_get_source_marks_at_line, -1);
-    rb_define_method (cbuffer, "get_source_marks_at_iter",
-                      sourcebuffer_get_source_marks_at_iter, -1);
-    rb_define_method (cbuffer, "remove_source_marks",
-                      sourcebuffer_remove_source_marks, -1);
-    rb_define_method (cbuffer, "forward_iter_to_source_mark",
-                      sourcebuffer_forward_iter_to_source_mark, -1);
-    rb_define_method (cbuffer, "backward_iter_to_source_mark",
-                      sourcebuffer_backward_iter_to_source_mark, -1);
+    RG_DEF_METHOD(create_source_mark, -1);
+    RG_DEF_METHOD(get_source_marks_at_line, -1);
+    RG_DEF_METHOD(get_source_marks_at_iter, -1);
+    RG_DEF_METHOD(remove_source_marks, -1);
+    RG_DEF_METHOD(forward_iter_to_source_mark, -1);
+    RG_DEF_METHOD(backward_iter_to_source_mark, -1);
 #endif
-    rb_define_method (cbuffer, "ensure_highlight",
-                      sourcebuffer_ensure_highlight, 2);
+    RG_DEF_METHOD(ensure_highlight, 2);
 
-	G_DEF_SETTERS (cbuffer);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }
