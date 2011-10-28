@@ -23,6 +23,7 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cMenuToolButton
 #define _SELF(self) (GTK_MENU_TOOL_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
@@ -70,9 +71,9 @@ void
 Init_gtk_menutoolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE gMenuToolButton = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);
 
-    rb_define_method(gMenuToolButton, "initialize", menutoolbutton_initialize, -1);
-    rb_define_method(gMenuToolButton, "set_arrow_tooltip", menutoolbutton_set_arrow_tooltip, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", menutoolbutton_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_arrow_tooltip", menutoolbutton_set_arrow_tooltip, -1);
 #endif
 }

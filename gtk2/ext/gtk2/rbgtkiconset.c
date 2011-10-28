@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIconSet
 #define _SELF(s) ((GtkIconSet*)RVAL2BOXED(s, GTK_TYPE_ICON_SET))
 
 static VALUE
@@ -80,11 +81,11 @@ icon_set_render_icon(int argc, VALUE *argv, VALUE self)
 void
 Init_gtk_icon_set(void)
 {
-    VALUE gIconSet = G_DEF_CLASS(GTK_TYPE_ICON_SET, "IconSet", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_SET, "IconSet", mGtk);
 
-    rb_define_method(gIconSet, "initialize", icon_set_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", icon_set_initialize, -1);
     
-    rb_define_method(gIconSet, "add_source", icon_set_add_source, 1);
-    rb_define_method(gIconSet, "sizes", icon_set_get_sizes, 0);
-    rb_define_method(gIconSet, "render_icon", icon_set_render_icon, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_source", icon_set_add_source, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "sizes", icon_set_get_sizes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_icon", icon_set_render_icon, -1);
 }

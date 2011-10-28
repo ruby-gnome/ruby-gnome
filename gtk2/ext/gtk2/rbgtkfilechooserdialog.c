@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cFileChooserDialog
 #define _SELF(self) GTK_FILE_CHOOSER_DIALOG(RVAL2GOBJ(self))
 
 static VALUE
@@ -58,9 +59,9 @@ Init_gtk_file_chooser_dialog(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gFileChoDiag = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_DIALOG, "FileChooserDialog", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_DIALOG, "FileChooserDialog", mGtk);
 
-    rb_define_method(gFileChoDiag, "initialize", fchodiag_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fchodiag_initialize, -1);
 
 #endif
 }

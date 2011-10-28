@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cPrintSettings
 #define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
 
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
@@ -685,7 +686,7 @@ void
 Init_gtk_print_settings(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPrintSettings;
+    VALUE RG_TARGET_NAMESPACE;
 
     s_string = ID2SYM(rb_intern("string"));
     s_bool = ID2SYM(rb_intern("bool"));
@@ -693,158 +694,158 @@ Init_gtk_print_settings(void)
     s_length = ID2SYM(rb_intern("length"));
     s_int = ID2SYM(rb_intern("int"));
 
-    gPrintSettings = G_DEF_CLASS(GTK_TYPE_PRINT_SETTINGS,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_SETTINGS,
                                  "PrintSettings", mGtk);
 
-    rb_include_module(gPrintSettings, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gPrintSettings, "initialize", ps_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_initialize, -1);
 #else
-    rb_define_method(gPrintSettings, "initialize", ps_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_initialize, 0);
 #endif
-    rb_define_method(gPrintSettings, "dup", ps_copy, 0);
-    rb_define_method(gPrintSettings, "has_key?", ps_has_key, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "dup", ps_copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_key?", ps_has_key, 1);
 
-    rb_define_method(gPrintSettings, "get", ps_get_generic, -1);
-    rb_define_alias(gPrintSettings, "[]", "get");
-    rb_define_method(gPrintSettings, "get_bool", ps_get_bool, 1);
-    rb_define_method(gPrintSettings, "get_double", ps_get_double, -1);
-    rb_define_method(gPrintSettings, "get_length", ps_get_length, 2);
-    rb_define_method(gPrintSettings, "get_int", ps_get_int, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get", ps_get_generic, -1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_bool", ps_get_bool, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_double", ps_get_double, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_length", ps_get_length, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_int", ps_get_int, -1);
 
-    rb_define_method(gPrintSettings, "set", ps_set_generic, -1);
-    rb_define_method(gPrintSettings, "[]=", ps_set_generic_indexer, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set", ps_set_generic, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "[]=", ps_set_generic_indexer, -1);
 
-    rb_define_method(gPrintSettings, "unset", ps_unset, -1);
-    rb_define_alias(gPrintSettings, "delete", "unset");
+    rb_define_method(RG_TARGET_NAMESPACE, "unset", ps_unset, -1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "delete", "unset");
 
-    rb_define_method(gPrintSettings, "each", ps_foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", ps_foreach, 0);
 
-    rb_define_const(gPrintSettings, "PRINTER",
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINTER",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PRINTER));
-    rb_define_const(gPrintSettings, "ORIENTATION",
+    rb_define_const(RG_TARGET_NAMESPACE, "ORIENTATION",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_ORIENTATION));
-    rb_define_const(gPrintSettings, "PAPER_FORMAT",
+    rb_define_const(RG_TARGET_NAMESPACE, "PAPER_FORMAT",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PAPER_FORMAT));
-    rb_define_const(gPrintSettings, "PAPER_WIDTH",
+    rb_define_const(RG_TARGET_NAMESPACE, "PAPER_WIDTH",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PAPER_WIDTH));
-    rb_define_const(gPrintSettings, "PAPER_HEIGHT",
+    rb_define_const(RG_TARGET_NAMESPACE, "PAPER_HEIGHT",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PAPER_HEIGHT));
-    rb_define_const(gPrintSettings, "N_COPIES",
+    rb_define_const(RG_TARGET_NAMESPACE, "N_COPIES",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_N_COPIES));
-    rb_define_const(gPrintSettings, "DEFAULT_SOURCE",
+    rb_define_const(RG_TARGET_NAMESPACE, "DEFAULT_SOURCE",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_DEFAULT_SOURCE));
-    rb_define_const(gPrintSettings, "QUALITY",
+    rb_define_const(RG_TARGET_NAMESPACE, "QUALITY",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_QUALITY));
-    rb_define_const(gPrintSettings, "RESOLUTION",
+    rb_define_const(RG_TARGET_NAMESPACE, "RESOLUTION",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_RESOLUTION));
-    rb_define_const(gPrintSettings, "USE_COLOR",
+    rb_define_const(RG_TARGET_NAMESPACE, "USE_COLOR",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_USE_COLOR));
-    rb_define_const(gPrintSettings, "DUPLEX",
+    rb_define_const(RG_TARGET_NAMESPACE, "DUPLEX",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_DUPLEX));
-    rb_define_const(gPrintSettings, "COLLATE",
+    rb_define_const(RG_TARGET_NAMESPACE, "COLLATE",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_COLLATE));
-    rb_define_const(gPrintSettings, "REVERSE",
+    rb_define_const(RG_TARGET_NAMESPACE, "REVERSE",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_REVERSE));
-    rb_define_const(gPrintSettings, "MEDIA_TYPE",
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_TYPE",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_MEDIA_TYPE));
-    rb_define_const(gPrintSettings, "DITHER",
+    rb_define_const(RG_TARGET_NAMESPACE, "DITHER",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_DITHER));
-    rb_define_const(gPrintSettings, "SCALE",
+    rb_define_const(RG_TARGET_NAMESPACE, "SCALE",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_SCALE));
-    rb_define_const(gPrintSettings, "PRINT_PAGES",
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT_PAGES",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PRINT_PAGES));
-    rb_define_const(gPrintSettings, "PAGE_RANGES",
+    rb_define_const(RG_TARGET_NAMESPACE, "PAGE_RANGES",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PAGE_RANGES));
-    rb_define_const(gPrintSettings, "PAGE_SET",
+    rb_define_const(RG_TARGET_NAMESPACE, "PAGE_SET",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_PAGE_SET));
-    rb_define_const(gPrintSettings, "FINISHINGS",
+    rb_define_const(RG_TARGET_NAMESPACE, "FINISHINGS",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_FINISHINGS));
-    rb_define_const(gPrintSettings, "NUMBER_UP",
+    rb_define_const(RG_TARGET_NAMESPACE, "NUMBER_UP",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_NUMBER_UP));
-    rb_define_const(gPrintSettings, "OUTPUT_BIN",
+    rb_define_const(RG_TARGET_NAMESPACE, "OUTPUT_BIN",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_OUTPUT_BIN));
 
-    rb_define_const(gPrintSettings, "OUTPUT_FILE_FORMAT",
+    rb_define_const(RG_TARGET_NAMESPACE, "OUTPUT_FILE_FORMAT",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT));
-    rb_define_const(gPrintSettings, "OUTPUT_URI",
+    rb_define_const(RG_TARGET_NAMESPACE, "OUTPUT_URI",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_OUTPUT_URI));
 
-    rb_define_const(gPrintSettings, "WIN32_DRIVER_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "WIN32_DRIVER_VERSION",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_WIN32_DRIVER_VERSION));
-    rb_define_const(gPrintSettings, "WIN32_DRIVER_EXTRA",
+    rb_define_const(RG_TARGET_NAMESPACE, "WIN32_DRIVER_EXTRA",
                     CSTR2RVAL(GTK_PRINT_SETTINGS_WIN32_DRIVER_EXTRA));
 
     /* Helpers: */
-    rb_define_method(gPrintSettings, "printer", ps_get_printer, 0);
-    rb_define_method(gPrintSettings, "set_printer", ps_set_printer, 1);
-    rb_define_method(gPrintSettings, "orientation", ps_get_orientation, 0);
-    rb_define_method(gPrintSettings, "set_orientation", ps_set_orientation, 1);
-    rb_define_method(gPrintSettings, "paper_size", ps_get_paper_size, 0);
-    rb_define_method(gPrintSettings, "set_paper_size", ps_set_paper_size, 1);
-    rb_define_method(gPrintSettings, "paper_width", ps_get_paper_width, 1);
-    rb_define_method(gPrintSettings, "set_paper_width", ps_set_paper_width, 2);
-    rb_define_method(gPrintSettings, "paper_height", ps_get_paper_height, 1);
-    rb_define_method(gPrintSettings, "set_paper_height",
+    rb_define_method(RG_TARGET_NAMESPACE, "printer", ps_get_printer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_printer", ps_set_printer, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "orientation", ps_get_orientation, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_orientation", ps_set_orientation, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "paper_size", ps_get_paper_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_size", ps_set_paper_size, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "paper_width", ps_get_paper_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_width", ps_set_paper_width, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "paper_height", ps_get_paper_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_height",
                      ps_set_paper_height, 2);
-    rb_define_method(gPrintSettings, "use_color?", ps_get_use_color, 0);
-    rb_define_method(gPrintSettings, "set_use_color", ps_set_use_color, 1);
-    rb_define_method(gPrintSettings, "collate?", ps_get_collate, 0);
-    rb_define_method(gPrintSettings, "set_collate", ps_set_collate, 1);
-    rb_define_method(gPrintSettings, "reverse?", ps_get_reverse, 0);
-    rb_define_method(gPrintSettings, "set_reverse", ps_set_reverse, 1);
-    rb_define_method(gPrintSettings, "duplex", ps_get_duplex, 0);
-    rb_define_method(gPrintSettings, "set_duplex", ps_set_duplex, 1);
-    rb_define_method(gPrintSettings, "quality", ps_get_quality, 0);
-    rb_define_method(gPrintSettings, "set_quality", ps_set_quality, 1);
-    rb_define_method(gPrintSettings, "n_copies", ps_get_n_copies, 0);
-    rb_define_method(gPrintSettings, "set_n_copies", ps_set_n_copies, 1);
-    rb_define_method(gPrintSettings, "number_up", ps_get_number_up, 0);
-    rb_define_method(gPrintSettings, "set_number_up", ps_set_number_up, 1);
-    rb_define_method(gPrintSettings, "resolution", ps_get_resolution, 0);
-    rb_define_method(gPrintSettings, "set_resolution", ps_set_resolution, 1);
-    rb_define_method(gPrintSettings, "scale", ps_get_scale, 0);
-    rb_define_method(gPrintSettings, "set_scale", ps_set_scale, 1);
-    rb_define_method(gPrintSettings, "print_pages", ps_get_print_pages, 0);
-    rb_define_method(gPrintSettings, "set_print_pages", ps_set_print_pages, 1);
-    rb_define_method(gPrintSettings, "page_ranges", ps_get_page_ranges, 0);
-    rb_define_method(gPrintSettings, "set_page_ranges", ps_set_page_ranges, 1);
-    rb_define_method(gPrintSettings, "page_set", ps_get_page_set, 0);
-    rb_define_method(gPrintSettings, "set_page_set", ps_set_page_set, 1);
-    rb_define_method(gPrintSettings, "default_source",
+    rb_define_method(RG_TARGET_NAMESPACE, "use_color?", ps_get_use_color, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_use_color", ps_set_use_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "collate?", ps_get_collate, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_collate", ps_set_collate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "reverse?", ps_get_reverse, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_reverse", ps_set_reverse, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "duplex", ps_get_duplex, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_duplex", ps_set_duplex, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "quality", ps_get_quality, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_quality", ps_set_quality, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_copies", ps_get_n_copies, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_n_copies", ps_set_n_copies, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "number_up", ps_get_number_up, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_number_up", ps_set_number_up, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "resolution", ps_get_resolution, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_resolution", ps_set_resolution, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "scale", ps_get_scale, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_scale", ps_set_scale, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "print_pages", ps_get_print_pages, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_print_pages", ps_set_print_pages, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "page_ranges", ps_get_page_ranges, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_ranges", ps_set_page_ranges, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "page_set", ps_get_page_set, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_set", ps_set_page_set, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_source",
                      ps_get_default_source, 0);
-    rb_define_method(gPrintSettings, "set_default_source",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_default_source",
                      ps_set_default_source, 1);
-    rb_define_method(gPrintSettings, "media_type", ps_get_media_type, 0);
-    rb_define_method(gPrintSettings, "set_media_type", ps_set_media_type, 1);
-    rb_define_method(gPrintSettings, "dither", ps_get_dither, 0);
-    rb_define_method(gPrintSettings, "set_dither", ps_set_dither, 1);
-    rb_define_method(gPrintSettings, "finishings", ps_get_finishings, 0);
-    rb_define_method(gPrintSettings, "set_finishings", ps_set_finishings, 1);
-    rb_define_method(gPrintSettings, "output_bin", ps_get_output_bin, 0);
-    rb_define_method(gPrintSettings, "set_output_bin", ps_set_output_bin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "media_type", ps_get_media_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_media_type", ps_set_media_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "dither", ps_get_dither, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_dither", ps_set_dither, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "finishings", ps_get_finishings, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_finishings", ps_set_finishings, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "output_bin", ps_get_output_bin, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_output_bin", ps_set_output_bin, 1);
 
-    G_DEF_SETTERS(gPrintSettings);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkPageOrientation */
-    G_DEF_CLASS(GTK_TYPE_PAGE_ORIENTATION, "PageOrientation", gPrintSettings);
-    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PAGE_ORIENTATION, "GTK_PAGE_");
+    G_DEF_CLASS(GTK_TYPE_PAGE_ORIENTATION, "PageOrientation", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PAGE_ORIENTATION, "GTK_PAGE_");
     /* GtkPrintDuplex */
-    G_DEF_CLASS(GTK_TYPE_PRINT_DUPLEX, "PrintDuplex", gPrintSettings);
-    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PRINT_DUPLEX, "GTK_PRINT_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_DUPLEX, "PrintDuplex", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_DUPLEX, "GTK_PRINT_");
     /* GtkPrintQuality */
-    G_DEF_CLASS(GTK_TYPE_PRINT_QUALITY, "PrintQuality", gPrintSettings);
-    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PRINT_QUALITY, "GTK_PRINT_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_QUALITY, "PrintQuality", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_QUALITY, "GTK_PRINT_");
     /* GtkPrintPages */
-    G_DEF_CLASS(GTK_TYPE_PRINT_PAGES, "PrintPages", gPrintSettings);
-    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PRINT_PAGES, "GTK_PRINT_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_PAGES, "PrintPages", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_PAGES, "GTK_PRINT_");
     /* GtkPageSet */
-    G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", gPrintSettings);
-    G_DEF_CONSTANTS(gPrintSettings, GTK_TYPE_PAGE_SET, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PAGE_SET, "GTK_");
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gPrintSettings, "to_file", ps_to_file, 1);
-    rb_define_method(gPrintSettings, "to_key_file", ps_to_key_file, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_file", ps_to_file, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_key_file", ps_to_key_file, -1);
 #endif
 }

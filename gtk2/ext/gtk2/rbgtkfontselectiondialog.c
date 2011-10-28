@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cFontSelectionDialog
 #define _SELF(self) (GTK_FONT_SELECTION_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
@@ -88,18 +89,18 @@ fsd_get_apply_button(VALUE self)
 void 
 Init_gtk_font_selection_dialog(void)
 {
-    VALUE gFontSelectionDialog = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION_DIALOG, 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION_DIALOG, 
                                              "FontSelectionDialog", mGtk);
 
-    rb_define_method(gFontSelectionDialog, "initialize", fsd_initialize, -1);
-    rb_define_method(gFontSelectionDialog, "font_name", fsd_get_font_name, 0);
-    rb_define_method(gFontSelectionDialog, "set_font_name", fsd_set_font_name, 1);
-    rb_define_method(gFontSelectionDialog, "preview_text", fsd_get_preview_text, 0);
-    rb_define_method(gFontSelectionDialog, "set_preview_text", fsd_set_preview_text, 1);
-    rb_define_method(gFontSelectionDialog, "font_selection", fsd_get_font_selection, 0);
-    rb_define_method(gFontSelectionDialog, "ok_button", fsd_get_ok_button, 0);
-    rb_define_method(gFontSelectionDialog, "cancel_button", fsd_get_cancel_button, 0);
-    rb_define_method(gFontSelectionDialog, "apply_button", fsd_get_apply_button, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fsd_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_name", fsd_get_font_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_name", fsd_set_font_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "preview_text", fsd_get_preview_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_preview_text", fsd_set_preview_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_selection", fsd_get_font_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ok_button", fsd_get_ok_button, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cancel_button", fsd_get_cancel_button, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "apply_button", fsd_get_apply_button, 0);
 
-    G_DEF_SETTERS(gFontSelectionDialog);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

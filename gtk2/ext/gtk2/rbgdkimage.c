@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cImage
 #define _SELF(i) GDK_IMAGE(RVAL2GOBJ(i))
 
 static VALUE
@@ -126,26 +127,26 @@ gdkimage_bpl(VALUE self)
 void 
 Init_gtk_gdk_image(void)
 {
-    VALUE gdkImage = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 
-    rb_define_method(gdkImage, "initialize", gdkimage_initialize, 4);
-    rb_define_method(gdkImage, "colormap", gdkimage_get_colormap, 0);
-    rb_define_method(gdkImage, "set_colormap", gdkimage_set_colormap, 1);
-    rb_define_method(gdkImage, "put_pixel", gdkimage_put_pixel, 3);
-    rb_define_method(gdkImage, "get_pixel", gdkimage_get_pixel, 2);
-    rb_define_method(gdkImage, "image_type", gdkimage_image_type, 0);
-    rb_define_method(gdkImage, "visual", gdkimage_visual, 0);
-    rb_define_method(gdkImage, "byte_order", gdkimage_byte_order, 0);
-    rb_define_method(gdkImage, "bits_per_pixel", gdkimage_bits_per_pixel, 0);
-    rb_define_method(gdkImage, "width", gdkimage_width, 0);
-    rb_define_method(gdkImage, "height", gdkimage_height, 0);
-    rb_define_method(gdkImage, "depth", gdkimage_depth, 0);
-    rb_define_method(gdkImage, "bpp", gdkimage_bpp, 0);
-    rb_define_method(gdkImage, "bpl", gdkimage_bpl, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkimage_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "colormap", gdkimage_get_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_colormap", gdkimage_set_colormap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "put_pixel", gdkimage_put_pixel, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_pixel", gdkimage_get_pixel, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "image_type", gdkimage_image_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visual", gdkimage_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "byte_order", gdkimage_byte_order, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bits_per_pixel", gdkimage_bits_per_pixel, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", gdkimage_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", gdkimage_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "depth", gdkimage_depth, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bpp", gdkimage_bpp, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bpl", gdkimage_bpl, 0);
 
-    G_DEF_SETTERS(gdkImage);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GdkImageType */
-    G_DEF_CLASS(GDK_TYPE_IMAGE_TYPE, "Type", gdkImage);
-    G_DEF_CONSTANTS(gdkImage, GDK_TYPE_IMAGE_TYPE, "GDK_IMAGE_");
+    G_DEF_CLASS(GDK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_IMAGE_TYPE, "GDK_IMAGE_");
 }

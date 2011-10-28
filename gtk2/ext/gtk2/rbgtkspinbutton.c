@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cSpinButton
 #define _SELF(self) (GTK_SPIN_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
@@ -115,23 +116,23 @@ sbtn_get_range(VALUE self)
 void 
 Init_gtk_spin_button(void)
 {
-    VALUE gSButton = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);
 
-    rb_define_method(gSButton, "initialize", sbtn_initialize, -1);
-    rb_define_method(gSButton, "configure", sbtn_configure, 3);
-    rb_define_method(gSButton, "set_increments", sbtn_set_increments, 2);
-    rb_define_method(gSButton, "set_range", sbtn_set_range, 2);
-    rb_define_method(gSButton, "value_as_int", sbtn_get_value_as_int, 0);
-    rb_define_method(gSButton, "spin", sbtn_spin, 2);
-    rb_define_method(gSButton, "update", sbtn_update, 0);
-    rb_define_method(gSButton, "increments", sbtn_get_increments, 0);
-    rb_define_method(gSButton, "range", sbtn_get_range, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", sbtn_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "configure", sbtn_configure, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_increments", sbtn_set_increments, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_range", sbtn_set_range, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_as_int", sbtn_get_value_as_int, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "spin", sbtn_spin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "update", sbtn_update, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "increments", sbtn_get_increments, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "range", sbtn_get_range, 0);
 
     /* GtkSpinType */
-    G_DEF_CLASS(GTK_TYPE_SPIN_TYPE, "Type", gSButton);
-    G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_TYPE, "GTK_SPIN_");
+    G_DEF_CLASS(GTK_TYPE_SPIN_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SPIN_TYPE, "GTK_SPIN_");
 
     /* GtkSpinButtonUpdatePolicy */
-    G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "UpdatePolicy", gSButton);
-    G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "UpdatePolicy", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "GTK_");
 }

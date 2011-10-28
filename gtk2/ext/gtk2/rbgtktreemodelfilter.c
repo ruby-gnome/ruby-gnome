@@ -22,6 +22,8 @@
 #include "global.h"
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
+
+#define RG_TARGET_NAMESPACE cTreeModelFilter
 #define _SELF(s) (GTK_TREE_MODEL_FILTER(RVAL2GOBJ(s)))
 
 static ID id_child_model;
@@ -180,22 +182,22 @@ void
 Init_gtk_treemodelfilter(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE tmf = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FILTER, "TreeModelFilter", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FILTER, "TreeModelFilter", mGtk);
 
     id_child_model = rb_intern("child_model");
     id_root = rb_intern("root");
 
-    rb_define_method(tmf, "initialize", treemodelfilter_initialize, -1);
-    rb_define_method(tmf, "set_visible_func", treemodelfilter_set_visible_func, 0);
-    rb_define_method(tmf, "set_modify_func", treemodelfilter_set_modify_func, -1);
-    rb_define_method(tmf, "set_visible_column", treemodelfilter_set_visible_column, 1);
-    rb_define_method(tmf, "model", treemodelfilter_get_model, 0);
-    rb_define_method(tmf, "convert_child_iter_to_iter", treemodelfilter_convert_child_iter_to_iter, 1);
-    rb_define_method(tmf, "convert_iter_to_child_iter", treemodelfilter_convert_iter_to_child_iter, 1);
-    rb_define_method(tmf, "convert_child_path_to_path", treemodelfilter_convert_child_path_to_path, 1);
-    rb_define_method(tmf, "convert_path_to_child_path", treemodelfilter_convert_path_to_child_path, 1);
-    rb_define_method(tmf, "refilter", treemodelfilter_refilter, 0);
-    rb_define_method(tmf, "clear_cache", treemodelfilter_clear_cache, 0);
-    G_DEF_SETTERS(tmf);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", treemodelfilter_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visible_func", treemodelfilter_set_visible_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_modify_func", treemodelfilter_set_modify_func, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visible_column", treemodelfilter_set_visible_column, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "model", treemodelfilter_get_model, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_child_iter_to_iter", treemodelfilter_convert_child_iter_to_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_iter_to_child_iter", treemodelfilter_convert_iter_to_child_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_child_path_to_path", treemodelfilter_convert_child_path_to_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_path_to_child_path", treemodelfilter_convert_path_to_child_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "refilter", treemodelfilter_refilter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_cache", treemodelfilter_clear_cache, 0);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

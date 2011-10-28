@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMessageDialog
 #define _SELF(s) (GTK_MESSAGE_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
@@ -79,19 +80,19 @@ void                gtk_message_dialog_format_secondary_markup
 void 
 Init_gtk_message_dialog(void)
 {
-    VALUE gMessageDialog = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
 
-    rb_define_method(gMessageDialog, "initialize", mdiag_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", mdiag_initialize, -1);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gMessageDialog, "set_markup", mdiag_set_markup, 1);
-    G_DEF_SETTER(gMessageDialog, "markup");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", mdiag_set_markup, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "markup");
 #endif
 
     /* GtkMessageType */
-    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", gMessageDialog);
-    G_DEF_CONSTANTS(gMessageDialog, GTK_TYPE_MESSAGE_TYPE, "GTK_MESSAGE_");
+    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_MESSAGE_TYPE, "GTK_MESSAGE_");
 
     /* GtkButtonsType */
-    G_DEF_CLASS(GTK_TYPE_BUTTONS_TYPE, "ButtonsType", gMessageDialog);
-    G_DEF_CONSTANTS(gMessageDialog, GTK_TYPE_BUTTONS_TYPE, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_BUTTONS_TYPE, "ButtonsType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_BUTTONS_TYPE, "GTK_");
 }

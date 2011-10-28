@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cRegion
 #define _SELF(r) ((GdkRegion*)RVAL2BOXED(r, GDK_TYPE_REGION))
 
 /**********************************/
@@ -262,28 +263,28 @@ gdkregion_xor(VALUE self, VALUE region)
 void
 Init_gtk_gdk_region(void)
 {
-    VALUE gdkRegion = G_DEF_CLASS(GDK_TYPE_REGION, "Region", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_REGION, "Region", mGdk);
 
-    rb_define_method(gdkRegion, "initialize", gdkregion_initialize, -1);
-    rb_define_method(gdkRegion, "rectangles", gdkregion_get_rectangles, 0);
-    rb_define_method(gdkRegion, "spans_intersect_each", gdkregion_spans_intersect_foreach, 2);
-    rb_define_method(gdkRegion, "clipbox", gdkregion_get_clipbox, 0);
-    rb_define_method(gdkRegion, "empty?", gdkregion_empty, 0);
-    rb_define_method(gdkRegion, "==", gdkregion_equal, 1);
-    rb_define_method(gdkRegion, "point_in?", gdkregion_point_in, 2);
-    rb_define_method(gdkRegion, "rect_in", gdkregion_rect_in, 1);
-    rb_define_method(gdkRegion, "offset", gdkregion_offset, 2);
-    rb_define_method(gdkRegion, "shrink", gdkregion_shrink, 2);
-    rb_define_method(gdkRegion, "intersect", gdkregion_intersect, 1);
-    rb_define_method(gdkRegion, "union", gdkregion_union, 1);
-    rb_define_method(gdkRegion, "subtract", gdkregion_subtract, 1);
-    rb_define_method(gdkRegion, "xor", gdkregion_xor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkregion_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "rectangles", gdkregion_get_rectangles, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "spans_intersect_each", gdkregion_spans_intersect_foreach, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "clipbox", gdkregion_get_clipbox, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "empty?", gdkregion_empty, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", gdkregion_equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "point_in?", gdkregion_point_in, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "rect_in", gdkregion_rect_in, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "offset", gdkregion_offset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "shrink", gdkregion_shrink, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "intersect", gdkregion_intersect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "union", gdkregion_union, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "subtract", gdkregion_subtract, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "xor", gdkregion_xor, 1);
 
     /* GdkOverlapType */
-    G_DEF_CLASS(GDK_TYPE_OVERLAP_TYPE, "OverlapType", gdkRegion);
-    G_DEF_CONSTANTS(gdkRegion, GDK_TYPE_OVERLAP_TYPE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_OVERLAP_TYPE, "OverlapType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_OVERLAP_TYPE, "GDK_");
 
     /* GdkFillRule */
-    G_DEF_CLASS(GDK_TYPE_FILL_RULE, "FillRule", gdkRegion);
-    G_DEF_CONSTANTS(gdkRegion, GDK_TYPE_FILL_RULE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_FILL_RULE, "FillRule", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_FILL_RULE, "GDK_");
 }

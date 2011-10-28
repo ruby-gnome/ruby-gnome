@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCalendar
 #define _SELF(self) (GTK_CALENDAR(RVAL2GOBJ(self)))
 
 static VALUE
@@ -134,23 +135,23 @@ cal_set_display_options(VALUE self, VALUE flags)
 void 
 Init_gtk_calendar(void)
 {
-    VALUE gCalendar = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);
 
-    rb_define_method(gCalendar, "initialize", cal_init, 0);
-    rb_define_method(gCalendar, "select_month", cal_select_month, 2);
-    rb_define_method(gCalendar, "select_day", cal_select_day, 1);
-    rb_define_method(gCalendar, "mark_day", cal_mark_day, 1);
-    rb_define_method(gCalendar, "unmark_day", cal_unmark_day, 1);
-    rb_define_method(gCalendar, "clear_marks", cal_clear_marks, 0);
-    rb_define_method(gCalendar, "date", cal_get_date, 0);
-    rb_define_method(gCalendar, "freeze", cal_freeze, 0);
-    rb_define_method(gCalendar, "thaw", cal_thaw, 0);
-    rb_define_method(gCalendar, "display_options", cal_get_display_options, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", cal_init, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_month", cal_select_month, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_day", cal_select_day, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mark_day", cal_mark_day, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unmark_day", cal_unmark_day, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_marks", cal_clear_marks, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "date", cal_get_date, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "freeze", cal_freeze, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "thaw", cal_thaw, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_options", cal_get_display_options, -1);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gCalendar, "set_display_options", cal_set_display_options, 1);
-    G_DEF_SETTER(gCalendar, "display_options");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_display_options", cal_set_display_options, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_options");
 #endif
 
-    G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", gCalendar);
-    G_DEF_CONSTANTS(gCalendar, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");
+    G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");
 }

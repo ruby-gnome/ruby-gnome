@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cPaned
 #define _SELF(self) (GTK_PANED(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -99,16 +100,16 @@ paned_child2_shrink(VALUE self)
 void 
 Init_gtk_paned(void)
 {
-    VALUE gPaned = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
 
-    rb_define_method(gPaned, "add1", paned_add1, 1);
-    rb_define_method(gPaned, "add2", paned_add2, 1);
-    rb_define_method(gPaned, "pack1", paned_pack1, 3);
-    rb_define_method(gPaned, "pack2", paned_pack2, 3);
-    rb_define_method(gPaned, "child1", paned_child1, 0);
-    rb_define_method(gPaned, "child2", paned_child2, 0);
-    rb_define_method(gPaned, "child1_resize?", paned_child1_resize, 0);
-    rb_define_method(gPaned, "child1_shrink?", paned_child1_shrink, 0);
-    rb_define_method(gPaned, "child2_resize?", paned_child2_resize, 0);
-    rb_define_method(gPaned, "child2_shrink?", paned_child2_shrink, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add1", paned_add1, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add2", paned_add2, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack1", paned_pack1, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack2", paned_pack2, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "child1", paned_child1, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child2", paned_child2, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child1_resize?", paned_child1_resize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child1_shrink?", paned_child1_shrink, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child2_resize?", paned_child2_resize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child2_shrink?", paned_child2_shrink, 0);
 }

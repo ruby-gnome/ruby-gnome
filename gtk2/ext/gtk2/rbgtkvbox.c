@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVBox
+
 static VALUE
 vbox_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -39,7 +41,7 @@ vbox_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_vbox(void)
 {
-    VALUE gVBox = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
 
-    rb_define_method(gVBox, "initialize", vbox_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vbox_initialize, -1);
 }

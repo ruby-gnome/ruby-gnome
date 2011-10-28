@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cNotebook
 #define _SELF(self) GTK_NOTEBOOK(RVAL2GOBJ(self))
 #define RVAL2WIDGET(w) GTK_WIDGET(RVAL2GOBJ(w))
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
@@ -418,50 +419,50 @@ void        gtk_notebook_set_tab_vborder    (GtkNotebook *notebook,
 void 
 Init_gtk_notebook(void)
 {
-    VALUE gNotebook = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
     G_DEF_CLASS(GTK_TYPE_NOTEBOOK_PAGE, "NotebookPage", mGtk);
 
-    rb_define_method(gNotebook, "initialize", note_initialize, 0);
-    rb_define_method(gNotebook, "append_page", note_append_page, -1);
-    rb_define_method(gNotebook, "append_page_menu", note_append_page_menu, -1);
-    rb_define_method(gNotebook, "prepend_page", note_prepend_page, -1);
-    rb_define_method(gNotebook, "prepend_page_menu", note_prepend_page_menu, -1);
-    rb_define_method(gNotebook, "insert_page", note_insert_page, -1);
-    rb_define_method(gNotebook, "insert_page_menu", note_insert_page_menu, -1);
-    rb_define_method(gNotebook, "remove_page", note_remove_page, 1);
-    rb_define_method(gNotebook, "page_num", note_page_num, 1);
-    rb_define_method(gNotebook, "next_page", note_next_page, 0);
-    rb_define_method(gNotebook, "prev_page", note_prev_page, 0);
-    rb_define_method(gNotebook, "reorder_child", note_reorder_child, 2);
-    rb_define_method(gNotebook, "get_menu_label", note_get_menu_label, 1);
-    rb_define_method(gNotebook, "get_nth_page", note_get_nth_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", note_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_page", note_append_page, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_page_menu", note_append_page_menu, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_page", note_prepend_page, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_page_menu", note_prepend_page_menu, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_page", note_insert_page, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_page_menu", note_insert_page_menu, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_page", note_remove_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "page_num", note_page_num, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "next_page", note_next_page, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "prev_page", note_prev_page, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "reorder_child", note_reorder_child, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_menu_label", note_get_menu_label, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_nth_page", note_get_nth_page, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gNotebook, "n_pages", note_get_n_pages, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_pages", note_get_n_pages, 0);
 #endif
-    rb_define_method(gNotebook, "get_tab_label", note_get_tab_label, 1);
-    rb_define_method(gNotebook, "query_tab_label_packing", note_query_tab_label_packing, 1);
-    rb_define_method(gNotebook, "set_menu_label", note_set_menu_label, 2);
-    rb_define_method(gNotebook, "set_menu_label_text", note_set_menu_label_text, 2);
-    rb_define_method(gNotebook, "set_tab_label", note_set_tab_label, 2);
-    rb_define_method(gNotebook, "set_tab_label_packing", note_set_tab_label_packing, 4);
-    rb_define_method(gNotebook, "set_tab_label_text", note_set_tab_label_text, 2);
-    rb_define_method(gNotebook, "get_menu_label_text", note_get_menu_label_text, 1);
-    rb_define_method(gNotebook, "get_tab_label_text", note_get_tab_label_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_label", note_get_tab_label, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "query_tab_label_packing", note_query_tab_label_packing, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_menu_label", note_set_menu_label, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_menu_label_text", note_set_menu_label_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_label", note_set_tab_label, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_label_packing", note_set_tab_label_packing, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_label_text", note_set_tab_label_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_menu_label_text", note_get_menu_label_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_label_text", note_get_tab_label_text, 1);
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gNotebook, "get_tab_reorderable", note_get_tab_reorderable, 1);
-    rb_define_method(gNotebook, "set_tab_reorderable", note_set_tab_reorderable, 2);
-    rb_define_method(gNotebook, "get_tab_detachable", note_get_tab_detachable, 1);
-    rb_define_method(gNotebook, "set_tab_detachable", note_set_tab_detachable, 2);
-    rb_define_singleton_method(gNotebook, "set_window_creation_hook", note_set_window_creation_hook, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_reorderable", note_get_tab_reorderable, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_reorderable", note_set_tab_reorderable, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_tab_detachable", note_get_tab_detachable, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tab_detachable", note_set_tab_detachable, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_window_creation_hook", note_set_window_creation_hook, 0);
 #endif
 #if GTK_CHECK_VERSION(2,20,0)
-    rb_define_method(gNotebook, "set_action_widget", note_set_action_widget, 2);
-    rb_define_method(gNotebook, "get_action_widget", note_get_action_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_action_widget", note_set_action_widget, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_action_widget", note_get_action_widget, 1);
 #endif
     /* GtkNotebookTab */
-    rb_define_const(gNotebook, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
-    rb_define_const(gNotebook, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
+    rb_define_const(RG_TARGET_NAMESPACE, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
+    rb_define_const(RG_TARGET_NAMESPACE, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);
 
-    G_DEF_SIGNAL_FUNC(gNotebook, "switch_page", (GValToRValSignalFunc)signal_g2r_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "switch_page", (GValToRValSignalFunc)signal_g2r_func);
 }

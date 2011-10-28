@@ -23,6 +23,8 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cFileChooserWidget
+
 static VALUE
 fchowidget_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -48,9 +50,9 @@ Init_gtk_file_chooser_widget(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gFileChoWidget = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_WIDGET, "FileChooserWidget", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_WIDGET, "FileChooserWidget", mGtk);
 
-    rb_define_method(gFileChoWidget, "initialize", fchowidget_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fchowidget_initialize, -1);
 
 #endif
 }

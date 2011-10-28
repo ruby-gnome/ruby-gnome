@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cEntry
 #define _SELF(self) (GTK_ENTRY(RVAL2GOBJ(self)))
 
 static VALUE
@@ -144,24 +145,24 @@ entry_set_cursor_hadjustment(VALUE self, VALUE adjustment)
 void 
 Init_gtk_entry(void)
 {
-    VALUE gEntry = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 
-    rb_define_method(gEntry, "initialize", entry_initialize, 0);
-    rb_define_method(gEntry, "layout", entry_get_layout, 0);
-    rb_define_method(gEntry, "layout_offsets", entry_get_layout_offsets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", entry_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout", entry_get_layout, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout_offsets", entry_get_layout_offsets, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gEntry, "set_completion", entry_set_completion, 1);
-    G_DEF_SETTER(gEntry, "completion");
-    rb_define_method(gEntry, "completion", entry_get_completion, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_completion", entry_set_completion, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "completion");
+    rb_define_method(RG_TARGET_NAMESPACE, "completion", entry_get_completion, 0);
 #endif
-    rb_define_method(gEntry, "layout_index_to_text_index", entry_layout_index_to_text_index, 1);
-    rb_define_method(gEntry, "text_index_to_layout_index", entry_text_index_to_layout_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout_index_to_text_index", entry_layout_index_to_text_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text_index_to_layout_index", entry_text_index_to_layout_index, 1);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(gEntry, "cursor_hadjustment",
+    rb_define_method(RG_TARGET_NAMESPACE, "cursor_hadjustment",
 		     entry_get_cursor_hadjustment, 0);
-    rb_define_method(gEntry, "set_cursor_hadjustment",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor_hadjustment",
 		     entry_set_cursor_hadjustment, 1);
-    G_DEF_SETTER(gEntry, "cursor_hadjustment");
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "cursor_hadjustment");
 #endif
 }

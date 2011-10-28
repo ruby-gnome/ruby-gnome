@@ -30,6 +30,7 @@
 GType gtk_print_backend_get_type (void) G_GNUC_CONST;
 #endif
 
+#define RG_TARGET_NAMESPACE cPrinter
 #define _SELF(s) (GTK_PRINTER(RVAL2GOBJ(s)))
 
 static VALUE
@@ -143,23 +144,23 @@ void
 Init_gtk_printer(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
-    VALUE gPrinter = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
-    rb_include_module(gPrinter, rb_mComparable);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
 
     G_DEF_CLASS(GTK_TYPE_PRINT_BACKEND, "PrintBackend", mGtk);
 
-    rb_define_singleton_method(gPrinter, "each", p_s_enumerate_printers, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "each", p_s_enumerate_printers, -1);
 
-    rb_define_method(gPrinter, "initialize", p_initialize, 3);
-    rb_define_method(gPrinter, "description", p_get_description, 0);
-    rb_define_method(gPrinter, "active?", p_is_active, 0);
-    rb_define_method(gPrinter, "default?", p_is_default, 0);
-    rb_define_method(gPrinter, "<=>", p_compare, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", p_initialize, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", p_get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "active?", p_is_active, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "default?", p_is_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "<=>", p_compare, 1);
 
     G_DEF_CLASS3("GtkPrintBackendCups", "PrintBackendCups", mGtk);
     G_DEF_CLASS3("GtkPrintBackendFile", "PrintBackendFile", mGtk);
     G_DEF_CLASS3("GtkPrintBackendLpr", "PrintBackendLpr", mGtk);
 
-    G_DEF_SETTERS(gPrinter);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

@@ -23,7 +23,9 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cToggleToolButton
 #define _SELF(self) (GTK_TOGGLE_TOOL_BUTTON(RVAL2GOBJ(self)))
+
 static VALUE
 toggletoolbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -57,8 +59,8 @@ void
 Init_gtk_toggletoolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gToggleToolButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_TOOL_BUTTON, "ToggleToolButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_TOOL_BUTTON, "ToggleToolButton", mGtk);
 
-    rb_define_method(gToggleToolButton, "initialize", toggletoolbutton_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", toggletoolbutton_initialize, -1);
 #endif
 }

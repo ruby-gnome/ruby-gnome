@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cImageMenuItem
+
 static VALUE
 imitem_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -53,7 +55,7 @@ imitem_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_image_menu_item(void)
 {
-    VALUE gIMenuItem = G_DEF_CLASS(GTK_TYPE_IMAGE_MENU_ITEM, "ImageMenuItem", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE_MENU_ITEM, "ImageMenuItem", mGtk);
 
-    rb_define_method(gIMenuItem, "initialize", imitem_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", imitem_initialize, -1);
 }

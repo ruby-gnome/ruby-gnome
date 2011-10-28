@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextMark
 #define _SELF(s) (GTK_TEXT_MARK(RVAL2GOBJ(s)))
 
 #if GTK_CHECK_VERSION(2,12,0)
@@ -71,13 +72,13 @@ gboolean            gtk_text_mark_get_left_gravity      (GtkTextMark *mark);
 void 
 Init_gtk_textmark(void)
 {
-    VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gTextMark, "initialize", initialize, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, 2);
 #endif
-    rb_define_method(gTextMark, "set_visible", set_visible, 1);
-    G_DEF_SETTER(gTextMark, "visible");
-    rb_define_method(gTextMark, "visible?", get_visible, 0);
-    rb_define_method(gTextMark, "deleted?", get_deleted, 0);
-    rb_define_method(gTextMark, "buffer", get_buffer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visible", set_visible, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "visible");
+    rb_define_method(RG_TARGET_NAMESPACE, "visible?", get_visible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "deleted?", get_deleted, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "buffer", get_buffer, 0);
 }

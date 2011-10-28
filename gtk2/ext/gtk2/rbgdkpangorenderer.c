@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cPangoRenderer
 #define _SELF(s) (GDK_PANGO_RENDERER(RVAL2GOBJ(s)))
 
 static VALUE
@@ -132,18 +133,18 @@ void
 Init_gtk_gdk_pangorenderer(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE renderer = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);
 
-    rb_define_method(renderer, "initialize", prenderer_initialize, -1);
-    rb_define_method(renderer, "set_drawable", prenderer_set_drawable, 1);
-    rb_define_method(renderer, "set_gc", prenderer_set_gc, 1);
-    rb_define_method(renderer, "set_stipple", prenderer_set_stipple, 2);
-    rb_define_method(renderer, "set_override_color", prenderer_set_override_color, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", prenderer_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_drawable", prenderer_set_drawable, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_gc", prenderer_set_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_stipple", prenderer_set_stipple, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_override_color", prenderer_set_override_color, 2);
 
-    rb_define_singleton_method(renderer, "get_default", prenderer_s_get_default, -1);
-    rb_define_singleton_method(renderer, "default", prenderer_s_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_default", prenderer_s_get_default, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", prenderer_s_default, 0);
 
-    G_DEF_SETTERS(renderer);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
 

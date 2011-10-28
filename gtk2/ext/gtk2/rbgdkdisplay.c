@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,2,0)
+
+#define RG_TARGET_NAMESPACE cDisplay
 #define _SELF(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
 
 
@@ -502,80 +504,80 @@ void
 Init_gtk_gdk_display(void)
 {
 #if GTK_CHECK_VERSION(2,2,0)
-    VALUE gdkDisplay = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
 
-    rb_define_singleton_method(gdkDisplay, "open", gdkdisplay_s_open, 1);
-    rb_define_singleton_method(gdkDisplay, "default", gdkdisplay_s_get_default, 0);
-    rb_define_method(gdkDisplay, "name", gdkdisplay_name, 0);
-    rb_define_method(gdkDisplay, "n_screens", gdkdisplay_n_screens, 0);
-    rb_define_method(gdkDisplay, "get_screen", gdkdisplay_get_screen, 1);
-    rb_define_alias(gdkDisplay, "[]", "get_screen");
-    rb_define_method(gdkDisplay, "default_screen", gdkdisplay_default_screen, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "open", gdkdisplay_s_open, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", gdkdisplay_s_get_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", gdkdisplay_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_screens", gdkdisplay_n_screens, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_screen", gdkdisplay_get_screen, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_screen");
+    rb_define_method(RG_TARGET_NAMESPACE, "default_screen", gdkdisplay_default_screen, 0);
     
-    rb_define_method(gdkDisplay, "pointer_ungrab", gdkdisplay_pointer_ungrab, 1);
-    rb_define_method(gdkDisplay, "keyboard_ungrab", gdkdisplay_keyboard_ungrab, 1);
-    rb_define_method(gdkDisplay, "pointer_grabbed?", gdkdisplay_pointer_grabbed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pointer_ungrab", gdkdisplay_pointer_ungrab, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "keyboard_ungrab", gdkdisplay_keyboard_ungrab, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pointer_grabbed?", gdkdisplay_pointer_grabbed, 0);
     
-    rb_define_method(gdkDisplay, "beep", gdkdisplay_beep, 0);
-    rb_define_method(gdkDisplay, "sync", gdkdisplay_sync, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "beep", gdkdisplay_beep, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sync", gdkdisplay_sync, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkDisplay, "flush", gdkdisplay_flush, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flush", gdkdisplay_flush, 0);
 #endif
-    rb_define_method(gdkDisplay, "close", gdkdisplay_close, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "close", gdkdisplay_close, 0);
     
-    rb_define_method(gdkDisplay, "devices", gdkdisplay_list_devices, 0);
-    rb_define_method(gdkDisplay, "event", gdkdisplay_get_event, 0);
-    rb_define_method(gdkDisplay, "peek_event", gdkdisplay_peek_event, 0);
-    rb_define_method(gdkDisplay, "put_event", gdkdisplay_put_event, 1);
-    rb_define_method(gdkDisplay, "set_double_click_time", gdkdisplay_set_double_click_time, 1);
-    rb_define_method(gdkDisplay, "double_click_time",  gdkdisplay_get_double_click_time, 0);
-    rb_define_method(gdkDisplay, "button_click_time",  gdkdisplay_get_button_click_time, 0);
-    rb_define_method(gdkDisplay, "button_window",  gdkdisplay_get_button_window, 0);
-    rb_define_method(gdkDisplay, "button_number",  gdkdisplay_get_button_number, 0);
-    rb_define_method(gdkDisplay, "closed?",  gdkdisplay_get_closed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "devices", gdkdisplay_list_devices, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "event", gdkdisplay_get_event, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "peek_event", gdkdisplay_peek_event, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "put_event", gdkdisplay_put_event, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_double_click_time", gdkdisplay_set_double_click_time, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "double_click_time",  gdkdisplay_get_double_click_time, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "button_click_time",  gdkdisplay_get_button_click_time, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "button_window",  gdkdisplay_get_button_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "button_number",  gdkdisplay_get_button_number, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "closed?",  gdkdisplay_get_closed, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkDisplay, "button_x",  gdkdisplay_get_button_x, 0);
-    rb_define_method(gdkDisplay, "button_y",  gdkdisplay_get_button_y, 0);
-    rb_define_method(gdkDisplay, "set_double_click_distance", gdkdisplay_set_double_click_distance, 1);
-    rb_define_method(gdkDisplay, "double_click_distance", gdkdisplay_get_double_click_distance, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "button_x",  gdkdisplay_get_button_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "button_y",  gdkdisplay_get_button_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_double_click_distance", gdkdisplay_set_double_click_distance, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "double_click_distance", gdkdisplay_get_double_click_distance, 0);
 #endif
-    rb_define_method(gdkDisplay, "pointer", gdkdisplay_get_pointer, 0);
-    rb_define_method(gdkDisplay, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pointer", gdkdisplay_get_pointer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "window_at_pointer", gdkdisplay_get_window_at_pointer, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkDisplay, "supports_cursor_color?", gdkdisplay_supports_cursor_color, 0);
-    rb_define_method(gdkDisplay, "supports_cursor_alpha?", gdkdisplay_supports_cursor_alpha, 0);
-    rb_define_method(gdkDisplay, "default_cursor_size", gdkdisplay_get_default_cursor_size, 0);
-    rb_define_method(gdkDisplay, "maximal_cursor_size", gdkdisplay_get_maximal_cursor_size, 0);
-    rb_define_method(gdkDisplay, "default_group", gdkdisplay_get_default_group, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_cursor_color?", gdkdisplay_supports_cursor_color, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_cursor_alpha?", gdkdisplay_supports_cursor_alpha, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_cursor_size", gdkdisplay_get_default_cursor_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "maximal_cursor_size", gdkdisplay_get_maximal_cursor_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_group", gdkdisplay_get_default_group, 0);
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gdkDisplay, "supports_selection_notification?", gdkdisplay_supports_selection_notification, 0);
-    rb_define_method(gdkDisplay, "request_selection_notification?", gdkdisplay_request_selection_notification, 1);
-    rb_define_method(gdkDisplay, "supports_clipboard_persistence?", gdkdisplay_supports_clipboard_persistence, 0);
-    rb_define_method(gdkDisplay, "store_clipboard", gdkdisplay_store_clipboard, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_selection_notification?", gdkdisplay_supports_selection_notification, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "request_selection_notification?", gdkdisplay_request_selection_notification, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_clipboard_persistence?", gdkdisplay_supports_clipboard_persistence, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "store_clipboard", gdkdisplay_store_clipboard, 3);
 #endif
-    rb_define_method(gdkDisplay, "core_pointer", gdkdisplay_get_core_pointer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "core_pointer", gdkdisplay_get_core_pointer, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gdkDisplay, "warp_pointer", gdkdisplay_warp_pointer, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "warp_pointer", gdkdisplay_warp_pointer, 3);
 #endif
 
-    G_DEF_SETTERS(gdkDisplay);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #ifdef GDK_WINDOWING_X11
-    rb_define_method(gdkDisplay, "grab", gdkdisplay_grab, 0);
-    rb_define_method(gdkDisplay, "ungrab", gdkdisplay_ungrab, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "grab", gdkdisplay_grab, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ungrab", gdkdisplay_ungrab, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkDisplay, "register_standard_event_type", gdkdisplay_register_standard_event_type, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "register_standard_event_type", gdkdisplay_register_standard_event_type, 2);
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gdkDisplay, "user_time", gdkdisplay_get_user_time, 0);
-    rb_define_method(gdkDisplay, "set_cursor_theme", gdkdisplay_set_cursor_theme, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "user_time", gdkdisplay_get_user_time, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor_theme", gdkdisplay_set_cursor_theme, 2);
 #endif
 #  if GTK_CHECK_VERSION(2, 12, 0)
 /*
-    rb_define_method(gdkDisplay, "broadcast_startup_message",
+    rb_define_method(RG_TARGET_NAMESPACE, "broadcast_startup_message",
 		     gdkdisplay_broadcast_startup_message, -1);
 */
-    rb_define_method(gdkDisplay, "startup_notification_id",
+    rb_define_method(RG_TARGET_NAMESPACE, "startup_notification_id",
 		     gdkdisplay_get_startup_notification_id, 0);
 #  endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
@@ -583,11 +585,11 @@ Init_gtk_gdk_display(void)
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gdkDisplay, "supports_shapes?", gdkdisplay_supports_shapes, 0);
-    rb_define_method(gdkDisplay, "supports_input_shapes?", gdkdisplay_supports_input_shapes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_shapes?", gdkdisplay_supports_shapes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_input_shapes?", gdkdisplay_supports_input_shapes, 0);
 #endif
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(gdkDisplay, "supports_composite?", gdkdisplay_supports_composite, 0);
-    rb_define_method(gdkDisplay, "trigger_tooltip_query", gdkdisplay_trigger_tooltip_query, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_composite?", gdkdisplay_supports_composite, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "trigger_tooltip_query", gdkdisplay_trigger_tooltip_query, 0);
 #endif
 }

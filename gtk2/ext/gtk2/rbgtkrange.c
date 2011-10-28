@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cRange
 #define _SELF(self) (GTK_RANGE(RVAL2GOBJ(self)))
 
 /* Defined as Properties 
@@ -87,17 +88,17 @@ range_set_value(VALUE self, VALUE value)
 void 
 Init_gtk_range(void)
 {
-  VALUE gRange = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
 
-  rb_define_method(gRange, "value", range_get_value, 0);
-  rb_define_method(gRange, "set_increments", range_set_increments, 2);
-  rb_define_method(gRange, "set_range", range_set_range, 2);
-  rb_define_method(gRange, "set_value", range_set_value, 1);
-  G_DEF_SETTER(gRange, "value");
+  rb_define_method(RG_TARGET_NAMESPACE, "value", range_get_value, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "set_increments", range_set_increments, 2);
+  rb_define_method(RG_TARGET_NAMESPACE, "set_range", range_set_range, 2);
+  rb_define_method(RG_TARGET_NAMESPACE, "set_value", range_set_value, 1);
+  G_DEF_SETTER(RG_TARGET_NAMESPACE, "value");
 
 #if GTK_CHECK_VERSION(2,10,0)
   /* GtkSensitivityType */
-  G_DEF_CLASS(GTK_TYPE_SENSITIVITY_TYPE, "SensitivityType", gRange);
-  G_DEF_CONSTANTS(gRange, GTK_TYPE_SENSITIVITY_TYPE, "GTK_");
+  G_DEF_CLASS(GTK_TYPE_SENSITIVITY_TYPE, "SensitivityType", RG_TARGET_NAMESPACE);
+  G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SENSITIVITY_TYPE, "GTK_");
 #endif
 }

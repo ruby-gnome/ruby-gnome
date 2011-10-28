@@ -25,6 +25,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cRadioMenuItem
+
 struct rbgtk_rval2gtkradiomenuitemgslist_args {
     VALUE ary;
     long n;
@@ -138,9 +140,9 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
 void 
 Init_gtk_radio_menu_item(void)
 {
-    VALUE gRMenuItem = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);
 
-    rb_define_method(gRMenuItem, "initialize", rmitem_initialize, -1);
-    G_REPLACE_GET_PROPERTY(gRMenuItem, "group", rmitem_get_group, 0);
-    G_REPLACE_SET_PROPERTY(gRMenuItem, "group", rmitem_set_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rmitem_initialize, -1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", rmitem_get_group, 0);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", rmitem_set_group, 1);
 }

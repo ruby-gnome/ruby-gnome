@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cDevice
 #define _SELF(self) (GDK_DEVICE(RVAL2GOBJ(self)))
 
 /* Methods */
@@ -187,43 +188,43 @@ device_keys(VALUE self)
 void 
 Init_gtk_gdk_device(void)
 {
-    VALUE dev = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
 
-    rb_define_singleton_method(dev, "list", device_s_list, 0);
-    rb_define_singleton_method(dev, "core_pointer", device_s_get_core_pointer, 0);
-    rb_define_singleton_method(dev, "set_extension_events", device_s_set_extension_events, 3);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "list", device_s_list, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "core_pointer", device_s_get_core_pointer, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_extension_events", device_s_set_extension_events, 3);
 
-    rb_define_method(dev, "set_source", device_set_source, 1);
-    rb_define_method(dev, "set_mode", device_set_mode, 1);
-    rb_define_method(dev, "set_key", device_set_key, 3);
-    rb_define_method(dev, "set_axis_use", device_set_axis_use, 2);
-    rb_define_method(dev, "get_state", device_get_state, 1);
-    rb_define_method(dev, "get_history", device_get_history, 3);
-    rb_define_method(dev, "get_axis", device_get_axis, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_source", device_set_source, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mode", device_set_mode, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_key", device_set_key, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_axis_use", device_set_axis_use, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_state", device_get_state, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_history", device_get_history, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_axis", device_get_axis, 2);
 
-    rb_define_method(dev, "name", device_name, 0);
-    rb_define_method(dev, "source", device_source, 0);
-    rb_define_method(dev, "mode", device_mode, 0);
-    rb_define_method(dev, "has_cursor?", device_has_cursor, 0);
-    rb_define_method(dev, "axes", device_axes, 0);
-    rb_define_method(dev, "keys", device_keys, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", device_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "source", device_source, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mode", device_mode, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_cursor?", device_has_cursor, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "axes", device_axes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "keys", device_keys, 0);
 
-    G_DEF_SETTERS(dev);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GdkInputSource */
-    G_DEF_CLASS(GDK_TYPE_INPUT_SOURCE, "InputSource", dev);
-    G_DEF_CONSTANTS(dev, GDK_TYPE_INPUT_SOURCE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_INPUT_SOURCE, "InputSource", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_INPUT_SOURCE, "GDK_");
 
     /* GdkInputMode */
-    G_DEF_CLASS(GDK_TYPE_INPUT_MODE, "InputMode", dev);
-    G_DEF_CONSTANTS(dev, GDK_TYPE_INPUT_MODE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_INPUT_MODE, "InputMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_INPUT_MODE, "GDK_");
     
     /* GdkAxisUse */
-    G_DEF_CLASS(GDK_TYPE_AXIS_USE, "AxisUse", dev);
-    G_DEF_CONSTANTS(dev, GDK_TYPE_AXIS_USE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_AXIS_USE, "AxisUse", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_AXIS_USE, "GDK_");
 
     /* GdkExtensionMode */
-    G_DEF_CLASS(GDK_TYPE_EXTENSION_MODE, "ExtensionMode", dev);
-    G_DEF_CONSTANTS(dev, GDK_TYPE_EXTENSION_MODE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_EXTENSION_MODE, "ExtensionMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_EXTENSION_MODE, "GDK_");
 
 }

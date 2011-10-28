@@ -22,6 +22,9 @@
 #include "global.h"
 
 #ifdef   G_THREADS_ENABLED
+
+#define RG_TARGET_NAMESPACE mThreads
+
 static VALUE
 rbgdk_threads_init(VALUE self)
 {
@@ -64,11 +67,11 @@ void
 Init_gtk_gdk_threads(void)
 {
 #ifdef   G_THREADS_ENABLED
-    VALUE mGdkThreads = rb_define_module_under(mGdk, "Threads");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Threads");
 
-    rb_define_module_function(mGdkThreads, "init",  rbgdk_threads_init, 0);
-    rb_define_module_function(mGdkThreads, "enter", rbgdk_threads_enter, 0);
-    rb_define_module_function(mGdkThreads, "leave", rbgdk_threads_leave, 0);
-    rb_define_module_function(mGdkThreads, "synchronize", rbgdk_threads_synchronize, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "init",  rbgdk_threads_init, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "enter", rbgdk_threads_enter, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "leave", rbgdk_threads_leave, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "synchronize", rbgdk_threads_synchronize, 0);
 #endif
 }

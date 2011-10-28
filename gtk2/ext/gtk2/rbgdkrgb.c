@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mRGB
 #define RVAL2DRAW(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
 
@@ -178,21 +179,21 @@ rgb_set_verbose(VALUE self, VALUE verbose)
 void
 Init_gtk_gdk_rgb(void)
 {
-    VALUE mGdkRgb = rb_define_module_under(mGdk, "RGB");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "RGB");
 
-    rb_define_module_function(mGdkRgb, "draw_rgb_image", rgb_draw_rgb_image, -1);
-    rb_define_module_function(mGdkRgb, "draw_indexed_image", rgb_draw_indexed_image, 10);
-    rb_define_module_function(mGdkRgb, "draw_gray_image", rgb_draw_gray_image, 9);
-    rb_define_module_function(mGdkRgb, "draw_rgb_32_image", rgb_draw_rgb_32_image, -1);
-    rb_define_module_function(mGdkRgb, "find_color", rgb_find_color, 2);
-    rb_define_module_function(mGdkRgb, "set_install", rgb_set_install, 1);
-    rb_define_module_function(mGdkRgb, "set_min_colors", rgb_set_min_colors, 0);
-    rb_define_module_function(mGdkRgb, "visual", rgb_get_visual, 0);
-    rb_define_module_function(mGdkRgb, "colormap", rgb_get_cmap, 0);
-    rb_define_module_function(mGdkRgb, "ditherable?", rgb_ditherable, 0);
-    rb_define_module_function(mGdkRgb, "set_verbose", rgb_set_verbose, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_rgb_image", rgb_draw_rgb_image, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_indexed_image", rgb_draw_indexed_image, 10);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_gray_image", rgb_draw_gray_image, 9);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "draw_rgb_32_image", rgb_draw_rgb_32_image, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "find_color", rgb_find_color, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_install", rgb_set_install, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_min_colors", rgb_set_min_colors, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "visual", rgb_get_visual, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "colormap", rgb_get_cmap, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "ditherable?", rgb_ditherable, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_verbose", rgb_set_verbose, 1);
 
     /* GdkRgbDither */
-    G_DEF_CLASS(GDK_TYPE_RGB_DITHER, "Dither", mGdkRgb);
-    G_DEF_CONSTANTS(mGdkRgb, GDK_TYPE_RGB_DITHER, "GDK_RGB_");
+    G_DEF_CLASS(GDK_TYPE_RGB_DITHER, "Dither", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_RGB_DITHER, "GDK_RGB_");
 }

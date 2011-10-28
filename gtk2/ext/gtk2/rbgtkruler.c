@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cRuler
 #define _SELF(self) (GTK_RULER(RVAL2GOBJ(self)))
 
 /* Defined as Properties
@@ -66,11 +67,11 @@ ruler_draw_pos(VALUE self)
 void 
 Init_gtk_ruler(void)
 {
-    VALUE gRuler = G_DEF_CLASS(GTK_TYPE_RULER, "Ruler", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RULER, "Ruler", mGtk);
 
-    rb_define_method(gRuler, "set_range", ruler_set_range, 4);
-    G_DEF_SETTER(gRuler, "range");
-    rb_define_method(gRuler, "range", ruler_get_range, 0);
-    rb_define_method(gRuler, "draw_ticks", ruler_draw_ticks, 0);
-    rb_define_method(gRuler, "draw_pos", ruler_draw_pos, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_range", ruler_set_range, 4);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "range");
+    rb_define_method(RG_TARGET_NAMESPACE, "range", ruler_get_range, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_ticks", ruler_draw_ticks, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_pos", ruler_draw_pos, 0);
 }

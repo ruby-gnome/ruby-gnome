@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCursor
+
 static VALUE
 gdkcursor_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -101,18 +103,18 @@ gdkcursor_get_image(VALUE self)
 void
 Init_gtk_gdk_cursor(void)
 {
-    VALUE gdkCursor = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
-    rb_define_method(gdkCursor, "initialize", gdkcursor_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkcursor_initialize, -1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkCursor, "display", gdkcursor_get_display, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display", gdkcursor_get_display, 0);
 #endif
-    rb_define_method(gdkCursor, "pixmap?", gdkcursor_is_pixmap, 0);
-    rb_define_method(gdkCursor, "cursor_type", gdkcursor_cursor_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixmap?", gdkcursor_is_pixmap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cursor_type", gdkcursor_cursor_type, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gdkCursor, "image", gdkcursor_get_image, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "image", gdkcursor_get_image, 0);
 #endif
 
-    G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", gdkCursor);
-    G_DEF_CONSTANTS(gdkCursor, GDK_TYPE_CURSOR_TYPE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_CURSOR_TYPE, "GDK_");
 }

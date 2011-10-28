@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mCellEditable
 #define _SELF(s) (GTK_CELL_EDITABLE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -48,9 +49,9 @@ celledit_remove_widget(VALUE self)
 void
 Init_gtk_celleditable(void)
 {
-    VALUE celledit = G_DEF_INTERFACE(GTK_TYPE_CELL_EDITABLE, "CellEditable", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_CELL_EDITABLE, "CellEditable", mGtk);
 
-    rb_define_method(celledit, "start_editing", celledit_start_editing, 1);
-    rb_define_method(celledit, "editing_done", celledit_editing_done, 0);
-    rb_define_method(celledit, "remove_widget", celledit_remove_widget, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_editing", celledit_start_editing, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "editing_done", celledit_editing_done, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_widget", celledit_remove_widget, 0);
 }

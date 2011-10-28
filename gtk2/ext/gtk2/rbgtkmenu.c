@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenu
 #define _SELF(self) (GTK_MENU(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -183,23 +184,23 @@ menu_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 void 
 Init_gtk_menu(void)
 {
-    VALUE gMenu = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 
-    rb_define_method(gMenu, "initialize", menu_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", menu_initialize, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gMenu, "set_screen", menu_set_screen, 1);
-    G_DEF_SETTER(gMenu, "screen");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_screen", menu_set_screen, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "screen");
 #endif
-    rb_define_method(gMenu, "reorder_child", menu_reorder_child, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "reorder_child", menu_reorder_child, 2);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gMenu, "attach", menu_attach, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach", menu_attach, 5);
 #endif
-    rb_define_method(gMenu, "popup", menu_popup, 4);
-    rb_define_method(gMenu, "popdown", menu_popdown, 0);
-    rb_define_method(gMenu, "reposition", menu_reposition, 0);
-    rb_define_method(gMenu, "detach", menu_detach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "popup", menu_popup, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "popdown", menu_popdown, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "reposition", menu_reposition, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "detach", menu_detach, 0);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(gMenu, "get_for_attach_widget", menu_s_get_for_attach_widget, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_for_attach_widget", menu_s_get_for_attach_widget, 1);
 #endif
-    rb_define_method(gMenu, "attach_to_widget", menu_attach_to_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach_to_widget", menu_attach_to_widget, 1);
 }

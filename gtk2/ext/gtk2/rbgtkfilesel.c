@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cFileSelection
 #define _SELF(self) GTK_FILE_SELECTION(RVAL2GOBJ(self))
 
 static VALUE
@@ -130,20 +131,20 @@ fsel_fileop_ren_file(VALUE self)
 void 
 Init_gtk_file_selection(void)
 {
-    VALUE gFileSel = G_DEF_CLASS(GTK_TYPE_FILE_SELECTION, "FileSelection", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_SELECTION, "FileSelection", mGtk);
 
-    rb_define_method(gFileSel, "initialize", fsel_initialize, -1);
-    rb_define_method(gFileSel, "complete", fsel_complete, 1);
-    rb_define_method(gFileSel, "show_fileop_buttons", fsel_show_fileop_buttons, 0);
-    rb_define_method(gFileSel, "hide_fileop_buttons", fsel_hide_fileop_buttons, 0);
-    rb_define_method(gFileSel, "selections", fsel_get_selections, 0);
-    rb_define_method(gFileSel, "fileop_dialog", fsel_fileop_dialog, 0);
-    rb_define_method(gFileSel, "ok_button", fsel_ok_button, 0);
-    rb_define_method(gFileSel, "cancel_button", fsel_cancel_button, 0);
-    rb_define_method(gFileSel, "dir_list", fsel_dir_list, 0);
-    rb_define_method(gFileSel, "file_list", fsel_file_list, 0);
-    rb_define_method(gFileSel, "history_pulldown", fsel_history_pulldown, 0);
-    rb_define_method(gFileSel, "fileop_c_dir", fsel_fileop_c_dir, 0);
-    rb_define_method(gFileSel, "fileop_del_file", fsel_fileop_del_file, 0);
-    rb_define_method(gFileSel, "fileop_ren_file", fsel_fileop_ren_file, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fsel_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "complete", fsel_complete, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "show_fileop_buttons", fsel_show_fileop_buttons, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "hide_fileop_buttons", fsel_hide_fileop_buttons, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "selections", fsel_get_selections, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "fileop_dialog", fsel_fileop_dialog, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ok_button", fsel_ok_button, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cancel_button", fsel_cancel_button, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dir_list", fsel_dir_list, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "file_list", fsel_file_list, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "history_pulldown", fsel_history_pulldown, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "fileop_c_dir", fsel_fileop_c_dir, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "fileop_del_file", fsel_fileop_del_file, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "fileop_ren_file", fsel_fileop_ren_file, 0);
 }

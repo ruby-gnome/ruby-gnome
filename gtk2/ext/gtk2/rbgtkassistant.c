@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cAssistant
 #define _SELF(s) (GTK_ASSISTANT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -190,36 +191,36 @@ void
 Init_gtk_assistant(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE ass = G_DEF_CLASS(GTK_TYPE_ASSISTANT, "Assistant", mGtk);
-    rb_define_method(ass, "initialize", ass_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ASSISTANT, "Assistant", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ass_initialize, 0);
 
-    rb_define_method(ass, "current_page", ass_get_current_page, 0);
-    rb_define_method(ass, "set_current_page", ass_set_current_page, 1);
-    rb_define_method(ass, "n_pages", ass_get_n_pages, 0);
-    rb_define_method(ass, "get_nth_page", ass_get_nth_page, 1);
-    rb_define_method(ass, "prepend_page", ass_prepend_page, 1);
-    rb_define_method(ass, "append_page", ass_append_page, 1);
-    rb_define_method(ass, "insert_page", ass_insert_page, 2);
-    rb_define_method(ass, "set_forward_page_func", ass_set_forward_page_func, 0);
-    rb_define_method(ass, "set_page_type", ass_set_page_type, 2);
-    rb_define_method(ass, "get_page_type", ass_get_page_type, 1);
-    rb_define_method(ass, "set_page_title", ass_set_page_title, 2);
-    rb_define_method(ass, "get_page_title", ass_get_page_title, 1);
-    rb_define_method(ass, "set_page_header_image", ass_set_page_header_image, 2);
-    rb_define_method(ass, "get_page_header_image", ass_get_page_header_image, 1);
-    rb_define_method(ass, "set_page_side_image", ass_set_page_side_image, 2);
-    rb_define_method(ass, "get_page_side_image", ass_get_page_side_image, 1);
-    rb_define_method(ass, "set_page_complete", ass_set_page_complete, 2);
-    rb_define_method(ass, "get_page_complete", ass_get_page_complete, 1);
-    rb_define_method(ass, "add_action_widget", ass_add_action_widget, 1);
-    rb_define_method(ass, "remove_action_widget", ass_remove_action_widget, 1);
-    rb_define_method(ass, "update_buttons_state", ass_update_buttons_state, 0);
-    rb_define_method(ass, "commit", ass_commit, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "current_page", ass_get_current_page, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_current_page", ass_set_current_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_pages", ass_get_n_pages, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_nth_page", ass_get_nth_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_page", ass_prepend_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_page", ass_append_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_page", ass_insert_page, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_forward_page_func", ass_set_forward_page_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_type", ass_set_page_type, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_type", ass_get_page_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_title", ass_set_page_title, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_title", ass_get_page_title, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_header_image", ass_set_page_header_image, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_header_image", ass_get_page_header_image, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_side_image", ass_set_page_side_image, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_side_image", ass_get_page_side_image, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_page_complete", ass_set_page_complete, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_complete", ass_get_page_complete, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_action_widget", ass_add_action_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_action_widget", ass_remove_action_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "update_buttons_state", ass_update_buttons_state, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "commit", ass_commit, 0);
 
-    G_DEF_SETTERS(ass);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkAssistantPageType */
-    G_DEF_CLASS(GTK_TYPE_ASSISTANT_PAGE_TYPE, "PageType", ass);
-    G_DEF_CONSTANTS(ass, GTK_TYPE_ASSISTANT_PAGE_TYPE, "GTK_ASSISTANT_");
+    G_DEF_CLASS(GTK_TYPE_ASSISTANT_PAGE_TYPE, "PageType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ASSISTANT_PAGE_TYPE, "GTK_ASSISTANT_");
 #endif
 }

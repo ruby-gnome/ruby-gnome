@@ -22,7 +22,10 @@
 #include "global.h"
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
+
+#define RG_TARGET_NAMESPACE cToolItem
 #define _SELF(self) (GTK_TOOL_ITEM(RVAL2GOBJ(self)))
+
 static VALUE
 toolitem_initialize(VALUE self)
 {
@@ -152,27 +155,27 @@ void
 Init_gtk_toolitem(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gToolItem = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);
-    rb_define_method(gToolItem, "initialize", toolitem_initialize, 0);
-    rb_define_method(gToolItem, "set_homogeneous", toolitem_set_homogeneous, 1);
-    G_DEF_SETTER(gToolItem, "homogenous");
-    rb_define_method(gToolItem, "homogeneous?", toolitem_get_homogeneous, 0);
-    rb_define_method(gToolItem, "set_expand", toolitem_set_expand, 1);
-    G_DEF_SETTER(gToolItem, "expand");
-    rb_define_method(gToolItem, "expand?", toolitem_get_expand, 0);
-    rb_define_method(gToolItem, "set_tooltip", toolitem_set_tooltip, -1);
-    rb_define_method(gToolItem, "set_use_drag_window", toolitem_set_use_drag_window, 1);
-    G_DEF_SETTER(gToolItem, "use_drag_window");
-    rb_define_method(gToolItem, "use_drag_window?", toolitem_get_use_drag_window, 0);
-    rb_define_method(gToolItem, "icon_size", toolitem_get_icon_size, 0);
-    rb_define_method(gToolItem, "orientation", toolitem_get_orientation, 0);
-    rb_define_method(gToolItem, "toolbar_style", toolitem_get_toolbar_style, 0);
-    rb_define_method(gToolItem, "relief_style", toolitem_get_relief_style, 0);
-    rb_define_method(gToolItem, "retrieve_proxy_menu_item", toolitem_retrieve_proxy_menu_item, 0);
-    rb_define_method(gToolItem, "get_proxy_menu_item", toolitem_get_proxy_menu_item, 1);
-    rb_define_method(gToolItem, "set_proxy_menu_item", toolitem_set_proxy_menu_item, 2);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", toolitem_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_homogeneous", toolitem_set_homogeneous, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "homogenous");
+    rb_define_method(RG_TARGET_NAMESPACE, "homogeneous?", toolitem_get_homogeneous, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_expand", toolitem_set_expand, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "expand");
+    rb_define_method(RG_TARGET_NAMESPACE, "expand?", toolitem_get_expand, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tooltip", toolitem_set_tooltip, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_use_drag_window", toolitem_set_use_drag_window, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "use_drag_window");
+    rb_define_method(RG_TARGET_NAMESPACE, "use_drag_window?", toolitem_get_use_drag_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "icon_size", toolitem_get_icon_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "orientation", toolitem_get_orientation, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toolbar_style", toolitem_get_toolbar_style, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "relief_style", toolitem_get_relief_style, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "retrieve_proxy_menu_item", toolitem_retrieve_proxy_menu_item, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_proxy_menu_item", toolitem_get_proxy_menu_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_proxy_menu_item", toolitem_set_proxy_menu_item, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gToolItem, "rebuild_menu", toolitem_rebuild_menu, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rebuild_menu", toolitem_rebuild_menu, 0);
 #endif
 #endif
 }

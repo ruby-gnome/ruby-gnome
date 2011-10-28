@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cRectangle
 #define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 
 static VALUE
@@ -120,22 +121,22 @@ gdkrect_to_a(VALUE self)
 void
 Init_gtk_gdk_rectangle(void)
 {
-    VALUE gdkRectangle = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
 
-    rb_define_method(gdkRectangle, "initialize", gdkrect_initialize, 4);
-    rb_define_method(gdkRectangle, "intersect", gdkrect_intersect, 1);
-    rb_define_alias(gdkRectangle, "&", "intersect");
-    rb_define_method(gdkRectangle, "union", gdkrect_union, 1);
-    rb_define_alias(gdkRectangle, "|", "union");
-    rb_define_method(gdkRectangle, "x", gdkrect_x, 0);
-    rb_define_method(gdkRectangle, "y", gdkrect_y, 0);
-    rb_define_method(gdkRectangle, "width", gdkrect_w, 0);
-    rb_define_method(gdkRectangle, "height", gdkrect_h, 0);
-    rb_define_method(gdkRectangle, "set_x", gdkrect_set_x, 1);
-    rb_define_method(gdkRectangle, "set_y", gdkrect_set_y, 1);
-    rb_define_method(gdkRectangle, "set_width", gdkrect_set_w, 1);
-    rb_define_method(gdkRectangle, "set_height", gdkrect_set_h, 1);
-    rb_define_method(gdkRectangle, "to_a", gdkrect_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkrect_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "intersect", gdkrect_intersect, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "&", "intersect");
+    rb_define_method(RG_TARGET_NAMESPACE, "union", gdkrect_union, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "|", "union");
+    rb_define_method(RG_TARGET_NAMESPACE, "x", gdkrect_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "y", gdkrect_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", gdkrect_w, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", gdkrect_h, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_x", gdkrect_set_x, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_y", gdkrect_set_y, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width", gdkrect_set_w, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_height", gdkrect_set_h, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", gdkrect_to_a, 0);
 
-    G_DEF_SETTERS(gdkRectangle);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMisc
 #define _SELF(s) (GTK_MISC(RVAL2GOBJ(s)))
 
 static VALUE
@@ -60,10 +61,10 @@ misc_get_padding(VALUE self)
 void 
 Init_gtk_misc(void)
 {
-    VALUE gMisc = G_DEF_CLASS(GTK_TYPE_MISC, "Misc", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MISC, "Misc", mGtk);
 
-    rb_define_method(gMisc, "set_alignment", misc_set_align, 2);
-    rb_define_method(gMisc, "set_padding", misc_set_padding, 2);
-    rb_define_method(gMisc, "alignment", misc_get_align, 0);
-    rb_define_method(gMisc, "padding", misc_get_padding, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment", misc_set_align, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_padding", misc_set_padding, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "alignment", misc_get_align, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "padding", misc_get_padding, 0);
 }

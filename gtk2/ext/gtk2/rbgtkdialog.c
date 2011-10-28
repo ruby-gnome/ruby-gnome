@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cDialog
 #define _SELF(self) (GTK_DIALOG(RVAL2GOBJ(self)))
 
 static ID id_to_a;
@@ -221,39 +222,39 @@ dialog_get_response_for_widget(VALUE self, VALUE widget)
 void 
 Init_gtk_dialog(void)
 {
-    VALUE gDialog = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
 
     id_to_a = rb_intern("to_a");
 
-    rb_define_method(gDialog, "initialize", dialog_initialize, -1);
-    rb_define_method(gDialog, "run", dialog_run, 0);
-    rb_define_method(gDialog, "response", dialog_response, 1);
-    rb_define_method(gDialog, "add_button", dialog_add_button, 2);
-    rb_define_method(gDialog, "add_buttons", dialog_add_buttons, -1);
-    rb_define_method(gDialog, "add_action_widget", dialog_add_action_widget, 2);
-    rb_define_method(gDialog, "set_default_response", dialog_set_default_response, 1);
-    G_DEF_SETTER(gDialog, "default_response");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", dialog_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "run", dialog_run, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "response", dialog_response, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_button", dialog_add_button, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_buttons", dialog_add_buttons, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_action_widget", dialog_add_action_widget, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_default_response", dialog_set_default_response, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "default_response");
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(gDialog, "alternative_dialog_button_order?", 
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "alternative_dialog_button_order?", 
                                dialog_s_alternative_dialog_button_order, 1);
-    rb_define_method(gDialog, "set_alternative_button_order", dialog_set_alternative_button_order, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_alternative_button_order", dialog_set_alternative_button_order, 1);
 #endif
 
-    rb_define_method(gDialog, "set_response_sensitive", dialog_set_response_sensitive, 2);
-    rb_define_method(gDialog, "vbox", dialog_vbox, 0);
-    rb_define_method(gDialog, "action_area", dialog_action_area, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_response_sensitive", dialog_set_response_sensitive, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "vbox", dialog_vbox, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "action_area", dialog_action_area, 0);
 
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gDialog, "get_response", dialog_get_response_for_widget, 1);
-    rb_define_method(gDialog, "get_response_for_widget", dialog_get_response_for_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_response", dialog_get_response_for_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_response_for_widget", dialog_get_response_for_widget, 1);
 #endif
 
     /* GtkDialogFlags */
-    G_DEF_CLASS(GTK_TYPE_DIALOG_FLAGS, "Flags", gDialog);
-    G_DEF_CONSTANTS(gDialog, GTK_TYPE_DIALOG_FLAGS, "GTK_DIALOG_");
+    G_DEF_CLASS(GTK_TYPE_DIALOG_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_DIALOG_FLAGS, "GTK_DIALOG_");
 
     /* GtkResponseType */
-    G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", gDialog);
-    G_DEF_CONSTANTS(gDialog, GTK_TYPE_RESPONSE_TYPE, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RESPONSE_TYPE, "GTK_");
 }

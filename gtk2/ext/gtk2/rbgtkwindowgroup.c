@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cWindowGroup
+
 static VALUE
 rbgwingrp_initialize(VALUE self)
 {
@@ -48,8 +50,8 @@ rbgwingrp_remove_window(VALUE self, VALUE window)
 void 
 Init_gtk_windowgroup(void)
 {
-    VALUE gWindowGroup = G_DEF_CLASS(GTK_TYPE_WINDOW_GROUP, "WindowGroup", mGtk);
-    rb_define_method(gWindowGroup, "initialize", rbgwingrp_initialize, 0);
-    rb_define_method(gWindowGroup, "add", rbgwingrp_add_window, 1);
-    rb_define_method(gWindowGroup, "remove", rbgwingrp_remove_window, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WINDOW_GROUP, "WindowGroup", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbgwingrp_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", rbgwingrp_add_window, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", rbgwingrp_remove_window, 1);
 }

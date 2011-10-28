@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mEditable
+
 static VALUE
 edit_sel_region(VALUE self, VALUE start, VALUE end)
 {
@@ -129,21 +131,21 @@ edit_paste_clipboard(VALUE self)
 void 
 Init_gtk_editable(void)
 {
-    VALUE mEditable = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
 
-    rb_define_method(mEditable, "select_region", edit_sel_region, 2);
-    rb_define_method(mEditable, "selection_bounds", edit_get_sel_bounds, 0);
-    rb_define_method(mEditable, "insert_text", edit_insert_text, 2);
-    rb_define_method(mEditable, "delete_text", edit_delete_text, 2);
-    rb_define_method(mEditable, "get_chars", edit_get_chars, 2);
-    rb_define_method(mEditable, "delete_selection", edit_delete_selection, 0);
-    rb_define_method(mEditable, "position", edit_get_position, 0);
-    rb_define_method(mEditable, "set_position", edit_set_position, 1);
-    rb_define_method(mEditable, "set_editable", edit_set_editable, 1);
-    rb_define_method(mEditable, "editable?", edit_get_editable, 0);
-    rb_define_method(mEditable, "copy_clipboard", edit_copy_clipboard, 0);
-    rb_define_method(mEditable, "cut_clipboard", edit_cut_clipboard, 0);
-    rb_define_method(mEditable, "paste_clipboard", edit_paste_clipboard, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_region", edit_sel_region, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection_bounds", edit_get_sel_bounds, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_text", edit_insert_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_text", edit_delete_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_chars", edit_get_chars, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_selection", edit_delete_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "position", edit_get_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_position", edit_set_position, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_editable", edit_set_editable, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "editable?", edit_get_editable, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy_clipboard", edit_copy_clipboard, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cut_clipboard", edit_cut_clipboard, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "paste_clipboard", edit_paste_clipboard, 0);
 
-    G_DEF_SETTERS(mEditable);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

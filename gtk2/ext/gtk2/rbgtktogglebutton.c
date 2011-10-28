@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cToggleButton
+
 static VALUE
 tbtn_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -77,11 +79,11 @@ tbtn_toggled(VALUE self)
 void 
 Init_gtk_toggle_button(void)
 {
-    VALUE gTButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);
 
-    rb_define_method(gTButton, "initialize", tbtn_initialize, -1);
-    rb_define_method(gTButton, "set_mode", tbtn_set_mode, 1);
-    G_DEF_SETTER(gTButton, "mode");
-    rb_define_method(gTButton, "mode?", tbtn_get_mode, 0);
-    rb_define_method(gTButton, "toggled", tbtn_toggled, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tbtn_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mode", tbtn_set_mode, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "mode");
+    rb_define_method(RG_TARGET_NAMESPACE, "mode?", tbtn_get_mode, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggled", tbtn_toggled, 0);
 }

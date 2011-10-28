@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTable
 #define _SELF(self) (GTK_TABLE(RVAL2GOBJ(self)))
 
 static VALUE
@@ -151,26 +152,26 @@ tbl_get_default_col_spacing(VALUE self)
 void 
 Init_gtk_table(void)
 {
-    VALUE gTable = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
 
-    rb_define_method(gTable, "initialize", tbl_initialize, -1);
-    rb_define_method(gTable, "resize", tbl_resize, 2);
-    rb_define_method(gTable, "attach", tbl_attach, -1);
-    rb_define_method(gTable, "attach_defaults", tbl_attach_defaults, 5);
-    G_REPLACE_SET_PROPERTY(gTable, "row_spacing", tbl_set_row_spacing, 2);
-    rb_undef_method(gTable, "row_spacing=");
-    G_REPLACE_SET_PROPERTY(gTable, "column_spacing", tbl_set_col_spacing, 2);
-    rb_undef_method(gTable, "column_spacing=");
-    rb_define_method(gTable, "get_row_spacing", tbl_get_row_spacing, 1);
-    rb_undef_method(gTable, "row_spacing");
-    rb_define_method(gTable, "get_column_spacing", tbl_get_col_spacing, 1);
-    rb_undef_method(gTable, "column_spacing");
-    rb_define_method(gTable, "set_row_spacings", tbl_set_row_spacings, 1);
-    G_DEF_SETTER(gTable, "row_spacings");
-    rb_define_method(gTable, "set_column_spacings", tbl_set_col_spacings, 1);
-    G_DEF_SETTER(gTable, "column_spacings");
-    rb_define_method(gTable, "row_spacings", tbl_get_row_spacings, 0);
-    rb_define_method(gTable, "column_spacings", tbl_get_col_spacings, 0);
-    rb_define_method(gTable, "default_row_spacing", tbl_get_default_row_spacing, 0);
-    rb_define_method(gTable, "default_column_spacing", tbl_get_default_col_spacing, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tbl_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "resize", tbl_resize, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach", tbl_attach, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach_defaults", tbl_attach_defaults, 5);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "row_spacing", tbl_set_row_spacing, 2);
+    rb_undef_method(RG_TARGET_NAMESPACE, "row_spacing=");
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "column_spacing", tbl_set_col_spacing, 2);
+    rb_undef_method(RG_TARGET_NAMESPACE, "column_spacing=");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_row_spacing", tbl_get_row_spacing, 1);
+    rb_undef_method(RG_TARGET_NAMESPACE, "row_spacing");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column_spacing", tbl_get_col_spacing, 1);
+    rb_undef_method(RG_TARGET_NAMESPACE, "column_spacing");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_row_spacings", tbl_set_row_spacings, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "row_spacings");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_column_spacings", tbl_set_col_spacings, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "column_spacings");
+    rb_define_method(RG_TARGET_NAMESPACE, "row_spacings", tbl_get_row_spacings, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "column_spacings", tbl_get_col_spacings, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_row_spacing", tbl_get_default_row_spacing, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_column_spacing", tbl_get_default_col_spacing, 0);
 }

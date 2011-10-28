@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentManager
 #define _SELF(self) (GTK_RECENT_MANAGER(RVAL2GOBJ(self)))
 
 
@@ -138,20 +139,20 @@ void
 Init_gtk_recent_manager(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE rm = G_DEF_CLASS(GTK_TYPE_RECENT_MANAGER, "RecentManager", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_MANAGER, "RecentManager", mGtk);
 
-    rb_define_method(rm, "initialize", rm_initialize, 0);
-    rb_define_singleton_method(rm, "default", rm_s_get_default, 0);
-    rb_define_singleton_method(rm, "get_for_screen", rm_s_get_for_screen, 1);
-    rb_define_method(rm, "set_screen", rm_set_screen, 1);
-    G_DEF_SETTER(rm, "set_screen");
-    rb_define_method(rm, "add_item", rm_add_item, -1);
-    rb_define_method(rm, "remove_item", rm_remove_item, 1);
-    rb_define_method(rm, "lookup_item", rm_lookup_item, 1);
-    rb_define_method(rm, "has_item?", rm_has_item, 1);
-    rb_define_method(rm, "move_item", rm_move_item, 2);
-    rb_define_method(rm, "items", rm_get_items, 0);
-    rb_define_method(rm, "purge_items", rm_purge_items, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rm_initialize, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", rm_s_get_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_for_screen", rm_s_get_for_screen, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_screen", rm_set_screen, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "set_screen");
+    rb_define_method(RG_TARGET_NAMESPACE, "add_item", rm_add_item, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_item", rm_remove_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup_item", rm_lookup_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_item?", rm_has_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_item", rm_move_item, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "items", rm_get_items, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "purge_items", rm_purge_items, 0);
 
     /* GtkRecentManagerError */
     G_DEF_ERROR(GTK_RECENT_MANAGER_ERROR, "RecentManagerError", mGtk, rb_eRuntimeError,

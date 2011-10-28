@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cDragContext
 #define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
 
 static VALUE
@@ -268,36 +269,36 @@ gdkdragcontext_drag_drop_succeeded(VALUE self)
 void
 Init_gtk_gdk_dragcontext(void)
 {
-    VALUE gdkDragContext = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
-    rb_define_singleton_method(gdkDragContext, "get_protocol", gdkdragcontext_s_get_protocol, -1);
-    rb_define_singleton_method(gdkDragContext, "drag_begin", gdkdragcontext_s_drag_begin, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_protocol", gdkdragcontext_s_get_protocol, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "drag_begin", gdkdragcontext_s_drag_begin, 1);
 
-    rb_define_method(gdkDragContext, "initialize", gdkdragcontext_initialize, 0);
-    rb_define_method(gdkDragContext, "protocol", gdkdragcontext_protocol, 0);
-    rb_define_method(gdkDragContext, "source?", gdkdragcontext_is_source, 0);
-    rb_define_method(gdkDragContext, "source_window", gdkdragcontext_source_window, 0);
-    rb_define_method(gdkDragContext, "dest_window", gdkdragcontext_dest_window, 0);
-    rb_define_method(gdkDragContext, "targets", gdkdragcontext_targets, 0);
-    rb_define_method(gdkDragContext, "actions", gdkdragcontext_actions, 0);
-    rb_define_method(gdkDragContext, "suggested_action", gdkdragcontext_suggested_action, 0);
-    rb_define_method(gdkDragContext, "action", gdkdragcontext_action, 0);
-    rb_define_method(gdkDragContext, "start_time", gdkdragcontext_start_time, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkdragcontext_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "protocol", gdkdragcontext_protocol, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "source?", gdkdragcontext_is_source, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "source_window", gdkdragcontext_source_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dest_window", gdkdragcontext_dest_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "targets", gdkdragcontext_targets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "actions", gdkdragcontext_actions, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "suggested_action", gdkdragcontext_suggested_action, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "action", gdkdragcontext_action, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_time", gdkdragcontext_start_time, 0);
 
-    rb_define_method(gdkDragContext, "selection", gdkdragcontext_get_selection, 0);
-    rb_define_method(gdkDragContext, "drag_abort", gdkdragcontext_drag_abort, 1);
-    rb_define_method(gdkDragContext, "drop_reply", gdkdragcontext_drop_reply, 2);
-    rb_define_method(gdkDragContext, "drag_drop", gdkdragcontext_drag_drop, 1);
-    rb_define_method(gdkDragContext, "find_window", gdkdragcontext_find_window, 4);
-    rb_define_method(gdkDragContext, "drag_motion", gdkdragcontext_drag_motion, 7);
-    rb_define_method(gdkDragContext, "drop_finish", gdkdragcontext_drop_finish, 2);
-    rb_define_method(gdkDragContext, "drag_status", gdkdragcontext_drag_status, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection", gdkdragcontext_get_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_abort", gdkdragcontext_drag_abort, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "drop_reply", gdkdragcontext_drop_reply, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_drop", gdkdragcontext_drag_drop, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "find_window", gdkdragcontext_find_window, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_motion", gdkdragcontext_drag_motion, 7);
+    rb_define_method(RG_TARGET_NAMESPACE, "drop_finish", gdkdragcontext_drop_finish, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_status", gdkdragcontext_drag_status, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gdkDragContext, "drag_drop_succeeded?", gdkdragcontext_drag_drop_succeeded, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_drop_succeeded?", gdkdragcontext_drag_drop_succeeded, 0);
 #endif
 	/* Constants */
-    G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", gdkDragContext);
-    G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", gdkDragContext);
-    G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_PROTOCOL, "GDK_DRAG_");
-    G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_ACTION, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_DRAG_PROTOCOL, "GDK_DRAG_");
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_DRAG_ACTION, "GDK_");
 }

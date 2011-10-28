@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreePath
 #define _SELF(s) ((GtkTreePath*)RVAL2BOXED(s, GTK_TYPE_TREE_PATH))
 
 static ID id_equal;
@@ -168,23 +169,23 @@ treepath_is_descendant(VALUE self, VALUE ancestor)
 void 
 Init_gtk_treepath(void)
 {
-    VALUE gTreepath = G_DEF_CLASS(GTK_TYPE_TREE_PATH, "TreePath", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_PATH, "TreePath", mGtk);
 
     id_equal = rb_intern("==");
 
-    rb_define_method(gTreepath, "initialize", treepath_initialize, -1);
-    rb_define_method(gTreepath, "to_str", treepath_to_string, 0);
-    rb_define_alias(gTreepath, "to_s", "to_str");
-    rb_define_method(gTreepath, "append_index", treepath_append_index, 1);
-    rb_define_method(gTreepath, "prepend_index", treepath_prepend_index, 1);
-    rb_define_method(gTreepath, "depth", treepath_get_depth, 0);
-    rb_define_method(gTreepath, "indices", treepath_get_indices, 0);
-    rb_define_method(gTreepath, "<=>", treepath_compare, 1);
-    rb_define_method(gTreepath, "==", treepath_equal, 1);
-    rb_define_method(gTreepath, "next!", treepath_next, 0);
-    rb_define_method(gTreepath, "prev!", treepath_prev, 0);
-    rb_define_method(gTreepath, "up!", treepath_up, 0);
-    rb_define_method(gTreepath, "down!", treepath_down, 0);
-    rb_define_method(gTreepath, "ancestor?", treepath_is_ancestor, 1);
-    rb_define_method(gTreepath, "descendant?", treepath_is_descendant, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", treepath_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_str", treepath_to_string, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_str");
+    rb_define_method(RG_TARGET_NAMESPACE, "append_index", treepath_append_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_index", treepath_prepend_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "depth", treepath_get_depth, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "indices", treepath_get_indices, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "<=>", treepath_compare, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", treepath_equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "next!", treepath_next, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "prev!", treepath_prev, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "up!", treepath_up, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "down!", treepath_down, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ancestor?", treepath_is_ancestor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "descendant?", treepath_is_descendant, 1);
 }

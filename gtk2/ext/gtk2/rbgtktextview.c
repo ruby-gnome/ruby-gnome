@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextView
 #define _SELF(self) (GTK_TEXT_VIEW(RVAL2GOBJ(self)))
 #define RVAL2BUFFER(b) (GTK_TEXT_BUFFER(RVAL2GOBJ(b)))
 #define RVAL2MARK(m) (GTK_TEXT_MARK(RVAL2GOBJ(m)))
@@ -283,47 +284,47 @@ textview_get_default_attributes(VALUE self)
 void
 Init_gtk_textview(void)
 {
-    VALUE cTextView = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
 
     id_buffer = rb_intern("buffer");
 
-    rb_define_method(cTextView, "initialize", textview_initialize, -1);
-    G_REPLACE_SET_PROPERTY(cTextView, "buffer", textview_set_buffer, 1);
-    G_REPLACE_GET_PROPERTY(cTextView, "buffer", textview_get_buffer, 0);
-    rb_define_method(cTextView, "scroll_to_mark", textview_scroll_to_mark, 5);
-    rb_define_method(cTextView, "scroll_to_iter", textview_scroll_to_iter, 5);
-    rb_define_method(cTextView, "scroll_mark_onscreen", textview_scroll_mark_onscreen, 1);
-    rb_define_method(cTextView, "move_mark_onscreen", textview_move_mark_onscreen, 1);
-    rb_define_method(cTextView, "place_cursor_onscreen", textview_place_cursor_onscreen, 0);
-    rb_define_method(cTextView, "visible_rect", textview_get_visible_rect, 0);
-    rb_define_method(cTextView, "get_iter_location", textview_get_iter_location, 1);
-    rb_define_method(cTextView, "get_line_at_y", textview_get_line_at_y, 1);
-    rb_define_method(cTextView, "get_line_yrange", textview_get_line_yrange, 1);
-    rb_define_method(cTextView, "get_iter_at_location", textview_get_iter_at_location, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", textview_initialize, -1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "buffer", textview_set_buffer, 1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "buffer", textview_get_buffer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to_mark", textview_scroll_to_mark, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to_iter", textview_scroll_to_iter, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "scroll_mark_onscreen", textview_scroll_mark_onscreen, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_mark_onscreen", textview_move_mark_onscreen, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "place_cursor_onscreen", textview_place_cursor_onscreen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_rect", textview_get_visible_rect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_location", textview_get_iter_location, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_line_at_y", textview_get_line_at_y, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_line_yrange", textview_get_line_yrange, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_location", textview_get_iter_at_location, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(cTextView, "get_iter_at_position", textview_get_iter_at_position, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_position", textview_get_iter_at_position, 2);
 #endif
-    rb_define_method(cTextView, "buffer_to_window_coords", textview_buffer_to_window_coords, 3);
-    rb_define_method(cTextView, "window_to_buffer_coords", textview_window_to_buffer_coords, 3);
-    rb_define_method(cTextView, "get_window", textview_get_window, 1);
-    rb_define_method(cTextView, "get_window_type", textview_get_window_type, 1);
-    rb_define_method(cTextView, "set_border_window_size", textview_set_border_window_size, 2);
-    G_DEF_SETTER(cTextView, "border_window_size");
-    rb_define_method(cTextView, "get_border_window_size", textview_get_border_window_size, 1);
-    rb_define_method(cTextView, "forward_display_line", textview_forward_display_line, 1);
-    rb_define_method(cTextView, "backward_display_line", textview_backward_display_line, 1);
-    rb_define_method(cTextView, "forward_display_line_end", textview_forward_display_line_end, 1);
-    rb_define_method(cTextView, "backward_display_line_start", textview_backward_display_line_start, 1);
-    rb_define_method(cTextView, "starts_display_line", textview_starts_display_line, 1);
-    rb_define_method(cTextView, "move_visually", textview_move_visually, 2);
-    rb_define_method(cTextView, "add_child_at_anchor", textview_add_child_at_anchor, 2);
-    rb_define_method(cTextView, "add_child_in_window", textview_add_child_in_window, 4);
-    rb_define_method(cTextView, "move_child", textview_move_child, 3);
-    rb_define_method(cTextView, "default_attributes", textview_get_default_attributes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "buffer_to_window_coords", textview_buffer_to_window_coords, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "window_to_buffer_coords", textview_window_to_buffer_coords, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_window", textview_get_window, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_window_type", textview_get_window_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_border_window_size", textview_set_border_window_size, 2);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "border_window_size");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_border_window_size", textview_get_border_window_size, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_display_line", textview_forward_display_line, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_display_line", textview_backward_display_line, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_display_line_end", textview_forward_display_line_end, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_display_line_start", textview_backward_display_line_start, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "starts_display_line", textview_starts_display_line, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_visually", textview_move_visually, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_child_at_anchor", textview_add_child_at_anchor, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_child_in_window", textview_add_child_in_window, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_child", textview_move_child, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_attributes", textview_get_default_attributes, 0);
 
     /* GtkTextWindowType */
-    G_DEF_CLASS(GTK_TYPE_TEXT_WINDOW_TYPE, "WindowType", cTextView);
-    G_DEF_CONSTANTS(cTextView, GTK_TYPE_TEXT_WINDOW_TYPE, "GTK_TEXT_");
+    G_DEF_CLASS(GTK_TYPE_TEXT_WINDOW_TYPE, "WindowType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TEXT_WINDOW_TYPE, "GTK_TEXT_");
  
-    rb_define_const(cTextView, "PRIORITY_VALIDATE", INT2FIX(GTK_TEXT_VIEW_PRIORITY_VALIDATE));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_VALIDATE", INT2FIX(GTK_TEXT_VIEW_PRIORITY_VALIDATE));
 }

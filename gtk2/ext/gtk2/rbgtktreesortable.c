@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mTreeSortable
 #define _SELF(s)	(GTK_TREE_SORTABLE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -107,16 +108,16 @@ treesortable_has_default_sort_func(VALUE self)
 void
 Init_gtk_treesortable(void)
 {
-    VALUE mts = G_DEF_INTERFACE(GTK_TYPE_TREE_SORTABLE, "TreeSortable", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_TREE_SORTABLE, "TreeSortable", mGtk);
 
-    rb_define_method(mts, "sort_column_changed", treesortable_sort_column_changed, 0);
-    rb_define_method(mts, "sort_column_id", treesortable_get_sort_column_id, 0);
-    rb_define_method(mts, "set_sort_column_id", treesortable_set_sort_column_id, -1);
-    rb_define_method(mts, "set_sort_func", treesortable_set_sort_func, 1);
-    rb_define_method(mts, "set_default_sort_func", treesortable_set_default_sort_func, 0);
-    rb_define_method(mts, "has_default_sort_func?", treesortable_has_default_sort_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sort_column_changed", treesortable_sort_column_changed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sort_column_id", treesortable_get_sort_column_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_sort_column_id", treesortable_set_sort_column_id, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_sort_func", treesortable_set_sort_func, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_default_sort_func", treesortable_set_default_sort_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_default_sort_func?", treesortable_has_default_sort_func, 0);
 
-    rb_define_const(mts, "DEFAULT_SORT_COLUMN_ID", GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID);
+    rb_define_const(RG_TARGET_NAMESPACE, "DEFAULT_SORT_COLUMN_ID", GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID);
 }
 
 /* vim: set sts=4 sw=4 ts=8: */

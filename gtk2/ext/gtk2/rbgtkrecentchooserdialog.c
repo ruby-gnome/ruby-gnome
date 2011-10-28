@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentChooserDialog
 #define _SELF(self) (GTK_RECENT_CHOOSER_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
@@ -59,8 +60,8 @@ void
 Init_gtk_recent_chooser_dialog(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-  VALUE rcd = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_DIALOG, "RecentChooserDialog", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_DIALOG, "RecentChooserDialog", mGtk);
 
-  rb_define_method(rcd, "initialize", rcd_initialize, -1);
+  rb_define_method(RG_TARGET_NAMESPACE, "initialize", rcd_initialize, -1);
 #endif
 }

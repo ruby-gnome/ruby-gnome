@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mAccelerator
+
 #define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
 
 static VALUE
@@ -68,16 +70,16 @@ accel_get_default_mod_mask(G_GNUC_UNUSED VALUE self)
 void
 Init_gtk_accelerator(void)
 {
-    VALUE mGtkAccel = rb_define_module_under(mGtk, "Accelerator");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Accelerator");
 
-    rb_define_singleton_method(mGtkAccel, "valid", accel_valid, 2);
-    rb_define_singleton_method(mGtkAccel, "parse", accel_parse, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "valid", accel_valid, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "parse", accel_parse, 1);
     /* name is reserved by Ruby */
-    rb_define_singleton_method(mGtkAccel, "to_name", accel_name, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "to_name", accel_name, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(mGtkAccel, "get_label", accel_get_label, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_label", accel_get_label, 2);
 #endif
-    rb_define_singleton_method(mGtkAccel, "set_default_mod_mask", accel_set_default_mod_mask, 1);
-    rb_define_singleton_method(mGtkAccel, "default_mod_mask", accel_get_default_mod_mask, 0);
-    G_DEF_SETTERS(mGtkAccel);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_mod_mask", accel_set_default_mod_mask, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_mod_mask", accel_get_default_mod_mask, 0);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

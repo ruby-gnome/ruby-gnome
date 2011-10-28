@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cToggleAction
 #define _SELF(self) (GTK_TOGGLE_ACTION(RVAL2GOBJ(self)))
 
 static VALUE
@@ -62,10 +63,10 @@ Init_gtk_toggle_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gToggleAction = G_DEF_CLASS(GTK_TYPE_TOGGLE_ACTION, "ToggleAction", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_ACTION, "ToggleAction", mGtk);
 
-    rb_define_method(gToggleAction, "initialize", taction_initialize, 4);
-    rb_define_method(gToggleAction, "toggled", taction_toggled, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", taction_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggled", taction_toggled, 0);
 #endif
 }
 

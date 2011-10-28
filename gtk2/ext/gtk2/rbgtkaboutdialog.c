@@ -23,6 +23,7 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cAboutDialog
 #define _SELF(self) (GTK_ABOUT_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
@@ -188,11 +189,11 @@ void
 Init_gtk_aboutdialog(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE gAboutDialog = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
-    rb_define_method(gAboutDialog, "initialize", aboutdialog_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", aboutdialog_initialize, 0);
 
-    rb_define_singleton_method(gAboutDialog, "set_email_hook", aboutdialog_s_set_email_hook, 0);
-    rb_define_singleton_method(gAboutDialog, "set_url_hook", aboutdialog_s_set_url_hook, 0);
-    rb_define_singleton_method(gAboutDialog, "show", aboutdialog_s_show_about_dialog, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_email_hook", aboutdialog_s_set_email_hook, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_url_hook", aboutdialog_s_set_url_hook, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "show", aboutdialog_s_show_about_dialog, 2);
 #endif
 }

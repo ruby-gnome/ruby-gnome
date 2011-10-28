@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAccelKey
 #define _SELF(s) ((GtkAccelKey*)RVAL2BOXED(s, GTK_TYPE_ACCEL_KEY))
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 
@@ -104,17 +105,17 @@ accel_key_set_flags(VALUE self, VALUE flags)
 void
 Init_gtk_accel_key(void)
 {
-    VALUE gAccelKey = G_DEF_CLASS(GTK_TYPE_ACCEL_KEY, "AccelKey", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_KEY, "AccelKey", mGtk);
 
-    rb_define_method(gAccelKey, "initialize", accel_key_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", accel_key_initialize, 0);
 
-    rb_define_method(gAccelKey, "key", accel_key_get_key, 0);
-    rb_define_method(gAccelKey, "mods", accel_key_get_mods, 0);
-    rb_define_method(gAccelKey, "flags", accel_key_get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "key", accel_key_get_key, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mods", accel_key_get_mods, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", accel_key_get_flags, 0);
 
-    rb_define_method(gAccelKey, "set_key", accel_key_set_key, 1);
-    rb_define_method(gAccelKey, "set_mods", accel_key_set_mods, 1);
-    rb_define_method(gAccelKey, "set_flags", accel_key_set_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_key", accel_key_set_key, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mods", accel_key_set_mods, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", accel_key_set_flags, 1);
     
-    G_DEF_SETTERS(gAccelKey);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

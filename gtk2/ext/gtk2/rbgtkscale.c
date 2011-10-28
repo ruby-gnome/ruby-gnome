@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cScale
 #define _SELF(self) (GTK_SCALE(RVAL2GOBJ(self)))
 
 #if GTK_CHECK_VERSION(2,4,0)
@@ -46,9 +47,9 @@ void
 Init_gtk_scale(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gScale = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
-    rb_define_method(gScale, "layout", rbscale_get_layout, 0);
-    rb_define_method(gScale, "layout_offsets", rbscale_get_layout_offsets, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout", rbscale_get_layout, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout_offsets", rbscale_get_layout_offsets, 0);
 #else
     G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
 #endif

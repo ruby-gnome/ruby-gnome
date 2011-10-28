@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeStore
 #define _SELF(s) (GTK_TREE_STORE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -352,29 +353,29 @@ tstore_move_after(VALUE self, VALUE iter, VALUE position)
 void
 Init_gtk_tree_store(void)
 {
-    VALUE ts = G_DEF_CLASS(GTK_TYPE_TREE_STORE, "TreeStore", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_STORE, "TreeStore", mGtk);
 
     rbgtk_register_treeiter_set_value_func(GTK_TYPE_TREE_STORE, 
                                            (rbgtkiter_set_value_func)&gtk_tree_store_set_value);
 
-    rb_define_method(ts, "initialize", tstore_initialize, -1);
-    rb_define_method(ts, "set_column_types", tstore_set_column_types, -1);
-    rb_define_method(ts, "set_value", tstore_set_value, 3);
-    rb_define_method(ts, "remove", tstore_remove, 1);
-    rb_define_method(ts, "insert", tstore_insert, -1);
-    rb_define_method(ts, "insert_before", tstore_insert_before, 2);
-    rb_define_method(ts, "insert_after", tstore_insert_after, 2);
-    rb_define_method(ts, "prepend", tstore_prepend, 1);
-    rb_define_method(ts, "append", tstore_append, 1);
-    rb_define_method(ts, "ancestor?", tstore_is_ancestor, 2);
-    rb_define_method(ts, "iter_depth", tstore_iter_depth, 1);
-    rb_define_method(ts, "clear", tstore_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tstore_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_column_types", tstore_set_column_types, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_value", tstore_set_value, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", tstore_remove, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert", tstore_insert, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_before", tstore_insert_before, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_after", tstore_insert_after, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend", tstore_prepend, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append", tstore_append, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ancestor?", tstore_is_ancestor, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_depth", tstore_iter_depth, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", tstore_clear, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(ts, "iter_is_valid?", tstore_iter_is_valid, 1);
-    rb_define_method(ts, "reorder", tstore_reorder, 2);
-    rb_define_method(ts, "swap", tstore_swap, 2);
-    rb_define_method(ts, "move_before", tstore_move_before, 2);
-    rb_define_method(ts, "move_after", tstore_move_after, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_is_valid?", tstore_iter_is_valid, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "reorder", tstore_reorder, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "swap", tstore_swap, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_before", tstore_move_before, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_after", tstore_move_after, 2);
 #endif
 
 }

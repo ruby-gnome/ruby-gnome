@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cColorSelectionDialog
 #define _SELF(s) (GTK_COLOR_SELECTION_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
@@ -38,10 +39,10 @@ cdialog_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_color_selection_dialog(void)
 {
-    VALUE gColorSelDialog = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 
                                         "ColorSelectionDialog", mGtk);
 
-    rb_define_method(gColorSelDialog, "initialize", cdialog_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", cdialog_initialize, -1);
     /* NOTE: Backward compatibility */
-    rb_define_alias(gColorSelDialog, "colorsel", "color_selection");
+    rb_define_alias(RG_TARGET_NAMESPACE, "colorsel", "color_selection");
 }

@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAccessible
+
 static VALUE
 access_connect_widget_destroyed(VALUE self)
 {
@@ -31,8 +33,8 @@ access_connect_widget_destroyed(VALUE self)
 void
 Init_gtk_accessible(void)
 {
-    VALUE gAccess = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
 
-    rb_define_method(gAccess, "connect_widget_destroyed", access_connect_widget_destroyed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "connect_widget_destroyed", access_connect_widget_destroyed, 0);
 }
 

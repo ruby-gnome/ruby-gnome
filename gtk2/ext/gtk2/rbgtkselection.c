@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mSelection
+
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
@@ -159,19 +161,19 @@ targets_include_rich_text(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuf
 void
 Init_gtk_selection(void)
 {
-    VALUE mSelection =  rb_define_module_under(mGtk, "Selection");
+    VALUE RG_TARGET_NAMESPACE =  rb_define_module_under(mGtk, "Selection");
 
-    rb_define_module_function(mSelection, "owner_set", gtkdrag_selection_owner_set, 3);
-    rb_define_module_function(mSelection, "add_target", gtkdrag_selection_add_target, 4);
-    rb_define_module_function(mSelection, "add_targets", gtkdrag_selection_add_targets, 3);
-    rb_define_module_function(mSelection, "clear_targets", gtkdrag_selection_clear_targets, 2);
-    rb_define_module_function(mSelection, "convert", gtkdrag_selection_convert, 4);
-    rb_define_module_function(mSelection, "remove_all", gtkdrag_selection_remove_all, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "owner_set", gtkdrag_selection_owner_set, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "add_target", gtkdrag_selection_add_target, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "add_targets", gtkdrag_selection_add_targets, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "clear_targets", gtkdrag_selection_clear_targets, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "convert", gtkdrag_selection_convert, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "remove_all", gtkdrag_selection_remove_all, 1);
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_module_function(mSelection, "include_image?", targets_include_image, 2);
-    rb_define_module_function(mSelection, "include_text?", targets_include_text, 1);
-    rb_define_module_function(mSelection, "include_uri?", targets_include_uri, 1);
-    rb_define_module_function(mSelection, "include_rich_text?", targets_include_rich_text, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "include_image?", targets_include_image, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "include_text?", targets_include_text, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "include_uri?", targets_include_uri, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "include_rich_text?", targets_include_rich_text, 2);
 #endif
 }

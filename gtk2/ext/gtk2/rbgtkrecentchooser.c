@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
 /* Defined as Properties 
@@ -234,33 +235,33 @@ void
 Init_gtk_recent_chooser(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-  VALUE gRecentChooser = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
-  rb_define_method(gRecentChooser, "set_show_numbers", rc_set_show_numbers, 1);
-  G_DEF_SETTER(gRecentChooser, "show_numbers");
-  rb_define_method(gRecentChooser, "show_numbers", rc_get_show_numbers, 0);
-  rb_define_method(gRecentChooser, "set_sort_func", rc_set_sort_func, 0);
-  rb_define_method(gRecentChooser, "set_current_uri", rc_set_current_uri, 1);
-  G_DEF_SETTER(gRecentChooser, "current_uri");
-  rb_define_method(gRecentChooser, "current_uri", rc_get_current_uri, 0);
-  rb_define_method(gRecentChooser, "current_item", rc_get_current_item, 0);
-  rb_define_method(gRecentChooser, "select_uri", rc_select_uri, 1);
-  rb_define_method(gRecentChooser, "unselect_uri", rc_unselect_uri, 1);
-  rb_define_method(gRecentChooser, "select_all", rc_select_all, 0);
-  rb_define_method(gRecentChooser, "unselect_all", rc_unselect_all, 0);
-  rb_define_method(gRecentChooser, "items", rc_get_items, 0);
-  rb_define_method(gRecentChooser, "uris", rc_get_uris, 0);
-  rb_define_method(gRecentChooser, "add_filter", rc_add_filter, 1);
-  rb_define_method(gRecentChooser, "remove_filter", rc_remove_filter, 1);
-  rb_define_method(gRecentChooser, "filters", rc_list_filters, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "set_show_numbers", rc_set_show_numbers, 1);
+  G_DEF_SETTER(RG_TARGET_NAMESPACE, "show_numbers");
+  rb_define_method(RG_TARGET_NAMESPACE, "show_numbers", rc_get_show_numbers, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "set_sort_func", rc_set_sort_func, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "set_current_uri", rc_set_current_uri, 1);
+  G_DEF_SETTER(RG_TARGET_NAMESPACE, "current_uri");
+  rb_define_method(RG_TARGET_NAMESPACE, "current_uri", rc_get_current_uri, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "current_item", rc_get_current_item, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "select_uri", rc_select_uri, 1);
+  rb_define_method(RG_TARGET_NAMESPACE, "unselect_uri", rc_unselect_uri, 1);
+  rb_define_method(RG_TARGET_NAMESPACE, "select_all", rc_select_all, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "unselect_all", rc_unselect_all, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "items", rc_get_items, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "uris", rc_get_uris, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "add_filter", rc_add_filter, 1);
+  rb_define_method(RG_TARGET_NAMESPACE, "remove_filter", rc_remove_filter, 1);
+  rb_define_method(RG_TARGET_NAMESPACE, "filters", rc_list_filters, 0);
   
   /* GtkRecentChooserError */
   G_DEF_ERROR(GTK_RECENT_CHOOSER_ERROR, "RecentChooserError", mGtk, rb_eRuntimeError,
               GTK_TYPE_RECENT_CHOOSER_ERROR);
 
   /* GtkRecentSortType */
-  G_DEF_CLASS(GTK_TYPE_RECENT_SORT_TYPE, "SortType", gRecentChooser);
-  G_DEF_CONSTANTS(gRecentChooser, GTK_TYPE_RECENT_SORT_TYPE, "GTK_RECENT_");
+  G_DEF_CLASS(GTK_TYPE_RECENT_SORT_TYPE, "SortType", RG_TARGET_NAMESPACE);
+  G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RECENT_SORT_TYPE, "GTK_RECENT_");
 #endif
 
 }

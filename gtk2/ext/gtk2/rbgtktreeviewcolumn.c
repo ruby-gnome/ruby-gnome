@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeViewColumn
 #define _SELF(s) (GTK_TREE_VIEW_COLUMN(RVAL2GOBJ(s)))
 #define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
 
@@ -264,31 +265,31 @@ tvc_get_tree_view(VALUE self)
 void
 Init_gtk_treeviewcolumn(void)
 {
-    VALUE tvc = G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN, "TreeViewColumn", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN, "TreeViewColumn", mGtk);
 
-    rb_define_method(tvc, "initialize", tvc_initialize, -1);
-    rb_define_method(tvc, "pack_start", tvc_pack_start, 2);
-    rb_define_method(tvc, "pack_end", tvc_pack_end, 2);
-    rb_define_method(tvc, "clear", tvc_clear, 0);
-    rb_define_method(tvc, "cell_renderers", tvc_get_cell_renderers, 0);
-    rb_define_method(tvc, "add_attribute", tvc_add_attribute, 3);
-    rb_define_method(tvc, "set_attributes", tvc_set_attributes, 2);
-    rb_define_method(tvc, "set_cell_data_func", tvc_set_cell_data_func, 1);
-    rb_define_method(tvc, "clear_attributes", tvc_clear_attributes, 1);
-    rb_define_method(tvc, "clicked", tvc_clicked, 0);
-    rb_define_method(tvc, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
-    rb_define_method(tvc, "cell_size", tvc_cell_get_size, 0);
-    rb_define_method(tvc, "cell_is_visible?", tvc_cell_is_visible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tvc_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_start", tvc_pack_start, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_end", tvc_pack_end, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", tvc_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cell_renderers", tvc_get_cell_renderers, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_attribute", tvc_add_attribute, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_attributes", tvc_set_attributes, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cell_data_func", tvc_set_cell_data_func, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_attributes", tvc_clear_attributes, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clicked", tvc_clicked, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cell_set_cell_data", tvc_cell_set_cell_data, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "cell_size", tvc_cell_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cell_is_visible?", tvc_cell_is_visible, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(tvc, "focus_cell", tvc_focus_cell, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "focus_cell", tvc_focus_cell, 1);
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(tvc, "queue_resize", tvc_queue_resize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "queue_resize", tvc_queue_resize, 0);
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(tvc, "tree_view", tvc_get_tree_view, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "tree_view", tvc_get_tree_view, 0);
 #endif
     /* GtkTreeViewColumnSizing */
-    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", tvc);
-    G_DEF_CONSTANTS(tvc, GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "GTK_TREE_VIEW_COLUMN_");
+    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "GTK_TREE_VIEW_COLUMN_");
 }

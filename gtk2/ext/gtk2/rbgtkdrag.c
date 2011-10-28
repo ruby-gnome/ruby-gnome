@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mDrag
+
 #define RVAL2DC(c) (GDK_DRAG_CONTEXT(RVAL2GOBJ(c)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -394,57 +396,57 @@ gtkdrag_source_add_uri_targets(VALUE self, VALUE widget)
 void
 Init_gtk_drag(void)
 {
-    VALUE mGtkDrag = rb_define_module_under(mGtk, "Drag");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Drag");
 
-    rb_define_module_function(mGtkDrag, "dest_set", gtkdrag_dest_set, 4);
-    rb_define_module_function(mGtkDrag, "dest_set_proxy", gtkdrag_dest_set_proxy, 4);
-    rb_define_module_function(mGtkDrag, "dest_unset", gtkdrag_dest_unset, 1);
-    rb_define_module_function(mGtkDrag, "dest_find_target", gtkdrag_dest_find_target, -1);
-    rb_define_module_function(mGtkDrag, "dest_get_target_list", gtkdrag_dest_get_target_list, 1);
-    rb_define_module_function(mGtkDrag, "dest_set_target_list", gtkdrag_dest_set_target_list, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_set", gtkdrag_dest_set, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_set_proxy", gtkdrag_dest_set_proxy, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_unset", gtkdrag_dest_unset, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_find_target", gtkdrag_dest_find_target, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_get_target_list", gtkdrag_dest_get_target_list, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_set_target_list", gtkdrag_dest_set_target_list, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_module_function(mGtkDrag, "dest_add_text_targets", gtkdrag_dest_add_text_targets, 1);
-    rb_define_module_function(mGtkDrag, "dest_add_image_targets", gtkdrag_dest_add_image_targets, 1);
-    rb_define_module_function(mGtkDrag, "dest_add_uri_targets", gtkdrag_dest_add_uri_targets, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_add_text_targets", gtkdrag_dest_add_text_targets, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_add_image_targets", gtkdrag_dest_add_image_targets, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_add_uri_targets", gtkdrag_dest_add_uri_targets, 1);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_module_function(mGtkDrag, "dest_set_track_motion", gtkdrag_dest_set_track_motion, 2);
-    rb_define_module_function(mGtkDrag, "dest_get_track_motion", gtkdrag_dest_get_track_motion, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_set_track_motion", gtkdrag_dest_set_track_motion, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "dest_get_track_motion", gtkdrag_dest_get_track_motion, 1);
 #endif
-    rb_define_module_function(mGtkDrag, "finish", gtkdrag_finish, 4);
-    rb_define_module_function(mGtkDrag, "get_data", gtkdrag_get_data, 4);
-    rb_define_module_function(mGtkDrag, "get_source_widget", gtkdrag_get_source_widget, 1);
-    rb_define_module_function(mGtkDrag, "highlight", gtkdrag_highlight, 1);
-    rb_define_module_function(mGtkDrag, "unhighlight", gtkdrag_unhighlight, 1);
-    rb_define_module_function(mGtkDrag, "begin", gtkdrag_begin, 5);
-    rb_define_module_function(mGtkDrag, "threshold?", gtkdrag_check_threshold, 5);
-    rb_define_module_function(mGtkDrag, "set_icon", gtkdrag_set_icon, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "finish", gtkdrag_finish, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_data", gtkdrag_get_data, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_source_widget", gtkdrag_get_source_widget, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "highlight", gtkdrag_highlight, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "unhighlight", gtkdrag_unhighlight, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "begin", gtkdrag_begin, 5);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "threshold?", gtkdrag_check_threshold, 5);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_icon", gtkdrag_set_icon, -1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_module_function(mGtkDrag, "set_icon_name", gtkdrag_set_icon_name, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_icon_name", gtkdrag_set_icon_name, 4);
 #endif
-    rb_define_module_function(mGtkDrag, "set_icon_default", gtkdrag_set_icon_default, 1);
-    rb_define_module_function(mGtkDrag, "source_set", gtkdrag_source_set, 4);
-    rb_define_module_function(mGtkDrag, "source_set_icon", gtkdrag_source_set_icon, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_icon_default", gtkdrag_set_icon_default, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_set", gtkdrag_source_set, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_set_icon", gtkdrag_source_set_icon, -1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_module_function(mGtkDrag, "source_set_icon_name", gtkdrag_source_set_icon_name, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_set_icon_name", gtkdrag_source_set_icon_name, 2);
 #endif
-    rb_define_module_function(mGtkDrag, "source_unset", gtkdrag_source_unset, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_unset", gtkdrag_source_unset, 1);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_module_function(mGtkDrag, "source_set_target_list", gtkdrag_source_set_target_list, 2);
-    rb_define_module_function(mGtkDrag, "source_get_target_list", gtkdrag_source_get_target_list, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_set_target_list", gtkdrag_source_set_target_list, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_get_target_list", gtkdrag_source_get_target_list, 1);
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_module_function(mGtkDrag, "source_add_text_targets", gtkdrag_source_add_text_targets, 1);
-    rb_define_module_function(mGtkDrag, "source_add_image_targets", gtkdrag_source_add_image_targets, 1);
-    rb_define_module_function(mGtkDrag, "source_add_uri_targets", gtkdrag_source_add_uri_targets, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_add_text_targets", gtkdrag_source_add_text_targets, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_add_image_targets", gtkdrag_source_add_image_targets, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "source_add_uri_targets", gtkdrag_source_add_uri_targets, 1);
 #endif
-    G_DEF_SETTERS(mGtkDrag);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkDestDefaults */
-    G_DEF_CLASS(GTK_TYPE_DEST_DEFAULTS, "DestDefaults", mGtkDrag);
-    G_DEF_CONSTANTS(mGtkDrag, GTK_TYPE_DEST_DEFAULTS, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_DEST_DEFAULTS, "DestDefaults", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_DEST_DEFAULTS, "GTK_");
 
     /* GtkTargetFlags */
-    G_DEF_CLASS(GTK_TYPE_TARGET_FLAGS, "TargetFlags", mGtkDrag);
-    G_DEF_CONSTANTS(mGtkDrag, GTK_TYPE_TARGET_FLAGS, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_TARGET_FLAGS, "TargetFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TARGET_FLAGS, "GTK_");
 }

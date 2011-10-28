@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cToolbar
 #define _SELF(self) (GTK_TOOLBAR(RVAL2GOBJ(self)))
 #define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
 #define N_RVAL2WIDGET(w)  (NIL_P(w) ? NULL : GTK_WIDGET(RVAL2GOBJ(w)))
@@ -299,36 +300,36 @@ tbar_unset_style(VALUE self)
 void 
 Init_gtk_toolbar(void)
 {
-    VALUE gToolbar = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
-    rb_define_method(gToolbar, "initialize", tbar_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tbar_initialize, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gToolbar, "item_index", tbar_get_item_index, 1);
-    rb_define_method(gToolbar, "n_items", tbar_get_n_items, 0);
-    rb_define_method(gToolbar, "nth_item", tbar_get_nth_item, 1);
-    rb_define_method(gToolbar, "drop_index", tbar_get_drop_index, 2);
-    rb_define_method(gToolbar, "set_drop_highlight_item", tbar_set_drop_highlight_item, 2);
-    rb_define_method(gToolbar, "relief_style", tbar_get_relief_style, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "item_index", tbar_get_item_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_items", tbar_get_n_items, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "nth_item", tbar_get_nth_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "drop_index", tbar_get_drop_index, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_drop_highlight_item", tbar_set_drop_highlight_item, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "relief_style", tbar_get_relief_style, 0);
 #endif
-    rb_define_method(gToolbar, "append", tbar_append, -1);
-    rb_define_method(gToolbar, "prepend", tbar_prepend, -1);
-    rb_define_method(gToolbar, "insert", tbar_insert, -1);
-    rb_define_method(gToolbar, "append_space", tbar_append_space, 0);
-    rb_define_method(gToolbar, "prepend_space", tbar_prepend_space, 0);
-    rb_define_method(gToolbar, "insert_space", tbar_insert_space, 1);
-    rb_define_method(gToolbar, "remove_space", tbar_remove_space, 1);
-    rb_define_method(gToolbar, "unset_icon_size", tbar_unset_icon_size, 0);
-    rb_define_method(gToolbar, "unset_style", tbar_unset_style, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append", tbar_append, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend", tbar_prepend, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert", tbar_insert, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_space", tbar_append_space, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_space", tbar_prepend_space, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_space", tbar_insert_space, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_space", tbar_remove_space, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_icon_size", tbar_unset_icon_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_style", tbar_unset_style, 0);
 
     /* GtkToolbarChildType */
-    G_DEF_CLASS(GTK_TYPE_TOOLBAR_CHILD_TYPE, "ChildType", gToolbar);
-    G_DEF_CONSTANTS(gToolbar, GTK_TYPE_TOOLBAR_CHILD_TYPE, "GTK_TOOLBAR_");
+    G_DEF_CLASS(GTK_TYPE_TOOLBAR_CHILD_TYPE, "ChildType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TOOLBAR_CHILD_TYPE, "GTK_TOOLBAR_");
 
     /* GtkToolbarSpaceStyle */
-    G_DEF_CLASS(GTK_TYPE_TOOLBAR_SPACE_STYLE, "SpaceStyle", gToolbar);
-    G_DEF_CONSTANTS(gToolbar, GTK_TYPE_TOOLBAR_SPACE_STYLE, "GTK_TOOLBAR_");
+    G_DEF_CLASS(GTK_TYPE_TOOLBAR_SPACE_STYLE, "SpaceStyle", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TOOLBAR_SPACE_STYLE, "GTK_TOOLBAR_");
 
     /* GtkToolbarStyle(from Standard Constants) */
-    G_DEF_CLASS(GTK_TYPE_TOOLBAR_STYLE, "Style", gToolbar);
-    G_DEF_CONSTANTS(gToolbar, GTK_TYPE_TOOLBAR_STYLE, "GTK_TOOLBAR_");
+    G_DEF_CLASS(GTK_TYPE_TOOLBAR_STYLE, "Style", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TOOLBAR_STYLE, "GTK_TOOLBAR_");
 }

@@ -26,6 +26,8 @@
 
 #ifndef GTK_DISABLE_DEPRECATED /* Since 2.4 */
 
+#define RG_TARGET_NAMESPACE cCombo
+
 static VALUE
 combo_set_popdown_strings(VALUE self, VALUE ary)
 {
@@ -101,18 +103,18 @@ void
 Init_gtk_combo(void)
 {
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
-    VALUE gCombo = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);
 
-    rb_define_method(gCombo, "initialize", combo_initialize, -1);
-    G_REPLACE_SET_PROPERTY(gCombo, "value_in_list", combo_set_val_in_list, 2);
-    rb_define_method(gCombo, "set_use_arrows", combo_set_use_arrows, 1);
-    rb_define_method(gCombo, "set_use_arrows_always", combo_set_use_arrows_always, 1);
-    rb_define_method(gCombo, "set_popdown_strings", combo_set_popdown_strings, 1);
-    rb_define_method(gCombo, "disable_activate", combo_disable_activate, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", combo_initialize, -1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "value_in_list", combo_set_val_in_list, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_use_arrows", combo_set_use_arrows, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_use_arrows_always", combo_set_use_arrows_always, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_popdown_strings", combo_set_popdown_strings, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "disable_activate", combo_disable_activate, 0);
 
-    rb_define_method(gCombo, "entry", combo_entry, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "entry", combo_entry, 0);
 
-    G_DEF_SETTERS(gCombo);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
 

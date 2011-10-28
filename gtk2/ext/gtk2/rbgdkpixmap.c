@@ -27,6 +27,8 @@
 #include <X11/Xlib.h>
 #endif /* HAVE_XREADBITMAPFILEDATA */
 
+#define RG_TARGET_NAMESPACE cPixmap
+
 static VALUE
 gdkpmap_initialize(VALUE self, VALUE win, VALUE w, VALUE h, VALUE depth)
 {
@@ -224,16 +226,16 @@ gdkpmap_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 void
 Init_gtk_gdk_pixmap(void)
 {
-    VALUE gdkPixmap = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
 
-    rb_define_method(gdkPixmap, "initialize", gdkpmap_initialize, 4);
-    rb_define_singleton_method(gdkPixmap, "create_from_data", gdkpmap_create_from_data, -1);
-    rb_define_singleton_method(gdkPixmap, "create_from_xpm", gdkpmap_create_from_xpm, 3);
-    rb_define_singleton_method(gdkPixmap, "create_from_xpm_d", gdkpmap_create_from_xpm_d, 3);
-    rb_define_singleton_method(gdkPixmap, "colormap_create_from_xpm", gdkpmap_colormap_create_from_xpm, 4);
-    rb_define_singleton_method(gdkPixmap, "colormap_create_from_xpm_d", gdkpmap_colormap_create_from_xpm_d, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkpmap_initialize, 4);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "create_from_data", gdkpmap_create_from_data, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "create_from_xpm", gdkpmap_create_from_xpm, 3);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "create_from_xpm_d", gdkpmap_create_from_xpm_d, 3);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "colormap_create_from_xpm", gdkpmap_colormap_create_from_xpm, 4);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "colormap_create_from_xpm_d", gdkpmap_colormap_create_from_xpm_d, 4);
 #ifdef HAVE_XREADBITMAPFILEDATA
-    rb_define_singleton_method(gdkPixmap, "create_from_xbm", gdkpmap_create_from_xbm, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "create_from_xbm", gdkpmap_create_from_xbm, 2);
 #endif /* HAVE_XREADBITMAPFILEDATA */
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkPixmapImplX11", "PixmapImplX11", mGdk);
@@ -243,7 +245,7 @@ Init_gtk_gdk_pixmap(void)
     G_DEF_CLASS3("GdkPixmapFB", "PixmapFB", mGdk);
 #endif
 
-    rb_define_singleton_method(gdkPixmap, "foreign_new", gdkpmap_foreign_new, -1);
-    rb_define_singleton_method(gdkPixmap, "lookup", gdkpmap_lookup, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "foreign_new", gdkpmap_foreign_new, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lookup", gdkpmap_lookup, -1);
 
 }

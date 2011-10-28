@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTearoffMenuItem
+
 static VALUE
 tmitem_initialize(VALUE self)
 {
@@ -34,6 +36,6 @@ tmitem_initialize(VALUE self)
 void 
 Init_gtk_tearoff_menu_item(void)
 {
-    VALUE gTMenuItem = G_DEF_CLASS(GTK_TYPE_TEAROFF_MENU_ITEM, "TearoffMenuItem", mGtk);
-    rb_define_method(gTMenuItem, "initialize", tmitem_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEAROFF_MENU_ITEM, "TearoffMenuItem", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tmitem_initialize, 0);
 }

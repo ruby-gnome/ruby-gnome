@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeModelSort
 #define _SELF(s) (GTK_TREE_MODEL_SORT(RVAL2GOBJ(s)))
 
 static ID id_model;
@@ -97,19 +98,19 @@ tmodelsort_iter_is_valid(VALUE self, VALUE iter)
 void 
 Init_gtk_tmodelsort(void)
 {
-    VALUE gTMSort = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_SORT, "TreeModelSort", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_SORT, "TreeModelSort", mGtk);
 
     id_model = rb_intern("model");
 
-    rb_define_method(gTMSort, "initialize", tmodelsort_initialize, 1);
-    rb_define_method(gTMSort, "convert_child_path_to_path", tmodelsort_convert_child_path_to_path, 1);
-    rb_define_method(gTMSort, "convert_child_iter_to_iter", tmodelsort_convert_child_iter_to_iter, 1);
-    rb_define_method(gTMSort, "convert_path_to_child_path", tmodelsort_convert_path_to_child_path, 1);
-    rb_define_method(gTMSort, "convert_iter_to_child_iter", tmodelsort_convert_iter_to_child_iter, 1);
-    rb_define_method(gTMSort, "reset_default_sort_func", tmodelsort_reset_default_sort_func, 0);
-    rb_define_method(gTMSort, "clear_cache", tmodelsort_clear_cache, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", tmodelsort_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_child_path_to_path", tmodelsort_convert_child_path_to_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_child_iter_to_iter", tmodelsort_convert_child_iter_to_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_path_to_child_path", tmodelsort_convert_path_to_child_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_iter_to_child_iter", tmodelsort_convert_iter_to_child_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "reset_default_sort_func", tmodelsort_reset_default_sort_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_cache", tmodelsort_clear_cache, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gTMSort, "iter_is_valid?", tmodelsort_iter_is_valid, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_is_valid?", tmodelsort_iter_is_valid, 1);
 #endif
 
 }

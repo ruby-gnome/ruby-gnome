@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2, 12, 0)
+
+#define RG_TARGET_NAMESPACE cBuildable
 #define _SELF(self) (GTK_BUILDABLE(RVAL2GOBJ(self)))
 #define RVAL2BUILDER(obj) (GTK_BUILDER(RVAL2GOBJ(obj)))
 
@@ -109,20 +111,20 @@ void
 Init_gtk_buildable(void)
 {
 #if GTK_CHECK_VERSION(2, 12, 0)
-    VALUE cGtkBuildable;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cGtkBuildable = G_DEF_CLASS(GTK_TYPE_BUILDABLE, "Buildable", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUILDABLE, "Buildable", mGtk);
 
-    rb_define_method(cGtkBuildable, "builder_name", buildable_get_name, 0);
-    rb_define_method(cGtkBuildable, "set_builder_name", buildable_set_name, 1);
-    rb_define_method(cGtkBuildable, "add_child", buildable_add_child, -1);
-    rb_define_method(cGtkBuildable, "set_buildable_property",
+    rb_define_method(RG_TARGET_NAMESPACE, "builder_name", buildable_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_builder_name", buildable_set_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_child", buildable_add_child, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_buildable_property",
                      buildable_set_buildable_property, 3);
-    rb_define_method(cGtkBuildable, "construct_child",
+    rb_define_method(RG_TARGET_NAMESPACE, "construct_child",
                      buildable_construct_child, 2);
-    rb_define_method(cGtkBuildable, "get_internal_child",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_internal_child",
                      buildable_get_internal_child, 2);
 
-    G_DEF_SETTERS(cGtkBuildable);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

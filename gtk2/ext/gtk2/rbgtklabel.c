@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cLabel
 #define _SELF(s) (GTK_LABEL(RVAL2GOBJ(s)))
 
 static VALUE
@@ -145,16 +146,16 @@ PangoWrapMode gtk_label_get_line_wrap_mode  (GtkLabel *label);
 void 
 Init_gtk_label(void)
 {
-    VALUE gLabel = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
 
-    rb_define_method(gLabel, "initialize", label_initialize, -1);
-    rb_define_method(gLabel, "text", label_get_text, 0);
-    rb_define_method(gLabel, "set_text", label_set_text, -1);
-    rb_define_method(gLabel, "text=", label_set_text_only, 1);
-    rb_define_method(gLabel, "set_markup", label_set_markup, -1);
-    rb_define_method(gLabel, "markup=", label_set_markup_only, 1);
-    rb_define_method(gLabel, "layout_offsets", label_get_layout_offsets, 0);
-    rb_define_method(gLabel, "select_region", label_select_region, 2);
-    rb_define_method(gLabel, "layout", label_get_layout, 0);
-    rb_define_method(gLabel, "selection_bounds", label_get_selection_bounds, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", label_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text", label_get_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text", label_set_text, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text=", label_set_text_only, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", label_set_markup, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "markup=", label_set_markup_only, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout_offsets", label_get_layout_offsets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_region", label_select_region, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout", label_get_layout, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection_bounds", label_get_selection_bounds, 0);
 }

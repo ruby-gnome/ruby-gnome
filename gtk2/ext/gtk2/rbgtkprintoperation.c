@@ -22,9 +22,11 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
+
+#define RG_TARGET_NAMESPACE cPrintOperation
 #define _SELF(s) (GTK_PRINT_OPERATION(RVAL2GOBJ(s)))
 
-static VALUE gPrintOperation;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 po_initialize(VALUE self)
@@ -96,7 +98,7 @@ page_setup_done_cb(GtkPageSetup *page_setup, gpointer data)
     VALUE callback = (VALUE)data;
     struct callback_arg arg;
 
-    G_CHILD_UNSET(gPrintOperation, rb_intern("setup_done_cb"));
+    G_CHILD_UNSET(RG_TARGET_NAMESPACE, rb_intern("setup_done_cb"));
 
     arg.callback = callback;
     arg.page_setup = GOBJ2RVAL(page_setup);
@@ -112,7 +114,7 @@ po_run_page_setup_dialog(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     if (rb_block_given_p()) {
         volatile VALUE func = rb_block_proc();
-        G_CHILD_SET(gPrintOperation, rb_intern("setup_done_cb"), func);
+        G_CHILD_SET(RG_TARGET_NAMESPACE, rb_intern("setup_done_cb"), func);
         gtk_print_run_page_setup_dialog_async(RVAL2GOBJ(parent),
                                               RVAL2GOBJ(page_setup),
                                               RVAL2GOBJ(settings),
@@ -131,30 +133,30 @@ void
 Init_gtk_print_operation(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    gPrintOperation = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION, "PrintOperation", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION, "PrintOperation", mGtk);
 
     G_DEF_ERROR(GTK_PRINT_ERROR, "PrintError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_PRINT_ERROR);
 
-    rb_define_method(gPrintOperation, "initialize", po_initialize, 0);
-    rb_define_method(gPrintOperation, "run", po_run, -1);
-    rb_define_method(gPrintOperation, "error", po_get_error, 0);
-    rb_define_method(gPrintOperation, "finished?", po_is_finished, 0);
-    rb_define_method(gPrintOperation, "cancel", po_cancel, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", po_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run", po_run, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "error", po_get_error, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "finished?", po_is_finished, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cancel", po_cancel, 0);
 
-    rb_define_singleton_method(gPrintOperation, "run_page_setup_dialog",
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "run_page_setup_dialog",
                                po_run_page_setup_dialog, -1);
 
     /* GtkPrintStatus */
-    G_DEF_CLASS(GTK_TYPE_PRINT_STATUS, "Status", gPrintOperation);
-    G_DEF_CONSTANTS(gPrintOperation, GTK_TYPE_PRINT_STATUS, "GTK_PRINT_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_STATUS, "Status", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_STATUS, "GTK_PRINT_");
 
     /* GtkPrintOperationAction */
-    G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_ACTION,"Action", gPrintOperation);
-    G_DEF_CONSTANTS(gPrintOperation, GTK_TYPE_PRINT_OPERATION_ACTION, "GTK_PRINT_OPERATION_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_ACTION,"Action", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_OPERATION_ACTION, "GTK_PRINT_OPERATION_");
 
     /* GtkPrintOperationResult */
-    G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_RESULT, "Result", gPrintOperation);
-    G_DEF_CONSTANTS(gPrintOperation, GTK_TYPE_PRINT_OPERATION_RESULT, "GTK_PRINT_OPERATION_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_RESULT, "Result", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_OPERATION_RESULT, "GTK_PRINT_OPERATION_");
 #endif
 }

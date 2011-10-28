@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentInfo
 #define _SELF(self) ((GtkRecentInfo*)RVAL2BOXED(self, GTK_TYPE_RECENT_INFO))
 
 
@@ -193,29 +194,29 @@ void
 Init_gtk_recent_info(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE ri = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);
-    rb_define_method(ri, "uri", ri_get_uri, 0);
-    rb_define_method(ri, "display_name", ri_get_display_name, 0);
-    rb_define_method(ri, "description", ri_get_description, 0);
-    rb_define_method(ri, "mime_type", ri_get_mime_type, 0);
-    rb_define_method(ri, "added", ri_get_added, 0);
-    rb_define_method(ri, "modified", ri_get_modified, 0);
-    rb_define_method(ri, "visited", ri_get_visited, 0);
-    rb_define_method(ri, "private_hint?", ri_get_private_hint, 0);
-    rb_define_method(ri, "application_info", ri_get_application_info, 1);
-    rb_define_method(ri, "applications", ri_get_applications, 0);
-    rb_define_method(ri, "last_application", ri_last_application, 0);
-    rb_define_method(ri, "groups", ri_get_groups, 0);
-    rb_define_method(ri, "has_group?", ri_has_group, 1);
-    rb_define_method(ri, "has_application?", ri_has_application, 1);
-    rb_define_method(ri, "get_icon", ri_get_icon, 1);
-    rb_define_method(ri, "short_name", ri_get_short_name, 0);
-    rb_define_method(ri, "uri_display", ri_get_uri_display, 0);
-    rb_define_method(ri, "age", ri_get_age, 0);
-    rb_define_method(ri, "local?", ri_is_local, 0);
-    rb_define_method(ri, "exist?", ri_exist, 0);
-    rb_define_method(ri, "==", ri_match, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "uri", ri_get_uri, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", ri_get_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", ri_get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", ri_get_mime_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "added", ri_get_added, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "modified", ri_get_modified, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visited", ri_get_visited, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "private_hint?", ri_get_private_hint, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "application_info", ri_get_application_info, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "applications", ri_get_applications, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "last_application", ri_last_application, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "groups", ri_get_groups, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_group?", ri_has_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_application?", ri_has_application, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_icon", ri_get_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "short_name", ri_get_short_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "uri_display", ri_get_uri_display, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "age", ri_get_age, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "local?", ri_is_local, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "exist?", ri_exist, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", ri_match, 1);
 
-    G_DEF_SETTERS(ri);   
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 #endif
 }

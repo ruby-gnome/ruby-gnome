@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cInvisible
 #define _SELF(s) GTK_INVISIBLE(RVAL2GOBJ(s))
 
 static VALUE
@@ -52,7 +53,7 @@ GdkScreen *         gtk_invisible_get_screen            (GtkInvisible *invisible
 void
 Init_gtk_invisible(void)
 {
-    VALUE gInvisible = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
 
-    rb_define_method(gInvisible, "initialize", invisible_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", invisible_initialize, -1);
 }

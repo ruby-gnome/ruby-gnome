@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentChooserWidget
 #define _SELF(self) (GTK_RECENT_CHOOSER_WIDGET(RVAL2GOBJ(self)))
 
 static VALUE
@@ -45,8 +46,8 @@ void
 Init_gtk_recent_chooser_widget(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-  VALUE rcw = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_WIDGET, "RecentChooserWidget", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_WIDGET, "RecentChooserWidget", mGtk);
 
-  rb_define_method(rcw, "initialize", rcw_initialize, -1);
+  rb_define_method(RG_TARGET_NAMESPACE, "initialize", rcw_initialize, -1);
 #endif
 }

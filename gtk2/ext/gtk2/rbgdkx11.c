@@ -21,6 +21,9 @@
 
 #include "global.h"
 #ifdef GDK_WINDOWING_X11
+
+#define RG_TARGET_NAMESPACE mX11
+
 /* Can't implement
 #define     GDK_ROOT_WINDOW                 ()
 */
@@ -246,14 +249,14 @@ void
 Init_gtk_gdk_x11(void)
 {
 #ifdef GDK_WINDOWING_X11
-    VALUE mX11 = rb_define_module_under(mGdk, "X11");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "X11");
 
-    rb_define_module_function(mX11, "xid_table_lookup", rbx11_xid_table_lookup, -1);
-    rb_define_module_function(mX11, "net_wm_supports?", rbx11_net_wm_supports, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "xid_table_lookup", rbx11_xid_table_lookup, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "net_wm_supports?", rbx11_net_wm_supports, 1);
 
-    rb_define_module_function(mX11, "default_screen", rbx11_get_default_screen, 0);
-    rb_define_module_function(mX11, "grab_server", rbx11_grab_server, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "default_screen", rbx11_get_default_screen, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "grab_server", rbx11_grab_server, 0);
                                                                                 
-    rb_define_module_function(mX11, "ungrab_server", rbx11_ungrab_server, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "ungrab_server", rbx11_ungrab_server, 0);
 #endif
 }

@@ -23,9 +23,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cGC
 #define _SELF(s) (GDK_GC(RVAL2GOBJ(s)))
 
-static VALUE gdkGC;
+static VALUE RG_TARGET_NAMESPACE;
 static VALUE gdkDrawable;
 
 static VALUE
@@ -189,7 +190,7 @@ gdkgc_copy(VALUE self, VALUE dst)
     if (RVAL2CBOOL(rb_obj_is_kind_of(dst, gdkDrawable))) {
         VALUE args[1];
         args[0] = dst;
-        dst = rb_class_new_instance(1, args, gdkGC);
+        dst = rb_class_new_instance(1, args, RG_TARGET_NAMESPACE);
     }
     gdk_gc_copy(_SELF(dst), _SELF(self));
     return dst;
@@ -339,83 +340,83 @@ gdkgc_screen(VALUE self)
 void
 Init_gtk_gdk_gc(void)
 {
-    gdkGC = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
     gdkDrawable = rb_const_get(mGdk, rb_intern("Drawable"));
         
     rbgobj_add_abstract_but_create_instance_class(GDK_TYPE_GC);
 
-    rb_define_method(gdkGC, "initialize", gdkgc_initialize, 1);
-    rb_define_method(gdkGC, "set_foreground", gdkgc_set_foreground, 1);
-    rb_define_method(gdkGC, "set_background", gdkgc_set_background, 1);
-    rb_define_method(gdkGC, "set_rgb_fg_color", gdkgc_set_rgb_fg_color, 1);
-    rb_define_method(gdkGC, "set_rgb_bg_color", gdkgc_set_rgb_bg_color, 1);
-    rb_define_method(gdkGC, "set_function", gdkgc_set_function, 1);
-    rb_define_method(gdkGC, "set_fill", gdkgc_set_fill, 1);
-    rb_define_method(gdkGC, "set_tile", gdkgc_set_tile, 1);
-    rb_define_method(gdkGC, "set_stipple", gdkgc_set_stipple, 1);
-    rb_define_method(gdkGC, "set_ts_origin", gdkgc_set_ts_origin, 2);
-    rb_define_method(gdkGC, "set_clip_origin", gdkgc_set_clip_origin, 2);
-    rb_define_method(gdkGC, "set_clip_mask", gdkgc_set_clip_mask, 1);
-    rb_define_method(gdkGC, "set_clip_rectangle", gdkgc_set_clip_rectangle, 1);
-    rb_define_method(gdkGC, "set_clip_region", gdkgc_set_clip_region, 1);
-    rb_define_method(gdkGC, "set_subwindow_mode", gdkgc_set_subwindow, 1);
-    rb_define_method(gdkGC, "set_exposures", gdkgc_set_exposures, 1);
-    rb_define_method(gdkGC, "set_line_attributes", gdkgc_set_line_attributes, 4);
-    rb_define_method(gdkGC, "set_dashes", gdkgc_set_dashes, 2);
-    rb_define_method(gdkGC, "copy", gdkgc_copy, 1);
-    rb_define_method(gdkGC, "set_colormap", gdkgc_set_colormap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkgc_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_foreground", gdkgc_set_foreground, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_background", gdkgc_set_background, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_rgb_fg_color", gdkgc_set_rgb_fg_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_rgb_bg_color", gdkgc_set_rgb_bg_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_function", gdkgc_set_function, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fill", gdkgc_set_fill, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tile", gdkgc_set_tile, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_stipple", gdkgc_set_stipple, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_ts_origin", gdkgc_set_ts_origin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_clip_origin", gdkgc_set_clip_origin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_clip_mask", gdkgc_set_clip_mask, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_clip_rectangle", gdkgc_set_clip_rectangle, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_clip_region", gdkgc_set_clip_region, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_subwindow_mode", gdkgc_set_subwindow, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_exposures", gdkgc_set_exposures, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_line_attributes", gdkgc_set_line_attributes, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_dashes", gdkgc_set_dashes, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy", gdkgc_copy, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_colormap", gdkgc_set_colormap, 1);
 
-    rb_define_method(gdkGC, "foreground", gdkgc_get_foreground, 0);
-    rb_define_method(gdkGC, "background", gdkgc_get_background, 0);
-    rb_define_method(gdkGC, "function", gdkgc_get_function, 0);
-    rb_define_method(gdkGC, "fill", gdkgc_get_fill, 0);
-    rb_define_method(gdkGC, "tile", gdkgc_get_tile, 0);
-    rb_define_method(gdkGC, "stipple", gdkgc_get_stipple, 0);
-    rb_define_method(gdkGC, "ts_origin", gdkgc_get_ts_origin, 0);
-    rb_define_method(gdkGC, "clip_origin", gdkgc_get_clip_origin, 0);
-    rb_define_method(gdkGC, "clip_mask", gdkgc_get_clip_mask, 0);
-    rb_define_method(gdkGC, "subwindow_mode", gdkgc_get_subwindow, 0);
-    rb_define_method(gdkGC, "exposures?", gdkgc_get_exposures, 0);
-    rb_define_method(gdkGC, "line_attributes", gdkgc_get_line_attributes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "foreground", gdkgc_get_foreground, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "background", gdkgc_get_background, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "function", gdkgc_get_function, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "fill", gdkgc_get_fill, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "tile", gdkgc_get_tile, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "stipple", gdkgc_get_stipple, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ts_origin", gdkgc_get_ts_origin, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clip_origin", gdkgc_get_clip_origin, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clip_mask", gdkgc_get_clip_mask, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "subwindow_mode", gdkgc_get_subwindow, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "exposures?", gdkgc_get_exposures, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_attributes", gdkgc_get_line_attributes, 0);
 
-    rb_define_method(gdkGC, "colormap", gdkgc_get_colormap, 0);
-    rb_define_method(gdkGC, "offset", gdkgc_offset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "colormap", gdkgc_get_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "offset", gdkgc_offset, 2);
 
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkGC, "screen", gdkgc_screen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "screen", gdkgc_screen, 0);
 #endif
 
-    G_DEF_SETTERS(gdkGC);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GdkGCValuesMask */
 /* Don't need them.
-    G_DEF_CLASS(GDK_TYPE_GC_VALUES_MASK, "ValuesMask", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_GC_VALUES_MASK, "GDK_GC_");
+    G_DEF_CLASS(GDK_TYPE_GC_VALUES_MASK, "ValuesMask", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_GC_VALUES_MASK, "GDK_GC_");
 */
 
     /* GdkFunction */
-    G_DEF_CLASS(GDK_TYPE_FUNCTION, "Function", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_FUNCTION, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_FUNCTION, "Function", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_FUNCTION, "GDK_");
 
     /* GdkFill */
-    G_DEF_CLASS(GDK_TYPE_FILL, "Fill", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_FILL, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_FILL, "Fill", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_FILL, "GDK_");
 
     /* GdkSubwindowMode */
-    G_DEF_CLASS(GDK_TYPE_SUBWINDOW_MODE, "SubWindowMode", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_SUBWINDOW_MODE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_SUBWINDOW_MODE, "SubWindowMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_SUBWINDOW_MODE, "GDK_");
 
     /* GdkLineStyle */
-    G_DEF_CLASS(GDK_TYPE_LINE_STYLE, "LineStyle", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_LINE_STYLE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_LINE_STYLE, "LineStyle", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_LINE_STYLE, "GDK_");
 
     /* GdkCapStyle */
-    G_DEF_CLASS(GDK_TYPE_CAP_STYLE, "CapStyle", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_CAP_STYLE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_CAP_STYLE, "CapStyle", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_CAP_STYLE, "GDK_");
 
     /* GdkJoinStyle */
-    G_DEF_CLASS(GDK_TYPE_JOIN_STYLE, "JoinStyle", gdkGC);
-    G_DEF_CONSTANTS(gdkGC, GDK_TYPE_JOIN_STYLE, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_JOIN_STYLE, "JoinStyle", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_JOIN_STYLE, "GDK_");
 
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkGCX11", "GCX11", mGdk);

@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cImage
 #define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
 /*
 Use properties instead.
@@ -139,16 +140,16 @@ image_clear(VALUE self)
 void 
 Init_gtk_image(void)
 {
-    VALUE gImage = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
-    rb_define_method(gImage, "initialize", image_initialize, -1);
-    rb_define_method(gImage, "set", image_set, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", image_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set", image_set, -1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gImage, "clear", image_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", image_clear, 0);
 #endif
 
     /* GtkImageType */
-    G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", gImage);
-    G_DEF_CONSTANTS(gImage, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
+    G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
 
     G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
 

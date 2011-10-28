@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVSeparator
+
 static VALUE
 vsep_initialize(VALUE self)
 {
@@ -34,6 +36,6 @@ vsep_initialize(VALUE self)
 void 
 Init_gtk_vseparator(void)
 {
-    VALUE gVSeparator = G_DEF_CLASS(GTK_TYPE_VSEPARATOR, "VSeparator", mGtk);
-    rb_define_method(gVSeparator, "initialize", vsep_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSEPARATOR, "VSeparator", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vsep_initialize, 0);
 }

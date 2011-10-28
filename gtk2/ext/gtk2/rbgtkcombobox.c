@@ -23,6 +23,7 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cComboBox
 #define _SELF(self) (GTK_COMBO_BOX(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -192,21 +193,21 @@ void
 Init_gtk_combobox(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gCombobox = G_DEF_CLASS(GTK_TYPE_COMBO_BOX, "ComboBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX, "ComboBox", mGtk);
 
-    rb_define_method(gCombobox, "initialize", combobox_initialize, -1);
-    rb_define_method(gCombobox, "active_iter", combobox_get_active_iter, 0);
-    rb_define_method(gCombobox, "set_active_iter", combobox_set_active_iter, 1);
-    G_DEF_SETTER(gCombobox, "active_iter");
-    rb_define_method(gCombobox, "append_text", combobox_append_text, 1);
-    rb_define_method(gCombobox, "insert_text", combobox_insert_text, 2);
-    rb_define_method(gCombobox, "prepend_text", combobox_prepend_text, 1);
-    rb_define_method(gCombobox, "remove_text", combobox_remove_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", combobox_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "active_iter", combobox_get_active_iter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_active_iter", combobox_set_active_iter, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "active_iter");
+    rb_define_method(RG_TARGET_NAMESPACE, "append_text", combobox_append_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_text", combobox_insert_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_text", combobox_prepend_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_text", combobox_remove_text, 1);
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gCombobox, "active_text", combobox_get_active_text, 0);
-    rb_define_method(gCombobox, "popup_accessible", combobox_get_popup_accessible, 0);
-    rb_define_method(gCombobox, "set_row_separator_func", combobox_set_row_separator_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "active_text", combobox_get_active_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "popup_accessible", combobox_get_popup_accessible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_row_separator_func", combobox_set_row_separator_func, 0);
 #endif
 #endif
 }

@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextChildAnchor
 #define _SELF(self) GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))
 
 static VALUE
@@ -46,9 +47,9 @@ textchild_get_deleted(VALUE self)
 void
 Init_gtk_textchild(void)
 {
-    VALUE gTextChildAnchor = G_DEF_CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR, "TextChildAnchor", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR, "TextChildAnchor", mGtk);
 
-    rb_define_method(gTextChildAnchor, "initialize", textchild_initialize, 0);
-    rb_define_method(gTextChildAnchor, "widgets", textchild_get_widgets, 0);
-    rb_define_method(gTextChildAnchor, "deleted?", textchild_get_deleted, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", textchild_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "widgets", textchild_get_widgets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "deleted?", textchild_get_deleted, 0);
 }

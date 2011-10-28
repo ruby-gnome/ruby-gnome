@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAdjustment
 #define _SELF(self) (GTK_ADJUSTMENT(RVAL2GOBJ(self)))
 
 static VALUE
@@ -83,10 +84,10 @@ void                gtk_adjustment_set_upper            (GtkAdjustment *adjustme
 void 
 Init_gtk_adjustment(void)
 {
-    VALUE gAdjustment = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);
 
-    rb_define_method(gAdjustment, "initialize", adj_initialize, 6);
-    rb_define_method(gAdjustment, "clamp_page", adj_clamp_page, 2);
-    rb_define_method(gAdjustment, "changed", adj_changed, 0);
-    rb_define_method(gAdjustment, "value_changed", adj_value_changed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", adj_initialize, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "clamp_page", adj_clamp_page, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "changed", adj_changed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_changed", adj_value_changed, 0);
 }

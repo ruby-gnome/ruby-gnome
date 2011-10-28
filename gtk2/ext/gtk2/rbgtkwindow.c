@@ -23,6 +23,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cWindow
 #define _SELF(s) (GTK_WINDOW(RVAL2GOBJ(s)))
 
 static VALUE
@@ -600,94 +601,94 @@ mark_toplevels(G_GNUC_UNUSED void *_)
 void 
 Init_gtk_window(void)
 {
-    VALUE gWindow = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);
 
-    rb_define_method(gWindow, "initialize", gwin_initialize, -1);
-    rb_define_method(gWindow, "set_wmclass", gwin_set_wmclass, 2);
-    rb_define_method(gWindow, "add_accel_group", gwin_add_accel_group, 1);
-    rb_define_method(gWindow, "remove_accel_group", gwin_remove_accel_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gwin_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_wmclass", gwin_set_wmclass, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_accel_group", gwin_add_accel_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_accel_group", gwin_remove_accel_group, 1);
     /* active_(focus|default) are deprecated. Use activate_* instead. */
-    rb_define_method(gWindow, "active_focus", gwin_active_focus, 0);
-    rb_define_method(gWindow, "active_default", gwin_active_default, 0);
-    G_REPLACE_ACTION(gWindow, "activate_focus", gwin_activate_focus, 0);
-    G_REPLACE_ACTION(gWindow, "activate_default", gwin_activate_default, 0);
-    rb_define_method(gWindow, "set_default_size", gwin_set_default_size, 2);
-    rb_define_method(gWindow, "set_geometry_hints", gwin_set_geometry_hints, 3);
-    rb_define_singleton_method(gWindow, "toplevels", gwin_s_list_toplevels, 0);
-    rb_define_method(gWindow, "add_mnemonic", gwin_add_mnemonic, 2);
-    rb_define_method(gWindow, "remove_mnemonic", gwin_remove_mnemonic, 2);
-    rb_define_method(gWindow, "mnemonic_activate", gwin_mnemonic_activate, 2);
-    rb_define_method(gWindow, "focus", gwin_get_focus, 0);
-    rb_define_method(gWindow, "set_focus", gwin_set_focus, 1);
-    rb_define_method(gWindow, "set_default", gwin_set_default, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "active_focus", gwin_active_focus, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "active_default", gwin_active_default, 0);
+    G_REPLACE_ACTION(RG_TARGET_NAMESPACE, "activate_focus", gwin_activate_focus, 0);
+    G_REPLACE_ACTION(RG_TARGET_NAMESPACE, "activate_default", gwin_activate_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_default_size", gwin_set_default_size, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_geometry_hints", gwin_set_geometry_hints, 3);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "toplevels", gwin_s_list_toplevels, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_mnemonic", gwin_add_mnemonic, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_mnemonic", gwin_remove_mnemonic, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "mnemonic_activate", gwin_mnemonic_activate, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "focus", gwin_get_focus, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_focus", gwin_set_focus, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_default", gwin_set_default, 1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gWindow, "present", gwin_present, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "present", gwin_present, -1);
 #else
-    rb_define_method(gWindow, "present", gwin_present, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "present", gwin_present, 0);
 #endif
-    rb_define_method(gWindow, "iconify", gwin_iconify, 0);
-    rb_define_method(gWindow, "deiconify", gwin_deiconify, 0);
-    rb_define_method(gWindow, "stick", gwin_stick, 0);
-    rb_define_method(gWindow, "unstick", gwin_unstick, 0);
-    rb_define_method(gWindow, "maximize", gwin_maximize, 0);
-    rb_define_method(gWindow, "unmaximize", gwin_unmaximize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "iconify", gwin_iconify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "deiconify", gwin_deiconify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "stick", gwin_stick, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unstick", gwin_unstick, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "maximize", gwin_maximize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unmaximize", gwin_unmaximize, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gWindow, "fullscreen", gwin_fullscreen, 0);
-    rb_define_method(gWindow, "unfullscreen", gwin_unfullscreen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "fullscreen", gwin_fullscreen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unfullscreen", gwin_unfullscreen, 0);
 #endif
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gWindow, "set_keep_above", gwin_set_keep_above, 1);
-    rb_define_method(gWindow, "set_keep_below", gwin_set_keep_below, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_keep_above", gwin_set_keep_above, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_keep_below", gwin_set_keep_below, 1);
 #endif
-    rb_define_method(gWindow, "begin_resize_drag", gwin_begin_resize_drag, 5);
-    rb_define_method(gWindow, "begin_move_drag", gwin_begin_move_drag, 4);
-    rb_define_method(gWindow, "set_frame_dimensions", gwin_set_frame_dimensions, 4);
-    rb_define_method(gWindow, "set_mnemonic_modifier", gwin_set_mnemonic_modifier, 1);
-    rb_define_method(gWindow, "default_size", gwin_get_default_size, 0);
-    rb_define_singleton_method(gWindow, "default_icon_list", gwin_s_get_default_icon_list, 0);
-    rb_define_method(gWindow, "frame_dimensions", gwin_get_frame_dimensions, 0);
-    rb_define_method(gWindow, "set_has_frame", gwin_set_has_frame, 1);
-    rb_define_method(gWindow, "has_frame?", gwin_get_has_frame, 0);
-    rb_define_method(gWindow, "icon_list", gwin_get_icon_list, 0);
-    rb_define_method(gWindow, "mnemonic_modifier", gwin_get_mnemonic_modifier, 0);
-    rb_define_method(gWindow, "position", gwin_get_position, 0);
-    rb_define_method(gWindow, "size", gwin_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "begin_resize_drag", gwin_begin_resize_drag, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "begin_move_drag", gwin_begin_move_drag, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_frame_dimensions", gwin_set_frame_dimensions, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mnemonic_modifier", gwin_set_mnemonic_modifier, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_size", gwin_get_default_size, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_icon_list", gwin_s_get_default_icon_list, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "frame_dimensions", gwin_get_frame_dimensions, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_has_frame", gwin_set_has_frame, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_frame?", gwin_get_has_frame, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "icon_list", gwin_get_icon_list, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mnemonic_modifier", gwin_get_mnemonic_modifier, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "position", gwin_get_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", gwin_get_size, 0);
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gWindow, "group", gwin_get_group, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "group", gwin_get_group, 0);
 #endif
-    rb_define_method(gWindow, "move", gwin_move, 2);
-    rb_define_method(gWindow, "parse_geometry", gwin_parse_geometry, 1);
-    rb_define_method(gWindow, "reshow_with_initial_size", gwin_reshow_with_initial_size, 0);
-    rb_define_method(gWindow, "resize", gwin_resize, 2);
-    rb_define_singleton_method(gWindow, "set_default_icon_list", gwin_s_set_default_icon_list, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move", gwin_move, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "parse_geometry", gwin_parse_geometry, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "reshow_with_initial_size", gwin_reshow_with_initial_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "resize", gwin_resize, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_icon_list", gwin_s_set_default_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gWindow, "set_default_icon", gwin_s_set_default_icon, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_icon", gwin_s_set_default_icon, 1);
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(gWindow, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_icon_name", gwin_s_set_default_icon_name, 1);
 #endif
-    G_REPLACE_SET_PROPERTY(gWindow, "icon", gwin_set_icon, 1);
-    rb_define_method(gWindow, "set_icon_list", gwin_set_icon_list, 1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "icon", gwin_set_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_icon_list", gwin_set_icon_list, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gWindow, "set_auto_startup_notification", 
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_auto_startup_notification", 
                                gwin_s_set_auto_startup_notification, 1);
 #endif
 
 /*
-    rb_define_method(gWindow, "decorated_window_init", gwin_decorated_window_init, 0);
-    rb_define_method(gWindow, "decorated_window_calculate_frame_size", gwin_decorated_window_calculate_frame_size, 0);   
-    rb_define_method(gWindow, "decorated_window_set_title", gwin_decorated_window_set_title, 1);
-    rb_define_method(gWindow, "decorated_window_move_resize_window", gwin_decorated_window_move_resize_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "decorated_window_init", gwin_decorated_window_init, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "decorated_window_calculate_frame_size", gwin_decorated_window_calculate_frame_size, 0);   
+    rb_define_method(RG_TARGET_NAMESPACE, "decorated_window_set_title", gwin_decorated_window_set_title, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "decorated_window_move_resize_window", gwin_decorated_window_move_resize_window, 0);
 */
-    G_DEF_SETTERS(gWindow);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkWindowPosition (from General constants) */
-    G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", gWindow);
-    G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_POSITION, "GTK_WIN_");
+    G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WINDOW_POSITION, "GTK_WIN_");
 
     /* GtkWindowType (from General constants) */
-    G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", gWindow);
-    G_DEF_CONSTANTS(gWindow, GTK_TYPE_WINDOW_TYPE, "GTK_WINDOW_");
+    G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WINDOW_TYPE, "GTK_WINDOW_");
 
     {
         static VALUE toplevels_marker;

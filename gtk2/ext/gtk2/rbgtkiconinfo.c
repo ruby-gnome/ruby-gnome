@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,4,0)
+
+#define RG_TARGET_NAMESPACE cIconInfo
 #define _SELF(i) ((GtkIconInfo*)RVAL2BOXED(i, GTK_TYPE_ICON_INFO))
 
 static VALUE
@@ -104,17 +106,17 @@ void
 Init_gtk_iconinfo(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE ii = G_DEF_CLASS(GTK_TYPE_ICON_INFO, "IconInfo", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_INFO, "IconInfo", mGtk);
 
-    rb_define_method(ii, "base_size", iconinfo_get_base_size, 0);
-    rb_define_method(ii, "filename", iconinfo_get_filename, 0);
-    rb_define_method(ii, "builtin_pixbuf", iconinfo_get_builtin_pixbuf, 0);
-    rb_define_method(ii, "load_icon", iconinfo_load_icon, 0);
-    rb_define_method(ii, "set_raw_coordinates", iconinfo_set_raw_coordinates, 1);
-    rb_define_method(ii, "embedded_rect", iconinfo_get_embedded_rect, 0);
-    rb_define_method(ii, "attach_points", iconinfo_get_attach_points, 0);
-    rb_define_method(ii, "display_name", iconinfo_get_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "base_size", iconinfo_get_base_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "filename", iconinfo_get_filename, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "builtin_pixbuf", iconinfo_get_builtin_pixbuf, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_icon", iconinfo_load_icon, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_raw_coordinates", iconinfo_set_raw_coordinates, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "embedded_rect", iconinfo_get_embedded_rect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach_points", iconinfo_get_attach_points, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", iconinfo_get_display_name, 0);
 
-    G_DEF_SETTERS(ii);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

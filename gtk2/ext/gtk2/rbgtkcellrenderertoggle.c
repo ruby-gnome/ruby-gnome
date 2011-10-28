@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCellRendererToggle
 #define _SELF(s) (GTK_CELL_RENDERER_TOGGLE(RVAL2GOBJ(s)))
 
 static VALUE
@@ -33,8 +34,8 @@ crtoggle_initialize(VALUE self)
 void
 Init_gtk_cellrenderertoggle(void)
 {
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TOGGLE, "CellRendererToggle", mGtk);
-    rb_define_method(renderer, "initialize", crtoggle_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TOGGLE, "CellRendererToggle", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", crtoggle_initialize, 0);
 }
 
 

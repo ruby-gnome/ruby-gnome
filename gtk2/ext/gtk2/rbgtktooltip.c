@@ -26,6 +26,7 @@
 
 #if GTK_CHECK_VERSION(2,12,0)
 
+#define RG_TARGET_NAMESPACE cTooltip
 /* GTK_TOOLTIP type-cast is private because it should be useless */
 #define _SELF(self) (RVAL2GOBJ(self))
 
@@ -70,12 +71,12 @@ void
 Init_gtk_tooltip(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
-    VALUE gTooltip = G_DEF_CLASS(GTK_TYPE_TOOLTIP, "Tooltip", mGtk);
-    rb_define_method(gTooltip, "set_markup", tooltip_set_markup, 1);
-    rb_define_method(gTooltip, "set_text", tooltip_set_text, 1);
-    rb_define_method(gTooltip, "set_icon", tooltip_set_icon, 1);
-    rb_define_method(gTooltip, "set_icon_from_stock", tooltip_set_icon_from_stock, 2);
-    rb_define_method(gTooltip, "set_custom", tooltip_set_custom, 1);
-    G_DEF_SETTERS(gTooltip);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLTIP, "Tooltip", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", tooltip_set_markup, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text", tooltip_set_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_icon", tooltip_set_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_icon_from_stock", tooltip_set_icon_from_stock, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_custom", tooltip_set_custom, 1);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

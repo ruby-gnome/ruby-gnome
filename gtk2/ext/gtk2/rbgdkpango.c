@@ -22,6 +22,8 @@
 #include "global.h"
 #include "rbpango.h"
 
+#define RG_TARGET_NAMESPACE mPango
+
 static VALUE
 gdkpango_s_context_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -145,7 +147,7 @@ Init_gtk_gdk_pango(void)
     PangoAttribute* tmpattr;
     GdkColor color;
 
-    VALUE mGdkPango = rb_define_module_under(mGdk, "Pango");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Pango");
     VALUE context = GTYPE2CLASS(PANGO_TYPE_CONTEXT);
     VALUE layout = GTYPE2CLASS(PANGO_TYPE_LAYOUT);
     VALUE layoutline = GTYPE2CLASS(PANGO_TYPE_LAYOUT_LINE);
@@ -153,7 +155,7 @@ Init_gtk_gdk_pango(void)
     VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
     VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
 
-    rb_define_module_function(mGdkPango, "context", gdkpango_s_context_get, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "context", gdkpango_s_context_get, -1);
 
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
     G_DEF_SETTER(context, "colormap");

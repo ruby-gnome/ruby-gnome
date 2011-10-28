@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cPageSetup
 #define _SELF(s) (GTK_PAGE_SETUP(RVAL2GOBJ(s)))
 
 #define RVAL2SIZE(o) (RVAL2BOXED(o, GTK_TYPE_PAPER_SIZE))
@@ -172,35 +173,35 @@ void
 Init_gtk_page_setup(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPageSetup = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP, "PageSetup", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP, "PageSetup", mGtk);
 
-    rb_define_method(gPageSetup, "initialize", ps_initialize, 0);
-    rb_define_method(gPageSetup, "dup", ps_copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dup", ps_copy, 0);
 
-    rb_define_method(gPageSetup, "orientation", ps_get_orientation, 0);
-    rb_define_method(gPageSetup, "set_orientation", ps_set_orientation, 1);
-    rb_define_method(gPageSetup, "paper_size", ps_get_paper_size, 0);
-    rb_define_method(gPageSetup, "set_paper_size", ps_set_paper_size, 1);
-    rb_define_method(gPageSetup, "get_top_margin", ps_get_top_margin, 1);
-    rb_define_method(gPageSetup, "set_top_margin", ps_set_top_margin, 2);
-    rb_define_method(gPageSetup, "get_bottom_margin", ps_get_bottom_margin, 1);
-    rb_define_method(gPageSetup, "set_bottom_margin", ps_set_bottom_margin, 2);
-    rb_define_method(gPageSetup, "get_left_margin", ps_get_left_margin, 1);
-    rb_define_method(gPageSetup, "set_left_margin", ps_set_left_margin, 2);
-    rb_define_method(gPageSetup, "get_right_margin", ps_get_right_margin, 1);
-    rb_define_method(gPageSetup, "set_right_margin", ps_set_right_margin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "orientation", ps_get_orientation, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_orientation", ps_set_orientation, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "paper_size", ps_get_paper_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_size", ps_set_paper_size, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_top_margin", ps_get_top_margin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_top_margin", ps_set_top_margin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_bottom_margin", ps_get_bottom_margin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bottom_margin", ps_set_bottom_margin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_left_margin", ps_get_left_margin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_left_margin", ps_set_left_margin, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_right_margin", ps_get_right_margin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_right_margin", ps_set_right_margin, 2);
 
-    rb_define_method(gPageSetup, "set_paper_size_and_default_margins",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_size_and_default_margins",
                      ps_set_paper_size_and_default_margins, 1);
 
     /* These take orientation, but not margins into consideration */
-    rb_define_method(gPageSetup, "get_paper_width", ps_get_paper_width, 1);
-    rb_define_method(gPageSetup, "get_paper_height", ps_get_paper_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_paper_width", ps_get_paper_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_paper_height", ps_get_paper_height, 1);
 
     /* These take orientation, and margins into consideration */
-    rb_define_method(gPageSetup, "get_page_width", ps_get_page_width, 1);
-    rb_define_method(gPageSetup, "get_page_height", ps_get_page_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_width", ps_get_page_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page_height", ps_get_page_height, 1);
 
-    G_DEF_SETTERS(gPageSetup);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

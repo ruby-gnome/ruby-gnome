@@ -23,9 +23,10 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cRadioToolButton
 #define _SELF(self) (GTK_RADIO_TOOL_BUTTON(RVAL2GOBJ(self)))
 
-static VALUE gRToolButton;
+static VALUE RG_TARGET_NAMESPACE;
 
 struct rbgtk_rval2gtkradiotoolbuttongslist_args {
     VALUE ary;
@@ -85,7 +86,7 @@ rbtn_initialize(int argc, VALUE *argv, VALUE self)
         if (TYPE(group_or_stock_id) == T_ARRAY)
             /* TODO: This has a potential for leaking. */
             group = RVAL2GTKRADIOTOOLBUTTONGSLIST(group_or_stock_id);
-        else if (rb_obj_is_kind_of(group_or_stock_id, gRToolButton))
+        else if (rb_obj_is_kind_of(group_or_stock_id, RG_TARGET_NAMESPACE))
             group = gtk_radio_tool_button_get_group(_SELF(group_or_stock_id));
 
         if (stock_id == NULL)
@@ -128,10 +129,10 @@ void
 Init_gtk_radiotoolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    gRToolButton = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);
 
-    rb_define_method(gRToolButton, "initialize", rbtn_initialize, -1);
-    G_REPLACE_GET_PROPERTY(gRToolButton, "group", rbtn_get_group, 0);
-    G_REPLACE_SET_PROPERTY(gRToolButton, "group", rbtn_set_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbtn_initialize, -1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", rbtn_get_group, 0);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", rbtn_set_group, 1);
 #endif
 }

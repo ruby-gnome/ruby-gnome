@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTimeCoord
 #define _SELF(s) ((GdkTimeCoord*)RVAL2BOXED(s, GDK_TYPE_TIME_COORD))
 
 /**********************************/
@@ -120,15 +121,15 @@ timecoord_set_axes(VALUE self, VALUE rbaxes)
 void
 Init_gtk_gdk_timecoord(void)
 {
-    VALUE tc = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
 
-    rb_define_method(tc, "initialize", timecoord_initialize, 2);
-    rb_define_method(tc, "time", timecoord_time, 0);
-    rb_define_method(tc, "set_time", timecoord_set_time, 1);
-    rb_define_method(tc, "axes", timecoord_axes, 0);
-    rb_define_method(tc, "set_axes", timecoord_set_axes, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", timecoord_initialize, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "time", timecoord_time, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_time", timecoord_set_time, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "axes", timecoord_axes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_axes", timecoord_set_axes, 1);
 
-    G_DEF_SETTERS(tc);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    rb_define_const(tc, "MAX_AXES", INT2NUM(GDK_MAX_TIMECOORD_AXES));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAX_AXES", INT2NUM(GDK_MAX_TIMECOORD_AXES));
 }

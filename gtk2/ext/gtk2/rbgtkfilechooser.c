@@ -24,6 +24,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE mFileChooser
 #define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
 
 #ifdef HAVE_GTK_GTKFILESYSTEM_H
@@ -312,46 +313,46 @@ Init_gtk_file_chooser(void)
 
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gFileCho = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
 #ifdef GTK_FILE_SYSTEM_ERROR
     VALUE eFileSystemError;
 #endif
 
-    rb_define_method(gFileCho, "set_current_name", fcho_set_current_name, 1);
-    rb_define_method(gFileCho, "set_filename", fcho_set_filename, 1);
-    rb_define_method(gFileCho, "filename", fcho_get_filename, 0);
-    rb_define_method(gFileCho, "select_filename", fcho_select_filename, 1);
-    rb_define_method(gFileCho, "unselect_filename", fcho_unselect_filename, 1);
-    rb_define_method(gFileCho, "select_all", fcho_select_all, 0);
-    rb_define_method(gFileCho, "unselect_all", fcho_unselect_all, 0);
-    rb_define_method(gFileCho, "filenames", fcho_get_filenames, 0);
-    rb_define_method(gFileCho, "set_current_folder", fcho_set_current_folder, 1);
-    rb_define_method(gFileCho, "current_folder", fcho_get_current_folder, 0);
-    rb_define_method(gFileCho, "set_uri", fcho_set_uri, 1);
-    rb_define_method(gFileCho, "uri", fcho_get_uri, 0);
-    rb_define_method(gFileCho, "select_uri", fcho_select_uri, 1);
-    rb_define_method(gFileCho, "unselect_uri", fcho_unselect_uri, 1);
-    rb_define_method(gFileCho, "uris", fcho_get_uris, 0);
-    rb_define_method(gFileCho, "set_current_folder_uri", fcho_set_current_folder_uri, 1);
-    rb_define_method(gFileCho, "current_folder_uri", fcho_get_current_folder_uri, 0);
-    rb_define_method(gFileCho, "preview_filename", fcho_get_preview_filename, 0);
-    rb_define_method(gFileCho, "preview_uri", fcho_get_preview_uri, 0);
-    rb_define_method(gFileCho, "add_filter", fcho_add_filter, 1);
-    rb_define_method(gFileCho, "remove_filter", fcho_remove_filter, 1);
-    rb_define_method(gFileCho, "filters", fcho_list_filters, 0);
-    rb_define_method(gFileCho, "add_shortcut_folder", fcho_add_shortcut_folder, 1);
-    rb_define_method(gFileCho, "remove_shortcut_folder", fcho_remove_shortcut_folder, 1);
-    rb_define_method(gFileCho, "shortcut_folders", fcho_list_shortcut_folders, 0);
-    rb_define_method(gFileCho, "add_shortcut_folder_uri", fcho_add_shortcut_folder_uri, 1);
-    rb_define_method(gFileCho, "remove_shortcut_folder_uri", fcho_remove_shortcut_folder_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_current_name", fcho_set_current_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_filename", fcho_set_filename, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "filename", fcho_get_filename, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_filename", fcho_select_filename, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_filename", fcho_unselect_filename, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_all", fcho_select_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_all", fcho_unselect_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "filenames", fcho_get_filenames, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_current_folder", fcho_set_current_folder, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "current_folder", fcho_get_current_folder, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_uri", fcho_set_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "uri", fcho_get_uri, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_uri", fcho_select_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_uri", fcho_unselect_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "uris", fcho_get_uris, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_current_folder_uri", fcho_set_current_folder_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "current_folder_uri", fcho_get_current_folder_uri, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "preview_filename", fcho_get_preview_filename, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "preview_uri", fcho_get_preview_uri, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_filter", fcho_add_filter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_filter", fcho_remove_filter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "filters", fcho_list_filters, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_shortcut_folder", fcho_add_shortcut_folder, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_shortcut_folder", fcho_remove_shortcut_folder, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "shortcut_folders", fcho_list_shortcut_folders, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_shortcut_folder_uri", fcho_add_shortcut_folder_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_shortcut_folder_uri", fcho_remove_shortcut_folder_uri, 1);
 
-    rb_define_method(gFileCho, "shortcut_folder_uris", fcho_list_shortcut_folder_uris, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "shortcut_folder_uris", fcho_list_shortcut_folder_uris, 0);
 
-    G_DEF_SETTERS(gFileCho);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkFileChooserAction */
-    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", gFileCho);
-    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
+    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
 
     /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
@@ -377,8 +378,8 @@ Init_gtk_file_chooser(void)
 
 #if GTK_CHECK_VERSION(2,8,0)
     /* GtkFileChooserConfirmation */
-    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", gFileCho);
-    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
+    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
 #endif
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);

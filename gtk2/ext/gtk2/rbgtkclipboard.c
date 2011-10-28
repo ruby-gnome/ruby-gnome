@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cClipboard
 #define _SELF(s) RVAL2CLIPBOARD(s)
 
 #ifndef GTK_TYPE_CLIPBOARD
@@ -420,53 +421,53 @@ clipboard_store(VALUE self)
 void 
 Init_gtk_clipboard(void)
 {
-    VALUE gClipboard = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 
-    rb_define_singleton_method(gClipboard, "get", clipboard_get, -1);
-    rb_define_method(gClipboard, "display", clipboard_get_display, 0);
-    rb_define_method(gClipboard, "set", clipboard_set, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get", clipboard_get, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "display", clipboard_get_display, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set", clipboard_set, 1);
 /*
-  rb_define_method(gClipboard, "owner", clipboard_get_owner, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "owner", clipboard_get_owner, 0);
 */
-    rb_define_method(gClipboard, "clear", clipboard_clear, 0);
-    rb_define_method(gClipboard, "set_text", clipboard_set_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", clipboard_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text", clipboard_set_text, 1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gClipboard, "set_image", clipboard_set_image, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_image", clipboard_set_image, 1);
 #endif
-    rb_define_method(gClipboard, "request_contents", clipboard_request_contents, 1);
-    rb_define_method(gClipboard, "request_text", clipboard_request_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "request_contents", clipboard_request_contents, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "request_text", clipboard_request_text, 0);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gClipboard, "request_image", clipboard_request_image, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "request_image", clipboard_request_image, 0);
 #endif
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gClipboard, "request_targets", clipboard_request_targets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "request_targets", clipboard_request_targets, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gClipboard, "request_rich_text", clipboard_request_rich_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "request_rich_text", clipboard_request_rich_text, 1);
 #endif
-    rb_define_method(gClipboard, "wait_for_contents", clipboard_wait_for_contents, 1);
-    rb_define_method(gClipboard, "wait_for_text", clipboard_wait_for_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_for_contents", clipboard_wait_for_contents, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_for_text", clipboard_wait_for_text, 0);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gClipboard, "wait_for_image", clipboard_wait_for_image, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_for_image", clipboard_wait_for_image, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gClipboard, "wait_for_rich_text", clipboard_wait_for_rich_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_for_rich_text", clipboard_wait_for_rich_text, 1);
 #endif
-    rb_define_method(gClipboard, "wait_is_text_available?", clipboard_wait_is_text_available, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_is_text_available?", clipboard_wait_is_text_available, 0);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gClipboard, "wait_is_image_available?", clipboard_wait_is_image_available, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_is_image_available?", clipboard_wait_is_image_available, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gClipboard, "wait_is_rich_text_available?", clipboard_wait_is_rich_text_available, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_is_rich_text_available?", clipboard_wait_is_rich_text_available, 1);
 #endif
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gClipboard, "wait_for_targets", clipboard_wait_for_targets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_for_targets", clipboard_wait_for_targets, 0);
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gClipboard, "wait_is_target_available?", clipboard_wait_is_target_available, 1);
-    rb_define_method(gClipboard, "set_can_store", clipboard_set_can_store, 1);
-    rb_define_method(gClipboard, "store", clipboard_store, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "wait_is_target_available?", clipboard_wait_is_target_available, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_can_store", clipboard_set_can_store, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "store", clipboard_store, 0);
 #endif
 
-    G_DEF_SETTERS(gClipboard);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -22,6 +22,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cSettings
+
 static VALUE prop_func_table;
 
 static VALUE
@@ -211,22 +213,22 @@ void        gtk_settings_set_double_property
 void 
 Init_gtk_settings(void)
 {
-    VALUE gSettings = G_DEF_CLASS(GTK_TYPE_SETTINGS, "Settings", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SETTINGS, "Settings", mGtk);
 
     rb_global_variable(&prop_func_table);
     prop_func_table = rb_hash_new();
 
-    rb_define_singleton_method(gSettings, "default", settings_s_get_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", settings_s_get_default, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gSettings, "get_for_screen", settings_s_get_for_screen, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_for_screen", settings_s_get_for_screen, 1);
 #endif
-    rb_define_singleton_method(gSettings, "install_property", settings_s_install_property, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "install_property", settings_s_install_property, 1);
 
-    rb_define_singleton_method(gSettings, "rc_property_parse_color", settings_rc_property_parse_color, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_enum", settings_rc_property_parse_enum, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_flags", settings_rc_property_parse_flags, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_requisition", settings_rc_property_parse_requisition, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_border", settings_rc_property_parse_border, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "rc_property_parse_color", settings_rc_property_parse_color, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "rc_property_parse_enum", settings_rc_property_parse_enum, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "rc_property_parse_flags", settings_rc_property_parse_flags, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "rc_property_parse_requisition", settings_rc_property_parse_requisition, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "rc_property_parse_border", settings_rc_property_parse_border, 2);
 
-    rb_define_method(gSettings, "set_property_value", settings_set_property_value, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_property_value", settings_set_property_value, 3);
 }

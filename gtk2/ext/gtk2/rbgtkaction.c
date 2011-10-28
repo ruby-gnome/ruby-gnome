@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cAction
 #define _SELF(self) (GTK_ACTION(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -202,12 +203,12 @@ void
 Init_gtk_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gAction;
+    VALUE RG_TARGET_NAMESPACE;
 
-    gAction = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION, "Action", mGtk,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION, "Action", mGtk,
 				       action_mark, NULL);
 
-    rb_define_method(gAction, "initialize", action_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", action_initialize, -1);
     /* (NOTICE) Gtk::Action#is_sensitive?, #is_visible are special.
        Because there are also Gtk::Action#sensitive?, #visible? as property 
        accessors. 
@@ -215,33 +216,33 @@ Init_gtk_action(void)
        action group.
        Gtk::Action#sensitive?, #visible? returns the value of the properties.
     */
-    rb_define_method(gAction, "is_sensitive?", action_is_sensitive, 0);
-    rb_define_method(gAction, "is_visible?", action_is_visible, 0);
-    rb_define_method(gAction, "activate", action_activate, 0);
-    rb_define_method(gAction, "create_icon", action_create_icon, 1);
-    rb_define_method(gAction, "create_menu_item", action_create_menu_item, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "is_sensitive?", action_is_sensitive, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "is_visible?", action_is_visible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "activate", action_activate, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_icon", action_create_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_menu_item", action_create_menu_item, 0);
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(gAction, "create_menu", action_create_menu, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_menu", action_create_menu, 0);
 #endif
-    rb_define_method(gAction, "create_tool_item", action_create_tool_item, 0);
-    rb_define_method(gAction, "connect_proxy", action_connect_proxy, 1);
-    rb_define_method(gAction, "disconnect_proxy", action_disconnect_proxy, 1);
-    rb_define_method(gAction, "proxies", action_get_proxies, 0);
-    rb_define_method(gAction, "connect_accelerator", action_connect_accelerator, 0);
-    rb_define_method(gAction, "disconnect_accelerator", action_disconnect_accelerator, 0);
-    rb_define_method(gAction, "block_activate_from", action_block_activate_from, 1);
-    rb_define_method(gAction, "unblock_activate_from", action_unblock_activate_from, 1);
-    rb_define_method(gAction, "set_accel_path", action_set_accel_path, 1);
-    G_DEF_SETTER(gAction, "accel_path");
-    rb_define_method(gAction, "set_accel_group", action_set_accel_group, 1);
-    G_DEF_SETTER(gAction, "accel_group");
+    rb_define_method(RG_TARGET_NAMESPACE, "create_tool_item", action_create_tool_item, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "connect_proxy", action_connect_proxy, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "disconnect_proxy", action_disconnect_proxy, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "proxies", action_get_proxies, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "connect_accelerator", action_connect_accelerator, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "disconnect_accelerator", action_disconnect_accelerator, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "block_activate_from", action_block_activate_from, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unblock_activate_from", action_unblock_activate_from, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_accel_path", action_set_accel_path, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_path");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_accel_group", action_set_accel_group, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_group");
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gAction, "accel_path", action_get_accel_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "accel_path", action_get_accel_path, 0);
 #endif
 
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gAction, "accel_closure", action_get_accel_closure, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "accel_closure", action_get_accel_closure, 0);
 #endif
 #endif
 }

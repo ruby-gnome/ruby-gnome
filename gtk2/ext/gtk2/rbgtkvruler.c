@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVRuler
+
 static VALUE
 vruler_initialize(VALUE self)
 {
@@ -34,6 +36,6 @@ vruler_initialize(VALUE self)
 void 
 Init_gtk_vruler(void)
 {
-    VALUE gVRuler = G_DEF_CLASS(GTK_TYPE_VRULER, "VRuler", mGtk);
-    rb_define_method(gVRuler, "initialize", vruler_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VRULER, "VRuler", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vruler_initialize, 0);
 }

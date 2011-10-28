@@ -31,6 +31,7 @@
 #include <rb_cairo.h>
 #endif
 
+#define RG_TARGET_NAMESPACE cDrawable
 #define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
 
 static VALUE
@@ -481,56 +482,56 @@ gdkdraw_cairo_create(VALUE self)
 void
 Init_gtk_gdk_draw(void)
 {
-    VALUE gdkDrawable = G_DEF_CLASS(GDK_TYPE_DRAWABLE, "Drawable", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAWABLE, "Drawable", mGdk);
 
-    rb_define_method(gdkDrawable, "visual", gdkdraw_get_visual, 0);
-    rb_define_method(gdkDrawable, "set_colormap", gdkdraw_set_colormap, 1);
-    rb_define_method(gdkDrawable, "colormap", gdkdraw_get_colormap, 0);
-    rb_define_method(gdkDrawable, "depth", gdkdraw_get_depth, 0);
-    rb_define_method(gdkDrawable, "size", gdkdraw_get_size, 0);
-    rb_define_method(gdkDrawable, "clip_region", gdkdraw_get_clip_region, 0);
-    rb_define_method(gdkDrawable, "visible_region", gdkdraw_get_visible_region, 0);
-    rb_define_method(gdkDrawable, "draw_point", gdkdraw_draw_point, 3);
-    rb_define_method(gdkDrawable, "draw_points", gdkdraw_draw_points, 2);
-    rb_define_method(gdkDrawable, "draw_line", gdkdraw_draw_line, 5);
-    rb_define_method(gdkDrawable, "draw_lines", gdkdraw_draw_lines, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "visual", gdkdraw_get_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_colormap", gdkdraw_set_colormap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "colormap", gdkdraw_get_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "depth", gdkdraw_get_depth, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", gdkdraw_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clip_region", gdkdraw_get_clip_region, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_region", gdkdraw_get_visible_region, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_point", gdkdraw_draw_point, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_points", gdkdraw_draw_points, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_line", gdkdraw_draw_line, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_lines", gdkdraw_draw_lines, 2);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkDrawable, "draw_pixbuf", gdkdraw_draw_pixbuf, 11);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_pixbuf", gdkdraw_draw_pixbuf, 11);
 #endif
-    rb_define_method(gdkDrawable, "draw_segments", gdkdraw_draw_segs, 2);
-    rb_define_method(gdkDrawable, "draw_rectangle", gdkdraw_draw_rect, 6);
-    rb_define_method(gdkDrawable, "draw_arc", gdkdraw_draw_arc, 8);
-    rb_define_method(gdkDrawable, "draw_polygon", gdkdraw_draw_poly, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_segments", gdkdraw_draw_segs, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_rectangle", gdkdraw_draw_rect, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_arc", gdkdraw_draw_arc, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_polygon", gdkdraw_draw_poly, 3);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gdkDrawable, "draw_trapezoids", gdkdraw_draw_trapezoids, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_trapezoids", gdkdraw_draw_trapezoids, 2);
 #endif
-    rb_define_method(gdkDrawable, "draw_glyphs", gdkdraw_glyphs, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_glyphs", gdkdraw_glyphs, 5);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gdkDrawable, "draw_glyphs_transformed", gdkdraw_glyphs_transformed, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_glyphs_transformed", gdkdraw_glyphs_transformed, 6);
 #endif
-    rb_define_method(gdkDrawable, "draw_layout_line", gdkdraw_layout_line, -1);
-    rb_define_method(gdkDrawable, "draw_layout", gdkdraw_layout, -1);
-    rb_define_method(gdkDrawable, "draw_drawable", gdkdraw_draw_drawable, 8);
-    rb_define_method(gdkDrawable, "draw_image", gdkdraw_draw_image, 8);
-    rb_define_method(gdkDrawable, "get_image", gdkdraw_get_image, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_layout_line", gdkdraw_layout_line, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_layout", gdkdraw_layout, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_drawable", gdkdraw_draw_drawable, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_image", gdkdraw_draw_image, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_image", gdkdraw_get_image, 4);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkDrawable, "copy_to_image", gdkdraw_copy_to_image, 7);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy_to_image", gdkdraw_copy_to_image, 7);
 #endif
 
 #ifdef GDK_WINDOWING_X11
-    rb_define_method(gdkDrawable, "xid", gdkdraw_get_xid, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "xid", gdkdraw_get_xid, 0);
 #endif
 #ifdef GDK_WINDOWING_WIN32
-    rb_define_method(gdkDrawable, "handle", gdkdraw_get_handle, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "handle", gdkdraw_get_handle, 0);
 #endif
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkDrawable, "display", gdkdraw_get_display, 0);
-    rb_define_method(gdkDrawable, "screen", gdkdraw_get_screen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display", gdkdraw_get_display, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "screen", gdkdraw_get_screen, 0);
 #endif
     
 #if GTK_CHECK_VERSION(2,8,0)
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gdkDrawable, "create_cairo_context",
+    rb_define_method(RG_TARGET_NAMESPACE, "create_cairo_context",
                      gdkdraw_cairo_create, 0);
 #  endif
 #endif
@@ -543,6 +544,6 @@ Init_gtk_gdk_draw(void)
     G_DEF_CLASS3("GdkDrawableFB", "DrawableFB", mGdk);
 #endif
     
-    G_DEF_SETTERS(gdkDrawable);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 

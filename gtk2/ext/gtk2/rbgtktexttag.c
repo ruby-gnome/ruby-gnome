@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextTag
+
 static VALUE
 initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -56,14 +58,14 @@ event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
 void
 Init_gtk_texttag(void)
 {
-    VALUE gTextTag = G_DEF_CLASS(GTK_TYPE_TEXT_TAG, "TextTag", mGtk);
-    rb_define_method(gTextTag, "initialize", initialize, -1);
-    rb_define_method(gTextTag, "priority", get_priority, 0);
-    rb_define_method(gTextTag, "set_priority", set_priority, 1);
-    G_DEF_SETTER(gTextTag, "priority");
-    rb_define_method(gTextTag, "event", event, 3);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_TAG, "TextTag", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "priority", get_priority, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_priority", set_priority, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "priority");
+    rb_define_method(RG_TARGET_NAMESPACE, "event", event, 3);
 
     /* GtkWrapMode */
-    G_DEF_CLASS(GTK_TYPE_WRAP_MODE, "WrapMode", gTextTag);
-    G_DEF_CONSTANTS(gTextTag, GTK_TYPE_WRAP_MODE, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_WRAP_MODE, "WrapMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WRAP_MODE, "GTK_");
 }

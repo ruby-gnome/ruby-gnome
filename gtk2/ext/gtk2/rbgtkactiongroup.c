@@ -26,6 +26,7 @@
 static ID id_action_procs;
 static ID id_toggle_action_procs;
 
+#define RG_TARGET_NAMESPACE cActionGroup
 #define _SELF(self) (GTK_ACTION_GROUP(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -458,27 +459,27 @@ void
 Init_gtk_actiongroup(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gActionGroup;
+    VALUE RG_TARGET_NAMESPACE;
 
-    gActionGroup = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION_GROUP, "ActionGroup",
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION_GROUP, "ActionGroup",
 					    mGtk, action_group_mark, NULL);
 
     id_action_procs = rb_intern("@action_procs");
     id_toggle_action_procs = rb_intern("@toggle_action_procs");
 
-    rb_define_method(gActionGroup, "initialize", actiongroup_initialize, 1);
-    rb_define_method(gActionGroup, "get_action", actiongroup_get_action, 1);
-    rb_define_method(gActionGroup, "actions", actiongroup_list_actions, 0);
-    rb_define_method(gActionGroup, "add_action", actiongroup_add_action, -1);
-    rb_define_method(gActionGroup, "remove_action", actiongroup_remove_action, 1);
-    rb_define_method(gActionGroup, "add_actions", actiongroup_add_actions, 1);
-    rb_define_method(gActionGroup, "add_toggle_actions", actiongroup_add_toggle_actions, 1);
-    rb_define_method(gActionGroup, "add_radio_actions", actiongroup_add_radio_actions, -1);
-    rb_define_method(gActionGroup, "set_translate_func", actiongroup_set_translate_func, 0);
-    rb_define_method(gActionGroup, "set_translation_domain", actiongroup_set_translation_domain, 1);
-    G_DEF_SETTER(gActionGroup, "translation_domain");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", actiongroup_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_action", actiongroup_get_action, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "actions", actiongroup_list_actions, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_action", actiongroup_add_action, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_action", actiongroup_remove_action, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_actions", actiongroup_add_actions, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_toggle_actions", actiongroup_add_toggle_actions, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_radio_actions", actiongroup_add_radio_actions, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_translate_func", actiongroup_set_translate_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_translation_domain", actiongroup_set_translation_domain, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "translation_domain");
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gActionGroup, "translate_string", actiongroup_translate_string, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "translate_string", actiongroup_translate_string, 1);
 #endif
 #endif
 }

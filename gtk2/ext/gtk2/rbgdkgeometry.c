@@ -47,6 +47,7 @@ gdk_geometry_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cGeometry
 #define _SELF(g) ((GdkGeometry*)RVAL2BOXED(g, GDK_TYPE_GEOMETRY))
 
 static VALUE
@@ -222,33 +223,33 @@ geo_set_win_gravity(VALUE self, VALUE gravity)
 void 
 Init_gtk_gdk_geometry(void)
 {
-    VALUE gdkGeometry = G_DEF_CLASS(GDK_TYPE_GEOMETRY, "Geometry", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_GEOMETRY, "Geometry", mGdk);
 
-    rb_define_method(gdkGeometry, "initialize", geo_initialize, 0);
-    rb_define_method(gdkGeometry, "min_width", geo_min_width, 0);
-    rb_define_method(gdkGeometry, "min_height", geo_min_height, 0);
-    rb_define_method(gdkGeometry, "max_width", geo_max_width, 0);
-    rb_define_method(gdkGeometry, "max_height", geo_max_height, 0);
-    rb_define_method(gdkGeometry, "base_width", geo_base_width, 0);
-    rb_define_method(gdkGeometry, "base_height", geo_base_height, 0);
-    rb_define_method(gdkGeometry, "width_inc", geo_width_inc, 0);
-    rb_define_method(gdkGeometry, "height_inc", geo_height_inc, 0);
-    rb_define_method(gdkGeometry, "min_aspect", geo_min_aspect, 0);
-    rb_define_method(gdkGeometry, "max_aspect", geo_max_aspect, 0);
-    rb_define_method(gdkGeometry, "win_gravity", geo_win_gravity, 0);
-    rb_define_method(gdkGeometry, "set", geo_set, 11);
-    rb_define_method(gdkGeometry, "set_min_width", geo_set_min_width, 1);
-    rb_define_method(gdkGeometry, "set_min_height", geo_set_min_height, 1);
-    rb_define_method(gdkGeometry, "set_max_width", geo_set_max_width, 1);
-    rb_define_method(gdkGeometry, "set_max_height", geo_set_max_height, 1);
-    rb_define_method(gdkGeometry, "set_base_width", geo_set_base_width, 1);
-    rb_define_method(gdkGeometry, "set_base_height", geo_set_base_height, 1);
-    rb_define_method(gdkGeometry, "set_width_inc", geo_set_width_inc, 1);
-    rb_define_method(gdkGeometry, "set_height_inc", geo_set_height_inc, 1);
-    rb_define_method(gdkGeometry, "set_min_aspect", geo_set_min_aspect, 1);
-    rb_define_method(gdkGeometry, "set_max_aspect", geo_set_max_aspect, 1);
-    rb_define_method(gdkGeometry, "set_win_gravity", geo_set_win_gravity, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", geo_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "min_width", geo_min_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "min_height", geo_min_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "max_width", geo_max_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "max_height", geo_max_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "base_width", geo_base_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "base_height", geo_base_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width_inc", geo_width_inc, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height_inc", geo_height_inc, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "min_aspect", geo_min_aspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "max_aspect", geo_max_aspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "win_gravity", geo_win_gravity, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set", geo_set, 11);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_min_width", geo_set_min_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_min_height", geo_set_min_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_max_width", geo_set_max_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_max_height", geo_set_max_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_base_width", geo_set_base_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_base_height", geo_set_base_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width_inc", geo_set_width_inc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_height_inc", geo_set_height_inc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_min_aspect", geo_set_min_aspect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_max_aspect", geo_set_max_aspect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_win_gravity", geo_set_win_gravity, 1);
 
-    G_DEF_SETTERS(gdkGeometry);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 }

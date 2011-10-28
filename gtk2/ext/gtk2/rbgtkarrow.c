@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cArrow
+
 static VALUE
 arrow_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
@@ -44,12 +46,12 @@ arrow_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
 void 
 Init_gtk_arrow(void)
 {
-    VALUE gArrow = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);
 
-    rb_define_method(gArrow, "initialize", arrow_initialize, 2);
-    rb_define_method(gArrow, "set", arrow_set, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", arrow_initialize, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set", arrow_set, 2);
 
     /* GtkArrowType (from General constants) */
-    G_DEF_CLASS(GTK_TYPE_ARROW_TYPE, "Type", gArrow);
-    G_DEF_CONSTANTS(gArrow, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
+    G_DEF_CLASS(GTK_TYPE_ARROW_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
 }

@@ -25,6 +25,7 @@
 #include "global.h"
 #include <gdk-pixbuf/gdk-pixdata.h>
 
+#define RG_TARGET_NAMESPACE cItemFactory
 #define _SELF(self) (GTK_ITEM_FACTORY(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 #define RVAL2ACCEL(a)  (GTK_ACCEL_GROUP(RVAL2GOBJ(a)))
@@ -264,36 +265,36 @@ void        gtk_item_factory_set_translate_func
 void 
 Init_gtk_itemfactory(void)
 {
-    VALUE gItemFactory = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
 
-    rb_define_singleton_method(gItemFactory, "from_widget", ifact_s_from_widget, 1);
-    rb_define_singleton_method(gItemFactory, "path_from_widget", ifact_s_path_from_widget, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_widget", ifact_s_from_widget, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "path_from_widget", ifact_s_path_from_widget, 1);
 
-    rb_define_method(gItemFactory, "initialize", ifact_initialize, 3);
-    rb_define_method(gItemFactory, "construct", ifact_construct, -1);
-    rb_define_method(gItemFactory, "get_item", ifact_get_item, 1);
-    rb_define_method(gItemFactory, "get_widget", ifact_get_widget, 1);
-    rb_define_method(gItemFactory, "create_item", ifact_create_item, -1);
-    rb_define_method(gItemFactory, "create_items", ifact_create_items, 1);
-    rb_define_method(gItemFactory, "delete_item", ifact_delete_item, 1);
-    rb_define_method(gItemFactory, "popup", ifact_popup, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ifact_initialize, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "construct", ifact_construct, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_item", ifact_get_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_widget", ifact_get_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_item", ifact_create_item, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_items", ifact_create_items, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_item", ifact_delete_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "popup", ifact_popup, 4);
 
     /* Ruby/GTK Original constants */
-    rb_define_const(gItemFactory, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
-    rb_define_const(gItemFactory, "TYPE_MENU", INT2FIX(GTK_TYPE_MENU));
-    rb_define_const(gItemFactory, "TYPE_OPTION_MENU", INT2FIX(GTK_TYPE_OPTION_MENU));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_MENU", INT2FIX(GTK_TYPE_MENU));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_OPTION_MENU", INT2FIX(GTK_TYPE_OPTION_MENU));
 
-    rb_define_const(gItemFactory, "TITLE", CSTR2RVAL("<Title>"));
-    rb_define_const(gItemFactory, "ITEM", CSTR2RVAL("<Item>"));
-    rb_define_const(gItemFactory, "CHECK_ITEM", CSTR2RVAL("<CheckItem>"));
-    rb_define_const(gItemFactory, "TOGGLE_ITEM", CSTR2RVAL("<ToggleItem>"));
-    rb_define_const(gItemFactory, "RADIO_ITEM", CSTR2RVAL("<RadioItem>"));
-    rb_define_const(gItemFactory, "IMAGE_ITEM", CSTR2RVAL("<ImageItem>"));
-    rb_define_const(gItemFactory, "STOCK_ITEM", CSTR2RVAL("<StockItem>"));
-    rb_define_const(gItemFactory, "SEPARATOR", CSTR2RVAL("<Separator>"));
-    rb_define_const(gItemFactory, "BRANCH", CSTR2RVAL("<Branch>"));
-    rb_define_const(gItemFactory, "LAST_BRANCH", CSTR2RVAL("<LastBranch>"));
-    rb_define_const(gItemFactory, "TEAROFF", CSTR2RVAL("<Tearoff>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "TITLE", CSTR2RVAL("<Title>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "ITEM", CSTR2RVAL("<Item>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "CHECK_ITEM", CSTR2RVAL("<CheckItem>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "TOGGLE_ITEM", CSTR2RVAL("<ToggleItem>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "RADIO_ITEM", CSTR2RVAL("<RadioItem>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "IMAGE_ITEM", CSTR2RVAL("<ImageItem>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "STOCK_ITEM", CSTR2RVAL("<StockItem>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEPARATOR", CSTR2RVAL("<Separator>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "BRANCH", CSTR2RVAL("<Branch>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "LAST_BRANCH", CSTR2RVAL("<LastBranch>"));
+    rb_define_const(RG_TARGET_NAMESPACE, "TEAROFF", CSTR2RVAL("<Tearoff>"));
 
     action_table = rb_hash_new();
     rb_global_variable(&action_table);

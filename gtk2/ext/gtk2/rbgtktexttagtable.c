@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextTagTable
 #define _SELF(self) (GTK_TEXT_TAG_TABLE(RVAL2GOBJ(self)))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 
@@ -84,14 +85,14 @@ txt_tt_get_size(VALUE self)
 void
 Init_gtk_text_tag_table(void)
 {
-    VALUE gTextTagTable = G_DEF_CLASS(GTK_TYPE_TEXT_TAG_TABLE, "TextTagTable", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_TAG_TABLE, "TextTagTable", mGtk);
 
-    rb_define_method(gTextTagTable, "initialize", txt_tt_initialize, 0);
-    rb_define_method(gTextTagTable, "add", txt_tt_add, 1);
-    rb_define_method(gTextTagTable, "remove", txt_tt_remove, 1);
-    rb_define_method(gTextTagTable, "lookup", txt_tt_lookup, 1);
-    rb_define_alias(gTextTagTable, "[]", "lookup");
-    rb_define_method(gTextTagTable, "each", txt_tt_foreach, 0);
-    rb_define_method(gTextTagTable, "size", txt_tt_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", txt_tt_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", txt_tt_add, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", txt_tt_remove, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup", txt_tt_lookup, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "lookup");
+    rb_define_method(RG_TARGET_NAMESPACE, "each", txt_tt_foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", txt_tt_get_size, 0);
 }
 

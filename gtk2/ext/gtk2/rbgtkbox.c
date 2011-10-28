@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cBox
 #define _SELF(self) (GTK_BOX(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -125,13 +126,13 @@ box_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE p
 void 
 Init_gtk_box(void)
 {
-    VALUE gBox = G_DEF_CLASS(GTK_TYPE_BOX, "Box", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BOX, "Box", mGtk);
 
-    rb_define_method(gBox, "pack_start", box_pack_start, -1);
-    rb_define_method(gBox, "pack_end", box_pack_end, -1);
-    rb_define_method(gBox, "pack_start_defaults", box_pack_start_defaults, 1);
-    rb_define_method(gBox, "pack_end_defaults", box_pack_end_defaults, 1);
-    rb_define_method(gBox, "reorder_child", box_reorder_child, 2);
-    rb_define_method(gBox, "query_child_packing", box_query_child_packing, 1);
-    rb_define_method(gBox, "set_child_packing", box_set_child_packing, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_start", box_pack_start, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_end", box_pack_end, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_start_defaults", box_pack_start_defaults, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_end_defaults", box_pack_end_defaults, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "reorder_child", box_reorder_child, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "query_child_packing", box_query_child_packing, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_child_packing", box_set_child_packing, 5);
 }

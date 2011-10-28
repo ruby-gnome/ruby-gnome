@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cButtonBox
+
 static VALUE
 bbox_set_child_secondary(VALUE self, VALUE child, VALUE is_secondary)
 {
@@ -44,12 +46,12 @@ bbox_get_child_secondary(VALUE self, VALUE child)
 void 
 Init_gtk_button_box(void)
 {
-    VALUE gBBox = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
-    rb_define_method(gBBox, "set_child_secondary", bbox_set_child_secondary, 2);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_child_secondary", bbox_set_child_secondary, 2);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gBBox, "get_child_secondary", bbox_get_child_secondary, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_child_secondary", bbox_get_child_secondary, 1);
 #endif
     /* GtkButtonBoxStyle(General constants) */
-    G_DEF_CLASS(GTK_TYPE_BUTTON_BOX_STYLE, "Style", gBBox);
-    G_DEF_CONSTANTS(gBBox, GTK_TYPE_BUTTON_BOX_STYLE, "GTK_BUTTONBOX_");
+    G_DEF_CLASS(GTK_TYPE_BUTTON_BOX_STYLE, "Style", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_BUTTON_BOX_STYLE, "GTK_BUTTONBOX_");
 }

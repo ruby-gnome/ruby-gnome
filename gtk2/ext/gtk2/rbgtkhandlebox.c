@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHandleBox
+
 static VALUE
 hb_initialize(VALUE self)
 {
@@ -34,10 +36,10 @@ hb_initialize(VALUE self)
 void 
 Init_gtk_handle_box(void)
 {
-    VALUE gHandleBox = G_DEF_CLASS(GTK_TYPE_HANDLE_BOX, "HandleBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HANDLE_BOX, "HandleBox", mGtk);
 
-    rb_define_method(gHandleBox, "initialize", hb_initialize, 0);
-    rb_undef_method(gHandleBox, "shadow");
-    rb_undef_method(gHandleBox, "shadow=");
-    rb_undef_method(gHandleBox, "set_shadow");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", hb_initialize, 0);
+    rb_undef_method(RG_TARGET_NAMESPACE, "shadow");
+    rb_undef_method(RG_TARGET_NAMESPACE, "shadow=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_shadow");
 }

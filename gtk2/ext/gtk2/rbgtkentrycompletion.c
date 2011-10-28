@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,4,0)
+
+#define RG_TARGET_NAMESPACE cEntryCompletion
 #define _SELF(self) (GTK_ENTRY_COMPLETION(RVAL2GOBJ(self)))
 
 static VALUE
@@ -139,23 +141,23 @@ void
 Init_gtk_entry_completion(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gEntryC = G_DEF_CLASS(GTK_TYPE_ENTRY_COMPLETION, "EntryCompletion", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY_COMPLETION, "EntryCompletion", mGtk);
 
-    rb_define_method(gEntryC, "initialize", entryc_initialize, 0);
-    rb_define_method(gEntryC, "entry", entryc_get_entry, 0);
-    rb_define_method(gEntryC, "set_match_func", entryc_set_match_func, 0);
-    rb_define_method(gEntryC, "complete", entryc_complete, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", entryc_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "entry", entryc_get_entry, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_match_func", entryc_set_match_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "complete", entryc_complete, 0);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gEntryC, "insert_prefix", entryc_insert_prefix, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_prefix", entryc_insert_prefix, 0);
 #endif
-    rb_define_method(gEntryC, "insert_action_text", entryc_insert_action_text, 2);
-    rb_define_method(gEntryC, "insert_action_markup", entryc_insert_action_markup, 2);
-    rb_define_method(gEntryC, "delete_action", entryc_delete_action, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_action_text", entryc_insert_action_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_action_markup", entryc_insert_action_markup, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_action", entryc_delete_action, 1);
 
-    G_REPLACE_SET_PROPERTY(gEntryC, "text_column", entryc_set_text_column, 1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "text_column", entryc_set_text_column, 1);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(gEntryC, "completion_prefix", entryc_get_completion_prefix, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "completion_prefix", entryc_get_completion_prefix, 0);
 #endif
 #endif
 }

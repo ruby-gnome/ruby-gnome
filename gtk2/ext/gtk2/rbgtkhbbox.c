@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHButtonBox
+
 static VALUE
 hbbox_initialize(VALUE self)
 {
@@ -34,7 +36,7 @@ hbbox_initialize(VALUE self)
 void 
 Init_gtk_hbutton_box(void)
 {
-    VALUE gHBBox = G_DEF_CLASS(GTK_TYPE_HBUTTON_BOX, "HButtonBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HBUTTON_BOX, "HButtonBox", mGtk);
 
-    rb_define_method(gHBBox, "initialize", hbbox_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", hbbox_initialize, 0);
 }

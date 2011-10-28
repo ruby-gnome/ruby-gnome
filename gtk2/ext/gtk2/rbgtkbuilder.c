@@ -23,6 +23,8 @@
 #include <glib-enum-types.h> /* From Ruby/GLib2 */
 
 #if GTK_CHECK_VERSION(2, 12, 0)
+
+#define RG_TARGET_NAMESPACE cBuilder
 #define _SELF(self) (GTK_BUILDER(RVAL2GOBJ(self)))
 
 static ID id___connect_signals__;
@@ -141,28 +143,28 @@ void
 Init_gtk_builder(void)
 {
 #if GTK_CHECK_VERSION(2, 12, 0)
-    VALUE gBuilder;
+    VALUE RG_TARGET_NAMESPACE;
 
     id___connect_signals__ = rb_intern("__connect_signals__");
 
-    gBuilder = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_BUILDER, "Builder", mGtk,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_BUILDER, "Builder", mGtk,
 					builder_mark, NULL);
 
     G_DEF_CLASS(GTK_TYPE_BUILDER_ERROR, "BuilderError", mGtk);
 
-    rb_define_method(gBuilder, "initialize", builder_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", builder_initialize, 0);
 
-    rb_define_method(gBuilder, "add_from_file", builder_add_from_file, 1);
-    rb_define_method(gBuilder, "add_from_string", builder_add_from_string, 1);
-    rb_define_method(gBuilder, "add", builder_add, 1);
-    rb_define_alias(gBuilder, "<<", "add");
+    rb_define_method(RG_TARGET_NAMESPACE, "add_from_file", builder_add_from_file, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_from_string", builder_add_from_string, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", builder_add, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "<<", "add");
 
-    rb_define_method(gBuilder, "get_object", builder_get_object, 1);
-    rb_define_alias(gBuilder, "[]", "get_object");
-    rb_define_method(gBuilder, "objects", builder_get_objects, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_object", builder_get_object, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_object");
+    rb_define_method(RG_TARGET_NAMESPACE, "objects", builder_get_objects, 0);
 
-    rb_define_method(gBuilder, "connect_signals", builder_connect_signals, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "connect_signals", builder_connect_signals, 0);
 
-    rb_define_method(gBuilder, "get_type", builder_get_type_from_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_type", builder_get_type_from_name, 1);
 #endif
 }

@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cFrame
+
 static VALUE
 frame_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -56,13 +58,13 @@ frame_get_label_align(VALUE self)
 void 
 Init_gtk_frame(void)
 {
-    VALUE gFrame = G_DEF_CLASS(GTK_TYPE_FRAME, "Frame", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FRAME, "Frame", mGtk);
 
-    rb_define_method(gFrame, "initialize", frame_initialize, -1);
-    rb_define_method(gFrame, "set_label_align", frame_set_label_align, 2);
-    rb_define_method(gFrame, "label_align", frame_get_label_align, 0);
-    rb_undef_method(gFrame, "shadow");
-    rb_undef_method(gFrame, "shadow=");
-    rb_undef_method(gFrame, "set_shadow");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", frame_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_label_align", frame_set_label_align, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "label_align", frame_get_label_align, 0);
+    rb_undef_method(RG_TARGET_NAMESPACE, "shadow");
+    rb_undef_method(RG_TARGET_NAMESPACE, "shadow=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_shadow");
 }
 

@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,2,0)
+
+#define RG_TARGET_NAMESPACE cDisplayManager
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
 static VALUE
@@ -49,9 +51,9 @@ void
 Init_gtk_gdk_display_manager(void)
 {
 #if GTK_CHECK_VERSION(2,2,0)
-    VALUE gdkDisplayManager = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
 
-    rb_define_singleton_method(gdkDisplayManager, "get", gdkdisplaymanager_get, 0);
-    rb_define_method(gdkDisplayManager, "displays", gdkdisplaymanager_list_displays, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get", gdkdisplaymanager_get, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "displays", gdkdisplaymanager_list_displays, 0);
 #endif
 }

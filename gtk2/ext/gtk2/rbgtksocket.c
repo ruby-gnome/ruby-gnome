@@ -23,6 +23,8 @@
 #include "global.h"
 
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
+
+#define RG_TARGET_NAMESPACE cSocket
 #define _SELF(self) GTK_SOCKET(RVAL2GOBJ(self))
 
 static VALUE
@@ -68,11 +70,11 @@ void
 Init_gtk_socket(void)
 {
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
-    VALUE gSocket = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
-    rb_define_method(gSocket, "initialize",  socket_initialize, 0);
-    rb_define_method(gSocket, "plug_window", socket_plug_window, 0);
-    rb_define_method(gSocket, "add_id", socket_add_id, 1);
-    rb_define_method(gSocket, "id", socket_get_socket_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize",  socket_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "plug_window", socket_plug_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_id", socket_add_id, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "id", socket_get_socket_id, 0);
 #endif
 }

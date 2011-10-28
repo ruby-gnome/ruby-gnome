@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCellRenderer
 #define _SELF(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))
 #define RVAL2RECT(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 #define RECT2RVAL(r) (BOXED2RVAL(r, GDK_TYPE_RECTANGLE))
@@ -111,28 +112,28 @@ cellrenderer_set_fixed_size(VALUE self, VALUE width, VALUE height)
 void
 Init_gtk_cellrenderer(void)
 {
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
     
-    rb_define_method(renderer, "get_size", cellrenderer_get_size, 2);
-    rb_define_method(renderer, "render", cellrenderer_render, 6);
-    rb_define_method(renderer, "activate", cellrenderer_activate, 6);
-    rb_define_method(renderer, "start_editing", cellrenderer_start_editing, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_size", cellrenderer_get_size, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "render", cellrenderer_render, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "activate", cellrenderer_activate, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_editing", cellrenderer_start_editing, 6);
 #if GTK_CHECK_VERSION(2,4,0)
 #ifndef GTK_DISABLE_DEPRECATED
-    rb_define_method(renderer, "editing_canceled", cellrenderer_editing_canceled, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "editing_canceled", cellrenderer_editing_canceled, 0);
 #endif
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(renderer, "stop_editing", cellrenderer_stop_editing, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "stop_editing", cellrenderer_stop_editing, 1);
 #endif
-    rb_define_method(renderer, "fixed_size", cellrenderer_get_fixed_size, 0);
-    rb_define_method(renderer, "set_fixed_size", cellrenderer_set_fixed_size, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "fixed_size", cellrenderer_get_fixed_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fixed_size", cellrenderer_set_fixed_size, 2);
 
     /* GtkCellRendererState */
-    G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_STATE, "State", renderer);
-    G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_STATE, "GTK_CELL_RENDERER_");
+    G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_STATE, "State", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CELL_RENDERER_STATE, "GTK_CELL_RENDERER_");
 
     /* GtkCellRendererMode */
-    G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_MODE, "Mode", renderer);
-    G_DEF_CONSTANTS(renderer, GTK_TYPE_CELL_RENDERER_MODE, "GTK_CELL_RENDERER_");
+    G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_MODE, "Mode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CELL_RENDERER_MODE, "GTK_CELL_RENDERER_");
 }

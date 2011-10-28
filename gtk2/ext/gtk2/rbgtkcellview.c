@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cCellView
 #define _SELF(self) (GTK_CELL_VIEW(RVAL2GOBJ(self)))
 
 static ID id_model;
@@ -112,17 +113,17 @@ void
 Init_gtk_cellview(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE cview = G_DEF_CLASS(GTK_TYPE_CELL_VIEW, "CellView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_VIEW, "CellView", mGtk);
 
     id_model = rb_intern("model");
     id_text = rb_intern("text");
 
-    rb_define_method(cview, "initialize", cview_initialize, -1);
-    rb_define_method(cview, "set_displayed_row", cview_set_displayed_row, 1);
-    G_DEF_SETTER(cview, "displayed_row");
-    rb_define_method(cview, "displayed_row", cview_get_displayed_row, 0);
-    rb_define_method(cview, "get_size_of_row", cview_get_size_of_row, 1);
-    rb_define_method(cview, "cell_renderers", cview_get_cell_renderers, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", cview_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_displayed_row", cview_set_displayed_row, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "displayed_row");
+    rb_define_method(RG_TARGET_NAMESPACE, "displayed_row", cview_get_displayed_row, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_size_of_row", cview_get_size_of_row, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "cell_renderers", cview_get_cell_renderers, 0);
 #endif
 }
 

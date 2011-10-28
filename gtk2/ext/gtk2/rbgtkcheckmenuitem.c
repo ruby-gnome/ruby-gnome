@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCheckMenuItem
+
 static VALUE
 cmitem_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -55,8 +57,8 @@ cmitem_toggled(VALUE self)
 void 
 Init_gtk_check_menu_item(void)
 {
-    VALUE gCMenuItem = G_DEF_CLASS(GTK_TYPE_CHECK_MENU_ITEM, "CheckMenuItem", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CHECK_MENU_ITEM, "CheckMenuItem", mGtk);
 
-    rb_define_method(gCMenuItem, "initialize", cmitem_initialize, -1);
-    rb_define_method(gCMenuItem, "toggled", cmitem_toggled, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", cmitem_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggled", cmitem_toggled, 0);
 }

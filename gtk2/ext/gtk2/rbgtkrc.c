@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mRC
+
 /*
 static VALUE
 rc_scanner_new(VALUE self)
@@ -187,33 +189,33 @@ rc_get_theme_dir(G_GNUC_UNUSED VALUE self)
 void 
 Init_gtk_rc(void)
 {
-    VALUE mRC = rb_define_module_under(mGtk, "RC");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "RC");
 
-    rb_define_module_function(mRC, "get_style", rc_get_style, 1);
-    rb_define_module_function(mRC, "get_style_by_paths", rc_get_style_by_paths, -1);
-    rb_define_module_function(mRC, "parse", rc_parse, 1);
-    rb_define_module_function(mRC, "parse_string", rc_parse_string, 1);
-    rb_define_module_function(mRC, "reparse_all", rc_reparse_all, 0);
-    rb_define_module_function(mRC, "reparse_all_for_settings", rc_reparse_all_for_settings, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_style", rc_get_style, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_style_by_paths", rc_get_style_by_paths, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "parse", rc_parse, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "parse_string", rc_parse_string, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "reparse_all", rc_reparse_all, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "reparse_all_for_settings", rc_reparse_all_for_settings, 2);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_module_function(mRC, "reset_styles", rc_reset_styles, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "reset_styles", rc_reset_styles, 1);
 #endif
-    rb_define_module_function(mRC, "add_default_file", rc_add_default_file, 1);
-    rb_define_module_function(mRC, "default_files", rc_get_default_files, 0);
-    rb_define_module_function(mRC, "set_default_files", rc_set_default_files, 1);
-    rb_define_module_function(mRC, "find_module_in_path", rc_find_module_in_path, 1);
-    rb_define_module_function(mRC, "module_dir", rc_get_module_dir, 0);
-    rb_define_module_function(mRC, "im_module_path", rc_get_im_module_path, 0);
-    rb_define_module_function(mRC, "im_module_file", rc_get_im_module_file, 0);
-    rb_define_module_function(mRC, "theme_dir", rc_get_theme_dir, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "add_default_file", rc_add_default_file, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "default_files", rc_get_default_files, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_default_files", rc_set_default_files, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "find_module_in_path", rc_find_module_in_path, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "module_dir", rc_get_module_dir, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "im_module_path", rc_get_im_module_path, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "im_module_file", rc_get_im_module_file, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "theme_dir", rc_get_theme_dir, 0);
 
-    G_DEF_SETTERS(mRC);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkRcFlags */
-    G_DEF_CLASS(GTK_TYPE_RC_FLAGS, "Flags", mRC);
-    G_DEF_CONSTANTS(mRC, GTK_TYPE_RC_FLAGS, "GTK_RC_");
+    G_DEF_CLASS(GTK_TYPE_RC_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RC_FLAGS, "GTK_RC_");
 
     /* GtkRcTokenType */
-    G_DEF_CLASS(GTK_TYPE_RC_TOKEN_TYPE, "TokenType", mRC);
-    G_DEF_CONSTANTS(mRC, GTK_TYPE_RC_TOKEN_TYPE, "GTK_RC_");
+    G_DEF_CLASS(GTK_TYPE_RC_TOKEN_TYPE, "TokenType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RC_TOKEN_TYPE, "GTK_RC_");
 }

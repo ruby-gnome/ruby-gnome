@@ -23,6 +23,8 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cComboBoxEntry
+
 static VALUE
 comboboxentry_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -61,7 +63,7 @@ void
 Init_gtk_comboboxentry(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gComboboxentry = G_DEF_CLASS(GTK_TYPE_COMBO_BOX_ENTRY, "ComboBoxEntry", mGtk);
-    rb_define_method(gComboboxentry, "initialize", comboboxentry_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX_ENTRY, "ComboBoxEntry", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", comboboxentry_initialize, -1);
 #endif
 }

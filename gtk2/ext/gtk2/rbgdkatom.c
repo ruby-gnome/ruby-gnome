@@ -22,6 +22,7 @@
 #include "global.h"
 #include "rbgdk.h"
 
+#define RG_TARGET_NAMESPACE cAtom
 #define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
 
 /*****************************************/
@@ -108,17 +109,17 @@ void
 Init_gtk_gdk_atom(void)
 {
     VALUE none;
-    VALUE gdkAtom = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
 
-    rb_define_singleton_method(gdkAtom, "intern", gdkatom_s_intern, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "intern", gdkatom_s_intern, -1);
 
-    rb_define_method(gdkAtom, "initialize", gdkatom_initialize, 1);
-    rb_define_method(gdkAtom, "name", gdkatom_name, 0);
-    rb_define_method(gdkAtom, "to_i", gdkatom_to_i, 0);
-    rb_define_method(gdkAtom, "==", gdkatom_eq, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkatom_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", gdkatom_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_i", gdkatom_to_i, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", gdkatom_eq, 1);
 
     /* This is a trick to define GDK_NONE as a BOXED object */
     none = BOXED2RVAL((gpointer)1, GDK_TYPE_ATOM);
-    rb_define_const(gdkAtom, "NONE", none);
+    rb_define_const(RG_TARGET_NAMESPACE, "NONE", none);
     _SELF(none) = GDK_NONE;
 }           

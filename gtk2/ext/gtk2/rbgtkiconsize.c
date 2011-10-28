@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mIconSize
+
 static VALUE
 icon_size_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 {
@@ -78,18 +80,18 @@ icon_size_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 void
 Init_gtk_icon_size(void)
 {
-    VALUE mIconSize = rb_define_module_under(mGtk, "IconSize");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "IconSize");
 
-    rb_define_module_function(mIconSize, "lookup", icon_size_lookup, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "lookup", icon_size_lookup, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_module_function(mIconSize, "lookup_for_settings", icon_size_lookup_for_settings, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "lookup_for_settings", icon_size_lookup_for_settings, 2);
 #endif
-    rb_define_module_function(mIconSize, "register", icon_size_register, 3);
-    rb_define_module_function(mIconSize, "register_alias", icon_size_register_alias, 2);
-    rb_define_module_function(mIconSize, "from_name", icon_size_from_name, 1);
-    rb_define_module_function(mIconSize, "get_name", icon_size_get_name, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "register", icon_size_register, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "register_alias", icon_size_register_alias, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "from_name", icon_size_from_name, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_name", icon_size_get_name, 1);
     
     /* GtkIconSize */
-    G_DEF_CLASS(GTK_TYPE_ICON_SIZE, "IconSize", mIconSize);
-    G_DEF_CONSTANTS(mIconSize, GTK_TYPE_ICON_SIZE, "GTK_ICON_SIZE_");
+    G_DEF_CLASS(GTK_TYPE_ICON_SIZE, "IconSize", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_SIZE, "GTK_ICON_SIZE_");
 }

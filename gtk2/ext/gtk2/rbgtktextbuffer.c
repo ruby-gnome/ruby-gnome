@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextBuffer
 #define _SELF(s) (GTK_TEXT_BUFFER(RVAL2GOBJ(s)))
 #define RVAL2ITR(i) (GtkTextIter*)RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
@@ -821,98 +822,98 @@ txt_get_iter_at_mark(VALUE self, VALUE mark)
 void 
 Init_gtk_textbuffer(void)
 {
-    VALUE gTextBuffer = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
 
     id_tagtable = rb_intern("tagtable");
 
-    rb_define_method(gTextBuffer, "initialize", txt_initialize, -1);
-    rb_define_method(gTextBuffer, "line_count", txt_get_line_count, 0);
-    rb_define_method(gTextBuffer, "char_count", txt_get_char_count, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", txt_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_count", txt_get_line_count, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "char_count", txt_get_char_count, 0);
 
-    G_REPLACE_SET_PROPERTY(gTextBuffer, "text", txt_set_text, 1);
-    rb_define_method(gTextBuffer, "insert", txt_insert, -1);
-    rb_define_method(gTextBuffer, "insert_with_tags", txt_insert_with_tags, -1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "text", txt_set_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert", txt_insert, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_with_tags", txt_insert_with_tags, -1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gTextBuffer, "backspace", txt_backspace, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "backspace", txt_backspace, 3);
 #endif
-    rb_define_method(gTextBuffer, "insert_at_cursor", txt_insert_at_cursor, 1);
-    rb_define_method(gTextBuffer, "insert_interactive", txt_insert_interactive, 3);
-    rb_define_method(gTextBuffer, "insert_interactive_at_cursor", txt_insert_interactive_at_cursor, 2);
-    rb_define_method(gTextBuffer, "insert_range", txt_insert_range, 3);
-    rb_define_method(gTextBuffer, "insert_range_interactive", txt_insert_range_interactive, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_at_cursor", txt_insert_at_cursor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_interactive", txt_insert_interactive, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_interactive_at_cursor", txt_insert_interactive_at_cursor, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_range", txt_insert_range, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_range_interactive", txt_insert_range_interactive, 4);
 
-    rb_define_method(gTextBuffer, "delete", txt_delete, 2);
-    rb_define_method(gTextBuffer, "delete_interactive", txt_delete_interactive, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete", txt_delete, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_interactive", txt_delete_interactive, 3);
 
-    rb_define_method(gTextBuffer, "get_text", txt_get_text, -1);
-    G_REPLACE_GET_PROPERTY(gTextBuffer, "text", txt_get_text_all, 0);
-    rb_define_method(gTextBuffer, "get_slice", txt_get_slice, -1);
-    rb_define_method(gTextBuffer, "slice", txt_get_slice_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text", txt_get_text, -1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "text", txt_get_text_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_slice", txt_get_slice, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "slice", txt_get_slice_all, 0);
 
-    rb_define_method(gTextBuffer, "insert_pixbuf", txt_insert_pixbuf, 2);
-    rb_define_method(gTextBuffer, "insert_child_anchor", txt_insert_child_anchor, 2);
-    rb_define_method(gTextBuffer, "create_child_anchor", txt_create_child_anchor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_pixbuf", txt_insert_pixbuf, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_child_anchor", txt_insert_child_anchor, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_child_anchor", txt_create_child_anchor, 1);
     
-    rb_define_method(gTextBuffer, "create_mark", txt_create_mark, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_mark", txt_create_mark, 3);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gTextBuffer, "add_mark", txt_add_mark, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_mark", txt_add_mark, 2);
 #endif
-    rb_define_method(gTextBuffer, "delete_mark", txt_delete_mark, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_mark", txt_delete_mark, 1);
 
-    rb_define_method(gTextBuffer, "get_mark", txt_get_mark, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_mark", txt_get_mark, 1);
 /* Comment out because this method's name is very bad.
    Use Gtk::TextBuffer#get_mark("insert") instead.
-    rb_define_method(gTextBuffer, "get_insert", txt_get_insert, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_insert", txt_get_insert, 0);
 */
-    rb_define_method(gTextBuffer, "selection_bound", txt_get_selection_bound, 0);
-    rb_define_method(gTextBuffer, "place_cursor", txt_place_cursor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection_bound", txt_get_selection_bound, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "place_cursor", txt_place_cursor, 1);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gTextBuffer, "select_range", txt_select_range, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_range", txt_select_range, 2);
 #endif
-    rb_define_method(gTextBuffer, "modified?", txt_get_modified, 0);
-    rb_define_method(gTextBuffer, "set_modified", txt_set_modified, 1);
-    G_DEF_SETTER(gTextBuffer, "modified");
+    rb_define_method(RG_TARGET_NAMESPACE, "modified?", txt_get_modified, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_modified", txt_set_modified, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "modified");
 
-    rb_define_method(gTextBuffer, "add_selection_clipboard", txt_add_selection_clipboard, 1);
-    rb_define_method(gTextBuffer, "remove_selection_clipboard", txt_remove_selection_clipboard, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_selection_clipboard", txt_add_selection_clipboard, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_selection_clipboard", txt_remove_selection_clipboard, 1);
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gTextBuffer, "deserialize", txt_deserialize, 4);
-    rb_define_method(gTextBuffer, "deserialize_can_create_tags?", txt_deserialize_get_can_create_tags, 1);
-    rb_define_method(gTextBuffer, "deserialize_set_can_create_tags", txt_deserialize_set_can_create_tags, 2);
-    rb_define_method(gTextBuffer, "deserialize_formats", txt_get_deserialize_formats, 0);
-    rb_define_method(gTextBuffer, "serialize_formats", txt_get_serialize_formats, 0);
-    rb_define_method(gTextBuffer, "register_deserialize_format", txt_register_deserialize_format, 1);
-    rb_define_method(gTextBuffer, "register_deserialize_target", txt_register_deserialize_target, 1);
-    rb_define_method(gTextBuffer, "register_serialize_format", txt_register_serialize_format, 1);
-    rb_define_method(gTextBuffer, "register_serialize_target", txt_register_serialize_target, 1);
-    rb_define_method(gTextBuffer, "serialize", txt_serialize, 4);
-    rb_define_method(gTextBuffer, "unregister_deserialize_format", txt_unregister_deserialize_format, 1);
-    rb_define_method(gTextBuffer, "unregister_serialize_format", txt_unregister_serialize_format, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "deserialize", txt_deserialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "deserialize_can_create_tags?", txt_deserialize_get_can_create_tags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "deserialize_set_can_create_tags", txt_deserialize_set_can_create_tags, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "deserialize_formats", txt_get_deserialize_formats, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "serialize_formats", txt_get_serialize_formats, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "register_deserialize_format", txt_register_deserialize_format, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "register_deserialize_target", txt_register_deserialize_target, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "register_serialize_format", txt_register_serialize_format, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "register_serialize_target", txt_register_serialize_target, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "serialize", txt_serialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "unregister_deserialize_format", txt_unregister_deserialize_format, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unregister_serialize_format", txt_unregister_serialize_format, 1);
 #endif
-    rb_define_method(gTextBuffer, "cut_clipboard", txt_cut_clipboard, 2);
-    rb_define_method(gTextBuffer, "copy_clipboard", txt_copy_clipboard, 1);
-    rb_define_method(gTextBuffer, "paste_clipboard", txt_paste_clipboard, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "cut_clipboard", txt_cut_clipboard, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy_clipboard", txt_copy_clipboard, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "paste_clipboard", txt_paste_clipboard, 3);
     
-    rb_define_method(gTextBuffer, "selection_bounds", txt_get_selection_bounds, 0);
-    rb_define_method(gTextBuffer, "delete_selection", txt_delete_selection, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection_bounds", txt_get_selection_bounds, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "delete_selection", txt_delete_selection, -1);
 
-    rb_define_method(gTextBuffer, "begin_user_action", txt_begin_user_action, 0);
-    rb_define_method(gTextBuffer, "end_user_action", txt_end_user_action, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "begin_user_action", txt_begin_user_action, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "end_user_action", txt_end_user_action, 0);
 
-    rb_define_method(gTextBuffer, "start_iter", txt_get_start_iter, 0);
-    rb_define_method(gTextBuffer, "end_iter", txt_get_end_iter, 0);
-    rb_define_method(gTextBuffer, "get_iter_at_line_offset", txt_get_iter_at_line_offset, 2);
-    rb_define_method(gTextBuffer, "get_iter_at_line_index", txt_get_iter_at_line_index, 2);
-    rb_define_method(gTextBuffer, "get_iter_at_offset", txt_get_iter_at_offset, 1);
-    rb_define_method(gTextBuffer, "get_iter_at_line", txt_get_iter_at_line, 1);
-    rb_define_method(gTextBuffer, "bounds", txt_get_bounds, 0);
-    rb_define_method(gTextBuffer, "get_iter_at_mark", txt_get_iter_at_mark, 1);
-    rb_define_method(gTextBuffer, "move_mark", txt_move_mark, 2);
-    rb_define_method(gTextBuffer, "get_iter_at_child_anchor", txt_get_iter_at_child_anchor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_iter", txt_get_start_iter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "end_iter", txt_get_end_iter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_line_offset", txt_get_iter_at_line_offset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_line_index", txt_get_iter_at_line_index, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_offset", txt_get_iter_at_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_line", txt_get_iter_at_line, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "bounds", txt_get_bounds, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_mark", txt_get_iter_at_mark, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_mark", txt_move_mark, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter_at_child_anchor", txt_get_iter_at_child_anchor, 1);
     
-    rb_define_method(gTextBuffer, "create_tag", txt_create_tag, 2);
-    rb_define_method(gTextBuffer, "apply_tag", txt_apply_tag, 3);
-    rb_define_method(gTextBuffer, "remove_tag", txt_remove_tag, 3);
-    rb_define_method(gTextBuffer, "remove_all_tags", txt_remove_all_tags, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_tag", txt_create_tag, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "apply_tag", txt_apply_tag, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_tag", txt_remove_tag, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_all_tags", txt_remove_all_tags, 2);
 }
 

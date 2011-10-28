@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mInput
+
 static void
 exec_input(gpointer data, G_GNUC_UNUSED gint source, GdkInputCondition condition)
 {
@@ -59,14 +61,14 @@ input_remove(VALUE self, VALUE id)
 void
 Init_gtk_gdk_input(void)
 {
-    VALUE mGdkInput = rb_define_module_under(mGdk, "Input");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Input");
 
-    rb_define_module_function(mGdkInput, "add", input_add, 2);
-    rb_define_module_function(mGdkInput, "remove", input_remove, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "add", input_add, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "remove", input_remove, 1);
 
     /* GdkInputCondition */
-    G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", mGdkInput);
-    G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
+    G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
 
 }
 

@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cKeymap
 #define _SELF(s) GDK_KEYMAP(RVAL2GOBJ(s))
 
 static VALUE
@@ -134,19 +135,19 @@ gdkkeymap_have_bidi_layouts(VALUE self)
 void 
 Init_gtk_gdk_keymap(void)
 {
-    VALUE gdkKeymap = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
 
-    rb_define_singleton_method(gdkKeymap, "default", gdkkeymap_s_get_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", gdkkeymap_s_get_default, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gdkKeymap, "for_display", gdkkeymap_s_get_for_display, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_display", gdkkeymap_s_get_for_display, 0);
 #endif
-    rb_define_method(gdkKeymap, "lookup_key", gdkkeymap_lookup_key, 3);
-    rb_define_method(gdkKeymap, "translate_keyboard_state", gdkkeymap_translate_keyboard_state, 3);
-    rb_define_method(gdkKeymap, "get_entries_for_keyval", gdkkeymap_get_entries_for_keyval, 1);
-    rb_define_method(gdkKeymap, "get_entries_for_keycode", gdkkeymap_get_entries_for_keycode, 1);
-    rb_define_method(gdkKeymap, "direction", gdkkeymap_get_direction, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup_key", gdkkeymap_lookup_key, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "translate_keyboard_state", gdkkeymap_translate_keyboard_state, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_entries_for_keyval", gdkkeymap_get_entries_for_keyval, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_entries_for_keycode", gdkkeymap_get_entries_for_keycode, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", gdkkeymap_get_direction, 0);
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(gdkKeymap, "have_bidi_layouts?",
+    rb_define_method(RG_TARGET_NAMESPACE, "have_bidi_layouts?",
 		     gdkkeymap_have_bidi_layouts, 0);
 #endif
 

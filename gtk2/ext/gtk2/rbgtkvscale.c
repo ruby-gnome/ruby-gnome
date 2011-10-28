@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVScale
+
 static VALUE
 vscale_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -47,6 +49,6 @@ vscale_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_vscale(void)
 {
-    VALUE gVScale = G_DEF_CLASS(GTK_TYPE_VSCALE, "VScale", mGtk);
-    rb_define_method(gVScale, "initialize", vscale_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSCALE, "VScale", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vscale_initialize, -1);
 }

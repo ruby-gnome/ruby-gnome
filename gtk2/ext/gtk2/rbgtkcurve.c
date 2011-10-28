@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCurve
+
 static VALUE
 curve_initialize(VALUE self)
 {
@@ -89,23 +91,23 @@ curve_get_vector(VALUE self, VALUE length)
 void 
 Init_gtk_curve(void)
 {
-    VALUE gCurve = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
 
-    rb_define_method(gCurve, "initialize", curve_initialize, 0);
-    rb_define_method(gCurve, "reset", curve_reset, 0);
-    rb_define_method(gCurve, "set_gamma", curve_set_gamma, 1);
-    G_DEF_SETTER(gCurve, "gamma");
-    rb_define_method(gCurve, "set_range", curve_set_range, 4);
-    rb_define_method(gCurve, "set_vector", curve_set_vector, 2);
-    G_DEF_SETTER(gCurve, "vector");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", curve_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "reset", curve_reset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_gamma", curve_set_gamma, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "gamma");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_range", curve_set_range, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_vector", curve_set_vector, 2);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "vector");
     /* NOTE: For backwards compatability. */
-    rb_define_method(gCurve, "get_vector", curve_get_vector, 1);
-    rb_define_method(gCurve, "vector", curve_get_vector, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_vector", curve_get_vector, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "vector", curve_get_vector, 1);
 
     /* GtkCurveType(from standard constants) */
 
-    G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", gCurve);
-    G_DEF_CONSTANTS(gCurve, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
+    G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
 }
 
 

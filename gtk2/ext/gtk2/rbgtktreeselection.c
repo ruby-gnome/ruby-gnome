@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeSelection
 #define _SELF(s) (GTK_TREE_SELECTION(RVAL2GOBJ(s)))
 #define RVAL2TREEMODEL(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
 
@@ -189,30 +190,30 @@ treeselection_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
 void
 Init_gtk_treeselection(void)
 {
-    VALUE gTs = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
     
-    rb_define_method(gTs, "set_mode", treeselection_set_mode, 1);
-    rb_define_method(gTs, "mode", treeselection_get_mode, 0);
-    rb_define_method(gTs, "set_select_function", treeselection_set_select_function, 0);
-    rb_define_method(gTs, "tree_view", treeselection_get_tree_view, 0);
-    rb_define_method(gTs, "selected", treeselection_get_selected, 0);
-    rb_define_method(gTs, "selected_each", treeselection_selected_foreach, 0);
-    rb_define_method(gTs, "select_path", treeselection_select_path, 1);
-    rb_define_method(gTs, "unselect_path", treeselection_unselect_path, 1);
-    rb_define_method(gTs, "path_is_selected?", treeselection_path_is_selected, 1);
-    rb_define_method(gTs, "select_iter", treeselection_select_iter, 1);
-    rb_define_method(gTs, "unselect_iter", treeselection_unselect_iter, 1);
-    rb_define_method(gTs, "iter_is_selected?", treeselection_iter_is_selected, 1);
-    rb_define_method(gTs, "select_all", treeselection_select_all, 0);
-    rb_define_method(gTs, "unselect_all", treeselection_unselect_all, 0);
-    rb_define_method(gTs, "select_range", treeselection_select_range, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mode", treeselection_set_mode, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mode", treeselection_get_mode, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_select_function", treeselection_set_select_function, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "tree_view", treeselection_get_tree_view, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected", treeselection_get_selected, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected_each", treeselection_selected_foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_path", treeselection_select_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_path", treeselection_unselect_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "path_is_selected?", treeselection_path_is_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_iter", treeselection_select_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_iter", treeselection_unselect_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_is_selected?", treeselection_iter_is_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_all", treeselection_select_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_all", treeselection_unselect_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_range", treeselection_select_range, 2);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gTs, "selected_rows", treeselection_get_selected_rows, 0);
-    rb_define_method(gTs, "count_selected_rows", treeselection_count_selected_rows, 0);
-    rb_define_method(gTs, "unselect_range", treeselection_unselect_range, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected_rows", treeselection_get_selected_rows, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "count_selected_rows", treeselection_count_selected_rows, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_range", treeselection_unselect_range, 2);
 #endif
 
-    G_DEF_SETTERS(gTs);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 
 

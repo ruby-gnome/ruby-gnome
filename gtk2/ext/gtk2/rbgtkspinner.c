@@ -22,6 +22,7 @@
 
 #if GTK_CHECK_VERSION(2,20,0)
 
+#define RG_TARGET_NAMESPACE cSpinner
 #define _SELF(s) (GTK_SPINNER(RVAL2GOBJ(s)))
 
 static VALUE
@@ -51,10 +52,10 @@ void
 Init_gtk_spinner(void)
 {
 #if GTK_CHECK_VERSION(2,20,0)
-    VALUE gSpinner = G_DEF_CLASS(GTK_TYPE_SPINNER, "Spinner", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPINNER, "Spinner", mGtk);
 
-    rb_define_method(gSpinner, "initialize", spinner_initialize, 0);
-    rb_define_method(gSpinner, "start", spinner_start, 0);
-    rb_define_method(gSpinner, "stop", spinner_stop, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", spinner_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "start", spinner_start, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "stop", spinner_stop, 0);
 #endif
 }

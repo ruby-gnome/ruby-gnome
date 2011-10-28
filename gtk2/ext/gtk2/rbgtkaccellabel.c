@@ -22,6 +22,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAccelLabel
+
 static VALUE
 alabel_initialize(VALUE self, VALUE string)
 {
@@ -45,9 +47,9 @@ alabel_refetch(VALUE self)
 void
 Init_gtk_accel_label(void)
 {
-  VALUE gAccelLabel = G_DEF_CLASS(GTK_TYPE_ACCEL_LABEL, "AccelLabel", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_LABEL, "AccelLabel", mGtk);
 
-  rb_define_method(gAccelLabel, "initialize", alabel_initialize, 1);
-  rb_define_method(gAccelLabel, "accel_width", alabel_get_accel_width, 0);
-  rb_define_method(gAccelLabel, "refetch", alabel_refetch, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "initialize", alabel_initialize, 1);
+  rb_define_method(RG_TARGET_NAMESPACE, "accel_width", alabel_get_accel_width, 0);
+  rb_define_method(RG_TARGET_NAMESPACE, "refetch", alabel_refetch, 0);
 }

@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cRadioAction
 #define _SELF(self) (GTK_RADIO_ACTION(RVAL2GOBJ(self)))
 
 static VALUE
@@ -130,15 +131,15 @@ void
 Init_gtk_radio_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gRadioAction = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
 
-    rb_define_method(gRadioAction, "initialize", raction_initialize, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", raction_initialize, 5);
 #if ! GTK_CHECK_VERSION(2,10,0)
     /* Define as Property since 2.10 */
-    rb_define_method(gRadioAction, "current_value", raction_get_current_value, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "current_value", raction_get_current_value, 0);
 #endif
-    G_REPLACE_GET_PROPERTY(gRadioAction, "group", raction_get_group, 0);
-    G_REPLACE_SET_PROPERTY(gRadioAction, "group", raction_set_group, 1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_get_group, 0);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_set_group, 1);
 #endif
 }
 

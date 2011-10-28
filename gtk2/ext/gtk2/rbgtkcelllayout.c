@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE mCellLayout
 #define _SELF(s) (GTK_CELL_LAYOUT(RVAL2GOBJ(s)))
 #define RVAL2RENDERER(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))
 
@@ -127,15 +128,15 @@ void
 Init_gtk_celllayout(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE layout = G_DEF_INTERFACE(GTK_TYPE_CELL_LAYOUT, "CellLayout", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_CELL_LAYOUT, "CellLayout", mGtk);
 
-    rb_define_method(layout, "pack_start", layout_pack_start, 2);
-    rb_define_method(layout, "pack_end", layout_pack_end, 2);
-    rb_define_method(layout, "reorder", layout_reorder, 2);
-    rb_define_method(layout, "clear", layout_clear, 0);
-    rb_define_method(layout, "add_attribute", layout_add_attribute, 3);
-    rb_define_method(layout, "set_cell_data_func", layout_set_cell_data_func, 1);
-    rb_define_method(layout, "clear_attributes", layout_clear_attributes, 1);
-    rb_define_method(layout, "set_attributes", layout_set_attributes, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_start", layout_pack_start, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "pack_end", layout_pack_end, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "reorder", layout_reorder, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", layout_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_attribute", layout_add_attribute, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cell_data_func", layout_set_cell_data_func, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_attributes", layout_clear_attributes, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_attributes", layout_set_attributes, 2);
 #endif
 }

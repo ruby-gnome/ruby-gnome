@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cIconView
 #define _SELF(s) (GTK_ICON_VIEW(RVAL2GOBJ(s)))
 
 static ID id_model;
@@ -296,38 +297,38 @@ void
 Init_gtk_iconview(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE iview = G_DEF_CLASS(GTK_TYPE_ICON_VIEW, "IconView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_VIEW, "IconView", mGtk);
 
     id_model = rb_intern("model");
     id_select_path = rb_intern("select_path");
 
-    rb_define_method(iview, "initialize", iview_initialize, -1);
-    rb_define_method(iview, "get_path_at_pos", iview_get_path_at_pos, 2);
-    rb_define_alias(iview, "get_path", "get_path_at_pos");
-    rb_define_method(iview, "selected_each", iview_selected_foreach, 0);
-    rb_define_method(iview, "select_path", iview_select_path, 1);
-    rb_define_method(iview, "unselect_path", iview_unselect_path, 1);
-    rb_define_method(iview, "path_is_selected?", iview_path_is_selected, 1);
-    rb_define_method(iview, "selected_items", iview_get_selected_items, 0);
-    rb_define_method(iview, "item_activated", iview_item_activated, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", iview_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_path_at_pos", iview_get_path_at_pos, 2);
+    rb_define_alias(RG_TARGET_NAMESPACE, "get_path", "get_path_at_pos");
+    rb_define_method(RG_TARGET_NAMESPACE, "selected_each", iview_selected_foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_path", iview_select_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unselect_path", iview_unselect_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "path_is_selected?", iview_path_is_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected_items", iview_get_selected_items, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "item_activated", iview_item_activated, 1);
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(iview, "create_drag_icon", iview_create_drag_icon, 1);
-    rb_define_method(iview, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
-    rb_define_method(iview, "enable_model_drag_source", iview_enable_model_drag_source, 3);
-    rb_define_method(iview, "cursor", iview_cursor, 0);
-    rb_define_method(iview, "get_dest_item", iview_get_dest_item_at_pos, 2); 
-    rb_define_method(iview, "drag_dest_item", iview_drag_dest_item, 0);
-    rb_define_method(iview, "get_item", iview_get_item_at_pos, 2);
-    rb_define_method(iview, "visible_range", iview_visible_range, 0);
-    rb_define_method(iview, "scroll_to_path", iview_scroll_to_path, 4);
-    rb_define_method(iview, "set_cursor", iview_set_cursor, 3);
-    rb_define_method(iview, "set_drag_dest_item", iview_set_drag_dest_item, 2);
-    rb_define_method(iview, "unset_model_drag_dest", iview_unset_model_drag_dest, 0);
-    rb_define_method(iview, "unset_model_drag_source", iview_unset_model_drag_source, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_drag_icon", iview_create_drag_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "enable_model_drag_dest", iview_enable_model_drag_dest, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "enable_model_drag_source", iview_enable_model_drag_source, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "cursor", iview_cursor, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_dest_item", iview_get_dest_item_at_pos, 2); 
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_dest_item", iview_drag_dest_item, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_item", iview_get_item_at_pos, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_range", iview_visible_range, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to_path", iview_scroll_to_path, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor", iview_set_cursor, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_drag_dest_item", iview_set_drag_dest_item, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_model_drag_dest", iview_unset_model_drag_dest, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_model_drag_source", iview_unset_model_drag_source, 0);
 
     /* GtkIconViewDropPosition */
-    G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", iview);
-    G_DEF_CONSTANTS(iview, GTK_TYPE_ICON_VIEW_DROP_POSITION, "GTK_ICON_VIEW_");
+    G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_VIEW_DROP_POSITION, "GTK_ICON_VIEW_");
 #endif
 }

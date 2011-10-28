@@ -23,6 +23,8 @@
 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cCellRendererCombo
+
 static VALUE
 crcombo_initialize(VALUE self)
 {
@@ -36,8 +38,8 @@ void
 Init_gtk_cellrenderercombo(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_COMBO, "CellRendererCombo", mGtk);
-    rb_define_method(renderer, "initialize", crcombo_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_COMBO, "CellRendererCombo", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", crcombo_initialize, 0);
 #endif
 }
 

@@ -24,6 +24,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cFileFilter
 #define _SELF(self) GTK_FILE_FILTER(RVAL2GOBJ(self))
 
 static VALUE
@@ -118,24 +119,24 @@ Init_gtk_file_filter(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gFileFilter = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);
 
-    rb_define_method(gFileFilter, "initialize", ffil_initialize, 0);
-    rb_define_method(gFileFilter, "set_name", ffil_set_name, 1);
-    rb_define_method(gFileFilter, "name", ffil_get_name, 0);
-    rb_define_method(gFileFilter, "add_mime_type", ffil_add_mime_type, 1);
-    rb_define_method(gFileFilter, "add_pattern", ffil_add_pattern, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ffil_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_name", ffil_set_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", ffil_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_mime_type", ffil_add_mime_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_pattern", ffil_add_pattern, 1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gFileFilter, "add_pixbuf_formats", ffil_add_pixbuf_formats, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_pixbuf_formats", ffil_add_pixbuf_formats, 0);
 #endif
-    rb_define_method(gFileFilter, "add_custom", ffil_add_custom, 1);
-    rb_define_method(gFileFilter, "needed", ffil_get_needed, 0);
-    rb_define_method(gFileFilter, "filter?", ffil_filter, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_custom", ffil_add_custom, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "needed", ffil_get_needed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "filter?", ffil_filter, 5);
 
-    G_DEF_SETTERS(gFileFilter);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", gFileFilter);
-    G_DEF_CONSTANTS(gFileFilter, GTK_TYPE_FILE_FILTER_FLAGS, "GTK_FILE_FILTER_");
+    G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_FILTER_FLAGS, "GTK_FILE_FILTER_");
 
 
 #endif

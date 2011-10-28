@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cItem
+
 /*
  * Item
  */
@@ -51,8 +53,8 @@ item_toggle(VALUE self)
 void 
 Init_gtk_item(void)
 {
-    VALUE gItem = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
-    rb_define_method(gItem, "select", item_select, 0);
-    rb_define_method(gItem, "deselect", item_deselect, 0);
-    rb_define_method(gItem, "toggle", item_toggle, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "select", item_select, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "deselect", item_deselect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggle", item_toggle, 0);
 }

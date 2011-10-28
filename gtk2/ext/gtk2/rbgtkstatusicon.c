@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cStatusIcon
 #define _SELF(w) (GTK_STATUS_ICON(RVAL2GOBJ(w)))
 
 static VALUE
@@ -107,12 +108,12 @@ void
 Init_gtk_status_icon(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE si = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
 
-    rb_define_method(si, "initialize", si_initialize, 0);
-    rb_define_method(si, "set_tooltip", si_set_tooltip, 1);
-    G_DEF_SETTER(si, "tooltip");
-    rb_define_method(si, "position_menu", si_position_menu, 1);
-    rb_define_method(si, "geometry", si_get_geometry, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", si_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tooltip", si_set_tooltip, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "tooltip");
+    rb_define_method(RG_TARGET_NAMESPACE, "position_menu", si_position_menu, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "geometry", si_get_geometry, 0);
 #endif
 }

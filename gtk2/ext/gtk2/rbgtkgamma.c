@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cGammaCurve
+
 static VALUE
 gamma_initialize(VALUE self)
 {
@@ -46,9 +48,9 @@ gamma_curve(VALUE self)
 void 
 Init_gtk_gamma_curve(void)
 {
-    VALUE gGamma = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
 
-    rb_define_method(gGamma, "initialize", gamma_initialize, 0);
-    rb_define_method(gGamma, "gamma", gamma_gamma, 0);
-    rb_define_method(gGamma, "curve", gamma_curve, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gamma_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gamma", gamma_gamma, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "curve", gamma_curve, 0);
 }

@@ -50,6 +50,7 @@ rbgtk_get_tree_row_reference(VALUE obj)
 
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cTreeRowReference
 #define _SELF(s) RVAL2TREEROWREFERENCE(s)
 
 /*****************************************/
@@ -156,18 +157,18 @@ treerowref_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VA
 void 
 Init_gtk_treerowreference(void)
 {
-    VALUE gTreeref = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);
   
-    rb_define_method(gTreeref, "initialize", treerowref_initialize, -1);
-    rb_define_method(gTreeref, "path", treerowref_get_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", treerowref_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "path", treerowref_get_path, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gTreeref, "model", treerowref_get_model, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "model", treerowref_get_model, 0);
 #endif
-    rb_define_method(gTreeref, "valid?", treerowref_valid, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "valid?", treerowref_valid, 0);
     
-    rb_define_singleton_method(gTreeref, "inserted", treerowref_s_inserted, 2);
-    rb_define_singleton_method(gTreeref, "deleted", treerowref_s_deleted, 2);
-    rb_define_singleton_method(gTreeref, "reordered", treerowref_s_reordered, 4);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "inserted", treerowref_s_inserted, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "deleted", treerowref_s_deleted, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "reordered", treerowref_s_reordered, 4);
 
     id_proxy = rb_intern("proxy");
     id_model = rb_intern("model");

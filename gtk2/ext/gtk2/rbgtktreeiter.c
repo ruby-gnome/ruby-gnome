@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeIter
 #define _SELF(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
 
 void
@@ -232,23 +233,23 @@ treeiter_to_string(VALUE self)
 void 
 Init_gtk_treeiter(void)
 {
-    VALUE gTreeIter = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
 
-    rb_define_method(gTreeIter, "first!", treeiter_first, 0);
-    rb_define_method(gTreeIter, "next!", treeiter_next, 0);
-    rb_define_method(gTreeIter, "get_value", treeiter_get_value, 1);
-    rb_define_alias(gTreeIter, "[]", "get_value");
-    rb_define_method(gTreeIter, "first_child", treeiter_children, 0);
-    rb_define_method(gTreeIter, "path", treeiter_get_path, 0);
-    rb_define_method(gTreeIter, "has_child?", treeiter_has_child, 0);
-    rb_define_method(gTreeIter, "n_children", treeiter_n_children, 0);
-    rb_define_method(gTreeIter, "nth_child", treeiter_nth_child, 1);
-    rb_define_method(gTreeIter, "parent", treeiter_parent, 0);
-    rb_define_method(gTreeIter, "set_value", treeiter_set_value, 2);
-    rb_define_method(gTreeIter, "[]=", treeiter_set_value_eql, 2);
-    rb_define_method(gTreeIter, "==", treeiter_eql, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "first!", treeiter_first, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next!", treeiter_next, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_value", treeiter_get_value, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_value");
+    rb_define_method(RG_TARGET_NAMESPACE, "first_child", treeiter_children, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "path", treeiter_get_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_child?", treeiter_has_child, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_children", treeiter_n_children, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "nth_child", treeiter_nth_child, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "parent", treeiter_parent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_value", treeiter_set_value, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "[]=", treeiter_set_value_eql, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", treeiter_eql, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gTreeIter, "to_str", treeiter_to_string, 0);
-    rb_define_alias(gTreeIter, "to_s", "to_str");
+    rb_define_method(RG_TARGET_NAMESPACE, "to_str", treeiter_to_string, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_str");
 #endif
 }

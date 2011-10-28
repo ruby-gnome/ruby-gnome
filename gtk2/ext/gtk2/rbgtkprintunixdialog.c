@@ -24,6 +24,7 @@
 #ifdef HAVE_GTK_UNIX_PRINT
 #include <gtk/gtkprintunixdialog.h>
 
+#define RG_TARGET_NAMESPACE cPrintUnixDialog
 #define _SELF(s) (GTK_PRINT_UNIX_DIALOG(RVAL2GOBJ(s)))
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
 #  define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type())
@@ -89,20 +90,20 @@ void
 Init_gtk_print_unix_dialog(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
-    VALUE gPrintUnixDialog = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,
                                          "PrintUnixDialog", mGtk);
 
-    rb_define_method(gPrintUnixDialog, "initialize", pud_initialize, -1);
-    rb_define_method(gPrintUnixDialog, "add_custom_tab", pud_add_custom_tab, 2);
-    rb_define_method(gPrintUnixDialog, "set_manual_capability",
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", pud_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_custom_tab", pud_add_custom_tab, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_manual_capability",
                      pud_set_manual_capabilities, 1);
-    rb_define_alias(gPrintUnixDialog, "settings", "print_settings");
-    rb_define_alias(gPrintUnixDialog, "set_settings", "set_print_settings");
+    rb_define_alias(RG_TARGET_NAMESPACE, "settings", "print_settings");
+    rb_define_alias(RG_TARGET_NAMESPACE, "set_settings", "set_print_settings");
 
-    G_DEF_SETTERS(gPrintUnixDialog);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkPrintCapabilities */
-    G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", gPrintUnixDialog);
-    G_DEF_CONSTANTS(gPrintUnixDialog, GTK_TYPE_PRINT_CAPABILITIES, "GTK_PRINT_");
+    G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_CAPABILITIES, "GTK_PRINT_");
 #endif
 }

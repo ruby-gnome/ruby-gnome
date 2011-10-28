@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVScrollbar
+
 static VALUE
 vscrollbar_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -40,6 +42,6 @@ vscrollbar_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_vscrollbar(void)
 {
-    VALUE gVScrollbar = G_DEF_CLASS(GTK_TYPE_VSCROLLBAR, "VScrollbar", mGtk);
-    rb_define_method(gVScrollbar, "initialize", vscrollbar_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSCROLLBAR, "VScrollbar", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", vscrollbar_initialize, -1);
 }

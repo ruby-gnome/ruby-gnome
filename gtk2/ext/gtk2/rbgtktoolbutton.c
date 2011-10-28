@@ -22,7 +22,10 @@
 #include "global.h"
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
+
+#define RG_TARGET_NAMESPACE cToolButton
 #define _SELF(self) (GTK_TOOL_BUTTON(RVAL2GOBJ(self)))
+
 static VALUE
 toolbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -75,8 +78,8 @@ void
 Init_gtk_toolbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gToolbutton = G_DEF_CLASS(GTK_TYPE_TOOL_BUTTON, "ToolButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_BUTTON, "ToolButton", mGtk);
 
-    rb_define_method(gToolbutton, "initialize", toolbutton_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", toolbutton_initialize, -1);
 #endif
 }

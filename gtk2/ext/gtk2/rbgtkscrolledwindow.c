@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cScrolledWindow
 #define _SELF(self) (GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)))
 
 static VALUE
@@ -139,21 +140,21 @@ GtkShadowType gtk_scrolled_window_get_shadow_type
 void 
 Init_gtk_scrolled_window(void)
 {
-    VALUE gScrolledWin = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);
 
-    rb_define_method(gScrolledWin, "initialize", scwin_initialize, -1);
-    rb_define_method(gScrolledWin, "set_policy", scwin_set_policy, 2);
-    rb_define_method(gScrolledWin, "policy", scwin_get_policy, 0);
-    rb_define_method(gScrolledWin, "add_with_viewport", scwin_add_with_viewport, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", scwin_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_policy", scwin_set_policy, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "policy", scwin_get_policy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_with_viewport", scwin_add_with_viewport, 1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gScrolledWin, "hscrollbar", scwin_get_hscrollbar, 0);
-    rb_define_method(gScrolledWin, "vscrollbar", scwin_get_vscrollbar, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "hscrollbar", scwin_get_hscrollbar, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "vscrollbar", scwin_get_vscrollbar, 0);
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gScrolledWin, "unset_placement", scwin_unset_placement, 0);
-    rb_define_method(gScrolledWin, "placement", scwin_get_placement, 0);
-    rb_define_method(gScrolledWin, "set_placement", scwin_set_placement, 1);
-    G_DEF_SETTER(gScrolledWin, "placement");
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_placement", scwin_unset_placement, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "placement", scwin_get_placement, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_placement", scwin_set_placement, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "placement");
 #endif
 }

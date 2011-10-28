@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeView
 #define _SELF(s) (GTK_TREE_VIEW(RVAL2GOBJ(s)))
 #define TREEVIEW_COL(c) (GTK_TREE_VIEW_COLUMN(RVAL2GOBJ(c)))
 #define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
@@ -729,90 +730,90 @@ void        gtk_tree_view_set_grid_lines    (GtkTreeView *tree_view,
 void 
 Init_gtk_treeview(void)
 {
-    VALUE gTv = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
 
     id_selection = rb_intern("selection");
     id_model = rb_intern("model");
 
-    rb_define_method(gTv, "initialize", treeview_initialize, -1);
-    rb_define_method(gTv, "selection", treeview_get_selection, 0);
-    rb_define_method(gTv, "columns_autosize", treeview_columns_autosize, 0);
-    rb_define_method(gTv, "append_column", treeview_append_column, 1);
-    rb_define_method(gTv, "remove_column", treeview_remove_column, 1);
-    rb_define_method(gTv, "insert_column", treeview_insert_column, -1);
-    rb_define_method(gTv, "get_column", treeview_get_column, 1);
-    rb_define_method(gTv, "columns", treeview_get_columns, 0);
-    rb_define_method(gTv, "move_column_after", treeview_move_column_after, 2);
-    rb_define_method(gTv, "set_column_drag_function", treeview_set_column_drag_function, 0);
-    rb_define_method(gTv, "scroll_to_point", treeview_scroll_to_point, 2);
-    rb_define_method(gTv, "scroll_to_cell", treeview_scroll_to_cell, 5);
-    rb_define_method(gTv, "set_cursor", treeview_set_cursor, 3);
-    rb_define_method(gTv, "cursor", treeview_get_cursor, 0);
-    rb_define_method(gTv, "expand_all", treeview_expand_all, 0);
-    rb_define_method(gTv, "collapse_all", treeview_collapse_all, 0);
-    rb_define_method(gTv, "expand_row", treeview_expand_row, 2);
-    rb_define_method(gTv, "collapse_row", treeview_collapse_row, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", treeview_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "selection", treeview_get_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "columns_autosize", treeview_columns_autosize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_column", treeview_append_column, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_column", treeview_remove_column, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_column", treeview_insert_column, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column", treeview_get_column, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "columns", treeview_get_columns, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_column_after", treeview_move_column_after, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_column_drag_function", treeview_set_column_drag_function, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to_point", treeview_scroll_to_point, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "scroll_to_cell", treeview_scroll_to_cell, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor", treeview_set_cursor, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "cursor", treeview_get_cursor, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "expand_all", treeview_expand_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "collapse_all", treeview_collapse_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "expand_row", treeview_expand_row, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "collapse_row", treeview_collapse_row, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gTv, "expand_to_path", treeview_expand_to_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "expand_to_path", treeview_expand_to_path, 1);
 #endif
-    rb_define_method(gTv, "map_expanded_rows", treeview_map_expanded_rows, 0);
-    rb_define_method(gTv, "row_expanded?", treeview_row_expanded, 1);
-    rb_define_method(gTv, "get_path_at_pos", treeview_get_path_at_pos, 2);
-    rb_define_alias(gTv, "get_path", "get_path_at_pos");
-    rb_define_method(gTv, "get_cell_area", treeview_get_cell_area, 2);
-    rb_define_method(gTv, "get_background_area", treeview_get_background_area, 2);
-    rb_define_method(gTv, "visible_rect", treeview_get_visible_rect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "map_expanded_rows", treeview_map_expanded_rows, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "row_expanded?", treeview_row_expanded, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_path_at_pos", treeview_get_path_at_pos, 2);
+    rb_define_alias(RG_TARGET_NAMESPACE, "get_path", "get_path_at_pos");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_cell_area", treeview_get_cell_area, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_background_area", treeview_get_background_area, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_rect", treeview_get_visible_rect, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gTv, "visible_range", treeview_get_visible_range, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_range", treeview_get_visible_range, 0);
 #endif
 
-    rb_define_method(gTv, "bin_window", treeview_get_bin_window, 0);
-    rb_define_method(gTv, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
-    rb_define_method(gTv, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "bin_window", treeview_get_bin_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "widget_to_tree_coords", treeview_widget_to_tree_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "tree_to_widget_coords", treeview_tree_to_widget_coords, 2);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gTv, "convert_bin_window_to_tree_coords", treeview_convert_bin_window_to_tree_coords, 2);
-    rb_define_method(gTv, "convert_bin_window_to_widget_coords", treeview_convert_bin_window_to_widget_coords, 2);
-    rb_define_method(gTv, "convert_tree_to_bin_window_coords", treeview_convert_tree_to_bin_window_coords, 2);
-    rb_define_method(gTv, "convert_tree_to_widget_coords", treeview_convert_tree_to_widget_coords, 2);
-    rb_define_method(gTv, "convert_widget_to_bin_window_coords", treeview_convert_widget_to_bin_window_coords, 2);
-    rb_define_method(gTv, "convert_widget_to_tree_coords", treeview_convert_widget_to_tree_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_bin_window_to_tree_coords", treeview_convert_bin_window_to_tree_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_bin_window_to_widget_coords", treeview_convert_bin_window_to_widget_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_tree_to_bin_window_coords", treeview_convert_tree_to_bin_window_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_tree_to_widget_coords", treeview_convert_tree_to_widget_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_widget_to_bin_window_coords", treeview_convert_widget_to_bin_window_coords, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "convert_widget_to_tree_coords", treeview_convert_widget_to_tree_coords, 2);
 #endif
-    rb_define_method(gTv, "enable_model_drag_dest", treeview_enable_model_drag_dest, 2);
-    rb_define_method(gTv, "enable_model_drag_source", treeview_enable_model_drag_source, 3);
-    rb_define_method(gTv, "unset_rows_drag_source", treeview_unset_rows_drag_source, 0);
-    rb_define_method(gTv, "unset_rows_drag_dest", treeview_unset_rows_drag_dest, 0);
-    rb_define_method(gTv, "set_drag_dest_row", treeview_set_drag_dest_row, 2);
-    rb_define_method(gTv, "drag_dest_row", treeview_get_drag_dest_row, 0);
-    rb_define_method(gTv, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
-    rb_define_alias(gTv, "get_dest_row", "get_dest_row_at_pos");
-    rb_define_method(gTv, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
-    rb_define_method(gTv, "set_search_equal_func", treeview_set_search_equal_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "enable_model_drag_dest", treeview_enable_model_drag_dest, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "enable_model_drag_source", treeview_enable_model_drag_source, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_rows_drag_source", treeview_unset_rows_drag_source, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_rows_drag_dest", treeview_unset_rows_drag_dest, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_drag_dest_row", treeview_set_drag_dest_row, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "drag_dest_row", treeview_get_drag_dest_row, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_dest_row_at_pos", treeview_get_dest_row_at_pos, 2);
+    rb_define_alias(RG_TARGET_NAMESPACE, "get_dest_row", "get_dest_row_at_pos");
+    rb_define_method(RG_TARGET_NAMESPACE, "create_row_drag_icon", treeview_create_row_drag_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_search_equal_func", treeview_set_search_equal_func, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gTv, "set_cursor_on_cell", treeview_set_cursor_on_cell, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor_on_cell", treeview_set_cursor_on_cell, 4);
 #endif
 
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gTv, "set_row_separator_func", treeview_set_row_separator_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_row_separator_func", treeview_set_row_separator_func, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gTv, "search_entry", treeview_get_search_entry, 0);
-    rb_define_method(gTv, "set_search_entry", treeview_set_search_entry, 1);
-    rb_define_method(gTv, "set_search_position_func", treeview_set_search_position_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "search_entry", treeview_get_search_entry, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_search_entry", treeview_set_search_entry, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_search_position_func", treeview_set_search_position_func, 0);
 #endif
 
     /* Constants */
-    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", gTv);
-    G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
+    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
 #if GTK_CHECK_VERSION(2,10,0)
     /* GtkTreeViewGridLines */
-    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", gTv);
-    G_DEF_CONSTANTS(gTv, GTK_TYPE_TREE_VIEW_GRID_LINES, "GTK_TREE_VIEW_");
+    G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_GRID_LINES, "GTK_TREE_VIEW_");
 #endif
 
     /* Option Signals */
-    G_DEF_SIGNAL_FUNC(gTv, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);
-    G_DEF_SIGNAL_FUNC(gTv, "row-expanded", (GValToRValSignalFunc)treeview_signal_func);
-    G_DEF_SIGNAL_FUNC(gTv, "test-collapse-row", (GValToRValSignalFunc)treeview_signal_func);
-    G_DEF_SIGNAL_FUNC(gTv, "test-expand-row", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row-expanded", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "test-collapse-row", (GValToRValSignalFunc)treeview_signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "test-expand-row", (GValToRValSignalFunc)treeview_signal_func);
 }

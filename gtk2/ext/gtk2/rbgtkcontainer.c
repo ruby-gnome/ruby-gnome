@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cContainer
 #define _SELF(s) (GTK_CONTAINER(RVAL2GOBJ(self)))
 
 /*
@@ -736,45 +737,45 @@ cont_mark(void* p)
 void 
 Init_gtk_container(void)
 {
-    VALUE gContainer;
+    VALUE RG_TARGET_NAMESPACE;
 
-    gContainer = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_CONTAINER, "Container",
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_CONTAINER, "Container",
 					  mGtk, cont_mark, NULL);
-    rb_define_method(gContainer, "resize_container?", cont_is_resize_container, 0);
-    rb_define_method(gContainer, "add", cont_add, -1);
-    rb_define_alias(gContainer, "<<", "add");
-    rb_define_method(gContainer, "remove", cont_remove, 1);
-    rb_define_method(gContainer, "check_resize", cont_check_resize, 0);
-    rb_define_method(gContainer, "each", cont_foreach, -1);
-    rb_define_method(gContainer, "each_forall", cont_forall, -1);
-    rb_define_method(gContainer, "children", cont_get_children, 0);
-    rb_define_method(gContainer, "set_reallocate_redraws", cont_set_reallocate_redraws, 1);
-    rb_define_method(gContainer, "set_focus_child", cont_set_focus_child, 1);
-    rb_define_method(gContainer, "set_focus_vadjustment", cont_set_focus_vadjustment, 1);
-    rb_define_method(gContainer, "set_focus_hadjustment", cont_set_focus_hadjustment, 1);
-    rb_define_method(gContainer, "focus_vadjustment", cont_get_focus_vadjustment, 0);
-    rb_define_method(gContainer, "focus_hadjustment", cont_get_focus_hadjustment, 0);
-    rb_define_method(gContainer, "resize_children", cont_get_resize_children, 0);
-    rb_define_method(gContainer, "child_type", cont_get_child_type, 0);
-    rb_define_method(gContainer, "child_get_property", cont_child_get_property, 2);
-    rb_define_method(gContainer, "child_set_property", cont_child_set_property, 3);
-    rb_define_method(gContainer, "propagate_expose", cont_propagate_expose, 2);
-    rb_define_method(gContainer, "focus_chain", cont_get_focus_chain, 0);
-    rb_define_method(gContainer, "set_focus_chain", cont_set_focus_chain, 1);
-    rb_define_method(gContainer, "unset_focus_chain", cont_unset_focus_chain, 0);
-    rb_define_singleton_method(gContainer, "child_property", cont_s_child_property, 1);
-    rb_define_singleton_method(gContainer, "child_properties", cont_s_child_properties, -1);
-    rb_define_singleton_method(gContainer, "install_child_property", cont_s_install_child_property, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "resize_container?", cont_is_resize_container, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", cont_add, -1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "<<", "add");
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", cont_remove, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "check_resize", cont_check_resize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", cont_foreach, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "each_forall", cont_forall, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "children", cont_get_children, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_reallocate_redraws", cont_set_reallocate_redraws, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_child", cont_set_focus_child, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_vadjustment", cont_set_focus_vadjustment, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_hadjustment", cont_set_focus_hadjustment, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "focus_vadjustment", cont_get_focus_vadjustment, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "focus_hadjustment", cont_get_focus_hadjustment, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "resize_children", cont_get_resize_children, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_type", cont_get_child_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_get_property", cont_child_get_property, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_set_property", cont_child_set_property, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "propagate_expose", cont_propagate_expose, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "focus_chain", cont_get_focus_chain, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_focus_chain", cont_set_focus_chain, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_focus_chain", cont_unset_focus_chain, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "child_property", cont_s_child_property, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "child_properties", cont_s_child_properties, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "install_child_property", cont_s_install_child_property, -1);
 
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
 
-    rb_define_singleton_method(gContainer, "type_register", type_register, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", type_register, -1);
 
     rb_global_variable(&proc_mod_eval);
     proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
 
-    G_DEF_SETTERS(gContainer);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     rb_global_variable(&type_to_prop_setter_table);
     rb_global_variable(&type_to_prop_getter_table);

@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAspectFrame
+
 static VALUE
 aframe_initialize(VALUE self, VALUE label, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child)
 {
@@ -47,8 +49,8 @@ aframe_set(VALUE self, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child
 void 
 Init_gtk_aspect_frame(void)
 {
-    VALUE gAspectFrame = G_DEF_CLASS(GTK_TYPE_ASPECT_FRAME, "AspectFrame", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ASPECT_FRAME, "AspectFrame", mGtk);
 
-    rb_define_method(gAspectFrame, "initialize", aframe_initialize, 5);
-    rb_define_method(gAspectFrame, "set", aframe_set, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", aframe_initialize, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "set", aframe_set, 4);
 }

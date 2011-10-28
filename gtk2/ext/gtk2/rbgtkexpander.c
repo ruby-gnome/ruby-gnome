@@ -23,6 +23,7 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cExpander
 #define _SELF(self) (GTK_EXPANDER(RVAL2GOBJ(self)))
 
 static VALUE
@@ -68,7 +69,7 @@ void
 Init_gtk_expander(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gExpander = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);
-    rb_define_method(gExpander, "initialize", expander_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", expander_initialize, -1);
 #endif
 }

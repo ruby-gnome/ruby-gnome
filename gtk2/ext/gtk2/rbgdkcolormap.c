@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cColormap
 #define _SELF(self) (GDK_COLORMAP(RVAL2GOBJ(self)))
 
 static VALUE
@@ -123,19 +124,19 @@ gdkcmap_colors(VALUE self)
 void
 Init_gtk_gdk_colormap(void)
 {
-    VALUE gdkColormap = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
 
-    rb_define_singleton_method(gdkColormap, "system",
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "system",
                                gdkcmap_s_get_system, 0);
-    rb_define_method(gdkColormap, "initialize", gdkcmap_initialize, 2);
-    rb_define_method(gdkColormap, "alloc_color", gdkcmap_alloc_color, 3);
-    rb_define_method(gdkColormap, "free_color", gdkcmap_free_color, 1);
-    rb_define_method(gdkColormap, "query_color", gdkcmap_query_color, 1);
-    rb_define_method(gdkColormap, "visual", gdkcmap_get_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkcmap_initialize, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "alloc_color", gdkcmap_alloc_color, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "free_color", gdkcmap_free_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "query_color", gdkcmap_query_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "visual", gdkcmap_get_visual, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkColormap, "screen", gdkcmap_get_screen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "screen", gdkcmap_get_screen, 0);
 #endif
-    rb_define_method(gdkColormap, "colors", gdkcmap_colors, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "colors", gdkcmap_colors, 0);
 }
 
 

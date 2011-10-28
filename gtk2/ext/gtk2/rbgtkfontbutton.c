@@ -23,6 +23,8 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cFontButton
+
 static VALUE
 fontbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -70,7 +72,7 @@ void
 Init_gtk_fontbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gFontbutton = G_DEF_CLASS(GTK_TYPE_FONT_BUTTON, "FontButton", mGtk);
-    rb_define_method(gFontbutton, "initialize", fontbutton_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_BUTTON, "FontButton", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fontbutton_initialize, -1);
 #endif
 }

@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cStatusbar
 #define _SELF(self) (GTK_STATUSBAR(RVAL2GOBJ(self)))
 
 static VALUE
@@ -72,11 +73,11 @@ gboolean            gtk_statusbar_get_has_resize_grip   (GtkStatusbar *statusbar
 void 
 Init_gtk_statusbar(void)
 {
-    VALUE gStatusBar = G_DEF_CLASS(GTK_TYPE_STATUSBAR, "Statusbar", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUSBAR, "Statusbar", mGtk);
 
-    rb_define_method(gStatusBar, "initialize", statusbar_initialize, 0);
-    rb_define_method(gStatusBar, "get_context_id", statusbar_get_context_id, 1);
-    rb_define_method(gStatusBar, "push", statusbar_push, 2);
-    rb_define_method(gStatusBar, "pop", statusbar_pop, 1);
-    rb_define_method(gStatusBar, "remove", statusbar_remove, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", statusbar_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_context_id", statusbar_get_context_id, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "push", statusbar_push, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "pop", statusbar_pop, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", statusbar_remove, 2);
 }

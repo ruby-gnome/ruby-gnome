@@ -24,7 +24,9 @@
 
 #include "global.h"
 
-static VALUE gRButton;
+#define RG_TARGET_NAMESPACE cRadioButton
+
+static VALUE RG_TARGET_NAMESPACE;
 
 #define _GROUP(s) (NIL_P(s) ? NULL : GTK_RADIO_BUTTON(RVAL2GOBJ(s)))
 
@@ -58,7 +60,7 @@ rbtn_initialize(int argc, VALUE *argv, VALUE self)
     GtkWidget *widget;
 
     if (rb_scan_args(argc, argv, "03", &group_or_label, &label_or_use_underline, &use_underline) > 0) {
-        if (rb_obj_is_kind_of(group_or_label, gRButton)){
+        if (rb_obj_is_kind_of(group_or_label, RG_TARGET_NAMESPACE)){
             widget = create_button(group_or_label, label_or_use_underline, use_underline);
         } else {
             widget = create_button(Qnil, group_or_label, label_or_use_underline);
@@ -81,8 +83,8 @@ rbtn_group(VALUE self)
 void 
 Init_gtk_radio_button(void)
 {
-    gRButton = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);
 
-    rb_define_method(gRButton, "initialize", rbtn_initialize, -1);
-    rb_define_method(gRButton, "group", rbtn_group, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbtn_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "group", rbtn_group, 0);
 }

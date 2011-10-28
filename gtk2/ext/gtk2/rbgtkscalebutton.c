@@ -26,6 +26,7 @@
 
 #if GTK_CHECK_VERSION(2,12,0)
 
+#define RG_TARGET_NAMESPACE cScaleButton
 #define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
 
 static VALUE
@@ -79,7 +80,7 @@ void
 Init_gtk_scalebutton(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
-    VALUE gScaleButton = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
-    rb_define_method(gScaleButton, "initialize", scalebutton_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", scalebutton_initialize, -1);
 #endif
 }

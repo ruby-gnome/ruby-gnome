@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIMContextSimple
 #define _SELF(self) (GTK_IM_CONTEXT_SIMPLE(RVAL2GOBJ(self)))
 
 static VALUE 
@@ -59,10 +60,10 @@ imcsimple_add_table(VALUE self, VALUE rbdata, VALUE rbmax_seq_len, VALUE rbn_seq
 void 
 Init_gtk_imcontext_simple(void)
 {
-    VALUE gIMContextS = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT_SIMPLE, "IMContextSimple", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT_SIMPLE, "IMContextSimple", mGtk);
 
-    rb_define_method(gIMContextS, "initialize", imcsimple_initialize, 0);
-    rb_define_method(gIMContextS, "add_table", imcsimple_add_table, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", imcsimple_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_table", imcsimple_add_table, 3);
 
-    rb_define_const(gIMContextS, "MAX_COMPOSE_LEN", GTK_MAX_COMPOSE_LEN);
+    rb_define_const(RG_TARGET_NAMESPACE, "MAX_COMPOSE_LEN", GTK_MAX_COMPOSE_LEN);
 }

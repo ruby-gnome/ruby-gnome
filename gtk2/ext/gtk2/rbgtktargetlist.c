@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTargetList
 #define _SELF(r) ((GtkTargetList*)RVAL2BOXED(r, GTK_TYPE_TARGET_LIST))
 
 /**********************************/
@@ -138,21 +139,21 @@ target_list_find(VALUE self, VALUE target)
 void
 Init_gtk_target_list(void)
 {
-    VALUE gTargetList = G_DEF_CLASS(GTK_TYPE_TARGET_LIST, "TargetList", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TARGET_LIST, "TargetList", mGtk);
 
     rbgobj_boxed_not_copy_obj(GTK_TYPE_TARGET_LIST);
 
-    rb_define_method(gTargetList, "initialize", target_list_initialize, 1);
-    rb_define_method(gTargetList, "add", target_list_add, 3);
-    rb_define_method(gTargetList, "add_table", target_list_add_table, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", target_list_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", target_list_add, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_table", target_list_add_table, 1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gTargetList, "add_text_targets", target_list_add_text_targets, 1);
-    rb_define_method(gTargetList, "add_image_targets", target_list_add_image_targets, 2);
-    rb_define_method(gTargetList, "add_uri_targets", target_list_add_uri_targets, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_text_targets", target_list_add_text_targets, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_image_targets", target_list_add_image_targets, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_uri_targets", target_list_add_uri_targets, 1);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gTargetList, "add_rich_text_targets", target_list_add_rich_text_targets, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_rich_text_targets", target_list_add_rich_text_targets, 3);
 #endif
-    rb_define_method(gTargetList, "remove", target_list_remove, 1);
-    rb_define_method(gTargetList, "find", target_list_find, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", target_list_remove, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "find", target_list_find, 1);
 }

@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAccelGroupEntry
 #define _SELF(s) ((GtkAccelGroupEntry*)RVAL2BOXED(s, GTK_TYPE_ACCEL_GROUP_ENTRY))
 
 static GtkAccelGroupEntry *
@@ -82,11 +83,11 @@ agentry_get_accel_path(VALUE self)
 void
 Init_gtk_accel_group_entry(void)
 {
-    VALUE gAccelGroupEntry = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP_ENTRY, "AccelGroupEntry", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP_ENTRY, "AccelGroupEntry", mGtk);
 
-    rb_define_method(gAccelGroupEntry, "initialize", agentry_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", agentry_initialize, 0);
 
-    rb_define_method(gAccelGroupEntry, "accel_key", agentry_get_accel_key, 0);
-    rb_define_method(gAccelGroupEntry, "closure", agentry_get_closure, 0);
-    rb_define_method(gAccelGroupEntry, "accel_path", agentry_get_accel_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "accel_key", agentry_get_accel_key, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "closure", agentry_get_closure, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "accel_path", agentry_get_accel_path, 0);
 }

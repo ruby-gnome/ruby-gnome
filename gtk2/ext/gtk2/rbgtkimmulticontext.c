@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIMMulticontext
 #define _SELF(self) (GTK_IM_MULTICONTEXT(RVAL2GOBJ(self)))
 
 static VALUE 
@@ -40,8 +41,8 @@ immulti_append_menuitems(VALUE self, VALUE menushell)
 void 
 Init_gtk_im_multicontext(void)
 {
-    VALUE gIMMContext = G_DEF_CLASS(GTK_TYPE_IM_MULTICONTEXT, "IMMulticontext", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_MULTICONTEXT, "IMMulticontext", mGtk);
 
-    rb_define_method(gIMMContext, "initialize", immulti_initialize, 0);
-    rb_define_method(gIMMContext, "append_menuitems", immulti_append_menuitems, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", immulti_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_menuitems", immulti_append_menuitems, 1);
 }

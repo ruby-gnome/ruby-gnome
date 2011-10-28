@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cSizeGroup
 #define _SELF(self) (GTK_SIZE_GROUP(RVAL2GOBJ(self)))
 
 static VALUE
@@ -64,18 +65,18 @@ sizegrp_get_widgets(VALUE self)
 void
 Init_gtk_size_group(void)
 {
-    VALUE gSizeGroup = G_DEF_CLASS(GTK_TYPE_SIZE_GROUP, "SizeGroup", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SIZE_GROUP, "SizeGroup", mGtk);
 
-    rb_define_method(gSizeGroup, "initialize", sizegrp_initialize, 1);
-    rb_define_method(gSizeGroup, "add_widget", sizegrp_add_widget, 1);
-    rb_define_method(gSizeGroup, "remove_widget", sizegrp_remove_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", sizegrp_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_widget", sizegrp_add_widget, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_widget", sizegrp_remove_widget, 1);
 
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gSizeGroup, "widgets", sizegrp_get_widgets, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "widgets", sizegrp_get_widgets, 0);
 #endif
 
     /* GtkSizeGroupMode */
-    G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", gSizeGroup);
-    G_DEF_CONSTANTS(gSizeGroup, GTK_TYPE_SIZE_GROUP_MODE, "GTK_SIZE_GROUP_");
+    G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SIZE_GROUP_MODE, "GTK_SIZE_GROUP_");
 }
 

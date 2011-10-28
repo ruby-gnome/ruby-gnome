@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cEventBox
+
 static VALUE
 eventbox_initialize(VALUE self)
 {
@@ -34,7 +36,7 @@ eventbox_initialize(VALUE self)
 void 
 Init_gtk_eventbox(void)
 {
-    VALUE gEventBox = G_DEF_CLASS(GTK_TYPE_EVENT_BOX, "EventBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_EVENT_BOX, "EventBox", mGtk);
 
-    rb_define_method(gEventBox, "initialize", eventbox_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", eventbox_initialize, 0);
 }

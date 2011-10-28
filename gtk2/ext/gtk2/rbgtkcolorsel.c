@@ -24,9 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cColorSelection
 #define _SELF(s) (GTK_COLOR_SELECTION(RVAL2GOBJ(self)))
 
-static VALUE gColorSel;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 colorsel_initialize(VALUE self)
@@ -161,7 +162,7 @@ static void
 screen_func(GdkScreen *screen, const GdkColor *colors, gint n_colors)
 {
     int i;
-    VALUE func = rb_cvar_get(gColorSel, rb_intern("__palette_proc__"));
+    VALUE func = rb_cvar_get(RG_TARGET_NAMESPACE, rb_intern("__palette_proc__"));
     VALUE ary = rb_ary_new();
     for (i = 0; i < n_colors; i++){
         ary = rb_ary_push(ary, GDKCOLOR2RVAL((GdkColor *)&colors[i]));
@@ -175,7 +176,7 @@ colorsel_s_set_change_palette_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
 
-    rb_cv_set(gColorSel, "__palette_proc__", func);
+    rb_cv_set(RG_TARGET_NAMESPACE, "__palette_proc__", func);
     gtk_color_selection_set_change_palette_with_screen_hook(
         (GtkColorSelectionChangePaletteWithScreenFunc)screen_func);
     return self;
@@ -194,21 +195,21 @@ void        (*GtkColorSelectionChangePaletteWithScreenFunc)
 void 
 Init_gtk_color_selection(void)
 {
-    gColorSel = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
 
-    rb_define_method(gColorSel, "initialize", colorsel_initialize, 0);
-    rb_define_method(gColorSel, "previous_alpha", colorsel_get_previous_alpha, 0);
-    rb_define_method(gColorSel, "set_previous_alpha", colorsel_set_previous_alpha, 1);
-    rb_define_method(gColorSel, "set_previous_color", colorsel_set_previous_color, 1);
-    rb_define_method(gColorSel, "previous_color", colorsel_get_previous_color, 0);
-    rb_define_method(gColorSel, "adjusting?", colorsel_is_adjusting, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", colorsel_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "previous_alpha", colorsel_get_previous_alpha, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_previous_alpha", colorsel_set_previous_alpha, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_previous_color", colorsel_set_previous_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "previous_color", colorsel_get_previous_color, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "adjusting?", colorsel_is_adjusting, 0);
 
-    rb_define_singleton_method(gColorSel, "palette_to_string", colorsel_s_palette_to_string, -1);
-    rb_define_singleton_method(gColorSel, "palette_from_string", colorsel_s_palette_from_string, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "palette_to_string", colorsel_s_palette_to_string, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "palette_from_string", colorsel_s_palette_from_string, 1);
 
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gColorSel, "set_change_palette_hook", colorsel_s_set_change_palette_hook, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_change_palette_hook", colorsel_s_set_change_palette_hook, 0);
 #endif
 
-    G_DEF_SETTERS(gColorSel);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cButton
 #define _SELF(self) (GTK_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
@@ -127,17 +128,17 @@ GtkPositionType gtk_button_get_image_position
 void 
 Init_gtk_button(void)
 {
-    VALUE gButton = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
 
-    rb_define_method(gButton, "initialize", button_initialize, -1);
-    rb_define_method(gButton, "pressed", button_pressed, 0);
-    rb_define_method(gButton, "released", button_released, 0);
-    rb_define_method(gButton, "enter", button_enter, 0);
-    rb_define_method(gButton, "leave", button_leave, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", button_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pressed", button_pressed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "released", button_released, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "enter", button_enter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "leave", button_leave, 0);
 
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gButton, "set_alignment", button_set_alignment, 2);
-    G_DEF_SETTER(gButton, "alignment");
-    rb_define_method(gButton, "alignment", button_get_alignment, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment", button_set_alignment, 2);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "alignment");
+    rb_define_method(RG_TARGET_NAMESPACE, "alignment", button_get_alignment, 0);
 #endif
 }

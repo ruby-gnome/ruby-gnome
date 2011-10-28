@@ -21,7 +21,7 @@
 
 #include "global.h"
 
-
+#define RG_TARGET_NAMESPACE cCellRendererText
 #define _SELF(s) (GTK_CELL_RENDERER_TEXT(RVAL2GOBJ(s)))
 
 static VALUE
@@ -41,11 +41,11 @@ crtext_set_fixed_height_from_font(VALUE self, VALUE number_of_rows)
 void
 Init_gtk_cellrenderertext(void)
 {
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TEXT, "CellRendererText", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TEXT, "CellRendererText", mGtk);
     
-    rb_define_method(renderer, "initialize", crtext_initialize, 0);
-    rb_define_method(renderer, "set_fixed_height_from_font", crtext_set_fixed_height_from_font, 1);
-    G_DEF_SETTER(renderer, "fixed_height_from_font");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", crtext_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fixed_height_from_font", crtext_set_fixed_height_from_font, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "fixed_height_from_font");
 }
 
 

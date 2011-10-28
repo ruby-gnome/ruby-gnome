@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenuItem
 #define _SELF(s) (GTK_MENU_ITEM(RVAL2GOBJ(s)))
 
 static VALUE
@@ -118,11 +119,11 @@ mitem_toggle_size_allocate(VALUE self, VALUE allocation)
 void 
 Init_gtk_menu_item(void)
 {
-    VALUE gMenuItem = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
 
-    rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
-    G_REPLACE_SET_PROPERTY(gMenuItem, "submenu", mitem_set_submenu, 1);
-    rb_define_method(gMenuItem, "remove_submenu", mitem_remove_submenu, 0);
-    rb_define_method(gMenuItem, "toggle_size_request", mitem_toggle_size_request, 0);
-    rb_define_method(gMenuItem, "toggle_size_allocate", mitem_toggle_size_allocate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", mitem_initialize, -1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "submenu", mitem_set_submenu, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_submenu", mitem_remove_submenu, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggle_size_request", mitem_toggle_size_request, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggle_size_allocate", mitem_toggle_size_allocate, 1);
 }

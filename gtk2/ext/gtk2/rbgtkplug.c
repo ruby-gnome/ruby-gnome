@@ -24,6 +24,8 @@
 
 #ifdef HAVE_GTK_PLUG_GET_TYPE
 
+#define RG_TARGET_NAMESPACE cPlug
+
 static VALUE
 plug_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -80,10 +82,10 @@ void
 Init_gtk_plug(void)
 {
 #ifdef HAVE_GTK_PLUG_GET_TYPE
-    VALUE gPlug = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);
     
-    rb_define_method(gPlug, "initialize", plug_initialize, -1);
-    rb_define_method(gPlug, "construct", plug_construct, 1);
-    rb_define_method(gPlug, "id", plug_get_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", plug_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "construct", plug_construct, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "id", plug_get_id, 0);
 #endif
 }

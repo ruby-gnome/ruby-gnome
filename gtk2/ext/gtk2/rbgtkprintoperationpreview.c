@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
+
+#define RG_TARGET_NAMESPACE cPrintOperationPreview
 #define _SELF(s) (GTK_PRINT_OPERATION_PREVIEW(RVAL2GOBJ(s)))
 
 static VALUE
@@ -52,13 +54,13 @@ void
 Init_gtk_print_operation_preview(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPrintOperationPreview = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_PREVIEW,
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_PREVIEW,
                                                "PrintOperationPreview", mGtk);
 
-    rb_define_method(gPrintOperationPreview, "render_page", pop_render_page, 1);
-    rb_define_method(gPrintOperationPreview, "end_preview", pop_end_preview, 0);
-    rb_define_method(gPrintOperationPreview, "selected?", pop_is_selected, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_page", pop_render_page, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "end_preview", pop_end_preview, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "selected?", pop_is_selected, 1);
 
-    G_DEF_SETTERS(gPrintOperationPreview);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

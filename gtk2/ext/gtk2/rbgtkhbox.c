@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHBox
+
 static VALUE
 hbox_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -39,7 +41,7 @@ hbox_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_hbox(void)
 {
-    VALUE gHBox = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
 
-    rb_define_method(gHBox, "initialize", hbox_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", hbox_initialize, -1);
 }

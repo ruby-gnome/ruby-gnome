@@ -41,6 +41,7 @@ gtk_allocation_get_type(void)
   return our_type;
 }
 
+#define RG_TARGET_NAMESPACE cAllocation
 #define _SELF(r) ((GtkAllocation*)RVAL2BOXED(r, GTK_TYPE_ALLOCATION))
 
 static VALUE
@@ -143,26 +144,26 @@ alloc_to_rect(VALUE self)
 void 
 Init_gtk_allocation(void)
 {
-    VALUE galloc;
+    VALUE RG_TARGET_NAMESPACE;
 
-    galloc = G_DEF_CLASS(GTK_TYPE_ALLOCATION, "Allocation", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ALLOCATION, "Allocation", mGtk);
     rbgobj_boxed_not_copy_obj(GTK_TYPE_ALLOCATION);
 
-    rb_define_method(galloc, "initialize", alloc_initialize, 4);
-    rb_define_method(galloc, "intersect", alloc_intersect, 1);
-    rb_define_alias(galloc, "&", "intersect");
-    rb_define_method(galloc, "union", alloc_union, 1);
-    rb_define_alias(galloc, "|", "union");
-    rb_define_method(galloc, "x", alloc_x, 0);
-    rb_define_method(galloc, "y", alloc_y, 0);
-    rb_define_method(galloc, "width", alloc_w, 0);
-    rb_define_method(galloc, "height", alloc_h, 0);
-    rb_define_method(galloc, "set_x", alloc_set_x, 1);
-    rb_define_method(galloc, "set_y", alloc_set_y, 1);
-    rb_define_method(galloc, "set_width", alloc_set_w, 1);
-    rb_define_method(galloc, "set_height", alloc_set_h, 1);
-    rb_define_method(galloc, "to_a", alloc_to_a, 0);
-    rb_define_method(galloc, "to_rect", alloc_to_rect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", alloc_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "intersect", alloc_intersect, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "&", "intersect");
+    rb_define_method(RG_TARGET_NAMESPACE, "union", alloc_union, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "|", "union");
+    rb_define_method(RG_TARGET_NAMESPACE, "x", alloc_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "y", alloc_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", alloc_w, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", alloc_h, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_x", alloc_set_x, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_y", alloc_set_y, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width", alloc_set_w, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_height", alloc_set_h, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", alloc_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_rect", alloc_to_rect, 0);
 
-    G_DEF_SETTERS(galloc);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

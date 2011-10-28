@@ -23,6 +23,8 @@
                                                                                 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cColorButton
+
 static VALUE
 colorbutton_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -64,7 +66,7 @@ void
 Init_gtk_colorbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gColorbutton = G_DEF_CLASS(GTK_TYPE_COLOR_BUTTON, "ColorButton", mGtk);
-    rb_define_method(gColorbutton, "initialize", colorbutton_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_BUTTON, "ColorButton", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", colorbutton_initialize, -1);
 #endif
 }

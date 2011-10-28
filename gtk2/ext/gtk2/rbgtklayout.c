@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cLayout
 #define _SELF(self) (GTK_LAYOUT(RVAL2GOBJ(self)))
 #define RVAL2ADJ(a) (GTK_ADJUSTMENT(RVAL2GOBJ(a)))
 
@@ -82,12 +83,12 @@ layout_get_bin_window(VALUE self)
 void
 Init_gtk_layout(void)
 {
-    VALUE gLayout = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
 
-    rb_define_method(gLayout, "initialize", layout_initialize, -1);
-    rb_define_method(gLayout, "put", layout_put, 3);
-    rb_define_method(gLayout, "move", layout_move, 3);
-    rb_define_method(gLayout, "set_size", layout_set_size, 2);
-    rb_define_method(gLayout, "size", layout_get_size, 0);
-    rb_define_method(gLayout, "bin_window", layout_get_bin_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", layout_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "put", layout_put, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "move", layout_move, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", layout_set_size, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", layout_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bin_window", layout_get_bin_window, 0);
 }

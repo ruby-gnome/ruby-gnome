@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentFilter
 #define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))
 
 static VALUE
@@ -153,24 +154,24 @@ void
 Init_gtk_recent_filter(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE rf = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER, "RecentFilter", mGtk);
-    rb_define_method(rf, "initialize", rf_initialize, 0);
-    rb_define_method(rf, "name", rf_get_name, 0);
-    rb_define_method(rf, "set_name", rf_set_name, 1);
-    rb_define_method(rf, "add_mime_type", rf_add_mime_type, 1);
-    rb_define_method(rf, "add_pattern", rf_add_pattern, 1);
-    rb_define_method(rf, "add_pixbuf_formats", rf_add_pixbuf_formats, 0);
-    rb_define_method(rf, "add_application", rf_add_application, 1);
-    rb_define_method(rf, "add_group", rf_add_group, 1);
-    rb_define_method(rf, "add_age", rf_add_age, 1);
-    rb_define_method(rf, "add_custom", rf_add_custom, 1);
-    rb_define_method(rf, "needed", rf_get_needed, 0);
-    rb_define_method(rf, "filter", rf_filter_filter, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER, "RecentFilter", mGtk);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rf_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", rf_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_name", rf_set_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_mime_type", rf_add_mime_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_pattern", rf_add_pattern, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_pixbuf_formats", rf_add_pixbuf_formats, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_application", rf_add_application, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_group", rf_add_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_age", rf_add_age, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_custom", rf_add_custom, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "needed", rf_get_needed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "filter", rf_filter_filter, 1);
 
-    G_DEF_SETTERS(rf);   
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 
     /* GtkRecentFilterFlags */
-    G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_FLAGS, "Flags", rf);
-    G_DEF_CONSTANTS(rf, GTK_TYPE_RECENT_FILTER_FLAGS, "GTK_RECENT_FILTER_");
+    G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RECENT_FILTER_FLAGS, "GTK_RECENT_FILTER_");
 #endif
 }

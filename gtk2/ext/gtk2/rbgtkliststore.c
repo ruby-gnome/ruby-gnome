@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cListStore
 #define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
 
 static ID id_to_a, id_size;
@@ -402,32 +403,32 @@ lstore_move_after(VALUE self, VALUE iter, VALUE position)
 void
 Init_gtk_list_store(void)
 {
-    VALUE ls = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
 
     id_to_a = rb_intern("to_a");
     id_size = rb_intern("size");
 
     rbgtk_register_treeiter_set_value_func(GTK_TYPE_LIST_STORE, 
                                            (rbgtkiter_set_value_func)&gtk_list_store_set_value);
-    rb_define_method(ls, "initialize", lstore_initialize, -1);
-    rb_define_method(ls, "set_column_types", lstore_set_column_types, -1);
-    rb_define_method(ls, "set_value", lstore_set_value, 3);
-    rb_define_method(ls, "remove", lstore_remove, 1);
-    rb_define_method(ls, "insert", lstore_insert, -1);
-    rb_define_method(ls, "insert_before", lstore_insert_before, 1);
-    rb_define_method(ls, "insert_after", lstore_insert_after, 1);
-    rb_define_method(ls, "prepend", lstore_prepend, 0);
-    rb_define_method(ls, "append", lstore_append, 0);
-    rb_define_method(ls, "clear", lstore_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", lstore_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_column_types", lstore_set_column_types, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_value", lstore_set_value, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", lstore_remove, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert", lstore_insert, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_before", lstore_insert_before, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_after", lstore_insert_after, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend", lstore_prepend, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append", lstore_append, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", lstore_clear, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(ls, "iter_is_valid?", lstore_iter_is_valid, 1);
-    rb_define_method(ls, "reorder", lstore_reorder, 1);
-    rb_define_method(ls, "swap", lstore_swap, 2);
-    rb_define_method(ls, "move_before", lstore_move_before, 2);
-    rb_define_method(ls, "move_after", lstore_move_after, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_is_valid?", lstore_iter_is_valid, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "reorder", lstore_reorder, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "swap", lstore_swap, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_before", lstore_move_before, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_after", lstore_move_after, 2);
 #endif
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(ls, "set_values", lstore_set_valuesv, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_values", lstore_set_valuesv, 2);
 #endif
 
 }

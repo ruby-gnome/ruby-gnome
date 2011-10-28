@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cBin
+
 static VALUE
 bin_child(VALUE self)
 {
@@ -34,7 +36,7 @@ bin_child(VALUE self)
 void 
 Init_gtk_bin(void)
 {
-    VALUE gBin = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);
 
-    rb_define_method(gBin, "child", bin_child, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child", bin_child, 0);
 }

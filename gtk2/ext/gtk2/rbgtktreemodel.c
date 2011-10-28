@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mTreeModel
 #define _SELF(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
 
 static VALUE
@@ -223,32 +224,32 @@ signal_rows_reordered_func(G_GNUC_UNUSED guint num, const GValue *values)
 void 
 Init_gtk_treemodel(void)
 {
-    VALUE mTreeModel = G_DEF_INTERFACE(GTK_TYPE_TREE_MODEL, "TreeModel", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_TREE_MODEL, "TreeModel", mGtk);
 
-    rb_define_method(mTreeModel, "flags", treemodel_get_flags, 0);
-    rb_define_method(mTreeModel, "n_columns", treemodel_get_n_columns, 0);
-    rb_define_method(mTreeModel, "get_column_type", treemodel_get_column_type, 1);
-    rb_define_method(mTreeModel, "iter_first", treemodel_get_iter_first, 0);
-    rb_define_method(mTreeModel, "get_iter", treemodel_get_iter, 1);
-    rb_define_method(mTreeModel, "get_value", treemodel_get_value, 2);
-    rb_define_method(mTreeModel, "each", treemodel_foreach, 0);
-    rb_define_method(mTreeModel, "row_changed", treemodel_row_changed, 2);
-    rb_define_method(mTreeModel, "row_inserted", treemodel_row_inserted, 2);
-    rb_define_method(mTreeModel, "row_has_child_toggled", treemodel_row_has_child_toggled, 2);
-    rb_define_method(mTreeModel, "row_deleted", treemodel_row_deleted, 1);
-    rb_define_method(mTreeModel, "rows_reordered", treemodel_rows_reordered, 3);
-    rb_define_method(mTreeModel, "iter_is_valid?", treemodel_iter_is_valid, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", treemodel_get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_columns", treemodel_get_n_columns, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_column_type", treemodel_get_column_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_first", treemodel_get_iter_first, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_iter", treemodel_get_iter, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_value", treemodel_get_value, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", treemodel_foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "row_changed", treemodel_row_changed, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "row_inserted", treemodel_row_inserted, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "row_has_child_toggled", treemodel_row_has_child_toggled, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "row_deleted", treemodel_row_deleted, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "rows_reordered", treemodel_rows_reordered, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter_is_valid?", treemodel_iter_is_valid, 1);
 
     /* GtkTreeModelFlags */
-    G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FLAGS, "Flags", mTreeModel);
-    G_DEF_CONSTANTS(mTreeModel, GTK_TYPE_TREE_MODEL_FLAGS, "GTK_TREE_MODEL_");
+    G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_MODEL_FLAGS, "GTK_TREE_MODEL_");
 
-    G_DEF_SIGNAL_FUNC(mTreeModel, "row_changed", (GValToRValSignalFunc)signal_func);
-    G_DEF_SIGNAL_FUNC(mTreeModel, "row_inserted", (GValToRValSignalFunc)signal_func);
-    G_DEF_SIGNAL_FUNC(mTreeModel, "row_has_child_toggled", (GValToRValSignalFunc)signal_func);
-    G_DEF_SIGNAL_FUNC(mTreeModel, "rows_reordered", (GValToRValSignalFunc)signal_rows_reordered_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_changed", (GValToRValSignalFunc)signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_inserted", (GValToRValSignalFunc)signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_has_child_toggled", (GValToRValSignalFunc)signal_func);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "rows_reordered", (GValToRValSignalFunc)signal_rows_reordered_func);
 
-    G_DEF_SETTERS(mTreeModel);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 
 

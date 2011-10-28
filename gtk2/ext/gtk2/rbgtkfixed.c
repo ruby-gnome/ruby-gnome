@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cFixed
 #define _SELF(self) (GTK_FIXED(RVAL2GOBJ(self)))
 
 static VALUE
@@ -65,13 +66,13 @@ fixed_set_has_window(VALUE self, VALUE has_window)
 void 
 Init_gtk_fixed(void)
 {
-    VALUE gFixed = G_DEF_CLASS(GTK_TYPE_FIXED, "Fixed", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FIXED, "Fixed", mGtk);
 
-    rb_define_method(gFixed, "initialize", fixed_initialize, 0);
-    rb_define_method(gFixed, "put", fixed_put, 3);
-    rb_define_method(gFixed, "move", fixed_move, 3);
-    rb_define_method(gFixed, "has_window?", fixed_get_has_window, 0);
-    rb_define_method(gFixed, "set_has_window", fixed_set_has_window, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fixed_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "put", fixed_put, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "move", fixed_move, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_window?", fixed_get_has_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_has_window", fixed_set_has_window, 1);
 
-    G_DEF_SETTERS(gFixed);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

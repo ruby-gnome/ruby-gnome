@@ -31,9 +31,10 @@
 #  include <rb_cairo.h>
 #endif
 
+#define RG_TARGET_NAMESPACE cPrintJob
 #define _SELF(s) (GTK_PRINT_JOB(RVAL2GOBJ(s)))
 
-static VALUE gPrintJob;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 pj_initialize(VALUE self, VALUE title, VALUE printer,
@@ -127,14 +128,14 @@ complete_func(GtkPrintJob *job, gpointer data, GError *error)
 static void
 remove_callback_reference(gpointer data)
 {
-    G_CHILD_REMOVE(gPrintJob, (VALUE)data);
+    G_CHILD_REMOVE(RG_TARGET_NAMESPACE, (VALUE)data);
 }
 
 static VALUE
 pj_send(VALUE self)
 {
     VALUE block = rb_block_proc();
-    G_CHILD_ADD(gPrintJob, block);
+    G_CHILD_ADD(RG_TARGET_NAMESPACE, block);
     gtk_print_job_send(_SELF(self), complete_func, (gpointer)block,
                        remove_callback_reference);
     return self;
@@ -145,16 +146,16 @@ void
 Init_gtk_print_job(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
-    gPrintJob = G_DEF_CLASS(GTK_TYPE_PRINT_JOB, "PrintJob", mGtk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_JOB, "PrintJob", mGtk);
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "PrintCapabilities", mGtk);
 
-    rb_define_method(gPrintJob, "initialize", pj_initialize, 4);
-    rb_define_method(gPrintJob, "status", pj_get_status, 0);
-    rb_define_method(gPrintJob, "set_source_file", pj_set_source_file, 1);
-    G_DEF_SETTER(gPrintJob, "source_file");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", pj_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "status", pj_get_status, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_source_file", pj_set_source_file, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "source_file");
 #ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gPrintJob, "surface", pj_get_surface, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "surface", pj_get_surface, 0);
 #endif
-    rb_define_method(gPrintJob, "send", pj_send, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "send", pj_send, 0);
 #endif
 }

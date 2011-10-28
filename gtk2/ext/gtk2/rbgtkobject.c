@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cObject
+
 /*
 We shouldn't implement it.
 void        gtk_object_sink                 (GtkObject *object);
@@ -165,25 +167,25 @@ gobj_s_binding_set(VALUE self)
 void 
 Init_gtk_object(void)
 {
-    VALUE gObject = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 
-    rb_define_singleton_method(gObject, "binding_set", gobj_s_binding_set, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "binding_set", gobj_s_binding_set, 0);
 
-    rb_define_method(gObject, "type_name", gobj_get_type_name, 0);
-    rb_define_method(gObject, "flags", gobj_get_flags, 0);
-    rb_define_method(gObject, "set_flags", gobj_set_flags, 1);
-    rb_define_method(gObject, "unset_flags", gobj_unset_flags, 1);
-    rb_define_method(gObject, "destroy", gobj_destroy, 0);
-    rb_define_method(gObject, "bindings_activate", gobj_bindings_activate, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "type_name", gobj_get_type_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", gobj_get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", gobj_set_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_flags", gobj_unset_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "destroy", gobj_destroy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bindings_activate", gobj_bindings_activate, 2);
 
     /* GtkObjectFlags */
-    G_DEF_CLASS(GTK_TYPE_OBJECT_FLAGS, "Flags", gObject);
-    G_DEF_CONSTANTS(gObject, GTK_TYPE_OBJECT_FLAGS, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_OBJECT_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_OBJECT_FLAGS, "GTK_");
 
     /* undef deprecated properties */
-    rb_undef_method(gObject, "user_data");
-    rb_undef_method(gObject, "user_data=");
-    rb_undef_method(gObject, "set_user_data");
+    rb_undef_method(RG_TARGET_NAMESPACE, "user_data");
+    rb_undef_method(RG_TARGET_NAMESPACE, "user_data=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_user_data");
 
-    G_DEF_SETTERS(gObject);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

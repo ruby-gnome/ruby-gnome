@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cPrintContext
 #define _SELF(s) (GTK_PRINT_CONTEXT(RVAL2GOBJ(s)))
 
 #  ifdef HAVE_RB_CAIRO_H
@@ -103,32 +104,32 @@ void
 Init_gtk_print_context(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPrintContext = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,
                                       "PrintContext", mGtk);
 
     /* Rendering */
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gPrintContext, "cairo_context", pc_get_cairo_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cairo_context", pc_get_cairo_context, 0);
 #  endif
-    rb_define_method(gPrintContext, "page_setup", pc_get_page_setup, 0);
-    rb_define_method(gPrintContext, "width", pc_get_width, 0);
-    rb_define_method(gPrintContext, "height", pc_get_height, 0);
-    rb_define_method(gPrintContext, "dpi_x", pc_get_dpi_x, 0);
-    rb_define_method(gPrintContext, "dpi_y", pc_get_dpi_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "page_setup", pc_get_page_setup, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", pc_get_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", pc_get_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dpi_x", pc_get_dpi_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dpi_y", pc_get_dpi_y, 0);
 
     /* Fonts */
-    rb_define_method(gPrintContext, "pango_fontmap", pc_get_pango_fontmap, 0);
-    rb_define_method(gPrintContext, "create_pango_context",
+    rb_define_method(RG_TARGET_NAMESPACE, "pango_fontmap", pc_get_pango_fontmap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_pango_context",
                      pc_create_pango_context, 0);
-    rb_define_method(gPrintContext, "create_pango_layout",
+    rb_define_method(RG_TARGET_NAMESPACE, "create_pango_layout",
                      pc_create_pango_layout, 0);
 
     /* Needed for preview implementations */
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gPrintContext, "set_cairo_context",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cairo_context",
                      pc_set_cairo_context, 3);
 #  endif
 
-    G_DEF_SETTERS(gPrintContext);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

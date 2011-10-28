@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mProperty
+
 static VALUE
 gdkprop_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -311,19 +313,19 @@ gdkprop_delete(VALUE self, VALUE win, VALUE property)
 void
 Init_gtk_gdk_property(void)
 {
-    VALUE gdkProperty = rb_define_module_under(mGdk, "Property");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Property");
 
-    rb_define_module_function(gdkProperty, "text_property_to_text_list", gdkprop_text_property_to_text_list, -1);
-    rb_define_module_function(gdkProperty, "text_property_to_utf8_list", gdkprop_text_property_to_utf8_list, -1);
-    rb_define_module_function(gdkProperty, "string_to_compound_text", gdkprop_string_to_compound_text, -1);
-    rb_define_module_function(gdkProperty, "utf8_to_string_target", gdkprop_utf8_to_string_target, 1);
-    rb_define_module_function(gdkProperty, "utf8_to_compound_text", gdkprop_utf8_to_compound_text, -1);
-    rb_define_module_function(gdkProperty, "change", gdkprop_change, -1);
-    rb_define_module_function(gdkProperty, "get", gdkprop_get, -1);
-    rb_define_module_function(gdkProperty, "delete", gdkprop_delete, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "text_property_to_text_list", gdkprop_text_property_to_text_list, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "text_property_to_utf8_list", gdkprop_text_property_to_utf8_list, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "string_to_compound_text", gdkprop_string_to_compound_text, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "utf8_to_string_target", gdkprop_utf8_to_string_target, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "utf8_to_compound_text", gdkprop_utf8_to_compound_text, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "change", gdkprop_change, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get", gdkprop_get, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "delete", gdkprop_delete, 2);
 
     /* GdkPropMode from GdkProperties */
-    G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", gdkProperty);
-    G_DEF_CONSTANTS(gdkProperty, GDK_TYPE_PROP_MODE, "GDK_PROP_");
+    G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_PROP_MODE, "GDK_PROP_");
 
 }

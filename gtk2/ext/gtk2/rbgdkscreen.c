@@ -26,6 +26,8 @@
 #endif
 
 #if GTK_CHECK_VERSION(2,2,0)
+
+#define RG_TARGET_NAMESPACE cScreen
 #define _SELF(i) GDK_SCREEN(RVAL2GOBJ(i))
 
 static ID id_new;
@@ -385,60 +387,60 @@ void
 Init_gtk_gdk_screen(void)
 {
 #if GTK_CHECK_VERSION(2,2,0)
-    VALUE gdkScreen = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
 
     id_new = rb_intern("new");
 
-    rb_define_singleton_method(gdkScreen, "default", gdkscreen_default, 0);
-    rb_define_method(gdkScreen, "default_colormap", gdkscreen_get_default_colormap, 0);
-    rb_define_method(gdkScreen, "set_default_colormap", gdkscreen_set_default_colormap, 1);
-    G_DEF_SETTER(gdkScreen, "default_colormap");
-    rb_define_method(gdkScreen, "system_colormap", gdkscreen_get_system_colormap, 0);
-    rb_define_method(gdkScreen, "system_visual", gdkscreen_get_system_visual, 0);
-    rb_define_method(gdkScreen, "rgb_colormap", gdkscreen_get_rgb_colormap, 0);
-    rb_define_method(gdkScreen, "rgb_visual", gdkscreen_get_rgb_visual, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", gdkscreen_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "default_colormap", gdkscreen_get_default_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_default_colormap", gdkscreen_set_default_colormap, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "default_colormap");
+    rb_define_method(RG_TARGET_NAMESPACE, "system_colormap", gdkscreen_get_system_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "system_visual", gdkscreen_get_system_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rgb_colormap", gdkscreen_get_rgb_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rgb_visual", gdkscreen_get_rgb_visual, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gdkScreen, "rgba_colormap", gdkscreen_get_rgba_colormap, 0);
-    rb_define_method(gdkScreen, "rgba_visual", gdkscreen_get_rgba_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rgba_colormap", gdkscreen_get_rgba_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rgba_visual", gdkscreen_get_rgba_visual, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gdkScreen, "composited?", gdkscreen_is_composited, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "composited?", gdkscreen_is_composited, 0);
 #endif
-    rb_define_method(gdkScreen, "root_window", gdkscreen_get_root_window, 0);
-    rb_define_method(gdkScreen, "display", gdkscreen_get_display, 0);
-    rb_define_method(gdkScreen, "number", gdkscreen_number, 0);
-    rb_define_method(gdkScreen, "width", gdkscreen_width, 0);
-    rb_define_method(gdkScreen, "height", gdkscreen_height, 0);
-    rb_define_method(gdkScreen, "width_mm", gdkscreen_width_mm, 0);
-    rb_define_method(gdkScreen, "height_mm", gdkscreen_height_mm, 0);
-    rb_define_method(gdkScreen, "visuals", gdkscreen_list_visuals, 0);
-    rb_define_method(gdkScreen, "toplevel_windows", gdkscreen_get_toplevel_windows, 0);
-    rb_define_method(gdkScreen, "display_name", gdkscreen_make_display_name, 0);
-    rb_define_method(gdkScreen, "n_monitors", gdkscreen_n_monitors, 0);
-    rb_define_method(gdkScreen, "monitor_geometry", gdkscreen_monitor_geometry, 1);
-    rb_define_method(gdkScreen, "get_monitor", gdkscreen_get_monitor, -1);
-    rb_define_method(gdkScreen, "broadcast_client_message", gdkscreen_broadcast_client_message, 1);
-    rb_define_method(gdkScreen, "get_setting", gdkscreen_get_setting, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "root_window", gdkscreen_get_root_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display", gdkscreen_get_display, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "number", gdkscreen_number, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", gdkscreen_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", gdkscreen_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width_mm", gdkscreen_width_mm, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height_mm", gdkscreen_height_mm, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visuals", gdkscreen_list_visuals, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toplevel_windows", gdkscreen_get_toplevel_windows, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", gdkscreen_make_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_monitors", gdkscreen_n_monitors, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "monitor_geometry", gdkscreen_monitor_geometry, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_monitor", gdkscreen_get_monitor, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "broadcast_client_message", gdkscreen_broadcast_client_message, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_setting", gdkscreen_get_setting, -1);
 #if GTK_CHECK_VERSION(2,10,0)
 #ifdef HAVE_RB_CAIRO_H
-    G_REPLACE_GET_PROPERTY(gdkScreen, "font_options", gdkscreen_get_font_options, 0);
-    G_REPLACE_SET_PROPERTY(gdkScreen, "font_options", gdkscreen_set_font_options, 1);
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "font_options", gdkscreen_get_font_options, 0);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "font_options", gdkscreen_set_font_options, 1);
 #endif
-    rb_define_method(gdkScreen, "active_window", gdkscreen_get_active_window, 0);
-    rb_define_method(gdkScreen, "window_stack", gdkscreen_get_window_stack, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "active_window", gdkscreen_get_active_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "window_stack", gdkscreen_get_window_stack, 0);
 #endif
 
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gdkScreen, "spawn_on_screen", gdkscreen_spawn_on_screen, 4);
-    rb_define_method(gdkScreen, "spawn_on_screen_with_pipes", gdkscreen_spawn_on_screen_with_pipes, 4);
-    rb_define_method(gdkScreen, "spawn_command_line_on_screen", gdkscreen_spawn_command_line_on_screen, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "spawn_on_screen", gdkscreen_spawn_on_screen, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "spawn_on_screen_with_pipes", gdkscreen_spawn_on_screen_with_pipes, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "spawn_command_line_on_screen", gdkscreen_spawn_command_line_on_screen, 1);
 #endif
 
 #ifdef GDK_WINDOWING_X11
-    rb_define_method(gdkScreen, "xnumber", gdkscreen_xnumber, 0);
-    rb_define_method(gdkScreen, "supports_net_wm_hint?", gdkscreen_supports_net_wm_hint, 0);
-    rb_define_method(gdkScreen, "window_manager_name", gdkscreen_get_window_manager_name, 0);
-    rb_define_method(gdkScreen, "screen_number", gdkscreen_get_screen_number, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "xnumber", gdkscreen_xnumber, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "supports_net_wm_hint?", gdkscreen_supports_net_wm_hint, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "window_manager_name", gdkscreen_get_window_manager_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "screen_number", gdkscreen_get_screen_number, 0);
 #endif
 
   #ifdef GDK_WINDOWING_X11

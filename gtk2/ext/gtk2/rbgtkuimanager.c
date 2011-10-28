@@ -24,6 +24,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cUIManager
 #define _SELF(self) (GTK_UI_MANAGER(RVAL2GOBJ(self)))
 
 static VALUE
@@ -178,28 +179,28 @@ void
 Init_gtk_uimanager(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gUI;
+    VALUE RG_TARGET_NAMESPACE;
 
-    gUI = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_UI_MANAGER, "UIManager", mGtk,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_UI_MANAGER, "UIManager", mGtk,
 				   rbuimanager_mark, NULL);
 
-    rb_define_method(gUI, "initialize", rbuimanager_initialize, 0);
-    rb_define_method(gUI, "insert_action_group", rbuimanager_insert_action_group, 2);
-    rb_define_method(gUI, "remove_action_group", rbuimanager_remove_action_group, 1);
-    rb_define_method(gUI, "action_groups", rbuimanager_get_action_groups, 0);
-    rb_define_method(gUI, "accel_group", rbuimanager_get_accel_group, 0);
-    rb_define_method(gUI, "get_widget", rbuimanager_get_widget, 1);
-    rb_define_alias(gUI, "[]", "get_widget");
-    rb_define_method(gUI, "get_toplevels", rbuimanager_get_toplevels, 1);
-    rb_define_method(gUI, "get_action", rbuimanager_get_action, 1);
-    rb_define_method(gUI, "add_ui", rbuimanager_add_ui, -1);
-    rb_define_method(gUI, "new_merge_id", rbuimanager_new_merge_id, 0);
-    rb_define_method(gUI, "remove_ui", rbuimanager_remove_ui, 1);
-    rb_define_method(gUI, "ensure_update", rbuimanager_ensure_update, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbuimanager_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_action_group", rbuimanager_insert_action_group, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_action_group", rbuimanager_remove_action_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "action_groups", rbuimanager_get_action_groups, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "accel_group", rbuimanager_get_accel_group, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_widget", rbuimanager_get_widget, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_widget");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_toplevels", rbuimanager_get_toplevels, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_action", rbuimanager_get_action, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_ui", rbuimanager_add_ui, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "new_merge_id", rbuimanager_new_merge_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_ui", rbuimanager_remove_ui, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ensure_update", rbuimanager_ensure_update, 0);
 
     /* GtkUIManagerItemType */
-    G_DEF_CLASS(GTK_TYPE_UI_MANAGER_ITEM_TYPE, "ItemType", gUI);
-    G_DEF_CONSTANTS(gUI, GTK_TYPE_UI_MANAGER_ITEM_TYPE, "GTK_UI_MANAGER_");
+    G_DEF_CLASS(GTK_TYPE_UI_MANAGER_ITEM_TYPE, "ItemType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_UI_MANAGER_ITEM_TYPE, "GTK_UI_MANAGER_");
                                                                                 
 #endif
 }

@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVisual
 #define _SELF(self) (GDK_VISUAL(RVAL2GOBJ(self)))
 
 static VALUE
@@ -212,44 +213,44 @@ gdkvisual_blue_prec(VALUE self)
 void
 Init_gtk_gdk_visual(void)
 {
-    VALUE gdkVisual = G_DEF_CLASS(GDK_TYPE_VISUAL, "Visual", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_VISUAL, "Visual", mGdk);
 
     /* class methods */
-    rb_define_singleton_method(gdkVisual, "query_depths", gdkvisual_s_query_depths, 0);
-    rb_define_singleton_method(gdkVisual, "query_visual_types", gdkvisual_s_query_visual_types, 0);
-    rb_define_singleton_method(gdkVisual, "visuals", gdkvisual_s_list_visuals, 0);
-    rb_define_singleton_method(gdkVisual, "best_depth", gdkvisual_s_get_best_depth, 0);
-    rb_define_singleton_method(gdkVisual, "best_type", gdkvisual_s_get_best_type, 0);
-    rb_define_singleton_method(gdkVisual, "system", gdkvisual_s_get_system, 0);
-    rb_define_singleton_method(gdkVisual, "best", gdkvisual_s_get_best, 0);
-    rb_define_singleton_method(gdkVisual, "best_with_depth", gdkvisual_s_get_best_with_depth, 1);
-    rb_define_singleton_method(gdkVisual, "best_with_type", gdkvisual_s_get_best_with_type, 1);
-    rb_define_singleton_method(gdkVisual, "best_with_both", gdkvisual_s_get_best_with_both, 2);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "query_depths", gdkvisual_s_query_depths, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "query_visual_types", gdkvisual_s_query_visual_types, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "visuals", gdkvisual_s_list_visuals, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "best_depth", gdkvisual_s_get_best_depth, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "best_type", gdkvisual_s_get_best_type, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "system", gdkvisual_s_get_system, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "best", gdkvisual_s_get_best, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "best_with_depth", gdkvisual_s_get_best_with_depth, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "best_with_type", gdkvisual_s_get_best_with_type, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "best_with_both", gdkvisual_s_get_best_with_both, 2);
 
     /* instance methods */
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkVisual, "screen", gdkvisual_get_screen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "screen", gdkvisual_get_screen, 0);
 #endif
-    rb_define_method(gdkVisual, "visual_type", gdkvisual_type, 0);
-    rb_define_method(gdkVisual, "depth", gdkvisual_depth, 0);
-    rb_define_method(gdkVisual, "byte_order", gdkvisual_byte_order, 0);
-    rb_define_method(gdkVisual, "colormap_size", gdkvisual_colormap_size, 0);
-    rb_define_method(gdkVisual, "bits_per_rgb", gdkvisual_bits_per_rgb, 0);
-    rb_define_method(gdkVisual, "red_mask", gdkvisual_red_mask, 0);
-    rb_define_method(gdkVisual, "red_shift", gdkvisual_red_shift, 0);
-    rb_define_method(gdkVisual, "red_prec", gdkvisual_red_prec, 0);
-    rb_define_method(gdkVisual, "green_mask", gdkvisual_green_mask, 0);
-    rb_define_method(gdkVisual, "green_shift", gdkvisual_green_shift, 0);
-    rb_define_method(gdkVisual, "green_prec", gdkvisual_green_prec, 0);
-    rb_define_method(gdkVisual, "blue_mask", gdkvisual_blue_mask, 0);
-    rb_define_method(gdkVisual, "blue_shift", gdkvisual_blue_shift, 0);
-    rb_define_method(gdkVisual, "blue_prec", gdkvisual_blue_prec, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visual_type", gdkvisual_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "depth", gdkvisual_depth, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "byte_order", gdkvisual_byte_order, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "colormap_size", gdkvisual_colormap_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bits_per_rgb", gdkvisual_bits_per_rgb, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "red_mask", gdkvisual_red_mask, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "red_shift", gdkvisual_red_shift, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "red_prec", gdkvisual_red_prec, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "green_mask", gdkvisual_green_mask, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "green_shift", gdkvisual_green_shift, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "green_prec", gdkvisual_green_prec, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "blue_mask", gdkvisual_blue_mask, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "blue_shift", gdkvisual_blue_shift, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "blue_prec", gdkvisual_blue_prec, 0);
 
     /* GdkVisualType */
-    G_DEF_CLASS(GDK_TYPE_VISUAL_TYPE, "Type", gdkVisual);
-    G_DEF_CONSTANTS(gdkVisual, GDK_TYPE_VISUAL_TYPE, "GDK_VISUAL_");
+    G_DEF_CLASS(GDK_TYPE_VISUAL_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_VISUAL_TYPE, "GDK_VISUAL_");
 
     /* GdkByteOrder */
-    G_DEF_CLASS(GDK_TYPE_BYTE_ORDER, "ByteOrder", gdkVisual);
-    G_DEF_CONSTANTS(gdkVisual, GDK_TYPE_BYTE_ORDER, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_BYTE_ORDER, "ByteOrder", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_BYTE_ORDER, "GDK_");
 }

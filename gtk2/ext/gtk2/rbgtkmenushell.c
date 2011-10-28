@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenuShell
 #define _SELF(self) (GTK_MENU_SHELL(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
@@ -103,19 +104,19 @@ gboolean    gtk_menu_shell_get_take_focus   (GtkMenuShell *menu_shell);
 void 
 Init_gtk_menu_shell(void)
 {
-    VALUE gMenuShell = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);
 
-    rb_define_method(gMenuShell, "append", mshell_append, 1);
-    rb_define_method(gMenuShell, "prepend", mshell_prepend, 1);
-    rb_define_method(gMenuShell, "insert", mshell_insert, 2);
-    rb_define_method(gMenuShell, "deactivate", mshell_deactivate, 0);
-    rb_define_method(gMenuShell, "select_item", mshell_select_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append", mshell_append, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend", mshell_prepend, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert", mshell_insert, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "deactivate", mshell_deactivate, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_item", mshell_select_item, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gMenuShell, "select_first", mshell_select_first, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "select_first", mshell_select_first, 1);
 #endif
-    rb_define_method(gMenuShell, "deselect", mshell_deselect, 0);
-    rb_define_method(gMenuShell, "activate_item", mshell_activate_item, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "deselect", mshell_deselect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "activate_item", mshell_activate_item, 2);
     /* GtkMenuDirectionType */
-    G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", gMenuShell);
-    G_DEF_CONSTANTS(gMenuShell, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");
+    G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");
 }

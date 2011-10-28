@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mSelection
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
@@ -126,34 +127,34 @@ gdkselection_send_notify(int argc, VALUE *argv, VALUE self)
 void
 Init_gtk_gdk_selection(void)
 {
-    VALUE mGdkSelection = rb_define_module_under(mGdk, "Selection");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Selection");
 
-    rb_define_module_function(mGdkSelection, "owner_set", gdkselection_owner_set, -1);
-    rb_define_module_function(mGdkSelection, "owner_get", gdkselection_owner_get, -1);
-    rb_define_module_function(mGdkSelection, "convert", gdkselection_convert, 4);
-    rb_define_module_function(mGdkSelection, "property_get", gdkselection_property_get, 1);
-    rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "owner_set", gdkselection_owner_set, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "owner_get", gdkselection_owner_get, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "convert", gdkselection_convert, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "property_get", gdkselection_property_get, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "send_notify", gdkselection_send_notify, -1);
 
     /* Constants */
-    rb_define_const(mGdkSelection, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
-    rb_define_const(mGdkSelection, "SECONDARY", GATOM2RVAL(GDK_SELECTION_SECONDARY));
-    rb_define_const(mGdkSelection, "CLIPBOARD", GATOM2RVAL(GDK_SELECTION_CLIPBOARD));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
+    rb_define_const(RG_TARGET_NAMESPACE, "SECONDARY", GATOM2RVAL(GDK_SELECTION_SECONDARY));
+    rb_define_const(RG_TARGET_NAMESPACE, "CLIPBOARD", GATOM2RVAL(GDK_SELECTION_CLIPBOARD));
     
     /* GdkSelectionType */
-    rb_define_const(mGdkSelection, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
-    rb_define_const(mGdkSelection, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));
-    rb_define_const(mGdkSelection, "TYPE_COLORMAP", GATOM2RVAL(GDK_SELECTION_TYPE_COLORMAP));
-    rb_define_const(mGdkSelection, "TYPE_DRAWABLE", GATOM2RVAL(GDK_SELECTION_TYPE_DRAWABLE));
-    rb_define_const(mGdkSelection, "TYPE_INTEGER", GATOM2RVAL(GDK_SELECTION_TYPE_INTEGER));
-    rb_define_const(mGdkSelection, "TYPE_PIXMAP", GATOM2RVAL(GDK_SELECTION_TYPE_PIXMAP));
-    rb_define_const(mGdkSelection, "TYPE_WINDOW", GATOM2RVAL(GDK_SELECTION_TYPE_WINDOW));
-    rb_define_const(mGdkSelection, "TYPE_STRING", GATOM2RVAL(GDK_SELECTION_TYPE_STRING));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_COLORMAP", GATOM2RVAL(GDK_SELECTION_TYPE_COLORMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_DRAWABLE", GATOM2RVAL(GDK_SELECTION_TYPE_DRAWABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_INTEGER", GATOM2RVAL(GDK_SELECTION_TYPE_INTEGER));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_PIXMAP", GATOM2RVAL(GDK_SELECTION_TYPE_PIXMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_WINDOW", GATOM2RVAL(GDK_SELECTION_TYPE_WINDOW));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRING", GATOM2RVAL(GDK_SELECTION_TYPE_STRING));
 
     /* GdkTarget */
-    rb_define_const(mGdkSelection, "TARGET_BITMAP", GATOM2RVAL(GDK_TARGET_BITMAP));
-    rb_define_const(mGdkSelection, "TARGET_COLORMAP", GATOM2RVAL(GDK_TARGET_COLORMAP));
-    rb_define_const(mGdkSelection, "TARGET_DRAWABLE", GATOM2RVAL(GDK_TARGET_DRAWABLE));
-    rb_define_const(mGdkSelection, "TARGET_PIXMAP", GATOM2RVAL(GDK_TARGET_PIXMAP));
-    rb_define_const(mGdkSelection, "TARGET_STRING", GATOM2RVAL(GDK_TARGET_STRING));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_BITMAP", GATOM2RVAL(GDK_TARGET_BITMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_COLORMAP", GATOM2RVAL(GDK_TARGET_COLORMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_DRAWABLE", GATOM2RVAL(GDK_TARGET_DRAWABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_PIXMAP", GATOM2RVAL(GDK_TARGET_PIXMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_STRING", GATOM2RVAL(GDK_TARGET_STRING));
 
 }

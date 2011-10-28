@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAccelGroup
 #define _SELF(w) GTK_ACCEL_GROUP(RVAL2GOBJ(w))
 #define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
 
@@ -187,22 +188,22 @@ gaccelgrp_s_from_object(G_GNUC_UNUSED VALUE self, VALUE object)
 void 
 Init_gtk_accel_group(void)
 {
-    VALUE gAccelGroup = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
 
-    rb_define_singleton_method(gAccelGroup, "activate", gaccelgrp_s_activate, 3);
-    rb_define_singleton_method(gAccelGroup, "from_object", gaccelgrp_s_from_object, 1);
-    rb_define_singleton_method(gAccelGroup, "from_accel_closure", gaccelgrp_s_from_accel_closure, 1);
-    rb_define_method(gAccelGroup, "initialize", gaccelgrp_initialize, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "activate", gaccelgrp_s_activate, 3);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_object", gaccelgrp_s_from_object, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_accel_closure", gaccelgrp_s_from_accel_closure, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gaccelgrp_initialize, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gAccelGroup, "activate", gaccelgrp_activate, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "activate", gaccelgrp_activate, 4);
 #endif
-    rb_define_method(gAccelGroup, "lock", gaccelgrp_lock, 0);
-    rb_define_method(gAccelGroup, "unlock", gaccelgrp_unlock, 0);
-    rb_define_method(gAccelGroup, "connect", gaccelgrp_connect, -1);
-    rb_define_method(gAccelGroup, "disconnect", gaccelgrp_disconnect, 1);
-    rb_define_method(gAccelGroup, "disconnect_key", gaccelgrp_disconnect_key, 2);
-    rb_define_method(gAccelGroup, "query", gaccelgrp_query, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "lock", gaccelgrp_lock, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unlock", gaccelgrp_unlock, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "connect", gaccelgrp_connect, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "disconnect", gaccelgrp_disconnect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "disconnect_key", gaccelgrp_disconnect_key, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "query", gaccelgrp_query, 2);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gAccelGroup, "find", gaccelgrp_find, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "find", gaccelgrp_find, 0);
 #endif
 }

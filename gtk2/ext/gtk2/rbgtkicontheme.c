@@ -22,6 +22,8 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,4,0)
+
+#define RG_TARGET_NAMESPACE cIconTheme
 #define _SELF(i) GTK_ICON_THEME(RVAL2GOBJ(i))
 
 #define RVAL2ICON_LOOKUP_FLAGS(flags) (RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS))
@@ -240,43 +242,43 @@ void
 Init_gtk_icon_theme(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE it = G_DEF_CLASS(GTK_TYPE_ICON_THEME, "IconTheme", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_THEME, "IconTheme", mGtk);
 
-    rb_define_method(it, "initialize", it_initialize, 0);
-    rb_define_singleton_method(it, "default", it_get_default, 0);
-    rb_define_singleton_method(it, "get_for_screen", it_get_for_screen, 1);
-    rb_define_method(it, "set_screen", it_set_screen, 1);
-    rb_define_method(it, "set_search_path", it_set_search_path, 1);
-    rb_define_method(it, "search_path", it_get_search_path, 0);
-    rb_define_method(it, "append_search_path", it_append_search_path, 1);
-    rb_define_method(it, "prepend_search_path", it_prepend_search_path, 1);
-    rb_define_method(it, "set_custom_theme", it_set_custom_theme, 1);
-    rb_define_method(it, "has_icon?", it_has_icon, 1);
-    rb_define_method(it, "lookup_icon", it_lookup_icon, 3);
-    rb_define_method(it, "load_icon", it_load_icon, 3);
-    rb_define_method(it, "icons", it_list_icons, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", it_initialize, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", it_get_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get_for_screen", it_get_for_screen, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_screen", it_set_screen, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_search_path", it_set_search_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "search_path", it_get_search_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_search_path", it_append_search_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepend_search_path", it_prepend_search_path, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_custom_theme", it_set_custom_theme, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_icon?", it_has_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup_icon", it_lookup_icon, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_icon", it_load_icon, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "icons", it_list_icons, -1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(it, "get_icon_sizes", it_get_icon_sizes, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_icon_sizes", it_get_icon_sizes, 1);
 #endif
-    rb_define_method(it, "example_icon_name", it_get_example_icon_name, 0);
-    rb_define_method(it, "rescan_if_needed", it_rescan_if_needed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "example_icon_name", it_get_example_icon_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rescan_if_needed", it_rescan_if_needed, 0);
 
-    rb_define_singleton_method(it, "add_builtin_icon", it_s_add_builtin_icon, 3);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "add_builtin_icon", it_s_add_builtin_icon, 3);
 
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(it, "choose_icon", it_choose_icon, -1);
-    rb_define_method(it, "contexts", it_list_contexts, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "choose_icon", it_choose_icon, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "contexts", it_list_contexts, 0);
 #endif
 
-    G_DEF_SETTERS(it);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkIconThemeError */
     G_DEF_ERROR(GTK_ICON_THEME_ERROR, "IconThemeError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_ICON_THEME_ERROR);
 
     /* GtkIconLookupFlags */
-    G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", it);
-    G_DEF_CONSTANTS(it, GTK_TYPE_ICON_LOOKUP_FLAGS, "GTK_ICON_");
+    G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_LOOKUP_FLAGS, "GTK_ICON_");
 
 #endif
 }

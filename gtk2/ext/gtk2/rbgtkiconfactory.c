@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIconFactory
 #define _SELF(s) (GTK_ICON_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
@@ -73,13 +74,13 @@ ifactory_remove_default(VALUE self)
 void
 Init_gtk_icon_factory(void)
 {
-    VALUE gIconFactory = G_DEF_CLASS(GTK_TYPE_ICON_FACTORY, "IconFactory", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_FACTORY, "IconFactory", mGtk);
 
-    rb_define_method(gIconFactory, "initialize", ifactory_initialize, 0);
-    rb_define_method(gIconFactory, "add", ifactory_add, 2);
-    rb_define_method(gIconFactory, "add_default", ifactory_add_default, 0);
-    rb_define_method(gIconFactory, "remove_default", ifactory_remove_default, 0);
-    rb_define_method(gIconFactory, "lookup", ifactory_lookup, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ifactory_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", ifactory_add, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_default", ifactory_add_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_default", ifactory_remove_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup", ifactory_lookup, 1);
     
-    rb_define_singleton_method(gIconFactory, "lookup_default", ifactory_lookup_default, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lookup_default", ifactory_lookup_default, 1);
 }

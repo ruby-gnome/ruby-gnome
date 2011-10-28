@@ -21,6 +21,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mStock
+
 #define Check_Symbol(sym) do { \
     if (!SYMBOL_P(sym)) \
         rb_raise(rb_eArgError, "invalid argument %s (expect Symbol)", \
@@ -103,164 +105,164 @@ stock_m_set_translate_func(VALUE klass, VALUE domain)
 void
 Init_gtk_stock(void)
 {
-    VALUE mGtkStock = rb_define_module_under(mGtk, "Stock");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Stock");
 
-    rb_undef_method(mGtkStock, "new");
-    rb_define_singleton_method(mGtkStock, "add", stock_m_add, -1);
-    rb_define_singleton_method(mGtkStock, "lookup", stock_m_lookup, 1);
-    rb_define_singleton_method(mGtkStock, "ids", stock_m_list_ids, 0);
+    rb_undef_method(RG_TARGET_NAMESPACE, "new");
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "add", stock_m_add, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lookup", stock_m_lookup, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "ids", stock_m_list_ids, 0);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_singleton_method(mGtkStock, "set_translate_func", stock_m_set_translate_func, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_translate_func", stock_m_set_translate_func, 1);
 #endif
 
     /* Stock IDs (not all are stock items; some are images only) */
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "ABOUT", CSTR2SYM(GTK_STOCK_ABOUT));
+    rb_define_const(RG_TARGET_NAMESPACE, "ABOUT", CSTR2SYM(GTK_STOCK_ABOUT));
 #endif
-    rb_define_const(mGtkStock, "ADD", CSTR2SYM(GTK_STOCK_ADD));
-    rb_define_const(mGtkStock, "APPLY", CSTR2SYM(GTK_STOCK_APPLY));
-    rb_define_const(mGtkStock, "BOLD", CSTR2SYM(GTK_STOCK_BOLD));
-    rb_define_const(mGtkStock, "CANCEL", CSTR2SYM(GTK_STOCK_CANCEL));
+    rb_define_const(RG_TARGET_NAMESPACE, "ADD", CSTR2SYM(GTK_STOCK_ADD));
+    rb_define_const(RG_TARGET_NAMESPACE, "APPLY", CSTR2SYM(GTK_STOCK_APPLY));
+    rb_define_const(RG_TARGET_NAMESPACE, "BOLD", CSTR2SYM(GTK_STOCK_BOLD));
+    rb_define_const(RG_TARGET_NAMESPACE, "CANCEL", CSTR2SYM(GTK_STOCK_CANCEL));
 #if GTK_CHECK_VERSION(2,16,0)
-    rb_define_const(mGtkStock, "CAPS_LOCK_WARNING", CSTR2SYM(GTK_STOCK_CAPS_LOCK_WARNING));
+    rb_define_const(RG_TARGET_NAMESPACE, "CAPS_LOCK_WARNING", CSTR2SYM(GTK_STOCK_CAPS_LOCK_WARNING));
 #endif
-    rb_define_const(mGtkStock, "CDROM", CSTR2SYM(GTK_STOCK_CDROM));
-    rb_define_const(mGtkStock, "CLEAR", CSTR2SYM(GTK_STOCK_CLEAR));
-    rb_define_const(mGtkStock, "CLOSE", CSTR2SYM(GTK_STOCK_CLOSE));
+    rb_define_const(RG_TARGET_NAMESPACE, "CDROM", CSTR2SYM(GTK_STOCK_CDROM));
+    rb_define_const(RG_TARGET_NAMESPACE, "CLEAR", CSTR2SYM(GTK_STOCK_CLEAR));
+    rb_define_const(RG_TARGET_NAMESPACE, "CLOSE", CSTR2SYM(GTK_STOCK_CLOSE));
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_const(mGtkStock, "COLOR_PICKER", CSTR2SYM(GTK_STOCK_COLOR_PICKER));
+    rb_define_const(RG_TARGET_NAMESPACE, "COLOR_PICKER", CSTR2SYM(GTK_STOCK_COLOR_PICKER));
 #endif
-    rb_define_const(mGtkStock, "CONVERT", CSTR2SYM(GTK_STOCK_CONVERT));
+    rb_define_const(RG_TARGET_NAMESPACE, "CONVERT", CSTR2SYM(GTK_STOCK_CONVERT));
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "CONNECT", CSTR2SYM(GTK_STOCK_CONNECT));
+    rb_define_const(RG_TARGET_NAMESPACE, "CONNECT", CSTR2SYM(GTK_STOCK_CONNECT));
 #endif
-    rb_define_const(mGtkStock, "COPY", CSTR2SYM(GTK_STOCK_COPY));
-    rb_define_const(mGtkStock, "CUT", CSTR2SYM(GTK_STOCK_CUT));
-    rb_define_const(mGtkStock, "DELETE", CSTR2SYM(GTK_STOCK_DELETE));
+    rb_define_const(RG_TARGET_NAMESPACE, "COPY", CSTR2SYM(GTK_STOCK_COPY));
+    rb_define_const(RG_TARGET_NAMESPACE, "CUT", CSTR2SYM(GTK_STOCK_CUT));
+    rb_define_const(RG_TARGET_NAMESPACE, "DELETE", CSTR2SYM(GTK_STOCK_DELETE));
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_const(mGtkStock, "DIALOG_AUTHENTICATION", CSTR2SYM(GTK_STOCK_DIALOG_AUTHENTICATION));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIALOG_AUTHENTICATION", CSTR2SYM(GTK_STOCK_DIALOG_AUTHENTICATION));
 #endif
-    rb_define_const(mGtkStock, "DIALOG_ERROR", CSTR2SYM(GTK_STOCK_DIALOG_ERROR));
-    rb_define_const(mGtkStock, "DIALOG_INFO", CSTR2SYM(GTK_STOCK_DIALOG_INFO));
-    rb_define_const(mGtkStock, "DIALOG_QUESTION", CSTR2SYM(GTK_STOCK_DIALOG_QUESTION));
-    rb_define_const(mGtkStock, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIALOG_ERROR", CSTR2SYM(GTK_STOCK_DIALOG_ERROR));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIALOG_INFO", CSTR2SYM(GTK_STOCK_DIALOG_INFO));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIALOG_QUESTION", CSTR2SYM(GTK_STOCK_DIALOG_QUESTION));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIALOG_WARNING", CSTR2SYM(GTK_STOCK_DIALOG_WARNING));
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "DIRECTORY", CSTR2SYM(GTK_STOCK_DIRECTORY));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIRECTORY", CSTR2SYM(GTK_STOCK_DIRECTORY));
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_const(mGtkStock, "DISCARD", CSTR2SYM(GTK_STOCK_DISCARD));
+    rb_define_const(RG_TARGET_NAMESPACE, "DISCARD", CSTR2SYM(GTK_STOCK_DISCARD));
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "DISCONNECT", CSTR2SYM(GTK_STOCK_DISCONNECT));
+    rb_define_const(RG_TARGET_NAMESPACE, "DISCONNECT", CSTR2SYM(GTK_STOCK_DISCONNECT));
 #endif
-    rb_define_const(mGtkStock, "DND", CSTR2SYM(GTK_STOCK_DND));
-    rb_define_const(mGtkStock, "DND_MULTIPLE", CSTR2SYM(GTK_STOCK_DND_MULTIPLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "DND", CSTR2SYM(GTK_STOCK_DND));
+    rb_define_const(RG_TARGET_NAMESPACE, "DND_MULTIPLE", CSTR2SYM(GTK_STOCK_DND_MULTIPLE));
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "EDIT", CSTR2SYM(GTK_STOCK_EDIT));
-    rb_define_const(mGtkStock, "FILE", CSTR2SYM(GTK_STOCK_FILE));
+    rb_define_const(RG_TARGET_NAMESPACE, "EDIT", CSTR2SYM(GTK_STOCK_EDIT));
+    rb_define_const(RG_TARGET_NAMESPACE, "FILE", CSTR2SYM(GTK_STOCK_FILE));
 #endif
-    rb_define_const(mGtkStock, "EXECUTE", CSTR2SYM(GTK_STOCK_EXECUTE));
-    rb_define_const(mGtkStock, "FIND", CSTR2SYM(GTK_STOCK_FIND));
-    rb_define_const(mGtkStock, "FIND_AND_REPLACE", CSTR2SYM(GTK_STOCK_FIND_AND_REPLACE));
-    rb_define_const(mGtkStock, "FLOPPY", CSTR2SYM(GTK_STOCK_FLOPPY));
+    rb_define_const(RG_TARGET_NAMESPACE, "EXECUTE", CSTR2SYM(GTK_STOCK_EXECUTE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FIND", CSTR2SYM(GTK_STOCK_FIND));
+    rb_define_const(RG_TARGET_NAMESPACE, "FIND_AND_REPLACE", CSTR2SYM(GTK_STOCK_FIND_AND_REPLACE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLOPPY", CSTR2SYM(GTK_STOCK_FLOPPY));
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_const(mGtkStock, "FULLSCREEN", CSTR2SYM(GTK_STOCK_FULLSCREEN));
+    rb_define_const(RG_TARGET_NAMESPACE, "FULLSCREEN", CSTR2SYM(GTK_STOCK_FULLSCREEN));
 #endif
-    rb_define_const(mGtkStock, "GOTO_BOTTOM", CSTR2SYM(GTK_STOCK_GOTO_BOTTOM));
-    rb_define_const(mGtkStock, "GOTO_FIRST", CSTR2SYM(GTK_STOCK_GOTO_FIRST));
-    rb_define_const(mGtkStock, "GOTO_LAST", CSTR2SYM(GTK_STOCK_GOTO_LAST));
-    rb_define_const(mGtkStock, "GOTO_TOP", CSTR2SYM(GTK_STOCK_GOTO_TOP));
-    rb_define_const(mGtkStock, "GO_BACK", CSTR2SYM(GTK_STOCK_GO_BACK));
-    rb_define_const(mGtkStock, "GO_DOWN", CSTR2SYM(GTK_STOCK_GO_DOWN));
-    rb_define_const(mGtkStock, "GO_FORWARD", CSTR2SYM(GTK_STOCK_GO_FORWARD));
-    rb_define_const(mGtkStock, "GO_UP", CSTR2SYM(GTK_STOCK_GO_UP));
+    rb_define_const(RG_TARGET_NAMESPACE, "GOTO_BOTTOM", CSTR2SYM(GTK_STOCK_GOTO_BOTTOM));
+    rb_define_const(RG_TARGET_NAMESPACE, "GOTO_FIRST", CSTR2SYM(GTK_STOCK_GOTO_FIRST));
+    rb_define_const(RG_TARGET_NAMESPACE, "GOTO_LAST", CSTR2SYM(GTK_STOCK_GOTO_LAST));
+    rb_define_const(RG_TARGET_NAMESPACE, "GOTO_TOP", CSTR2SYM(GTK_STOCK_GOTO_TOP));
+    rb_define_const(RG_TARGET_NAMESPACE, "GO_BACK", CSTR2SYM(GTK_STOCK_GO_BACK));
+    rb_define_const(RG_TARGET_NAMESPACE, "GO_DOWN", CSTR2SYM(GTK_STOCK_GO_DOWN));
+    rb_define_const(RG_TARGET_NAMESPACE, "GO_FORWARD", CSTR2SYM(GTK_STOCK_GO_FORWARD));
+    rb_define_const(RG_TARGET_NAMESPACE, "GO_UP", CSTR2SYM(GTK_STOCK_GO_UP));
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_const(mGtkStock, "HARDDISK", CSTR2SYM(GTK_STOCK_HARDDISK));
+    rb_define_const(RG_TARGET_NAMESPACE, "HARDDISK", CSTR2SYM(GTK_STOCK_HARDDISK));
 #endif
-    rb_define_const(mGtkStock, "HELP", CSTR2SYM(GTK_STOCK_HELP));
-    rb_define_const(mGtkStock, "HOME", CSTR2SYM(GTK_STOCK_HOME));
+    rb_define_const(RG_TARGET_NAMESPACE, "HELP", CSTR2SYM(GTK_STOCK_HELP));
+    rb_define_const(RG_TARGET_NAMESPACE, "HOME", CSTR2SYM(GTK_STOCK_HOME));
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_const(mGtkStock, "INDENT", CSTR2SYM(GTK_STOCK_INDENT));
+    rb_define_const(RG_TARGET_NAMESPACE, "INDENT", CSTR2SYM(GTK_STOCK_INDENT));
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_const(mGtkStock, "INFO", CSTR2SYM(GTK_STOCK_INFO));
+    rb_define_const(RG_TARGET_NAMESPACE, "INFO", CSTR2SYM(GTK_STOCK_INFO));
 #endif
-    rb_define_const(mGtkStock, "INDEX", CSTR2SYM(GTK_STOCK_INDEX));
-    rb_define_const(mGtkStock, "ITALIC", CSTR2SYM(GTK_STOCK_ITALIC));
-    rb_define_const(mGtkStock, "JUMP_TO", CSTR2SYM(GTK_STOCK_JUMP_TO));
-    rb_define_const(mGtkStock, "JUSTIFY_CENTER", CSTR2SYM(GTK_STOCK_JUSTIFY_CENTER));
-    rb_define_const(mGtkStock, "JUSTIFY_FILL", CSTR2SYM(GTK_STOCK_JUSTIFY_FILL));
-    rb_define_const(mGtkStock, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
-    rb_define_const(mGtkStock, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
+    rb_define_const(RG_TARGET_NAMESPACE, "INDEX", CSTR2SYM(GTK_STOCK_INDEX));
+    rb_define_const(RG_TARGET_NAMESPACE, "ITALIC", CSTR2SYM(GTK_STOCK_ITALIC));
+    rb_define_const(RG_TARGET_NAMESPACE, "JUMP_TO", CSTR2SYM(GTK_STOCK_JUMP_TO));
+    rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_CENTER", CSTR2SYM(GTK_STOCK_JUSTIFY_CENTER));
+    rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_FILL", CSTR2SYM(GTK_STOCK_JUSTIFY_FILL));
+    rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
+    rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_const(mGtkStock, "LEAVE_FULLSCREEN", CSTR2SYM(GTK_STOCK_LEAVE_FULLSCREEN));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEAVE_FULLSCREEN", CSTR2SYM(GTK_STOCK_LEAVE_FULLSCREEN));
 #endif
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_const(mGtkStock, "MEDIA_FORWARD", CSTR2SYM(GTK_STOCK_MEDIA_FORWARD));
-    rb_define_const(mGtkStock, "MEDIA_NEXT", CSTR2SYM(GTK_STOCK_MEDIA_NEXT));
-    rb_define_const(mGtkStock, "MEDIA_PAUSE", CSTR2SYM(GTK_STOCK_MEDIA_PAUSE));
-    rb_define_const(mGtkStock, "MEDIA_PLAY", CSTR2SYM(GTK_STOCK_MEDIA_PLAY));
-    rb_define_const(mGtkStock, "MEDIA_PREVIOUS", CSTR2SYM(GTK_STOCK_MEDIA_PREVIOUS));
-    rb_define_const(mGtkStock, "MEDIA_RECORD", CSTR2SYM(GTK_STOCK_MEDIA_RECORD));
-    rb_define_const(mGtkStock, "MEDIA_REWIND", CSTR2SYM(GTK_STOCK_MEDIA_REWIND));
-    rb_define_const(mGtkStock, "MEDIA_STOP", CSTR2SYM(GTK_STOCK_MEDIA_STOP));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_FORWARD", CSTR2SYM(GTK_STOCK_MEDIA_FORWARD));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_NEXT", CSTR2SYM(GTK_STOCK_MEDIA_NEXT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_PAUSE", CSTR2SYM(GTK_STOCK_MEDIA_PAUSE));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_PLAY", CSTR2SYM(GTK_STOCK_MEDIA_PLAY));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_PREVIOUS", CSTR2SYM(GTK_STOCK_MEDIA_PREVIOUS));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_RECORD", CSTR2SYM(GTK_STOCK_MEDIA_RECORD));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_REWIND", CSTR2SYM(GTK_STOCK_MEDIA_REWIND));
+    rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_STOP", CSTR2SYM(GTK_STOCK_MEDIA_STOP));
 #endif
-    rb_define_const(mGtkStock, "MISSING_IMAGE", CSTR2SYM(GTK_STOCK_MISSING_IMAGE));
+    rb_define_const(RG_TARGET_NAMESPACE, "MISSING_IMAGE", CSTR2SYM(GTK_STOCK_MISSING_IMAGE));
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_const(mGtkStock, "NETWORK", CSTR2SYM(GTK_STOCK_NETWORK));
+    rb_define_const(RG_TARGET_NAMESPACE, "NETWORK", CSTR2SYM(GTK_STOCK_NETWORK));
 #endif
-    rb_define_const(mGtkStock, "NEW", CSTR2SYM(GTK_STOCK_NEW));
-    rb_define_const(mGtkStock, "NO", CSTR2SYM(GTK_STOCK_NO));
-    rb_define_const(mGtkStock, "OK", CSTR2SYM(GTK_STOCK_OK));
-    rb_define_const(mGtkStock, "OPEN", CSTR2SYM(GTK_STOCK_OPEN));
+    rb_define_const(RG_TARGET_NAMESPACE, "NEW", CSTR2SYM(GTK_STOCK_NEW));
+    rb_define_const(RG_TARGET_NAMESPACE, "NO", CSTR2SYM(GTK_STOCK_NO));
+    rb_define_const(RG_TARGET_NAMESPACE, "OK", CSTR2SYM(GTK_STOCK_OK));
+    rb_define_const(RG_TARGET_NAMESPACE, "OPEN", CSTR2SYM(GTK_STOCK_OPEN));
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_const(mGtkStock, "ORIENTATION_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_LANDSCAPE));
-    rb_define_const(mGtkStock, "ORIENTATION_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_PORTRAIT));
-    rb_define_const(mGtkStock, "ORIENTATION_REVERSE_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE));
-    rb_define_const(mGtkStock, "ORIENTATION_REVERSE_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT));
+    rb_define_const(RG_TARGET_NAMESPACE, "ORIENTATION_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_LANDSCAPE));
+    rb_define_const(RG_TARGET_NAMESPACE, "ORIENTATION_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_PORTRAIT));
+    rb_define_const(RG_TARGET_NAMESPACE, "ORIENTATION_REVERSE_LANDSCAPE", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE));
+    rb_define_const(RG_TARGET_NAMESPACE, "ORIENTATION_REVERSE_PORTRAIT", CSTR2SYM(GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT));
 #endif
 #if GTK_CHECK_VERSION(2,14,0)
-    rb_define_const(mGtkStock, "PAGE_SETUP", CSTR2SYM(GTK_STOCK_PAGE_SETUP));
+    rb_define_const(RG_TARGET_NAMESPACE, "PAGE_SETUP", CSTR2SYM(GTK_STOCK_PAGE_SETUP));
 #endif
-    rb_define_const(mGtkStock, "PASTE", CSTR2SYM(GTK_STOCK_PASTE));
-    rb_define_const(mGtkStock, "PREFERENCES", CSTR2SYM(GTK_STOCK_PREFERENCES));
-    rb_define_const(mGtkStock, "PRINT", CSTR2SYM(GTK_STOCK_PRINT));
+    rb_define_const(RG_TARGET_NAMESPACE, "PASTE", CSTR2SYM(GTK_STOCK_PASTE));
+    rb_define_const(RG_TARGET_NAMESPACE, "PREFERENCES", CSTR2SYM(GTK_STOCK_PREFERENCES));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT", CSTR2SYM(GTK_STOCK_PRINT));
 #if GTK_CHECK_VERSION(2,14,0)
-    rb_define_const(mGtkStock, "PRINT_ERROR", CSTR2SYM(GTK_STOCK_PRINT_ERROR));
-    rb_define_const(mGtkStock, "PRINT_PAUSED", CSTR2SYM(GTK_STOCK_PRINT_PAUSED));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT_ERROR", CSTR2SYM(GTK_STOCK_PRINT_ERROR));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT_PAUSED", CSTR2SYM(GTK_STOCK_PRINT_PAUSED));
 #endif
-    rb_define_const(mGtkStock, "PRINT_PREVIEW", CSTR2SYM(GTK_STOCK_PRINT_PREVIEW));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT_PREVIEW", CSTR2SYM(GTK_STOCK_PRINT_PREVIEW));
 #if GTK_CHECK_VERSION(2,14,0)
-    rb_define_const(mGtkStock, "PRINT_REPORT", CSTR2SYM(GTK_STOCK_PRINT_REPORT));
-    rb_define_const(mGtkStock, "PRINT_WARNING", CSTR2SYM(GTK_STOCK_PRINT_WARNING));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT_REPORT", CSTR2SYM(GTK_STOCK_PRINT_REPORT));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRINT_WARNING", CSTR2SYM(GTK_STOCK_PRINT_WARNING));
 #endif
-    rb_define_const(mGtkStock, "PROPERTIES", CSTR2SYM(GTK_STOCK_PROPERTIES));
-    rb_define_const(mGtkStock, "QUIT", CSTR2SYM(GTK_STOCK_QUIT));
-    rb_define_const(mGtkStock, "REDO", CSTR2SYM(GTK_STOCK_REDO));
-    rb_define_const(mGtkStock, "REFRESH", CSTR2SYM(GTK_STOCK_REFRESH));
-    rb_define_const(mGtkStock, "REMOVE", CSTR2SYM(GTK_STOCK_REMOVE));
-    rb_define_const(mGtkStock, "REVERT_TO_SAVED", CSTR2SYM(GTK_STOCK_REVERT_TO_SAVED));
-    rb_define_const(mGtkStock, "SAVE", CSTR2SYM(GTK_STOCK_SAVE));
-    rb_define_const(mGtkStock, "SAVE_AS", CSTR2SYM(GTK_STOCK_SAVE_AS));
+    rb_define_const(RG_TARGET_NAMESPACE, "PROPERTIES", CSTR2SYM(GTK_STOCK_PROPERTIES));
+    rb_define_const(RG_TARGET_NAMESPACE, "QUIT", CSTR2SYM(GTK_STOCK_QUIT));
+    rb_define_const(RG_TARGET_NAMESPACE, "REDO", CSTR2SYM(GTK_STOCK_REDO));
+    rb_define_const(RG_TARGET_NAMESPACE, "REFRESH", CSTR2SYM(GTK_STOCK_REFRESH));
+    rb_define_const(RG_TARGET_NAMESPACE, "REMOVE", CSTR2SYM(GTK_STOCK_REMOVE));
+    rb_define_const(RG_TARGET_NAMESPACE, "REVERT_TO_SAVED", CSTR2SYM(GTK_STOCK_REVERT_TO_SAVED));
+    rb_define_const(RG_TARGET_NAMESPACE, "SAVE", CSTR2SYM(GTK_STOCK_SAVE));
+    rb_define_const(RG_TARGET_NAMESPACE, "SAVE_AS", CSTR2SYM(GTK_STOCK_SAVE_AS));
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_const(mGtkStock, "SELECT_ALL", CSTR2SYM(GTK_STOCK_SELECT_ALL));
+    rb_define_const(RG_TARGET_NAMESPACE, "SELECT_ALL", CSTR2SYM(GTK_STOCK_SELECT_ALL));
 #endif
-    rb_define_const(mGtkStock, "SELECT_COLOR", CSTR2SYM(GTK_STOCK_SELECT_COLOR));
-    rb_define_const(mGtkStock, "SELECT_FONT", CSTR2SYM(GTK_STOCK_SELECT_FONT));
-    rb_define_const(mGtkStock, "SORT_ASCENDING", CSTR2SYM(GTK_STOCK_SORT_ASCENDING));
-    rb_define_const(mGtkStock, "SORT_DESCENDING", CSTR2SYM(GTK_STOCK_SORT_DESCENDING));
-    rb_define_const(mGtkStock, "SPELL_CHECK", CSTR2SYM(GTK_STOCK_SPELL_CHECK));
-    rb_define_const(mGtkStock, "STOP", CSTR2SYM(GTK_STOCK_STOP));
-    rb_define_const(mGtkStock, "STRIKETHROUGH", CSTR2SYM(GTK_STOCK_STRIKETHROUGH));
-    rb_define_const(mGtkStock, "UNDELETE", CSTR2SYM(GTK_STOCK_UNDELETE));
-    rb_define_const(mGtkStock, "UNDERLINE", CSTR2SYM(GTK_STOCK_UNDERLINE));
-    rb_define_const(mGtkStock, "UNDO", CSTR2SYM(GTK_STOCK_UNDO));
+    rb_define_const(RG_TARGET_NAMESPACE, "SELECT_COLOR", CSTR2SYM(GTK_STOCK_SELECT_COLOR));
+    rb_define_const(RG_TARGET_NAMESPACE, "SELECT_FONT", CSTR2SYM(GTK_STOCK_SELECT_FONT));
+    rb_define_const(RG_TARGET_NAMESPACE, "SORT_ASCENDING", CSTR2SYM(GTK_STOCK_SORT_ASCENDING));
+    rb_define_const(RG_TARGET_NAMESPACE, "SORT_DESCENDING", CSTR2SYM(GTK_STOCK_SORT_DESCENDING));
+    rb_define_const(RG_TARGET_NAMESPACE, "SPELL_CHECK", CSTR2SYM(GTK_STOCK_SPELL_CHECK));
+    rb_define_const(RG_TARGET_NAMESPACE, "STOP", CSTR2SYM(GTK_STOCK_STOP));
+    rb_define_const(RG_TARGET_NAMESPACE, "STRIKETHROUGH", CSTR2SYM(GTK_STOCK_STRIKETHROUGH));
+    rb_define_const(RG_TARGET_NAMESPACE, "UNDELETE", CSTR2SYM(GTK_STOCK_UNDELETE));
+    rb_define_const(RG_TARGET_NAMESPACE, "UNDERLINE", CSTR2SYM(GTK_STOCK_UNDERLINE));
+    rb_define_const(RG_TARGET_NAMESPACE, "UNDO", CSTR2SYM(GTK_STOCK_UNDO));
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_const(mGtkStock, "UNINDENT", CSTR2SYM(GTK_STOCK_UNINDENT));
+    rb_define_const(RG_TARGET_NAMESPACE, "UNINDENT", CSTR2SYM(GTK_STOCK_UNINDENT));
 #endif
-    rb_define_const(mGtkStock, "YES", CSTR2SYM(GTK_STOCK_YES));
-    rb_define_const(mGtkStock, "ZOOM_100", CSTR2SYM(GTK_STOCK_ZOOM_100));
-    rb_define_const(mGtkStock, "ZOOM_FIT", CSTR2SYM(GTK_STOCK_ZOOM_FIT));
-    rb_define_const(mGtkStock, "ZOOM_IN", CSTR2SYM(GTK_STOCK_ZOOM_IN));
-    rb_define_const(mGtkStock, "ZOOM_OUT", CSTR2SYM(GTK_STOCK_ZOOM_OUT));
+    rb_define_const(RG_TARGET_NAMESPACE, "YES", CSTR2SYM(GTK_STOCK_YES));
+    rb_define_const(RG_TARGET_NAMESPACE, "ZOOM_100", CSTR2SYM(GTK_STOCK_ZOOM_100));
+    rb_define_const(RG_TARGET_NAMESPACE, "ZOOM_FIT", CSTR2SYM(GTK_STOCK_ZOOM_FIT));
+    rb_define_const(RG_TARGET_NAMESPACE, "ZOOM_IN", CSTR2SYM(GTK_STOCK_ZOOM_IN));
+    rb_define_const(RG_TARGET_NAMESPACE, "ZOOM_OUT", CSTR2SYM(GTK_STOCK_ZOOM_OUT));
 }

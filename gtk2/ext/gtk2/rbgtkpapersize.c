@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cPaperSize
 #define _SELF(s) (RVAL2BOXED(s, GTK_TYPE_PAPER_SIZE))
 #define SIZE2RVAL(o) (BOXED2RVAL(o, GTK_TYPE_PAPER_SIZE))
 
@@ -150,47 +151,47 @@ void
 Init_gtk_paper_size(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPaperSize = G_DEF_CLASS(GTK_TYPE_PAPER_SIZE, "PaperSize", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAPER_SIZE, "PaperSize", mGtk);
 
-    rb_define_singleton_method(gPaperSize, "default", ps_s_get_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", ps_s_get_default, 0);
 
-    rb_define_const(gPaperSize, "A3", CSTR2RVAL(GTK_PAPER_NAME_A3));
-    rb_define_const(gPaperSize, "A4", CSTR2RVAL(GTK_PAPER_NAME_A4));
-    rb_define_const(gPaperSize, "A5", CSTR2RVAL(GTK_PAPER_NAME_A5));
-    rb_define_const(gPaperSize, "B5", CSTR2RVAL(GTK_PAPER_NAME_B5));
-    rb_define_const(gPaperSize, "LETTER", CSTR2RVAL(GTK_PAPER_NAME_LETTER));
-    rb_define_const(gPaperSize, "EXECUTIVE",
+    rb_define_const(RG_TARGET_NAMESPACE, "A3", CSTR2RVAL(GTK_PAPER_NAME_A3));
+    rb_define_const(RG_TARGET_NAMESPACE, "A4", CSTR2RVAL(GTK_PAPER_NAME_A4));
+    rb_define_const(RG_TARGET_NAMESPACE, "A5", CSTR2RVAL(GTK_PAPER_NAME_A5));
+    rb_define_const(RG_TARGET_NAMESPACE, "B5", CSTR2RVAL(GTK_PAPER_NAME_B5));
+    rb_define_const(RG_TARGET_NAMESPACE, "LETTER", CSTR2RVAL(GTK_PAPER_NAME_LETTER));
+    rb_define_const(RG_TARGET_NAMESPACE, "EXECUTIVE",
                     CSTR2RVAL(GTK_PAPER_NAME_EXECUTIVE));
-    rb_define_const(gPaperSize, "LEGAL", CSTR2RVAL(GTK_PAPER_NAME_LEGAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEGAL", CSTR2RVAL(GTK_PAPER_NAME_LEGAL));
 
-    rb_define_method(gPaperSize, "initialize", ps_initialize, -1);
-    rb_define_method(gPaperSize, "==", ps_is_equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", ps_is_equal, 1);
 
-    rb_define_method(gPaperSize, "name", ps_get_name, 0);
-    rb_define_method(gPaperSize, "display_name", ps_get_display_name, 0);
-    rb_define_method(gPaperSize, "ppd_name", ps_get_ppd_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", ps_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", ps_get_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ppd_name", ps_get_ppd_name, 0);
 
-    rb_define_method(gPaperSize, "get_width", ps_get_width, 1);
-    rb_define_method(gPaperSize, "get_height", ps_get_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_width", ps_get_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_height", ps_get_height, 1);
 
-    rb_define_method(gPaperSize, "custom?", ps_is_custom, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "custom?", ps_is_custom, 0);
 
-    rb_define_method(gPaperSize, "set_size", ps_set_size, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", ps_set_size, 3);
 
-    rb_define_method(gPaperSize, "get_default_top_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_default_top_margin",
                      ps_get_default_top_margin, 1);
-    rb_define_method(gPaperSize, "get_default_bottom_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_default_bottom_margin",
                      ps_get_default_bottom_margin, 1);
-    rb_define_method(gPaperSize, "get_default_left_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_default_left_margin",
                      ps_get_default_left_margin, 1);
-    rb_define_method(gPaperSize, "get_default_right_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_default_right_margin",
                      ps_get_default_right_margin, 1);
 
-    G_DEF_SETTERS(gPaperSize);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkUnit */
-    G_DEF_CLASS(GTK_TYPE_UNIT, "Unit", gPaperSize);
-    G_DEF_CONSTANTS(gPaperSize, GTK_TYPE_UNIT, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_UNIT, "Unit", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_UNIT, "GTK_");
 
 #endif
 }

@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIconSource
 #define _SELF(s) ((GtkIconSource*)RVAL2BOXED(s, GTK_TYPE_ICON_SOURCE))
 
 static VALUE
@@ -144,27 +145,27 @@ icon_source_set_state_wildcarded(VALUE self, VALUE setting)
 void
 Init_gtk_icon_source(void)
 {
-    VALUE gIconSource = G_DEF_CLASS(GTK_TYPE_ICON_SOURCE, "IconSource", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_SOURCE, "IconSource", mGtk);
 
-    rb_define_method(gIconSource, "initialize", icon_source_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", icon_source_initialize, 0);
     
-    rb_define_method(gIconSource, "direction", icon_source_get_direction , 0); ;
-    rb_define_method(gIconSource, "direction_wildcarded?", icon_source_get_direction_wildcarded , 0); ;
-    rb_define_method(gIconSource, "filename", icon_source_get_filename , 0); ;
-    rb_define_method(gIconSource, "pixbuf", icon_source_get_pixbuf , 0); ;
-    rb_define_method(gIconSource, "size", icon_source_get_size , 0); ;
-    rb_define_method(gIconSource, "size_wildcarded?", icon_source_get_size_wildcarded , 0); ;
-    rb_define_method(gIconSource, "state", icon_source_get_state , 0); ;
-    rb_define_method(gIconSource, "state_wildcarded?" , icon_source_get_state_wildcarded , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", icon_source_get_direction , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "direction_wildcarded?", icon_source_get_direction_wildcarded , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "filename", icon_source_get_filename , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf", icon_source_get_pixbuf , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "size", icon_source_get_size , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "size_wildcarded?", icon_source_get_size_wildcarded , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "state", icon_source_get_state , 0); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "state_wildcarded?" , icon_source_get_state_wildcarded , 0); ;
 
-    rb_define_method(gIconSource, "set_direction", icon_source_set_direction , 1); ;
-    rb_define_method(gIconSource, "set_direction_wildcarded", icon_source_set_direction_wildcarded , 1); ;
-    rb_define_method(gIconSource, "set_filename", icon_source_set_filename , 1); ;
-    rb_define_method(gIconSource, "set_pixbuf", icon_source_set_pixbuf , 1); ;
-    rb_define_method(gIconSource, "set_size", icon_source_set_size , 1); ;
-    rb_define_method(gIconSource, "set_size_wildcarded", icon_source_set_size_wildcarded , 1); ;
-    rb_define_method(gIconSource, "set_state", icon_source_set_state , 1); ;
-    rb_define_method(gIconSource, "set_state_wildcarded", icon_source_set_state_wildcarded , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_direction", icon_source_set_direction , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_direction_wildcarded", icon_source_set_direction_wildcarded , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_filename", icon_source_set_filename , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_pixbuf", icon_source_set_pixbuf , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", icon_source_set_size , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size_wildcarded", icon_source_set_size_wildcarded , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_state", icon_source_set_state , 1); ;
+    rb_define_method(RG_TARGET_NAMESPACE, "set_state_wildcarded", icon_source_set_state_wildcarded , 1); ;
 
-    G_DEF_SETTERS(gIconSource);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
