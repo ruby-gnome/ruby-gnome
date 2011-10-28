@@ -57,13 +57,8 @@ void
 Init_glib_shell(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Shell");
-    VALUE cShellError = G_DEF_ERROR2(G_SHELL_ERROR, "ShellError", mGLib, rb_eRuntimeError);
 
     rb_define_module_function(RG_TARGET_NAMESPACE, "parse", shell_parse, 1);
     rb_define_module_function(RG_TARGET_NAMESPACE, "quote", shell_quote, 1);
     rb_define_module_function(RG_TARGET_NAMESPACE, "unquote", shell_unquote, 1);
-
-    rb_define_const(cShellError, "BAD_QUOTING", INT2FIX(G_SHELL_ERROR_BAD_QUOTING));
-    rb_define_const(cShellError, "EMPTY_STRING", INT2FIX(G_SHELL_ERROR_EMPTY_STRING));
-    rb_define_const(cShellError, "FAILED", INT2FIX(G_SHELL_ERROR_FAILED));
 }

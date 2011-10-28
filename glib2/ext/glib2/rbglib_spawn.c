@@ -221,7 +221,6 @@ void
 Init_glib_spawn(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Spawn");
-    VALUE cSpawnError = G_DEF_ERROR2(G_SPAWN_ERROR, "SpawnError", mGLib, rb_eIOError);
 
     id_call = rb_intern("call");
     id_new = rb_intern("new");
@@ -243,26 +242,4 @@ Init_glib_spawn(void)
     rb_define_const(RG_TARGET_NAMESPACE, "STDERR_TO_DEV_NULL", INT2NUM(G_SPAWN_STDERR_TO_DEV_NULL));
     rb_define_const(RG_TARGET_NAMESPACE, "CHILD_INHERITS_STDIN", INT2NUM(G_SPAWN_CHILD_INHERITS_STDIN));
     rb_define_const(RG_TARGET_NAMESPACE, "FILE_AND_ARGV_ZERO", INT2NUM(G_SPAWN_FILE_AND_ARGV_ZERO));
-
-    rb_define_const(cSpawnError, "FORK", INT2NUM(G_SPAWN_ERROR_FORK));
-    rb_define_const(cSpawnError, "READ", INT2NUM(G_SPAWN_ERROR_READ));
-    rb_define_const(cSpawnError, "CHDIR", INT2NUM(G_SPAWN_ERROR_CHDIR));
-    rb_define_const(cSpawnError, "EACCES", INT2NUM(G_SPAWN_ERROR_ACCES));
-    rb_define_const(cSpawnError, "EPERM", INT2NUM(G_SPAWN_ERROR_PERM));
-    rb_define_const(cSpawnError, "E2BIG", INT2NUM(G_SPAWN_ERROR_2BIG));
-    rb_define_const(cSpawnError, "ENOEXEC", INT2NUM(G_SPAWN_ERROR_NOEXEC));
-    rb_define_const(cSpawnError, "ENAMETOOLONG", INT2NUM(G_SPAWN_ERROR_NAMETOOLONG));
-    rb_define_const(cSpawnError, "ENOENT", INT2NUM(G_SPAWN_ERROR_NOENT));
-    rb_define_const(cSpawnError, "ENOMEM", INT2NUM(G_SPAWN_ERROR_NOMEM));
-    rb_define_const(cSpawnError, "ENOTDIR", INT2NUM(G_SPAWN_ERROR_NOTDIR));
-    rb_define_const(cSpawnError, "ELOOP", INT2NUM(G_SPAWN_ERROR_LOOP));
-    rb_define_const(cSpawnError, "ETXTBUSY", INT2NUM(G_SPAWN_ERROR_TXTBUSY));
-    rb_define_const(cSpawnError, "EIO", INT2NUM(G_SPAWN_ERROR_IO));
-    rb_define_const(cSpawnError, "ENFILE", INT2NUM(G_SPAWN_ERROR_NFILE));
-    rb_define_const(cSpawnError, "EMFILE", INT2NUM(G_SPAWN_ERROR_MFILE));
-    rb_define_const(cSpawnError, "EINVAL", INT2NUM(G_SPAWN_ERROR_INVAL));
-    rb_define_const(cSpawnError, "EISDIR", INT2NUM(G_SPAWN_ERROR_ISDIR));
-    rb_define_const(cSpawnError, "ELIBBAD", INT2NUM(G_SPAWN_ERROR_LIBBAD));
-    rb_define_const(cSpawnError, "FAILED", INT2NUM(G_SPAWN_ERROR_FAILED));
-
 }

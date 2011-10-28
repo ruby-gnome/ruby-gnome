@@ -647,29 +647,6 @@ GIOError    g_io_channel_seek               (GIOChannel *channel,
 void        g_io_channel_close              (GIOChannel *channel);
 */
 
-#ifdef G_OS_WIN32
-static VALUE
-ioc_win32_socket_initialize(VALUE self, VALUE socket)
-{
-    GIOChannel *io = NULL;
-    int fd;
-
-    rb_secure(4);
-    /* TODO: support IO object */
-    fd = NUM2INT(socket);
-    io = g_io_channel_win32_new_socket(rb_w32_get_osfhandle(fd));
-    G_INITIALIZE(self, io);
-
-    return Qnil;
-}
-#endif
-
-static VALUE
-ioc_error_s_from_errno(G_GNUC_UNUSED VALUE self, VALUE errno_)
-{
-    return INT2NUM(g_io_channel_error_from_errno(NUM2INT(errno_)));
-}
-
 /* 
  * Stolen some convenient methods from io.c
  */
@@ -776,7 +753,6 @@ void
 Init_glib_io_channel(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
-    VALUE ioc_error = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
@@ -819,19 +795,6 @@ Init_glib_io_channel(void)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-#ifdef G_OS_WIN32
-    {
-        /* GIOWin32Channel */
-        VALUE io_channel_win32_socket;
-        io_channel_win32_socket =
-            rb_define_class_under(mGLib,
-                                  "IOChannelWin32Socket",
-                                  RG_TARGET_NAMESPACE);
-        rb_define_method(io_channel_win32_socket, "initialize",
-                         ioc_win32_socket_initialize, 1);
-    }
-#endif
-
     /* GSeekType */
     rb_define_const(RG_TARGET_NAMESPACE, "SEEK_CUR", INT2NUM(G_SEEK_CUR));
     rb_define_const(RG_TARGET_NAMESPACE, "SEEK_SET", INT2NUM(G_SEEK_SET));
@@ -860,18 +823,4 @@ Init_glib_io_channel(void)
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_MASK", INT2NUM(G_IO_FLAG_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
-
-    /* GIOChannelError */
-    rb_define_singleton_method(ioc_error, "from_errno", ioc_error_s_from_errno, 1);
-
-    rb_define_const(ioc_error, "FBIG", INT2NUM(G_IO_CHANNEL_ERROR_FBIG));
-    rb_define_const(ioc_error, "INVAL", INT2NUM(G_IO_CHANNEL_ERROR_INVAL));
-    rb_define_const(ioc_error, "IO", INT2NUM(G_IO_CHANNEL_ERROR_IO));
-    rb_define_const(ioc_error, "ISDIR", INT2NUM(G_IO_CHANNEL_ERROR_ISDIR));
-    rb_define_const(ioc_error, "NOSPC", INT2NUM(G_IO_CHANNEL_ERROR_NOSPC));
-    rb_define_const(ioc_error, "NXIO", INT2NUM(G_IO_CHANNEL_ERROR_NXIO));
-    rb_define_const(ioc_error, "OVERFLOW", INT2NUM(G_IO_CHANNEL_ERROR_OVERFLOW));
-    rb_define_const(ioc_error, "PIPE", INT2NUM(G_IO_CHANNEL_ERROR_PIPE));
-    rb_define_const(ioc_error, "FAILED", INT2NUM(G_IO_CHANNEL_ERROR_FAILED));
-
 }
