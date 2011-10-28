@@ -45,10 +45,11 @@ g_poll_fd_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cPollFD
 #define _SELF(s) ((GPollFD*)RVAL2BOXED(s, G_TYPE_POLL_FD))
 
 static VALUE
-poll_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
+rg_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
 {
     GPollFD gfd;
     gfd.fd = NUM2INT(fd);
@@ -60,37 +61,37 @@ poll_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
 }
 
 static VALUE
-poll_set_fd(VALUE self, VALUE fd)
+rg_set_fd(VALUE self, VALUE fd)
 {
     _SELF(self)->fd = fd;
     return self;
 }
 static VALUE
-poll_fd(VALUE self)
+rg_fd(VALUE self)
 {
     return INT2NUM(_SELF(self)->fd);
 }
 
 static VALUE
-poll_set_events(VALUE self, VALUE events)
+rg_set_events(VALUE self, VALUE events)
 {
     _SELF(self)->events = events;
     return self;
 }
 static VALUE
-poll_events(VALUE self)
+rg_events(VALUE self)
 {
     return INT2NUM(_SELF(self)->events);
 }
 
 static VALUE
-poll_set_revents(VALUE self, VALUE revents)
+rg_set_revents(VALUE self, VALUE revents)
 {
     _SELF(self)->revents = revents;
     return self;
 }
 static VALUE
-poll_revents(VALUE self)
+rg_revents(VALUE self)
 {
     return INT2NUM(_SELF(self)->revents);
 }
@@ -98,17 +99,17 @@ poll_revents(VALUE self)
 void
 Init_glib_poll_fd(void)
 {
-    VALUE fd = G_DEF_CLASS(G_TYPE_POLL_FD, "PollFD", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_POLL_FD, "PollFD", mGLib); 
 
-    rb_define_method(fd, "initialize", poll_initialize, 3);
+    RG_DEF_METHOD(initialize, 3);
 
-    rb_define_method(fd, "set_fd", poll_set_fd, 1);
-    rb_define_method(fd, "fd", poll_fd, 0);
-    rb_define_method(fd, "set_events", poll_set_events, 1);
-    rb_define_method(fd, "events", poll_events, 0);
-    rb_define_method(fd, "set_revents", poll_set_revents, 1);
-    rb_define_method(fd, "revents", poll_revents, 0);
+    RG_DEF_METHOD(set_fd, 1);
+    RG_DEF_METHOD(fd, 0);
+    RG_DEF_METHOD(set_events, 1);
+    RG_DEF_METHOD(events, 0);
+    RG_DEF_METHOD(set_revents, 1);
+    RG_DEF_METHOD(revents, 0);
 
-    G_DEF_SETTERS(fd);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 }

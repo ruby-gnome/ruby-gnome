@@ -23,6 +23,7 @@
 
 static ID id_call;
 
+#define RG_TARGET_NAMESPACE cIOChannel
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
 
 static void
@@ -42,7 +43,7 @@ ioc_error(GIOStatus status, GError *err)
 }
 
 static VALUE
-ioc_initialize(gint argc, VALUE *argv, VALUE self)
+rg_initialize(gint argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
 
@@ -88,7 +89,7 @@ ioc_close(VALUE self)
 }
 
 static VALUE
-ioc_s_open(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_open(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg1, arg2;
     VALUE rio;
@@ -123,7 +124,7 @@ ioc_s_open(gint argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-ioc_get_fd(VALUE self)
+rg_fileno(VALUE self)
 {
 #ifdef G_OS_UNIX
     return INT2NUM(g_io_channel_unix_get_fd(_SELF(self)));
@@ -140,9 +141,8 @@ ioc_get_fd(VALUE self)
 void        g_io_channel_init               (GIOChannel *channel);
 */
 
-
 static VALUE
-ioc_read_chars(gint argc, VALUE *argv, VALUE self)
+rg_read(gint argc, VALUE *argv, VALUE self)
 {
     VALUE rbcount;
     gsize count;
@@ -179,7 +179,7 @@ ioc_read_chars(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_read_unichar(VALUE self)
+rg_readchar(VALUE self)
 {
     gunichar thechar;
     GError* err = NULL;
@@ -191,7 +191,7 @@ ioc_read_unichar(VALUE self)
 }
 
 static VALUE
-ioc_getuc(VALUE self)
+rg_getc(VALUE self)
 {
     gunichar thechar;
     GError* err = NULL;
@@ -209,7 +209,7 @@ ioc_getuc(VALUE self)
 }
 
 static VALUE
-ioc_each_char(VALUE self)
+rg_each_char(VALUE self)
 {
     if (!rb_block_given_p()) {
         rb_raise(rb_eArgError, "called without a block");
@@ -230,7 +230,7 @@ ioc_each_char(VALUE self)
 }
 
 static VALUE
-ioc_read_line(gint argc, VALUE *argv, VALUE self)
+rg_readline(gint argc, VALUE *argv, VALUE self)
 {
     gchar* str;
     VALUE line_term, ret;
@@ -257,7 +257,7 @@ ioc_read_line(gint argc, VALUE *argv, VALUE self)
     }   
 
     ioc_error(status, err);
-    
+
     ret = str ? CSTR2RVAL(str) : CSTR2RVAL("");
     g_free(str);
 
@@ -265,7 +265,7 @@ ioc_read_line(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_gets(gint argc, VALUE *argv, VALUE self)
+rg_gets(gint argc, VALUE *argv, VALUE self)
 {
     gchar* str;
     VALUE line_term, ret;
@@ -319,7 +319,7 @@ ioc_set_line_term(VALUE args)
 }
 
 static VALUE
-ioc_each_line(gint argc, VALUE *argv, VALUE self)
+rg_each(gint argc, VALUE *argv, VALUE self)
 {
     gchar* str;
     VALUE line_term;
@@ -366,7 +366,6 @@ ioc_each_line(gint argc, VALUE *argv, VALUE self)
     return self;
 }
 
-
 /* Don't need this.
 GIOStatus   g_io_channel_read_line_string   (GIOChannel *channel,
                                              GString *buffer,
@@ -396,7 +395,7 @@ ioc_read_to_end(VALUE self)
 */
 
 static VALUE
-ioc_write_chars(VALUE self, VALUE buf)
+rg_write(VALUE self, VALUE buf)
 {
     gssize count;
     gsize bytes_written;
@@ -419,7 +418,7 @@ ioc_write_chars(VALUE self, VALUE buf)
 static ID id_unpack;
 
 static VALUE
-ioc_write_unichar(VALUE self, VALUE thechar)
+rg_putc(VALUE self, VALUE thechar)
 {
     GError* err = NULL;
     GIOStatus status;
@@ -441,7 +440,7 @@ ioc_write_unichar(VALUE self, VALUE thechar)
 }
 
 static VALUE
-ioc_flush(VALUE self)
+rg_flush(VALUE self)
 {
     GError* err = NULL;
     GIOStatus status =  g_io_channel_flush(_SELF(self), &err);
@@ -450,7 +449,7 @@ ioc_flush(VALUE self)
 }
 
 static VALUE
-ioc_seek(gint argc, VALUE *argv, VALUE self)
+rg_seek(gint argc, VALUE *argv, VALUE self)
 {
     VALUE ofs, type;
     GIOStatus status;
@@ -469,7 +468,7 @@ ioc_seek(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_seek_pos(VALUE self, VALUE pos)
+rg_set_pos(VALUE self, VALUE pos)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_seek_position(_SELF(self), NUM2INT(pos),
@@ -479,7 +478,7 @@ ioc_seek_pos(VALUE self, VALUE pos)
 }
 
 static VALUE
-ioc_shutdown(gint argc, VALUE *argv, VALUE self)
+rg_close(gint argc, VALUE *argv, VALUE self)
 {
     VALUE flush;
     GError* err = NULL;
@@ -499,7 +498,7 @@ ioc_shutdown(gint argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_create_watch(VALUE self, VALUE condition)
+rg_create_watch(VALUE self, VALUE condition)
 {
     return BOXED2RVAL(g_io_create_watch(_SELF(self), NUM2INT(condition)), 
                       G_TYPE_SOURCE);
@@ -514,14 +513,14 @@ io_func(GIOChannel *source, GIOCondition condition, gpointer func)
 }
 
 static VALUE
-ioc_add_watch(VALUE self, VALUE condition)
+rg_add_watch(VALUE self, VALUE condition)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     return UINT2NUM(g_io_add_watch(_SELF(self), NUM2INT(condition), 
                                    (GIOFunc)io_func, (gpointer)func));
 }
-             
+
 /* Don't need this
 guint       g_io_add_watch_full             (GIOChannel *channel,
                                              gint priority,
@@ -532,32 +531,32 @@ guint       g_io_add_watch_full             (GIOChannel *channel,
 */
 
 static VALUE
-ioc_get_buffer_size(VALUE self)
+rg_buffer_size(VALUE self)
 {
     return UINT2NUM(g_io_channel_get_buffer_size(_SELF(self)));
 }
 
 static VALUE
-ioc_set_buffer_size(VALUE self, VALUE buffer_size)
+rg_set_buffer_size(VALUE self, VALUE buffer_size)
 {
     g_io_channel_set_buffer_size(_SELF(self), NUM2UINT(buffer_size));
     return self;
 }
 
 static VALUE
-ioc_get_buffer_condition(VALUE self)
+rg_buffer_condition(VALUE self)
 {
     return INT2NUM(g_io_channel_get_buffer_condition(_SELF(self)));
 }
 
 static VALUE
-ioc_get_flags(VALUE self)
+rg_flags(VALUE self)
 {
     return INT2NUM(g_io_channel_get_flags(_SELF(self)));
 }
 
 static VALUE
-ioc_set_flags(VALUE self, VALUE flags)
+rg_set_flags(VALUE self, VALUE flags)
 {
     GError* err = NULL;
     GIOStatus status = g_io_channel_set_flags(_SELF(self), 
@@ -593,26 +592,26 @@ ioc_set_line_term(VALUE self, VALUE line_term)
 */
 
 static VALUE
-ioc_get_buffered(VALUE self)
+rg_buffered(VALUE self)
 {
     return CBOOL2RVAL(g_io_channel_get_buffered(_SELF(self)));
 }
 
 static VALUE
-ioc_set_buffered(VALUE self, VALUE buffered)
+rg_set_buffered(VALUE self, VALUE buffered)
 {
     g_io_channel_set_buffered(_SELF(self), RVAL2CBOOL(buffered));
     return self;
 }
 
 static VALUE
-ioc_get_encoding(VALUE self)
+rg_encoding(VALUE self)
 {
     return CSTR2RVAL(g_io_channel_get_encoding(_SELF(self)));
 }
 
 static VALUE
-ioc_set_encoding(VALUE self, VALUE encoding)
+rg_set_encoding(VALUE self, VALUE encoding)
 {
     GError* err = NULL;
     GIOStatus status;
@@ -646,40 +645,15 @@ GIOError    g_io_channel_seek               (GIOChannel *channel,
 void        g_io_channel_close              (GIOChannel *channel);
 */
 
-#ifdef G_OS_WIN32
-static VALUE
-ioc_win32_socket_initialize(VALUE self, VALUE socket)
-{
-    GIOChannel *io = NULL;
-    int fd;
-
-    rb_secure(4);
-    /* TODO: support IO object */
-    fd = NUM2INT(socket);
-    io = g_io_channel_win32_new_socket(rb_w32_get_osfhandle(fd));
-    G_INITIALIZE(self, io);
-
-    return Qnil;
-}
-#endif
-
-static VALUE
-ioc_error_s_from_errno(G_GNUC_UNUSED VALUE self, VALUE errno_)
-{
-    return INT2NUM(g_io_channel_error_from_errno(NUM2INT(errno_)));
-}
-
 /* 
  * Stolen some convenient methods from io.c
  */
 static VALUE
-ioc_printf(int argc, VALUE *argv, VALUE self)
+rg_printf(int argc, VALUE *argv, VALUE self)
 {
-    ioc_write_chars(self, rb_f_sprintf(argc, argv));
+    rg_write(self, rb_f_sprintf(argc, argv));
     return Qnil;
 }
-
-static VALUE ioc_puts(int argc, VALUE* argv, VALUE self);
 
 static VALUE
 ioc_puts_ary(VALUE ary, VALUE out, int recur)
@@ -698,14 +672,14 @@ ioc_puts_ary(VALUE ary, VALUE out, int recur)
 }
 
 static VALUE
-ioc_puts(int argc, VALUE *argv, VALUE self)
+rg_puts(int argc, VALUE *argv, VALUE self)
 {
     int i;
     VALUE line;
 
     /* if no argument given, print newline. */
     if (argc == 0) {
-        ioc_write_chars(self, rb_default_rs);
+        rg_write(self, rb_default_rs);
         return Qnil;
     }
     for (i=0; i<argc; i++) {
@@ -728,10 +702,10 @@ ioc_puts(int argc, VALUE *argv, VALUE self)
           }
           line = rb_obj_as_string(argv[i]);
         }
-        ioc_write_chars(self, line);
+        rg_write(self, line);
         if (RSTRING_LEN(line) == 0 ||
             RSTRING_PTR(line)[RSTRING_LEN(line)-1] != '\n') {
-            ioc_write_chars(self, rb_default_rs);
+            rg_write(self, rb_default_rs);
         }
     }
 
@@ -739,7 +713,7 @@ ioc_puts(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ioc_print(int argc, VALUE *argv, VALUE out)
+rg_print(int argc, VALUE *argv, VALUE out)
 {
     int i;
     VALUE line;
@@ -752,125 +726,95 @@ ioc_print(int argc, VALUE *argv, VALUE out)
     }
     for (i=0; i<argc; i++) {
         if (!NIL_P(rb_output_fs) && i>0) {
-            ioc_write_chars(out, rb_output_fs);
+            rg_write(out, rb_output_fs);
         }
         switch (TYPE(argv[i])) {
           case T_NIL:
-            ioc_write_chars(out, rb_str_new2("nil"));
+            rg_write(out, rb_str_new2("nil"));
             break;
           default:
-            ioc_write_chars(out, argv[i]);
+            rg_write(out, argv[i]);
             break;
         }
     }
     if (!NIL_P(rb_output_rs)) {
-        ioc_write_chars(out, rb_output_rs);
+        rg_write(out, rb_output_rs);
     }
 
     return Qnil;
 }
 
-
 void
 Init_glib_io_channel(void)
 {
-    VALUE io = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
-    VALUE ioc_error = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
 
-    rb_include_module(io, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
     id_call = rb_intern("call");
     id_unpack = rb_intern("unpack");
 
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_SMETHOD(open, -1);
+    RG_DEF_METHOD(fileno, 0);
+    RG_DEF_ALIAS("to_i", "fileno");
+    RG_DEF_METHOD(read, -1);
+    RG_DEF_METHOD(readchar, 0);
+    RG_DEF_METHOD(getc, 0);
+    RG_DEF_METHOD(readline, -1);
+    RG_DEF_METHOD(gets, -1);
+    RG_DEF_METHOD(each, -1);
+    RG_DEF_ALIAS("each_line", "each");
+    RG_DEF_METHOD(each_char, 0);
+    RG_DEF_METHOD(write, 1);
+    RG_DEF_METHOD(printf, -1);
+    RG_DEF_METHOD(print, -1);
+    RG_DEF_METHOD(puts, -1);
+    RG_DEF_METHOD(putc, 1);
+    RG_DEF_METHOD(flush, 0);
+    RG_DEF_METHOD(seek, -1);
+    RG_DEF_METHOD(set_pos, 1);
+    RG_DEF_METHOD(close, -1);
+    RG_DEF_METHOD(create_watch, 1);
+    RG_DEF_METHOD(add_watch, 1);
+    RG_DEF_METHOD(buffer_size, 0);
+    RG_DEF_METHOD(set_buffer_size, 1);
+    RG_DEF_METHOD(buffer_condition, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(set_flags, 1);
+    RG_DEF_METHOD(buffered, 0);
+    RG_DEF_METHOD(set_buffered, 1);
+    RG_DEF_METHOD(encoding, 0);
+    RG_DEF_METHOD(set_encoding, 1);
 
-    rb_define_method(io, "initialize", ioc_initialize, -1);
-    rb_define_singleton_method(io, "open", ioc_s_open, -1);
-    rb_define_method(io, "fileno", ioc_get_fd, 0);          /* ref: IO#fileno */
-    rb_define_alias(io, "to_i", "fileno");                  /* ref: IO#to_i */        
-    rb_define_method(io, "read", ioc_read_chars, -1);       /* ref: IO#read(count = nil) */
-    rb_define_method(io, "readchar", ioc_read_unichar, 0);  /* ref: IO#readchar but this return an UTF-8 char */
-    rb_define_method(io, "getc", ioc_getuc, 0);             /* ref: IO#getc but this return an UTF-8 char */
-    rb_define_method(io, "readline", ioc_read_line, -1);    /* ref: IO#readline(rs = nil) */
-    rb_define_method(io, "gets", ioc_gets, -1);             /* ref: IO#gets(rs = nil) */
-    rb_define_method(io, "each", ioc_each_line, -1);        /* ref: IO#each(rs = nil){|line|...} */
-    rb_define_alias(io, "each_line", "each");               /* ref: IO#each_line(rs = nil){|line|...} */
-    rb_define_method(io, "each_char", ioc_each_char, 0);    /* ref: IO#each_byte{|line|...} */
-    rb_define_method(io, "write", ioc_write_chars, 1);      /* ref: IO#write(str) */
-    rb_define_method(io, "printf", ioc_printf, -1);         /* ref: IO#printf(...) */
-    rb_define_method(io, "print", ioc_print, -1);           /* ref: IO#print(...) */
-    rb_define_method(io, "puts", ioc_puts, -1);             /* ref: IO#puts(...) */
-    rb_define_method(io, "putc", ioc_write_unichar, 1);     /* ref: IO#putc(ch) but this accept an UTF-8 code */
-    rb_define_method(io, "flush", ioc_flush, 0);            /* ref: IO#flush */
-    rb_define_method(io, "seek", ioc_seek, -1);             /* ref: IO#seek */
-    rb_define_method(io, "set_pos", ioc_seek_pos, 1);       /* ref: IO#pos= */
-    rb_define_method(io, "close", ioc_shutdown, -1);        /* ref: IO#close */
-    rb_define_method(io, "create_watch", ioc_create_watch, 1);
-    rb_define_method(io, "add_watch", ioc_add_watch, 1);
-    rb_define_method(io, "buffer_size", ioc_get_buffer_size, 0);
-    rb_define_method(io, "set_buffer_size", ioc_set_buffer_size, 1);
-    rb_define_method(io, "buffer_condition", ioc_get_buffer_condition, 0);
-    rb_define_method(io, "flags", ioc_get_flags, 0);
-    rb_define_method(io, "set_flags", ioc_set_flags, 1);
-    rb_define_method(io, "buffered", ioc_get_buffered, 0);
-    rb_define_method(io, "set_buffered", ioc_set_buffered, 1);
-    rb_define_method(io, "encoding", ioc_get_encoding, 0);
-    rb_define_method(io, "set_encoding", ioc_set_encoding, 1);
-
-    G_DEF_SETTERS(io);
-
-#ifdef G_OS_WIN32
-    {
-        /* GIOWin32Channel */
-        VALUE io_channel_win32_socket;
-        io_channel_win32_socket =
-            rb_define_class_under(mGLib,
-                                  "IOChannelWin32Socket",
-                                  io);
-        rb_define_method(io_channel_win32_socket, "initialize",
-                         ioc_win32_socket_initialize, 1);
-    }
-#endif
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GSeekType */
-    rb_define_const(io, "SEEK_CUR", INT2NUM(G_SEEK_CUR));
-    rb_define_const(io, "SEEK_SET", INT2NUM(G_SEEK_SET));
-    rb_define_const(io, "SEEK_END", INT2NUM(G_SEEK_END));
-    
+    rb_define_const(RG_TARGET_NAMESPACE, "SEEK_CUR", INT2NUM(G_SEEK_CUR));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEEK_SET", INT2NUM(G_SEEK_SET));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEEK_END", INT2NUM(G_SEEK_END));
+
     /* GIOStatus */
-    rb_define_const(io, "STATUS_ERROR", INT2NUM(G_IO_STATUS_ERROR));
-    rb_define_const(io, "STATUS_NORMAL", INT2NUM(G_IO_STATUS_NORMAL));
-    rb_define_const(io, "STATUS_EOF", INT2NUM(G_IO_STATUS_EOF));
-    rb_define_const(io, "STATUS_AGAIN", INT2NUM(G_IO_STATUS_AGAIN));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_ERROR", INT2NUM(G_IO_STATUS_ERROR));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_NORMAL", INT2NUM(G_IO_STATUS_NORMAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_EOF", INT2NUM(G_IO_STATUS_EOF));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_AGAIN", INT2NUM(G_IO_STATUS_AGAIN));
 
     /* GIOCondition */
-    rb_define_const(io, "IN", INT2NUM(G_IO_IN));
-    rb_define_const(io, "OUT", INT2NUM(G_IO_OUT));
-    rb_define_const(io, "PRI", INT2NUM(G_IO_PRI));
-    rb_define_const(io, "ERR", INT2NUM(G_IO_ERR));
-    rb_define_const(io, "HUP", INT2NUM(G_IO_HUP));
-    rb_define_const(io, "NVAL", INT2NUM(G_IO_NVAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "IN", INT2NUM(G_IO_IN));
+    rb_define_const(RG_TARGET_NAMESPACE, "OUT", INT2NUM(G_IO_OUT));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRI", INT2NUM(G_IO_PRI));
+    rb_define_const(RG_TARGET_NAMESPACE, "ERR", INT2NUM(G_IO_ERR));
+    rb_define_const(RG_TARGET_NAMESPACE, "HUP", INT2NUM(G_IO_HUP));
+    rb_define_const(RG_TARGET_NAMESPACE, "NVAL", INT2NUM(G_IO_NVAL));
 
     /* GIOFlags */
-    rb_define_const(io, "FLAG_APPEND", INT2NUM(G_IO_FLAG_APPEND));
-    rb_define_const(io, "FLAG_NONBLOCK", INT2NUM(G_IO_FLAG_NONBLOCK));
-    rb_define_const(io, "FLAG_READABLE", INT2NUM(G_IO_FLAG_IS_READABLE));
-    rb_define_const(io, "FLAG_WRITEABLE", INT2NUM(G_IO_FLAG_IS_WRITEABLE));
-    rb_define_const(io, "FLAG_IS_SEEKABLE", INT2NUM(G_IO_FLAG_IS_SEEKABLE));
-    rb_define_const(io, "FLAG_MASK", INT2NUM(G_IO_FLAG_MASK));
-    rb_define_const(io, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
-    rb_define_const(io, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
-
-    /* GIOChannelError */
-    rb_define_singleton_method(ioc_error, "from_errno", ioc_error_s_from_errno, 1);
-
-    rb_define_const(ioc_error, "FBIG", INT2NUM(G_IO_CHANNEL_ERROR_FBIG));
-    rb_define_const(ioc_error, "INVAL", INT2NUM(G_IO_CHANNEL_ERROR_INVAL));
-    rb_define_const(ioc_error, "IO", INT2NUM(G_IO_CHANNEL_ERROR_IO));
-    rb_define_const(ioc_error, "ISDIR", INT2NUM(G_IO_CHANNEL_ERROR_ISDIR));
-    rb_define_const(ioc_error, "NOSPC", INT2NUM(G_IO_CHANNEL_ERROR_NOSPC));
-    rb_define_const(ioc_error, "NXIO", INT2NUM(G_IO_CHANNEL_ERROR_NXIO));
-    rb_define_const(ioc_error, "OVERFLOW", INT2NUM(G_IO_CHANNEL_ERROR_OVERFLOW));
-    rb_define_const(ioc_error, "PIPE", INT2NUM(G_IO_CHANNEL_ERROR_PIPE));
-    rb_define_const(ioc_error, "FAILED", INT2NUM(G_IO_CHANNEL_ERROR_FAILED));
-
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_APPEND", INT2NUM(G_IO_FLAG_APPEND));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_NONBLOCK", INT2NUM(G_IO_FLAG_NONBLOCK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_READABLE", INT2NUM(G_IO_FLAG_IS_READABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_WRITEABLE", INT2NUM(G_IO_FLAG_IS_WRITEABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_IS_SEEKABLE", INT2NUM(G_IO_FLAG_IS_SEEKABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_MASK", INT2NUM(G_IO_FLAG_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
 }

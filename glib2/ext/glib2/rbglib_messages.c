@@ -32,6 +32,8 @@
 #define rb_sourceline() (ruby_sourceline)
 #endif
 
+#define RG_TARGET_NAMESPACE mLog
+
 static VALUE rbglib_log_handler_procs;
 static ID id_call;
 static gboolean log_canceled;
@@ -71,14 +73,14 @@ rbglib_log_handler(const gchar *log_domain, GLogLevelFlags log_level, const gcha
 
 /* Use Internal only */
 static VALUE
-rbglib_m_log_cancel_handler(G_GNUC_UNUSED VALUE self)
+rg_m_cancel_handler(G_GNUC_UNUSED VALUE self)
 {
     log_canceled = TRUE;
     return Qnil;
 }
 
 static VALUE
-rbglib_m_log_set_handler(VALUE self, VALUE domain, VALUE levels)
+rg_m_set_handler(VALUE self, VALUE domain, VALUE levels)
 {
     guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                          NUM2INT(levels),
@@ -87,7 +89,7 @@ rbglib_m_log_set_handler(VALUE self, VALUE domain, VALUE levels)
 }
 
 static VALUE
-rbglib_m_log_remove_handler(VALUE self, VALUE domain, VALUE handler_id)
+rg_m_remove_handler(VALUE self, VALUE domain, VALUE handler_id)
 {
     g_log_remove_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                          NUM2UINT(handler_id));
@@ -96,20 +98,20 @@ rbglib_m_log_remove_handler(VALUE self, VALUE domain, VALUE handler_id)
 }
 
 static VALUE
-rbglib_m_log_set_always_fatal(G_GNUC_UNUSED VALUE self, VALUE fatal_mask)
+rg_m_set_always_fatal(G_GNUC_UNUSED VALUE self, VALUE fatal_mask)
 {
     return INT2NUM(g_log_set_always_fatal(NUM2INT(fatal_mask)));
 }
 
 static VALUE
-rbglib_m_log_set_fatal_mask(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE fatal_mask)
+rg_m_set_fatal_mask(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE fatal_mask)
 {
     return INT2NUM(g_log_set_fatal_mask(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
                                         NUM2INT(fatal_mask)));
 }
 
 static VALUE
-rbglib_m_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
+rg_m_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
 {
     g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), "%s", RVAL2CSTR(str));
     return Qnil;
@@ -118,31 +120,31 @@ rbglib_m_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
 void
 Init_glib_messages(void)
 {
-    VALUE mGLog = rb_define_module_under(mGLib, "Log");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Log");
 
     id_call = rb_intern("call");
     log_canceled = FALSE;
 
     rb_global_variable(&rbglib_log_handler_procs);
     rbglib_log_handler_procs = rb_hash_new();
-    rb_define_module_function(mGLog, "set_handler", rbglib_m_log_set_handler, 2);
-    rb_define_module_function(mGLog, "remove_handler", rbglib_m_log_remove_handler, 2);
-    rb_define_module_function(mGLog, "cancel_handler", rbglib_m_log_cancel_handler, 0);
-    rb_define_module_function(mGLog, "set_always_fatal", rbglib_m_log_set_always_fatal, 1);
-    rb_define_module_function(mGLog, "set_fatal_mask", rbglib_m_log_set_fatal_mask, 2);
-    rb_define_module_function(mGLog, "log", rbglib_m_log, 3);
+    RG_DEF_MODFUNC(set_handler, 2);
+    RG_DEF_MODFUNC(remove_handler, 2);
+    RG_DEF_MODFUNC(cancel_handler, 0);
+    RG_DEF_MODFUNC(set_always_fatal, 1);
+    RG_DEF_MODFUNC(set_fatal_mask, 2);
+    RG_DEF_MODFUNC(log, 3);
 
-    rb_define_const(mGLog, "FATAL_MASK", INT2NUM(G_LOG_FATAL_MASK));
-    rb_define_const(mGLog, "LEVEL_USER_SHIFT", INT2NUM(G_LOG_LEVEL_USER_SHIFT));
+    rb_define_const(RG_TARGET_NAMESPACE, "FATAL_MASK", INT2NUM(G_LOG_FATAL_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_USER_SHIFT", INT2NUM(G_LOG_LEVEL_USER_SHIFT));
 
     /* GLogLevelFlags */
-    rb_define_const(mGLog, "FLAG_RECURSION", INT2NUM(G_LOG_FLAG_RECURSION));
-    rb_define_const(mGLog, "FLAG_FATAL", INT2NUM(G_LOG_FLAG_FATAL));
-    rb_define_const(mGLog, "LEVEL_ERROR", INT2NUM(G_LOG_LEVEL_ERROR));
-    rb_define_const(mGLog, "LEVEL_CRITICAL", INT2NUM(G_LOG_LEVEL_CRITICAL));
-    rb_define_const(mGLog, "LEVEL_WARNING", INT2NUM(G_LOG_LEVEL_WARNING));
-    rb_define_const(mGLog, "LEVEL_MESSAGE", INT2NUM(G_LOG_LEVEL_MESSAGE));
-    rb_define_const(mGLog, "LEVEL_INFO", INT2NUM(G_LOG_LEVEL_INFO));
-    rb_define_const(mGLog, "LEVEL_DEBUG", INT2NUM(G_LOG_LEVEL_DEBUG));
-    rb_define_const(mGLog, "LEVEL_MASK", INT2NUM(G_LOG_LEVEL_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_RECURSION", INT2NUM(G_LOG_FLAG_RECURSION));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_FATAL", INT2NUM(G_LOG_FLAG_FATAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_ERROR", INT2NUM(G_LOG_LEVEL_ERROR));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_CRITICAL", INT2NUM(G_LOG_LEVEL_CRITICAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_WARNING", INT2NUM(G_LOG_LEVEL_WARNING));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_MESSAGE", INT2NUM(G_LOG_LEVEL_MESSAGE));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_INFO", INT2NUM(G_LOG_LEVEL_INFO));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_DEBUG", INT2NUM(G_LOG_LEVEL_DEBUG));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEVEL_MASK", INT2NUM(G_LOG_LEVEL_MASK));
 }

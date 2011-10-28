@@ -21,44 +21,36 @@
 
 #include "rbgprivate.h"
 
-#define RG_TARGET_NAMESPACE mShell
+#ifdef G_OS_WIN32
+
+#define RG_TARGET_NAMESPACE cIOChannelWin32Socket
 
 static VALUE
-rg_m_parse(G_GNUC_UNUSED VALUE self, VALUE command_line)
+rg_initialize(VALUE self, VALUE socket)
 {
-    gint argc;
-    gchar **argv;
-    GError *error = NULL;
+    GIOChannel *io = NULL;
+    int fd;
 
-    if (!g_shell_parse_argv(RVAL2CSTR(command_line), &argc, &argv, &error))
-        RAISE_GERROR(error);
+    rb_secure(4);
+    /* TODO: support IO object */
+    fd = NUM2INT(socket);
+    io = g_io_channel_win32_new_socket(rb_w32_get_osfhandle(fd));
+    G_INITIALIZE(self, io);
 
-    return STRV2RVAL_FREE(argv);
+    return Qnil;
 }
-
-static VALUE
-rg_m_quote(G_GNUC_UNUSED VALUE self, VALUE unquoted_string)
-{
-    return CSTR2RVAL_FREE(g_shell_quote(RVAL2CSTR(unquoted_string)));
-}
-
-static VALUE
-rg_m_unquote(G_GNUC_UNUSED VALUE self, VALUE quoted_string)
-{
-    GError *error = NULL;
-    gchar *str = g_shell_unquote(RVAL2CSTR(quoted_string), &error);
-    if (str == NULL)
-        RAISE_GERROR(error);
-
-    return CSTR2RVAL_FREE(str);
-}
+#endif
 
 void
-Init_glib_shell(void)
+Init_glib_io_channel_win32_socket(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Shell");
-
-    RG_DEF_MODFUNC(parse, 1);
-    RG_DEF_MODFUNC(quote, 1);
-    RG_DEF_MODFUNC(unquote, 1);
+#ifdef G_OS_WIN32
+    /* GIOWin32Channel */
+    VALUE RG_TARGET_NAMESPACE;
+    RG_TARGET_NAMESPACE =
+        rb_define_class_under(mGLib,
+                              "IOChannelWin32Socket",
+                              RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD(initialize, 1);
+#endif
 }

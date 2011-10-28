@@ -36,7 +36,6 @@ static ID id_poll_func;
 */
 static ID id_call;
 
-
 static VALUE mGLibSource;
 static ID id__callbacks__;
 static GHashTable *callbacks_table;
@@ -122,11 +121,11 @@ restore_poll_func(G_GNUC_UNUSED VALUE data)
 static guint ruby_source_id = 0;
 
 /* from eval.c */
-#define WAIT_FD		(1<<0)
-#define WAIT_SELECT	(1<<1)
-#define WAIT_TIME	(1<<2)
-#define WAIT_JOIN	(1<<3)
-#define WAIT_PID	(1<<4)
+#define WAIT_FD     (1<<0)
+#define WAIT_SELECT (1<<1)
+#define WAIT_TIME   (1<<2)
+#define WAIT_JOIN   (1<<3)
+#define WAIT_PID    (1<<4)
 
 #define DELAY_INFTY 1E30
 
@@ -163,7 +162,7 @@ timeofday(void)
     struct timespec tp;
 
     if (clock_gettime(CLOCK_MONOTONIC, &tp) == 0) {
-	return (double)tp.tv_sec + (double)tp.tv_nsec * 1e-9;
+        return (double)tp.tv_sec + (double)tp.tv_nsec * 1e-9;
     }
 #  endif
 #endif
@@ -436,7 +435,6 @@ invoke_source_func(gpointer data)
     return ret;
 }
 
-
 /*****************************************/
 GType
 g_main_context_get_type(void)
@@ -450,10 +448,11 @@ g_main_context_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cMainContext
 #define _SELF(s) ((GMainContext*)RVAL2BOXED(s, G_TYPE_MAIN_CONTEXT))
 
 static VALUE
-mc_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GMainContext *context;
 
@@ -474,25 +473,25 @@ mc_initialize(VALUE self)
 }
 
 static VALUE
-mc_s_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(g_main_context_default(), G_TYPE_MAIN_CONTEXT);
 }
 
 static VALUE
-mc_iteration(VALUE self, VALUE may_block)
+rg_iteration(VALUE self, VALUE may_block)
 {
     return CBOOL2RVAL(g_main_context_iteration(_SELF(self), RVAL2CBOOL(may_block)));
 }
 
 static VALUE
-mc_pending(VALUE self)
+rg_pending_p(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_pending(_SELF(self)));
 }
 
 static VALUE
-mc_find_source(VALUE self, VALUE source_id)
+rg_find_source(VALUE self, VALUE source_id)
 {
     GSource* src = g_main_context_find_source_by_id(_SELF(self), NUM2UINT(source_id));
     return BOXED2RVAL(src, G_TYPE_SOURCE);
@@ -509,20 +508,20 @@ GSource*    g_main_context_find_source_by_funcs_user_data
 */
 
 static VALUE
-mc_wakeup(VALUE self)
+rg_wakeup(VALUE self)
 {
     g_main_context_wakeup(_SELF(self));
     return self;
 }
 
 static VALUE
-mc_acquire(VALUE self)
+rg_acquire(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_acquire(_SELF(self)));
 }
 
 static VALUE
-mc_release(VALUE self)
+rg_release(VALUE self)
 {
     g_main_context_release(_SELF(self));
     return self;
@@ -530,7 +529,7 @@ mc_release(VALUE self)
 
 #if GLIB_CHECK_VERSION(2,10,0)
 static VALUE
-mc_is_owner(VALUE self)
+rg_owner_p(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_is_owner(_SELF(self)));
 }
@@ -543,7 +542,7 @@ gboolean    g_main_context_wait             (GMainContext *context,
 */
 
 static VALUE
-mc_prepare(VALUE self)
+rg_prepare(VALUE self)
 {
     gint priority;
     gboolean ret = g_main_context_prepare(_SELF(self), &priority);
@@ -581,7 +580,7 @@ mc_query_ensure(VALUE value)
 #define QUERY_DEFAULT_FDS 100
 
 static VALUE
-mc_query(VALUE self, VALUE rbmax_priority)
+rg_query(VALUE self, VALUE rbmax_priority)
 {
     GMainContext *context = _SELF(self);
     gint max_priority = NUM2INT(rbmax_priority);
@@ -607,7 +606,7 @@ mc_query(VALUE self, VALUE rbmax_priority)
 
 /* How can I implement this?
 static VALUE
-mc_check(VALUE self, VALUE max_priority)
+rg_check(VALUE self, VALUE max_priority)
 {
     gint i, timeout_;
     VALUE ary;
@@ -622,7 +621,7 @@ mc_check(VALUE self, VALUE max_priority)
 
     g_free(fds);
     fds = g_new (GPollFD, n_fds);    
-    
+
     ret = g_main_context_check(_SELF(self), NUM2INT(max_priority),
                                fds, n_fds);
     printf("ret = %d\n", ret);
@@ -636,7 +635,7 @@ mc_check(VALUE self, VALUE max_priority)
 */
 
 static VALUE
-mc_dispatch(VALUE self)
+rg_dispatch(VALUE self)
 {
     g_main_context_dispatch(_SELF(self));
     return self;
@@ -654,7 +653,7 @@ poll_func(GPollFD *ufds, guint nfsd, gint timeout_)
 }
 
 static VALUE
-mc_set_poll_func(VALUE self)
+rg_set_poll_func(VALUE self)
 {
     rb_ivar_set(self, id_poll_func, rb_block_proc());
     g_main_context_set_poll_func(_SELF(self), (GPollFunc)poll_func);
@@ -668,7 +667,7 @@ GPollFunc   g_main_context_get_poll_func    (GMainContext *context);
 */
 
 static VALUE
-mc_add_poll(VALUE self, VALUE fd, VALUE priority)
+rg_add_poll(VALUE self, VALUE fd, VALUE priority)
 {
     g_main_context_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD),
                             NUM2INT(priority));
@@ -676,7 +675,7 @@ mc_add_poll(VALUE self, VALUE fd, VALUE priority)
 }
 
 static VALUE
-mc_remove_poll(VALUE self, VALUE fd)
+rg_remove_poll(VALUE self, VALUE fd)
 {
     g_main_context_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
     return self;
@@ -684,12 +683,11 @@ mc_remove_poll(VALUE self, VALUE fd)
 
 #ifdef HAVE_G_MAIN_DEPTH
 static VALUE
-mc_s_depth(VALUE self)
+rg_s_depth(VALUE self)
 {
     return INT2NUM(g_main_depth());
 }
 #endif
-
 
 static VALUE
 timeout_source_new(G_GNUC_UNUSED VALUE self, VALUE interval)
@@ -838,7 +836,7 @@ ruby_source_remove(G_GNUC_UNUSED VALUE data)
 void
 Init_glib_main_context(void)
 {
-    VALUE mc = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
 
     VALUE timeout = rb_define_module_under(mGLib, "Timeout");
     VALUE idle = rb_define_module_under(mGLib, "Idle");
@@ -863,30 +861,30 @@ Init_glib_main_context(void)
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
-    rb_define_method(mc, "initialize", mc_initialize, 0);
-    rb_define_singleton_method(mc, "default", mc_s_default, 0);
-    rb_define_method(mc, "iteration", mc_iteration, 1);
-    rb_define_method(mc, "pending?", mc_pending, 0);
-    rb_define_method(mc, "find_source", mc_find_source, 1);
-    rb_define_method(mc, "wakeup", mc_wakeup, 0);
-    rb_define_method(mc, "acquire", mc_acquire, 0);
-    rb_define_method(mc, "release", mc_release, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_SMETHOD(default, 0);
+    RG_DEF_METHOD(iteration, 1);
+    RG_DEF_METHOD_P(pending, 0);
+    RG_DEF_METHOD(find_source, 1);
+    RG_DEF_METHOD(wakeup, 0);
+    RG_DEF_METHOD(acquire, 0);
+    RG_DEF_METHOD(release, 0);
 #if GLIB_CHECK_VERSION(2,10,0)
-    rb_define_method(mc, "owner?", mc_is_owner, 0);
+    RG_DEF_METHOD_P(owner, 0);
 #endif
-    rb_define_method(mc, "prepare", mc_prepare, 0);
-    rb_define_method(mc, "query", mc_query, 1);
+    RG_DEF_METHOD(prepare, 0);
+    RG_DEF_METHOD(query, 1);
 /*
-    rb_define_method(mc, "check", mc_check, 1);
+    RG_DEF_METHOD(check, 1);
 */
-    rb_define_method(mc, "dispatch", mc_dispatch, 0);
+    RG_DEF_METHOD(dispatch, 0);
 /*
-    rb_define_method(mc, "set_poll_func", mc_set_poll_func, 0);
+    RG_DEF_METHOD(set_poll_func, 0);
 */
-    rb_define_method(mc, "add_poll", mc_add_poll, 2);
-    rb_define_method(mc, "remove_poll", mc_remove_poll, 1);
+    RG_DEF_METHOD(add_poll, 2);
+    RG_DEF_METHOD(remove_poll, 1);
 #ifdef HAVE_G_MAIN_DEPTH
-    rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
+    RG_DEF_SMETHOD(depth, 0);
 #endif
     rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
 #if GLIB_CHECK_VERSION(2,14,0)
@@ -904,7 +902,6 @@ Init_glib_main_context(void)
     rb_define_module_function(child_watch, "source_new", child_watch_source_new, 1);
     rb_define_module_function(child_watch, "add", child_watch_add, 1);
 #endif
-
 
     default_poll_func = g_main_context_get_poll_func(NULL);
     g_main_context_set_poll_func(NULL, rg_poll);

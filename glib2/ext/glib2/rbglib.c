@@ -1062,12 +1062,16 @@ union       GDoubleIEEE754;
     /* Require GBoxed/GObject */
     Init_glib_utils();
     Init_glib_spawn();
+    Init_glib_spawnerror();
     Init_glib_main_loop();
     Init_glib_source();
     Init_glib_main_context();
     Init_glib_poll_fd();
     Init_glib_io_channel();
+    Init_glib_io_channelerror();
+    Init_glib_io_channel_win32_socket();
     Init_glib_shell();
+    Init_glib_shellerror();
     Init_glib_completion();
     Init_glib_timer();
     Init_glib_unicode();

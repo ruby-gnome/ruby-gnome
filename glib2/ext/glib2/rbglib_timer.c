@@ -66,24 +66,25 @@ g_timer_get_type(void)
 
 #define G_TYPE_TIMER (g_timer_get_type())
 
+#define RG_TARGET_NAMESPACE cTimer
 #define _SELF(s) ((GTimer*)RVAL2BOXED(s, G_TYPE_TIMER))
 
 static VALUE
-timer_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_timer_new());
     return Qnil;
 }
 
 static VALUE
-timer_start(VALUE self)
+rg_start(VALUE self)
 {
     g_timer_start(_SELF(self));
     return self;
 }
 
 static VALUE
-timer_stop(VALUE self)
+rg_stop(VALUE self)
 {
     g_timer_stop(_SELF(self));
     return self;
@@ -91,7 +92,7 @@ timer_stop(VALUE self)
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-timer_continue(VALUE self)
+rg_continue(VALUE self)
 {
     g_timer_continue(_SELF(self));
     return self;
@@ -99,7 +100,7 @@ timer_continue(VALUE self)
 #endif
 
 static VALUE
-timer_elapsed(VALUE self)
+rg_elapsed(VALUE self)
 {
     gulong microseconds;
     gdouble ret = g_timer_elapsed(_SELF(self), &microseconds);
@@ -108,7 +109,7 @@ timer_elapsed(VALUE self)
 }
 
 static VALUE
-timer_reset(VALUE self)
+rg_reset(VALUE self)
 {
     g_timer_reset(_SELF(self));
     return self;
@@ -117,14 +118,14 @@ timer_reset(VALUE self)
 void
 Init_glib_timer(void)
 {
-    VALUE timer = G_DEF_CLASS(G_TYPE_TIMER, "Timer", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TIMER, "Timer", mGLib); 
 
-    rb_define_method(timer, "initialize", timer_initialize, 0);
-    rb_define_method(timer, "start", timer_start, 0);
-    rb_define_method(timer, "stop", timer_stop, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(start, 0);
+    RG_DEF_METHOD(stop, 0);
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_method(timer, "continue", timer_continue, 0);
+    RG_DEF_METHOD(continue, 0);
 #endif
-    rb_define_method(timer, "elapsed", timer_elapsed, 0);
-    rb_define_method(timer, "reset", timer_reset, 0);
+    RG_DEF_METHOD(elapsed, 0);
+    RG_DEF_METHOD(reset, 0);
 }
