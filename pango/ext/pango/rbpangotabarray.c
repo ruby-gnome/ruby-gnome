@@ -21,10 +21,11 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cTabArray
 #define _SELF(self) ((PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY))
 
 static VALUE
-rtab_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE size, positions_in_pixels, attr_ary;
     PangoTabArray *array;
@@ -43,7 +44,7 @@ rtab_initialize(int argc, VALUE *argv, VALUE self)
                                     FIX2INT(RARRAY_PTR(RARRAY_PTR(attr_ary)[i])[1]));
         }
     }
-     
+
     return Qnil;
 }
 /* This is implemented in rtab_initialize.
@@ -55,20 +56,20 @@ PangoTabArray* pango_tab_array_new_with_positions
                                              ...);
 */
 static VALUE
-rtab_get_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(pango_tab_array_get_size(_SELF(self)));
 }
 
 static VALUE
-rtab_resize(VALUE self, VALUE size)
+rg_resize(VALUE self, VALUE size)
 {
     pango_tab_array_resize(_SELF(self), NUM2INT(size));
     return self;
 }
 
 static VALUE
-rtab_set_tab(VALUE self, VALUE tab_index, VALUE align, VALUE location)
+rg_set_tab(VALUE self, VALUE tab_index, VALUE align, VALUE location)
 {
     pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), RVAL2GENUM(align, PANGO_TYPE_TAB_ALIGN),
                             NUM2INT(location));
@@ -76,7 +77,7 @@ rtab_set_tab(VALUE self, VALUE tab_index, VALUE align, VALUE location)
 }
 
 static VALUE
-rtab_get_tab(VALUE self, VALUE tab_index)
+rg_get_tab(VALUE self, VALUE tab_index)
 {
     PangoTabAlign align;
     gint location;
@@ -86,7 +87,7 @@ rtab_get_tab(VALUE self, VALUE tab_index)
 }
 
 static VALUE
-rtab_get_tabs(VALUE self)
+rg_tabs(VALUE self)
 {
     PangoTabAlign* aligns;
     gint* locations;
@@ -104,7 +105,7 @@ rtab_get_tabs(VALUE self)
 }
 
 static VALUE
-rtab_get_positions_in_pixels(VALUE self)
+rg_positions_in_pixels_p(VALUE self)
 {
     return CBOOL2RVAL(pango_tab_array_get_positions_in_pixels(_SELF(self)));
 }
@@ -112,18 +113,18 @@ rtab_get_positions_in_pixels(VALUE self)
 void
 Init_pango_array(void)
 {
-    VALUE pTabArray = G_DEF_CLASS(PANGO_TYPE_TAB_ARRAY, "TabArray", mPango);
-    rb_define_method(pTabArray, "initialize", rtab_initialize, -1);
-    rb_define_method(pTabArray, "size", rtab_get_size, 0);
-    rb_define_method(pTabArray, "resize", rtab_resize, 1);
-    rb_define_method(pTabArray, "set_tab", rtab_set_tab, 3);
-    rb_define_method(pTabArray, "get_tab", rtab_get_tab, 1);
-    rb_define_method(pTabArray, "tabs", rtab_get_tabs, 0);
-    rb_define_method(pTabArray, "positions_in_pixels?", rtab_get_positions_in_pixels, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_TAB_ARRAY, "TabArray", mPango);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(resize, 1);
+    RG_DEF_METHOD(set_tab, 3);
+    RG_DEF_METHOD(get_tab, 1);
+    RG_DEF_METHOD(tabs, 0);
+    RG_DEF_METHOD_P(positions_in_pixels, 0);
 
-    G_DEF_SETTERS(pTabArray);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* PangoTabAlign */
-    G_DEF_CLASS(PANGO_TYPE_TAB_ALIGN, "TabAlign", pTabArray);
-    G_DEF_CONSTANTS(pTabArray, PANGO_TYPE_TAB_ALIGN, "PANGO_");    
+    G_DEF_CLASS(PANGO_TYPE_TAB_ALIGN, "TabAlign", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_TAB_ALIGN, "PANGO_");    
 }

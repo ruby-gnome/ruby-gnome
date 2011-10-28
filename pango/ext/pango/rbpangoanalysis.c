@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cAnalysis
 #define _SELF(s) ((PangoAnalysis*)RVAL2BOXED(s, PANGO_TYPE_ANALYSIS))
 
 /**********************************/
@@ -33,12 +34,12 @@ ana_copy(const PangoAnalysis* val)
     *new_val = *val;
     return new_val;
 }
-                                                                                     
+
 GType
 pango_analysis_get_type(void)
 {
     static GType our_type = 0;
-                                                                                     
+
     if (our_type == 0)
         our_type = g_boxed_type_register_static ("PangoAnalysis",
                     (GBoxedCopyFunc)ana_copy,
@@ -48,7 +49,7 @@ pango_analysis_get_type(void)
 /**********************************/
 
 static VALUE
-ana_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     PangoAnalysis ana = { NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL };
     G_INITIALIZE(self, &ana);
@@ -57,13 +58,13 @@ ana_initialize(VALUE self)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-ana_set_shape_engine(VALUE self, VALUE engine)
+rg_set_shape_engine(VALUE self, VALUE engine)
 {
     _SELF(self)->shape_engine = PANGO_ENGINE_SHAPE(RVAL2GOBJ(engine));
     return self;
 }
 static VALUE
-ana_get_shape_engine(VALUE self)
+rg_shape_engine(VALUE self)
 {
     VALUE ret;
     if (_SELF(self)->shape_engine){
@@ -79,13 +80,13 @@ ana_get_shape_engine(VALUE self)
 }
 
 static VALUE
-ana_set_lang_engine(VALUE self, VALUE engine)
+rg_set_lang_engine(VALUE self, VALUE engine)
 {
     _SELF(self)->lang_engine = PANGO_ENGINE_LANG(RVAL2GOBJ(engine));
     return self;
 }
 static VALUE
-ana_get_lang_engine(VALUE self)
+rg_lang_engine(VALUE self)
 {
     VALUE ret;
     if (_SELF(self)->lang_engine){
@@ -102,40 +103,40 @@ ana_get_lang_engine(VALUE self)
 #endif
 
 static VALUE
-ana_set_font(VALUE self, VALUE font)
+rg_set_font(VALUE self, VALUE font)
 {
     _SELF(self)->font = PANGO_FONT(RVAL2GOBJ(font));
     return self;
 }
 
 static VALUE
-ana_get_font(VALUE self)
+rg_font(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->font);
 }
 
 static VALUE
-ana_set_level(VALUE self, VALUE level)
+rg_set_level(VALUE self, VALUE level)
 {
     _SELF(self)->level = NUM2UINT(level);
     return self;
 }
 
 static VALUE
-ana_get_level(VALUE self)
+rg_level(VALUE self)
 {
     return UINT2NUM(_SELF(self)->level);
 }
 
 static VALUE
-ana_set_language(VALUE self, VALUE lang)
+rg_set_language(VALUE self, VALUE lang)
 {
     _SELF(self)->language = RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE);
     return self;
 }
 
 static VALUE
-ana_get_language(VALUE self)
+rg_language(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
 }
@@ -170,7 +171,7 @@ ana_set_extra_attrs_rescue(VALUE value)
 }
 
 static VALUE
-ana_set_extra_attrs(VALUE self, VALUE attrs)
+rg_set_extra_attrs(VALUE self, VALUE attrs)
 {
     struct ana_set_extra_attrs_args args;
     args.analysis = _SELF(self);
@@ -185,7 +186,7 @@ ana_set_extra_attrs(VALUE self, VALUE attrs)
 }
 
 static VALUE
-ana_get_extra_attrs(VALUE self)
+rg_extra_attrs(VALUE self)
 {
     VALUE ary = rb_ary_new();
     GSList* list = _SELF(self)->extra_attrs;
@@ -200,24 +201,24 @@ ana_get_extra_attrs(VALUE self)
 void
 Init_pango_analysis(void)
 {
-    VALUE pana = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
-    
-    rb_define_method(pana, "initialize", ana_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
+
+    RG_DEF_METHOD(initialize, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pana, "set_shape_engine", ana_set_shape_engine, 1);
-    rb_define_method(pana, "shape_engine", ana_get_shape_engine, 0);
-    rb_define_method(pana, "set_lang_engine", ana_set_lang_engine, 1);
-    rb_define_method(pana, "lang_engine", ana_get_lang_engine, 0);
+    RG_DEF_METHOD(set_shape_engine, 1);
+    RG_DEF_METHOD(shape_engine, 0);
+    RG_DEF_METHOD(set_lang_engine, 1);
+    RG_DEF_METHOD(lang_engine, 0);
 #endif
-    rb_define_method(pana, "set_font", ana_set_font, 1);
-    rb_define_method(pana, "font", ana_get_font, 0);
-    rb_define_method(pana, "set_level", ana_set_level, 1);
-    rb_define_method(pana, "level", ana_get_level, 0);
-    rb_define_method(pana, "set_language", ana_set_language, 1);
-    rb_define_method(pana, "language", ana_get_language, 0);
+    RG_DEF_METHOD(set_font, 1);
+    RG_DEF_METHOD(font, 0);
+    RG_DEF_METHOD(set_level, 1);
+    RG_DEF_METHOD(level, 0);
+    RG_DEF_METHOD(set_language, 1);
+    RG_DEF_METHOD(language, 0);
 
-    rb_define_method(pana, "set_extra_attrs", ana_set_extra_attrs, 1);
-    rb_define_method(pana, "extra_attrs", ana_get_extra_attrs, 0);
+    RG_DEF_METHOD(set_extra_attrs, 1);
+    RG_DEF_METHOD(extra_attrs, 0);
 
-    G_DEF_SETTERS(pana);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

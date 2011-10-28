@@ -22,30 +22,31 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cLanguage
 #define _SELF(self) ((PangoLanguage*)RVAL2BOXED(self, PANGO_TYPE_LANGUAGE))
 #define LANG2RVAL(lang) (BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE))
 
 static VALUE
-language_s_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return LANG2RVAL(pango_language_get_default());
 }
 
 static VALUE
-language_initialize(VALUE self, VALUE language)
+rg_initialize(VALUE self, VALUE language)
 {
     G_INITIALIZE(self, pango_language_from_string(RVAL2CSTR(language)));
     return Qnil;
 }
 
 static VALUE
-language_s_to_string(G_GNUC_UNUSED VALUE self, VALUE language)
+rg_s_to_string(G_GNUC_UNUSED VALUE self, VALUE language)
 {
     return CSTR2RVAL(pango_language_to_string(RVAL2CSTR(language)));
 }
 
 static VALUE
-language_matches(int argc, VALUE *argv, VALUE self)
+rg_matches(int argc, VALUE *argv, VALUE self)
 {
     VALUE range_list;
 
@@ -56,7 +57,7 @@ language_matches(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-language_to_str(VALUE self)
+rg_to_str(VALUE self)
 {
     return CSTR2RVAL(pango_language_to_string(_SELF(self)));
 }
@@ -64,7 +65,7 @@ language_to_str(VALUE self)
 #if PANGO_CHECK_VERSION(1,4,0)
 /* Moved from Pango::Script */
 static VALUE
-language_includes_script(VALUE self, VALUE script)
+rg_includes_script(VALUE self, VALUE script)
 {
     return CBOOL2RVAL(pango_language_includes_script(_SELF(self), 
                                                      RVAL2GENUM(script, PANGO_TYPE_SCRIPT)));
@@ -74,18 +75,18 @@ language_includes_script(VALUE self, VALUE script)
 void
 Init_pango_language(void)
 {
-    VALUE pLanguage = G_DEF_CLASS(PANGO_TYPE_LANGUAGE, "Language", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LANGUAGE, "Language", mPango);
 
-    rb_define_singleton_method(pLanguage, "default", language_s_default, 0);
+    RG_DEF_SMETHOD(default, 0);
 
-    rb_define_method(pLanguage, "initialize", language_initialize, 1);
-    rb_define_singleton_method(pLanguage, "to_string", language_s_to_string, 1);
-    rb_define_method(pLanguage, "matches", language_matches, -1);
-    rb_define_method(pLanguage, "to_str", language_to_str, 0);
-    rb_define_alias(pLanguage, "to_s", "to_str");
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_SMETHOD(to_string, 1);
+    RG_DEF_METHOD(matches, -1);
+    RG_DEF_METHOD(to_str, 0);
+    RG_DEF_ALIAS("to_s", "to_str");
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pLanguage, "includes_script", language_includes_script, 1);
+    RG_DEF_METHOD(includes_script, 1);
 #endif
 
 }

@@ -20,16 +20,18 @@
 
 #include "rbpangoprivate.h"
 
-
 #if PANGO_CHECK_VERSION(1,16,0)
+
+#define RG_TARGET_NAMESPACE mGravity
+
 static VALUE
-to_rotation(G_GNUC_UNUSED VALUE self, VALUE gravity)
+rg_s_to_rotation(G_GNUC_UNUSED VALUE self, VALUE gravity)
 {
     return rb_float_new(pango_gravity_to_rotation(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
 }
 
 static VALUE
-is_vertical(G_GNUC_UNUSED VALUE self, VALUE gravity)
+rg_s_vertical_p(G_GNUC_UNUSED VALUE self, VALUE gravity)
 {
     return CBOOL2RVAL(PANGO_GRAVITY_IS_VERTICAL(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
 }
@@ -39,15 +41,14 @@ void
 Init_pango_gravity(void)
 {
 #if PANGO_CHECK_VERSION(1,16,0)
-    VALUE mGravity = rb_define_module_under(mPango, "Gravity");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mPango, "Gravity");
 
-    rb_define_singleton_method(mGravity, "to_rotation", to_rotation, 1);
-    rb_define_singleton_method(mGravity, "vertical?", is_vertical, 1);
+    RG_DEF_SMETHOD(to_rotation, 1);
+    RG_DEF_SMETHOD_P(vertical, 1);
 
-    G_DEF_CLASS(PANGO_TYPE_GRAVITY, "Gravity", mGravity);
-    G_DEF_CONSTANTS(mGravity, PANGO_TYPE_GRAVITY, "PANGO_GRAVITY_");
-    G_DEF_CLASS(PANGO_TYPE_GRAVITY_HINT, "Hint", mGravity);
-    G_DEF_CONSTANTS(mGravity, PANGO_TYPE_GRAVITY_HINT, "PANGO_GRAVITY_");
+    G_DEF_CLASS(PANGO_TYPE_GRAVITY, "Gravity", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_GRAVITY, "PANGO_GRAVITY_");
+    G_DEF_CLASS(PANGO_TYPE_GRAVITY_HINT, "Hint", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_GRAVITY_HINT, "PANGO_GRAVITY_");
 #endif
 }
-
