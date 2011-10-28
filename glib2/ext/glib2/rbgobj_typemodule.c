@@ -21,27 +21,29 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE cTypeModule
+
 static VALUE
-use(VALUE self)
+rg_use(VALUE self)
 {
     return CBOOL2RVAL(g_type_module_use(G_TYPE_MODULE(RVAL2GOBJ(self))));
 }
 
 static VALUE
-unuse(VALUE self)
+rg_unuse(VALUE self)
 {
     g_type_module_unuse(G_TYPE_MODULE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-get_name(VALUE self)
+rg_name(VALUE self)
 {
     return rb_str_new2(G_TYPE_MODULE(RVAL2GOBJ(self))->name);
 }
 
 static VALUE
-set_name(VALUE self, VALUE name)
+rg_operator_set_name(VALUE self, VALUE name)
 {
     g_type_module_set_name(G_TYPE_MODULE(RVAL2GOBJ(self)), StringValuePtr(name));
     return name;
@@ -49,22 +51,22 @@ set_name(VALUE self, VALUE name)
 
 #if 0
 GType    g_type_module_register_type (GTypeModule     *module,
-				      GType            parent_type,
-				      const gchar     *type_name,
-				      const GTypeInfo *type_info,
-				      GTypeFlags       flags);
+                      GType            parent_type,
+                      const gchar     *type_name,
+                      const GTypeInfo *type_info,
+                      GTypeFlags       flags);
 void     g_type_module_add_interface (GTypeModule           *module,
-				      GType                  instance_type,
-				      GType                  interface_type,
-				      const GInterfaceInfo  *interface_info);
+                      GType                  instance_type,
+                      GType                  interface_type,
+                      const GInterfaceInfo  *interface_info);
 #endif
 
 void
 Init_gobject_gtypemodule(void)
 {
-    VALUE cTypeModule = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
-    rb_define_method(cTypeModule, "use", use, 0);
-    rb_define_method(cTypeModule, "unuse", unuse, 0);
-    rb_define_method(cTypeModule, "name", get_name, 0);
-    rb_define_method(cTypeModule, "name=", set_name, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
+    RG_DEF_METHOD(use, 0);
+    RG_DEF_METHOD(unuse, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD_OPERATOR("name=", set_name, 1);
 }

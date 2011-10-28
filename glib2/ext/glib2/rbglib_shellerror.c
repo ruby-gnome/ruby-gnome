@@ -21,44 +21,14 @@
 
 #include "rbgprivate.h"
 
-#define RG_TARGET_NAMESPACE mShell
-
-static VALUE
-rg_m_parse(G_GNUC_UNUSED VALUE self, VALUE command_line)
-{
-    gint argc;
-    gchar **argv;
-    GError *error = NULL;
-
-    if (!g_shell_parse_argv(RVAL2CSTR(command_line), &argc, &argv, &error))
-        RAISE_GERROR(error);
-
-    return STRV2RVAL_FREE(argv);
-}
-
-static VALUE
-rg_m_quote(G_GNUC_UNUSED VALUE self, VALUE unquoted_string)
-{
-    return CSTR2RVAL_FREE(g_shell_quote(RVAL2CSTR(unquoted_string)));
-}
-
-static VALUE
-rg_m_unquote(G_GNUC_UNUSED VALUE self, VALUE quoted_string)
-{
-    GError *error = NULL;
-    gchar *str = g_shell_unquote(RVAL2CSTR(quoted_string), &error);
-    if (str == NULL)
-        RAISE_GERROR(error);
-
-    return CSTR2RVAL_FREE(str);
-}
+#define RG_TARGET_NAMESPACE cShellError
 
 void
-Init_glib_shell(void)
+Init_glib_shellerror(void)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Shell");
+    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_SHELL_ERROR, "ShellError", mGLib, rb_eRuntimeError);
 
-    RG_DEF_MODFUNC(parse, 1);
-    RG_DEF_MODFUNC(quote, 1);
-    RG_DEF_MODFUNC(unquote, 1);
+    rb_define_const(RG_TARGET_NAMESPACE, "BAD_QUOTING", INT2FIX(G_SHELL_ERROR_BAD_QUOTING));
+    rb_define_const(RG_TARGET_NAMESPACE, "EMPTY_STRING", INT2FIX(G_SHELL_ERROR_EMPTY_STRING));
+    rb_define_const(RG_TARGET_NAMESPACE, "FAILED", INT2FIX(G_SHELL_ERROR_FAILED));
 }

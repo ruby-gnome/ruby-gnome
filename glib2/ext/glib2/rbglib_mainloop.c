@@ -34,12 +34,13 @@ g_main_loop_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cMainLoop
 #define _SELF(s) ((GMainLoop*)RVAL2BOXED(s, G_TYPE_MAIN_LOOP))
 
 /*****************************************/
 
 static VALUE
-ml_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE context, is_running;
     GMainLoop *loop;
@@ -55,27 +56,27 @@ ml_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-ml_run(VALUE self)
+rg_run(VALUE self)
 {
     g_main_loop_run(_SELF(self));
     return self;
 }
 
 static VALUE
-ml_quit(VALUE self)
+rg_quit(VALUE self)
 {
     g_main_loop_quit(_SELF(self));
     return Qnil;
 }
 
 static VALUE
-ml_is_running(VALUE self)
+rg_running_p(VALUE self)
 {
     return CBOOL2RVAL(g_main_loop_is_running(_SELF(self)));
 }
 
 static VALUE
-ml_get_context(VALUE self)
+rg_context(VALUE self)
 {
     return BOXED2RVAL(g_main_loop_get_context(_SELF(self)), G_TYPE_MAIN_CONTEXT);
 }
@@ -83,11 +84,11 @@ ml_get_context(VALUE self)
 void
 Init_glib_main_loop(void)
 {
-    VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
 
-    rb_define_method(ml, "initialize", ml_initialize, -1);
-    rb_define_method(ml, "run", ml_run, 0);
-    rb_define_method(ml, "quit", ml_quit, 0);
-    rb_define_method(ml, "running?", ml_is_running, 0);
-    rb_define_method(ml, "context", ml_get_context, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(run, 0);
+    RG_DEF_METHOD(quit, 0);
+    RG_DEF_METHOD_P(running, 0);
+    RG_DEF_METHOD(context, 0);
 }

@@ -21,35 +21,37 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE mTypePlugin
+
 static VALUE
-use(VALUE self)
+rg_use(VALUE self)
 {
     g_type_plugin_use(G_TYPE_PLUGIN(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-unuse(VALUE self)
+rg_unuse(VALUE self)
 {
     g_type_plugin_unuse(G_TYPE_PLUGIN(RVAL2GOBJ(self)));
     return self;
 }
 
 #if 0
-void	g_type_plugin_complete_type_info	(GTypePlugin     *plugin,
-						 GType            g_type,
-						 GTypeInfo       *info,
-						 GTypeValueTable *value_table);
-void	g_type_plugin_complete_interface_info	(GTypePlugin     *plugin,
-						 GType            interface_type,
-						 GType            instance_type,
-						 GInterfaceInfo  *info);
+void    g_type_plugin_complete_type_info   (GTypePlugin     *plugin,
+                         GType            g_type,
+                         GTypeInfo       *info,
+                         GTypeValueTable *value_table);
+void    g_type_plugin_complete_interface_info  (GTypePlugin     *plugin,
+                         GType            interface_type,
+                         GType            instance_type,
+                         GInterfaceInfo  *info);
 #endif
 
 void
 Init_gobject_gtypeplugin(void)
 {
-    VALUE iTypePlugin = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", mGLib);
-    rb_define_method(iTypePlugin, "use", use, 0);
-    rb_define_method(iTypePlugin, "unuse", unuse, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", mGLib);
+    RG_DEF_METHOD(use, 0);
+    RG_DEF_METHOD(unuse, 0);
 }
