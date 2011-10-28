@@ -21,8 +21,10 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasStyle
+
 static VALUE
-rb_goo_canvas_style_new(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, goo_canvas_style_new());
     return Qnil;
@@ -30,7 +32,7 @@ rb_goo_canvas_style_new(VALUE self)
 
 /* TODO: make it more generic, with maybe some part in Ruby */
 static VALUE
-rb_goo_canvas_style_set_fill_pattern(VALUE self, VALUE value)
+rg_set_fill_pattern(VALUE self, VALUE value)
 {
     GValue gval = {0,};
     cairo_pattern_t *pattern;
@@ -50,13 +52,12 @@ rb_goo_canvas_style_set_fill_pattern(VALUE self, VALUE value)
 void
 Init_goocanvasstyle(void)
 {
-    VALUE GooCanvasStyle;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasStyle = G_DEF_CLASS(GOO_TYPE_CANVAS_STYLE, "CanvasStyle", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_STYLE, "CanvasStyle", mGoo);
 
-    rb_define_method(GooCanvasStyle, "initialize", rb_goo_canvas_style_new, 0);
-    rb_define_method(GooCanvasStyle, "set_fill_pattern",
-                     rb_goo_canvas_style_set_fill_pattern, 1);
-    
-    G_DEF_SETTERS(GooCanvasStyle);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_fill_pattern, 1);
+
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

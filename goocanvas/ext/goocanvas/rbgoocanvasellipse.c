@@ -21,8 +21,10 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasEllipse
+
 static VALUE
-rb_goo_canvas_ellipse_new(VALUE self, VALUE parent,
+rg_initialize(VALUE self, VALUE parent,
                           VALUE center_x, VALUE center_y,
                           VALUE radius_x, VALUE radius_y)
 {
@@ -41,11 +43,10 @@ rb_goo_canvas_ellipse_new(VALUE self, VALUE parent,
 void
 Init_goocanvasellipse(void)
 {
-    VALUE GooCanvasEllipse;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasEllipse = G_DEF_CLASS(GOO_TYPE_CANVAS_ELLIPSE, "CanvasEllipse",
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_ELLIPSE, "CanvasEllipse",
                                    mGoo);
 
-    rb_define_method(GooCanvasEllipse, "initialize",
-                     rb_goo_canvas_ellipse_new, 5);
+    RG_DEF_METHOD(initialize, 5);
 }
