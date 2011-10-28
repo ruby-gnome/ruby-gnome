@@ -450,6 +450,7 @@ g_main_context_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cMainContext
 #define _SELF(s) ((GMainContext*)RVAL2BOXED(s, G_TYPE_MAIN_CONTEXT))
 
 static VALUE
@@ -838,7 +839,7 @@ ruby_source_remove(G_GNUC_UNUSED VALUE data)
 void
 Init_glib_main_context(void)
 {
-    VALUE mc = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_CONTEXT, "MainContext", mGLib); 
 
     VALUE timeout = rb_define_module_under(mGLib, "Timeout");
     VALUE idle = rb_define_module_under(mGLib, "Idle");
@@ -863,30 +864,30 @@ Init_glib_main_context(void)
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
-    rb_define_method(mc, "initialize", mc_initialize, 0);
-    rb_define_singleton_method(mc, "default", mc_s_default, 0);
-    rb_define_method(mc, "iteration", mc_iteration, 1);
-    rb_define_method(mc, "pending?", mc_pending, 0);
-    rb_define_method(mc, "find_source", mc_find_source, 1);
-    rb_define_method(mc, "wakeup", mc_wakeup, 0);
-    rb_define_method(mc, "acquire", mc_acquire, 0);
-    rb_define_method(mc, "release", mc_release, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", mc_initialize, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", mc_s_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "iteration", mc_iteration, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pending?", mc_pending, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "find_source", mc_find_source, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wakeup", mc_wakeup, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "acquire", mc_acquire, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "release", mc_release, 0);
 #if GLIB_CHECK_VERSION(2,10,0)
-    rb_define_method(mc, "owner?", mc_is_owner, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "owner?", mc_is_owner, 0);
 #endif
-    rb_define_method(mc, "prepare", mc_prepare, 0);
-    rb_define_method(mc, "query", mc_query, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "prepare", mc_prepare, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "query", mc_query, 1);
 /*
-    rb_define_method(mc, "check", mc_check, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "check", mc_check, 1);
 */
-    rb_define_method(mc, "dispatch", mc_dispatch, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dispatch", mc_dispatch, 0);
 /*
-    rb_define_method(mc, "set_poll_func", mc_set_poll_func, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_poll_func", mc_set_poll_func, 0);
 */
-    rb_define_method(mc, "add_poll", mc_add_poll, 2);
-    rb_define_method(mc, "remove_poll", mc_remove_poll, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_poll", mc_add_poll, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_poll", mc_remove_poll, 1);
 #ifdef HAVE_G_MAIN_DEPTH
-    rb_define_singleton_method(mc, "depth", mc_s_depth, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "depth", mc_s_depth, 0);
 #endif
     rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
 #if GLIB_CHECK_VERSION(2,14,0)

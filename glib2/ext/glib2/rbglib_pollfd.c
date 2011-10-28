@@ -45,6 +45,7 @@ g_poll_fd_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cPollFD
 #define _SELF(s) ((GPollFD*)RVAL2BOXED(s, G_TYPE_POLL_FD))
 
 static VALUE
@@ -98,17 +99,17 @@ poll_revents(VALUE self)
 void
 Init_glib_poll_fd(void)
 {
-    VALUE fd = G_DEF_CLASS(G_TYPE_POLL_FD, "PollFD", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_POLL_FD, "PollFD", mGLib); 
 
-    rb_define_method(fd, "initialize", poll_initialize, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", poll_initialize, 3);
 
-    rb_define_method(fd, "set_fd", poll_set_fd, 1);
-    rb_define_method(fd, "fd", poll_fd, 0);
-    rb_define_method(fd, "set_events", poll_set_events, 1);
-    rb_define_method(fd, "events", poll_events, 0);
-    rb_define_method(fd, "set_revents", poll_set_revents, 1);
-    rb_define_method(fd, "revents", poll_revents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fd", poll_set_fd, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "fd", poll_fd, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_events", poll_set_events, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "events", poll_events, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_revents", poll_set_revents, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "revents", poll_revents, 0);
 
-    G_DEF_SETTERS(fd);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 }

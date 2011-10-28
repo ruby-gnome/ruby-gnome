@@ -23,6 +23,8 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
+#define RG_TARGET_NAMESPACE mSpawn
+
 static ID id_call;
 static ID id_new;
 
@@ -218,29 +220,29 @@ rbglib_m_spawn_close_pid(VALUE self, VALUE pid)
 void
 Init_glib_spawn(void)
 {
-    VALUE mGSpawn = rb_define_module_under(mGLib, "Spawn");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Spawn");
     VALUE cSpawnError = G_DEF_ERROR2(G_SPAWN_ERROR, "SpawnError", mGLib, rb_eIOError);
 
     id_call = rb_intern("call");
     id_new = rb_intern("new");
 
     /* glib/gspawn.h */
-    rb_define_module_function(mGSpawn, "async_with_pipes", rbglib_m_spawn_async_with_pipes, 4);
-    rb_define_module_function(mGSpawn, "async", rbglib_m_spawn_async, 4);
-    rb_define_module_function(mGSpawn, "sync", rbglib_m_spawn_sync, 4);
-    rb_define_module_function(mGSpawn, "command_line_sync", rbglib_m_spawn_command_line_sync, 1);
-    rb_define_module_function(mGSpawn, "command_line_async", rbglib_m_spawn_command_line_async, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "async_with_pipes", rbglib_m_spawn_async_with_pipes, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "async", rbglib_m_spawn_async, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "sync", rbglib_m_spawn_sync, 4);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "command_line_sync", rbglib_m_spawn_command_line_sync, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "command_line_async", rbglib_m_spawn_command_line_async, 1);
 #ifdef HAVE_G_SPAWN_CLOSE_PID
-    rb_define_module_function(mGSpawn, "close_pid", rbglib_m_spawn_close_pid, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "close_pid", rbglib_m_spawn_close_pid, 1);
 #endif
 
-    rb_define_const(mGSpawn, "LEAVE_DESCRIPTORS_OPEN", INT2NUM(G_SPAWN_LEAVE_DESCRIPTORS_OPEN));
-    rb_define_const(mGSpawn, "DO_NOT_REAP_CHILD", INT2NUM(G_SPAWN_DO_NOT_REAP_CHILD));
-    rb_define_const(mGSpawn, "SEARCH_PATH", INT2NUM(G_SPAWN_SEARCH_PATH));
-    rb_define_const(mGSpawn, "STDOUT_TO_DEV_NULL", INT2NUM(G_SPAWN_STDOUT_TO_DEV_NULL));
-    rb_define_const(mGSpawn, "STDERR_TO_DEV_NULL", INT2NUM(G_SPAWN_STDERR_TO_DEV_NULL));
-    rb_define_const(mGSpawn, "CHILD_INHERITS_STDIN", INT2NUM(G_SPAWN_CHILD_INHERITS_STDIN));
-    rb_define_const(mGSpawn, "FILE_AND_ARGV_ZERO", INT2NUM(G_SPAWN_FILE_AND_ARGV_ZERO));
+    rb_define_const(RG_TARGET_NAMESPACE, "LEAVE_DESCRIPTORS_OPEN", INT2NUM(G_SPAWN_LEAVE_DESCRIPTORS_OPEN));
+    rb_define_const(RG_TARGET_NAMESPACE, "DO_NOT_REAP_CHILD", INT2NUM(G_SPAWN_DO_NOT_REAP_CHILD));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEARCH_PATH", INT2NUM(G_SPAWN_SEARCH_PATH));
+    rb_define_const(RG_TARGET_NAMESPACE, "STDOUT_TO_DEV_NULL", INT2NUM(G_SPAWN_STDOUT_TO_DEV_NULL));
+    rb_define_const(RG_TARGET_NAMESPACE, "STDERR_TO_DEV_NULL", INT2NUM(G_SPAWN_STDERR_TO_DEV_NULL));
+    rb_define_const(RG_TARGET_NAMESPACE, "CHILD_INHERITS_STDIN", INT2NUM(G_SPAWN_CHILD_INHERITS_STDIN));
+    rb_define_const(RG_TARGET_NAMESPACE, "FILE_AND_ARGV_ZERO", INT2NUM(G_SPAWN_FILE_AND_ARGV_ZERO));
 
     rb_define_const(cSpawnError, "FORK", INT2NUM(G_SPAWN_ERROR_FORK));
     rb_define_const(cSpawnError, "READ", INT2NUM(G_SPAWN_ERROR_READ));

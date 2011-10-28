@@ -34,6 +34,7 @@ g_main_loop_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cMainLoop
 #define _SELF(s) ((GMainLoop*)RVAL2BOXED(s, G_TYPE_MAIN_LOOP))
 
 /*****************************************/
@@ -83,11 +84,11 @@ ml_get_context(VALUE self)
 void
 Init_glib_main_loop(void)
 {
-    VALUE ml = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MAIN_LOOP, "MainLoop", mGLib);
 
-    rb_define_method(ml, "initialize", ml_initialize, -1);
-    rb_define_method(ml, "run", ml_run, 0);
-    rb_define_method(ml, "quit", ml_quit, 0);
-    rb_define_method(ml, "running?", ml_is_running, 0);
-    rb_define_method(ml, "context", ml_get_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ml_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "run", ml_run, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "quit", ml_quit, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "running?", ml_is_running, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "context", ml_get_context, 0);
 }

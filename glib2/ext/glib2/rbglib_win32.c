@@ -24,6 +24,9 @@
 #include <glib/gwin32.h>
 
 #ifdef G_OS_WIN32
+
+#define RG_TARGET_NAMESPACE mWin32
+
 static VALUE
 rbglib_m_win32_error_message(VALUE self, VALUE error)
 {
@@ -110,18 +113,18 @@ Init_glib_win32(void)
 {
 #ifdef G_OS_WIN32
     /* glib/gwin32.h */
-    VALUE mWin32 = rb_define_module_under(mGLib, "Win32");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Win32");
 
-    rb_define_module_function(mWin32, "error_message", rbglib_m_win32_error_message, 1);
-    rb_define_module_function(mWin32, "locale", rbglib_m_win32_locale, 0);
-    rb_define_module_function(mWin32, "get_package_installation_directory", rbglib_m_win32_get_package_installation_directory, 2);
-    rb_define_module_function(mWin32, "get_package_installation_subdirectory", rbglib_m_get_package_installation_subdirectory, 3);
-    rb_define_module_function(mWin32, "version", rbglib_m_get_windows_version, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "error_message", rbglib_m_win32_error_message, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "locale", rbglib_m_win32_locale, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_package_installation_directory", rbglib_m_win32_get_package_installation_directory, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_package_installation_subdirectory", rbglib_m_get_package_installation_subdirectory, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "version", rbglib_m_get_windows_version, 0);
     /* Deprecated */
     rb_define_module_function(mGLib, "win32_locale", rbglib_m_win32_locale_deprecated, 0);
 
 #  if GLIB_CHECK_VERSION(2,8,0)
-    rb_define_module_function(mWin32, "locale_filename_from_utf8",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "locale_filename_from_utf8",
                               rbglib_m_win32_locale_filename_from_utf8, 1);
     /* Deprecated */
     rb_define_module_function(mGLib, "win32_locale_filename_from_utf8",
@@ -129,7 +132,7 @@ Init_glib_win32(void)
 #  endif
 
 #  if GLIB_CHECK_VERSION(2, 16, 0)
-    rb_define_module_function(mWin32,
+    rb_define_module_function(RG_TARGET_NAMESPACE,
 			      "get_package_installation_directory_of_module",
 			      rbglib_m_win32_get_package_installation_directory_of_module,
 			      -1);

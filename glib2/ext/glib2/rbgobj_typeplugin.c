@@ -21,6 +21,8 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE mTypePlugin
+
 static VALUE
 use(VALUE self)
 {
@@ -49,7 +51,7 @@ void	g_type_plugin_complete_interface_info	(GTypePlugin     *plugin,
 void
 Init_gobject_gtypeplugin(void)
 {
-    VALUE iTypePlugin = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", mGLib);
-    rb_define_method(iTypePlugin, "use", use, 0);
-    rb_define_method(iTypePlugin, "unuse", unuse, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_TYPE_PLUGIN, "TypePlugin", mGLib);
+    rb_define_method(RG_TARGET_NAMESPACE, "use", use, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unuse", unuse, 0);
 }

@@ -49,6 +49,7 @@ g_key_file_get_type(void)
 }
 /************************************************/
 
+#define RG_TARGET_NAMESPACE cKeyFile
 #define _SELF(self) ((GKeyFile*)(RVAL2BOXED(self, G_TYPE_KEY_FILE)))
 
 static VALUE
@@ -662,112 +663,112 @@ void
 Init_glib_keyfile(void)
 {
 #if GLIB_CHECK_VERSION(2,6,0)
-    VALUE kf = G_DEF_CLASS(G_TYPE_KEY_FILE, "KeyFile", mGLib);   
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_KEY_FILE, "KeyFile", mGLib);   
     G_DEF_ERROR(G_KEY_FILE_ERROR, "KeyFileError", mGLib, 
                 rb_eRuntimeError, G_TYPE_KEY_FILE_ERROR);
 
-    rb_define_method(kf, "initialize", keyfile_initialize, 0);
-    rb_define_method(kf, "set_list_separator", keyfile_set_list_separator, 1);
-    rb_define_method(kf, "load_from_file", keyfile_load_from_file, -1);
-    rb_define_method(kf, "load_from_data", keyfile_load_from_data, -1);
-    rb_define_method(kf, "load_from_data_dirs", keyfile_load_from_data_dirs, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", keyfile_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_list_separator", keyfile_set_list_separator, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_file", keyfile_load_from_file, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data", keyfile_load_from_data, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data_dirs", keyfile_load_from_data_dirs, -1);
 #if GLIB_CHECK_VERSION(2, 14, 0)
-    rb_define_method(kf, "load_from_dirs", keyfile_load_from_dirs, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_dirs", keyfile_load_from_dirs, -1);
 #endif
-    rb_define_method(kf, "to_data", keyfile_to_data, 0);
-    rb_define_method(kf, "start_group", keyfile_get_start_group, 0);
-    rb_define_method(kf, "groups", keyfile_get_groups, 0);
-    rb_define_method(kf, "get_keys", keyfile_get_keys, 1);
-    rb_define_method(kf, "has_group?", keyfile_has_group, 1);
-    rb_define_method(kf, "has_key?", keyfile_has_key, 2);
-    rb_define_method(kf, "get_value", keyfile_get_value, 2);
-    rb_define_method(kf, "get_string", keyfile_get_string, 2);
-    rb_define_method(kf, "get_locale_string", keyfile_get_locale_string, -1);
-    rb_define_method(kf, "get_boolean", keyfile_get_boolean, 2);
-    rb_define_method(kf, "get_integer", keyfile_get_integer, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_data", keyfile_to_data, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_group", keyfile_get_start_group, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "groups", keyfile_get_groups, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_keys", keyfile_get_keys, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_group?", keyfile_has_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_key?", keyfile_has_key, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_value", keyfile_get_value, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_string", keyfile_get_string, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_locale_string", keyfile_get_locale_string, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_boolean", keyfile_get_boolean, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_integer", keyfile_get_integer, 2);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(kf, "get_double", keyfile_get_double, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_double", keyfile_get_double, 2);
 #endif
-    rb_define_method(kf, "get_string_list", keyfile_get_string_list, 2);
-    rb_define_method(kf, "get_locale_string_list", keyfile_get_locale_string_list, -1);
-    rb_define_method(kf, "get_boolean_list", keyfile_get_boolean_list, 2);
-    rb_define_method(kf, "get_integer_list", keyfile_get_integer_list, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_string_list", keyfile_get_string_list, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_locale_string_list", keyfile_get_locale_string_list, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_boolean_list", keyfile_get_boolean_list, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_integer_list", keyfile_get_integer_list, 2);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(kf, "get_double_list", keyfile_get_double_list, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_double_list", keyfile_get_double_list, 2);
 #endif
-    rb_define_method(kf, "get_comment", keyfile_get_comment, 2);
-    rb_define_method(kf, "set_value", keyfile_set_value, 3);
-    rb_define_method(kf, "set_string", keyfile_set_string, 3);
-    rb_define_method(kf, "set_locale_string", keyfile_set_locale_string, 4);
-    rb_define_method(kf, "set_boolean", keyfile_set_boolean, 3);
-    rb_define_method(kf, "set_integer", keyfile_set_integer, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_comment", keyfile_get_comment, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_value", keyfile_set_value, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_string", keyfile_set_string, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_locale_string", keyfile_set_locale_string, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_boolean", keyfile_set_boolean, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_integer", keyfile_set_integer, 3);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(kf, "set_double", keyfile_set_double, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_double", keyfile_set_double, 3);
 #endif
-    rb_define_method(kf, "set_string_list", keyfile_set_string_list, 3);
-    rb_define_method(kf, "set_locale_string_list", keyfile_set_locale_string_list, 4);
-    rb_define_method(kf, "set_boolean_list", keyfile_set_boolean_list, 3);
-    rb_define_method(kf, "set_integer_list", keyfile_set_integer_list, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_string_list", keyfile_set_string_list, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_locale_string_list", keyfile_set_locale_string_list, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_boolean_list", keyfile_set_boolean_list, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_integer_list", keyfile_set_integer_list, 3);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(kf, "set_double_list", keyfile_set_double_list, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_double_list", keyfile_set_double_list, 3);
 #endif
-    rb_define_method(kf, "set_comment", keyfile_set_comment, 3);
-    rb_define_method(kf, "remove_group", keyfile_remove_group, 1);
-    rb_define_method(kf, "remove_key", keyfile_remove_key, 2);
-    rb_define_method(kf, "remove_comment", keyfile_remove_comment, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_comment", keyfile_set_comment, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_group", keyfile_remove_group, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_key", keyfile_remove_key, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_comment", keyfile_remove_comment, 2);
 
     /* GKeyFileFlags */
-    G_DEF_CLASS(G_TYPE_KEY_FILE_FLAGS, "Flags", kf);
-    G_DEF_CONSTANTS(kf, G_TYPE_KEY_FILE_FLAGS, "G_KEY_FILE_");
+    G_DEF_CLASS(G_TYPE_KEY_FILE_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_KEY_FILE_FLAGS, "G_KEY_FILE_");
 
 #if GLIB_CHECK_VERSION(2, 14, 0)
     /* Defines for handling freedesktop.org Desktop files */
-    rb_define_const(kf, "DESKTOP_GROUP", CSTR2RVAL(G_KEY_FILE_DESKTOP_GROUP));
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_GROUP", CSTR2RVAL(G_KEY_FILE_DESKTOP_GROUP));
 
-    rb_define_const(kf, "DESKTOP_KEY_TYPE",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_TYPE",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_TYPE));
-    rb_define_const(kf, "DESKTOP_KEY_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_VERSION",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_VERSION));
-    rb_define_const(kf, "DESKTOP_KEY_NAME",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_NAME",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_NAME));
-    rb_define_const(kf, "DESKTOP_KEY_GENERIC_NAME",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_GENERIC_NAME",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_GENERIC_NAME));
-    rb_define_const(kf, "DESKTOP_KEY_NO_DISPLAY",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_NO_DISPLAY",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY));
-    rb_define_const(kf, "DESKTOP_KEY_COMMENT",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_COMMENT",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_COMMENT));
-    rb_define_const(kf, "DESKTOP_KEY_ICON",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_ICON",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_ICON));
-    rb_define_const(kf, "DESKTOP_KEY_HIDDEN",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_HIDDEN",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_HIDDEN));
-    rb_define_const(kf, "DESKTOP_KEY_ONLY_SHOW_IN",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_ONLY_SHOW_IN",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN));
-    rb_define_const(kf, "DESKTOP_KEY_NOT_SHOW_IN",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_NOT_SHOW_IN",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN));
-    rb_define_const(kf, "DESKTOP_KEY_TRY_EXEC",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_TRY_EXEC",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_TRY_EXEC));
-    rb_define_const(kf, "DESKTOP_KEY_EXEC",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_EXEC",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_EXEC));
-    rb_define_const(kf, "DESKTOP_KEY_PATH",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_PATH",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_PATH));
-    rb_define_const(kf, "DESKTOP_KEY_TERMINAL",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_TERMINAL",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_TERMINAL));
-    rb_define_const(kf, "DESKTOP_KEY_MIME_TYPE",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_MIME_TYPE",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_MIME_TYPE));
-    rb_define_const(kf, "DESKTOP_KEY_CATEGORIES",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_CATEGORIES",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_CATEGORIES));
-    rb_define_const(kf, "DESKTOP_KEY_STARTUP_NOTIFY",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_STARTUP_NOTIFY",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY));
-    rb_define_const(kf, "DESKTOP_KEY_STARTUP_WM_CLASS",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_STARTUP_WM_CLASS",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS));
-    rb_define_const(kf, "DESKTOP_KEY_URL",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_KEY_URL",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_KEY_URL));
 
-    rb_define_const(kf, "DESKTOP_TYPE_APPLICATION",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_TYPE_APPLICATION",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_APPLICATION));
-    rb_define_const(kf, "DESKTOP_TYPE_LINK",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_TYPE_LINK",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_LINK));
-    rb_define_const(kf, "DESKTOP_TYPE_DIRECTORY",
+    rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_TYPE_DIRECTORY",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_DIRECTORY));
 #endif
 #endif

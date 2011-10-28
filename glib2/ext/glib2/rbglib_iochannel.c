@@ -23,6 +23,7 @@
 
 static ID id_call;
 
+#define RG_TARGET_NAMESPACE cIOChannel
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
 
 static void
@@ -774,49 +775,49 @@ ioc_print(int argc, VALUE *argv, VALUE out)
 void
 Init_glib_io_channel(void)
 {
-    VALUE io = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_CHANNEL, "IOChannel", mGLib); 
     VALUE ioc_error = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
 
-    rb_include_module(io, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
     id_call = rb_intern("call");
     id_unpack = rb_intern("unpack");
 
 
-    rb_define_method(io, "initialize", ioc_initialize, -1);
-    rb_define_singleton_method(io, "open", ioc_s_open, -1);
-    rb_define_method(io, "fileno", ioc_get_fd, 0);          /* ref: IO#fileno */
-    rb_define_alias(io, "to_i", "fileno");                  /* ref: IO#to_i */        
-    rb_define_method(io, "read", ioc_read_chars, -1);       /* ref: IO#read(count = nil) */
-    rb_define_method(io, "readchar", ioc_read_unichar, 0);  /* ref: IO#readchar but this return an UTF-8 char */
-    rb_define_method(io, "getc", ioc_getuc, 0);             /* ref: IO#getc but this return an UTF-8 char */
-    rb_define_method(io, "readline", ioc_read_line, -1);    /* ref: IO#readline(rs = nil) */
-    rb_define_method(io, "gets", ioc_gets, -1);             /* ref: IO#gets(rs = nil) */
-    rb_define_method(io, "each", ioc_each_line, -1);        /* ref: IO#each(rs = nil){|line|...} */
-    rb_define_alias(io, "each_line", "each");               /* ref: IO#each_line(rs = nil){|line|...} */
-    rb_define_method(io, "each_char", ioc_each_char, 0);    /* ref: IO#each_byte{|line|...} */
-    rb_define_method(io, "write", ioc_write_chars, 1);      /* ref: IO#write(str) */
-    rb_define_method(io, "printf", ioc_printf, -1);         /* ref: IO#printf(...) */
-    rb_define_method(io, "print", ioc_print, -1);           /* ref: IO#print(...) */
-    rb_define_method(io, "puts", ioc_puts, -1);             /* ref: IO#puts(...) */
-    rb_define_method(io, "putc", ioc_write_unichar, 1);     /* ref: IO#putc(ch) but this accept an UTF-8 code */
-    rb_define_method(io, "flush", ioc_flush, 0);            /* ref: IO#flush */
-    rb_define_method(io, "seek", ioc_seek, -1);             /* ref: IO#seek */
-    rb_define_method(io, "set_pos", ioc_seek_pos, 1);       /* ref: IO#pos= */
-    rb_define_method(io, "close", ioc_shutdown, -1);        /* ref: IO#close */
-    rb_define_method(io, "create_watch", ioc_create_watch, 1);
-    rb_define_method(io, "add_watch", ioc_add_watch, 1);
-    rb_define_method(io, "buffer_size", ioc_get_buffer_size, 0);
-    rb_define_method(io, "set_buffer_size", ioc_set_buffer_size, 1);
-    rb_define_method(io, "buffer_condition", ioc_get_buffer_condition, 0);
-    rb_define_method(io, "flags", ioc_get_flags, 0);
-    rb_define_method(io, "set_flags", ioc_set_flags, 1);
-    rb_define_method(io, "buffered", ioc_get_buffered, 0);
-    rb_define_method(io, "set_buffered", ioc_set_buffered, 1);
-    rb_define_method(io, "encoding", ioc_get_encoding, 0);
-    rb_define_method(io, "set_encoding", ioc_set_encoding, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ioc_initialize, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "open", ioc_s_open, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "fileno", ioc_get_fd, 0);          /* ref: IO#fileno */
+    rb_define_alias(RG_TARGET_NAMESPACE, "to_i", "fileno");                  /* ref: IO#to_i */        
+    rb_define_method(RG_TARGET_NAMESPACE, "read", ioc_read_chars, -1);       /* ref: IO#read(count = nil) */
+    rb_define_method(RG_TARGET_NAMESPACE, "readchar", ioc_read_unichar, 0);  /* ref: IO#readchar but this return an UTF-8 char */
+    rb_define_method(RG_TARGET_NAMESPACE, "getc", ioc_getuc, 0);             /* ref: IO#getc but this return an UTF-8 char */
+    rb_define_method(RG_TARGET_NAMESPACE, "readline", ioc_read_line, -1);    /* ref: IO#readline(rs = nil) */
+    rb_define_method(RG_TARGET_NAMESPACE, "gets", ioc_gets, -1);             /* ref: IO#gets(rs = nil) */
+    rb_define_method(RG_TARGET_NAMESPACE, "each", ioc_each_line, -1);        /* ref: IO#each(rs = nil){|line|...} */
+    rb_define_alias(RG_TARGET_NAMESPACE, "each_line", "each");               /* ref: IO#each_line(rs = nil){|line|...} */
+    rb_define_method(RG_TARGET_NAMESPACE, "each_char", ioc_each_char, 0);    /* ref: IO#each_byte{|line|...} */
+    rb_define_method(RG_TARGET_NAMESPACE, "write", ioc_write_chars, 1);      /* ref: IO#write(str) */
+    rb_define_method(RG_TARGET_NAMESPACE, "printf", ioc_printf, -1);         /* ref: IO#printf(...) */
+    rb_define_method(RG_TARGET_NAMESPACE, "print", ioc_print, -1);           /* ref: IO#print(...) */
+    rb_define_method(RG_TARGET_NAMESPACE, "puts", ioc_puts, -1);             /* ref: IO#puts(...) */
+    rb_define_method(RG_TARGET_NAMESPACE, "putc", ioc_write_unichar, 1);     /* ref: IO#putc(ch) but this accept an UTF-8 code */
+    rb_define_method(RG_TARGET_NAMESPACE, "flush", ioc_flush, 0);            /* ref: IO#flush */
+    rb_define_method(RG_TARGET_NAMESPACE, "seek", ioc_seek, -1);             /* ref: IO#seek */
+    rb_define_method(RG_TARGET_NAMESPACE, "set_pos", ioc_seek_pos, 1);       /* ref: IO#pos= */
+    rb_define_method(RG_TARGET_NAMESPACE, "close", ioc_shutdown, -1);        /* ref: IO#close */
+    rb_define_method(RG_TARGET_NAMESPACE, "create_watch", ioc_create_watch, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_watch", ioc_add_watch, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "buffer_size", ioc_get_buffer_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_buffer_size", ioc_set_buffer_size, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "buffer_condition", ioc_get_buffer_condition, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", ioc_get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", ioc_set_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "buffered", ioc_get_buffered, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_buffered", ioc_set_buffered, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "encoding", ioc_get_encoding, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_encoding", ioc_set_encoding, 1);
 
-    G_DEF_SETTERS(io);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 #ifdef G_OS_WIN32
     {
@@ -825,40 +826,40 @@ Init_glib_io_channel(void)
         io_channel_win32_socket =
             rb_define_class_under(mGLib,
                                   "IOChannelWin32Socket",
-                                  io);
+                                  RG_TARGET_NAMESPACE);
         rb_define_method(io_channel_win32_socket, "initialize",
                          ioc_win32_socket_initialize, 1);
     }
 #endif
 
     /* GSeekType */
-    rb_define_const(io, "SEEK_CUR", INT2NUM(G_SEEK_CUR));
-    rb_define_const(io, "SEEK_SET", INT2NUM(G_SEEK_SET));
-    rb_define_const(io, "SEEK_END", INT2NUM(G_SEEK_END));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEEK_CUR", INT2NUM(G_SEEK_CUR));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEEK_SET", INT2NUM(G_SEEK_SET));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEEK_END", INT2NUM(G_SEEK_END));
     
     /* GIOStatus */
-    rb_define_const(io, "STATUS_ERROR", INT2NUM(G_IO_STATUS_ERROR));
-    rb_define_const(io, "STATUS_NORMAL", INT2NUM(G_IO_STATUS_NORMAL));
-    rb_define_const(io, "STATUS_EOF", INT2NUM(G_IO_STATUS_EOF));
-    rb_define_const(io, "STATUS_AGAIN", INT2NUM(G_IO_STATUS_AGAIN));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_ERROR", INT2NUM(G_IO_STATUS_ERROR));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_NORMAL", INT2NUM(G_IO_STATUS_NORMAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_EOF", INT2NUM(G_IO_STATUS_EOF));
+    rb_define_const(RG_TARGET_NAMESPACE, "STATUS_AGAIN", INT2NUM(G_IO_STATUS_AGAIN));
 
     /* GIOCondition */
-    rb_define_const(io, "IN", INT2NUM(G_IO_IN));
-    rb_define_const(io, "OUT", INT2NUM(G_IO_OUT));
-    rb_define_const(io, "PRI", INT2NUM(G_IO_PRI));
-    rb_define_const(io, "ERR", INT2NUM(G_IO_ERR));
-    rb_define_const(io, "HUP", INT2NUM(G_IO_HUP));
-    rb_define_const(io, "NVAL", INT2NUM(G_IO_NVAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "IN", INT2NUM(G_IO_IN));
+    rb_define_const(RG_TARGET_NAMESPACE, "OUT", INT2NUM(G_IO_OUT));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRI", INT2NUM(G_IO_PRI));
+    rb_define_const(RG_TARGET_NAMESPACE, "ERR", INT2NUM(G_IO_ERR));
+    rb_define_const(RG_TARGET_NAMESPACE, "HUP", INT2NUM(G_IO_HUP));
+    rb_define_const(RG_TARGET_NAMESPACE, "NVAL", INT2NUM(G_IO_NVAL));
 
     /* GIOFlags */
-    rb_define_const(io, "FLAG_APPEND", INT2NUM(G_IO_FLAG_APPEND));
-    rb_define_const(io, "FLAG_NONBLOCK", INT2NUM(G_IO_FLAG_NONBLOCK));
-    rb_define_const(io, "FLAG_READABLE", INT2NUM(G_IO_FLAG_IS_READABLE));
-    rb_define_const(io, "FLAG_WRITEABLE", INT2NUM(G_IO_FLAG_IS_WRITEABLE));
-    rb_define_const(io, "FLAG_IS_SEEKABLE", INT2NUM(G_IO_FLAG_IS_SEEKABLE));
-    rb_define_const(io, "FLAG_MASK", INT2NUM(G_IO_FLAG_MASK));
-    rb_define_const(io, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
-    rb_define_const(io, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_APPEND", INT2NUM(G_IO_FLAG_APPEND));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_NONBLOCK", INT2NUM(G_IO_FLAG_NONBLOCK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_READABLE", INT2NUM(G_IO_FLAG_IS_READABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_WRITEABLE", INT2NUM(G_IO_FLAG_IS_WRITEABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_IS_SEEKABLE", INT2NUM(G_IO_FLAG_IS_SEEKABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_MASK", INT2NUM(G_IO_FLAG_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_GET_MASK", INT2NUM(G_IO_FLAG_GET_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAG_SET_MASK", INT2NUM(G_IO_FLAG_SET_MASK));
 
     /* GIOChannelError */
     rb_define_singleton_method(ioc_error, "from_errno", ioc_error_s_from_errno, 1);

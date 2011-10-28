@@ -21,6 +21,8 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE cTypeModule
+
 static VALUE
 use(VALUE self)
 {
@@ -62,9 +64,9 @@ void     g_type_module_add_interface (GTypeModule           *module,
 void
 Init_gobject_gtypemodule(void)
 {
-    VALUE cTypeModule = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
-    rb_define_method(cTypeModule, "use", use, 0);
-    rb_define_method(cTypeModule, "unuse", unuse, 0);
-    rb_define_method(cTypeModule, "name", get_name, 0);
-    rb_define_method(cTypeModule, "name=", set_name, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_TYPE_MODULE, "TypeModule", mGLib);
+    rb_define_method(RG_TARGET_NAMESPACE, "use", use, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unuse", unuse, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name=", set_name, 1);
 }

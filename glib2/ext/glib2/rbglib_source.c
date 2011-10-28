@@ -43,6 +43,7 @@ g_source_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cSource
 #define _SELF(s) ((GSource*)RVAL2BOXED(s, G_TYPE_SOURCE))
 
 /*
@@ -161,26 +162,26 @@ gboolean    g_source_remove_by_user_data    (gpointer user_data);
 void
 Init_glib_source(void)
 {
-    VALUE src = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib); 
 
     id_call = rb_intern("call");
 
-    rb_define_method(src, "attach", source_attach, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach", source_attach, 1);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(src, "destroyed?", source_is_destroyed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "destroyed?", source_is_destroyed, 0);
 #endif
-    rb_define_method(src, "set_priority", source_set_priority, 1);
-    rb_define_method(src, "priority", source_get_priority, 0);
-    rb_define_method(src, "set_can_recurse", source_set_can_recurse, 1);
-    rb_define_method(src, "can_recurse?", source_get_can_recurse, 0);
-    rb_define_method(src, "id", source_get_id, 0);
-    rb_define_method(src, "context", source_get_context, 0);
-    rb_define_method(src, "set_callback", source_set_callback, 0);
-    rb_define_method(src, "add_poll", source_add_poll, 1);
-    rb_define_method(src, "remove_poll", source_remove_poll, 1);
-    rb_define_method(src, "current_time", source_get_current_time, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_priority", source_set_priority, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "priority", source_get_priority, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_can_recurse", source_set_can_recurse, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "can_recurse?", source_get_can_recurse, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "id", source_get_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "context", source_get_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_callback", source_set_callback, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_poll", source_add_poll, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_poll", source_remove_poll, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "current_time", source_get_current_time, 0);
 
     /* GLib::Source.remove is moved to rbglib_maincontext.c */
 
-    G_DEF_SETTERS(src);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -53,6 +53,7 @@ g_completion_get_type(void)
 
 #define G_TYPE_COMPLETION (g_completion_get_type())
 
+#define RG_TARGET_NAMESPACE cCompletion
 #define _SELF(s) ((GCompletion*)RVAL2BOXED(s, G_TYPE_COMPLETION))
 
 /* data should be [self, data] */
@@ -176,7 +177,7 @@ void        g_completion_set_compare        (GCompletion *cmp,
 void
 Init_glib_completion(void)
 {
-    VALUE comp = G_DEF_CLASS(G_TYPE_COMPLETION, "Completion", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_COMPLETION, "Completion", mGLib); 
 
     id_call = rb_intern("call");
     id_to_s = rb_intern("to_s");
@@ -184,11 +185,11 @@ Init_glib_completion(void)
     id_compfunc = rb_intern("completion_proc");
     id_items_internal = rb_intern("items_internal");
 
-    rb_define_method(comp, "initialize", comp_initialize, 0);
-    rb_define_method(comp, "add_items", comp_add_items, 1);
-    rb_define_method(comp, "remove_items", comp_remove_items, 1);
-    rb_define_method(comp, "clear_items", comp_clear_items, 0);
-    rb_define_method(comp, "complete", comp_complete, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", comp_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_items", comp_add_items, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_items", comp_remove_items, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear_items", comp_clear_items, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "complete", comp_complete, 1);
 
-    rb_define_method(comp, "items", comp_items, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "items", comp_items, 0);
 }

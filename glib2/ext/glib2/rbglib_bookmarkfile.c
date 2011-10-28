@@ -50,6 +50,8 @@ g_bookmark_file_get_type(void)
 /************************************************/
 
 #define G_TYPE_BOOKMARK_FILE (g_bookmark_file_get_type())
+
+#define RG_TARGET_NAMESPACE cBookmarkFile
 #define _SELF(self) ((GBookmarkFile*)(RVAL2BOXED(self, G_TYPE_BOOKMARK_FILE)))
 
 static VALUE
@@ -506,48 +508,48 @@ void
 Init_glib_bookmark_file(void)
 {
 #if GLIB_CHECK_VERSION(2,12,0)
-    VALUE bf = G_DEF_CLASS(G_TYPE_BOOKMARK_FILE, "BookmarkFile", mGLib);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOOKMARK_FILE, "BookmarkFile", mGLib);
 
     G_DEF_ERROR(G_BOOKMARK_FILE_ERROR, "BookmarkFileError", mGLib, 
                 rb_eRuntimeError, G_TYPE_BOOKMARK_FILE_ERROR);
 
-    rb_define_method(bf, "initialize", bf_initialize, 0);
-    rb_define_method(bf, "load_from_file", bf_load_from_file, 1);
-    rb_define_method(bf, "load_from_data", bf_load_from_data, 1);
-    rb_define_method(bf, "load_from_data_dirs", bf_load_from_data_dirs, 1);
-    rb_define_method(bf, "to_data", bf_to_data, 0);
-    rb_define_method(bf, "to_file", bf_to_file, 1);
-    rb_define_method(bf, "has_item?", bf_has_item, 1);
-    rb_define_method(bf, "has_group?", bf_has_group, 2);
-    rb_define_method(bf, "has_application?", bf_has_application, 2);
-    rb_define_method(bf, "size", bf_get_size, 0);
-    rb_define_method(bf, "uris", bf_get_uris, 0);
-    rb_define_method(bf, "get_title", bf_get_title, 1);
-    rb_define_method(bf, "get_description", bf_get_description, 1);
-    rb_define_method(bf, "get_mime_type", bf_get_mime_type, 1);
-    rb_define_method(bf, "private?", bf_get_is_private, 1);
-    rb_define_method(bf, "get_icon", bf_get_icon, 1);
-    rb_define_method(bf, "get_added", bf_get_added, 1);
-    rb_define_method(bf, "get_modified", bf_get_modified, 1);
-    rb_define_method(bf, "get_visited", bf_get_visited, 1);
-    rb_define_method(bf, "get_groups", bf_get_groups, 1);
-    rb_define_method(bf, "get_applications", bf_get_applications, 1);
-    rb_define_method(bf, "get_app_info", bf_get_app_info, 2);
-    rb_define_method(bf, "set_title", bf_set_title, 2);
-    rb_define_method(bf, "set_description", bf_set_description, 2);
-    rb_define_method(bf, "set_mime_type", bf_set_mime_type, 2);
-    rb_define_method(bf, "set_private", bf_set_is_private, 2);
-    rb_define_method(bf, "set_icon", bf_set_icon, 3);
-    rb_define_method(bf, "set_added", bf_set_added, 2);
-    rb_define_method(bf, "set_groups", bf_set_groups, 2);
-    rb_define_method(bf, "set_modified", bf_set_modified, 2);
-    rb_define_method(bf, "set_visited", bf_set_visited, 2);
-    rb_define_method(bf, "set_app_info", bf_set_app_info, 5);
-    rb_define_method(bf, "add_group", bf_add_group, 2);
-    rb_define_method(bf, "add_application", bf_add_application, 3);
-    rb_define_method(bf, "remove_group", bf_remove_group, 2);
-    rb_define_method(bf, "remove_application", bf_remove_application, 2);
-    rb_define_method(bf, "remove_item", bf_remove_item, 1);
-    rb_define_method(bf, "move_item", bf_move_item, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", bf_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_file", bf_load_from_file, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data", bf_load_from_data, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data_dirs", bf_load_from_data_dirs, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_data", bf_to_data, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_file", bf_to_file, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_item?", bf_has_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_group?", bf_has_group, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_application?", bf_has_application, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", bf_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "uris", bf_get_uris, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_title", bf_get_title, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_description", bf_get_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_mime_type", bf_get_mime_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "private?", bf_get_is_private, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_icon", bf_get_icon, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_added", bf_get_added, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_modified", bf_get_modified, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_visited", bf_get_visited, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_groups", bf_get_groups, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_applications", bf_get_applications, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_app_info", bf_get_app_info, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_title", bf_set_title, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_description", bf_set_description, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", bf_set_mime_type, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_private", bf_set_is_private, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_icon", bf_set_icon, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_added", bf_set_added, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_groups", bf_set_groups, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_modified", bf_set_modified, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visited", bf_set_visited, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_app_info", bf_set_app_info, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_group", bf_add_group, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_application", bf_add_application, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_group", bf_remove_group, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_application", bf_remove_application, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_item", bf_remove_item, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_item", bf_move_item, 2);
 #endif
 }

@@ -21,7 +21,9 @@
 
 #include "rbgprivate.h"
 
-static VALUE gthreads;
+#define RG_TARGET_NAMESPACE cThread
+
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 gt_init(VALUE self)
@@ -52,8 +54,8 @@ gt_supported(G_GNUC_UNUSED VALUE self)
 void
 Init_glib_threads(void)
 {
-    gthreads = rb_define_class_under(mGLib, "Thread", rb_cObject);
+    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Thread", rb_cObject);
 
-    rb_define_singleton_method(gthreads, "init", gt_init, 0);
-    rb_define_singleton_method(gthreads, "supported?", gt_supported, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "init", gt_init, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "supported?", gt_supported, 0);
 }
