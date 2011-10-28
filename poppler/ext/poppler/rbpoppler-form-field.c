@@ -21,6 +21,8 @@
 
 #include "rbpoppler-private.h"
 
+#define RG_TARGET_NAMESPACE cFormField
+
 #define RVAL2FF(obj) RVAL2POPPLER_FORM_FIELD(obj)
 #define RVAL2TF(obj) RVAL2FF(obj)
 #define RVAL2BF(obj) RVAL2FF(obj)
@@ -68,19 +70,19 @@ rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
 
 /* FormField */
 static VALUE
-form_field_get_id(VALUE self)
+rg_id(VALUE self)
 {
     return INT2NUM(poppler_form_field_get_id(RVAL2FF(self)));
 }
 
 static VALUE
-form_field_get_font_size(VALUE self)
+rg_font_size(VALUE self)
 {
     return rb_float_new(poppler_form_field_get_font_size(RVAL2FF(self)));
 }
 
 static VALUE
-form_field_is_read_only(VALUE self)
+rg_read_only_p(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_is_read_only(RVAL2FF(self)));
 }
@@ -154,7 +156,6 @@ text_field_is_password(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_text_is_password(RVAL2TF(self)));
 }
-
 
 /* Choice Field */
 static VALUE
@@ -244,30 +245,28 @@ choice_field_get_text(VALUE self)
 void
 Init_poppler_form_field(VALUE mPoppler)
 {
-    VALUE cFormField;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cFormField = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
-    cUnknownField = rb_define_class_under(mPoppler, "UnknownField", cFormField);
-    cTextField = rb_define_class_under(mPoppler, "TextField", cFormField);
-    cButtonField = rb_define_class_under(mPoppler, "ButtonField", cFormField);
-    cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", cFormField);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
+    cUnknownField = rb_define_class_under(mPoppler, "UnknownField", RG_TARGET_NAMESPACE);
+    cTextField = rb_define_class_under(mPoppler, "TextField", RG_TARGET_NAMESPACE);
+    cButtonField = rb_define_class_under(mPoppler, "ButtonField", RG_TARGET_NAMESPACE);
+    cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", RG_TARGET_NAMESPACE);
     cSignatureField = rb_define_class_under(mPoppler, "SignatureField",
-                                            cFormField);
+                                            RG_TARGET_NAMESPACE);
 
 /* FormField */
-    rb_define_method(cFormField, "id", form_field_get_id, 0);
-    rb_define_method(cFormField, "font_size", form_field_get_font_size, 0);
-    rb_define_method(cFormField, "read_only?", form_field_is_read_only, 0);
+    RG_DEF_METHOD(id, 0);
+    RG_DEF_METHOD(font_size, 0);
+    RG_DEF_METHOD_P(read_only, 0);
 
-    G_DEF_SETTERS(cFormField);
-
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     rb_define_method(cButtonField, "type", button_field_get_button_type, 0);
     rb_define_method(cButtonField, "active?", button_field_get_state, 0);
     rb_define_method(cButtonField, "set_active", button_field_set_state, 1);
 
     G_DEF_SETTERS(cButtonField);
-
 
     rb_define_method(cTextField, "type", text_field_get_text_type, 0);
     rb_define_method(cTextField, "text", text_field_get_text, 0);
@@ -279,7 +278,6 @@ Init_poppler_form_field(VALUE mPoppler)
     rb_define_method(cTextField, "password?", text_field_is_password, 0);
 
     G_DEF_SETTERS(cTextField);
-
 
     rb_define_method(cChoiceField, "type", choice_field_get_choice_type, 0);
     rb_define_method(cChoiceField, "editable?", choice_field_is_editable, 0);

@@ -21,20 +21,22 @@
 
 #include "rbpoppler-private.h"
 
+#define RG_TARGET_NAMESPACE mPoppler
+
 static VALUE
-get_backend(VALUE self)
+rg_m_backend(VALUE self)
 {
     return GENUM2RVAL(poppler_get_backend(), POPPLER_TYPE_BACKEND);
 }
 
 static VALUE
-get_version(VALUE self)
+rg_m_version(VALUE self)
 {
     return CSTR2RVAL(poppler_get_version());
 }
 
 static VALUE
-cairo_available(VALUE self)
+rg_m_cairo_available_p(VALUE self)
 {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
     return Qtrue;
@@ -43,60 +45,58 @@ cairo_available(VALUE self)
 #endif
 }
 
-
 void
 Init_poppler(void)
 {
-    VALUE mPoppler;
+    VALUE RG_TARGET_NAMESPACE;
 
-    mPoppler = rb_define_module("Poppler");
+    RG_TARGET_NAMESPACE = rb_define_module("Poppler");
 
-    rb_define_const(mPoppler, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(POPPLER_MAJOR_VERSION),
                                 INT2FIX(POPPLER_MINOR_VERSION),
                                 INT2FIX(POPPLER_MICRO_VERSION)));
 
-    G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ERROR, "Error", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(POPPLER_TYPE_ORIENTATION, "Orientation", RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_TYPE,
-                "PageTransitionType", mPoppler);
+                "PageTransitionType", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_ALIGNMENT,
-                "PageTransitionAlignment", mPoppler);
+                "PageTransitionAlignment", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION_DIRECTION,
-                "PageTransitionDirection", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_SELECTION_STYLE, "SelectionStyle", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_FORM_BUTTON_TYPE, "FormButtonType", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_FORM_TEXT_TYPE, "FormTextType", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_FORM_CHOICE_TYPE, "FormChoiceType", mPoppler);
+                "PageTransitionDirection", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(POPPLER_TYPE_SELECTION_STYLE, "SelectionStyle", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_BUTTON_TYPE, "FormButtonType", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_TEXT_TYPE, "FormTextType", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(POPPLER_TYPE_FORM_CHOICE_TYPE, "FormChoiceType", RG_TARGET_NAMESPACE);
 
     G_RENAME_NICK("3D", "TYPE_3D");
-    G_DEF_CLASS(POPPLER_TYPE_ANNOT_TYPE, "AnnotationType", mPoppler);
-    G_DEF_CLASS(POPPLER_TYPE_ANNOT_FLAG, "AnnotationFlag", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ANNOT_TYPE, "AnnotationType", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(POPPLER_TYPE_ANNOT_FLAG, "AnnotationFlag", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_MARKUP_REPLY_TYPE,
-		"AnnotationMarkupReplyType", mPoppler);
+        "AnnotationMarkupReplyType", RG_TARGET_NAMESPACE);
     G_RENAME_NICK("3D", "TYPE_3D");
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_EXTERNAL_DATA_TYPE,
-		"AnnotationExternalDataType", mPoppler);
+        "AnnotationExternalDataType", RG_TARGET_NAMESPACE);
 #  if !POPPLER_CHECK_VERSION(0, 9, 0)
-    G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_ICON, "AnnotationTextIcon", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_ICON, "AnnotationTextIcon", RG_TARGET_NAMESPACE);
 #  endif
-    G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_STATE, "AnnotationTextState", mPoppler);
+    G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_STATE, "AnnotationTextState", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING,
-		"AnnotationFreeTextQuadding", mPoppler);
+        "AnnotationFreeTextQuadding", RG_TARGET_NAMESPACE);
 
+    G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", mPoppler);
+    RG_DEF_MODFUNC(backend, 0);
+    RG_DEF_MODFUNC(version, 0);
+    RG_DEF_MODFUNC_P(cairo_available, 0);
 
-    rb_define_module_function(mPoppler, "backend", get_backend, 0);
-    rb_define_module_function(mPoppler, "version", get_version, 0);
-    rb_define_module_function(mPoppler, "cairo_available?", cairo_available, 0);
-
-    Init_poppler_document(mPoppler);
-    Init_poppler_page(mPoppler);
-    Init_poppler_attachment(mPoppler);
-    Init_poppler_action(mPoppler);
-    Init_poppler_annotation(mPoppler);
-    Init_poppler_form_field(mPoppler);
+    Init_poppler_document(RG_TARGET_NAMESPACE);
+    Init_poppler_page(RG_TARGET_NAMESPACE);
+    Init_poppler_attachment(RG_TARGET_NAMESPACE);
+    Init_poppler_action(RG_TARGET_NAMESPACE);
+    Init_poppler_annotation(RG_TARGET_NAMESPACE);
+    Init_poppler_form_field(RG_TARGET_NAMESPACE);
 }
