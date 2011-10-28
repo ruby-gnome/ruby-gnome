@@ -55,63 +55,6 @@ sprintcompositor_initialize(VALUE self, VALUE val)
     return Qnil;
 }
 
-/* Defined as properties.
-GtkSourceBuffer*    gtk_source_print_compositor_get_buffer
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_tab_width
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         guint width);
-guint               gtk_source_print_compositor_get_tab_width
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_wrap_mode
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         GtkWrapMode wrap_mode);
-GtkWrapMode         gtk_source_print_compositor_get_wrap_mode
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_highlight_syntax
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         gboolean highlight);
-gboolean            gtk_source_print_compositor_get_highlight_syntax
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_print_line_numbers
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         guint interval);
-guint               gtk_source_print_compositor_get_print_line_numbers
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_body_font_name
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         const gchar *font_name);
-gchar*              gtk_source_print_compositor_get_body_font_name
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_line_numbers_font_name
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         const gchar *font_name);
-gchar*              gtk_source_print_compositor_get_line_numbers_font_name
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_header_font_name
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         const gchar *font_name);
-gchar*              gtk_source_print_compositor_get_header_font_name
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_footer_font_name
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         const gchar *font_name);
-gchar*              gtk_source_print_compositor_get_footer_font_name
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_print_header
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         gboolean print);
-gboolean            gtk_source_print_compositor_get_print_header
-                                                        (GtkSourcePrintCompositor *compositor);
-void                gtk_source_print_compositor_set_print_footer
-                                                        (GtkSourcePrintCompositor *compositor,
-                                                         gboolean print);
-gboolean            gtk_source_print_compositor_get_print_footer
-                                                        (GtkSourcePrintCompositor *compositor);
-gint                gtk_source_print_compositor_get_n_pages
-                                                        (GtkSourcePrintCompositor *compositor);
-*/
-
 static VALUE
 sprintcompositor_get_top_margin(VALUE self, VALUE unit)
 {

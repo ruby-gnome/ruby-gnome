@@ -29,13 +29,6 @@
 #define RG_TARGET_NAMESPACE cSourceLanguage
 #define _SELF(self) (GTK_SOURCE_LANGUAGE(RVAL2GOBJ(self)))
 
-/* Defined as properties.
-const gchar*        gtk_source_language_get_id          (GtkSourceLanguage *language);
-const gchar*        gtk_source_language_get_name        (GtkSourceLanguage *language);
-const gchar*        gtk_source_language_get_section     (GtkSourceLanguage *language);
-gboolean            gtk_source_language_get_hidden      (GtkSourceLanguage *language);
-*/
-
 /* Method: get_metadata(name)
  * name: the metadata property name (string)
  * Returns: the localized metadata for the given name.

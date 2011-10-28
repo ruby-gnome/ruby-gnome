@@ -27,15 +27,6 @@
 #define RG_TARGET_NAMESPACE cSourceStyleScheme
 #define _SELF(self) (GTK_SOURCE_STYLE_SCHEME(RVAL2GOBJ(self)))
 
-/* Defined as properties.
-const gchar*        gtk_source_style_scheme_get_id      (GtkSourceStyleScheme *scheme);
-const gchar*        gtk_source_style_scheme_get_name    (GtkSourceStyleScheme *scheme);
-const gchar*        gtk_source_style_scheme_get_description
-                                                        (GtkSourceStyleScheme *scheme);
-const gchar*        gtk_source_style_scheme_get_filename
-                                                        (GtkSourceStyleScheme *scheme);
-*/
-
 /* Method: authors
  *
  * Returns: a list of authors for the given style scheme.

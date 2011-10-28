@@ -43,10 +43,6 @@ sourcemark_new(VALUE self, VALUE name, VALUE category)
 	return Qnil;
 }
 
-/* Defined as properties.
-const gchar*        gtk_source_mark_get_category        (GtkSourceMark *mark);
-*/
-
 /* Method: next(category=nil)
  * category: the category (string), or nil.
  *

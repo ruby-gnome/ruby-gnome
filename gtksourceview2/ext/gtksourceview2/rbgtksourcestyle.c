@@ -33,23 +33,6 @@ sourcestyle_copy(VALUE self)
 	return GOBJ2RVAL (gtk_source_style_copy (_SELF (self)));
 }
 
-/* Defined as properties.
-  "background"               gchar*                : Read / Write / Construct Only
-  "background-set"           gboolean              : Read / Write / Construct Only
-  "bold"                     gboolean              : Read / Write / Construct Only
-  "bold-set"                 gboolean              : Read / Write / Construct Only
-  "foreground"               gchar*                : Read / Write / Construct Only
-  "foreground-set"           gboolean              : Read / Write / Construct Only
-  "italic"                   gboolean              : Read / Write / Construct Only
-  "italic-set"               gboolean              : Read / Write / Construct Only
-  "line-background"          gchar*                : Read / Write / Construct Only
-  "line-background-set"      gboolean              : Read / Write / Construct Only
-  "strikethrough"            gboolean              : Read / Write / Construct Only
-  "strikethrough-set"        gboolean              : Read / Write / Construct Only
-  "underline"                gboolean              : Read / Write / Construct Only
-  "underline-set"            gboolean              : Read / Write / Construct Only
-*/
-
 void
 Init_gtk_sourcestyle ()
 {

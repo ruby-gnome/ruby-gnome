@@ -73,33 +73,6 @@ sourcebuffer_new(int argc, VALUE *argv, VALUE self)
 	return Qnil;
 }
 
-/* Defined as properties.
-void                gtk_source_buffer_set_highlight_syntax
-                                                        (GtkSourceBuffer *buffer,
-                                                         gboolean highlight);
-gboolean            gtk_source_buffer_get_highlight_syntax
-                                                        (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_language      (GtkSourceBuffer *buffer,
-                                                         GtkSourceLanguage *language);
-GtkSourceLanguage*  gtk_source_buffer_get_language      (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_highlight_matching_brackets
-                                                        (GtkSourceBuffer *buffer,
-                                                         gboolean highlight);
-gboolean            gtk_source_buffer_get_highlight_matching_brackets
-                                                        (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_style_scheme  (GtkSourceBuffer *buffer,
-                                                         GtkSourceStyleScheme *scheme);
-GtkSourceStyleScheme* gtk_source_buffer_get_style_scheme
-                                                        (GtkSourceBuffer *buffer);
-gint                gtk_source_buffer_get_max_undo_levels
-                                                        (GtkSourceBuffer *buffer);
-void                gtk_source_buffer_set_max_undo_levels
-                                                        (GtkSourceBuffer *buffer,
-                                                         gint max_undo_levels);
-gboolean            gtk_source_buffer_can_redo          (GtkSourceBuffer *buffer);
-gboolean            gtk_source_buffer_can_undo          (GtkSourceBuffer *buffer);
-*/
-
 /*
  * Method: redo!
  *

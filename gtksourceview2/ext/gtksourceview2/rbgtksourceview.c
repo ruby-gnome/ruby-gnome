@@ -56,27 +56,6 @@ sourceview_initialize(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-/* Defined as properties.
-void                gtk_source_view_set_auto_indent     (GtkSourceView *view,
-                                                         gboolean enable)
-gboolean            gtk_source_view_get_auto_indent     (GtkSourceView *view)
-void                gtk_source_view_set_indent_on_tab   (GtkSourceView *view,
-                                                         gboolean enable)
-gboolean            gtk_source_view_get_indent_on_tab   (GtkSourceView *view)
-void                gtk_source_view_set_indent_width    (GtkSourceView *view,
-                                                         gint width)
-gint                gtk_source_view_get_indent_width    (GtkSourceView *view)
-void                gtk_source_view_set_insert_spaces_instead_of_tabs
-                                                        (GtkSourceView *view,
-                                                         gboolean enable)
-gboolean            gtk_source_view_get_insert_spaces_instead_of_tabs
-                                                        (GtkSourceView *view)
-void                gtk_source_view_set_smart_home_end  (GtkSourceView *view,
-                                                         GtkSourceSmartHomeEndType smart_he)
-GtkSourceSmartHomeEndType gtk_source_view_get_smart_home_end
-                                                        (GtkSourceView *view)
-*/
-
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
 /*
  * Method: set_mark_category_pixbuf(category, pixbuf)
@@ -189,35 +168,6 @@ sourceview_set_mark_category_background(VALUE self, VALUE category, VALUE color)
     return self;
 }
 # endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
-
-/* Defined as properties.
-void                gtk_source_view_set_highlight_current_line
-                                                        (GtkSourceView *view,
-                                                         gboolean show)
-gboolean            gtk_source_view_get_highlight_current_line
-                                                        (GtkSourceView *view)
-void                gtk_source_view_set_show_line_marks (GtkSourceView *view,
-                                                         gboolean show);
-gboolean            gtk_source_view_get_show_line_marks (GtkSourceView *view)
-void                gtk_source_view_set_show_line_numbers
-                                                        (GtkSourceView *view,
-                                                         gboolean show)
-gboolean            gtk_source_view_get_show_line_numbers
-                                                        (GtkSourceView *view)
-void                gtk_source_view_set_show_right_margin
-                                                        (GtkSourceView *view,
-                                                         gboolean show)
-gboolean            gtk_source_view_get_show_right_margin
-                                                        (GtkSourceView *view)
-void                gtk_source_view_set_right_margin_position
-                                                        (GtkSourceView *view,
-                                                         guint pos)
-guint               gtk_source_view_get_right_margin_position
-                                                        (GtkSourceView *view)
-void                gtk_source_view_set_tab_width       (GtkSourceView *view,
-                                                         guint width)
-guint               gtk_source_view_get_tab_width       (GtkSourceView *view)
-*/
 
 void
 Init_gtk_sourceview ()
