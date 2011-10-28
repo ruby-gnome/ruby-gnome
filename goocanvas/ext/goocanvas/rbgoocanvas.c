@@ -134,6 +134,7 @@ Init_goocanvas(void)
     Init_goocanvasrect(); /* Goo::CanvasRect */
     Init_goocanvasellipse(); /* Goo::CanvasEllipse */
     Init_goocanvaspolyline(); /* Goo::CanvasPolyline */
+    Init_goocanvaspoints(); /* Goo::CanvasPoints */
     Init_goocanvasimage(); /* Goo::CanvasImage */
     Init_goocanvastable(); /* Goo::CanvasTable */
     Init_goocanvaswidget(); /* Goo::CanvasWidget */

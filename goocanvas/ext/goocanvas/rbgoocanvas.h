@@ -55,6 +55,7 @@ void Init_goocanvastext(void); /* Goo::CanvasText */
 void Init_goocanvasrect(void); /* Goo::CanvasRect */
 void Init_goocanvasellipse(void); /* Goo::CanvasEllipse */
 void Init_goocanvaspolyline(void); /* Goo::CanvasPolyline */
+void Init_goocanvaspoints(void); /* Goo::CanvasPoints */
 void Init_goocanvasimage(void); /* Goo::CanvasImage */
 void Init_goocanvastable(void); /* Goo::CanvasTable */
 void Init_goocanvaswidget(void); /* Goo::CanvasWidget */
