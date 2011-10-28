@@ -33,10 +33,10 @@
  * Returns: a newly created Gtk::SourceLanguageManager object.
  */
 static VALUE
-slm_new(VALUE self)
+rg_initialize(VALUE self)
 {
-	G_INITIALIZE (self, gtk_source_language_manager_new ());
-	return Qnil;
+    G_INITIALIZE (self, gtk_source_language_manager_new ());
+    return Qnil;
 }
 
 /* Class method: default
@@ -46,7 +46,7 @@ slm_new(VALUE self)
  * Returns: a Gtk::SourceLanguageManager
  */
 static VALUE
-slm_get_default(VALUE self)
+rg_s_default(VALUE self)
 {
     GtkSourceLanguageManager* slm = gtk_source_language_manager_get_default();
     GType gtype = G_TYPE_FROM_INSTANCE(slm);
@@ -68,10 +68,10 @@ slm_get_default(VALUE self)
  * Returns: self.
  */
 static VALUE
-slm_set_search_path(VALUE self, VALUE dirs)
+rg_set_search_path(VALUE self, VALUE dirs)
 {
     gchar** gdirs = (gchar**)NULL;
-	gint i;
+    gint i;
 
     if (! NIL_P(dirs)){
         Check_Type(dirs, T_ARRAY);
@@ -88,9 +88,9 @@ slm_set_search_path(VALUE self, VALUE dirs)
         gdirs[i] = (gchar*)NULL;
     }
 
-	gtk_source_language_manager_set_search_path (_SELF (self), gdirs);
+    gtk_source_language_manager_set_search_path (_SELF (self), gdirs);
 
-	return self;
+    return self;
 }
 
 /* Method: search_path
@@ -98,10 +98,10 @@ slm_set_search_path(VALUE self, VALUE dirs)
  * language manager.
  */
 static VALUE
-slm_get_search_path(VALUE self)
+rg_search_path(VALUE self)
 {
-	VALUE ary;
- 	const gchar * const * dirs =
+    VALUE ary;
+    const gchar * const * dirs =
             gtk_source_language_manager_get_search_path (_SELF (self));
     if (!dirs)
         return Qnil;
@@ -118,10 +118,10 @@ slm_get_search_path(VALUE self)
  * Returns: a list of languages ids for the given language manager
  */
 static VALUE
-slm_get_language_ids(VALUE self)
+rg_language_ids(VALUE self)
 {
-	VALUE ary;
- 	const gchar * const * ids =
+    VALUE ary;
+    const gchar * const * ids =
             gtk_source_language_manager_get_language_ids (_SELF (self));
     if (!ids)
         return Qnil;
@@ -145,11 +145,11 @@ slm_get_language_ids(VALUE self)
  * with the given id.
  */
 static VALUE
-slm_get_language(VALUE self, VALUE id)
+rg_get_language(VALUE self, VALUE id)
 {
-	return
-	    GOBJ2RVAL (gtk_source_language_manager_get_language
-		       (_SELF (self), RVAL2CSTR (id)));
+    return
+        GOBJ2RVAL (gtk_source_language_manager_get_language
+               (_SELF (self), RVAL2CSTR (id)));
 }
 
 #ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
@@ -164,30 +164,30 @@ slm_get_language(VALUE self, VALUE id)
  * with the given filename or content_type.
  */
 static VALUE
-slm_guess_language(VALUE self, VALUE filename, VALUE content_type)
+rg_guess_language(VALUE self, VALUE filename, VALUE content_type)
 {
-	return GOBJ2RVAL (gtk_source_language_manager_guess_language
-	                     (_SELF (self),
-		                  NIL_P(filename) ? NULL : RVAL2CSTR (filename),
-		                  NIL_P(content_type) ? NULL : RVAL2CSTR (content_type)));
+    return GOBJ2RVAL (gtk_source_language_manager_guess_language
+                         (_SELF (self),
+                          NIL_P(filename) ? NULL : RVAL2CSTR (filename),
+                          NIL_P(content_type) ? NULL : RVAL2CSTR (content_type)));
 }
 #endif /* HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE */
 
 void
 Init_gtk_sourcelanguagemanager ()
 {
-	VALUE RG_TARGET_NAMESPACE =
-	    G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE_MANAGER,
-			 "SourceLanguageManager", mGtk);
+    VALUE RG_TARGET_NAMESPACE =
+        G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE_MANAGER,
+             "SourceLanguageManager", mGtk);
 
-	rb_define_method (RG_TARGET_NAMESPACE, "initialize", slm_new, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "set_search_path", slm_set_search_path, 1);
-	rb_define_method (RG_TARGET_NAMESPACE, "search_path", slm_get_search_path, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "language_ids", slm_get_language_ids, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "get_language", slm_get_language, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_search_path, 1);
+    RG_DEF_METHOD(search_path, 0);
+    RG_DEF_METHOD(language_ids, 0);
+    RG_DEF_METHOD(get_language, 1);
 #ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
-	rb_define_method (RG_TARGET_NAMESPACE, "guess_language", slm_guess_language, 2);
+    RG_DEF_METHOD(guess_language, 2);
 #endif
-	rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", slm_get_default, 0);
-	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
+    RG_DEF_SMETHOD(default, 0);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

@@ -40,7 +40,7 @@
  * Returns: a newly created Gtk::SourceView object.
  */
 static VALUE
-sourceview_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE buffer;
     GtkWidget *widget;
@@ -48,9 +48,9 @@ sourceview_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &buffer);
 
     if (NIL_P(buffer))
-	widget = gtk_source_view_new();
+        widget = gtk_source_view_new();
     else
-	widget = gtk_source_view_new_with_buffer(RVAL2GOBJ(buffer));
+        widget = gtk_source_view_new_with_buffer(RVAL2GOBJ(buffer));
 
     RBGTK_INITIALIZE(self, widget);
     return self;
@@ -67,11 +67,11 @@ sourceview_initialize(int argc, VALUE *argv, VALUE self)
  * Returns: self.
  */
 static VALUE
-sourceview_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
+rg_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
 {
     gtk_source_view_set_mark_category_pixbuf(_SELF(self),
-					     RVAL2CSTR(category),
-					     GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+                         RVAL2CSTR(category),
+                         GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
 }
 
@@ -84,12 +84,12 @@ sourceview_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
  * Returns: a Gdk::Pixbuf object if found, or nil if not found.
  */
 static VALUE
-sourceview_get_mark_category_pixbuf(VALUE self, VALUE category)
+rg_get_mark_category_pixbuf(VALUE self, VALUE category)
 {
     GdkPixbuf *pixbuf;
 
     pixbuf = gtk_source_view_get_mark_category_pixbuf(_SELF(self),
-						      RVAL2CSTR(category));
+                              RVAL2CSTR(category));
     return GOBJ2RVAL(pixbuf);
 }
 
@@ -103,11 +103,11 @@ sourceview_get_mark_category_pixbuf(VALUE self, VALUE category)
  * Returns: self.
  */
 static VALUE
-sourceview_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
+rg_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
 {
     gtk_source_view_set_mark_category_priority(_SELF (self),
-					       RVAL2CSTR(category),
-					       NUM2INT(priority));
+                           RVAL2CSTR(category),
+                           NUM2INT(priority));
     return self;
 }
 
@@ -120,12 +120,12 @@ sourceview_set_mark_category_priority(VALUE self, VALUE category, VALUE priority
  * Returns: the priority if found, or 0 if not found.
  */
 static VALUE
-sourceview_get_mark_category_priority(VALUE self, VALUE category)
+rg_get_mark_category_priority(VALUE self, VALUE category)
 {
     gint priority;
 
     priority = gtk_source_view_get_mark_category_priority(_SELF(self),
-							  RVAL2CSTR(category));
+                              RVAL2CSTR(category));
     return INT2NUM(priority);
 }
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
@@ -140,12 +140,12 @@ sourceview_get_mark_category_priority(VALUE self, VALUE category)
  * Returns: a Gdk::Color object if found, or nil if not found.
  */
 static VALUE
-sourceview_get_mark_category_background(VALUE self, VALUE category)
+rg_get_mark_category_background(VALUE self, VALUE category)
 {
     GdkColor color;
     gtk_source_view_get_mark_category_background(_SELF (self),
-						 RVAL2CSTR(category),
-						 &color);
+                         RVAL2CSTR(category),
+                         &color);
     return GDKCOLOR2RVAL(&color);
 }
 
@@ -160,11 +160,11 @@ sourceview_get_mark_category_background(VALUE self, VALUE category)
  * Returns: self.
  */
 static VALUE
-sourceview_set_mark_category_background(VALUE self, VALUE category, VALUE color)
+rg_set_mark_category_background(VALUE self, VALUE category, VALUE color)
 {
     gtk_source_view_set_mark_category_background(_SELF (self),
-						 RVAL2CSTR (category),
-						 RVAL2GDKCOLOR((color)));
+                         RVAL2CSTR (category),
+                         RVAL2GDKCOLOR((color)));
     return self;
 }
 # endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
@@ -180,16 +180,16 @@ Init_gtk_sourceview ()
                                 INT2FIX(GTKSOURCEVIEW2_MINOR_VERSION),
                                 INT2FIX(GTKSOURCEVIEW2_MICRO_VERSION)));
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", sourceview_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-    rb_define_method(RG_TARGET_NAMESPACE, "get_mark_category_pixbuf", sourceview_get_mark_category_pixbuf, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_mark_category_pixbuf", sourceview_set_mark_category_pixbuf, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_mark_category_priority", sourceview_get_mark_category_priority, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_mark_category_priority", sourceview_set_mark_category_priority, 2);
+    RG_DEF_METHOD(get_mark_category_pixbuf, 1);
+    RG_DEF_METHOD(set_mark_category_pixbuf, 2);
+    RG_DEF_METHOD(get_mark_category_priority, 1);
+    RG_DEF_METHOD(set_mark_category_priority, 2);
 #endif
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
-    rb_define_method(RG_TARGET_NAMESPACE, "get_mark_category_background", sourceview_get_mark_category_background, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_mark_category_background", sourceview_set_mark_category_background, 2);
+    RG_DEF_METHOD(get_mark_category_background, 1);
+    RG_DEF_METHOD(set_mark_category_background, 2);
 #endif
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 

@@ -32,35 +32,35 @@
  * Returns: locations of start and end of match.
  */
 static VALUE
-forward_search(int argc, VALUE *argv, VALUE self)
+rg_forward_search(int argc, VALUE *argv, VALUE self)
 {
-	GtkTextIter m_start, m_end;
-	VALUE str, flags, limit;
-	VALUE ret = Qnil;
+    GtkTextIter m_start, m_end;
+    VALUE str, flags, limit;
+    VALUE ret = Qnil;
 
-	rb_scan_args (argc, argv, "21", &str, &flags, &limit);
+    rb_scan_args (argc, argv, "21", &str, &flags, &limit);
 
-	if (rb_obj_is_kind_of
-	    (flags, GTYPE2CLASS (GTK_TYPE_SOURCE_SEARCH_FLAGS))) {
-		if (gtk_source_iter_forward_search
-		    (_SELF (self), RVAL2CSTR (str),
-		     RVAL2GFLAGS (flags, GTK_TYPE_SOURCE_SEARCH_FLAGS),
-		     &m_start, &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
-			ret =
-			    rb_ary_new3 (2, ITR2RVAL (&m_start),
-					 ITR2RVAL (&m_end));
-	} else
-	    if (rb_obj_is_kind_of
-		(flags, GTYPE2CLASS (GTK_TYPE_TEXT_SEARCH_FLAGS))) {
-		if (gtk_text_iter_forward_search
-		    (_SELF (self), RVAL2CSTR (str),
-		     RVAL2GFLAGS (flags, GTK_TYPE_TEXT_SEARCH_FLAGS), &m_start,
-		     &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
-			ret =
-			    rb_ary_new3 (2, ITR2RVAL (&m_start),
-					 ITR2RVAL (&m_end));
-	}
-	return ret;
+    if (rb_obj_is_kind_of
+        (flags, GTYPE2CLASS (GTK_TYPE_SOURCE_SEARCH_FLAGS))) {
+        if (gtk_source_iter_forward_search
+            (_SELF (self), RVAL2CSTR (str),
+             RVAL2GFLAGS (flags, GTK_TYPE_SOURCE_SEARCH_FLAGS),
+             &m_start, &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
+            ret =
+                rb_ary_new3 (2, ITR2RVAL (&m_start),
+                     ITR2RVAL (&m_end));
+    } else
+        if (rb_obj_is_kind_of
+        (flags, GTYPE2CLASS (GTK_TYPE_TEXT_SEARCH_FLAGS))) {
+        if (gtk_text_iter_forward_search
+            (_SELF (self), RVAL2CSTR (str),
+             RVAL2GFLAGS (flags, GTK_TYPE_TEXT_SEARCH_FLAGS), &m_start,
+             &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
+            ret =
+                rb_ary_new3 (2, ITR2RVAL (&m_start),
+                     ITR2RVAL (&m_end));
+    }
+    return ret;
 }
 
 /* Method: backward_search(str, flags, limit)
@@ -70,47 +70,47 @@ forward_search(int argc, VALUE *argv, VALUE self)
  * Returns: locations of start and end of match.
  */
 static VALUE
-backward_search(int argc, VALUE *argv, VALUE self)
+rg_backward_search(int argc, VALUE *argv, VALUE self)
 {
-	GtkTextIter m_start, m_end;
-	VALUE str, flags, limit;
-	VALUE ret = Qnil;
+    GtkTextIter m_start, m_end;
+    VALUE str, flags, limit;
+    VALUE ret = Qnil;
 
-	rb_scan_args (argc, argv, "21", &str, &flags, &limit);
-	if (rb_obj_is_kind_of
-	    (flags, GTYPE2CLASS (GTK_TYPE_SOURCE_SEARCH_FLAGS))) {
-		if (gtk_source_iter_backward_search
-		    (_SELF (self), RVAL2CSTR (str),
-		     RVAL2GFLAGS (flags, GTK_TYPE_SOURCE_SEARCH_FLAGS),
-		     &m_start, &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
-			ret =
-			    rb_ary_new3 (2, ITR2RVAL (&m_start),
-					 ITR2RVAL (&m_end));
-	} else
-	    if (rb_obj_is_kind_of
-		(flags, GTYPE2CLASS (GTK_TYPE_TEXT_SEARCH_FLAGS))) {
-		if (gtk_text_iter_backward_search
-		    (_SELF (self), RVAL2CSTR (str),
-		     RVAL2GFLAGS (flags, GTK_TYPE_TEXT_SEARCH_FLAGS), &m_start,
-		     &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
-			ret =
-			    rb_ary_new3 (2, ITR2RVAL (&m_start),
-					 ITR2RVAL (&m_end));
-	}
-	return ret;
+    rb_scan_args (argc, argv, "21", &str, &flags, &limit);
+    if (rb_obj_is_kind_of
+        (flags, GTYPE2CLASS (GTK_TYPE_SOURCE_SEARCH_FLAGS))) {
+        if (gtk_source_iter_backward_search
+            (_SELF (self), RVAL2CSTR (str),
+             RVAL2GFLAGS (flags, GTK_TYPE_SOURCE_SEARCH_FLAGS),
+             &m_start, &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
+            ret =
+                rb_ary_new3 (2, ITR2RVAL (&m_start),
+                     ITR2RVAL (&m_end));
+    } else
+        if (rb_obj_is_kind_of
+        (flags, GTYPE2CLASS (GTK_TYPE_TEXT_SEARCH_FLAGS))) {
+        if (gtk_text_iter_backward_search
+            (_SELF (self), RVAL2CSTR (str),
+             RVAL2GFLAGS (flags, GTK_TYPE_TEXT_SEARCH_FLAGS), &m_start,
+             &m_end, NIL_P (limit) ? NULL : _SELF (limit)))
+            ret =
+                rb_ary_new3 (2, ITR2RVAL (&m_start),
+                     ITR2RVAL (&m_end));
+    }
+    return ret;
 }
 
 void
 Init_gtk_sourceiter ()
 {
-	VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS (GTK_TYPE_TEXT_ITER);
+    VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS (GTK_TYPE_TEXT_ITER);
 
-	/*
-	 * They are override original Gtk::TextIter#[for|back]ward_search
-	 */
-	rb_define_method (RG_TARGET_NAMESPACE, "forward_search", forward_search, -1);
-	rb_define_method (RG_TARGET_NAMESPACE, "backward_search", backward_search, -1);
+    /*
+     * They are override original Gtk::TextIter#[for|back]ward_search
+     */
+    RG_DEF_METHOD(forward_search, -1);
+    RG_DEF_METHOD(backward_search, -1);
 
-	G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", RG_TARGET_NAMESPACE);
-	G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SEARCH_FLAGS, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SEARCH_FLAGS, "GTK_");
 }

@@ -33,10 +33,10 @@
  * Returns: a newly created Gtk::SourceStyleSchemeManager object.
  */
 static VALUE
-sssm_new(VALUE self)
+rg_initialize(VALUE self)
 {
-	G_INITIALIZE (self, gtk_source_style_scheme_manager_new ());
-	return Qnil;
+    G_INITIALIZE (self, gtk_source_style_scheme_manager_new ());
+    return Qnil;
 }
 
 /* Class method: default
@@ -46,7 +46,7 @@ sssm_new(VALUE self)
  * Returns: a Gtk::SourceStyleSchemeManager
  */
 static VALUE
-sssm_get_default(VALUE self)
+rg_s_default(VALUE self)
 {
     GtkSourceStyleSchemeManager* sssm = gtk_source_style_scheme_manager_get_default();
     GType gtype = G_TYPE_FROM_INSTANCE(sssm);
@@ -68,10 +68,10 @@ sssm_get_default(VALUE self)
  * Returns: self.
  */
 static VALUE
-sssm_set_search_path(VALUE self, VALUE dirs)
+rg_set_search_path(VALUE self, VALUE dirs)
 {
     gchar** gdirs = (gchar**)NULL;
-	gint i;
+    gint i;
 
     if (! NIL_P(dirs)){
         Check_Type(dirs, T_ARRAY);
@@ -88,8 +88,8 @@ sssm_set_search_path(VALUE self, VALUE dirs)
         gdirs[i] = (gchar*)NULL;
     }
 
-	gtk_source_style_scheme_manager_set_search_path (_SELF (self), gdirs);
-	return self;
+    gtk_source_style_scheme_manager_set_search_path (_SELF (self), gdirs);
+    return self;
 }
 
 /* Method: append_search_path(path)
@@ -100,10 +100,10 @@ sssm_set_search_path(VALUE self, VALUE dirs)
  * Returns: self.
  */
 static VALUE
-sssm_append_search_path(VALUE self, VALUE path)
+rg_append_search_path(VALUE self, VALUE path)
 {
-	gtk_source_style_scheme_manager_append_search_path (_SELF (self), RVAL2CSTR(path));
-	return self;
+    gtk_source_style_scheme_manager_append_search_path (_SELF (self), RVAL2CSTR(path));
+    return self;
 }
 
 /* Method: prepend_search_path(path)
@@ -114,10 +114,10 @@ sssm_append_search_path(VALUE self, VALUE path)
  * Returns: self.
  */
 static VALUE
-sssm_prepend_search_path(VALUE self, VALUE path)
+rg_prepend_search_path(VALUE self, VALUE path)
 {
-	gtk_source_style_scheme_manager_prepend_search_path (_SELF (self), RVAL2CSTR(path));
-	return self;
+    gtk_source_style_scheme_manager_prepend_search_path (_SELF (self), RVAL2CSTR(path));
+    return self;
 }
 
 /* Method: get_search_path
@@ -125,10 +125,10 @@ sssm_prepend_search_path(VALUE self, VALUE path)
  * style scheme manager.
  */
 static VALUE
-sssm_get_search_path(VALUE self)
+rg_search_path(VALUE self)
 {
-	VALUE ary;
- 	const gchar * const * dirs =
+    VALUE ary;
+    const gchar * const * dirs =
             gtk_source_style_scheme_manager_get_search_path (_SELF (self));
     if (!dirs)
         return Qnil;
@@ -145,10 +145,10 @@ sssm_get_search_path(VALUE self)
  * Returns: a list of style scheme ids for the given style scheme manager
  */
 static VALUE
-sssm_get_scheme_ids(VALUE self)
+rg_scheme_ids(VALUE self)
 {
-	VALUE ary;
- 	const gchar * const * ids =
+    VALUE ary;
+    const gchar * const * ids =
             gtk_source_style_scheme_manager_get_scheme_ids (_SELF (self));
     if (!ids)
         return Qnil;
@@ -172,11 +172,11 @@ sssm_get_scheme_ids(VALUE self)
  * associated with the given id.
  */
 static VALUE
-sssm_get_scheme(VALUE self, VALUE scheme_id)
+rg_get_scheme(VALUE self, VALUE scheme_id)
 {
-	return
-	    GOBJ2RVAL (gtk_source_style_scheme_manager_get_scheme
-		       (_SELF (self), RVAL2CSTR (scheme_id)));
+    return
+        GOBJ2RVAL (gtk_source_style_scheme_manager_get_scheme
+               (_SELF (self), RVAL2CSTR (scheme_id)));
 }
 
 /*
@@ -188,27 +188,27 @@ sssm_get_scheme(VALUE self, VALUE scheme_id)
  * Returns: self.
  */
 static VALUE
-sssm_force_rescan(VALUE self)
+rg_force_rescan(VALUE self)
 {
-	gtk_source_style_scheme_manager_force_rescan(_SELF (self));
-	return self;
+    gtk_source_style_scheme_manager_force_rescan(_SELF (self));
+    return self;
 }
 
 void
 Init_gtk_sourcestyleschememanager ()
 {
-	VALUE RG_TARGET_NAMESPACE =
-	    G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER,
-			 "SourceStyleSchemeManager", mGtk);
+    VALUE RG_TARGET_NAMESPACE =
+        G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER,
+             "SourceStyleSchemeManager", mGtk);
 
-	rb_define_method (RG_TARGET_NAMESPACE, "initialize", sssm_new, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "set_search_path", sssm_set_search_path, 1);
-	rb_define_method (RG_TARGET_NAMESPACE, "append_search_path", sssm_append_search_path, 1);
-	rb_define_method (RG_TARGET_NAMESPACE, "prepend_search_path", sssm_prepend_search_path, 1);
-	rb_define_method (RG_TARGET_NAMESPACE, "search_path", sssm_get_search_path, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "scheme_ids", sssm_get_scheme_ids, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "get_scheme", sssm_get_scheme, 1);
-	rb_define_method (RG_TARGET_NAMESPACE, "force_rescan", sssm_force_rescan, 0);
-	rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", sssm_get_default, 0);
-	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_search_path, 1);
+    RG_DEF_METHOD(append_search_path, 1);
+    RG_DEF_METHOD(prepend_search_path, 1);
+    RG_DEF_METHOD(search_path, 0);
+    RG_DEF_METHOD(scheme_ids, 0);
+    RG_DEF_METHOD(get_scheme, 1);
+    RG_DEF_METHOD(force_rescan, 0);
+    RG_DEF_SMETHOD(default, 0);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

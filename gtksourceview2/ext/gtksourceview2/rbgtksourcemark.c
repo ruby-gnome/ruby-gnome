@@ -36,11 +36,11 @@
  * Returns: a newly created Gtk::SourceMark object.
  */
 static VALUE
-sourcemark_new(VALUE self, VALUE name, VALUE category)
+rg_initialize(VALUE self, VALUE name, VALUE category)
 {
-	G_INITIALIZE (self,
-		      gtk_source_mark_new (RVAL2CSTR(name), RVAL2CSTR(category)));
-	return Qnil;
+    G_INITIALIZE (self,
+              gtk_source_mark_new (RVAL2CSTR(name), RVAL2CSTR(category)));
+    return Qnil;
 }
 
 /* Method: next(category=nil)
@@ -49,7 +49,7 @@ sourcemark_new(VALUE self, VALUE name, VALUE category)
  * Returns: the next Gtk::SourceMark after the mark.
  */
 static VALUE
-sourcemark_next(int argc, VALUE *argv, VALUE self)
+rg_next(int argc, VALUE *argv, VALUE self)
 {
     VALUE category;
 
@@ -65,7 +65,7 @@ sourcemark_next(int argc, VALUE *argv, VALUE self)
  * Returns: the previous Gtk::SourceMark before the mark.
  */
 static VALUE
-sourcemark_prev(int argc, VALUE *argv, VALUE self)
+rg_prev(int argc, VALUE *argv, VALUE self)
 {
     VALUE category;
 
@@ -80,12 +80,12 @@ void
 Init_gtk_sourcemark ()
 {
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_MARK, "SourceMark", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_MARK, "SourceMark", mGtk);
 
-	rb_define_method (RG_TARGET_NAMESPACE, "initialize", sourcemark_new, 2);
-	rb_define_method (RG_TARGET_NAMESPACE, "next", sourcemark_next, -1);
-	rb_define_method (RG_TARGET_NAMESPACE, "prev", sourcemark_prev, -1);
+    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(next, -1);
+    RG_DEF_METHOD(prev, -1);
 
-	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 }

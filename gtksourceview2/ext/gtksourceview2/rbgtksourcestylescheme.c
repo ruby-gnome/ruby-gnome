@@ -32,10 +32,10 @@
  * Returns: a list of authors for the given style scheme.
  */
 static VALUE
-scheme_get_authors(VALUE self)
+rg_authors(VALUE self)
 {
-	VALUE ary;
- 	const gchar * const * authors =
+    VALUE ary;
+    const gchar * const * authors =
             gtk_source_style_scheme_get_authors (_SELF (self));
     if (!authors)
         return Qnil;
@@ -56,7 +56,7 @@ scheme_get_authors(VALUE self)
  * Returns: Gtk::SourceStyle
  */
 static VALUE
-scheme_get_style(VALUE self, VALUE style_name)
+rg_get_style(VALUE self, VALUE style_name)
 {
     return GOBJ2RVAL(gtk_source_style_scheme_get_style(_SELF(self),
                                                        RVAL2CSTR(style_name)));
@@ -67,6 +67,6 @@ Init_gtk_sourcestylescheme ()
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME, "SourceStyleScheme", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "authors", scheme_get_authors, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_style", scheme_get_style, 1);
+    RG_DEF_METHOD(authors, 0);
+    RG_DEF_METHOD(get_style, 1);
 }
