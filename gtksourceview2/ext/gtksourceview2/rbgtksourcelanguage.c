@@ -26,35 +26,29 @@
  * Source language.
  */
 
+#define RG_TARGET_NAMESPACE cSourceLanguage
 #define _SELF(self) (GTK_SOURCE_LANGUAGE(RVAL2GOBJ(self)))
-
-/* Defined as properties.
-const gchar*        gtk_source_language_get_id          (GtkSourceLanguage *language);
-const gchar*        gtk_source_language_get_name        (GtkSourceLanguage *language);
-const gchar*        gtk_source_language_get_section     (GtkSourceLanguage *language);
-gboolean            gtk_source_language_get_hidden      (GtkSourceLanguage *language);
-*/
 
 /* Method: get_metadata(name)
  * name: the metadata property name (string)
  * Returns: the localized metadata for the given name.
  */
 static VALUE
-sourcelanguage_get_metadata(VALUE self, VALUE name)
+rg_get_metadata(VALUE self, VALUE name)
 {
-	return
-		CSTR2RVAL (gtk_source_language_get_metadata
-			(_SELF (self), RVAL2CSTR(name)));
+    return
+        CSTR2RVAL (gtk_source_language_get_metadata
+            (_SELF (self), RVAL2CSTR(name)));
 }
 
 /* Method: mime_types
  * Returns: a list of mime types for the given language, as an array of strings.
  */
 static VALUE
-sourcelanguage_get_mime_types(VALUE self)
+rg_mime_types(VALUE self)
 {
-	VALUE ary;
- 	char **types = gtk_source_language_get_mime_types (_SELF (self));
+    VALUE ary;
+    char **types = gtk_source_language_get_mime_types (_SELF (self));
     if (!types)
         return Qnil;
 
@@ -70,10 +64,10 @@ sourcelanguage_get_mime_types(VALUE self)
  * Returns: a list of globs for the given language, as an array of strings.
  */
 static VALUE
-sourcelanguage_get_globs(VALUE self)
+rg_globs(VALUE self)
 {
-	VALUE ary;
- 	char **globs = gtk_source_language_get_globs (_SELF (self));
+    VALUE ary;
+    char **globs = gtk_source_language_get_globs (_SELF (self));
     if (!globs)
         return Qnil;
 
@@ -90,21 +84,21 @@ sourcelanguage_get_globs(VALUE self)
  * Returns: the localized style name of the given id.
  */
 static VALUE
-sourcelanguage_get_style_name(VALUE self, VALUE style_id)
+rg_get_style_name(VALUE self, VALUE style_id)
 {
-	return
-		CSTR2RVAL (gtk_source_language_get_style_name
-			(_SELF (self), RVAL2CSTR(style_id)));
+    return
+        CSTR2RVAL (gtk_source_language_get_style_name
+            (_SELF (self), RVAL2CSTR(style_id)));
 }
 
 /* Method: style_id
  * Returns: the styles defined by the language.
  */
 static VALUE
-sourcelanguage_get_style_ids(VALUE self)
+rg_style_ids(VALUE self)
 {
-	VALUE ary;
- 	gchar **ids = gtk_source_language_get_style_ids (_SELF (self));
+    VALUE ary;
+    gchar **ids = gtk_source_language_get_style_ids (_SELF (self));
     if (!ids)
         return Qnil;
 
@@ -119,14 +113,14 @@ sourcelanguage_get_style_ids(VALUE self)
 void
 Init_gtk_sourcelanguage ()
 {
-	VALUE clang =
-	    G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE, "SourceLanguage", mGtk);
+    VALUE RG_TARGET_NAMESPACE =
+        G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE, "SourceLanguage", mGtk);
 
-	rb_define_method (clang, "get_metadata", sourcelanguage_get_metadata, 1);
-	rb_define_method (clang, "mime_types", sourcelanguage_get_mime_types, 0);
-	rb_define_method (clang, "globs", sourcelanguage_get_globs, 0);
-	rb_define_method (clang, "get_style_name", sourcelanguage_get_style_name, 1);
-	rb_define_method (clang, "style_ids", sourcelanguage_get_style_ids, 0);
+    RG_DEF_METHOD(get_metadata, 1);
+    RG_DEF_METHOD(mime_types, 0);
+    RG_DEF_METHOD(globs, 0);
+    RG_DEF_METHOD(get_style_name, 1);
+    RG_DEF_METHOD(style_ids, 0);
 
-	G_DEF_SETTERS (clang);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }
