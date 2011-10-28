@@ -22,6 +22,7 @@
 #include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,8,0)
+#define RG_TARGET_NAMESPACE cRenderer
 #define _SELF(self) (PANGO_RENDERER(RVAL2GOBJ(self)))
 
 static VALUE
@@ -171,29 +172,29 @@ void
 Init_pangorenderer(void)
 {
 #if PANGO_CHECK_VERSION(1,8,0)
-    VALUE renderer = G_DEF_CLASS(PANGO_TYPE_RENDERER, "Renderer", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_RENDERER, "Renderer", mPango);
 
-    rb_define_method(renderer, "draw_layout", renderer_draw_layout, 3);
-    rb_define_method(renderer, "draw_layout_line", renderer_draw_layout_line, 3);
-    rb_define_method(renderer, "draw_glyphs", renderer_draw_glyphs, 4);
-    rb_define_method(renderer, "draw_rectangle", renderer_draw_rectangle, 5);
-    rb_define_method(renderer, "draw_error_underline", renderer_draw_error_underline, 4);
-    rb_define_method(renderer, "draw_trapezoid", renderer_draw_trapezoid, 7);
-    rb_define_method(renderer, "draw_glyph", renderer_draw_glyph, 4);
-    rb_define_method(renderer, "activate", renderer_activate, 0);
-    rb_define_method(renderer, "deactivate", renderer_deactivate, 0); 
-    rb_define_method(renderer, "part_changed", renderer_part_changed, 1);
-    rb_define_method(renderer, "set_color", renderer_set_color, 2);
-    rb_define_method(renderer, "get_color", renderer_get_color, 1);
-    rb_define_method(renderer, "set_matrix", renderer_set_matrix, 1);
-    rb_define_method(renderer, "matrix", renderer_get_matrix, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_layout", renderer_draw_layout, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_layout_line", renderer_draw_layout_line, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_glyphs", renderer_draw_glyphs, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_rectangle", renderer_draw_rectangle, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_error_underline", renderer_draw_error_underline, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_trapezoid", renderer_draw_trapezoid, 7);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_glyph", renderer_draw_glyph, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "activate", renderer_activate, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "deactivate", renderer_deactivate, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "part_changed", renderer_part_changed, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_color", renderer_set_color, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_color", renderer_get_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_matrix", renderer_set_matrix, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "matrix", renderer_get_matrix, 0);
 
-    G_DEF_SETTERS(renderer);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* PangoRenderPart */
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
-    G_DEF_CLASS(PANGO_TYPE_RENDER_PART, "Part", renderer);
-    G_DEF_CONSTANTS(renderer, PANGO_TYPE_RENDER_PART, "PANGO_RENDER_");
+    G_DEF_CLASS(PANGO_TYPE_RENDER_PART, "Part", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_RENDER_PART, "PANGO_RENDER_");
 #endif
 
 #endif

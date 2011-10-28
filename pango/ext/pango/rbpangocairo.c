@@ -28,6 +28,7 @@
 
 #ifdef CAIRO_AVAILABLE
 
+#define RG_TARGET_NAMESPACE cCairoFontMap
 #define _SELF(self) (PANGO_CAIRO_FONT_MAP(RVAL2GOBJ(self)))
 #define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
 #define RVAL2LAYOUT(v) (PANGO_LAYOUT(RVAL2GOBJ(v)))
@@ -173,19 +174,19 @@ void
 Init_pango_cairo(void)
 {
 #ifdef CAIRO_AVAILABLE
-    VALUE pFontMap;
+    VALUE RG_TARGET_NAMESPACE;
 
     /* Pango::CairoFontMap */
-    pFontMap = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
 
-    rb_define_singleton_method(pFontMap, "create", font_map_create, 0);
-    rb_define_singleton_method(pFontMap, "default", font_map_get_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "create", font_map_create, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", font_map_get_default, 0);
 
-    rb_define_method(pFontMap, "set_resolution", font_map_set_resolution, 1);
-    rb_define_method(pFontMap, "resolution", font_map_get_resolution, 0);
-    rb_define_method(pFontMap, "create_context", font_map_create_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_resolution", font_map_set_resolution, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "resolution", font_map_get_resolution, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_context", font_map_create_context, 0);
 
-    G_DEF_SETTERS(pFontMap);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* Cairo::Context */
     rb_define_method(rb_cCairo_Context, "update_pango_context",

@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cFont
 #define _SELF(self) (PANGO_FONT(RVAL2GOBJ(self)))
 
 static VALUE
@@ -98,16 +99,16 @@ font_get_font_map(VALUE self)
 void
 Init_pango_font(void)
 {
-    VALUE pFont = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
     
-    rb_define_method(pFont, "find_shaper", font_find_shaper, 2);
-    rb_define_method(pFont, "describe", font_describe, -1);
-    rb_define_method(pFont, "get_coverage", font_get_coverage, 1);
-    rb_define_method(pFont, "get_glyph_extents", font_get_glyph_extents, 1);
-    rb_define_method(pFont, "metrics", font_get_metrics, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "find_shaper", font_find_shaper, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "describe", font_describe, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_coverage", font_get_coverage, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_glyph_extents", font_get_glyph_extents, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "metrics", font_get_metrics, -1);
 
 #if PANGO_CHECK_VERSION(1,9,0)
-    rb_define_method(pFont, "font_map", font_get_font_map, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_map", font_get_font_map, 0);
 #endif
 
     G_DEF_CLASS3("PangoXFont", "XFont", mPango);

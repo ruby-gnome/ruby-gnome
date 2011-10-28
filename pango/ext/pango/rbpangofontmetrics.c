@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cFontMetrics
 #define _SELF(self) ((PangoFontMetrics*)RVAL2BOXED(self, PANGO_TYPE_FONT_METRICS))
 
 static VALUE
@@ -72,16 +73,16 @@ font_metrics_get_strikethrough_position(VALUE self)
 void
 Init_pango_font_metrics(void)
 {
-    VALUE pMetrics = G_DEF_CLASS(PANGO_TYPE_FONT_METRICS, "FontMetrics", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_METRICS, "FontMetrics", mPango);
     
-    rb_define_method(pMetrics, "ascent", font_metrics_get_ascent, 0);
-    rb_define_method(pMetrics, "descent", font_metrics_get_descent, 0);
-    rb_define_method(pMetrics, "approximate_char_width", font_metrics_get_approximate_char_width, 0);
-    rb_define_method(pMetrics, "approximate_digit_width", font_metrics_get_approximate_digit_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ascent", font_metrics_get_ascent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "descent", font_metrics_get_descent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "approximate_char_width", font_metrics_get_approximate_char_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "approximate_digit_width", font_metrics_get_approximate_digit_width, 0);
 #if PANGO_CHECK_VERSION(1,6,0)
-    rb_define_method(pMetrics, "underline_thickness", font_metrics_get_underline_thickness, 0);
-    rb_define_method(pMetrics, "underline_position", font_metrics_get_underline_position, 0);
-    rb_define_method(pMetrics, "strikethrough_thickness", font_metrics_get_strikethrough_thickness, 0);
-    rb_define_method(pMetrics, "strikethrough_position", font_metrics_get_strikethrough_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "underline_thickness", font_metrics_get_underline_thickness, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "underline_position", font_metrics_get_underline_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "strikethrough_thickness", font_metrics_get_strikethrough_thickness, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "strikethrough_position", font_metrics_get_strikethrough_position, 0);
 #endif
 }

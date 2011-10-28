@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cLayoutIter
 #define _SELF(r) ((PangoLayoutIter*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_ITER))
 
 /**********************************/
@@ -163,26 +164,26 @@ layout_iter_get_layout_extents(VALUE self)
 void
 Init_pango_layout_iter(void)
 {
-    VALUE pIter = G_DEF_CLASS(PANGO_TYPE_LAYOUT_ITER, "LayoutIter", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT_ITER, "LayoutIter", mPango);
 
     rbgobj_boxed_not_copy_obj(PANGO_TYPE_LAYOUT_ITER);
 
-    rb_define_method(pIter, "next_run!", layout_iter_next_run, 0);
-    rb_define_method(pIter, "next_char!", layout_iter_next_char, 0);
-    rb_define_method(pIter, "next_cluster!", layout_iter_next_cluster, 0);
-    rb_define_method(pIter, "next_line!", layout_iter_next_line, 0);
-    rb_define_method(pIter, "at_last_line?", layout_iter_at_last_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next_run!", layout_iter_next_run, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next_char!", layout_iter_next_char, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next_cluster!", layout_iter_next_cluster, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next_line!", layout_iter_next_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "at_last_line?", layout_iter_at_last_line, 0);
     /* for backword compatibility. :< */
-    rb_define_alias(pIter, "at_last_line!", "at_last_line?");
-    rb_define_method(pIter, "index", layout_iter_get_index, 0);
-    rb_define_method(pIter, "baseline", layout_iter_get_baseline, 0);
-    rb_define_method(pIter, "run", layout_iter_get_run, 0);
-    rb_define_method(pIter, "line", layout_iter_get_line, 0);
-    rb_define_method(pIter, "char_extents", layout_iter_get_char_extents, 0);
-    rb_define_method(pIter, "cluster_extents", layout_iter_get_cluster_extents, 0);
-    rb_define_method(pIter, "run_extents", layout_iter_get_run_extents, 0);
-    rb_define_method(pIter, "line_yrange", layout_iter_get_line_yrange, 0);
-    rb_define_method(pIter, "line_extents", layout_iter_get_line_extents, 0);
-    rb_define_method(pIter, "layout_extents", layout_iter_get_layout_extents, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "at_last_line!", "at_last_line?");
+    rb_define_method(RG_TARGET_NAMESPACE, "index", layout_iter_get_index, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "baseline", layout_iter_get_baseline, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run", layout_iter_get_run, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line", layout_iter_get_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "char_extents", layout_iter_get_char_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cluster_extents", layout_iter_get_cluster_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run_extents", layout_iter_get_run_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_yrange", layout_iter_get_line_yrange, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_extents", layout_iter_get_line_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "layout_extents", layout_iter_get_layout_extents, 0);
    
 }

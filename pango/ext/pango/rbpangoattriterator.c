@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cAttrIterator
 #define _SELF(self) ((PangoAttrIterator*)RVAL2BOXED(self, PANGO_TYPE_ATTR_ITERATOR))
 
 /**********************************/
@@ -128,13 +129,13 @@ attriterator_get_attrs(VALUE self)
 void
 Init_pango_attriterator(void)
 {
-    VALUE pAttriterator = G_DEF_CLASS(PANGO_TYPE_ATTR_ITERATOR, "AttrIterator", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ATTR_ITERATOR, "AttrIterator", mPango);
     
-    rb_define_method(pAttriterator, "next!", attriterator_next, 0);
-    rb_define_method(pAttriterator, "range", attriterator_range, 0);
-    rb_define_method(pAttriterator, "get", attriterator_get, -1);
-    rb_define_method(pAttriterator, "font", attriterator_get_font, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next!", attriterator_next, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "range", attriterator_range, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get", attriterator_get, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font", attriterator_get_font, 0);
 #ifdef HAVE_PANGO_ATTR_ITERATOR_GET_ATTRS
-    rb_define_method(pAttriterator, "attrs", attriterator_get_attrs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "attrs", attriterator_get_attrs, 0);
 #endif
 }

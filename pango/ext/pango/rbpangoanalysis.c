@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cAnalysis
 #define _SELF(s) ((PangoAnalysis*)RVAL2BOXED(s, PANGO_TYPE_ANALYSIS))
 
 /**********************************/
@@ -200,24 +201,24 @@ ana_get_extra_attrs(VALUE self)
 void
 Init_pango_analysis(void)
 {
-    VALUE pana = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
     
-    rb_define_method(pana, "initialize", ana_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ana_initialize, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pana, "set_shape_engine", ana_set_shape_engine, 1);
-    rb_define_method(pana, "shape_engine", ana_get_shape_engine, 0);
-    rb_define_method(pana, "set_lang_engine", ana_set_lang_engine, 1);
-    rb_define_method(pana, "lang_engine", ana_get_lang_engine, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_shape_engine", ana_set_shape_engine, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "shape_engine", ana_get_shape_engine, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_lang_engine", ana_set_lang_engine, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lang_engine", ana_get_lang_engine, 0);
 #endif
-    rb_define_method(pana, "set_font", ana_set_font, 1);
-    rb_define_method(pana, "font", ana_get_font, 0);
-    rb_define_method(pana, "set_level", ana_set_level, 1);
-    rb_define_method(pana, "level", ana_get_level, 0);
-    rb_define_method(pana, "set_language", ana_set_language, 1);
-    rb_define_method(pana, "language", ana_get_language, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font", ana_set_font, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font", ana_get_font, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_level", ana_set_level, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "level", ana_get_level, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_language", ana_set_language, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "language", ana_get_language, 0);
 
-    rb_define_method(pana, "set_extra_attrs", ana_set_extra_attrs, 1);
-    rb_define_method(pana, "extra_attrs", ana_get_extra_attrs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_extra_attrs", ana_set_extra_attrs, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "extra_attrs", ana_get_extra_attrs, 0);
 
-    G_DEF_SETTERS(pana);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

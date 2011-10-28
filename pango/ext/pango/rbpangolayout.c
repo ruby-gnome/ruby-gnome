@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cLayout
 #define _SELF(self) (PANGO_LAYOUT(RVAL2GOBJ(self)))
 #define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
 
@@ -486,75 +487,75 @@ layout_get_iter(VALUE self)
 void
 Init_pango_layout(void)
 {
-    VALUE pLayout = G_DEF_CLASS(PANGO_TYPE_LAYOUT, "Layout", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT, "Layout", mPango);
 
-    rb_define_method(pLayout, "initialize", layout_initialize, 1);
-    rb_define_method(pLayout, "copy", layout_copy, 0);
-    rb_define_method(pLayout, "context", layout_get_context, 0);
-    rb_define_method(pLayout, "context_changed", layout_context_changed, 0);
-    rb_define_method(pLayout, "set_text", layout_set_text, 1);
-    rb_define_method(pLayout, "text", layout_get_text, 0);
-    rb_define_method(pLayout, "set_markup", layout_set_markup, -1);
-    rb_define_method(pLayout, "markup=", layout_set_markup_eq, 1);
-    rb_define_method(pLayout, "set_attributes", layout_set_attributes, 1);
-    rb_define_method(pLayout, "attributes", layout_get_attributes, 0);
-    rb_define_method(pLayout, "set_font_description", layout_set_font_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", layout_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy", layout_copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "context", layout_get_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "context_changed", layout_context_changed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text", layout_set_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text", layout_get_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_markup", layout_set_markup, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "markup=", layout_set_markup_eq, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_attributes", layout_set_attributes, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "attributes", layout_get_attributes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_description", layout_set_font_description, 1);
 #ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
-    rb_define_method(pLayout, "font_description", layout_get_font_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_description", layout_get_font_description, 0);
 #endif
-    rb_define_method(pLayout, "set_width", layout_set_width, 1);
-    rb_define_method(pLayout, "width", layout_get_width, 0);
-    rb_define_method(pLayout, "set_wrap", layout_set_wrap, 1);
-    rb_define_method(pLayout, "wrap", layout_get_wrap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width", layout_set_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", layout_get_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_wrap", layout_set_wrap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wrap", layout_get_wrap, 0);
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
-    rb_define_method(pLayout, "set_ellipsize", layout_set_ellipsize, 1);
-    rb_define_method(pLayout, "ellipsize", layout_get_ellipsize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_ellipsize", layout_set_ellipsize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ellipsize", layout_get_ellipsize, 0);
 #endif
-    rb_define_method(pLayout, "set_indent", layout_set_indent, 1);
-    rb_define_method(pLayout, "indent", layout_get_indent, 0);
-    rb_define_method(pLayout, "spacing", layout_get_spacing, 0);
-    rb_define_method(pLayout, "set_spacing", layout_set_spacing, 1);
-    rb_define_method(pLayout, "set_justify", layout_set_justify, 1);
-    rb_define_method(pLayout, "justify?", layout_get_justify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_indent", layout_set_indent, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "indent", layout_get_indent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "spacing", layout_get_spacing, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_spacing", layout_set_spacing, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_justify", layout_set_justify, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "justify?", layout_get_justify, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pLayout, "set_auto_dir", layout_set_auto_dir, 1);
-    rb_define_method(pLayout, "auto_dir?", layout_get_auto_dir, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_auto_dir", layout_set_auto_dir, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "auto_dir?", layout_get_auto_dir, 0);
 #endif
-    rb_define_method(pLayout, "set_alignment", layout_set_alignment, 1);
-    rb_define_method(pLayout, "alignment", layout_get_alignment, 0);
-    rb_define_method(pLayout, "set_tabs", layout_set_tabs, 1);
-    rb_define_method(pLayout, "tabs", layout_get_tabs, 0);
-    rb_define_method(pLayout, "set_single_paragraph_mode", layout_set_single_paragraph_mode, 1);
-    rb_define_method(pLayout, "single_paragraph_mode?", layout_get_single_paragraph_mode, 0);
-    rb_define_method(pLayout, "log_attrs", layout_get_log_attrs, 0);
-    rb_define_method(pLayout, "xy_to_index", layout_xy_to_index, 2);
-    rb_define_method(pLayout, "index_to_pos", layout_index_to_pos, 1);
-    rb_define_method(pLayout, "get_cursor_pos", layout_get_cursor_pos, 1);
-    rb_define_method(pLayout, "move_cursor_visually", layout_move_cursor_visually, 4);
-    rb_define_method(pLayout, "get_extents", layout_get_extents, -1);
-    rb_define_method(pLayout, "extents", layout_extents, 0);
-    rb_define_method(pLayout, "get_pixel_extents", layout_get_pixel_extents, -1);
-    rb_define_method(pLayout, "pixel_extents", layout_pixel_extents, 0);
-    rb_define_method(pLayout, "size", layout_get_size, 0);
-    rb_define_method(pLayout, "pixel_size", layout_get_pixel_size, 0);
-    rb_define_method(pLayout, "line_count", layout_get_line_count, 0);
-    rb_define_method(pLayout, "get_line", layout_get_line, 1);
-    rb_define_method(pLayout, "lines", layout_get_lines, 0);
-    rb_define_method(pLayout, "iter", layout_get_iter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment", layout_set_alignment, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "alignment", layout_get_alignment, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tabs", layout_set_tabs, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "tabs", layout_get_tabs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_single_paragraph_mode", layout_set_single_paragraph_mode, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "single_paragraph_mode?", layout_get_single_paragraph_mode, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "log_attrs", layout_get_log_attrs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "xy_to_index", layout_xy_to_index, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "index_to_pos", layout_index_to_pos, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_cursor_pos", layout_get_cursor_pos, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "move_cursor_visually", layout_move_cursor_visually, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_extents", layout_get_extents, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "extents", layout_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_pixel_extents", layout_get_pixel_extents, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixel_extents", layout_pixel_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", layout_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixel_size", layout_get_pixel_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_count", layout_get_line_count, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_line", layout_get_line, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lines", layout_get_lines, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "iter", layout_get_iter, 0);
 
-    G_DEF_SETTERS(pLayout);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* PangoWrapMode */
-    G_DEF_CLASS(PANGO_TYPE_WRAP_MODE, "WrapMode", pLayout);
-    G_DEF_CONSTANTS(pLayout, PANGO_TYPE_WRAP_MODE, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_WRAP_MODE, "WrapMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_WRAP_MODE, "PANGO_");
 
     /* PangoAlignment */
-    G_DEF_CLASS(PANGO_TYPE_ALIGNMENT, "Alignment", pLayout);
-    G_DEF_CONSTANTS(pLayout, PANGO_TYPE_ALIGNMENT, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_ALIGNMENT, "Alignment", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_ALIGNMENT, "PANGO_");
 
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
     /* PangoEllipsizeMode */
-    G_DEF_CLASS(PANGO_TYPE_ELLIPSIZE_MODE, "EllipsizeMode", pLayout);
-    G_DEF_CONSTANTS(pLayout, PANGO_TYPE_ELLIPSIZE_MODE, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_ELLIPSIZE_MODE, "EllipsizeMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_ELLIPSIZE_MODE, "PANGO_");
 #endif
 }

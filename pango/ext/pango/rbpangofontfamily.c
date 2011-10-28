@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cFontFamily
 #define _SELF(self) (PANGO_FONT_FAMILY(RVAL2GOBJ(self)))
 
 static VALUE
@@ -61,13 +62,13 @@ font_family_list_faces(VALUE self)
 void
 Init_pango_font_family(void)
 {
-    VALUE pFamily = G_DEF_CLASS(PANGO_TYPE_FONT_FAMILY, "FontFamily", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_FAMILY, "FontFamily", mPango);
     
-    rb_define_method(pFamily, "name", font_family_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", font_family_get_name, 0);
 #ifdef HAVE_PANGO_FONT_FAMILY_IS_MONOSPACE
-    rb_define_method(pFamily, "monospace?", font_family_is_monospace, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "monospace?", font_family_is_monospace, 0);
 #endif
-    rb_define_method(pFamily, "faces", font_family_list_faces, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "faces", font_family_list_faces, 0);
 
     G_DEF_CLASS3("PangoFcFamily", "FcFamily", mPango);
     G_DEF_CLASS3("PangoFT2Family", "FT2Family", mPango);

@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cRectangle
 #define _SELF(s) ((PangoRectangle*)RVAL2BOXED(s, PANGO_TYPE_RECTANGLE))
 
 /**********************************/
@@ -152,22 +153,22 @@ pango_rectangle_rbearing(VALUE self)
 void
 Init_pango_rectangle(void)
 {
-    VALUE pRectangle = G_DEF_CLASS(PANGO_TYPE_RECTANGLE, "Rectangle", mPango);
-    rb_define_method(pRectangle, "initialize", pango_rectangle_initialize, 4);
-    rb_define_method(pRectangle, "x", pango_rectangle_x, 0);
-    rb_define_method(pRectangle, "y", pango_rectangle_y, 0);
-    rb_define_method(pRectangle, "width", pango_rectangle_w, 0);
-    rb_define_method(pRectangle, "height", pango_rectangle_h, 0);
-    rb_define_method(pRectangle, "set_x", pango_rectangle_set_x, 1);
-    rb_define_method(pRectangle, "set_y", pango_rectangle_set_y, 1);
-    rb_define_method(pRectangle, "set_width", pango_rectangle_set_w, 1);
-    rb_define_method(pRectangle, "set_height", pango_rectangle_set_h, 1);
-    rb_define_method(pRectangle, "to_a", pango_rectangle_to_a, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_RECTANGLE, "Rectangle", mPango);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", pango_rectangle_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "x", pango_rectangle_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "y", pango_rectangle_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", pango_rectangle_w, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", pango_rectangle_h, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_x", pango_rectangle_set_x, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_y", pango_rectangle_set_y, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width", pango_rectangle_set_w, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_height", pango_rectangle_set_h, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", pango_rectangle_to_a, 0);
 
-    rb_define_method(pRectangle, "ascent", pango_rectangle_ascent, 0);
-    rb_define_method(pRectangle, "descent", pango_rectangle_descent, 0);
-    rb_define_method(pRectangle, "lbearing", pango_rectangle_lbearing, 0);
-    rb_define_method(pRectangle, "rbearing", pango_rectangle_rbearing, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ascent", pango_rectangle_ascent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "descent", pango_rectangle_descent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "lbearing", pango_rectangle_lbearing, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rbearing", pango_rectangle_rbearing, 0);
 
-    G_DEF_SETTERS(pRectangle);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

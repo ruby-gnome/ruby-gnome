@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cFontFace
 #define _SELF(self) (PANGO_FONT_FACE(RVAL2GOBJ(self)))
 
 static VALUE
@@ -60,12 +61,12 @@ font_face_list_sizes(VALUE self)
 void
 Init_pango_font_face(void)
 {
-    VALUE pFace = G_DEF_CLASS(PANGO_TYPE_FONT_FACE, "FontFace", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_FACE, "FontFace", mPango);
     
-    rb_define_method(pFace, "name", font_face_get_face_name, 0);
-    rb_define_method(pFace, "describe", font_face_describe, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", font_face_get_face_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "describe", font_face_describe, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pFace, "sizes", font_face_list_sizes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sizes", font_face_list_sizes, 0);
 #endif
     G_DEF_CLASS3("PangoFcFace", "FcFace", mPango);
     G_DEF_CLASS3("PangoFT2Face", "FT2Face", mPango);

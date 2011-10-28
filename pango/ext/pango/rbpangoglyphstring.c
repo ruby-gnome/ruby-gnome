@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cGlyphString
 #define _SELF(self) ((PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)))
 
 static VALUE
@@ -139,18 +140,18 @@ rglyph_get_glyphs(VALUE self)
 void
 Init_pango_glyph_string(void)
 {
-    VALUE pGlyph = G_DEF_CLASS(PANGO_TYPE_GLYPH_STRING, "GlyphString", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_STRING, "GlyphString", mPango);
 
-    rb_define_method(pGlyph, "initialize", rglyph_initialize, 0);
-    rb_define_method(pGlyph, "set_size", rglyph_set_size, 1);
-    rb_define_method(pGlyph, "extents", rglyph_extents, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rglyph_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", rglyph_set_size, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "extents", rglyph_extents, -1);
 #if PANGO_CHECK_VERSION(1,14,0)
-    rb_define_method(pGlyph, "width", rglyph_get_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", rglyph_get_width, 0);
 #endif
-    rb_define_method(pGlyph, "index_to_x", rglyph_index_to_x, 4);
-    rb_define_method(pGlyph, "x_to_index", rglyph_x_to_index, 3);
-    rb_define_method(pGlyph, "get_logical_widths", rglyph_get_logical_widths, 2);
-    rb_define_method(pGlyph, "glyphs", rglyph_get_glyphs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "index_to_x", rglyph_index_to_x, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "x_to_index", rglyph_x_to_index, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_logical_widths", rglyph_get_logical_widths, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "glyphs", rglyph_get_glyphs, 0);
 
-    G_DEF_SETTERS(pGlyph);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

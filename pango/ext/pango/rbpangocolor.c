@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cColor
 #define _SELF(self) ((PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR))
 
 static VALUE
@@ -101,18 +102,18 @@ color_equal(VALUE self, VALUE other)
 void
 Init_pango_color(void)
 {
-    VALUE pColor = G_DEF_CLASS(PANGO_TYPE_COLOR, "Color", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_COLOR, "Color", mPango);
     
-    rb_define_method(pColor, "initialize", color_initialize, 3);
-    rb_define_method(pColor, "parse", color_parse, 1);
-    rb_define_method(pColor, "red", color_red, 0);
-    rb_define_method(pColor, "set_red", color_set_red, 1);
-    rb_define_method(pColor, "green", color_green, 0);
-    rb_define_method(pColor, "set_green", color_set_green, 1);
-    rb_define_method(pColor, "blue", color_blue, 0);
-    rb_define_method(pColor, "set_blue", color_set_blue, 1);
-    rb_define_method(pColor, "to_a", color_to_a, 0);
-    rb_define_method(pColor, "==", color_equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", color_initialize, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "parse", color_parse, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "red", color_red, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_red", color_set_red, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "green", color_green, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_green", color_set_green, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "blue", color_blue, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_blue", color_set_blue, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", color_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", color_equal, 1);
 
-    G_DEF_SETTERS(pColor);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

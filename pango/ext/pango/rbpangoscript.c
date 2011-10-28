@@ -22,6 +22,7 @@
 #include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,4,0)
+#define RG_TARGET_NAMESPACE cScript
 #define _SELF(r) (RVAL2GENUM(r, PANGO_TYPE_SCRIPT))
 
 static VALUE
@@ -76,13 +77,13 @@ void
 Init_pango_script(void)
 {
 #if PANGO_CHECK_VERSION(1,4,0)
-    VALUE script = G_DEF_CLASS(PANGO_TYPE_SCRIPT, "Script", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_SCRIPT, "Script", mPango);
 
-    rb_define_singleton_method(script, "for_unichar", rbpango_s_script_for_unichar, 1);
-    rb_define_method(script, "sample_language", rbpango_script_get_sample_language, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "for_unichar", rbpango_s_script_for_unichar, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "sample_language", rbpango_script_get_sample_language, 0);
 #endif
 #if PANGO_CHECK_VERSION(1,16,0)
-    rb_define_method(script, "get_gravity", rbpango_script_get_gravity, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_gravity", rbpango_script_get_gravity, -1);
 #endif
 }
 

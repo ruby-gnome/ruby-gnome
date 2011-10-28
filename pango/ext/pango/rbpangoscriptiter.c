@@ -50,6 +50,7 @@ pango_script_iter_get_type(void)
 }
 /**********************************/
 
+#define RG_TARGET_NAMESPACE cScriptIter
 #define _SELF(r) ((PangoScriptIter*)RVAL2BOXED(r, PANGO_TYPE_SCRIPT_ITER))
 
 static VALUE
@@ -87,11 +88,11 @@ void
 Init_pango_script_iter(void)
 {
 #if PANGO_CHECK_VERSION(1,4,0)
-    VALUE scriter = G_DEF_CLASS(PANGO_TYPE_SCRIPT_ITER, "ScriptIter", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_SCRIPT_ITER, "ScriptIter", mPango);
 
-    rb_define_method(scriter, "initialize", rbpango_scriptiter_initialize, 1);
-    rb_define_method(scriter, "range", rbpango_scriptiter_get_range, 0);
-    rb_define_method(scriter, "next!", rbpango_scriptiter_next, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbpango_scriptiter_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "range", rbpango_scriptiter_get_range, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "next!", rbpango_scriptiter_next, 0);
 #endif
 }
 

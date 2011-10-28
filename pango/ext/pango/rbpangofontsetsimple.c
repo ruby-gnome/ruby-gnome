@@ -23,6 +23,7 @@
 
 #ifdef PANGO_ENABLE_BACKEND
 
+#define RG_TARGET_NAMESPACE cFontsetSimple
 #define _SELF(self) (PANGO_FONTSET_SIMPLE(RVAL2GOBJ(self)))
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
 
@@ -51,10 +52,10 @@ void
 Init_pango_fontset_simple(void)
 {
 #ifdef PANGO_ENABLE_BACKEND
-    VALUE pFSimple = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontsetSimple", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontsetSimple", mPango);
     
-    rb_define_method(pFSimple, "initialize", fontset_simple_initialize, 1);
-    rb_define_method(pFSimple, "append", fontset_simple_append, 1);
-    rb_define_method(pFSimple, "size", fontset_simple_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", fontset_simple_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append", fontset_simple_append, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", fontset_simple_size, 0);
 #endif
 }

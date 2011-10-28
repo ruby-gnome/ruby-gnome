@@ -22,6 +22,7 @@
 #include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,2,0)
+#define RG_TARGET_NAMESPACE cGlyphItem
 #define _SELF(r) ((PangoGlyphItem*)RVAL2BOXED(r, PANGO_TYPE_GLYPH_ITEM))
 
 /**********************************/
@@ -117,16 +118,16 @@ void
 Init_pango_glyph_item(void)
 {
 #if PANGO_CHECK_VERSION(1,2,0)
-    VALUE pItem = G_DEF_CLASS(PANGO_TYPE_GLYPH_ITEM, "GlyphItem", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_ITEM, "GlyphItem", mPango);
 
-    rb_define_method(pItem, "item", glyph_item_get_item, 0);
-    rb_define_method(pItem, "glyphs", glyph_item_get_glyphs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "item", glyph_item_get_item, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "glyphs", glyph_item_get_glyphs, 0);
 
-    rb_define_method(pItem, "split", glyph_item_split, 2);
-    rb_define_method(pItem, "appy_attrs", glyph_item_apply_attrs, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "split", glyph_item_split, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "appy_attrs", glyph_item_apply_attrs, 2);
 
 #if PANGO_CHECK_VERSION(1,6,0)
-    rb_define_method(pItem, "letter_space", glyph_item_letter_space, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "letter_space", glyph_item_letter_space, 3);
 #endif
 #endif
 }

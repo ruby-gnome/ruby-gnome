@@ -21,6 +21,8 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE mPango
+
 /*
  * Rendering
  */
@@ -251,18 +253,18 @@ rpango_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 void
 Init_pango_main(void)
 {
-    rb_define_module_function(mPango, "reorder_items", rpango_reorder_items, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "reorder_items", rpango_reorder_items, 1);
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_module_function(mPango, "unichar_direction", rpango_unichar_direction, 1);
-    rb_define_module_function(mPango, "find_base_dir", rpango_find_base_dir, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "unichar_direction", rpango_unichar_direction, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "find_base_dir", rpango_find_base_dir, 1);
 #endif
-    rb_define_module_function(mPango, "break", rpango_break, 2);
-    rb_define_module_function(mPango, "get_log_attrs", rpango_get_log_attrs, 3);
-    rb_define_module_function(mPango, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
-    rb_define_module_function(mPango, "shape", rpango_shape, 2);
-    rb_define_module_function(mPango, "parse_markup", rpango_parse_markup, -1);
-    rb_define_module_function(mPango, "pixels", rpango_pixels, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "break", rpango_break, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_log_attrs", rpango_get_log_attrs, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "find_paragraph_boundary", rpango_find_paragraph_boundary, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "shape", rpango_shape, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "parse_markup", rpango_parse_markup, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pixels", rpango_pixels, 1);
 
-    rb_define_const(mPango, "SCALE", INT2FIX(PANGO_SCALE));
+    rb_define_const(RG_TARGET_NAMESPACE, "SCALE", INT2FIX(PANGO_SCALE));
 }

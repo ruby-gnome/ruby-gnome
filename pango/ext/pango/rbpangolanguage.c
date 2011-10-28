@@ -22,6 +22,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cLanguage
 #define _SELF(self) ((PangoLanguage*)RVAL2BOXED(self, PANGO_TYPE_LANGUAGE))
 #define LANG2RVAL(lang) (BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE))
 
@@ -74,18 +75,18 @@ language_includes_script(VALUE self, VALUE script)
 void
 Init_pango_language(void)
 {
-    VALUE pLanguage = G_DEF_CLASS(PANGO_TYPE_LANGUAGE, "Language", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LANGUAGE, "Language", mPango);
 
-    rb_define_singleton_method(pLanguage, "default", language_s_default, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", language_s_default, 0);
 
-    rb_define_method(pLanguage, "initialize", language_initialize, 1);
-    rb_define_singleton_method(pLanguage, "to_string", language_s_to_string, 1);
-    rb_define_method(pLanguage, "matches", language_matches, -1);
-    rb_define_method(pLanguage, "to_str", language_to_str, 0);
-    rb_define_alias(pLanguage, "to_s", "to_str");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", language_initialize, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "to_string", language_s_to_string, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "matches", language_matches, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_str", language_to_str, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "to_s", "to_str");
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pLanguage, "includes_script", language_includes_script, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "includes_script", language_includes_script, 1);
 #endif
 
 }

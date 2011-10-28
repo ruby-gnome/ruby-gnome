@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cLayoutLine
 #define _SELF(r) ((PangoLayoutLine*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_LINE))
 
 /**********************************/
@@ -245,29 +246,29 @@ layout_line_set_resolved_dir(VALUE self, VALUE val)
 void
 Init_pango_layout_line(void)
 {
-    VALUE pLine = G_DEF_CLASS(PANGO_TYPE_LAYOUT_LINE, "LayoutLine", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT_LINE, "LayoutLine", mPango);
 
-    rb_define_method(pLine, "extents", layout_line_get_extents, 0);
-    rb_define_method(pLine, "pixel_extents", layout_line_get_pixel_extents, 0);
-    rb_define_method(pLine, "index_to_x", layout_line_index_to_x, 2);
-    rb_define_method(pLine, "x_to_index", layout_line_x_to_index, 1); 
-    rb_define_method(pLine, "get_x_ranges", layout_line_get_x_ranges, 2); 
-    rb_define_method(pLine, "layout", layout_line_get_layout, 0); 
-    rb_define_method(pLine, "set_layout", layout_line_set_layout, 1); 
-    rb_define_method(pLine, "start_index", layout_line_get_start_index, 0); 
-    rb_define_method(pLine, "set_start_index", layout_line_set_start_index, 1); 
-    rb_define_method(pLine, "length", layout_line_get_length, 0); 
-    rb_define_method(pLine, "set_length", layout_line_set_length, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "extents", layout_line_get_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixel_extents", layout_line_get_pixel_extents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "index_to_x", layout_line_index_to_x, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "x_to_index", layout_line_x_to_index, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "get_x_ranges", layout_line_get_x_ranges, 2); 
+    rb_define_method(RG_TARGET_NAMESPACE, "layout", layout_line_get_layout, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_layout", layout_line_set_layout, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "start_index", layout_line_get_start_index, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_start_index", layout_line_set_start_index, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "length", layout_line_get_length, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_length", layout_line_set_length, 1); 
 #if PANGO_CHECK_VERSION(1,2,0)
-    rb_define_method(pLine, "runs", layout_line_get_runs, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "runs", layout_line_get_runs, 0); 
 #endif
-    rb_define_method(pLine, "set_runs", layout_line_set_runs, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_runs", layout_line_set_runs, 1); 
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pLine, "paragraph_start?", layout_line_is_paragraph_start, 0); 
-    rb_define_method(pLine, "set_paragraph_start", layout_line_set_paragraph_start, 1); 
-    rb_define_method(pLine, "resolved_dir", layout_line_get_resolved_dir, 0); 
-    rb_define_method(pLine, "set_resolved_dir", layout_line_set_resolved_dir, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "paragraph_start?", layout_line_is_paragraph_start, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_paragraph_start", layout_line_set_paragraph_start, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "resolved_dir", layout_line_get_resolved_dir, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_resolved_dir", layout_line_set_resolved_dir, 1); 
 #endif
-    G_DEF_SETTERS(pLine);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

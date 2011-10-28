@@ -23,6 +23,7 @@
 
 static ID id_call;
 
+#define RG_TARGET_NAMESPACE cAttrList
 #define _SELF(self) ((PangoAttrList*)RVAL2BOXED(self, PANGO_TYPE_ATTR_LIST))
 
 static VALUE
@@ -88,18 +89,18 @@ attrlist_get_iterator(VALUE self)
 void
 Init_pango_attrlist(void)
 {
-    VALUE pAttrlist = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
 
     id_call = rb_intern("call");
 
-    rb_define_method(pAttrlist, "initialize", attrlist_initialize, 0);
-    rb_define_method(pAttrlist, "insert", attrlist_insert, 1);
-    rb_define_method(pAttrlist, "insert_before", attrlist_insert_before, 1);
-    rb_define_method(pAttrlist, "change", attrlist_change, 1);
-    rb_define_method(pAttrlist, "splice", attrlist_splice, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", attrlist_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert", attrlist_insert, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "insert_before", attrlist_insert_before, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "change", attrlist_change, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "splice", attrlist_splice, 3);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pAttrlist, "filter", attrlist_filter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "filter", attrlist_filter, 0);
 #endif
-    rb_define_method(pAttrlist, "iterator", attrlist_get_iterator, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "iterator", attrlist_get_iterator, 0);
 
 }

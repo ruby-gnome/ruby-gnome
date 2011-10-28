@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cContext
 #define _SELF(self) (PANGO_CONTEXT(RVAL2GOBJ(self)))
 #define RVAL2DESC(v) ((PangoFontDescription*)RVAL2BOXED(v, PANGO_TYPE_FONT_DESCRIPTION))
 #define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
@@ -274,53 +275,53 @@ rcontext_list_families_old(VALUE self)
 void
 Init_pango_context(void)
 {
-    VALUE pContext = G_DEF_CLASS(PANGO_TYPE_CONTEXT, "Context", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CONTEXT, "Context", mPango);
 
-    rb_define_method(pContext, "itemize", rcontext_itemize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "itemize", rcontext_itemize, -1);
 
 #ifdef PANGO_ENABLE_BACKEND
-    rb_define_method(pContext, "initialize", rcontext_initialize, 0);
-    rb_define_method(pContext, "set_font_map", rcontext_set_font_map, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rcontext_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_map", rcontext_set_font_map, 1);
 #if PANGO_CHECK_VERSION(1,6,0)
-    rb_define_method(pContext, "font_map", rcontext_get_font_map, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_map", rcontext_get_font_map, 0);
 #endif
 #endif /* PANGO_ENABLE_BACKEND */
-    rb_define_method(pContext, "font_description", rcontext_get_font_description, 0);
-    rb_define_method(pContext, "set_font_description", rcontext_set_font_description, 1);
-    rb_define_method(pContext, "language", rcontext_get_language, 0);
-    rb_define_method(pContext, "set_language", rcontext_set_language, 1);
-    rb_define_method(pContext, "base_dir", rcontext_get_base_dir, 0);
-    rb_define_method(pContext, "set_base_dir", rcontext_set_base_dir, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_description", rcontext_get_font_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_description", rcontext_set_font_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "language", rcontext_get_language, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_language", rcontext_set_language, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "base_dir", rcontext_get_base_dir, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_base_dir", rcontext_set_base_dir, 1);
 #if PANGO_CHECK_VERSION(1,16,0)
-    rb_define_method(pContext, "base_gravity", rcontext_get_base_gravity, 0);
-    rb_define_method(pContext, "set_base_gravity", rcontext_set_base_gravity, 1);
-    rb_define_method(pContext, "gravity_hint", rcontext_get_gravity_hint, 0);
-    rb_define_method(pContext, "set_gravity_hint", rcontext_set_gravity_hint, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "base_gravity", rcontext_get_base_gravity, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_base_gravity", rcontext_set_base_gravity, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "gravity_hint", rcontext_get_gravity_hint, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_gravity_hint", rcontext_set_gravity_hint, 1);
 #endif
 #if PANGO_CHECK_VERSION(1,6,0)
-    rb_define_method(pContext, "matrix", rcontext_get_matrix, 0);
-    rb_define_method(pContext, "set_matrix", rcontext_set_matrix, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "matrix", rcontext_get_matrix, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_matrix", rcontext_set_matrix, 1);
 #endif
-    rb_define_method(pContext, "load_font", rcontext_load_font, 1);
-    rb_define_method(pContext, "load_fontset", rcontext_load_fontset, 2);
-    rb_define_method(pContext, "get_metrics", rcontext_get_metrics, -1);
-    rb_define_method(pContext, "families", rcontext_list_families, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_font", rcontext_load_font, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "load_fontset", rcontext_load_fontset, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_metrics", rcontext_get_metrics, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "families", rcontext_list_families, 0);
 
 #if PANGO_CHECK_VERSION(1,10,0)
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(pContext, "set_font_options", rcontext_set_font_options, 1);
-    rb_define_method(pContext, "font_options", rcontext_get_font_options, 0);
-    rb_define_method(pContext, "set_resolution", rcontext_set_resolution, 1);
-    rb_define_method(pContext, "resolution", rcontext_get_resolution, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_options", rcontext_set_font_options, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_options", rcontext_get_font_options, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_resolution", rcontext_set_resolution, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "resolution", rcontext_get_resolution, 0);
 #  endif
 #endif
     
     /* This will remove 2 or 3 releases later since 0.14.0. */
-    rb_define_method(pContext, "list_families", rcontext_list_families_old, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "list_families", rcontext_list_families_old, 0);
 
-    G_DEF_SETTERS(pContext);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* PangoDirection */
-    G_DEF_CLASS(PANGO_TYPE_DIRECTION, "Direction", pContext);
-    G_DEF_CONSTANTS(pContext, PANGO_TYPE_DIRECTION, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_DIRECTION, "Direction", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_DIRECTION, "PANGO_");
 }

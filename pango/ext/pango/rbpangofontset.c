@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cFontset
 #define _SELF(self) (PANGO_FONTSET(RVAL2GOBJ(self)))
 
 static ID id_call;
@@ -60,13 +61,13 @@ fontset_foreach(VALUE self)
 void
 Init_pango_fontset(void)
 {
-    VALUE pFontSet = G_DEF_CLASS(PANGO_TYPE_FONTSET, "Fontset", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONTSET, "Fontset", mPango);
     
     id_call = rb_intern("call");
 
-    rb_define_method(pFontSet, "get_font", fontset_get_font, 1);
-    rb_define_method(pFontSet, "metrics", fontset_get_metrics, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_font", fontset_get_font, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "metrics", fontset_get_metrics, 0);
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(pFontSet, "each", fontset_foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", fontset_foreach, 0);
 #endif
 }
