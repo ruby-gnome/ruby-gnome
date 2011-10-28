@@ -21,6 +21,8 @@
 
 #include "rbpoppler.h"
 
+#define RG_TARGET_NAMESPACE cDocument
+
 #define RVAL2DOC(obj) (POPPLER_DOCUMENT(RVAL2GOBJ(obj)))
 
 #define IITER2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_INDEX_ITER))
@@ -407,14 +409,14 @@ ps_file_set_duplex(VALUE self, VALUE duplex)
 void
 Init_poppler_document(VALUE mPoppler)
 {
-    VALUE cDocument, cFontsIter, cPSFile;
+    VALUE RG_TARGET_NAMESPACE, cFontsIter, cPSFile;
 
     id_new = rb_intern("new");
     id_valid = rb_intern("valid?");
     id_pdf_data_p = rb_intern("pdf_data?");
     id_ensure_uri = rb_intern("ensure_uri");
 
-    cDocument = G_DEF_CLASS(POPPLER_TYPE_DOCUMENT, "Document", mPoppler);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_DOCUMENT, "Document", mPoppler);
     cIndexIter = G_DEF_CLASS(POPPLER_TYPE_INDEX_ITER, "IndexIter", mPoppler);
     cFontInfo = G_DEF_CLASS(POPPLER_TYPE_FONT_INFO, "FontInfo", mPoppler);
     cFontsIter = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
@@ -426,30 +428,30 @@ Init_poppler_document(VALUE mPoppler)
     G_DEF_CLASS(POPPLER_TYPE_VIEWER_PREFERENCES, "ViewerPreferences", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_PERMISSIONS, "Permissions", mPoppler);
 
-    rb_include_module(cDocument, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_method(cDocument, "initialize", doc_initialize, -1);
-    rb_define_method(cDocument, "save", doc_save, 1);
-    rb_define_method(cDocument, "save_a_copy", doc_save_a_copy, 1);
-    rb_define_method(cDocument, "n_pages", doc_get_n_pages, 0);
-    rb_define_alias(cDocument, "size", "n_pages");
-    rb_define_method(cDocument, "get_page", doc_get_page, 1);
-    rb_define_alias(cDocument, "[]", "get_page");
-    rb_define_method(cDocument, "has_attachments?", doc_has_attachments, 0);
-    rb_define_alias(cDocument, "have_attachments?", "has_attachments?");
-    rb_define_method(cDocument, "attachments", doc_get_attachments, 0);
-    rb_define_method(cDocument, "find_dest", doc_find_dest, 1);
-    rb_define_alias(cDocument, "get_destination", "find_dest");
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", doc_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "save", doc_save, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "save_a_copy", doc_save_a_copy, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "n_pages", doc_get_n_pages, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "size", "n_pages");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_page", doc_get_page, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_page");
+    rb_define_method(RG_TARGET_NAMESPACE, "has_attachments?", doc_has_attachments, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "have_attachments?", "has_attachments?");
+    rb_define_method(RG_TARGET_NAMESPACE, "attachments", doc_get_attachments, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "find_dest", doc_find_dest, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "get_destination", "find_dest");
 
-    rb_define_method(cDocument, "get_form_field", doc_get_form_field, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_form_field", doc_get_form_field, 1);
 
-    rb_define_method(cDocument, "each", doc_each, 0);
-    rb_define_alias(cDocument, "pages", "to_a");
+    rb_define_method(RG_TARGET_NAMESPACE, "each", doc_each, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "pages", "to_a");
 
-    rb_define_method(cDocument, "index_iter", doc_get_index_iter, 0);
-    rb_define_method(cDocument, "font_info", doc_get_font_info, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "index_iter", doc_get_index_iter, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_info", doc_get_font_info, 0);
 
-    G_DEF_SETTERS(cDocument);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 
 /* Interface for getting the Index of a poppler_document */

@@ -21,6 +21,8 @@
 
 #include "rbpoppler-private.h"
 
+#define RG_TARGET_NAMESPACE cFormField
+
 #define RVAL2FF(obj) RVAL2POPPLER_FORM_FIELD(obj)
 #define RVAL2TF(obj) RVAL2FF(obj)
 #define RVAL2BF(obj) RVAL2FF(obj)
@@ -244,22 +246,22 @@ choice_field_get_text(VALUE self)
 void
 Init_poppler_form_field(VALUE mPoppler)
 {
-    VALUE cFormField;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cFormField = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
-    cUnknownField = rb_define_class_under(mPoppler, "UnknownField", cFormField);
-    cTextField = rb_define_class_under(mPoppler, "TextField", cFormField);
-    cButtonField = rb_define_class_under(mPoppler, "ButtonField", cFormField);
-    cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", cFormField);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
+    cUnknownField = rb_define_class_under(mPoppler, "UnknownField", RG_TARGET_NAMESPACE);
+    cTextField = rb_define_class_under(mPoppler, "TextField", RG_TARGET_NAMESPACE);
+    cButtonField = rb_define_class_under(mPoppler, "ButtonField", RG_TARGET_NAMESPACE);
+    cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", RG_TARGET_NAMESPACE);
     cSignatureField = rb_define_class_under(mPoppler, "SignatureField",
-                                            cFormField);
+                                            RG_TARGET_NAMESPACE);
 
 /* FormField */
-    rb_define_method(cFormField, "id", form_field_get_id, 0);
-    rb_define_method(cFormField, "font_size", form_field_get_font_size, 0);
-    rb_define_method(cFormField, "read_only?", form_field_is_read_only, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "id", form_field_get_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_size", form_field_get_font_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "read_only?", form_field_is_read_only, 0);
 
-    G_DEF_SETTERS(cFormField);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 
     rb_define_method(cButtonField, "type", button_field_get_button_type, 0);

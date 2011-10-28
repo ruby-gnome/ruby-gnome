@@ -21,6 +21,7 @@
 
 #include "rbpoppler.h"
 
+#define RG_TARGET_NAMESPACE cAttachment
 #define SELF(self) ((PopplerAttachment *)RVAL2GOBJ(self))
 
 static ID id_call;
@@ -107,19 +108,19 @@ attachment_get_checksum(VALUE self)
 void
 Init_poppler_attachment(VALUE mPoppler)
 {
-    VALUE cAttachment;
+    VALUE RG_TARGET_NAMESPACE;
 
     id_call = rb_intern("call");
 
-    cAttachment = G_DEF_CLASS(POPPLER_TYPE_ATTACHMENT, "Attachment", mPoppler);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ATTACHMENT, "Attachment", mPoppler);
 
-    rb_define_method(cAttachment, "save", attachment_save, -1);
-    rb_define_method(cAttachment, "name", attachment_get_name, 0);
-    rb_define_method(cAttachment, "description", attachment_get_description, 0);
-    rb_define_method(cAttachment, "size", attachment_get_size, 0);
-    rb_define_method(cAttachment, "mtime", attachment_get_mtime, 0);
-    rb_define_method(cAttachment, "ctime", attachment_get_ctime, 0);
-    rb_define_method(cAttachment, "checksum", attachment_get_checksum, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "save", attachment_save, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", attachment_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", attachment_get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", attachment_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mtime", attachment_get_mtime, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ctime", attachment_get_ctime, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "checksum", attachment_get_checksum, 0);
 
-    G_DEF_SETTERS(cAttachment);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
