@@ -52,7 +52,7 @@ GSource*    g_source_new                    (GSourceFuncs *source_funcs,
 */
 
 static VALUE
-source_attach(VALUE self, VALUE context)
+rg_attach(VALUE self, VALUE context)
 {
     return UINT2NUM(g_source_attach(_SELF(self), 
                                     RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT)));
@@ -60,46 +60,46 @@ source_attach(VALUE self, VALUE context)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-source_is_destroyed(VALUE self)
+rg_destroyed_p(VALUE self)
 {
     return CBOOL2RVAL(g_source_is_destroyed(_SELF(self)));
 }
 #endif
 
 static VALUE
-source_set_priority(VALUE self, VALUE priority)
+rg_set_priority(VALUE self, VALUE priority)
 {
     g_source_set_priority(_SELF(self), NUM2INT(priority));
     return self;
 }
 
 static VALUE
-source_get_priority(VALUE self)
+rg_priority(VALUE self)
 {
     return INT2NUM(g_source_get_priority(_SELF(self)));
 }
 
 static VALUE
-source_set_can_recurse(VALUE self, VALUE can_recurse)
+rg_set_can_recurse(VALUE self, VALUE can_recurse)
 {
     g_source_set_can_recurse(_SELF(self), RVAL2CBOOL(can_recurse));
     return self;
 }
 
 static VALUE
-source_get_can_recurse(VALUE self)
+rg_can_recurse_p(VALUE self)
 {
     return CBOOL2RVAL(g_source_get_can_recurse(_SELF(self)));
 }
 
 static VALUE
-source_get_id(VALUE self)
+rg_id(VALUE self)
 {
     return UINT2NUM(g_source_get_id(_SELF(self)));
 }
 
 static VALUE
-source_get_context(VALUE self)
+rg_context(VALUE self)
 {
     GMainContext* context = g_source_get_context(_SELF(self));
     return BOXED2RVAL(context, G_TYPE_MAIN_CONTEXT);
@@ -112,7 +112,7 @@ source_func(gpointer func)
 }
 
 static VALUE
-source_set_callback(VALUE self)
+rg_set_callback(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -130,21 +130,21 @@ void        g_source_set_callback_indirect  (GSource *source,
 */
 
 static VALUE
-source_add_poll(VALUE self, VALUE fd)
+rg_add_poll(VALUE self, VALUE fd)
 {
     g_source_add_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
     return self;
 }
 
 static VALUE
-source_remove_poll(VALUE self, VALUE fd)
+rg_remove_poll(VALUE self, VALUE fd)
 {
     g_source_remove_poll(_SELF(self), RVAL2BOXED(fd, G_TYPE_POLL_FD));
     return self;
 }
 
 static VALUE
-source_get_current_time(VALUE self)
+rg_current_time(VALUE self)
 {
     GTimeVal timeval;
     g_source_get_current_time(_SELF(self), &timeval);
@@ -166,20 +166,20 @@ Init_glib_source(void)
 
     id_call = rb_intern("call");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "attach", source_attach, 1);
+    RG_DEF_METHOD(attach, 1);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "destroyed?", source_is_destroyed, 0);
+    RG_DEF_METHOD_P(destroyed, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_priority", source_set_priority, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "priority", source_get_priority, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_can_recurse", source_set_can_recurse, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "can_recurse?", source_get_can_recurse, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "id", source_get_id, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "context", source_get_context, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_callback", source_set_callback, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_poll", source_add_poll, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_poll", source_remove_poll, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "current_time", source_get_current_time, 0);
+    RG_DEF_METHOD(set_priority, 1);
+    RG_DEF_METHOD(priority, 0);
+    RG_DEF_METHOD(set_can_recurse, 1);
+    RG_DEF_METHOD_P(can_recurse, 0);
+    RG_DEF_METHOD(id, 0);
+    RG_DEF_METHOD(context, 0);
+    RG_DEF_METHOD(set_callback, 0);
+    RG_DEF_METHOD(add_poll, 1);
+    RG_DEF_METHOD(remove_poll, 1);
+    RG_DEF_METHOD(current_time, 0);
 
     /* GLib::Source.remove is moved to rbglib_maincontext.c */
 

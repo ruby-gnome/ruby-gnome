@@ -36,7 +36,6 @@ bookmarkfile_copy(const GBookmarkFile* file)
     return (GBookmarkFile*)file;
 }
 
-
 static GType
 g_bookmark_file_get_type(void)
 {
@@ -55,14 +54,14 @@ g_bookmark_file_get_type(void)
 #define _SELF(self) ((GBookmarkFile*)(RVAL2BOXED(self, G_TYPE_BOOKMARK_FILE)))
 
 static VALUE
-bf_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_bookmark_file_new());
     return Qnil;
 }
 
 static VALUE
-bf_load_from_file(VALUE self, VALUE rbfilename)
+rg_load_from_file(VALUE self, VALUE rbfilename)
 {
     gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     GError* error = NULL;
@@ -75,22 +74,22 @@ bf_load_from_file(VALUE self, VALUE rbfilename)
 }
 
 static VALUE
-bf_load_from_data(VALUE self, VALUE data)
+rg_load_from_data(VALUE self, VALUE data)
 {
     GError *error = NULL;
 
     StringValue(data);
     if (!g_bookmark_file_load_from_data(_SELF(self),
-					RSTRING_PTR(data),
-					RSTRING_LEN(data),
-					&error))
-	RAISE_GERROR(error);
+                                        RSTRING_PTR(data),
+                                        RSTRING_LEN(data),
+                                        &error))
+        RAISE_GERROR(error);
 
     return Qnil;
 }
 
 static VALUE
-bf_load_from_data_dirs(VALUE self, VALUE file)
+rg_load_from_data_dirs(VALUE self, VALUE file)
 {
     GError* error = NULL;
     gboolean ret;
@@ -106,18 +105,18 @@ bf_load_from_data_dirs(VALUE self, VALUE file)
 }
 
 static VALUE
-bf_to_data(VALUE self)
+rg_to_data(VALUE self)
 {
     GError* error = NULL;
     gchar* data = g_bookmark_file_to_data(_SELF(self), NULL, &error);
 
     if (error) RAISE_GERROR(error);
-    
+
     return CSTR2RVAL_FREE(data);
 }
 
 static VALUE
-bf_to_file(VALUE self, VALUE rbfilename)
+rg_to_file(VALUE self, VALUE rbfilename)
 {
     gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     GError* error = NULL;
@@ -130,14 +129,14 @@ bf_to_file(VALUE self, VALUE rbfilename)
 }
 
 static VALUE
-bf_has_item(VALUE self, VALUE uri)
+rg_has_item_p(VALUE self, VALUE uri)
 {
     return CBOOL2RVAL(g_bookmark_file_has_item(_SELF(self),
                                                RVAL2CSTR(uri))); 
 }
 
 static VALUE
-bf_has_group(VALUE self, VALUE uri, VALUE group)
+rg_has_group_p(VALUE self, VALUE uri, VALUE group)
 {
     GError* error = NULL;
     return CBOOL2RVAL(g_bookmark_file_has_group(_SELF(self),
@@ -145,9 +144,9 @@ bf_has_group(VALUE self, VALUE uri, VALUE group)
                                                 RVAL2CSTR(group),
                                                 &error));
 }
-	                                           
+
 static VALUE
-bf_has_application(VALUE self, VALUE uri, VALUE name)
+rg_has_application_p(VALUE self, VALUE uri, VALUE name)
 {
     GError* error = NULL;
     return CBOOL2RVAL(g_bookmark_file_has_application(_SELF(self),
@@ -155,21 +154,21 @@ bf_has_application(VALUE self, VALUE uri, VALUE name)
                                                       RVAL2CSTR(name),
                                                       &error));
 }
-	                                           
+
 static VALUE
-bf_get_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(g_bookmark_file_get_size(_SELF(self)));
 }
 
 static VALUE
-bf_get_uris(VALUE self)
+rg_uris(VALUE self)
 {
     return STRV2RVAL_FREE(g_bookmark_file_get_uris(_SELF(self), NULL));
 }
 
 static VALUE
-bf_get_title(VALUE self, VALUE uri)
+rg_get_title(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gchar* ret = g_bookmark_file_get_title(_SELF(self),
@@ -180,7 +179,7 @@ bf_get_title(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_description(VALUE self, VALUE uri)
+rg_get_description(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gchar* ret = g_bookmark_file_get_description(_SELF(self),
@@ -191,7 +190,7 @@ bf_get_description(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_mime_type(VALUE self, VALUE uri)
+rg_get_mime_type(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gchar* ret = g_bookmark_file_get_mime_type(_SELF(self),
@@ -202,7 +201,7 @@ bf_get_mime_type(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_is_private(VALUE self, VALUE uri)
+rg_private_p(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_get_is_private(_SELF(self),
@@ -213,7 +212,7 @@ bf_get_is_private(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_icon(VALUE self, VALUE uri)
+rg_get_icon(VALUE self, VALUE uri)
 {
     gchar* href;
     gchar* mime_type;
@@ -230,7 +229,7 @@ bf_get_icon(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_added(VALUE self, VALUE uri)
+rg_get_added(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     time_t ret = g_bookmark_file_get_added(_SELF(self),
@@ -242,7 +241,7 @@ bf_get_added(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_modified(VALUE self, VALUE uri)
+rg_get_modified(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     time_t ret = g_bookmark_file_get_modified(_SELF(self),
@@ -254,7 +253,7 @@ bf_get_modified(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_visited(VALUE self, VALUE uri)
+rg_get_visited(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     time_t ret = g_bookmark_file_get_visited(_SELF(self),
@@ -266,7 +265,7 @@ bf_get_visited(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_groups(VALUE self, VALUE uri)
+rg_get_groups(VALUE self, VALUE uri)
 {
     gsize length;
     VALUE ary;
@@ -276,7 +275,6 @@ bf_get_groups(VALUE self, VALUE uri)
                                              RVAL2CSTR(uri),
                                              &length, &error);
     if (error) RAISE_GERROR(error);
-  
 
     ary = rb_ary_new();
     for(i = 0; i < length; i++){
@@ -288,7 +286,7 @@ bf_get_groups(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_get_applications(VALUE self, VALUE uri)
+rg_get_applications(VALUE self, VALUE uri)
 {
     gsize length;
     VALUE ary;
@@ -298,7 +296,6 @@ bf_get_applications(VALUE self, VALUE uri)
                                                    RVAL2CSTR(uri),
                                                    &length, &error);
     if (error) RAISE_GERROR(error);
-  
 
     ary = rb_ary_new();
     for(i = 0; i < length; i++){
@@ -308,9 +305,9 @@ bf_get_applications(VALUE self, VALUE uri)
     g_strfreev(ret);
     return ary;
 }
-  
+
 static VALUE
-bf_get_app_info(VALUE self, VALUE uri, VALUE name)
+rg_get_app_info(VALUE self, VALUE uri, VALUE name)
 {
     gchar* exec;
     guint count;
@@ -322,12 +319,12 @@ bf_get_app_info(VALUE self, VALUE uri, VALUE name)
                                                 RVAL2CSTR(name),
                                                 &exec, &count, &stamp, &error);
     if (!ret) RAISE_GERROR(error);
-    
+
     return rb_ary_new3(3, CSTR2RVAL(exec), UINT2NUM(count), rb_time_new(stamp, 0));
 }
 
 static VALUE
-bf_set_title(VALUE self, VALUE uri, VALUE title)
+rg_set_title(VALUE self, VALUE uri, VALUE title)
 {
     g_bookmark_file_set_title(_SELF(self),
                               RVAL2CSTR(uri),
@@ -336,7 +333,7 @@ bf_set_title(VALUE self, VALUE uri, VALUE title)
 }
 
 static VALUE
-bf_set_description(VALUE self, VALUE uri, VALUE description)
+rg_set_description(VALUE self, VALUE uri, VALUE description)
 {
     g_bookmark_file_set_description(_SELF(self),
                                     RVAL2CSTR(uri),
@@ -345,7 +342,7 @@ bf_set_description(VALUE self, VALUE uri, VALUE description)
 }
 
 static VALUE
-bf_set_mime_type(VALUE self, VALUE uri, VALUE mime_type)
+rg_set_mime_type(VALUE self, VALUE uri, VALUE mime_type)
 {
     g_bookmark_file_set_mime_type(_SELF(self),
                                   RVAL2CSTR(uri),
@@ -354,7 +351,7 @@ bf_set_mime_type(VALUE self, VALUE uri, VALUE mime_type)
 }
 
 static VALUE
-bf_set_is_private(VALUE self, VALUE uri, VALUE is_private)
+rg_set_private(VALUE self, VALUE uri, VALUE is_private)
 {
     g_bookmark_file_set_is_private(_SELF(self),
                                    RVAL2CSTR(uri),
@@ -363,7 +360,7 @@ bf_set_is_private(VALUE self, VALUE uri, VALUE is_private)
 }
 
 static VALUE
-bf_set_icon(VALUE self, VALUE uri, VALUE href, VALUE mime_type)
+rg_set_icon(VALUE self, VALUE uri, VALUE href, VALUE mime_type)
 {
     g_bookmark_file_set_icon(_SELF(self),
                              RVAL2CSTR(uri),
@@ -373,7 +370,7 @@ bf_set_icon(VALUE self, VALUE uri, VALUE href, VALUE mime_type)
 }
 
 static VALUE
-bf_set_added(VALUE self, VALUE uri, VALUE time)
+rg_set_added(VALUE self, VALUE uri, VALUE time)
 {
     g_bookmark_file_set_added(_SELF(self), 
                               RVAL2CSTR(uri),
@@ -382,7 +379,7 @@ bf_set_added(VALUE self, VALUE uri, VALUE time)
 }
 
 static VALUE
-bf_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
+rg_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
 {
     GBookmarkFile *bookmark = _SELF(self);
     const gchar *uri = RVAL2CSTR(rburi);
@@ -397,7 +394,7 @@ bf_set_groups(VALUE self, VALUE rburi, VALUE rbgroups)
 }
 
 static VALUE
-bf_set_modified(VALUE self, VALUE uri, VALUE time)
+rg_set_modified(VALUE self, VALUE uri, VALUE time)
 {
     g_bookmark_file_set_modified(_SELF(self), 
                                  RVAL2CSTR(uri),
@@ -406,7 +403,7 @@ bf_set_modified(VALUE self, VALUE uri, VALUE time)
 }
 
 static VALUE
-bf_set_visited(VALUE self, VALUE uri, VALUE time)
+rg_set_visited(VALUE self, VALUE uri, VALUE time)
 {
     g_bookmark_file_set_visited(_SELF(self), 
                                 RVAL2CSTR(uri),
@@ -415,7 +412,7 @@ bf_set_visited(VALUE self, VALUE uri, VALUE time)
 }
 
 static VALUE
-bf_set_app_info(VALUE self, VALUE uri, VALUE name, VALUE exec, VALUE count, VALUE stamp)
+rg_set_app_info(VALUE self, VALUE uri, VALUE name, VALUE exec, VALUE count, VALUE stamp)
 {
     GError* error = NULL;
     gboolean ret = g_bookmark_file_set_app_info(_SELF(self),
@@ -425,14 +422,14 @@ bf_set_app_info(VALUE self, VALUE uri, VALUE name, VALUE exec, VALUE count, VALU
                                                 NUM2INT(count),
                                                 (time_t)NUM2LONG(rb_Integer(stamp)),
                                                 &error);
- 
+
     if (! ret) RAISE_GERROR(error);
 
     return self;
 }
 
 static VALUE 
-bf_add_group(VALUE self, VALUE uri, VALUE group)
+rg_add_group(VALUE self, VALUE uri, VALUE group)
 {
     g_bookmark_file_add_group(_SELF(self),
                               RVAL2CSTR(uri),
@@ -441,7 +438,7 @@ bf_add_group(VALUE self, VALUE uri, VALUE group)
 }
 
 static VALUE
-bf_add_application(VALUE self, VALUE uri, VALUE name, VALUE exec)
+rg_add_application(VALUE self, VALUE uri, VALUE name, VALUE exec)
 {
     g_bookmark_file_add_application(_SELF(self),
                                     RVAL2CSTR(uri),
@@ -451,7 +448,7 @@ bf_add_application(VALUE self, VALUE uri, VALUE name, VALUE exec)
 }
 
 static VALUE
-bf_remove_group(VALUE self, VALUE uri, VALUE group)
+rg_remove_group(VALUE self, VALUE uri, VALUE group)
 {
     GError* error = NULL;
     gboolean ret = g_bookmark_file_remove_group(_SELF(self),
@@ -464,7 +461,7 @@ bf_remove_group(VALUE self, VALUE uri, VALUE group)
 }
 
 static VALUE
-bf_remove_application(VALUE self, VALUE uri, VALUE name)
+rg_remove_application(VALUE self, VALUE uri, VALUE name)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_remove_application(_SELF(self),
@@ -476,9 +473,8 @@ bf_remove_application(VALUE self, VALUE uri, VALUE name)
     return self;
 }
 
-
 static VALUE
-bf_remove_item(VALUE self, VALUE uri)
+rg_remove_item(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_remove_item(_SELF(self),
@@ -490,7 +486,7 @@ bf_remove_item(VALUE self, VALUE uri)
 }
 
 static VALUE
-bf_move_item(VALUE self, VALUE old_uri, VALUE new_uri)
+rg_move_item(VALUE self, VALUE old_uri, VALUE new_uri)
 {
     GError *error = NULL;
     gboolean ret = g_bookmark_file_move_item(_SELF(self),
@@ -513,43 +509,43 @@ Init_glib_bookmark_file(void)
     G_DEF_ERROR(G_BOOKMARK_FILE_ERROR, "BookmarkFileError", mGLib, 
                 rb_eRuntimeError, G_TYPE_BOOKMARK_FILE_ERROR);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", bf_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_file", bf_load_from_file, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data", bf_load_from_data, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data_dirs", bf_load_from_data_dirs, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_data", bf_to_data, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_file", bf_to_file, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_item?", bf_has_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_group?", bf_has_group, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_application?", bf_has_application, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", bf_get_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "uris", bf_get_uris, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_title", bf_get_title, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_description", bf_get_description, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_mime_type", bf_get_mime_type, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "private?", bf_get_is_private, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_icon", bf_get_icon, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_added", bf_get_added, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_modified", bf_get_modified, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_visited", bf_get_visited, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_groups", bf_get_groups, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_applications", bf_get_applications, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_app_info", bf_get_app_info, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_title", bf_set_title, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_description", bf_set_description, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", bf_set_mime_type, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_private", bf_set_is_private, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_icon", bf_set_icon, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_added", bf_set_added, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_groups", bf_set_groups, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_modified", bf_set_modified, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_visited", bf_set_visited, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_app_info", bf_set_app_info, 5);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_group", bf_add_group, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_application", bf_add_application, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_group", bf_remove_group, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_application", bf_remove_application, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_item", bf_remove_item, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "move_item", bf_move_item, 2);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(load_from_file, 1);
+    RG_DEF_METHOD(load_from_data, 1);
+    RG_DEF_METHOD(load_from_data_dirs, 1);
+    RG_DEF_METHOD(to_data, 0);
+    RG_DEF_METHOD(to_file, 1);
+    RG_DEF_METHOD_P(has_item, 1);
+    RG_DEF_METHOD_P(has_group, 2);
+    RG_DEF_METHOD_P(has_application, 2);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(uris, 0);
+    RG_DEF_METHOD(get_title, 1);
+    RG_DEF_METHOD(get_description, 1);
+    RG_DEF_METHOD(get_mime_type, 1);
+    RG_DEF_METHOD_P(private, 1);
+    RG_DEF_METHOD(get_icon, 1);
+    RG_DEF_METHOD(get_added, 1);
+    RG_DEF_METHOD(get_modified, 1);
+    RG_DEF_METHOD(get_visited, 1);
+    RG_DEF_METHOD(get_groups, 1);
+    RG_DEF_METHOD(get_applications, 1);
+    RG_DEF_METHOD(get_app_info, 2);
+    RG_DEF_METHOD(set_title, 2);
+    RG_DEF_METHOD(set_description, 2);
+    RG_DEF_METHOD(set_mime_type, 2);
+    RG_DEF_METHOD(set_private, 2);
+    RG_DEF_METHOD(set_icon, 3);
+    RG_DEF_METHOD(set_added, 2);
+    RG_DEF_METHOD(set_groups, 2);
+    RG_DEF_METHOD(set_modified, 2);
+    RG_DEF_METHOD(set_visited, 2);
+    RG_DEF_METHOD(set_app_info, 5);
+    RG_DEF_METHOD(add_group, 2);
+    RG_DEF_METHOD(add_application, 3);
+    RG_DEF_METHOD(remove_group, 2);
+    RG_DEF_METHOD(remove_application, 2);
+    RG_DEF_METHOD(remove_item, 1);
+    RG_DEF_METHOD(move_item, 2);
 #endif
 }

@@ -63,9 +63,9 @@ comp_func(gpointer compdata)
     VALUE ret;
     VALUE self = RARRAY_PTR((VALUE)compdata)[0];
     VALUE data = RARRAY_PTR((VALUE)compdata)[1];
-    
+
     VALUE func = rb_ivar_get(self, id_compfunc);
-    
+
     if (NIL_P(func)){
         ret = rb_funcall(data, id_to_s, 0);
     } else {
@@ -75,7 +75,7 @@ comp_func(gpointer compdata)
 }
 
 static VALUE
-comp_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     VALUE block = Qnil;
 
@@ -93,7 +93,7 @@ comp_initialize(VALUE self)
 }
 
 static VALUE
-comp_add_items(VALUE self, VALUE items)
+rg_add_items(VALUE self, VALUE items)
 {
     gint i, len;
     GList* list = (GList*)NULL;
@@ -113,7 +113,7 @@ comp_add_items(VALUE self, VALUE items)
 }
 
 static VALUE
-comp_remove_items(VALUE self, VALUE items)
+rg_remove_items(VALUE self, VALUE items)
 {
     gint i, len;
     GList* list = (GList*)NULL;
@@ -133,7 +133,7 @@ comp_remove_items(VALUE self, VALUE items)
 }
 
 static VALUE
-comp_clear_items(VALUE self)
+rg_clear_items(VALUE self)
 {
     VALUE items_internal = rb_ivar_get(self, id_items_internal);
     rb_funcall(items_internal, id_clear, 0);
@@ -142,13 +142,13 @@ comp_clear_items(VALUE self)
 }
 
 static VALUE
-comp_items(VALUE self)
+rg_items(VALUE self)
 {
     return rb_ivar_get(self, id_items_internal);
 }
 
 static VALUE
-comp_complete(VALUE self, VALUE prefix)
+rg_complete(VALUE self, VALUE prefix)
 {
     gchar* new_prefix;
     VALUE ary = rb_ary_new();
@@ -185,11 +185,11 @@ Init_glib_completion(void)
     id_compfunc = rb_intern("completion_proc");
     id_items_internal = rb_intern("items_internal");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", comp_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "add_items", comp_add_items, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_items", comp_remove_items, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "clear_items", comp_clear_items, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "complete", comp_complete, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(add_items, 1);
+    RG_DEF_METHOD(remove_items, 1);
+    RG_DEF_METHOD(clear_items, 0);
+    RG_DEF_METHOD(complete, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "items", comp_items, 0);
+    RG_DEF_METHOD(items, 0);
 }

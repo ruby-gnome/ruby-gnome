@@ -26,7 +26,7 @@
 #define RG_TARGET_NAMESPACE cIOChannelWin32Socket
 
 static VALUE
-ioc_win32_socket_initialize(VALUE self, VALUE socket)
+rg_initialize(VALUE self, VALUE socket)
 {
     GIOChannel *io = NULL;
     int fd;
@@ -51,7 +51,6 @@ Init_glib_io_channel_win32_socket(void)
         rb_define_class_under(mGLib,
                               "IOChannelWin32Socket",
                               RG_TARGET_NAMESPACE);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize",
-                     ioc_win32_socket_initialize, 1);
+    RG_DEF_METHOD(initialize, 1);
 #endif
 }

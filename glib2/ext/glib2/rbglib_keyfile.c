@@ -36,7 +36,6 @@ keyfile_copy(const GKeyFile* keyfile)
   return (GKeyFile*)keyfile;
 }
 
-
 GType
 g_key_file_get_type(void)
 {
@@ -53,21 +52,21 @@ g_key_file_get_type(void)
 #define _SELF(self) ((GKeyFile*)(RVAL2BOXED(self, G_TYPE_KEY_FILE)))
 
 static VALUE
-keyfile_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_key_file_new());
     return Qnil;
 }
 
 static VALUE
-keyfile_set_list_separator(VALUE self, VALUE sep)
+rg_set_list_separator(VALUE self, VALUE sep)
 {
     g_key_file_set_list_separator(_SELF(self), NUM2INT(sep));
     return self;
 }
 
 static VALUE
-keyfile_load_from_file(int argc, VALUE *argv, VALUE self)
+rg_load_from_file(int argc, VALUE *argv, VALUE self)
 {
     VALUE file, flags;
     GError* error = NULL;
@@ -90,7 +89,7 @@ keyfile_load_from_file(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-keyfile_load_from_data(int argc, VALUE *argv, VALUE self)
+rg_load_from_data(int argc, VALUE *argv, VALUE self)
 {
     VALUE data, flags;
     GError* error = NULL;
@@ -115,7 +114,7 @@ keyfile_load_from_data(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-keyfile_load_from_data_dirs(int argc, VALUE *argv, VALUE self)
+rg_load_from_data_dirs(int argc, VALUE *argv, VALUE self)
 {
     VALUE file, flags;
     GError* error = NULL;
@@ -142,7 +141,7 @@ keyfile_load_from_data_dirs(int argc, VALUE *argv, VALUE self)
 
 #if GLIB_CHECK_VERSION(2, 14, 0)
 static VALUE
-keyfile_load_from_dirs(int argc, VALUE *argv, VALUE self)
+rg_load_from_dirs(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_file, rb_search_dirs, rb_flags;
     GError* error = NULL;
@@ -161,24 +160,24 @@ keyfile_load_from_dirs(int argc, VALUE *argv, VALUE self)
         flags = RVAL2GFLAGS(rb_flags, G_TYPE_KEY_FILE_FLAGS);
 
     if (search_dirs != NULL)
-	success = g_key_file_load_from_dirs(_SELF(self), file,
-					    search_dirs,
-					    &full_path, flags, &error);
+        success = g_key_file_load_from_dirs(_SELF(self), file,
+                                            search_dirs,
+                                            &full_path, flags, &error);
     else
-	success = g_key_file_load_from_data_dirs(_SELF(self), file,
-						 &full_path, flags, &error);
+        success = g_key_file_load_from_data_dirs(_SELF(self), file,
+                                                 &full_path, flags, &error);
 
     g_free(search_dirs);
 
     if (!success)
-	RAISE_GERROR(error);
+        RAISE_GERROR(error);
 
     return CSTR2RVAL(full_path);
 }
 #endif
 
 static VALUE
-keyfile_to_data(VALUE self)
+rg_to_data(VALUE self)
 {
     GError* error = NULL;
     gchar* data = g_key_file_to_data(_SELF(self), NULL, &error);
@@ -189,19 +188,19 @@ keyfile_to_data(VALUE self)
 }
 
 static VALUE
-keyfile_get_start_group(VALUE self)
+rg_start_group(VALUE self)
 {
     return CSTR2RVAL(g_key_file_get_start_group(_SELF(self)));
 }
 
 static VALUE
-keyfile_get_groups(VALUE self)
+rg_groups(VALUE self)
 {
     return STRV2RVAL_FREE(g_key_file_get_groups(_SELF(self), NULL));
 }
 
 static VALUE
-keyfile_get_keys(VALUE self, VALUE group_name)
+rg_get_keys(VALUE self, VALUE group_name)
 {
     GError *error = NULL;
     gchar **keys = g_key_file_get_keys(_SELF(self),
@@ -215,14 +214,14 @@ keyfile_get_keys(VALUE self, VALUE group_name)
 }
 
 static VALUE
-keyfile_has_group(VALUE self, VALUE group_name)
+rg_has_group_p(VALUE self, VALUE group_name)
 {
     return CBOOL2RVAL(g_key_file_has_group(_SELF(self), 
                                            (const gchar*)RVAL2CSTR(group_name)));
 }
 
 static VALUE
-keyfile_has_key(VALUE self, VALUE group_name, VALUE key)
+rg_has_key_p(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gboolean ret = g_key_file_has_key(_SELF(self), 
@@ -236,7 +235,7 @@ keyfile_has_key(VALUE self, VALUE group_name, VALUE key)
 }
 
 static VALUE
-keyfile_get_value(VALUE self, VALUE group_name, VALUE key)
+rg_get_value(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gchar* ret = g_key_file_get_value(_SELF(self), 
@@ -250,7 +249,7 @@ keyfile_get_value(VALUE self, VALUE group_name, VALUE key)
 }
 
 static VALUE
-keyfile_get_string(VALUE self, VALUE group_name, VALUE key)
+rg_get_string(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gchar* ret = g_key_file_get_string(_SELF(self), 
@@ -264,7 +263,7 @@ keyfile_get_string(VALUE self, VALUE group_name, VALUE key)
 }
 
 static VALUE
-keyfile_get_locale_string(int argc, VALUE *argv, VALUE self)
+rg_get_locale_string(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_name, key, locale;
     GError* error = NULL;
@@ -284,7 +283,7 @@ keyfile_get_locale_string(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-keyfile_get_boolean(VALUE self, VALUE group_name, VALUE key)
+rg_get_boolean(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gboolean ret = g_key_file_get_boolean(_SELF(self), 
@@ -298,7 +297,7 @@ keyfile_get_boolean(VALUE self, VALUE group_name, VALUE key)
 }
 
 static VALUE
-keyfile_get_integer(VALUE self, VALUE group_name, VALUE key)
+rg_get_integer(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gint ret = g_key_file_get_integer(_SELF(self), 
@@ -313,7 +312,7 @@ keyfile_get_integer(VALUE self, VALUE group_name, VALUE key)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_get_double(VALUE self, VALUE group_name, VALUE key)
+rg_get_double(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gdouble ret = g_key_file_get_double(_SELF(self), 
@@ -328,7 +327,7 @@ keyfile_get_double(VALUE self, VALUE group_name, VALUE key)
 #endif
 
 static VALUE
-keyfile_get_string_list(VALUE self, VALUE group_name, VALUE key)
+rg_get_string_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gsize i;
@@ -351,7 +350,7 @@ keyfile_get_string_list(VALUE self, VALUE group_name, VALUE key)
 }
 
 static VALUE
-keyfile_get_locale_string_list(int argc, VALUE *argv, VALUE self)
+rg_get_locale_string_list(int argc, VALUE *argv, VALUE self)
 {
     VALUE group_name, key, locale;
     GError* error = NULL;
@@ -380,7 +379,7 @@ keyfile_get_locale_string_list(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-keyfile_get_boolean_list(VALUE self, VALUE group_name, VALUE key)
+rg_get_boolean_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gsize i;
@@ -401,7 +400,7 @@ keyfile_get_boolean_list(VALUE self, VALUE group_name, VALUE key)
 }
 
 static VALUE
-keyfile_get_integer_list(VALUE self, VALUE group_name, VALUE key)
+rg_get_integer_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gsize i;
@@ -423,7 +422,7 @@ keyfile_get_integer_list(VALUE self, VALUE group_name, VALUE key)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_get_double_list(VALUE self, VALUE group_name, VALUE key)
+rg_get_double_list(VALUE self, VALUE group_name, VALUE key)
 {
     VALUE ary;
     gsize i;
@@ -433,7 +432,7 @@ keyfile_get_double_list(VALUE self, VALUE group_name, VALUE key)
                                               (const gchar*)RVAL2CSTR(group_name),
                                               (const gchar*)RVAL2CSTR(key),
                                               &length, &error);
-    
+
     if (error) RAISE_GERROR(error);
 
     ary = rb_ary_new();
@@ -445,21 +444,21 @@ keyfile_get_double_list(VALUE self, VALUE group_name, VALUE key)
 #endif
 
 static VALUE
-keyfile_get_comment(VALUE self, VALUE group_name, VALUE key)
+rg_get_comment(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
     gchar* ret = g_key_file_get_comment(_SELF(self), 
                                         (const gchar*)RVAL2CSTR(group_name),
                                         (const gchar*)RVAL2CSTR(key),
                                         &error);
-    
+
     if (error) RAISE_GERROR(error);
 
     return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
-keyfile_set_value(VALUE self, VALUE group_name, VALUE key, VALUE value)
+rg_set_value(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_value(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                          (const gchar*)RVAL2CSTR(key),
@@ -468,7 +467,7 @@ keyfile_set_value(VALUE self, VALUE group_name, VALUE key, VALUE value)
 }
 
 static VALUE
-keyfile_set_string(VALUE self, VALUE group_name, VALUE key, VALUE string)
+rg_set_string(VALUE self, VALUE group_name, VALUE key, VALUE string)
 {
     g_key_file_set_string(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                          (const gchar*)RVAL2CSTR(key),
@@ -477,7 +476,7 @@ keyfile_set_string(VALUE self, VALUE group_name, VALUE key, VALUE string)
 }
 
 static VALUE
-keyfile_set_locale_string(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE locale_string)
+rg_set_locale_string(VALUE self, VALUE group_name, VALUE key, VALUE locale, VALUE locale_string)
 {
     g_key_file_set_locale_string(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                                  (const gchar*)RVAL2CSTR(key),
@@ -487,7 +486,7 @@ keyfile_set_locale_string(VALUE self, VALUE group_name, VALUE key, VALUE locale,
 }
 
 static VALUE
-keyfile_set_boolean(VALUE self, VALUE group_name, VALUE key, VALUE value)
+rg_set_boolean(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_boolean(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                            (const gchar*)RVAL2CSTR(key),
@@ -496,7 +495,7 @@ keyfile_set_boolean(VALUE self, VALUE group_name, VALUE key, VALUE value)
 }
 
 static VALUE
-keyfile_set_integer(VALUE self, VALUE group_name, VALUE key, VALUE value)
+rg_set_integer(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_integer(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                            (const gchar*)RVAL2CSTR(key),
@@ -506,7 +505,7 @@ keyfile_set_integer(VALUE self, VALUE group_name, VALUE key, VALUE value)
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
+rg_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
     g_key_file_set_double(_SELF(self), (const gchar*)RVAL2CSTR(group_name),
                           (const gchar*)RVAL2CSTR(key),
@@ -516,7 +515,7 @@ keyfile_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
 #endif
 
 static VALUE
-keyfile_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
+rg_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
     GKeyFile *key_file = _SELF(self);
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
@@ -532,7 +531,7 @@ keyfile_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblis
 }
 
 static VALUE
-keyfile_set_locale_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblocale, VALUE rblist)
+rg_set_locale_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblocale, VALUE rblist)
 {
     GKeyFile *key_file = _SELF(self);
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
@@ -549,7 +548,7 @@ keyfile_set_locale_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALU
 }
 
 static VALUE
-keyfile_set_boolean_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
+rg_set_boolean_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
     GKeyFile *key_file = _SELF(self);
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
@@ -565,7 +564,7 @@ keyfile_set_boolean_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rbli
 }
 
 static VALUE
-keyfile_set_integer_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
+rg_set_integer_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
     GKeyFile *key_file = _SELF(self);
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
@@ -582,7 +581,7 @@ keyfile_set_integer_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rbli
 
 #if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
-keyfile_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
+rg_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
     GKeyFile *key_file = _SELF(self);
     const gchar *group_name = RVAL2CSTR(rbgroup_name);
@@ -597,7 +596,7 @@ keyfile_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblis
 #endif
 
 static VALUE
-keyfile_set_comment(VALUE self, VALUE group_name, VALUE key, VALUE comment)
+rg_set_comment(VALUE self, VALUE group_name, VALUE key, VALUE comment)
 {
     GError* error = NULL;
 
@@ -613,7 +612,7 @@ keyfile_set_comment(VALUE self, VALUE group_name, VALUE key, VALUE comment)
 }
 
 static VALUE
-keyfile_remove_group(VALUE self, VALUE group_name)
+rg_remove_group(VALUE self, VALUE group_name)
 {
     GError* error = NULL;
 
@@ -626,7 +625,7 @@ keyfile_remove_group(VALUE self, VALUE group_name)
 }
 
 static VALUE
-keyfile_remove_key(VALUE self, VALUE group_name, VALUE key)
+rg_remove_key(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
 
@@ -641,9 +640,8 @@ keyfile_remove_key(VALUE self, VALUE group_name, VALUE key)
     return self;
 }
 
-
 static VALUE
-keyfile_remove_comment(VALUE self, VALUE group_name, VALUE key)
+rg_remove_comment(VALUE self, VALUE group_name, VALUE key)
 {
     GError* error = NULL;
 
@@ -667,55 +665,55 @@ Init_glib_keyfile(void)
     G_DEF_ERROR(G_KEY_FILE_ERROR, "KeyFileError", mGLib, 
                 rb_eRuntimeError, G_TYPE_KEY_FILE_ERROR);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", keyfile_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_list_separator", keyfile_set_list_separator, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_file", keyfile_load_from_file, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data", keyfile_load_from_data, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_data_dirs", keyfile_load_from_data_dirs, -1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_list_separator, 1);
+    RG_DEF_METHOD(load_from_file, -1);
+    RG_DEF_METHOD(load_from_data, -1);
+    RG_DEF_METHOD(load_from_data_dirs, -1);
 #if GLIB_CHECK_VERSION(2, 14, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "load_from_dirs", keyfile_load_from_dirs, -1);
+    RG_DEF_METHOD(load_from_dirs, -1);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "to_data", keyfile_to_data, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "start_group", keyfile_get_start_group, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "groups", keyfile_get_groups, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_keys", keyfile_get_keys, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_group?", keyfile_has_group, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_key?", keyfile_has_key, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_value", keyfile_get_value, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_string", keyfile_get_string, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_locale_string", keyfile_get_locale_string, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_boolean", keyfile_get_boolean, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_integer", keyfile_get_integer, 2);
+    RG_DEF_METHOD(to_data, 0);
+    RG_DEF_METHOD(start_group, 0);
+    RG_DEF_METHOD(groups, 0);
+    RG_DEF_METHOD(get_keys, 1);
+    RG_DEF_METHOD_P(has_group, 1);
+    RG_DEF_METHOD_P(has_key, 2);
+    RG_DEF_METHOD(get_value, 2);
+    RG_DEF_METHOD(get_string, 2);
+    RG_DEF_METHOD(get_locale_string, -1);
+    RG_DEF_METHOD(get_boolean, 2);
+    RG_DEF_METHOD(get_integer, 2);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "get_double", keyfile_get_double, 2);
+    RG_DEF_METHOD(get_double, 2);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "get_string_list", keyfile_get_string_list, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_locale_string_list", keyfile_get_locale_string_list, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_boolean_list", keyfile_get_boolean_list, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "get_integer_list", keyfile_get_integer_list, 2);
+    RG_DEF_METHOD(get_string_list, 2);
+    RG_DEF_METHOD(get_locale_string_list, -1);
+    RG_DEF_METHOD(get_boolean_list, 2);
+    RG_DEF_METHOD(get_integer_list, 2);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "get_double_list", keyfile_get_double_list, 2);
+    RG_DEF_METHOD(get_double_list, 2);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "get_comment", keyfile_get_comment, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_value", keyfile_set_value, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_string", keyfile_set_string, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_locale_string", keyfile_set_locale_string, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_boolean", keyfile_set_boolean, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_integer", keyfile_set_integer, 3);
+    RG_DEF_METHOD(get_comment, 2);
+    RG_DEF_METHOD(set_value, 3);
+    RG_DEF_METHOD(set_string, 3);
+    RG_DEF_METHOD(set_locale_string, 4);
+    RG_DEF_METHOD(set_boolean, 3);
+    RG_DEF_METHOD(set_integer, 3);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_double", keyfile_set_double, 3);
+    RG_DEF_METHOD(set_double, 3);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_string_list", keyfile_set_string_list, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_locale_string_list", keyfile_set_locale_string_list, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_boolean_list", keyfile_set_boolean_list, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_integer_list", keyfile_set_integer_list, 3);
+    RG_DEF_METHOD(set_string_list, 3);
+    RG_DEF_METHOD(set_locale_string_list, 4);
+    RG_DEF_METHOD(set_boolean_list, 3);
+    RG_DEF_METHOD(set_integer_list, 3);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "set_double_list", keyfile_set_double_list, 3);
+    RG_DEF_METHOD(set_double_list, 3);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "set_comment", keyfile_set_comment, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_group", keyfile_remove_group, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_key", keyfile_remove_key, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_comment", keyfile_remove_comment, 2);
+    RG_DEF_METHOD(set_comment, 3);
+    RG_DEF_METHOD(remove_group, 1);
+    RG_DEF_METHOD(remove_key, 2);
+    RG_DEF_METHOD(remove_comment, 2);
 
     /* GKeyFileFlags */
     G_DEF_CLASS(G_TYPE_KEY_FILE_FLAGS, "Flags", RG_TARGET_NAMESPACE);

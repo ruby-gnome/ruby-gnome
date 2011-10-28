@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cIOChannelError
 
 static VALUE
-ioc_error_s_from_errno(G_GNUC_UNUSED VALUE self, VALUE errno_)
+rg_s_from_errno(G_GNUC_UNUSED VALUE self, VALUE errno_)
 {
     return INT2NUM(g_io_channel_error_from_errno(NUM2INT(errno_)));
 }
@@ -35,7 +35,7 @@ Init_glib_io_channelerror(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_IO_CHANNEL_ERROR, "IOChannelError", mGLib, rb_eIOError);
 
     /* GIOChannelError */
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_errno", ioc_error_s_from_errno, 1);
+    RG_DEF_SMETHOD(from_errno, 1);
 
     rb_define_const(RG_TARGET_NAMESPACE, "FBIG", INT2NUM(G_IO_CHANNEL_ERROR_FBIG));
     rb_define_const(RG_TARGET_NAMESPACE, "INVAL", INT2NUM(G_IO_CHANNEL_ERROR_INVAL));

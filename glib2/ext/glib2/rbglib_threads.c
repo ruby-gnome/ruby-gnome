@@ -26,7 +26,7 @@
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-gt_init(VALUE self)
+rg_s_init(VALUE self)
 {
 #ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED
@@ -37,7 +37,7 @@ gt_init(VALUE self)
 }
 
 static VALUE
-gt_supported(G_GNUC_UNUSED VALUE self)
+rg_s_supported_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_G_THREAD_INIT
 #ifdef G_THREADS_ENABLED
@@ -56,6 +56,6 @@ Init_glib_threads(void)
 {
     RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Thread", rb_cObject);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "init", gt_init, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "supported?", gt_supported, 0);
+    RG_DEF_SMETHOD(init, 0);
+    RG_DEF_SMETHOD_P(supported, 0);
 }
