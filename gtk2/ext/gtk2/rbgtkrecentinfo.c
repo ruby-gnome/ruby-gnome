@@ -23,62 +23,62 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentInfo
 #define _SELF(self) ((GtkRecentInfo*)RVAL2BOXED(self, GTK_TYPE_RECENT_INFO))
 
-
 static VALUE
-ri_get_uri(VALUE self)
+rg_uri(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_uri(_SELF(self)));
 }
 
 static VALUE
-ri_get_display_name(VALUE self)
+rg_display_name(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_display_name(_SELF(self)));
 }
 
 static VALUE
-ri_get_description(VALUE self)
+rg_description(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_description(_SELF(self)));
 }
 
 static VALUE
-ri_get_mime_type(VALUE self)
+rg_mime_type(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_mime_type(_SELF(self)));
 }
 
 static VALUE
-ri_get_added(VALUE self)
+rg_added(VALUE self)
 {
     time_t t = gtk_recent_info_get_added(_SELF(self));
     return rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t));
 }
 
 static VALUE
-ri_get_modified(VALUE self)
+rg_modified(VALUE self)
 {
     time_t t = gtk_recent_info_get_modified(_SELF(self));
     return rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t));
 }
 
 static VALUE
-ri_get_visited(VALUE self)
+rg_visited(VALUE self)
 {
     time_t t = gtk_recent_info_get_visited(_SELF(self));
     return rb_funcall(rb_cTime, rb_intern("at"), 1, INT2NUM(t));
 }
 
 static VALUE
-ri_get_private_hint(VALUE self)
+rg_private_hint_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_info_get_private_hint(_SELF(self)));
 }
 
 static VALUE
-ri_get_application_info(VALUE self, VALUE app_name)
+rg_application_info(VALUE self, VALUE app_name)
 {
     const gchar *app_exec;
     guint count;
@@ -98,7 +98,7 @@ ri_get_application_info(VALUE self, VALUE app_name)
 }    
 
 static VALUE
-ri_get_applications(VALUE self)
+rg_applications(VALUE self)
 {
     gsize i;
     gsize length;
@@ -112,13 +112,13 @@ ri_get_applications(VALUE self)
 }
 
 static VALUE
-ri_last_application(VALUE self)
+rg_last_application(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_last_application(_SELF(self)));
 }
 
 static VALUE
-ri_get_groups(VALUE self)
+rg_groups(VALUE self)
 {
     gsize i;
     gsize length;
@@ -132,57 +132,57 @@ ri_get_groups(VALUE self)
 }
 
 static VALUE
-ri_has_group(VALUE self, VALUE group_name)
+rg_has_group_p(VALUE self, VALUE group_name)
 {
     return CBOOL2RVAL(gtk_recent_info_has_group(_SELF(self), 
                                                 RVAL2CSTR(group_name)));
 }
 
 static VALUE
-ri_has_application(VALUE self, VALUE app_name)
+rg_has_application_p(VALUE self, VALUE app_name)
 {
     return CBOOL2RVAL(gtk_recent_info_has_application(_SELF(self), 
                                                 RVAL2CSTR(app_name)));
 }
 
 static VALUE
-ri_get_icon(VALUE self, VALUE size)
+rg_get_icon(VALUE self, VALUE size)
 {
     return GOBJ2RVAL(gtk_recent_info_get_icon(_SELF(self), NUM2INT(size)));
 }
 
 static VALUE
-ri_get_short_name(VALUE self)
+rg_short_name(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_short_name(_SELF(self)));
 }
 
 static VALUE
-ri_get_uri_display(VALUE self)
+rg_uri_display(VALUE self)
 {
     return CSTR2RVAL(gtk_recent_info_get_uri_display(_SELF(self)));
 }
 
 static VALUE
-ri_get_age(VALUE self)
+rg_age(VALUE self)
 {
     return INT2NUM(gtk_recent_info_get_age(_SELF(self)));
 }
 
 static VALUE
-ri_is_local(VALUE self)
+rg_local_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_info_is_local(_SELF(self)));
 }
 
 static VALUE
-ri_exist(VALUE self)
+rg_exist_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_info_exists(_SELF(self)));
 }
 
 static VALUE
-ri_match(VALUE self, VALUE other)
+rg_operator_ri_match(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(gtk_recent_info_match(_SELF(self), _SELF(other)));
 }
@@ -193,29 +193,29 @@ void
 Init_gtk_recent_info(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE ri = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);
-    rb_define_method(ri, "uri", ri_get_uri, 0);
-    rb_define_method(ri, "display_name", ri_get_display_name, 0);
-    rb_define_method(ri, "description", ri_get_description, 0);
-    rb_define_method(ri, "mime_type", ri_get_mime_type, 0);
-    rb_define_method(ri, "added", ri_get_added, 0);
-    rb_define_method(ri, "modified", ri_get_modified, 0);
-    rb_define_method(ri, "visited", ri_get_visited, 0);
-    rb_define_method(ri, "private_hint?", ri_get_private_hint, 0);
-    rb_define_method(ri, "application_info", ri_get_application_info, 1);
-    rb_define_method(ri, "applications", ri_get_applications, 0);
-    rb_define_method(ri, "last_application", ri_last_application, 0);
-    rb_define_method(ri, "groups", ri_get_groups, 0);
-    rb_define_method(ri, "has_group?", ri_has_group, 1);
-    rb_define_method(ri, "has_application?", ri_has_application, 1);
-    rb_define_method(ri, "get_icon", ri_get_icon, 1);
-    rb_define_method(ri, "short_name", ri_get_short_name, 0);
-    rb_define_method(ri, "uri_display", ri_get_uri_display, 0);
-    rb_define_method(ri, "age", ri_get_age, 0);
-    rb_define_method(ri, "local?", ri_is_local, 0);
-    rb_define_method(ri, "exist?", ri_exist, 0);
-    rb_define_method(ri, "==", ri_match, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);
+    RG_DEF_METHOD(uri, 0);
+    RG_DEF_METHOD(display_name, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD(mime_type, 0);
+    RG_DEF_METHOD(added, 0);
+    RG_DEF_METHOD(modified, 0);
+    RG_DEF_METHOD(visited, 0);
+    RG_DEF_METHOD_P(private_hint, 0);
+    RG_DEF_METHOD(application_info, 1);
+    RG_DEF_METHOD(applications, 0);
+    RG_DEF_METHOD(last_application, 0);
+    RG_DEF_METHOD(groups, 0);
+    RG_DEF_METHOD_P(has_group, 1);
+    RG_DEF_METHOD_P(has_application, 1);
+    RG_DEF_METHOD(get_icon, 1);
+    RG_DEF_METHOD(short_name, 0);
+    RG_DEF_METHOD(uri_display, 0);
+    RG_DEF_METHOD(age, 0);
+    RG_DEF_METHOD_P(local, 0);
+    RG_DEF_METHOD_P(exist, 0);
+    RG_DEF_METHOD_OPERATOR("==", ri_match, 1);
 
-    G_DEF_SETTERS(ri);   
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 #endif
 }

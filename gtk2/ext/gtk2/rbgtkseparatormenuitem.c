@@ -21,8 +21,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cSeparatorMenuItem
+
 static VALUE
-smitem_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_separator_menu_item_new());
     return Qnil;
@@ -31,7 +33,7 @@ smitem_initialize(VALUE self)
 void 
 Init_gtk_separator_menu_item(void)
 {
-    VALUE gSMenuItem = G_DEF_CLASS(GTK_TYPE_SEPARATOR_MENU_ITEM, "SeparatorMenuItem", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR_MENU_ITEM, "SeparatorMenuItem", mGtk);
 
-    rb_define_method(gSMenuItem, "initialize", smitem_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

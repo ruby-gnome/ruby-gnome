@@ -20,74 +20,18 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cAboutDialog
 #define _SELF(self) (GTK_ABOUT_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-aboutdialog_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_about_dialog_new());
     return Qnil;
 }
-
-/* Defined as Properties
-const gchar* gtk_about_dialog_get_name      (GtkAboutDialog *about);
-void        gtk_about_dialog_set_name       (GtkAboutDialog *about,
-                                             const gchar *name);
-const gchar* gtk_about_dialog_get_version   (GtkAboutDialog *about);
-void        gtk_about_dialog_set_version    (GtkAboutDialog *about,
-                                             const gchar *version);
-const gchar* gtk_about_dialog_get_copyright (GtkAboutDialog *about);
-void        gtk_about_dialog_set_copyright  (GtkAboutDialog *about,
-                                             const gchar *copyright);
-const gchar* gtk_about_dialog_get_comments  (GtkAboutDialog *about);
-void        gtk_about_dialog_set_comments   (GtkAboutDialog *about,
-                                             const gchar *comments);
-const gchar* gtk_about_dialog_get_license   (GtkAboutDialog *about);
-void        gtk_about_dialog_set_license    (GtkAboutDialog *about,
-                                             const gchar *license);
-const gchar* gtk_about_dialog_get_website   (GtkAboutDialog *about);
-void        gtk_about_dialog_set_website    (GtkAboutDialog *about,
-                                             const gchar *website);
-const gchar* gtk_about_dialog_get_website_label
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_website_label
-                                            (GtkAboutDialog *about,
-                                             const gchar *website_label);
-const gchar* const * gtk_about_dialog_get_authors
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_authors    (GtkAboutDialog *about,
-                                             const gchar **authors);
-const gchar* const * gtk_about_dialog_get_artists
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_artists    (GtkAboutDialog *about,
-                                             const gchar **artists);
-const gchar* const * gtk_about_dialog_get_documenters
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_documenters
-                                            (GtkAboutDialog *about,
-                                             const gchar **documenters);
-const gchar* gtk_about_dialog_get_translator_credits
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_translator_credits
-                                            (GtkAboutDialog *about,
-                                             const gchar *translator_credits);
-GdkPixbuf*  gtk_about_dialog_get_logo       (GtkAboutDialog *about);
-void        gtk_about_dialog_set_logo       (GtkAboutDialog *about,
-                                             GdkPixbuf *logo);
-const gchar* gtk_about_dialog_get_logo_icon_name
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_logo_icon_name
-                                            (GtkAboutDialog *about,
-                                             const gchar *icon_name);
-gboolean    gtk_about_dialog_get_wrap_license
-                                            (GtkAboutDialog *about);
-void        gtk_about_dialog_set_wrap_license
-                                            (GtkAboutDialog *about,
-                                             gboolean wrap_license);
-*/
 
 static void
 activate_link_func(GtkAboutDialog *about, const gchar *link, gpointer func)
@@ -96,7 +40,7 @@ activate_link_func(GtkAboutDialog *about, const gchar *link, gpointer func)
 }
 
 static VALUE
-aboutdialog_s_set_email_hook(VALUE self)
+rg_s_set_email_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -105,14 +49,13 @@ aboutdialog_s_set_email_hook(VALUE self)
 }
 
 static VALUE
-aboutdialog_s_set_url_hook(VALUE self)
+rg_s_set_url_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     gtk_about_dialog_set_url_hook((GtkAboutDialogActivateLinkFunc)activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
-
 
 typedef struct {
     const char *name;
@@ -122,7 +65,7 @@ typedef struct {
 #define ABOUT_PROP_NUM (15)
 
 static VALUE
-aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
+rg_s_show(VALUE self, VALUE parent, VALUE props)
 {
     int i;
     VALUE ary;
@@ -131,7 +74,7 @@ aboutdialog_s_show_about_dialog(VALUE self, VALUE parent, VALUE props)
     Check_Type(props, T_HASH);
 
     ary = rb_funcall(props, rb_intern("to_a"), 0);
-    
+
     if (RARRAY_LEN(ary) > ABOUT_PROP_NUM)
         rb_raise(rb_eArgError, "Too many args.");
 
@@ -188,11 +131,11 @@ void
 Init_gtk_aboutdialog(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE gAboutDialog = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
-    rb_define_method(gAboutDialog, "initialize", aboutdialog_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 
-    rb_define_singleton_method(gAboutDialog, "set_email_hook", aboutdialog_s_set_email_hook, 0);
-    rb_define_singleton_method(gAboutDialog, "set_url_hook", aboutdialog_s_set_url_hook, 0);
-    rb_define_singleton_method(gAboutDialog, "show", aboutdialog_s_show_about_dialog, 2);
+    RG_DEF_SMETHOD(set_email_hook, 0);
+    RG_DEF_SMETHOD(set_url_hook, 0);
+    RG_DEF_SMETHOD(show, 2);
 #endif
 }

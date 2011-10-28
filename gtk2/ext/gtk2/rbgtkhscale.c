@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHScale
+
 static VALUE
-hscale_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
@@ -47,6 +49,6 @@ hscale_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_hscale(void)
 {
-    VALUE gHScale = G_DEF_CLASS(GTK_TYPE_HSCALE, "HScale", mGtk);
-    rb_define_method(gHScale, "initialize", hscale_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HSCALE, "HScale", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 }

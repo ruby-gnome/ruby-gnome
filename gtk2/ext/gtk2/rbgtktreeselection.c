@@ -21,18 +21,19 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTreeSelection
 #define _SELF(s) (GTK_TREE_SELECTION(RVAL2GOBJ(s)))
 #define RVAL2TREEMODEL(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
 
 static VALUE
-treeselection_set_mode(VALUE self, VALUE type)
+rg_set_mode(VALUE self, VALUE type)
 {
     gtk_tree_selection_set_mode(_SELF(self), RVAL2GENUM(type, GTK_TYPE_SELECTION_MODE));
     return self;
 }
 
 static VALUE
-treeselection_get_mode(VALUE self)
+rg_mode(VALUE self)
 {
     return GENUM2RVAL(gtk_tree_selection_get_mode(_SELF(self)), GTK_TYPE_SELECTION_MODE);
 }
@@ -48,7 +49,7 @@ selection_func(GtkTreeSelection *selection, GtkTreeModel *model, GtkTreePath *pa
 }
 
 static VALUE
-treeselection_set_select_function(VALUE self)
+rg_set_select_function(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -64,13 +65,13 @@ gpointer    gtk_tree_selection_get_user_data
 */
 
 static VALUE
-treeselection_get_tree_view(VALUE self)
+rg_tree_view(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_selection_get_tree_view(_SELF(self)));
 }
 
 static VALUE
-treeselection_get_selected(VALUE self)
+rg_selected(VALUE self)
 {
     GtkTreeIter iter;
     GtkTreeModel* model;
@@ -88,7 +89,7 @@ foreach_func(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer
 }
 
 static VALUE
-treeselection_selected_foreach(VALUE self)
+rg_selected_each(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     gtk_tree_selection_selected_foreach(_SELF(self), 
@@ -98,61 +99,61 @@ treeselection_selected_foreach(VALUE self)
 }
 
 static VALUE
-treeselection_select_path(VALUE self, VALUE path)
+rg_select_path(VALUE self, VALUE path)
 {
     gtk_tree_selection_select_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treeselection_unselect_path(VALUE self, VALUE path)
+rg_unselect_path(VALUE self, VALUE path)
 {
     gtk_tree_selection_unselect_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
 
 static VALUE
-treeselection_path_is_selected(VALUE self, VALUE path)
+rg_path_is_selected_p(VALUE self, VALUE path)
 {
     return CBOOL2RVAL(gtk_tree_selection_path_is_selected(_SELF(self), RVAL2GTKTREEPATH(path)));
 }
 
 static VALUE
-treeselection_select_iter(VALUE self, VALUE iter)
+rg_select_iter(VALUE self, VALUE iter)
 {
     gtk_tree_selection_select_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
 }
 
 static VALUE
-treeselection_unselect_iter(VALUE self, VALUE iter)
+rg_unselect_iter(VALUE self, VALUE iter)
 {
     gtk_tree_selection_unselect_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
 }
 
 static VALUE
-treeselection_iter_is_selected(VALUE self, VALUE iter)
+rg_iter_is_selected_p(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_tree_selection_iter_is_selected(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
 static VALUE
-treeselection_select_all(VALUE self)
+rg_select_all(VALUE self)
 {
     gtk_tree_selection_select_all(_SELF(self));
     return self;
 }
 
 static VALUE
-treeselection_unselect_all(VALUE self)
+rg_unselect_all(VALUE self)
 {
     gtk_tree_selection_unselect_all(_SELF(self));
     return self;
 }
 
 static VALUE
-treeselection_select_range(VALUE self, VALUE start_path, VALUE end_path)
+rg_select_range(VALUE self, VALUE start_path, VALUE end_path)
 {
     gtk_tree_selection_select_range(_SELF(self), RVAL2GTKTREEPATH(start_path), 
                                     RVAL2GTKTREEPATH(end_path));
@@ -161,7 +162,7 @@ treeselection_select_range(VALUE self, VALUE start_path, VALUE end_path)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-treeselection_get_selected_rows(VALUE self)
+rg_selected_rows(VALUE self)
 {
     GtkTreeModel* model;
     GList* list = gtk_tree_selection_get_selected_rows(_SELF(self), &model);
@@ -172,13 +173,13 @@ treeselection_get_selected_rows(VALUE self)
 }
 
 static VALUE
-treeselection_count_selected_rows(VALUE self)
+rg_count_selected_rows(VALUE self)
 {
     return INT2NUM(gtk_tree_selection_count_selected_rows(_SELF(self)));
 }
 
 static VALUE
-treeselection_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
+rg_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
 {
     gtk_tree_selection_unselect_range(_SELF(self), RVAL2GTKTREEPATH(start_path), 
                                       RVAL2GTKTREEPATH(end_path));
@@ -189,30 +190,28 @@ treeselection_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
 void
 Init_gtk_treeselection(void)
 {
-    VALUE gTs = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
-    
-    rb_define_method(gTs, "set_mode", treeselection_set_mode, 1);
-    rb_define_method(gTs, "mode", treeselection_get_mode, 0);
-    rb_define_method(gTs, "set_select_function", treeselection_set_select_function, 0);
-    rb_define_method(gTs, "tree_view", treeselection_get_tree_view, 0);
-    rb_define_method(gTs, "selected", treeselection_get_selected, 0);
-    rb_define_method(gTs, "selected_each", treeselection_selected_foreach, 0);
-    rb_define_method(gTs, "select_path", treeselection_select_path, 1);
-    rb_define_method(gTs, "unselect_path", treeselection_unselect_path, 1);
-    rb_define_method(gTs, "path_is_selected?", treeselection_path_is_selected, 1);
-    rb_define_method(gTs, "select_iter", treeselection_select_iter, 1);
-    rb_define_method(gTs, "unselect_iter", treeselection_unselect_iter, 1);
-    rb_define_method(gTs, "iter_is_selected?", treeselection_iter_is_selected, 1);
-    rb_define_method(gTs, "select_all", treeselection_select_all, 0);
-    rb_define_method(gTs, "unselect_all", treeselection_unselect_all, 0);
-    rb_define_method(gTs, "select_range", treeselection_select_range, 2);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
+
+    RG_DEF_METHOD(set_mode, 1);
+    RG_DEF_METHOD(mode, 0);
+    RG_DEF_METHOD(set_select_function, 0);
+    RG_DEF_METHOD(tree_view, 0);
+    RG_DEF_METHOD(selected, 0);
+    RG_DEF_METHOD(selected_each, 0);
+    RG_DEF_METHOD(select_path, 1);
+    RG_DEF_METHOD(unselect_path, 1);
+    RG_DEF_METHOD_P(path_is_selected, 1);
+    RG_DEF_METHOD(select_iter, 1);
+    RG_DEF_METHOD(unselect_iter, 1);
+    RG_DEF_METHOD_P(iter_is_selected, 1);
+    RG_DEF_METHOD(select_all, 0);
+    RG_DEF_METHOD(unselect_all, 0);
+    RG_DEF_METHOD(select_range, 2);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gTs, "selected_rows", treeselection_get_selected_rows, 0);
-    rb_define_method(gTs, "count_selected_rows", treeselection_count_selected_rows, 0);
-    rb_define_method(gTs, "unselect_range", treeselection_unselect_range, 2);
+    RG_DEF_METHOD(selected_rows, 0);
+    RG_DEF_METHOD(count_selected_rows, 0);
+    RG_DEF_METHOD(unselect_range, 2);
 #endif
 
-    G_DEF_SETTERS(gTs);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-
-

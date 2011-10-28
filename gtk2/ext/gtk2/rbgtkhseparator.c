@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHSeparator
+
 static VALUE
-hsep_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hseparator_new());
     return Qnil;
@@ -34,6 +36,6 @@ hsep_initialize(VALUE self)
 void 
 Init_gtk_hseparator(void)
 {
-    VALUE gHSeparator = G_DEF_CLASS(GTK_TYPE_HSEPARATOR, "HSeparator", mGtk);
-    rb_define_method(gHSeparator, "initialize", hsep_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HSEPARATOR, "HSeparator", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 }

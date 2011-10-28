@@ -23,10 +23,11 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cLinkButton
 #define _SELF(self) (GTK_LINK_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-lb_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE uri, label;
     GtkWidget *widget = NULL;
@@ -48,7 +49,7 @@ link_func(GtkLinkButton *button, const gchar *link, gpointer func)
 }
 
 static VALUE
-lb_set_uri_hook(VALUE self)
+rg_s_set_uri_hook(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -61,9 +62,9 @@ void
 Init_gtk_link_button(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE button = G_DEF_CLASS(GTK_TYPE_LINK_BUTTON, "LinkButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LINK_BUTTON, "LinkButton", mGtk);
 
-    rb_define_method(button, "initialize", lb_initialize, -1);
-    rb_define_singleton_method(button, "set_uri_hook", lb_set_uri_hook, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_SMETHOD(set_uri_hook, 0);
 #endif
 }

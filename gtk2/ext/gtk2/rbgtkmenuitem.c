@@ -24,10 +24,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenuItem
 #define _SELF(s) (GTK_MENU_ITEM(RVAL2GOBJ(s)))
 
 static VALUE
-mitem_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     const gchar *label = NULL;
     VALUE rb_label, use_underline;
@@ -51,13 +52,6 @@ mitem_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void                gtk_menu_item_set_right_justified   (GtkMenuItem *menu_item,
-                                                         gboolean right_justified);
-gboolean            gtk_menu_item_get_right_justified   (GtkMenuItem *menu_item);
-GtkWidget *         gtk_menu_item_get_submenu           (GtkMenuItem *menu_item);
-*/
-
 static VALUE
 mitem_set_submenu(VALUE self, VALUE child)
 {
@@ -74,13 +68,8 @@ mitem_set_submenu(VALUE self, VALUE child)
     return self;
 }
 
-/* Defined as Properties
-void                gtk_menu_item_set_accel_path        (GtkMenuItem *menu_item,
-                                                         const gchar *accel_path);
-*/
-
 static VALUE
-mitem_remove_submenu(VALUE self)
+rg_remove_submenu(VALUE self)
 {
     GtkMenuItem *item;
     GtkWidget *submenu;
@@ -94,14 +83,8 @@ mitem_remove_submenu(VALUE self)
     return self;
 }
 
-/* Defined as Signals
-void                gtk_menu_item_select                (GtkMenuItem *menu_item);
-void                gtk_menu_item_deselect              (GtkMenuItem *menu_item);
-void                gtk_menu_item_activate              (GtkMenuItem *menu_item);
-*/
-
 static VALUE
-mitem_toggle_size_request(VALUE self)
+rg_toggle_size_request(VALUE self)
 {
     gint requisition;
     gtk_menu_item_toggle_size_request(_SELF(self), &requisition);
@@ -109,7 +92,7 @@ mitem_toggle_size_request(VALUE self)
 }
 
 static VALUE
-mitem_toggle_size_allocate(VALUE self, VALUE allocation)
+rg_toggle_size_allocate(VALUE self, VALUE allocation)
 {
     gtk_menu_item_toggle_size_allocate(_SELF(self), NUM2INT(allocation));
     return self;
@@ -118,11 +101,11 @@ mitem_toggle_size_allocate(VALUE self, VALUE allocation)
 void 
 Init_gtk_menu_item(void)
 {
-    VALUE gMenuItem = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
 
-    rb_define_method(gMenuItem, "initialize", mitem_initialize, -1);
-    G_REPLACE_SET_PROPERTY(gMenuItem, "submenu", mitem_set_submenu, 1);
-    rb_define_method(gMenuItem, "remove_submenu", mitem_remove_submenu, 0);
-    rb_define_method(gMenuItem, "toggle_size_request", mitem_toggle_size_request, 0);
-    rb_define_method(gMenuItem, "toggle_size_allocate", mitem_toggle_size_allocate, 1);
+    RG_DEF_METHOD(initialize, -1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "submenu", mitem_set_submenu, 1);
+    RG_DEF_METHOD(remove_submenu, 0);
+    RG_DEF_METHOD(toggle_size_request, 0);
+    RG_DEF_METHOD(toggle_size_allocate, 1);
 }

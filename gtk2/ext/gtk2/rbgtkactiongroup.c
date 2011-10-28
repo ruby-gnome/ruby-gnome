@@ -26,40 +26,31 @@
 static ID id_action_procs;
 static ID id_toggle_action_procs;
 
+#define RG_TARGET_NAMESPACE cActionGroup
 #define _SELF(self) (GTK_ACTION_GROUP(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-actiongroup_initialize(VALUE self, VALUE name)
+rg_initialize(VALUE self, VALUE name)
 {
     G_INITIALIZE(self, gtk_action_group_new(RVAL2CSTR(name)));
     return Qnil;
 }
 
-/* Defined as properties
-const gchar* gtk_action_group_get_name      (GtkActionGroup *action_group);
-gboolean    gtk_action_group_get_sensitive  (GtkActionGroup *action_group);
-void        gtk_action_group_set_sensitive  (GtkActionGroup *action_group,
-                                             gboolean sensitive);
-gboolean    gtk_action_group_get_visible    (GtkActionGroup *action_group);
-void        gtk_action_group_set_visible    (GtkActionGroup *action_group,
-                                             gboolean visible);
-*/
-
 static VALUE
-actiongroup_get_action(VALUE self, VALUE action_name)
+rg_get_action(VALUE self, VALUE action_name)
 {
     return GOBJ2RVAL(gtk_action_group_get_action(_SELF(self), RVAL2CSTR(action_name)));
 }
 
 static VALUE
-actiongroup_list_actions(VALUE self)
+rg_actions(VALUE self)
 {
     return GLIST2ARYF(gtk_action_group_list_actions(_SELF(self)));
 }
 
 static VALUE
-actiongroup_add_action(int argc, VALUE *argv, VALUE self)
+rg_add_action(int argc, VALUE *argv, VALUE self)
 {
     VALUE action, accelerator;
 
@@ -74,7 +65,7 @@ actiongroup_add_action(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-actiongroup_remove_action(VALUE self, VALUE action)
+rg_remove_action(VALUE self, VALUE action)
 {
     gtk_action_group_remove_action(_SELF(self), GTK_ACTION(RVAL2GOBJ(action)));
     G_CHILD_REMOVE(self, action);
@@ -169,7 +160,7 @@ rbg_rval2gtkactionentries(volatile VALUE *value, long *n, VALUE procs)
 #define RVAL2GTKACTIONENTRIES(value, n, procs) rbg_rval2gtkactionentries(&(value), &(n), procs)
 
 static VALUE
-actiongroup_add_actions(VALUE self, VALUE rbentries)
+rg_add_actions(VALUE self, VALUE rbentries)
 {
     GtkActionGroup *group = _SELF(self);
     VALUE action_procs = rb_ivar_defined(self, id_action_procs) == Qtrue ?
@@ -277,7 +268,7 @@ rbg_rval2gtktoggleactionentries(volatile VALUE *value, long *n, VALUE procs)
 #define RVAL2GTKTOGGLEACTIONENTRIES(value, n, procs) rbg_rval2gtktoggleactionentries(&(value), &(n), procs)
 
 static VALUE
-actiongroup_add_toggle_actions(VALUE self, VALUE rbentries)
+rg_add_toggle_actions(VALUE self, VALUE rbentries)
 {
     GtkActionGroup *group = _SELF(self);
     VALUE toggle_action_procs = rb_ivar_defined(self, id_toggle_action_procs) == Qtrue ?
@@ -371,7 +362,7 @@ rbg_rval2gtkradioactionentries(volatile VALUE *value, long *n)
 #define RVAL2GTKRADIOACTIONENTRIES(value, n) rbg_rval2gtkradioactionentries(&(value), &(n))
 
 static VALUE
-actiongroup_add_radio_actions(int argc, VALUE *argv, VALUE self)
+rg_add_radio_actions(int argc, VALUE *argv, VALUE self)
 {
     GtkActionGroup *group = _SELF(self);
     VALUE rbentries, rbvalue, proc;
@@ -397,7 +388,7 @@ actiongroup_add_radio_actions(int argc, VALUE *argv, VALUE self)
                                        n,
                                        value,
                                        G_CALLBACK(activate_radio_action),
-				       (gpointer)proc);
+                                       (gpointer)proc);
 
     g_free(entries);
 
@@ -412,7 +403,7 @@ translate_func(const gchar *path, gpointer func)
 }
 
 static VALUE
-actiongroup_set_translate_func(VALUE self)
+rg_set_translate_func(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -423,7 +414,7 @@ actiongroup_set_translate_func(VALUE self)
 }
 
 static VALUE
-actiongroup_set_translation_domain(VALUE self, VALUE domain)
+rg_set_translation_domain(VALUE self, VALUE domain)
 {
     gtk_action_group_set_translation_domain(_SELF(self), 
                                             NIL_P(domain) ? (const gchar*)NULL : RVAL2CSTR(domain));
@@ -432,7 +423,7 @@ actiongroup_set_translation_domain(VALUE self, VALUE domain)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-actiongroup_translate_string(VALUE self, VALUE str)
+rg_translate_string(VALUE self, VALUE str)
 {
     return CSTR2RVAL(gtk_action_group_translate_string(_SELF(self), RVAL2CSTR(str)));
 }
@@ -447,8 +438,8 @@ action_group_mark(void *p)
     group = GTK_ACTION_GROUP(p);
     actions = gtk_action_group_list_actions(group);
     for (node = actions; node; node = g_list_next(node)) {
-	GtkWidget *action = node->data;
-	rbgobj_gc_mark_instance(action);
+        GtkWidget *action = node->data;
+        rbgobj_gc_mark_instance(action);
     }
     g_list_free(actions);
 }
@@ -458,27 +449,27 @@ void
 Init_gtk_actiongroup(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gActionGroup;
+    VALUE RG_TARGET_NAMESPACE;
 
-    gActionGroup = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION_GROUP, "ActionGroup",
-					    mGtk, action_group_mark, NULL);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION_GROUP, "ActionGroup",
+                                                    mGtk, action_group_mark, NULL);
 
     id_action_procs = rb_intern("@action_procs");
     id_toggle_action_procs = rb_intern("@toggle_action_procs");
 
-    rb_define_method(gActionGroup, "initialize", actiongroup_initialize, 1);
-    rb_define_method(gActionGroup, "get_action", actiongroup_get_action, 1);
-    rb_define_method(gActionGroup, "actions", actiongroup_list_actions, 0);
-    rb_define_method(gActionGroup, "add_action", actiongroup_add_action, -1);
-    rb_define_method(gActionGroup, "remove_action", actiongroup_remove_action, 1);
-    rb_define_method(gActionGroup, "add_actions", actiongroup_add_actions, 1);
-    rb_define_method(gActionGroup, "add_toggle_actions", actiongroup_add_toggle_actions, 1);
-    rb_define_method(gActionGroup, "add_radio_actions", actiongroup_add_radio_actions, -1);
-    rb_define_method(gActionGroup, "set_translate_func", actiongroup_set_translate_func, 0);
-    rb_define_method(gActionGroup, "set_translation_domain", actiongroup_set_translation_domain, 1);
-    G_DEF_SETTER(gActionGroup, "translation_domain");
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(get_action, 1);
+    RG_DEF_METHOD(actions, 0);
+    RG_DEF_METHOD(add_action, -1);
+    RG_DEF_METHOD(remove_action, 1);
+    RG_DEF_METHOD(add_actions, 1);
+    RG_DEF_METHOD(add_toggle_actions, 1);
+    RG_DEF_METHOD(add_radio_actions, -1);
+    RG_DEF_METHOD(set_translate_func, 0);
+    RG_DEF_METHOD(set_translation_domain, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "translation_domain");
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gActionGroup, "translate_string", actiongroup_translate_string, 1);
+    RG_DEF_METHOD(translate_string, 1);
 #endif
 #endif
 }

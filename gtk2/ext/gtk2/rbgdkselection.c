@@ -21,10 +21,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mSelection
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
 
 static VALUE
-gdkselection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE owner, selection, time, send_event;
     int ret;
@@ -51,7 +52,7 @@ gdkselection_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gdkselection_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE selection;
 
@@ -71,7 +72,7 @@ gdkselection_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gdkselection_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
+rg_m_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
 {
     gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
                           RVAL2ATOM(selection), 
@@ -80,7 +81,7 @@ gdkselection_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target,
 }
 
 static VALUE
-gdkselection_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
+rg_m_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 {
     guchar *data;
     GdkAtom prop_type;
@@ -97,7 +98,7 @@ gdkselection_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 }
 
 static VALUE
-gdkselection_send_notify(int argc, VALUE *argv, VALUE self)
+rg_m_send_notify(int argc, VALUE *argv, VALUE self)
 {
     VALUE requestor, selection, target, property, time;
 
@@ -126,34 +127,34 @@ gdkselection_send_notify(int argc, VALUE *argv, VALUE self)
 void
 Init_gtk_gdk_selection(void)
 {
-    VALUE mGdkSelection = rb_define_module_under(mGdk, "Selection");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Selection");
 
-    rb_define_module_function(mGdkSelection, "owner_set", gdkselection_owner_set, -1);
-    rb_define_module_function(mGdkSelection, "owner_get", gdkselection_owner_get, -1);
-    rb_define_module_function(mGdkSelection, "convert", gdkselection_convert, 4);
-    rb_define_module_function(mGdkSelection, "property_get", gdkselection_property_get, 1);
-    rb_define_module_function(mGdkSelection, "send_notify", gdkselection_send_notify, -1);
+    RG_DEF_MODFUNC(owner_set, -1);
+    RG_DEF_MODFUNC(owner_get, -1);
+    RG_DEF_MODFUNC(convert, 4);
+    RG_DEF_MODFUNC(property_get, 1);
+    RG_DEF_MODFUNC(send_notify, -1);
 
     /* Constants */
-    rb_define_const(mGdkSelection, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
-    rb_define_const(mGdkSelection, "SECONDARY", GATOM2RVAL(GDK_SELECTION_SECONDARY));
-    rb_define_const(mGdkSelection, "CLIPBOARD", GATOM2RVAL(GDK_SELECTION_CLIPBOARD));
-    
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIMARY", GATOM2RVAL(GDK_SELECTION_PRIMARY));
+    rb_define_const(RG_TARGET_NAMESPACE, "SECONDARY", GATOM2RVAL(GDK_SELECTION_SECONDARY));
+    rb_define_const(RG_TARGET_NAMESPACE, "CLIPBOARD", GATOM2RVAL(GDK_SELECTION_CLIPBOARD));
+
     /* GdkSelectionType */
-    rb_define_const(mGdkSelection, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
-    rb_define_const(mGdkSelection, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));
-    rb_define_const(mGdkSelection, "TYPE_COLORMAP", GATOM2RVAL(GDK_SELECTION_TYPE_COLORMAP));
-    rb_define_const(mGdkSelection, "TYPE_DRAWABLE", GATOM2RVAL(GDK_SELECTION_TYPE_DRAWABLE));
-    rb_define_const(mGdkSelection, "TYPE_INTEGER", GATOM2RVAL(GDK_SELECTION_TYPE_INTEGER));
-    rb_define_const(mGdkSelection, "TYPE_PIXMAP", GATOM2RVAL(GDK_SELECTION_TYPE_PIXMAP));
-    rb_define_const(mGdkSelection, "TYPE_WINDOW", GATOM2RVAL(GDK_SELECTION_TYPE_WINDOW));
-    rb_define_const(mGdkSelection, "TYPE_STRING", GATOM2RVAL(GDK_SELECTION_TYPE_STRING));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_ATOM", GATOM2RVAL(GDK_SELECTION_TYPE_ATOM));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_BITMAP", GATOM2RVAL(GDK_SELECTION_TYPE_BITMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_COLORMAP", GATOM2RVAL(GDK_SELECTION_TYPE_COLORMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_DRAWABLE", GATOM2RVAL(GDK_SELECTION_TYPE_DRAWABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_INTEGER", GATOM2RVAL(GDK_SELECTION_TYPE_INTEGER));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_PIXMAP", GATOM2RVAL(GDK_SELECTION_TYPE_PIXMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_WINDOW", GATOM2RVAL(GDK_SELECTION_TYPE_WINDOW));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRING", GATOM2RVAL(GDK_SELECTION_TYPE_STRING));
 
     /* GdkTarget */
-    rb_define_const(mGdkSelection, "TARGET_BITMAP", GATOM2RVAL(GDK_TARGET_BITMAP));
-    rb_define_const(mGdkSelection, "TARGET_COLORMAP", GATOM2RVAL(GDK_TARGET_COLORMAP));
-    rb_define_const(mGdkSelection, "TARGET_DRAWABLE", GATOM2RVAL(GDK_TARGET_DRAWABLE));
-    rb_define_const(mGdkSelection, "TARGET_PIXMAP", GATOM2RVAL(GDK_TARGET_PIXMAP));
-    rb_define_const(mGdkSelection, "TARGET_STRING", GATOM2RVAL(GDK_TARGET_STRING));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_BITMAP", GATOM2RVAL(GDK_TARGET_BITMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_COLORMAP", GATOM2RVAL(GDK_TARGET_COLORMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_DRAWABLE", GATOM2RVAL(GDK_TARGET_DRAWABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_PIXMAP", GATOM2RVAL(GDK_TARGET_PIXMAP));
+    rb_define_const(RG_TARGET_NAMESPACE, "TARGET_STRING", GATOM2RVAL(GDK_TARGET_STRING));
 
 }

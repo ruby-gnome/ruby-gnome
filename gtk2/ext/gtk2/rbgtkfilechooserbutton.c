@@ -20,11 +20,13 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cFileChooserButton
+
 static VALUE
-filechooserbutton_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, action, backend;
     GtkWidget* widget;
@@ -49,31 +51,13 @@ filechooserbutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-const gchar* gtk_file_chooser_button_get_title
-                                            (GtkFileChooserButton *button);
-void        gtk_file_chooser_button_set_title
-                                            (GtkFileChooserButton *button,
-                                             const gchar *title);
-gint        gtk_file_chooser_button_get_width_chars
-                                            (GtkFileChooserButton *button);
-void        gtk_file_chooser_button_set_width_chars
-                                            (GtkFileChooserButton *button,
-                                             gint n_chars);
-gboolean    gtk_file_chooser_button_get_focus_on_click
-                                            (GtkFileChooserButton *button);
-void        gtk_file_chooser_button_set_focus_on_click
-                                            (GtkFileChooserButton *button,
-                                             gboolean focus_on_click);
-*/
-
 #endif
 
 void 
 Init_gtk_filechooserbutton(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE gFCButton = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_BUTTON, "FileChooserButton", mGtk);
-    rb_define_method(gFCButton, "initialize", filechooserbutton_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_BUTTON, "FileChooserButton", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

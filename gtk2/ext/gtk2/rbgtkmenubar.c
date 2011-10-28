@@ -24,34 +24,24 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenuBar
+
 static VALUE
-mbar_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_menu_bar_new());
     return Qnil;
 }
 
-/* Defined as property
-void        gtk_menu_bar_set_pack_direction (GtkMenuBar *menubar,
-                                             GtkPackDirection pack_dir);
-GtkPackDirection gtk_menu_bar_get_pack_direction
-                                            (GtkMenuBar *menubar);
-void        gtk_menu_bar_set_child_pack_direction
-                                            (GtkMenuBar *menubar,
-                                             GtkPackDirection child_pack_dir);
-GtkPackDirection gtk_menu_bar_get_child_pack_direction
-                                            (GtkMenuBar *menubar);
-*/
-
 void 
 Init_gtk_menu_bar(void)
 {
-    VALUE gMenuBar = G_DEF_CLASS(GTK_TYPE_MENU_BAR, "MenuBar", mGtk);
-    rb_define_method(gMenuBar, "initialize", mbar_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_BAR, "MenuBar", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 
 #if GTK_CHECK_VERSION(2,8,0)
     /* GtkPackDirection */
-    G_DEF_CLASS(GTK_TYPE_PACK_DIRECTION, "PackDirection", gMenuBar);
-    G_DEF_CONSTANTS(gMenuBar, GTK_TYPE_PACK_DIRECTION, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_PACK_DIRECTION, "PackDirection", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PACK_DIRECTION, "GTK_");
 #endif
 }

@@ -24,11 +24,12 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenuShell
 #define _SELF(self) (GTK_MENU_SHELL(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-mshell_append(VALUE self, VALUE child)
+rg_append(VALUE self, VALUE child)
 {
     gtk_menu_shell_append(_SELF(self),RVAL2WIDGET(child));
     G_CHILD_ADD(self, child);
@@ -36,7 +37,7 @@ mshell_append(VALUE self, VALUE child)
 }
 
 static VALUE
-mshell_prepend(VALUE self, VALUE child)
+rg_prepend(VALUE self, VALUE child)
 {
     gtk_menu_shell_prepend(_SELF(self), RVAL2WIDGET(child));
     G_CHILD_ADD(self, child);
@@ -44,7 +45,7 @@ mshell_prepend(VALUE self, VALUE child)
 }
 
 static VALUE
-mshell_insert(VALUE self, VALUE child, VALUE pos)
+rg_insert(VALUE self, VALUE child, VALUE pos)
 {
     gtk_menu_shell_insert(_SELF(self), RVAL2WIDGET(child),
                           NUM2INT(pos));
@@ -53,14 +54,14 @@ mshell_insert(VALUE self, VALUE child, VALUE pos)
 }
 
 static VALUE
-mshell_deactivate(VALUE self)
+rg_deactivate(VALUE self)
 {
     gtk_menu_shell_deactivate(_SELF(self));
     return self;
 }
 
 static VALUE
-mshell_select_item(VALUE self, VALUE menu_item)
+rg_select_item(VALUE self, VALUE menu_item)
 {
     gtk_menu_shell_select_item(_SELF(self), RVAL2WIDGET(menu_item));
     return self;
@@ -68,7 +69,7 @@ mshell_select_item(VALUE self, VALUE menu_item)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-mshell_select_first(VALUE self, VALUE search_sensitive)
+rg_select_first(VALUE self, VALUE search_sensitive)
 {
     gtk_menu_shell_select_first(_SELF(self), RVAL2CBOOL(search_sensitive));
     return self;
@@ -76,46 +77,36 @@ mshell_select_first(VALUE self, VALUE search_sensitive)
 #endif
 
 static VALUE
-mshell_deselect(VALUE self)
+rg_deselect(VALUE self)
 {
     gtk_menu_shell_deselect(_SELF(self));
     return self;
 }
 
 static VALUE
-mshell_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
+rg_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
 {
     gtk_menu_shell_activate_item(_SELF(self), RVAL2WIDGET(menu_item), 
                                  RVAL2CBOOL(force_deactivate));
     return self;
 }
 
-/* Defined as Signals
-void                gtk_menu_shell_cancel               (GtkMenuShell *menu_shell);
-*/
-
-/* Defined as properties
-void        gtk_menu_shell_set_take_focus   (GtkMenuShell *menu_shell,
-                                             gboolean take_focus);
-gboolean    gtk_menu_shell_get_take_focus   (GtkMenuShell *menu_shell);
-*/
-
 void 
 Init_gtk_menu_shell(void)
 {
-    VALUE gMenuShell = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);
 
-    rb_define_method(gMenuShell, "append", mshell_append, 1);
-    rb_define_method(gMenuShell, "prepend", mshell_prepend, 1);
-    rb_define_method(gMenuShell, "insert", mshell_insert, 2);
-    rb_define_method(gMenuShell, "deactivate", mshell_deactivate, 0);
-    rb_define_method(gMenuShell, "select_item", mshell_select_item, 1);
+    RG_DEF_METHOD(append, 1);
+    RG_DEF_METHOD(prepend, 1);
+    RG_DEF_METHOD(insert, 2);
+    RG_DEF_METHOD(deactivate, 0);
+    RG_DEF_METHOD(select_item, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gMenuShell, "select_first", mshell_select_first, 1);
+    RG_DEF_METHOD(select_first, 1);
 #endif
-    rb_define_method(gMenuShell, "deselect", mshell_deselect, 0);
-    rb_define_method(gMenuShell, "activate_item", mshell_activate_item, 2);
+    RG_DEF_METHOD(deselect, 0);
+    RG_DEF_METHOD(activate_item, 2);
     /* GtkMenuDirectionType */
-    G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", gMenuShell);
-    G_DEF_CONSTANTS(gMenuShell, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");
+    G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_MENU_DIRECTION_TYPE, "GTK_MENU_");
 }

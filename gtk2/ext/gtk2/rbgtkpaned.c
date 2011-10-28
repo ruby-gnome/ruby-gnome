@@ -24,26 +24,26 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cPaned
 #define _SELF(self) (GTK_PANED(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
-
 static VALUE
-paned_add1(VALUE self, VALUE child)
+rg_add1(VALUE self, VALUE child)
 {
     gtk_paned_add1(_SELF(self), RVAL2WIDGET(child));
     return self;
 }
 
 static VALUE
-paned_add2(VALUE self, VALUE child)
+rg_add2(VALUE self, VALUE child)
 {
     gtk_paned_add2(_SELF(self), RVAL2WIDGET(child));
     return self;
 }
 
 static VALUE
-paned_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
+rg_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 {
     gtk_paned_pack1(_SELF(self), RVAL2WIDGET(child),
                     RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
@@ -51,7 +51,7 @@ paned_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 }
 
 static VALUE
-paned_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
+rg_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 {
     gtk_paned_pack2(_SELF(self), RVAL2WIDGET(child),
                     RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
@@ -59,39 +59,39 @@ paned_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 }
 
 static VALUE
-paned_child1(VALUE self)
+rg_child1(VALUE self)
 {
     GtkWidget *child = _SELF(self)->child1;
     return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
 static VALUE
-paned_child2(VALUE self)
+rg_child2(VALUE self)
 {
     GtkWidget *child = _SELF(self)->child2;
     return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
 static VALUE
-paned_child1_resize(VALUE self)
+rg_child1_resize_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child1_resize);
 }
 
 static VALUE
-paned_child1_shrink(VALUE self)
+rg_child1_shrink_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child1_shrink);
 }
 
 static VALUE
-paned_child2_resize(VALUE self)
+rg_child2_resize_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child2_resize);
 }
 
 static VALUE
-paned_child2_shrink(VALUE self)
+rg_child2_shrink_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->child2_shrink);
 }
@@ -99,16 +99,16 @@ paned_child2_shrink(VALUE self)
 void 
 Init_gtk_paned(void)
 {
-    VALUE gPaned = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
 
-    rb_define_method(gPaned, "add1", paned_add1, 1);
-    rb_define_method(gPaned, "add2", paned_add2, 1);
-    rb_define_method(gPaned, "pack1", paned_pack1, 3);
-    rb_define_method(gPaned, "pack2", paned_pack2, 3);
-    rb_define_method(gPaned, "child1", paned_child1, 0);
-    rb_define_method(gPaned, "child2", paned_child2, 0);
-    rb_define_method(gPaned, "child1_resize?", paned_child1_resize, 0);
-    rb_define_method(gPaned, "child1_shrink?", paned_child1_shrink, 0);
-    rb_define_method(gPaned, "child2_resize?", paned_child2_resize, 0);
-    rb_define_method(gPaned, "child2_shrink?", paned_child2_shrink, 0);
+    RG_DEF_METHOD(add1, 1);
+    RG_DEF_METHOD(add2, 1);
+    RG_DEF_METHOD(pack1, 3);
+    RG_DEF_METHOD(pack2, 3);
+    RG_DEF_METHOD(child1, 0);
+    RG_DEF_METHOD(child2, 0);
+    RG_DEF_METHOD_P(child1_resize, 0);
+    RG_DEF_METHOD_P(child1_shrink, 0);
+    RG_DEF_METHOD_P(child2_resize, 0);
+    RG_DEF_METHOD_P(child2_shrink, 0);
 }

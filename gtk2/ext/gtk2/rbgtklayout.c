@@ -24,11 +24,12 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cLayout
 #define _SELF(self) (GTK_LAYOUT(RVAL2GOBJ(self)))
 #define RVAL2ADJ(a) (GTK_ADJUSTMENT(RVAL2GOBJ(a)))
 
 static VALUE
-layout_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE hadjustment, vadjustment;
     GtkWidget* layout;
@@ -37,36 +38,36 @@ layout_initialize(int argc, VALUE *argv, VALUE self)
     layout = gtk_layout_new(
         NIL_P(hadjustment) ? 0 : RVAL2ADJ(hadjustment),
         NIL_P(vadjustment) ? 0 : RVAL2ADJ(vadjustment));
-    
+
     RBGTK_INITIALIZE(self, layout);
     return Qnil;
 }
 
 static VALUE
-layout_put(VALUE self, VALUE widget, VALUE x, VALUE y)
+rg_put(VALUE self, VALUE widget, VALUE x, VALUE y)
 {
     gtk_layout_put(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
-		   NUM2INT(x), NUM2INT(y));
+                   NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-layout_move(VALUE self, VALUE widget, VALUE x, VALUE y)
+rg_move(VALUE self, VALUE widget, VALUE x, VALUE y)
 {
     gtk_layout_move(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
-		    NUM2INT(x), NUM2INT(y));
+                    NUM2INT(x), NUM2INT(y));
     return self;
 }
 
 static VALUE
-layout_set_size(VALUE self, VALUE width, VALUE height)
+rg_set_size(VALUE self, VALUE width, VALUE height)
 {
     gtk_layout_set_size(_SELF(self), NUM2UINT(width), NUM2UINT(height));
     return self;
 }
 
 static VALUE
-layout_get_size(VALUE self)
+rg_size(VALUE self)
 {
     guint width, height;
     gtk_layout_get_size(_SELF(self), &width, &height);
@@ -74,7 +75,7 @@ layout_get_size(VALUE self)
 }
 
 static VALUE
-layout_get_bin_window(VALUE self)
+rg_bin_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->bin_window);
 }
@@ -82,12 +83,12 @@ layout_get_bin_window(VALUE self)
 void
 Init_gtk_layout(void)
 {
-    VALUE gLayout = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
 
-    rb_define_method(gLayout, "initialize", layout_initialize, -1);
-    rb_define_method(gLayout, "put", layout_put, 3);
-    rb_define_method(gLayout, "move", layout_move, 3);
-    rb_define_method(gLayout, "set_size", layout_set_size, 2);
-    rb_define_method(gLayout, "size", layout_get_size, 0);
-    rb_define_method(gLayout, "bin_window", layout_get_bin_window, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(put, 3);
+    RG_DEF_METHOD(move, 3);
+    RG_DEF_METHOD(set_size, 2);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(bin_window, 0);
 }

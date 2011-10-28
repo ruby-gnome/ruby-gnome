@@ -21,17 +21,18 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIconFactory
 #define _SELF(s) (GTK_ICON_FACTORY(RVAL2GOBJ(s)))
 
 static VALUE
-ifactory_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_icon_factory_new());
     return Qnil;
 }
 
 static VALUE
-ifactory_add(VALUE self, VALUE id, VALUE icon_set)
+rg_add(VALUE self, VALUE id, VALUE icon_set)
 {
     gtk_icon_factory_add(_SELF(self), RVAL2CSTR(id),
                          (GtkIconSet*)RVAL2BOXED(icon_set, GTK_TYPE_ICON_SET));
@@ -39,14 +40,14 @@ ifactory_add(VALUE self, VALUE id, VALUE icon_set)
 }
 
 static VALUE
-ifactory_add_default(VALUE self)
+rg_add_default(VALUE self)
 {
     gtk_icon_factory_add_default(_SELF(self));
     return self;
 }
 
 static VALUE
-ifactory_lookup(VALUE self, VALUE id)
+rg_lookup(VALUE self, VALUE id)
 {
     GtkIconSet *icon_set;
 
@@ -55,7 +56,7 @@ ifactory_lookup(VALUE self, VALUE id)
 }
 
 static VALUE
-ifactory_lookup_default(G_GNUC_UNUSED VALUE self, VALUE id)
+rg_s_lookup_default(G_GNUC_UNUSED VALUE self, VALUE id)
 {
     GtkIconSet *icon_set;
 
@@ -64,7 +65,7 @@ ifactory_lookup_default(G_GNUC_UNUSED VALUE self, VALUE id)
 }
 
 static VALUE
-ifactory_remove_default(VALUE self)
+rg_remove_default(VALUE self)
 {
     gtk_icon_factory_remove_default(_SELF(self));
     return self;
@@ -73,13 +74,13 @@ ifactory_remove_default(VALUE self)
 void
 Init_gtk_icon_factory(void)
 {
-    VALUE gIconFactory = G_DEF_CLASS(GTK_TYPE_ICON_FACTORY, "IconFactory", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_FACTORY, "IconFactory", mGtk);
 
-    rb_define_method(gIconFactory, "initialize", ifactory_initialize, 0);
-    rb_define_method(gIconFactory, "add", ifactory_add, 2);
-    rb_define_method(gIconFactory, "add_default", ifactory_add_default, 0);
-    rb_define_method(gIconFactory, "remove_default", ifactory_remove_default, 0);
-    rb_define_method(gIconFactory, "lookup", ifactory_lookup, 1);
-    
-    rb_define_singleton_method(gIconFactory, "lookup_default", ifactory_lookup_default, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(add, 2);
+    RG_DEF_METHOD(add_default, 0);
+    RG_DEF_METHOD(remove_default, 0);
+    RG_DEF_METHOD(lookup, 1);
+
+    RG_DEF_SMETHOD(lookup_default, 1);
 }

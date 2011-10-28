@@ -21,11 +21,12 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextMark
 #define _SELF(s) (GTK_TEXT_MARK(RVAL2GOBJ(s)))
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-initialize(VALUE self, VALUE name, VALUE left_gravity)
+rg_initialize(VALUE self, VALUE name, VALUE left_gravity)
 {
     if (NIL_P(name))
         G_INITIALIZE(self, gtk_text_mark_new(NULL, RVAL2CBOOL(left_gravity)));
@@ -36,48 +37,40 @@ initialize(VALUE self, VALUE name, VALUE left_gravity)
 #endif
 
 static VALUE
-set_visible(VALUE self, VALUE setting)
+rg_set_visible(VALUE self, VALUE setting)
 {
     gtk_text_mark_set_visible(_SELF(self), RVAL2CBOOL(setting));
     return setting;
 }
 
 static VALUE
-get_visible(VALUE self)
+rg_visible_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_mark_get_visible(_SELF(self)));
 }
 
-/* Defined as Properties:
-const gchar *       gtk_text_mark_get_name              (GtkTextMark *mark);
-*/
-
 static VALUE
-get_deleted(VALUE self)
+rg_deleted_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_mark_get_deleted(_SELF(self)));
 }
 
 static VALUE
-get_buffer(VALUE self)
+rg_buffer(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_mark_get_buffer(_SELF(self)));
 }
 
-/* Defined as Properties:
-gboolean            gtk_text_mark_get_left_gravity      (GtkTextMark *mark);
-*/
-
 void 
 Init_gtk_textmark(void)
 {
-    VALUE gTextMark = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gTextMark, "initialize", initialize, 2);
+    RG_DEF_METHOD(initialize, 2);
 #endif
-    rb_define_method(gTextMark, "set_visible", set_visible, 1);
-    G_DEF_SETTER(gTextMark, "visible");
-    rb_define_method(gTextMark, "visible?", get_visible, 0);
-    rb_define_method(gTextMark, "deleted?", get_deleted, 0);
-    rb_define_method(gTextMark, "buffer", get_buffer, 0);
+    RG_DEF_METHOD(set_visible, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "visible");
+    RG_DEF_METHOD_P(visible, 0);
+    RG_DEF_METHOD_P(deleted, 0);
+    RG_DEF_METHOD(buffer, 0);
 }

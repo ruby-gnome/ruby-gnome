@@ -20,13 +20,14 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cExpander
 #define _SELF(self) (GTK_EXPANDER(RVAL2GOBJ(self)))
 
 static VALUE
-expander_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, with_mnemonic;
     GtkWidget* widget = NULL;
@@ -41,34 +42,14 @@ expander_initialize(int argc, VALUE *argv, VALUE self)
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-/* Defined as Property.
-void        gtk_expander_set_expanded       (GtkExpander *expander,
-                                             gboolean expanded);
-gboolean    gtk_expander_get_expanded       (GtkExpander *expander);
-void        gtk_expander_set_spacing        (GtkExpander *expander,
-                                             gint spacing);
-gint        gtk_expander_get_spacing        (GtkExpander *expander);
-void        gtk_expander_set_label          (GtkExpander *expander,
-                                             const gchar *label);
-G_CONST_RETURN gchar* gtk_expander_get_label
-                                            (GtkExpander *expander);
-void        gtk_expander_set_use_underline  (GtkExpander *expander,
-                                             gboolean use_underline);
-gboolean    gtk_expander_get_use_underline  (GtkExpander *expander);
-void        gtk_expander_set_use_markup     (GtkExpander *expander,
-                                             gboolean use_markup);
-gboolean    gtk_expander_get_use_markup     (GtkExpander *expander);
-void        gtk_expander_set_label_widget   (GtkExpander *expander,
-                                             GtkWidget *label_widget);
-GtkWidget*  gtk_expander_get_label_widget   (GtkExpander *expander);
- */
+
 #endif
 
 void 
 Init_gtk_expander(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gExpander = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);
-    rb_define_method(gExpander, "initialize", expander_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

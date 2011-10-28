@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cVButtonBox
+
 static VALUE
-vbbox_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_vbutton_box_new());
     return Qnil;
@@ -34,7 +36,7 @@ vbbox_initialize(VALUE self)
 void 
 Init_gtk_vbutton_box(void)
 {
-    VALUE gVBBox = G_DEF_CLASS(GTK_TYPE_VBUTTON_BOX, "VButtonBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VBUTTON_BOX, "VButtonBox", mGtk);
 
-    rb_define_method(gVBBox, "initialize", vbbox_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

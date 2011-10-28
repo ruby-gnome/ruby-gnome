@@ -24,42 +24,43 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTooltips
 #define _SELF(self) (GTK_TOOLTIPS(RVAL2GOBJ(self)))
 
 static VALUE
-ttips_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_tooltips_new());
     return Qnil;
 }
 
 static VALUE
-ttips_enable(VALUE self)
+rg_enable(VALUE self)
 {
     gtk_tooltips_enable(_SELF(self));
     return self;
 }
 
 static VALUE
-ttips_disable(VALUE self)
+rg_disable(VALUE self)
 {
     gtk_tooltips_disable(_SELF(self));
     return self;
 }
 
 static VALUE
-ttips_set_tip(VALUE self, VALUE win, VALUE text, VALUE priv)
+rg_set_tip(VALUE self, VALUE win, VALUE text, VALUE priv)
 {
     gtk_tooltips_set_tip(_SELF(self),
-			 GTK_WIDGET(RVAL2GOBJ(win)),
-			 NIL_P(text)?NULL:RVAL2CSTR(text),
-			 NIL_P(priv)?NULL:RVAL2CSTR(priv));
+                         GTK_WIDGET(RVAL2GOBJ(win)),
+                         NIL_P(text)?NULL:RVAL2CSTR(text),
+                         NIL_P(priv)?NULL:RVAL2CSTR(priv));
 
     return self;
 }
 
 static VALUE
-ttips_s_data_get(G_GNUC_UNUSED VALUE self, VALUE widget)
+rg_s_get_data(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTooltipsData* data = gtk_tooltips_data_get(GTK_WIDGET(RVAL2GOBJ(widget)));
 
@@ -68,7 +69,7 @@ ttips_s_data_get(G_GNUC_UNUSED VALUE self, VALUE widget)
 }
 
 static VALUE
-ttips_force_window(VALUE self)
+rg_force_window(VALUE self)
 {
     gtk_tooltips_force_window(_SELF(self));
     return self;
@@ -76,7 +77,7 @@ ttips_force_window(VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-ttips_s_get_info_from_tip_window(G_GNUC_UNUSED VALUE self, VALUE window)
+rg_s_get_info(G_GNUC_UNUSED VALUE self, VALUE window)
 {
     GtkTooltips* tooltips;
     GtkWidget* current_widget;
@@ -93,15 +94,15 @@ ttips_s_get_info_from_tip_window(G_GNUC_UNUSED VALUE self, VALUE window)
 void 
 Init_gtk_tooltips(void)
 {
-    VALUE gTooltips = G_DEF_CLASS(GTK_TYPE_TOOLTIPS, "Tooltips", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLTIPS, "Tooltips", mGtk);
 
-    rb_define_method(gTooltips, "initialize", ttips_initialize, 0);
-    rb_define_method(gTooltips, "set_tip", ttips_set_tip, 3);
-    rb_define_method(gTooltips, "enable", ttips_enable, 0);
-    rb_define_method(gTooltips, "disable", ttips_disable, 0);
-    rb_define_method(gTooltips, "force_window", ttips_force_window, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_tip, 3);
+    RG_DEF_METHOD(enable, 0);
+    RG_DEF_METHOD(disable, 0);
+    RG_DEF_METHOD(force_window, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_singleton_method(gTooltips, "get_info", ttips_s_get_info_from_tip_window, 1);
+    RG_DEF_SMETHOD(get_info, 1);
 #endif
-    rb_define_singleton_method(gTooltips, "get_data", ttips_s_data_get, 1);
+    RG_DEF_SMETHOD(get_data, 1);
 }

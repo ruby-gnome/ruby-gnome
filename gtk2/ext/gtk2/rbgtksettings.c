@@ -22,17 +22,19 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cSettings
+
 static VALUE prop_func_table;
 
 static VALUE
-settings_s_get_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_settings_get_default());
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-settings_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
+rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_settings_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
@@ -62,7 +64,7 @@ rc_property_parser(const GParamSpec *pspec, const GString *rc_string, GValue *pr
 }
 
 static VALUE
-settings_s_install_property(VALUE self, VALUE spec)
+rg_s_install_property(VALUE self, VALUE spec)
 {
     GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
     if (rb_block_given_p()){
@@ -93,25 +95,25 @@ settings_rc_property_parse(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstrin
 }
 
 static VALUE
-settings_rc_property_parse_color(VALUE self, VALUE rbspec, VALUE rbstring)
+rg_s_rc_property_parse_color(VALUE self, VALUE rbspec, VALUE rbstring)
 {
     return settings_rc_property_parse(self, rbspec, rbstring, gtk_rc_property_parse_color);
 }
 
 static VALUE
-settings_rc_property_parse_enum(VALUE self, VALUE rbspec, VALUE rbstring)
+rg_s_rc_property_parse_enum(VALUE self, VALUE rbspec, VALUE rbstring)
 {
     return settings_rc_property_parse(self, rbspec, rbstring, gtk_rc_property_parse_enum);
 }
 
 static VALUE
-settings_rc_property_parse_flags(VALUE self, VALUE rbspec, VALUE rbstring)
+rg_s_rc_property_parse_flags(VALUE self, VALUE rbspec, VALUE rbstring)
 {
     return settings_rc_property_parse(self, rbspec, rbstring, gtk_rc_property_parse_flags);
 }
 
 static VALUE
-settings_rc_property_parse_requisition(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
+rg_s_rc_property_parse_requisition(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
@@ -154,7 +156,7 @@ settings_rc_property_parse_border_ensure(VALUE value)
 }
 
 static VALUE
-settings_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
+rg_s_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
 {
     GParamSpec *spec = RVAL2GOBJ(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
@@ -175,7 +177,7 @@ settings_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE 
 }
 
 static VALUE
-settings_set_property_value(VALUE self, VALUE rbname, VALUE rbvalue, VALUE origin)
+rg_set_property_value(VALUE self, VALUE rbname, VALUE rbvalue, VALUE origin)
 {
     GtkSettings *settings = GTK_SETTINGS(RVAL2GOBJ(self));
     GtkSettingsValue svalue = { (gchar *)RVAL2CSTR(origin), G_VALUE_INIT };
@@ -207,26 +209,25 @@ void        gtk_settings_set_double_property
                                              const gchar *origin);
 */
 
-
 void 
 Init_gtk_settings(void)
 {
-    VALUE gSettings = G_DEF_CLASS(GTK_TYPE_SETTINGS, "Settings", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SETTINGS, "Settings", mGtk);
 
     rb_global_variable(&prop_func_table);
     prop_func_table = rb_hash_new();
 
-    rb_define_singleton_method(gSettings, "default", settings_s_get_default, 0);
+    RG_DEF_SMETHOD(default, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gSettings, "get_for_screen", settings_s_get_for_screen, 1);
+    RG_DEF_SMETHOD(get_for_screen, 1);
 #endif
-    rb_define_singleton_method(gSettings, "install_property", settings_s_install_property, 1);
+    RG_DEF_SMETHOD(install_property, 1);
 
-    rb_define_singleton_method(gSettings, "rc_property_parse_color", settings_rc_property_parse_color, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_enum", settings_rc_property_parse_enum, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_flags", settings_rc_property_parse_flags, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_requisition", settings_rc_property_parse_requisition, 2);
-    rb_define_singleton_method(gSettings, "rc_property_parse_border", settings_rc_property_parse_border, 2);
+    RG_DEF_SMETHOD(rc_property_parse_color, 2);
+    RG_DEF_SMETHOD(rc_property_parse_enum, 2);
+    RG_DEF_SMETHOD(rc_property_parse_flags, 2);
+    RG_DEF_SMETHOD(rc_property_parse_requisition, 2);
+    RG_DEF_SMETHOD(rc_property_parse_border, 2);
 
-    rb_define_method(gSettings, "set_property_value", settings_set_property_value, 3);
+    RG_DEF_METHOD(set_property_value, 3);
 }

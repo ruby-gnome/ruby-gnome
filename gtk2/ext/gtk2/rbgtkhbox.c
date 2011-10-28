@@ -24,22 +24,24 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHBox
+
 static VALUE
-hbox_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE homogeneous, spacing;
 
     rb_scan_args(argc, argv, "02", &homogeneous, &spacing);
 
     RBGTK_INITIALIZE(self, gtk_hbox_new(RVAL2CBOOL(homogeneous),
-				  (NIL_P(spacing)?0:NUM2INT(spacing))));
+                      (NIL_P(spacing)?0:NUM2INT(spacing))));
     return Qnil;
 }
 
 void 
 Init_gtk_hbox(void)
 {
-    VALUE gHBox = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HBOX, "HBox", mGtk);
 
-    rb_define_method(gHBox, "initialize", hbox_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

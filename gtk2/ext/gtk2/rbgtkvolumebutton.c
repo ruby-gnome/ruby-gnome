@@ -26,8 +26,10 @@
 
 #if GTK_CHECK_VERSION(2,12,0)
 
+#define RG_TARGET_NAMESPACE cVolumeButton
+
 static VALUE
-volumebutton_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_volume_button_new());
     return Qnil;
@@ -39,7 +41,7 @@ void
 Init_gtk_volumebutton(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
-    VALUE gVolumeButton = G_DEF_CLASS(GTK_TYPE_VOLUME_BUTTON, "VolumeButton", mGtk);
-    rb_define_method(gVolumeButton, "initialize", volumebutton_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VOLUME_BUTTON, "VolumeButton", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 #endif
 }

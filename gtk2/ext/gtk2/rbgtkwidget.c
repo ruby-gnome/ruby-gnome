@@ -240,14 +240,6 @@ widget_intersect(VALUE self, VALUE area)
     return ret ? BOXED2RVAL(&intersection, GDK_TYPE_RECTANGLE) : Qnil;
 }
 
-/* Defined as Properties
-gboolean            gtk_widget_is_focus                 (GtkWidget *widget);
-*/
-
-/* Defined as Signals
-void                gtk_widget_grab_focus               (GtkWidget *widget);
-*/
-
 static VALUE
 widget_grab_default(VALUE self)
 {
@@ -615,11 +607,6 @@ widget_reset_shapes(VALUE self)
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_widget_set_double_buffered      (GtkWidget *widget,
-                                                         gboolean double_buffered);
-*/
-
 static VALUE
 widget_set_redraw_on_allocate(VALUE self, VALUE redraw_on_allocate)
 {
@@ -919,11 +906,6 @@ widget_thaw_child_notify(VALUE self)
 }
 
 #if GTK_CHECK_VERSION(2,4,0)
-/* Defined as Properties:
-void                gtk_widget_set_no_show_all          (GtkWidget *widget,
-                                                         gboolean no_show_all);
-gboolean            gtk_widget_get_no_show_all          (GtkWidget *widget);
-*/
 
 static VALUE
 widget_list_mnemonic_labels(VALUE self)
@@ -982,10 +964,6 @@ widget_is_composited(VALUE self)
     return CBOOL2RVAL(gtk_widget_is_composited(_SELF(self)));
 }
 #endif
-
-/* Defined as Properties:
-GdkWindow *         gtk_widget_get_window               (GtkWidget *widget);
-*/
 
 static VALUE
 widget_set_window(VALUE self, VALUE window)

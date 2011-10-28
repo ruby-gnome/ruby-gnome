@@ -24,10 +24,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cRectangle
 #define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 
 static VALUE
-gdkrect_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
+rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
     GdkRectangle new;
 
@@ -41,7 +42,7 @@ gdkrect_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 }
 
 static VALUE
-gdkrect_intersect(VALUE self, VALUE other)
+rg_intersect(VALUE self, VALUE other)
 {
     GdkRectangle dest;
     gboolean ret = gdk_rectangle_intersect(_SELF(self), _SELF(other), &dest);
@@ -49,7 +50,7 @@ gdkrect_intersect(VALUE self, VALUE other)
 }
 
 static VALUE
-gdkrect_union(VALUE self, VALUE other)
+rg_union(VALUE self, VALUE other)
 {
     GdkRectangle dest;
     gdk_rectangle_union(_SELF(self), _SELF(other), &dest);
@@ -58,59 +59,59 @@ gdkrect_union(VALUE self, VALUE other)
 
 /* Struct accessors */
 static VALUE
-gdkrect_x(VALUE self)
+rg_x(VALUE self)
 {
     return INT2NUM(_SELF(self)->x);
 }
 
 static VALUE
-gdkrect_y(VALUE self)
+rg_y(VALUE self)
 {
     return INT2NUM(_SELF(self)->y);
 }
 
 static VALUE
-gdkrect_w(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(_SELF(self)->width);
 }
 
 static VALUE
-gdkrect_h(VALUE self)
+rg_height(VALUE self)
 {
     return INT2NUM(_SELF(self)->height);
 }
 
 static VALUE
-gdkrect_set_x(VALUE self, VALUE x)
+rg_set_x(VALUE self, VALUE x)
 {
     _SELF(self)->x = NUM2INT(x);
     return self;
 }
 
 static VALUE
-gdkrect_set_y(VALUE self, VALUE y)
+rg_set_y(VALUE self, VALUE y)
 {
     _SELF(self)->y = NUM2INT(y);
     return self;
 }
 
 static VALUE
-gdkrect_set_w(VALUE self, VALUE width)
+rg_set_width(VALUE self, VALUE width)
 {
     _SELF(self)->width = NUM2INT(width);
     return self;
 }
 
 static VALUE
-gdkrect_set_h(VALUE self, VALUE height)
+rg_set_height(VALUE self, VALUE height)
 {
     _SELF(self)->height = NUM2INT(height);
     return self;
 }
 
 static VALUE
-gdkrect_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
   GdkRectangle* a = _SELF(self);
   return rb_ary_new3(4, INT2FIX(a->x), INT2FIX(a->y),
@@ -120,22 +121,22 @@ gdkrect_to_a(VALUE self)
 void
 Init_gtk_gdk_rectangle(void)
 {
-    VALUE gdkRectangle = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
 
-    rb_define_method(gdkRectangle, "initialize", gdkrect_initialize, 4);
-    rb_define_method(gdkRectangle, "intersect", gdkrect_intersect, 1);
-    rb_define_alias(gdkRectangle, "&", "intersect");
-    rb_define_method(gdkRectangle, "union", gdkrect_union, 1);
-    rb_define_alias(gdkRectangle, "|", "union");
-    rb_define_method(gdkRectangle, "x", gdkrect_x, 0);
-    rb_define_method(gdkRectangle, "y", gdkrect_y, 0);
-    rb_define_method(gdkRectangle, "width", gdkrect_w, 0);
-    rb_define_method(gdkRectangle, "height", gdkrect_h, 0);
-    rb_define_method(gdkRectangle, "set_x", gdkrect_set_x, 1);
-    rb_define_method(gdkRectangle, "set_y", gdkrect_set_y, 1);
-    rb_define_method(gdkRectangle, "set_width", gdkrect_set_w, 1);
-    rb_define_method(gdkRectangle, "set_height", gdkrect_set_h, 1);
-    rb_define_method(gdkRectangle, "to_a", gdkrect_to_a, 0);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(intersect, 1);
+    RG_DEF_ALIAS("&", "intersect");
+    RG_DEF_METHOD(union, 1);
+    RG_DEF_ALIAS("|", "union");
+    RG_DEF_METHOD(x, 0);
+    RG_DEF_METHOD(y, 0);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(set_x, 1);
+    RG_DEF_METHOD(set_y, 1);
+    RG_DEF_METHOD(set_width, 1);
+    RG_DEF_METHOD(set_height, 1);
+    RG_DEF_METHOD(to_a, 0);
 
-    G_DEF_SETTERS(gdkRectangle);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

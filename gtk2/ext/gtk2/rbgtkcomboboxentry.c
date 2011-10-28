@@ -20,11 +20,13 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cComboBoxEntry
+
 static VALUE
-comboboxentry_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE model_or_false, text_column;
     GtkWidget* widget;
@@ -48,20 +50,13 @@ comboboxentry_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as property.
-void        gtk_combo_box_entry_set_text_column
-                                            (GtkComboBoxEntry *entry_box,
-                                             gint text_column);
-gint        gtk_combo_box_entry_get_text_column
-                                            (GtkComboBoxEntry *entry_box);
-*/
 #endif
 
 void 
 Init_gtk_comboboxentry(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gComboboxentry = G_DEF_CLASS(GTK_TYPE_COMBO_BOX_ENTRY, "ComboBoxEntry", mGtk);
-    rb_define_method(gComboboxentry, "initialize", comboboxentry_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX_ENTRY, "ComboBoxEntry", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

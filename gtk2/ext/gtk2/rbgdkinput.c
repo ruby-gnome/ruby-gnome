@@ -24,6 +24,8 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mInput
+
 static void
 exec_input(gpointer data, G_GNUC_UNUSED gint source, GdkInputCondition condition)
 {
@@ -32,7 +34,7 @@ exec_input(gpointer data, G_GNUC_UNUSED gint source, GdkInputCondition condition
 }
 
 static VALUE
-input_add(VALUE self, VALUE filedescriptor, VALUE gdk_input_condition)
+rg_m_add(VALUE self, VALUE filedescriptor, VALUE gdk_input_condition)
 {
     VALUE id;
     VALUE func;
@@ -48,25 +50,23 @@ input_add(VALUE self, VALUE filedescriptor, VALUE gdk_input_condition)
 }
 
 static VALUE
-input_remove(VALUE self, VALUE id)
+rg_m_remove(VALUE self, VALUE id)
 {
     gdk_input_remove(NUM2INT(id));
     G_REMOVE_RELATIVE(self, id_relative_callbacks, id);
     return id;
 }
 
-
 void
 Init_gtk_gdk_input(void)
 {
-    VALUE mGdkInput = rb_define_module_under(mGdk, "Input");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Input");
 
-    rb_define_module_function(mGdkInput, "add", input_add, 2);
-    rb_define_module_function(mGdkInput, "remove", input_remove, 1);
+    RG_DEF_MODFUNC(add, 2);
+    RG_DEF_MODFUNC(remove, 1);
 
     /* GdkInputCondition */
-    G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", mGdkInput);
-    G_DEF_CONSTANTS(mGdkInput, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
+    G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
 
 }
-

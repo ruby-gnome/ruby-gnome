@@ -23,10 +23,11 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cRecentChooserDialog
 #define _SELF(self) (GTK_RECENT_CHOOSER_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-rcd_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE title, parent, button_ary;
     GtkWidget* dialog;
@@ -35,15 +36,15 @@ rcd_initialize(int argc, VALUE *argv, VALUE self)
       rb_scan_args(argc, argv, "03*", &title, &parent, &manager, &button_ary);
 
       dialog = gtk_recent_chooser_dialog_new_for_manager((const gchar*)RVAL2CSTR_ACCEPT_NIL(title),
-							 GTK_WINDOW(RVAL2GOBJ(parent)),
-							 GTK_RECENT_MANAGER(RVAL2GOBJ(manager)),
-							 (const gchar*)NULL, NULL);
+                                                         GTK_WINDOW(RVAL2GOBJ(parent)),
+                                                         GTK_RECENT_MANAGER(RVAL2GOBJ(manager)),
+                                                         (const gchar*)NULL, NULL);
     } else {
       rb_scan_args(argc, argv, "02*", &title, &parent, &button_ary);
 
       dialog = gtk_recent_chooser_dialog_new((const gchar*)RVAL2CSTR_ACCEPT_NIL(title),
-					     GTK_WINDOW(RVAL2GOBJ(parent)),
-					     (const gchar*)NULL, NULL);
+                                             GTK_WINDOW(RVAL2GOBJ(parent)),
+                                             (const gchar*)NULL, NULL);
     }
 
     RBGTK_INITIALIZE(self, dialog);
@@ -59,8 +60,8 @@ void
 Init_gtk_recent_chooser_dialog(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-  VALUE rcd = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_DIALOG, "RecentChooserDialog", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_DIALOG, "RecentChooserDialog", mGtk);
 
-  rb_define_method(rcd, "initialize", rcd_initialize, -1);
+  RG_DEF_METHOD(initialize, -1);
 #endif
 }

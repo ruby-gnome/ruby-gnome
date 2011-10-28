@@ -24,11 +24,12 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cMenu
 #define _SELF(self) (GTK_MENU(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
-menu_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_menu_new());
     return Qnil;
@@ -36,7 +37,7 @@ menu_initialize(VALUE self)
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-menu_set_screen(VALUE self, VALUE screen)
+rg_set_screen(VALUE self, VALUE screen)
 {
     gtk_menu_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
@@ -44,7 +45,7 @@ menu_set_screen(VALUE self, VALUE screen)
 #endif
 
 static VALUE
-menu_reorder_child(VALUE self, VALUE child, VALUE position)
+rg_reorder_child(VALUE self, VALUE child, VALUE position)
 {
     gtk_menu_reorder_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
                            NUM2INT(position));
@@ -53,7 +54,7 @@ menu_reorder_child(VALUE self, VALUE child, VALUE position)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-menu_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
+rg_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
     gtk_menu_attach(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
                     NUM2UINT(left_attach), NUM2UINT(right_attach), 
@@ -81,7 +82,7 @@ menu_pos_func(GtkMenu *menu, gint *px, gint *py, gboolean *push_in, gpointer dat
 
 /* the proc should return [x, y, push_in] */
 static VALUE
-menu_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_time)
+rg_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_time)
 {
     GtkWidget *gpshell = NULL;
     GtkWidget *gpitem = NULL;
@@ -101,46 +102,27 @@ menu_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_t
     if (!NIL_P(pitem)) {
         gpitem = RVAL2WIDGET(pitem);
     }
-    
+
     gtk_menu_popup(_SELF(self), gpshell, gpitem,
                    pfunc, data, NUM2UINT(button),
                    NUM2UINT(activate_time));
     return self;
 }
 
-/* Defined as Properties
-gboolean            gtk_menu_get_tearoff_state          (GtkMenu *menu);
-void                gtk_menu_set_accel_group            (GtkMenu *menu,
-                                                         GtkAccelGroup *accel_group);
-GtkAccelGroup *     gtk_menu_get_accel_group            (GtkMenu *menu);
-void                gtk_menu_set_accel_path             (GtkMenu *menu,
-                                                         const gchar *accel_path);
-*/
-
 static VALUE
-menu_popdown(VALUE self)
+rg_popdown(VALUE self)
 {
     gtk_menu_popdown(_SELF(self));
     return self;
 }
 
 static VALUE
-menu_reposition(VALUE self)
+rg_reposition(VALUE self)
 {
     gtk_menu_reposition(_SELF(self));
     return self;
 }
 
-/* Defined as Properties
-GtkWidget *         gtk_menu_get_active                 (GtkMenu *menu);
-void                gtk_menu_set_active                 (GtkMenu *menu,
-                                                         guint index_);
-void                gtk_menu_set_tearoff_state          (GtkMenu *menu,
-                                                         gboolean torn_off);
-void                gtk_menu_set_monitor                (GtkMenu *menu,
-                                                         gint monitor_num);
-gint                gtk_menu_get_monitor                (GtkMenu *menu);
-*/
 static VALUE menu_detacher;
 static void
 detach_func(GtkWidget *attach_widget, GtkMenu *menu)
@@ -150,7 +132,7 @@ detach_func(GtkWidget *attach_widget, GtkMenu *menu)
 }
 
 static VALUE
-menu_attach_to_widget(VALUE self, VALUE attach_widget)
+rg_attach_to_widget(VALUE self, VALUE attach_widget)
 {
     menu_detacher = rb_block_proc();
     G_RELATIVE(self, menu_detacher);
@@ -161,19 +143,15 @@ menu_attach_to_widget(VALUE self, VALUE attach_widget)
 }
 
 static VALUE
-menu_detach(VALUE self)
+rg_detach(VALUE self)
 {
     gtk_menu_detach(_SELF(self));
     return self;
 }
 
-/* Defined as Properties
-GtkWidget *         gtk_menu_get_attach_widget          (GtkMenu *menu);
-*/
-
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-menu_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
+rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     /* Owned by GTK+ */
     return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
@@ -183,23 +161,23 @@ menu_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 void 
 Init_gtk_menu(void)
 {
-    VALUE gMenu = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 
-    rb_define_method(gMenu, "initialize", menu_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gMenu, "set_screen", menu_set_screen, 1);
-    G_DEF_SETTER(gMenu, "screen");
+    RG_DEF_METHOD(set_screen, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "screen");
 #endif
-    rb_define_method(gMenu, "reorder_child", menu_reorder_child, 2);
+    RG_DEF_METHOD(reorder_child, 2);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gMenu, "attach", menu_attach, 5);
+    RG_DEF_METHOD(attach, 5);
 #endif
-    rb_define_method(gMenu, "popup", menu_popup, 4);
-    rb_define_method(gMenu, "popdown", menu_popdown, 0);
-    rb_define_method(gMenu, "reposition", menu_reposition, 0);
-    rb_define_method(gMenu, "detach", menu_detach, 0);
+    RG_DEF_METHOD(popup, 4);
+    RG_DEF_METHOD(popdown, 0);
+    RG_DEF_METHOD(reposition, 0);
+    RG_DEF_METHOD(detach, 0);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_singleton_method(gMenu, "get_for_attach_widget", menu_s_get_for_attach_widget, 1);
+    RG_DEF_SMETHOD(get_for_attach_widget, 1);
 #endif
-    rb_define_method(gMenu, "attach_to_widget", menu_attach_to_widget, 1);
+    RG_DEF_METHOD(attach_to_widget, 1);
 }

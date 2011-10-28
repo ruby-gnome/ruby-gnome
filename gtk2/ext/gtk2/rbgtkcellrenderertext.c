@@ -21,18 +21,18 @@
 
 #include "global.h"
 
-
+#define RG_TARGET_NAMESPACE cCellRendererText
 #define _SELF(s) (GTK_CELL_RENDERER_TEXT(RVAL2GOBJ(s)))
 
 static VALUE
-crtext_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_text_new());
     return Qnil;
 }
 
 static VALUE
-crtext_set_fixed_height_from_font(VALUE self, VALUE number_of_rows)
+rg_set_fixed_height_from_font(VALUE self, VALUE number_of_rows)
 {
     gtk_cell_renderer_text_set_fixed_height_from_font(_SELF(self), NUM2INT(number_of_rows));
     return self;
@@ -41,12 +41,9 @@ crtext_set_fixed_height_from_font(VALUE self, VALUE number_of_rows)
 void
 Init_gtk_cellrenderertext(void)
 {
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TEXT, "CellRendererText", mGtk);
-    
-    rb_define_method(renderer, "initialize", crtext_initialize, 0);
-    rb_define_method(renderer, "set_fixed_height_from_font", crtext_set_fixed_height_from_font, 1);
-    G_DEF_SETTER(renderer, "fixed_height_from_font");
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TEXT, "CellRendererText", mGtk);
+
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_fixed_height_from_font, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "fixed_height_from_font");
 }
-
-
- 

@@ -22,24 +22,26 @@
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,10,0)
+
+#define RG_TARGET_NAMESPACE cPrintOperationPreview
 #define _SELF(s) (GTK_PRINT_OPERATION_PREVIEW(RVAL2GOBJ(s)))
 
 static VALUE
-pop_render_page(VALUE self, VALUE page_number)
+rg_render_page(VALUE self, VALUE page_number)
 {
     gtk_print_operation_preview_render_page(_SELF(self), NUM2INT(page_number));
     return self;
 }
 
 static VALUE
-pop_end_preview(VALUE self)
+rg_end_preview(VALUE self)
 {
     gtk_print_operation_preview_end_preview(_SELF(self));
     return self;
 }
 
 static VALUE
-pop_is_selected(VALUE self, VALUE page_number)
+rg_selected_p(VALUE self, VALUE page_number)
 {
     gboolean selected;
     selected = gtk_print_operation_preview_is_selected(_SELF(self),
@@ -52,13 +54,13 @@ void
 Init_gtk_print_operation_preview(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPrintOperationPreview = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_PREVIEW,
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_PREVIEW,
                                                "PrintOperationPreview", mGtk);
 
-    rb_define_method(gPrintOperationPreview, "render_page", pop_render_page, 1);
-    rb_define_method(gPrintOperationPreview, "end_preview", pop_end_preview, 0);
-    rb_define_method(gPrintOperationPreview, "selected?", pop_is_selected, 1);
+    RG_DEF_METHOD(render_page, 1);
+    RG_DEF_METHOD(end_preview, 0);
+    RG_DEF_METHOD_P(selected, 1);
 
-    G_DEF_SETTERS(gPrintOperationPreview);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

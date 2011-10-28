@@ -26,10 +26,11 @@
 
 #if GTK_CHECK_VERSION(2,12,0)
 
+#define RG_TARGET_NAMESPACE cScaleButton
 #define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
 
 static VALUE
-scalebutton_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3, arg4, arg5;
     GtkWidget *widget;
@@ -62,24 +63,13 @@ scalebutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void                gtk_scale_button_set_adjustment     (GtkScaleButton *button,
-                                                         GtkAdjustment *adjustment);
-void                gtk_scale_button_set_icons          (GtkScaleButton *button,
-                                                         const gchar **icons);
-void                gtk_scale_button_set_value          (GtkScaleButton *button,
-                                                         gdouble value);
-GtkAdjustment *     gtk_scale_button_get_adjustment     (GtkScaleButton *button);
-gdouble             gtk_scale_button_get_value          (GtkScaleButton *button);
-*/
-
 #endif
 
 void 
 Init_gtk_scalebutton(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
-    VALUE gScaleButton = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
-    rb_define_method(gScaleButton, "initialize", scalebutton_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }
