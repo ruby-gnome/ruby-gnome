@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE mTag
+
 /* Module: Gst::Tag
  * Helper module to the tagging interface.
  */
@@ -34,7 +36,7 @@
  * Returns: true if the tag is registered, false otherwise.
  */
 static VALUE
-rb_gst_tag_exists (VALUE self, VALUE tag)
+rg_m_exists_p (VALUE self, VALUE tag)
 {
     return CBOOL2RVAL (gst_tag_exists (RVAL2CSTR (tag)));
 }
@@ -49,7 +51,7 @@ rb_gst_tag_exists (VALUE self, VALUE tag)
  * Returns: true if the tag is fixed, false otherwise.
  */
 static VALUE
-rb_gst_tag_fixed (VALUE self, VALUE tag)
+rg_m_fixed_p (VALUE self, VALUE tag)
 {
     return CBOOL2RVAL (gst_tag_is_fixed (RVAL2CSTR (tag)));
 }
@@ -61,7 +63,7 @@ rb_gst_tag_fixed (VALUE self, VALUE tag)
  * Returns: the human-readable name of this tag.
  */
 static VALUE
-rb_gst_tag_get_nick (VALUE self, VALUE tag)
+rg_m_get_nick (VALUE self, VALUE tag)
 {
     return CSTR2RVAL (gst_tag_get_nick (RVAL2CSTR (tag)));
 }
@@ -73,7 +75,7 @@ rb_gst_tag_get_nick (VALUE self, VALUE tag)
  * Returns: the human-readable description of this tag.
  */
 static VALUE
-rb_gst_tag_get_description (VALUE self, VALUE tag)
+rg_m_get_description (VALUE self, VALUE tag)
 {
     return CSTR2RVAL (gst_tag_get_description (RVAL2CSTR (tag)));
 }
@@ -87,7 +89,7 @@ rb_gst_tag_get_description (VALUE self, VALUE tag)
  * Returns: the flag of this tag (see Gst::Tag::Flag).
  */
 static VALUE
-rb_gst_tag_get_flag (VALUE self, VALUE tag)
+rg_m_get_flag (VALUE self, VALUE tag)
 {
     return GFLAGS2RVAL (gst_tag_get_flag (RVAL2CSTR (tag)),
                         GST_TYPE_TAG_FLAG);
@@ -96,17 +98,16 @@ rb_gst_tag_get_flag (VALUE self, VALUE tag)
 void
 Init_gst_tag (void)
 {
-    VALUE m = rb_define_module_under (mGst, "Tag");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under (mGst, "Tag");
 
-    rb_define_module_function (m, "exists?", rb_gst_tag_exists, 1);
-    rb_define_module_function (m, "get_nick", rb_gst_tag_get_nick, 1);
-    rb_define_module_function (m, "get_description", 
-                                rb_gst_tag_get_description, 1);
-    rb_define_module_function (m, "get_flag", rb_gst_tag_get_flag, 1);
-    rb_define_module_function (m, "fixed?", rb_gst_tag_fixed, 1);
+    RG_DEF_MODFUNC_P(exists, 1);
+    RG_DEF_MODFUNC(get_nick, 1);
+    RG_DEF_MODFUNC(get_description, 1);
+    RG_DEF_MODFUNC(get_flag, 1);
+    RG_DEF_MODFUNC_P(fixed, 1);
 
-    G_DEF_CLASS (GST_TYPE_TAG_FLAG, "Flag", m);
-    G_DEF_CONSTANTS (m, GST_TYPE_TAG_FLAG, "GST_TAG_");
-    G_DEF_CLASS (GST_TYPE_TAG_MERGE_MODE, "MergeMode", m);
-    G_DEF_CONSTANTS (m, GST_TYPE_TAG_MERGE_MODE, "GST_TAG_");
+    G_DEF_CLASS (GST_TYPE_TAG_FLAG, "Flag", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_TAG_FLAG, "GST_TAG_");
+    G_DEF_CLASS (GST_TYPE_TAG_MERGE_MODE, "MergeMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_TAG_MERGE_MODE, "GST_TAG_");
 }

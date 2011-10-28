@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cIndex
+
 /* Class: Gst::Index
  * Generates indexes on objects. 
  */
@@ -29,7 +31,7 @@
  * Returns: a newly allocated Gst::Index object.
  */
 static VALUE
-rb_gst_index_new (VALUE self)
+rg_initialize (VALUE self)
 {
     GstIndex *index = gst_index_new ();
 
@@ -42,7 +44,7 @@ rb_gst_index_new (VALUE self)
  * Returns: whether the index can be read.
  */
 static VALUE
-rb_gst_index_is_readable (VALUE self)
+rg_readable_p (VALUE self)
 {
     return CBOOL2RVAL (GST_INDEX_IS_READABLE (RGST_INDEX (self)));
 }
@@ -51,7 +53,7 @@ rb_gst_index_is_readable (VALUE self)
  * Returns: whether the index can be written.
  */
 static VALUE
-rb_gst_index_is_writable (VALUE self)
+rg_writable_p (VALUE self)
 {
     return CBOOL2RVAL (GST_INDEX_IS_WRITABLE (RGST_INDEX (self)));
 }
@@ -66,7 +68,7 @@ rb_gst_index_is_writable (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_index_commit (VALUE self, VALUE id)
+rg_commit (VALUE self, VALUE id)
 {
     gst_index_commit (RGST_INDEX (self), FIX2INT (id));
     return self;
@@ -76,7 +78,7 @@ rb_gst_index_commit (VALUE self, VALUE id)
  * Returns: the ID of the current group.
  */
 static VALUE
-rb_gst_index_get_group (VALUE self)
+rg_group (VALUE self)
 {
     return INT2FIX (gst_index_get_group (RGST_INDEX (self)));
 }
@@ -90,7 +92,7 @@ rb_gst_index_get_group (VALUE self)
  * Returns: the ID of the newly created group.
  */
 static VALUE
-rb_gst_index_new_group (VALUE self)
+rg_new_group (VALUE self)
 {
     return INT2FIX (gst_index_new_group (RGST_INDEX (self)));
 }
@@ -104,7 +106,7 @@ rb_gst_index_new_group (VALUE self)
  * Returns: true if the operation succeeded, false if the group did not exist.
  */
 static VALUE
-rb_gst_index_set_group (VALUE self, VALUE group)
+rg_set_group (VALUE self, VALUE group)
 {
     return
         CBOOL2RVAL (gst_index_set_group (RGST_INDEX (self), FIX2INT (group)));
@@ -114,7 +116,7 @@ rb_gst_index_set_group (VALUE self, VALUE group)
  * Returns: the certainty of the index (see Gst::Index::Certainty).
  */
 static VALUE
-rb_gst_index_get_certainty (VALUE self)
+rg_certainty (VALUE self)
 {
     return GENUM2RVAL (gst_index_get_certainty (RGST_INDEX (self)),
                        GST_TYPE_INDEX_CERTAINTY);
@@ -129,7 +131,7 @@ rb_gst_index_get_certainty (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_index_set_certainty (VALUE self, VALUE certainty)
+rg_set_certainty (VALUE self, VALUE certainty)
 {
     gst_index_set_certainty (RGST_INDEX (self),
                              RVAL2GENUM (certainty, GST_TYPE_INDEX_CERTAINTY));
@@ -144,7 +146,7 @@ __filter (GstIndex * index, GstIndexEntry * entry)
 }
 
 static VALUE
-rb_gst_index_set_filter (VALUE self)
+rg_set_filter (VALUE self)
 {
     /*
      * TODO 
@@ -165,7 +167,7 @@ __resolver (GstIndex * index, GstObject * writer, gchar ** writer_string,
 }
 
 static VALUE
-rb_gst_index_set_resolver (VALUE self)
+rg_set_resolver (VALUE self)
 {
     gst_index_set_resolver (RGST_INDEX (self), __resolver,
                             (gpointer) rb_block_proc ());
@@ -181,15 +183,15 @@ rb_gst_index_set_resolver (VALUE self)
  * Adds an entry into the index.  The type of the entry depends of
  * the number and kind of additional parameters.
  *
- *	* For an ID type, args must be a String.
- *	* For a FORMAT type, args must be a Gst::Format.
- *	* For an ASSOCIATION type, args must contains an association flag (see Gst::Index::AssocFlags), a Gst::Format and a value for the format.
- *	* For an OBJECT type, well you must wait, because it is not yet implemented.
+ *  * For an ID type, args must be a String.
+ *  * For a FORMAT type, args must be a Gst::Format.
+ *  * For an ASSOCIATION type, args must contains an association flag (see Gst::Index::AssocFlags), a Gst::Format and a value for the format.
+ *  * For an OBJECT type, well you must wait, because it is not yet implemented.
  *
  * Returns: a reference to the newly allocated entry in the index, as a Gst::EntryIndex object.
  */
 static VALUE
-rb_gst_index_add (int argc, VALUE * argv, VALUE self)
+rg_add (int argc, VALUE * argv, VALUE self)
 {
     GstIndexEntry *index_entry;
     VALUE id;
@@ -248,7 +250,7 @@ __compare (gconstpointer a, gconstpointer b, gpointer user_data)
  * if the value is not found.
  */
 static VALUE
-rb_gst_index_get_assoc_entry (VALUE self, VALUE id, VALUE method, VALUE flags,
+rg_get_assoc_entry (VALUE self, VALUE id, VALUE method, VALUE flags,
                               VALUE format, VALUE value)
 {
     GstIndexEntry *index_entry;
@@ -279,37 +281,37 @@ rb_gst_index_get_assoc_entry (VALUE self, VALUE id, VALUE method, VALUE flags,
 void
 Init_gst_index (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_INDEX, "Index", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_INDEX, "Index", mGst);
 
-    rb_define_method (c, "initialize", rb_gst_index_new, 0);
-    rb_define_method (c, "readable?", rb_gst_index_is_readable, 0);
-    rb_define_method (c, "writable?", rb_gst_index_is_writable, 0);
-    rb_define_method (c, "commit", rb_gst_index_commit, 1);
-    rb_define_method (c, "group", rb_gst_index_get_group, 0);
-    rb_define_method (c, "new_group", rb_gst_index_new_group, 0);
-    rb_define_method (c, "set_group", rb_gst_index_set_group, 1);
-    rb_define_method (c, "certainty", rb_gst_index_get_certainty, 0);
-    rb_define_method (c, "set_certainty", rb_gst_index_set_certainty, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD_P(readable, 0);
+    RG_DEF_METHOD_P(writable, 0);
+    RG_DEF_METHOD(commit, 1);
+    RG_DEF_METHOD(group, 0);
+    RG_DEF_METHOD(new_group, 0);
+    RG_DEF_METHOD(set_group, 1);
+    RG_DEF_METHOD(certainty, 0);
+    RG_DEF_METHOD(set_certainty, 1);
 #if 0
-    rb_define_method (c, "set_filter", rb_gst_index_set_filter, 0);
-    rb_define_method (c, "set_resolver", rb_gst_index_set_resolver, 0);
+    RG_DEF_METHOD(set_filter, 0);
+    RG_DEF_METHOD(set_resolver, 0);
 #endif
-    rb_define_method (c, "add", rb_gst_index_add, -1);
-    rb_define_method (c, "get_assoc_entry", rb_gst_index_get_assoc_entry, 5);
+    RG_DEF_METHOD(add, -1);
+    RG_DEF_METHOD(get_assoc_entry, 5);
 
-    G_DEF_CLASS (GST_TYPE_INDEX_CERTAINTY, "Certainty", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_CERTAINTY, "GST_INDEX_");
-    G_DEF_CLASS (GST_TYPE_INDEX_LOOKUP_METHOD, "LookupMethod", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_LOOKUP_METHOD, "GST_INDEX_");
-    G_DEF_CLASS (GST_TYPE_ASSOC_FLAGS, "AssocFlags", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_ASSOC_FLAGS, "GST_");
-    G_DEF_CLASS (GST_TYPE_INDEX_RESOLVER_METHOD, "ResolverMethod", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_RESOLVER_METHOD, "GST_INDEX_");
-    G_DEF_CLASS (GST_TYPE_INDEX_FLAGS, "Flags", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_FLAGS, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_INDEX_CERTAINTY, "Certainty", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_CERTAINTY, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_INDEX_LOOKUP_METHOD, "LookupMethod", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_LOOKUP_METHOD, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_ASSOC_FLAGS, "AssocFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_ASSOC_FLAGS, "GST_");
+    G_DEF_CLASS (GST_TYPE_INDEX_RESOLVER_METHOD, "ResolverMethod", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_RESOLVER_METHOD, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_INDEX_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_FLAGS, "GST_INDEX_");
 
-    G_DEF_SETTERS (c);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 
-    rb_undef_method (c, "resolver");
-    rb_undef_method (c, "resolver=");
+    rb_undef_method (RG_TARGET_NAMESPACE, "resolver");
+    rb_undef_method (RG_TARGET_NAMESPACE, "resolver=");
 }

@@ -25,6 +25,7 @@
  * Asynchronous message bus subsystem.
  */
 
+#define RG_TARGET_NAMESPACE cBus
 #define SELF(obj) (RVAL2GST_BUS(obj))
 
 static ID id_call;
@@ -56,7 +57,7 @@ destroy_watch_func(gpointer data)
 }
 
 static VALUE
-rb_gst_bus_add_watch(int argc, VALUE *argv, VALUE self)
+rg_add_watch(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_priority, block, rb_id;
     gint priority;
@@ -78,15 +79,14 @@ rb_gst_bus_add_watch(int argc, VALUE *argv, VALUE self)
     return rb_id;
 }
 
-
 void
 Init_gst_bus (void)
 {
-    VALUE rb_cGstBus;
+    VALUE RG_TARGET_NAMESPACE;
 
     id_call = rb_intern("call");
 
-    rb_cGstBus = G_DEF_CLASS(GST_TYPE_BUS, "Bus", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_BUS, "Bus", mGst);
 
-    rb_define_method(rb_cGstBus, "add_watch", rb_gst_bus_add_watch, -1);
+    RG_DEF_METHOD(add_watch, -1);
 }

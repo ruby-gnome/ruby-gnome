@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cClockEntry
+
 /* Class: Gst::ClockEntry
  * A wrapper for GstClockID, used to create and start timers
  * on Gst::Clock objects.
@@ -70,7 +72,7 @@ gst_clock_entry_get_type (void)
  * Returns: a new Gst::ClockEntry object.
  */
 static VALUE
-rb_gst_clock_entry_new (int argc, VALUE * argv, VALUE self)
+rg_initialize (int argc, VALUE * argv, VALUE self)
 {
     VALUE clock, time, interval;
     GstClockID id;
@@ -97,7 +99,7 @@ rb_gst_clock_entry_new (int argc, VALUE * argv, VALUE self)
  * Returns: true if the entry is single-shot, false otherwise.
  */
 static VALUE
-rb_gst_clock_entry_is_single_shot (VALUE self)
+rg_single_shot_p (VALUE self)
 {
     return CBOOL2RVAL (GST_CLOCK_ENTRY_TYPE (RGST_CLOCK_ENTRY (self)) ==
                        GST_CLOCK_ENTRY_SINGLE);
@@ -107,7 +109,7 @@ rb_gst_clock_entry_is_single_shot (VALUE self)
  * Returns: true if the entry is periodic, false otherwise.
  */
 static VALUE
-rb_gst_clock_entry_is_periodic (VALUE self)
+rg_periodic_p (VALUE self)
 {
     return CBOOL2RVAL (GST_CLOCK_ENTRY_TYPE (RGST_CLOCK_ENTRY (self)) ==
                        GST_CLOCK_ENTRY_PERIODIC);
@@ -121,7 +123,7 @@ rb_gst_clock_entry_is_periodic (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_clock_entry_unschedule (VALUE self)
+rg_unschedule (VALUE self)
 {
     gst_clock_id_unschedule (RGST_CLOCK_ENTRY (self));
     return self;
@@ -135,7 +137,7 @@ rb_gst_clock_entry_unschedule (VALUE self)
  * Returns: a return code (see Gst::Clock::Return).
  */
 static VALUE
-rb_gst_clock_entry_wait (VALUE self)
+rg_wait (VALUE self)
 {
     return GENUM2RVAL (gst_clock_id_wait (RGST_CLOCK_ENTRY (self), NULL),
                        GST_TYPE_CLOCK_RETURN);
@@ -186,7 +188,7 @@ __callback_dispatcher (GstClock * clock, GstClockTime time, GstClockID id,
  * Returns: a return code (see Gst::Clock::Return).
  */
 static VALUE
-rb_gst_clock_entry_wait_async (VALUE self)
+rg_wait_async (VALUE self)
 {
     GstClockID id = (GstClockID) RGST_CLOCK_ENTRY (self);
 
@@ -212,7 +214,7 @@ rb_gst_clock_entry_wait_async (VALUE self)
  * Returns: the requested time of the entry, in nanoseconds.
  */
 static VALUE
-rb_gst_clock_entry_get_time (VALUE self)
+rg_time (VALUE self)
 {
     return ULL2NUM (GST_CLOCK_ENTRY_TIME (RGST_CLOCK_ENTRY (self)));
 }
@@ -222,7 +224,7 @@ rb_gst_clock_entry_get_time (VALUE self)
  * if the entry is not periodic.
  */
 static VALUE
-rb_gst_clock_entry_get_interval (VALUE self)
+rg_interval (VALUE self)
 {
     return ULL2NUM (GST_CLOCK_ENTRY_INTERVAL (RGST_CLOCK_ENTRY (self)));
 }
@@ -231,7 +233,7 @@ rb_gst_clock_entry_get_interval (VALUE self)
  * Returns: the owner clock of the entry, as a Gst::Clock object. 
  */
 static VALUE
-rb_gst_clock_entry_get_clock (VALUE self)
+rg_clock (VALUE self)
 {
     return RGST_CLOCK_NEW (GST_CLOCK_ENTRY_CLOCK (RGST_CLOCK_ENTRY (self)));
 }
@@ -240,7 +242,7 @@ rb_gst_clock_entry_get_clock (VALUE self)
  * Returns: the status of the entry (see Gst::ClockEntry::Return).
  */
 static VALUE
-rb_gst_clock_entry_get_status (VALUE self)
+rg_status (VALUE self)
 {
     return GENUM2RVAL(GST_CLOCK_ENTRY_STATUS(RGST_CLOCK_ENTRY (self)),
                       GST_TYPE_CLOCK_RETURN);
@@ -249,21 +251,21 @@ rb_gst_clock_entry_get_status (VALUE self)
 void
 Init_gst_clock_entry (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
 
-    rb_define_method (c, "initialize", rb_gst_clock_entry_new, -1);
-    rb_define_method (c, "single_shot?", rb_gst_clock_entry_is_single_shot, 0);
-    rb_define_method (c, "periodic?", rb_gst_clock_entry_is_periodic, 0);
-    rb_define_method (c, "wait", rb_gst_clock_entry_wait, 0);
-    rb_define_method (c, "wait_async", rb_gst_clock_entry_wait_async, 0);
-    rb_define_method (c, "unschedule", rb_gst_clock_entry_unschedule, 0);
-    rb_define_method (c, "clock", rb_gst_clock_entry_get_clock, 0);
-    rb_define_method (c, "time", rb_gst_clock_entry_get_time, 0);
-    rb_define_method (c, "interval", rb_gst_clock_entry_get_interval, 0);
-    rb_define_method (c, "status", rb_gst_clock_entry_get_status, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD_P(single_shot, 0);
+    RG_DEF_METHOD_P(periodic, 0);
+    RG_DEF_METHOD(wait, 0);
+    RG_DEF_METHOD(wait_async, 0);
+    RG_DEF_METHOD(unschedule, 0);
+    RG_DEF_METHOD(clock, 0);
+    RG_DEF_METHOD(time, 0);
+    RG_DEF_METHOD(interval, 0);
+    RG_DEF_METHOD(status, 0);
 
-    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
-    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
 }

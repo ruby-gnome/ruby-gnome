@@ -23,12 +23,13 @@
 #include "rbgst-private.h"
 
 /* need to implement */
+#define RG_TARGET_NAMESPACE cChildProxy
 #define SELF(self) RVAL2GST_CHILD_PROXY(self)
 
 void
 Init_gst_child_proxy(void)
 {
-    VALUE rb_mGstChildProxy;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_mGstChildProxy = G_DEF_CLASS(GST_TYPE_CHILD_PROXY, "ChildProxy", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_CHILD_PROXY, "ChildProxy", mGst);
 }

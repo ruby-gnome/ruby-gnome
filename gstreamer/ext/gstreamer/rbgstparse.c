@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE mParse
+
 /* Module: Gst::Parse
  * Parses command-line syntax into a pipeline. 
  */
@@ -37,30 +39,30 @@
  * an exception on failure.
  */
 static VALUE
-rb_gst_parse_launch (VALUE self, VALUE command)
+rg_m_launch (VALUE self, VALUE command)
 {
 #if !defined(GST_DISABLE_PARSE)
-	GError *error;
-	GstBin *bin;
+    GError *error;
+    GstBin *bin;
 
-	error = NULL;
-	bin = (GstBin*)gst_parse_launch (RVAL2CSTR (command), &error);
-	if (bin != NULL)
-		return RGST_BIN_NEW (bin);
+    error = NULL;
+    bin = (GstBin*)gst_parse_launch (RVAL2CSTR (command), &error);
+    if (bin != NULL)
+        return RGST_BIN_NEW (bin);
         RAISE_GERROR(error);
 #else
-	rb_raise (rb_eRuntimeError, 
-		  "This function has been disabled "
-		  "when GStreamer was compiled");
+    rb_raise (rb_eRuntimeError, 
+          "This function has been disabled "
+          "when GStreamer was compiled");
 #endif
-	return Qnil;
+    return Qnil;
 }
 
 void
 Init_gst_parse (void)
 {
-	VALUE c = rb_define_module_under (mGst, "Parse"); 
-	rb_define_module_function (c, "launch", rb_gst_parse_launch, 1);
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under (mGst, "Parse"); 
+    RG_DEF_MODFUNC(launch, 1);
 
         G_DEF_ERROR(GST_PARSE_ERROR, "ParseError", mGst, rb_eRuntimeError,
                     GST_TYPE_PARSE_ERROR);

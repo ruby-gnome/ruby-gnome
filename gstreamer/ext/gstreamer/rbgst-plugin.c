@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cPlugin
 #define SELF(self) RVAL2GST_PLUGIN(self)
 
 /* Class: Gst::Plugin
@@ -32,50 +33,50 @@
  * Returns: true if the plugin is loaded into memory, false otherwise.
  */
 static VALUE
-rb_gst_plugin_is_loaded (VALUE self)
+rg_loaded_p (VALUE self)
 {
-	GstPlugin *plugin = RGST_PLUGIN (self);
-	return CBOOL2RVAL (gst_plugin_is_loaded (plugin));
+    GstPlugin *plugin = RGST_PLUGIN (self);
+    return CBOOL2RVAL (gst_plugin_is_loaded (plugin));
 }
 
 /* Method: filename
  * Returns: the filename where this plugin comes from.
  */
 static VALUE
-rb_gst_plugin_get_filename (VALUE self)
+rg_filename (VALUE self)
 {
-	return CSTR2RVAL (gst_plugin_get_filename (RGST_PLUGIN (self)));
+    return CSTR2RVAL (gst_plugin_get_filename (RGST_PLUGIN (self)));
 }
 
 /* Method: description 
  * Returns: a long description of the plugin.
  */
 static VALUE
-rb_gst_plugin_get_description (VALUE self)
+rg_description (VALUE self)
 {
-	return CSTR2RVAL (gst_plugin_get_description (RGST_PLUGIN (self)));
+    return CSTR2RVAL (gst_plugin_get_description (RGST_PLUGIN (self)));
 }
 
 /* Method: package 
  * Returns: the name of the package this plugin belongs to.
  */
 static VALUE
-rb_gst_plugin_get_package (VALUE self)
+rg_package (VALUE self)
 {
-	return CSTR2RVAL (gst_plugin_get_package (RGST_PLUGIN (self)));
+    return CSTR2RVAL (gst_plugin_get_package (RGST_PLUGIN (self)));
 }
 
 /* Method: license 
  * Returns: the effective license of the plugin.
  */
 static VALUE
-rb_gst_plugin_get_license (VALUE self)
+rg_license (VALUE self)
 {
-	return CSTR2RVAL (gst_plugin_get_license (RGST_PLUGIN (self)));
+    return CSTR2RVAL (gst_plugin_get_license (RGST_PLUGIN (self)));
 }
 
 static VALUE
-get_source (VALUE self)
+rg_source (VALUE self)
 {
     return CSTR2RVAL(gst_plugin_get_source(SELF(self)));
 }
@@ -84,45 +85,45 @@ get_source (VALUE self)
  * Returns: the URL to the provider of the plugin.
  */
 static VALUE
-rb_gst_plugin_get_origin (VALUE self)
+rg_origin (VALUE self)
 {
-	return CSTR2RVAL (gst_plugin_get_origin ( RGST_PLUGIN (self)));
+    return CSTR2RVAL (gst_plugin_get_origin ( RGST_PLUGIN (self)));
 }
 
 /* Method: name 
  * Returns: the unique name of the plugin.
  */
 static VALUE
-rb_gst_plugin_get_name (VALUE self)
+rg_name (VALUE self)
 {
-	return CSTR2RVAL (gst_plugin_get_name (RGST_PLUGIN (self)));
+    return CSTR2RVAL (gst_plugin_get_name (RGST_PLUGIN (self)));
 }
 
 /* Method: minor_version 
  * Returns: the minor version of the core this plugin was compiled for.
  */
 static VALUE
-rb_gst_plugin_get_minor_version (VALUE self)
+rg_minor_version (VALUE self)
 {
-	return INT2FIX (RGST_PLUGIN (self)->desc.minor_version);
+    return INT2FIX (RGST_PLUGIN (self)->desc.minor_version);
 }
 
 /* Method: major_version 
  * Returns: the major version of the core this plugin was compiled for.
  */
 static VALUE
-rb_gst_plugin_get_major_version (VALUE self)
+rg_major_version (VALUE self)
 {
-	return INT2FIX (RGST_PLUGIN (self)->desc.major_version);
+    return INT2FIX (RGST_PLUGIN (self)->desc.major_version);
 }
 
 /* Method: version
  * Returns: the version of the plugin (note: as a string).
  */
 static VALUE
-rb_gst_plugin_get_version (VALUE self)
+rg_version (VALUE self)
 {
-	return CSTR2RVAL (RGST_PLUGIN (self)->desc.version);
+    return CSTR2RVAL (RGST_PLUGIN (self)->desc.version);
 }
 
 /* Method: ==(plugin)
@@ -130,35 +131,32 @@ rb_gst_plugin_get_version (VALUE self)
  * false otherwise.
  */
 static VALUE
-rb_gst_plugin_is_equal (VALUE self, VALUE other_plugin)
+rg_operator_is_equal (VALUE self, VALUE other_plugin)
 {
-	return NIL_P (other_plugin)
-		? Qfalse
-		: rb_equal (rb_gst_plugin_get_filename (self),
-			    rb_gst_plugin_get_filename (other_plugin));
+    return NIL_P (other_plugin)
+                ? Qfalse
+                : rb_equal (rb_gst_plugin_get_filename (self),
+                        rb_gst_plugin_get_filename (other_plugin));
 }
 
 void
 Init_gst_plugin (void)
 {
-    VALUE rb_cGstPlugin;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstPlugin = G_DEF_CLASS(GST_TYPE_PLUGIN, "Plugin", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_PLUGIN, "Plugin", mGst);
 
-    rb_define_method(rb_cGstPlugin, "loaded?", rb_gst_plugin_is_loaded, 0);
-    rb_define_method(rb_cGstPlugin, "==", rb_gst_plugin_is_equal, 1);
+    RG_DEF_METHOD_P(loaded, 0);
+    RG_DEF_METHOD_OPERATOR("==", is_equal, 1);
 
-    rb_define_method(rb_cGstPlugin, "filename", rb_gst_plugin_get_filename, 0);
-    rb_define_method(rb_cGstPlugin, "major_version",
-                     rb_gst_plugin_get_major_version, 0);
-    rb_define_method(rb_cGstPlugin, "minor_version",
-                     rb_gst_plugin_get_minor_version, 0);
-    rb_define_method(rb_cGstPlugin, "name", rb_gst_plugin_get_name, 0);
-    rb_define_method(rb_cGstPlugin, "description",
-                     rb_gst_plugin_get_description, 0);
-    rb_define_method(rb_cGstPlugin, "version", rb_gst_plugin_get_version, 0);
-    rb_define_method(rb_cGstPlugin, "license", rb_gst_plugin_get_license, 0);
-    rb_define_method(rb_cGstPlugin, "source", get_source, 0);
-    rb_define_method(rb_cGstPlugin, "package", rb_gst_plugin_get_package, 0);
-    rb_define_method(rb_cGstPlugin, "origin", rb_gst_plugin_get_origin, 0);
+    RG_DEF_METHOD(filename, 0);
+    RG_DEF_METHOD(major_version, 0);
+    RG_DEF_METHOD(minor_version, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD(version, 0);
+    RG_DEF_METHOD(license, 0);
+    RG_DEF_METHOD(source, 0);
+    RG_DEF_METHOD(package, 0);
+    RG_DEF_METHOD(origin, 0);
 }

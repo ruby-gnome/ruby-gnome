@@ -23,6 +23,7 @@
 #include "rbgst.h"
 #include "rbgst-private.h"
 
+#define RG_TARGET_NAMESPACE cBin
 #define SELF(self) RVAL2GST_BIN(self)
 
 /* Class: Gst::Bin
@@ -42,7 +43,7 @@
  * Returns: a newly allocated Gst::Bin object.
  */
 static VALUE
-rb_gst_bin_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GstElement *bin;
     VALUE name;
@@ -61,7 +62,7 @@ rb_gst_bin_initialize(int argc, VALUE *argv, VALUE self)
  * Returns: the number of elements in the container.
  */
 static VALUE
-rb_gst_bin_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(GST_BIN_NUMCHILDREN(SELF(self)));
 }
@@ -76,7 +77,7 @@ rb_gst_bin_size(VALUE self)
  * implements the interface.
  */
 static VALUE
-rb_gst_bin_get_children(int argc, VALUE *argv, VALUE self)
+rg_children(int argc, VALUE *argv, VALUE self)
 {
     VALUE children, iface;
 
@@ -107,7 +108,7 @@ rb_gst_bin_get_children(int argc, VALUE *argv, VALUE self)
  * bins.
  */
 static VALUE
-rb_gst_bin_get_children_recurse(VALUE self)
+rg_children_recurse(VALUE self)
 {
    GstIterator *iter;
    VALUE children;
@@ -119,19 +120,19 @@ rb_gst_bin_get_children_recurse(VALUE self)
 }
 
 static VALUE
-rb_gst_bin_get_children_cookie(VALUE self)
+rg_children_cookie(VALUE self)
 {
     return UINT2NUM(GST_BIN_CHILDREN_COOKIE(SELF(self)));
 }
 
 static VALUE
-rb_gst_bin_get_child_bus(VALUE self)
+rg_child_bus(VALUE self)
 {
     return GST_BUS2RVAL(SELF(self)->child_bus);
 }
 
 static VALUE
-rb_gst_bin_get_messages(VALUE self)
+rg_messages(VALUE self)
 {
     GList *node;
     VALUE messages;
@@ -145,13 +146,13 @@ rb_gst_bin_get_messages(VALUE self)
 }
 
 static VALUE
-rb_gst_bin_polling_p(VALUE self)
+rg_polling_p(VALUE self)
 {
     return CBOOL2RVAL(SELF(self)->polling);
 }
 
 static VALUE
-rb_gst_bin_clock_dirty_p(VALUE self)
+rg_clock_dirty_p(VALUE self)
 {
     return CBOOL2RVAL(SELF(self)->clock_dirty);
 }
@@ -165,7 +166,7 @@ rb_gst_bin_clock_dirty_p(VALUE self)
  * Returns: a Gst::Clock object, or nil.
  */
 static VALUE
-rb_gst_bin_get_provided_clock(VALUE self)
+rg_provided_clock(VALUE self)
 {
     return GST_CLOCK2RVAL(SELF(self)->provided_clock);
 }
@@ -180,7 +181,7 @@ rb_gst_bin_get_provided_clock(VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_bin_set_provided_clock(VALUE self, VALUE clock)
+rg_set_provided_clock(VALUE self, VALUE clock)
 {
     GstBin *bin;
 
@@ -196,7 +197,7 @@ rb_gst_bin_set_provided_clock(VALUE self, VALUE clock)
 }
 
 static VALUE
-rb_gst_bin_get_clock_provider(VALUE self)
+rg_clock_provider(VALUE self)
 {
     return GST_ELEMENT2RVAL(SELF(self)->clock_provider);
 }
@@ -210,7 +211,7 @@ rb_gst_bin_get_clock_provider(VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_bin_add(VALUE self, VALUE element)
+rg_operator_add(VALUE self, VALUE element)
 {
     VALUE klass = GTYPE2CLASS(GST_TYPE_ELEMENT);
 
@@ -231,7 +232,7 @@ rb_gst_bin_add(VALUE self, VALUE element)
  * Returns: nil.
  */
 static VALUE
-rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
+rg_add(int argc, VALUE *argv, VALUE self)
 {
     int i;
 
@@ -240,7 +241,6 @@ rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
     }
     return Qnil;
 }
-
 
 /*
  * Method: remove(*elements)
@@ -252,7 +252,7 @@ rb_gst_bin_add_multi(int argc, VALUE *argv, VALUE self)
  * Returns: nil.
  */
 static VALUE
-rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
+rg_remove(int argc, VALUE *argv, VALUE self)
 {
     int i;
     GstBin *bin;
@@ -273,7 +273,7 @@ rb_gst_bin_remove(int argc, VALUE *argv, VALUE self)
  * Returns: nil.
  */
 static VALUE
-rb_gst_bin_clear(VALUE self)
+rg_clear(VALUE self)
 {
     GstBin *bin;
     GList *node, *children;
@@ -297,7 +297,7 @@ rb_gst_bin_clear(VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_bin_each_element(int argc, VALUE *argv, VALUE self)
+rg_each(int argc, VALUE *argv, VALUE self)
 {
     return rb_ary_yield(rb_gst_bin_get_children(argc, argv, self));
 }
@@ -311,7 +311,7 @@ rb_gst_bin_each_element(int argc, VALUE *argv, VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_bin_each_recurse_element(VALUE self)
+rg_each_recurse(VALUE self)
 {
     return rb_ary_yield(rb_gst_bin_get_children_recurse(self));
 }
@@ -341,7 +341,7 @@ rb_gst_bin_each_recurse_element(VALUE self)
  * an element with the given name nor implementing the interface.
  */
 static VALUE
-rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
+rg_get_child(int argc, VALUE *argv, VALUE self)
 {
     VALUE index_or_name_or_interface, recurse;
     GstElement *element = NULL;
@@ -375,27 +375,27 @@ rb_gst_bin_get(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rb_gst_bin_get_sinks(VALUE self)
+rg_sinks(VALUE self)
 {
     return _rbgst_collect_elements(gst_bin_iterate_sinks(SELF(self)));
 }
 
 static VALUE
-rb_gst_bin_get_sources(VALUE self)
+rg_sources(VALUE self)
 {
     return _rbgst_collect_elements(gst_bin_iterate_sources(SELF(self)));
 }
 
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
 static VALUE
-rb_gst_bin_to_dot_file(VALUE self, VALUE details, VALUE filename)
+rg_to_dot_file(VALUE self, VALUE details, VALUE filename)
 {
     GST_DEBUG_BIN_TO_DOT_FILE(SELF(self), NUM2INT(details), RVAL2CSTR(filename));
     return Qnil;
 }
 
 static VALUE
-rb_gst_bin_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
+rg_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
 {
     GST_DEBUG_BIN_TO_DOT_FILE_WITH_TS(SELF(self),
                                       NUM2INT(details),
@@ -407,61 +407,53 @@ rb_gst_bin_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
 void
 Init_gst_bin (void)
 {
-    VALUE rb_cGstBin;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstBin = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
 
-    rb_include_module(rb_cGstBin, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_method(rb_cGstBin, "initialize", rb_gst_bin_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 
-    rb_define_method(rb_cGstBin, "size", rb_gst_bin_size, 0);
-    rb_define_alias(rb_cGstBin, "length", "size");
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_ALIAS("length", "size");
 
-    rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, -1);
-    rb_define_method(rb_cGstBin, "each", rb_gst_bin_each_element, -1);
+    RG_DEF_METHOD(children, -1);
+    RG_DEF_METHOD(each, -1);
 
-    rb_define_method(rb_cGstBin, "children_recurse", 
-                     rb_gst_bin_get_children_recurse, 0);
-    rb_define_method(rb_cGstBin, "each_recurse", 
-                     rb_gst_bin_each_recurse_element, 0);
+    RG_DEF_METHOD(children_recurse, 0);
+    RG_DEF_METHOD(each_recurse, 0);
 
-    rb_define_method(rb_cGstBin, "children_cookie",
-                     rb_gst_bin_get_children_cookie, 0);
-    rb_define_method(rb_cGstBin, "child_bus", rb_gst_bin_get_child_bus, 0);
-    rb_define_method(rb_cGstBin, "messages", rb_gst_bin_get_messages, 0);
-    rb_define_method(rb_cGstBin, "polling?", rb_gst_bin_polling_p, 0);
-    rb_define_method(rb_cGstBin, "clock_dirty?", rb_gst_bin_clock_dirty_p, 0);
-    rb_define_method(rb_cGstBin, "provided_clock",
-                     rb_gst_bin_get_provided_clock, 0);
-    rb_define_method(rb_cGstBin, "set_provided_clock",
-                     rb_gst_bin_set_provided_clock, 1);
-    rb_define_method(rb_cGstBin, "clock_provider",
-                     rb_gst_bin_get_clock_provider, 0);
+    RG_DEF_METHOD(children_cookie, 0);
+    RG_DEF_METHOD(child_bus, 0);
+    RG_DEF_METHOD(messages, 0);
+    RG_DEF_METHOD_P(polling, 0);
+    RG_DEF_METHOD_P(clock_dirty, 0);
+    RG_DEF_METHOD(provided_clock, 0);
+    RG_DEF_METHOD(set_provided_clock, 1);
+    RG_DEF_METHOD(clock_provider, 0);
 
+    RG_DEF_METHOD_OPERATOR("<<", add, 1);
+    RG_DEF_METHOD(add, -1);
+    RG_DEF_METHOD(remove, -1);
+    RG_DEF_METHOD(clear, 0);
 
-    rb_define_method(rb_cGstBin, "<<", rb_gst_bin_add, 1);
-    rb_define_method(rb_cGstBin, "add", rb_gst_bin_add_multi, -1);
-    rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
-    rb_define_method(rb_cGstBin, "clear", rb_gst_bin_clear, 0);
+    RG_DEF_METHOD(get_child, -1);
 
-    rb_define_method(rb_cGstBin, "get_child", rb_gst_bin_get, -1);
-
-    rb_define_method(rb_cGstBin, "sinks", rb_gst_bin_get_sinks, 0);
-    rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
+    RG_DEF_METHOD(sinks, 0);
+    RG_DEF_METHOD(sources, 0);
 
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
-    rb_define_method(rb_cGstBin, "to_dot_file", rb_gst_bin_to_dot_file, 2);
-    rb_define_method(rb_cGstBin, "to_dot_file_with_ts",
-                     rb_gst_bin_to_dot_file_with_ts, 2);
+    RG_DEF_METHOD(to_dot_file, 2);
+    RG_DEF_METHOD(to_dot_file_with_ts, 2);
 #endif
 
-    G_DEF_SETTERS(rb_cGstBin);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
-    G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_BIN_FLAGS, "GST_BIN_");
+    G_DEF_CLASS(GST_TYPE_BIN_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_BIN_FLAGS, "GST_BIN_");
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
-    G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_DEBUG_GRAPH_DETAILS,
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_DEBUG_GRAPH_DETAILS,
         "GST_DEBUG_GRAPH_");
 #endif
 }
