@@ -44,21 +44,6 @@ iview_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void        gtk_icon_view_set_model         (GtkIconView *icon_view,
-                                             GtkTreeModel *model);
-GtkTreeModel* gtk_icon_view_get_model       (GtkIconView *icon_view);
-void        gtk_icon_view_set_text_column   (GtkIconView *icon_view,
-                                             gint column);
-gint        gtk_icon_view_get_text_column   (GtkIconView *icon_view);
-void        gtk_icon_view_set_markup_column (GtkIconView *icon_view,
-                                             gint column);
-gint        gtk_icon_view_get_markup_column (GtkIconView *icon_view);
-void        gtk_icon_view_set_pixbuf_column (GtkIconView *icon_view,
-                                             gint column);
-gint        gtk_icon_view_get_pixbuf_column (GtkIconView *icon_view);
-*/
-
 static VALUE
 iview_get_path_at_pos(VALUE self, VALUE x, VALUE y)
 {
@@ -81,41 +66,6 @@ iview_selected_foreach(VALUE self)
                                    (gpointer)func);
     return self;
 }
-
-/* Defined as Properties 
-void        gtk_icon_view_set_selection_mode
-                                            (GtkIconView *icon_view,
-                                             GtkSelectionMode mode);
-GtkSelectionMode gtk_icon_view_get_selection_mode
-                                            (GtkIconView *icon_view);
-void        gtk_icon_view_set_orientation   (GtkIconView *icon_view,
-                                             GtkOrientation orientation);
-GtkOrientation gtk_icon_view_get_orientation
-                                            (GtkIconView *icon_view);
-void        gtk_icon_view_set_columns       (GtkIconView *icon_view,
-                                             gint columns);
-gint        gtk_icon_view_get_columns       (GtkIconView *icon_view);
-void        gtk_icon_view_set_item_width    (GtkIconView *icon_view,
-                                             gint item_width);
-gint        gtk_icon_view_get_item_width    (GtkIconView *icon_view);
-void        gtk_icon_view_set_spacing       (GtkIconView *icon_view,
-                                             gint spacing);
-gint        gtk_icon_view_get_spacing       (GtkIconView *icon_view);
-void        gtk_icon_view_set_row_spacing   (GtkIconView *icon_view,
-                                             gint row_spacing);
-gint        gtk_icon_view_get_row_spacing   (GtkIconView *icon_view);
-void        gtk_icon_view_set_column_spacing
-                                            (GtkIconView *icon_view,
-                                             gint column_spacing);
-gint        gtk_icon_view_get_column_spacing
-                                            (GtkIconView *icon_view);
-void        gtk_icon_view_set_margin        (GtkIconView *icon_view,
-                                             gint margin);
-gint        gtk_icon_view_get_margin        (GtkIconView *icon_view);
-void        gtk_icon_view_set_reorderable   (GtkIconView *icon_view,
-                                             gboolean reorderable);
-gboolean    gtk_icon_view_get_reorderable   (GtkIconView *icon_view);
-*/
 
 static VALUE
 iview_select_path(VALUE self, VALUE path)
@@ -148,11 +98,6 @@ iview_get_selected_items(VALUE self)
     g_list_free(list);
     return ret;
 }
-
-/* Defined as Signals
-void                gtk_icon_view_select_all            (GtkIconView *icon_view);
-void                gtk_icon_view_unselect_all          (GtkIconView *icon_view);
-*/
  
 static VALUE
 iview_item_activated(VALUE self, VALUE path)

@@ -91,16 +91,6 @@ mshell_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
     return self;
 }
 
-/* Defined as Signals
-void                gtk_menu_shell_cancel               (GtkMenuShell *menu_shell);
-*/
-
-/* Defined as properties
-void        gtk_menu_shell_set_take_focus   (GtkMenuShell *menu_shell,
-                                             gboolean take_focus);
-gboolean    gtk_menu_shell_get_take_focus   (GtkMenuShell *menu_shell);
-*/
-
 void 
 Init_gtk_menu_shell(void)
 {

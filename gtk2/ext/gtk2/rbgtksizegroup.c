@@ -46,14 +46,6 @@ sizegrp_remove_widget(VALUE self, VALUE widget)
     return self;
 }
 
-/* Defined as properties
-void        gtk_size_group_set_ignore_hidden
-                                            (GtkSizeGroup *size_group,
-                                             gboolean ignore_hidden);
-gboolean    gtk_size_group_get_ignore_hidden
-                                            (GtkSizeGroup *size_group);
-*/
-
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 sizegrp_get_widgets(VALUE self)

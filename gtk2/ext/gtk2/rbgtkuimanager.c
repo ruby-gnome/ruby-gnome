@@ -34,12 +34,6 @@ rbuimanager_initialize(VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties.
-void        gtk_ui_manager_set_add_tearoffs (GtkUIManager *self,
-                                             gboolean add_tearoffs);
-gboolean    gtk_ui_manager_get_add_tearoffs (GtkUIManager *self);
-*/
-
 static VALUE
 rbuimanager_insert_action_group(VALUE self, VALUE action_group, VALUE pos)
 {
@@ -145,10 +139,6 @@ rbuimanager_remove_ui(VALUE self, VALUE merge_id)
     gtk_ui_manager_remove_ui(_SELF(self), NUM2UINT(merge_id));
     return self;
 }
-
-/* Defined as Properties
-gchar*      gtk_ui_manager_get_ui           (GtkUIManager *self);
-*/
 
 static VALUE
 rbuimanager_ensure_update(VALUE self)

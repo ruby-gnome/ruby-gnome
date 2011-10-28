@@ -43,52 +43,6 @@ gobj_get_type_name(VALUE self)
     return CSTR2RVAL(GTK_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
 }
 
-/*
-They are all Deprecated.
-void        gtk_object_get                  (GtkObject *object,
-                                             const gchar *first_property_name,
-                                             ...);
-void        gtk_object_set                  (GtkObject *object,
-                                             const gchar *first_property_name,
-                                             ...);
-void        gtk_object_set_data             (GtkObject *object,
-                                             const gchar *key,
-                                             gpointer data);
-void        gtk_object_set_data_full        (GtkObject *object,
-                                             const gchar *key,
-                                             gpointer data,
-                                             GtkDestroyNotify destroy);
-void        gtk_object_remove_data          (GtkObject *object,
-                                             const gchar *key);
-gpointer    gtk_object_get_data             (GtkObject *object,
-                                             const gchar *key);
-void        gtk_object_remove_no_notify     (GtkObject *object,
-                                             const gchar *key);
-void        gtk_object_set_user_data        (GtkObject *object,
-                                             gpointer data);
-gpointer    gtk_object_get_user_data        (GtkObject *object);
-void        gtk_object_add_arg_type         (const gchar *arg_name,
-                                             GtkType arg_type,
-                                             guint arg_flags,
-                                             guint arg_id);
-void        gtk_object_set_data_by_id       (GtkObject *object,
-                                             GQuark data_id,
-                                             gpointer data);
-void        gtk_object_set_data_by_id_full  (GtkObject *object,
-                                             GQuark data_id,
-                                             gpointer data,
-                                             GtkDestroyNotify destroy);
-gpointer    gtk_object_get_data_by_id       (GtkObject *object,
-                                             GQuark data_id);
-void        gtk_object_remove_data_by_id    (GtkObject *object,
-                                             GQuark data_id);
-void        gtk_object_remove_no_notify_by_id
-                                            (GtkObject *object,
-                                             GQuark key_id);
-#define     gtk_object_data_try_key
-#define     gtk_object_data_force_id
-*/
-
 static VALUE
 gobj_destroy(VALUE self)
 {

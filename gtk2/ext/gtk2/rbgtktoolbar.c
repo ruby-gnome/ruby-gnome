@@ -233,11 +233,6 @@ tbar_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
                                         NUM2INT(index));
     return self;
 }
-/* Defined as Properties
-void        gtk_toolbar_set_show_arrow      (GtkToolbar *toolbar,
-                                             gboolean show_arrow);
-gboolean    gtk_toolbar_get_show_arrow      (GtkToolbar *toolbar);
-*/
 
 static VALUE
 tbar_get_relief_style(VALUE self)
@@ -266,15 +261,6 @@ tbar_insert_space(VALUE self, VALUE pos)
     gtk_toolbar_insert_space(_SELF(self), NUM2INT(pos));
     return self;
 }
-
-/* Defined as Properties:
-void                gtk_toolbar_set_tooltips            (GtkToolbar *toolbar,
-                                                         gboolean enable);
-void                gtk_toolbar_set_icon_size           (GtkToolbar *toolbar,
-                                                         GtkIconSize icon_size);
-GtkIconSize         gtk_toolbar_get_icon_size           (GtkToolbar *toolbar);
-gboolean            gtk_toolbar_get_tooltips            (GtkToolbar *toolbar);
-*/
 
 static VALUE
 tbar_remove_space(VALUE self, VALUE position)

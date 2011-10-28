@@ -63,17 +63,6 @@ scalebutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void                gtk_scale_button_set_adjustment     (GtkScaleButton *button,
-                                                         GtkAdjustment *adjustment);
-void                gtk_scale_button_set_icons          (GtkScaleButton *button,
-                                                         const gchar **icons);
-void                gtk_scale_button_set_value          (GtkScaleButton *button,
-                                                         gdouble value);
-GtkAdjustment *     gtk_scale_button_get_adjustment     (GtkScaleButton *button);
-gdouble             gtk_scale_button_get_value          (GtkScaleButton *button);
-*/
-
 #endif
 
 void 

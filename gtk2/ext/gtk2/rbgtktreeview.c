@@ -235,12 +235,6 @@ treeview_get_cursor(VALUE self)
                        GOBJ2RVAL(focus_column));
 }
 
-/* Defined as Signals
-void                gtk_tree_view_row_activated         (GtkTreeView *tree_view,
-                                                         GtkTreePath *path,
-                                                         GtkTreeViewColumn *column);
-*/
-
 static VALUE
 treeview_expand_all(VALUE self)
 {
@@ -591,22 +585,6 @@ treeview_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE fo
 }
 #endif
 
-/* Defined as Property.
-gboolean    gtk_tree_view_get_fixed_height_mode
-                                            (GtkTreeView *tree_view);
-void        gtk_tree_view_set_fixed_height_mode
-                                            (GtkTreeView *tree_view,
-                                             gboolean enable);
-gboolean    gtk_tree_view_get_hover_selection
-                                            (GtkTreeView *tree_view);
-void        gtk_tree_view_set_hover_selection
-                                            (GtkTreeView *tree_view,
-                                             gboolean hover);
-gboolean    gtk_tree_view_get_hover_expand  (GtkTreeView *tree_view);
-void        gtk_tree_view_set_hover_expand  (GtkTreeView *tree_view,
-                                             gboolean expand);
-*/
-
 /* How can I implement this?
 GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
                                             (GtkTreeView *tree_view);
@@ -702,30 +680,6 @@ treeview_set_search_position_func(VALUE self)
 }
 
 #endif
-/* Defined as properties
-gboolean    gtk_tree_view_get_headers_clickable
-                                            (GtkTreeView *tree_view);
-void        gtk_tree_view_set_headers_clickable
-                                            (GtkTreeView *tree_view,
-                                             gboolean setting);
-gboolean    gtk_tree_view_get_rubber_banding
-                                            (GtkTreeView *tree_view);
-void        gtk_tree_view_set_rubber_banding
-                                            (GtkTreeView *tree_view,
-                                             gboolean enable);
-gboolean    gtk_tree_view_get_enable_tree_lines
-                                            (GtkTreeView *tree_view);
-void        gtk_tree_view_set_enable_tree_lines
-                                            (GtkTreeView *tree_view,
-                                             gboolean enabled);
-
-// Use Gtk::TreeView#enable_grid_lines, #set_enable_grid_lines instead.
-GtkTreeViewGridLines gtk_tree_view_get_grid_lines
-                                            (GtkTreeView *tree_view);
-
-void        gtk_tree_view_set_grid_lines    (GtkTreeView *tree_view,
-                                             GtkTreeViewGridLines grid_lines);
-*/
 
 void 
 Init_gtk_treeview(void)

@@ -59,17 +59,6 @@ action_is_visible(VALUE self)
     return CBOOL2RVAL(gtk_action_is_visible(_SELF(self)));
 }
 
-/* Defined as property.
-const gchar* gtk_action_get_name            (GtkAction *action);
-gboolean    gtk_action_get_sensitive        (GtkAction *action);
-void                gtk_action_set_sensitive            (GtkAction *action,
-                                                         gboolean
-                                                         sensitive);
-gboolean    gtk_action_get_visible          (GtkAction *action);
-void                gtk_action_set_visible              (GtkAction *action,
-                                                         gboolean visible);
-*/
-
 static VALUE
 action_activate(VALUE self)
 {

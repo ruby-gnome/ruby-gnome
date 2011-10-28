@@ -45,23 +45,6 @@ gslist2ary_free(GSList* list)
     return ary;
 }
 
-/*  They are defined as properties
-    gtk_file_chooser_set_action(_SELF(self), RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION));
-    gtk_file_chooser_get_action(_SELF(self));
-    gtk_file_chooser_set_local_only(_SELF(self), RVAL2CBOOL(local));
-    gtk_file_chooser_get_local_only(_SELF(self));
-    gtk_file_chooser_set_select_multiple(_SELF(self), RVAL2CBOOL(multiple));
-    gtk_file_chooser_get_select_multiple(_SELF(self));
-*/
-
-/*  Defined as Property
-void        gtk_file_chooser_set_show_hidden
-                                            (GtkFileChooser *chooser,
-                                             gboolean show_hidden);
-gboolean    gtk_file_chooser_get_show_hidden
-                                            (GtkFileChooser *chooser);
-*/
-
 static VALUE
 fcho_set_current_name(VALUE self, VALUE name)
 {
@@ -189,15 +172,6 @@ fcho_get_current_folder_uri(VALUE self)
     return CSTR2RVAL_FREE(gtk_file_chooser_get_current_folder_uri(_SELF(self)));
 }
 
-/* They are defined as properties.
-    gtk_file_chooser_set_preview_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget));
-    gtk_file_chooser_get_preview_widget(_SELF(self)));
-    gtk_file_chooser_set_preview_widget_active(_SELF(self), RVAL2CBOOL(active));
-    gtk_file_chooser_get_preview_widget_active(_SELF(self));
-    gtk_file_chooser_set_use_preview_label(_SELF(self), RVAL2CBOOL(label));
-    gtk_file_chooser_get_use_preview_label(_SELF(self));
-*/
-
 static VALUE
 fcho_get_preview_filename(VALUE self)
 {
@@ -209,11 +183,6 @@ fcho_get_preview_uri(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_file_chooser_get_preview_uri(_SELF(self)));
 }
-
-/* They are defined as properties.
-    gtk_file_chooser_set_extra_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
-    gtk_file_chooser_get_extra_widget(_SELF(self));
-*/
 
 static VALUE
 fcho_add_filter(VALUE self, VALUE filter)
@@ -234,12 +203,6 @@ fcho_list_filters(VALUE self)
 {
     return GSLIST2ARYF(gtk_file_chooser_list_filters(_SELF(self)));
 }
-
-/*
-  They are defined as property.
-    gtk_file_chooser_set_filter(_SELF(self), GTK_FILE_FILTER(RVAL2GOBJ(filter)));
-    gtk_file_chooser_get_filter(_SELF(self));
-*/
 
 static VALUE
 fcho_add_shortcut_folder(VALUE self, VALUE rbfolder)
@@ -298,14 +261,6 @@ fcho_list_shortcut_folder_uris(VALUE self)
     return gslist2ary_free(gtk_file_chooser_list_shortcut_folder_uris(_SELF(self)));
 }
 #endif
-
-/* Properties.
-void        gtk_file_chooser_set_do_overwrite_confirmation
-                                            (GtkFileChooser *chooser,
-                                             gboolean do_overwrite_confirmation);
-gboolean    gtk_file_chooser_get_do_overwrite_confirmation
-                                           (GtkFileChooser *chooser);
-*/
 
 void 
 Init_gtk_file_chooser(void)

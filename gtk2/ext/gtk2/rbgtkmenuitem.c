@@ -52,13 +52,6 @@ mitem_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void                gtk_menu_item_set_right_justified   (GtkMenuItem *menu_item,
-                                                         gboolean right_justified);
-gboolean            gtk_menu_item_get_right_justified   (GtkMenuItem *menu_item);
-GtkWidget *         gtk_menu_item_get_submenu           (GtkMenuItem *menu_item);
-*/
-
 static VALUE
 mitem_set_submenu(VALUE self, VALUE child)
 {
@@ -75,11 +68,6 @@ mitem_set_submenu(VALUE self, VALUE child)
     return self;
 }
 
-/* Defined as Properties
-void                gtk_menu_item_set_accel_path        (GtkMenuItem *menu_item,
-                                                         const gchar *accel_path);
-*/
-
 static VALUE
 mitem_remove_submenu(VALUE self)
 {
@@ -94,12 +82,6 @@ mitem_remove_submenu(VALUE self)
 
     return self;
 }
-
-/* Defined as Signals
-void                gtk_menu_item_select                (GtkMenuItem *menu_item);
-void                gtk_menu_item_deselect              (GtkMenuItem *menu_item);
-void                gtk_menu_item_activate              (GtkMenuItem *menu_item);
-*/
 
 static VALUE
 mitem_toggle_size_request(VALUE self)

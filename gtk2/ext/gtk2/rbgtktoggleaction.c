@@ -51,11 +51,6 @@ taction_toggled(VALUE self)
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_toggle_action_set_active        (GtkToggleAction *action,
-                                                         gboolean is_active);
-gboolean            gtk_toggle_action_get_active        (GtkToggleAction *action);
-*/
 #endif
 
 void 

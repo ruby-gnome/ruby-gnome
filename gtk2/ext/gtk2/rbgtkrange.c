@@ -27,37 +27,6 @@
 #define RG_TARGET_NAMESPACE cRange
 #define _SELF(self) (GTK_RANGE(RVAL2GOBJ(self)))
 
-/* Defined as Properties 
-GtkAdjustment* gtk_range_get_adjustment     (GtkRange *range);
-void        gtk_range_set_adjustment        (GtkRange *range,
-                                             GtkAdjustment *adjustment);
-void        gtk_range_set_update_policy     (GtkRange *range,
-                                             GtkUpdateType policy);
-GtkUpdateType gtk_range_get_update_policy   (GtkRange *range);
-gboolean    gtk_range_get_inverted          (GtkRange *range);
-void        gtk_range_set_inverted          (GtkRange *range,
-                                             gboolean setting);
-void        gtk_range_set_upper_stepper_sensitivity
-                                            (GtkRange *range,
-                                             GtkSensitivityType sensitivity);
-GtkSensitivityType gtk_range_get_upper_stepper_sensitivity
-                                            (GtkRange *range);
-void        gtk_range_set_lower_stepper_sensitivity
-                                            (GtkRange *range,
-                                             GtkSensitivityType sensitivity);
-GtkSensitivityType gtk_range_get_lower_stepper_sensitivity
-                                            (GtkRange *range);
-void               gtk_range_set_show_fill_level           (GtkRange      *range,
-                                                            gboolean       show_fill_level);
-gboolean           gtk_range_get_show_fill_level           (GtkRange      *range);
-void               gtk_range_set_restrict_to_fill_level    (GtkRange      *range,
-                                                            gboolean       restrict_to_fill_level);
-gboolean           gtk_range_get_restrict_to_fill_level    (GtkRange      *range);
-void               gtk_range_set_fill_level                (GtkRange      *range,
-                                                            gdouble        fill_level);
-gdouble            gtk_range_get_fill_level                (GtkRange      *range);
-*/
-
 static VALUE
 range_get_value(VALUE self)
 {

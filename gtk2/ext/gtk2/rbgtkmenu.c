@@ -109,15 +109,6 @@ menu_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_t
     return self;
 }
 
-/* Defined as Properties
-gboolean            gtk_menu_get_tearoff_state          (GtkMenu *menu);
-void                gtk_menu_set_accel_group            (GtkMenu *menu,
-                                                         GtkAccelGroup *accel_group);
-GtkAccelGroup *     gtk_menu_get_accel_group            (GtkMenu *menu);
-void                gtk_menu_set_accel_path             (GtkMenu *menu,
-                                                         const gchar *accel_path);
-*/
-
 static VALUE
 menu_popdown(VALUE self)
 {
@@ -132,16 +123,6 @@ menu_reposition(VALUE self)
     return self;
 }
 
-/* Defined as Properties
-GtkWidget *         gtk_menu_get_active                 (GtkMenu *menu);
-void                gtk_menu_set_active                 (GtkMenu *menu,
-                                                         guint index_);
-void                gtk_menu_set_tearoff_state          (GtkMenu *menu,
-                                                         gboolean torn_off);
-void                gtk_menu_set_monitor                (GtkMenu *menu,
-                                                         gint monitor_num);
-gint                gtk_menu_get_monitor                (GtkMenu *menu);
-*/
 static VALUE menu_detacher;
 static void
 detach_func(GtkWidget *attach_widget, GtkMenu *menu)
@@ -167,10 +148,6 @@ menu_detach(VALUE self)
     gtk_menu_detach(_SELF(self));
     return self;
 }
-
-/* Defined as Properties
-GtkWidget *         gtk_menu_get_attach_widget          (GtkMenu *menu);
-*/
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE

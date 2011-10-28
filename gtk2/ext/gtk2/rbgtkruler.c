@@ -27,12 +27,6 @@
 #define RG_TARGET_NAMESPACE cRuler
 #define _SELF(self) (GTK_RULER(RVAL2GOBJ(self)))
 
-/* Defined as Properties
-void                gtk_ruler_set_metric                (GtkRuler *ruler,
-                                                         GtkMetricType metric);
-GtkMetricType       gtk_ruler_get_metric                (GtkRuler *ruler);
-*/
-
 static VALUE
 ruler_set_range(VALUE self, VALUE lower, VALUE upper, VALUE position, VALUE max_size)
 {

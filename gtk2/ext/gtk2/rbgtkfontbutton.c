@@ -43,29 +43,6 @@ fontbutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as property.
-gboolean    gtk_font_button_set_font_name   (GtkFontButton *font_button,
-                                             const gchar *fontname);
-G_CONST_RETURN gchar* gtk_font_button_get_font_name
-                                            (GtkFontButton *font_button);
-void        gtk_font_button_set_show_style  (GtkFontButton *font_button,
-                                             gboolean show_style);
-gboolean    gtk_font_button_get_show_style  (GtkFontButton *font_button);
-void        gtk_font_button_set_show_size   (GtkFontButton *font_button,
-                                             gboolean show_size);
-gboolean    gtk_font_button_get_show_size   (GtkFontButton *font_button);
-void        gtk_font_button_set_use_font    (GtkFontButton *font_button,
-                                             gboolean use_font);
-gboolean    gtk_font_button_get_use_font    (GtkFontButton *font_button);
-void        gtk_font_button_set_use_size    (GtkFontButton *font_button,
-                                             gboolean use_size);
-gboolean    gtk_font_button_get_use_size    (GtkFontButton *font_button);
-void        gtk_font_button_set_title       (GtkFontButton *font_button,
-                                             const gchar *title);
-G_CONST_RETURN gchar* gtk_font_button_get_title
-                                            (GtkFontButton *font_button);
-*/
-
 #endif
 
 void 

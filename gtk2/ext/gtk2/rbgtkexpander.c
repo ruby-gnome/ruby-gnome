@@ -42,27 +42,7 @@ expander_initialize(int argc, VALUE *argv, VALUE self)
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-/* Defined as Property.
-void        gtk_expander_set_expanded       (GtkExpander *expander,
-                                             gboolean expanded);
-gboolean    gtk_expander_get_expanded       (GtkExpander *expander);
-void        gtk_expander_set_spacing        (GtkExpander *expander,
-                                             gint spacing);
-gint        gtk_expander_get_spacing        (GtkExpander *expander);
-void        gtk_expander_set_label          (GtkExpander *expander,
-                                             const gchar *label);
-G_CONST_RETURN gchar* gtk_expander_get_label
-                                            (GtkExpander *expander);
-void        gtk_expander_set_use_underline  (GtkExpander *expander,
-                                             gboolean use_underline);
-gboolean    gtk_expander_get_use_underline  (GtkExpander *expander);
-void        gtk_expander_set_use_markup     (GtkExpander *expander,
-                                             gboolean use_markup);
-gboolean    gtk_expander_get_use_markup     (GtkExpander *expander);
-void        gtk_expander_set_label_widget   (GtkExpander *expander,
-                                             GtkWidget *label_widget);
-GtkWidget*  gtk_expander_get_label_widget   (GtkExpander *expander);
- */
+
 #endif
 
 void 

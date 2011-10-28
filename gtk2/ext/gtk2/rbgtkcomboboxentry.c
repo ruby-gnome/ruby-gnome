@@ -50,13 +50,6 @@ comboboxentry_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as property.
-void        gtk_combo_box_entry_set_text_column
-                                            (GtkComboBoxEntry *entry_box,
-                                             gint text_column);
-gint        gtk_combo_box_entry_get_text_column
-                                            (GtkComboBoxEntry *entry_box);
-*/
 #endif
 
 void 

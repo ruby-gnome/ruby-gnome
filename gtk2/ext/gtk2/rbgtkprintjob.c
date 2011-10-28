@@ -51,18 +51,6 @@ pj_initialize(VALUE self, VALUE title, VALUE printer,
     return Qnil;
 }
 
-/* Defined as properties.
-GtkPrintSettings* gtk_print_job_get_settings
-                                            (GtkPrintJob *job);
-GtkPrinter* gtk_print_job_get_printer       (GtkPrintJob *job);
-const gchar* gtk_print_job_get_title        (GtkPrintJob *job);
-void        gtk_print_job_set_track_print_status
-                                            (GtkPrintJob *job,
-                                             gboolean track_status);
-gboolean    gtk_print_job_get_track_print_status
-                                            (GtkPrintJob *job);
-*/
-
 static VALUE
 pj_get_status(VALUE self)
 {

@@ -61,11 +61,6 @@ mdiag_set_markup(VALUE self, VALUE str)
 }
 #endif
 
-/* Defined as properties.
-void        gtk_message_dialog_set_image    (GtkMessageDialog *dialog,
-                                             GtkWidget *image);
-*/
-
 /* Not needed in Ruby
 void                gtk_message_dialog_format_secondary_text
                                                         (GtkMessageDialog *message_dialog,

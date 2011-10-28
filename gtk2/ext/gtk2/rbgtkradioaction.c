@@ -121,12 +121,6 @@ raction_get_current_value(VALUE self)
     
 #endif
 
-/* Defined as Properties
-void        gtk_radio_action_set_current_value
-                                            (GtkRadioAction *action,
-                                             gint current_value);
-*/
-
 void 
 Init_gtk_radio_action(void)
 {

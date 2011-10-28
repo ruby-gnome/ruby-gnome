@@ -367,53 +367,6 @@ signal_g2r_func(G_GNUC_UNUSED guint num, const GValue *values)
                        GVAL2RVAL(&values[2]));
 }
 
-/* Defined as the "page" property.
-*/
-
-/* Defined as properties
-// "enable-popup" property
-void        gtk_notebook_popup_enable       (GtkNotebook *notebook);
-void        gtk_notebook_popup_disable      (GtkNotebook *notebook);
-
-void        gtk_notebook_set_group_id       (GtkNotebook *notebook,
-                                             gint group_id);
-gint        gtk_notebook_get_group_id       (GtkNotebook *notebook);
-
-// "homogeneous" property
-void        gtk_notebook_set_homogeneous_tabs
-                                            (GtkNotebook *notebook,
-                                             gboolean homogeneous);
-// "page" property.
-#define     gtk_notebook_current_page
-#define     gtk_notebook_set_page
-gint        gtk_notebook_get_current_page   (GtkNotebook *notebook);
-void        gtk_notebook_set_current_page   (GtkNotebook *notebook,
-                                             gint page_num);
-
-gboolean    gtk_notebook_get_scrollable     (GtkNotebook *notebook);
-void        gtk_notebook_set_scrollable     (GtkNotebook *notebook,
-                                             gboolean scrollable);
-
-void        gtk_notebook_set_show_border    (GtkNotebook *notebook,
-                                             gboolean show_border);
-gboolean    gtk_notebook_get_show_border    (GtkNotebook *notebook);
-
-gboolean    gtk_notebook_get_show_tabs      (GtkNotebook *notebook);
-void        gtk_notebook_set_show_tabs      (GtkNotebook *notebook,
-                                             gboolean show_tabs);
-
-GtkPositionType gtk_notebook_get_tab_pos    (GtkNotebook *notebook);
-void        gtk_notebook_set_tab_pos        (GtkNotebook *notebook,
-                                             GtkPositionType pos);
-
-void        gtk_notebook_set_tab_hborder    (GtkNotebook *notebook,
-                                             guint tab_hborder);
-void        gtk_notebook_set_tab_border     (GtkNotebook *notebook,
-                                             guint border_width);
-void        gtk_notebook_set_tab_vborder    (GtkNotebook *notebook,
-                                             guint tab_vborder);
- */
-
 /*****************************************/
 
 void 

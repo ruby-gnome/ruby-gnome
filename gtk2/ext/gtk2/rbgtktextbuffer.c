@@ -60,10 +60,6 @@ txt_get_char_count(VALUE self)
     return INT2NUM(gtk_text_buffer_get_char_count(_SELF(self)));
 }
 
-/* Defined as Properties:
-GtkTextTagTable *   gtk_text_buffer_get_tag_table       (GtkTextBuffer *buffer);
-*/
-
 static VALUE
 txt_set_text(VALUE self, VALUE text)
 {
@@ -386,11 +382,6 @@ txt_deserialize_set_can_create_tags(VALUE self, VALUE format, VALUE can_create_t
     return self;
 }
 
-/* Defined as Properties
-GtkTargetList* gtk_text_buffer_get_copy_target_list
-                                            (GtkTextBuffer *buffer);
-*/
-
 static VALUE
 txt_get_deserialize_formats(VALUE self)
 {
@@ -404,11 +395,6 @@ txt_get_deserialize_formats(VALUE self)
     }
     return ary;
 }
-
-/* Defined as Properties
-GtkTargetList* gtk_text_buffer_get_paste_target_list
-                                            (GtkTextBuffer *buffer);
-*/
 
 static VALUE
 txt_get_serialize_formats(VALUE self)
@@ -598,11 +584,6 @@ txt_get_selection_bounds(VALUE self)
     gboolean ret = gtk_text_buffer_get_selection_bounds(_SELF(self), &start, &end);
     return rb_ary_new3(3, ITR2RVAL(&start), ITR2RVAL(&end), CBOOL2RVAL(ret));
 }
-
-/* Defined as a proprety
-gboolean    gtk_text_buffer_get_has_selection
-                                            (GtkTextBuffer *buffer);
-*/
 
 static VALUE
 txt_delete_selection(int argc, VALUE *argv, VALUE self)

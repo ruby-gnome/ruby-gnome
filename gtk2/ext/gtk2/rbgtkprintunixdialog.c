@@ -30,28 +30,6 @@
 #  define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type())
 #endif
 
-/* Defined as Properties
-void        gtk_print_unix_dialog_set_page_setup
-                                            (GtkPrintUnixDialog *dialog,
-                                             GtkPageSetup *page_setup);
-GtkPageSetup* gtk_print_unix_dialog_get_page_setup
-                                            (GtkPrintUnixDialog *dialog);
-void        gtk_print_unix_dialog_set_current_page
-                                            (GtkPrintUnixDialog *dialog,
-                                             gint current_page);
-gint        gtk_print_unix_dialog_get_current_page
-                                            (GtkPrintUnixDialog *dialog);
-
-void        gtk_print_unix_dialog_set_settings
-                                            (GtkPrintUnixDialog *dialog,
-                                             GtkPrintSettings *settings);
-GtkPrintSettings* gtk_print_unix_dialog_get_settings
-                                            (GtkPrintUnixDialog *dialog);
-
-GtkPrinter* gtk_print_unix_dialog_get_selected_printer
-                                            (GtkPrintUnixDialog *dialog);
-*/
-
 static VALUE
 pud_initialize(int argc, VALUE *argv, VALUE self)
 {

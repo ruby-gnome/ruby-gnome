@@ -62,12 +62,6 @@ cview_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Properties:
-void                gtk_cell_view_set_model             (GtkCellView *cell_view,
-                                                         GtkTreeModel *model);
-GtkTreeModel *      gtk_cell_view_get_model             (GtkCellView *cell_view);
-*/
-
 static VALUE
 cview_set_displayed_row(VALUE self, VALUE path)
 {

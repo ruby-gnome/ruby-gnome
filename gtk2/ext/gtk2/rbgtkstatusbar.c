@@ -64,12 +64,6 @@ statusbar_remove(VALUE self, VALUE cid, VALUE mid)
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_statusbar_set_has_resize_grip   (GtkStatusbar *statusbar,
-                                                         gboolean setting);
-gboolean            gtk_statusbar_get_has_resize_grip   (GtkStatusbar *statusbar);
-*/
-
 void 
 Init_gtk_statusbar(void)
 {

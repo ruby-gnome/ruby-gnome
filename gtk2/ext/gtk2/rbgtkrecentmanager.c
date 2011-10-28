@@ -111,12 +111,6 @@ rm_move_item(VALUE self, VALUE uri, VALUE new_uri)
     return self;
 }
 
-/* Defined as properties
-gint        gtk_recent_manager_get_limit    (GtkRecentManager *manager);
-void        gtk_recent_manager_set_limit    (GtkRecentManager *manager,
-                                             gint limit);
-*/
-
 static VALUE
 rm_get_items(VALUE self)
 {

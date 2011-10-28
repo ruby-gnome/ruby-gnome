@@ -46,18 +46,6 @@ p_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
     return Qnil;
 }
 
-/* Defined as properties
-gboolean    gtk_printer_accepts_ps          (GtkPrinter *printer);
-gboolean    gtk_printer_accepts_pdf         (GtkPrinter *printer);
-GtkPrintBackend* gtk_printer_get_backend    (GtkPrinter *printer);
-const gchar* gtk_printer_get_icon_name      (GtkPrinter *printer);
-gboolean    gtk_printer_is_virtual          (GtkPrinter *printer);
-const gchar* gtk_printer_get_name           (GtkPrinter *printer);
-const gchar* gtk_printer_get_state_message  (GtkPrinter *printer);
-const gchar* gtk_printer_get_location       (GtkPrinter *printer);
-gint        gtk_printer_get_job_count       (GtkPrinter *printer);
-*/
-
 static VALUE
 p_get_description(VALUE self)
 {

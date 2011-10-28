@@ -49,10 +49,6 @@ get_visible(VALUE self)
     return CBOOL2RVAL(gtk_text_mark_get_visible(_SELF(self)));
 }
 
-/* Defined as Properties:
-const gchar *       gtk_text_mark_get_name              (GtkTextMark *mark);
-*/
-
 static VALUE
 get_deleted(VALUE self)
 {
@@ -64,10 +60,6 @@ get_buffer(VALUE self)
 {
     return GOBJ2RVAL(gtk_text_mark_get_buffer(_SELF(self)));
 }
-
-/* Defined as Properties:
-gboolean            gtk_text_mark_get_left_gravity      (GtkTextMark *mark);
-*/
 
 void 
 Init_gtk_textmark(void)

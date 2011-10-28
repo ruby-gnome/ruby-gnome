@@ -124,24 +124,6 @@ gwin_set_geometry_hints(VALUE self, VALUE geometry_widget, VALUE geometry, VALUE
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_window_set_gravity              (GtkWindow *window,
-                                                         GdkGravity gravity);
-GdkGravity          gtk_window_get_gravity              (GtkWindow *window);
-void                gtk_window_set_transient_for        (GtkWindow *window,
-                                                         GtkWindow *parent);
-void                gtk_window_set_destroy_with_parent  (GtkWindow *window,
-                                                         gboolean setting);
-*/
-
-/* Define as Properties.
-void        gtk_window_set_screen           (GtkWindow *window,
-                                             GdkScreen *screen);
-GdkScreen*  gtk_window_get_screen           (GtkWindow *window);
-gboolean    gtk_window_is_active            (GtkWindow *window);
-gboolean    gtk_window_has_toplevel_focus   (GtkWindow *window);
-*/
-
 static VALUE
 gwin_s_list_toplevels(G_GNUC_UNUSED VALUE self)
 {
@@ -306,11 +288,6 @@ gwin_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VALUE
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_window_set_decorated            (GtkWindow *window,
-                                                         gboolean setting);
-*/
-
 static VALUE
 gwin_set_frame_dimensions(VALUE self, VALUE left, VALUE top, VALUE right, VALUE bottom)
 {
@@ -335,38 +312,6 @@ gwin_set_mnemonic_modifier(VALUE self, VALUE modifier)
     return self;
 }
 
-/* Defined as Properties
-void                gtk_window_set_decorated            (GtkWindow *window,
-                                                         gboolean setting);
-void                gtk_window_set_type_hint            (GtkWindow *window,
-                                                         GdkWindowTypeHint hint);
-void        gtk_window_set_skip_taskbar_hint
-                                            (GtkWindow *window,
-                                             gboolean setting);
-void        gtk_window_set_skip_pager_hint  (GtkWindow *window,
-                                             gboolean setting);
-void        gtk_window_set_accept_focus     (GtkWindow *window,
-                                             gboolean setting);
-
-gchar*      gtk_window_get_icon_name        (GtkWindow *window);
-void        gtk_window_set_icon_name        (GtkWindow *window,
-                                             const gchar *name);
-
-void        gtk_window_set_focus_on_map     (GtkWindow *window,
-                                             gboolean setting);
-gboolean    gtk_window_get_focus_on_map     (GtkWindow *window);
-
-void        gtk_window_set_urgency_hint     (GtkWindow *window,
-                                             gboolean setting);
-
-gboolean    gtk_window_get_deletable        (GtkWindow *window);
-
-void        gtk_window_set_deletable        (GtkWindow *window,
-                                             gboolean setting);
-gboolean            gtk_window_get_decorated            (GtkWindow *window);
-*/
-
-
 static VALUE
 gwin_s_get_default_icon_list(G_GNUC_UNUSED VALUE self)
 {
@@ -380,10 +325,6 @@ gwin_get_default_size(VALUE self)
     gtk_window_get_default_size(_SELF(self), &width, &height);
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
-
-/* Defined as Properties:
-gboolean            gtk_window_get_destroy_with_parent  (GtkWindow *window);
-*/
 
 static VALUE
 gwin_get_frame_dimensions(VALUE self)
@@ -422,12 +363,6 @@ gwin_get_position(VALUE self)
     gtk_window_get_position(_SELF(self), &root_x, &root_y);
     return rb_ary_new3(2, INT2NUM(root_x), INT2NUM(root_y));
 }
-
-/* Defined as Properties:
-const gchar *       gtk_window_get_role                 (GtkWindow *window);
-GtkWindow *         gtk_window_get_transient_for        (GtkWindow *window);
-GdkWindowTypeHint   gtk_window_get_type_hint            (GtkWindow *window);
-*/
 
 static VALUE
 gwin_get_size(VALUE self)

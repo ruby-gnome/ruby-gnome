@@ -47,12 +47,6 @@ toggletoolbutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties:
-void                gtk_toggle_tool_button_set_active   (GtkToggleToolButton *button,
-                                                         gboolean is_active);
-gboolean            gtk_toggle_tool_button_get_active   (GtkToggleToolButton *button);
-*/
-
 #endif
 
 void 

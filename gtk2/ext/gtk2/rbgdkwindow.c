@@ -250,10 +250,6 @@ gdkwin_clear_area(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-/* Obsolete
-   #define gdk_window_copy_area()
-*/
-
 static VALUE
 gdkwin_raise(VALUE self)
 {
@@ -578,10 +574,6 @@ gdkwin_set_static_gravities(VALUE self, VALUE use_static)
     return self;
 }
 
-/* Obsoleted.
-   void        gdk_window_set_hints            (GdkWindow *window,
-*/
-
 static VALUE
 gdkwin_set_title(VALUE self, VALUE title)
 {
@@ -604,17 +596,6 @@ gdkwin_set_back_pixmap(VALUE self, VALUE pixmap, VALUE parent_relative)
                                RVAL2CBOOL(parent_relative));
     return self;
 }
-
-/* Properties:
- *
- * void                gdk_window_set_cursor               (GdkWindow *window,
- *                                                          GdkCursor *cursor);
- * GdkCursor *         gdk_window_get_cursor               (GdkWindow *window);
- */
-
-/* Obsolete
-   #define     gdk_window_set_colormap
-*/
 
 static VALUE
 gdkwin_get_user_data(VALUE self)
@@ -726,13 +707,6 @@ gdkwin_get_frame_extents(VALUE self)
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
-/* Obsolete
-   #define     gdk_window_get_size
-   #define     gdk_window_get_visual
-   #define     gdk_window_get_colormap
-   #define     gdk_window_get_type
-*/
-
 static VALUE
 gdkwin_get_origin(VALUE self)
 {
@@ -740,13 +714,6 @@ gdkwin_get_origin(VALUE self)
     gdk_window_get_origin(_SELF(self), &x, &y);
     return rb_assoc_new(INT2NUM(x), INT2NUM(y));
 }
-
-/* Obsolete
-   gboolean    gdk_window_get_deskrelative_origin
-   (GdkWindow *window,
-   gint *x,
-   gint *y);
-*/
 
 static VALUE
 gdkwin_get_pointer(VALUE self)

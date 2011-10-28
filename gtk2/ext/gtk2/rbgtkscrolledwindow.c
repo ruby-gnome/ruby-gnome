@@ -110,32 +110,6 @@ scwin_get_placement(VALUE self)
 }
 #endif
 
-/* Defined as properties
-GtkAdjustment* gtk_scrolled_window_get_hadjustment
-                                            (GtkScrolledWindow *scrolled_window);
-GtkAdjustment* gtk_scrolled_window_get_vadjustment
-                                            (GtkScrolledWindow *scrolled_window);
-GtkWidget*  gtk_scrolled_window_get_hscrollbar
-                                            (GtkScrolledWindow *scrolled_window);
-GtkWidget*  gtk_scrolled_window_get_vscrollbar
-                                            (GtkScrolledWindow *scrolled_window);
-void        gtk_scrolled_window_add_with_viewport
-                                            (GtkScrolledWindow *scrolled_window,
-                                             GtkWidget *child);
-void        gtk_scrolled_window_set_shadow_type
-                                            (GtkScrolledWindow *scrolled_window,
-                                             GtkShadowType type);
-void        gtk_scrolled_window_set_hadjustment
-                                            (GtkScrolledWindow *scrolled_window,
-                                             GtkAdjustment *hadjustment);
-void        gtk_scrolled_window_set_vadjustment
-                                            (GtkScrolledWindow *scrolled_window,
-                                             GtkAdjustment *vadjustment);
-GtkShadowType gtk_scrolled_window_get_shadow_type
-                                            (GtkScrolledWindow *scrolled_window);
-
-*/
-
 
 void 
 Init_gtk_scrolled_window(void)

@@ -239,12 +239,6 @@ gdkscreen_set_font_options(VALUE self, VALUE options)
 }
 #endif
 
-/* Defined as properties
-void        gdk_screen_set_font_options     (GdkScreen *screen,
-                                             const cairo_font_options_t *options);
-gdouble     gdk_screen_get_resolution       (GdkScreen *screen);
- */
-
 static VALUE
 gdkscreen_get_active_window(VALUE self)
 {

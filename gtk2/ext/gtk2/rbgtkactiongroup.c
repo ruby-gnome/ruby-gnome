@@ -37,16 +37,6 @@ actiongroup_initialize(VALUE self, VALUE name)
     return Qnil;
 }
 
-/* Defined as properties
-const gchar* gtk_action_group_get_name      (GtkActionGroup *action_group);
-gboolean    gtk_action_group_get_sensitive  (GtkActionGroup *action_group);
-void        gtk_action_group_set_sensitive  (GtkActionGroup *action_group,
-                                             gboolean sensitive);
-gboolean    gtk_action_group_get_visible    (GtkActionGroup *action_group);
-void        gtk_action_group_set_visible    (GtkActionGroup *action_group,
-                                             gboolean visible);
-*/
-
 static VALUE
 actiongroup_get_action(VALUE self, VALUE action_name)
 {

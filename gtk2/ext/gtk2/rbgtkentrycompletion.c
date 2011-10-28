@@ -110,31 +110,6 @@ entryc_get_completion_prefix(VALUE self)
 }
 #endif
 
-/* Defined as property
-gint        gtk_entry_completion_get_text_column
-                                            (GtkEntryCompletion *completion);
-void        gtk_entry_completion_set_inline_completion
-                                            (GtkEntryCompletion *completion,
-                                             gboolean inline_completion);
-gboolean    gtk_entry_completion_get_inline_completion
-                                            (GtkEntryCompletion *completion);
-void        gtk_entry_completion_set_popup_completion
-                                            (GtkEntryCompletion *completion,
-                                             gboolean popup_completion);
-gboolean    gtk_entry_completion_get_popup_completion
-                                            (GtkEntryCompletion *completion);
-void        gtk_entry_completion_set_popup_set_width
-                                            (GtkEntryCompletion *completion,
-                                             gboolean popup_set_width);
-gboolean    gtk_entry_completion_get_popup_set_width
-                                            (GtkEntryCompletion *completion);
-void        gtk_entry_completion_set_popup_single_match
-                                            (GtkEntryCompletion *completion,
-                                             gboolean popup_single_match);
-gboolean    gtk_entry_completion_get_popup_single_match
-                                            (GtkEntryCompletion *completion);
-*/
-
 #endif
 
 void 

@@ -43,13 +43,6 @@ rcm_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as properties
-gboolean    gtk_recent_chooser_menu_get_show_numbers
-                                            (GtkRecentChooserMenu *menu);
-void        gtk_recent_chooser_menu_set_show_numbers
-                                            (GtkRecentChooserMenu *menu,
-                                             gboolean show_numbers);
-*/
 #endif
 
 void 

@@ -50,20 +50,6 @@ combobox_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as properties.
-void        gtk_combo_box_set_wrap_width    (GtkComboBox *combo_box,
-                                             gint width);
-void        gtk_combo_box_set_row_span_column
-                                            (GtkComboBox *combo_box,
-                                             gint row_span);
-void        gtk_combo_box_set_column_span_column
-                                            (GtkComboBox *combo_box,
-                                             gint column_span);
-gint        gtk_combo_box_get_active        (GtkComboBox *combo_box);
-void        gtk_combo_box_set_active        (GtkComboBox *combo_box,
-                                             gint index);
-*/
-
 static VALUE
 combobox_get_active_iter(VALUE self)
 {
@@ -83,12 +69,6 @@ combobox_set_active_iter(VALUE self, VALUE iter)
     gtk_combo_box_set_active_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
 }
-
-/* Defined as properties 
-GtkTreeModel* gtk_combo_box_get_model       (GtkComboBox *combo_box);
-void        gtk_combo_box_set_model         (GtkComboBox *combo_box,
-                                             GtkTreeModel *model);
-*/
 
 
 static VALUE
@@ -118,26 +98,8 @@ combobox_remove_text(VALUE self, VALUE position)
     gtk_combo_box_remove_text(_SELF(self), NUM2INT(position));
     return self;
 }
-    
-/* Defined as Signals
-void                gtk_combo_box_popup                 (GtkComboBox *combo_box);
-void                gtk_combo_box_popdown               (GtkComboBox *combo_box);
-*/
 
 #if GTK_CHECK_VERSION(2,6,0)
-/* Defined as Property
-void        gtk_combo_box_set_add_tearoffs  (GtkComboBox *combo_box,
-                                             gboolean add_tearoffs);
-gboolean    gtk_combo_box_get_add_tearoffs  (GtkComboBox *combo_box);
-gint        gtk_combo_box_get_column_span_column
-                                            (GtkComboBox *combo_box);
-gint        gtk_combo_box_get_wrap_width    (GtkComboBox *combo_box);
-
-gboolean    gtk_combo_box_get_focus_on_click
-                                            (GtkComboBox *combo);
-gint        gtk_combo_box_get_row_span_column
-                                            (GtkComboBox *combo_box);
- */
 
 static VALUE
 combobox_get_active_text(VALUE self)
@@ -175,19 +137,8 @@ combobox_set_row_separator_func(VALUE self)
     return self;
 }
 
-/* Defined as Properties
-void                gtk_combo_box_set_focus_on_click    (GtkComboBox *combo,
-                                                         gboolean focus_on_click);
- */
-
 #endif
 #endif
-
-/* Defined as Properties
-void        gtk_combo_box_set_title         (GtkComboBox *combo_box,
-                                             const gchar *title);
-const gchar* gtk_combo_box_get_title        (GtkComboBox *combo_box);
- */
 
 void 
 Init_gtk_combobox(void)

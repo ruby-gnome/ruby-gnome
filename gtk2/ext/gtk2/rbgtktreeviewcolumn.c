@@ -165,26 +165,12 @@ tvc_clear_attributes(VALUE self, VALUE cell)
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_tree_view_column_set_spacing    (GtkTreeViewColumn *tree_column,
-                                                         gint spacing);
-gint                gtk_tree_view_column_get_spacing    (GtkTreeViewColumn *tree_column);
-*/
-
 static VALUE
 tvc_clicked(VALUE self)
 {
     gtk_tree_view_column_clicked(_SELF(self));
     return self;
 }
-
-/* Defined as Properties:
-void                gtk_tree_view_column_set_sort_column_id
-                                                        (GtkTreeViewColumn *tree_column,
-                                                         gint sort_column_id);
-gint                gtk_tree_view_column_get_sort_column_id
-                                                        (GtkTreeViewColumn *tree_column);
-*/
 
 static VALUE
 tvc_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, VALUE is_expanded)

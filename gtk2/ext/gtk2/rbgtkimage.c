@@ -23,16 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cImage
 #define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
-/*
-Use properties instead.
-void        gtk_image_get_icon_set          (GtkImage *image,
-                                             GtkIconSet **icon_set,
-                                             GtkIconSize *size);
-void        gtk_image_get_image             (GtkImage *image,
-                                             GdkImage **gdk_image,
-                                             GdkBitmap **mask);
-GtkImageType gtk_image_get_storage_type     (GtkImage *image);
-*/
 
 static VALUE
 image_initialize(int argc, VALUE *argv, VALUE self)
@@ -117,16 +107,6 @@ image_set(int argc, VALUE *argv, VALUE self)
 
     return self;
 }
-
-/* Defined as property
-void        gtk_image_get_icon_name         (GtkImage *image,
-                                             G_CONST_RETURN gchar **icon_name,
-                                             GtkIconSize *size);
-void        gtk_image_set_pixel_size        (GtkImage *image,
-                                             gint pixel_size);
-gint        gtk_image_get_pixel_size        (GtkImage *image);
-
-*/
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE

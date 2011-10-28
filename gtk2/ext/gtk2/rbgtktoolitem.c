@@ -126,21 +126,6 @@ toolitem_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
     return self;
 }
 
-/* Defined as Properties
-void        gtk_tool_item_set_visible_horizontal
-                                            (GtkToolItem *toolitem,
-                                             gboolean visible_horizontal);
-gboolean    gtk_tool_item_get_visible_horizontal
-                                            (GtkToolItem *toolitem);
-void        gtk_tool_item_set_visible_vertical
-                                            (GtkToolItem *toolitem,
-                                             gboolean visible_vertical);
-gboolean    gtk_tool_item_get_visible_vertical
-                                            (GtkToolItem *toolitem);
-void        gtk_tool_item_set_is_important  (GtkToolItem *tool_item,
-                                             gboolean is_important);
-gboolean    gtk_tool_item_get_is_important  (GtkToolItem *tool_item);
-*/
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 toolitem_rebuild_menu(VALUE self)

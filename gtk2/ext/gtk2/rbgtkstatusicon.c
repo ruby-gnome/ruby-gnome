@@ -43,30 +43,6 @@ GtkStatusIcon* gtk_status_icon_new_from_stock
 GtkStatusIcon* gtk_status_icon_new_from_icon_name
                                             (const gchar *icon_name);
 */
-/* Defined as properties
-void        gtk_status_icon_set_from_pixbuf (GtkStatusIcon *status_icon,
-                                             GdkPixbuf *pixbuf);
-void        gtk_status_icon_set_from_file   (GtkStatusIcon *status_icon,
-                                             const gchar *filename);
-void        gtk_status_icon_set_from_stock  (GtkStatusIcon *status_icon,
-                                             const gchar *stock_id);
-void        gtk_status_icon_set_from_icon_name
-                                            (GtkStatusIcon *status_icon,
-                                             const gchar *icon_name);
-GtkImageType gtk_status_icon_get_storage_type
-                                            (GtkStatusIcon *status_icon);
-GdkPixbuf*  gtk_status_icon_get_pixbuf      (GtkStatusIcon *status_icon);
-const gchar* gtk_status_icon_get_stock      (GtkStatusIcon *status_icon);
-const gchar* gtk_status_icon_get_icon_name  (GtkStatusIcon *status_icon);
-gint        gtk_status_icon_get_size        (GtkStatusIcon *status_icon);
-void        gtk_status_icon_set_visible     (GtkStatusIcon *status_icon,
-                                             gboolean visible);
-gboolean    gtk_status_icon_get_visible     (GtkStatusIcon *status_icon);
-void        gtk_status_icon_set_blinking    (GtkStatusIcon *status_icon,
-                                             gboolean blinking);
-gboolean    gtk_status_icon_get_blinking    (GtkStatusIcon *status_icon);
-gboolean            gtk_status_icon_is_embedded         (GtkStatusIcon *status_icon);
-*/
 
 static VALUE
 si_set_tooltip(VALUE self, VALUE tooltip_text)

@@ -26,51 +26,6 @@
 #define RG_TARGET_NAMESPACE cRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
-/* Defined as Properties 
-void        gtk_recent_chooser_set_show_private
-                                            (GtkRecentChooser *chooser,
-                                             gboolean show_private);
-gboolean    gtk_recent_chooser_get_show_private
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_show_not_found
-                                            (GtkRecentChooser *chooser,
-                                             gboolean show_not_found);
-gboolean    gtk_recent_chooser_get_show_not_found
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_show_icons
-                                            (GtkRecentChooser *chooser,
-                                             gboolean show_icons);
-gboolean    gtk_recent_chooser_get_show_icons
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_select_multiple
-                                            (GtkRecentChooser *chooser,
-                                             gboolean select_multiple);
-gboolean    gtk_recent_chooser_get_select_multiple
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_local_only
-                                            (GtkRecentChooser *chooser,
-                                             gboolean local_only);
-gboolean    gtk_recent_chooser_get_local_only
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_limit    (GtkRecentChooser *chooser,
-                                             gint limit);
-gint        gtk_recent_chooser_get_limit    (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_show_tips
-                                            (GtkRecentChooser *chooser,
-                                             gboolean show_tips);
-gboolean    gtk_recent_chooser_get_show_tips
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_sort_type
-                                            (GtkRecentChooser *chooser,
-                                             GtkRecentSortType sort_type);
-GtkRecentSortType gtk_recent_chooser_get_sort_type
-                                            (GtkRecentChooser *chooser);
-void        gtk_recent_chooser_set_filter   (GtkRecentChooser *chooser,
-                                             GtkRecentFilter *filter);
-GtkRecentFilter* gtk_recent_chooser_get_filter
-                                            (GtkRecentChooser *chooser);
-
-*/
 static VALUE
 rc_set_show_numbers(VALUE self, VALUE val)
 {

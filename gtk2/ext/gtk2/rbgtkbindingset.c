@@ -171,10 +171,6 @@ binding_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
 }
 #endif
 
-/* Deprecated.
-guint       gtk_binding_parse_binding       (GScanner *scanner);
-*/
-
 void 
 Init_gtk_bindings(void)
 {

@@ -46,32 +46,6 @@ toolbutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties.
-void        gtk_tool_button_set_label       (GtkToolButton *button,
-                                             const gchar *label);
-G_CONST_RETURN gchar* gtk_tool_button_get_label
-                                            (GtkToolButton *button);
-void        gtk_tool_button_set_use_underline
-                                            (GtkToolButton *button,
-                                             gboolean use_underline);
-gboolean    gtk_tool_button_get_use_underline
-                                            (GtkToggletoolbutton *button);
-void        gtk_tool_button_set_stock_id    (GtkToggletoolbutton *button,
-                                             const gchar *stock_id);
-G_CONST_RETURN gchar* gtk_tool_button_get_stock_id
-                                            (GtkToggletoolbutton *button);
-void        gtk_tool_button_set_icon_widget (GtkToggletoolbutton *button,
-                                             GtkWidget *icon_widget);
-GtkWidget*  gtk_tool_button_get_icon_widget (GtkToggletoolbutton *button);
-void        gtk_tool_button_set_icon_name   (GtkToolButton *button,
-                                             const gchar *icon_name);
-const gchar* gtk_tool_button_get_icon_name  (GtkToolButton *button);
-void        gtk_tool_button_set_label_widget
-                                            (GtkToggletoolbutton *button,
-                                             GtkWidget *label_widget);
-GtkWidget*  gtk_tool_button_get_label_widget
-                                            (GtkToggletoolbutton *button);
-*/
 #endif
 
 void 

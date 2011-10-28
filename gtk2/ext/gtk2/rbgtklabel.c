@@ -121,28 +121,6 @@ label_get_selection_bounds(VALUE self)
     return ret ? rb_ary_new3(2, INT2NUM(start), INT2NUM(end)) : Qnil;
 }
 
-/* Defined as Properties
-gdouble     gtk_label_get_angle             (GtkLabel *label);
-void        gtk_label_set_angle             (GtkLabel *label,
-                                             gdouble angle);
-void        gtk_label_set_ellipsize         (GtkLabel *label,
-                                             PangoEllipsizeMode mode);
-PangoEllipsizeMode gtk_label_get_ellipsize  (GtkLabel *label);
-void        gtk_label_set_max_width_chars   (GtkLabel *label,
-                                             gint n_chars);
-gint        gtk_label_get_max_width_chars   (GtkLabel *label);
-
-gboolean    gtk_label_get_single_line_mode  (GtkLabel *label);
-void        gtk_label_set_single_line_mode  (GtkLabel *label,
-                                             gboolean single_line_mode);
-void        gtk_label_set_width_chars       (GtkLabel *label,
-                                             gint n_chars);
-gint        gtk_label_get_width_chars       (GtkLabel *label);
-void        gtk_label_set_line_wrap_mode    (GtkLabel *label,
-                                             PangoWrapMode wrap_mode);
-PangoWrapMode gtk_label_get_line_wrap_mode  (GtkLabel *label);
-*/
-
 void 
 Init_gtk_label(void)
 {

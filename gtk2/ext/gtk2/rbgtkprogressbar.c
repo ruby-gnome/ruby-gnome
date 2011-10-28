@@ -40,21 +40,10 @@ pbar_pulse(VALUE self)
     return self;
 }
 
-/* Defined as Property
-void        gtk_progress_bar_set_ellipsize  (GtkProgressBar *pbar,
-                                             PangoEllipsizeMode mode);
-*/
-
 void 
 Init_gtk_progress_bar(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
-
-    /* GtkProgressBarStyle */
-/* Deprecated.
-    rb_define_const(RG_TARGET_NAMESPACE, "CONTINUOUS", INT2FIX(GTK_PROGRESS_CONTINUOUS));
-    rb_define_const(RG_TARGET_NAMESPACE, "DISCRETE", INT2FIX(GTK_PROGRESS_DISCRETE));
-*/
 
     /* GtkProgressBarOrientation */
     G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR_ORIENTATION, "Orientation", RG_TARGET_NAMESPACE);

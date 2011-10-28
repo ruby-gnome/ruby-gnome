@@ -44,12 +44,6 @@ invisible_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void                gtk_invisible_set_screen            (GtkInvisible *invisible,
-                                                         GdkScreen *screen);
-GdkScreen *         gtk_invisible_get_screen            (GtkInvisible *invisible);
-*/
-
 void
 Init_gtk_invisible(void)
 {
