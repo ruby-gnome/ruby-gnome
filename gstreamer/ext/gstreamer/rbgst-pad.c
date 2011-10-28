@@ -37,10 +37,10 @@ static VALUE RG_TARGET_NAMESPACE;
  */
 
 static VALUE
-rb_gst_pad_get_name (VALUE self)
+rg_name (VALUE self)
 {
-	GstPad *pad = RGST_PAD (self);
-	return CSTR2RVAL (gst_pad_get_name (pad));
+    GstPad *pad = RGST_PAD (self);
+    return CSTR2RVAL (gst_pad_get_name (pad));
 }
 
 /* Method: direction
@@ -48,24 +48,24 @@ rb_gst_pad_get_name (VALUE self)
  */
 
 static VALUE
-rb_gst_pad_get_direction (VALUE self)
+rg_direction (VALUE self)
 {
-	GstPad *pad = RGST_PAD (self);
-	return GENUM2RVAL (GST_PAD_DIRECTION(pad), GST_TYPE_PAD_DIRECTION);
+    GstPad *pad = RGST_PAD (self);
+    return GENUM2RVAL (GST_PAD_DIRECTION(pad), GST_TYPE_PAD_DIRECTION);
 }
 
 /* Method: pad_template
  * Returns: the Gst::PadTemplate object of this pad.
  */
 static VALUE
-rb_gst_pad_get_pad_template(VALUE self)
+rg_pad_template(VALUE self)
 {
-	GstPadTemplate *templ = gst_pad_get_pad_template (RGST_PAD (self));
-	if (templ != NULL) {
-		gst_object_ref (GST_OBJECT (templ));
-		return RGST_PAD_TEMPLATE_NEW (templ);
-	}   
-	return Qnil;
+    GstPadTemplate *templ = gst_pad_get_pad_template (RGST_PAD (self));
+    if (templ != NULL) {
+        gst_object_ref (GST_OBJECT (templ));
+        return RGST_PAD_TEMPLATE_NEW (templ);
+    }   
+    return Qnil;
 }
 
 /*
@@ -77,10 +77,10 @@ rb_gst_pad_get_pad_template(VALUE self)
  * Returns: true if supported, false otherwise.
  */
 static VALUE
-rb_gst_pad_provides_query_types (VALUE self)
+rg_provides_query_types_p (VALUE self)
 {
-	GstPad *pad = RGST_PAD (self);
-	return CBOOL2RVAL (GST_PAD_QUERYTYPEFUNC (pad) != gst_pad_get_query_types_default);
+    GstPad *pad = RGST_PAD (self);
+    return CBOOL2RVAL (GST_PAD_QUERYTYPEFUNC (pad) != gst_pad_get_query_types_default);
 }
 
 /*
@@ -91,19 +91,19 @@ rb_gst_pad_provides_query_types (VALUE self)
  * Returns: an array of Gst::QueryType objects.
  */
 static VALUE
-rb_gst_pad_get_query_types (VALUE self)
+rg_query_types (VALUE self)
 {
-	const GstQueryType *types; 
-	VALUE arr;
+    const GstQueryType *types; 
+    VALUE arr;
 
-	arr = rb_ary_new ();
-	types = gst_pad_get_query_types (RGST_PAD (self));
-	
-	while (types && *types) {
-		rb_ary_push (arr, RGST_QUERY_TYPE_NEW ((GstQueryType *)types));
-		types++;
-	}
-	return arr;
+    arr = rb_ary_new ();
+    types = gst_pad_get_query_types (RGST_PAD (self));
+
+    while (types && *types) {
+        rb_ary_push (arr, RGST_QUERY_TYPE_NEW ((GstQueryType *)types));
+        types++;
+    }
+    return arr;
 }
 
 /*
@@ -115,13 +115,13 @@ rb_gst_pad_get_query_types (VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_pad_each_query_type (VALUE self)
+rg_each_query_type (VALUE self)
 {
-	return rb_ary_yield (rb_gst_pad_get_query_types (self));
+    return rb_ary_yield (rb_gst_pad_get_query_types (self));
 }
 
 static VALUE
-rb_gst_pad_is_linked(VALUE self)
+rg_linked_p(VALUE self)
 {
     return CBOOL2RVAL(gst_pad_is_linked(SELF(self)));
 }
@@ -150,7 +150,7 @@ rb_gst_pad_link_raw(VALUE self, VALUE other_pad)
  * Returns: a Gst::Pad::LinkReturn
  */
 static VALUE
-rb_gst_pad_link(VALUE self, VALUE other_pad)
+rg_link(VALUE self, VALUE other_pad)
 {
     return GENUM2RVAL(rb_gst_pad_link_raw(self, other_pad),
                       GST_TYPE_PAD_LINK_RETURN);
@@ -173,7 +173,7 @@ rb_gst_pad_link(VALUE self, VALUE other_pad)
  *          Return values aren't used in this case.)
  */
 static VALUE
-rb_gst_pad_link_shift(VALUE self, VALUE other_pad)
+rg_operator_link_shift(VALUE self, VALUE other_pad)
 {
     if (rb_gst_pad_link_raw(self, other_pad) == GST_PAD_LINK_OK)
         return other_pad;
@@ -190,7 +190,7 @@ rb_gst_pad_link_shift(VALUE self, VALUE other_pad)
  * Returns: true if the pads were unlinked and false if the pads weren't linked.
  */
 static VALUE
-rb_gst_pad_unlink(VALUE self, VALUE other_pad)
+rg_unlink(VALUE self, VALUE other_pad)
 {
     GstPad *src_pad;
     GstPad *sink_pad;
@@ -216,7 +216,7 @@ rb_gst_pad_unlink(VALUE self, VALUE other_pad)
  * Method: query
  */
 static VALUE
-rb_gst_pad_query(VALUE self, VALUE query)
+rg_query(VALUE self, VALUE query)
 {
     return CBOOL2RVAL(gst_pad_query(SELF(self), RVAL2GST_QUERY(query)));
 }
@@ -231,10 +231,10 @@ rb_gst_pad_query(VALUE self, VALUE query)
  * otherwise.
  */
 static VALUE
-rb_gst_pad_send_event (VALUE self, VALUE event)
+rg_send_event (VALUE self, VALUE event)
 {
-	return CBOOL2RVAL (gst_pad_send_event (RGST_PAD (self),
-					       RGST_EVENT (event)));
+    return CBOOL2RVAL (gst_pad_send_event (RGST_PAD (self),
+                                           RGST_EVENT (event)));
 }
 
 /*
@@ -245,7 +245,7 @@ rb_gst_pad_send_event (VALUE self, VALUE event)
  * Returns: a Gst::Caps object.
  */
 static VALUE
-rb_gst_pad_get_caps(VALUE self)
+rg_caps(VALUE self)
 {
     return GST_CAPS2RVAL_UNREF(gst_pad_get_caps(SELF(self)));
 }
@@ -258,7 +258,7 @@ rb_gst_pad_get_caps(VALUE self)
  * Returns: a Gst::Caps object.
  */
 static VALUE
-rb_gst_pad_get_negotiated_caps(VALUE self)
+rg_negotiated_caps(VALUE self)
 {
     return GST_CAPS2RVAL_UNREF(gst_pad_get_negotiated_caps(SELF(self)));
 }
@@ -271,7 +271,7 @@ rb_gst_pad_get_negotiated_caps(VALUE self)
  * Returns: true if the setting succeeded
  */
 static VALUE
-rb_gst_pad_set_caps(VALUE self, VALUE caps)
+rg_set_caps(VALUE self, VALUE caps)
 {
     return CBOOL2RVAL(gst_pad_set_caps(SELF(self), RVAL2GST_CAPS(caps)));
 }
@@ -284,7 +284,7 @@ rb_gst_pad_set_caps(VALUE self, VALUE caps)
  * Returns: true if the setting succeeded
  */
 static VALUE
-rb_gst_pad_set_active(VALUE self, VALUE active)
+rg_set_active(VALUE self, VALUE active)
 {
     return CBOOL2RVAL(gst_pad_set_active(SELF(self), RVAL2CBOOL(active)));
 }
@@ -297,37 +297,35 @@ rb_gst_pad_set_active(VALUE self, VALUE active)
  * Returns: Returns the peer pad or Qnil if there is none
  */
 static VALUE
-rb_gst_pad_get_peer(VALUE self)
+rg_peer(VALUE self)
 {
     return GST_PAD2RVAL_UNREF(gst_pad_get_peer(SELF(self)));
 }
-
 
 void
 Init_gst_pad (void)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_PAD, "Pad", mGst);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "direction", rb_gst_pad_get_direction, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", rb_gst_pad_get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pad_template", rb_gst_pad_get_pad_template, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "provides_query_types?", rb_gst_pad_provides_query_types, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "query_types", rb_gst_pad_get_query_types, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "each_query_type", rb_gst_pad_each_query_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "linked?", rb_gst_pad_is_linked, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "link", rb_gst_pad_link, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, ">>", rb_gst_pad_link_shift, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "unlink", rb_gst_pad_unlink, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "query", rb_gst_pad_query, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "send_event", rb_gst_pad_send_event, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "caps", rb_gst_pad_get_caps, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "negotiated_caps", rb_gst_pad_get_negotiated_caps, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_caps", rb_gst_pad_set_caps, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_active", rb_gst_pad_set_active, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "peer", rb_gst_pad_get_peer, 0);
+    RG_DEF_METHOD(direction, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(pad_template, 0);
+    RG_DEF_METHOD_P(provides_query_types, 0);
+    RG_DEF_METHOD(query_types, 0);
+    RG_DEF_METHOD(each_query_type, 0);
+    RG_DEF_METHOD_P(linked, 0);
+    RG_DEF_METHOD(link, 1);
+    RG_DEF_METHOD_OPERATOR(">>", link_shift, 1);
+    RG_DEF_METHOD(unlink, 1);
+    RG_DEF_METHOD(query, 1);
+    RG_DEF_METHOD(send_event, 1);
+    RG_DEF_METHOD(caps, 0);
+    RG_DEF_METHOD(negotiated_caps, 0);
+    RG_DEF_METHOD(set_caps, 1);
+    RG_DEF_METHOD(set_active, 1);
+    RG_DEF_METHOD(peer, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 
     G_DEF_CLASS(GST_TYPE_PAD_LINK_RETURN, "LinkReturn", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");

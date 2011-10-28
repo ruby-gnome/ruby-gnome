@@ -35,12 +35,12 @@
  * Returns: a newly created Gst::XML object.
  */
 static VALUE
-rb_gst_xml_new (VALUE self)
+rg_initialize (VALUE self)
 {
-	GstXML *xml = gst_xml_new ();
-	if (xml != NULL)
-		G_INITIALIZE (self, xml);
-	return Qnil;
+    GstXML *xml = gst_xml_new ();
+    if (xml != NULL)
+        G_INITIALIZE (self, xml);
+    return Qnil;
 }
 
 /*
@@ -54,15 +54,15 @@ rb_gst_xml_new (VALUE self)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_xml_write_file (VALUE self, VALUE element, VALUE filename)
+rg_s_write_file (VALUE self, VALUE element, VALUE filename)
 {
-	FILE *file = fopen (RVAL2CSTR (filename), "w");
-	gboolean ret = FALSE;
-	if (file != NULL) {
-		ret = gst_xml_write_file (RGST_ELEMENT (element), file) != -1; 
-		fclose (file);
-	}
-	return CBOOL2RVAL (ret);
+    FILE *file = fopen (RVAL2CSTR (filename), "w");
+    gboolean ret = FALSE;
+    if (file != NULL) {
+        ret = gst_xml_write_file (RGST_ELEMENT (element), file) != -1; 
+        fclose (file);
+    }
+    return CBOOL2RVAL (ret);
 }
 
 /*
@@ -83,13 +83,13 @@ rb_gst_xml_write_file (VALUE self, VALUE element, VALUE filename)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_xml_parse_file (int argc, VALUE *argv, VALUE self)
+rg_parse_file (int argc, VALUE *argv, VALUE self)
 {
-	VALUE fname, rootname;
-	rb_scan_args (argc, argv, "11", &fname, &rootname);	
-	return CBOOL2RVAL (gst_xml_parse_file (RGST_XML (self),
-					       (const guchar*) RVAL2CSTR (fname),
-					       (const guchar*)(NIL_P (rootname) 
+    VALUE fname, rootname;
+    rb_scan_args (argc, argv, "11", &fname, &rootname);    
+    return CBOOL2RVAL (gst_xml_parse_file (RGST_XML (self),
+                           (const guchar*) RVAL2CSTR (fname),
+                           (const guchar*)(NIL_P (rootname) 
                                                                ? NULL 
                                                                : RVAL2CSTR (rootname))));
 }
@@ -105,17 +105,17 @@ rb_gst_xml_parse_file (int argc, VALUE *argv, VALUE self)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_xml_parse_memory (int argc, VALUE *argv, VALUE self)
+rg_parse_memory (int argc, VALUE *argv, VALUE self)
 {
-	VALUE memory, rootname;
-	gchar *cstr;
-    
-	rb_scan_args (argc, argv, "11", &memory, &rootname);	
-	cstr = RVAL2CSTR (memory);
-	return CBOOL2RVAL (gst_xml_parse_memory (RGST_XML (self),
-						 (guchar*)cstr, 
-						 strlen (cstr), 
-						 (const gchar*)(NIL_P (rootname) 
+    VALUE memory, rootname;
+    gchar *cstr;
+
+    rb_scan_args (argc, argv, "11", &memory, &rootname);   
+    cstr = RVAL2CSTR (memory);
+    return CBOOL2RVAL (gst_xml_parse_memory (RGST_XML (self),
+                         (guchar*)cstr, 
+                         strlen (cstr), 
+                         (const gchar*)(NIL_P (rootname) 
                                                                 ? NULL 
                                                                 : RVAL2CSTR (rootname))));
 }
@@ -132,13 +132,13 @@ rb_gst_xml_parse_memory (int argc, VALUE *argv, VALUE self)
  * returns nil.
  */
 static VALUE
-rb_gst_xml_get_element (VALUE self, VALUE element_name)
+rg_get_element (VALUE self, VALUE element_name)
 {
-	GstElement *element = gst_xml_get_element (RGST_XML (self),
-						   (const guchar*)RVAL2CSTR (element_name));
-	return element != NULL
-		? RGST_ELEMENT_NEW (element)
-		: Qnil;
+    GstElement *element = gst_xml_get_element (RGST_XML (self),
+                           (const guchar*)RVAL2CSTR (element_name));
+    return element != NULL
+        ? RGST_ELEMENT_NEW (element)
+        : Qnil;
 }
 
 /*
@@ -149,17 +149,17 @@ rb_gst_xml_get_element (VALUE self, VALUE element_name)
  * Returns: an array of Gst::Element objects.
  */
 static VALUE
-rb_gst_xml_get_topelements (VALUE self)
+rg_topelements (VALUE self)
 {
-	GList *list;
-	VALUE arr;
+    GList *list;
+    VALUE arr;
 
-	arr = rb_ary_new ();
-	for (list = gst_xml_get_topelements (RGST_XML (self));
-	     list != NULL;
-	     list = g_list_next (list))
-		rb_ary_push (arr, RGST_ELEMENT_NEW (list->data)); 
-	return arr;
+    arr = rb_ary_new ();
+    for (list = gst_xml_get_topelements (RGST_XML (self));
+         list != NULL;
+         list = g_list_next (list))
+        rb_ary_push (arr, RGST_ELEMENT_NEW (list->data)); 
+    return arr;
 }
 
 /*
@@ -171,22 +171,22 @@ rb_gst_xml_get_topelements (VALUE self)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_xml_each_topelement (VALUE self)
+rg_each_topelement (VALUE self)
 {
-	return rb_ary_yield (rb_gst_xml_get_topelements (self));
+    return rb_ary_yield (rb_gst_xml_get_topelements (self));
 }
 
 void
 Init_gst_xml (void)
 {
-	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_XML, "XML", mGst);
-	
-	rb_define_singleton_method (RG_TARGET_NAMESPACE, "write_file", rb_gst_xml_write_file, 2);
-	
-	rb_define_method (RG_TARGET_NAMESPACE, "initialize", rb_gst_xml_new, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "parse_file", rb_gst_xml_parse_file, -1);
-	rb_define_method (RG_TARGET_NAMESPACE, "parse_memory", rb_gst_xml_parse_memory, -1);
-	rb_define_method (RG_TARGET_NAMESPACE, "get_element", rb_gst_xml_get_element, 1);
-	rb_define_method (RG_TARGET_NAMESPACE, "topelements", rb_gst_xml_get_topelements, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "each_topelement", rb_gst_xml_each_topelement, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_XML, "XML", mGst);
+
+    RG_DEF_SMETHOD(write_file, 2);
+
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(parse_file, -1);
+    RG_DEF_METHOD(parse_memory, -1);
+    RG_DEF_METHOD(get_element, 1);
+    RG_DEF_METHOD(topelements, 0);
+    RG_DEF_METHOD(each_topelement, 0);
 }

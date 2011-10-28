@@ -48,19 +48,19 @@ gst_install_plugins_result_func(GstInstallPluginsReturn result, VALUE data)
 }
 
 static VALUE
-supported(VALUE self)
+rg_s_supported_p(VALUE self)
 {
     return CBOOL2RVAL(gst_install_plugins_supported());
 }
 
 static VALUE
-progress(VALUE self)
+rg_s_progress_p(VALUE self)
 {
     return CBOOL2RVAL(gst_install_plugins_installation_in_progress());
 }
 
 static VALUE
-async(int argc, VALUE *argv, VALUE self)
+rg_s_async(int argc, VALUE *argv, VALUE self)
 {
     VALUE details, rcontext, block;
     int length, i;
@@ -76,19 +76,19 @@ async(int argc, VALUE *argv, VALUE self)
     str = RARRAY_PTR(details);
     carray= ALLOCA_N (char *, length+1);
     for (i = 0; i<length; i++) {
-	  carray[i] = RVAL2CSTR(str[i]);
-	}
-	carray[length] = NULL;
+      carray[i] = RVAL2CSTR(str[i]);
+    }
+    carray[length] = NULL;
 
     if (!NIL_P(rcontext)) {
-	  if (!RVAL2CBOOL(rb_obj_is_kind_of(rcontext, rb_cGstInstallPluginsContext)))
-	    rb_raise(rb_eTypeError,
-	             "2nd parameter is not Gst::InstallPluginsContext");
-	    context = (GstInstallPluginsContext *)RVAL2GOBJ(rcontext);
-	}
-	else {
-	  context = NULL;
-	}
+      if (!RVAL2CBOOL(rb_obj_is_kind_of(rcontext, rb_cGstInstallPluginsContext)))
+        rb_raise(rb_eTypeError,
+                 "2nd parameter is not Gst::InstallPluginsContext");
+        context = (GstInstallPluginsContext *)RVAL2GOBJ(rcontext);
+    }
+    else {
+      context = NULL;
+    }
 
     block = rb_block_proc();
     G_CHILD_ADD(self, block);
@@ -96,11 +96,11 @@ async(int argc, VALUE *argv, VALUE self)
     result = gst_install_plugins_async(carray, context,
                (GstInstallPluginsResultFunc)gst_install_plugins_result_func,
                (gpointer)block); 
-    return 	GENUM2RVAL(result, GST_TYPE_INSTALL_PLUGINS_RETURN);
+    return  GENUM2RVAL(result, GST_TYPE_INSTALL_PLUGINS_RETURN);
 }
 
 static VALUE
-sync(int argc, VALUE *argv, VALUE self)
+rg_s_sync(int argc, VALUE *argv, VALUE self)
 {
     VALUE details, context;
     int length, i;
@@ -114,12 +114,12 @@ sync(int argc, VALUE *argv, VALUE self)
     str = RARRAY_PTR(details);
     carray= ALLOCA_N (char *, length+1);
     for (i = 0; i<length; i++) {
-	  carray[i] = RVAL2CSTR(str[i]);
-	}
-	carray[length] = NULL;
+      carray[i] = RVAL2CSTR(str[i]);
+    }
+    carray[length] = NULL;
 
     result = gst_install_plugins_sync(carray, NULL);
-    return 	GENUM2RVAL(result, GST_TYPE_INSTALL_PLUGINS_RETURN);
+    return  GENUM2RVAL(result, GST_TYPE_INSTALL_PLUGINS_RETURN);
 }
 
 static VALUE
@@ -172,10 +172,10 @@ Init_gst_install_plugins(void)
     rb_define_method(rb_cGstInstallPluginsReturn, "name", return_get_name,
                      0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "supported?", supported, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "progress?", progress, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "async", async, -1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "sync", sync, -1);
+    RG_DEF_SMETHOD_P(supported, 0);
+    RG_DEF_SMETHOD_P(progress, 0);
+    RG_DEF_SMETHOD(async, -1);
+    RG_DEF_SMETHOD(sync, -1);
 
     context_table.type = GST_TYPE_INSTALL_PLUGINS_CONTEXT;
     context_table.instance2robj = context2robj;

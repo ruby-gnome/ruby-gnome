@@ -40,16 +40,16 @@
  * unique name, consisting of the element factory name and a number. 
  * If name is given, it will be given the name supplied.
  *
- * 	# Creates a 'mad' GStreamer element, named 'foo':
- * 	elem1 = Gst::ElementFactory.make("mad", "foo")
- *	  
- * 	# This line does exactly the same thing:
- * 	elem2 = Gst::ElementFactory.find("mad").create("foo")
+ *  # Creates a 'mad' GStreamer element, named 'foo':
+ *  elem1 = Gst::ElementFactory.make("mad", "foo")
+ *    
+ *  # This line does exactly the same thing:
+ *  elem2 = Gst::ElementFactory.find("mad").create("foo")
  *
  * Returns: a newly created object based on Gst::Element.
  */
 static VALUE
-rb_gst_elementfactory_make(int argc, VALUE *argv, VALUE self)
+rg_s_make(int argc, VALUE *argv, VALUE self)
 {
     GstElement *element;
     VALUE fname, ename;
@@ -58,7 +58,7 @@ rb_gst_elementfactory_make(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &fname, &ename);
 
     element = gst_element_factory_make(RVAL2CSTR(fname),
-				       RVAL2CSTR_ACCEPT_NIL(ename));
+                                       RVAL2CSTR_ACCEPT_NIL(ename));
 
     if (element == NULL)
         return Qnil;
@@ -79,12 +79,12 @@ rb_gst_elementfactory_make(int argc, VALUE *argv, VALUE self)
  * Returns: a Gst::ElementFactory object if found, nil otherwise.
  */
 static VALUE
-rb_gst_elementfactory_find (VALUE self, VALUE factory_name)
+rg_s_find (VALUE self, VALUE factory_name)
 {
-	GstElementFactory *factory = gst_element_factory_find (RVAL2CSTR (factory_name));
-	return factory != NULL 
-		? RGST_ELEMENT_FACTORY_NEW (factory)
-		: Qnil;
+    GstElementFactory *factory = gst_element_factory_find (RVAL2CSTR (factory_name));
+    return factory != NULL 
+                ? RGST_ELEMENT_FACTORY_NEW (factory)
+                : Qnil;
 }
 
 /*
@@ -100,7 +100,7 @@ rb_gst_elementfactory_find (VALUE self, VALUE factory_name)
  * Returns: a newly created object based on Gst::Element.
  */
 static VALUE
-create(int argc, VALUE *argv, VALUE self)
+rg_create(int argc, VALUE *argv, VALUE self)
 {
     GstElement *element;
     VALUE name;
@@ -112,12 +112,12 @@ create(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rb_gst_elementfactory_to_s (VALUE self)
+rg_to_s (VALUE self)
 {
-	GstElementFactory *factory = RGST_ELEMENT_FACTORY (self); 
-	return rb_str_new_with_format ("Element: %s (%s)",
-			      GST_PLUGIN_FEATURE_NAME(factory),
-			      factory->details.longname);
+    GstElementFactory *factory = RGST_ELEMENT_FACTORY (self); 
+    return rb_str_new_with_format ("Element: %s (%s)",
+                                  GST_PLUGIN_FEATURE_NAME(factory),
+                                  factory->details.longname);
 }
 
 /*
@@ -128,7 +128,7 @@ rb_gst_elementfactory_to_s (VALUE self)
  * Returns: an array of Gst::PadTemplate objects.
  */
 static VALUE
-rb_gst_elementfactory_get_pad_templates (VALUE self)
+rg_pad_templates (VALUE self)
 {
     GstElementFactory *factory;
     const GList *list;
@@ -154,9 +154,9 @@ rb_gst_elementfactory_get_pad_templates (VALUE self)
  * Returns: always nil. 
  */
 static VALUE
-rb_gst_elementfactory_each_pad_template (VALUE self)
+rg_each_pad_template (VALUE self)
 {
-	return rb_ary_yield (rb_gst_elementfactory_get_pad_templates (self));
+    return rb_ary_yield (rb_gst_elementfactory_get_pad_templates (self));
 }
 
 /*
@@ -175,55 +175,54 @@ rb_gst_elementfactory_each_pad_template (VALUE self)
  *
  * Here is an example.
  *
- *	# Prints all details related to the 'mad' element:
- *	Gst::ElementFactory.find("mad").details do |k, v| 
- *		p "#{k}: #{v}"
- *	end 
+ *  # Prints all details related to the 'mad' element:
+ *  Gst::ElementFactory.find("mad").details do |k, v| 
+ *      p "#{k}: #{v}"
+ *  end 
  *
  * Returns: a Hash.
  */
 static VALUE
-rb_gst_elementfactory_get_details (VALUE self)
+rg_details (VALUE self)
 {
-	GstElementFactory *factory;
-	VALUE hash;
-  
-	factory = RGST_ELEMENT_FACTORY (self); 
-	
-	hash = rb_hash_new();
+    GstElementFactory *factory;
+    VALUE hash;
 
-	rb_hash_aset (hash, CSTR2RVAL ("longname"), CSTR2RVAL (factory->details.longname));
-	rb_hash_aset (hash, CSTR2RVAL ("klass"), CSTR2RVAL (factory->details.klass)); 
-	rb_hash_aset (hash, CSTR2RVAL ("description"), CSTR2RVAL (factory->details.description));
-	rb_hash_aset (hash, CSTR2RVAL ("author"), CSTR2RVAL (factory->details.author));
+    factory = RGST_ELEMENT_FACTORY (self); 
 
-	return hash;
+    hash = rb_hash_new();
+
+    rb_hash_aset (hash, CSTR2RVAL ("longname"), CSTR2RVAL (factory->details.longname));
+    rb_hash_aset (hash, CSTR2RVAL ("klass"), CSTR2RVAL (factory->details.klass)); 
+    rb_hash_aset (hash, CSTR2RVAL ("description"), CSTR2RVAL (factory->details.description));
+    rb_hash_aset (hash, CSTR2RVAL ("author"), CSTR2RVAL (factory->details.author));
+
+    return hash;
 }
 
 static VALUE
-get_long_name(VALUE self)
+rg_long_name(VALUE self)
 {
     return CSTR2RVAL(gst_element_factory_get_longname(SELF(self)));
 }
 
 static VALUE
-get_klass(VALUE self)
+rg_klass(VALUE self)
 {
     return CSTR2RVAL(gst_element_factory_get_klass(SELF(self)));
 }
 
 static VALUE
-get_description(VALUE self)
+rg_description(VALUE self)
 {
     return CSTR2RVAL(gst_element_factory_get_description(SELF(self)));
 }
 
 static VALUE
-get_author(VALUE self)
+rg_author(VALUE self)
 {
     return CSTR2RVAL(gst_element_factory_get_author(SELF(self)));
 }
-
 
 void
 Init_gst_elementfactory (void)
@@ -234,23 +233,17 @@ Init_gst_elementfactory (void)
                                         "ElementFactory",
                                         mGst);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "make",
-                               rb_gst_elementfactory_make, -1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "find",
-                               rb_gst_elementfactory_find, 1);
+    RG_DEF_SMETHOD(make, -1);
+    RG_DEF_SMETHOD(find, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "create", create, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "details",
-                     rb_gst_elementfactory_get_details, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_s",
-                     rb_gst_elementfactory_to_s, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pad_templates",
-                     rb_gst_elementfactory_get_pad_templates, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "each_pad_template",
-                     rb_gst_elementfactory_each_pad_template, 0);
+    RG_DEF_METHOD(create, -1);
+    RG_DEF_METHOD(details, 0);
+    RG_DEF_METHOD(to_s, 0);
+    RG_DEF_METHOD(pad_templates, 0);
+    RG_DEF_METHOD(each_pad_template, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "long_name", get_long_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "klass", get_klass, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "description", get_description, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "author", get_author, 0);
+    RG_DEF_METHOD(long_name, 0);
+    RG_DEF_METHOD(klass, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD(author, 0);
 }

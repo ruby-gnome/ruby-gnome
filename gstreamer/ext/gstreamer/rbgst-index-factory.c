@@ -30,7 +30,7 @@
  */
 
 static VALUE
-s_find(VALUE self, VALUE name)
+rg_s_find(VALUE self, VALUE name)
 {
     return GOBJ2RVAL(gst_index_factory_find(RVAL2CSTR(name)));
 }
@@ -39,16 +39,16 @@ s_find(VALUE self, VALUE name)
  * Returns: a String representing the factory.
  */
 static VALUE
-rb_gst_indexfactory_to_s (VALUE self)
+rg_to_s (VALUE self)
 {
-	GstIndexFactory *factory = RGST_INDEX_FACTORY (self); 
-	return rb_str_new_with_format ("Index: %s (%s)",
-			      GST_PLUGIN_FEATURE_NAME (factory),
-			      factory->longdesc);
+    GstIndexFactory *factory = RGST_INDEX_FACTORY (self); 
+    return rb_str_new_with_format ("Index: %s (%s)",
+                                  GST_PLUGIN_FEATURE_NAME (factory),
+                                  factory->longdesc);
 }
 
 static VALUE
-get_description(VALUE self)
+rg_description(VALUE self)
 {
     return CSTR2RVAL(SELF(self)->longdesc);
 }
@@ -61,9 +61,9 @@ Init_gst_indexfactory (void)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_INDEX_FACTORY,
                                       "IndexFactory", mGst);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "find", s_find, 1);
+    RG_DEF_SMETHOD(find, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "to_s", rb_gst_indexfactory_to_s, 0);
+    RG_DEF_METHOD(to_s, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "description", get_description, 0);
+    RG_DEF_METHOD(description, 0);
 }

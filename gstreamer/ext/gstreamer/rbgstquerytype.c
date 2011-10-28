@@ -30,22 +30,22 @@
 static GstQueryType *
 query_type_copy (const GstQueryType* query_type)
 {
-	GstQueryType *new_query_type;
-	g_return_val_if_fail (query_type != NULL, NULL);
-	new_query_type = g_new (GstQueryType, 1);
-	*new_query_type = *query_type;
-	return new_query_type;
+    GstQueryType *new_query_type;
+    g_return_val_if_fail (query_type != NULL, NULL);
+    new_query_type = g_new (GstQueryType, 1);
+    *new_query_type = *query_type;
+    return new_query_type;
 }
 
 GType
 gst_query_type_get_type2 (void)
 {
-	static GType our_type = 0;
-	if (our_type == 0)
-		our_type = g_boxed_type_register_static ("GstQueryTypeClass",
-			(GBoxedCopyFunc)query_type_copy,
-			(GBoxedFreeFunc)g_free);
-	return our_type;
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static ("GstQueryTypeClass",
+            (GBoxedCopyFunc)query_type_copy,
+            (GBoxedFreeFunc)g_free);
+    return our_type;
 }
 
 /*
@@ -56,12 +56,12 @@ gst_query_type_get_type2 (void)
  * given nick, or nil if this query was not registered.
  */
 static VALUE
-rb_gst_querytype_find (VALUE self, VALUE nick)
+rg_s_find (VALUE self, VALUE nick)
 {
-	GstQueryType type = gst_query_type_get_by_nick (RVAL2CSTR (nick));
-	return type != GST_QUERY_NONE 
-		? RGST_QUERY_TYPE_NEW (&type)
-		: Qnil; 
+    GstQueryType type = gst_query_type_get_by_nick (RVAL2CSTR (nick));
+    return type != GST_QUERY_NONE 
+        ? RGST_QUERY_TYPE_NEW (&type)
+        : Qnil; 
 }
 
 /*
@@ -73,7 +73,7 @@ rb_gst_querytype_find (VALUE self, VALUE nick)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_querytype_each (VALUE self)
+rg_s_each (VALUE self)
 {
     GstIterator *iter;
     gpointer value;
@@ -91,30 +91,30 @@ rb_gst_querytype_each (VALUE self)
  * Returns: the type id of this query type (see Gst::QueryType::Type).
  */
 static VALUE
-rb_gst_querytype_get_type_id (VALUE self)
+rg_type_id (VALUE self)
 {
-	GstQueryType *querytype = RGST_QUERY_TYPE (self);
-	return INT2FIX (*querytype);
+    GstQueryType *querytype = RGST_QUERY_TYPE (self);
+    return INT2FIX (*querytype);
 }
 
 /* Method: nick
  * Returns: the short nick of the query type.
  */
 static VALUE
-rb_gst_querytype_get_nick (VALUE self)
+rg_nick (VALUE self)
 {
-	GstQueryType *querytype = RGST_QUERY_TYPE (self);
-	return CSTR2RVAL (gst_query_type_get_details (*querytype)->nick);
+    GstQueryType *querytype = RGST_QUERY_TYPE (self);
+    return CSTR2RVAL (gst_query_type_get_details (*querytype)->nick);
 }
 
 /* Method: description
  * Returns: a longer description of the query type.
  */
 static VALUE
-rb_gst_querytype_get_description (VALUE self)
+rg_description (VALUE self)
 {
-	GstQueryType *querytype = RGST_QUERY_TYPE (self);
-	return CSTR2RVAL (gst_query_type_get_details (*querytype)->description);
+    GstQueryType *querytype = RGST_QUERY_TYPE (self);
+    return CSTR2RVAL (gst_query_type_get_details (*querytype)->description);
 }
 
 /*
@@ -127,36 +127,36 @@ rb_gst_querytype_get_description (VALUE self)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_querytype_is_equal (VALUE self, VALUE other_query)
+rg_operator_is_equal (VALUE self, VALUE other_query)
 {
-	GstQueryType *q1, *q2;
-	const gchar *n1, *n2;
+    GstQueryType *q1, *q2;
+    const gchar *n1, *n2;
 
-	if (NIL_P (other_query))
-		return Qfalse;
+    if (NIL_P (other_query))
+        return Qfalse;
 
-	q1 = RGST_QUERY_TYPE (self);
-	q2 = RGST_QUERY_TYPE (other_query);
+    q1 = RGST_QUERY_TYPE (self);
+    q2 = RGST_QUERY_TYPE (other_query);
 
-	n1 = gst_query_type_get_details (*q1)->nick;
-	n2 = gst_query_type_get_details (*q2)->nick;
+    n1 = gst_query_type_get_details (*q1)->nick;
+    n2 = gst_query_type_get_details (*q2)->nick;
 
-	return CBOOL2RVAL( strcmp (n1, n2) == 0);
+    return CBOOL2RVAL( strcmp (n1, n2) == 0);
 }
 
 void
 Init_gst_querytype (void)
 {
-	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_QUERY_TYPE2, "QueryType", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_QUERY_TYPE2, "QueryType", mGst);
 
-	rb_define_singleton_method (RG_TARGET_NAMESPACE, "each", rb_gst_querytype_each, 0);
-	rb_define_singleton_method (RG_TARGET_NAMESPACE, "find", rb_gst_querytype_find, 1);
+    RG_DEF_SMETHOD(each, 0);
+    RG_DEF_SMETHOD(find, 1);
 
-	rb_define_method (RG_TARGET_NAMESPACE, "type_id", rb_gst_querytype_get_type_id, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "nick", rb_gst_querytype_get_nick,	0);
-	rb_define_method (RG_TARGET_NAMESPACE, "description", rb_gst_querytype_get_description, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "==", rb_gst_querytype_is_equal, 1);
+    RG_DEF_METHOD(type_id, 0);
+    RG_DEF_METHOD(nick, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD_OPERATOR("==", is_equal, 1);
 
-	G_DEF_CLASS (GST_TYPE_QUERY_TYPE, "Type", RG_TARGET_NAMESPACE);
-	G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_QUERY_TYPE, "GST_QUERY_");
+    G_DEF_CLASS (GST_TYPE_QUERY_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_QUERY_TYPE, "GST_QUERY_");
 }

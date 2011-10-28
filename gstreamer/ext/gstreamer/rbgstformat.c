@@ -30,22 +30,22 @@
 static GstFormat *
 format_copy (const GstFormat* format)
 {
-	GstFormat *new_format;
-	g_return_val_if_fail (format != NULL, NULL);
-	new_format = g_new (GstFormat, sizeof (GstFormat));
-	*new_format = *format;
-	return new_format;
+    GstFormat *new_format;
+    g_return_val_if_fail (format != NULL, NULL);
+    new_format = g_new (GstFormat, sizeof (GstFormat));
+    *new_format = *format;
+    return new_format;
 }
 
 GType
 gst_format_get_type2 (void)
 {
-	static GType our_type = 0;
-	if (our_type == 0)
-		our_type = g_boxed_type_register_static ("GstFormatClass",
-			(GBoxedCopyFunc)format_copy,
-			(GBoxedFreeFunc)g_free);
-	return our_type;
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static ("GstFormatClass",
+            (GBoxedCopyFunc)format_copy,
+            (GBoxedFreeFunc)g_free);
+    return our_type;
 }
 
 /*
@@ -56,12 +56,12 @@ gst_format_get_type2 (void)
  * given nick, or nil if this query was not registered.
  */
 static VALUE
-rb_gst_format_find (VALUE self, VALUE nick)
+rg_s_find (VALUE self, VALUE nick)
 {
-	GstFormat format = gst_format_get_by_nick (RVAL2CSTR (nick));
-	return format != GST_FORMAT_UNDEFINED
-		? RGST_FORMAT_NEW (&format)
-		: Qnil;
+    GstFormat format = gst_format_get_by_nick (RVAL2CSTR (nick));
+    return format != GST_FORMAT_UNDEFINED
+        ? RGST_FORMAT_NEW (&format)
+        : Qnil;
 }
 
 /*
@@ -73,7 +73,7 @@ rb_gst_format_find (VALUE self, VALUE nick)
  * Returns: always nil.
  */
 static VALUE
-rb_gst_format_each (VALUE self)
+rg_s_each (VALUE self)
 {
     GstIterator *iter;
     gpointer value;
@@ -91,30 +91,30 @@ rb_gst_format_each (VALUE self)
  * Returns: the type id of this format (see Gst::Format::Type).
  */
 static VALUE
-rb_gst_format_get_type_id (VALUE self)
+rg_type_id (VALUE self)
 {
-	GstFormat *format = RGST_FORMAT (self);
-	return GENUM2RVAL (*format, GST_TYPE_FORMAT);
+    GstFormat *format = RGST_FORMAT (self);
+    return GENUM2RVAL (*format, GST_TYPE_FORMAT);
 }
 
 /* Method: nick
  * Returns: the short nick of the format.
  */
 static VALUE
-rb_gst_format_get_nick (VALUE self)
+rg_nick (VALUE self)
 {
-	GstFormat *format = RGST_FORMAT (self);
-	return CSTR2RVAL (gst_format_get_details (*format)->nick);
+    GstFormat *format = RGST_FORMAT (self);
+    return CSTR2RVAL (gst_format_get_details (*format)->nick);
 }
 
 /* Method: description
  * Returns: a longer description of the format.
  */
 static VALUE
-rb_gst_format_get_description (VALUE self)
+rg_description (VALUE self)
 {
-	GstFormat *format = RGST_FORMAT (self);
-	return CSTR2RVAL (gst_format_get_details (*format)->description);
+    GstFormat *format = RGST_FORMAT (self);
+    return CSTR2RVAL (gst_format_get_details (*format)->description);
 }
 
 /*
@@ -127,36 +127,36 @@ rb_gst_format_get_description (VALUE self)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rb_gst_format_is_equal (VALUE self, VALUE other_format)
+rg_operator_is_equal (VALUE self, VALUE other_format)
 {
-	GstFormat *f1, *f2;
-	const gchar *n1, *n2;
+    GstFormat *f1, *f2;
+    const gchar *n1, *n2;
 
-	if (NIL_P (other_format))
-		return Qfalse;
+    if (NIL_P (other_format))
+        return Qfalse;
 
-	f1 = RGST_FORMAT (self);
-	f2 = RGST_FORMAT (other_format);
+    f1 = RGST_FORMAT (self);
+    f2 = RGST_FORMAT (other_format);
 
-	n1 = gst_format_get_details (*f1)->nick;
-	n2 = gst_format_get_details (*f2)->nick;
+    n1 = gst_format_get_details (*f1)->nick;
+    n2 = gst_format_get_details (*f2)->nick;
 
-	return CBOOL2RVAL (strcmp (n1, n2) == 0);
+    return CBOOL2RVAL (strcmp (n1, n2) == 0);
 }
 
 void
 Init_gst_format (void)
 {
-	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_FORMAT2, "Format", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_FORMAT2, "Format", mGst);
 
-	rb_define_singleton_method (RG_TARGET_NAMESPACE, "each", rb_gst_format_each, 0);
-	rb_define_singleton_method (RG_TARGET_NAMESPACE, "find", rb_gst_format_find, 1);
+    RG_DEF_SMETHOD(each, 0);
+    RG_DEF_SMETHOD(find, 1);
 
-	rb_define_method (RG_TARGET_NAMESPACE, "type_id", rb_gst_format_get_type_id, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "nick",	rb_gst_format_get_nick,	0);
-	rb_define_method (RG_TARGET_NAMESPACE, "description", rb_gst_format_get_description, 0);
-	rb_define_method (RG_TARGET_NAMESPACE, "==", rb_gst_format_is_equal, 1);
+    RG_DEF_METHOD(type_id, 0);
+    RG_DEF_METHOD(nick, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD_OPERATOR("==", is_equal, 1);
 
-	G_DEF_CLASS (GST_TYPE_FORMAT, "Type", RG_TARGET_NAMESPACE);
-	G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_FORMAT, "GST_FORMAT_");
+    G_DEF_CLASS (GST_TYPE_FORMAT, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_FORMAT, "GST_FORMAT_");
 }

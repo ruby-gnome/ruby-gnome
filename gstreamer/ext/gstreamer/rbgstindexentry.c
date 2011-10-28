@@ -32,15 +32,15 @@
  *
  * Gets the internal data stored in the entry.  The data depends of the type
  * of the entry:
- *	* Gst::IndexEntry::ID: the description of the ID, as a String. 
- *	* Gst::IndexEntry::ASSOCIATION: an Array that contains the number of associations, a Gst::Format, the value of the format and the association flags (see Gst::Index::AssocFlags).
- *	* Gst::IndexEntry::FORMAT: an Array that contains a Gst::Format and its value.
- *	* Gst::IndexEntry::OBJECt: not yet implemented.
+ *  * Gst::IndexEntry::ID: the description of the ID, as a String. 
+ *  * Gst::IndexEntry::ASSOCIATION: an Array that contains the number of associations, a Gst::Format, the value of the format and the association flags (see Gst::Index::AssocFlags).
+ *  * Gst::IndexEntry::FORMAT: an Array that contains a Gst::Format and its value.
+ *  * Gst::IndexEntry::OBJECt: not yet implemented.
  *
  * Returns: the internal data of the entry. 
  */
 static VALUE
-rb_gst_index_entry_get_data (VALUE self)
+rg_data (VALUE self)
 {
     GstIndexEntry *entry;
     VALUE data;
@@ -78,7 +78,7 @@ rb_gst_index_entry_get_data (VALUE self)
  * Returns: the type of the entry (see Gst::IndexEntry::Types).
  */
 static VALUE
-rb_gst_index_entry_get_type (VALUE self)
+rg_entry_type (VALUE self)
 {
     GstIndexEntry *entry = RGST_INDEX_ENTRY (self);
 
@@ -91,8 +91,8 @@ Init_gst_indexentry (void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_INDEX_ENTRY, "IndexEntry", mGst);
 
     rb_undef_method (RG_TARGET_NAMESPACE, "initialize");
-    rb_define_method (RG_TARGET_NAMESPACE, "data", rb_gst_index_entry_get_data, 0);
-    rb_define_method (RG_TARGET_NAMESPACE, "entry_type", rb_gst_index_entry_get_type, 0);
+    RG_DEF_METHOD(data, 0);
+    RG_DEF_METHOD(entry_type, 0);
 
     G_DEF_CLASS (GST_TYPE_INDEX_ENTRY_TYPE, "Types", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_ENTRY_TYPE, "GST_INDEX_ENTRY_");

@@ -25,10 +25,10 @@
 #define RG_TARGET_NAMESPACE cGhostPad
 
 static VALUE
-rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad)
+rg_initialize(VALUE self, VALUE name, VALUE pad)
 {
     GstPad *gpad;
-    
+
     gpad = gst_ghost_pad_new(RVAL2CSTR(name), RVAL2GST_PAD(pad));
 
     G_INITIALIZE(self, gpad);
@@ -41,5 +41,5 @@ Init_gst_ghost_pad(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_GHOST_PAD, "GhostPad", mGst);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_gst_ghost_pad_new, 2);
+    RG_DEF_METHOD(initialize, 2);
 }

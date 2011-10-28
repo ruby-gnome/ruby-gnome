@@ -35,14 +35,14 @@
  * to a Gst::SystemClock object.
  */
 static VALUE
-rb_gst_systemclock_obtain (self)
+rg_s_obtain (self)
 {
-	return RGST_SYSTEM_CLOCK_NEW (gst_system_clock_obtain ());
+    return RGST_SYSTEM_CLOCK_NEW (gst_system_clock_obtain ());
 }
 
 void
 Init_gst_systemclock (void)
 {
-	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
-	rb_define_singleton_method (RG_TARGET_NAMESPACE, "obtain", rb_gst_systemclock_obtain, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
+    RG_DEF_SMETHOD(obtain, 0);
 }

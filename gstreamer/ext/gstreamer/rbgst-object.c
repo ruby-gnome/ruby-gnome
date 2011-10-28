@@ -54,7 +54,7 @@ rbgst_object_initialize(VALUE obj, gpointer cobj)
 }
 
 static VALUE
-object_set_name(VALUE self, VALUE name)
+rg_set_name(VALUE self, VALUE name)
 {
     return CBOOL2RVAL(gst_object_set_name(SELF(self), RVAL2CSTR(name)));
 }
@@ -72,7 +72,7 @@ Init_gst_object(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_name", object_set_name, 1);
+    RG_DEF_METHOD(set_name, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

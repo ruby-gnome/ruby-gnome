@@ -52,7 +52,7 @@ rbgst_ruby_object_from_gst_caps_with_unref(GstCaps *caps)
  * Returns: a newly allocated Gst::Caps object.
  */
 static VALUE
-rb_gst_caps_new (int argc, VALUE * argv, VALUE self)
+rg_initialize (int argc, VALUE * argv, VALUE self)
 {
     GstCaps *caps;
     int i;
@@ -75,7 +75,7 @@ rb_gst_caps_new (int argc, VALUE * argv, VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_caps_set_any (VALUE self, VALUE state)
+rg_set_any (VALUE self, VALUE state)
 {
     RGST_CAPS (self)->flags = GST_CAPS_FLAGS_ANY;
     return self;
@@ -90,7 +90,7 @@ rb_gst_caps_set_any (VALUE self, VALUE state)
  * Returns: self.
  */
 static VALUE
-rb_gst_caps_append (VALUE self, VALUE caps)
+rg_append (VALUE self, VALUE caps)
 {
     gst_caps_append (RGST_CAPS (self), RGST_CAPS (caps));
     return self;
@@ -105,7 +105,7 @@ rb_gst_caps_append (VALUE self, VALUE caps)
  * Returns: self.
  */
 static VALUE
-rb_gst_caps_append_structure (VALUE self, VALUE structure)
+rg_append_structure (VALUE self, VALUE structure)
 {
     gst_caps_append_structure (RGST_CAPS (self), RVAL2GST_STRUCT(structure));
     return self;
@@ -115,7 +115,7 @@ rb_gst_caps_append_structure (VALUE self, VALUE structure)
  * Returns: the number of structures contained in the caps.
  */
 static VALUE
-rb_gst_caps_get_size (VALUE self)
+rg_size (VALUE self)
 {
     return INT2FIX (gst_caps_get_size (RGST_CAPS (self)));
 }
@@ -130,7 +130,7 @@ returns it.
  * Returns: a Hash object corresponding to index, or nil if not found.
  */
 static VALUE
-rb_gst_caps_get_structure (VALUE self, VALUE index)
+rg_get_structure (VALUE self, VALUE index)
 {
     GstStructure *structure = gst_caps_get_structure (RGST_CAPS (self),
                                                       FIX2INT (index));
@@ -139,7 +139,7 @@ rb_gst_caps_get_structure (VALUE self, VALUE index)
 }
 
 static VALUE
-rb_gst_caps_set_simple (VALUE self, VALUE field, VALUE value)
+rg_set_simple (VALUE self, VALUE field, VALUE value)
 {
     /*
      * TODO 
@@ -151,7 +151,7 @@ rb_gst_caps_set_simple (VALUE self, VALUE field, VALUE value)
  * Returns: whether the caps represents any media format.
  */
 static VALUE
-rb_gst_caps_is_any (VALUE self)
+rg_any_p (VALUE self)
 {
     return CBOOL2RVAL (gst_caps_is_any (RGST_CAPS (self)));
 }
@@ -160,7 +160,7 @@ rb_gst_caps_is_any (VALUE self)
  * Returns: whether the caps represents no media formats.
  */
 static VALUE
-rb_gst_caps_is_empty (VALUE self)
+rg_empty_p (VALUE self)
 {
     return CBOOL2RVAL (gst_caps_is_empty (RGST_CAPS (self)));
 }
@@ -169,7 +169,7 @@ rb_gst_caps_is_empty (VALUE self)
  * Returns: whether the caps contains multiple structure.
  */
 static VALUE
-rb_gst_caps_is_simple (VALUE self)
+rg_simple_p (VALUE self)
 {
     return CBOOL2RVAL(GST_CAPS_IS_SIMPLE(RGST_CAPS (self)));
 }
@@ -184,7 +184,7 @@ rb_gst_caps_is_simple (VALUE self)
  * Returns: whether the caps is fixed.
  */
 static VALUE
-rb_gst_caps_is_fixed (VALUE self)
+rg_fixed_p (VALUE self)
 {
     return CBOOL2RVAL (gst_caps_is_fixed (RGST_CAPS (self)));
 }
@@ -197,7 +197,7 @@ rb_gst_caps_is_fixed (VALUE self)
 self.
   */
 static VALUE
-rb_gst_caps_is_equal (VALUE self, VALUE caps)
+rg_equal_p (VALUE self, VALUE caps)
 {
     return CBOOL2RVAL (gst_caps_is_equal (RGST_CAPS (self), RGST_CAPS (caps)));
 }
@@ -211,7 +211,7 @@ than self
  * (self must be fixed as well).
  */
 static VALUE
-rb_gst_caps_is_equal_fixed (VALUE self, VALUE caps)
+rg_equal_fixed_p (VALUE self, VALUE caps)
 {
     return CBOOL2RVAL (gst_caps_is_equal_fixed (RGST_CAPS (self), RGST_CAPS
                                                 (caps)));
@@ -228,7 +228,7 @@ media format that is
  * Returns: whether self is compatible with the given caps.
  */
 static VALUE
-rb_gst_caps_is_always_compatible (VALUE self, VALUE caps)
+rg_always_compatible_p (VALUE self, VALUE caps)
 {
     return CBOOL2RVAL (gst_caps_is_always_compatible (RGST_CAPS (self),
                                                       RGST_CAPS (caps)));
@@ -247,7 +247,7 @@ are included
  * Returns: whether self is a subset of the given caps.
  */
 static VALUE
-rb_gst_caps_is_subset (VALUE self, VALUE caps)
+rg_subset_p (VALUE self, VALUE caps)
 {
     return CBOOL2RVAL (gst_caps_is_subset (RGST_CAPS (self), RGST_CAPS (caps)));
 }
@@ -263,7 +263,7 @@ common to both
  * Returns: a new Gst::Caps object.
  */
 static VALUE
-rb_gst_caps_intersect (VALUE self, VALUE caps)
+rg_intersect (VALUE self, VALUE caps)
 {
     return RGST_CAPS_NEW (gst_caps_intersect (RGST_CAPS (self), RGST_CAPS
                                               (caps)));
@@ -280,7 +280,7 @@ either
  * Returns: a new Gst::Caps object.
  */
 static VALUE
-rb_gst_caps_union (VALUE self, VALUE caps)
+rg_union (VALUE self, VALUE caps)
 {
     return RGST_CAPS_NEW (gst_caps_union (RGST_CAPS (self), RGST_CAPS (caps)));
 }
@@ -295,7 +295,7 @@ rb_gst_caps_union (VALUE self, VALUE caps)
  * Returns: a new Gst::Caps object.
  */
 static VALUE
-rb_gst_caps_normalize (VALUE self)
+rg_normalize (VALUE self)
 {
     return RGST_CAPS_NEW (gst_caps_normalize (RGST_CAPS (self)));
 }
@@ -312,7 +312,7 @@ structures
  * Returns: whether the caps could be simplified.
  */
 static VALUE
-rb_gst_caps_do_simplify (VALUE self)
+rg_simplify_bang (VALUE self)
 {
     return CBOOL2RVAL (gst_caps_do_simplify (RGST_CAPS (self)));
 }
@@ -326,7 +326,7 @@ rb_gst_caps_do_simplify (VALUE self)
  * Returns: self.
  */
 static VALUE
-rb_gst_caps_replace (VALUE self, VALUE caps)
+rg_replace_bang (VALUE self, VALUE caps)
 {
     GstCaps *current = RGST_CAPS (self);
 
@@ -338,7 +338,7 @@ rb_gst_caps_replace (VALUE self, VALUE caps)
  * Returns: a string representation of the current caps.
  */
 static VALUE
-rb_gst_caps_to_string (VALUE self)
+rg_to_s (VALUE self)
 {
     return CSTR2RVAL (gst_caps_to_string (RGST_CAPS (self)));
 }
@@ -352,7 +352,7 @@ rb_gst_caps_to_string (VALUE self)
  * Returns: a newly allocated Gst::Caps.
  */
 static VALUE
-rb_gst_caps_from_string (VALUE self, VALUE string)
+rg_s_parse (VALUE self, VALUE string)
 {
     return RGST_CAPS_NEW (gst_caps_from_string (RVAL2CSTR (string)));
 }
@@ -369,14 +369,14 @@ are included
  * Returns: the resulting caps, as a new Gst::Caps object.
  */
 static VALUE
-rb_gst_caps_subtract (VALUE self, VALUE caps)
+rg_subtract (VALUE self, VALUE caps)
 {
     return RGST_CAPS_NEW (gst_caps_subtract (RGST_CAPS (self), RGST_CAPS
                                              (caps)));
 }
 
 static VALUE
-each(VALUE self)
+rg_each(VALUE self)
 {
     int i, size;
     GstCaps *caps;
@@ -400,39 +400,36 @@ Init_gst_caps (void)
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "parse",
-                               rb_gst_caps_from_string, 1);
+    RG_DEF_SMETHOD(parse, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_gst_caps_new, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_any", rb_gst_caps_set_any, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "append", rb_gst_caps_append, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "append_structure",
-                     rb_gst_caps_append_structure, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", rb_gst_caps_get_size, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "length", "size");
-    rb_define_method(RG_TARGET_NAMESPACE, "get_structure", rb_gst_caps_get_structure, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_structure");
-    rb_define_method(RG_TARGET_NAMESPACE, "set_simple", rb_gst_caps_set_simple, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "any?", rb_gst_caps_is_any, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "empty?", rb_gst_caps_is_empty, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "simple?", rb_gst_caps_is_simple, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "chained?", "simple?");
-    rb_define_method(RG_TARGET_NAMESPACE, "fixed?", rb_gst_caps_is_fixed, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "equal?", rb_gst_caps_is_equal, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "==", "equal?");
-    rb_define_method(RG_TARGET_NAMESPACE, "equal_fixed?", rb_gst_caps_is_equal_fixed, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "always_compatible?",
-                     rb_gst_caps_is_always_compatible, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "subset?", rb_gst_caps_is_subset, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "intersect", rb_gst_caps_intersect, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "union", rb_gst_caps_union, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "normalize", rb_gst_caps_normalize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "simplify!", rb_gst_caps_do_simplify, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "replace!", rb_gst_caps_replace, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_s", rb_gst_caps_to_string, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "subtract", rb_gst_caps_subtract, 1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_any, 1);
+    RG_DEF_METHOD(append, 1);
+    RG_DEF_METHOD(append_structure, 1);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_ALIAS("length", "size");
+    RG_DEF_METHOD(get_structure, 1);
+    RG_DEF_ALIAS("[]", "get_structure");
+    RG_DEF_METHOD(set_simple, 2);
+    RG_DEF_METHOD_P(any, 0);
+    RG_DEF_METHOD_P(empty, 0);
+    RG_DEF_METHOD_P(simple, 0);
+    RG_DEF_ALIAS("chained?", "simple?");
+    RG_DEF_METHOD_P(fixed, 0);
+    RG_DEF_METHOD_P(equal, 1);
+    RG_DEF_ALIAS("==", "equal?");
+    RG_DEF_METHOD_P(equal_fixed, 1);
+    RG_DEF_METHOD_P(always_compatible, 1);
+    RG_DEF_METHOD_P(subset, 1);
+    RG_DEF_METHOD(intersect, 1);
+    RG_DEF_METHOD(union, 1);
+    RG_DEF_METHOD(normalize, 0);
+    RG_DEF_METHOD_BANG(simplify, 0);
+    RG_DEF_METHOD_BANG(replace, 1);
+    RG_DEF_METHOD(to_s, 0);
+    RG_DEF_METHOD(subtract, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "each", each, 0);
+    RG_DEF_METHOD(each, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

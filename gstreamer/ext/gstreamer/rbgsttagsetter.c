@@ -37,7 +37,7 @@
  * Returns: self.
  */
 static VALUE
-rb_gst_tag_setter_merge (VALUE self, VALUE structure, VALUE merge_mode)
+rg_merge (VALUE self, VALUE structure, VALUE merge_mode)
 {
     gst_tag_setter_merge_tags(RGST_TAG_SETTER(self),
                               RVAL2GST_STRUCT(structure),
@@ -48,6 +48,6 @@ rb_gst_tag_setter_merge (VALUE self, VALUE structure, VALUE merge_mode)
 void
 Init_gst_tag_setter (void)
 {
-	VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE (GST_TYPE_TAG_SETTER, "TagSetter", mGst);
-	rb_define_method (RG_TARGET_NAMESPACE, "merge", rb_gst_tag_setter_merge, 2);	
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE (GST_TYPE_TAG_SETTER, "TagSetter", mGst);
+    RG_DEF_METHOD(merge, 2);   
 }

@@ -70,9 +70,8 @@ xid_callback_data_destroy_cb(gpointer data)
     g_slice_free(struct xid_callback_data, data);
 }
 
-
 static VALUE
-rb_gst_x_overlay_set_xwindow_id_with_buswatch(VALUE self, VALUE bus,
+rg_set_xwindow_id_with_buswatch(VALUE self, VALUE bus,
                                               VALUE x_window_id)
 {
     struct xid_callback_data* xid_cb_data;
@@ -94,21 +93,21 @@ rb_gst_x_overlay_set_xwindow_id_with_buswatch(VALUE self, VALUE bus,
 }
 
 static VALUE
-rb_gst_x_overlay_set_xwindow_id(VALUE self, VALUE x_window_id)
+rg_set_xwindow_id(VALUE self, VALUE x_window_id)
 {
     gst_x_overlay_set_xwindow_id(SELF(self), NUM2ULONG(x_window_id));
     return self;
 }
 
 static VALUE
-rb_gst_x_overlay_expose(VALUE self)
+rg_expose(VALUE self)
 {
     gst_x_overlay_expose(SELF(self));
     return self;
 }
 
 static VALUE
-rb_gst_x_overlay_got_xwindow_id(VALUE self, VALUE x_window_id)
+rg_got_xwindow_id(VALUE self, VALUE x_window_id)
 {
     gst_x_overlay_got_xwindow_id(SELF(self), NUM2ULL(x_window_id));
     return self;
@@ -118,16 +117,16 @@ void
 Init_gst_x_overlay(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GST_TYPE_X_OVERLAY, "XOverlay", mGst);
-    
+
     xoverlay_xid_data_quark =
       g_quark_from_static_string("__rbgst_xoverlay_xid_data_quark__");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_xwindow_id", rb_gst_x_overlay_set_xwindow_id, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "expose", rb_gst_x_overlay_expose, 0);
-   
-    rb_define_method(RG_TARGET_NAMESPACE, "got_xwindow_id", rb_gst_x_overlay_got_xwindow_id, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_xwindow_id_with_buswatch", rb_gst_x_overlay_set_xwindow_id_with_buswatch, 2);
-    
+    RG_DEF_METHOD(set_xwindow_id, 1);
+    RG_DEF_METHOD(expose, 0);
+
+    RG_DEF_METHOD(got_xwindow_id, 1);
+    RG_DEF_METHOD(set_xwindow_id_with_buswatch, 2);
+
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 
