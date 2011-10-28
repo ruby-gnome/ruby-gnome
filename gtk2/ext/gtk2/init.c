@@ -132,6 +132,7 @@ Init_gtk2(void)
     Init_gtk_eventbox();
     Init_gtk_expander();
     Init_gtk_file_chooser();
+    Init_gtk_filesystemerror();
     Init_gtk_filechooserbutton();
     Init_gtk_file_chooser_dialog();
     Init_gtk_file_chooser_widget();

@@ -269,9 +269,6 @@ Init_gtk_file_chooser(void)
 #if GTK_CHECK_VERSION(2,4,0)
 
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
-#ifdef GTK_FILE_SYSTEM_ERROR
-    VALUE eFileSystemError;
-#endif
 
     rb_define_method(RG_TARGET_NAMESPACE, "set_current_name", fcho_set_current_name, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "set_filename", fcho_set_filename, 1);
@@ -312,24 +309,6 @@ Init_gtk_file_chooser(void)
     /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
-
-#ifdef GTK_FILE_SYSTEM_ERROR
-    /* GtkFileSystemError */
-    eFileSystemError = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError",
-				    mGtk, rb_eRuntimeError);
-    rb_define_const(eFileSystemError, "NONEXISTENT",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
-    rb_define_const(eFileSystemError, "NOT_FOLDER",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
-    rb_define_const(eFileSystemError, "INVALID_URI",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
-    rb_define_const(eFileSystemError, "BAD_FILENAME",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
-    rb_define_const(eFileSystemError, "FAILED",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
-    rb_define_const(eFileSystemError, "ALREADY_EXSITS",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
-#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
     /* GtkFileChooserConfirmation */

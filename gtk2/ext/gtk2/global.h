@@ -136,6 +136,7 @@ G_GNUC_INTERNAL void Init_gtk_entry_completion(void);
 G_GNUC_INTERNAL void Init_gtk_eventbox(void);
 G_GNUC_INTERNAL void Init_gtk_expander(void);
 G_GNUC_INTERNAL void Init_gtk_file_chooser(void);
+G_GNUC_INTERNAL void Init_gtk_filesystemerror(void);
 G_GNUC_INTERNAL void Init_gtk_filechooserbutton(void);
 G_GNUC_INTERNAL void Init_gtk_file_chooser_dialog(void);
 G_GNUC_INTERNAL void Init_gtk_file_chooser_widget(void);
