@@ -34,9 +34,8 @@ static ID id_new, id_valid, id_pdf_data_p, id_ensure_uri;
 static VALUE cIndexIter;
 static VALUE cFontInfo;
 
-
 static VALUE
-doc_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     PopplerDocument *document = NULL;
     GError *error = NULL;
@@ -67,7 +66,7 @@ doc_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-doc_save(VALUE self, VALUE uri)
+rg_save(VALUE self, VALUE uri)
 {
     gboolean result;
     GError *error = NULL;
@@ -82,14 +81,14 @@ doc_save(VALUE self, VALUE uri)
 }
 
 static VALUE
-doc_save_a_copy(VALUE self, VALUE uri)
+rg_save_a_copy(VALUE self, VALUE uri)
 {
     gboolean result;
     GError *error = NULL;
 
     uri = rb_funcall(self, id_ensure_uri, 1, uri);
     result = poppler_document_save_a_copy(RVAL2DOC(self), RVAL2CSTR(uri),
-					  &error);
+                      &error);
 
     if (error)
         RAISE_GERROR(error);
@@ -98,13 +97,13 @@ doc_save_a_copy(VALUE self, VALUE uri)
 }
 
 static VALUE
-doc_get_n_pages(VALUE self)
+rg_n_pages(VALUE self)
 {
     return INT2NUM(poppler_document_get_n_pages(RVAL2DOC(self)));
 }
 
 static VALUE
-doc_get_page(VALUE self, VALUE index_or_label)
+rg_get_page(VALUE self, VALUE index_or_label)
 {
     VALUE rb_page;
     PopplerPage *page;
@@ -129,33 +128,33 @@ doc_get_page(VALUE self, VALUE index_or_label)
 }
 
 static VALUE
-doc_has_attachments(VALUE self)
+rg_has_attachments_p(VALUE self)
 {
     return CBOOL2RVAL(poppler_document_has_attachments(RVAL2DOC(self)));
 }
 
 static VALUE
-doc_get_attachments(VALUE self)
+rg_attachments(VALUE self)
 {
     return GLIST2ARYF(poppler_document_get_attachments(RVAL2DOC(self)));
 }
 
 static VALUE
-doc_find_dest(VALUE self, VALUE link_name)
+rg_find_dest(VALUE self, VALUE link_name)
 {
     return GOBJ2RVAL(poppler_document_find_dest(RVAL2DOC(self),
                                                 RVAL2CSTR(link_name)));
 }
 
 static VALUE
-doc_get_form_field(VALUE self, VALUE id)
+rg_get_form_field(VALUE self, VALUE id)
 {
     return GOBJ2RVAL(poppler_document_get_form_field(RVAL2DOC(self),
                                                      NUM2INT(id)));
 }
 
 static VALUE
-doc_each(VALUE self)
+rg_each(VALUE self)
 {
     PopplerDocument *document;
     int i, n_pages;
@@ -176,19 +175,17 @@ doc_each(VALUE self)
 }
 
 static VALUE
-doc_get_index_iter(VALUE self)
+rg_index_iter(VALUE self)
 {
     return rb_funcall(cIndexIter, id_new, 1, self);
 }
 
 static VALUE
-doc_get_font_info(VALUE self)
+rg_font_info(VALUE self)
 {
     return rb_funcall(cFontInfo, id_new, 1, self);
 }
 
-
-
 /* Interface for getting the Index of a poppler_document */
 #define CHECK_IITER_IS_VALID(iter) do {         \
     if (!RVAL2CBOOL(index_iter_valid_p(iter)))       \
@@ -267,9 +264,8 @@ index_iter_each(VALUE self)
     return self;
 }
 
-
 #if POPPLER_CHECK_VERSION(0, 6, 0)
-
+
 static VALUE
 font_info_initialize(VALUE self, VALUE document)
 {
@@ -292,7 +288,6 @@ font_info_scan(VALUE self, VALUE n_pages)
 }
 #endif
 
-
 #define CHECK_FITER_IS_VALID(iter) do {         \
     if (!RVAL2CBOOL(fonts_iter_valid_p(iter)))       \
         return Qnil;                            \
@@ -373,7 +368,6 @@ fonts_iter_each(VALUE self)
     return self;
 }
 
-
 /* Export to ps */
 static VALUE
 ps_file_initialize(VALUE self, VALUE document, VALUE filename,
@@ -430,29 +424,28 @@ Init_poppler_document(VALUE mPoppler)
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", doc_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "save", doc_save, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "save_a_copy", doc_save_a_copy, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "n_pages", doc_get_n_pages, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "size", "n_pages");
-    rb_define_method(RG_TARGET_NAMESPACE, "get_page", doc_get_page, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_page");
-    rb_define_method(RG_TARGET_NAMESPACE, "has_attachments?", doc_has_attachments, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "have_attachments?", "has_attachments?");
-    rb_define_method(RG_TARGET_NAMESPACE, "attachments", doc_get_attachments, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "find_dest", doc_find_dest, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "get_destination", "find_dest");
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(save, 1);
+    RG_DEF_METHOD(save_a_copy, 1);
+    RG_DEF_METHOD(n_pages, 0);
+    RG_DEF_ALIAS("size", "n_pages");
+    RG_DEF_METHOD(get_page, 1);
+    RG_DEF_ALIAS("[]", "get_page");
+    RG_DEF_METHOD_P(has_attachments, 0);
+    RG_DEF_ALIAS("have_attachments?", "has_attachments?");
+    RG_DEF_METHOD(attachments, 0);
+    RG_DEF_METHOD(find_dest, 1);
+    RG_DEF_ALIAS("get_destination", "find_dest");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "get_form_field", doc_get_form_field, 1);
+    RG_DEF_METHOD(get_form_field, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "each", doc_each, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "pages", "to_a");
+    RG_DEF_METHOD(each, 0);
+    RG_DEF_ALIAS("pages", "to_a");
 
-    rb_define_method(RG_TARGET_NAMESPACE, "index_iter", doc_get_index_iter, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "font_info", doc_get_font_info, 0);
+    RG_DEF_METHOD(index_iter, 0);
+    RG_DEF_METHOD(font_info, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 
 /* Interface for getting the Index of a poppler_document */
     rb_include_module(cIndexIter, rb_mEnumerable);
@@ -469,7 +462,6 @@ Init_poppler_document(VALUE mPoppler)
     rb_define_method(cIndexIter, "each", index_iter_each, 0);
 
     G_DEF_SETTERS(cIndexIter);
-
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     rb_define_method(cFontInfo, "initialize", font_info_initialize, 1);

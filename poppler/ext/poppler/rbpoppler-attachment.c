@@ -38,7 +38,7 @@ attachment_save_func(const gchar *buf, gsize count, gpointer data,
 }
 
 static VALUE
-attachment_save(int argc, VALUE *argv, VALUE self)
+rg_save(int argc, VALUE *argv, VALUE self)
 {
     VALUE filename;
     gboolean result;
@@ -68,37 +68,37 @@ attachment_save(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-attachment_get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL(SELF(self)->name);
 }
 
 static VALUE
-attachment_get_description(VALUE self)
+rg_description(VALUE self)
 {
     return CSTR2RVAL(SELF(self)->description);
 }
 
 static VALUE
-attachment_get_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(SELF(self)->size);
 }
 
 static VALUE
-attachment_get_mtime(VALUE self)
+rg_mtime(VALUE self)
 {
     return rb_time_new(SELF(self)->mtime, 0);
 }
 
 static VALUE
-attachment_get_ctime(VALUE self)
+rg_ctime(VALUE self)
 {
     return rb_time_new(SELF(self)->ctime, 0);
 }
 
 static VALUE
-attachment_get_checksum(VALUE self)
+rg_checksum(VALUE self)
 {
     GString *checksum;
     checksum = SELF(self)->checksum;
@@ -114,13 +114,13 @@ Init_poppler_attachment(VALUE mPoppler)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ATTACHMENT, "Attachment", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "save", attachment_save, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", attachment_get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "description", attachment_get_description, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "size", attachment_get_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "mtime", attachment_get_mtime, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ctime", attachment_get_ctime, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "checksum", attachment_get_checksum, 0);
+    RG_DEF_METHOD(save, -1);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(mtime, 0);
+    RG_DEF_METHOD(ctime, 0);
+    RG_DEF_METHOD(checksum, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -24,19 +24,19 @@
 #define RG_TARGET_NAMESPACE mPoppler
 
 static VALUE
-get_backend(VALUE self)
+rg_m_backend(VALUE self)
 {
     return GENUM2RVAL(poppler_get_backend(), POPPLER_TYPE_BACKEND);
 }
 
 static VALUE
-get_version(VALUE self)
+rg_m_version(VALUE self)
 {
     return CSTR2RVAL(poppler_get_version());
 }
 
 static VALUE
-cairo_available(VALUE self)
+rg_m_cairo_available_p(VALUE self)
 {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
     return Qtrue;
@@ -44,7 +44,6 @@ cairo_available(VALUE self)
     return Qfalse;
 #endif
 }
-
 
 void
 Init_poppler(void)
@@ -77,23 +76,22 @@ Init_poppler(void)
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TYPE, "AnnotationType", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_FLAG, "AnnotationFlag", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_MARKUP_REPLY_TYPE,
-		"AnnotationMarkupReplyType", RG_TARGET_NAMESPACE);
+        "AnnotationMarkupReplyType", RG_TARGET_NAMESPACE);
     G_RENAME_NICK("3D", "TYPE_3D");
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_EXTERNAL_DATA_TYPE,
-		"AnnotationExternalDataType", RG_TARGET_NAMESPACE);
+        "AnnotationExternalDataType", RG_TARGET_NAMESPACE);
 #  if !POPPLER_CHECK_VERSION(0, 9, 0)
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_ICON, "AnnotationTextIcon", RG_TARGET_NAMESPACE);
 #  endif
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT_STATE, "AnnotationTextState", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING,
-		"AnnotationFreeTextQuadding", RG_TARGET_NAMESPACE);
-
+        "AnnotationFreeTextQuadding", RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", RG_TARGET_NAMESPACE);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "backend", get_backend, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "version", get_version, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "cairo_available?", cairo_available, 0);
+    RG_DEF_MODFUNC(backend, 0);
+    RG_DEF_MODFUNC(version, 0);
+    RG_DEF_MODFUNC_P(cairo_available, 0);
 
     Init_poppler_document(RG_TARGET_NAMESPACE);
     Init_poppler_page(RG_TARGET_NAMESPACE);
