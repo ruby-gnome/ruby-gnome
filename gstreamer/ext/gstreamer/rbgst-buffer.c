@@ -21,6 +21,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cBuffer
 #define SELF(obj) (RVAL2GST_BUF(obj))
 #define RVAL2GST_FLAGS(flags) \
     (RVAL2GFLAGS(flags, GST_TYPE_BUFFER_FLAG))
@@ -295,72 +296,72 @@ span_p(VALUE self, VALUE other)
 void
 Init_gst_buffer(void)
 {
-    VALUE rb_cGstBuffer, rb_cGstBufferCopyFlags;
+    VALUE RG_TARGET_NAMESPACE, rb_cGstBufferCopyFlags;
 
-    rb_cGstBuffer = G_DEF_CLASS(GST_TYPE_BUFFER, "Buffer", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_BUFFER, "Buffer", mGst);
 
-    rb_define_const(rb_cGstBuffer, "OFFSET_NONE",
+    rb_define_const(RG_TARGET_NAMESPACE, "OFFSET_NONE",
                     ULL2NUM(GST_BUFFER_OFFSET_NONE));
 
-    G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flags", rb_cGstBuffer);
-    G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
+    G_DEF_CLASS(GST_TYPE_BUFFER_FLAG, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_BUFFER_FLAG, "GST_BUFFER_");
 
     rb_cGstBufferCopyFlags = G_DEF_CLASS(GST_TYPE_BUFFER_COPY_FLAGS,
-                                         "CopyFlags", rb_cGstBuffer);
-    G_DEF_CONSTANTS(rb_cGstBuffer, GST_TYPE_BUFFER_COPY_FLAGS, "GST_BUFFER_");
+                                         "CopyFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_BUFFER_COPY_FLAGS, "GST_BUFFER_");
     rb_define_const(rb_cGstBufferCopyFlags, "ALL",
                     GST_COPY_FLAGS2RVAL(GST_BUFFER_COPY_ALL));
-    rb_define_const(rb_cGstBuffer, "COPY_ALL",
+    rb_define_const(RG_TARGET_NAMESPACE, "COPY_ALL",
                     GST_COPY_FLAGS2RVAL(GST_BUFFER_COPY_ALL));
 
-    rb_define_method(rb_cGstBuffer, "initialize", initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, -1);
 
-    rb_define_method(rb_cGstBuffer, "flags", get_flags, 0);
-    rb_define_method(rb_cGstBuffer, "set_flags", set_flags, 1);
-    rb_define_method(rb_cGstBuffer, "raise_flag", raise_flag, 1);
-    rb_define_method(rb_cGstBuffer, "lower_flag", lower_flag, 1);
-    rb_define_method(rb_cGstBuffer, "flag_raised?", flag_raised_p, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", set_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "raise_flag", raise_flag, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lower_flag", lower_flag, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "flag_raised?", flag_raised_p, 1);
 
-    rb_define_method(rb_cGstBuffer, "data", get_data, 0);
-    rb_define_method(rb_cGstBuffer, "set_data", set_data, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "data", get_data, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_data", set_data, 1);
 
-    rb_define_method(rb_cGstBuffer, "size", get_size, 0);
-    rb_define_method(rb_cGstBuffer, "set_size", set_size, 1);
-    rb_define_alias(rb_cGstBuffer, "length", "size");
-    rb_define_alias(rb_cGstBuffer, "set_length", "set_size");
+    rb_define_method(RG_TARGET_NAMESPACE, "size", get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size", set_size, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "length", "size");
+    rb_define_alias(RG_TARGET_NAMESPACE, "set_length", "set_size");
 
-    rb_define_method(rb_cGstBuffer, "timestamp", get_timestamp, 0);
-    rb_define_method(rb_cGstBuffer, "set_timestamp", set_timestamp, 1);
-    rb_define_method(rb_cGstBuffer, "valid_timestamp?", valid_timestamp_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "timestamp", get_timestamp, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_timestamp", set_timestamp, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "valid_timestamp?", valid_timestamp_p, 0);
 
-    rb_define_method(rb_cGstBuffer, "duration", get_duration, 0);
-    rb_define_method(rb_cGstBuffer, "set_duration", set_duration, 1);
-    rb_define_method(rb_cGstBuffer, "valid_duration?", valid_duration_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "duration", get_duration, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_duration", set_duration, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "valid_duration?", valid_duration_p, 0);
 
-    rb_define_method(rb_cGstBuffer, "caps", get_caps, 0);
-    rb_define_method(rb_cGstBuffer, "set_caps", set_caps, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "caps", get_caps, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_caps", set_caps, 1);
 
-    rb_define_method(rb_cGstBuffer, "offset", get_offset, 0);
-    rb_define_method(rb_cGstBuffer, "set_offset", set_offset, 1);
-    rb_define_method(rb_cGstBuffer, "valid_offset?", valid_offset_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "offset", get_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_offset", set_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "valid_offset?", valid_offset_p, 0);
 
-    rb_define_method(rb_cGstBuffer, "offset_end", get_offset_end, 0);
-    rb_define_method(rb_cGstBuffer, "set_offset_end", set_offset_end, 1);
-    rb_define_method(rb_cGstBuffer, "valid_offset_end?", valid_offset_end_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "offset_end", get_offset_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_offset_end", set_offset_end, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "valid_offset_end?", valid_offset_end_p, 0);
 
-    rb_define_method(rb_cGstBuffer, "discontinuity?", discontinuity_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "discontinuity?", discontinuity_p, 0);
 
-    rb_define_method(rb_cGstBuffer, "copy_metadata", copy_metadata, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy_metadata", copy_metadata, -1);
 
-    rb_define_method(rb_cGstBuffer, "metadata_writable?",
+    rb_define_method(RG_TARGET_NAMESPACE, "metadata_writable?",
                      metadata_writable_p, 0);
-    rb_define_method(rb_cGstBuffer, "metadata_writable!",
+    rb_define_method(RG_TARGET_NAMESPACE, "metadata_writable!",
                      metadata_writable_bang, 0);
 
-    rb_define_method(rb_cGstBuffer, "create_sub", create_sub, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_sub", create_sub, 2);
 
-    rb_define_method(rb_cGstBuffer, "span", span, 3);
-    rb_define_method(rb_cGstBuffer, "span?", span_p, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "span", span, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "span?", span_p, 1);
 
-    G_DEF_SETTERS(rb_cGstBuffer);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

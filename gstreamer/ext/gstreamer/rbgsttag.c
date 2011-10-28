@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE mTag
+
 /* Module: Gst::Tag
  * Helper module to the tagging interface.
  */
@@ -96,17 +98,17 @@ rb_gst_tag_get_flag (VALUE self, VALUE tag)
 void
 Init_gst_tag (void)
 {
-    VALUE m = rb_define_module_under (mGst, "Tag");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under (mGst, "Tag");
 
-    rb_define_module_function (m, "exists?", rb_gst_tag_exists, 1);
-    rb_define_module_function (m, "get_nick", rb_gst_tag_get_nick, 1);
-    rb_define_module_function (m, "get_description", 
+    rb_define_module_function (RG_TARGET_NAMESPACE, "exists?", rb_gst_tag_exists, 1);
+    rb_define_module_function (RG_TARGET_NAMESPACE, "get_nick", rb_gst_tag_get_nick, 1);
+    rb_define_module_function (RG_TARGET_NAMESPACE, "get_description", 
                                 rb_gst_tag_get_description, 1);
-    rb_define_module_function (m, "get_flag", rb_gst_tag_get_flag, 1);
-    rb_define_module_function (m, "fixed?", rb_gst_tag_fixed, 1);
+    rb_define_module_function (RG_TARGET_NAMESPACE, "get_flag", rb_gst_tag_get_flag, 1);
+    rb_define_module_function (RG_TARGET_NAMESPACE, "fixed?", rb_gst_tag_fixed, 1);
 
-    G_DEF_CLASS (GST_TYPE_TAG_FLAG, "Flag", m);
-    G_DEF_CONSTANTS (m, GST_TYPE_TAG_FLAG, "GST_TAG_");
-    G_DEF_CLASS (GST_TYPE_TAG_MERGE_MODE, "MergeMode", m);
-    G_DEF_CONSTANTS (m, GST_TYPE_TAG_MERGE_MODE, "GST_TAG_");
+    G_DEF_CLASS (GST_TYPE_TAG_FLAG, "Flag", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_TAG_FLAG, "GST_TAG_");
+    G_DEF_CLASS (GST_TYPE_TAG_MERGE_MODE, "MergeMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_TAG_MERGE_MODE, "GST_TAG_");
 }

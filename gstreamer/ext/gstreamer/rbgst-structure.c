@@ -21,6 +21,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cStructure
 #define SELF(obj) (RVAL2GST_STRUCT(obj))
 
 static VALUE
@@ -258,44 +259,44 @@ to_s(VALUE self)
 void
 Init_gst_structure(void)
 {
-    VALUE rb_cGstStructure;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstStructure = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_STRUCTURE, "Structure", mGst);
 
-    rb_include_module(rb_cGstStructure, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_singleton_method(rb_cGstStructure, "parse", s_parse, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "parse", s_parse, 1);
 
-    rb_define_method(rb_cGstStructure, "initialize", initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", initialize, -1);
 
-    rb_define_method(rb_cGstStructure, "name", get_name, 0);
-    rb_define_method(rb_cGstStructure, "set_name", set_name, 1);
-    rb_define_method(rb_cGstStructure, "has_name?", has_name_p, 1);
-    rb_define_alias(rb_cGstStructure, "have_name?", "has_name?");
+    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_name", set_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_name?", has_name_p, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "have_name?", "has_name?");
 
-    rb_define_method(rb_cGstStructure, "[]", get_value, 1);
-    rb_define_method(rb_cGstStructure, "[]=", set_value, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "[]", get_value, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "[]=", set_value, 2);
 
-    rb_define_method(rb_cGstStructure, "remove", remove_fields, -1);
-    rb_define_alias(rb_cGstStructure, "delete", "remove");
-    rb_define_method(rb_cGstStructure, "remove_all", remove_all_fields, 0);
-    rb_define_alias(rb_cGstStructure, "clear", "remove_all");
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", remove_fields, -1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "delete", "remove");
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_all", remove_all_fields, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "clear", "remove_all");
 
-    rb_define_method(rb_cGstStructure, "each", foreach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", foreach, 0);
 
-    rb_define_method(rb_cGstStructure, "map!", map_in_place, 0);
-    rb_define_alias(rb_cGstStructure, "collect!", "map!");
+    rb_define_method(RG_TARGET_NAMESPACE, "map!", map_in_place, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "collect!", "map!");
 
-    rb_define_method(rb_cGstStructure, "size", n_fields, 0);
-    rb_define_alias(rb_cGstStructure, "length", "size");
-    rb_define_method(rb_cGstStructure, "empty?", empty_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", n_fields, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "length", "size");
+    rb_define_method(RG_TARGET_NAMESPACE, "empty?", empty_p, 0);
 
-    rb_define_method(rb_cGstStructure, "nth_field_name", nth_field_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "nth_field_name", nth_field_name, 1);
 
-    rb_define_method(rb_cGstStructure, "has_field?", has_field_p, 1);
-    rb_define_alias(rb_cGstStructure, "have_field?", "has_field?");
+    rb_define_method(RG_TARGET_NAMESPACE, "has_field?", has_field_p, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "have_field?", "has_field?");
 
-    rb_define_method(rb_cGstStructure, "to_s", to_s, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_s", to_s, 0);
 
-    G_DEF_SETTERS(rb_cGstStructure);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

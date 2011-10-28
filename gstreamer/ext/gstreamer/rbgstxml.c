@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cXML
+
 /* Class: Gst::XML
  * Convert Gst::Element objects into an XML presentation. 
  */
@@ -177,14 +179,14 @@ rb_gst_xml_each_topelement (VALUE self)
 void
 Init_gst_xml (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_XML, "XML", mGst);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_XML, "XML", mGst);
 	
-	rb_define_singleton_method (c, "write_file", rb_gst_xml_write_file, 2);
+	rb_define_singleton_method (RG_TARGET_NAMESPACE, "write_file", rb_gst_xml_write_file, 2);
 	
-	rb_define_method (c, "initialize", rb_gst_xml_new, 0);
-	rb_define_method (c, "parse_file", rb_gst_xml_parse_file, -1);
-	rb_define_method (c, "parse_memory", rb_gst_xml_parse_memory, -1);
-	rb_define_method (c, "get_element", rb_gst_xml_get_element, 1);
-	rb_define_method (c, "topelements", rb_gst_xml_get_topelements, 0);
-	rb_define_method (c, "each_topelement", rb_gst_xml_each_topelement, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "initialize", rb_gst_xml_new, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "parse_file", rb_gst_xml_parse_file, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "parse_memory", rb_gst_xml_parse_memory, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "get_element", rb_gst_xml_get_element, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "topelements", rb_gst_xml_get_topelements, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "each_topelement", rb_gst_xml_each_topelement, 0);
 }

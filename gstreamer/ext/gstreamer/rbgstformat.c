@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cFormat
+
 /* Class: Gst::Format
  * Dynamically register new formats. 
  */
@@ -145,16 +147,16 @@ rb_gst_format_is_equal (VALUE self, VALUE other_format)
 void
 Init_gst_format (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_FORMAT2, "Format", mGst);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_FORMAT2, "Format", mGst);
 
-	rb_define_singleton_method (c, "each", rb_gst_format_each, 0);
-	rb_define_singleton_method (c, "find", rb_gst_format_find, 1);
+	rb_define_singleton_method (RG_TARGET_NAMESPACE, "each", rb_gst_format_each, 0);
+	rb_define_singleton_method (RG_TARGET_NAMESPACE, "find", rb_gst_format_find, 1);
 
-	rb_define_method (c, "type_id", rb_gst_format_get_type_id, 0);
-	rb_define_method (c, "nick",	rb_gst_format_get_nick,	0);
-	rb_define_method (c, "description", rb_gst_format_get_description, 0);
-	rb_define_method (c, "==", rb_gst_format_is_equal, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "type_id", rb_gst_format_get_type_id, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "nick",	rb_gst_format_get_nick,	0);
+	rb_define_method (RG_TARGET_NAMESPACE, "description", rb_gst_format_get_description, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "==", rb_gst_format_is_equal, 1);
 
-	G_DEF_CLASS (GST_TYPE_FORMAT, "Type", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_FORMAT, "GST_FORMAT_");
+	G_DEF_CLASS (GST_TYPE_FORMAT, "Type", RG_TARGET_NAMESPACE);
+	G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_FORMAT, "GST_FORMAT_");
 }

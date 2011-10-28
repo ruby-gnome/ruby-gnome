@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cTypeFindFactory
 #define SELF(self) RVAL2GST_TYPE_FIND_FACTORY(self)
 
 /* Class: Gst::TypeFindFactory
@@ -114,11 +115,11 @@ rb_gst_type_find_factory_to_s (VALUE self)
 void
 Init_gst_typefindfactory (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_TYPE_FIND_FACTORY, "TypeFindFactory", mGst);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_TYPE_FIND_FACTORY, "TypeFindFactory", mGst);
 
-	rb_define_singleton_method(c, "list", rb_gst_type_find_factory_get_list, 0);
-	rb_define_method(c, "extensions", rb_gst_type_find_factory_get_extensions, 0);
-	rb_define_method(c, "caps", rb_gst_type_find_factory_get_caps, 0);
-	/*rb_define_method(c, "call_function", rb_gst_type_find_factory_call_function, 1);*/
-	rb_define_method(c, "to_s", rb_gst_type_find_factory_to_s, 0);
+	rb_define_singleton_method(RG_TARGET_NAMESPACE, "list", rb_gst_type_find_factory_get_list, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "extensions", rb_gst_type_find_factory_get_extensions, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "caps", rb_gst_type_find_factory_get_caps, 0);
+	/*rb_define_method(RG_TARGET_NAMESPACE, "call_function", rb_gst_type_find_factory_call_function, 1);*/
+	rb_define_method(RG_TARGET_NAMESPACE, "to_s", rb_gst_type_find_factory_to_s, 0);
 }

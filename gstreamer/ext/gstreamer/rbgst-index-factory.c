@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cIndexFactory
 #define SELF(self) RVAL2GST_INDEX_FACTORY(self)
 
 /* Class: Gst::IndexFactory
@@ -55,14 +56,14 @@ get_description(VALUE self)
 void
 Init_gst_indexfactory (void)
 {
-    VALUE rb_cGstIndexFactory;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstIndexFactory = G_DEF_CLASS(GST_TYPE_INDEX_FACTORY,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_INDEX_FACTORY,
                                       "IndexFactory", mGst);
 
-    rb_define_singleton_method(rb_cGstIndexFactory, "find", s_find, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "find", s_find, 1);
 
-    rb_define_method(rb_cGstIndexFactory, "to_s", rb_gst_indexfactory_to_s, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_s", rb_gst_indexfactory_to_s, 0);
 
-    rb_define_method(rb_cGstIndexFactory, "description", get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", get_description, 0);
 }

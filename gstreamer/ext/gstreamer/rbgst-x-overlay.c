@@ -25,6 +25,7 @@
 #include "rbgst.h"
 #include <gst/interfaces/xoverlay.h>
 
+#define RG_TARGET_NAMESPACE mXOverlay
 #define SELF(o)           (GST_X_OVERLAY(RVAL2GOBJ(o)))
 
 static GQuark xoverlay_xid_data_quark;
@@ -116,18 +117,18 @@ rb_gst_x_overlay_got_xwindow_id(VALUE self, VALUE x_window_id)
 void
 Init_gst_x_overlay(void)
 {
-    VALUE i = G_DEF_INTERFACE(GST_TYPE_X_OVERLAY, "XOverlay", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GST_TYPE_X_OVERLAY, "XOverlay", mGst);
     
     xoverlay_xid_data_quark =
       g_quark_from_static_string("__rbgst_xoverlay_xid_data_quark__");
 
-    rb_define_method(i, "set_xwindow_id", rb_gst_x_overlay_set_xwindow_id, 1);
-    rb_define_method(i, "expose", rb_gst_x_overlay_expose, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_xwindow_id", rb_gst_x_overlay_set_xwindow_id, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "expose", rb_gst_x_overlay_expose, 0);
    
-    rb_define_method(i, "got_xwindow_id", rb_gst_x_overlay_got_xwindow_id, 1);
-    rb_define_method(i, "set_xwindow_id_with_buswatch", rb_gst_x_overlay_set_xwindow_id_with_buswatch, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "got_xwindow_id", rb_gst_x_overlay_got_xwindow_id, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_xwindow_id_with_buswatch", rb_gst_x_overlay_set_xwindow_id_with_buswatch, 2);
     
-    G_DEF_SETTERS(i);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 
 #endif /* HAVE_GST_OVERLAY */

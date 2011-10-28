@@ -21,17 +21,19 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE mSeek
+
 /*  Class: Gst::Seek
  */
 
 void
 Init_gst_seek (void)
 {
-    VALUE c = rb_define_module_under(mGst, "Seek");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGst, "Seek");
 
     G_DEF_CLASS(GST_TYPE_SEEK_TYPE, "SeekType", mGst);
-    G_DEF_CONSTANTS(c, GST_TYPE_SEEK_TYPE, "GST_SEEK_");
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_SEEK_TYPE, "GST_SEEK_");
 
     G_DEF_CLASS(GST_TYPE_SEEK_FLAGS, "SeekFlags", mGst);
-    G_DEF_CONSTANTS(c, GST_TYPE_SEEK_FLAGS, "GST_SEEK_");
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_SEEK_FLAGS, "GST_SEEK_");
 }

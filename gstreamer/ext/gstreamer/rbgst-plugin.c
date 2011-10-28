@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cPlugin
 #define SELF(self) RVAL2GST_PLUGIN(self)
 
 /* Class: Gst::Plugin
@@ -141,24 +142,24 @@ rb_gst_plugin_is_equal (VALUE self, VALUE other_plugin)
 void
 Init_gst_plugin (void)
 {
-    VALUE rb_cGstPlugin;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstPlugin = G_DEF_CLASS(GST_TYPE_PLUGIN, "Plugin", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_PLUGIN, "Plugin", mGst);
 
-    rb_define_method(rb_cGstPlugin, "loaded?", rb_gst_plugin_is_loaded, 0);
-    rb_define_method(rb_cGstPlugin, "==", rb_gst_plugin_is_equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "loaded?", rb_gst_plugin_is_loaded, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", rb_gst_plugin_is_equal, 1);
 
-    rb_define_method(rb_cGstPlugin, "filename", rb_gst_plugin_get_filename, 0);
-    rb_define_method(rb_cGstPlugin, "major_version",
+    rb_define_method(RG_TARGET_NAMESPACE, "filename", rb_gst_plugin_get_filename, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "major_version",
                      rb_gst_plugin_get_major_version, 0);
-    rb_define_method(rb_cGstPlugin, "minor_version",
+    rb_define_method(RG_TARGET_NAMESPACE, "minor_version",
                      rb_gst_plugin_get_minor_version, 0);
-    rb_define_method(rb_cGstPlugin, "name", rb_gst_plugin_get_name, 0);
-    rb_define_method(rb_cGstPlugin, "description",
+    rb_define_method(RG_TARGET_NAMESPACE, "name", rb_gst_plugin_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "description",
                      rb_gst_plugin_get_description, 0);
-    rb_define_method(rb_cGstPlugin, "version", rb_gst_plugin_get_version, 0);
-    rb_define_method(rb_cGstPlugin, "license", rb_gst_plugin_get_license, 0);
-    rb_define_method(rb_cGstPlugin, "source", get_source, 0);
-    rb_define_method(rb_cGstPlugin, "package", rb_gst_plugin_get_package, 0);
-    rb_define_method(rb_cGstPlugin, "origin", rb_gst_plugin_get_origin, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "version", rb_gst_plugin_get_version, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "license", rb_gst_plugin_get_license, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "source", get_source, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "package", rb_gst_plugin_get_package, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "origin", rb_gst_plugin_get_origin, 0);
 }

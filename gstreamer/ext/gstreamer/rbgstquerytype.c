@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cQueryType
+
 /* Class: Gst::QueryType
  * Dynamically register new query types. 
  */
@@ -145,16 +147,16 @@ rb_gst_querytype_is_equal (VALUE self, VALUE other_query)
 void
 Init_gst_querytype (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_QUERY_TYPE2, "QueryType", mGst);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_QUERY_TYPE2, "QueryType", mGst);
 
-	rb_define_singleton_method (c, "each", rb_gst_querytype_each, 0);
-	rb_define_singleton_method (c, "find", rb_gst_querytype_find, 1);
+	rb_define_singleton_method (RG_TARGET_NAMESPACE, "each", rb_gst_querytype_each, 0);
+	rb_define_singleton_method (RG_TARGET_NAMESPACE, "find", rb_gst_querytype_find, 1);
 
-	rb_define_method (c, "type_id", rb_gst_querytype_get_type_id, 0);
-	rb_define_method (c, "nick", rb_gst_querytype_get_nick,	0);
-	rb_define_method (c, "description", rb_gst_querytype_get_description, 0);
-	rb_define_method (c, "==", rb_gst_querytype_is_equal, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "type_id", rb_gst_querytype_get_type_id, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "nick", rb_gst_querytype_get_nick,	0);
+	rb_define_method (RG_TARGET_NAMESPACE, "description", rb_gst_querytype_get_description, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "==", rb_gst_querytype_is_equal, 1);
 
-	G_DEF_CLASS (GST_TYPE_QUERY_TYPE, "Type", c);
-	G_DEF_CONSTANTS (c, GST_TYPE_QUERY_TYPE, "GST_QUERY_");
+	G_DEF_CLASS (GST_TYPE_QUERY_TYPE, "Type", RG_TARGET_NAMESPACE);
+	G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_QUERY_TYPE, "GST_QUERY_");
 }

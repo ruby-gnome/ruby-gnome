@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cSystemClock
+
 /* Class: Gst::SystemClock
  * The Gst::SystemClock class is an implementation of Gst::Clock 
  * using the system time. 
@@ -41,6 +43,6 @@ rb_gst_systemclock_obtain (self)
 void
 Init_gst_systemclock (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
-	rb_define_singleton_method (c, "obtain", rb_gst_systemclock_obtain, 0);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
+	rb_define_singleton_method (RG_TARGET_NAMESPACE, "obtain", rb_gst_systemclock_obtain, 0);
 }

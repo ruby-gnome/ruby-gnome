@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cCaps
 #define SELF(self) (RVAL2GST_CAPS(self))
 
 /* Class: Gst::Caps
@@ -393,47 +394,47 @@ each(VALUE self)
 void
 Init_gst_caps (void)
 {
-    VALUE cGstCaps;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cGstCaps = G_DEF_CLASS (GST_TYPE_CAPS, "Caps", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_CAPS, "Caps", mGst);
 
-    rb_include_module(cGstCaps, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_singleton_method(cGstCaps, "parse",
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "parse",
                                rb_gst_caps_from_string, 1);
 
-    rb_define_method(cGstCaps, "initialize", rb_gst_caps_new, -1);
-    rb_define_method(cGstCaps, "set_any", rb_gst_caps_set_any, 1);
-    rb_define_method(cGstCaps, "append", rb_gst_caps_append, 1);
-    rb_define_method(cGstCaps, "append_structure",
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_gst_caps_new, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_any", rb_gst_caps_set_any, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append", rb_gst_caps_append, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_structure",
                      rb_gst_caps_append_structure, 1);
-    rb_define_method(cGstCaps, "size", rb_gst_caps_get_size, 0);
-    rb_define_alias(cGstCaps, "length", "size");
-    rb_define_method(cGstCaps, "get_structure", rb_gst_caps_get_structure, 1);
-    rb_define_alias(cGstCaps, "[]", "get_structure");
-    rb_define_method(cGstCaps, "set_simple", rb_gst_caps_set_simple, 2);
-    rb_define_method(cGstCaps, "any?", rb_gst_caps_is_any, 0);
-    rb_define_method(cGstCaps, "empty?", rb_gst_caps_is_empty, 0);
-    rb_define_method(cGstCaps, "simple?", rb_gst_caps_is_simple, 0);
-    rb_define_alias(cGstCaps, "chained?", "simple?");
-    rb_define_method(cGstCaps, "fixed?", rb_gst_caps_is_fixed, 0);
-    rb_define_method(cGstCaps, "equal?", rb_gst_caps_is_equal, 1);
-    rb_define_alias(cGstCaps, "==", "equal?");
-    rb_define_method(cGstCaps, "equal_fixed?", rb_gst_caps_is_equal_fixed, 1);
-    rb_define_method(cGstCaps, "always_compatible?",
+    rb_define_method(RG_TARGET_NAMESPACE, "size", rb_gst_caps_get_size, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "length", "size");
+    rb_define_method(RG_TARGET_NAMESPACE, "get_structure", rb_gst_caps_get_structure, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "[]", "get_structure");
+    rb_define_method(RG_TARGET_NAMESPACE, "set_simple", rb_gst_caps_set_simple, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "any?", rb_gst_caps_is_any, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "empty?", rb_gst_caps_is_empty, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "simple?", rb_gst_caps_is_simple, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "chained?", "simple?");
+    rb_define_method(RG_TARGET_NAMESPACE, "fixed?", rb_gst_caps_is_fixed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "equal?", rb_gst_caps_is_equal, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "==", "equal?");
+    rb_define_method(RG_TARGET_NAMESPACE, "equal_fixed?", rb_gst_caps_is_equal_fixed, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "always_compatible?",
                      rb_gst_caps_is_always_compatible, 1);
-    rb_define_method(cGstCaps, "subset?", rb_gst_caps_is_subset, 1);
-    rb_define_method(cGstCaps, "intersect", rb_gst_caps_intersect, 1);
-    rb_define_method(cGstCaps, "union", rb_gst_caps_union, 1);
-    rb_define_method(cGstCaps, "normalize", rb_gst_caps_normalize, 0);
-    rb_define_method(cGstCaps, "simplify!", rb_gst_caps_do_simplify, 0);
-    rb_define_method(cGstCaps, "replace!", rb_gst_caps_replace, 1);
-    rb_define_method(cGstCaps, "to_s", rb_gst_caps_to_string, 0);
-    rb_define_method(cGstCaps, "subtract", rb_gst_caps_subtract, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "subset?", rb_gst_caps_is_subset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "intersect", rb_gst_caps_intersect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "union", rb_gst_caps_union, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "normalize", rb_gst_caps_normalize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "simplify!", rb_gst_caps_do_simplify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "replace!", rb_gst_caps_replace, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_s", rb_gst_caps_to_string, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "subtract", rb_gst_caps_subtract, 1);
 
-    rb_define_method(cGstCaps, "each", each, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", each, 0);
 
-    G_DEF_SETTERS(cGstCaps);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 /* TODO:
     gst_caps_structure_fixate_field_nearest_int ()

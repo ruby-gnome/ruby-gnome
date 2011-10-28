@@ -24,8 +24,10 @@
 #include <gst/pbutils/pbutils-enumtypes.h>
 #include <gst/pbutils/install-plugins.h>
 
+#define RG_TARGET_NAMESPACE mInstallPlugins
+
 static RGConvertTable context_table = {0};
-static VALUE mGstInstallPlugins;
+static VALUE RG_TARGET_NAMESPACE;
 static VALUE rb_cGstInstallPluginsReturn;
 static VALUE rb_cGstInstallPluginsContext;
 
@@ -42,7 +44,7 @@ gst_install_plugins_result_func(GstInstallPluginsReturn result, VALUE data)
 {
     rb_funcall(data, rb_intern("call"), 1, 
                GENUM2RVAL(result, GST_TYPE_INSTALL_PLUGINS_RETURN));
-    G_CHILD_REMOVE(mGstInstallPlugins, data);
+    G_CHILD_REMOVE(RG_TARGET_NAMESPACE, data);
 }
 
 static VALUE
@@ -163,17 +165,17 @@ context_set_xid(VALUE self, VALUE xid)
 void
 Init_gst_install_plugins(void)
 {
-    mGstInstallPlugins = rb_define_module_under(mGst, "InstallPlugins");
+    RG_TARGET_NAMESPACE = rb_define_module_under(mGst, "InstallPlugins");
 
     rb_cGstInstallPluginsReturn = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_RETURN,
                                               "InstallPluginsReturn", mGst);
     rb_define_method(rb_cGstInstallPluginsReturn, "name", return_get_name,
                      0);
 
-    rb_define_singleton_method(mGstInstallPlugins, "supported?", supported, 0);
-    rb_define_singleton_method(mGstInstallPlugins, "progress?", progress, 0);
-    rb_define_singleton_method(mGstInstallPlugins, "async", async, -1);
-    rb_define_singleton_method(mGstInstallPlugins, "sync", sync, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "supported?", supported, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "progress?", progress, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "async", async, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "sync", sync, -1);
 
     context_table.type = GST_TYPE_INSTALL_PLUGINS_CONTEXT;
     context_table.instance2robj = context2robj;

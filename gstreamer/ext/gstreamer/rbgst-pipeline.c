@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cPipeline
 #define SELF(obj) (RVAL2GST_PIPELINE(obj))
 
 /* Class: Gst::Pipeline
@@ -80,11 +81,11 @@ rb_gst_pipeline_get_bus(VALUE self)
 void
 Init_gst_pipeline(void)
 {
-    VALUE cPipeline;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cPipeline = G_DEF_CLASS(GST_TYPE_PIPELINE, "Pipeline", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_PIPELINE, "Pipeline", mGst);
 
-    rb_define_method(cPipeline, "initialize", rb_gst_pipeline_new, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_gst_pipeline_new, -1);
 
-    rb_define_method(cPipeline, "bus", rb_gst_pipeline_get_bus, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bus", rb_gst_pipeline_get_bus, 0);
 }

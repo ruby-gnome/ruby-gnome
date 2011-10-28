@@ -23,6 +23,7 @@
 #include "rbgst.h"
 #include "rbgst-private.h"
 
+#define RG_TARGET_NAMESPACE cBin
 #define SELF(self) RVAL2GST_BIN(self)
 
 /* Class: Gst::Bin
@@ -407,61 +408,61 @@ rb_gst_bin_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
 void
 Init_gst_bin (void)
 {
-    VALUE rb_cGstBin;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstBin = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_BIN, "Bin", mGst);
 
-    rb_include_module(rb_cGstBin, rb_mEnumerable);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_method(rb_cGstBin, "initialize", rb_gst_bin_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_gst_bin_initialize, -1);
 
-    rb_define_method(rb_cGstBin, "size", rb_gst_bin_size, 0);
-    rb_define_alias(rb_cGstBin, "length", "size");
+    rb_define_method(RG_TARGET_NAMESPACE, "size", rb_gst_bin_size, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "length", "size");
 
-    rb_define_method(rb_cGstBin, "children", rb_gst_bin_get_children, -1);
-    rb_define_method(rb_cGstBin, "each", rb_gst_bin_each_element, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "children", rb_gst_bin_get_children, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "each", rb_gst_bin_each_element, -1);
 
-    rb_define_method(rb_cGstBin, "children_recurse", 
+    rb_define_method(RG_TARGET_NAMESPACE, "children_recurse", 
                      rb_gst_bin_get_children_recurse, 0);
-    rb_define_method(rb_cGstBin, "each_recurse", 
+    rb_define_method(RG_TARGET_NAMESPACE, "each_recurse", 
                      rb_gst_bin_each_recurse_element, 0);
 
-    rb_define_method(rb_cGstBin, "children_cookie",
+    rb_define_method(RG_TARGET_NAMESPACE, "children_cookie",
                      rb_gst_bin_get_children_cookie, 0);
-    rb_define_method(rb_cGstBin, "child_bus", rb_gst_bin_get_child_bus, 0);
-    rb_define_method(rb_cGstBin, "messages", rb_gst_bin_get_messages, 0);
-    rb_define_method(rb_cGstBin, "polling?", rb_gst_bin_polling_p, 0);
-    rb_define_method(rb_cGstBin, "clock_dirty?", rb_gst_bin_clock_dirty_p, 0);
-    rb_define_method(rb_cGstBin, "provided_clock",
+    rb_define_method(RG_TARGET_NAMESPACE, "child_bus", rb_gst_bin_get_child_bus, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "messages", rb_gst_bin_get_messages, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "polling?", rb_gst_bin_polling_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clock_dirty?", rb_gst_bin_clock_dirty_p, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "provided_clock",
                      rb_gst_bin_get_provided_clock, 0);
-    rb_define_method(rb_cGstBin, "set_provided_clock",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_provided_clock",
                      rb_gst_bin_set_provided_clock, 1);
-    rb_define_method(rb_cGstBin, "clock_provider",
+    rb_define_method(RG_TARGET_NAMESPACE, "clock_provider",
                      rb_gst_bin_get_clock_provider, 0);
 
 
-    rb_define_method(rb_cGstBin, "<<", rb_gst_bin_add, 1);
-    rb_define_method(rb_cGstBin, "add", rb_gst_bin_add_multi, -1);
-    rb_define_method(rb_cGstBin, "remove", rb_gst_bin_remove, -1);
-    rb_define_method(rb_cGstBin, "clear", rb_gst_bin_clear, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "<<", rb_gst_bin_add, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add", rb_gst_bin_add_multi, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove", rb_gst_bin_remove, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "clear", rb_gst_bin_clear, 0);
 
-    rb_define_method(rb_cGstBin, "get_child", rb_gst_bin_get, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_child", rb_gst_bin_get, -1);
 
-    rb_define_method(rb_cGstBin, "sinks", rb_gst_bin_get_sinks, 0);
-    rb_define_method(rb_cGstBin, "sources", rb_gst_bin_get_sources, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sinks", rb_gst_bin_get_sinks, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sources", rb_gst_bin_get_sources, 0);
 
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
-    rb_define_method(rb_cGstBin, "to_dot_file", rb_gst_bin_to_dot_file, 2);
-    rb_define_method(rb_cGstBin, "to_dot_file_with_ts",
+    rb_define_method(RG_TARGET_NAMESPACE, "to_dot_file", rb_gst_bin_to_dot_file, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_dot_file_with_ts",
                      rb_gst_bin_to_dot_file_with_ts, 2);
 #endif
 
-    G_DEF_SETTERS(rb_cGstBin);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GST_TYPE_BIN_FLAGS, "Flags", rb_cGstBin);
-    G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_BIN_FLAGS, "GST_BIN_");
+    G_DEF_CLASS(GST_TYPE_BIN_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_BIN_FLAGS, "GST_BIN_");
 #ifdef GST_DEBUG_BIN_TO_DOT_FILE
-    G_DEF_CONSTANTS(rb_cGstBin, GST_TYPE_DEBUG_GRAPH_DETAILS,
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_DEBUG_GRAPH_DETAILS,
         "GST_DEBUG_GRAPH_");
 #endif
 }

@@ -24,6 +24,7 @@
 /* Class: Gst::StaticPadTemplate
  */
 
+#define RG_TARGET_NAMESPACE cStaticPadTemplate
 #define SELF(self) RVAL2GST_STATIC_PAD_TEMPLATE(self)
 
 static VALUE
@@ -53,12 +54,12 @@ get_caps(VALUE self)
 void
 Init_gst_static_pad_template (void)
 {
-    VALUE cGstStaticPadTemplate;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cGstStaticPadTemplate = G_DEF_CLASS(GST_TYPE_STATIC_PAD_TEMPLATE,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_STATIC_PAD_TEMPLATE,
                                         "StaticPadTemplate", mGst);
-    rb_define_method(cGstStaticPadTemplate, "name", get_name, 0);
-    rb_define_method(cGstStaticPadTemplate, "presence", get_presence, 0);
-    rb_define_method(cGstStaticPadTemplate, "direction", get_direction, 0);
-    rb_define_method(cGstStaticPadTemplate, "caps", get_caps, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "presence", get_presence, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", get_direction, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "caps", get_caps, 0);
 }

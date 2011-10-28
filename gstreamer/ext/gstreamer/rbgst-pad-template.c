@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cPadTemplate
 #define SELF(self) RVAL2GST_PAD_TEMPLATE(self)
 
 /* Class: Gst::PadTemplate
@@ -106,19 +107,19 @@ has_caps_p(VALUE self)
 void
 Init_gst_pad_template (void)
 {
-    VALUE cGstPadTemplate;
+    VALUE RG_TARGET_NAMESPACE;
 
-    cGstPadTemplate = G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE, "PadTemplate", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE, "PadTemplate", mGst);
 
-    rb_define_method(cGstPadTemplate, "name", get_name, 0);
-    rb_define_method(cGstPadTemplate, "presence", get_presence, 0);
-    rb_define_method(cGstPadTemplate, "direction", get_direction, 0);
-    rb_define_method(cGstPadTemplate, "caps", get_caps, 0);
-    rb_define_method(cGstPadTemplate, "each_caps", each_caps, 0);
-    rb_define_method(cGstPadTemplate, "has_caps?", has_caps_p, 0);
-    rb_define_alias(cGstPadTemplate, "have_caps?", "has_caps?");
+    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "presence", get_presence, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", get_direction, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "caps", get_caps, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each_caps", each_caps, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_caps?", has_caps_p, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "have_caps?", "has_caps?");
 
-    G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE_FLAGS, "Flags", cGstPadTemplate);
-    G_DEF_CONSTANTS(cGstPadTemplate, GST_TYPE_PAD_TEMPLATE_FLAGS,
+    G_DEF_CLASS(GST_TYPE_PAD_TEMPLATE_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_PAD_TEMPLATE_FLAGS,
                     "GST_PAD_TEMPLATE_");
 }

@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cClockEntry
+
 /* Class: Gst::ClockEntry
  * A wrapper for GstClockID, used to create and start timers
  * on Gst::Clock objects.
@@ -249,21 +251,21 @@ rb_gst_clock_entry_get_status (VALUE self)
 void
 Init_gst_clock_entry (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
 
-    rb_define_method (c, "initialize", rb_gst_clock_entry_new, -1);
-    rb_define_method (c, "single_shot?", rb_gst_clock_entry_is_single_shot, 0);
-    rb_define_method (c, "periodic?", rb_gst_clock_entry_is_periodic, 0);
-    rb_define_method (c, "wait", rb_gst_clock_entry_wait, 0);
-    rb_define_method (c, "wait_async", rb_gst_clock_entry_wait_async, 0);
-    rb_define_method (c, "unschedule", rb_gst_clock_entry_unschedule, 0);
-    rb_define_method (c, "clock", rb_gst_clock_entry_get_clock, 0);
-    rb_define_method (c, "time", rb_gst_clock_entry_get_time, 0);
-    rb_define_method (c, "interval", rb_gst_clock_entry_get_interval, 0);
-    rb_define_method (c, "status", rb_gst_clock_entry_get_status, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "initialize", rb_gst_clock_entry_new, -1);
+    rb_define_method (RG_TARGET_NAMESPACE, "single_shot?", rb_gst_clock_entry_is_single_shot, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "periodic?", rb_gst_clock_entry_is_periodic, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "wait", rb_gst_clock_entry_wait, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "wait_async", rb_gst_clock_entry_wait_async, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "unschedule", rb_gst_clock_entry_unschedule, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "clock", rb_gst_clock_entry_get_clock, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "time", rb_gst_clock_entry_get_time, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "interval", rb_gst_clock_entry_get_interval, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "status", rb_gst_clock_entry_get_status, 0);
 
-    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
-    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_CLOCK_ENTRY_TYPE, "GST_CLOCK_ENTRY_");
+    G_DEF_CLASS (GST_TYPE_CLOCK_RETURN, "Return", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_CLOCK_RETURN, "GST_CLOCK_");
 }

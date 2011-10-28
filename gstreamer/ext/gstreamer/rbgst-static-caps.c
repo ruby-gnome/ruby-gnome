@@ -21,6 +21,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cStaticCaps
 #define SELF(obj) (RVAL2GST_STATIC_CAPS(obj))
 
 static VALUE
@@ -38,13 +39,13 @@ get(VALUE self)
 void
 Init_gst_static_caps(void)
 {
-    VALUE rb_cGstStaticCaps;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstStaticCaps = G_DEF_CLASS(GST_TYPE_STATIC_CAPS, "StaticCaps", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_STATIC_CAPS, "StaticCaps", mGst);
 
-    rb_define_method(rb_cGstStaticCaps, "description", get_description, 0);
-    rb_define_method(rb_cGstStaticCaps, "get", get, 0);
-    rb_define_alias(rb_cGstStaticCaps, "to_caps", "get");
+    rb_define_method(RG_TARGET_NAMESPACE, "description", get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get", get, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "to_caps", "get");
 
-    G_DEF_SETTERS(rb_cGstStaticCaps);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

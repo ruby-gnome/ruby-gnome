@@ -22,6 +22,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cGhostPad
+
 static VALUE
 rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad)
 {
@@ -37,7 +39,7 @@ rb_gst_ghost_pad_new(VALUE self, VALUE name, VALUE pad)
 void
 Init_gst_ghost_pad(void)
 {
-    VALUE c = G_DEF_CLASS(GST_TYPE_GHOST_PAD, "GhostPad", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_GHOST_PAD, "GhostPad", mGst);
 
-    rb_define_method(c, "initialize", rb_gst_ghost_pad_new, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_gst_ghost_pad_new, 2);
 }

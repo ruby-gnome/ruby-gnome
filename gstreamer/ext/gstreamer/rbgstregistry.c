@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cRegistry
+
 /* Class: Gst::Registry
  * Abstract class for managing plugins. 
  */
@@ -267,20 +269,20 @@ rb_gst_registry_find_feature(VALUE self, VALUE name, VALUE type)
 void
 Init_gst_registry (void)
 {
-	VALUE c = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
 
-	rb_define_singleton_method(c, "default", rb_gst_registry_get_default, 0);
-	rb_define_singleton_method(c, "update", rb_gst_update_registry, 0);
+	rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", rb_gst_registry_get_default, 0);
+	rb_define_singleton_method(RG_TARGET_NAMESPACE, "update", rb_gst_update_registry, 0);
 	
-	rb_define_method(c, "plugins", rb_gst_registry_get_plugins, 0);
-	rb_define_method(c, "each_plugin", rb_gst_registry_each_plugin, 0);
-	rb_define_method(c, "get_features", rb_gst_registry_get_features, 1);
-	rb_define_method(c, "each_feature", rb_gst_registry_each_feature, 1);
-	rb_define_method(c, "paths", rb_gst_registry_get_paths, 0);
-	rb_define_method(c, "each_path", rb_gst_registry_each_path, 0);
-	rb_define_method(c, "add_path",	rb_gst_registry_add_path, 1);
-	rb_define_method(c, "add_plugin", rb_gst_registry_add_plugin, 1);
-	rb_define_method(c, "remove_plugin", rb_gst_registry_remove_plugin, 1);
-	rb_define_method(c, "find_plugin", rb_gst_registry_find_plugin, 1);
-	rb_define_method(c, "find_feature", rb_gst_registry_find_feature, 2);
+	rb_define_method(RG_TARGET_NAMESPACE, "plugins", rb_gst_registry_get_plugins, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "each_plugin", rb_gst_registry_each_plugin, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "get_features", rb_gst_registry_get_features, 1);
+	rb_define_method(RG_TARGET_NAMESPACE, "each_feature", rb_gst_registry_each_feature, 1);
+	rb_define_method(RG_TARGET_NAMESPACE, "paths", rb_gst_registry_get_paths, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "each_path", rb_gst_registry_each_path, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "add_path",	rb_gst_registry_add_path, 1);
+	rb_define_method(RG_TARGET_NAMESPACE, "add_plugin", rb_gst_registry_add_plugin, 1);
+	rb_define_method(RG_TARGET_NAMESPACE, "remove_plugin", rb_gst_registry_remove_plugin, 1);
+	rb_define_method(RG_TARGET_NAMESPACE, "find_plugin", rb_gst_registry_find_plugin, 1);
+	rb_define_method(RG_TARGET_NAMESPACE, "find_feature", rb_gst_registry_find_feature, 2);
 }

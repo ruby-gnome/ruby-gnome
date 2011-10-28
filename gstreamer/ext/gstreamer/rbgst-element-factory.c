@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cElementFactory
 #define SELF(self) RVAL2GST_ELEMENT_FACTORY(self)
 
 /* Class: Gst::ElementFactory
@@ -227,29 +228,29 @@ get_author(VALUE self)
 void
 Init_gst_elementfactory (void)
 {
-    VALUE rb_cGstElementFactory;
+    VALUE RG_TARGET_NAMESPACE;
 
-    rb_cGstElementFactory = G_DEF_CLASS(GST_TYPE_ELEMENT_FACTORY,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_ELEMENT_FACTORY,
                                         "ElementFactory",
                                         mGst);
 
-    rb_define_singleton_method(rb_cGstElementFactory, "make",
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "make",
                                rb_gst_elementfactory_make, -1);
-    rb_define_singleton_method(rb_cGstElementFactory, "find",
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "find",
                                rb_gst_elementfactory_find, 1);
 
-    rb_define_method(rb_cGstElementFactory, "create", create, -1);
-    rb_define_method(rb_cGstElementFactory, "details",
+    rb_define_method(RG_TARGET_NAMESPACE, "create", create, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "details",
                      rb_gst_elementfactory_get_details, 0);
-    rb_define_method(rb_cGstElementFactory, "to_s",
+    rb_define_method(RG_TARGET_NAMESPACE, "to_s",
                      rb_gst_elementfactory_to_s, 0);
-    rb_define_method(rb_cGstElementFactory, "pad_templates",
+    rb_define_method(RG_TARGET_NAMESPACE, "pad_templates",
                      rb_gst_elementfactory_get_pad_templates, 0);
-    rb_define_method(rb_cGstElementFactory, "each_pad_template",
+    rb_define_method(RG_TARGET_NAMESPACE, "each_pad_template",
                      rb_gst_elementfactory_each_pad_template, 0);
 
-    rb_define_method(rb_cGstElementFactory, "long_name", get_long_name, 0);
-    rb_define_method(rb_cGstElementFactory, "klass", get_klass, 0);
-    rb_define_method(rb_cGstElementFactory, "description", get_description, 0);
-    rb_define_method(rb_cGstElementFactory, "author", get_author, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "long_name", get_long_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "klass", get_klass, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "author", get_author, 0);
 }

@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cIndexEntry
+
 /* Class: Gst::IndexEntry
  * An index's entry. 
  */
@@ -86,12 +88,12 @@ rb_gst_index_entry_get_type (VALUE self)
 void
 Init_gst_indexentry (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_INDEX_ENTRY, "IndexEntry", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_INDEX_ENTRY, "IndexEntry", mGst);
 
-    rb_undef_method (c, "initialize");
-    rb_define_method (c, "data", rb_gst_index_entry_get_data, 0);
-    rb_define_method (c, "entry_type", rb_gst_index_entry_get_type, 0);
+    rb_undef_method (RG_TARGET_NAMESPACE, "initialize");
+    rb_define_method (RG_TARGET_NAMESPACE, "data", rb_gst_index_entry_get_data, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "entry_type", rb_gst_index_entry_get_type, 0);
 
-    G_DEF_CLASS (GST_TYPE_INDEX_ENTRY_TYPE, "Types", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_ENTRY_TYPE, "GST_INDEX_ENTRY_");
+    G_DEF_CLASS (GST_TYPE_INDEX_ENTRY_TYPE, "Types", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_ENTRY_TYPE, "GST_INDEX_ENTRY_");
 }

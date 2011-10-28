@@ -23,9 +23,10 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cPad
 #define SELF(self) RVAL2GST_PAD(self)
 
-static VALUE cGstPad;
+static VALUE RG_TARGET_NAMESPACE;
 
 /* Class: Gst::Pad
  * The link between Gst::Element objects.
@@ -132,7 +133,7 @@ rb_gst_pad_link_raw(VALUE self, VALUE other_pad)
     GstPad *sink_pad;
 
     src_pad = SELF(self);
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(other_pad, cGstPad))) {
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(other_pad, RG_TARGET_NAMESPACE))) {
         rb_raise(rb_eTypeError, "Not a Gst::Pad");
     }
 
@@ -195,7 +196,7 @@ rb_gst_pad_unlink(VALUE self, VALUE other_pad)
     GstPad *sink_pad;
 
     src_pad = SELF(self);
-    if (!CBOOL2RVAL(rb_obj_is_kind_of(other_pad, cGstPad))) {
+    if (!CBOOL2RVAL(rb_obj_is_kind_of(other_pad, RG_TARGET_NAMESPACE))) {
         rb_raise(rb_eTypeError, "Not a Gst::Pad");
     }
     sink_pad = RVAL2GST_PAD(other_pad);
@@ -305,35 +306,35 @@ rb_gst_pad_get_peer(VALUE self)
 void
 Init_gst_pad (void)
 {
-    cGstPad = G_DEF_CLASS (GST_TYPE_PAD, "Pad", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_PAD, "Pad", mGst);
 
-    rb_define_method(cGstPad, "direction", rb_gst_pad_get_direction, 0);
-    rb_define_method(cGstPad, "name", rb_gst_pad_get_name, 0);
-    rb_define_method(cGstPad, "pad_template", rb_gst_pad_get_pad_template, 0);
-    rb_define_method(cGstPad, "provides_query_types?", rb_gst_pad_provides_query_types, 0);
-    rb_define_method(cGstPad, "query_types", rb_gst_pad_get_query_types, 0);
-    rb_define_method(cGstPad, "each_query_type", rb_gst_pad_each_query_type, 0);
-    rb_define_method(cGstPad, "linked?", rb_gst_pad_is_linked, 0);
-    rb_define_method(cGstPad, "link", rb_gst_pad_link, 1);
-    rb_define_method(cGstPad, ">>", rb_gst_pad_link_shift, 1);
-    rb_define_method(cGstPad, "unlink", rb_gst_pad_unlink, 1);
-    rb_define_method(cGstPad, "query", rb_gst_pad_query, 1);
-    rb_define_method(cGstPad, "send_event", rb_gst_pad_send_event, 1);
-    rb_define_method(cGstPad, "caps", rb_gst_pad_get_caps, 0);
-    rb_define_method(cGstPad, "negotiated_caps", rb_gst_pad_get_negotiated_caps, 0);
-    rb_define_method(cGstPad, "set_caps", rb_gst_pad_set_caps, 1);
-    rb_define_method(cGstPad, "set_active", rb_gst_pad_set_active, 1);
-    rb_define_method(cGstPad, "peer", rb_gst_pad_get_peer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", rb_gst_pad_get_direction, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", rb_gst_pad_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pad_template", rb_gst_pad_get_pad_template, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "provides_query_types?", rb_gst_pad_provides_query_types, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "query_types", rb_gst_pad_get_query_types, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "each_query_type", rb_gst_pad_each_query_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "linked?", rb_gst_pad_is_linked, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "link", rb_gst_pad_link, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, ">>", rb_gst_pad_link_shift, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unlink", rb_gst_pad_unlink, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "query", rb_gst_pad_query, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "send_event", rb_gst_pad_send_event, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "caps", rb_gst_pad_get_caps, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "negotiated_caps", rb_gst_pad_get_negotiated_caps, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_caps", rb_gst_pad_set_caps, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_active", rb_gst_pad_set_active, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "peer", rb_gst_pad_get_peer, 0);
 
-    G_DEF_SETTERS(cGstPad);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 
-    G_DEF_CLASS(GST_TYPE_PAD_LINK_RETURN, "LinkReturn", cGstPad);
-    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");
-    G_DEF_CLASS(GST_TYPE_PAD_DIRECTION, "Direction", cGstPad);
-    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_DIRECTION, "GST_PAD_");
-    G_DEF_CLASS(GST_TYPE_PAD_FLAGS, "Flags", cGstPad);
-    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_FLAGS, "GST_PAD_");
-    G_DEF_CLASS(GST_TYPE_PAD_PRESENCE, "Presence", cGstPad);
-    G_DEF_CONSTANTS(cGstPad, GST_TYPE_PAD_PRESENCE, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_LINK_RETURN, "LinkReturn", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_PAD_LINK_RETURN, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_DIRECTION, "Direction", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_PAD_DIRECTION, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_PAD_FLAGS, "GST_PAD_");
+    G_DEF_CLASS(GST_TYPE_PAD_PRESENCE, "Presence", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_PAD_PRESENCE, "GST_PAD_");
 }

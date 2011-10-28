@@ -21,6 +21,8 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cIndex
+
 /* Class: Gst::Index
  * Generates indexes on objects. 
  */
@@ -279,37 +281,37 @@ rb_gst_index_get_assoc_entry (VALUE self, VALUE id, VALUE method, VALUE flags,
 void
 Init_gst_index (void)
 {
-    VALUE c = G_DEF_CLASS (GST_TYPE_INDEX, "Index", mGst);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_INDEX, "Index", mGst);
 
-    rb_define_method (c, "initialize", rb_gst_index_new, 0);
-    rb_define_method (c, "readable?", rb_gst_index_is_readable, 0);
-    rb_define_method (c, "writable?", rb_gst_index_is_writable, 0);
-    rb_define_method (c, "commit", rb_gst_index_commit, 1);
-    rb_define_method (c, "group", rb_gst_index_get_group, 0);
-    rb_define_method (c, "new_group", rb_gst_index_new_group, 0);
-    rb_define_method (c, "set_group", rb_gst_index_set_group, 1);
-    rb_define_method (c, "certainty", rb_gst_index_get_certainty, 0);
-    rb_define_method (c, "set_certainty", rb_gst_index_set_certainty, 1);
+    rb_define_method (RG_TARGET_NAMESPACE, "initialize", rb_gst_index_new, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "readable?", rb_gst_index_is_readable, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "writable?", rb_gst_index_is_writable, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "commit", rb_gst_index_commit, 1);
+    rb_define_method (RG_TARGET_NAMESPACE, "group", rb_gst_index_get_group, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "new_group", rb_gst_index_new_group, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "set_group", rb_gst_index_set_group, 1);
+    rb_define_method (RG_TARGET_NAMESPACE, "certainty", rb_gst_index_get_certainty, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "set_certainty", rb_gst_index_set_certainty, 1);
 #if 0
-    rb_define_method (c, "set_filter", rb_gst_index_set_filter, 0);
-    rb_define_method (c, "set_resolver", rb_gst_index_set_resolver, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "set_filter", rb_gst_index_set_filter, 0);
+    rb_define_method (RG_TARGET_NAMESPACE, "set_resolver", rb_gst_index_set_resolver, 0);
 #endif
-    rb_define_method (c, "add", rb_gst_index_add, -1);
-    rb_define_method (c, "get_assoc_entry", rb_gst_index_get_assoc_entry, 5);
+    rb_define_method (RG_TARGET_NAMESPACE, "add", rb_gst_index_add, -1);
+    rb_define_method (RG_TARGET_NAMESPACE, "get_assoc_entry", rb_gst_index_get_assoc_entry, 5);
 
-    G_DEF_CLASS (GST_TYPE_INDEX_CERTAINTY, "Certainty", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_CERTAINTY, "GST_INDEX_");
-    G_DEF_CLASS (GST_TYPE_INDEX_LOOKUP_METHOD, "LookupMethod", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_LOOKUP_METHOD, "GST_INDEX_");
-    G_DEF_CLASS (GST_TYPE_ASSOC_FLAGS, "AssocFlags", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_ASSOC_FLAGS, "GST_");
-    G_DEF_CLASS (GST_TYPE_INDEX_RESOLVER_METHOD, "ResolverMethod", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_RESOLVER_METHOD, "GST_INDEX_");
-    G_DEF_CLASS (GST_TYPE_INDEX_FLAGS, "Flags", c);
-    G_DEF_CONSTANTS (c, GST_TYPE_INDEX_FLAGS, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_INDEX_CERTAINTY, "Certainty", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_CERTAINTY, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_INDEX_LOOKUP_METHOD, "LookupMethod", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_LOOKUP_METHOD, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_ASSOC_FLAGS, "AssocFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_ASSOC_FLAGS, "GST_");
+    G_DEF_CLASS (GST_TYPE_INDEX_RESOLVER_METHOD, "ResolverMethod", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_RESOLVER_METHOD, "GST_INDEX_");
+    G_DEF_CLASS (GST_TYPE_INDEX_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_FLAGS, "GST_INDEX_");
 
-    G_DEF_SETTERS (c);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 
-    rb_undef_method (c, "resolver");
-    rb_undef_method (c, "resolver=");
+    rb_undef_method (RG_TARGET_NAMESPACE, "resolver");
+    rb_undef_method (RG_TARGET_NAMESPACE, "resolver=");
 }

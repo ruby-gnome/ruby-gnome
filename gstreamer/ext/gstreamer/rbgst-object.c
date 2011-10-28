@@ -22,6 +22,7 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE cObject
 #define SELF(self) (RVAL2GST_OBJ(self))
 
 static RGConvertTable table = {0};
@@ -61,7 +62,7 @@ object_set_name(VALUE self, VALUE name)
 void
 Init_gst_object(void)
 {
-    VALUE cGstObject;
+    VALUE RG_TARGET_NAMESPACE;
 
     table.type = GST_TYPE_OBJECT;
     table.instance2robj = rbgst_object_instance2robj;
@@ -69,12 +70,12 @@ Init_gst_object(void)
 
     RG_DEF_CONVERSION(&table);
 
-    cGstObject = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
 
-    rb_define_method(cGstObject, "set_name", object_set_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_name", object_set_name, 1);
 
-    G_DEF_SETTERS(cGstObject);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GST_TYPE_OBJECT_FLAGS, "Flags", cGstObject);
-    G_DEF_CONSTANTS(cGstObject, GST_TYPE_OBJECT_FLAGS, "GST_");
+    G_DEF_CLASS(GST_TYPE_OBJECT_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_OBJECT_FLAGS, "GST_");
 }
