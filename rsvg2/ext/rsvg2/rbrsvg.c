@@ -54,6 +54,8 @@
      (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION == (minor) && \
       LIBRSVG_MICRO_VERSION >= (micro)))
 
+#define RG_TARGET_NAMESPACE mRSVG
+
 #ifdef RSVG_TYPE_HANDLE
 #  define _SELF(self) (RSVG_HANDLE(RVAL2GOBJ(self)))
 #else
@@ -723,7 +725,7 @@ rb_rsvg_handle_render_cairo(int argc, VALUE *argv, VALUE self)
 void
 Init_rsvg2(void)
 {
-    VALUE mRSVG = rb_define_module("RSVG");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module("RSVG");
 
 #if LIBRSVG_CHECK_VERSION(2, 9, 0)
     rsvg_init();
@@ -731,39 +733,39 @@ Init_rsvg2(void)
 #endif
 
 #ifdef RSVG_TYPE_HANDLE
-    cHandle = G_DEF_CLASS(RSVG_TYPE_HANDLE, "Handle", mRSVG);
+    cHandle = G_DEF_CLASS(RSVG_TYPE_HANDLE, "Handle", RG_TARGET_NAMESPACE);
 #else
-    cHandle = rb_define_class_under(mRSVG, "Handle", rb_cObject);
+    cHandle = rb_define_class_under(RG_TARGET_NAMESPACE, "Handle", rb_cObject);
     rb_define_alloc_func(cHandle, rb_rsvg_handle_alloc);
 #endif
 
-    G_DEF_ERROR(RSVG_ERROR, "Error", mRSVG, rb_eRuntimeError, RSVG_TYPE_ERROR);
+    G_DEF_ERROR(RSVG_ERROR, "Error", RG_TARGET_NAMESPACE, rb_eRuntimeError, RSVG_TYPE_ERROR);
 
     id_call = rb_intern("call");
     id_callback = rb_intern("callback");
     id_closed = rb_intern("closed");
     id_to_s = rb_intern("to_s");
 
-    rb_define_const(mRSVG, "BINDING_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BINDING_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(RBRSVG_MAJOR_VERSION),
                                 INT2FIX(RBRSVG_MINOR_VERSION),
                                 INT2FIX(RBRSVG_MICRO_VERSION)));
 
-    rb_define_const(mRSVG, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(LIBRSVG_MAJOR_VERSION),
                                 INT2FIX(LIBRSVG_MINOR_VERSION),
                                 INT2FIX(LIBRSVG_MICRO_VERSION)));
 
 
-    rb_define_module_function(mRSVG, "set_default_dpi",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_default_dpi",
                               rb_rsvg_set_default_dpi, 1);
-    rb_define_module_function(mRSVG, "set_default_dpi_x_y",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_default_dpi_x_y",
                               rb_rsvg_set_default_dpi_x_y, 2);
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
-    cDim = rb_define_class_under(mRSVG, "DimensionData", rb_cObject);
+    cDim = rb_define_class_under(RG_TARGET_NAMESPACE, "DimensionData", rb_cObject);
 
     rb_define_alloc_func(cDim, rb_rsvg_dim_alloc);
     rb_define_method(cDim, "initialize", rb_rsvg_dim_initialize, -1);
@@ -808,15 +810,15 @@ Init_rsvg2(void)
 #endif
 
     /* Convenience API */
-    rb_define_module_function(mRSVG, "pixbuf_from_file",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file",
                               rb_rsvg_pixbuf_from_file, 1);
-    rb_define_module_function(mRSVG, "pixbuf_from_file_at_zoom",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_zoom",
                               rb_rsvg_pixbuf_from_file_at_zoom, 3);
-    rb_define_module_function(mRSVG, "pixbuf_from_file_at_size",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_size",
                               rb_rsvg_pixbuf_from_file_at_size, 3);
-    rb_define_module_function(mRSVG, "pixbuf_from_file_at_max_size",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_max_size",
                               rb_rsvg_pixbuf_from_file_at_max_size, 3);
-    rb_define_module_function(mRSVG, "pixbuf_from_file_at_zoom_with_max",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_zoom_with_max",
                               rb_rsvg_pixbuf_from_file_at_zoom_with_max, 5);
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
@@ -845,7 +847,7 @@ Init_rsvg2(void)
                      rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex, 5);
 #endif
 
-    rb_define_singleton_method(mRSVG, "cairo_available?",
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "cairo_available?",
                                rb_rsvg_cairo_available, 0);
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     rb_define_method(cHandle, "render_cairo", rb_rsvg_handle_render_cairo, -1);
