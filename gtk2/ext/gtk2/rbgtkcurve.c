@@ -24,38 +24,40 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCurve
+
 static VALUE
-curve_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_curve_new());
     return Qnil;
 }
 
 static VALUE
-curve_reset(VALUE self)
+rg_reset(VALUE self)
 {
     gtk_curve_reset(GTK_CURVE(RVAL2GOBJ(self)));
     return self;
 }
 
 static VALUE
-curve_set_gamma(VALUE self, VALUE gamma)
+rg_set_gamma(VALUE self, VALUE gamma)
 {
     gtk_curve_set_gamma(GTK_CURVE(RVAL2GOBJ(self)), NUM2DBL(gamma));
     return self;
 }
 
 static VALUE
-curve_set_range(VALUE self, VALUE min_x, VALUE max_x, VALUE min_y, VALUE max_y)
+rg_set_range(VALUE self, VALUE min_x, VALUE max_x, VALUE min_y, VALUE max_y)
 {
     gtk_curve_set_range(GTK_CURVE(RVAL2GOBJ(self)),
-			NUM2DBL(min_x), NUM2DBL(max_x),
-			NUM2DBL(min_y), NUM2DBL(max_y));
+                        NUM2DBL(min_x), NUM2DBL(max_x),
+                        NUM2DBL(min_y), NUM2DBL(max_y));
     return self;
 }
 
 static VALUE
-curve_set_vector(VALUE self, VALUE length, VALUE vector)
+rg_set_vector(VALUE self, VALUE length, VALUE vector)
 {
     gint len = NUM2INT(length);
     gfloat *c_vec;
@@ -71,7 +73,7 @@ curve_set_vector(VALUE self, VALUE length, VALUE vector)
 }
 
 static VALUE
-curve_get_vector(VALUE self, VALUE length)
+rg_get_vector(VALUE self, VALUE length)
 {
     gint len = NUM2INT(length);
     gfloat *c_vec;
@@ -89,23 +91,21 @@ curve_get_vector(VALUE self, VALUE length)
 void 
 Init_gtk_curve(void)
 {
-    VALUE gCurve = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
 
-    rb_define_method(gCurve, "initialize", curve_initialize, 0);
-    rb_define_method(gCurve, "reset", curve_reset, 0);
-    rb_define_method(gCurve, "set_gamma", curve_set_gamma, 1);
-    G_DEF_SETTER(gCurve, "gamma");
-    rb_define_method(gCurve, "set_range", curve_set_range, 4);
-    rb_define_method(gCurve, "set_vector", curve_set_vector, 2);
-    G_DEF_SETTER(gCurve, "vector");
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(reset, 0);
+    RG_DEF_METHOD(set_gamma, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "gamma");
+    RG_DEF_METHOD(set_range, 4);
+    RG_DEF_METHOD(set_vector, 2);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "vector");
     /* NOTE: For backwards compatability. */
-    rb_define_method(gCurve, "get_vector", curve_get_vector, 1);
-    rb_define_method(gCurve, "vector", curve_get_vector, 1);
+    RG_DEF_METHOD(get_vector, 1);
+    RG_DEF_ALIAS("vector", "get_vector");
 
     /* GtkCurveType(from standard constants) */
 
-    G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", gCurve);
-    G_DEF_CONSTANTS(gCurve, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
+    G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
 }
-
-

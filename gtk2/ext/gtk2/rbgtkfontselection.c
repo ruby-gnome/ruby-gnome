@@ -22,8 +22,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cFontSelection
+
 static VALUE
-fs_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_font_selection_new());
     return Qnil;
@@ -32,8 +34,8 @@ fs_initialize(VALUE self)
 void 
 Init_gtk_font_selection(void)
 {
-    VALUE gFontSelection = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION, "FontSelection", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION, "FontSelection", mGtk);
 
-    rb_define_method(gFontSelection, "initialize", fs_initialize, 0);
-    rb_undef_method(gFontSelection, "font");
+    RG_DEF_METHOD(initialize, 0);
+    rb_undef_method(RG_TARGET_NAMESPACE, "font");
 }

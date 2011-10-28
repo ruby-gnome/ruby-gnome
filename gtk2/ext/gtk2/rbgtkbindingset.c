@@ -57,25 +57,26 @@ gtk_bindingset_get_type(void)
   return our_type;
 }
 /*****************************************/
-                                                                                
+
+#define RG_TARGET_NAMESPACE cBindingSet
 #define _SELF(s) (GtkBindingSet*)(RVAL2BOXED(s, GTK_TYPE_BINDING_SET))
 
 static VALUE
-binding_initialize(VALUE self, VALUE set_name)
+rg_initialize(VALUE self, VALUE set_name)
 {
     G_INITIALIZE(self, gtk_binding_set_new(RVAL2CSTR(set_name)));
     return Qnil;
 }
 
 static VALUE
-binding_s_find(G_GNUC_UNUSED VALUE self, VALUE set_name)
+rg_s_find(G_GNUC_UNUSED VALUE self, VALUE set_name)
 {
     return BOXED2RVAL(gtk_binding_set_find(RVAL2CSTR(set_name)), 
                       GTK_TYPE_BINDING_SET);
 }
 
 static VALUE
-binding_activate(VALUE self, VALUE keyval, VALUE modifiers, VALUE object)
+rg_activate(VALUE self, VALUE keyval, VALUE modifiers, VALUE object)
 {
     return CBOOL2RVAL(gtk_binding_set_activate(_SELF(self), NUM2UINT(keyval),
                                                RVAL2MOD(modifiers),
@@ -83,7 +84,7 @@ binding_activate(VALUE self, VALUE keyval, VALUE modifiers, VALUE object)
 }
 
 static VALUE
-binding_entry_clear(VALUE self, VALUE keyval, VALUE modifiers)
+rg_entry_clear(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_clear(_SELF(self), NUM2UINT(keyval),
                             RVAL2MOD(modifiers));
@@ -91,7 +92,7 @@ binding_entry_clear(VALUE self, VALUE keyval, VALUE modifiers)
 }
 
 static VALUE
-binding_entry_add_signal(int argc, VALUE *argv, VALUE self)
+rg_add_signal(int argc, VALUE *argv, VALUE self)
 {
     VALUE keyval, modifiers, signame, rest;
     long i;
@@ -122,7 +123,7 @@ binding_entry_add_signal(int argc, VALUE *argv, VALUE self)
             arg->arg_type = G_TYPE_LONG;
             arg->d.long_data = 1;
         } else if (rb_respond_to (param, rb_intern("to_str"))) {
-	    arg->arg_type = G_TYPE_STRING;
+            arg->arg_type = G_TYPE_STRING;
             arg->d.string_data = (gchar *)RVAL2CSTR(param);
         } else {
             rb_raise(rb_eTypeError, 
@@ -146,7 +147,7 @@ binding_entry_add_signal(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-binding_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority)
+rg_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority)
 {
     gtk_binding_set_add_path(_SELF(self), RVAL2GENUM(path_type, GTK_TYPE_PATH_TYPE),
                              RVAL2CSTR(path_pattern),
@@ -155,7 +156,7 @@ binding_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority
 }
 
 static VALUE
-binding_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
+rg_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
     return self;
@@ -163,30 +164,26 @@ binding_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
-binding_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
+rg_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_skip(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
     return self;
 }
 #endif
 
-/* Deprecated.
-guint       gtk_binding_parse_binding       (GScanner *scanner);
-*/
-
 void 
 Init_gtk_bindings(void)
 {
-    VALUE gBinding = G_DEF_CLASS(GTK_TYPE_BINDING_SET, "BindingSet", mGtk);
-    rb_define_method(gBinding, "initialize", binding_initialize, 1);
-    rb_define_singleton_method(gBinding, "find", binding_s_find, 1);
-    rb_define_method(gBinding, "activate", binding_activate, 3);
-    rb_define_method(gBinding, "entry_clear", binding_entry_clear, 2);
-    rb_define_method(gBinding, "add_signal", binding_entry_add_signal, -1);
-    rb_define_method(gBinding, "add_path", binding_add_path, 3);
-    rb_define_method(gBinding, "entry_add_signal", binding_entry_add_signal, -1);
-    rb_define_method(gBinding, "entry_remove", binding_entry_remove, 2);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BINDING_SET, "BindingSet", mGtk);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_SMETHOD(find, 1);
+    RG_DEF_METHOD(activate, 3);
+    RG_DEF_METHOD(entry_clear, 2);
+    RG_DEF_METHOD(add_signal, -1);
+    RG_DEF_ALIAS("entry_add_signal", "add_signal");
+    RG_DEF_METHOD(add_path, 3);
+    RG_DEF_METHOD(entry_remove, 2);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gBinding, "entry_skip", binding_entry_skip, 2);
+    RG_DEF_METHOD(entry_skip, 2);
 #endif
 }

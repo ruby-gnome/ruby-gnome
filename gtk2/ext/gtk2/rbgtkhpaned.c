@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHPaned
+
 static VALUE
-hpaned_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hpaned_new());
     return Qnil;
@@ -34,7 +36,7 @@ hpaned_initialize(VALUE self)
 void 
 Init_gtk_hpaned(void)
 {
-    VALUE gHPaned = G_DEF_CLASS(GTK_TYPE_HPANED, "HPaned", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HPANED, "HPaned", mGtk);
 
-    rb_define_method(gHPaned, "initialize", hpaned_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

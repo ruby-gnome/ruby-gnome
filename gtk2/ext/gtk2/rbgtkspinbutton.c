@@ -24,10 +24,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cSpinButton
 #define _SELF(self) (GTK_SPIN_BUTTON(RVAL2GOBJ(self)))
 
 static VALUE
-sbtn_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2, arg3;
     GtkAdjustment *adj = NULL;
@@ -51,7 +52,7 @@ sbtn_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-sbtn_configure(VALUE self, VALUE adj, VALUE climb_rate, VALUE digits)
+rg_configure(VALUE self, VALUE adj, VALUE climb_rate, VALUE digits)
 {
     gtk_spin_button_configure(_SELF(self), GTK_ADJUSTMENT(RVAL2GOBJ(adj)),
                               NUM2DBL(climb_rate), NUM2UINT(digits));
@@ -59,28 +60,27 @@ sbtn_configure(VALUE self, VALUE adj, VALUE climb_rate, VALUE digits)
 }
 
 static VALUE
-sbtn_set_increments(VALUE self, VALUE step, VALUE page)
+rg_set_increments(VALUE self, VALUE step, VALUE page)
 {
     gtk_spin_button_set_increments(_SELF(self), NUM2DBL(step), NUM2DBL(page));
     return self;
 }
 
 static VALUE
-sbtn_set_range(VALUE self, VALUE min, VALUE max)
+rg_set_range(VALUE self, VALUE min, VALUE max)
 {
     gtk_spin_button_set_range(_SELF(self), NUM2DBL(min), NUM2DBL(max));
     return self;
 }
 
-
 static VALUE
-sbtn_get_value_as_int(VALUE self)
+rg_value_as_int(VALUE self)
 {
     return INT2NUM(gtk_spin_button_get_value_as_int(_SELF(self)));
 }
 
 static VALUE
-sbtn_spin(VALUE self, VALUE direction, VALUE increment)
+rg_spin(VALUE self, VALUE direction, VALUE increment)
 {
     gtk_spin_button_spin(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_SPIN_TYPE), 
                          NUM2DBL(increment));
@@ -88,14 +88,14 @@ sbtn_spin(VALUE self, VALUE direction, VALUE increment)
 }
 
 static VALUE
-sbtn_update(VALUE self)
+rg_update(VALUE self)
 {
     gtk_spin_button_update(_SELF(self));
     return self;
 }
 
 static VALUE
-sbtn_get_increments(VALUE self)
+rg_increments(VALUE self)
 {
     gdouble step, page;
     gtk_spin_button_get_increments(_SELF(self), &step, &page);
@@ -104,7 +104,7 @@ sbtn_get_increments(VALUE self)
 }
 
 static VALUE
-sbtn_get_range(VALUE self)
+rg_range(VALUE self)
 {
     gdouble min, max;
     gtk_spin_button_get_range(_SELF(self), &min, &max);
@@ -115,23 +115,23 @@ sbtn_get_range(VALUE self)
 void 
 Init_gtk_spin_button(void)
 {
-    VALUE gSButton = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);
 
-    rb_define_method(gSButton, "initialize", sbtn_initialize, -1);
-    rb_define_method(gSButton, "configure", sbtn_configure, 3);
-    rb_define_method(gSButton, "set_increments", sbtn_set_increments, 2);
-    rb_define_method(gSButton, "set_range", sbtn_set_range, 2);
-    rb_define_method(gSButton, "value_as_int", sbtn_get_value_as_int, 0);
-    rb_define_method(gSButton, "spin", sbtn_spin, 2);
-    rb_define_method(gSButton, "update", sbtn_update, 0);
-    rb_define_method(gSButton, "increments", sbtn_get_increments, 0);
-    rb_define_method(gSButton, "range", sbtn_get_range, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(configure, 3);
+    RG_DEF_METHOD(set_increments, 2);
+    RG_DEF_METHOD(set_range, 2);
+    RG_DEF_METHOD(value_as_int, 0);
+    RG_DEF_METHOD(spin, 2);
+    RG_DEF_METHOD(update, 0);
+    RG_DEF_METHOD(increments, 0);
+    RG_DEF_METHOD(range, 0);
 
     /* GtkSpinType */
-    G_DEF_CLASS(GTK_TYPE_SPIN_TYPE, "Type", gSButton);
-    G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_TYPE, "GTK_SPIN_");
+    G_DEF_CLASS(GTK_TYPE_SPIN_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SPIN_TYPE, "GTK_SPIN_");
 
     /* GtkSpinButtonUpdatePolicy */
-    G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "UpdatePolicy", gSButton);
-    G_DEF_CONSTANTS(gSButton, GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "UpdatePolicy", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "GTK_");
 }

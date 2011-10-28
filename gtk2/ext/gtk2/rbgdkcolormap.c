@@ -24,10 +24,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cColormap
 #define _SELF(self) (GDK_COLORMAP(RVAL2GOBJ(self)))
 
 static VALUE
-gdkcmap_initialize(VALUE self, VALUE visual, VALUE allocate)
+rg_initialize(VALUE self, VALUE visual, VALUE allocate)
 {
     GdkColormap *cmap  = gdk_colormap_new(GDK_VISUAL(RVAL2GOBJ(visual)),
                                           RVAL2CBOOL(allocate));
@@ -36,7 +37,7 @@ gdkcmap_initialize(VALUE self, VALUE visual, VALUE allocate)
 }
 
 static VALUE
-gdkcmap_s_get_system(G_GNUC_UNUSED VALUE self)
+rg_s_system(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_system());
 }
@@ -53,7 +54,7 @@ gint        gdk_colormap_alloc_colors       (GdkColormap *colormap,
 */
 
 static VALUE
-gdkcmap_alloc_color(VALUE self, VALUE color, VALUE writeable, VALUE best_match)
+rg_alloc_color(VALUE self, VALUE color, VALUE writeable, VALUE best_match)
 {
     gboolean result;
     GdkColor *c = RVAL2GDKCOLOR(color);
@@ -65,14 +66,14 @@ gdkcmap_alloc_color(VALUE self, VALUE color, VALUE writeable, VALUE best_match)
 /* Don't implement Gdk::Colormap#free_colors.
    Because it should be pair with Gdk::Colormap#alloc_colors */
 static VALUE
-gdkcmap_free_color(VALUE self, VALUE color)
+rg_free_color(VALUE self, VALUE color)
 {
     gdk_colormap_free_colors(_SELF(self), RVAL2GDKCOLOR(color), 1);
     return self;
 }
 
 static VALUE
-gdkcmap_query_color(VALUE self, VALUE pixel)
+rg_query_color(VALUE self, VALUE pixel)
 {
     GdkColor color;
     gdk_colormap_query_color(_SELF(self), NUM2ULONG(pixel), &color);
@@ -80,21 +81,21 @@ gdkcmap_query_color(VALUE self, VALUE pixel)
 }
 
 static VALUE
-gdkcmap_get_visual(VALUE self)
+rg_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_visual(_SELF(self)));
 }
 
 #if GTK_CHECK_VERSION(2,2,0)
 static VALUE
-gdkcmap_get_screen(VALUE self)
+rg_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_screen(_SELF(self)));
 }
 #endif
 
 static VALUE
-gdkcmap_colors(VALUE self)
+rg_colors(VALUE self)
 {
     GdkColormap *cmap;
     GdkColor *colors;
@@ -123,19 +124,16 @@ gdkcmap_colors(VALUE self)
 void
 Init_gtk_gdk_colormap(void)
 {
-    VALUE gdkColormap = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
 
-    rb_define_singleton_method(gdkColormap, "system",
-                               gdkcmap_s_get_system, 0);
-    rb_define_method(gdkColormap, "initialize", gdkcmap_initialize, 2);
-    rb_define_method(gdkColormap, "alloc_color", gdkcmap_alloc_color, 3);
-    rb_define_method(gdkColormap, "free_color", gdkcmap_free_color, 1);
-    rb_define_method(gdkColormap, "query_color", gdkcmap_query_color, 1);
-    rb_define_method(gdkColormap, "visual", gdkcmap_get_visual, 0);
+    RG_DEF_SMETHOD(system, 0);
+    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(alloc_color, 3);
+    RG_DEF_METHOD(free_color, 1);
+    RG_DEF_METHOD(query_color, 1);
+    RG_DEF_METHOD(visual, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gdkColormap, "screen", gdkcmap_get_screen, 0);
+    RG_DEF_METHOD(screen, 0);
 #endif
-    rb_define_method(gdkColormap, "colors", gdkcmap_colors, 0);
+    RG_DEF_METHOD(colors, 0);
 }
-
-

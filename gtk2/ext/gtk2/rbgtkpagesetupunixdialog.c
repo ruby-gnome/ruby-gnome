@@ -24,10 +24,11 @@
 #ifdef HAVE_GTK_UNIX_PRINT
 #include <gtk/gtkpagesetupunixdialog.h>
 
+#define RG_TARGET_NAMESPACE cPageSetupUnixDialog
 #define _SELF(s) (GTK_PAGE_SETUP_UNIX_DIALOG(RVAL2GOBJ(s)))
 
 static VALUE
-psud_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GtkWidget *dialog;
     VALUE title, parent;
@@ -40,7 +41,7 @@ psud_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-psud_set_page_setup(VALUE self, VALUE page_setup)
+rg_set_page_setup(VALUE self, VALUE page_setup)
 {
     gtk_page_setup_unix_dialog_set_page_setup(_SELF(self),
                                               RVAL2GOBJ(page_setup));
@@ -48,13 +49,13 @@ psud_set_page_setup(VALUE self, VALUE page_setup)
 }
 
 static VALUE
-psud_get_page_setup(VALUE self)
+rg_page_setup(VALUE self)
 {
     return GOBJ2RVAL(gtk_page_setup_unix_dialog_get_page_setup(_SELF(self)));
 }
 
 static VALUE
-psud_set_print_settings(VALUE self, VALUE print_settings)
+rg_set_print_settings(VALUE self, VALUE print_settings)
 {
     gtk_page_setup_unix_dialog_set_print_settings(_SELF(self),
                                                   RVAL2GOBJ(print_settings));
@@ -62,7 +63,7 @@ psud_set_print_settings(VALUE self, VALUE print_settings)
 }
 
 static VALUE
-psud_get_print_settings(VALUE self)
+rg_print_settings(VALUE self)
 {
     return GOBJ2RVAL(gtk_page_setup_unix_dialog_get_print_settings(_SELF(self)));
 }
@@ -72,19 +73,15 @@ void
 Init_gtk_page_setup_unix_dialog(void)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
-    VALUE gPageSetupUnixDialog = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP_UNIX_DIALOG,
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP_UNIX_DIALOG,
                                              "PageSetupUnixDialog", mGtk);
 
-    rb_define_method(gPageSetupUnixDialog, "initialize", psud_initialize, -1);
-    rb_define_method(gPageSetupUnixDialog, "set_page_setup",
-                     psud_set_page_setup, 1);
-    rb_define_method(gPageSetupUnixDialog, "page_setup",
-                     psud_get_page_setup, 0);
-    rb_define_method(gPageSetupUnixDialog, "set_print_settings",
-                     psud_set_print_settings, 1);
-    rb_define_method(gPageSetupUnixDialog, "print_settings",
-                     psud_get_print_settings, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_page_setup, 1);
+    RG_DEF_METHOD(page_setup, 0);
+    RG_DEF_METHOD(set_print_settings, 1);
+    RG_DEF_METHOD(print_settings, 0);
 
-    G_DEF_SETTERS(gPageSetupUnixDialog);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

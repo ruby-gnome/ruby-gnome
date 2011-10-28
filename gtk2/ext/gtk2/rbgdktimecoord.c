@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTimeCoord
 #define _SELF(s) ((GdkTimeCoord*)RVAL2BOXED(s, GDK_TYPE_TIME_COORD))
 
 /**********************************/
@@ -48,7 +49,7 @@ gdk_timecoord_get_type(void)
 /**********************************/
 
 static VALUE
-timecoord_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
+rg_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
 {
     guint32 time = NUM2UINT(rbtime);
     long n;
@@ -75,20 +76,20 @@ timecoord_initialize(VALUE self, VALUE rbtime, VALUE rbaxes)
 }
 
 static VALUE
-timecoord_time(VALUE self)
+rg_time(VALUE self)
 {
     return UINT2NUM(_SELF(self)->time);
 }
 
 static VALUE
-timecoord_set_time(VALUE self, VALUE time)
+rg_set_time(VALUE self, VALUE time)
 {
     _SELF(self)->time = NUM2UINT(time);
     return self;
 }
 
 static VALUE
-timecoord_axes(VALUE self)
+rg_axes(VALUE self)
 {
     VALUE ary = rb_ary_new();
     int i;
@@ -99,7 +100,7 @@ timecoord_axes(VALUE self)
 }
 
 static VALUE
-timecoord_set_axes(VALUE self, VALUE rbaxes)
+rg_set_axes(VALUE self, VALUE rbaxes)
 {
     GdkTimeCoord *coord = _SELF(self);
     VALUE axes = rb_ary_to_ary(rbaxes);
@@ -120,15 +121,15 @@ timecoord_set_axes(VALUE self, VALUE rbaxes)
 void
 Init_gtk_gdk_timecoord(void)
 {
-    VALUE tc = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
 
-    rb_define_method(tc, "initialize", timecoord_initialize, 2);
-    rb_define_method(tc, "time", timecoord_time, 0);
-    rb_define_method(tc, "set_time", timecoord_set_time, 1);
-    rb_define_method(tc, "axes", timecoord_axes, 0);
-    rb_define_method(tc, "set_axes", timecoord_set_axes, 1);
+    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(time, 0);
+    RG_DEF_METHOD(set_time, 1);
+    RG_DEF_METHOD(axes, 0);
+    RG_DEF_METHOD(set_axes, 1);
 
-    G_DEF_SETTERS(tc);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    rb_define_const(tc, "MAX_AXES", INT2NUM(GDK_MAX_TIMECOORD_AXES));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAX_AXES", INT2NUM(GDK_MAX_TIMECOORD_AXES));
 }

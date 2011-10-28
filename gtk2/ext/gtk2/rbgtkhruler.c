@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cHRuler
+
 static VALUE
-hruler_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_hruler_new());
     return Qnil;
@@ -34,7 +36,7 @@ hruler_initialize(VALUE self)
 void 
 Init_gtk_hruler(void)
 {
-    VALUE gHRuler = G_DEF_CLASS(GTK_TYPE_HRULER, "HRuler", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HRULER, "HRuler", mGtk);
 
-    rb_define_method(gHRuler, "initialize", hruler_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
 }

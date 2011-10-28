@@ -24,57 +24,48 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cProgressBar
+
 static VALUE
-pbar_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_progress_bar_new());
     return Qnil;
 }
 
 static VALUE
-pbar_pulse(VALUE self)
+rg_pulse(VALUE self)
 {
     gtk_progress_bar_pulse(GTK_PROGRESS_BAR(RVAL2GOBJ(self)));
     return self;
 }
 
-/* Defined as Property
-void        gtk_progress_bar_set_ellipsize  (GtkProgressBar *pbar,
-                                             PangoEllipsizeMode mode);
-*/
-
 void 
 Init_gtk_progress_bar(void)
 {
-    VALUE gProgressBar = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
-
-    /* GtkProgressBarStyle */
-/* Deprecated.
-    rb_define_const(gProgressBar, "CONTINUOUS", INT2FIX(GTK_PROGRESS_CONTINUOUS));
-    rb_define_const(gProgressBar, "DISCRETE", INT2FIX(GTK_PROGRESS_DISCRETE));
-*/
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
 
     /* GtkProgressBarOrientation */
-    G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR_ORIENTATION, "Orientation", gProgressBar);
-    G_DEF_CONSTANTS(gProgressBar, GTK_TYPE_PROGRESS_BAR_ORIENTATION, "GTK_PROGRESS_");
+    G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR_ORIENTATION, "Orientation", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PROGRESS_BAR_ORIENTATION, "GTK_PROGRESS_");
 
-    rb_define_method(gProgressBar, "initialize", pbar_initialize, 0);
-    rb_define_method(gProgressBar, "pulse", pbar_pulse, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(pulse, 0);
 
     /* undef deprecated properties */
-    rb_undef_method(gProgressBar, "adjustment");
-    rb_undef_method(gProgressBar, "adjustment=");
-    rb_undef_method(gProgressBar, "set_adjustment");
-    rb_undef_method(gProgressBar, "bar_style");
-    rb_undef_method(gProgressBar, "bar_style=");
-    rb_undef_method(gProgressBar, "set_bar_style");
-    rb_undef_method(gProgressBar, "discrete_blocks");
-    rb_undef_method(gProgressBar, "discrete_blocks=");
-    rb_undef_method(gProgressBar, "set_discrete_blocks");
-    rb_undef_method(gProgressBar, "activity_blocks");
-    rb_undef_method(gProgressBar, "activity_blocks=");
-    rb_undef_method(gProgressBar, "set_activity_blocks");
-    rb_undef_method(gProgressBar, "activity_step");
-    rb_undef_method(gProgressBar, "activity_step=");
-    rb_undef_method(gProgressBar, "set_activity_step");
+    rb_undef_method(RG_TARGET_NAMESPACE, "adjustment");
+    rb_undef_method(RG_TARGET_NAMESPACE, "adjustment=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_adjustment");
+    rb_undef_method(RG_TARGET_NAMESPACE, "bar_style");
+    rb_undef_method(RG_TARGET_NAMESPACE, "bar_style=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_bar_style");
+    rb_undef_method(RG_TARGET_NAMESPACE, "discrete_blocks");
+    rb_undef_method(RG_TARGET_NAMESPACE, "discrete_blocks=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_discrete_blocks");
+    rb_undef_method(RG_TARGET_NAMESPACE, "activity_blocks");
+    rb_undef_method(RG_TARGET_NAMESPACE, "activity_blocks=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_activity_blocks");
+    rb_undef_method(RG_TARGET_NAMESPACE, "activity_step");
+    rb_undef_method(RG_TARGET_NAMESPACE, "activity_step=");
+    rb_undef_method(RG_TARGET_NAMESPACE, "set_activity_step");
 }

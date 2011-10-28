@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cToggleButton
+
 static VALUE
-tbtn_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget;
@@ -45,7 +47,7 @@ tbtn_initialize(int argc, VALUE *argv, VALUE self)
                      rb_class2name(CLASS_OF(label)));
         }
     } else {
-	widget = gtk_toggle_button_new();
+        widget = gtk_toggle_button_new();
     }
 
     RBGTK_INITIALIZE(self, widget);
@@ -53,35 +55,34 @@ tbtn_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-tbtn_set_mode(VALUE self, VALUE mode)
+rg_set_mode(VALUE self, VALUE mode)
 {
     gtk_toggle_button_set_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)),
-			       RVAL2CBOOL(mode));
+                               RVAL2CBOOL(mode));
     return self;
 }
 
 static VALUE
-tbtn_get_mode(VALUE self)
+rg_mode_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_toggle_button_get_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self))));
 }
 
 static VALUE
-tbtn_toggled(VALUE self)
+rg_toggled(VALUE self)
 {
     gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)));
     return self;
 }
 
-
 void 
 Init_gtk_toggle_button(void)
 {
-    VALUE gTButton = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);
 
-    rb_define_method(gTButton, "initialize", tbtn_initialize, -1);
-    rb_define_method(gTButton, "set_mode", tbtn_set_mode, 1);
-    G_DEF_SETTER(gTButton, "mode");
-    rb_define_method(gTButton, "mode?", tbtn_get_mode, 0);
-    rb_define_method(gTButton, "toggled", tbtn_toggled, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_mode, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "mode");
+    RG_DEF_METHOD_P(mode, 0);
+    RG_DEF_METHOD(toggled, 0);
 }

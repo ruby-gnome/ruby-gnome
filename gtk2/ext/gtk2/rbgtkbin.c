@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cBin
+
 static VALUE
-bin_child(VALUE self)
+rg_child(VALUE self)
 {
     GtkWidget *child = gtk_bin_get_child(RVAL2GOBJ(self));
     return child ? GOBJ2RVAL(child) : Qnil;
@@ -34,7 +36,7 @@ bin_child(VALUE self)
 void 
 Init_gtk_bin(void)
 {
-    VALUE gBin = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);
 
-    rb_define_method(gBin, "child", bin_child, 0);
+    RG_DEF_METHOD(child, 0);
 }

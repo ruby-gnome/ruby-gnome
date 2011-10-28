@@ -24,21 +24,23 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cGammaCurve
+
 static VALUE
-gamma_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_gamma_curve_new());
     return Qnil;
 }
 
 static VALUE
-gamma_gamma(VALUE self)
+rg_gamma(VALUE self)
 {
     return rb_float_new(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->gamma);
 }
 
 static VALUE
-gamma_curve(VALUE self)
+rg_curve(VALUE self)
 {
     return GOBJ2RVAL(GTK_GAMMA_CURVE(RVAL2GOBJ(self))->curve);
 }
@@ -46,9 +48,9 @@ gamma_curve(VALUE self)
 void 
 Init_gtk_gamma_curve(void)
 {
-    VALUE gGamma = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
 
-    rb_define_method(gGamma, "initialize", gamma_initialize, 0);
-    rb_define_method(gGamma, "gamma", gamma_gamma, 0);
-    rb_define_method(gGamma, "curve", gamma_curve, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(gamma, 0);
+    RG_DEF_METHOD(curve, 0);
 }

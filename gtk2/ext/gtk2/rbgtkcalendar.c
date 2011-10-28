@@ -24,17 +24,18 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCalendar
 #define _SELF(self) (GTK_CALENDAR(RVAL2GOBJ(self)))
 
 static VALUE
-cal_init(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_calendar_new());
     return Qnil;
 }
 
 static VALUE
-cal_select_month(VALUE self, VALUE month, VALUE year)
+rg_select_month(VALUE self, VALUE month, VALUE year)
 {
     gint ret = gtk_calendar_select_month(_SELF(self),
                                          NUM2INT(month)-1,
@@ -43,35 +44,35 @@ cal_select_month(VALUE self, VALUE month, VALUE year)
 }
 
 static VALUE
-cal_select_day(VALUE self, VALUE day)
+rg_select_day(VALUE self, VALUE day)
 {
     gtk_calendar_select_day(_SELF(self), NUM2INT(day));
     return self;
 }
 
 static VALUE
-cal_mark_day(VALUE self, VALUE day)
+rg_mark_day(VALUE self, VALUE day)
 {
     gtk_calendar_mark_day(_SELF(self), NUM2INT(day));
     return self;
 }
 
 static VALUE
-cal_unmark_day(VALUE self, VALUE day)
+rg_unmark_day(VALUE self, VALUE day)
 {
     gtk_calendar_unmark_day(_SELF(self), NUM2INT(day));
     return self;
 }
 
 static VALUE
-cal_clear_marks(VALUE self)
+rg_clear_marks(VALUE self)
 {
     gtk_calendar_clear_marks(_SELF(self));
     return self;
 }
 
 static VALUE
-cal_get_date(VALUE self)
+rg_date(VALUE self)
 {
     VALUE ret;
     guint year, month, day;
@@ -85,21 +86,21 @@ cal_get_date(VALUE self)
 }
 
 static VALUE
-cal_freeze(VALUE self)
+rg_freeze(VALUE self)
 {
     gtk_calendar_freeze(_SELF(self));
     return self;
 }
 
 static VALUE
-cal_thaw(VALUE self)
+rg_thaw(VALUE self)
 {
     gtk_calendar_thaw(_SELF(self));
     return self;
 }
 
 static VALUE
-cal_get_display_options(int argc, VALUE *argv, VALUE self)
+rg_display_options(int argc, VALUE *argv, VALUE self)
 {
     VALUE flags;
     rb_scan_args(argc, argv, "01", &flags);
@@ -122,7 +123,7 @@ cal_get_display_options(int argc, VALUE *argv, VALUE self)
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-cal_set_display_options(VALUE self, VALUE flags)
+rg_set_display_options(VALUE self, VALUE flags)
 {
     gtk_calendar_set_display_options(_SELF(self), 
                                      RVAL2GFLAGS(flags, 
@@ -134,23 +135,23 @@ cal_set_display_options(VALUE self, VALUE flags)
 void 
 Init_gtk_calendar(void)
 {
-    VALUE gCalendar = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);
 
-    rb_define_method(gCalendar, "initialize", cal_init, 0);
-    rb_define_method(gCalendar, "select_month", cal_select_month, 2);
-    rb_define_method(gCalendar, "select_day", cal_select_day, 1);
-    rb_define_method(gCalendar, "mark_day", cal_mark_day, 1);
-    rb_define_method(gCalendar, "unmark_day", cal_unmark_day, 1);
-    rb_define_method(gCalendar, "clear_marks", cal_clear_marks, 0);
-    rb_define_method(gCalendar, "date", cal_get_date, 0);
-    rb_define_method(gCalendar, "freeze", cal_freeze, 0);
-    rb_define_method(gCalendar, "thaw", cal_thaw, 0);
-    rb_define_method(gCalendar, "display_options", cal_get_display_options, -1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(select_month, 2);
+    RG_DEF_METHOD(select_day, 1);
+    RG_DEF_METHOD(mark_day, 1);
+    RG_DEF_METHOD(unmark_day, 1);
+    RG_DEF_METHOD(clear_marks, 0);
+    RG_DEF_METHOD(date, 0);
+    RG_DEF_METHOD(freeze, 0);
+    RG_DEF_METHOD(thaw, 0);
+    RG_DEF_METHOD(display_options, -1);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gCalendar, "set_display_options", cal_set_display_options, 1);
-    G_DEF_SETTER(gCalendar, "display_options");
+    RG_DEF_METHOD(set_display_options, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_options");
 #endif
 
-    G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", gCalendar);
-    G_DEF_CONSTANTS(gCalendar, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");
+    G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");
 }

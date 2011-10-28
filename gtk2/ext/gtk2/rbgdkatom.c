@@ -22,6 +22,7 @@
 #include "global.h"
 #include "rbgdk.h"
 
+#define RG_TARGET_NAMESPACE cAtom
 #define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
 
 /*****************************************/
@@ -45,7 +46,6 @@ gdk_atom_get_type(void)
     return our_type;
 }
 
-
 GdkAtom
 get_gdkatom(VALUE atom)
 {
@@ -56,11 +56,11 @@ get_gdkatom(VALUE atom)
 /*****************************************/
 
 static VALUE
-gdkatom_s_intern(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_intern(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE name;
     VALUE exist;
-  
+
     rb_scan_args(argc, argv, "11", &name, &exist);
 
     return BOXED2RVAL(gdk_atom_intern(RVAL2CSTR(name), RVAL2CBOOL(exist)), 
@@ -72,7 +72,7 @@ GdkAtom gdk_atom_intern_static_string(const gchar *atom_name);
  */
 
 static VALUE
-gdkatom_initialize(VALUE self, VALUE num)
+rg_initialize(VALUE self, VALUE num)
 {
     guint atom = FIX2INT(num);
     if (atom == 0){
@@ -87,19 +87,19 @@ gdkatom_initialize(VALUE self, VALUE num)
 }
 
 static VALUE
-gdkatom_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_atom_name(_SELF(self)));
 }
 
 static VALUE
-gdkatom_to_i(VALUE self)
+rg_to_i(VALUE self)
 {
     return UINT2NUM(GPOINTER_TO_UINT(_SELF(self)));
 }
 
 static VALUE
-gdkatom_eq(VALUE self, VALUE other)
+rg_operator_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(_SELF(self) == _SELF(other));
 }
@@ -108,17 +108,17 @@ void
 Init_gtk_gdk_atom(void)
 {
     VALUE none;
-    VALUE gdkAtom = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);
 
-    rb_define_singleton_method(gdkAtom, "intern", gdkatom_s_intern, -1);
+    RG_DEF_SMETHOD(intern, -1);
 
-    rb_define_method(gdkAtom, "initialize", gdkatom_initialize, 1);
-    rb_define_method(gdkAtom, "name", gdkatom_name, 0);
-    rb_define_method(gdkAtom, "to_i", gdkatom_to_i, 0);
-    rb_define_method(gdkAtom, "==", gdkatom_eq, 1);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(to_i, 0);
+    RG_DEF_METHOD_OPERATOR("==", equal, 1);
 
     /* This is a trick to define GDK_NONE as a BOXED object */
     none = BOXED2RVAL((gpointer)1, GDK_TYPE_ATOM);
-    rb_define_const(gdkAtom, "NONE", none);
+    rb_define_const(RG_TARGET_NAMESPACE, "NONE", none);
     _SELF(none) = GDK_NONE;
 }           

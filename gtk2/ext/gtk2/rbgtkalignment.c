@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cAlignment
+
 static VALUE
-align_initialize(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
+rg_initialize(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
 {
     RBGTK_INITIALIZE(self, gtk_alignment_new(NUM2DBL(xalign),
                                              NUM2DBL(yalign),
@@ -35,16 +37,16 @@ align_initialize(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE ysc
 }
 
 static VALUE
-align_set(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
+rg_set(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
 {
     gtk_alignment_set(GTK_ALIGNMENT(RVAL2GOBJ(self)),
-		      NUM2DBL(xalign), NUM2DBL(yalign),
-		      NUM2DBL(xscale), NUM2DBL(yscale));
+                      NUM2DBL(xalign), NUM2DBL(yalign),
+                      NUM2DBL(xscale), NUM2DBL(yscale));
     return self;
 }
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-align_get_padding(VALUE self)
+rg_padding(VALUE self)
 {
     guint top, bottom, left, right;
     gtk_alignment_get_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
@@ -53,7 +55,7 @@ align_get_padding(VALUE self)
                        UINT2NUM(left), UINT2NUM(right));
 }
 static VALUE
-align_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
+rg_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
 {
     gtk_alignment_set_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
                               NUM2UINT(top), NUM2UINT(bottom),
@@ -65,13 +67,13 @@ align_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
 void 
 Init_gtk_alignment(void)
 {
-    VALUE gAlignment = G_DEF_CLASS(GTK_TYPE_ALIGNMENT, "Alignment", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ALIGNMENT, "Alignment", mGtk);
 
-    rb_define_method(gAlignment, "initialize", align_initialize, 4);
-    rb_define_method(gAlignment, "set", align_set, 4);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(set, 4);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gAlignment, "padding", align_get_padding, 0);
-    rb_define_method(gAlignment, "set_padding", align_set_padding, 4);
+    RG_DEF_METHOD(padding, 0);
+    RG_DEF_METHOD(set_padding, 4);
 #endif
 
 }

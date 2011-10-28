@@ -27,17 +27,19 @@
 #include <X11/Xlib.h>
 #endif /* HAVE_XREADBITMAPFILEDATA */
 
+#define RG_TARGET_NAMESPACE cPixmap
+
 static VALUE
-gdkpmap_initialize(VALUE self, VALUE win, VALUE w, VALUE h, VALUE depth)
+rg_initialize(VALUE self, VALUE win, VALUE w, VALUE h, VALUE depth)
 {
-	G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
-                                          NUM2INT(w), NUM2INT(h), 
-                                          NUM2INT(depth)));
-	return Qnil;
+    G_INITIALIZE(self, gdk_pixmap_new(GDK_WINDOW(RVAL2GOBJ(win)), 
+                                      NUM2INT(w), NUM2INT(h), 
+                                      NUM2INT(depth)));
+    return Qnil;
 }
 
 static VALUE
-gdkpmap_create_from_data(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_create_from_data(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE win, data, w, h, depth, fg, bg, ret;
 
@@ -51,14 +53,14 @@ gdkpmap_create_from_data(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         ret = GOBJ2RVAL(gdk_pixmap_create_from_data(NIL_P(win) ? NULL : GDK_WINDOW(RVAL2GOBJ(win)),
                                                     RVAL2CSTR(data), NUM2INT(w), NUM2INT(h), 
                                                     NUM2INT(depth),
-						    RVAL2GDKCOLOR(fg),
-						    RVAL2GDKCOLOR(bg)));
+                                                    RVAL2GDKCOLOR(fg),
+                                                    RVAL2GDKCOLOR(bg)));
     }
     return ret;
 }
 
 static VALUE
-gdkpmap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE color, VALUE fname)
+rg_s_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE color, VALUE fname)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -74,7 +76,7 @@ gdkpmap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE color, VALUE 
 }
 
 static VALUE
-gdkpmap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE tcolor, VALUE data)
+rg_s_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE tcolor, VALUE data)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -91,7 +93,7 @@ gdkpmap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE tcolor, VAL
 }
 
 static VALUE
-gdkpmap_colormap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE fname)
+rg_s_colormap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE fname)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -108,7 +110,7 @@ gdkpmap_colormap_create_from_xpm(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colo
 }
 
 static VALUE
-gdkpmap_colormap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE data)
+rg_s_colormap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE colormap, VALUE tcolor, VALUE data)
 {
     GdkPixmap *result;
     GdkBitmap *mask;
@@ -125,7 +127,7 @@ gdkpmap_colormap_create_from_xpm_d(G_GNUC_UNUSED VALUE self, VALUE win, VALUE co
 
 #ifdef HAVE_XREADBITMAPFILEDATA
 static VALUE
-gdkpmap_create_from_xbm(VALUE self, VALUE win, VALUE fname)
+rg_s_create_from_xbm(VALUE self, VALUE win, VALUE fname)
 {
     GdkBitmap *new;
     unsigned char *data;
@@ -151,13 +153,13 @@ gdkpmap_create_from_xbm(VALUE self, VALUE win, VALUE fname)
  */
 
 static VALUE
-gdkpmap_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg[5];
     GdkPixmap* win = NULL;
-    
+
     rb_scan_args(argc, argv, "14", &arg[0], &arg[1], &arg[2], &arg[3], &arg[4]);
-    
+
     switch(argc)
         {
         case 1:
@@ -191,26 +193,26 @@ gdkpmap_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gdkpmap_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE arg[2];
     GdkPixmap* win = NULL;
-    
+
     rb_scan_args(argc, argv, "11", &arg[0], &arg[1]);
 
     switch(argc)
     {
       case 1:
-    	win = gdk_pixmap_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
-	break;
+        win = gdk_pixmap_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
+        break;
       case 2:
 #if GTK_CHECK_VERSION(2,2,0)
-    	win = gdk_pixmap_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
+        win = gdk_pixmap_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
 #else
-    	win = gdk_pixmap_lookup(RVAL2GDKNATIVEWINDOW(arg[1])); 
+        win = gdk_pixmap_lookup(RVAL2GDKNATIVEWINDOW(arg[1])); 
         rb_warn("Not supported in GTK+-2.0.x.");
 #endif
-    	break;
+        break;
     default:
         break;
     }
@@ -224,16 +226,16 @@ gdkpmap_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 void
 Init_gtk_gdk_pixmap(void)
 {
-    VALUE gdkPixmap = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
 
-    rb_define_method(gdkPixmap, "initialize", gdkpmap_initialize, 4);
-    rb_define_singleton_method(gdkPixmap, "create_from_data", gdkpmap_create_from_data, -1);
-    rb_define_singleton_method(gdkPixmap, "create_from_xpm", gdkpmap_create_from_xpm, 3);
-    rb_define_singleton_method(gdkPixmap, "create_from_xpm_d", gdkpmap_create_from_xpm_d, 3);
-    rb_define_singleton_method(gdkPixmap, "colormap_create_from_xpm", gdkpmap_colormap_create_from_xpm, 4);
-    rb_define_singleton_method(gdkPixmap, "colormap_create_from_xpm_d", gdkpmap_colormap_create_from_xpm_d, 4);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_SMETHOD(create_from_data, -1);
+    RG_DEF_SMETHOD(create_from_xpm, 3);
+    RG_DEF_SMETHOD(create_from_xpm_d, 3);
+    RG_DEF_SMETHOD(colormap_create_from_xpm, 4);
+    RG_DEF_SMETHOD(colormap_create_from_xpm_d, 4);
 #ifdef HAVE_XREADBITMAPFILEDATA
-    rb_define_singleton_method(gdkPixmap, "create_from_xbm", gdkpmap_create_from_xbm, 2);
+    RG_DEF_SMETHOD(create_from_xbm, 2);
 #endif /* HAVE_XREADBITMAPFILEDATA */
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkPixmapImplX11", "PixmapImplX11", mGdk);
@@ -243,7 +245,7 @@ Init_gtk_gdk_pixmap(void)
     G_DEF_CLASS3("GdkPixmapFB", "PixmapFB", mGdk);
 #endif
 
-    rb_define_singleton_method(gdkPixmap, "foreign_new", gdkpmap_foreign_new, -1);
-    rb_define_singleton_method(gdkPixmap, "lookup", gdkpmap_lookup, -1);
+    RG_DEF_SMETHOD(foreign_new, -1);
+    RG_DEF_SMETHOD(lookup, -1);
 
 }

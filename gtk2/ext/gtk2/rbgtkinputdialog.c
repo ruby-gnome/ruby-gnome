@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cInputDialog
+
 static VALUE
-idiag_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_input_dialog_new());
     return Qnil;
@@ -34,6 +36,6 @@ idiag_initialize(VALUE self)
 void 
 Init_gtk_input_dialog(void)
 {
-    VALUE gInputDialog = G_DEF_CLASS(GTK_TYPE_INPUT_DIALOG, "InputDialog", mGtk);
-    rb_define_method(gInputDialog, "initialize", idiag_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_INPUT_DIALOG, "InputDialog", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 }

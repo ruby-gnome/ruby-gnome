@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cViewport
+
 static VALUE
-vport_initialize(VALUE self, VALUE hadj, VALUE vadj)
+rg_initialize(VALUE self, VALUE hadj, VALUE vadj)
 {
     GtkAdjustment *h_adj = GTK_ADJUSTMENT(RVAL2GOBJ(hadj));
     GtkAdjustment *v_adj = GTK_ADJUSTMENT(RVAL2GOBJ(vadj));
@@ -37,6 +39,6 @@ vport_initialize(VALUE self, VALUE hadj, VALUE vadj)
 void 
 Init_gtk_viewport(void)
 {
-    VALUE gViewport = G_DEF_CLASS(GTK_TYPE_VIEWPORT, "Viewport", mGtk);
-    rb_define_method(gViewport, "initialize", vport_initialize, 2);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VIEWPORT, "Viewport", mGtk);
+    RG_DEF_METHOD(initialize, 2);
 }

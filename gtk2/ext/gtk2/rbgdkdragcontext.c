@@ -21,34 +21,35 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cDragContext
 #define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
 
 static VALUE
-gdkdragcontext_protocol(VALUE self)
+rg_protocol(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->protocol, GDK_TYPE_DRAG_PROTOCOL);
 }
 
 static VALUE
-gdkdragcontext_is_source(VALUE self)
+rg_source_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->is_source);
 }
 
 static VALUE
-gdkdragcontext_source_window(VALUE self)
+rg_source_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->source_window);
 }
 
 static VALUE
-gdkdragcontext_dest_window(VALUE self)
+rg_dest_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->dest_window);
 }
 
 static VALUE
-gdkdragcontext_targets(VALUE self)
+rg_targets(VALUE self)
 {
     GList *list = _SELF(self)->targets, *cur;
     VALUE ary = rb_ary_new();
@@ -60,38 +61,38 @@ gdkdragcontext_targets(VALUE self)
 }
 
 static VALUE
-gdkdragcontext_actions(VALUE self)
+rg_actions(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->actions, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
-gdkdragcontext_suggested_action(VALUE self)
+rg_suggested_action(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->suggested_action, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
-gdkdragcontext_action(VALUE self)
+rg_action(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->action, GDK_TYPE_DRAG_ACTION);
 }
 
 static VALUE
-gdkdragcontext_start_time(VALUE self)
+rg_start_time(VALUE self)
 {
     return UINT2NUM(_SELF(self)->start_time);
 }
 
 static VALUE
-gdkdragcontext_initialize(VALUE self)
+rg_initialize(VALUE self)
 {   
     G_INITIALIZE(self, gdk_drag_context_new());
     return Qnil;
 }
 
 static VALUE
-gdkdragcontext_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE xid;
     GdkDragProtocol prot;
@@ -117,34 +118,34 @@ gdkdragcontext_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
 /* Instance Methods */
 static VALUE
-gdkdragcontext_get_selection(VALUE self)
+rg_selection(VALUE self)
 {
     return BOXED2RVAL(gdk_drag_get_selection(_SELF(self)), GDK_TYPE_ATOM);
 }
 
 static VALUE
-gdkdragcontext_drag_abort(VALUE self, VALUE time)
+rg_drag_abort(VALUE self, VALUE time)
 {
     gdk_drag_abort(_SELF(self), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_drop_reply(VALUE self, VALUE ok, VALUE time)
+rg_drop_reply(VALUE self, VALUE ok, VALUE time)
 {
     gdk_drop_reply(_SELF(self), RVAL2CBOOL(ok), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_drag_drop(VALUE self, VALUE time)
+rg_drag_drop(VALUE self, VALUE time)
 {
     gdk_drag_drop(_SELF(self), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_find_window(int argc, VALUE *argv, VALUE self)
+rg_find_window(int argc, VALUE *argv, VALUE self)
 {
     VALUE drag_window, x_root, y_root;
     GdkWindow *dest_window;
@@ -218,7 +219,7 @@ rbgdk_rval2gdkatomglist(VALUE value)
 #define RVAL2GDKATOMGLIST(value) rbgdk_rval2gdkatomglist(value)
 
 static VALUE
-gdkdragcontext_s_drag_begin(G_GNUC_UNUSED VALUE self, VALUE rbwindow, VALUE rbtargets)
+rg_s_drag_begin(G_GNUC_UNUSED VALUE self, VALUE rbwindow, VALUE rbtargets)
 {
     GdkWindow *window = GDK_WINDOW(RVAL2GOBJ(rbwindow));
     GList *targets = RVAL2GDKATOMGLIST(rbtargets);
@@ -230,7 +231,7 @@ gdkdragcontext_s_drag_begin(G_GNUC_UNUSED VALUE self, VALUE rbwindow, VALUE rbta
 }
 
 static VALUE
-gdkdragcontext_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE x_root, VALUE y_root, VALUE suggested_action, VALUE possible_actions, VALUE time)
+rg_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE x_root, VALUE y_root, VALUE suggested_action, VALUE possible_actions, VALUE time)
 {
     gboolean ret = gdk_drag_motion(_SELF(self), 
                                    GDK_WINDOW(RVAL2GOBJ(dest_window)), 
@@ -243,14 +244,14 @@ gdkdragcontext_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE 
 }
 
 static VALUE
-gdkdragcontext_drop_finish(VALUE self, VALUE success, VALUE time)
+rg_drop_finish(VALUE self, VALUE success, VALUE time)
 {
     gdk_drop_finish(_SELF(self), RVAL2CBOOL(success), NUM2UINT(time));
     return self;
 }
 
 static VALUE
-gdkdragcontext_drag_status(VALUE self, VALUE action, VALUE time)
+rg_drag_status(VALUE self, VALUE action, VALUE time)
 {
     gdk_drag_status(_SELF(self), 
                     RVAL2GFLAGS(action, GDK_TYPE_DRAG_ACTION), NUM2UINT(time));
@@ -259,7 +260,7 @@ gdkdragcontext_drag_status(VALUE self, VALUE action, VALUE time)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-gdkdragcontext_drag_drop_succeeded(VALUE self)
+rg_drag_drop_succeeded_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_drag_drop_succeeded(_SELF(self)));
 }
@@ -268,36 +269,36 @@ gdkdragcontext_drag_drop_succeeded(VALUE self)
 void
 Init_gtk_gdk_dragcontext(void)
 {
-    VALUE gdkDragContext = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
-    rb_define_singleton_method(gdkDragContext, "get_protocol", gdkdragcontext_s_get_protocol, -1);
-    rb_define_singleton_method(gdkDragContext, "drag_begin", gdkdragcontext_s_drag_begin, 1);
+    RG_DEF_SMETHOD(get_protocol, -1);
+    RG_DEF_SMETHOD(drag_begin, 1);
 
-    rb_define_method(gdkDragContext, "initialize", gdkdragcontext_initialize, 0);
-    rb_define_method(gdkDragContext, "protocol", gdkdragcontext_protocol, 0);
-    rb_define_method(gdkDragContext, "source?", gdkdragcontext_is_source, 0);
-    rb_define_method(gdkDragContext, "source_window", gdkdragcontext_source_window, 0);
-    rb_define_method(gdkDragContext, "dest_window", gdkdragcontext_dest_window, 0);
-    rb_define_method(gdkDragContext, "targets", gdkdragcontext_targets, 0);
-    rb_define_method(gdkDragContext, "actions", gdkdragcontext_actions, 0);
-    rb_define_method(gdkDragContext, "suggested_action", gdkdragcontext_suggested_action, 0);
-    rb_define_method(gdkDragContext, "action", gdkdragcontext_action, 0);
-    rb_define_method(gdkDragContext, "start_time", gdkdragcontext_start_time, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(protocol, 0);
+    RG_DEF_METHOD_P(source, 0);
+    RG_DEF_METHOD(source_window, 0);
+    RG_DEF_METHOD(dest_window, 0);
+    RG_DEF_METHOD(targets, 0);
+    RG_DEF_METHOD(actions, 0);
+    RG_DEF_METHOD(suggested_action, 0);
+    RG_DEF_METHOD(action, 0);
+    RG_DEF_METHOD(start_time, 0);
 
-    rb_define_method(gdkDragContext, "selection", gdkdragcontext_get_selection, 0);
-    rb_define_method(gdkDragContext, "drag_abort", gdkdragcontext_drag_abort, 1);
-    rb_define_method(gdkDragContext, "drop_reply", gdkdragcontext_drop_reply, 2);
-    rb_define_method(gdkDragContext, "drag_drop", gdkdragcontext_drag_drop, 1);
-    rb_define_method(gdkDragContext, "find_window", gdkdragcontext_find_window, 4);
-    rb_define_method(gdkDragContext, "drag_motion", gdkdragcontext_drag_motion, 7);
-    rb_define_method(gdkDragContext, "drop_finish", gdkdragcontext_drop_finish, 2);
-    rb_define_method(gdkDragContext, "drag_status", gdkdragcontext_drag_status, 2);
+    RG_DEF_METHOD(selection, 0);
+    RG_DEF_METHOD(drag_abort, 1);
+    RG_DEF_METHOD(drop_reply, 2);
+    RG_DEF_METHOD(drag_drop, 1);
+    RG_DEF_METHOD(find_window, 4);
+    RG_DEF_METHOD(drag_motion, 7);
+    RG_DEF_METHOD(drop_finish, 2);
+    RG_DEF_METHOD(drag_status, 2);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gdkDragContext, "drag_drop_succeeded?", gdkdragcontext_drag_drop_succeeded, 0);
+    RG_DEF_METHOD_P(drag_drop_succeeded, 0);
 #endif
-	/* Constants */
-    G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", gdkDragContext);
-    G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", gdkDragContext);
-    G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_PROTOCOL, "GDK_DRAG_");
-    G_DEF_CONSTANTS(gdkDragContext, GDK_TYPE_DRAG_ACTION, "GDK_");
+    /* Constants */
+    G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_DRAG_PROTOCOL, "GDK_DRAG_");
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_DRAG_ACTION, "GDK_");
 }

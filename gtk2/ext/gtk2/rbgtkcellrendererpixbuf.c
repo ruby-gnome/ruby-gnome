@@ -21,11 +21,11 @@
 
 #include "global.h"
 
-
+#define RG_TARGET_NAMESPACE cCellRendererPixbuf
 #define _SELF(s) (GTK_CELL_RENDERER_PIXBUF(RVAL2GOBJ(s)))
 
 static VALUE
-crpixbuf_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_pixbuf_new());
     return Qnil;
@@ -34,9 +34,6 @@ crpixbuf_initialize(VALUE self)
 void
 Init_gtk_cellrendererpixbuf(void)
 {
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_PIXBUF, "CellRendererPixbuf", mGtk);
-    rb_define_method(renderer, "initialize", crpixbuf_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_PIXBUF, "CellRendererPixbuf", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 }
-
-
- 

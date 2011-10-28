@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cCheckButton
+
 static VALUE
-cbtn_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label, use_underline;
     GtkWidget *widget;
@@ -56,7 +58,7 @@ cbtn_initialize(int argc, VALUE *argv, VALUE self)
 void 
 Init_gtk_check_button(void)
 {
-    VALUE gCButton = G_DEF_CLASS(GTK_TYPE_CHECK_BUTTON, "CheckButton", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CHECK_BUTTON, "CheckButton", mGtk);
 
-    rb_define_method(gCButton, "initialize", cbtn_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

@@ -19,42 +19,43 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *  MA  02110-1301  USA
  */
- 
+
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cFileFilter
 #define _SELF(self) GTK_FILE_FILTER(RVAL2GOBJ(self))
 
 static VALUE
-ffil_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
   RBGTK_INITIALIZE(self, gtk_file_filter_new());
   return Qnil;
 }
 
 static VALUE
-ffil_set_name(VALUE self, VALUE name)
+rg_set_name(VALUE self, VALUE name)
 {
   gtk_file_filter_set_name(_SELF(self), RVAL2CSTR(name));
   return self;
 }
 
 static VALUE
-ffil_get_name(VALUE self)
+rg_name(VALUE self)
 {
   return CSTR2RVAL(gtk_file_filter_get_name(_SELF(self)));
 }
 
 static VALUE
-ffil_add_mime_type(VALUE self, VALUE mime)
+rg_add_mime_type(VALUE self, VALUE mime)
 {
   gtk_file_filter_add_mime_type(_SELF(self), RVAL2CSTR(mime));
   return self;
 }
 
 static VALUE
-ffil_add_pattern(VALUE self, VALUE pattern)
+rg_add_pattern(VALUE self, VALUE pattern)
 {
   gtk_file_filter_add_pattern(_SELF(self), RVAL2CSTR(pattern));
   return self;
@@ -76,7 +77,7 @@ filter_func(const GtkFileFilterInfo *info, gpointer func)
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
-ffil_add_pixbuf_formats(VALUE self)
+rg_add_pixbuf_formats(VALUE self)
 {
     gtk_file_filter_add_pixbuf_formats(_SELF(self));
     return self;
@@ -84,7 +85,7 @@ ffil_add_pixbuf_formats(VALUE self)
 #endif
 
 static VALUE
-ffil_add_custom(VALUE self, VALUE needed)
+rg_add_custom(VALUE self, VALUE needed)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
@@ -94,13 +95,13 @@ ffil_add_custom(VALUE self, VALUE needed)
 }
 
 static VALUE
-ffil_get_needed(VALUE self)
+rg_needed(VALUE self)
 {
     return GFLAGS2RVAL(gtk_file_filter_get_needed(_SELF(self)), GTK_TYPE_FILE_FILTER_FLAGS);
 }
 
 static VALUE
-ffil_filter(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display_name, VALUE mime_type)
+rg_filter_p(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display_name, VALUE mime_type)
 {
     GtkFileFilterInfo info;
     info.contains = RVAL2GFLAGS(contains, GTK_TYPE_FILE_FILTER_FLAGS);
@@ -118,25 +119,24 @@ Init_gtk_file_filter(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gFileFilter = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);
 
-    rb_define_method(gFileFilter, "initialize", ffil_initialize, 0);
-    rb_define_method(gFileFilter, "set_name", ffil_set_name, 1);
-    rb_define_method(gFileFilter, "name", ffil_get_name, 0);
-    rb_define_method(gFileFilter, "add_mime_type", ffil_add_mime_type, 1);
-    rb_define_method(gFileFilter, "add_pattern", ffil_add_pattern, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_name, 1);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(add_mime_type, 1);
+    RG_DEF_METHOD(add_pattern, 1);
 #if GTK_CHECK_VERSION(2,6,0)
-    rb_define_method(gFileFilter, "add_pixbuf_formats", ffil_add_pixbuf_formats, 0);
+    RG_DEF_METHOD(add_pixbuf_formats, 0);
 #endif
-    rb_define_method(gFileFilter, "add_custom", ffil_add_custom, 1);
-    rb_define_method(gFileFilter, "needed", ffil_get_needed, 0);
-    rb_define_method(gFileFilter, "filter?", ffil_filter, 5);
+    RG_DEF_METHOD(add_custom, 1);
+    RG_DEF_METHOD(needed, 0);
+    RG_DEF_METHOD_P(filter, 5);
 
-    G_DEF_SETTERS(gFileFilter);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", gFileFilter);
-    G_DEF_CONSTANTS(gFileFilter, GTK_TYPE_FILE_FILTER_FLAGS, "GTK_FILE_FILTER_");
-
+    G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_FILTER_FLAGS, "GTK_FILE_FILTER_");
 
 #endif
 }

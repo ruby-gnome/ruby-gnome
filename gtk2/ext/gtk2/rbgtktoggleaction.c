@@ -18,15 +18,16 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  *  MA  02110-1301  USA
  */
- 
+
 #include "global.h"
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cToggleAction
 #define _SELF(self) (GTK_TOGGLE_ACTION(RVAL2GOBJ(self)))
 
 static VALUE
-taction_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id)
+rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id)
 {
     const gchar *gstockid = NULL;
 
@@ -44,17 +45,12 @@ taction_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE sto
 }
 
 static VALUE
-taction_toggled(VALUE self)
+rg_toggled(VALUE self)
 {
     gtk_toggle_action_toggled(_SELF(self));
     return self;
 }
 
-/* Defined as Properties:
-void                gtk_toggle_action_set_active        (GtkToggleAction *action,
-                                                         gboolean is_active);
-gboolean            gtk_toggle_action_get_active        (GtkToggleAction *action);
-*/
 #endif
 
 void 
@@ -62,10 +58,9 @@ Init_gtk_toggle_action(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gToggleAction = G_DEF_CLASS(GTK_TYPE_TOGGLE_ACTION, "ToggleAction", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_ACTION, "ToggleAction", mGtk);
 
-    rb_define_method(gToggleAction, "initialize", taction_initialize, 4);
-    rb_define_method(gToggleAction, "toggled", taction_toggled, 0);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(toggled, 0);
 #endif
 }
-

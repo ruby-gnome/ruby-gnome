@@ -23,8 +23,10 @@
 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cCellRendererProgress
+
 static VALUE
-crprogress_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_cell_renderer_progress_new());
     return Qnil;
@@ -36,11 +38,7 @@ void
 Init_gtk_cellrendererprogress(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE renderer = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_PROGRESS, "CellRendererProgress", mGtk);
-    rb_define_method(renderer, "initialize", crprogress_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_PROGRESS, "CellRendererProgress", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 #endif
 }
-
-
- 
-

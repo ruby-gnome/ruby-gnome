@@ -21,20 +21,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cImage
 #define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
-/*
-Use properties instead.
-void        gtk_image_get_icon_set          (GtkImage *image,
-                                             GtkIconSet **icon_set,
-                                             GtkIconSize *size);
-void        gtk_image_get_image             (GtkImage *image,
-                                             GdkImage **gdk_image,
-                                             GdkBitmap **mask);
-GtkImageType gtk_image_get_storage_type     (GtkImage *image);
-*/
 
 static VALUE
-image_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GType gtype;
@@ -75,7 +66,7 @@ image_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-image_set(int argc, VALUE *argv, VALUE self)
+rg_set(int argc, VALUE *argv, VALUE self)
 {
     VALUE arg1, arg2;
     GType gtype;
@@ -99,7 +90,7 @@ image_set(int argc, VALUE *argv, VALUE self)
                                      GDK_BITMAP(RVAL2GOBJ(arg2)));
         } else if (gtype == GDK_TYPE_PIXBUF){
             gtk_image_set_from_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(arg1)));
-            
+
         } else if (gtype == GDK_TYPE_PIXMAP){
             gtk_image_set_from_pixmap(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(arg1)),
                                       GDK_BITMAP(RVAL2GOBJ(arg2)));
@@ -117,19 +108,9 @@ image_set(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-/* Defined as property
-void        gtk_image_get_icon_name         (GtkImage *image,
-                                             G_CONST_RETURN gchar **icon_name,
-                                             GtkIconSize *size);
-void        gtk_image_set_pixel_size        (GtkImage *image,
-                                             gint pixel_size);
-gint        gtk_image_get_pixel_size        (GtkImage *image);
-
-*/
-
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
-image_clear(VALUE self)
+rg_clear(VALUE self)
 {
     gtk_image_clear(_SELF(self));
     return self;
@@ -139,16 +120,16 @@ image_clear(VALUE self)
 void 
 Init_gtk_image(void)
 {
-    VALUE gImage = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
-    rb_define_method(gImage, "initialize", image_initialize, -1);
-    rb_define_method(gImage, "set", image_set, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set, -1);
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(gImage, "clear", image_clear, 0);
+    RG_DEF_METHOD(clear, 0);
 #endif
 
     /* GtkImageType */
-    G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", gImage);
-    G_DEF_CONSTANTS(gImage, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
+    G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
 
     G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
 

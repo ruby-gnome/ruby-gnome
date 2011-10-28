@@ -23,10 +23,11 @@
 
 #if GTK_CHECK_VERSION(2,6,0)
 
+#define RG_TARGET_NAMESPACE cPangoRenderer
 #define _SELF(s) (GDK_PANGO_RENDERER(RVAL2GOBJ(s)))
 
 static VALUE
-prenderer_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen;
     GdkScreen* gscreen;
@@ -45,7 +46,7 @@ prenderer_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-prenderer_s_get_default(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_get_default(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE screen;
     GdkScreen* gscreen;
@@ -61,14 +62,14 @@ prenderer_s_get_default(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-prenderer_s_default(G_GNUC_UNUSED VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     GdkScreen* gscreen = gdk_screen_get_default();
     return GOBJ2RVAL(gdk_pango_renderer_get_default(gscreen));
 }
 
 static VALUE
-prenderer_set_drawable(VALUE self, VALUE drawable)
+rg_set_drawable(VALUE self, VALUE drawable)
 {
     gdk_pango_renderer_set_drawable(_SELF(self), 
                                     GDK_DRAWABLE(RVAL2GOBJ(drawable)));
@@ -76,7 +77,7 @@ prenderer_set_drawable(VALUE self, VALUE drawable)
 }
 
 static VALUE
-prenderer_set_gc(VALUE self, VALUE gc)
+rg_set_gc(VALUE self, VALUE gc)
 {
     gdk_pango_renderer_set_gc(_SELF(self), 
                               NIL_P(gc) ? NULL : GDK_GC(RVAL2GOBJ(gc)));
@@ -85,7 +86,7 @@ prenderer_set_gc(VALUE self, VALUE gc)
 
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
 static VALUE
-prenderer_set_stipple(VALUE self, VALUE part, VALUE stipple)
+rg_set_stipple(VALUE self, VALUE part, VALUE stipple)
 {
     gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
                                    NIL_P(stipple) ? NULL : GDK_BITMAP(RVAL2GOBJ(stipple)));
@@ -106,7 +107,7 @@ prenderer_set_stipple(G_GNUC_UNUSED VALUE self,
 
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
 static VALUE
-prenderer_set_override_color(VALUE self, VALUE part, VALUE color)
+rg_set_override_color(VALUE self, VALUE part, VALUE color)
 {
     gdk_pango_renderer_set_override_color(_SELF(self),
                                           RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
@@ -132,19 +133,17 @@ void
 Init_gtk_gdk_pangorenderer(void)
 {
 #if GTK_CHECK_VERSION(2,6,0)
-    VALUE renderer = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);
 
-    rb_define_method(renderer, "initialize", prenderer_initialize, -1);
-    rb_define_method(renderer, "set_drawable", prenderer_set_drawable, 1);
-    rb_define_method(renderer, "set_gc", prenderer_set_gc, 1);
-    rb_define_method(renderer, "set_stipple", prenderer_set_stipple, 2);
-    rb_define_method(renderer, "set_override_color", prenderer_set_override_color, 2);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_drawable, 1);
+    RG_DEF_METHOD(set_gc, 1);
+    RG_DEF_METHOD(set_stipple, 2);
+    RG_DEF_METHOD(set_override_color, 2);
 
-    rb_define_singleton_method(renderer, "get_default", prenderer_s_get_default, -1);
-    rb_define_singleton_method(renderer, "default", prenderer_s_default, 0);
+    RG_DEF_SMETHOD(get_default, -1);
+    RG_DEF_SMETHOD(default, 0);
 
-    G_DEF_SETTERS(renderer);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
-
-

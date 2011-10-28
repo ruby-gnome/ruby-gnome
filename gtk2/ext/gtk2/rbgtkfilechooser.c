@@ -24,6 +24,7 @@
 
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE mFileChooser
 #define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
 
 #ifdef HAVE_GTK_GTKFILESYSTEM_H
@@ -44,25 +45,8 @@ gslist2ary_free(GSList* list)
     return ary;
 }
 
-/*  They are defined as properties
-    gtk_file_chooser_set_action(_SELF(self), RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION));
-    gtk_file_chooser_get_action(_SELF(self));
-    gtk_file_chooser_set_local_only(_SELF(self), RVAL2CBOOL(local));
-    gtk_file_chooser_get_local_only(_SELF(self));
-    gtk_file_chooser_set_select_multiple(_SELF(self), RVAL2CBOOL(multiple));
-    gtk_file_chooser_get_select_multiple(_SELF(self));
-*/
-
-/*  Defined as Property
-void        gtk_file_chooser_set_show_hidden
-                                            (GtkFileChooser *chooser,
-                                             gboolean show_hidden);
-gboolean    gtk_file_chooser_get_show_hidden
-                                            (GtkFileChooser *chooser);
-*/
-
 static VALUE
-fcho_set_current_name(VALUE self, VALUE name)
+rg_set_current_name(VALUE self, VALUE name)
 {
     /* doc says the awaited string is UTF-8, so use RVAL2CSTR */
     gtk_file_chooser_set_current_name(_SELF(self), RVAL2CSTR(name));
@@ -70,13 +54,13 @@ fcho_set_current_name(VALUE self, VALUE name)
 }
 
 static VALUE
-fcho_get_filename(VALUE self)
+rg_filename(VALUE self)
 {
     return CSTRFILENAME2RVAL_FREE(gtk_file_chooser_get_filename(_SELF(self)));
 }
 
 static VALUE
-fcho_set_filename(VALUE self, VALUE rbfilename)
+rg_set_filename(VALUE self, VALUE rbfilename)
 {
     gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     gboolean ret = gtk_file_chooser_set_filename(_SELF(self), filename);
@@ -88,7 +72,7 @@ fcho_set_filename(VALUE self, VALUE rbfilename)
 }
 
 static VALUE
-fcho_select_filename(VALUE self, VALUE rbfilename)
+rg_select_filename(VALUE self, VALUE rbfilename)
 {
     gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     gboolean ret = gtk_file_chooser_select_filename(_SELF(self), filename);
@@ -98,7 +82,7 @@ fcho_select_filename(VALUE self, VALUE rbfilename)
 }
 
 static VALUE
-fcho_unselect_filename(VALUE self, VALUE rbfilename)
+rg_unselect_filename(VALUE self, VALUE rbfilename)
 {
     gchar *filename = RVAL2CSTRFILENAME(rbfilename);
     gtk_file_chooser_unselect_filename(_SELF(self), filename);
@@ -108,27 +92,27 @@ fcho_unselect_filename(VALUE self, VALUE rbfilename)
 }
 
 static VALUE
-fcho_select_all(VALUE self)
+rg_select_all(VALUE self)
 {
     gtk_file_chooser_select_all(_SELF(self));
     return self;
 }
 
 static VALUE
-fcho_unselect_all(VALUE self)
+rg_unselect_all(VALUE self)
 {
     gtk_file_chooser_unselect_all(_SELF(self));
     return self;
 }
 
 static VALUE
-fcho_get_filenames(VALUE self)
+rg_filenames(VALUE self)
 {
     return CSTRFILENAMEARRAY2RVAL_FREE(gtk_file_chooser_get_filenames(_SELF(self)));
 }
 
 static VALUE
-fcho_set_current_folder(VALUE self, VALUE filename)
+rg_set_current_folder(VALUE self, VALUE filename)
 {
     gboolean ret = gtk_file_chooser_set_current_folder(_SELF(self), RVAL2CSTR(filename));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set current folder");
@@ -136,19 +120,19 @@ fcho_set_current_folder(VALUE self, VALUE filename)
 }
 
 static VALUE
-fcho_get_current_folder(VALUE self)
+rg_current_folder(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_file_chooser_get_current_folder(_SELF(self)));
 }
 
 static VALUE
-fcho_get_uri(VALUE self)
+rg_uri(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_file_chooser_get_uri(_SELF(self)));
 }
 
 static VALUE
-fcho_set_uri(VALUE self, VALUE uri)
+rg_set_uri(VALUE self, VALUE uri)
 {
     gboolean ret = gtk_file_chooser_set_uri(_SELF(self), RVAL2CSTR(uri));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set uri");
@@ -156,26 +140,26 @@ fcho_set_uri(VALUE self, VALUE uri)
 }
 
 static VALUE
-fcho_select_uri(VALUE self, VALUE uri)
+rg_select_uri(VALUE self, VALUE uri)
 {
     return CBOOL2RVAL(gtk_file_chooser_select_uri(_SELF(self), RVAL2CSTR(uri)));
 }
 
 static VALUE
-fcho_unselect_uri(VALUE self, VALUE uri)
+rg_unselect_uri(VALUE self, VALUE uri)
 {
     gtk_file_chooser_unselect_uri(_SELF(self), RVAL2CSTR(uri));
     return self;
 }
 
 static VALUE
-fcho_get_uris(VALUE self)
+rg_uris(VALUE self)
 {
     return gslist2ary_free(gtk_file_chooser_get_uris(_SELF(self)));
 }
 
 static VALUE
-fcho_set_current_folder_uri(VALUE self, VALUE uri)
+rg_set_current_folder_uri(VALUE self, VALUE uri)
 {
     gboolean ret = gtk_file_chooser_set_current_folder_uri(_SELF(self), RVAL2CSTR(uri));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set current folder uri");
@@ -183,65 +167,45 @@ fcho_set_current_folder_uri(VALUE self, VALUE uri)
 }
 
 static VALUE
-fcho_get_current_folder_uri(VALUE self)
+rg_current_folder_uri(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_file_chooser_get_current_folder_uri(_SELF(self)));
 }
 
-/* They are defined as properties.
-    gtk_file_chooser_set_preview_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget));
-    gtk_file_chooser_get_preview_widget(_SELF(self)));
-    gtk_file_chooser_set_preview_widget_active(_SELF(self), RVAL2CBOOL(active));
-    gtk_file_chooser_get_preview_widget_active(_SELF(self));
-    gtk_file_chooser_set_use_preview_label(_SELF(self), RVAL2CBOOL(label));
-    gtk_file_chooser_get_use_preview_label(_SELF(self));
-*/
-
 static VALUE
-fcho_get_preview_filename(VALUE self)
+rg_preview_filename(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_file_chooser_get_preview_filename(_SELF(self)));
 }
 
 static VALUE
-fcho_get_preview_uri(VALUE self)
+rg_preview_uri(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_file_chooser_get_preview_uri(_SELF(self)));
 }
 
-/* They are defined as properties.
-    gtk_file_chooser_set_extra_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
-    gtk_file_chooser_get_extra_widget(_SELF(self));
-*/
-
 static VALUE
-fcho_add_filter(VALUE self, VALUE filter)
+rg_add_filter(VALUE self, VALUE filter)
 {
     gtk_file_chooser_add_filter(_SELF(self), GTK_FILE_FILTER(RVAL2GOBJ(filter)));
     return self;
 }
 
 static VALUE
-fcho_remove_filter(VALUE self, VALUE filter)
+rg_remove_filter(VALUE self, VALUE filter)
 {
     gtk_file_chooser_remove_filter(_SELF(self), GTK_FILE_FILTER(RVAL2GOBJ(filter)));
     return self;
 }
 
 static VALUE
-fcho_list_filters(VALUE self)
+rg_filters(VALUE self)
 {
     return GSLIST2ARYF(gtk_file_chooser_list_filters(_SELF(self)));
 }
 
-/*
-  They are defined as property.
-    gtk_file_chooser_set_filter(_SELF(self), GTK_FILE_FILTER(RVAL2GOBJ(filter)));
-    gtk_file_chooser_get_filter(_SELF(self));
-*/
-
 static VALUE
-fcho_add_shortcut_folder(VALUE self, VALUE rbfolder)
+rg_add_shortcut_folder(VALUE self, VALUE rbfolder)
 {
     gchar *folder = RVAL2CSTRFILENAME(rbfolder);
     GError *error = NULL;
@@ -254,7 +218,7 @@ fcho_add_shortcut_folder(VALUE self, VALUE rbfolder)
 }
 
 static VALUE
-fcho_remove_shortcut_folder(VALUE self, VALUE rbfolder)
+rg_remove_shortcut_folder(VALUE self, VALUE rbfolder)
 {
     gchar *folder = RVAL2CSTRFILENAME(rbfolder);
     GError *error = NULL;
@@ -267,14 +231,13 @@ fcho_remove_shortcut_folder(VALUE self, VALUE rbfolder)
 }
 
 static VALUE
-fcho_list_shortcut_folders(VALUE self)
+rg_shortcut_folders(VALUE self)
 {
     return CSTRFILENAMEARRAY2RVAL_FREE(gtk_file_chooser_list_shortcut_folders(_SELF(self)));
 }
 
-
 static VALUE
-fcho_add_shortcut_folder_uri(VALUE self, VALUE uri)
+rg_add_shortcut_folder_uri(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_add_shortcut_folder_uri(_SELF(self), RVAL2CSTR(uri), &error))
@@ -283,7 +246,7 @@ fcho_add_shortcut_folder_uri(VALUE self, VALUE uri)
 }
 
 static VALUE
-fcho_remove_shortcut_folder_uri(VALUE self, VALUE uri)
+rg_remove_shortcut_folder_uri(VALUE self, VALUE uri)
 {
     GError *error = NULL;
     if (! gtk_file_chooser_remove_shortcut_folder_uri(_SELF(self), RVAL2CSTR(uri), &error))
@@ -292,19 +255,11 @@ fcho_remove_shortcut_folder_uri(VALUE self, VALUE uri)
 }
 
 static VALUE
-fcho_list_shortcut_folder_uris(VALUE self)
+rg_shortcut_folder_uris(VALUE self)
 {
     return gslist2ary_free(gtk_file_chooser_list_shortcut_folder_uris(_SELF(self)));
 }
 #endif
-
-/* Properties.
-void        gtk_file_chooser_set_do_overwrite_confirmation
-                                            (GtkFileChooser *chooser,
-                                             gboolean do_overwrite_confirmation);
-gboolean    gtk_file_chooser_get_do_overwrite_confirmation
-                                           (GtkFileChooser *chooser);
-*/
 
 void 
 Init_gtk_file_chooser(void)
@@ -312,73 +267,52 @@ Init_gtk_file_chooser(void)
 
 #if GTK_CHECK_VERSION(2,4,0)
 
-    VALUE gFileCho = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
-#ifdef GTK_FILE_SYSTEM_ERROR
-    VALUE eFileSystemError;
-#endif
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
 
-    rb_define_method(gFileCho, "set_current_name", fcho_set_current_name, 1);
-    rb_define_method(gFileCho, "set_filename", fcho_set_filename, 1);
-    rb_define_method(gFileCho, "filename", fcho_get_filename, 0);
-    rb_define_method(gFileCho, "select_filename", fcho_select_filename, 1);
-    rb_define_method(gFileCho, "unselect_filename", fcho_unselect_filename, 1);
-    rb_define_method(gFileCho, "select_all", fcho_select_all, 0);
-    rb_define_method(gFileCho, "unselect_all", fcho_unselect_all, 0);
-    rb_define_method(gFileCho, "filenames", fcho_get_filenames, 0);
-    rb_define_method(gFileCho, "set_current_folder", fcho_set_current_folder, 1);
-    rb_define_method(gFileCho, "current_folder", fcho_get_current_folder, 0);
-    rb_define_method(gFileCho, "set_uri", fcho_set_uri, 1);
-    rb_define_method(gFileCho, "uri", fcho_get_uri, 0);
-    rb_define_method(gFileCho, "select_uri", fcho_select_uri, 1);
-    rb_define_method(gFileCho, "unselect_uri", fcho_unselect_uri, 1);
-    rb_define_method(gFileCho, "uris", fcho_get_uris, 0);
-    rb_define_method(gFileCho, "set_current_folder_uri", fcho_set_current_folder_uri, 1);
-    rb_define_method(gFileCho, "current_folder_uri", fcho_get_current_folder_uri, 0);
-    rb_define_method(gFileCho, "preview_filename", fcho_get_preview_filename, 0);
-    rb_define_method(gFileCho, "preview_uri", fcho_get_preview_uri, 0);
-    rb_define_method(gFileCho, "add_filter", fcho_add_filter, 1);
-    rb_define_method(gFileCho, "remove_filter", fcho_remove_filter, 1);
-    rb_define_method(gFileCho, "filters", fcho_list_filters, 0);
-    rb_define_method(gFileCho, "add_shortcut_folder", fcho_add_shortcut_folder, 1);
-    rb_define_method(gFileCho, "remove_shortcut_folder", fcho_remove_shortcut_folder, 1);
-    rb_define_method(gFileCho, "shortcut_folders", fcho_list_shortcut_folders, 0);
-    rb_define_method(gFileCho, "add_shortcut_folder_uri", fcho_add_shortcut_folder_uri, 1);
-    rb_define_method(gFileCho, "remove_shortcut_folder_uri", fcho_remove_shortcut_folder_uri, 1);
+    RG_DEF_METHOD(set_current_name, 1);
+    RG_DEF_METHOD(set_filename, 1);
+    RG_DEF_METHOD(filename, 0);
+    RG_DEF_METHOD(select_filename, 1);
+    RG_DEF_METHOD(unselect_filename, 1);
+    RG_DEF_METHOD(select_all, 0);
+    RG_DEF_METHOD(unselect_all, 0);
+    RG_DEF_METHOD(filenames, 0);
+    RG_DEF_METHOD(set_current_folder, 1);
+    RG_DEF_METHOD(current_folder, 0);
+    RG_DEF_METHOD(set_uri, 1);
+    RG_DEF_METHOD(uri, 0);
+    RG_DEF_METHOD(select_uri, 1);
+    RG_DEF_METHOD(unselect_uri, 1);
+    RG_DEF_METHOD(uris, 0);
+    RG_DEF_METHOD(set_current_folder_uri, 1);
+    RG_DEF_METHOD(current_folder_uri, 0);
+    RG_DEF_METHOD(preview_filename, 0);
+    RG_DEF_METHOD(preview_uri, 0);
+    RG_DEF_METHOD(add_filter, 1);
+    RG_DEF_METHOD(remove_filter, 1);
+    RG_DEF_METHOD(filters, 0);
+    RG_DEF_METHOD(add_shortcut_folder, 1);
+    RG_DEF_METHOD(remove_shortcut_folder, 1);
+    RG_DEF_METHOD(shortcut_folders, 0);
+    RG_DEF_METHOD(add_shortcut_folder_uri, 1);
+    RG_DEF_METHOD(remove_shortcut_folder_uri, 1);
 
-    rb_define_method(gFileCho, "shortcut_folder_uris", fcho_list_shortcut_folder_uris, 0);
+    RG_DEF_METHOD(shortcut_folder_uris, 0);
 
-    G_DEF_SETTERS(gFileCho);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkFileChooserAction */
-    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", gFileCho);
-    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
+    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
 
     /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
 
-#ifdef GTK_FILE_SYSTEM_ERROR
-    /* GtkFileSystemError */
-    eFileSystemError = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError",
-				    mGtk, rb_eRuntimeError);
-    rb_define_const(eFileSystemError, "NONEXISTENT",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NONEXISTENT));
-    rb_define_const(eFileSystemError, "NOT_FOLDER",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_NOT_FOLDER));
-    rb_define_const(eFileSystemError, "INVALID_URI",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_INVALID_URI));
-    rb_define_const(eFileSystemError, "BAD_FILENAME",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_BAD_FILENAME));
-    rb_define_const(eFileSystemError, "FAILED",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
-    rb_define_const(eFileSystemError, "ALREADY_EXSITS",
-		    INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
-#endif
-
 #if GTK_CHECK_VERSION(2,8,0)
     /* GtkFileChooserConfirmation */
-    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", gFileCho);
-    G_DEF_CONSTANTS(gFileCho, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
+    G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
 #endif
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);

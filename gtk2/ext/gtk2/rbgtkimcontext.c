@@ -21,17 +21,18 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIMContext
 #define _SELF(self) (GTK_IM_CONTEXT(RVAL2GOBJ(self)))
 
 static VALUE 
-imcontext_set_client_window(VALUE self, VALUE gdkwindow)
+rg_set_client_window(VALUE self, VALUE gdkwindow)
 {
     gtk_im_context_set_client_window(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)));
     return self;
 }
 
 static VALUE
-imcontext_get_preedit_string(VALUE self)
+rg_preedit_string(VALUE self)
 {
     gchar* str;
     PangoAttrList* attrs;
@@ -43,34 +44,34 @@ imcontext_get_preedit_string(VALUE self)
 }
 
 static VALUE
-imcontext_filter_keypress(VALUE self, VALUE event)
+rg_filter_keypress(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_im_context_filter_keypress(_SELF(self), (GdkEventKey*)RVAL2GEV(event)));
 }
 
 static VALUE
-imcontext_focus_in(VALUE self)
+rg_focus_in(VALUE self)
 {
     gtk_im_context_focus_in(_SELF(self));
     return self;
 }
 
 static VALUE
-imcontext_focus_out(VALUE self)
+rg_focus_out(VALUE self)
 {
     gtk_im_context_focus_out(_SELF(self));
     return self;
 }
 
 static VALUE
-imcontext_reset(VALUE self)
+rg_reset(VALUE self)
 {
     gtk_im_context_reset(_SELF(self));
     return self;
 }
 
 static VALUE
-imcontext_set_cursor_location(VALUE self, VALUE area)
+rg_set_cursor_location(VALUE self, VALUE area)
 {
     gtk_im_context_set_cursor_location(
         _SELF(self), 
@@ -79,14 +80,14 @@ imcontext_set_cursor_location(VALUE self, VALUE area)
 }
 
 static VALUE
-imcontext_set_use_preedit(VALUE self, VALUE use_preedit)
+rg_set_use_preedit(VALUE self, VALUE use_preedit)
 {
     gtk_im_context_set_use_preedit(_SELF(self), RVAL2CBOOL(use_preedit));
     return self;
 }
 
 static VALUE
-imcontext_set_surrounding(VALUE self, VALUE text, VALUE cursor_index)
+rg_set_surrounding(VALUE self, VALUE text, VALUE cursor_index)
 {
     StringValue(text);
     gtk_im_context_set_surrounding(_SELF(self),
@@ -96,7 +97,7 @@ imcontext_set_surrounding(VALUE self, VALUE text, VALUE cursor_index)
 }
 
 static VALUE
-imcontext_get_surrounding(VALUE self)
+rg_surrounding(VALUE self)
 {
     gchar* text;
     gint cursor_index;
@@ -106,7 +107,7 @@ imcontext_get_surrounding(VALUE self)
 }
 
 static VALUE
-imcontext_delete_surrounding(VALUE self, VALUE offset, VALUE n_chars)
+rg_delete_surrounding(VALUE self, VALUE offset, VALUE n_chars)
 {
     return CBOOL2RVAL(gtk_im_context_delete_surrounding(_SELF(self), NUM2INT(offset),
                                                         NUM2INT(n_chars)));
@@ -115,20 +116,20 @@ imcontext_delete_surrounding(VALUE self, VALUE offset, VALUE n_chars)
 void 
 Init_gtk_imcontext(void)
 {
-    VALUE gIMContext = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT, "IMContext", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT, "IMContext", mGtk);
 
-    rb_define_method(gIMContext, "set_client_window", imcontext_set_client_window, 1);
-    rb_define_method(gIMContext, "preedit_string", imcontext_get_preedit_string, 0);
+    RG_DEF_METHOD(set_client_window, 1);
+    RG_DEF_METHOD(preedit_string, 0);
     /* Is it better to name as "filter_keypress?" ?*/
-    rb_define_method(gIMContext, "filter_keypress", imcontext_filter_keypress, 1);
-    rb_define_method(gIMContext, "focus_in", imcontext_focus_in, 0);
-    rb_define_method(gIMContext, "focus_out", imcontext_focus_out, 0);
-    rb_define_method(gIMContext, "reset", imcontext_reset, 0);
-    rb_define_method(gIMContext, "set_cursor_location", imcontext_set_cursor_location, 1);
-    rb_define_method(gIMContext, "set_use_preedit", imcontext_set_use_preedit, 1);
-    rb_define_method(gIMContext, "set_surrounding", imcontext_set_surrounding, 2);
-    rb_define_method(gIMContext, "surrounding", imcontext_get_surrounding, 0);
-    rb_define_method(gIMContext, "delete_surrounding", imcontext_delete_surrounding, 2);
+    RG_DEF_METHOD(filter_keypress, 1);
+    RG_DEF_METHOD(focus_in, 0);
+    RG_DEF_METHOD(focus_out, 0);
+    RG_DEF_METHOD(reset, 0);
+    RG_DEF_METHOD(set_cursor_location, 1);
+    RG_DEF_METHOD(set_use_preedit, 1);
+    RG_DEF_METHOD(set_surrounding, 2);
+    RG_DEF_METHOD(surrounding, 0);
+    RG_DEF_METHOD(delete_surrounding, 2);
 
-    G_DEF_SETTERS(gIMContext);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

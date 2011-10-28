@@ -23,6 +23,7 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cPrintContext
 #define _SELF(s) (GTK_PRINT_CONTEXT(RVAL2GOBJ(s)))
 
 #  ifdef HAVE_RB_CAIRO_H
@@ -30,57 +31,57 @@
 
 /* Rendering */
 static VALUE
-pc_get_cairo_context(VALUE self)
+rg_cairo_context(VALUE self)
 {
     return CRCONTEXT2RVAL(gtk_print_context_get_cairo_context(_SELF(self)));
 }
 #  endif
 
 static VALUE
-pc_get_page_setup(VALUE self)
+rg_page_setup(VALUE self)
 {
     return GOBJ2RVAL(gtk_print_context_get_page_setup(_SELF(self)));
 }
 
 static VALUE
-pc_get_width(VALUE self)
+rg_width(VALUE self)
 {
     return rb_float_new(gtk_print_context_get_width(_SELF(self)));
 }
 
 static VALUE
-pc_get_height(VALUE self)
+rg_height(VALUE self)
 {
     return rb_float_new(gtk_print_context_get_height(_SELF(self)));
 }
 
 static VALUE
-pc_get_dpi_x(VALUE self)
+rg_dpi_x(VALUE self)
 {
     return rb_float_new(gtk_print_context_get_dpi_x(_SELF(self)));
 }
 
 static VALUE
-pc_get_dpi_y(VALUE self)
+rg_dpi_y(VALUE self)
 {
     return rb_float_new(gtk_print_context_get_dpi_y(_SELF(self)));
 }
 
 /* Fonts */
 static VALUE
-pc_get_pango_fontmap(VALUE self)
+rg_pango_fontmap(VALUE self)
 {
     return GOBJ2RVAL(gtk_print_context_get_pango_fontmap(_SELF(self)));
 }
 
 static VALUE
-pc_create_pango_context(VALUE self)
+rg_create_pango_context(VALUE self)
 {
     return GOBJ2RVALU(gtk_print_context_create_pango_context(_SELF(self)));
 }
 
 static VALUE
-pc_create_pango_layout(VALUE self)
+rg_create_pango_layout(VALUE self)
 {
     return GOBJ2RVALU(gtk_print_context_create_pango_layout(_SELF(self)));
 }
@@ -88,7 +89,7 @@ pc_create_pango_layout(VALUE self)
 /* Needed for preview implementations */
 #  ifdef HAVE_RB_CAIRO_H
 static VALUE
-pc_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
+rg_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
 {
     gtk_print_context_set_cairo_context(_SELF(self),
                                         RVAL2CRCONTEXT(cr),
@@ -103,32 +104,29 @@ void
 Init_gtk_print_context(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE gPrintContext = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,
                                       "PrintContext", mGtk);
 
     /* Rendering */
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gPrintContext, "cairo_context", pc_get_cairo_context, 0);
+    RG_DEF_METHOD(cairo_context, 0);
 #  endif
-    rb_define_method(gPrintContext, "page_setup", pc_get_page_setup, 0);
-    rb_define_method(gPrintContext, "width", pc_get_width, 0);
-    rb_define_method(gPrintContext, "height", pc_get_height, 0);
-    rb_define_method(gPrintContext, "dpi_x", pc_get_dpi_x, 0);
-    rb_define_method(gPrintContext, "dpi_y", pc_get_dpi_y, 0);
+    RG_DEF_METHOD(page_setup, 0);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(dpi_x, 0);
+    RG_DEF_METHOD(dpi_y, 0);
 
     /* Fonts */
-    rb_define_method(gPrintContext, "pango_fontmap", pc_get_pango_fontmap, 0);
-    rb_define_method(gPrintContext, "create_pango_context",
-                     pc_create_pango_context, 0);
-    rb_define_method(gPrintContext, "create_pango_layout",
-                     pc_create_pango_layout, 0);
+    RG_DEF_METHOD(pango_fontmap, 0);
+    RG_DEF_METHOD(create_pango_context, 0);
+    RG_DEF_METHOD(create_pango_layout, 0);
 
     /* Needed for preview implementations */
 #  ifdef HAVE_RB_CAIRO_H
-    rb_define_method(gPrintContext, "set_cairo_context",
-                     pc_set_cairo_context, 3);
+    RG_DEF_METHOD(set_cairo_context, 3);
 #  endif
 
-    G_DEF_SETTERS(gPrintContext);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

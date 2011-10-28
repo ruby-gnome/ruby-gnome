@@ -24,18 +24,20 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE mProperty
+
 static VALUE
-gdkprop_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num, i;
     gchar** list;
     VALUE ret = Qnil;
-    
+
     if (argc == 3) {
         VALUE encoding, format, text;
         rb_scan_args(argc, argv, "30", &encoding, &format, &text);
         StringValue(text);
-        
+
         num = gdk_text_property_to_text_list(RVAL2ATOM(encoding),
                                              NUM2INT(format),
                                              (const guchar*)RVAL2CSTR(text), 
@@ -45,7 +47,7 @@ gdkprop_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE se
         VALUE display, encoding, format, text;
         rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
         StringValue(text);
-        
+
         num = gdk_text_property_to_text_list_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                          RVAL2ATOM(encoding),
                                                          NUM2INT(format),
@@ -72,17 +74,17 @@ gdkprop_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE se
 }
 
 static VALUE
-gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num, i;
     gchar** list;
     VALUE ret = Qnil;
-    
+
     if (argc == 3) {
         VALUE encoding, format, text;
         rb_scan_args(argc, argv, "30", &encoding, &format, &text);
         StringValue(text);
-        
+
         num = gdk_text_property_to_utf8_list(RVAL2ATOM(encoding),
                                              NUM2INT(format),
                                              (const guchar*)RVAL2CSTR(text),
@@ -92,7 +94,7 @@ gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE se
         VALUE display, encoding, format, text;
         rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
         StringValue(text);
-        
+
         num = gdk_text_property_to_utf8_list_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                          RVAL2ATOM(encoding),
                                                          NUM2INT(format),
@@ -121,7 +123,7 @@ gdkprop_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE se
 }
 
 static VALUE
-gdkprop_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num;
     GdkAtom encoding;
@@ -166,13 +168,13 @@ gdkprop_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gdkprop_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     return CSTR2RVAL((const char*)gdk_utf8_to_string_target(RVAL2CSTR(str)));
 }
 
 static VALUE
-gdkprop_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     GdkAtom encoding;
     gint format;
@@ -183,7 +185,7 @@ gdkprop_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (argc == 1) {
         VALUE str;
         rb_scan_args(argc, argv, "10", &str);
-    
+
         ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
                                         &encoding, &format,
                                         &ctext, &length);
@@ -199,7 +201,7 @@ gdkprop_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 #else
         VALUE str;
         rb_scan_args(argc, argv, "10", &str);
-    
+
         rb_warn("Gdk::Property.utf8_to_compound_text: Not supported arguments in GTK+-2.0.x.");
         ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
                                         &encoding, &format,
@@ -218,22 +220,21 @@ gdkprop_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     return Qnil;
 }
 
-
 static VALUE
-gdkprop_change(int argc, VALUE *argv, VALUE self)
+rg_m_change(int argc, VALUE *argv, VALUE self)
 {
     int        fmt, len;
     void*      dat;
     GdkAtom    ntype;
     VALUE win, property, type, size= Qnil, mode, src;
-    
+
     if(6 == argc)
         rb_scan_args(argc, argv, "60", &win, &property, &type, &size, &mode, &src);
     else
         rb_scan_args(argc, argv, "50", &win, &property, &type, &mode, &src);
-    
+
     rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
-    
+
     gdk_property_change(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property), 
                         ntype, fmt, RVAL2GENUM(mode, GDK_TYPE_PROP_MODE), dat, len);
 
@@ -243,45 +244,44 @@ gdkprop_change(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-gdkprop_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     /* for argument processing */
     GdkAtom     rtype;
     gint        rfmt, rlen;
-    guchar*	rdat;
+    guchar* rdat;
     VALUE win, property, type, offset=INT2FIX(0), length=INT2FIX(9999), delete;
-    
+
     /* for inner processing */
-    gint		i;
+    gint        i;
     size_t j;
-    VALUE	ret = 0;
-    
+    VALUE   ret = 0;
+
     if(6 == argc)
         rb_scan_args(argc, argv, "60", &win, &property, &type, &offset, &length, &delete);
     else
         rb_scan_args(argc, argv, "40", &win, &property, &type, &delete);
-    
-    
+
     if(gdk_property_get(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property), RVAL2ATOM(type),
                         NUM2INT(offset), NUM2INT(length),
                         RVAL2CBOOL(delete), &rtype, &rfmt, &rlen, &rdat) == FALSE){
         return Qnil;
     }
- 
+
     switch(rfmt){
       case 8:
       default:
         ret = RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const char*)rdat, rlen));
         break;
-        
+
       case 16:
         ret = rb_ary_new();
-        
+
         for( i = 0; i < rlen; i++){
             rb_ary_push(ret, rb_Integer(((unsigned short*)rdat)[i]));
         }
         break;
-        
+
       case 32:
          ret = rb_ary_new();
 
@@ -296,13 +296,13 @@ gdkprop_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
          }
         break;
     }
-    
+
     return rb_ary_new3(3, BOXED2RVAL(rtype, GDK_TYPE_ATOM), 
                        ret, INT2NUM(rlen));
 }
 
 static VALUE
-gdkprop_delete(VALUE self, VALUE win, VALUE property)
+rg_m_delete(VALUE self, VALUE win, VALUE property)
 {
     gdk_property_delete(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property));
     return self;
@@ -311,19 +311,19 @@ gdkprop_delete(VALUE self, VALUE win, VALUE property)
 void
 Init_gtk_gdk_property(void)
 {
-    VALUE gdkProperty = rb_define_module_under(mGdk, "Property");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Property");
 
-    rb_define_module_function(gdkProperty, "text_property_to_text_list", gdkprop_text_property_to_text_list, -1);
-    rb_define_module_function(gdkProperty, "text_property_to_utf8_list", gdkprop_text_property_to_utf8_list, -1);
-    rb_define_module_function(gdkProperty, "string_to_compound_text", gdkprop_string_to_compound_text, -1);
-    rb_define_module_function(gdkProperty, "utf8_to_string_target", gdkprop_utf8_to_string_target, 1);
-    rb_define_module_function(gdkProperty, "utf8_to_compound_text", gdkprop_utf8_to_compound_text, -1);
-    rb_define_module_function(gdkProperty, "change", gdkprop_change, -1);
-    rb_define_module_function(gdkProperty, "get", gdkprop_get, -1);
-    rb_define_module_function(gdkProperty, "delete", gdkprop_delete, 2);
+    RG_DEF_MODFUNC(text_property_to_text_list, -1);
+    RG_DEF_MODFUNC(text_property_to_utf8_list, -1);
+    RG_DEF_MODFUNC(string_to_compound_text, -1);
+    RG_DEF_MODFUNC(utf8_to_string_target, 1);
+    RG_DEF_MODFUNC(utf8_to_compound_text, -1);
+    RG_DEF_MODFUNC(change, -1);
+    RG_DEF_MODFUNC(get, -1);
+    RG_DEF_MODFUNC(delete, 2);
 
     /* GdkPropMode from GdkProperties */
-    G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", gdkProperty);
-    G_DEF_CONSTANTS(gdkProperty, GDK_TYPE_PROP_MODE, "GDK_PROP_");
+    G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_PROP_MODE, "GDK_PROP_");
 
 }

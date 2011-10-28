@@ -24,8 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cArrow
+
 static VALUE
-arrow_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
+rg_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
     RBGTK_INITIALIZE(self, gtk_arrow_new(RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
                                          RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE)));
@@ -33,23 +35,23 @@ arrow_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
 }
 
 static VALUE
-arrow_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
+rg_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
     gtk_arrow_set(GTK_ARROW(RVAL2GOBJ(self)),
-		  RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
-		  RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE));
+                  RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
+                  RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE));
     return self;
 }
 
 void 
 Init_gtk_arrow(void)
 {
-    VALUE gArrow = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);
 
-    rb_define_method(gArrow, "initialize", arrow_initialize, 2);
-    rb_define_method(gArrow, "set", arrow_set, 2);
+    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(set, 2);
 
     /* GtkArrowType (from General constants) */
-    G_DEF_CLASS(GTK_TYPE_ARROW_TYPE, "Type", gArrow);
-    G_DEF_CONSTANTS(gArrow, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
+    G_DEF_CLASS(GTK_TYPE_ARROW_TYPE, "Type", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
 }

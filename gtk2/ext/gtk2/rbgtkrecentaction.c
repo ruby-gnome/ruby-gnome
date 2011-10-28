@@ -26,8 +26,10 @@
 
 #if GTK_CHECK_VERSION(2,12,0)
 
+#define RG_TARGET_NAMESPACE cRecentAction
+
 static VALUE
-recentaction_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE  name, label, tooltip, stock_id, manager;
     rb_scan_args(argc, argv, "23", &name, &label, &tooltip, &stock_id, &manager);
@@ -52,7 +54,7 @@ void
 Init_gtk_recentaction(void)
 {
 #if GTK_CHECK_VERSION(2,12,0)
-    VALUE gRecentaction = G_DEF_CLASS(GTK_TYPE_RECENT_ACTION, "RecentAction", mGtk);
-    rb_define_method(gRecentaction, "initialize", recentaction_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_ACTION, "RecentAction", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

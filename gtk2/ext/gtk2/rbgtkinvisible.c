@@ -21,10 +21,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cInvisible
 #define _SELF(s) GTK_INVISIBLE(RVAL2GOBJ(s))
 
 static VALUE
-invisible_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE screen;
 
@@ -43,16 +44,10 @@ invisible_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as Properties
-void                gtk_invisible_set_screen            (GtkInvisible *invisible,
-                                                         GdkScreen *screen);
-GdkScreen *         gtk_invisible_get_screen            (GtkInvisible *invisible);
-*/
-
 void
 Init_gtk_invisible(void)
 {
-    VALUE gInvisible = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_INVISIBLE, "Invisible", mGtk);
 
-    rb_define_method(gInvisible, "initialize", invisible_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 }

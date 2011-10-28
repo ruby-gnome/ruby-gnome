@@ -21,10 +21,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cIconSource
 #define _SELF(s) ((GtkIconSource*)RVAL2BOXED(s, GTK_TYPE_ICON_SOURCE))
 
 static VALUE
-icon_source_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GtkIconSource *icon_source;
 
@@ -34,26 +35,26 @@ icon_source_initialize(VALUE self)
 }
 
 static VALUE
-icon_source_get_direction(VALUE self)
+rg_direction(VALUE self)
 {
     return GENUM2RVAL(gtk_icon_source_get_direction(_SELF(self)), 
                       GTK_TYPE_TEXT_DIRECTION);
 }
 
 static VALUE
-icon_source_get_direction_wildcarded(VALUE self)
+rg_direction_wildcarded_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_source_get_direction_wildcarded(_SELF(self)));
 }
 
 static VALUE
-icon_source_get_filename(VALUE self)
+rg_filename(VALUE self)
 {
     return CSTR2RVAL(gtk_icon_source_get_filename(_SELF(self)));
 }
 
 static VALUE
-icon_source_get_pixbuf(VALUE self)
+rg_pixbuf(VALUE self)
 {
     GdkPixbuf *pixbuf;
     pixbuf = gtk_icon_source_get_pixbuf(_SELF(self));
@@ -61,31 +62,31 @@ icon_source_get_pixbuf(VALUE self)
 }
 
 static VALUE
-icon_source_get_size(VALUE self)
+rg_size(VALUE self)
 {
     return GENUM2RVAL(gtk_icon_source_get_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
 }
 
 static VALUE
-icon_source_get_size_wildcarded(VALUE self)
+rg_size_wildcarded_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_source_get_size_wildcarded(_SELF(self)));
 }
 
 static VALUE
-icon_source_get_state(VALUE self)
+rg_state(VALUE self)
 {
     return GENUM2RVAL(gtk_icon_source_get_state(_SELF(self)), GTK_TYPE_STATE_TYPE);
 }
 
 static VALUE
-icon_source_get_state_wildcarded(VALUE self)
+rg_state_wildcarded_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_icon_source_get_state_wildcarded(_SELF(self)));
 }
 
 static VALUE
-icon_source_set_direction(VALUE self, VALUE direction)
+rg_set_direction(VALUE self, VALUE direction)
 {
     gtk_icon_source_set_direction(_SELF(self),
                                   RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION));
@@ -93,49 +94,49 @@ icon_source_set_direction(VALUE self, VALUE direction)
 }
 
 static VALUE
-icon_source_set_direction_wildcarded(VALUE self, VALUE setting)
+rg_set_direction_wildcarded(VALUE self, VALUE setting)
 {
     gtk_icon_source_set_direction_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-icon_source_set_filename(VALUE self, VALUE filename)
+rg_set_filename(VALUE self, VALUE filename)
 {
     gtk_icon_source_set_filename(_SELF(self), RVAL2CSTR(filename));
     return self;
 }
 
 static VALUE
-icon_source_set_pixbuf(VALUE self, VALUE pixbuf)
+rg_set_pixbuf(VALUE self, VALUE pixbuf)
 {
     gtk_icon_source_set_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
 }
 
 static VALUE
-icon_source_set_size(VALUE self, VALUE size)
+rg_set_size(VALUE self, VALUE size)
 {
     gtk_icon_source_set_size(_SELF(self), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
     return self;
 }
 
 static VALUE
-icon_source_set_size_wildcarded(VALUE self, VALUE setting)
+rg_set_size_wildcarded(VALUE self, VALUE setting)
 {
     gtk_icon_source_set_size_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
-icon_source_set_state(VALUE self, VALUE state)
+rg_set_state(VALUE self, VALUE state)
 {
     gtk_icon_source_set_state(_SELF(self), RVAL2GENUM(state, GTK_TYPE_STATE_TYPE));
     return self;
 }
 
 static VALUE
-icon_source_set_state_wildcarded(VALUE self, VALUE setting)
+rg_set_state_wildcarded(VALUE self, VALUE setting)
 {
     gtk_icon_source_set_state_wildcarded(_SELF(self), RVAL2CBOOL(setting));
     return self;
@@ -144,27 +145,27 @@ icon_source_set_state_wildcarded(VALUE self, VALUE setting)
 void
 Init_gtk_icon_source(void)
 {
-    VALUE gIconSource = G_DEF_CLASS(GTK_TYPE_ICON_SOURCE, "IconSource", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_SOURCE, "IconSource", mGtk);
 
-    rb_define_method(gIconSource, "initialize", icon_source_initialize, 0);
-    
-    rb_define_method(gIconSource, "direction", icon_source_get_direction , 0); ;
-    rb_define_method(gIconSource, "direction_wildcarded?", icon_source_get_direction_wildcarded , 0); ;
-    rb_define_method(gIconSource, "filename", icon_source_get_filename , 0); ;
-    rb_define_method(gIconSource, "pixbuf", icon_source_get_pixbuf , 0); ;
-    rb_define_method(gIconSource, "size", icon_source_get_size , 0); ;
-    rb_define_method(gIconSource, "size_wildcarded?", icon_source_get_size_wildcarded , 0); ;
-    rb_define_method(gIconSource, "state", icon_source_get_state , 0); ;
-    rb_define_method(gIconSource, "state_wildcarded?" , icon_source_get_state_wildcarded , 0); ;
+    RG_DEF_METHOD(initialize, 0);
 
-    rb_define_method(gIconSource, "set_direction", icon_source_set_direction , 1); ;
-    rb_define_method(gIconSource, "set_direction_wildcarded", icon_source_set_direction_wildcarded , 1); ;
-    rb_define_method(gIconSource, "set_filename", icon_source_set_filename , 1); ;
-    rb_define_method(gIconSource, "set_pixbuf", icon_source_set_pixbuf , 1); ;
-    rb_define_method(gIconSource, "set_size", icon_source_set_size , 1); ;
-    rb_define_method(gIconSource, "set_size_wildcarded", icon_source_set_size_wildcarded , 1); ;
-    rb_define_method(gIconSource, "set_state", icon_source_set_state , 1); ;
-    rb_define_method(gIconSource, "set_state_wildcarded", icon_source_set_state_wildcarded , 1); ;
+    RG_DEF_METHOD(direction, 0);
+    RG_DEF_METHOD_P(direction_wildcarded, 0);
+    RG_DEF_METHOD(filename, 0);
+    RG_DEF_METHOD(pixbuf, 0);
+    RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD_P(size_wildcarded, 0);
+    RG_DEF_METHOD(state, 0);
+    RG_DEF_METHOD_P(state_wildcarded, 0);
 
-    G_DEF_SETTERS(gIconSource);
+    RG_DEF_METHOD(set_direction, 1);
+    RG_DEF_METHOD(set_direction_wildcarded, 1);
+    RG_DEF_METHOD(set_filename, 1);
+    RG_DEF_METHOD(set_pixbuf, 1);
+    RG_DEF_METHOD(set_size, 1);
+    RG_DEF_METHOD(set_size_wildcarded, 1);
+    RG_DEF_METHOD(set_state, 1);
+    RG_DEF_METHOD(set_state_wildcarded, 1);
+
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

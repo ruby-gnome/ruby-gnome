@@ -23,10 +23,11 @@
 
 #if GTK_CHECK_VERSION(2,10,0)
 
+#define RG_TARGET_NAMESPACE cStatusIcon
 #define _SELF(w) (GTK_STATUS_ICON(RVAL2GOBJ(w)))
 
 static VALUE
-si_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_status_icon_new());
     return Qnil;
@@ -42,40 +43,16 @@ GtkStatusIcon* gtk_status_icon_new_from_stock
 GtkStatusIcon* gtk_status_icon_new_from_icon_name
                                             (const gchar *icon_name);
 */
-/* Defined as properties
-void        gtk_status_icon_set_from_pixbuf (GtkStatusIcon *status_icon,
-                                             GdkPixbuf *pixbuf);
-void        gtk_status_icon_set_from_file   (GtkStatusIcon *status_icon,
-                                             const gchar *filename);
-void        gtk_status_icon_set_from_stock  (GtkStatusIcon *status_icon,
-                                             const gchar *stock_id);
-void        gtk_status_icon_set_from_icon_name
-                                            (GtkStatusIcon *status_icon,
-                                             const gchar *icon_name);
-GtkImageType gtk_status_icon_get_storage_type
-                                            (GtkStatusIcon *status_icon);
-GdkPixbuf*  gtk_status_icon_get_pixbuf      (GtkStatusIcon *status_icon);
-const gchar* gtk_status_icon_get_stock      (GtkStatusIcon *status_icon);
-const gchar* gtk_status_icon_get_icon_name  (GtkStatusIcon *status_icon);
-gint        gtk_status_icon_get_size        (GtkStatusIcon *status_icon);
-void        gtk_status_icon_set_visible     (GtkStatusIcon *status_icon,
-                                             gboolean visible);
-gboolean    gtk_status_icon_get_visible     (GtkStatusIcon *status_icon);
-void        gtk_status_icon_set_blinking    (GtkStatusIcon *status_icon,
-                                             gboolean blinking);
-gboolean    gtk_status_icon_get_blinking    (GtkStatusIcon *status_icon);
-gboolean            gtk_status_icon_is_embedded         (GtkStatusIcon *status_icon);
-*/
 
 static VALUE
-si_set_tooltip(VALUE self, VALUE tooltip_text)
+rg_set_tooltip(VALUE self, VALUE tooltip_text)
 {
     gtk_status_icon_set_tooltip(_SELF(self), RVAL2CSTR(tooltip_text));
     return self;
 }
 
 static VALUE
-si_position_menu(VALUE self, VALUE menu)
+rg_position_menu(VALUE self, VALUE menu)
 {
     gint x, y;
     gboolean push_in;
@@ -86,7 +63,7 @@ si_position_menu(VALUE self, VALUE menu)
 }
 
 static VALUE
-si_get_geometry(VALUE self)
+rg_geometry(VALUE self)
 {
     GdkScreen* screen;
     GdkRectangle area;
@@ -107,12 +84,12 @@ void
 Init_gtk_status_icon(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE si = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
 
-    rb_define_method(si, "initialize", si_initialize, 0);
-    rb_define_method(si, "set_tooltip", si_set_tooltip, 1);
-    G_DEF_SETTER(si, "tooltip");
-    rb_define_method(si, "position_menu", si_position_menu, 1);
-    rb_define_method(si, "geometry", si_get_geometry, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_tooltip, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "tooltip");
+    RG_DEF_METHOD(position_menu, 1);
+    RG_DEF_METHOD(geometry, 0);
 #endif
 }

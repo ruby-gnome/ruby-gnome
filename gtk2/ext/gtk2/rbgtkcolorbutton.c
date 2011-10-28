@@ -20,11 +20,13 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cColorButton
+
 static VALUE
-colorbutton_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE color;
     GtkWidget* widget;
@@ -41,30 +43,13 @@ colorbutton_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/* Defined as property.
-void        gtk_color_button_set_color      (GtkColorButton *color_button,
-                                             const GdkColor *color);
-void        gtk_color_button_get_color      (GtkColorButton *color_button,
-                                             GdkColor *color);
-void        gtk_color_button_set_alpha      (GtkColorButton *color_button,
-                                             guint16 alpha);
-guint16     gtk_color_button_get_alpha      (GtkColorButton *color_button);
-void        gtk_color_button_set_use_alpha  (GtkColorButton *color_button,
-                                             gboolean use_alpha);
-gboolean    gtk_color_button_get_use_alpha  (GtkColorButton *color_button);
-void        gtk_color_button_set_title      (GtkColorButton *color_button,
-                                             const gchar *title);
-G_CONST_RETURN gchar* gtk_color_button_get_title
-                                            (GtkColorButton *color_button);
-*/
-
 #endif
 
 void 
 Init_gtk_colorbutton(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE gColorbutton = G_DEF_CLASS(GTK_TYPE_COLOR_BUTTON, "ColorButton", mGtk);
-    rb_define_method(gColorbutton, "initialize", colorbutton_initialize, -1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_BUTTON, "ColorButton", mGtk);
+    RG_DEF_METHOD(initialize, -1);
 #endif
 }

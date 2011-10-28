@@ -20,30 +20,25 @@
  */
 
 #include "global.h"
-                                                                                
+
 #if GTK_CHECK_VERSION(2,4,0)
 
+#define RG_TARGET_NAMESPACE cSeparatorToolItem
+
 static VALUE
-separatortoolitem_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     RBGTK_INITIALIZE(self, gtk_separator_tool_item_new());
     return Qnil;
 }
 
-/* Defined as Property.
-void        gtk_separator_tool_item_set_draw
-                                            (GtkSeparatorToolItem *item,
-                                             gboolean draw);
-gboolean    gtk_separator_tool_item_get_draw
-                                            (GtkSeparatorToolItem *item);
- */
 #endif
 
 void 
 Init_gtk_separatortoolitem(void)
 {
 #if GTK_CHECK_VERSION(2,4,0)
-    VALUE st = G_DEF_CLASS(GTK_TYPE_SEPARATOR_TOOL_ITEM, "SeparatorToolItem", mGtk);
-    rb_define_method(st, "initialize", separatortoolitem_initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR_TOOL_ITEM, "SeparatorToolItem", mGtk);
+    RG_DEF_METHOD(initialize, 0);
 #endif
 }
