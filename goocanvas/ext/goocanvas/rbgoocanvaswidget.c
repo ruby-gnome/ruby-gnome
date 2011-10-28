@@ -21,8 +21,10 @@
 
 #include "rbgoocanvas.h"
 
+#define RG_TARGET_NAMESPACE cCanvasWidget
+
 static VALUE
-rb_goo_canvas_widget_new(VALUE self, VALUE parent, VALUE widget,
+rg_initialize(VALUE self, VALUE parent, VALUE widget,
                          VALUE x, VALUE y, VALUE width, VALUE height)
 {
     GooCanvasItem *item;
@@ -41,9 +43,9 @@ rb_goo_canvas_widget_new(VALUE self, VALUE parent, VALUE widget,
 void
 Init_goocanvaswidget(void)
 {
-    VALUE GooCanvasWidget;
+    VALUE RG_TARGET_NAMESPACE;
 
-    GooCanvasWidget = G_DEF_CLASS(GOO_TYPE_CANVAS_WIDGET, "CanvasWidget", mGoo);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS_WIDGET, "CanvasWidget", mGoo);
 
-    rb_define_method(GooCanvasWidget, "initialize", rb_goo_canvas_widget_new, 6);
+    RG_DEF_METHOD(initialize, 6);
 }
