@@ -26,6 +26,7 @@
  * A class to manage source language.
  */
 
+#define RG_TARGET_NAMESPACE cSourceLanguageManager
 #define _SELF(self) (GTK_SOURCE_LANGUAGE_MANAGER(RVAL2GOBJ(self)))
 
 /* Class method: new
@@ -175,18 +176,18 @@ slm_guess_language(VALUE self, VALUE filename, VALUE content_type)
 void
 Init_gtk_sourcelanguagemanager ()
 {
-	VALUE cslm =
+	VALUE RG_TARGET_NAMESPACE =
 	    G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE_MANAGER,
 			 "SourceLanguageManager", mGtk);
 
-	rb_define_method (cslm, "initialize", slm_new, 0);
-	rb_define_method (cslm, "set_search_path", slm_set_search_path, 1);
-	rb_define_method (cslm, "search_path", slm_get_search_path, 0);
-	rb_define_method (cslm, "language_ids", slm_get_language_ids, 0);
-	rb_define_method (cslm, "get_language", slm_get_language, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "initialize", slm_new, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "set_search_path", slm_set_search_path, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "search_path", slm_get_search_path, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "language_ids", slm_get_language_ids, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "get_language", slm_get_language, 1);
 #ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
-	rb_define_method (cslm, "guess_language", slm_guess_language, 2);
+	rb_define_method (RG_TARGET_NAMESPACE, "guess_language", slm_guess_language, 2);
 #endif
-	rb_define_singleton_method(cslm, "default", slm_get_default, 0);
-	G_DEF_SETTERS (cslm);
+	rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", slm_get_default, 0);
+	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

@@ -26,6 +26,7 @@
  * A source mark.
  */
 
+#define RG_TARGET_NAMESPACE cSourceMark
 #define _SELF(self) (GTK_SOURCE_MARK(RVAL2GOBJ(self)))
 
 /* Class method: new(name, category)
@@ -83,12 +84,12 @@ void
 Init_gtk_sourcemark ()
 {
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-	VALUE csm = G_DEF_CLASS (GTK_TYPE_SOURCE_MARK, "SourceMark", mGtk);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_MARK, "SourceMark", mGtk);
 
-	rb_define_method (csm, "initialize", sourcemark_new, 2);
-	rb_define_method (csm, "next", sourcemark_next, -1);
-	rb_define_method (csm, "prev", sourcemark_prev, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "initialize", sourcemark_new, 2);
+	rb_define_method (RG_TARGET_NAMESPACE, "next", sourcemark_next, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "prev", sourcemark_prev, -1);
 
-	G_DEF_SETTERS (csm);
+	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 }

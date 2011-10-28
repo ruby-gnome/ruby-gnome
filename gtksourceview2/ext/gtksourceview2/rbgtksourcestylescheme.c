@@ -24,6 +24,7 @@
 /* Module: Gtk::SourceStyleScheme
  */
 
+#define RG_TARGET_NAMESPACE cSourceStyleScheme
 #define _SELF(self) (GTK_SOURCE_STYLE_SCHEME(RVAL2GOBJ(self)))
 
 /* Defined as properties.
@@ -73,8 +74,8 @@ scheme_get_style(VALUE self, VALUE style_name)
 void
 Init_gtk_sourcestylescheme ()
 {
-    VALUE scheme = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME, "SourceStyleScheme", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME, "SourceStyleScheme", mGtk);
 
-    rb_define_method(scheme, "authors", scheme_get_authors, 0);
-    rb_define_method(scheme, "get_style", scheme_get_style, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "authors", scheme_get_authors, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_style", scheme_get_style, 1);
 }

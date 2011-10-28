@@ -22,6 +22,8 @@
 
 #include "rbgtksourcemain.h"
 
+#define RG_TARGET_NAMESPACE cSourceBuffer
+
 /* Class: Gtk::SourceBuffer
  * Text buffer object for Gtk::SourceView.
  */
@@ -352,35 +354,35 @@ sourcebuffer_ensure_highlight(VALUE self, VALUE start, VALUE end)
 void
 Init_gtk_sourcebuffer ()
 {
-	VALUE cbuffer =
+	VALUE RG_TARGET_NAMESPACE =
 	    G_DEF_CLASS (GTK_TYPE_SOURCE_BUFFER, "SourceBuffer", mGtk);
 
-	rb_define_method (cbuffer, "initialize", sourcebuffer_new, -1);
-	rb_define_method (cbuffer, "redo!", sourcebuffer_redo, 0);
-	rb_define_method (cbuffer, "undo!", sourcebuffer_undo, 0);
-	rb_define_method (cbuffer, "begin_not_undoable_action",
+	rb_define_method (RG_TARGET_NAMESPACE, "initialize", sourcebuffer_new, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "redo!", sourcebuffer_redo, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "undo!", sourcebuffer_undo, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "begin_not_undoable_action",
 			          sourcebuffer_begin_not_undoable_action, 0);
-	rb_define_method (cbuffer, "end_not_undoable_action",
+	rb_define_method (RG_TARGET_NAMESPACE, "end_not_undoable_action",
 			          sourcebuffer_end_not_undoable_action, 0);
-	rb_define_method (cbuffer, "not_undoable_action",
+	rb_define_method (RG_TARGET_NAMESPACE, "not_undoable_action",
 			          sourcebuffer_not_undoable_action, 0);
-	rb_define_alias (cbuffer, "non_undoable_action", "not_undoable_action");
+	rb_define_alias (RG_TARGET_NAMESPACE, "non_undoable_action", "not_undoable_action");
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-    rb_define_method (cbuffer, "create_source_mark",
+    rb_define_method (RG_TARGET_NAMESPACE, "create_source_mark",
                       sourcebuffer_create_source_mark, -1);
-    rb_define_method (cbuffer, "get_source_marks_at_line",
+    rb_define_method (RG_TARGET_NAMESPACE, "get_source_marks_at_line",
                       sourcebuffer_get_source_marks_at_line, -1);
-    rb_define_method (cbuffer, "get_source_marks_at_iter",
+    rb_define_method (RG_TARGET_NAMESPACE, "get_source_marks_at_iter",
                       sourcebuffer_get_source_marks_at_iter, -1);
-    rb_define_method (cbuffer, "remove_source_marks",
+    rb_define_method (RG_TARGET_NAMESPACE, "remove_source_marks",
                       sourcebuffer_remove_source_marks, -1);
-    rb_define_method (cbuffer, "forward_iter_to_source_mark",
+    rb_define_method (RG_TARGET_NAMESPACE, "forward_iter_to_source_mark",
                       sourcebuffer_forward_iter_to_source_mark, -1);
-    rb_define_method (cbuffer, "backward_iter_to_source_mark",
+    rb_define_method (RG_TARGET_NAMESPACE, "backward_iter_to_source_mark",
                       sourcebuffer_backward_iter_to_source_mark, -1);
 #endif
-    rb_define_method (cbuffer, "ensure_highlight",
+    rb_define_method (RG_TARGET_NAMESPACE, "ensure_highlight",
                       sourcebuffer_ensure_highlight, 2);
 
-	G_DEF_SETTERS (cbuffer);
+	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

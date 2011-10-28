@@ -24,6 +24,8 @@
 #ifdef HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE
 /* Module: Gtk::SourcePrintCompositor
  */
+
+#define RG_TARGET_NAMESPACE cSourcePrintCompositor
 #define _SELF(self) (GTK_SOURCE_PRINT_COMPOSITOR(RVAL2GOBJ(self)))
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
@@ -211,36 +213,36 @@ void
 Init_gtk_sourceprintcompositor()
 {
 #ifdef HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE
-    VALUE pc = G_DEF_CLASS(GTK_TYPE_SOURCE_PRINT_COMPOSITOR, "SourcePrintCompositor", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOURCE_PRINT_COMPOSITOR, "SourcePrintCompositor", mGtk);
 
-    rb_define_method(pc, "initialize", sprintcompositor_initialize, 1);
-    rb_define_method(pc, "get_top_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", sprintcompositor_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_top_margin",
                      sprintcompositor_get_top_margin, 1);
-    rb_define_method(pc, "set_top_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_top_margin",
                      sprintcompositor_set_top_margin, 2);
-    rb_define_method(pc, "get_bottom_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_bottom_margin",
                      sprintcompositor_get_bottom_margin, 1);
-    rb_define_method(pc, "set_bottom_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bottom_margin",
                      sprintcompositor_set_bottom_margin, 2);
-    rb_define_method(pc, "get_left_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_left_margin",
                      sprintcompositor_get_left_margin, 1);
-    rb_define_method(pc, "set_left_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_left_margin",
                      sprintcompositor_set_left_margin, 2);
-    rb_define_method(pc, "get_right_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "get_right_margin",
                      sprintcompositor_get_right_margin, 1);
-    rb_define_method(pc, "set_right_margin",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_right_margin",
                      sprintcompositor_set_right_margin, 2);
-    rb_define_method(pc, "set_header_format",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_header_format",
                      sprintcompositor_set_header_format, 4);
-    rb_define_method(pc, "set_footer_format",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_footer_format",
                      sprintcompositor_set_footer_format, 4);
-    rb_define_method(pc, "paginate",
+    rb_define_method(RG_TARGET_NAMESPACE, "paginate",
                      sprintcompositor_paginate, 1);
-    rb_define_method(pc, "pagination_progress",
+    rb_define_method(RG_TARGET_NAMESPACE, "pagination_progress",
                      sprintcompositor_get_pagination_progress, 0);
-    rb_define_method(pc, "draw_page",
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_page",
                      sprintcompositor_draw_page, 2);
 
-    G_DEF_SETTERS(pc);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif /* HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE */
 }

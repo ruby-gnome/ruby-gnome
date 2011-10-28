@@ -24,6 +24,7 @@
 /* Module: Gtk::SourceStyle
  */
 
+#define RG_TARGET_NAMESPACE cSourceStyle
 #define _SELF(self) (GTK_SOURCE_STYLE(RVAL2GOBJ(self)))
 
 static VALUE
@@ -52,7 +53,7 @@ sourcestyle_copy(VALUE self)
 void
 Init_gtk_sourcestyle ()
 {
-	VALUE style = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE, "SourceStyle", mGtk);
+	VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE, "SourceStyle", mGtk);
 
-	rb_define_method(style, "copy", sourcestyle_copy, 0);
+	rb_define_method(RG_TARGET_NAMESPACE, "copy", sourcestyle_copy, 0);
 }

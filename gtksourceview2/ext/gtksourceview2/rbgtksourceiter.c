@@ -21,6 +21,7 @@
 
 #include "rbgtksourcemain.h"
 
+#define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
@@ -102,14 +103,14 @@ backward_search(int argc, VALUE *argv, VALUE self)
 void
 Init_gtk_sourceiter ()
 {
-	VALUE cTextIter = GTYPE2CLASS (GTK_TYPE_TEXT_ITER);
+	VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS (GTK_TYPE_TEXT_ITER);
 
 	/*
 	 * They are override original Gtk::TextIter#[for|back]ward_search
 	 */
-	rb_define_method (cTextIter, "forward_search", forward_search, -1);
-	rb_define_method (cTextIter, "backward_search", backward_search, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "forward_search", forward_search, -1);
+	rb_define_method (RG_TARGET_NAMESPACE, "backward_search", backward_search, -1);
 
-	G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", cTextIter);
-	G_DEF_CONSTANTS(cTextIter, GTK_TYPE_SOURCE_SEARCH_FLAGS, "GTK_");
+	G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", RG_TARGET_NAMESPACE);
+	G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SEARCH_FLAGS, "GTK_");
 }

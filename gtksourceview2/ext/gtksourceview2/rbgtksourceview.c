@@ -25,6 +25,8 @@
 /* Class: Gtk::SourceView
  * A view on a source.
  */
+
+#define RG_TARGET_NAMESPACE cSourceView
 #define _SELF(self) (GTK_SOURCE_VIEW(RVAL2GOBJ(self)))
 
 /*
@@ -220,31 +222,31 @@ guint               gtk_source_view_get_tab_width       (GtkSourceView *view)
 void
 Init_gtk_sourceview ()
 {
-    VALUE cSourceView = G_DEF_CLASS (GTK_TYPE_SOURCE_VIEW, "SourceView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_VIEW, "SourceView", mGtk);
 
-    rb_define_const(cSourceView, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(GTKSOURCEVIEW2_MAJOR_VERSION),
                                 INT2FIX(GTKSOURCEVIEW2_MINOR_VERSION),
                                 INT2FIX(GTKSOURCEVIEW2_MICRO_VERSION)));
 
-    rb_define_method(cSourceView, "initialize", sourceview_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", sourceview_initialize, -1);
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-    rb_define_method(cSourceView, "get_mark_category_pixbuf", sourceview_get_mark_category_pixbuf, 1);
-    rb_define_method(cSourceView, "set_mark_category_pixbuf", sourceview_set_mark_category_pixbuf, 2);
-    rb_define_method(cSourceView, "get_mark_category_priority", sourceview_get_mark_category_priority, 1);
-    rb_define_method(cSourceView, "set_mark_category_priority", sourceview_set_mark_category_priority, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_mark_category_pixbuf", sourceview_get_mark_category_pixbuf, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mark_category_pixbuf", sourceview_set_mark_category_pixbuf, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_mark_category_priority", sourceview_get_mark_category_priority, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mark_category_priority", sourceview_set_mark_category_priority, 2);
 #endif
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
-    rb_define_method(cSourceView, "get_mark_category_background", sourceview_get_mark_category_background, 1);
-    rb_define_method(cSourceView, "set_mark_category_background", sourceview_set_mark_category_background, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_mark_category_background", sourceview_get_mark_category_background, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mark_category_background", sourceview_set_mark_category_background, 2);
 #endif
-    G_DEF_SETTERS (cSourceView);
+    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "SmartHomeEndType", cSourceView);
-    G_DEF_CONSTANTS(cSourceView, GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "GTK_SOURCE_");
+    G_DEF_CLASS(GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "SmartHomeEndType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "GTK_SOURCE_");
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
-    G_DEF_CLASS(GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", cSourceView);
-    G_DEF_CONSTANTS(cSourceView, GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "GTK_SOURCE_");
+    G_DEF_CLASS(GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "GTK_SOURCE_");
 #endif
 }

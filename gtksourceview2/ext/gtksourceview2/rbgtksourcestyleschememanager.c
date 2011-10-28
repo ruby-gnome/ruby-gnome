@@ -26,6 +26,7 @@
  * A class to manage source style scheme.
  */
 
+#define RG_TARGET_NAMESPACE cSourceStyleSchemeManager
 #define _SELF(self) (GTK_SOURCE_STYLE_SCHEME_MANAGER(RVAL2GOBJ(self)))
 
 /* Class method: new
@@ -196,18 +197,18 @@ sssm_force_rescan(VALUE self)
 void
 Init_gtk_sourcestyleschememanager ()
 {
-	VALUE csssm =
+	VALUE RG_TARGET_NAMESPACE =
 	    G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER,
 			 "SourceStyleSchemeManager", mGtk);
 
-	rb_define_method (csssm, "initialize", sssm_new, 0);
-	rb_define_method (csssm, "set_search_path", sssm_set_search_path, 1);
-	rb_define_method (csssm, "append_search_path", sssm_append_search_path, 1);
-	rb_define_method (csssm, "prepend_search_path", sssm_prepend_search_path, 1);
-	rb_define_method (csssm, "search_path", sssm_get_search_path, 0);
-	rb_define_method (csssm, "scheme_ids", sssm_get_scheme_ids, 0);
-	rb_define_method (csssm, "get_scheme", sssm_get_scheme, 1);
-	rb_define_method (csssm, "force_rescan", sssm_force_rescan, 0);
-	rb_define_singleton_method(csssm, "default", sssm_get_default, 0);
-	G_DEF_SETTERS (csssm);
+	rb_define_method (RG_TARGET_NAMESPACE, "initialize", sssm_new, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "set_search_path", sssm_set_search_path, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "append_search_path", sssm_append_search_path, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "prepend_search_path", sssm_prepend_search_path, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "search_path", sssm_get_search_path, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "scheme_ids", sssm_get_scheme_ids, 0);
+	rb_define_method (RG_TARGET_NAMESPACE, "get_scheme", sssm_get_scheme, 1);
+	rb_define_method (RG_TARGET_NAMESPACE, "force_rescan", sssm_force_rescan, 0);
+	rb_define_singleton_method(RG_TARGET_NAMESPACE, "default", sssm_get_default, 0);
+	G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }
