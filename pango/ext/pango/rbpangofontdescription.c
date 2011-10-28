@@ -21,10 +21,11 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cFontDescription
 #define _SELF(self) ((PangoFontDescription*)RVAL2BOXED(self, PANGO_TYPE_FONT_DESCRIPTION))
 
 static VALUE
-font_desc_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE str;
     PangoFontDescription *description;
@@ -32,7 +33,7 @@ font_desc_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &str);
 
     if (NIL_P(str)) {
-	description = pango_font_description_new();
+        description = pango_font_description_new();
     } else {
         description = pango_font_description_from_string(RVAL2CSTR(str));
     }
@@ -50,13 +51,13 @@ PangoFontDescription* pango_font_description_copy_static
 */
 
 static VALUE
-font_desc_hash(VALUE self)
+rg_hash(VALUE self)
 {
     return UINT2NUM(pango_font_description_hash(_SELF(self)));
 }
 
 static VALUE
-font_desc_equal(VALUE self, VALUE other)
+rg_operator_font_desc_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(pango_font_description_equal(_SELF(self), _SELF(other)));
 }
@@ -67,7 +68,7 @@ void        pango_font_descriptions_free    (PangoFontDescription **descs,
 */
 
 static VALUE
-font_desc_set_family(VALUE self, VALUE family)
+rg_set_family(VALUE self, VALUE family)
 {
     pango_font_description_set_family(_SELF(self), RVAL2CSTR(family));
     return self;
@@ -79,87 +80,87 @@ void        pango_font_description_set_family_static
 */
 
 static VALUE
-font_desc_get_family(VALUE self)
+rg_family(VALUE self)
 {
     return CSTR2RVAL(pango_font_description_get_family(_SELF(self)));
 }
 
 static VALUE
-font_desc_set_style(VALUE self, VALUE style)
+rg_set_style(VALUE self, VALUE style)
 {
     pango_font_description_set_style(_SELF(self), RVAL2GENUM(style, PANGO_TYPE_STYLE));
     return self;
 }
 
 static VALUE
-font_desc_get_style(VALUE self)
+rg_style(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_style(_SELF(self)), PANGO_TYPE_STYLE);
 }
 
 static VALUE
-font_desc_set_variant(VALUE self, VALUE variant)
+rg_set_variant(VALUE self, VALUE variant)
 {
     pango_font_description_set_variant(_SELF(self), RVAL2GENUM(variant, PANGO_TYPE_VARIANT));
     return self;
 }
 
 static VALUE
-font_desc_get_variant(VALUE self)
+rg_variant(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_variant(_SELF(self)), PANGO_TYPE_VARIANT);
 }
 
 static VALUE
-font_desc_set_weight(VALUE self, VALUE weight)
+rg_set_weight(VALUE self, VALUE weight)
 {
     pango_font_description_set_weight(_SELF(self),
-				      RVAL2GENUM(weight, PANGO_TYPE_WEIGHT));
+                      RVAL2GENUM(weight, PANGO_TYPE_WEIGHT));
     return self;
 }
 
 static VALUE
-font_desc_get_weight(VALUE self)
+rg_weight(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_weight(_SELF(self)), PANGO_TYPE_WEIGHT);
 }
 
 static VALUE
-font_desc_set_stretch(VALUE self, VALUE stretch)
+rg_set_stretch(VALUE self, VALUE stretch)
 {
     pango_font_description_set_stretch(_SELF(self), RVAL2GENUM(stretch, PANGO_TYPE_STRETCH));
     return self;
 }
 
 static VALUE
-font_desc_get_stretch(VALUE self)
+rg_stretch(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_stretch(_SELF(self)), PANGO_TYPE_STRETCH);
 }
 
 static VALUE
-font_desc_set_size(VALUE self, VALUE size)
+rg_set_size(VALUE self, VALUE size)
 {
     pango_font_description_set_size(_SELF(self), NUM2INT(size));
     return self;
 }
 
 static VALUE
-font_desc_get_size(VALUE self)
+rg_size(VALUE self)
 {
     return INT2NUM(pango_font_description_get_size(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,8,0)
 static VALUE
-font_desc_set_absolute_size(VALUE self, VALUE size)
+rg_set_absolute_size(VALUE self, VALUE size)
 {
     pango_font_description_set_absolute_size(_SELF(self), NUM2INT(size));
     return self;
 }
 
 static VALUE
-font_desc_get_size_is_absolute(VALUE self)
+rg_size_is_absolute_p(VALUE self)
 {
     return CBOOL2RVAL(pango_font_description_get_size_is_absolute(_SELF(self)));
 }
@@ -167,13 +168,13 @@ font_desc_get_size_is_absolute(VALUE self)
 
 #if PANGO_CHECK_VERSION(1,16,0)
 static VALUE
-font_desc_get_gravity(VALUE self)
+rg_gravity(VALUE self)
 {
     return GENUM2RVAL(pango_font_description_get_gravity(_SELF(self)), PANGO_TYPE_GRAVITY);
 }
 
 static VALUE
-font_desc_set_gravity(VALUE self, VALUE gravity)
+rg_set_gravity(VALUE self, VALUE gravity)
 {
     pango_font_description_set_gravity(_SELF(self), RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
     return self;
@@ -181,20 +182,20 @@ font_desc_set_gravity(VALUE self, VALUE gravity)
 #endif
 
 static VALUE
-font_desc_get_set_fields(VALUE self)
+rg_set_fields(VALUE self)
 {
     return GFLAGS2RVAL(pango_font_description_get_set_fields(_SELF(self)), PANGO_TYPE_FONT_MASK);
 }
 
 static VALUE
-font_desc_unset_fields(VALUE self, VALUE to_unset)
+rg_unset_fields(VALUE self, VALUE to_unset)
 {
     pango_font_description_unset_fields(_SELF(self), RVAL2GFLAGS(to_unset, PANGO_TYPE_FONT_MASK));
     return self;
 }
 
 static VALUE
-font_desc_merge(VALUE self, VALUE desc_to_merge, VALUE replace_existing)
+rg_merge(VALUE self, VALUE desc_to_merge, VALUE replace_existing)
 {
     pango_font_description_merge(_SELF(self), _SELF(desc_to_merge),
                                  RVAL2CBOOL(replace_existing));
@@ -209,7 +210,7 @@ void        pango_font_description_merge_static
 */
 
 static VALUE
-font_desc_better_match(VALUE self, VALUE old_match, VALUE new_match)
+rg_better_match(VALUE self, VALUE old_match, VALUE new_match)
 {
     return CBOOL2RVAL(pango_font_description_better_match(_SELF(self), 
                                                           _SELF(old_match),
@@ -217,13 +218,13 @@ font_desc_better_match(VALUE self, VALUE old_match, VALUE new_match)
 }
 
 static VALUE
-font_desc_to_string(VALUE self)
+rg_to_str(VALUE self)
 {
     return CSTR2RVAL(pango_font_description_to_string(_SELF(self)));
 }
 
 static VALUE
-font_desc_to_filename(VALUE self)
+rg_to_filename(VALUE self)
 {
     return CSTR2RVAL(pango_font_description_to_filename(_SELF(self)));
 }
@@ -231,59 +232,59 @@ font_desc_to_filename(VALUE self)
 void
 Init_pango_font_description(void)
 {
-    VALUE pFontDesc = G_DEF_CLASS(PANGO_TYPE_FONT_DESCRIPTION, "FontDescription", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_DESCRIPTION, "FontDescription", mPango);
 
-    rb_define_method(pFontDesc, "initialize", font_desc_initialize, -1);
-    rb_define_method(pFontDesc, "hash", font_desc_hash, 0);
-    rb_define_method(pFontDesc, "==", font_desc_equal, 1);
-    rb_define_method(pFontDesc, "set_family", font_desc_set_family, 1);
-    rb_define_method(pFontDesc, "family", font_desc_get_family, 0);
-    rb_define_method(pFontDesc, "set_style", font_desc_set_style, 1);
-    rb_define_method(pFontDesc, "style", font_desc_get_style, 0);
-    rb_define_method(pFontDesc, "set_variant", font_desc_set_variant, 1);
-    rb_define_method(pFontDesc, "variant", font_desc_get_variant, 0);
-    rb_define_method(pFontDesc, "set_weight", font_desc_set_weight, 1);
-    rb_define_method(pFontDesc, "weight", font_desc_get_weight, 0);
-    rb_define_method(pFontDesc, "set_stretch", font_desc_set_stretch, 1);
-    rb_define_method(pFontDesc, "stretch", font_desc_get_stretch, 0);
-    rb_define_method(pFontDesc, "set_size", font_desc_set_size, 1);
-    rb_define_method(pFontDesc, "size", font_desc_get_size, 0);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(hash, 0);
+    RG_DEF_METHOD_OPERATOR("==", font_desc_equal, 1);
+    RG_DEF_METHOD(set_family, 1);
+    RG_DEF_METHOD(family, 0);
+    RG_DEF_METHOD(set_style, 1);
+    RG_DEF_METHOD(style, 0);
+    RG_DEF_METHOD(set_variant, 1);
+    RG_DEF_METHOD(variant, 0);
+    RG_DEF_METHOD(set_weight, 1);
+    RG_DEF_METHOD(weight, 0);
+    RG_DEF_METHOD(set_stretch, 1);
+    RG_DEF_METHOD(stretch, 0);
+    RG_DEF_METHOD(set_size, 1);
+    RG_DEF_METHOD(size, 0);
 
 #if PANGO_CHECK_VERSION(1,8,0)
-    rb_define_method(pFontDesc, "set_absolute_size", font_desc_set_absolute_size, 1);
-    rb_define_method(pFontDesc, "size_is_absolute?", font_desc_get_size_is_absolute, 0);
+    RG_DEF_METHOD(set_absolute_size, 1);
+    RG_DEF_METHOD_P(size_is_absolute, 0);
 #endif
 #if PANGO_CHECK_VERSION(1,16,0)
-    rb_define_method(pFontDesc, "set_gravity", font_desc_set_gravity, 1);
-    rb_define_method(pFontDesc, "gravity", font_desc_get_gravity, 0);
+    RG_DEF_METHOD(set_gravity, 1);
+    RG_DEF_METHOD(gravity, 0);
 #endif
-    rb_define_method(pFontDesc, "set_fields", font_desc_get_set_fields, 0);
-    rb_define_method(pFontDesc, "unset_fields", font_desc_unset_fields, 1);
-    rb_define_method(pFontDesc, "merge", font_desc_merge, 2);
-    rb_define_method(pFontDesc, "better_match", font_desc_better_match, 2);
-    rb_define_method(pFontDesc, "to_str", font_desc_to_string, 0);
-    rb_define_alias(pFontDesc, "to_s", "to_str");
-    rb_define_method(pFontDesc, "to_filename", font_desc_to_filename, 0);
+    RG_DEF_METHOD(set_fields, 0);
+    RG_DEF_METHOD(unset_fields, 1);
+    RG_DEF_METHOD(merge, 2);
+    RG_DEF_METHOD(better_match, 2);
+    RG_DEF_METHOD(to_str, 0);
+    RG_DEF_ALIAS("to_s", "to_str");
+    RG_DEF_METHOD(to_filename, 0);
 
-    G_DEF_SETTERS(pFontDesc);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* PangoStyle */
-    G_DEF_CLASS(PANGO_TYPE_STYLE, "Style", pFontDesc);
-    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_STYLE, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_STYLE, "Style", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_STYLE, "PANGO_");
 
     /* PangoWeight */
-    G_DEF_CLASS(PANGO_TYPE_WEIGHT, "Weight", pFontDesc);
-    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_WEIGHT, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_WEIGHT, "Weight", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_WEIGHT, "PANGO_");
 
     /* PangoVariant */
-    G_DEF_CLASS(PANGO_TYPE_VARIANT, "Variant", pFontDesc);
-    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_VARIANT, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_VARIANT, "Variant", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_VARIANT, "PANGO_");
 
     /* PangoStretch */
-    G_DEF_CLASS(PANGO_TYPE_STRETCH, "Stretch", pFontDesc);
-    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_STRETCH, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_STRETCH, "Stretch", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_STRETCH, "PANGO_");
 
     /* PangoFontMask */
-    G_DEF_CLASS(PANGO_TYPE_FONT_MASK, "FontMask", pFontDesc);
-    G_DEF_CONSTANTS(pFontDesc, PANGO_TYPE_FONT_MASK, "PANGO_");
+    G_DEF_CLASS(PANGO_TYPE_FONT_MASK, "FontMask", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_FONT_MASK, "PANGO_");
 }

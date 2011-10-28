@@ -21,8 +21,8 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cCoverage
 #define _SELF(self) ((PangoCoverage*)RVAL2BOXED(self, PANGO_TYPE_COVERAGE))
-
 
 /**********************************/
 GType
@@ -39,28 +39,28 @@ pango_coverage_get_type(void)
 /**********************************/
 
 static VALUE
-coverage_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_coverage_new());
     return Qnil;
 }
 
 static VALUE
-coverage_get_level(VALUE self, VALUE index_)
+rg_get_level(VALUE self, VALUE index_)
 {
     return GENUM2RVAL(pango_coverage_get(_SELF(self), NUM2INT(index_)), 
                       PANGO_TYPE_COVERAGE_LEVEL);
 }
 
 static VALUE
-coverage_max(VALUE self, VALUE other)
+rg_max_bang(VALUE self, VALUE other)
 {
     pango_coverage_max(_SELF(self), _SELF(other));
     return self;
 }
 
 static VALUE
-coverage_set(VALUE self, VALUE index_, VALUE level)
+rg_set(VALUE self, VALUE index_, VALUE level)
 {
     pango_coverage_set(_SELF(self), NUM2INT(index_), 
                        RVAL2GENUM(level, PANGO_TYPE_COVERAGE_LEVEL));
@@ -68,7 +68,7 @@ coverage_set(VALUE self, VALUE index_, VALUE level)
 }
 
 static VALUE
-coverage_to_bytes(VALUE self)
+rg_to_bytes(VALUE self)
 {
     guchar* bytes;
     int n_bytes;
@@ -82,7 +82,7 @@ coverage_to_bytes(VALUE self)
 }
 
 static VALUE
-coverage_s_from_bytes(G_GNUC_UNUSED VALUE self, VALUE bytes)
+rg_s_from_bytes(G_GNUC_UNUSED VALUE self, VALUE bytes)
 {
     StringValue(bytes);
     return BOXED2RVAL(pango_coverage_from_bytes((guchar *)RSTRING_PTR(bytes), 
@@ -93,16 +93,16 @@ coverage_s_from_bytes(G_GNUC_UNUSED VALUE self, VALUE bytes)
 void
 Init_pango_coverage(void)
 {
-    VALUE pCoverage = G_DEF_CLASS(PANGO_TYPE_COVERAGE, "Coverage", mPango);
-    
-    rb_define_method(pCoverage, "initialize", coverage_initialize, 0);
-    rb_define_method(pCoverage, "get_level", coverage_get_level, 0);
-    rb_define_method(pCoverage, "max!", coverage_max, 1);
-    rb_define_method(pCoverage, "set", coverage_set, 2);
-    rb_define_method(pCoverage, "to_bytes", coverage_to_bytes, 0);
-    rb_define_singleton_method(pCoverage, "from_bytes", coverage_s_from_bytes, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_COVERAGE, "Coverage", mPango);
+
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(get_level, 0);
+    RG_DEF_METHOD_BANG(max, 1);
+    RG_DEF_METHOD(set, 2);
+    RG_DEF_METHOD(to_bytes, 0);
+    RG_DEF_SMETHOD(from_bytes, 1);
 
     /* PangoCoverageLevel */
-    G_DEF_CLASS(PANGO_TYPE_COVERAGE_LEVEL, "Level", pCoverage);
-    G_DEF_CONSTANTS(pCoverage, PANGO_TYPE_COVERAGE_LEVEL, "PANGO_COVERAGE_");
+    G_DEF_CLASS(PANGO_TYPE_COVERAGE_LEVEL, "Level", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_COVERAGE_LEVEL, "PANGO_COVERAGE_");
 }

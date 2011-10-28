@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cAttrIterator
 #define _SELF(self) ((PangoAttrIterator*)RVAL2BOXED(self, PANGO_TYPE_ATTR_ITERATOR))
 
 /**********************************/
@@ -38,13 +39,13 @@ pango_attr_iter_get_type(void)
 /**********************************/
 
 static VALUE
-attriterator_next(VALUE self)
+rg_next_bang(VALUE self)
 {
     return CBOOL2RVAL(pango_attr_iterator_next(_SELF(self)));
 }
 
 static VALUE
-attriterator_range(VALUE self)
+rg_range(VALUE self)
 {
     gint start = 0;
     gint end = 0;
@@ -53,7 +54,7 @@ attriterator_range(VALUE self)
 }
 
 static VALUE
-attriterator_get(int argc, VALUE *argv, VALUE self)
+rg_get(int argc, VALUE *argv, VALUE self)
 {
     VALUE type, ret;
     PangoAttribute* attr;
@@ -77,7 +78,7 @@ attriterator_get(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-attriterator_get_font(VALUE self)
+rg_font(VALUE self)
 {
     PangoFontDescription* desc;
     PangoLanguage* lang;
@@ -104,7 +105,7 @@ attriterator_get_font(VALUE self)
 
 #ifdef HAVE_PANGO_ATTR_ITERATOR_GET_ATTRS
 static VALUE
-attriterator_get_attrs(VALUE self)
+rg_attrs(VALUE self)
 {
     GSList* list = pango_attr_iterator_get_attrs(_SELF(self));
     GSList* base = list;
@@ -128,13 +129,13 @@ attriterator_get_attrs(VALUE self)
 void
 Init_pango_attriterator(void)
 {
-    VALUE pAttriterator = G_DEF_CLASS(PANGO_TYPE_ATTR_ITERATOR, "AttrIterator", mPango);
-    
-    rb_define_method(pAttriterator, "next!", attriterator_next, 0);
-    rb_define_method(pAttriterator, "range", attriterator_range, 0);
-    rb_define_method(pAttriterator, "get", attriterator_get, -1);
-    rb_define_method(pAttriterator, "font", attriterator_get_font, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ATTR_ITERATOR, "AttrIterator", mPango);
+
+    RG_DEF_METHOD_BANG(next, 0);
+    RG_DEF_METHOD(range, 0);
+    RG_DEF_METHOD(get, -1);
+    RG_DEF_METHOD(font, 0);
 #ifdef HAVE_PANGO_ATTR_ITERATOR_GET_ATTRS
-    rb_define_method(pAttriterator, "attrs", attriterator_get_attrs, 0);
+    RG_DEF_METHOD(attrs, 0);
 #endif
 }

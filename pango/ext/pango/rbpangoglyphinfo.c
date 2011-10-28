@@ -21,8 +21,8 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cGlyphInfo
 #define _SELF(self) ((PangoGlyphInfo*)RVAL2BOXED(self, PANGO_TYPE_GLYPH_INFO))
-
 
 /**********************************/
 static PangoGlyphInfo *
@@ -52,27 +52,27 @@ pango_glyph_info_get_type(void)
 /**********************************/
 
 static VALUE
-gi_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, g_new0(PangoGlyphInfo, 1));
     return Qnil;
 }
 
 static VALUE
-gi_glyph(VALUE self)
+rg_glyph(VALUE self)
 {
     return UINT2NUM(_SELF(self)->glyph);
 }
 
 static VALUE
-gi_set_glyph(VALUE self, VALUE val)
+rg_set_glyph(VALUE self, VALUE val)
 {
     _SELF(self)->glyph = NUM2UINT(val);
     return self;
 }
 
 static VALUE
-gi_geometry(VALUE self)
+rg_geometry(VALUE self)
 {
     PangoGlyphGeometry geo = _SELF(self)->geometry;
 
@@ -81,7 +81,7 @@ gi_geometry(VALUE self)
 }
 
 static VALUE
-gi_set_geometry(VALUE self, VALUE width, VALUE x_offset, VALUE y_offset)
+rg_set_geometry(VALUE self, VALUE width, VALUE x_offset, VALUE y_offset)
 {
     PangoGlyphGeometry geo = _SELF(self)->geometry;
 
@@ -96,13 +96,13 @@ gi_set_geometry(VALUE self, VALUE width, VALUE x_offset, VALUE y_offset)
   This method may be changed in the future following Pango implementation.
  */
 static VALUE
-gi_attr_is_cluster_start(VALUE self)
+rg_cluster_start_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->attr.is_cluster_start);
 }
 
 static VALUE
-gi_attr_set_is_cluster_start(VALUE self, VALUE val)
+rg_set_cluster_start(VALUE self, VALUE val)
 {
     _SELF(self)->attr.is_cluster_start = RVAL2CBOOL(val);
     return self;
@@ -111,15 +111,15 @@ gi_attr_set_is_cluster_start(VALUE self, VALUE val)
 void
 Init_pango_glyph_info(void)
 {
-    VALUE pInfo = G_DEF_CLASS(PANGO_TYPE_GLYPH_INFO, "GlyphInfo", mPango);
-    
-    rb_define_method(pInfo, "initialize", gi_initialize, 0);
-    rb_define_method(pInfo, "glyph", gi_glyph, 0);
-    rb_define_method(pInfo, "set_glyph", gi_set_glyph, 1);
-    rb_define_method(pInfo, "geometry", gi_geometry, 0);
-    rb_define_method(pInfo, "set_geometry", gi_set_geometry, 3);
-    rb_define_method(pInfo, "cluster_start?", gi_attr_is_cluster_start, 0);
-    rb_define_method(pInfo, "set_cluster_start", gi_attr_set_is_cluster_start, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_INFO, "GlyphInfo", mPango);
 
-    G_DEF_SETTERS(pInfo);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(glyph, 0);
+    RG_DEF_METHOD(set_glyph, 1);
+    RG_DEF_METHOD(geometry, 0);
+    RG_DEF_METHOD(set_geometry, 3);
+    RG_DEF_METHOD_P(cluster_start, 0);
+    RG_DEF_METHOD(set_cluster_start, 1);
+
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
