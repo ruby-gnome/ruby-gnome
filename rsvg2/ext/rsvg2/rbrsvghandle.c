@@ -55,7 +55,7 @@ exec_callback(gint *width, gint *height, gpointer self)
 }
 
 static VALUE
-rb_rsvg_handle_set_dpi(VALUE self, VALUE dpi)
+rg_set_dpi(VALUE self, VALUE dpi)
 {
 #ifdef HAVE_RSVG_HANDLE_SET_DPI
     rsvg_handle_set_dpi(_SELF(self), NUM2DBL(dpi));
@@ -66,7 +66,7 @@ rb_rsvg_handle_set_dpi(VALUE self, VALUE dpi)
 }
 
 static VALUE
-rb_rsvg_handle_set_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
+rg_set_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 {
 #ifdef HAVE_RSVG_HANDLE_SET_DPI_X_Y
     rsvg_handle_set_dpi_x_y(_SELF(self), NUM2DBL(dpi_x), NUM2DBL(dpi_y));
@@ -94,7 +94,7 @@ rb_rsvg_handle_alloc(VALUE klass)
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
 static VALUE
-rb_rsvg_handle_new_from_data(VALUE self, VALUE data)
+rg_m_new_from_data(VALUE self, VALUE data)
 {
     GError *error = NULL;
     RsvgHandle *handle;
@@ -109,7 +109,7 @@ rb_rsvg_handle_new_from_data(VALUE self, VALUE data)
 }
 
 static VALUE
-rb_rsvg_handle_new_from_file(VALUE self, VALUE file)
+rg_m_new_from_file(VALUE self, VALUE file)
 {
     GError *error = NULL;
     RsvgHandle *handle;
@@ -125,7 +125,7 @@ rb_rsvg_handle_new_from_file(VALUE self, VALUE file)
 #endif
 
 static VALUE
-rb_rsvg_handle_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     RsvgHandle *handle;
     VALUE gz;
@@ -157,7 +157,7 @@ rb_rsvg_handle_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rb_rsvg_handle_set_size_callback(VALUE self)
+rg_set_size_callback(VALUE self)
 {
     rb_ivar_set(self, id_callback, rb_block_proc());
     rsvg_handle_set_size_callback(_SELF(self), exec_callback,
@@ -166,7 +166,7 @@ rb_rsvg_handle_set_size_callback(VALUE self)
 }
 
 static VALUE
-rb_rsvg_handle_write(VALUE self, VALUE buf)
+rg_write(VALUE self, VALUE buf)
 {
     gboolean result;
     GError *error = NULL;
@@ -180,7 +180,7 @@ rb_rsvg_handle_write(VALUE self, VALUE buf)
 }
 
 static VALUE
-rb_rsvg_handle_close(VALUE self)
+rg_close(VALUE self)
 {
     gboolean result;
     GError *error = NULL;
@@ -188,7 +188,7 @@ rb_rsvg_handle_close(VALUE self)
     if (RVAL2CBOOL(rb_ivar_get(self, id_closed))) {
         return Qnil;
     }
-  
+
     result = rsvg_handle_close(_SELF(self), &error);
 
     if (result) {
@@ -196,18 +196,18 @@ rb_rsvg_handle_close(VALUE self)
     } else {
         RAISE_GERROR(error);
     }
-  
+
     return CBOOL2RVAL(result);
 }
 
 static VALUE
-rb_rsvg_handle_closed(VALUE self)
+rg_closed_p(VALUE self)
 {
     return rb_ivar_get(self, id_closed);
 }
 
 static VALUE
-rb_rsvg_handle_get_pixbuf(int argc, VALUE *argv, VALUE self)
+rg_pixbuf(int argc, VALUE *argv, VALUE self)
 {
     VALUE id;
     VALUE rb_pixbuf;
@@ -234,13 +234,13 @@ rb_rsvg_handle_get_pixbuf(int argc, VALUE *argv, VALUE self)
 
 #if LIBRSVG_CHECK_VERSION(2, 9, 0)
 static VALUE
-rb_rsvg_handle_get_base_uri(VALUE self)
+rg_base_uri(VALUE self)
 {
     return CSTR2RVAL(rsvg_handle_get_base_uri(_SELF(self)));
 }
 
 static VALUE
-rb_rsvg_handle_set_base_uri(VALUE self, VALUE base_uri)
+rg_set_base_uri(VALUE self, VALUE base_uri)
 {
     rsvg_handle_set_base_uri(_SELF(self), RVAL2CSTR(base_uri));
     return self;
@@ -251,7 +251,7 @@ rb_rsvg_handle_set_base_uri(VALUE self, VALUE base_uri)
 extern VALUE rg_cDimensionData;
 
 static VALUE
-rb_rsvg_handle_get_dim(VALUE self)
+rg_dimensions(VALUE self)
 {
     RsvgDimensionData dim;
     VALUE args[4];
@@ -268,20 +268,20 @@ rb_rsvg_handle_get_dim(VALUE self)
 
 /* Accessibility API */
 static VALUE
-rb_rsvg_handle_get_title(VALUE self)
+rg_title(VALUE self)
 {
     return CSTR2RVAL(rsvg_handle_get_title(_SELF(self)));
 }
 
 static VALUE
-rb_rsvg_handle_get_desc(VALUE self)
+rg_desc(VALUE self)
 {
     return CSTR2RVAL(rsvg_handle_get_desc(_SELF(self)));
 }
 
 #ifdef HAVE_RSVG_HANDLE_GET_METADATA
 static VALUE
-rb_rsvg_handle_get_metadata(VALUE self)
+rg_metadata(VALUE self)
 {
     return CSTR2RVAL(rsvg_handle_get_metadata(_SELF(self)));
 }
@@ -290,7 +290,7 @@ rb_rsvg_handle_get_metadata(VALUE self)
 #if !LIBRSVG_CHECK_VERSION(2, 11, 0)
 /* Extended Convenience API */
 static VALUE
-rb_rsvg_pixbuf_from_file_at_size_ex(VALUE self, VALUE file_name,
+rg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
                                     VALUE width, VALUE height)
 {
     VALUE rb_pixbuf;
@@ -311,7 +311,7 @@ rb_rsvg_pixbuf_from_file_at_size_ex(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_ex(VALUE self, VALUE file_name)
+rg_pixbuf_from_file(VALUE self, VALUE file_name)
 {
     VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
@@ -329,7 +329,7 @@ rb_rsvg_pixbuf_from_file_ex(VALUE self, VALUE file_name)
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_zoom_ex(VALUE self, VALUE file_name,
+rg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
                                     VALUE x_zoom, VALUE y_zoom)
 {
     VALUE rb_pixbuf;
@@ -350,7 +350,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_ex(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_max_size_ex(VALUE self, VALUE file_name,
+rg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
                                         VALUE max_width, VALUE max_height)
 {
     VALUE rb_pixbuf;
@@ -371,7 +371,7 @@ rb_rsvg_pixbuf_from_file_at_max_size_ex(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
+rg_pixbuf_from_file_at_zoom_with_max(VALUE self,
                                              VALUE file_name,
                                              VALUE x_zoom,
                                              VALUE y_zoom,
@@ -400,7 +400,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex(VALUE self,
 
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
 static VALUE
-rb_rsvg_handle_render_cairo(int argc, VALUE *argv, VALUE self)
+rg_render_cairo(int argc, VALUE *argv, VALUE self)
 {
     VALUE cr, id;
     rb_scan_args(argc, argv, "11", &cr, &id);
@@ -431,57 +431,47 @@ Init_rsvg_handle(VALUE mRSVG)
 #endif
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "new_from_data",
-                              rb_rsvg_handle_new_from_data, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "new_from_file",
-                              rb_rsvg_handle_new_from_file, 1);
+    RG_DEF_MODFUNC(new_from_data, 1);
+    RG_DEF_MODFUNC(new_from_file, 1);
 #endif
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_rsvg_handle_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_size_callback",
-                     rb_rsvg_handle_set_size_callback, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_dpi", rb_rsvg_handle_set_dpi, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_dpi_x_y", rb_rsvg_handle_set_dpi_x_y, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "write", rb_rsvg_handle_write, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "close", rb_rsvg_handle_close, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "closed?", rb_rsvg_handle_closed, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf", rb_rsvg_handle_get_pixbuf, -1);
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(set_size_callback, 0);
+    RG_DEF_METHOD(set_dpi, 1);
+    RG_DEF_METHOD(set_dpi_x_y, 2);
+    RG_DEF_METHOD(write, 1);
+    RG_DEF_METHOD(close, 0);
+    RG_DEF_METHOD_P(closed, 0);
+    RG_DEF_METHOD(pixbuf, -1);
 
 #if LIBRSVG_CHECK_VERSION(2, 9, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "base_uri", rb_rsvg_handle_get_base_uri, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_base_uri", rb_rsvg_handle_set_base_uri, 1);
+    RG_DEF_METHOD(base_uri, 0);
+    RG_DEF_METHOD(set_base_uri, 1);
 #endif
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
-    rb_define_method(RG_TARGET_NAMESPACE, "dimensions", rb_rsvg_handle_get_dim, 0);
+    RG_DEF_METHOD(dimensions, 0);
 #endif
 
     /* Accessibility API */
-    rb_define_method(RG_TARGET_NAMESPACE, "title", rb_rsvg_handle_get_title, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "desc", rb_rsvg_handle_get_desc, 0);
+    RG_DEF_METHOD(title, 0);
+    RG_DEF_METHOD(desc, 0);
 #ifdef HAVE_RSVG_HANDLE_GET_METADATA
-    rb_define_method(RG_TARGET_NAMESPACE, "metadata", rb_rsvg_handle_get_metadata, 0);
+    RG_DEF_METHOD(metadata, 0);
 #endif
-
 
 #if !LIBRSVG_CHECK_VERSION(2, 11, 0)
     /* Extended Convenience API */
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_size",
-                     rb_rsvg_pixbuf_from_file_at_size_ex, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf_from_file",
-                     rb_rsvg_pixbuf_from_file_ex, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_zoom",
-                     rb_rsvg_pixbuf_from_file_at_zoom_ex, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_max_size",
-                     rb_rsvg_pixbuf_from_file_at_max_size_ex, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_zoom_with_max",
-                     rb_rsvg_pixbuf_from_file_at_zoom_with_max_ex, 5);
+    RG_DEF_METHOD(pixbuf_from_file_at_size, 3);
+    RG_DEF_METHOD(pixbuf_from_file, 1);
+    RG_DEF_METHOD(pixbuf_from_file_at_zoom, 3);
+    RG_DEF_METHOD(pixbuf_from_file_at_max_size, 3);
+    RG_DEF_METHOD(pixbuf_from_file_at_zoom_with_max, 5);
 #endif
 
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
-    rb_define_method(RG_TARGET_NAMESPACE, "render_cairo", rb_rsvg_handle_render_cairo, -1);
+    RG_DEF_METHOD(render_cairo, -1);
 #endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-

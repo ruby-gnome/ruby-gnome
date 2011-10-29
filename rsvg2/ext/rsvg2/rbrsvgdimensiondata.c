@@ -43,7 +43,7 @@ static void
 rb_rsvg_dim_free(RsvgDimensionData *dimp)
 {
     if (dimp) {
-	free(dimp);
+        free(dimp);
     }
 }
 
@@ -56,7 +56,7 @@ rb_rsvg_dim_alloc(VALUE klass)
 }
 
 static VALUE
-rb_rsvg_dim_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE width, height, em, ex;
     RsvgDimensionData *dimp;
@@ -77,69 +77,69 @@ rb_rsvg_dim_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rb_rsvg_dim_get_width(VALUE self)
+rg_width(VALUE self)
 {
     return INT2NUM(RVAL2DIM(self)->width);
 }
 
 static VALUE
-rb_rsvg_dim_set_width(VALUE self, VALUE width)
+rg_set_width(VALUE self, VALUE width)
 {
     RVAL2DIM(self)->width = NUM2INT(width);
     return Qnil;
 }
 
 static VALUE
-rb_rsvg_dim_get_height(VALUE self)
+rg_height(VALUE self)
 {
     return INT2NUM(RVAL2DIM(self)->height);
 }
 
 static VALUE
-rb_rsvg_dim_set_height(VALUE self, VALUE height)
+rg_set_height(VALUE self, VALUE height)
 {
     RVAL2DIM(self)->height = NUM2INT(height);
     return Qnil;
 }
 
 static VALUE
-rb_rsvg_dim_get_em(VALUE self)
+rg_em(VALUE self)
 {
     return rb_float_new(RVAL2DIM(self)->em);
 }
 
 static VALUE
-rb_rsvg_dim_set_em(VALUE self, VALUE em)
+rg_set_em(VALUE self, VALUE em)
 {
     RVAL2DIM(self)->em = NUM2DBL(em);
     return Qnil;
 }
 
 static VALUE
-rb_rsvg_dim_get_ex(VALUE self)
+rg_ex(VALUE self)
 {
     return rb_float_new(RVAL2DIM(self)->ex);
 }
 
 static VALUE
-rb_rsvg_dim_set_ex(VALUE self, VALUE ex)
+rg_set_ex(VALUE self, VALUE ex)
 {
     RVAL2DIM(self)->ex = NUM2DBL(ex);
     return Qnil;
 }
 
 static VALUE
-rb_rsvg_dim_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     return rb_ary_new3(4,
-                       rb_rsvg_dim_get_width(self),
-                       rb_rsvg_dim_get_height(self),
-                       rb_rsvg_dim_get_em(self),
-                       rb_rsvg_dim_get_ex(self));
+                       rg_width(self),
+                       rg_height(self),
+                       rg_em(self),
+                       rg_ex(self));
 }
 
 static VALUE
-rb_rsvg_dim_to_s(VALUE self)
+rg_to_s(VALUE self)
 {
     VALUE ret;
 
@@ -150,16 +150,16 @@ rb_rsvg_dim_to_s(VALUE self)
     rb_str_cat2(ret, " ");
 
     rb_str_cat2(ret, "width=");
-    rb_str_concat(ret, to_s(rb_rsvg_dim_get_width(self)));
+    rb_str_concat(ret, to_s(rg_width(self)));
     rb_str_cat2(ret, ", ");
     rb_str_cat2(ret, "height=");
-    rb_str_concat(ret, to_s(rb_rsvg_dim_get_height(self)));
+    rb_str_concat(ret, to_s(rg_height(self)));
     rb_str_cat2(ret, ", ");
     rb_str_cat2(ret, "em=");
-    rb_str_concat(ret, to_s(rb_rsvg_dim_get_em(self)));
+    rb_str_concat(ret, to_s(rg_em(self)));
     rb_str_cat2(ret, ", ");
     rb_str_cat2(ret, "ex=");
-    rb_str_concat(ret, to_s(rb_rsvg_dim_get_ex(self)));
+    rb_str_concat(ret, to_s(rg_ex(self)));
     rb_str_cat2(ret, ">");
 
     return ret;
@@ -176,22 +176,21 @@ Init_rsvg_dimensiondata(VALUE mRSVG)
     RG_TARGET_NAMESPACE = rb_define_class_under(mRSVG, "DimensionData", rb_cObject);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rb_rsvg_dim_alloc);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rb_rsvg_dim_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "width", rb_rsvg_dim_get_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_width", rb_rsvg_dim_set_width, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "height", rb_rsvg_dim_get_height, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_height", rb_rsvg_dim_set_height, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "em", rb_rsvg_dim_get_em, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_em", rb_rsvg_dim_set_em, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "ex", rb_rsvg_dim_get_ex, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_ex", rb_rsvg_dim_set_ex, 1);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(set_width, 1);
+    RG_DEF_METHOD(height, 0);
+    RG_DEF_METHOD(set_height, 1);
+    RG_DEF_METHOD(em, 0);
+    RG_DEF_METHOD(set_em, 1);
+    RG_DEF_METHOD(ex, 0);
+    RG_DEF_METHOD(set_ex, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "to_s", rb_rsvg_dim_to_s, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_a", rb_rsvg_dim_to_a, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "to_ary", "to_a");
+    RG_DEF_METHOD(to_s, 0);
+    RG_DEF_METHOD(to_a, 0);
+    RG_DEF_ALIAS("to_ary", "to_a");
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
-

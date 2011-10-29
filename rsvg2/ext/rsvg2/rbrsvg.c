@@ -31,7 +31,7 @@
 void Init_rsvg2(void);
 
 static VALUE
-rb_rsvg_set_default_dpi(VALUE self, VALUE dpi)
+rg_m_set_default_dpi(VALUE self, VALUE dpi)
 {
 #ifdef HAVE_RSVG_SET_DEFAULT_DPI
     rsvg_set_default_dpi(NUM2DBL(dpi));
@@ -42,7 +42,7 @@ rb_rsvg_set_default_dpi(VALUE self, VALUE dpi)
 }
 
 static VALUE
-rb_rsvg_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
+rg_m_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 {
 #ifdef HAVE_RSVG_SET_DEFAULT_DPI_X_Y
     rsvg_set_default_dpi_x_y(NUM2DBL(dpi_x), NUM2DBL(dpi_y));
@@ -54,7 +54,7 @@ rb_rsvg_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 
 /* Convenience API */
 static VALUE
-rb_rsvg_pixbuf_from_file(VALUE self, VALUE file_name)
+rg_m_pixbuf_from_file(VALUE self, VALUE file_name)
 {
     VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
@@ -70,7 +70,7 @@ rb_rsvg_pixbuf_from_file(VALUE self, VALUE file_name)
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
+rg_m_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
                                  VALUE x_zoom, VALUE y_zoom)
 {
     VALUE rb_pixbuf;
@@ -90,7 +90,7 @@ rb_rsvg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
+rg_m_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
                                  VALUE width, VALUE height)
 {
     VALUE rb_pixbuf;
@@ -110,7 +110,7 @@ rb_rsvg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
+rg_m_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
                                      VALUE max_width, VALUE max_height)
 {
     VALUE rb_pixbuf;
@@ -130,7 +130,7 @@ rb_rsvg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rb_rsvg_pixbuf_from_file_at_zoom_with_max(VALUE self,
+rg_m_pixbuf_from_file_at_zoom_with_max(VALUE self,
                                           VALUE file_name,
                                           VALUE x_zoom,
                                           VALUE y_zoom,
@@ -156,7 +156,7 @@ rb_rsvg_pixbuf_from_file_at_zoom_with_max(VALUE self,
 }
 
 static VALUE
-rb_rsvg_cairo_available(VALUE self)
+rg_s_cairo_available_p(VALUE self)
 {
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     return Qtrue;
@@ -189,26 +189,17 @@ Init_rsvg2(void)
                                 INT2FIX(LIBRSVG_MINOR_VERSION),
                                 INT2FIX(LIBRSVG_MICRO_VERSION)));
 
-
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_default_dpi",
-                              rb_rsvg_set_default_dpi, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_default_dpi_x_y",
-                              rb_rsvg_set_default_dpi_x_y, 2);
+    RG_DEF_MODFUNC(set_default_dpi, 1);
+    RG_DEF_MODFUNC(set_default_dpi_x_y, 2);
 
     /* Convenience API */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file",
-                              rb_rsvg_pixbuf_from_file, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_zoom",
-                              rb_rsvg_pixbuf_from_file_at_zoom, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_size",
-                              rb_rsvg_pixbuf_from_file_at_size, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_max_size",
-                              rb_rsvg_pixbuf_from_file_at_max_size, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "pixbuf_from_file_at_zoom_with_max",
-                              rb_rsvg_pixbuf_from_file_at_zoom_with_max, 5);
+    RG_DEF_MODFUNC(pixbuf_from_file, 1);
+    RG_DEF_MODFUNC(pixbuf_from_file_at_zoom, 3);
+    RG_DEF_MODFUNC(pixbuf_from_file_at_size, 3);
+    RG_DEF_MODFUNC(pixbuf_from_file_at_max_size, 3);
+    RG_DEF_MODFUNC(pixbuf_from_file_at_zoom_with_max, 5);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "cairo_available?",
-                               rb_rsvg_cairo_available, 0);
+    RG_DEF_SMETHOD_P(cairo_available, 0);
 
     Init_rsvg_handle(RG_TARGET_NAMESPACE);
     Init_rsvg_dimensiondata(RG_TARGET_NAMESPACE);
