@@ -60,7 +60,7 @@ rg_faces(VALUE self)
 }
 
 void
-Init_pango_font_family(void)
+Init_pango_font_family(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_FAMILY, "FontFamily", mPango);
 

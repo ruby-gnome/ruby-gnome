@@ -59,7 +59,7 @@ rg_each(VALUE self)
 #endif
 
 void
-Init_pango_fontset(void)
+Init_pango_fontset(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONTSET, "Fontset", mPango);
 

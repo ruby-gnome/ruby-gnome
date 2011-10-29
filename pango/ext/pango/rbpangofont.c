@@ -97,7 +97,7 @@ rg_font_map(VALUE self)
 #endif
 
 void
-Init_pango_font(void)
+Init_pango_font(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT, "Font", mPango);
 

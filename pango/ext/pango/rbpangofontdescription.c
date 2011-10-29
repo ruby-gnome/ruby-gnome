@@ -230,7 +230,7 @@ rg_to_filename(VALUE self)
 }
 
 void
-Init_pango_font_description(void)
+Init_pango_font_description(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_DESCRIPTION, "FontDescription", mPango);
 

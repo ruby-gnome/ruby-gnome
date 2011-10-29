@@ -96,7 +96,7 @@ item_set_analysis(VALUE self, VALUE val)
 }
 
 void
-Init_pango_item(void)
+Init_pango_item(VALUE mPango)
 {
     VALUE pItem = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
     

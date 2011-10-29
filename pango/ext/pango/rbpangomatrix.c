@@ -123,7 +123,7 @@ matrix_to_a(VALUE self)
 #endif
 
 void
-Init_pango_matrix(void)
+Init_pango_matrix(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,6,0)
     VALUE matrix = G_DEF_CLASS(PANGO_TYPE_MATRIX, "Matrix", mPango);

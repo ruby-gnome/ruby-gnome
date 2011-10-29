@@ -71,7 +71,7 @@ rg_strikethrough_position(VALUE self)
 }
 #endif
 void
-Init_pango_font_metrics(void)
+Init_pango_font_metrics(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_METRICS, "FontMetrics", mPango);
 

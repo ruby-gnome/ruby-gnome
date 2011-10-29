@@ -244,7 +244,7 @@ rg_set_resolved_dir(VALUE self, VALUE val)
 #endif
 
 void
-Init_pango_layout_line(void)
+Init_pango_layout_line(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT_LINE, "LayoutLine", mPango);
 
