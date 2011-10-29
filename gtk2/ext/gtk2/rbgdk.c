@@ -24,7 +24,9 @@
 
 #include "global.h"
 
-VALUE mGdk;
+#define RG_TARGET_NAMESPACE mGdk
+
+VALUE RG_TARGET_NAMESPACE;
 
 /* We don't need them.
 void        gdk_init                        (gint *argc,
@@ -457,52 +459,64 @@ gdk_m_target(G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL(RUBY_GTK2_TARGET);
 }
 
+static VALUE
+cairo_available_p(G_GNUC_UNUSED VALUE self)
+{
+#if CAIRO_AVAILABLE
+    return Qtrue;
+#else
+    return Qfalse;
+#endif
+}
+
 void
 Init_gtk_gdk(void)
 {
-    mGdk = rb_define_module("Gdk");
+    RG_TARGET_NAMESPACE = rb_define_module("Gdk");
 
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_module_function(mGdk, "display_arg_name", gdk_s_get_display_arg_name, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "display_arg_name", gdk_s_get_display_arg_name, 0);
 #endif
-    rb_define_module_function(mGdk, "set_locale", gdk_s_set_locale, 0);
-    rb_define_module_function(mGdk, "set_sm_client_id", gdk_s_set_sm_client_id, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_locale", gdk_s_set_locale, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_sm_client_id", gdk_s_set_sm_client_id, 1);
 #if GTK_CHECK_VERSION(2, 2, 0)
-    rb_define_module_function(mGdk, "notify_startup_complete",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "notify_startup_complete",
 			      gdk_s_notify_startup_complete, -1);
 #endif
-    rb_define_module_function(mGdk, "program_class", gdk_s_get_program_class, 0);
-    rb_define_module_function(mGdk, "set_program_class", gdk_s_set_program_class, 1);
-    rb_define_module_function(mGdk, "display", gdk_s_get_display, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "program_class", gdk_s_get_program_class, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_program_class", gdk_s_set_program_class, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "display", gdk_s_get_display, 0);
 
-    rb_define_module_function(mGdk, "set_x_error_handler", gdk_s_set_x_error_handler , 0);
-    rb_define_module_function(mGdk, "set_x_io_error_handler", gdk_s_set_x_io_error_handler , 0);
-    rb_define_module_function(mGdk, "screen_width", gdk_s_screen_width, 0);
-    rb_define_module_function(mGdk, "screen_width_mm", gdk_s_screen_width_mm, 0);
-    rb_define_module_function(mGdk, "screen_height", gdk_s_screen_height, 0);
-    rb_define_module_function(mGdk, "screen_height_mm", gdk_s_screen_height_mm, 0);
-    rb_define_module_function(mGdk, "beep", gdk_s_beep, 0);
-    rb_define_module_function(mGdk, "flush", gdk_s_flush, 0);
-    rb_define_module_function(mGdk, "set_double_click_time", gdk_s_set_double_click_time, 1);
-    rb_define_module_function(mGdk, "pointer_grab", gdk_s_pointer_grab, 6);
-    rb_define_module_function(mGdk, "pointer_ungrab", gdk_s_pointer_ungrab, 1);
-    rb_define_module_function(mGdk, "keyboard_grab", gdk_s_keyboard_grab, 3);
-    rb_define_module_function(mGdk, "keyboard_ungrab", gdk_s_keyboard_ungrab, 1);
-    rb_define_module_function(mGdk, "pointer_is_grabbed?", gdk_s_pointer_is_grabbed, 0);
-    rb_define_module_function(mGdk, "error_trap_push", gdk_s_error_trap_push, 0);
-    rb_define_module_function(mGdk, "error_trap_pop", gdk_s_error_trap_pop, 0);
-    rb_define_module_function(mGdk, "windowing_x11?", gdk_s_windowing_x11, 0);
-    rb_define_module_function(mGdk, "windowing_win32?", gdk_s_windowing_win32, 0);
-    rb_define_module_function(mGdk, "windowing_fb?", gdk_s_windowing_fb, 0);
-    rb_define_module_function(mGdk, "windowing_quartz?", gdk_s_windowing_quartz, 0);
-    rb_define_module_function(mGdk, "windowing_directfb?", gdk_s_windowing_directfb, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_x_error_handler", gdk_s_set_x_error_handler , 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_x_io_error_handler", gdk_s_set_x_io_error_handler , 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "screen_width", gdk_s_screen_width, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "screen_width_mm", gdk_s_screen_width_mm, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "screen_height", gdk_s_screen_height, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "screen_height_mm", gdk_s_screen_height_mm, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "beep", gdk_s_beep, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "flush", gdk_s_flush, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_double_click_time", gdk_s_set_double_click_time, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pointer_grab", gdk_s_pointer_grab, 6);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pointer_ungrab", gdk_s_pointer_ungrab, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "keyboard_grab", gdk_s_keyboard_grab, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "keyboard_ungrab", gdk_s_keyboard_ungrab, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "pointer_is_grabbed?", gdk_s_pointer_is_grabbed, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "error_trap_push", gdk_s_error_trap_push, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "error_trap_pop", gdk_s_error_trap_pop, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "windowing_x11?", gdk_s_windowing_x11, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "windowing_win32?", gdk_s_windowing_win32, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "windowing_fb?", gdk_s_windowing_fb, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "windowing_quartz?", gdk_s_windowing_quartz, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "windowing_directfb?", gdk_s_windowing_directfb, 0);
 
-    rb_define_module_function(mGdk, "target", gdk_m_target, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "target", gdk_m_target, 0);
+
+    rb_define_module_function(RG_TARGET_NAMESPACE, "cairo_available?", cairo_available_p, 0);
     
     /* GdkGrabStatus */
-    G_DEF_CLASS(GDK_TYPE_GRAB_STATUS, "GrabStatus", mGdk);
-    G_DEF_CONSTANTS(mGdk, GDK_TYPE_GRAB_STATUS, "GDK_");
+    G_DEF_CLASS(GDK_TYPE_GRAB_STATUS, "GrabStatus", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_GRAB_STATUS, "GDK_");
 
-    G_DEF_SETTERS(mGdk);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 

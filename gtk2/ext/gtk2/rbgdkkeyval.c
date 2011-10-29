@@ -25,6 +25,8 @@
 #include "global.h"
 #include <gdk/gdkkeysyms.h>
 
+#define RG_TARGET_NAMESPACE mGdkKeyval
+
 static VALUE
 keyval_to_name(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
@@ -91,16 +93,16 @@ unicode_to_keyval(G_GNUC_UNUSED VALUE self, VALUE wc)
 void
 Init_gtk_gdk_keyval(void)
 {
-    VALUE mGdkKeyval = rb_define_module_under(mGdk, "Keyval");
-    rb_define_module_function(mGdkKeyval, "to_name", keyval_to_name, 1);
-    rb_define_module_function(mGdkKeyval, "from_name", keyval_from_name, 1);
-    rb_define_module_function(mGdkKeyval, "upper?", keyval_is_upper, 1);
-    rb_define_module_function(mGdkKeyval, "lower?", keyval_is_lower, 1);
-    rb_define_module_function(mGdkKeyval, "convert_case", keyval_convert_case, 1);
-    rb_define_module_function(mGdkKeyval, "to_upper", keyval_to_upper, 1);
-    rb_define_module_function(mGdkKeyval, "to_lower", keyval_to_lower, 1);
-    rb_define_module_function(mGdkKeyval, "to_unicode", keyval_to_unicode, 1);
-    rb_define_module_function(mGdkKeyval, "from_unicode", unicode_to_keyval, 1);
+    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Keyval");
+    rb_define_module_function(RG_TARGET_NAMESPACE, "to_name", keyval_to_name, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "from_name", keyval_from_name, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "upper?", keyval_is_upper, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "lower?", keyval_is_lower, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "convert_case", keyval_convert_case, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "to_upper", keyval_to_upper, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "to_lower", keyval_to_lower, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "to_unicode", keyval_to_unicode, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "from_unicode", unicode_to_keyval, 1);
 
 #include "rbgdkkeysyms.h"
 }

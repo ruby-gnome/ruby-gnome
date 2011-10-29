@@ -25,6 +25,8 @@
 #include "global.h"
 #include <locale.h>
 
+#define RG_TARGET_NAMESPACE mGtk
+
 static VALUE rbgtk_eGtkInitError;
 
 static ID id__quit_callbacks__, id__timeout_callbacks__;
@@ -46,7 +48,7 @@ gtk_m_function_body(VALUE data)
     VALUE ret = rb_funcall(info->callback, id_call, 0);
 
     if (info->key && !ret)
-        G_REMOVE_RELATIVE(mGtk, info->key, UINT2NUM(info->id));
+        G_REMOVE_RELATIVE(RG_TARGET_NAMESPACE, info->key, UINT2NUM(info->id));
     return ret;
 }
 
@@ -464,41 +466,41 @@ Init_gtk_main(void)
     id__idle_callbacks__ = rb_intern("__idle_callbacks__");
     id__snooper_callbacks__ = rb_intern("__snooper_callbacks__");
 
-    rbgtk_eGtkInitError = rb_define_class_under(mGtk, "InitError",
+    rbgtk_eGtkInitError = rb_define_class_under(RG_TARGET_NAMESPACE, "InitError",
                                                 rb_eRuntimeError);
 
-    rb_define_module_function(mGtk, "set_locale", gtk_m_set_locale, 0);
-    rb_define_module_function(mGtk, "disable_setlocale", gtk_m_disable_setlocale, 0);
-    rb_define_module_function(mGtk, "default_language", gtk_m_get_default_language, 0);
-    rb_define_module_function(mGtk, "init", gtk_m_init, -1);
-    rb_define_module_function(mGtk, "main", gtk_m_main, 0);
-    rb_define_module_function(mGtk, "main_level", gtk_m_main_level, 0);
-    rb_define_module_function(mGtk, "main_quit", gtk_m_main_quit, 0);
-    rb_define_module_function(mGtk, "main_iteration", gtk_m_main_iteration, 0);
-    rb_define_module_function(mGtk, "main_iteration_do", gtk_m_main_iteration_do, 1);
-    rb_define_module_function(mGtk, "main_do_event", gtk_m_main_do_event, 1);
-    rb_define_module_function(mGtk, "grab_add", gtk_m_grab_add, 1);
-    rb_define_module_function(mGtk, "current", gtk_m_get_current, 0);
-    rb_define_module_function(mGtk, "grab_remove", gtk_m_grab_remove, 1);
-    rb_define_module_function(mGtk, "init_add", gtk_m_init_add, 0);
-    rb_define_module_function(mGtk, "quit_add", gtk_m_quit_add, 1);
-    rb_define_module_function(mGtk, "quit_remove", gtk_m_quit_remove, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_locale", gtk_m_set_locale, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "disable_setlocale", gtk_m_disable_setlocale, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "default_language", gtk_m_get_default_language, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "init", gtk_m_init, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "main", gtk_m_main, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "main_level", gtk_m_main_level, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "main_quit", gtk_m_main_quit, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "main_iteration", gtk_m_main_iteration, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "main_iteration_do", gtk_m_main_iteration_do, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "main_do_event", gtk_m_main_do_event, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "grab_add", gtk_m_grab_add, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "current", gtk_m_get_current, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "grab_remove", gtk_m_grab_remove, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "init_add", gtk_m_init_add, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "quit_add", gtk_m_quit_add, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "quit_remove", gtk_m_quit_remove, 1);
 
-    rb_define_module_function(mGtk, "timeout_add", timeout_add, 1);
-    rb_define_module_function(mGtk, "timeout_remove", timeout_remove, 1);
-    rb_define_module_function(mGtk, "idle_add", idle_add, 0);
-    rb_define_module_function(mGtk, "idle_add_priority", idle_add_priority, 1);
-    rb_define_module_function(mGtk, "idle_remove", idle_remove, 1);
-    rb_define_module_function(mGtk, "key_snooper_install", gtk_m_key_snooper_install, 0);
-    rb_define_module_function(mGtk, "key_snooper_remove", gtk_m_key_snooper_remove, 1);
-    rb_define_module_function(mGtk, "current_event", gtk_m_get_current_event, 0);
-    rb_define_module_function(mGtk, "current_event_time", gtk_m_get_current_event_time, 0);
-    rb_define_module_function(mGtk, "current_event_state", gtk_m_get_current_event_state, 0);
-    rb_define_module_function(mGtk, "get_event_widget", gtk_m_get_event_widget, -1);
-    rb_define_module_function(mGtk, "propagate_event", gtk_m_propagate_event, 2);
-    rb_define_module_function(mGtk, "check_version", gtk_m_check_version, 3);
-    rb_define_module_function(mGtk, "check_version?", gtk_m_check_version_q, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "timeout_add", timeout_add, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "timeout_remove", timeout_remove, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "idle_add", idle_add, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "idle_add_priority", idle_add_priority, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "idle_remove", idle_remove, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "key_snooper_install", gtk_m_key_snooper_install, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "key_snooper_remove", gtk_m_key_snooper_remove, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "current_event", gtk_m_get_current_event, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "current_event_time", gtk_m_get_current_event_time, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "current_event_state", gtk_m_get_current_event_state, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_event_widget", gtk_m_get_event_widget, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "propagate_event", gtk_m_propagate_event, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version", gtk_m_check_version, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version?", gtk_m_check_version_q, 3);
 
-    rb_define_const(mGtk, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 
 }

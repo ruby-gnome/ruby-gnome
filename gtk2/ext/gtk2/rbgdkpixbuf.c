@@ -21,6 +21,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cPixbuf
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
 static VALUE
@@ -162,12 +163,12 @@ Init_gtk_gdk_pixbuf(void)
     /*
      *  This defines Gdk::Pixbuf methods of GDK side.
      */
-    VALUE gdkPixbuf = GTYPE2CLASS(GDK_TYPE_PIXBUF);
+    VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
-    rb_define_method(gdkPixbuf, "render_threshold_alpha", pixbuf_render_threshold_alpha, 8);
-    rb_define_method(gdkPixbuf, "render_to_drawable", pixbuf_render_to_drawable, -1);
-    rb_define_method(gdkPixbuf, "render_pixmap_and_mask", pixbuf_render_pixmap_and_mask, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_threshold_alpha", pixbuf_render_threshold_alpha, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_to_drawable", pixbuf_render_to_drawable, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_pixmap_and_mask", pixbuf_render_pixmap_and_mask, -1);
 
-    rb_define_singleton_method(gdkPixbuf, "from_drawable", pixbuf_s_from_drawable, -1);
-    rb_define_singleton_method(gdkPixbuf, "from_image", pixbuf_s_from_image, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_drawable", pixbuf_s_from_drawable, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "from_image", pixbuf_s_from_image, -1);
 }

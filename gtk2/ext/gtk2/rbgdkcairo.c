@@ -21,16 +21,11 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,8,0) && defined(HAVE_RB_CAIRO_H)
-#  define CAIRO_AVAILABLE 1
-#else
-#  define CAIRO_AVAILABLE 0
-#endif
-
 #if CAIRO_AVAILABLE
 #include <gdk/gdkcairo.h>
 #include <rb_cairo.h>
 
+#define RG_TARGET_NAMESPACE rb_cCairo_Context
 #define _SELF(self) RVAL2CRCONTEXT(self)
 
 static VALUE
@@ -85,33 +80,21 @@ gdkdraw_cairo_region(VALUE self, VALUE region)
 }
 #endif
 
-static VALUE
-cairo_available_p(G_GNUC_UNUSED VALUE self)
-{
-#if CAIRO_AVAILABLE
-    return Qtrue;
-#else
-    return Qfalse;
-#endif
-}
-
 void
 Init_gtk_gdk_cairo(void)
 {
 #if CAIRO_AVAILABLE
-    rb_define_method(rb_cCairo_Context, "set_source_gdk_color",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_source_gdk_color",
                      gdkdraw_cairo_set_source_color, 1);
-    rb_define_method(rb_cCairo_Context, "set_source_pixbuf",
+    rb_define_method(RG_TARGET_NAMESPACE, "set_source_pixbuf",
                      gdkdraw_cairo_set_source_pixbuf, -1);
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(rb_cCairo_Context, "set_source_pixmap", gdkdraw_cairo_set_source_pixmap, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_source_pixmap", gdkdraw_cairo_set_source_pixmap, 3);
 #endif
-    rb_define_method(rb_cCairo_Context, "gdk_rectangle", gdkdraw_cairo_rectangle, 1);
-    rb_define_method(rb_cCairo_Context, "gdk_region", gdkdraw_cairo_region, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "gdk_rectangle", gdkdraw_cairo_rectangle, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "gdk_region", gdkdraw_cairo_region, 1);
 
-    G_DEF_SETTERS(rb_cCairo_Context);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
-
-    rb_define_module_function(mGdk, "cairo_available?", cairo_available_p, 0);
 }
 

@@ -27,7 +27,9 @@
 # include <sys/time.h>
 #endif
 
-VALUE mGtk;
+#define RG_TARGET_NAMESPACE mGtk
+
+VALUE RG_TARGET_NAMESPACE;
 
 ID id_relative_callbacks;
 ID id_call;
@@ -94,9 +96,9 @@ Init_gtk_gtk(void)
     id_call = rb_intern("call");
     id__windows__ = rb_intern("__windows__");
 
-    mGtk = rb_define_module("Gtk");
-    rb_ivar_set(mGtk, id_relative_callbacks, Qnil);
+    RG_TARGET_NAMESPACE = rb_define_module("Gtk");
+    rb_ivar_set(RG_TARGET_NAMESPACE, id_relative_callbacks, Qnil);
 
-    rb_define_module_function(mGtk, "events_pending?", gtk_m_events_pending, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "events_pending?", gtk_m_events_pending, 0);
 
 }

@@ -24,9 +24,10 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE rb_cGdkColor
 #define _SELF(c) (RVAL2GDKCOLOR(c))
 
-VALUE rb_cGdkColor = Qnil;
+VALUE RG_TARGET_NAMESPACE = Qnil;
 
 static VALUE
 gdkcolor_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
@@ -123,23 +124,23 @@ gdkcolor_to_string(VALUE self)
 void
 Init_gtk_gdk_color(void)
 {
-    rb_cGdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
-    rb_define_singleton_method(rb_cGdkColor, "parse", gdkcolor_s_parse, 1);
-    rb_define_method(rb_cGdkColor, "initialize", gdkcolor_initialize, 3);
-    rb_define_method(rb_cGdkColor, "pixel", gdkcolor_pixel, 0);
-    rb_define_method(rb_cGdkColor, "red", gdkcolor_red, 0);
-    rb_define_method(rb_cGdkColor, "set_red", gdkcolor_set_red, 1);
-    rb_define_method(rb_cGdkColor, "green", gdkcolor_green, 0);
-    rb_define_method(rb_cGdkColor, "set_green", gdkcolor_set_green, 1);
-    rb_define_method(rb_cGdkColor, "blue", gdkcolor_blue, 0);
-    rb_define_method(rb_cGdkColor, "set_blue", gdkcolor_set_blue, 1);
-    rb_define_method(rb_cGdkColor, "to_a", gdkcolor_to_a, 0);
-    rb_define_method(rb_cGdkColor, "==", gdkcolor_equal, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "parse", gdkcolor_s_parse, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gdkcolor_initialize, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixel", gdkcolor_pixel, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "red", gdkcolor_red, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_red", gdkcolor_set_red, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "green", gdkcolor_green, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_green", gdkcolor_set_green, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "blue", gdkcolor_blue, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_blue", gdkcolor_set_blue, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", gdkcolor_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", gdkcolor_equal, 1);
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(rb_cGdkColor, "to_s", gdkcolor_to_string, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_s", gdkcolor_to_string, 0);
 #endif
 
-    G_DEF_SETTERS(rb_cGdkColor);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 
