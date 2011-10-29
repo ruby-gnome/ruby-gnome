@@ -32,14 +32,14 @@ VALUE RG_TARGET_NAMESPACE;
 static ID id_valid;
 
 static VALUE
-font_info_initialize(VALUE self, VALUE document)
+rg_initialize(VALUE self, VALUE document)
 {
     G_INITIALIZE(self, poppler_font_info_new(RVAL2GOBJ(document)));
     return Qnil;
 }
 
 static VALUE
-font_info_scan(VALUE self, VALUE n_pages)
+rg_scan(VALUE self, VALUE n_pages)
 {
     VALUE rb_iter = Qnil;
     PopplerFontsIter *iter;
@@ -61,9 +61,8 @@ Init_poppler_fontinfo(VALUE mPoppler)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FONT_INFO, "FontInfo", mPoppler);
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", font_info_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "scan", font_info_scan, 1);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(scan, 1);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
-

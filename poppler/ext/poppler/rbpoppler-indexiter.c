@@ -32,18 +32,18 @@ static ID id_valid;
 
 /* Interface for getting the Index of a poppler_document */
 #define CHECK_IITER_IS_VALID(iter) do {         \
-    if (!RVAL2CBOOL(index_iter_valid_p(iter)))       \
+    if (!RVAL2CBOOL(rg_valid_p(iter)))       \
         return Qnil;                            \
 } while (0)
 
 static VALUE
-index_iter_valid_p(VALUE self)
+rg_valid_p(VALUE self)
 {
     return rb_ivar_get(self, id_valid);
 }
 
 static VALUE
-index_iter_initialize(VALUE self, VALUE document)
+rg_initialize(VALUE self, VALUE document)
 {
     PopplerIndexIter *iter;
     iter = poppler_index_iter_new(RVAL2GOBJ(document));
@@ -54,7 +54,7 @@ index_iter_initialize(VALUE self, VALUE document)
 }
 
 static VALUE
-index_iter_get_child(VALUE self)
+rg_child(VALUE self)
 {
     PopplerIndexIter *child;
     VALUE rb_child;
@@ -67,7 +67,7 @@ index_iter_get_child(VALUE self)
 }
 
 static VALUE
-index_iter_is_open(VALUE self)
+rg_open_p(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
     return CBOOL2RVAL(poppler_index_iter_is_open(RVAL2IITER(self)));
@@ -75,7 +75,7 @@ index_iter_is_open(VALUE self)
 
 #ifndef HAVE_TYPE_POPPLERACTIONANY
 static VALUE
-index_iter_get_action(VALUE self)
+rg_action(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
     return POPPLER_ACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
@@ -83,7 +83,7 @@ index_iter_get_action(VALUE self)
 #endif
 
 static VALUE
-index_iter_next(VALUE self)
+rg_next(VALUE self)
 {
     if (poppler_index_iter_next(RVAL2IITER(self))) {
         return Qtrue;
@@ -94,7 +94,7 @@ index_iter_next(VALUE self)
 }
 
 static VALUE
-index_iter_each(VALUE self)
+rg_each(VALUE self)
 {
     PopplerIndexIter *iter;
 
@@ -118,17 +118,16 @@ Init_poppler_indexiter(VALUE mPoppler)
 /* Interface for getting the Index of a poppler_document */
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", index_iter_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "child", index_iter_get_child, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "open?", index_iter_is_open, 0);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(child, 0);
+    RG_DEF_METHOD_P(open, 0);
 #ifndef HAVE_TYPE_POPPLERACTIONANY
-    rb_define_method(RG_TARGET_NAMESPACE, "action", index_iter_get_action, 0);
+    RG_DEF_METHOD(action, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "next", index_iter_next, 0);
+    RG_DEF_METHOD(next, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "valid?", index_iter_valid_p, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "each", index_iter_each, 0);
+    RG_DEF_METHOD_P(valid, 0);
+    RG_DEF_METHOD(each, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-

@@ -26,41 +26,41 @@
 #define RVAL2FITER(obj) (RVAL2BOXED(obj, POPPLER_TYPE_FONTS_ITER))
 
 #define CHECK_FITER_IS_VALID(iter) do {         \
-    if (!RVAL2CBOOL(fonts_iter_valid_p(iter)))       \
+    if (!RVAL2CBOOL(rg_valid_p(iter)))       \
         return Qnil;                            \
 } while (0)
 
 static ID id_valid;
 
 static VALUE
-fonts_iter_valid_p(VALUE self)
+rg_valid_p(VALUE self)
 {
     return rb_ivar_get(self, id_valid);
 }
 
 static VALUE
-fonts_iter_get_name(VALUE self)
+rg_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CSTR2RVAL(poppler_fonts_iter_get_name(RVAL2FITER(self)));
 }
 
 static VALUE
-fonts_iter_get_full_name(VALUE self)
+rg_full_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CSTR2RVAL(poppler_fonts_iter_get_full_name(RVAL2FITER(self)));
 }
 
 static VALUE
-fonts_iter_get_file_name(VALUE self)
+rg_file_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CSTR2RVAL(poppler_fonts_iter_get_file_name(RVAL2FITER(self)));
 }
 
 static VALUE
-fonts_iter_get_font_type(VALUE self)
+rg_font_type(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return GENUM2RVAL(poppler_fonts_iter_get_font_type(RVAL2FITER(self)),
@@ -68,21 +68,21 @@ fonts_iter_get_font_type(VALUE self)
 }
 
 static VALUE
-fonts_iter_is_embedded(VALUE self)
+rg_embedded_p(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CBOOL2RVAL(poppler_fonts_iter_is_embedded(RVAL2FITER(self)));
 }
 
 static VALUE
-fonts_iter_is_subset(VALUE self)
+rg_subset_p(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
     return CBOOL2RVAL(poppler_fonts_iter_is_subset(RVAL2FITER(self)));
 }
 
 static VALUE
-fonts_iter_next(VALUE self)
+rg_next(VALUE self)
 {
     if (poppler_fonts_iter_next(RVAL2FITER(self))) {
         return Qtrue;
@@ -93,7 +93,7 @@ fonts_iter_next(VALUE self)
 }
 
 static VALUE
-fonts_iter_each(VALUE self)
+rg_each(VALUE self)
 {
     PopplerFontsIter *iter;
 
@@ -116,19 +116,18 @@ Init_poppler_fontsiter(VALUE mPoppler)
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "name", fonts_iter_get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "full_name", fonts_iter_get_full_name, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(full_name, 0);
 #if POPPLER_CHECK_VERSION(0, 6, 0)
-    rb_define_method(RG_TARGET_NAMESPACE, "file_name", fonts_iter_get_file_name, 0);
+    RG_DEF_METHOD(file_name, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "font_type", fonts_iter_get_font_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "embedded?", fonts_iter_is_embedded, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "subset?", fonts_iter_is_subset, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "next", fonts_iter_next, 0);
+    RG_DEF_METHOD(font_type, 0);
+    RG_DEF_METHOD_P(embedded, 0);
+    RG_DEF_METHOD_P(subset, 0);
+    RG_DEF_METHOD(next, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "valid?", fonts_iter_valid_p, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "each", fonts_iter_each, 0);
+    RG_DEF_METHOD_P(valid, 0);
+    RG_DEF_METHOD(each, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-

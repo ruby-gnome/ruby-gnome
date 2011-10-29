@@ -29,19 +29,19 @@
 VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-button_field_get_button_type(VALUE self)
+rg_type(VALUE self)
 {
     return FBT2RVAL(poppler_form_field_button_get_button_type(_SELF(self)));
 }
 
 static VALUE
-button_field_get_state(VALUE self)
+rg_active_p(VALUE self)
 {
     return CBOOL2RVAL(poppler_form_field_button_get_state(_SELF(self)));
 }
 
 static VALUE
-button_field_set_state(VALUE self, VALUE state)
+rg_set_active(VALUE self, VALUE state)
 {
     poppler_form_field_button_set_state(_SELF(self), RVAL2CBOOL(state));
     return Qnil;
@@ -52,10 +52,9 @@ Init_poppler_button_field(VALUE mPoppler, VALUE cFormField)
 {
     RG_TARGET_NAMESPACE = rb_define_class_under(mPoppler, "ButtonField", cFormField);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "type", button_field_get_button_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "active?", button_field_get_state, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_active", button_field_set_state, 1);
+    RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD_P(active, 0);
+    RG_DEF_METHOD(set_active, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-

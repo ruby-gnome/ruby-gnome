@@ -25,7 +25,7 @@
 
 /* Export to ps */
 static VALUE
-ps_file_initialize(VALUE self, VALUE document, VALUE filename,
+rg_initialize(VALUE self, VALUE document, VALUE filename,
                    VALUE first_page, VALUE n_pages)
 {
     PopplerPSFile *ps_file;
@@ -41,7 +41,7 @@ ps_file_initialize(VALUE self, VALUE document, VALUE filename,
 }
 
 static VALUE
-ps_file_set_paper_size(VALUE self, VALUE width, VALUE height)
+rg_set_paper_size(VALUE self, VALUE width, VALUE height)
 {
     poppler_ps_file_set_paper_size(RVAL2GOBJ(self),
                                    NUM2DBL(width), NUM2DBL(height));
@@ -49,7 +49,7 @@ ps_file_set_paper_size(VALUE self, VALUE width, VALUE height)
 }
 
 static VALUE
-ps_file_set_duplex(VALUE self, VALUE duplex)
+rg_set_duplex(VALUE self, VALUE duplex)
 {
     poppler_ps_file_set_duplex(RVAL2GOBJ(self), RVAL2CBOOL(duplex));
     return Qnil;
@@ -61,10 +61,9 @@ Init_poppler_psfile(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_PS_FILE, "PSFile", mPoppler);
 
 /* Export to ps */
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", ps_file_initialize, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_paper_size", ps_file_set_paper_size, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_duplex", ps_file_set_duplex, 1);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(set_paper_size, 2);
+    RG_DEF_METHOD(set_duplex, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-
