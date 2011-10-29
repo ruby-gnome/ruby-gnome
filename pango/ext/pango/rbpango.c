@@ -255,7 +255,7 @@ rg_m_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 }
 
 static VALUE
-cairo_available_p(G_GNUC_UNUSED VALUE self)
+rg_m_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef CAIRO_AVAILABLE
     return Qtrue;
@@ -290,7 +290,7 @@ Init_pango(void)
 
     rb_define_const(RG_TARGET_NAMESPACE, "SCALE", INT2FIX(PANGO_SCALE));
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "cairo_available?", cairo_available_p, 0);
+    RG_DEF_MODFUNC_P(cairo_available, 0);
 
     Init_pango_analysis(RG_TARGET_NAMESPACE);
     Init_pango_attribute(RG_TARGET_NAMESPACE);
