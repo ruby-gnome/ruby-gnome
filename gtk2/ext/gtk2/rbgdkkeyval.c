@@ -28,32 +28,32 @@
 #define RG_TARGET_NAMESPACE mGdkKeyval
 
 static VALUE
-keyval_to_name(G_GNUC_UNUSED VALUE self, VALUE keyval)
+rg_m_to_name(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     gchar* name = gdk_keyval_name(NUM2UINT(keyval));
     return name ? CSTR2RVAL(name) : Qnil;
 }
 
 static VALUE
-keyval_from_name(G_GNUC_UNUSED VALUE self, VALUE keyval_name)
+rg_m_from_name(G_GNUC_UNUSED VALUE self, VALUE keyval_name)
 {
     return UINT2NUM(gdk_keyval_from_name(RVAL2CSTR(keyval_name)));
 }
 
 static VALUE
-keyval_is_upper(G_GNUC_UNUSED VALUE self, VALUE keyval)
+rg_m_upper_p(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return CBOOL2RVAL(gdk_keyval_is_upper(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_is_lower(G_GNUC_UNUSED VALUE self, VALUE keyval)
+rg_m_lower_p(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return CBOOL2RVAL(gdk_keyval_is_lower(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_convert_case(G_GNUC_UNUSED VALUE self, VALUE symbol)
+rg_m_convert_case(G_GNUC_UNUSED VALUE self, VALUE symbol)
 {
     guint upper, lower;
     gdk_keyval_convert_case(NUM2UINT(symbol), &lower, &upper);
@@ -61,25 +61,25 @@ keyval_convert_case(G_GNUC_UNUSED VALUE self, VALUE symbol)
 }
 
 static VALUE
-keyval_to_upper(G_GNUC_UNUSED VALUE self, VALUE keyval)
+rg_m_to_upper(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return INT2NUM(gdk_keyval_to_upper(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_to_lower(G_GNUC_UNUSED VALUE self, VALUE keyval)
+rg_m_to_lower(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return INT2NUM(gdk_keyval_to_lower(NUM2UINT(keyval)));
 }
 
 static VALUE
-keyval_to_unicode(G_GNUC_UNUSED VALUE self, VALUE keyval)
+rg_m_to_unicode(G_GNUC_UNUSED VALUE self, VALUE keyval)
 {
     return UINT2NUM(gdk_keyval_to_unicode(NUM2UINT(keyval)));
 }
 
 static VALUE
-unicode_to_keyval(G_GNUC_UNUSED VALUE self, VALUE wc)
+rg_m_from_unicode(G_GNUC_UNUSED VALUE self, VALUE wc)
 {
     VALUE unicode;
     if (TYPE(wc) == T_STRING) {
@@ -94,15 +94,15 @@ void
 Init_gtk_gdk_keyval(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Keyval");
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_name", keyval_to_name, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "from_name", keyval_from_name, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "upper?", keyval_is_upper, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "lower?", keyval_is_lower, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "convert_case", keyval_convert_case, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_upper", keyval_to_upper, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_lower", keyval_to_lower, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_unicode", keyval_to_unicode, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "from_unicode", unicode_to_keyval, 1);
+    RG_DEF_MODFUNC(to_name, 1);
+    RG_DEF_MODFUNC(from_name, 1);
+    RG_DEF_MODFUNC_P(upper, 1);
+    RG_DEF_MODFUNC_P(lower, 1);
+    RG_DEF_MODFUNC(convert_case, 1);
+    RG_DEF_MODFUNC(to_upper, 1);
+    RG_DEF_MODFUNC(to_lower, 1);
+    RG_DEF_MODFUNC(to_unicode, 1);
+    RG_DEF_MODFUNC(from_unicode, 1);
 
 #include "rbgdkkeysyms.h"
 }

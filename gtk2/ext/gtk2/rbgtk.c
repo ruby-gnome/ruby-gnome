@@ -94,7 +94,7 @@ exec_callback(GtkWidget *widget, gpointer proc)
 #define USE_POLL_FUNC
 
 static VALUE
-gtk_m_events_pending(G_GNUC_UNUSED VALUE self)
+rg_m_events_pending_p(G_GNUC_UNUSED VALUE self)
 {
    return CBOOL2RVAL(gtk_events_pending());
 }
@@ -129,22 +129,21 @@ gtk_m_function2(gpointer proc)
     G_PROTECT_CALLBACK(gtk_m_function2_body, proc);
 }
 
-
 static VALUE
-gtk_m_set_locale(G_GNUC_UNUSED VALUE self)
+rg_m_set_locale(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_set_locale());
 }
 
 static VALUE
-gtk_m_disable_setlocale(G_GNUC_UNUSED VALUE self)
+rg_m_disable_setlocale(G_GNUC_UNUSED VALUE self)
 {
     gtk_disable_setlocale();
     return Qnil;
 }
 
 static VALUE
-gtk_m_get_default_language(G_GNUC_UNUSED VALUE self)
+rg_m_default_language(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
 }
@@ -154,7 +153,7 @@ typedef void (*SignalFunc) (int);
 static gboolean _initialized = FALSE;
 
 static VALUE
-gtk_m_init(int argc, VALUE *argv, VALUE self)
+rg_m_init(int argc, VALUE *argv, VALUE self)
 {
     gint i, gargc;
     VALUE argary;
@@ -175,7 +174,7 @@ gtk_m_init(int argc, VALUE *argv, VALUE self)
         Check_Type(argary, T_ARRAY);
         gargc = RARRAY_LEN(argary);
     }
-    
+
     gargv = ALLOCA_N(char *, gargc + 1);
     progname = rb_gv_get("$0");
     gargv[0] = (char *)RVAL2CSTR(progname);
@@ -244,39 +243,39 @@ gtk_exit()
 */
 
 static VALUE
-gtk_m_main(G_GNUC_UNUSED VALUE self)
+rg_m_main(G_GNUC_UNUSED VALUE self)
 {
     gtk_main();
     return Qnil;
 }
 
 static VALUE
-gtk_m_main_level(G_GNUC_UNUSED VALUE self)
+rg_m_main_level(G_GNUC_UNUSED VALUE self)
 {
     return INT2FIX(gtk_main_level());
 }
 
 static VALUE
-gtk_m_main_quit(G_GNUC_UNUSED VALUE self)
+rg_m_main_quit(G_GNUC_UNUSED VALUE self)
 {
     gtk_main_quit();
     return Qnil;
 }
 
 static VALUE
-gtk_m_main_iteration(G_GNUC_UNUSED VALUE self)
+rg_m_main_iteration(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gtk_main_iteration());
 }
 
 static VALUE
-gtk_m_main_iteration_do(G_GNUC_UNUSED VALUE self, VALUE blocking)
+rg_m_main_iteration_do(G_GNUC_UNUSED VALUE self, VALUE blocking)
 {
     return CBOOL2RVAL(gtk_main_iteration_do(RVAL2CBOOL(blocking)));
 }
 
 static VALUE
-gtk_m_main_do_event(G_GNUC_UNUSED VALUE self, VALUE event)
+rg_m_main_do_event(G_GNUC_UNUSED VALUE self, VALUE event)
 {
     gtk_main_do_event(RVAL2GEV(event));
     return event;
@@ -288,27 +287,27 @@ gtk_false()
 */
 
 static VALUE
-gtk_m_grab_add(G_GNUC_UNUSED VALUE self, VALUE widget)
+rg_m_grab_add(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
     return Qnil;
 }
 
 static VALUE
-gtk_m_get_current(G_GNUC_UNUSED VALUE self)
+rg_m_current(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_grab_get_current());
 }
 
 static VALUE
-gtk_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
+rg_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
     return Qnil;
 }
 
 static VALUE
-gtk_m_init_add(VALUE self)
+rg_m_init_add(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
 
@@ -318,7 +317,7 @@ gtk_m_init_add(VALUE self)
 }
 
 static VALUE
-gtk_m_quit_add(VALUE self, VALUE main_level)
+rg_m_quit_add(VALUE self, VALUE main_level)
 {
     volatile VALUE func = rb_block_proc();
     VALUE rb_id;
@@ -337,7 +336,7 @@ gtk_m_quit_add(VALUE self, VALUE main_level)
 }
 
 static VALUE
-gtk_m_quit_remove(VALUE self, VALUE quit_handler_id)
+rg_m_quit_remove(VALUE self, VALUE quit_handler_id)
 {
     gtk_quit_remove(NUM2UINT(quit_handler_id));
     G_REMOVE_RELATIVE(self, id__quit_callbacks__, quit_handler_id);
@@ -352,7 +351,7 @@ gtk_timeout_add_full()
 */
 
 static VALUE
-timeout_add(VALUE self, VALUE interval)
+rg_m_timeout_add(VALUE self, VALUE interval)
 {
     VALUE func, rb_id;
     callback_info_t *info;
@@ -371,7 +370,7 @@ timeout_add(VALUE self, VALUE interval)
 }
 
 static VALUE
-timeout_remove(VALUE self, VALUE id)
+rg_m_timeout_remove(VALUE self, VALUE id)
 {
     gtk_timeout_remove(NUM2UINT(id));
     G_REMOVE_RELATIVE(self, id__timeout_callbacks__, id);
@@ -379,7 +378,7 @@ timeout_remove(VALUE self, VALUE id)
 }
 
 static VALUE
-idle_add(VALUE self)
+rg_m_idle_add(VALUE self)
 {
     VALUE func, rb_id;
     callback_info_t *info;
@@ -399,7 +398,7 @@ idle_add(VALUE self)
 }
 
 static VALUE
-idle_add_priority(VALUE self, VALUE priority)
+rg_m_idle_add_priority(VALUE self, VALUE priority)
 {
     VALUE func, rb_id;
     callback_info_t *info;
@@ -418,7 +417,7 @@ idle_add_priority(VALUE self, VALUE priority)
 }
 
 static VALUE
-idle_remove(VALUE self, VALUE id)
+rg_m_idle_remove(VALUE self, VALUE id)
 {
     gtk_idle_remove(NUM2UINT(id));
     G_REMOVE_RELATIVE(self, id__idle_callbacks__, id);
@@ -444,7 +443,7 @@ gtk_m_key_snoop_func(GtkWidget *grab_widget, GdkEventKey *event, gpointer func)
 }
 
 static VALUE
-gtk_m_key_snooper_install(VALUE self)
+rg_m_key_snooper_install(VALUE self)
 {
     VALUE func = rb_block_proc();
     VALUE id = INT2FIX(gtk_key_snooper_install(
@@ -455,7 +454,7 @@ gtk_m_key_snooper_install(VALUE self)
 }
 
 static VALUE
-gtk_m_key_snooper_remove(VALUE self, VALUE id)
+rg_m_key_snooper_remove(VALUE self, VALUE id)
 {
     gtk_key_snooper_remove(NUM2UINT(id));
     G_REMOVE_RELATIVE(self, id__snooper_callbacks__, id);
@@ -463,19 +462,19 @@ gtk_m_key_snooper_remove(VALUE self, VALUE id)
 }
 
 static VALUE
-gtk_m_get_current_event(G_GNUC_UNUSED VALUE self)
+rg_m_current_event(G_GNUC_UNUSED VALUE self)
 {
     return GEV2RVAL(gtk_get_current_event());
 }
 
 static VALUE
-gtk_m_get_current_event_time(G_GNUC_UNUSED VALUE self)
+rg_m_current_event_time(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gtk_get_current_event_time());
 }
 
 static VALUE
-gtk_m_get_current_event_state(G_GNUC_UNUSED VALUE self)
+rg_m_current_event_state(G_GNUC_UNUSED VALUE self)
 {
     GdkModifierType state;
     gboolean ret = gtk_get_current_event_state(&state);
@@ -483,7 +482,7 @@ gtk_m_get_current_event_state(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gtk_m_get_event_widget(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_get_event_widget(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE event;
     rb_scan_args(argc, argv, "01", &event);
@@ -492,7 +491,7 @@ gtk_m_get_event_widget(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-gtk_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
+rg_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
 {
     gtk_propagate_event(GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2GEV(event));
     return Qnil;
@@ -500,7 +499,7 @@ gtk_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
 
 /* From Version Information */
 static VALUE
-gtk_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
+rg_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     const gchar *ret;
     ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
@@ -508,7 +507,7 @@ gtk_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE mi
 }
 
 static VALUE
-gtk_m_check_version_q(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
+rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     const gchar *ret;
     ret = gtk_check_version(FIX2INT(major), FIX2INT(minor), FIX2INT(micro));
@@ -534,39 +533,39 @@ Init_gtk_gtk(void)
     rbgtk_eGtkInitError = rb_define_class_under(RG_TARGET_NAMESPACE, "InitError",
                                                 rb_eRuntimeError);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "events_pending?", gtk_m_events_pending, 0);
+    RG_DEF_MODFUNC_P(events_pending, 0);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_locale", gtk_m_set_locale, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "disable_setlocale", gtk_m_disable_setlocale, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "default_language", gtk_m_get_default_language, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "init", gtk_m_init, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "main", gtk_m_main, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "main_level", gtk_m_main_level, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "main_quit", gtk_m_main_quit, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "main_iteration", gtk_m_main_iteration, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "main_iteration_do", gtk_m_main_iteration_do, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "main_do_event", gtk_m_main_do_event, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "grab_add", gtk_m_grab_add, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "current", gtk_m_get_current, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "grab_remove", gtk_m_grab_remove, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "init_add", gtk_m_init_add, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "quit_add", gtk_m_quit_add, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "quit_remove", gtk_m_quit_remove, 1);
+    RG_DEF_MODFUNC(set_locale, 0);
+    RG_DEF_MODFUNC(disable_setlocale, 0);
+    RG_DEF_MODFUNC(default_language, 0);
+    RG_DEF_MODFUNC(init, -1);
+    RG_DEF_MODFUNC(main, 0);
+    RG_DEF_MODFUNC(main_level, 0);
+    RG_DEF_MODFUNC(main_quit, 0);
+    RG_DEF_MODFUNC(main_iteration, 0);
+    RG_DEF_MODFUNC(main_iteration_do, 1);
+    RG_DEF_MODFUNC(main_do_event, 1);
+    RG_DEF_MODFUNC(grab_add, 1);
+    RG_DEF_MODFUNC(current, 0);
+    RG_DEF_MODFUNC(grab_remove, 1);
+    RG_DEF_MODFUNC(init_add, 0);
+    RG_DEF_MODFUNC(quit_add, 1);
+    RG_DEF_MODFUNC(quit_remove, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "timeout_add", timeout_add, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "timeout_remove", timeout_remove, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "idle_add", idle_add, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "idle_add_priority", idle_add_priority, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "idle_remove", idle_remove, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "key_snooper_install", gtk_m_key_snooper_install, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "key_snooper_remove", gtk_m_key_snooper_remove, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "current_event", gtk_m_get_current_event, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "current_event_time", gtk_m_get_current_event_time, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "current_event_state", gtk_m_get_current_event_state, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_event_widget", gtk_m_get_event_widget, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "propagate_event", gtk_m_propagate_event, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version", gtk_m_check_version, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version?", gtk_m_check_version_q, 3);
+    RG_DEF_MODFUNC(timeout_add, 1);
+    RG_DEF_MODFUNC(timeout_remove, 1);
+    RG_DEF_MODFUNC(idle_add, 0);
+    RG_DEF_MODFUNC(idle_add_priority, 1);
+    RG_DEF_MODFUNC(idle_remove, 1);
+    RG_DEF_MODFUNC(key_snooper_install, 0);
+    RG_DEF_MODFUNC(key_snooper_remove, 1);
+    RG_DEF_MODFUNC(current_event, 0);
+    RG_DEF_MODFUNC(current_event_time, 0);
+    RG_DEF_MODFUNC(current_event_state, 0);
+    RG_DEF_MODFUNC(get_event_widget, -1);
+    RG_DEF_MODFUNC(propagate_event, 2);
+    RG_DEF_MODFUNC(check_version, 3);
+    RG_DEF_MODFUNC_P(check_version, 3);
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 }
