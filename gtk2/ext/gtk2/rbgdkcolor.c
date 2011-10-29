@@ -24,12 +24,13 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE rb_cGdkColor
 #define _SELF(c) (RVAL2GDKCOLOR(c))
 
-VALUE rb_cGdkColor = Qnil;
+VALUE RG_TARGET_NAMESPACE = Qnil;
 
 static VALUE
-gdkcolor_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
+rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
     GdkColor c;
     c.pixel = 0;
@@ -43,7 +44,7 @@ gdkcolor_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 }
 
 static VALUE
-gdkcolor_s_parse(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     GdkColor c;
     if (! gdk_color_parse(RVAL2CSTR(name), &c)) {
@@ -53,53 +54,53 @@ gdkcolor_s_parse(G_GNUC_UNUSED VALUE self, VALUE name)
 }
 
 static VALUE
-gdkcolor_pixel(VALUE self)
+rg_pixel(VALUE self)
 {
     return INT2NUM(_SELF(self)->pixel);
 }
 
 static VALUE
-gdkcolor_red(VALUE self)
+rg_red(VALUE self)
 {
 
     return INT2FIX(_SELF(self)->red);
 }
 
 static VALUE
-gdkcolor_set_red(VALUE self, VALUE red)
+rg_set_red(VALUE self, VALUE red)
 {
     _SELF(self)->red = NUM2INT(red);
     return self;
 }
 
 static VALUE
-gdkcolor_green(VALUE self)
+rg_green(VALUE self)
 {
     return INT2FIX(_SELF(self)->green);
 }
 
 static VALUE
-gdkcolor_set_green(VALUE self, VALUE green)
+rg_set_green(VALUE self, VALUE green)
 {
     _SELF(self)->green = NUM2INT(green);
     return self;
 }
 
 static VALUE
-gdkcolor_blue(VALUE self)
+rg_blue(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue);
 }
 
 static VALUE
-gdkcolor_set_blue(VALUE self, VALUE blue)
+rg_set_blue(VALUE self, VALUE blue)
 {
     _SELF(self)->blue = NUM2INT(blue);
     return self;
 }
 
 static VALUE
-gdkcolor_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     GdkColor *c = _SELF(self);
     return rb_ary_new3(3, INT2FIX(c->red), 
@@ -107,14 +108,14 @@ gdkcolor_to_a(VALUE self)
 }
 
 static VALUE
-gdkcolor_equal(VALUE self, VALUE other)
+rg_operator_gdkcolor_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(gdk_color_equal(_SELF(self), _SELF(other)));
 }
 
 #if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
-gdkcolor_to_string(VALUE self)
+rg_to_s(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_color_to_string(_SELF(self)));
 }
@@ -123,23 +124,22 @@ gdkcolor_to_string(VALUE self)
 void
 Init_gtk_gdk_color(void)
 {
-    rb_cGdkColor = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
-    rb_define_singleton_method(rb_cGdkColor, "parse", gdkcolor_s_parse, 1);
-    rb_define_method(rb_cGdkColor, "initialize", gdkcolor_initialize, 3);
-    rb_define_method(rb_cGdkColor, "pixel", gdkcolor_pixel, 0);
-    rb_define_method(rb_cGdkColor, "red", gdkcolor_red, 0);
-    rb_define_method(rb_cGdkColor, "set_red", gdkcolor_set_red, 1);
-    rb_define_method(rb_cGdkColor, "green", gdkcolor_green, 0);
-    rb_define_method(rb_cGdkColor, "set_green", gdkcolor_set_green, 1);
-    rb_define_method(rb_cGdkColor, "blue", gdkcolor_blue, 0);
-    rb_define_method(rb_cGdkColor, "set_blue", gdkcolor_set_blue, 1);
-    rb_define_method(rb_cGdkColor, "to_a", gdkcolor_to_a, 0);
-    rb_define_method(rb_cGdkColor, "==", gdkcolor_equal, 1);
+    RG_DEF_SMETHOD(parse, 1);
+    RG_DEF_METHOD(initialize, 3);
+    RG_DEF_METHOD(pixel, 0);
+    RG_DEF_METHOD(red, 0);
+    RG_DEF_METHOD(set_red, 1);
+    RG_DEF_METHOD(green, 0);
+    RG_DEF_METHOD(set_green, 1);
+    RG_DEF_METHOD(blue, 0);
+    RG_DEF_METHOD(set_blue, 1);
+    RG_DEF_METHOD(to_a, 0);
+    RG_DEF_METHOD_OPERATOR("==", gdkcolor_equal, 1);
 #if GTK_CHECK_VERSION(2, 12, 0)
-    rb_define_method(rb_cGdkColor, "to_s", gdkcolor_to_string, 0);
+    RG_DEF_METHOD(to_s, 0);
 #endif
 
-    G_DEF_SETTERS(rb_cGdkColor);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-

@@ -21,10 +21,11 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cPixbuf
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
 static VALUE
-pixbuf_render_threshold_alpha(VALUE self, VALUE bitmap, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE alpha_threshold)
+rg_render_threshold_alpha(VALUE self, VALUE bitmap, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE alpha_threshold)
 {
     gdk_pixbuf_render_threshold_alpha(_SELF(self), GDK_BITMAP(RVAL2GOBJ(bitmap)),
                                       NUM2INT(src_x), NUM2INT(src_y),
@@ -35,7 +36,7 @@ pixbuf_render_threshold_alpha(VALUE self, VALUE bitmap, VALUE src_x, VALUE src_y
 }
 
 static VALUE
-pixbuf_render_to_drawable(int argc, VALUE *argv, VALUE self)
+rg_render_to_drawable(int argc, VALUE *argv, VALUE self)
 {
     VALUE gc, src_x, src_y, dest_x, dest_y, width, height,
         dither, x_dither, y_dither;
@@ -63,9 +64,9 @@ pixbuf_render_to_drawable(int argc, VALUE *argv, VALUE self)
         rb_raise(rb_eArgError, "arguments 7 must be non nil");
 
     gdk_pixbuf_render_to_drawable(_SELF(self),
-				  GDK_DRAWABLE(RVAL2GOBJ(self)),
-				  GDK_GC(RVAL2GOBJ(gc)),
-				  NUM2INT(src_x), NUM2INT(src_y),
+                                  GDK_DRAWABLE(RVAL2GOBJ(self)),
+                                  GDK_GC(RVAL2GOBJ(gc)),
+                                  NUM2INT(src_x), NUM2INT(src_y),
                                   NUM2INT(dest_x), NUM2INT(dest_y),
                                   NUM2INT(width), NUM2INT(height),
                                   NIL_P(dither) ? GDK_RGB_DITHER_NONE : RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
@@ -75,7 +76,7 @@ pixbuf_render_to_drawable(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-pixbuf_render_pixmap_and_mask(int argc, VALUE *argv, VALUE self)
+rg_render_pixmap_and_mask(int argc, VALUE *argv, VALUE self)
 {
     VALUE colormap_or_alpha, alpha;
     GdkPixmap *pixmap;
@@ -103,7 +104,7 @@ pixbuf_render_pixmap_and_mask(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-pixbuf_s_from_drawable(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_from_drawable(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
     GdkPixbuf* buf;
@@ -128,9 +129,9 @@ pixbuf_s_from_drawable(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         return dest;
     }
 }
- 
+
 static VALUE
-pixbuf_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
     GdkPixbuf* buf;
@@ -162,12 +163,12 @@ Init_gtk_gdk_pixbuf(void)
     /*
      *  This defines Gdk::Pixbuf methods of GDK side.
      */
-    VALUE gdkPixbuf = GTYPE2CLASS(GDK_TYPE_PIXBUF);
+    VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
-    rb_define_method(gdkPixbuf, "render_threshold_alpha", pixbuf_render_threshold_alpha, 8);
-    rb_define_method(gdkPixbuf, "render_to_drawable", pixbuf_render_to_drawable, -1);
-    rb_define_method(gdkPixbuf, "render_pixmap_and_mask", pixbuf_render_pixmap_and_mask, -1);
+    RG_DEF_METHOD(render_threshold_alpha, 8);
+    RG_DEF_METHOD(render_to_drawable, -1);
+    RG_DEF_METHOD(render_pixmap_and_mask, -1);
 
-    rb_define_singleton_method(gdkPixbuf, "from_drawable", pixbuf_s_from_drawable, -1);
-    rb_define_singleton_method(gdkPixbuf, "from_image", pixbuf_s_from_image, -1);
+    RG_DEF_SMETHOD(from_drawable, -1);
+    RG_DEF_SMETHOD(from_image, -1);
 }

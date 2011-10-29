@@ -174,7 +174,6 @@ Init_gtk2(void)
     Init_gtk_layout();
     Init_gtk_link_button();
     Init_gtk_list_store();
-    Init_gtk_main();
     Init_gtk_menu();
     Init_gtk_menu_bar();
     Init_gtk_menu_item();

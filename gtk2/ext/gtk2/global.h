@@ -40,6 +40,12 @@
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
+#if GTK_CHECK_VERSION(2,8,0) && defined(HAVE_RB_CAIRO_H)
+#  define CAIRO_AVAILABLE 1
+#else
+#  define CAIRO_AVAILABLE 0
+#endif
+
 extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
@@ -178,7 +184,6 @@ G_GNUC_INTERNAL void Init_gtk_label(void);
 G_GNUC_INTERNAL void Init_gtk_layout(void);
 G_GNUC_INTERNAL void Init_gtk_link_button(void);
 G_GNUC_INTERNAL void Init_gtk_list_store(void);
-G_GNUC_INTERNAL void Init_gtk_main(void);
 G_GNUC_INTERNAL void Init_gtk_menu(void);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(void);
 G_GNUC_INTERNAL void Init_gtk_menu_item(void);
