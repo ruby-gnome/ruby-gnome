@@ -22,10 +22,6 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,10,0) && defined(HAVE_RB_CAIRO_H)
-#  define CAIRO_AVAILABLE 1
-#endif
-
 #ifdef CAIRO_AVAILABLE
 
 #define RG_TARGET_NAMESPACE cCairoFontMap
