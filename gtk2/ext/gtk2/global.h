@@ -184,7 +184,6 @@ G_GNUC_INTERNAL void Init_gtk_label(void);
 G_GNUC_INTERNAL void Init_gtk_layout(void);
 G_GNUC_INTERNAL void Init_gtk_link_button(void);
 G_GNUC_INTERNAL void Init_gtk_list_store(void);
-G_GNUC_INTERNAL void Init_gtk_main(void);
 G_GNUC_INTERNAL void Init_gtk_menu(void);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(void);
 G_GNUC_INTERNAL void Init_gtk_menu_item(void);
