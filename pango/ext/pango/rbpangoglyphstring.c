@@ -138,7 +138,7 @@ rg_glyphs(VALUE self)
 }
 
 void
-Init_pango_glyph_string(void)
+Init_pango_glyph_string(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_STRING, "GlyphString", mPango);
 

@@ -59,7 +59,7 @@ rg_sizes(VALUE self)
 #endif
 
 void
-Init_pango_font_face(void)
+Init_pango_font_face(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_FACE, "FontFace", mPango);
 

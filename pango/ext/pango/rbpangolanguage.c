@@ -73,7 +73,7 @@ rg_includes_script(VALUE self, VALUE script)
 #endif
 
 void
-Init_pango_language(void)
+Init_pango_language(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LANGUAGE, "Language", mPango);
 

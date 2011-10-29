@@ -403,7 +403,7 @@ rb_hash_aset(type_to_klass, INT2FIX(gtype), tmpklass);\
 rb_define_method(tmpklass, "initialize", attr_## name ## _initialize , num);
 
 void
-Init_pango_attribute(void)
+Init_pango_attribute(VALUE mPango)
 {
     VALUE tmpklass;
     pattr = rb_define_class_under(mPango, "Attribute", rb_cData);

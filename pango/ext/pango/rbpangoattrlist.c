@@ -87,7 +87,7 @@ rg_iterator(VALUE self)
 }
 
 void
-Init_pango_attrlist(void)
+Init_pango_attrlist(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ATTR_LIST, "AttrList", mPango);
 

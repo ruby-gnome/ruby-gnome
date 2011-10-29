@@ -9,40 +9,40 @@
 
 G_BEGIN_DECLS
 
-G_GNUC_INTERNAL void Init_pango_analysis(void);
-G_GNUC_INTERNAL void Init_pango_attribute(void);
-G_GNUC_INTERNAL void Init_pango_attriterator(void);
-G_GNUC_INTERNAL void Init_pango_attrlist(void);
-G_GNUC_INTERNAL void Init_pango_cairo(void);
-G_GNUC_INTERNAL void Init_pango_color(void);
-G_GNUC_INTERNAL void Init_pango_context(void);
-G_GNUC_INTERNAL void Init_pango_coverage(void);
-G_GNUC_INTERNAL void Init_pango_engine(void);
-G_GNUC_INTERNAL void Init_pango_font(void);
-G_GNUC_INTERNAL void Init_pango_font_description(void);
-G_GNUC_INTERNAL void Init_pango_font_face(void);
-G_GNUC_INTERNAL void Init_pango_font_family(void);
-G_GNUC_INTERNAL void Init_pango_font_map(void);
-G_GNUC_INTERNAL void Init_pango_font_metrics(void);
-G_GNUC_INTERNAL void Init_pango_fontset(void);
-G_GNUC_INTERNAL void Init_pango_fontset_simple(void);
-G_GNUC_INTERNAL void Init_pango_glyph_info(void);
-G_GNUC_INTERNAL void Init_pango_glyph_item(void);
-G_GNUC_INTERNAL void Init_pango_glyph_string(void);
-G_GNUC_INTERNAL void Init_pango_gravity(void);
-G_GNUC_INTERNAL void Init_pango_item(void);
-G_GNUC_INTERNAL void Init_pango_language(void);
-G_GNUC_INTERNAL void Init_pango_layout(void);
-G_GNUC_INTERNAL void Init_pango_layout_iter(void);
-G_GNUC_INTERNAL void Init_pango_layout_line(void);
-G_GNUC_INTERNAL void Init_pango_logattr(void);
-G_GNUC_INTERNAL void Init_pango_main(void);
-G_GNUC_INTERNAL void Init_pango_matrix(void);
-G_GNUC_INTERNAL void Init_pango_rectangle(void);
-G_GNUC_INTERNAL void Init_pangorenderer(void);
-G_GNUC_INTERNAL void Init_pango_script(void);
-G_GNUC_INTERNAL void Init_pango_script_iter(void);
-G_GNUC_INTERNAL void Init_pango_array(void);
+G_GNUC_INTERNAL void Init_pango_analysis(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_attribute(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_attriterator(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_attrlist(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_cairo(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_cairo_context(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_color(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_context(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_coverage(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_engine(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_font(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_font_description(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_font_face(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_font_family(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_font_map(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_font_metrics(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_fontset(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_fontset_simple(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_glyph_info(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_glyph_item(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_glyph_string(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_gravity(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_item(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_language(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_layout(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_layout_iter(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_layout_line(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_logattr(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_matrix(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_rectangle(VALUE mPango);
+G_GNUC_INTERNAL void Init_pangorenderer(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_script(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_script_iter(VALUE mPango);
+G_GNUC_INTERNAL void Init_pango_array(VALUE mPango);
 
 G_END_DECLS
 

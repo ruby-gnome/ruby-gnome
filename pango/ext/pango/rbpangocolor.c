@@ -100,7 +100,7 @@ rg_operator_color_equal(VALUE self, VALUE other)
 }
 
 void
-Init_pango_color(void)
+Init_pango_color(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_COLOR, "Color", mPango);
 

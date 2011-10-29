@@ -88,7 +88,7 @@ ATTR_BOOL(backspace_deletes_character);
 #endif
 
 void
-Init_pango_logattr(void)
+Init_pango_logattr(VALUE mPango)
 {
     VALUE logattr = G_DEF_CLASS(PANGO_TYPE_LOG_ATTR, "LogAttr", mPango);
     

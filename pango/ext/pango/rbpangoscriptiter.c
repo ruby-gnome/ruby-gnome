@@ -85,7 +85,7 @@ rg_next_bang(VALUE self)
 #endif
 
 void
-Init_pango_script_iter(void)
+Init_pango_script_iter(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_SCRIPT_ITER, "ScriptIter", mPango);

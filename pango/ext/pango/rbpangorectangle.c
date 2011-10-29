@@ -149,7 +149,7 @@ rg_rbearing(VALUE self)
 }
 
 void
-Init_pango_rectangle(void)
+Init_pango_rectangle(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_RECTANGLE, "Rectangle", mPango);
     RG_DEF_METHOD(initialize, 4);

@@ -127,7 +127,7 @@ rg_attrs(VALUE self)
 #endif
 
 void
-Init_pango_attriterator(void)
+Init_pango_attriterator(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ATTR_ITERATOR, "AttrIterator", mPango);
 

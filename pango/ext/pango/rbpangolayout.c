@@ -484,7 +484,7 @@ rg_iter(VALUE self)
 }
 
 void
-Init_pango_layout(void)
+Init_pango_layout(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT, "Layout", mPango);
 

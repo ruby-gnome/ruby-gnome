@@ -91,7 +91,7 @@ rg_s_from_bytes(G_GNUC_UNUSED VALUE self, VALUE bytes)
 }
 
 void
-Init_pango_coverage(void)
+Init_pango_coverage(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_COVERAGE, "Coverage", mPango);
 
