@@ -49,7 +49,7 @@ rg_size(VALUE self)
 
 #endif
 void
-Init_pango_fontset_simple(void)
+Init_pango_fontset_simple(VALUE mPango)
 {
 #ifdef PANGO_ENABLE_BACKEND
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONTSET_SIMPLE, "FontsetSimple", mPango);

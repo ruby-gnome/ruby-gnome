@@ -162,7 +162,7 @@ rg_layout_extents(VALUE self)
 }
 
 void
-Init_pango_layout_iter(void)
+Init_pango_layout_iter(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LAYOUT_ITER, "LayoutIter", mPango);
 

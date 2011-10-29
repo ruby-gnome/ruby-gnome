@@ -109,7 +109,7 @@ rg_set_cluster_start(VALUE self, VALUE val)
 }
 
 void
-Init_pango_glyph_info(void)
+Init_pango_glyph_info(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_INFO, "GlyphInfo", mPango);
 

@@ -272,7 +272,7 @@ rg_list_families(VALUE self)
 }
 
 void
-Init_pango_context(void)
+Init_pango_context(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CONTEXT, "Context", mPango);
 

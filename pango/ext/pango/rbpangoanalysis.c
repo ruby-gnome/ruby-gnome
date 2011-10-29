@@ -199,7 +199,7 @@ rg_extra_attrs(VALUE self)
 }
 
 void
-Init_pango_analysis(void)
+Init_pango_analysis(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
 

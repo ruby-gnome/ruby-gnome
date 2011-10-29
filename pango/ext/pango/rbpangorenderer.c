@@ -169,7 +169,7 @@ rg_matrix(VALUE self)
 #endif
 
 void
-Init_pangorenderer(void)
+Init_pangorenderer(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,8,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_RENDERER, "Renderer", mPango);

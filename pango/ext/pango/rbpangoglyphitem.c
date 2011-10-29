@@ -115,7 +115,7 @@ rg_letter_space(VALUE self, VALUE text, VALUE log_attrs, VALUE letter_spacing)
 #endif
 
 void
-Init_pango_glyph_item(void)
+Init_pango_glyph_item(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_ITEM, "GlyphItem", mPango);

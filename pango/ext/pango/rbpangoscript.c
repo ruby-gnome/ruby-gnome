@@ -74,7 +74,7 @@ gboolean    pango_language_includes_script  (PangoLanguage *language,
 #endif
 
 void
-Init_pango_script(void)
+Init_pango_script(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_SCRIPT, "Script", mPango);

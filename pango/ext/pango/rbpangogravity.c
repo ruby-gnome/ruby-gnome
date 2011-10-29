@@ -38,7 +38,7 @@ rg_s_vertical_p(G_GNUC_UNUSED VALUE self, VALUE gravity)
 #endif
 
 void
-Init_pango_gravity(void)
+Init_pango_gravity(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,16,0)
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mPango, "Gravity");

@@ -82,7 +82,7 @@ rg_shape_engine_type(VALUE self)
 #endif
 
 void
-Init_pango_font_map(void)
+Init_pango_font_map(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_FONT_MAP, "FontMap", mPango);
 

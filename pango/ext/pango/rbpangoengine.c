@@ -57,7 +57,7 @@ PangoEngine* script_engine_create           (const char *id);
 #endif
 
 void
-Init_pango_engine(void)
+Init_pango_engine(VALUE mPango)
 {
 #ifdef PANGO_TYPE_ENGINE
     G_DEF_CLASS(PANGO_TYPE_ENGINE, "Engine", mPango);

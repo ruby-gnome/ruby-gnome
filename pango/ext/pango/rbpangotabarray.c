@@ -111,7 +111,7 @@ rg_positions_in_pixels_p(VALUE self)
 }
 
 void
-Init_pango_array(void)
+Init_pango_array(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_TAB_ARRAY, "TabArray", mPango);
     RG_DEF_METHOD(initialize, -1);
