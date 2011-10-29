@@ -22,20 +22,13 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cFormField
-
-#define RVAL2FF(obj) RVAL2POPPLER_FORM_FIELD(obj)
-#define RVAL2TF(obj) RVAL2FF(obj)
-#define RVAL2BF(obj) RVAL2FF(obj)
-#define RVAL2CF(obj) RVAL2FF(obj)
+#define _SELF(obj) RVAL2POPPLER_FORM_FIELD(obj)
 
 #define FFT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
 #define RVAL2FFT(obj) (RVAL2GENUM(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
-#define FBT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_BUTTON_TYPE))
-#define FTT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_TEXT_TYPE))
-#define FCT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_CHOICE_TYPE))
 
-static VALUE cUnknownField, cTextField, cButtonField;
-static VALUE cChoiceField, cSignatureField;
+extern VALUE rg_cButtonField, rg_cTextField, rg_cChoiceField;
+static VALUE cUnknownField, cSignatureField;
 
 VALUE
 rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
@@ -49,13 +42,13 @@ rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
           obj = rbgobj_create_object(cUnknownField);
           break;
         case POPPLER_FORM_FIELD_BUTTON:
-          obj = rbgobj_create_object(cButtonField);
+          obj = rbgobj_create_object(rg_cButtonField);
           break;
         case POPPLER_FORM_FIELD_TEXT:
-          obj = rbgobj_create_object(cTextField);
+          obj = rbgobj_create_object(rg_cTextField);
           break;
         case POPPLER_FORM_FIELD_CHOICE:
-          obj = rbgobj_create_object(cChoiceField);
+          obj = rbgobj_create_object(rg_cChoiceField);
           break;
         case POPPLER_FORM_FIELD_SIGNATURE:
           obj = rbgobj_create_object(cSignatureField);
@@ -68,234 +61,39 @@ rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
     return obj;
 }
 
-/* FormField */
 static VALUE
 rg_id(VALUE self)
 {
-    return INT2NUM(poppler_form_field_get_id(RVAL2FF(self)));
+    return INT2NUM(poppler_form_field_get_id(_SELF(self)));
 }
 
 static VALUE
 rg_font_size(VALUE self)
 {
-    return rb_float_new(poppler_form_field_get_font_size(RVAL2FF(self)));
+    return rb_float_new(poppler_form_field_get_font_size(_SELF(self)));
 }
 
 static VALUE
 rg_read_only_p(VALUE self)
 {
-    return CBOOL2RVAL(poppler_form_field_is_read_only(RVAL2FF(self)));
-}
-
-/* Button Field */
-static VALUE
-button_field_get_button_type(VALUE self)
-{
-    return FBT2RVAL(poppler_form_field_button_get_button_type(RVAL2FF(self)));
-}
-
-static VALUE
-button_field_get_state(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_button_get_state(RVAL2BF(self)));
-}
-
-static VALUE
-button_field_set_state(VALUE self, VALUE state)
-{
-    poppler_form_field_button_set_state(RVAL2BF(self), RVAL2CBOOL(state));
-    return Qnil;
-}
-
-/* Text Field */
-static VALUE
-text_field_get_text_type(VALUE self)
-{
-    return FTT2RVAL(poppler_form_field_text_get_text_type(RVAL2TF(self)));
-}
-
-static VALUE
-text_field_get_text(VALUE self)
-{
-    return CSTR2RVAL(poppler_form_field_text_get_text(RVAL2TF(self)));
-}
-
-static VALUE
-text_field_set_text(VALUE self, VALUE text)
-{
-    poppler_form_field_text_set_text(RVAL2TF(self), RVAL2CSTR_ACCEPT_NIL(text));
-    return Qnil;
-}
-
-static VALUE
-text_field_get_max_length(VALUE self)
-{
-    return INT2NUM(poppler_form_field_text_get_max_len(RVAL2TF(self)));
-}
-
-static VALUE
-text_field_do_spell_check(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_text_do_spell_check(RVAL2TF(self)));
-}
-
-static VALUE
-text_field_do_scroll(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_text_do_scroll(RVAL2TF(self)));
-}
-
-static VALUE
-text_field_is_rich_text(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_text_is_rich_text(RVAL2TF(self)));
-}
-
-static VALUE
-text_field_is_password(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_text_is_password(RVAL2TF(self)));
-}
-
-/* Choice Field */
-static VALUE
-choice_field_get_choice_type(VALUE self)
-{
-    return FCT2RVAL(poppler_form_field_choice_get_choice_type(RVAL2CF(self)));
-}
-
-static VALUE
-choice_field_is_editable(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_choice_is_editable(RVAL2CF(self)));
-}
-
-static VALUE
-choice_field_can_select_multiple(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_choice_can_select_multiple(RVAL2CF(self)));
-}
-
-static VALUE
-choice_field_do_spell_check(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_choice_do_spell_check(RVAL2CF(self)));
-}
-
-static VALUE
-choice_field_commit_on_change(VALUE self)
-{
-    return CBOOL2RVAL(poppler_form_field_choice_commit_on_change(RVAL2CF(self)));
-}
-
-static VALUE
-choice_field_get_n_items(VALUE self)
-{
-    return INT2NUM(poppler_form_field_choice_get_n_items(RVAL2CF(self)));
-}
-
-static VALUE
-choice_field_get_item(VALUE self, VALUE index)
-{
-    return CSTR2RVAL(poppler_form_field_choice_get_item(RVAL2CF(self),
-                                                        NUM2INT(index)));
-}
-
-static VALUE
-choice_field_is_item_selected(VALUE self, VALUE index)
-{
-    return CBOOL2RVAL(poppler_form_field_choice_is_item_selected(RVAL2CF(self),
-                                                                 NUM2INT(index)));
-}
-
-static VALUE
-choice_field_select_item(VALUE self, VALUE index)
-{
-    poppler_form_field_choice_select_item(RVAL2CF(self), NUM2INT(index));
-    return Qnil;
-}
-
-static VALUE
-choice_field_unselect_all(VALUE self)
-{
-    poppler_form_field_choice_unselect_all(RVAL2CF(self));
-    return Qnil;
-}
-
-static VALUE
-choice_field_toggle_item(VALUE self, VALUE index)
-{
-    poppler_form_field_choice_toggle_item(RVAL2CF(self), NUM2INT(index));
-    return Qnil;
-}
-
-static VALUE
-choice_field_set_text(VALUE self, VALUE text)
-{
-    poppler_form_field_choice_set_text(RVAL2CF(self), RVAL2CSTR_ACCEPT_NIL(text));
-    return Qnil;
-}
-
-static VALUE
-choice_field_get_text(VALUE self)
-{
-    return CSTR2RVAL(poppler_form_field_choice_get_text(RVAL2CF(self)));
+    return CBOOL2RVAL(poppler_form_field_is_read_only(_SELF(self)));
 }
 
 void
 Init_poppler_form_field(VALUE mPoppler)
 {
-    VALUE RG_TARGET_NAMESPACE;
-
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD, "FormField", mPoppler);
     cUnknownField = rb_define_class_under(mPoppler, "UnknownField", RG_TARGET_NAMESPACE);
-    cTextField = rb_define_class_under(mPoppler, "TextField", RG_TARGET_NAMESPACE);
-    cButtonField = rb_define_class_under(mPoppler, "ButtonField", RG_TARGET_NAMESPACE);
-    cChoiceField = rb_define_class_under(mPoppler, "ChoiceField", RG_TARGET_NAMESPACE);
     cSignatureField = rb_define_class_under(mPoppler, "SignatureField",
                                             RG_TARGET_NAMESPACE);
 
-/* FormField */
     RG_DEF_METHOD(id, 0);
     RG_DEF_METHOD(font_size, 0);
     RG_DEF_METHOD_P(read_only, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    rb_define_method(cButtonField, "type", button_field_get_button_type, 0);
-    rb_define_method(cButtonField, "active?", button_field_get_state, 0);
-    rb_define_method(cButtonField, "set_active", button_field_set_state, 1);
-
-    G_DEF_SETTERS(cButtonField);
-
-    rb_define_method(cTextField, "type", text_field_get_text_type, 0);
-    rb_define_method(cTextField, "text", text_field_get_text, 0);
-    rb_define_method(cTextField, "set_text", text_field_set_text, 1);
-    rb_define_method(cTextField, "max_length", text_field_get_max_length, 0);
-    rb_define_method(cTextField, "spell_check?", text_field_do_spell_check, 0);
-    rb_define_method(cTextField, "scroll?", text_field_do_scroll, 0);
-    rb_define_method(cTextField, "rich_text?", text_field_is_rich_text, 0);
-    rb_define_method(cTextField, "password?", text_field_is_password, 0);
-
-    G_DEF_SETTERS(cTextField);
-
-    rb_define_method(cChoiceField, "type", choice_field_get_choice_type, 0);
-    rb_define_method(cChoiceField, "editable?", choice_field_is_editable, 0);
-    rb_define_method(cChoiceField, "select_multiple?",
-                     choice_field_can_select_multiple, 0);
-    rb_define_method(cChoiceField, "spell_check?",
-                     choice_field_do_spell_check, 0);
-    rb_define_method(cChoiceField, "commit_on_change?",
-                     choice_field_commit_on_change, 0);
-    rb_define_method(cChoiceField, "n_items", choice_field_get_n_items, 0);
-    rb_define_method(cChoiceField, "[]", choice_field_get_item, 1);
-    rb_define_method(cChoiceField, "selected?",
-                     choice_field_is_item_selected, 1);
-    rb_define_method(cChoiceField, "select", choice_field_select_item, 1);
-    rb_define_method(cChoiceField, "unselect_all", choice_field_unselect_all, 0);
-    rb_define_method(cChoiceField, "toggle", choice_field_toggle_item, 1);
-    rb_define_method(cChoiceField, "text", choice_field_get_text, 0);
-    rb_define_method(cChoiceField, "set_text", choice_field_set_text, 1);
-
-    G_DEF_SETTERS(cChoiceField);
+    Init_poppler_button_field(mPoppler, RG_TARGET_NAMESPACE);
+    Init_poppler_text_field(mPoppler, RG_TARGET_NAMESPACE);
+    Init_poppler_choice_field(mPoppler, RG_TARGET_NAMESPACE);
 }
