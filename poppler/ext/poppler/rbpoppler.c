@@ -94,6 +94,10 @@ Init_poppler(void)
     RG_DEF_MODFUNC_P(cairo_available, 0);
 
     Init_poppler_document(RG_TARGET_NAMESPACE);
+    Init_poppler_indexiter(RG_TARGET_NAMESPACE);
+    Init_poppler_fontinfo(RG_TARGET_NAMESPACE);
+    Init_poppler_fontsiter(RG_TARGET_NAMESPACE);
+    Init_poppler_psfile(RG_TARGET_NAMESPACE);
     Init_poppler_page(RG_TARGET_NAMESPACE);
     Init_poppler_attachment(RG_TARGET_NAMESPACE);
     Init_poppler_action(RG_TARGET_NAMESPACE);
