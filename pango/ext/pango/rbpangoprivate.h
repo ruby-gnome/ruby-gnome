@@ -7,6 +7,10 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
+#if PANGO_CHECK_VERSION(1,10,0) && defined(HAVE_RB_CAIRO_H)
+#  define CAIRO_AVAILABLE 1
+#endif
+
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL void Init_pango_analysis(VALUE mPango);
