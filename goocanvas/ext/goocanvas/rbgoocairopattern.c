@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cPattern
 
 static VALUE
-rb_cairo_pattern_to_goo(VALUE self)
+rg_to_goo(VALUE self)
 {
     GValue gval = {0,};
     VALUE result;
@@ -43,6 +43,5 @@ Init_goocairopattern(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_const_get(rb_const_get(rb_mKernel, rb_intern("Cairo")), rb_intern("Pattern"));
 
-    rb_define_method(RG_TARGET_NAMESPACE, "to_goo", rb_cairo_pattern_to_goo, 0);
+    RG_DEF_METHOD(to_goo, 0);
 }
-
