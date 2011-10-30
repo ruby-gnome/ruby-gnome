@@ -26,7 +26,7 @@
 #define RG_TARGET_NAMESPACE mGLib
 
 static VALUE
-rbglib_m_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
+rg_m_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
 {
     GError *err = NULL;
     gchar* ret;
@@ -37,7 +37,7 @@ rbglib_m_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
     ret = g_convert(RSTRING_PTR(str), RSTRING_LEN(str),
                     StringValuePtr(to), StringValuePtr(from),
                     NULL, &written, &err);
-    
+
     if (err != NULL)
         RAISE_GERROR(err);
     s = rb_str_new(ret, written);
@@ -46,7 +46,7 @@ rbglib_m_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
 }
 
 static VALUE
-rbglib_m_locale_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_locale_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -65,7 +65,7 @@ rbglib_m_locale_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_locale_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_locale_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -84,7 +84,7 @@ rbglib_m_locale_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_filename_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_filename_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -103,7 +103,7 @@ rbglib_m_filename_to_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_filename_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_filename_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s = Qnil;
@@ -122,7 +122,7 @@ rbglib_m_filename_from_utf8(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_filename_to_uri(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_filename_to_uri(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE filename, hostname, s;
     GError *err = NULL;
@@ -142,7 +142,7 @@ rbglib_m_filename_to_uri(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbglib_m_filename_from_uri(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_filename_from_uri(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     VALUE s;
@@ -161,7 +161,7 @@ rbglib_m_filename_from_uri(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     rb_warning("GLib.utf8_validate is deprecated. Use GLib::UTF8.validate instead.");
     StringValue(str);
@@ -183,15 +183,15 @@ Init_glib_convert(void)
     /* glib/gunicode.h */
     /* just for backward compatibility.
        Use GLib::UTF8.validate instead. */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "utf8_validate", rbglib_m_utf8_validate, 1);
+    RG_DEF_MODFUNC(utf8_validate, 1);
 
     /* glib/gconvert.h */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "convert", rbglib_m_convert, 3);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "locale_to_utf8", rbglib_m_locale_to_utf8, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "locale_from_utf8", rbglib_m_locale_from_utf8, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_to_utf8", rbglib_m_filename_to_utf8, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_from_utf8", rbglib_m_filename_from_utf8, 1);
+    RG_DEF_MODFUNC(convert, 3);
+    RG_DEF_MODFUNC(locale_to_utf8, 1);
+    RG_DEF_MODFUNC(locale_from_utf8, 1);
+    RG_DEF_MODFUNC(filename_to_utf8, 1);
+    RG_DEF_MODFUNC(filename_from_utf8, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_to_uri", rbglib_m_filename_to_uri, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_from_uri", rbglib_m_filename_from_uri, 1);
+    RG_DEF_MODFUNC(filename_to_uri, -1);
+    RG_DEF_MODFUNC(filename_from_uri, 1);
 }

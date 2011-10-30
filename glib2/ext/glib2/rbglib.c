@@ -873,7 +873,7 @@ Init_mem()
 #endif
 
 static VALUE
-rbg_s_os_win32(G_GNUC_UNUSED VALUE self)
+rg_m_os_win32_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_WIN32
     return Qtrue;
@@ -883,7 +883,7 @@ rbg_s_os_win32(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbg_s_os_beos(G_GNUC_UNUSED VALUE self)
+rg_m_os_beos_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_BEOS
     return Qtrue;
@@ -893,7 +893,7 @@ rbg_s_os_beos(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbg_s_os_unix(G_GNUC_UNUSED VALUE self)
+rg_m_os_unix_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_UNIX
     return Qtrue;
@@ -948,7 +948,7 @@ Init_glib2(void)
     rb_define_const(RG_TARGET_NAMESPACE, "MININT", INT2FIX(G_MININT));
     rb_define_const(RG_TARGET_NAMESPACE, "MAXINT", INT2NUM(G_MAXINT));
     rb_define_const(RG_TARGET_NAMESPACE, "MAXUINT", UINT2NUM(G_MAXUINT));
-    
+
     rb_define_const(RG_TARGET_NAMESPACE, "MINSHORT", INT2FIX(G_MINSHORT));
     rb_define_const(RG_TARGET_NAMESPACE, "MAXSHORT", INT2FIX(G_MAXSHORT));
     rb_define_const(RG_TARGET_NAMESPACE, "MAXUSHORT", UINT2NUM(G_MAXUSHORT));
@@ -983,9 +983,9 @@ Init_glib2(void)
     rb_define_const(RG_TARGET_NAMESPACE, "MAXDOUBLE", DBL2NUM(G_MAXDOUBLE));
 
     /* Standard Macros */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "os_win32?", rbg_s_os_win32, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "os_beos?", rbg_s_os_beos, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "os_unix?", rbg_s_os_unix, 0);
+    RG_DEF_MODFUNC_P(os_win32, 0);
+    RG_DEF_MODFUNC_P(os_beos, 0);
+    RG_DEF_MODFUNC_P(os_unix, 0);
 
     rb_define_const(RG_TARGET_NAMESPACE, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
     rb_define_const(RG_TARGET_NAMESPACE, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
@@ -1045,7 +1045,6 @@ union       GDoubleIEEE754;
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_HIGH_IDLE", INT2FIX(G_PRIORITY_HIGH_IDLE));
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_DEFAULT_IDLE", INT2FIX(G_PRIORITY_DEFAULT_IDLE));
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_LOW", INT2FIX(G_PRIORITY_LOW));
-
 
 /*    Init_mem(); */
     Init_gutil();

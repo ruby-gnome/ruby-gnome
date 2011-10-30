@@ -28,7 +28,7 @@ VALUE rbgobj_mInterface;
 VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-interface_s_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
+rg_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
 {
     if (!rb_obj_is_kind_of(klass, cInstantiatable))
         rb_raise(rb_eTypeError, "Not a subclass of GLib::Instantiatable");
@@ -38,7 +38,7 @@ interface_s_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
 #if GLIB_CHECK_VERSION(2,4,0)
 
 static VALUE
-interface_s_install_property(VALUE self, VALUE pspec_obj)
+rg_install_property(VALUE self, VALUE pspec_obj)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     gpointer ginterface;
@@ -57,7 +57,7 @@ interface_s_install_property(VALUE self, VALUE pspec_obj)
 }
 
 static VALUE
-interface_s_property(VALUE self, VALUE property_name)
+rg_property(VALUE self, VALUE property_name)
 {
     gpointer ginterface;
     const char* name;
@@ -92,7 +92,7 @@ interface_s_property(VALUE self, VALUE property_name)
 }
 
 static VALUE
-interface_s_properties(int argc, VALUE* argv, VALUE self)
+rg_properties(int argc, VALUE* argv, VALUE self)
 {
     guint n_properties;
     GParamSpec** props;
@@ -131,7 +131,7 @@ rbgobj_init_interface(VALUE interf)
 
     rb_extend_object(interf, RG_TARGET_NAMESPACE);
     if (CLASS2GTYPE(interf) == G_TYPE_INTERFACE) {
-	rb_mGLibInterface = interf;
+        rb_mGLibInterface = interf;
     } else {
         rb_extend_object(interf, rb_mGLibInterface);
         rb_include_module(interf, rb_mGLibInterface);
@@ -144,11 +144,11 @@ Init_gobject_typeinterface(void)
 {
     RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "MetaInterface");
     rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "append_features", interface_s_append_features, 1);
+    RG_DEF_METHOD(append_features, 1);
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "install_property", interface_s_install_property, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "property", interface_s_property, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "properties", interface_s_properties, -1);
+    RG_DEF_METHOD(install_property, 1);
+    RG_DEF_METHOD(property, 1);
+    RG_DEF_METHOD(properties, -1);
 #endif
 
     rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);

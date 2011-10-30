@@ -26,13 +26,13 @@
 
 #if GLIB_CHECK_VERSION(2,2,0)
 static VALUE
-rbglib_m_application_name(G_GNUC_UNUSED VALUE self)
+rg_m_application_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_application_name());
 }
 
 static VALUE
-rbglib_m_set_application_name(VALUE self, VALUE application_name)
+rg_m_set_application_name(VALUE self, VALUE application_name)
 {
     g_set_prgname(NIL_P(application_name) ? NULL : RVAL2CSTR(application_name));
     return self;
@@ -40,27 +40,27 @@ rbglib_m_set_application_name(VALUE self, VALUE application_name)
 #endif
 
 static VALUE
-rbglib_m_prgname(G_GNUC_UNUSED VALUE self)
+rg_m_prgname(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_prgname());
 }
 
 static VALUE
-rbglib_m_set_prgname(VALUE self, VALUE prgname)
+rg_m_set_prgname(VALUE self, VALUE prgname)
 {
     g_set_prgname(NIL_P(prgname) ? NULL : RVAL2CSTR(prgname));
     return self;
 }
 
 static VALUE
-rbglib_m_env(G_GNUC_UNUSED VALUE self, VALUE variable)
+rg_m_getenv(G_GNUC_UNUSED VALUE self, VALUE variable)
 {
     return CSTR2RVAL(g_getenv(RVAL2CSTR(variable)));
 }
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-rbglib_m_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
+rg_m_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
 {
     return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable), 
                                NIL_P(value) ? NULL : RVAL2CSTR(value),
@@ -68,7 +68,7 @@ rbglib_m_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE ove
 }
 
 static VALUE
-rbglib_m_unsetenv(VALUE self, VALUE variable)
+rg_m_unsetenv(VALUE self, VALUE variable)
 {
     g_unsetenv(RVAL2CSTR(variable));
     return self;
@@ -78,7 +78,7 @@ rbglib_m_unsetenv(VALUE self, VALUE variable)
 #if GLIB_CHECK_VERSION(2,8,0)
 #ifdef HAVE_G_LISTENV
 static VALUE
-rbglib_m_listenv(VALUE self)
+rg_m_listenv(VALUE self)
 {
     gchar** c_list;
     gchar** c_var;
@@ -94,51 +94,51 @@ rbglib_m_listenv(VALUE self)
 #endif
 
 static VALUE
-rbglib_m_host_name(G_GNUC_UNUSED VALUE self)
+rg_m_host_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_host_name());
 }
 #endif
 
 static VALUE
-rbglib_m_user_name(G_GNUC_UNUSED VALUE self)
+rg_m_user_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_name());
 }
 
 static VALUE
-rbglib_m_real_name(G_GNUC_UNUSED VALUE self)
+rg_m_real_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_real_name());
 }
 
 #if GLIB_CHECK_VERSION(2, 6, 0)
 static VALUE
-rbglib_m_user_cache_dir(G_GNUC_UNUSED VALUE self)
+rg_m_user_cache_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_cache_dir());
 }
 
 static VALUE
-rbglib_m_user_data_dir(G_GNUC_UNUSED VALUE self)
+rg_m_user_data_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_data_dir());
 }
 
 static VALUE
-rbglib_m_user_config_dir(G_GNUC_UNUSED VALUE self)
+rg_m_user_config_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_user_config_dir());
 }
 
 static VALUE
-rbglib_m_system_data_dirs(G_GNUC_UNUSED VALUE self)
+rg_m_system_data_dirs(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_system_data_dirs());
 }
 
 static VALUE
-rbglib_m_system_config_dirs(G_GNUC_UNUSED VALUE self)
+rg_m_system_config_dirs(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_system_config_dirs());
 }
@@ -146,27 +146,27 @@ rbglib_m_system_config_dirs(G_GNUC_UNUSED VALUE self)
 
 #if GLIB_CHECK_VERSION(2, 14, 0)
 static VALUE
-rbglib_m_get_user_special_dir(G_GNUC_UNUSED VALUE self, VALUE directory)
+rg_m_get_user_special_dir(G_GNUC_UNUSED VALUE self, VALUE directory)
 {
     return CSTR2RVAL(g_get_user_special_dir(RVAL2GENUM(directory,
-						       G_TYPE_USER_DIRECTORY)));
+                                           G_TYPE_USER_DIRECTORY)));
 }
 #endif
 
 static VALUE
-rbglib_m_home_dir(G_GNUC_UNUSED VALUE self)
+rg_m_home_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_home_dir());
 }
 
 static VALUE
-rbglib_m_tmp_dir(G_GNUC_UNUSED VALUE self)
+rg_m_tmp_dir(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_tmp_dir());
 }
 
 static VALUE
-rbglib_m_current_dir(G_GNUC_UNUSED VALUE self)
+rg_m_current_dir(G_GNUC_UNUSED VALUE self)
 {
     gchar* dir = g_get_current_dir();
     VALUE ret = CSTR2RVAL(dir);
@@ -175,25 +175,25 @@ rbglib_m_current_dir(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbglib_m_path_is_absolute(G_GNUC_UNUSED VALUE self, VALUE fname)
+rg_m_path_is_absolute_p(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CBOOL2RVAL(g_path_is_absolute(RVAL2CSTR(fname)));
 }
 
 static VALUE
-rbglib_m_path_skip_root(G_GNUC_UNUSED VALUE self, VALUE fname)
+rg_m_path_skip_root(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CSTR2RVAL(g_path_skip_root(RVAL2CSTR(fname)));
 }
 
 static VALUE
-rbglib_m_path_get_basename(G_GNUC_UNUSED VALUE self, VALUE fname)
+rg_m_path_get_basename(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CSTR2RVAL(g_path_get_basename(RVAL2CSTR(fname)));
 }
 
 static VALUE
-rbglib_m_path_get_dirname(G_GNUC_UNUSED VALUE self, VALUE fname)
+rg_m_path_get_dirname(G_GNUC_UNUSED VALUE self, VALUE fname)
 {
     return CSTR2RVAL(g_path_get_dirname(RVAL2CSTR(fname)));
 }
@@ -211,7 +211,7 @@ gchar*      g_build_pathv                   (const gchar *separator,
 */
 
 static VALUE
-rbglib_m_find_program_in_path(G_GNUC_UNUSED VALUE self, VALUE program)
+rg_m_find_program_in_path(G_GNUC_UNUSED VALUE self, VALUE program)
 {
     gchar* path = g_find_program_in_path(RVAL2CSTR(program));
     VALUE ret = CSTR2RVAL(path);
@@ -220,25 +220,25 @@ rbglib_m_find_program_in_path(G_GNUC_UNUSED VALUE self, VALUE program)
 }
 
 static VALUE
-rbglib_m_bit_nth_lsf(G_GNUC_UNUSED VALUE self, VALUE mask, VALUE nth_bit)
+rg_m_bit_nth_lsf(G_GNUC_UNUSED VALUE self, VALUE mask, VALUE nth_bit)
 {
     return INT2NUM(g_bit_nth_lsf(NUM2ULONG(mask), NUM2INT(nth_bit)));
 }
 
 static VALUE
-rbglib_m_bit_nth_msf(G_GNUC_UNUSED VALUE self, VALUE mask, VALUE nth_bit)
+rg_m_bit_nth_msf(G_GNUC_UNUSED VALUE self, VALUE mask, VALUE nth_bit)
 {
     return INT2NUM(g_bit_nth_msf(NUM2ULONG(mask), NUM2INT(nth_bit)));
 }
 
 static VALUE
-rbglib_m_bit_storage(G_GNUC_UNUSED VALUE self, VALUE number)
+rg_m_bit_storage(G_GNUC_UNUSED VALUE self, VALUE number)
 {
     return UINT2NUM(g_bit_storage(NUM2ULONG(number)));
 }
 
 static VALUE
-rbglib_m_spaced_primes_closest(G_GNUC_UNUSED VALUE self, VALUE num)
+rg_m_spaced_primes_closest(G_GNUC_UNUSED VALUE self, VALUE num)
 {
     return UINT2NUM(g_spaced_primes_closest(NUM2UINT(num)));
 }
@@ -249,7 +249,7 @@ void        g_atexit                        (GVoidFunc func);
 */
 
 static VALUE
-rbglib_m_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
+rg_m_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
 {
     gint i, nkeys;
     VALUE ary;
@@ -263,7 +263,7 @@ rbglib_m_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
         gkeys[i].key = RVAL2CSTR(RARRAY_PTR(RARRAY_PTR(ary)[i])[0]);
         gkeys[i].value = NUM2UINT(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
     }
-   
+
     return UINT2NUM(g_parse_debug_string(RVAL2CSTR(string), gkeys, nkeys));
 }
 
@@ -282,7 +282,7 @@ void        g_nullify_pointer               (gpointer *nullify_location);
 */
 
 static VALUE
-rbglib_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
+rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     return CBOOL2RVAL(glib_major_version > NUM2UINT(major) ||
                       (glib_major_version == NUM2UINT(major) && 
@@ -302,56 +302,49 @@ Init_glib_utils(void)
 #endif
 
 #if GLIB_CHECK_VERSION(2,2,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "application_name", rbglib_m_application_name, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_application_name", rbglib_m_set_application_name, 1);
+    RG_DEF_MODFUNC(application_name, 0);
+    RG_DEF_MODFUNC(set_application_name, 1);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "prgname", rbglib_m_prgname, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "set_prgname", rbglib_m_set_prgname, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "getenv", rbglib_m_env, 1);
+    RG_DEF_MODFUNC(prgname, 0);
+    RG_DEF_MODFUNC(set_prgname, 1);
+    RG_DEF_MODFUNC(getenv, 1);
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "setenv", rbglib_m_setenv, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "unsetenv", rbglib_m_unsetenv, 1);
+    RG_DEF_MODFUNC(setenv, 2);
+    RG_DEF_MODFUNC(unsetenv, 1);
 #endif
 #if GLIB_CHECK_VERSION(2,8,0)
 #ifdef HAVE_G_LISTENV
-    rb_define_module_function(RG_TARGET_NAMESPACE, "listenv", rbglib_m_listenv, 0);
+    RG_DEF_MODFUNC(listenv, 0);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "host_name", rbglib_m_host_name, 0);
+    RG_DEF_MODFUNC(host_name, 0);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "user_name", rbglib_m_user_name, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "real_name", rbglib_m_real_name, 0);
+    RG_DEF_MODFUNC(user_name, 0);
+    RG_DEF_MODFUNC(real_name, 0);
 
 #if GLIB_CHECK_VERSION(2, 6, 0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "user_cache_dir",
-			      rbglib_m_user_cache_dir, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "user_data_dir",
-			      rbglib_m_user_data_dir, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "user_config_dir",
-			      rbglib_m_user_config_dir, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "system_data_dirs",
-			      rbglib_m_system_data_dirs, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "system_config_dirs",
-			      rbglib_m_system_config_dirs, 0);
+    RG_DEF_MODFUNC(user_cache_dir, 0);
+    RG_DEF_MODFUNC(user_data_dir, 0);
+    RG_DEF_MODFUNC(user_config_dir, 0);
+    RG_DEF_MODFUNC(system_data_dirs, 0);
+    RG_DEF_MODFUNC(system_config_dirs, 0);
 #endif
 #if GLIB_CHECK_VERSION(2, 14, 0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_user_special_dir",
-			      rbglib_m_get_user_special_dir, 1);
+    RG_DEF_MODFUNC(get_user_special_dir, 1);
 #endif
-    rb_define_module_function(RG_TARGET_NAMESPACE, "home_dir", rbglib_m_home_dir, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "tmp_dir", rbglib_m_tmp_dir, 0);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "current_dir", rbglib_m_current_dir, 0);
+    RG_DEF_MODFUNC(home_dir, 0);
+    RG_DEF_MODFUNC(tmp_dir, 0);
+    RG_DEF_MODFUNC(current_dir, 0);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "path_is_absolute?", rbglib_m_path_is_absolute, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "path_skip_root", rbglib_m_path_skip_root, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "path_get_basename", rbglib_m_path_get_basename, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "path_get_dirname", rbglib_m_path_get_dirname, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "find_program_in_path", rbglib_m_find_program_in_path, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "bit_nth_lsf", rbglib_m_bit_nth_lsf, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "bit_nth_msf", rbglib_m_bit_nth_msf, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "bit_storage", rbglib_m_bit_storage, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "spaced_primes_closest", rbglib_m_spaced_primes_closest, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "parse_debug_string", rbglib_m_parse_debug_string, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version?", rbglib_m_check_version, 3);
+    RG_DEF_MODFUNC_P(path_is_absolute, 1);
+    RG_DEF_MODFUNC(path_skip_root, 1);
+    RG_DEF_MODFUNC(path_get_basename, 1);
+    RG_DEF_MODFUNC(path_get_dirname, 1);
+    RG_DEF_MODFUNC(find_program_in_path, 1);
+    RG_DEF_MODFUNC(bit_nth_lsf, 2);
+    RG_DEF_MODFUNC(bit_nth_msf, 2);
+    RG_DEF_MODFUNC(bit_storage, 1);
+    RG_DEF_MODFUNC(spaced_primes_closest, 1);
+    RG_DEF_MODFUNC(parse_debug_string, 2);
+    RG_DEF_MODFUNC_P(check_version, 3);
 
 }
-
