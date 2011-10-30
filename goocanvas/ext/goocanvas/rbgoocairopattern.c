@@ -21,21 +21,28 @@
 
 #include "rbgoocanvas.h"
 
-#define RG_TARGET_NAMESPACE mGoo
+#define RG_TARGET_NAMESPACE cPattern
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE
+rb_cairo_pattern_to_goo(VALUE self)
+{
+    GValue gval = {0,};
+    VALUE result;
+
+    g_value_init(&gval, GOO_TYPE_CAIRO_PATTERN);
+    g_value_set_boxed(&gval, RVAL2CRPATTERN(self));
+
+    result = rbgobj_gvalue_to_rvalue(&gval);
+    g_value_unset(&gval);
+
+    return result;
+}
 
 void
-Init_goo(void)
+Init_goocairopattern(void)
 {
-    RG_TARGET_NAMESPACE = rb_define_module("Goo");
+    VALUE RG_TARGET_NAMESPACE = rb_const_get(rb_const_get(rb_mKernel, rb_intern("Cairo")), rb_intern("Pattern"));
 
-    G_DEF_CLASS(GOO_TYPE_CAIRO_MATRIX, "CairoMatrix", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_PATTERN, "CairoPattern", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_FILL_RULE, "CairoFillRule", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_OPERATOR, "CairoOperator", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_ANTIALIAS, "CairoAntiAlias", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_LINE_CAP, "CairoLineCap", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_LINE_JOIN, "CairoLineJoin", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GOO_TYPE_CAIRO_HINT_METRICS, "CairoHintMetrics", RG_TARGET_NAMESPACE);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_goo", rb_cairo_pattern_to_goo, 0);
 }
+
