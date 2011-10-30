@@ -22,6 +22,8 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
+#define RG_TARGET_NAMESPACE cFileError
+
 /* Use Ruby standard libraries.
 enum        GFileTest;
 GFileError  g_file_error_from_errno         (gint err_no);
@@ -58,32 +60,32 @@ rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 void
 Init_glib_fileutils(void)
 {
-    VALUE cFileError = G_DEF_ERROR2(G_FILE_ERROR, "FileError", mGLib, rb_eIOError);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_ERROR2(G_FILE_ERROR, "FileError", mGLib, rb_eIOError);
 
-    rb_define_const(cFileError, "EXIST", INT2NUM(G_FILE_ERROR_EXIST));
-    rb_define_const(cFileError, "ISDIR", INT2NUM(G_FILE_ERROR_ISDIR));
-    rb_define_const(cFileError, "ACCES", INT2NUM(G_FILE_ERROR_ACCES));
-    rb_define_const(cFileError, "NAMETOOLONG", INT2NUM(G_FILE_ERROR_NAMETOOLONG));
-    rb_define_const(cFileError, "NOENT", INT2NUM(G_FILE_ERROR_NOENT));
-    rb_define_const(cFileError, "NOTDIR", INT2NUM(G_FILE_ERROR_NOTDIR));
-    rb_define_const(cFileError, "NXIO", INT2NUM(G_FILE_ERROR_NXIO));
-    rb_define_const(cFileError, "NODEV", INT2NUM(G_FILE_ERROR_NODEV));
-    rb_define_const(cFileError, "ROFS", INT2NUM(G_FILE_ERROR_ROFS));
-    rb_define_const(cFileError, "TXTBSY", INT2NUM(G_FILE_ERROR_TXTBSY));
-    rb_define_const(cFileError, "FAULT", INT2NUM(G_FILE_ERROR_FAULT));
-    rb_define_const(cFileError, "LOOP", INT2NUM(G_FILE_ERROR_LOOP));
-    rb_define_const(cFileError, "NOSPC", INT2NUM(G_FILE_ERROR_NOSPC));
-    rb_define_const(cFileError, "NOMEM", INT2NUM(G_FILE_ERROR_NOMEM));
-    rb_define_const(cFileError, "MFILE", INT2NUM(G_FILE_ERROR_MFILE));
-    rb_define_const(cFileError, "NFILE", INT2NUM(G_FILE_ERROR_NFILE));
-    rb_define_const(cFileError, "BADF", INT2NUM(G_FILE_ERROR_BADF));
-    rb_define_const(cFileError, "INVAL", INT2NUM(G_FILE_ERROR_INVAL));
-    rb_define_const(cFileError, "PIPE", INT2NUM(G_FILE_ERROR_PIPE));
-    rb_define_const(cFileError, "AGAIN", INT2NUM(G_FILE_ERROR_AGAIN));
-    rb_define_const(cFileError, "INTR", INT2NUM(G_FILE_ERROR_INTR));
-    rb_define_const(cFileError, "IO", INT2NUM(G_FILE_ERROR_IO));
-    rb_define_const(cFileError, "PERM", INT2NUM(G_FILE_ERROR_PERM));
-    rb_define_const(cFileError, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
+    rb_define_const(RG_TARGET_NAMESPACE, "EXIST", INT2NUM(G_FILE_ERROR_EXIST));
+    rb_define_const(RG_TARGET_NAMESPACE, "ISDIR", INT2NUM(G_FILE_ERROR_ISDIR));
+    rb_define_const(RG_TARGET_NAMESPACE, "ACCES", INT2NUM(G_FILE_ERROR_ACCES));
+    rb_define_const(RG_TARGET_NAMESPACE, "NAMETOOLONG", INT2NUM(G_FILE_ERROR_NAMETOOLONG));
+    rb_define_const(RG_TARGET_NAMESPACE, "NOENT", INT2NUM(G_FILE_ERROR_NOENT));
+    rb_define_const(RG_TARGET_NAMESPACE, "NOTDIR", INT2NUM(G_FILE_ERROR_NOTDIR));
+    rb_define_const(RG_TARGET_NAMESPACE, "NXIO", INT2NUM(G_FILE_ERROR_NXIO));
+    rb_define_const(RG_TARGET_NAMESPACE, "NODEV", INT2NUM(G_FILE_ERROR_NODEV));
+    rb_define_const(RG_TARGET_NAMESPACE, "ROFS", INT2NUM(G_FILE_ERROR_ROFS));
+    rb_define_const(RG_TARGET_NAMESPACE, "TXTBSY", INT2NUM(G_FILE_ERROR_TXTBSY));
+    rb_define_const(RG_TARGET_NAMESPACE, "FAULT", INT2NUM(G_FILE_ERROR_FAULT));
+    rb_define_const(RG_TARGET_NAMESPACE, "LOOP", INT2NUM(G_FILE_ERROR_LOOP));
+    rb_define_const(RG_TARGET_NAMESPACE, "NOSPC", INT2NUM(G_FILE_ERROR_NOSPC));
+    rb_define_const(RG_TARGET_NAMESPACE, "NOMEM", INT2NUM(G_FILE_ERROR_NOMEM));
+    rb_define_const(RG_TARGET_NAMESPACE, "MFILE", INT2NUM(G_FILE_ERROR_MFILE));
+    rb_define_const(RG_TARGET_NAMESPACE, "NFILE", INT2NUM(G_FILE_ERROR_NFILE));
+    rb_define_const(RG_TARGET_NAMESPACE, "BADF", INT2NUM(G_FILE_ERROR_BADF));
+    rb_define_const(RG_TARGET_NAMESPACE, "INVAL", INT2NUM(G_FILE_ERROR_INVAL));
+    rb_define_const(RG_TARGET_NAMESPACE, "PIPE", INT2NUM(G_FILE_ERROR_PIPE));
+    rb_define_const(RG_TARGET_NAMESPACE, "AGAIN", INT2NUM(G_FILE_ERROR_AGAIN));
+    rb_define_const(RG_TARGET_NAMESPACE, "INTR", INT2NUM(G_FILE_ERROR_INTR));
+    rb_define_const(RG_TARGET_NAMESPACE, "IO", INT2NUM(G_FILE_ERROR_IO));
+    rb_define_const(RG_TARGET_NAMESPACE, "PERM", INT2NUM(G_FILE_ERROR_PERM));
+    rb_define_const(RG_TARGET_NAMESPACE, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
 
 #if GLIB_CHECK_VERSION(2, 16, 0)
     rb_define_module_function(mGLib, "format_size_for_display",

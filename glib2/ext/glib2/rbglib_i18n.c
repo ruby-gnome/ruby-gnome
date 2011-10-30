@@ -24,6 +24,8 @@
 #undef _
 #include <glib/gi18n.h>
 
+#define RG_TARGET_NAMESPACE mGLib
+
 #if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
 rbglib_m_language_names(G_GNUC_UNUSED VALUE self)
@@ -37,7 +39,7 @@ Init_glib_i18n(void)
 {
     /* glib/gi18n.h */
 #if GLIB_CHECK_VERSION(2,6,0)
-    rb_define_module_function(mGLib, "language_names",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "language_names",
                               rbglib_m_language_names, 0);
 #endif
 }

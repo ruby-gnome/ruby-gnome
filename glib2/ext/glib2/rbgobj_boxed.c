@@ -21,7 +21,9 @@
 
 #include "rbgprivate.h"
 
-VALUE rbgobj_cBoxed;
+#define RG_TARGET_NAMESPACE rbgobj_cBoxed
+
+VALUE RG_TARGET_NAMESPACE;
 
 static void
 boxed_mark(boxed_holder *holder)
@@ -229,19 +231,16 @@ boxed_from_ruby(VALUE from, GValue* to)
 void
 Init_gobject_gboxed(void)
 {
-    VALUE gBoxed;
-
-    rbgobj_cBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
-    gBoxed = rbgobj_cBoxed;
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
 
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 
-    rb_define_alloc_func(gBoxed, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
-    rb_define_singleton_method(gBoxed, "gtype", generic_s_gtype, 0);
-    rb_define_method(gBoxed, "gtype", generic_gtype, 0);
-    rb_define_method(gBoxed, "initialize", rbgobj_boxed_init, 0);
-    rb_define_method(gBoxed, "inspect", rbgobj_boxed_inspect, 0);
-    rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 1);
-    rb_define_alias(gBoxed, "copy", "dup");
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rbgobj_boxed_init, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "inspect", rbgobj_boxed_inspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize_copy", rbgobj_boxed_init_copy, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "copy", "dup");
 }

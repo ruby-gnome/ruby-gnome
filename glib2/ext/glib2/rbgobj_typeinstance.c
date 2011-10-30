@@ -22,7 +22,9 @@
 
 #include "rbgprivate.h"
 
-VALUE cInstantiatable;
+#define RG_TARGET_NAMESPACE cInstantiatable
+
+VALUE RG_TARGET_NAMESPACE;
 
 typedef void (*ClassInfoCallbackFunc) (gpointer instance,
 				       const RGObjClassInfo *class_info,
@@ -117,10 +119,10 @@ void
 Init_gobject_typeinstance(void)
 {
     /* should be renamed to GLib::Instance? */
-    cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
-    rb_extend_object(cInstantiatable, mMetaInterface);
+    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
+    rb_extend_object(RG_TARGET_NAMESPACE, mMetaInterface);
 
-    rb_define_alloc_func(cInstantiatable, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
-    rb_define_method(cInstantiatable, "gtype", instantiatable_get_gtype, 0);
-    rb_define_method(cInstantiatable, "clone", instantiatable_clone, 0);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", instantiatable_get_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clone", instantiatable_clone, 0);
 }

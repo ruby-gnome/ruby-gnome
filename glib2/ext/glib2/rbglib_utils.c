@@ -22,6 +22,8 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE mGLib
+
 #if GLIB_CHECK_VERSION(2,2,0)
 static VALUE
 rbglib_m_application_name(G_GNUC_UNUSED VALUE self)
@@ -295,61 +297,61 @@ Init_glib_utils(void)
 {
     /* glib/gutils.h */
 #if GLIB_CHECK_VERSION(2, 14, 0)
-    G_DEF_CLASS(G_TYPE_USER_DIRECTORY, "UserDirectory", mGLib);
-    G_DEF_CONSTANTS(mGLib, G_TYPE_USER_DIRECTORY, "G_");
+    G_DEF_CLASS(G_TYPE_USER_DIRECTORY, "UserDirectory", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_USER_DIRECTORY, "G_");
 #endif
 
 #if GLIB_CHECK_VERSION(2,2,0)
-    rb_define_module_function(mGLib, "application_name", rbglib_m_application_name, 0);
-    rb_define_module_function(mGLib, "set_application_name", rbglib_m_set_application_name, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "application_name", rbglib_m_application_name, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_application_name", rbglib_m_set_application_name, 1);
 #endif
-    rb_define_module_function(mGLib, "prgname", rbglib_m_prgname, 0);
-    rb_define_module_function(mGLib, "set_prgname", rbglib_m_set_prgname, 1);
-    rb_define_module_function(mGLib, "getenv", rbglib_m_env, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "prgname", rbglib_m_prgname, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "set_prgname", rbglib_m_set_prgname, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "getenv", rbglib_m_env, 1);
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_module_function(mGLib, "setenv", rbglib_m_setenv, 2);
-    rb_define_module_function(mGLib, "unsetenv", rbglib_m_unsetenv, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "setenv", rbglib_m_setenv, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "unsetenv", rbglib_m_unsetenv, 1);
 #endif
 #if GLIB_CHECK_VERSION(2,8,0)
 #ifdef HAVE_G_LISTENV
-    rb_define_module_function(mGLib, "listenv", rbglib_m_listenv, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "listenv", rbglib_m_listenv, 0);
 #endif
-    rb_define_module_function(mGLib, "host_name", rbglib_m_host_name, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "host_name", rbglib_m_host_name, 0);
 #endif
-    rb_define_module_function(mGLib, "user_name", rbglib_m_user_name, 0);
-    rb_define_module_function(mGLib, "real_name", rbglib_m_real_name, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "user_name", rbglib_m_user_name, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "real_name", rbglib_m_real_name, 0);
 
 #if GLIB_CHECK_VERSION(2, 6, 0)
-    rb_define_module_function(mGLib, "user_cache_dir",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "user_cache_dir",
 			      rbglib_m_user_cache_dir, 0);
-    rb_define_module_function(mGLib, "user_data_dir",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "user_data_dir",
 			      rbglib_m_user_data_dir, 0);
-    rb_define_module_function(mGLib, "user_config_dir",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "user_config_dir",
 			      rbglib_m_user_config_dir, 0);
-    rb_define_module_function(mGLib, "system_data_dirs",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "system_data_dirs",
 			      rbglib_m_system_data_dirs, 0);
-    rb_define_module_function(mGLib, "system_config_dirs",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "system_config_dirs",
 			      rbglib_m_system_config_dirs, 0);
 #endif
 #if GLIB_CHECK_VERSION(2, 14, 0)
-    rb_define_module_function(mGLib, "get_user_special_dir",
+    rb_define_module_function(RG_TARGET_NAMESPACE, "get_user_special_dir",
 			      rbglib_m_get_user_special_dir, 1);
 #endif
-    rb_define_module_function(mGLib, "home_dir", rbglib_m_home_dir, 0);
-    rb_define_module_function(mGLib, "tmp_dir", rbglib_m_tmp_dir, 0);
-    rb_define_module_function(mGLib, "current_dir", rbglib_m_current_dir, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "home_dir", rbglib_m_home_dir, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "tmp_dir", rbglib_m_tmp_dir, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "current_dir", rbglib_m_current_dir, 0);
 
-    rb_define_module_function(mGLib, "path_is_absolute?", rbglib_m_path_is_absolute, 1);
-    rb_define_module_function(mGLib, "path_skip_root", rbglib_m_path_skip_root, 1);
-    rb_define_module_function(mGLib, "path_get_basename", rbglib_m_path_get_basename, 1);
-    rb_define_module_function(mGLib, "path_get_dirname", rbglib_m_path_get_dirname, 1);
-    rb_define_module_function(mGLib, "find_program_in_path", rbglib_m_find_program_in_path, 1);
-    rb_define_module_function(mGLib, "bit_nth_lsf", rbglib_m_bit_nth_lsf, 2);
-    rb_define_module_function(mGLib, "bit_nth_msf", rbglib_m_bit_nth_msf, 2);
-    rb_define_module_function(mGLib, "bit_storage", rbglib_m_bit_storage, 1);
-    rb_define_module_function(mGLib, "spaced_primes_closest", rbglib_m_spaced_primes_closest, 1);
-    rb_define_module_function(mGLib, "parse_debug_string", rbglib_m_parse_debug_string, 2);
-    rb_define_module_function(mGLib, "check_version?", rbglib_m_check_version, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "path_is_absolute?", rbglib_m_path_is_absolute, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "path_skip_root", rbglib_m_path_skip_root, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "path_get_basename", rbglib_m_path_get_basename, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "path_get_dirname", rbglib_m_path_get_dirname, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "find_program_in_path", rbglib_m_find_program_in_path, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "bit_nth_lsf", rbglib_m_bit_nth_lsf, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "bit_nth_msf", rbglib_m_bit_nth_msf, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "bit_storage", rbglib_m_bit_storage, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "spaced_primes_closest", rbglib_m_spaced_primes_closest, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "parse_debug_string", rbglib_m_parse_debug_string, 2);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version?", rbglib_m_check_version, 3);
 
 }
 

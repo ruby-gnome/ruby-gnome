@@ -23,6 +23,8 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
+#define RG_TARGET_NAMESPACE mGLib
+
 static VALUE
 rbglib_m_convert(G_GNUC_UNUSED VALUE self, VALUE str, VALUE to, VALUE from)
 {
@@ -169,7 +171,7 @@ rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 void
 Init_glib_convert(void)
 {
-    VALUE cCharError = G_DEF_ERROR2(G_CONVERT_ERROR, "ConvertError", mGLib, rb_eIOError);
+    VALUE cCharError = G_DEF_ERROR2(G_CONVERT_ERROR, "ConvertError", RG_TARGET_NAMESPACE, rb_eIOError);
 
     rb_define_const(cCharError, "NO_CONVERSION", INT2NUM(G_CONVERT_ERROR_NO_CONVERSION));
     rb_define_const(cCharError, "ILLEGAL_SEQUENCE", INT2NUM(G_CONVERT_ERROR_ILLEGAL_SEQUENCE));
@@ -181,15 +183,15 @@ Init_glib_convert(void)
     /* glib/gunicode.h */
     /* just for backward compatibility.
        Use GLib::UTF8.validate instead. */
-    rb_define_module_function(mGLib, "utf8_validate", rbglib_m_utf8_validate, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "utf8_validate", rbglib_m_utf8_validate, 1);
 
     /* glib/gconvert.h */
-    rb_define_module_function(mGLib, "convert", rbglib_m_convert, 3);
-    rb_define_module_function(mGLib, "locale_to_utf8", rbglib_m_locale_to_utf8, 1);
-    rb_define_module_function(mGLib, "locale_from_utf8", rbglib_m_locale_from_utf8, 1);
-    rb_define_module_function(mGLib, "filename_to_utf8", rbglib_m_filename_to_utf8, 1);
-    rb_define_module_function(mGLib, "filename_from_utf8", rbglib_m_filename_from_utf8, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "convert", rbglib_m_convert, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "locale_to_utf8", rbglib_m_locale_to_utf8, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "locale_from_utf8", rbglib_m_locale_from_utf8, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_to_utf8", rbglib_m_filename_to_utf8, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_from_utf8", rbglib_m_filename_from_utf8, 1);
 
-    rb_define_module_function(mGLib, "filename_to_uri", rbglib_m_filename_to_uri, -1);
-    rb_define_module_function(mGLib, "filename_from_uri", rbglib_m_filename_from_uri, 1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_to_uri", rbglib_m_filename_to_uri, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "filename_from_uri", rbglib_m_filename_from_uri, 1);
 }

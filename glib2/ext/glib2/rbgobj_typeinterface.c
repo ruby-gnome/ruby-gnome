@@ -22,8 +22,10 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE mMetaInterface
+
 VALUE rbgobj_mInterface;
-VALUE mMetaInterface;
+VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 interface_s_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
@@ -127,7 +129,7 @@ rbgobj_init_interface(VALUE interf)
 {
     static VALUE rb_mGLibInterface = Qnil;
 
-    rb_extend_object(interf, mMetaInterface);
+    rb_extend_object(interf, RG_TARGET_NAMESPACE);
     if (CLASS2GTYPE(interf) == G_TYPE_INTERFACE) {
 	rb_mGLibInterface = interf;
     } else {
@@ -140,13 +142,13 @@ rbgobj_init_interface(VALUE interf)
 void
 Init_gobject_typeinterface(void)
 {
-    mMetaInterface = rb_define_module_under(mGLib, "MetaInterface");
-    rb_define_method(mMetaInterface, "gtype", generic_s_gtype, 0);
-    rb_define_method(mMetaInterface, "append_features", interface_s_append_features, 1);
+    RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "MetaInterface");
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "append_features", interface_s_append_features, 1);
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_method(mMetaInterface, "install_property", interface_s_install_property, 1);
-    rb_define_method(mMetaInterface, "property", interface_s_property, 1);
-    rb_define_method(mMetaInterface, "properties", interface_s_properties, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "install_property", interface_s_install_property, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "property", interface_s_property, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "properties", interface_s_properties, -1);
 #endif
 
     rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
