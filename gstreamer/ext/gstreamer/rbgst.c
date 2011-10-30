@@ -22,10 +22,12 @@
 
 #include "rbgst.h"
 
+#define RG_TARGET_NAMESPACE mGst
+
 /* Module: Gst
  * The GStreamer module.
  */
-VALUE mGst;
+VALUE RG_TARGET_NAMESPACE;
 
 static void
 Init_gst_classes (void)
@@ -249,39 +251,39 @@ rbgst_m_check_version(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro
 void
 Init_gstreamer (void)
 {
-    mGst = rb_define_module ("Gst");
+    RG_TARGET_NAMESPACE = rb_define_module ("Gst");
 
-    rb_define_module_function(mGst, "init", rb_gst_init, -1);
-    rb_define_module_function(mGst, "version", rb_gst_version, 0);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "init", rb_gst_init, -1);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "version", rb_gst_version, 0);
 
     /*
      * Constant: VERSION_MAJOR
      * GStreamer's major version.
      */
-    rb_define_const(mGst, "VERSION_MAJOR", INT2FIX(GST_VERSION_MAJOR));
+    rb_define_const(RG_TARGET_NAMESPACE, "VERSION_MAJOR", INT2FIX(GST_VERSION_MAJOR));
 
     /*
      * Constant: VERSION_MINOR
      * GStreamer's minor version.
      */
-    rb_define_const(mGst, "VERSION_MINOR", INT2FIX(GST_VERSION_MINOR));
+    rb_define_const(RG_TARGET_NAMESPACE, "VERSION_MINOR", INT2FIX(GST_VERSION_MINOR));
 
     /*
      * Constant: VERSION_MICRO
      * GStreamer's micro version.
      */
-    rb_define_const(mGst, "VERSION_MICRO", INT2FIX(GST_VERSION_MICRO));
+    rb_define_const(RG_TARGET_NAMESPACE, "VERSION_MICRO", INT2FIX(GST_VERSION_MICRO));
 
 
     /*
      * Constant: BUILD_VERSION
      * GStreamer's build version.
      */
-    rb_define_const(mGst, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(GST_VERSION_MAJOR),
                                 INT2FIX(GST_VERSION_MINOR),
                                 INT2FIX(GST_VERSION_MICRO)));
 
-    rb_define_module_function(mGst, "check_version?", rbgst_m_check_version, 3);
+    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version?", rbgst_m_check_version, 3);
 }
