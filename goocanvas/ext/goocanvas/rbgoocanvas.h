@@ -61,7 +61,9 @@ void Init_goocanvastable(void); /* Goo::CanvasTable */
 void Init_goocanvaswidget(void); /* Goo::CanvasWidget */
 void Init_goocanvasstyle(void); /* Goo::CanvasStyle */
 void Init_goocanvasgroup(void); /* Goo::CanvasGroup */
-void Init_goocairo(void); /* conversion from Cairo types to GooCairo types */
+void Init_goo(void);
+void Init_goocairopattern(void);
+void Init_goocairomatrix(void);
 
 extern VALUE mGoo;
 
