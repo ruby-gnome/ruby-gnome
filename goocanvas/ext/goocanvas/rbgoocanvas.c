@@ -21,8 +21,6 @@
 
 #include "rbgoocanvas.h"
 
-VALUE mGoo;
-
 #define RG_TARGET_NAMESPACE cCanvas
 #define SELF(self) RVAL2GC(self)
 
@@ -114,9 +112,10 @@ rg_scroll_to(VALUE self, VALUE left, VALUE top)
 void
 Init_goocanvas(void)
 {
+    Init_goo();
+
     VALUE RG_TARGET_NAMESPACE;
 
-    mGoo = rb_define_module("Goo");
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS, "Canvas", mGoo);
 
     RG_DEF_METHOD(initialize, 0);
@@ -139,5 +138,6 @@ Init_goocanvas(void)
     Init_goocanvaswidget(); /* Goo::CanvasWidget */
     Init_goocanvasstyle(); /* Goo::CanvasStyle */
     Init_goocanvasgroup(); /* Goo::CanvasGroup */
-    Init_goocairo(); /* conversion from Cairo types to GooCairo types */
+    Init_goocairopattern();
+    Init_goocairomatrix();
 }
