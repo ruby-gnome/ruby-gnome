@@ -92,7 +92,7 @@ rg_caps(VALUE self)
 static VALUE
 rg_each_caps(VALUE self)
 {
-    return rb_ary_yield(get_caps(self));
+    return rb_ary_yield(rg_caps(self));
 }
 
 /* Method: has_caps?

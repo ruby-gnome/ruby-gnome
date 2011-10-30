@@ -173,7 +173,7 @@ rg_topelements (VALUE self)
 static VALUE
 rg_each_topelement (VALUE self)
 {
-    return rb_ary_yield (rb_gst_xml_get_topelements (self));
+    return rb_ary_yield (rg_topelements (self));
 }
 
 void

@@ -850,7 +850,7 @@ rg_s_pad_templates(VALUE self)
 static VALUE
 rg_s_each_pad_template(VALUE self)
 {
-    return rb_ary_yield(rb_gst_element_get_pad_templates(self));
+    return rb_ary_yield(rg_s_pad_templates(self));
 }
 
 /*

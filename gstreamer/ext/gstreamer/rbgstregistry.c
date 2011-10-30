@@ -75,7 +75,7 @@ rg_plugins(VALUE self)
 static VALUE
 rg_each_plugin (VALUE self)
 {
-    return rb_ary_yield (rb_gst_registry_get_plugins (self));
+    return rb_ary_yield (rg_plugins (self));
 }
 
 /*
@@ -130,7 +130,7 @@ rg_get_features(VALUE self, VALUE type_or_plugin_name)
 static VALUE
 rg_each_feature (VALUE self, VALUE type)
 {
-    return rb_ary_yield (rb_gst_registry_get_features (self, type));
+    return rb_ary_yield (rg_get_features (self, type));
 }
 
 /*
@@ -166,7 +166,7 @@ rg_paths (VALUE self)
 static VALUE
 rg_each_path (VALUE self)
 {
-    return rb_ary_yield (rb_gst_registry_get_paths (self));
+    return rb_ary_yield (rg_paths (self));
 }
 
 /*

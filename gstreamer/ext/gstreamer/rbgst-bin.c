@@ -237,7 +237,7 @@ rg_add(int argc, VALUE *argv, VALUE self)
     int i;
 
     for (i = 0; i < argc; i++) {
-        rb_gst_bin_add(self, argv[i]);
+        rg_operator_add(self, argv[i]);
     }
     return Qnil;
 }
@@ -299,7 +299,7 @@ rg_clear(VALUE self)
 static VALUE
 rg_each(int argc, VALUE *argv, VALUE self)
 {
-    return rb_ary_yield(rb_gst_bin_get_children(argc, argv, self));
+    return rb_ary_yield(rg_children(argc, argv, self));
 }
 
 /*
@@ -313,7 +313,7 @@ rg_each(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_each_recurse(VALUE self)
 {
-    return rb_ary_yield(rb_gst_bin_get_children_recurse(self));
+    return rb_ary_yield(rg_children_recurse(self));
 }
 
 /*
