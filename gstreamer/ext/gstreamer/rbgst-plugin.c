@@ -135,8 +135,8 @@ rg_operator_is_equal (VALUE self, VALUE other_plugin)
 {
     return NIL_P (other_plugin)
                 ? Qfalse
-                : rb_equal (rb_gst_plugin_get_filename (self),
-                        rb_gst_plugin_get_filename (other_plugin));
+                : rb_equal (rg_filename (self),
+                        rg_filename (other_plugin));
 }
 
 void

@@ -117,7 +117,7 @@ rg_query_types (VALUE self)
 static VALUE
 rg_each_query_type (VALUE self)
 {
-    return rb_ary_yield (rb_gst_pad_get_query_types (self));
+    return rb_ary_yield (rg_query_types (self));
 }
 
 static VALUE

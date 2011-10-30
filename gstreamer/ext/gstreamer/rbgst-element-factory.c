@@ -156,7 +156,7 @@ rg_pad_templates (VALUE self)
 static VALUE
 rg_each_pad_template (VALUE self)
 {
-    return rb_ary_yield (rb_gst_elementfactory_get_pad_templates (self));
+    return rb_ary_yield (rg_pad_templates (self));
 }
 
 /*
