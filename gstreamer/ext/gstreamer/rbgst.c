@@ -77,7 +77,7 @@ Init_gst_classes (void)
 #if defined(HAVE_GST_OVERLAY)
     extern void Init_gst_x_overlay (void);
 #endif
-    
+
 #if defined(HAVE_MEDIA_INFO)
     extern void Init_gst_mediatype (void);
 #endif
@@ -157,7 +157,7 @@ Init_gst_classes (void)
  */
 
 static VALUE
-rb_gst_init (int argc, VALUE * argv, VALUE self)
+rg_m_init (int argc, VALUE * argv, VALUE self)
 {
     gint i, gargc;
     VALUE argary;
@@ -221,13 +221,13 @@ rb_gst_init (int argc, VALUE * argv, VALUE self)
  * Gets the version number of the GStreamer library, in an array
  * of 3 fixnums, which represent major, minor and macro numbers. 
  *
- *	# Prints GStreamer version in a String 'major.minor.macro.nano'
- *	p Gst.version.join('.')
+ *  # Prints GStreamer version in a String 'major.minor.macro.nano'
+ *  p Gst.version.join('.')
  *
  * Returns: an Array of 4 fixnums (major, minor, macro and nano numbers).
  */
 static VALUE
-rb_gst_version (VALUE self)
+rg_m_version (VALUE self)
 {
     guint major, minor, micro, nano;
 
@@ -238,7 +238,7 @@ rb_gst_version (VALUE self)
 }
 
 static VALUE
-rbgst_m_check_version(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
+rg_m_check_version_p(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
 {
     guint major, minor, micro, nano;
 
@@ -251,14 +251,13 @@ rbgst_m_check_version(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro
                        micro >= NUM2UINT(rb_micro)));
 }
 
-
 void
 Init_gstreamer (void)
 {
     RG_TARGET_NAMESPACE = rb_define_module ("Gst");
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "init", rb_gst_init, -1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "version", rb_gst_version, 0);
+    RG_DEF_MODFUNC(init, -1);
+    RG_DEF_MODFUNC(version, 0);
 
     /*
      * Constant: VERSION_MAJOR
@@ -278,7 +277,6 @@ Init_gstreamer (void)
      */
     rb_define_const(RG_TARGET_NAMESPACE, "VERSION_MICRO", INT2FIX(GST_VERSION_MICRO));
 
-
     /*
      * Constant: BUILD_VERSION
      * GStreamer's build version.
@@ -289,5 +287,5 @@ Init_gstreamer (void)
                                 INT2FIX(GST_VERSION_MINOR),
                                 INT2FIX(GST_VERSION_MICRO)));
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "check_version?", rbgst_m_check_version, 3);
+    RG_DEF_MODFUNC_P(check_version, 3);
 }

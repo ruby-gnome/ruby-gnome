@@ -50,7 +50,7 @@ robj2context(VALUE object)
 }
 
 static VALUE
-context_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GstInstallPluginsContext *context;
 
@@ -60,7 +60,7 @@ context_initialize(VALUE self)
 }
 
 static VALUE
-context_set_xid(VALUE self, VALUE xid)
+rg_set_xid(VALUE self, VALUE xid)
 {
     GstInstallPluginsContext *context;
 
@@ -80,10 +80,8 @@ Init_gst_install_plugins_context(void)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_CONTEXT,
                                                "InstallPluginsContext", mGst);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize",
-                     context_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_xid",
-                     context_set_xid, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(set_xid, 1);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 #endif /* HAVE_GST_PBUTILS */

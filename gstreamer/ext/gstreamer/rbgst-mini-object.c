@@ -134,47 +134,47 @@ s_allocate(VALUE klass)
 }
 
 static VALUE
-get_flags(VALUE self)
+rg_flags(VALUE self)
 {
     return GST_FLAGS2RVAL(GST_MINI_OBJECT_FLAGS(SELF(self)));
 }
 
 static VALUE
-set_flags(VALUE self, VALUE flag)
+rg_set_flags(VALUE self, VALUE flag)
 {
     GST_MINI_OBJECT_FLAGS(SELF(self)) = RVAL2GST_FLAGS(flag);
     return Qnil;
 }
 
 static VALUE
-raise_flag(VALUE self, VALUE flag)
+rg_raise_flag(VALUE self, VALUE flag)
 {
     GST_MINI_OBJECT_FLAG_SET(SELF(self), RVAL2GST_FLAGS(flag));
     return Qnil;
 }
 
 static VALUE
-lower_flag(VALUE self, VALUE flag)
+rg_lower_flag(VALUE self, VALUE flag)
 {
     GST_MINI_OBJECT_FLAG_UNSET(SELF(self), RVAL2GST_FLAGS(flag));
     return Qnil;
 }
 
 static VALUE
-flag_raised_p(VALUE self, VALUE flag)
+rg_flag_raised_p(VALUE self, VALUE flag)
 {
     return CBOOL2RVAL(GST_MINI_OBJECT_FLAG_IS_SET(SELF(self),
                                                   RVAL2GST_FLAGS(flag)));
 }
 
 static VALUE
-writable_p(VALUE self)
+rg_writable_p(VALUE self)
 {
     return CBOOL2RVAL(gst_mini_object_is_writable(SELF(self)));
 }
 
 static VALUE
-writable_bang(VALUE self)
+rg_writable_bang(VALUE self)
 {
     GstMiniObject *original, *writable;
 
@@ -209,13 +209,13 @@ Init_gst_mini_object(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, s_allocate);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "flags", get_flags, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", set_flags, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "raise_flag", raise_flag, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "lower_flag", lower_flag, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "flag_raised?", flag_raised_p, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "writable?", writable_p, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "writable!", writable_bang, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(set_flags, 1);
+    RG_DEF_METHOD(raise_flag, 1);
+    RG_DEF_METHOD(lower_flag, 1);
+    RG_DEF_METHOD_P(flag_raised, 1);
+    RG_DEF_METHOD_P(writable, 0);
+    RG_DEF_METHOD_BANG(writable, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

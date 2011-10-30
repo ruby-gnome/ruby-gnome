@@ -29,7 +29,7 @@
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-return_get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL(gst_install_plugins_return_get_name(
                      (GstInstallPluginsReturn)
@@ -41,7 +41,6 @@ Init_gst_install_plugins_return(void)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_RETURN,
                                               "InstallPluginsReturn", mGst);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", return_get_name,
-                     0);
+    RG_DEF_METHOD(name, 0);
 }
 #endif /* HAVE_GST_PBUTILS */
