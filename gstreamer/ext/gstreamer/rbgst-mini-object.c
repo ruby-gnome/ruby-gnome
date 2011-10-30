@@ -26,13 +26,14 @@
  * Base class for refcounted lightweight objects.
  */
 
+#define RG_TARGET_NAMESPACE rb_cGstMiniObject
 #define SELF(object) (RVAL2GST_MINI_OBJ(object))
 #define RVAL2GST_FLAGS(flags) \
     (RVAL2GFLAGS(flags, GST_TYPE_MINI_OBJECT_FLAGS))
 #define GST_FLAGS2RVAL(flags) \
     (GFLAGS2RVAL(flags, GST_TYPE_MINI_OBJECT_FLAGS))
 
-VALUE rb_cGstMiniObject;
+VALUE RG_TARGET_NAMESPACE;
 
 static RGConvertTable table = {0};
 
@@ -94,7 +95,7 @@ rbgst_mini_object_robj2instance(VALUE object)
 {
     gpointer instance;
 
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(object, rb_cGstMiniObject))) {
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(object, RG_TARGET_NAMESPACE))) {
         rb_raise(rb_eTypeError, "not a Gst::MiniObject");
     }
     Data_Get_Struct(object, GstMiniObject, instance);
@@ -133,47 +134,47 @@ s_allocate(VALUE klass)
 }
 
 static VALUE
-get_flags(VALUE self)
+rg_flags(VALUE self)
 {
     return GST_FLAGS2RVAL(GST_MINI_OBJECT_FLAGS(SELF(self)));
 }
 
 static VALUE
-set_flags(VALUE self, VALUE flag)
+rg_set_flags(VALUE self, VALUE flag)
 {
     GST_MINI_OBJECT_FLAGS(SELF(self)) = RVAL2GST_FLAGS(flag);
     return Qnil;
 }
 
 static VALUE
-raise_flag(VALUE self, VALUE flag)
+rg_raise_flag(VALUE self, VALUE flag)
 {
     GST_MINI_OBJECT_FLAG_SET(SELF(self), RVAL2GST_FLAGS(flag));
     return Qnil;
 }
 
 static VALUE
-lower_flag(VALUE self, VALUE flag)
+rg_lower_flag(VALUE self, VALUE flag)
 {
     GST_MINI_OBJECT_FLAG_UNSET(SELF(self), RVAL2GST_FLAGS(flag));
     return Qnil;
 }
 
 static VALUE
-flag_raised_p(VALUE self, VALUE flag)
+rg_flag_raised_p(VALUE self, VALUE flag)
 {
     return CBOOL2RVAL(GST_MINI_OBJECT_FLAG_IS_SET(SELF(self),
                                                   RVAL2GST_FLAGS(flag)));
 }
 
 static VALUE
-writable_p(VALUE self)
+rg_writable_p(VALUE self)
 {
     return CBOOL2RVAL(gst_mini_object_is_writable(SELF(self)));
 }
 
 static VALUE
-writable_bang(VALUE self)
+rg_writable_bang(VALUE self)
 {
     GstMiniObject *original, *writable;
 
@@ -200,21 +201,21 @@ Init_gst_mini_object(void)
 
     RG_DEF_CONVERSION(&table);
 
-    rb_cGstMiniObject = G_DEF_CLASS(GST_TYPE_MINI_OBJECT, "MiniObject", mGst);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_MINI_OBJECT, "MiniObject", mGst);
 
-    G_DEF_CLASS(GST_TYPE_MINI_OBJECT_FLAGS, "Flags", rb_cGstMiniObject);
-    G_DEF_CONSTANTS(rb_cGstMiniObject, GST_TYPE_MINI_OBJECT_FLAGS,
+    G_DEF_CLASS(GST_TYPE_MINI_OBJECT_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GST_TYPE_MINI_OBJECT_FLAGS,
                     "GST_MINI_OBJECT_");
 
-    rb_define_alloc_func(rb_cGstMiniObject, s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, s_allocate);
 
-    rb_define_method(rb_cGstMiniObject, "flags", get_flags, 0);
-    rb_define_method(rb_cGstMiniObject, "set_flags", set_flags, 1);
-    rb_define_method(rb_cGstMiniObject, "raise_flag", raise_flag, 1);
-    rb_define_method(rb_cGstMiniObject, "lower_flag", lower_flag, 1);
-    rb_define_method(rb_cGstMiniObject, "flag_raised?", flag_raised_p, 1);
-    rb_define_method(rb_cGstMiniObject, "writable?", writable_p, 0);
-    rb_define_method(rb_cGstMiniObject, "writable!", writable_bang, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(set_flags, 1);
+    RG_DEF_METHOD(raise_flag, 1);
+    RG_DEF_METHOD(lower_flag, 1);
+    RG_DEF_METHOD_P(flag_raised, 1);
+    RG_DEF_METHOD_P(writable, 0);
+    RG_DEF_METHOD_BANG(writable, 0);
 
-    G_DEF_SETTERS(rb_cGstMiniObject);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

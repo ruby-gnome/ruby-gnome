@@ -26,18 +26,7 @@
 
 #define RG_TARGET_NAMESPACE mInstallPlugins
 
-static RGConvertTable context_table = {0};
 static VALUE RG_TARGET_NAMESPACE;
-static VALUE rb_cGstInstallPluginsReturn;
-static VALUE rb_cGstInstallPluginsContext;
-
-static VALUE
-return_get_name(VALUE self)
-{
-    return CSTR2RVAL(gst_install_plugins_return_get_name(
-                     (GstInstallPluginsReturn)
-                     RVAL2GENUM(self, GST_TYPE_INSTALL_PLUGINS_RETURN)));
-}
 
 static void
 gst_install_plugins_result_func(GstInstallPluginsReturn result, VALUE data)
@@ -58,6 +47,8 @@ rg_s_progress_p(VALUE self)
 {
     return CBOOL2RVAL(gst_install_plugins_installation_in_progress());
 }
+
+extern VALUE rg_cInstallPluginsContext;
 
 static VALUE
 rg_s_async(int argc, VALUE *argv, VALUE self)
@@ -81,7 +72,7 @@ rg_s_async(int argc, VALUE *argv, VALUE self)
     carray[length] = NULL;
 
     if (!NIL_P(rcontext)) {
-      if (!RVAL2CBOOL(rb_obj_is_kind_of(rcontext, rb_cGstInstallPluginsContext)))
+      if (!RVAL2CBOOL(rb_obj_is_kind_of(rcontext, rg_cInstallPluginsContext)))
         rb_raise(rb_eTypeError,
                  "2nd parameter is not Gst::InstallPluginsContext");
         context = (GstInstallPluginsContext *)RVAL2GOBJ(rcontext);
@@ -122,71 +113,14 @@ rg_s_sync(int argc, VALUE *argv, VALUE self)
     return  GENUM2RVAL(result, GST_TYPE_INSTALL_PLUGINS_RETURN);
 }
 
-static VALUE
-context2robj(gpointer context)
-{
-    return Data_Wrap_Struct(rb_cGstInstallPluginsContext, NULL,
-                            gst_install_plugins_context_free,
-                            (GstInstallPluginsContext *)context);
-}
-
-static gpointer
-robj2context(VALUE object)
-{
-    gpointer instance;
-
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(object, rb_cGstInstallPluginsContext))) {
-      rb_raise(rb_eTypeError, "not a Gst::InstallPluginsContext");
-    }
-    Data_Get_Struct(object, GstInstallPluginsContext, instance);
-    return instance;
-}
-
-static VALUE
-context_initialize(VALUE self)
-{
-    GstInstallPluginsContext *context;
-
-    context = gst_install_plugins_context_new();
-    G_INITIALIZE(self, context);
-    return Qnil;
-}
-
-static VALUE
-context_set_xid(VALUE self, VALUE xid)
-{
-    GstInstallPluginsContext *context;
-
-    context = (GstInstallPluginsContext *)RVAL2GOBJ(self);
-    gst_install_plugins_context_set_xid(context, NUM2INT(xid));/*FIXME: segfault on ruby exit*/
-    return self;
-}
-
 void
 Init_gst_install_plugins(void)
 {
     RG_TARGET_NAMESPACE = rb_define_module_under(mGst, "InstallPlugins");
 
-    rb_cGstInstallPluginsReturn = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_RETURN,
-                                              "InstallPluginsReturn", mGst);
-    rb_define_method(rb_cGstInstallPluginsReturn, "name", return_get_name,
-                     0);
-
     RG_DEF_SMETHOD_P(supported, 0);
     RG_DEF_SMETHOD_P(progress, 0);
     RG_DEF_SMETHOD(async, -1);
     RG_DEF_SMETHOD(sync, -1);
-
-    context_table.type = GST_TYPE_INSTALL_PLUGINS_CONTEXT;
-    context_table.instance2robj = context2robj;
-    context_table.robj2instance = robj2context;
-    RG_DEF_CONVERSION(&context_table);
-    rb_cGstInstallPluginsContext = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_CONTEXT,
-                                               "InstallPluginsContext", mGst);
-    rb_define_method(rb_cGstInstallPluginsContext, "initialize",
-                     context_initialize, 0);
-    rb_define_method(rb_cGstInstallPluginsContext, "set_xid",
-                     context_set_xid, 1);
-    G_DEF_SETTERS(rb_cGstInstallPluginsContext);
 }
 #endif /* HAVE_GST_PBUTILS */
