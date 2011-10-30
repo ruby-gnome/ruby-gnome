@@ -84,6 +84,8 @@ Init_gst_classes (void)
 
 #ifdef HAVE_GST_PBUTILS
     extern void Init_gst_install_plugins (void);
+    extern void Init_gst_install_plugins_return (void);
+    extern void Init_gst_install_plugins_context (void);
 #endif
 
     Init_gst_bin ();
@@ -135,6 +137,8 @@ Init_gst_classes (void)
 
 #ifdef HAVE_GST_PBUTILS
     Init_gst_install_plugins ();
+    Init_gst_install_plugins_return ();
+    Init_gst_install_plugins_context ();
 #endif
 }
 
