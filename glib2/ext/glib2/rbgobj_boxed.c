@@ -21,7 +21,9 @@
 
 #include "rbgprivate.h"
 
-VALUE rbgobj_cBoxed;
+#define RG_TARGET_NAMESPACE rbgobj_cBoxed
+
+VALUE RG_TARGET_NAMESPACE;
 
 static void
 boxed_mark(boxed_holder *holder)
@@ -70,14 +72,14 @@ rbgobj_boxed_s_allocate(VALUE klass)
 }
 
 static G_GNUC_NORETURN VALUE
-rbgobj_boxed_init(VALUE self)
+rg_initialize(VALUE self)
 {
     rb_raise(rb_eTypeError, "can't initialize %s",
              rb_class2name(CLASS_OF(self)));
 }
 
 static VALUE
-rbgobj_boxed_inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     boxed_holder* holder;
     gchar* s;
@@ -98,7 +100,7 @@ rbgobj_boxed_inspect(VALUE self)
 }
 
 static VALUE
-rbgobj_boxed_init_copy(VALUE self, VALUE orig)
+rg_initialize_copy(VALUE self, VALUE orig)
 {
     boxed_holder* holder1;
     boxed_holder* holder2;
@@ -106,7 +108,7 @@ rbgobj_boxed_init_copy(VALUE self, VALUE orig)
     if (self == orig) return self;
 
     if (!rb_obj_is_instance_of(orig, rb_obj_class(self))) {
-	rb_raise(rb_eTypeError, "wrong argument class");
+        rb_raise(rb_eTypeError, "wrong argument class");
     }
 
     Data_Get_Struct(self, boxed_holder, holder1);
@@ -168,12 +170,12 @@ rbgobj_make_boxed(gpointer p, GType gtype)
 
     if (!p)
         return Qnil;
-    
+
     cinfo = GTYPE2CINFO(gtype);
     result = rbgobj_boxed_s_allocate(cinfo->klass);
-    
+
     Data_Get_Struct(result, boxed_holder, holder);
-    
+
     if (cinfo->flags & RBGOBJ_BOXED_NOT_COPY){
         holder->boxed = p;
         holder->own   = FALSE;
@@ -229,19 +231,16 @@ boxed_from_ruby(VALUE from, GValue* to)
 void
 Init_gobject_gboxed(void)
 {
-    VALUE gBoxed;
-
-    rbgobj_cBoxed = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
-    gBoxed = rbgobj_cBoxed;
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOXED, "Boxed", mGLib);
 
     rbgobj_register_g2r_func(G_TYPE_BOXED, boxed_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_BOXED, boxed_from_ruby);
 
-    rb_define_alloc_func(gBoxed, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
-    rb_define_singleton_method(gBoxed, "gtype", generic_s_gtype, 0);
-    rb_define_method(gBoxed, "gtype", generic_gtype, 0);
-    rb_define_method(gBoxed, "initialize", rbgobj_boxed_init, 0);
-    rb_define_method(gBoxed, "inspect", rbgobj_boxed_inspect, 0);
-    rb_define_method(gBoxed, "initialize_copy", rbgobj_boxed_init_copy, 1);
-    rb_define_alias(gBoxed, "copy", "dup");
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(inspect, 0);
+    RG_DEF_METHOD(initialize_copy, 1);
+    RG_DEF_ALIAS("copy", "dup");
 }

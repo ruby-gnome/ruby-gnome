@@ -23,9 +23,11 @@
 #include "rbgprivate.h"
 #include "rbglib.h"
 
+#define RG_TARGET_NAMESPACE mGLib
+
 static ID id_inspect;
 
-VALUE mGLib;
+VALUE RG_TARGET_NAMESPACE;
 
 const gchar *
 rbg_rval2cstr(VALUE *str)
@@ -871,7 +873,7 @@ Init_mem()
 #endif
 
 static VALUE
-rbg_s_os_win32(G_GNUC_UNUSED VALUE self)
+rg_m_os_win32_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_WIN32
     return Qtrue;
@@ -881,7 +883,7 @@ rbg_s_os_win32(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbg_s_os_beos(G_GNUC_UNUSED VALUE self)
+rg_m_os_beos_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_BEOS
     return Qtrue;
@@ -891,7 +893,7 @@ rbg_s_os_beos(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbg_s_os_unix(G_GNUC_UNUSED VALUE self)
+rg_m_os_unix_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_UNIX
     return Qtrue;
@@ -911,7 +913,7 @@ Init_glib2(void)
 
     id_inspect = rb_intern("inspect");
 
-    mGLib = rb_define_module("GLib");
+    RG_TARGET_NAMESPACE = rb_define_module("GLib");
 
     setlocale (LC_CTYPE, "");
 #ifdef LC_MESSAGES
@@ -919,74 +921,74 @@ Init_glib2(void)
 #endif
 
     /* Version Information */
-    rb_define_const(mGLib, "VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(glib_major_version),
                                 INT2FIX(glib_minor_version),
                                 INT2FIX(glib_micro_version)));
-    rb_define_const(mGLib, "MAJOR_VERSION", INT2FIX(glib_major_version));
-    rb_define_const(mGLib, "MINOR_VERSION", INT2FIX(glib_minor_version));
-    rb_define_const(mGLib, "MICRO_VERSION", INT2FIX(glib_micro_version));
-    rb_define_const(mGLib, "INTERFACE_AGE", INT2FIX(glib_interface_age));
-    rb_define_const(mGLib, "BINARY_AGE", INT2FIX(glib_binary_age));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAJOR_VERSION", INT2FIX(glib_major_version));
+    rb_define_const(RG_TARGET_NAMESPACE, "MINOR_VERSION", INT2FIX(glib_minor_version));
+    rb_define_const(RG_TARGET_NAMESPACE, "MICRO_VERSION", INT2FIX(glib_micro_version));
+    rb_define_const(RG_TARGET_NAMESPACE, "INTERFACE_AGE", INT2FIX(glib_interface_age));
+    rb_define_const(RG_TARGET_NAMESPACE, "BINARY_AGE", INT2FIX(glib_binary_age));
 
-    rb_define_const(mGLib, "BINDING_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BINDING_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(RBGLIB_MAJOR_VERSION),
                                 INT2FIX(RBGLIB_MINOR_VERSION),
                                 INT2FIX(RBGLIB_MICRO_VERSION)));
 
-    rb_define_const(mGLib, "BUILD_VERSION",
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
                                 INT2FIX(GLIB_MAJOR_VERSION),
                                 INT2FIX(GLIB_MINOR_VERSION),
                                 INT2FIX(GLIB_MICRO_VERSION)));
 
     /* Limits of Basic Types */
-    rb_define_const(mGLib, "MININT", INT2FIX(G_MININT));
-    rb_define_const(mGLib, "MAXINT", INT2NUM(G_MAXINT));
-    rb_define_const(mGLib, "MAXUINT", UINT2NUM(G_MAXUINT));
-    
-    rb_define_const(mGLib, "MINSHORT", INT2FIX(G_MINSHORT));
-    rb_define_const(mGLib, "MAXSHORT", INT2FIX(G_MAXSHORT));
-    rb_define_const(mGLib, "MAXUSHORT", UINT2NUM(G_MAXUSHORT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MININT", INT2FIX(G_MININT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXINT", INT2NUM(G_MAXINT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXUINT", UINT2NUM(G_MAXUINT));
 
-    rb_define_const(mGLib, "MINLONG", INT2FIX(G_MINLONG));
-    rb_define_const(mGLib, "MAXLONG", INT2NUM(G_MAXLONG));
-    rb_define_const(mGLib, "MAXULONG", UINT2NUM(G_MAXULONG));
+    rb_define_const(RG_TARGET_NAMESPACE, "MINSHORT", INT2FIX(G_MINSHORT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXSHORT", INT2FIX(G_MAXSHORT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXUSHORT", UINT2NUM(G_MAXUSHORT));
+
+    rb_define_const(RG_TARGET_NAMESPACE, "MINLONG", INT2FIX(G_MINLONG));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXLONG", INT2NUM(G_MAXLONG));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXULONG", UINT2NUM(G_MAXULONG));
 
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_const(mGLib, "MININT8", INT2FIX(G_MININT8));
-    rb_define_const(mGLib, "MAXINT8", INT2FIX(G_MAXINT8));
-    rb_define_const(mGLib, "MAXUINT8", UINT2NUM(G_MAXUINT8));
+    rb_define_const(RG_TARGET_NAMESPACE, "MININT8", INT2FIX(G_MININT8));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXINT8", INT2FIX(G_MAXINT8));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXUINT8", UINT2NUM(G_MAXUINT8));
 
-    rb_define_const(mGLib, "MININT16", INT2FIX(G_MININT16));
-    rb_define_const(mGLib, "MAXINT16", INT2FIX(G_MAXINT16));
-    rb_define_const(mGLib, "MAXUINT16", UINT2NUM(G_MAXUINT16));
+    rb_define_const(RG_TARGET_NAMESPACE, "MININT16", INT2FIX(G_MININT16));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXINT16", INT2FIX(G_MAXINT16));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXUINT16", UINT2NUM(G_MAXUINT16));
 
-    rb_define_const(mGLib, "MININT32", INT2FIX(G_MININT32));
-    rb_define_const(mGLib, "MAXINT32", INT2NUM(G_MAXINT32));
-    rb_define_const(mGLib, "MAXUINT32", UINT2NUM(G_MAXUINT32));
+    rb_define_const(RG_TARGET_NAMESPACE, "MININT32", INT2FIX(G_MININT32));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXINT32", INT2NUM(G_MAXINT32));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXUINT32", UINT2NUM(G_MAXUINT32));
 #endif
-    rb_define_const(mGLib, "MININT64", INT2FIX(G_MININT64));
-    rb_define_const(mGLib, "MAXINT64", LL2NUM(G_MAXINT64));
-    rb_define_const(mGLib, "MAXUINT64", ULL2NUM(G_MAXUINT64));
+    rb_define_const(RG_TARGET_NAMESPACE, "MININT64", INT2FIX(G_MININT64));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXINT64", LL2NUM(G_MAXINT64));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXUINT64", ULL2NUM(G_MAXUINT64));
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_const(mGLib, "MAXSIZE", UINT2NUM(G_MAXSIZE));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXSIZE", UINT2NUM(G_MAXSIZE));
 #endif
-    rb_define_const(mGLib, "MINFLOAT", INT2FIX(G_MINFLOAT));
-    rb_define_const(mGLib, "MAXFLOAT", DBL2NUM(G_MAXFLOAT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MINFLOAT", INT2FIX(G_MINFLOAT));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXFLOAT", DBL2NUM(G_MAXFLOAT));
 
-    rb_define_const(mGLib, "MINDOUBLE", INT2FIX(G_MINDOUBLE));
-    rb_define_const(mGLib, "MAXDOUBLE", DBL2NUM(G_MAXDOUBLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "MINDOUBLE", INT2FIX(G_MINDOUBLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "MAXDOUBLE", DBL2NUM(G_MAXDOUBLE));
 
     /* Standard Macros */
-    rb_define_module_function(mGLib, "os_win32?", rbg_s_os_win32, 0);
-    rb_define_module_function(mGLib, "os_beos?", rbg_s_os_beos, 0);
-    rb_define_module_function(mGLib, "os_unix?", rbg_s_os_unix, 0);
+    RG_DEF_MODFUNC_P(os_win32, 0);
+    RG_DEF_MODFUNC_P(os_beos, 0);
+    RG_DEF_MODFUNC_P(os_unix, 0);
 
-    rb_define_const(mGLib, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
-    rb_define_const(mGLib, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
+    rb_define_const(RG_TARGET_NAMESPACE, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
+    rb_define_const(RG_TARGET_NAMESPACE, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
 
     /* discover and store glib filename encoding */
 #ifdef HAVE_RUBY_ENCODING_H
@@ -1028,22 +1030,21 @@ Init_glib2(void)
 union       GFloatIEEE754;
 union       GDoubleIEEE754;
 */
-    rb_define_const(mGLib, "E", CSTR2RVAL(G_STRINGIFY(G_E)));
-    rb_define_const(mGLib, "LN2", CSTR2RVAL(G_STRINGIFY(G_LN2)));
-    rb_define_const(mGLib, "LN10", CSTR2RVAL(G_STRINGIFY(G_LN10)));
-    rb_define_const(mGLib, "PI", CSTR2RVAL(G_STRINGIFY(G_PI)));
-    rb_define_const(mGLib, "PI_2", CSTR2RVAL(G_STRINGIFY(G_PI_2)));
-    rb_define_const(mGLib, "PI_4", CSTR2RVAL(G_STRINGIFY(G_PI_4)));
-    rb_define_const(mGLib, "SQRT2", CSTR2RVAL(G_STRINGIFY(G_SQRT2)));
-    rb_define_const(mGLib, "LOG_2_BASE_10", CSTR2RVAL(G_STRINGIFY(G_LOG_2_BASE_10)));
+    rb_define_const(RG_TARGET_NAMESPACE, "E", CSTR2RVAL(G_STRINGIFY(G_E)));
+    rb_define_const(RG_TARGET_NAMESPACE, "LN2", CSTR2RVAL(G_STRINGIFY(G_LN2)));
+    rb_define_const(RG_TARGET_NAMESPACE, "LN10", CSTR2RVAL(G_STRINGIFY(G_LN10)));
+    rb_define_const(RG_TARGET_NAMESPACE, "PI", CSTR2RVAL(G_STRINGIFY(G_PI)));
+    rb_define_const(RG_TARGET_NAMESPACE, "PI_2", CSTR2RVAL(G_STRINGIFY(G_PI_2)));
+    rb_define_const(RG_TARGET_NAMESPACE, "PI_4", CSTR2RVAL(G_STRINGIFY(G_PI_4)));
+    rb_define_const(RG_TARGET_NAMESPACE, "SQRT2", CSTR2RVAL(G_STRINGIFY(G_SQRT2)));
+    rb_define_const(RG_TARGET_NAMESPACE, "LOG_2_BASE_10", CSTR2RVAL(G_STRINGIFY(G_LOG_2_BASE_10)));
 
     /* From "The Main Event Loop" */
-    rb_define_const(mGLib, "PRIORITY_HIGH", INT2FIX(G_PRIORITY_HIGH));
-    rb_define_const(mGLib, "PRIORITY_DEFAULT", INT2FIX(G_PRIORITY_DEFAULT));
-    rb_define_const(mGLib, "PRIORITY_HIGH_IDLE", INT2FIX(G_PRIORITY_HIGH_IDLE));
-    rb_define_const(mGLib, "PRIORITY_DEFAULT_IDLE", INT2FIX(G_PRIORITY_DEFAULT_IDLE));
-    rb_define_const(mGLib, "PRIORITY_LOW", INT2FIX(G_PRIORITY_LOW));
-
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_HIGH", INT2FIX(G_PRIORITY_HIGH));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_DEFAULT", INT2FIX(G_PRIORITY_DEFAULT));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_HIGH_IDLE", INT2FIX(G_PRIORITY_HIGH_IDLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_DEFAULT_IDLE", INT2FIX(G_PRIORITY_DEFAULT_IDLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_LOW", INT2FIX(G_PRIORITY_LOW));
 
 /*    Init_mem(); */
     Init_gutil();
@@ -1079,5 +1080,5 @@ union       GDoubleIEEE754;
     Init_glib_bookmark_file();
 
     /* This is called here once. */
-    G_DEF_SETTERS(mGLib);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
