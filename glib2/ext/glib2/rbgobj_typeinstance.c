@@ -22,11 +22,13 @@
 
 #include "rbgprivate.h"
 
-VALUE cInstantiatable;
+#define RG_TARGET_NAMESPACE cInstantiatable
+
+VALUE RG_TARGET_NAMESPACE;
 
 typedef void (*ClassInfoCallbackFunc) (gpointer instance,
-				       const RGObjClassInfo *class_info,
-				       gpointer user_data);
+                                       const RGObjClassInfo *class_info,
+                                       gpointer user_data);
 
 static G_GNUC_NORETURN VALUE
 instantiatable_s_allocate(G_GNUC_UNUSED VALUE klass)
@@ -35,13 +37,13 @@ instantiatable_s_allocate(G_GNUC_UNUSED VALUE klass)
 }
 
 static VALUE
-instantiatable_get_gtype(VALUE self)
+rg_gtype(VALUE self)
 {
     return rbgobj_gtype_new(G_TYPE_FROM_INSTANCE(rbgobj_instance_from_ruby_object(self)));
 }
 
 static G_GNUC_NORETURN VALUE
-instantiatable_clone(VALUE self)
+rg_clone(VALUE self)
 {
     rb_raise(rb_eTypeError, "can't clone %s", rb_class2name(CLASS_OF(self)));
 }
@@ -59,24 +61,24 @@ each_cinfo(gpointer instance, ClassInfoCallbackFunc func, gpointer user_data)
     {
         guint i;
         for (i = 0; i < n_interfaces; i++) {
-	    const RGObjClassInfo *info;
+            const RGObjClassInfo *info;
 
-	    info = GTYPE2CINFO_NO_CREATE(interfaces[i]);
-	    if (info)
-		func(instance, info, user_data);
-	}
+            info = GTYPE2CINFO_NO_CREATE(interfaces[i]);
+            if (info)
+                func(instance, info, user_data);
+        }
     }
     g_free(interfaces);
 
     {
         GType type;
         for (type = gtype; type != G_TYPE_INVALID; type = g_type_parent(type)) {
-	    const RGObjClassInfo *info;
+            const RGObjClassInfo *info;
 
-	    info = GTYPE2CINFO_NO_CREATE(type);
-	    if (info)
-		func(instance, info, user_data);
-	}
+            info = GTYPE2CINFO_NO_CREATE(type);
+            if (info)
+                func(instance, info, user_data);
+        }
     }
 }
 
@@ -117,10 +119,10 @@ void
 Init_gobject_typeinstance(void)
 {
     /* should be renamed to GLib::Instance? */
-    cInstantiatable = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
-    rb_extend_object(cInstantiatable, mMetaInterface);
+    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Instantiatable", rb_cObject);
+    rb_extend_object(RG_TARGET_NAMESPACE, mMetaInterface);
 
-    rb_define_alloc_func(cInstantiatable, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
-    rb_define_method(cInstantiatable, "gtype", instantiatable_get_gtype, 0);
-    rb_define_method(cInstantiatable, "clone", instantiatable_clone, 0);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))instantiatable_s_allocate);
+    RG_DEF_METHOD(gtype, 0);
+    RG_DEF_METHOD(clone, 0);
 }

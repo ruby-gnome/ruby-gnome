@@ -26,7 +26,7 @@
 void Init_gio2(void);
 
 static VALUE
-gio_has_unix(G_GNUC_UNUSED VALUE self)
+rg_m_gio_has_unix_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_GIO_UNIX
         return Qtrue;
@@ -47,7 +47,7 @@ Init_gio2(void)
         G_DEF_CLASS(G_TYPE_DATA_STREAM_NEWLINE_TYPE, "DataStreamNewlineType", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DATA_STREAM_NEWLINE_TYPE, "G_");
 
-        rb_define_module_function(RG_TARGET_NAMESPACE, "gio_has_unix?", gio_has_unix, 0);
+        RG_DEF_MODFUNC_P(gio_has_unix, 0);
 
         Init_util();
 
