@@ -130,6 +130,10 @@ G_GNUC_INTERNAL void Init_glib_shellerror(void);
 G_GNUC_INTERNAL void Init_glib_completion(void);
 G_GNUC_INTERNAL void Init_glib_timer(void);
 G_GNUC_INTERNAL void Init_glib_unicode(void);
+G_GNUC_INTERNAL void Init_glib_utf8(void);
+G_GNUC_INTERNAL void Init_glib_utf16(void);
+G_GNUC_INTERNAL void Init_glib_ucs4(void);
+G_GNUC_INTERNAL void Init_glib_unichar(void);
 G_GNUC_INTERNAL void Init_glib_keyfile(void);
 G_GNUC_INTERNAL void Init_glib_bookmark_file(void);
 
@@ -144,7 +148,9 @@ G_GNUC_INTERNAL void Init_gobject_gboxed(void);
 G_GNUC_INTERNAL void Init_gobject_gstrv(void);
 #endif
 G_GNUC_INTERNAL void Init_gobject_value_array(void);
+G_GNUC_INTERNAL void Init_gobject_genumflags(void);
 G_GNUC_INTERNAL void Init_gobject_genums(void);
+G_GNUC_INTERNAL void Init_gobject_gflags(void);
 G_GNUC_INTERNAL void Init_gobject_gparam(void);
 G_GNUC_INTERNAL void Init_gobject_gparamspecs(void);
 G_GNUC_INTERNAL void Init_gobject_gclosure(void);

@@ -22,7 +22,9 @@
 
 #include "rbgprivate.h"
 
-static VALUE cSignal;
+#define RG_TARGET_NAMESPACE cSignal
+
+static VALUE RG_TARGET_NAMESPACE;
 VALUE rbgobj_signal_wrap(guint sig_id);
 
 #define default_handler_method_prefix "signal_do_"
@@ -257,7 +259,7 @@ gobj_s_signal(VALUE self, VALUE name)
         sig_name = rb_id2name(SYM2ID(name));
     else
         sig_name = StringValuePtr(name);
-    
+
     sig_id = g_signal_lookup(sig_name, CLASS2GTYPE(self));
     if (!sig_id)
         rb_raise(eNoSignalError, "no such signal: %s", sig_name);
@@ -443,7 +445,7 @@ gobj_sig_emit(int argc, VALUE *argv, VALUE self)
 
     arg.self = self;
     arg.instance_and_params = g_value_array_new(1 + arg.query.n_params);
-    
+
     return rb_ensure(emit_body, (VALUE)&arg, emit_ensure, (VALUE)&arg);
 }
 
@@ -511,34 +513,34 @@ gobj_sig_handler_is_connected(VALUE self, VALUE id)
 }
 
 #if 0
-gulong	 g_signal_handler_find		      (gpointer		  instance,
-					       GSignalMatchType	  mask,
-					       guint		  signal_id,
-					       GQuark		  detail,
-					       GClosure		 *closure,
-					       gpointer		  func,
-					       gpointer		  data);
-guint	 g_signal_handlers_block_matched      (gpointer		  instance,
-					       GSignalMatchType	  mask,
-					       guint		  signal_id,
-					       GQuark		  detail,
-					       GClosure		 *closure,
-					       gpointer		  func,
-					       gpointer		  data);
-guint	 g_signal_handlers_unblock_matched    (gpointer		  instance,
-					       GSignalMatchType	  mask,
-					       guint		  signal_id,
-					       GQuark		  detail,
-					       GClosure		 *closure,
-					       gpointer		  func,
-					       gpointer		  data);
-guint	 g_signal_handlers_disconnect_matched (gpointer		  instance,
-					       GSignalMatchType	  mask,
-					       guint		  signal_id,
-					       GQuark		  detail,
-					       GClosure		 *closure,
-					       gpointer		  func,
-					       gpointer		  data);
+gulong   g_signal_handler_find             (gpointer        instance,
+                           GSignalMatchType      mask,
+                           guint         signal_id,
+                           GQuark        detail,
+                           GClosure         *closure,
+                           gpointer          func,
+                           gpointer          data);
+guint    g_signal_handlers_block_matched      (gpointer         instance,
+                           GSignalMatchType      mask,
+                           guint         signal_id,
+                           GQuark        detail,
+                           GClosure         *closure,
+                           gpointer          func,
+                           gpointer          data);
+guint    g_signal_handlers_unblock_matched    (gpointer         instance,
+                           GSignalMatchType      mask,
+                           guint         signal_id,
+                           GQuark        detail,
+                           GClosure         *closure,
+                           gpointer          func,
+                           gpointer          data);
+guint    g_signal_handlers_disconnect_matched (gpointer         instance,
+                           GSignalMatchType      mask,
+                           guint         signal_id,
+                           GQuark        detail,
+                           GClosure         *closure,
+                           gpointer          func,
+                           gpointer          data);
 #endif
 
 static VALUE
@@ -648,45 +650,6 @@ gobj_s_method_added(VALUE klass, VALUE id)
     return Qnil;
 }
 
-static void
-Init_signal_misc(void)
-{
-    signal_func_table = rb_hash_new();
-    rb_global_variable(&signal_func_table);
-
-    rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
-    rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
-    rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
-
-    rb_define_method(cInstantiatable, "signal_has_handler_pending?",
-                     gobj_sig_has_handler_pending, -1);
-    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
-    rb_define_method(cInstantiatable, "signal_connect_after",
-                     gobj_sig_connect_after, -1);
-
-#if 0
-    rb_define_method(cInstantiatable, "signal_invocation_hint",
-                     gobj_sig_get_invocation_hint, 0);
-#endif
-
-    rb_define_method(cInstantiatable, "signal_emit",
-                     gobj_sig_emit, -1);
-    rb_define_method(cInstantiatable, "signal_emit_stop",
-                     gobj_sig_emit_stop, 1);
-    rb_define_method(cInstantiatable, "signal_handler_block",
-                     gobj_sig_handler_block, 1);
-    rb_define_method(cInstantiatable, "signal_handler_unblock",
-                     gobj_sig_handler_unblock, 1);
-    rb_define_method(cInstantiatable, "signal_handler_disconnect",
-                     gobj_sig_handler_disconnect, 1);
-
-    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
-                     gobj_sig_handler_is_connected, 1);
-
-    rb_define_singleton_method(cInstantiatable, "method_added",
-                               gobj_s_method_added, 1);
-}
-
 /**********************************************************************/
 
 VALUE
@@ -695,13 +658,13 @@ rbgobj_signal_wrap(guint sig_id)
     VALUE result;
     GSignalQuery* query;
 
-    result = Data_Make_Struct(cSignal, GSignalQuery, NULL, free, query);
+    result = Data_Make_Struct(RG_TARGET_NAMESPACE, GSignalQuery, NULL, free, query);
     g_signal_query(sig_id, query);
     return result;
 }
 
 static VALUE
-query_signal_id(VALUE self)
+rg_id(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -709,7 +672,7 @@ query_signal_id(VALUE self)
 }
 
 static VALUE
-query_signal_name(VALUE self)
+rg_name(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -717,7 +680,7 @@ query_signal_name(VALUE self)
 }
 
 static VALUE
-query_itype(VALUE self)
+rg_itype(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -725,7 +688,7 @@ query_itype(VALUE self)
 }
 
 static VALUE
-query_owner(VALUE self)
+rg_owner(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -733,7 +696,7 @@ query_owner(VALUE self)
 }
 
 static VALUE
-query_return_type(VALUE self)
+rg_return_type(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -741,7 +704,7 @@ query_return_type(VALUE self)
 }
 
 static VALUE
-query_signal_flags(VALUE self)
+rg_flags(VALUE self)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
@@ -749,7 +712,7 @@ query_signal_flags(VALUE self)
 }
 
 static VALUE
-query_param_types(VALUE self)
+rg_param_types(VALUE self)
 {
     GSignalQuery* query;
     VALUE result;
@@ -764,7 +727,7 @@ query_param_types(VALUE self)
 }
 
 static VALUE
-query_inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     GSignalQuery* query;
     gchar* s;
@@ -801,7 +764,6 @@ query_is_flag(G_SIGNAL_DETAILED)
 query_is_flag(G_SIGNAL_ACTION)
 query_is_flag(G_SIGNAL_NO_HOOKS)
 
-
 static gboolean
 hook_func(GSignalInvocationHint* ihint,
           guint                  n_param_values,
@@ -835,7 +797,7 @@ g_signal_add_emission_hook_closure (guint     signal_id,
 }
 
 static VALUE
-signal_add_emission_hook(int argc, VALUE* argv, VALUE self)
+rg_add_emission_hook(int argc, VALUE* argv, VALUE self)
 {
     GSignalQuery* query;
     VALUE proc;
@@ -865,62 +827,12 @@ signal_add_emission_hook(int argc, VALUE* argv, VALUE self)
 }
 
 static VALUE
-signal_remove_emission_hook(VALUE self, VALUE hook_id)
+rg_remove_emission_hook(VALUE self, VALUE hook_id)
 {
     GSignalQuery* query;
     Data_Get_Struct(self, GSignalQuery, query);
     g_signal_remove_emission_hook(query->signal_id, NUM2ULONG(hook_id));
     return Qnil;
-}
-
-static void
-Init_signal_class(void)
-{
-    VALUE cSignalFlags, cSignalMatchType;
-
-    cSignal = rb_define_class_under(mGLib, "Signal", rb_cData);
-
-    rb_define_method(cSignal, "id", query_signal_id, 0);
-    rb_define_method(cSignal, "name", query_signal_name, 0);
-    rb_define_method(cSignal, "flags", query_signal_flags, 0);
-    rb_define_method(cSignal, "itype", query_itype, 0);
-    rb_define_method(cSignal, "owner", query_owner, 0);
-    rb_define_method(cSignal, "return_type", query_return_type, 0);
-    rb_define_method(cSignal, "param_types", query_param_types, 0);
-    rb_define_method(cSignal, "inspect", query_inspect, 0);
-
-    rb_define_method(cSignal, "add_emission_hook", signal_add_emission_hook, -1);
-    rb_define_method(cSignal, "remove_emission_hook", signal_remove_emission_hook, 1);
-
-    /* GSignalFlags */
-    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", mGLib);
-    G_DEF_CONSTANTS(cSignal, G_TYPE_SIGNAL_FLAGS, "G_SIGNAL_");
-    rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
-    rb_define_const(cSignal, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
-
-    rb_define_method(cSignal, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
-    rb_define_method(cSignal, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
-    rb_define_method(cSignal, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
-    rb_define_method(cSignal, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
-    rb_define_method(cSignal, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
-    rb_define_method(cSignal, "action?", query_is_G_SIGNAL_ACTION, 0);
-    rb_define_method(cSignal, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
-
-
-    /* GConnectFlags */
-    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
-    G_DEF_CONSTANTS(cSignal, G_TYPE_CONNECT_FLAGS, "G_");
-
-    /* GSignalMatchType */
-    cSignalMatchType = G_DEF_CLASS(G_TYPE_SIGNAL_MATCH_TYPE,
-				   "SignalMatchType", mGLib);
-    G_DEF_CONSTANTS(cSignal, G_TYPE_SIGNAL_MATCH_TYPE, "G_SIGNAL_");
-    rb_define_const(cSignalMatchType, "MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
-    rb_define_const(cSignal, "MATCH_MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
-
-    rb_define_const(cSignal, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
-
-    eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
 }
 
 /**********************************************************************/
@@ -983,7 +895,83 @@ rbgobj_define_action_methods(VALUE klass)
 void
 Init_gobject_gsignal(void)
 {
-    Init_signal_class();
-    Init_signal_misc();
-}
+    VALUE cSignalFlags, cSignalMatchType;
 
+    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cData);
+
+    RG_DEF_METHOD(id, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(itype, 0);
+    RG_DEF_METHOD(owner, 0);
+    RG_DEF_METHOD(return_type, 0);
+    RG_DEF_METHOD(param_types, 0);
+    RG_DEF_METHOD(inspect, 0);
+
+    RG_DEF_METHOD(add_emission_hook, -1);
+    RG_DEF_METHOD(remove_emission_hook, 1);
+
+    /* GSignalFlags */
+    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", mGLib);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_FLAGS, "G_SIGNAL_");
+    rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
+
+    rb_define_method(RG_TARGET_NAMESPACE, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "action?", query_is_G_SIGNAL_ACTION, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
+
+    /* GConnectFlags */
+    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_CONNECT_FLAGS, "G_");
+
+    /* GSignalMatchType */
+    cSignalMatchType = G_DEF_CLASS(G_TYPE_SIGNAL_MATCH_TYPE,
+                                   "SignalMatchType", mGLib);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_MATCH_TYPE, "G_SIGNAL_");
+    rb_define_const(cSignalMatchType, "MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "MATCH_MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
+
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
+
+    eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
+
+    signal_func_table = rb_hash_new();
+    rb_global_variable(&signal_func_table);
+
+    rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
+    rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
+    rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
+
+    rb_define_method(cInstantiatable, "signal_has_handler_pending?",
+                     gobj_sig_has_handler_pending, -1);
+    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
+    rb_define_method(cInstantiatable, "signal_connect_after",
+                     gobj_sig_connect_after, -1);
+
+#if 0
+    rb_define_method(cInstantiatable, "signal_invocation_hint",
+                     gobj_sig_get_invocation_hint, 0);
+#endif
+
+    rb_define_method(cInstantiatable, "signal_emit",
+                     gobj_sig_emit, -1);
+    rb_define_method(cInstantiatable, "signal_emit_stop",
+                     gobj_sig_emit_stop, 1);
+    rb_define_method(cInstantiatable, "signal_handler_block",
+                     gobj_sig_handler_block, 1);
+    rb_define_method(cInstantiatable, "signal_handler_unblock",
+                     gobj_sig_handler_unblock, 1);
+    rb_define_method(cInstantiatable, "signal_handler_disconnect",
+                     gobj_sig_handler_disconnect, 1);
+
+    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
+                     gobj_sig_handler_is_connected, 1);
+
+    rb_define_singleton_method(cInstantiatable, "method_added",
+                               gobj_s_method_added, 1);
+}

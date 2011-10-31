@@ -25,7 +25,9 @@
 
 #include "rbgprivate.h"
 
-VALUE rbgobj_cObject;
+#define RG_TARGET_NAMESPACE rbgobj_cObject
+
+VALUE RG_TARGET_NAMESPACE;
 static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
@@ -62,7 +64,7 @@ holder_free(gobj_holder *holder)
         if (!holder->destroyed) {
             g_object_set_qdata(holder->gobj, RUBY_GOBJECT_OBJ_KEY, NULL);
             g_object_weak_unref(holder->gobj, (GWeakNotify)weak_notify, holder);
-	    weak_notify(holder, holder->gobj);
+            weak_notify(holder, holder->gobj);
         }
         holder->gobj = NULL;
     }
@@ -127,7 +129,7 @@ rbgobj_get_ruby_object_from_gobject(GObject* gobj, gboolean alloc)
     } else if (alloc) {
         VALUE obj;
 
-	obj = gobj_s_allocate(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
+        obj = gobj_s_allocate(GTYPE2CLASS(G_OBJECT_TYPE(gobj)));
         gobj = g_object_ref(gobj);
         rbgobj_gobject_initialize(obj, (gpointer)gobj);
         return obj;
@@ -213,7 +215,7 @@ gobj_mark(gpointer ptr)
 }
 
 static VALUE
-gobj_s_gobject_new(int argc, VALUE *argv, VALUE self)
+rg_s_new_bang(int argc, VALUE *argv, VALUE self)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     VALUE params_hash;
@@ -343,7 +345,7 @@ rbgobj_gobject_new(GType gtype, VALUE params_hash)
 }
 
 static VALUE
-gobj_s_install_property(int argc, VALUE* argv, VALUE self)
+rg_s_install_property(int argc, VALUE* argv, VALUE self)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     gpointer gclass;
@@ -437,7 +439,7 @@ rbgobj_register_property_setter(GType gtype, const char *name, RValueToGValueFun
 
     oclass = g_type_class_ref(gtype);
     pspec = g_object_class_find_property(oclass, name);
-    
+
     rb_hash_aset(table, rb_str_new2(g_param_spec_get_name(pspec)),
                  Data_Wrap_Struct(rb_cData, NULL, NULL, func));
 
@@ -464,7 +466,7 @@ rbgobj_register_property_getter(GType gtype, const char *name, GValueToRValueFun
 }
 
 static VALUE
-gobj_set_property(VALUE self, VALUE prop_name, VALUE val)
+rg_set_property(VALUE self, VALUE prop_name, VALUE val)
 {
     GParamSpec* pspec;
     const char* name;
@@ -511,7 +513,7 @@ gobj_set_property(VALUE self, VALUE prop_name, VALUE val)
 }
 
 static VALUE
-gobj_get_property(VALUE self, VALUE prop_name)
+rg_get_property(VALUE self, VALUE prop_name)
 {
     GParamSpec* pspec;
     const char* name;
@@ -554,34 +556,34 @@ gobj_get_property(VALUE self, VALUE prop_name)
     }
 }
 
-static VALUE gobj_thaw_notify(VALUE self);
+static VALUE rg_thaw_notify(VALUE self);
 
 static VALUE
-gobj_freeze_notify(VALUE self)
+rg_freeze_notify(VALUE self)
 {
     g_object_freeze_notify(RVAL2GOBJ(self));
     if (rb_block_given_p()) {
-        return rb_ensure(rb_yield, self, gobj_thaw_notify, self);
+        return rb_ensure(rb_yield, self, rg_thaw_notify, self);
     }
     return self;
 }
 
 static VALUE
-gobj_notify(VALUE self, VALUE property_name)
+rg_notify(VALUE self, VALUE property_name)
 {
     g_object_notify(RVAL2GOBJ(self), StringValuePtr(property_name));
     return self;
 }
 
 static VALUE
-gobj_thaw_notify(VALUE self)
+rg_thaw_notify(VALUE self)
 {
     g_object_thaw_notify(RVAL2GOBJ(self));
     return self;
 }
 
 static VALUE
-gobj_is_destroyed(VALUE self)
+rg_destroyed_p(VALUE self)
 {
     gobj_holder* holder;
 
@@ -594,7 +596,7 @@ gobj_is_destroyed(VALUE self)
 }
 
 static VALUE
-gobj_inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     gobj_holder* holder;
     const char *class_name;
@@ -606,7 +608,7 @@ gobj_inspect(VALUE self)
     class_name = rb_class2name(CLASS_OF(self));
     if (!holder->destroyed)
         s = g_strdup_printf("#<%s:%p ptr=%p>", class_name, (void *)self,
-			    holder->gobj);
+                            holder->gobj);
     else
         s = g_strdup_printf("#<%s:%p destroyed>", class_name, (void *)self);
 
@@ -617,11 +619,11 @@ gobj_inspect(VALUE self)
 }
 
 static VALUE
-gobj_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE params_hash;
     GObject* gobj;
-    
+
     rb_scan_args(argc, argv, "01", &params_hash);
 
     if (!NIL_P(params_hash))
@@ -720,7 +722,7 @@ class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
 }
 
 static VALUE
-type_register(int argc, VALUE* argv, VALUE self)
+rg_s_type_register(int argc, VALUE* argv, VALUE self)
 {
     VALUE type_name, flags;
     volatile VALUE class_init_proc = Qnil;
@@ -793,7 +795,7 @@ type_register(int argc, VALUE* argv, VALUE self)
             VALUE m = rb_define_module_under(self, RubyGObjectHookModule);
 
             if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                rb_define_method(m, "initialize", gobj_initialize, -1);
+                rb_define_method(m, "initialize", rg_initialize, -1);
             }
 
             rb_include_module(self, m);
@@ -803,26 +805,13 @@ type_register(int argc, VALUE* argv, VALUE self)
     }
 }
 
-static void
-Init_gobject_subclass(void)
-{
-    VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
-    rb_define_singleton_method(cGObject, "type_register", type_register, -1);
-
-    rb_global_variable(&proc_mod_eval);
-    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
-}
-
 /**********************************************************************/
 
 void 
 Init_gobject_gobject(void)
 {
-    VALUE cGObject;
-
-    rbgobj_cObject = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
-					      gobj_mark, NULL);
-    cGObject = rbgobj_cObject;
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
+                                                  gobj_mark, NULL);
 
 #ifdef G_TYPE_INITIALLY_UNOWNED
     G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", mGLib);
@@ -830,26 +819,26 @@ Init_gobject_gobject(void)
 
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
 
-    rb_define_alloc_func(cGObject, (VALUE(*)_((VALUE)))gobj_s_allocate);
-    rb_define_singleton_method(cGObject, "new!", gobj_s_gobject_new, -1);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))gobj_s_allocate);
+    RG_DEF_SMETHOD_BANG(new, -1);
 
-    rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
-    rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);
-    rb_define_singleton_method(cGObject, "install_property", gobj_s_install_property, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
+    RG_DEF_SMETHOD(install_property, -1);
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
 
-    rb_define_method(cGObject, "set_property", gobj_set_property, 2);
-    rb_define_method(cGObject, "get_property", gobj_get_property, 1);
-    rb_define_method(cGObject, "freeze_notify", gobj_freeze_notify, 0);
-    rb_undef_method(cGObject, "notify");
-    rb_define_method(cGObject, "notify", gobj_notify, 1);
-    rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);
-    rb_define_method(cGObject, "destroyed?", gobj_is_destroyed, 0);
+    RG_DEF_METHOD(set_property, 2);
+    RG_DEF_METHOD(get_property, 1);
+    RG_DEF_METHOD(freeze_notify, 0);
+    rb_undef_method(RG_TARGET_NAMESPACE, "notify");
+    RG_DEF_METHOD(notify, 1);
+    RG_DEF_METHOD(thaw_notify, 0);
+    RG_DEF_METHOD_P(destroyed, 0);
 
-    rb_define_method(cGObject, "initialize", gobj_initialize, -1);
-    rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
-    rb_define_method(cGObject, "inspect", gobj_inspect, 0);
+    RG_DEF_METHOD(initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
+    RG_DEF_METHOD(inspect, 0);
 
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);
@@ -859,6 +848,9 @@ Init_gobject_gobject(void)
     type_to_prop_setter_table = rb_hash_new();
     type_to_prop_getter_table = rb_hash_new();
 
-    Init_gobject_subclass();
-}
+    /* subclass */
+    RG_DEF_SMETHOD(type_register, -1);
 
+    rb_global_variable(&proc_mod_eval);
+    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
+}

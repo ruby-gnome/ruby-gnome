@@ -67,6 +67,14 @@ typedef int GPid;
 #define CSTR2RVAL_FREE(s) (rbg_cstr2rval_free(s))
 #define CSTR2RVAL2(s) (CSTR2RVAL_FREE(s))
 
+#if G_BYTE_ORDER == G_LITTLE_ENDIAN
+#  define CSTR2RVAL_LEN_UCS4(s, l) (CSTR2RVAL_LEN_ENC(s, l, "UTF-32LE"))
+#  define CSTR2RVAL_LEN_UTF16(s, l) (CSTR2RVAL_LEN_ENC(s, l, "UTF-16LE"))
+#else
+#  define CSTR2RVAL_LEN_UCS4(s, l) (CSTR2RVAL_LEN_ENC(s, l, "UTF-32BE"))
+#  define CSTR2RVAL_LEN_UTF16(s, l) (CSTR2RVAL_LEN_ENC(s, l, "UTF-16BE"))
+#endif
+
 #define RVAL2CSTRFILENAME(v) (rbg_filename_from_ruby(v))
 #define CSTRFILENAME2RVAL(s) (rbg_filename_to_ruby(s))
 #define CSTRFILENAME2RVAL_FREE(s) (rbg_filename_to_ruby_free(s))

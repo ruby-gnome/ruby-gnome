@@ -370,7 +370,7 @@ Init_gobject(void)
     Init_gobject_gstrv();
 #endif
     Init_gobject_value_array();
-    Init_gobject_genums();
+    Init_gobject_genumflags();
     Init_gobject_gparam();
     Init_gobject_gparamspecs();
     Init_gobject_gclosure();
