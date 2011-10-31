@@ -22,6 +22,8 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE cClosure
+
 static ID id_call, id_closures;
 static gboolean rclosure_initialized = FALSE;
 
@@ -281,7 +283,7 @@ rclosure_end_proc(G_GNUC_UNUSED VALUE _)
 }
 
 static void
-Init_rclosure(void)
+init_rclosure(void)
 {
     id_call = rb_intern("call");
     id_closures = rb_intern("closures");
@@ -292,7 +294,7 @@ Init_rclosure(void)
 /**********************************************************************/
 
 static VALUE
-closure_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GClosure* closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
     G_INITIALIZE(self, closure);
@@ -301,35 +303,25 @@ closure_initialize(VALUE self)
 }
 
 static VALUE
-closure_in_marshal(VALUE self)
+rg_in_marshal_p(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return CBOOL2RVAL(closure->in_marshal);
 }
 
 static VALUE
-closure_is_invalid(VALUE self)
+rg_invalid_p(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return CBOOL2RVAL(closure->is_invalid);
 }
 
 static VALUE
-closure_invalidate(VALUE self)
+rg_invalidate(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     g_closure_invalidate(closure);
     return self;
-}
-
-static void
-Init_closure(void)
-{
-    VALUE cClosure = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
-    rb_define_method(cClosure, "initialize", closure_initialize, 0);
-    rb_define_method(cClosure, "in_marshal?", closure_in_marshal, 0);
-    rb_define_method(cClosure, "invalid?", closure_is_invalid, 0);
-    rb_define_method(cClosure, "invalidate", closure_invalidate, 0);
 }
 
 /**********************************************************************/
@@ -337,7 +329,12 @@ Init_closure(void)
 void
 Init_gobject_gclosure(void)
 {
-    Init_rclosure();
-    Init_closure();
-}
+    init_rclosure();
 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD_P(in_marshal, 0);
+    RG_DEF_METHOD_P(invalid, 0);
+    RG_DEF_METHOD(invalidate, 0);
+}
