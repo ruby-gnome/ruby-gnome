@@ -361,7 +361,7 @@ rbgobj_register_class(VALUE klass,
     rbgobj_register_class(klass, gtype, FALSE, TRUE)
 
 static void
-Init_typemap(void)
+init_typemap(void)
 {
     id_new = rb_intern("new");
     id_superclass = rb_intern("superclass");
@@ -726,9 +726,15 @@ _def_fundamental_type(VALUE ary, GType gtype, const char* name)
     rb_ary_push(ary, c);
 }
 
-static void
-Init_type(void)
+/**********************************************************************/
+
+void
+Init_gobject_gtype(void)
 {
+    g_type_init();
+    init_typemap();
+
+    /* type */
     rb_cMutex = rb_const_get(rb_cObject, rb_intern("Mutex"));
     id_lock = rb_intern("lock");
     id_unlock = rb_intern("unlock");
@@ -804,14 +810,4 @@ Init_type(void)
     _def_fundamental_type(ary, G_TYPE_OBJECT,    "OBJECT");
     rb_define_const(RG_TARGET_NAMESPACE, "FUNDAMENTAL_TYPES", ary); /* FIXME: better name */
     }
-}
-
-/**********************************************************************/
-
-void
-Init_gobject_gtype(void)
-{
-    g_type_init();
-    Init_typemap();
-    Init_type();
 }

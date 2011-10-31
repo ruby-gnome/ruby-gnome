@@ -283,7 +283,7 @@ rclosure_end_proc(G_GNUC_UNUSED VALUE _)
 }
 
 static void
-Init_rclosure(void)
+init_rclosure(void)
 {
     id_call = rb_intern("call");
     id_closures = rb_intern("closures");
@@ -324,22 +324,18 @@ closure_invalidate(VALUE self)
     return self;
 }
 
-static void
-Init_closure(void)
-{
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", closure_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "in_marshal?", closure_in_marshal, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "invalid?", closure_is_invalid, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "invalidate", closure_invalidate, 0);
-}
-
 /**********************************************************************/
 
 void
 Init_gobject_gclosure(void)
 {
-    Init_rclosure();
-    Init_closure();
+    init_rclosure();
+
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", closure_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "in_marshal?", closure_in_marshal, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "invalid?", closure_is_invalid, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "invalidate", closure_invalidate, 0);
 }
 

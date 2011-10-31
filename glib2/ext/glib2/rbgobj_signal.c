@@ -650,45 +650,6 @@ gobj_s_method_added(VALUE klass, VALUE id)
     return Qnil;
 }
 
-static void
-Init_signal_misc(void)
-{
-    signal_func_table = rb_hash_new();
-    rb_global_variable(&signal_func_table);
-
-    rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
-    rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
-    rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
-
-    rb_define_method(cInstantiatable, "signal_has_handler_pending?",
-                     gobj_sig_has_handler_pending, -1);
-    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
-    rb_define_method(cInstantiatable, "signal_connect_after",
-                     gobj_sig_connect_after, -1);
-
-#if 0
-    rb_define_method(cInstantiatable, "signal_invocation_hint",
-                     gobj_sig_get_invocation_hint, 0);
-#endif
-
-    rb_define_method(cInstantiatable, "signal_emit",
-                     gobj_sig_emit, -1);
-    rb_define_method(cInstantiatable, "signal_emit_stop",
-                     gobj_sig_emit_stop, 1);
-    rb_define_method(cInstantiatable, "signal_handler_block",
-                     gobj_sig_handler_block, 1);
-    rb_define_method(cInstantiatable, "signal_handler_unblock",
-                     gobj_sig_handler_unblock, 1);
-    rb_define_method(cInstantiatable, "signal_handler_disconnect",
-                     gobj_sig_handler_disconnect, 1);
-
-    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
-                     gobj_sig_handler_is_connected, 1);
-
-    rb_define_singleton_method(cInstantiatable, "method_added",
-                               gobj_s_method_added, 1);
-}
-
 /**********************************************************************/
 
 VALUE
@@ -875,56 +836,6 @@ signal_remove_emission_hook(VALUE self, VALUE hook_id)
     return Qnil;
 }
 
-static void
-Init_signal_class(void)
-{
-    VALUE cSignalFlags, cSignalMatchType;
-
-    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cData);
-
-    rb_define_method(RG_TARGET_NAMESPACE, "id", query_signal_id, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", query_signal_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "flags", query_signal_flags, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "itype", query_itype, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "owner", query_owner, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "return_type", query_return_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "param_types", query_param_types, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "inspect", query_inspect, 0);
-
-    rb_define_method(RG_TARGET_NAMESPACE, "add_emission_hook", signal_add_emission_hook, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "remove_emission_hook", signal_remove_emission_hook, 1);
-
-    /* GSignalFlags */
-    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", mGLib);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_FLAGS, "G_SIGNAL_");
-    rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
-    rb_define_const(RG_TARGET_NAMESPACE, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
-
-    rb_define_method(RG_TARGET_NAMESPACE, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "action?", query_is_G_SIGNAL_ACTION, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
-
-
-    /* GConnectFlags */
-    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_CONNECT_FLAGS, "G_");
-
-    /* GSignalMatchType */
-    cSignalMatchType = G_DEF_CLASS(G_TYPE_SIGNAL_MATCH_TYPE,
-				   "SignalMatchType", mGLib);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_MATCH_TYPE, "G_SIGNAL_");
-    rb_define_const(cSignalMatchType, "MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
-    rb_define_const(RG_TARGET_NAMESPACE, "MATCH_MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
-
-    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
-
-    eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
-}
-
 /**********************************************************************/
 
 void
@@ -985,7 +896,85 @@ rbgobj_define_action_methods(VALUE klass)
 void
 Init_gobject_gsignal(void)
 {
-    Init_signal_class();
-    Init_signal_misc();
+    VALUE cSignalFlags, cSignalMatchType;
+
+    RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Signal", rb_cData);
+
+    rb_define_method(RG_TARGET_NAMESPACE, "id", query_signal_id, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", query_signal_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", query_signal_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "itype", query_itype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "owner", query_owner, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "return_type", query_return_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "param_types", query_param_types, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "inspect", query_inspect, 0);
+
+    rb_define_method(RG_TARGET_NAMESPACE, "add_emission_hook", signal_add_emission_hook, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_emission_hook", signal_remove_emission_hook, 1);
+
+    /* GSignalFlags */
+    cSignalFlags = G_DEF_CLASS(G_TYPE_SIGNAL_FLAGS, "SignalFlags", mGLib);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_FLAGS, "G_SIGNAL_");
+    rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
+
+    rb_define_method(RG_TARGET_NAMESPACE, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "action?", query_is_G_SIGNAL_ACTION, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
+
+
+    /* GConnectFlags */
+    G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_CONNECT_FLAGS, "G_");
+
+    /* GSignalMatchType */
+    cSignalMatchType = G_DEF_CLASS(G_TYPE_SIGNAL_MATCH_TYPE,
+				   "SignalMatchType", mGLib);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SIGNAL_MATCH_TYPE, "G_SIGNAL_");
+    rb_define_const(cSignalMatchType, "MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "MATCH_MASK", INT2NUM(G_SIGNAL_MATCH_MASK));
+
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STATIC_SCOPE", INT2FIX(G_SIGNAL_TYPE_STATIC_SCOPE));
+
+    eNoSignalError = rb_define_class_under(mGLib, "NoSignalError", rb_eNameError);
+
+    signal_func_table = rb_hash_new();
+    rb_global_variable(&signal_func_table);
+
+    rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
+    rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
+    rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
+
+    rb_define_method(cInstantiatable, "signal_has_handler_pending?",
+                     gobj_sig_has_handler_pending, -1);
+    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
+    rb_define_method(cInstantiatable, "signal_connect_after",
+                     gobj_sig_connect_after, -1);
+
+#if 0
+    rb_define_method(cInstantiatable, "signal_invocation_hint",
+                     gobj_sig_get_invocation_hint, 0);
+#endif
+
+    rb_define_method(cInstantiatable, "signal_emit",
+                     gobj_sig_emit, -1);
+    rb_define_method(cInstantiatable, "signal_emit_stop",
+                     gobj_sig_emit_stop, 1);
+    rb_define_method(cInstantiatable, "signal_handler_block",
+                     gobj_sig_handler_block, 1);
+    rb_define_method(cInstantiatable, "signal_handler_unblock",
+                     gobj_sig_handler_unblock, 1);
+    rb_define_method(cInstantiatable, "signal_handler_disconnect",
+                     gobj_sig_handler_disconnect, 1);
+
+    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
+                     gobj_sig_handler_is_connected, 1);
+
+    rb_define_singleton_method(cInstantiatable, "method_added",
+                               gobj_s_method_added, 1);
 }
 

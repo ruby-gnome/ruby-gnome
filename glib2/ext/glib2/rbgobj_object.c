@@ -805,16 +805,6 @@ type_register(int argc, VALUE* argv, VALUE self)
     }
 }
 
-static void
-Init_gobject_subclass(void)
-{
-    VALUE cGObject = GTYPE2CLASS(G_TYPE_OBJECT);
-    rb_define_singleton_method(cGObject, "type_register", type_register, -1);
-
-    rb_global_variable(&proc_mod_eval);
-    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
-}
-
 /**********************************************************************/
 
 void 
@@ -858,6 +848,10 @@ Init_gobject_gobject(void)
     type_to_prop_setter_table = rb_hash_new();
     type_to_prop_getter_table = rb_hash_new();
 
-    Init_gobject_subclass();
+    /* subclass */
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", type_register, -1);
+
+    rb_global_variable(&proc_mod_eval);
+    proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
 }
 
