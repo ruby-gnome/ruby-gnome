@@ -21,7 +21,9 @@
 
 #include "rbgprivate.h"
 
-VALUE rbgobj_cParam;
+#define RG_TARGET_NAMESPACE rbgobj_cParam
+
+VALUE RG_TARGET_NAMESPACE;
 static GQuark qparamspec;
 
 static VALUE pspec_s_allocate(VALUE klass);
@@ -329,57 +331,54 @@ param_is_flag(G_PARAM_READWRITE)
 static void
 Init_gobject_gparam_spec(void)
 {
-    VALUE cParamSpec;
-
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
-    rbgobj_cParam = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
-    cParamSpec = rbgobj_cParam;
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
 
     /* GParamFlags */
-    rb_define_const(cParamSpec, "READABLE",       INT2FIX(G_PARAM_READABLE));
-    rb_define_const(cParamSpec, "WRITABLE",       INT2FIX(G_PARAM_WRITABLE));
-    rb_define_const(cParamSpec, "CONSTRUCT",      INT2FIX(G_PARAM_CONSTRUCT));
-    rb_define_const(cParamSpec, "CONSTRUCT_ONLY", INT2FIX(G_PARAM_CONSTRUCT_ONLY));
-    rb_define_const(cParamSpec, "LAX_VALIDATION", INT2FIX(G_PARAM_LAX_VALIDATION));
-    rb_define_const(cParamSpec, "PRIVATE",        INT2FIX(G_PARAM_PRIVATE));
-    rb_define_const(cParamSpec, "READWRITE",      INT2FIX(G_PARAM_READWRITE));
-    rb_define_const(cParamSpec, "MASK",           INT2FIX(G_PARAM_MASK));
-    rb_define_const(cParamSpec, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
+    rb_define_const(RG_TARGET_NAMESPACE, "READABLE",       INT2FIX(G_PARAM_READABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "WRITABLE",       INT2FIX(G_PARAM_WRITABLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "CONSTRUCT",      INT2FIX(G_PARAM_CONSTRUCT));
+    rb_define_const(RG_TARGET_NAMESPACE, "CONSTRUCT_ONLY", INT2FIX(G_PARAM_CONSTRUCT_ONLY));
+    rb_define_const(RG_TARGET_NAMESPACE, "LAX_VALIDATION", INT2FIX(G_PARAM_LAX_VALIDATION));
+    rb_define_const(RG_TARGET_NAMESPACE, "PRIVATE",        INT2FIX(G_PARAM_PRIVATE));
+    rb_define_const(RG_TARGET_NAMESPACE, "READWRITE",      INT2FIX(G_PARAM_READWRITE));
+    rb_define_const(RG_TARGET_NAMESPACE, "MASK",           INT2FIX(G_PARAM_MASK));
+    rb_define_const(RG_TARGET_NAMESPACE, "USER_SHIFT",     INT2FIX(G_PARAM_USER_SHIFT));
 
-    rb_define_alloc_func(cParamSpec, pspec_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, pspec_s_allocate);
 
-    rb_define_method(cParamSpec, "inspect", inspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "inspect", inspect, 0);
 
-    rb_define_method(cParamSpec, "name", get_name, 0);
-    rb_define_method(cParamSpec, "nick", get_nick, 0);
-    rb_define_method(cParamSpec, "blurb", get_blurb, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "nick", get_nick, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "blurb", get_blurb, 0);
 
-    rb_define_method(cParamSpec, "flags", get_flags, 0);
-    rb_define_method(cParamSpec, "value_type", get_value_type, 0);
-    rb_define_method(cParamSpec, "owner_type", get_owner_type, 0);
-    rb_define_method(cParamSpec, "owner", get_owner, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_type", get_value_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "owner_type", get_owner_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "owner", get_owner, 0);
 
-    rb_define_method(cParamSpec, "value_default", value_default, 0);
-    rb_define_alias(cParamSpec, "default", "value_default");
+    rb_define_method(RG_TARGET_NAMESPACE, "value_default", value_default, 0);
+    rb_define_alias(RG_TARGET_NAMESPACE, "default", "value_default");
 
     // FIXME: better name
 #if 0
-    rb_define_method(cParamSpec, "value_defaults?", value_defaults, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_defaults?", value_defaults, 1);
 #endif
-    rb_define_method(cParamSpec, "value_validate", value_validate, 1);
-    rb_define_method(cParamSpec, "value_convert", value_convert, -1);
-    rb_define_method(cParamSpec, "value_compare", values_compare, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_validate", value_validate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_convert", value_convert, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "value_compare", values_compare, 2);
 
     /* for debugging */
-    rb_define_method(cParamSpec, "ref_count", get_ref_count, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_count", get_ref_count, 0);
 
-    rb_define_method(cParamSpec, "readable?",       param_is_G_PARAM_READABLE, 0);
-    rb_define_method(cParamSpec, "writable?",       param_is_G_PARAM_WRITABLE, 0);
-    rb_define_method(cParamSpec, "construct?",      param_is_G_PARAM_CONSTRUCT, 0);
-    rb_define_method(cParamSpec, "construct_only?", param_is_G_PARAM_CONSTRUCT_ONLY, 0);
-    rb_define_method(cParamSpec, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
-    rb_define_method(cParamSpec, "private?",        param_is_G_PARAM_PRIVATE, 0);
-    rb_define_method(cParamSpec, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "readable?",       param_is_G_PARAM_READABLE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "writable?",       param_is_G_PARAM_WRITABLE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "construct?",      param_is_G_PARAM_CONSTRUCT, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "construct_only?", param_is_G_PARAM_CONSTRUCT_ONLY, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "private?",        param_is_G_PARAM_PRIVATE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
 }
 
 /**********************************************************************/

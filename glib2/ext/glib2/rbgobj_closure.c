@@ -22,6 +22,8 @@
 
 #include "rbgprivate.h"
 
+#define RG_TARGET_NAMESPACE cClosure
+
 static ID id_call, id_closures;
 static gboolean rclosure_initialized = FALSE;
 
@@ -325,11 +327,11 @@ closure_invalidate(VALUE self)
 static void
 Init_closure(void)
 {
-    VALUE cClosure = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
-    rb_define_method(cClosure, "initialize", closure_initialize, 0);
-    rb_define_method(cClosure, "in_marshal?", closure_in_marshal, 0);
-    rb_define_method(cClosure, "invalid?", closure_is_invalid, 0);
-    rb_define_method(cClosure, "invalidate", closure_invalidate, 0);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", closure_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "in_marshal?", closure_in_marshal, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "invalid?", closure_is_invalid, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "invalidate", closure_invalidate, 0);
 }
 
 /**********************************************************************/

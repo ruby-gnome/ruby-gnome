@@ -23,7 +23,9 @@
 #include "rbgprivate.h"
 #include <ctype.h>
 
-VALUE rbgobj_cEnum, rbgobj_cFlags;
+#define RG_TARGET_NAMESPACE rbgobj_cEnum
+
+VALUE RG_TARGET_NAMESPACE, rbgobj_cFlags;
 
 static ID id_new;
 static ID id_module_eval;
@@ -502,32 +504,29 @@ enum_coerce(VALUE self, VALUE other)
 static void
 Init_enum(void)
 {
-    VALUE cEnum;
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
 
-    rbgobj_cEnum = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
-    cEnum = rbgobj_cEnum;
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
-    rb_define_singleton_method(cEnum, "gtype", generic_s_gtype, 0);
-    rb_define_method(cEnum, "gtype", generic_gtype, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "range", enum_s_range, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "values", enum_s_values, 0);
 
-    rb_define_singleton_method(cEnum, "range", enum_s_range, 0);
-    rb_define_singleton_method(cEnum, "values", enum_s_values, 0);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, enum_s_allocate);
 
-    rb_define_alloc_func(cEnum, enum_s_allocate);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", enum_initialize, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_i", enum_to_i, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", enum_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "nick", enum_nick, 0);
 
-    rb_define_method(cEnum, "initialize", enum_initialize, 1);
-    rb_define_method(cEnum, "to_i", enum_to_i, 0);
-    rb_define_method(cEnum, "name", enum_name, 0);
-    rb_define_method(cEnum, "nick", enum_nick, 0);
-
-    rb_define_method(cEnum, "inspect", enum_inspect, 0);
-    rb_define_method(cEnum, "==", enum_eqv, 1);
-    rb_define_method(cEnum, "hash", enum_hash, 0);
-    rb_define_method(cEnum, "eql?", enum_eqv, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "inspect", enum_inspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", enum_eqv, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "hash", enum_hash, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "eql?", enum_eqv, 1);
 
     /* for compatibility */
-    rb_define_method(cEnum, "coerce", enum_coerce, 1);
-    rb_define_alias(cEnum, "to_int", "to_i");
+    rb_define_method(RG_TARGET_NAMESPACE, "coerce", enum_coerce, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "to_int", "to_i");
 }
 
 /**********************************************************************/

@@ -25,7 +25,9 @@
 
 #include "rbgprivate.h"
 
-VALUE rbgobj_cObject;
+#define RG_TARGET_NAMESPACE rbgobj_cObject
+
+VALUE RG_TARGET_NAMESPACE;
 static VALUE eNoPropertyError;
 static GQuark RUBY_GOBJECT_OBJ_KEY;
 
@@ -818,11 +820,8 @@ Init_gobject_subclass(void)
 void 
 Init_gobject_gobject(void)
 {
-    VALUE cGObject;
-
-    rbgobj_cObject = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
+    RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(G_TYPE_OBJECT, "Object", mGLib,
 					      gobj_mark, NULL);
-    cGObject = rbgobj_cObject;
 
 #ifdef G_TYPE_INITIALLY_UNOWNED
     G_DEF_CLASS(G_TYPE_INITIALLY_UNOWNED, "InitiallyUnowned", mGLib);
@@ -830,26 +829,26 @@ Init_gobject_gobject(void)
 
     RUBY_GOBJECT_OBJ_KEY = g_quark_from_static_string("__ruby_gobject_object__");
 
-    rb_define_alloc_func(cGObject, (VALUE(*)_((VALUE)))gobj_s_allocate);
-    rb_define_singleton_method(cGObject, "new!", gobj_s_gobject_new, -1);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))gobj_s_allocate);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "new!", gobj_s_gobject_new, -1);
 
-    rb_define_singleton_method(cGObject, "property", &gobj_s_property, 1);
-    rb_define_singleton_method(cGObject, "properties", &gobj_s_properties, -1);
-    rb_define_singleton_method(cGObject, "install_property", gobj_s_install_property, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "install_property", gobj_s_install_property, -1);
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
 
-    rb_define_method(cGObject, "set_property", gobj_set_property, 2);
-    rb_define_method(cGObject, "get_property", gobj_get_property, 1);
-    rb_define_method(cGObject, "freeze_notify", gobj_freeze_notify, 0);
-    rb_undef_method(cGObject, "notify");
-    rb_define_method(cGObject, "notify", gobj_notify, 1);
-    rb_define_method(cGObject, "thaw_notify", gobj_thaw_notify, 0);
-    rb_define_method(cGObject, "destroyed?", gobj_is_destroyed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_property", gobj_set_property, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_property", gobj_get_property, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "freeze_notify", gobj_freeze_notify, 0);
+    rb_undef_method(RG_TARGET_NAMESPACE, "notify");
+    rb_define_method(RG_TARGET_NAMESPACE, "notify", gobj_notify, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "thaw_notify", gobj_thaw_notify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "destroyed?", gobj_is_destroyed, 0);
 
-    rb_define_method(cGObject, "initialize", gobj_initialize, -1);
-    rb_define_method(cGObject, "ref_count", gobj_ref_count, 0); /* for debugging */
-    rb_define_method(cGObject, "inspect", gobj_inspect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", gobj_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
+    rb_define_method(RG_TARGET_NAMESPACE, "inspect", gobj_inspect, 0);
 
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);
