@@ -1076,6 +1076,10 @@ union       GDoubleIEEE754;
     Init_glib_completion();
     Init_glib_timer();
     Init_glib_unicode();
+    Init_glib_utf8();
+    Init_glib_utf16();
+    Init_glib_ucs4();
+    Init_glib_unichar();
     Init_glib_keyfile();
     Init_glib_bookmark_file();
 
