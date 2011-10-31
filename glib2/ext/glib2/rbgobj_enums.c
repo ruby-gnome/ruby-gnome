@@ -141,7 +141,7 @@ rbgobj_get_enum(VALUE obj, GType gtype)
     if (!g_type_is_a(gtype, G_TYPE_ENUM))
         rb_raise(rb_eTypeError, "%s is not a %s: %s",
                  g_type_name(gtype), g_type_name(G_TYPE_ENUM),
-		 RBG_INSPECT(obj));
+                 RBG_INSPECT(obj));
 
     /* for compatibility */
     if (rb_obj_is_kind_of(obj, rb_cInteger))
@@ -161,7 +161,7 @@ rbgobj_get_enum(VALUE obj, GType gtype)
         return enum_get_holder(obj)->value;
     else
         rb_raise(rb_eTypeError, "not a %s: %s",
-		 rb_class2name(klass), RBG_INSPECT(obj));
+                 rb_class2name(klass), RBG_INSPECT(obj));
 }
 
 /**********************************************************************/
@@ -184,7 +184,7 @@ rbgobj_init_enum_class(VALUE klass)
             if (rb_is_const_id(id)) {
                 VALUE value;
 
-		value = make_enum(entry->value, klass);
+                value = make_enum(entry->value, klass);
                 rb_define_const(klass, const_nick_name, value);
             }
         }
@@ -193,7 +193,7 @@ rbgobj_init_enum_class(VALUE klass)
             if (const_nick_name) {
                 VALUE value;
 
-		value = make_enum(entry->value, klass);
+                value = make_enum(entry->value, klass);
                 rbgobj_define_const(klass, const_nick_name, value);
             }
         }
@@ -206,7 +206,7 @@ rbgobj_init_enum_class(VALUE klass)
 }
 
 static VALUE
-enum_s_range(VALUE self)
+rg_s_range(VALUE self)
 {
     GEnumClass* gclass = g_type_class_ref(CLASS2GTYPE(self));
     VALUE result = rb_range_new(INT2NUM(gclass->minimum),
@@ -243,7 +243,7 @@ enum_s_values_ensure(VALUE gclass)
 }
 
 static VALUE
-enum_s_values(VALUE self)
+rg_s_values(VALUE self)
 {
     struct enum_s_values_body_args args = {
         g_type_class_ref(CLASS2GTYPE(self)),
@@ -271,7 +271,7 @@ enum_s_allocate(VALUE self)
 }
 
 static VALUE
-enum_initialize(VALUE self, VALUE arg)
+rg_initialize(VALUE self, VALUE arg)
 {
     enum_holder* p = enum_get_holder(self);
 
@@ -291,28 +291,28 @@ enum_initialize(VALUE self, VALUE arg)
 }
 
 static VALUE
-enum_to_i(VALUE self)
+rg_to_i(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
     return INT2NUM(p->value);
 }
 
 static VALUE
-enum_name(VALUE self)
+rg_name(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
     return p->info ? rb_str_new2(p->info->value_name) : Qnil;
 }
 
 static VALUE
-enum_nick(VALUE self)
+rg_nick(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
     return p->info ? rb_str_new2(p->info->value_nick) : Qnil;
 }
 
 static VALUE
-enum_inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     const char* cname = rb_class2name(CLASS_OF(self));
     enum_holder* p = enum_get_holder(self);
@@ -332,7 +332,7 @@ enum_inspect(VALUE self)
 }
 
 static VALUE
-enum_eqv(VALUE self, VALUE rhs)
+rg_operator_enum_eqv(VALUE self, VALUE rhs)
 {
     enum_holder* p = enum_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -343,14 +343,14 @@ enum_eqv(VALUE self, VALUE rhs)
 }
 
 static VALUE
-enum_hash(VALUE self)
+rg_hash(VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
     return UINT2NUM(p->value ^ G_TYPE_FROM_CLASS(p->gclass));
 }
 
 static VALUE
-enum_coerce(VALUE self, VALUE other)
+rg_coerce(VALUE self, VALUE other)
 {
     enum_holder *holder;
     GType gtype;
@@ -377,22 +377,22 @@ Init_gobject_genums(void)
     rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "range", enum_s_range, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "values", enum_s_values, 0);
+    RG_DEF_SMETHOD(range, 0);
+    RG_DEF_SMETHOD(values, 0);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, enum_s_allocate);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", enum_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_i", enum_to_i, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", enum_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "nick", enum_nick, 0);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(to_i, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(nick, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "inspect", enum_inspect, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", enum_eqv, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "hash", enum_hash, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "eql?", enum_eqv, 1);
+    RG_DEF_METHOD(inspect, 0);
+    RG_DEF_METHOD_OPERATOR("==", enum_eqv, 1);
+    RG_DEF_METHOD(hash, 0);
+    RG_DEF_ALIAS("eql?", "==");
 
     /* for compatibility */
-    rb_define_method(RG_TARGET_NAMESPACE, "coerce", enum_coerce, 1);
-    rb_define_alias(RG_TARGET_NAMESPACE, "to_int", "to_i");
+    RG_DEF_METHOD(coerce, 1);
+    RG_DEF_ALIAS("to_int", "to_i");
 }

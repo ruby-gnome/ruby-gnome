@@ -25,7 +25,7 @@
 #define RG_TARGET_NAMESPACE mUTF8
 
 static VALUE
-rbglib_m_utf8_get_char(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_get_char(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE utf8, validate;
     gunichar result;
@@ -49,7 +49,7 @@ rbglib_m_utf8_get_char(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbglib_m_utf8_strlen(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
+rg_m_size(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     gchar *utf8;
 
@@ -58,7 +58,7 @@ rbglib_m_utf8_strlen(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_strreverse(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
+rg_m_reverse(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *reversed_utf8;
@@ -71,7 +71,7 @@ rbglib_m_utf8_strreverse(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_m_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     StringValue(str);
     return CBOOL2RVAL(g_utf8_validate(RSTRING_PTR(str), RSTRING_LEN(str),
@@ -79,7 +79,7 @@ rbglib_m_utf8_validate(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rbglib_m_utf8_strup(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
+rg_m_upcase(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *upcased_utf8;
@@ -92,7 +92,7 @@ rbglib_m_utf8_strup(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_strdown(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
+rg_m_downcase(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *downcased_utf8;
@@ -105,7 +105,7 @@ rbglib_m_utf8_strdown(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_casefold(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
+rg_m_casefold(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8, *casefolded_utf8;
@@ -118,7 +118,7 @@ rbglib_m_utf8_casefold(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_normalize(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_normalize(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE rb_utf8, rb_mode, result;
     gchar *utf8, *normalized_utf8;
@@ -137,14 +137,14 @@ rbglib_m_utf8_normalize(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbglib_m_utf8_collate(G_GNUC_UNUSED VALUE self, VALUE utf8a, VALUE utf8b)
+rg_m_collate(G_GNUC_UNUSED VALUE self, VALUE utf8a, VALUE utf8b)
 {
     return INT2NUM(g_utf8_collate(StringValueCStr(utf8a),
                                   StringValueCStr(utf8b)));
 }
 
 static VALUE
-rbglib_m_utf8_collate_key(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_collate_key(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE result, rb_utf8, for_filename;
     gchar *key, *utf8;
@@ -167,7 +167,7 @@ rbglib_m_utf8_collate_key(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbglib_m_utf8_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
+rg_m_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 {
     VALUE result;
     gchar *utf8;
@@ -190,7 +190,7 @@ rbglib_m_utf8_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_utf8)
 }
 
 static VALUE
-rbglib_m_utf8_to_ucs4(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_m_to_ucs4(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE result, rb_utf8, is_fast;
     gchar *utf8;
@@ -226,8 +226,7 @@ Init_glib_utf8(void)
       Not implemented.
       g_utf8_next_char
     */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_char",
-                              rbglib_m_utf8_get_char, -1);
+    RG_DEF_MODFUNC(get_char, -1);
     /*
       Not implemented.
       g_utf8_offset_to_pointer
@@ -237,35 +236,24 @@ Init_glib_utf8(void)
       g_utf8_find_prev_char
       g_utf8_prev_char
     */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "size", rbglib_m_utf8_strlen, 1);
+    RG_DEF_MODFUNC(size, 1);
     /*
       Not implemented.
       g_utf8_strncpy
       g_utf8_strrchr
     */
-    rb_define_module_function(RG_TARGET_NAMESPACE, "reverse",
-                              rbglib_m_utf8_strreverse, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "validate",
-                              rbglib_m_utf8_validate, 1);
+    RG_DEF_MODFUNC(reverse, 1);
+    RG_DEF_MODFUNC(validate, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "upcase",
-                              rbglib_m_utf8_strup, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "downcase",
-                              rbglib_m_utf8_strdown, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "casefold",
-                              rbglib_m_utf8_casefold, 1);
+    RG_DEF_MODFUNC(upcase, 1);
+    RG_DEF_MODFUNC(downcase, 1);
+    RG_DEF_MODFUNC(casefold, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "normalize",
-                              rbglib_m_utf8_normalize, -1);
+    RG_DEF_MODFUNC(normalize, -1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "collate",
-                              rbglib_m_utf8_collate, 2);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "collate_key",
-                              rbglib_m_utf8_collate_key, -1);
+    RG_DEF_MODFUNC(collate, 2);
+    RG_DEF_MODFUNC(collate_key, -1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_utf16",
-                              rbglib_m_utf8_to_utf16, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_ucs4",
-                              rbglib_m_utf8_to_ucs4, -1);
+    RG_DEF_MODFUNC(to_utf16, 1);
+    RG_DEF_MODFUNC(to_ucs4, -1);
 }
-

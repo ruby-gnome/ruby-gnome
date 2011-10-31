@@ -54,7 +54,7 @@ resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
         if (NIL_P(value))
             return Qnil;
 
-	flags_value = rb_funcall(flags_value, id_or, 1, value);
+        flags_value = rb_funcall(flags_value, id_or, 1, value);
     }
 
     return flags_value;
@@ -149,7 +149,7 @@ rbgobj_get_flags(VALUE obj, GType gtype)
         return flags_get_holder(obj)->value;
     else
         rb_raise(rb_eTypeError, "not a %s: %s",
-		 rb_class2name(klass), RBG_INSPECT(obj));
+                 rb_class2name(klass), RBG_INSPECT(obj));
 }
 
 /**********************************************************************/
@@ -212,7 +212,7 @@ rbgobj_init_flags_class(VALUE klass)
 }
 
 static VALUE
-flags_s_mask(VALUE klass)
+rg_s_mask(VALUE klass)
 {
     GFlagsClass* gclass = g_type_class_ref(CLASS2GTYPE(klass));
     VALUE result = UINT2NUM(gclass->mask);
@@ -221,7 +221,7 @@ flags_s_mask(VALUE klass)
 }
 
 static VALUE
-flags_s_values(VALUE klass)
+rg_s_values(VALUE klass)
 {
     GFlagsClass *gclass;
     VALUE result;
@@ -256,7 +256,7 @@ flags_s_allocate(VALUE self)
 }
 
 static VALUE
-flags_initialize(int argc, VALUE* argv, VALUE self)
+rg_initialize(int argc, VALUE* argv, VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     VALUE arg;
@@ -294,28 +294,28 @@ flags_initialize(int argc, VALUE* argv, VALUE self)
 }
 
 static VALUE
-flags_to_i(VALUE self)
+rg_to_i(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return UINT2NUM(p->value);
 }
 
 static VALUE
-flags_name(VALUE self)
+rg_name(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return p->info ? rb_str_new2(p->info->value_name) : Qnil;
 }
 
 static VALUE
-flags_nick(VALUE self)
+rg_nick(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return p->info ? rb_str_new2(p->info->value_nick) : Qnil;
 }
 
 static VALUE
-flags_compare(VALUE self, VALUE rhs)
+rg_operator_flags_compare(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -338,7 +338,7 @@ flags_compare(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_eqv(VALUE self, VALUE rhs)
+rg_operator_flags_eqv(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -353,7 +353,7 @@ flags_eqv(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_gt_eq(VALUE self, VALUE rhs)
+rg_operator_flags_gt_eq(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -368,7 +368,7 @@ flags_gt_eq(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_lt_eq(VALUE self, VALUE rhs)
+rg_operator_flags_lt_eq(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -383,7 +383,7 @@ flags_lt_eq(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_gt(VALUE self, VALUE rhs)
+rg_operator_flags_gt(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -399,7 +399,7 @@ flags_gt(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_lt(VALUE self, VALUE rhs)
+rg_operator_flags_lt(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -415,7 +415,7 @@ flags_lt(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_not(VALUE self, G_GNUC_UNUSED VALUE rhs)
+rg_operator_flags_not(VALUE self, G_GNUC_UNUSED VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     return rbgobj_make_flags((~ p->value) & p->gclass->mask,
@@ -437,7 +437,7 @@ LIFT_BINARY_OP(flags_or, |)
 LIFT_BINARY_OP(flags_xor, ^)
 
 static VALUE
-flags_minus(VALUE self, VALUE rhs)
+rg_operator_flags_minus(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -446,21 +446,21 @@ flags_minus(VALUE self, VALUE rhs)
 }
 
 static VALUE
-flags_empty_p(VALUE self)
+rg_empty_p(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return CBOOL2RVAL(p->value == 0);
 }
 
 static VALUE
-flags_hash(VALUE self)
+rg_hash(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return UINT2NUM(p->value ^ G_TYPE_FROM_CLASS(p->gclass));
 }
 
 static VALUE
-flags_coerce(VALUE self, VALUE other)
+rg_coerce(VALUE self, VALUE other)
 {
     flags_holder *holder;
     GType gtype;
@@ -475,7 +475,7 @@ flags_coerce(VALUE self, VALUE other)
 }
 
 static VALUE
-flags_nonzero_p(VALUE self)
+rg_nonzero_p(VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
     return CBOOL2RVAL(p->value != 0);
@@ -495,42 +495,41 @@ Init_gobject_gflags(void)
     rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "mask", flags_s_mask, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "values", flags_s_values, 0);
+    RG_DEF_SMETHOD(mask, 0);
+    RG_DEF_SMETHOD(values, 0);
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, flags_s_allocate);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", flags_initialize, -1);
+    RG_DEF_METHOD(initialize, -1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "to_i", flags_to_i, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "to_int", "to_i");
-    rb_define_method(RG_TARGET_NAMESPACE, "name", flags_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "nick", flags_nick, 0);
+    RG_DEF_METHOD(to_i, 0);
+    RG_DEF_ALIAS("to_int", "to_i");
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(nick, 0);
 
     /*
     rb_define_method(RG_TARGET_NAMESPACE, "inspect", flags_inspect, 0);
     */
 
-    rb_define_method(RG_TARGET_NAMESPACE, "<=>", flags_compare, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", flags_eqv, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, ">=", flags_gt_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "<=", flags_lt_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, ">", flags_gt, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "<", flags_lt, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "~", flags_not, 0);
+    RG_DEF_METHOD_OPERATOR("<=>", flags_compare, 1);
+    RG_DEF_METHOD_OPERATOR("==", flags_eqv, 1);
+    RG_DEF_METHOD_OPERATOR(">=", flags_gt_eq, 1);
+    RG_DEF_METHOD_OPERATOR("<=", flags_lt_eq, 1);
+    RG_DEF_METHOD_OPERATOR(">", flags_gt, 1);
+    RG_DEF_METHOD_OPERATOR("<", flags_lt, 1);
+    RG_DEF_METHOD_OPERATOR("~", flags_not, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "&", flags_and, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "|", flags_or, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "^", flags_xor, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "-", flags_minus, 1);
+    RG_DEF_METHOD_OPERATOR("-", flags_minus, 1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "empty?", flags_empty_p, 0);
+    RG_DEF_METHOD_P(empty, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "hash", flags_hash, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "eql?", flags_eqv, 1);
+    RG_DEF_METHOD(hash, 0);
+    RG_DEF_ALIAS("eql?", "==");
 
     /* for compatibility */
-    rb_define_method(RG_TARGET_NAMESPACE, "coerce", flags_coerce, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "zero?", flags_empty_p, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "nonzero?", flags_nonzero_p, 0);
+    RG_DEF_METHOD(coerce, 1);
+    RG_DEF_ALIAS("zero?", "empty?");
+    RG_DEF_METHOD_P(nonzero, 0);
 }
-

@@ -110,7 +110,7 @@ pspec_s_allocate(VALUE klass)
 }
 
 static VALUE
-inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     GParamSpec* pspec = rbgobj_get_param_spec(self);
     VALUE v = rb_inspect(GTYPE2CLASS(pspec->owner_type));
@@ -124,51 +124,51 @@ inspect(VALUE self)
 }
 
 static VALUE
-get_name(VALUE self)
+rg_name(VALUE self)
 {
     return rb_str_new2(g_param_spec_get_name(rbgobj_get_param_spec(self)));
 }
 
 static VALUE
-get_nick(VALUE self)
+rg_nick(VALUE self)
 {
     const gchar* str = g_param_spec_get_nick(rbgobj_get_param_spec(self));
     return str ? rb_str_new2(str) : Qnil;
 }
 
 static VALUE
-get_blurb(VALUE self)
+rg_blurb(VALUE self)
 {
     const gchar* str = g_param_spec_get_blurb(rbgobj_get_param_spec(self));
     return str ? rb_str_new2(str) : Qnil;
 }
 
 static VALUE
-get_flags(VALUE self)
+rg_flags(VALUE self)
 {
     return INT2NUM(rbgobj_get_param_spec(self)->flags);
 }
 
 static VALUE
-get_value_type(VALUE self)
+rg_value_type(VALUE self)
 {
     return rbgobj_gtype_new(G_PARAM_SPEC_VALUE_TYPE(rbgobj_get_param_spec(self)));
 }
 
 static VALUE
-get_owner_type(VALUE self)
+rg_owner_type(VALUE self)
 {
     return rbgobj_gtype_new(rbgobj_get_param_spec(self)->owner_type);
 }
 
 static VALUE
-get_owner(VALUE self)
+rg_owner(VALUE self)
 {
     return GTYPE2CLASS(rbgobj_get_param_spec(self)->owner_type);
 }
 
 static VALUE
-value_default(VALUE self)
+rg_value_default(VALUE self)
 {
     GValue tmp = G_VALUE_INIT;
     VALUE result;
@@ -184,7 +184,7 @@ value_default(VALUE self)
 
 #if 0
 static VALUE
-value_defaults(VALUE self, VALUE val)
+rg_value_defaults_p(VALUE self, VALUE val)
 {
     GValue tmp = {0,};
     gboolean result;
@@ -199,7 +199,6 @@ value_defaults(VALUE self, VALUE val)
     return CBOOL2RVAL(result);
 }
 #endif
-
 
 struct validate_arg{
     GParamSpec* pspec;
@@ -227,7 +226,7 @@ value_validate_ensure(struct validate_arg* arg)
 }
 
 static VALUE
-value_validate(VALUE self, VALUE obj)
+rg_value_validate(VALUE self, VALUE obj)
 {
     struct validate_arg arg;
     GValue value = G_VALUE_INIT;
@@ -242,9 +241,8 @@ value_validate(VALUE self, VALUE obj)
                      value_validate_ensure, (VALUE)&arg);
 }
 
-
 static VALUE
-value_convert(int argc, VALUE* argv, VALUE self)
+rg_value_convert(int argc, VALUE* argv, VALUE self)
 {
     GParamSpec* pspec = rbgobj_get_param_spec(self);
     VALUE src, strict_validation;
@@ -279,7 +277,7 @@ value_convert(int argc, VALUE* argv, VALUE self)
 }
 
 static VALUE
-values_compare(VALUE self, VALUE a, VALUE b)
+rg_value_compare(VALUE self, VALUE a, VALUE b)
 {
     GParamSpec* pspec = rbgobj_get_param_spec(self);
     GType type = G_PARAM_SPEC_VALUE_TYPE(pspec);
@@ -302,13 +300,11 @@ values_compare(VALUE self, VALUE a, VALUE b)
     return INT2NUM(result);
 }
 
-
 static VALUE
-get_ref_count(VALUE self)
+rg_ref_count(VALUE self)
 {
     return INT2NUM(G_PARAM_SPEC(rbgobj_get_param_spec(self))->ref_count);
 }
-
 
 #define param_is_flag(flag) \
     static VALUE \
@@ -328,8 +324,8 @@ param_is_flag(G_PARAM_READWRITE)
 
 /**********************************************************************/
 
-static void
-Init_gobject_gparam_spec(void)
+void
+Init_gobject_gparam(void)
 {
     qparamspec = g_quark_from_static_string("__ruby_gobject_param_spec__");
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_PARAM, "Param", mGLib);
@@ -347,30 +343,30 @@ Init_gobject_gparam_spec(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, pspec_s_allocate);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "inspect", inspect, 0);
+    RG_DEF_METHOD(inspect, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "name", get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "nick", get_nick, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "blurb", get_blurb, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(nick, 0);
+    RG_DEF_METHOD(blurb, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "flags", get_flags, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "value_type", get_value_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "owner_type", get_owner_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "owner", get_owner, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(value_type, 0);
+    RG_DEF_METHOD(owner_type, 0);
+    RG_DEF_METHOD(owner, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "value_default", value_default, 0);
-    rb_define_alias(RG_TARGET_NAMESPACE, "default", "value_default");
+    RG_DEF_METHOD(value_default, 0);
+    RG_DEF_ALIAS("default", "value_default");
 
     // FIXME: better name
 #if 0
-    rb_define_method(RG_TARGET_NAMESPACE, "value_defaults?", value_defaults, 1);
+    RG_DEF_METHOD_P(value_defaults, 1);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "value_validate", value_validate, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "value_convert", value_convert, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "value_compare", values_compare, 2);
+    RG_DEF_METHOD(value_validate, 1);
+    RG_DEF_METHOD(value_convert, -1);
+    RG_DEF_METHOD(value_compare, 2);
 
     /* for debugging */
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_count", get_ref_count, 0);
+    RG_DEF_METHOD(ref_count, 0);
 
     rb_define_method(RG_TARGET_NAMESPACE, "readable?",       param_is_G_PARAM_READABLE, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "writable?",       param_is_G_PARAM_WRITABLE, 0);
@@ -379,12 +375,4 @@ Init_gobject_gparam_spec(void)
     rb_define_method(RG_TARGET_NAMESPACE, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "private?",        param_is_G_PARAM_PRIVATE, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
-}
-
-/**********************************************************************/
-
-void
-Init_gobject_gparam(void)
-{
-    Init_gobject_gparam_spec();
 }

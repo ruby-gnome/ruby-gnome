@@ -33,7 +33,7 @@ rbglib_m_charset(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rbglib_m_unicode_canonical_ordering(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
+rg_s_canonical_ordering(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 {
     VALUE normalized_ucs4;
     gchar *original_str;
@@ -50,7 +50,7 @@ rbglib_m_unicode_canonical_ordering(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 }
 
 static VALUE
-rbglib_m_unicode_canonical_decomposition(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_s_canonical_decomposition(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     VALUE normalized_ucs4;
     gunichar *ucs4;
@@ -85,8 +85,6 @@ Init_glib_unicode(void)
 
     rb_define_module_function(mGLib, "charset", rbglib_m_charset, 0);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "canonical_ordering",
-                               rbglib_m_unicode_canonical_ordering, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "canonical_decomposition",
-                               rbglib_m_unicode_canonical_decomposition, 1);
+    RG_DEF_SMETHOD(canonical_ordering, 1);
+    RG_DEF_SMETHOD(canonical_decomposition, 1);
 }

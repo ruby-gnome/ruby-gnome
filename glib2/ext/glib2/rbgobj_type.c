@@ -62,7 +62,6 @@ cinfo_mark(RGObjClassInfo* cinfo)
     rb_gc_mark(cinfo->klass);
 }
 
-
 const RGObjClassInfo *
 rbgobj_lookup_class(VALUE klass)
 {
@@ -87,8 +86,8 @@ rbgobj_lookup_class(VALUE klass)
 }
 
 static const RGObjClassInfo *rbgobj_lookup_class_by_gtype_without_lock(GType gtype,
-								       VALUE parent,
-								       gboolean create_class);
+                                                                       VALUE parent,
+                                                                       gboolean create_class);
 
 static VALUE
 get_superclass(GType gtype)
@@ -116,12 +115,12 @@ get_superclass(GType gtype)
       default:
       {
           const RGObjClassInfo *cinfo_super;
-	  GType parent_type;
+          GType parent_type;
 
-	  parent_type = g_type_parent(gtype);
-	  cinfo_super = rbgobj_lookup_class_by_gtype_without_lock(parent_type,
-								  Qnil,
-								  TRUE);
+          parent_type = g_type_parent(gtype);
+          cinfo_super = rbgobj_lookup_class_by_gtype_without_lock(parent_type,
+                                                                  Qnil,
+                                                                  TRUE);
           return cinfo_super->klass;
       }
     }
@@ -129,7 +128,7 @@ get_superclass(GType gtype)
 
 static const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
-					  gboolean create_class)
+                                          gboolean create_class)
 {
     GType fundamental_type;
     RGObjClassInfo* cinfo;
@@ -145,7 +144,7 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
         return cinfo;
 
     if (!create_class)
-	return NULL;
+        return NULL;
 
     c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
     cinfo->gtype = gtype;
@@ -164,11 +163,11 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
         if (NIL_P(parent)) parent = get_superclass(gtype);
         cinfo->klass = rb_funcall(rb_cClass, id_new, 1, parent);
         break;
-        
+
     case G_TYPE_INTERFACE:
         cinfo->klass = rb_module_new();
         break;
-        
+
     default:
       if (NIL_P(parent)) parent = get_superclass(gtype);
       if (NIL_P(parent)) {
@@ -183,7 +182,7 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
     }
 
     cinfod = (RGObjClassInfoDynamic *)g_hash_table_lookup(dynamic_gtype_list,
-							  g_type_name(gtype));
+                                                          g_type_name(gtype));
     if (cinfod){
         cinfo->mark = cinfod->mark;
         cinfo->free = cinfod->free;
@@ -192,10 +191,10 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
 
     rb_hash_aset(klass_to_cinfo, cinfo->klass, c);
     g_hash_table_insert(gtype_to_cinfo, GUINT_TO_POINTER(gtype), cinfo);
-    
+
     if (G_TYPE_IS_CLASSED(gtype))
         gclass = g_type_class_ref(gtype);
-    
+
     if (G_TYPE_IS_INSTANTIATABLE(gtype) || G_TYPE_IS_INTERFACE(gtype))
         rbgobj_define_action_methods(cinfo->klass);
 
@@ -206,11 +205,11 @@ rbgobj_lookup_class_by_gtype_without_lock(GType gtype, VALUE parent,
 
         interfaces = g_type_interfaces(gtype, &n_interfaces);
         for (i = 0; i < n_interfaces; i++){
-	    const RGObjClassInfo *iface_cinfo;
-	    iface_cinfo =
-		rbgobj_lookup_class_by_gtype_without_lock(interfaces[i],
-							  Qnil,
-							  TRUE);
+            const RGObjClassInfo *iface_cinfo;
+            iface_cinfo =
+            rbgobj_lookup_class_by_gtype_without_lock(interfaces[i],
+                                                      Qnil,
+                                                      TRUE);
             rb_include_module(cinfo->klass, iface_cinfo->klass);
         }
         g_free(interfaces);
@@ -249,8 +248,8 @@ rbgobj_lookup_class_by_gtype_body(VALUE data)
     const RGObjClassInfo *cinfo;
 
     cinfo = rbgobj_lookup_class_by_gtype_without_lock(cdata->gtype,
-						      cdata->parent,
-						      cdata->create_class);
+                                                      cdata->parent,
+                                                      cdata->create_class);
     return (VALUE)cinfo;
 }
 
@@ -269,7 +268,7 @@ rbgobj_lookup_class_by_gtype(GType gtype, VALUE parent)
 
 const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype_full(GType gtype, VALUE parent,
-				  gboolean create_class)
+                                  gboolean create_class)
 {
     RGObjClassByGtypeData data;
 
@@ -278,14 +277,14 @@ rbgobj_lookup_class_by_gtype_full(GType gtype, VALUE parent,
     data.create_class = create_class;
 
     if (create_class) {
-	rb_funcall(lookup_class_mutex, id_lock, 0);
-	return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
-					   (VALUE)&data,
-					   rbgobj_lookup_class_by_gtype_ensure,
-					   (VALUE)&data);
+        rb_funcall(lookup_class_mutex, id_lock, 0);
+        return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
+                                           (VALUE)&data,
+                                           rbgobj_lookup_class_by_gtype_ensure,
+                                           (VALUE)&data);
     } else {
-	return rbgobj_lookup_class_by_gtype_without_lock(gtype, parent,
-							 create_class);
+        return rbgobj_lookup_class_by_gtype_without_lock(gtype, parent,
+                                                         create_class);
     }
 }
 
@@ -335,16 +334,16 @@ rbgobj_register_class(VALUE klass,
     VALUE c = Qnil;
 
     if (klass2gtype)
-	c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
+        c = Data_Make_Struct(rb_cData, RGObjClassInfo, cinfo_mark, NULL, cinfo);
     if (gtype2klass && !cinfo)
-	cinfo = g_new(RGObjClassInfo, 1);
+        cinfo = g_new(RGObjClassInfo, 1);
 
     if (cinfo) {
-	cinfo->klass = klass;
-	cinfo->gtype = gtype;
-	cinfo->mark  = NULL;
-	cinfo->free  = NULL;
-	cinfo->flags = 0;
+        cinfo->klass = klass;
+        cinfo->gtype = gtype;
+        cinfo->mark  = NULL;
+        cinfo->free  = NULL;
+        cinfo->flags = 0;
     }
 
     if (klass2gtype)
@@ -425,7 +424,7 @@ rbgobj_gtype_get(VALUE self)
 }
 
 static VALUE
-type_initialize(VALUE self, VALUE type)
+rg_initialize(VALUE self, VALUE type)
 {
     GType gtype;
 
@@ -442,12 +441,12 @@ type_initialize(VALUE self, VALUE type)
         rb_raise(rb_eArgError, "invalid type");
 
     rb_ivar_set(self, id_gtype, UINT2NUM(gtype));
- 
+
     return Qnil;
 }
 
 static VALUE
-type_inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     GType gtype = rbgobj_gtype_get(self);
     gchar* str;
@@ -461,7 +460,7 @@ type_inspect(VALUE self)
 }
 
 static VALUE
-type_compare(VALUE self, VALUE other)
+rg_operator_type_compare(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
@@ -481,7 +480,7 @@ type_compare(VALUE self, VALUE other)
 }
 
 static VALUE
-type_eq(VALUE self, VALUE other)
+rg_operator_type_eq(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
@@ -493,7 +492,7 @@ type_eq(VALUE self, VALUE other)
 }
 
 static VALUE
-type_lt_eq(VALUE self, VALUE other)
+rg_operator_type_lt_eq(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
@@ -505,7 +504,7 @@ type_lt_eq(VALUE self, VALUE other)
 }
 
 static VALUE
-type_gt_eq(VALUE self, VALUE other)
+rg_operator_type_gt_eq(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
@@ -517,7 +516,7 @@ type_gt_eq(VALUE self, VALUE other)
 }
 
 static VALUE
-type_lt(VALUE self, VALUE other)
+rg_operator_type_lt(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
@@ -529,7 +528,7 @@ type_lt(VALUE self, VALUE other)
 }
 
 static VALUE
-type_gt(VALUE self, VALUE other)
+rg_operator_type_gt(VALUE self, VALUE other)
 {
     if (!RVAL2CBOOL(rb_obj_is_kind_of(other, RG_TARGET_NAMESPACE)))
         return Qnil;
@@ -541,110 +540,110 @@ type_gt(VALUE self, VALUE other)
 }
 
 static VALUE
-type_to_int(VALUE self)
+rg_hash(VALUE self)
 {
     return rb_ivar_get(self, id_gtype);
 }
 
 static VALUE
-type_to_class(VALUE self)
+rg_to_class(VALUE self)
 {
     return GTYPE2CLASS(rbgobj_gtype_get(self));
 }
 
 static VALUE
-type_fundamental(VALUE self)
+rg_fundamental(VALUE self)
 {
     return rbgobj_gtype_new(G_TYPE_FUNDAMENTAL(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_fundamental(VALUE self)
+rg_fundamental_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_FUNDAMENTAL(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_derived(VALUE self)
+rg_derived_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_DERIVED(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_interface(VALUE self)
+rg_interface_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_INTERFACE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_classed(VALUE self)
+rg_classed_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_CLASSED(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_instantiatable(VALUE self)
+rg_instantiatable_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_INSTANTIATABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_derivable(VALUE self)
+rg_derivable_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_DERIVABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_deep_derivable(VALUE self)
+rg_deep_derivable_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_DEEP_DERIVABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_abstract(VALUE self)
+rg_abstract_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_ABSTRACT(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_value_abstract(VALUE self)
+rg_value_abstract_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_VALUE_ABSTRACT(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_is_value_type(VALUE self)
+rg_value_type_p(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_IS_VALUE_TYPE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_has_value_table(VALUE self)
+rg_has_value_table(VALUE self)
 {
     return CBOOL2RVAL(G_TYPE_HAS_VALUE_TABLE(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_name(VALUE self)
+rg_name(VALUE self)
 {
     return rb_str_new2(g_type_name(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_parent(VALUE self)
+rg_parent(VALUE self)
 {
     GType parent = g_type_parent(rbgobj_gtype_get(self));
     return parent ? rbgobj_gtype_new(parent) : Qnil;
 }
 
 static VALUE
-type_depth(VALUE self)
+rg_depth(VALUE self)
 {
     return UINT2NUM(g_type_depth(rbgobj_gtype_get(self)));
 }
 
 static VALUE
-type_next_base(VALUE leaf_type, VALUE root_type)
+rg_next_base(VALUE leaf_type, VALUE root_type)
 {
     GType ret = g_type_next_base(rbgobj_gtype_get(leaf_type),
                                  rbgobj_gtype_get(root_type));
@@ -652,7 +651,7 @@ type_next_base(VALUE leaf_type, VALUE root_type)
 }
 
 static VALUE
-type_is_a(VALUE self, VALUE is_a_type)
+rg_type_is_a_p(VALUE self, VALUE is_a_type)
 {
     return CBOOL2RVAL(g_type_is_a(rbgobj_gtype_get(self), rbgobj_gtype_get(is_a_type)));
 }
@@ -663,12 +662,12 @@ gpointer              g_type_class_peek              (GType            type);
 void                  g_type_class_unref             (gpointer         g_class);
 gpointer              g_type_class_peek_parent       (gpointer         g_class);
 gpointer              g_type_interface_peek          (gpointer         instance_class,
-						      GType            iface_type);
+                              GType            iface_type);
 gpointer              g_type_interface_peek_parent   (gpointer         g_iface);
 #endif 
 
 static VALUE
-type_children(VALUE self)
+rg_children(VALUE self)
 {
     guint n_children;
     GType* types;
@@ -685,7 +684,7 @@ type_children(VALUE self)
 }
 
 static VALUE
-type_interfaces(VALUE self)
+rg_interfaces(VALUE self)
 {
     guint n_interfaces;
     GType* types;
@@ -702,7 +701,7 @@ type_interfaces(VALUE self)
 }
 
 static VALUE
-type_class_size(VALUE self)
+rg_class_size(VALUE self)
 {
     GTypeQuery query;
     g_type_query(rbgobj_gtype_get(self), &query);
@@ -710,13 +709,12 @@ type_class_size(VALUE self)
 }
 
 static VALUE
-type_instance_size(VALUE self)
+rg_instance_size(VALUE self)
 {
     GTypeQuery query;
     g_type_query(rbgobj_gtype_get(self), &query);
     return UINT2NUM(query.instance_size);
 }
-
 
 static inline void
 _def_fundamental_type(VALUE ary, GType gtype, const char* name)
@@ -747,43 +745,43 @@ Init_gobject_gtype(void)
     RG_TARGET_NAMESPACE = rb_define_class_under(mGLib, "Type", rb_cObject);
 
     rb_define_alias(CLASS_OF(RG_TARGET_NAMESPACE), "[]", "new");
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", type_initialize, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "inspect", type_inspect, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "<=>", type_compare, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", type_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "<=", type_lt_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, ">=", type_gt_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "<", type_lt, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, ">", type_gt, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "eql?", type_eq, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "hash", type_to_int, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_i", type_to_int, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_int", type_to_int, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_class", type_to_class, 0);
+    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(inspect, 0);
+    RG_DEF_METHOD_OPERATOR("<=>", type_compare, 1);
+    RG_DEF_METHOD_OPERATOR("==", type_eq, 1);
+    RG_DEF_METHOD_OPERATOR("<=", type_lt_eq, 1);
+    RG_DEF_METHOD_OPERATOR(">=", type_gt_eq, 1);
+    RG_DEF_METHOD_OPERATOR("<", type_lt, 1);
+    RG_DEF_METHOD_OPERATOR(">", type_gt, 1);
+    RG_DEF_ALIAS("eql?", "==");
+    RG_DEF_METHOD(hash, 0);
+    RG_DEF_ALIAS("to_i", "hash");
+    RG_DEF_ALIAS("to_int", "hash");
+    RG_DEF_METHOD(to_class, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "fundamental", type_fundamental, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "fundamental?", type_is_fundamental, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "derived?", type_is_derived, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "interface?", type_is_interface, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "classed?", type_is_classed, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "instantiatable?", type_is_instantiatable, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "derivable?", type_is_derivable, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "deep_derivable?", type_is_deep_derivable, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "abstract?", type_is_abstract, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "value_abstract?", type_is_value_abstract, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "value_type?", type_is_value_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_value_table", type_has_value_table, 0);
+    RG_DEF_METHOD(fundamental, 0);
+    RG_DEF_METHOD_P(fundamental, 0);
+    RG_DEF_METHOD_P(derived, 0);
+    RG_DEF_METHOD_P(interface, 0);
+    RG_DEF_METHOD_P(classed, 0);
+    RG_DEF_METHOD_P(instantiatable, 0);
+    RG_DEF_METHOD_P(derivable, 0);
+    RG_DEF_METHOD_P(deep_derivable, 0);
+    RG_DEF_METHOD_P(abstract, 0);
+    RG_DEF_METHOD_P(value_abstract, 0);
+    RG_DEF_METHOD_P(value_type, 0);
+    RG_DEF_METHOD(has_value_table, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "name", type_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_s", type_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "parent", type_parent, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "depth", type_depth, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "next_base", type_next_base, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "type_is_a?", type_is_a, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "children", type_children, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "interfaces", type_interfaces, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "class_size", type_class_size, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "instance_size", type_instance_size, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_ALIAS("to_s", "name");
+    RG_DEF_METHOD(parent, 0);
+    RG_DEF_METHOD(depth, 0);
+    RG_DEF_METHOD(next_base, 1);
+    RG_DEF_METHOD_P(type_is_a, 1);
+    RG_DEF_METHOD(children, 0);
+    RG_DEF_METHOD(interfaces, 0);
+    RG_DEF_METHOD(class_size, 0);
+    RG_DEF_METHOD(instance_size, 0);
 
     {
     VALUE ary = rb_ary_new();

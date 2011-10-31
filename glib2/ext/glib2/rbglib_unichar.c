@@ -52,44 +52,44 @@ DEF_IS_UNICHAR(wide_cjk)
 #undef DEF_IS_UNICHAR
 
 static VALUE
-rbglib_m_unichar_toupper(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_to_upper(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return UINT2NUM(g_unichar_toupper(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_tolower(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_to_lower(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return UINT2NUM(g_unichar_tolower(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_totitle(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_to_title(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return UINT2NUM(g_unichar_totitle(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_digit_value(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_digit_value(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return INT2NUM(g_unichar_digit_value(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_xdigit_value(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_xdigit_value(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return INT2NUM(g_unichar_xdigit_value(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_type(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_TYPE);
 }
 
 static VALUE
-rbglib_m_unichar_break_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_break_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_break_type(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_BREAK_TYPE);
@@ -97,7 +97,7 @@ rbglib_m_unichar_break_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
 
 #if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
-rbglib_m_unichar_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     gunichar mirrored_char;
 
@@ -111,33 +111,33 @@ rbglib_m_unichar_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
-rbglib_m_unichar_combining_class(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_combining_class(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return INT2NUM(g_unichar_combining_class(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_get_script(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_get_script(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return GENUM2RVAL(g_unichar_get_script(NUM2UINT(unichar)),
                       G_TYPE_UNICODE_SCRIPT);
 }
 
 static VALUE
-rbglib_m_unichar_ismark(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_mark_p(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return CBOOL2RVAL(g_unichar_ismark(NUM2UINT(unichar)));
 }
 
 static VALUE
-rbglib_m_unichar_iszerowidth(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_zero_width_p(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     return CBOOL2RVAL(g_unichar_iszerowidth(NUM2UINT(unichar)));
 }
 #endif
 
 static VALUE
-rbglib_m_unichar_to_utf8(G_GNUC_UNUSED VALUE self, VALUE unichar)
+rg_m_to_utf8(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
     gchar utf8[6];
     gint len;
@@ -184,39 +184,26 @@ Init_glib_unichar(void)
                               rbglib_m_unichar_iswide_cjk, 1);
 #endif
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_upper",
-                              rbglib_m_unichar_toupper, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_lower",
-                              rbglib_m_unichar_tolower, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_title",
-                              rbglib_m_unichar_totitle, 1);
+    RG_DEF_MODFUNC(to_upper, 1);
+    RG_DEF_MODFUNC(to_lower, 1);
+    RG_DEF_MODFUNC(to_title, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "digit_value",
-                              rbglib_m_unichar_digit_value, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "xdigit_value",
-                              rbglib_m_unichar_xdigit_value, 1);
+    RG_DEF_MODFUNC(digit_value, 1);
+    RG_DEF_MODFUNC(xdigit_value, 1);
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "type", rbglib_m_unichar_type, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "break_type",
-                              rbglib_m_unichar_break_type, 1);
+    RG_DEF_MODFUNC(type, 1);
+    RG_DEF_MODFUNC(break_type, 1);
 
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_mirror_char",
-                              rbglib_m_unichar_get_mirror_char, 1);
+    RG_DEF_MODFUNC(get_mirror_char, 1);
 #endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_module_function(RG_TARGET_NAMESPACE, "combining_class",
-			      rbglib_m_unichar_combining_class, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "get_script",
-                              rbglib_m_unichar_get_script, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "mark?",
-			      rbglib_m_unichar_ismark, 1);
-    rb_define_module_function(RG_TARGET_NAMESPACE, "zero_width?",
-			      rbglib_m_unichar_iszerowidth, 1);
+    RG_DEF_MODFUNC(combining_class, 1);
+    RG_DEF_MODFUNC(get_script, 1);
+    RG_DEF_MODFUNC_P(mark, 1);
+    RG_DEF_MODFUNC_P(zero_width, 1);
 #endif
 
-    rb_define_module_function(RG_TARGET_NAMESPACE, "to_utf8",
-                              rbglib_m_unichar_to_utf8, 1);
+    RG_DEF_MODFUNC(to_utf8, 1);
 }
-

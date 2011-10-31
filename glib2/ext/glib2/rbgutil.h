@@ -43,6 +43,8 @@ extern "C" {
         rb_define_singleton_method(RG_TARGET_NAMESPACE, #method, rg_s_ ## method, argc)
 #define RG_DEF_SMETHOD_P(method, argc) \
         rb_define_singleton_method(RG_TARGET_NAMESPACE, #method"?", rg_s_ ## method ## _p, argc)
+#define RG_DEF_SMETHOD_BANG(method, argc) \
+        rb_define_singleton_method(RG_TARGET_NAMESPACE, #method"!", rg_s_ ## method ## _bang, argc)
 #define RG_DEF_SMETHOD_OPERATOR(ope, func, argc) \
         rb_define_singleton_method(RG_TARGET_NAMESPACE, ope, rg_s_operator_ ## func, argc)
 #define RG_DEF_METHOD(method, argc) \

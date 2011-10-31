@@ -294,7 +294,7 @@ init_rclosure(void)
 /**********************************************************************/
 
 static VALUE
-closure_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GClosure* closure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
     G_INITIALIZE(self, closure);
@@ -303,21 +303,21 @@ closure_initialize(VALUE self)
 }
 
 static VALUE
-closure_in_marshal(VALUE self)
+rg_in_marshal_p(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return CBOOL2RVAL(closure->in_marshal);
 }
 
 static VALUE
-closure_is_invalid(VALUE self)
+rg_invalid_p(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     return CBOOL2RVAL(closure->is_invalid);
 }
 
 static VALUE
-closure_invalidate(VALUE self)
+rg_invalidate(VALUE self)
 {
     GClosure* closure = RVAL2BOXED(self, G_TYPE_CLOSURE);
     g_closure_invalidate(closure);
@@ -333,9 +333,8 @@ Init_gobject_gclosure(void)
 
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", closure_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "in_marshal?", closure_in_marshal, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "invalid?", closure_is_invalid, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "invalidate", closure_invalidate, 0);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD_P(in_marshal, 0);
+    RG_DEF_METHOD_P(invalid, 0);
+    RG_DEF_METHOD(invalidate, 0);
 }
-
