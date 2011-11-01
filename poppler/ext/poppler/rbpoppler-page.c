@@ -21,6 +21,7 @@
 
 #include "rbpoppler-private.h"
 
+#define RG_TARGET_NAMESPACE cPage
 #define SELF(self) (POPPLER_PAGE(RVAL2GOBJ(self)))
 
 #ifndef GDK_TYPE_REGION
@@ -453,7 +454,7 @@ page_get_crop_box(VALUE self)
     return POPPLER_RECT2RVAL(&rect);
 }
 
-
+
 /* A rectangle on a page, with coordinates in PDF points. */
 static VALUE
 rectangle_initialize(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
@@ -503,7 +504,7 @@ rectangle_inspect(VALUE self)
     return inspected;
 }
 
-
+
 #ifdef POPPLER_TYPE_COLOR
 /* A color in RGB */
 static VALUE
@@ -552,7 +553,7 @@ color_inspect(VALUE self)
 }
 #endif
 
-
+
 /* Mapping between areas on the current page and PopplerActions */
 #define RECT_ENTITY2RVAL(rect) POPPLER_RECT2RVAL(&(rect))
 #define RECT_ENTITY_SET(rect, rb_rect) rectangle_set(&(rect), rb_rect)
@@ -567,7 +568,7 @@ DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
 DEF_ACCESSOR(link_mapping, action, RVAL2LM,
 	     POPPLER_ACTION2RVAL, RVAL2POPPLER_ACTION)
 
-
+
 /* Page Transition */
 DEF_ACCESSOR(page_trans, type, RVAL2TRANS, RVAL2TT, TT2RVAL)
 DEF_ACCESSOR(page_trans, alignment, RVAL2TRANS, RVAL2TA, TA2RVAL)
@@ -577,7 +578,7 @@ DEF_ACCESSOR(page_trans, angle, RVAL2TRANS, NUM2INT, INT2NUM)
 DEF_ACCESSOR(page_trans, scale, RVAL2TRANS, NUM2DBL, rb_float_new)
 DEF_ACCESSOR(page_trans, rectangular, RVAL2TRANS, RVAL2CBOOL, CBOOL2RVAL)
 
-
+
 /* Mapping between areas on the current page and images */
 DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
                          RVAL2IM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
@@ -590,7 +591,7 @@ image_mapping_get_image(VALUE self)
 }
 #endif
 
-
+
 /* Mapping between areas on the current page and form fields */
 DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
                          RVAL2FFM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
@@ -633,11 +634,11 @@ annot_mapping_set_annotation(VALUE self, VALUE annotation)
 void
 Init_poppler_page(VALUE mPoppler)
 {
-    VALUE cPage, cLinkMapping;
+    VALUE RG_TARGET_NAMESPACE, cLinkMapping;
     VALUE cPageTransition, cImageMapping, cFormFieldMapping;
     VALUE cAnnotationMapping;
 
-    cPage = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
     cRectangle = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
 #ifdef POPPLER_TYPE_COLOR
     rb_cPopplerColor = G_DEF_CLASS(POPPLER_TYPE_COLOR, "Color", mPoppler);
@@ -654,40 +655,40 @@ Init_poppler_page(VALUE mPoppler)
 				     "AnnotationMapping", mPoppler);
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
-    rb_define_method(cPage, "render", page_render_generic, -1);
-    rb_define_method(cPage, "render_for_printing",
+    rb_define_method(RG_TARGET_NAMESPACE, "render", page_render_generic, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_for_printing",
 		     page_render_for_printing_generic, -1);
-    rb_define_method(cPage, "size", page_get_size, 0);
-    rb_define_method(cPage, "index", page_get_index, 0);
-    rb_define_method(cPage, "duration", page_get_duration, 0);
-    rb_define_method(cPage, "transition", page_get_transition, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size", page_get_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "index", page_get_index, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "duration", page_get_duration, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "transition", page_get_transition, 0);
 
 #if RB_POPPLER_CAIRO_AVAILABLE
-    rb_define_method(cPage, "thumbnail", page_get_thumbnail, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "thumbnail", page_get_thumbnail, 0);
 #endif
 #if POPPLER_WITH_GDK
-    rb_define_method(cPage, "thumbnail_pixbuf", page_get_thumbnail_pixbuf, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "thumbnail_pixbuf", page_get_thumbnail_pixbuf, 0);
 #endif
-    rb_define_method(cPage, "thumbnail_size", page_get_thumbnail_size, 0);
-    rb_define_method(cPage, "find_text", page_find_text, 1);
-    rb_define_method(cPage, "get_text", page_get_text, -1);
-    rb_define_method(cPage, "get_selection_region",
+    rb_define_method(RG_TARGET_NAMESPACE, "thumbnail_size", page_get_thumbnail_size, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "find_text", page_find_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text", page_get_text, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_selection_region",
 		     page_get_selection_region, 3);
-    rb_define_method(cPage, "link_mapping", page_get_link_mapping, 0);
-    rb_define_method(cPage, "image_mapping", page_get_image_mapping, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "link_mapping", page_get_link_mapping, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "image_mapping", page_get_image_mapping, 0);
 #if RB_POPPLER_CAIRO_AVAILABLE
-    rb_define_method(cPage, "get_image", page_get_image, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_image", page_get_image, 1);
 #endif
 
-    rb_define_method(cPage, "form_field_mapping",
+    rb_define_method(RG_TARGET_NAMESPACE, "form_field_mapping",
                      page_get_form_field_mapping, 0);
-    rb_define_method(cPage, "annotation_mapping",
+    rb_define_method(RG_TARGET_NAMESPACE, "annotation_mapping",
                      page_get_annot_mapping, 0);
-    rb_define_method(cPage, "render_selection",
+    rb_define_method(RG_TARGET_NAMESPACE, "render_selection",
                      page_render_selection_generic, -1);
-    rb_define_method(cPage, "crop_box", page_get_crop_box, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "crop_box", page_get_crop_box, 0);
 
-    G_DEF_SETTERS(cPage);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 /* A rectangle on a page, with coordinates in PDF points. */
     rb_define_method(cRectangle, "initialize", rectangle_initialize, 4);

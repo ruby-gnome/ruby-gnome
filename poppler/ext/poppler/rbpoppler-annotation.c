@@ -21,6 +21,7 @@
 
 #include "rbpoppler-private.h"
 
+#define RG_TARGET_NAMESPACE cAnnotation
 #define SELF(self) (POPPLER_ANNOT(RVAL2GOBJ(self)))
 
 #define TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TYPE))
@@ -237,19 +238,19 @@ annot_callout_line_inspect(VALUE self)
 void
 Init_poppler_annotation(VALUE mPoppler)
 {
-    VALUE cAnnotation, cAnnotationMarkup, cAnnotationText;
+    VALUE RG_TARGET_NAMESPACE, cAnnotationMarkup, cAnnotationText;
     VALUE cAnnotationFreeText, cAnnotationCalloutLine;
 
     id_new = rb_intern("new");
     rb_cDate = rb_const_get(rb_cObject, rb_intern("Date"));
 
-    cAnnotation = G_DEF_CLASS(POPPLER_TYPE_ANNOT, "Annotation", mPoppler);
-    rb_define_method(cAnnotation, "type", annot_get_annot_type, 0);
-    rb_define_method(cAnnotation, "contents", annot_get_contents, 0);
-    rb_define_method(cAnnotation, "name", annot_get_name, 0);
-    rb_define_method(cAnnotation, "modified", annot_get_modified, 0);
-    rb_define_method(cAnnotation, "flags", annot_get_flags, 0);
-    rb_define_method(cAnnotation, "color", annot_get_color, 0);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT, "Annotation", mPoppler);
+    rb_define_method(RG_TARGET_NAMESPACE, "type", annot_get_annot_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "contents", annot_get_contents, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "name", annot_get_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "modified", annot_get_modified, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", annot_get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "color", annot_get_color, 0);
 
     cAnnotationMarkup = G_DEF_CLASS(POPPLER_TYPE_ANNOT_MARKUP,
                                     "AnnotationMarkup", mPoppler);
