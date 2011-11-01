@@ -50,7 +50,7 @@ ATTR_INT(bottom);
     rb_define_method(gt, G_STRINGIFY(set_ ## name), border_ ## type ## _set_## name, 1);
 
 static VALUE
-border_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
+rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 {
     GtkBorder border;
     border.left = NUM2INT(left);
@@ -63,7 +63,7 @@ border_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 }
 
 static VALUE
-border_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     GtkBorder* border = _SELF(self);
     return rb_ary_new3(4, INT2NUM(border->left), INT2NUM(border->right),
@@ -75,8 +75,8 @@ Init_gtk_border(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BORDER, "Border", mGtk);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", border_initialize, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "to_a", border_to_a, 0);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(to_a, 0);
 
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, left);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, right);

@@ -26,14 +26,14 @@
 #define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
 
 static VALUE
-accel_map_add_entry(VALUE self, VALUE path, VALUE key, VALUE mods)
+rg_s_add_entry(VALUE self, VALUE path, VALUE key, VALUE mods)
 {
     gtk_accel_map_add_entry(RVAL2CSTR(path), NUM2UINT(key), RVAL2MOD(mods));
     return self;
 }
 
 static VALUE
-accel_map_lookup_entry(VALUE self, VALUE path)
+rg_s_lookup_entry(VALUE self, VALUE path)
 {
     GtkAccelKey key;
     if(gtk_accel_map_lookup_entry(RVAL2CSTR(path), &key))
@@ -43,28 +43,28 @@ accel_map_lookup_entry(VALUE self, VALUE path)
 }
 
 static VALUE
-accel_map_change_entry(G_GNUC_UNUSED VALUE self, VALUE path, VALUE key, VALUE mods, VALUE replace)
+rg_s_change_entry(G_GNUC_UNUSED VALUE self, VALUE path, VALUE key, VALUE mods, VALUE replace)
 {
     return CBOOL2RVAL(gtk_accel_map_change_entry(RVAL2CSTR(path), NUM2UINT(key),
                                                  RVAL2MOD(mods), RVAL2CBOOL(replace)));
 }
 
 static VALUE
-accel_map_load(VALUE self, VALUE filename)
+rg_s_load(VALUE self, VALUE filename)
 {
     gtk_accel_map_load(RVAL2CSTR(filename));
     return self;
 }
 
 static VALUE
-accel_map_save(VALUE self, VALUE filename)
+rg_s_save(VALUE self, VALUE filename)
 {
     gtk_accel_map_save(RVAL2CSTR(filename));
     return self;
 }
 
 static VALUE
-accel_map_add_filter(VALUE self, VALUE pattern)
+rg_s_add_filter(VALUE self, VALUE pattern)
 {
     gtk_accel_map_add_filter(RVAL2CSTR(pattern));
     return self;
@@ -79,7 +79,7 @@ accel_map_foreach_func(gpointer func, const gchar *path, guint key, GdkModifierT
 }
 
 static VALUE
-accel_map_foreach(VALUE self)
+rg_s_each(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     gtk_accel_map_foreach((gpointer)func,
@@ -88,7 +88,7 @@ accel_map_foreach(VALUE self)
 }
 
 static VALUE
-accel_map_foreach_unfilterd(VALUE self)
+rg_s_each_unfilterd(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
     gtk_accel_map_foreach_unfiltered((gpointer)func,
@@ -107,20 +107,20 @@ void        gtk_accel_map_save_fd           (gint fd);
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
-accel_map_get(G_GNUC_UNUSED VALUE self)
+rg_s_get(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_accel_map_get());
 }
 
 static VALUE
-accel_map_lock_path(VALUE self, VALUE accel_path)
+rg_s_lock_path(VALUE self, VALUE accel_path)
 {
     gtk_accel_map_lock_path(RVAL2CSTR(accel_path));
     return self;
 }
 
 static VALUE
-accel_map_unlock_path(VALUE self, VALUE accel_path)
+rg_s_unlock_path(VALUE self, VALUE accel_path)
 {
     gtk_accel_map_unlock_path(RVAL2CSTR(accel_path));
     return self;
@@ -133,20 +133,20 @@ Init_gtk_accel_map(void)
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_MAP, "AccelMap", mGtk);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "add_entry", accel_map_add_entry, 3);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lookup_entry", accel_map_lookup_entry, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "change_entry", accel_map_change_entry, 4);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "load", accel_map_load, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "save", accel_map_save, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "add_filter", accel_map_add_filter, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "each", accel_map_foreach, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "each_unfilterd", accel_map_foreach_unfilterd, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "get", accel_map_get, 0);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "lock_path", accel_map_lock_path, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "unlock_path", accel_map_unlock_path, 1);
+    RG_DEF_SMETHOD(add_entry, 3);
+    RG_DEF_SMETHOD(lookup_entry, 1);
+    RG_DEF_SMETHOD(change_entry, 4);
+    RG_DEF_SMETHOD(load, 1);
+    RG_DEF_SMETHOD(save, 1);
+    RG_DEF_SMETHOD(add_filter, 1);
+    RG_DEF_SMETHOD(each, 0);
+    RG_DEF_SMETHOD(each_unfilterd, 0);
+    RG_DEF_SMETHOD(get, 0);
+    RG_DEF_SMETHOD(lock_path, 1);
+    RG_DEF_SMETHOD(unlock_path, 1);
 #else
     VALUE mAccelMap = rb_define_module_under(mGtk, "AccelMap");
-                                                                                
+
     rb_define_module_function(mAccelMap, "add_entry", accel_map_add_entry, 3);
     rb_define_module_function(mAccelMap, "lookup_entry", accel_map_lookup_entry, 1);
     rb_define_module_function(mAccelMap, "change_entry", accel_map_change_entry, 4);

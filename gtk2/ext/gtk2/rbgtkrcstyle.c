@@ -25,27 +25,27 @@
 #define _SELF(rc) (GTK_RC_STYLE(RVAL2GOBJ(rc)))
 
 static VALUE
-rcstyle_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_rc_style_new());
     return Qnil;
 }
 
 static VALUE
-rcstyle_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->name);
 }
 
 static VALUE
-rcstyle_set_name(VALUE self, VALUE name)
+rg_set_name(VALUE self, VALUE name)
 {
     _SELF(self)->name = g_strdup(RVAL2CSTR(name));
     return self;
 }
 
 static VALUE
-rcstyle_bg_pixmap_name(VALUE self, VALUE idx)
+rg_bg_pixmap_name(VALUE self, VALUE idx)
 {
     int i = NUM2INT(idx);
 
@@ -55,7 +55,7 @@ rcstyle_bg_pixmap_name(VALUE self, VALUE idx)
 }
 
 static VALUE
-rcstyle_set_bg_pixmap_name(VALUE self, VALUE idx, VALUE bg_pixmap_name)
+rg_set_bg_pixmap_name(VALUE self, VALUE idx, VALUE bg_pixmap_name)
 {
     int i = NUM2INT(idx);
 
@@ -64,23 +64,23 @@ rcstyle_set_bg_pixmap_name(VALUE self, VALUE idx, VALUE bg_pixmap_name)
     _SELF(self)->bg_pixmap_name[i] = g_strdup(RVAL2CSTR(bg_pixmap_name));
     return self;
 }
-    
+
 static VALUE
-rcstyle_font_desc(VALUE self)
+rg_font_desc(VALUE self)
 {
     PangoFontDescription* desc = _SELF(self)->font_desc;
     return BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION);
 }
 
 static VALUE
-rcstyle_set_font_desc(VALUE self, VALUE font_desc)
+rg_set_font_desc(VALUE self, VALUE font_desc)
 {
     _SELF(self)->font_desc = (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION);
     return self;
 }
 
 static VALUE
-rcstyle_color_flags(VALUE self, VALUE rb_state_type)
+rg_color_flags(VALUE self, VALUE rb_state_type)
 {
     GtkStateType state_type;
 
@@ -89,7 +89,7 @@ rcstyle_color_flags(VALUE self, VALUE rb_state_type)
 }
 
 static VALUE
-rcstyle_set_color_flags(VALUE self, VALUE rb_state_type, VALUE flags)
+rg_set_color_flags(VALUE self, VALUE rb_state_type, VALUE flags)
 {
     GtkStateType state_type;
 
@@ -127,26 +127,26 @@ DEFINE_STYLE_COLOR(text);
 DEFINE_STYLE_COLOR(base);
 
 static VALUE
-rcstyle_xthickness(VALUE self)
+rg_xthickness(VALUE self)
 {
     return INT2NUM(_SELF(self)->xthickness);
 }
 
 static VALUE
-rcstyle_set_xthickness(VALUE self, VALUE xthickness)
+rg_set_xthickness(VALUE self, VALUE xthickness)
 {
     _SELF(self)->xthickness = NUM2INT(xthickness);
     return self;
 }
 
 static VALUE
-rcstyle_ythickness(VALUE self)
+rg_ythickness(VALUE self)
 {
     return INT2NUM(_SELF(self)->ythickness);
 }
 
 static VALUE
-rcstyle_set_ythickness(VALUE self, VALUE ythickness)
+rg_set_ythickness(VALUE self, VALUE ythickness)
 {
     _SELF(self)->ythickness = NUM2INT(ythickness);
     return self;
@@ -156,15 +156,15 @@ void
 Init_gtk_rcstyle(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RC_STYLE, "RcStyle", mGtk);
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rcstyle_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "color_flags", rcstyle_color_flags, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_color_flags", rcstyle_set_color_flags, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", rcstyle_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_name", rcstyle_set_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "bg_pixmap_name", rcstyle_bg_pixmap_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_bg_pixmap_name", rcstyle_set_bg_pixmap_name, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "font_desc", rcstyle_font_desc, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_font_desc", rcstyle_set_font_desc, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(color_flags, 1);
+    RG_DEF_METHOD(set_color_flags, 2);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(set_name, 1);
+    RG_DEF_METHOD(bg_pixmap_name, 1);
+    RG_DEF_METHOD(set_bg_pixmap_name, 2);
+    RG_DEF_METHOD(font_desc, 0);
+    RG_DEF_METHOD(set_font_desc, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "fg", rcstyle_fg, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "bg", rcstyle_bg, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "text", rcstyle_text, 1);
@@ -173,10 +173,10 @@ Init_gtk_rcstyle(void)
     rb_define_method(RG_TARGET_NAMESPACE, "set_bg", rcstyle_set_bg, 4);
     rb_define_method(RG_TARGET_NAMESPACE, "set_text", rcstyle_set_text, 4);
     rb_define_method(RG_TARGET_NAMESPACE, "set_base", rcstyle_set_base, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "xthickness", rcstyle_xthickness, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "ythickness", rcstyle_ythickness, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_xthickness", rcstyle_set_xthickness, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_ythickness", rcstyle_set_ythickness, 1);
+    RG_DEF_METHOD(xthickness, 0);
+    RG_DEF_METHOD(ythickness, 0);
+    RG_DEF_METHOD(set_xthickness, 1);
+    RG_DEF_METHOD(set_ythickness, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -117,11 +117,11 @@ static VALUE \
 txt_app_color_set_ ## name (VALUE self, VALUE val)\
 {\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    _SELF(self)->name = *RVAL2GDKCOLOR(val);	\
+    _SELF(self)->name = *RVAL2GDKCOLOR(val);    \
     return self;\
 }
 
-#define DEFINE_ACCESSOR(gt, type, name)			\
+#define DEFINE_ACCESSOR(gt, type, name)         \
     rb_define_method(gt, G_STRINGIFY(name), txt_app_ ## type ## _## name, 0);\
     rb_define_method(gt, G_STRINGIFY(set_ ## name), txt_app_ ## type ## _set_## name, 1);
 /***********************************************/
@@ -138,14 +138,13 @@ ATTR_BOOL(inside_selection);
 ATTR_BOOL(is_text);
 
 static VALUE
-txt_app_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GtkTextAppearance* app = ALLOC(GtkTextAppearance);
     memset(app, 0, sizeof(GtkTextAppearance));
     G_INITIALIZE(self, app);
     return Qnil;
 }
-
 
 void
 Init_gtk_text_appearance(void)
@@ -159,7 +158,7 @@ Init_gtk_text_appearance(void)
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, rise);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, underline);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", txt_app_initialize, 0);
+    RG_DEF_METHOD(initialize, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "strikethrough?", txt_app_bool_strikethrough, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "set_strikethrough", txt_app_bool_set_strikethrough, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "draw_bg?", txt_app_bool_draw_bg, 0);

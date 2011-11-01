@@ -151,7 +151,7 @@ ATTR_BOOL(realized);
 /***********************************************/
 
 static VALUE
-txt_attr_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GtkTextAttributes *attr;
 
@@ -161,7 +161,7 @@ txt_attr_initialize(VALUE self)
 }
 
 static VALUE
-txt_attr_copy_values(VALUE self, VALUE dest)
+rg_copy_values(VALUE self, VALUE dest)
 {
     gtk_text_attributes_copy_values(_SELF(self), _SELF(dest));
     return self;
@@ -171,9 +171,9 @@ void
 Init_gtk_text_attributes(void)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_ATTRIBUTES, "TextAttributes", mGtk);
-  
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", txt_attr_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "copy_values", txt_attr_copy_values, 1);
+
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(copy_values, 1);
 
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, appearance);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, justification);
