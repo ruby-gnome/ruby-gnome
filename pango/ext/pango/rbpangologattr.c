@@ -34,12 +34,12 @@ log_copy(const PangoLogAttr* val)
     *new_val = *val;
     return new_val;
 }
-                                                                                     
+
 GType
 pango_log_attr_get_type(void)
 {
     static GType our_type = 0;
-                                                                                     
+
     if (our_type == 0)
         our_type = g_boxed_type_register_static ("PangoLogAttr",
                     (GBoxedCopyFunc)log_copy,
@@ -62,7 +62,7 @@ log_set_ ## name (VALUE self, VALUE val)\
 }
 
 static VALUE
-log_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     PangoLogAttr log;
     G_INITIALIZE(self, &log);
@@ -92,8 +92,8 @@ void
 Init_pango_logattr(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LOG_ATTR, "LogAttr", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", log_initialize, 0);
+
+    RG_DEF_METHOD(initialize, 0);
 
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, line_break);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, mandatory_break);

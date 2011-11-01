@@ -58,14 +58,14 @@ pango_item_get_type(void)
 /**********************************/
 
 static VALUE
-item_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, pango_item_new());
     return Qnil;
 }
 
 static VALUE
-item_split(VALUE self, VALUE split_index, VALUE split_offset)
+rg_split(VALUE self, VALUE split_index, VALUE split_offset)
 {
     return BOXED2RVAL(pango_item_split(_SELF(self), 
                                        NUM2INT(split_index), 
@@ -80,16 +80,15 @@ ATTR_INT(offset);
 ATTR_INT(length);
 ATTR_INT(num_chars);
 
-
 static VALUE
-item_get_analysis(VALUE self)
+rg_analysis(VALUE self)
 {
     PangoAnalysis ana = _SELF(self)->analysis;
     return BOXED2RVAL(&ana, PANGO_TYPE_ANALYSIS);
 }
 
 static VALUE
-item_set_analysis(VALUE self, VALUE val)
+rg_set_analysis(VALUE self, VALUE val)
 {
     PangoAnalysis* ana = (PangoAnalysis*)RVAL2BOXED(val, PANGO_TYPE_ANALYSIS);
     _SELF(self)->analysis = *ana;
@@ -100,16 +99,16 @@ void
 Init_pango_item(VALUE mPango)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", item_initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "split", item_split, 2);
+
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(split, 2);
 
     DEF_INT_ACCESSOR(offset);
     DEF_INT_ACCESSOR(length);
     DEF_INT_ACCESSOR(num_chars);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "analysis", item_get_analysis, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_analysis", item_set_analysis, 1);
+    RG_DEF_METHOD(analysis, 0);
+    RG_DEF_METHOD(set_analysis, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

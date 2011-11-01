@@ -84,7 +84,7 @@ pango_get_attribute(VALUE attr)
 
 /***********************************************/
 static VALUE
-attr_s_allocate(VALUE klass)
+rg_s_allocate(VALUE klass)
 {
     /* Don't define destroy method here.
        return Data_Wrap_Struct(klass, 0, pango_attribute_destroy, 0);
@@ -96,9 +96,9 @@ attr_s_allocate(VALUE klass)
 #define attr_s_new rb_class_new_instance
 #else
 static VALUE
-attr_s_new(int argc, VALUE *argv, VALUE klass)
+rg_s_new(int argc, VALUE *argv, VALUE klass)
 {
-    VALUE obj = attr_s_allocate(klass);
+    VALUE obj = rg_s_allocate(klass);
     rb_obj_call_init(obj, argc, argv);
     return obj;
 }
@@ -117,13 +117,13 @@ gboolean    pango_parse_markup              (const char *markup_text,
 */
 
 static VALUE
-attr_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return INT2NUM(pango_attr_type_register(RVAL2CSTR(name)));
 }
 
 static VALUE
-attr_equal(VALUE self, VALUE other)
+rg_operator_attr_equal(VALUE self, VALUE other)
 {
     return CBOOL2RVAL(pango_attribute_equal(RVAL2ATTR(self), RVAL2ATTR(other)));
 }
@@ -133,26 +133,26 @@ attr_equal(VALUE self, VALUE other)
  */
 /* PangoAttribute */
 static VALUE
-attr_start_index(VALUE self)
+rg_start_index(VALUE self)
 {
     return UINT2NUM(RVAL2ATTR(self)->start_index);
 }
 
 static VALUE
-attr_set_start_index(VALUE self, VALUE value)
+rg_set_start_index(VALUE self, VALUE value)
 {
     RVAL2ATTR(self)->start_index = NUM2UINT(value);
     return Qnil;
 }
 
 static VALUE
-attr_end_index(VALUE self)
+rg_end_index(VALUE self)
 {
     return UINT2NUM(RVAL2ATTR(self)->end_index);
 }
 
 static VALUE
-attr_set_end_index(VALUE self, VALUE value)
+rg_set_end_index(VALUE self, VALUE value)
 {
     RVAL2ATTR(self)->end_index = NUM2UINT(value);
     return Qnil;
@@ -352,7 +352,7 @@ static VALUE
 attr_AttrShape_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE ink_rect, logical_rect, data;
-    
+
     rb_scan_args(argc, argv, "21", &ink_rect, &logical_rect, &data);
 
     if (NIL_P(data)){
@@ -410,22 +410,22 @@ Init_pango_attribute(VALUE mPango)
     VALUE tmpklass;
     RG_TARGET_NAMESPACE = rb_define_class_under(mPango, "Attribute", rb_cData);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", attr_s_type_register, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "==", attr_equal, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "start_index", attr_start_index, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_start_index", attr_set_start_index, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "end_index", attr_end_index, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_end_index", attr_set_end_index, 1);
+    RG_DEF_SMETHOD(type_register, 1);
+    RG_DEF_METHOD_OPERATOR("==", attr_equal, 1);
+    RG_DEF_METHOD(start_index, 0);
+    RG_DEF_METHOD(set_start_index, 1);
+    RG_DEF_METHOD(end_index, 0);
+    RG_DEF_METHOD(set_end_index, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "allocate", attr_s_allocate, 0);
+    RG_DEF_SMETHOD(allocate, 0);
 #else
-    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))attr_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))rg_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "new", attr_s_new, -1);
+    RG_DEF_SMETHOD(new, -1);
 #endif
 
     attrstring = rb_define_class_under(mPango, "AttrString", RG_TARGET_NAMESPACE);
@@ -448,7 +448,7 @@ Init_pango_attribute(VALUE mPango)
 
     MAKE_ATTR(PANGO_ATTR_LANGUAGE, AttrLanguage, RG_TARGET_NAMESPACE, 1);
     rb_define_method(tmpklass, "value", attr_language_value, 0);
-    
+
     MAKE_ATTR(PANGO_ATTR_FAMILY, AttrFamily, attrstring, 1);
     MAKE_ATTR(PANGO_ATTR_STYLE, AttrStyle, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_WEIGHT, AttrWeight, pattrint, 1);

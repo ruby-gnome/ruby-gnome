@@ -44,7 +44,7 @@ matrix_set_ ## name (VALUE self, VALUE val)\
     rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
 
 static VALUE
-matrix_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     PangoMatrix matrix = PANGO_MATRIX_INIT;
     VALUE xx, xy, yx, yy, x0, y0;
@@ -64,21 +64,21 @@ matrix_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-matrix_translate(VALUE self, VALUE tx, VALUE ty)
+rg_translate_bang(VALUE self, VALUE tx, VALUE ty)
 {
     pango_matrix_translate(_SELF(self), NUM2DBL(tx), NUM2DBL(ty));
     return self;
 }
 
 static VALUE
-matrix_scale(VALUE self, VALUE scale_x, VALUE scale_y)
+rg_scale_bang(VALUE self, VALUE scale_x, VALUE scale_y)
 {
     pango_matrix_scale(_SELF(self), NUM2DBL(scale_x), NUM2DBL(scale_y));
     return self;
 }
 
 static VALUE
-matrix_rotate(VALUE self, VALUE degrees)
+rg_rotate_bang(VALUE self, VALUE degrees)
 {
     pango_matrix_rotate(_SELF(self), NUM2DBL(degrees));
     return self;
@@ -86,14 +86,14 @@ matrix_rotate(VALUE self, VALUE degrees)
 
 #if PANGO_CHECK_VERSION(1,16,0)
 static VALUE
-matrix_get_gravity(VALUE self)
+rg_gravity(VALUE self)
 {
     return GENUM2RVAL(pango_gravity_get_for_matrix(_SELF(self)), PANGO_TYPE_GRAVITY);
 }
 #endif
 
 static VALUE
-matrix_concat(VALUE self, VALUE new_matrix)
+rg_concat_bang(VALUE self, VALUE new_matrix)
 {
     pango_matrix_concat(_SELF(self), _SELF(new_matrix));
     return self;
@@ -101,7 +101,7 @@ matrix_concat(VALUE self, VALUE new_matrix)
 
 #if PANGO_CHECK_VERSION(1,12,0)
 static VALUE
-matrix_get_font_scale_factor(VALUE self)
+rg_font_scale_factor(VALUE self)
 {
     return rb_float_new(pango_matrix_get_font_scale_factor(_SELF(self)));
 }
@@ -115,7 +115,7 @@ ATTR_FLOAT(x0);
 ATTR_FLOAT(y0);
 
 static VALUE
-matrix_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     PangoMatrix* matrix = _SELF(self);
     return rb_ary_new3(6, INT2NUM(matrix->xx), INT2NUM(matrix->xy), INT2NUM(matrix->yx),
@@ -129,19 +129,19 @@ Init_pango_matrix(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_MATRIX, "Matrix", mPango);
-    
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize", matrix_initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "translate!", matrix_translate, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "scale!", matrix_scale, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "rotate!", matrix_rotate, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "concat!", matrix_concat, 1);
+
+    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD_BANG(translate, 2);
+    RG_DEF_METHOD_BANG(scale, 2);
+    RG_DEF_METHOD_BANG(rotate, 1);
+    RG_DEF_METHOD_BANG(concat, 1);
 #if PANGO_CHECK_VERSION(1,12,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "font_scale_factor", matrix_get_font_scale_factor, 0);
+    RG_DEF_METHOD(font_scale_factor, 0);
 #endif
 #if PANGO_CHECK_VERSION(1,16,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "gravity", matrix_get_gravity, 0);
+    RG_DEF_METHOD(gravity, 0);
 #endif
-    rb_define_method(RG_TARGET_NAMESPACE, "to_a", matrix_to_a, 0);
+    RG_DEF_METHOD(to_a, 0);
 
     DEFINE_ACCESSOR(xx);
     DEFINE_ACCESSOR(xy);
