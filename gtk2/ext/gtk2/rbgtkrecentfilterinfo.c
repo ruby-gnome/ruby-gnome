@@ -56,10 +56,11 @@ gtk_recent_filter_info_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cRecentFilterInfo
 #define _SELF(w) ((GtkRecentFilterInfo*)RVAL2BOXED(w, GTK_TYPE_RECENT_FILTER_INFO))
 
 static VALUE
-rf_initialize(VALUE self)
+rg_initialize(VALUE self)
 {   
     GtkRecentFilterInfo finfo;
     G_INITIALIZE(self, &finfo);
@@ -67,13 +68,13 @@ rf_initialize(VALUE self)
 }
 
 static VALUE
-rf_get_contains(VALUE self)
+rg_contains(VALUE self)
 {
     return GFLAGS2RVAL(_SELF(self)->contains, GTK_TYPE_RECENT_FILTER_FLAGS);
 }
 
 static VALUE
-rf_set_contains(VALUE self, VALUE contains)
+rg_set_contains(VALUE self, VALUE contains)
 {
     _SELF(self)->contains = RVAL2GFLAGS(contains, GTK_TYPE_RECENT_FILTER_FLAGS);
     return self;
@@ -97,7 +98,7 @@ FINFO_STR(display_name);
 FINFO_STR(mime_type);
 
 static VALUE
-rf_get_applications(VALUE self)
+rg_applications(VALUE self)
 {
     const gchar** apps = _SELF(self)->applications;
     VALUE ary = rb_ary_new();
@@ -111,7 +112,7 @@ rf_get_applications(VALUE self)
 }
 
 static VALUE
-rf_set_applications(VALUE self, VALUE applications)
+rg_set_applications(VALUE self, VALUE applications)
 {
     /* NOTE: This can't be right.  What guarantees that the entries in
      * applications will be around?  It should be RVAL2STRV_DUP and use
@@ -122,11 +123,11 @@ rf_set_applications(VALUE self, VALUE applications)
 }
 
 static VALUE
-rf_get_groups(VALUE self)
+rg_groups(VALUE self)
 {
     const gchar** grps = _SELF(self)->groups;
     VALUE ary = rb_ary_new();
- 
+
     gint i = 0;
     while (grps[i]) {
         rb_ary_push(ary, CSTR2RVAL((gchar*)grps[i]));
@@ -136,7 +137,7 @@ rf_get_groups(VALUE self)
 }
 
 static VALUE
-rf_set_groups(VALUE self, VALUE groups)
+rg_set_groups(VALUE self, VALUE groups)
 {
     _SELF(self)->groups = RVAL2STRV(groups);
 
@@ -144,13 +145,13 @@ rf_set_groups(VALUE self, VALUE groups)
 }
 
 static VALUE
-rf_get_age(VALUE self)
+rg_age(VALUE self)
 {
     return INT2NUM(_SELF(self)->age);
 }
 
 static VALUE
-rf_set_age(VALUE self, VALUE age)
+rg_set_age(VALUE self, VALUE age)
 {
     _SELF(self)->age = NUM2INT(age);
     return self;
@@ -162,24 +163,24 @@ void
 Init_gtk_recent_filter_info(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE rf = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);
 
-    rb_define_method(rf, "initialize", rf_initialize, 0);
-    rb_define_method(rf, "contains", rf_get_contains, 0);
-    rb_define_method(rf, "set_contains", rf_set_contains, 1);
-    rb_define_method(rf, "uri", rf_get_uri, 0);
-    rb_define_method(rf, "set_uri", rf_set_uri, 1);
-    rb_define_method(rf, "display_name", rf_get_display_name, 0);
-    rb_define_method(rf, "set_display_name", rf_set_display_name, 1);
-    rb_define_method(rf, "mime_type", rf_get_mime_type, 0);
-    rb_define_method(rf, "set_mime_type", rf_set_mime_type, 1);
-    rb_define_method(rf, "applications", rf_get_applications, 0);
-    rb_define_method(rf, "set_applications", rf_set_applications, 1);
-    rb_define_method(rf, "groups", rf_get_groups, 0);
-    rb_define_method(rf, "set_groups", rf_set_groups, 1);
-    rb_define_method(rf, "age", rf_get_age, 0);
-    rb_define_method(rf, "set_age", rf_set_age, 1);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(contains, 0);
+    RG_DEF_METHOD(set_contains, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "uri", rf_get_uri, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_uri", rf_set_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", rf_get_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_display_name", rf_set_display_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", rf_get_mime_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", rf_set_mime_type, 1);
+    RG_DEF_METHOD(applications, 0);
+    RG_DEF_METHOD(set_applications, 1);
+    RG_DEF_METHOD(groups, 0);
+    RG_DEF_METHOD(set_groups, 1);
+    RG_DEF_METHOD(age, 0);
+    RG_DEF_METHOD(set_age, 1);
 
-    G_DEF_SETTERS(rf);   
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 #endif
 }

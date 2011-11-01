@@ -44,6 +44,7 @@ gtk_text_appearance_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cTextAppearance
 #define _SELF(t) ((GtkTextAppearance*)RVAL2BOXED(t, GTK_TYPE_TEXT_APPEARANCE))
 
 /***********************************************/
@@ -116,11 +117,11 @@ static VALUE \
 txt_app_color_set_ ## name (VALUE self, VALUE val)\
 {\
     G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    _SELF(self)->name = *RVAL2GDKCOLOR(val);	\
+    _SELF(self)->name = *RVAL2GDKCOLOR(val);    \
     return self;\
 }
 
-#define DEFINE_ACCESSOR(gt, type, name)			\
+#define DEFINE_ACCESSOR(gt, type, name)         \
     rb_define_method(gt, G_STRINGIFY(name), txt_app_ ## type ## _## name, 0);\
     rb_define_method(gt, G_STRINGIFY(set_ ## name), txt_app_ ## type ## _set_## name, 1);
 /***********************************************/
@@ -137,7 +138,7 @@ ATTR_BOOL(inside_selection);
 ATTR_BOOL(is_text);
 
 static VALUE
-txt_app_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GtkTextAppearance* app = ALLOC(GtkTextAppearance);
     memset(app, 0, sizeof(GtkTextAppearance));
@@ -145,28 +146,27 @@ txt_app_initialize(VALUE self)
     return Qnil;
 }
 
-
 void
 Init_gtk_text_appearance(void)
 {
-    VALUE gTextApp = G_DEF_CLASS(GTK_TYPE_TEXT_APPEARANCE, "TextAppearance", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_APPEARANCE, "TextAppearance", mGtk);
 
-    DEFINE_ACCESSOR(gTextApp, color, bg_color);
-    DEFINE_ACCESSOR(gTextApp, color, fg_color);
-    DEFINE_ACCESSOR(gTextApp, gobj, bg_stipple);
-    DEFINE_ACCESSOR(gTextApp, gobj, fg_stipple);
-    DEFINE_ACCESSOR(gTextApp, int, rise);
-    DEFINE_ACCESSOR(gTextApp, enums, underline);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, color, bg_color);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, color, fg_color);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, gobj, bg_stipple);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, gobj, fg_stipple);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, rise);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, underline);
 
-    rb_define_method(gTextApp, "initialize", txt_app_initialize, 0);
-    rb_define_method(gTextApp, "strikethrough?", txt_app_bool_strikethrough, 0);
-    rb_define_method(gTextApp, "set_strikethrough", txt_app_bool_set_strikethrough, 1);
-    rb_define_method(gTextApp, "draw_bg?", txt_app_bool_draw_bg, 0);
-    rb_define_method(gTextApp, "set_draw_bg", txt_app_bool_set_draw_bg, 1);
-    rb_define_method(gTextApp, "inside_selection?", txt_app_bool_inside_selection, 0);
-    rb_define_method(gTextApp, "set_inside_selection", txt_app_bool_set_inside_selection, 1);
-    rb_define_method(gTextApp, "text?", txt_app_bool_is_text, 0);
-    rb_define_method(gTextApp, "set_text", txt_app_bool_set_is_text, 1);
+    RG_DEF_METHOD(initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "strikethrough?", txt_app_bool_strikethrough, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_strikethrough", txt_app_bool_set_strikethrough, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "draw_bg?", txt_app_bool_draw_bg, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_draw_bg", txt_app_bool_set_draw_bg, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "inside_selection?", txt_app_bool_inside_selection, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_inside_selection", txt_app_bool_set_inside_selection, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text?", txt_app_bool_is_text, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text", txt_app_bool_set_is_text, 1);
 
-    G_DEF_SETTERS(gTextApp);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
