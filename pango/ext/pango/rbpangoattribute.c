@@ -21,7 +21,7 @@
 
 #include "rbpangoprivate.h"
 
-#define RG_TARGET_NAMESPACE cAttribute
+#define RG_TARGET_NAMESPACE pattr
 
 VALUE RG_TARGET_NAMESPACE, attrstring, pattrint, pattrfloat, pattrcolor, pattrbool;
 static VALUE type_to_klass;
