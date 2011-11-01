@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cStyle
 #define _SELF(w) GTK_STYLE(RVAL2GOBJ(w))
 #define RVAL2REC(r) (NIL_P(r) ? NULL : (GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 #define RVAL2ICONSOURCE(s) ((GtkIconSource*)RVAL2BOXED(s, GTK_TYPE_ICON_SOURCE))
@@ -555,95 +556,95 @@ style_set_bg_pixmap(VALUE self, VALUE idx, VALUE bg_pixmap)
 void 
 Init_gtk_style(void)
 {
-    VALUE gStyle = G_DEF_CLASS(GTK_TYPE_STYLE, "Style", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STYLE, "Style", mGtk);
 
-    rb_define_method(gStyle, "initialize", style_initialize, 0);
-    rb_define_method(gStyle, "attached?", style_attached, 0);
-    rb_define_method(gStyle, "copy", style_copy, 0);
-    rb_define_method(gStyle, "clone", style_copy, 0);
-    rb_define_method(gStyle, "dup", style_copy, 0);
-    rb_define_method(gStyle, "attach", style_attach, 1);
-    rb_define_method(gStyle, "detach", style_detach, 0);
-    rb_define_method(gStyle, "set_background", style_set_background, 2);
-    rb_define_method(gStyle, "apply_default_background", style_apply_default_background, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", style_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "attached?", style_attached, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "copy", style_copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "clone", style_copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "dup", style_copy, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "attach", style_attach, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "detach", style_detach, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_background", style_set_background, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "apply_default_background", style_apply_default_background, 8);
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gStyle, "lookup_color", style_lookup_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup_color", style_lookup_color, 1);
 #endif
-    rb_define_method(gStyle, "lookup_icon_set", style_lookup_icon_set, 1);
-    rb_define_method(gStyle, "render_icon", style_render_icon, 6);
-    rb_define_method(gStyle, "paint_arrow", style_paint_arrow, 12);
-    rb_define_method(gStyle, "paint_box", style_paint_box, 10);
-    rb_define_method(gStyle, "paint_box_gap", style_paint_box_gap, 13);
-    rb_define_method(gStyle, "paint_check", style_paint_check, 10);
-    rb_define_method(gStyle, "paint_diamond", style_paint_diamond, 10);
-    rb_define_method(gStyle, "paint_extension", style_paint_extension, 10);
-    rb_define_method(gStyle, "paint_flat_box", style_paint_flat_box, 10);
-    rb_define_method(gStyle, "paint_focus", style_paint_focus, 9);
-    rb_define_method(gStyle, "paint_handle", style_paint_handle, 11);
-    rb_define_method(gStyle, "paint_hline", style_paint_hline, 8);
-    rb_define_method(gStyle, "paint_option", style_paint_option, 10);
-    rb_define_method(gStyle, "paint_polygon", style_paint_polygon, 8);
-    rb_define_method(gStyle, "paint_shadow", style_paint_shadow, 10);
-    rb_define_method(gStyle, "paint_shadow_gap", style_paint_shadow_gap, 13);
-    rb_define_method(gStyle, "paint_slider", style_paint_slider, 11);
-    rb_define_method(gStyle, "paint_tab", style_paint_tab, 10);
-    rb_define_method(gStyle, "paint_vline", style_paint_vline, 9);
-    rb_define_method(gStyle, "paint_expander", style_paint_expander, 8);
-    rb_define_method(gStyle, "paint_layout", style_paint_layout, 9);
-    rb_define_method(gStyle, "paint_resize_grip", style_paint_resize_grip, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "lookup_icon_set", style_lookup_icon_set, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_icon", style_render_icon, 6);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_arrow", style_paint_arrow, 12);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_box", style_paint_box, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_box_gap", style_paint_box_gap, 13);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_check", style_paint_check, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_diamond", style_paint_diamond, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_extension", style_paint_extension, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_flat_box", style_paint_flat_box, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_focus", style_paint_focus, 9);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_handle", style_paint_handle, 11);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_hline", style_paint_hline, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_option", style_paint_option, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_polygon", style_paint_polygon, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_shadow", style_paint_shadow, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_shadow_gap", style_paint_shadow_gap, 13);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_slider", style_paint_slider, 11);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_tab", style_paint_tab, 10);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_vline", style_paint_vline, 9);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_expander", style_paint_expander, 8);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_layout", style_paint_layout, 9);
+    rb_define_method(RG_TARGET_NAMESPACE, "paint_resize_grip", style_paint_resize_grip, 10);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_singleton_method(gStyle, "draw_insertion_cursor", style_s_draw_insertion_cursor, 7);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "draw_insertion_cursor", style_s_draw_insertion_cursor, 7);
 #endif
-    rb_define_method(gStyle, "fg", style_fg, 1);
-    rb_define_method(gStyle, "bg", style_bg, 1);
-    rb_define_method(gStyle, "light", style_light, 1);
-    rb_define_method(gStyle, "dark", style_dark, 1);
-    rb_define_method(gStyle, "mid", style_mid, 1);
-    rb_define_method(gStyle, "text", style_text, 1);
-    rb_define_method(gStyle, "base", style_base, 1);
-    rb_define_method(gStyle, "text_aa", style_text_aa, 1);
-    rb_define_method(gStyle, "set_fg", style_set_fg, 4);
-    rb_define_method(gStyle, "set_bg", style_set_bg, 4);
-    rb_define_method(gStyle, "set_light", style_set_light, 4);
-    rb_define_method(gStyle, "set_dark", style_set_dark, 4);
-    rb_define_method(gStyle, "set_mid", style_set_mid, 4);
-    rb_define_method(gStyle, "set_text", style_set_text, 4);
-    rb_define_method(gStyle, "set_base", style_set_base, 4);
-    rb_define_method(gStyle, "set_text_aa", style_set_text_aa, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "fg", style_fg, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "bg", style_bg, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "light", style_light, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "dark", style_dark, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mid", style_mid, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text", style_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "base", style_base, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text_aa", style_text_aa, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fg", style_set_fg, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bg", style_set_bg, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_light", style_set_light, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_dark", style_set_dark, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mid", style_set_mid, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text", style_set_text, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_base", style_set_base, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text_aa", style_set_text_aa, 4);
 
-    rb_define_method(gStyle, "black", style_black, 0);
-    rb_define_method(gStyle, "set_black", style_set_black, 3);
-    rb_define_method(gStyle, "white", style_white, 0);
-    rb_define_method(gStyle, "set_white", style_set_white, 3);
-    rb_define_method(gStyle, "font_desc", style_font_desc, 0);
-    rb_define_method(gStyle, "set_font_desc", style_set_font_desc, 1);
-    rb_define_method(gStyle, "xthickness", style_xthickness, 0);
-    rb_define_method(gStyle, "ythickness", style_ythickness, 0);
-    rb_define_method(gStyle, "set_xthickness", style_set_xthickness, 1);
-    rb_define_method(gStyle, "set_ythickness", style_set_ythickness, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "black", style_black, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_black", style_set_black, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "white", style_white, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_white", style_set_white, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_desc", style_font_desc, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_desc", style_set_font_desc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "xthickness", style_xthickness, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ythickness", style_ythickness, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_xthickness", style_set_xthickness, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_ythickness", style_set_ythickness, 1);
 
-    rb_define_method(gStyle, "fg_gc", style_fg_gc, 1);
-    rb_define_method(gStyle, "bg_gc", style_bg_gc, 1);
-    rb_define_method(gStyle, "light_gc", style_light_gc, 1);
-    rb_define_method(gStyle, "dark_gc", style_dark_gc, 1);
-    rb_define_method(gStyle, "mid_gc", style_mid_gc, 1);
-    rb_define_method(gStyle, "text_gc", style_text_gc, 1);
-    rb_define_method(gStyle, "base_gc", style_base_gc, 1);
-    rb_define_method(gStyle, "text_aa_gc", style_text_aa_gc, 1);
-    rb_define_method(gStyle, "black_gc", style_black_gc, 0);
-    rb_define_method(gStyle, "white_gc", style_white_gc, 0);
-    rb_define_method(gStyle, "bg_pixmap", style_bg_pixmap, 1);
-    rb_define_method(gStyle, "set_fg_gc", style_set_fg_gc, 2);
-    rb_define_method(gStyle, "set_bg_gc", style_set_bg_gc, 2);
-    rb_define_method(gStyle, "set_light_gc", style_set_light_gc, 2);
-    rb_define_method(gStyle, "set_dark_gc", style_set_dark_gc, 2);
-    rb_define_method(gStyle, "set_mid_gc", style_set_mid_gc, 2);
-    rb_define_method(gStyle, "set_text_gc", style_set_text_gc, 2);
-    rb_define_method(gStyle, "set_base_gc", style_set_base_gc, 2);
-    rb_define_method(gStyle, "set_text_aa_gc", style_set_text_aa_gc, 2);
-    rb_define_method(gStyle, "set_black_gc", style_set_black_gc, 1);
-    rb_define_method(gStyle, "set_white_gc", style_set_white_gc, 1);
-    rb_define_method(gStyle, "set_bg_pixmap", style_set_bg_pixmap, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "fg_gc", style_fg_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "bg_gc", style_bg_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "light_gc", style_light_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "dark_gc", style_dark_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mid_gc", style_mid_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text_gc", style_text_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "base_gc", style_base_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "text_aa_gc", style_text_aa_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "black_gc", style_black_gc, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "white_gc", style_white_gc, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bg_pixmap", style_bg_pixmap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fg_gc", style_set_fg_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bg_gc", style_set_bg_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_light_gc", style_set_light_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_dark_gc", style_set_dark_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mid_gc", style_set_mid_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text_gc", style_set_text_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_base_gc", style_set_base_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_text_aa_gc", style_set_text_aa_gc, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_black_gc", style_set_black_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_white_gc", style_set_white_gc, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bg_pixmap", style_set_bg_pixmap, 2);
 
-    G_DEF_SETTERS(gStyle);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

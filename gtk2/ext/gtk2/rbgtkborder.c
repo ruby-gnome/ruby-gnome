@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cBorder
 #define _SELF(self) ((GtkBorder*)RVAL2BOXED(self, GTK_TYPE_BORDER))
 
 #define ATTR_INT(name)\
@@ -72,15 +73,15 @@ border_to_a(VALUE self)
 void 
 Init_gtk_border(void)
 {
-    VALUE gBorder = G_DEF_CLASS(GTK_TYPE_BORDER, "Border", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BORDER, "Border", mGtk);
 
-    rb_define_method(gBorder, "initialize", border_initialize, 4);
-    rb_define_method(gBorder, "to_a", border_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", border_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", border_to_a, 0);
 
-    DEFINE_ACCESSOR(gBorder, int, left);
-    DEFINE_ACCESSOR(gBorder, int, right);
-    DEFINE_ACCESSOR(gBorder, int, top);
-    DEFINE_ACCESSOR(gBorder, int, bottom);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, left);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, right);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, top);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, bottom);
 
-    G_DEF_SETTERS(gBorder);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

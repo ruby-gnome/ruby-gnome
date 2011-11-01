@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
@@ -396,121 +397,121 @@ void        gtk_text_iter_order             (GtkTextIter *first,
 void
 Init_gtk_textiter(void)
 {
-    VALUE cTextIter = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
-    rb_include_module(cTextIter, rb_mComparable);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
 
     is_compat_240 = gtk_check_version(2, 4, 0) ? FALSE : TRUE;
 
     id_pixbuf = rb_intern("pixbuf");
 
-    rb_define_method(cTextIter, "buffer", get_buffer, 0);
-    rb_define_method(cTextIter, "offset", get_offset, 0);
-    rb_define_method(cTextIter, "line", get_line, 0);
-    rb_define_method(cTextIter, "line_offset", get_line_offset, 0);
-    rb_define_method(cTextIter, "line_index", get_line_index, 0);
-    rb_define_method(cTextIter, "visible_line_offset", get_visible_line_offset, 0);
-    rb_define_method(cTextIter, "visible_line_index", get_visible_line_index, 0);
-    rb_define_method(cTextIter, "char", get_char, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "buffer", get_buffer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "offset", get_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line", get_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_offset", get_line_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "line_index", get_line_index, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_line_offset", get_visible_line_offset, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "visible_line_index", get_visible_line_index, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "char", get_char, 0);
 
-    rb_define_method(cTextIter, "get_slice", get_slice, 1);
-    rb_define_method(cTextIter, "get_text", get_text, 1);
-    rb_define_method(cTextIter, "get_visible_slice", get_visible_slice, 1);
-    rb_define_method(cTextIter, "get_visible_text", get_visible_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_slice", get_slice, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_text", get_text, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_visible_slice", get_visible_slice, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_visible_text", get_visible_text, 1);
 
-    rb_define_method(cTextIter, "pixbuf", get_pixbuf, 0);
-    rb_define_method(cTextIter, "marks", get_marks, 0);
-    rb_define_method(cTextIter, "child_anchor", get_child_anchor, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixbuf", get_pixbuf, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "marks", get_marks, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_anchor", get_child_anchor, 0);
 
-    rb_define_method(cTextIter, "toggled_tags", get_toggled_tags, 1);
-    rb_define_method(cTextIter, "begins_tag?", begins_tag, 1);
-    rb_define_method(cTextIter, "ends_tag?", ends_tag, 1);
-    rb_define_method(cTextIter, "toggles_tag?", toggles_tag, 1);
-    rb_define_method(cTextIter, "has_tag?", has_tag, 1);
-    rb_define_method(cTextIter, "tags", get_tags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggled_tags", get_toggled_tags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "begins_tag?", begins_tag, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "ends_tag?", ends_tag, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "toggles_tag?", toggles_tag, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_tag?", has_tag, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "tags", get_tags, 0);
 
-    rb_define_method(cTextIter, "editable?", editable, 1);
-    rb_define_method(cTextIter, "can_insert?", can_insert, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "editable?", editable, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "can_insert?", can_insert, 1);
 
-    rb_define_method(cTextIter, "starts_word?", starts_word, 0);
-    rb_define_method(cTextIter, "ends_word?", ends_word, 0);
-    rb_define_method(cTextIter, "inside_word?", inside_word, 0);
-    rb_define_method(cTextIter, "starts_sentence?", starts_sentence, 0);
-    rb_define_method(cTextIter, "ends_sentence?", ends_sentence, 0);
-    rb_define_method(cTextIter, "starts_line?", starts_line, 0);
-    rb_define_method(cTextIter, "ends_line?", ends_line, 0);
-    rb_define_method(cTextIter, "cursor_position?", is_cursor_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "starts_word?", starts_word, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ends_word?", ends_word, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "inside_word?", inside_word, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "starts_sentence?", starts_sentence, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ends_sentence?", ends_sentence, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "starts_line?", starts_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ends_line?", ends_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "cursor_position?", is_cursor_position, 0);
 
-    rb_define_method(cTextIter, "chars_in_line", get_chars_in_line, 0);
-    rb_define_method(cTextIter, "bytes_in_line", get_bytes_in_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "chars_in_line", get_chars_in_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bytes_in_line", get_bytes_in_line, 0);
 
-    rb_define_method(cTextIter, "attributes", get_attributes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "attributes", get_attributes, 0);
 
-    rb_define_method(cTextIter, "language", get_language, 0);
-    rb_define_method(cTextIter, "end?", is_end, 0);
-    rb_define_method(cTextIter, "start?", is_start, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "language", get_language, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "end?", is_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "start?", is_start, 0);
 
-    rb_define_method(cTextIter, "forward_char", forward_char, 0);
-    rb_define_method(cTextIter, "backward_char", backward_char, 0);
-    rb_define_method(cTextIter, "forward_chars", forward_chars, 1);
-    rb_define_method(cTextIter, "backward_chars", backward_chars, 1);
-    rb_define_method(cTextIter, "forward_line", forward_line, 0);
-    rb_define_method(cTextIter, "backward_line", backward_line, 0);
-    rb_define_method(cTextIter, "forward_lines", forward_lines, 1);
-    rb_define_method(cTextIter, "backward_lines", backward_lines, 1);
-    rb_define_method(cTextIter, "forward_word_end", forward_word_end, 0);
-    rb_define_method(cTextIter, "backward_word_start", backward_word_start, 0);
-    rb_define_method(cTextIter, "forward_word_ends", forward_word_ends, 1);
-    rb_define_method(cTextIter, "backward_word_starts", backward_word_starts, 1);
-    rb_define_method(cTextIter, "forward_sentence_end", forward_sentence_end, 0);
-    rb_define_method(cTextIter, "backward_sentence_start", backward_sentence_start, 0);
-    rb_define_method(cTextIter, "forward_sentence_ends", forward_sentence_ends, 1);
-    rb_define_method(cTextIter, "backward_sentence_starts", backward_sentence_starts, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_char", forward_char, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_char", backward_char, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_chars", forward_chars, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_chars", backward_chars, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_line", forward_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_line", backward_line, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_lines", forward_lines, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_lines", backward_lines, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_word_end", forward_word_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_word_start", backward_word_start, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_word_ends", forward_word_ends, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_word_starts", backward_word_starts, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_sentence_end", forward_sentence_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_sentence_start", backward_sentence_start, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_sentence_ends", forward_sentence_ends, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_sentence_starts", backward_sentence_starts, 1);
 
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(cTextIter, "forward_visible_word_ends", forward_visible_word_ends, 1);
-    rb_define_method(cTextIter, "backward_visible_word_starts", backward_visible_word_starts, 1);
-    rb_define_method(cTextIter, "forward_visible_word_end", forward_visible_word_end, 0);
-    rb_define_method(cTextIter, "backword_visible_word_start", backward_visible_word_start, 0);
-    rb_define_method(cTextIter, "forward_visible_cursor_position", forward_visible_cursor_position, 0);
-    rb_define_method(cTextIter, "backward_visible_cursor_position", backward_visible_cursor_position, 0);
-    rb_define_method(cTextIter, "forward_visible_cursor_positions", forward_visible_cursor_positions, 1);
-    rb_define_method(cTextIter, "backward_visible_cursor_positions", backward_visible_cursor_positions, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_word_ends", forward_visible_word_ends, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_word_starts", backward_visible_word_starts, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_word_end", forward_visible_word_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backword_visible_word_start", backward_visible_word_start, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_cursor_position", forward_visible_cursor_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_cursor_position", backward_visible_cursor_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_cursor_positions", forward_visible_cursor_positions, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_cursor_positions", backward_visible_cursor_positions, 1); 
 #endif
 #if GTK_CHECK_VERSION(2,8,0)
-    rb_define_method(cTextIter, "forward_visible_line", forward_visible_line, 0); 
-    rb_define_method(cTextIter, "backward_visible_line", backward_visible_line, 0); 
-    rb_define_method(cTextIter, "forward_visible_lines", forward_visible_lines, 1); 
-    rb_define_method(cTextIter, "backward_visible_lines", backward_visible_lines, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_line", forward_visible_line, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_line", backward_visible_line, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_lines", forward_visible_lines, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_lines", backward_visible_lines, 1); 
 #endif
-    rb_define_method(cTextIter, "forward_cursor_position", forward_cursor_position, 0);
-    rb_define_method(cTextIter, "backward_cursor_position", backward_cursor_position, 0);
-    rb_define_method(cTextIter, "forward_cursor_positions", forward_cursor_positions, 1);
-    rb_define_method(cTextIter, "backward_cursor_positions", backward_cursor_positions, 1);
-    rb_define_method(cTextIter, "forward_to_end", forward_to_end, 0);
-    rb_define_method(cTextIter, "forward_to_line_end", forward_to_line_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_cursor_position", forward_cursor_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_cursor_position", backward_cursor_position, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_cursor_positions", forward_cursor_positions, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_cursor_positions", backward_cursor_positions, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_to_end", forward_to_end, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_to_line_end", forward_to_line_end, 0);
 
 
-    rb_define_method(cTextIter, "set_offset", set_offset, 1);
-    rb_define_method(cTextIter, "set_line", set_line, 1);
-    rb_define_method(cTextIter, "set_line_offset", set_line_offset, 1);
-    rb_define_method(cTextIter, "set_line_index", set_line_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_offset", set_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_line", set_line, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_line_offset", set_line_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_line_index", set_line_index, 1);
 
-    rb_define_method(cTextIter, "set_visible_line_offset", set_visible_line_offset, 1);
-    rb_define_method(cTextIter, "set_visible_line_index", set_visible_line_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visible_line_offset", set_visible_line_offset, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visible_line_index", set_visible_line_index, 1);
 
-    rb_define_method(cTextIter, "forward_to_tag_toggle", forward_to_tag_toggle, -1);
-    rb_define_method(cTextIter, "backward_to_tag_toggle", backward_to_tag_toggle, -1);
-    rb_define_method(cTextIter, "forward_find_char", forward_find_char, -1);
-    rb_define_method(cTextIter, "backward_find_char", backward_find_char, -1);
-    rb_define_method(cTextIter, "forward_search", forward_search, -1);
-    rb_define_method(cTextIter, "backward_search", backward_search, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_to_tag_toggle", forward_to_tag_toggle, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_to_tag_toggle", backward_to_tag_toggle, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_find_char", forward_find_char, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_find_char", backward_find_char, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "forward_search", forward_search, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "backward_search", backward_search, -1);
 
-    rb_define_method(cTextIter, "==", equal, 1);
-    rb_define_method(cTextIter, "<=>", compare, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "<=>", compare, 1);
 
-    G_DEF_SETTERS(cTextIter);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkTextSearchFlags */
-    G_DEF_CLASS(GTK_TYPE_TEXT_SEARCH_FLAGS, "SearchFlags", cTextIter);
-    G_DEF_CONSTANTS(cTextIter, GTK_TYPE_TEXT_SEARCH_FLAGS, "GTK_TEXT_");
+    G_DEF_CLASS(GTK_TYPE_TEXT_SEARCH_FLAGS, "SearchFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TEXT_SEARCH_FLAGS, "GTK_TEXT_");
 }

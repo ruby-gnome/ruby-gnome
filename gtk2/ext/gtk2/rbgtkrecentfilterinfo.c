@@ -56,6 +56,7 @@ gtk_recent_filter_info_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cRecentFilterInfo
 #define _SELF(w) ((GtkRecentFilterInfo*)RVAL2BOXED(w, GTK_TYPE_RECENT_FILTER_INFO))
 
 static VALUE
@@ -162,24 +163,24 @@ void
 Init_gtk_recent_filter_info(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE rf = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);
 
-    rb_define_method(rf, "initialize", rf_initialize, 0);
-    rb_define_method(rf, "contains", rf_get_contains, 0);
-    rb_define_method(rf, "set_contains", rf_set_contains, 1);
-    rb_define_method(rf, "uri", rf_get_uri, 0);
-    rb_define_method(rf, "set_uri", rf_set_uri, 1);
-    rb_define_method(rf, "display_name", rf_get_display_name, 0);
-    rb_define_method(rf, "set_display_name", rf_set_display_name, 1);
-    rb_define_method(rf, "mime_type", rf_get_mime_type, 0);
-    rb_define_method(rf, "set_mime_type", rf_set_mime_type, 1);
-    rb_define_method(rf, "applications", rf_get_applications, 0);
-    rb_define_method(rf, "set_applications", rf_set_applications, 1);
-    rb_define_method(rf, "groups", rf_get_groups, 0);
-    rb_define_method(rf, "set_groups", rf_set_groups, 1);
-    rb_define_method(rf, "age", rf_get_age, 0);
-    rb_define_method(rf, "set_age", rf_set_age, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rf_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "contains", rf_get_contains, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_contains", rf_set_contains, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "uri", rf_get_uri, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_uri", rf_set_uri, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", rf_get_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_display_name", rf_set_display_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", rf_get_mime_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", rf_set_mime_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "applications", rf_get_applications, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_applications", rf_set_applications, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "groups", rf_get_groups, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_groups", rf_set_groups, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "age", rf_get_age, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_age", rf_set_age, 1);
 
-    G_DEF_SETTERS(rf);   
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 #endif
 }

@@ -44,6 +44,7 @@ gdk_windowattr_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cWindowAttr
 #define _SELF(w) ((GdkWindowAttr*)RVAL2BOXED(w, GDK_TYPE_WINDOW_ATTR))
 
 static VALUE
@@ -170,38 +171,38 @@ attr_set_override_redirect(VALUE self, VALUE val)
 void 
 Init_gtk_gdk_windowattr(void)
 {
-    VALUE gWindowAttr = G_DEF_CLASS(GDK_TYPE_WINDOW_ATTR, "WindowAttr", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_WINDOW_ATTR, "WindowAttr", mGdk);
 
-    rb_define_method(gWindowAttr, "initialize", attr_initialize, 4);
-    rb_define_method(gWindowAttr, "title", attr_get_title, 0);
-    rb_define_method(gWindowAttr, "set_title", attr_set_title, 1);
-    rb_define_method(gWindowAttr, "event_mask", attr_get_event_mask, 0);
-    rb_define_method(gWindowAttr, "set_event_mask", attr_set_event_mask, 1);
-    rb_define_method(gWindowAttr, "x", attr_get_x, 0);
-    rb_define_method(gWindowAttr, "set_x", attr_set_x, 1);
-    rb_define_method(gWindowAttr, "y", attr_get_y, 0);
-    rb_define_method(gWindowAttr, "set_y", attr_set_y, 1);
-    rb_define_method(gWindowAttr, "width", attr_get_width, 0);
-    rb_define_method(gWindowAttr, "set_width", attr_set_width, 1);
-    rb_define_method(gWindowAttr, "height", attr_get_height, 0);
-    rb_define_method(gWindowAttr, "set_height", attr_set_height, 1);
-    rb_define_method(gWindowAttr, "wclass", attr_get_wclass, 0);
-    rb_define_method(gWindowAttr, "set_wclass", attr_set_wclass, 1);
-    rb_define_method(gWindowAttr, "visual", attr_get_visual, 0);
-    rb_define_method(gWindowAttr, "set_visual", attr_set_visual, 1);
-    rb_define_method(gWindowAttr, "colormap", attr_get_colormap, 0);
-    rb_define_method(gWindowAttr, "set_colormap", attr_set_colormap, 1);
-    rb_define_method(gWindowAttr, "window_type", attr_get_window_type, 0);
-    rb_define_method(gWindowAttr, "set_window_type", attr_set_window_type, 1);
-    rb_define_method(gWindowAttr, "cursor", attr_get_cursor, 0);
-    rb_define_method(gWindowAttr, "set_cursor", attr_set_cursor, 1);
-    rb_define_method(gWindowAttr, "wmclass_name", attr_get_wmclass_name, 0);
-    rb_define_method(gWindowAttr, "set_wmclass_name", attr_set_wmclass_name, 1);
-    rb_define_method(gWindowAttr, "wmclass_class", attr_get_wmclass_class, 0);
-    rb_define_method(gWindowAttr, "set_wmclass_class", attr_set_wmclass_class, 1);
-    rb_define_method(gWindowAttr, "override_redirect", attr_get_override_redirect, 0);
-    rb_define_method(gWindowAttr, "set_override_redirect", attr_set_override_redirect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", attr_initialize, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "title", attr_get_title, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_title", attr_set_title, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "event_mask", attr_get_event_mask, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_event_mask", attr_set_event_mask, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "x", attr_get_x, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_x", attr_set_x, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "y", attr_get_y, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_y", attr_set_y, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "width", attr_get_width, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_width", attr_set_width, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "height", attr_get_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_height", attr_set_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wclass", attr_get_wclass, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_wclass", attr_set_wclass, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "visual", attr_get_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_visual", attr_set_visual, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "colormap", attr_get_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_colormap", attr_set_colormap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "window_type", attr_get_window_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_window_type", attr_set_window_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "cursor", attr_get_cursor, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_cursor", attr_set_cursor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wmclass_name", attr_get_wmclass_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_wmclass_name", attr_set_wmclass_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wmclass_class", attr_get_wmclass_class, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_wmclass_class", attr_set_wmclass_class, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "override_redirect", attr_get_override_redirect, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_override_redirect", attr_set_override_redirect, 1);
 
-    G_DEF_SETTERS(gWindowAttr);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 }

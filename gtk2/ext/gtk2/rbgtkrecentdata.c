@@ -55,6 +55,7 @@ gtk_recent_data_get_type(void)
 }
 /*****************************************/
 
+#define RG_TARGET_NAMESPACE cRecentData
 #define _SELF(w) ((GtkRecentData*)RVAL2BOXED(w, GTK_TYPE_RECENT_DATA))
 
 static VALUE
@@ -125,24 +126,24 @@ void
 Init_gtk_recent_data(void)
 {
 #if GTK_CHECK_VERSION(2,10,0)
-    VALUE rd = G_DEF_CLASS(GTK_TYPE_RECENT_DATA, "RecentData", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_DATA, "RecentData", mGtk);
 
-    rb_define_method(rd, "initialize", rd_initialize, 0);
-    rb_define_method(rd, "display_name", rd_get_display_name, 0);
-    rb_define_method(rd, "set_display_name", rd_set_display_name, 1);
-    rb_define_method(rd, "description", rd_get_description, 0);
-    rb_define_method(rd, "set_description", rd_set_description, 1);
-    rb_define_method(rd, "mime_type", rd_get_mime_type, 0);
-    rb_define_method(rd, "set_mime_type", rd_set_mime_type, 1);
-    rb_define_method(rd, "app_name", rd_get_app_name, 0);
-    rb_define_method(rd, "set_app_name", rd_set_app_name, 1);
-    rb_define_method(rd, "app_exec", rd_get_app_exec, 0);
-    rb_define_method(rd, "set_app_exec", rd_set_app_exec, 1);
-    rb_define_method(rd, "groups", rd_get_groups, 0);
-    rb_define_method(rd, "set_groups", rd_set_groups, 1);
-    rb_define_method(rd, "private?", rd_get_is_private, 0);
-    rb_define_method(rd, "set_private", rd_set_is_private, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", rd_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "display_name", rd_get_display_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_display_name", rd_set_display_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "description", rd_get_description, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_description", rd_set_description, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", rd_get_mime_type, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", rd_set_mime_type, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "app_name", rd_get_app_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_app_name", rd_set_app_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "app_exec", rd_get_app_exec, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_app_exec", rd_set_app_exec, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "groups", rd_get_groups, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_groups", rd_set_groups, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "private?", rd_get_is_private, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_private", rd_set_is_private, 1);
 
-    G_DEF_SETTERS(rd);   
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 #endif
 }

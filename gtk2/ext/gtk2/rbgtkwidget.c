@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cWidget
 #define _SELF(self) (GTK_WIDGET(RVAL2GOBJ(self)))
 
 static VALUE style_prop_func_table;
@@ -1055,7 +1056,7 @@ widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
 void 
 Init_gtk_widget(void)
 {
-    VALUE gWidget = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
 
     rb_global_variable(&style_prop_func_table);
     style_prop_func_table = rb_hash_new();
@@ -1063,180 +1064,180 @@ Init_gtk_widget(void)
     /*
      * instance methods
      */
-    rb_define_method(gWidget, "flags", widget_get_flags, 0);
-    rb_define_method(gWidget, "set_flags", widget_set_flags, 1);
-    rb_define_method(gWidget, "unset_flags", widget_unset_flags, 1);
-    rb_define_method(gWidget, "unparent", widget_unparent, 0);
-    rb_define_method(gWidget, "show", widget_show, 0);
-    rb_define_method(gWidget, "show_now", widget_show_now, 0);
-    rb_define_method(gWidget, "hide", widget_hide, 0);
-    rb_define_method(gWidget, "show_all", widget_show_all, 0);
-    rb_define_method(gWidget, "hide_all", widget_hide_all, 0);
-    rb_define_method(gWidget, "map", widget_map, 0);
-    rb_define_method(gWidget, "unmap", widget_unmap, 0);
-    rb_define_method(gWidget, "realize", widget_realize, 0);
-    rb_define_method(gWidget, "unrealize", widget_unrealize, 0);
-    rb_define_method(gWidget, "queue_draw", widget_queue_draw, 0);
-    rb_define_method(gWidget, "queue_resize", widget_queue_resize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "flags", widget_get_flags, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_flags", widget_set_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unset_flags", widget_unset_flags, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "unparent", widget_unparent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "show", widget_show, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "show_now", widget_show_now, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "hide", widget_hide, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "show_all", widget_show_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "hide_all", widget_hide_all, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "map", widget_map, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unmap", widget_unmap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "realize", widget_realize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "unrealize", widget_unrealize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "queue_draw", widget_queue_draw, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "queue_resize", widget_queue_resize, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gWidget, "queue_resize_no_redraw", widget_queue_resize_no_redraw, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "queue_resize_no_redraw", widget_queue_resize_no_redraw, 0);
 #endif
-    rb_define_method(gWidget, "size_request", widget_size_request, 0);
-    rb_define_method(gWidget, "child_requisition", widget_get_child_requisition, 0);
-    rb_define_method(gWidget, "size_allocate", widget_size_allocate, 1);
-    rb_define_method(gWidget, "add_accelerator", widget_add_accelerator, 5);
-    rb_define_method(gWidget, "remove_accelerator", widget_remove_accelerator, 3);
-    rb_define_method(gWidget, "set_accel_path", widget_set_accel_path, 2);
-    rb_define_method(gWidget, "accel_closures", widget_list_accel_closures, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size_request", widget_size_request, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_requisition", widget_get_child_requisition, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "size_allocate", widget_size_allocate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_accelerator", widget_add_accelerator, 5);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_accelerator", widget_remove_accelerator, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_accel_path", widget_set_accel_path, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "accel_closures", widget_list_accel_closures, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gWidget, "can_activate_accel?", widget_can_activate_accel, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "can_activate_accel?", widget_can_activate_accel, 1);
 #endif
-    rb_define_method(gWidget, "event", widget_event, 1);
-    rb_define_method(gWidget, "activate", widget_activate, 0);
-    rb_define_method(gWidget, "reparent", widget_reparent, 1);
-    rb_define_singleton_method(gWidget, "install_style_property", widget_s_install_style_property, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "event", widget_event, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "activate", widget_activate, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "reparent", widget_reparent, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "install_style_property", widget_s_install_style_property, 1);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_singleton_method(gWidget, "style_property", widget_s_find_style_property, 1);
-    rb_define_singleton_method(gWidget, "style_properties", widget_s_style_properties, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "style_property", widget_s_find_style_property, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "style_properties", widget_s_style_properties, -1);
 #endif
-    rb_define_method(gWidget, "intersect", widget_intersect, 1);
-    rb_define_method(gWidget, "grab_default", widget_grab_default, 0);
-    rb_define_method(gWidget, "set_state", widget_set_state, 1);
-    rb_define_method(gWidget, "set_parent_window", widget_set_parent_window, 1);
-    rb_define_method(gWidget, "parent_window", widget_get_parent_window, 0);
-    rb_define_method(gWidget, "add_events", widget_add_events, 1);
-    rb_define_method(gWidget, "toplevel", widget_get_toplevel, 0);
-    rb_define_method(gWidget, "get_ancestor", widget_get_ancestor, 1);
-    rb_define_method(gWidget, "colormap", widget_get_colormap, 0);
-    rb_define_method(gWidget, "set_colormap", widget_set_colormap, 1);
-    rb_define_method(gWidget, "visual", widget_get_visual, 0);
-    rb_define_method(gWidget, "pointer", widget_get_pointer, 0);
-    rb_define_method(gWidget, "ancestor?", widget_is_ancestor, 1);
-    rb_define_method(gWidget, "translate_coordinates", widget_translate_coordinates, 3);
-    rb_define_method(gWidget, "hide_on_delete", widget_hide_on_delete, 0);
-    rb_define_method(gWidget, "ensure_style", widget_ensure_style, 0);
-    rb_define_method(gWidget, "reset_rc_styles", widget_reset_rc_styles, 0);
-    rb_define_method(gWidget, "set_direction", widget_set_direction, 1);
-    rb_define_method(gWidget, "direction", widget_get_direction, 0);
-    rb_define_method(gWidget, "shape_combine_mask", widget_shape_combine_mask, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "intersect", widget_intersect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "grab_default", widget_grab_default, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_state", widget_set_state, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_parent_window", widget_set_parent_window, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "parent_window", widget_get_parent_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_events", widget_add_events, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "toplevel", widget_get_toplevel, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_ancestor", widget_get_ancestor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "colormap", widget_get_colormap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_colormap", widget_set_colormap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "visual", widget_get_visual, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pointer", widget_get_pointer, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ancestor?", widget_is_ancestor, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "translate_coordinates", widget_translate_coordinates, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "hide_on_delete", widget_hide_on_delete, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "ensure_style", widget_ensure_style, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "reset_rc_styles", widget_reset_rc_styles, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_direction", widget_set_direction, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", widget_get_direction, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "shape_combine_mask", widget_shape_combine_mask, 3);
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gWidget, "input_shape_combine_mask", widget_input_shape_combine_mask, 3);
+    rb_define_method(RG_TARGET_NAMESPACE, "input_shape_combine_mask", widget_input_shape_combine_mask, 3);
 #endif
-    rb_define_method(gWidget, "path", widget_path, 0);
-    rb_define_method(gWidget, "class_path", widget_class_path, 0);
-    rb_define_method(gWidget, "composite_name", widget_get_composite_name, 0);
-    rb_define_method(gWidget, "modify_style", widget_modify_style, 1);
-    rb_define_method(gWidget, "modifier_style", widget_get_modifier_style, 0);
-    rb_define_method(gWidget, "modify_fg", widget_modify_fg, 2);
-    rb_define_method(gWidget, "modify_bg", widget_modify_bg, 2);
-    rb_define_method(gWidget, "modify_text", widget_modify_text, 2);
-    rb_define_method(gWidget, "modify_base", widget_modify_base, 2);
-    rb_define_method(gWidget, "modify_font", widget_modify_font, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "path", widget_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "class_path", widget_class_path, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "composite_name", widget_get_composite_name, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_style", widget_modify_style, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "modifier_style", widget_get_modifier_style, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_fg", widget_modify_fg, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_bg", widget_modify_bg, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_text", widget_modify_text, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_base", widget_modify_base, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_font", widget_modify_font, 1);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gWidget, "modify_cursor", widget_modify_cursor, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "modify_cursor", widget_modify_cursor, 2);
 #endif
-    rb_define_method(gWidget, "create_pango_context", widget_create_pango_context, 0);
-    rb_define_method(gWidget, "pango_context", widget_get_pango_context, 0);
-    rb_define_method(gWidget, "create_pango_layout", widget_create_pango_layout, -1);
-    rb_define_method(gWidget, "render_icon", widget_render_icon, -1);
-    rb_define_method(gWidget, "queue_draw_area", widget_queue_draw_area, 4);
-    rb_define_method(gWidget, "reset_shapes", widget_reset_shapes, 0);
-    rb_define_method(gWidget, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
-    rb_define_method(gWidget, "set_composite_name", widget_set_composite_name, 1);
-    rb_define_method(gWidget, "set_scroll_adjustments", widget_set_scroll_adjustments, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_pango_context", widget_create_pango_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "pango_context", widget_get_pango_context, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "create_pango_layout", widget_create_pango_layout, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "render_icon", widget_render_icon, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "queue_draw_area", widget_queue_draw_area, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "reset_shapes", widget_reset_shapes, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_redraw_on_allocate", widget_set_redraw_on_allocate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_composite_name", widget_set_composite_name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_scroll_adjustments", widget_set_scroll_adjustments, 2);
     /* for backward compatibility. */
-    rb_define_alias(gWidget, "set_scroll_adjustment", "set_scroll_adjustments");
-    rb_define_method(gWidget, "mnemonic_activate", widget_mnemonic_activate, 1);
-    rb_define_method(gWidget, "region_intersect", widget_region_intersect, 1);
-    rb_define_method(gWidget, "send_expose", widget_send_expose, 1);
-    rb_define_method(gWidget, "style_get_property", widget_style_get_property, 1);
-    rb_define_method(gWidget, "accessible", widget_get_accessible, 0);
-    rb_define_method(gWidget, "child_focus", widget_child_focus, 1);
+    rb_define_alias(RG_TARGET_NAMESPACE, "set_scroll_adjustment", "set_scroll_adjustments");
+    rb_define_method(RG_TARGET_NAMESPACE, "mnemonic_activate", widget_mnemonic_activate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "region_intersect", widget_region_intersect, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "send_expose", widget_send_expose, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "style_get_property", widget_style_get_property, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "accessible", widget_get_accessible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_focus", widget_child_focus, 1);
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gWidget, "error_bell", widget_error_bell, 0);
-    rb_define_method(gWidget, "keynav_failed", widget_keynav_failed, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "error_bell", widget_error_bell, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "keynav_failed", widget_keynav_failed, 0);
 #endif
-    rb_define_method(gWidget, "child_notify", widget_child_notify, 1);
-    rb_define_method(gWidget, "freeze_child_notify", widget_freeze_child_notify, 0);
-    rb_define_method(gWidget, "child_visible?", widget_get_child_visible, 0);
-    rb_define_method(gWidget, "settings", widget_get_settings, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_notify", widget_child_notify, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "freeze_child_notify", widget_freeze_child_notify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "child_visible?", widget_get_child_visible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "settings", widget_get_settings, 0);
 #if GTK_CHECK_VERSION(2,2,0)
-    rb_define_method(gWidget, "get_clipboard", widget_get_clipboard, 1);
-    rb_define_method(gWidget, "display", widget_get_display, 0);
-    rb_define_method(gWidget, "root_window", widget_get_root_window, 0);
-    rb_define_method(gWidget, "screen", widget_get_screen, 0);
-    rb_define_method(gWidget, "has_screen?", widget_has_screen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_clipboard", widget_get_clipboard, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "display", widget_get_display, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "root_window", widget_get_root_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "screen", widget_get_screen, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_screen?", widget_has_screen, 0);
 #endif
-    rb_define_method(gWidget, "set_child_visible", widget_set_child_visible, 1);
-    rb_define_method(gWidget, "get_size_request", widget_get_size_request, 0);
-    rb_define_method(gWidget, "set_size_request", widget_set_size_request, 2);
-    rb_define_method(gWidget, "thaw_child_notify", widget_thaw_child_notify, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_child_visible", widget_set_child_visible, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "get_size_request", widget_get_size_request, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_size_request", widget_set_size_request, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "thaw_child_notify", widget_thaw_child_notify, 0);
 #if GTK_CHECK_VERSION(2,4,0)
-    rb_define_method(gWidget, "mnemonic_labels", widget_list_mnemonic_labels, 0);
-    rb_define_method(gWidget, "add_mnemonic_label", widget_add_mnemonic_label, 1);
-    rb_define_method(gWidget, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "mnemonic_labels", widget_list_mnemonic_labels, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "add_mnemonic_label", widget_add_mnemonic_label, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "remove_mnemonic_label", widget_remove_mnemonic_label, 1);
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
-    rb_define_method(gWidget, "set_tooltip_window", widget_set_tooltip_window, 1);
-    rb_define_method(gWidget, "tooltip_window", widget_get_tooltip_window, 0);
-    rb_define_method(gWidget, "trigger_tooltip_query", widget_trigger_tooltip_query, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tooltip_window", widget_set_tooltip_window, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "tooltip_window", widget_get_tooltip_window, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "trigger_tooltip_query", widget_trigger_tooltip_query, 0);
 #endif
 #if GTK_CHECK_VERSION(2,10,0)
-    rb_define_method(gWidget, "action", widget_get_action, 0);
-    rb_define_method(gWidget, "composited?", widget_is_composited, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "action", widget_get_action, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "composited?", widget_is_composited, 0);
 #endif
-    rb_define_method(gWidget, "set_window", widget_set_window, 1);
-    rb_define_method(gWidget, "allocation", widget_get_allocation, 0);
-    rb_define_method(gWidget, "set_allocation", widget_set_allocation, 4);
-    rb_define_method(gWidget, "requisition", widget_get_requisition, 0);
-    rb_define_method(gWidget, "set_requisition", widget_set_requisition, 2);
-    rb_define_method(gWidget, "state", widget_state, 0);
-    rb_define_method(gWidget, "saved_state", widget_saved_state, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_window", widget_set_window, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "allocation", widget_get_allocation, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_allocation", widget_set_allocation, 4);
+    rb_define_method(RG_TARGET_NAMESPACE, "requisition", widget_get_requisition, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_requisition", widget_set_requisition, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "state", widget_state, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "saved_state", widget_saved_state, 0);
 
-    rb_define_method(gWidget, "toplevel?",  widget_TOPLEVEL, 0);
-    rb_define_method(gWidget, "no_window?", widget_NO_WINDOW, 0);
-    rb_define_method(gWidget, "realized?",  widget_REALIZED, 0);
-    rb_define_method(gWidget, "mapped?",    widget_MAPPED, 0); 
-    rb_define_method(gWidget, "drawable?",  widget_DRAWABLE, 0);
-    rb_define_method(gWidget, "parent_sensitive?", widget_PARENT_SENSITIVE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "toplevel?",  widget_TOPLEVEL, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "no_window?", widget_NO_WINDOW, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "realized?",  widget_REALIZED, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "mapped?",    widget_MAPPED, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "drawable?",  widget_DRAWABLE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "parent_sensitive?", widget_PARENT_SENSITIVE, 0);
     /* This method's name avoid to sensitive? of a property variables. */
-    rb_define_method(gWidget, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
-    rb_define_method(gWidget, "has_grab?",    widget_HAS_GRAB, 0);
-    rb_define_method(gWidget, "rc_style?",    widget_RC_STYLE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "has_grab?",    widget_HAS_GRAB, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "rc_style?",    widget_RC_STYLE, 0);
 
     /*
      * singleton methods
      */
-    rb_define_singleton_method(gWidget, "push_colormap", widget_s_push_colormap, 1);
-    rb_define_singleton_method(gWidget, "pop_colormap", widget_s_pop_colormap, 0);
-    rb_define_singleton_method(gWidget, "set_default_colormap", widget_s_set_default_colormap, 1);
-    rb_define_singleton_method(gWidget, "default_style", widget_s_get_default_style, 0);
-    rb_define_singleton_method(gWidget, "default_colormap", widget_s_get_default_colormap, 0);
-    rb_define_singleton_method(gWidget, "default_visual", widget_s_get_default_visual, 0);
-    rb_define_singleton_method(gWidget, "set_default_direction",widget_s_set_default_direction, 1);
-    rb_define_singleton_method(gWidget, "default_direction",widget_s_get_default_direction, 0);
-    rb_define_singleton_method(gWidget, "pop_composite_child",widget_s_pop_composite_child, 0);
-    rb_define_singleton_method(gWidget, "push_composite_child",widget_s_push_composite_child, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "push_colormap", widget_s_push_colormap, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "pop_colormap", widget_s_pop_colormap, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_colormap", widget_s_set_default_colormap, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_style", widget_s_get_default_style, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_colormap", widget_s_get_default_colormap, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_visual", widget_s_get_default_visual, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "set_default_direction",widget_s_set_default_direction, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "default_direction",widget_s_get_default_direction, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "pop_composite_child",widget_s_pop_composite_child, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "push_composite_child",widget_s_push_composite_child, 0);
 
-    G_DEF_SETTERS(gWidget);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /*
      * constants
      */
     /* GtkWidgetFlags */
-    G_DEF_CLASS(GTK_TYPE_WIDGET_FLAGS, "Flags", gWidget);
-    G_DEF_CONSTANTS(gWidget, GTK_TYPE_WIDGET_FLAGS, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_WIDGET_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_FLAGS, "GTK_");
 
     /* GtkWidgetHelpType */
-    G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", gWidget);
-    G_DEF_CONSTANTS(gWidget, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
+    G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
 
     /* GtkTextDirection */
-    G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", gWidget);
-    G_DEF_CONSTANTS(gWidget, GTK_TYPE_TEXT_DIRECTION, "GTK_");
+    G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TEXT_DIRECTION, "GTK_");
 
     /* Special signals */
-    G_DEF_SIGNAL_FUNC(gWidget, "size-request", (GValToRValSignalFunc)widget_signal_size_request);
-    G_DEF_SIGNAL_FUNC(gWidget, "size-allocate", (GValToRValSignalFunc)widget_signal_size_allocate);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-request", (GValToRValSignalFunc)widget_signal_size_request);
+    G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-allocate", (GValToRValSignalFunc)widget_signal_size_allocate);
     
 }
