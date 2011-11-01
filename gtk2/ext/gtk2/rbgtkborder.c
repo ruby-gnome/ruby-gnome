@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cBorder
 #define _SELF(self) ((GtkBorder*)RVAL2BOXED(self, GTK_TYPE_BORDER))
 
 #define ATTR_INT(name)\
@@ -49,7 +50,7 @@ ATTR_INT(bottom);
     rb_define_method(gt, G_STRINGIFY(set_ ## name), border_ ## type ## _set_## name, 1);
 
 static VALUE
-border_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
+rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 {
     GtkBorder border;
     border.left = NUM2INT(left);
@@ -62,7 +63,7 @@ border_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 }
 
 static VALUE
-border_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     GtkBorder* border = _SELF(self);
     return rb_ary_new3(4, INT2NUM(border->left), INT2NUM(border->right),
@@ -72,15 +73,15 @@ border_to_a(VALUE self)
 void 
 Init_gtk_border(void)
 {
-    VALUE gBorder = G_DEF_CLASS(GTK_TYPE_BORDER, "Border", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BORDER, "Border", mGtk);
 
-    rb_define_method(gBorder, "initialize", border_initialize, 4);
-    rb_define_method(gBorder, "to_a", border_to_a, 0);
+    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(to_a, 0);
 
-    DEFINE_ACCESSOR(gBorder, int, left);
-    DEFINE_ACCESSOR(gBorder, int, right);
-    DEFINE_ACCESSOR(gBorder, int, top);
-    DEFINE_ACCESSOR(gBorder, int, bottom);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, left);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, right);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, top);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, bottom);
 
-    G_DEF_SETTERS(gBorder);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

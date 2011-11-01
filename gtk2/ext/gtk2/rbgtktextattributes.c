@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+#define RG_TARGET_NAMESPACE cTextAttributes
 #define _SELF(s) ((GtkTextAttributes*)RVAL2BOXED(s, GTK_TYPE_TEXT_ATTRIBUTES))
 
 /***********************************************/
@@ -150,7 +151,7 @@ ATTR_BOOL(realized);
 /***********************************************/
 
 static VALUE
-txt_attr_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     GtkTextAttributes *attr;
 
@@ -160,7 +161,7 @@ txt_attr_initialize(VALUE self)
 }
 
 static VALUE
-txt_attr_copy_values(VALUE self, VALUE dest)
+rg_copy_values(VALUE self, VALUE dest)
 {
     gtk_text_attributes_copy_values(_SELF(self), _SELF(dest));
     return self;
@@ -169,34 +170,34 @@ txt_attr_copy_values(VALUE self, VALUE dest)
 void
 Init_gtk_text_attributes(void)
 {
-    VALUE gTextAttributes = G_DEF_CLASS(GTK_TYPE_TEXT_ATTRIBUTES, "TextAttributes", mGtk);
-  
-    rb_define_method(gTextAttributes, "initialize", txt_attr_initialize, 0);
-    rb_define_method(gTextAttributes, "copy_values", txt_attr_copy_values, 1);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_ATTRIBUTES, "TextAttributes", mGtk);
 
-    DEFINE_ACCESSOR(gTextAttributes, boxed, appearance);
-    DEFINE_ACCESSOR(gTextAttributes, enums, justification);
-    DEFINE_ACCESSOR(gTextAttributes, enums, direction);
-    DEFINE_ACCESSOR(gTextAttributes, boxed, font);
-    DEFINE_ACCESSOR(gTextAttributes, double, font_scale);
-    DEFINE_ACCESSOR(gTextAttributes, int, left_margin);
-    DEFINE_ACCESSOR(gTextAttributes, int, indent);
-    DEFINE_ACCESSOR(gTextAttributes, int, right_margin);
-    DEFINE_ACCESSOR(gTextAttributes, int, pixels_above_lines);
-    DEFINE_ACCESSOR(gTextAttributes, int, pixels_below_lines);
-    DEFINE_ACCESSOR(gTextAttributes, int, pixels_inside_wrap);
-    DEFINE_ACCESSOR(gTextAttributes, boxed, tabs);
-    DEFINE_ACCESSOR(gTextAttributes, enums, wrap_mode);
-    DEFINE_ACCESSOR(gTextAttributes, boxed, language);
+    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(copy_values, 1);
 
-    rb_define_method(gTextAttributes, "invisible?", txt_attr_bool_invisible, 0);
-    rb_define_method(gTextAttributes, "set_invisible", txt_attr_bool_set_invisible, 1);
-    rb_define_method(gTextAttributes, "bg_full_height?", txt_attr_bool_bg_full_height, 0);
-    rb_define_method(gTextAttributes, "set_bg_full_height", txt_attr_bool_set_bg_full_height, 1);
-    rb_define_method(gTextAttributes, "editable?", txt_attr_bool_editable, 0);
-    rb_define_method(gTextAttributes, "set_editable", txt_attr_bool_set_editable, 1);
-    rb_define_method(gTextAttributes, "realized?", txt_attr_bool_realized, 0);
-    rb_define_method(gTextAttributes, "set_realized", txt_attr_bool_set_realized, 1);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, appearance);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, justification);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, direction);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, font);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, double, font_scale);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, left_margin);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, indent);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, right_margin);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, pixels_above_lines);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, pixels_below_lines);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, pixels_inside_wrap);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, tabs);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, wrap_mode);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, language);
 
-    G_DEF_SETTERS(gTextAttributes);
+    rb_define_method(RG_TARGET_NAMESPACE, "invisible?", txt_attr_bool_invisible, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_invisible", txt_attr_bool_set_invisible, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "bg_full_height?", txt_attr_bool_bg_full_height, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bg_full_height", txt_attr_bool_set_bg_full_height, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "editable?", txt_attr_bool_editable, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_editable", txt_attr_bool_set_editable, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "realized?", txt_attr_bool_realized, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_realized", txt_attr_bool_set_realized, 1);
+
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
