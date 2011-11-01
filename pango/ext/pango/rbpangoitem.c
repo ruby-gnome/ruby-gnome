@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cItem
 #define _SELF(self) ((PangoItem*)RVAL2BOXED(self, PANGO_TYPE_ITEM))
 
 #define ATTR_INT(name)\
@@ -37,8 +38,8 @@ item_int_set_ ## name (VALUE self, VALUE val)\
 }
 
 #define DEF_INT_ACCESSOR(name)                                  \
-    rb_define_method(pItem, G_STRINGIFY(name), item_int_ ## name, 0);\
-    rb_define_method(pItem, G_STRINGIFY(set_ ## name), item_int_set_ ## name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), item_int_ ## name, 0);\
+    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), item_int_set_ ## name, 1);
 
 /**********************************/
 #if ! PANGO_CHECK_VERSION(1,9,0)
@@ -98,17 +99,17 @@ item_set_analysis(VALUE self, VALUE val)
 void
 Init_pango_item(VALUE mPango)
 {
-    VALUE pItem = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ITEM, "Item", mPango);
     
-    rb_define_method(pItem, "initialize", item_initialize, 0);
-    rb_define_method(pItem, "split", item_split, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", item_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "split", item_split, 2);
 
     DEF_INT_ACCESSOR(offset);
     DEF_INT_ACCESSOR(length);
     DEF_INT_ACCESSOR(num_chars);
 
-    rb_define_method(pItem, "analysis", item_get_analysis, 0);
-    rb_define_method(pItem, "set_analysis", item_set_analysis, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "analysis", item_get_analysis, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_analysis", item_set_analysis, 1);
 
-    G_DEF_SETTERS(pItem);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

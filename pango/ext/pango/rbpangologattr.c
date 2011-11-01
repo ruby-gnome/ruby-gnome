@@ -21,6 +21,7 @@
 
 #include "rbpangoprivate.h"
 
+#define RG_TARGET_NAMESPACE cLogAttr
 #define _SELF(s) ((PangoLogAttr*)RVAL2BOXED(s, PANGO_TYPE_LOG_ATTR))
 
 /**********************************/
@@ -90,25 +91,25 @@ ATTR_BOOL(backspace_deletes_character);
 void
 Init_pango_logattr(VALUE mPango)
 {
-    VALUE logattr = G_DEF_CLASS(PANGO_TYPE_LOG_ATTR, "LogAttr", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_LOG_ATTR, "LogAttr", mPango);
     
-    rb_define_method(logattr, "initialize", log_initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", log_initialize, 0);
 
-    DEFINE_ACCESSOR(logattr, line_break);
-    DEFINE_ACCESSOR(logattr, mandatory_break);
-    DEFINE_ACCESSOR(logattr, char_break);
-    DEFINE_ACCESSOR(logattr, white);
-    DEFINE_ACCESSOR(logattr, cursor_position);
-    DEFINE_ACCESSOR(logattr, word_start);
-    DEFINE_ACCESSOR(logattr, word_end);
-    DEFINE_ACCESSOR(logattr, sentence_boundary);
-    DEFINE_ACCESSOR(logattr, sentence_start);
-    DEFINE_ACCESSOR(logattr, sentence_end);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, line_break);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, mandatory_break);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, char_break);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, white);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, cursor_position);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, word_start);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, word_end);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, sentence_boundary);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, sentence_start);
+    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, sentence_end);
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(logattr, "backspace_deletes_character?", log_get_backspace_deletes_character, 0); 
-    rb_define_method(logattr, "set_backspace_deletes_character", log_set_backspace_deletes_character, 1); 
+    rb_define_method(RG_TARGET_NAMESPACE, "backspace_deletes_character?", log_get_backspace_deletes_character, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "set_backspace_deletes_character", log_set_backspace_deletes_character, 1); 
 #endif
 
-    G_DEF_SETTERS(logattr);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

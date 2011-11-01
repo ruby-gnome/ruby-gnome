@@ -22,6 +22,8 @@
 #include "rbpangoprivate.h"
 
 #if PANGO_CHECK_VERSION(1,6,0)
+
+#define RG_TARGET_NAMESPACE cMatrix
 #define _SELF(self) ((PangoMatrix*)(RVAL2BOXED(self, PANGO_TYPE_MATRIX)))
 
 #define ATTR_FLOAT(name)\
@@ -38,8 +40,8 @@ matrix_set_ ## name (VALUE self, VALUE val)\
 }
 
 #define DEFINE_ACCESSOR(name) \
-    rb_define_method(matrix, G_STRINGIFY(name), matrix_get_ ## name, 0);\
-    rb_define_method(matrix, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), matrix_get_ ## name, 0);\
+    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
 
 static VALUE
 matrix_initialize(int argc, VALUE *argv, VALUE self)
@@ -126,20 +128,20 @@ void
 Init_pango_matrix(VALUE mPango)
 {
 #if PANGO_CHECK_VERSION(1,6,0)
-    VALUE matrix = G_DEF_CLASS(PANGO_TYPE_MATRIX, "Matrix", mPango);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_MATRIX, "Matrix", mPango);
     
-    rb_define_method(matrix, "initialize", matrix_initialize, -1);
-    rb_define_method(matrix, "translate!", matrix_translate, 2);
-    rb_define_method(matrix, "scale!", matrix_scale, 2);
-    rb_define_method(matrix, "rotate!", matrix_rotate, 1);
-    rb_define_method(matrix, "concat!", matrix_concat, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "initialize", matrix_initialize, -1);
+    rb_define_method(RG_TARGET_NAMESPACE, "translate!", matrix_translate, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "scale!", matrix_scale, 2);
+    rb_define_method(RG_TARGET_NAMESPACE, "rotate!", matrix_rotate, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "concat!", matrix_concat, 1);
 #if PANGO_CHECK_VERSION(1,12,0)
-    rb_define_method(matrix, "font_scale_factor", matrix_get_font_scale_factor, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_scale_factor", matrix_get_font_scale_factor, 0);
 #endif
 #if PANGO_CHECK_VERSION(1,16,0)
-    rb_define_method(matrix, "gravity", matrix_get_gravity, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "gravity", matrix_get_gravity, 0);
 #endif
-    rb_define_method(matrix, "to_a", matrix_to_a, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "to_a", matrix_to_a, 0);
 
     DEFINE_ACCESSOR(xx);
     DEFINE_ACCESSOR(xy);
@@ -148,7 +150,7 @@ Init_pango_matrix(VALUE mPango)
     DEFINE_ACCESSOR(x0);
     DEFINE_ACCESSOR(y0);
 
-    G_DEF_SETTERS(matrix);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 #endif
 }

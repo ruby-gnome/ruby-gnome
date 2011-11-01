@@ -21,7 +21,9 @@
 
 #include "rbpangoprivate.h"
 
-VALUE pattr, attrstring, pattrint, pattrfloat, pattrcolor, pattrbool;
+#define RG_TARGET_NAMESPACE cAttribute
+
+VALUE RG_TARGET_NAMESPACE, attrstring, pattrint, pattrfloat, pattrcolor, pattrbool;
 static VALUE type_to_klass;
 
 /***********************************************/
@@ -39,7 +41,7 @@ pango_get_attribute_klass(VALUE attr_type)
     if (TYPE(attr_type) == T_STRING){
         const char *strtype = RVAL2CSTR(attr_type);
         if (strcmp(strtype, "Attribute") == 0){
-            type = pattr;
+            type = RG_TARGET_NAMESPACE;
         } else if (strcmp(strtype, "AttrString") == 0){
             type = attrstring;
         } else if (strcmp(strtype, "AttrInt") == 0){
@@ -73,7 +75,7 @@ pango_get_attribute(VALUE attr)
 
     if (NIL_P(attr)) return NULL;
 
-    if (!rb_obj_is_kind_of(attr, pattr)) {
+    if (!rb_obj_is_kind_of(attr, RG_TARGET_NAMESPACE)) {
         rb_raise(rb_eTypeError, "not a Pango::Attribute...");
     }
     Data_Get_Struct(attr, PangoAttribute, gattr);
@@ -406,45 +408,45 @@ void
 Init_pango_attribute(VALUE mPango)
 {
     VALUE tmpklass;
-    pattr = rb_define_class_under(mPango, "Attribute", rb_cData);
+    RG_TARGET_NAMESPACE = rb_define_class_under(mPango, "Attribute", rb_cData);
 
-    rb_define_singleton_method(pattr, "type_register", attr_s_type_register, 1);
-    rb_define_method(pattr, "==", attr_equal, 1);
-    rb_define_method(pattr, "start_index", attr_start_index, 0);
-    rb_define_method(pattr, "set_start_index", attr_set_start_index, 1);
-    rb_define_method(pattr, "end_index", attr_end_index, 0);
-    rb_define_method(pattr, "set_end_index", attr_set_end_index, 1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "type_register", attr_s_type_register, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "==", attr_equal, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "start_index", attr_start_index, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_start_index", attr_set_start_index, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "end_index", attr_end_index, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_end_index", attr_set_end_index, 1);
 
-    G_DEF_SETTERS(pattr);
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
-    rb_define_singleton_method(pattr, "allocate", attr_s_allocate, 0);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "allocate", attr_s_allocate, 0);
 #else
-    rb_define_alloc_func(pattr, (VALUE(*)_((VALUE)))attr_s_allocate);
+    rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))attr_s_allocate);
 #endif
 #ifndef HAVE_OBJECT_ALLOCATE
-    rb_define_singleton_method(pattr, "new", attr_s_new, -1);
+    rb_define_singleton_method(RG_TARGET_NAMESPACE, "new", attr_s_new, -1);
 #endif
 
-    attrstring = rb_define_class_under(mPango, "AttrString", pattr);
+    attrstring = rb_define_class_under(mPango, "AttrString", RG_TARGET_NAMESPACE);
     rb_define_method(attrstring, "value", attr_string_value, 0);
 
-    pattrint = rb_define_class_under(mPango, "AttrInt", pattr);
+    pattrint = rb_define_class_under(mPango, "AttrInt", RG_TARGET_NAMESPACE);
     rb_define_method(pattrint, "value", attr_int_value, 0);
 
-    pattrfloat = rb_define_class_under(mPango, "AttrFloat", pattr);
+    pattrfloat = rb_define_class_under(mPango, "AttrFloat", RG_TARGET_NAMESPACE);
     rb_define_method(pattrfloat, "value", attr_float_value, 0);
 
-    pattrcolor = rb_define_class_under(mPango, "AttrColor", pattr);
+    pattrcolor = rb_define_class_under(mPango, "AttrColor", RG_TARGET_NAMESPACE);
     rb_define_method(pattrcolor, "value", attr_color_value, 0);
 
-    pattrbool = rb_define_class_under(mPango, "AttrBool", pattr);
+    pattrbool = rb_define_class_under(mPango, "AttrBool", RG_TARGET_NAMESPACE);
     rb_define_method(pattrbool, "value", attr_bool_value, 0);
 
     rb_global_variable(&type_to_klass);
     type_to_klass = rb_hash_new();
 
-    MAKE_ATTR(PANGO_ATTR_LANGUAGE, AttrLanguage, pattr, 1);
+    MAKE_ATTR(PANGO_ATTR_LANGUAGE, AttrLanguage, RG_TARGET_NAMESPACE, 1);
     rb_define_method(tmpklass, "value", attr_language_value, 0);
     
     MAKE_ATTR(PANGO_ATTR_FAMILY, AttrFamily, attrstring, 1);
@@ -460,7 +462,7 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_GRAVITY, AttrGravity, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_GRAVITY_HINT, AttrGravityHint, pattrint, 1);
 #endif
-    MAKE_ATTR(PANGO_ATTR_FONT_DESC, AttrFontDescription, pattr, 1);
+    MAKE_ATTR(PANGO_ATTR_FONT_DESC, AttrFontDescription, RG_TARGET_NAMESPACE, 1);
     rb_define_method(tmpklass, "value", attr_fontdesc_value, 0);
     MAKE_ATTR(PANGO_ATTR_FOREGROUND, AttrForeground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_BACKGROUND, AttrBackground, pattrcolor, 3);
@@ -480,7 +482,7 @@ Init_pango_attribute(VALUE mPango)
 #if PANGO_CHECK_VERSION(1,6,0)
     MAKE_ATTR(PANGO_ATTR_LETTER_SPACING, AttrLetterSpacing, pattrint, 1);
 #endif
-    MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, pattr, -1);
+    MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, RG_TARGET_NAMESPACE, -1);
     rb_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
     rb_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
     rb_define_method(tmpklass, "value", attr_shape_value, 0);
@@ -497,31 +499,31 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_FALLBACK, AttrFallback, pattrbool, 1);
 #endif
     /* PangoAttrType */
-    G_DEF_CLASS(PANGO_TYPE_ATTR_TYPE, "Type", pattr);
+    G_DEF_CLASS(PANGO_TYPE_ATTR_TYPE, "Type", RG_TARGET_NAMESPACE);
 #define INT2ATTRTYPE(x) rbgobj_make_enum((x), PANGO_TYPE_ATTR_TYPE)
-    rb_define_const(pattr, "TYPE_INVALID", INT2ATTRTYPE(PANGO_ATTR_INVALID));
-    rb_define_const(pattr, "TYPE_LANGUAGE", INT2ATTRTYPE(PANGO_ATTR_LANGUAGE));
-    rb_define_const(pattr, "TYPE_FAMILY", INT2ATTRTYPE(PANGO_ATTR_FAMILY));
-    rb_define_const(pattr, "TYPE_STYLE", INT2ATTRTYPE(PANGO_ATTR_STYLE));
-    rb_define_const(pattr, "TYPE_WEIGHT", INT2ATTRTYPE(PANGO_ATTR_WEIGHT));
-    rb_define_const(pattr, "TYPE_VARIANT", INT2ATTRTYPE(PANGO_ATTR_VARIANT));
-    rb_define_const(pattr, "TYPE_STRETCH", INT2ATTRTYPE(PANGO_ATTR_STRETCH));
-    rb_define_const(pattr, "TYPE_SIZE", INT2ATTRTYPE(PANGO_ATTR_SIZE));
-    rb_define_const(pattr, "TYPE_FONT_DESC", INT2ATTRTYPE(PANGO_ATTR_FONT_DESC));
-    rb_define_const(pattr, "TYPE_FOREGROUND", INT2ATTRTYPE(PANGO_ATTR_FOREGROUND));
-    rb_define_const(pattr, "TYPE_BACKGROUND", INT2ATTRTYPE(PANGO_ATTR_BACKGROUND));
-    rb_define_const(pattr, "TYPE_UNDERLINE", INT2ATTRTYPE(PANGO_ATTR_UNDERLINE));
-    rb_define_const(pattr, "TYPE_STRIKETHROUGH", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_INVALID", INT2ATTRTYPE(PANGO_ATTR_INVALID));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_LANGUAGE", INT2ATTRTYPE(PANGO_ATTR_LANGUAGE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_FAMILY", INT2ATTRTYPE(PANGO_ATTR_FAMILY));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STYLE", INT2ATTRTYPE(PANGO_ATTR_STYLE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_WEIGHT", INT2ATTRTYPE(PANGO_ATTR_WEIGHT));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_VARIANT", INT2ATTRTYPE(PANGO_ATTR_VARIANT));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRETCH", INT2ATTRTYPE(PANGO_ATTR_STRETCH));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_SIZE", INT2ATTRTYPE(PANGO_ATTR_SIZE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_FONT_DESC", INT2ATTRTYPE(PANGO_ATTR_FONT_DESC));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_FOREGROUND", INT2ATTRTYPE(PANGO_ATTR_FOREGROUND));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_BACKGROUND", INT2ATTRTYPE(PANGO_ATTR_BACKGROUND));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_UNDERLINE", INT2ATTRTYPE(PANGO_ATTR_UNDERLINE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRIKETHROUGH", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH));
 #if PANGO_CHECK_VERSION(1,8,0)
-    rb_define_const(pattr, "TYPE_STRIKETHROUGH_COLOR", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH_COLOR));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRIKETHROUGH_COLOR", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH_COLOR));
 #endif
-    rb_define_const(pattr, "TYPE_RISE", INT2ATTRTYPE(PANGO_ATTR_RISE));
-    rb_define_const(pattr, "TYPE_SHAPE", INT2ATTRTYPE(PANGO_ATTR_SHAPE));
-    rb_define_const(pattr, "TYPE_SCALE", INT2ATTRTYPE(PANGO_ATTR_SCALE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_RISE", INT2ATTRTYPE(PANGO_ATTR_RISE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_SHAPE", INT2ATTRTYPE(PANGO_ATTR_SHAPE));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_SCALE", INT2ATTRTYPE(PANGO_ATTR_SCALE));
 #if PANGO_CHECK_VERSION(1,8,0)
-    rb_define_const(pattr, "TYPE_FALLBACK", INT2ATTRTYPE(PANGO_ATTR_FALLBACK));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_FALLBACK", INT2ATTRTYPE(PANGO_ATTR_FALLBACK));
 #endif
 #if PANGO_CHECK_VERSION(1,6,0)
-    rb_define_const(pattr, "TYPE_LETTER_SPACING", INT2ATTRTYPE(PANGO_ATTR_LETTER_SPACING));
+    rb_define_const(RG_TARGET_NAMESPACE, "TYPE_LETTER_SPACING", INT2ATTRTYPE(PANGO_ATTR_LETTER_SPACING));
 #endif
 }
