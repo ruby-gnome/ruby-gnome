@@ -102,5 +102,9 @@ Init_poppler(void)
     Init_poppler_attachment(RG_TARGET_NAMESPACE);
     Init_poppler_action(RG_TARGET_NAMESPACE);
     Init_poppler_annotation(RG_TARGET_NAMESPACE);
+    Init_poppler_annotationmarkup(RG_TARGET_NAMESPACE);
+    Init_poppler_annotationtext(RG_TARGET_NAMESPACE);
+    Init_poppler_annotationfreetext(RG_TARGET_NAMESPACE);
+    Init_poppler_annotationcalloutline(RG_TARGET_NAMESPACE);
     Init_poppler_form_field(RG_TARGET_NAMESPACE);
 }
