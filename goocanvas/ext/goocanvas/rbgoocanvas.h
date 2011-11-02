@@ -50,20 +50,20 @@ void rb_goo_canvas_initialize_item_object(VALUE obj, GooCanvasItem *item);
 GooCanvasBounds *ruby_to_goo_canvas_bounds(VALUE rb_bounds, GooCanvasBounds *dest_bounds);
 
 void Init_goocanvas(void); /* Goo::Canvas */
-G_GNUC_INTERNAL void Init_goocanvasitem(void); /* Goo::CanvasItem */
-G_GNUC_INTERNAL void Init_goocanvastext(void); /* Goo::CanvasText */
-G_GNUC_INTERNAL void Init_goocanvasrect(void); /* Goo::CanvasRect */
-G_GNUC_INTERNAL void Init_goocanvasellipse(void); /* Goo::CanvasEllipse */
-G_GNUC_INTERNAL void Init_goocanvaspolyline(void); /* Goo::CanvasPolyline */
-G_GNUC_INTERNAL void Init_goocanvaspoints(void); /* Goo::CanvasPoints */
-G_GNUC_INTERNAL void Init_goocanvasimage(void); /* Goo::CanvasImage */
-G_GNUC_INTERNAL void Init_goocanvastable(void); /* Goo::CanvasTable */
-G_GNUC_INTERNAL void Init_goocanvaswidget(void); /* Goo::CanvasWidget */
-G_GNUC_INTERNAL void Init_goocanvasstyle(void); /* Goo::CanvasStyle */
-G_GNUC_INTERNAL void Init_goocanvasgroup(void); /* Goo::CanvasGroup */
+G_GNUC_INTERNAL void Init_goocanvasitem(VALUE mGoo); /* Goo::CanvasItem */
+G_GNUC_INTERNAL void Init_goocanvastext(VALUE mGoo); /* Goo::CanvasText */
+G_GNUC_INTERNAL void Init_goocanvasrect(VALUE mGoo); /* Goo::CanvasRect */
+G_GNUC_INTERNAL void Init_goocanvasellipse(VALUE mGoo); /* Goo::CanvasEllipse */
+G_GNUC_INTERNAL void Init_goocanvaspolyline(VALUE mGoo); /* Goo::CanvasPolyline */
+G_GNUC_INTERNAL void Init_goocanvaspoints(VALUE mGoo); /* Goo::CanvasPoints */
+G_GNUC_INTERNAL void Init_goocanvasimage(VALUE mGoo); /* Goo::CanvasImage */
+G_GNUC_INTERNAL void Init_goocanvastable(VALUE mGoo); /* Goo::CanvasTable */
+G_GNUC_INTERNAL void Init_goocanvaswidget(VALUE mGoo); /* Goo::CanvasWidget */
+G_GNUC_INTERNAL void Init_goocanvasstyle(VALUE mGoo); /* Goo::CanvasStyle */
+G_GNUC_INTERNAL void Init_goocanvasgroup(VALUE mGoo); /* Goo::CanvasGroup */
 G_GNUC_INTERNAL void Init_goo(void);
-G_GNUC_INTERNAL void Init_goocairopattern(void);
-G_GNUC_INTERNAL void Init_goocairomatrix(void);
+G_GNUC_INTERNAL void Init_goocairopattern(VALUE mCairo);
+G_GNUC_INTERNAL void Init_goocairomatrix(VALUE mCairo);
 
 extern VALUE mGoo;
 

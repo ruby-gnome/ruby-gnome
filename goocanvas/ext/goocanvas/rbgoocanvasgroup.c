@@ -34,7 +34,7 @@ rg_initialize(VALUE self, VALUE parent)
 }
 
 void
-Init_goocanvasgroup(void)
+Init_goocanvasgroup(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

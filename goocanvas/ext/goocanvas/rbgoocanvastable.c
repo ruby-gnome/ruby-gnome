@@ -34,7 +34,7 @@ rg_initialize(VALUE self, VALUE parent)
 }
 
 void
-Init_goocanvastable(void)
+Init_goocanvastable(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

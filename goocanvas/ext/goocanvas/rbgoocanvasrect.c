@@ -40,7 +40,7 @@ rg_initialize(VALUE self, VALUE parent, VALUE x, VALUE y,
 }
 
 void
-Init_goocanvasrect(void)
+Init_goocanvasrect(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 
