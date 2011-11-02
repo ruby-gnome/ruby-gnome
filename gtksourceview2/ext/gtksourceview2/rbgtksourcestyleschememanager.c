@@ -195,7 +195,7 @@ rg_force_rescan(VALUE self)
 }
 
 void
-Init_gtk_sourcestyleschememanager ()
+Init_gtk_sourcestyleschememanager (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =
         G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER,

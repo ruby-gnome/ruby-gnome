@@ -22,28 +22,28 @@
 
 #include "rbgtksourcemain.h"
 
-G_GNUC_INTERNAL void Init_gtk_sourceview (void);
-G_GNUC_INTERNAL void Init_gtk_sourcebuffer (void);
-G_GNUC_INTERNAL void Init_gtk_sourceiter (void);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguage (void);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (void);
-G_GNUC_INTERNAL void Init_gtk_sourcemark (void);
-G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (void);
-G_GNUC_INTERNAL void Init_gtk_sourcestyle (void);
-G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (void);
-G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (void);
+G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourceiter (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtk);
 
 void
 Init_gtksourceview2 (void)
 {
-    Init_gtk_sourceview ();
-    Init_gtk_sourcebuffer ();
-    Init_gtk_sourceiter ();
-    Init_gtk_sourcelanguage ();
-    Init_gtk_sourcelanguagemanager ();
-    Init_gtk_sourcemark ();
-    Init_gtk_sourceprintcompositor ();
-    Init_gtk_sourcestyle ();
-    Init_gtk_sourcestylescheme ();
-    Init_gtk_sourcestyleschememanager ();
+    Init_gtk_sourceview (mGtk);
+    Init_gtk_sourcebuffer (mGtk);
+    Init_gtk_sourceiter (mGtk);
+    Init_gtk_sourcelanguage (mGtk);
+    Init_gtk_sourcelanguagemanager (mGtk);
+    Init_gtk_sourcemark (mGtk);
+    Init_gtk_sourceprintcompositor (mGtk);
+    Init_gtk_sourcestyle (mGtk);
+    Init_gtk_sourcestylescheme (mGtk);
+    Init_gtk_sourcestyleschememanager (mGtk);
 }
