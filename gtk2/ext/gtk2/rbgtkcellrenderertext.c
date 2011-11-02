@@ -39,7 +39,7 @@ rg_set_fixed_height_from_font(VALUE self, VALUE number_of_rows)
 }
 
 void
-Init_gtk_cellrenderertext(void)
+Init_gtk_cellrenderertext(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_TEXT, "CellRendererText", mGtk);
 

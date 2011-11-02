@@ -211,7 +211,7 @@ rg_blue_prec(VALUE self)
 }
 
 void
-Init_gtk_gdk_visual(void)
+Init_gtk_gdk_visual(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_VISUAL, "Visual", mGdk);
 

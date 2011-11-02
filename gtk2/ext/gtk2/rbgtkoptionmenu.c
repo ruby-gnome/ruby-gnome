@@ -58,7 +58,7 @@ rg_history(VALUE self)
 #endif
 
 void 
-Init_gtk_option_menu(void)
+Init_gtk_option_menu(VALUE mGtk)
 {
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);

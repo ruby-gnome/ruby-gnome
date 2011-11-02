@@ -143,7 +143,7 @@ rg_set_state_wildcarded(VALUE self, VALUE setting)
 }
 
 void
-Init_gtk_icon_source(void)
+Init_gtk_icon_source(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_SOURCE, "IconSource", mGtk);
 

@@ -172,7 +172,7 @@ rg_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
 #endif
 
 void 
-Init_gtk_bindings(void)
+Init_gtk_bindings(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BINDING_SET, "BindingSet", mGtk);
     RG_DEF_METHOD(initialize, 1);

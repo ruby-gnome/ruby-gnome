@@ -56,7 +56,7 @@ rg_event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
 }
 
 void
-Init_gtk_texttag(void)
+Init_gtk_texttag(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_TAG, "TextTag", mGtk);
     RG_DEF_METHOD(initialize, -1);

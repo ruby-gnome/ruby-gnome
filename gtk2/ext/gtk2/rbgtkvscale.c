@@ -47,7 +47,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_vscale(void)
+Init_gtk_vscale(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSCALE, "VScale", mGtk);
     RG_DEF_METHOD(initialize, -1);

@@ -129,7 +129,7 @@ rg_paste_clipboard(VALUE self)
 }
 
 void 
-Init_gtk_editable(void)
+Init_gtk_editable(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_EDITABLE, "Editable", mGtk);
 

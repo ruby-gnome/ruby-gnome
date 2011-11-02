@@ -35,7 +35,7 @@ rg_initialize(VALUE self)
 #endif
 
 void 
-Init_gtk_separatortoolitem(void)
+Init_gtk_separatortoolitem(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR_TOOL_ITEM, "SeparatorToolItem", mGtk);

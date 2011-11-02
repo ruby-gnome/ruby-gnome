@@ -679,7 +679,7 @@ rg_set_search_position_func(VALUE self)
 #endif
 
 void 
-Init_gtk_treeview(void)
+Init_gtk_treeview(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
 

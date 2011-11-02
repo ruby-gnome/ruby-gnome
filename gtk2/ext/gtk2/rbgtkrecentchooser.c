@@ -187,7 +187,7 @@ rg_filters(VALUE self)
 #endif
 
 void 
-Init_gtk_recent_chooser(void)
+Init_gtk_recent_chooser(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);

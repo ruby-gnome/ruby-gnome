@@ -187,7 +187,7 @@ rg_m_theme_dir(G_GNUC_UNUSED VALUE self)
 }
 
 void 
-Init_gtk_rc(void)
+Init_gtk_rc(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "RC");
 

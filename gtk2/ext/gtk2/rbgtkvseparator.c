@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_vseparator(void)
+Init_gtk_vseparator(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VSEPARATOR, "VSeparator", mGtk);
     RG_DEF_METHOD(initialize, 0);

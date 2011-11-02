@@ -370,7 +370,7 @@ signal_g2r_func(G_GNUC_UNUSED guint num, const GValue *values)
 /*****************************************/
 
 void 
-Init_gtk_notebook(void)
+Init_gtk_notebook(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);
     G_DEF_CLASS(GTK_TYPE_NOTEBOOK_PAGE, "NotebookPage", mGtk);

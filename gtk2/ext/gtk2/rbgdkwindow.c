@@ -960,7 +960,7 @@ rg_move_to_current_desktop(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_window(void)
+Init_gtk_gdk_window(VALUE mGdk)
 {
     GObjectClass *g_class;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_WINDOW, "Window", mGdk);

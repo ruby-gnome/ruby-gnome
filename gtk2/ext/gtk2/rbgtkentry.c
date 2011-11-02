@@ -94,7 +94,7 @@ rg_set_cursor_hadjustment(VALUE self, VALUE adjustment)
 #endif
 
 void 
-Init_gtk_entry(void)
+Init_gtk_entry(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 

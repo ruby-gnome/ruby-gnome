@@ -128,7 +128,7 @@ rg_s_unlock_path(VALUE self, VALUE accel_path)
 #endif
 
 void
-Init_gtk_accel_map(void)
+Init_gtk_accel_map(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_MAP, "AccelMap", mGtk);

@@ -41,7 +41,7 @@ rg_pulse(VALUE self)
 }
 
 void 
-Init_gtk_progress_bar(void)
+Init_gtk_progress_bar(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR, "ProgressBar", mGtk);
 

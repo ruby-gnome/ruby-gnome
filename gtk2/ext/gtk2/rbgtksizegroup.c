@@ -55,7 +55,7 @@ rg_widgets(VALUE self)
 #endif
 
 void
-Init_gtk_size_group(void)
+Init_gtk_size_group(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SIZE_GROUP, "SizeGroup", mGtk);
 

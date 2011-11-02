@@ -179,7 +179,7 @@ rg_clear_cache(VALUE self)
 #endif
 
 void 
-Init_gtk_treemodelfilter(void)
+Init_gtk_treemodelfilter(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FILTER, "TreeModelFilter", mGtk);

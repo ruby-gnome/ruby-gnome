@@ -87,7 +87,7 @@ rg_apply_button(VALUE self)
 }
 
 void 
-Init_gtk_font_selection_dialog(void)
+Init_gtk_font_selection_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION_DIALOG, 
                                              "FontSelectionDialog", mGtk);

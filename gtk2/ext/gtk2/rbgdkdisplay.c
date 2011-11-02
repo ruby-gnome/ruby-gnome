@@ -499,7 +499,7 @@ rg_trigger_tooltip_query(VALUE self)
 #endif
 
 void 
-Init_gtk_gdk_display(void)
+Init_gtk_gdk_display(VALUE mGdk)
 {
 #if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);

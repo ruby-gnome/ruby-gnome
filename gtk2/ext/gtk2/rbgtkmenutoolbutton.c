@@ -68,7 +68,7 @@ rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_menutoolbutton(void)
+Init_gtk_menutoolbutton(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);

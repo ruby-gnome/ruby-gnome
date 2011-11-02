@@ -393,7 +393,7 @@ void        gtk_text_iter_order             (GtkTextIter *first,
 */
 
 void
-Init_gtk_textiter(void)
+Init_gtk_textiter(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
     rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);

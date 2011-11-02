@@ -55,7 +55,7 @@ rg_toggled(VALUE self)
 }
 
 void 
-Init_gtk_check_menu_item(void)
+Init_gtk_check_menu_item(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CHECK_MENU_ITEM, "CheckMenuItem", mGtk);
 

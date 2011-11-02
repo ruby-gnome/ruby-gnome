@@ -257,7 +257,7 @@ rg_targets_include_rich_text(VALUE self, VALUE buffer)
 #endif
 
 void
-Init_gtk_selectiondata(void)
+Init_gtk_selectiondata(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SELECTION_DATA, "SelectionData", mGtk);
 

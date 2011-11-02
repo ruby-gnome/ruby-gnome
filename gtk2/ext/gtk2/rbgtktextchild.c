@@ -45,7 +45,7 @@ rg_deleted_p(VALUE self)
 }
 
 void
-Init_gtk_textchild(void)
+Init_gtk_textchild(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR, "TextChildAnchor", mGtk);
 

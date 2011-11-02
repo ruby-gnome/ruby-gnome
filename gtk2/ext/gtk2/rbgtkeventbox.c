@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_eventbox(void)
+Init_gtk_eventbox(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_EVENT_BOX, "EventBox", mGtk);
 

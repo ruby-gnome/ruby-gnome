@@ -185,7 +185,7 @@ rg_s_from_object(G_GNUC_UNUSED VALUE self, VALUE object)
 }
 
 void 
-Init_gtk_accel_group(void)
+Init_gtk_accel_group(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);
 

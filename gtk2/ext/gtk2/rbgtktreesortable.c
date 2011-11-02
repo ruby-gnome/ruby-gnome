@@ -106,7 +106,7 @@ rg_has_default_sort_func_p(VALUE self)
 }
 
 void
-Init_gtk_treesortable(void)
+Init_gtk_treesortable(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_TREE_SORTABLE, "TreeSortable", mGtk);
 

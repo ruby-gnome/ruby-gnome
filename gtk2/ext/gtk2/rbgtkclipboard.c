@@ -419,7 +419,7 @@ rg_store(VALUE self)
 #endif
 
 void 
-Init_gtk_clipboard(void)
+Init_gtk_clipboard(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);
 

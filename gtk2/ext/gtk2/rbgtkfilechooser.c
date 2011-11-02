@@ -262,7 +262,7 @@ rg_shortcut_folder_uris(VALUE self)
 #endif
 
 void 
-Init_gtk_file_chooser(void)
+Init_gtk_file_chooser(VALUE mGtk)
 {
 
 #if GTK_CHECK_VERSION(2,4,0)

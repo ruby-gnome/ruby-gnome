@@ -51,7 +51,7 @@ rg_toggle(VALUE self)
 }
 
 void 
-Init_gtk_item(void)
+Init_gtk_item(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ITEM, "Item", mGtk);
     RG_DEF_METHOD(select, 0);

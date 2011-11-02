@@ -682,7 +682,7 @@ rg_to_key_file(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gtk_print_settings(void)
+Init_gtk_print_settings(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE;

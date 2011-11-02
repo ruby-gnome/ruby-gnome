@@ -260,7 +260,7 @@ rg_xor(VALUE self, VALUE region)
 }
 
 void
-Init_gtk_gdk_region(void)
+Init_gtk_gdk_region(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_REGION, "Region", mGdk);
 

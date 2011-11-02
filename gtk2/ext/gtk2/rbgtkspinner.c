@@ -49,7 +49,7 @@ rg_stop(VALUE self)
 #endif
 
 void 
-Init_gtk_spinner(void)
+Init_gtk_spinner(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,20,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPINNER, "Spinner", mGtk);

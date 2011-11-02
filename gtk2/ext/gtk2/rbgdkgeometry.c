@@ -221,7 +221,7 @@ rg_set_win_gravity(VALUE self, VALUE gravity)
 }
 
 void 
-Init_gtk_gdk_geometry(void)
+Init_gtk_gdk_geometry(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_GEOMETRY, "Geometry", mGdk);
 

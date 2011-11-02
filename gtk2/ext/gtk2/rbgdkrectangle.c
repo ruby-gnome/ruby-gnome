@@ -119,7 +119,7 @@ rg_to_a(VALUE self)
 }
 
 void
-Init_gtk_gdk_rectangle(void)
+Init_gtk_gdk_rectangle(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_RECTANGLE, "Rectangle", mGdk);
 

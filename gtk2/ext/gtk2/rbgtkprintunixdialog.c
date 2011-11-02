@@ -65,7 +65,7 @@ rg_set_manual_capability(VALUE self, VALUE rb_capabilities)
 #endif
 
 void
-Init_gtk_print_unix_dialog(void)
+Init_gtk_print_unix_dialog(VALUE mGtk)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_UNIX_DIALOG,

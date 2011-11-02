@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_vbox(void)
+Init_gtk_vbox(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VBOX, "VBox", mGtk);
 

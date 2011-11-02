@@ -91,7 +91,7 @@ rg_m_from_unicode(G_GNUC_UNUSED VALUE self, VALUE wc)
 }
 
 void
-Init_gtk_gdk_keyval(void)
+Init_gtk_gdk_keyval(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Keyval");
     RG_DEF_MODFUNC(to_name, 1);

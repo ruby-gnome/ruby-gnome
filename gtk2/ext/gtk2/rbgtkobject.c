@@ -118,7 +118,7 @@ rg_s_binding_set(VALUE self)
 }
 
 void 
-Init_gtk_object(void)
+Init_gtk_object(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OBJECT, "Object", mGtk);
 

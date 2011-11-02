@@ -44,7 +44,7 @@ rg_layout_offsets(VALUE self)
 #endif
 
 void 
-Init_gtk_scale(void)
+Init_gtk_scale(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);

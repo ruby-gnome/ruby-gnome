@@ -56,7 +56,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void 
-Init_gtk_check_button(void)
+Init_gtk_check_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CHECK_BUTTON, "CheckButton", mGtk);
 

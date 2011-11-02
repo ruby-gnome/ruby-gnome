@@ -125,7 +125,7 @@ rg_m_send_notify(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_gdk_selection(void)
+Init_gtk_gdk_selection(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Selection");
 

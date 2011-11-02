@@ -158,7 +158,7 @@ rg_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_gtk_gdk_pixbuf(void)
+Init_gtk_gdk_pixbuf(VALUE mGdk)
 {
     /*
      *  This defines Gdk::Pixbuf methods of GDK side.
