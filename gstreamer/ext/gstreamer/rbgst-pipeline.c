@@ -79,7 +79,7 @@ rg_bus(VALUE self)
 }
 
 void
-Init_gst_pipeline(void)
+Init_gst_pipeline(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

@@ -80,7 +80,7 @@ rg_add_watch(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gst_bus (void)
+Init_gst_bus (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

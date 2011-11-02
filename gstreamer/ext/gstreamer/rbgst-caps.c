@@ -392,7 +392,7 @@ rg_each(VALUE self)
 }
 
 void
-Init_gst_caps (void)
+Init_gst_caps (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

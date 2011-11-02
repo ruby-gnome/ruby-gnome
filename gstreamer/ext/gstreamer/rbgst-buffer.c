@@ -294,7 +294,7 @@ rg_span_p(VALUE self, VALUE other)
 }
 
 void
-Init_gst_buffer(void)
+Init_gst_buffer(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE, rb_cGstBufferCopyFlags;
 

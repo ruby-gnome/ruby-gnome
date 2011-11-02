@@ -249,7 +249,7 @@ rg_status (VALUE self)
 }
 
 void
-Init_gst_clock_entry (void)
+Init_gst_clock_entry (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_CLOCK_ENTRY, "ClockEntry", mGst);
 

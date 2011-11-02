@@ -54,7 +54,7 @@ rg_description(VALUE self)
 }
 
 void
-Init_gst_indexfactory (void)
+Init_gst_indexfactory (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

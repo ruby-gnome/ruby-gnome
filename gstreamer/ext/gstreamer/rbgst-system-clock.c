@@ -41,7 +41,7 @@ rg_s_obtain (self)
 }
 
 void
-Init_gst_systemclock (void)
+Init_gst_systemclock (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_SYSTEM_CLOCK, "SystemClock", mGst);
     RG_DEF_SMETHOD(obtain, 0);

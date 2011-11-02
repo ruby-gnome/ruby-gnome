@@ -27,7 +27,7 @@
 #define SELF(self) RVAL2GST_CHILD_PROXY(self)
 
 void
-Init_gst_child_proxy(void)
+Init_gst_child_proxy(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

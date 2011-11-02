@@ -621,7 +621,7 @@ type_name(VALUE self)
 
 
 void
-Init_gst_message(void)
+Init_gst_message(VALUE mGst)
 {
     VALUE rb_cGstMessageType;
 

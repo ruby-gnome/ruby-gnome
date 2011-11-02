@@ -969,7 +969,7 @@ initialize_thread_pool(GThreadPool **pool, GFunc function)
 }
 
 void
-Init_gst_element(void)
+Init_gst_element(VALUE mGst)
 {
     table.type = GST_TYPE_ELEMENT;
     table.instance2robj = instance2robj;

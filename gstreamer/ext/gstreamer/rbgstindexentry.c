@@ -86,7 +86,7 @@ rg_entry_type (VALUE self)
 }
 
 void
-Init_gst_indexentry (void)
+Init_gst_indexentry (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_INDEX_ENTRY, "IndexEntry", mGst);
 

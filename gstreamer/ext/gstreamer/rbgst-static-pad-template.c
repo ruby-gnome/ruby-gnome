@@ -52,7 +52,7 @@ rg_caps(VALUE self)
 }
 
 void
-Init_gst_static_pad_template (void)
+Init_gst_static_pad_template (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

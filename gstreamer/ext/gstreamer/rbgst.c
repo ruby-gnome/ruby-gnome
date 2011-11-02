@@ -24,60 +24,60 @@
 
 #define RG_TARGET_NAMESPACE mGst
 
-G_GNUC_INTERNAL void Init_gst_bin (void);
-G_GNUC_INTERNAL void Init_gst_buffer(void);
-G_GNUC_INTERNAL void Init_gst_bus(void);
-G_GNUC_INTERNAL void Init_gst_caps (void);
-G_GNUC_INTERNAL void Init_gst_child_proxy(void);
-G_GNUC_INTERNAL void Init_gst_clock (void);
-G_GNUC_INTERNAL void Init_gst_clock_entry (void);
-G_GNUC_INTERNAL void Init_gst_element (void);
-G_GNUC_INTERNAL void Init_gst_elementfactory (void);
-G_GNUC_INTERNAL void Init_gst_event(void);
-G_GNUC_INTERNAL void Init_gst_format (void);
-G_GNUC_INTERNAL void Init_gst_seek(void);
-G_GNUC_INTERNAL void Init_gst_structure(void);
-G_GNUC_INTERNAL void Init_gst_index (void);
-G_GNUC_INTERNAL void Init_gst_indexentry (void);
-G_GNUC_INTERNAL void Init_gst_indexfactory (void);
-G_GNUC_INTERNAL void Init_gst_message(void);
-G_GNUC_INTERNAL void Init_gst_mini_object(void);
-G_GNUC_INTERNAL void Init_gst_object (void);
-G_GNUC_INTERNAL void Init_gst_pad (void);
-G_GNUC_INTERNAL void Init_gst_pad_template(void);
-G_GNUC_INTERNAL void Init_gst_ghost_pad(void);
-G_GNUC_INTERNAL void Init_gst_parse (void);
-G_GNUC_INTERNAL void Init_gst_pipeline (void);
-G_GNUC_INTERNAL void Init_gst_plugin (void);
-G_GNUC_INTERNAL void Init_gst_plugin_feature (void);
-G_GNUC_INTERNAL void Init_gst_query(void);
-G_GNUC_INTERNAL void Init_gst_querytype (void);
-G_GNUC_INTERNAL void Init_gst_registry (void);
-G_GNUC_INTERNAL void Init_gst_registry_pool (void);
-G_GNUC_INTERNAL void Init_gst_scheduler (void);
-G_GNUC_INTERNAL void Init_gst_schedulerfactory (void);
-G_GNUC_INTERNAL void Init_gst_static_caps(void);
-G_GNUC_INTERNAL void Init_gst_static_pad_template(void);
-G_GNUC_INTERNAL void Init_gst_systemclock (void);
-G_GNUC_INTERNAL void Init_gst_tag (void);
-G_GNUC_INTERNAL void Init_gst_tag_setter (void);
-G_GNUC_INTERNAL void Init_gst_thread (void);
-G_GNUC_INTERNAL void Init_gst_typefindfactory (void);
-G_GNUC_INTERNAL void Init_gst_value(void);
-G_GNUC_INTERNAL void Init_gst_xml (void);
+G_GNUC_INTERNAL void Init_gst_bin (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_buffer(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_bus(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_caps (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_child_proxy(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_clock (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_clock_entry (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_element (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_elementfactory (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_event(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_format (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_seek(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_structure(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_index (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_indexentry (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_indexfactory (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_message(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_mini_object(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_object (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_pad (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_pad_template(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_ghost_pad(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_parse (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_pipeline (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_plugin (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_plugin_feature (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_query(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_querytype (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_registry (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_registry_pool (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_scheduler (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_schedulerfactory (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_static_caps(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_static_pad_template(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_systemclock (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_tag (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_tag_setter (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_thread (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_typefindfactory (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_value(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_xml (VALUE mGst);
 
 #if defined(HAVE_GST_OVERLAY)
-G_GNUC_INTERNAL void Init_gst_x_overlay (void);
+G_GNUC_INTERNAL void Init_gst_x_overlay (VALUE mGst);
 #endif
 
 #if defined(HAVE_MEDIA_INFO)
-G_GNUC_INTERNAL void Init_gst_mediatype (void);
+G_GNUC_INTERNAL void Init_gst_mediatype (VALUE mGst);
 #endif
 
 #ifdef HAVE_GST_PBUTILS
-G_GNUC_INTERNAL void Init_gst_install_plugins (void);
-G_GNUC_INTERNAL void Init_gst_install_plugins_return (void);
-G_GNUC_INTERNAL void Init_gst_install_plugins_context (void);
+G_GNUC_INTERNAL void Init_gst_install_plugins (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_install_plugins_return (VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_install_plugins_context (VALUE mGst);
 #endif
 
 /* Module: Gst
@@ -88,57 +88,57 @@ VALUE RG_TARGET_NAMESPACE;
 static void
 Init_gst_classes (void)
 {
-    Init_gst_bin ();
-    Init_gst_bus();
-    Init_gst_caps ();
-    Init_gst_child_proxy();
-    Init_gst_clock ();
-    Init_gst_clock_entry ();
-    Init_gst_element ();
-    Init_gst_elementfactory ();
-    Init_gst_seek();
-    Init_gst_format ();
-    Init_gst_structure();
-    Init_gst_index ();
-    Init_gst_indexentry ();
-    Init_gst_indexfactory ();
-    Init_gst_object ();
-    Init_gst_pad ();
-    Init_gst_pad_template();
-    Init_gst_ghost_pad();
-    Init_gst_parse ();
-    Init_gst_pipeline ();
-    Init_gst_plugin ();
-    Init_gst_plugin_feature();
-    Init_gst_querytype ();
-    Init_gst_registry ();
-    Init_gst_static_caps();
-    Init_gst_static_pad_template();
-    Init_gst_systemclock ();
-    Init_gst_tag ();
-    Init_gst_tag_setter ();
-    Init_gst_typefindfactory ();
-    Init_gst_value();
-    Init_gst_xml ();
+    Init_gst_bin (RG_TARGET_NAMESPACE);
+    Init_gst_bus(RG_TARGET_NAMESPACE);
+    Init_gst_caps (RG_TARGET_NAMESPACE);
+    Init_gst_child_proxy(RG_TARGET_NAMESPACE);
+    Init_gst_clock (RG_TARGET_NAMESPACE);
+    Init_gst_clock_entry (RG_TARGET_NAMESPACE);
+    Init_gst_element (RG_TARGET_NAMESPACE);
+    Init_gst_elementfactory (RG_TARGET_NAMESPACE);
+    Init_gst_seek(RG_TARGET_NAMESPACE);
+    Init_gst_format (RG_TARGET_NAMESPACE);
+    Init_gst_structure(RG_TARGET_NAMESPACE);
+    Init_gst_index (RG_TARGET_NAMESPACE);
+    Init_gst_indexentry (RG_TARGET_NAMESPACE);
+    Init_gst_indexfactory (RG_TARGET_NAMESPACE);
+    Init_gst_object (RG_TARGET_NAMESPACE);
+    Init_gst_pad (RG_TARGET_NAMESPACE);
+    Init_gst_pad_template(RG_TARGET_NAMESPACE);
+    Init_gst_ghost_pad(RG_TARGET_NAMESPACE);
+    Init_gst_parse (RG_TARGET_NAMESPACE);
+    Init_gst_pipeline (RG_TARGET_NAMESPACE);
+    Init_gst_plugin (RG_TARGET_NAMESPACE);
+    Init_gst_plugin_feature(RG_TARGET_NAMESPACE);
+    Init_gst_querytype (RG_TARGET_NAMESPACE);
+    Init_gst_registry (RG_TARGET_NAMESPACE);
+    Init_gst_static_caps(RG_TARGET_NAMESPACE);
+    Init_gst_static_pad_template(RG_TARGET_NAMESPACE);
+    Init_gst_systemclock (RG_TARGET_NAMESPACE);
+    Init_gst_tag (RG_TARGET_NAMESPACE);
+    Init_gst_tag_setter (RG_TARGET_NAMESPACE);
+    Init_gst_typefindfactory (RG_TARGET_NAMESPACE);
+    Init_gst_value(RG_TARGET_NAMESPACE);
+    Init_gst_xml (RG_TARGET_NAMESPACE);
 
-    Init_gst_mini_object();
-    Init_gst_buffer();
-    Init_gst_message();
-    Init_gst_query();
-    Init_gst_event();
+    Init_gst_mini_object(RG_TARGET_NAMESPACE);
+    Init_gst_buffer(RG_TARGET_NAMESPACE);
+    Init_gst_message(RG_TARGET_NAMESPACE);
+    Init_gst_query(RG_TARGET_NAMESPACE);
+    Init_gst_event(RG_TARGET_NAMESPACE);
 
 #if defined(HAVE_GST_OVERLAY)
-    Init_gst_x_overlay ();
+    Init_gst_x_overlay (RG_TARGET_NAMESPACE);
 #endif
 
 #ifdef HAVE_MEDIA_INFO
-    Init_gst_mediatype ();
+    Init_gst_mediatype (RG_TARGET_NAMESPACE);
 #endif
 
 #ifdef HAVE_GST_PBUTILS
-    Init_gst_install_plugins ();
-    Init_gst_install_plugins_return ();
-    Init_gst_install_plugins_context ();
+    Init_gst_install_plugins (RG_TARGET_NAMESPACE);
+    Init_gst_install_plugins_return (RG_TARGET_NAMESPACE);
+    Init_gst_install_plugins_context (RG_TARGET_NAMESPACE);
 #endif
 }
 

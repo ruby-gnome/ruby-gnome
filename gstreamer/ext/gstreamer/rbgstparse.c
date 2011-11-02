@@ -59,7 +59,7 @@ rg_m_launch (VALUE self, VALUE command)
 }
 
 void
-Init_gst_parse (void)
+Init_gst_parse (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under (mGst, "Parse"); 
     RG_DEF_MODFUNC(launch, 1);

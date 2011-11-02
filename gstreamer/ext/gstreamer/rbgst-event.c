@@ -313,7 +313,7 @@ rbgst_event_get_type(VALUE self)
 }
 
 void
-Init_gst_event (void)
+Init_gst_event (VALUE mGst)
 {
     table.type = GST_TYPE_EVENT;
     table.get_superclass = get_superclass;

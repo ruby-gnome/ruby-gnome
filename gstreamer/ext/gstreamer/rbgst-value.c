@@ -405,7 +405,7 @@ DEF_G_VALUE_CONVERTERS(fraction_range, GST_TYPE_FRACTION_RANGE, FractionRange)
 
 
 void
-Init_gst_value(void)
+Init_gst_value(VALUE mGst)
 {
     value_list_table.type = GST_TYPE_LIST;
     value_list_table.rvalue2gvalue = value_list_rvalue2gvalue;
