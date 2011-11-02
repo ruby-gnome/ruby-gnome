@@ -24,6 +24,62 @@
 
 #define RG_TARGET_NAMESPACE mGst
 
+G_GNUC_INTERNAL void Init_gst_bin (void);
+G_GNUC_INTERNAL void Init_gst_buffer(void);
+G_GNUC_INTERNAL void Init_gst_bus(void);
+G_GNUC_INTERNAL void Init_gst_caps (void);
+G_GNUC_INTERNAL void Init_gst_child_proxy(void);
+G_GNUC_INTERNAL void Init_gst_clock (void);
+G_GNUC_INTERNAL void Init_gst_clock_entry (void);
+G_GNUC_INTERNAL void Init_gst_element (void);
+G_GNUC_INTERNAL void Init_gst_elementfactory (void);
+G_GNUC_INTERNAL void Init_gst_event(void);
+G_GNUC_INTERNAL void Init_gst_format (void);
+G_GNUC_INTERNAL void Init_gst_seek(void);
+G_GNUC_INTERNAL void Init_gst_structure(void);
+G_GNUC_INTERNAL void Init_gst_index (void);
+G_GNUC_INTERNAL void Init_gst_indexentry (void);
+G_GNUC_INTERNAL void Init_gst_indexfactory (void);
+G_GNUC_INTERNAL void Init_gst_message(void);
+G_GNUC_INTERNAL void Init_gst_mini_object(void);
+G_GNUC_INTERNAL void Init_gst_object (void);
+G_GNUC_INTERNAL void Init_gst_pad (void);
+G_GNUC_INTERNAL void Init_gst_pad_template(void);
+G_GNUC_INTERNAL void Init_gst_ghost_pad(void);
+G_GNUC_INTERNAL void Init_gst_parse (void);
+G_GNUC_INTERNAL void Init_gst_pipeline (void);
+G_GNUC_INTERNAL void Init_gst_plugin (void);
+G_GNUC_INTERNAL void Init_gst_plugin_feature (void);
+G_GNUC_INTERNAL void Init_gst_query(void);
+G_GNUC_INTERNAL void Init_gst_querytype (void);
+G_GNUC_INTERNAL void Init_gst_registry (void);
+G_GNUC_INTERNAL void Init_gst_registry_pool (void);
+G_GNUC_INTERNAL void Init_gst_scheduler (void);
+G_GNUC_INTERNAL void Init_gst_schedulerfactory (void);
+G_GNUC_INTERNAL void Init_gst_static_caps(void);
+G_GNUC_INTERNAL void Init_gst_static_pad_template(void);
+G_GNUC_INTERNAL void Init_gst_systemclock (void);
+G_GNUC_INTERNAL void Init_gst_tag (void);
+G_GNUC_INTERNAL void Init_gst_tag_setter (void);
+G_GNUC_INTERNAL void Init_gst_thread (void);
+G_GNUC_INTERNAL void Init_gst_typefindfactory (void);
+G_GNUC_INTERNAL void Init_gst_value(void);
+G_GNUC_INTERNAL void Init_gst_xml (void);
+
+#if defined(HAVE_GST_OVERLAY)
+G_GNUC_INTERNAL void Init_gst_x_overlay (void);
+#endif
+
+#if defined(HAVE_MEDIA_INFO)
+G_GNUC_INTERNAL void Init_gst_mediatype (void);
+#endif
+
+#ifdef HAVE_GST_PBUTILS
+G_GNUC_INTERNAL void Init_gst_install_plugins (void);
+G_GNUC_INTERNAL void Init_gst_install_plugins_return (void);
+G_GNUC_INTERNAL void Init_gst_install_plugins_context (void);
+#endif
+
 /* Module: Gst
  * The GStreamer module.
  */
@@ -32,62 +88,6 @@ VALUE RG_TARGET_NAMESPACE;
 static void
 Init_gst_classes (void)
 {
-    G_GNUC_INTERNAL void Init_gst_bin (void);
-    G_GNUC_INTERNAL void Init_gst_buffer(void);
-    G_GNUC_INTERNAL void Init_gst_bus(void);
-    G_GNUC_INTERNAL void Init_gst_caps (void);
-    G_GNUC_INTERNAL void Init_gst_child_proxy(void);
-    G_GNUC_INTERNAL void Init_gst_clock (void);
-    G_GNUC_INTERNAL void Init_gst_clock_entry (void);
-    G_GNUC_INTERNAL void Init_gst_element (void);
-    G_GNUC_INTERNAL void Init_gst_elementfactory (void);
-    G_GNUC_INTERNAL void Init_gst_event(void);
-    G_GNUC_INTERNAL void Init_gst_format (void);
-    G_GNUC_INTERNAL void Init_gst_seek(void);
-    G_GNUC_INTERNAL void Init_gst_structure(void);
-    G_GNUC_INTERNAL void Init_gst_index (void);
-    G_GNUC_INTERNAL void Init_gst_indexentry (void);
-    G_GNUC_INTERNAL void Init_gst_indexfactory (void);
-    G_GNUC_INTERNAL void Init_gst_message(void);
-    G_GNUC_INTERNAL void Init_gst_mini_object(void);
-    G_GNUC_INTERNAL void Init_gst_object (void);
-    G_GNUC_INTERNAL void Init_gst_pad (void);
-    G_GNUC_INTERNAL void Init_gst_pad_template(void);
-    G_GNUC_INTERNAL void Init_gst_ghost_pad(void);
-    G_GNUC_INTERNAL void Init_gst_parse (void);
-    G_GNUC_INTERNAL void Init_gst_pipeline (void);
-    G_GNUC_INTERNAL void Init_gst_plugin (void);
-    G_GNUC_INTERNAL void Init_gst_plugin_feature (void);
-    G_GNUC_INTERNAL void Init_gst_query(void);
-    G_GNUC_INTERNAL void Init_gst_querytype (void);
-    G_GNUC_INTERNAL void Init_gst_registry (void);
-    G_GNUC_INTERNAL void Init_gst_registry_pool (void);
-    G_GNUC_INTERNAL void Init_gst_scheduler (void);
-    G_GNUC_INTERNAL void Init_gst_schedulerfactory (void);
-    G_GNUC_INTERNAL void Init_gst_static_caps(void);
-    G_GNUC_INTERNAL void Init_gst_static_pad_template(void);
-    G_GNUC_INTERNAL void Init_gst_systemclock (void);
-    G_GNUC_INTERNAL void Init_gst_tag (void);
-    G_GNUC_INTERNAL void Init_gst_tag_setter (void);
-    G_GNUC_INTERNAL void Init_gst_thread (void);
-    G_GNUC_INTERNAL void Init_gst_typefindfactory (void);
-    G_GNUC_INTERNAL void Init_gst_value(void);
-    G_GNUC_INTERNAL void Init_gst_xml (void);
-
-#if defined(HAVE_GST_OVERLAY)
-    G_GNUC_INTERNAL void Init_gst_x_overlay (void);
-#endif
-
-#if defined(HAVE_MEDIA_INFO)
-    G_GNUC_INTERNAL void Init_gst_mediatype (void);
-#endif
-
-#ifdef HAVE_GST_PBUTILS
-    G_GNUC_INTERNAL void Init_gst_install_plugins (void);
-    G_GNUC_INTERNAL void Init_gst_install_plugins_return (void);
-    G_GNUC_INTERNAL void Init_gst_install_plugins_context (void);
-#endif
-
     Init_gst_bin ();
     Init_gst_bus();
     Init_gst_caps ();
