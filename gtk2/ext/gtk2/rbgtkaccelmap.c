@@ -147,13 +147,13 @@ Init_gtk_accel_map(void)
 #else
     VALUE mAccelMap = rb_define_module_under(mGtk, "AccelMap");
 
-    rb_define_module_function(mAccelMap, "add_entry", accel_map_add_entry, 3);
-    rb_define_module_function(mAccelMap, "lookup_entry", accel_map_lookup_entry, 1);
-    rb_define_module_function(mAccelMap, "change_entry", accel_map_change_entry, 4);
-    rb_define_module_function(mAccelMap, "load", accel_map_load, 1);
-    rb_define_module_function(mAccelMap, "save", accel_map_save, 1);
-    rb_define_module_function(mAccelMap, "add_filter", accel_map_add_filter, 1);
-    rb_define_module_function(mAccelMap, "each", accel_map_foreach, 0);
-    rb_define_module_function(mAccelMap, "each_unfilterd", accel_map_foreach_unfilterd, 0);
+    rb_define_module_function(mAccelMap, "add_entry", rg_s_add_entry, 3);
+    rb_define_module_function(mAccelMap, "lookup_entry", rg_s_lookup_entry, 1);
+    rb_define_module_function(mAccelMap, "change_entry", rg_s_change_entry, 4);
+    rb_define_module_function(mAccelMap, "load", rg_s_load, 1);
+    rb_define_module_function(mAccelMap, "save", rg_s_save, 1);
+    rb_define_module_function(mAccelMap, "add_filter", rg_s_add_filter, 1);
+    rb_define_module_function(mAccelMap, "each", rg_s_each, 0);
+    rb_define_module_function(mAccelMap, "each_unfilterd", rg_s_each_unfilterd, 0);
 #endif
 }
