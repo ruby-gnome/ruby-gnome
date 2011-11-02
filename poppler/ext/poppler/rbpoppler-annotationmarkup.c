@@ -31,25 +31,25 @@ static ID id_new;
 static VALUE rb_cDate;
 
 static VALUE
-annot_markup_get_label(VALUE self)
+rg_label(VALUE self)
 {
     return CSTR2RVAL_FREE(poppler_annot_markup_get_label(SELF(self)));
 }
 
 static VALUE
-annot_markup_get_popup_is_open(VALUE self)
+rg_popup_is_open_p(VALUE self)
 {
     return CBOOL2RVAL(poppler_annot_markup_get_popup_is_open(SELF(self)));
 }
 
 static VALUE
-annot_markup_get_opacity(VALUE self)
+rg_opacity(VALUE self)
 {
     return rb_float_new(poppler_annot_markup_get_opacity(SELF(self)));
 }
 
 static VALUE
-annot_markup_get_date(VALUE self)
+rg_date(VALUE self)
 {
     GDate *date;
     VALUE rb_date;
@@ -64,19 +64,19 @@ annot_markup_get_date(VALUE self)
 }
 
 static VALUE
-annot_markup_get_subject(VALUE self)
+rg_subject(VALUE self)
 {
     return CSTR2RVAL_FREE(poppler_annot_markup_get_subject(SELF(self)));
 }
 
 static VALUE
-annot_markup_get_reply_to(VALUE self)
+rg_reply_to(VALUE self)
 {
     return REPLY_TYPE2RVAL(poppler_annot_markup_get_reply_to(SELF(self)));
 }
 
 static VALUE
-annot_markup_get_external_data(VALUE self)
+rg_external_data(VALUE self)
 {
     return DATA_TYPE2RVAL(poppler_annot_markup_get_external_data(SELF(self)));
 }
@@ -90,15 +90,11 @@ Init_poppler_annotationmarkup(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT_MARKUP,
                                     "AnnotationMarkup", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "label", annot_markup_get_label, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "popup_is_open?",
-                     annot_markup_get_popup_is_open, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "opacity", annot_markup_get_opacity, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "date", annot_markup_get_date, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "subject", annot_markup_get_subject, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "reply_to",
-                     annot_markup_get_reply_to, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "external_data",
-                     annot_markup_get_external_data, 0);
+    RG_DEF_METHOD(label, 0);
+    RG_DEF_METHOD_P(popup_is_open, 0);
+    RG_DEF_METHOD(opacity, 0);
+    RG_DEF_METHOD(date, 0);
+    RG_DEF_METHOD(subject, 0);
+    RG_DEF_METHOD(reply_to, 0);
+    RG_DEF_METHOD(external_data, 0);
 }
-

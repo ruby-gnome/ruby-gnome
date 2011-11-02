@@ -99,6 +99,13 @@ Init_poppler(void)
     Init_poppler_fontsiter(RG_TARGET_NAMESPACE);
     Init_poppler_psfile(RG_TARGET_NAMESPACE);
     Init_poppler_page(RG_TARGET_NAMESPACE);
+    Init_poppler_rectangle(RG_TARGET_NAMESPACE);
+    Init_poppler_color(RG_TARGET_NAMESPACE);
+    Init_poppler_linkmapping(RG_TARGET_NAMESPACE);
+    Init_poppler_pagetransition(RG_TARGET_NAMESPACE);
+    Init_poppler_imagemapping(RG_TARGET_NAMESPACE);
+    Init_poppler_formfieldmapping(RG_TARGET_NAMESPACE);
+    Init_poppler_annotationmapping(RG_TARGET_NAMESPACE);
     Init_poppler_attachment(RG_TARGET_NAMESPACE);
     Init_poppler_action(RG_TARGET_NAMESPACE);
     Init_poppler_annotation(RG_TARGET_NAMESPACE);

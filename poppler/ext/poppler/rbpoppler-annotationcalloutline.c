@@ -26,7 +26,7 @@
 #define RVAL2LINE(obj) ((PopplerAnnotCalloutLine *)RVAL2BOXED(obj, POPPLER_TYPE_ANNOT_CALLOUT_LINE))
 
 static VALUE
-annot_callout_line_initialize(VALUE self, VALUE multiline, VALUE x1, VALUE y1,
+rg_initialize(VALUE self, VALUE multiline, VALUE x1, VALUE y1,
                               VALUE x2, VALUE y2, VALUE x3, VALUE y3)
 {
     PopplerAnnotCalloutLine *line;
@@ -53,7 +53,7 @@ DEF_ACCESSOR(annot_callout_line, x3, RVAL2LINE, rb_float_new, NUM2DBL)
 DEF_ACCESSOR(annot_callout_line, y3, RVAL2LINE, rb_float_new, NUM2DBL)
 
 static VALUE
-annot_callout_line_to_a(VALUE self)
+rg_to_a(VALUE self)
 {
     PopplerAnnotCalloutLine *line;
 
@@ -69,7 +69,7 @@ annot_callout_line_to_a(VALUE self)
 }
 
 static VALUE
-annot_callout_line_inspect(VALUE self)
+rg_inspect(VALUE self)
 {
     VALUE inspected;
     gchar *info;
@@ -94,8 +94,7 @@ Init_poppler_annotationcalloutline(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT_CALLOUT_LINE,
                                          "AnnotationCalloutLine", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "initialize",
-                     annot_callout_line_initialize, 7);
+    RG_DEF_METHOD(initialize, 7);
 
     rb_define_method(RG_TARGET_NAMESPACE, "multiline?",
                      annot_callout_line_get_multiline, 0);
@@ -126,10 +125,8 @@ Init_poppler_annotationcalloutline(VALUE mPoppler)
     rb_define_method(RG_TARGET_NAMESPACE, "set_y3",
                      annot_callout_line_set_y3, 3);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "to_a", annot_callout_line_to_a, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "inspect",
-                     annot_callout_line_inspect, 0);
+    RG_DEF_METHOD(to_a, 0);
+    RG_DEF_METHOD(inspect, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
-

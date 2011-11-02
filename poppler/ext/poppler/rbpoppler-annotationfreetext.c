@@ -28,13 +28,13 @@
 #define QUADDING2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING))
 
 static VALUE
-annot_free_text_get_quadding(VALUE self)
+rg_quadding(VALUE self)
 {
     return QUADDING2RVAL(poppler_annot_free_text_get_quadding(SELF(self)));
 }
 
 static VALUE
-annot_free_text_get_callout_line(VALUE self)
+rg_callout_line(VALUE self)
 {
     return LINE2RVAL(poppler_annot_free_text_get_callout_line(SELF(self)));
 }
@@ -45,9 +45,6 @@ Init_poppler_annotationfreetext(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT_FREE_TEXT,
                                       "AnnotationFreeText", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "quadding",
-                     annot_free_text_get_quadding, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "callout_line",
-                     annot_free_text_get_callout_line, 0);
+    RG_DEF_METHOD(quadding, 0);
+    RG_DEF_METHOD(callout_line, 0);
 }
-

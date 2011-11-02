@@ -13,6 +13,13 @@ G_GNUC_INTERNAL void Init_poppler_fontinfo(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_fontsiter(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_psfile(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_page(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_rectangle(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_color(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_linkmapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_pagetransition(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_imagemapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_formfieldmapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotationmapping(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_attachment(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_action(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_annotation(VALUE mPoppler);
@@ -24,6 +31,11 @@ G_GNUC_INTERNAL void Init_poppler_form_field(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_button_field(VALUE mPoppler, VALUE cFormField);
 G_GNUC_INTERNAL void Init_poppler_text_field(VALUE mPoppler, VALUE cFormField);
 G_GNUC_INTERNAL void Init_poppler_choice_field(VALUE mPoppler, VALUE cFormField);
+
+G_GNUC_INTERNAL void rectangle_set(PopplerRectangle *rect, VALUE rb_rect);
+
+#define RECT_ENTITY2RVAL(rect) POPPLER_RECT2RVAL(&(rect))
+#define RECT_ENTITY_SET(rect, rb_rect) rectangle_set(&(rect), rb_rect)
 
 #define DEF_READER(prefix, name, member, self_to_c, member_to_rb)       \
 static VALUE                                                            \

@@ -28,37 +28,37 @@
 #define FLAG2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FLAG))
 
 static VALUE
-annot_get_annot_type(VALUE self)
+rg_type(VALUE self)
 {
     return TYPE2RVAL(poppler_annot_get_annot_type(SELF(self)));
 }
 
 static VALUE
-annot_get_contents(VALUE self)
+rg_contents(VALUE self)
 {
     return CSTR2RVAL_FREE(poppler_annot_get_contents(SELF(self)));
 }
 
 static VALUE
-annot_get_name(VALUE self)
+rg_name(VALUE self)
 {
     return CSTR2RVAL_FREE(poppler_annot_get_name(SELF(self)));
 }
 
 static VALUE
-annot_get_modified(VALUE self)
+rg_modified(VALUE self)
 {
     return CSTR2RVAL_FREE(poppler_annot_get_modified(SELF(self)));
 }
 
 static VALUE
-annot_get_flags(VALUE self)
+rg_flags(VALUE self)
 {
     return FLAG2RVAL(poppler_annot_get_flags(SELF(self)));
 }
 
 static VALUE
-annot_get_color(VALUE self)
+rg_color(VALUE self)
 {
     return POPPLER_COLOR2RVAL_FREE(poppler_annot_get_color(SELF(self)));
 }
@@ -68,10 +68,10 @@ Init_poppler_annotation(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT, "Annotation", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "type", annot_get_annot_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "contents", annot_get_contents, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "name", annot_get_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "modified", annot_get_modified, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "flags", annot_get_flags, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "color", annot_get_color, 0);
+    RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(contents, 0);
+    RG_DEF_METHOD(name, 0);
+    RG_DEF_METHOD(modified, 0);
+    RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(color, 0);
 }

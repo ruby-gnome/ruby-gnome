@@ -28,13 +28,13 @@
 #define TEXT_STATE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_STATE))
 
 static VALUE
-annot_text_get_is_open(VALUE self)
+rg_open_p(VALUE self)
 {
     return CBOOL2RVAL(poppler_annot_text_get_is_open(SELF(self)));
 }
 
 static VALUE
-annot_text_get_icon(VALUE self)
+rg_icon(VALUE self)
 {
 #if POPPLER_CHECK_VERSION(0, 9, 0)
     return CSTR2RVAL_FREE(poppler_annot_text_get_icon(SELF(self)));
@@ -44,7 +44,7 @@ annot_text_get_icon(VALUE self)
 }
 
 static VALUE
-annot_text_get_state(VALUE self)
+rg_state(VALUE self)
 {
     return TEXT_STATE2RVAL(poppler_annot_text_get_state(SELF(self)));
 }
@@ -55,8 +55,7 @@ Init_poppler_annotationtext(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT_TEXT,
                                   "AnnotationText", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "open?", annot_text_get_is_open, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "icon", annot_text_get_icon, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "state", annot_text_get_state, 0);
+    RG_DEF_METHOD_P(open, 0);
+    RG_DEF_METHOD(icon, 0);
+    RG_DEF_METHOD(state, 0);
 }
-
