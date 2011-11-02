@@ -50,20 +50,20 @@ void rb_goo_canvas_initialize_item_object(VALUE obj, GooCanvasItem *item);
 GooCanvasBounds *ruby_to_goo_canvas_bounds(VALUE rb_bounds, GooCanvasBounds *dest_bounds);
 
 void Init_goocanvas(void); /* Goo::Canvas */
-void Init_goocanvasitem(void); /* Goo::CanvasItem */
-void Init_goocanvastext(void); /* Goo::CanvasText */
-void Init_goocanvasrect(void); /* Goo::CanvasRect */
-void Init_goocanvasellipse(void); /* Goo::CanvasEllipse */
-void Init_goocanvaspolyline(void); /* Goo::CanvasPolyline */
-void Init_goocanvaspoints(void); /* Goo::CanvasPoints */
-void Init_goocanvasimage(void); /* Goo::CanvasImage */
-void Init_goocanvastable(void); /* Goo::CanvasTable */
-void Init_goocanvaswidget(void); /* Goo::CanvasWidget */
-void Init_goocanvasstyle(void); /* Goo::CanvasStyle */
-void Init_goocanvasgroup(void); /* Goo::CanvasGroup */
-void Init_goo(void);
-void Init_goocairopattern(void);
-void Init_goocairomatrix(void);
+G_GNUC_INTERNAL void Init_goocanvasitem(void); /* Goo::CanvasItem */
+G_GNUC_INTERNAL void Init_goocanvastext(void); /* Goo::CanvasText */
+G_GNUC_INTERNAL void Init_goocanvasrect(void); /* Goo::CanvasRect */
+G_GNUC_INTERNAL void Init_goocanvasellipse(void); /* Goo::CanvasEllipse */
+G_GNUC_INTERNAL void Init_goocanvaspolyline(void); /* Goo::CanvasPolyline */
+G_GNUC_INTERNAL void Init_goocanvaspoints(void); /* Goo::CanvasPoints */
+G_GNUC_INTERNAL void Init_goocanvasimage(void); /* Goo::CanvasImage */
+G_GNUC_INTERNAL void Init_goocanvastable(void); /* Goo::CanvasTable */
+G_GNUC_INTERNAL void Init_goocanvaswidget(void); /* Goo::CanvasWidget */
+G_GNUC_INTERNAL void Init_goocanvasstyle(void); /* Goo::CanvasStyle */
+G_GNUC_INTERNAL void Init_goocanvasgroup(void); /* Goo::CanvasGroup */
+G_GNUC_INTERNAL void Init_goo(void);
+G_GNUC_INTERNAL void Init_goocairopattern(void);
+G_GNUC_INTERNAL void Init_goocairomatrix(void);
 
 extern VALUE mGoo;
 

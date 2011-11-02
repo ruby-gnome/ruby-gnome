@@ -7,23 +7,23 @@
 #  include <rbgdk.h>
 #endif
 
-extern void Init_poppler_document(VALUE mPoppler);
-extern void Init_poppler_indexiter(VALUE mPoppler);
-extern void Init_poppler_fontinfo(VALUE mPoppler);
-extern void Init_poppler_fontsiter(VALUE mPoppler);
-extern void Init_poppler_psfile(VALUE mPoppler);
-extern void Init_poppler_page(VALUE mPoppler);
-extern void Init_poppler_attachment(VALUE mPoppler);
-extern void Init_poppler_action(VALUE mPoppler);
-extern void Init_poppler_annotation(VALUE mPoppler);
-extern void Init_poppler_annotationmarkup(VALUE mPoppler);
-extern void Init_poppler_annotationtext(VALUE mPoppler);
-extern void Init_poppler_annotationfreetext(VALUE mPoppler);
-extern void Init_poppler_annotationcalloutline(VALUE mPoppler);
-extern void Init_poppler_form_field(VALUE mPoppler);
-extern void Init_poppler_button_field(VALUE mPoppler, VALUE cFormField);
-extern void Init_poppler_text_field(VALUE mPoppler, VALUE cFormField);
-extern void Init_poppler_choice_field(VALUE mPoppler, VALUE cFormField);
+G_GNUC_INTERNAL void Init_poppler_document(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_indexiter(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_fontinfo(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_fontsiter(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_psfile(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_page(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_attachment(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_action(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotation(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotationmarkup(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotationtext(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotationfreetext(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotationcalloutline(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_form_field(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_button_field(VALUE mPoppler, VALUE cFormField);
+G_GNUC_INTERNAL void Init_poppler_text_field(VALUE mPoppler, VALUE cFormField);
+G_GNUC_INTERNAL void Init_poppler_choice_field(VALUE mPoppler, VALUE cFormField);
 
 #define DEF_READER(prefix, name, member, self_to_c, member_to_rb)       \
 static VALUE                                                            \
