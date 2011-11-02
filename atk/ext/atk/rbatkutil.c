@@ -98,7 +98,7 @@ rg_s_toolkit_version(G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_atk_util(void)
+Init_atk_util(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_UTIL, "Util", mAtk);
 

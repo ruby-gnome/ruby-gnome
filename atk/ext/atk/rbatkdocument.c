@@ -81,7 +81,7 @@ rg_locale(VALUE self)
 #endif
 
 void
-Init_atk_document(void)
+Init_atk_document(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_DOCUMENT, "Document", mAtk);
 

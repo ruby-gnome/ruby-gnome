@@ -57,7 +57,7 @@ rg_image_size(VALUE self)
 }
 
 void
-Init_atk_image(void)
+Init_atk_image(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_IMAGE, "Image", mAtk);
 

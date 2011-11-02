@@ -31,7 +31,7 @@ rg_ref_accessible(VALUE self)
 }
 
 void
-Init_atk_implementor(void)
+Init_atk_implementor(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_IMPLEMENTOR, "Implementor", mAtk);
     RG_DEF_METHOD(ref_accessible, 0);

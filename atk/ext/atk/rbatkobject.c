@@ -128,7 +128,7 @@ rg_remove_relationship(VALUE self, VALUE relationship, VALUE target)
 #endif
 
 void
-Init_atk_object(void)
+Init_atk_object(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_OBJECT, "Object", mAtk);
 

@@ -130,7 +130,7 @@ rg_to_a(VALUE self)
 #endif
 
 void
-Init_atk_text_rectangle(void)
+Init_atk_text_rectangle(VALUE mAtk)
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_RECTANGLE, "TextRectangle", mAtk);

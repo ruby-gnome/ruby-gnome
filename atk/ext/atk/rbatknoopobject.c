@@ -32,7 +32,7 @@ rg_initialize(VALUE self, VALUE gobj)
 }
 
 void
-Init_atk_noopobject(void)
+Init_atk_noopobject(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_NO_OP_OBJECT, "NoOpObject", mAtk);
 

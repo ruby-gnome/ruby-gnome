@@ -47,7 +47,7 @@ rg_get_stream(VALUE self, VALUE mime_type)
 }
 
 void
-Init_atk_streamable_content(void)
+Init_atk_streamable_content(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_STREAMABLE_CONTENT, "StreamableContent", mAtk);
 
