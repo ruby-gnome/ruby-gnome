@@ -71,7 +71,7 @@ rg_to_a(VALUE self)
 }
 
 void 
-Init_gtk_border(void)
+Init_gtk_border(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BORDER, "Border", mGtk);
 

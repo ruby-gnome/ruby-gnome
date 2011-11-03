@@ -100,7 +100,7 @@ rg_entry(VALUE self)
 #endif
 
 void 
-Init_gtk_combo(void)
+Init_gtk_combo(VALUE mGtk)
 {
 #ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);

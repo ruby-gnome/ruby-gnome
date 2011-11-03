@@ -267,7 +267,7 @@ rg_find_feature(VALUE self, VALUE name, VALUE type)
 }
 
 void
-Init_gst_registry (void)
+Init_gst_registry (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_REGISTRY, "Registry", mGst); 
 

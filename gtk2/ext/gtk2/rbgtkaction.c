@@ -189,7 +189,7 @@ action_mark(void *p)
 #endif
 
 void
-Init_gtk_action(void)
+Init_gtk_action(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE;

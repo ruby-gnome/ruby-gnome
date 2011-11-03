@@ -246,7 +246,7 @@ G_CONST_RETURN gchar* gdk_x11_get_xatom_name_for_display
 */
 #endif
 void
-Init_gtk_gdk_x11(void)
+Init_gtk_gdk_x11(VALUE mGdk)
 {
 #ifdef GDK_WINDOWING_X11
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "X11");

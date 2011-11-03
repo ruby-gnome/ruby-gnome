@@ -28,7 +28,7 @@
  * constants
  */
 void 
-Init_gtk_const(void)
+Init_gtk_const(VALUE mGtk)
 {
     /*
      * version information

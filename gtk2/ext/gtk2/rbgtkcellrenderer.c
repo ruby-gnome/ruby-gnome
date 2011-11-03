@@ -110,7 +110,7 @@ rg_set_fixed_size(VALUE self, VALUE width, VALUE height)
 }
 
 void
-Init_gtk_cellrenderer(void)
+Init_gtk_cellrenderer(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
 

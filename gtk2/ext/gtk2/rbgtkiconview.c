@@ -239,7 +239,7 @@ rg_unset_model_drag_source(VALUE self)
 #endif
 
 void
-Init_gtk_iconview(void)
+Init_gtk_iconview(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_VIEW, "IconView", mGtk);

@@ -60,7 +60,7 @@ rg_set_name(VALUE self, VALUE name)
 }
 
 void
-Init_gst_object(void)
+Init_gst_object(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

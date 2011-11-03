@@ -151,7 +151,7 @@ rg_alpha(VALUE self)
 #endif
 
 void
-Init_atk_component(void)
+Init_atk_component(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_COMPONENT, "Component", mAtk);
 /*

@@ -187,7 +187,7 @@ rg_writable_bang(VALUE self)
 }
 
 void
-Init_gst_mini_object(void)
+Init_gst_mini_object(VALUE mGst)
 {
     table.type = GST_TYPE_MINI_OBJECT;
     table.get_superclass = rbgst_mini_object_get_superclass;

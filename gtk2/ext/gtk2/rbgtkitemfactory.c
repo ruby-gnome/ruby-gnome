@@ -261,7 +261,7 @@ void        gtk_item_factory_set_translate_func
 */
 
 void 
-Init_gtk_itemfactory(void)
+Init_gtk_itemfactory(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ITEM_FACTORY, "ItemFactory", mGtk);
 

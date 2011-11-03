@@ -109,7 +109,7 @@ rg_plugin_name(VALUE self)
 }
 
 void
-Init_gst_plugin_feature (void)
+Init_gst_plugin_feature (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

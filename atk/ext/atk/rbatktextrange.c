@@ -79,7 +79,7 @@ rg_content(VALUE self)
 #endif
 
 void
-Init_atk_text_range(void)
+Init_atk_text_range(VALUE mAtk)
 {
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_TEXT_RANGE, "TextRange",  mAtk);

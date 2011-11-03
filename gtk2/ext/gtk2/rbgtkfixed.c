@@ -64,7 +64,7 @@ rg_set_has_window(VALUE self, VALUE has_window)
 }
 
 void 
-Init_gtk_fixed(void)
+Init_gtk_fixed(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FIXED, "Fixed", mGtk);
 

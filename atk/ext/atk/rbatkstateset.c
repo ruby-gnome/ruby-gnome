@@ -159,7 +159,7 @@ rg_xor(VALUE self, VALUE compare_set)
 }
 
 void
-Init_atk_state_set(void)
+Init_atk_state_set(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_STATE_SET, "StateSet", mAtk);
 

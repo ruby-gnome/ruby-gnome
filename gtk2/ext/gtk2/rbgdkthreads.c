@@ -64,7 +64,7 @@ rg_m_synchronize(G_GNUC_UNUSED VALUE self)
 #endif
 
 void
-Init_gtk_gdk_threads(void)
+Init_gtk_gdk_threads(VALUE mGdk)
 {
 #ifdef   G_THREADS_ENABLED
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Threads");

@@ -89,7 +89,7 @@ rg_add_target(VALUE self, VALUE obj)
 #endif
 
 void
-Init_atk_relation(void)
+Init_atk_relation(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
     RG_DEF_SMETHOD(type_register, 1);

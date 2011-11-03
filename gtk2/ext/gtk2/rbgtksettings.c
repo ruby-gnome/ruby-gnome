@@ -210,7 +210,7 @@ void        gtk_settings_set_double_property
 */
 
 void 
-Init_gtk_settings(void)
+Init_gtk_settings(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SETTINGS, "Settings", mGtk);
 

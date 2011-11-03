@@ -103,7 +103,7 @@ rg_s_set_translate_func(VALUE klass, VALUE domain)
 #endif
 
 void
-Init_gtk_stock(void)
+Init_gtk_stock(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Stock");
 

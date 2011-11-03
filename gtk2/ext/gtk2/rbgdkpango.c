@@ -141,7 +141,7 @@ gdkpango_attr_emboss_color_value(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_pango(void)
+Init_gtk_gdk_pango(VALUE mGdk)
 {
     VALUE klass;
     PangoAttribute* tmpattr;

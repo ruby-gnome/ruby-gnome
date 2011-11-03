@@ -145,7 +145,7 @@ rg_operator_is_equal (VALUE self, VALUE other_format)
 }
 
 void
-Init_gst_format (void)
+Init_gst_format (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_FORMAT2, "Format", mGst);
 

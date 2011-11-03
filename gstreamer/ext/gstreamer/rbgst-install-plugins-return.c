@@ -37,7 +37,7 @@ rg_name(VALUE self)
 }
 
 void
-Init_gst_install_plugins_return(void)
+Init_gst_install_plugins_return(VALUE mGst)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_INSTALL_PLUGINS_RETURN,
                                               "InstallPluginsReturn", mGst);

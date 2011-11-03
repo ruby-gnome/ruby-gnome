@@ -129,7 +129,7 @@ rg_s_each(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gtk_printer(void)
+Init_gtk_printer(VALUE mGtk)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);

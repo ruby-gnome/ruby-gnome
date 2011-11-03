@@ -220,7 +220,7 @@ rg_get_response(VALUE self, VALUE widget)
 #endif
 
 void 
-Init_gtk_dialog(void)
+Init_gtk_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
 

@@ -25,7 +25,7 @@
 #include "global.h"
 
 void 
-Init_gtk_progress(void)
+Init_gtk_progress(VALUE mGtk)
 {
     G_DEF_CLASS(GTK_TYPE_PROGRESS, "Progress", mGtk);
 }

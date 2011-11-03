@@ -122,7 +122,7 @@ rg_selection_bounds(VALUE self)
 }
 
 void 
-Init_gtk_label(void)
+Init_gtk_label(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);
 

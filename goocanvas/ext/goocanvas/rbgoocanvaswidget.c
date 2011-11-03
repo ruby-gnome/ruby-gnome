@@ -41,7 +41,7 @@ rg_initialize(VALUE self, VALUE parent, VALUE widget,
 }
 
 void
-Init_goocanvaswidget(void)
+Init_goocanvaswidget(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

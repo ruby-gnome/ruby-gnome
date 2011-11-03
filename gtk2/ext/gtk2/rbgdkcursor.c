@@ -101,7 +101,7 @@ rg_image(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_cursor(void)
+Init_gtk_gdk_cursor(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 

@@ -13,35 +13,35 @@
 
 G_BEGIN_DECLS
 
-G_GNUC_INTERNAL void Init_atk_action(void);
-G_GNUC_INTERNAL void Init_atk_component(void);
-G_GNUC_INTERNAL void Init_atk_document(void);
-G_GNUC_INTERNAL void Init_atk_editabletext(void);
-G_GNUC_INTERNAL void Init_atk_gobjectaccessible(void);
-G_GNUC_INTERNAL void Init_atk_hyperlink(void);
-G_GNUC_INTERNAL void Init_atk_hypertext(void);
-G_GNUC_INTERNAL void Init_atk_image(void);
-G_GNUC_INTERNAL void Init_atk_implementor(void);
-G_GNUC_INTERNAL void Init_atk_noopobject(void);
-G_GNUC_INTERNAL void Init_atk_noopobjectfactory(void);
-G_GNUC_INTERNAL void Init_atk_object(void);
+G_GNUC_INTERNAL void Init_atk_action(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_component(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_document(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_editabletext(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_gobjectaccessible(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_hyperlink(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_hypertext(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_image(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_implementor(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_noopobject(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_noopobjectfactory(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_object(VALUE mAtk);
 G_GNUC_INTERNAL void Init_atk_object_role(VALUE cObject);
-G_GNUC_INTERNAL void Init_atk_objectfactory(void);
-G_GNUC_INTERNAL void Init_atk_registry(void);
-G_GNUC_INTERNAL void Init_atk_relation(void);
+G_GNUC_INTERNAL void Init_atk_objectfactory(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_registry(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_relation(VALUE mAtk);
 G_GNUC_INTERNAL void Init_atk_relation_type(VALUE cRelation);
-G_GNUC_INTERNAL void Init_atk_relation_set(void);
-G_GNUC_INTERNAL void Init_atk_selection(void);
-G_GNUC_INTERNAL void Init_atk_state(void);
-G_GNUC_INTERNAL void Init_atk_state_set(void);
-G_GNUC_INTERNAL void Init_atk_streamable_content(void);
-G_GNUC_INTERNAL void Init_atk_table(void);
-G_GNUC_INTERNAL void Init_atk_text(void);
+G_GNUC_INTERNAL void Init_atk_relation_set(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_selection(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_state(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_state_set(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_streamable_content(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_table(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_text(VALUE mAtk);
 G_GNUC_INTERNAL void Init_atk_text_attribute(VALUE mText);
-G_GNUC_INTERNAL void Init_atk_text_range(void);
-G_GNUC_INTERNAL void Init_atk_text_rectangle(void);
-G_GNUC_INTERNAL void Init_atk_util(void);
-G_GNUC_INTERNAL void Init_atk_value(void);
+G_GNUC_INTERNAL void Init_atk_text_range(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_text_rectangle(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_util(VALUE mAtk);
+G_GNUC_INTERNAL void Init_atk_value(VALUE mAtk);
 
 G_END_DECLS
 

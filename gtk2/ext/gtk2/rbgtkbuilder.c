@@ -140,7 +140,7 @@ rg_get_type(VALUE self, VALUE name)
 #endif
 
 void
-Init_gtk_builder(void)
+Init_gtk_builder(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2, 12, 0)
     VALUE RG_TARGET_NAMESPACE;

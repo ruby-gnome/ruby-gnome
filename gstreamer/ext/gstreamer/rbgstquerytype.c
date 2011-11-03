@@ -145,7 +145,7 @@ rg_operator_is_equal (VALUE self, VALUE other_query)
 }
 
 void
-Init_gst_querytype (void)
+Init_gst_querytype (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_QUERY_TYPE2, "QueryType", mGst);
 

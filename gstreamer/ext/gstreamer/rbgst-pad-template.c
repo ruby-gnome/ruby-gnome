@@ -105,7 +105,7 @@ rg_has_caps_p(VALUE self)
 }
 
 void
-Init_gst_pad_template (void)
+Init_gst_pad_template (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

@@ -338,7 +338,7 @@ rg_screen(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_gc(void)
+Init_gtk_gdk_gc(VALUE mGdk)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_GC, "GC", mGdk);
     gdkDrawable = rb_const_get(mGdk, rb_intern("Drawable"));

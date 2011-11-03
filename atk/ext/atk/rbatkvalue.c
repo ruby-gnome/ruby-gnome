@@ -67,7 +67,7 @@ rg_set_current(VALUE self, VALUE value)
 }
 
 void
-Init_atk_value(void)
+Init_atk_value(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_VALUE, "Value", mAtk);
 

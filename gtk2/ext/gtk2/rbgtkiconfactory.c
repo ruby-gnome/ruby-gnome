@@ -72,7 +72,7 @@ rg_remove_default(VALUE self)
 }
 
 void
-Init_gtk_icon_factory(void)
+Init_gtk_icon_factory(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_FACTORY, "IconFactory", mGtk);
 

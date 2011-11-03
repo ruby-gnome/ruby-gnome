@@ -163,7 +163,7 @@ rg_paste_text(VALUE self, VALUE position)
 }
 
 void
-Init_atk_editabletext(void)
+Init_atk_editabletext(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_EDITABLE_TEXT, "EditableText", mAtk);
 

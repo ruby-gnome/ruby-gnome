@@ -170,7 +170,7 @@ rg_set_mark_category_background(VALUE self, VALUE category, VALUE color)
 # endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
 
 void
-Init_gtk_sourceview ()
+Init_gtk_sourceview (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_VIEW, "SourceView", mGtk);
 

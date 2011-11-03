@@ -77,7 +77,7 @@ rg_prev(int argc, VALUE *argv, VALUE self)
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
 void
-Init_gtk_sourcemark ()
+Init_gtk_sourcemark (VALUE mGtk)
 {
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_MARK, "SourceMark", mGtk);

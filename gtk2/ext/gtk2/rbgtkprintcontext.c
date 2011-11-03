@@ -101,7 +101,7 @@ rg_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
 #endif
 
 void
-Init_gtk_print_context(void)
+Init_gtk_print_context(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,

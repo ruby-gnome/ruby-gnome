@@ -74,7 +74,7 @@ rg_num_points(VALUE self)
 }
 
 void
-Init_goocanvaspoints(void)
+Init_goocanvaspoints(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

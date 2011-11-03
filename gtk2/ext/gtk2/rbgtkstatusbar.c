@@ -65,7 +65,7 @@ rg_remove(VALUE self, VALUE cid, VALUE mid)
 }
 
 void 
-Init_gtk_statusbar(void)
+Init_gtk_statusbar(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUSBAR, "Statusbar", mGtk);
 

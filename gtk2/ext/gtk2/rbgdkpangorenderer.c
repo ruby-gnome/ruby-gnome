@@ -130,7 +130,7 @@ prenderer_set_override_color(G_GNUC_UNUSED VALUE self,
 #endif
 
 void
-Init_gtk_gdk_pangorenderer(void)
+Init_gtk_gdk_pangorenderer(VALUE mGdk)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);

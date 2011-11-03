@@ -34,7 +34,7 @@ rg_initialize(VALUE self, VALUE parent, VALUE close_path)
 }
 
 void
-Init_goocanvaspolyline(void)
+Init_goocanvaspolyline(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

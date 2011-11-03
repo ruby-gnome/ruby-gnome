@@ -324,7 +324,7 @@ rg_ensure_highlight(VALUE self, VALUE start, VALUE end)
 }
 
 void
-Init_gtk_sourcebuffer ()
+Init_gtk_sourcebuffer (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =
         G_DEF_CLASS (GTK_TYPE_SOURCE_BUFFER, "SourceBuffer", mGtk);

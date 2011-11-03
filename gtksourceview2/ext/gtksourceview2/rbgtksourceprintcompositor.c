@@ -153,7 +153,7 @@ rg_draw_page(VALUE self, VALUE context, VALUE page_nr)
 #endif /* HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE */
 
 void
-Init_gtk_sourceprintcompositor()
+Init_gtk_sourceprintcompositor(VALUE mGtk)
 {
 #ifdef HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOURCE_PRINT_COMPOSITOR, "SourcePrintCompositor", mGtk);

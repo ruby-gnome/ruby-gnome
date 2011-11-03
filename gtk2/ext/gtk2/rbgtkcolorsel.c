@@ -193,7 +193,7 @@ void        (*GtkColorSelectionChangePaletteWithScreenFunc)
 */
 
 void 
-Init_gtk_color_selection(void)
+Init_gtk_color_selection(VALUE mGtk)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);
 

@@ -62,7 +62,7 @@ rg_buffer(VALUE self)
 }
 
 void 
-Init_gtk_textmark(void)
+Init_gtk_textmark(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
 #if GTK_CHECK_VERSION(2,12,0)

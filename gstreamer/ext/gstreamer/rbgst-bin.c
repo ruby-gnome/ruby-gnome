@@ -405,7 +405,7 @@ rg_to_dot_file_with_ts(VALUE self, VALUE details, VALUE filename)
 #endif
 
 void
-Init_gst_bin (void)
+Init_gst_bin (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

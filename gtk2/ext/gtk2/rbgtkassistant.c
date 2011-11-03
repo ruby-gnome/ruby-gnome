@@ -188,7 +188,7 @@ rg_commit(VALUE self)
 #endif
 
 void
-Init_gtk_assistant(void)
+Init_gtk_assistant(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ASSISTANT, "Assistant", mGtk);

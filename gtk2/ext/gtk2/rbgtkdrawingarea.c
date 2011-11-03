@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_drawing_area(void)
+Init_gtk_drawing_area(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_DRAWING_AREA, "DrawingArea", mGtk);
 

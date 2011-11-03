@@ -401,7 +401,7 @@ rg_move_after(VALUE self, VALUE iter, VALUE position)
 #endif
 
 void
-Init_gtk_list_store(void)
+Init_gtk_list_store(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LIST_STORE, "ListStore", mGtk);
 

@@ -83,7 +83,7 @@ rg_add_relation(VALUE self, VALUE relationship, VALUE obj)
 #endif
 
 void
-Init_atk_relation_set(void)
+Init_atk_relation_set(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION_SET, "RelationSet", mAtk);
 

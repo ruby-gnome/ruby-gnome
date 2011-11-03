@@ -99,7 +99,7 @@ rg_toggle_size_allocate(VALUE self, VALUE allocation)
 }
 
 void 
-Init_gtk_menu_item(void)
+Init_gtk_menu_item(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_ITEM, "MenuItem", mGtk);
 

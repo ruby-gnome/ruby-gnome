@@ -92,7 +92,7 @@ rg_s_get_info(G_GNUC_UNUSED VALUE self, VALUE window)
 #endif
 
 void 
-Init_gtk_tooltips(void)
+Init_gtk_tooltips(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLTIPS, "Tooltips", mGtk);
 

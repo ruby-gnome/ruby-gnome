@@ -42,7 +42,7 @@ rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 }
 
 void
-Init_atk_state(void)
+Init_atk_state(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_STATE_TYPE, "State", mAtk);
     RG_DEF_SMETHOD(type_register, 1);

@@ -73,7 +73,7 @@ rg_select_all_selection(VALUE self)
 }
 
 void
-Init_atk_selection(void)
+Init_atk_selection(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_SELECTION, "Selection", mAtk);
 

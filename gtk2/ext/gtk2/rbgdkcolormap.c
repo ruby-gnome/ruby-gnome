@@ -122,7 +122,7 @@ rg_colors(VALUE self)
 }
 
 void
-Init_gtk_gdk_colormap(void)
+Init_gtk_gdk_colormap(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLORMAP, "Colormap", mGdk);
 

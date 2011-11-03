@@ -69,7 +69,7 @@ rg_set_description(VALUE self, VALUE i, VALUE desc)
 }
 
 void
-Init_atk_action(void)
+Init_atk_action(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_ACTION, "Action", mAtk);
 

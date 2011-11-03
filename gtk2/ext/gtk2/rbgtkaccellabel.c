@@ -45,7 +45,7 @@ rg_refetch(VALUE self)
 }
 
 void
-Init_gtk_accel_label(void)
+Init_gtk_accel_label(VALUE mGtk)
 {
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_LABEL, "AccelLabel", mGtk);
 

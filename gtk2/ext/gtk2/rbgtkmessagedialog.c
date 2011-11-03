@@ -73,7 +73,7 @@ void                gtk_message_dialog_format_secondary_markup
 */
 
 void 
-Init_gtk_message_dialog(void)
+Init_gtk_message_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
 

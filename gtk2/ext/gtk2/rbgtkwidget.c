@@ -1053,7 +1053,7 @@ widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
 }
 
 void 
-Init_gtk_widget(void)
+Init_gtk_widget(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
 

@@ -118,7 +118,7 @@ rg_clear(VALUE self)
 #endif
 
 void 
-Init_gtk_image(void)
+Init_gtk_image(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     RG_DEF_METHOD(initialize, -1);

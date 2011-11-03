@@ -96,7 +96,7 @@ rg_iter_is_valid_p(VALUE self, VALUE iter)
 #endif
 
 void 
-Init_gtk_tmodelsort(void)
+Init_gtk_tmodelsort(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_SORT, "TreeModelSort", mGtk);
 

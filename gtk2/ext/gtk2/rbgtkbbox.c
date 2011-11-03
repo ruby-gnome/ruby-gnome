@@ -44,7 +44,7 @@ rg_get_child_secondary(VALUE self, VALUE child)
 #endif
 
 void 
-Init_gtk_button_box(void)
+Init_gtk_button_box(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
     RG_DEF_METHOD(set_child_secondary, 2);

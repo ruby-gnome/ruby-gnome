@@ -174,7 +174,7 @@ rg_guess_language(VALUE self, VALUE filename, VALUE content_type)
 #endif /* HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE */
 
 void
-Init_gtk_sourcelanguagemanager ()
+Init_gtk_sourcelanguagemanager (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =
         G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE_MANAGER,

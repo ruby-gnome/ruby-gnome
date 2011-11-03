@@ -53,7 +53,7 @@ rg_s_default_registry(G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_atk_registry(void)
+Init_atk_registry(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_REGISTRY, "Registry", mAtk);
     RG_DEF_METHOD(set_factory_type, 2);

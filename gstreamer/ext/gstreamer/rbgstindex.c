@@ -279,7 +279,7 @@ rg_get_assoc_entry (VALUE self, VALUE id, VALUE method, VALUE flags,
 }
 
 void
-Init_gst_index (void)
+Init_gst_index (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_INDEX, "Index", mGst);
 

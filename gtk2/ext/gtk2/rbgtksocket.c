@@ -67,7 +67,7 @@ rg_id(VALUE self)
 #endif /* HAVE_GTK_SOCKET_GET_TYPE */
 
 void 
-Init_gtk_socket(void)
+Init_gtk_socket(VALUE mGtk)
 {
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);

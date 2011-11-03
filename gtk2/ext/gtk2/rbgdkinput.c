@@ -58,7 +58,7 @@ rg_m_remove(VALUE self, VALUE id)
 }
 
 void
-Init_gtk_gdk_input(void)
+Init_gtk_gdk_input(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Input");
 

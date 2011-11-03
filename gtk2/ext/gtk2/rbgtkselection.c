@@ -159,7 +159,7 @@ rg_m_include_rich_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuff
 #endif
 
 void
-Init_gtk_selection(void)
+Init_gtk_selection(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =  rb_define_module_under(mGtk, "Selection");
 

@@ -46,7 +46,7 @@ rg_merge (VALUE self, VALUE structure, VALUE merge_mode)
 }
 
 void
-Init_gst_tag_setter (void)
+Init_gst_tag_setter (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE (GST_TYPE_TAG_SETTER, "TagSetter", mGst);
     RG_DEF_METHOD(merge, 2);   

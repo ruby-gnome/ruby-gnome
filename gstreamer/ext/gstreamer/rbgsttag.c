@@ -96,7 +96,7 @@ rg_m_get_flag (VALUE self, VALUE tag)
 }
 
 void
-Init_gst_tag (void)
+Init_gst_tag (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under (mGst, "Tag");
 

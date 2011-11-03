@@ -97,7 +97,7 @@ rg_child2_shrink_p(VALUE self)
 }
 
 void 
-Init_gtk_paned(void)
+Init_gtk_paned(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
 

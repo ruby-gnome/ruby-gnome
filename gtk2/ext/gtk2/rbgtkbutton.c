@@ -101,7 +101,7 @@ rg_alignment(VALUE self)
 #endif
 
 void 
-Init_gtk_button(void)
+Init_gtk_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
 

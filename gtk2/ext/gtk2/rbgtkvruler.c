@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_vruler(void)
+Init_gtk_vruler(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VRULER, "VRuler", mGtk);
     RG_DEF_METHOD(initialize, 0);

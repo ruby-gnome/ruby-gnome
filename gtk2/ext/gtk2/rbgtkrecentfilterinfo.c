@@ -160,7 +160,7 @@ rg_set_age(VALUE self, VALUE age)
 #endif
 
 void 
-Init_gtk_recent_filter_info(void)
+Init_gtk_recent_filter_info(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);

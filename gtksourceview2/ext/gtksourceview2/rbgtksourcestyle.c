@@ -34,7 +34,7 @@ rg_copy(VALUE self)
 }
 
 void
-Init_gtk_sourcestyle ()
+Init_gtk_sourcestyle (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE, "SourceStyle", mGtk);
 

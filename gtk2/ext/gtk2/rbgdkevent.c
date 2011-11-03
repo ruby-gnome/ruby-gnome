@@ -657,7 +657,7 @@ gdkevent_g2r(const GValue *values)
 }
 
 void
-Init_gtk_gdk_event(void)
+Init_gtk_gdk_event(VALUE mGdk)
 {
     VALUE ev;
     VALUE gdkEvent;

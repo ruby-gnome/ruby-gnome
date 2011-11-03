@@ -68,7 +68,7 @@ rg_s_default_mod_mask(G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_gtk_accelerator(void)
+Init_gtk_accelerator(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Accelerator");
 

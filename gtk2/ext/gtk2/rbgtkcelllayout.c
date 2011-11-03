@@ -125,7 +125,7 @@ rg_set_attributes(VALUE self, VALUE cell, VALUE attrs)
 #endif
 
 void
-Init_gtk_celllayout(void)
+Init_gtk_celllayout(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_CELL_LAYOUT, "CellLayout", mGtk);

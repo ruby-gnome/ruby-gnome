@@ -70,7 +70,7 @@ rg_set_xid(VALUE self, VALUE xid)
 }
 
 void
-Init_gst_install_plugins_context(void)
+Init_gst_install_plugins_context(VALUE mGst)
 {
     context_table.type = GST_TYPE_INSTALL_PLUGINS_CONTEXT;
     context_table.instance2robj = context2robj;

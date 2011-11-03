@@ -27,7 +27,7 @@
  */
 
 void
-Init_gst_seek (void)
+Init_gst_seek (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGst, "Seek");
 

@@ -222,7 +222,7 @@ signal_rows_reordered_func(G_GNUC_UNUSED guint num, const GValue *values)
 }
 
 void 
-Init_gtk_treemodel(void)
+Init_gtk_treemodel(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_TREE_MODEL, "TreeModel", mGtk);
 

@@ -31,7 +31,7 @@ rg_connect_widget_destroyed(VALUE self)
 }
 
 void
-Init_gtk_accessible(void)
+Init_gtk_accessible(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
 

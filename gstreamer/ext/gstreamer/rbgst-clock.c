@@ -82,7 +82,7 @@ rg_operator_equal_p(VALUE self, VALUE other_clock)
 }
 
 void
-Init_gst_clock (void)
+Init_gst_clock (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE, rb_mGstClockTime;
 

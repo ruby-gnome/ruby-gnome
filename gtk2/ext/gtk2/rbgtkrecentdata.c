@@ -123,7 +123,7 @@ rg_set_private(VALUE self, VALUE is_private)
 #endif
 
 void
-Init_gtk_recent_data(void)
+Init_gtk_recent_data(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_DATA, "RecentData", mGtk);

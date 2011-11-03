@@ -51,7 +51,7 @@ rg_selected_p(VALUE self, VALUE page_number)
 #endif
 
 void
-Init_gtk_print_operation_preview(void)
+Init_gtk_print_operation_preview(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_PREVIEW,

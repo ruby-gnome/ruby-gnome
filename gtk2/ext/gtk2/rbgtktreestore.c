@@ -350,7 +350,7 @@ rg_move_after(VALUE self, VALUE iter, VALUE position)
 #endif
 
 void
-Init_gtk_tree_store(void)
+Init_gtk_tree_store(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_STORE, "TreeStore", mGtk);
 

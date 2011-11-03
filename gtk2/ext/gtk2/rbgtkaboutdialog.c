@@ -128,7 +128,7 @@ rg_s_show(VALUE self, VALUE parent, VALUE props)
 #endif
 
 void 
-Init_gtk_aboutdialog(void)
+Init_gtk_aboutdialog(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);

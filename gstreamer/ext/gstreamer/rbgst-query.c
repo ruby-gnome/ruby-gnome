@@ -262,7 +262,7 @@ formats_parse(VALUE self)
 }
 
 void
-Init_gst_query (void)
+Init_gst_query (VALUE mGst)
 {
     table.type = GST_TYPE_QUERY;
     table.get_superclass = get_superclass;

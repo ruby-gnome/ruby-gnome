@@ -534,7 +534,7 @@ mark_toplevels(G_GNUC_UNUSED void *_)
 }
 
 void 
-Init_gtk_window(void)
+Init_gtk_window(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);
 

@@ -54,7 +54,7 @@ rg_toggled(VALUE self)
 #endif
 
 void 
-Init_gtk_toggle_action(void)
+Init_gtk_toggle_action(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 

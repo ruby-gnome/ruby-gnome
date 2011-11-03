@@ -21,10 +21,10 @@
 #define RVAL2PFD(obj) ((PangoFontDescription*)RVAL2BOXED(self, PANGO_TYPE_FONT_DESCRIPTION))
 #define PFD2RVAL(obj) (BOXED2RVAL(obj, PANGO_TYPE_FONT_DESCRIPTION))
 
-extern void Init_vte_access(VALUE mVte);
-extern void Init_vte_reaper(VALUE mVte);
-extern void Init_vte_terminal(VALUE mVte);
-extern void Init_vte_charattributes(VALUE mVte);
-extern void Init_vte_pty(VALUE mVte);
+G_GNUC_INTERNAL void Init_vte_access(VALUE mVte);
+G_GNUC_INTERNAL void Init_vte_reaper(VALUE mVte);
+G_GNUC_INTERNAL void Init_vte_terminal(VALUE mVte);
+G_GNUC_INTERNAL void Init_vte_charattributes(VALUE mVte);
+G_GNUC_INTERNAL void Init_vte_pty(VALUE mVte);
 
 #endif

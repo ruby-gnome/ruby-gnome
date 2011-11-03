@@ -554,7 +554,7 @@ rg_set_bg_pixmap(VALUE self, VALUE idx, VALUE bg_pixmap)
 }
 
 void 
-Init_gtk_style(void)
+Init_gtk_style(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STYLE, "Style", mGtk);
 

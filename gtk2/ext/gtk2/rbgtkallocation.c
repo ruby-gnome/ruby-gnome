@@ -142,7 +142,7 @@ rg_to_rect(VALUE self)
 }
 
 void 
-Init_gtk_allocation(void)
+Init_gtk_allocation(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE;
 

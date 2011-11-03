@@ -39,7 +39,7 @@ rg_append_menuitems(VALUE self, VALUE menushell)
 }
 
 void 
-Init_gtk_im_multicontext(void)
+Init_gtk_im_multicontext(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_MULTICONTEXT, "IMMulticontext", mGtk);
 

@@ -57,7 +57,7 @@ rg_n_anchors(VALUE self)
 }
 
 void
-Init_atk_hyperlink(void)
+Init_atk_hyperlink(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_HYPERLINK, "Hyperlink", mAtk);
 

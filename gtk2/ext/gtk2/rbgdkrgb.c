@@ -176,7 +176,7 @@ rg_m_set_verbose(VALUE self, VALUE verbose)
 }
 
 void
-Init_gtk_gdk_rgb(void)
+Init_gtk_gdk_rgb(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "RGB");
 

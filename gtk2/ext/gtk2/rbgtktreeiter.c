@@ -231,7 +231,7 @@ rg_to_str(VALUE self)
 #endif
 
 void 
-Init_gtk_treeiter(void)
+Init_gtk_treeiter(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);
 

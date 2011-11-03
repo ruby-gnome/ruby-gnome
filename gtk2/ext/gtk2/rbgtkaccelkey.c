@@ -103,7 +103,7 @@ rg_set_flags(VALUE self, VALUE flags)
 }
 
 void
-Init_gtk_accel_key(void)
+Init_gtk_accel_key(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_KEY, "AccelKey", mGtk);
 

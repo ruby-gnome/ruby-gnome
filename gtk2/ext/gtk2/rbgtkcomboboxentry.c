@@ -53,7 +53,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_comboboxentry(void)
+Init_gtk_comboboxentry(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX_ENTRY, "ComboBoxEntry", mGtk);
