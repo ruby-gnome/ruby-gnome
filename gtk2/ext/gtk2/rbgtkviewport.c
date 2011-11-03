@@ -37,7 +37,7 @@ rg_initialize(VALUE self, VALUE hadj, VALUE vadj)
 }
 
 void 
-Init_gtk_viewport(void)
+Init_gtk_viewport(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VIEWPORT, "Viewport", mGtk);
     RG_DEF_METHOD(initialize, 2);

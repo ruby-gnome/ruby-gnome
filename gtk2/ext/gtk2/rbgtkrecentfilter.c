@@ -149,7 +149,7 @@ rg_filter(VALUE self, VALUE filter_info)
 #endif
 
 void 
-Init_gtk_recent_filter(void)
+Init_gtk_recent_filter(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER, "RecentFilter", mGtk);

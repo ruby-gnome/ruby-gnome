@@ -47,7 +47,7 @@ rg_remove_widget(VALUE self)
 }
 
 void
-Init_gtk_celleditable(void)
+Init_gtk_celleditable(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_CELL_EDITABLE, "CellEditable", mGtk);
 

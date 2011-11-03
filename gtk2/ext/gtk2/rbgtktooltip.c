@@ -68,7 +68,7 @@ rg_set_custom(VALUE self, VALUE custom_widget)
 #endif
 
 void 
-Init_gtk_tooltip(void)
+Init_gtk_tooltip(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,12,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLTIP, "Tooltip", mGtk);

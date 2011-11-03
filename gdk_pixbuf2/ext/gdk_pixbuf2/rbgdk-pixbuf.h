@@ -24,11 +24,11 @@
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include "rbgobject.h"
 
-extern void Init_gdk_pixbuf_animation(VALUE mGLib);
-extern void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
-extern void Init_gdk_pixdata(VALUE mGLib);
-extern void Init_gdk_pixbuf_loader(VALUE mGLib);
-extern void Init_gdk_pixbuf_format(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_animation(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixdata(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_loader(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_format(VALUE mGLib);
 extern GType gdk_pixbuf_format_get_type(void);
 
 #define RBGDK_PIXBUF_CHECK_VERSION(major,minor,micro)    \
@@ -38,7 +38,7 @@ extern GType gdk_pixbuf_format_get_type(void);
       GDK_PIXBUF_MICRO >= (micro)))
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
-extern void Init_gdk_pixbuf_simpleanim(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_simpleanim(VALUE mGLib);
 #endif
 
 #define GDK_TYPE_PIXBUF_FORMAT (gdk_pixbuf_format_get_type())

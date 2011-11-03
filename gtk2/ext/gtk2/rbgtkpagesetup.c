@@ -170,7 +170,7 @@ rg_get_page_height(VALUE self, VALUE unit)
 #endif
 
 void
-Init_gtk_page_setup(void)
+Init_gtk_page_setup(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP, "PageSetup", mGtk);

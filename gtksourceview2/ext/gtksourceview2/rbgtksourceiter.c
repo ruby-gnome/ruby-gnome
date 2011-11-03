@@ -101,7 +101,7 @@ rg_backward_search(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_sourceiter ()
+Init_gtk_sourceiter (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS (GTK_TYPE_TEXT_ITER);
 

@@ -81,7 +81,7 @@ rg_accel_path(VALUE self)
 }
 
 void
-Init_gtk_accel_group_entry(void)
+Init_gtk_accel_group_entry(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP_ENTRY, "AccelGroupEntry", mGtk);
 

@@ -111,7 +111,7 @@ rg_placement(VALUE self)
 #endif
 
 void 
-Init_gtk_scrolled_window(void)
+Init_gtk_scrolled_window(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);
 

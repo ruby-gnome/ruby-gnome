@@ -117,6 +117,7 @@ Init_goocanvas(void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GOO_TYPE_CANVAS, "Canvas", mGoo);
+    VALUE mCairo = rb_const_get(rb_mKernel, rb_intern("Cairo"));
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_bounds, 4);
@@ -127,17 +128,17 @@ Init_goocanvas(void)
     RG_DEF_METHOD(render, 3);
     RG_DEF_METHOD(scroll_to, 2);
 
-    Init_goocanvasitem(); /* Goo::CanvasItem */
-    Init_goocanvastext(); /* Goo::CanvasText */
-    Init_goocanvasrect(); /* Goo::CanvasRect */
-    Init_goocanvasellipse(); /* Goo::CanvasEllipse */
-    Init_goocanvaspolyline(); /* Goo::CanvasPolyline */
-    Init_goocanvaspoints(); /* Goo::CanvasPoints */
-    Init_goocanvasimage(); /* Goo::CanvasImage */
-    Init_goocanvastable(); /* Goo::CanvasTable */
-    Init_goocanvaswidget(); /* Goo::CanvasWidget */
-    Init_goocanvasstyle(); /* Goo::CanvasStyle */
-    Init_goocanvasgroup(); /* Goo::CanvasGroup */
-    Init_goocairopattern();
-    Init_goocairomatrix();
+    Init_goocanvasitem(RG_TARGET_NAMESPACE); /* Goo::CanvasItem */
+    Init_goocanvastext(RG_TARGET_NAMESPACE); /* Goo::CanvasText */
+    Init_goocanvasrect(RG_TARGET_NAMESPACE); /* Goo::CanvasRect */
+    Init_goocanvasellipse(RG_TARGET_NAMESPACE); /* Goo::CanvasEllipse */
+    Init_goocanvaspolyline(RG_TARGET_NAMESPACE); /* Goo::CanvasPolyline */
+    Init_goocanvaspoints(RG_TARGET_NAMESPACE); /* Goo::CanvasPoints */
+    Init_goocanvasimage(RG_TARGET_NAMESPACE); /* Goo::CanvasImage */
+    Init_goocanvastable(RG_TARGET_NAMESPACE); /* Goo::CanvasTable */
+    Init_goocanvaswidget(RG_TARGET_NAMESPACE); /* Goo::CanvasWidget */
+    Init_goocanvasstyle(RG_TARGET_NAMESPACE); /* Goo::CanvasStyle */
+    Init_goocanvasgroup(RG_TARGET_NAMESPACE); /* Goo::CanvasGroup */
+    Init_goocairopattern(mCairo);
+    Init_goocairomatrix(mCairo);
 }

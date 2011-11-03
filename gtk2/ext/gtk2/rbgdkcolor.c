@@ -122,7 +122,7 @@ rg_to_s(VALUE self)
 #endif
 
 void
-Init_gtk_gdk_color(void)
+Init_gtk_gdk_color(VALUE mGdk)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 

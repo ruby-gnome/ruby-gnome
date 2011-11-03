@@ -177,7 +177,7 @@ rg_each_topelement (VALUE self)
 }
 
 void
-Init_gst_xml (void)
+Init_gst_xml (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_XML, "XML", mGst);
 

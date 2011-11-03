@@ -124,7 +124,7 @@ rg_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE pa
 }
 
 void 
-Init_gtk_box(void)
+Init_gtk_box(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BOX, "Box", mGtk);
 

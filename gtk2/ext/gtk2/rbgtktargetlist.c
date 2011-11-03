@@ -137,7 +137,7 @@ rg_find(VALUE self, VALUE target)
 } 
 
 void
-Init_gtk_target_list(void)
+Init_gtk_target_list(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TARGET_LIST, "TargetList", mGtk);
 

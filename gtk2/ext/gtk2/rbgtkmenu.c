@@ -159,7 +159,7 @@ rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 #endif
 
 void 
-Init_gtk_menu(void)
+Init_gtk_menu(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 

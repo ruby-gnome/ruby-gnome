@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_hbutton_box(void)
+Init_gtk_hbutton_box(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HBUTTON_BOX, "HButtonBox", mGtk);
 

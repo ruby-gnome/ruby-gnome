@@ -47,7 +47,7 @@ rg_remove(VALUE self, VALUE window)
 }
 
 void 
-Init_gtk_windowgroup(void)
+Init_gtk_windowgroup(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WINDOW_GROUP, "WindowGroup", mGtk);
     RG_DEF_METHOD(initialize, 0);

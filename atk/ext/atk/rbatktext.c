@@ -273,7 +273,7 @@ rg_set_caret_offset(VALUE self, VALUE offset)
 */
 
 void
-Init_atk_text(void)
+Init_atk_text(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_TEXT, "Text", mAtk);
 

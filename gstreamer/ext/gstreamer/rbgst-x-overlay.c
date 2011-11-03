@@ -114,7 +114,7 @@ rg_got_xwindow_id(VALUE self, VALUE x_window_id)
 }
 
 void
-Init_gst_x_overlay(void)
+Init_gst_x_overlay(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GST_TYPE_X_OVERLAY, "XOverlay", mGst);
 

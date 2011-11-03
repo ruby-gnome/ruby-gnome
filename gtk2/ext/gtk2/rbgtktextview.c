@@ -282,7 +282,7 @@ rg_default_attributes(VALUE self)
 }
 
 void
-Init_gtk_textview(void)
+Init_gtk_textview(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
 

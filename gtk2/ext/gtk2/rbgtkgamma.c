@@ -46,7 +46,7 @@ rg_curve(VALUE self)
 }
 
 void 
-Init_gtk_gamma_curve(void)
+Init_gtk_gamma_curve(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_GAMMA_CURVE, "GammaCurve", mGtk);
 

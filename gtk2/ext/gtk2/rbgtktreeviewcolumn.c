@@ -247,7 +247,7 @@ rg_tree_view(VALUE self)
 #endif
 
 void
-Init_gtk_treeviewcolumn(void)
+Init_gtk_treeviewcolumn(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN, "TreeViewColumn", mGtk);
 

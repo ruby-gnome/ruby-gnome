@@ -81,7 +81,7 @@ rg_bin_window(VALUE self)
 }
 
 void
-Init_gtk_layout(void)
+Init_gtk_layout(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LAYOUT, "Layout", mGtk);
 

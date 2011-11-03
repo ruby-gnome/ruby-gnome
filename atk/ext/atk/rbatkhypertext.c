@@ -43,7 +43,7 @@ rg_link_index(VALUE self, VALUE char_index)
 }
 
 void
-Init_atk_hypertext(void)
+Init_atk_hypertext(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_HYPERTEXT, "Hypertext", mAtk);
 

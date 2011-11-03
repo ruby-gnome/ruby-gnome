@@ -224,7 +224,7 @@ rg_remove_child(VALUE self, VALUE child)
 }
 
 void
-Init_goocanvasitem(void)
+Init_goocanvasitem(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

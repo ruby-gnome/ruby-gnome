@@ -44,7 +44,7 @@ rg_invalidate(VALUE self)
 }
 
 void
-Init_atk_objectfactory(void)
+Init_atk_objectfactory(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_OBJECT_FACTORY, "ObjectFactory", mAtk);
     RG_DEF_METHOD(create_accessible, 0);

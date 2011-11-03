@@ -114,7 +114,7 @@ rg_s_sync(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gst_install_plugins(void)
+Init_gst_install_plugins(VALUE mGst)
 {
     RG_TARGET_NAMESPACE = rb_define_module_under(mGst, "InstallPlugins");
 

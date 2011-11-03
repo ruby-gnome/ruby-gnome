@@ -225,7 +225,7 @@ rg_author(VALUE self)
 }
 
 void
-Init_gst_elementfactory (void)
+Init_gst_elementfactory (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

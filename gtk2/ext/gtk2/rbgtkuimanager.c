@@ -165,7 +165,7 @@ rbuimanager_mark(void *p)
 #endif
 
 void
-Init_gtk_uimanager(void)
+Init_gtk_uimanager(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE;

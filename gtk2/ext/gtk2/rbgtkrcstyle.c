@@ -153,7 +153,7 @@ rg_set_ythickness(VALUE self, VALUE ythickness)
 }
 
 void 
-Init_gtk_rcstyle(void)
+Init_gtk_rcstyle(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RC_STYLE, "RcStyle", mGtk);
     RG_DEF_METHOD(initialize, 0);

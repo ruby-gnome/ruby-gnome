@@ -31,7 +31,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_separator_menu_item(void)
+Init_gtk_separator_menu_item(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR_MENU_ITEM, "SeparatorMenuItem", mGtk);
 

@@ -37,7 +37,7 @@ rg_get(VALUE self)
 }
 
 void
-Init_gst_static_caps(void)
+Init_gst_static_caps(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

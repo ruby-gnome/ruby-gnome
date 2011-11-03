@@ -25,7 +25,7 @@
 #include "global.h"
 
 void 
-Init_gtk_separator(void)
+Init_gtk_separator(VALUE mGtk)
 {
     G_DEF_CLASS(GTK_TYPE_SEPARATOR, "Separator", mGtk);
 }

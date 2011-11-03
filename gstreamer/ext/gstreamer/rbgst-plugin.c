@@ -140,7 +140,7 @@ rg_operator_is_equal (VALUE self, VALUE other_plugin)
 }
 
 void
-Init_gst_plugin (void)
+Init_gst_plugin (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

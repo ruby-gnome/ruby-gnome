@@ -188,7 +188,7 @@ rg_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
 #endif
 
 void
-Init_gtk_treeselection(void)
+Init_gtk_treeselection(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
 

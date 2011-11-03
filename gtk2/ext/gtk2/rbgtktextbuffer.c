@@ -800,7 +800,7 @@ rg_get_iter_at_mark(VALUE self, VALUE mark)
 }
 
 void 
-Init_gtk_textbuffer(void)
+Init_gtk_textbuffer(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
 

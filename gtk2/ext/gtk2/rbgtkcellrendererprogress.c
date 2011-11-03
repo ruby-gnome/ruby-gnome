@@ -35,7 +35,7 @@ rg_initialize(VALUE self)
 #endif
 
 void
-Init_gtk_cellrendererprogress(void)
+Init_gtk_cellrendererprogress(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_PROGRESS, "CellRendererProgress", mGtk);

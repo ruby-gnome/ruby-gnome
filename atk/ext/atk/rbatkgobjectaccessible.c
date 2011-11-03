@@ -37,7 +37,7 @@ rg_object(VALUE self)
 }
 
 void
-Init_atk_gobjectaccessible(void)
+Init_atk_gobjectaccessible(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_GOBJECT_ACCESSIBLE, "GObjectAccessible", mAtk);
 

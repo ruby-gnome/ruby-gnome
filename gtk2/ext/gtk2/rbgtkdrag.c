@@ -393,7 +393,7 @@ rg_m_source_add_uri_targets(VALUE self, VALUE widget)
 #endif
 
 void
-Init_gtk_drag(void)
+Init_gtk_drag(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "Drag");
 

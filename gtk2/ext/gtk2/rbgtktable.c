@@ -150,7 +150,7 @@ rg_default_column_spacing(VALUE self)
 }
 
 void 
-Init_gtk_table(void)
+Init_gtk_table(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
 

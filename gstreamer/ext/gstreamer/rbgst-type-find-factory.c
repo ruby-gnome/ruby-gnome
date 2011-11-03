@@ -113,7 +113,7 @@ rg_to_s (VALUE self)
 }
 
 void
-Init_gst_typefindfactory (void)
+Init_gst_typefindfactory (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_TYPE_FIND_FACTORY, "TypeFindFactory", mGst);
 

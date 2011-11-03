@@ -235,7 +235,7 @@ rg_remove_row_selection(VALUE self, VALUE row)
 }
 
 void
-Init_atk_table(void)
+Init_atk_table(VALUE mAtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(ATK_TYPE_TABLE, "Table", mAtk);
 

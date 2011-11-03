@@ -89,7 +89,7 @@ rg_get_vector(VALUE self, VALUE length)
 }
 
 void 
-Init_gtk_curve(void)
+Init_gtk_curve(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CURVE, "Curve", mGtk);
 

@@ -239,7 +239,7 @@ rg_contexts(VALUE self)
 #endif
 
 void
-Init_gtk_icon_theme(void)
+Init_gtk_icon_theme(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_THEME, "IconTheme", mGtk);

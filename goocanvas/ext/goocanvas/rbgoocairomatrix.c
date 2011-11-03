@@ -39,9 +39,9 @@ rg_to_goo(VALUE self)
 }
 
 void
-Init_goocairomatrix(void)
+Init_goocairomatrix(VALUE mCairo)
 {
-    VALUE RG_TARGET_NAMESPACE = rb_const_get(rb_const_get(rb_mKernel, rb_intern("Cairo")), rb_intern("Matrix"));
+    VALUE RG_TARGET_NAMESPACE = rb_const_get(mCairo, rb_intern("Matrix"));
 
     RG_DEF_METHOD(to_goo, 0);
 }

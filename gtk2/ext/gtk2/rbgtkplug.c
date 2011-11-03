@@ -79,7 +79,7 @@ rg_id(VALUE self)
 #endif /* HAVE_GTK_PLUG_GET_TYPE */
 
 void 
-Init_gtk_plug(void)
+Init_gtk_plug(VALUE mGtk)
 {
 #ifdef HAVE_GTK_PLUG_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);

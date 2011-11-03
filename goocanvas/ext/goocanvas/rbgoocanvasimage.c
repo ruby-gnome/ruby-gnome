@@ -39,7 +39,7 @@ rg_initialize(VALUE self, VALUE parent, VALUE pixbuf,
 }
 
 void
-Init_goocanvasimage(void)
+Init_goocanvasimage(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

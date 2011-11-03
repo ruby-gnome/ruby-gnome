@@ -111,7 +111,7 @@ rg_style_ids(VALUE self)
 }
 
 void
-Init_gtk_sourcelanguage ()
+Init_gtk_sourcelanguage (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =
         G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE, "SourceLanguage", mGtk);

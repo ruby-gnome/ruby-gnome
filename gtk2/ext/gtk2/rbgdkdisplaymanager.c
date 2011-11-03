@@ -48,7 +48,7 @@ gdkdisplaymanager_get_core_pointer(VALUE self)
 #endif
 
 void 
-Init_gtk_gdk_display_manager(void)
+Init_gtk_gdk_display_manager(VALUE mGdk)
 {
 #if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);

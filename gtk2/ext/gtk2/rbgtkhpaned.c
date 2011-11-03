@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 }
 
 void 
-Init_gtk_hpaned(void)
+Init_gtk_hpaned(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HPANED, "HPaned", mGtk);
 

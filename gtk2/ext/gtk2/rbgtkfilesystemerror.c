@@ -25,7 +25,7 @@
 #define RG_TARGET_NAMESPACE cFileSystemError
 
 void 
-Init_gtk_filesystemerror(void)
+Init_gtk_filesystemerror(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 #ifdef GTK_FILE_SYSTEM_ERROR

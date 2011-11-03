@@ -65,7 +65,7 @@ rg_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
 #endif
 
 void 
-Init_gtk_alignment(void)
+Init_gtk_alignment(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ALIGNMENT, "Alignment", mGtk);
 

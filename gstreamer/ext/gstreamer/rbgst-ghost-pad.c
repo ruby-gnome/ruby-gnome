@@ -37,7 +37,7 @@ rg_initialize(VALUE self, VALUE name, VALUE pad)
 }
 
 void
-Init_gst_ghost_pad(void)
+Init_gst_ghost_pad(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_GHOST_PAD, "GhostPad", mGst);
 

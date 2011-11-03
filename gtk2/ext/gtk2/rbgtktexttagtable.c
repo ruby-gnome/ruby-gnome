@@ -83,7 +83,7 @@ rg_size(VALUE self)
 }
 
 void
-Init_gtk_text_tag_table(void)
+Init_gtk_text_tag_table(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_TAG_TABLE, "TextTagTable", mGtk);
 

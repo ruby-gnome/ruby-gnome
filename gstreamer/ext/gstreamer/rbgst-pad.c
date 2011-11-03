@@ -303,7 +303,7 @@ rg_peer(VALUE self)
 }
 
 void
-Init_gst_pad (void)
+Init_gst_pad (VALUE mGst)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS (GST_TYPE_PAD, "Pad", mGst);
 

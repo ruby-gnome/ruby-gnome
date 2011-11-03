@@ -119,7 +119,7 @@ rg_set_axes(VALUE self, VALUE rbaxes)
 }
 
 void
-Init_gtk_gdk_timecoord(void)
+Init_gtk_gdk_timecoord(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_TIME_COORD, "TimeCoord", mGdk);
 

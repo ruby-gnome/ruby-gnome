@@ -70,7 +70,7 @@ rg_print_settings(VALUE self)
 #endif
 
 void
-Init_gtk_page_setup_unix_dialog(void)
+Init_gtk_page_setup_unix_dialog(VALUE mGtk)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAGE_SETUP_UNIX_DIALOG,

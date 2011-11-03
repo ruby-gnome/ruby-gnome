@@ -129,7 +129,7 @@ rg_fileop_ren_file(VALUE self)
 }
 
 void 
-Init_gtk_file_selection(void)
+Init_gtk_file_selection(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_SELECTION, "FileSelection", mGtk);
 

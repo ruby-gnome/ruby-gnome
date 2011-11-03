@@ -257,7 +257,7 @@ rg_to_s(VALUE self)
 }
 
 void
-Init_gst_structure(void)
+Init_gst_structure(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 

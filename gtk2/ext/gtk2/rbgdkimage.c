@@ -125,7 +125,7 @@ rg_bpl(VALUE self)
 }
 
 void 
-Init_gtk_gdk_image(void)
+Init_gtk_gdk_image(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_IMAGE, "Image", mGdk);
 

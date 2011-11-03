@@ -50,7 +50,7 @@ rg_set_fill_pattern(VALUE self, VALUE value)
 }
 
 void
-Init_goocanvasstyle(void)
+Init_goocanvasstyle(VALUE mGoo)
 {
     VALUE RG_TARGET_NAMESPACE;
 

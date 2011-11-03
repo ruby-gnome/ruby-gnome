@@ -115,7 +115,7 @@ rg_filter_p(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display
 #endif
 
 void 
-Init_gtk_file_filter(void)
+Init_gtk_file_filter(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,4,0)
 

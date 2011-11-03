@@ -224,7 +224,7 @@ rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_gtk_gdk_pixmap(void)
+Init_gtk_gdk_pixmap(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXMAP, "Pixmap", mGdk);
 

@@ -47,7 +47,7 @@ rg_set(VALUE self, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child)
 }
 
 void 
-Init_gtk_aspect_frame(void)
+Init_gtk_aspect_frame(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ASPECT_FRAME, "AspectFrame", mGtk);
 

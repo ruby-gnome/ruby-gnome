@@ -43,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void 
-Init_gtk_recent_chooser_widget(void)
+Init_gtk_recent_chooser_widget(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,10,0)
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_WIDGET, "RecentChooserWidget", mGtk);

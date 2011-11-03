@@ -78,7 +78,7 @@ rg_m_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 }
 
 void
-Init_gtk_icon_size(void)
+Init_gtk_icon_size(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "IconSize");
 
