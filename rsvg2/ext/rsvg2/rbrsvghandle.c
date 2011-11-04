@@ -248,13 +248,13 @@ rg_set_base_uri(VALUE self, VALUE base_uri)
 #endif
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
-extern VALUE rg_cDimensionData;
-
 static VALUE
 rg_dimensions(VALUE self)
 {
     RsvgDimensionData dim;
     VALUE args[4];
+    VALUE cDimensionData = rb_const_get(rb_const_get(rb_cObject,
+                                rb_intern("RSVG")), rb_intern("DimensionData"));
 
     rsvg_handle_get_dimensions(_SELF(self), &dim);
     args[0] = INT2NUM(dim.width);
@@ -262,7 +262,7 @@ rg_dimensions(VALUE self)
     args[2] = rb_float_new(dim.em);
     args[3] = rb_float_new(dim.ex);
     return rb_class_new_instance(sizeof(args) / sizeof(VALUE),
-                                 args, rg_cDimensionData);
+                                 args, cDimensionData);
 }
 #endif
 
