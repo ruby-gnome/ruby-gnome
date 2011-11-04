@@ -31,8 +31,8 @@ static ID id_new;
 static ID id_module_eval;
 static ID id_or;
 
-extern char *rbgobj_constant_lookup(const char *name);
-extern VALUE resolve_enum_value(VALUE klass, VALUE nick);
+G_GNUC_INTERNAL char *rbgobj_constant_lookup(const char *name);
+G_GNUC_INTERNAL VALUE resolve_enum_value(VALUE klass, VALUE nick);
 
 /**********************************************************************/
 
