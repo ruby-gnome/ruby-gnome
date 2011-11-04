@@ -93,13 +93,13 @@ Init_poppler(void)
     RG_DEF_MODFUNC(version, 0);
     RG_DEF_MODFUNC_P(cairo_available, 0);
 
-    Init_poppler_document(RG_TARGET_NAMESPACE);
     Init_poppler_indexiter(RG_TARGET_NAMESPACE);
     Init_poppler_fontinfo(RG_TARGET_NAMESPACE);
+    Init_poppler_document(RG_TARGET_NAMESPACE);
     Init_poppler_fontsiter(RG_TARGET_NAMESPACE);
     Init_poppler_psfile(RG_TARGET_NAMESPACE);
-    Init_poppler_page(RG_TARGET_NAMESPACE);
     Init_poppler_rectangle(RG_TARGET_NAMESPACE);
+    Init_poppler_page(RG_TARGET_NAMESPACE);
     Init_poppler_color(RG_TARGET_NAMESPACE);
     Init_poppler_linkmapping(RG_TARGET_NAMESPACE);
     Init_poppler_pagetransition(RG_TARGET_NAMESPACE);
