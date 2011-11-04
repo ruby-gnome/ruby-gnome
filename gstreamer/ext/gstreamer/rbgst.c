@@ -75,9 +75,9 @@ G_GNUC_INTERNAL void Init_gst_mediatype (VALUE mGst);
 #endif
 
 #ifdef HAVE_GST_PBUTILS
+G_GNUC_INTERNAL void Init_gst_install_plugins_context (VALUE mGst);
 G_GNUC_INTERNAL void Init_gst_install_plugins (VALUE mGst);
 G_GNUC_INTERNAL void Init_gst_install_plugins_return (VALUE mGst);
-G_GNUC_INTERNAL void Init_gst_install_plugins_context (VALUE mGst);
 #endif
 
 /* Module: Gst
@@ -136,9 +136,9 @@ Init_gst_classes (void)
 #endif
 
 #ifdef HAVE_GST_PBUTILS
+    Init_gst_install_plugins_context (RG_TARGET_NAMESPACE);
     Init_gst_install_plugins (RG_TARGET_NAMESPACE);
     Init_gst_install_plugins_return (RG_TARGET_NAMESPACE);
-    Init_gst_install_plugins_context (RG_TARGET_NAMESPACE);
 #endif
 }
 

@@ -21,12 +21,12 @@
 
 #include "rbpoppler-private.h"
 
-#define RG_TARGET_NAMESPACE rg_cTextField
+#define RG_TARGET_NAMESPACE cTextField
 #define _SELF(obj) RVAL2POPPLER_FORM_FIELD(obj)
 
 #define FTT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_TEXT_TYPE))
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 rg_type(VALUE self)

@@ -26,6 +26,8 @@
 #define RVAL2DOC(obj) (POPPLER_DOCUMENT(RVAL2GOBJ(obj)))
 
 static ID id_new, id_pdf_data_p, id_ensure_uri;
+static VALUE cIndexIter;
+static VALUE cFontInfo;
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -167,26 +169,24 @@ rg_each(VALUE self)
     return self;
 }
 
-extern VALUE rg_cIndexIter;
-
 static VALUE
 rg_index_iter(VALUE self)
 {
-    return rb_funcall(rg_cIndexIter, id_new, 1, self);
+    return rb_funcall(cIndexIter, id_new, 1, self);
 }
-
-extern VALUE rg_cFontInfo;
 
 static VALUE
 rg_font_info(VALUE self)
 {
-    return rb_funcall(rg_cFontInfo, id_new, 1, self);
+    return rb_funcall(cFontInfo, id_new, 1, self);
 }
 
 void
 Init_poppler_document(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE;
+    cIndexIter = rb_const_get(mPoppler, rb_intern("IndexIter"));
+    cFontInfo = rb_const_get(mPoppler, rb_intern("FontInfo"));
 
     id_new = rb_intern("new");
     id_pdf_data_p = rb_intern("pdf_data?");

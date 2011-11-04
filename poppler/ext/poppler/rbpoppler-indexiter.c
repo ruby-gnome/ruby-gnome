@@ -21,12 +21,12 @@
 
 #include "rbpoppler.h"
 
-#define RG_TARGET_NAMESPACE rg_cIndexIter
+#define RG_TARGET_NAMESPACE cIndexIter
 
 #define IITER2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_INDEX_ITER))
 #define RVAL2IITER(obj) (RVAL2BOXED(obj, POPPLER_TYPE_INDEX_ITER))
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 static ID id_valid;
 

@@ -21,9 +21,9 @@
 
 #include "rbpoppler-private.h"
 
-#define RG_TARGET_NAMESPACE rg_cRectangle
+#define RG_TARGET_NAMESPACE cRectangle
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 rg_initialize(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
