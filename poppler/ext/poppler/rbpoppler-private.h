@@ -7,13 +7,13 @@
 #  include <rbgdk.h>
 #endif
 
-G_GNUC_INTERNAL void Init_poppler_document(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_indexiter(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_fontinfo(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_document(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_fontsiter(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_psfile(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_page(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_rectangle(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_page(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_color(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_linkmapping(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_pagetransition(VALUE mPoppler);

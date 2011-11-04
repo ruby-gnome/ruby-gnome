@@ -24,11 +24,11 @@
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
 
-#define RG_TARGET_NAMESPACE rg_cDimensionData
+#define RG_TARGET_NAMESPACE cDimensionData
 
 #define RVAL2DIM(obj) ((RsvgDimensionData *)DATA_PTR(obj))
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 static ID id_closed;
 static ID id_to_s;

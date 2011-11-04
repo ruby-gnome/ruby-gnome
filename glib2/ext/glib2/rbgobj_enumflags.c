@@ -23,8 +23,8 @@
 #include "rbgprivate.h"
 #include <ctype.h>
 
-extern void rbgobj_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix);
-extern void rbgobj_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix);
+G_GNUC_INTERNAL void rbgobj_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix);
+G_GNUC_INTERNAL void rbgobj_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix);
 
 typedef struct {
 	char *original;

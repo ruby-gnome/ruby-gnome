@@ -21,11 +21,11 @@
 
 #include "rbpoppler.h"
 
-#define RG_TARGET_NAMESPACE rg_cFontInfo
+#define RG_TARGET_NAMESPACE cFontInfo
 
 #define FITER2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_FONTS_ITER))
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
 
