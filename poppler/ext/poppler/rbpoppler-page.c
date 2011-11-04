@@ -37,7 +37,7 @@ extern GType gdk_region_get_type(void);
 
 #define TRANS2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_PAGE_TRANSITION))
 
-extern VALUE rg_cRectangle;
+static VALUE cRectangle;
 static VALUE cPSFile;
 
 #ifdef POPPLER_WITH_GDK
@@ -289,7 +289,7 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     if (NIL_P(arg1)) {
         rb_rect = arg2;
     } else {
-        if (RTEST(rb_obj_is_kind_of(arg2, rg_cRectangle))) {
+        if (RTEST(rb_obj_is_kind_of(arg2, cRectangle))) {
             rb_rect = arg2;
         } else {
             rb_rect = Qnil;
@@ -407,6 +407,7 @@ void
 Init_poppler_page(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_PAGE, "Page", mPoppler);
+    cRectangle = rb_const_get(mPoppler, rb_intern("Rectangle"));
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
     RG_DEF_METHOD(render, -1);
