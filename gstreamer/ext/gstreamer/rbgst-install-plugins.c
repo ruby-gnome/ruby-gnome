@@ -27,6 +27,7 @@
 #define RG_TARGET_NAMESPACE mInstallPlugins
 
 static VALUE RG_TARGET_NAMESPACE;
+static VALUE cInstallPluginsContext;
 
 static void
 gst_install_plugins_result_func(GstInstallPluginsReturn result, VALUE data)
@@ -47,8 +48,6 @@ rg_s_progress_p(VALUE self)
 {
     return CBOOL2RVAL(gst_install_plugins_installation_in_progress());
 }
-
-extern VALUE rg_cInstallPluginsContext;
 
 static VALUE
 rg_s_async(int argc, VALUE *argv, VALUE self)
@@ -72,7 +71,7 @@ rg_s_async(int argc, VALUE *argv, VALUE self)
     carray[length] = NULL;
 
     if (!NIL_P(rcontext)) {
-      if (!RVAL2CBOOL(rb_obj_is_kind_of(rcontext, rg_cInstallPluginsContext)))
+      if (!RVAL2CBOOL(rb_obj_is_kind_of(rcontext, cInstallPluginsContext)))
         rb_raise(rb_eTypeError,
                  "2nd parameter is not Gst::InstallPluginsContext");
         context = (GstInstallPluginsContext *)RVAL2GOBJ(rcontext);
@@ -117,6 +116,7 @@ void
 Init_gst_install_plugins(VALUE mGst)
 {
     RG_TARGET_NAMESPACE = rb_define_module_under(mGst, "InstallPlugins");
+    cInstallPluginsContext = rb_const_get(mGst, rb_intern("InstallPluginsContext"));
 
     RG_DEF_SMETHOD_P(supported, 0);
     RG_DEF_SMETHOD_P(progress, 0);

@@ -24,10 +24,10 @@
 #include <gst/pbutils/pbutils-enumtypes.h>
 #include <gst/pbutils/install-plugins.h>
 
-#define RG_TARGET_NAMESPACE rg_cInstallPluginsContext
+#define RG_TARGET_NAMESPACE cInstallPluginsContext
 
 static RGConvertTable context_table = {0};
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 context2robj(gpointer context)
