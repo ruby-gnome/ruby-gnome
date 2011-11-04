@@ -27,7 +27,7 @@
 #define FFT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
 #define RVAL2FFT(obj) (RVAL2GENUM(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
 
-extern VALUE rg_cButtonField, rg_cTextField, rg_cChoiceField;
+static VALUE cButtonField, cTextField, cChoiceField;
 static VALUE cUnknownField, cSignatureField;
 
 VALUE
@@ -42,13 +42,13 @@ rb_poppler_ruby_object_from_form_field(PopplerFormField *field)
           obj = rbgobj_create_object(cUnknownField);
           break;
         case POPPLER_FORM_FIELD_BUTTON:
-          obj = rbgobj_create_object(rg_cButtonField);
+          obj = rbgobj_create_object(cButtonField);
           break;
         case POPPLER_FORM_FIELD_TEXT:
-          obj = rbgobj_create_object(rg_cTextField);
+          obj = rbgobj_create_object(cTextField);
           break;
         case POPPLER_FORM_FIELD_CHOICE:
-          obj = rbgobj_create_object(rg_cChoiceField);
+          obj = rbgobj_create_object(cChoiceField);
           break;
         case POPPLER_FORM_FIELD_SIGNATURE:
           obj = rbgobj_create_object(cSignatureField);
@@ -96,4 +96,8 @@ Init_poppler_form_field(VALUE mPoppler)
     Init_poppler_button_field(mPoppler, RG_TARGET_NAMESPACE);
     Init_poppler_text_field(mPoppler, RG_TARGET_NAMESPACE);
     Init_poppler_choice_field(mPoppler, RG_TARGET_NAMESPACE);
+
+    cButtonField = rb_const_get(mPoppler, rb_intern("ButtonField"));
+    cTextField = rb_const_get(mPoppler, rb_intern("TextField"));
+    cChoiceField = rb_const_get(mPoppler, rb_intern("ChoiceField"));
 }
