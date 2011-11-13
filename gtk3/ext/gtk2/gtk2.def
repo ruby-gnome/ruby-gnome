@@ -1,0 +1,29 @@
+EXPORTS
+    Init_gtk2
+    mGdk DATA
+    rb_cGdkColor DATA
+    mGtk DATA
+    exec_callback
+    rbgdk_rval2gdkpoints
+    rbgdk_rval2gdkatoms
+    rbgdk_rval2gdkpixbufglist
+    gdk_atom_get_type
+    gdk_geometry_get_type
+    gdk_region_get_type
+    gdk_windowattr_get_type
+    get_gdkatom
+    get_gdkevent
+    gtk_accel_group_entry_get_type
+    gtk_accel_key_get_type
+    gtk_target_list_get_type
+    gtk_bindingset_get_type
+    make_gdkevent
+    rbgtk_atom2selectiondata
+    rbgtk_atom2selectiondata_free
+    rbgtk_rval2gtktargetentries
+    rbgtk_rval2gtktargetentries_accept_nil
+    rbgtk_get_target_entry
+    rbgtk_initialize_gtkobject
+    rbgtk_register_treeiter_set_value_func
+    gtk_text_appearance_get_type
+    rbgtk_dialog_add_buttons_internal

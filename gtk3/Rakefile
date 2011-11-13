@@ -1,0 +1,26 @@
+# -*- ruby -*-
+
+require './../glib2/lib/gnome2-raketask'
+
+package = GNOME2Package.new do |_package|
+  _package.summary = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
+  _package.description = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
+  _package.dependency.gem.runtime = ["atk",
+                                     "pango",
+                                     "gdk_pixbuf2"]
+  _package.win32.packages = ["gtk+"]
+  _package.win32.dependencies = []
+end
+package.define_tasks
+
+namespace :win32 do
+  desc "create default gtkrc"
+  task :gtkrc do
+    gtkrc_path = File.join("vendor", "local", "etc", "gtk-2.0", "gtkrc")
+    mkdir_p(File.dirname(gtkrc_path))
+    File.open(gtkrc_path, "w") do |gtkrc|
+      gtkrc.puts('gtk-theme-name = "MS-Windows"')
+    end
+  end
+  task :download => :gtkrc
+end
