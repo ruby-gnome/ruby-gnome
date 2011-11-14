@@ -8,5 +8,5 @@ install-so:
 install:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
-	  $(INSTALL_DATA) ruby-gtk2.pc $(pkgconfigdir);		\
+	  $(INSTALL_DATA) ruby-gtk3.pc $(pkgconfigdir);		\
 	fi

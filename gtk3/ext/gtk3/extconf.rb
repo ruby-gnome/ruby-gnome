@@ -20,8 +20,8 @@ end
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
-module_name = "gtk2"
-package_id = "gtk+-2.0"
+module_name = "gtk3"
+package_id = "gtk+-3.0"
 
 begin
   require 'mkmf-gnome2'
@@ -67,7 +67,7 @@ have_header("ruby/st.h")
 STDOUT.print("checking for target... ")
 STDOUT.flush
 target = PKGConfig.variable(package_id, "target")
-$defs << "-DRUBY_GTK2_TARGET=\\\"#{target}\\\""
+$defs << "-DRUBY_GTK3_TARGET=\\\"#{target}\\\""
 STDOUT.print(target, "\n")
 
 gdk_include_path = nil
@@ -100,7 +100,7 @@ if target != "win32" and PKGConfig.have_package('gtk+-unix-print-2.0')
   $defs.push("-DHAVE_GTK_UNIX_PRINT")
 end
 
-create_pkg_config_file("Ruby/GTK2", package_id, ruby_gnome2_version)
+create_pkg_config_file("Ruby/GTK3", package_id, ruby_gnome2_version)
 
 rbgdkkeysyms_h_path = Pathname("rbgdkkeysyms.h")
 gdkkeysyms_h_paths = []
@@ -122,7 +122,7 @@ add_distcleanfile("rbgdkkeysyms.h")
 
 ensure_objs
 
-$defs << "-DRUBY_GTK2_COMPILATION"
+$defs << "-DRUBY_GTK3_COMPILATION"
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")

@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GtkSourceView2 extension library
+extconf.rb for Ruby/GtkSourceView3 extension library
 =end
 
 require 'pathname'
@@ -19,8 +19,8 @@ end
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
-module_name = "gtksourceview2"
-package_id = "gtksourceview-2.0"
+module_name = "gtksourceview3"
+package_id = "gtksourceview-3.0"
 
 begin
   require 'mkmf-gnome2'
@@ -30,7 +30,7 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
-["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"].each do |package|
+["glib2", "atk", "pango", "gdk_pixbuf2", "gtk3"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
@@ -64,10 +64,10 @@ have_func('gtk_source_print_compositor_get_type', "gtksourceview/gtksourceprintc
 have_func('gtk_source_view_get_mark_category_background', "gtksourceview/gtksourceview.h")
 have_func('gtk_source_language_manager_guess_language', "gtksourceview/gtksourcelanguagemanager.h")
 
-make_version_header("GTKSOURCEVIEW2", package_id, ".")
+make_version_header("GTKSOURCEVIEW3", package_id, ".")
 
-create_pkg_config_file("Ruby/GtkSourceView2", package_id)
-$defs << "-DRUBY_GTKSOURCEVIEW2_COMPILATION"
+create_pkg_config_file("Ruby/GtkSourceView3", package_id)
+$defs << "-DRUBY_GTKSOURCEVIEW3_COMPILATION"
 create_makefile(module_name)
 pkg_config_dir = with_config("pkg-config-dir")
 if pkg_config_dir.is_a?(String)

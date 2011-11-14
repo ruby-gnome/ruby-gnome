@@ -3,13 +3,14 @@
 require './../glib2/lib/gnome2-raketask'
 
 package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
-  _package.description = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
+  _package.summary = "Ruby/GTK3 is a Ruby binding of GTK+-3.x."
+  _package.description = "Ruby/GTK3 is a Ruby binding of GTK+-3.x."
   _package.dependency.gem.runtime = ["atk",
                                      "pango",
                                      "gdk_pixbuf2"]
   _package.win32.packages = ["gtk+"]
   _package.win32.dependencies = []
+  _package.post_install_message = "This library is experimental."
 end
 package.define_tasks
 

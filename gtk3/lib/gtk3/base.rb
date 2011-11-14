@@ -1,11 +1,7 @@
 #! /usr/bin/env ruby
 =begin
-  gtk2/base.rb
-
-  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2006-2011 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: base.rb,v 1.6 2007/08/13 11:09:22 ktou Exp $
 =end
 
 
@@ -20,9 +16,9 @@ vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_environment_path(vendor_bin_dir)
 begin
   major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/gtk2.so"
+  require "#{major}.#{minor}/gtk3.so"
 rescue LoadError
-  require "gtk2.so"
+  require "gtk3.so"
 end
 
 module Gdk

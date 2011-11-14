@@ -34,7 +34,7 @@ G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtk);
 
 void
-Init_gtksourceview2 (void)
+Init_gtksourceview3 (void)
 {
     Init_gtk_sourceview (mGtk);
     Init_gtk_sourcebuffer (mGtk);

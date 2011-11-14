@@ -27,10 +27,10 @@
 
 VALUE treeiter_set_value_table;
 
-extern void Init_gtk2(void);
+extern void Init_gtk3(void);
 
 void
-Init_gtk2(void)
+Init_gtk3(void)
 {
     /*
      * For Gtk::TreeModel, Gtk::TreeIter. 
