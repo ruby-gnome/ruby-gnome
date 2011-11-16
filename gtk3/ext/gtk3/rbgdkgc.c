@@ -21,6 +21,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cGC
@@ -35,17 +36,6 @@ rg_initialize(VALUE self, VALUE win)
     G_INITIALIZE(self, gdk_gc_new(GDK_DRAWABLE(RVAL2GOBJ(win))));
     return Qnil;
 }
-
-/* we don't need them.
-GdkGC*      gdk_gc_new_with_values          (GdkDrawable *drawable,
-                                             GdkGCValues *values,
-                                             GdkGCValuesMask values_mask);
-void        gdk_gc_set_values               (GdkGC *gc,
-                                             GdkGCValues *values,
-                                             GdkGCValuesMask values_mask);
-void        gdk_gc_get_values               (GdkGC *gc,
-                                             GdkGCValues *values);
-*/
 
 static VALUE
 rg_set_foreground(VALUE self, VALUE color)
@@ -384,33 +374,21 @@ Init_gtk_gdk_gc(VALUE mGdk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GdkGCValuesMask */
-/* Don't need them.
-    G_DEF_CLASS(GDK_TYPE_GC_VALUES_MASK, "ValuesMask", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_GC_VALUES_MASK, "GDK_GC_");
-*/
-
-    /* GdkFunction */
     G_DEF_CLASS(GDK_TYPE_FUNCTION, "Function", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_FUNCTION, "GDK_");
 
-    /* GdkFill */
     G_DEF_CLASS(GDK_TYPE_FILL, "Fill", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_FILL, "GDK_");
 
-    /* GdkSubwindowMode */
     G_DEF_CLASS(GDK_TYPE_SUBWINDOW_MODE, "SubWindowMode", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_SUBWINDOW_MODE, "GDK_");
 
-    /* GdkLineStyle */
     G_DEF_CLASS(GDK_TYPE_LINE_STYLE, "LineStyle", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_LINE_STYLE, "GDK_");
 
-    /* GdkCapStyle */
     G_DEF_CLASS(GDK_TYPE_CAP_STYLE, "CapStyle", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_CAP_STYLE, "GDK_");
 
-    /* GdkJoinStyle */
     G_DEF_CLASS(GDK_TYPE_JOIN_STYLE, "JoinStyle", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_JOIN_STYLE, "GDK_");
 
@@ -422,3 +400,5 @@ Init_gtk_gdk_gc(VALUE mGdk)
     G_DEF_CLASS3("GdkGCFB", "GCFB", mGdk);
 #endif
 }
+*/
+

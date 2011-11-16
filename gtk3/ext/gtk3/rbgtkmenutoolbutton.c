@@ -52,6 +52,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+/* deprecated
 static VALUE
 rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
 {
@@ -63,6 +64,7 @@ rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
                                            NIL_P(tip_private) ? NULL : RVAL2CSTR(tip_private));
     return self;
 }
+*/
 
 void 
 Init_gtk_menutoolbutton(VALUE mGtk)
@@ -70,5 +72,7 @@ Init_gtk_menutoolbutton(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
+/* deprecated
     RG_DEF_METHOD(set_arrow_tooltip, -1);
+*/
 }

@@ -77,7 +77,7 @@ rg_size(VALUE self)
 static VALUE
 rg_bin_window(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->bin_window);
+    return GOBJ2RVAL(gtk_layout_get_bin_window(_SELF(self)));
 }
 
 void

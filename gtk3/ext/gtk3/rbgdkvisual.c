@@ -127,33 +127,34 @@ rg_screen(VALUE self)
 static VALUE
 rg_visual_type(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->type, GDK_TYPE_VISUAL_TYPE);
+    return GENUM2RVAL(gdk_visual_get_visual_type(_SELF(self)), GDK_TYPE_VISUAL_TYPE);
 }
 
 static VALUE
 rg_depth(VALUE self)
 {
-    return INT2FIX(_SELF(self)->depth);
+    return INT2FIX(gdk_visual_get_depth(_SELF(self)));
 }
 
 static VALUE
 rg_byte_order(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->byte_order, GDK_TYPE_BYTE_ORDER);
+    return GENUM2RVAL(gdk_visual_get_byte_order(_SELF(self)), GDK_TYPE_BYTE_ORDER);
 }
 
 static VALUE
 rg_colormap_size(VALUE self)
 {
-    return INT2FIX(_SELF(self)->colormap_size);
+    return INT2FIX(gdk_visual_get_colormap_size(_SELF(self)));
 }
 
 static VALUE
 rg_bits_per_rgb(VALUE self)
 {
-    return INT2FIX(_SELF(self)->bits_per_rgb);
+    return INT2FIX(gdk_visual_get_bits_per_rgb(_SELF(self)));
 }
 
+/* TODO
 static VALUE
 rg_red_mask(VALUE self)
 {
@@ -207,6 +208,7 @@ rg_blue_prec(VALUE self)
 {
     return INT2FIX(_SELF(self)->blue_prec);
 }
+*/
 
 void
 Init_gtk_gdk_visual(VALUE mGdk)
@@ -232,6 +234,7 @@ Init_gtk_gdk_visual(VALUE mGdk)
     RG_DEF_METHOD(byte_order, 0);
     RG_DEF_METHOD(colormap_size, 0);
     RG_DEF_METHOD(bits_per_rgb, 0);
+/* TODO
     RG_DEF_METHOD(red_mask, 0);
     RG_DEF_METHOD(red_shift, 0);
     RG_DEF_METHOD(red_prec, 0);
@@ -241,6 +244,7 @@ Init_gtk_gdk_visual(VALUE mGdk)
     RG_DEF_METHOD(blue_mask, 0);
     RG_DEF_METHOD(blue_shift, 0);
     RG_DEF_METHOD(blue_prec, 0);
+*/
 
     /* GdkVisualType */
     G_DEF_CLASS(GDK_TYPE_VISUAL_TYPE, "Type", RG_TARGET_NAMESPACE);

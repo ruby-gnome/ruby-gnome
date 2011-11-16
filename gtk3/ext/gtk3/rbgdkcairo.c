@@ -22,7 +22,7 @@
 #include "global.h"
 
 #if CAIRO_AVAILABLE
-#include <gdk/gdkcairo.h>
+#include <gdk/gdk.h>
 #include <rb_cairo.h>
 
 #define RG_TARGET_NAMESPACE rb_cCairo_Context
@@ -51,6 +51,7 @@ rg_set_source_pixbuf(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
 {
@@ -59,6 +60,7 @@ rg_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
+*/
 
 static VALUE
 rg_gdk_rectangle(VALUE self, VALUE rectangle)
@@ -72,7 +74,9 @@ rg_gdk_rectangle(VALUE self, VALUE rectangle)
 static VALUE
 rg_gdk_region(VALUE self, VALUE region)
 {
+/* TODO
     gdk_cairo_region(_SELF(self), (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION));
+*/
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
@@ -84,7 +88,9 @@ Init_gtk_gdk_cairo(void)
 #if CAIRO_AVAILABLE
     RG_DEF_METHOD(set_source_gdk_color, 1);
     RG_DEF_METHOD(set_source_pixbuf, -1);
+/* deprecated
     RG_DEF_METHOD(set_source_pixmap, 3);
+*/
     RG_DEF_METHOD(gdk_rectangle, 1);
     RG_DEF_METHOD(gdk_region, 1);
 

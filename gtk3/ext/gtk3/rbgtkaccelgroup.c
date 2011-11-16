@@ -168,7 +168,7 @@ rg_unlock(VALUE self)
 static VALUE
 rg_s_activate(G_GNUC_UNUSED VALUE self, VALUE obj, VALUE key, VALUE modtype)
 {
-    return CBOOL2RVAL(gtk_accel_groups_activate(G_OBJECT(RVAL2GOBJ(obj)),
+    return CBOOL2RVAL(gtk_accel_groups_activate(RVAL2GOBJ(obj),
                                                 NUM2UINT(key),
                                                 RVAL2MOD(modtype)));
 }

@@ -89,6 +89,7 @@ GdkWindow*  gdk_window_foreign_new_for_display
                                              GdkNativeWindow anid);
 */
 
+/* deprecated
 static VALUE
 rg_m_xid_table_lookup(int argc, VALUE *argv, VALUE self)
 {
@@ -112,6 +113,7 @@ rg_m_xid_table_lookup(int argc, VALUE *argv, VALUE self)
         return GOBJ2RVAL(win);
     }
 }
+*/
 
 /* Implement at Gdk::Window
 GdkWindow*  gdk_window_lookup               (GdkNativeWindow anid);
@@ -134,11 +136,13 @@ GdkDisplay* gdk_x11_lookup_xdisplay         (Display *xdisplay);
 guint32     gdk_x11_get_server_time         (GdkWindow *window);
 */
 
+/* deprecated
 static VALUE
 rg_m_net_wm_supports_p(VALUE self, VALUE property)
 {
     return CBOOL2RVAL(gdk_net_wm_supports(RVAL2ATOM(property)));
 }
+*/
 
 /* Implement at Gdk::Screen
 gboolean    gdk_x11_screen_supports_net_wm_hint
@@ -246,8 +250,12 @@ Init_gtk_gdk_x11(VALUE mGdk)
 #ifdef GDK_WINDOWING_X11
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "X11");
 
+/* deprecated
     RG_DEF_MODFUNC(xid_table_lookup, -1);
+*/
+/* deprecated
     RG_DEF_MODFUNC_P(net_wm_supports, 1);
+*/
 
     RG_DEF_MODFUNC(default_screen, 0);
     RG_DEF_MODFUNC(grab_server, 0);

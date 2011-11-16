@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE mInput
@@ -65,8 +66,9 @@ Init_gtk_gdk_input(VALUE mGdk)
     RG_DEF_MODFUNC(add, 2);
     RG_DEF_MODFUNC(remove, 1);
 
-    /* GdkInputCondition */
     G_DEF_CLASS(GDK_TYPE_INPUT_CONDITION, "Condition", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_INPUT_CONDITION, "GDK_INPUT_");
 
 }
+*/
+

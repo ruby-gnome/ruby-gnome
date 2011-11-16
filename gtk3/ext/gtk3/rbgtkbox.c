@@ -70,6 +70,7 @@ rg_pack_end(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_pack_start_defaults(VALUE self, VALUE widget)
 {
@@ -83,6 +84,7 @@ rg_pack_end_defaults(VALUE self, VALUE widget)
     gtk_box_pack_end_defaults(_SELF(self), RVAL2WIDGET(widget));
     return self;
 }
+*/
 
 static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE pos)
@@ -130,8 +132,10 @@ Init_gtk_box(VALUE mGtk)
 
     RG_DEF_METHOD(pack_start, -1);
     RG_DEF_METHOD(pack_end, -1);
+/* deprecated
     RG_DEF_METHOD(pack_start_defaults, 1);
     RG_DEF_METHOD(pack_end_defaults, 1);
+*/
     RG_DEF_METHOD(reorder_child, 2);
     RG_DEF_METHOD(query_child_packing, 1);
     RG_DEF_METHOD(set_child_packing, 5);

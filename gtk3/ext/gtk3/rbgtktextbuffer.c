@@ -685,7 +685,7 @@ rg_insert(int argc, VALUE *argv, VALUE self)
             if (rb_obj_is_kind_of(RARRAY_PTR(tags)[i], GTYPE2CLASS(GTK_TYPE_TEXT_TAG))) {
                 tag = RVAL2GOBJ(RARRAY_PTR(tags)[i]);
             } else {
-                tag = gtk_text_tag_table_lookup(_SELF(self)->tag_table,
+                tag = gtk_text_tag_table_lookup(gtk_text_buffer_get_tag_table(_SELF(self)),
                                                 RVAL2CSTR(RARRAY_PTR(tags)[i]));
                 if (tag == NULL) {
                     g_warning ("%s: no tag with name '%s'!",

@@ -96,7 +96,7 @@ if target == "x11" and have_header('X11/Xlib.h') and have_library("X11")
   have_func("XGetErrorText", xlib_header)
 end
 
-if target != "win32" and PKGConfig.have_package('gtk+-unix-print-2.0')
+if target != "win32" and PKGConfig.have_package('gtk+-unix-print-3.0')
   $defs.push("-DHAVE_GTK_UNIX_PRINT")
 end
 
@@ -110,7 +110,7 @@ rbgdkkeysyms_h_path.open("w") do |rbgdkkeysyms_h|
   gdkkeysyms_h_paths.each do |path|
     next unless path.exist?
     path.each_line do |line|
-      if /^#define\s+(GDK_\w+)\s+\d+/ =~ line
+      if /^#define\s+(GDK_KEY_\w+)\s+\d+/ =~ line
         define_line = "rb_define_const(mGdkKeyval, \"#{$1}\", INT2FIX(#{$1}));"
         rbgdkkeysyms_h.puts(define_line)
       end

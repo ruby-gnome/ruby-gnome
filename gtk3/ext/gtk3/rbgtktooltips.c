@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cTooltips
@@ -102,3 +103,5 @@ Init_gtk_tooltips(VALUE mGtk)
     RG_DEF_SMETHOD(get_info, 1);
     RG_DEF_SMETHOD(get_data, 1);
 }
+*/
+

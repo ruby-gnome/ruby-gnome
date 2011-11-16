@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 #include <gdk-pixbuf/gdk-pixdata.h>
 
@@ -94,15 +95,6 @@ rg_get_widget(VALUE self, VALUE path)
     }
     return obj;
 }
-
-/* We can't implement them because actions are always 1.
-GtkWidget*  gtk_item_factory_get_widget_by_action
-                                            (GtkItemFactory *ifactory,
-                                             guint action);
-GtkWidget*  gtk_item_factory_get_item_by_action
-                                            (GtkItemFactory *ifactory,
-                                             guint action);
-*/
 
 static int
 menuitem_type_check(char *item_type)
@@ -223,15 +215,6 @@ rg_delete_item(VALUE self, VALUE path)
     return self;
 }
 
-/*
-Don't implement. Use Gtk::ItemFactory#delete_item instead.
-void        gtk_item_factory_delete_entry   (GtkItemFactory *ifactory,
-                                             GtkItemFactoryEntry *entry);
-void        gtk_item_factory_delete_entries (GtkItemFactory *ifactory,
-                                             guint n_entries,
-                                             GtkItemFactoryEntry *entries);
-*/
-
 static VALUE
 rg_popup(VALUE self, VALUE x, VALUE y, VALUE mouse_button, VALUE time)
 {
@@ -239,26 +222,6 @@ rg_popup(VALUE self, VALUE x, VALUE y, VALUE mouse_button, VALUE time)
                            NUM2UINT(time));
     return self;
 }
-/*
-Do we need these methods?
-void        gtk_item_factory_popup_with_data
-                                            (GtkItemFactory *ifactory,
-                                             gpointer popup_data,
-                                             GtkDestroyNotify destroy,
-                                             guint x,
-                                             guint y,
-                                             guint mouse_button,
-                                             guint32 time);
-
-gpointer    gtk_item_factory_popup_data     (GtkItemFactory *ifactory);
-gpointer    gtk_item_factory_popup_data_from_widget
-                                            (GtkWidget *widget);
-void        gtk_item_factory_set_translate_func
-                                            (GtkItemFactory *ifactory,
-                                             GtkTranslateFunc func,
-                                             gpointer data,
-                                             GtkDestroyNotify notify);
-*/
 
 void 
 Init_gtk_itemfactory(VALUE mGtk)
@@ -277,7 +240,6 @@ Init_gtk_itemfactory(VALUE mGtk)
     RG_DEF_METHOD(delete_item, 1);
     RG_DEF_METHOD(popup, 4);
 
-    /* Ruby/GTK Original constants */
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_MENU_BAR", INT2FIX(GTK_TYPE_MENU_BAR));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_MENU", INT2FIX(GTK_TYPE_MENU));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_OPTION_MENU", INT2FIX(GTK_TYPE_OPTION_MENU));
@@ -297,3 +259,5 @@ Init_gtk_itemfactory(VALUE mGtk)
     action_table = rb_hash_new();
     rb_global_variable(&action_table);
 }
+*/
+

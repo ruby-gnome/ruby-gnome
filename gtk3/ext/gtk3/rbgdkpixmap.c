@@ -22,10 +22,11 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 #ifdef HAVE_XREADBITMAPFILEDATA
 #include <X11/Xlib.h>
-#endif /* HAVE_XREADBITMAPFILEDATA */
+#endif
 
 #define RG_TARGET_NAMESPACE cPixmap
 
@@ -143,14 +144,7 @@ rg_s_create_from_xbm(VALUE self, VALUE win, VALUE fname)
     XFree(data);
     return GOBJ2RVAL(new);
 }
-#endif /* HAVE_XREADBITMAPFILEDATA */
-
-/* From X Window System Interaction */
-/*
-  Gdk::Window.foreign_new(anid)
-  Gdk::Window.foreign_new(display, anid)                       # Since GTK+-2.2
-  Gdk::Window.foreign_new(screen, anid, width, height, depth)  # Since GTK+-2.10
- */
+#endif
 
 static VALUE
 rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -171,10 +165,10 @@ rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
             break;
         case 5:
             win = gdk_pixmap_foreign_new_for_screen(GDK_SCREEN(RVAL2GOBJ(arg[0])), 
-                                                    RVAL2GDKNATIVEWINDOW(arg[1]), /* anid */
-                                                    NUM2INT(arg[2]),  /* width */
-                                                    NUM2INT(arg[3]),  /* height */
-                                                    NUM2INT(arg[4])); /* depth */
+                                                    RVAL2GDKNATIVEWINDOW(arg[1]),
+                                                    NUM2INT(arg[2]),
+                                                    NUM2INT(arg[3]),
+                                                    NUM2INT(arg[4]));
             break;
         default:
             break;
@@ -221,7 +215,7 @@ Init_gtk_gdk_pixmap(VALUE mGdk)
     RG_DEF_SMETHOD(colormap_create_from_xpm_d, 4);
 #ifdef HAVE_XREADBITMAPFILEDATA
     RG_DEF_SMETHOD(create_from_xbm, 2);
-#endif /* HAVE_XREADBITMAPFILEDATA */
+#endif
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkPixmapImplX11", "PixmapImplX11", mGdk);
 #elif defined(GDK_WINDOWING_WIN32)
@@ -234,3 +228,5 @@ Init_gtk_gdk_pixmap(VALUE mGdk)
     RG_DEF_SMETHOD(lookup, -1);
 
 }
+*/
+

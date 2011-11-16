@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cImage
@@ -146,7 +147,8 @@ Init_gtk_gdk_image(VALUE mGdk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GdkImageType */
     G_DEF_CLASS(GDK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_IMAGE_TYPE, "GDK_IMAGE_");
 }
+*/
+

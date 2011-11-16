@@ -24,6 +24,7 @@
 #define RG_TARGET_NAMESPACE cFileChooserDialog
 #define _SELF(self) GTK_FILE_CHOOSER_DIALOG(RVAL2GOBJ(self))
 
+/* TODO
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -49,11 +50,14 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rbgtk_dialog_add_buttons_internal(self, button_ary);
     return Qnil;
 }
+*/
 
 void 
 Init_gtk_file_chooser_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_DIALOG, "FileChooserDialog", mGtk);
 
+/* TODO
     RG_DEF_METHOD(initialize, -1);
+*/
 }

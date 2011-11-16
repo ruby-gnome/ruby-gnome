@@ -22,7 +22,7 @@
 #include "global.h"
 
 #ifdef HAVE_GTK_UNIX_PRINT
-#include <gtk/gtkprintjob.h>
+#include <gtk/gtkunixprint.h>
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
 #  define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type())
 #endif
@@ -103,7 +103,7 @@ invoke_callback(VALUE data)
     return Qnil;
 }
 static void
-complete_func(GtkPrintJob *job, gpointer data, GError *error)
+complete_func(GtkPrintJob *job, gpointer data, const GError *error)
 {
     struct callback_arg arg;
 

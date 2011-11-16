@@ -37,6 +37,7 @@ activate_link_func(GtkAboutDialog *about, const gchar *link, gpointer func)
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(about), CSTR2RVAL(link));
 }
 
+/* deprecated
 static VALUE
 rg_s_set_email_hook(VALUE self)
 {
@@ -54,6 +55,7 @@ rg_s_set_url_hook(VALUE self)
     gtk_about_dialog_set_url_hook((GtkAboutDialogActivateLinkFunc)activate_link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
+*/
 
 typedef struct {
     const char *name;
@@ -130,7 +132,9 @@ Init_gtk_aboutdialog(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
     RG_DEF_METHOD(initialize, 0);
 
+/* deprecated
     RG_DEF_SMETHOD(set_email_hook, 0);
     RG_DEF_SMETHOD(set_url_hook, 0);
+*/
     RG_DEF_SMETHOD(show, 2);
 }

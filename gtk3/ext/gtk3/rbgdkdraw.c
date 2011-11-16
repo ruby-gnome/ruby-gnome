@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 #include "rbpango.h"
 #ifdef GDK_WINDOWING_X11
@@ -257,9 +258,6 @@ rg_draw_polygon(VALUE self, VALUE rbgc, VALUE rbfilled, VALUE rbpoints)
     return self;
 }
 
-/*
-  trapezoids = [[y1, x11, x21, y2, x12, x22], ...]
- */
 struct rbgdk_rval2gdktrapezoids_args {
     VALUE ary;
     long n;
@@ -520,3 +518,5 @@ Init_gtk_gdk_draw(VALUE mGdk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
+*/
+

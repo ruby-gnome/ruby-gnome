@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cVRuler
@@ -39,3 +40,5 @@ Init_gtk_vruler(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VRULER, "VRuler", mGtk);
     RG_DEF_METHOD(initialize, 0);
 }
+*/
+

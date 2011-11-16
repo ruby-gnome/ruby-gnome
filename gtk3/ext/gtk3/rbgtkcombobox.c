@@ -35,8 +35,10 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     if (rb_obj_is_kind_of(model_or_false, GTYPE2CLASS(GTK_TYPE_TREE_MODEL))){
         widget = gtk_combo_box_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model_or_false)));
+/* deprecated
     } else if (NIL_P(model_or_false) || TYPE(model_or_false) == T_TRUE){
         widget = gtk_combo_box_new_text();
+*/
     } else if (TYPE(model_or_false) == T_FALSE){
         widget = gtk_combo_box_new();
     } else {
@@ -68,6 +70,7 @@ rg_set_active_iter(VALUE self, VALUE iter)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_append_text(VALUE self, VALUE text)
 {
@@ -95,12 +98,15 @@ rg_remove_text(VALUE self, VALUE position)
     gtk_combo_box_remove_text(_SELF(self), NUM2INT(position));
     return self;
 }
+*/
 
+/* deprecated
 static VALUE
 rg_active_text(VALUE self)
 {
     return CSTR2RVAL_FREE(gtk_combo_box_get_active_text(_SELF(self)));
 }
+*/
 
 static VALUE
 rg_popup_accessible(VALUE self)
@@ -141,11 +147,16 @@ Init_gtk_combobox(VALUE mGtk)
     RG_DEF_METHOD(active_iter, 0);
     RG_DEF_METHOD(set_active_iter, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "active_iter");
+/* deprecated
     RG_DEF_METHOD(append_text, 1);
     RG_DEF_METHOD(insert_text, 2);
     RG_DEF_METHOD(prepend_text, 1);
     RG_DEF_METHOD(remove_text, 1);
+*/
+
+/* deprecated
     RG_DEF_METHOD(active_text, 0);
+*/
     RG_DEF_METHOD(popup_accessible, 0);
     RG_DEF_METHOD(set_row_separator_func, 0);
 }

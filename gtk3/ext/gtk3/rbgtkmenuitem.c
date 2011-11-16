@@ -68,6 +68,7 @@ mitem_set_submenu(VALUE self, VALUE child)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_remove_submenu(VALUE self)
 {
@@ -82,6 +83,7 @@ rg_remove_submenu(VALUE self)
 
     return self;
 }
+*/
 
 static VALUE
 rg_toggle_size_request(VALUE self)
@@ -105,7 +107,9 @@ Init_gtk_menu_item(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "submenu", mitem_set_submenu, 1);
+/* deprecated
     RG_DEF_METHOD(remove_submenu, 0);
+*/
     RG_DEF_METHOD(toggle_size_request, 0);
     RG_DEF_METHOD(toggle_size_allocate, 1);
 }
