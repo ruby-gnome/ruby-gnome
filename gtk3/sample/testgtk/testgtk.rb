@@ -32,7 +32,7 @@ Original Copyright:
 
 =end
 
-require 'gtk2'
+require 'gtk3'
 require 'sample'
 require 'button'
 require 'checkbutton'

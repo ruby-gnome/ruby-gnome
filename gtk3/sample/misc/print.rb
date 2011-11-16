@@ -8,7 +8,7 @@
   $Id: print.rb,v 1.1 2007/08/05 15:41:31 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 # Values returned by a Pango::Layout or set in a Pango::Layout
 # are always multiple of Pango::SCALE. Those are convenience methods to

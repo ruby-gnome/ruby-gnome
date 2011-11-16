@@ -9,7 +9,7 @@
 =end
 
 
-require 'gtk2'
+require 'gtk3'
 
 if str = Gtk.check_version(2, 6, 0)
   puts "This sample requires GTK+ 2.6.0 or later"

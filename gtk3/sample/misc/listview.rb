@@ -8,7 +8,7 @@
   $Id: listview.rb,v 1.11 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 window = Gtk::Window.new("Gtk::ListStore sample")
 window.border_width = 0

@@ -8,7 +8,7 @@
   $Id: scalebutton.rb,v 1.1 2007/07/12 14:04:54 ggc Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 if str = Gtk.check_version(2, 12, 0)
     puts "This sample requires GTK+ 2.12.0 or later"

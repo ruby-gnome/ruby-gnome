@@ -7,7 +7,7 @@
   $Id: drawing.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 class Canvas < Gtk::DrawingArea
   def initialize

@@ -7,7 +7,7 @@
   $Id: stock.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 window = Gtk::Window.new("Gtk::Stock sample")
 window.signal_connect("destroy"){Gtk.main_quit}

@@ -8,7 +8,7 @@
   $Id: linkbutton.rb,v 1.1 2006/10/21 16:58:00 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 window = Gtk::Window.new("Gtk::LinkButton sample")
 window.signal_connect("destroy"){Gtk.main_quit}

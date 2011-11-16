@@ -14,7 +14,7 @@
   $Id: alpha-demo.rb,v 1.1 2007/01/06 03:55:44 ktou Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 require 'cairo'
 
 class AlphaDemo < Gtk::Window

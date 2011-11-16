@@ -7,11 +7,11 @@
   $Id: common.rb,v 1.9 2005/10/15 03:41:36 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 module Demo
   def self.find_file(basename)
-    %w(. /usr/share/gtk-2.0/demo /usr/local/share/gtk-2.0/demo/).each do |dirname|
+    %w(. /usr/share/gtk-3.0/demo /usr/local/share/gtk-3.0/demo/).each do |dirname|
       path = File.join(dirname, basename)
       if File.exist?(path)
 	return path

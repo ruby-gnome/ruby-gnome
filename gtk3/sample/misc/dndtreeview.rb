@@ -8,7 +8,7 @@
   $Id: dndtreeview.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 class TestWindow < Gtk::Window
   attr_reader :list

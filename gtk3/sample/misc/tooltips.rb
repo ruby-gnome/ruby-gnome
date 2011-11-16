@@ -9,7 +9,7 @@
   $Id: tooltips.rb,v 1.1 2007/07/10 13:17:34 ggc Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 if str = Gtk.check_version(2, 12, 0)
     puts "This sample requires GTK+ 2.12.0 or later"

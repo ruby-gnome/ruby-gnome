@@ -8,7 +8,7 @@
   $Id: treeview.rb,v 1.8 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 window = Gtk::Window.new("Gtk::TreeView sample")
 

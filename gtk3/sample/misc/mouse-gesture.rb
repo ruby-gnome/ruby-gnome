@@ -8,7 +8,7 @@
   $Id: mouse-gesture.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 unless Gdk.cairo_available?
   STDERR.puts("need cairo and rcairo support for this sample")

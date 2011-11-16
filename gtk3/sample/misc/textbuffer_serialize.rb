@@ -8,7 +8,7 @@
   $Id: textbuffer_serialize.rb,v 1.1 2006/11/23 08:39:13 mutoh Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 if str = Gtk.check_version(2, 10, 0)
   puts "This sample requires GTK+ 2.10.0 or later"

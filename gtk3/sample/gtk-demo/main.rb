@@ -8,7 +8,7 @@
   $Id: main.rb,v 1.20 2007/07/09 13:21:54 ggc Exp $
 =end
 
-require 'gtk2'
+require 'gtk3'
 
 $:.unshift(File.dirname(__FILE__))
 
