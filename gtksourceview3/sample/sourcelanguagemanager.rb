@@ -8,7 +8,7 @@
   $Id: sourcelanguagesmanager.rb,v 1.3 2007/06/03 02:11:07 mutoh Exp $
 =end
 
-require 'gtksourceview2'
+require 'gtksourceview3'
 
 s = Gtk::SourceLanguageManager.new
 s.language_ids.each do |v|

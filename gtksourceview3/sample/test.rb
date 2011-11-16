@@ -8,7 +8,7 @@
   $Id: test.rb,v 1.4 2007/06/03 02:11:07 mutoh Exp $
 =end
 
-require 'gtksourceview2'
+require 'gtksourceview3'
 
 w = Gtk::Window.new
 w.signal_connect("delete-event"){Gtk::main_quit}
