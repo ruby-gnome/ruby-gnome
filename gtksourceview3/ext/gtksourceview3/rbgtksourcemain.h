@@ -24,7 +24,6 @@
 #define __RBGTKSOURCEVIEWMAIN_H_
 
 #include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourcemark.h>
@@ -37,6 +36,6 @@
 
 #include "ruby.h"
 #include "rbgtk.h"
-#include "rbgtksourceview2version.h"
+#include "rbgtksourceview3version.h"
 
 #endif /* __RBGTKSOURCEVIEWMAIN_H_ */

@@ -40,11 +40,11 @@
 static VALUE
 rg_initialize(VALUE self, VALUE val)
 {
-    if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_TYPE_SOURCE_BUFFER))) {
+    if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_SOURCE_TYPE_BUFFER))) {
        G_INITIALIZE(self,
            gtk_source_print_compositor_new (GTK_SOURCE_BUFFER (RVAL2GOBJ (val))));
     } else
-        if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_TYPE_SOURCE_VIEW))) {
+        if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_SOURCE_TYPE_VIEW))) {
             G_INITIALIZE(self,
                 gtk_source_print_compositor_new_from_view (GTK_SOURCE_VIEW (RVAL2GOBJ (val))));
     } else {
@@ -156,7 +156,7 @@ void
 Init_gtk_sourceprintcompositor(VALUE mGtk)
 {
 #ifdef HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOURCE_PRINT_COMPOSITOR, "SourcePrintCompositor", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_SOURCE_TYPE_PRINT_COMPOSITOR, "SourcePrintCompositor", mGtk);
 
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(get_top_margin, 1);

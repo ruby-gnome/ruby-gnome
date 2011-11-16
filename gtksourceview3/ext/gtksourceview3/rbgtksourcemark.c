@@ -80,7 +80,7 @@ void
 Init_gtk_sourcemark (VALUE mGtk)
 {
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_MARK, "SourceMark", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_MARK, "SourceMark", mGtk);
 
     RG_DEF_METHOD(initialize, 2);
     RG_DEF_METHOD(next, -1);

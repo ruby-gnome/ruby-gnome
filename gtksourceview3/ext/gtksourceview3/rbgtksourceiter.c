@@ -19,18 +19,13 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "rbgtksourcemain.h"
 
 #define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
-/* Method: forward_search(str, flags, limit)
- * str: the search string (string)
- * flags: flags affecting the search (Gtk::SourceSearchFlags)
- * limit: location of last possible match start, or NULL for start of buffer
- * Returns: locations of start and end of match.
- */
 static VALUE
 rg_forward_search(int argc, VALUE *argv, VALUE self)
 {
@@ -63,12 +58,6 @@ rg_forward_search(int argc, VALUE *argv, VALUE self)
     return ret;
 }
 
-/* Method: backward_search(str, flags, limit)
- * str: the search string (string)
- * flags: flags affecting the search (Gtk::SourceSearchFlags)
- * limit: location of last possible match end, or NULL for end of buffer
- * Returns: locations of start and end of match.
- */
 static VALUE
 rg_backward_search(int argc, VALUE *argv, VALUE self)
 {
@@ -105,12 +94,11 @@ Init_gtk_sourceiter (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS (GTK_TYPE_TEXT_ITER);
 
-    /*
-     * They are override original Gtk::TextIter#[for|back]ward_search
-     */
     RG_DEF_METHOD(forward_search, -1);
     RG_DEF_METHOD(backward_search, -1);
 
     G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SEARCH_FLAGS, "GTK_");
 }
+*/
+

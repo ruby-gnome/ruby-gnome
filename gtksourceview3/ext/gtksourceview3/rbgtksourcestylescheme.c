@@ -65,7 +65,7 @@ rg_get_style(VALUE self, VALUE style_name)
 void
 Init_gtk_sourcestylescheme (VALUE mGtk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_STYLE_SCHEME, "SourceStyleScheme", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_STYLE_SCHEME, "SourceStyleScheme", mGtk);
 
     RG_DEF_METHOD(authors, 0);
     RG_DEF_METHOD(get_style, 1);
