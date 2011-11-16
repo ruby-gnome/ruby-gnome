@@ -1,0 +1,33 @@
+Ruby/GTK2
+=========
+Ruby/GTK2 is a Ruby binding of GTK+-2.0.x.
+
+Requirements
+------------
+   Ruby: http://www.ruby-lang.org/
+   GTK+: http://www.gtk.org/
+   Pango: http://www.pango.org/
+   cairo/rcairo: http://cairographics.org/ (optional)
+   Ruby/GLib2, Ruby/ATK, Ruby/Pango: http://ruby-gnome2.sourceforge.net/
+
+Install
+-------
+   0. install ruby-1.6.x or later, GTK+-2.0.x, Ruby/GLib2, Ruby/Pango 
+      (and cairo/rcairo).
+   1. ruby extconf.rb
+      (To use rcairo on Win32, set CAIRO_PATH as a environment variable first)
+   2. make
+   3. su
+   4. make install
+
+Copying
+-------
+   Copyright (c) 2002-2005 Ruby-GNOME2 Project Team
+
+   This program is free software.
+   You can distribute/modify this program under the terms of
+   the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
+
+Project Website
+---------------
+   http://ruby-gnome2.sourceforge.jp/
