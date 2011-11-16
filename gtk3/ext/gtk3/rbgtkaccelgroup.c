@@ -108,7 +108,6 @@ rg_s_from_accel_closure(G_GNUC_UNUSED VALUE self, VALUE closure)
                          (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static gboolean
 gaccelgrp_find_func(GtkAccelKey *key, GClosure *closure, gpointer func)
 {
@@ -128,9 +127,7 @@ rg_find(VALUE self)
                                   (gpointer)func);
     return BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY);
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_activate(VALUE self, VALUE accel_quark, VALUE acceleratable, VALUE accel_key, VALUE accel_mods)
 {
@@ -143,7 +140,6 @@ rg_activate(VALUE self, VALUE accel_quark, VALUE acceleratable, VALUE accel_key,
     return CBOOL2RVAL(gtk_accel_group_activate(_SELF(self), quark, RVAL2GOBJ(acceleratable),
                                                NUM2UINT(accel_key), RVAL2MOD(accel_mods)));
 }
-#endif
 
 static VALUE
 _gaccelgrp_lock_ensure(VALUE self)
@@ -193,16 +189,12 @@ Init_gtk_accel_group(VALUE mGtk)
     RG_DEF_SMETHOD(from_object, 1);
     RG_DEF_SMETHOD(from_accel_closure, 1);
     RG_DEF_METHOD(initialize, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(activate, 4);
-#endif
     RG_DEF_METHOD(lock, 0);
     RG_DEF_METHOD(unlock, 0);
     RG_DEF_METHOD(connect, -1);
     RG_DEF_METHOD(disconnect, 1);
     RG_DEF_METHOD(disconnect_key, 2);
     RG_DEF_METHOD(query, 2);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(find, 0);
-#endif
 }

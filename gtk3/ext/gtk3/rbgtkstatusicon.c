@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cStatusIcon
 #define _SELF(w) (GTK_STATUS_ICON(RVAL2GOBJ(w)))
 
@@ -78,12 +76,10 @@ rg_geometry(VALUE self)
         return rb_ary_new3(3, Qnil, Qnil, Qnil);
     }
 }
-#endif
 
 void 
 Init_gtk_status_icon(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -91,5 +87,4 @@ Init_gtk_status_icon(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "tooltip");
     RG_DEF_METHOD(position_menu, 1);
     RG_DEF_METHOD(geometry, 0);
-#endif
 }

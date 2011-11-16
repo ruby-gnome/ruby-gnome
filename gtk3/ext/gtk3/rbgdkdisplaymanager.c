@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,2,0)
-
 #define RG_TARGET_NAMESPACE cDisplayManager
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
 
@@ -45,15 +43,12 @@ gdkdisplaymanager_get_core_pointer(VALUE self)
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
 */
-#endif
 
 void 
 Init_gtk_gdk_display_manager(VALUE mGdk)
 {
-#if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
 
     RG_DEF_SMETHOD(get, 0);
     RG_DEF_METHOD(displays, 0);
-#endif
 }

@@ -82,7 +82,6 @@ rg_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 typedef struct _ValuesInfo
 {
     gint i;
@@ -179,7 +178,6 @@ rg_set_values(VALUE self, VALUE iter, VALUE values)
 
     return self;
 }
-#endif
 
 /*
   void        gtk_tree_store_set (GtkTreeStore *tree_store,
@@ -195,12 +193,7 @@ static VALUE
 rg_remove(VALUE self, VALUE iter)
 {
     G_CHILD_REMOVE(self, iter);
-#if GTK_CHECK_VERSION(2,2,0)
     return CBOOL2RVAL(gtk_list_store_remove(_SELF(self), RVAL2GTKTREEITER(iter)));
-#else
-    gtk_list_store_remove(_SELF(self), RVAL2GTKTREEITER(iter));
-    return Qtrue;
-#endif
 }
 
 struct lstore_insert_args {
@@ -270,7 +263,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
     if (NIL_P(values)){
         gtk_list_store_insert(args.store, &args.iter, args.position);
     } else {
-#if GTK_CHECK_VERSION(2,6,0)
         args.ary = rb_funcall(values, id_to_a, 0);
         args.n = RARRAY_LEN(args.ary);
         args.columns = g_new(gint, args.n);
@@ -278,10 +270,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
 
         rb_ensure(lstore_insert_body, (VALUE)&args,
                   lstore_insert_ensure, (VALUE)&args);
-#else
-        gtk_list_store_insert(args.store, &args.iter, args.position);
-        rb_warn("Ignored 2nd argument under this environment, as it has been supported since GTK+-2.6.");
-#endif
     }
 
     args.iter.user_data3 = args.store;
@@ -357,7 +345,6 @@ rg_clear(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_iter_is_valid_p(VALUE self, VALUE iter)
 {
@@ -378,12 +365,14 @@ rg_reorder(VALUE self, VALUE rbnew_order)
 
     return self;
 }
+
 static VALUE
 rg_swap(VALUE self, VALUE iter1, VALUE iter2)
 {
     gtk_list_store_swap(_SELF(self), RVAL2GTKTREEITER(iter1), RVAL2GTKTREEITER(iter2));
     return self;
 }
+
 static VALUE
 rg_move_before(VALUE self, VALUE iter, VALUE position)
 {
@@ -391,6 +380,7 @@ rg_move_before(VALUE self, VALUE iter, VALUE position)
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
+
 static VALUE
 rg_move_after(VALUE self, VALUE iter, VALUE position)
 {
@@ -398,7 +388,6 @@ rg_move_after(VALUE self, VALUE iter, VALUE position)
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
-#endif
 
 void
 Init_gtk_list_store(VALUE mGtk)
@@ -420,15 +409,10 @@ Init_gtk_list_store(VALUE mGtk)
     RG_DEF_METHOD(prepend, 0);
     RG_DEF_METHOD(append, 0);
     RG_DEF_METHOD(clear, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD_P(iter_is_valid, 1);
     RG_DEF_METHOD(reorder, 1);
     RG_DEF_METHOD(swap, 2);
     RG_DEF_METHOD(move_before, 2);
     RG_DEF_METHOD(move_after, 2);
-#endif
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(set_values, 2);
-#endif
-
 }

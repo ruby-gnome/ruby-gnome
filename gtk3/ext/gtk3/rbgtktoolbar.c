@@ -182,13 +182,11 @@ rg_insert(int argc, VALUE *argv, VALUE self)
                                        N_RVAL2CSTR(ttext), N_RVAL2CSTR(ptext),
                                        GTK_SIGNAL_FUNC(exec_callback),
                                        (gpointer)func, NUM2INT(pos));
-#if GTK_CHECK_VERSION(2,4,0)
     } else if (rb_obj_is_kind_of(type, GTYPE2CLASS(GTK_TYPE_TOOL_ITEM))){
         rb_scan_args(argc, argv, "20", &pos, &widget);
         gtk_toolbar_insert(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(widget)),
                            NUM2INT(pos));
         return widget;
-#endif
     } else {
         rb_scan_args(argc, argv, "22", &pos, &widget, &ttext, &ptext);
         gtk_toolbar_insert_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
@@ -200,7 +198,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
     return ret ? GOBJ2RVAL(ret) : Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_item_index(VALUE self, VALUE item)
 {
@@ -239,7 +236,6 @@ rg_relief_style(VALUE self)
 {
     return GENUM2RVAL(gtk_toolbar_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
 }
-#endif
 
 static VALUE
 rg_append_space(VALUE self)
@@ -289,14 +285,12 @@ Init_gtk_toolbar(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(item_index, 1);
     RG_DEF_METHOD(n_items, 0);
     RG_DEF_METHOD(nth_item, 1);
     RG_DEF_METHOD(drop_index, 2);
     RG_DEF_METHOD(set_drop_highlight_item, 2);
     RG_DEF_METHOD(relief_style, 0);
-#endif
     RG_DEF_METHOD(append, -1);
     RG_DEF_METHOD(prepend, -1);
     RG_DEF_METHOD(insert, -1);

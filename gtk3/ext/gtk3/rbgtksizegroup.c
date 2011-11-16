@@ -46,13 +46,11 @@ rg_remove_widget(VALUE self, VALUE widget)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_widgets(VALUE self)
 {
     return GSLIST2ARY(gtk_size_group_get_widgets(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_size_group(VALUE mGtk)
@@ -62,10 +60,7 @@ Init_gtk_size_group(VALUE mGtk)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(add_widget, 1);
     RG_DEF_METHOD(remove_widget, 1);
-
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(widgets, 0);
-#endif
 
     /* GtkSizeGroupMode */
     G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", RG_TARGET_NAMESPACE);

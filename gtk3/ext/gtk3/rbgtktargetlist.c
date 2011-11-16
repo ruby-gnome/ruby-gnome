@@ -24,32 +24,6 @@
 #define RG_TARGET_NAMESPACE cTargetList
 #define _SELF(r) ((GtkTargetList*)RVAL2BOXED(r, GTK_TYPE_TARGET_LIST))
 
-/**********************************/
-#if ! GTK_CHECK_VERSION(2,10,0) 
-static GtkTargetList*
-rbgtk_target_list_copy(const GtkTargetList* list)
-{
-  GtkTargetList* new_list;
-  g_return_val_if_fail (list != NULL, NULL);
-  new_list = g_new(GtkTargetList, 1);
-  *new_list = *list;
-  return new_list;
-}
-
-GType
-gtk_target_list_get_type(void)
-{
-    static GType our_type = 0;
-
-    if (our_type == 0)
-        our_type = g_boxed_type_register_static ("GtkTargetList",
-                    (GBoxedCopyFunc)rbgtk_target_list_copy,
-                    (GBoxedFreeFunc)gtk_target_list_unref);
-    return our_type;
-}
-#endif
-/**********************************/
-
 static VALUE
 rg_initialize(VALUE self, VALUE rbtargets)
 {
@@ -86,7 +60,6 @@ rg_add_table(VALUE self, VALUE rbtargets)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_add_text_targets(VALUE self, VALUE info)
 {
@@ -107,9 +80,7 @@ rg_add_uri_targets(VALUE self, VALUE info)
     gtk_target_list_add_uri_targets(_SELF(self), NUM2UINT(info));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, VALUE buffer)
 {
@@ -118,7 +89,6 @@ rg_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, VALUE buf
                                           GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)));
     return self;
 }
-#endif
 
 static VALUE
 rg_remove(VALUE self, VALUE target)
@@ -146,14 +116,10 @@ Init_gtk_target_list(VALUE mGtk)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(add, 3);
     RG_DEF_METHOD(add_table, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(add_text_targets, 1);
     RG_DEF_METHOD(add_image_targets, 2);
     RG_DEF_METHOD(add_uri_targets, 1);
-#endif
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(add_rich_text_targets, 3);
-#endif
     RG_DEF_METHOD(remove, 1);
     RG_DEF_METHOD(find, 1);
 }

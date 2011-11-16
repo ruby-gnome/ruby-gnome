@@ -24,8 +24,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,12,0)
-
 #define RG_TARGET_NAMESPACE cVolumeButton
 
 static VALUE
@@ -35,13 +33,9 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#endif
-
 void 
 Init_gtk_volumebutton(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,12,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VOLUME_BUTTON, "VolumeButton", mGtk);
     RG_DEF_METHOD(initialize, 0);
-#endif
 }

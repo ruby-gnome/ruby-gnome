@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cUIManager
 #define _SELF(self) (GTK_UI_MANAGER(RVAL2GOBJ(self)))
 
@@ -162,12 +160,10 @@ rbuimanager_mark(void *p)
 
     rbgobj_gc_mark_instance(gtk_ui_manager_get_accel_group(manager));
 }
-#endif
 
 void
 Init_gtk_uimanager(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_UI_MANAGER, "UIManager", mGtk,
@@ -190,6 +186,4 @@ Init_gtk_uimanager(VALUE mGtk)
     /* GtkUIManagerItemType */
     G_DEF_CLASS(GTK_TYPE_UI_MANAGER_ITEM_TYPE, "ItemType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_UI_MANAGER_ITEM_TYPE, "GTK_UI_MANAGER_");
-
-#endif
 }

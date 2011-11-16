@@ -22,8 +22,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cFileFilter
 #define _SELF(self) GTK_FILE_FILTER(RVAL2GOBJ(self))
 
@@ -75,14 +73,12 @@ filter_func(const GtkFileFilterInfo *info, gpointer func)
                                  CSTR2RVAL(info->mime_type)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_add_pixbuf_formats(VALUE self)
 {
     gtk_file_filter_add_pixbuf_formats(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_add_custom(VALUE self, VALUE needed)
@@ -112,13 +108,10 @@ rg_filter_p(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display
 
     return CBOOL2RVAL(gtk_file_filter_filter(_SELF(self), &info));
 }
-#endif
 
 void 
 Init_gtk_file_filter(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
-
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -126,9 +119,7 @@ Init_gtk_file_filter(VALUE mGtk)
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(add_mime_type, 1);
     RG_DEF_METHOD(add_pattern, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(add_pixbuf_formats, 0);
-#endif
     RG_DEF_METHOD(add_custom, 1);
     RG_DEF_METHOD(needed, 0);
     RG_DEF_METHOD_P(filter, 5);
@@ -137,6 +128,4 @@ Init_gtk_file_filter(VALUE mGtk)
 
     G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_FILTER_FLAGS, "GTK_FILE_FILTER_");
-
-#endif
 }

@@ -178,7 +178,6 @@ rg_set_default(VALUE self, VALUE win)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_present(int argc, VALUE *argv, VALUE self)
 {
@@ -190,14 +189,6 @@ rg_present(int argc, VALUE *argv, VALUE self)
     }
     return self;
 }
-#else
-static VALUE
-gwin_present(VALUE self)
-{
-    gtk_window_present(_SELF(self));
-    return self;
-}
-#endif
 
 static VALUE
 rg_iconify(VALUE self)
@@ -241,34 +232,33 @@ rg_unmaximize(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0) 
 static VALUE
 rg_fullscreen(VALUE self)
 {
     gtk_window_fullscreen(_SELF(self));
     return self;
 }
+
 static VALUE
 rg_unfullscreen(VALUE self)
 {
     gtk_window_unfullscreen(_SELF(self));
     return self;
 }
-#endif
-#if GTK_CHECK_VERSION(2,4,0)
+
 static VALUE
 rg_set_keep_above(VALUE self, VALUE setting)
 {
     gtk_window_set_keep_above(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
+
 static VALUE
 rg_set_keep_below(VALUE self, VALUE setting)
 {
     gtk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
-#endif
 
 static VALUE
 rg_begin_resize_drag(VALUE self, VALUE edge, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
@@ -372,13 +362,11 @@ rg_size(VALUE self)
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_group(VALUE self)
 {
     return GOBJ2RVAL(gtk_window_get_group(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_move(VALUE self, VALUE x, VALUE y)
@@ -419,7 +407,6 @@ rg_s_set_default_icon_list(G_GNUC_UNUSED VALUE self, VALUE rblist)
     return rblist;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
 {
@@ -429,40 +416,27 @@ rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
         if (! ret)
             RAISE_GERROR(err);
     } else {
-#if GTK_CHECK_VERSION(2,4,0)
         gtk_window_set_default_icon(GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
-#else
-        rb_raise(rb_eArgError, "Invalid argument: %s, or you may need to use GTK+-2.4.x", 
-                 rb_class2name(CLASS_OF(icon_or_filename)));
-#endif
     }
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_set_default_icon_name(VALUE self, VALUE name)
 {
     gtk_window_set_default_icon_name(RVAL2CSTR(name));
     return self;
 }
-#endif
 
 static VALUE
 gwin_set_icon(VALUE self, VALUE icon_or_filename)
 {
     if (TYPE(icon_or_filename) == T_STRING){
-#if GTK_CHECK_VERSION(2,2,0)
         GError* err;
         gboolean ret = gtk_window_set_icon_from_file(_SELF(self),
                                                      RVAL2CSTR(icon_or_filename), &err);
         if (! ret)
             RAISE_GERROR(err);
-#else
-        rb_raise(rb_eArgError, "Invalid argument: %s, or you may need to use GTK+-2.4.x", 
-                 rb_class2name(CLASS_OF(icon_or_filename)));
-#endif
     } else {
         gtk_window_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
     }
@@ -483,14 +457,12 @@ rg_set_icon_list(VALUE self, VALUE rblist)
     return rblist;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_set_auto_startup_notification(VALUE self, VALUE setting)
 {
     gtk_window_set_auto_startup_notification(RVAL2CBOOL(setting));
     return self;
 }
-#endif
 
 /* They are not public methods.
 static VALUE
@@ -556,25 +528,17 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(focus, 0);
     RG_DEF_METHOD(set_focus, 1);
     RG_DEF_METHOD(set_default, 1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(present, -1);
-#else
-    RG_DEF_METHOD(present, 0);
-#endif
     RG_DEF_METHOD(iconify, 0);
     RG_DEF_METHOD(deiconify, 0);
     RG_DEF_METHOD(stick, 0);
     RG_DEF_METHOD(unstick, 0);
     RG_DEF_METHOD(maximize, 0);
     RG_DEF_METHOD(unmaximize, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(fullscreen, 0);
     RG_DEF_METHOD(unfullscreen, 0);
-#endif
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_keep_above, 1);
     RG_DEF_METHOD(set_keep_below, 1);
-#endif
     RG_DEF_METHOD(begin_resize_drag, 5);
     RG_DEF_METHOD(begin_move_drag, 4);
     RG_DEF_METHOD(set_frame_dimensions, 4);
@@ -588,25 +552,17 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(mnemonic_modifier, 0);
     RG_DEF_METHOD(position, 0);
     RG_DEF_METHOD(size, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(group, 0);
-#endif
     RG_DEF_METHOD(move, 2);
     RG_DEF_METHOD(parse_geometry, 1);
     RG_DEF_METHOD(reshow_with_initial_size, 0);
     RG_DEF_METHOD(resize, 2);
     RG_DEF_SMETHOD(set_default_icon_list, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(set_default_icon, 1);
-#endif
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(set_default_icon_name, 1);
-#endif
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "icon", gwin_set_icon, 1);
     RG_DEF_METHOD(set_icon_list, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(set_auto_startup_notification, 1);
-#endif
 
 /*
     RG_DEF_METHOD(decorated_window_init, 0);

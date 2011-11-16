@@ -51,7 +51,6 @@ rg_set_source_pixbuf(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
 {
@@ -60,7 +59,6 @@ rg_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
-#endif
 
 static VALUE
 rg_gdk_rectangle(VALUE self, VALUE rectangle)
@@ -86,9 +84,7 @@ Init_gtk_gdk_cairo(void)
 #if CAIRO_AVAILABLE
     RG_DEF_METHOD(set_source_gdk_color, 1);
     RG_DEF_METHOD(set_source_pixbuf, -1);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(set_source_pixmap, 3);
-#endif
     RG_DEF_METHOD(gdk_rectangle, 1);
     RG_DEF_METHOD(gdk_region, 1);
 

@@ -35,14 +35,12 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_set_screen(VALUE self, VALUE screen)
 {
     gtk_menu_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
-#endif
 
 static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE position)
@@ -52,7 +50,6 @@ rg_reorder_child(VALUE self, VALUE child, VALUE position)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
@@ -61,7 +58,6 @@ rg_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE 
                     NUM2UINT(top_attach), NUM2UINT(bottom_attach));
     return self;
 }
-#endif
 
 static void
 menu_pos_func(GtkMenu *menu, gint *px, gint *py, gboolean *push_in, gpointer data)
@@ -149,14 +145,12 @@ rg_detach(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     /* Owned by GTK+ */
     return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
 }
-#endif
 
 void 
 Init_gtk_menu(VALUE mGtk)
@@ -164,20 +158,14 @@ Init_gtk_menu(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(set_screen, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "screen");
-#endif
     RG_DEF_METHOD(reorder_child, 2);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(attach, 5);
-#endif
     RG_DEF_METHOD(popup, 4);
     RG_DEF_METHOD(popdown, 0);
     RG_DEF_METHOD(reposition, 0);
     RG_DEF_METHOD(detach, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(get_for_attach_widget, 1);
-#endif
     RG_DEF_METHOD(attach_to_widget, 1);
 }

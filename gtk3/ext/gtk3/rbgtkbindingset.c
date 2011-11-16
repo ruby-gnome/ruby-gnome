@@ -162,14 +162,12 @@ rg_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_skip(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
     return self;
 }
-#endif
 
 void 
 Init_gtk_bindings(VALUE mGtk)
@@ -183,7 +181,5 @@ Init_gtk_bindings(VALUE mGtk)
     RG_DEF_ALIAS("entry_add_signal", "add_signal");
     RG_DEF_METHOD(add_path, 3);
     RG_DEF_METHOD(entry_remove, 2);
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(entry_skip, 2);
-#endif
 }

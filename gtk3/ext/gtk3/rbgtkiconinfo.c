@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cIconInfo
 #define _SELF(i) ((GtkIconInfo*)RVAL2BOXED(i, GTK_TYPE_ICON_INFO))
 
@@ -100,12 +98,10 @@ rg_display_name(VALUE self)
 {
     return CSTR2RVAL(gtk_icon_info_get_display_name(_SELF(self)));
 }
-#endif
 
 void 
 Init_gtk_iconinfo(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_INFO, "IconInfo", mGtk);
 
     RG_DEF_METHOD(base_size, 0);
@@ -118,5 +114,4 @@ Init_gtk_iconinfo(VALUE mGtk)
     RG_DEF_METHOD(display_name, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }

@@ -166,25 +166,15 @@ rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
             win = gdk_pixmap_foreign_new(RVAL2GDKNATIVEWINDOW(arg[0]));
             break;
         case 2:
-#if GTK_CHECK_VERSION(2,2,0)
             win = gdk_pixmap_foreign_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(arg[0])), 
                                                      RVAL2GDKNATIVEWINDOW(arg[1])); 
-#else
-            win = gdk_pixmap_foreign_new(RVAL2GDKNATIVEWINDOW(arg[1])); 
-            rb_warn("Not supported. Use GTK+-2.2.0 or later.");
-#endif
             break;
         case 5:
-#if GTK_CHECK_VERSION(2,10,0)
             win = gdk_pixmap_foreign_new_for_screen(GDK_SCREEN(RVAL2GOBJ(arg[0])), 
                                                     RVAL2GDKNATIVEWINDOW(arg[1]), /* anid */
                                                     NUM2INT(arg[2]),  /* width */
                                                     NUM2INT(arg[3]),  /* height */
                                                     NUM2INT(arg[4])); /* depth */
-#else
-            win = gdk_pixmap_foreign_new(NUM2UINT(arg[1])); 
-            rb_warn("Not supported. GTK+-2.10.0 or later.");
-#endif
             break;
         default:
             break;
@@ -206,12 +196,7 @@ rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         win = gdk_pixmap_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
         break;
       case 2:
-#if GTK_CHECK_VERSION(2,2,0)
         win = gdk_pixmap_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
-#else
-        win = gdk_pixmap_lookup(RVAL2GDKNATIVEWINDOW(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif
         break;
     default:
         break;

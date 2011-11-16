@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cIconTheme
 #define _SELF(i) GTK_ICON_THEME(RVAL2GOBJ(i))
 
@@ -149,7 +147,6 @@ rg_icons(int argc, VALUE *argv, VALUE self)
     return GLIST2ARY_STR_FREE(icons);
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_get_icon_sizes(VALUE self, VALUE icon_name)
 {
@@ -164,7 +161,6 @@ rg_get_icon_sizes(VALUE self, VALUE icon_name)
     g_free(sizes);
     return ary;
 }
-#endif
 
 static VALUE
 rg_example_icon_name(VALUE self)
@@ -186,7 +182,6 @@ rg_s_add_builtin_icon(VALUE self, VALUE icon_name, VALUE size, VALUE pixbuf)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_choose_icon(int argc, VALUE *argv, VALUE self)
 {
@@ -234,14 +229,10 @@ rg_contexts(VALUE self)
 {
     return GLIST2ARY_STR_FREE(gtk_icon_theme_list_contexts(_SELF(self)));
 }
-#endif
-
-#endif
 
 void
 Init_gtk_icon_theme(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_THEME, "IconTheme", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -257,18 +248,12 @@ Init_gtk_icon_theme(VALUE mGtk)
     RG_DEF_METHOD(lookup_icon, 3);
     RG_DEF_METHOD(load_icon, 3);
     RG_DEF_METHOD(icons, -1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(get_icon_sizes, 1);
-#endif
     RG_DEF_METHOD(example_icon_name, 0);
     RG_DEF_METHOD(rescan_if_needed, 0);
-
     RG_DEF_SMETHOD(add_builtin_icon, 3);
-
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(choose_icon, -1);
     RG_DEF_METHOD(contexts, 0);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
@@ -279,6 +264,4 @@ Init_gtk_icon_theme(VALUE mGtk)
     /* GtkIconLookupFlags */
     G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_LOOKUP_FLAGS, "GTK_ICON_");
-
-#endif
 }

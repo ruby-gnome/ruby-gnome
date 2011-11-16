@@ -32,13 +32,11 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL(gtk_settings_get_default());
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_settings_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
-#endif
 
 /*
  * Gtk::Settings.install_property(...) do |spec, str|
@@ -218,9 +216,7 @@ Init_gtk_settings(VALUE mGtk)
     prop_func_table = rb_hash_new();
 
     RG_DEF_SMETHOD(default, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(get_for_screen, 1);
-#endif
     RG_DEF_SMETHOD(install_property, 1);
 
     RG_DEF_SMETHOD(rc_property_parse_color, 2);

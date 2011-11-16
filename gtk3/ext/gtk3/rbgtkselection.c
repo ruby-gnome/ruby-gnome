@@ -39,15 +39,11 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         ret = gtk_selection_owner_set(RVAL2WIDGET(widget), 
                                       RVAL2ATOM(selection), NUM2INT(time));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, widget, selection, time;
         rb_scan_args(argc, argv, "40", &display, &widget, &selection, &time);
         ret = gtk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                   RVAL2WIDGET(widget), 
                                                   RVAL2ATOM(selection), NUM2INT(time));
-#else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     }
     return CBOOL2RVAL(ret);
 }
@@ -98,7 +94,6 @@ rg_m_remove_all(VALUE self, VALUE widget)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_m_include_image_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable)
 {
@@ -156,7 +151,6 @@ rg_m_include_rich_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuff
 
     return result;
 }
-#endif
 
 void
 Init_gtk_selection(VALUE mGtk)
@@ -169,11 +163,8 @@ Init_gtk_selection(VALUE mGtk)
     RG_DEF_MODFUNC(clear_targets, 2);
     RG_DEF_MODFUNC(convert, 4);
     RG_DEF_MODFUNC(remove_all, 1);
-
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_MODFUNC_P(include_image, 2);
     RG_DEF_MODFUNC_P(include_text, 1);
     RG_DEF_MODFUNC_P(include_uri, 1);
     RG_DEF_MODFUNC_P(include_rich_text, 2);
-#endif
 }

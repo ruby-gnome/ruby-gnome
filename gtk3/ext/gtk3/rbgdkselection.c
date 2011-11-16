@@ -36,17 +36,12 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                       RVAL2ATOM(selection), 
                                       NUM2UINT(time), RVAL2CBOOL(send_event));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "50", &display, &owner, &selection, &time, &send_event);
       ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                 GDK_WINDOW(RVAL2GOBJ(owner)), 
                                                 RVAL2ATOM(selection), 
                                                 NUM2UINT(time), RVAL2CBOOL(send_event));
-#else
-      rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
-
     }
     return CBOOL2RVAL(ret);
 }
@@ -60,14 +55,10 @@ rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_scan_args(argc, argv, "10", &selection);
         return GOBJ2RVAL(gdk_selection_owner_get(RVAL2ATOM(selection)));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "20", &display, &selection);
       return GOBJ2RVAL(gdk_selection_owner_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                            RVAL2ATOM(selection)));
-#else
-      rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     }
 }
 
@@ -109,7 +100,6 @@ rg_m_send_notify(int argc, VALUE *argv, VALUE self)
                                   NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
                                   NUM2INT(time));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
       gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
@@ -117,9 +107,6 @@ rg_m_send_notify(int argc, VALUE *argv, VALUE self)
                                             RVAL2ATOM(target), 
                                             NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
                                             NUM2INT(time));
-#else
-      rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     }
     return self;
 }

@@ -39,9 +39,7 @@ Init_gtk_menu_bar(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_BAR, "MenuBar", mGtk);
     RG_DEF_METHOD(initialize, 0);
 
-#if GTK_CHECK_VERSION(2,8,0)
     /* GtkPackDirection */
     G_DEF_CLASS(GTK_TYPE_PACK_DIRECTION, "PackDirection", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PACK_DIRECTION, "GTK_");
-#endif
 }

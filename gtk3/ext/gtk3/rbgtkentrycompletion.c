@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cEntryCompletion
 #define _SELF(self) (GTK_ENTRY_COMPLETION(RVAL2GOBJ(self)))
 
@@ -65,14 +63,12 @@ rg_complete(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_insert_prefix(VALUE self)
 {
     gtk_entry_completion_insert_prefix(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_insert_action_text(VALUE self, VALUE index, VALUE text)
@@ -102,37 +98,25 @@ entryc_set_text_column(VALUE self, VALUE column)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_completion_prefix(VALUE self)
 {
     return CSTR2RVAL(gtk_entry_completion_get_completion_prefix(_SELF(self)));
 }
-#endif
-
-#endif
 
 void 
 Init_gtk_entry_completion(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY_COMPLETION, "EntryCompletion", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(entry, 0);
     RG_DEF_METHOD(set_match_func, 0);
     RG_DEF_METHOD(complete, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(insert_prefix, 0);
-#endif
     RG_DEF_METHOD(insert_action_text, 2);
     RG_DEF_METHOD(insert_action_markup, 2);
     RG_DEF_METHOD(delete_action, 1);
-
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "text_column", entryc_set_text_column, 1);
-
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(completion_prefix, 0);
-#endif
-#endif
 }

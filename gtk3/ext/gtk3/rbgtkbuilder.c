@@ -22,8 +22,6 @@
 #include "global.h"
 #include <glib-enum-types.h> /* From Ruby/GLib2 */
 
-#if GTK_CHECK_VERSION(2, 12, 0)
-
 #define RG_TARGET_NAMESPACE cBuilder
 #define _SELF(self) (GTK_BUILDER(RVAL2GOBJ(self)))
 
@@ -137,12 +135,10 @@ rg_get_type(VALUE self, VALUE name)
     return GTYPE2CLASS(gtk_builder_get_type_from_name(_SELF(self),
                                                       RVAL2CSTR(name)));
 }
-#endif
 
 void
 Init_gtk_builder(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2, 12, 0)
     VALUE RG_TARGET_NAMESPACE;
 
     id___connect_signals__ = rb_intern("__connect_signals__");
@@ -166,5 +162,4 @@ Init_gtk_builder(VALUE mGtk)
     RG_DEF_METHOD(connect_signals, 0);
 
     RG_DEF_METHOD(get_type, 1);
-#endif
 }

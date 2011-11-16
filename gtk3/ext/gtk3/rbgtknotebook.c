@@ -168,13 +168,11 @@ rg_get_nth_page(VALUE self, VALUE page_num)
     return page ? GOBJ2RVAL(page) : Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_n_pages(VALUE self)
 {
     return INT2NUM(gtk_notebook_get_n_pages(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_get_tab_label(VALUE self, VALUE child)
@@ -260,7 +258,6 @@ rg_get_tab_label_text(VALUE self, VALUE child)
                                                      RVAL2WIDGET(child)));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_get_tab_reorderable(VALUE self, VALUE child)
 {
@@ -307,9 +304,7 @@ rg_s_set_window_creation_hook(VALUE self)
                                           (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }    
-#endif
 
-#if GTK_CHECK_VERSION(2,20,0)
 static VALUE
 rg_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
 {
@@ -325,7 +320,6 @@ rg_get_action_widget(VALUE self, VALUE pack_type)
     return GOBJ2RVAL(gtk_notebook_get_action_widget(_SELF(self),
                                                     RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE)));
 }
-#endif
 
 /***********************************************/
 /*
@@ -389,9 +383,7 @@ Init_gtk_notebook(VALUE mGtk)
     RG_DEF_METHOD(reorder_child, 2);
     RG_DEF_METHOD(get_menu_label, 1);
     RG_DEF_METHOD(get_nth_page, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(n_pages, 0);
-#endif
     RG_DEF_METHOD(get_tab_label, 1);
     RG_DEF_METHOD(query_tab_label_packing, 1);
     RG_DEF_METHOD(set_menu_label, 2);
@@ -401,18 +393,14 @@ Init_gtk_notebook(VALUE mGtk)
     RG_DEF_METHOD(set_tab_label_text, 2);
     RG_DEF_METHOD(get_menu_label_text, 1);
     RG_DEF_METHOD(get_tab_label_text, 1);
-
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(get_tab_reorderable, 1);
     RG_DEF_METHOD(set_tab_reorderable, 2);
     RG_DEF_METHOD(get_tab_detachable, 1);
     RG_DEF_METHOD(set_tab_detachable, 2);
     RG_DEF_SMETHOD(set_window_creation_hook, 0);
-#endif
-#if GTK_CHECK_VERSION(2,20,0)
     RG_DEF_METHOD(set_action_widget, 2);
     RG_DEF_METHOD(get_action_widget, 1);
-#endif
+
     /* GtkNotebookTab */
     rb_define_const(RG_TARGET_NAMESPACE, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
     rb_define_const(RG_TARGET_NAMESPACE, "TAB_LAST", GTK_NOTEBOOK_TAB_LAST);

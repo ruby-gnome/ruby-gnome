@@ -217,8 +217,6 @@ rg_cell_is_visible_p(VALUE self)
     return CBOOL2RVAL(gtk_tree_view_column_cell_is_visible(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
-
 static VALUE
 rg_focus_cell(VALUE self, VALUE renderer)
 {
@@ -227,24 +225,18 @@ rg_focus_cell(VALUE self, VALUE renderer)
     return self;
 }
 
-#endif
-
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_queue_resize(VALUE self)
 {
     gtk_tree_view_column_queue_resize(_SELF(self));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_tree_view(VALUE self)
 {
     return GOBJ2RVAL(gtk_tree_view_column_get_tree_view(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_treeviewcolumn(VALUE mGtk)
@@ -264,15 +256,10 @@ Init_gtk_treeviewcolumn(VALUE mGtk)
     RG_DEF_METHOD(cell_set_cell_data, 4);
     RG_DEF_METHOD(cell_size, 0);
     RG_DEF_METHOD_P(cell_is_visible, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(focus_cell, 1);
-#endif
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(queue_resize, 0);
-#endif
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(tree_view, 0);
-#endif
+
     /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "GTK_TREE_VIEW_COLUMN_");

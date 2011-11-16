@@ -133,14 +133,12 @@ rg_queue_resize(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_queue_resize_no_redraw(VALUE self)
 {
     gtk_widget_queue_resize_no_redraw(_SELF(self));
     return self;
 }
-#endif
 
 /* Note this method is not
    gtk_widget_get_size_request */
@@ -203,13 +201,11 @@ rg_accel_closures(VALUE self)
     return GLIST2ARY2F(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_can_activate_accel_p(VALUE self, VALUE signal_id)
 {
     return CBOOL2RVAL(gtk_widget_can_activate_accel(_SELF(self), NUM2UINT(signal_id)));
 }
-#endif
 
 static VALUE
 rg_event(VALUE self, VALUE event)
@@ -431,7 +427,6 @@ rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
@@ -441,7 +436,6 @@ rg_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE 
                                         NUM2INT(offset_y));
     return self;
 }
-#endif
 
 static VALUE
 rg_path(VALUE self)
@@ -537,7 +531,6 @@ rg_modify_font(VALUE self, VALUE font_desc)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_modify_cursor(VALUE self, VALUE primary, VALUE seconday)
 {
@@ -546,7 +539,6 @@ rg_modify_cursor(VALUE self, VALUE primary, VALUE seconday)
                              RVAL2BOXED(seconday, GDK_TYPE_COLOR));
     return self;
 }
-#endif
 
 static VALUE
 rg_create_pango_context(VALUE self)
@@ -681,7 +673,6 @@ rg_s_install_style_property(VALUE self, VALUE spec)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_style_property(VALUE self, VALUE property_name)
 {
@@ -735,7 +726,6 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
     g_type_class_unref(oclass);
     return ary;
 }
-#endif
 
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
@@ -771,9 +761,7 @@ rg_style_get_property(VALUE self, VALUE prop_name)
     } else {
         name = RVAL2CSTR(prop_name);
     }
-#if GTK_CHECK_VERSION(2,2,0)
     pspec = gtk_widget_class_find_style_property((GtkWidgetClass*)g_type_class_ref(RVAL2GTYPE(self)), name);
-#endif
     if (!pspec)
         rb_raise(rb_eval_string("GLib::NoPropertyError"), "No such property: %s", name);
     else {
@@ -800,7 +788,6 @@ rg_child_focus(VALUE self, VALUE direction)
     return CBOOL2RVAL(gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_error_bell(VALUE self)
 {
@@ -813,7 +800,6 @@ rg_keynav_failed(VALUE self, VALUE direction)
 {
     return CBOOL2RVAL(gtk_widget_keynav_failed(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
 }
-#endif
 
 static VALUE
 rg_child_notify(VALUE self, VALUE child_property)
@@ -841,7 +827,6 @@ rg_settings(VALUE self)
     return GOBJ2RVAL(gtk_widget_get_settings(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_get_clipboard(VALUE self, VALUE selection)
 {
@@ -871,7 +856,6 @@ rg_has_screen_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_has_screen(_SELF(self)));
 }
-#endif
 
 /*
   Note this method is not gtk_widget_size_request()
@@ -905,8 +889,6 @@ rg_thaw_child_notify(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 static VALUE
 rg_mnemonic_labels(VALUE self)
 {
@@ -926,9 +908,7 @@ rg_remove_mnemonic_label(VALUE self, VALUE label)
     gtk_widget_remove_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_set_tooltip_window(VALUE self, VALUE custom_window)
 {
@@ -949,9 +929,6 @@ rg_trigger_tooltip_query(VALUE self)
     return self;
 }
 
-#endif
-
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_action(VALUE self)
 {
@@ -963,16 +940,11 @@ rg_composited_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_is_composited(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_set_window(VALUE self, VALUE window)
 {
-#if GTK_CHECK_VERSION(2,18,0)
     gtk_widget_set_window(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)));
-#else
-    _SELF(self)->window = RVAL2GOBJ(window);
-#endif
     return self;
 }
 
@@ -1078,9 +1050,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(unrealize, 0);
     RG_DEF_METHOD(queue_draw, 0);
     RG_DEF_METHOD(queue_resize, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(queue_resize_no_redraw, 0);
-#endif
     RG_DEF_METHOD(size_request, 0);
     RG_DEF_METHOD(child_requisition, 0);
     RG_DEF_METHOD(size_allocate, 1);
@@ -1088,17 +1058,13 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(remove_accelerator, 3);
     RG_DEF_METHOD(set_accel_path, 2);
     RG_DEF_METHOD(accel_closures, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD_P(can_activate_accel, 1);
-#endif
     RG_DEF_METHOD(event, 1);
     RG_DEF_METHOD(activate, 0);
     RG_DEF_METHOD(reparent, 1);
     RG_DEF_SMETHOD(install_style_property, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(style_property, 1);
     RG_DEF_SMETHOD(style_properties, -1);
-#endif
     RG_DEF_METHOD(intersect, 1);
     RG_DEF_METHOD(grab_default, 0);
     RG_DEF_METHOD(set_state, 1);
@@ -1119,9 +1085,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
     RG_DEF_METHOD(shape_combine_mask, 3);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(input_shape_combine_mask, 3);
-#endif
     RG_DEF_METHOD(path, 0);
     RG_DEF_METHOD(class_path, 0);
     RG_DEF_METHOD(composite_name, 0);
@@ -1132,9 +1096,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(modify_text, 2);
     RG_DEF_METHOD(modify_base, 2);
     RG_DEF_METHOD(modify_font, 1);
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(modify_cursor, 2);
-#endif
     RG_DEF_METHOD(create_pango_context, 0);
     RG_DEF_METHOD(pango_context, 0);
     RG_DEF_METHOD(create_pango_layout, -1);
@@ -1152,39 +1114,29 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(style_get_property, 1);
     RG_DEF_METHOD(accessible, 0);
     RG_DEF_METHOD(child_focus, 1);
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(error_bell, 0);
     RG_DEF_METHOD(keynav_failed, 0);
-#endif
     RG_DEF_METHOD(child_notify, 1);
     RG_DEF_METHOD(freeze_child_notify, 0);
     RG_DEF_METHOD_P(child_visible, 0);
     RG_DEF_METHOD(settings, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(get_clipboard, 1);
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD(root_window, 0);
     RG_DEF_METHOD(screen, 0);
     RG_DEF_METHOD_P(has_screen, 0);
-#endif
     RG_DEF_METHOD(set_child_visible, 1);
     RG_DEF_METHOD(get_size_request, 0);
     RG_DEF_METHOD(set_size_request, 2);
     RG_DEF_METHOD(thaw_child_notify, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(mnemonic_labels, 0);
     RG_DEF_METHOD(add_mnemonic_label, 1);
     RG_DEF_METHOD(remove_mnemonic_label, 1);
-#endif
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(set_tooltip_window, 1);
     RG_DEF_METHOD(tooltip_window, 0);
     RG_DEF_METHOD(trigger_tooltip_query, 0);
-#endif
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(action, 0);
     RG_DEF_METHOD_P(composited, 0);
-#endif
     RG_DEF_METHOD(set_window, 1);
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 4);

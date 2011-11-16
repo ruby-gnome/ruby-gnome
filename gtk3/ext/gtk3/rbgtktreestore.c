@@ -94,12 +94,7 @@ static VALUE
 rg_remove(VALUE self, VALUE iter)
 {
     G_CHILD_REMOVE(self, iter);
-#if GTK_CHECK_VERSION(2,2,0)
     return CBOOL2RVAL(gtk_tree_store_remove(_SELF(self), RVAL2GTKTREEITER(iter)));
-#else
-    gtk_tree_store_remove(_SELF(self), RVAL2GTKTREEITER(iter));
-    return Qtrue;
-#endif
 }
 
 static VALUE
@@ -119,7 +114,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
         ret = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, ret);
     } else {
-#if GTK_CHECK_VERSION(2,10,0)
         gint *c_columns;
         GValue *c_values;
         long size, i;
@@ -176,15 +170,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
             G_CHILD_ADD(ret, rbgobj_gvalue_to_rvalue(&(c_values[i])));
             g_value_unset(&(c_values[i]));
         }
-#else
-        rb_warn("Gtk::TreeStore#insert(parent, position, values) requires GTK+-2.10.0 or later");
-        gtk_tree_store_insert(model, &iter, 
-                              NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent), 
-                              NUM2INT(position));
-        iter.user_data3 = model;
-        ret = GTKTREEITER2RVAL(&iter);
-        G_CHILD_ADD(self, ret);
-#endif
     }
 
     return ret;
@@ -293,7 +278,6 @@ rg_clear(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_iter_is_valid_p(VALUE self, VALUE iter)
 {
@@ -347,7 +331,6 @@ rg_move_after(VALUE self, VALUE iter, VALUE position)
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
-#endif
 
 void
 Init_gtk_tree_store(VALUE mGtk)
@@ -369,12 +352,9 @@ Init_gtk_tree_store(VALUE mGtk)
     RG_DEF_METHOD_P(ancestor, 2);
     RG_DEF_METHOD(iter_depth, 1);
     RG_DEF_METHOD(clear, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD_P(iter_is_valid, 1);
     RG_DEF_METHOD(reorder, 2);
     RG_DEF_METHOD(swap, 2);
     RG_DEF_METHOD(move_before, 2);
     RG_DEF_METHOD(move_after, 2);
-#endif
-
 }

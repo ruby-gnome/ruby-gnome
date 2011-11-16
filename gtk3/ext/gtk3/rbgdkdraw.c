@@ -136,7 +136,6 @@ rg_draw_lines(VALUE self, VALUE rbgc, VALUE rbpoints)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE dither, VALUE x_dither, VALUE y_dither)
 {
@@ -150,7 +149,6 @@ rg_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VAL
                     NUM2INT(x_dither), NUM2INT(y_dither));
     return self;
 }
-#endif
 
 struct rbgdk_rval2gdksegments_args {
     VALUE ary;
@@ -259,7 +257,6 @@ rg_draw_polygon(VALUE self, VALUE rbgc, VALUE rbfilled, VALUE rbpoints)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 /*
   trapezoids = [[y1, x11, x21, y2, x12, x22], ...]
  */
@@ -334,7 +331,6 @@ rg_draw_trapezoids(VALUE self, VALUE rbgc, VALUE rbtrapezoids)
 
     return self;
 }
-#endif
 
 static VALUE
 rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
@@ -345,7 +341,6 @@ rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_draw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
@@ -356,7 +351,6 @@ rg_draw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE
                                 (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
     return self;
 }
-#endif
 
 static VALUE
 rg_draw_layout_line(int argc, VALUE *argv, VALUE self)
@@ -418,7 +412,6 @@ rg_get_image(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
                                             NUM2INT(w), NUM2INT(h)));
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_copy_to_image(VALUE self, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
@@ -428,7 +421,6 @@ rg_copy_to_image(VALUE self, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VA
                                                 NUM2INT(xdst), NUM2INT(ydst),
                                                 NUM2INT(w), NUM2INT(h)));
 }
-#endif
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
@@ -448,7 +440,6 @@ rg_handle(VALUE self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_display(VALUE self)
 {
@@ -460,10 +451,8 @@ rg_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
 static VALUE
 rg_create_cairo_context(VALUE self)
 {
@@ -475,7 +464,6 @@ rg_create_cairo_context(VALUE self)
     cairo_destroy (cr);
     return rb_cr;
 }
-#  endif
 #endif
 
 void
@@ -494,28 +482,20 @@ Init_gtk_gdk_draw(VALUE mGdk)
     RG_DEF_METHOD(draw_points, 2);
     RG_DEF_METHOD(draw_line, 5);
     RG_DEF_METHOD(draw_lines, 2);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(draw_pixbuf, 11);
-#endif
     RG_DEF_METHOD(draw_segments, 2);
     RG_DEF_METHOD(draw_rectangle, 6);
     RG_DEF_METHOD(draw_arc, 8);
     RG_DEF_METHOD(draw_polygon, 3);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(draw_trapezoids, 2);
-#endif
     RG_DEF_METHOD(draw_glyphs, 5);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(draw_glyphs_transformed, 6);
-#endif
     RG_DEF_METHOD(draw_layout_line, -1);
     RG_DEF_METHOD(draw_layout, -1);
     RG_DEF_METHOD(draw_drawable, 8);
     RG_DEF_METHOD(draw_image, 8);
     RG_DEF_METHOD(get_image, 4);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(copy_to_image, 7);
-#endif
 
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(xid, 0);
@@ -523,15 +503,11 @@ Init_gtk_gdk_draw(VALUE mGdk)
 #ifdef GDK_WINDOWING_WIN32
     RG_DEF_METHOD(handle, 0);
 #endif
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD(screen, 0);
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(create_cairo_context, 0);
-#  endif
 #endif
 
 #ifdef GDK_WINDOWING_X11

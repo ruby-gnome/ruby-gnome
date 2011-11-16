@@ -149,7 +149,7 @@ rg_unmaximize(VALUE self)
     gdk_window_unmaximize(_SELF(self));
     return self;
 }
-#if GTK_CHECK_VERSION(2,2,0)
+
 static VALUE
 rg_fullscreen(VALUE self)
 {
@@ -163,8 +163,7 @@ rg_unfullscreen(VALUE self)
     gdk_window_unfullscreen(_SELF(self));
     return self;
 }
-#endif
-#if GTK_CHECK_VERSION(2,4,0)
+
 static VALUE
 rg_set_keep_above(VALUE self, VALUE setting)
 {
@@ -178,7 +177,6 @@ rg_set_keep_below(VALUE self, VALUE setting)
     gdk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
-#endif
 
 static VALUE
 rg_move(VALUE self, VALUE x, VALUE y)
@@ -208,7 +206,6 @@ rg_scroll(VALUE self, VALUE dx, VALUE dy)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_move_region(VALUE self, VALUE region, VALUE dx, VALUE dy)
 {
@@ -218,7 +215,6 @@ rg_move_region(VALUE self, VALUE region, VALUE dx, VALUE dy)
                            NUM2INT(dy));
     return self;
 }
-#endif
 
 static VALUE
 rg_reparent(VALUE self, VALUE new_parent, VALUE x, VALUE y)
@@ -308,14 +304,12 @@ rg_s_constrain_size(G_GNUC_UNUSED VALUE self, VALUE geometry, VALUE flags, VALUE
     return rb_assoc_new(INT2NUM(new_width), INT2NUM(new_height));
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_beep(VALUE self) 
 {
     gdk_window_beep(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_begin_paint(VALUE self, VALUE area)
@@ -430,7 +424,6 @@ rg_internal_paint_info(VALUE self)
                        INT2NUM(x_offset), INT2NUM(y_offset));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_configure_finished(VALUE self)
 {
@@ -448,7 +441,6 @@ rg_enable_synchronized_configure(VALUE self)
     }
     return self;
 }
-#endif
 
 static VALUE
 rg_set_user_data(VALUE self, VALUE user_data)
@@ -465,23 +457,19 @@ rg_set_override_redirect(VALUE self, VALUE override_redirect)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_accept_focus(VALUE self, VALUE accept_focus)
 {
     gdk_window_set_accept_focus(_SELF(self), RVAL2CBOOL(accept_focus));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_set_focus_on_map(VALUE self, VALUE focus_on_map)
 {
     gdk_window_set_focus_on_map(_SELF(self), RVAL2CBOOL(focus_on_map));
     return self;
 }
-#endif
 
 /* GdkXEvent is not implemented.
   void        gdk_window_add_filter           (GdkWindow *window,
@@ -527,7 +515,6 @@ rg_merge_child_shapes(VALUE self)
     return self;
 }   
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_input_shape_combine_mask(VALUE self, VALUE mask, VALUE x, VALUE y)
 {
@@ -560,8 +547,6 @@ rg_merge_child_input_shapes(VALUE self)
     gdk_window_merge_child_input_shapes(_SELF(self));
     return self;
 }
-
-#endif
 
 static VALUE
 rg_set_static_gravities(VALUE self, VALUE use_static)
@@ -650,15 +635,12 @@ rg_set_type_hint(VALUE self, VALUE hint)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_type_hint(VALUE self)
 {
     return GENUM2RVAL(gdk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_set_skip_taskbar_hint(VALUE self, VALUE hint)
 {
@@ -672,16 +654,13 @@ rg_set_skip_pager_hint(VALUE self, VALUE hint)
     gdk_window_set_skip_pager_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_set_urgency_hint(VALUE self, VALUE hint)
 {
     gdk_window_set_urgency_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
-#endif
 
 static VALUE
 rg_position(VALUE self)
@@ -799,13 +778,11 @@ rg_set_group(VALUE self, VALUE leader)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_group(VALUE self)
 {
     return GOBJ2RVAL(gdk_window_get_group(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_set_decorations(VALUE self, VALUE decor)
@@ -829,7 +806,6 @@ rg_set_functions(VALUE self, VALUE func)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_set_composited(VALUE self, VALUE composited)
 {
@@ -850,7 +826,6 @@ rg_set_startup_id(VALUE self, VALUE startup_id)
     gdk_window_set_startup_id(_SELF(self), RVAL2CSTR_ACCEPT_NIL(startup_id));
     return self;
 }
-#endif
 
 static VALUE
 rg_s_toplevels(G_GNUC_UNUSED VALUE self)
@@ -883,13 +858,8 @@ rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         win = gdk_window_foreign_new(RVAL2GDKNATIVEWINDOW(arg[0]));
         break;
       case 2:
-#if GTK_CHECK_VERSION(2,2,0)
         win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]),
                                                  RVAL2GDKNATIVEWINDOW(arg[1])); 
-#else
-        win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif 
         break;
     default:
         break;
@@ -915,12 +885,7 @@ rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         win = gdk_window_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
         break;
       case 2:
-#if GTK_CHECK_VERSION(2,2,0)
         win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
-#else
-        win = gdk_window_lookup(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif
         break;
     default:
         break;
@@ -939,23 +904,19 @@ rg_server_time(VALUE self)
     return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_set_user_time(VALUE self, VALUE time)
 {
     gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
     return Qnil;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_move_to_current_desktop(VALUE self)
 {
     gdk_x11_window_move_to_current_desktop(_SELF(self));
     return self;
 }
-#endif
 
 #endif
 
@@ -987,21 +948,15 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(unstick, 0);
     RG_DEF_METHOD(maximize, 0);
     RG_DEF_METHOD(unmaximize, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(fullscreen, 0);
     RG_DEF_METHOD(unfullscreen, 0);
-#endif
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_keep_above, 1);
     RG_DEF_METHOD(set_keep_below, 1);
-#endif
     RG_DEF_METHOD(move, 2);
     RG_DEF_METHOD(resize, 2);
     RG_DEF_METHOD(move_resize, 4);
     RG_DEF_METHOD(scroll, 2);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(move_region, 3);
-#endif
     RG_DEF_METHOD(reparent, 3);
     RG_DEF_METHOD(clear, 0);
     RG_DEF_METHOD(clear_area, -1);
@@ -1009,9 +964,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(lower, 0);
     RG_DEF_METHOD(focus, 1);
     RG_DEF_METHOD(register_dnd, 0);
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(beep, 0);
-#endif
     RG_DEF_METHOD(begin_resize_drag, 5);
     RG_DEF_METHOD(begin_move_drag, 4);
     RG_DEF_METHOD(begin_paint, 1);
@@ -1023,28 +976,20 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(thaw_updates, 0);
     RG_DEF_METHOD(process_updates, 1);
     RG_DEF_METHOD(internal_paint_info, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(configure_finished, 0);
     RG_DEF_METHOD(enable_synchronized_configure, 0);
-#endif
     RG_DEF_METHOD(set_user_data, 1);
     RG_DEF_METHOD(set_override_redirect, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_accept_focus, 1);
-#endif
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_focus_on_map, 1);
-#endif
     RG_DEF_METHOD(shape_combine_mask, 3);
     RG_DEF_METHOD(shape_combine_region, 3);
     RG_DEF_METHOD(set_child_shapes, 0);
     RG_DEF_METHOD(merge_child_shapes, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(input_shape_combine_mask, 3);
     RG_DEF_METHOD(input_shape_combine_region, 3);
     RG_DEF_METHOD(set_child_input_shapes, 0);
     RG_DEF_METHOD(merge_child_input_shapes, 0);
-#endif
     RG_DEF_METHOD(set_static_gravities, 1);
     RG_DEF_METHOD(set_title, 1);
     RG_DEF_METHOD(set_background, 1);
@@ -1055,17 +1000,11 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_METHOD(set_modal_hint, 1);
     RG_DEF_METHOD(set_type_hint, 1);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(type_hint, 0);
-#endif
 
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(set_skip_taskbar_hint, 1);
     RG_DEF_METHOD(set_skip_pager_hint, 1);
-#endif
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(set_urgency_hint, 1);
-#endif
     RG_DEF_METHOD(position, 0);
     RG_DEF_METHOD(root_origin, 0);
     RG_DEF_METHOD(frame_extents, 0);
@@ -1082,17 +1021,13 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_transient_for, 1);
     RG_DEF_METHOD(set_role, 1);
     RG_DEF_METHOD(set_group, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(group, 0);
-#endif
     RG_DEF_METHOD(set_decorations, 1);
     RG_DEF_METHOD(decorations, 0);
     RG_DEF_METHOD(set_functions, 1);
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(set_composited, 1);
     RG_DEF_METHOD(set_opacity, 1);
     RG_DEF_METHOD(set_startup_id, 1);
-#endif
     RG_DEF_SMETHOD(toplevels, 0);
 
     RG_DEF_SMETHOD(foreign_new, -1);
@@ -1149,12 +1084,8 @@ Init_gtk_gdk_window(VALUE mGdk)
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(server_time, 0);
 
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_user_time, 1);
-#endif
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(move_to_current_desktop, 0);
-#endif
 
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
 #elif defined(GDK_WINDOWING_WIN32)

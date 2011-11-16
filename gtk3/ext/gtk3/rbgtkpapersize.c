@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cPaperSize
 #define _SELF(s) (RVAL2BOXED(s, GTK_TYPE_PAPER_SIZE))
 #define SIZE2RVAL(o) (BOXED2RVAL(o, GTK_TYPE_PAPER_SIZE))
@@ -144,12 +142,10 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_paper_size_get_default());
 }
-#endif
 
 void
 Init_gtk_paper_size(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PAPER_SIZE, "PaperSize", mGtk);
 
     RG_DEF_SMETHOD(default, 0);
@@ -187,6 +183,4 @@ Init_gtk_paper_size(VALUE mGtk)
     /* GtkUnit */
     G_DEF_CLASS(GTK_TYPE_UNIT, "Unit", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_UNIT, "GTK_");
-
-#endif
 }

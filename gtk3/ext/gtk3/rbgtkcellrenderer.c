@@ -73,7 +73,6 @@ rg_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE backgr
     return edit ? GOBJ2RVAL(edit) : Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 #ifndef GTK_DISABLE_DEPRECATED
 static VALUE
 rg_editing_canceled(VALUE self)
@@ -82,16 +81,13 @@ rg_editing_canceled(VALUE self)
     return self;
 }
 #endif
-#endif
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_stop_editing(VALUE self, VALUE canceled)
 {
     gtk_cell_renderer_stop_editing(_SELF(self), RVAL2CBOOL(canceled));
     return self;
 }
-#endif
 
 static VALUE
 rg_fixed_size(VALUE self)
@@ -118,14 +114,10 @@ Init_gtk_cellrenderer(VALUE mGtk)
     RG_DEF_METHOD(render, 6);
     RG_DEF_METHOD(activate, 6);
     RG_DEF_METHOD(start_editing, 6);
-#if GTK_CHECK_VERSION(2,4,0)
 #ifndef GTK_DISABLE_DEPRECATED
     RG_DEF_METHOD(editing_canceled, 0);
 #endif
-#endif
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(stop_editing, 1);
-#endif
     RG_DEF_METHOD(fixed_size, 0);
     RG_DEF_METHOD(set_fixed_size, 2);
 

@@ -24,7 +24,6 @@
 #define RG_TARGET_NAMESPACE cTextMark
 #define _SELF(s) (GTK_TEXT_MARK(RVAL2GOBJ(s)))
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_initialize(VALUE self, VALUE name, VALUE left_gravity)
 {
@@ -34,7 +33,6 @@ rg_initialize(VALUE self, VALUE name, VALUE left_gravity)
         G_INITIALIZE(self, gtk_text_mark_new(RVAL2CSTR(name), RVAL2CBOOL(left_gravity)));
     return Qnil;
 }
-#endif
 
 static VALUE
 rg_set_visible(VALUE self, VALUE setting)
@@ -65,9 +63,7 @@ void
 Init_gtk_textmark(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(initialize, 2);
-#endif
     RG_DEF_METHOD(set_visible, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "visible");
     RG_DEF_METHOD_P(visible, 0);

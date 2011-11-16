@@ -34,12 +34,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (argc == 0){
         RBGTK_INITIALIZE(self, gtk_invisible_new());
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         RBGTK_INITIALIZE(self, gtk_invisible_new_for_screen(
                              GDK_SCREEN(RVAL2GOBJ(screen))));
-#else
-        rb_raise(rb_eArgError, "GTK+-2.2 feature. GTK+-2.0.x doesn't support this.");
-#endif
     }
     return Qnil;
 }

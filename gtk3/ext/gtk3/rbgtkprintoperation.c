@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cPrintOperation
 #define _SELF(s) (GTK_PRINT_OPERATION(RVAL2GOBJ(s)))
 
@@ -127,12 +125,10 @@ rg_s_run_page_setup_dialog(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                           RVAL2GOBJ(settings)));
     }
 }
-#endif
 
 void
 Init_gtk_print_operation(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION, "PrintOperation", mGtk);
 
     G_DEF_ERROR(GTK_PRINT_ERROR, "PrintError", mGtk, rb_eRuntimeError,
@@ -157,5 +153,4 @@ Init_gtk_print_operation(VALUE mGtk)
     /* GtkPrintOperationResult */
     G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_RESULT, "Result", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_OPERATION_RESULT, "GTK_PRINT_OPERATION_");
-#endif
 }

@@ -159,28 +159,27 @@ rg_m_dest_set_target_list(VALUE self, VALUE widget, VALUE target_list)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_m_dest_add_text_targets(VALUE self, VALUE widget)
 {
     gtk_drag_dest_add_text_targets(RVAL2WIDGET(widget));
     return self;
 }
+
 static VALUE
 rg_m_dest_add_image_targets(VALUE self, VALUE widget)
 {
     gtk_drag_dest_add_image_targets(RVAL2WIDGET(widget));
     return self;
 }
+
 static VALUE
 rg_m_dest_add_uri_targets(VALUE self, VALUE widget)
 {
     gtk_drag_dest_add_uri_targets(RVAL2WIDGET(widget));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_m_dest_set_track_motion(VALUE self, VALUE widget, VALUE track_motion)
 {
@@ -193,7 +192,6 @@ rg_m_dest_get_track_motion(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2WIDGET(widget)));
 }
-#endif
 
 static VALUE
 rg_m_finish(VALUE self, VALUE context, VALUE success, VALUE del, VALUE time)
@@ -273,14 +271,12 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_m_set_icon_name(VALUE self, VALUE context, VALUE name, VALUE hot_x, VALUE hot_y)
 {
     gtk_drag_set_icon_name(RVAL2DC(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
     return self;
 }
-#endif
 
 static VALUE
 rg_m_set_icon_default(VALUE self, VALUE context)
@@ -335,14 +331,12 @@ rg_m_source_set_icon(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_m_source_set_icon_name(VALUE self, VALUE widget, VALUE icon_name)
 {
     gtk_drag_source_set_icon_name(RVAL2WIDGET(widget), RVAL2CSTR(icon_name));
     return self;
 }
-#endif
 
 static VALUE
 rg_m_source_unset(VALUE self, VALUE widget)
@@ -351,7 +345,6 @@ rg_m_source_unset(VALUE self, VALUE widget)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_m_source_set_target_list(VALUE self, VALUE widget, VALUE targetlist)
 {
@@ -369,9 +362,7 @@ rg_m_source_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
     GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
     return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_m_source_add_text_targets(VALUE self, VALUE widget)
 {
@@ -390,7 +381,6 @@ rg_m_source_add_uri_targets(VALUE self, VALUE widget)
     gtk_drag_source_add_uri_targets(RVAL2WIDGET(widget));
     return self;
 }
-#endif
 
 void
 Init_gtk_drag(VALUE mGtk)
@@ -403,15 +393,11 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_MODFUNC(dest_find_target, -1);
     RG_DEF_MODFUNC(dest_get_target_list, 1);
     RG_DEF_MODFUNC(dest_set_target_list, 2);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_MODFUNC(dest_add_text_targets, 1);
     RG_DEF_MODFUNC(dest_add_image_targets, 1);
     RG_DEF_MODFUNC(dest_add_uri_targets, 1);
-#endif
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_MODFUNC(dest_set_track_motion, 2);
     RG_DEF_MODFUNC(dest_get_track_motion, 1);
-#endif
     RG_DEF_MODFUNC(finish, 4);
     RG_DEF_MODFUNC(get_data, 4);
     RG_DEF_MODFUNC(get_source_widget, 1);
@@ -420,25 +406,17 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_MODFUNC(begin, 5);
     RG_DEF_MODFUNC_P(threshold, 5);
     RG_DEF_MODFUNC(set_icon, -1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_MODFUNC(set_icon_name, 4);
-#endif
     RG_DEF_MODFUNC(set_icon_default, 1);
     RG_DEF_MODFUNC(source_set, 4);
     RG_DEF_MODFUNC(source_set_icon, -1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_MODFUNC(source_set_icon_name, 2);
-#endif
     RG_DEF_MODFUNC(source_unset, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_MODFUNC(source_set_target_list, 2);
     RG_DEF_MODFUNC(source_get_target_list, 1);
-#endif
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_MODFUNC(source_add_text_targets, 1);
     RG_DEF_MODFUNC(source_add_image_targets, 1);
     RG_DEF_MODFUNC(source_add_uri_targets, 1);
-#endif
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkDestDefaults */

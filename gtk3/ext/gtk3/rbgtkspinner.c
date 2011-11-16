@@ -20,8 +20,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,20,0)
-
 #define RG_TARGET_NAMESPACE cSpinner
 #define _SELF(s) (GTK_SPINNER(RVAL2GOBJ(s)))
 
@@ -46,16 +44,12 @@ rg_stop(VALUE self)
     return self;
 }
 
-#endif
-
 void 
 Init_gtk_spinner(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,20,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPINNER, "Spinner", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(start, 0);
     RG_DEF_METHOD(stop, 0);
-#endif
 }

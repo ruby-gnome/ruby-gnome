@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cRecentManager
 #define _SELF(self) (GTK_RECENT_MANAGER(RVAL2GOBJ(self)))
 
@@ -126,12 +124,10 @@ rg_purge_items(VALUE self)
 
     return INT2NUM(ret);
 }
-#endif
 
 void 
 Init_gtk_recent_manager(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_MANAGER, "RecentManager", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -150,5 +146,4 @@ Init_gtk_recent_manager(VALUE mGtk)
     /* GtkRecentManagerError */
     G_DEF_ERROR(GTK_RECENT_MANAGER_ERROR, "RecentManagerError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_RECENT_MANAGER_ERROR);
-#endif
 }

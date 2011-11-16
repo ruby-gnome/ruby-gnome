@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2, 12, 0)
-
 #define RG_TARGET_NAMESPACE cBuildable
 #define _SELF(self) (GTK_BUILDABLE(RVAL2GOBJ(self)))
 #define RVAL2BUILDER(obj) (GTK_BUILDER(RVAL2GOBJ(obj)))
@@ -105,12 +103,10 @@ rg_get_internal_child(VALUE self, VALUE builder, VALUE child_name)
                                                       RVAL2BUILDER(builder),
                                                       RVAL2CSTR(child_name)));
 }
-#endif
 
 void
 Init_gtk_buildable(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2, 12, 0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUILDABLE, "Buildable", mGtk);
@@ -123,5 +119,4 @@ Init_gtk_buildable(VALUE mGtk)
     RG_DEF_METHOD(get_internal_child, 2);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }

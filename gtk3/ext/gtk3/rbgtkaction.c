@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cAction
 #define _SELF(self) (GTK_ACTION(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
@@ -79,13 +77,11 @@ rg_create_menu_item(VALUE self)
     return GOBJ2RVAL(gtk_action_create_menu_item(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_create_menu(VALUE self)
 {
     return GOBJ2RVAL(gtk_action_create_menu(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_create_tool_item(VALUE self)
@@ -156,21 +152,17 @@ rg_set_accel_group(VALUE self, VALUE accel_group)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_accel_path(VALUE self)
 {
     return CSTR2RVAL(gtk_action_get_accel_path(_SELF(self)));
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_accel_closure(VALUE self)
 {
     return BOXED2RVAL(gtk_action_get_accel_closure(_SELF(self)), G_TYPE_CLOSURE);
 }
-#endif
 
 static void
 action_mark(void *p)
@@ -186,12 +178,10 @@ action_mark(void *p)
         rbgobj_gc_mark_instance(proxy);
     }
 }
-#endif
 
 void
 Init_gtk_action(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION, "Action", mGtk,
@@ -210,9 +200,7 @@ Init_gtk_action(VALUE mGtk)
     RG_DEF_METHOD(activate, 0);
     RG_DEF_METHOD(create_icon, 1);
     RG_DEF_METHOD(create_menu_item, 0);
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(create_menu, 0);
-#endif
     RG_DEF_METHOD(create_tool_item, 0);
     RG_DEF_METHOD(connect_proxy, 1);
     RG_DEF_METHOD(disconnect_proxy, 1);
@@ -226,12 +214,7 @@ Init_gtk_action(VALUE mGtk)
     RG_DEF_METHOD(set_accel_group, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_group");
 
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(accel_path, 0);
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(accel_closure, 0);
-#endif
-#endif
 }

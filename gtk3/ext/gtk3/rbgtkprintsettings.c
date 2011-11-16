@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cPrintSettings
 #define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
 
@@ -30,7 +28,6 @@
 
 static VALUE s_string, s_bool, s_double, s_length, s_int;
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -56,14 +53,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     G_INITIALIZE(self, settings);
     return Qnil;
 }
-#else
-static VALUE
-ps_initialize(VALUE self)
-{
-    G_INITIALIZE(self, gtk_print_settings_new());
-    return Qnil;
-}
-#endif
 
 static VALUE
 rg_dup(VALUE self)
@@ -657,9 +646,7 @@ rg_set_output_bin(VALUE self, VALUE output_bin)
     gtk_print_settings_set_output_bin(_SELF(self), RVAL2CSTR_ACCEPT_NIL(output_bin));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_to_file(VALUE self, VALUE file_name)
 {
@@ -669,6 +656,7 @@ rg_to_file(VALUE self, VALUE file_name)
     }
     return self;
 }
+
 static VALUE
 rg_to_key_file(int argc, VALUE *argv, VALUE self)
 {
@@ -679,12 +667,10 @@ rg_to_key_file(int argc, VALUE *argv, VALUE self)
                                    RVAL2CSTR_ACCEPT_NIL(group_name));
     return self;
 }
-#endif
 
 void
 Init_gtk_print_settings(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE;
 
     s_string = ID2SYM(rb_intern("string"));
@@ -698,11 +684,7 @@ Init_gtk_print_settings(VALUE mGtk)
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(initialize, -1);
-#else
-    RG_DEF_METHOD(initialize, 0);
-#endif
     RG_DEF_METHOD(dup, 0);
     RG_DEF_METHOD_P(has_key, 1);
 
@@ -821,6 +803,8 @@ Init_gtk_print_settings(VALUE mGtk)
     RG_DEF_METHOD(set_finishings, 1);
     RG_DEF_METHOD(output_bin, 0);
     RG_DEF_METHOD(set_output_bin, 1);
+    RG_DEF_METHOD(to_file, 1);
+    RG_DEF_METHOD(to_key_file, -1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
@@ -839,9 +823,4 @@ Init_gtk_print_settings(VALUE mGtk)
     /* GtkPageSet */
     G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PAGE_SET, "GTK_");
-#endif
-#if GTK_CHECK_VERSION(2,12,0)
-    RG_DEF_METHOD(to_file, 1);
-    RG_DEF_METHOD(to_key_file, -1);
-#endif
 }

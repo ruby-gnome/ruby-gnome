@@ -113,13 +113,11 @@ rg_operator_gdkcolor_equal(VALUE self, VALUE other)
     return CBOOL2RVAL(gdk_color_equal(_SELF(self), _SELF(other)));
 }
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_to_s(VALUE self)
 {
     return CSTR2RVAL_FREE(gdk_color_to_string(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_gdk_color(VALUE mGdk)
@@ -137,9 +135,7 @@ Init_gtk_gdk_color(VALUE mGdk)
     RG_DEF_METHOD(set_blue, 1);
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_METHOD_OPERATOR("==", gdkcolor_equal, 1);
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(to_s, 0);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

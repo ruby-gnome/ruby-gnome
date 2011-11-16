@@ -257,14 +257,12 @@ rg_expand_row(VALUE self, VALUE path, VALUE open_all)
                                                RVAL2CBOOL(open_all)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_expand_to_path(VALUE self, VALUE path)
 {
     gtk_tree_view_expand_to_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
-#endif
 
 static VALUE
 rg_collapse_row(VALUE self, VALUE path)
@@ -345,7 +343,6 @@ rg_visible_rect(VALUE self)
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_visible_range(VALUE self)
 {
@@ -357,7 +354,6 @@ rg_visible_range(VALUE self)
     return valid_paths ? rb_assoc_new(GTKTREEPATH2RVAL(start_path),
                                       GTKTREEPATH2RVAL(end_path)) : Qnil;
 }
-#endif
 
 static VALUE
 rg_bin_window(VALUE self)
@@ -385,7 +381,6 @@ rg_tree_to_widget_coords(VALUE self, VALUE tx, VALUE ty)
     return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
 }
 
-#if GTK_CHECK_VERSION(2,12,0)
 static VALUE
 rg_convert_bin_window_to_tree_coords(VALUE self, VALUE bx, VALUE by)
 {
@@ -442,7 +437,6 @@ rg_convert_widget_to_tree_coords(VALUE self, VALUE wx, VALUE wy)
                                                 &tx, &ty);
     return rb_ary_new3(2, INT2NUM(tx), INT2NUM(ty));
 }
-#endif
 
 static VALUE
 rg_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
@@ -571,7 +565,6 @@ treeview_signal_func(G_GNUC_UNUSED guint num, const GValue *values)
     return rb_ary_new3(3, GOBJ2RVAL(view), GTKTREEITER2RVAL(iter), GVAL2RVAL(&values[2]));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_cell, VALUE start_editing)
 {
@@ -581,14 +574,12 @@ rg_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_ce
                                      RVAL2CBOOL(start_editing));
     return self;
 }
-#endif
 
 /* How can I implement this?
 GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
                                             (GtkTreeView *tree_view);
 */
 
-#if GTK_CHECK_VERSION(2,6,0)
 static gboolean
 row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer func)
 {
@@ -611,9 +602,7 @@ rg_set_row_separator_func(VALUE self)
                                          (GtkDestroyNotify)NULL);
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_search_entry(VALUE self)
 {
@@ -676,8 +665,6 @@ rg_set_search_position_func(VALUE self)
     return self;
 }
 
-#endif
-
 void 
 Init_gtk_treeview(VALUE mGtk)
 {
@@ -704,9 +691,7 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(collapse_all, 0);
     RG_DEF_METHOD(expand_row, 2);
     RG_DEF_METHOD(collapse_row, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(expand_to_path, 1);
-#endif
     RG_DEF_METHOD(map_expanded_rows, 0);
     RG_DEF_METHOD_P(row_expanded, 1);
     RG_DEF_METHOD(get_path_at_pos, 2);
@@ -714,21 +699,16 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(get_cell_area, 2);
     RG_DEF_METHOD(get_background_area, 2);
     RG_DEF_METHOD(visible_rect, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(visible_range, 0);
-#endif
-
     RG_DEF_METHOD(bin_window, 0);
     RG_DEF_METHOD(widget_to_tree_coords, 2);
     RG_DEF_METHOD(tree_to_widget_coords, 2);
-#if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(convert_bin_window_to_tree_coords, 2);
     RG_DEF_METHOD(convert_bin_window_to_widget_coords, 2);
     RG_DEF_METHOD(convert_tree_to_bin_window_coords, 2);
     RG_DEF_METHOD(convert_tree_to_widget_coords, 2);
     RG_DEF_METHOD(convert_widget_to_bin_window_coords, 2);
     RG_DEF_METHOD(convert_widget_to_tree_coords, 2);
-#endif
     RG_DEF_METHOD(enable_model_drag_dest, 2);
     RG_DEF_METHOD(enable_model_drag_source, 3);
     RG_DEF_METHOD(unset_rows_drag_source, 0);
@@ -739,28 +719,19 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_ALIAS("get_dest_row", "get_dest_row_at_pos");
     RG_DEF_METHOD(create_row_drag_icon, 1);
     RG_DEF_METHOD(set_search_equal_func, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(set_cursor_on_cell, 4);
-#endif
-
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_row_separator_func, 0);
-#endif
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(search_entry, 0);
     RG_DEF_METHOD(set_search_entry, 1);
     RG_DEF_METHOD(set_search_position_func, 0);
-#endif
 
     /* Constants */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
-#if GTK_CHECK_VERSION(2,10,0)
     /* GtkTreeViewGridLines */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_GRID_LINES, "GTK_TREE_VIEW_");
-#endif
 
     /* Option Signals */
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);

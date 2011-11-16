@@ -40,11 +40,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     } else if (TYPE(arg1) == T_SYMBOL){
         widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), 
                                           RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
-#if GTK_CHECK_VERSION(2,6,0)
     } else if (TYPE(arg1) == T_STRING){
         widget = gtk_image_new_from_icon_name(RVAL2CSTR(arg1),
                                               RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
-#endif
     } else {
         gtype = RVAL2GTYPE(arg1);
         if (gtype == GDK_TYPE_IMAGE){
@@ -78,11 +76,9 @@ rg_set(int argc, VALUE *argv, VALUE self)
     } else if (TYPE(arg1) == T_SYMBOL){
         gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), 
                                  RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
-#if GTK_CHECK_VERSION(2,6,0)
     } else if (TYPE(arg1) == T_STRING){
         gtk_image_set_from_icon_name(_SELF(self), RVAL2CSTR(arg1),
                                      RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
-#endif
     } else {
         gtype = RVAL2GTYPE(arg1);
         if (gtype == GDK_TYPE_IMAGE){
@@ -108,14 +104,12 @@ rg_set(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_clear(VALUE self)
 {
     gtk_image_clear(_SELF(self));
     return self;
 }
-#endif
 
 void 
 Init_gtk_image(VALUE mGtk)
@@ -123,14 +117,11 @@ Init_gtk_image(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set, -1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(clear, 0);
-#endif
 
     /* GtkImageType */
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_IMAGE_TYPE, "GTK_IMAGE_");
 
     G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
-
 }

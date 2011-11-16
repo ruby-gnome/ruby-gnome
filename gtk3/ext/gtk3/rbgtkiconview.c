@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,6,0)
-
 #define RG_TARGET_NAMESPACE cIconView
 #define _SELF(s) (GTK_ICON_VIEW(RVAL2GOBJ(s)))
 
@@ -105,9 +103,7 @@ rg_item_activated(VALUE self, VALUE path)
     gtk_icon_view_item_activated(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_create_drag_icon(VALUE self, VALUE path)
 {
@@ -236,12 +232,10 @@ rg_unset_model_drag_source(VALUE self)
     gtk_icon_view_unset_model_drag_source(_SELF(self));
     return self;
 }
-#endif
 
 void
 Init_gtk_iconview(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_VIEW, "IconView", mGtk);
 
     id_model = rb_intern("model");
@@ -256,8 +250,6 @@ Init_gtk_iconview(VALUE mGtk)
     RG_DEF_METHOD_P(path_is_selected, 1);
     RG_DEF_METHOD(selected_items, 0);
     RG_DEF_METHOD(item_activated, 1);
-#endif
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(create_drag_icon, 1);
     RG_DEF_METHOD(enable_model_drag_dest, 2);
     RG_DEF_METHOD(enable_model_drag_source, 3);
@@ -275,5 +267,4 @@ Init_gtk_iconview(VALUE mGtk)
     /* GtkIconViewDropPosition */
     G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_VIEW_DROP_POSITION, "GTK_ICON_VIEW_");
-#endif
 }

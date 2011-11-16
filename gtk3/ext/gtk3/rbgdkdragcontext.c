@@ -102,15 +102,10 @@ rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_scan_args(argc, argv, "10", &xid);
         ret = gdk_drag_get_protocol(RVAL2GDKNATIVEWINDOW(xid), &prot);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display;
         rb_scan_args(argc, argv, "20", &display, &xid);
         ret = gdk_drag_get_protocol_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                 RVAL2GDKNATIVEWINDOW(xid), &prot);
-#else
-        rb_warn("Not supported arguments for Gdk::Display in GTK+-2.0.x.");
-        ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
-#endif
     }
 
     return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), GDKNATIVEWINDOW2RVAL(ret));
@@ -158,7 +153,6 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
                              NUM2INT(x_root), NUM2INT(y_root),
                              &dest_window, &prot);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE screen;
         rb_scan_args(argc, argv, "40", &drag_window, &screen, &x_root, &y_root);
         gdk_drag_find_window_for_screen(_SELF(self),
@@ -166,9 +160,6 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
                                         GDK_SCREEN(RVAL2GOBJ(screen)),
                                         NUM2INT(x_root), NUM2INT(y_root),
                                         &dest_window, &prot);
-#else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     }
 
     return rb_ary_new3(2, GOBJ2RVAL(dest_window), 
@@ -258,13 +249,11 @@ rg_drag_status(VALUE self, VALUE action, VALUE time)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_drag_drop_succeeded_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_drag_drop_succeeded(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_gdk_dragcontext(VALUE mGdk)
@@ -293,9 +282,8 @@ Init_gtk_gdk_dragcontext(VALUE mGdk)
     RG_DEF_METHOD(drag_motion, 7);
     RG_DEF_METHOD(drop_finish, 2);
     RG_DEF_METHOD(drag_status, 2);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(drag_drop_succeeded, 0);
-#endif
+
     /* Constants */
     G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", RG_TARGET_NAMESPACE);

@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 /*****************************************/
 static GtkRecentData*
 rd_copy(const GtkRecentData* data)
@@ -120,12 +118,9 @@ rg_set_private(VALUE self, VALUE is_private)
     return self;
 }
 
-#endif
-
 void
 Init_gtk_recent_data(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_DATA, "RecentData", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -145,5 +140,4 @@ Init_gtk_recent_data(VALUE mGtk)
     RG_DEF_METHOD(set_private, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
-#endif
 }

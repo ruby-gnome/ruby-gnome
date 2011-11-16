@@ -21,12 +21,10 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cPrintContext
 #define _SELF(s) (GTK_PRINT_CONTEXT(RVAL2GOBJ(s)))
 
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
 #include <rb_cairo.h>
 
 /* Rendering */
@@ -35,7 +33,7 @@ rg_cairo_context(VALUE self)
 {
     return CRCONTEXT2RVAL(gtk_print_context_get_cairo_context(_SELF(self)));
 }
-#  endif
+#endif
 
 static VALUE
 rg_page_setup(VALUE self)
@@ -87,7 +85,7 @@ rg_create_pango_layout(VALUE self)
 }
 
 /* Needed for preview implementations */
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
 static VALUE
 rg_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
 {
@@ -97,20 +95,18 @@ rg_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
                                         NUM2DBL(dpi_y));
     return self;
 }
-#  endif
 #endif
 
 void
 Init_gtk_print_context(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,
                                       "PrintContext", mGtk);
 
     /* Rendering */
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(cairo_context, 0);
-#  endif
+#endif
     RG_DEF_METHOD(page_setup, 0);
     RG_DEF_METHOD(width, 0);
     RG_DEF_METHOD(height, 0);
@@ -123,10 +119,9 @@ Init_gtk_print_context(VALUE mGtk)
     RG_DEF_METHOD(create_pango_layout, 0);
 
     /* Needed for preview implementations */
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(set_cairo_context, 3);
-#  endif
+#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }

@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cRecentFilter
 #define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))
 
@@ -146,12 +144,10 @@ rg_filter(VALUE self, VALUE filter_info)
     return CBOOL2RVAL(gtk_recent_filter_filter(_SELF(self),
                                                (GtkRecentFilterInfo*)RVAL2BOXED(filter_info, GTK_TYPE_RECENT_FILTER_INFO)));
 }
-#endif
 
 void 
 Init_gtk_recent_filter(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER, "RecentFilter", mGtk);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(name, 0);
@@ -171,5 +167,4 @@ Init_gtk_recent_filter(VALUE mGtk)
     /* GtkRecentFilterFlags */
     G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RECENT_FILTER_FLAGS, "GTK_RECENT_FILTER_");
-#endif
 }

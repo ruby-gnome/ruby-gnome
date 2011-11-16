@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cExpander
 #define _SELF(self) (GTK_EXPANDER(RVAL2GOBJ(self)))
 
@@ -43,13 +41,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-#endif
-
 void 
 Init_gtk_expander(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);
     RG_DEF_METHOD(initialize, -1);
-#endif
 }

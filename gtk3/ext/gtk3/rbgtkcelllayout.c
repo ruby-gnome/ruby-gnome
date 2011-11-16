@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE mCellLayout
 #define _SELF(s) (GTK_CELL_LAYOUT(RVAL2GOBJ(s)))
 #define RVAL2RENDERER(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))
@@ -122,12 +120,10 @@ rg_set_attributes(VALUE self, VALUE cell, VALUE attrs)
     }
     return self;
 }
-#endif
 
 void
 Init_gtk_celllayout(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_CELL_LAYOUT, "CellLayout", mGtk);
 
     RG_DEF_METHOD(pack_start, 2);
@@ -138,5 +134,4 @@ Init_gtk_celllayout(VALUE mGtk)
     RG_DEF_METHOD(set_cell_data_func, 1);
     RG_DEF_METHOD(clear_attributes, 1);
     RG_DEF_METHOD(set_attributes, 2);
-#endif
 }

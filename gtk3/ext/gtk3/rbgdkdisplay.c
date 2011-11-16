@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,2,0)
-
 #define RG_TARGET_NAMESPACE cDisplay
 #define _SELF(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
 
@@ -122,14 +120,12 @@ rg_sync(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_flush(VALUE self)
 {
     gdk_display_flush(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_devices(VALUE self)
@@ -219,7 +215,6 @@ rg_closed_p(VALUE self)
     return CBOOL2RVAL(_SELF(self)->closed);
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_button_x(VALUE self)
 {
@@ -248,7 +243,6 @@ rg_double_click_distance(VALUE self)
 {
     return UINT2NUM(_SELF(self)->double_click_distance);
 }
-#endif
 
 static VALUE
 rg_pointer(VALUE self)
@@ -278,7 +272,6 @@ GdkDisplayPointerHooks* gdk_display_set_pointer_hooks
                                              const GdkDisplayPointerHooks *new_hooks);
  */
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_supports_cursor_color_p(VALUE self)
 {
@@ -310,9 +303,7 @@ rg_default_group(VALUE self)
 {
     return GOBJ2RVAL(gdk_display_get_default_group(_SELF(self)));
 }
-#endif
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_supports_selection_notification_p(VALUE self)
 {
@@ -347,7 +338,6 @@ rg_store_clipboard(VALUE self, VALUE rbclipboard_window, VALUE rbtime_, VALUE rb
 
     return self;
 }
-#endif
 
 static VALUE
 rg_core_pointer(VALUE self)
@@ -355,14 +345,12 @@ rg_core_pointer(VALUE self)
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_warp_pointer(VALUE self, VALUE screen, VALUE x, VALUE y)
 {
     gdk_display_warp_pointer(_SELF(self), RVAL2GOBJ(screen), NUM2INT(x), NUM2INT(y));
     return self;
 }
-#endif
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
@@ -371,13 +359,14 @@ rg_grab(VALUE self)
     gdk_x11_display_grab(_SELF(self));
     return self;
 }
+
 static VALUE
 rg_ungrab(VALUE self)
 {
     gdk_x11_display_ungrab(_SELF(self));
     return self;
 }
-#if GTK_CHECK_VERSION(2,4,0)
+
 static VALUE
 rg_register_standard_event_type(VALUE self, VALUE event_base, VALUE n_events)
 {
@@ -385,8 +374,7 @@ rg_register_standard_event_type(VALUE self, VALUE event_base, VALUE n_events)
                                          NUM2INT(event_base), NUM2INT(n_events));
     return self;
 }
-#endif
-#if GTK_CHECK_VERSION(2,8,0)
+
 static VALUE
 rg_user_time(VALUE self)
 {
@@ -399,9 +387,7 @@ rg_set_cursor_theme(VALUE self, VALUE theme, VALUE size)
     gdk_x11_display_set_cursor_theme(_SELF(self), RVAL2CSTR(theme), NUM2INT(size));
     return self;
 }
-#endif
 
-#  if GTK_CHECK_VERSION(2, 12, 0)
 /*
 *** need gdk_x11_display_broadcast_startup_messagev() ***
 
@@ -464,12 +450,9 @@ rg_startup_notification_id(VALUE self)
 {
     return CSTR2RVAL(gdk_x11_display_get_startup_notification_id(_SELF(self)));
 }
-#  endif
 
 #endif
-#endif
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_supports_shapes_p(VALUE self)
 {
@@ -481,9 +464,7 @@ rg_supports_input_shapes_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_display_supports_input_shapes(_SELF(self)));
 }
-#endif
 
-#if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
 rg_supports_composite_p(VALUE self)
 {
@@ -496,12 +477,10 @@ rg_trigger_tooltip_query(VALUE self)
     gtk_tooltip_trigger_tooltip_query(_SELF(self));
     return self;
 }
-#endif
 
 void 
 Init_gtk_gdk_display(VALUE mGdk)
 {
-#if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
 
     RG_DEF_SMETHOD(open, 1);
@@ -518,9 +497,7 @@ Init_gtk_gdk_display(VALUE mGdk)
 
     RG_DEF_METHOD(beep, 0);
     RG_DEF_METHOD(sync, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(flush, 0);
-#endif
     RG_DEF_METHOD(close, 0);
 
     RG_DEF_METHOD(devices, 0);
@@ -533,59 +510,40 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(button_window, 0);
     RG_DEF_METHOD(button_number, 0);
     RG_DEF_METHOD_P(closed, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(button_x, 0);
     RG_DEF_METHOD(button_y, 0);
     RG_DEF_METHOD(set_double_click_distance, 1);
     RG_DEF_METHOD(double_click_distance, 0);
-#endif
     RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD(window_at_pointer, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD_P(supports_cursor_color, 0);
     RG_DEF_METHOD_P(supports_cursor_alpha, 0);
     RG_DEF_METHOD(default_cursor_size, 0);
     RG_DEF_METHOD(maximal_cursor_size, 0);
     RG_DEF_METHOD(default_group, 0);
-#endif
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(supports_selection_notification, 0);
     RG_DEF_METHOD_P(request_selection_notification, 1);
     RG_DEF_METHOD_P(supports_clipboard_persistence, 0);
     RG_DEF_METHOD(store_clipboard, 3);
-#endif
     RG_DEF_METHOD(core_pointer, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(warp_pointer, 3);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(grab, 0);
     RG_DEF_METHOD(ungrab, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(register_standard_event_type, 2);
-#endif
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(user_time, 0);
     RG_DEF_METHOD(set_cursor_theme, 2);
-#endif
-#  if GTK_CHECK_VERSION(2, 12, 0)
 /*
     RG_DEF_METHOD(broadcast_startup_message, -1);
 */
     RG_DEF_METHOD(startup_notification_id, 0);
-#  endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
 #endif
-#endif
 
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(supports_shapes, 0);
     RG_DEF_METHOD_P(supports_input_shapes, 0);
-#endif
-#if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD_P(supports_composite, 0);
     RG_DEF_METHOD(trigger_tooltip_query, 0);
-#endif
 }
