@@ -1,0 +1,5 @@
+install:
+	if test -n "$(pkgconfigdir)"; then				\
+	  $(MAKEDIRS) $(pkgconfigdir);					\
+	  $(INSTALL_DATA) ruby-gtksourceview3.pc $(pkgconfigdir);	\
+	fi
