@@ -19,15 +19,6 @@
  *  MA  02110-1301  USA
  */
 
-/* 
-   NOTE:
-   - gtk_bindings_activate() is mapped to
-     Gtk::Object#bindings_activate.
-
-   - gtk_binding_set_by_class() is mapped to
-     Gtk::Object.binding_set
- */
-
 #include "global.h"
 
 #define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
