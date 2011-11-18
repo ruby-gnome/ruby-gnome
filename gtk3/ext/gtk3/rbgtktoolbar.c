@@ -24,6 +24,7 @@
 
 #include "global.h"
 
+/* TODO
 #define RG_TARGET_NAMESPACE cToolbar
 #define _SELF(self) (GTK_TOOLBAR(RVAL2GOBJ(self)))
 #define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
@@ -278,10 +279,12 @@ rg_unset_style(VALUE self)
     gtk_toolbar_unset_style(_SELF(self));
     return self;
 }
+*/
 
 void 
 Init_gtk_toolbar(VALUE mGtk)
 {
+/* TODO
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOLBAR, "Toolbar", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -301,15 +304,13 @@ Init_gtk_toolbar(VALUE mGtk)
     RG_DEF_METHOD(unset_icon_size, 0);
     RG_DEF_METHOD(unset_style, 0);
 
-    /* GtkToolbarChildType */
     G_DEF_CLASS(GTK_TYPE_TOOLBAR_CHILD_TYPE, "ChildType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TOOLBAR_CHILD_TYPE, "GTK_TOOLBAR_");
 
-    /* GtkToolbarSpaceStyle */
     G_DEF_CLASS(GTK_TYPE_TOOLBAR_SPACE_STYLE, "SpaceStyle", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TOOLBAR_SPACE_STYLE, "GTK_TOOLBAR_");
 
-    /* GtkToolbarStyle(from Standard Constants) */
     G_DEF_CLASS(GTK_TYPE_TOOLBAR_STYLE, "Style", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TOOLBAR_STYLE, "GTK_TOOLBAR_");
+*/
 }

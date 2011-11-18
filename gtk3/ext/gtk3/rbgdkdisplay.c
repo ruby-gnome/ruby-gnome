@@ -179,6 +179,7 @@ rg_set_double_click_time(VALUE self, VALUE msec)
     return self;
 }
 
+/* TODO
 static VALUE
 rg_double_click_time(VALUE self)
 {
@@ -214,7 +215,9 @@ rg_closed_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->closed);
 }
+*/
 
+/* TODO
 static VALUE
 rg_button_x(VALUE self)
 {
@@ -230,6 +233,7 @@ rg_button_y(VALUE self)
                        INT2NUM(_SELF(self)->button_y[0]),
                        INT2NUM(_SELF(self)->button_y[1]));
 }
+*/
 
 static VALUE
 rg_set_double_click_distance(VALUE self, VALUE distance)
@@ -238,11 +242,13 @@ rg_set_double_click_distance(VALUE self, VALUE distance)
     return self;
 }
 
+/* TODO
 static VALUE
 rg_double_click_distance(VALUE self)
 {
     return UINT2NUM(_SELF(self)->double_click_distance);
 }
+*/
 
 static VALUE
 rg_pointer(VALUE self)
@@ -339,11 +345,13 @@ rg_store_clipboard(VALUE self, VALUE rbclipboard_window, VALUE rbtime_, VALUE rb
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_core_pointer(VALUE self)
 {
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
+*/
 
 static VALUE
 rg_warp_pointer(VALUE self, VALUE screen, VALUE x, VALUE y)
@@ -359,7 +367,6 @@ rg_grab(VALUE self)
     gdk_x11_display_grab(_SELF(self));
     return self;
 }
-
 static VALUE
 rg_ungrab(VALUE self)
 {
@@ -450,7 +457,6 @@ rg_startup_notification_id(VALUE self)
 {
     return CSTR2RVAL(gdk_x11_display_get_startup_notification_id(_SELF(self)));
 }
-
 #endif
 
 static VALUE
@@ -505,15 +511,21 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(peek_event, 0);
     RG_DEF_METHOD(put_event, 1);
     RG_DEF_METHOD(set_double_click_time, 1);
+/* TODO
     RG_DEF_METHOD(double_click_time, 0);
     RG_DEF_METHOD(button_click_time, 0);
     RG_DEF_METHOD(button_window, 0);
     RG_DEF_METHOD(button_number, 0);
     RG_DEF_METHOD_P(closed, 0);
+*/
+/* TODO
     RG_DEF_METHOD(button_x, 0);
     RG_DEF_METHOD(button_y, 0);
+*/
     RG_DEF_METHOD(set_double_click_distance, 1);
+/* TODO
     RG_DEF_METHOD(double_click_distance, 0);
+*/
     RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD(window_at_pointer, 0);
     RG_DEF_METHOD_P(supports_cursor_color, 0);
@@ -525,7 +537,9 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD_P(request_selection_notification, 1);
     RG_DEF_METHOD_P(supports_clipboard_persistence, 0);
     RG_DEF_METHOD(store_clipboard, 3);
+/* deprecated
     RG_DEF_METHOD(core_pointer, 0);
+*/
     RG_DEF_METHOD(warp_pointer, 3);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);

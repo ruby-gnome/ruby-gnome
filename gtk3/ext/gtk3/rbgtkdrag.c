@@ -246,11 +246,13 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
 
     if (argc == 6) {
         rb_scan_args(argc, argv, "60", &context, &obj, &pixmap, &mask, &hot_x, &hot_y);
+/* deprecated?
         gtk_drag_set_icon_pixmap(RVAL2DC(context),
                                  GDK_COLORMAP(RVAL2GOBJ(obj)), 
                                  GDK_PIXMAP(RVAL2GOBJ(pixmap)),
                                  GDK_BITMAP(RVAL2GOBJ(mask)), 
                                  NUM2INT(hot_x), NUM2INT(hot_y));
+*/
     } else {
         rb_scan_args(argc, argv, "40", &context, &obj, &hot_x, &hot_y);
 
@@ -316,9 +318,11 @@ rg_m_source_set_icon(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "22", &widget, &obj, &pixmap, &mask);
     if (argc == 4){
+/* deprecated?
         gtk_drag_source_set_icon(RVAL2WIDGET(widget), GDK_COLORMAP(RVAL2GOBJ(obj)),
                                  GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
                                  GDK_BITMAP(RVAL2GOBJ(mask)));
+*/
     } else if (argc == 2){
         if (TYPE(obj) == T_SYMBOL){
             gtk_drag_source_set_icon_stock(RVAL2WIDGET(widget), rb_id2name(SYM2ID(obj)));

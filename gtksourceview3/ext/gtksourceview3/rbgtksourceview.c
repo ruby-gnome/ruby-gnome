@@ -66,6 +66,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
  *
  * Returns: self.
  */
+/* deprecated
 static VALUE
 rg_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
 {
@@ -74,6 +75,7 @@ rg_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
                          GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
 }
+*/
 
 /*
  * Method: get_mark_category_pixbuf(category)
@@ -83,6 +85,7 @@ rg_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
  *
  * Returns: a Gdk::Pixbuf object if found, or nil if not found.
  */
+/* deprecated
 static VALUE
 rg_get_mark_category_pixbuf(VALUE self, VALUE category)
 {
@@ -92,6 +95,7 @@ rg_get_mark_category_pixbuf(VALUE self, VALUE category)
                               RVAL2CSTR(category));
     return GOBJ2RVAL(pixbuf);
 }
+*/
 
 /*
  * Method: set_mark_category_priority(category, priority)
@@ -102,6 +106,7 @@ rg_get_mark_category_pixbuf(VALUE self, VALUE category)
  *
  * Returns: self.
  */
+/* deprecated
 static VALUE
 rg_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
 {
@@ -110,6 +115,7 @@ rg_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
                            NUM2INT(priority));
     return self;
 }
+*/
 
 /*
  * Method: get_mark_category_priority(category)
@@ -119,6 +125,7 @@ rg_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
  *
  * Returns: the priority if found, or 0 if not found.
  */
+/* deprecated
 static VALUE
 rg_get_mark_category_priority(VALUE self, VALUE category)
 {
@@ -128,6 +135,7 @@ rg_get_mark_category_priority(VALUE self, VALUE category)
                               RVAL2CSTR(category));
     return INT2NUM(priority);
 }
+*/
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
@@ -172,20 +180,22 @@ rg_set_mark_category_background(VALUE self, VALUE category, VALUE color)
 void
 Init_gtk_sourceview (VALUE mGtk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_TYPE_SOURCE_VIEW, "SourceView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "SourceView", mGtk);
 
     rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,
-                                INT2FIX(GTKSOURCEVIEW2_MAJOR_VERSION),
-                                INT2FIX(GTKSOURCEVIEW2_MINOR_VERSION),
-                                INT2FIX(GTKSOURCEVIEW2_MICRO_VERSION)));
+                                INT2FIX(GTKSOURCEVIEW3_MAJOR_VERSION),
+                                INT2FIX(GTKSOURCEVIEW3_MINOR_VERSION),
+                                INT2FIX(GTKSOURCEVIEW3_MICRO_VERSION)));
 
     RG_DEF_METHOD(initialize, -1);
 #ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
+/* deprecated
     RG_DEF_METHOD(get_mark_category_pixbuf, 1);
     RG_DEF_METHOD(set_mark_category_pixbuf, 2);
     RG_DEF_METHOD(get_mark_category_priority, 1);
     RG_DEF_METHOD(set_mark_category_priority, 2);
+*/
 #endif
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
     RG_DEF_METHOD(get_mark_category_background, 1);
@@ -193,10 +203,10 @@ Init_gtk_sourceview (VALUE mGtk)
 #endif
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 
-    G_DEF_CLASS(GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "SmartHomeEndType", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SMART_HOME_END_TYPE, "GTK_SOURCE_");
+    G_DEF_CLASS(GTK_SOURCE_TYPE_SMART_HOME_END_TYPE, "SmartHomeEndType", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_SOURCE_TYPE_SMART_HOME_END_TYPE, "GTK_SOURCE_");
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
-    G_DEF_CLASS(GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS, "GTK_SOURCE_");
+    G_DEF_CLASS(GTK_SOURCE_TYPE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_SOURCE_TYPE_DRAW_SPACES_FLAGS, "GTK_SOURCE_");
 #endif
 }

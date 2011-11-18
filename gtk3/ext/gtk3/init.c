@@ -45,7 +45,9 @@ Init_gtk3(void)
     Init_gtk_gdk_atom(mGdk);
     Init_gtk_gdk_cairo();
     Init_gtk_gdk_color(mGdk);
+/* deprecated
     Init_gtk_gdk_colormap(mGdk);
+*/
     Init_gtk_gdk_const(mGdk);
     Init_gtk_gdk_cursor(mGdk);
     Init_gtk_gdk_device(mGdk);
@@ -54,18 +56,26 @@ Init_gtk3(void)
     Init_gtk_gdk_dragcontext(mGdk);
     Init_gtk_gdk_event(mGdk);
     Init_gtk_gdk_geometry(mGdk);
+/* deprecated
     Init_gtk_gdk_image(mGdk);
     Init_gtk_gdk_input(mGdk);
+*/
     Init_gtk_gdk_keymap(mGdk);
     Init_gtk_gdk_keyval(mGdk);
     Init_gtk_gdk_pango(mGdk);
+/* deprecated
     Init_gtk_gdk_pangorenderer(mGdk);
+*/
     Init_gtk_gdk_pixbuf(mGdk);
+/* deprecated
     Init_gtk_gdk_pixmap(mGdk);
+*/
     Init_gtk_gdk_property(mGdk);
     Init_gtk_gdk_rectangle(mGdk);
+/* deprecated
     Init_gtk_gdk_region(mGdk);
     Init_gtk_gdk_rgb(mGdk);
+*/
     Init_gtk_gdk_screen(mGdk);
     Init_gtk_gdk_selection(mGdk);
     Init_gtk_gdk_threads(mGdk);
@@ -117,12 +127,18 @@ Init_gtk3(void)
     Init_gtk_colorbutton(mGtk);
     Init_gtk_color_selection(mGtk);
     Init_gtk_color_selection_dialog(mGtk);
+/* deprecated
     Init_gtk_combo(mGtk);
+*/
     Init_gtk_combobox(mGtk);
+/* deprecated
     Init_gtk_comboboxentry(mGtk);
+*/
     Init_gtk_const(mGtk);
     Init_gtk_container(mGtk);
+/* deprecated
     Init_gtk_curve(mGtk);
+*/
     Init_gtk_dialog(mGtk);
     Init_gtk_drag(mGtk);
     Init_gtk_drawing_area(mGtk);
@@ -137,20 +153,26 @@ Init_gtk3(void)
     Init_gtk_file_chooser_dialog(mGtk);
     Init_gtk_file_chooser_widget(mGtk);
     Init_gtk_file_filter(mGtk);
+/* deprecated
     Init_gtk_file_selection(mGtk);
+*/
     Init_gtk_fixed(mGtk);
     Init_gtk_fontbutton(mGtk);
     Init_gtk_font_selection(mGtk);
     Init_gtk_font_selection_dialog(mGtk);
     Init_gtk_frame(mGtk);
+/* deprecated
     Init_gtk_gamma_curve(mGtk);
     Init_gtk_gdk_draw(mGdk);
     Init_gtk_gdk_gc(mGdk);
+*/
     Init_gtk_handle_box(mGtk);
     Init_gtk_hbutton_box(mGtk);
     Init_gtk_hbox(mGtk);
     Init_gtk_hpaned(mGtk);
+/* deprecated
     Init_gtk_hruler(mGtk);
+*/
     Init_gtk_hscale(mGtk);
     Init_gtk_hscrollbar(mGtk);
     Init_gtk_hseparator(mGtk);
@@ -166,10 +188,14 @@ Init_gtk3(void)
     Init_gtk_imcontext(mGtk);
     Init_gtk_imcontext_simple(mGtk);
     Init_gtk_im_multicontext(mGtk);
+/* deprecated
     Init_gtk_input_dialog(mGtk);
+*/
     Init_gtk_invisible(mGtk);
+/* deprecated
     Init_gtk_item(mGtk);
     Init_gtk_itemfactory(mGtk);
+*/
     Init_gtk_label(mGtk);
     Init_gtk_layout(mGtk);
     Init_gtk_link_button(mGtk);
@@ -182,8 +208,10 @@ Init_gtk3(void)
     Init_gtk_message_dialog(mGtk);
     Init_gtk_misc(mGtk);
     Init_gtk_notebook(mGtk);
+/* deprecated
     Init_gtk_object(mGtk);
     Init_gtk_option_menu(mGtk);
+*/
     Init_gtk_page_setup(mGtk);
     Init_gtk_page_setup_unix_dialog(mGtk);
     Init_gtk_paned(mGtk);
@@ -196,7 +224,9 @@ Init_gtk3(void)
     Init_gtk_print_operation_preview(mGtk);
     Init_gtk_print_settings(mGtk);
     Init_gtk_print_unix_dialog(mGtk);
+/* deprecated
     Init_gtk_progress(mGtk);
+*/
     Init_gtk_progress_bar(mGtk);
     Init_gtk_radio_action(mGtk);
     Init_gtk_radio_button(mGtk);
@@ -215,7 +245,9 @@ Init_gtk3(void)
     Init_gtk_recent_filter_info(mGtk);
     Init_gtk_recent_info(mGtk);
     Init_gtk_recent_manager(mGtk);
+/* deprecated
     Init_gtk_ruler(mGtk);
+*/
     Init_gtk_scale(mGtk);
     Init_gtk_scalebutton(mGtk);
     Init_gtk_scrollbar(mGtk);
@@ -233,7 +265,9 @@ Init_gtk3(void)
     Init_gtk_statusbar(mGtk);
     Init_gtk_status_icon(mGtk);
     Init_gtk_stock(mGtk);
+/* deprecated
     Init_gtk_style(mGtk);
+*/
     Init_gtk_table(mGtk);
     Init_gtk_target_list(mGtk);
     Init_gtk_tearoff_menu_item(mGtk);
@@ -253,7 +287,9 @@ Init_gtk3(void)
     Init_gtk_toolbutton(mGtk);
     Init_gtk_toolitem(mGtk);
     Init_gtk_tooltip(mGtk);
+/* deprecated
     Init_gtk_tooltips(mGtk);
+*/
     Init_gtk_treedragdest(mGtk);
     Init_gtk_treedragsource(mGtk);
     Init_gtk_treeiter(mGtk);
@@ -273,7 +309,9 @@ Init_gtk3(void)
     Init_gtk_viewport(mGtk);
     Init_gtk_volumebutton(mGtk);
     Init_gtk_vpaned(mGtk);
+/* deprecated
     Init_gtk_vruler(mGtk);
+*/
     Init_gtk_vscale(mGtk);
     Init_gtk_vscrollbar(mGtk);
     Init_gtk_vseparator(mGtk);

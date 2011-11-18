@@ -118,7 +118,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rmitem_get_group(VALUE self)
 {
-    /* Owened by GTK+ */
     return GSLIST2ARY(gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
 }
 
@@ -130,7 +129,7 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
 
     rmitem2add = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self));
     rmitem_orig = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(rb_ary_entry(grp_ary, 0)));
-    group = gtk_radio_menu_item_group(rmitem_orig);
+    group = gtk_radio_menu_item_get_group(rmitem_orig);
 
     gtk_radio_menu_item_set_group(rmitem2add, group);
 

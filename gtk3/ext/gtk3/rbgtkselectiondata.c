@@ -51,9 +51,11 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
             len = NUM2UINT(size);
             fmt = (RSTRING_LEN(src) / len) * 8;
         }
+/* TODO
     } else if(ntype == compound_text){
         guchar* str = (guchar*)dat;
         gdk_string_to_compound_text(RVAL2CSTR(src), &ntype, &fmt, &str, &len);
+*/
     } else if(type != Qnil && size != Qnil && src != Qnil) {
         dat = (void *)RVAL2CSTR(src);
         fmt = NUM2INT(size);
@@ -74,12 +76,15 @@ rbgtk_atom2selectiondata_free(GdkAtom type, void *dat)
     if (type == GDK_SELECTION_TYPE_INTEGER ||
         type == GDK_SELECTION_TYPE_ATOM) {
         xfree(dat);
+/* TODO
     } else if(type == compound_text) {
         gdk_free_compound_text(dat);
+*/
     }
 }    
 /************************************************************************/
 
+/* TODO
 static VALUE
 rg_selection(VALUE self)
 {
@@ -117,6 +122,7 @@ rg_display(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->display, GDK_TYPE_DISPLAY);
 }
+*/
 
 /* Instance Methods */
 static VALUE
@@ -259,12 +265,14 @@ Init_gtk_selectiondata(VALUE mGtk)
 
     compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
 
+/* TODO
     RG_DEF_METHOD(selection, 0);
     RG_DEF_METHOD(target, 0);
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(format, 0);
     RG_DEF_METHOD(data, 0);
     RG_DEF_METHOD(display, 0);
+*/
     RG_DEF_METHOD(set, -1);
     RG_DEF_METHOD(text, 0);
     RG_DEF_METHOD(set_text, 1);

@@ -22,20 +22,10 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cObject
-
-/*
-We shouldn't implement it.
-void        gtk_object_sink                 (GtkObject *object);
-#define     GTK_OBJECT_FLOATING             (obj)
-
-gtk_object_new is deprecated. Use g_object_new instead.
-GtkObject*  gtk_object_new                  (GtkType type,
-                                             const gchar *first_property_name,
-                                             ...);
-*/
 
 static VALUE
 rg_type_name(VALUE self)
@@ -53,7 +43,6 @@ rg_destroy(VALUE self)
 static VALUE
 rg_flags(VALUE self)
 {
-    /* _GtkObject.flags is int32 */
     return(INT2FIX(GTK_OBJECT_FLAGS(RVAL2GOBJ(self))));
 }
 
@@ -71,7 +60,6 @@ rg_unset_flags(VALUE self, VALUE flags)
     return self;
 }
 
-/* Move from Bindings */
 static VALUE
 rg_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
 {
@@ -80,7 +68,6 @@ rg_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
                                              NUM2UINT(modifiers)));
 }
 
-/* Move from Bindings */
 static VALUE
 rg_s_binding_set(VALUE self)
 {
@@ -131,14 +118,14 @@ Init_gtk_object(VALUE mGtk)
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(bindings_activate, 2);
 
-    /* GtkObjectFlags */
     G_DEF_CLASS(GTK_TYPE_OBJECT_FLAGS, "Flags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_OBJECT_FLAGS, "GTK_");
 
-    /* undef deprecated properties */
     rb_undef_method(RG_TARGET_NAMESPACE, "user_data");
     rb_undef_method(RG_TARGET_NAMESPACE, "user_data=");
     rb_undef_method(RG_TARGET_NAMESPACE, "set_user_data");
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
+*/
+

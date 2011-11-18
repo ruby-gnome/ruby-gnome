@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cRuler
@@ -69,3 +70,5 @@ Init_gtk_ruler(VALUE mGtk)
     RG_DEF_METHOD(draw_ticks, 0);
     RG_DEF_METHOD(draw_pos, 0);
 }
+*/
+

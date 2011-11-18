@@ -22,9 +22,10 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
-#ifndef GTK_DISABLE_DEPRECATED /* Since 2.4 */
+#ifndef GTK_DISABLE_DEPRECATED
 
 #define RG_TARGET_NAMESPACE cCombo
 
@@ -102,7 +103,7 @@ rg_entry(VALUE self)
 void 
 Init_gtk_combo(VALUE mGtk)
 {
-#ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
+#ifndef GTK_DISABLE_DEPRECATED
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO, "Combo", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
@@ -117,3 +118,5 @@ Init_gtk_combo(VALUE mGtk)
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
+*/
+

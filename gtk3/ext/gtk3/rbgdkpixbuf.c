@@ -24,6 +24,7 @@
 #define RG_TARGET_NAMESPACE cPixbuf
 #define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
 
+/* deprecated
 static VALUE
 rg_render_threshold_alpha(VALUE self, VALUE bitmap, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE alpha_threshold)
 {
@@ -154,6 +155,7 @@ rg_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         return dest;
     }
 }
+*/
 
 void
 Init_gtk_gdk_pixbuf(VALUE mGdk)
@@ -163,10 +165,12 @@ Init_gtk_gdk_pixbuf(VALUE mGdk)
      */
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
+/* deprecated
     RG_DEF_METHOD(render_threshold_alpha, 8);
     RG_DEF_METHOD(render_to_drawable, -1);
     RG_DEF_METHOD(render_pixmap_and_mask, -1);
 
     RG_DEF_SMETHOD(from_drawable, -1);
     RG_DEF_SMETHOD(from_image, -1);
+*/
 }

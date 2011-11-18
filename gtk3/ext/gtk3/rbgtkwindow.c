@@ -278,6 +278,7 @@ rg_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VALUE t
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_set_frame_dimensions(VALUE self, VALUE left, VALUE top, VALUE right, VALUE bottom)
 {
@@ -293,6 +294,7 @@ rg_set_has_frame(VALUE self, VALUE setting)
     gtk_window_set_has_frame(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
+*/
 
 static VALUE
 rg_set_mnemonic_modifier(VALUE self, VALUE modifier)
@@ -316,6 +318,7 @@ rg_default_size(VALUE self)
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
+/* deprecated
 static VALUE
 rg_frame_dimensions(VALUE self)
 {
@@ -333,6 +336,7 @@ rg_has_frame_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_window_get_has_frame(_SELF(self)));
 }
+*/
 
 static VALUE
 rg_icon_list(VALUE self)
@@ -541,13 +545,17 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(set_keep_below, 1);
     RG_DEF_METHOD(begin_resize_drag, 5);
     RG_DEF_METHOD(begin_move_drag, 4);
+/* deprecated
     RG_DEF_METHOD(set_frame_dimensions, 4);
+*/
     RG_DEF_METHOD(set_mnemonic_modifier, 1);
     RG_DEF_METHOD(default_size, 0);
     RG_DEF_SMETHOD(default_icon_list, 0);
+/* deprecated
     RG_DEF_METHOD(frame_dimensions, 0);
     RG_DEF_METHOD(set_has_frame, 1);
     RG_DEF_METHOD_P(has_frame, 0);
+*/
     RG_DEF_METHOD(icon_list, 0);
     RG_DEF_METHOD(mnemonic_modifier, 0);
     RG_DEF_METHOD(position, 0);

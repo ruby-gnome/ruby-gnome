@@ -36,6 +36,7 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL(gdk_screen_get_default());
 }
 
+/* deprecated
 static VALUE
 rg_default_colormap(VALUE self)
 {
@@ -55,6 +56,7 @@ rg_system_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_system_colormap(_SELF(self)));
 }
+*/
 
 static VALUE
 rg_system_visual(VALUE self)
@@ -62,6 +64,7 @@ rg_system_visual(VALUE self)
     return GOBJ2RVAL(gdk_screen_get_system_visual(_SELF(self)));
 }
 
+/* deprecated
 static VALUE
 rg_rgb_colormap(VALUE self)
 {
@@ -73,12 +76,15 @@ rg_rgb_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgb_visual(_SELF(self)));
 }
+*/
 
+/* deprecated
 static VALUE
 rg_rgba_colormap(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgba_colormap(_SELF(self)));
 }
+*/
 
 static VALUE
 rg_rgba_visual(VALUE self)
@@ -184,12 +190,14 @@ rg_get_monitor(int argc, VALUE *argv, VALUE self)
     return ret;
 }
 
+/* deprecated
 static VALUE
 rg_broadcast_client_message(VALUE self, VALUE event)
 {
     gdk_screen_broadcast_client_message(_SELF(self), RVAL2GEV(event));
     return self;
 }
+*/
 
 /*
   type: String, Integer, Gdk::Color.
@@ -260,6 +268,7 @@ child_setup(gpointer func)
     }
 }
 
+/* deprecated
 static VALUE
 rg_spawn_on_screen(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
@@ -325,6 +334,7 @@ rg_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE argv, V
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_output)),
                        rb_funcall(rb_cIO, id_new, 1, INT2NUM(standard_error)));
 }
+*/
 
 static VALUE
 rg_spawn_command_line_on_screen(G_GNUC_UNUSED VALUE self, VALUE command_line)
@@ -373,14 +383,20 @@ Init_gtk_gdk_screen(VALUE mGdk)
     id_new = rb_intern("new");
 
     RG_DEF_SMETHOD(default, 0);
+/* deprecated
     RG_DEF_METHOD(default_colormap, 0);
     RG_DEF_METHOD(set_default_colormap, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "default_colormap");
     RG_DEF_METHOD(system_colormap, 0);
+*/
     RG_DEF_METHOD(system_visual, 0);
+/* deprecated
     RG_DEF_METHOD(rgb_colormap, 0);
     RG_DEF_METHOD(rgb_visual, 0);
+*/
+/* deprecated
     RG_DEF_METHOD(rgba_colormap, 0);
+*/
     RG_DEF_METHOD(rgba_visual, 0);
     RG_DEF_METHOD_P(composited, 0);
     RG_DEF_METHOD(root_window, 0);
@@ -396,7 +412,9 @@ Init_gtk_gdk_screen(VALUE mGdk)
     RG_DEF_METHOD(n_monitors, 0);
     RG_DEF_METHOD(monitor_geometry, 1);
     RG_DEF_METHOD(get_monitor, -1);
+/* deprecated
     RG_DEF_METHOD(broadcast_client_message, 1);
+*/
     RG_DEF_METHOD(get_setting, -1);
 #ifdef HAVE_RB_CAIRO_H
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "font_options", gdkscreen_get_font_options, 0);
@@ -405,8 +423,10 @@ Init_gtk_gdk_screen(VALUE mGdk)
     RG_DEF_METHOD(active_window, 0);
     RG_DEF_METHOD(window_stack, 0);
 
+/* deprecated
     RG_DEF_METHOD(spawn_on_screen, 4);
     RG_DEF_METHOD(spawn_on_screen_with_pipes, 4);
+*/
     RG_DEF_METHOD(spawn_command_line_on_screen, 1);
 
 #ifdef GDK_WINDOWING_X11

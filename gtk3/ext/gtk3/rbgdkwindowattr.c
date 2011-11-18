@@ -54,7 +54,7 @@ rg_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
     GdkWindowAttr w;
     w.width = NUM2INT(width);
     w.height = NUM2INT(height);
-    w.wclass = RVAL2GENUM(wclass, GDK_TYPE_WINDOW_CLASS);
+    w.wclass = RVAL2GENUM(wclass, GDK_TYPE_WINDOW_WINDOW_CLASS);
     w.window_type = RVAL2GENUM(window_type, GDK_TYPE_WINDOW_TYPE);
     G_INITIALIZE(self, &w);
     return Qnil;
@@ -96,12 +96,12 @@ ATTR_INT(height);
 static VALUE
 rg_wclass(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->wclass, GDK_TYPE_WINDOW_CLASS);
+    return GENUM2RVAL(_SELF(self)->wclass, GDK_TYPE_WINDOW_WINDOW_CLASS);
 }
 static VALUE
 rg_set_wclass(VALUE self, VALUE val)
 {
-    _SELF(self)->wclass = RVAL2GENUM(val, GDK_TYPE_WINDOW_CLASS);
+    _SELF(self)->wclass = RVAL2GENUM(val, GDK_TYPE_WINDOW_WINDOW_CLASS);
     return self;
 }
 
@@ -117,6 +117,7 @@ rg_set_visual(VALUE self, VALUE val)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_colormap(VALUE self)
 {
@@ -128,6 +129,7 @@ rg_set_colormap(VALUE self, VALUE val)
     _SELF(self)->colormap = GDK_COLORMAP(RVAL2GOBJ(val));
     return self;
 }
+*/
 
 static VALUE
 rg_window_type(VALUE self)
@@ -190,8 +192,10 @@ Init_gtk_gdk_windowattr(VALUE mGdk)
     RG_DEF_METHOD(set_wclass, 1);
     RG_DEF_METHOD(visual, 0);
     RG_DEF_METHOD(set_visual, 1);
+/* deprecated
     RG_DEF_METHOD(colormap, 0);
     RG_DEF_METHOD(set_colormap, 1);
+*/
     RG_DEF_METHOD(window_type, 0);
     RG_DEF_METHOD(set_window_type, 1);
     RG_DEF_METHOD(cursor, 0);

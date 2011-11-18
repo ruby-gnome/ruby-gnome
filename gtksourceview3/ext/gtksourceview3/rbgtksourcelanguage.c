@@ -114,7 +114,7 @@ void
 Init_gtk_sourcelanguage (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =
-        G_DEF_CLASS (GTK_TYPE_SOURCE_LANGUAGE, "SourceLanguage", mGtk);
+        G_DEF_CLASS (GTK_SOURCE_TYPE_LANGUAGE, "SourceLanguage", mGtk);
 
     RG_DEF_METHOD(get_metadata, 1);
     RG_DEF_METHOD(mime_types, 0);

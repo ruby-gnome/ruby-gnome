@@ -24,6 +24,7 @@
 #define RG_TARGET_NAMESPACE cDragContext
 #define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
 
+/* TODO
 static VALUE
 rg_protocol(VALUE self)
 {
@@ -83,14 +84,18 @@ rg_start_time(VALUE self)
 {
     return UINT2NUM(_SELF(self)->start_time);
 }
+*/
 
+/* deprecated
 static VALUE
 rg_initialize(VALUE self)
 {   
     G_INITIALIZE(self, gdk_drag_context_new());
     return Qnil;
 }
+*/
 
+/* TODO
 static VALUE
 rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -110,6 +115,7 @@ rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), GDKNATIVEWINDOW2RVAL(ret));
 }
+*/
 
 /* Instance Methods */
 static VALUE
@@ -147,11 +153,13 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
     GdkDragProtocol prot;
 
     if (argc == 3) {
+/* deprecated
         rb_scan_args(argc, argv, "30", &drag_window, &x_root, &y_root);
         gdk_drag_find_window(_SELF(self),
                              GDK_WINDOW(RVAL2GOBJ(drag_window)), 
                              NUM2INT(x_root), NUM2INT(y_root),
                              &dest_window, &prot);
+*/
     } else {
         VALUE screen;
         rb_scan_args(argc, argv, "40", &drag_window, &screen, &x_root, &y_root);
@@ -260,10 +268,15 @@ Init_gtk_gdk_dragcontext(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
+/* TODO
     RG_DEF_SMETHOD(get_protocol, -1);
+*/
     RG_DEF_SMETHOD(drag_begin, 1);
 
+/* deprecated
     RG_DEF_METHOD(initialize, 0);
+*/
+/* TODO
     RG_DEF_METHOD(protocol, 0);
     RG_DEF_METHOD_P(source, 0);
     RG_DEF_METHOD(source_window, 0);
@@ -273,6 +286,7 @@ Init_gtk_gdk_dragcontext(VALUE mGdk)
     RG_DEF_METHOD(suggested_action, 0);
     RG_DEF_METHOD(action, 0);
     RG_DEF_METHOD(start_time, 0);
+*/
 
     RG_DEF_METHOD(selection, 0);
     RG_DEF_METHOD(drag_abort, 1);

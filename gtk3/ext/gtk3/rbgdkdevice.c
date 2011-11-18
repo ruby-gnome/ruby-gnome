@@ -24,11 +24,10 @@
 #define RG_TARGET_NAMESPACE cDevice
 #define _SELF(self) (GDK_DEVICE(RVAL2GOBJ(self)))
 
-/* Methods */
+/* deprecated
 static VALUE
 rg_s_list(G_GNUC_UNUSED VALUE self)
 {
-    /* Owned by GDK */
     return GLIST2ARY(gdk_devices_list());
 }
 
@@ -41,11 +40,18 @@ rg_s_set_extension_events(G_GNUC_UNUSED VALUE self, VALUE window, VALUE mask, VA
 }
 
 static VALUE
+rg_s_core_pointer(G_GNUC_UNUSED VALUE self)
+{
+    return GOBJ2RVAL(gdk_device_get_core_pointer());
+}
+
+static VALUE
 rg_set_source(VALUE self, VALUE source)
 {
     gdk_device_set_source(_SELF(self), RVAL2GENUM(source, GDK_TYPE_INPUT_SOURCE));
     return self;
 }
+*/
 
 static VALUE
 rg_set_mode(VALUE self, VALUE mode)
@@ -67,12 +73,6 @@ rg_set_axis_use(VALUE self, VALUE index, VALUE use)
     gdk_device_set_axis_use(_SELF(self), NUM2UINT(index), 
                             RVAL2GENUM(use, GDK_TYPE_AXIS_USE));
     return self;
-}
-
-static VALUE
-rg_s_core_pointer(G_GNUC_UNUSED VALUE self)
-{
-    return GOBJ2RVAL(gdk_device_get_core_pointer());
 }
 
 static VALUE
@@ -131,7 +131,7 @@ rg_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
     return found ? DBL2NUM(value) : Qnil;
 }
 
-/* Accessor */
+/* TODO
 static VALUE
 rg_name(VALUE self)
 {
@@ -155,7 +155,9 @@ rg_has_cursor_p(VALUE self)
 {
     return CBOOL2RVAL(_SELF(self)->has_cursor);
 }
+*/
 
+/* deprecated
 static VALUE
 rg_axes(VALUE self)
 {
@@ -183,17 +185,20 @@ rg_keys(VALUE self)
     }
     return ary;
 }
+*/
 
 void 
 Init_gtk_gdk_device(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
 
+/* deprecated
     RG_DEF_SMETHOD(list, 0);
-    RG_DEF_SMETHOD(core_pointer, 0);
     RG_DEF_SMETHOD(set_extension_events, 3);
+    RG_DEF_SMETHOD(core_pointer, 0);
 
     RG_DEF_METHOD(set_source, 1);
+*/
     RG_DEF_METHOD(set_mode, 1);
     RG_DEF_METHOD(set_key, 3);
     RG_DEF_METHOD(set_axis_use, 2);
@@ -201,12 +206,16 @@ Init_gtk_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_history, 3);
     RG_DEF_METHOD(get_axis, 2);
 
+/* TODO
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(source, 0);
     RG_DEF_METHOD(mode, 0);
     RG_DEF_METHOD_P(has_cursor, 0);
+*/
+/* deprecated
     RG_DEF_METHOD(axes, 0);
     RG_DEF_METHOD(keys, 0);
+*/
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

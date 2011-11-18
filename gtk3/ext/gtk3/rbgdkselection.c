@@ -95,7 +95,7 @@ rg_m_send_notify(int argc, VALUE *argv, VALUE self)
 
     if (argc == 5) {
         rb_scan_args(argc, argv, "50", &requestor, &selection, &target, &property, &time);
-        gdk_selection_send_notify(RVAL2GDKNATIVEWINDOW(requestor), RVAL2ATOM(selection),
+        gdk_selection_send_notify(RVAL2GDKWINDOW(requestor), RVAL2ATOM(selection),
                                   RVAL2ATOM(target), 
                                   NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
                                   NUM2INT(time));
@@ -103,7 +103,7 @@ rg_m_send_notify(int argc, VALUE *argv, VALUE self)
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
       gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
-                                            RVAL2GDKNATIVEWINDOW(requestor), RVAL2ATOM(selection),
+                                            RVAL2GDKWINDOW(requestor), RVAL2ATOM(selection),
                                             RVAL2ATOM(target), 
                                             NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 
                                             NUM2INT(time));

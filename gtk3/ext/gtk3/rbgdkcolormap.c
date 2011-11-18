@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cColormap
@@ -42,17 +43,6 @@ rg_s_system(G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL(gdk_colormap_get_system());
 }
 
-/* Don't implement this. Because API is ugly
-   (especially treating of "success"). 
-   Use Gdk::Colormap#alloc_color instead.
-gint        gdk_colormap_alloc_colors       (GdkColormap *colormap,
-                                             GdkColor *colors,
-                                             gint ncolors,
-                                             gboolean writeable,
-                                             gboolean best_match,
-                                             gboolean *success);
-*/
-
 static VALUE
 rg_alloc_color(VALUE self, VALUE color, VALUE writeable, VALUE best_match)
 {
@@ -63,8 +53,6 @@ rg_alloc_color(VALUE self, VALUE color, VALUE writeable, VALUE best_match)
     return result ? INT2NUM(c->pixel) : Qnil;
 }
 
-/* Don't implement Gdk::Colormap#free_colors.
-   Because it should be pair with Gdk::Colormap#alloc_colors */
 static VALUE
 rg_free_color(VALUE self, VALUE color)
 {
@@ -133,3 +121,5 @@ Init_gtk_gdk_colormap(VALUE mGdk)
     RG_DEF_METHOD(screen, 0);
     RG_DEF_METHOD(colors, 0);
 }
+*/
+

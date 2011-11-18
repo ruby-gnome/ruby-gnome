@@ -22,7 +22,7 @@
 #include "global.h"
 
 #ifdef HAVE_GTK_UNIX_PRINT
-#include <gtk/gtkprinter.h>
+#include <gtk/gtkunixprint.h>
 
 #ifndef GTK_TYPE_PRINT_BACKEND
 #define GTK_TYPE_PRINT_BACKEND  (gtk_print_backend_get_type ())

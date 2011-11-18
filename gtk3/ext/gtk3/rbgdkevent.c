@@ -85,16 +85,16 @@ gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
     return self;\
 }
 
-#define ATTR_GDKNATIVEWINDOW(type, name)\
+#define ATTR_GDKWINDOW(type, name)\
 static VALUE \
 gdkevent ## type ## _ ## name (VALUE self)\
 {\
-    return GDKNATIVEWINDOW2RVAL(get_gdkevent(self)->type.name);\
+    return GDKWINDOW2RVAL(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
 gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 {\
-    get_gdkevent(self)->type.name = RVAL2GDKNATIVEWINDOW(val);\
+    get_gdkevent(self)->type.name = RVAL2GDKWINDOW(val);\
     return self;\
 }
 
@@ -249,11 +249,13 @@ gdkevent_s_get(G_GNUC_UNUSED VALUE self)
     return make_gdkevent(gdk_event_get());
 }
 
+/* deprecated
 static VALUE
 gdkevent_s_get_graphics_expose(G_GNUC_UNUSED VALUE self, VALUE window)
 {
     return make_gdkevent(gdk_event_get_graphics_expose(GDK_WINDOW(RVAL2GOBJ(window))));
 }
+*/
 
 /* GdkEvent */
 static VALUE
@@ -504,7 +506,7 @@ GDKEVENT_INIT(property, GDK_PROPERTY_NOTIFY);
 ATTR_ATOM(selection, selection);
 ATTR_ATOM(selection, target);
 ATTR_ATOM(selection, property);
-ATTR_GDKNATIVEWINDOW(selection, requestor);
+ATTR_GDKWINDOW(selection, requestor);
 ATTR_INT(selection, time);
 
 /* GdkEventDND */
@@ -518,6 +520,7 @@ ATTR_UINT(proximity, time);
 ATTR_GOBJ(proximity, device);
 
 /* GdkEventClient */
+/* deprecated
 ATTR_ATOM(client, message_type);
 GDKEVENT_INIT(client, GDK_CLIENT_EVENT);
 
@@ -591,9 +594,12 @@ gdkevent_s_add_client_message_filter(VALUE self, VALUE message_type)
                                   (GdkFilterFunc)filter_func, (gpointer)func);
     return self;
 }
+*/
 
 /* GdkEventNoExpose */
+/* deprecated
 GDKEVENT_INIT(noexpose, GDK_NO_EXPOSE);
+*/
 
 /* GdkEventWindowState */
 ATTR_FLAGS(window_state, changed_mask, GDK_TYPE_WINDOW_STATE);
@@ -606,7 +612,7 @@ ATTR_STR(setting, name);
 GDKEVENT_INIT(setting, GDK_SETTING);
 
 /* GdkEventOwnerChange */
-ATTR_GDKNATIVEWINDOW(owner_change, owner);
+ATTR_GDKWINDOW(owner_change, owner);
 ATTR_ENUM(owner_change, reason, GDK_TYPE_OWNER_CHANGE);
 ATTR_ATOM(owner_change, selection);
 ATTR_UINT(owner_change, time);
@@ -666,7 +672,9 @@ Init_gtk_gdk_event(VALUE mGdk)
     gdkevents[GDK_DROP_FINISHED] = gdkevents[GDK_DRAG_ENTER];
     gdkevents[GDK_CLIENT_EVENT]  = rb_define_class_under(mGdk, "EventClient", gdkEventAny);
     gdkevents[GDK_VISIBILITY_NOTIFY] = rb_define_class_under(mGdk, "EventVisibility", gdkEventAny);
+/* deprecated
     gdkevents[GDK_NO_EXPOSE]     = rb_define_class_under(mGdk, "EventNoExpose", gdkEventAny);
+*/
     gdkevents[GDK_SCROLL]        = rb_define_class_under(mGdk, "EventScroll", gdkEventAny);
     gdkevents[GDK_WINDOW_STATE]  = rb_define_class_under(mGdk, "EventWindowState", gdkEventAny);
     gdkevents[GDK_SETTING]       = rb_define_class_under(mGdk, "EventSetting", gdkEventAny);
@@ -689,7 +697,9 @@ Init_gtk_gdk_event(VALUE mGdk)
     rb_define_singleton_method(gdkEvent, "show_events?", gdkevent_s_get_show_events, 0);
     rb_define_singleton_method(gdkEvent, "set_show_events", gdkevent_s_set_show_events, 1);
     rb_define_singleton_method(gdkEvent, "setting_get", gdkevent_s_setting_get, -1);
+/* deprecated
     rb_define_singleton_method(gdkEvent, "add_client_message_filter", gdkevent_s_add_client_message_filter, 1);
+*/
     rb_define_method(gdkEvent, "screen", gdkevent_screen, 0);
     rb_define_method(gdkEvent, "set_screen", gdkevent_set_screen, 1);
     G_DEF_SETTERS(gdkEvent);
@@ -763,8 +773,10 @@ Init_gtk_gdk_event(VALUE mGdk)
     DEFINE_ACCESSOR(ev, expose, region);
     DEFINE_ACCESSOR(ev, expose, count);
     DEFINE_INIT(ev, expose);
+/* deprecated
     rb_define_singleton_method(ev, "get_graphics_expose", 
                                gdkevent_s_get_graphics_expose, 1);
+*/
     G_DEF_SETTERS(ev);
 
     /* GdkEventVisibility */
@@ -851,6 +863,7 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_SETTERS(ev);
 
     /* GdkEventClient */
+/* deprecated
     ev = gdkevents[GDK_CLIENT_EVENT];
     DEFINE_ACCESSOR(ev, client, message_type);
     rb_define_method(ev, "data_format", gdkeventclient_data_format, 0);
@@ -861,10 +874,13 @@ Init_gtk_gdk_event(VALUE mGdk)
                      gdkeventclient_send_clientmessage_toall, 0);
     DEFINE_INIT(ev, client);
     G_DEF_SETTERS(ev);
+*/
 
     /* GdkEventNoExpose */
+/* deprecated
     ev = gdkevents[GDK_NO_EXPOSE];
     DEFINE_INIT(ev, noexpose);
+*/
 
     /* GdkEventWindowState */
     ev = gdkevents[GDK_WINDOW_STATE];

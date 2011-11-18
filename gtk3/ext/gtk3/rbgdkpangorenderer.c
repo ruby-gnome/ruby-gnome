@@ -19,6 +19,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cPangoRenderer
@@ -141,3 +142,5 @@ Init_gtk_gdk_pangorenderer(VALUE mGdk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
+*/
+

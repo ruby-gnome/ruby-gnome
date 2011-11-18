@@ -55,6 +55,7 @@ rg_expand_p(VALUE self)
     return CBOOL2RVAL(gtk_tool_item_get_expand(_SELF(self)));
 }
 
+/* deprecated
 static VALUE
 rg_set_tooltip(int argc, VALUE *argv, VALUE self)
 {
@@ -67,6 +68,7 @@ rg_set_tooltip(int argc, VALUE *argv, VALUE self)
                               NIL_P(tip_private) ? NULL : RVAL2CSTR(tip_private));
     return self;
 }
+*/
 
 static VALUE
 rg_set_use_drag_window(VALUE self, VALUE use_drag_window)
@@ -142,7 +144,9 @@ Init_gtk_toolitem(VALUE mGtk)
     RG_DEF_METHOD(set_expand, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "expand");
     RG_DEF_METHOD_P(expand, 0);
+/* deprecated
     RG_DEF_METHOD(set_tooltip, -1);
+*/
     RG_DEF_METHOD(set_use_drag_window, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "use_drag_window");
     RG_DEF_METHOD_P(use_drag_window, 0);

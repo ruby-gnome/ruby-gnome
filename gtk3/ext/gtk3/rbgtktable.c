@@ -125,6 +125,7 @@ rg_set_column_spacings(VALUE self, VALUE spc)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_row_spacings(VALUE self)
 {
@@ -136,6 +137,7 @@ rg_column_spacings(VALUE self)
 {
     return UINT2NUM(_SELF(self)->column_spacing);
 }
+*/
 
 static VALUE
 rg_default_row_spacing(VALUE self)
@@ -170,8 +172,10 @@ Init_gtk_table(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "row_spacings");
     RG_DEF_METHOD(set_column_spacings, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "column_spacings");
+/* deprecated
     RG_DEF_METHOD(row_spacings, 0);
     RG_DEF_METHOD(column_spacings, 0);
+*/
     RG_DEF_METHOD(default_row_spacing, 0);
     RG_DEF_METHOD(default_column_spacing, 0);
 }

@@ -37,6 +37,7 @@ rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
     return RECT2RVAL(&ret);
 }
 
+/* TODO
 static VALUE
 rg_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE cell_area, VALUE expose_area, VALUE flags)
 {
@@ -48,6 +49,7 @@ rg_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE c
                              RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
     return self;
 }
+*/
 
 static VALUE
 rg_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_area, VALUE cell_area, VALUE flags)
@@ -74,12 +76,14 @@ rg_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE backgr
 }
 
 #ifndef GTK_DISABLE_DEPRECATED
+/* deprecated
 static VALUE
 rg_editing_canceled(VALUE self)
 {
     gtk_cell_renderer_editing_canceled(_SELF(self));
     return self;
 }
+*/
 #endif
 
 static VALUE
@@ -111,11 +115,15 @@ Init_gtk_cellrenderer(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
 
     RG_DEF_METHOD(get_size, 2);
+/* TODO
     RG_DEF_METHOD(render, 6);
+*/
     RG_DEF_METHOD(activate, 6);
     RG_DEF_METHOD(start_editing, 6);
 #ifndef GTK_DISABLE_DEPRECATED
+/* deprecated
     RG_DEF_METHOD(editing_canceled, 0);
+*/
 #endif
     RG_DEF_METHOD(stop_editing, 1);
     RG_DEF_METHOD(fixed_size, 0);
