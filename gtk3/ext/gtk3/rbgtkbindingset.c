@@ -19,15 +19,6 @@
  *  MA  02110-1301  USA
  */
 
-/* 
-   NOTE:
-   - gtk_bindings_activate() is mapped to
-     Gtk::Object#bindings_activate.
-
-   - gtk_binding_set_by_class() is mapped to
-     Gtk::Object.binding_set
- */
-
 #include "global.h"
 
 #define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
@@ -82,16 +73,6 @@ rg_activate(VALUE self, VALUE keyval, VALUE modifiers, VALUE object)
                                                RVAL2MOD(modifiers),
                                                RVAL2GOBJ(object)));
 }
-
-/* deprecated
-static VALUE
-rg_entry_clear(VALUE self, VALUE keyval, VALUE modifiers)
-{
-    gtk_binding_entry_clear(_SELF(self), NUM2UINT(keyval),
-                            RVAL2MOD(modifiers));
-    return self;
-}
-*/
 
 static VALUE
 rg_add_signal(int argc, VALUE *argv, VALUE self)
@@ -178,9 +159,6 @@ Init_gtk_bindings(VALUE mGtk)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_SMETHOD(find, 1);
     RG_DEF_METHOD(activate, 3);
-/* deprecated
-    RG_DEF_METHOD(entry_clear, 2);
-*/
     RG_DEF_METHOD(add_signal, -1);
     RG_DEF_ALIAS("entry_add_signal", "add_signal");
     RG_DEF_METHOD(add_path, 3);

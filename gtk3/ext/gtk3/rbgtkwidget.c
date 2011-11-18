@@ -743,15 +743,12 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
     return ary;
 }
 
-/* TOOD:GdkRegion -> cairo_region_t
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
 {
-    return BOXED2RVAL(gtk_widget_region_intersect(_SELF(self), 
-                                                  (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)), 
-                      GDK_TYPE_REGION);
+    return CRREGION2RVAL(gtk_widget_region_intersect(_SELF(self), 
+                                                     RVAL2CRREGION(region)));
 }
-*/
 
 static VALUE
 rg_send_expose(VALUE self, VALUE event)
@@ -1034,6 +1031,57 @@ rg_saved_state(VALUE self)
 */
 
 static VALUE
+rg_destroy(VALUE self)
+{
+    gtk_widget_destroy(_SELF(self));
+    return Qnil;
+}
+
+static VALUE
+rg_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
+{
+     return CBOOL2RVAL(gtk_bindings_activate(RVAL2GOBJ(self),
+                                             NUM2UINT(keyval),
+                                             NUM2UINT(modifiers)));
+}
+
+static VALUE
+rg_s_binding_set(VALUE self)
+{
+    GType gtype;
+    gpointer gclass;
+    GtkBindingSet* binding_set;
+
+    Check_Type(self, T_CLASS);
+
+    gtype = CLASS2GTYPE(self);
+
+    if (!G_TYPE_IS_CLASSED(gtype)) {
+        rb_raise(rb_eTypeError, "%s is not a classed GType",
+                 rb_class2name(self));
+    }
+    gclass = g_type_class_ref(gtype);
+    if (!gclass) {
+        rb_raise(rb_eRuntimeError, "couldn't get class reference");
+    }
+    if (!G_IS_OBJECT_CLASS(gclass)) {
+        g_type_class_unref(gclass);
+        rb_raise(rb_eTypeError, "%s is not a GObject class",
+                 rb_class2name(self));
+    }
+
+    binding_set = gtk_binding_set_by_class(gclass);
+    if (!binding_set) {
+        g_type_class_unref(gclass);
+        rb_raise(rb_eRuntimeError, "couldn't get BindingSet from %s",
+                 rb_class2name(self));
+    }
+    g_type_class_unref(gclass);
+
+    return BOXED2RVAL(binding_set, GTK_TYPE_BINDING_SET);
+}
+
+static VALUE
 widget_signal_size_request(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
@@ -1143,9 +1191,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_ALIAS("set_scroll_adjustment", "set_scroll_adjustments");
 */
     RG_DEF_METHOD(mnemonic_activate, 1);
-/* TODO
     RG_DEF_METHOD(region_intersect, 1);
-*/
     RG_DEF_METHOD(send_expose, 1);
     RG_DEF_METHOD(style_get_property, 1);
     RG_DEF_METHOD(accessible, 0);
@@ -1184,6 +1230,8 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(state, 0);
     RG_DEF_METHOD(saved_state, 0);
 */
+    RG_DEF_METHOD(destroy, 0);
+    RG_DEF_METHOD(bindings_activate, 2);
 
 /* deprecated
     rb_define_method(RG_TARGET_NAMESPACE, "toplevel?",  widget_TOPLEVEL, 0);
@@ -1214,6 +1262,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_SMETHOD(default_direction, 0);
     RG_DEF_SMETHOD(pop_composite_child, 0);
     RG_DEF_SMETHOD(push_composite_child, 0);
+    RG_DEF_SMETHOD(binding_set, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

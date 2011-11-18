@@ -25,6 +25,7 @@
 #ifndef _RBGTK_GLOBAL_H
 #define _RBGTK_GLOBAL_H
 
+#include <rb_cairo.h>
 #include <rbgdk.h>
 #include <rbgdkconversions.h>
 #include "rbgtk.h"
@@ -176,7 +177,6 @@ G_GNUC_INTERNAL void Init_gtk_message_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_misc(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_notebook(VALUE mGtk);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_object(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_option_menu(VALUE mGtk);
 */
 G_GNUC_INTERNAL void Init_gtk_page_setup(VALUE mGtk);

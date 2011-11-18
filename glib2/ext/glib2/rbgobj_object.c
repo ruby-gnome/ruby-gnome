@@ -619,6 +619,12 @@ rg_inspect(VALUE self)
 }
 
 static VALUE
+rg_type_name(VALUE self)
+{
+    return CSTR2RVAL(G_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
+}
+
+static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE params_hash;
@@ -839,6 +845,7 @@ Init_gobject_gobject(void)
     RG_DEF_METHOD(initialize, -1);
     rb_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
     RG_DEF_METHOD(inspect, 0);
+    RG_DEF_METHOD(type_name, 0);
 
     eNoPropertyError = rb_define_class_under(mGLib, "NoPropertyError",
                                              rb_eNameError);

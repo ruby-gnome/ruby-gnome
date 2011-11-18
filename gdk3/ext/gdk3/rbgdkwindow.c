@@ -206,17 +206,15 @@ rg_scroll(VALUE self, VALUE dx, VALUE dy)
     return self;
 }
 
-/* TODO
 static VALUE
 rg_move_region(VALUE self, VALUE region, VALUE dx, VALUE dy)
 {
     gdk_window_move_region(_SELF(self),
-                           (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION),
+                           RVAL2CRREGION(region),
                            NUM2INT(dx),
                            NUM2INT(dy));
     return self;
 }
-*/
 
 static VALUE
 rg_reparent(VALUE self, VALUE new_parent, VALUE x, VALUE y)
@@ -322,10 +320,7 @@ rg_begin_paint(VALUE self, VALUE area)
         gdk_window_begin_paint_rect(_SELF(self), 
                                     (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE));
     } else {
-/* TODO
-        gdk_window_begin_paint_region(_SELF(self),
-                                      (GdkRegion*)RVAL2BOXED(area, GDK_TYPE_REGION));
-*/
+        gdk_window_begin_paint_region(_SELF(self), RVAL2CRREGION(area));
     }
     return self;
 }
@@ -376,14 +371,11 @@ rg_invalidate_maybe_recurse(VALUE self, VALUE region)
     return self;
 }
 
-/* TODO
 static VALUE
 rg_update_area(VALUE self)
 {
-    GdkRegion* ret = gdk_window_get_update_area(_SELF(self));
-    return BOXED2RVAL(ret, GDK_TYPE_REGION); 
+    return CRREGION2RVAL(gdk_window_get_update_area(_SELF(self))); 
 }
-*/
 
 static VALUE
 rg_freeze_updates(VALUE self)
@@ -504,16 +496,14 @@ rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset
 }
 */
 
-/* TODO
 static VALUE
 rg_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
 {
     gdk_window_shape_combine_region(_SELF(self),
-                                    NIL_P(shape_region) ? NULL : (GdkRegion*)RVAL2BOXED(shape_region, GDK_TYPE_REGION),
+                                    NIL_P(shape_region) ? NULL : RVAL2CRREGION(shape_region),
                                     INT2NUM(offset_x), INT2NUM(offset_y));
     return self;
 }
-*/
 
 static VALUE
 rg_set_child_shapes(VALUE self)
@@ -540,17 +530,15 @@ rg_input_shape_combine_mask(VALUE self, VALUE mask, VALUE x, VALUE y)
 }
 */
 
-/* TODO
 static VALUE
 rg_input_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
 {
     gdk_window_input_shape_combine_region(_SELF(self),
-                                          (GdkRegion*)RVAL2BOXED(shape_region, GDK_TYPE_REGION),
+                                          RVAL2CRREGION(shape_region),
                                           NUM2INT(offset_x),
                                           NUM2INT(offset_y));
     return self;
 }
-*/
 
 static VALUE
 rg_set_child_input_shapes(VALUE self)
@@ -983,9 +971,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(resize, 2);
     RG_DEF_METHOD(move_resize, 4);
     RG_DEF_METHOD(scroll, 2);
-/* TODO
     RG_DEF_METHOD(move_region, 3);
-*/
     RG_DEF_METHOD(reparent, 3);
 /* deprecated
     RG_DEF_METHOD(clear, 0);
@@ -1002,9 +988,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(end_paint, 0);
     RG_DEF_METHOD(invalidate, 2);
     RG_DEF_METHOD(invalidate_maybe_recurse, 1);
-/* TODO
     RG_DEF_METHOD(update_area, 0);
-*/
     RG_DEF_METHOD(freeze_updates, 0);
     RG_DEF_METHOD(thaw_updates, 0);
     RG_DEF_METHOD(process_updates, 1);
@@ -1020,17 +1004,13 @@ Init_gtk_gdk_window(VALUE mGdk)
 /* deprecated
     RG_DEF_METHOD(shape_combine_mask, 3);
 */
-/* TODO
     RG_DEF_METHOD(shape_combine_region, 3);
-*/
     RG_DEF_METHOD(set_child_shapes, 0);
     RG_DEF_METHOD(merge_child_shapes, 0);
 /* deprecated
     RG_DEF_METHOD(input_shape_combine_mask, 3);
 */
-/* TODO
     RG_DEF_METHOD(input_shape_combine_region, 3);
-*/
     RG_DEF_METHOD(set_child_input_shapes, 0);
     RG_DEF_METHOD(merge_child_input_shapes, 0);
     RG_DEF_METHOD(set_static_gravities, 1);
