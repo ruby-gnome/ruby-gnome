@@ -25,7 +25,7 @@
 /* Module: Gtk::SourcePrintCompositor
  */
 
-#define RG_TARGET_NAMESPACE cSourcePrintCompositor
+#define RG_TARGET_NAMESPACE cPrintCompositor
 #define _SELF(self) (GTK_SOURCE_PRINT_COMPOSITOR(RVAL2GOBJ(self)))
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
@@ -153,10 +153,10 @@ rg_draw_page(VALUE self, VALUE context, VALUE page_nr)
 #endif /* HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE */
 
 void
-Init_gtk_sourceprintcompositor(VALUE mGtk)
+Init_gtk_sourceprintcompositor(VALUE mGtkSource)
 {
 #ifdef HAVE_GTK_SOURCE_PRINT_COMPOSITOR_GET_TYPE
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_SOURCE_TYPE_PRINT_COMPOSITOR, "SourcePrintCompositor", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_SOURCE_TYPE_PRINT_COMPOSITOR, "PrintCompositor", mGtkSource);
 
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(get_top_margin, 1);
