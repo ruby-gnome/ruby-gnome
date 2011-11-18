@@ -177,7 +177,6 @@ G_GNUC_INTERNAL void Init_gtk_message_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_misc(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_notebook(VALUE mGtk);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_object(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_option_menu(VALUE mGtk);
 */
 G_GNUC_INTERNAL void Init_gtk_page_setup(VALUE mGtk);
