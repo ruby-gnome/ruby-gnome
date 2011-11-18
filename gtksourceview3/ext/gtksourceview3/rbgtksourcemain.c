@@ -26,9 +26,6 @@
 
 G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtkSource);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_sourceiter (VALUE mGtkSource);
-*/
 G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtkSource);
@@ -44,9 +41,6 @@ Init_gtksourceview3 (void)
 
     Init_gtk_sourceview (RG_TARGET_NAMESPACE);
     Init_gtk_sourcebuffer (RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_sourceiter (RG_TARGET_NAMESPACE);
-*/
     Init_gtk_sourcelanguage (RG_TARGET_NAMESPACE);
     Init_gtk_sourcelanguagemanager (RG_TARGET_NAMESPACE);
     Init_gtk_sourcemark (RG_TARGET_NAMESPACE);
