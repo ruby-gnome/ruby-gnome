@@ -33,6 +33,8 @@ GType gtk_print_backend_get_type (void) G_GNUC_CONST;
 #define RG_TARGET_NAMESPACE cPrinter
 #define _SELF(s) (GTK_PRINTER(RVAL2GOBJ(s)))
 
+static VALUE rb_mGtk;
+
 static VALUE
 rg_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
 {
@@ -110,7 +112,7 @@ static void
 remove_callback_reference(gpointer data)
 {
     VALUE callback = (VALUE)data;
-    G_CHILD_REMOVE(mGtk, callback);
+    G_CHILD_REMOVE(rb_mGtk, callback);
 }
 
 static VALUE
@@ -120,7 +122,7 @@ rg_s_each(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &wait);
 
     block = rb_block_proc();
-    G_CHILD_ADD(mGtk, block);
+    G_CHILD_ADD(rb_mGtk, block);
     gtk_enumerate_printers(each_printer, (gpointer)block,
                            remove_callback_reference, RVAL2CBOOL(wait));
 
@@ -132,6 +134,7 @@ void
 Init_gtk_printer(VALUE mGtk)
 {
 #ifdef HAVE_GTK_UNIX_PRINT
+    rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINTER, "Printer", mGtk);
     rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
 

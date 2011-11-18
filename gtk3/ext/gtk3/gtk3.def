@@ -1,8 +1,5 @@
 EXPORTS
     Init_gtk3
-    mGdk DATA
-    rb_cGdkColor DATA
-    mGtk DATA
     exec_callback
     rbgdk_rval2gdkpoints
     rbgdk_rval2gdkatoms

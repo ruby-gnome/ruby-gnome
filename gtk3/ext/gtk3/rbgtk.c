@@ -30,7 +30,7 @@
 
 #define RG_TARGET_NAMESPACE mGtk
 
-VALUE RG_TARGET_NAMESPACE;
+static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE rbgtk_eGtkInitError;
 
@@ -559,4 +559,237 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC_P(check_version, 3);
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
+
+    Init_gtk_aboutdialog(RG_TARGET_NAMESPACE);
+    Init_gtk_accelerator(RG_TARGET_NAMESPACE);
+    Init_gtk_accel_group(RG_TARGET_NAMESPACE);
+    Init_gtk_accel_group_entry(RG_TARGET_NAMESPACE);
+    Init_gtk_accel_key(RG_TARGET_NAMESPACE);
+    Init_gtk_accel_label(RG_TARGET_NAMESPACE);
+    Init_gtk_accel_map(RG_TARGET_NAMESPACE);
+    Init_gtk_accessible(RG_TARGET_NAMESPACE);
+    Init_gtk_action(RG_TARGET_NAMESPACE);
+    Init_gtk_actiongroup(RG_TARGET_NAMESPACE);
+    Init_gtk_adjustment(RG_TARGET_NAMESPACE);
+    Init_gtk_alignment(RG_TARGET_NAMESPACE);
+    Init_gtk_allocation(RG_TARGET_NAMESPACE);
+    Init_gtk_arrow(RG_TARGET_NAMESPACE);
+    Init_gtk_aspect_frame(RG_TARGET_NAMESPACE);
+    Init_gtk_assistant(RG_TARGET_NAMESPACE);
+    Init_gtk_button_box(RG_TARGET_NAMESPACE);
+    Init_gtk_bin(RG_TARGET_NAMESPACE);
+    Init_gtk_bindings(RG_TARGET_NAMESPACE);
+    Init_gtk_border(RG_TARGET_NAMESPACE);
+    Init_gtk_box(RG_TARGET_NAMESPACE);
+    Init_gtk_buildable(RG_TARGET_NAMESPACE);
+    Init_gtk_builder(RG_TARGET_NAMESPACE);
+    Init_gtk_button(RG_TARGET_NAMESPACE);
+    Init_gtk_calendar(RG_TARGET_NAMESPACE);
+    Init_gtk_celleditable(RG_TARGET_NAMESPACE);
+    Init_gtk_celllayout(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrenderer(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrendereraccel(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrenderercombo(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrendererpixbuf(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrendererprogress(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrendererspin(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrendererspinner(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrenderertext(RG_TARGET_NAMESPACE);
+    Init_gtk_cellrenderertoggle(RG_TARGET_NAMESPACE);
+    Init_gtk_cellview(RG_TARGET_NAMESPACE);
+    Init_gtk_check_button(RG_TARGET_NAMESPACE);
+    Init_gtk_check_menu_item(RG_TARGET_NAMESPACE);
+    Init_gtk_clipboard(RG_TARGET_NAMESPACE);
+    Init_gtk_colorbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_color_selection(RG_TARGET_NAMESPACE);
+    Init_gtk_color_selection_dialog(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_combo(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_combobox(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_comboboxentry(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_const(RG_TARGET_NAMESPACE);
+    Init_gtk_container(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_curve(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_drag(RG_TARGET_NAMESPACE);
+    Init_gtk_drawing_area(RG_TARGET_NAMESPACE);
+    Init_gtk_editable(RG_TARGET_NAMESPACE);
+    Init_gtk_entry(RG_TARGET_NAMESPACE);
+    Init_gtk_entry_completion(RG_TARGET_NAMESPACE);
+    Init_gtk_eventbox(RG_TARGET_NAMESPACE);
+    Init_gtk_expander(RG_TARGET_NAMESPACE);
+    Init_gtk_file_chooser(RG_TARGET_NAMESPACE);
+    Init_gtk_filesystemerror(RG_TARGET_NAMESPACE);
+    Init_gtk_filechooserbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_file_chooser_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_file_chooser_widget(RG_TARGET_NAMESPACE);
+    Init_gtk_file_filter(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_file_selection(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_fixed(RG_TARGET_NAMESPACE);
+    Init_gtk_fontbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_font_selection(RG_TARGET_NAMESPACE);
+    Init_gtk_font_selection_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_frame(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_gamma_curve(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_handle_box(RG_TARGET_NAMESPACE);
+    Init_gtk_hbutton_box(RG_TARGET_NAMESPACE);
+    Init_gtk_hbox(RG_TARGET_NAMESPACE);
+    Init_gtk_hpaned(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_hruler(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_hscale(RG_TARGET_NAMESPACE);
+    Init_gtk_hscrollbar(RG_TARGET_NAMESPACE);
+    Init_gtk_hseparator(RG_TARGET_NAMESPACE);
+    Init_gtk_icon_factory(RG_TARGET_NAMESPACE);
+    Init_gtk_iconinfo(RG_TARGET_NAMESPACE);
+    Init_gtk_icon_set(RG_TARGET_NAMESPACE);
+    Init_gtk_icon_size(RG_TARGET_NAMESPACE);
+    Init_gtk_icon_source(RG_TARGET_NAMESPACE);
+    Init_gtk_icon_theme(RG_TARGET_NAMESPACE);
+    Init_gtk_iconview(RG_TARGET_NAMESPACE);
+    Init_gtk_image(RG_TARGET_NAMESPACE);
+    Init_gtk_image_menu_item(RG_TARGET_NAMESPACE);
+    Init_gtk_imcontext(RG_TARGET_NAMESPACE);
+    Init_gtk_imcontext_simple(RG_TARGET_NAMESPACE);
+    Init_gtk_im_multicontext(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_input_dialog(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_invisible(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_item(RG_TARGET_NAMESPACE);
+    Init_gtk_itemfactory(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_label(RG_TARGET_NAMESPACE);
+    Init_gtk_layout(RG_TARGET_NAMESPACE);
+    Init_gtk_link_button(RG_TARGET_NAMESPACE);
+    Init_gtk_list_store(RG_TARGET_NAMESPACE);
+    Init_gtk_menu(RG_TARGET_NAMESPACE);
+    Init_gtk_menu_bar(RG_TARGET_NAMESPACE);
+    Init_gtk_menu_item(RG_TARGET_NAMESPACE);
+    Init_gtk_menu_shell(RG_TARGET_NAMESPACE);
+    Init_gtk_menutoolbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_message_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_misc(RG_TARGET_NAMESPACE);
+    Init_gtk_notebook(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_object(RG_TARGET_NAMESPACE);
+    Init_gtk_option_menu(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_page_setup(RG_TARGET_NAMESPACE);
+    Init_gtk_page_setup_unix_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_paned(RG_TARGET_NAMESPACE);
+    Init_gtk_paper_size(RG_TARGET_NAMESPACE);
+    Init_gtk_plug(RG_TARGET_NAMESPACE);
+    Init_gtk_print_context(RG_TARGET_NAMESPACE);
+    Init_gtk_printer(RG_TARGET_NAMESPACE);
+    Init_gtk_print_job(RG_TARGET_NAMESPACE);
+    Init_gtk_print_operation(RG_TARGET_NAMESPACE);
+    Init_gtk_print_operation_preview(RG_TARGET_NAMESPACE);
+    Init_gtk_print_settings(RG_TARGET_NAMESPACE);
+    Init_gtk_print_unix_dialog(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_progress(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_progress_bar(RG_TARGET_NAMESPACE);
+    Init_gtk_radio_action(RG_TARGET_NAMESPACE);
+    Init_gtk_radio_button(RG_TARGET_NAMESPACE);
+    Init_gtk_radio_menu_item(RG_TARGET_NAMESPACE);
+    Init_gtk_radiotoolbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_range(RG_TARGET_NAMESPACE);
+    Init_gtk_rc(RG_TARGET_NAMESPACE);
+    Init_gtk_rcstyle(RG_TARGET_NAMESPACE);
+    Init_gtk_recentaction(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_chooser(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_chooser_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_chooser_menu(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_chooser_widget(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_data(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_filter(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_filter_info(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_info(RG_TARGET_NAMESPACE);
+    Init_gtk_recent_manager(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_ruler(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_scale(RG_TARGET_NAMESPACE);
+    Init_gtk_scalebutton(RG_TARGET_NAMESPACE);
+    Init_gtk_scrollbar(RG_TARGET_NAMESPACE);
+    Init_gtk_scrolled_window(RG_TARGET_NAMESPACE);
+    Init_gtk_selection(RG_TARGET_NAMESPACE);
+    Init_gtk_selectiondata(RG_TARGET_NAMESPACE);
+    Init_gtk_separator(RG_TARGET_NAMESPACE);
+    Init_gtk_separator_menu_item(RG_TARGET_NAMESPACE);
+    Init_gtk_separatortoolitem(RG_TARGET_NAMESPACE);
+    Init_gtk_settings(RG_TARGET_NAMESPACE);
+    Init_gtk_size_group(RG_TARGET_NAMESPACE);
+    Init_gtk_socket(RG_TARGET_NAMESPACE);
+    Init_gtk_spin_button(RG_TARGET_NAMESPACE);
+    Init_gtk_spinner(RG_TARGET_NAMESPACE);
+    Init_gtk_statusbar(RG_TARGET_NAMESPACE);
+    Init_gtk_status_icon(RG_TARGET_NAMESPACE);
+    Init_gtk_stock(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_style(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_table(RG_TARGET_NAMESPACE);
+    Init_gtk_target_list(RG_TARGET_NAMESPACE);
+    Init_gtk_tearoff_menu_item(RG_TARGET_NAMESPACE);
+    Init_gtk_text_appearance(RG_TARGET_NAMESPACE);
+    Init_gtk_text_attributes(RG_TARGET_NAMESPACE);
+    Init_gtk_textbuffer(RG_TARGET_NAMESPACE);
+    Init_gtk_textchild(RG_TARGET_NAMESPACE);
+    Init_gtk_textiter(RG_TARGET_NAMESPACE);
+    Init_gtk_textmark(RG_TARGET_NAMESPACE);
+    Init_gtk_texttag(RG_TARGET_NAMESPACE);
+    Init_gtk_text_tag_table(RG_TARGET_NAMESPACE);
+    Init_gtk_textview(RG_TARGET_NAMESPACE);
+    Init_gtk_toggle_action(RG_TARGET_NAMESPACE);
+    Init_gtk_toggle_button(RG_TARGET_NAMESPACE);
+    Init_gtk_toggletoolbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_toolbar(RG_TARGET_NAMESPACE);
+    Init_gtk_toolbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_toolitem(RG_TARGET_NAMESPACE);
+    Init_gtk_tooltip(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_tooltips(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_treedragdest(RG_TARGET_NAMESPACE);
+    Init_gtk_treedragsource(RG_TARGET_NAMESPACE);
+    Init_gtk_treeiter(RG_TARGET_NAMESPACE);
+    Init_gtk_treemodel(RG_TARGET_NAMESPACE);
+    Init_gtk_treemodelfilter(RG_TARGET_NAMESPACE);
+    Init_gtk_tmodelsort(RG_TARGET_NAMESPACE);
+    Init_gtk_treepath(RG_TARGET_NAMESPACE);
+    Init_gtk_treerowreference(RG_TARGET_NAMESPACE);
+    Init_gtk_treeselection(RG_TARGET_NAMESPACE);
+    Init_gtk_treesortable(RG_TARGET_NAMESPACE);
+    Init_gtk_tree_store(RG_TARGET_NAMESPACE);
+    Init_gtk_treeview(RG_TARGET_NAMESPACE);
+    Init_gtk_treeviewcolumn(RG_TARGET_NAMESPACE);
+    Init_gtk_uimanager(RG_TARGET_NAMESPACE);
+    Init_gtk_vbutton_box(RG_TARGET_NAMESPACE);
+    Init_gtk_vbox(RG_TARGET_NAMESPACE);
+    Init_gtk_viewport(RG_TARGET_NAMESPACE);
+    Init_gtk_volumebutton(RG_TARGET_NAMESPACE);
+    Init_gtk_vpaned(RG_TARGET_NAMESPACE);
+/* deprecated
+    Init_gtk_vruler(RG_TARGET_NAMESPACE);
+*/
+    Init_gtk_vscale(RG_TARGET_NAMESPACE);
+    Init_gtk_vscrollbar(RG_TARGET_NAMESPACE);
+    Init_gtk_vseparator(RG_TARGET_NAMESPACE);
+    Init_gtk_widget(RG_TARGET_NAMESPACE);
+    Init_gtk_window(RG_TARGET_NAMESPACE);
+    Init_gtk_windowgroup(RG_TARGET_NAMESPACE);
 }

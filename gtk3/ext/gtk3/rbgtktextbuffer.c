@@ -32,6 +32,7 @@
 #define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
 #define ATOM2RVAL(a) (BOXED2RVAL(a, GDK_TYPE_ATOM))
 
+static VALUE rb_mGtk;
 static ID id_tagtable;
 
 static VALUE
@@ -449,7 +450,7 @@ deserialize_func(GtkTextBuffer *register_buffer,
 static void
 remove_callback_reference(gpointer callback)
 {
-    G_CHILD_REMOVE(mGtk, (VALUE)callback);
+    G_CHILD_REMOVE(rb_mGtk, (VALUE)callback);
 }
 
 static VALUE
@@ -457,7 +458,7 @@ rg_register_deserialize_format(VALUE self, VALUE mime_type)
 {
     VALUE block = rb_block_proc();
     GdkAtom atom;
-    G_CHILD_ADD(mGtk, block);
+    G_CHILD_ADD(rb_mGtk, block);
     atom = gtk_text_buffer_register_deserialize_format(_SELF(self),
                                                        (const gchar*)RVAL2CSTR(mime_type),
                                                        (GtkTextBufferDeserializeFunc)deserialize_func,
@@ -501,7 +502,7 @@ rg_register_serialize_format(VALUE self, VALUE mime_type)
 {
     VALUE block = rb_block_proc();
     GdkAtom atom;
-    G_CHILD_ADD(mGtk, block);
+    G_CHILD_ADD(rb_mGtk, block);
     atom = gtk_text_buffer_register_serialize_format(_SELF(self),
                                                      (const gchar*)RVAL2CSTR(mime_type),
                                                      (GtkTextBufferSerializeFunc)serialize_func,
@@ -794,6 +795,7 @@ rg_get_iter_at_mark(VALUE self, VALUE mark)
 void 
 Init_gtk_textbuffer(VALUE mGtk)
 {
+    rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
 
     id_tagtable = rb_intern("tagtable");
