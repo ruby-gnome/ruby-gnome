@@ -270,9 +270,9 @@ module GLib
 
     def const_missing(deprecated_const)
       if new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
-        if new_const = constant_get(new_const)
+        if new_const_val = constant_get(new_const)
           warn "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated. Use '#{new_const}'."
-          const_set(deprecated_const, new_const)
+          const_set(deprecated_const, new_const_val)
         else
           super
         end
