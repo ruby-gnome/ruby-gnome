@@ -26,7 +26,7 @@
  * A view on a source.
  */
 
-#define RG_TARGET_NAMESPACE cSourceView
+#define RG_TARGET_NAMESPACE cView
 #define _SELF(self) (GTK_SOURCE_VIEW(RVAL2GOBJ(self)))
 
 /*
@@ -178,9 +178,9 @@ rg_set_mark_category_background(VALUE self, VALUE category, VALUE color)
 # endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
 
 void
-Init_gtk_sourceview (VALUE mGtk)
+Init_gtk_sourceview (VALUE mGtkSource)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "SourceView", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "View", mGtkSource);
 
     rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
                     rb_ary_new3(3,

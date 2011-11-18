@@ -26,7 +26,7 @@
  * Source language.
  */
 
-#define RG_TARGET_NAMESPACE cSourceLanguage
+#define RG_TARGET_NAMESPACE cLanguage
 #define _SELF(self) (GTK_SOURCE_LANGUAGE(RVAL2GOBJ(self)))
 
 /* Method: get_metadata(name)
@@ -111,10 +111,10 @@ rg_style_ids(VALUE self)
 }
 
 void
-Init_gtk_sourcelanguage (VALUE mGtk)
+Init_gtk_sourcelanguage (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE =
-        G_DEF_CLASS (GTK_SOURCE_TYPE_LANGUAGE, "SourceLanguage", mGtk);
+        G_DEF_CLASS (GTK_SOURCE_TYPE_LANGUAGE, "Language", mGtkSource);
 
     RG_DEF_METHOD(get_metadata, 1);
     RG_DEF_METHOD(mime_types, 0);
