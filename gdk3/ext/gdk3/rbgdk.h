@@ -23,9 +23,12 @@
 #define __RB_GDK_H__
 
 #include <rbgobject.h>
-#include <rbgtkmacros.h>
 #include <gdk/gdk.h>
 #include <rbgdkconversions.h>
+
+#define RBGDK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
+#define RBGDK_MINOR_VERSION RBGLIB_MINOR_VERSION
+#define RBGDK_MICRO_VERSION RBGLIB_MICRO_VERSION
 
 #ifdef GDK_WINDOWING_X11
 #  include <gdk/gdkx.h>

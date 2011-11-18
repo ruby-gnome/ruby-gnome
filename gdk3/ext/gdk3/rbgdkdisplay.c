@@ -477,12 +477,14 @@ rg_supports_composite_p(VALUE self)
     return CBOOL2RVAL(gdk_display_supports_composite(_SELF(self)));
 }
 
+/* TODO
 static VALUE
 rg_trigger_tooltip_query(VALUE self)
 {
     gtk_tooltip_trigger_tooltip_query(_SELF(self));
     return self;
 }
+*/
 
 void 
 Init_gtk_gdk_display(VALUE mGdk)
@@ -559,5 +561,7 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD_P(supports_shapes, 0);
     RG_DEF_METHOD_P(supports_input_shapes, 0);
     RG_DEF_METHOD_P(supports_composite, 0);
+/* TODO
     RG_DEF_METHOD(trigger_tooltip_query, 0);
+*/
 }

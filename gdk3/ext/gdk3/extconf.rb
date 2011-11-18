@@ -1,5 +1,5 @@
 =begin
-extconf.rb for Ruby/GTK extention library
+extconf.rb for Ruby/GDK extention library
 =end
 
 require 'pathname'
@@ -20,8 +20,8 @@ end
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
-module_name = "gtk3"
-package_id = "gtk+-3.0"
+module_name = "gdk3"
+package_id = "gdk-3.0"
 
 begin
   require 'mkmf-gnome2'
@@ -33,7 +33,7 @@ end
 
 have_func("rb_errinfo")
 
-["glib2", "atk", "pango", "gdk_pixbuf2", "gdk3"].each do |package|
+["glib2", "pango", "gdk_pixbuf2"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
@@ -67,16 +67,20 @@ have_header("ruby/st.h")
 STDOUT.print("checking for target... ")
 STDOUT.flush
 target = PKGConfig.variable(package_id, "target")
-$defs << "-DRUBY_GTK3_TARGET=\\\"#{target}\\\""
+$defs << "-DRUBY_GDK3_TARGET=\\\"#{target}\\\""
 STDOUT.print(target, "\n")
 
-gtk_header = "gtk/gtk.h"
-have_func('gtk_plug_get_type', gtk_header)
-have_func('gtk_socket_get_type', gtk_header)
-have_func('pango_render_part_get_type', gtk_header)
-have_header('gtk/gtkfilesystem.h') do |src|
-  "#define GTK_FILE_SYSTEM_ENABLE_UNSUPPORTED\n#{src}"
+gdk_include_path = nil
+include_paths = $CFLAGS.gsub(/-D\w+/, '').split(/-I/) + ['/usr/include']
+include_paths.each do |path|
+  path.strip!
+
+  if FileTest.exist?("#{path}/gdk/gdkkeysyms.h")
+    gdk_include_path = Pathname("#{path}/gdk")
+    break
+  end
 end
+raise "can't find gdkkeysyms.h" if gdk_include_path.nil?
 
 xlib_header = "X11/Xlib.h"
 if target == "x11" and have_header('X11/Xlib.h') and have_library("X11")
@@ -84,15 +88,29 @@ if target == "x11" and have_header('X11/Xlib.h') and have_library("X11")
   have_func("XGetErrorText", xlib_header)
 end
 
-if target != "win32" and PKGConfig.have_package('gtk+-unix-print-3.0')
-  $defs.push("-DHAVE_GTK_UNIX_PRINT")
+create_pkg_config_file("Ruby/GDK3", package_id, ruby_gnome2_version)
+
+rbgdkkeysyms_h_path = Pathname("rbgdkkeysyms.h")
+gdkkeysyms_h_paths = []
+gdkkeysyms_h_paths << gdk_include_path + "gdkkeysyms.h"
+gdkkeysyms_h_paths << gdk_include_path + "gdkkeysyms-compat.h"
+rbgdkkeysyms_h_path.open("w") do |rbgdkkeysyms_h|
+  gdkkeysyms_h_paths.each do |path|
+    next unless path.exist?
+    path.each_line do |line|
+      if /^#define\s+(GDK_KEY_\w+)\s+\d+/ =~ line
+        define_line = "rb_define_const(mGdkKeyval, \"#{$1}\", INT2FIX(#{$1}));"
+        rbgdkkeysyms_h.puts(define_line)
+      end
+    end
+  end
 end
 
-create_pkg_config_file("Ruby/GTK3", package_id, ruby_gnome2_version)
+add_distcleanfile("rbgdkkeysyms.h")
 
 ensure_objs
 
-$defs << "-DRUBY_GTK3_COMPILATION"
+$defs << "-DRUBY_GDK3_COMPILATION"
 create_makefile(module_name)
 
 pkg_config_dir = with_config("pkg-config-dir")
