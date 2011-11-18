@@ -26,6 +26,8 @@
 
 #define RG_TARGET_NAMESPACE mRC
 
+static VALUE rb_mGtk;
+
 /*
 static VALUE
 rc_scanner_new(VALUE self)
@@ -40,8 +42,8 @@ rg_m_get_style(G_GNUC_UNUSED VALUE self, VALUE widget)
     GtkStyle* style = gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(widget)));
     GType gtype = G_OBJECT_TYPE(style);
     const gchar* name = G_OBJECT_TYPE_NAME(style);
-    if (! rb_const_defined_at(mGtk, rb_intern(name))){
-        G_DEF_CLASS(gtype, (gchar*)name, mGtk);
+    if (! rb_const_defined_at(rb_mGtk, rb_intern(name))){
+        G_DEF_CLASS(gtype, (gchar*)name, rb_mGtk);
     }
     return GOBJ2RVAL(gtk_rc_get_style(GTK_WIDGET(RVAL2GOBJ(widget))));
 }
@@ -64,8 +66,8 @@ rg_m_get_style_by_paths(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (style){
         gtype = G_OBJECT_TYPE(style);
         name = G_OBJECT_TYPE_NAME(style);
-        if (! rb_const_defined_at(mGtk, rb_intern(name))){
-            G_DEF_CLASS(gtype, (gchar*)name, mGtk);
+        if (! rb_const_defined_at(rb_mGtk, rb_intern(name))){
+            G_DEF_CLASS(gtype, (gchar*)name, rb_mGtk);
         }
         return GOBJ2RVAL(style);
     }
@@ -187,6 +189,7 @@ rg_m_theme_dir(G_GNUC_UNUSED VALUE self)
 void 
 Init_gtk_rc(VALUE mGtk)
 {
+    rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "RC");
 
     RG_DEF_MODFUNC(get_style, 1);

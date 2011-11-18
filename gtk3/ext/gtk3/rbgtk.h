@@ -50,8 +50,6 @@ extern GType gtk_target_list_get_type();
 #define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
 #endif
 
-RUBY_GTK2_VAR VALUE mGtk;
-
 /*
  * for gtk2.0/gtk2.2
  */

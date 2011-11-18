@@ -24,6 +24,8 @@
 #define RG_TARGET_NAMESPACE cRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
+static VALUE rb_mGtk;
+
 /* deprecated
 static VALUE
 rg_set_show_numbers(VALUE self, VALUE val)
@@ -55,7 +57,7 @@ invoke_callback(VALUE data)
 static void
 remove_callback_reference(gpointer callback)
 {
-    G_CHILD_REMOVE(mGtk, (VALUE)callback);
+    G_CHILD_REMOVE(rb_mGtk, (VALUE)callback);
 }
 
 static gint
@@ -73,7 +75,7 @@ static VALUE
 rg_set_sort_func(VALUE self)
 {
     VALUE func = rb_block_proc();
-    G_CHILD_ADD(mGtk, func);
+    G_CHILD_ADD(rb_mGtk, func);
     gtk_recent_chooser_set_sort_func(_SELF(self), (GtkRecentSortFunc)sort_func,
                                      (gpointer)func, (GDestroyNotify)remove_callback_reference);
     return self;
@@ -188,6 +190,7 @@ rg_filters(VALUE self)
 void 
 Init_gtk_recent_chooser(VALUE mGtk)
 {
+  rb_mGtk = mGtk;
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
 /* deprecated

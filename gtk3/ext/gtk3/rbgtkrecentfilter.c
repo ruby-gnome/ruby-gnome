@@ -24,6 +24,8 @@
 #define RG_TARGET_NAMESPACE cRecentFilter
 #define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))
 
+static VALUE rb_mGtk;
+
 static VALUE
 rg_initialize(VALUE self)
 {
@@ -115,14 +117,14 @@ filter_func(const GtkRecentFilterInfo *info, gpointer func)
 static void
 remove_callback_reference(gpointer data)
 {
-    G_CHILD_REMOVE(mGtk, (VALUE)data);
+    G_CHILD_REMOVE(rb_mGtk, (VALUE)data);
 }
 
 static VALUE
 rg_add_custom(VALUE self, VALUE needed)
 {
   VALUE func = rb_block_proc();
-  G_CHILD_ADD(mGtk, func);
+  G_CHILD_ADD(rb_mGtk, func);
 
   gtk_recent_filter_add_custom(_SELF(self),
                                RVAL2GFLAGS(needed, GTK_TYPE_RECENT_FILTER_FLAGS),
@@ -148,6 +150,7 @@ rg_filter(VALUE self, VALUE filter_info)
 void 
 Init_gtk_recent_filter(VALUE mGtk)
 {
+    rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER, "RecentFilter", mGtk);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(name, 0);

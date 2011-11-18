@@ -57,9 +57,6 @@
 #define GDK_TYPE_WINDOW_ATTR (gdk_windowattr_get_type())
 #define GDK_TYPE_TIME_COORD (gdk_timecoord_get_type())
 
-RUBY_GTK2_VAR VALUE mGdk;
-RUBY_GTK2_VAR VALUE rb_cGdkColor;
-
 typedef struct {
     GdkAtom atom;
 } GdkAtomData;
