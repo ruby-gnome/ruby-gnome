@@ -25,19 +25,10 @@
 #include "global.h"
 #include "gmodule.h"
 
-VALUE treeiter_set_value_table;
-
-extern void Init_gtk3(void);
+extern void Init_gdk3(void);
 
 void
-Init_gtk3(void)
+Init_gdk3(void)
 {
-    /*
-     * For Gtk::TreeModel, Gtk::TreeIter. 
-     * They should be initialized on this timing.
-     */
-    treeiter_set_value_table = rb_hash_new();
-    rb_global_variable(&treeiter_set_value_table);
-
-    Init_gtk_gtk();
+    Init_gtk_gdk();
 }

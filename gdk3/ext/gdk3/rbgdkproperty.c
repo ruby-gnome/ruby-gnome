@@ -187,6 +187,7 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 */
 
+/* TODO
 static VALUE
 rg_m_change(int argc, VALUE *argv, VALUE self)
 {
@@ -209,6 +210,7 @@ rg_m_change(int argc, VALUE *argv, VALUE self)
 
     return self;
 }
+*/
 
 static VALUE
 rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -293,7 +295,9 @@ Init_gtk_gdk_property(VALUE mGdk)
 /* deprecated
     RG_DEF_MODFUNC(utf8_to_compound_text, -1);
 */
+/* TODO
     RG_DEF_MODFUNC(change, -1);
+*/
     RG_DEF_MODFUNC(get, -1);
     RG_DEF_MODFUNC(delete, 2);
 

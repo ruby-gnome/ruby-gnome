@@ -28,7 +28,6 @@
 #include <rbgobject.h>
 #include <rbgtkmacros.h>
 #include <gtk/gtk.h>
-#include <rbgdk.h>
 #include <rbgtkconversions.h>
 
 #include <signal.h>
