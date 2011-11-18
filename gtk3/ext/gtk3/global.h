@@ -25,6 +25,7 @@
 #ifndef _RBGTK_GLOBAL_H
 #define _RBGTK_GLOBAL_H
 
+#include <rb_cairo.h>
 #include <rbgdk.h>
 #include <rbgdkconversions.h>
 #include "rbgtk.h"

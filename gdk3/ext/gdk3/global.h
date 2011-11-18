@@ -25,6 +25,7 @@
 #ifndef _RBGDK_GLOBAL_H
 #define _RBGDK_GLOBAL_H
 
+#include <rb_cairo.h>
 #include "rbgdk.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
@@ -80,7 +81,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk_pixmap(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_property(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_rectangle(VALUE mGdk);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_region(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_rgb(VALUE mGdk);
 */
 G_GNUC_INTERNAL void Init_gtk_gdk_screen(VALUE mGdk);
@@ -93,7 +93,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk_windowattr(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_x11(VALUE mGdk);
 /* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_draw(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_gc(VALUE mGdk);
 */
 
 #endif /* _RBGDK_GLOBAL_H */

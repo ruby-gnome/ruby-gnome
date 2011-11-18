@@ -539,7 +539,6 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_property(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_rectangle(RG_TARGET_NAMESPACE);
 /* deprecated
-    Init_gtk_gdk_region(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_rgb(RG_TARGET_NAMESPACE);
 */
     Init_gtk_gdk_screen(RG_TARGET_NAMESPACE);
@@ -552,6 +551,5 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_x11(RG_TARGET_NAMESPACE);
 /* deprecated
     Init_gtk_gdk_draw(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_gc(RG_TARGET_NAMESPACE);
 */
 }

@@ -743,15 +743,12 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
     return ary;
 }
 
-/* TOOD:GdkRegion -> cairo_region_t
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
 {
-    return BOXED2RVAL(gtk_widget_region_intersect(_SELF(self), 
-                                                  (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)), 
-                      GDK_TYPE_REGION);
+    return CRREGION2RVAL(gtk_widget_region_intersect(_SELF(self), 
+                                                     RVAL2CRREGION(region)));
 }
-*/
 
 static VALUE
 rg_send_expose(VALUE self, VALUE event)
@@ -1143,9 +1140,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_ALIAS("set_scroll_adjustment", "set_scroll_adjustments");
 */
     RG_DEF_METHOD(mnemonic_activate, 1);
-/* TODO
     RG_DEF_METHOD(region_intersect, 1);
-*/
     RG_DEF_METHOD(send_expose, 1);
     RG_DEF_METHOD(style_get_property, 1);
     RG_DEF_METHOD(accessible, 0);
