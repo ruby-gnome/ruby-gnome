@@ -26,6 +26,8 @@
 
 #define RG_TARGET_NAMESPACE mGdk
 
+ID id_call;
+
 /* We don't need them.
 void        gdk_init                        (gint *argc,
                                              gchar ***argv);
@@ -444,7 +446,7 @@ rg_m_windowing_directfb_p(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_target(G_GNUC_UNUSED VALUE self)
 {
-    return CSTR2RVAL(RUBY_GTK3_TARGET);
+    return CSTR2RVAL(RUBY_GDK3_TARGET);
 }
 
 static VALUE
@@ -460,6 +462,8 @@ rg_m_cairo_available_p(G_GNUC_UNUSED VALUE self)
 void
 Init_gtk_gdk(void)
 {
+    id_call = rb_intern("call");
+
     VALUE RG_TARGET_NAMESPACE = rb_define_module("Gdk");
 
     RG_DEF_MODFUNC(display_arg_name, 0);

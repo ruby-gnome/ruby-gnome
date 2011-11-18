@@ -1,14 +1,11 @@
-#! /usr/bin/env ruby
 =begin
   Copyright (c) 2006-2011 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
 
-require 'glib2'
 require 'atk'
-require 'pango'
-require 'gdk_pixbuf2'
+require 'gdk3'
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
@@ -19,34 +16,6 @@ begin
   require "#{major}.#{minor}/gtk3.so"
 rescue LoadError
   require "gtk3.so"
-end
-
-module Gdk
-  LOG_DOMAIN = "Gdk"
-end
-
-if Gdk.cairo_available?
-  module Cairo
-    class Context
-      if method_defined?(:set_source_color)
-        alias_method :set_source_not_gdk_color, :set_source_color
-        def set_source_color(color)
-          if color.is_a?(Gdk::Color)
-            set_source_gdk_color(color)
-          else
-            set_source_not_gdk_color(color)
-          end
-        end
-      else
-        alias_method :set_source_color, :set_source_gdk_color
-      end
-
-      def source_color=(color)
-        set_source_color(color)
-        color
-      end
-    end
-  end
 end
 
 
@@ -97,5 +66,4 @@ module Gtk
   end
 end
 
-GLib::Log.set_log_domain(Gdk::LOG_DOMAIN)
 GLib::Log.set_log_domain(Gtk::LOG_DOMAIN)
