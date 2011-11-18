@@ -22,32 +22,36 @@
 
 #include "rbgtksourcemain.h"
 
-G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtk);
+#define RG_TARGET_NAMESPACE mGtkSource
+
+G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtkSource);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_sourceiter (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourceiter (VALUE mGtkSource);
 */
-G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtkSource);
 
 void
 Init_gtksourceview3 (void)
 {
-    Init_gtk_sourceview (mGtk);
-    Init_gtk_sourcebuffer (mGtk);
+    VALUE RG_TARGET_NAMESPACE = rb_define_module("GtkSource");
+
+    Init_gtk_sourceview (RG_TARGET_NAMESPACE);
+    Init_gtk_sourcebuffer (RG_TARGET_NAMESPACE);
 /* deprecated
-    Init_gtk_sourceiter (mGtk);
+    Init_gtk_sourceiter (RG_TARGET_NAMESPACE);
 */
-    Init_gtk_sourcelanguage (mGtk);
-    Init_gtk_sourcelanguagemanager (mGtk);
-    Init_gtk_sourcemark (mGtk);
-    Init_gtk_sourceprintcompositor (mGtk);
-    Init_gtk_sourcestyle (mGtk);
-    Init_gtk_sourcestylescheme (mGtk);
-    Init_gtk_sourcestyleschememanager (mGtk);
+    Init_gtk_sourcelanguage (RG_TARGET_NAMESPACE);
+    Init_gtk_sourcelanguagemanager (RG_TARGET_NAMESPACE);
+    Init_gtk_sourcemark (RG_TARGET_NAMESPACE);
+    Init_gtk_sourceprintcompositor (RG_TARGET_NAMESPACE);
+    Init_gtk_sourcestyle (RG_TARGET_NAMESPACE);
+    Init_gtk_sourcestylescheme (RG_TARGET_NAMESPACE);
+    Init_gtk_sourcestyleschememanager (RG_TARGET_NAMESPACE);
 }

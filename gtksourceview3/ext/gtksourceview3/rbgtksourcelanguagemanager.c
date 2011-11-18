@@ -26,8 +26,10 @@
  * A class to manage source language.
  */
 
-#define RG_TARGET_NAMESPACE cSourceLanguageManager
+#define RG_TARGET_NAMESPACE cLanguageManager
 #define _SELF(self) (GTK_SOURCE_LANGUAGE_MANAGER(RVAL2GOBJ(self)))
+
+static VALUE rb_mGtkSource;
 
 /* Class method: new
  * Returns: a newly created Gtk::SourceLanguageManager object.
@@ -52,10 +54,10 @@ rg_s_default(VALUE self)
     GType gtype = G_TYPE_FROM_INSTANCE(slm);
 
     gchar *gtypename = (gchar *) g_type_name (gtype);
-    if (strncmp (gtypename, "Gtk", 3) == 0)
-        gtypename += 3;
-    if (!rb_const_defined_at (mGtk, rb_intern (gtypename)))
-        G_DEF_CLASS (gtype, gtypename, mGtk);
+    if (strncmp (gtypename, "GtkSource", 9) == 0)
+        gtypename += 9;
+    if (!rb_const_defined_at (rb_mGtkSource, rb_intern (gtypename)))
+        G_DEF_CLASS (gtype, gtypename, rb_mGtkSource);
 
     return GOBJ2RVAL(slm);
 }
@@ -174,11 +176,12 @@ rg_guess_language(VALUE self, VALUE filename, VALUE content_type)
 #endif /* HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE */
 
 void
-Init_gtk_sourcelanguagemanager (VALUE mGtk)
+Init_gtk_sourcelanguagemanager (VALUE mGtkSource)
 {
+    rb_mGtkSource = mGtkSource;
     VALUE RG_TARGET_NAMESPACE =
         G_DEF_CLASS (GTK_SOURCE_TYPE_LANGUAGE_MANAGER,
-             "SourceLanguageManager", mGtk);
+             "LanguageManager", mGtkSource);
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_search_path, 1);

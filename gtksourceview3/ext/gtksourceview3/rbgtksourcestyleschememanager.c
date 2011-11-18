@@ -26,8 +26,10 @@
  * A class to manage source style scheme.
  */
 
-#define RG_TARGET_NAMESPACE cSourceStyleSchemeManager
+#define RG_TARGET_NAMESPACE cStyleSchemeManager
 #define _SELF(self) (GTK_SOURCE_STYLE_SCHEME_MANAGER(RVAL2GOBJ(self)))
+
+static VALUE rb_mGtkSource;
 
 /* Class method: new
  * Returns: a newly created Gtk::SourceStyleSchemeManager object.
@@ -52,10 +54,10 @@ rg_s_default(VALUE self)
     GType gtype = G_TYPE_FROM_INSTANCE(sssm);
 
     gchar *gtypename = (gchar *) g_type_name (gtype);
-    if (strncmp (gtypename, "Gtk", 3) == 0)
-        gtypename += 3;
-    if (!rb_const_defined_at (mGtk, rb_intern (gtypename)))
-        G_DEF_CLASS (gtype, gtypename, mGtk);
+    if (strncmp (gtypename, "GtkSource", 9) == 0)
+        gtypename += 9;
+    if (!rb_const_defined_at (rb_mGtkSource, rb_intern (gtypename)))
+        G_DEF_CLASS (gtype, gtypename, rb_mGtkSource);
 
     return GOBJ2RVAL(sssm);
 }
@@ -195,11 +197,12 @@ rg_force_rescan(VALUE self)
 }
 
 void
-Init_gtk_sourcestyleschememanager (VALUE mGtk)
+Init_gtk_sourcestyleschememanager (VALUE mGtkSource)
 {
+    rb_mGtkSource = mGtkSource;
     VALUE RG_TARGET_NAMESPACE =
         G_DEF_CLASS (GTK_SOURCE_TYPE_STYLE_SCHEME_MANAGER,
-             "SourceStyleSchemeManager", mGtk);
+             "StyleSchemeManager", mGtkSource);
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_search_path, 1);

@@ -22,7 +22,7 @@
 
 #include "rbgtksourcemain.h"
 
-#define RG_TARGET_NAMESPACE cSourceBuffer
+#define RG_TARGET_NAMESPACE cBuffer
 
 /* Class: Gtk::SourceBuffer
  * Text buffer object for Gtk::SourceView.
@@ -324,10 +324,10 @@ rg_ensure_highlight(VALUE self, VALUE start, VALUE end)
 }
 
 void
-Init_gtk_sourcebuffer (VALUE mGtk)
+Init_gtk_sourcebuffer (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE =
-        G_DEF_CLASS (GTK_SOURCE_TYPE_BUFFER, "SourceBuffer", mGtk);
+        G_DEF_CLASS (GTK_SOURCE_TYPE_BUFFER, "Buffer", mGtkSource);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD_BANG(redo, 0);

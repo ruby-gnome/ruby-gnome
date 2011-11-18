@@ -15,3 +15,6 @@ begin
 rescue LoadError
   require "gtksourceview3.so"
 end
+
+require 'gtksourceview3/deprecated'
+
