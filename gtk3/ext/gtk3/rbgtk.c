@@ -683,7 +683,6 @@ Init_gtk_gtk(void)
     Init_gtk_misc(RG_TARGET_NAMESPACE);
     Init_gtk_notebook(RG_TARGET_NAMESPACE);
 /* deprecated
-    Init_gtk_object(RG_TARGET_NAMESPACE);
     Init_gtk_option_menu(RG_TARGET_NAMESPACE);
 */
     Init_gtk_page_setup(RG_TARGET_NAMESPACE);

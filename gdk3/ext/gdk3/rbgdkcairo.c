@@ -74,9 +74,7 @@ rg_gdk_rectangle(VALUE self, VALUE rectangle)
 static VALUE
 rg_gdk_region(VALUE self, VALUE region)
 {
-/* TODO
-    gdk_cairo_region(_SELF(self), (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION));
-*/
+    gdk_cairo_region(_SELF(self), RVAL2CRREGION(region));
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }

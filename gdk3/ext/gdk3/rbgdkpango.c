@@ -75,7 +75,6 @@ gdkpango_attr_stipple_value(VALUE self)
 }
 */
 
-/* TODO
 static VALUE
 gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, VALUE rbindex_ranges)
 {
@@ -84,7 +83,7 @@ gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, 
     gint y_origin = NUM2INT(rby_origin);
     long n;
     gint *index_ranges = RVAL2GINTS(rbindex_ranges, n);
-    GdkRegion *result;
+    cairo_region_t *result;
 
     if (n % 2 != 0) {
         g_free(index_ranges);
@@ -97,7 +96,7 @@ gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, 
 
     g_free(index_ranges);
 
-    return BOXED2RVAL(result, GDK_TYPE_REGION);
+    return CRREGION2RVAL(result);
 }
 
 static VALUE
@@ -108,7 +107,7 @@ gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_ori
     gint y_origin = NUM2INT(rby_origin);
     long n;
     gint *index_ranges = RVAL2GINTS(rbindex_ranges, n);
-    GdkRegion *result;
+    cairo_region_t *result;
 
     if (n % 2 != 0) {
         g_free(index_ranges);
@@ -121,9 +120,8 @@ gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_ori
 
     g_free(index_ranges);
 
-    return BOXED2RVAL(result, GDK_TYPE_REGION);
+    return CRREGION2RVAL(result);
 }
-*/
 
 /* deprecated
 static VALUE
@@ -153,8 +151,10 @@ Init_gtk_gdk_pango(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Pango");
 /* deprecated
     VALUE context = GTYPE2CLASS(PANGO_TYPE_CONTEXT);
+*/
     VALUE layout = GTYPE2CLASS(PANGO_TYPE_LAYOUT);
     VALUE layoutline = GTYPE2CLASS(PANGO_TYPE_LAYOUT_LINE);
+/* deprecated
     VALUE pattr = ATTRTYPE2CLASS(CSTR2RVAL("Attribute"));
     VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
     VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
@@ -166,10 +166,8 @@ Init_gtk_gdk_pango(VALUE mGdk)
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
     G_DEF_SETTER(context, "colormap");
 */
-/* TODO
     rb_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
     rb_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
-*/
 
 /* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossed", pattrbool);
