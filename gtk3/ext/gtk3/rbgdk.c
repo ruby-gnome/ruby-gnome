@@ -177,18 +177,22 @@ rg_m_display_arg_name(G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL(gdk_get_display_arg_name());
 }
 
+/* deprecated
 static VALUE
 rg_m_set_locale(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_set_locale());
 }
+*/
 
+/* deprecated
 static VALUE
 rg_m_set_sm_client_id(VALUE self, VALUE id)
 {
     gdk_set_sm_client_id(NIL_P(id) ? NULL : RVAL2CSTR(id));
     return self;
 }
+*/
 
 static VALUE
 rg_m_notify_startup_complete(int argc, VALUE *argv, VALUE self)
@@ -442,7 +446,7 @@ rg_m_windowing_directfb_p(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_target(G_GNUC_UNUSED VALUE self)
 {
-    return CSTR2RVAL(RUBY_GTK2_TARGET);
+    return CSTR2RVAL(RUBY_GTK3_TARGET);
 }
 
 static VALUE
@@ -461,8 +465,10 @@ Init_gtk_gdk(void)
     RG_TARGET_NAMESPACE = rb_define_module("Gdk");
 
     RG_DEF_MODFUNC(display_arg_name, 0);
+/* deprecated
     RG_DEF_MODFUNC(set_locale, 0);
     RG_DEF_MODFUNC(set_sm_client_id, 1);
+*/
     RG_DEF_MODFUNC(notify_startup_complete, -1);
     RG_DEF_MODFUNC(program_class, 0);
     RG_DEF_MODFUNC(set_program_class, 1);

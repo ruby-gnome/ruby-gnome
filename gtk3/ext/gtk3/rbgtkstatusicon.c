@@ -42,12 +42,14 @@ GtkStatusIcon* gtk_status_icon_new_from_icon_name
                                             (const gchar *icon_name);
 */
 
+/* deprecated
 static VALUE
 rg_set_tooltip(VALUE self, VALUE tooltip_text)
 {
     gtk_status_icon_set_tooltip(_SELF(self), RVAL2CSTR(tooltip_text));
     return self;
 }
+*/
 
 static VALUE
 rg_position_menu(VALUE self, VALUE menu)
@@ -83,8 +85,10 @@ Init_gtk_status_icon(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
+/* deprecated
     RG_DEF_METHOD(set_tooltip, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "tooltip");
+*/
     RG_DEF_METHOD(position_menu, 1);
     RG_DEF_METHOD(geometry, 0);
 }

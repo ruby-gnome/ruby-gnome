@@ -60,10 +60,10 @@ remove_from_windows(G_GNUC_UNUSED GtkWidget *window, VALUE obj)
 }
 
 void
-rbgtk_initialize_gtkobject(VALUE obj, GtkObject *gtkobj)
+rbgtk_initialize_gtkobject(VALUE obj, GtkWidget *gtkobj)
 {
     gtkobj = g_object_ref(gtkobj);
-    gtk_object_sink(gtkobj);
+    g_object_ref_sink(gtkobj);
     G_INITIALIZE(obj, gtkobj);
 
     if (GTK_IS_WINDOW(gtkobj) || GTK_IS_MENU_SHELL(gtkobj)) {
@@ -129,11 +129,13 @@ gtk_m_function2(gpointer proc)
     G_PROTECT_CALLBACK(gtk_m_function2_body, proc);
 }
 
+/* deprecated
 static VALUE
 rg_m_set_locale(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_set_locale());
 }
+*/
 
 static VALUE
 rg_m_disable_setlocale(G_GNUC_UNUSED VALUE self)
@@ -239,7 +241,6 @@ rg_m_init(int argc, VALUE *argv, VALUE self)
 
 /* We don't need them.
 gtk_init()
-gtk_exit()
 */
 
 static VALUE
@@ -306,6 +307,7 @@ rg_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
     return Qnil;
 }
 
+/* deprecated
 static VALUE
 rg_m_init_add(VALUE self)
 {
@@ -342,13 +344,6 @@ rg_m_quit_remove(VALUE self, VALUE quit_handler_id)
     G_REMOVE_RELATIVE(self, id__quit_callbacks__, quit_handler_id);
     return quit_handler_id;
 }
-
-/* We don't need this.
-gtk_quit_add_full ()
-gtk_quit_add_destroy()
-gtk_quit_remove_by_data()
-gtk_timeout_add_full()
-*/
 
 static VALUE
 rg_m_timeout_add(VALUE self, VALUE interval)
@@ -423,14 +418,6 @@ rg_m_idle_remove(VALUE self, VALUE id)
     G_REMOVE_RELATIVE(self, id__idle_callbacks__, id);
     return Qnil;
 }
-
-/* We don't need this.
-gtk_idle_remove_by_data()
-gtk_idle_add_full()
-
-Use Gdk::Input.add, remove
-gtk_input_add_full()
-gtk_input_remove()
 */
 
 static gint
@@ -535,7 +522,9 @@ Init_gtk_gtk(void)
 
     RG_DEF_MODFUNC_P(events_pending, 0);
 
+/* deprecated
     RG_DEF_MODFUNC(set_locale, 0);
+*/
     RG_DEF_MODFUNC(disable_setlocale, 0);
     RG_DEF_MODFUNC(default_language, 0);
     RG_DEF_MODFUNC(init, -1);
@@ -548,6 +537,7 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(grab_add, 1);
     RG_DEF_MODFUNC(current, 0);
     RG_DEF_MODFUNC(grab_remove, 1);
+/* deprecated
     RG_DEF_MODFUNC(init_add, 0);
     RG_DEF_MODFUNC(quit_add, 1);
     RG_DEF_MODFUNC(quit_remove, 1);
@@ -557,6 +547,7 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(idle_add, 0);
     RG_DEF_MODFUNC(idle_add_priority, 1);
     RG_DEF_MODFUNC(idle_remove, 1);
+*/
     RG_DEF_MODFUNC(key_snooper_install, 0);
     RG_DEF_MODFUNC(key_snooper_remove, 1);
     RG_DEF_MODFUNC(current_event, 0);

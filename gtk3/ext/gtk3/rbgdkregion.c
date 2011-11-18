@@ -22,12 +22,12 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cRegion
 #define _SELF(r) ((GdkRegion*)RVAL2BOXED(r, GDK_TYPE_REGION))
 
-/**********************************/
 GType
 gdk_region_get_type(void)
 {
@@ -39,7 +39,7 @@ gdk_region_get_type(void)
                     (GBoxedFreeFunc)gdk_region_destroy);
     return our_type;
 }
-/**********************************/
+
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -279,11 +279,11 @@ Init_gtk_gdk_region(VALUE mGdk)
     RG_DEF_METHOD(subtract, 1);
     RG_DEF_METHOD(xor, 1);
 
-    /* GdkOverlapType */
     G_DEF_CLASS(GDK_TYPE_OVERLAP_TYPE, "OverlapType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_OVERLAP_TYPE, "GDK_");
 
-    /* GdkFillRule */
     G_DEF_CLASS(GDK_TYPE_FILL_RULE, "FillRule", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_FILL_RULE, "GDK_");
 }
+*/
+

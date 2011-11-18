@@ -44,9 +44,12 @@
 #define GEV2RVAL(ev) (make_gdkevent(ev))
 #define RVAL2GEV(ev) (get_gdkevent(ev))
 #define RVAL2ATOM(atom) (get_gdkatom(atom))
+/* deprecated
 #define RVAL2GDKNATIVEWINDOW(value) ((GdkNativeWindow)NUM2UINT(value))
-/* TODO: Will UINT2NUM work for pointers on 64-bit Windows? */
 #define GDKNATIVEWINDOW2RVAL(value) UINT2NUM((guint32)value)
+*/
+#define RVAL2GDKWINDOW(value) (GDK_WINDOW(RVAL2GOBJ(value)))
+#define GDKWINDOW2RVAL(value) (GOBJ2RVAL(value))
 
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
 #define GDK_TYPE_REGION (gdk_region_get_type())

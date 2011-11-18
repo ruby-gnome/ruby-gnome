@@ -127,8 +127,10 @@ txt_app_color_set_ ## name (VALUE self, VALUE val)\
 /***********************************************/
 ATTR_COLOR(bg_color);
 ATTR_COLOR(fg_color);
+/* deprecated
 ATTR_GOBJ(bg_stipple);
 ATTR_GOBJ(fg_stipple);
+*/
 
 ATTR_INT(rise);
 ATTR_ENUM(underline, PANGO_TYPE_UNDERLINE);
@@ -153,8 +155,10 @@ Init_gtk_text_appearance(VALUE mGtk)
 
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, color, bg_color);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, color, fg_color);
+/* deprecated
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, gobj, bg_stipple);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, gobj, fg_stipple);
+*/
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, rise);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, underline);
 

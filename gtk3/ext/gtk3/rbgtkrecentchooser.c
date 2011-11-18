@@ -24,6 +24,7 @@
 #define RG_TARGET_NAMESPACE cRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
+/* deprecated
 static VALUE
 rg_set_show_numbers(VALUE self, VALUE val)
 {
@@ -36,6 +37,7 @@ rg_show_numbers(VALUE self)
 {
     return CBOOL2RVAL(gtk_recent_chooser_get_show_numbers(_SELF(self)));
 }
+*/
 
 struct callback_arg
 {
@@ -188,9 +190,11 @@ Init_gtk_recent_chooser(VALUE mGtk)
 {
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
+/* deprecated
   RG_DEF_METHOD(set_show_numbers, 1);
   G_DEF_SETTER(RG_TARGET_NAMESPACE, "show_numbers");
   RG_DEF_METHOD(show_numbers, 0);
+*/
   RG_DEF_METHOD(set_sort_func, 0);
   RG_DEF_METHOD(set_current_uri, 1);
   G_DEF_SETTER(RG_TARGET_NAMESPACE, "current_uri");

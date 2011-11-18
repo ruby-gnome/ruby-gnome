@@ -61,7 +61,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                              (RVAL2GOBJ (val))));
     } else
         if (rb_obj_is_kind_of
-        (val, GTYPE2CLASS (GTK_TYPE_SOURCE_LANGUAGE))) {
+        (val, GTYPE2CLASS (GTK_SOURCE_TYPE_LANGUAGE))) {
         G_INITIALIZE (self,
                   gtk_source_buffer_new_with_language
                   (GTK_SOURCE_LANGUAGE (RVAL2GOBJ (val))));
@@ -327,7 +327,7 @@ void
 Init_gtk_sourcebuffer (VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =
-        G_DEF_CLASS (GTK_TYPE_SOURCE_BUFFER, "SourceBuffer", mGtk);
+        G_DEF_CLASS (GTK_SOURCE_TYPE_BUFFER, "SourceBuffer", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD_BANG(redo, 0);

@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cCurve
@@ -100,12 +101,12 @@ Init_gtk_curve(VALUE mGtk)
     RG_DEF_METHOD(set_range, 4);
     RG_DEF_METHOD(set_vector, 2);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "vector");
-    /* NOTE: For backwards compatability. */
     RG_DEF_METHOD(get_vector, 1);
     RG_DEF_ALIAS("vector", "get_vector");
 
-    /* GtkCurveType(from standard constants) */
 
     G_DEF_CLASS(GTK_TYPE_CURVE_TYPE, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CURVE_TYPE, "GTK_CURVE_");
 }
+*/
+

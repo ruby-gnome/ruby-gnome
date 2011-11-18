@@ -146,7 +146,9 @@ ATTR_BOXED(language, PANGO_TYPE_LANGUAGE);
 ATTR_BOOL(invisible);
 ATTR_BOOL(bg_full_height);
 ATTR_BOOL(editable);
+/* deprecated
 ATTR_BOOL(realized);
+*/
 
 /***********************************************/
 
@@ -196,8 +198,10 @@ Init_gtk_text_attributes(VALUE mGtk)
     rb_define_method(RG_TARGET_NAMESPACE, "set_bg_full_height", txt_attr_bool_set_bg_full_height, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "editable?", txt_attr_bool_editable, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "set_editable", txt_attr_bool_set_editable, 1);
+/* deprecated
     rb_define_method(RG_TARGET_NAMESPACE, "realized?", txt_attr_bool_realized, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "set_realized", txt_attr_bool_set_realized, 1);
+*/
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

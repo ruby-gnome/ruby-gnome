@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cFileSelection
@@ -148,3 +149,5 @@ Init_gtk_file_selection(VALUE mGtk)
     RG_DEF_METHOD(fileop_del_file, 0);
     RG_DEF_METHOD(fileop_ren_file, 0);
 }
+*/
+

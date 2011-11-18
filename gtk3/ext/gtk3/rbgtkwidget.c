@@ -29,6 +29,7 @@
 
 static VALUE style_prop_func_table;
 
+/* deprecated
 static VALUE
 rg_flags(VALUE self)
 {
@@ -48,6 +49,7 @@ rg_unset_flags(VALUE self, VALUE flag)
     GTK_WIDGET_UNSET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
     return self;
 }
+*/
 
 static VALUE
 rg_unparent(VALUE self)
@@ -84,12 +86,14 @@ rg_show_all(VALUE self)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_hide_all(VALUE self)
 {
     gtk_widget_hide_all(_SELF(self));
     return self;
 }
+*/
 
 static VALUE
 rg_map(VALUE self)
@@ -283,6 +287,7 @@ rg_get_ancestor(VALUE self, VALUE klass)
     return GOBJ2RVAL(gtk_widget_get_ancestor(_SELF(self), CLASS2GTYPE(klass)));
 }
 
+/* deprecated?
 static VALUE
 rg_colormap(VALUE self)
 {
@@ -295,6 +300,7 @@ rg_set_colormap(VALUE self, VALUE colormap)
     gtk_widget_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
     return self;
 }
+*/
 
 static VALUE
 rg_visual(VALUE self)
@@ -352,6 +358,7 @@ rg_reset_rc_styles(VALUE self)
     return self;
 }
 
+/* deprecated?
 static VALUE
 rg_s_push_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
 {
@@ -372,6 +379,7 @@ rg_s_set_default_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
     gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
     return cmap;
 }
+*/
 
 static VALUE
 rg_s_default_style(G_GNUC_UNUSED VALUE self)
@@ -379,6 +387,7 @@ rg_s_default_style(G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL(gtk_widget_get_default_style());
 }
 
+/* deprecated?
 static VALUE
 rg_s_default_colormap(G_GNUC_UNUSED VALUE self)
 {
@@ -390,6 +399,7 @@ rg_s_default_visual(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_visual());
 }
+*/
 
 static VALUE
 rg_set_direction(VALUE self, VALUE dir)
@@ -417,6 +427,7 @@ rg_s_default_direction(G_GNUC_UNUSED VALUE self)
     return GENUM2RVAL(gtk_widget_get_default_direction(), GTK_TYPE_TEXT_DIRECTION);
 }
 
+/* deprecated?
 static VALUE
 rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
@@ -436,6 +447,7 @@ rg_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE 
                                         NUM2INT(offset_y));
     return self;
 }
+*/
 
 static VALUE
 rg_path(VALUE self)
@@ -592,12 +604,14 @@ rg_queue_draw_area(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_reset_shapes(VALUE self)
 {
     gtk_widget_reset_shapes(_SELF(self));
     return self;
 }
+*/
 
 static VALUE
 rg_set_redraw_on_allocate(VALUE self, VALUE redraw_on_allocate)
@@ -613,6 +627,7 @@ rg_set_composite_name(VALUE self, VALUE name)
     return self;
 }
 
+/* deprecated?
 static VALUE
 rg_set_scroll_adjustments(VALUE self, VALUE h, VALUE v)
 {
@@ -620,6 +635,7 @@ rg_set_scroll_adjustments(VALUE self, VALUE h, VALUE v)
                                                         GTK_ADJUSTMENT(_SELF(h)),
                                                         GTK_ADJUSTMENT(_SELF(v))));
 }
+*/
 
 static VALUE
 rg_mnemonic_activate(VALUE self, VALUE group_cycling)
@@ -727,6 +743,7 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
     return ary;
 }
 
+/* TOOD:GdkRegion -> cairo_region_t
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
 {
@@ -734,6 +751,7 @@ rg_region_intersect(VALUE self, VALUE region)
                                                   (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)), 
                       GDK_TYPE_REGION);
 }
+*/
 
 static VALUE
 rg_send_expose(VALUE self, VALUE event)
@@ -929,11 +947,13 @@ rg_trigger_tooltip_query(VALUE self)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_action(VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_action(_SELF(self)));
 }
+*/
 
 static VALUE
 rg_composited_p(VALUE self)
@@ -948,6 +968,7 @@ rg_set_window(VALUE self, VALUE window)
     return self;
 }
 
+/* deprecated
 #define DEFINE_IS_WIDGET(STATE) \
 static VALUE \
 widget_ ## STATE (VALUE self) \
@@ -958,13 +979,14 @@ DEFINE_IS_WIDGET(TOPLEVEL);
 DEFINE_IS_WIDGET(NO_WINDOW);
 DEFINE_IS_WIDGET(REALIZED);
 DEFINE_IS_WIDGET(MAPPED);
-/*DEFINE_IS_WIDGET(VISIBLE); VISIBLE is defined as property*/
 DEFINE_IS_WIDGET(DRAWABLE);
 DEFINE_IS_WIDGET(PARENT_SENSITIVE);
 DEFINE_IS_WIDGET(IS_SENSITIVE);
 DEFINE_IS_WIDGET(HAS_GRAB);
 DEFINE_IS_WIDGET(RC_STYLE);
+*/
 
+/* deprecated
 static VALUE
 rg_allocation(VALUE self)
 {
@@ -1009,6 +1031,7 @@ rg_saved_state(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
 }
+*/
 
 static VALUE
 widget_signal_size_request(G_GNUC_UNUSED guint num, const GValue *values)
@@ -1035,15 +1058,19 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * instance methods
      */
+/* deprecated
     RG_DEF_METHOD(flags, 0);
     RG_DEF_METHOD(set_flags, 1);
     RG_DEF_METHOD(unset_flags, 1);
+*/
     RG_DEF_METHOD(unparent, 0);
     RG_DEF_METHOD(show, 0);
     RG_DEF_METHOD(show_now, 0);
     RG_DEF_METHOD(hide, 0);
     RG_DEF_METHOD(show_all, 0);
+/* deprecated
     RG_DEF_METHOD(hide_all, 0);
+*/
     RG_DEF_METHOD(map, 0);
     RG_DEF_METHOD(unmap, 0);
     RG_DEF_METHOD(realize, 0);
@@ -1073,8 +1100,10 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(add_events, 1);
     RG_DEF_METHOD(toplevel, 0);
     RG_DEF_METHOD(get_ancestor, 1);
+/* deprecated?
     RG_DEF_METHOD(colormap, 0);
     RG_DEF_METHOD(set_colormap, 1);
+*/
     RG_DEF_METHOD(visual, 0);
     RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD_P(ancestor, 1);
@@ -1084,8 +1113,10 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(reset_rc_styles, 0);
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
+/* deprecated?
     RG_DEF_METHOD(shape_combine_mask, 3);
     RG_DEF_METHOD(input_shape_combine_mask, 3);
+*/
     RG_DEF_METHOD(path, 0);
     RG_DEF_METHOD(class_path, 0);
     RG_DEF_METHOD(composite_name, 0);
@@ -1102,14 +1133,19 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(create_pango_layout, -1);
     RG_DEF_METHOD(render_icon, -1);
     RG_DEF_METHOD(queue_draw_area, 4);
+/* deprecated
     RG_DEF_METHOD(reset_shapes, 0);
+*/
     RG_DEF_METHOD(set_redraw_on_allocate, 1);
     RG_DEF_METHOD(set_composite_name, 1);
+/* deprecated?
     RG_DEF_METHOD(set_scroll_adjustments, 2);
-    /* for backward compatibility. */
     RG_DEF_ALIAS("set_scroll_adjustment", "set_scroll_adjustments");
+*/
     RG_DEF_METHOD(mnemonic_activate, 1);
+/* TODO
     RG_DEF_METHOD(region_intersect, 1);
+*/
     RG_DEF_METHOD(send_expose, 1);
     RG_DEF_METHOD(style_get_property, 1);
     RG_DEF_METHOD(accessible, 0);
@@ -1135,36 +1171,45 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_tooltip_window, 1);
     RG_DEF_METHOD(tooltip_window, 0);
     RG_DEF_METHOD(trigger_tooltip_query, 0);
+/* deprecated
     RG_DEF_METHOD(action, 0);
+*/
     RG_DEF_METHOD_P(composited, 0);
     RG_DEF_METHOD(set_window, 1);
+/* deprecated
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 4);
     RG_DEF_METHOD(requisition, 0);
     RG_DEF_METHOD(set_requisition, 2);
     RG_DEF_METHOD(state, 0);
     RG_DEF_METHOD(saved_state, 0);
+*/
 
+/* deprecated
     rb_define_method(RG_TARGET_NAMESPACE, "toplevel?",  widget_TOPLEVEL, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "no_window?", widget_NO_WINDOW, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "realized?",  widget_REALIZED, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "mapped?",    widget_MAPPED, 0); 
     rb_define_method(RG_TARGET_NAMESPACE, "drawable?",  widget_DRAWABLE, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "parent_sensitive?", widget_PARENT_SENSITIVE, 0);
-    /* This method's name avoid to sensitive? of a property variables. */
     rb_define_method(RG_TARGET_NAMESPACE, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "has_grab?",    widget_HAS_GRAB, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "rc_style?",    widget_RC_STYLE, 0);
+*/
 
     /*
      * singleton methods
      */
+/* deprecated?
     RG_DEF_SMETHOD(push_colormap, 1);
     RG_DEF_SMETHOD(pop_colormap, 0);
     RG_DEF_SMETHOD(set_default_colormap, 1);
+*/
     RG_DEF_SMETHOD(default_style, 0);
+/* deprecated?
     RG_DEF_SMETHOD(default_colormap, 0);
     RG_DEF_SMETHOD(default_visual, 0);
+*/
     RG_DEF_SMETHOD(set_default_direction, 1);
     RG_DEF_SMETHOD(default_direction, 0);
     RG_DEF_SMETHOD(pop_composite_child, 0);
@@ -1176,8 +1221,10 @@ Init_gtk_widget(VALUE mGtk)
      * constants
      */
     /* GtkWidgetFlags */
+/* deprecated
     G_DEF_CLASS(GTK_TYPE_WIDGET_FLAGS, "Flags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_FLAGS, "GTK_");
+*/
 
     /* GtkWidgetHelpType */
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);

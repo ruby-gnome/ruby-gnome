@@ -114,8 +114,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         if (gflags & GTK_DIALOG_DESTROY_WITH_PARENT)
             gtk_window_set_destroy_with_parent(GTK_WINDOW(dialog), TRUE);
-        if (gflags & GTK_DIALOG_NO_SEPARATOR)
-            gtk_dialog_set_has_separator(dialog, FALSE);
 
         RBGTK_INITIALIZE(self, dialog);
         if (! NIL_P(button_ary))
@@ -196,16 +194,18 @@ rg_set_alternative_button_order(VALUE self, VALUE rbnew_order)
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_vbox(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->vbox);
 }
+*/
 
 static VALUE
 rg_action_area(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->action_area);
+    return GOBJ2RVAL(gtk_dialog_get_action_area(_SELF(self)));
 }
 
 static VALUE
@@ -232,7 +232,9 @@ Init_gtk_dialog(VALUE mGtk)
     RG_DEF_SMETHOD_P(alternative_dialog_button_order, 1);
     RG_DEF_METHOD(set_alternative_button_order, 1);
     RG_DEF_METHOD(set_response_sensitive, 2);
+/* deprecated
     RG_DEF_METHOD(vbox, 0);
+*/
     RG_DEF_METHOD(action_area, 0);
     RG_DEF_METHOD(get_response, 1);
     RG_DEF_ALIAS("get_response_for_widget", "get_response");

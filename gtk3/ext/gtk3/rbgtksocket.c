@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+/* TODO
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
 
 #define RG_TARGET_NAMESPACE cSocket
@@ -64,11 +65,13 @@ rg_id(VALUE self)
 #endif
 }
 
-#endif /* HAVE_GTK_SOCKET_GET_TYPE */
+#endif
+*/
 
 void 
 Init_gtk_socket(VALUE mGtk)
 {
+/* TODO
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
@@ -77,4 +80,5 @@ Init_gtk_socket(VALUE mGtk)
     RG_DEF_METHOD(add_id, 1);
     RG_DEF_METHOD(id, 0);
 #endif
+*/
 }

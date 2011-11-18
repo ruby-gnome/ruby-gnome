@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cGammaCurve
@@ -54,3 +55,5 @@ Init_gtk_gamma_curve(VALUE mGtk)
     RG_DEF_METHOD(gamma, 0);
     RG_DEF_METHOD(curve, 0);
 }
+*/
+

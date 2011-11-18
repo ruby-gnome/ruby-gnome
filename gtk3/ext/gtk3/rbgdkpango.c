@@ -37,6 +37,7 @@ rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     return ret;
 }
 
+/* deprecated
 static VALUE
 gdkpango_context_set_colormap(VALUE self, VALUE colormap)
 {
@@ -57,7 +58,9 @@ gdkpango_attr_embossed_value(VALUE self)
 {
     return CBOOL2RVAL(((GdkPangoAttrEmbossed*)RVAL2ATTR(self))->embossed);
 }
+*/
 
+/* deprecated
 static VALUE
 gdkpango_attr_stipple_initialize(VALUE self, VALUE stipple)
 {
@@ -70,7 +73,9 @@ gdkpango_attr_stipple_value(VALUE self)
 {
     return GOBJ2RVAL(((GdkPangoAttrStipple*)RVAL2ATTR(self))->stipple);
 }
+*/
 
+/* TODO
 static VALUE
 gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, VALUE rbindex_ranges)
 {
@@ -118,7 +123,9 @@ gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_ori
 
     return BOXED2RVAL(result, GDK_TYPE_REGION);
 }
+*/
 
+/* deprecated
 static VALUE
 gdkpango_attr_emboss_color_initialize(VALUE self, VALUE color)
 {
@@ -132,43 +139,57 @@ gdkpango_attr_emboss_color_value(VALUE self)
     return BOXED2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2ATTR(self))->color),
                       PANGO_TYPE_COLOR);
 }
+*/
 
 void
 Init_gtk_gdk_pango(VALUE mGdk)
 {
+/* deprecated
     VALUE klass;
     PangoAttribute* tmpattr;
     GdkColor color;
+*/
 
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Pango");
+/* deprecated
     VALUE context = GTYPE2CLASS(PANGO_TYPE_CONTEXT);
     VALUE layout = GTYPE2CLASS(PANGO_TYPE_LAYOUT);
     VALUE layoutline = GTYPE2CLASS(PANGO_TYPE_LAYOUT_LINE);
     VALUE pattr = ATTRTYPE2CLASS(CSTR2RVAL("Attribute"));
     VALUE pattrbool = ATTRTYPE2CLASS(CSTR2RVAL("AttrBool"));
     VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
+*/
 
     RG_DEF_MODFUNC(context, -1);
 
+/* deprecated
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
     G_DEF_SETTER(context, "colormap");
+*/
+/* TODO
     rb_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
     rb_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
+*/
 
+/* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossed", pattrbool);
     rb_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
     tmpattr = gdk_pango_attr_embossed_new(TRUE);
     rb_define_method(klass, "value", gdkpango_attr_embossed_value, 0);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
     pango_attribute_destroy(tmpattr);
+*/
 
+/* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrStipple", pattr);
     rb_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
     rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
     tmpattr = gdk_pango_attr_stipple_new(NULL);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
     pango_attribute_destroy(tmpattr);
+*/
 
+/* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossColor", pattr_color);
     rb_define_method(klass, "initialize",
                      gdkpango_attr_emboss_color_initialize, 1);
@@ -176,4 +197,5 @@ Init_gtk_gdk_pango(VALUE mGdk)
     tmpattr = gdk_pango_attr_emboss_color_new(&color);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
     pango_attribute_destroy(tmpattr);
+*/
 }

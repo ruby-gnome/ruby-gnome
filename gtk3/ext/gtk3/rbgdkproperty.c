@@ -26,6 +26,7 @@
 
 #define RG_TARGET_NAMESPACE mProperty
 
+/* deprecated
 static VALUE
 rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -62,7 +63,9 @@ rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     gdk_free_text_list(list);
     return ret;
 }
+*/
 
+/* TODO
 static VALUE
 rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -99,7 +102,9 @@ rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     g_strfreev(list);
     return ret;
 }
+*/
 
+/* deprecated
 static VALUE
 rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -135,6 +140,7 @@ rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     }
     return Qnil;
 }
+*/
 
 static VALUE
 rg_m_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
@@ -142,6 +148,7 @@ rg_m_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
     return CSTR2RVAL((const char*)gdk_utf8_to_string_target(RVAL2CSTR(str)));
 }
 
+/* deprecated
 static VALUE
 rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -178,6 +185,7 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     }
     return Qnil;
 }
+*/
 
 static VALUE
 rg_m_change(int argc, VALUE *argv, VALUE self)
@@ -272,11 +280,19 @@ Init_gtk_gdk_property(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Property");
 
+/* deprecated
     RG_DEF_MODFUNC(text_property_to_text_list, -1);
+*/
+/* TODO
     RG_DEF_MODFUNC(text_property_to_utf8_list, -1);
+*/
+/* deprecated
     RG_DEF_MODFUNC(string_to_compound_text, -1);
+*/
     RG_DEF_MODFUNC(utf8_to_string_target, 1);
+/* deprecated
     RG_DEF_MODFUNC(utf8_to_compound_text, -1);
+*/
     RG_DEF_MODFUNC(change, -1);
     RG_DEF_MODFUNC(get, -1);
     RG_DEF_MODFUNC(delete, 2);

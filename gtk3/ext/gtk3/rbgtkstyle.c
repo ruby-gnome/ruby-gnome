@@ -22,6 +22,7 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cStyle
@@ -641,3 +642,5 @@ Init_gtk_style(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
+*/
+

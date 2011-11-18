@@ -22,13 +22,11 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cItem
 
-/*
- * Item
- */
 static VALUE
 rg_select(VALUE self)
 {
@@ -58,3 +56,5 @@ Init_gtk_item(VALUE mGtk)
     RG_DEF_METHOD(deselect, 0);
     RG_DEF_METHOD(toggle, 0);
 }
+*/
+

@@ -22,9 +22,10 @@
  *  MA  02110-1301  USA
  */
 
+/* deprecated
 #include "global.h"
 
-#ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
+#ifndef GTK_DISABLE_DEPRECATED
 
 #define RG_TARGET_NAMESPACE cOptionMenu
 
@@ -60,7 +61,7 @@ rg_history(VALUE self)
 void 
 Init_gtk_option_menu(VALUE mGtk)
 {
-#ifndef GTK_DISABLE_DEPRECATED  /* Since 2.4 */
+#ifndef GTK_DISABLE_DEPRECATED
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_OPTION_MENU, "OptionMenu", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -70,3 +71,5 @@ Init_gtk_option_menu(VALUE mGtk)
     RG_DEF_METHOD(history, 0);
 #endif
 }
+*/
+

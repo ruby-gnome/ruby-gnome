@@ -303,7 +303,7 @@ rg_add(int argc, VALUE *argv, VALUE self)
 
     G_CHILD_ADD(self, other);
 
-    if (child->parent && (! NIL_P(properties))){
+    if (gtk_widget_get_parent(child) && (! NIL_P(properties))){
         int i;
         VALUE ary;
         GObject* obj;
@@ -333,6 +333,7 @@ void        gtk_container_child_set_valist  (GtkContainer *container,
                                              va_list var_args);
 */
 
+/* deprecated
 static VALUE
 rg_propagate_expose(VALUE self, VALUE child, VALUE event)
 {
@@ -340,6 +341,7 @@ rg_propagate_expose(VALUE self, VALUE child, VALUE event)
                                    (GdkEventExpose *)RVAL2GEV(event));
     return self;
 }
+*/
 
 static VALUE
 rg_focus_chain(VALUE self)
@@ -758,7 +760,9 @@ Init_gtk_container(VALUE mGtk)
     RG_DEF_METHOD(child_type, 0);
     RG_DEF_METHOD(child_get_property, 2);
     RG_DEF_METHOD(child_set_property, 3);
+/* deprecated
     RG_DEF_METHOD(propagate_expose, 2);
+*/
     RG_DEF_METHOD(focus_chain, 0);
     RG_DEF_METHOD(set_focus_chain, 1);
     RG_DEF_METHOD(unset_focus_chain, 0);

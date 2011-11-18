@@ -22,7 +22,7 @@
 #include "global.h"
 
 #ifdef HAVE_GTK_UNIX_PRINT
-#include <gtk/gtkprintunixdialog.h>
+#include <gtk/gtkunixprint.h>
 
 #define RG_TARGET_NAMESPACE cPrintUnixDialog
 #define _SELF(s) (GTK_PRINT_UNIX_DIALOG(RVAL2GOBJ(s)))

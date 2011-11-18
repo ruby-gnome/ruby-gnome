@@ -94,11 +94,13 @@ void        gtk_cell_view_set_background_color
                                              const GdkColor *color);
 */
 
+/* deprecated
 static VALUE
 rg_cell_renderers(VALUE self)
 {
     return GLIST2ARYF(gtk_cell_view_get_cell_renderers(_SELF(self)));
 }
+*/
 
 void
 Init_gtk_cellview(VALUE mGtk)
@@ -113,5 +115,7 @@ Init_gtk_cellview(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "displayed_row");
     RG_DEF_METHOD(displayed_row, 0);
     RG_DEF_METHOD(get_size_of_row, 1);
+/* deprecated
     RG_DEF_METHOD(cell_renderers, 0);
+*/
 }

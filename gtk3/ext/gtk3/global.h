@@ -55,7 +55,9 @@ G_GNUC_INTERNAL void Init_gtk_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_gdk_atom(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_cairo(void);
 G_GNUC_INTERNAL void Init_gtk_gdk_color(VALUE mGdk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_colormap(VALUE mGdk);
+*/
 G_GNUC_INTERNAL void Init_gtk_gdk_const(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_cursor(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_device(VALUE mGdk);
@@ -64,18 +66,26 @@ G_GNUC_INTERNAL void Init_gtk_gdk_display_manager(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_dragcontext(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_event(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_geometry(VALUE mGdk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_image(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_input(VALUE mGdk);
+*/
 G_GNUC_INTERNAL void Init_gtk_gdk_keymap(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_keyval(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_pango(VALUE mGdk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_pangorenderer(VALUE mGdk);
+*/
 G_GNUC_INTERNAL void Init_gtk_gdk_pixbuf(VALUE mGdk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_pixmap(VALUE mGdk);
+*/
 G_GNUC_INTERNAL void Init_gtk_gdk_property(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_rectangle(VALUE mGdk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_region(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_rgb(VALUE mGdk);
+*/
 G_GNUC_INTERNAL void Init_gtk_gdk_screen(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_selection(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_threads(VALUE mGdk);
@@ -127,12 +137,18 @@ G_GNUC_INTERNAL void Init_gtk_clipboard(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_colorbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_color_selection(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_color_selection_dialog(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_combo(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_combobox(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_comboboxentry(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_const(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_container(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_curve(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drag(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drawing_area(VALUE mGtk);
@@ -147,20 +163,26 @@ G_GNUC_INTERNAL void Init_gtk_filechooserbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_file_chooser_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_file_chooser_widget(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_file_filter(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_file_selection(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_fixed(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_fontbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_font_selection(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_font_selection_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_frame(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_gamma_curve(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_gdk_draw(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_gc(VALUE mGdk);
+*/
 G_GNUC_INTERNAL void Init_gtk_handle_box(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hbutton_box(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hbox(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hpaned(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_hruler(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_hscale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hscrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hseparator(VALUE mGtk);
@@ -176,10 +198,14 @@ G_GNUC_INTERNAL void Init_gtk_image_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_imcontext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_imcontext_simple(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_im_multicontext(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_input_dialog(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_invisible(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_itemfactory(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_layout(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_link_button(VALUE mGtk);
@@ -192,8 +218,10 @@ G_GNUC_INTERNAL void Init_gtk_menutoolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_message_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_misc(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_notebook(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_object(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_option_menu(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_page_setup(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_page_setup_unix_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_paned(VALUE mGtk);
@@ -225,7 +253,9 @@ G_GNUC_INTERNAL void Init_gtk_recent_filter(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_filter_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_manager(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_ruler(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_scale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scalebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollbar(VALUE mGtk);
@@ -243,7 +273,9 @@ G_GNUC_INTERNAL void Init_gtk_spinner(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_statusbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_status_icon(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_style(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_target_list(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tearoff_menu_item(VALUE mGtk);
@@ -263,7 +295,9 @@ G_GNUC_INTERNAL void Init_gtk_toolbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolitem(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tooltip(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_tooltips(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_treedragdest(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_treedragsource(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_treeiter(VALUE mGtk);
@@ -283,7 +317,9 @@ G_GNUC_INTERNAL void Init_gtk_vbox(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_viewport(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_volumebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_vpaned(VALUE mGtk);
+/* deprecated
 G_GNUC_INTERNAL void Init_gtk_vruler(VALUE mGtk);
+*/
 G_GNUC_INTERNAL void Init_gtk_vscale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_vscrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_vseparator(VALUE mGtk);

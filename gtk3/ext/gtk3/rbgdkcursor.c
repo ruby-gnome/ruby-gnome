@@ -47,6 +47,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         cursor = gdk_cursor_new_from_pixbuf(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
                                             GDK_PIXBUF(RVAL2GOBJ(pixbuf)), 
                                             NUM2INT(x), NUM2INT(y));
+/* deprecated
     } else if (argc == 6) {
         VALUE pixmap, mask, fg, bg, x, y;
         rb_scan_args(argc, argv, "60", &pixmap, &mask, &fg, &bg, &x, &y);
@@ -55,6 +56,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                             RVAL2GDKCOLOR(fg),
                                             RVAL2GDKCOLOR(bg),
                                             NUM2INT(x), NUM2INT(y));
+*/
     }
     G_INITIALIZE(self, cursor);
 
@@ -67,18 +69,22 @@ rg_display(VALUE self)
     return GOBJ2RVAL(gdk_cursor_get_display((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
 
+/* deprecated
 static VALUE
 rg_pixmap_p(VALUE self)
 {
     return CBOOL2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
                       GDK_CURSOR_IS_PIXMAP);
 }
+*/
 
+/* TODO
 static VALUE
 rg_cursor_type(VALUE self)
 {
     return GENUM2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR))->type, GDK_TYPE_CURSOR_TYPE);
 }
+*/
 
 static VALUE
 rg_image(VALUE self)
@@ -93,8 +99,12 @@ Init_gtk_gdk_cursor(VALUE mGdk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(display, 0);
+/* deprecated
     RG_DEF_METHOD_P(pixmap, 0);
+*/
+/* TODO
     RG_DEF_METHOD(cursor_type, 0);
+*/
     RG_DEF_METHOD(image, 0);
 
     G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", RG_TARGET_NAMESPACE);

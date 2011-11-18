@@ -46,6 +46,7 @@ link_func(GtkLinkButton *button, const gchar *link, gpointer func)
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(button), CSTR2RVAL(link));
 }
 
+/* deprecated
 static VALUE
 rg_s_set_uri_hook(VALUE self)
 {
@@ -54,6 +55,7 @@ rg_s_set_uri_hook(VALUE self)
     gtk_link_button_set_uri_hook((GtkLinkButtonUriFunc)link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
+*/
 
 void 
 Init_gtk_link_button(VALUE mGtk)
@@ -61,5 +63,7 @@ Init_gtk_link_button(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LINK_BUTTON, "LinkButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
+/* deprecated
     RG_DEF_SMETHOD(set_uri_hook, 0);
+*/
 }

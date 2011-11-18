@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+/* TODO
 #ifdef HAVE_GTK_PLUG_GET_TYPE
 
 #define RG_TARGET_NAMESPACE cPlug
@@ -46,14 +47,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/*
-GtkWidget*  gtk_plug_new_for_display        (GdkDisplay *display,
-GdkNativeWindow socket_id);
-void        gtk_plug_construct_for_display  (GtkPlug *plug,
-GdkDisplay *display,
-                                             GdkNativeWindow socket_id);
-*/
-
 static VALUE
 rg_construct(VALUE self, VALUE socket_id)
 {
@@ -76,11 +69,13 @@ rg_id(VALUE self)
 #endif
 }
 
-#endif /* HAVE_GTK_PLUG_GET_TYPE */
+#endif
+*/
 
 void 
 Init_gtk_plug(VALUE mGtk)
 {
+/* TODO
 #ifdef HAVE_GTK_PLUG_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PLUG, "Plug", mGtk);
 
@@ -88,4 +83,5 @@ Init_gtk_plug(VALUE mGtk)
     RG_DEF_METHOD(construct, 1);
     RG_DEF_METHOD(id, 0);
 #endif
+*/
 }
