@@ -5,5 +5,6 @@
 =end
 
 require 'gtk3/base'
+require 'gtk3/deprecated'
 
 Gtk.init

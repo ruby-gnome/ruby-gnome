@@ -26,6 +26,7 @@
 #define TREEVIEW_COL(c) (GTK_TREE_VIEW_COLUMN(RVAL2GOBJ(c)))
 #define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
 
+static VALUE rb_mGtk;
 static ID id_model;
 static ID id_selection;
 
@@ -652,14 +653,14 @@ search_position_func(GtkTreeView *tree_view, GtkWidget *search_dialog, gpointer 
 static void
 remove_callback_reference(gpointer data)
 {
-    G_CHILD_REMOVE(mGtk, (VALUE)data);
+    G_CHILD_REMOVE(rb_mGtk, (VALUE)data);
 }
 
 static VALUE
 rg_set_search_position_func(VALUE self)
 {
     VALUE func = rb_block_proc();
-    G_CHILD_ADD(mGtk, func);
+    G_CHILD_ADD(rb_mGtk, func);
     gtk_tree_view_set_search_position_func(_SELF(self),
                                            (GtkTreeViewSearchPositionFunc)search_position_func,
                                            (gpointer)func,
@@ -670,6 +671,7 @@ rg_set_search_position_func(VALUE self)
 void 
 Init_gtk_treeview(VALUE mGtk)
 {
+    rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_VIEW, "TreeView", mGtk);
 
     id_selection = rb_intern("selection");
