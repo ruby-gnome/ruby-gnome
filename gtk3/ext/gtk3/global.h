@@ -106,9 +106,6 @@ G_GNUC_INTERNAL void Init_gtk_comboboxentry(VALUE mGtk);
 */
 G_GNUC_INTERNAL void Init_gtk_const(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_container(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_curve(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drag(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drawing_area(VALUE mGtk);
@@ -131,9 +128,6 @@ G_GNUC_INTERNAL void Init_gtk_fontbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_font_selection(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_font_selection_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_frame(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gamma_curve(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_handle_box(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hbutton_box(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hbox(VALUE mGtk);

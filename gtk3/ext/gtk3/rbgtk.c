@@ -612,9 +612,6 @@ Init_gtk_gtk(void)
 */
     Init_gtk_const(RG_TARGET_NAMESPACE);
     Init_gtk_container(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_curve(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_drag(RG_TARGET_NAMESPACE);
     Init_gtk_drawing_area(RG_TARGET_NAMESPACE);
@@ -637,9 +634,6 @@ Init_gtk_gtk(void)
     Init_gtk_font_selection(RG_TARGET_NAMESPACE);
     Init_gtk_font_selection_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_frame(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_gamma_curve(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);
     Init_gtk_hbutton_box(RG_TARGET_NAMESPACE);
     Init_gtk_hbox(RG_TARGET_NAMESPACE);
