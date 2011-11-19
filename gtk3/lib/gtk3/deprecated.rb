@@ -66,5 +66,11 @@ module Gtk
     define_deprecated_method :set_screen, :warn => "Don't use this method."
     alias :screen= :set_screen
   end
+
+  class TreeView
+    extend GLib::Deprecatable
+    define_deprecated_method :widget_to_tree_coords, :convert_widget_to_bin_window_coords
+    define_deprecated_method :tree_to_widget_coords, :convert_bin_window_to_widget_coords
+  end
 end
 
