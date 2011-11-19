@@ -738,9 +738,6 @@ Init_gtk_gtk(void)
     Init_gtk_toolbutton(RG_TARGET_NAMESPACE);
     Init_gtk_toolitem(RG_TARGET_NAMESPACE);
     Init_gtk_tooltip(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_tooltips(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_treedragdest(RG_TARGET_NAMESPACE);
     Init_gtk_treedragsource(RG_TARGET_NAMESPACE);
     Init_gtk_treeiter(RG_TARGET_NAMESPACE);

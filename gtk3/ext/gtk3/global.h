@@ -230,9 +230,6 @@ G_GNUC_INTERNAL void Init_gtk_toolbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolitem(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tooltip(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_tooltips(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_treedragdest(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_treedragsource(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_treeiter(VALUE mGtk);
