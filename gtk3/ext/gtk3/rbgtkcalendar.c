@@ -87,20 +87,6 @@ rg_date(VALUE self)
 
 /* deprecated
 static VALUE
-rg_freeze(VALUE self)
-{
-    gtk_calendar_freeze(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_thaw(VALUE self)
-{
-    gtk_calendar_thaw(_SELF(self));
-    return self;
-}
-
-static VALUE
 rg_display_options(int argc, VALUE *argv, VALUE self)
 {
     VALUE flags;
@@ -140,8 +126,6 @@ Init_gtk_calendar(VALUE mGtk)
     RG_DEF_METHOD(clear_marks, 0);
     RG_DEF_METHOD(date, 0);
 /* deprecated
-    RG_DEF_METHOD(freeze, 0);
-    RG_DEF_METHOD(thaw, 0);
     RG_DEF_METHOD(display_options, -1);
 */
     RG_DEF_METHOD(set_display_options, 1);

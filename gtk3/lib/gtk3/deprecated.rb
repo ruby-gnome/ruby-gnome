@@ -22,6 +22,12 @@ module Gtk
     define_deprecated_method :pack_end_defaults, :pack_end
   end
 
+  class Calendar
+    extend GLib::Deprecatable
+    define_deprecated_method :freeze, :warn => "Don't use this method."
+    define_deprecated_method :thaw, :warn => "Don't use this method."
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
