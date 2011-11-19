@@ -88,6 +88,7 @@ module Gtk
     alias :colormap= :set_colormap
     define_deprecated_method :shape_combine_mask, :warn => "Don't use this method."
     define_deprecated_method :input_shape_combine_mask, :warn => "Don't use this method."
+    define_deprecated_method :reset_shapes, :warn => "Don't use this method."
   end
 end
 

@@ -558,15 +558,6 @@ rg_queue_draw_area(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_reset_shapes(VALUE self)
-{
-    gtk_widget_reset_shapes(_SELF(self));
-    return self;
-}
-*/
-
 static VALUE
 rg_set_redraw_on_allocate(VALUE self, VALUE redraw_on_allocate)
 {
@@ -1137,9 +1128,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(create_pango_layout, -1);
     RG_DEF_METHOD(render_icon, -1);
     RG_DEF_METHOD(queue_draw_area, 4);
-/* deprecated
-    RG_DEF_METHOD(reset_shapes, 0);
-*/
     RG_DEF_METHOD(set_redraw_on_allocate, 1);
     RG_DEF_METHOD(set_composite_name, 1);
 /* deprecated?
