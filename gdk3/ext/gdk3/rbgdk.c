@@ -511,9 +511,6 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_atom(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_cairo();
     Init_gtk_gdk_color(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_gdk_colormap(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_gdk_const(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_cursor(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_device(RG_TARGET_NAMESPACE);

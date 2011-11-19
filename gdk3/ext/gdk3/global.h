@@ -53,9 +53,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk(void);
 G_GNUC_INTERNAL void Init_gtk_gdk_atom(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_cairo(void);
 G_GNUC_INTERNAL void Init_gtk_gdk_color(VALUE mGdk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_colormap(VALUE mGdk);
-*/
 G_GNUC_INTERNAL void Init_gtk_gdk_const(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_cursor(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_device(VALUE mGdk);
