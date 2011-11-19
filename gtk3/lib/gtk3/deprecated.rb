@@ -28,6 +28,13 @@ module Gtk
     define_deprecated_method :thaw, :warn => "Don't use this method."
   end
 
+  class CellRenderer
+    extend GLib::Deprecatable
+    define_deprecated_method :editing_canceled, :warn => "Use '#{self}#stop_editing'." do |_self|
+      _self.stop_editing(true)
+    end
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
