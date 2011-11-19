@@ -61,9 +61,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk_display_manager(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_dragcontext(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_event(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_geometry(VALUE mGdk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_input(VALUE mGdk);
-*/
 G_GNUC_INTERNAL void Init_gtk_gdk_keymap(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_keyval(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_pango(VALUE mGdk);

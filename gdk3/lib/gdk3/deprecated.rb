@@ -3,6 +3,7 @@ module Gdk
   define_deprecated_const :Pixmap, :raise => "Use 'Cairo::Surface' instead."
   define_deprecated_const :Image, :raise => "Use 'Gdk::Pixbuf' or 'Cairo::Surface' instead."
   define_deprecated_const :Colormap, :raise => "Use 'Gdk::Visual' instead."
+  define_deprecated_const :Input, :raise => "Use 'GLib::IOChannel' instead."
 
   module Keyval
     extend GLib::Deprecatable

@@ -519,9 +519,6 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_dragcontext(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_event(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_geometry(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_gdk_input(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_gdk_keymap(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_keyval(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_pango(RG_TARGET_NAMESPACE);
