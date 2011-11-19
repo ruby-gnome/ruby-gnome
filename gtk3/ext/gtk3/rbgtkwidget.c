@@ -879,14 +879,6 @@ rg_trigger_tooltip_query(VALUE self)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_action(VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_action(_SELF(self)));
-}
-*/
-
 static VALUE
 rg_composited_p(VALUE self)
 {
@@ -1147,9 +1139,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_tooltip_window, 1);
     RG_DEF_METHOD(tooltip_window, 0);
     RG_DEF_METHOD(trigger_tooltip_query, 0);
-/* deprecated
-    RG_DEF_METHOD(action, 0);
-*/
     RG_DEF_METHOD_P(composited, 0);
     RG_DEF_METHOD(set_window, 1);
 /* deprecated

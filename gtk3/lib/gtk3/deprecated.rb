@@ -91,6 +91,9 @@ module Gtk
     define_deprecated_method :reset_shapes, :warn => "Don't use this method."
     define_deprecated_method :set_scroll_adjustments, :warn => "Use 'Gtk::Scrollable#set_hadjustment' and 'Gtk::Scrollable#set_vadjustment'."
     alias :set_scroll_adjustment :set_scroll_adjustments
+    define_deprecated_method :action, :warn => "Use 'Gtk::Activatable#related_action'." do |_self|
+      _self.related_action
+    end
   end
 end
 
