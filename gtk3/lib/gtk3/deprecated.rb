@@ -83,6 +83,9 @@ module Gtk
   class Widget
     extend GLib::Deprecatable
     define_deprecated_method :hide_all, :hide
+    define_deprecated_method :colormap, :raise => "Use '#{self}#visual'."
+    define_deprecated_method :set_colormap, :warn => "Use '#{self}#set_visual'."
+    alias :colormap= :set_colormap
   end
 end
 

@@ -278,21 +278,6 @@ rg_get_ancestor(VALUE self, VALUE klass)
     return GOBJ2RVAL(gtk_widget_get_ancestor(_SELF(self), CLASS2GTYPE(klass)));
 }
 
-/* deprecated?
-static VALUE
-rg_colormap(VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_colormap(_SELF(self)));
-}
-
-static VALUE
-rg_set_colormap(VALUE self, VALUE colormap)
-{
-    gtk_widget_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
-    return self;
-}
-*/
-
 static VALUE
 rg_visual(VALUE self)
 {
@@ -1149,10 +1134,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(add_events, 1);
     RG_DEF_METHOD(toplevel, 0);
     RG_DEF_METHOD(get_ancestor, 1);
-/* deprecated?
-    RG_DEF_METHOD(colormap, 0);
-    RG_DEF_METHOD(set_colormap, 1);
-*/
     RG_DEF_METHOD(visual, 0);
     RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD_P(ancestor, 1);
