@@ -86,15 +86,6 @@ rg_show_all(VALUE self)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_hide_all(VALUE self)
-{
-    gtk_widget_hide_all(_SELF(self));
-    return self;
-}
-*/
-
 static VALUE
 rg_map(VALUE self)
 {
@@ -1129,9 +1120,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(show_now, 0);
     RG_DEF_METHOD(hide, 0);
     RG_DEF_METHOD(show_all, 0);
-/* deprecated
-    RG_DEF_METHOD(hide_all, 0);
-*/
     RG_DEF_METHOD(map, 0);
     RG_DEF_METHOD(unmap, 0);
     RG_DEF_METHOD(realize, 0);

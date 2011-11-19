@@ -79,5 +79,10 @@ module Gtk
       _self.cells
     end
   end
+
+  class Widget
+    extend GLib::Deprecatable
+    define_deprecated_method :hide_all, :hide
+  end
 end
 
