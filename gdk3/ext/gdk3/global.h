@@ -75,9 +75,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk_pango(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_pangorenderer(VALUE mGdk);
 */
 G_GNUC_INTERNAL void Init_gtk_gdk_pixbuf(VALUE mGdk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_pixmap(VALUE mGdk);
-*/
 G_GNUC_INTERNAL void Init_gtk_gdk_property(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_rectangle(VALUE mGdk);
 /* deprecated
