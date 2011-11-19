@@ -35,6 +35,13 @@ module Gtk
     end
   end
 
+  class CellView
+    extend GLib::Deprecatable
+    define_deprecated_method :cell_renderers, :warn => "Use 'Gtk::CellLayout#cells'." do |_self|
+      _self.cells
+    end
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child

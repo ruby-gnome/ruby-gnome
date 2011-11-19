@@ -121,6 +121,12 @@ rg_set_attributes(VALUE self, VALUE cell, VALUE attrs)
     return self;
 }
 
+static VALUE
+rg_cells(VALUE self)
+{
+    return GLIST2ARYF(gtk_cell_layout_get_cells(_SELF(self)));
+}
+
 void
 Init_gtk_celllayout(VALUE mGtk)
 {
@@ -134,4 +140,5 @@ Init_gtk_celllayout(VALUE mGtk)
     RG_DEF_METHOD(set_cell_data_func, 1);
     RG_DEF_METHOD(clear_attributes, 1);
     RG_DEF_METHOD(set_attributes, 2);
+    RG_DEF_METHOD(cells, 0);
 }
