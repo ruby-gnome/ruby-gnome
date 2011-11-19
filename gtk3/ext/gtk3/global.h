@@ -147,7 +147,6 @@ G_GNUC_INTERNAL void Init_gtk_im_multicontext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_invisible(VALUE mGtk);
 /* deprecated
 G_GNUC_INTERNAL void Init_gtk_item(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_itemfactory(VALUE mGtk);
 */
 G_GNUC_INTERNAL void Init_gtk_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_layout(VALUE mGtk);
