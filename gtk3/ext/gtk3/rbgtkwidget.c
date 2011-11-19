@@ -1046,6 +1046,19 @@ rg_bindings_activate(VALUE self, VALUE keyval, VALUE modifiers)
 }
 
 static VALUE
+rg_has_window_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_has_window(_SELF(self)));
+}
+
+static VALUE
+rg_set_has_window(VALUE self, VALUE has_window)
+{
+    gtk_widget_set_has_window(_SELF(self), RVAL2CBOOL(has_window));
+    return self;
+}
+
+static VALUE
 rg_s_binding_set(VALUE self)
 {
     GType gtype;
@@ -1263,6 +1276,8 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_SMETHOD(pop_composite_child, 0);
     RG_DEF_SMETHOD(push_composite_child, 0);
     RG_DEF_SMETHOD(binding_set, 0);
+    RG_DEF_METHOD_P(has_window, 0);
+    RG_DEF_METHOD(set_has_window, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

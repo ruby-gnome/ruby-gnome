@@ -50,21 +50,6 @@ rg_move(VALUE self, VALUE win, VALUE x, VALUE y)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_has_window_p(VALUE self)
-{
-    return CBOOL2RVAL(gtk_fixed_get_has_window(_SELF(self)));
-}
-
-static VALUE
-rg_set_has_window(VALUE self, VALUE has_window)
-{
-    gtk_fixed_set_has_window(_SELF(self), RVAL2CBOOL(has_window));
-    return self;
-}
-*/
-
 void 
 Init_gtk_fixed(VALUE mGtk)
 {
@@ -73,10 +58,6 @@ Init_gtk_fixed(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(put, 3);
     RG_DEF_METHOD(move, 3);
-/* deprecated
-    RG_DEF_METHOD_P(has_window, 0);
-    RG_DEF_METHOD(set_has_window, 1);
-*/
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
