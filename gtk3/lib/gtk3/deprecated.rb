@@ -72,5 +72,12 @@ module Gtk
     define_deprecated_method :widget_to_tree_coords, :convert_widget_to_bin_window_coords
     define_deprecated_method :tree_to_widget_coords, :convert_bin_window_to_widget_coords
   end
+
+  class TreeViewColumn
+    extend GLib::Deprecatable
+    define_deprecated_method :cell_renderers, :warn => "Use 'Gtk::CellLayout#cells'." do |_self|
+      _self.cells
+    end
+  end
 end
 
