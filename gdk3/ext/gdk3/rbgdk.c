@@ -511,9 +511,6 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_atom(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_cairo();
     Init_gtk_gdk_color(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_gdk_colormap(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_gdk_const(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_cursor(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_device(RG_TARGET_NAMESPACE);
@@ -522,10 +519,6 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_dragcontext(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_event(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_geometry(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_gdk_image(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_input(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_gdk_keymap(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_keyval(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_pango(RG_TARGET_NAMESPACE);
@@ -533,9 +526,6 @@ Init_gtk_gdk(void)
     Init_gtk_gdk_pangorenderer(RG_TARGET_NAMESPACE);
 */
     Init_gtk_gdk_pixbuf(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_gdk_pixmap(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_gdk_property(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_rectangle(RG_TARGET_NAMESPACE);
 /* deprecated

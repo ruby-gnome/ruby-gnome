@@ -53,9 +53,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk(void);
 G_GNUC_INTERNAL void Init_gtk_gdk_atom(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_cairo(void);
 G_GNUC_INTERNAL void Init_gtk_gdk_color(VALUE mGdk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_colormap(VALUE mGdk);
-*/
 G_GNUC_INTERNAL void Init_gtk_gdk_const(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_cursor(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_device(VALUE mGdk);
@@ -64,10 +61,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk_display_manager(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_dragcontext(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_event(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_geometry(VALUE mGdk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_image(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_input(VALUE mGdk);
-*/
 G_GNUC_INTERNAL void Init_gtk_gdk_keymap(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_keyval(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_pango(VALUE mGdk);
@@ -75,9 +68,6 @@ G_GNUC_INTERNAL void Init_gtk_gdk_pango(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_pangorenderer(VALUE mGdk);
 */
 G_GNUC_INTERNAL void Init_gtk_gdk_pixbuf(VALUE mGdk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_pixmap(VALUE mGdk);
-*/
 G_GNUC_INTERNAL void Init_gtk_gdk_property(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_rectangle(VALUE mGdk);
 /* deprecated
