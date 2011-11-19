@@ -89,6 +89,8 @@ module Gtk
     define_deprecated_method :shape_combine_mask, :warn => "Don't use this method."
     define_deprecated_method :input_shape_combine_mask, :warn => "Don't use this method."
     define_deprecated_method :reset_shapes, :warn => "Don't use this method."
+    define_deprecated_method :set_scroll_adjustments, :warn => "Use 'Gtk::Scrollable#set_hadjustment' and 'Gtk::Scrollable#set_vadjustment'."
+    alias :set_scroll_adjustment :set_scroll_adjustments
   end
 end
 

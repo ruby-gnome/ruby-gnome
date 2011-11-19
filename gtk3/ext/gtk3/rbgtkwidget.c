@@ -572,16 +572,6 @@ rg_set_composite_name(VALUE self, VALUE name)
     return self;
 }
 
-/* deprecated?
-static VALUE
-rg_set_scroll_adjustments(VALUE self, VALUE h, VALUE v)
-{
-    return CBOOL2RVAL(gtk_widget_set_scroll_adjustments(_SELF(self),
-                                                        GTK_ADJUSTMENT(_SELF(h)),
-                                                        GTK_ADJUSTMENT(_SELF(v))));
-}
-*/
-
 static VALUE
 rg_mnemonic_activate(VALUE self, VALUE group_cycling)
 {
@@ -1130,10 +1120,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(queue_draw_area, 4);
     RG_DEF_METHOD(set_redraw_on_allocate, 1);
     RG_DEF_METHOD(set_composite_name, 1);
-/* deprecated?
-    RG_DEF_METHOD(set_scroll_adjustments, 2);
-    RG_DEF_ALIAS("set_scroll_adjustment", "set_scroll_adjustments");
-*/
     RG_DEF_METHOD(mnemonic_activate, 1);
     RG_DEF_METHOD(region_intersect, 1);
     RG_DEF_METHOD(send_expose, 1);
