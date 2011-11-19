@@ -258,9 +258,10 @@ module GLib
     end
 
     def define_deprecated_method(deprecated_method, new_method)
+      klass = self
       if public_method_defined?(new_method)
         define_method(deprecated_method) do |*args, &block|
-          warn "#{caller[0]}: '#{deprecated_method}' has been deprecated. Use '#{new_method}'."
+          warn "#{caller[0]}: '#{klass}##{deprecated_method}' has been deprecated. Use '#{klass}##{new_method}'."
           __send__(new_method, *args, &block)
         end
       end

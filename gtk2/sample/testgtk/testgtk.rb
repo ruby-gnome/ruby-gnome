@@ -32,6 +32,8 @@ Original Copyright:
 
 =end
 
+$:.unshift(File.dirname(__FILE__))
+
 require 'gtk2'
 require 'sample'
 require 'button'

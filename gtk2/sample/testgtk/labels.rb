@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 =begin header
 
   labels.rb - a part of testgtk.c rewritten in Ruby/GTK2
