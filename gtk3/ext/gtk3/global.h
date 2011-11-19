@@ -132,9 +132,6 @@ G_GNUC_INTERNAL void Init_gtk_handle_box(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hbutton_box(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hbox(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hpaned(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_hruler(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_hscale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hscrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_hseparator(VALUE mGtk);
@@ -204,9 +201,6 @@ G_GNUC_INTERNAL void Init_gtk_recent_filter(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_filter_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_manager(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_ruler(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_scale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scalebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollbar(VALUE mGtk);
@@ -268,9 +262,6 @@ G_GNUC_INTERNAL void Init_gtk_vbox(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_viewport(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_volumebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_vpaned(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_vruler(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_vscale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_vscrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_vseparator(VALUE mGtk);

@@ -638,9 +638,6 @@ Init_gtk_gtk(void)
     Init_gtk_hbutton_box(RG_TARGET_NAMESPACE);
     Init_gtk_hbox(RG_TARGET_NAMESPACE);
     Init_gtk_hpaned(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_hruler(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_hscale(RG_TARGET_NAMESPACE);
     Init_gtk_hscrollbar(RG_TARGET_NAMESPACE);
     Init_gtk_hseparator(RG_TARGET_NAMESPACE);
@@ -712,9 +709,6 @@ Init_gtk_gtk(void)
     Init_gtk_recent_filter_info(RG_TARGET_NAMESPACE);
     Init_gtk_recent_info(RG_TARGET_NAMESPACE);
     Init_gtk_recent_manager(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_ruler(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_scale(RG_TARGET_NAMESPACE);
     Init_gtk_scalebutton(RG_TARGET_NAMESPACE);
     Init_gtk_scrollbar(RG_TARGET_NAMESPACE);
@@ -776,9 +770,6 @@ Init_gtk_gtk(void)
     Init_gtk_viewport(RG_TARGET_NAMESPACE);
     Init_gtk_volumebutton(RG_TARGET_NAMESPACE);
     Init_gtk_vpaned(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_vruler(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_vscale(RG_TARGET_NAMESPACE);
     Init_gtk_vscrollbar(RG_TARGET_NAMESPACE);
     Init_gtk_vseparator(RG_TARGET_NAMESPACE);
