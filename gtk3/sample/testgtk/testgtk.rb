@@ -60,7 +60,6 @@ require 'notebook'
 require 'shapedwindow'
 require 'wmhints'
 require 'progressbar'
-require 'gammacurve'
 require 'savedposition'
 require 'filesel'
 require 'fontselection'
@@ -78,7 +77,6 @@ def create_main_window
     ["entry", EntrySample],
     ["file selection", FileSelectionSample],
     ["font selection", FontSelectionSample],
-    ["gamma curve", GammaCurveSample],
     ["labels", LabelSample],
     ["layout", LayoutSample],
     ["menus", MenuSample],
