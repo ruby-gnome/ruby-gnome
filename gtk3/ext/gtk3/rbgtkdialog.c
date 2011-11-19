@@ -194,14 +194,6 @@ rg_set_alternative_button_order(VALUE self, VALUE rbnew_order)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_vbox(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->vbox);
-}
-*/
-
 static VALUE
 rg_action_area(VALUE self)
 {
@@ -232,9 +224,6 @@ Init_gtk_dialog(VALUE mGtk)
     RG_DEF_SMETHOD_P(alternative_dialog_button_order, 1);
     RG_DEF_METHOD(set_alternative_button_order, 1);
     RG_DEF_METHOD(set_response_sensitive, 2);
-/* deprecated
-    RG_DEF_METHOD(vbox, 0);
-*/
     RG_DEF_METHOD(action_area, 0);
     RG_DEF_METHOD(get_response, 1);
     RG_DEF_ALIAS("get_response_for_widget", "get_response");
