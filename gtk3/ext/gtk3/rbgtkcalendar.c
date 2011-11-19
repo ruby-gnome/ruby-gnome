@@ -85,24 +85,12 @@ rg_date(VALUE self)
     return ret;
 }
 
-/* deprecated
 static VALUE
-rg_display_options(int argc, VALUE *argv, VALUE self)
+rg_display_options(VALUE self)
 {
-    VALUE flags;
-    rb_scan_args(argc, argv, "01", &flags);
-
-    if NIL_P(flags){
-        return GFLAGS2RVAL(gtk_calendar_get_display_options(_SELF(self)),
-                           GTK_TYPE_CALENDAR_DISPLAY_OPTIONS);
-    } else {
-        rb_warning("Gtk::Calendar#display_options(flags) has been deprecated. Use Gtk::Calendar#set_display_options(flags).");
-        gtk_calendar_display_options(_SELF(self), 
-                                     RVAL2GFLAGS(flags, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS));
-    }
-    return self;
+    return GFLAGS2RVAL(gtk_calendar_get_display_options(_SELF(self)),
+                       GTK_TYPE_CALENDAR_DISPLAY_OPTIONS);
 }
-*/
 
 static VALUE
 rg_set_display_options(VALUE self, VALUE flags)
@@ -125,9 +113,7 @@ Init_gtk_calendar(VALUE mGtk)
     RG_DEF_METHOD(unmark_day, 1);
     RG_DEF_METHOD(clear_marks, 0);
     RG_DEF_METHOD(date, 0);
-/* deprecated
-    RG_DEF_METHOD(display_options, -1);
-*/
+    RG_DEF_METHOD(display_options, 0);
     RG_DEF_METHOD(set_display_options, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_options");
 
