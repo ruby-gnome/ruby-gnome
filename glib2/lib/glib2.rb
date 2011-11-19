@@ -261,19 +261,20 @@ module GLib
       @@deprecated_const[self][deprecated_const.to_sym] = new_const
     end
 
-    def define_deprecated_method(deprecated_method, new_method = {})
+    def define_deprecated_method(deprecated_method, new_method = {}, &block)
       klass = self
-      define_method(deprecated_method) do |*args, &block|
+      define_method(deprecated_method) do |*args, &mblock|
         msg = "#{caller[0]}: '#{klass}##{deprecated_method}' has been deprecated."
         case new_method
         when String, Symbol
           warn "#{msg} Use '#{klass}##{new_method}'."
-          __send__(new_method, *args, &block)
+          __send__(new_method, *args, &mblock)
         when Hash
           if new_method[:raise]
             raise DeprecatedError.new("#{msg} #{new_method[:raise]}")
           elsif new_method[:warn]
             warn "#{msg} #{new_method[:warn]}"
+            block.call(self, *args, &mblock) if block
           end
         end
       end
