@@ -46,5 +46,10 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
   end
+
+  class FontSelectionDialog
+    extend GLib::Deprecatable
+    define_deprecated_method :apply_button, :raise => "Don't use this method."
+  end
 end
 
