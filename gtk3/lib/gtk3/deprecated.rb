@@ -7,6 +7,7 @@ module Gtk
   define_deprecated_const :VRuler, :raise => "Don't use this widget anymore."
   define_deprecated_const :InputDialog, :raise => "Don't use this widget anymore."
   define_deprecated_const :Combo, :raise => "Use Gtk::ComboBox instead."
+  define_deprecated_const :OptionMenu, :raise => "Use Gtk::ComboBox instead."
 
   class BindingSet
     extend GLib::Deprecatable
