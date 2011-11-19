@@ -88,14 +88,6 @@ rg_clear(VALUE self)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_cell_renderers(VALUE self)
-{
-    return GLIST2ARYF(gtk_tree_view_column_get_cell_renderers(_SELF(self)));
-}
-*/
-
 static VALUE
 rg_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
 {
@@ -249,9 +241,6 @@ Init_gtk_treeviewcolumn(VALUE mGtk)
     RG_DEF_METHOD(pack_start, 2);
     RG_DEF_METHOD(pack_end, 2);
     RG_DEF_METHOD(clear, 0);
-/* deprecated
-    RG_DEF_METHOD(cell_renderers, 0);
-*/
     RG_DEF_METHOD(add_attribute, 3);
     RG_DEF_METHOD(set_attributes, 2);
     RG_DEF_METHOD(set_cell_data_func, 1);

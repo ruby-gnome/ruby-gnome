@@ -362,28 +362,6 @@ rg_bin_window(VALUE self)
     return GOBJ2RVAL(gtk_tree_view_get_bin_window(_SELF(self)));
 }
 
-/* deprecated
-static VALUE
-rg_widget_to_tree_coords(VALUE self, VALUE wx, VALUE wy)
-{
-    gint tx, ty;
-    gtk_tree_view_widget_to_tree_coords(_SELF(self), 
-                                        NUM2INT(wx), NUM2INT(wy), 
-                                        &tx, &ty);
-    return rb_ary_new3(2, INT2NUM(tx), INT2NUM(ty));
-}
-
-static VALUE
-rg_tree_to_widget_coords(VALUE self, VALUE tx, VALUE ty)
-{
-    gint wx, wy;
-    gtk_tree_view_tree_to_widget_coords(_SELF(self),
-                                        NUM2INT(tx), NUM2INT(ty), 
-                                        &wx, &wy);
-    return rb_ary_new3(2, INT2NUM(wx), INT2NUM(wy));
-}
-*/
-
 static VALUE
 rg_convert_bin_window_to_tree_coords(VALUE self, VALUE bx, VALUE by)
 {
@@ -705,10 +683,6 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(visible_rect, 0);
     RG_DEF_METHOD(visible_range, 0);
     RG_DEF_METHOD(bin_window, 0);
-/* deprecated
-    RG_DEF_METHOD(widget_to_tree_coords, 2);
-    RG_DEF_METHOD(tree_to_widget_coords, 2);
-*/
     RG_DEF_METHOD(convert_bin_window_to_tree_coords, 2);
     RG_DEF_METHOD(convert_bin_window_to_widget_coords, 2);
     RG_DEF_METHOD(convert_tree_to_bin_window_coords, 2);

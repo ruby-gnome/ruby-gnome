@@ -62,31 +62,23 @@ rg_set_preview_text(VALUE self, VALUE text)
     return self;
 }
 
-/* deprecated
 static VALUE
 rg_font_selection(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->fontsel);
+    return GOBJ2RVAL(gtk_font_selection_dialog_get_font_selection(_SELF(self)));
 }
 
 static VALUE
 rg_ok_button(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->ok_button);
+    return GOBJ2RVAL(gtk_font_selection_dialog_get_ok_button(_SELF(self)));
 }
 
 static VALUE
 rg_cancel_button(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->cancel_button);
+    return GOBJ2RVAL(gtk_font_selection_dialog_get_cancel_button(_SELF(self)));
 }
-
-static VALUE
-rg_apply_button(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->apply_button);
-}
-*/
 
 void 
 Init_gtk_font_selection_dialog(VALUE mGtk)
@@ -99,12 +91,9 @@ Init_gtk_font_selection_dialog(VALUE mGtk)
     RG_DEF_METHOD(set_font_name, 1);
     RG_DEF_METHOD(preview_text, 0);
     RG_DEF_METHOD(set_preview_text, 1);
-/* deprecated
     RG_DEF_METHOD(font_selection, 0);
     RG_DEF_METHOD(ok_button, 0);
     RG_DEF_METHOD(cancel_button, 0);
-    RG_DEF_METHOD(apply_button, 0);
-*/
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

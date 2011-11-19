@@ -72,32 +72,6 @@ rg_child2(VALUE self)
     return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
-/* deprecated
-static VALUE
-rg_child1_resize_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->child1_resize);
-}
-
-static VALUE
-rg_child1_shrink_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->child1_shrink);
-}
-
-static VALUE
-rg_child2_resize_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->child2_resize);
-}
-
-static VALUE
-rg_child2_shrink_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->child2_shrink);
-}
-*/
-
 void 
 Init_gtk_paned(VALUE mGtk)
 {
@@ -109,10 +83,4 @@ Init_gtk_paned(VALUE mGtk)
     RG_DEF_METHOD(pack2, 3);
     RG_DEF_METHOD(child1, 0);
     RG_DEF_METHOD(child2, 0);
-/* deprecated
-    RG_DEF_METHOD_P(child1_resize, 0);
-    RG_DEF_METHOD_P(child1_shrink, 0);
-    RG_DEF_METHOD_P(child2_resize, 0);
-    RG_DEF_METHOD_P(child2_shrink, 0);
-*/
 }
