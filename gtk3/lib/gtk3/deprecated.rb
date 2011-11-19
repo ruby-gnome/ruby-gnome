@@ -51,5 +51,14 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method :apply_button, :raise => "Don't use this method."
   end
+
+  class Paned
+    extend GLib::Deprecatable
+    %w(child1 child2).product(%w(resize shrink)).each do |child, prop|
+      define_deprecated_method "#{child}_#{prop}?", :warn => "Use '#{prop}' child property." do |_self|
+        _self.child_get_property(_self.send(child), prop)
+      end
+    end
+  end
 end
 
