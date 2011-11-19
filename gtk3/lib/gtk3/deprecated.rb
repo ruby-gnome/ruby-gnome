@@ -16,6 +16,12 @@ module Gtk
     define_deprecated_method :entry_clear, :entry_remove
   end
 
+  class Box
+    extend GLib::Deprecatable
+    define_deprecated_method :pack_start_defaults, :pack_start
+    define_deprecated_method :pack_end_defaults, :pack_end
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
