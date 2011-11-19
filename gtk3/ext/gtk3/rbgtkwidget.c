@@ -403,28 +403,6 @@ rg_s_default_direction(G_GNUC_UNUSED VALUE self)
     return GENUM2RVAL(gtk_widget_get_default_direction(), GTK_TYPE_TEXT_DIRECTION);
 }
 
-/* deprecated?
-static VALUE
-rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
-{
-    gtk_widget_shape_combine_mask(_SELF(self),
-                                  GDK_BITMAP(RVAL2GOBJ(shape_mask)),
-                                  NUM2INT(offset_x),
-                                  NUM2INT(offset_y));
-    return self;
-}
-
-static VALUE
-rg_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
-{
-    gtk_widget_input_shape_combine_mask(_SELF(self),
-                                        GDK_BITMAP(RVAL2GOBJ(shape_mask)),
-                                        NUM2INT(offset_x),
-                                        NUM2INT(offset_y));
-    return self;
-}
-*/
-
 static VALUE
 rg_path(VALUE self)
 {
@@ -1143,10 +1121,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(reset_rc_styles, 0);
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
-/* deprecated?
-    RG_DEF_METHOD(shape_combine_mask, 3);
-    RG_DEF_METHOD(input_shape_combine_mask, 3);
-*/
     RG_DEF_METHOD(path, 0);
     RG_DEF_METHOD(class_path, 0);
     RG_DEF_METHOD(composite_name, 0);
