@@ -5,6 +5,7 @@ module Gtk
   define_deprecated_const :Ruler, :raise => "Don't use this widget anymore."
   define_deprecated_const :HRuler, :raise => "Don't use this widget anymore."
   define_deprecated_const :VRuler, :raise => "Don't use this widget anymore."
+  define_deprecated_const :InputDialog, :raise => "Don't use this widget anymore."
 
   class BindingSet
     extend GLib::Deprecatable
