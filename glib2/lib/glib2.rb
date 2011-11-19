@@ -252,8 +252,12 @@ module GLib
   module Deprecatable
     @@deprecated_const = {}
 
-    def define_deprecated_const(deprecated_const, new_const)
+    def define_deprecated_const(deprecated_const, new_const = {})
       @@deprecated_const[self] ||= {}
+      case new_const
+      when String, Symbol
+        new_const = new_const.to_s
+      end
       @@deprecated_const[self][deprecated_const.to_sym] = new_const
     end
 
@@ -271,11 +275,20 @@ module GLib
 
     def const_missing(deprecated_const)
       if new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
-        if new_const_val = constant_get(new_const)
-          warn "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated. Use '#{new_const}'."
-          const_set(deprecated_const, new_const_val)
+        msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
+        if new_const.is_a?(String)
+          if new_const_val = constant_get(new_const)
+            warn "#{msg} Use '#{new_const}'."
+            const_set(deprecated_const, new_const_val)
+          else
+            super
+          end
         else
-          super
+          if new_const[:raise]
+            raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
+          else
+            super
+          end
         end
       else
         super
@@ -285,6 +298,9 @@ module GLib
     def constant_get(const)
       const.split('::').inject(Object){|r, c| r.const_get(c)} rescue nil
     end
+  end
+
+  class DeprecatedError < RuntimeError
   end
 end
 
