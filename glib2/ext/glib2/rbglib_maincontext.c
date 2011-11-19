@@ -436,6 +436,7 @@ invoke_source_func(gpointer data)
 }
 
 /*****************************************/
+#if !GLIB_CHECK_VERSION(2,30,0)
 GType
 g_main_context_get_type(void)
 {
@@ -446,6 +447,7 @@ g_main_context_get_type(void)
                     (GBoxedFreeFunc)g_main_context_unref);
   return our_type;
 }
+#endif
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cMainContext

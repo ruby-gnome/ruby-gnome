@@ -22,6 +22,7 @@
 #include "rbgprivate.h"
 
 /*****************************************/
+#if !GLIB_CHECK_VERSION(2,30,0)
 GType
 g_main_loop_get_type(void)
 {
@@ -32,6 +33,7 @@ g_main_loop_get_type(void)
                     (GBoxedFreeFunc)g_main_loop_unref);
   return our_type;
 }
+#endif
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cMainLoop

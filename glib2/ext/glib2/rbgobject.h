@@ -239,15 +239,20 @@ extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
 
 
 /* rbglib_mainloop.c */
-#define G_TYPE_MAIN_LOOP (g_main_loop_get_type())
-extern GType g_main_loop_get_type(void);
+#if !GLIB_CHECK_VERSION(2,30,0)
+  #define G_TYPE_MAIN_LOOP (g_main_loop_get_type())
+  extern GType g_main_loop_get_type(void);
+#endif
 
 /* rbglib_maincontext.c */
-#define G_TYPE_MAIN_CONTEXT (g_main_context_get_type())
-#define G_TYPE_SOURCE (g_source_get_type())
+#if !GLIB_CHECK_VERSION(2,30,0)
+  #define G_TYPE_MAIN_CONTEXT (g_main_context_get_type())
+  #define G_TYPE_SOURCE (g_source_get_type())
+  extern GType g_main_context_get_type(void);
+  extern GType g_source_get_type(void);
+#endif
+
 #define G_TYPE_POLL_FD (g_poll_fd_get_type())
-extern GType g_main_context_get_type(void);
-extern GType g_source_get_type(void);
 extern GType g_poll_fd_get_type(void);
 
 /* rbglib_keyfile.c */
