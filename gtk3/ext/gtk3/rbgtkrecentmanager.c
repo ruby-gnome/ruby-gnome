@@ -43,13 +43,6 @@ rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     return GOBJ2RVAL(gtk_recent_manager_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
 }
-
-static VALUE
-rg_set_screen(VALUE self, VALUE screen)
-{
-    gtk_recent_manager_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
-    return self;
-}
 */
 
 static VALUE
@@ -136,8 +129,6 @@ Init_gtk_recent_manager(VALUE mGtk)
     RG_DEF_SMETHOD(default, 0);
 /* deprecated
     RG_DEF_SMETHOD(get_for_screen, 1);
-    RG_DEF_METHOD(set_screen, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "set_screen");
 */
     RG_DEF_METHOD(add_item, -1);
     RG_DEF_METHOD(remove_item, 1);

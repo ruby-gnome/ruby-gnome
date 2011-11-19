@@ -278,24 +278,6 @@ rg_begin_move_drag(VALUE self, VALUE button, VALUE root_x, VALUE root_y, VALUE t
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_set_frame_dimensions(VALUE self, VALUE left, VALUE top, VALUE right, VALUE bottom)
-{
-    gtk_window_set_frame_dimensions(_SELF(self), NUM2INT(left),
-                                    NUM2INT(top), NUM2INT(right),
-                                    NUM2INT(bottom));
-    return self;
-}
-
-static VALUE
-rg_set_has_frame(VALUE self, VALUE setting)
-{
-    gtk_window_set_has_frame(_SELF(self), RVAL2CBOOL(setting));
-    return self;
-}
-*/
-
 static VALUE
 rg_set_mnemonic_modifier(VALUE self, VALUE modifier)
 {
@@ -317,26 +299,6 @@ rg_default_size(VALUE self)
     gtk_window_get_default_size(_SELF(self), &width, &height);
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
-
-/* deprecated
-static VALUE
-rg_frame_dimensions(VALUE self)
-{
-    int left, top, right, bottom;
-    gtk_window_get_frame_dimensions(_SELF(self), &left, &top, &right, &bottom);
-    return rb_ary_new3(4,
-                       INT2NUM(left),
-                       INT2NUM(top),
-                       INT2NUM(right),
-                       INT2NUM(bottom));
-}
-
-static VALUE
-rg_has_frame_p(VALUE self)
-{
-    return CBOOL2RVAL(gtk_window_get_has_frame(_SELF(self)));
-}
-*/
 
 static VALUE
 rg_icon_list(VALUE self)
@@ -468,37 +430,6 @@ rg_s_set_auto_startup_notification(VALUE self, VALUE setting)
     return self;
 }
 
-/* They are not public methods.
-static VALUE
-rg_decorated_window_init(VALUE self)
-{
-    gtk_decorated_window_init(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_decorated_window_calculate_frame_size(VALUE self)
-{
-    gtk_decorated_window_calculate_frame_size(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_decorated_window_set_title(VALUE self, VALUE title)
-{
-    gtk_decorated_window_set_title(_SELF(self), RVAL2CSTR(title));
-    return self;
-}
-
-static VALUE
-rg_decorated_window_move_resize_window(VALUE self)
-{
-    int x, y, width, height;
-    gtk_decorated_window_move_resize_window(_SELF(self), &x, &y, &width, &height);
-    return rb_ary_new3(4, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
-}
-*/
-
 static void
 mark_toplevels(G_GNUC_UNUSED void *_)
 {
@@ -545,17 +476,9 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(set_keep_below, 1);
     RG_DEF_METHOD(begin_resize_drag, 5);
     RG_DEF_METHOD(begin_move_drag, 4);
-/* deprecated
-    RG_DEF_METHOD(set_frame_dimensions, 4);
-*/
     RG_DEF_METHOD(set_mnemonic_modifier, 1);
     RG_DEF_METHOD(default_size, 0);
     RG_DEF_SMETHOD(default_icon_list, 0);
-/* deprecated
-    RG_DEF_METHOD(frame_dimensions, 0);
-    RG_DEF_METHOD(set_has_frame, 1);
-    RG_DEF_METHOD_P(has_frame, 0);
-*/
     RG_DEF_METHOD(icon_list, 0);
     RG_DEF_METHOD(mnemonic_modifier, 0);
     RG_DEF_METHOD(position, 0);
@@ -572,12 +495,6 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_SMETHOD(set_auto_startup_notification, 1);
 
-/*
-    RG_DEF_METHOD(decorated_window_init, 0);
-    RG_DEF_METHOD(decorated_window_calculate_frame_size, 0);   
-    RG_DEF_METHOD(decorated_window_set_title, 1);
-    RG_DEF_METHOD(decorated_window_move_resize_window, 0);
-*/
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkWindowPosition (from General constants) */

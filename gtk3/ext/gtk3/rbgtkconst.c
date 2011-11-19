@@ -91,12 +91,6 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_JUSTIFICATION, "Justification", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_JUSTIFICATION, "GTK_");
 
-    /* GtkMetricType */
-/* deprecated
-    G_DEF_CLASS(GTK_TYPE_METRIC_TYPE, "MetricType", mGtk);
-    G_DEF_CONSTANTS(mGtk, GTK_TYPE_METRIC_TYPE, "GTK_");
-*/
-
     /* GtkMovementStep */
     G_DEF_CLASS(GTK_TYPE_MOVEMENT_STEP, "MovementStep", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_MOVEMENT_STEP, "GTK_");
@@ -169,12 +163,6 @@ Init_gtk_const(VALUE mGtk)
 /* deprecated
     G_DEF_CLASS(GTK_TYPE_UPDATE_TYPE, "UpdateType", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_UPDATE_TYPE, "GTK_");
-*/
-
-    /* GtkVisibility */
-/* deprecated
-    G_DEF_CLASS(GTK_TYPE_VISIBILITY, "Visibility", mGtk);
-    G_DEF_CONSTANTS(mGtk, GTK_TYPE_VISIBILITY, "GTK_");
 */
 
     /* GtkSortType */
