@@ -430,37 +430,6 @@ rg_s_set_auto_startup_notification(VALUE self, VALUE setting)
     return self;
 }
 
-/* They are not public methods.
-static VALUE
-rg_decorated_window_init(VALUE self)
-{
-    gtk_decorated_window_init(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_decorated_window_calculate_frame_size(VALUE self)
-{
-    gtk_decorated_window_calculate_frame_size(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_decorated_window_set_title(VALUE self, VALUE title)
-{
-    gtk_decorated_window_set_title(_SELF(self), RVAL2CSTR(title));
-    return self;
-}
-
-static VALUE
-rg_decorated_window_move_resize_window(VALUE self)
-{
-    int x, y, width, height;
-    gtk_decorated_window_move_resize_window(_SELF(self), &x, &y, &width, &height);
-    return rb_ary_new3(4, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
-}
-*/
-
 static void
 mark_toplevels(G_GNUC_UNUSED void *_)
 {
@@ -526,12 +495,6 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_SMETHOD(set_auto_startup_notification, 1);
 
-/*
-    RG_DEF_METHOD(decorated_window_init, 0);
-    RG_DEF_METHOD(decorated_window_calculate_frame_size, 0);   
-    RG_DEF_METHOD(decorated_window_set_title, 1);
-    RG_DEF_METHOD(decorated_window_move_resize_window, 0);
-*/
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     /* GtkWindowPosition (from General constants) */
