@@ -19,8 +19,8 @@ end
 
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
-module_name = "vte"
-package_id = "vte"
+module_name = "vte3"
+package_id = "vte-2.90"
 
 begin
   require 'mkmf-gnome2'
@@ -34,7 +34,7 @@ setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id, 0, 12, 1) or exit(false)
 
-["glib2", "atk", "gtk2"].each do |package|
+["glib2", "atk", "gtk3"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
@@ -50,8 +50,8 @@ unless have_macro("VTE_CHECK_VERSION", vte_headers)
   make_version_header("VTE", package_id, ".")
 end
 
-create_pkg_config_file("Ruby/VTE", package_id)
-$defs << "-DRUBY_VTE_COMPILATION"
+create_pkg_config_file("Ruby/VTE3", package_id)
+$defs << "-DRUBY_VTE3_COMPILATION"
 create_makefile(module_name)
 pkg_config_dir = with_config("pkg-config-dir")
 if pkg_config_dir.is_a?(String)

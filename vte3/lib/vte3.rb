@@ -1,4 +1,4 @@
-require "gtk2"
+require "gtk3"
 require "vte.so"
 require "vte/deprecated"
 

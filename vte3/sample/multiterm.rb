@@ -8,7 +8,7 @@
   $Id: multiterm.rb,v 1.2 2006/06/17 13:27:51 mutoh Exp $
 =end
 
-require "vte"
+require "vte3"
 
 class MultiTerm
   def initialize
