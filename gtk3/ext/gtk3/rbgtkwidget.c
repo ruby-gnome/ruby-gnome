@@ -29,28 +29,6 @@
 
 static VALUE style_prop_func_table;
 
-/* deprecated
-static VALUE
-rg_flags(VALUE self)
-{
-    return GFLAGS2RVAL(GTK_WIDGET_FLAGS(_SELF(self)), GTK_TYPE_WIDGET_FLAGS);
-}
-
-static VALUE
-rg_set_flags(VALUE self, VALUE flag)
-{
-    GTK_WIDGET_SET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
-    return self;
-}
-
-static VALUE
-rg_unset_flags(VALUE self, VALUE flag)
-{
-    GTK_WIDGET_UNSET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
-    return self;
-}
-*/
-
 static VALUE
 rg_unparent(VALUE self)
 {
@@ -892,42 +870,64 @@ rg_set_window(VALUE self, VALUE window)
     return self;
 }
 
-/* deprecated
-#define DEFINE_IS_WIDGET(STATE) \
-static VALUE \
-widget_ ## STATE (VALUE self) \
-{ \
-    return( GTK_WIDGET_ ## STATE (_SELF(self))? Qtrue: Qfalse ); \
+static VALUE
+rg_toplevel_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_is_toplevel(_SELF(self)));
 }
-DEFINE_IS_WIDGET(TOPLEVEL);
-DEFINE_IS_WIDGET(NO_WINDOW);
-DEFINE_IS_WIDGET(REALIZED);
-DEFINE_IS_WIDGET(MAPPED);
-DEFINE_IS_WIDGET(DRAWABLE);
-DEFINE_IS_WIDGET(PARENT_SENSITIVE);
-DEFINE_IS_WIDGET(IS_SENSITIVE);
-DEFINE_IS_WIDGET(HAS_GRAB);
-DEFINE_IS_WIDGET(RC_STYLE);
-*/
 
-/* deprecated
+static VALUE
+rg_realized_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_realized(_SELF(self)));
+}
+
+static VALUE
+rg_mapped_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_mapped(_SELF(self)));
+}
+
+static VALUE
+rg_drawable_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_is_drawable(_SELF(self)));
+}
+
+static VALUE
+rg_sensitive_with_parent_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_sensitive(_SELF(self)));
+}
+
+static VALUE
+rg_has_grab_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_has_grab(_SELF(self)));
+}
+
+static VALUE
+rg_has_rc_style_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_has_rc_style(_SELF(self)));
+}
+
 static VALUE
 rg_allocation(VALUE self)
 {
-    return BOXED2RVAL(&(_SELF(self)->allocation), GTK_TYPE_ALLOCATION);
+    GtkAllocation alloc;
+    gtk_widget_get_allocation(_SELF(self), &alloc);
+    return BOXED2RVAL(&alloc, GTK_TYPE_ALLOCATION);
 }
 
 static VALUE
-rg_set_allocation(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
+rg_set_allocation(VALUE self, VALUE alloc)
 {
-    GtkAllocation *a = &(_SELF(self)->allocation);
-    a->x      = NUM2INT(x);
-    a->y      = NUM2INT(y);
-    a->width  = NUM2INT(w);
-    a->height = NUM2INT(h);
+    gtk_widget_set_allocation(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_requisition(VALUE self)
 {
@@ -1046,11 +1046,6 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * instance methods
      */
-/* deprecated
-    RG_DEF_METHOD(flags, 0);
-    RG_DEF_METHOD(set_flags, 1);
-    RG_DEF_METHOD(unset_flags, 1);
-*/
     RG_DEF_METHOD(unparent, 0);
     RG_DEF_METHOD(show, 0);
     RG_DEF_METHOD(show_now, 0);
@@ -1141,9 +1136,9 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(trigger_tooltip_query, 0);
     RG_DEF_METHOD_P(composited, 0);
     RG_DEF_METHOD(set_window, 1);
-/* deprecated
     RG_DEF_METHOD(allocation, 0);
-    RG_DEF_METHOD(set_allocation, 4);
+    RG_DEF_METHOD(set_allocation, 1);
+/* deprecated
     RG_DEF_METHOD(requisition, 0);
     RG_DEF_METHOD(set_requisition, 2);
     RG_DEF_METHOD(state, 0);
@@ -1152,17 +1147,13 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(bindings_activate, 2);
 
-/* deprecated
-    rb_define_method(RG_TARGET_NAMESPACE, "toplevel?",  widget_TOPLEVEL, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "no_window?", widget_NO_WINDOW, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "realized?",  widget_REALIZED, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "mapped?",    widget_MAPPED, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "drawable?",  widget_DRAWABLE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "parent_sensitive?", widget_PARENT_SENSITIVE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_grab?",    widget_HAS_GRAB, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "rc_style?",    widget_RC_STYLE, 0);
-*/
+    RG_DEF_METHOD_P(toplevel, 0);
+    RG_DEF_METHOD_P(realized, 0);
+    RG_DEF_METHOD_P(mapped, 0);
+    RG_DEF_METHOD_P(drawable, 0);
+    RG_DEF_METHOD_P(sensitive_with_parent, 0);
+    RG_DEF_METHOD_P(has_grab, 0);
+    RG_DEF_METHOD_P(has_rc_style, 0);
 
     /*
      * singleton methods
@@ -1190,12 +1181,6 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * constants
      */
-    /* GtkWidgetFlags */
-/* deprecated
-    G_DEF_CLASS(GTK_TYPE_WIDGET_FLAGS, "Flags", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_FLAGS, "GTK_");
-*/
-
     /* GtkWidgetHelpType */
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
