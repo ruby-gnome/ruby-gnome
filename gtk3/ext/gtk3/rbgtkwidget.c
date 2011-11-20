@@ -870,23 +870,47 @@ rg_set_window(VALUE self, VALUE window)
     return self;
 }
 
-/* deprecated
-#define DEFINE_IS_WIDGET(STATE) \
-static VALUE \
-widget_ ## STATE (VALUE self) \
-{ \
-    return( GTK_WIDGET_ ## STATE (_SELF(self))? Qtrue: Qfalse ); \
+static VALUE
+rg_toplevel_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_is_toplevel(_SELF(self)));
 }
-DEFINE_IS_WIDGET(TOPLEVEL);
-DEFINE_IS_WIDGET(NO_WINDOW);
-DEFINE_IS_WIDGET(REALIZED);
-DEFINE_IS_WIDGET(MAPPED);
-DEFINE_IS_WIDGET(DRAWABLE);
-DEFINE_IS_WIDGET(PARENT_SENSITIVE);
-DEFINE_IS_WIDGET(IS_SENSITIVE);
-DEFINE_IS_WIDGET(HAS_GRAB);
-DEFINE_IS_WIDGET(RC_STYLE);
-*/
+
+static VALUE
+rg_realized_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_realized(_SELF(self)));
+}
+
+static VALUE
+rg_mapped_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_mapped(_SELF(self)));
+}
+
+static VALUE
+rg_drawable_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_is_drawable(_SELF(self)));
+}
+
+static VALUE
+rg_sensitive_with_parent_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_sensitive(_SELF(self)));
+}
+
+static VALUE
+rg_has_grab_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_has_grab(_SELF(self)));
+}
+
+static VALUE
+rg_has_rc_style_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_has_rc_style(_SELF(self)));
+}
 
 /* deprecated
 static VALUE
@@ -1125,17 +1149,13 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(bindings_activate, 2);
 
-/* deprecated
-    rb_define_method(RG_TARGET_NAMESPACE, "toplevel?",  widget_TOPLEVEL, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "no_window?", widget_NO_WINDOW, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "realized?",  widget_REALIZED, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "mapped?",    widget_MAPPED, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "drawable?",  widget_DRAWABLE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "parent_sensitive?", widget_PARENT_SENSITIVE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "sensitive_with_parent?",   widget_IS_SENSITIVE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "has_grab?",    widget_HAS_GRAB, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "rc_style?",    widget_RC_STYLE, 0);
-*/
+    RG_DEF_METHOD_P(toplevel, 0);
+    RG_DEF_METHOD_P(realized, 0);
+    RG_DEF_METHOD_P(mapped, 0);
+    RG_DEF_METHOD_P(drawable, 0);
+    RG_DEF_METHOD_P(sensitive_with_parent, 0);
+    RG_DEF_METHOD_P(has_grab, 0);
+    RG_DEF_METHOD_P(has_rc_style, 0);
 
     /*
      * singleton methods

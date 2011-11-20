@@ -87,6 +87,13 @@ module Gtk
     define_deprecated_method :set_flags, :warn => "Use the proper method."
     alias :flags= :set_flags
     define_deprecated_method :unset_flags, :warn => "Use the proper method."
+    define_deprecated_method :no_window?, :warn => "Use '#{self}#has_window?'." do |_self|
+      !_self.has_window?
+    end
+    define_deprecated_method :rc_style?, :has_rc_style?
+    define_deprecated_method :parent_sensitive?, :warn => "Use '#{self}#sensitive?' on the parent widget." do |_self|
+      _self.parent.sensitive?
+    end
     define_deprecated_method :hide_all, :hide
     define_deprecated_method :colormap, :raise => "Use '#{self}#visual'."
     define_deprecated_method :set_colormap, :warn => "Use '#{self}#set_visual'."
