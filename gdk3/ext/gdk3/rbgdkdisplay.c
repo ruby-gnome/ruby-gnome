@@ -181,12 +181,6 @@ rg_set_double_click_time(VALUE self, VALUE msec)
 
 /* TODO
 static VALUE
-rg_double_click_time(VALUE self)
-{
-    return UINT2NUM(_SELF(self)->double_click_time);
-}
-
-static VALUE
 rg_button_click_time(VALUE self)
 {
     return rb_ary_new3(2,
@@ -514,7 +508,6 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(put_event, 1);
     RG_DEF_METHOD(set_double_click_time, 1);
 /* TODO
-    RG_DEF_METHOD(double_click_time, 0);
     RG_DEF_METHOD(button_click_time, 0);
     RG_DEF_METHOD(button_window, 0);
     RG_DEF_METHOD(button_number, 0);

@@ -17,6 +17,11 @@ module Gdk
     define_deprecated_method :source, :input_source
   end
 
+  class Display
+    extend GLib::Deprecatable
+    define_deprecated_method :double_click_time, :raise => "Don't use this method."
+  end
+
   module Keyval
     extend GLib::Deprecatable
     constants.each do |key|
