@@ -825,6 +825,56 @@ rbg_gints2rval_free(gint *gints, long n)
                      rbg_gints2rval_free_ensure, (VALUE)&args);
 }
 
+static const char *
+rbg_inspect (VALUE object)
+{
+    VALUE inspected;
+
+    inspected = rb_funcall(object, rb_intern("inspect"), 0);
+    return StringValueCStr(inspected);
+}
+
+
+void
+rbg_scan_options (VALUE options, ...)
+{
+    VALUE original_options = options;
+    VALUE available_keys;
+    const char *key;
+    VALUE *value;
+    va_list args;
+
+    options = rb_check_convert_type(options, T_HASH, "Hash", "to_hash");
+    if (NIL_P(options)) {
+        options = rb_hash_new();
+    } else if (options == original_options) {
+        options = rb_funcall(options, rb_intern("dup"), 0);
+    }
+
+    available_keys = rb_ary_new();
+    va_start(args, options);
+    key = va_arg(args, const char *);
+    while (key) {
+        VALUE rb_key;
+        value = va_arg(args, VALUE *);
+
+        rb_key = ID2SYM(rb_intern(key));
+        rb_ary_push(available_keys, rb_key);
+        *value = rb_funcall(options, rb_intern("delete"), 1, rb_key);
+
+        key = va_arg(args, const char *);
+    }
+    va_end(args);
+
+    if (RVAL2CBOOL(rb_funcall(options, rb_intern("empty?"), 0)))
+        return;
+
+    rb_raise(rb_eArgError,
+             "unexpected key(s) exist: %s: available keys: %s",
+             rbg_inspect(rb_funcall(options, rb_intern("keys"), 0)),
+             rbg_inspect(available_keys));
+}
+
 #if 0
 /*
 2004-04-15 Commented out by Masao.

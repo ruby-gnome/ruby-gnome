@@ -166,6 +166,8 @@ gdouble *rbg_rval2gdoubles(volatile VALUE *value, long *n);
 VALUE rbg_gints2rval(const gint *gints, long n);
 VALUE rbg_gints2rval_free(gint *gints, long n);
 
+extern void rbg_scan_options(VALUE options, ...);
+
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);
 extern VALUE rbgerr_define_gerror(GQuark domain, const gchar* name, VALUE module, VALUE parent, VALUE gtype);
