@@ -47,6 +47,20 @@ module Gtk
     define_deprecated_method :vbox, :child
   end
 
+  class FileChooserDialog
+    alias :__initialize__ :initialize
+    def initialize(*args)
+      if args.size == 1 && args.first.is_a?(Hash)
+        params = args.first
+      else
+        warn "#{caller[0]}: '#{self.class}#initialize(title, parent, action, back, buttons)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        title, parent, action, back, buttons = args
+        params = {:title => title, :parent => parent, :action => action, :buttons => buttons}
+      end
+      __initialize__(params)
+    end
+  end
+
   class FontSelectionDialog
     extend GLib::Deprecatable
     define_deprecated_method :apply_button, :raise => "Don't use this method."
