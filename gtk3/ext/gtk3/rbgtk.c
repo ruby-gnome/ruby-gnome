@@ -60,7 +60,7 @@ remove_from_windows(G_GNUC_UNUSED GtkWidget *window, VALUE obj)
 }
 
 void
-rbgtk_initialize_gtkobject(VALUE obj, GtkWidget *gtkobj)
+rbgtk_initialize_gtkobject(VALUE obj, GObject *gtkobj)
 {
     gtkobj = g_object_ref(gtkobj);
     g_object_ref_sink(gtkobj);
