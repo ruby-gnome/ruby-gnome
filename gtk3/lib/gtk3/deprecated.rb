@@ -82,6 +82,11 @@ module Gtk
 
   class Widget
     extend GLib::Deprecatable
+    define_deprecated_const :Flags, :raise => "Don't use this flags anymore."
+    define_deprecated_method :flags, :raise => "Use the proper method."
+    define_deprecated_method :set_flags, :warn => "Use the proper method."
+    alias :flags= :set_flags
+    define_deprecated_method :unset_flags, :warn => "Use the proper method."
     define_deprecated_method :hide_all, :hide
     define_deprecated_method :colormap, :raise => "Use '#{self}#visual'."
     define_deprecated_method :set_colormap, :warn => "Use '#{self}#set_visual'."

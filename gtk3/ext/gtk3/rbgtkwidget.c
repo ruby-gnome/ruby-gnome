@@ -29,28 +29,6 @@
 
 static VALUE style_prop_func_table;
 
-/* deprecated
-static VALUE
-rg_flags(VALUE self)
-{
-    return GFLAGS2RVAL(GTK_WIDGET_FLAGS(_SELF(self)), GTK_TYPE_WIDGET_FLAGS);
-}
-
-static VALUE
-rg_set_flags(VALUE self, VALUE flag)
-{
-    GTK_WIDGET_SET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
-    return self;
-}
-
-static VALUE
-rg_unset_flags(VALUE self, VALUE flag)
-{
-    GTK_WIDGET_UNSET_FLAGS(_SELF(self), RVAL2GFLAGS(flag, GTK_TYPE_WIDGET_FLAGS));
-    return self;
-}
-*/
-
 static VALUE
 rg_unparent(VALUE self)
 {
@@ -1046,11 +1024,6 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * instance methods
      */
-/* deprecated
-    RG_DEF_METHOD(flags, 0);
-    RG_DEF_METHOD(set_flags, 1);
-    RG_DEF_METHOD(unset_flags, 1);
-*/
     RG_DEF_METHOD(unparent, 0);
     RG_DEF_METHOD(show, 0);
     RG_DEF_METHOD(show_now, 0);
@@ -1190,12 +1163,6 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * constants
      */
-    /* GtkWidgetFlags */
-/* deprecated
-    G_DEF_CLASS(GTK_TYPE_WIDGET_FLAGS, "Flags", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_FLAGS, "GTK_");
-*/
-
     /* GtkWidgetHelpType */
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
