@@ -24,40 +24,42 @@
 #define RG_TARGET_NAMESPACE cFileChooserDialog
 #define _SELF(self) GTK_FILE_CHOOSER_DIALOG(RVAL2GOBJ(self))
 
-/* TODO
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE title, parent, action, back, button_ary;
-    GtkWidget* dialog;
-    const gchar *gtitle;
-    GtkWindow *gparent;
-    GtkFileChooserAction gaction;
-    const gchar *gback;
+    VALUE options, rb_title, rb_parent, rb_action, rb_button_ary;
+    const gchar *title;
+    GtkWindow *parent;
+    GtkFileChooserAction action;
+    GtkWidget *dialog;
 
-    rb_scan_args(argc, argv, "04*", &title, &parent, &action, &back, &button_ary);
-    gtitle = NIL_P(title) ? NULL : RVAL2CSTR(title);
-    gparent = NIL_P(parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(parent));
-    gaction = NIL_P(action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION);
-    gback = NIL_P(back) ? NULL : RVAL2CSTR(back);
-    dialog = gtk_file_chooser_dialog_new_with_backend(gtitle, 
-                                                      gparent,
-                                                      gaction, 
-                                                      gback, 
-                                                      NULL,
-                                                      NULL);
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "title", &rb_title,
+                     "parent", &rb_parent,
+                     "action", &rb_action,
+                     "buttons", &rb_button_ary,
+                     NULL);
+    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    action = NIL_P(rb_action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GENUM(rb_action, GTK_TYPE_FILE_CHOOSER_ACTION);
+    rb_button_ary = NIL_P(rb_button_ary) ? rb_ary_new() : rb_button_ary;
+
+    dialog = gtk_file_chooser_dialog_new(title, 
+                                         parent,
+                                         action, 
+                                         NULL,
+                                         NULL);
     RBGTK_INITIALIZE(self, dialog);
-    rbgtk_dialog_add_buttons_internal(self, button_ary);
+    rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
+
     return Qnil;
 }
-*/
 
 void 
 Init_gtk_file_chooser_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_DIALOG, "FileChooserDialog", mGtk);
 
-/* TODO
     RG_DEF_METHOD(initialize, -1);
-*/
 }
