@@ -131,14 +131,6 @@ rg_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
     return found ? DBL2NUM(value) : Qnil;
 }
 
-/* TODO
-static VALUE
-rg_name(VALUE self)
-{
-    return CSTR2RVAL(_SELF(self)->name);
-}
-*/
-
 static VALUE
 rg_mode(VALUE self)
 {
@@ -201,10 +193,6 @@ Init_gtk_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_state, 1);
     RG_DEF_METHOD(get_history, 3);
     RG_DEF_METHOD(get_axis, 2);
-
-/* TODO
-    RG_DEF_METHOD(name, 0);
-*/
     RG_DEF_METHOD(mode, 0);
 /* TODO
     RG_DEF_METHOD_P(has_cursor, 0);
