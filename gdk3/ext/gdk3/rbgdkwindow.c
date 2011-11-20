@@ -514,16 +514,14 @@ rg_user_data(VALUE self)
     return GOBJ2RVAL(data);
 }
 
-/* TODO
 static VALUE
 rg_geometry(VALUE self)
 {
-    gint x, y, w, h, d;
-    gdk_window_get_geometry(_SELF(self), &x, &y, &w, &h, &d);
+    gint x, y, w, h;
+    gdk_window_get_geometry(_SELF(self), &x, &y, &w, &h);
     return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
-                       INT2NUM(w), INT2NUM(h), INT2NUM(d));
+                       INT2NUM(w), INT2NUM(h));
 }
-*/
 
 static VALUE
 rg_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
@@ -920,9 +918,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_title, 1);
     RG_DEF_METHOD(set_background, 1);
     RG_DEF_METHOD(user_data, 0);
-/* TODO
     RG_DEF_METHOD(geometry, 0);
-*/
     RG_DEF_METHOD(set_geometry_hints, 2);
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_METHOD(set_modal_hint, 1);
