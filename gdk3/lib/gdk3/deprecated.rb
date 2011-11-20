@@ -5,6 +5,12 @@ module Gdk
   define_deprecated_const :Colormap, :raise => "Use 'Gdk::Visual' instead."
   define_deprecated_const :Input, :raise => "Use 'GLib::IOChannel' instead."
 
+  class Cursor
+    define_deprecated_method :pixmap?, :warn => "Don't use this method." do |_self|
+      false
+    end
+  end
+
   module Keyval
     extend GLib::Deprecatable
     constants.each do |key|

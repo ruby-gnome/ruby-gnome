@@ -69,15 +69,6 @@ rg_display(VALUE self)
     return GOBJ2RVAL(gdk_cursor_get_display((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
 
-/* deprecated
-static VALUE
-rg_pixmap_p(VALUE self)
-{
-    return CBOOL2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_COLOR))->type == 
-                      GDK_CURSOR_IS_PIXMAP);
-}
-*/
-
 /* TODO
 static VALUE
 rg_cursor_type(VALUE self)
@@ -99,9 +90,6 @@ Init_gtk_gdk_cursor(VALUE mGdk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(display, 0);
-/* deprecated
-    RG_DEF_METHOD_P(pixmap, 0);
-*/
 /* TODO
     RG_DEF_METHOD(cursor_type, 0);
 */
