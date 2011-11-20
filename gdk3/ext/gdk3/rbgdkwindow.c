@@ -434,18 +434,6 @@ rg_set_focus_on_map(VALUE self, VALUE focus_on_map)
     return self;
 }
 
-/* GdkXEvent is not implemented.
-  void        gdk_window_add_filter           (GdkWindow *window,
-  GdkFilterFunc function,
-  gpointer data);
-  void        gdk_window_remove_filter        (GdkWindow *window,
-  GdkFilterFunc function,
-  gpointer data);
-  GdkFilterReturn (*GdkFilterFunc)            (GdkXEvent *xevent,
-  GdkEvent *event,
-  gpointer data);
-*/
-
 static VALUE
 rg_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
 {
