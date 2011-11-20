@@ -137,14 +137,6 @@ rg_mode(VALUE self)
     return GENUM2RVAL(gdk_device_set_mode(_SELF(self)), GDK_TYPE_INPUT_MODE);
 }
 
-/* TODO
-static VALUE
-rg_has_cursor_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->has_cursor);
-}
-*/
-
 /* deprecated
 static VALUE
 rg_axes(VALUE self)
@@ -194,9 +186,6 @@ Init_gtk_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_history, 3);
     RG_DEF_METHOD(get_axis, 2);
     RG_DEF_METHOD(mode, 0);
-/* TODO
-    RG_DEF_METHOD_P(has_cursor, 0);
-*/
 /* deprecated
     RG_DEF_METHOD(axes, 0);
     RG_DEF_METHOD(keys, 0);
