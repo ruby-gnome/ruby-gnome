@@ -14,6 +14,12 @@ end
 module GtkSource
   class View
     extend GLib::Deprecatable
+    define_deprecated_method :set_mark_category_pixbuf, :warn => "Use 'GtkSource::MarkAttributes#set_pixbuf'." do |_self, category, pixbuf|
+      _self.get_mark_attributes(category).first.set_pixbuf(pixbuf) # TODO
+    end
+    define_deprecated_method :get_mark_category_pixbuf, :warn => "Use 'GtkSource::MarkAttributes#pixbuf'." do |_self, category|
+      _self.get_mark_attributes(category).first.pixbuf # TODO
+    end
     define_deprecated_method :set_mark_category_priority, :warn => "Use '#{self}#set_mark_attributes'." do |_self, category, priority|
       attributes = _self.get_mark_attributes(category).first # TODO
       _self.set_mark_attributes(category, attributes, priority)

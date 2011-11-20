@@ -56,48 +56,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-/*
- * Method: set_mark_category_pixbuf(category, pixbuf)
- * category: a category (as a string).
- * pixbuf: a Gdk::Pixbuf object.
- *
- * Associates a given pixbuf with a given category.
- *
- * Returns: self.
- */
-/* deprecated
-static VALUE
-rg_set_mark_category_pixbuf(VALUE self, VALUE category, VALUE pixbuf)
-{
-    gtk_source_view_set_mark_category_pixbuf(_SELF(self),
-                         RVAL2CSTR(category),
-                         GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
-    return self;
-}
-*/
-
-/*
- * Method: get_mark_category_pixbuf(category)
- * category: a category (as a string).
- *
- * Gets the pixbuf which is associated with the given category.
- *
- * Returns: a Gdk::Pixbuf object if found, or nil if not found.
- */
-/* deprecated
-static VALUE
-rg_get_mark_category_pixbuf(VALUE self, VALUE category)
-{
-    GdkPixbuf *pixbuf;
-
-    pixbuf = gtk_source_view_get_mark_category_pixbuf(_SELF(self),
-                              RVAL2CSTR(category));
-    return GOBJ2RVAL(pixbuf);
-}
-*/
-#endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
-
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
 /*
  * Method: get_mark_category_background(category)
@@ -149,12 +107,6 @@ Init_gtk_sourceview (VALUE mGtkSource)
                                 INT2FIX(GTKSOURCEVIEW3_MICRO_VERSION)));
 
     RG_DEF_METHOD(initialize, -1);
-#ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
-/* deprecated
-    RG_DEF_METHOD(get_mark_category_pixbuf, 1);
-    RG_DEF_METHOD(set_mark_category_pixbuf, 2);
-*/
-#endif
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
     RG_DEF_METHOD(get_mark_category_background, 1);
     RG_DEF_METHOD(set_mark_category_background, 2);
