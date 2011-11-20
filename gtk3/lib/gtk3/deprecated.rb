@@ -110,6 +110,20 @@ module Gtk
     define_deprecated_method :action, :warn => "Use 'Gtk::Activatable#related_action'." do |_self|
       _self.related_action
     end
+
+    alias :__set_allocation__ :set_allocation
+    private :__set_allocation__
+    def set_allocation(*args)
+      case args.size
+      when 1
+        __set_allocation__(args.first)
+      when 4
+        warn "#{caller[0]}: '#{self.class}#set_allocation(x, y, width, height)' style has been deprecated. Use '#{self.class}#set_allocation(alloc)' style."
+        __set_allocation__(Gtk::Allocation.new(*args))
+      else
+        raise ArgumentError.new("need 1 or 4 arguments.")
+      end
+    end
   end
 end
 

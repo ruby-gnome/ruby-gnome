@@ -912,24 +912,22 @@ rg_has_rc_style_p(VALUE self)
     return CBOOL2RVAL(gtk_widget_has_rc_style(_SELF(self)));
 }
 
-/* deprecated
 static VALUE
 rg_allocation(VALUE self)
 {
-    return BOXED2RVAL(&(_SELF(self)->allocation), GTK_TYPE_ALLOCATION);
+    GtkAllocation alloc;
+    gtk_widget_get_allocation(_SELF(self), &alloc);
+    return BOXED2RVAL(&alloc, GTK_TYPE_ALLOCATION);
 }
 
 static VALUE
-rg_set_allocation(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
+rg_set_allocation(VALUE self, VALUE alloc)
 {
-    GtkAllocation *a = &(_SELF(self)->allocation);
-    a->x      = NUM2INT(x);
-    a->y      = NUM2INT(y);
-    a->width  = NUM2INT(w);
-    a->height = NUM2INT(h);
+    gtk_widget_set_allocation(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
     return self;
 }
 
+/* deprecated
 static VALUE
 rg_requisition(VALUE self)
 {
@@ -1138,9 +1136,9 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(trigger_tooltip_query, 0);
     RG_DEF_METHOD_P(composited, 0);
     RG_DEF_METHOD(set_window, 1);
-/* deprecated
     RG_DEF_METHOD(allocation, 0);
-    RG_DEF_METHOD(set_allocation, 4);
+    RG_DEF_METHOD(set_allocation, 1);
+/* deprecated
     RG_DEF_METHOD(requisition, 0);
     RG_DEF_METHOD(set_requisition, 2);
     RG_DEF_METHOD(state, 0);
