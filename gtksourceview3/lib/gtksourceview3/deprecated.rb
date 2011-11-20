@@ -11,3 +11,16 @@ module Gtk
   define_deprecated_const :SourceView, 'GtkSource::View'
 end
 
+module GtkSource
+  class View
+    extend GLib::Deprecatable
+    define_deprecated_method :set_mark_category_priority, :warn => "Use '#{self}#set_mark_attributes'." do |_self, category, priority|
+      attributes = _self.get_mark_attributes(category).first # TODO
+      _self.set_mark_attributes(category, attributes, priority)
+    end
+    define_deprecated_method :get_mark_category_priority, :warn => "Use '#{self}#get_mark_attributes'." do |_self, category|
+      _self.get_mark_attributes(category).last # TODO
+    end
+  end
+end
+

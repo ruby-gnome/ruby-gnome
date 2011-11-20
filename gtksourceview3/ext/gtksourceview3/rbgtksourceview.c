@@ -96,46 +96,6 @@ rg_get_mark_category_pixbuf(VALUE self, VALUE category)
     return GOBJ2RVAL(pixbuf);
 }
 */
-
-/*
- * Method: set_mark_category_priority(category, priority)
- * category: a category (as a string).
- * priority: a priority (int).
- *
- * Associates a given priority with a given category.
- *
- * Returns: self.
- */
-/* deprecated
-static VALUE
-rg_set_mark_category_priority(VALUE self, VALUE category, VALUE priority)
-{
-    gtk_source_view_set_mark_category_priority(_SELF (self),
-                           RVAL2CSTR(category),
-                           NUM2INT(priority));
-    return self;
-}
-*/
-
-/*
- * Method: get_mark_category_priority(category)
- * category: a category (as a string).
- *
- * Gets the priority which is associated with the given category.
- *
- * Returns: the priority if found, or 0 if not found.
- */
-/* deprecated
-static VALUE
-rg_get_mark_category_priority(VALUE self, VALUE category)
-{
-    gint priority;
-
-    priority = gtk_source_view_get_mark_category_priority(_SELF(self),
-                              RVAL2CSTR(category));
-    return INT2NUM(priority);
-}
-*/
 #endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
@@ -193,8 +153,6 @@ Init_gtk_sourceview (VALUE mGtkSource)
 /* deprecated
     RG_DEF_METHOD(get_mark_category_pixbuf, 1);
     RG_DEF_METHOD(set_mark_category_pixbuf, 2);
-    RG_DEF_METHOD(get_mark_category_priority, 1);
-    RG_DEF_METHOD(set_mark_category_priority, 2);
 */
 #endif
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
