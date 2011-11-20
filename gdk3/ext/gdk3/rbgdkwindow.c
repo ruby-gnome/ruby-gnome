@@ -387,20 +387,6 @@ rg_s_set_debug_updates(VALUE self, VALUE setting)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_internal_paint_info(VALUE self)
-{
-    GdkDrawable* real_drawable;
-    gint x_offset, y_offset;
-
-    gdk_window_get_internal_paint_info(_SELF(self), &real_drawable,
-                                       &x_offset, &y_offset);
-    return rb_ary_new3(3, GOBJ2RVAL(real_drawable),
-                       INT2NUM(x_offset), INT2NUM(y_offset));
-}
-*/
-
 static VALUE
 rg_configure_finished(VALUE self)
 {
@@ -963,9 +949,6 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(freeze_updates, 0);
     RG_DEF_METHOD(thaw_updates, 0);
     RG_DEF_METHOD(process_updates, 1);
-/* deprecated
-    RG_DEF_METHOD(internal_paint_info, 0);
-*/
     RG_DEF_METHOD(configure_finished, 0);
     RG_DEF_METHOD(enable_synchronized_configure, 0);
     RG_DEF_METHOD(set_user_data, 1);
