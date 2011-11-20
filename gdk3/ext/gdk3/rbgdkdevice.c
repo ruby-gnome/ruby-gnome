@@ -134,7 +134,7 @@ rg_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
 static VALUE
 rg_mode(VALUE self)
 {
-    return GENUM2RVAL(gdk_device_set_mode(_SELF(self)), GDK_TYPE_INPUT_MODE);
+    return GENUM2RVAL(gdk_device_get_mode(_SELF(self)), GDK_TYPE_INPUT_MODE);
 }
 
 /* deprecated
