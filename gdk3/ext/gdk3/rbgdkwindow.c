@@ -446,17 +446,6 @@ rg_set_focus_on_map(VALUE self, VALUE focus_on_map)
   gpointer data);
 */
 
-/* deprecated
-static VALUE
-rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
-{
-    gdk_window_shape_combine_mask(_SELF(self), 
-                                  GDK_BITMAP(RVAL2GOBJ(shape_mask)), 
-                                  NUM2INT(offset_x), NUM2INT(offset_y));
-    return self;
-}
-*/
-
 static VALUE
 rg_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
 {
@@ -479,17 +468,6 @@ rg_merge_child_shapes(VALUE self)
     gdk_window_merge_child_shapes(_SELF(self));
     return self;
 }   
-
-/* deprecated
-static VALUE
-rg_input_shape_combine_mask(VALUE self, VALUE mask, VALUE x, VALUE y)
-{
-    gdk_window_input_shape_combine_mask(_SELF(self),
-                                        GDK_BITMAP(RVAL2GOBJ(mask)),
-                                        NUM2INT(x), NUM2INT(y));
-    return self;
-}
-*/
 
 static VALUE
 rg_input_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
@@ -955,15 +933,9 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_override_redirect, 1);
     RG_DEF_METHOD(set_accept_focus, 1);
     RG_DEF_METHOD(set_focus_on_map, 1);
-/* deprecated
-    RG_DEF_METHOD(shape_combine_mask, 3);
-*/
     RG_DEF_METHOD(shape_combine_region, 3);
     RG_DEF_METHOD(set_child_shapes, 0);
     RG_DEF_METHOD(merge_child_shapes, 0);
-/* deprecated
-    RG_DEF_METHOD(input_shape_combine_mask, 3);
-*/
     RG_DEF_METHOD(input_shape_combine_region, 3);
     RG_DEF_METHOD(set_child_input_shapes, 0);
     RG_DEF_METHOD(merge_child_input_shapes, 0);

@@ -40,6 +40,8 @@ module Gdk
     define_deprecated_method :clear, :warn => "Don't use this method."
     define_deprecated_method :clear_area, :warn => "Don't use this method."
     define_deprecated_method :internal_paint_info, :raise => "Don't use this method."
+    define_deprecated_method :shape_combine_mask, :warn => "Don't use this method."
+    define_deprecated_method :input_shape_combine_mask, :warn => "Don't use this method."
   end
 end
 
