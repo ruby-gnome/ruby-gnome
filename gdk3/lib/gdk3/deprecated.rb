@@ -20,6 +20,11 @@ module Gdk
   class Display
     extend GLib::Deprecatable
     define_deprecated_method :double_click_time, :raise => "Don't use this method."
+    define_deprecated_method :button_click_time, :raise => "Don't use this method."
+    define_deprecated_method :button_window, :raise => "Don't use this method."
+    define_deprecated_method :button_number, :raise => "Don't use this method."
+    define_deprecated_method :button_x, :raise => "Don't use this method."
+    define_deprecated_method :button_y, :raise => "Don't use this method."
   end
 
   module Keyval
