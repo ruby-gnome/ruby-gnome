@@ -137,13 +137,15 @@ rg_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->name);
 }
+*/
 
 static VALUE
 rg_mode(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->mode, GDK_TYPE_INPUT_MODE);
+    return GENUM2RVAL(gdk_device_set_mode(_SELF(self)), GDK_TYPE_INPUT_MODE);
 }
 
+/* TODO
 static VALUE
 rg_has_cursor_p(VALUE self)
 {
@@ -202,7 +204,9 @@ Init_gtk_gdk_device(VALUE mGdk)
 
 /* TODO
     RG_DEF_METHOD(name, 0);
+*/
     RG_DEF_METHOD(mode, 0);
+/* TODO
     RG_DEF_METHOD_P(has_cursor, 0);
 */
 /* deprecated
