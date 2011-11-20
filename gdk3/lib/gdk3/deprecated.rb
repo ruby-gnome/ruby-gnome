@@ -44,5 +44,12 @@ module Gdk
     define_deprecated_method :input_shape_combine_mask, :warn => "Don't use this method."
     define_deprecated_method :set_back_pixmap, :warn => "Don't use this method."
   end
+
+  class WindowAttr
+    extend GLib::Deprecatable
+    define_deprecated_method :colormap, :raise => "Don't use this method."
+    define_deprecated_method :set_colormap, :warn => "Don't use this method."
+    alias :colormap= :set_colormap
+  end
 end
 
