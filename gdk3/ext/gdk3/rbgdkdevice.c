@@ -131,31 +131,11 @@ rg_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
     return found ? DBL2NUM(value) : Qnil;
 }
 
-/* TODO
-static VALUE
-rg_name(VALUE self)
-{
-    return CSTR2RVAL(_SELF(self)->name);
-}
-
-static VALUE
-rg_source(VALUE self)
-{
-    return GENUM2RVAL(_SELF(self)->source, GDK_TYPE_INPUT_SOURCE);
-}
-
 static VALUE
 rg_mode(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->mode, GDK_TYPE_INPUT_MODE);
+    return GENUM2RVAL(gdk_device_get_mode(_SELF(self)), GDK_TYPE_INPUT_MODE);
 }
-
-static VALUE
-rg_has_cursor_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->has_cursor);
-}
-*/
 
 /* deprecated
 static VALUE
@@ -205,13 +185,7 @@ Init_gtk_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_state, 1);
     RG_DEF_METHOD(get_history, 3);
     RG_DEF_METHOD(get_axis, 2);
-
-/* TODO
-    RG_DEF_METHOD(name, 0);
-    RG_DEF_METHOD(source, 0);
     RG_DEF_METHOD(mode, 0);
-    RG_DEF_METHOD_P(has_cursor, 0);
-*/
 /* deprecated
     RG_DEF_METHOD(axes, 0);
     RG_DEF_METHOD(keys, 0);

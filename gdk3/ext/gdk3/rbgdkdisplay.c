@@ -179,61 +179,11 @@ rg_set_double_click_time(VALUE self, VALUE msec)
     return self;
 }
 
-/* TODO
-static VALUE
-rg_double_click_time(VALUE self)
-{
-    return UINT2NUM(_SELF(self)->double_click_time);
-}
-
-static VALUE
-rg_button_click_time(VALUE self)
-{
-    return rb_ary_new3(2,
-                       UINT2NUM(_SELF(self)->button_click_time[0]),
-                       UINT2NUM(_SELF(self)->button_click_time[1]));
-}
-
-static VALUE
-rg_button_window(VALUE self)
-{
-    return rb_ary_new3(2,
-                       GOBJ2RVAL(_SELF(self)->button_window[0]),
-                       GOBJ2RVAL(_SELF(self)->button_window[1]));
-}
-
-static VALUE
-rg_button_number(VALUE self)
-{
-    return rb_ary_new3(2,
-                       INT2NUM(_SELF(self)->button_number[0]),
-                       INT2NUM(_SELF(self)->button_number[1]));
-}
-
 static VALUE
 rg_closed_p(VALUE self)
 {
-    return CBOOL2RVAL(_SELF(self)->closed);
+    return CBOOL2RVAL(gdk_display_is_closed(_SELF(self)));
 }
-*/
-
-/* TODO
-static VALUE
-rg_button_x(VALUE self)
-{
-    return rb_ary_new3(2,
-                       INT2NUM(_SELF(self)->button_x[0]),
-                       INT2NUM(_SELF(self)->button_x[1]));
-}
-
-static VALUE
-rg_button_y(VALUE self)
-{
-    return rb_ary_new3(2,
-                       INT2NUM(_SELF(self)->button_y[0]),
-                       INT2NUM(_SELF(self)->button_y[1]));
-}
-*/
 
 static VALUE
 rg_set_double_click_distance(VALUE self, VALUE distance)
@@ -241,14 +191,6 @@ rg_set_double_click_distance(VALUE self, VALUE distance)
     gdk_display_set_double_click_distance(_SELF(self), NUM2UINT(distance));
     return self;
 }
-
-/* TODO
-static VALUE
-rg_double_click_distance(VALUE self)
-{
-    return UINT2NUM(_SELF(self)->double_click_distance);
-}
-*/
 
 static VALUE
 rg_pointer(VALUE self)
@@ -513,21 +455,8 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(peek_event, 0);
     RG_DEF_METHOD(put_event, 1);
     RG_DEF_METHOD(set_double_click_time, 1);
-/* TODO
-    RG_DEF_METHOD(double_click_time, 0);
-    RG_DEF_METHOD(button_click_time, 0);
-    RG_DEF_METHOD(button_window, 0);
-    RG_DEF_METHOD(button_number, 0);
     RG_DEF_METHOD_P(closed, 0);
-*/
-/* TODO
-    RG_DEF_METHOD(button_x, 0);
-    RG_DEF_METHOD(button_y, 0);
-*/
     RG_DEF_METHOD(set_double_click_distance, 1);
-/* TODO
-    RG_DEF_METHOD(double_click_distance, 0);
-*/
     RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD(window_at_pointer, 0);
     RG_DEF_METHOD_P(supports_cursor_color, 0);

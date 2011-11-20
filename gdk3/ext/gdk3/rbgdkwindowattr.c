@@ -117,20 +117,6 @@ rg_set_visual(VALUE self, VALUE val)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_colormap(VALUE self)
-{
-    return GOBJ2RVAL(_SELF(self)->colormap);
-}
-static VALUE
-rg_set_colormap(VALUE self, VALUE val)
-{
-    _SELF(self)->colormap = GDK_COLORMAP(RVAL2GOBJ(val));
-    return self;
-}
-*/
-
 static VALUE
 rg_window_type(VALUE self)
 {
@@ -192,10 +178,6 @@ Init_gtk_gdk_windowattr(VALUE mGdk)
     RG_DEF_METHOD(set_wclass, 1);
     RG_DEF_METHOD(visual, 0);
     RG_DEF_METHOD(set_visual, 1);
-/* deprecated
-    RG_DEF_METHOD(colormap, 0);
-    RG_DEF_METHOD(set_colormap, 1);
-*/
     RG_DEF_METHOD(window_type, 0);
     RG_DEF_METHOD(set_window_type, 1);
     RG_DEF_METHOD(cursor, 0);

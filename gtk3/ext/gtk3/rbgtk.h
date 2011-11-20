@@ -35,7 +35,7 @@
 #define RubyGtkContainerHookModule "RubyGtkContainerHook__"
 
 #define RBGTK_INITIALIZE(obj,gtkobj)\
- (rbgtk_initialize_gtkobject(obj, GTK_WIDGET(gtkobj)))
+ (rbgtk_initialize_gtkobject(obj, G_OBJECT(gtkobj)))
 
 #define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
@@ -77,7 +77,7 @@ extern GtkTreeRowReference* rbgtk_get_tree_row_reference(VALUE obj);
 /*
  * for gtk
  */
-extern void rbgtk_initialize_gtkobject(VALUE obj, GtkWidget *gtkobj);
+extern void rbgtk_initialize_gtkobject(VALUE obj, GObject *gtkobj);
 extern void exec_callback(GtkWidget *widget, gpointer proc);
 extern GType gtk_allocation_get_type(void);
 extern GType gtk_accel_key_get_type(void);
