@@ -192,14 +192,6 @@ rg_set_double_click_distance(VALUE self, VALUE distance)
     return self;
 }
 
-/* TODO
-static VALUE
-rg_double_click_distance(VALUE self)
-{
-    return UINT2NUM(_SELF(self)->double_click_distance);
-}
-*/
-
 static VALUE
 rg_pointer(VALUE self)
 {
@@ -465,9 +457,6 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(set_double_click_time, 1);
     RG_DEF_METHOD_P(closed, 0);
     RG_DEF_METHOD(set_double_click_distance, 1);
-/* TODO
-    RG_DEF_METHOD(double_click_distance, 0);
-*/
     RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD(window_at_pointer, 0);
     RG_DEF_METHOD_P(supports_cursor_color, 0);
