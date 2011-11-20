@@ -179,13 +179,11 @@ rg_set_double_click_time(VALUE self, VALUE msec)
     return self;
 }
 
-/* TODO
 static VALUE
 rg_closed_p(VALUE self)
 {
-    return CBOOL2RVAL(_SELF(self)->closed);
+    return CBOOL2RVAL(gdk_display_is_closed(_SELF(self)));
 }
-*/
 
 static VALUE
 rg_set_double_click_distance(VALUE self, VALUE distance)
@@ -465,9 +463,7 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(peek_event, 0);
     RG_DEF_METHOD(put_event, 1);
     RG_DEF_METHOD(set_double_click_time, 1);
-/* TODO
     RG_DEF_METHOD_P(closed, 0);
-*/
     RG_DEF_METHOD(set_double_click_distance, 1);
 /* TODO
     RG_DEF_METHOD(double_click_distance, 0);
