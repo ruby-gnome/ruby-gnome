@@ -506,17 +506,6 @@ rg_set_background(VALUE self, VALUE color)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_set_back_pixmap(VALUE self, VALUE pixmap, VALUE parent_relative)
-{
-    gdk_window_set_back_pixmap(_SELF(self), 
-                               GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-                               RVAL2CBOOL(parent_relative));
-    return self;
-}
-*/
-
 static VALUE
 rg_user_data(VALUE self)
 {
@@ -930,9 +919,6 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_static_gravities, 1);
     RG_DEF_METHOD(set_title, 1);
     RG_DEF_METHOD(set_background, 1);
-/* deprecated
-    RG_DEF_METHOD(set_back_pixmap, 2);
-*/
     RG_DEF_METHOD(user_data, 0);
 /* TODO
     RG_DEF_METHOD(geometry, 0);
