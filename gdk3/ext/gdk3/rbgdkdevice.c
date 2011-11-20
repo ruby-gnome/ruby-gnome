@@ -139,12 +139,6 @@ rg_name(VALUE self)
 }
 
 static VALUE
-rg_source(VALUE self)
-{
-    return GENUM2RVAL(_SELF(self)->source, GDK_TYPE_INPUT_SOURCE);
-}
-
-static VALUE
 rg_mode(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->mode, GDK_TYPE_INPUT_MODE);
@@ -208,7 +202,6 @@ Init_gtk_gdk_device(VALUE mGdk)
 
 /* TODO
     RG_DEF_METHOD(name, 0);
-    RG_DEF_METHOD(source, 0);
     RG_DEF_METHOD(mode, 0);
     RG_DEF_METHOD_P(has_cursor, 0);
 */
