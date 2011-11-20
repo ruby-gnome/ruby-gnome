@@ -223,31 +223,6 @@ rg_reparent(VALUE self, VALUE new_parent, VALUE x, VALUE y)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_clear(VALUE self)
-{
-    gdk_window_clear(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_clear_area(int argc, VALUE *argv, VALUE self)
-{
-    VALUE gen_expose, x, y, w, h;
-    rb_scan_args(argc, argv, "41", &x, &y, &w, &h, &gen_expose);
-
-    if (! NIL_P(gen_expose) && RVAL2CBOOL(gen_expose)){
-        gdk_window_clear_area_e(_SELF(self),
-                                NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
-    } else {
-        gdk_window_clear_area(_SELF(self),
-                              NUM2INT(x), NUM2INT(y), NUM2INT(w), NUM2INT(h));
-    }
-    return self;
-}
-*/
-
 static VALUE
 rg_raise(VALUE self)
 {
@@ -973,10 +948,6 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(scroll, 2);
     RG_DEF_METHOD(move_region, 3);
     RG_DEF_METHOD(reparent, 3);
-/* deprecated
-    RG_DEF_METHOD(clear, 0);
-    RG_DEF_METHOD(clear_area, -1);
-*/
     RG_DEF_METHOD(raise, 0);
     RG_DEF_METHOD(lower, 0);
     RG_DEF_METHOD(focus, 1);

@@ -34,5 +34,11 @@ module Gdk
       define_deprecated_const key.to_s.sub(/^GDK_KEY_/, 'GDK_'), [self, key].join('::')
     end
   end
+
+  class Window
+    extend GLib::Deprecatable
+    define_deprecated_method :clear, :warn => "Don't use this method."
+    define_deprecated_method :clear_area, :warn => "Don't use this method."
+  end
 end
 
