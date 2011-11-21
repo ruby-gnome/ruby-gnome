@@ -108,7 +108,7 @@ fork_command_default_argv(void)
 }
 
 static VALUE
-fork_command_full(int argc, VALUE *argv, VALUE self)
+rg_fork_command(int argc, VALUE *argv, VALUE self)
 {
     VALUE options, rb_pty_flags, rb_working_directory, rb_command_argv, rb_envv, rb_spawn_flags;
     int pty_flags, spawn_flags;
@@ -153,42 +153,6 @@ fork_command_full(int argc, VALUE *argv, VALUE self)
         RAISE_GERROR(error);
 
     return INT2NUM(child_pid);
-}
-
-static VALUE
-rg_fork_command(int argc, VALUE *argv, VALUE self)
-{
-    VALUE rb_command, rb_command_argv, rb_envv, rb_directory;
-    VALUE lastlog, utmp, wtmp;
-    char *command;
-    char **command_argv;
-    char **envv;
-    char *directory;
-    pid_t pid;
-
-    rb_scan_args(argc, argv, "07", &rb_command, &rb_command_argv,
-                 &rb_envv, &rb_directory, &lastlog, &utmp, &wtmp);
-
-    if (argc == 0 || TYPE(rb_command) == T_HASH)
-        return fork_command_full(1, &rb_command, self);
-
-    rb_warn("'fork_commad(command, argv, envv, directory, lastlog, utmp, wtmp)' style"
-            " has been deprecated since version 0.26."
-            " Use 'fork_commad(options = {})' style.");
-
-    command = NIL_P(rb_command) ? NULL : RVAL2CSTR(rb_command);
-    command_argv = rval2cstrary(rb_command_argv);
-    envv = rval2cstrary(rb_envv);
-    directory = NIL_P(rb_directory) ? NULL : RVAL2CSTR(rb_directory);
-    pid = vte_terminal_fork_command(RVAL2TERM(self), command,
-                                    command_argv, envv, directory,
-                                    NIL_P(lastlog) ? TRUE : RVAL2CBOOL(lastlog),
-                                    NIL_P(utmp) ? TRUE : RVAL2CBOOL(utmp),
-                                    NIL_P(wtmp) ? TRUE : RVAL2CBOOL(wtmp));
-    free_cstrary(command_argv);
-    free_cstrary(envv);
-
-    return INT2NUM(pid);
 }
 
 static VALUE
