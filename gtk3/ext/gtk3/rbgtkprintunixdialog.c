@@ -33,14 +33,22 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
+    VALUE options, rb_title, rb_parent;
+    const gchar *title;
+    GtkWindow *parent;
     GtkWidget *dialog;
-    VALUE title, parent;
 
-    rb_scan_args(argc, argv, "02", &title, &parent);
-    dialog = gtk_print_unix_dialog_new(NIL_P(title) ? NULL : RVAL2CSTR(title),
-                                       RVAL2GOBJ(parent));
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "title", &rb_title,
+                     "parent", &rb_parent,
+                     NULL);
+    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
 
+    dialog = gtk_print_unix_dialog_new(title, parent);
     RBGTK_INITIALIZE(self, dialog);
+
     return Qnil;
 }
 
