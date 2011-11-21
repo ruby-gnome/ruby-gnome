@@ -28,9 +28,19 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE title;
-    rb_scan_args(argc, argv, "01", &title);
-    RBGTK_INITIALIZE(self, gtk_font_selection_dialog_new(NIL_P(title) ? NULL : RVAL2CSTR(title)));
+    VALUE options, rb_title;
+    const gchar *title;
+    GtkWidget *dialog;
+
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "title", &rb_title,
+                     NULL);
+    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+
+    dialog = gtk_font_selection_dialog_new(title);
+    RBGTK_INITIALIZE(self, dialog);
+
     return Qnil;
 }
 

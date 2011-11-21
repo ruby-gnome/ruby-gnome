@@ -89,6 +89,17 @@ module Gtk
   class FontSelectionDialog
     extend GLib::Deprecatable
     define_deprecated_method :apply_button, :raise => "Don't use this method."
+
+    alias :__initialize__ :initialize
+    def initialize(*args)
+      if args.size == 1 && args.first.is_a?(Hash)
+        params = args.first
+      else
+        warn "#{caller[0]}: '#{self.class}#initialize(title)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        params = {:title => args.first}
+      end
+      __initialize__(params)
+    end
   end
 
   class Paned
