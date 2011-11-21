@@ -153,6 +153,23 @@ module Gtk
     end
   end
 
+  class RecentChooserDialog
+    alias :__initialize__ :initialize
+    def initialize(*args)
+      if args.size == 1 && args.first.is_a?(Hash)
+        params = args.first
+      else
+        title, parent, *buttons = args
+        if buttons.first.is_a?(RecentManager)
+          manager = buttons.shift
+        end
+        warn "#{caller[0]}: '#{self.class}#initialize(title, parent#{manager && ', manager'}, *buttons)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        params = {:title => title, :parent => parent, :manager => manager, :buttons => buttons}
+      end
+      __initialize__(params)
+    end
+  end
+
   class RecentManager
     extend GLib::Deprecatable
     define_deprecated_method :set_screen, :warn => "Don't use this method."

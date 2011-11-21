@@ -27,29 +27,32 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE title, parent, button_ary;
-    GtkWidget* dialog;
-    if (rb_obj_is_kind_of(argv[2], GTYPE2CLASS(GTK_TYPE_RECENT_MANAGER))){
-      VALUE manager;
-      rb_scan_args(argc, argv, "03*", &title, &parent, &manager, &button_ary);
+    VALUE options, rb_title, rb_parent, rb_manager, rb_button_ary;
+    const gchar *title;
+    GtkWindow *parent;
+    GtkRecentManager *manager;
+    GtkWidget *dialog;
 
-      dialog = gtk_recent_chooser_dialog_new_for_manager((const gchar*)RVAL2CSTR_ACCEPT_NIL(title),
-                                                         GTK_WINDOW(RVAL2GOBJ(parent)),
-                                                         GTK_RECENT_MANAGER(RVAL2GOBJ(manager)),
-                                                         (const gchar*)NULL, NULL);
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "title", &rb_title,
+                     "parent", &rb_parent,
+                     "manager", &rb_manager,
+                     "buttons", &rb_button_ary,
+                     NULL);
+    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    manager = NIL_P(rb_manager) ? NULL : GTK_RECENT_MANAGER(RVAL2GOBJ(rb_manager));
+
+    if (manager) {
+        dialog = gtk_recent_chooser_dialog_new_for_manager(title, parent, manager, NULL, NULL);
     } else {
-      rb_scan_args(argc, argv, "02*", &title, &parent, &button_ary);
-
-      dialog = gtk_recent_chooser_dialog_new((const gchar*)RVAL2CSTR_ACCEPT_NIL(title),
-                                             GTK_WINDOW(RVAL2GOBJ(parent)),
-                                             (const gchar*)NULL, NULL);
+        dialog = gtk_recent_chooser_dialog_new(title, parent, NULL, NULL);
     }
-
     RBGTK_INITIALIZE(self, dialog);
+    if (!NIL_P(rb_button_ary))
+        rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
 
-    if (button_ary != Qnil){
-      rbgtk_dialog_add_buttons_internal(self, button_ary);
-    }
     return Qnil;
 }
 
