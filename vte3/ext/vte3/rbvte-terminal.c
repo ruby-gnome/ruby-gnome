@@ -486,12 +486,6 @@ rg_font(VALUE self)
 }
 
 static VALUE
-rg_using_xft_p(VALUE self)
-{
-    return CBOOL2RVAL(vte_terminal_get_using_xft(RVAL2TERM(self)));
-}
-
-static VALUE
 rg_set_allow_bold(VALUE self, VALUE allow_bold)
 {
     vte_terminal_set_allow_bold(RVAL2TERM(self), RVAL2CBOOL(allow_bold));
@@ -946,7 +940,6 @@ Init_vte_terminal(VALUE mVte)
 
     RG_DEF_METHOD(set_font, 1);
     RG_DEF_METHOD(font, 0);
-    RG_DEF_METHOD_P(using_xft, 0);
     RG_DEF_METHOD(set_allow_bold, 1);
     RG_DEF_METHOD_P(allow_bold, 0);
     RG_DEF_METHOD_P(has_selection, 0);
