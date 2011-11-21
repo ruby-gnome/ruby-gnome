@@ -102,6 +102,20 @@ module Gtk
     end
   end
 
+  class MessageDialog
+    alias :__initialize__ :initialize
+    def initialize(*args)
+      if args.size == 1 && args.first.is_a?(Hash)
+        params = args.first
+      else
+        warn "#{caller[0]}: '#{self.class}#initialize(parent, flags, type, buttons_type, message)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        parent, flags, type, buttons_type, message = args
+        params = {:parent => parent, :flags => flags, :type => type, :buttons_type => buttons_type, :message => message}
+      end
+      __initialize__(params)
+    end
+  end
+
   class Paned
     extend GLib::Deprecatable
     %w(child1 child2).product(%w(resize shrink)).each do |child, prop|
