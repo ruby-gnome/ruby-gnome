@@ -163,7 +163,7 @@ rg_feed(VALUE self, VALUE data)
     length = RSTRING_LEN(data);
 
     if (length > 0) {
-        vte_terminal_feed(RVAL2TERM(self), RSTRING_PTR(data), length);
+        vte_terminal_feed(_SELF(self), RSTRING_PTR(data), length);
     }
 
     return self;
@@ -177,7 +177,7 @@ rg_feed_child(VALUE self, VALUE data)
     length = RSTRING_LEN(data);
 
     if (length > 0) {
-        vte_terminal_feed_child(RVAL2TERM(self), RSTRING_PTR(data), length);
+        vte_terminal_feed_child(_SELF(self), RSTRING_PTR(data), length);
     }
 
     return self;
@@ -191,7 +191,7 @@ rg_feed_child_binary(VALUE self, VALUE data)
     length = RSTRING_LEN(data);
 
     if (length > 0) {
-        vte_terminal_feed_child_binary(RVAL2TERM(self),
+        vte_terminal_feed_child_binary(_SELF(self),
                                        RSTRING_PTR(data), length);
     }
 
@@ -201,117 +201,117 @@ rg_feed_child_binary(VALUE self, VALUE data)
 static VALUE
 rg_copy_clipboard(VALUE self)
 {
-    vte_terminal_copy_clipboard(RVAL2TERM(self));
+    vte_terminal_copy_clipboard(_SELF(self));
     return self;
 }
 
 static VALUE
 rg_paste_clipboard(VALUE self)
 {
-    vte_terminal_paste_clipboard(RVAL2TERM(self));
+    vte_terminal_paste_clipboard(_SELF(self));
     return self;
 }
 
 static VALUE
 rg_copy_primary(VALUE self)
 {
-    vte_terminal_copy_primary(RVAL2TERM(self));
+    vte_terminal_copy_primary(_SELF(self));
     return self;
 }
 
 static VALUE
 rg_paste_primary(VALUE self)
 {
-    vte_terminal_paste_primary(RVAL2TERM(self));
+    vte_terminal_paste_primary(_SELF(self));
     return self;
 }
 
 static VALUE
 rg_set_size(VALUE self, VALUE columns, VALUE rows)
 {
-    vte_terminal_set_size(RVAL2TERM(self), NUM2LONG(columns), NUM2LONG(rows));
+    vte_terminal_set_size(_SELF(self), NUM2LONG(columns), NUM2LONG(rows));
     return self;
 }
 
 static VALUE
 rg_set_audible_bell(VALUE self, VALUE is_audible)
 {
-    vte_terminal_set_audible_bell(RVAL2TERM(self), RVAL2CBOOL(is_audible));
+    vte_terminal_set_audible_bell(_SELF(self), RVAL2CBOOL(is_audible));
     return self;
 }
 
 static VALUE
 rg_audible_bell_p(VALUE self)
 {
-    return CBOOL2RVAL(vte_terminal_get_audible_bell(RVAL2TERM(self)));
+    return CBOOL2RVAL(vte_terminal_get_audible_bell(_SELF(self)));
 }
 
 static VALUE
 rg_set_visible_bell(VALUE self, VALUE is_visible)
 {
-    vte_terminal_set_visible_bell(RVAL2TERM(self), RVAL2CBOOL(is_visible));
+    vte_terminal_set_visible_bell(_SELF(self), RVAL2CBOOL(is_visible));
     return self;
 }
 
 static VALUE
 rg_visible_bell_p(VALUE self)
 {
-    return CBOOL2RVAL(vte_terminal_get_visible_bell(RVAL2TERM(self)));
+    return CBOOL2RVAL(vte_terminal_get_visible_bell(_SELF(self)));
 }
 
 static VALUE
 rg_set_scroll_background(VALUE self, VALUE scroll)
 {
-    vte_terminal_set_scroll_background(RVAL2TERM(self), RVAL2CBOOL(scroll));
+    vte_terminal_set_scroll_background(_SELF(self), RVAL2CBOOL(scroll));
     return self;
 }
 
 static VALUE
 rg_set_scroll_on_output(VALUE self, VALUE scroll)
 {
-    vte_terminal_set_scroll_on_output(RVAL2TERM(self), RVAL2CBOOL(scroll));
+    vte_terminal_set_scroll_on_output(_SELF(self), RVAL2CBOOL(scroll));
     return self;
 }
 
 static VALUE
 rg_set_scroll_on_keystroke(VALUE self, VALUE scroll)
 {
-    vte_terminal_set_scroll_on_keystroke(RVAL2TERM(self), RVAL2CBOOL(scroll));
+    vte_terminal_set_scroll_on_keystroke(_SELF(self), RVAL2CBOOL(scroll));
     return self;
 }
 
 static VALUE
 rg_set_color_dim(VALUE self, VALUE dim)
 {
-    vte_terminal_set_color_dim(RVAL2TERM(self), RVAL2COLOR(dim));
+    vte_terminal_set_color_dim(_SELF(self), RVAL2COLOR(dim));
     return self;
 }
 
 static VALUE
 rg_set_color_bold(VALUE self, VALUE bold)
 {
-    vte_terminal_set_color_bold(RVAL2TERM(self), RVAL2COLOR(bold));
+    vte_terminal_set_color_bold(_SELF(self), RVAL2COLOR(bold));
     return self;
 }
 
 static VALUE
 rg_set_color_foreground(VALUE self, VALUE foreground)
 {
-    vte_terminal_set_color_foreground(RVAL2TERM(self), RVAL2COLOR(foreground));
+    vte_terminal_set_color_foreground(_SELF(self), RVAL2COLOR(foreground));
     return self;
 }
 
 static VALUE
 rg_set_color_background(VALUE self, VALUE background)
 {
-    vte_terminal_set_color_background(RVAL2TERM(self), RVAL2COLOR(background));
+    vte_terminal_set_color_background(_SELF(self), RVAL2COLOR(background));
     return self;
 }
 
 static VALUE
 rg_set_color_cursor(VALUE self, VALUE cursor)
 {
-    vte_terminal_set_color_cursor(RVAL2TERM(self),
+    vte_terminal_set_color_cursor(_SELF(self),
                                   NIL_P(cursor) ? NULL : RVAL2COLOR(cursor));
     return self;
 }
@@ -319,7 +319,7 @@ rg_set_color_cursor(VALUE self, VALUE cursor)
 static VALUE
 rg_set_color_highlight(VALUE self, VALUE highlight)
 {
-    vte_terminal_set_color_highlight(RVAL2TERM(self),
+    vte_terminal_set_color_highlight(_SELF(self),
                                      NIL_P(highlight) ?
                                        NULL : RVAL2COLOR(highlight));
     return self;
@@ -348,7 +348,7 @@ rg_set_colors(VALUE self, VALUE foreground, VALUE background,
         palette[i] = *color;
     }
 
-    vte_terminal_set_colors(RVAL2TERM(self), RVAL2COLOR(foreground),
+    vte_terminal_set_colors(_SELF(self), RVAL2COLOR(foreground),
                             RVAL2COLOR(background), palette, len);
     return self;
 }
@@ -356,7 +356,7 @@ rg_set_colors(VALUE self, VALUE foreground, VALUE background,
 static VALUE
 rg_set_default_colors(VALUE self)
 {
-    vte_terminal_set_default_colors(RVAL2TERM(self));
+    vte_terminal_set_default_colors(_SELF(self));
     return self;
 }
 
@@ -364,10 +364,10 @@ static VALUE
 rg_set_background_image(VALUE self, VALUE image_or_path)
 {
     if (RVAL2CBOOL(rb_obj_is_kind_of(image_or_path, rb_cString))) {
-        vte_terminal_set_background_image_file(RVAL2TERM(self),
+        vte_terminal_set_background_image_file(_SELF(self),
                                                RVAL2CSTR(image_or_path));
     } else {
-        vte_terminal_set_background_image(RVAL2TERM(self),
+        vte_terminal_set_background_image(_SELF(self),
                                           RVAL2GOBJ(image_or_path));
     }
 
@@ -377,14 +377,14 @@ rg_set_background_image(VALUE self, VALUE image_or_path)
 static VALUE
 rg_set_background_tint_color(VALUE self, VALUE color)
 {
-    vte_terminal_set_background_tint_color(RVAL2TERM(self), RVAL2COLOR(color));
+    vte_terminal_set_background_tint_color(_SELF(self), RVAL2COLOR(color));
     return self;
 }
 
 static VALUE
 rg_set_background_saturation(VALUE self, VALUE saturation)
 {
-    vte_terminal_set_background_saturation(RVAL2TERM(self),
+    vte_terminal_set_background_saturation(_SELF(self),
                                            NUM2DBL(saturation));
     return self;
 }
@@ -392,7 +392,7 @@ rg_set_background_saturation(VALUE self, VALUE saturation)
 static VALUE
 rg_set_background_transparent(VALUE self, VALUE transparent)
 {
-    vte_terminal_set_background_transparent(RVAL2TERM(self),
+    vte_terminal_set_background_transparent(_SELF(self),
                                             RVAL2CBOOL(transparent));
     return self;
 }
@@ -403,7 +403,7 @@ rg_set_cursor_blinks(VALUE self, VALUE blink)
     VteTerminalCursorBlinkMode mode;
 
     mode = RVAL2CBOOL(blink) ? VTE_CURSOR_BLINK_ON : VTE_CURSOR_BLINK_OFF;
-    vte_terminal_set_cursor_blink_mode(RVAL2TERM(self), mode);
+    vte_terminal_set_cursor_blink_mode(_SELF(self), mode);
     return self;
 }
 
@@ -413,7 +413,7 @@ rg_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
     VteTerminalCursorBlinkMode mode;
 
     mode = RVAL2GENUM(rb_mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
-    vte_terminal_set_cursor_blink_mode(RVAL2TERM(self), mode);
+    vte_terminal_set_cursor_blink_mode(_SELF(self), mode);
     return self;
 }
 
@@ -422,7 +422,7 @@ rg_cursor_blink_mode(VALUE self)
 {
     VteTerminalCursorBlinkMode mode;
 
-    mode = vte_terminal_get_cursor_blink_mode(RVAL2TERM(self));
+    mode = vte_terminal_get_cursor_blink_mode(_SELF(self));
     return GENUM2RVAL(mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
 }
 
@@ -432,7 +432,7 @@ rg_set_cursor_shape(VALUE self, VALUE rb_shape)
     VteTerminalCursorShape shape;
 
     shape = RVAL2GENUM(rb_shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
-    vte_terminal_set_cursor_shape(RVAL2TERM(self), shape);
+    vte_terminal_set_cursor_shape(_SELF(self), shape);
     return self;
 }
 
@@ -441,27 +441,27 @@ rg_cursor_shape(VALUE self)
 {
     VteTerminalCursorShape shape;
 
-    shape = vte_terminal_get_cursor_shape(RVAL2TERM(self));
+    shape = vte_terminal_get_cursor_shape(_SELF(self));
     return GENUM2RVAL(shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
 }
 
 static VALUE
 rg_child_exit_status(VALUE self)
 {
-    return INT2NUM(vte_terminal_get_child_exit_status(RVAL2TERM(self)));
+    return INT2NUM(vte_terminal_get_child_exit_status(_SELF(self)));
 }
 
 static VALUE
 rg_set_scrollback_lines(VALUE self, VALUE lines)
 {
-    vte_terminal_set_scrollback_lines(RVAL2TERM(self), NUM2LONG(lines));
+    vte_terminal_set_scrollback_lines(_SELF(self), NUM2LONG(lines));
     return self;
 }
 
 static VALUE
 rg_im_append_menuitems(VALUE self, VALUE menushell)
 {
-    vte_terminal_im_append_menuitems(RVAL2TERM(self), RVAL2GOBJ(menushell));
+    vte_terminal_im_append_menuitems(_SELF(self), RVAL2GOBJ(menushell));
     return self;
 }
 
@@ -469,9 +469,9 @@ static VALUE
 rg_set_font(VALUE self, VALUE desc_or_name)
 {
     if (rb_obj_is_kind_of(desc_or_name, rb_cString)) {
-        vte_terminal_set_font_from_string(RVAL2TERM(self), RVAL2CSTR(desc_or_name));
+        vte_terminal_set_font_from_string(_SELF(self), RVAL2CSTR(desc_or_name));
     } else {
-        vte_terminal_set_font(RVAL2TERM(self), RVAL2PFD(desc_or_name));
+        vte_terminal_set_font(_SELF(self), RVAL2PFD(desc_or_name));
     }
 
     return self;
@@ -481,33 +481,33 @@ static VALUE
 rg_font(VALUE self)
 {
     PangoFontDescription *font_desc;
-    font_desc = (PangoFontDescription *)vte_terminal_get_font(RVAL2TERM(self));
+    font_desc = (PangoFontDescription *)vte_terminal_get_font(_SELF(self));
     return PFD2RVAL(font_desc);
 }
 
 static VALUE
 rg_set_allow_bold(VALUE self, VALUE allow_bold)
 {
-    vte_terminal_set_allow_bold(RVAL2TERM(self), RVAL2CBOOL(allow_bold));
+    vte_terminal_set_allow_bold(_SELF(self), RVAL2CBOOL(allow_bold));
     return self;
 }
 
 static VALUE
 rg_allow_bold_p(VALUE self)
 {
-    return CBOOL2RVAL(vte_terminal_get_allow_bold(RVAL2TERM(self)));
+    return CBOOL2RVAL(vte_terminal_get_allow_bold(_SELF(self)));
 }
 
 static VALUE
 rg_has_selection_p(VALUE self)
 {
-    return CBOOL2RVAL(vte_terminal_get_has_selection(RVAL2TERM(self)));
+    return CBOOL2RVAL(vte_terminal_get_has_selection(_SELF(self)));
 }
 
 static VALUE
 rg_set_word_chars(VALUE self, VALUE word_chars)
 {
-    vte_terminal_set_word_chars(RVAL2TERM(self),
+    vte_terminal_set_word_chars(_SELF(self),
                                 NIL_P(word_chars) ?
                                   NULL : RVAL2CSTR(word_chars));
     return self;
@@ -516,40 +516,40 @@ rg_set_word_chars(VALUE self, VALUE word_chars)
 static VALUE
 rg_word_char_p(VALUE self, VALUE c)
 {
-    return CBOOL2RVAL(vte_terminal_is_word_char(RVAL2TERM(self), NUM2UINT(c)));
+    return CBOOL2RVAL(vte_terminal_is_word_char(_SELF(self), NUM2UINT(c)));
 }
 
 static VALUE
 rg_set_backspace_binding(VALUE self, VALUE binding)
 {
-    vte_terminal_set_backspace_binding(RVAL2TERM(self), RVAL2EB(binding));
+    vte_terminal_set_backspace_binding(_SELF(self), RVAL2EB(binding));
     return self;
 }
 
 static VALUE
 rg_set_delete_binding(VALUE self, VALUE binding)
 {
-    vte_terminal_set_delete_binding(RVAL2TERM(self), RVAL2EB(binding));
+    vte_terminal_set_delete_binding(_SELF(self), RVAL2EB(binding));
     return self;
 }
 
 static VALUE
 rg_mouse_autohide_p(VALUE self)
 {
-    return CBOOL2RVAL(vte_terminal_get_mouse_autohide(RVAL2TERM(self)));
+    return CBOOL2RVAL(vte_terminal_get_mouse_autohide(_SELF(self)));
 }
 
 static VALUE
 rg_set_mouse_autohide(VALUE self, VALUE setting)
 {
-    vte_terminal_set_mouse_autohide(RVAL2TERM(self), RVAL2CBOOL(setting));
+    vte_terminal_set_mouse_autohide(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
 
 static VALUE
 rg_reset(VALUE self, VALUE full, VALUE clear_history)
 {
-    vte_terminal_reset(RVAL2TERM(self), RVAL2CBOOL(full),
+    vte_terminal_reset(_SELF(self), RVAL2CBOOL(full),
                        RVAL2CBOOL(clear_history));
     return self;
 }
@@ -586,9 +586,9 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
 
     if (RVAL2CBOOL(include_trailing_spaces)) {
         text = vte_terminal_get_text_include_trailing_spaces(
-            RVAL2TERM(self), term_is_selected_cb, (gpointer)proc, attrs);
+            _SELF(self), term_is_selected_cb, (gpointer)proc, attrs);
     } else {
-        text = vte_terminal_get_text(RVAL2TERM(self), term_is_selected_cb,
+        text = vte_terminal_get_text(_SELF(self), term_is_selected_cb,
                                      (gpointer)proc, attrs);
     }
     rb_text = CSTR2RVAL(text);
@@ -617,7 +617,7 @@ rg_get_text_range(int argc, VALUE *argv, VALUE self)
     if (get_attrs != Qfalse)
         attrs = g_array_new(FALSE, TRUE, sizeof(VteCharAttributes));
 
-    text = vte_terminal_get_text_range(RVAL2TERM(self),
+    text = vte_terminal_get_text_range(_SELF(self),
                                        NUM2LONG(start_row),
                                        NUM2LONG(start_col),
                                        NUM2LONG(end_row),
@@ -642,30 +642,30 @@ static VALUE
 rg_cursor_position(VALUE self)
 {
     glong column, row;
-    vte_terminal_get_cursor_position(RVAL2TERM(self), &column, &row);
+    vte_terminal_get_cursor_position(_SELF(self), &column, &row);
     return rb_ary_new3(2, LONG2NUM(column), LONG2NUM(row));
 }
 
 static VALUE
 rg_match_clear_all(VALUE self)
 {
-    vte_terminal_match_clear_all(RVAL2TERM(self));
+    vte_terminal_match_clear_all(_SELF(self));
     return self;
 }
 
 static VALUE
 rg_match_add(VALUE self, VALUE match)
 {
-    return INT2NUM(vte_terminal_match_add(RVAL2TERM(self), RVAL2CSTR(match)));
+    return INT2NUM(vte_terminal_match_add(_SELF(self), RVAL2CSTR(match)));
 }
 
 static VALUE
 rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 {
     if (NIL_P(cursor) || RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR) {
-        vte_terminal_match_set_cursor(RVAL2TERM(self), NUM2INT(tag), RVAL2GOBJ(cursor));
+        vte_terminal_match_set_cursor(_SELF(self), NUM2INT(tag), RVAL2GOBJ(cursor));
     } else if (RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR_TYPE) {
-        vte_terminal_match_set_cursor_type(RVAL2TERM(self), NUM2INT(tag), RVAL2CT(cursor));
+        vte_terminal_match_set_cursor_type(_SELF(self), NUM2INT(tag), RVAL2CT(cursor));
     } else {
         vte_terminal_match_set_cursor_name(_SELF(self), NUM2INT(tag), RVAL2CSTR(cursor));
     }
@@ -676,7 +676,7 @@ rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 static VALUE
 rg_match_remove(VALUE self, VALUE tag)
 {
-    vte_terminal_match_remove(RVAL2TERM(self), NUM2INT(tag));
+    vte_terminal_match_remove(_SELF(self), NUM2INT(tag));
     return self;
 }
 
@@ -686,7 +686,7 @@ rg_match_check(VALUE self, VALUE column, VALUE row)
     char *string;
     int tag;
 
-    string = vte_terminal_match_check(RVAL2TERM(self), NUM2LONG(column),
+    string = vte_terminal_match_check(_SELF(self), NUM2LONG(column),
                                       NUM2LONG(row), &tag);
     if (string) {
         VALUE rb_string;
@@ -701,55 +701,55 @@ rg_match_check(VALUE self, VALUE column, VALUE row)
 static VALUE
 rg_default_emulation(VALUE self)
 {
-    return CSTR2RVAL(vte_terminal_get_default_emulation(RVAL2TERM(self)));
+    return CSTR2RVAL(vte_terminal_get_default_emulation(_SELF(self)));
 }
 
 static VALUE
 rg_status_line(VALUE self)
 {
-    return CSTR2RVAL(vte_terminal_get_status_line(RVAL2TERM(self)));
+    return CSTR2RVAL(vte_terminal_get_status_line(_SELF(self)));
 }
 
 static VALUE
 rg_adjustment(VALUE self)
 {
-    return GOBJ2RVAL(vte_terminal_get_adjustment(RVAL2TERM(self)));
+    return GOBJ2RVAL(vte_terminal_get_adjustment(_SELF(self)));
 }
 
 static VALUE
 rg_char_width(VALUE self)
 {
-    return LONG2NUM(vte_terminal_get_char_width(RVAL2TERM(self)));
+    return LONG2NUM(vte_terminal_get_char_width(_SELF(self)));
 }
 
 static VALUE
 rg_char_height(VALUE self)
 {
-    return LONG2NUM(vte_terminal_get_char_height(RVAL2TERM(self)));
+    return LONG2NUM(vte_terminal_get_char_height(_SELF(self)));
 }
 
 static VALUE
 rg_row_count(VALUE self)
 {
-    return LONG2NUM(vte_terminal_get_row_count(RVAL2TERM(self)));
+    return LONG2NUM(vte_terminal_get_row_count(_SELF(self)));
 }
 
 static VALUE
 rg_column_count(VALUE self)
 {
-    return LONG2NUM(vte_terminal_get_column_count(RVAL2TERM(self)));
+    return LONG2NUM(vte_terminal_get_column_count(_SELF(self)));
 }
 
 static VALUE
 rg_window_title(VALUE self)
 {
-    return CSTR2RVAL(vte_terminal_get_window_title(RVAL2TERM(self)));
+    return CSTR2RVAL(vte_terminal_get_window_title(_SELF(self)));
 }
 
 static VALUE
 rg_icon_title(VALUE self)
 {
-    return CSTR2RVAL(vte_terminal_get_icon_title(RVAL2TERM(self)));
+    return CSTR2RVAL(vte_terminal_get_icon_title(_SELF(self)));
 }
 
 static VALUE
