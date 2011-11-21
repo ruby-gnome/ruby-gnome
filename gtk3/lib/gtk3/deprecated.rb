@@ -58,6 +58,18 @@ module Gtk
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
+
+    alias :__initialize__ :initialize
+    def initialize(*args)
+      if args.size == 1 && args.first.is_a?(Hash)
+        params = args.first
+      else
+        warn "#{caller[0]}: '#{self.class}#initialize(title, parent, flags, *buttons)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        title, parent, flags, *buttons = args
+        params = {:title => title, :parent => parent, :flags => flags, :buttons => buttons}
+      end
+      __initialize__(params)
+    end
   end
 
   class FileChooserDialog
