@@ -42,6 +42,19 @@ module Gtk
     end
   end
 
+  class ColorSelectionDialog
+    alias :__initialize__ :initialize
+    def initialize(*args)
+      if args.size == 1 && args.first.is_a?(Hash)
+        params = args.first
+      else
+        warn "#{caller[0]}: '#{self.class}#initialize(title)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        params = {:title => args.first}
+      end
+      __initialize__(params)
+    end
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
