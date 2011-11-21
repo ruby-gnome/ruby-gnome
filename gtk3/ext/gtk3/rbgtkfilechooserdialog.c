@@ -43,15 +43,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
     parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
     action = NIL_P(rb_action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GENUM(rb_action, GTK_TYPE_FILE_CHOOSER_ACTION);
-    rb_button_ary = NIL_P(rb_button_ary) ? rb_ary_new() : rb_button_ary;
 
-    dialog = gtk_file_chooser_dialog_new(title, 
-                                         parent,
-                                         action, 
-                                         NULL,
-                                         NULL);
+    dialog = gtk_file_chooser_dialog_new(title, parent, action, NULL, NULL);
     RBGTK_INITIALIZE(self, dialog);
-    rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
+    if (!NIL_P(rb_button_ary))
+        rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
 
     return Qnil;
 }

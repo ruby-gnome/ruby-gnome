@@ -78,8 +78,8 @@ module Gtk
       if args.size == 1 && args.first.is_a?(Hash)
         params = args.first
       else
-        warn "#{caller[0]}: '#{self.class}#initialize(title, parent, action, back, buttons)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
-        title, parent, action, back, buttons = args
+        warn "#{caller[0]}: '#{self.class}#initialize(title, parent, action, back, *buttons)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
+        title, parent, action, back, *buttons = args
         params = {:title => title, :parent => parent, :action => action, :buttons => buttons}
       end
       __initialize__(params)
