@@ -729,18 +729,6 @@ rg_char_height(VALUE self)
 }
 
 static VALUE
-rg_char_descent(VALUE self)
-{
-    return LONG2NUM(vte_terminal_get_char_descent(RVAL2TERM(self)));
-}
-
-static VALUE
-rg_char_ascent(VALUE self)
-{
-    return LONG2NUM(vte_terminal_get_char_ascent(RVAL2TERM(self)));
-}
-
-static VALUE
 rg_row_count(VALUE self)
 {
     return LONG2NUM(vte_terminal_get_row_count(RVAL2TERM(self)));
@@ -960,8 +948,6 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(adjustment, 0);
     RG_DEF_METHOD(char_width, 0);
     RG_DEF_METHOD(char_height, 0);
-    RG_DEF_METHOD(char_descent, 0);
-    RG_DEF_METHOD(char_ascent, 0);
     RG_DEF_METHOD(row_count, 0);
     RG_DEF_METHOD(column_count, 0);
     RG_DEF_METHOD(window_title, 0);
