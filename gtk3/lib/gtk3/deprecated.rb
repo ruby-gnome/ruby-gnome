@@ -42,28 +42,55 @@ module Gtk
     end
   end
 
+  class ColorSelectionDialog
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize, 'title' do |_self, title|
+      {:title => title}
+    end
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_method :vbox, :child
+    define_deprecated_method_by_hash_args :initialize, 'title, parent, flags, *buttons' do |_self, title, parent, flags, *buttons|
+      {:title => title, :parent => parent, :flags => flags, :buttons => buttons}
+    end
   end
 
   class FileChooserDialog
-    alias :__initialize__ :initialize
-    def initialize(*args)
-      if args.size == 1 && args.first.is_a?(Hash)
-        params = args.first
-      else
-        warn "#{caller[0]}: '#{self.class}#initialize(title, parent, action, back, buttons)' style has been deprecated. Use '#{self.class}#initialize(options = {})' style."
-        title, parent, action, back, buttons = args
-        params = {:title => title, :parent => parent, :action => action, :buttons => buttons}
-      end
-      __initialize__(params)
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize, 'title, parent, action, back, *buttons' do |_self, title, parent, action, back, *buttons|
+      {:title => title, :parent => parent, :action => action, :buttons => buttons}
     end
   end
 
   class FontSelectionDialog
     extend GLib::Deprecatable
     define_deprecated_method :apply_button, :raise => "Don't use this method."
+    define_deprecated_method_by_hash_args :initialize, 'title' do |_self, title|
+      {:title => title}
+    end
+  end
+
+  class MessageDialog
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize, 'parent, flags, type, buttons_type, message' do |_self, parent, flags, type, buttons_type, message|
+      {:parent => parent, :flags => flags, :type => type, :buttons_type => buttons_type, :message => message}
+    end
+  end
+
+  class PageSetupUnixDialog
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
+      {:title => title, :parent => parent}
+    end
+  end
+
+  class PrintUnixDialog
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
+      {:title => title, :parent => parent}
+    end
   end
 
   class Paned
@@ -72,6 +99,14 @@ module Gtk
       define_deprecated_method "#{child}_#{prop}?", :warn => "Use '#{prop}' child property." do |_self|
         _self.child_get_property(_self.send(child), prop)
       end
+    end
+  end
+
+  class RecentChooserDialog
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize, 'title, parent, manager, *buttons' do |_self, title, parent, *buttons|
+      manager = buttons.first.is_a?(RecentManager) ? buttons.shift : nil
+      {:title => title, :parent => parent, :manager => manager, :buttons => buttons}
     end
   end
 

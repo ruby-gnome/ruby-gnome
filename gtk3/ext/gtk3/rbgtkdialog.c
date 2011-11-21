@@ -97,30 +97,28 @@ rg_add_buttons(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE title, parent, flags, button_ary;
-    rb_scan_args(argc, argv, "03*", &title, &parent, &flags, &button_ary);
+    VALUE options, rb_title, rb_parent, rb_flags, rb_button_ary;
+    const gchar *title;
+    GtkWindow *parent;
+    GtkDialogFlags flags;
+    GtkWidget *dialog;
 
-    if (argc == 0){
-        RBGTK_INITIALIZE(self, gtk_dialog_new());
-    } else if (argc > 0){
-        GtkDialog* dialog = GTK_DIALOG(g_object_new(GTK_TYPE_DIALOG, NULL));
-        GtkDialogFlags gflags = NIL_P(flags) ? 0 : RVAL2GFLAGS(flags, GTK_TYPE_DIALOG_FLAGS);
-        if (! NIL_P(title))
-            gtk_window_set_title(GTK_WINDOW(dialog), RVAL2CSTR(title));
-        if (! NIL_P(parent))
-            gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(RVAL2GOBJ(parent)));
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "title", &rb_title,
+                     "parent", &rb_parent,
+                     "flags", &rb_flags,
+                     "buttons", &rb_button_ary,
+                     NULL);
+    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
 
-        if (gflags & GTK_DIALOG_MODAL)
-            gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
-        if (gflags & GTK_DIALOG_DESTROY_WITH_PARENT)
-            gtk_window_set_destroy_with_parent(GTK_WINDOW(dialog), TRUE);
+    dialog = gtk_dialog_new_with_buttons(title, parent, flags, NULL, NULL);
+    RBGTK_INITIALIZE(self, dialog);
+    if (!NIL_P(rb_button_ary))
+        rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
 
-        RBGTK_INITIALIZE(self, dialog);
-        if (! NIL_P(button_ary))
-            rbgtk_dialog_add_buttons_internal(self, button_ary);
-    } else {
-        rb_raise(rb_eArgError, "invalid argument number");
-    }
     return Qnil;
 }
 

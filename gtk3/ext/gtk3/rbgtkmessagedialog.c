@@ -27,18 +27,31 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE parent, flags, type, buttons, message;
-    GtkWidget* w;
+    VALUE options, rb_parent, rb_flags, rb_type, rb_buttons_type, rb_message;
+    GtkWindow *parent;
+    GtkDialogFlags flags;
+    GtkMessageType type;
+    GtkButtonsType buttons_type;
+    const gchar *message;
+    GtkWidget *dialog;
 
-    rb_scan_args(argc, argv, "41", &parent, &flags, &type, &buttons, &message);
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "parent", &rb_parent,
+                     "flags", &rb_flags,
+                     "type", &rb_type,
+                     "buttons_type", &rb_buttons_type,
+                     "message", &rb_message,
+                     NULL);
+    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
+    type = NIL_P(rb_type) ? GTK_MESSAGE_INFO : RVAL2GENUM(rb_type, GTK_TYPE_MESSAGE_TYPE);
+    buttons_type = NIL_P(rb_buttons_type) ? GTK_BUTTONS_OK : RVAL2GENUM(rb_buttons_type, GTK_TYPE_BUTTONS_TYPE);
+    message = NIL_P(rb_message) ? "" : RVAL2CSTR(rb_message);
 
-    w = gtk_message_dialog_new(NIL_P(parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(parent)), 
-                               RVAL2GFLAGS(flags, GTK_TYPE_DIALOG_FLAGS), 
-                               RVAL2GENUM(type, GTK_TYPE_MESSAGE_TYPE), 
-                               RVAL2GENUM(buttons, GTK_TYPE_BUTTONS_TYPE),
-                               "%s",
-                               NIL_P(message) ? "": RVAL2CSTR(message));
-    RBGTK_INITIALIZE(self, w);
+    dialog = gtk_message_dialog_new(parent, flags, type, buttons_type, "%s", message);
+    RBGTK_INITIALIZE(self, dialog);
+
     return Qnil;
 }
 
