@@ -26,6 +26,17 @@ module Vte
       end
       __fork_command__(params)
     end
+
+    alias :__set_font__ :set_font
+    private :__set_font__
+    def set_font(*args)
+      if args.size == 1
+        params = args.first
+      else
+        raise GLib::DeprecatedError.new("#{caller[0]}: '#{self.class}#set_font(desc_or_name, antialias)' style has been deprecated. Use '#{self.class}#set_font(desc_or_name)' style.")
+      end
+      __set_font__(params)
+    end
   end
 end
 

@@ -466,32 +466,12 @@ rg_im_append_menuitems(VALUE self, VALUE menushell)
 }
 
 static VALUE
-rg_set_font(int argc, VALUE *argv, VALUE self)
+rg_set_font(VALUE self, VALUE desc_or_name)
 {
-    VALUE font_desc_or_name, rb_antialias;
-    VteTerminalAntiAlias antialias = VTE_ANTI_ALIAS_USE_DEFAULT;
-    VteTerminal *term;
-
-    rb_scan_args(argc, argv, "11", &font_desc_or_name, &rb_antialias);
-
-    term = RVAL2TERM(self);
-    if (!NIL_P(rb_antialias))
-        antialias = RVAL2AA(rb_antialias);
-
-    if (rb_obj_is_kind_of(font_desc_or_name, rb_cString)) {
-        char *name;
-        name = RVAL2CSTR(font_desc_or_name);
-        if (NIL_P(rb_antialias))
-            vte_terminal_set_font_from_string(term, name);
-        else
-            vte_terminal_set_font_from_string_full(term, name, antialias);
+    if (rb_obj_is_kind_of(desc_or_name, rb_cString)) {
+        vte_terminal_set_font_from_string(RVAL2TERM(self), RVAL2CSTR(desc_or_name));
     } else {
-        PangoFontDescription *font_desc;
-        font_desc = RVAL2PFD(font_desc_or_name);
-        if (NIL_P(rb_antialias))
-            vte_terminal_set_font(term, font_desc);
-        else
-            vte_terminal_set_font_full(term, font_desc, antialias);
+        vte_terminal_set_font(RVAL2TERM(self), RVAL2PFD(desc_or_name));
     }
 
     return self;
@@ -964,7 +944,7 @@ Init_vte_terminal(VALUE mVte)
 
     RG_DEF_METHOD(im_append_menuitems, 1);
 
-    RG_DEF_METHOD(set_font, -1);
+    RG_DEF_METHOD(set_font, 1);
     RG_DEF_METHOD(font, 0);
     RG_DEF_METHOD_P(using_xft, 0);
     RG_DEF_METHOD(set_allow_bold, 1);
