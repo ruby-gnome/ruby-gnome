@@ -32,36 +32,31 @@ Original Copyright:
 
 require 'sample'
 
-class FileSelectionSample < Gtk::FileSelection
+class FileChooserSample < Gtk::FileChooserDialog
   include Sample
   extend SampleClass
 
   def initialize
-    super("file selection dialog")
+    super(
+      :title => "file chooser dialog",
+      :buttons  => [
+        [Gtk::Stock::CANCEL,  Gtk::Dialog::ResponseType::CANCEL],
+        [Gtk::Stock::OPEN,    Gtk::Dialog::ResponseType::ACCEPT],
+      ]
+    )
+
     @destroyed = false
     signal_connect("destroy") do destroy end
+    signal_connect("response") do |widget, response_id|
+      case response_id
+      when Gtk::Dialog::ResponseType::ACCEPT
+        puts filename
+        destroy
+      when Gtk::Dialog::ResponseType::CANCEL
+        destroy
+      end
+    end
 
     set_window_position(Gtk::Window::POS_MOUSE)
-    hide_fileop_buttons
-
-    ok_button.signal_connect("clicked") do
-      puts filename
-      destroy
-    end
-    cancel_button.signal_connect("clicked") do
-      destroy
-    end
-
-    button = Gtk::Button.new("Hide Fileops")
-    button.signal_connect("clicked") do
-      hide_fileop_buttons
-    end
-    action_area.pack_start(button, false, false, 0)
-
-    button = Gtk::Button.new("Show Fileops")
-    button.signal_connect("clicked") do
-      show_fileop_buttons
-    end
-    action_area.pack_start(button, false, false, 0)
   end
 end

@@ -10,6 +10,7 @@ module Gtk
   define_deprecated_const :OptionMenu, :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :ItemFactory, :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :Tooltips, :raise => "Use 'Gtk::Tooltip' API."
+  define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
 
   class BindingSet
     extend GLib::Deprecatable
