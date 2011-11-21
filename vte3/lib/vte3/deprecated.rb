@@ -11,6 +11,9 @@ module Vte
     define_deprecated_method :using_xft?, :warn => "Don't use this method." do |_self|
       false
     end
+    define_deprecated_method :padding, :warn => "Use 'inner-border' style property." do |_self|
+      [0, 0]
+    end
 
     alias :__fork_command__ :fork_command
     private :__fork_command__

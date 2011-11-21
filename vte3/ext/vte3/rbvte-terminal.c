@@ -711,14 +711,6 @@ rg_status_line(VALUE self)
 }
 
 static VALUE
-rg_padding(VALUE self)
-{
-    int xpad, ypad;
-    vte_terminal_get_padding(RVAL2TERM(self), &xpad, &ypad);
-    return rb_ary_new3(2, INT2NUM(xpad), INT2NUM(ypad));
-}
-
-static VALUE
 rg_adjustment(VALUE self)
 {
     return GOBJ2RVAL(vte_terminal_get_adjustment(RVAL2TERM(self)));
@@ -965,7 +957,6 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(match_check, 2);
     RG_DEF_METHOD(default_emulation, 0);
     RG_DEF_METHOD(status_line, 0);
-    RG_DEF_METHOD(padding, 0);
     RG_DEF_METHOD(adjustment, 0);
     RG_DEF_METHOD(char_width, 0);
     RG_DEF_METHOD(char_height, 0);
