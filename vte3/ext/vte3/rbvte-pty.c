@@ -23,7 +23,6 @@
 #define RG_TARGET_NAMESPACE cPty
 #define _SELF(s) (VTE_PTY(RVAL2GOBJ(s)))
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_initialize(VALUE self, VALUE flags_or_fd)
 {
@@ -98,12 +97,10 @@ rg_set_utf8(VALUE self, VALUE utf8)
 
     return self;
 }
-#endif
 
 void
 Init_vte_pty(VALUE mVte)
 {
-#if VTE_CHECK_VERSION(0, 26, 0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_PTY, "Pty", mVte);
     G_DEF_CLASS(VTE_TYPE_PTY_ERROR, "Error", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(VTE_TYPE_PTY_FLAGS, "Flags", RG_TARGET_NAMESPACE);
@@ -116,5 +113,4 @@ Init_vte_pty(VALUE mVte)
     RG_DEF_METHOD(set_utf8, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }

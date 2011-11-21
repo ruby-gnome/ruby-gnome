@@ -92,7 +92,6 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 fork_command_default_argv(void)
 {
@@ -155,7 +154,6 @@ fork_command_full(int argc, VALUE *argv, VALUE self)
 
     return INT2NUM(child_pid);
 }
-#endif
 
 static VALUE
 rg_fork_command(int argc, VALUE *argv, VALUE self)
@@ -171,14 +169,12 @@ rg_fork_command(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "07", &rb_command, &rb_command_argv,
                  &rb_envv, &rb_directory, &lastlog, &utmp, &wtmp);
 
-#if VTE_CHECK_VERSION(0, 26, 0)
     if (argc == 0 || TYPE(rb_command) == T_HASH)
         return fork_command_full(1, &rb_command, self);
 
     rb_warn("'fork_commad(command, argv, envv, directory, lastlog, utmp, wtmp)' style"
             " has been deprecated since version 0.26."
             " Use 'fork_commad(options = {})' style.");
-#endif
 
     command = NIL_P(rb_command) ? NULL : RVAL2CSTR(rb_command);
     command_argv = rval2cstrary(rb_command_argv);
@@ -462,18 +458,13 @@ rg_set_background_transparent(VALUE self, VALUE transparent)
 static VALUE
 rg_set_cursor_blinks(VALUE self, VALUE blink)
 {
-#if VTE_CHECK_VERSION(0, 18, 0)
     VteTerminalCursorBlinkMode mode;
 
     mode = RVAL2CBOOL(blink) ? VTE_CURSOR_BLINK_ON : VTE_CURSOR_BLINK_OFF;
     vte_terminal_set_cursor_blink_mode(RVAL2TERM(self), mode);
-#else
-    vte_terminal_set_cursor_blinks(RVAL2TERM(self), RVAL2CBOOL(blink));
-#endif
     return self;
 }
 
-#if VTE_CHECK_VERSION(0, 18, 0)
 static VALUE
 rg_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 {
@@ -492,9 +483,7 @@ rg_cursor_blink_mode(VALUE self)
     mode = vte_terminal_get_cursor_blink_mode(RVAL2TERM(self));
     return GENUM2RVAL(mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 19, 1)
 static VALUE
 rg_set_cursor_shape(VALUE self, VALUE rb_shape)
 {
@@ -514,20 +503,11 @@ rg_cursor_shape(VALUE self)
     return GENUM2RVAL(shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
 }
 
-#if !VTE_CHECK_VERSION(0, 20, 0)
-static VALUE
-rg_pty(VALUE self)
-{
-    return INT2NUM(vte_terminal_get_pty(RVAL2TERM(self)));
-}
-#endif
-
 static VALUE
 rg_child_exit_status(VALUE self)
 {
     return INT2NUM(vte_terminal_get_child_exit_status(RVAL2TERM(self)));
 }
-#endif
 
 static VALUE
 rg_set_scrollback_lines(VALUE self, VALUE lines)
@@ -770,10 +750,8 @@ rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
         vte_terminal_match_set_cursor(RVAL2TERM(self), NUM2INT(tag), RVAL2GOBJ(cursor));
     } else if (RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR_TYPE) {
         vte_terminal_match_set_cursor_type(RVAL2TERM(self), NUM2INT(tag), RVAL2CT(cursor));
-#if VTE_CHECK_VERSION(0, 17, 1)
     } else {
         vte_terminal_match_set_cursor_name(_SELF(self), NUM2INT(tag), RVAL2CSTR(cursor));
-#endif
     }
 
     return self;
@@ -804,41 +782,11 @@ rg_match_check(VALUE self, VALUE column, VALUE row)
     }
 }
 
-#if !VTE_CHECK_VERSION(0, 20, 0)
-static VALUE
-rg_set_emulation(VALUE self, VALUE emulation)
-{
-    vte_terminal_set_emulation(RVAL2TERM(self), RVAL2CSTR(emulation));
-    return self;
-}
-
-static VALUE
-rg_emulation(VALUE self)
-{
-    return CSTR2RVAL(vte_terminal_get_emulation(RVAL2TERM(self)));
-}
-#endif
-
 static VALUE
 rg_default_emulation(VALUE self)
 {
     return CSTR2RVAL(vte_terminal_get_default_emulation(RVAL2TERM(self)));
 }
-
-#if !VTE_CHECK_VERSION(0, 20, 0)
-static VALUE
-rg_set_encoding(VALUE self, VALUE encoding)
-{
-    vte_terminal_set_encoding(RVAL2TERM(self), RVAL2CSTR(encoding));
-    return self;
-}
-
-static VALUE
-rg_encoding(VALUE self)
-{
-    return CSTR2RVAL(vte_terminal_get_encoding(RVAL2TERM(self)));
-}
-#endif
 
 static VALUE
 rg_status_line(VALUE self)
@@ -853,15 +801,6 @@ rg_padding(VALUE self)
     vte_terminal_get_padding(RVAL2TERM(self), &xpad, &ypad);
     return rb_ary_new3(2, INT2NUM(xpad), INT2NUM(ypad));
 }
-
-#if !VTE_CHECK_VERSION(0, 20, 0)
-static VALUE
-rg_set_pty(VALUE self, VALUE pty_master)
-{
-    vte_terminal_set_pty(RVAL2TERM(self), NUM2INT(pty_master));
-    return self;
-}
-#endif
 
 static VALUE
 rg_adjustment(VALUE self)
@@ -917,7 +856,6 @@ rg_icon_title(VALUE self)
     return CSTR2RVAL(vte_terminal_get_icon_title(RVAL2TERM(self)));
 }
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_pty_new(VALUE self, VALUE flags)
 {
@@ -930,9 +868,7 @@ rg_pty_new(VALUE self, VALUE flags)
 
     return GOBJ2RVAL(result);
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_search_find_next(VALUE self)
 {
@@ -942,9 +878,7 @@ rg_search_find_next(VALUE self)
 
     return CBOOL2RVAL(result);
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_search_find_previous(VALUE self)
 {
@@ -954,9 +888,7 @@ rg_search_find_previous(VALUE self)
 
     return CBOOL2RVAL(result);
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_search_get_wrap_around_p(VALUE self)
 {
@@ -966,9 +898,7 @@ rg_search_get_wrap_around_p(VALUE self)
 
     return CBOOL2RVAL(result);
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_search_set_wrap_around(VALUE self, VALUE wrap_around)
 {
@@ -976,9 +906,7 @@ rg_search_set_wrap_around(VALUE self, VALUE wrap_around)
 
     return self;
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 16, 0)
 static VALUE
 rg_select_all(VALUE self)
 {
@@ -986,9 +914,7 @@ rg_select_all(VALUE self)
 
     return self;
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 16, 0)
 static VALUE
 rg_select_none(VALUE self)
 {
@@ -996,7 +922,6 @@ rg_select_none(VALUE self)
 
     return self;
 }
-#endif
 
 static VALUE
 rg_set_opacity(VALUE self, VALUE opacity)
@@ -1006,7 +931,6 @@ rg_set_opacity(VALUE self, VALUE opacity)
     return self;
 }
 
-#if VTE_CHECK_VERSION(0, 26, 0)
 static VALUE
 rg_watch_child(VALUE self, VALUE child_pid)
 {
@@ -1014,9 +938,7 @@ rg_watch_child(VALUE self, VALUE child_pid)
 
     return self;
 }
-#endif
 
-#if VTE_CHECK_VERSION(0, 24, 0)
 static VALUE
 rg_write_contents(int argc, VALUE *argv, VALUE self)
 {
@@ -1038,7 +960,6 @@ rg_write_contents(int argc, VALUE *argv, VALUE self)
 
     return CBOOL2RVAL(result);
 }
-#endif
 
 void
 Init_vte_terminal(VALUE mVte)
@@ -1051,12 +972,8 @@ Init_vte_terminal(VALUE mVte)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_TERMINAL, "Terminal", mVte);
 
     G_DEF_CLASS(VTE_TYPE_TERMINAL_ERASE_BINDING, "EraseBinding", RG_TARGET_NAMESPACE);
-#if VTE_CHECK_VERSION(0, 18, 0)
     G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE, "CursorBlinkMode", RG_TARGET_NAMESPACE);
-#endif
-#if VTE_CHECK_VERSION(0, 19, 1)
     G_DEF_CLASS(VTE_TYPE_TERMINAL_CURSOR_SHAPE, "CursorShape", RG_TARGET_NAMESPACE);
-#endif
     G_DEF_CLASS(VTE_TYPE_TERMINAL_WRITE_FLAGS, "WriteFlags", RG_TARGET_NAMESPACE);
 
     RG_DEF_METHOD(initialize, 0);
@@ -1097,18 +1014,11 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(set_background_saturation, 1);
     RG_DEF_METHOD(set_background_transparent, 1);
     RG_DEF_METHOD(set_cursor_blinks, 1);
-#if VTE_CHECK_VERSION(0, 18, 0)
     RG_DEF_METHOD(set_cursor_blink_mode, 1);
     RG_DEF_METHOD(cursor_blink_mode, 0);
-#endif
-#if VTE_CHECK_VERSION(0, 19, 1)
     RG_DEF_METHOD(set_cursor_shape, 1);
     RG_DEF_METHOD(cursor_shape, 0);
-#if !VTE_CHECK_VERSION(0, 20, 0)
-    RG_DEF_METHOD(pty, 0);
-#endif
     RG_DEF_METHOD(child_exit_status, 0);
-#endif
     RG_DEF_METHOD(set_scrollback_lines, 1);
 
     RG_DEF_METHOD(im_append_menuitems, 1);
@@ -1139,25 +1049,9 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(match_set_cursor, 2);
     RG_DEF_METHOD(match_remove, 1);
     RG_DEF_METHOD(match_check, 2);
-
-#if !VTE_CHECK_VERSION(0, 20, 0)
-    RG_DEF_METHOD(set_emulation, 1);
-    RG_DEF_METHOD(emulation, 0);
-#endif
     RG_DEF_METHOD(default_emulation, 0);
-
-#if !VTE_CHECK_VERSION(0, 20, 0)
-    RG_DEF_METHOD(set_encoding, 1);
-    RG_DEF_METHOD(encoding, 0);
-#endif
-
     RG_DEF_METHOD(status_line, 0);
     RG_DEF_METHOD(padding, 0);
-
-#if !VTE_CHECK_VERSION(0, 20, 0)
-    RG_DEF_METHOD(set_pty, 1);
-#endif
-
     RG_DEF_METHOD(adjustment, 0);
     RG_DEF_METHOD(char_width, 0);
     RG_DEF_METHOD(char_height, 0);
@@ -1167,26 +1061,17 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(column_count, 0);
     RG_DEF_METHOD(window_title, 0);
     RG_DEF_METHOD(icon_title, 0);
-
-#if VTE_CHECK_VERSION(0, 26, 0)
     RG_DEF_METHOD(pty_new, 1);
     RG_DEF_METHOD(search_find_next, 0);
     RG_DEF_METHOD(search_find_previous, 0);
     RG_DEF_METHOD_P(search_get_wrap_around, 0);
     RG_DEF_METHOD(search_set_wrap_around, 1);
     RG_DEF_ALIAS("search_wrap_around=", "search_set_wrap_around");
-#endif
-#if VTE_CHECK_VERSION(0, 16, 0)
     RG_DEF_METHOD(select_all, 0);
     RG_DEF_METHOD(select_none, 0);
-#endif
     RG_DEF_METHOD(set_opacity, 1);
-#if VTE_CHECK_VERSION(0, 26, 0)
     RG_DEF_METHOD(watch_child, 1);
-#endif
-#if VTE_CHECK_VERSION(0, 24, 0)
     RG_DEF_METHOD(write_contents, -1);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

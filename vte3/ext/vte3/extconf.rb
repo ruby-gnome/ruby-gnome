@@ -32,7 +32,7 @@ end
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id, 0, 12, 1) or exit(false)
+PKGConfig.have_package(package_id, 0, 26, 0) or exit(false)
 
 ["glib2", "atk", "gtk3"].each do |package|
   directory = "#{package}#{version_suffix}"
