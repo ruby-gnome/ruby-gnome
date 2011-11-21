@@ -20,23 +20,10 @@ module Vte
     define_deprecated_method :char_ascent, :warn => "Don't use this method." do |_self|
       0
     end
-
-    alias :__fork_command__ :fork_command
-    private :__fork_command__
-    def fork_command(*args)
-      if args.size == 1 && args.first.is_a?(Hash)
-        params = args.first
-      else
-        warn "#{caller[0]}: '#{self.class}#fork_command(command, argv, envv, directory, lastlog, utmp, wtmp)' style has been deprecated. Use '#{self.class}#fork_command(options = {})' style."
-        command, argv, envv, directory, lastlog, utmp, wtmp = args
-        params = {
-          :pty_flags          => nil,  # TODO
-          :working_directory  => directory,
-          :argv               => command && [command, *argv],
-          :envv               => envv,
-        }
-      end
-      __fork_command__(params)
+    define_deprecated_method_by_hash_args :fork_command, 'command, argv, envv, directory, lastlog, utmp, wtmp' do |_self, command, argv, envv, directory, lastlog, utmp, wtmp|
+      pty_flags = nil # TODO
+      argv = command && [command, *argv]
+      {:pty_flags => pty_flags, :working_directory => directory, :argv => argv, :envv => envv}
     end
 
     alias :__set_font__ :set_font
