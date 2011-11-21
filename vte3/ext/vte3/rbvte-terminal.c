@@ -156,28 +156,6 @@ rg_fork_command(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_fork_pty(int argc, VALUE *argv, VALUE self)
-{
-    VALUE rb_envv, rb_directory, lastlog, utmp, wtmp;
-    char **envv;
-    char *directory;
-    pid_t pid;
-
-    rb_scan_args(argc, argv, "05", &rb_envv, &rb_directory,
-                 &lastlog, &utmp, &wtmp);
-
-    envv = rval2cstrary(rb_envv);
-    directory = NIL_P(rb_directory) ? NULL : RVAL2CSTR(rb_directory);
-    pid = vte_terminal_forkpty(RVAL2TERM(self), envv, directory,
-                               NIL_P(lastlog) ? TRUE : RVAL2CBOOL(lastlog),
-                               NIL_P(utmp) ? TRUE : RVAL2CBOOL(utmp),
-                               NIL_P(wtmp) ? TRUE : RVAL2CBOOL(wtmp));
-    free_cstrary(envv);
-
-    return INT2NUM(pid);
-}
-
-static VALUE
 rg_feed(VALUE self, VALUE data)
 {
     glong length;
@@ -943,7 +921,6 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(initialize, 0);
 
     RG_DEF_METHOD(fork_command, -1);
-    RG_DEF_METHOD(fork_pty, -1);
 
     RG_DEF_METHOD(feed, 1);
     RG_DEF_METHOD(feed_child, 1);
