@@ -109,6 +109,11 @@ module Gtk
     end
   end
 
+  class LinkButton
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :set_uri_hook, :warn => "Use 'clicked' signal."
+  end
+
   class MessageDialog
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize, 'parent, flags, type, buttons_type, message' do |_self, parent, flags, type, buttons_type, message|
