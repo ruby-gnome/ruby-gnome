@@ -16,6 +16,12 @@ module Gtk
   define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
 
+  class AboutDialog
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :set_email_hook, :warn => "Use 'activate-link' signal."
+    define_deprecated_singleton_method :set_url_hook, :warn => "Use 'activate-link' signal."
+  end
+
   class BindingSet
     extend GLib::Deprecatable
     define_deprecated_method :entry_clear, :entry_remove
