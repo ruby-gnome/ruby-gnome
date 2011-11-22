@@ -171,6 +171,15 @@ module Gtk
     alias :update_policy= :set_update_policy
   end
 
+  module RecentChooser
+    extend GLib::Deprecatable
+    define_deprecated_method :show_numbers, :warn => "Use 'Gtk::RecentChooserMenu#show_numbers?'." do |_self|
+      false
+    end
+    define_deprecated_method :set_show_numbers, :warn => "Use 'Gtk::RecentChooserMenu#set_show_numbers'."
+    alias :show_numbers= :set_show_numbers
+  end
+
   class RecentChooserDialog
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize, 'title, parent, manager, *buttons' do |_self, title, parent, *buttons|
