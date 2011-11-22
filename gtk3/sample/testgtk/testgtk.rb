@@ -75,7 +75,7 @@ def create_main_window
     ["color selection", ColorSelectionSample],
     ["dialog", DialogSample],
     ["entry", EntrySample],
-    ["file selection", FileSelectionSample],
+    ["file chooser", FileChooserSample],
     ["font selection", FontSelectionSample],
     ["labels", LabelSample],
     ["layout", LayoutSample],

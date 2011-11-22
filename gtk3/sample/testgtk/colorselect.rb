@@ -24,8 +24,8 @@ class ColorSelectionSample < Gtk::ColorSelectionDialog
       colorsel.current_color
     }
     ok_button.signal_connect("clicked"){
-      color = colorsel.current_color
-      colorsel.set_current_color(color)
+      puts colorsel.current_color
+      destroy
     }
     cancel_button.signal_connect("clicked"){destroy}
   end
