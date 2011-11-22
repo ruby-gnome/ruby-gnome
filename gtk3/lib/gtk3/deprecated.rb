@@ -194,6 +194,15 @@ module Gtk
     alias :screen= :set_screen
   end
 
+  class TextAttributes
+    extend GLib::Deprecatable
+    define_deprecated_method :realized?, :warn => "Don't use this method." do |_self|
+      false
+    end
+    define_deprecated_method :set_realized, :warn => "Don't use this method."
+    alias :realized= :set_realized
+  end
+
   class TreeView
     extend GLib::Deprecatable
     define_deprecated_method :widget_to_tree_coords, :convert_widget_to_bin_window_coords
