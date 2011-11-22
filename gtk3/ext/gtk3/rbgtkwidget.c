@@ -312,34 +312,11 @@ rg_reset_rc_styles(VALUE self)
     return self;
 }
 
-/* deprecated?
-static VALUE
-rg_s_set_default_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
-{
-    gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
-    return cmap;
-}
-*/
-
 static VALUE
 rg_s_default_style(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gtk_widget_get_default_style());
 }
-
-/* deprecated?
-static VALUE
-rg_s_default_colormap(G_GNUC_UNUSED VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_default_colormap());
-}
-
-static VALUE
-rg_s_default_visual(G_GNUC_UNUSED VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_default_visual());
-}
-*/
 
 static VALUE
 rg_set_direction(VALUE self, VALUE dir)
@@ -1144,14 +1121,7 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * singleton methods
      */
-/* deprecated?
-    RG_DEF_SMETHOD(set_default_colormap, 1);
-*/
     RG_DEF_SMETHOD(default_style, 0);
-/* deprecated?
-    RG_DEF_SMETHOD(default_colormap, 0);
-    RG_DEF_SMETHOD(default_visual, 0);
-*/
     RG_DEF_SMETHOD(set_default_direction, 1);
     RG_DEF_SMETHOD(default_direction, 0);
     RG_DEF_SMETHOD(pop_composite_child, 0);

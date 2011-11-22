@@ -223,6 +223,12 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_singleton_method :push_colormap, :warn => "Don't use this method."
     define_deprecated_singleton_method :pop_colormap, :warn => "Don't use this method."
+    define_deprecated_singleton_method :set_default_colormap, :warn => "Don't use this method."
+    class << self
+      alias :default_colormap= :set_default_colormap
+    end
+    define_deprecated_singleton_method :default_colormap, :raise => "Don't use this method."
+    define_deprecated_singleton_method :default_visual, :raise => "Don't use this method."
     define_deprecated_const :Flags, :raise => "Don't use this flags anymore."
     define_deprecated_method :flags, :raise => "Use the proper method."
     define_deprecated_method :set_flags, :warn => "Use the proper method."
