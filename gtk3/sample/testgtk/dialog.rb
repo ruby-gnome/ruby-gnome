@@ -16,6 +16,7 @@ class DialogSample < SampleDialog
     set_default_size(200, 100)
 
     button = Gtk::Button.new("OK")
+    button.signal_connect("clicked"){destroy}
     button.can_default = true
 
     action_area.pack_start(button)
