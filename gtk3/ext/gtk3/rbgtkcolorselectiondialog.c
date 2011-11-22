@@ -53,6 +53,4 @@ Init_gtk_color_selection_dialog(VALUE mGtk)
                                         "ColorSelectionDialog", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
-    /* NOTE: Backward compatibility */
-    RG_DEF_ALIAS("colorsel", "color_selection");
 }

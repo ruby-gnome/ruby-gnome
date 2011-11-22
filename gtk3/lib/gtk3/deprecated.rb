@@ -45,6 +45,7 @@ module Gtk
 
   class ColorSelectionDialog
     extend GLib::Deprecatable
+    define_deprecated_method :colorsel, :color_selection
     define_deprecated_method_by_hash_args :initialize, 'title' do |_self, title|
       {:title => title}
     end
