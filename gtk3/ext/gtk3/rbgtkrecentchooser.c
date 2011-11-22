@@ -21,7 +21,7 @@
 
 #include "global.h"
 
-#define RG_TARGET_NAMESPACE cRecentChooser
+#define RG_TARGET_NAMESPACE mRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
 static VALUE rb_mGtk;
@@ -191,7 +191,7 @@ void
 Init_gtk_recent_chooser(VALUE mGtk)
 {
   rb_mGtk = mGtk;
-  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
+  VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
 /* deprecated
   RG_DEF_METHOD(set_show_numbers, 1);
