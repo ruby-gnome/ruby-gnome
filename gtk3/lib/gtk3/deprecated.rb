@@ -26,6 +26,8 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method :connect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
     define_deprecated_method :disconnect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
+    define_deprecated_method :block_activate_from, :warn => "Don't use this method."
+    define_deprecated_method :unblock_activate_from, :warn => "Don't use this method."
   end
 
   class BindingSet
