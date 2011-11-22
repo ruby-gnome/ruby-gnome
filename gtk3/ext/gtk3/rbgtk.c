@@ -604,9 +604,6 @@ Init_gtk_gtk(void)
     Init_gtk_color_selection(RG_TARGET_NAMESPACE);
     Init_gtk_color_selection_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_combobox(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_comboboxentry(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_const(RG_TARGET_NAMESPACE);
     Init_gtk_container(RG_TARGET_NAMESPACE);
     Init_gtk_dialog(RG_TARGET_NAMESPACE);

@@ -28,25 +28,39 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE model_or_false;
-    GtkWidget* widget;
+    VALUE options, rb_entry, rb_model, rb_area;
+    gboolean entry;
+    GtkTreeModel *model;
+    GtkCellArea *area;
+    GtkWidget *widget;
 
-    rb_scan_args(argc, argv, "01", &model_or_false);
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "entry", &rb_entry,
+                     "model", &rb_model,
+                     "area", &rb_area,
+                     NULL);
+    entry = RVAL2CBOOL(rb_entry);
+    model = NIL_P(rb_model) ? NULL : GTK_TREE_MODEL(RVAL2GOBJ(rb_model));
+    area = NIL_P(rb_area) ? NULL : GTK_CELL_AREA(RVAL2GOBJ(rb_area));
 
-    if (rb_obj_is_kind_of(model_or_false, GTYPE2CLASS(GTK_TYPE_TREE_MODEL))){
-        widget = gtk_combo_box_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model_or_false)));
-/* deprecated
-    } else if (NIL_P(model_or_false) || TYPE(model_or_false) == T_TRUE){
-        widget = gtk_combo_box_new_text();
-*/
-    } else if (TYPE(model_or_false) == T_FALSE){
-        widget = gtk_combo_box_new();
+    if (entry) {
+        if (model)
+            widget = gtk_combo_box_new_with_model_and_entry(model);
+        else if (area)
+            widget = gtk_combo_box_new_with_area_and_entry(area);
+        else
+            widget = gtk_combo_box_new_with_entry();
     } else {
-        rb_raise(rb_eArgError, "invalid 2nd argument %s (except true/false or Gtk::TreeModel)", 
-                 rb_class2name(CLASS_OF(model_or_false)));
+        if (model)
+            widget = gtk_combo_box_new_with_model(model);
+        else if (area)
+            widget = gtk_combo_box_new_with_area(area);
+        else
+            widget = gtk_combo_box_new();
     }
-
     RBGTK_INITIALIZE(self, widget);
+
     return Qnil;
 }
 
@@ -69,44 +83,6 @@ rg_set_active_iter(VALUE self, VALUE iter)
     gtk_combo_box_set_active_iter(_SELF(self), RVAL2GTKTREEITER(iter));
     return self;
 }
-
-/* deprecated
-static VALUE
-rg_append_text(VALUE self, VALUE text)
-{
-    gtk_combo_box_append_text(_SELF(self), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-rg_insert_text(VALUE self, VALUE position, VALUE text)
-{
-    gtk_combo_box_insert_text(_SELF(self), NUM2INT(position), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-rg_prepend_text(VALUE self, VALUE text)
-{
-    gtk_combo_box_prepend_text(_SELF(self), RVAL2CSTR(text));
-    return self;
-}
-
-static VALUE
-rg_remove_text(VALUE self, VALUE position)
-{
-    gtk_combo_box_remove_text(_SELF(self), NUM2INT(position));
-    return self;
-}
-*/
-
-/* deprecated
-static VALUE
-rg_active_text(VALUE self)
-{
-    return CSTR2RVAL_FREE(gtk_combo_box_get_active_text(_SELF(self)));
-}
-*/
 
 static VALUE
 rg_popup_accessible(VALUE self)
@@ -147,16 +123,6 @@ Init_gtk_combobox(VALUE mGtk)
     RG_DEF_METHOD(active_iter, 0);
     RG_DEF_METHOD(set_active_iter, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "active_iter");
-/* deprecated
-    RG_DEF_METHOD(append_text, 1);
-    RG_DEF_METHOD(insert_text, 2);
-    RG_DEF_METHOD(prepend_text, 1);
-    RG_DEF_METHOD(remove_text, 1);
-*/
-
-/* deprecated
-    RG_DEF_METHOD(active_text, 0);
-*/
     RG_DEF_METHOD(popup_accessible, 0);
     RG_DEF_METHOD(set_row_separator_func, 0);
 }

@@ -39,9 +39,9 @@ module GLib
         if margs.empty? || (margs.size == 1 && margs.first.is_a?(Hash))
           params = margs.first
         else
+          params = block.call(self, *margs, &mblock)
           msg = "#{caller[0]}: '#{klass}##{deprecated_method}(#{args})' style has been deprecated."
           warn "#{msg} Use '#{klass}##{deprecated_method}(options = {})' style."
-          params = block.call(self, *margs, &mblock)
         end
         __send__(alias_name, params, &mblock)
       end

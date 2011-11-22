@@ -98,9 +98,6 @@ G_GNUC_INTERNAL void Init_gtk_colorbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_color_selection(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_color_selection_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_combobox(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_comboboxentry(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_const(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_container(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_dialog(VALUE mGtk);
