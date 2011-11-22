@@ -101,10 +101,8 @@ class NotebookSample < SampleWindow
 
     @notebook.realize
 
-    @book_open, @book_open_mask =
-      Gdk::Pixmap::create_from_xpm_d(@notebook.window, nil, $book_open_xpm)
-    @book_closed, @book_closed_mask =
-      Gdk::Pixmap::create_from_xpm_d(@notebook.window, nil, $book_closed_xpm)
+    @book_open = Gdk::Pixbuf.new($book_open_xpm)
+    @book_closed = Gdk::Pixbuf.new($book_closed_xpm)
 
     create_pages(1, 5)
 
@@ -123,12 +121,14 @@ class NotebookSample < SampleWindow
     label = Gtk::Label.new("Notebook Style :")
     hbox.add(label)
 
+=begin
     omenu = build_option_menu([
       OptionMenuItem.new("Standard", proc { standard_notebook }),
       OptionMenuItem.new("No tabs",  proc { notabs_notebook }),
       OptionMenuItem.new("Scrollable", proc { scrollable_notebook }) ], 0)
 
     hbox.add(omenu)
+=end
 
     button = Gtk::Button.new("Show all Pages")
 

@@ -6,10 +6,15 @@ module Gtk
   define_deprecated_const :HRuler, :raise => "Don't use this widget anymore."
   define_deprecated_const :VRuler, :raise => "Don't use this widget anymore."
   define_deprecated_const :InputDialog, :raise => "Don't use this widget anymore."
-  define_deprecated_const :Combo, :raise => "Use 'Gtk::ComboBox' instead."
+  define_deprecated_const :Combo, :raise => "Use 'Gtk::ComboBoxText' instead."
+  define_deprecated_const :ComboBoxEntry, :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :OptionMenu, :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :ItemFactory, :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :Tooltips, :raise => "Use 'Gtk::Tooltip' API."
+  define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :UPDATE_CONTINUOUS, :warn => "Don't use this constant anymore."
+  define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
+  define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
 
   class BindingSet
     extend GLib::Deprecatable
@@ -44,8 +49,26 @@ module Gtk
 
   class ColorSelectionDialog
     extend GLib::Deprecatable
+    define_deprecated_method :colorsel, :color_selection
     define_deprecated_method_by_hash_args :initialize, 'title' do |_self, title|
       {:title => title}
+    end
+  end
+
+  class ComboBox
+    extend GLib::Deprecatable
+    define_deprecated_method :append_text, :raise => "Use 'Gtk::ComboBoxText#append_text'."
+    define_deprecated_method :insert_text, :raise => "Use 'Gtk::ComboBoxText#insert_text'."
+    define_deprecated_method :prepend_text, :raise => "Use 'Gtk::ComboBoxText#prepend_text'."
+    define_deprecated_method :remove_text, :raise => "Use 'Gtk::ComboBoxText#remove'."
+    define_deprecated_method :active_text, :raise => "Use 'Gtk::ComboBoxText#active_text'."
+    define_deprecated_method_by_hash_args :initialize, 'model' do |_self, model|
+      case model
+      when TreeModel
+        {:model => model}
+      when true, false
+        raise GLib::DeprecatedError.new("#{caller[0]}: '#{self}#initialize(is_text_only)' style has been deprecated. Use 'Gtk::ComboBoxText'.")
+      end
     end
   end
 
@@ -79,6 +102,18 @@ module Gtk
     end
   end
 
+  class Notebook
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :set_window_creation_hook, :warn => "Use 'create-window' signal."
+    define_deprecated_method :query_tab_label_packing, :warn => "Use 'tab-expand' and 'tab-fill' child property." do |_self, child|
+      [_self.child_get_property(child, 'tab-expand'), _self.child_get_property(child, 'tab-fill')]
+    end
+    define_deprecated_method :set_tab_label_packing, :warn => "Use 'tab-expand' and 'tab-fill' child property." do |_self, child, expand, fill, pack_type|
+      _self.child_set_property(child, 'tab-expand', expand)
+      _self.child_set_property(child, 'tab-fill', fill)
+    end
+  end
+
   class PageSetupUnixDialog
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
@@ -100,6 +135,13 @@ module Gtk
         _self.child_get_property(_self.send(child), prop)
       end
     end
+  end
+
+  class Range
+    extend GLib::Deprecatable
+    define_deprecated_method :update_policy, :raise => "Don't use this method."
+    define_deprecated_method :set_update_policy, :warn => "Don't use this method."
+    alias :update_policy= :set_update_policy
   end
 
   class RecentChooserDialog
