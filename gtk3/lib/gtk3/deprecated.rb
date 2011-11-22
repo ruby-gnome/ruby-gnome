@@ -22,6 +22,12 @@ module Gtk
     define_deprecated_singleton_method :set_url_hook, :warn => "Use 'activate-link' signal."
   end
 
+  class Action
+    extend GLib::Deprecatable
+    define_deprecated_method :connect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
+    define_deprecated_method :disconnect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
+  end
+
   class BindingSet
     extend GLib::Deprecatable
     define_deprecated_method :entry_clear, :entry_remove

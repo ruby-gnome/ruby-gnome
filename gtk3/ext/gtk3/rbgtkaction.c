@@ -89,22 +89,6 @@ rg_create_tool_item(VALUE self)
     return GOBJ2RVAL(gtk_action_create_tool_item(_SELF(self)));
 }
 
-/* deprecated
-static VALUE
-rg_connect_proxy(VALUE self, VALUE proxy)
-{
-    gtk_action_connect_proxy(_SELF(self), RVAL2WIDGET(proxy));
-    return self;
-}
-
-static VALUE
-rg_disconnect_proxy(VALUE self, VALUE proxy)
-{
-    gtk_action_disconnect_proxy(_SELF(self), RVAL2WIDGET(proxy));
-    return self;
-}
-*/
-
 static VALUE
 rg_proxies(VALUE self)
 {
@@ -206,10 +190,6 @@ Init_gtk_action(VALUE mGtk)
     RG_DEF_METHOD(create_menu_item, 0);
     RG_DEF_METHOD(create_menu, 0);
     RG_DEF_METHOD(create_tool_item, 0);
-/* deprecated
-    RG_DEF_METHOD(connect_proxy, 1);
-    RG_DEF_METHOD(disconnect_proxy, 1);
-*/
     RG_DEF_METHOD(proxies, 0);
     RG_DEF_METHOD(connect_accelerator, 0);
     RG_DEF_METHOD(disconnect_accelerator, 0);
