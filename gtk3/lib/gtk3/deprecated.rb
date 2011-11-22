@@ -114,6 +114,13 @@ module Gtk
     define_deprecated_singleton_method :set_uri_hook, :warn => "Use 'clicked' signal."
   end
 
+  class MenuItem
+    extend GLib::Deprecatable
+    define_deprecated_method :remove_submenu, :warn => "Use '#{self}#set_submenu'." do |_self|
+      _self.set_submenu(nil)
+    end
+  end
+
   class MessageDialog
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize, 'parent, flags, type, buttons_type, message' do |_self, parent, flags, type, buttons_type, message|

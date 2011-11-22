@@ -68,23 +68,6 @@ mitem_set_submenu(VALUE self, VALUE child)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_remove_submenu(VALUE self)
-{
-    GtkMenuItem *item;
-    GtkWidget *submenu;
-
-    item = _SELF(self);
-    submenu = gtk_menu_item_get_submenu(item);
-    gtk_menu_item_remove_submenu(item);
-    if (submenu)
-        G_CHILD_REMOVE(self, GOBJ2RVAL(submenu));
-
-    return self;
-}
-*/
-
 static VALUE
 rg_toggle_size_request(VALUE self)
 {
@@ -107,9 +90,6 @@ Init_gtk_menu_item(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "submenu", mitem_set_submenu, 1);
-/* deprecated
-    RG_DEF_METHOD(remove_submenu, 0);
-*/
     RG_DEF_METHOD(toggle_size_request, 0);
     RG_DEF_METHOD(toggle_size_allocate, 1);
 }
