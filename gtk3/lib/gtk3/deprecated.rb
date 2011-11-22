@@ -12,6 +12,7 @@ module Gtk
   define_deprecated_const :ItemFactory, :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :Tooltips, :raise => "Use 'Gtk::Tooltip' API."
   define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :UpdateType, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_CONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
