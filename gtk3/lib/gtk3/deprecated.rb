@@ -12,6 +12,9 @@ module Gtk
   define_deprecated_const :ItemFactory, :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :Tooltips, :raise => "Use 'Gtk::Tooltip' API."
   define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :UPDATE_CONTINUOUS, :warn => "Don't use this constant anymore."
+  define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
+  define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
 
   class BindingSet
     extend GLib::Deprecatable
@@ -132,6 +135,13 @@ module Gtk
         _self.child_get_property(_self.send(child), prop)
       end
     end
+  end
+
+  class Range
+    extend GLib::Deprecatable
+    define_deprecated_method :update_policy, :raise => "Don't use this method."
+    define_deprecated_method :set_update_policy, :warn => "Don't use this method."
+    alias :update_policy= :set_update_policy
   end
 
   class RecentChooserDialog

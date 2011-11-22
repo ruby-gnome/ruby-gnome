@@ -159,12 +159,6 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_SUBMENU_PLACEMENT, "GTK_");
 */
 
-    /* GtkUpdateType */
-/* deprecated
-    G_DEF_CLASS(GTK_TYPE_UPDATE_TYPE, "UpdateType", mGtk);
-    G_DEF_CONSTANTS(mGtk, GTK_TYPE_UPDATE_TYPE, "GTK_");
-*/
-
     /* GtkSortType */
     G_DEF_CLASS(GTK_TYPE_SORT_TYPE, "SortType", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_SORT_TYPE, "GTK_");
