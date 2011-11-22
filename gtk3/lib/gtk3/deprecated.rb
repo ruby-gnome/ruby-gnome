@@ -190,7 +190,7 @@ module Gtk
 
   class RecentManager
     extend GLib::Deprecatable
-    define_deprecated_method :get_for_screen, :warn => "Use '#{self}#default'." do |_self, screen|
+    define_deprecated_singleton_method :get_for_screen, :warn => "Use '#{self}.default'." do |_self, screen|
       _self.default
     end
     define_deprecated_method :set_screen, :warn => "Don't use this method."
