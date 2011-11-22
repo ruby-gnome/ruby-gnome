@@ -314,20 +314,6 @@ rg_reset_rc_styles(VALUE self)
 
 /* deprecated?
 static VALUE
-rg_s_push_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
-{
-    gtk_widget_push_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
-    return cmap;
-}
-
-static VALUE
-rg_s_pop_colormap(VALUE self)
-{
-    gtk_widget_pop_colormap();
-    return self;
-}
-
-static VALUE
 rg_s_set_default_colormap(G_GNUC_UNUSED VALUE self, VALUE cmap)
 {
     gtk_widget_set_default_colormap(GDK_COLORMAP(RVAL2GOBJ(cmap)));
@@ -1159,8 +1145,6 @@ Init_gtk_widget(VALUE mGtk)
      * singleton methods
      */
 /* deprecated?
-    RG_DEF_SMETHOD(push_colormap, 1);
-    RG_DEF_SMETHOD(pop_colormap, 0);
     RG_DEF_SMETHOD(set_default_colormap, 1);
 */
     RG_DEF_SMETHOD(default_style, 0);
