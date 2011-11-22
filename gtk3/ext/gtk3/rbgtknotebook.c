@@ -181,25 +181,6 @@ rg_get_tab_label(VALUE self, VALUE child)
                                                 RVAL2WIDGET(child)));
 }
 
-/* deprecated
-static VALUE
-rg_query_tab_label_packing(VALUE self, VALUE child)
-{
-    gboolean expand, fill;
-    GtkPackType pack_type;
-    VALUE ary;
-
-    gtk_notebook_query_tab_label_packing(_SELF(self),
-                                         RVAL2WIDGET(child),
-                                         &expand, &fill, &pack_type);
-    ary = rb_ary_new2(3);
-    rb_ary_push(ary, CBOOL2RVAL(expand));
-    rb_ary_push(ary, CBOOL2RVAL(fill));
-    rb_ary_push(ary, GENUM2RVAL(pack_type, GTK_TYPE_PACK_TYPE));
-    return ary;
-}
-*/
-
 static VALUE
 rg_set_menu_label(VALUE self, VALUE child, VALUE label)
 {
@@ -226,18 +207,6 @@ rg_set_tab_label(VALUE self, VALUE child, VALUE label)
                                NIL_P(label)?NULL:RVAL2WIDGET(label));
     return self;
 }
-
-/* deprecated
-static VALUE
-rg_set_tab_label_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE pack_type)
-{
-    gtk_notebook_set_tab_label_packing(_SELF(self),
-                                       RVAL2WIDGET(child),
-                                       RVAL2CBOOL(expand), RVAL2CBOOL(fill),
-                                       RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
-    return self;
-}
-*/
 
 static VALUE
 rg_set_tab_label_text(VALUE self, VALUE child, VALUE text)
@@ -389,15 +358,9 @@ Init_gtk_notebook(VALUE mGtk)
     RG_DEF_METHOD(get_nth_page, 1);
     RG_DEF_METHOD(n_pages, 0);
     RG_DEF_METHOD(get_tab_label, 1);
-/* deprecated
-    RG_DEF_METHOD(query_tab_label_packing, 1);
-*/
     RG_DEF_METHOD(set_menu_label, 2);
     RG_DEF_METHOD(set_menu_label_text, 2);
     RG_DEF_METHOD(set_tab_label, 2);
-/* deprecated
-    RG_DEF_METHOD(set_tab_label_packing, 4);
-*/
     RG_DEF_METHOD(set_tab_label_text, 2);
     RG_DEF_METHOD(get_menu_label_text, 1);
     RG_DEF_METHOD(get_tab_label_text, 1);

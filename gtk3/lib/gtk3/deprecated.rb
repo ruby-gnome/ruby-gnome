@@ -99,6 +99,17 @@ module Gtk
     end
   end
 
+  class Notebook
+    extend GLib::Deprecatable
+    define_deprecated_method :query_tab_label_packing, :warn => "Use 'tab-expand' and 'tab-fill' child property." do |_self, child|
+      [_self.child_get_property(child, 'tab-expand'), _self.child_get_property(child, 'tab-fill')]
+    end
+    define_deprecated_method :set_tab_label_packing, :warn => "Use 'tab-expand' and 'tab-fill' child property." do |_self, child, expand, fill, pack_type|
+      _self.child_set_property(child, 'tab-expand', expand)
+      _self.child_set_property(child, 'tab-fill', fill)
+    end
+  end
+
   class PageSetupUnixDialog
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
