@@ -11,23 +11,12 @@ module GLib
       @@deprecated_const[self][deprecated_const.to_sym] = new_const
     end
 
+    def define_deprecated_singleton_method(deprecated_method, new_method = {}, &block)
+      __define_deprecated_method__(:singleton, deprecated_method, new_method, &block)
+    end
+
     def define_deprecated_method(deprecated_method, new_method = {}, &block)
-      klass = self
-      define_method(deprecated_method) do |*margs, &mblock|
-        msg = "#{caller[0]}: '#{klass}##{deprecated_method}' has been deprecated."
-        case new_method
-        when String, Symbol
-          warn "#{msg} Use '#{klass}##{new_method}'."
-          __send__(new_method, *margs, &mblock)
-        when Hash
-          if new_method[:raise]
-            raise DeprecatedError.new("#{msg} #{new_method[:raise]}")
-          elsif new_method[:warn]
-            warn "#{msg} #{new_method[:warn]}"
-            block.call(self, *margs, &mblock) if block
-          end
-        end
-      end
+      __define_deprecated_method__(:instance, deprecated_method, new_method, &block)
     end
 
     def define_deprecated_method_by_hash_args(deprecated_method, args, &block)
@@ -62,6 +51,8 @@ module GLib
         else
           if new_const[:raise]
             raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
+          elsif new_const[:warn]
+            warn "#{msg} #{new_const[:warn]}"
           else
             super
           end
@@ -73,6 +64,27 @@ module GLib
 
     def constant_get(const)
       const.split('::').inject(Object){|r, c| r.const_get(c)} rescue nil
+    end
+
+    def __define_deprecated_method__(type, deprecated_method, new_method = {}, &block)
+      def_method = type == :singleton ? :define_singleton_method : :define_method
+      sep = type == :singleton ? '.' : '#'
+      klass = self
+      __send__(def_method, deprecated_method) do |*margs, &mblock|
+        msg = "#{caller[0]}: '#{klass}#{sep}#{deprecated_method}' has been deprecated."
+        case new_method
+        when String, Symbol
+          warn "#{msg} Use '#{klass}#{sep}#{new_method}'."
+          __send__(new_method, *margs, &mblock)
+        when Hash
+          if new_method[:raise]
+            raise DeprecatedError.new("#{msg} #{new_method[:raise]}")
+          elsif new_method[:warn]
+            warn "#{msg} #{new_method[:warn]}"
+            block.call(self, *margs, &mblock) if block
+          end
+        end
+      end
     end
   end
 
