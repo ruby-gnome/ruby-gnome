@@ -101,6 +101,7 @@ module Gtk
 
   class Notebook
     extend GLib::Deprecatable
+    define_deprecated_singleton_method :set_window_creation_hook, :warn => "Use 'create-window' signal."
     define_deprecated_method :query_tab_label_packing, :warn => "Use 'tab-expand' and 'tab-fill' child property." do |_self, child|
       [_self.child_get_property(child, 'tab-expand'), _self.child_get_property(child, 'tab-fill')]
     end

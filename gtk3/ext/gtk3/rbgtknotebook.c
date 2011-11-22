@@ -268,18 +268,6 @@ creation_func(GtkNotebook *source, GtkWidget *page, gint x, gint y, gpointer fun
     return NIL_P(ret) ? (GtkNotebook*)NULL : GTK_NOTEBOOK(RVAL2GOBJ(ret));
 }
 
-/* deprecated
-static VALUE
-rg_s_set_window_creation_hook(VALUE self)
-{
-    VALUE func = rb_block_proc();
-    G_RELATIVE(self, func);
-    gtk_notebook_set_window_creation_hook((GtkNotebookWindowCreationFunc)creation_func, 
-                                          (gpointer)func, (GDestroyNotify)NULL);
-    return self;
-}    
-*/
-
 static VALUE
 rg_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
 {
@@ -368,9 +356,6 @@ Init_gtk_notebook(VALUE mGtk)
     RG_DEF_METHOD(set_tab_reorderable, 2);
     RG_DEF_METHOD(get_tab_detachable, 1);
     RG_DEF_METHOD(set_tab_detachable, 2);
-/* deprecated
-    RG_DEF_SMETHOD(set_window_creation_hook, 0);
-*/
     RG_DEF_METHOD(set_action_widget, 2);
     RG_DEF_METHOD(get_action_widget, 1);
 
