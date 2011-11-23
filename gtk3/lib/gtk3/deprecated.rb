@@ -110,7 +110,8 @@ module Gtk
   class ColorSelectionDialog
     extend GLib::Deprecatable
     define_deprecated_method :colorsel, :color_selection
-    define_deprecated_method_by_hash_args :initialize, 'title' do |_self, title|
+    define_deprecated_method_by_hash_args :initialize,
+        'title', ':title => nil' do |_self, title|
       {:title => title}
     end
   end
@@ -122,7 +123,8 @@ module Gtk
     define_deprecated_method :prepend_text, :raise => "Use 'Gtk::ComboBoxText#prepend_text'."
     define_deprecated_method :remove_text, :raise => "Use 'Gtk::ComboBoxText#remove'."
     define_deprecated_method :active_text, :raise => "Use 'Gtk::ComboBoxText#active_text'."
-    define_deprecated_method_by_hash_args :initialize, 'model' do |_self, model|
+    define_deprecated_method_by_hash_args :initialize,
+        'model', ':entry => false, :model => nil, :area => nil' do |_self, model|
       case model
       when TreeModel
         {:model => model}
@@ -137,7 +139,10 @@ module Gtk
     define_deprecated_flags Flags
     define_deprecated_enums ResponseType, 'RESPONSE'
     define_deprecated_method :vbox, :child
-    define_deprecated_method_by_hash_args :initialize, 'title, parent, flags, *buttons' do |_self, title, parent, flags, *buttons|
+    define_deprecated_method_by_hash_args :initialize,
+        'title, parent, flags, *buttons',
+        ':title => nil, :parent => nil, :flags => 0, :buttons => nil' do
+        |_self, title, parent, flags, *buttons|
       {:title => title, :parent => parent, :flags => flags, :buttons => buttons}
     end
   end
@@ -156,7 +161,10 @@ module Gtk
 
   class FileChooserDialog
     extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize, 'title, parent, action, back, *buttons' do |_self, title, parent, action, back, *buttons|
+    define_deprecated_method_by_hash_args :initialize,
+        'title, parent, action, back, *buttons',
+        ':title => nil, :parent => nil, :action => :open, :buttons => nil' do
+        |_self, title, parent, action, back, *buttons|
       {:title => title, :parent => parent, :action => action, :buttons => buttons}
     end
   end
@@ -169,7 +177,8 @@ module Gtk
   class FontSelectionDialog
     extend GLib::Deprecatable
     define_deprecated_method :apply_button, :raise => "Don't use this method."
-    define_deprecated_method_by_hash_args :initialize, 'title' do |_self, title|
+    define_deprecated_method_by_hash_args :initialize,
+        'title', ':title => nil' do |_self, title|
       {:title => title}
     end
   end
@@ -220,7 +229,10 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_enums ButtonsType, 'BUTTONS'
     define_deprecated_enums Type
-    define_deprecated_method_by_hash_args :initialize, 'parent, flags, type, buttons_type, message' do |_self, parent, flags, type, buttons_type, message|
+    define_deprecated_method_by_hash_args :initialize,
+        'parent, flags, type, buttons_type, message',
+        ':parent => nil, :flags => 0, :type => :info, :buttons_type => :ok, :message => ""' do
+        |_self, parent, flags, type, buttons_type, message|
       {:parent => parent, :flags => flags, :type => type, :buttons_type => buttons_type, :message => message}
     end
   end
@@ -239,7 +251,8 @@ module Gtk
 
   class PageSetupUnixDialog
     extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
+    define_deprecated_method_by_hash_args :initialize,
+        'title, parent', ':title => nil, :parent => nil' do |_self, title, parent|
       {:title => title, :parent => parent}
     end
   end
@@ -268,7 +281,8 @@ module Gtk
   class PrintUnixDialog
     extend GLib::Deprecatable
     define_deprecated_flags Capabilities, 'CAPABILITY'
-    define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
+    define_deprecated_method_by_hash_args :initialize,
+        'title, parent', ':title => nil, :parent => nil' do |_self, title, parent|
       {:title => title, :parent => parent}
     end
   end
@@ -308,7 +322,10 @@ module Gtk
 
   class RecentChooserDialog
     extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize, 'title, parent, manager, *buttons' do |_self, title, parent, *buttons|
+    define_deprecated_method_by_hash_args :initialize,
+        'title, parent, manager, *buttons',
+        ':title => nil, :parent => nil, :manager => nil, :buttons => nil' do
+        |_self, title, parent, *buttons|
       manager = buttons.first.is_a?(RecentManager) ? buttons.shift : nil
       {:title => title, :parent => parent, :manager => manager, :buttons => buttons}
     end

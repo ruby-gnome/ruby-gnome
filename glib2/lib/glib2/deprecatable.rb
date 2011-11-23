@@ -28,7 +28,7 @@ module GLib
       __define_deprecated_method__(:instance, deprecated_method, new_method, &block)
     end
 
-    def define_deprecated_method_by_hash_args(deprecated_method, args, &block)
+    def define_deprecated_method_by_hash_args(deprecated_method, old_args, new_args, &block)
       klass = self
       alias_name = "__#{deprecated_method}__"
       alias_method alias_name, deprecated_method
@@ -38,8 +38,8 @@ module GLib
           params = margs.first
         else
           params = block.call(self, *margs, &mblock)
-          msg = "#{caller[0]}: '#{klass}##{deprecated_method}(#{args})' style has been deprecated."
-          warn "#{msg} Use '#{klass}##{deprecated_method}(options = {})' style."
+          msg = "#{caller[0]}: '#{klass}##{deprecated_method}(#{old_args})' style has been deprecated."
+          warn "#{msg} Use '#{klass}##{deprecated_method}(#{new_args})' style."
         end
         __send__(alias_name, params, &mblock)
       end
