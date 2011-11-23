@@ -12,6 +12,7 @@ module GLib
     end
 
     def define_deprecated_enums(enums, prefix = nil)
+      enums = module_eval(enums.to_s) rescue return
       enums.constants.each do |const|
         deprecated_const = prefix ? "#{prefix}_#{const}" : const
         new_const = [enums, const].join('::')
@@ -53,7 +54,11 @@ module GLib
         case new_const
         when String
           new_const_val = constant_get(new_const)
-          warn "#{msg} Use '#{new_const}'."
+          case new_const_val
+          when GLib::Enum, GLib::Flags
+            alt = " or ':#{new_const_val.nick.gsub('-', '_')}'"
+          end
+          warn "#{msg} Use '#{new_const}'#{alt}."
           return const_set(deprecated_const, new_const_val)
         when Hash
           if new_const[:raise]
@@ -64,7 +69,7 @@ module GLib
           end
         end
       end
-      super
+      raise NameError.new("uninitialized constant #{[self, deprecated_const].join('::')}")
     end
 
     def constant_get(const)

@@ -14,8 +14,8 @@ end
 module GtkSource
   class View
     extend GLib::Deprecatable
-    define_deprecated_flags DrawSpacesFlags, 'DRAW_SPACES'
-    define_deprecated_enums SmartHomeEndType, 'SMART_HOME_END'
+    define_deprecated_flags :DrawSpacesFlags, 'DRAW_SPACES'
+    define_deprecated_enums :SmartHomeEndType, 'SMART_HOME_END'
     define_deprecated_method :set_mark_category_pixbuf, :warn => "Use 'GtkSource::MarkAttributes#set_pixbuf'." do |_self, category, pixbuf|
       _self.get_mark_attributes(category).first.set_pixbuf(pixbuf) # TODO
     end
