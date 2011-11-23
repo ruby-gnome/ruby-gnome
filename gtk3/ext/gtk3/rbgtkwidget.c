@@ -1137,11 +1137,9 @@ Init_gtk_widget(VALUE mGtk)
      */
     /* GtkWidgetHelpType */
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WIDGET_HELP_TYPE, "GTK_WIDGET_");
 
     /* GtkTextDirection */
     G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TEXT_DIRECTION, "GTK_");
 
     /* Special signals */
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-request", (GValToRValSignalFunc)widget_signal_size_request);

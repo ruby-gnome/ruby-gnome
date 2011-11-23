@@ -53,5 +53,4 @@ Init_gtk_arrow(VALUE mGtk)
 
     /* GtkArrowType (from General constants) */
     G_DEF_CLASS(GTK_TYPE_ARROW_TYPE, "Type", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ARROW_TYPE, "GTK_ARROW_");
 }

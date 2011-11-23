@@ -41,5 +41,4 @@ Init_gtk_menu_bar(VALUE mGtk)
 
     /* GtkPackDirection */
     G_DEF_CLASS(GTK_TYPE_PACK_DIRECTION, "PackDirection", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PACK_DIRECTION, "GTK_");
 }

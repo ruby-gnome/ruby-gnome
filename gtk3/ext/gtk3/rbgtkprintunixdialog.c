@@ -89,6 +89,5 @@ Init_gtk_print_unix_dialog(VALUE mGtk)
 
     /* GtkPrintCapabilities */
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PRINT_CAPABILITIES, "GTK_PRINT_");
 #endif
 }

@@ -297,7 +297,6 @@ Init_gtk_file_chooser(VALUE mGtk)
 
     /* GtkFileChooserAction */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_CHOOSER_ACTION, "GTK_FILE_CHOOSER_");
 
     /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
@@ -305,7 +304,6 @@ Init_gtk_file_chooser(VALUE mGtk)
 
     /* GtkFileChooserConfirmation */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "GTK_FILE_CHOOSER_");
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);
 }
