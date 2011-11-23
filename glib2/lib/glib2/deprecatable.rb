@@ -11,6 +11,15 @@ module GLib
       @@deprecated_const[self][deprecated_const.to_sym] = new_const
     end
 
+    def define_deprecated_enums(enums, prefix = nil)
+      enums.constants.each do |const|
+        deprecated_const = prefix ? "#{prefix}_#{const}" : const
+        new_const = [enums, const].join('::')
+        define_deprecated_const(deprecated_const, new_const)
+      end
+    end
+    alias :define_deprecated_flags :define_deprecated_enums
+
     def define_deprecated_singleton_method(deprecated_method, new_method = {}, &block)
       __define_deprecated_method__(:singleton, deprecated_method, new_method, &block)
     end
@@ -41,29 +50,25 @@ module GLib
     def const_missing(deprecated_const)
       if new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
         msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
-        if new_const.is_a?(String)
-          if new_const_val = constant_get(new_const)
-            warn "#{msg} Use '#{new_const}'."
-            const_set(deprecated_const, new_const_val)
-          else
-            super
-          end
-        else
+        case new_const
+        when String
+          new_const_val = constant_get(new_const)
+          warn "#{msg} Use '#{new_const}'."
+          return const_set(deprecated_const, new_const_val)
+        when Hash
           if new_const[:raise]
             raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
           elsif new_const[:warn]
             warn "#{msg} #{new_const[:warn]}"
-          else
-            super
+            return
           end
         end
-      else
-        super
       end
+      super
     end
 
     def constant_get(const)
-      const.split('::').inject(Object){|r, c| r.const_get(c)} rescue nil
+      const.split('::').inject(Object){|r, c| r.const_get(c)}
     end
 
     def __define_deprecated_method__(type, deprecated_method, new_method = {}, &block)

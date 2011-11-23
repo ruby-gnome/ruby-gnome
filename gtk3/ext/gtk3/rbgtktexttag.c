@@ -67,5 +67,4 @@ Init_gtk_texttag(VALUE mGtk)
 
     /* GtkWrapMode */
     G_DEF_CLASS(GTK_TYPE_WRAP_MODE, "WrapMode", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WRAP_MODE, "GTK_");
 }

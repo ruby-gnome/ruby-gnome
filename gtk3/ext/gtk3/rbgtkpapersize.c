@@ -182,5 +182,4 @@ Init_gtk_paper_size(VALUE mGtk)
 
     /* GtkUnit */
     G_DEF_CLASS(GTK_TYPE_UNIT, "Unit", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_UNIT, "GTK_");
 }

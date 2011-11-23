@@ -242,7 +242,6 @@ Init_gtk_treemodel(VALUE mGtk)
 
     /* GtkTreeModelFlags */
     G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FLAGS, "Flags", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_MODEL_FLAGS, "GTK_TREE_MODEL_");
 
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_changed", (GValToRValSignalFunc)signal_func);
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_inserted", (GValToRValSignalFunc)signal_func);

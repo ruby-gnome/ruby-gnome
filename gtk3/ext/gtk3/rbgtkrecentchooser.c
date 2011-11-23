@@ -21,25 +21,10 @@
 
 #include "global.h"
 
-#define RG_TARGET_NAMESPACE cRecentChooser
+#define RG_TARGET_NAMESPACE mRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
 static VALUE rb_mGtk;
-
-/* deprecated
-static VALUE
-rg_set_show_numbers(VALUE self, VALUE val)
-{
-    gtk_recent_chooser_set_show_numbers(_SELF(self), RVAL2CBOOL(val));
-    return self;
-}
-
-static VALUE
-rg_show_numbers(VALUE self)
-{
-    return CBOOL2RVAL(gtk_recent_chooser_get_show_numbers(_SELF(self)));
-}
-*/
 
 struct callback_arg
 {
@@ -190,34 +175,28 @@ rg_filters(VALUE self)
 void 
 Init_gtk_recent_chooser(VALUE mGtk)
 {
-  rb_mGtk = mGtk;
-  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
+    rb_mGtk = mGtk;
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
-/* deprecated
-  RG_DEF_METHOD(set_show_numbers, 1);
-  G_DEF_SETTER(RG_TARGET_NAMESPACE, "show_numbers");
-  RG_DEF_METHOD(show_numbers, 0);
-*/
-  RG_DEF_METHOD(set_sort_func, 0);
-  RG_DEF_METHOD(set_current_uri, 1);
-  G_DEF_SETTER(RG_TARGET_NAMESPACE, "current_uri");
-  RG_DEF_METHOD(current_uri, 0);
-  RG_DEF_METHOD(current_item, 0);
-  RG_DEF_METHOD(select_uri, 1);
-  RG_DEF_METHOD(unselect_uri, 1);
-  RG_DEF_METHOD(select_all, 0);
-  RG_DEF_METHOD(unselect_all, 0);
-  RG_DEF_METHOD(items, 0);
-  RG_DEF_METHOD(uris, 0);
-  RG_DEF_METHOD(add_filter, 1);
-  RG_DEF_METHOD(remove_filter, 1);
-  RG_DEF_METHOD(filters, 0);
+    RG_DEF_METHOD(set_sort_func, 0);
+    RG_DEF_METHOD(set_current_uri, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "current_uri");
+    RG_DEF_METHOD(current_uri, 0);
+    RG_DEF_METHOD(current_item, 0);
+    RG_DEF_METHOD(select_uri, 1);
+    RG_DEF_METHOD(unselect_uri, 1);
+    RG_DEF_METHOD(select_all, 0);
+    RG_DEF_METHOD(unselect_all, 0);
+    RG_DEF_METHOD(items, 0);
+    RG_DEF_METHOD(uris, 0);
+    RG_DEF_METHOD(add_filter, 1);
+    RG_DEF_METHOD(remove_filter, 1);
+    RG_DEF_METHOD(filters, 0);
 
-  /* GtkRecentChooserError */
-  G_DEF_ERROR(GTK_RECENT_CHOOSER_ERROR, "RecentChooserError", mGtk, rb_eRuntimeError,
-              GTK_TYPE_RECENT_CHOOSER_ERROR);
+    /* GtkRecentChooserError */
+    G_DEF_ERROR(GTK_RECENT_CHOOSER_ERROR, "RecentChooserError", mGtk, rb_eRuntimeError,
+                GTK_TYPE_RECENT_CHOOSER_ERROR);
 
-  /* GtkRecentSortType */
-  G_DEF_CLASS(GTK_TYPE_RECENT_SORT_TYPE, "SortType", RG_TARGET_NAMESPACE);
-  G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RECENT_SORT_TYPE, "GTK_RECENT_");
+    /* GtkRecentSortType */
+    G_DEF_CLASS(GTK_TYPE_RECENT_SORT_TYPE, "SortType", RG_TARGET_NAMESPACE);
 }

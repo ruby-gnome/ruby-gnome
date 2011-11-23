@@ -748,7 +748,6 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkScrollDirection */
     G_DEF_CLASS(GDK_TYPE_SCROLL_DIRECTION, "Direction", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_SCROLL_DIRECTION, "GDK_SCROLL_");
 
     /* GdkEventMotion */
     ev = gdkevents[GDK_MOTION_NOTIFY];
@@ -787,7 +786,6 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkVisibilityState */
     G_DEF_CLASS(GDK_TYPE_VISIBILITY_STATE, "State", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_VISIBILITY_STATE, "GDK_VISIBILITY_");
 
     /* GdkEventCrossing */
     ev = gdkevents[GDK_ENTER_NOTIFY];
@@ -806,10 +804,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkCrossingMode */
     G_DEF_CLASS(GDK_TYPE_CROSSING_MODE, "Mode", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_CROSSING_MODE, "GDK_CROSSING_");
     /* GdkNotifyType */
     G_DEF_CLASS(GDK_TYPE_NOTIFY_TYPE, "NotifyType", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_NOTIFY_TYPE, "GDK_");
 
     /* GdkEventFocus */
     ev = gdkevents[GDK_FOCUS_CHANGE];
@@ -837,7 +833,6 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkPropertyState */ 
     G_DEF_CLASS(GDK_TYPE_PROPERTY_STATE, "State", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_PROPERTY_STATE, "GDK_");
 
     /* GdkEventSelection */
     ev = gdkevents[GDK_SELECTION_CLEAR];
@@ -891,7 +886,6 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkWindowState */
     G_DEF_CLASS(GDK_TYPE_WINDOW_STATE, "WindowState", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_WINDOW_STATE, "GDK_WINDOW_STATE_");
 
     /* GdkEventSetting */
     ev = gdkevents[GDK_SETTING];
@@ -902,7 +896,6 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkSettingAction */
     G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "Action", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
 
     /* GdkEventOwnerChange */
     ev = gdkevents[GDK_OWNER_CHANGE];
@@ -916,7 +909,6 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkOwnerChange */
     G_DEF_CLASS(GDK_TYPE_OWNER_CHANGE, "OwnerChange", ev);
-    G_DEF_CONSTANTS(ev, GDK_TYPE_OWNER_CHANGE, "GDK_OWNER_CHANGE_");
 
     /* GdkEventGrabBroken */
     ev = gdkevents[GDK_GRAB_BROKEN];
@@ -944,10 +936,7 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_CLASS(GDK_TYPE_EVENT_TYPE, "Type", gdkEvent);
     G_RENAME_CONSTANT("2BUTTON_PRESS","BUTTON2_PRESS");
     G_RENAME_CONSTANT("3BUTTON_PRESS","BUTTON3_PRESS");
-    G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_TYPE, "GDK_");
 
     /* GdkEventMask */
     G_DEF_CLASS(GDK_TYPE_EVENT_MASK, "Mask", gdkEvent);
-    G_DEF_CONSTANTS(gdkEvent, GDK_TYPE_EVENT_MASK, "GDK_");
-
 }
