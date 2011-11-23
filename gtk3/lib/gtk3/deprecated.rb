@@ -1,5 +1,27 @@
 module Gtk
   extend GLib::Deprecatable
+  define_deprecated_flags AccelFlags, 'ACCEL'
+  define_deprecated_flags AttachOptions
+  define_deprecated_enums CornerType, 'CORNER'
+  define_deprecated_enums DeleteType, 'DELETE'
+  define_deprecated_enums DirectionType, 'DIR'
+  define_deprecated_enums ExpanderStyle, 'EXPANDER'
+  define_deprecated_enums Justification, 'JUSTIFY'
+  define_deprecated_enums MovementStep, 'MOVEMENT'
+  define_deprecated_enums Orientation, 'ORIENTATION'
+  define_deprecated_enums PackType, 'PACK'
+  define_deprecated_enums PathPriorityType, 'PATH_PRIO'
+  define_deprecated_enums PathType, 'PATH'
+  define_deprecated_enums PolicyType, 'POLICY'
+  define_deprecated_enums PositionType, 'POS'
+  define_deprecated_enums ReliefStyle, 'RELIEF'
+  define_deprecated_enums ResizeMode, 'RESIZE'
+  define_deprecated_enums ScrollStep, 'SCROLL'
+  define_deprecated_enums ScrollType, 'SCROLL'
+  define_deprecated_enums SelectionMode, 'SELECTION'
+  define_deprecated_enums ShadowType, 'SHADOW'
+  define_deprecated_enums StateType, 'STATE'
+  define_deprecated_enums SortType, 'SORT'
   define_deprecated_const :Curve, :raise => "Don't use this widget anymore."
   define_deprecated_const :GammaCurve, :raise => "Don't use this widget anymore."
   define_deprecated_const :Ruler, :raise => "Don't use this widget anymore."
@@ -12,9 +34,34 @@ module Gtk
   define_deprecated_const :ItemFactory, :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :Tooltips, :raise => "Use 'Gtk::Tooltip' API."
   define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :UpdateType, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_CONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
+
+  class AboutDialog
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :set_email_hook, :warn => "Use 'activate-link' signal."
+    define_deprecated_singleton_method :set_url_hook, :warn => "Use 'activate-link' signal."
+  end
+
+  class Action
+    extend GLib::Deprecatable
+    define_deprecated_method :connect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
+    define_deprecated_method :disconnect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
+    define_deprecated_method :block_activate_from, :warn => "Don't use this method."
+    define_deprecated_method :unblock_activate_from, :warn => "Don't use this method."
+  end
+
+  class Arrow
+    extend GLib::Deprecatable
+    define_deprecated_enums Type
+  end
+
+  class Assistant
+    extend GLib::Deprecatable
+    define_deprecated_enums PageType, 'PAGE'
+  end
 
   class BindingSet
     extend GLib::Deprecatable
@@ -27,17 +74,30 @@ module Gtk
     define_deprecated_method :pack_end_defaults, :pack_end
   end
 
+  class ButtonBox
+    extend GLib::Deprecatable
+    define_deprecated_enums Style
+  end
+
   class Calendar
     extend GLib::Deprecatable
+    define_deprecated_flags DisplayOptions
     define_deprecated_method :freeze, :warn => "Don't use this method."
     define_deprecated_method :thaw, :warn => "Don't use this method."
   end
 
   class CellRenderer
     extend GLib::Deprecatable
+    define_deprecated_enums Mode, 'MODE'
+    define_deprecated_flags State
     define_deprecated_method :editing_canceled, :warn => "Use '#{self}#stop_editing'." do |_self|
       _self.stop_editing(true)
     end
+  end
+
+  class CellRendererAccel
+    extend GLib::Deprecatable
+    define_deprecated_enums Mode, 'MODE'
   end
 
   class CellView
@@ -74,10 +134,24 @@ module Gtk
 
   class Dialog
     extend GLib::Deprecatable
+    define_deprecated_flags Flags
+    define_deprecated_enums ResponseType, 'RESPONSE'
     define_deprecated_method :vbox, :child
     define_deprecated_method_by_hash_args :initialize, 'title, parent, flags, *buttons' do |_self, title, parent, flags, *buttons|
       {:title => title, :parent => parent, :flags => flags, :buttons => buttons}
     end
+  end
+
+  module Drag
+    extend GLib::Deprecatable
+    define_deprecated_flags DestDefaults, 'DEST_DEFAULT'
+    define_deprecated_flags TargetFlags, 'TARGET'
+  end
+
+  module FileChooser
+    extend GLib::Deprecatable
+    define_deprecated_enums Action, 'ACTION'
+    define_deprecated_enums Confirmation, 'CONFIRMATION'
   end
 
   class FileChooserDialog
@@ -85,6 +159,11 @@ module Gtk
     define_deprecated_method_by_hash_args :initialize, 'title, parent, action, back, *buttons' do |_self, title, parent, action, back, *buttons|
       {:title => title, :parent => parent, :action => action, :buttons => buttons}
     end
+  end
+
+  class FileFilter
+    extend GLib::Deprecatable
+    define_deprecated_flags Flags
   end
 
   class FontSelectionDialog
@@ -95,8 +174,52 @@ module Gtk
     end
   end
 
+  module IconSize
+    extend GLib::Deprecatable
+    define_deprecated_enums IconSize
+  end
+
+  class IconTheme
+    extend GLib::Deprecatable
+    define_deprecated_flags LookupFlags, 'LOOKUP'
+  end
+
+  class IconView
+    extend GLib::Deprecatable
+    define_deprecated_enums Type
+  end
+
+  class Image
+    extend GLib::Deprecatable
+    define_deprecated_enums Type
+  end
+
+  class LinkButton
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :set_uri_hook, :warn => "Use 'clicked' signal."
+  end
+
+  class MenuBar
+    extend GLib::Deprecatable
+    define_deprecated_enums PackDirection, 'PACK_DIRECTION'
+  end
+
+  class MenuItem
+    extend GLib::Deprecatable
+    define_deprecated_method :remove_submenu, :warn => "Use '#{self}#set_submenu'." do |_self|
+      _self.set_submenu(nil)
+    end
+  end
+
+  class MenuShell
+    extend GLib::Deprecatable
+    define_deprecated_enums DirectionType, 'DIR'
+  end
+
   class MessageDialog
     extend GLib::Deprecatable
+    define_deprecated_enums ButtonsType, 'BUTTONS'
+    define_deprecated_enums Type
     define_deprecated_method_by_hash_args :initialize, 'parent, flags, type, buttons_type, message' do |_self, parent, flags, type, buttons_type, message|
       {:parent => parent, :flags => flags, :type => type, :buttons_type => buttons_type, :message => message}
     end
@@ -121,8 +244,30 @@ module Gtk
     end
   end
 
+  class PaperSize
+    extend GLib::Deprecatable
+    define_deprecated_enums Unit, 'UNIT'
+  end
+
+  class PrintOperation
+    extend GLib::Deprecatable
+    define_deprecated_enums Action, 'ACTION'
+    define_deprecated_enums Result, 'RESULT'
+    define_deprecated_enums Status, 'STATUS'
+  end
+
+  class PrintSettings
+    extend GLib::Deprecatable
+    define_deprecated_enums PageOrientation, 'ORIENTATION'
+    define_deprecated_enums PageSet, 'PAGE_SET'
+    define_deprecated_enums PrintDuplex, 'DUPLEX'
+    define_deprecated_enums PrintPages, 'PAGES'
+    define_deprecated_enums PrintQuality, 'QUALITY'
+  end
+
   class PrintUnixDialog
     extend GLib::Deprecatable
+    define_deprecated_flags Capabilities, 'CAPABILITY'
     define_deprecated_method_by_hash_args :initialize, 'title, parent' do |_self, title, parent|
       {:title => title, :parent => parent}
     end
@@ -139,9 +284,26 @@ module Gtk
 
   class Range
     extend GLib::Deprecatable
+    define_deprecated_enums SensitivityType, 'SENSITIVITY'
     define_deprecated_method :update_policy, :raise => "Don't use this method."
     define_deprecated_method :set_update_policy, :warn => "Don't use this method."
     alias :update_policy= :set_update_policy
+  end
+
+  module RC
+    extend GLib::Deprecatable
+    define_deprecated_flags Flags
+    define_deprecated_enums TokenType, 'TOKEN'
+  end
+
+  module RecentChooser
+    extend GLib::Deprecatable
+    define_deprecated_enums SortType, 'SORT'
+    define_deprecated_method :show_numbers, :warn => "Use 'Gtk::RecentChooserMenu#show_numbers?'." do |_self|
+      false
+    end
+    define_deprecated_method :set_show_numbers, :warn => "Use 'Gtk::RecentChooserMenu#set_show_numbers'."
+    alias :show_numbers= :set_show_numbers
   end
 
   class RecentChooserDialog
@@ -152,27 +314,93 @@ module Gtk
     end
   end
 
+  class RecentFilter
+    extend GLib::Deprecatable
+    define_deprecated_flags Flags
+  end
+
   class RecentManager
     extend GLib::Deprecatable
+    define_deprecated_singleton_method :get_for_screen, :warn => "Use '#{self}.default'." do |_self, screen|
+      _self.default
+    end
     define_deprecated_method :set_screen, :warn => "Don't use this method."
     alias :screen= :set_screen
   end
 
+  class SizeGroup
+    extend GLib::Deprecatable
+    define_deprecated_enums Mode
+  end
+
+  class SpinButton
+    extend GLib::Deprecatable
+    define_deprecated_enums Type
+    define_deprecated_enums UpdatePolicy, 'UPDATE'
+  end
+
+  class TextAttributes
+    extend GLib::Deprecatable
+    define_deprecated_method :realized?, :warn => "Don't use this method." do |_self|
+      false
+    end
+    define_deprecated_method :set_realized, :warn => "Don't use this method."
+    alias :realized= :set_realized
+  end
+
+  class TextIter
+    extend GLib::Deprecatable
+    define_deprecated_flags SearchFlags, 'SEARCH'
+  end
+
+  class TextTag
+    extend GLib::Deprecatable
+    define_deprecated_enums WrapMode, 'WRAP'
+  end
+
+  class TextView
+    extend GLib::Deprecatable
+    define_deprecated_enums WindowType, 'WINDOW'
+  end
+
+  module TreeModel
+    extend GLib::Deprecatable
+    define_deprecated_flags Flags
+  end
+
   class TreeView
     extend GLib::Deprecatable
+    define_deprecated_enums DropPosition, 'DROP'
+    define_deprecated_enums GridLines, 'GRID_LINES'
     define_deprecated_method :widget_to_tree_coords, :convert_widget_to_bin_window_coords
     define_deprecated_method :tree_to_widget_coords, :convert_bin_window_to_widget_coords
   end
 
   class TreeViewColumn
     extend GLib::Deprecatable
+    define_deprecated_enums Sizing
     define_deprecated_method :cell_renderers, :warn => "Use 'Gtk::CellLayout#cells'." do |_self|
       _self.cells
     end
   end
 
+  class UIManager
+    extend GLib::Deprecatable
+    define_deprecated_flags ItemType
+  end
+
   class Widget
     extend GLib::Deprecatable
+    define_deprecated_enums HelpType, 'HELP'
+    define_deprecated_enums TextDirection, 'TEXT_DIR'
+    define_deprecated_singleton_method :push_colormap, :warn => "Don't use this method."
+    define_deprecated_singleton_method :pop_colormap, :warn => "Don't use this method."
+    define_deprecated_singleton_method :set_default_colormap, :warn => "Don't use this method."
+    class << self
+      alias :default_colormap= :set_default_colormap
+    end
+    define_deprecated_singleton_method :default_colormap, :raise => "Don't use this method."
+    define_deprecated_singleton_method :default_visual, :raise => "Don't use this method."
     define_deprecated_const :Flags, :raise => "Don't use this flags anymore."
     define_deprecated_method :flags, :raise => "Use the proper method."
     define_deprecated_method :set_flags, :warn => "Use the proper method."
@@ -215,6 +443,12 @@ module Gtk
         raise ArgumentError.new("need 1 or 4 arguments.")
       end
     end
+  end
+
+  class Window
+    extend GLib::Deprecatable
+    define_deprecated_enums Position, 'POS'
+    define_deprecated_enums Type
   end
 end
 

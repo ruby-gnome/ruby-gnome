@@ -499,11 +499,9 @@ Init_gtk_window(VALUE mGtk)
 
     /* GtkWindowPosition (from General constants) */
     G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WINDOW_POSITION, "GTK_WIN_");
 
     /* GtkWindowType (from General constants) */
     G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_WINDOW_TYPE, "GTK_WINDOW_");
 
     {
         static VALUE toplevels_marker;

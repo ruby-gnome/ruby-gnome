@@ -89,22 +89,6 @@ rg_create_tool_item(VALUE self)
     return GOBJ2RVAL(gtk_action_create_tool_item(_SELF(self)));
 }
 
-/* deprecated
-static VALUE
-rg_connect_proxy(VALUE self, VALUE proxy)
-{
-    gtk_action_connect_proxy(_SELF(self), RVAL2WIDGET(proxy));
-    return self;
-}
-
-static VALUE
-rg_disconnect_proxy(VALUE self, VALUE proxy)
-{
-    gtk_action_disconnect_proxy(_SELF(self), RVAL2WIDGET(proxy));
-    return self;
-}
-*/
-
 static VALUE
 rg_proxies(VALUE self)
 {
@@ -125,22 +109,6 @@ rg_disconnect_accelerator(VALUE self)
     gtk_action_disconnect_accelerator(_SELF(self));
     return self;
 }
-
-/* deprecated
-static VALUE
-rg_block_activate_from(VALUE self, VALUE proxy)
-{
-    gtk_action_block_activate_from(_SELF(self), RVAL2WIDGET(proxy));
-    return self;
-}
-
-static VALUE
-rg_unblock_activate_from(VALUE self, VALUE proxy)
-{
-    gtk_action_unblock_activate_from(_SELF(self), RVAL2WIDGET(proxy));
-    return self;
-}
-*/
 
 static VALUE
 rg_set_accel_path(VALUE self, VALUE accel_path)
@@ -206,17 +174,9 @@ Init_gtk_action(VALUE mGtk)
     RG_DEF_METHOD(create_menu_item, 0);
     RG_DEF_METHOD(create_menu, 0);
     RG_DEF_METHOD(create_tool_item, 0);
-/* deprecated
-    RG_DEF_METHOD(connect_proxy, 1);
-    RG_DEF_METHOD(disconnect_proxy, 1);
-*/
     RG_DEF_METHOD(proxies, 0);
     RG_DEF_METHOD(connect_accelerator, 0);
     RG_DEF_METHOD(disconnect_accelerator, 0);
-/* deprecated
-    RG_DEF_METHOD(block_activate_from, 1);
-    RG_DEF_METHOD(unblock_activate_from, 1);
-*/
     RG_DEF_METHOD(set_accel_path, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_path");
     RG_DEF_METHOD(set_accel_group, 1);

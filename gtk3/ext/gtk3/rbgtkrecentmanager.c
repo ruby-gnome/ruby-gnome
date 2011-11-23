@@ -37,14 +37,6 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL(gtk_recent_manager_get_default());
 }
 
-/* deprecated
-static VALUE
-rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
-{
-    return GOBJ2RVAL(gtk_recent_manager_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
-}
-*/
-
 static VALUE
 rg_add_item(int argc, VALUE *argv, VALUE self)
 {
@@ -127,9 +119,6 @@ Init_gtk_recent_manager(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_SMETHOD(default, 0);
-/* deprecated
-    RG_DEF_SMETHOD(get_for_screen, 1);
-*/
     RG_DEF_METHOD(add_item, -1);
     RG_DEF_METHOD(remove_item, 1);
     RG_DEF_METHOD(lookup_item, 1);

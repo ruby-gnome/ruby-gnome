@@ -32,8 +32,6 @@ Init_gtk_gdk_const(VALUE mGdk)
 {
     /* GdkStatus */
     G_DEF_CLASS(GDK_TYPE_STATUS, "Status", mGdk);
-    G_DEF_CONSTANTS(mGdk, GDK_TYPE_STATUS, "GDK_");
-
 }
 
 

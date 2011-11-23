@@ -303,6 +303,4 @@ Init_gtk_gdk_property(VALUE mGdk)
 
     /* GdkPropMode from GdkProperties */
     G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_PROP_MODE, "GDK_PROP_");
-
 }

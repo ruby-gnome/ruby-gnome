@@ -48,7 +48,6 @@ Init_gtk_progress_bar(VALUE mGtk)
     /* GtkProgressBarOrientation */
 /* deprecated
     G_DEF_CLASS(GTK_TYPE_PROGRESS_BAR_ORIENTATION, "Orientation", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PROGRESS_BAR_ORIENTATION, "GTK_PROGRESS_");
 */
 
     RG_DEF_METHOD(initialize, 0);
