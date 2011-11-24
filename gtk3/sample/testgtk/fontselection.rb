@@ -37,8 +37,8 @@ class FontSelectionSample < Gtk::FontSelectionDialog
   extend SampleClass
 
   def initialize
-    super('Font Selection Dialog')
-    set_window_position(Gtk::Window::POS_MOUSE)
+    super(:title => 'Font Selection Dialog')
+    set_window_position(:mouse) # Gtk::Window::Position::MOUSE
     
     signal_connect('destroy') {
       destroy

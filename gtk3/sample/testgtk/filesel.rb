@@ -40,6 +40,9 @@ class FileChooserSample < Gtk::FileChooserDialog
     super(
       :title => "file chooser dialog",
       :buttons  => [
+# TODO
+#        [:cancel, :cancel], # Gtk::Stock::CANCEL,  Gtk::Dialog::ResponseType::CANCEL
+#        [:open,   :accept], # Gtk::Stock::OPEN,    Gtk::Dialog::ResponseType::ACCEPT
         [Gtk::Stock::CANCEL,  Gtk::Dialog::ResponseType::CANCEL],
         [Gtk::Stock::OPEN,    Gtk::Dialog::ResponseType::ACCEPT],
       ]
@@ -48,15 +51,16 @@ class FileChooserSample < Gtk::FileChooserDialog
     @destroyed = false
     signal_connect("destroy") do destroy end
     signal_connect("response") do |widget, response_id|
+      p response_id
       case response_id
-      when Gtk::Dialog::ResponseType::ACCEPT
+      when Gtk::Dialog::ResponseType::ACCEPT # TODO
         puts filename
         destroy
-      when Gtk::Dialog::ResponseType::CANCEL
+      when Gtk::Dialog::ResponseType::CANCEL # TODO
         destroy
       end
     end
 
-    set_window_position(Gtk::Window::POS_MOUSE)
+    set_window_position(:mouse) # Gtk::Window::Position::MOUSE
   end
 end

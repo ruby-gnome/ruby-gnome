@@ -48,7 +48,7 @@ class SampleDialog < Gtk::Dialog
   extend SampleClass
 
   def initialize(title)
-    super(title)
+    super(:title => title)
     @destroyed = false
     signal_connect("destroy") do destroy end
   end

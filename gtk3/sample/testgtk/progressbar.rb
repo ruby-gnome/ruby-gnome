@@ -40,7 +40,7 @@ class ProgressBarSample < SampleDialog
 
     vbox1 = Gtk::VBox.new(false, 5)
     vbox1.border_width = 10
-    vbox.add(vbox1)
+    child.add(vbox1)
 
     frame = Gtk::Frame.new("Progress")
     vbox1.add(frame)
@@ -53,7 +53,7 @@ class ProgressBarSample < SampleDialog
 
     @pbar = Gtk::ProgressBar.new
     align.add(@pbar)
-    @timer = Gtk.timeout_add(100){progress_timeout}
+    @timer = GLib::Timeout.add(100){progress_timeout}
 
     align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
     vbox2.pack_start(align, false, false, 5);
@@ -75,11 +75,10 @@ class ProgressBarSample < SampleDialog
     vbox2.add(tab)
 
     label = Gtk::Label.new("Orientation :");
-    tab.attach(label, 0, 1, 0, 1,
-	       Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-	       5, 5)
+    tab.attach(label, 0, 1, 0, 1, [:expand, :fill], [:expand, :fill], 5, 5) # Gtk::EXPAND | Gtk::FILL
     label.set_alignment(0, 0.5)
 
+=begin
     @omenu1 = build_option_menu(
 	[ OptionMenuItem.new("Left-Right", proc { |w| toggle_orientation(w) }),
 	  OptionMenuItem.new("Right-Left", proc { |w| toggle_orientation(w) }),
@@ -91,28 +90,21 @@ class ProgressBarSample < SampleDialog
 		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
 		5, 5);
     hbox.add(@omenu1)
-       
+=end
+
     check = Gtk::CheckButton.new("Show text")
     check.signal_connect("clicked") do |w| toggle_show_text(w) end
-    tab.attach(check, 0, 1, 1, 2,
-		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-		5, 5)
+    tab.attach(check, 0, 1, 1, 2, [:expand, :fill], [:expand, :fill], 5, 5)
 
     hbox = Gtk::HBox.new(false, 0)
-    tab.attach(hbox, 1, 2, 1, 2,
-	       Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-	       5, 5)
+    tab.attach(hbox, 1, 2, 1, 2, [:expand, :fill], [:expand, :fill], 5, 5)
 
     label = Gtk::Label.new("Text align :")
-    tab.attach(label, 0, 1, 2, 3,
- 		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-		5, 5)
+    tab.attach(label, 0, 1, 2, 3, [:expand, :fill], [:expand, :fill], 5, 5)
     label.set_alignment(0, 0.5)
 
     hbox = Gtk::HBox.new(false, 0)
-    tab.attach(hbox, 1, 2, 2, 3,
-		Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL,
-		5, 5)
+    tab.attach(hbox, 1, 2, 2, 3, [:expand, :fill], [:expand, :fill], 5, 5)
 
     label = Gtk::Label.new("x :")
     hbox.pack_start(label, false, true, 5)
@@ -134,7 +126,7 @@ class ProgressBarSample < SampleDialog
 
     button = Gtk::Button.new("close")
     button.signal_connect("clicked"){
-      Gtk::timeout_remove(@timer)
+      GLib::Source.remove(@timer)
       destroy
     }
     button.can_default = true

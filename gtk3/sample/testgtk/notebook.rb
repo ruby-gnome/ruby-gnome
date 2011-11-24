@@ -92,10 +92,10 @@ class NotebookSample < SampleWindow
     @notebook = Gtk::Notebook.new
     @notebook.signal_connect("switch_page") do |widget, page, num_page|
       unless destroyed?
-	page_switch(widget, page, num_page)
+        page_switch(widget, page, num_page)
       end
     end
-    @notebook.tab_pos = Gtk::POS_TOP
+    @notebook.tab_pos = :top # Gtk::PositionType::TOP
     vbox.add(@notebook)
     @notebook.border_width = 10
 
@@ -135,7 +135,7 @@ class NotebookSample < SampleWindow
     hbox.add(button)
     button.signal_connect('clicked'){
       @notebook.each do |w|
-	w.show
+        w.show
       end
     }
 
@@ -177,7 +177,7 @@ class NotebookSample < SampleWindow
     @notebook.set_scrollable(false)
     if @notebook.children.size == 15
       10.times do
-	@notebook.remove_page(5)
+        @notebook.remove_page(5)
       end
     end
   end
@@ -186,7 +186,7 @@ class NotebookSample < SampleWindow
     @notebook.set_show_tabs(false)
     if @notebook.children.size == 15
       10.times do
-	@notebook.remove_page(5)
+        @notebook.remove_page(5)
       end
     end
   end
@@ -217,29 +217,28 @@ class NotebookSample < SampleWindow
       hbox.pack_start(button1, true, true, 5)
       button1.active = true
       button1.signal_connect('toggled'){
-	expand, fill, pack = @notebook.query_tab_label_packing(child)
-	@notebook.set_tab_label_packing(child, expand, button1.active?, pack)
+        @notebook.child_set_property(child, :tab_fill, button1.active?)
       }
 
       button2 = Gtk::CheckButton.new("Expand Tab")
       hbox.pack_start(button2, true, true, 5)
       button2.signal_connect('toggled'){
-	expand, fill, pack = @notebook.query_tab_label_packing(child)
-	@notebook.set_tab_label_packing(child, button2.active?, fill, pack)
+        @notebook.child_set_property(child, :tab_expand, button2.active?)
       }
 
+=begin
       button3 = Gtk::CheckButton.new("Pack end")
       hbox.pack_start(button3, true, true, 5)
       button3.signal_connect('toggled'){
-	expand, fill, pack = @notebook.query_tab_label_packing(child)
-	@notebook.set_tab_label_packing(child, expand, fill,
-				       if button3.active? then Gtk::PACK_END else Gtk::PACK_START end)
+        expand, fill, pack = @notebook.query_tab_label_packing(child)
+        @notebook.set_tab_label_packing(child, expand, fill, button3.active? ? :end : :start)
       }
+=end
 
       button = Gtk::Button.new("Hide Page")
       vbox.pack_end(button, false, false, 5)
       button.signal_connect('clicked'){
-	child.hide
+        child.hide
       }
 
       child.show_all
