@@ -319,33 +319,6 @@ rg_m_init_add(VALUE self)
 }
 
 static VALUE
-rg_m_quit_add(VALUE self, VALUE main_level)
-{
-    volatile VALUE func = rb_block_proc();
-    VALUE rb_id;
-    callback_info_t *info;
-    guint id;
-
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id_relative_callbacks;
-    id = gtk_quit_add_full(NUM2UINT(main_level), (GtkFunction)gtk_m_function,
-                           NULL, (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__quit_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_quit_remove(VALUE self, VALUE quit_handler_id)
-{
-    gtk_quit_remove(NUM2UINT(quit_handler_id));
-    G_REMOVE_RELATIVE(self, id__quit_callbacks__, quit_handler_id);
-    return quit_handler_id;
-}
-
-static VALUE
 rg_m_idle_add(VALUE self)
 {
     VALUE func, rb_id;
@@ -512,8 +485,6 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(grab_remove, 1);
 /* deprecated
     RG_DEF_MODFUNC(init_add, 0);
-    RG_DEF_MODFUNC(quit_add, 1);
-    RG_DEF_MODFUNC(quit_remove, 1);
     RG_DEF_MODFUNC(idle_add, 0);
     RG_DEF_MODFUNC(idle_add_priority, 1);
     RG_DEF_MODFUNC(idle_remove, 1);
