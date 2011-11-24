@@ -307,119 +307,6 @@ rg_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
     return Qnil;
 }
 
-/* deprecated
-static VALUE
-rg_m_init_add(VALUE self)
-{
-    volatile VALUE func = rb_block_proc();
-
-    gtk_init_add((GtkFunction)gtk_m_function2, (gpointer)func);
-    G_RELATIVE(self, func);
-    return Qnil;
-}
-
-static VALUE
-rg_m_quit_add(VALUE self, VALUE main_level)
-{
-    volatile VALUE func = rb_block_proc();
-    VALUE rb_id;
-    callback_info_t *info;
-    guint id;
-
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id_relative_callbacks;
-    id = gtk_quit_add_full(NUM2UINT(main_level), (GtkFunction)gtk_m_function,
-                           NULL, (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__quit_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_quit_remove(VALUE self, VALUE quit_handler_id)
-{
-    gtk_quit_remove(NUM2UINT(quit_handler_id));
-    G_REMOVE_RELATIVE(self, id__quit_callbacks__, quit_handler_id);
-    return quit_handler_id;
-}
-
-static VALUE
-rg_m_timeout_add(VALUE self, VALUE interval)
-{
-    VALUE func, rb_id;
-    callback_info_t *info;
-    guint id;
-
-    func = rb_block_proc();
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id__timeout_callbacks__;
-    id = gtk_timeout_add_full(NUM2UINT(interval), (GtkFunction)gtk_m_function,
-                              NULL, (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__timeout_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_timeout_remove(VALUE self, VALUE id)
-{
-    gtk_timeout_remove(NUM2UINT(id));
-    G_REMOVE_RELATIVE(self, id__timeout_callbacks__, id);
-    return Qnil;
-}
-
-static VALUE
-rg_m_idle_add(VALUE self)
-{
-    VALUE func, rb_id;
-    callback_info_t *info;
-    guint id;
-
-    func = rb_block_proc();
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id__idle_callbacks__;
-    id = gtk_idle_add_full(G_PRIORITY_DEFAULT_IDLE,
-                           (GtkFunction)gtk_m_function, NULL,
-                           (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__idle_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_idle_add_priority(VALUE self, VALUE priority)
-{
-    VALUE func, rb_id;
-    callback_info_t *info;
-    guint id;
-
-    func = rb_block_proc();
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id__idle_callbacks__;
-    id = gtk_idle_add_full(NUM2INT(priority), (GtkFunction)gtk_m_function,
-                           NULL, (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__idle_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_idle_remove(VALUE self, VALUE id)
-{
-    gtk_idle_remove(NUM2UINT(id));
-    G_REMOVE_RELATIVE(self, id__idle_callbacks__, id);
-    return Qnil;
-}
-*/
-
 static gint
 gtk_m_key_snoop_func(GtkWidget *grab_widget, GdkEventKey *event, gpointer func)
 {
@@ -537,17 +424,6 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(grab_add, 1);
     RG_DEF_MODFUNC(current, 0);
     RG_DEF_MODFUNC(grab_remove, 1);
-/* deprecated
-    RG_DEF_MODFUNC(init_add, 0);
-    RG_DEF_MODFUNC(quit_add, 1);
-    RG_DEF_MODFUNC(quit_remove, 1);
-
-    RG_DEF_MODFUNC(timeout_add, 1);
-    RG_DEF_MODFUNC(timeout_remove, 1);
-    RG_DEF_MODFUNC(idle_add, 0);
-    RG_DEF_MODFUNC(idle_add_priority, 1);
-    RG_DEF_MODFUNC(idle_remove, 1);
-*/
     RG_DEF_MODFUNC(key_snooper_install, 0);
     RG_DEF_MODFUNC(key_snooper_remove, 1);
     RG_DEF_MODFUNC(current_event, 0);
@@ -645,9 +521,6 @@ Init_gtk_gtk(void)
     Init_gtk_imcontext_simple(RG_TARGET_NAMESPACE);
     Init_gtk_im_multicontext(RG_TARGET_NAMESPACE);
     Init_gtk_invisible(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_item(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_label(RG_TARGET_NAMESPACE);
     Init_gtk_layout(RG_TARGET_NAMESPACE);
     Init_gtk_link_button(RG_TARGET_NAMESPACE);
@@ -672,9 +545,6 @@ Init_gtk_gtk(void)
     Init_gtk_print_operation_preview(RG_TARGET_NAMESPACE);
     Init_gtk_print_settings(RG_TARGET_NAMESPACE);
     Init_gtk_print_unix_dialog(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_progress(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_progress_bar(RG_TARGET_NAMESPACE);
     Init_gtk_radio_action(RG_TARGET_NAMESPACE);
     Init_gtk_radio_button(RG_TARGET_NAMESPACE);

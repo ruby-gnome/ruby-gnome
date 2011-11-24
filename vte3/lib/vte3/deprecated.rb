@@ -20,7 +20,10 @@ module Vte
     define_deprecated_method :char_ascent, :warn => "Don't use this method." do |_self|
       0
     end
-    define_deprecated_method_by_hash_args :fork_command, 'command, argv, envv, directory, lastlog, utmp, wtmp' do |_self, command, argv, envv, directory, lastlog = true, utmp = true, wtmp = true|
+    define_deprecated_method_by_hash_args :fork_command,
+        'command, argv, envv, directory, lastlog, utmp, wtmp',
+        ':pty_flags => :default, :working_directory => <current>, :argv => <user_shell>, :envv => nil, :spawn_flags => :child_inherits_stdin' do
+        |_self, command, argv, envv, directory, lastlog = true, utmp = true, wtmp = true|
       pty_flags = [!lastlog && :no_lastlog, !utmp && :no_utmp, !wtmp && :no_wtmp].select{|f| f}
       argv = command && [command, *argv]
       {:pty_flags => pty_flags, :working_directory => directory, :argv => argv, :envv => envv}

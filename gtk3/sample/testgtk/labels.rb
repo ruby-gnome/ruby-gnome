@@ -29,12 +29,12 @@ class LabelSample < SampleWindow
     create_frame("Left Justified Label",
 		 "This is a Left-Justified\nMulti-line label.\nThird      line",
 		 vbox) do |label|
-      label.justify = Gtk::JUSTIFY_LEFT
+      label.justify = :left # Gtk::Justification::LEFT
     end
     create_frame("Right Justified Label",
 		 "This is a Right-Justified\nMulti-line label.\nFourth line, (j/k)",
 		 vbox) do |label|
-      label.justify = Gtk::JUSTIFY_RIGHT
+      label.justify = :right # Gtk::Justification::RIGHT
     end
 
     vbox = Gtk::VBox::new(false, 5)
@@ -48,13 +48,13 @@ class LabelSample < SampleWindow
     create_frame("Filled, wrapped label",
 		 "This is an example of a line-wrapped, filled label.  It should be taking up the entire              width allocated to it.  Here is a seneance to prove my point.  Here is another sentence. Here comes the sun, do de do de do.\n    This is a new paragraph.\n    This is another newer, longer, better paragraph.  It is coming to an end, unfortunately.",
 		 vbox) do |label|
-      label.justify = Gtk::JUSTIFY_FILL
+      label.justify = :fill # Gtk::Justification::FILL
       label.wrap = true
     end
     create_frame("Underlined label",
 		 "This label is underlined!\nThis one is underlined in 日本語の入用quite a funky fashion",
 		 vbox) do |label|
-      label.justify = Gtk::JUSTIFY_LEFT
+      label.justify = :left
       label.pattern = "_________________________ _ _________ _ _____ _ __ __  ___ ____ _____"
     end
 

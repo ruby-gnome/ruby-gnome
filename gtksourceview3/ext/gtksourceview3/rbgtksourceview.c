@@ -100,12 +100,6 @@ Init_gtk_sourceview (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "View", mGtkSource);
 
-    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
-                    rb_ary_new3(3,
-                                INT2FIX(GTKSOURCEVIEW3_MAJOR_VERSION),
-                                INT2FIX(GTKSOURCEVIEW3_MINOR_VERSION),
-                                INT2FIX(GTKSOURCEVIEW3_MICRO_VERSION)));
-
     RG_DEF_METHOD(initialize, -1);
 #ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
     RG_DEF_METHOD(get_mark_category_background, 1);

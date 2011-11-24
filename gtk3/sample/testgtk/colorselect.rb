@@ -13,18 +13,18 @@ class ColorSelectionSample < Gtk::ColorSelectionDialog
   extend SampleClass
 
   def initialize
-    super("color selection dialog")
+    super(:title => "color selection dialog")
     @destroyed = false
     signal_connect("destroy"){destroy}
 
-    colorsel.set_has_opacity_control(true)
-    set_window_position(Gtk::Window::POS_MOUSE)
+    color_selection.set_has_opacity_control(true)
+    set_window_position(:mouse) # Gtk::Window::Position::MOUSE
 
-    colorsel.signal_connect("color_changed"){
-      colorsel.current_color
+    color_selection.signal_connect("color_changed"){
+      color_selection.current_color
     }
     ok_button.signal_connect("clicked"){
-      puts colorsel.current_color
+      puts color_selection.current_color
       destroy
     }
     cancel_button.signal_connect("clicked"){destroy}

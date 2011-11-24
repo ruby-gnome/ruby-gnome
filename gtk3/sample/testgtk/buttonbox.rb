@@ -47,17 +47,13 @@ class ButtonBoxSample < SampleWindow
     vbox.border_width = 10
     frame_horz.add(vbox)
 
-    vbox.pack_start(create_bbox(true, "Spread", 40,
-				Gtk::ButtonBox::SPREAD))
+    vbox.pack_start(create_bbox(true, "Spread", 40, :spread)) # Gtk::ButtonBox::Style::SPREAD
 
-    vbox.pack_start(create_bbox(true, "Edge", 40,
-				Gtk::ButtonBox::EDGE), true, true, 5)
+    vbox.pack_start(create_bbox(true, "Edge", 40, :edge), true, true, 5) # Gtk::ButtonBox::Style::EDGE
 
-    vbox.pack_start(create_bbox(true, "Start", 40,
-				Gtk::ButtonBox::START), true, true, 5)
+    vbox.pack_start(create_bbox(true, "Start", 40, :start), true, true, 5) # Gtk::ButtonBox::Style::START
 
-    vbox.pack_start(create_bbox(true, "End", 40,
-				Gtk::ButtonBox::END), true, true, 5)
+    vbox.pack_start(create_bbox(true, "End", 40, :end), true, true, 5) # Gtk::ButtonBox::Style::END
 
     frame_vert = Gtk::Frame.new("Vertical Button Boxes")
     main_vbox.pack_start(frame_vert, true, true, 10)
@@ -66,17 +62,13 @@ class ButtonBoxSample < SampleWindow
     hbox.border_width = 10
     frame_vert.add(hbox)
 
-    hbox.pack_start(create_bbox(false, "Spread", 30,
-				Gtk::ButtonBox::SPREAD))
+    hbox.pack_start(create_bbox(false, "Spread", 30, :spread))
 
-    hbox.pack_start(create_bbox(false, "Edge", 30,
-				Gtk::ButtonBox::EDGE), true, true, 5)
+    hbox.pack_start(create_bbox(false, "Edge", 30, :edge), true, true, 5)
 
-    hbox.pack_start(create_bbox(false, "Start", 30,
-				Gtk::ButtonBox::START), true, true, 5)
+    hbox.pack_start(create_bbox(false, "Start", 30, :start), true, true, 5)
 
-    hbox.pack_start(create_bbox(false, "End", 30,
-				Gtk::ButtonBox::END), true, true, 5)
+    hbox.pack_start(create_bbox(false, "End", 30, :end), true, true, 5)
   end
 
   def create_bbox(horizontal, title, spacing, layout)

@@ -1,14 +1,14 @@
 module Gdk
   extend GLib::Deprecatable
-  define_deprecated_enums GrabStatus, 'GRAB'
-  define_deprecated_enums Status
+  define_deprecated_enums :GrabStatus, 'GRAB'
+  define_deprecated_enums :Status
   define_deprecated_const :Image, :raise => "Use 'Gdk::Pixbuf' or 'Cairo::Surface' instead."
   define_deprecated_const :Colormap, :raise => "Use 'Gdk::Visual' instead."
   define_deprecated_const :Input, :raise => "Use 'GLib::IOChannel' instead."
 
   class Cursor
     extend GLib::Deprecatable
-    define_deprecated_enums Type
+    define_deprecated_enums :Type
     define_deprecated_method :pixmap?, :warn => "Don't use this method." do |_self|
       false
     end
@@ -16,10 +16,10 @@ module Gdk
 
   class Device
     extend GLib::Deprecatable
-    define_deprecated_enums AxisUse, 'AXIS'
-    define_deprecated_enums ExtensionMode, 'EXTENSION_EVENTS'
-    define_deprecated_enums InputMode, 'MODE'
-    define_deprecated_enums InputSource, 'SOURCE'
+    define_deprecated_enums :AxisUse, 'AXIS'
+    define_deprecated_enums :ExtensionMode, 'EXTENSION_EVENTS'
+    define_deprecated_enums :InputMode, 'MODE'
+    define_deprecated_enums :InputSource, 'SOURCE'
     define_deprecated_method :source, :input_source
   end
 
@@ -36,50 +36,50 @@ module Gdk
 
   class DragContext
     extend GLib::Deprecatable
-    define_deprecated_flags Action, 'ACTION'
-    define_deprecated_enums Protocol, 'PROTO'
+    define_deprecated_flags :Action, 'ACTION'
+    define_deprecated_enums :Protocol, 'PROTO'
   end
 
   class Event
     extend GLib::Deprecatable
-    define_deprecated_flags Mask
-    define_deprecated_enums Type
+    define_deprecated_flags :Mask
+    define_deprecated_enums :Type
   end
 
   class EventCrossing
     extend GLib::Deprecatable
-    define_deprecated_enums Mode
-    define_deprecated_enums NotifyType, 'NOTIFY'
+    define_deprecated_enums :Mode
+    define_deprecated_enums :NotifyType, 'NOTIFY'
   end
 
   class EventOwnerChange
     extend GLib::Deprecatable
-    define_deprecated_enums OwnerChange
+    define_deprecated_enums :OwnerChange
   end
 
   class EventProperty
     extend GLib::Deprecatable
-    define_deprecated_enums State, 'PROPERTY'
+    define_deprecated_enums :State, 'PROPERTY'
   end
 
   class EventScroll
     extend GLib::Deprecatable
-    define_deprecated_enums Direction
+    define_deprecated_enums :Direction
   end
 
   class EventSetting
     extend GLib::Deprecatable
-    define_deprecated_enums Action, 'ACTION'
+    define_deprecated_enums :Action, 'ACTION'
   end
 
   class EventVisibility
     extend GLib::Deprecatable
-    define_deprecated_enums State
+    define_deprecated_enums :State
   end
 
   class EventWindowState
     extend GLib::Deprecatable
-    define_deprecated_flags WindowState
+    define_deprecated_flags :WindowState
   end
 
   module Keyval
@@ -102,29 +102,29 @@ module Gdk
     define_deprecated_singleton_method :lookup, :raise => "Don't use this method."
   end
 
-  class Property
+  module Property
     extend GLib::Deprecatable
-    define_deprecated_enums PropMode, 'MODE'
+    define_deprecated_enums :PropMode, 'MODE'
   end
 
   class Visual
     extend GLib::Deprecatable
-    define_deprecated_enums ByteOrder
-    define_deprecated_enums Type
+    define_deprecated_enums :ByteOrder
+    define_deprecated_enums :Type
   end
 
   class Window
     extend GLib::Deprecatable
-    define_deprecated_flags AttributesType, 'WA'
-    define_deprecated_enums Edge, 'EDGE'
-    define_deprecated_enums FilterReturn, 'FILTER'
-    define_deprecated_enums Gravity, 'GRAVITY'
-    define_deprecated_flags Hints, 'HINT'
-    define_deprecated_flags ModifierType
-    define_deprecated_enums Type
-    define_deprecated_enums TypeHint, 'TYPE_HINT'
-    define_deprecated_flags WMDecoration, 'DECOR'
-    define_deprecated_flags WMFunction, 'FUNC'
+    define_deprecated_flags :AttributesType, 'WA'
+    define_deprecated_enums :Edge, 'EDGE'
+    define_deprecated_enums :FilterReturn, 'FILTER'
+    define_deprecated_enums :Gravity, 'GRAVITY'
+    define_deprecated_flags :Hints, 'HINT'
+    define_deprecated_flags :ModifierType
+    define_deprecated_enums :Type
+    define_deprecated_enums :TypeHint, 'TYPE_HINT'
+    define_deprecated_flags :WMDecoration, 'DECOR'
+    define_deprecated_flags :WMFunction, 'FUNC'
     define_deprecated_method :clear, :warn => "Don't use this method."
     define_deprecated_method :clear_area, :warn => "Don't use this method."
     define_deprecated_method :internal_paint_info, :raise => "Don't use this method."

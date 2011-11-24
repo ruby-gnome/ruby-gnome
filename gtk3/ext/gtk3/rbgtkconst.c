@@ -60,11 +60,6 @@ Init_gtk_const(VALUE mGtk)
     /* GtkAccelFlags */
     G_DEF_CLASS(GTK_TYPE_ACCEL_FLAGS, "AccelFlags", mGtk);
 
-    /* GtkAnchorType */
-/* deprecated
-    G_DEF_CLASS(GTK_TYPE_ANCHOR_TYPE, "AnchorType", mGtk);
-*/
-
     /* GtkAttachOptions */
     G_DEF_CLASS(GTK_TYPE_ATTACH_OPTIONS, "AttachOptions", mGtk);
 
