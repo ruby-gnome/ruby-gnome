@@ -307,18 +307,6 @@ rg_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
     return Qnil;
 }
 
-/* deprecated
-static VALUE
-rg_m_init_add(VALUE self)
-{
-    volatile VALUE func = rb_block_proc();
-
-    gtk_init_add((GtkFunction)gtk_m_function2, (gpointer)func);
-    G_RELATIVE(self, func);
-    return Qnil;
-}
-*/
-
 static gint
 gtk_m_key_snoop_func(GtkWidget *grab_widget, GdkEventKey *event, gpointer func)
 {
@@ -436,9 +424,6 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(grab_add, 1);
     RG_DEF_MODFUNC(current, 0);
     RG_DEF_MODFUNC(grab_remove, 1);
-/* deprecated
-    RG_DEF_MODFUNC(init_add, 0);
-*/
     RG_DEF_MODFUNC(key_snooper_install, 0);
     RG_DEF_MODFUNC(key_snooper_remove, 1);
     RG_DEF_MODFUNC(current_event, 0);
