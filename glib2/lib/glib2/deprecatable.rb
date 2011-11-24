@@ -65,8 +65,10 @@ module GLib
             raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
           elsif new_const[:warn]
             warn "#{msg} #{new_const[:warn]}"
-            return
+          else
+            warn "#{msg} Don't use this constant anymore."
           end
+          return
         end
       end
       raise NameError.new("uninitialized constant #{[self, deprecated_const].join('::')}")

@@ -1,5 +1,17 @@
 module Gtk
   extend GLib::Deprecatable
+  define_deprecated_const :Combo,         :raise => "Use 'Gtk::ComboBoxText' instead."
+  define_deprecated_const :ComboBoxEntry, :raise => "Use 'Gtk::ComboBox' instead."
+  define_deprecated_const :Curve,         :raise => "Don't use this widget anymore."
+  define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :GammaCurve,    :raise => "Don't use this widget anymore."
+  define_deprecated_const :HRuler,        :raise => "Don't use this widget anymore."
+  define_deprecated_const :InputDialog,   :raise => "Don't use this widget anymore."
+  define_deprecated_const :ItemFactory,   :raise => "Use 'Gtk::UIManager' instead."
+  define_deprecated_const :OptionMenu,    :raise => "Use 'Gtk::ComboBox' instead."
+  define_deprecated_const :Ruler,         :raise => "Don't use this widget anymore."
+  define_deprecated_const :Tooltips,      :raise => "Use 'Gtk::Tooltip' API."
+  define_deprecated_const :VRuler,        :raise => "Don't use this widget anymore."
   define_deprecated_flags :AccelFlags, 'ACCEL'
   define_deprecated_flags :AttachOptions
   define_deprecated_enums :CornerType, 'CORNER'
@@ -22,40 +34,28 @@ module Gtk
   define_deprecated_enums :ShadowType, 'SHADOW'
   define_deprecated_enums :StateType, 'STATE'
   define_deprecated_enums :SortType, 'SORT'
-  define_deprecated_const :Curve, :raise => "Don't use this widget anymore."
-  define_deprecated_const :GammaCurve, :raise => "Don't use this widget anymore."
-  define_deprecated_const :Ruler, :raise => "Don't use this widget anymore."
-  define_deprecated_const :HRuler, :raise => "Don't use this widget anymore."
-  define_deprecated_const :VRuler, :raise => "Don't use this widget anymore."
-  define_deprecated_const :InputDialog, :raise => "Don't use this widget anymore."
-  define_deprecated_const :Combo, :raise => "Use 'Gtk::ComboBoxText' instead."
-  define_deprecated_const :ComboBoxEntry, :raise => "Use 'Gtk::ComboBox' instead."
-  define_deprecated_const :OptionMenu, :raise => "Use 'Gtk::ComboBox' instead."
-  define_deprecated_const :ItemFactory, :raise => "Use 'Gtk::UIManager' instead."
-  define_deprecated_const :Tooltips, :raise => "Use 'Gtk::Tooltip' API."
-  define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
-  define_deprecated_const :AnchorType, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_CENTER, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_NORTH, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_NORTH_WEST, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_NORTH_EAST, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_SOUTH, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_SOUTH_WEST, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_SOUTH_EAST, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_WEST, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_EAST, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_N, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_NW, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_NE, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_S, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_SW, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_SE, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_W, :warn => "Don't use this constant anymore."
-  define_deprecated_const :ANCHOR_E, :warn => "Don't use this constant anymore."
-  define_deprecated_const :UpdateType, :warn => "Don't use this constant anymore."
-  define_deprecated_const :UPDATE_CONTINUOUS, :warn => "Don't use this constant anymore."
-  define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
-  define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
+  define_deprecated_const :AnchorType
+  define_deprecated_const :ANCHOR_CENTER
+  define_deprecated_const :ANCHOR_NORTH
+  define_deprecated_const :ANCHOR_NORTH_WEST
+  define_deprecated_const :ANCHOR_NORTH_EAST
+  define_deprecated_const :ANCHOR_SOUTH
+  define_deprecated_const :ANCHOR_SOUTH_WEST
+  define_deprecated_const :ANCHOR_SOUTH_EAST
+  define_deprecated_const :ANCHOR_WEST
+  define_deprecated_const :ANCHOR_EAST
+  define_deprecated_const :ANCHOR_N
+  define_deprecated_const :ANCHOR_NW
+  define_deprecated_const :ANCHOR_NE
+  define_deprecated_const :ANCHOR_S
+  define_deprecated_const :ANCHOR_SW
+  define_deprecated_const :ANCHOR_SE
+  define_deprecated_const :ANCHOR_W
+  define_deprecated_const :ANCHOR_E
+  define_deprecated_const :UpdateType
+  define_deprecated_const :UPDATE_CONTINUOUS
+  define_deprecated_const :UPDATE_DISCONTINUOUS
+  define_deprecated_const :UPDATE_DELAYED
   define_deprecated_singleton_method :init_add, :warn => "Don't use this method."
   define_deprecated_singleton_method :quit_add, :warn => "Don't use this method."
   define_deprecated_singleton_method :quit_remove, :warn => "Don't use this method."
