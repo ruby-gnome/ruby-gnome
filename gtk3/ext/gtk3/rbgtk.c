@@ -521,9 +521,6 @@ Init_gtk_gtk(void)
     Init_gtk_imcontext_simple(RG_TARGET_NAMESPACE);
     Init_gtk_im_multicontext(RG_TARGET_NAMESPACE);
     Init_gtk_invisible(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_item(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_label(RG_TARGET_NAMESPACE);
     Init_gtk_layout(RG_TARGET_NAMESPACE);
     Init_gtk_link_button(RG_TARGET_NAMESPACE);
