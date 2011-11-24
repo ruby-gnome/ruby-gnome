@@ -502,6 +502,8 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_enums :Position, 'POS'
     define_deprecated_enums :Type
+    define_deprecated_method :active_focus, :activate_focus
+    define_deprecated_method :active_default, :activate_default
   end
 end
 
