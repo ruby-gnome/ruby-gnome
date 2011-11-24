@@ -314,8 +314,14 @@ rg_nick(VALUE self)
     return p->info ? rb_str_new2(p->info->value_nick) : Qnil;
 }
 
-static VALUE
-rg_operator_flags_compare(VALUE self, VALUE rhs)
+#define FLAGS_COMP_EQUAL        0
+#define FLAGS_COMP_GREATER      1
+#define FLAGS_COMP_LESS         -1
+#define FLAGS_COMP_ELSE         -2
+#define FLAGS_COMP_INCOMPARABLE -3
+
+static gint
+flags_compare(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
@@ -323,95 +329,77 @@ rg_operator_flags_compare(VALUE self, VALUE rhs)
 
     if (CLASS_OF(rhs) != CLASS_OF(self) &&
         !rb_obj_is_kind_of(rhs, rb_cInteger))
-        return Qnil;
+        return FLAGS_COMP_INCOMPARABLE;
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
 
     if (p->value == rhs_val)
-        return INT2FIX(0);
+        return FLAGS_COMP_EQUAL;
     else if ((p->value & rhs_val) == rhs_val)
-        return INT2FIX(1);
+        return FLAGS_COMP_GREATER;
     else if ((p->value & rhs_val) == p->value)
-        return INT2FIX(-1);
+        return FLAGS_COMP_LESS;
     else
+        return FLAGS_COMP_ELSE;
+}
+
+static VALUE
+rg_operator_flags_compare(VALUE self, VALUE rhs)
+{
+    gint ret = flags_compare(self, rhs);
+    switch (ret) {
+    case FLAGS_COMP_EQUAL:
+    case FLAGS_COMP_GREATER:
+    case FLAGS_COMP_LESS:
+        return INT2FIX(ret);
+    default:
         return Qnil;
+    }
 }
 
 static VALUE
 rg_operator_flags_eqv(VALUE self, VALUE rhs)
 {
-    flags_holder* p = flags_get_holder(self);
-    GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    guint rhs_val;
-
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
+    gint ret = flags_compare(self, rhs);
+    if (ret == FLAGS_COMP_INCOMPARABLE)
         return Qnil;
-
-    rhs_val = rbgobj_get_flags(rhs, gtype);
-    return CBOOL2RVAL(p->value == rhs_val);
+    return CBOOL2RVAL(ret == FLAGS_COMP_EQUAL);
 }
 
 static VALUE
 rg_operator_flags_gt_eq(VALUE self, VALUE rhs)
 {
-    flags_holder* p = flags_get_holder(self);
-    GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    guint rhs_val;
-
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
+    gint ret = flags_compare(self, rhs);
+    if (ret == FLAGS_COMP_INCOMPARABLE)
         return Qnil;
-
-    rhs_val = rbgobj_get_flags(rhs, gtype);
-    return CBOOL2RVAL((p->value & rhs_val) == rhs_val);
+    return CBOOL2RVAL(ret == FLAGS_COMP_GREATER || ret == FLAGS_COMP_EQUAL);
 }
 
 static VALUE
 rg_operator_flags_lt_eq(VALUE self, VALUE rhs)
 {
-    flags_holder* p = flags_get_holder(self);
-    GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    guint rhs_val;
-
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
+    gint ret = flags_compare(self, rhs);
+    if (ret == FLAGS_COMP_INCOMPARABLE)
         return Qnil;
-
-    rhs_val = rbgobj_get_flags(rhs, gtype);
-    return CBOOL2RVAL((p->value & rhs_val) == p->value);
+    return CBOOL2RVAL(ret == FLAGS_COMP_LESS || ret == FLAGS_COMP_EQUAL);
 }
 
 static VALUE
 rg_operator_flags_gt(VALUE self, VALUE rhs)
 {
-    flags_holder* p = flags_get_holder(self);
-    GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    guint rhs_val;
-
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
+    gint ret = flags_compare(self, rhs);
+    if (ret == FLAGS_COMP_INCOMPARABLE)
         return Qnil;
-
-    rhs_val = rbgobj_get_flags(rhs, gtype);
-    return CBOOL2RVAL((p->value & rhs_val) == rhs_val &&
-                      p->value != rhs_val);
+    return CBOOL2RVAL(ret == FLAGS_COMP_GREATER);
 }
 
 static VALUE
 rg_operator_flags_lt(VALUE self, VALUE rhs)
 {
-    flags_holder* p = flags_get_holder(self);
-    GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    guint rhs_val;
-
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
+    gint ret = flags_compare(self, rhs);
+    if (ret == FLAGS_COMP_INCOMPARABLE)
         return Qnil;
-
-    rhs_val = rbgobj_get_flags(rhs, gtype);
-    return CBOOL2RVAL((p->value & rhs_val) == p->value &&
-                      p->value != rhs_val);
+    return CBOOL2RVAL(ret == FLAGS_COMP_LESS);
 }
 
 static VALUE
