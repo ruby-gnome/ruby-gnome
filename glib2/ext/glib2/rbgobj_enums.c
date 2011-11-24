@@ -336,9 +336,13 @@ rg_operator_enum_eqv(VALUE self, VALUE rhs)
 {
     enum_holder* p = enum_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
-        return Qnil;
+    VALUE klass = GTYPE2CLASS(gtype);
+
+    if (!rb_obj_is_kind_of(rhs, rb_cInteger)) {
+        rhs = resolve_enum_value(klass, rhs);
+        if (CLASS_OF(rhs) != CLASS_OF(self))
+            return Qnil;
+    }
     return CBOOL2RVAL(rbgobj_get_enum(self, gtype) == rbgobj_get_enum(rhs, gtype));
 }
 
