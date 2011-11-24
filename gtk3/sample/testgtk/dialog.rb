@@ -38,7 +38,7 @@ class DialogSample < SampleDialog
       @label.signal_connect("destroy"){@label = nil}
       @label.set_padding(10, 10)
 
-      vbox.pack_start(@label)
+      child.pack_start(@label)
       @label.show
     else
       @label.destroy

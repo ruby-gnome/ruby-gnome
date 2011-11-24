@@ -113,13 +113,12 @@ def create_main_window
   label = Gtk::Label.new("Gtk+ v#{Gtk::MAJOR_VERSION}.#{Gtk::MINOR_VERSION}.#{Gtk::MICRO_VERSION}")
   box1.pack_start(label, false, false, 0)
 
-  label = Gtk::Label.new("Ruby/GTK2 v#{Gtk::BINDING_VERSION.join(".")}")
+  label = Gtk::Label.new("Ruby/GTK3 v#{Gtk::BINDING_VERSION.join(".")}")
   box1.pack_start(label, false, false, 0)
 
   scrolled_window = Gtk::ScrolledWindow.new(nil, nil)
   scrolled_window.border_width = 10
-  scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC,
-                             Gtk::POLICY_AUTOMATIC)
+  scrolled_window.set_policy(:automatic, :automatic) # Gtk::PolicyType::AUTOMATIC
   box1.pack_start(scrolled_window, true, true, 0)
 
   box2 = Gtk::VBox.new(false, 0)

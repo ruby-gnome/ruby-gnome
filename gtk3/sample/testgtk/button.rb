@@ -60,56 +60,47 @@ class ButtonSample < SampleWindow
     button[0].signal_connect("clicked") do
       button_window(button[1])
     end
-    table.attach(button[0], 0, 1, 0, 1,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[0], 0, 1, 0, 1, [:expand, :fill], [:expand, :fill], 0, 0) # Gtk::EXPAND | Gtk::FILL
 
     button[1].signal_connect("clicked") do
       button_window(button[2])
     end
-    table.attach(button[1], 1, 2, 1, 2,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[1], 1, 2, 1, 2, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[2].signal_connect("clicked") do
       button_window(button[3])
     end
-    table.attach(button[2], 2, 3, 2, 3,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[2], 2, 3, 2, 3, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[3].signal_connect("clicked") do
       button_window(button[4])
     end
-    table.attach(button[3], 0, 1, 2, 3,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[3], 0, 1, 2, 3, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[4].signal_connect("clicked") do
       button_window(button[5])
     end
-    table.attach(button[4], 2, 3, 0, 1,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[4], 2, 3, 0, 1, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[5].signal_connect("clicked") do
       button_window(button[6])
     end
-    table.attach(button[5], 1, 2, 2, 3,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[5], 1, 2, 2, 3, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[6].signal_connect("clicked") do
       button_window(button[7])
     end
-    table.attach(button[6], 1, 2, 0, 1,
-                 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[6], 1, 2, 0, 1, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[7].signal_connect("clicked") do
       button_window(button[8])
     end
-    table.attach(button[7], 2, 3, 1, 2,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[7], 2, 3, 1, 2, [:expand, :fill], [:expand, :fill], 0, 0)
 
     button[8].signal_connect("clicked") do
       button_window(button[0])
     end
-    table.attach(button[8], 0, 1, 1, 2,
-		 Gtk::EXPAND | Gtk::FILL, Gtk::EXPAND | Gtk::FILL, 0, 0)
+    table.attach(button[8], 0, 1, 1, 2, [:expand, :fill], [:expand, :fill], 0, 0)
 
     box1.pack_start(Gtk::HSeparator.new, false, true, 0)
 

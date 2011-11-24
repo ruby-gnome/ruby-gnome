@@ -91,22 +91,6 @@ gwin_activate_default(VALUE self)
 }
 
 static VALUE
-rg_active_focus(VALUE self)
-{
-    rb_warning("Gtk::Window#active_focus is deprecated. Use Gtk::Window#activate_focus");
-    gtk_window_activate_focus(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_active_default(VALUE self)
-{
-    rb_warning("Gtk::Window#active_default is deprecated. Use Gtk::Window#activate_default");
-    gtk_window_activate_default(_SELF(self));
-    return self;
-}
-
-static VALUE
 rg_set_default_size(VALUE self, VALUE w, VALUE h)
 {
     gtk_window_set_default_size(_SELF(self),
@@ -449,9 +433,6 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(set_wmclass, 2);
     RG_DEF_METHOD(add_accel_group, 1);
     RG_DEF_METHOD(remove_accel_group, 1);
-    /* active_(focus|default) are deprecated. Use activate_* instead. */
-    RG_DEF_METHOD(active_focus, 0);
-    RG_DEF_METHOD(active_default, 0);
     G_REPLACE_ACTION(RG_TARGET_NAMESPACE, "activate_focus", gwin_activate_focus, 0);
     G_REPLACE_ACTION(RG_TARGET_NAMESPACE, "activate_default", gwin_activate_default, 0);
     RG_DEF_METHOD(set_default_size, 2);

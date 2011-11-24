@@ -39,6 +39,12 @@ Init_gtksourceview3 (void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module("GtkSource");
 
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GTKSOURCEVIEW3_MAJOR_VERSION),
+                                INT2FIX(GTKSOURCEVIEW3_MINOR_VERSION),
+                                INT2FIX(GTKSOURCEVIEW3_MICRO_VERSION)));
+
     Init_gtk_sourceview (RG_TARGET_NAMESPACE);
     Init_gtk_sourcebuffer (RG_TARGET_NAMESPACE);
     Init_gtk_sourcelanguage (RG_TARGET_NAMESPACE);

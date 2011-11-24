@@ -12,6 +12,7 @@ module GLib
     end
 
     def define_deprecated_enums(enums, prefix = nil)
+      enums = module_eval(enums.to_s) rescue return
       enums.constants.each do |const|
         deprecated_const = prefix ? "#{prefix}_#{const}" : const
         new_const = [enums, const].join('::')
@@ -28,7 +29,7 @@ module GLib
       __define_deprecated_method__(:instance, deprecated_method, new_method, &block)
     end
 
-    def define_deprecated_method_by_hash_args(deprecated_method, args, &block)
+    def define_deprecated_method_by_hash_args(deprecated_method, old_args, new_args, &block)
       klass = self
       alias_name = "__#{deprecated_method}__"
       alias_method alias_name, deprecated_method
@@ -38,8 +39,8 @@ module GLib
           params = margs.first
         else
           params = block.call(self, *margs, &mblock)
-          msg = "#{caller[0]}: '#{klass}##{deprecated_method}(#{args})' style has been deprecated."
-          warn "#{msg} Use '#{klass}##{deprecated_method}(options = {})' style."
+          msg = "#{caller[0]}: '#{klass}##{deprecated_method}(#{old_args})' style has been deprecated."
+          warn "#{msg} Use '#{klass}##{deprecated_method}(#{new_args})' style."
         end
         __send__(alias_name, params, &mblock)
       end
@@ -53,18 +54,24 @@ module GLib
         case new_const
         when String
           new_const_val = constant_get(new_const)
-          warn "#{msg} Use '#{new_const}'."
+          case new_const_val
+          when GLib::Enum, GLib::Flags
+            alt = " or ':#{new_const_val.nick.gsub('-', '_')}'"
+          end
+          warn "#{msg} Use '#{new_const}'#{alt}."
           return const_set(deprecated_const, new_const_val)
         when Hash
           if new_const[:raise]
             raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
           elsif new_const[:warn]
             warn "#{msg} #{new_const[:warn]}"
-            return
+          else
+            warn "#{msg} Don't use this constant anymore."
           end
+          return
         end
       end
-      super
+      raise NameError.new("uninitialized constant #{[self, deprecated_const].join('::')}")
     end
 
     def constant_get(const)
