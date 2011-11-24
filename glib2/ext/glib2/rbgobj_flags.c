@@ -325,11 +325,14 @@ flags_compare(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
     GType gtype = G_TYPE_FROM_CLASS(p->gclass);
+    VALUE klass = GTYPE2CLASS(gtype);
     guint rhs_val;
 
-    if (CLASS_OF(rhs) != CLASS_OF(self) &&
-        !rb_obj_is_kind_of(rhs, rb_cInteger))
-        return FLAGS_COMP_INCOMPARABLE;
+    if (!rb_obj_is_kind_of(rhs, rb_cInteger)) {
+        rhs = resolve_flags_value(klass, rhs);
+        if (CLASS_OF(rhs) != CLASS_OF(self))
+            return FLAGS_COMP_INCOMPARABLE;
+    }
 
     rhs_val = rbgobj_get_flags(rhs, gtype);
 
