@@ -545,9 +545,6 @@ Init_gtk_gtk(void)
     Init_gtk_print_operation_preview(RG_TARGET_NAMESPACE);
     Init_gtk_print_settings(RG_TARGET_NAMESPACE);
     Init_gtk_print_unix_dialog(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_progress(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_progress_bar(RG_TARGET_NAMESPACE);
     Init_gtk_radio_action(RG_TARGET_NAMESPACE);
     Init_gtk_radio_button(RG_TARGET_NAMESPACE);

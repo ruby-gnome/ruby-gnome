@@ -163,7 +163,6 @@ G_GNUC_INTERNAL void Init_gtk_print_operation(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_print_operation_preview(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_print_settings(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_print_unix_dialog(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_progress(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_progress_bar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_radio_action(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_radio_button(VALUE mGtk);

@@ -381,6 +381,25 @@ module Gtk
     alias :screen= :set_screen
   end
 
+  class ProgressBar
+    extend GLib::Deprecatable
+    define_deprecated_method :set_activity_mode, :warn => "Don't use this method."
+    alias :activity_mode= :set_activity_mode
+    define_deprecated_method :activity_mode?, :warn => "Don't use this method." do |_self|
+      false
+    end
+    define_deprecated_method :set_text_xalign, :warn => "Don't use this method."
+    alias :text_xalign= :set_text_xalign
+    define_deprecated_method :text_xalign, :warn => "Don't use this method." do |_self|
+      0.0
+    end
+    define_deprecated_method :set_text_yalign, :warn => "Don't use this method."
+    alias :text_yalign= :set_text_yalign
+    define_deprecated_method :text_yalign, :warn => "Don't use this method." do |_self|
+      0.0
+    end
+  end
+
   class SizeGroup
     extend GLib::Deprecatable
     define_deprecated_enums :Mode
