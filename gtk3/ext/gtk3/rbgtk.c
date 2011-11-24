@@ -317,53 +317,6 @@ rg_m_init_add(VALUE self)
     G_RELATIVE(self, func);
     return Qnil;
 }
-
-static VALUE
-rg_m_idle_add(VALUE self)
-{
-    VALUE func, rb_id;
-    callback_info_t *info;
-    guint id;
-
-    func = rb_block_proc();
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id__idle_callbacks__;
-    id = gtk_idle_add_full(G_PRIORITY_DEFAULT_IDLE,
-                           (GtkFunction)gtk_m_function, NULL,
-                           (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__idle_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_idle_add_priority(VALUE self, VALUE priority)
-{
-    VALUE func, rb_id;
-    callback_info_t *info;
-    guint id;
-
-    func = rb_block_proc();
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id__idle_callbacks__;
-    id = gtk_idle_add_full(NUM2INT(priority), (GtkFunction)gtk_m_function,
-                           NULL, (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__idle_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_idle_remove(VALUE self, VALUE id)
-{
-    gtk_idle_remove(NUM2UINT(id));
-    G_REMOVE_RELATIVE(self, id__idle_callbacks__, id);
-    return Qnil;
-}
 */
 
 static gint
@@ -485,9 +438,6 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(grab_remove, 1);
 /* deprecated
     RG_DEF_MODFUNC(init_add, 0);
-    RG_DEF_MODFUNC(idle_add, 0);
-    RG_DEF_MODFUNC(idle_add_priority, 1);
-    RG_DEF_MODFUNC(idle_remove, 1);
 */
     RG_DEF_MODFUNC(key_snooper_install, 0);
     RG_DEF_MODFUNC(key_snooper_remove, 1);

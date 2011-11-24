@@ -46,6 +46,15 @@ module Gtk
   define_deprecated_singleton_method :timeout_remove, :warn => "Use 'GLib::Source.remove'." do |_self, id|
     GLib::Source.remove(id)
   end
+  define_deprecated_singleton_method :idle_add, :warn => "Use 'GLib::Idle.add'." do |_self, &block|
+    GLib::Idle.add(&block)
+  end
+  define_deprecated_singleton_method :idle_add_priority, :warn => "Use 'GLib::Idle.add'." do |_self, priority, &block|
+    GLib::Idle.add(priority, &block)
+  end
+  define_deprecated_singleton_method :idle_remove, :warn => "Use 'GLib::Source.remove'." do |_self, id|
+    GLib::Source.remove(id)
+  end
 
   class AboutDialog
     extend GLib::Deprecatable
