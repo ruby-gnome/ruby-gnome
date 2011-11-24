@@ -346,33 +346,6 @@ rg_m_quit_remove(VALUE self, VALUE quit_handler_id)
 }
 
 static VALUE
-rg_m_timeout_add(VALUE self, VALUE interval)
-{
-    VALUE func, rb_id;
-    callback_info_t *info;
-    guint id;
-
-    func = rb_block_proc();
-    info = ALLOC(callback_info_t);
-    info->callback = func;
-    info->key = id__timeout_callbacks__;
-    id = gtk_timeout_add_full(NUM2UINT(interval), (GtkFunction)gtk_m_function,
-                              NULL, (gpointer)info, g_free);
-    info->id = id;
-    rb_id = UINT2NUM(id);
-    G_RELATIVE2(self, func, id__timeout_callbacks__, rb_id);
-    return rb_id;
-}
-
-static VALUE
-rg_m_timeout_remove(VALUE self, VALUE id)
-{
-    gtk_timeout_remove(NUM2UINT(id));
-    G_REMOVE_RELATIVE(self, id__timeout_callbacks__, id);
-    return Qnil;
-}
-
-static VALUE
 rg_m_idle_add(VALUE self)
 {
     VALUE func, rb_id;
@@ -541,9 +514,6 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(init_add, 0);
     RG_DEF_MODFUNC(quit_add, 1);
     RG_DEF_MODFUNC(quit_remove, 1);
-
-    RG_DEF_MODFUNC(timeout_add, 1);
-    RG_DEF_MODFUNC(timeout_remove, 1);
     RG_DEF_MODFUNC(idle_add, 0);
     RG_DEF_MODFUNC(idle_add_priority, 1);
     RG_DEF_MODFUNC(idle_remove, 1);

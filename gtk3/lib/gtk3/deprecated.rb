@@ -38,6 +38,12 @@ module Gtk
   define_deprecated_const :UPDATE_CONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DISCONTINUOUS, :warn => "Don't use this constant anymore."
   define_deprecated_const :UPDATE_DELAYED, :warn => "Don't use this constant anymore."
+  define_deprecated_singleton_method :timeout_add, :warn => "Use 'GLib::Timeout.add'." do |_self, interval, &block|
+    GLib::Timeout.add(interval, &block)
+  end
+  define_deprecated_singleton_method :timeout_remove, :warn => "Use 'GLib::Source.remove'." do |_self, id|
+    GLib::Source.remove(id)
+  end
 
   class AboutDialog
     extend GLib::Deprecatable
