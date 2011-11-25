@@ -13,6 +13,8 @@ This is a bug fix release of 1.0.3.
   * Fixes
     * [GitHub#1] Fix GLib::Spawn regression.
       [Geoff Youngs]
+  * Changes
+    * don't require gettext.
 
 === Thanks
 
