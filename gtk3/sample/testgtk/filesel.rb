@@ -51,7 +51,6 @@ class FileChooserSample < Gtk::FileChooserDialog
     @destroyed = false
     signal_connect("destroy") do destroy end
     signal_connect("response") do |widget, response_id|
-      p response_id
       case response_id
       when Gtk::Dialog::ResponseType::ACCEPT # TODO
         puts filename

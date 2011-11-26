@@ -515,6 +515,8 @@ module Gtk
         raise ArgumentError.new("need 1 or 4 arguments.")
       end
     end
+
+    define_deprecated_signal :expose_event, :warn => "Use '#{self}::draw' signal."
   end
 
   class Window
