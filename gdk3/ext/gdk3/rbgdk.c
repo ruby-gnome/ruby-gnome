@@ -530,6 +530,7 @@ Init_gtk_gdk(void)
 /* deprecated
     Init_gtk_gdk_rgb(RG_TARGET_NAMESPACE);
 */
+    Init_gdk_rgba(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_screen(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_selection(RG_TARGET_NAMESPACE);
     Init_gtk_gdk_threads(RG_TARGET_NAMESPACE);
