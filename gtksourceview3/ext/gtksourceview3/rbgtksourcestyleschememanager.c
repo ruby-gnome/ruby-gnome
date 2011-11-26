@@ -143,26 +143,6 @@ rg_search_path(VALUE self)
     return ary;
 }
 
-/* Method: scheme_ids
- * Returns: a list of style scheme ids for the given style scheme manager
- */
-static VALUE
-rg_scheme_ids(VALUE self)
-{
-    VALUE ary;
-    const gchar * const * ids =
-            gtk_source_style_scheme_manager_get_scheme_ids (_SELF (self));
-    if (!ids)
-        return Qnil;
-
-    ary = rb_ary_new();
-    while (*ids){
-        rb_ary_push(ary, CSTR2RVAL(*ids));
-        ids++;
-    }
-    return ary;
-}
-
 /*
  * Method: scheme(scheme_id)
  * scheme_id: a style scheme id (as a string).
@@ -209,7 +189,6 @@ Init_gtk_sourcestyleschememanager (VALUE mGtkSource)
     RG_DEF_METHOD(append_search_path, 1);
     RG_DEF_METHOD(prepend_search_path, 1);
     RG_DEF_METHOD(search_path, 0);
-    RG_DEF_METHOD(scheme_ids, 0);
     RG_DEF_METHOD(get_scheme, 1);
     RG_DEF_METHOD(force_rescan, 0);
     RG_DEF_SMETHOD(default, 0);
