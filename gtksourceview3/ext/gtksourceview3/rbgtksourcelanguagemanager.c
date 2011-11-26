@@ -154,7 +154,6 @@ rg_get_language(VALUE self, VALUE id)
                (_SELF (self), RVAL2CSTR (id)));
 }
 
-#ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
 /*
  * Method: guess_language(filename, content_type)
  * filename: a file name (as a string), or nil.
@@ -173,7 +172,6 @@ rg_guess_language(VALUE self, VALUE filename, VALUE content_type)
                           NIL_P(filename) ? NULL : RVAL2CSTR (filename),
                           NIL_P(content_type) ? NULL : RVAL2CSTR (content_type)));
 }
-#endif /* HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE */
 
 void
 Init_gtk_sourcelanguagemanager (VALUE mGtkSource)
@@ -188,9 +186,7 @@ Init_gtk_sourcelanguagemanager (VALUE mGtkSource)
     RG_DEF_METHOD(search_path, 0);
     RG_DEF_METHOD(language_ids, 0);
     RG_DEF_METHOD(get_language, 1);
-#ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
     RG_DEF_METHOD(guess_language, 2);
-#endif
     RG_DEF_SMETHOD(default, 0);
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }
