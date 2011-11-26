@@ -27,5 +27,7 @@
 
 #define RVAL2GDKCOLOR(color) ((GdkColor *)RVAL2BOXED(color, GDK_TYPE_COLOR))
 #define GDKCOLOR2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_COLOR))
+#define RVAL2GDKRGBA(color) ((GdkRGBA *)RVAL2BOXED(color, GDK_TYPE_RGBA))
+#define GDKRGBA2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_RGBA))
 
 #endif /* __RB_GDK_CONVERSIONS_H__ */
