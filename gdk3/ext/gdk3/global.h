@@ -73,6 +73,7 @@ G_GNUC_INTERNAL void Init_gtk_gdk_rectangle(VALUE mGdk);
 /* deprecated
 G_GNUC_INTERNAL void Init_gtk_gdk_rgb(VALUE mGdk);
 */
+G_GNUC_INTERNAL void Init_gdk_rgba(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_screen(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_selection(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_threads(VALUE mGdk);
