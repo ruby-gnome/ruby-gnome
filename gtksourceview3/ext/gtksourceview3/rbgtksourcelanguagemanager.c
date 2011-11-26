@@ -116,26 +116,6 @@ rg_search_path(VALUE self)
     return ary;
 }
 
-/* Method: language_ids
- * Returns: a list of languages ids for the given language manager
- */
-static VALUE
-rg_language_ids(VALUE self)
-{
-    VALUE ary;
-    const gchar * const * ids =
-            gtk_source_language_manager_get_language_ids (_SELF (self));
-    if (!ids)
-        return Qnil;
-
-    ary = rb_ary_new();
-    while (*ids){
-        rb_ary_push(ary, CSTR2RVAL(*ids));
-        ids++;
-    }
-    return ary;
-}
-
 /*
  * Method: get_language(id)
  * id: a language id (as a string).
@@ -184,7 +164,6 @@ Init_gtk_sourcelanguagemanager (VALUE mGtkSource)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_search_path, 1);
     RG_DEF_METHOD(search_path, 0);
-    RG_DEF_METHOD(language_ids, 0);
     RG_DEF_METHOD(get_language, 1);
     RG_DEF_METHOD(guess_language, 2);
     RG_DEF_SMETHOD(default, 0);
