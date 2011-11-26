@@ -178,7 +178,6 @@ rg_not_undoable_action(VALUE self)
     return ret;
 }
 
-#ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
 /*
  * Method: create_source_mark(name=nil, category, where)
  * name: the name of the mark.
@@ -313,8 +312,6 @@ rg_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
                                     NIL_P (category) ? NULL : RVAL2CSTR (category)));
 }
 
-#endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
-
 static VALUE
 rg_ensure_highlight(VALUE self, VALUE start, VALUE end)
 {
@@ -336,14 +333,12 @@ Init_gtk_sourcebuffer (VALUE mGtkSource)
     RG_DEF_METHOD(end_not_undoable_action, 0);
     RG_DEF_METHOD(not_undoable_action, 0);
     RG_DEF_ALIAS("non_undoable_action", "not_undoable_action");
-#ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
     RG_DEF_METHOD(create_source_mark, -1);
     RG_DEF_METHOD(get_source_marks_at_line, -1);
     RG_DEF_METHOD(get_source_marks_at_iter, -1);
     RG_DEF_METHOD(remove_source_marks, -1);
     RG_DEF_METHOD(forward_iter_to_source_mark, -1);
     RG_DEF_METHOD(backward_iter_to_source_mark, -1);
-#endif
     RG_DEF_METHOD(ensure_highlight, 2);
 
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);

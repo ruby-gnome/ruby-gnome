@@ -21,7 +21,6 @@
 
 #include "rbgtksourcemain.h"
 
-#ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
 /* Class: Gtk::SourceMark
  * A source mark.
  */
@@ -74,12 +73,10 @@ rg_prev(int argc, VALUE *argv, VALUE self)
     return GOBJ2RVAL (gtk_source_mark_prev (_SELF (self),
                                 NIL_P (category) ? NULL : RVAL2CSTR(category)));
 }
-#endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 
 void
 Init_gtk_sourcemark (VALUE mGtkSource)
 {
-#ifdef HAVE_GTK_SOURCE_MARK_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_MARK, "Mark", mGtkSource);
 
     RG_DEF_METHOD(initialize, 2);
@@ -87,5 +84,4 @@ Init_gtk_sourcemark (VALUE mGtkSource)
     RG_DEF_METHOD(prev, -1);
 
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);
-#endif /* HAVE_GTK_SOURCE_MARK_GET_TYPE */
 }

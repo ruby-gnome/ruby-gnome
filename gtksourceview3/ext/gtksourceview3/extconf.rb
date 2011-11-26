@@ -57,13 +57,6 @@ setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit(false)
 
-# 2.2
-have_func('gtk_source_mark_get_type', "gtksourceview/gtksourcemark.h")
-have_func('gtk_source_print_compositor_get_type', "gtksourceview/gtksourceprintcompositor.h")
-# 2.4
-have_func('gtk_source_view_get_mark_category_background', "gtksourceview/gtksourceview.h")
-have_func('gtk_source_language_manager_guess_language', "gtksourceview/gtksourcelanguagemanager.h")
-
 make_version_header("GTKSOURCEVIEW3", package_id, ".")
 
 create_pkg_config_file("Ruby/GtkSourceView3", package_id)

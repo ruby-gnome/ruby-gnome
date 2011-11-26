@@ -55,7 +55,6 @@ require 'spinbutton'
 require 'colorselect'
 require 'dialog'
 require 'range'
-require 'rulers'
 require 'notebook'
 require 'shapedwindow'
 require 'wmhints'
@@ -86,7 +85,6 @@ def create_main_window
     ["radio buttons", RadioButtonSample],
     ["range controls", RangeSample],
     ["reparent", ReparentSample],
-    ["rulers", RulerSample],
     ["saved position", SavedPositionSample],
     ["scrolled windows", ScrolledWindowSample],
     ["shapes", ShapesSample],

@@ -56,59 +56,14 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
-/*
- * Method: get_mark_category_background(category)
- * category: a category (as a string).
- *
- * Gets the background color which is associated with the given category.
- *
- * Returns: a Gdk::Color object if found, or nil if not found.
- */
-static VALUE
-rg_get_mark_category_background(VALUE self, VALUE category)
-{
-    GdkColor color;
-    gtk_source_view_get_mark_category_background(_SELF (self),
-                         RVAL2CSTR(category),
-                         &color);
-    return GDKCOLOR2RVAL(&color);
-}
-
-/*
- * Method: set_mark_category_background(category, color)
- * category: a category (as a string).
- * color: a Gdk::Color.
- *
- * Sets given background color for mark category. If color is NULL,
- * the background color is unset.
- *
- * Returns: self.
- */
-static VALUE
-rg_set_mark_category_background(VALUE self, VALUE category, VALUE color)
-{
-    gtk_source_view_set_mark_category_background(_SELF (self),
-                         RVAL2CSTR (category),
-                         RVAL2GDKCOLOR((color)));
-    return self;
-}
-# endif /* HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND */
-
 void
 Init_gtk_sourceview (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "View", mGtkSource);
 
     RG_DEF_METHOD(initialize, -1);
-#ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
-    RG_DEF_METHOD(get_mark_category_background, 1);
-    RG_DEF_METHOD(set_mark_category_background, 2);
-#endif
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(GTK_SOURCE_TYPE_SMART_HOME_END_TYPE, "SmartHomeEndType", RG_TARGET_NAMESPACE);
-#ifdef HAVE_GTK_SOURCE_VIEW_GET_MARK_CATEGORY_BACKGROUND
     G_DEF_CLASS(GTK_SOURCE_TYPE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", RG_TARGET_NAMESPACE);
-#endif
 }

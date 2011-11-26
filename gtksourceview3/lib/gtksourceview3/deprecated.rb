@@ -17,6 +17,12 @@ module GtkSource
     define_deprecated_flags :DrawSpacesFlags, 'DRAW_SPACES'
     define_deprecated_enums :SmartHomeEndType, 'SMART_HOME_END'
     define_deprecated_const :BUILD_VERSION, 'GtkSource::BUILD_VERSION'
+    define_deprecated_method :set_mark_category_background, :warn => "Use 'GtkSource::MarkAttributes#set_background'." do |_self, category, background|
+      _self.get_mark_attributes(category).first.set_background(background) # TODO
+    end
+    define_deprecated_method :get_mark_category_background, :warn => "Use 'GtkSource::MarkAttributes#background'." do |_self, category|
+      _self.get_mark_attributes(category).first.background # TODO
+    end
     define_deprecated_method :set_mark_category_pixbuf, :warn => "Use 'GtkSource::MarkAttributes#set_pixbuf'." do |_self, category, pixbuf|
       _self.get_mark_attributes(category).first.set_pixbuf(pixbuf) # TODO
     end
