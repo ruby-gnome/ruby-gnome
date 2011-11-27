@@ -95,6 +95,9 @@ extern "C" {
 #define GSLIST2ARYF(list)         (GSLIST2ARY_FREE(list))
 #define GSLIST2ARY2(list, gtype)  (rbgutil_gslist2ary_boxed(list, gtype))
 #define GSLIST2ARY2F(list, gtype) (rbgutil_gslist2ary_boxed_and_free(list, gtype))
+#define GSLIST2ARY_STR(list)      (rbgutil_gslist2ary_string(list))
+#define GSLIST2ARY_STR_FREE(list) (rbgutil_gslist2ary_string_and_free(list))
+#define GSLIST2ARY_STR_FREE_LIST(list) (rbgutil_gslist2ary_string_and_free_list(list))
 
 #define RBG_STRING_SET_UTF8_ENCODING(string) \
     (rbgutil_string_set_utf8_encoding(string))
@@ -111,6 +114,9 @@ extern VALUE rbgutil_gslist2ary(const GSList *list);
 extern VALUE rbgutil_gslist2ary_and_free(GSList *list);
 extern VALUE rbgutil_gslist2ary_boxed(const GSList *list, GType gtype);
 extern VALUE rbgutil_gslist2ary_boxed_and_free(GSList *list, GType gtype);
+extern VALUE rbgutil_gslist2ary_string(const GSList *list);
+extern VALUE rbgutil_gslist2ary_string_and_free(GSList *list);
+extern VALUE rbgutil_gslist2ary_string_and_free_list(GSList *list);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);
 extern VALUE rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg);
 extern void rbgutil_start_callback_dispatch_thread(void);

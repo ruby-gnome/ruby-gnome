@@ -278,6 +278,66 @@ rbgutil_gslist2ary_boxed_and_free(GSList *const list, GType gtype)
 }
 
 VALUE
+rbgutil_gslist2ary_string(const GSList *const list)
+{
+    VALUE ary;
+    const GSList *i;
+
+    ary = rb_ary_new();
+    for (i = list; i != NULL; i = i->next)
+        rb_ary_push(ary, CSTR2RVAL(i->data));
+
+    return ary;
+}
+
+static VALUE
+rbgutil_gslist2ary_string_and_free_body(VALUE data)
+{
+    VALUE ary;
+    GSList *i;
+
+    ary = rb_ary_new();
+    for (i = (GSList *)data; i != NULL; i = i->next)
+        rb_ary_push(ary, CSTR2RVAL(i->data));
+
+    return ary;
+}
+
+static VALUE
+rbgutil_gslist2ary_string_and_free_ensure(VALUE data)
+{
+    GSList *i;
+
+    for (i = (GSList *)data; i != NULL; i = i->next)
+        g_free(i->data);
+    g_slist_free((GSList *)data);
+
+    return Qnil;
+}
+
+VALUE
+rbgutil_gslist2ary_string_and_free(GSList *const list)
+{
+    return rb_ensure(rbgutil_gslist2ary_string_and_free_body, (VALUE)list,
+                     rbgutil_gslist2ary_string_and_free_ensure, (VALUE)list);
+}
+
+static VALUE
+rbgutil_gslist2ary_string_and_free_list_ensure(VALUE data)
+{
+    g_slist_free((GSList *)data);
+
+    return Qnil;
+}
+
+VALUE
+rbgutil_gslist2ary_string_and_free_list(GSList *const list)
+{
+    return rb_ensure(rbgutil_gslist2ary_string_and_free_body, (VALUE)list,
+                     rbgutil_gslist2ary_string_and_free_list_ensure, (VALUE)list);
+}
+
+VALUE
 rbgutil_def_setters(VALUE klass)
 {
     return rb_funcall(mGLib, id_add_one_arg_setter, 1, klass);
