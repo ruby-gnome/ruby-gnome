@@ -59,7 +59,7 @@ module GLib
           define_method(connect_method) do |signal, *margs, &mblock|
             signal = signal.to_s.gsub('_', '-').to_sym
             table = @@deprecated_signal.select{|c,| self.is_a?(c)}.values.inject{|r, i| r.merge(i)}
-            if new_signal = table[signal]
+            if new_signal = (table || {})[signal]
               msg = "#{caller[0]}: '#{signal}' signal has been deprecated."
               case new_signal
               when String, Symbol
