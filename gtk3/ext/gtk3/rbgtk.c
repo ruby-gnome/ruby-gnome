@@ -533,6 +533,7 @@ Init_gtk_gtk(void)
     Init_gtk_message_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_misc(RG_TARGET_NAMESPACE);
     Init_gtk_notebook(RG_TARGET_NAMESPACE);
+    Init_gtk_overlay(RG_TARGET_NAMESPACE);
     Init_gtk_page_setup(RG_TARGET_NAMESPACE);
     Init_gtk_page_setup_unix_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_paned(RG_TARGET_NAMESPACE);
