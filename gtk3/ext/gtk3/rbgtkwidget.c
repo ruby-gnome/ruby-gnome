@@ -1140,6 +1140,7 @@ Init_gtk_widget(VALUE mGtk)
 
     /* GtkTextDirection */
     G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(GTK_TYPE_ALIGN, "Align", RG_TARGET_NAMESPACE);
 
     /* Special signals */
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-request", (GValToRValSignalFunc)widget_signal_size_request);
