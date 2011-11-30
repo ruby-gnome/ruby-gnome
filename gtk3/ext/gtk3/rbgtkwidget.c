@@ -479,15 +479,6 @@ rg_send_expose(VALUE self, VALUE event)
     return INT2NUM(gtk_widget_send_expose(_SELF(self), RVAL2GEV(event)));
 }
 
-/* They are needless method for ruby.
-void        gtk_widget_style_get            (GtkWidget *widget,
-                                             const gchar *first_property_name,
-                                             ...);
-void        gtk_widget_style_get_valist     (GtkWidget *widget,
-                                             const gchar *first_property_name,
-                                             va_list var_args);
-*/
-
 static VALUE
 rg_style_get_property(VALUE self, VALUE prop_name)
 {
@@ -1156,9 +1147,6 @@ Init_gtk_widget(VALUE mGtk)
     rb_global_variable(&style_prop_func_table);
     style_prop_func_table = rb_hash_new();
 
-    /*
-     * instance methods
-     */
     RG_DEF_METHOD(unparent, 0);
     RG_DEF_METHOD(show, 0);
     RG_DEF_METHOD(show_now, 0);
@@ -1245,9 +1233,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD_P(sensitive_with_parent, 0);
     RG_DEF_METHOD_P(has_grab, 0);
 
-    /*
-     * singleton methods
-     */
     RG_DEF_SMETHOD(set_default_direction, 1);
     RG_DEF_SMETHOD(default_direction, 0);
     RG_DEF_SMETHOD(pop_composite_child, 0);
@@ -1299,17 +1284,11 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(unset_state_flags, 1);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /*
-     * constants
-     */
-    /* GtkWidgetHelpType */
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
 
-    /* GtkTextDirection */
     G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GTK_TYPE_ALIGN, "Align", RG_TARGET_NAMESPACE);
 
-    /* Special signals */
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-request", (GValToRValSignalFunc)widget_signal_size_request);
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-allocate", (GValToRValSignalFunc)widget_signal_size_allocate);
 
