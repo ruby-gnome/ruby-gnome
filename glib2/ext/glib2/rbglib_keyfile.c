@@ -274,7 +274,7 @@ rg_get_locale_string(int argc, VALUE *argv, VALUE self)
     ret = g_key_file_get_locale_string(_SELF(self), 
                                        (const gchar*)RVAL2CSTR(group_name),
                                        (const gchar*)RVAL2CSTR(key),
-                                       (const gchar*)(NIL_P(locale) ? NULL : RVAL2CSTR(locale)),
+                                       (const gchar*)RVAL2CSTR_ACCEPT_NIL(locale),
                                        &error);
 
     if (error) RAISE_GERROR(error);
@@ -364,7 +364,7 @@ rg_get_locale_string_list(int argc, VALUE *argv, VALUE self)
     ret = g_key_file_get_locale_string_list(_SELF(self), 
                                             (const gchar*)RVAL2CSTR(group_name),
                                             (const gchar*)RVAL2CSTR(key),
-                                            (const gchar*)(NIL_P(locale) ? NULL : RVAL2CSTR(locale)),
+                                            (const gchar*)RVAL2CSTR_ACCEPT_NIL(locale),
                                             &length, &error);
 
     if (error) RAISE_GERROR(error);
