@@ -82,7 +82,7 @@ rg_m_cancel_handler(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_set_handler(VALUE self, VALUE domain, VALUE levels)
 {
-    guint handler_id = g_log_set_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
+    guint handler_id = g_log_set_handler(RVAL2CSTR_ACCEPT_NIL(domain),
                                          NUM2INT(levels),
                                          (GLogFunc)rbglib_log_handler, (gpointer)self);
     return UINT2NUM(handler_id);
@@ -91,7 +91,7 @@ rg_m_set_handler(VALUE self, VALUE domain, VALUE levels)
 static VALUE
 rg_m_remove_handler(VALUE self, VALUE domain, VALUE handler_id)
 {
-    g_log_remove_handler(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
+    g_log_remove_handler(RVAL2CSTR_ACCEPT_NIL(domain),
                          NUM2UINT(handler_id));
     G_REMOVE_RELATIVE(self, handler_id, rbglib_log_handler_procs);
     return Qnil;
@@ -106,14 +106,14 @@ rg_m_set_always_fatal(G_GNUC_UNUSED VALUE self, VALUE fatal_mask)
 static VALUE
 rg_m_set_fatal_mask(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE fatal_mask)
 {
-    return INT2NUM(g_log_set_fatal_mask(NIL_P(domain) ? NULL : RVAL2CSTR(domain),
+    return INT2NUM(g_log_set_fatal_mask(RVAL2CSTR_ACCEPT_NIL(domain),
                                         NUM2INT(fatal_mask)));
 }
 
 static VALUE
 rg_m_log(G_GNUC_UNUSED VALUE self, VALUE domain, VALUE level, VALUE str)
 {
-    g_log(NIL_P(domain) ? NULL : RVAL2CSTR(domain), NUM2INT(level), "%s", RVAL2CSTR(str));
+    g_log(RVAL2CSTR_ACCEPT_NIL(domain), NUM2INT(level), "%s", RVAL2CSTR(str));
     return Qnil;
 }
 

@@ -65,7 +65,7 @@ rg_set_tooltip(int argc, VALUE *argv, VALUE self)
 
     gtk_tool_item_set_tooltip(_SELF(self), GTK_TOOLTIPS(RVAL2GOBJ(tooltip)),
                               RVAL2CSTR(tip_text), 
-                              NIL_P(tip_private) ? NULL : RVAL2CSTR(tip_private));
+                              RVAL2CSTR_ACCEPT_NIL(tip_private));
     return self;
 }
 */

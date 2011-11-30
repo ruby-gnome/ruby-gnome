@@ -64,24 +64,70 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#define RD_STR(name)\
-static VALUE \
-rd_get_ ## name (VALUE self)\
-{\
-    return CSTR2RVAL(_SELF(self)->name);\
-}\
-static VALUE \
-rd_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = (gchar *)RVAL2CSTR(val);\
-    return self;\
+static VALUE
+rg_display_name(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->display_name);
 }
 
-RD_STR(display_name);
-RD_STR(description);
-RD_STR(mime_type);
-RD_STR(app_name);
-RD_STR(app_exec);
+static VALUE
+rg_set_display_name(VALUE self, VALUE val)
+{
+    _SELF(self)->display_name = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rg_description(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->description);
+}
+
+static VALUE
+rg_set_description(VALUE self, VALUE val)
+{
+    _SELF(self)->description = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rg_mime_type(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->mime_type);
+}
+
+static VALUE
+rg_set_mime_type(VALUE self, VALUE val)
+{
+    _SELF(self)->mime_type = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rg_app_name(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->app_name);
+}
+
+static VALUE
+rg_set_app_name(VALUE self, VALUE val)
+{
+    _SELF(self)->app_name = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rg_app_exec(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->app_exec);
+}
+
+static VALUE
+rg_set_app_exec(VALUE self, VALUE val)
+{
+    _SELF(self)->app_exec = (gchar *) RVAL2CSTR(val);
+    return self;
+}
 
 static VALUE
 rg_groups(VALUE self)
@@ -124,16 +170,16 @@ Init_gtk_recent_data(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_DATA, "RecentData", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "display_name", rd_get_display_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_display_name", rd_set_display_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "description", rd_get_description, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_description", rd_set_description, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", rd_get_mime_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", rd_set_mime_type, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "app_name", rd_get_app_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_app_name", rd_set_app_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "app_exec", rd_get_app_exec, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_app_exec", rd_set_app_exec, 1);
+    RG_DEF_METHOD(display_name, 0);
+    RG_DEF_METHOD(set_display_name, 1);
+    RG_DEF_METHOD(description, 0);
+    RG_DEF_METHOD(set_description, 1);
+    RG_DEF_METHOD(mime_type, 0);
+    RG_DEF_METHOD(set_mime_type, 1);
+    RG_DEF_METHOD(app_name, 0);
+    RG_DEF_METHOD(set_app_name, 1);
+    RG_DEF_METHOD(app_exec, 0);
+    RG_DEF_METHOD(set_app_exec, 1);
     RG_DEF_METHOD(groups, 0);
     RG_DEF_METHOD(set_groups, 1);
     RG_DEF_METHOD_P(private, 0);

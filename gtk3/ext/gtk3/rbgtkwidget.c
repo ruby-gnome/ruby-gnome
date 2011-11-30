@@ -113,25 +113,6 @@ rg_queue_resize_no_redraw(VALUE self)
     return self;
 }
 
-/* Note this method is not
-   gtk_widget_get_size_request */
-static VALUE
-rg_size_request(VALUE self)
-{
-    GtkRequisition req;
-    gtk_widget_size_request(_SELF(self), &req);
-    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
-}
-
-static VALUE
-rg_child_requisition(VALUE self)
-{
-    GtkRequisition req;
-
-    gtk_widget_get_child_requisition(_SELF(self), &req);
-    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
-}
-
 static VALUE
 rg_size_allocate(VALUE self, VALUE alloc)
 {
@@ -217,13 +198,6 @@ rg_grab_default(VALUE self)
 }
 
 static VALUE
-rg_set_state(VALUE self, VALUE state)
-{
-    gtk_widget_set_state(_SELF(self), RVAL2GTKSTATETYPE(state));
-    return self;
-}
-
-static VALUE
 rg_set_parent_window(VALUE self, VALUE parent_window)
 {
     gtk_widget_set_parent_window(_SELF(self), 
@@ -299,26 +273,6 @@ rg_hide_on_delete(VALUE self)
 }
 
 static VALUE
-rg_ensure_style(VALUE self)
-{
-    gtk_widget_ensure_style(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_reset_rc_styles(VALUE self)
-{
-    gtk_widget_reset_rc_styles(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_s_default_style(G_GNUC_UNUSED VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_default_style());
-}
-
-static VALUE
 rg_set_direction(VALUE self, VALUE dir)
 {
     gtk_widget_set_direction(_SELF(self), RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
@@ -345,106 +299,9 @@ rg_s_default_direction(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_path(VALUE self)
-{
-    guint path_length;
-    gchar *path;
-    gchar *path_reversed;
-    VALUE str_path;
-    VALUE str_path_reversed;
-
-    gtk_widget_path(_SELF(self), &path_length, &path, &path_reversed);
-    str_path = CSTR2RVAL(path);
-    str_path_reversed = CSTR2RVAL(path_reversed);
-    g_free(path);
-    g_free(path_reversed);
-    return rb_ary_new3(2, str_path, str_path_reversed);
-}
-
-static VALUE
-rg_class_path(VALUE self)
-{
-    guint path_length;
-    gchar *path;
-    gchar *path_reversed;
-    VALUE str_path;
-    VALUE str_path_reversed;
-
-    gtk_widget_class_path(_SELF(self), &path_length, &path, &path_reversed);
-    str_path = CSTR2RVAL(path);
-    str_path_reversed = CSTR2RVAL(path_reversed);
-    g_free(path);
-    g_free(path_reversed);
-    return rb_ary_new3(2, str_path, str_path_reversed);
-}
-
-static VALUE
 rg_composite_name(VALUE self)
 {
     return CSTR2RVAL(gtk_widget_get_composite_name(_SELF(self)));
-}
-
-static VALUE
-rg_modify_style(VALUE self, VALUE style)
-{
-    gtk_widget_modify_style(_SELF(self),
-                            GTK_RC_STYLE(RVAL2GOBJ(style)));
-    return self;
-}
-
-static VALUE
-rg_modifier_style(VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_modifier_style(_SELF(self)));
-}
-
-static VALUE
-rg_modify_fg(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_fg(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_bg(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_bg(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_text(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_text(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_base(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_base(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_font(VALUE self, VALUE font_desc)
-{
-    gtk_widget_modify_font(_SELF(self), 
-                           (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
-    return self;
-}
-
-static VALUE
-rg_modify_cursor(VALUE self, VALUE primary, VALUE seconday)
-{
-    gtk_widget_modify_cursor(_SELF(self), 
-                             RVAL2BOXED(primary, GDK_TYPE_COLOR),
-                             RVAL2BOXED(seconday, GDK_TYPE_COLOR));
-    return self;
 }
 
 static VALUE
@@ -465,16 +322,6 @@ rg_create_pango_layout(int argc, VALUE *argv, VALUE self)
     VALUE text;
     rb_scan_args(argc, argv, "01", &text);
     return GOBJ2RVALU(gtk_widget_create_pango_layout(_SELF(self), RVAL2CSTR_ACCEPT_NIL(text)));
-}
-
-static VALUE
-rg_render_icon(int argc, VALUE *argv, VALUE self)
-{
-    VALUE stock_id, size, detail;
-    rb_scan_args(argc, argv, "21", &stock_id, &size, &detail);
-    return GOBJ2RVALU(gtk_widget_render_icon(_SELF(self), rb_id2name(SYM2ID(stock_id)),
-                                             RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
-                                             RVAL2CSTR_ACCEPT_NIL(detail)));
 }
 
 static VALUE
@@ -632,15 +479,6 @@ rg_send_expose(VALUE self, VALUE event)
     return INT2NUM(gtk_widget_send_expose(_SELF(self), RVAL2GEV(event)));
 }
 
-/* They are needless method for ruby.
-void        gtk_widget_style_get            (GtkWidget *widget,
-                                             const gchar *first_property_name,
-                                             ...);
-void        gtk_widget_style_get_valist     (GtkWidget *widget,
-                                             const gchar *first_property_name,
-                                             va_list var_args);
-*/
-
 static VALUE
 rg_style_get_property(VALUE self, VALUE prop_name)
 {
@@ -748,9 +586,6 @@ rg_has_screen_p(VALUE self)
     return CBOOL2RVAL(gtk_widget_has_screen(_SELF(self)));
 }
 
-/*
-  Note this method is not gtk_widget_size_request()
-*/
 static VALUE
 rg_get_size_request(VALUE self)
 {
@@ -870,12 +705,6 @@ rg_has_grab_p(VALUE self)
 }
 
 static VALUE
-rg_has_rc_style_p(VALUE self)
-{
-    return CBOOL2RVAL(gtk_widget_has_rc_style(_SELF(self)));
-}
-
-static VALUE
 rg_allocation(VALUE self)
 {
     GtkAllocation alloc;
@@ -889,36 +718,6 @@ rg_set_allocation(VALUE self, VALUE alloc)
     gtk_widget_set_allocation(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
     return self;
 }
-
-/* deprecated
-static VALUE
-rg_requisition(VALUE self)
-{
-    GtkRequisition req = _SELF(self)->requisition;
-    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
-}
-
-static VALUE
-rg_set_requisition(VALUE self, VALUE w, VALUE h)
-{
-    GtkRequisition *r = &(_SELF(self)->requisition);
-    r->width  = NUM2INT(w);
-    r->height = NUM2INT(h);
-    return self;    
-}
-
-static VALUE
-rg_state(VALUE self)
-{
-    return GENUM2RVAL(_SELF(self)->state, GTK_TYPE_STATE_TYPE);
-}
-
-static VALUE
-rg_saved_state(VALUE self)
-{
-    return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
-}
-*/
 
 static VALUE
 rg_destroy(VALUE self)
@@ -998,6 +797,348 @@ widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
 }
 
+static VALUE
+rg_add_device_events(VALUE self, VALUE device, VALUE events)
+{
+    gtk_widget_add_device_events(_SELF(self),
+                                 GDK_DEVICE(RVAL2GOBJ(device)),
+                                 RVAL2GENUM(events, GDK_TYPE_EVENT_MASK));
+
+    return self;
+}
+
+static VALUE
+rg_compute_expand(VALUE self, VALUE orientation)
+{
+    gboolean result;
+
+    result = gtk_widget_compute_expand(_SELF(self),
+                                       RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION));
+
+    return CBOOL2RVAL(result);
+}
+
+static VALUE
+rg_device_is_shadowed_p(VALUE self, VALUE device)
+{
+    return CBOOL2RVAL(gtk_widget_device_is_shadowed(_SELF(self),
+                                                    GDK_DEVICE(RVAL2GOBJ(device))));
+}
+
+static VALUE
+rg_draw(VALUE self, VALUE cr)
+{
+    gtk_widget_draw(_SELF(self), RVAL2CRCONTEXT(cr));
+
+    return self;
+}
+
+static VALUE
+rg_allocated_height(VALUE self)
+{
+    return INT2NUM(gtk_widget_get_allocated_height(_SELF(self)));
+}
+
+static VALUE
+rg_allocated_width(VALUE self)
+{
+    return INT2NUM(gtk_widget_get_allocated_width(_SELF(self)));
+}
+
+/* TODO: device_enabled_p? */
+static VALUE
+rg_get_device_enabled_p(VALUE self, VALUE device)
+{
+    return CBOOL2RVAL(gtk_widget_get_device_enabled(_SELF(self),
+                                                    GDK_DEVICE(RVAL2GOBJ(device))));
+}
+
+static VALUE
+rg_get_device_events(VALUE self, VALUE device)
+{
+    GdkEventMask mask;
+
+    mask = gtk_widget_get_device_events(_SELF(self), GDK_DEVICE(RVAL2GOBJ(device)));
+
+    return GENUM2RVAL(mask, GDK_TYPE_EVENT_MASK);
+}
+
+static VALUE
+rg_preferred_height(VALUE self)
+{
+    gint minimum_height, natural_height;
+
+    gtk_widget_get_preferred_height(_SELF(self), &minimum_height, &natural_height);
+
+    return rb_ary_new3(2, INT2NUM(minimum_height), INT2NUM(natural_height));
+}
+
+static VALUE
+rg_get_preferred_height_for_width(VALUE self, VALUE width)
+{
+    gint minimum_height, natural_height;
+
+    gtk_widget_get_preferred_height_for_width(_SELF(self), NUM2INT(width),
+                                              &minimum_height, &natural_height);
+
+    return rb_ary_new3(2, INT2NUM(minimum_height), INT2NUM(natural_height));
+}
+
+static VALUE
+rg_preferred_size(VALUE self)
+{
+    GtkRequisition minimum_size, natural_size;
+
+    gtk_widget_get_preferred_size(_SELF(self), &minimum_size, &natural_size);
+
+    return rb_ary_new3(2,
+                       rb_ary_new3(2, minimum_size.width, minimum_size.height),
+                       rb_ary_new3(2, natural_size.width, natural_size.height));
+}
+
+static VALUE
+rg_preferred_width(VALUE self)
+{
+    gint minimum_width, natural_width;
+
+    gtk_widget_get_preferred_width(_SELF(self), &minimum_width, &natural_width);
+
+    return rb_ary_new3(2, INT2NUM(minimum_width), INT2NUM(natural_width));
+}
+
+static VALUE
+rg_get_preferred_width_for_height(VALUE self, VALUE height)
+{
+    gint minimum_width, natural_width;
+
+    gtk_widget_get_preferred_width_for_height(_SELF(self), NUM2INT(height),
+                                              &minimum_width, &natural_width);
+
+    return rb_ary_new3(2, INT2NUM(minimum_width), INT2NUM(natural_width));
+}
+
+static VALUE
+rg_request_mode(VALUE self)
+{
+    return GENUM2RVAL(gtk_widget_get_request_mode(_SELF(self)), GTK_TYPE_SIZE_REQUEST_MODE);
+}
+
+static VALUE
+rg_state_flags(VALUE self)
+{
+    return GFLAGS2RVAL(gtk_widget_get_state_flags(_SELF(self)), GTK_TYPE_STATE_FLAGS);
+}
+
+static VALUE
+rg_style_context(VALUE self)
+{
+    return GOBJ2RVAL(gtk_widget_get_style_context(_SELF(self)));
+}
+
+static VALUE
+rg_support_multidevice_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_get_support_multidevice(_SELF(self)));
+}
+
+#if GTK_CHECK_VERSION(3, 2, 0)
+static VALUE
+rg_has_visible_focus_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_has_visible_focus(_SELF(self)));
+}
+#endif
+
+static VALUE
+rg_in_destruction_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_widget_in_destruction(_SELF(self)));
+}
+
+static VALUE
+rg_input_shape_combine_region(VALUE self, VALUE region)
+{
+    gtk_widget_input_shape_combine_region(_SELF(self),
+                                          NIL_P(region) ? NULL : RVAL2CRREGION(region));
+
+    return self;
+}
+
+static VALUE
+rg_override_background_color(VALUE self, VALUE state, VALUE color)
+{
+    gtk_widget_override_background_color(_SELF(self),
+                                         RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                         NIL_P(color) ? NULL : RVAL2GDKRGBA(color));
+
+    return self;
+}
+
+static VALUE
+rg_override_color(VALUE self, VALUE state, VALUE color)
+{
+    gtk_widget_override_color(_SELF(self),
+                              RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                              NIL_P(color) ? NULL : RVAL2GDKRGBA(color));
+
+    return self;
+}
+
+static VALUE
+rg_override_cursor(VALUE self, VALUE cursor, VALUE secondary_cursor)
+{
+    gtk_widget_override_cursor(_SELF(self),
+                               NIL_P(cursor) ? NULL : RVAL2GDKRGBA(cursor),
+                               NIL_P(secondary_cursor) ? NULL : RVAL2GDKRGBA(secondary_cursor));
+
+    return self;
+}
+
+static VALUE
+rg_override_font(VALUE self, VALUE font_desc)
+{
+    gtk_widget_override_font(_SELF(self),
+                             NIL_P(font_desc) ? NULL : RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
+
+    return self;
+}
+
+static VALUE
+rg_override_symbolic_color(VALUE self, VALUE name, VALUE color)
+{
+    gtk_widget_override_symbolic_color(_SELF(self),
+                                       RVAL2CSTR(name),
+                                       NIL_P(color) ? NULL : RVAL2GDKRGBA(color));
+
+    return self;
+}
+
+static VALUE
+rg_queue_compute_expand(VALUE self)
+{
+    gtk_widget_queue_compute_expand(_SELF(self));
+
+    return self;
+}
+
+static VALUE
+rg_queue_draw_region(VALUE self, VALUE region)
+{
+    gtk_widget_queue_draw_region(_SELF(self), RVAL2CRREGION(region));
+
+    return self;
+}
+
+static VALUE
+rg_render_icon_pixbuf(VALUE self, VALUE stock_id, VALUE size)
+{
+    GdkPixbuf *pixbuf;
+
+    pixbuf = gtk_widget_render_icon_pixbuf(_SELF(self),
+                                           RVAL2CSTR(stock_id),
+                                           RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
+
+    return GOBJ2RVAL(pixbuf);
+}
+
+static VALUE
+rg_reset_style(VALUE self)
+{
+    gtk_widget_reset_style(_SELF(self));
+
+    return self;
+}
+
+static VALUE
+rg_send_focus_change(VALUE self, VALUE event)
+{
+    gboolean result;
+
+    result = gtk_widget_send_focus_change(_SELF(self), RVAL2BOXED(event, GDK_TYPE_EVENT));
+
+    return CBOOL2RVAL(result);
+}
+
+static VALUE
+rg_set_device_enabled(VALUE self, VALUE device, VALUE enabled)
+{
+    gtk_widget_set_device_enabled(_SELF(self),
+                                  GDK_DEVICE(RVAL2GOBJ(device)),
+                                  RVAL2CBOOL(enabled));
+
+    return self;
+}
+
+static VALUE
+rg_set_device_events(VALUE self, VALUE device, VALUE events)
+{
+    gtk_widget_set_device_events(_SELF(self),
+                                 GDK_DEVICE(RVAL2GOBJ(device)),
+                                 RVAL2GENUM(events, GDK_TYPE_EVENT_MASK));
+
+    return self;
+}
+
+static VALUE
+rg_set_mapped(VALUE self, VALUE mapped)
+{
+    gtk_widget_set_mapped(_SELF(self), RVAL2CBOOL(mapped));
+
+    return self;
+}
+
+static VALUE
+rg_set_realized(VALUE self, VALUE realized)
+{
+    gtk_widget_set_realized(_SELF(self), RVAL2CBOOL(realized));
+
+    return self;
+}
+
+static VALUE
+rg_set_state_flags(VALUE self, VALUE flags, VALUE clear)
+{
+    gtk_widget_set_state_flags(_SELF(self),
+                               RVAL2GFLAGS(flags, GTK_TYPE_STATE_FLAGS),
+                               RVAL2CBOOL(clear));
+
+    return self;
+}
+
+static VALUE
+rg_set_support_multidevice(VALUE self, VALUE support_multidevice)
+{
+    gtk_widget_set_support_multidevice(_SELF(self), RVAL2CBOOL(support_multidevice));
+
+    return self;
+}
+
+static VALUE
+rg_set_visual(VALUE self, VALUE visual)
+{
+    gtk_widget_set_visual(_SELF(self), GDK_VISUAL(RVAL2GOBJ(visual)));
+
+    return self;
+}
+
+static VALUE
+rg_shape_combine_region(VALUE self, VALUE region)
+{
+    gtk_widget_shape_combine_region(_SELF(self),
+                                    NIL_P(region) ? NULL : RVAL2CRREGION(region));
+
+    return self;
+}
+
+static VALUE
+rg_unset_state_flags(VALUE self, VALUE flags)
+{
+    gtk_widget_unset_state_flags(_SELF(self),
+                                 RVAL2GFLAGS(flags, GTK_TYPE_STATE_FLAGS));
+
+    return self;
+}
+
 void 
 Init_gtk_widget(VALUE mGtk)
 {
@@ -1006,9 +1147,6 @@ Init_gtk_widget(VALUE mGtk)
     rb_global_variable(&style_prop_func_table);
     style_prop_func_table = rb_hash_new();
 
-    /*
-     * instance methods
-     */
     RG_DEF_METHOD(unparent, 0);
     RG_DEF_METHOD(show, 0);
     RG_DEF_METHOD(show_now, 0);
@@ -1021,8 +1159,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(queue_draw, 0);
     RG_DEF_METHOD(queue_resize, 0);
     RG_DEF_METHOD(queue_resize_no_redraw, 0);
-    RG_DEF_METHOD(size_request, 0);
-    RG_DEF_METHOD(child_requisition, 0);
     RG_DEF_METHOD(size_allocate, 1);
     RG_DEF_METHOD(add_accelerator, 5);
     RG_DEF_METHOD(remove_accelerator, 3);
@@ -1037,7 +1173,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_SMETHOD(style_properties, -1);
     RG_DEF_METHOD(intersect, 1);
     RG_DEF_METHOD(grab_default, 0);
-    RG_DEF_METHOD(set_state, 1);
     RG_DEF_METHOD(set_parent_window, 1);
     RG_DEF_METHOD(parent_window, 0);
     RG_DEF_METHOD(add_events, 1);
@@ -1048,25 +1183,12 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD_P(ancestor, 1);
     RG_DEF_METHOD(translate_coordinates, 3);
     RG_DEF_METHOD(hide_on_delete, 0);
-    RG_DEF_METHOD(ensure_style, 0);
-    RG_DEF_METHOD(reset_rc_styles, 0);
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
-    RG_DEF_METHOD(path, 0);
-    RG_DEF_METHOD(class_path, 0);
     RG_DEF_METHOD(composite_name, 0);
-    RG_DEF_METHOD(modify_style, 1);
-    RG_DEF_METHOD(modifier_style, 0);
-    RG_DEF_METHOD(modify_fg, 2);
-    RG_DEF_METHOD(modify_bg, 2);
-    RG_DEF_METHOD(modify_text, 2);
-    RG_DEF_METHOD(modify_base, 2);
-    RG_DEF_METHOD(modify_font, 1);
-    RG_DEF_METHOD(modify_cursor, 2);
     RG_DEF_METHOD(create_pango_context, 0);
     RG_DEF_METHOD(pango_context, 0);
     RG_DEF_METHOD(create_pango_layout, -1);
-    RG_DEF_METHOD(render_icon, -1);
     RG_DEF_METHOD(queue_draw_area, 4);
     RG_DEF_METHOD(set_redraw_on_allocate, 1);
     RG_DEF_METHOD(set_composite_name, 1);
@@ -1101,12 +1223,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_window, 1);
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 1);
-/* deprecated
-    RG_DEF_METHOD(requisition, 0);
-    RG_DEF_METHOD(set_requisition, 2);
-    RG_DEF_METHOD(state, 0);
-    RG_DEF_METHOD(saved_state, 0);
-*/
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(bindings_activate, 2);
 
@@ -1116,12 +1232,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD_P(drawable, 0);
     RG_DEF_METHOD_P(sensitive_with_parent, 0);
     RG_DEF_METHOD_P(has_grab, 0);
-    RG_DEF_METHOD_P(has_rc_style, 0);
 
-    /*
-     * singleton methods
-     */
-    RG_DEF_SMETHOD(default_style, 0);
     RG_DEF_SMETHOD(set_default_direction, 1);
     RG_DEF_SMETHOD(default_direction, 0);
     RG_DEF_SMETHOD(pop_composite_child, 0);
@@ -1130,18 +1241,54 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD_P(has_window, 0);
     RG_DEF_METHOD(set_has_window, 1);
 
+    RG_DEF_METHOD(add_device_events, 2);
+    RG_DEF_METHOD(compute_expand, 1);
+    RG_DEF_METHOD_P(device_is_shadowed, 1);
+    RG_DEF_METHOD(draw, 1);
+    RG_DEF_METHOD(allocated_height, 0);
+    RG_DEF_METHOD(allocated_width, 0);
+    RG_DEF_METHOD_P(get_device_enabled, 1);
+    RG_DEF_METHOD(get_device_events, 1);
+    RG_DEF_METHOD(preferred_height, 0);
+    RG_DEF_METHOD(get_preferred_height_for_width, 1);
+    RG_DEF_METHOD(preferred_size, 0);
+    RG_DEF_METHOD(preferred_width, 0);
+    RG_DEF_METHOD(get_preferred_width_for_height, 1);
+    RG_DEF_METHOD(request_mode, 0);
+    RG_DEF_METHOD(state_flags, 0);
+    RG_DEF_METHOD(style_context, 0);
+    RG_DEF_METHOD_P(support_multidevice, 0);
+#if GTK_CHECK_VERSION(3, 2, 0)
+    RG_DEF_METHOD_P(has_visible_focus, 0);
+#endif
+    RG_DEF_METHOD_P(in_destruction, 0);
+    RG_DEF_METHOD(input_shape_combine_region, 1);
+    RG_DEF_METHOD(override_background_color, 2);
+    RG_DEF_METHOD(override_color, 2);
+    RG_DEF_METHOD(override_cursor, 2);
+    RG_DEF_METHOD(override_font, 1);
+    RG_DEF_METHOD(override_symbolic_color, -1);
+    RG_DEF_METHOD(queue_compute_expand, 0);
+    RG_DEF_METHOD(queue_draw_region, 1);
+    RG_DEF_METHOD(render_icon_pixbuf, 2);
+    RG_DEF_METHOD(reset_style, 0);
+    RG_DEF_METHOD(send_focus_change, 1);
+    RG_DEF_METHOD(set_device_enabled, 2);
+    RG_DEF_METHOD(set_device_events, 2);
+    RG_DEF_METHOD(set_mapped, 1);
+    RG_DEF_METHOD(set_realized, 1);
+    RG_DEF_METHOD(set_state_flags, 2);
+    RG_DEF_METHOD(set_support_multidevice, 1);
+    RG_DEF_METHOD(set_visual, 1);
+    RG_DEF_METHOD(shape_combine_region, 1);
+    RG_DEF_METHOD(unset_state_flags, 1);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /*
-     * constants
-     */
-    /* GtkWidgetHelpType */
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
 
-    /* GtkTextDirection */
     G_DEF_CLASS(GTK_TYPE_TEXT_DIRECTION, "TextDirection", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(GTK_TYPE_ALIGN, "Align", RG_TARGET_NAMESPACE);
 
-    /* Special signals */
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-request", (GValToRValSignalFunc)widget_signal_size_request);
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "size-allocate", (GValToRValSignalFunc)widget_signal_size_allocate);
 

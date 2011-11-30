@@ -40,7 +40,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "action", &rb_action,
                      "buttons", &rb_button_ary,
                      NULL);
-    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    title = RVAL2CSTR_ACCEPT_NIL(rb_title);
     parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
     action = NIL_P(rb_action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GENUM(rb_action, GTK_TYPE_FILE_CHOOSER_ACTION);
 

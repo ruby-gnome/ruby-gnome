@@ -55,7 +55,7 @@ rg_next(int argc, VALUE *argv, VALUE self)
     rb_scan_args (argc, argv, "01", &category);
 
     return GOBJ2RVAL (gtk_source_mark_next (_SELF (self),
-                                NIL_P (category) ? NULL : RVAL2CSTR(category)));
+                                RVAL2CSTR_ACCEPT_NIL(category)));
 }
 
 /* Method: prev(category=nil)
@@ -71,7 +71,7 @@ rg_prev(int argc, VALUE *argv, VALUE self)
     rb_scan_args (argc, argv, "01", &category);
 
     return GOBJ2RVAL (gtk_source_mark_prev (_SELF (self),
-                                NIL_P (category) ? NULL : RVAL2CSTR(category)));
+                                RVAL2CSTR_ACCEPT_NIL(category)));
 }
 
 void

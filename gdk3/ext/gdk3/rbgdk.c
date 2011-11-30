@@ -189,7 +189,7 @@ rg_m_set_locale(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_set_sm_client_id(VALUE self, VALUE id)
 {
-    gdk_set_sm_client_id(NIL_P(id) ? NULL : RVAL2CSTR(id));
+    gdk_set_sm_client_id(RVAL2CSTR_ACCEPT_NIL(id));
     return self;
 }
 */

@@ -95,8 +95,8 @@ rg_guess_language(VALUE self, VALUE filename, VALUE content_type)
 {
     return GOBJ2RVAL (gtk_source_language_manager_guess_language
                          (_SELF (self),
-                          NIL_P(filename) ? NULL : RVAL2CSTR (filename),
-                          NIL_P(content_type) ? NULL : RVAL2CSTR (content_type)));
+                          RVAL2CSTR_ACCEPT_NIL (filename),
+                          RVAL2CSTR_ACCEPT_NIL (content_type)));
 }
 
 void

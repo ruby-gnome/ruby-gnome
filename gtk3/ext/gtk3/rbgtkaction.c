@@ -40,7 +40,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     }
 
     G_INITIALIZE(self, gtk_action_new(RVAL2CSTR(name), RVAL2CSTR(label),
-                                      NIL_P(tooltip) ? NULL : RVAL2CSTR(tooltip),
+                                      RVAL2CSTR_ACCEPT_NIL(tooltip),
                                       stock));
     return Qnil;
 }
