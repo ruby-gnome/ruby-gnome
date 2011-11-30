@@ -299,23 +299,6 @@ rg_s_default_direction(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_class_path(VALUE self)
-{
-    guint path_length;
-    gchar *path;
-    gchar *path_reversed;
-    VALUE str_path;
-    VALUE str_path_reversed;
-
-    gtk_widget_class_path(_SELF(self), &path_length, &path, &path_reversed);
-    str_path = CSTR2RVAL(path);
-    str_path_reversed = CSTR2RVAL(path_reversed);
-    g_free(path);
-    g_free(path_reversed);
-    return rb_ary_new3(2, str_path, str_path_reversed);
-}
-
-static VALUE
 rg_composite_name(VALUE self)
 {
     return CSTR2RVAL(gtk_widget_get_composite_name(_SELF(self)));
@@ -1323,7 +1306,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(hide_on_delete, 0);
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
-    RG_DEF_METHOD(class_path, 0);
     RG_DEF_METHOD(composite_name, 0);
     RG_DEF_METHOD(modify_style, 1);
     RG_DEF_METHOD(modifier_style, 0);
