@@ -25,130 +25,6 @@
 #define RG_TARGET_NAMESPACE cTextAttributes
 #define _SELF(s) ((GtkTextAttributes*)RVAL2BOXED(s, GTK_TYPE_TEXT_ATTRIBUTES))
 
-/***********************************************/
-#define ATTR_INT(name)\
-static VALUE \
-txt_attr_int_ ## name (VALUE self)\
-{\
-    return INT2NUM(_SELF(self)->name);\
-}\
-static VALUE \
-txt_attr_int_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = NUM2INT(val); \
-    return self;\
-}
-
-#define ATTR_BOOL(name)\
-static VALUE \
-txt_attr_bool_ ## name (VALUE self)\
-{\
-    return CBOOL2RVAL(_SELF(self)->name);\
-}\
-static VALUE \
-txt_attr_bool_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2CBOOL(val);\
-    return self;\
-}
-
-#define ATTR_FLAGS(name, gtype)\
-static VALUE \
-txt_attr_flags_ ## name (VALUE self)\
-{\
-    return GFLAGS2RVAL(_SELF(self)->name, gtype);\
-}\
-static VALUE \
-txt_attr_flags_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2GFLAGS(val, gtype);\
-    return self;\
-}
-
-#define ATTR_ENUM(name, gtype)\
-static VALUE \
-txt_attr_enums_ ## name (VALUE self)\
-{\
-    return GENUM2RVAL(_SELF(self)->name, gtype);\
-}\
-static VALUE \
-txt_attr_enums_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2GENUM(val, gtype);\
-    return self;\
-}
-
-#define ATTR_BOXED(name, gtype)\
-static VALUE \
-txt_attr_boxed_ ## name (VALUE self)\
-{\
-    VALUE val; \
-    if (_SELF(self)->name == NULL) return Qnil;\
-    val = BOXED2RVAL(_SELF(self)->name, gtype);\
-    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    return val;\
-}\
-static VALUE \
-txt_attr_boxed_set_ ## name (VALUE self, VALUE val)\
-{\
-    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    _SELF(self)->name = RVAL2BOXED(val, gtype);\
-    return self;\
-}
-
-#define DEFINE_ACCESSOR(gt, type, name)                                  \
-    rb_define_method(gt, G_STRINGIFY(name), txt_attr_ ## type ## _## name, 0);\
-    rb_define_method(gt, G_STRINGIFY(set_ ## name), txt_attr_ ## type ## _set_## name, 1);
-
-/***********************************************/
-static VALUE
-txt_attr_boxed_appearance(VALUE self)
-{
-    GtkTextAppearance app = _SELF(self)->appearance;
-    return BOXED2RVAL(&app, GTK_TYPE_TEXT_APPEARANCE);
-}
-static VALUE
-txt_attr_boxed_set_appearance(VALUE self, VALUE val)
-{
-    GtkTextAppearance* app = (GtkTextAppearance*)RVAL2BOXED(val, GTK_TYPE_TEXT_APPEARANCE);
-    _SELF(self)->appearance = *app;
-    return self;
-}
-
-ATTR_ENUM(justification, GTK_TYPE_JUSTIFICATION);
-ATTR_ENUM(direction, GTK_TYPE_DIRECTION_TYPE);
-ATTR_BOXED(font, PANGO_TYPE_FONT_DESCRIPTION);
-
-static VALUE
-txt_attr_double_font_scale(VALUE self)
-{
-    return rb_float_new(_SELF(self)->font_scale);
-}
-static VALUE
-txt_attr_double_set_font_scale(VALUE self, VALUE val)
-{
-    _SELF(self)->font_scale = NUM2DBL(val);
-    return self;
-}
-
-ATTR_INT(left_margin);
-ATTR_INT(indent);
-ATTR_INT(right_margin);
-ATTR_INT(pixels_above_lines);
-ATTR_INT(pixels_below_lines);
-ATTR_INT(pixels_inside_wrap);
-
-ATTR_BOXED(tabs, PANGO_TYPE_TAB_ARRAY);
-
-ATTR_ENUM(wrap_mode, GTK_TYPE_WRAP_MODE);
-ATTR_BOXED(language, PANGO_TYPE_LANGUAGE);
-
-ATTR_BOOL(invisible);
-ATTR_BOOL(bg_full_height);
-ATTR_BOOL(editable);
-
-/***********************************************/
-
 static VALUE
 rg_initialize(VALUE self)
 {
@@ -157,6 +33,244 @@ rg_initialize(VALUE self)
     attr = gtk_text_attributes_new();
     G_INITIALIZE(self, attr);
     return Qnil;
+}
+
+static VALUE
+txt_attr_boxed_appearance(VALUE self)
+{
+    GtkTextAppearance app = _SELF(self)->appearance;
+    return BOXED2RVAL(&app, GTK_TYPE_TEXT_APPEARANCE);
+}
+
+static VALUE
+txt_attr_boxed_set_appearance(VALUE self, VALUE val)
+{
+    GtkTextAppearance* app = (GtkTextAppearance*)RVAL2BOXED(val, GTK_TYPE_TEXT_APPEARANCE);
+    _SELF(self)->appearance = *app;
+    return self;
+}
+
+static VALUE
+txt_attr_enums_justification(VALUE self)
+{
+    return GENUM2RVAL(_SELF(self)->justification, GTK_TYPE_JUSTIFICATION);
+}
+
+static VALUE
+txt_attr_enums_set_justification(VALUE self, VALUE val)
+{
+    _SELF(self)->justification = RVAL2GENUM(val, GTK_TYPE_JUSTIFICATION);
+    return self;
+}
+
+static VALUE
+txt_attr_enums_direction(VALUE self)
+{
+    return GENUM2RVAL(_SELF(self)->direction, GTK_TYPE_DIRECTION_TYPE);
+}
+
+static VALUE
+txt_attr_enums_set_direction(VALUE self, VALUE val)
+{
+    _SELF(self)->direction = RVAL2GENUM(val, GTK_TYPE_DIRECTION_TYPE);
+    return self;
+}
+
+static VALUE
+txt_attr_boxed_font(VALUE self)
+{
+    VALUE val;
+    if (_SELF(self)->font == NULL) return Qnil;
+    val = BOXED2RVAL(_SELF(self)->font, PANGO_TYPE_FONT_DESCRIPTION);
+    G_CHILD_SET(self, rb_intern("font"), val);
+    return val;
+}
+
+static VALUE
+txt_attr_boxed_set_font(VALUE self, VALUE val)
+{
+    G_CHILD_SET(self, rb_intern("font"), val);
+    _SELF(self)->font = RVAL2BOXED(val, PANGO_TYPE_FONT_DESCRIPTION);
+    return self;
+}
+
+static VALUE
+txt_attr_double_font_scale(VALUE self)
+{
+    return rb_float_new(_SELF(self)->font_scale);
+}
+
+static VALUE
+txt_attr_double_set_font_scale(VALUE self, VALUE val)
+{
+    _SELF(self)->font_scale = NUM2DBL(val);
+    return self;
+}
+
+static VALUE
+txt_attr_int_left_margin(VALUE self)
+{
+    return INT2NUM(_SELF(self)->left_margin);
+}
+
+static VALUE
+txt_attr_int_set_left_margin(VALUE self, VALUE val)
+{
+    _SELF(self)->left_margin = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_attr_int_indent(VALUE self)
+{
+    return INT2NUM(_SELF(self)->indent);
+}
+
+static VALUE
+txt_attr_int_set_indent(VALUE self, VALUE val)
+{
+    _SELF(self)->indent = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_attr_int_right_margin(VALUE self)
+{
+    return INT2NUM(_SELF(self)->right_margin);
+}
+
+static VALUE
+txt_attr_int_set_right_margin(VALUE self, VALUE val)
+{
+    _SELF(self)->right_margin = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_attr_int_pixels_above_lines(VALUE self)
+{
+    return INT2NUM(_SELF(self)->pixels_above_lines);
+}
+
+static VALUE
+txt_attr_int_set_pixels_above_lines(VALUE self, VALUE val)
+{
+    _SELF(self)->pixels_above_lines = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_attr_int_pixels_below_lines(VALUE self)
+{
+    return INT2NUM(_SELF(self)->pixels_below_lines);
+}
+
+static VALUE
+txt_attr_int_set_pixels_below_lines(VALUE self, VALUE val)
+{
+    _SELF(self)->pixels_below_lines = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_attr_int_pixels_inside_wrap(VALUE self)
+{
+    return INT2NUM(_SELF(self)->pixels_inside_wrap);
+}
+
+static VALUE
+txt_attr_int_set_pixels_inside_wrap(VALUE self, VALUE val)
+{
+    _SELF(self)->pixels_inside_wrap = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_attr_boxed_tabs(VALUE self)
+{
+    VALUE val;
+    if (_SELF(self)->tabs == NULL) return Qnil;
+    val = BOXED2RVAL(_SELF(self)->tabs, PANGO_TYPE_TAB_ARRAY);
+    G_CHILD_SET(self, rb_intern("tabs"), val);
+    return val;
+}
+
+static VALUE
+txt_attr_boxed_set_tabs(VALUE self, VALUE val)
+{
+    G_CHILD_SET(self, rb_intern("tabs"), val);
+    _SELF(self)->tabs = RVAL2BOXED(val, PANGO_TYPE_TAB_ARRAY);
+    return self;
+}
+
+static VALUE
+txt_attr_enums_wrap_mode(VALUE self)
+{
+    return GENUM2RVAL(_SELF(self)->wrap_mode, GTK_TYPE_WRAP_MODE);
+}
+
+static VALUE
+txt_attr_enums_set_wrap_mode(VALUE self, VALUE val)
+{
+    _SELF(self)->wrap_mode = RVAL2GENUM(val, GTK_TYPE_WRAP_MODE);
+    return self;
+}
+
+static VALUE
+txt_attr_boxed_language(VALUE self)
+{
+    VALUE val;
+    if (_SELF(self)->language == NULL) return Qnil;
+    val = BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
+    G_CHILD_SET(self, rb_intern("language"), val);
+    return val;
+}
+
+static VALUE
+txt_attr_boxed_set_language(VALUE self, VALUE val)
+{
+    G_CHILD_SET(self, rb_intern("language"), val);
+    _SELF(self)->language = RVAL2BOXED(val, PANGO_TYPE_LANGUAGE);
+    return self;
+}
+
+static VALUE
+txt_attr_bool_invisible(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->invisible);
+}
+
+static VALUE
+txt_attr_bool_set_invisible(VALUE self, VALUE val)
+{
+    _SELF(self)->invisible = RVAL2CBOOL(val);
+    return self;
+}
+
+static VALUE
+txt_attr_bool_bg_full_height(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->bg_full_height);
+}
+
+static VALUE
+txt_attr_bool_set_bg_full_height(VALUE self, VALUE val)
+{
+    _SELF(self)->bg_full_height = RVAL2CBOOL(val);
+    return self;
+}
+
+static VALUE
+txt_attr_bool_editable(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->editable);
+}
+
+static VALUE
+txt_attr_bool_set_editable(VALUE self, VALUE val)
+{
+    _SELF(self)->editable = RVAL2CBOOL(val);
+    return self;
 }
 
 static VALUE
@@ -174,20 +288,34 @@ Init_gtk_text_attributes(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(copy_values, 1);
 
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, appearance);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, justification);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, direction);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, font);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, double, font_scale);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, left_margin);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, indent);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, right_margin);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, pixels_above_lines);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, pixels_below_lines);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, pixels_inside_wrap);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, tabs);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, wrap_mode);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, boxed, language);
+    rb_define_method(RG_TARGET_NAMESPACE, "appearance", txt_attr_boxed_appearance, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_appearance", txt_attr_boxed_set_appearance, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "justification", txt_attr_enums_justification, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_justification", txt_attr_enums_set_justification, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "direction", txt_attr_enums_direction, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_direction", txt_attr_enums_set_direction, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font", txt_attr_boxed_font, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font", txt_attr_boxed_set_font, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "font_scale", txt_attr_double_font_scale, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_font_scale", txt_attr_double_set_font_scale, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "left_margin", txt_attr_int_left_margin, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_left_margin", txt_attr_int_set_left_margin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "indent", txt_attr_int_indent, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_indent", txt_attr_int_set_indent, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "right_margin", txt_attr_int_right_margin, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_right_margin", txt_attr_int_set_right_margin, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixels_above_lines", txt_attr_int_pixels_above_lines, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_pixels_above_lines", txt_attr_int_set_pixels_above_lines, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixels_below_lines", txt_attr_int_pixels_below_lines, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_pixels_below_lines", txt_attr_int_set_pixels_below_lines, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "pixels_inside_wrap", txt_attr_int_pixels_inside_wrap, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_pixels_inside_wrap", txt_attr_int_set_pixels_inside_wrap, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "tabs", txt_attr_boxed_tabs, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_tabs", txt_attr_boxed_set_tabs, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "wrap_mode", txt_attr_enums_wrap_mode, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_wrap_mode", txt_attr_enums_set_wrap_mode, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "language", txt_attr_boxed_language, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_language", txt_attr_boxed_set_language, 1);
 
     rb_define_method(RG_TARGET_NAMESPACE, "invisible?", txt_attr_bool_invisible, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "set_invisible", txt_attr_bool_set_invisible, 1);

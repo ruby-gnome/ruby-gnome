@@ -78,22 +78,44 @@ rg_set_contains(VALUE self, VALUE contains)
     return self;
 }
 
-#define FINFO_STR(name)\
-static VALUE \
-rf_get_ ## name (VALUE self)\
-{\
-    return CSTR2RVAL(_SELF(self)->name);\
-}\
-static VALUE \
-rf_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2CSTR(val);\
-    return self;\
+static VALUE
+rf_get_uri(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->uri);
 }
 
-FINFO_STR(uri);
-FINFO_STR(display_name);
-FINFO_STR(mime_type);
+static VALUE
+rf_set_uri(VALUE self, VALUE val)
+{
+    _SELF(self)->uri = RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rf_get_display_name(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->display_name);
+}
+
+static VALUE
+rf_set_display_name(VALUE self, VALUE val)
+{
+    _SELF(self)->display_name = RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rf_get_mime_type(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->mime_type);
+}
+
+static VALUE
+rf_set_mime_type(VALUE self, VALUE val)
+{
+    _SELF(self)->mime_type = RVAL2CSTR(val);
+    return self;
+}
 
 static VALUE
 rg_applications(VALUE self)

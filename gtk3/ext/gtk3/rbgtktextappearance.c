@@ -47,98 +47,6 @@ gtk_text_appearance_get_type(void)
 #define RG_TARGET_NAMESPACE cTextAppearance
 #define _SELF(t) ((GtkTextAppearance*)RVAL2BOXED(t, GTK_TYPE_TEXT_APPEARANCE))
 
-/***********************************************/
-#define ATTR_INT(name)\
-static VALUE \
-txt_app_int_ ## name (VALUE self)\
-{\
-    return INT2NUM(_SELF(self)->name);\
-}\
-static VALUE \
-txt_app_int_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = NUM2INT(val); \
-    return self;\
-}
-
-#define ATTR_BOOL(name)\
-static VALUE \
-txt_app_bool_ ## name (VALUE self)\
-{\
-    return CBOOL2RVAL(_SELF(self)->name);\
-}\
-static VALUE \
-txt_app_bool_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2CBOOL(val);\
-    return self;\
-}
-
-#define ATTR_ENUM(name, gtype)\
-static VALUE \
-txt_app_enums_ ## name (VALUE self)\
-{\
-    return GENUM2RVAL(_SELF(self)->name, gtype);\
-}\
-static VALUE \
-txt_app_enums_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2GENUM(val, gtype);\
-    return self;\
-}
-
-#define ATTR_GOBJ(name)\
-static VALUE \
-txt_app_gobj_ ## name (VALUE self)\
-{\
-    VALUE val; \
-    if (_SELF(self)->name == NULL) return Qnil;\
-    val = GOBJ2RVAL(_SELF(self)->name);  \
-    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    return val; \
-}\
-static VALUE \
-txt_app_gobj_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = RVAL2GOBJ(val);\
-    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    return self;\
-}
-
-#define ATTR_COLOR(name)\
-static VALUE \
-txt_app_color_ ## name (VALUE self)\
-{\
-    VALUE val = BOXED2RVAL(&_SELF(self)->name, GDK_TYPE_COLOR);\
-    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    return val;\
-}\
-static VALUE \
-txt_app_color_set_ ## name (VALUE self, VALUE val)\
-{\
-    G_CHILD_SET(self, rb_intern(G_STRINGIFY(name)), val);\
-    _SELF(self)->name = *RVAL2GDKCOLOR(val);    \
-    return self;\
-}
-
-#define DEFINE_ACCESSOR(gt, type, name)         \
-    rb_define_method(gt, G_STRINGIFY(name), txt_app_ ## type ## _## name, 0);\
-    rb_define_method(gt, G_STRINGIFY(set_ ## name), txt_app_ ## type ## _set_## name, 1);
-/***********************************************/
-ATTR_COLOR(bg_color);
-ATTR_COLOR(fg_color);
-/* deprecated
-ATTR_GOBJ(bg_stipple);
-ATTR_GOBJ(fg_stipple);
-*/
-
-ATTR_INT(rise);
-ATTR_ENUM(underline, PANGO_TYPE_UNDERLINE);
-ATTR_BOOL(strikethrough);
-ATTR_BOOL(draw_bg);
-ATTR_BOOL(inside_selection);
-ATTR_BOOL(is_text);
-
 static VALUE
 rg_initialize(VALUE self)
 {
@@ -148,21 +56,175 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
+static VALUE
+txt_app_color_bg_color(VALUE self)
+{
+    VALUE val = BOXED2RVAL(&_SELF(self)->bg_color, GDK_TYPE_COLOR);
+    G_CHILD_SET(self, rb_intern("bg_color"), val);
+    return val;
+}
+
+static VALUE
+txt_app_color_set_bg_color(VALUE self, VALUE val)
+{
+    G_CHILD_SET(self, rb_intern("bg_color"), val);
+    _SELF(self)->bg_color = *RVAL2GDKCOLOR(val);
+    return self;
+}
+
+static VALUE
+txt_app_color_fg_color(VALUE self)
+{
+    VALUE val = BOXED2RVAL(&_SELF(self)->fg_color, GDK_TYPE_COLOR);
+    G_CHILD_SET(self, rb_intern("fg_color"), val);
+    return val;
+}
+
+static VALUE
+txt_app_color_set_fg_color(VALUE self, VALUE val)
+{
+    G_CHILD_SET(self, rb_intern("fg_color"), val);
+    _SELF(self)->fg_color = *RVAL2GDKCOLOR(val);
+    return self;
+}
+
+/* deprecated
+static VALUE
+txt_app_gobj_bg_stipple(VALUE self)
+{
+    VALUE val;
+    if (_SELF(self)->bg_stipple == NULL) return Qnil;
+    val = GOBJ2RVAL(_SELF(self)->bg_stipple);
+    G_CHILD_SET(self, rb_intern("bg_stipple"), val);
+    return val;
+}
+
+static VALUE
+txt_app_gobj_set_bg_stipple(VALUE self, VALUE val)
+{
+    _SELF(self)->bg_stipple = RVAL2GOBJ(val);
+    G_CHILD_SET(self, rb_intern("bg_stipple"), val);
+    return self;
+}
+
+static VALUE
+txt_app_gobj_fg_stipple(VALUE self)
+{
+    VALUE val;
+    if (_SELF(self)->fg_stipple == NULL) return Qnil;
+    val = GOBJ2RVAL(_SELF(self)->fg_stipple);
+    G_CHILD_SET(self, rb_intern("fg_stipple"), val);
+    return val;
+}
+
+static VALUE
+txt_app_gobj_set_fg_stipple(VALUE self, VALUE val)
+{
+    _SELF(self)->fg_stipple = RVAL2GOBJ(val);
+    G_CHILD_SET(self, rb_intern("fg_stipple"), val);
+    return self;
+}
+*/
+
+static VALUE
+txt_app_int_rise(VALUE self)
+{
+    return INT2NUM(_SELF(self)->rise);
+}
+
+static VALUE
+txt_app_int_set_rise(VALUE self, VALUE val)
+{
+    _SELF(self)->rise = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+txt_app_enums_underline(VALUE self)
+{
+    return GENUM2RVAL(_SELF(self)->underline, PANGO_TYPE_UNDERLINE);
+}
+
+static VALUE
+txt_app_enums_set_underline(VALUE self, VALUE val)
+{
+    _SELF(self)->underline = RVAL2GENUM(val, PANGO_TYPE_UNDERLINE);
+    return self;
+}
+
+static VALUE
+txt_app_bool_strikethrough(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->strikethrough);
+}
+
+static VALUE
+txt_app_bool_set_strikethrough(VALUE self, VALUE val)
+{
+    _SELF(self)->strikethrough = RVAL2CBOOL(val);
+    return self;
+}
+
+static VALUE
+txt_app_bool_draw_bg(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->draw_bg);
+}
+
+static VALUE
+txt_app_bool_set_draw_bg(VALUE self, VALUE val)
+{
+    _SELF(self)->draw_bg = RVAL2CBOOL(val);
+    return self;
+}
+
+static VALUE
+txt_app_bool_inside_selection(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->inside_selection);
+}
+
+static VALUE
+txt_app_bool_set_inside_selection(VALUE self, VALUE val)
+{
+    _SELF(self)->inside_selection = RVAL2CBOOL(val);
+    return self;
+}
+
+static VALUE
+txt_app_bool_is_text(VALUE self)
+{
+    return CBOOL2RVAL(_SELF(self)->is_text);
+}
+
+static VALUE
+txt_app_bool_set_is_text(VALUE self, VALUE val)
+{
+    _SELF(self)->is_text = RVAL2CBOOL(val);
+    return self;
+}
+
 void
 Init_gtk_text_appearance(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_APPEARANCE, "TextAppearance", mGtk);
 
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, color, bg_color);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, color, fg_color);
-/* deprecated
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, gobj, bg_stipple);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, gobj, fg_stipple);
-*/
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, rise);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, enums, underline);
-
     RG_DEF_METHOD(initialize, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "bg_color", txt_app_color_bg_color, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bg_color", txt_app_color_set_bg_color, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "fg_color", txt_app_color_fg_color, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fg_color", txt_app_color_set_fg_color, 1);
+/* deprecated
+    rb_define_method(RG_TARGET_NAMESPACE, "bg_stipple", txt_app_gobj_bg_stipple, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_bg_stipple", txt_app_gobj_set_bg_stipple, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "fg_stipple", txt_app_gobj_fg_stipple, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_fg_stipple", txt_app_gobj_set_fg_stipple, 1);
+*/
+    rb_define_method(RG_TARGET_NAMESPACE, "rise", txt_app_int_rise, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_rise", txt_app_int_set_rise, 1);
+    rb_define_method(RG_TARGET_NAMESPACE, "underline", txt_app_enums_underline, 0);
+    rb_define_method(RG_TARGET_NAMESPACE, "set_underline", txt_app_enums_set_underline, 1);
+
     rb_define_method(RG_TARGET_NAMESPACE, "strikethrough?", txt_app_bool_strikethrough, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "set_strikethrough", txt_app_bool_set_strikethrough, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "draw_bg?", txt_app_bool_draw_bg, 0);

@@ -64,24 +64,70 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#define RD_STR(name)\
-static VALUE \
-rd_get_ ## name (VALUE self)\
-{\
-    return CSTR2RVAL(_SELF(self)->name);\
-}\
-static VALUE \
-rd_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = (gchar *)RVAL2CSTR(val);\
-    return self;\
+static VALUE
+rd_get_display_name(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->display_name);
 }
 
-RD_STR(display_name);
-RD_STR(description);
-RD_STR(mime_type);
-RD_STR(app_name);
-RD_STR(app_exec);
+static VALUE
+rd_set_display_name(VALUE self, VALUE val)
+{
+    _SELF(self)->display_name = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rd_get_description(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->description);
+}
+
+static VALUE
+rd_set_description(VALUE self, VALUE val)
+{
+    _SELF(self)->description = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rd_get_mime_type(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->mime_type);
+}
+
+static VALUE
+rd_set_mime_type(VALUE self, VALUE val)
+{
+    _SELF(self)->mime_type = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rd_get_app_name(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->app_name);
+}
+
+static VALUE
+rd_set_app_name(VALUE self, VALUE val)
+{
+    _SELF(self)->app_name = (gchar *) RVAL2CSTR(val);
+    return self;
+}
+
+static VALUE
+rd_get_app_exec(VALUE self)
+{
+    return CSTR2RVAL(_SELF(self)->app_exec);
+}
+
+static VALUE
+rd_set_app_exec(VALUE self, VALUE val)
+{
+    _SELF(self)->app_exec = (gchar *) RVAL2CSTR(val);
+    return self;
+}
 
 static VALUE
 rg_groups(VALUE self)

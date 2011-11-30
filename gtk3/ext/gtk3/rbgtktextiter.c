@@ -36,19 +36,41 @@ rg_buffer(VALUE self)
     return GOBJ2RVAL(gtk_text_iter_get_buffer(_SELF(self)));
 }
 
-#define def_gint_getter(__name__) \
-static VALUE \
-get_##__name__(VALUE self) \
-{ \
-    return INT2NUM(gtk_text_iter_get_##__name__(_SELF(self))); \
+static VALUE
+get_offset(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_offset(_SELF(self)));
 }
 
-def_gint_getter(offset)
-def_gint_getter(line)
-def_gint_getter(line_offset)
-def_gint_getter(line_index)
-def_gint_getter(visible_line_offset)
-def_gint_getter(visible_line_index)
+static VALUE
+get_line(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_line(_SELF(self)));
+}
+
+static VALUE
+get_line_offset(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_line_offset(_SELF(self)));
+}
+
+static VALUE
+get_line_index(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_line_index(_SELF(self)));
+}
+
+static VALUE
+get_visible_line_offset(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_visible_line_offset(_SELF(self)));
+}
+
+static VALUE
+get_visible_line_index(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_visible_line_index(_SELF(self)));
+}
 
 static VALUE
 rg_char(VALUE self)
@@ -156,24 +178,65 @@ rg_can_insert_p(VALUE self, VALUE default_setting)
     return CBOOL2RVAL(gtk_text_iter_can_insert(_SELF(self), RVAL2CBOOL(default_setting)));
 }
 
-#define def_predicate(__name__) \
-static VALUE \
-__name__(VALUE self) \
-{ \
-    return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self)));   \
+static VALUE
+starts_word(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_starts_word(_SELF(self)));
 }
 
-def_predicate(starts_word)
-def_predicate(ends_word)
-def_predicate(inside_word)
-def_predicate(starts_sentence)
-def_predicate(ends_sentence)
-def_predicate(starts_line)
-def_predicate(ends_line)
-def_predicate(is_cursor_position)
+static VALUE
+ends_word(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_ends_word(_SELF(self)));
+}
 
-def_gint_getter(chars_in_line)
-def_gint_getter(bytes_in_line)
+static VALUE
+inside_word(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_inside_word(_SELF(self)));
+}
+
+static VALUE
+starts_sentence(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_starts_sentence(_SELF(self)));
+}
+
+static VALUE
+ends_sentence(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_ends_sentence(_SELF(self)));
+}
+
+static VALUE
+starts_line(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_starts_line(_SELF(self)));
+}
+
+static VALUE
+ends_line(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_ends_line(_SELF(self)));
+}
+
+static VALUE
+is_cursor_position(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_is_cursor_position(_SELF(self)));
+}
+
+static VALUE
+get_chars_in_line(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_chars_in_line(_SELF(self)));
+}
+
+static VALUE
+get_bytes_in_line(VALUE self)
+{
+    return INT2NUM(gtk_text_iter_get_bytes_in_line(_SELF(self)));
+}
 
 static VALUE
 rg_attributes(VALUE self)
@@ -193,57 +256,215 @@ rg_language(VALUE self)
     return CSTR2RVAL(pango_language_to_string(gtk_text_iter_get_language(_SELF(self))));
 }
 
-def_predicate(is_end)
-def_predicate(is_start)
-
-#define def_move(__name__) \
-static VALUE \
-__name__(VALUE self) \
-{ \
-    return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self))); \
+static VALUE
+is_end(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_is_end(_SELF(self)));
 }
 
-#define def_move_gint(__name__) \
-static VALUE \
-__name__(VALUE self, VALUE i) \
-{ \
-    return CBOOL2RVAL(gtk_text_iter_##__name__(_SELF(self), NUM2INT(i))); \
+static VALUE
+is_start(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_is_start(_SELF(self)));
 }
 
-def_move(forward_char)
-def_move(backward_char)
-def_move_gint(forward_chars)
-def_move_gint(backward_chars)
-def_move(forward_line)
-def_move(backward_line)
-def_move_gint(forward_lines)
-def_move_gint(backward_lines)
-def_move(forward_word_end)
-def_move(backward_word_start)
-def_move_gint(forward_word_ends)
-def_move_gint(backward_word_starts)
-def_move(forward_sentence_end)
-def_move(backward_sentence_start)
-def_move_gint(forward_sentence_ends)
-def_move_gint(backward_sentence_starts)
+static VALUE
+forward_char(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_char(_SELF(self)));
+}
 
-def_move_gint(forward_visible_word_ends)
-def_move_gint(backward_visible_word_starts)
-def_move(forward_visible_word_end)
-def_move(backward_visible_word_start)
-def_move(forward_visible_cursor_position)
-def_move(backward_visible_cursor_position)
-def_move_gint(forward_visible_cursor_positions)
-def_move_gint(backward_visible_cursor_positions)
-def_move(forward_visible_line)
-def_move(backward_visible_line)
-def_move_gint(forward_visible_lines)
-def_move_gint(backward_visible_lines)
-def_move(forward_cursor_position)
-def_move(backward_cursor_position)
-def_move_gint(forward_cursor_positions)
-def_move_gint(backward_cursor_positions)
-def_move(forward_to_line_end)
+static VALUE
+backward_char(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_char(_SELF(self)));
+}
+
+static VALUE
+forward_chars(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_chars(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_chars(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_chars(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_line(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_line(_SELF(self)));
+}
+
+static VALUE
+backward_line(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_line(_SELF(self)));
+}
+
+static VALUE
+forward_lines(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_lines(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_lines(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_lines(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_word_end(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_word_end(_SELF(self)));
+}
+
+static VALUE
+backward_word_start(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_word_start(_SELF(self)));
+}
+
+static VALUE
+forward_word_ends(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_word_ends(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_word_starts(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_word_starts(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_sentence_end(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_sentence_end(_SELF(self)));
+}
+
+static VALUE
+backward_sentence_start(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_sentence_start(_SELF(self)));
+}
+
+static VALUE
+forward_sentence_ends(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_sentence_ends(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_sentence_starts(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_sentence_starts(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_visible_word_ends(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_visible_word_ends(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_visible_word_starts(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_visible_word_starts(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_visible_word_end(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_visible_word_end(_SELF(self)));
+}
+
+static VALUE
+backward_visible_word_start(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_visible_word_start(_SELF(self)));
+}
+
+static VALUE
+forward_visible_cursor_position(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_visible_cursor_position(_SELF(self)));
+}
+
+static VALUE
+backward_visible_cursor_position(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_visible_cursor_position(_SELF(self)));
+}
+
+static VALUE
+forward_visible_cursor_positions(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_visible_cursor_positions(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_visible_cursor_positions(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_visible_cursor_positions(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_visible_line(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_visible_line(_SELF(self)));
+}
+
+static VALUE
+backward_visible_line(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_visible_line(_SELF(self)));
+}
+
+static VALUE
+forward_visible_lines(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_visible_lines(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_visible_lines(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_visible_lines(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_cursor_position(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_cursor_position(_SELF(self)));
+}
+
+static VALUE
+backward_cursor_position(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_cursor_position(_SELF(self)));
+}
+
+static VALUE
+forward_cursor_positions(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_cursor_positions(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+backward_cursor_positions(VALUE self, VALUE i)
+{
+    return CBOOL2RVAL(gtk_text_iter_backward_cursor_positions(_SELF(self), NUM2INT(i)));
+}
+
+static VALUE
+forward_to_line_end(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_forward_to_line_end(_SELF(self)));
+}
 
 static VALUE
 rg_forward_to_end(VALUE self)
@@ -252,21 +473,47 @@ rg_forward_to_end(VALUE self)
     return self;
 }
 
-#define def_gint_setter(__name__) \
-static VALUE \
-set_##__name__(VALUE self, VALUE val) \
-{ \
-    gtk_text_iter_set_##__name__(_SELF(self), NUM2INT(val)); \
-    return val; \
+static VALUE
+set_offset(VALUE self, VALUE val)
+{
+    gtk_text_iter_set_offset(_SELF(self), NUM2INT(val));
+    return val;
 }
 
-def_gint_setter(offset)
-def_gint_setter(line)
-def_gint_setter(line_offset)
-def_gint_setter(line_index)
+static VALUE
+set_line(VALUE self, VALUE val)
+{
+    gtk_text_iter_set_line(_SELF(self), NUM2INT(val));
+    return val;
+}
 
-def_gint_setter(visible_line_offset)
-def_gint_setter(visible_line_index)
+static VALUE
+set_line_offset(VALUE self, VALUE val)
+{
+    gtk_text_iter_set_line_offset(_SELF(self), NUM2INT(val));
+    return val;
+}
+
+static VALUE
+set_line_index(VALUE self, VALUE val)
+{
+    gtk_text_iter_set_line_index(_SELF(self), NUM2INT(val));
+    return val;
+}
+
+static VALUE
+set_visible_line_offset(VALUE self, VALUE val)
+{
+    gtk_text_iter_set_visible_line_offset(_SELF(self), NUM2INT(val));
+    return val;
+}
+
+static VALUE
+set_visible_line_index(VALUE self, VALUE val)
+{
+    gtk_text_iter_set_visible_line_index(_SELF(self), NUM2INT(val));
+    return val;
+}
 
 static VALUE
 rg_forward_to_tag_toggle(int argc, VALUE *argv, VALUE self)
