@@ -513,6 +513,7 @@ module Gtk
     end
     define_deprecated_method :set_state, :warn => "Use '#{self}#set_state_flags'."
     alias :state= :set_state
+    define_deprecated_method :ensure_style, :warn => "Use 'Gtk::StyleContext'."
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__

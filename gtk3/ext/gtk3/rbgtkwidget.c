@@ -273,13 +273,6 @@ rg_hide_on_delete(VALUE self)
 }
 
 static VALUE
-rg_ensure_style(VALUE self)
-{
-    gtk_widget_ensure_style(_SELF(self));
-    return self;
-}
-
-static VALUE
 rg_reset_rc_styles(VALUE self)
 {
     gtk_widget_reset_rc_styles(_SELF(self));
@@ -1358,7 +1351,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD_P(ancestor, 1);
     RG_DEF_METHOD(translate_coordinates, 3);
     RG_DEF_METHOD(hide_on_delete, 0);
-    RG_DEF_METHOD(ensure_style, 0);
     RG_DEF_METHOD(reset_rc_styles, 0);
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
