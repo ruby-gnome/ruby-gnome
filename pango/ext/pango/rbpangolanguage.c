@@ -53,7 +53,7 @@ rg_matches(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &range_list);
 
     return CBOOL2RVAL(pango_language_matches(_SELF(self), 
-                                             NIL_P(range_list) ? NULL : RVAL2CSTR(range_list)));
+                                             RVAL2CSTR_ACCEPT_NIL(range_list)));
 }
 
 static VALUE
