@@ -170,8 +170,6 @@ G_GNUC_INTERNAL void Init_gtk_radio_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_radio_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_radiotoolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_range(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_rc(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_rcstyle(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recentaction(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_chooser(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_chooser_dialog(VALUE mGtk);
@@ -199,9 +197,6 @@ G_GNUC_INTERNAL void Init_gtk_spinner(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_statusbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_status_icon(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
-/* deprecated
-G_GNUC_INTERNAL void Init_gtk_style(VALUE mGtk);
-*/
 G_GNUC_INTERNAL void Init_gtk_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_target_list(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tearoff_menu_item(VALUE mGtk);

@@ -552,8 +552,6 @@ Init_gtk_gtk(void)
     Init_gtk_radio_menu_item(RG_TARGET_NAMESPACE);
     Init_gtk_radiotoolbutton(RG_TARGET_NAMESPACE);
     Init_gtk_range(RG_TARGET_NAMESPACE);
-    Init_gtk_rc(RG_TARGET_NAMESPACE);
-    Init_gtk_rcstyle(RG_TARGET_NAMESPACE);
     Init_gtk_recentaction(RG_TARGET_NAMESPACE);
     Init_gtk_recent_chooser(RG_TARGET_NAMESPACE);
     Init_gtk_recent_chooser_dialog(RG_TARGET_NAMESPACE);
@@ -581,9 +579,6 @@ Init_gtk_gtk(void)
     Init_gtk_statusbar(RG_TARGET_NAMESPACE);
     Init_gtk_status_icon(RG_TARGET_NAMESPACE);
     Init_gtk_stock(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gtk_style(RG_TARGET_NAMESPACE);
-*/
     Init_gtk_table(RG_TARGET_NAMESPACE);
     Init_gtk_target_list(RG_TARGET_NAMESPACE);
     Init_gtk_tearoff_menu_item(RG_TARGET_NAMESPACE);
