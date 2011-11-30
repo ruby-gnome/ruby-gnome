@@ -325,16 +325,6 @@ rg_create_pango_layout(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_render_icon(int argc, VALUE *argv, VALUE self)
-{
-    VALUE stock_id, size, detail;
-    rb_scan_args(argc, argv, "21", &stock_id, &size, &detail);
-    return GOBJ2RVALU(gtk_widget_render_icon(_SELF(self), rb_id2name(SYM2ID(stock_id)),
-                                             RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
-                                             RVAL2CSTR_ACCEPT_NIL(detail)));
-}
-
-static VALUE
 rg_s_pop_composite_child(VALUE self)
 {
     gtk_widget_pop_composite_child();
@@ -1247,7 +1237,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(create_pango_context, 0);
     RG_DEF_METHOD(pango_context, 0);
     RG_DEF_METHOD(create_pango_layout, -1);
-    RG_DEF_METHOD(render_icon, -1);
     RG_DEF_METHOD(queue_draw_area, 4);
     RG_DEF_METHOD(set_redraw_on_allocate, 1);
     RG_DEF_METHOD(set_composite_name, 1);
