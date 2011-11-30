@@ -38,7 +38,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         item = gtk_tool_button_new_from_stock(RVAL2CSTR(obj));
     } else {
         item = gtk_tool_button_new(GTK_WIDGET(RVAL2GOBJ(obj)), 
-                                   NIL_P(label) ? NULL : RVAL2CSTR(label));
+                                   RVAL2CSTR_ACCEPT_NIL(label));
     }
     RBGTK_INITIALIZE(self, item);
     return Qnil;

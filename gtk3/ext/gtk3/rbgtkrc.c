@@ -59,8 +59,8 @@ rg_m_get_style_by_paths(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rb_scan_args(argc, argv, "13", &settings, &widget_path, &class_path, &klass);
 
     style = gtk_rc_get_style_by_paths(GTK_SETTINGS(RVAL2GOBJ(settings)),
-                                      NIL_P(widget_path) ? NULL : RVAL2CSTR(widget_path),
-                                      NIL_P(class_path) ? NULL : RVAL2CSTR(class_path),
+                                      RVAL2CSTR_ACCEPT_NIL(widget_path),
+                                      RVAL2CSTR_ACCEPT_NIL(class_path),
                                       NIL_P(klass) ? G_TYPE_NONE : CLASS2GTYPE(klass));
 
     if (style){

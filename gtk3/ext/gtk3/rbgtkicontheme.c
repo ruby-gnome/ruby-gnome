@@ -95,7 +95,7 @@ static VALUE
 rg_set_custom_theme(VALUE self, VALUE theme_name)
 {
     gtk_icon_theme_set_custom_theme(_SELF(self), 
-                                    NIL_P(theme_name) ? NULL : RVAL2CSTR(theme_name));
+                                    RVAL2CSTR_ACCEPT_NIL(theme_name));
     return self;
 }
 

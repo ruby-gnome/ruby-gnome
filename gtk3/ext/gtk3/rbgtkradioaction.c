@@ -36,7 +36,7 @@ rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id
     }
     G_INITIALIZE(self, gtk_radio_action_new(RVAL2CSTR(name),
                                             RVAL2CSTR(label),
-                                            NIL_P(tooltip) ? NULL : RVAL2CSTR(tooltip),
+                                            RVAL2CSTR_ACCEPT_NIL(tooltip),
                                             gstock,
                                             NUM2INT(value)));
     return Qnil;

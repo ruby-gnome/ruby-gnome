@@ -56,7 +56,7 @@ rg_add_action(int argc, VALUE *argv, VALUE self)
 
     gtk_action_group_add_action_with_accel(_SELF(self),
                                            GTK_ACTION(RVAL2GOBJ(action)),
-                                           NIL_P(accelerator) ? NULL : RVAL2CSTR(accelerator));
+                                           RVAL2CSTR_ACCEPT_NIL(accelerator));
     G_CHILD_ADD(self, action);
 
     return self;
@@ -415,7 +415,7 @@ static VALUE
 rg_set_translation_domain(VALUE self, VALUE domain)
 {
     gtk_action_group_set_translation_domain(_SELF(self), 
-                                            NIL_P(domain) ? (const gchar*)NULL : RVAL2CSTR(domain));
+                                            RVAL2CSTR_ACCEPT_NIL(domain));
     return self;
 }
 

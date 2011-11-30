@@ -27,7 +27,6 @@
 #define RVAL2ITR(i) (GtkTextIter*)RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 #define RVAL2MARK(m) (GTK_TEXT_MARK(RVAL2GOBJ(m)))
-#define N_RVAL2CSTR(text) (NIL_P(text) ? NULL : RVAL2CSTR(text))
 #define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
 #define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
 #define ATOM2RVAL(a) (BOXED2RVAL(a, GDK_TYPE_ATOM))
@@ -244,7 +243,7 @@ static VALUE
 rg_create_mark(VALUE self, VALUE name, VALUE where, VALUE left_gravity)
 {
     VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
-                                                      NIL_P(name) ? NULL : RVAL2CSTR(name),
+                                                      RVAL2CSTR_ACCEPT_NIL(name),
                                                       RVAL2ITR(where),
                                                       RVAL2CBOOL(left_gravity)));
     G_CHILD_ADD(self, ret);
@@ -471,7 +470,7 @@ static VALUE
 rg_register_deserialize_target(VALUE self, VALUE tagset_name)
 {
     return ATOM2RVAL(gtk_text_buffer_register_deserialize_tagset(_SELF(self),
-                                                                 (const gchar*)(NIL_P(tagset_name) ? NULL : RVAL2CSTR(tagset_name))));
+                                                                 RVAL2CSTR_ACCEPT_NIL(tagset_name)));
 }
 
 static guint8*
@@ -515,7 +514,7 @@ static VALUE
 rg_register_serialize_target(VALUE self, VALUE tagset_name)
 {
     return ATOM2RVAL(gtk_text_buffer_register_serialize_tagset(_SELF(self),
-                                                               NIL_P(tagset_name) ? NULL : RVAL2CSTR(tagset_name)));
+                                                               RVAL2CSTR_ACCEPT_NIL(tagset_name)));
 }
 
 static VALUE
@@ -635,7 +634,7 @@ rg_create_tag(VALUE self, VALUE tag_name, VALUE properties)
     GtkTextTag *tag;
     VALUE ret;
 
-    tag = gtk_text_tag_new(NIL_P(tag_name) ? (gchar*)NULL : RVAL2CSTR(tag_name));
+    tag = gtk_text_tag_new(RVAL2CSTR_ACCEPT_NIL(tag_name));
     gtk_text_tag_table_add (gtk_text_buffer_get_tag_table(_SELF(self)), tag);
 
     G_SET_PROPERTIES(GOBJ2RVAL(tag), properties);
