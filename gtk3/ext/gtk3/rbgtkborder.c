@@ -27,28 +27,6 @@
 #define RG_TARGET_NAMESPACE cBorder
 #define _SELF(self) ((GtkBorder*)RVAL2BOXED(self, GTK_TYPE_BORDER))
 
-#define ATTR_INT(name)\
-static VALUE \
-border_int_ ## name (VALUE self)\
-{\
-    return INT2NUM(_SELF(self)->name);\
-}\
-static VALUE \
-border_int_set_ ## name (VALUE self, VALUE val)\
-{\
-    _SELF(self)->name = NUM2INT(val); \
-    return self;\
-}
-
-ATTR_INT(left);
-ATTR_INT(right);
-ATTR_INT(top);
-ATTR_INT(bottom);
-
-#define DEFINE_ACCESSOR(gt, type, name)                                  \
-    rb_define_method(gt, G_STRINGIFY(name), border_ ## type ## _## name, 0);\
-    rb_define_method(gt, G_STRINGIFY(set_ ## name), border_ ## type ## _set_## name, 1);
-
 static VALUE
 rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 {
@@ -60,6 +38,58 @@ rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 
     G_INITIALIZE(self, &border);
     return Qnil;
+}
+
+static VALUE
+rg_left(VALUE self)
+{
+    return INT2NUM(_SELF(self)->left);
+}
+
+static VALUE
+rg_set_left(VALUE self, VALUE val)
+{
+    _SELF(self)->left = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+rg_right(VALUE self)
+{
+    return INT2NUM(_SELF(self)->right);
+}
+
+static VALUE
+rg_set_right(VALUE self, VALUE val)
+{
+    _SELF(self)->right = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+rg_top(VALUE self)
+{
+    return INT2NUM(_SELF(self)->top);
+}
+
+static VALUE
+rg_set_top(VALUE self, VALUE val)
+{
+    _SELF(self)->top = NUM2INT(val);
+    return self;
+}
+
+static VALUE
+rg_bottom(VALUE self)
+{
+    return INT2NUM(_SELF(self)->bottom);
+}
+
+static VALUE
+rg_set_bottom(VALUE self, VALUE val)
+{
+    _SELF(self)->bottom = NUM2INT(val);
+    return self;
 }
 
 static VALUE
@@ -78,10 +108,14 @@ Init_gtk_border(VALUE mGtk)
     RG_DEF_METHOD(initialize, 4);
     RG_DEF_METHOD(to_a, 0);
 
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, left);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, right);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, top);
-    DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, int, bottom);
+    RG_DEF_METHOD(left, 0);
+    RG_DEF_METHOD(set_left, 1);
+    RG_DEF_METHOD(right, 0);
+    RG_DEF_METHOD(set_right, 1);
+    RG_DEF_METHOD(top, 0);
+    RG_DEF_METHOD(set_top, 1);
+    RG_DEF_METHOD(bottom, 0);
+    RG_DEF_METHOD(set_bottom, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

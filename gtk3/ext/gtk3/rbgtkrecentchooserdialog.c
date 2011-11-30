@@ -40,7 +40,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "manager", &rb_manager,
                      "buttons", &rb_button_ary,
                      NULL);
-    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    title = RVAL2CSTR_ACCEPT_NIL(rb_title);
     parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
     manager = NIL_P(rb_manager) ? NULL : GTK_RECENT_MANAGER(RVAL2GOBJ(rb_manager));
 

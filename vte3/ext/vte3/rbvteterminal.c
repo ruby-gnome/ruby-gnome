@@ -130,7 +130,7 @@ rg_fork_command(int argc, VALUE *argv, VALUE self)
     pty_flags = NIL_P(rb_pty_flags) ?
                 VTE_PTY_DEFAULT :
                 RVAL2GFLAGS(rb_pty_flags, VTE_TYPE_PTY_FLAGS);
-    working_directory = NIL_P(rb_working_directory) ? NULL : RVAL2CSTR(rb_working_directory);
+    working_directory = RVAL2CSTR_ACCEPT_NIL(rb_working_directory);
     command_argv = rval2cstrary(NIL_P(rb_command_argv) ? fork_command_default_argv() : rb_command_argv);
     envv = rval2cstrary(rb_envv);
     spawn_flags = NIL_P(rb_spawn_flags) ?
@@ -507,9 +507,7 @@ rg_has_selection_p(VALUE self)
 static VALUE
 rg_set_word_chars(VALUE self, VALUE word_chars)
 {
-    vte_terminal_set_word_chars(_SELF(self),
-                                NIL_P(word_chars) ?
-                                  NULL : RVAL2CSTR(word_chars));
+    vte_terminal_set_word_chars(_SELF(self), RVAL2CSTR_ACCEPT_NIL(word_chars));
     return self;
 }
 

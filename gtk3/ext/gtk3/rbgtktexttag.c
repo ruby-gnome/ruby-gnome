@@ -28,7 +28,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE name;
     rb_scan_args(argc, argv, "01", &name);
-    G_INITIALIZE(self, gtk_text_tag_new(NIL_P(name) ? NULL : RVAL2CSTR(name)));
+    G_INITIALIZE(self, gtk_text_tag_new(RVAL2CSTR_ACCEPT_NIL(name)));
     return Qnil;
 }
 

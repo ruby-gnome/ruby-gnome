@@ -75,7 +75,7 @@ rg_render_icon(int argc, VALUE *argv, VALUE self)
                                               RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
                                               RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
                                               NIL_P(widget) ? NULL : RVAL2GOBJ(widget),
-                                              NIL_P(detail) ? NULL : RVAL2CSTR(detail)));
+                                              RVAL2CSTR_ACCEPT_NIL(detail)));
 }
 
 void

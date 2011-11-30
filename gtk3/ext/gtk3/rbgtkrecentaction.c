@@ -34,13 +34,13 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(manager)) {
         G_INITIALIZE(self, gtk_recent_action_new(RVAL2CSTR(name),
                                                  RVAL2CSTR(label),
-                                                 NIL_P(tooltip) ? NULL : RVAL2CSTR(tooltip),
-                                                 NIL_P(stock_id) ? NULL : RVAL2CSTR(stock_id)));
+                                                 RVAL2CSTR_ACCEPT_NIL(tooltip),
+                                                 RVAL2CSTR_ACCEPT_NIL(stock_id)));
     } else {
         G_INITIALIZE(self, gtk_recent_action_new_for_manager(RVAL2CSTR(name),
                                                              RVAL2CSTR(label),
-                                                             NIL_P(tooltip) ? NULL : RVAL2CSTR(tooltip),
-                                                             NIL_P(stock_id) ? NULL : RVAL2CSTR(stock_id),
+                                                             RVAL2CSTR_ACCEPT_NIL(tooltip),
+                                                             RVAL2CSTR_ACCEPT_NIL(stock_id),
                                                              GTK_RECENT_MANAGER(RVAL2GOBJ(manager))));
     }
     return Qnil;

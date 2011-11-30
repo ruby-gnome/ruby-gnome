@@ -34,7 +34,7 @@ rg_m_application_name(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_set_application_name(VALUE self, VALUE application_name)
 {
-    g_set_prgname(NIL_P(application_name) ? NULL : RVAL2CSTR(application_name));
+    g_set_prgname(RVAL2CSTR_ACCEPT_NIL(application_name));
     return self;
 }
 #endif
@@ -48,7 +48,7 @@ rg_m_prgname(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_set_prgname(VALUE self, VALUE prgname)
 {
-    g_set_prgname(NIL_P(prgname) ? NULL : RVAL2CSTR(prgname));
+    g_set_prgname(RVAL2CSTR_ACCEPT_NIL(prgname));
     return self;
 }
 
@@ -63,7 +63,7 @@ static VALUE
 rg_m_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
 {
     return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable), 
-                               NIL_P(value) ? NULL : RVAL2CSTR(value),
+                               RVAL2CSTR_ACCEPT_NIL(value),
                                RVAL2CBOOL(overwrite)));
 }
 

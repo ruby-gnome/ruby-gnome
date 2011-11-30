@@ -9,7 +9,10 @@ module Gtk
   define_deprecated_const :InputDialog,   :raise => "Don't use this widget anymore."
   define_deprecated_const :ItemFactory,   :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :OptionMenu,    :raise => "Use 'Gtk::ComboBox' instead."
+  define_deprecated_const :RC,            :raise => "Use 'Gtk::StyleContext' instead."
+  define_deprecated_const :RcStyle,       :raise => "Use 'Gtk::CssProvider' instead."
   define_deprecated_const :Ruler,         :raise => "Don't use this widget anymore."
+  define_deprecated_const :Style,         :raise => "Use 'Gtk::StyleContext' instead."
   define_deprecated_const :Tooltips,      :raise => "Use 'Gtk::Tooltip' API."
   define_deprecated_const :VRuler,        :raise => "Don't use this widget anymore."
   define_deprecated_flags :AccelFlags, 'ACCEL'
@@ -423,6 +426,7 @@ module Gtk
   class TextIter
     extend GLib::Deprecatable
     define_deprecated_flags :SearchFlags, 'SEARCH'
+    define_deprecated_method :backword_visible_word_start, :backward_visible_word_start
   end
 
   class TextTag
@@ -473,6 +477,7 @@ module Gtk
     end
     define_deprecated_singleton_method :default_colormap, :raise => "Don't use this method."
     define_deprecated_singleton_method :default_visual, :raise => "Don't use this method."
+    define_deprecated_singleton_method :default_style, :raise => "Use 'Gtk::StyleContext' and 'Gtk::CssProvider'."
     define_deprecated_const :Flags, :raise => "Don't use this flags anymore."
     define_deprecated_method :flags, :raise => "Use the proper method."
     define_deprecated_method :set_flags, :warn => "Use the proper method."
@@ -501,6 +506,36 @@ module Gtk
     define_deprecated_method :action, :warn => "Use 'Gtk::Activatable#related_action'." do |_self|
       _self.related_action
     end
+    define_deprecated_method :size_request, :warn => "Use '#{self}#preferred_size'." do |_self|
+      _self.preferred_size.last
+    end
+    define_deprecated_method :child_requisition, :warn => "Use '#{self}#preferred_size'." do |_self|
+      _self.preferred_size.last
+    end
+    define_deprecated_method :set_state, :warn => "Use '#{self}#set_state_flags'."
+    alias :state= :set_state
+    define_deprecated_method :ensure_style, :warn => "Use 'Gtk::StyleContext'."
+    define_deprecated_method :reset_rc_styles, :warn => "Use '#{self}#reset_style'."
+    define_deprecated_method :path, :raise => "Use '#{self}#widget_path'."
+    define_deprecated_method :class_path, :raise => "Use '#{self}#widget_path'."
+    define_deprecated_method :modify_style, :warn => "Use 'Gtk::StyleContext'."
+    define_deprecated_method :modifier_style, :raise => "Use 'Gtk::StyleContext'."
+    define_deprecated_method :modify_fg, :warn => "Use '#{self}#override_color'."
+    define_deprecated_method :modify_bg, :warn => "Use '#{self}#override_background_color'."
+    define_deprecated_method :modify_text, :warn => "Use '#{self}#override_color'."
+    define_deprecated_method :modify_base, :warn => "Use '#{self}#override_background_color'."
+    define_deprecated_method :modify_font, :warn => "Use '#{self}#override_font'."
+    define_deprecated_method :modify_cursor, :warn => "Use '#{self}#override_cursor'."
+    define_deprecated_method :render_icon, :warn => "Use '#{self}#render_icon_pixbuf'." do |_self, stock_id, size, detail|
+      _self.render_icon_pixbuf(stock_id, size)
+    end
+    define_deprecated_method :state, :raise => "Use '#{self}#state_flags'."
+    define_deprecated_method :has_rc_style?, :warn => "Use 'Gtk::StyleContext'." do |_self|
+      false
+    end
+    define_deprecated_method :requisition, :raise => "Don't use this method."
+    define_deprecated_method :set_requisition, :warn => "Don't use this method."
+    define_deprecated_method :saved_state, :raise => "Don't use this method."
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__
@@ -517,6 +552,8 @@ module Gtk
     end
 
     define_deprecated_signal :expose_event, :warn => "Use '#{self}::draw' signal."
+    define_deprecated_signal :state_changed, :warn => "Use '#{self}::state-flags-changed' signal."
+    define_deprecated_signal :style_set, :warn => "Use '#{self}::style-updated' signal."
   end
 
   class Window

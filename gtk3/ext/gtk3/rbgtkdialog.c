@@ -110,7 +110,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "flags", &rb_flags,
                      "buttons", &rb_button_ary,
                      NULL);
-    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    title = RVAL2CSTR_ACCEPT_NIL(rb_title);
     parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
     flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
 

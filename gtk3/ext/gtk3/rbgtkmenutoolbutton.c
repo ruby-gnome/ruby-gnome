@@ -45,7 +45,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "11", &icon_widget, &label);
 
         item = gtk_menu_tool_button_new(GTK_WIDGET(RVAL2GOBJ(icon_widget)),
-                                        NIL_P(label) ? (const gchar*)NULL : RVAL2CSTR(label));
+                                        RVAL2CSTR_ACCEPT_NIL(label));
     }
 
     RBGTK_INITIALIZE(self, item);
@@ -60,8 +60,8 @@ rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "12", &tooltips, &tip_text, &tip_private);
     gtk_menu_tool_button_set_arrow_tooltip(_SELF(self), GTK_TOOLTIPS(RVAL2GOBJ(self)),
-                                           NIL_P(tip_text) ? NULL : RVAL2CSTR(tip_text),
-                                           NIL_P(tip_private) ? NULL : RVAL2CSTR(tip_private));
+                                           RVAL2CSTR_ACCEPT_NIL(tip_text),
+                                           RVAL2CSTR_ACCEPT_NIL(tip_private));
     return self;
 }
 */

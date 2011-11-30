@@ -43,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "title", &rb_title,
                      "parent", &rb_parent,
                      NULL);
-    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    title = RVAL2CSTR_ACCEPT_NIL(rb_title);
     parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
 
     dialog = gtk_print_unix_dialog_new(title, parent);

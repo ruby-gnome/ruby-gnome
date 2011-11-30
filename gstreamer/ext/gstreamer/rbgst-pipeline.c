@@ -52,7 +52,7 @@ rg_initialize (int argc, VALUE *argv, VALUE self)
 
     rb_scan_args (argc, argv, "01", &name);
 
-    bin = gst_pipeline_new (NIL_P (name) ? NULL : RVAL2CSTR(name));
+    bin = gst_pipeline_new (RVAL2CSTR_ACCEPT_NIL(name));
     if (bin != NULL)
         RBGST_INITIALIZE (self, bin);
     return Qnil;

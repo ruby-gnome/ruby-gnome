@@ -36,7 +36,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rbg_scan_options(options,
                      "title", &rb_title,
                      NULL);
-    title = NIL_P(rb_title) ? NULL : RVAL2CSTR(rb_title);
+    title = RVAL2CSTR_ACCEPT_NIL(rb_title);
 
     dialog = gtk_font_selection_dialog_new(title);
     RBGTK_INITIALIZE(self, dialog);
