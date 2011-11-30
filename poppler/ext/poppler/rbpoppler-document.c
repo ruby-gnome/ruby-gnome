@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &uri_or_data, &rb_password);
 
-    password = NIL_P(rb_password) ? NULL : RVAL2CSTR(rb_password);
+    password = RVAL2CSTR_ACCEPT_NIL(rb_password);
 
     if (RVAL2CBOOL(rb_funcall(self, id_pdf_data_p, 1, uri_or_data))) {
         document = poppler_document_new_from_data(RSTRING_PTR(uri_or_data),
