@@ -114,15 +114,6 @@ rg_queue_resize_no_redraw(VALUE self)
 }
 
 static VALUE
-rg_child_requisition(VALUE self)
-{
-    GtkRequisition req;
-
-    gtk_widget_get_child_requisition(_SELF(self), &req);
-    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
-}
-
-static VALUE
 rg_size_allocate(VALUE self, VALUE alloc)
 {
     gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
@@ -1350,7 +1341,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(queue_draw, 0);
     RG_DEF_METHOD(queue_resize, 0);
     RG_DEF_METHOD(queue_resize_no_redraw, 0);
-    RG_DEF_METHOD(child_requisition, 0);
     RG_DEF_METHOD(size_allocate, 1);
     RG_DEF_METHOD(add_accelerator, 5);
     RG_DEF_METHOD(remove_accelerator, 3);

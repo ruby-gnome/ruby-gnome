@@ -508,6 +508,9 @@ module Gtk
     define_deprecated_method :size_request, :warn => "Use '#{self}#preferred_size'." do |_self|
       _self.preferred_size.last
     end
+    define_deprecated_method :child_requisition, :warn => "Use '#{self}#preferred_size'." do |_self|
+      _self.preferred_size.last
+    end
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__
