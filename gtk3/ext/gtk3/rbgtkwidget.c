@@ -305,69 +305,6 @@ rg_composite_name(VALUE self)
 }
 
 static VALUE
-rg_modify_style(VALUE self, VALUE style)
-{
-    gtk_widget_modify_style(_SELF(self),
-                            GTK_RC_STYLE(RVAL2GOBJ(style)));
-    return self;
-}
-
-static VALUE
-rg_modifier_style(VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_modifier_style(_SELF(self)));
-}
-
-static VALUE
-rg_modify_fg(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_fg(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_bg(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_bg(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_text(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_text(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_base(VALUE self, VALUE state, VALUE color)
-{
-    gtk_widget_modify_base(_SELF(self), RVAL2GTKSTATETYPE(state),
-                         RVAL2GDKCOLOR(color));
-    return self;
-}
-
-static VALUE
-rg_modify_font(VALUE self, VALUE font_desc)
-{
-    gtk_widget_modify_font(_SELF(self), 
-                           (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
-    return self;
-}
-
-static VALUE
-rg_modify_cursor(VALUE self, VALUE primary, VALUE seconday)
-{
-    gtk_widget_modify_cursor(_SELF(self), 
-                             RVAL2BOXED(primary, GDK_TYPE_COLOR),
-                             RVAL2BOXED(seconday, GDK_TYPE_COLOR));
-    return self;
-}
-
-static VALUE
 rg_create_pango_context(VALUE self)
 {
     return GOBJ2RVALU(gtk_widget_create_pango_context(_SELF(self)));
@@ -1307,14 +1244,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
     RG_DEF_METHOD(composite_name, 0);
-    RG_DEF_METHOD(modify_style, 1);
-    RG_DEF_METHOD(modifier_style, 0);
-    RG_DEF_METHOD(modify_fg, 2);
-    RG_DEF_METHOD(modify_bg, 2);
-    RG_DEF_METHOD(modify_text, 2);
-    RG_DEF_METHOD(modify_base, 2);
-    RG_DEF_METHOD(modify_font, 1);
-    RG_DEF_METHOD(modify_cursor, 2);
     RG_DEF_METHOD(create_pango_context, 0);
     RG_DEF_METHOD(pango_context, 0);
     RG_DEF_METHOD(create_pango_layout, -1);

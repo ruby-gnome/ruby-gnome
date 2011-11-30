@@ -518,6 +518,14 @@ module Gtk
     define_deprecated_method :reset_rc_styles, :warn => "Use '#{self}#reset_style'."
     define_deprecated_method :path, :raise => "Use '#{self}#widget_path'."
     define_deprecated_method :class_path, :raise => "Use '#{self}#widget_path'."
+    define_deprecated_method :modify_style, :warn => "Use 'Gtk::StyleContext'."
+    define_deprecated_method :modifier_style, :raise => "Use 'Gtk::StyleContext'."
+    define_deprecated_method :modify_fg, :warn => "Use '#{self}#override_color'."
+    define_deprecated_method :modify_bg, :warn => "Use '#{self}#override_background_color'."
+    define_deprecated_method :modify_text, :warn => "Use '#{self}#override_color'."
+    define_deprecated_method :modify_base, :warn => "Use '#{self}#override_background_color'."
+    define_deprecated_method :modify_font, :warn => "Use '#{self}#override_font'."
+    define_deprecated_method :modify_cursor, :warn => "Use '#{self}#override_cursor'."
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__
