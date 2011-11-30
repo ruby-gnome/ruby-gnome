@@ -235,7 +235,7 @@ rg_get_source_marks_at_line(int argc, VALUE *argv, VALUE self)
     list =
         gtk_source_buffer_get_source_marks_at_line (_SELF (self),
                           NUM2INT (line),
-                          NIL_P (category) ? NULL : RVAL2CSTR (category));
+                          RVAL2CSTR_ACCEPT_NIL (category));
     ary = rb_ary_new ();
 
     p = (GSList *) list;
@@ -259,7 +259,7 @@ rg_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
     list =
         gtk_source_buffer_get_source_marks_at_iter (_SELF (self),
                           RVAL2ITR (iter),
-                          NIL_P (category) ? NULL : RVAL2CSTR (category));
+                          RVAL2CSTR_ACCEPT_NIL (category));
     ary = rb_ary_new ();
 
     p = (GSList *) list;
@@ -281,7 +281,7 @@ rg_remove_source_marks(int argc, VALUE *argv, VALUE self)
     gtk_source_buffer_remove_source_marks (_SELF (self),
                             RVAL2ITR (start),
                             RVAL2ITR (end),
-                            NIL_P (category) ? NULL : RVAL2CSTR (category));
+                            RVAL2CSTR_ACCEPT_NIL (category));
 
     return self;
 }
@@ -296,7 +296,7 @@ rg_forward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
     return
         CBOOL2RVAL (gtk_source_buffer_forward_iter_to_source_mark
                                    (_SELF (self), RVAL2ITR (iter),
-                                    NIL_P (category) ? NULL : RVAL2CSTR (category)));
+                                    RVAL2CSTR_ACCEPT_NIL (category)));
 }
 
 static VALUE
@@ -309,7 +309,7 @@ rg_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
     return
         CBOOL2RVAL (gtk_source_buffer_backward_iter_to_source_mark
                                    (_SELF (self), RVAL2ITR (iter),
-                                    NIL_P (category) ? NULL : RVAL2CSTR (category)));
+                                    RVAL2CSTR_ACCEPT_NIL (category)));
 }
 
 static VALUE
