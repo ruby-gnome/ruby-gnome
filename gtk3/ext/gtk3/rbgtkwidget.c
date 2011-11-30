@@ -730,13 +730,6 @@ rg_set_allocation(VALUE self, VALUE alloc)
 
 /* deprecated
 static VALUE
-rg_requisition(VALUE self)
-{
-    GtkRequisition req = _SELF(self)->requisition;
-    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
-}
-
-static VALUE
 rg_set_requisition(VALUE self, VALUE w, VALUE h)
 {
     GtkRequisition *r = &(_SELF(self)->requisition);
@@ -1260,7 +1253,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 1);
 /* deprecated
-    RG_DEF_METHOD(requisition, 0);
     RG_DEF_METHOD(set_requisition, 2);
     RG_DEF_METHOD(saved_state, 0);
 */

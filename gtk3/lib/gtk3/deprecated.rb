@@ -533,6 +533,7 @@ module Gtk
     define_deprecated_method :has_rc_style?, :warn => "Use 'Gtk::StyleContext'." do |_self|
       false
     end
+    define_deprecated_method :requisition, :raise => "Don't use this method."
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__
