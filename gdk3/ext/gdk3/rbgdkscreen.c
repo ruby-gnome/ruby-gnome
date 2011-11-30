@@ -287,7 +287,7 @@ rg_spawn_on_screen(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, 
     gargv = (gchar **)RVAL2STRV(argv);
     genvp = (gchar **)RVAL2STRV_ACCEPT_NIL(envp);
     ret = gdk_spawn_on_screen(_SELF(self),
-                              NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
+                              RVAL2CSTR_ACCEPT_NIL(working_directory),
                               gargv, genvp, NUM2INT(flags),
                               (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                               &child_pid, &err);
@@ -318,7 +318,7 @@ rg_spawn_on_screen_with_pipes(VALUE self, VALUE working_directory, VALUE argv, V
     gargv = (gchar **)RVAL2STRV(argv);
     genvp = (gchar **)RVAL2STRV_ACCEPT_NIL(envp);
     ret = gdk_spawn_on_screen_with_pipes(_SELF(self),
-                                         NIL_P(working_directory) ? NULL : RVAL2CSTR(working_directory),
+                                         RVAL2CSTR_ACCEPT_NIL(working_directory),
                                          gargv, genvp, NUM2INT(flags),
                                          (GSpawnChildSetupFunc)child_setup, (gpointer)func,
                                          &child_pid, 
