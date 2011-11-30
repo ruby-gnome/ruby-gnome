@@ -426,6 +426,7 @@ module Gtk
   class TextIter
     extend GLib::Deprecatable
     define_deprecated_flags :SearchFlags, 'SEARCH'
+    define_deprecated_method :backword_visible_word_start, :backward_visible_word_start
   end
 
   class TextTag

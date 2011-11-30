@@ -383,7 +383,7 @@ rg_forward_visible_word_end(VALUE self)
 }
 
 static VALUE
-rg_backword_visible_word_start(VALUE self)
+rg_backward_visible_word_start(VALUE self)
 {
     return CBOOL2RVAL(gtk_text_iter_backward_visible_word_start(_SELF(self)));
 }
@@ -711,7 +711,7 @@ Init_gtk_textiter(VALUE mGtk)
     RG_DEF_METHOD(forward_visible_word_ends, 1);
     RG_DEF_METHOD(backward_visible_word_starts, 1);
     RG_DEF_METHOD(forward_visible_word_end, 0);
-    RG_DEF_METHOD(backword_visible_word_start, 0);
+    RG_DEF_METHOD(backward_visible_word_start, 0);
     RG_DEF_METHOD(forward_visible_cursor_position, 0);
     RG_DEF_METHOD(backward_visible_cursor_position, 0);
     RG_DEF_METHOD(forward_visible_cursor_positions, 1);
