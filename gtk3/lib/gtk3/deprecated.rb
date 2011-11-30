@@ -535,6 +535,7 @@ module Gtk
     end
     define_deprecated_method :requisition, :raise => "Don't use this method."
     define_deprecated_method :set_requisition, :warn => "Don't use this method."
+    define_deprecated_method :saved_state, :raise => "Don't use this method."
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__

@@ -728,14 +728,6 @@ rg_set_allocation(VALUE self, VALUE alloc)
     return self;
 }
 
-/* deprecated
-static VALUE
-rg_saved_state(VALUE self)
-{
-    return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
-}
-*/
-
 static VALUE
 rg_destroy(VALUE self)
 {
@@ -1243,9 +1235,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_window, 1);
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 1);
-/* deprecated
-    RG_DEF_METHOD(saved_state, 0);
-*/
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(bindings_activate, 2);
 
