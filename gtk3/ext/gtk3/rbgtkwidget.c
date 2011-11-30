@@ -113,16 +113,6 @@ rg_queue_resize_no_redraw(VALUE self)
     return self;
 }
 
-/* Note this method is not
-   gtk_widget_get_size_request */
-static VALUE
-rg_size_request(VALUE self)
-{
-    GtkRequisition req;
-    gtk_widget_size_request(_SELF(self), &req);
-    return rb_ary_new3(2, INT2NUM(req.width), INT2NUM(req.height));
-}
-
 static VALUE
 rg_child_requisition(VALUE self)
 {
@@ -748,9 +738,6 @@ rg_has_screen_p(VALUE self)
     return CBOOL2RVAL(gtk_widget_has_screen(_SELF(self)));
 }
 
-/*
-  Note this method is not gtk_widget_size_request()
-*/
 static VALUE
 rg_get_size_request(VALUE self)
 {
@@ -1363,7 +1350,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(queue_draw, 0);
     RG_DEF_METHOD(queue_resize, 0);
     RG_DEF_METHOD(queue_resize_no_redraw, 0);
-    RG_DEF_METHOD(size_request, 0);
     RG_DEF_METHOD(child_requisition, 0);
     RG_DEF_METHOD(size_allocate, 1);
     RG_DEF_METHOD(add_accelerator, 5);
