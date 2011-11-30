@@ -550,6 +550,8 @@ module Gtk
     end
 
     define_deprecated_signal :expose_event, :warn => "Use '#{self}::draw' signal."
+    define_deprecated_signal :state_changed, :warn => "Use '#{self}::state-flags-changed' signal."
+    define_deprecated_signal :style_set, :warn => "Use '#{self}::style-updated' signal."
   end
 
   class Window
