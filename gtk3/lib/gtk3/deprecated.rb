@@ -529,6 +529,7 @@ module Gtk
     define_deprecated_method :render_icon, :warn => "Use '#{self}#render_icon_pixbuf'." do |_self, stock_id, size, detail|
       _self.render_icon_pixbuf(stock_id, size)
     end
+    define_deprecated_method :state, :raise => "Use '#{self}#state_flags'."
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__

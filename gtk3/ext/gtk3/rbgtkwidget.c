@@ -752,12 +752,6 @@ rg_set_requisition(VALUE self, VALUE w, VALUE h)
 }
 
 static VALUE
-rg_state(VALUE self)
-{
-    return GENUM2RVAL(_SELF(self)->state, GTK_TYPE_STATE_TYPE);
-}
-
-static VALUE
 rg_saved_state(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
@@ -1274,7 +1268,6 @@ Init_gtk_widget(VALUE mGtk)
 /* deprecated
     RG_DEF_METHOD(requisition, 0);
     RG_DEF_METHOD(set_requisition, 2);
-    RG_DEF_METHOD(state, 0);
     RG_DEF_METHOD(saved_state, 0);
 */
     RG_DEF_METHOD(destroy, 0);
