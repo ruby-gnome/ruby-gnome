@@ -79,39 +79,39 @@ rg_set_contains(VALUE self, VALUE contains)
 }
 
 static VALUE
-rf_get_uri(VALUE self)
+rg_uri(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->uri);
 }
 
 static VALUE
-rf_set_uri(VALUE self, VALUE val)
+rg_set_uri(VALUE self, VALUE val)
 {
     _SELF(self)->uri = RVAL2CSTR(val);
     return self;
 }
 
 static VALUE
-rf_get_display_name(VALUE self)
+rg_display_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->display_name);
 }
 
 static VALUE
-rf_set_display_name(VALUE self, VALUE val)
+rg_set_display_name(VALUE self, VALUE val)
 {
     _SELF(self)->display_name = RVAL2CSTR(val);
     return self;
 }
 
 static VALUE
-rf_get_mime_type(VALUE self)
+rg_mime_type(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->mime_type);
 }
 
 static VALUE
-rf_set_mime_type(VALUE self, VALUE val)
+rg_set_mime_type(VALUE self, VALUE val)
 {
     _SELF(self)->mime_type = RVAL2CSTR(val);
     return self;
@@ -185,12 +185,12 @@ Init_gtk_recent_filter_info(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(contains, 0);
     RG_DEF_METHOD(set_contains, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "uri", rf_get_uri, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_uri", rf_set_uri, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "display_name", rf_get_display_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_display_name", rf_set_display_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "mime_type", rf_get_mime_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_mime_type", rf_set_mime_type, 1);
+    RG_DEF_METHOD(uri, 0);
+    RG_DEF_METHOD(set_uri, 1);
+    RG_DEF_METHOD(display_name, 0);
+    RG_DEF_METHOD(set_display_name, 1);
+    RG_DEF_METHOD(mime_type, 0);
+    RG_DEF_METHOD(set_mime_type, 1);
     RG_DEF_METHOD(applications, 0);
     RG_DEF_METHOD(set_applications, 1);
     RG_DEF_METHOD(groups, 0);

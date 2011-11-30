@@ -41,52 +41,52 @@ rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
 }
 
 static VALUE
-border_int_left(VALUE self)
+rg_left(VALUE self)
 {
     return INT2NUM(_SELF(self)->left);
 }
 
 static VALUE
-border_int_set_left(VALUE self, VALUE val)
+rg_set_left(VALUE self, VALUE val)
 {
     _SELF(self)->left = NUM2INT(val);
     return self;
 }
 
 static VALUE
-border_int_right(VALUE self)
+rg_right(VALUE self)
 {
     return INT2NUM(_SELF(self)->right);
 }
 
 static VALUE
-border_int_set_right(VALUE self, VALUE val)
+rg_set_right(VALUE self, VALUE val)
 {
     _SELF(self)->right = NUM2INT(val);
     return self;
 }
 
 static VALUE
-border_int_top(VALUE self)
+rg_top(VALUE self)
 {
     return INT2NUM(_SELF(self)->top);
 }
 
 static VALUE
-border_int_set_top(VALUE self, VALUE val)
+rg_set_top(VALUE self, VALUE val)
 {
     _SELF(self)->top = NUM2INT(val);
     return self;
 }
 
 static VALUE
-border_int_bottom(VALUE self)
+rg_bottom(VALUE self)
 {
     return INT2NUM(_SELF(self)->bottom);
 }
 
 static VALUE
-border_int_set_bottom(VALUE self, VALUE val)
+rg_set_bottom(VALUE self, VALUE val)
 {
     _SELF(self)->bottom = NUM2INT(val);
     return self;
@@ -108,14 +108,14 @@ Init_gtk_border(VALUE mGtk)
     RG_DEF_METHOD(initialize, 4);
     RG_DEF_METHOD(to_a, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "left", border_int_left, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_left", border_int_set_left, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "right", border_int_right, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_right", border_int_set_right, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "top", border_int_top, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_top", border_int_set_top, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "bottom", border_int_bottom, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_bottom", border_int_set_bottom, 1);
+    RG_DEF_METHOD(left, 0);
+    RG_DEF_METHOD(set_left, 1);
+    RG_DEF_METHOD(right, 0);
+    RG_DEF_METHOD(set_right, 1);
+    RG_DEF_METHOD(top, 0);
+    RG_DEF_METHOD(set_top, 1);
+    RG_DEF_METHOD(bottom, 0);
+    RG_DEF_METHOD(set_bottom, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
