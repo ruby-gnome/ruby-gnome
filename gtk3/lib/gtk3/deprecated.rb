@@ -477,6 +477,7 @@ module Gtk
     end
     define_deprecated_singleton_method :default_colormap, :raise => "Don't use this method."
     define_deprecated_singleton_method :default_visual, :raise => "Don't use this method."
+    define_deprecated_singleton_method :default_style, :raise => "Use 'Gtk::StyleContext' and 'Gtk::CssProvider'."
     define_deprecated_const :Flags, :raise => "Don't use this flags anymore."
     define_deprecated_method :flags, :raise => "Use the proper method."
     define_deprecated_method :set_flags, :warn => "Use the proper method."

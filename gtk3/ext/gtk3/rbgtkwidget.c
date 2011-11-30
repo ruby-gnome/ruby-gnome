@@ -273,12 +273,6 @@ rg_hide_on_delete(VALUE self)
 }
 
 static VALUE
-rg_s_default_style(G_GNUC_UNUSED VALUE self)
-{
-    return GOBJ2RVAL(gtk_widget_get_default_style());
-}
-
-static VALUE
 rg_set_direction(VALUE self, VALUE dir)
 {
     gtk_widget_set_direction(_SELF(self), RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
@@ -1415,7 +1409,6 @@ Init_gtk_widget(VALUE mGtk)
     /*
      * singleton methods
      */
-    RG_DEF_SMETHOD(default_style, 0);
     RG_DEF_SMETHOD(set_default_direction, 1);
     RG_DEF_SMETHOD(default_direction, 0);
     RG_DEF_SMETHOD(pop_composite_child, 0);
