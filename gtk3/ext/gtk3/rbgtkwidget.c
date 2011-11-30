@@ -730,15 +730,6 @@ rg_set_allocation(VALUE self, VALUE alloc)
 
 /* deprecated
 static VALUE
-rg_set_requisition(VALUE self, VALUE w, VALUE h)
-{
-    GtkRequisition *r = &(_SELF(self)->requisition);
-    r->width  = NUM2INT(w);
-    r->height = NUM2INT(h);
-    return self;    
-}
-
-static VALUE
 rg_saved_state(VALUE self)
 {
     return GENUM2RVAL(_SELF(self)->saved_state, GTK_TYPE_STATE_TYPE);
@@ -1253,7 +1244,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 1);
 /* deprecated
-    RG_DEF_METHOD(set_requisition, 2);
     RG_DEF_METHOD(saved_state, 0);
 */
     RG_DEF_METHOD(destroy, 0);
