@@ -714,12 +714,6 @@ rg_has_grab_p(VALUE self)
 }
 
 static VALUE
-rg_has_rc_style_p(VALUE self)
-{
-    return CBOOL2RVAL(gtk_widget_has_rc_style(_SELF(self)));
-}
-
-static VALUE
 rg_allocation(VALUE self)
 {
     GtkAllocation alloc;
@@ -1279,7 +1273,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD_P(drawable, 0);
     RG_DEF_METHOD_P(sensitive_with_parent, 0);
     RG_DEF_METHOD_P(has_grab, 0);
-    RG_DEF_METHOD_P(has_rc_style, 0);
 
     /*
      * singleton methods
