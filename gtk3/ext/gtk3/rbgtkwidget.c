@@ -198,13 +198,6 @@ rg_grab_default(VALUE self)
 }
 
 static VALUE
-rg_set_state(VALUE self, VALUE state)
-{
-    gtk_widget_set_state(_SELF(self), RVAL2GTKSTATETYPE(state));
-    return self;
-}
-
-static VALUE
 rg_set_parent_window(VALUE self, VALUE parent_window)
 {
     gtk_widget_set_parent_window(_SELF(self), 
@@ -1355,7 +1348,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_SMETHOD(style_properties, -1);
     RG_DEF_METHOD(intersect, 1);
     RG_DEF_METHOD(grab_default, 0);
-    RG_DEF_METHOD(set_state, 1);
     RG_DEF_METHOD(set_parent_window, 1);
     RG_DEF_METHOD(parent_window, 0);
     RG_DEF_METHOD(add_events, 1);

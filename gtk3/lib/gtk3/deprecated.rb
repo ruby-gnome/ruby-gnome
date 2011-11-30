@@ -511,6 +511,8 @@ module Gtk
     define_deprecated_method :child_requisition, :warn => "Use '#{self}#preferred_size'." do |_self|
       _self.preferred_size.last
     end
+    define_deprecated_method :set_state, :warn => "Use '#{self}#set_state_flags'."
+    alias :state= :set_state
 
     alias :__set_allocation__ :set_allocation
     private :__set_allocation__
