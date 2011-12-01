@@ -24,8 +24,21 @@
 
 #include "global.h"
 
-void 
+#define RG_TARGET_NAMESPACE cSeparator
+#define _SELF(self) (GTK_SEPARATOR(RVAL2GOBJ(self)))
+
+static VALUE
+rg_initialize(VALUE self, VALUE orientation)
+{
+    RBGTK_INITIALIZE(self, gtk_separator_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION)));
+
+    return Qnil;
+}
+
+void
 Init_gtk_separator(VALUE mGtk)
 {
-    G_DEF_CLASS(GTK_TYPE_SEPARATOR, "Separator", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SEPARATOR, "Separator", mGtk);
+
+    RG_DEF_METHOD(initialize, 1);
 }
