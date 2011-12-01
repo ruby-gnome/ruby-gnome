@@ -222,6 +222,13 @@ module Gtk
     end
   end
 
+  class HScale
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale#new'." do |_self, arg1, arg2, arg3|
+      Gtk::Scale.new(:horizontal, arg1, arg2, arg3)
+    end
+  end
+
   module IconSize
     extend GLib::Deprecatable
     define_deprecated_enums :IconSize
@@ -463,6 +470,13 @@ module Gtk
   class UIManager
     extend GLib::Deprecatable
     define_deprecated_flags :ItemType
+  end
+
+  class VScale
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale#new'." do |_self, arg1, arg2, arg3|
+      Gtk::Scale.new(:vertical, arg1, arg2, arg3)
+    end
   end
 
   class Widget
