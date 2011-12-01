@@ -24,8 +24,29 @@
 
 #include "global.h"
 
-void 
+#define RG_TARGET_NAMESPACE cScrollbar
+#define _SELF(self) (GTK_SCROLLBAR(RVAL2GOBJ(self)))
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+    VALUE orientation, adjustment;
+    GtkWidget *widget = NULL;
+
+    rb_scan_args(argc, argv, "11", &orientation, &adjustment);
+
+    widget = gtk_scrollbar_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
+                               NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
+
+    RBGTK_INITIALIZE(self, widget);
+
+    return Qnil;
+}
+
+void
 Init_gtk_scrollbar(VALUE mGtk)
 {
-    G_DEF_CLASS(GTK_TYPE_SCROLLBAR, "Scrollbar", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCROLLBAR, "Scrollbar", mGtk);
+
+    RG_DEF_METHOD(initialize, -1);
 }
