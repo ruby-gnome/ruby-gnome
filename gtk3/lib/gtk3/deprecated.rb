@@ -222,6 +222,13 @@ module Gtk
     end
   end
 
+  class HPaned
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned#new'." do |_self|
+      Gtk::Paned.new(:horizontal)
+    end
+  end
+
   class HScale
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale#new'." do |_self, arg1, arg2, arg3|
@@ -484,6 +491,13 @@ module Gtk
   class UIManager
     extend GLib::Deprecatable
     define_deprecated_flags :ItemType
+  end
+
+  class VPaned
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned#new'." do |_self|
+      Gtk::Paned.new(:vertical)
+    end
   end
 
   class VScale
