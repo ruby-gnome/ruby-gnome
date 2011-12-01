@@ -151,6 +151,16 @@ rg_default_column_spacing(VALUE self)
     return UINT2NUM(gtk_table_get_default_col_spacing(_SELF(self)));
 }
 
+static VALUE
+rg_size(VALUE self)
+{
+    guint rows, columns;
+
+    gtk_table_get_size(_SELF(self), &rows, &columns);
+
+    return rb_ary_new3(2, UINT2NUM(rows), UINT2NUM(columns));
+}
+
 void 
 Init_gtk_table(VALUE mGtk)
 {
@@ -178,4 +188,5 @@ Init_gtk_table(VALUE mGtk)
 */
     RG_DEF_METHOD(default_row_spacing, 0);
     RG_DEF_METHOD(default_column_spacing, 0);
+    RG_DEF_METHOD(size, 0);
 }
