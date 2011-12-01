@@ -145,6 +145,7 @@ G_GNUC_INTERNAL void Init_gtk_menutoolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_message_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_misc(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_notebook(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_orientable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_overlay(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_page_setup(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_page_setup_unix_dialog(VALUE mGtk);
