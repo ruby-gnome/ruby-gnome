@@ -29,6 +29,14 @@
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
+rg_initialize(VALUE self, VALUE orientation)
+{
+    RBGTK_INITIALIZE(self, gtk_paned_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION)));
+
+    return Qnil;
+}
+
+static VALUE
 rg_add1(VALUE self, VALUE child)
 {
     gtk_paned_add1(_SELF(self), RVAL2WIDGET(child));
@@ -72,15 +80,23 @@ rg_child2(VALUE self)
     return (child == NULL) ? Qnil : GOBJ2RVAL(child);
 }
 
+static VALUE
+rg_handle_window(VALUE self)
+{
+    return GOBJ2RVAL(gtk_paned_get_handle_window(_SELF(self)));
+}
+
 void 
 Init_gtk_paned(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);
 
+    RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(add1, 1);
     RG_DEF_METHOD(add2, 1);
     RG_DEF_METHOD(pack1, 3);
     RG_DEF_METHOD(pack2, 3);
     RG_DEF_METHOD(child1, 0);
     RG_DEF_METHOD(child2, 0);
+    RG_DEF_METHOD(handle_window, 0);
 }

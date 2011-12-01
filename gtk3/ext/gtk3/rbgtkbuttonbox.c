@@ -25,11 +25,20 @@
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cButtonBox
+#define _SELF(self) (GTK_BUTTON_BOX(RVAL2GOBJ(self)))
+
+static VALUE
+rg_initialize(VALUE self, VALUE orientation)
+{
+    RBGTK_INITIALIZE(self, gtk_button_box_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION)));
+
+    return Qnil;
+}
 
 static VALUE
 rg_set_child_secondary(VALUE self, VALUE child, VALUE is_secondary)
 {
-    gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(RVAL2GOBJ(self)), 
+    gtk_button_box_set_child_secondary(_SELF(self), 
                                        GTK_WIDGET(RVAL2GOBJ(child)),
                                        RVAL2CBOOL(is_secondary));
     return self;
@@ -38,16 +47,41 @@ rg_set_child_secondary(VALUE self, VALUE child, VALUE is_secondary)
 static VALUE
 rg_get_child_secondary(VALUE self, VALUE child)
 {
-    return CBOOL2RVAL(gtk_button_box_get_child_secondary(GTK_BUTTON_BOX(RVAL2GOBJ(self)), 
+    return CBOOL2RVAL(gtk_button_box_get_child_secondary(_SELF(self), 
                                                          GTK_WIDGET(RVAL2GOBJ(child))));
 }
+
+#if GTK_CHECK_VERSION(3, 2, 0)
+static VALUE
+rg_get_child_non_homogeneous(VALUE self, VALUE child)
+{
+    return CBOOL2RVAL(gtk_button_box_get_child_non_homogeneous(_SELF(self),
+                                                               GTK_WIDGET(RVAL2GOBJ(child))));
+}
+
+static VALUE
+rg_set_child_non_homogeneous(VALUE self, VALUE child, VALUE non_homogeneous)
+{
+    gtk_button_box_set_child_non_homogeneous(_SELF(self),
+                                             GTK_WIDGET(RVAL2GOBJ(child)),
+                                             RVAL2CBOOL(non_homogeneous));
+
+    return self;
+}
+#endif
 
 void 
 Init_gtk_button_box(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);
+
+    RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(set_child_secondary, 2);
     RG_DEF_METHOD(get_child_secondary, 1);
-    /* GtkButtonBoxStyle(General constants) */
+#if GTK_CHECK_VERSION(3, 2, 0)
+    RG_DEF_METHOD(get_child_non_homogeneous, 1);
+    RG_DEF_METHOD(set_child_non_homogeneous, 2);
+#endif
+
     G_DEF_CLASS(GTK_TYPE_BUTTON_BOX_STYLE, "Style", RG_TARGET_NAMESPACE);
 }

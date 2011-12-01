@@ -322,6 +322,18 @@ signal_g2r_func(G_GNUC_UNUSED guint num, const GValue *values)
 }
 */
 
+static VALUE
+rg_tab_hborder(VALUE self)
+{
+    return UINT2NUM(gtk_notebook_get_tab_hborder(_SELF(self)));
+}
+
+static VALUE
+rg_tab_vborder(VALUE self)
+{
+    return UINT2NUM(gtk_notebook_get_tab_vborder(_SELF(self)));
+}
+
 void 
 Init_gtk_notebook(VALUE mGtk)
 {
@@ -358,6 +370,8 @@ Init_gtk_notebook(VALUE mGtk)
     RG_DEF_METHOD(set_tab_detachable, 2);
     RG_DEF_METHOD(set_action_widget, 2);
     RG_DEF_METHOD(get_action_widget, 1);
+    RG_DEF_METHOD(tab_hborder, 0);
+    RG_DEF_METHOD(tab_vborder, 0);
 
     /* GtkNotebookTab */
     rb_define_const(RG_TARGET_NAMESPACE, "TAB_FIRST", GTK_NOTEBOOK_TAB_FIRST);
@@ -366,4 +380,5 @@ Init_gtk_notebook(VALUE mGtk)
 /* deprecated
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "switch_page", (GValToRValSignalFunc)signal_g2r_func);
 */
+
 }
