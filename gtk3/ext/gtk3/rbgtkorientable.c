@@ -1,10 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
- *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,19 +20,8 @@
 
 #include "global.h"
 
-#define RG_TARGET_NAMESPACE cHButtonBox
-
-static VALUE
-rg_initialize(VALUE self)
+void
+Init_gtk_orientable(VALUE mGtk)
 {
-    RBGTK_INITIALIZE(self, gtk_hbutton_box_new());
-    return Qnil;
-}
-
-void 
-Init_gtk_hbutton_box(VALUE mGtk)
-{
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_HBUTTON_BOX, "HButtonBox", mGtk);
-
-    RG_DEF_METHOD(initialize, 0);
+    G_DEF_INTERFACE(GTK_TYPE_ORIENTABLE, "Orientable", mGtk);
 }

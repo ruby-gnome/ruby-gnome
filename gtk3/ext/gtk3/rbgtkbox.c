@@ -28,6 +28,19 @@
 #define _SELF(self) (GTK_BOX(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+    VALUE orientation, spacing;
+
+    rb_scan_args(argc, argv, "11", &orientation, &spacing);
+
+    RBGTK_INITIALIZE(self, gtk_box_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
+                                       NIL_P(spacing) ? 0 : NUM2INT(spacing)));
+
+    return Qnil;
+}
+
 static void
 box_pack_start_or_end(int argc, VALUE *argv, VALUE self, int start)
 {
@@ -114,6 +127,7 @@ Init_gtk_box(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BOX, "Box", mGtk);
 
+    RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(pack_start, -1);
     RG_DEF_METHOD(pack_end, -1);
     RG_DEF_METHOD(reorder_child, 2);

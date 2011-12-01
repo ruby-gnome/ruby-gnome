@@ -22,8 +22,9 @@
 
 #include "global.h"
 
-/* TODO
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
+
+#include <gtk/gtkx.h>
 
 #define RG_TARGET_NAMESPACE cSocket
 #define _SELF(self) GTK_SOCKET(RVAL2GOBJ(self))
@@ -51,13 +52,13 @@ rg_add_id(VALUE self, VALUE wid)
 static VALUE
 rg_plug_window(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->plug_window);
+    return GOBJ2RVAL(gtk_socket_get_plug_window(_SELF(self)));
 }
 
 static VALUE
 rg_id(VALUE self)
 {
-    GdkNativeWindow id =  gtk_socket_get_id(_SELF(self));
+    Window id =  gtk_socket_get_id(_SELF(self));
 #ifdef GDK_NATIVE_WINDOW_POINTER
     return UINT2NUM(GPOINTER_TO_UINT(id));
 #else
@@ -66,12 +67,10 @@ rg_id(VALUE self)
 }
 
 #endif
-*/
 
 void 
 Init_gtk_socket(VALUE mGtk)
 {
-/* TODO
 #ifdef HAVE_GTK_SOCKET_GET_TYPE
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SOCKET, "Socket", mGtk);
 
@@ -80,5 +79,4 @@ Init_gtk_socket(VALUE mGtk)
     RG_DEF_METHOD(add_id, 1);
     RG_DEF_METHOD(id, 0);
 #endif
-*/
 }

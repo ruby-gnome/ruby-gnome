@@ -424,6 +424,65 @@ mark_toplevels(G_GNUC_UNUSED void *_)
     g_list_free(list);
 }
 
+static VALUE
+rg_s_default_icon_name(VALUE self)
+{
+    return CSTR2RVAL(gtk_window_get_default_icon_name());
+}
+
+static VALUE
+rg_activate_key(VALUE self, VALUE event)
+{
+    return CBOOL2RVAL(gtk_window_activate_key(_SELF(self),
+                                              RVAL2BOXED(event, GDK_TYPE_EVENT)));
+}
+
+static VALUE
+rg_default_widget(VALUE self)
+{
+    return GOBJ2RVAL(gtk_window_get_default_widget(_SELF(self)));
+}
+
+static VALUE
+rg_resize_grip_area(VALUE self)
+{
+    GdkRectangle rect;
+    gboolean result;
+
+    result = gtk_window_get_resize_grip_area(_SELF(self), &rect);
+
+    return result ? BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE) : Qnil;
+}
+
+static VALUE
+rg_has_group_p(VALUE self)
+{
+    return CBOOL2RVAL(gtk_window_has_group(_SELF(self)));
+}
+
+static VALUE
+rg_propagate_key_event(VALUE self, VALUE event)
+{
+    return CBOOL2RVAL(gtk_window_propagate_key_event(_SELF(self),
+                                                     RVAL2BOXED(event, GDK_TYPE_EVENT)));
+}
+
+static VALUE
+rg_resize_to_geometry(VALUE self, VALUE width, VALUE height)
+{
+    gtk_window_resize_to_geometry(_SELF(self), NUM2INT(width), NUM2INT(height));
+
+    return self;
+}
+
+static VALUE
+rg_set_default_geometry(VALUE self, VALUE width, VALUE height)
+{
+    gtk_window_set_default_geometry(_SELF(self), NUM2INT(width), NUM2INT(height));
+
+    return self;
+}
+
 void 
 Init_gtk_window(VALUE mGtk)
 {
@@ -475,6 +534,14 @@ Init_gtk_window(VALUE mGtk)
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "icon", gwin_set_icon, 1);
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_SMETHOD(set_auto_startup_notification, 1);
+    RG_DEF_SMETHOD(default_icon_name, 0);
+    RG_DEF_METHOD(activate_key, 1);
+    RG_DEF_METHOD(default_widget, 0);
+    RG_DEF_METHOD(resize_grip_area, 0);
+    RG_DEF_METHOD_P(has_group, 0);
+    RG_DEF_METHOD(propagate_key_event, 1);
+    RG_DEF_METHOD(resize_to_geometry, 2);
+    RG_DEF_METHOD(set_default_geometry, 2);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
