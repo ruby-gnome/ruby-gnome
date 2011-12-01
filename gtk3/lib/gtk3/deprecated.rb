@@ -229,6 +229,13 @@ module Gtk
     end
   end
 
+  class HScrollbar
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar#new'." do |_self, adj|
+      Gtk::Scrollbar.new(:horizontal, adj)
+    end
+  end
+
   module IconSize
     extend GLib::Deprecatable
     define_deprecated_enums :IconSize
@@ -476,6 +483,13 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale#new'." do |_self, arg1, arg2, arg3|
       Gtk::Scale.new(:vertical, arg1, arg2, arg3)
+    end
+  end
+
+  class VScrollbar
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar#new'." do |_self, adj|
+      Gtk::Scrollbar.new(:vertical, adj)
     end
   end
 
