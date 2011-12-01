@@ -55,8 +55,8 @@ static VALUE
 rg_set_wmclass(VALUE self, VALUE wmclass_name, VALUE wmclass_class)
 {
     gtk_window_set_wmclass(_SELF(self),
-                           NIL_P(wmclass_name)?NULL:RVAL2CSTR(wmclass_name),
-                           NIL_P(wmclass_class)?NULL:RVAL2CSTR(wmclass_class));
+                           RVAL2CSTR_ACCEPT_NIL(wmclass_name),
+                           RVAL2CSTR_ACCEPT_NIL(wmclass_class));
     return self;
 }
 

@@ -29,7 +29,7 @@
 static VALUE
 rg_initialize(VALUE self, VALUE label, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child)
 {
-    RBGTK_INITIALIZE(self, gtk_aspect_frame_new(NIL_P(label)?NULL:RVAL2CSTR(label),
+    RBGTK_INITIALIZE(self, gtk_aspect_frame_new(RVAL2CSTR_ACCEPT_NIL(label),
                                                 NUM2DBL(xalign),
                                                 NUM2DBL(yalign),
                                                 NUM2DBL(ratio),
