@@ -236,6 +236,13 @@ module Gtk
     end
   end
 
+  class HSeparator
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator#new'." do |_self|
+      Gtk::Separator.new(:horizontal)
+    end
+  end
+
   module IconSize
     extend GLib::Deprecatable
     define_deprecated_enums :IconSize
@@ -490,6 +497,13 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar#new'." do |_self, adj|
       Gtk::Scrollbar.new(:vertical, adj)
+    end
+  end
+
+  class VSeparator
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator#new'." do |_self|
+      Gtk::Separator.new(:vertical)
     end
   end
 
