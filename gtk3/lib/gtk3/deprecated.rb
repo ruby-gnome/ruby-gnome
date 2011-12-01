@@ -229,6 +229,13 @@ module Gtk
     end
   end
 
+  class HButtonBox
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox#new'." do |_self|
+      Gtk::ButtonBox.new(:horizontal)
+    end
+  end
+
   class HPaned
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned#new'." do |_self|
@@ -504,6 +511,13 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box#new'." do |_self, homogeneous, spacing|
       Gtk::Box.new(:vertical, spacing)
+    end
+  end
+
+  class VButtonBox
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox#new'." do |_self|
+      Gtk::ButtonBox.new(:vertical)
     end
   end
 
