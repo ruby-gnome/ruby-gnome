@@ -116,19 +116,6 @@ rg_get_page_title(VALUE self, VALUE page)
 }
 
 static VALUE
-rg_set_page_header_image(VALUE self, VALUE page, VALUE header_image)
-{
-    gtk_assistant_set_page_header_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), GDK_PIXBUF(RVAL2GOBJ(header_image)));
-    return self;
-}
-
-static VALUE
-rg_get_page_header_image(VALUE self, VALUE page)
-{
-    return GOBJ2RVAL(gtk_assistant_get_page_header_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
-}
-
-static VALUE
 rg_set_page_side_image(VALUE self, VALUE page, VALUE side_image)
 {
     gtk_assistant_set_page_side_image(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), GDK_PIXBUF(RVAL2GOBJ(side_image)));
@@ -201,8 +188,6 @@ Init_gtk_assistant(VALUE mGtk)
     RG_DEF_METHOD(get_page_type, 1);
     RG_DEF_METHOD(set_page_title, 2);
     RG_DEF_METHOD(get_page_title, 1);
-    RG_DEF_METHOD(set_page_header_image, 2);
-    RG_DEF_METHOD(get_page_header_image, 1);
     RG_DEF_METHOD(set_page_side_image, 2);
     RG_DEF_METHOD(get_page_side_image, 1);
     RG_DEF_METHOD(set_page_complete, 2);
