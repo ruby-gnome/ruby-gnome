@@ -503,7 +503,6 @@ Init_gtk_gtk(void)
     Init_gtk_frame(RG_TARGET_NAMESPACE);
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);
     Init_gtk_hbutton_box(RG_TARGET_NAMESPACE);
-    Init_gtk_hbox(RG_TARGET_NAMESPACE);
     Init_gtk_icon_factory(RG_TARGET_NAMESPACE);
     Init_gtk_iconinfo(RG_TARGET_NAMESPACE);
     Init_gtk_icon_set(RG_TARGET_NAMESPACE);
@@ -609,7 +608,6 @@ Init_gtk_gtk(void)
     Init_gtk_treeviewcolumn(RG_TARGET_NAMESPACE);
     Init_gtk_uimanager(RG_TARGET_NAMESPACE);
     Init_gtk_vbutton_box(RG_TARGET_NAMESPACE);
-    Init_gtk_vbox(RG_TARGET_NAMESPACE);
     Init_gtk_viewport(RG_TARGET_NAMESPACE);
     Init_gtk_volumebutton(RG_TARGET_NAMESPACE);
     Init_gtk_widget(RG_TARGET_NAMESPACE);
