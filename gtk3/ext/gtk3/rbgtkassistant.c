@@ -157,6 +157,32 @@ rg_commit(VALUE self)
     return self;
 }
 
+static VALUE
+rg_next_page(VALUE self)
+{
+    gtk_assistant_next_page(_SELF(self));
+
+    return self;
+}
+
+static VALUE
+rg_previous_page(VALUE self)
+{
+    gtk_assistant_previous_page(_SELF(self));
+
+    return self;
+}
+
+#if GTK_CHECK_VERSION(3, 2, 0)
+static VALUE
+rg_remove_page(VALUE self, VALUE page_num)
+{
+    gtk_assistant_remove_page(_SELF(self), NUM2INT(page_num));
+
+    return self;
+}
+#endif
+
 void
 Init_gtk_assistant(VALUE mGtk)
 {
@@ -181,6 +207,11 @@ Init_gtk_assistant(VALUE mGtk)
     RG_DEF_METHOD(remove_action_widget, 1);
     RG_DEF_METHOD(update_buttons_state, 0);
     RG_DEF_METHOD(commit, 0);
+    RG_DEF_METHOD(next_page, 0);
+    RG_DEF_METHOD(previous_page, 0);
+#if GTK_CHECK_VERSION(3, 2, 0)
+    RG_DEF_METHOD(remove_page, 1);
+#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
