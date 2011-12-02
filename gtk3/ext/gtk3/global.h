@@ -28,6 +28,7 @@
 #include <rb_cairo.h>
 #include <rbgdk.h>
 #include <rbgdkconversions.h>
+#include <gio2.h>
 #include "rbgtk.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
