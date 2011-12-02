@@ -89,11 +89,6 @@ rg_popup_accessible(VALUE self)
     return GOBJ2RVAL(gtk_combo_box_get_popup_accessible(_SELF(self)));
 }
 
-/* How can I implement this?
-GtkTreeViewRowSeparatorFunc gtk_combo_box_get_row_separator_func
-                                            (GtkComboBox *combo_box);
-*/
-
 static gboolean
 row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer *func)
 {  
