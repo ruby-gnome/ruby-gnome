@@ -69,6 +69,7 @@ G_GNUC_INTERNAL void Init_gtk_adjustment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_alignment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_allocation(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserbutton(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_appchooserdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_arrow(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_aspect_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_assistant(VALUE mGtk);
