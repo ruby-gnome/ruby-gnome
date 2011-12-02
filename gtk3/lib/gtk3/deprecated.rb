@@ -4,6 +4,7 @@ module Gtk
   define_deprecated_const :ComboBoxEntry, :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :Curve,         :raise => "Don't use this widget anymore."
   define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :FontSelection, :raise => "Use 'Gtk::FontChooserWidget' instead."
   define_deprecated_const :GammaCurve,    :raise => "Don't use this widget anymore."
   define_deprecated_const :HRuler,        :raise => "Don't use this widget anymore."
   define_deprecated_const :InputDialog,   :raise => "Don't use this widget anymore."
