@@ -31,7 +31,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     VALUE label;
     rb_scan_args(argc, argv, "01", &label);
-    RBGTK_INITIALIZE(self, gtk_frame_new(NIL_P(label)?NULL:RVAL2CSTR(label)));
+    RBGTK_INITIALIZE(self, gtk_frame_new(RVAL2CSTR_ACCEPT_NIL(label)));
     return Qnil;
 }
 

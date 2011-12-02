@@ -56,80 +56,30 @@ Init_gtk_const(VALUE mGtk)
     /*
      * standard enumeration
      */
-
-    /* GtkAccelFlags */
     G_DEF_CLASS(GTK_TYPE_ACCEL_FLAGS, "AccelFlags", mGtk);
-
-    /* GtkAttachOptions */
     G_DEF_CLASS(GTK_TYPE_ATTACH_OPTIONS, "AttachOptions", mGtk);
-
-    /* GtkCornerType */
     G_DEF_CLASS(GTK_TYPE_CORNER_TYPE, "CornerType", mGtk);
-
-    /* GtkDeleteType */
     G_DEF_CLASS(GTK_TYPE_DELETE_TYPE, "DeleteType", mGtk);
-
-    /* GtkDirectionType */
     G_DEF_CLASS(GTK_TYPE_DIRECTION_TYPE, "DirectionType", mGtk);
-
-    /* GtkExpanderStyle */
     G_DEF_CLASS(GTK_TYPE_EXPANDER_STYLE, "ExpanderStyle", mGtk);
-
-    /* GtkJustification */
     G_DEF_CLASS(GTK_TYPE_JUSTIFICATION, "Justification", mGtk);
-
-    /* GtkMovementStep */
     G_DEF_CLASS(GTK_TYPE_MOVEMENT_STEP, "MovementStep", mGtk);
-
-    /* GtkOrientation */
     G_DEF_CLASS(GTK_TYPE_ORIENTATION, "Orientation", mGtk);
-
-    /* GtkPackType */
     G_DEF_CLASS(GTK_TYPE_PACK_TYPE, "PackType", mGtk);
-
-    /* GtkPathPriorityType */
     G_DEF_CLASS(GTK_TYPE_PATH_PRIORITY_TYPE, "PathPriorityType", mGtk);
-
-    /* GtkPathType */
     G_DEF_CLASS(GTK_TYPE_PATH_TYPE, "PathType", mGtk);
-
-    /* GtkPolicyType */
     G_DEF_CLASS(GTK_TYPE_POLICY_TYPE, "PolicyType", mGtk);
-
-    /* GtkPositionType */
     G_DEF_CLASS(GTK_TYPE_POSITION_TYPE, "PositionType", mGtk);
-
-    /* GtkReliefStyle */
     G_DEF_CLASS(GTK_TYPE_RELIEF_STYLE, "ReliefStyle", mGtk);
-
-    /* GtkResizeMode */
     G_DEF_CLASS(GTK_TYPE_RESIZE_MODE, "ResizeMode", mGtk);
-
-    /* GtkScrollStep */
     G_DEF_CLASS(GTK_TYPE_SCROLL_STEP, "ScrollStep", mGtk);
-
-    /* GtkScrollType */
     G_DEF_CLASS(GTK_TYPE_SCROLL_TYPE, "ScrollType", mGtk);
-
-    /* GtkSelectionMode */
     G_DEF_CLASS(GTK_TYPE_SELECTION_MODE, "SelectionMode", mGtk);
-
-    /* GtkShadowType */
     G_DEF_CLASS(GTK_TYPE_SHADOW_TYPE, "ShadowType", mGtk);
-
-    /* GtkStateType */
     G_DEF_CLASS(GTK_TYPE_STATE_TYPE, "StateType", mGtk);
-
-    /* GtkSubmenuDirection */
 /* deprecated
     G_DEF_CLASS(GTK_TYPE_SUBMENU_DIRECTION, "SubmenuDirection", mGtk);
-*/
-
-    /* GtkSubmenuPlacement */
-/* deprecated
     G_DEF_CLASS(GTK_TYPE_SUBMENU_PLACEMENT, "SubmenuPlacement", mGtk);
 */
-
-    /* GtkSortType */
     G_DEF_CLASS(GTK_TYPE_SORT_TYPE, "SortType", mGtk);
 }

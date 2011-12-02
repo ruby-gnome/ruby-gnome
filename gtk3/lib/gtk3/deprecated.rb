@@ -1,20 +1,22 @@
 module Gtk
   extend GLib::Deprecatable
-  define_deprecated_const :Combo,         :raise => "Use 'Gtk::ComboBoxText' instead."
-  define_deprecated_const :ComboBoxEntry, :raise => "Use 'Gtk::ComboBox' instead."
-  define_deprecated_const :Curve,         :raise => "Don't use this widget anymore."
-  define_deprecated_const :FileSelection, :raise => "Use 'Gtk::FileChooserDialog' instead."
-  define_deprecated_const :GammaCurve,    :raise => "Don't use this widget anymore."
-  define_deprecated_const :HRuler,        :raise => "Don't use this widget anymore."
-  define_deprecated_const :InputDialog,   :raise => "Don't use this widget anymore."
-  define_deprecated_const :ItemFactory,   :raise => "Use 'Gtk::UIManager' instead."
-  define_deprecated_const :OptionMenu,    :raise => "Use 'Gtk::ComboBox' instead."
-  define_deprecated_const :RC,            :raise => "Use 'Gtk::StyleContext' instead."
-  define_deprecated_const :RcStyle,       :raise => "Use 'Gtk::CssProvider' instead."
-  define_deprecated_const :Ruler,         :raise => "Don't use this widget anymore."
-  define_deprecated_const :Style,         :raise => "Use 'Gtk::StyleContext' instead."
-  define_deprecated_const :Tooltips,      :raise => "Use 'Gtk::Tooltip' API."
-  define_deprecated_const :VRuler,        :raise => "Don't use this widget anymore."
+  define_deprecated_const :Combo,               :raise => "Use 'Gtk::ComboBoxText' instead."
+  define_deprecated_const :ComboBoxEntry,       :raise => "Use 'Gtk::ComboBox' instead."
+  define_deprecated_const :Curve,               :raise => "Don't use this widget anymore."
+  define_deprecated_const :FileSelection,       :raise => "Use 'Gtk::FileChooserDialog' instead."
+  define_deprecated_const :FontSelection,       :raise => "Use 'Gtk::FontChooserWidget' instead."
+  define_deprecated_const :FontSelectionDialog, :raise => "Use 'Gtk::FontChooserDialog' instead."
+  define_deprecated_const :GammaCurve,          :raise => "Don't use this widget anymore."
+  define_deprecated_const :HRuler,              :raise => "Don't use this widget anymore."
+  define_deprecated_const :InputDialog,         :raise => "Don't use this widget anymore."
+  define_deprecated_const :ItemFactory,         :raise => "Use 'Gtk::UIManager' instead."
+  define_deprecated_const :OptionMenu,          :raise => "Use 'Gtk::ComboBox' instead."
+  define_deprecated_const :RC,                  :raise => "Use 'Gtk::StyleContext' instead."
+  define_deprecated_const :RcStyle,             :raise => "Use 'Gtk::CssProvider' instead."
+  define_deprecated_const :Ruler,               :raise => "Don't use this widget anymore."
+  define_deprecated_const :Style,               :raise => "Use 'Gtk::StyleContext' instead."
+  define_deprecated_const :Tooltips,            :raise => "Use 'Gtk::Tooltip' API."
+  define_deprecated_const :VRuler,              :raise => "Don't use this widget anymore."
   define_deprecated_flags :AccelFlags, 'ACCEL'
   define_deprecated_flags :AttachOptions
   define_deprecated_enums :CornerType, 'CORNER'
@@ -215,15 +217,6 @@ module Gtk
   class FileFilter
     extend GLib::Deprecatable
     define_deprecated_flags :Flags
-  end
-
-  class FontSelectionDialog
-    extend GLib::Deprecatable
-    define_deprecated_method :apply_button, :raise => "Don't use this method."
-    define_deprecated_method_by_hash_args :initialize,
-        'title', ':title => nil' do |_self, title|
-      {:title => title}
-    end
   end
 
   class HBox
