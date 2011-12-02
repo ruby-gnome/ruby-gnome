@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cComboBox
 #define _SELF(self) (GTK_COMBO_BOX(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -90,11 +89,6 @@ rg_popup_accessible(VALUE self)
     return GOBJ2RVAL(gtk_combo_box_get_popup_accessible(_SELF(self)));
 }
 
-/* How can I implement this?
-GtkTreeViewRowSeparatorFunc gtk_combo_box_get_row_separator_func
-                                            (GtkComboBox *combo_box);
-*/
-
 static gboolean
 row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer *func)
 {  
@@ -114,6 +108,29 @@ rg_set_row_separator_func(VALUE self)
     return self;
 }
 
+static VALUE
+rg_title(VALUE self)
+{
+    return CSTR2RVAL(gtk_combo_box_get_title(_SELF(self)));
+}
+
+/* TODO: merge to popup? */
+static VALUE
+rg_popup_for_device(VALUE self, VALUE device)
+{
+    gtk_combo_box_popup_for_device(_SELF(self), GDK_DEVICE(RVAL2GOBJ(device)));
+
+    return self;
+}
+
+static VALUE
+rg_set_title(VALUE self, VALUE title)
+{
+    gtk_combo_box_set_title(_SELF(self), RVAL2CSTR(title));
+
+    return self;
+}
+
 void 
 Init_gtk_combobox(VALUE mGtk)
 {
@@ -125,4 +142,9 @@ Init_gtk_combobox(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "active_iter");
     RG_DEF_METHOD(popup_accessible, 0);
     RG_DEF_METHOD(set_row_separator_func, 0);
+    RG_DEF_METHOD(title, 0);
+    RG_DEF_METHOD(popup_for_device, 1);
+    RG_DEF_METHOD(set_title, 1);
+
+    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

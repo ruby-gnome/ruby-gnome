@@ -1,8 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
- *  Copyright (C) 2001  Neil Conway <neilconway@rogers.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,20 +20,32 @@
 
 #include "global.h"
 
-#define RG_TARGET_NAMESPACE cFontSelection
+#define RG_TARGET_NAMESPACE cFontChooserDialog
+#define _SELF(self) (GTK_FONT_CHOOSER_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
-rg_initialize(VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    RBGTK_INITIALIZE(self, gtk_font_selection_new());
+    VALUE options, rb_title, rb_parent;
+    GtkWidget *widget = NULL;
+
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "title", &rb_title,
+                     "parent", &rb_parent,
+                     NULL);
+
+    /* TODO: accept NULL? */
+    widget = gtk_font_chooser_dialog_new(RVAL2CSTR(rb_title), GTK_WINDOW(RVAL2GOBJ(rb_parent)));
+    RBGTK_INITIALIZE(self, widget);
+
     return Qnil;
 }
 
-void 
-Init_gtk_font_selection(VALUE mGtk)
+void
+Init_gtk_fontchooserdialog(VALUE mGtk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_SELECTION, "FontSelection", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_CHOOSER_DIALOG, "FontChooserDialog", mGtk);
 
-    RG_DEF_METHOD(initialize, 0);
-    rb_undef_method(RG_TARGET_NAMESPACE, "font");
+    RG_DEF_METHOD(initialize, -1);
 }

@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,57 +20,49 @@
 
 #include "global.h"
 
-#define RG_TARGET_NAMESPACE cMessageDialog
-#define _SELF(s) (GTK_MESSAGE_DIALOG(RVAL2GOBJ(s)))
+#define RG_TARGET_NAMESPACE cAppChooserDialog
+#define _SELF(self) (GTK_APP_CHOOSER_DIALOG(RVAL2GOBJ(self)))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE options, rb_parent, rb_flags, rb_type, rb_buttons_type, rb_message;
+    VALUE options, rb_parent, rb_file, rb_flags, rb_content_type;
     GtkWindow *parent;
     GtkDialogFlags flags;
-    GtkMessageType type;
-    GtkButtonsType buttons_type;
-    const gchar *message;
-    GtkWidget *dialog;
+    GtkWidget *widget = NULL;
 
     rb_scan_args(argc, argv, "01", &options);
     rbg_scan_options(options,
                      "parent", &rb_parent,
                      "flags", &rb_flags,
-                     "type", &rb_type,
-                     "buttons_type", &rb_buttons_type,
-                     "message", &rb_message,
+                     "file", &rb_file,
+                     "content_type", &rb_content_type,
                      NULL);
     parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
     flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
-    type = NIL_P(rb_type) ? GTK_MESSAGE_INFO : RVAL2GENUM(rb_type, GTK_TYPE_MESSAGE_TYPE);
-    buttons_type = NIL_P(rb_buttons_type) ? GTK_BUTTONS_OK : RVAL2GENUM(rb_buttons_type, GTK_TYPE_BUTTONS_TYPE);
-    message = NIL_P(rb_message) ? "" : RVAL2CSTR(rb_message);
 
-    dialog = gtk_message_dialog_new(parent, flags, type, buttons_type, "%s", message);
-    RBGTK_INITIALIZE(self, dialog);
+    if (!NIL_P(rb_file))
+        widget = gtk_app_chooser_dialog_new(parent, flags, RVAL2GFILE(rb_file));
+    else
+        widget = gtk_app_chooser_dialog_new_for_content_type(parent,
+                                                             flags,
+                                                             RVAL2CSTR(rb_content_type));
+    RBGTK_INITIALIZE(self, widget);
 
     return Qnil;
 }
 
 static VALUE
-rg_set_markup(VALUE self, VALUE str)
+rg_widget(VALUE self)
 {
-    gtk_message_dialog_set_markup(_SELF(self), RVAL2CSTR(str));
-    return self;
+    return GOBJ2RVAL(gtk_app_chooser_dialog_get_widget(_SELF(self)));
 }
 
-void 
-Init_gtk_message_dialog(VALUE mGtk)
+void
+Init_gtk_appchooserdialog(VALUE mGtk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_APP_CHOOSER_DIALOG, "AppChooserDialog", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
-    RG_DEF_METHOD(set_markup, 1);
-
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "markup");
-
-    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GTK_TYPE_BUTTONS_TYPE, "ButtonsType", RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD(widget, 0);
 }

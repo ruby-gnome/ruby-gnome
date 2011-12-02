@@ -28,6 +28,7 @@
 #include <rb_cairo.h>
 #include <rbgdk.h>
 #include <rbgdkconversions.h>
+#include <gio2.h>
 #include "rbgtk.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
@@ -67,6 +68,8 @@ G_GNUC_INTERNAL void Init_gtk_actiongroup(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_adjustment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_alignment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_allocation(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_appchooserbutton(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_appchooserdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_arrow(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_aspect_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_assistant(VALUE mGtk);
@@ -98,6 +101,7 @@ G_GNUC_INTERNAL void Init_gtk_colorbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_color_selection(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_color_selection_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_combobox(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_comboboxtext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_const(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_container(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_dialog(VALUE mGtk);
@@ -116,8 +120,7 @@ G_GNUC_INTERNAL void Init_gtk_file_chooser_widget(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_file_filter(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_fixed(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_fontbutton(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_font_selection(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_font_selection_dialog(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_fontchooserdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_grid(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_handle_box(VALUE mGtk);

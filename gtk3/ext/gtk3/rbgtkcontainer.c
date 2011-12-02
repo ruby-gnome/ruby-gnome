@@ -25,7 +25,7 @@
 #include "global.h"
 
 #define RG_TARGET_NAMESPACE cContainer
-#define _SELF(s) (GTK_CONTAINER(RVAL2GOBJ(self)))
+#define _SELF(self) (GTK_CONTAINER(RVAL2GOBJ(self)))
 
 /*
 We don't need this.

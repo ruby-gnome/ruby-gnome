@@ -449,6 +449,8 @@ Init_gtk_gtk(void)
     Init_gtk_adjustment(RG_TARGET_NAMESPACE);
     Init_gtk_alignment(RG_TARGET_NAMESPACE);
     Init_gtk_allocation(RG_TARGET_NAMESPACE);
+    Init_gtk_appchooserbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_appchooserdialog(RG_TARGET_NAMESPACE);
     Init_gtk_arrow(RG_TARGET_NAMESPACE);
     Init_gtk_aspect_frame(RG_TARGET_NAMESPACE);
     Init_gtk_assistant(RG_TARGET_NAMESPACE);
@@ -480,6 +482,7 @@ Init_gtk_gtk(void)
     Init_gtk_color_selection(RG_TARGET_NAMESPACE);
     Init_gtk_color_selection_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_combobox(RG_TARGET_NAMESPACE);
+    Init_gtk_comboboxtext(RG_TARGET_NAMESPACE);
     Init_gtk_const(RG_TARGET_NAMESPACE);
     Init_gtk_container(RG_TARGET_NAMESPACE);
     Init_gtk_dialog(RG_TARGET_NAMESPACE);
@@ -498,8 +501,7 @@ Init_gtk_gtk(void)
     Init_gtk_file_filter(RG_TARGET_NAMESPACE);
     Init_gtk_fixed(RG_TARGET_NAMESPACE);
     Init_gtk_fontbutton(RG_TARGET_NAMESPACE);
-    Init_gtk_font_selection(RG_TARGET_NAMESPACE);
-    Init_gtk_font_selection_dialog(RG_TARGET_NAMESPACE);
+    Init_gtk_fontchooserdialog(RG_TARGET_NAMESPACE);
     Init_gtk_frame(RG_TARGET_NAMESPACE);
     Init_gtk_grid(RG_TARGET_NAMESPACE);
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);

@@ -35,9 +35,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "02", &label, &with_mnemonic);
     if (NIL_P(with_mnemonic) || ! RVAL2CBOOL(with_mnemonic)){
-        widget = gtk_label_new(NIL_P(label)?NULL:RVAL2CSTR(label));
+        widget = gtk_label_new(RVAL2CSTR_ACCEPT_NIL(label));
     } else {
-        widget = gtk_label_new_with_mnemonic(NIL_P(label)?NULL:RVAL2CSTR(label));
+        widget = gtk_label_new_with_mnemonic(RVAL2CSTR_ACCEPT_NIL(label));
     }
 
     RBGTK_INITIALIZE(self, widget);
