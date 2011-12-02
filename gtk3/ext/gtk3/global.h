@@ -121,7 +121,6 @@ G_GNUC_INTERNAL void Init_gtk_file_filter(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_fixed(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_fontbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_fontchooserdialog(VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_font_selection_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_grid(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_handle_box(VALUE mGtk);
