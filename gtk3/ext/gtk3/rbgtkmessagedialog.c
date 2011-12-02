@@ -55,34 +55,12 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-/*
-Don't implement. Use Gtk::MessageDialog#set_markup.
-GtkWidget*  gtk_message_dialog_new_with_markup
-                                            (GtkWindow *parent,
-                                             GtkDialogFlags flags,
-                                             GtkMessageType type,
-                                             GtkButtonsType buttons,
-                                             const gchar *message_format,
-                                             ...);
-*/
-
 static VALUE
 rg_set_markup(VALUE self, VALUE str)
 {
     gtk_message_dialog_set_markup(_SELF(self), RVAL2CSTR(str));
     return self;
 }
-
-/* Not needed in Ruby
-void                gtk_message_dialog_format_secondary_text
-                                                        (GtkMessageDialog *message_dialog,
-                                                         const gchar *message_format,
-                                                         ...);
-void                gtk_message_dialog_format_secondary_markup
-                                                        (GtkMessageDialog *message_dialog,
-                                                         const gchar *message_format,
-                                                         ...);
-*/
 
 void 
 Init_gtk_message_dialog(VALUE mGtk)
@@ -91,11 +69,9 @@ Init_gtk_message_dialog(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_markup, 1);
+
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "markup");
 
-    /* GtkMessageType */
     G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
-
-    /* GtkButtonsType */
     G_DEF_CLASS(GTK_TYPE_BUTTONS_TYPE, "ButtonsType", RG_TARGET_NAMESPACE);
 }
