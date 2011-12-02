@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cComboBox
 #define _SELF(self) (GTK_COMBO_BOX(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
