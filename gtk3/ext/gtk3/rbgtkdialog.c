@@ -171,13 +171,6 @@ rg_s_alternative_dialog_button_order_p(G_GNUC_UNUSED VALUE self, VALUE screen)
     return CBOOL2RVAL(ret);
 }
 
-/* Use gtk_dialog_set_alternative_button_order_from_array() instead.
-void        gtk_dialog_set_alternative_button_order
-                                            (GtkDialog *dialog,
-                                             gint first_response_id,
-                                             ...);
-*/
-
 static VALUE
 rg_set_alternative_button_order(VALUE self, VALUE rbnew_order)
 {
@@ -240,9 +233,6 @@ Init_gtk_dialog(VALUE mGtk)
     RG_DEF_METHOD(content_area, 0);
     RG_DEF_METHOD(get_widget_for_response, 1);
 
-    /* GtkDialogFlags */
     G_DEF_CLASS(GTK_TYPE_DIALOG_FLAGS, "Flags", RG_TARGET_NAMESPACE);
-
-    /* GtkResponseType */
     G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", RG_TARGET_NAMESPACE);
 }
