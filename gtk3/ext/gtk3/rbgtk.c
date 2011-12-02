@@ -501,6 +501,7 @@ Init_gtk_gtk(void)
     Init_gtk_file_filter(RG_TARGET_NAMESPACE);
     Init_gtk_fixed(RG_TARGET_NAMESPACE);
     Init_gtk_fontbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_fontchooserdialog(RG_TARGET_NAMESPACE);
     Init_gtk_font_selection(RG_TARGET_NAMESPACE);
     Init_gtk_font_selection_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_frame(RG_TARGET_NAMESPACE);
