@@ -100,8 +100,11 @@ EXPORTS
 	rbgutil_glist2ary_string_and_free
 	rbgutil_gslist2ary
 	rbgutil_gslist2ary_boxed
+	rbgutil_gslist2ary_string
 	rbgutil_gslist2ary_and_free
 	rbgutil_gslist2ary_boxed_and_free
+	rbgutil_gslist2ary_string_and_free
+	rbgutil_gslist2ary_string_and_free_list
 	rbgutil_set_properties
 	rbgutil_sym_g2r_func
 	rbgutil_protect
