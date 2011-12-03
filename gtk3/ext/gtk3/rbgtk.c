@@ -503,6 +503,7 @@ Init_gtk_gtk(void)
     Init_gtk_fontbutton(RG_TARGET_NAMESPACE);
     Init_gtk_fontchooser(RG_TARGET_NAMESPACE);
     Init_gtk_fontchooserdialog(RG_TARGET_NAMESPACE);
+    Init_gtk_fontchooserwidget(RG_TARGET_NAMESPACE);
     Init_gtk_frame(RG_TARGET_NAMESPACE);
     Init_gtk_grid(RG_TARGET_NAMESPACE);
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);
