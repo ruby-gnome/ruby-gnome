@@ -68,7 +68,7 @@ void
 Init_gtk_fontchooser(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(3, 2, 0)
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_CHOOSER, "FontChooser", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_FONT_CHOOSER, "FontChooser", mGtk);
 
     RG_DEF_METHOD(font_face, 0);
     RG_DEF_METHOD(font_family, 0);
