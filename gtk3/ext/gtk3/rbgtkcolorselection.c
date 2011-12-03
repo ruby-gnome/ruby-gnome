@@ -181,15 +181,6 @@ rg_s_set_change_palette_hook(VALUE self)
     return self;
 }
 
-/* Don't implement them.
-GtkColorSelectionChangePaletteFunc gtk_color_selection_set_change_palette_hook
-                                            (GtkColorSelectionChangePaletteFunc func);
-void        (*GtkColorSelectionChangePaletteWithScreenFunc)
-                                            (GdkScreen *screen,
-                                             const GdkColor *colors,
-                                             gint n_colors);
-*/
-
 void 
 Init_gtk_color_selection(VALUE mGtk)
 {
