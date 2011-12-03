@@ -256,8 +256,10 @@ extern void rbgobj_define_const(VALUE mod, const char *name, VALUE value);
 extern GType g_poll_fd_get_type(void);
 
 /* rbglib_keyfile.c */
-#define G_TYPE_KEY_FILE (g_key_file_get_type())
-extern GType g_key_file_get_type(void);
+#if !GLIB_CHECK_VERSION(2,31,2)
+  #define G_TYPE_KEY_FILE (g_key_file_get_type())
+  extern GType g_key_file_get_type(void);
+#endif
 
 /* rbgobj_convert.c */
 typedef struct {

@@ -22,6 +22,7 @@
 #include "rbgprivate.h"
 
 #if GLIB_CHECK_VERSION(2,6,0)
+#if !GLIB_CHECK_VERSION(2,31,2)
 /************************************************/
 static GKeyFile*
 keyfile_copy(const GKeyFile* keyfile)
@@ -47,6 +48,7 @@ g_key_file_get_type(void)
   return our_type;
 }
 /************************************************/
+#endif
 
 #define RG_TARGET_NAMESPACE cKeyFile
 #define _SELF(self) ((GKeyFile*)(RVAL2BOXED(self, G_TYPE_KEY_FILE)))
