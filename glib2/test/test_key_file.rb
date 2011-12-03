@@ -19,8 +19,12 @@ class TestGLibKeyFile < Test::Unit::TestCase
     assert_raise(GLib::KeyFileError) do
       key_file.load_from_dirs("non-existent", search_dirs)
     end
-    assert_raise(GLib::KeyFileError) do
-      key_file.load_from_dirs(base_name, search_dirs)
+    if GLib.check_version?(2, 31, 2)
+      assert_equal(temp.path, key_file.load_from_dirs(base_name, search_dirs))
+    else
+      assert_raise(GLib::KeyFileError) do
+        key_file.load_from_dirs(base_name, search_dirs)
+      end
     end
     temp.puts(<<-EOK)
 [General]
