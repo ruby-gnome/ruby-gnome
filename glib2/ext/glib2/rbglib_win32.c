@@ -21,7 +21,6 @@
 
 #include "rbgprivate.h"
 #include "rbglib.h"
-#include <glib/gwin32.h>
 
 #ifdef G_OS_WIN32
 

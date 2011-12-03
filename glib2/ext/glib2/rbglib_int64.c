@@ -21,7 +21,6 @@
  *  MA  02110-1301  USA
  */
 
-#include <glib/gtypes.h>
 #include "rbgprivate.h"
 
 static ID id_and;
