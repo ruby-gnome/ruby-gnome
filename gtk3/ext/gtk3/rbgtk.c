@@ -449,6 +449,7 @@ Init_gtk_gtk(void)
     Init_gtk_adjustment(RG_TARGET_NAMESPACE);
     Init_gtk_alignment(RG_TARGET_NAMESPACE);
     Init_gtk_allocation(RG_TARGET_NAMESPACE);
+    Init_gtk_appchooser(RG_TARGET_NAMESPACE);
     Init_gtk_appchooserbutton(RG_TARGET_NAMESPACE);
     Init_gtk_appchooserdialog(RG_TARGET_NAMESPACE);
     Init_gtk_arrow(RG_TARGET_NAMESPACE);
