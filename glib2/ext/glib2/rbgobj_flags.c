@@ -31,8 +31,6 @@ static ID id_new;
 static ID id_module_eval;
 static ID id_or;
 
-G_GNUC_INTERNAL char *rbgobj_constant_lookup(const char *name);
-
 /**********************************************************************/
 
 static VALUE
@@ -165,7 +163,7 @@ rbgobj_init_flags_class(VALUE klass)
         gchar* p;
         gchar* replace_nick;
 
-        replace_nick = rbgobj_constant_lookup(entry->value_nick);
+        replace_nick = rg_obj_constant_lookup(entry->value_nick);
         if (replace_nick){
             nick = g_strdup(replace_nick);
         } else {

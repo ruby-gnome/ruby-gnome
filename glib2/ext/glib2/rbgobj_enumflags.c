@@ -48,7 +48,7 @@ rbgobj_constant_remap(const char *original, const char *replacement)
 }
 
 char *
-rbgobj_constant_lookup(const char *name)
+rg_obj_constant_lookup(const char *name)
 {
       GSList *p = rbgobj_cmap;
       
@@ -81,7 +81,7 @@ rbgobj_define_const(VALUE mod, const char *name,
      }
      else
      {
-         char *new_name = rbgobj_constant_lookup(name);
+         char *new_name = rg_obj_constant_lookup(name);
 	 
 	 if (new_name)
 	 {
