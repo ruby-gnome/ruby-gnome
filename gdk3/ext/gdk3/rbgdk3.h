@@ -25,6 +25,7 @@
 #include <gdk/gdk.h>
 #include <rb_cairo.h>
 #include <rbgobject.h>
+#include <rbgdk-pixbuf.h>
 
 #include "rbgdk3conversions.h"
 
