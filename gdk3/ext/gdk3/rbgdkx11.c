@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 #ifdef GDK_WINDOWING_X11
 
 #define RG_TARGET_NAMESPACE mX11

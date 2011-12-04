@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cVisual
 #define _SELF(self) (GDK_VISUAL(RVAL2GOBJ(self)))

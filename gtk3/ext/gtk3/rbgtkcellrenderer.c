@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cCellRenderer
 #define _SELF(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))

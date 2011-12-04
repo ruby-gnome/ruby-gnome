@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 #include <gdk/gdkkeysyms.h>
 
 #define RG_TARGET_NAMESPACE mGdkKeyval

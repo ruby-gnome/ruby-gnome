@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextBuffer
 #define _SELF(s) (GTK_TEXT_BUFFER(RVAL2GOBJ(s)))

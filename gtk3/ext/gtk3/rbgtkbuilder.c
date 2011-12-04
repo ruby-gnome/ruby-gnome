@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 #include <glib-enum-types.h> /* From Ruby/GLib2 */
 
 #define RG_TARGET_NAMESPACE cBuilder

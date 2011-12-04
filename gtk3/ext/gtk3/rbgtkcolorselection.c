@@ -22,10 +22,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cColorSelection
-#define _SELF(s) (GTK_COLOR_SELECTION(RVAL2GOBJ(self)))
+#define _SELF(self) (GTK_COLOR_SELECTION(RVAL2GOBJ(self)))
 
 static VALUE RG_TARGET_NAMESPACE;
 
@@ -181,14 +181,23 @@ rg_s_set_change_palette_hook(VALUE self)
     return self;
 }
 
-/* Don't implement them.
-GtkColorSelectionChangePaletteFunc gtk_color_selection_set_change_palette_hook
-                                            (GtkColorSelectionChangePaletteFunc func);
-void        (*GtkColorSelectionChangePaletteWithScreenFunc)
-                                            (GdkScreen *screen,
-                                             const GdkColor *colors,
-                                             gint n_colors);
-*/
+static VALUE
+rg_previous_rgba(VALUE self)
+{
+    GdkRGBA rgba;
+
+    gtk_color_selection_get_previous_rgba(_SELF(self), &rgba);
+
+    return GDKRGBA2RVAL(&rgba);
+}
+
+static VALUE
+rg_set_previous_rgba(VALUE self, VALUE rgba)
+{
+    gtk_color_selection_set_previous_rgba(_SELF(self), RVAL2BOXED(rgba, GDK_TYPE_RGBA));
+
+    return self;
+}
 
 void 
 Init_gtk_color_selection(VALUE mGtk)
@@ -205,6 +214,8 @@ Init_gtk_color_selection(VALUE mGtk)
     RG_DEF_SMETHOD(palette_to_string, -1);
     RG_DEF_SMETHOD(palette_from_string, 1);
     RG_DEF_SMETHOD(set_change_palette_hook, 0);
+    RG_DEF_METHOD(previous_rgba, 0);
+    RG_DEF_METHOD(set_previous_rgba, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

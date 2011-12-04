@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 void
 Init_gtk_orientable(VALUE mGtk)
