@@ -31,6 +31,8 @@
 #  endif
 #endif
 
+GStaticPrivate rg_polling_key = G_STATIC_PRIVATE_INIT;
+
 /*
 static ID id_poll_func;
 */
@@ -84,7 +86,9 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     info.timeout = timeout;
     info.result = 0;
 
+    g_static_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE), NULL);
     rb_thread_blocking_region(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
+    g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
 
     return info.result;
 }

@@ -175,10 +175,6 @@ invoke_callback_in_ruby_thread(VALUE (*func)(VALUE), VALUE arg)
     return request.result;
 }
 
-#ifdef HAVE_RUBY_THREAD_HAS_GVL_P
-extern int ruby_thread_has_gvl_p(void);
-#endif
-
 #ifdef HAVE_RB_THREAD_CALL_WITH_GVL
 extern void *rb_thread_call_with_gvl(void *(*func)(void *), void *data1);
 
@@ -198,10 +194,8 @@ VALUE
 rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 {
 #ifdef HAVE_NATIVETHREAD
-#ifdef HAVE_RUBY_THREAD_HAS_GVL_P
-    if (ruby_thread_has_gvl_p())
+    if (!GPOINTER_TO_INT(g_static_private_get(&rg_polling_key)))
         return rbgutil_protect(func, arg);
-#endif
     if (ruby_native_thread_p()) {
 #ifdef HAVE_RB_THREAD_CALL_WITH_GVL
         CallbackRequest req;

@@ -48,6 +48,10 @@ typedef struct {
     GType type;
 } boxed_holder;
 
+#ifdef HAVE_RB_THREAD_BLOCKING_REGION
+G_GNUC_INTERNAL extern GStaticPrivate rg_polling_key;
+#endif
+
 extern VALUE rbgobj_cEnum;
 extern VALUE rbgobj_cFlags;
 extern VALUE rbgobj_cBoxed;
