@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDragContext
-#define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GDKDRAGCONTEXT(self))
 
 /* TODO
 static VALUE
@@ -109,7 +109,7 @@ rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     } else {
         VALUE display;
         rb_scan_args(argc, argv, "20", &display, &xid);
-        ret = gdk_drag_get_protocol_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        ret = gdk_drag_get_protocol_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                 RVAL2GDKNATIVEWINDOW(xid), &prot);
     }
 
@@ -156,7 +156,7 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
 /* deprecated
         rb_scan_args(argc, argv, "30", &drag_window, &x_root, &y_root);
         gdk_drag_find_window(_SELF(self),
-                             GDK_WINDOW(RVAL2GOBJ(drag_window)), 
+                             RVAL2GDKWINDOW(drag_window), 
                              NUM2INT(x_root), NUM2INT(y_root),
                              &dest_window, &prot);
 */
@@ -164,8 +164,8 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
         VALUE screen;
         rb_scan_args(argc, argv, "40", &drag_window, &screen, &x_root, &y_root);
         gdk_drag_find_window_for_screen(_SELF(self),
-                                        GDK_WINDOW(RVAL2GOBJ(drag_window)), 
-                                        GDK_SCREEN(RVAL2GOBJ(screen)),
+                                        RVAL2GDKWINDOW(drag_window), 
+                                        RVAL2GDKSCREEN(screen),
                                         NUM2INT(x_root), NUM2INT(y_root),
                                         &dest_window, &prot);
     }
@@ -220,7 +220,7 @@ rbgdk_rval2gdkatomglist(VALUE value)
 static VALUE
 rg_s_drag_begin(G_GNUC_UNUSED VALUE self, VALUE rbwindow, VALUE rbtargets)
 {
-    GdkWindow *window = GDK_WINDOW(RVAL2GOBJ(rbwindow));
+    GdkWindow *window = RVAL2GDKWINDOW(rbwindow);
     GList *targets = RVAL2GDKATOMGLIST(rbtargets);
     GdkDragContext *result = gdk_drag_begin(window, targets);
 
@@ -233,7 +233,7 @@ static VALUE
 rg_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE x_root, VALUE y_root, VALUE suggested_action, VALUE possible_actions, VALUE time)
 {
     gboolean ret = gdk_drag_motion(_SELF(self), 
-                                   GDK_WINDOW(RVAL2GOBJ(dest_window)), 
+                                   RVAL2GDKWINDOW(dest_window), 
                                    RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
                                    NUM2INT(x_root), NUM2INT(y_root), 
                                    RVAL2GFLAGS(suggested_action, GDK_TYPE_DRAG_ACTION), 

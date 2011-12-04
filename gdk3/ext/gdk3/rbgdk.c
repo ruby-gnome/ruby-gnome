@@ -329,10 +329,10 @@ rg_m_screen_height_mm(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
 {
-    return GENUM2RVAL(gdk_pointer_grab(GDK_WINDOW(RVAL2GOBJ(win)),
+    return GENUM2RVAL(gdk_pointer_grab(RVAL2GDKWINDOW(win),
                      RVAL2CBOOL(owner_events),
                      RVAL2GFLAGS(event_mask, GDK_TYPE_EVENT_MASK),
-                     NIL_P(confine_to)?NULL:GDK_WINDOW(RVAL2GOBJ(confine_to)),
+                     NIL_P(confine_to)?NULL:RVAL2GDKWINDOW(confine_to),
                      NIL_P(cursor)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
                      NUM2INT(time)), GDK_TYPE_GRAB_STATUS);
 }
@@ -347,7 +347,7 @@ rg_m_pointer_ungrab(VALUE self, VALUE time)
 static VALUE
 rg_m_keyboard_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE time)
 {
-    return GENUM2RVAL(gdk_keyboard_grab(GDK_WINDOW(RVAL2GOBJ(win)), 
+    return GENUM2RVAL(gdk_keyboard_grab(RVAL2GDKWINDOW(win), 
                                         RVAL2CBOOL(owner_events), NUM2INT(time)), 
                       GDK_TYPE_GRAB_STATUS);
 }

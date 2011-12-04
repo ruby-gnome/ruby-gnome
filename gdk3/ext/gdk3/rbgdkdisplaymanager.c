@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDisplayManager
-#define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))
+#define _SELF(obj) RVAL2GDKDISPLAYMANAGER(obj)
 
 static VALUE
 rg_s_get(G_GNUC_UNUSED VALUE self)

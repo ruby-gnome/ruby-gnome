@@ -33,7 +33,7 @@
 #endif
 
 #define RG_TARGET_NAMESPACE cDrawable
-#define _SELF(s) GDK_DRAWABLE(RVAL2GOBJ(s))
+#define _SELF(s) RVAL2GDKDRAWABLE(s)
 
 static VALUE
 rg_visual(VALUE self)
@@ -50,7 +50,7 @@ rg_set_colormap(VALUE self, VALUE colormap)
     G_CHILD_REMOVE(self, old_colormap);
 
     G_CHILD_ADD(self, colormap);
-    gdk_drawable_set_colormap(_SELF(self), GDK_COLORMAP(RVAL2GOBJ(colormap)));
+    gdk_drawable_set_colormap(_SELF(self), RVAL2GDKCOLORMAP(colormap));
     return self;
 }
 
@@ -93,7 +93,7 @@ rg_visible_region(VALUE self)
 static VALUE
 rg_draw_point(VALUE self, VALUE gc, VALUE x, VALUE y)
 {
-    gdk_draw_point(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_point(_SELF(self), RVAL2GDKGC(gc),
                    NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -102,7 +102,7 @@ static VALUE
 rg_draw_points(VALUE self, VALUE rbgc, VALUE rbpoints)
 {
     GdkDrawable *drawable = _SELF(self);
-    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    GdkGC *gc = RVAL2GDKGC(rbgc);
     long n;
     GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
 
@@ -116,7 +116,7 @@ rg_draw_points(VALUE self, VALUE rbgc, VALUE rbpoints)
 static VALUE
 rg_draw_line(VALUE self, VALUE gc, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
 {
-    gdk_draw_line(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_line(_SELF(self), RVAL2GDKGC(gc),
                   NUM2INT(x1), NUM2INT(y1),
                   NUM2INT(x2), NUM2INT(y2));
     return self;
@@ -126,7 +126,7 @@ static VALUE
 rg_draw_lines(VALUE self, VALUE rbgc, VALUE rbpoints)
 {
     GdkDrawable *drawable = _SELF(self);
-    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    GdkGC *gc = RVAL2GDKGC(rbgc);
     long n;
     GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
 
@@ -141,8 +141,8 @@ static VALUE
 rg_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE dither, VALUE x_dither, VALUE y_dither)
 {
     gdk_draw_pixbuf(_SELF(self),
-                    GDK_GC(RVAL2GOBJ(gc)),
-                    GDK_PIXBUF(RVAL2GOBJ(pixbuf)),
+                    RVAL2GDKGC(gc),
+                    RVAL2GDKPIXBUF(pixbuf),
                     NUM2INT(src_x), NUM2INT(src_y), 
                     NUM2INT(dest_x), NUM2INT(dest_y),
                     NUM2INT(width), NUM2INT(height),
@@ -210,7 +210,7 @@ static VALUE
 rg_draw_segments(VALUE self, VALUE rbgc, VALUE rbsegments)
 {
     GdkDrawable *drawable = _SELF(self);
-    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    GdkGC *gc = RVAL2GDKGC(rbgc);
     long n;
     GdkSegment *segments = RVAL2GDKSEGMENTS(rbsegments, &n);
 
@@ -224,7 +224,7 @@ rg_draw_segments(VALUE self, VALUE rbgc, VALUE rbsegments)
 static VALUE
 rg_draw_rectangle(VALUE self, VALUE gc, VALUE filled, VALUE x, VALUE y, VALUE w, VALUE h)
 {
-    gdk_draw_rectangle(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_rectangle(_SELF(self), RVAL2GDKGC(gc),
                        RVAL2CBOOL(filled),
                        NUM2INT(x), NUM2INT(y),
                        NUM2INT(w), NUM2INT(h));
@@ -234,7 +234,7 @@ rg_draw_rectangle(VALUE self, VALUE gc, VALUE filled, VALUE x, VALUE y, VALUE w,
 static VALUE
 rg_draw_arc(VALUE self, VALUE gc, VALUE filled, VALUE x, VALUE y, VALUE w, VALUE h, VALUE a1, VALUE a2)
 {
-    gdk_draw_arc(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_arc(_SELF(self), RVAL2GDKGC(gc),
                  RVAL2CBOOL(filled),
                  NUM2INT(x), NUM2INT(y),
                  NUM2INT(w), NUM2INT(h),
@@ -246,7 +246,7 @@ static VALUE
 rg_draw_polygon(VALUE self, VALUE rbgc, VALUE rbfilled, VALUE rbpoints)
 {
     GdkDrawable *drawable = _SELF(self);
-    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    GdkGC *gc = RVAL2GDKGC(rbgc);
     gboolean filled = RVAL2CBOOL(rbfilled);
     long n;
     GdkPoint *points = RVAL2GDKPOINTS(rbpoints, &n);
@@ -319,7 +319,7 @@ static VALUE
 rg_draw_trapezoids(VALUE self, VALUE rbgc, VALUE rbtrapezoids)
 {
     GdkDrawable *drawable = _SELF(self);
-    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    GdkGC *gc = RVAL2GDKGC(rbgc);
     long n;
     GdkTrapezoid *trapezoids = RVAL2GDKTRAPEZOIDS(rbtrapezoids, &n);
 
@@ -333,7 +333,7 @@ rg_draw_trapezoids(VALUE self, VALUE rbgc, VALUE rbtrapezoids)
 static VALUE
 rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
-    gdk_draw_glyphs(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), PANGO_FONT(RVAL2GOBJ(font)),
+    gdk_draw_glyphs(_SELF(self), RVAL2GDKGC(gc), RVAL2PANGOFONT(font),
                     NUM2INT(x), NUM2INT(y), 
                     (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
     return self;
@@ -342,9 +342,9 @@ rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 static VALUE
 rg_draw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
-    gdk_draw_glyphs_transformed(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), 
+    gdk_draw_glyphs_transformed(_SELF(self), RVAL2GDKGC(gc), 
                                 NIL_P(matrix) ? (PangoMatrix*)NULL : (PangoMatrix*)(RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)),
-                                PANGO_FONT(RVAL2GOBJ(font)),
+                                RVAL2PANGOFONT(font),
                                 NUM2INT(x), NUM2INT(y), 
                                 (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
     return self;
@@ -357,7 +357,7 @@ rg_draw_layout_line(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "42", &gc, &x, &y, &line, &fg, &bg);
 
-    gdk_draw_layout_line_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_layout_line_with_colors(_SELF(self), RVAL2GDKGC(gc),
                                      NUM2INT(x), NUM2INT(y),
                                      (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
                                      RVAL2GDKCOLOR(fg),
@@ -373,8 +373,8 @@ rg_draw_layout(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "42", &gc, &x, &y, &layout, &fg, &bg);
 
-    gdk_draw_layout_with_colors(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                                NUM2INT(x), NUM2INT(y), PANGO_LAYOUT(RVAL2GOBJ(layout)),
+    gdk_draw_layout_with_colors(_SELF(self), RVAL2GDKGC(gc),
+                                NUM2INT(x), NUM2INT(y), RVAL2PANGOLAYOUT(layout),
                                 RVAL2GDKCOLOR(fg),
                                 RVAL2GDKCOLOR(bg));
 
@@ -384,7 +384,7 @@ rg_draw_layout(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_draw_drawable(VALUE self, VALUE gc, VALUE src, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
-    gdk_draw_drawable(_SELF(self), GDK_GC(RVAL2GOBJ(gc)), _SELF(src),
+    gdk_draw_drawable(_SELF(self), RVAL2GDKGC(gc), _SELF(src),
                       NUM2INT(xsrc), NUM2INT(ysrc),
                       NUM2INT(xdst), NUM2INT(ydst),
                       NUM2INT(w), NUM2INT(h));
@@ -394,8 +394,8 @@ rg_draw_drawable(VALUE self, VALUE gc, VALUE src, VALUE xsrc, VALUE ysrc, VALUE 
 static VALUE
 rg_draw_image(VALUE self, VALUE gc, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
-    gdk_draw_image(_SELF(self), GDK_GC(RVAL2GOBJ(gc)),
-                   GDK_IMAGE(RVAL2GOBJ(image)),
+    gdk_draw_image(_SELF(self), RVAL2GDKGC(gc),
+                   RVAL2GDKIMAGE(image),
                    NUM2INT(xsrc), NUM2INT(ysrc),
                    NUM2INT(xdst), NUM2INT(ydst),
                    NUM2INT(w), NUM2INT(h));
@@ -414,7 +414,7 @@ static VALUE
 rg_copy_to_image(VALUE self, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
     return GOBJ2RVAL(gdk_drawable_copy_to_image(_SELF(self), 
-                                                GDK_IMAGE(RVAL2GOBJ(image)),
+                                                RVAL2GDKIMAGE(image),
                                                 NUM2INT(xsrc), NUM2INT(ysrc),
                                                 NUM2INT(xdst), NUM2INT(ydst),
                                                 NUM2INT(w), NUM2INT(h)));

@@ -113,7 +113,7 @@ rg_visual(VALUE self)
 static VALUE
 rg_set_visual(VALUE self, VALUE val)
 {
-    _SELF(self)->visual = GDK_VISUAL(RVAL2GOBJ(val));
+    _SELF(self)->visual = RVAL2GDKVISUAL(val);
     return self;
 }
 

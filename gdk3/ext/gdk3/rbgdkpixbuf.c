@@ -22,13 +22,13 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cPixbuf
-#define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
+#define _SELF(s) RVAL2GDKPIXBUF(s) 
 
 /* deprecated
 static VALUE
 rg_render_threshold_alpha(VALUE self, VALUE bitmap, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE alpha_threshold)
 {
-    gdk_pixbuf_render_threshold_alpha(_SELF(self), GDK_BITMAP(RVAL2GOBJ(bitmap)),
+    gdk_pixbuf_render_threshold_alpha(_SELF(self), RVAL2GDKBITMAP(bitmap),
                                       NUM2INT(src_x), NUM2INT(src_y),
                                       NUM2INT(dest_x), NUM2INT(dest_y),
                                       NUM2INT(width), NUM2INT(height),
@@ -63,8 +63,8 @@ rg_render_to_drawable(int argc, VALUE *argv, VALUE self)
         rb_raise(rb_eArgError, "arguments 7 must be non nil");
 
     gdk_pixbuf_render_to_drawable(_SELF(self),
-                                  GDK_DRAWABLE(RVAL2GOBJ(self)),
-                                  GDK_GC(RVAL2GOBJ(gc)),
+                                  RVAL2GDKDRAWABLE(self),
+                                  RVAL2GDKGC(gc),
                                   NUM2INT(src_x), NUM2INT(src_y),
                                   NUM2INT(dest_x), NUM2INT(dest_y),
                                   NUM2INT(width), NUM2INT(height),
@@ -111,9 +111,9 @@ rg_s_from_drawable(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rb_scan_args(argc, argv, "63", &cmap, &src, &src_x, &src_y, &width, &height, 
                  &dest, &dest_x, &dest_y);
 
-    buf = gdk_pixbuf_get_from_drawable(GDK_PIXBUF(RVAL2GOBJ(dest)),
-                                       GDK_DRAWABLE(RVAL2GOBJ(src)),
-                                       GDK_COLORMAP(RVAL2GOBJ(cmap)),
+    buf = gdk_pixbuf_get_from_drawable(RVAL2GDKPIXBUF(dest),
+                                       RVAL2GDKDRAWABLE(src),
+                                       RVAL2GDKCOLORMAP(cmap),
                                        NUM2INT(src_x), NUM2INT(src_y),
                                        NIL_P(dest_x) ? 0 : NUM2INT(dest_x),
                                        NIL_P(dest_y) ? 0 : NUM2INT(dest_y),
@@ -138,9 +138,9 @@ rg_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rb_scan_args(argc, argv, "63", &cmap, &src, &src_x, &src_y, &width, &height, 
                  &dest, &dest_x, &dest_y);
 
-    buf = gdk_pixbuf_get_from_image(GDK_PIXBUF(RVAL2GOBJ(dest)),
-                                    GDK_IMAGE(RVAL2GOBJ(src)),
-                                    GDK_COLORMAP(RVAL2GOBJ(cmap)),
+    buf = gdk_pixbuf_get_from_image(RVAL2GDKPIXBUF(dest),
+                                    RVAL2GDKIMAGE(src),
+                                    RVAL2GDKCOLORMAP(cmap),
                                     NUM2INT(src_x), NUM2INT(src_y),
                                     NIL_P(dest_x) ? 0 : NUM2INT(dest_x),
                                     NIL_P(dest_y) ? 0 : NUM2INT(dest_y),

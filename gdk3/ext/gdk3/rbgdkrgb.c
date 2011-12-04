@@ -26,7 +26,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE mRGB
-#define RVAL2DRAW(s) GDK_DRAWABLE(RVAL2GOBJ(s))
+#define RVAL2DRAW(s) RVAL2GDKDRAWABLE(s)
 
 static VALUE
 rg_m_draw_rgb_image(int argc, VALUE *argv, VALUE self)
@@ -37,14 +37,14 @@ rg_m_draw_rgb_image(int argc, VALUE *argv, VALUE self)
                  &buf, &rowstride, &xdith, &ydith);
 
     if (argc == 9){
-        gdk_draw_rgb_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
+        gdk_draw_rgb_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                            NUM2INT(x), NUM2INT(y),
                            NUM2INT(w), NUM2INT(h),
                            RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
                            (guchar*)RVAL2CSTR(buf),
                            NUM2INT(rowstride));
     } else {
-        gdk_draw_rgb_image_dithalign(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
+        gdk_draw_rgb_image_dithalign(RVAL2DRAW(win), RVAL2GDKGC(gc),
                                      NUM2INT(x), NUM2INT(y),
                                      NUM2INT(w), NUM2INT(h),
                                      RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
@@ -62,7 +62,7 @@ rg_m_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
                        VALUE rbbuf, VALUE rbrowstride, VALUE rbcolors)
 {
     GdkDrawable *drawable = RVAL2DRAW(win);
-    GdkGC *gc = GDK_GC(RVAL2GOBJ(rbgc));
+    GdkGC *gc = RVAL2GDKGC(rbgc);
     gint x = NUM2INT(rbx);
     gint y = NUM2INT(rby);
     gint width = NUM2INT(rbwidth);
@@ -94,7 +94,7 @@ rg_m_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
 static VALUE
 rg_m_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride)
 {
-    gdk_draw_gray_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
+    gdk_draw_gray_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                         NUM2INT(x), NUM2INT(y),
                         NUM2INT(w), NUM2INT(h),
                         RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
@@ -112,14 +112,14 @@ rg_m_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
                  &buf, &rowstride, &xdith, &ydith);
 
     if (argc == 9){
-        gdk_draw_rgb_32_image(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
+        gdk_draw_rgb_32_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                               NUM2INT(x), NUM2INT(y),
                               NUM2INT(w), NUM2INT(h),
                               RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
                               (guchar*)RVAL2CSTR(buf),
                               NUM2INT(rowstride));
     } else {
-        gdk_draw_rgb_32_image_dithalign(RVAL2DRAW(win), GDK_GC(RVAL2GOBJ(gc)),
+        gdk_draw_rgb_32_image_dithalign(RVAL2DRAW(win), RVAL2GDKGC(gc),
                                         NUM2INT(x), NUM2INT(y),
                                         NUM2INT(w), NUM2INT(h),
                                         RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
@@ -132,7 +132,7 @@ rg_m_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_m_find_color(VALUE self, VALUE colormap, VALUE color)
 {
-    gdk_rgb_find_color(GDK_COLORMAP(RVAL2GOBJ(colormap)),
+    gdk_rgb_find_color(RVAL2GDKCOLORMAP(colormap),
                        RVAL2GDKCOLOR(color));
     return self;
 }

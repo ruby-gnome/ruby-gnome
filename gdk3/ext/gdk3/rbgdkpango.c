@@ -32,7 +32,7 @@ rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (NIL_P(screen)){
         ret = GOBJ2RVAL(gdk_pango_context_get());
     } else {
-        ret = GOBJ2RVAL(gdk_pango_context_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
+        ret = GOBJ2RVAL(gdk_pango_context_get_for_screen(RVAL2GDKSCREEN(screen)));
     }
     return ret;
 }
@@ -41,8 +41,8 @@ rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 gdkpango_context_set_colormap(VALUE self, VALUE colormap)
 {
-    gdk_pango_context_set_colormap(PANGO_CONTEXT(RVAL2GOBJ(self)),
-                                   GDK_COLORMAP(RVAL2GOBJ(colormap)));
+    gdk_pango_context_set_colormap(RVAL2PANGOCONTEXT(self),
+                                   RVAL2GDKCOLORMAP(colormap));
     return self;
 }
 
@@ -64,7 +64,7 @@ gdkpango_attr_embossed_value(VALUE self)
 static VALUE
 gdkpango_attr_stipple_initialize(VALUE self, VALUE stipple)
 {
-    DATA_PTR(self) = gdk_pango_attr_stipple_new(GDK_BITMAP(RVAL2GOBJ(stipple)));
+    DATA_PTR(self) = gdk_pango_attr_stipple_new(RVAL2GDKBITMAP(stipple));
     return Qnil;
 }
 
@@ -78,7 +78,7 @@ gdkpango_attr_stipple_value(VALUE self)
 static VALUE
 gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, VALUE rbindex_ranges)
 {
-    PangoLayout *layout = PANGO_LAYOUT(RVAL2GOBJ(self));
+    PangoLayout *layout = RVAL2PANGOLAYOUT(self);
     gint x_origin = NUM2INT(rbx_origin);
     gint y_origin = NUM2INT(rby_origin);
     long n;

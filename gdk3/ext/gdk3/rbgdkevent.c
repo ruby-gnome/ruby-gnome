@@ -253,7 +253,7 @@ gdkevent_s_get(G_GNUC_UNUSED VALUE self)
 static VALUE
 gdkevent_s_get_graphics_expose(G_GNUC_UNUSED VALUE self, VALUE window)
 {
-    return make_gdkevent(gdk_event_get_graphics_expose(GDK_WINDOW(RVAL2GOBJ(window))));
+    return make_gdkevent(gdk_event_get_graphics_expose(RVAL2GDKWINDOW(window)));
 }
 */
 
@@ -347,7 +347,7 @@ gdkevent_s_set_show_events(VALUE self, VALUE show_events)
 static VALUE
 gdkevent_set_screen(VALUE self, VALUE screen)
 {
-    gdk_event_set_screen(get_gdkevent(self), GDK_SCREEN(RVAL2GOBJ(screen)));
+    gdk_event_set_screen(get_gdkevent(self), RVAL2GDKSCREEN(screen));
     return self;
 }
 
@@ -565,7 +565,7 @@ gdkeventclient_send_client_message(int argc, VALUE *argv, VALUE self)
                               get_gdkevent(self), RVAL2GDKNATIVEWINDOW(xid)));
     } else {
         return CBOOL2RVAL(gdk_event_send_client_message_for_display(
-                              GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+                              RVAL2GDKDISPLAYOBJECT(display),
                               get_gdkevent(self),
                               RVAL2GDKNATIVEWINDOW(xid)));
     }

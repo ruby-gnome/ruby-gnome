@@ -26,7 +26,7 @@
 #endif
 
 #define RG_TARGET_NAMESPACE cScreen
-#define _SELF(i) GDK_SCREEN(RVAL2GOBJ(i))
+#define _SELF(i) RVAL2GDKSCREEN(i)
 
 static ID id_new;
 
@@ -47,7 +47,7 @@ static VALUE
 rg_set_default_colormap(VALUE self, VALUE colormap)
 {
     gdk_screen_set_default_colormap(_SELF(self),
-                                    GDK_COLORMAP(RVAL2GOBJ(colormap)));
+                                    RVAL2GDKCOLORMAP(colormap));
     return self;
 }
 
@@ -183,7 +183,7 @@ rg_get_monitor(int argc, VALUE *argv, VALUE self)
                                                       NUM2INT(arg1), NUM2INT(arg2)));
     } else if (argc == 1){
         ret = INT2NUM(gdk_screen_get_monitor_at_window(_SELF(self),
-                                                       GDK_WINDOW(RVAL2GOBJ(arg1))));
+                                                       RVAL2GDKWINDOW(arg1)));
     } else {
         rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
     }
