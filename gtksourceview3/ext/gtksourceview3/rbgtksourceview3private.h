@@ -37,5 +37,6 @@
 #include "ruby.h"
 #include "rbgtk3.h"
 #include "rbgtksourceview3version.h"
+#include "rbgtksourceview3conversions.h"
 
 #endif /* __RBGTKSOURCEVIEW3PRIVATE_H_ */
