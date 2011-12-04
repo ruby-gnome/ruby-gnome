@@ -22,8 +22,10 @@
 #ifndef __RBGDK3_H__
 #define __RBGDK3_H__
 
-#include <rbgobject.h>
 #include <gdk/gdk.h>
+#include <rb_cairo.h>
+#include <rbgobject.h>
+
 #include "rbgdk3conversions.h"
 
 #define RBGDK_MAJOR_VERSION RBGLIB_MAJOR_VERSION

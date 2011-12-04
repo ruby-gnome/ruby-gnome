@@ -22,9 +22,6 @@
 #ifndef __RBGDK3CONVERSIONS_H__
 #define __RBGDK3CONVERSIONS_H__
 
-#include <rbgobject.h>
-#include <gdk/gdk.h>
-
 #define RVAL2GDKCOLOR(color) ((GdkColor *)RVAL2BOXED(color, GDK_TYPE_COLOR))
 #define GDKCOLOR2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_COLOR))
 #define RVAL2GDKRGBA(color) ((GdkRGBA *)RVAL2BOXED(color, GDK_TYPE_RGBA))

@@ -22,10 +22,9 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef _RBGDK3PRIVATE_H
-#define _RBGDK3PRIVATE_H
+#ifndef __RBGDK3PRIVATE_H__
+#define __RBGDK3PRIVATE_H__
 
-#include <rb_cairo.h>
 #include "rbgdk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
@@ -86,4 +85,4 @@ G_GNUC_INTERNAL void Init_gtk_gdk_x11(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_draw(VALUE mGdk);
 */
 
-#endif /* _RBGDK3PRIVATE_H */
+#endif /* __RBGDK3PRIVATE_H__ */

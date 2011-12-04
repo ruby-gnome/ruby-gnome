@@ -35,7 +35,7 @@
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
 #include "ruby.h"
-#include "rbgtk.h"
+#include "rbgtk3.h"
 #include "rbgtksourceview3version.h"
 
 #endif /* __RBGTKSOURCEVIEW3PRIVATE_H_ */

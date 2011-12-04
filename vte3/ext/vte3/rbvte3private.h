@@ -2,7 +2,7 @@
 #define __RBVTE3PRIVATE_H__
 
 #include <ruby.h>
-#include <rbgtk.h>
+#include <rbgtk3.h>
 
 #include <vte/vte.h>
 #include <vte/vteaccess.h>

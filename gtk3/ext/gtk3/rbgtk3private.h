@@ -22,13 +22,9 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef _RBGTK3PRIVATE_H
-#define _RBGTK3PRIVATE_H
+#ifndef __RBGTK3PRIVATE_H__
+#define __RBGTK3PRIVATE_H__
 
-#include <rb_cairo.h>
-#include <rbgdk.h>
-#include <rbgdkconversions.h>
-#include <gio2.h>
 #include "rbgtk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
@@ -240,4 +236,4 @@ G_GNUC_INTERNAL void Init_gtk_widget(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_window(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_windowgroup(VALUE mGtk);
 
-#endif /* _RBGTK3PRIVATE_H */
+#endif /* __RBGTK3PRIVATE_H__ */
