@@ -51,7 +51,7 @@ rg_event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
     gboolean ret = gtk_text_tag_event(RVAL2GTKTEXTTAG(self), 
                                       RVAL2GOBJ(event_object),
                                       RVAL2GEV(event),
-                                      (GtkTextIter*)RVAL2BOXED(iter, GTK_TYPE_TEXT_ITER));
+                                      RVAL2GTKTEXTITER(iter));
     return CBOOL2RVAL(ret);
 }
 

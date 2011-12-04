@@ -25,7 +25,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cStyle
-#define _SELF(self) (GTK_SOURCE_STYLE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCESTYLE(self))
 
 static VALUE
 rg_copy(VALUE self)

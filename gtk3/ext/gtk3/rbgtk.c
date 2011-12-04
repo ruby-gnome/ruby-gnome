@@ -147,7 +147,7 @@ rg_m_disable_setlocale(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_default_language(G_GNUC_UNUSED VALUE self)
 {
-    return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
+    return PANGOLANGUAGE2RVAL(gtk_get_default_language());
 }
 
 typedef void (*SignalFunc) (int);
@@ -492,6 +492,7 @@ Init_gtk_gtk(void)
     Init_gtk_drawing_area(RG_TARGET_NAMESPACE);
     Init_gtk_editable(RG_TARGET_NAMESPACE);
     Init_gtk_entry(RG_TARGET_NAMESPACE);
+    Init_gtk_entrybuffer(RG_TARGET_NAMESPACE);
     Init_gtk_entry_completion(RG_TARGET_NAMESPACE);
     Init_gtk_eventbox(RG_TARGET_NAMESPACE);
     Init_gtk_expander(RG_TARGET_NAMESPACE);

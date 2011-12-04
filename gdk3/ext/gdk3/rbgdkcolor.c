@@ -50,7 +50,7 @@ rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE name)
     if (! gdk_color_parse(RVAL2CSTR(name), &c)) {
         rb_raise(rb_eArgError, "can't parse color name `%s'", RVAL2CSTR(name));
     }
-    return BOXED2RVAL(&c, GDK_TYPE_COLOR);
+    return GDKCOLOR2RVAL(&c);
 }
 
 static VALUE

@@ -23,10 +23,14 @@
 
 #define RVAL2GPARAMSPEC(o)                 (G_PARAM_SPEC(RVAL2GOBJ(o)))
 
+#define RVAL2GCLOSURE(o)                   ((GClosure*)RVAL2BOXED(o, G_TYPE_CLOSURE))
+#define GCLOSURE2RVAL(o)                   (BOXED2RVAL(o, G_TYPE_CLOSURE))
 #define RVAL2GCOMPLETION(o)                ((GCompletion*)RVAL2BOXED(o, G_TYPE_COMPLETION))
 #define GCOMPLETION2RVAL(o)                (BOXED2RVAL(o, G_TYPE_COMPLETION))
 #define RVAL2GIOCHANNEL(o)                 ((GIOChannel*)RVAL2BOXED(o, G_TYPE_IO_CHANNEL))
 #define GIOCHANNEL2RVAL(o)                 (BOXED2RVAL(o, G_TYPE_IO_CHANNEL))
+#define RVAL2GKEYFILE(o)                   ((GKeyFile*)RVAL2BOXED(o, G_TYPE_KEY_FILE))
+#define GKEYFILE2RVAL(o)                   (BOXED2RVAL(o, G_TYPE_KEY_FILE))
 #define RVAL2GMAINCONTEXT(o)               ((GMainContext*)RVAL2BOXED(o, G_TYPE_MAIN_CONTEXT))
 #define GMAINCONTEXT2RVAL(o)               (BOXED2RVAL(o, G_TYPE_MAIN_CONTEXT))
 #define RVAL2GMAINLOOP(o)                  ((GMainLoop*)RVAL2BOXED(o, G_TYPE_MAIN_LOOP))

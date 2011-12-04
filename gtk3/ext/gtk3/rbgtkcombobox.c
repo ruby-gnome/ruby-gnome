@@ -71,7 +71,7 @@ rg_active_iter(VALUE self)
     gboolean ret = gtk_combo_box_get_active_iter(_SELF(self), &iter);
     if (ret){
         iter.user_data3 = (gpointer)gtk_combo_box_get_model(_SELF(self));
-        val = BOXED2RVAL(&iter, GTK_TYPE_TREE_ITER);
+        val = GTKTREEITER2RVAL(&iter);
     }
     return val;
 }

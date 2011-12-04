@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cTimeCoord
-#define _SELF(s) ((GdkTimeCoord*)RVAL2BOXED(s, GDK_TYPE_TIME_COORD))
+#define _SELF(s) (RVAL2GDKTIMECOORD(s))
 
 /**********************************/
 static GdkTimeCoord*

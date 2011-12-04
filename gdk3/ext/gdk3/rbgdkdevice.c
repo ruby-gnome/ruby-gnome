@@ -101,7 +101,7 @@ rg_get_history(VALUE self, VALUE window, VALUE start, VALUE stop)
     if (ret){
         ary = rb_ary_new();
         for (i = 0; i < n_events; i++){
-            rb_ary_push(ary, BOXED2RVAL(events, GDK_TYPE_TIME_COORD));
+            rb_ary_push(ary, GDKTIMECOORD2RVAL(events));
         }
         gdk_device_free_history(events, n_events);
     }

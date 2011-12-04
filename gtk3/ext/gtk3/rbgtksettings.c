@@ -142,7 +142,7 @@ rg_s_rc_property_parse_requisition(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE
 static VALUE
 settings_rc_property_parse_border_result(VALUE value)
 {
-    return BOXED2RVAL(g_value_get_boxed((GValue *)value), GTK_TYPE_BORDER);
+    return GTKBORDER2RVAL(g_value_get_boxed((GValue *)value));
 }
 
 static VALUE

@@ -168,7 +168,7 @@ rg_monitor_geometry(VALUE self, VALUE num)
 {
       GdkRectangle rect;
       gdk_screen_get_monitor_geometry(_SELF(self), NUM2INT(num), &rect);
-      return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
+      return GDKRECTANGLE2RVAL(&rect);
 }
 
 static VALUE

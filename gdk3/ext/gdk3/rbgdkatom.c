@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cAtom
-#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
+#define _SELF(a) ((RVAL2GDKATOM(a))->atom)
 
 /*****************************************/
 static GdkAtomData *
@@ -50,7 +50,7 @@ get_gdkatom(VALUE atom)
 {
     if (TYPE(atom) == T_STRING)
         return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
-    return ((GdkAtomData*)RVAL2BOXED(atom, GDK_TYPE_ATOM))->atom;
+    return (RVAL2GDKATOM(atom))->atom;
 }
 /*****************************************/
 
@@ -117,7 +117,7 @@ Init_gtk_gdk_atom(VALUE mGdk)
     RG_DEF_METHOD_OPERATOR("==", equal, 1);
 
     /* This is a trick to define GDK_NONE as a BOXED object */
-    none = BOXED2RVAL((gpointer)1, GDK_TYPE_ATOM);
+    none = GDKATOM2RVAL((gpointer)1);
     rb_define_const(RG_TARGET_NAMESPACE, "NONE", none);
     _SELF(none) = GDK_NONE;
 }           

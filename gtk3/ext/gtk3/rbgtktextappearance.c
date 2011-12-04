@@ -45,7 +45,7 @@ gtk_text_appearance_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cTextAppearance
-#define _SELF(t) ((GtkTextAppearance*)RVAL2BOXED(t, GTK_TYPE_TEXT_APPEARANCE))
+#define _SELF(t) (RVAL2GTKTEXTAPPEARANCE(t))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -59,7 +59,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_bg_color(VALUE self)
 {
-    VALUE val = BOXED2RVAL(&_SELF(self)->bg_color, GDK_TYPE_COLOR);
+    VALUE val = GDKCOLOR2RVAL(&_SELF(self)->bg_color);
     G_CHILD_SET(self, rb_intern("bg_color"), val);
     return val;
 }
@@ -75,7 +75,7 @@ rg_set_bg_color(VALUE self, VALUE val)
 static VALUE
 rg_fg_color(VALUE self)
 {
-    VALUE val = BOXED2RVAL(&_SELF(self)->fg_color, GDK_TYPE_COLOR);
+    VALUE val = GDKCOLOR2RVAL(&_SELF(self)->fg_color);
     G_CHILD_SET(self, rb_intern("fg_color"), val);
     return val;
 }

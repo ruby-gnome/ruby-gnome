@@ -196,7 +196,7 @@ rg_cell_size(VALUE self)
         cell_area.width == -1 || cell_area.height == -1){
         cell = Qnil;
     } else {
-        cell = BOXED2RVAL(&cell_area, GDK_TYPE_RECTANGLE);
+        cell = GDKRECTANGLE2RVAL(&cell_area);
     }
     return rb_ary_new3(5, cell,
                        x_offset ? INT2NUM(x_offset) : Qnil,

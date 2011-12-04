@@ -25,8 +25,8 @@
 #define _SELF(self) (RVAL2GTKTEXTVIEW(self))
 #define RVAL2BUFFER(b) (RVAL2GTKTEXTBUFFER(b))
 #define RVAL2MARK(m) (RVAL2GTKTEXTMARK(m))
-#define RVAL2ITR(i) ((GtkTextIter*)(RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
+#define RVAL2ITR(i) (RVAL2GTKTEXTITER(i))
+#define ITR2RVAL(i) (GTKTEXTITER2RVAL(i))
 
 static ID id_buffer;
 
@@ -107,7 +107,7 @@ rg_visible_rect(VALUE self)
 {
     GdkRectangle rect;
     gtk_text_view_get_visible_rect(_SELF(self), &rect);
-    return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(&rect);
 }
 
 static VALUE
@@ -115,7 +115,7 @@ rg_get_iter_location(VALUE self, VALUE iter)
 {
     GdkRectangle rect;
     gtk_text_view_get_iter_location(_SELF(self), RVAL2ITR(iter), &rect);
-    return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(&rect);
 }
 
 static VALUE

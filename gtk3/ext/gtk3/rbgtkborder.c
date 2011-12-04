@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cBorder
-#define _SELF(self) ((GtkBorder*)RVAL2BOXED(self, GTK_TYPE_BORDER))
+#define _SELF(self) (RVAL2GTKBORDER(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)

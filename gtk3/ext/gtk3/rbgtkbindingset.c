@@ -50,7 +50,7 @@ gtk_bindingset_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cBindingSet
-#define _SELF(s) (GtkBindingSet*)(RVAL2BOXED(s, GTK_TYPE_BINDING_SET))
+#define _SELF(s) (RVAL2GTKBINDINGSET(s))
 
 static VALUE
 rg_initialize(VALUE self, VALUE set_name)

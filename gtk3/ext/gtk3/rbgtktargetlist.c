@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTargetList
-#define _SELF(r) ((GtkTargetList*)RVAL2BOXED(r, GTK_TYPE_TARGET_LIST))
+#define _SELF(r) (RVAL2GTKTARGETLIST(r))
 
 static VALUE
 rg_initialize(VALUE self, VALUE rbtargets)

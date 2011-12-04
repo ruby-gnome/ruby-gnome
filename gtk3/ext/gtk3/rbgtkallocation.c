@@ -42,7 +42,7 @@ gtk_allocation_get_type(void)
 }
 
 #define RG_TARGET_NAMESPACE cAllocation
-#define _SELF(r) ((GtkAllocation*)RVAL2BOXED(r, GTK_TYPE_ALLOCATION))
+#define _SELF(r) (RVAL2GTKALLOCATION(r))
 
 static VALUE
 rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
@@ -63,7 +63,7 @@ rg_intersect(VALUE self, VALUE other)
 {
     GtkAllocation dest;
     gboolean ret = gdk_rectangle_intersect(_SELF(self), _SELF(other), &dest);
-    return ret ? BOXED2RVAL(&dest, GTK_TYPE_ALLOCATION) : Qnil;
+    return ret ? GTKALLOCATION2RVAL(&dest) : Qnil;
 }
 
 static VALUE
@@ -71,7 +71,7 @@ rg_union(VALUE self, VALUE other)
 {
     GtkAllocation dest;
     gdk_rectangle_union(_SELF(self), _SELF(other), &dest);
-    return BOXED2RVAL(&dest, GTK_TYPE_ALLOCATION);
+    return GTKALLOCATION2RVAL(&dest);
 }
 
 /* Struct accessors */
@@ -138,7 +138,7 @@ rg_to_a(VALUE self)
 static VALUE
 rg_to_rect(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self), GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(_SELF(self));
 }
 
 void 

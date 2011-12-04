@@ -44,7 +44,7 @@ rbgtk_tree_row_reference_get_type()
 GtkTreeRowReference *
 rbgtk_get_tree_row_reference(VALUE obj)
 {
-    return (GtkTreeRowReference*)RVAL2BOXED(obj, GTK_TYPE_TREE_ROW_REFERENCE);
+    return RVAL2GTKTREEROWREFERENCE(obj);
 }
 #endif
 

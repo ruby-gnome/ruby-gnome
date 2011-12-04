@@ -66,21 +66,21 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_display(VALUE self)
 {
-    return GOBJ2RVAL(gdk_cursor_get_display((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
+    return GOBJ2RVAL(gdk_cursor_get_display(RVAL2GDKCURSOR(self)));
 }
 
 /* TODO
 static VALUE
 rg_cursor_type(VALUE self)
 {
-    return GENUM2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR))->type, GDK_TYPE_CURSOR_TYPE);
+    return GENUM2RVAL((RVAL2GDKCURSOR(self))->type, GDK_TYPE_CURSOR_TYPE);
 }
 */
 
 static VALUE
 rg_image(VALUE self)
 {
-    return GOBJ2RVAL(gdk_cursor_get_image((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
+    return GOBJ2RVAL(gdk_cursor_get_image(RVAL2GDKCURSOR(self)));
 }
 
 void

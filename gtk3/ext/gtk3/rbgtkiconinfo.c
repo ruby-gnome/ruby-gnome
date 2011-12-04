@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIconInfo
-#define _SELF(i) ((GtkIconInfo*)RVAL2BOXED(i, GTK_TYPE_ICON_INFO))
+#define _SELF(i) (RVAL2GTKICONINFO(i))
 
 static VALUE
 rg_base_size(VALUE self)
@@ -70,7 +70,7 @@ rg_embedded_rect(VALUE self)
     gboolean ret = gtk_icon_info_get_embedded_rect(_SELF(self), &rectangle);
 
     if (ret)
-        return BOXED2RVAL(&rectangle, GDK_TYPE_RECTANGLE);
+        return GDKRECTANGLE2RVAL(&rectangle);
     else
         return Qnil;
 }
