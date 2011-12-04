@@ -29,7 +29,6 @@
  */
 
 #define _SELF(self) (RVAL2GTKSOURCEBUFFER(self))
-#define RVAL2ITR(i) ((GtkTextIter*)RVAL2BOXED(i, GTK_TYPE_TEXT_ITER))
 
 /*
  * Class method: new(obj=nil)
@@ -220,7 +219,7 @@ rg_create_source_mark(int argc, VALUE *argv, VALUE self)
     return GOBJ2RVAL (gtk_source_buffer_create_source_mark (_SELF (self),
                                RVAL2CSTR (name),
                                RVAL2CSTR (category),
-                               RVAL2ITR (where)));
+                               RVAL2GTKTEXTITER (where)));
 }
 
 static VALUE
@@ -258,7 +257,7 @@ rg_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
 
     list =
         gtk_source_buffer_get_source_marks_at_iter (_SELF (self),
-                          RVAL2ITR (iter),
+                          RVAL2GTKTEXTITER (iter),
                           RVAL2CSTR_ACCEPT_NIL (category));
     ary = rb_ary_new ();
 
@@ -279,8 +278,8 @@ rg_remove_source_marks(int argc, VALUE *argv, VALUE self)
     rb_scan_args (argc, argv, "21", &start, &end, &category);
 
     gtk_source_buffer_remove_source_marks (_SELF (self),
-                            RVAL2ITR (start),
-                            RVAL2ITR (end),
+                            RVAL2GTKTEXTITER (start),
+                            RVAL2GTKTEXTITER (end),
                             RVAL2CSTR_ACCEPT_NIL (category));
 
     return self;
@@ -295,7 +294,7 @@ rg_forward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 
     return
         CBOOL2RVAL (gtk_source_buffer_forward_iter_to_source_mark
-                                   (_SELF (self), RVAL2ITR (iter),
+                                   (_SELF (self), RVAL2GTKTEXTITER (iter),
                                     RVAL2CSTR_ACCEPT_NIL (category)));
 }
 
@@ -308,14 +307,14 @@ rg_backward_iter_to_source_mark(int argc, VALUE *argv, VALUE self)
 
     return
         CBOOL2RVAL (gtk_source_buffer_backward_iter_to_source_mark
-                                   (_SELF (self), RVAL2ITR (iter),
+                                   (_SELF (self), RVAL2GTKTEXTITER (iter),
                                     RVAL2CSTR_ACCEPT_NIL (category)));
 }
 
 static VALUE
 rg_ensure_highlight(VALUE self, VALUE start, VALUE end)
 {
-    gtk_source_buffer_ensure_highlight (_SELF (self), RVAL2ITR (start), RVAL2ITR (end));
+    gtk_source_buffer_ensure_highlight (_SELF (self), RVAL2GTKTEXTITER (start), RVAL2GTKTEXTITER (end));
 
     return self;
 }
