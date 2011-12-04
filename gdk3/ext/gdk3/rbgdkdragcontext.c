@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDragContext
 #define _SELF(self) (GDK_DRAG_CONTEXT(RVAL2GOBJ(self)))

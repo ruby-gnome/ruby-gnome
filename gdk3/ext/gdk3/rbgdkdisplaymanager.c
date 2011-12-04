@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDisplayManager
 #define _SELF(obj) GDK_DISPLAY_MANAGER(RVAL2GOBJ(obj))

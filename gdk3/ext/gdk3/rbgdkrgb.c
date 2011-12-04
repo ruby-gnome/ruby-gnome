@@ -23,7 +23,7 @@
  */
 
 /* deprecated
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE mRGB
 #define RVAL2DRAW(s) GDK_DRAWABLE(RVAL2GOBJ(s))

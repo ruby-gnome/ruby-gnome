@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE mSelection
 #define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
