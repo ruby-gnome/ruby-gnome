@@ -24,7 +24,7 @@
 
 #include <rbgobject.h>
 #include <gdk/gdk.h>
-#include <rbgdkconversions.h>
+#include "rbgdk3conversions.h"
 
 #define RBGDK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
 #define RBGDK_MINOR_VERSION RBGLIB_MINOR_VERSION

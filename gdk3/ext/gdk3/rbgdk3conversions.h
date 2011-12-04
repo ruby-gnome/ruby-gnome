@@ -19,8 +19,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RB_GDK_CONVERSIONS_H__
-#define __RB_GDK_CONVERSIONS_H__
+#ifndef __RBGDK3CONVERSIONS_H__
+#define __RBGDK3CONVERSIONS_H__
 
 #include <rbgobject.h>
 #include <gdk/gdk.h>
@@ -30,4 +30,4 @@
 #define RVAL2GDKRGBA(color) ((GdkRGBA *)RVAL2BOXED(color, GDK_TYPE_RGBA))
 #define GDKRGBA2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_RGBA))
 
-#endif /* __RB_GDK_CONVERSIONS_H__ */
+#endif /* __RBGDK3CONVERSIONS_H__ */
