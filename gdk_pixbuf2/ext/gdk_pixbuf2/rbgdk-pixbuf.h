@@ -23,6 +23,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include "rbgobject.h"
+#include "gdk_pixbuf2conversions.h"
 
 G_GNUC_INTERNAL void Init_gdk_pixbuf_animation(VALUE mGLib);
 G_GNUC_INTERNAL void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
