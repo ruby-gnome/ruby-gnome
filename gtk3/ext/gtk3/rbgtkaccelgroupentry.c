@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAccelGroupEntry
 #define _SELF(s) ((GtkAccelGroupEntry*)RVAL2BOXED(s, GTK_TYPE_ACCEL_GROUP_ENTRY))

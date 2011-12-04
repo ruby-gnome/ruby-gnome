@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 #ifdef HAVE_RB_CAIRO_H
 #include <rb_cairo.h>
 #endif

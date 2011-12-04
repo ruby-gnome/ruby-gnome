@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeSelection
 #define _SELF(s) (GTK_TREE_SELECTION(RVAL2GOBJ(s)))

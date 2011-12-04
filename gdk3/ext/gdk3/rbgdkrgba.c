@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cRGBA
 #define _SELF(self) (RVAL2GDKRGBA(self))

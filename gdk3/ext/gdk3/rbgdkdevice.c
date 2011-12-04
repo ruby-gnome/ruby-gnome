@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDevice
 #define _SELF(self) (GDK_DEVICE(RVAL2GOBJ(self)))

@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeModelFilter
 #define _SELF(s) (GTK_TREE_MODEL_FILTER(RVAL2GOBJ(s)))

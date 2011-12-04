@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cButtonBox
 #define _SELF(self) (GTK_BUTTON_BOX(RVAL2GOBJ(self)))

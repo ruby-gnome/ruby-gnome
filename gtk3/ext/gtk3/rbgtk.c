@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 #ifdef HAVE_SYS_TIME_H
 # include <sys/time.h>
 #endif
@@ -449,8 +449,10 @@ Init_gtk_gtk(void)
     Init_gtk_adjustment(RG_TARGET_NAMESPACE);
     Init_gtk_alignment(RG_TARGET_NAMESPACE);
     Init_gtk_allocation(RG_TARGET_NAMESPACE);
+    Init_gtk_appchooser(RG_TARGET_NAMESPACE);
     Init_gtk_appchooserbutton(RG_TARGET_NAMESPACE);
     Init_gtk_appchooserdialog(RG_TARGET_NAMESPACE);
+    Init_gtk_appchooserwidget(RG_TARGET_NAMESPACE);
     Init_gtk_arrow(RG_TARGET_NAMESPACE);
     Init_gtk_aspect_frame(RG_TARGET_NAMESPACE);
     Init_gtk_assistant(RG_TARGET_NAMESPACE);
@@ -501,10 +503,13 @@ Init_gtk_gtk(void)
     Init_gtk_file_filter(RG_TARGET_NAMESPACE);
     Init_gtk_fixed(RG_TARGET_NAMESPACE);
     Init_gtk_fontbutton(RG_TARGET_NAMESPACE);
+    Init_gtk_fontchooser(RG_TARGET_NAMESPACE);
     Init_gtk_fontchooserdialog(RG_TARGET_NAMESPACE);
+    Init_gtk_fontchooserwidget(RG_TARGET_NAMESPACE);
     Init_gtk_frame(RG_TARGET_NAMESPACE);
     Init_gtk_grid(RG_TARGET_NAMESPACE);
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);
+    Init_gtk_hsv(RG_TARGET_NAMESPACE);
     Init_gtk_icon_factory(RG_TARGET_NAMESPACE);
     Init_gtk_iconinfo(RG_TARGET_NAMESPACE);
     Init_gtk_icon_set(RG_TARGET_NAMESPACE);

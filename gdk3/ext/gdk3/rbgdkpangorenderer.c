@@ -20,7 +20,7 @@
  */
 
 /* deprecated
-#include "global.h"
+#include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cPangoRenderer
 #define _SELF(s) (GDK_PANGO_RENDERER(RVAL2GOBJ(s)))

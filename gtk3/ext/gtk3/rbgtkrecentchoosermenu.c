@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRecentChooserMenu
 #define _SELF(self) (GTK_RECENT_CHOOSER_MENU(RVAL2GOBJ(self)))

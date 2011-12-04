@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 #include "rbgdk.h"
 
 #define RG_TARGET_NAMESPACE cAtom

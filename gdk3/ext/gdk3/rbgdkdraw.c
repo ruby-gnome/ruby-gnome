@@ -23,7 +23,7 @@
  */
 
 /* deprecated
-#include "global.h"
+#include "rbgdk3private.h"
 #include "rbpango.h"
 #ifdef GDK_WINDOWING_X11
 #include <gdk/gdkx.h>

@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgdk3private.h"
 #include "gmodule.h"
 
 extern void Init_gdk3(void);
