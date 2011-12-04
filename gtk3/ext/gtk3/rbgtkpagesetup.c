@@ -58,7 +58,7 @@ rg_set_orientation(VALUE self, VALUE orientation)
 static VALUE
 rg_paper_size(VALUE self)
 {
-    return BOXED2RVAL(gtk_page_setup_get_paper_size(_SELF(self)), GTK_TYPE_PAPER_SIZE);
+    return GTKPAPERSIZE2RVAL(gtk_page_setup_get_paper_size(_SELF(self)));
 }
 
 static VALUE

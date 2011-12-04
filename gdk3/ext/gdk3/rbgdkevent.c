@@ -34,7 +34,7 @@ make_gdkevent(GdkEvent *ev)
     VALUE obj;
     if (ev == NULL) return Qnil;
 
-    obj = BOXED2RVAL(ev, GDK_TYPE_EVENT);
+    obj = GDKEVENT2RVAL(ev);
     RBASIC(obj)->klass = gdkevents[ev->type]; /* hack */
     return obj;
 }
@@ -148,7 +148,7 @@ static VALUE \
 gdkevent ## type ## _ ## name (VALUE self)\
 {\
     GdkAtom atom = get_gdkevent(self)->type.name;\
-    return BOXED2RVAL(atom, GDK_TYPE_ATOM);\
+    return GDKATOM2RVAL(atom);\
 }\
 static VALUE \
 gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
@@ -439,7 +439,7 @@ gdkeventmotion_request_motions(VALUE self)
 static VALUE
 gdkeventexpose_area(VALUE self)
 {
-    return BOXED2RVAL(&get_gdkevent(self)->expose.area, GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(&get_gdkevent(self)->expose.area);
 }
  
 static VALUE
@@ -457,7 +457,7 @@ gdkeventexpose_set_area(VALUE self, VALUE rect)
 static VALUE
 gdkeventexpose_region(VALUE self)
 {
-    return BOXED2RVAL(get_gdkevent(self)->expose.region, GDK_TYPE_REGION);
+    return GDKREGION2RVAL(get_gdkevent(self)->expose.region);
 }
 static VALUE
 gdkeventexpose_set_region(VALUE self, VALUE region)

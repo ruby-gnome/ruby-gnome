@@ -139,14 +139,14 @@ rg_m_dest_find_target(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         RVAL2WIDGET(widget), RVAL2DC(context),
         NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
 
-    return BOXED2RVAL(ret, GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(ret);
 }
 
 static VALUE
 rg_m_dest_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
-    return BOXED2RVAL(list, GTK_TYPE_TARGET_LIST);
+    return GTKTARGETLIST2RVAL(list);
 }
 
 static VALUE
@@ -364,7 +364,7 @@ static VALUE
 rg_m_source_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
-    return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);
+    return NIL_P(ret) ? Qnil : GTKTARGETLIST2RVAL(ret);
 }
 
 static VALUE

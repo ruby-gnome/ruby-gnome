@@ -108,7 +108,7 @@ filter_func(const GtkRecentFilterInfo *info, gpointer func)
     struct callback_arg arg;
 
     arg.callback = (VALUE)func;
-    arg.info = BOXED2RVAL((gpointer)info, GTK_TYPE_RECENT_FILTER_INFO);
+    arg.info = GTKRECENTFILTERINFO2RVAL((gpointer)info);
 
     result = G_PROTECT_CALLBACK(invoke_callback, &arg);
     return NIL_P(rb_errinfo()) ? TRUE : RVAL2CBOOL(result);

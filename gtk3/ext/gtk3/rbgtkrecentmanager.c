@@ -74,7 +74,7 @@ rg_lookup_item(VALUE self, VALUE uri)
     GtkRecentInfo* info = gtk_recent_manager_lookup_item(_SELF(self), RVAL2CSTR(uri),
                                                          &error);
     if (error) RAISE_GERROR(error);
-    return BOXED2RVAL(info, GTK_TYPE_RECENT_INFO);
+    return GTKRECENTINFO2RVAL(info);
 }
 
 static VALUE

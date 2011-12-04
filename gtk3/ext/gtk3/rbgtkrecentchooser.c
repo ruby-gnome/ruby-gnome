@@ -51,8 +51,8 @@ sort_func(GtkRecentInfo *a, GtkRecentInfo *b, gpointer func)
     struct callback_arg arg;
 
     arg.callback = (VALUE)func;
-    arg.a = BOXED2RVAL(a, GTK_TYPE_RECENT_INFO);
-    arg.b = BOXED2RVAL(b, GTK_TYPE_RECENT_INFO);
+    arg.a = GTKRECENTINFO2RVAL(a);
+    arg.b = GTKRECENTINFO2RVAL(b);
     return NUM2INT(G_PROTECT_CALLBACK(invoke_callback, &arg));
 }
 
@@ -128,7 +128,7 @@ rg_items(VALUE self)
     GList* list = gtk_recent_chooser_get_items(_SELF(self));
     VALUE ary = rb_ary_new();
     while (list) {
-        rb_ary_push(ary, BOXED2RVAL(list->data, GTK_TYPE_RECENT_INFO));
+        rb_ary_push(ary, GTKRECENTINFO2RVAL(list->data));
         gtk_recent_info_unref(list->data);
         list = list->next;
     }

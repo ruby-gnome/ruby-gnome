@@ -56,7 +56,7 @@ rg_targets(VALUE self)
     VALUE ary = rb_ary_new();
 
     for (cur = list; cur != NULL; cur = cur->next) {
-        rb_ary_push(ary, BOXED2RVAL((GdkAtom)cur->data, GDK_TYPE_ATOM));
+        rb_ary_push(ary, GDKATOM2RVAL((GdkAtom)cur->data));
     }
     return ary;
 }
@@ -121,7 +121,7 @@ rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_selection(VALUE self)
 {
-    return BOXED2RVAL(gdk_drag_get_selection(_SELF(self)), GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(gdk_drag_get_selection(_SELF(self)));
 }
 
 static VALUE

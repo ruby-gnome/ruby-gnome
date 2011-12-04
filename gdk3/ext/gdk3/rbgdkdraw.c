@@ -81,13 +81,13 @@ rg_size(VALUE self)
 static VALUE
 rg_clip_region(VALUE self)
 {
-    return BOXED2RVAL(gdk_drawable_get_clip_region(_SELF(self)), GDK_TYPE_REGION);
+    return GDKREGION2RVAL(gdk_drawable_get_clip_region(_SELF(self)));
 }
 
 static VALUE
 rg_visible_region(VALUE self)
 {
-    return BOXED2RVAL(gdk_drawable_get_visible_region(_SELF(self)), GDK_TYPE_REGION);
+    return GDKREGION2RVAL(gdk_drawable_get_visible_region(_SELF(self)));
 }
 
 static VALUE

@@ -117,7 +117,7 @@ Init_gtk_gdk_atom(VALUE mGdk)
     RG_DEF_METHOD_OPERATOR("==", equal, 1);
 
     /* This is a trick to define GDK_NONE as a BOXED object */
-    none = BOXED2RVAL((gpointer)1, GDK_TYPE_ATOM);
+    none = GDKATOM2RVAL((gpointer)1);
     rb_define_const(RG_TARGET_NAMESPACE, "NONE", none);
     _SELF(none) = GDK_NONE;
 }           

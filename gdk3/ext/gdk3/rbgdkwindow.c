@@ -607,7 +607,7 @@ rg_frame_extents(VALUE self)
 {
     GdkRectangle rect;
     gdk_window_get_frame_extents(_SELF(self), &rect);
-    return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(&rect);
 }
 
 static VALUE

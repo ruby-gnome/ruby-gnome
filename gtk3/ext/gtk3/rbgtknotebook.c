@@ -317,7 +317,7 @@ signal_g2r_func(G_GNUC_UNUSED guint num, const GValue *values)
     GtkNotebookPageData npp;
     npp.parent = GVAL2RVAL(&values[0]);
     npp.page = (GtkNotebookPage*)g_value_get_pointer(&values[1]);
-    return rb_ary_new3(3, GVAL2RVAL(&values[0]), BOXED2RVAL(&npp, GTK_TYPE_NOTEBOOK_PAGE),
+    return rb_ary_new3(3, GVAL2RVAL(&values[0]), GTKNOTEBOOKPAGE2RVAL(&npp),
                        GVAL2RVAL(&values[2]));
 }
 */

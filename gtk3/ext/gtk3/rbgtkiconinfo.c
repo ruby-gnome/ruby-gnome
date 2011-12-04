@@ -70,7 +70,7 @@ rg_embedded_rect(VALUE self)
     gboolean ret = gtk_icon_info_get_embedded_rect(_SELF(self), &rectangle);
 
     if (ret)
-        return BOXED2RVAL(&rectangle, GDK_TYPE_RECTANGLE);
+        return GDKRECTANGLE2RVAL(&rectangle);
     else
         return Qnil;
 }

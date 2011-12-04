@@ -133,7 +133,7 @@ rg_accel_path(VALUE self)
 static VALUE
 rg_accel_closure(VALUE self)
 {
-    return BOXED2RVAL(gtk_action_get_accel_closure(_SELF(self)), G_TYPE_CLOSURE);
+    return GCLOSURE2RVAL(gtk_action_get_accel_closure(_SELF(self)));
 }
 
 static void

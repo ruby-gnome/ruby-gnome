@@ -187,7 +187,7 @@ rg_intersect(VALUE self, VALUE area)
     gboolean ret = gtk_widget_intersect(_SELF(self),
                                         RVAL2GDKRECTANGLE(area),
                                         &intersection);
-    return ret ? BOXED2RVAL(&intersection, GDK_TYPE_RECTANGLE) : Qnil;
+    return ret ? GDKRECTANGLE2RVAL(&intersection) : Qnil;
 }
 
 static VALUE
@@ -709,7 +709,7 @@ rg_allocation(VALUE self)
 {
     GtkAllocation alloc;
     gtk_widget_get_allocation(_SELF(self), &alloc);
-    return BOXED2RVAL(&alloc, GTK_TYPE_ALLOCATION);
+    return GTKALLOCATION2RVAL(&alloc);
 }
 
 static VALUE
@@ -780,7 +780,7 @@ rg_s_binding_set(VALUE self)
     }
     g_type_class_unref(gclass);
 
-    return BOXED2RVAL(binding_set, GTK_TYPE_BINDING_SET);
+    return GTKBINDINGSET2RVAL(binding_set);
 }
 
 static VALUE
@@ -794,7 +794,7 @@ static VALUE
 widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkAllocation* alloc = (GtkAllocation*)g_value_get_boxed(&values[1]);
-    return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]), GTKALLOCATION2RVAL(alloc));
 }
 
 static VALUE

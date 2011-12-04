@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE mSelection
-#define GATOM2RVAL(g) (BOXED2RVAL(g, GDK_TYPE_ATOM))
+#define GATOM2RVAL(g) (GDKATOM2RVAL(g))
 
 static VALUE
 rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)

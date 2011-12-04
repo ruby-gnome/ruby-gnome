@@ -39,7 +39,7 @@ rg_preedit_string(VALUE self)
     gint cursor_pos;
 
     gtk_im_context_get_preedit_string(_SELF(self), &str, &attrs, &cursor_pos);
-    return rb_ary_new3(3, CSTR2RVAL(str), BOXED2RVAL(attrs, PANGO_TYPE_ATTR_LIST), 
+    return rb_ary_new3(3, CSTR2RVAL(str), PANGOATTRLIST2RVAL(attrs), 
                        INT2NUM(cursor_pos));
 }
 

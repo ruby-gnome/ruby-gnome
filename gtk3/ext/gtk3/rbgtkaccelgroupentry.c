@@ -64,13 +64,13 @@ rg_initialize(VALUE self)
 static VALUE
 rg_accel_key(VALUE self)
 {
-    return BOXED2RVAL(&_SELF(self)->key, GTK_TYPE_ACCEL_KEY);
+    return GTKACCELKEY2RVAL(&_SELF(self)->key);
 }
 
 static VALUE
 rg_closure(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self)->closure, G_TYPE_CLOSURE);
+    return GCLOSURE2RVAL(_SELF(self)->closure);
 }
 
 static VALUE

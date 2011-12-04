@@ -39,7 +39,7 @@ static VALUE
 rg_appearance(VALUE self)
 {
     GtkTextAppearance app = _SELF(self)->appearance;
-    return BOXED2RVAL(&app, GTK_TYPE_TEXT_APPEARANCE);
+    return GTKTEXTAPPEARANCE2RVAL(&app);
 }
 
 static VALUE
@@ -81,7 +81,7 @@ rg_font(VALUE self)
 {
     VALUE val;
     if (_SELF(self)->font == NULL) return Qnil;
-    val = BOXED2RVAL(_SELF(self)->font, PANGO_TYPE_FONT_DESCRIPTION);
+    val = PANGOFONTDESCRIPTION2RVAL(_SELF(self)->font);
     G_CHILD_SET(self, rb_intern("font"), val);
     return val;
 }
@@ -190,7 +190,7 @@ rg_tabs(VALUE self)
 {
     VALUE val;
     if (_SELF(self)->tabs == NULL) return Qnil;
-    val = BOXED2RVAL(_SELF(self)->tabs, PANGO_TYPE_TAB_ARRAY);
+    val = PANGOTABARRAY2RVAL(_SELF(self)->tabs);
     G_CHILD_SET(self, rb_intern("tabs"), val);
     return val;
 }
@@ -221,7 +221,7 @@ rg_language(VALUE self)
 {
     VALUE val;
     if (_SELF(self)->language == NULL) return Qnil;
-    val = BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
+    val = PANGOLANGUAGE2RVAL(_SELF(self)->language);
     G_CHILD_SET(self, rb_intern("language"), val);
     return val;
 }

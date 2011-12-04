@@ -147,7 +147,7 @@ rg_m_disable_setlocale(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_default_language(G_GNUC_UNUSED VALUE self)
 {
-    return BOXED2RVAL(gtk_get_default_language(), PANGO_TYPE_LANGUAGE);
+    return PANGOLANGUAGE2RVAL(gtk_get_default_language());
 }
 
 typedef void (*SignalFunc) (int);

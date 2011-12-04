@@ -89,19 +89,19 @@ static VALUE
 rg_selection(VALUE self)
 {
     GdkAtom selection = _SELF(self)->selection;
-    return BOXED2RVAL(&selection, GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(&selection);
 }
 
 static VALUE
 rg_target(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self)->target, GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(_SELF(self)->target);
 }
 
 static VALUE
 rg_type(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self)->type, GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(_SELF(self)->type);
 }
 
 static VALUE
@@ -120,7 +120,7 @@ rg_data(VALUE self)
 static VALUE
 rg_display(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self)->display, GDK_TYPE_DISPLAY);
+    return GDKDISPLAY2RVAL(_SELF(self)->display);
 }
 */
 
@@ -224,7 +224,7 @@ rg_targets(VALUE self)
         int i;
         result = rb_ary_new2(n_atoms);
         for (i = 0; i < n_atoms; i++){
-            rb_ary_push(result, BOXED2RVAL(targets[i], GDK_TYPE_ATOM));
+            rb_ary_push(result, GDKATOM2RVAL(targets[i]));
         }
     }
     g_free(targets);

@@ -52,7 +52,7 @@ rg_lookup(VALUE self, VALUE id)
     GtkIconSet *icon_set;
 
     icon_set = gtk_icon_factory_lookup(_SELF(self), RVAL2CSTR(id));
-    return BOXED2RVAL(icon_set, GTK_TYPE_ICON_SET);
+    return GTKICONSET2RVAL(icon_set);
 }
 
 static VALUE
@@ -61,7 +61,7 @@ rg_s_lookup_default(G_GNUC_UNUSED VALUE self, VALUE id)
     GtkIconSet *icon_set;
 
     icon_set = gtk_icon_factory_lookup_default(RVAL2CSTR(id));
-    return BOXED2RVAL(icon_set, GTK_TYPE_ICON_SET);
+    return GTKICONSET2RVAL(icon_set);
 }
 
 static VALUE

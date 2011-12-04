@@ -451,7 +451,7 @@ rg_resize_grip_area(VALUE self)
 
     result = gtk_window_get_resize_grip_area(_SELF(self), &rect);
 
-    return result ? BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE) : Qnil;
+    return result ? GDKRECTANGLE2RVAL(&rect) : Qnil;
 }
 
 static VALUE

@@ -132,7 +132,7 @@ rg_set_window_type(VALUE self, VALUE val)
 static VALUE
 rg_cursor(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self)->cursor, GDK_TYPE_CURSOR);
+    return GDKCURSOR2RVAL(_SELF(self)->cursor);
 }
 static VALUE
 rg_set_cursor(VALUE self, VALUE val)
