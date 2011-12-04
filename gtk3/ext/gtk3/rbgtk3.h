@@ -22,8 +22,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef _RBGTK_H
-#define _RBGTK_H
+#ifndef ___RBGTK3_H__
+#define ___RBGTK3_H__
 
 #include <rbgobject.h>
 #include <rbgtkmacros.h>
@@ -126,4 +126,4 @@ extern void rbgtkcontainer_register_child_property_getter(GType gtype,
  */
 extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);
 
-#endif /* _RBGTK_H */
+#endif /* ___RBGTK3_H__ */

@@ -29,7 +29,7 @@
 #include <rbgdk.h>
 #include <rbgdkconversions.h>
 #include <gio2.h>
-#include "rbgtk.h"
+#include "rbgtk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
 #else
