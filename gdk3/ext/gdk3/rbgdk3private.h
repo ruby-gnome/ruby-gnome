@@ -22,8 +22,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef _RBGDK_GLOBAL_H
-#define _RBGDK_GLOBAL_H
+#ifndef _RBGDK3PRIVATE_H
+#define _RBGDK3PRIVATE_H
 
 #include <rb_cairo.h>
 #include "rbgdk.h"
@@ -86,4 +86,4 @@ G_GNUC_INTERNAL void Init_gtk_gdk_x11(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gtk_gdk_draw(VALUE mGdk);
 */
 
-#endif /* _RBGDK_GLOBAL_H */
+#endif /* _RBGDK3PRIVATE_H */
