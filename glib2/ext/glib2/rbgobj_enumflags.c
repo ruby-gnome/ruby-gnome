@@ -24,8 +24,8 @@
 #include <ctype.h>
 
 typedef struct {
-	char *original;
-	char *replacement;
+    char *original;
+    char *replacement;
 } constant_map;
 
 static GSList *rbgobj_cmap = NULL;
@@ -33,66 +33,60 @@ static GSList *rbgobj_cmap = NULL;
 static gint
 rbgobj_constant_find(constant_map *a, char *name)
 {
-      return strcmp(a->original, name);
+    return strcmp(a->original, name);
 }
 
 void
 rbgobj_constant_remap(const char *original, const char *replacement)
 {
-      constant_map *map = g_new(constant_map,1);
-      
-      map -> original     = g_strdup(original);
-      map -> replacement  = g_strdup(replacement);
-      
-      rbgobj_cmap = g_slist_append(rbgobj_cmap, map);
+    constant_map *map = g_new(constant_map,1);
+
+    map->original     = g_strdup(original);
+    map->replacement  = g_strdup(replacement);
+
+    rbgobj_cmap = g_slist_append(rbgobj_cmap, map);
 }
 
 char *
 rg_obj_constant_lookup(const char *name)
 {
-      GSList *p = rbgobj_cmap;
-      
-      p = g_slist_find_custom(rbgobj_cmap, name,
-			      (GCompareFunc)rbgobj_constant_find);
-      if (p)
-      {
-          char *replacement;
-	  constant_map *map;
-	  
-	  map         = (constant_map*) p -> data;
-	  rbgobj_cmap = g_slist_delete_link(rbgobj_cmap, p);
-	  replacement = map -> replacement;
-	  
-	  g_free(map -> original);
-	  g_free(map);
-	  
-	  return replacement;
-      }
-      return NULL;
+    GSList *p = rbgobj_cmap;
+
+    p = g_slist_find_custom(rbgobj_cmap, name,
+                            (GCompareFunc)rbgobj_constant_find);
+    if (p) {
+        char *replacement;
+        constant_map *map;
+
+        map         = (constant_map *)p->data;
+        rbgobj_cmap = g_slist_delete_link(rbgobj_cmap, p);
+        replacement = map->replacement;
+
+        g_free(map->original);
+        g_free(map);
+
+        return replacement;
+    }
+
+    return NULL;
 }
 
-void 
+void
 rbgobj_define_const(VALUE mod, const char *name,
 			VALUE value)
 {
-     if (name[0] >= 'A' && name[0] <= 'Z')
-     {
-         rb_define_const(mod, name, value);
-     }
-     else
-     {
-         char *new_name = rg_obj_constant_lookup(name);
-	 
-	 if (new_name)
-	 {
-	     rb_define_const(mod, new_name, value);
-	     g_free(new_name);
-	 }
-	 else
-	 {
-	     rb_warn("Invalid constant name '%s' - skipped", name);
-	 }
-     }
+    if (name[0] >= 'A' && name[0] <= 'Z') {
+        rb_define_const(mod, name, value);
+    } else {
+        char *new_name = rg_obj_constant_lookup(name);
+
+        if (new_name) {
+            rb_define_const(mod, new_name, value);
+            g_free(new_name);
+        } else {
+            rb_warn("Invalid constant name '%s' - skipped", name);
+        }
+    }
 }
 
 void
@@ -113,4 +107,3 @@ Init_gobject_genumflags(void)
     Init_gobject_genums();
     Init_gobject_gflags();
 }
-
