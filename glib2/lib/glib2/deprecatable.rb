@@ -1,5 +1,12 @@
 module GLib
   module Deprecatable
+    unless respond_to?(:define_singleton_method)
+      def define_singleton_method(name, &block)
+        singleton_class = class << self; self; end
+        singleton_class.__send__(:define_method, name, &block)
+      end
+    end
+
     @@deprecated_const = {}
     def define_deprecated_const(deprecated_const, new_const = {})
       @@deprecated_const[self] ||= {}
@@ -58,8 +65,8 @@ module GLib
 
           define_method(connect_method) do |signal, *margs, &mblock|
             signal = signal.to_s.gsub('_', '-').to_sym
-            table = @@deprecated_signal.select{|c,| self.is_a?(c)}.values.inject{|r, i| r.merge(i)}
-            if new_signal = (table || {})[signal]
+            signals = @@deprecated_signal[self]
+            if new_signal = (signals || {})[signal]
               msg = "#{caller[0]}: '#{signal}' signal has been deprecated."
               case new_signal
               when String, Symbol
