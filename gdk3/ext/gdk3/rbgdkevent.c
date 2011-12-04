@@ -42,7 +42,7 @@ make_gdkevent(GdkEvent *ev)
 GdkEvent*
 get_gdkevent(VALUE event)
 {
-    return NIL_P(event) ? NULL : RVAL2BOXED(event, GDK_TYPE_EVENT);
+    return NIL_P(event) ? NULL : RVAL2GDKEVENT(event);
 }
 
 /***********************************************/
@@ -445,7 +445,7 @@ gdkeventexpose_area(VALUE self)
 static VALUE
 gdkeventexpose_set_area(VALUE self, VALUE rect)
 {
-    GdkRectangle* grect = (GdkRectangle*)RVAL2BOXED(rect, GDK_TYPE_RECTANGLE);
+    GdkRectangle* grect = RVAL2GDKRECTANGLE(rect);
     GdkEventExpose event = get_gdkevent(self)->expose;
     event.area.x = grect->x;
     event.area.y = grect->y;
@@ -462,7 +462,7 @@ gdkeventexpose_region(VALUE self)
 static VALUE
 gdkeventexpose_set_region(VALUE self, VALUE region)
 {
-    get_gdkevent(self)->expose.region = RVAL2BOXED(region, GDK_TYPE_REGION);
+    get_gdkevent(self)->expose.region = RVAL2GDKREGION(region);
     return self;
 }
 

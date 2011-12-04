@@ -45,7 +45,7 @@ gdk_windowattr_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cWindowAttr
-#define _SELF(w) ((GdkWindowAttr*)RVAL2BOXED(w, GDK_TYPE_WINDOW_ATTR))
+#define _SELF(w) (RVAL2GDKWINDOWATTR(w))
 
 static VALUE
 rg_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
@@ -137,7 +137,7 @@ rg_cursor(VALUE self)
 static VALUE
 rg_set_cursor(VALUE self, VALUE val)
 {
-    _SELF(self)->cursor = (GdkCursor*)(RVAL2BOXED(val, GDK_TYPE_CURSOR));
+    _SELF(self)->cursor = RVAL2GDKCURSOR(val);
     return self;
 }
 

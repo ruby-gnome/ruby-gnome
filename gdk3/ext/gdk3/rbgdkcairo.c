@@ -66,7 +66,7 @@ static VALUE
 rg_gdk_rectangle(VALUE self, VALUE rectangle)
 {
     gdk_cairo_rectangle(_SELF(self), 
-                        (GdkRectangle*)RVAL2BOXED(rectangle, GDK_TYPE_RECTANGLE));
+                        RVAL2GDKRECTANGLE(rectangle));
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }

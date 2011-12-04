@@ -333,7 +333,7 @@ rg_m_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE
                      RVAL2CBOOL(owner_events),
                      RVAL2GFLAGS(event_mask, GDK_TYPE_EVENT_MASK),
                      NIL_P(confine_to)?NULL:RVAL2GDKWINDOW(confine_to),
-                     NIL_P(cursor)?NULL:(GdkCursor*)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
+                     NIL_P(cursor)?NULL:RVAL2GDKCURSOR(cursor),
                      NUM2INT(time)), GDK_TYPE_GRAB_STATUS);
 }
 

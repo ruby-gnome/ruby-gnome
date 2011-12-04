@@ -25,7 +25,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cRectangle
-#define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
+#define _SELF(r) (RVAL2GDKRECTANGLE(r))
 
 static VALUE
 rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)

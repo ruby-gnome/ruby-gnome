@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cAtom
-#define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)
+#define _SELF(a) ((RVAL2GDKATOM(a))->atom)
 
 /*****************************************/
 static GdkAtomData *
@@ -50,7 +50,7 @@ get_gdkatom(VALUE atom)
 {
     if (TYPE(atom) == T_STRING)
         return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
-    return ((GdkAtomData*)RVAL2BOXED(atom, GDK_TYPE_ATOM))->atom;
+    return (RVAL2GDKATOM(atom))->atom;
 }
 /*****************************************/
 

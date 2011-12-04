@@ -335,7 +335,7 @@ rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
     gdk_draw_glyphs(_SELF(self), RVAL2GDKGC(gc), RVAL2PANGOFONT(font),
                     NUM2INT(x), NUM2INT(y), 
-                    (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
+                    RVAL2PANGOGLYPHSTRING(glyphs));
     return self;
 }
 
@@ -343,10 +343,10 @@ static VALUE
 rg_draw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
     gdk_draw_glyphs_transformed(_SELF(self), RVAL2GDKGC(gc), 
-                                NIL_P(matrix) ? (PangoMatrix*)NULL : (PangoMatrix*)(RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)),
+                                NIL_P(matrix) ? (PangoMatrix*)NULL : RVAL2PANGOMATRIX(matrix),
                                 RVAL2PANGOFONT(font),
                                 NUM2INT(x), NUM2INT(y), 
-                                (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
+                                RVAL2PANGOGLYPHSTRING(glyphs));
     return self;
 }
 
@@ -359,7 +359,7 @@ rg_draw_layout_line(int argc, VALUE *argv, VALUE self)
 
     gdk_draw_layout_line_with_colors(_SELF(self), RVAL2GDKGC(gc),
                                      NUM2INT(x), NUM2INT(y),
-                                     (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
+                                     RVAL2PANGOLAYOUTLINE(line),
                                      RVAL2GDKCOLOR(fg),
                                      RVAL2GDKCOLOR(bg));
 
