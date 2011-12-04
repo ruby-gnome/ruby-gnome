@@ -188,10 +188,11 @@ rclosure_invalidate(G_GNUC_UNUSED gpointer data, GClosure *closure)
 static void
 gr_closure_holder_mark(GRClosure *rclosure)
 {
-    if (rclosure) {
-        rb_gc_mark(rclosure->callback);
-        rb_gc_mark(rclosure->extra_args);
-    }
+    if (!rclosure)
+        return;
+
+    rb_gc_mark(rclosure->callback);
+    rb_gc_mark(rclosure->extra_args);
 }
 
 static void
