@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 static GtkAllocation *
 gtk_allocation_copy(const GtkAllocation *alloc)

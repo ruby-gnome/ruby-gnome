@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #if GTK_CHECK_VERSION(3, 2, 0)
 

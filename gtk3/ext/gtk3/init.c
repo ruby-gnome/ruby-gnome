@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 #include "gmodule.h"
 
 VALUE treeiter_set_value_table;

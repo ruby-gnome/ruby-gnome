@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 
 #ifdef HAVE_GTK_PLUG_GET_TYPE
 

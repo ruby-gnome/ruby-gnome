@@ -22,7 +22,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h"
+#include "rbgtk3private.h"
 #ifdef HAVE_SYS_TIME_H
 # include <sys/time.h>
 #endif
