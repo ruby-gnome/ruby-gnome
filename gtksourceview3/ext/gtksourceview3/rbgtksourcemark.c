@@ -26,7 +26,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cMark
-#define _SELF(self) (GTK_SOURCE_MARK(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCEMARK(self))
 
 /* Class method: new(name, category)
  * name: mark name (string)

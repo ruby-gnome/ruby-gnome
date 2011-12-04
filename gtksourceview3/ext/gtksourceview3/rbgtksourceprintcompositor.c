@@ -25,7 +25,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cPrintCompositor
-#define _SELF(self) (GTK_SOURCE_PRINT_COMPOSITOR(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCEPRINTCOMPOSITOR(self))
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
 /*

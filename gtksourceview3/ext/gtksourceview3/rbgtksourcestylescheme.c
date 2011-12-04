@@ -25,7 +25,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cStyleScheme
-#define _SELF(self) (GTK_SOURCE_STYLE_SCHEME(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCESTYLESCHEME(self))
 
 /* Method: authors
  *

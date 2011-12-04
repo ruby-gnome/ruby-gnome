@@ -27,7 +27,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cStyleSchemeManager
-#define _SELF(self) (GTK_SOURCE_STYLE_SCHEME_MANAGER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCESTYLESCHEMEMANAGER(self))
 
 static VALUE rb_mGtkSource;
 

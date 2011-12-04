@@ -27,7 +27,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cView
-#define _SELF(self) (GTK_SOURCE_VIEW(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCEVIEW(self))
 
 /*
  * Class method: new(buffer=nil)

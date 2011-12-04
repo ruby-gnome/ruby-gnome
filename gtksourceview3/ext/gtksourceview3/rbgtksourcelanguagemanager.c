@@ -27,7 +27,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cLanguageManager
-#define _SELF(self) (GTK_SOURCE_LANGUAGE_MANAGER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCELANGUAGEMANAGER(self))
 
 static VALUE rb_mGtkSource;
 

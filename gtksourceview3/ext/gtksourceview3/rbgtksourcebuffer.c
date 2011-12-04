@@ -28,7 +28,7 @@
  * Text buffer object for Gtk::SourceView.
  */
 
-#define _SELF(self) (GTK_SOURCE_BUFFER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCEBUFFER(self))
 #define RVAL2ITR(i) ((GtkTextIter*)RVAL2BOXED(i, GTK_TYPE_TEXT_ITER))
 
 /*

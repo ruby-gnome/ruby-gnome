@@ -27,7 +27,7 @@
  */
 
 #define RG_TARGET_NAMESPACE cLanguage
-#define _SELF(self) (GTK_SOURCE_LANGUAGE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSOURCELANGUAGE(self))
 
 /* Method: get_metadata(name)
  * name: the metadata property name (string)
