@@ -53,7 +53,6 @@
 #define RVAL2GDKNATIVEWINDOW(value) ((GdkNativeWindow)NUM2UINT(value))
 #define GDKNATIVEWINDOW2RVAL(value) UINT2NUM((guint32)value)
 */
-#define RVAL2GDKWINDOW(value) (GDK_WINDOW(RVAL2GOBJ(value)))
 #define GDKWINDOW2RVAL(value) (GOBJ2RVAL(value))
 
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())

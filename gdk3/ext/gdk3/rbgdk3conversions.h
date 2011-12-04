@@ -22,9 +22,31 @@
 #ifndef __RBGDK3CONVERSIONS_H__
 #define __RBGDK3CONVERSIONS_H__
 
-#define RVAL2GDKCOLOR(color) ((GdkColor *)RVAL2BOXED(color, GDK_TYPE_COLOR))
-#define GDKCOLOR2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_COLOR))
-#define RVAL2GDKRGBA(color) ((GdkRGBA *)RVAL2BOXED(color, GDK_TYPE_RGBA))
-#define GDKRGBA2RVAL(color) (BOXED2RVAL(color, GDK_TYPE_RGBA))
+#define RVAL2GDKDEVICE(o)                  (GDK_DEVICE(RVAL2GOBJ(o)))
+#define RVAL2GDKDRAGCONTEXT(o)             (GDK_DRAG_CONTEXT(RVAL2GOBJ(o)))
+#define RVAL2GDKPANGORENDERER(o)           (GDK_PANGO_RENDERER(RVAL2GOBJ(o)))
+#define RVAL2GDKVISUAL(o)                  (GDK_VISUAL(RVAL2GOBJ(o)))
+#define RVAL2GDKDISPLAYMANAGER(o)          (GDK_DISPLAY_MANAGER(RVAL2GOBJ(o)))
+#define RVAL2GDKDISPLAYOBJECT(o)           (GDK_DISPLAY_OBJECT(RVAL2GOBJ(o)))
+#define RVAL2GDKDRAWABLE(o)                (GDK_DRAWABLE(RVAL2GOBJ(o)))
+#define RVAL2GDKKEYMAP(o)                  (GDK_KEYMAP(RVAL2GOBJ(o)))
+#define RVAL2GDKPIXBUF(o)                  (GDK_PIXBUF(RVAL2GOBJ(o)))
+#define RVAL2GDKSCREEN(o)                  (GDK_SCREEN(RVAL2GOBJ(o)))
+#define RVAL2GDKWINDOW(o)                  (GDK_WINDOW(RVAL2GOBJ(o)))
+
+#define RVAL2GDKATOM(o)                    ((GdkAtomData*)RVAL2BOXED(o, GDK_TYPE_ATOM))
+#define GDKATOM2RVAL(o)                    (BOXED2RVAL(o, GDK_TYPE_ATOM))
+#define RVAL2GDKCOLOR(o)                   ((GdkColor*)RVAL2BOXED(o, GDK_TYPE_COLOR))
+#define GDKCOLOR2RVAL(o)                   (BOXED2RVAL(o, GDK_TYPE_COLOR))
+#define RVAL2GDKGEOMETRY(o)                ((GdkGeometry*)RVAL2BOXED(o, GDK_TYPE_GEOMETRY))
+#define GDKGEOMETRY2RVAL(o)                (BOXED2RVAL(o, GDK_TYPE_GEOMETRY))
+#define RVAL2GDKRECTANGLE(o)               ((GdkRectangle*)RVAL2BOXED(o, GDK_TYPE_RECTANGLE))
+#define GDKRECTANGLE2RVAL(o)               (BOXED2RVAL(o, GDK_TYPE_RECTANGLE))
+#define RVAL2GDKRGBA(o)                    ((GdkRGBA*)RVAL2BOXED(o, GDK_TYPE_RGBA))
+#define GDKRGBA2RVAL(o)                    (BOXED2RVAL(o, GDK_TYPE_RGBA))
+#define RVAL2GDKTIMECOORD(o)               ((GdkTimeCoord*)RVAL2BOXED(o, GDK_TYPE_TIME_COORD))
+#define GDKTIMECOORD2RVAL(o)               (BOXED2RVAL(o, GDK_TYPE_TIME_COORD))
+#define RVAL2GDKWINDOWATTR(o)              ((GdkWindowAttr*)RVAL2BOXED(o, GDK_TYPE_WINDOW_ATTR))
+#define GDKWINDOWATTR2RVAL(o)              (BOXED2RVAL(o, GDK_TYPE_WINDOW_ATTR))
 
 #endif /* __RBGDK3CONVERSIONS_H__ */
