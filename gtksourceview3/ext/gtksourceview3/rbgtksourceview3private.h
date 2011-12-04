@@ -20,8 +20,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGTKSOURCEVIEWMAIN_H_
-#define __RBGTKSOURCEVIEWMAIN_H_
+#ifndef __RBGTKSOURCEVIEW3PRIVATE_H_
+#define __RBGTKSOURCEVIEW3PRIVATE_H_
 
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourcelanguage.h>
@@ -38,4 +38,4 @@
 #include "rbgtk.h"
 #include "rbgtksourceview3version.h"
 
-#endif /* __RBGTKSOURCEVIEWMAIN_H_ */
+#endif /* __RBGTKSOURCEVIEW3PRIVATE_H_ */
