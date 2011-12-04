@@ -25,8 +25,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cLayout
-#define _SELF(self) (GTK_LAYOUT(RVAL2GOBJ(self)))
-#define RVAL2ADJ(a) (GTK_ADJUSTMENT(RVAL2GOBJ(a)))
+#define _SELF(self) (RVAL2GTKLAYOUT(self))
+#define RVAL2ADJ(a) (RVAL2GTKADJUSTMENT(a))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -46,7 +46,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_put(VALUE self, VALUE widget, VALUE x, VALUE y)
 {
-    gtk_layout_put(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+    gtk_layout_put(_SELF(self), RVAL2GTKWIDGET(widget),
                    NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -54,7 +54,7 @@ rg_put(VALUE self, VALUE widget, VALUE x, VALUE y)
 static VALUE
 rg_move(VALUE self, VALUE widget, VALUE x, VALUE y)
 {
-    gtk_layout_move(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+    gtk_layout_move(_SELF(self), RVAL2GTKWIDGET(widget),
                     NUM2INT(x), NUM2INT(y));
     return self;
 }

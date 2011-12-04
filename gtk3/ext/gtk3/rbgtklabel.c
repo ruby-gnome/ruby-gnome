@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cLabel
-#define _SELF(s) (GTK_LABEL(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKLABEL(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

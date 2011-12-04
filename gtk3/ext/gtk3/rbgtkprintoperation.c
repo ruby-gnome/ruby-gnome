@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cPrintOperation
-#define _SELF(s) (GTK_PRINT_OPERATION(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTOPERATION(s))
 
 static VALUE RG_TARGET_NAMESPACE;
 

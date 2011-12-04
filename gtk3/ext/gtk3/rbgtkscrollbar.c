@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cScrollbar
-#define _SELF(self) (GTK_SCROLLBAR(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSCROLLBAR(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -36,7 +36,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &orientation, &adjustment);
 
     widget = gtk_scrollbar_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
-                               NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
+                               NIL_P(adjustment) ? NULL : RVAL2GTKADJUSTMENT(adjustment));
 
     RBGTK_INITIALIZE(self, widget);
 

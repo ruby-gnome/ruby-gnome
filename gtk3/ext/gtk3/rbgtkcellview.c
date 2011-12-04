@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cCellView
-#define _SELF(self) (GTK_CELL_VIEW(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKCELLVIEW(self))
 
 static ID id_model;
 static ID id_text;
@@ -47,7 +47,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                 widget = gtk_cell_view_new_with_text(RVAL2CSTR(text));
             }
         } else if (rb_obj_is_kind_of(text, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
-            widget = gtk_cell_view_new_with_pixbuf(GDK_PIXBUF(RVAL2GOBJ(text)));
+            widget = gtk_cell_view_new_with_pixbuf(RVAL2GDKPIXBUF(text));
         } else {
             rb_raise(rb_eArgError, 
                      "invalid argument %s (expect String or Gdk::Pixbuf)", 

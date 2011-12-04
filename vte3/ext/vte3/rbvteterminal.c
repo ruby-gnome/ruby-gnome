@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbvte.h"
+#include "rbvte3private.h"
 
 #include <stdarg.h>
 #include <pwd.h>

@@ -36,7 +36,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_pulse(VALUE self)
 {
-    gtk_progress_bar_pulse(GTK_PROGRESS_BAR(RVAL2GOBJ(self)));
+    gtk_progress_bar_pulse(RVAL2GTKPROGRESSBAR(self));
     return self;
 }
 

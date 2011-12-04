@@ -22,13 +22,19 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef _RBGTK_H
-#define _RBGTK_H
+#ifndef __RBGTK3_H__
+#define __RBGTK3_H__
 
-#include <rbgobject.h>
-#include <rbgtkmacros.h>
 #include <gtk/gtk.h>
-#include <rbgtkconversions.h>
+#include <rbgobject.h>
+#include <rbgdk3.h>
+#include <gio2.h>
+
+#include "rbgtk3conversions.h"
+
+#define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
+#define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
+#define RBGTK_MICRO_VERSION RBGLIB_MICRO_VERSION
 
 #include <signal.h>
 
@@ -126,4 +132,4 @@ extern void rbgtkcontainer_register_child_property_getter(GType gtype,
  */
 extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);
 
-#endif /* _RBGTK_H */
+#endif /* __RBGTK3_H__ */

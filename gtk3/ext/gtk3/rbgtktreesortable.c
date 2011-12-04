@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE mTreeSortable
-#define _SELF(s)    (GTK_TREE_SORTABLE(RVAL2GOBJ(s)))
+#define _SELF(s)    (RVAL2GTKTREESORTABLE(s))
 
 static VALUE
 rg_sort_column_changed(VALUE self)

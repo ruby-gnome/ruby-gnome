@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cMisc
-#define _SELF(s) (GTK_MISC(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKMISC(s))
 
 static VALUE
 rg_set_alignment(VALUE self, VALUE xalign, VALUE yalign)

@@ -22,12 +22,12 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIMContext
-#define _SELF(self) (GTK_IM_CONTEXT(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKIMCONTEXT(self))
 
 static VALUE 
 rg_set_client_window(VALUE self, VALUE gdkwindow)
 {
-    gtk_im_context_set_client_window(_SELF(self), GDK_WINDOW(RVAL2GOBJ(gdkwindow)));
+    gtk_im_context_set_client_window(_SELF(self), RVAL2GDKWINDOW(gdkwindow));
     return self;
 }
 

@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cMenuItem
-#define _SELF(s) (GTK_MENU_ITEM(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKMENUITEM(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -63,7 +63,7 @@ mitem_set_submenu(VALUE self, VALUE child)
     if (submenu)
         G_CHILD_REMOVE(self, GOBJ2RVAL(submenu));
 
-    gtk_menu_item_set_submenu(item, GTK_WIDGET(RVAL2GOBJ(child)));
+    gtk_menu_item_set_submenu(item, RVAL2GTKWIDGET(child));
     G_CHILD_ADD(self, child);
     return self;
 }

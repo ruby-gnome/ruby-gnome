@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDisplay
-#define _SELF(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
+#define _SELF(i) RVAL2GDKDISPLAYOBJECT(i)
 
 static VALUE
 rg_close(VALUE self)
@@ -275,7 +275,7 @@ static VALUE
 rg_store_clipboard(VALUE self, VALUE rbclipboard_window, VALUE rbtime_, VALUE rbtargets)
 {
     GdkDisplay *display = _SELF(self);
-    GdkWindow *clipboard_window = GDK_WINDOW(RVAL2GOBJ(rbclipboard_window));
+    GdkWindow *clipboard_window = RVAL2GDKWINDOW(rbclipboard_window);
     guint32 time_ = NUM2UINT(rbtime_);
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);

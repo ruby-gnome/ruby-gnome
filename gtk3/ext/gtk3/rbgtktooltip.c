@@ -45,7 +45,7 @@ rg_set_text(VALUE self, VALUE text)
 static VALUE
 rg_set_icon(VALUE self, VALUE icon)
 {
-    gtk_tooltip_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon)));
+    gtk_tooltip_set_icon(_SELF(self), RVAL2GDKPIXBUF(icon));
     return self;
 }
 
@@ -59,7 +59,7 @@ rg_set_icon_from_stock(VALUE self, VALUE stock_id, VALUE size)
 static VALUE
 rg_set_custom(VALUE self, VALUE custom_widget)
 {
-    gtk_tooltip_set_custom(_SELF(self), GTK_WIDGET(RVAL2GOBJ(custom_widget)));
+    gtk_tooltip_set_custom(_SELF(self), RVAL2GTKWIDGET(custom_widget));
     return self;
 }
 

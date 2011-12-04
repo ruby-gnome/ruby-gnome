@@ -26,8 +26,8 @@
 
 /* TODO
 #define RG_TARGET_NAMESPACE cToolbar
-#define _SELF(self) (GTK_TOOLBAR(RVAL2GOBJ(self)))
-#define N_RVAL2WIDGET(w)  (NIL_P(w) ? NULL : GTK_WIDGET(RVAL2GOBJ(w)))
+#define _SELF(self) (RVAL2GTKTOOLBAR(self))
+#define N_RVAL2WIDGET(w)  (NIL_P(w) ? NULL : RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -80,7 +80,7 @@ rg_append(int argc, VALUE *argv, VALUE self)
                                        (gpointer)func, -1);
     } else {
         rb_scan_args(argc, argv, "12", &widget, &ttext, &ptext);
-        gtk_toolbar_append_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+        gtk_toolbar_append_widget(_SELF(self), RVAL2GTKWIDGET(widget),
                                   RVAL2CSTR_ACCEPT_NIL(ttext), RVAL2CSTR_ACCEPT_NIL(ptext));
         return widget;
     }
@@ -131,7 +131,7 @@ rg_prepend(int argc, VALUE *argv, VALUE self)
                                        (gpointer)func, 0);
     } else {
         rb_scan_args(argc, argv, "12", &widget, &ttext, &ptext);
-        gtk_toolbar_prepend_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+        gtk_toolbar_prepend_widget(_SELF(self), RVAL2GTKWIDGET(widget),
                                   RVAL2CSTR_ACCEPT_NIL(ttext), RVAL2CSTR_ACCEPT_NIL(ptext));
         return widget;
     }
@@ -184,12 +184,12 @@ rg_insert(int argc, VALUE *argv, VALUE self)
                                        (gpointer)func, NUM2INT(pos));
     } else if (rb_obj_is_kind_of(type, GTYPE2CLASS(GTK_TYPE_TOOL_ITEM))){
         rb_scan_args(argc, argv, "20", &pos, &widget);
-        gtk_toolbar_insert(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(widget)),
+        gtk_toolbar_insert(_SELF(self), RVAL2GTKTOOLITEM(widget),
                            NUM2INT(pos));
         return widget;
     } else {
         rb_scan_args(argc, argv, "22", &pos, &widget, &ttext, &ptext);
-        gtk_toolbar_insert_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+        gtk_toolbar_insert_widget(_SELF(self), RVAL2GTKWIDGET(widget),
                                   RVAL2CSTR_ACCEPT_NIL(ttext), RVAL2CSTR_ACCEPT_NIL(ptext),
                                   NUM2INT(pos));
         return widget;
@@ -201,7 +201,7 @@ rg_insert(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_item_index(VALUE self, VALUE item)
 {
-    return INT2NUM(gtk_toolbar_get_item_index(_SELF(self), GTK_TOOL_ITEM(RVAL2GOBJ(item))));
+    return INT2NUM(gtk_toolbar_get_item_index(_SELF(self), RVAL2GTKTOOLITEM(item)));
 }
 
 static VALUE
@@ -226,7 +226,7 @@ static VALUE
 rg_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
 {
     gtk_toolbar_set_drop_highlight_item(_SELF(self), 
-                                        GTK_TOOL_ITEM(RVAL2GOBJ(item)), 
+                                        RVAL2GTKTOOLITEM(item), 
                                         NUM2INT(index));
     return self;
 }

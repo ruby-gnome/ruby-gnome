@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAdjustment
-#define _SELF(self) (GTK_ADJUSTMENT(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKADJUSTMENT(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE value, VALUE lower, VALUE upper, VALUE step_inc, VALUE page_inc, VALUE page_size)

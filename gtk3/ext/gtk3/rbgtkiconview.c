@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIconView
-#define _SELF(s) (GTK_ICON_VIEW(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKICONVIEW(s))
 
 static ID id_model;
 static ID id_select_path;
@@ -37,7 +37,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     } else {
         G_CHILD_SET(self, id_model, model);
         RBGTK_INITIALIZE(self, 
-                         gtk_icon_view_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model))));
+                         gtk_icon_view_new_with_model(RVAL2GTKTREEMODEL(model)));
     }
     return Qnil;
 }

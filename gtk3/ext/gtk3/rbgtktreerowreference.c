@@ -69,11 +69,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "3", &proxy, &model, &path);
     G_CHILD_SET(self, id_proxy, proxy);
     ref = gtk_tree_row_reference_new_proxy(RVAL2GOBJ(proxy),
-                                           GTK_TREE_MODEL(RVAL2GOBJ(model)), 
+                                           RVAL2GTKTREEMODEL(model), 
                                            RVAL2GTKTREEPATH(path));
   } else {
     rb_scan_args(argc, argv, "2", &model, &path);
-    ref = gtk_tree_row_reference_new(GTK_TREE_MODEL(RVAL2GOBJ(model)), 
+    ref = gtk_tree_row_reference_new(RVAL2GTKTREEMODEL(model), 
                                      RVAL2GTKTREEPATH(path));
   }
   if (ref == NULL)

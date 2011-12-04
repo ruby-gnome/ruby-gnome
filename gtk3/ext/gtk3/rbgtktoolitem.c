@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cToolItem
-#define _SELF(self) (GTK_TOOL_ITEM(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKTOOLITEM(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -63,7 +63,7 @@ rg_set_tooltip(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "21", &tooltip, &tip_text, &tip_private);
 
-    gtk_tool_item_set_tooltip(_SELF(self), GTK_TOOLTIPS(RVAL2GOBJ(tooltip)),
+    gtk_tool_item_set_tooltip(_SELF(self), RVAL2GTKTOOLTIPS(tooltip),
                               RVAL2CSTR(tip_text), 
                               RVAL2CSTR_ACCEPT_NIL(tip_private));
     return self;
@@ -122,7 +122,7 @@ static VALUE
 rg_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
 {
     gtk_tool_item_set_proxy_menu_item(_SELF(self), RVAL2CSTR(menu_item_id),
-                                      GTK_WIDGET(RVAL2GOBJ(menu_item)));
+                                      RVAL2GTKWIDGET(menu_item));
     return self;
 }
 

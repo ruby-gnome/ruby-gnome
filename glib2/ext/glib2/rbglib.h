@@ -23,6 +23,8 @@
 #include <glib.h>
 #include "ruby.h"
 
+#include "rbglib2conversions.h"
+
 #ifndef __RBGLIB_H__
 #define __RBGLIB_H__
 

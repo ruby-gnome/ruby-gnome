@@ -22,8 +22,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeSelection
-#define _SELF(s) (GTK_TREE_SELECTION(RVAL2GOBJ(s)))
-#define RVAL2TREEMODEL(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKTREESELECTION(s))
+#define RVAL2TREEMODEL(s) (RVAL2GTKTREEMODEL(s))
 
 static VALUE
 rg_set_mode(VALUE self, VALUE type)

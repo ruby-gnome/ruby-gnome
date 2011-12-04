@@ -25,8 +25,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cBox
-#define _SELF(self) (GTK_BOX(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define _SELF(self) (RVAL2GTKBOX(self))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -57,11 +57,11 @@ box_pack_start_or_end(int argc, VALUE *argv, VALUE self, int start)
       case 2:
         expand = RVAL2CBOOL(arg1);
       default:
-        child = GTK_WIDGET(RVAL2GOBJ(arg0));
+        child = RVAL2GTKWIDGET(arg0);
         G_CHILD_ADD(self, arg0);
         break;
     }
-    widget = GTK_WIDGET(RVAL2GOBJ(self));
+    widget = RVAL2GTKWIDGET(self);
 
     if (start)
         gtk_box_pack_start(_SELF(self), child, expand, fill, padding);

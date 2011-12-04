@@ -33,16 +33,16 @@ rg_initialize(VALUE self)
 static VALUE
 rg_add(VALUE self, VALUE window)
 {
-    gtk_window_group_add_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
-                                    GTK_WINDOW(RVAL2GOBJ(window)));
+    gtk_window_group_add_window(RVAL2GTKWINDOWGROUP(self), 
+                                    RVAL2GTKWINDOW(window));
     return self;
 }
 
 static VALUE
 rg_remove(VALUE self, VALUE window)
 {
-    gtk_window_group_remove_window(GTK_WINDOW_GROUP(RVAL2GOBJ(self)), 
-                                       GTK_WINDOW(RVAL2GOBJ(window)));
+    gtk_window_group_remove_window(RVAL2GTKWINDOWGROUP(self), 
+                                       RVAL2GTKWINDOW(window));
     return self;
 }
 

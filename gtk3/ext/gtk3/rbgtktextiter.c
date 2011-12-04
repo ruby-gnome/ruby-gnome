@@ -24,7 +24,7 @@
 
 #define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
-#define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
+#define RVAL2TAG(t) (RVAL2GTKTEXTTAG(t))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
 static gboolean is_compat_240;

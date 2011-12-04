@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cStatusbar
-#define _SELF(self) (GTK_STATUSBAR(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSTATUSBAR(self))
 
 static VALUE
 rg_initialize(VALUE self)

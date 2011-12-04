@@ -44,7 +44,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 */
         }
     } else {
-        widget = gtk_file_chooser_button_new_with_dialog(GTK_WIDGET(RVAL2GOBJ(title)));
+        widget = gtk_file_chooser_button_new_with_dialog(RVAL2GTKWIDGET(title));
     }
 
     RBGTK_INITIALIZE(self, widget);

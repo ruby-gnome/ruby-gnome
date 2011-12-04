@@ -35,20 +35,20 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_priority(VALUE self)
 {
-    return INT2NUM(gtk_text_tag_get_priority(GTK_TEXT_TAG(RVAL2GOBJ(self))));
+    return INT2NUM(gtk_text_tag_get_priority(RVAL2GTKTEXTTAG(self)));
 }
 
 static VALUE
 rg_set_priority(VALUE self, VALUE priority)
 {
-    gtk_text_tag_set_priority(GTK_TEXT_TAG(RVAL2GOBJ(self)), NUM2INT(priority));
+    gtk_text_tag_set_priority(RVAL2GTKTEXTTAG(self), NUM2INT(priority));
     return priority;
 }
 
 static VALUE
 rg_event(VALUE self, VALUE event_object, VALUE event, VALUE iter)
 {
-    gboolean ret = gtk_text_tag_event(GTK_TEXT_TAG(RVAL2GOBJ(self)), 
+    gboolean ret = gtk_text_tag_event(RVAL2GTKTEXTTAG(self), 
                                       RVAL2GOBJ(event_object),
                                       RVAL2GEV(event),
                                       (GtkTextIter*)RVAL2BOXED(iter, GTK_TYPE_TEXT_ITER));

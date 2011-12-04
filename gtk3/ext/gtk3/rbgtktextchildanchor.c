@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextChildAnchor
-#define _SELF(self) GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(self))
+#define _SELF(self) RVAL2GTKTEXTCHILDANCHOR(self)
 
 static VALUE
 rg_initialize(VALUE self)

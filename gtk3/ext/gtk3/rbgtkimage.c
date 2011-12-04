@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cImage
-#define _SELF(s) (GTK_IMAGE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKIMAGE(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -47,19 +47,19 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         gtype = RVAL2GTYPE(arg1);
 /* deprecated
         if (gtype == GDK_TYPE_IMAGE){
-            widget = gtk_image_new_from_image(GDK_IMAGE(RVAL2GOBJ(arg1)),
-                                              GDK_BITMAP(RVAL2GOBJ(arg2)));
+            widget = gtk_image_new_from_image(RVAL2GDKIMAGE(arg1),
+                                              RVAL2GDKBITMAP(arg2));
         } else */if (gtype == GDK_TYPE_PIXBUF){
-            widget = gtk_image_new_from_pixbuf(GDK_PIXBUF(RVAL2GOBJ(arg1)));
+            widget = gtk_image_new_from_pixbuf(RVAL2GDKPIXBUF(arg1));
 /* deprecated
         } else if (gtype == GDK_TYPE_PIXMAP){
-            widget = gtk_image_new_from_pixmap(GDK_PIXMAP(RVAL2GOBJ(arg1)),
-                                               GDK_BITMAP(RVAL2GOBJ(arg2)));
+            widget = gtk_image_new_from_pixmap(RVAL2GDKPIXMAP(arg1),
+                                               RVAL2GDKBITMAP(arg2));
 */
         } else if (gtype == GTK_TYPE_ICON_SET){
             widget = gtk_image_new_from_icon_set((GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
-            widget = gtk_image_new_from_animation(GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
+            widget = gtk_image_new_from_animation(RVAL2GDKPIXBUFANIMATION(arg1));
         }
     }
     RBGTK_INITIALIZE(self, widget);
@@ -86,22 +86,22 @@ rg_set(int argc, VALUE *argv, VALUE self)
         gtype = RVAL2GTYPE(arg1);
 /* deprecated
         if (gtype == GDK_TYPE_IMAGE){
-            gtk_image_set_from_image(_SELF(self), GDK_IMAGE(RVAL2GOBJ(arg1)),
-                                     GDK_BITMAP(RVAL2GOBJ(arg2)));
+            gtk_image_set_from_image(_SELF(self), RVAL2GDKIMAGE(arg1),
+                                     RVAL2GDKBITMAP(arg2));
         } else */if (gtype == GDK_TYPE_PIXBUF){
-            gtk_image_set_from_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(arg1)));
+            gtk_image_set_from_pixbuf(_SELF(self), RVAL2GDKPIXBUF(arg1));
 
 /* deprecated
         } else if (gtype == GDK_TYPE_PIXMAP){
-            gtk_image_set_from_pixmap(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(arg1)),
-                                      GDK_BITMAP(RVAL2GOBJ(arg2)));
+            gtk_image_set_from_pixmap(_SELF(self), RVAL2GDKPIXMAP(arg1),
+                                      RVAL2GDKBITMAP(arg2));
 */
         } else if (gtype == GTK_TYPE_ICON_SET){
             gtk_image_set_from_icon_set(_SELF(self), 
                                         (GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), 
                                         RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
-            gtk_image_set_from_animation(_SELF(self), GDK_PIXBUF_ANIMATION(RVAL2GOBJ(arg1)));
+            gtk_image_set_from_animation(_SELF(self), RVAL2GDKPIXBUFANIMATION(arg1));
         } else {
             rb_raise(rb_eArgError, "invalid argument: %s", rb_class2name(arg1));
         }

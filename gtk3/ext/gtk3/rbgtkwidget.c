@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cWidget
-#define _SELF(self) (GTK_WIDGET(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKWIDGET(self))
 
 static VALUE style_prop_func_table;
 
@@ -125,7 +125,7 @@ rg_add_accelerator(VALUE self, VALUE sig, VALUE accel, VALUE key, VALUE mod, VAL
 {
     gtk_widget_add_accelerator(_SELF(self),
                                RVAL2CSTR(sig),
-                               GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
+                               RVAL2GTKACCELGROUP(accel),
                                NUM2INT(key),
                                RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE),
                                RVAL2GFLAGS(flag, GTK_TYPE_ACCEL_FLAGS));
@@ -136,7 +136,7 @@ static VALUE
 rg_remove_accelerator(VALUE self, VALUE accel, VALUE key, VALUE mod)
 {
     return CBOOL2RVAL(gtk_widget_remove_accelerator(_SELF(self),
-                                                    GTK_ACCEL_GROUP(RVAL2GOBJ(accel)),
+                                                    RVAL2GTKACCELGROUP(accel),
                                                     NUM2INT(key),
                                                     RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE)));
 }
@@ -145,7 +145,7 @@ static VALUE
 rg_set_accel_path(VALUE self, VALUE accel_path, VALUE accel_group)
 {
     gtk_widget_set_accel_path(_SELF(self), RVAL2CSTR(accel_path), 
-                              GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)));
+                              RVAL2GTKACCELGROUP(accel_group));
     return self;
 }
 
@@ -201,7 +201,7 @@ static VALUE
 rg_set_parent_window(VALUE self, VALUE parent_window)
 {
     gtk_widget_set_parent_window(_SELF(self), 
-                                 GDK_WINDOW(RVAL2GOBJ(parent_window)));
+                                 RVAL2GDKWINDOW(parent_window));
     return self;
 }
 
@@ -394,7 +394,7 @@ rg_s_install_style_property(VALUE self, VALUE spec)
 {
     const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
     GtkWidgetClass* gclass;
-    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+    GParamSpec* pspec = RVAL2GPARAMSPEC(spec);
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registered class",
@@ -498,7 +498,7 @@ rg_style_get_property(VALUE self, VALUE prop_name)
         GValue gval = G_VALUE_INIT;
         VALUE ret;
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        gtk_widget_style_get_property(GTK_WIDGET(RVAL2GOBJ(self)), name, &gval);
+        gtk_widget_style_get_property(RVAL2GTKWIDGET(self), name, &gval);
         ret = GVAL2RVAL(&gval);
         g_value_unset(&gval);
         return ret;
@@ -624,21 +624,21 @@ rg_mnemonic_labels(VALUE self)
 static VALUE
 rg_add_mnemonic_label(VALUE self, VALUE label)
 {
-    gtk_widget_add_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
+    gtk_widget_add_mnemonic_label(_SELF(self), RVAL2GTKWIDGET(label));
     return self;
 }
 
 static VALUE
 rg_remove_mnemonic_label(VALUE self, VALUE label)
 {
-    gtk_widget_remove_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
+    gtk_widget_remove_mnemonic_label(_SELF(self), RVAL2GTKWIDGET(label));
     return self;
 }
 
 static VALUE
 rg_set_tooltip_window(VALUE self, VALUE custom_window)
 {
-    gtk_widget_set_tooltip_window(_SELF(self), GTK_WINDOW(RVAL2GOBJ(custom_window)));
+    gtk_widget_set_tooltip_window(_SELF(self), RVAL2GTKWINDOW(custom_window));
     return self;
 }
 
@@ -664,7 +664,7 @@ rg_composited_p(VALUE self)
 static VALUE
 rg_set_window(VALUE self, VALUE window)
 {
-    gtk_widget_set_window(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)));
+    gtk_widget_set_window(_SELF(self), RVAL2GDKWINDOW(window));
     return self;
 }
 
@@ -801,7 +801,7 @@ static VALUE
 rg_add_device_events(VALUE self, VALUE device, VALUE events)
 {
     gtk_widget_add_device_events(_SELF(self),
-                                 GDK_DEVICE(RVAL2GOBJ(device)),
+                                 RVAL2GDKDEVICE(device),
                                  RVAL2GENUM(events, GDK_TYPE_EVENT_MASK));
 
     return self;
@@ -822,7 +822,7 @@ static VALUE
 rg_device_is_shadowed_p(VALUE self, VALUE device)
 {
     return CBOOL2RVAL(gtk_widget_device_is_shadowed(_SELF(self),
-                                                    GDK_DEVICE(RVAL2GOBJ(device))));
+                                                    RVAL2GDKDEVICE(device)));
 }
 
 static VALUE
@@ -850,7 +850,7 @@ static VALUE
 rg_get_device_enabled_p(VALUE self, VALUE device)
 {
     return CBOOL2RVAL(gtk_widget_get_device_enabled(_SELF(self),
-                                                    GDK_DEVICE(RVAL2GOBJ(device))));
+                                                    RVAL2GDKDEVICE(device)));
 }
 
 static VALUE
@@ -858,7 +858,7 @@ rg_get_device_events(VALUE self, VALUE device)
 {
     GdkEventMask mask;
 
-    mask = gtk_widget_get_device_events(_SELF(self), GDK_DEVICE(RVAL2GOBJ(device)));
+    mask = gtk_widget_get_device_events(_SELF(self), RVAL2GDKDEVICE(device));
 
     return GENUM2RVAL(mask, GDK_TYPE_EVENT_MASK);
 }
@@ -1063,7 +1063,7 @@ static VALUE
 rg_set_device_enabled(VALUE self, VALUE device, VALUE enabled)
 {
     gtk_widget_set_device_enabled(_SELF(self),
-                                  GDK_DEVICE(RVAL2GOBJ(device)),
+                                  RVAL2GDKDEVICE(device),
                                   RVAL2CBOOL(enabled));
 
     return self;
@@ -1073,7 +1073,7 @@ static VALUE
 rg_set_device_events(VALUE self, VALUE device, VALUE events)
 {
     gtk_widget_set_device_events(_SELF(self),
-                                 GDK_DEVICE(RVAL2GOBJ(device)),
+                                 RVAL2GDKDEVICE(device),
                                  RVAL2GENUM(events, GDK_TYPE_EVENT_MASK));
 
     return self;
@@ -1116,7 +1116,7 @@ rg_set_support_multidevice(VALUE self, VALUE support_multidevice)
 static VALUE
 rg_set_visual(VALUE self, VALUE visual)
 {
-    gtk_widget_set_visual(_SELF(self), GDK_VISUAL(RVAL2GOBJ(visual)));
+    gtk_widget_set_visual(_SELF(self), RVAL2GDKVISUAL(visual));
 
     return self;
 }

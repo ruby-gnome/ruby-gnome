@@ -48,7 +48,7 @@ rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
         StringValue(text);
 
-        num = gdk_text_property_to_text_list_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        num = gdk_text_property_to_text_list_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                          RVAL2ATOM(encoding),
                                                          NUM2INT(format),
                                                          (const guchar*)RVAL2CSTR(text),
@@ -87,7 +87,7 @@ rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
         StringValue(text);
 
-        num = gdk_text_property_to_utf8_list_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        num = gdk_text_property_to_utf8_list_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                          RVAL2ATOM(encoding),
                                                          NUM2INT(format),
                                                          (const guchar*)RVAL2CSTR(text),
@@ -124,7 +124,7 @@ rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         VALUE display, str;
 
         rb_scan_args(argc, argv, "20", &display, &str);
-        num = gdk_string_to_compound_text_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        num = gdk_string_to_compound_text_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                       RVAL2CSTR(str),
                                                       &encoding, &format,
                                                       &ctext, &length);
@@ -169,7 +169,7 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         VALUE display, str;
 
         rb_scan_args(argc, argv, "20", &display, &str);
-        ret = gdk_utf8_to_compound_text_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        ret = gdk_utf8_to_compound_text_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                     RVAL2CSTR(str),
                                                     &encoding, &format,
                                                     &ctext, &length);
@@ -203,7 +203,7 @@ rg_m_change(int argc, VALUE *argv, VALUE self)
 
     rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
 
-    gdk_property_change(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property), 
+    gdk_property_change(RVAL2GDKWINDOW(win), RVAL2ATOM(property), 
                         ntype, fmt, RVAL2GENUM(mode, GDK_TYPE_PROP_MODE), dat, len);
 
     rbgtk_atom2selectiondata_free(ntype, dat);
@@ -231,7 +231,7 @@ rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     else
         rb_scan_args(argc, argv, "40", &win, &property, &type, &delete);
 
-    if(gdk_property_get(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property), RVAL2ATOM(type),
+    if(gdk_property_get(RVAL2GDKWINDOW(win), RVAL2ATOM(property), RVAL2ATOM(type),
                         NUM2INT(offset), NUM2INT(length),
                         RVAL2CBOOL(delete), &rtype, &rfmt, &rlen, &rdat) == FALSE){
         return Qnil;
@@ -273,7 +273,7 @@ rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_delete(VALUE self, VALUE win, VALUE property)
 {
-    gdk_property_delete(GDK_WINDOW(RVAL2GOBJ(win)), RVAL2ATOM(property));
+    gdk_property_delete(RVAL2GDKWINDOW(win), RVAL2ATOM(property));
     return self;
 }
 

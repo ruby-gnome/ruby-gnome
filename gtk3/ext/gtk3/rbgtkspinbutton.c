@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cSpinButton
-#define _SELF(self) (GTK_SPIN_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSPINBUTTON(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "03", &arg1, &arg2, &arg3);
 
     if (NIL_P(arg1) || RVAL2GTYPE(arg1) == GTK_TYPE_ADJUSTMENT){
-        if (!NIL_P(arg1)) adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
+        if (!NIL_P(arg1)) adj = RVAL2GTKADJUSTMENT(arg1);
         climb_rate = (NIL_P(arg2))? 0.0: NUM2DBL(arg2);
         digits     = (NIL_P(arg3))?   0: NUM2UINT(arg3);
         widget = gtk_spin_button_new(adj, climb_rate, digits);
@@ -54,7 +54,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_configure(VALUE self, VALUE adj, VALUE climb_rate, VALUE digits)
 {
-    gtk_spin_button_configure(_SELF(self), GTK_ADJUSTMENT(RVAL2GOBJ(adj)),
+    gtk_spin_button_configure(_SELF(self), RVAL2GTKADJUSTMENT(adj),
                               NUM2DBL(climb_rate), NUM2UINT(digits));
     return self;
 }

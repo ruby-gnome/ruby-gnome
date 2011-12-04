@@ -19,12 +19,15 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RB_GDK_H__
-#define __RB_GDK_H__
+#ifndef __RBGDK3_H__
+#define __RBGDK3_H__
 
-#include <rbgobject.h>
 #include <gdk/gdk.h>
-#include <rbgdkconversions.h>
+#include <rb_cairo.h>
+#include <rbgobject.h>
+#include <rbgdk-pixbuf.h>
+
+#include "rbgdk3conversions.h"
 
 #define RBGDK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
 #define RBGDK_MINOR_VERSION RBGLIB_MINOR_VERSION
@@ -51,7 +54,6 @@
 #define RVAL2GDKNATIVEWINDOW(value) ((GdkNativeWindow)NUM2UINT(value))
 #define GDKNATIVEWINDOW2RVAL(value) UINT2NUM((guint32)value)
 */
-#define RVAL2GDKWINDOW(value) (GDK_WINDOW(RVAL2GOBJ(value)))
 #define GDKWINDOW2RVAL(value) (GOBJ2RVAL(value))
 
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
@@ -79,4 +81,4 @@ extern GdkAtom get_gdkatom(VALUE atom);
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
 
-#endif /* __RB_GDK_H__ */
+#endif /* __RBGDK3_H__ */

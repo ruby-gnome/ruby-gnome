@@ -110,7 +110,7 @@ rg_set_filename(VALUE self, VALUE filename)
 static VALUE
 rg_set_pixbuf(VALUE self, VALUE pixbuf)
 {
-    gtk_icon_source_set_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+    gtk_icon_source_set_pixbuf(_SELF(self), RVAL2GDKPIXBUF(pixbuf));
     return self;
 }
 

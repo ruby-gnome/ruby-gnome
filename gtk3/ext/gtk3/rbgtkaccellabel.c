@@ -34,13 +34,13 @@ rg_initialize(VALUE self, VALUE string)
 static VALUE
 rg_accel_width(VALUE self)
 {
-    return INT2NUM(gtk_accel_label_get_accel_width(GTK_ACCEL_LABEL(RVAL2GOBJ(self))));
+    return INT2NUM(gtk_accel_label_get_accel_width(RVAL2GTKACCELLABEL(self)));
 }
 
 static VALUE
 rg_refetch(VALUE self)
 {
-    gtk_accel_label_refetch(GTK_ACCEL_LABEL(RVAL2GOBJ(self)));
+    gtk_accel_label_refetch(RVAL2GTKACCELLABEL(self));
     return Qfalse; // always returns false
 }
 

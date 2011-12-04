@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE mRecentChooser
-#define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRECENTCHOOSER(self))
 
 static VALUE rb_mGtk;
 
@@ -154,7 +154,7 @@ static VALUE
 rg_add_filter(VALUE self, VALUE filter)
 {
     gtk_recent_chooser_add_filter(_SELF(self), 
-                                  GTK_RECENT_FILTER(RVAL2GOBJ(filter)));
+                                  RVAL2GTKRECENTFILTER(filter));
     return self;
 }
 
@@ -162,7 +162,7 @@ static VALUE
 rg_remove_filter(VALUE self, VALUE filter)
 {
     gtk_recent_chooser_remove_filter(_SELF(self),
-                                     GTK_RECENT_FILTER(RVAL2GOBJ(filter)));
+                                     RVAL2GTKRECENTFILTER(filter));
     return self;
 }
 

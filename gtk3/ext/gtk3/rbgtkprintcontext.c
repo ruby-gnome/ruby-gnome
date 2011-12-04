@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cPrintContext
-#define _SELF(s) (GTK_PRINT_CONTEXT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTCONTEXT(s))
 
 #ifdef HAVE_RB_CAIRO_H
 #include <rb_cairo.h>

@@ -1,7 +1,8 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2008  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2003  Geoff Youngs
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,11 +20,22 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RB_GTK_MACROS_H__
-#define __RB_GTK_MACROS_H__
+#ifndef __RBGTKSOURCEVIEW3PRIVATE_H_
+#define __RBGTKSOURCEVIEW3PRIVATE_H_
 
-#define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
-#define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
-#define RBGTK_MICRO_VERSION RBGLIB_MICRO_VERSION
+#include <gtksourceview/gtksourcebuffer.h>
+#include <gtksourceview/gtksourcelanguage.h>
+#include <gtksourceview/gtksourcelanguagemanager.h>
+#include <gtksourceview/gtksourcemark.h>
+#include <gtksourceview/gtksourceprintcompositor.h>
+#include <gtksourceview/gtksourcestyle.h>
+#include <gtksourceview/gtksourcestylescheme.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourceview-typebuiltins.h>
 
-#endif /* __RB_GTK_MACROS_H__ */
+#include "ruby.h"
+#include "rbgtk3.h"
+#include "rbgtksourceview3version.h"
+
+#endif /* __RBGTKSOURCEVIEW3PRIVATE_H_ */

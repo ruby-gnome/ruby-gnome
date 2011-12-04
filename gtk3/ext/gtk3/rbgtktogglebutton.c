@@ -57,7 +57,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_set_mode(VALUE self, VALUE mode)
 {
-    gtk_toggle_button_set_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)),
+    gtk_toggle_button_set_mode(RVAL2GTKTOGGLEBUTTON(self),
                                RVAL2CBOOL(mode));
     return self;
 }
@@ -65,13 +65,13 @@ rg_set_mode(VALUE self, VALUE mode)
 static VALUE
 rg_mode_p(VALUE self)
 {
-    return CBOOL2RVAL(gtk_toggle_button_get_mode(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self))));
+    return CBOOL2RVAL(gtk_toggle_button_get_mode(RVAL2GTKTOGGLEBUTTON(self)));
 }
 
 static VALUE
 rg_toggled(VALUE self)
 {
-    gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(RVAL2GOBJ(self)));
+    gtk_toggle_button_toggled(RVAL2GTKTOGGLEBUTTON(self));
     return self;
 }
 

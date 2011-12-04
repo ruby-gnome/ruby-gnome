@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cInvisible
-#define _SELF(s) GTK_INVISIBLE(RVAL2GOBJ(s))
+#define _SELF(s) RVAL2GTKINVISIBLE(s)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -35,7 +35,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         RBGTK_INITIALIZE(self, gtk_invisible_new());
     } else {
         RBGTK_INITIALIZE(self, gtk_invisible_new_for_screen(
-                             GDK_SCREEN(RVAL2GOBJ(screen))));
+                             RVAL2GDKSCREEN(screen)));
     }
     return Qnil;
 }

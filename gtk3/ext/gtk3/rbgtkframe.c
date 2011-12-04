@@ -38,7 +38,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_set_label_align(VALUE self, VALUE xalign, VALUE yalign)
 {
-    gtk_frame_set_label_align(GTK_FRAME(RVAL2GOBJ(self)),
+    gtk_frame_set_label_align(RVAL2GTKFRAME(self),
                               NUM2DBL(xalign),
                               NUM2DBL(yalign));
 
@@ -49,7 +49,7 @@ static VALUE
 rg_label_align(VALUE self)
 {
     gfloat xalign, yalign;
-    gtk_frame_get_label_align(GTK_FRAME(RVAL2GOBJ(self)),
+    gtk_frame_get_label_align(RVAL2GTKFRAME(self),
                               &xalign, &yalign);
 
     return rb_ary_new3(2, rb_float_new(xalign), rb_float_new(yalign));

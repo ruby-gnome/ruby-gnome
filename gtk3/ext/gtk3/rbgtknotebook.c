@@ -25,8 +25,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cNotebook
-#define _SELF(self) GTK_NOTEBOOK(RVAL2GOBJ(self))
-#define RVAL2WIDGET(w) GTK_WIDGET(RVAL2GOBJ(w))
+#define _SELF(self) RVAL2GTKNOTEBOOK(self)
+#define RVAL2WIDGET(w) RVAL2GTKWIDGET(w)
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
 
 static VALUE
@@ -235,12 +235,12 @@ static VALUE
 rg_get_tab_reorderable(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_notebook_get_tab_reorderable(_SELF(self), 
-                                                       GTK_WIDGET(RVAL2GOBJ(child))));
+                                                       RVAL2GTKWIDGET(child)));
 }
 static VALUE
 rg_set_tab_reorderable(VALUE self, VALUE child, VALUE reorderable)
 {
-    gtk_notebook_set_tab_reorderable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+    gtk_notebook_set_tab_reorderable(_SELF(self), RVAL2GTKWIDGET(child),
                                      RVAL2CBOOL(reorderable));
     return self;
 }
@@ -249,12 +249,12 @@ static VALUE
 rg_get_tab_detachable(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_notebook_get_tab_detachable(_SELF(self), 
-                                                      GTK_WIDGET(RVAL2GOBJ(child))));
+                                                      RVAL2GTKWIDGET(child)));
 }
 static VALUE
 rg_set_tab_detachable(VALUE self, VALUE child, VALUE detachable)
 {
-    gtk_notebook_set_tab_detachable(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+    gtk_notebook_set_tab_detachable(_SELF(self), RVAL2GTKWIDGET(child),
                                      RVAL2CBOOL(detachable));
     return self;
 }
@@ -265,7 +265,7 @@ creation_func(GtkNotebook *source, GtkWidget *page, gint x, gint y, gpointer fun
     VALUE ret;
     ret = rb_funcall((VALUE)func, id_call, 4, GOBJ2RVAL(source), GOBJ2RVAL(page),
                      INT2NUM(x), INT2NUM(y));
-    return NIL_P(ret) ? (GtkNotebook*)NULL : GTK_NOTEBOOK(RVAL2GOBJ(ret));
+    return NIL_P(ret) ? (GtkNotebook*)NULL : RVAL2GTKNOTEBOOK(ret);
 }
 
 static VALUE

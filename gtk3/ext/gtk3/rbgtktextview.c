@@ -22,9 +22,9 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextView
-#define _SELF(self) (GTK_TEXT_VIEW(RVAL2GOBJ(self)))
-#define RVAL2BUFFER(b) (GTK_TEXT_BUFFER(RVAL2GOBJ(b)))
-#define RVAL2MARK(m) (GTK_TEXT_MARK(RVAL2GOBJ(m)))
+#define _SELF(self) (RVAL2GTKTEXTVIEW(self))
+#define RVAL2BUFFER(b) (RVAL2GTKTEXTBUFFER(b))
+#define RVAL2MARK(m) (RVAL2GTKTEXTMARK(m))
 #define RVAL2ITR(i) ((GtkTextIter*)(RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
@@ -248,8 +248,8 @@ static VALUE
 rg_add_child_at_anchor(VALUE self, VALUE child, VALUE anchor)
 {
     G_CHILD_ADD(self, child);
-    gtk_text_view_add_child_at_anchor(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
-                                      GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
+    gtk_text_view_add_child_at_anchor(_SELF(self), RVAL2GTKWIDGET(child), 
+                                      RVAL2GTKTEXTCHILDANCHOR(anchor));
     return self;
 }
 
@@ -257,7 +257,7 @@ static VALUE
 rg_add_child_in_window(VALUE self, VALUE child, VALUE which_window, VALUE xpos, VALUE ypos)
 {
     G_CHILD_ADD(self, child);
-    gtk_text_view_add_child_in_window(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+    gtk_text_view_add_child_in_window(_SELF(self), RVAL2GTKWIDGET(child),
                                       RVAL2GENUM(which_window, GTK_TYPE_TEXT_WINDOW_TYPE),
                                       NUM2INT(xpos), NUM2INT(ypos));
     return self;
@@ -267,7 +267,7 @@ static VALUE
 rg_move_child(VALUE self, VALUE child, VALUE xpos, VALUE ypos)
 {
     G_CHILD_ADD(self, child);
-    gtk_text_view_move_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+    gtk_text_view_move_child(_SELF(self), RVAL2GTKWIDGET(child),
                              NUM2INT(xpos), NUM2INT(ypos));
     return self;
 }

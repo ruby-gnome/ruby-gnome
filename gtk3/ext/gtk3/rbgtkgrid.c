@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cGrid
-#define _SELF(self) (GTK_GRID(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKGRID(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -35,7 +35,7 @@ static VALUE
 rg_attach(VALUE self, VALUE child, VALUE left, VALUE top, VALUE width, VALUE height)
 {
     gtk_grid_attach(_SELF(self),
-                    GTK_WIDGET(RVAL2GOBJ(child)),
+                    RVAL2GTKWIDGET(child),
                     NUM2INT(left), NUM2INT(top),
                     NUM2INT(width), NUM2INT(height));
 
@@ -46,8 +46,8 @@ static VALUE
 rg_attach_next_to(VALUE self, VALUE child, VALUE sibling, VALUE side, VALUE width, VALUE height)
 {
     gtk_grid_attach_next_to(_SELF(self),
-                            GTK_WIDGET(RVAL2GOBJ(child)),
-                            NIL_P(sibling) ? NULL : GTK_WIDGET(RVAL2GOBJ(sibling)),
+                            RVAL2GTKWIDGET(child),
+                            NIL_P(sibling) ? NULL : RVAL2GTKWIDGET(sibling),
                             RVAL2GENUM(side, GTK_TYPE_POSITION_TYPE),
                             NUM2INT(width), NUM2INT(height));
 
@@ -73,7 +73,7 @@ static VALUE
 rg_insert_next_to(VALUE self, VALUE sibling, VALUE side)
 {
     gtk_grid_insert_next_to(_SELF(self),
-                            GTK_WIDGET(RVAL2GOBJ(sibling)),
+                            RVAL2GTKWIDGET(sibling),
                             RVAL2GENUM(side, GTK_TYPE_POSITION_TYPE));
 
     return self;

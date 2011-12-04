@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAssistant
-#define _SELF(s) (GTK_ASSISTANT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKASSISTANT(s))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -59,19 +59,19 @@ rg_get_nth_page(VALUE self, VALUE page_num)
 static VALUE
 rg_prepend_page(VALUE self, VALUE page)
 {
-    return INT2NUM(gtk_assistant_prepend_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
+    return INT2NUM(gtk_assistant_prepend_page(_SELF(self), RVAL2GTKWIDGET(page)));
 }
 
 static VALUE
 rg_append_page(VALUE self, VALUE page)
 {
-    return INT2NUM(gtk_assistant_append_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
+    return INT2NUM(gtk_assistant_append_page(_SELF(self), RVAL2GTKWIDGET(page)));
 }
 
 static VALUE
 rg_insert_page(VALUE self, VALUE page, VALUE position)
 {
-    return INT2NUM(gtk_assistant_insert_page(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), NUM2INT(position)));
+    return INT2NUM(gtk_assistant_insert_page(_SELF(self), RVAL2GTKWIDGET(page), NUM2INT(position)));
 }
 
 static gint
@@ -92,53 +92,53 @@ rg_set_forward_page_func(VALUE self)
 static VALUE
 rg_set_page_type(VALUE self, VALUE page, VALUE type)
 {
-    gtk_assistant_set_page_type(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2GENUM(type, GTK_TYPE_ASSISTANT_PAGE_TYPE));
+    gtk_assistant_set_page_type(_SELF(self), RVAL2GTKWIDGET(page), RVAL2GENUM(type, GTK_TYPE_ASSISTANT_PAGE_TYPE));
     return self;
 }
 
 static VALUE
 rg_get_page_type(VALUE self, VALUE page)
 {
-    return GENUM2RVAL(gtk_assistant_get_page_type(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))), GTK_TYPE_ASSISTANT_PAGE_TYPE);
+    return GENUM2RVAL(gtk_assistant_get_page_type(_SELF(self), RVAL2GTKWIDGET(page)), GTK_TYPE_ASSISTANT_PAGE_TYPE);
 }
 
 static VALUE
 rg_set_page_title(VALUE self, VALUE page, VALUE title)
 {
-    gtk_assistant_set_page_title(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2CSTR(title));
+    gtk_assistant_set_page_title(_SELF(self), RVAL2GTKWIDGET(page), RVAL2CSTR(title));
     return self;
 }
 
 static VALUE
 rg_get_page_title(VALUE self, VALUE page)
 {
-    return CSTR2RVAL(gtk_assistant_get_page_title(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
+    return CSTR2RVAL(gtk_assistant_get_page_title(_SELF(self), RVAL2GTKWIDGET(page)));
 }
 
 static VALUE
 rg_set_page_complete(VALUE self, VALUE page, VALUE complete)
 {
-    gtk_assistant_set_page_complete(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page)), RVAL2CBOOL(complete));
+    gtk_assistant_set_page_complete(_SELF(self), RVAL2GTKWIDGET(page), RVAL2CBOOL(complete));
     return self;
 }
 
 static VALUE
 rg_get_page_complete(VALUE self, VALUE page)
 {
-    return CBOOL2RVAL(gtk_assistant_get_page_complete(_SELF(self), GTK_WIDGET(RVAL2GOBJ(page))));
+    return CBOOL2RVAL(gtk_assistant_get_page_complete(_SELF(self), RVAL2GTKWIDGET(page)));
 }
 
 static VALUE
 rg_add_action_widget(VALUE self, VALUE child)
 {
-    gtk_assistant_add_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
+    gtk_assistant_add_action_widget(_SELF(self), RVAL2GTKWIDGET(child));
     return self;
 }
 
 static VALUE
 rg_remove_action_widget(VALUE self, VALUE child)
 {
-    gtk_assistant_remove_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
+    gtk_assistant_remove_action_widget(_SELF(self), RVAL2GTKWIDGET(child));
     return self;
 }
 

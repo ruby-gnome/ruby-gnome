@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cContainer
-#define _SELF(self) (GTK_CONTAINER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKCONTAINER(self))
 
 /*
 We don't need this.
@@ -45,7 +45,7 @@ static VALUE
 rg_remove(VALUE self, VALUE other)
 {
     G_CHILD_REMOVE(self, other);
-    gtk_container_remove(_SELF(self), GTK_WIDGET(RVAL2GOBJ(other)));
+    gtk_container_remove(_SELF(self), RVAL2GTKWIDGET(other));
     return self;
 }
 
@@ -98,7 +98,7 @@ rg_set_reallocate_redraws(VALUE self, VALUE needs_redraws)
 static VALUE
 rg_set_focus_child(VALUE self, VALUE child)
 {
-    gtk_container_set_focus_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)));
+    gtk_container_set_focus_child(_SELF(self), RVAL2GTKWIDGET(child));
     return self;
 }
 
@@ -106,7 +106,7 @@ static VALUE
 rg_set_focus_vadjustment(VALUE self, VALUE adjustment)
 {
     gtk_container_set_focus_vadjustment(_SELF(self),
-                                        NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
+                                        NIL_P(adjustment) ? NULL : RVAL2GTKADJUSTMENT(adjustment));
     return self;
 }
 
@@ -114,7 +114,7 @@ static VALUE
 rg_set_focus_hadjustment(VALUE self, VALUE adjustment)
 {
     gtk_container_set_focus_hadjustment(_SELF(self),
-                                        NIL_P(adjustment) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(adjustment)));
+                                        NIL_P(adjustment) ? NULL : RVAL2GTKADJUSTMENT(adjustment));
     return self;
 }
 
@@ -228,8 +228,8 @@ rg_child_get_property(VALUE self, VALUE child, VALUE prop_name)
             }
         }
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        gtk_container_child_get_property(GTK_CONTAINER(RVAL2GOBJ(self)), 
-                                         GTK_WIDGET(RVAL2GOBJ(child)),
+        gtk_container_child_get_property(RVAL2GTKCONTAINER(self), 
+                                         RVAL2GTKWIDGET(child),
                                          name , &gval);
         ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
 
@@ -281,8 +281,8 @@ rg_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
 
         G_CHILD_ADD(child, val);
 
-        gtk_container_child_set_property(GTK_CONTAINER(RVAL2GOBJ(self)), 
-                                         GTK_WIDGET(RVAL2GOBJ(child)), name, &gval);
+        gtk_container_child_set_property(RVAL2GTKCONTAINER(self), 
+                                         RVAL2GTKWIDGET(child), name, &gval);
 
         g_value_unset(&gval);
         return self;
@@ -297,7 +297,7 @@ rg_add(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &other, &properties);
 
-    child = GTK_WIDGET(RVAL2GOBJ(other));
+    child = RVAL2GTKWIDGET(other);
     gtk_widget_freeze_child_notify(child);
     gtk_container_add(_SELF(self), child);
 
@@ -337,7 +337,7 @@ void        gtk_container_child_set_valist  (GtkContainer *container,
 static VALUE
 rg_propagate_expose(VALUE self, VALUE child, VALUE event)
 {
-    gtk_container_propagate_expose(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+    gtk_container_propagate_expose(_SELF(self), RVAL2GTKWIDGET(child),
                                    (GdkEventExpose *)RVAL2GEV(event));
     return self;
 }
@@ -452,7 +452,7 @@ rg_s_install_child_property(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &spec, &prop_id);
 
-    pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+    pspec = RVAL2GPARAMSPEC(spec);
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registerd class",

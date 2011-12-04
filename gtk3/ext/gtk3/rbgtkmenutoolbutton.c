@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cMenuToolButton
-#define _SELF(self) (GTK_MENU_TOOL_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKMENUTOOLBUTTON(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -44,7 +44,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         VALUE icon_widget, label;
         rb_scan_args(argc, argv, "11", &icon_widget, &label);
 
-        item = gtk_menu_tool_button_new(GTK_WIDGET(RVAL2GOBJ(icon_widget)),
+        item = gtk_menu_tool_button_new(RVAL2GTKWIDGET(icon_widget),
                                         RVAL2CSTR_ACCEPT_NIL(label));
     }
 
@@ -59,7 +59,7 @@ rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
     VALUE tooltips, tip_text, tip_private;
 
     rb_scan_args(argc, argv, "12", &tooltips, &tip_text, &tip_private);
-    gtk_menu_tool_button_set_arrow_tooltip(_SELF(self), GTK_TOOLTIPS(RVAL2GOBJ(self)),
+    gtk_menu_tool_button_set_arrow_tooltip(_SELF(self), RVAL2GTKTOOLTIPS(self),
                                            RVAL2CSTR_ACCEPT_NIL(tip_text),
                                            RVAL2CSTR_ACCEPT_NIL(tip_private));
     return self;

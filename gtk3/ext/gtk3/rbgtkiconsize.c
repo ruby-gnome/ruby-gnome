@@ -39,7 +39,7 @@ rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
 {
     gint width, height;
 
-    if(gtk_icon_size_lookup_for_settings(GTK_SETTINGS(RVAL2GOBJ(settings)),
+    if(gtk_icon_size_lookup_for_settings(RVAL2GTKSETTINGS(settings),
                                          RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), 
                                          &width, &height))
         return rb_ary_new3(2, INT2FIX(width), INT2FIX(height));

@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cOverlay
-#define _SELF(self) (GTK_OVERLAY(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKOVERLAY(self))
 
 #if GTK_CHECK_VERSION(3, 2, 0)
 static VALUE
@@ -35,7 +35,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_add_overlay(VALUE self, VALUE widget)
 {
-    gtk_overlay_add_overlay(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
+    gtk_overlay_add_overlay(_SELF(self), RVAL2GTKWIDGET(widget));
 
     return self;
 }

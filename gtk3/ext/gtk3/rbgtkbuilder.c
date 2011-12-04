@@ -23,7 +23,7 @@
 #include <glib-enum-types.h> /* From Ruby/GLib2 */
 
 #define RG_TARGET_NAMESPACE cBuilder
-#define _SELF(self) (GTK_BUILDER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKBUILDER(self))
 
 static ID id___connect_signals__;
 

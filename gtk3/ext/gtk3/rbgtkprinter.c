@@ -31,7 +31,7 @@ GType gtk_print_backend_get_type (void) G_GNUC_CONST;
 #endif
 
 #define RG_TARGET_NAMESPACE cPrinter
-#define _SELF(s) (GTK_PRINTER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTER(s))
 
 static VALUE rb_mGtk;
 
@@ -41,7 +41,7 @@ rg_initialize(VALUE self, VALUE name, VALUE backend, VALUE rb_virtual)
     GtkPrinter *printer;
 
     printer = gtk_printer_new(RVAL2CSTR(name),
-                              GTK_PRINT_BACKEND(RVAL2GOBJ(backend)),
+                              RVAL2GTKPRINTBACKEND(backend),
                               RVAL2CBOOL(rb_virtual));
 
     G_INITIALIZE(self, printer);

@@ -23,7 +23,7 @@
 #if GTK_CHECK_VERSION(3, 2, 0)
 
 #define RG_TARGET_NAMESPACE cFontChooserWidget
-#define _SELF(self) (GTK_FONT_CHOOSER_WIDGET(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKFONTCHOOSERWIDGET(self))
 
 static VALUE
 rg_initialize(VALUE self)

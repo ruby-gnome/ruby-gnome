@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbvte.h"
+#include "rbvte3private.h"
 
 #define RG_TARGET_NAMESPACE cTerminalAccessible
 
