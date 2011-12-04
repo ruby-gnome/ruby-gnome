@@ -60,8 +60,7 @@ resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
 }
 
 void
-rbgobj_flags_add_constants(VALUE mod, GType flags_type,
-                           const gchar *strip_prefix)
+rg_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix)
 {
     GFlagsClass *gclass;
     guint i;

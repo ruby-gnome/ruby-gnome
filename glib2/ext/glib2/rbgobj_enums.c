@@ -73,8 +73,7 @@ rg_enum_resolve_value(VALUE klass, VALUE nick)
 }
 
 void
-rbgobj_enum_add_constants(VALUE mod, GType enum_type,
-                          const gchar *strip_prefix)
+rg_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix)
 {
     GEnumClass *gclass;
     guint i;

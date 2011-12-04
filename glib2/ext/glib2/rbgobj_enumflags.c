@@ -23,9 +23,6 @@
 #include "rbgprivate.h"
 #include <ctype.h>
 
-G_GNUC_INTERNAL void rbgobj_enum_add_constants(VALUE mod, GType enum_type, const gchar *strip_prefix);
-G_GNUC_INTERNAL void rbgobj_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix);
-
 typedef struct {
 	char *original;
 	char *replacement;
@@ -102,9 +99,9 @@ void
 rbgobj_add_constants(VALUE mod, GType type, const gchar *strip_prefix)
 {
     if (G_TYPE_IS_ENUM(type)) {
-        rbgobj_enum_add_constants(mod, type, strip_prefix);
+        rg_enum_add_constants(mod, type, strip_prefix);
     } else if (G_TYPE_IS_FLAGS(type)) {
-        rbgobj_flags_add_constants(mod, type, strip_prefix);
+        rg_flags_add_constants(mod, type, strip_prefix);
     } else {
         g_warning("`%s' is not an enum/flags type", g_type_name(type));
     }
