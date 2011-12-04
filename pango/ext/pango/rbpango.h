@@ -30,6 +30,7 @@
 
 #include "rbgobject.h"
 #include "rbpangoversion.h"
+#include "rbpangoconversions.h"
 
 #if PANGO_CHECK_VERSION(1,10,0)
 #include <pango/pangocairo.h>
