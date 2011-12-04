@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cPaperSize
-#define _SELF(s) (RVAL2BOXED(s, GTK_TYPE_PAPER_SIZE))
+#define _SELF(s) (RVAL2GTKPAPERSIZE(s))
 #define SIZE2RVAL(o) (BOXED2RVAL(o, GTK_TYPE_PAPER_SIZE))
 
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))

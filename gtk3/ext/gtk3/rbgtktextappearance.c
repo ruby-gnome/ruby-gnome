@@ -45,7 +45,7 @@ gtk_text_appearance_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cTextAppearance
-#define _SELF(t) ((GtkTextAppearance*)RVAL2BOXED(t, GTK_TYPE_TEXT_APPEARANCE))
+#define _SELF(t) (RVAL2GTKTEXTAPPEARANCE(t))
 
 static VALUE
 rg_initialize(VALUE self)

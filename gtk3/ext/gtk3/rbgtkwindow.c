@@ -103,7 +103,7 @@ rg_set_geometry_hints(VALUE self, VALUE geometry_widget, VALUE geometry, VALUE g
 {
     gtk_window_set_geometry_hints(_SELF(self),
                                   RVAL2GTKWIDGET(geometry_widget),
-                                  (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
+                                  RVAL2GDKGEOMETRY(geometry),
                                   RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
     return self;
 }
@@ -434,7 +434,7 @@ static VALUE
 rg_activate_key(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_window_activate_key(_SELF(self),
-                                              RVAL2BOXED(event, GDK_TYPE_EVENT)));
+                                              RVAL2GDKEVENT(event)));
 }
 
 static VALUE
@@ -464,7 +464,7 @@ static VALUE
 rg_propagate_key_event(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_window_propagate_key_event(_SELF(self),
-                                                     RVAL2BOXED(event, GDK_TYPE_EVENT)));
+                                                     RVAL2GDKEVENT(event)));
 }
 
 static VALUE

@@ -116,7 +116,7 @@ rg_queue_resize_no_redraw(VALUE self)
 static VALUE
 rg_size_allocate(VALUE self, VALUE alloc)
 {
-    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
+    gtk_widget_size_allocate(_SELF(self), RVAL2GTKALLOCATION(alloc));
     return self;
 }
 
@@ -185,7 +185,7 @@ rg_intersect(VALUE self, VALUE area)
 {
     GdkRectangle intersection;
     gboolean ret = gtk_widget_intersect(_SELF(self),
-                                        (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
+                                        RVAL2GDKRECTANGLE(area),
                                         &intersection);
     return ret ? BOXED2RVAL(&intersection, GDK_TYPE_RECTANGLE) : Qnil;
 }
@@ -715,7 +715,7 @@ rg_allocation(VALUE self)
 static VALUE
 rg_set_allocation(VALUE self, VALUE alloc)
 {
-    gtk_widget_set_allocation(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
+    gtk_widget_set_allocation(_SELF(self), RVAL2GTKALLOCATION(alloc));
     return self;
 }
 
@@ -998,7 +998,7 @@ static VALUE
 rg_override_font(VALUE self, VALUE font_desc)
 {
     gtk_widget_override_font(_SELF(self),
-                             NIL_P(font_desc) ? NULL : RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
+                             NIL_P(font_desc) ? NULL : RVAL2PANGOFONTDESCRIPTION(font_desc));
 
     return self;
 }
@@ -1054,7 +1054,7 @@ rg_send_focus_change(VALUE self, VALUE event)
 {
     gboolean result;
 
-    result = gtk_widget_send_focus_change(_SELF(self), RVAL2BOXED(event, GDK_TYPE_EVENT));
+    result = gtk_widget_send_focus_change(_SELF(self), RVAL2GDKEVENT(event));
 
     return CBOOL2RVAL(result);
 }

@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreePath
-#define _SELF(s) ((GtkTreePath*)RVAL2BOXED(s, GTK_TYPE_TREE_PATH))
+#define _SELF(s) (RVAL2GTKTREEPATH(s))
 
 static ID id_equal;
 

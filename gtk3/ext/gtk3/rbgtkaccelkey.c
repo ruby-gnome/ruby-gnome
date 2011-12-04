@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAccelKey
-#define _SELF(s) ((GtkAccelKey*)RVAL2BOXED(s, GTK_TYPE_ACCEL_KEY))
+#define _SELF(s) (RVAL2GTKACCELKEY(s))
 #define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 
 static GtkAccelKey *

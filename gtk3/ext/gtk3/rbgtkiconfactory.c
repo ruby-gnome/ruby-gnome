@@ -35,7 +35,7 @@ static VALUE
 rg_add(VALUE self, VALUE id, VALUE icon_set)
 {
     gtk_icon_factory_add(_SELF(self), RVAL2CSTR(id),
-                         (GtkIconSet*)RVAL2BOXED(icon_set, GTK_TYPE_ICON_SET));
+                         RVAL2GTKICONSET(icon_set));
     return self;
 }
 

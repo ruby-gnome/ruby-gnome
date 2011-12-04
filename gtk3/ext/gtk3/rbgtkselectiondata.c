@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cSelectionData
-#define _SELF(d) ((GtkSelectionData*)RVAL2BOXED(d, GTK_TYPE_SELECTION_DATA))
+#define _SELF(d) (RVAL2GTKSELECTIONDATA(d))
 
 static GdkAtom compound_text;
 

@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIconInfo
-#define _SELF(i) ((GtkIconInfo*)RVAL2BOXED(i, GTK_TYPE_ICON_INFO))
+#define _SELF(i) (RVAL2GTKICONINFO(i))
 
 static VALUE
 rg_base_size(VALUE self)

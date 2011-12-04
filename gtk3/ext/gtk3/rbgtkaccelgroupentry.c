@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAccelGroupEntry
-#define _SELF(s) ((GtkAccelGroupEntry*)RVAL2BOXED(s, GTK_TYPE_ACCEL_GROUP_ENTRY))
+#define _SELF(s) (RVAL2GTKACCELGROUPENTRY(s))
 
 static GtkAccelGroupEntry *
 agentry_copy(const GtkAccelGroupEntry *agentry)

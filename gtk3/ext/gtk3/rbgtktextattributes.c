@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextAttributes
-#define _SELF(s) ((GtkTextAttributes*)RVAL2BOXED(s, GTK_TYPE_TEXT_ATTRIBUTES))
+#define _SELF(s) (RVAL2GTKTEXTATTRIBUTES(s))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -45,7 +45,7 @@ rg_appearance(VALUE self)
 static VALUE
 rg_set_appearance(VALUE self, VALUE val)
 {
-    GtkTextAppearance* app = (GtkTextAppearance*)RVAL2BOXED(val, GTK_TYPE_TEXT_APPEARANCE);
+    GtkTextAppearance* app = RVAL2GTKTEXTAPPEARANCE(val);
     _SELF(self)->appearance = *app;
     return self;
 }
@@ -90,7 +90,7 @@ static VALUE
 rg_set_font(VALUE self, VALUE val)
 {
     G_CHILD_SET(self, rb_intern("font"), val);
-    _SELF(self)->font = RVAL2BOXED(val, PANGO_TYPE_FONT_DESCRIPTION);
+    _SELF(self)->font = RVAL2PANGOFONTDESCRIPTION(val);
     return self;
 }
 
@@ -199,7 +199,7 @@ static VALUE
 rg_set_tabs(VALUE self, VALUE val)
 {
     G_CHILD_SET(self, rb_intern("tabs"), val);
-    _SELF(self)->tabs = RVAL2BOXED(val, PANGO_TYPE_TAB_ARRAY);
+    _SELF(self)->tabs = RVAL2PANGOTABARRAY(val);
     return self;
 }
 
@@ -230,7 +230,7 @@ static VALUE
 rg_set_language(VALUE self, VALUE val)
 {
     G_CHILD_SET(self, rb_intern("language"), val);
-    _SELF(self)->language = RVAL2BOXED(val, PANGO_TYPE_LANGUAGE);
+    _SELF(self)->language = RVAL2PANGOLANGUAGE(val);
     return self;
 }
 

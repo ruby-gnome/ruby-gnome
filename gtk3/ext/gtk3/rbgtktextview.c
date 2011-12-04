@@ -25,7 +25,7 @@
 #define _SELF(self) (RVAL2GTKTEXTVIEW(self))
 #define RVAL2BUFFER(b) (RVAL2GTKTEXTBUFFER(b))
 #define RVAL2MARK(m) (RVAL2GTKTEXTMARK(m))
-#define RVAL2ITR(i) ((GtkTextIter*)(RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)))
+#define RVAL2ITR(i) (RVAL2GTKTEXTITER(i))
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
 
 static ID id_buffer;

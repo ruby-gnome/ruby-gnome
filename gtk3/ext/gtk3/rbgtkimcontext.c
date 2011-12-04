@@ -75,7 +75,7 @@ rg_set_cursor_location(VALUE self, VALUE area)
 {
     gtk_im_context_set_cursor_location(
         _SELF(self), 
-        ((GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE)));
+        RVAL2GDKRECTANGLE(area));
     return self;
 }
 

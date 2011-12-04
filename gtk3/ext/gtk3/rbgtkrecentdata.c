@@ -54,7 +54,7 @@ gtk_recent_data_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cRecentData
-#define _SELF(w) ((GtkRecentData*)RVAL2BOXED(w, GTK_TYPE_RECENT_DATA))
+#define _SELF(w) (RVAL2GTKRECENTDATA(w))
 
 static VALUE
 rg_initialize(VALUE self)

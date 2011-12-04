@@ -42,7 +42,7 @@ gtk_allocation_get_type(void)
 }
 
 #define RG_TARGET_NAMESPACE cAllocation
-#define _SELF(r) ((GtkAllocation*)RVAL2BOXED(r, GTK_TYPE_ALLOCATION))
+#define _SELF(r) (RVAL2GTKALLOCATION(r))
 
 static VALUE
 rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)

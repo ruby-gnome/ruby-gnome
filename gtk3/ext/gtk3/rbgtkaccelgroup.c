@@ -46,7 +46,7 @@ rg_connect(int argc, VALUE *argv, VALUE self)
         if (NIL_P(closure)){
             rclosure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
         } else {
-            rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+            rclosure = RVAL2GCLOSURE(closure);
         }
         g_rclosure_attach(rclosure, self);
         gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
@@ -58,7 +58,7 @@ rg_connect(int argc, VALUE *argv, VALUE self)
         if (NIL_P(closure)){
             rclosure = g_rclosure_new(rb_block_proc(), Qnil, NULL);
         } else {
-            rclosure = (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE);
+            rclosure = RVAL2GCLOSURE(closure);
         }
         g_rclosure_attach(rclosure, self);
         gtk_accel_group_connect_by_path(_SELF(self), RVAL2CSTR(path), rclosure);
@@ -98,14 +98,14 @@ static VALUE
 rg_disconnect(VALUE self, VALUE closure)
 {
     return CBOOL2RVAL(gtk_accel_group_disconnect(_SELF(self),
-                                                 (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
+                                                 RVAL2GCLOSURE(closure)));
 }
 
 static VALUE
 rg_s_from_accel_closure(G_GNUC_UNUSED VALUE self, VALUE closure)
 {
     return GOBJ2RVAL(gtk_accel_group_from_accel_closure(
-                         (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
+                         RVAL2GCLOSURE(closure)));
 }
 
 static gboolean
