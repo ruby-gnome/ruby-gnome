@@ -107,6 +107,7 @@ G_GNUC_INTERNAL void Init_gtk_drag(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drawing_area(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_editable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_entry(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_entrybuffer(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_entry_completion(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_eventbox(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_expander(VALUE mGtk);
