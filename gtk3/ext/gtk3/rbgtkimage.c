@@ -57,7 +57,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                                RVAL2GDKBITMAP(arg2));
 */
         } else if (gtype == GTK_TYPE_ICON_SET){
-            widget = gtk_image_new_from_icon_set((GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+            widget = gtk_image_new_from_icon_set(RVAL2GTKICONSET(arg1), RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
             widget = gtk_image_new_from_animation(RVAL2GDKPIXBUFANIMATION(arg1));
         }
@@ -98,7 +98,7 @@ rg_set(int argc, VALUE *argv, VALUE self)
 */
         } else if (gtype == GTK_TYPE_ICON_SET){
             gtk_image_set_from_icon_set(_SELF(self), 
-                                        (GtkIconSet*)RVAL2BOXED(arg1, GTK_TYPE_ICON_SET), 
+                                        RVAL2GTKICONSET(arg1), 
                                         RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
         } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
             gtk_image_set_from_animation(_SELF(self), RVAL2GDKPIXBUFANIMATION(arg1));

@@ -1,8 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
- *  Copyright (C) 2003  Geoff Youngs
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,23 +18,10 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGTKSOURCEVIEW3PRIVATE_H_
-#define __RBGTKSOURCEVIEW3PRIVATE_H_
+#ifndef __RBVTE3CONVERSIONS_H__
+#define __RBVTE3CONVERSIONS_H__
 
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourceprintcompositor.h>
-#include <gtksourceview/gtksourcestyle.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
-#include <gtksourceview/gtksourceview-typebuiltins.h>
+#define RVAL2VTEPTY(o)                     (VTE_PTY(RVAL2GOBJ(o)))
+#define RVAL2VTETERMINAL(o)                (VTE_TERMINAL(RVAL2GOBJ(o)))
 
-#include "ruby.h"
-#include "rbgtk3.h"
-#include "rbgtksourceview3version.h"
-#include "rbgtksourceview3conversions.h"
-
-#endif /* __RBGTKSOURCEVIEW3PRIVATE_H_ */
+#endif /* __RBVTE3CONVERSIONS_H__ */

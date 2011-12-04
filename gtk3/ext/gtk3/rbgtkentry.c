@@ -89,6 +89,86 @@ rg_set_cursor_hadjustment(VALUE self, VALUE adjustment)
     return self;
 }
 
+static VALUE
+rg_current_icon_drag_source(VALUE self)
+{
+    return INT2NUM(gtk_entry_get_current_icon_drag_source(_SELF(self)));
+}
+
+static VALUE
+rg_get_icon_area(VALUE self, VALUE icon_pos)
+{
+    GdkRectangle icon_area;
+
+    gtk_entry_get_icon_area(_SELF(self),
+                            RVAL2GENUM(icon_pos, GTK_TYPE_ENTRY_ICON_POSITION),
+                            &icon_area);
+
+    return GOBJ2RVAL(&icon_area);
+}
+
+static VALUE
+rg_get_icon_at_pos(VALUE self, VALUE x, VALUE y)
+{
+    return INT2NUM(gtk_entry_get_icon_at_pos(_SELF(self), NUM2INT(x), NUM2INT(y)));
+}
+
+static VALUE
+rg_text_area(VALUE self)
+{
+    GdkRectangle text_area;
+
+    gtk_entry_get_text_area(_SELF(self), &text_area);
+
+    return GOBJ2RVAL(&text_area);
+}
+
+static VALUE
+rg_im_context_filter_keypress(VALUE self, VALUE event)
+{
+    gboolean result;
+
+    result = gtk_entry_im_context_filter_keypress(_SELF(self),
+                                                  RVAL2GDKEVENT(event));
+
+    return CBOOL2RVAL(result);
+}
+
+static VALUE
+rg_progress_pulse(VALUE self)
+{
+    gtk_entry_progress_pulse(_SELF(self));
+
+    return self;
+}
+
+static VALUE
+rg_reset_im_context(VALUE self)
+{
+    gtk_entry_reset_im_context(_SELF(self));
+
+    return self;
+}
+
+static VALUE
+rg_set_icon_drag_source(VALUE self, VALUE icon_pos, VALUE target_list, VALUE actions)
+{
+    gtk_entry_set_icon_drag_source(_SELF(self),
+                                   RVAL2GENUM(icon_pos, GTK_TYPE_ENTRY_ICON_POSITION),
+                                   RVAL2GTKTARGETLIST(target_list),
+                                   RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+
+    return self;
+}
+
+static VALUE
+rg_unset_invisible_char(VALUE self)
+{
+    gtk_entry_unset_invisible_char(_SELF(self));
+
+    return self;
+}
+
 void 
 Init_gtk_entry(VALUE mGtk)
 {
@@ -105,4 +185,13 @@ Init_gtk_entry(VALUE mGtk)
     RG_DEF_METHOD(cursor_hadjustment, 0);
     RG_DEF_METHOD(set_cursor_hadjustment, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "cursor_hadjustment");
+    RG_DEF_METHOD(current_icon_drag_source, 0);
+    RG_DEF_METHOD(get_icon_area, 1);
+    RG_DEF_METHOD(get_icon_at_pos, 2);
+    RG_DEF_METHOD(text_area, 0);
+    RG_DEF_METHOD(im_context_filter_keypress, 1);
+    RG_DEF_METHOD(progress_pulse, 0);
+    RG_DEF_METHOD(reset_im_context, 0);
+    RG_DEF_METHOD(set_icon_drag_source, 3);
+    RG_DEF_METHOD(unset_invisible_char, 0);
 }

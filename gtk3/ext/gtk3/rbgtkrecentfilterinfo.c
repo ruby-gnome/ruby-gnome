@@ -55,7 +55,7 @@ gtk_recent_filter_info_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cRecentFilterInfo
-#define _SELF(w) ((GtkRecentFilterInfo*)RVAL2BOXED(w, GTK_TYPE_RECENT_FILTER_INFO))
+#define _SELF(w) (RVAL2GTKRECENTFILTERINFO(w))
 
 static VALUE
 rg_initialize(VALUE self)

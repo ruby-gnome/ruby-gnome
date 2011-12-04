@@ -8,6 +8,8 @@
 #include <vte/vteaccess.h>
 #include <vte/reaper.h>
 
+#include "rbvte3conversions.h"
+
 #ifndef VTE_CHECK_VERSION
 #  include "rbvteversion.h"
 #endif

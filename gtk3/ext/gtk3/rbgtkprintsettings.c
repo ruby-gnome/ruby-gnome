@@ -43,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             RAISE_GERROR(error);
         }
     } else {
-        settings = gtk_print_settings_new_from_key_file((GKeyFile*)RVAL2BOXED(arg1, G_TYPE_KEY_FILE),
+        settings = gtk_print_settings_new_from_key_file(RVAL2GKEYFILE(arg1),
                                                         RVAL2CSTR(arg2),
                                                         &error);
         if (!settings) {
@@ -310,7 +310,7 @@ static VALUE
 rg_set_paper_size(VALUE self, VALUE paper_size)
 {
     gtk_print_settings_set_paper_size(_SELF(self), 
-                                      RVAL2BOXED(paper_size, GTK_TYPE_PAPER_SIZE));
+                                      RVAL2GTKPAPERSIZE(paper_size));
     return self;
 }
 
@@ -663,7 +663,7 @@ rg_to_key_file(int argc, VALUE *argv, VALUE self)
     VALUE key_file, group_name;
     rb_scan_args(argc, argv, "11", &key_file, &group_name);
     gtk_print_settings_to_key_file(_SELF(self),
-                                   (GKeyFile*)RVAL2BOXED(key_file, G_TYPE_KEY_FILE),
+                                   RVAL2GKEYFILE(key_file),
                                    RVAL2CSTR_ACCEPT_NIL(group_name));
     return self;
 }

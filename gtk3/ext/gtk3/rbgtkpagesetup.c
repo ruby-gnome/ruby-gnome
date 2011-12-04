@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE cPageSetup
 #define _SELF(s) (RVAL2GTKPAGESETUP(s))
 
-#define RVAL2SIZE(o) (RVAL2BOXED(o, GTK_TYPE_PAPER_SIZE))
+#define RVAL2SIZE(o) (RVAL2GTKPAPERSIZE(o))
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
 static VALUE
@@ -58,7 +58,7 @@ rg_set_orientation(VALUE self, VALUE orientation)
 static VALUE
 rg_paper_size(VALUE self)
 {
-    return BOXED2RVAL(gtk_page_setup_get_paper_size(_SELF(self)), GTK_TYPE_PAPER_SIZE);
+    return GTKPAPERSIZE2RVAL(gtk_page_setup_get_paper_size(_SELF(self)));
 }
 
 static VALUE

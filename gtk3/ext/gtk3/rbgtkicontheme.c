@@ -25,7 +25,7 @@
 #define _SELF(i) RVAL2GTKICONTHEME(i)
 
 #define RVAL2ICON_LOOKUP_FLAGS(flags) (RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS))
-#define ICON_INFO2RVAL(info) (BOXED2RVAL(info, GTK_TYPE_ICON_INFO))
+#define ICON_INFO2RVAL(info) (GTKICONINFO2RVAL(info))
 
 static VALUE
 rg_initialize(VALUE self)

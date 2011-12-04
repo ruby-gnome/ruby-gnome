@@ -37,7 +37,7 @@ rg_s_lookup_entry(VALUE self, VALUE path)
 {
     GtkAccelKey key;
     if(gtk_accel_map_lookup_entry(RVAL2CSTR(path), &key))
-        return BOXED2RVAL(&key, GTK_TYPE_ACCEL_KEY);
+        return GTKACCELKEY2RVAL(&key);
     else
         return self;
 }

@@ -275,7 +275,7 @@ static VALUE
 rg_s_constrain_size(G_GNUC_UNUSED VALUE self, VALUE geometry, VALUE flags, VALUE w, VALUE h)
 {
     gint new_width, new_height;
-    gdk_window_constrain_size((GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
+    gdk_window_constrain_size(RVAL2GDKGEOMETRY(geometry),
                               RVAL2GFLAGS(flags, GDK_TYPE_WINDOW_HINTS),
                               NUM2INT(w), NUM2INT(h), &new_width, &new_height);
     return rb_assoc_new(INT2NUM(new_width), INT2NUM(new_height));
@@ -293,7 +293,7 @@ rg_begin_paint(VALUE self, VALUE area)
 {
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
         gdk_window_begin_paint_rect(_SELF(self), 
-                                    (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE));
+                                    RVAL2GDKRECTANGLE(area));
     } else {
         gdk_window_begin_paint_region(_SELF(self), RVAL2CRREGION(area));
     }
@@ -312,11 +312,11 @@ rg_invalidate(VALUE self, VALUE area, VALUE invalidate_children)
 {
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_REGION))){
         gdk_window_invalidate_region(_SELF(self),
-                                     RVAL2BOXED(area, GDK_TYPE_REGION),
+                                     RVAL2GDKREGION(area),
                                      RVAL2CBOOL(invalidate_children));
     } else {
         gdk_window_invalidate_rect(_SELF(self),
-                                   RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
+                                   RVAL2GDKRECTANGLE(area),
                                    RVAL2CBOOL(invalidate_children));
     }
     return self;
@@ -340,7 +340,7 @@ rg_invalidate_maybe_recurse(VALUE self, VALUE region)
         G_RELATIVE(self, func);
     }
     gdk_window_invalidate_maybe_recurse(_SELF(self),
-                                        RVAL2BOXED(region, GDK_TYPE_REGION),
+                                        RVAL2GDKREGION(region),
                                         (ChildFunc)invalidate_child_func_wrap,
                                         (gpointer)func);
     return self;
@@ -527,7 +527,7 @@ static VALUE
 rg_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 {
     gdk_window_set_geometry_hints(_SELF(self), 
-                                  NIL_P(geometry) ? (GdkGeometry*)NULL : (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
+                                  NIL_P(geometry) ? (GdkGeometry*)NULL : RVAL2GDKGEOMETRY(geometry),
                                   RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
     return self;
 }
@@ -607,7 +607,7 @@ rg_frame_extents(VALUE self)
 {
     GdkRectangle rect;
     gdk_window_get_frame_extents(_SELF(self), &rect);
-    return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(&rect);
 }
 
 static VALUE

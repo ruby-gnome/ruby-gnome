@@ -23,8 +23,8 @@
 
 #define RG_TARGET_NAMESPACE cCellRenderer
 #define _SELF(s) (RVAL2GTKCELLRENDERER(s))
-#define RVAL2RECT(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
-#define RECT2RVAL(r) (BOXED2RVAL(r, GDK_TYPE_RECTANGLE))
+#define RVAL2RECT(r) (RVAL2GDKRECTANGLE(r))
+#define RECT2RVAL(r) (GDKRECTANGLE2RVAL(r))
 
 static VALUE
 rg_get_size(VALUE self, VALUE widget, VALUE cell_area)

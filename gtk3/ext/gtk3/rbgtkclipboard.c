@@ -85,7 +85,7 @@ static void
 clipboard_get_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, G_GNUC_UNUSED guint info, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
-               BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
+               GTKSELECTIONDATA2RVAL(selection_data));
 }
 
 struct clipboard_set_args {
@@ -178,7 +178,7 @@ static void
 clipboard_received_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
-               BOXED2RVAL(selection_data, GTK_TYPE_SELECTION_DATA));
+               GTKSELECTIONDATA2RVAL(selection_data));
 }
 
 static VALUE
@@ -239,7 +239,7 @@ clipboard_target_received_func(GtkClipboard *clipboard, GdkAtom *atoms, gint n_a
     gint i;
     VALUE ary = rb_ary_new();
     for (i = 0; i < n_atoms; i++){
-        rb_ary_push(ary, BOXED2RVAL(atoms[i], GDK_TYPE_ATOM));
+        rb_ary_push(ary, GDKATOM2RVAL(atoms[i]));
     }
 
     rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), ary);
@@ -261,7 +261,7 @@ static void
 clipboard_rich_text_received_func(GtkClipboard *clipboard, GdkAtom format, const guint8 *text, gsize length, gpointer func)
 {
     rb_funcall((VALUE)func, id_call, 3, CLIPBOARD2RVAL(clipboard), 
-               BOXED2RVAL(format, GDK_TYPE_ATOM), rb_str_new((char*)text, length));
+               GDKATOM2RVAL(format), rb_str_new((char*)text, length));
 }
 
 static VALUE
@@ -311,9 +311,9 @@ rg_wait_for_rich_text(VALUE self, VALUE buffer)
     if (data){
         VALUE str = rb_str_new((char*)data, length);
         g_free(data);
-        return rb_assoc_new(str, BOXED2RVAL(format, GDK_TYPE_ATOM));
+        return rb_assoc_new(str, GDKATOM2RVAL(format));
     } else {
-        return rb_assoc_new(Qnil, BOXED2RVAL(format, GDK_TYPE_ATOM));
+        return rb_assoc_new(Qnil, GDKATOM2RVAL(format));
     }
 
 }
@@ -352,7 +352,7 @@ rg_wait_for_targets(VALUE self)
                 rb_ary_push(ary, rb_eval_string("Gdk::Atom::NONE"));
             }
             else
-                rb_ary_push(ary, BOXED2RVAL(targets, GDK_TYPE_ATOM));
+                rb_ary_push(ary, GDKATOM2RVAL(targets));
             targets++;
         } 
         /* How can I this ?

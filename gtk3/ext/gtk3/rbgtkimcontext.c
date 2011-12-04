@@ -39,7 +39,7 @@ rg_preedit_string(VALUE self)
     gint cursor_pos;
 
     gtk_im_context_get_preedit_string(_SELF(self), &str, &attrs, &cursor_pos);
-    return rb_ary_new3(3, CSTR2RVAL(str), BOXED2RVAL(attrs, PANGO_TYPE_ATTR_LIST), 
+    return rb_ary_new3(3, CSTR2RVAL(str), PANGOATTRLIST2RVAL(attrs), 
                        INT2NUM(cursor_pos));
 }
 
@@ -75,7 +75,7 @@ rg_set_cursor_location(VALUE self, VALUE area)
 {
     gtk_im_context_set_cursor_location(
         _SELF(self), 
-        ((GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE)));
+        RVAL2GDKRECTANGLE(area));
     return self;
 }
 

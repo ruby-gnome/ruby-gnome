@@ -137,16 +137,16 @@ rg_m_dest_find_target(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     ret = gtk_drag_dest_find_target(
         RVAL2WIDGET(widget), RVAL2DC(context),
-        NIL_P(target_list) ? NULL : RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
+        NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
 
-    return BOXED2RVAL(ret, GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(ret);
 }
 
 static VALUE
 rg_m_dest_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
-    return BOXED2RVAL(list, GTK_TYPE_TARGET_LIST);
+    return GTKTARGETLIST2RVAL(list);
 }
 
 static VALUE
@@ -154,7 +154,7 @@ rg_m_dest_set_target_list(VALUE self, VALUE widget, VALUE target_list)
 {
     gtk_drag_dest_set_target_list(
         RVAL2WIDGET(widget), 
-        NIL_P(target_list) ? NULL : RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST));
+        NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
 
     return self;
 }
@@ -233,7 +233,7 @@ static VALUE
 rg_m_begin(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE target_list, VALUE actions, VALUE button, VALUE event)
 {
     return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(widget),
-                                    RVAL2BOXED(target_list, GTK_TYPE_TARGET_LIST),
+                                    RVAL2GTKTARGETLIST(target_list),
                                     RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION),
                                     NUM2INT(button),
                                     RVAL2GEV(event)));
@@ -354,7 +354,7 @@ rg_m_source_set_target_list(VALUE self, VALUE widget, VALUE targetlist)
 {
     GtkTargetList* tlist = NULL;
     if (! NIL_P(targetlist))
-        tlist = (GtkTargetList*)RVAL2BOXED(targetlist, GTK_TYPE_TARGET_LIST);
+        tlist = RVAL2GTKTARGETLIST(targetlist);
 
     gtk_drag_source_set_target_list(RVAL2WIDGET(widget),tlist);
     return self;
@@ -364,7 +364,7 @@ static VALUE
 rg_m_source_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
-    return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);
+    return NIL_P(ret) ? Qnil : GTKTARGETLIST2RVAL(ret);
 }
 
 static VALUE

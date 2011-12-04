@@ -133,7 +133,7 @@ rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (num == 0){
         VALUE ret = CSTR2RVAL((const char*)ctext);
         gdk_free_compound_text(ctext);
-        return rb_ary_new3(3, BOXED2RVAL(encoding, GDK_TYPE_ATOM),
+        return rb_ary_new3(3, GDKATOM2RVAL(encoding),
                            INT2NUM(format), ret);
     } else {
         rb_raise(rb_eRuntimeError, "failed to converts a string %d\n", num);
@@ -178,7 +178,7 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (ret){
         VALUE val = CSTR2RVAL((const char*)ctext);
         gdk_free_compound_text(ctext);
-        return rb_ary_new3(3, BOXED2RVAL(encoding, GDK_TYPE_ATOM),
+        return rb_ary_new3(3, GDKATOM2RVAL(encoding),
                            INT2NUM(format), val);
     } else {
         rb_raise(rb_eRuntimeError, "failed to converts a string %d\n", ret);
@@ -260,13 +260,13 @@ rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
            }
          } else {
            for(j = 0; j < (rlen/sizeof(unsigned long)); j++){
-             rb_ary_push(ret, BOXED2RVAL((GdkAtom)((unsigned long*)rdat)[j], GDK_TYPE_ATOM));
+             rb_ary_push(ret, GDKATOM2RVAL((GdkAtom)((unsigned long*)rdat)[j]));
            }
          }
         break;
     }
 
-    return rb_ary_new3(3, BOXED2RVAL(rtype, GDK_TYPE_ATOM), 
+    return rb_ary_new3(3, GDKATOM2RVAL(rtype), 
                        ret, INT2NUM(rlen));
 }
 

@@ -194,7 +194,7 @@ rg_previous_rgba(VALUE self)
 static VALUE
 rg_set_previous_rgba(VALUE self, VALUE rgba)
 {
-    gtk_color_selection_set_previous_rgba(_SELF(self), RVAL2BOXED(rgba, GDK_TYPE_RGBA));
+    gtk_color_selection_set_previous_rgba(_SELF(self), RVAL2GDKRGBA(rgba));
 
     return self;
 }

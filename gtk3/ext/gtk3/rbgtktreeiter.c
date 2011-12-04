@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeIter
-#define _SELF(i) ((GtkTreeIter*)RVAL2BOXED(i, GTK_TYPE_TREE_ITER))
+#define _SELF(i) (RVAL2GTKTREEITER(i))
 
 void
 rbgtk_register_treeiter_set_value_func(GType gtype, rbgtkiter_set_value_func func)

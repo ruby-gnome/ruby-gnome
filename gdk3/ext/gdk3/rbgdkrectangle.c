@@ -25,7 +25,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cRectangle
-#define _SELF(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
+#define _SELF(r) (RVAL2GDKRECTANGLE(r))
 
 static VALUE
 rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
@@ -46,7 +46,7 @@ rg_intersect(VALUE self, VALUE other)
 {
     GdkRectangle dest;
     gboolean ret = gdk_rectangle_intersect(_SELF(self), _SELF(other), &dest);
-    return ret ? BOXED2RVAL(&dest, GDK_TYPE_RECTANGLE) : Qnil;
+    return ret ? GDKRECTANGLE2RVAL(&dest) : Qnil;
 }
 
 static VALUE
@@ -54,7 +54,7 @@ rg_union(VALUE self, VALUE other)
 {
     GdkRectangle dest;
     gdk_rectangle_union(_SELF(self), _SELF(other), &dest);
-    return BOXED2RVAL(&dest, GDK_TYPE_RECTANGLE);
+    return GDKRECTANGLE2RVAL(&dest);
 }
 
 /* Struct accessors */

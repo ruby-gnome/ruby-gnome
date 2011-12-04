@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRecentInfo
-#define _SELF(self) ((GtkRecentInfo*)RVAL2BOXED(self, GTK_TYPE_RECENT_INFO))
+#define _SELF(self) (RVAL2GTKRECENTINFO(self))
 
 static VALUE
 rg_uri(VALUE self)

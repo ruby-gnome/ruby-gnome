@@ -102,7 +102,7 @@ gdkpango_layout_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, 
 static VALUE
 gdkpango_layout_line_get_clip_region(VALUE self, VALUE rbx_origin, VALUE rby_origin, VALUE rbindex_ranges)
 {
-    PangoLayoutLine *line = (PangoLayoutLine *)RVAL2BOXED(self, PANGO_TYPE_LAYOUT_LINE);
+    PangoLayoutLine *line = RVAL2PANGOLAYOUTLINE(self);
     gint x_origin = NUM2INT(rbx_origin);
     gint y_origin = NUM2INT(rby_origin);
     long n;

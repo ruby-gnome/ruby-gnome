@@ -50,7 +50,7 @@ rg_add_item(int argc, VALUE *argv, VALUE self)
     } else {
         ret = gtk_recent_manager_add_full(_SELF(self),
                                           RVAL2CSTR(uri),
-                                          RVAL2BOXED(data, GTK_TYPE_RECENT_DATA));
+                                          RVAL2GTKRECENTDATA(data));
         if (! ret) rb_raise(rb_eRuntimeError, "Can't add the uri or data");
     }
     return self;
@@ -74,7 +74,7 @@ rg_lookup_item(VALUE self, VALUE uri)
     GtkRecentInfo* info = gtk_recent_manager_lookup_item(_SELF(self), RVAL2CSTR(uri),
                                                          &error);
     if (error) RAISE_GERROR(error);
-    return BOXED2RVAL(info, GTK_TYPE_RECENT_INFO);
+    return GTKRECENTINFO2RVAL(info);
 }
 
 static VALUE

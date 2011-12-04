@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextAttributes
-#define _SELF(s) ((GtkTextAttributes*)RVAL2BOXED(s, GTK_TYPE_TEXT_ATTRIBUTES))
+#define _SELF(s) (RVAL2GTKTEXTATTRIBUTES(s))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -39,13 +39,13 @@ static VALUE
 rg_appearance(VALUE self)
 {
     GtkTextAppearance app = _SELF(self)->appearance;
-    return BOXED2RVAL(&app, GTK_TYPE_TEXT_APPEARANCE);
+    return GTKTEXTAPPEARANCE2RVAL(&app);
 }
 
 static VALUE
 rg_set_appearance(VALUE self, VALUE val)
 {
-    GtkTextAppearance* app = (GtkTextAppearance*)RVAL2BOXED(val, GTK_TYPE_TEXT_APPEARANCE);
+    GtkTextAppearance* app = RVAL2GTKTEXTAPPEARANCE(val);
     _SELF(self)->appearance = *app;
     return self;
 }
@@ -81,7 +81,7 @@ rg_font(VALUE self)
 {
     VALUE val;
     if (_SELF(self)->font == NULL) return Qnil;
-    val = BOXED2RVAL(_SELF(self)->font, PANGO_TYPE_FONT_DESCRIPTION);
+    val = PANGOFONTDESCRIPTION2RVAL(_SELF(self)->font);
     G_CHILD_SET(self, rb_intern("font"), val);
     return val;
 }
@@ -90,7 +90,7 @@ static VALUE
 rg_set_font(VALUE self, VALUE val)
 {
     G_CHILD_SET(self, rb_intern("font"), val);
-    _SELF(self)->font = RVAL2BOXED(val, PANGO_TYPE_FONT_DESCRIPTION);
+    _SELF(self)->font = RVAL2PANGOFONTDESCRIPTION(val);
     return self;
 }
 
@@ -190,7 +190,7 @@ rg_tabs(VALUE self)
 {
     VALUE val;
     if (_SELF(self)->tabs == NULL) return Qnil;
-    val = BOXED2RVAL(_SELF(self)->tabs, PANGO_TYPE_TAB_ARRAY);
+    val = PANGOTABARRAY2RVAL(_SELF(self)->tabs);
     G_CHILD_SET(self, rb_intern("tabs"), val);
     return val;
 }
@@ -199,7 +199,7 @@ static VALUE
 rg_set_tabs(VALUE self, VALUE val)
 {
     G_CHILD_SET(self, rb_intern("tabs"), val);
-    _SELF(self)->tabs = RVAL2BOXED(val, PANGO_TYPE_TAB_ARRAY);
+    _SELF(self)->tabs = RVAL2PANGOTABARRAY(val);
     return self;
 }
 
@@ -221,7 +221,7 @@ rg_language(VALUE self)
 {
     VALUE val;
     if (_SELF(self)->language == NULL) return Qnil;
-    val = BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
+    val = PANGOLANGUAGE2RVAL(_SELF(self)->language);
     G_CHILD_SET(self, rb_intern("language"), val);
     return val;
 }
@@ -230,7 +230,7 @@ static VALUE
 rg_set_language(VALUE self, VALUE val)
 {
     G_CHILD_SET(self, rb_intern("language"), val);
-    _SELF(self)->language = RVAL2BOXED(val, PANGO_TYPE_LANGUAGE);
+    _SELF(self)->language = RVAL2PANGOLANGUAGE(val);
     return self;
 }
 

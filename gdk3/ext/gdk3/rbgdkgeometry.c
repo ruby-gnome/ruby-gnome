@@ -48,7 +48,7 @@ gdk_geometry_get_type(void)
 /*****************************************/
 
 #define RG_TARGET_NAMESPACE cGeometry
-#define _SELF(g) ((GdkGeometry*)RVAL2BOXED(g, GDK_TYPE_GEOMETRY))
+#define _SELF(g) (RVAL2GDKGEOMETRY(g))
 
 static VALUE
 rg_initialize(VALUE self)

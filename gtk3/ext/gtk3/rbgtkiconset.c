@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIconSet
-#define _SELF(s) ((GtkIconSet*)RVAL2BOXED(s, GTK_TYPE_ICON_SET))
+#define _SELF(s) (RVAL2GTKICONSET(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -44,7 +44,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_add_source(VALUE self, VALUE source)
 {
-    gtk_icon_set_add_source(_SELF(self), RVAL2BOXED(source, GTK_TYPE_ICON_SOURCE));
+    gtk_icon_set_add_source(_SELF(self), RVAL2GTKICONSOURCE(source));
     return self;
 }
 

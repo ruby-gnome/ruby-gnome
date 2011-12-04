@@ -23,9 +23,9 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextIter
-#define _SELF(s) ((GtkTextIter*)RVAL2BOXED(s, GTK_TYPE_TEXT_ITER))
+#define _SELF(s) (RVAL2GTKTEXTITER(s))
 #define RVAL2TAG(t) (RVAL2GTKTEXTTAG(t))
-#define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
+#define ITR2RVAL(i) (GTKTEXTITER2RVAL(i))
 
 static gboolean is_compat_240;
 static ID id_pixbuf;
@@ -244,7 +244,7 @@ rg_attributes(VALUE self)
     GtkTextAttributes attr;
 
     if(gtk_text_iter_get_attributes(_SELF(self), &attr) == TRUE){
-        return BOXED2RVAL(&attr, GTK_TYPE_TEXT_ATTRIBUTES);
+        return GTKTEXTATTRIBUTES2RVAL(&attr);
     } else {
         return Qnil;
     }

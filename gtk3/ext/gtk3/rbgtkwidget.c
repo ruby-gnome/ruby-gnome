@@ -116,7 +116,7 @@ rg_queue_resize_no_redraw(VALUE self)
 static VALUE
 rg_size_allocate(VALUE self, VALUE alloc)
 {
-    gtk_widget_size_allocate(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
+    gtk_widget_size_allocate(_SELF(self), RVAL2GTKALLOCATION(alloc));
     return self;
 }
 
@@ -185,9 +185,9 @@ rg_intersect(VALUE self, VALUE area)
 {
     GdkRectangle intersection;
     gboolean ret = gtk_widget_intersect(_SELF(self),
-                                        (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE),
+                                        RVAL2GDKRECTANGLE(area),
                                         &intersection);
-    return ret ? BOXED2RVAL(&intersection, GDK_TYPE_RECTANGLE) : Qnil;
+    return ret ? GDKRECTANGLE2RVAL(&intersection) : Qnil;
 }
 
 static VALUE
@@ -709,13 +709,13 @@ rg_allocation(VALUE self)
 {
     GtkAllocation alloc;
     gtk_widget_get_allocation(_SELF(self), &alloc);
-    return BOXED2RVAL(&alloc, GTK_TYPE_ALLOCATION);
+    return GTKALLOCATION2RVAL(&alloc);
 }
 
 static VALUE
 rg_set_allocation(VALUE self, VALUE alloc)
 {
-    gtk_widget_set_allocation(_SELF(self), (GtkAllocation*)RVAL2BOXED(alloc, GTK_TYPE_ALLOCATION));
+    gtk_widget_set_allocation(_SELF(self), RVAL2GTKALLOCATION(alloc));
     return self;
 }
 
@@ -780,7 +780,7 @@ rg_s_binding_set(VALUE self)
     }
     g_type_class_unref(gclass);
 
-    return BOXED2RVAL(binding_set, GTK_TYPE_BINDING_SET);
+    return GTKBINDINGSET2RVAL(binding_set);
 }
 
 static VALUE
@@ -794,7 +794,7 @@ static VALUE
 widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkAllocation* alloc = (GtkAllocation*)g_value_get_boxed(&values[1]);
-    return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]), GTKALLOCATION2RVAL(alloc));
 }
 
 static VALUE
@@ -998,7 +998,7 @@ static VALUE
 rg_override_font(VALUE self, VALUE font_desc)
 {
     gtk_widget_override_font(_SELF(self),
-                             NIL_P(font_desc) ? NULL : RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
+                             NIL_P(font_desc) ? NULL : RVAL2PANGOFONTDESCRIPTION(font_desc));
 
     return self;
 }
@@ -1054,7 +1054,7 @@ rg_send_focus_change(VALUE self, VALUE event)
 {
     gboolean result;
 
-    result = gtk_widget_send_focus_change(_SELF(self), RVAL2BOXED(event, GDK_TYPE_EVENT));
+    result = gtk_widget_send_focus_change(_SELF(self), RVAL2GDKEVENT(event));
 
     return CBOOL2RVAL(result);
 }
