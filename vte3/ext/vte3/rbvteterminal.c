@@ -24,7 +24,7 @@
 #include <pwd.h>
 
 #define RG_TARGET_NAMESPACE cTerminal
-#define _SELF(s) (VTE_TERMINAL(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2VTETERMINAL(s))
 
 static ID id_new, id_call;
 
