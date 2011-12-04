@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIconTheme
-#define _SELF(i) GTK_ICON_THEME(RVAL2GOBJ(i))
+#define _SELF(i) RVAL2GTKICONTHEME(i)
 
 #define RVAL2ICON_LOOKUP_FLAGS(flags) (RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS))
 #define ICON_INFO2RVAL(info) (BOXED2RVAL(info, GTK_TYPE_ICON_INFO))
@@ -43,13 +43,13 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
-    return GOBJ2RVAL(gtk_icon_theme_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
+    return GOBJ2RVAL(gtk_icon_theme_get_for_screen(RVAL2GDKSCREEN(screen)));
 }
 
 static VALUE
 rg_set_screen(VALUE self, VALUE screen)
 {
-    gtk_icon_theme_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
+    gtk_icon_theme_set_screen(_SELF(self), RVAL2GDKSCREEN(screen));
     return self;
 }
 
@@ -178,7 +178,7 @@ static VALUE
 rg_s_add_builtin_icon(VALUE self, VALUE icon_name, VALUE size, VALUE pixbuf)
 {
     gtk_icon_theme_add_builtin_icon(RVAL2CSTR(icon_name), NUM2INT(size),
-                                    GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+                                    RVAL2GDKPIXBUF(pixbuf));
     return self;
 }
 

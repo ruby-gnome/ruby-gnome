@@ -41,7 +41,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                                              RVAL2CSTR(label),
                                                              RVAL2CSTR_ACCEPT_NIL(tooltip),
                                                              RVAL2CSTR_ACCEPT_NIL(stock_id),
-                                                             GTK_RECENT_MANAGER(RVAL2GOBJ(manager))));
+                                                             RVAL2GTKRECENTMANAGER(manager)));
     }
     return Qnil;
 }

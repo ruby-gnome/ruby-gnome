@@ -168,7 +168,7 @@ rg_text(VALUE self)
 static VALUE
 rg_set_pixbuf(VALUE self, VALUE pixbuf)
 {
-    if (!gtk_selection_data_set_pixbuf(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf))))
+    if (!gtk_selection_data_set_pixbuf(_SELF(self), RVAL2GDKPIXBUF(pixbuf)))
         rb_raise(rb_eRuntimeError, "the selection wasn't successfully set");
 
     return self;
@@ -253,7 +253,7 @@ static VALUE
 rg_targets_include_rich_text(VALUE self, VALUE buffer)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_rich_text(_SELF(self),
-                                                                   GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
+                                                                   RVAL2GTKTEXTBUFFER(buffer)));
 }
 
 void

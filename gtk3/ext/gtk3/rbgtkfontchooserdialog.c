@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cFontChooserDialog
-#define _SELF(self) (GTK_FONT_CHOOSER_DIALOG(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKFONTCHOOSERDIALOG(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -36,7 +36,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      NULL);
 
     /* TODO: accept NULL? */
-    widget = gtk_font_chooser_dialog_new(RVAL2CSTR(rb_title), GTK_WINDOW(RVAL2GOBJ(rb_parent)));
+    widget = gtk_font_chooser_dialog_new(RVAL2CSTR(rb_title), RVAL2GTKWINDOW(rb_parent));
     RBGTK_INITIALIZE(self, widget);
 
     return Qnil;

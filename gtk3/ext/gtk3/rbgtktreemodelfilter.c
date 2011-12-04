@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeModelFilter
-#define _SELF(s) (GTK_TREE_MODEL_FILTER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKTREEMODELFILTER(s))
 
 static ID id_child_model;
 static ID id_root;
@@ -37,11 +37,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     G_CHILD_SET(self, id_child_model, child_model);
     if (NIL_P(root)){
-        widget = gtk_tree_model_filter_new(GTK_TREE_MODEL(RVAL2GOBJ(child_model)), 
+        widget = gtk_tree_model_filter_new(RVAL2GTKTREEMODEL(child_model), 
                                            (GtkTreePath*)NULL);
     } else {
         G_CHILD_SET(self, id_root, root);
-        widget = gtk_tree_model_filter_new(GTK_TREE_MODEL(RVAL2GOBJ(child_model)), 
+        widget = gtk_tree_model_filter_new(RVAL2GTKTREEMODEL(child_model), 
                                            (GtkTreePath*)RVAL2GTKTREEPATH(root));
     }
 

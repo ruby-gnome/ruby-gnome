@@ -44,7 +44,7 @@ rg_set_source_pixbuf(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "12", &pixbuf, &pixbuf_x, &pixbuf_y);
 
     gdk_cairo_set_source_pixbuf(_SELF(self),
-                                GDK_PIXBUF(RVAL2GOBJ(pixbuf)),
+                                RVAL2GDKPIXBUF(pixbuf),
                                 NIL_P(pixbuf_x) ? 0 : NUM2DBL(pixbuf_x),
                                 NIL_P(pixbuf_y) ? 0 : NUM2DBL(pixbuf_y));
     rb_cairo_check_status(cairo_status(_SELF(self)));
@@ -55,7 +55,7 @@ rg_set_source_pixbuf(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
 {
-    gdk_cairo_set_source_pixmap(_SELF(self), GDK_PIXMAP(RVAL2GOBJ(pixmap)),
+    gdk_cairo_set_source_pixmap(_SELF(self), RVAL2GDKPIXMAP(pixmap),
                                 NUM2DBL(pixmap_x), NUM2DBL(pixmap_y));
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;

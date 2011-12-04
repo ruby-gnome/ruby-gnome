@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRecentChooserDialog
-#define _SELF(self) (GTK_RECENT_CHOOSER_DIALOG(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRECENTCHOOSERDIALOG(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -41,8 +41,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "buttons", &rb_button_ary,
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
-    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
-    manager = NIL_P(rb_manager) ? NULL : GTK_RECENT_MANAGER(RVAL2GOBJ(rb_manager));
+    parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
+    manager = NIL_P(rb_manager) ? NULL : RVAL2GTKRECENTMANAGER(rb_manager);
 
     if (manager) {
         dialog = gtk_recent_chooser_dialog_new_for_manager(title, parent, manager, NULL, NULL);

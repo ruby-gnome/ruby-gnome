@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cDevice
-#define _SELF(self) (GDK_DEVICE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GDKDEVICE(self))
 
 /* deprecated
 static VALUE
@@ -34,7 +34,7 @@ rg_s_list(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_set_extension_events(G_GNUC_UNUSED VALUE self, VALUE window, VALUE mask, VALUE mode)
 {
-    gdk_input_set_extension_events(GDK_WINDOW(RVAL2GOBJ(window)),
+    gdk_input_set_extension_events(RVAL2GDKWINDOW(window),
                                    NUM2INT(mask), FIX2INT(mode));
     return Qnil;
 }
@@ -81,7 +81,7 @@ rg_get_state(VALUE self, VALUE window)
     gdouble axes[2];
     GdkModifierType mask;
 
-    gdk_device_get_state(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)),
+    gdk_device_get_state(_SELF(self), RVAL2GDKWINDOW(window),
                          axes, &mask);
     return rb_ary_new3(3, rb_float_new(axes[0]), rb_float_new(axes[1]),
                        GFLAGS2RVAL(mask, GDK_TYPE_MODIFIER_TYPE));
@@ -95,7 +95,7 @@ rg_get_history(VALUE self, VALUE window, VALUE start, VALUE stop)
     gint i, n_events;
     VALUE ary = Qnil;
     ret = gdk_device_get_history(_SELF(self),
-                                 GDK_WINDOW(RVAL2GOBJ(window)),
+                                 RVAL2GDKWINDOW(window),
                                  NUM2UINT(start), NUM2UINT(stop),
                                  &events, &n_events);
     if (ret){

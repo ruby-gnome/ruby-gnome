@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cButton
-#define _SELF(self) (GTK_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKBUTTON(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -57,7 +57,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_pressed(VALUE self)
 {
-    gtk_button_pressed(GTK_BUTTON(RVAL2GOBJ(self)));
+    gtk_button_pressed(RVAL2GTKBUTTON(self));
     return self;
 }
 

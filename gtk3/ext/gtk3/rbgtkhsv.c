@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cHSV
-#define _SELF(self) (GTK_HSV(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKHSV(self))
 
 static VALUE
 rg_s_to_rgb(VALUE self, VALUE h, VALUE s, VALUE v)

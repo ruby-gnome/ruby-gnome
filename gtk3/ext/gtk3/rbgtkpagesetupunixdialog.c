@@ -25,7 +25,7 @@
 #include <gtk/gtkunixprint.h>
 
 #define RG_TARGET_NAMESPACE cPageSetupUnixDialog
-#define _SELF(s) (GTK_PAGE_SETUP_UNIX_DIALOG(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPAGESETUPUNIXDIALOG(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -41,7 +41,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "parent", &rb_parent,
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
-    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
 
     dialog = gtk_page_setup_unix_dialog_new(title, parent);
     RBGTK_INITIALIZE(self, dialog);

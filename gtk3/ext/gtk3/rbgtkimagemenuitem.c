@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         } else if (TYPE(label) == T_SYMBOL){
             widget = gtk_image_menu_item_new_from_stock(rb_id2name(SYM2ID(label)),
                                                         NIL_P(use_underline_or_accel_group) ? NULL :
-                                                        GTK_ACCEL_GROUP(RVAL2GOBJ(use_underline_or_accel_group)));
+                                                        RVAL2GTKACCELGROUP(use_underline_or_accel_group));
         } else {
             rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
                      rb_class2name(CLASS_OF(label)));

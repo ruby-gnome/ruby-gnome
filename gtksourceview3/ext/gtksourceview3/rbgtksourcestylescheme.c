@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgtksourcemain.h"
+#include "rbgtksourceview3private.h"
 
 /* Module: Gtk::SourceStyleScheme
  */

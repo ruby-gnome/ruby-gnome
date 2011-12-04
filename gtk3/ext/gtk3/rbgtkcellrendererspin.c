@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cCellRendererSpin
-#define _SELF(s) (GTK_CELL_RENDERER_SPIN(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKCELLRENDERERSPIN(s))
 
 static VALUE
 rg_initialize(VALUE self)

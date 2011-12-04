@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cFixed
-#define _SELF(self) (GTK_FIXED(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKFIXED(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -37,7 +37,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_put(VALUE self, VALUE win, VALUE x, VALUE y)
 {
-    gtk_fixed_put(_SELF(self), GTK_WIDGET(RVAL2GOBJ(win)), 
+    gtk_fixed_put(_SELF(self), RVAL2GTKWIDGET(win), 
                   NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -45,7 +45,7 @@ rg_put(VALUE self, VALUE win, VALUE x, VALUE y)
 static VALUE
 rg_move(VALUE self, VALUE win, VALUE x, VALUE y)
 {
-    gtk_fixed_move(_SELF(self), GTK_WIDGET(RVAL2GOBJ(win)), 
+    gtk_fixed_move(_SELF(self), RVAL2GTKWIDGET(win), 
                    NUM2INT(x), NUM2INT(y));
     return self;
 }

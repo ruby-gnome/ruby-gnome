@@ -20,7 +20,6 @@
  */
 
 #include "rbgdk3private.h"
-#include "rbgdk.h"
 
 #define RG_TARGET_NAMESPACE cAtom
 #define _SELF(a) (((GdkAtomData*)RVAL2BOXED(a, GDK_TYPE_ATOM))->atom)

@@ -22,8 +22,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE mCellLayout
-#define _SELF(s) (GTK_CELL_LAYOUT(RVAL2GOBJ(s)))
-#define RVAL2RENDERER(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKCELLLAYOUT(s))
+#define RVAL2RENDERER(s) (RVAL2GTKCELLRENDERER(s))
 
 static VALUE
 rg_pack_start(VALUE self, VALUE cell, VALUE expand)

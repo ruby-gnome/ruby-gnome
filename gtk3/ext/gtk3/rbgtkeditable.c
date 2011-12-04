@@ -29,7 +29,7 @@
 static VALUE
 rg_select_region(VALUE self, VALUE start, VALUE end)
 {
-    gtk_editable_select_region(GTK_EDITABLE(RVAL2GOBJ(self)),
+    gtk_editable_select_region(RVAL2GTKEDITABLE(self),
                                NUM2INT(start), NUM2INT(end));
     return self;
 }
@@ -39,7 +39,7 @@ rg_selection_bounds(VALUE self)
 {
     gint start, end;
     gboolean ret;
-    ret = gtk_editable_get_selection_bounds(GTK_EDITABLE(RVAL2GOBJ(self)),
+    ret = gtk_editable_get_selection_bounds(RVAL2GTKEDITABLE(self),
                                             &start, &end);
     return ret ? rb_ary_new3(2, INT2NUM(start), INT2NUM(end)) : Qnil;
 }
@@ -50,7 +50,7 @@ rg_insert_text(VALUE self, VALUE new_text, VALUE pos)
     gint p = NUM2INT(pos);
 
     StringValue(new_text);
-    gtk_editable_insert_text(GTK_EDITABLE(RVAL2GOBJ(self)),
+    gtk_editable_insert_text(RVAL2GTKEDITABLE(self),
                              RSTRING_PTR(new_text),
                              RSTRING_LEN(new_text),
                              &p);
@@ -60,7 +60,7 @@ rg_insert_text(VALUE self, VALUE new_text, VALUE pos)
 static VALUE
 rg_delete_text(VALUE self, VALUE start, VALUE end)
 {
-    gtk_editable_delete_text(GTK_EDITABLE(RVAL2GOBJ(self)),
+    gtk_editable_delete_text(RVAL2GTKEDITABLE(self),
                              NUM2INT(start), NUM2INT(end));
     return self;
 }
@@ -69,27 +69,27 @@ static VALUE
 rg_get_chars(VALUE self, VALUE start, VALUE end)
 {
     return CSTR2RVAL_FREE(
-            gtk_editable_get_chars(GTK_EDITABLE(RVAL2GOBJ(self)),   /* check s */
+            gtk_editable_get_chars(RVAL2GTKEDITABLE(self),   /* check s */
                                    NUM2INT(start), NUM2INT(end)));  /* check start,end */
 }
 
 static VALUE
 rg_delete_selection(VALUE self)
 {
-    gtk_editable_delete_selection(GTK_EDITABLE(RVAL2GOBJ(self)));
+    gtk_editable_delete_selection(RVAL2GTKEDITABLE(self));
     return self;
 }
 
 static VALUE
 rg_position(VALUE self)
 {
-    return INT2NUM(gtk_editable_get_position(GTK_EDITABLE(RVAL2GOBJ(self))));
+    return INT2NUM(gtk_editable_get_position(RVAL2GTKEDITABLE(self)));
 }
 
 static VALUE
 rg_set_position(VALUE self, VALUE position)
 {
-    gtk_editable_set_position(GTK_EDITABLE(RVAL2GOBJ(self)),
+    gtk_editable_set_position(RVAL2GTKEDITABLE(self),
                               NUM2INT(position));
     return self;
 }
@@ -97,34 +97,34 @@ rg_set_position(VALUE self, VALUE position)
 static VALUE
 rg_set_editable(VALUE self, VALUE editable)
 {
-    gtk_editable_set_editable(GTK_EDITABLE(RVAL2GOBJ(self)), RVAL2CBOOL(editable));
+    gtk_editable_set_editable(RVAL2GTKEDITABLE(self), RVAL2CBOOL(editable));
     return self;
 }
 
 static VALUE
 rg_editable_p(VALUE self)
 {
-    return CBOOL2RVAL(gtk_editable_get_editable(GTK_EDITABLE(RVAL2GOBJ(self))));
+    return CBOOL2RVAL(gtk_editable_get_editable(RVAL2GTKEDITABLE(self)));
 }
 
 static VALUE
 rg_cut_clipboard(VALUE self)
 {
-    gtk_editable_cut_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
+    gtk_editable_cut_clipboard(RVAL2GTKEDITABLE(self));
     return self;
 }
 
 static VALUE
 rg_copy_clipboard(VALUE self)
 {
-    gtk_editable_copy_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
+    gtk_editable_copy_clipboard(RVAL2GTKEDITABLE(self));
     return self;
 }
 
 static VALUE
 rg_paste_clipboard(VALUE self)
 {
-    gtk_editable_paste_clipboard(GTK_EDITABLE(RVAL2GOBJ(self)));
+    gtk_editable_paste_clipboard(RVAL2GTKEDITABLE(self));
     return self;
 }
 

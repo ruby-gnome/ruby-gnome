@@ -32,14 +32,14 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     if (argc == 4){
         rb_scan_args(argc, argv, "40", &owner, &selection, &time, &send_event);
-        ret = gdk_selection_owner_set(GDK_WINDOW(RVAL2GOBJ(owner)), 
+        ret = gdk_selection_owner_set(RVAL2GDKWINDOW(owner), 
                                       RVAL2ATOM(selection), 
                                       NUM2UINT(time), RVAL2CBOOL(send_event));
     } else {
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "50", &display, &owner, &selection, &time, &send_event);
-      ret = gdk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
-                                                GDK_WINDOW(RVAL2GOBJ(owner)), 
+      ret = gdk_selection_owner_set_for_display(RVAL2GDKDISPLAYOBJECT(display),
+                                                RVAL2GDKWINDOW(owner), 
                                                 RVAL2ATOM(selection), 
                                                 NUM2UINT(time), RVAL2CBOOL(send_event));
     }
@@ -57,7 +57,7 @@ rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     } else {
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "20", &display, &selection);
-      return GOBJ2RVAL(gdk_selection_owner_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+      return GOBJ2RVAL(gdk_selection_owner_get_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                            RVAL2ATOM(selection)));
     }
 }
@@ -65,7 +65,7 @@ rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
 {
-    gdk_selection_convert(GDK_WINDOW(RVAL2GOBJ(requestor)), 
+    gdk_selection_convert(RVAL2GDKWINDOW(requestor), 
                           RVAL2ATOM(selection), 
                           RVAL2ATOM(target), NUM2INT(time));
     return self;
@@ -79,7 +79,7 @@ rg_m_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
     gint prop_format;
     VALUE ary;
 
-    gdk_selection_property_get(GDK_WINDOW(RVAL2GOBJ(requestor)), &data, 
+    gdk_selection_property_get(RVAL2GDKWINDOW(requestor), &data, 
                                &prop_type, &prop_format);
 
     ary = rb_ary_new3(3, CSTR2RVAL((const char*)data), GATOM2RVAL(prop_type), 
@@ -102,7 +102,7 @@ rg_m_send_notify(int argc, VALUE *argv, VALUE self)
     } else {
       VALUE display = Qnil;
       rb_scan_args(argc, argv, "60", &display, &requestor, &selection, &target, &property, &time);
-      gdk_selection_send_notify_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+      gdk_selection_send_notify_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                             RVAL2GDKWINDOW(requestor), RVAL2ATOM(selection),
                                             RVAL2ATOM(target), 
                                             NIL_P(property) ? GDK_NONE : RVAL2ATOM(property), 

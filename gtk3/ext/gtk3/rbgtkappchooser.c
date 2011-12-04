@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE mAppChooser
-#define _SELF(self) (GTK_APP_CHOOSER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKAPPCHOOSER(self))
 
 static VALUE
 rg_app_info(VALUE self)

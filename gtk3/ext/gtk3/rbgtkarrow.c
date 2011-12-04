@@ -37,7 +37,7 @@ rg_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
 static VALUE
 rg_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
-    gtk_arrow_set(GTK_ARROW(RVAL2GOBJ(self)),
+    gtk_arrow_set(RVAL2GTKARROW(self),
                   RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
                   RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE));
     return self;

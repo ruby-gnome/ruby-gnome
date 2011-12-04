@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cCellRenderer
-#define _SELF(s) (GTK_CELL_RENDERER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKCELLRENDERER(s))
 #define RVAL2RECT(r) ((GdkRectangle*)RVAL2BOXED(r, GDK_TYPE_RECTANGLE))
 #define RECT2RVAL(r) (BOXED2RVAL(r, GDK_TYPE_RECTANGLE))
 
@@ -31,7 +31,7 @@ rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
 {
     GdkRectangle ret;
 
-    gtk_cell_renderer_get_size(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+    gtk_cell_renderer_get_size(_SELF(self), RVAL2GTKWIDGET(widget),
                                RVAL2RECT(cell_area),
                                &ret.x, &ret.y, &ret.width, &ret.height);
     return RECT2RVAL(&ret);
@@ -41,8 +41,8 @@ rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
 static VALUE
 rg_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE cell_area, VALUE expose_area, VALUE flags)
 {
-    gtk_cell_renderer_render(_SELF(self), GDK_WINDOW(RVAL2GOBJ(window)),
-                             GTK_WIDGET(RVAL2GOBJ(widget)),
+    gtk_cell_renderer_render(_SELF(self), RVAL2GDKWINDOW(window),
+                             RVAL2GTKWIDGET(widget),
                              RVAL2RECT(background_area),
                              RVAL2RECT(cell_area),
                              RVAL2RECT(expose_area),
@@ -56,7 +56,7 @@ rg_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_
 {
     gboolean ret =
     gtk_cell_renderer_activate(_SELF(self), (GdkEvent*)RVAL2GEV(event),
-                               GTK_WIDGET(RVAL2GOBJ(widget)),
+                               RVAL2GTKWIDGET(widget),
                                RVAL2CSTR(path), RVAL2RECT(background_area),
                                RVAL2RECT(cell_area), 
                                RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
@@ -68,7 +68,7 @@ rg_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE backgr
 {
     GtkCellEditable* edit =
     gtk_cell_renderer_start_editing(_SELF(self), (GdkEvent*)RVAL2GEV(event),
-                               GTK_WIDGET(RVAL2GOBJ(widget)),
+                               RVAL2GTKWIDGET(widget),
                                RVAL2CSTR(path), RVAL2RECT(background_area),
                                RVAL2RECT(cell_area), 
                                RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));

@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cCellRendererText
-#define _SELF(s) (GTK_CELL_RENDERER_TEXT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKCELLRENDERERTEXT(s))
 
 static VALUE
 rg_initialize(VALUE self)

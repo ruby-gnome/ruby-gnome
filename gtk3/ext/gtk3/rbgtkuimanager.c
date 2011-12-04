@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cUIManager
-#define _SELF(self) (GTK_UI_MANAGER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKUIMANAGER(self))
 
 static VALUE
 rg_initialize(VALUE self)

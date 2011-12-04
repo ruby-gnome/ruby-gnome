@@ -23,12 +23,12 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextBuffer
-#define _SELF(s) (GTK_TEXT_BUFFER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKTEXTBUFFER(s))
 #define RVAL2ITR(i) (GtkTextIter*)RVAL2BOXED(i, GTK_TYPE_TEXT_ITER)
 #define ITR2RVAL(i) (BOXED2RVAL(i, GTK_TYPE_TEXT_ITER))
-#define RVAL2MARK(m) (GTK_TEXT_MARK(RVAL2GOBJ(m)))
-#define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
-#define RVAL2ANCHOR(a) (GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(a)))
+#define RVAL2MARK(m) (RVAL2GTKTEXTMARK(m))
+#define RVAL2TAG(t) (RVAL2GTKTEXTTAG(t))
+#define RVAL2ANCHOR(a) (RVAL2GTKTEXTCHILDANCHOR(a))
 #define ATOM2RVAL(a) (BOXED2RVAL(a, GDK_TYPE_ATOM))
 
 static VALUE rb_mGtk;
@@ -43,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         G_INITIALIZE(self, gtk_text_buffer_new(NULL));
     else {
         G_CHILD_SET(self, id_tagtable, table);
-        G_INITIALIZE(self, gtk_text_buffer_new(GTK_TEXT_TAG_TABLE(RVAL2GOBJ(table))));
+        G_INITIALIZE(self, gtk_text_buffer_new(RVAL2GTKTEXTTAGTABLE(table)));
     }
     return Qnil;
 }
@@ -128,7 +128,7 @@ rg_insert_range_interactive(VALUE self, VALUE iter, VALUE start, VALUE end, VALU
 static VALUE
 rg_delete(VALUE self, VALUE start, VALUE end)
 {
-    gtk_text_buffer_delete(GTK_TEXT_BUFFER(RVAL2GOBJ(self)),
+    gtk_text_buffer_delete(RVAL2GTKTEXTBUFFER(self),
                            RVAL2ITR(start), RVAL2ITR(end));
     return self;
 }
@@ -215,7 +215,7 @@ rg_insert_pixbuf(VALUE self, VALUE iter, VALUE pixbuf)
     if (RVAL2CBOOL(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(iter),
-                                  GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+                                  RVAL2GDKPIXBUF(pixbuf));
     return self;
 }
 
@@ -227,7 +227,7 @@ rg_insert_child_anchor(VALUE self, VALUE iter, VALUE anchor)
     if (RVAL2CBOOL(ruby_debug))
         rb_warning("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
     gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(iter),
-                                        GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(anchor)));
+                                        RVAL2GTKTEXTCHILDANCHOR(anchor));
     return self;
 }
 
@@ -660,10 +660,10 @@ rg_insert(int argc, VALUE *argv, VALUE self)
     G_CHILD_ADD(self, value);
     if (rb_obj_is_kind_of(value, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
         gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITR(where),
-                                      GDK_PIXBUF(RVAL2GOBJ(value)));
+                                      RVAL2GDKPIXBUF(value));
     } else if (rb_obj_is_kind_of(value, GTYPE2CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR))){
         gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITR(where),
-                                            GTK_TEXT_CHILD_ANCHOR(RVAL2GOBJ(value)));
+                                            RVAL2GTKTEXTCHILDANCHOR(value));
     } else {
         start_offset = gtk_text_iter_get_offset(RVAL2ITR(where));
         StringValue(value);

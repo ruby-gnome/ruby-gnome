@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cScale
-#define _SELF(self) (GTK_SCALE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSCALE(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -37,7 +37,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
    if (NIL_P(arg1) || RVAL2GTYPE(arg1) == GTK_TYPE_ADJUSTMENT) {
         widget = gtk_scale_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
-                               NIL_P(arg1) ? NULL : GTK_ADJUSTMENT(RVAL2GOBJ(arg1)));
+                               NIL_P(arg1) ? NULL : RVAL2GTKADJUSTMENT(arg1));
     } else {
         widget = gtk_scale_new_with_range(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
                                           NUM2DBL(arg1), NUM2DBL(arg2), NUM2DBL(arg3));

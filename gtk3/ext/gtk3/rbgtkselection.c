@@ -26,7 +26,7 @@
 
 #define RG_TARGET_NAMESPACE mSelection
 
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -41,7 +41,7 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     } else {
         VALUE display, widget, selection, time;
         rb_scan_args(argc, argv, "40", &display, &widget, &selection, &time);
-        ret = gtk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        ret = gtk_selection_owner_set_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                   RVAL2WIDGET(widget), 
                                                   RVAL2ATOM(selection), NUM2INT(time));
     }
@@ -140,7 +140,7 @@ rg_m_include_uri_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 static VALUE
 rg_m_include_rich_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuffer)
 {
-    GtkTextBuffer *buffer = GTK_TEXT_BUFFER(RVAL2GOBJ(rbbuffer));
+    GtkTextBuffer *buffer = RVAL2GTKTEXTBUFFER(rbbuffer);
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
     gboolean result;

@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRecentChooserMenu
-#define _SELF(self) (GTK_RECENT_CHOOSER_MENU(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRECENTCHOOSERMENU(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -33,7 +33,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &manager);
 
     if (NIL_P(manager)){
-        menu = gtk_recent_chooser_menu_new_for_manager(GTK_RECENT_MANAGER(RVAL2GOBJ(manager)));
+        menu = gtk_recent_chooser_menu_new_for_manager(RVAL2GTKRECENTMANAGER(manager));
     } else {
         menu = gtk_recent_chooser_menu_new();
     }

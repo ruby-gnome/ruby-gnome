@@ -22,8 +22,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cBuildable
-#define _SELF(self) (GTK_BUILDABLE(RVAL2GOBJ(self)))
-#define RVAL2BUILDER(obj) (GTK_BUILDER(RVAL2GOBJ(obj)))
+#define _SELF(self) (RVAL2GTKBUILDABLE(self))
+#define RVAL2BUILDER(obj) (RVAL2GTKBUILDER(obj))
 
 static VALUE
 rg_builder_name(VALUE self)

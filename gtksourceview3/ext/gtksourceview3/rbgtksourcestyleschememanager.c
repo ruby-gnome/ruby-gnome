@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgtksourcemain.h"
+#include "rbgtksourceview3private.h"
 
 /* Class: Gtk::SourceStyleSchemeManager
  * A class to manage source style scheme.

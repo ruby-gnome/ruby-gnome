@@ -28,7 +28,7 @@
 
 static VALUE RG_TARGET_NAMESPACE;
 
-#define _GROUP(s) (NIL_P(s) ? NULL : GTK_RADIO_BUTTON(RVAL2GOBJ(s)))
+#define _GROUP(s) (NIL_P(s) ? NULL : RVAL2GTKRADIOBUTTON(s))
 
 static GtkWidget*
 create_button(VALUE group, VALUE label, VALUE use_underline)
@@ -77,7 +77,7 @@ static VALUE
 rg_group(VALUE self)
 {
     /* Owned by GTK+ */
-    return GSLIST2ARY(gtk_radio_button_get_group(GTK_RADIO_BUTTON(RVAL2GOBJ(self))));
+    return GSLIST2ARY(gtk_radio_button_get_group(RVAL2GTKRADIOBUTTON(self)));
 }
 
 void 

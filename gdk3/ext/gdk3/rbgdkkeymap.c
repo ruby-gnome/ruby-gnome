@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cKeymap
-#define _SELF(s) GDK_KEYMAP(RVAL2GOBJ(s))
+#define _SELF(s) RVAL2GDKKEYMAP(s)
 
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE self)
@@ -33,7 +33,7 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_for_display(G_GNUC_UNUSED VALUE self, VALUE display)
 {
-  return GOBJ2RVAL(gdk_keymap_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display))));
+  return GOBJ2RVAL(gdk_keymap_get_for_display(RVAL2GDKDISPLAYOBJECT(display)));
 }
 
 static VALUE

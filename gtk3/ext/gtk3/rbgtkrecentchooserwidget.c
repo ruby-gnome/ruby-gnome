@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRecentChooserWidget
-#define _SELF(self) (GTK_RECENT_CHOOSER_WIDGET(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRECENTCHOOSERWIDGET(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -31,7 +31,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     GtkWidget* widget;
     rb_scan_args(argc, argv, "01", &manager);
     if (NIL_P(manager)){
-      widget = gtk_recent_chooser_widget_new_for_manager(GTK_RECENT_MANAGER(RVAL2GOBJ(manager)));
+      widget = gtk_recent_chooser_widget_new_for_manager(RVAL2GTKRECENTMANAGER(manager));
     } else {
       widget = gtk_recent_chooser_widget_new();
     }

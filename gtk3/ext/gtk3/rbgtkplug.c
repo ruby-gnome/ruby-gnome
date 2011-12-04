@@ -52,9 +52,9 @@ static VALUE
 rg_construct(VALUE self, VALUE socket_id)
 {
 #ifdef GDK_NATIVE_WINDOW_POINTER
-    gtk_plug_construct(GTK_PLUG(RVAL2GOBJ(self)), GUINT_TO_POINTER(NUM2ULONG(socket_id)));
+    gtk_plug_construct(RVAL2GTKPLUG(self), GUINT_TO_POINTER(NUM2ULONG(socket_id)));
 #else
-    gtk_plug_construct(GTK_PLUG(RVAL2GOBJ(self)), (guint32)NUM2UINT(socket_id));
+    gtk_plug_construct(RVAL2GTKPLUG(self), (guint32)NUM2UINT(socket_id));
 #endif
     return self;
 }
@@ -62,7 +62,7 @@ rg_construct(VALUE self, VALUE socket_id)
 static VALUE
 rg_id(VALUE self)
 {
-    Window id = gtk_plug_get_id(GTK_PLUG(RVAL2GOBJ(self)));
+    Window id = gtk_plug_get_id(RVAL2GTKPLUG(self));
 #ifdef GDK_NATIVE_WINDOW_POINTER
     return UINT2NUM(GPOINTER_TO_UINT(id));
 #else

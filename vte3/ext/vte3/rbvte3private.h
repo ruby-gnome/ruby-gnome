@@ -1,8 +1,8 @@
-#ifndef __RBVTE_H__
-#define __RBVTE_H__
+#ifndef __RBVTE3PRIVATE_H__
+#define __RBVTE3PRIVATE_H__
 
 #include <ruby.h>
-#include <rbgtk.h>
+#include <rbgtk3.h>
 
 #include <vte/vte.h>
 #include <vte/vteaccess.h>

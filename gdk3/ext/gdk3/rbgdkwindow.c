@@ -25,7 +25,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cWindow
-#define _SELF(s) GDK_WINDOW(RVAL2GOBJ(s))
+#define _SELF(s) RVAL2GDKWINDOW(s)
 
 static VALUE
 rg_initialize(VALUE self, VALUE parent, VALUE attributes, VALUE attributes_mask)
@@ -670,8 +670,8 @@ static VALUE
 rg_set_icon(VALUE self, VALUE icon, VALUE pixmap, VALUE mask)
 {
     gdk_window_set_icon(_SELF(self), NIL_P(icon) ? NULL :_SELF(icon),
-                        NIL_P(pixmap) ? NULL : GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-                        NIL_P(mask) ? NULL : GDK_BITMAP(RVAL2GOBJ(mask)));
+                        NIL_P(pixmap) ? NULL : RVAL2GDKPIXMAP(pixmap),
+                        NIL_P(mask) ? NULL : RVAL2GDKBITMAP(mask));
     return self;
 }
 */

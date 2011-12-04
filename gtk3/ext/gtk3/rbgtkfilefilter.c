@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cFileFilter
-#define _SELF(self) GTK_FILE_FILTER(RVAL2GOBJ(self))
+#define _SELF(self) RVAL2GTKFILEFILTER(self)
 
 static VALUE
 rg_initialize(VALUE self)

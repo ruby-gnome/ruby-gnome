@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cExpander
-#define _SELF(self) (GTK_EXPANDER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKEXPANDER(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

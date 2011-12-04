@@ -23,7 +23,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cPangoRenderer
-#define _SELF(s) (GDK_PANGO_RENDERER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GDKPANGORENDERER(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -36,7 +36,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(screen)){
         gscreen = gdk_screen_get_default();
     } else {
-        gscreen = GDK_SCREEN(RVAL2GOBJ(screen));
+        gscreen = RVAL2GDKSCREEN(screen);
     }
 
     G_INITIALIZE(self, gdk_pango_renderer_new(gscreen));
@@ -55,7 +55,7 @@ rg_s_get_default(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (NIL_P(screen)){
         gscreen = gdk_screen_get_default();
     } else {
-        gscreen = GDK_SCREEN(RVAL2GOBJ(screen));
+        gscreen = RVAL2GDKSCREEN(screen);
     }
     return GOBJ2RVAL(gdk_pango_renderer_get_default(gscreen));
 }
@@ -71,7 +71,7 @@ static VALUE
 rg_set_drawable(VALUE self, VALUE drawable)
 {
     gdk_pango_renderer_set_drawable(_SELF(self), 
-                                    GDK_DRAWABLE(RVAL2GOBJ(drawable)));
+                                    RVAL2GDKDRAWABLE(drawable));
     return self;
 }
 
@@ -79,7 +79,7 @@ static VALUE
 rg_set_gc(VALUE self, VALUE gc)
 {
     gdk_pango_renderer_set_gc(_SELF(self), 
-                              NIL_P(gc) ? NULL : GDK_GC(RVAL2GOBJ(gc)));
+                              NIL_P(gc) ? NULL : RVAL2GDKGC(gc));
     return self;
 }
 
@@ -88,7 +88,7 @@ static VALUE
 rg_set_stipple(VALUE self, VALUE part, VALUE stipple)
 {
     gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
-                                   NIL_P(stipple) ? NULL : GDK_BITMAP(RVAL2GOBJ(stipple)));
+                                   NIL_P(stipple) ? NULL : RVAL2GDKBITMAP(stipple));
 
     return self;
 }

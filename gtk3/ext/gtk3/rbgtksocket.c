@@ -27,7 +27,7 @@
 #include <gtk/gtkx.h>
 
 #define RG_TARGET_NAMESPACE cSocket
-#define _SELF(self) GTK_SOCKET(RVAL2GOBJ(self))
+#define _SELF(self) RVAL2GTKSOCKET(self)
 
 static VALUE
 rg_initialize(VALUE self)

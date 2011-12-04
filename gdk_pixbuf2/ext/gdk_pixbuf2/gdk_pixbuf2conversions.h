@@ -1,8 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2004,2005 Ruby-GNOME2 Project Team
- *  Copyright (C) 2003  Geoff Youngs
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -20,22 +18,15 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGTKSOURCEVIEWMAIN_H_
-#define __RBGTKSOURCEVIEWMAIN_H_
+#ifndef __RBGDK_PIXBUF2CONVERSIONS_H__
+#define __RBGDK_PIXBUF2CONVERSIONS_H__
 
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourceprintcompositor.h>
-#include <gtksourceview/gtksourcestyle.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
-#include <gtksourceview/gtksourceview-typebuiltins.h>
+#define RVAL2GDKPIXBUF(o)                  (GDK_PIXBUF(RVAL2GOBJ(o)))
+#define RVAL2GDKPIXBUFANIMATION(o)         (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(o)))
+#define RVAL2GDKPIXBUFLOADER(o)            (GDK_PIXBUF_LOADER(RVAL2GOBJ(o)))
+#define RVAL2GDKPIXBUFSIMPLEANIM(o)        (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(o)))
 
-#include "ruby.h"
-#include "rbgtk.h"
-#include "rbgtksourceview3version.h"
+#define RVAL2GDKPIXBUFFORMAT(o)            ((GdkPixbufFormat*)RVAL2BOXED(o, GDK_TYPE_PIXBUF_FORMAT))
+#define GDKPIXBUFFORMAT2RVAL(o)            (BOXED2RVAL(o, GDK_TYPE_PIXBUF_FORMAT))
 
-#endif /* __RBGTKSOURCEVIEWMAIN_H_ */
+#endif /* __RBGDK_PIXBUF2CONVERSIONS_H__ */

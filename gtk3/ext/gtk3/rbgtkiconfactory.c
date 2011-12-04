@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIconFactory
-#define _SELF(s) (GTK_ICON_FACTORY(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKICONFACTORY(s))
 
 static VALUE
 rg_initialize(VALUE self)

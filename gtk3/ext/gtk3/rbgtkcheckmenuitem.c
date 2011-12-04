@@ -50,7 +50,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_toggled(VALUE self)
 {
-    gtk_check_menu_item_toggled(GTK_CHECK_MENU_ITEM(RVAL2GOBJ(self)));
+    gtk_check_menu_item_toggled(RVAL2GTKCHECKMENUITEM(self));
     return self;
 }
 

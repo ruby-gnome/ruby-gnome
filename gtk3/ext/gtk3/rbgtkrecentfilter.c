@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRecentFilter
-#define _SELF(self) (GTK_RECENT_FILTER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRECENTFILTER(self))
 
 static VALUE rb_mGtk;
 

@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cStatusIcon
-#define _SELF(w) (GTK_STATUS_ICON(RVAL2GOBJ(w)))
+#define _SELF(w) (RVAL2GTKSTATUSICON(w))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -57,7 +57,7 @@ rg_position_menu(VALUE self, VALUE menu)
     gint x, y;
     gboolean push_in;
 
-    gtk_status_icon_position_menu(GTK_MENU(RVAL2GOBJ(menu)), &x, &y, &push_in,
+    gtk_status_icon_position_menu(RVAL2GTKMENU(menu), &x, &y, &push_in,
                                   (gpointer)(_SELF(self)));
     return rb_ary_new3(3, INT2NUM(x), INT2NUM(y), CBOOL2RVAL(push_in));
 }

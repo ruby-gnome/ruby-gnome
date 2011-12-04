@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cListStore
-#define _SELF(s) (GTK_LIST_STORE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKLISTSTORE(s))
 
 static ID id_to_a, id_size;
 
@@ -67,7 +67,7 @@ rg_set_column_types(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 {
-    GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(column));
+    GType gtype = gtk_tree_model_get_column_type(RVAL2GTKTREEMODEL(self), NUM2INT(column));
     GValue gval = G_VALUE_INIT;
     g_value_init(&gval, gtype);
 

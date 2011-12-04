@@ -25,8 +25,8 @@ static ID id_action_procs;
 static ID id_toggle_action_procs;
 
 #define RG_TARGET_NAMESPACE cActionGroup
-#define _SELF(self) (GTK_ACTION_GROUP(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define _SELF(self) (RVAL2GTKACTIONGROUP(self))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self, VALUE name)
@@ -55,7 +55,7 @@ rg_add_action(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &action, &accelerator);
 
     gtk_action_group_add_action_with_accel(_SELF(self),
-                                           GTK_ACTION(RVAL2GOBJ(action)),
+                                           RVAL2GTKACTION(action),
                                            RVAL2CSTR_ACCEPT_NIL(accelerator));
     G_CHILD_ADD(self, action);
 
@@ -65,7 +65,7 @@ rg_add_action(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_remove_action(VALUE self, VALUE action)
 {
-    gtk_action_group_remove_action(_SELF(self), GTK_ACTION(RVAL2GOBJ(action)));
+    gtk_action_group_remove_action(_SELF(self), RVAL2GTKACTION(action));
     G_CHILD_REMOVE(self, action);
     return self;
 }

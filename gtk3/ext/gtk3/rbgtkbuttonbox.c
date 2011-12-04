@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cButtonBox
-#define _SELF(self) (GTK_BUTTON_BOX(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKBUTTONBOX(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE orientation)
@@ -39,7 +39,7 @@ static VALUE
 rg_set_child_secondary(VALUE self, VALUE child, VALUE is_secondary)
 {
     gtk_button_box_set_child_secondary(_SELF(self), 
-                                       GTK_WIDGET(RVAL2GOBJ(child)),
+                                       RVAL2GTKWIDGET(child),
                                        RVAL2CBOOL(is_secondary));
     return self;
 }
@@ -48,7 +48,7 @@ static VALUE
 rg_get_child_secondary(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_button_box_get_child_secondary(_SELF(self), 
-                                                         GTK_WIDGET(RVAL2GOBJ(child))));
+                                                         RVAL2GTKWIDGET(child)));
 }
 
 #if GTK_CHECK_VERSION(3, 2, 0)
@@ -56,14 +56,14 @@ static VALUE
 rg_get_child_non_homogeneous(VALUE self, VALUE child)
 {
     return CBOOL2RVAL(gtk_button_box_get_child_non_homogeneous(_SELF(self),
-                                                               GTK_WIDGET(RVAL2GOBJ(child))));
+                                                               RVAL2GTKWIDGET(child)));
 }
 
 static VALUE
 rg_set_child_non_homogeneous(VALUE self, VALUE child, VALUE non_homogeneous)
 {
     gtk_button_box_set_child_non_homogeneous(_SELF(self),
-                                             GTK_WIDGET(RVAL2GOBJ(child)),
+                                             RVAL2GTKWIDGET(child),
                                              RVAL2CBOOL(non_homogeneous));
 
     return self;
