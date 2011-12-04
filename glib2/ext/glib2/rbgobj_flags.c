@@ -32,7 +32,6 @@ static ID id_module_eval;
 static ID id_or;
 
 G_GNUC_INTERNAL char *rbgobj_constant_lookup(const char *name);
-G_GNUC_INTERNAL VALUE resolve_enum_value(VALUE klass, VALUE nick);
 
 /**********************************************************************/
 
@@ -43,14 +42,14 @@ resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
     VALUE flags_value;
 
     if (!RVAL2CBOOL(rb_obj_is_kind_of(nick_or_nicks, rb_cArray)))
-        return resolve_enum_value(klass, nick_or_nicks);
+        return rg_enum_resolve_value(klass, nick_or_nicks);
 
     len = RARRAY_LEN(nick_or_nicks);
     flags_value = rb_funcall(klass, id_new, 0);
     for (i = 0; i < len; i++) {
         VALUE value;
 
-        value = resolve_enum_value(klass, RARRAY_PTR(nick_or_nicks)[i]);
+        value = rg_enum_resolve_value(klass, RARRAY_PTR(nick_or_nicks)[i]);
         if (NIL_P(value))
             return Qnil;
 

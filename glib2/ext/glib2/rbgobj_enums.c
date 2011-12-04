@@ -52,7 +52,7 @@ nick_to_const_name(const gchar *nick)
 }
 
 VALUE
-resolve_enum_value(VALUE klass, VALUE nick)
+rg_enum_resolve_value(VALUE klass, VALUE nick)
 {
     VALUE value = Qnil;
     gchar *const_nick;
@@ -152,7 +152,7 @@ rbgobj_get_enum(VALUE obj, GType gtype)
     if (!rb_obj_is_kind_of(obj, klass)) {
         VALUE enum_value;
 
-        enum_value = resolve_enum_value(klass, obj);
+        enum_value = rg_enum_resolve_value(klass, obj);
         if (!NIL_P(enum_value))
             obj = enum_value;
     }
@@ -339,7 +339,7 @@ rg_operator_enum_eqv(VALUE self, VALUE rhs)
     VALUE klass = GTYPE2CLASS(gtype);
 
     if (!rb_obj_is_kind_of(rhs, rb_cInteger)) {
-        rhs = resolve_enum_value(klass, rhs);
+        rhs = rg_enum_resolve_value(klass, rhs);
         if (CLASS_OF(rhs) != CLASS_OF(self))
             return Qnil;
     }

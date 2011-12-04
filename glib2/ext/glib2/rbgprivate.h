@@ -108,6 +108,8 @@ extern gboolean rbgobj_convert_unref(GType type, gpointer instance);
 
 #define RubyGObjectHookModule "RubyGObjectHook__"
 
+G_GNUC_INTERNAL VALUE rg_enum_resolve_value(VALUE klass, VALUE nick);
+
 G_GNUC_INTERNAL void Init_gutil(void);
 G_GNUC_INTERNAL void Init_gutil_callback(void);
 G_GNUC_INTERNAL void Init_glib_int64(void);
