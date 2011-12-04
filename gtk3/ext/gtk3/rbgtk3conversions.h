@@ -19,8 +19,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef _RBGTKCONVERSIONS_H
-#define _RBGTKCONVERSIONS_H
+#ifndef __RBGTK3CONVERSIONS_H__
+#define __RBGTK3CONVERSIONS_H__
 
 #include <rbgobject.h>
 #include <gtk/gtk.h>
@@ -34,4 +34,4 @@
 #define GTKRCFLAGS2RVAL(flags) (GFLAGS2RVAL(flags, GTK_TYPE_RC_FLAGS))
 #define RVAL2GTKRCFLAGS(flags) (RVAL2GFLAGS(flags, GTK_TYPE_RC_FLAGS))
 
-#endif /* _RBGTKCONVERSIONS_H */
+#endif /* __RBGTK3CONVERSIONS_H__ */
