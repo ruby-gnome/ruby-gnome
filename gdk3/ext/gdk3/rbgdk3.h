@@ -19,8 +19,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RB_GDK_H__
-#define __RB_GDK_H__
+#ifndef __RBGDK3_H__
+#define __RBGDK3_H__
 
 #include <rbgobject.h>
 #include <gdk/gdk.h>
@@ -79,4 +79,4 @@ extern GdkAtom get_gdkatom(VALUE atom);
 extern VALUE make_gdkevent(GdkEvent* event);
 extern GdkEvent* get_gdkevent(VALUE event);
 
-#endif /* __RB_GDK_H__ */
+#endif /* __RBGDK3_H__ */

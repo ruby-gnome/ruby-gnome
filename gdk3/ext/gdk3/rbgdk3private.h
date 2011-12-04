@@ -26,7 +26,7 @@
 #define _RBGDK3PRIVATE_H
 
 #include <rb_cairo.h>
-#include "rbgdk.h"
+#include "rbgdk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
 #else
