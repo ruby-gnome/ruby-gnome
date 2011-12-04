@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE mFileChooser
-#define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
+#define _SELF(self) RVAL2GTKFILECHOOSER(self)
 
 #ifdef HAVE_GTK_GTKFILESYSTEM_H
 /* For error handling */
@@ -185,14 +185,14 @@ rg_preview_uri(VALUE self)
 static VALUE
 rg_add_filter(VALUE self, VALUE filter)
 {
-    gtk_file_chooser_add_filter(_SELF(self), GTK_FILE_FILTER(RVAL2GOBJ(filter)));
+    gtk_file_chooser_add_filter(_SELF(self), RVAL2GTKFILEFILTER(filter));
     return self;
 }
 
 static VALUE
 rg_remove_filter(VALUE self, VALUE filter)
 {
-    gtk_file_chooser_remove_filter(_SELF(self), GTK_FILE_FILTER(RVAL2GOBJ(filter)));
+    gtk_file_chooser_remove_filter(_SELF(self), RVAL2GTKFILEFILTER(filter));
     return self;
 }
 

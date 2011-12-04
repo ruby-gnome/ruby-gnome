@@ -22,9 +22,9 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeView
-#define _SELF(s) (GTK_TREE_VIEW(RVAL2GOBJ(s)))
-#define TREEVIEW_COL(c) (GTK_TREE_VIEW_COLUMN(RVAL2GOBJ(c)))
-#define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
+#define _SELF(s) (RVAL2GTKTREEVIEW(s))
+#define TREEVIEW_COL(c) (RVAL2GTKTREEVIEWCOLUMN(c))
+#define RVAL2CELLRENDERER(c) (RVAL2GTKCELLRENDERER(c))
 
 static VALUE rb_mGtk;
 static ID id_model;
@@ -38,7 +38,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     if (rb_scan_args(argc, argv, "01", &model) == 1) {
         G_CHILD_SET(self, id_model, model);
-        widget = gtk_tree_view_new_with_model(GTK_TREE_MODEL(RVAL2GOBJ(model)));
+        widget = gtk_tree_view_new_with_model(RVAL2GTKTREEMODEL(model));
     }
     else {
         widget = gtk_tree_view_new();
@@ -551,7 +551,7 @@ rg_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_ce
 {
     gtk_tree_view_set_cursor_on_cell(_SELF(self), RVAL2GTKTREEPATH(path),
                                      NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
-                                     NIL_P(focus_cell) ? NULL : GTK_CELL_RENDERER(RVAL2GOBJ(focus_cell)), 
+                                     NIL_P(focus_cell) ? NULL : RVAL2GTKCELLRENDERER(focus_cell), 
                                      RVAL2CBOOL(start_editing));
     return self;
 }

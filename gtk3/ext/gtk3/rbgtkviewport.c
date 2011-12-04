@@ -29,8 +29,8 @@
 static VALUE
 rg_initialize(VALUE self, VALUE hadj, VALUE vadj)
 {
-    GtkAdjustment *h_adj = GTK_ADJUSTMENT(RVAL2GOBJ(hadj));
-    GtkAdjustment *v_adj = GTK_ADJUSTMENT(RVAL2GOBJ(vadj));
+    GtkAdjustment *h_adj = RVAL2GTKADJUSTMENT(hadj);
+    GtkAdjustment *v_adj = RVAL2GTKADJUSTMENT(vadj);
 
     RBGTK_INITIALIZE(self, gtk_viewport_new(h_adj, v_adj));
     return Qnil;

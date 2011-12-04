@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAccelGroup
-#define _SELF(w) GTK_ACCEL_GROUP(RVAL2GOBJ(w))
+#define _SELF(w) RVAL2GTKACCELGROUP(w)
 #define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
 
 static VALUE

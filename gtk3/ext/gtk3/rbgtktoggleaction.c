@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cToggleAction
-#define _SELF(self) (GTK_TOGGLE_ACTION(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKTOGGLEACTION(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id)

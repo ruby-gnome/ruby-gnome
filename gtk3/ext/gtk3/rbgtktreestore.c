@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeStore
-#define _SELF(s) (GTK_TREE_STORE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKTREESTORE(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -65,7 +65,7 @@ rg_set_column_types(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 {
-    GType gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)), NUM2INT(column));
+    GType gtype = gtk_tree_model_get_column_type(RVAL2GTKTREEMODEL(self), NUM2INT(column));
     GValue gval = G_VALUE_INIT;
     g_value_init(&gval, gtype);
 
@@ -128,7 +128,7 @@ rg_insert(int argc, VALUE *argv, VALUE self)
                 GValue gval = G_VALUE_INIT;
 
                 c_columns[i] = i;
-                gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
+                gtype = gtk_tree_model_get_column_type(RVAL2GTKTREEMODEL(self),
                                                        c_columns[i]);
 
                 g_value_init(&gval, gtype);
@@ -144,7 +144,7 @@ rg_insert(int argc, VALUE *argv, VALUE self)
                 GValue gval = G_VALUE_INIT;
 
                 c_columns[i] = NUM2INT (rb_ary_entry(r_columns, i));
-                gtype = gtk_tree_model_get_column_type(GTK_TREE_MODEL(RVAL2GOBJ(self)),
+                gtype = gtk_tree_model_get_column_type(RVAL2GTKTREEMODEL(self),
                                                        c_columns[i]);
 
                 g_value_init(&gval, gtype);

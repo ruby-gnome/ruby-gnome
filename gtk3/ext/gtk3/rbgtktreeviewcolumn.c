@@ -22,8 +22,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTreeViewColumn
-#define _SELF(s) (GTK_TREE_VIEW_COLUMN(RVAL2GOBJ(s)))
-#define RVAL2CELLRENDERER(c) (GTK_CELL_RENDERER(RVAL2GOBJ(c)))
+#define _SELF(s) (RVAL2GTKTREEVIEWCOLUMN(s))
+#define RVAL2CELLRENDERER(c) (RVAL2GTKCELLRENDERER(c))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -169,7 +169,7 @@ static VALUE
 rg_cell_set_cell_data(VALUE self, VALUE model, VALUE iter, VALUE is_expander, VALUE is_expanded)
 {
     gtk_tree_view_column_cell_set_cell_data(_SELF(self), 
-                                            GTK_TREE_MODEL(RVAL2GOBJ(model)),
+                                            RVAL2GTKTREEMODEL(model),
                                             RVAL2GTKTREEITER(iter), 
                                             RVAL2CBOOL(is_expander), 
                                             RVAL2CBOOL(is_expanded));

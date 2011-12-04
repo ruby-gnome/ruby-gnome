@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cMessageDialog
-#define _SELF(s) (GTK_MESSAGE_DIALOG(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKMESSAGEDIALOG(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -43,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "buttons_type", &rb_buttons_type,
                      "message", &rb_message,
                      NULL);
-    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
     flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
     type = NIL_P(rb_type) ? GTK_MESSAGE_INFO : RVAL2GENUM(rb_type, GTK_TYPE_MESSAGE_TYPE);
     buttons_type = NIL_P(rb_buttons_type) ? GTK_BUTTONS_OK : RVAL2GENUM(rb_buttons_type, GTK_TYPE_BUTTONS_TYPE);

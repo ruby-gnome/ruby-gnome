@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cFileChooserDialog
-#define _SELF(self) GTK_FILE_CHOOSER_DIALOG(RVAL2GOBJ(self))
+#define _SELF(self) RVAL2GTKFILECHOOSERDIALOG(self)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -41,7 +41,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "buttons", &rb_button_ary,
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
-    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
     action = NIL_P(rb_action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GENUM(rb_action, GTK_TYPE_FILE_CHOOSER_ACTION);
 
     dialog = gtk_file_chooser_dialog_new(title, parent, action, NULL, NULL);

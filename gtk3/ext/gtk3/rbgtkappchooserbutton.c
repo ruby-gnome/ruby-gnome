@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAppChooserButton
-#define _SELF(self) (GTK_APP_CHOOSER_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKAPPCHOOSERBUTTON(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE content_type)

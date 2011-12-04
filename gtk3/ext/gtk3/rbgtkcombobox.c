@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cComboBox
-#define _SELF(self) (GTK_COMBO_BOX(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKCOMBOBOX(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -40,8 +40,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "area", &rb_area,
                      NULL);
     entry = RVAL2CBOOL(rb_entry);
-    model = NIL_P(rb_model) ? NULL : GTK_TREE_MODEL(RVAL2GOBJ(rb_model));
-    area = NIL_P(rb_area) ? NULL : GTK_CELL_AREA(RVAL2GOBJ(rb_area));
+    model = NIL_P(rb_model) ? NULL : RVAL2GTKTREEMODEL(rb_model);
+    area = NIL_P(rb_area) ? NULL : RVAL2GTKCELLAREA(rb_area);
 
     if (entry) {
         if (model)
@@ -118,7 +118,7 @@ rg_title(VALUE self)
 static VALUE
 rg_popup_for_device(VALUE self, VALUE device)
 {
-    gtk_combo_box_popup_for_device(_SELF(self), GDK_DEVICE(RVAL2GOBJ(device)));
+    gtk_combo_box_popup_for_device(_SELF(self), RVAL2GDKDEVICE(device));
 
     return self;
 }

@@ -23,8 +23,8 @@
 
 #define RG_TARGET_NAMESPACE mDrag
 
-#define RVAL2DC(c) (GDK_DRAG_CONTEXT(RVAL2GOBJ(c)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define RVAL2DC(c) (RVAL2GDKDRAGCONTEXT(c))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 struct rbgtk_rval2gtktargetentries_args {
     VALUE ary;
@@ -115,7 +115,7 @@ static VALUE
 rg_m_dest_set_proxy(VALUE self, VALUE widget, VALUE proxy_window, VALUE protocol, VALUE use_coordinates)
 {
     gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
-                            GDK_WINDOW(RVAL2GOBJ(proxy_window)),
+                            RVAL2GDKWINDOW(proxy_window),
                             RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
                             RVAL2CBOOL(use_coordinates)); 
     return self;
@@ -248,9 +248,9 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "60", &context, &obj, &pixmap, &mask, &hot_x, &hot_y);
 /* deprecated?
         gtk_drag_set_icon_pixmap(RVAL2DC(context),
-                                 GDK_COLORMAP(RVAL2GOBJ(obj)), 
-                                 GDK_PIXMAP(RVAL2GOBJ(pixmap)),
-                                 GDK_BITMAP(RVAL2GOBJ(mask)), 
+                                 RVAL2GDKCOLORMAP(obj), 
+                                 RVAL2GDKPIXMAP(pixmap),
+                                 RVAL2GDKBITMAP(mask), 
                                  NUM2INT(hot_x), NUM2INT(hot_y));
 */
     } else {
@@ -264,7 +264,7 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
                                      NUM2INT(hot_x), NUM2INT(hot_y));
         } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
             gtk_drag_set_icon_pixbuf(RVAL2DC(context),
-                                     GDK_PIXBUF(RVAL2GOBJ(obj)),
+                                     RVAL2GDKPIXBUF(obj),
                                      NUM2INT(hot_x), NUM2INT(hot_y));
         } else {
             rb_raise(rb_eArgError, "invalid argument %s", rb_class2name(CLASS_OF(obj)));
@@ -319,15 +319,15 @@ rg_m_source_set_icon(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "22", &widget, &obj, &pixmap, &mask);
     if (argc == 4){
 /* deprecated?
-        gtk_drag_source_set_icon(RVAL2WIDGET(widget), GDK_COLORMAP(RVAL2GOBJ(obj)),
-                                 GDK_PIXMAP(RVAL2GOBJ(pixmap)), 
-                                 GDK_BITMAP(RVAL2GOBJ(mask)));
+        gtk_drag_source_set_icon(RVAL2WIDGET(widget), RVAL2GDKCOLORMAP(obj),
+                                 RVAL2GDKPIXMAP(pixmap), 
+                                 RVAL2GDKBITMAP(mask));
 */
     } else if (argc == 2){
         if (TYPE(obj) == T_SYMBOL){
             gtk_drag_source_set_icon_stock(RVAL2WIDGET(widget), rb_id2name(SYM2ID(obj)));
         } else {
-            gtk_drag_source_set_icon_pixbuf(RVAL2WIDGET(widget), GDK_PIXBUF(RVAL2GOBJ(obj)));
+            gtk_drag_source_set_icon_pixbuf(RVAL2WIDGET(widget), RVAL2GDKPIXBUF(obj));
         }
     } else {
         rb_raise(rb_eArgError, "need 2 or 4 arguments");

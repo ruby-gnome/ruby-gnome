@@ -25,8 +25,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cPaned
-#define _SELF(self) (GTK_PANED(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define _SELF(self) (RVAL2GTKPANED(self))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self, VALUE orientation)

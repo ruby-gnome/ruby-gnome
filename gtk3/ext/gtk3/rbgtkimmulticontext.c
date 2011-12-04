@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIMMulticontext
-#define _SELF(self) (GTK_IM_MULTICONTEXT(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKIMMULTICONTEXT(self))
 
 static VALUE 
 rg_initialize(VALUE self)

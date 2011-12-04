@@ -40,7 +40,7 @@ rg_initialize(VALUE self, VALUE label, VALUE xalign, VALUE yalign, VALUE ratio, 
 static VALUE
 rg_set(VALUE self, VALUE xalign, VALUE yalign, VALUE ratio, VALUE obey_child)
 {
-    gtk_aspect_frame_set(GTK_ASPECT_FRAME(RVAL2GOBJ(self)),
+    gtk_aspect_frame_set(RVAL2GTKASPECTFRAME(self),
                          NUM2DBL(xalign), NUM2DBL(yalign),
                          NUM2DBL(ratio), RVAL2CBOOL(obey_child));
     return self;

@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cDialog
-#define _SELF(self) (GTK_DIALOG(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKDIALOG(self))
 
 static ID id_to_a;
 
@@ -111,7 +111,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "buttons", &rb_button_ary,
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
-    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
     flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
 
     dialog = gtk_dialog_new_with_buttons(title, parent, flags, NULL, NULL);
@@ -144,7 +144,7 @@ rg_response(VALUE self, VALUE response_id)
 static VALUE
 rg_add_action_widget(VALUE self, VALUE child, VALUE response_id)
 {
-    gtk_dialog_add_action_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
+    gtk_dialog_add_action_widget(_SELF(self), RVAL2GTKWIDGET(child), 
                                  NUM2INT(response_id));
     return self;
 }
@@ -167,7 +167,7 @@ static VALUE
 rg_s_alternative_dialog_button_order_p(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
     gboolean ret = gtk_alternative_dialog_button_order(NIL_P(screen) ? NULL : 
-                                                       GDK_SCREEN(RVAL2GOBJ(screen)));
+                                                       RVAL2GDKSCREEN(screen));
     return CBOOL2RVAL(ret);
 }
 

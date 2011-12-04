@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cSeparator
-#define _SELF(self) (GTK_SEPARATOR(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSEPARATOR(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE orientation)

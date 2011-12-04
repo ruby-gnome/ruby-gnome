@@ -25,8 +25,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cMenu
-#define _SELF(self) (GTK_MENU(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define _SELF(self) (RVAL2GTKMENU(self))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -38,14 +38,14 @@ rg_initialize(VALUE self)
 static VALUE
 rg_set_screen(VALUE self, VALUE screen)
 {
-    gtk_menu_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
+    gtk_menu_set_screen(_SELF(self), RVAL2GDKSCREEN(screen));
     return self;
 }
 
 static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE position)
 {
-    gtk_menu_reorder_child(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)),
+    gtk_menu_reorder_child(_SELF(self), RVAL2GTKWIDGET(child),
                            NUM2INT(position));
     return self;
 }
@@ -53,7 +53,7 @@ rg_reorder_child(VALUE self, VALUE child, VALUE position)
 static VALUE
 rg_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
-    gtk_menu_attach(_SELF(self), GTK_WIDGET(RVAL2GOBJ(child)), 
+    gtk_menu_attach(_SELF(self), RVAL2GTKWIDGET(child), 
                     NUM2UINT(left_attach), NUM2UINT(right_attach), 
                     NUM2UINT(top_attach), NUM2UINT(bottom_attach));
     return self;
@@ -133,7 +133,7 @@ rg_attach_to_widget(VALUE self, VALUE attach_widget)
     menu_detacher = rb_block_proc();
     G_RELATIVE(self, menu_detacher);
     gtk_menu_attach_to_widget(_SELF(self),
-                              GTK_WIDGET(RVAL2GOBJ(attach_widget)),
+                              RVAL2GTKWIDGET(attach_widget),
                               (GtkMenuDetachFunc)detach_func);
     return self;
 }
@@ -149,7 +149,7 @@ static VALUE
 rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     /* Owned by GTK+ */
-    return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
+    return GLIST2ARY(gtk_menu_get_for_attach_widget(RVAL2GTKWIDGET(widget)));
 }
 
 void 

@@ -39,7 +39,7 @@ rg_initialize(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale
 static VALUE
 rg_set(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
 {
-    gtk_alignment_set(GTK_ALIGNMENT(RVAL2GOBJ(self)),
+    gtk_alignment_set(RVAL2GTKALIGNMENT(self),
                       NUM2DBL(xalign), NUM2DBL(yalign),
                       NUM2DBL(xscale), NUM2DBL(yscale));
     return self;
@@ -49,7 +49,7 @@ static VALUE
 rg_padding(VALUE self)
 {
     guint top, bottom, left, right;
-    gtk_alignment_get_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
+    gtk_alignment_get_padding(RVAL2GTKALIGNMENT(self),
                               &top, &bottom, &left, &right);
     return rb_ary_new3(4, UINT2NUM(top), UINT2NUM(bottom), 
                        UINT2NUM(left), UINT2NUM(right));
@@ -57,7 +57,7 @@ rg_padding(VALUE self)
 static VALUE
 rg_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
 {
-    gtk_alignment_set_padding(GTK_ALIGNMENT(RVAL2GOBJ(self)),
+    gtk_alignment_set_padding(RVAL2GTKALIGNMENT(self),
                               NUM2UINT(top), NUM2UINT(bottom),
                               NUM2UINT(left), NUM2UINT(right));
     return self;

@@ -86,7 +86,7 @@ rg_add_rich_text_targets(VALUE self, VALUE info, VALUE deserializable, VALUE buf
 {
     gtk_target_list_add_rich_text_targets(_SELF(self), NUM2UINT(info),
                                           RVAL2CBOOL(deserializable),
-                                          GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)));
+                                          RVAL2GTKTEXTBUFFER(buffer));
     return self;
 }
 

@@ -22,8 +22,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAction
-#define _SELF(self) (GTK_ACTION(RVAL2GOBJ(self)))
-#define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
+#define _SELF(self) (RVAL2GTKACTION(self))
+#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

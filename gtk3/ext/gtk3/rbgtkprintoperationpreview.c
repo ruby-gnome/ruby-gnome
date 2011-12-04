@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cPrintOperationPreview
-#define _SELF(s) (GTK_PRINT_OPERATION_PREVIEW(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTOPERATIONPREVIEW(s))
 
 static VALUE
 rg_render_page(VALUE self, VALUE page_number)

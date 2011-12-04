@@ -25,7 +25,7 @@
 #include <gtk/gtkunixprint.h>
 
 #define RG_TARGET_NAMESPACE cPrintUnixDialog
-#define _SELF(s) (GTK_PRINT_UNIX_DIALOG(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTUNIXDIALOG(s))
 #ifndef GTK_TYPE_PRINT_CAPABILITIES
 #  define GTK_TYPE_PRINT_CAPABILITIES (gtk_print_capabilities_get_type())
 #endif
@@ -44,7 +44,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "parent", &rb_parent,
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
-    parent = NIL_P(rb_parent) ? NULL : GTK_WINDOW(RVAL2GOBJ(rb_parent));
+    parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
 
     dialog = gtk_print_unix_dialog_new(title, parent);
     RBGTK_INITIALIZE(self, dialog);

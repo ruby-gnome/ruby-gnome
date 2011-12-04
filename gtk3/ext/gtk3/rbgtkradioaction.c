@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRadioAction
-#define _SELF(self) (GTK_RADIO_ACTION(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRADIOACTION(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id, VALUE value)
@@ -104,7 +104,7 @@ raction_set_group(VALUE self, VALUE rbgroup)
         gtk_radio_action_set_group(action, NULL);
     else
         gtk_radio_action_set_group(action,
-                                   gtk_radio_action_get_group(GTK_RADIO_ACTION(RVAL2GOBJ(rbgroup))));
+                                   gtk_radio_action_get_group(RVAL2GTKRADIOACTION(rbgroup)));
 
     return self;
 }

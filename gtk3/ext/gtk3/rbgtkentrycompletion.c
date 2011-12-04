@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cEntryCompletion
-#define _SELF(self) (GTK_ENTRY_COMPLETION(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKENTRYCOMPLETION(self))
 
 static VALUE
 rg_initialize(VALUE self)

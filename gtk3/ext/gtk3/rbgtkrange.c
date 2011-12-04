@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRange
-#define _SELF(self) (GTK_RANGE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRANGE(self))
 
 static VALUE
 rg_value(VALUE self)

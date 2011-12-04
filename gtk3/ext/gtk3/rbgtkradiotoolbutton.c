@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cRadioToolButton
-#define _SELF(self) (GTK_RADIO_TOOL_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKRADIOTOOLBUTTON(self))
 
 static VALUE RG_TARGET_NAMESPACE;
 

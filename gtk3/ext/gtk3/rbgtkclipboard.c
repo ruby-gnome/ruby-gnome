@@ -47,7 +47,7 @@ rbgtk_clipboard_get_type()
 GtkClipboard*
 rbgtk_get_clipboard(VALUE obj)
 {
-    return GTK_CLIPBOARD(RVAL2GOBJ(obj));
+    return RVAL2GTKCLIPBOARD(obj);
 }
 
 VALUE
@@ -69,7 +69,7 @@ rg_s_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     } else {
         VALUE display, selection;
         rb_scan_args(argc, argv, "20", &display, &selection);
-        clipboard = gtk_clipboard_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
+        clipboard = gtk_clipboard_get_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                   RVAL2ATOM(selection));
     } 
     return CLIPBOARD2RVAL(clipboard);
@@ -170,7 +170,7 @@ rg_set_text(VALUE self, VALUE text)
 static VALUE
 rg_set_image(VALUE self, VALUE pixbuf)
 {
-    gtk_clipboard_set_image(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
+    gtk_clipboard_set_image(_SELF(self), RVAL2GDKPIXBUF(pixbuf));
     return self;
 }
 
@@ -270,7 +270,7 @@ rg_request_rich_text(VALUE self, VALUE buffer)
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
 
-    gtk_clipboard_request_rich_text(_SELF(self), GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)),
+    gtk_clipboard_request_rich_text(_SELF(self), RVAL2GTKTEXTBUFFER(buffer),
                                     (GtkClipboardRichTextReceivedFunc)clipboard_rich_text_received_func,
                                     (gpointer)func);
     return self;
@@ -306,7 +306,7 @@ rg_wait_for_rich_text(VALUE self, VALUE buffer)
     GdkAtom format;
     gsize length;
     guint8* data = gtk_clipboard_wait_for_rich_text(_SELF(self), 
-                                                    GTK_TEXT_BUFFER(RVAL2GOBJ(buffer)),
+                                                    RVAL2GTKTEXTBUFFER(buffer),
                                                                     &format, &length);
     if (data){
         VALUE str = rb_str_new((char*)data, length);
@@ -333,7 +333,7 @@ rg_wait_is_image_available_p(VALUE self)
 static VALUE
 rg_wait_is_rich_text_available_p(VALUE self, VALUE buffer)
 {
-    return CBOOL2RVAL(gtk_clipboard_wait_is_rich_text_available(_SELF(self), GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
+    return CBOOL2RVAL(gtk_clipboard_wait_is_rich_text_available(_SELF(self), RVAL2GTKTEXTBUFFER(buffer)));
 }
 
 static VALUE

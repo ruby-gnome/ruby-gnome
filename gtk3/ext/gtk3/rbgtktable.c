@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTable
-#define _SELF(self) (GTK_TABLE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKTABLE(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -65,7 +65,7 @@ rg_attach(int argc, VALUE *argv, VALUE self)
     if (!NIL_P(arg3)) yspc = NUM2INT(arg3);
 
     gtk_table_attach(_SELF(self),
-                     GTK_WIDGET(RVAL2GOBJ(child)),
+                     RVAL2GTKWIDGET(child),
                      NUM2INT(left),NUM2INT(right),
                      NUM2INT(top),NUM2INT(bottom),
                      xopt, yopt, xspc, yspc);
@@ -78,7 +78,7 @@ rg_attach(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_attach_defaults(VALUE self, VALUE widget, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
-    gtk_table_attach_defaults(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)),
+    gtk_table_attach_defaults(_SELF(self), RVAL2GTKWIDGET(widget),
                               NUM2UINT(left_attach), NUM2UINT(right_attach),
                               NUM2UINT(top_attach), NUM2UINT(bottom_attach));
     G_CHILD_ADD(self, widget);

@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cEntry
-#define _SELF(self) (GTK_ENTRY(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKENTRY(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -51,7 +51,7 @@ rg_layout_offsets(VALUE self)
 static VALUE
 rg_set_completion(VALUE self, VALUE completion)
 {
-    gtk_entry_set_completion(_SELF(self), GTK_ENTRY_COMPLETION(RVAL2GOBJ(completion)));
+    gtk_entry_set_completion(_SELF(self), RVAL2GTKENTRYCOMPLETION(completion));
 
     G_CHILD_SET(self, rb_intern("completion"), completion);
 

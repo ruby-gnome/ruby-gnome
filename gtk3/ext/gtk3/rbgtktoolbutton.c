@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cToolButton
-#define _SELF(self) (GTK_TOOL_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKTOOLBUTTON(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -37,7 +37,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     } else if (TYPE(obj) == T_STRING){
         item = gtk_tool_button_new_from_stock(RVAL2CSTR(obj));
     } else {
-        item = gtk_tool_button_new(GTK_WIDGET(RVAL2GOBJ(obj)), 
+        item = gtk_tool_button_new(RVAL2GTKWIDGET(obj), 
                                    RVAL2CSTR_ACCEPT_NIL(label));
     }
     RBGTK_INITIALIZE(self, item);

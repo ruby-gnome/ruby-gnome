@@ -94,7 +94,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         }
 
         if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GTK_TYPE_RADIO_MENU_ITEM)))
-            list = gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(arg1)));
+            list = gtk_radio_menu_item_get_group(RVAL2GTKRADIOMENUITEM(arg1));
         else if (TYPE(arg1) == T_ARRAY)
             /* TODO: This might leak. */
             list = RVAL2GTKRADIOMENUITEMGSLIST(arg1);
@@ -118,7 +118,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rmitem_get_group(VALUE self)
 {
-    return GSLIST2ARY(gtk_radio_menu_item_get_group(GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self))));
+    return GSLIST2ARY(gtk_radio_menu_item_get_group(RVAL2GTKRADIOMENUITEM(self)));
 }
 
 static VALUE
@@ -127,7 +127,7 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
     GtkRadioMenuItem *rmitem2add, *rmitem_orig;
     GSList *group;
 
-    rmitem2add = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(self));
+    rmitem2add = RVAL2GTKRADIOMENUITEM(self);
     rmitem_orig = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(rb_ary_entry(grp_ary, 0)));
     group = gtk_radio_menu_item_get_group(rmitem_orig);
 

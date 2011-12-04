@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cLinkButton
-#define _SELF(self) (GTK_LINK_BUTTON(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKLINKBUTTON(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE mTreeModel
-#define _SELF(s) (GTK_TREE_MODEL(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKTREEMODEL(s))
 
 static VALUE
 rg_flags(VALUE self)

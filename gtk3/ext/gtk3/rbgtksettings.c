@@ -35,7 +35,7 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_get_for_screen(G_GNUC_UNUSED VALUE self, VALUE screen)
 {
-    return GOBJ2RVAL(gtk_settings_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
+    return GOBJ2RVAL(gtk_settings_get_for_screen(RVAL2GDKSCREEN(screen)));
 }
 
 /*
@@ -64,7 +64,7 @@ rc_property_parser(const GParamSpec *pspec, const GString *rc_string, GValue *pr
 static VALUE
 rg_s_install_property(VALUE self, VALUE spec)
 {
-    GParamSpec* pspec = G_PARAM_SPEC(RVAL2GOBJ(spec));
+    GParamSpec* pspec = RVAL2GPARAMSPEC(spec);
     if (rb_block_given_p()){
         VALUE func = rb_block_proc();
         rb_hash_aset(prop_func_table, spec, func);
@@ -177,7 +177,7 @@ rg_s_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbst
 static VALUE
 rg_set_property_value(VALUE self, VALUE rbname, VALUE rbvalue, VALUE origin)
 {
-    GtkSettings *settings = GTK_SETTINGS(RVAL2GOBJ(self));
+    GtkSettings *settings = RVAL2GTKSETTINGS(self);
     GtkSettingsValue svalue = { (gchar *)RVAL2CSTR(origin), G_VALUE_INIT };
     const gchar *name = RVAL2CSTR(rbname);
     g_value_init(&svalue.value, RVAL2GTYPE(rbvalue));

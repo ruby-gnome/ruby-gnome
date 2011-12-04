@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cPrintSettings
-#define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTSETTINGS(s))
 
 #define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 

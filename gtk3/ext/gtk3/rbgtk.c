@@ -290,7 +290,7 @@ gtk_false()
 static VALUE
 rg_m_grab_add(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
-    gtk_grab_add(GTK_WIDGET(RVAL2GOBJ(widget)));
+    gtk_grab_add(RVAL2GTKWIDGET(widget));
     return Qnil;
 }
 
@@ -303,7 +303,7 @@ rg_m_current(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
-    gtk_grab_remove(GTK_WIDGET(RVAL2GOBJ(widget)));
+    gtk_grab_remove(RVAL2GTKWIDGET(widget));
     return Qnil;
 }
 
@@ -367,7 +367,7 @@ rg_m_get_event_widget(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
 {
-    gtk_propagate_event(GTK_WIDGET(RVAL2GOBJ(widget)), RVAL2GEV(event));
+    gtk_propagate_event(RVAL2GTKWIDGET(widget), RVAL2GEV(event));
     return Qnil;
 }
 

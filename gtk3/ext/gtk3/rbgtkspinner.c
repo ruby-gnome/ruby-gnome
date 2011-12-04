@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cSpinner
-#define _SELF(s) (GTK_SPINNER(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKSPINNER(s))
 
 static VALUE
 rg_initialize(VALUE self)

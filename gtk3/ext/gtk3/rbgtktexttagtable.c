@@ -22,8 +22,8 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cTextTagTable
-#define _SELF(self) (GTK_TEXT_TAG_TABLE(RVAL2GOBJ(self)))
-#define RVAL2TAG(t) (GTK_TEXT_TAG(RVAL2GOBJ(t)))
+#define _SELF(self) (RVAL2GTKTEXTTAGTABLE(self))
+#define RVAL2TAG(t) (RVAL2GTKTEXTTAG(t))
 
 static VALUE
 rg_initialize(VALUE self)

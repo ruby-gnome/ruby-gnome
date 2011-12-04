@@ -23,7 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cSizeGroup
-#define _SELF(self) (GTK_SIZE_GROUP(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSIZEGROUP(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE mode)
@@ -35,14 +35,14 @@ rg_initialize(VALUE self, VALUE mode)
 static VALUE
 rg_add_widget(VALUE self, VALUE widget)
 {
-    gtk_size_group_add_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
+    gtk_size_group_add_widget(_SELF(self), RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
 rg_remove_widget(VALUE self, VALUE widget)
 {
-    gtk_size_group_remove_widget(_SELF(self), GTK_WIDGET(RVAL2GOBJ(widget)));
+    gtk_size_group_remove_widget(_SELF(self), RVAL2GTKWIDGET(widget));
     return self;
 }
 

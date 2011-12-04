@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cScaleButton
-#define _SELF(s) (GTK_SCALE_BUTTON(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKSCALEBUTTON(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

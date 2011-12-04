@@ -25,7 +25,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cScrolledWindow
-#define _SELF(self) (GTK_SCROLLED_WINDOW(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKSCROLLEDWINDOW(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -36,8 +36,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
-    if (!NIL_P(arg1)) h_adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg1));
-    if (!NIL_P(arg2)) v_adj = GTK_ADJUSTMENT(RVAL2GOBJ(arg2));
+    if (!NIL_P(arg1)) h_adj = RVAL2GTKADJUSTMENT(arg1);
+    if (!NIL_P(arg2)) v_adj = RVAL2GTKADJUSTMENT(arg2);
 
     RBGTK_INITIALIZE(self, gtk_scrolled_window_new(h_adj, v_adj));
     return Qnil;
@@ -67,7 +67,7 @@ static VALUE
 rg_add_with_viewport(VALUE self, VALUE other)
 {
     gtk_scrolled_window_add_with_viewport(_SELF(self),
-                                          GTK_WIDGET(RVAL2GOBJ(other)));
+                                          RVAL2GTKWIDGET(other));
     G_CHILD_ADD(self, other);
     return self;
 }

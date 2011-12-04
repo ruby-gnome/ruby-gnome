@@ -26,7 +26,7 @@
 static VALUE
 rg_connect_widget_destroyed(VALUE self)
 {
-    gtk_accessible_connect_widget_destroyed(GTK_ACCESSIBLE(RVAL2GOBJ(self)));
+    gtk_accessible_connect_widget_destroyed(RVAL2GTKACCESSIBLE(self));
     return self;
 }
 

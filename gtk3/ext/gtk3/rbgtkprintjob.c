@@ -32,7 +32,7 @@
 #endif
 
 #define RG_TARGET_NAMESPACE cPrintJob
-#define _SELF(s) (GTK_PRINT_JOB(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKPRINTJOB(s))
 
 static VALUE RG_TARGET_NAMESPACE;
 
@@ -43,9 +43,9 @@ rg_initialize(VALUE self, VALUE title, VALUE printer,
     GtkPrintJob *job;
 
     job = gtk_print_job_new(RVAL2CSTR(title), 
-                            GTK_PRINTER(RVAL2GOBJ(printer)),
-                            GTK_PRINT_SETTINGS(RVAL2GOBJ(settings)),
-                            GTK_PAGE_SETUP(RVAL2GOBJ(page_setup)));
+                            RVAL2GTKPRINTER(printer),
+                            RVAL2GTKPRINTSETTINGS(settings),
+                            RVAL2GTKPAGESETUP(page_setup));
 
     G_INITIALIZE(self, job);
     return Qnil;

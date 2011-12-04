@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cIMContextSimple
-#define _SELF(self) (GTK_IM_CONTEXT_SIMPLE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKIMCONTEXTSIMPLE(self))
 
 static VALUE 
 rg_initialize(VALUE self)

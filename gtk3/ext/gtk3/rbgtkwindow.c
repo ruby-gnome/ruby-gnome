@@ -24,7 +24,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cWindow
-#define _SELF(s) (GTK_WINDOW(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GTKWINDOW(s))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -64,7 +64,7 @@ static VALUE
 rg_add_accel_group(VALUE self, VALUE accel)
 {
     gtk_window_add_accel_group(_SELF(self),
-                               GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
+                               RVAL2GTKACCELGROUP(accel));
     G_CHILD_ADD(self, accel);
     return self;
 }
@@ -73,7 +73,7 @@ static VALUE
 rg_remove_accel_group(VALUE self, VALUE accel)
 {
     gtk_window_remove_accel_group(_SELF(self),
-                                  GTK_ACCEL_GROUP(RVAL2GOBJ(accel)));
+                                  RVAL2GTKACCELGROUP(accel));
     G_CHILD_REMOVE(self, accel);
     return self;
 }
@@ -102,7 +102,7 @@ static VALUE
 rg_set_geometry_hints(VALUE self, VALUE geometry_widget, VALUE geometry, VALUE geom_mask)
 {
     gtk_window_set_geometry_hints(_SELF(self),
-                                  GTK_WIDGET(RVAL2GOBJ(geometry_widget)),
+                                  RVAL2GTKWIDGET(geometry_widget),
                                   (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
                                   RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
     return self;
@@ -121,14 +121,14 @@ rg_s_toplevels(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_add_mnemonic(VALUE self, VALUE keyval, VALUE target)
 {
-    gtk_window_add_mnemonic(_SELF(self), NUM2INT(keyval), GTK_WIDGET(RVAL2GOBJ(target)));
+    gtk_window_add_mnemonic(_SELF(self), NUM2INT(keyval), RVAL2GTKWIDGET(target));
     return self;
 }
 
 static VALUE
 rg_remove_mnemonic(VALUE self, VALUE keyval, VALUE target)
 {
-    gtk_window_remove_mnemonic(_SELF(self), NUM2INT(keyval), GTK_WIDGET(RVAL2GOBJ(target)));
+    gtk_window_remove_mnemonic(_SELF(self), NUM2INT(keyval), RVAL2GTKWIDGET(target));
     return self;
 }
 
@@ -150,7 +150,7 @@ static VALUE
 rg_set_focus(VALUE self, VALUE win)
 {
     gtk_window_set_focus(_SELF(self), 
-                         NIL_P(win) ? NULL : GTK_WIDGET(RVAL2GOBJ(win)));
+                         NIL_P(win) ? NULL : RVAL2GTKWIDGET(win));
     return self;
 }
 
@@ -158,7 +158,7 @@ static VALUE
 rg_set_default(VALUE self, VALUE win)
 {
     gtk_window_set_default(_SELF(self), 
-                           NIL_P(win) ? NULL : GTK_WIDGET(RVAL2GOBJ(win)));
+                           NIL_P(win) ? NULL : RVAL2GTKWIDGET(win));
     return self;
 }
 
@@ -366,7 +366,7 @@ rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
         if (! ret)
             RAISE_GERROR(err);
     } else {
-        gtk_window_set_default_icon(GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
+        gtk_window_set_default_icon(RVAL2GDKPIXBUF(icon_or_filename));
     }
     return self;
 }
@@ -388,7 +388,7 @@ gwin_set_icon(VALUE self, VALUE icon_or_filename)
         if (! ret)
             RAISE_GERROR(err);
     } else {
-        gtk_window_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
+        gtk_window_set_icon(_SELF(self), RVAL2GDKPIXBUF(icon_or_filename));
     }
     return self;
 }

@@ -22,7 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cAboutDialog
-#define _SELF(self) (GTK_ABOUT_DIALOG(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2GTKABOUTDIALOG(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -86,7 +86,7 @@ rg_s_show(VALUE self, VALUE parent, VALUE props)
         }
     }
 
-    gtk_show_about_dialog(GTK_WINDOW(RVAL2GOBJ(parent)), 
+    gtk_show_about_dialog(RVAL2GTKWINDOW(parent), 
                           pd[0].name, pd[0].value,
                           pd[1].name, pd[1].value,
                           pd[2].name, pd[2].value,
