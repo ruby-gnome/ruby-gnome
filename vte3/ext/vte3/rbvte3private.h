@@ -1,5 +1,5 @@
-#ifndef __RBVTE_H__
-#define __RBVTE_H__
+#ifndef __RBVTE3PRIVATE_H__
+#define __RBVTE3PRIVATE_H__
 
 #include <ruby.h>
 #include <rbgtk.h>
