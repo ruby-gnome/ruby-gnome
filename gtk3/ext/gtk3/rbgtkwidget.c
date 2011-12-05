@@ -784,6 +784,12 @@ rg_s_binding_set(VALUE self)
 }
 
 static VALUE
+rg_path(VALUE self)
+{
+    return BOXED2RVAL(gtk_widget_get_path(_SELF(self)), GTK_TYPE_WIDGET_PATH);
+}
+
+static VALUE
 widget_signal_size_request(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
@@ -1240,6 +1246,8 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_SMETHOD(binding_set, 0);
     RG_DEF_METHOD_P(has_window, 0);
     RG_DEF_METHOD(set_has_window, 1);
+
+    RG_DEF_METHOD(path, 0);
 
     RG_DEF_METHOD(add_device_events, 2);
     RG_DEF_METHOD(compute_expand, 1);

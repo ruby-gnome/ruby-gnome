@@ -597,7 +597,6 @@ module Gtk
     alias :state= :set_state
     define_deprecated_method :ensure_style, :warn => "Use 'Gtk::StyleContext'."
     define_deprecated_method :reset_rc_styles, :warn => "Use '#{self}#reset_style'."
-    define_deprecated_method :path, :raise => "Use '#{self}#widget_path'."
     define_deprecated_method :class_path, :raise => "Use '#{self}#widget_path'."
     define_deprecated_method :modify_style, :warn => "Use 'Gtk::StyleContext'."
     define_deprecated_method :modifier_style, :raise => "Use 'Gtk::StyleContext'."
