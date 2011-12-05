@@ -102,6 +102,6 @@ Init_gtk_menu_shell(VALUE mGtk)
     RG_DEF_METHOD(select_first, 1);
     RG_DEF_METHOD(deselect, 0);
     RG_DEF_METHOD(activate_item, 2);
-    /* GtkMenuDirectionType */
+
     G_DEF_CLASS(GTK_TYPE_MENU_DIRECTION_TYPE, "DirectionType", RG_TARGET_NAMESPACE);
 }

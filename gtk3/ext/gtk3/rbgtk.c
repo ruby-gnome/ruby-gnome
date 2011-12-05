@@ -371,7 +371,6 @@ rg_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
     return Qnil;
 }
 
-/* From Version Information */
 static VALUE
 rg_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
@@ -388,9 +387,6 @@ rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
     return CBOOL2RVAL(ret == NULL);
 }
 
-/*
- * Init
- */
 void 
 Init_gtk_gtk(void)
 {
@@ -436,6 +432,7 @@ Init_gtk_gtk(void)
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 
+    Init_gdk_screen();
     Init_gtk_aboutdialog(RG_TARGET_NAMESPACE);
     Init_gtk_accelerator(RG_TARGET_NAMESPACE);
     Init_gtk_accel_group(RG_TARGET_NAMESPACE);
@@ -487,6 +484,7 @@ Init_gtk_gtk(void)
     Init_gtk_comboboxtext(RG_TARGET_NAMESPACE);
     Init_gtk_const(RG_TARGET_NAMESPACE);
     Init_gtk_container(RG_TARGET_NAMESPACE);
+    Init_gtk_cssprovider(RG_TARGET_NAMESPACE);
     Init_gtk_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_drag(RG_TARGET_NAMESPACE);
     Init_gtk_drawing_area(RG_TARGET_NAMESPACE);
@@ -583,6 +581,9 @@ Init_gtk_gtk(void)
     Init_gtk_statusbar(RG_TARGET_NAMESPACE);
     Init_gtk_status_icon(RG_TARGET_NAMESPACE);
     Init_gtk_stock(RG_TARGET_NAMESPACE);
+    Init_gtk_stylecontext(RG_TARGET_NAMESPACE);
+    Init_gtk_styleproperties(RG_TARGET_NAMESPACE);
+    Init_gtk_styleprovider(RG_TARGET_NAMESPACE);
     Init_gtk_table(RG_TARGET_NAMESPACE);
     Init_gtk_target_list(RG_TARGET_NAMESPACE);
     Init_gtk_tearoff_menu_item(RG_TARGET_NAMESPACE);
@@ -595,6 +596,7 @@ Init_gtk_gtk(void)
     Init_gtk_texttag(RG_TARGET_NAMESPACE);
     Init_gtk_text_tag_table(RG_TARGET_NAMESPACE);
     Init_gtk_textview(RG_TARGET_NAMESPACE);
+    Init_gtk_themingengine(RG_TARGET_NAMESPACE);
     Init_gtk_toggle_action(RG_TARGET_NAMESPACE);
     Init_gtk_toggle_button(RG_TARGET_NAMESPACE);
     Init_gtk_toggletoolbutton(RG_TARGET_NAMESPACE);
@@ -619,6 +621,7 @@ Init_gtk_gtk(void)
     Init_gtk_viewport(RG_TARGET_NAMESPACE);
     Init_gtk_volumebutton(RG_TARGET_NAMESPACE);
     Init_gtk_widget(RG_TARGET_NAMESPACE);
+    Init_gtk_widgetpath(RG_TARGET_NAMESPACE);
     Init_gtk_window(RG_TARGET_NAMESPACE);
     Init_gtk_windowgroup(RG_TARGET_NAMESPACE);
 }

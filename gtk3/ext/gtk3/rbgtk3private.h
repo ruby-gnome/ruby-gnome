@@ -25,12 +25,18 @@
 #ifndef __RBGTK3PRIVATE_H__
 #define __RBGTK3PRIVATE_H__
 
-#include "rbgtk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
 #else
 #  include <st.h>
 #endif
+
+#include <rb_cairo.h>
+#include <gio2.h>
+#include <rbpango.h>
+#include <rbgdk-pixbuf.h>
+#include <rbgdk3.h>
+#include "rbgtk3.h"
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)
@@ -50,6 +56,7 @@ extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
 
+G_GNUC_INTERNAL void Init_gdk_screen(void);
 G_GNUC_INTERNAL void Init_gtk_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_aboutdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accelerator(VALUE mGtk);
@@ -102,6 +109,7 @@ G_GNUC_INTERNAL void Init_gtk_combobox(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_comboboxtext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_const(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_container(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_cssprovider(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drag(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_drawing_area(VALUE mGtk);
@@ -198,6 +206,9 @@ G_GNUC_INTERNAL void Init_gtk_spinner(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_statusbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_status_icon(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_stylecontext(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_styleproperties(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_styleprovider(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_target_list(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tearoff_menu_item(VALUE mGtk);
@@ -210,6 +221,7 @@ G_GNUC_INTERNAL void Init_gtk_textmark(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_texttag(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_text_tag_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_textview(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_themingengine(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toggle_action(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toggle_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toggletoolbutton(VALUE mGtk);
@@ -234,6 +246,7 @@ G_GNUC_INTERNAL void Init_gtk_uimanager(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_viewport(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_volumebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_widget(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_widgetpath(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_window(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_windowgroup(VALUE mGtk);
 

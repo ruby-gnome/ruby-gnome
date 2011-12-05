@@ -1,15 +1,13 @@
 #ifndef __RBVTE3PRIVATE_H__
 #define __RBVTE3PRIVATE_H__
 
-#include <ruby.h>
-#include <rbgtk3.h>
-
 #include <vte/vte.h>
 #include <vte/vteaccess.h>
 #include <vte/reaper.h>
 
+#include <ruby.h>
+#include <rbgtk3.h>
 #include "rbvte3conversions.h"
-
 #ifndef VTE_CHECK_VERSION
 #  include "rbvteversion.h"
 #endif

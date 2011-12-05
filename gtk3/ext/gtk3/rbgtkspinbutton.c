@@ -127,9 +127,6 @@ Init_gtk_spin_button(VALUE mGtk)
     RG_DEF_METHOD(increments, 0);
     RG_DEF_METHOD(range, 0);
 
-    /* GtkSpinType */
     G_DEF_CLASS(GTK_TYPE_SPIN_TYPE, "Type", RG_TARGET_NAMESPACE);
-
-    /* GtkSpinButtonUpdatePolicy */
     G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON_UPDATE_POLICY, "UpdatePolicy", RG_TARGET_NAMESPACE);
 }

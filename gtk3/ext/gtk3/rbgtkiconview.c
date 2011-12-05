@@ -264,6 +264,5 @@ Init_gtk_iconview(VALUE mGtk)
     RG_DEF_METHOD(unset_model_drag_dest, 0);
     RG_DEF_METHOD(unset_model_drag_source, 0);
 
-    /* GtkIconViewDropPosition */
     G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", RG_TARGET_NAMESPACE);
 }

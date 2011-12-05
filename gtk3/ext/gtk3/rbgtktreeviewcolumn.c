@@ -253,6 +253,5 @@ Init_gtk_treeviewcolumn(VALUE mGtk)
     RG_DEF_METHOD(queue_resize, 0);
     RG_DEF_METHOD(tree_view, 0);
 
-    /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", RG_TARGET_NAMESPACE);
 }
