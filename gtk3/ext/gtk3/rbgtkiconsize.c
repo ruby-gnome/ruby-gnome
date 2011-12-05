@@ -87,6 +87,5 @@ Init_gtk_icon_size(VALUE mGtk)
     RG_DEF_MODFUNC(from_name, 1);
     RG_DEF_MODFUNC(get_name, 1);
 
-    /* GtkIconSize */
     G_DEF_CLASS(GTK_TYPE_ICON_SIZE, "IconSize", RG_TARGET_NAMESPACE);
 }

@@ -318,7 +318,6 @@ Init_gtk_textview(VALUE mGtk)
     RG_DEF_METHOD(move_child, 3);
     RG_DEF_METHOD(default_attributes, 0);
 
-    /* GtkTextWindowType */
     G_DEF_CLASS(GTK_TYPE_TEXT_WINDOW_TYPE, "WindowType", RG_TARGET_NAMESPACE);
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_VALIDATE", INT2FIX(GTK_TEXT_VIEW_PRIORITY_VALIDATE));

@@ -167,6 +167,5 @@ Init_gtk_recent_filter(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 
-    /* GtkRecentFilterFlags */
     G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
 }

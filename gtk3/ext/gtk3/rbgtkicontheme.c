@@ -257,10 +257,7 @@ Init_gtk_icon_theme(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkIconThemeError */
     G_DEF_ERROR(GTK_ICON_THEME_ERROR, "IconThemeError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_ICON_THEME_ERROR);
-
-    /* GtkIconLookupFlags */
     G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", RG_TARGET_NAMESPACE);
 }

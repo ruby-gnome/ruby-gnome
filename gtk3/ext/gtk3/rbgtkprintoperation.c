@@ -142,12 +142,7 @@ Init_gtk_print_operation(VALUE mGtk)
 
     RG_DEF_SMETHOD(run_page_setup_dialog, -1);
 
-    /* GtkPrintStatus */
     G_DEF_CLASS(GTK_TYPE_PRINT_STATUS, "Status", RG_TARGET_NAMESPACE);
-
-    /* GtkPrintOperationAction */
     G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_ACTION,"Action", RG_TARGET_NAMESPACE);
-
-    /* GtkPrintOperationResult */
     G_DEF_CLASS(GTK_TYPE_PRINT_OPERATION_RESULT, "Result", RG_TARGET_NAMESPACE);
 }

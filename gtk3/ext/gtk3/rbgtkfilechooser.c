@@ -374,14 +374,9 @@ Init_gtk_file_chooser(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkFileChooserAction */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
-
-    /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
-
-    /* GtkFileChooserConfirmation */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);

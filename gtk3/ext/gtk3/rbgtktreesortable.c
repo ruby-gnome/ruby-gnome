@@ -120,4 +120,3 @@ Init_gtk_treesortable(VALUE mGtk)
     rb_define_const(RG_TARGET_NAMESPACE, "DEFAULT_SORT_COLUMN_ID", GTK_TREE_SORTABLE_DEFAULT_SORT_COLUMN_ID);
 }
 
-/* vim: set sts=4 sw=4 ts=8: */

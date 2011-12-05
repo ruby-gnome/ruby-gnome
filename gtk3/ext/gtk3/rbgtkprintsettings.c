@@ -808,14 +808,9 @@ Init_gtk_print_settings(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkPageOrientation */
     G_DEF_CLASS(GTK_TYPE_PAGE_ORIENTATION, "PageOrientation", RG_TARGET_NAMESPACE);
-    /* GtkPrintDuplex */
     G_DEF_CLASS(GTK_TYPE_PRINT_DUPLEX, "PrintDuplex", RG_TARGET_NAMESPACE);
-    /* GtkPrintQuality */
     G_DEF_CLASS(GTK_TYPE_PRINT_QUALITY, "PrintQuality", RG_TARGET_NAMESPACE);
-    /* GtkPrintPages */
     G_DEF_CLASS(GTK_TYPE_PRINT_PAGES, "PrintPages", RG_TARGET_NAMESPACE);
-    /* GtkPageSet */
     G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", RG_TARGET_NAMESPACE);
 }

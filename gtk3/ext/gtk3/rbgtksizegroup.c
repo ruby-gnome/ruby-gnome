@@ -62,6 +62,5 @@ Init_gtk_size_group(VALUE mGtk)
     RG_DEF_METHOD(remove_widget, 1);
     RG_DEF_METHOD(widgets, 0);
 
-    /* GtkSizeGroupMode */
     G_DEF_CLASS(GTK_TYPE_SIZE_GROUP_MODE, "Mode", RG_TARGET_NAMESPACE);
 }

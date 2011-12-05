@@ -215,6 +215,5 @@ Init_gtk_assistant(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkAssistantPageType */
     G_DEF_CLASS(GTK_TYPE_ASSISTANT_PAGE_TYPE, "PageType", RG_TARGET_NAMESPACE);
 }

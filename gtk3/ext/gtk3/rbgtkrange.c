@@ -57,14 +57,13 @@ rg_set_value(VALUE self, VALUE value)
 void 
 Init_gtk_range(VALUE mGtk)
 {
-  VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RANGE, "Range", mGtk);
 
-  RG_DEF_METHOD(value, 0);
-  RG_DEF_METHOD(set_increments, 2);
-  RG_DEF_METHOD(set_range, 2);
-  RG_DEF_METHOD(set_value, 1);
-  G_DEF_SETTER(RG_TARGET_NAMESPACE, "value");
+    RG_DEF_METHOD(value, 0);
+    RG_DEF_METHOD(set_increments, 2);
+    RG_DEF_METHOD(set_range, 2);
+    RG_DEF_METHOD(set_value, 1);
+    G_DEF_SETTER(RG_TARGET_NAMESPACE, "value");
 
-  /* GtkSensitivityType */
-  G_DEF_CLASS(GTK_TYPE_SENSITIVITY_TYPE, "SensitivityType", RG_TARGET_NAMESPACE);
+    G_DEF_CLASS(GTK_TYPE_SENSITIVITY_TYPE, "SensitivityType", RG_TARGET_NAMESPACE);
 }

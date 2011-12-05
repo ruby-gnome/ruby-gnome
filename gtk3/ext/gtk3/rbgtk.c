@@ -371,7 +371,6 @@ rg_m_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
     return Qnil;
 }
 
-/* From Version Information */
 static VALUE
 rg_m_check_version(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
@@ -388,9 +387,6 @@ rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
     return CBOOL2RVAL(ret == NULL);
 }
 
-/*
- * Init
- */
 void 
 Init_gtk_gtk(void)
 {

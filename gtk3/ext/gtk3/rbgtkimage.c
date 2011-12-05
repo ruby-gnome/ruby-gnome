@@ -125,7 +125,6 @@ Init_gtk_image(VALUE mGtk)
     RG_DEF_METHOD(set, -1);
     RG_DEF_METHOD(clear, 0);
 
-    /* GtkImageType */
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
 
     G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");

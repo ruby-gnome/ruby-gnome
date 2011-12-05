@@ -37,6 +37,5 @@ Init_gtk_cellrendereraccel(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_ACCEL, "CellRendererAccel", mGtk);
     RG_DEF_METHOD(initialize, 0);
 
-    /* GtkCellRendererAccelMode */
     G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_ACCEL_MODE, "Mode", RG_TARGET_NAMESPACE);
 }

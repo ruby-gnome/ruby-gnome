@@ -127,7 +127,6 @@ Init_gtk_recent_manager(VALUE mGtk)
     RG_DEF_METHOD(items, 0);
     RG_DEF_METHOD(purge_items, 0);
 
-    /* GtkRecentManagerError */
     G_DEF_ERROR(GTK_RECENT_MANAGER_ERROR, "RecentManagerError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_RECENT_MANAGER_ERROR);
 }

@@ -705,10 +705,7 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(set_search_entry, 1);
     RG_DEF_METHOD(set_search_position_func, 0);
 
-    /* Constants */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", RG_TARGET_NAMESPACE);
-
-    /* GtkTreeViewGridLines */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", RG_TARGET_NAMESPACE);
 
     /* Option Signals */

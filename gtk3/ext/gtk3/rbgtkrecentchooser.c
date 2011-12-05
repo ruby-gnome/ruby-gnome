@@ -193,10 +193,7 @@ Init_gtk_recent_chooser(VALUE mGtk)
     RG_DEF_METHOD(remove_filter, 1);
     RG_DEF_METHOD(filters, 0);
 
-    /* GtkRecentChooserError */
     G_DEF_ERROR(GTK_RECENT_CHOOSER_ERROR, "RecentChooserError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_RECENT_CHOOSER_ERROR);
-
-    /* GtkRecentSortType */
     G_DEF_CLASS(GTK_TYPE_RECENT_SORT_TYPE, "SortType", RG_TARGET_NAMESPACE);
 }
