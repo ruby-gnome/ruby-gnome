@@ -221,42 +221,42 @@ module Gtk
 
   class HBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box#new'." do |_self, homogeneous, spacing|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new'." do |_self, homogeneous, spacing|
       Gtk::Box.new(:horizontal, spacing)
     end
   end
 
   class HButtonBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox#new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox.new'." do |_self|
       Gtk::ButtonBox.new(:horizontal)
     end
   end
 
   class HPaned
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned#new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned.new'." do |_self|
       Gtk::Paned.new(:horizontal)
     end
   end
 
   class HScale
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale#new'." do |_self, arg1, arg2, arg3|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale.new'." do |_self, arg1, arg2, arg3|
       Gtk::Scale.new(:horizontal, arg1, arg2, arg3)
     end
   end
 
   class HScrollbar
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar#new'." do |_self, adj|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar.new'." do |_self, adj|
       Gtk::Scrollbar.new(:horizontal, adj)
     end
   end
 
   class HSeparator
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator#new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new'." do |_self|
       Gtk::Separator.new(:horizontal)
     end
   end
@@ -506,42 +506,42 @@ module Gtk
 
   class VBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box#new'." do |_self, homogeneous, spacing|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new'." do |_self, homogeneous, spacing|
       Gtk::Box.new(:vertical, spacing)
     end
   end
 
   class VButtonBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox#new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox.new'." do |_self|
       Gtk::ButtonBox.new(:vertical)
     end
   end
 
   class VPaned
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned#new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned.new'." do |_self|
       Gtk::Paned.new(:vertical)
     end
   end
 
   class VScale
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale#new'." do |_self, arg1, arg2, arg3|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale.new'." do |_self, arg1, arg2, arg3|
       Gtk::Scale.new(:vertical, arg1, arg2, arg3)
     end
   end
 
   class VScrollbar
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar#new'." do |_self, adj|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar.new'." do |_self, adj|
       Gtk::Scrollbar.new(:vertical, adj)
     end
   end
 
   class VSeparator
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator#new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new'." do |_self|
       Gtk::Separator.new(:vertical)
     end
   end
