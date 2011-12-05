@@ -25,12 +25,15 @@
 #ifndef __RBGDK3PRIVATE_H__
 #define __RBGDK3PRIVATE_H__
 
-#include "rbgdk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
 #else
 #  include <st.h>
 #endif
+
+#include <rb_cairo.h>
+#include <rbgobject.h>
+#include "rbgdk3.h"
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)

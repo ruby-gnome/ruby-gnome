@@ -25,18 +25,15 @@
 #ifndef __RBGTK3_H__
 #define __RBGTK3_H__
 
+#include <signal.h>
 #include <gtk/gtk.h>
-#include <rbgobject.h>
-#include <rbgdk3.h>
-#include <gio2.h>
 
+#include <rbgobject.h>
 #include "rbgtk3conversions.h"
 
 #define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
 #define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
 #define RBGTK_MICRO_VERSION RBGLIB_MICRO_VERSION
-
-#include <signal.h>
 
 #define RubyGtkContainerHookModule "RubyGtkContainerHook__"
 

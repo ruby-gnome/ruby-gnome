@@ -25,12 +25,18 @@
 #ifndef __RBGTK3PRIVATE_H__
 #define __RBGTK3PRIVATE_H__
 
-#include "rbgtk3.h"
 #ifdef HAVE_RUBY_ST_H
 #  include <ruby/st.h>
 #else
 #  include <st.h>
 #endif
+
+#include <rb_cairo.h>
+#include <gio2.h>
+#include <rbpango.h>
+#include <rbgdk-pixbuf.h>
+#include <rbgdk3.h>
+#include "rbgtk3.h"
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)
