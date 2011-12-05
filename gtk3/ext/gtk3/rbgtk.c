@@ -487,6 +487,7 @@ Init_gtk_gtk(void)
     Init_gtk_comboboxtext(RG_TARGET_NAMESPACE);
     Init_gtk_const(RG_TARGET_NAMESPACE);
     Init_gtk_container(RG_TARGET_NAMESPACE);
+    Init_gtk_cssprovider(RG_TARGET_NAMESPACE);
     Init_gtk_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_drag(RG_TARGET_NAMESPACE);
     Init_gtk_drawing_area(RG_TARGET_NAMESPACE);
