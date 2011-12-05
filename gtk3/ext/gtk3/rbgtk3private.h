@@ -206,6 +206,8 @@ G_GNUC_INTERNAL void Init_gtk_spinner(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_statusbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_status_icon(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_stylecontext(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_styleproperties(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_styleprovider(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_target_list(VALUE mGtk);
