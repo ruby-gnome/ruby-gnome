@@ -329,8 +329,6 @@ invalidate_child_func_wrap(GdkWindow *window, VALUE func)
     return RVAL2CBOOL(result);
 }
 
-typedef gboolean (*ChildFunc) (GdkWindow*, gpointer);
-
 static VALUE
 rg_invalidate_maybe_recurse(VALUE self, VALUE region)
 {
@@ -341,7 +339,7 @@ rg_invalidate_maybe_recurse(VALUE self, VALUE region)
     }
     gdk_window_invalidate_maybe_recurse(_SELF(self),
                                         RVAL2CRREGION(region),
-                                        (ChildFunc)invalidate_child_func_wrap,
+                                        (GdkWindowChildFunc)invalidate_child_func_wrap,
                                         (gpointer)func);
     return self;
 }
