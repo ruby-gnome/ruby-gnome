@@ -22,6 +22,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cWindowGroup
+#define _SELF(self) (RVAL2GTKWINDOWGROUP(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -33,16 +34,16 @@ rg_initialize(VALUE self)
 static VALUE
 rg_add(VALUE self, VALUE window)
 {
-    gtk_window_group_add_window(RVAL2GTKWINDOWGROUP(self), 
-                                    RVAL2GTKWINDOW(window));
+    gtk_window_group_add_window(_SELF(self), 
+                                RVAL2GTKWINDOW(window));
     return self;
 }
 
 static VALUE
 rg_remove(VALUE self, VALUE window)
 {
-    gtk_window_group_remove_window(RVAL2GTKWINDOWGROUP(self), 
-                                       RVAL2GTKWINDOW(window));
+    gtk_window_group_remove_window(_SELF(self), 
+                                   RVAL2GTKWINDOW(window));
     return self;
 }
 
