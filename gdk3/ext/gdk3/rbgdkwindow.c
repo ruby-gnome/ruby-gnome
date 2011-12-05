@@ -310,14 +310,14 @@ rg_end_paint(VALUE self)
 static VALUE
 rg_invalidate(VALUE self, VALUE area, VALUE invalidate_children)
 {
-    if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_REGION))){
-        gdk_window_invalidate_region(_SELF(self),
-                                     RVAL2GDKREGION(area),
-                                     RVAL2CBOOL(invalidate_children));
-    } else {
+    if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
         gdk_window_invalidate_rect(_SELF(self),
                                    RVAL2GDKRECTANGLE(area),
                                    RVAL2CBOOL(invalidate_children));
+    } else {
+        gdk_window_invalidate_region(_SELF(self),
+                                     RVAL2CRREGION(area),
+                                     RVAL2CBOOL(invalidate_children));
     }
     return self;
 }
@@ -340,7 +340,7 @@ rg_invalidate_maybe_recurse(VALUE self, VALUE region)
         G_RELATIVE(self, func);
     }
     gdk_window_invalidate_maybe_recurse(_SELF(self),
-                                        RVAL2GDKREGION(region),
+                                        RVAL2CRREGION(region),
                                         (ChildFunc)invalidate_child_func_wrap,
                                         (gpointer)func);
     return self;
