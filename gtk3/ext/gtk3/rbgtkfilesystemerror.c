@@ -30,7 +30,6 @@ Init_gtk_filesystemerror(VALUE mGtk)
 #ifdef GTK_FILE_SYSTEM_ERROR
     VALUE RG_TARGET_NAMESPACE;
 
-    /* GtkFileSystemError */
     RG_TARGET_NAMESPACE = G_DEF_ERROR2(GTK_FILE_SYSTEM_ERROR, "FileSystemError",
                                         mGtk, rb_eRuntimeError);
     rb_define_const(RG_TARGET_NAMESPACE, "NONEXISTENT",

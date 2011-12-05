@@ -258,6 +258,78 @@ rg_shortcut_folder_uris(VALUE self)
     return gslist2ary_free(gtk_file_chooser_list_shortcut_folder_uris(_SELF(self)));
 }
 
+static VALUE
+rg_current_folder_file(VALUE self)
+{
+    return GOBJ2RVAL(gtk_file_chooser_get_current_folder_file(_SELF(self)));
+}
+
+static VALUE
+rg_file(VALUE self)
+{
+    return GOBJ2RVAL_UNREF(gtk_file_chooser_get_file(_SELF(self)));
+}
+
+static VALUE
+rg_files(VALUE self)
+{
+    return GOBJGSLIST2RVAL_FREE(gtk_file_chooser_get_files(_SELF(self)),
+                                g_slist_free, g_object_unref);
+}
+
+static VALUE
+rg_preview_file(VALUE self)
+{
+    return GOBJ2RVAL_UNREF(gtk_file_chooser_get_preview_file(_SELF(self)));
+}
+
+static VALUE
+rg_select_file(VALUE self, VALUE file)
+{
+    gboolean result;
+    GError *error = NULL;
+
+    result = gtk_file_chooser_select_file(_SELF(self), RVAL2GFILE(file), &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return self;
+}
+
+static VALUE
+rg_set_current_folder_file(VALUE self, VALUE file)
+{
+    gboolean result;
+    GError *error = NULL;
+
+    result = gtk_file_chooser_set_current_folder_file(_SELF(self), RVAL2GFILE(file), &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return CBOOL2RVAL(result);
+}
+
+static VALUE
+rg_set_file(VALUE self, VALUE file)
+{
+    gboolean result;
+    GError *error = NULL;
+
+    result = gtk_file_chooser_set_file(_SELF(self), RVAL2GFILE(file), &error);
+    if (error)
+        RAISE_GERROR(error);
+
+    return self;
+}
+
+static VALUE
+rg_unselect_file(VALUE self, VALUE file)
+{
+    gtk_file_chooser_unselect_file(_SELF(self), RVAL2GFILE(file));
+
+    return self;
+}
+
 void 
 Init_gtk_file_chooser(VALUE mGtk)
 {
@@ -290,19 +362,21 @@ Init_gtk_file_chooser(VALUE mGtk)
     RG_DEF_METHOD(shortcut_folders, 0);
     RG_DEF_METHOD(add_shortcut_folder_uri, 1);
     RG_DEF_METHOD(remove_shortcut_folder_uri, 1);
-
     RG_DEF_METHOD(shortcut_folder_uris, 0);
+    RG_DEF_METHOD(current_folder_file, 0);
+    RG_DEF_METHOD(file, 0);
+    RG_DEF_METHOD(files, 0);
+    RG_DEF_METHOD(preview_file, 0);
+    RG_DEF_METHOD(select_file, 1);
+    RG_DEF_METHOD(set_current_folder_file, 1);
+    RG_DEF_METHOD(set_file, 1);
+    RG_DEF_METHOD(unselect_file, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkFileChooserAction */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
-
-    /* GtkFileChooserError */
     G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
                 GTK_TYPE_FILE_CHOOSER_ERROR);
-
-    /* GtkFileChooserConfirmation */
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);

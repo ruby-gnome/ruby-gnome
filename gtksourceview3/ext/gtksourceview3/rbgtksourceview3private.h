@@ -20,8 +20,8 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGTKSOURCEVIEW3PRIVATE_H_
-#define __RBGTKSOURCEVIEW3PRIVATE_H_
+#ifndef __RBGTKSOURCEVIEW3PRIVATE_H__
+#define __RBGTKSOURCEVIEW3PRIVATE_H__
 
 #include <gtksourceview/gtksourcebuffer.h>
 #include <gtksourceview/gtksourcelanguage.h>
@@ -34,9 +34,21 @@
 #include <gtksourceview/gtksourceview.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
-#include "ruby.h"
-#include "rbgtk3.h"
-#include "rbgtksourceview3version.h"
+#include <ruby.h>
+#include <rb_cairo.h>
+#include <rbgdk3.h>
+#include <rbgtk3.h>
 #include "rbgtksourceview3conversions.h"
+#include "rbgtksourceview3version.h"
 
-#endif /* __RBGTKSOURCEVIEW3PRIVATE_H_ */
+G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtkSource);
+
+#endif /* __RBGTKSOURCEVIEW3PRIVATE_H__ */

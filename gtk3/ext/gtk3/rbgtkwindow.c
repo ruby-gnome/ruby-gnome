@@ -545,10 +545,7 @@ Init_gtk_window(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkWindowPosition (from General constants) */
     G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", RG_TARGET_NAMESPACE);
-
-    /* GtkWindowType (from General constants) */
     G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
 
     {

@@ -1,10 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
- *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,20 +20,42 @@
 
 #include "rbgtk3private.h"
 
-#define RG_TARGET_NAMESPACE cMenuBar
+#define RG_TARGET_NAMESPACE cScreen
+#define _SELF(self) (RVAL2GDKSCREEN(self))
 
 static VALUE
-rg_initialize(VALUE self)
+rg_add_provider(VALUE self, VALUE provider, VALUE priority)
 {
-    RBGTK_INITIALIZE(self, gtk_menu_bar_new());
-    return Qnil;
+    gtk_style_context_add_provider_for_screen(_SELF(self),
+                                              RVAL2GTKSTYLEPROVIDER(provider),
+                                              NUM2UINT(priority));
+
+    return self;
+}
+
+static VALUE
+rg_remove_provider(VALUE self, VALUE provider)
+{
+    gtk_style_context_remove_provider_for_screen(_SELF(self),
+                                                 RVAL2GTKSTYLEPROVIDER(provider));
+
+    return self;
+}
+
+static VALUE
+rg_reset_widgets(VALUE self)
+{
+    gtk_style_context_reset_widgets(_SELF(self));
+
+    return self;
 }
 
 void 
-Init_gtk_menu_bar(VALUE mGtk)
+Init_gdk_screen(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_BAR, "MenuBar", mGtk);
-    RG_DEF_METHOD(initialize, 0);
+    VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_SCREEN);
 
-    G_DEF_CLASS(GTK_TYPE_PACK_DIRECTION, "PackDirection", RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD(add_provider, 2);
+    RG_DEF_METHOD(remove_provider, 1);
+    RG_DEF_METHOD(reset_widgets, 0);
 }

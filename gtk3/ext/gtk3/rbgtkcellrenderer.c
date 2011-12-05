@@ -113,9 +113,6 @@ Init_gtk_cellrenderer(VALUE mGtk)
     RG_DEF_METHOD(fixed_size, 0);
     RG_DEF_METHOD(set_fixed_size, 2);
 
-    /* GtkCellRendererState */
     G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_STATE, "State", RG_TARGET_NAMESPACE);
-
-    /* GtkCellRendererMode */
     G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_MODE, "Mode", RG_TARGET_NAMESPACE);
 }

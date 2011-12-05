@@ -747,6 +747,5 @@ Init_gtk_textiter(VALUE mGtk)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    /* GtkTextSearchFlags */
     G_DEF_CLASS(GTK_TYPE_TEXT_SEARCH_FLAGS, "SearchFlags", RG_TARGET_NAMESPACE);
 }

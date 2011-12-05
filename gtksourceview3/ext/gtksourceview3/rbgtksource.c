@@ -24,16 +24,6 @@
 
 #define RG_TARGET_NAMESPACE mGtkSource
 
-G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtkSource);
-
 void
 Init_gtksourceview3 (void)
 {

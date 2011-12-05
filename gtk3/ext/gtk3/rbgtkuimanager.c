@@ -183,6 +183,5 @@ Init_gtk_uimanager(VALUE mGtk)
     RG_DEF_METHOD(remove_ui, 1);
     RG_DEF_METHOD(ensure_update, 0);
 
-    /* GtkUIManagerItemType */
     G_DEF_CLASS(GTK_TYPE_UI_MANAGER_ITEM_TYPE, "ItemType", RG_TARGET_NAMESPACE);
 }

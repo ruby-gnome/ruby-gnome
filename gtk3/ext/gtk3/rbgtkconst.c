@@ -24,15 +24,9 @@
 
 #include "rbgtk3private.h"
 
-/*
- * constants
- */
 void 
 Init_gtk_const(VALUE mGtk)
 {
-    /*
-     * version information
-     */
     rb_define_const(mGtk, "BINDING_VERSION",
 		    rb_ary_new3(3, INT2FIX(RBGTK_MAJOR_VERSION),
 				INT2FIX(RBGTK_MINOR_VERSION),
@@ -53,9 +47,6 @@ Init_gtk_const(VALUE mGtk)
     rb_define_const(mGtk, "BINARY_AGE", INT2FIX(gtk_binary_age));
     rb_define_const(mGtk, "INTERFACE_AGE", INT2FIX(gtk_interface_age));
 
-    /*
-     * standard enumeration
-     */
     G_DEF_CLASS(GTK_TYPE_ACCEL_FLAGS, "AccelFlags", mGtk);
     G_DEF_CLASS(GTK_TYPE_ATTACH_OPTIONS, "AttachOptions", mGtk);
     G_DEF_CLASS(GTK_TYPE_CORNER_TYPE, "CornerType", mGtk);
