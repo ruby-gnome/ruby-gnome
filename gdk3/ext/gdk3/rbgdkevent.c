@@ -436,6 +436,7 @@ gdkeventmotion_request_motions(VALUE self)
 }
 
 /* GdkEventExpose */
+/* deprecated
 static VALUE
 gdkeventexpose_area(VALUE self)
 {
@@ -468,6 +469,7 @@ gdkeventexpose_set_region(VALUE self, VALUE region)
 
 ATTR_INT(expose, count);
 GDKEVENT_INIT(expose, GDK_EXPOSE);
+*/
 
 /* GdkEventVisibility */
 ATTR_ENUM(visibility, state, GDK_TYPE_VISIBILITY_STATE);
@@ -644,7 +646,9 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     gdkevents[GDK_DELETE]        = gdkEventAny;
     gdkevents[GDK_DESTROY]       = gdkEventAny;
+/* deprecated
     gdkevents[GDK_EXPOSE]        = rb_define_class_under(mGdk, "EventExpose", gdkEventAny);
+*/
     gdkevents[GDK_MOTION_NOTIFY] = rb_define_class_under(mGdk, "EventMotion", gdkEventAny);
     gdkevents[GDK_BUTTON_PRESS]  = rb_define_class_under(mGdk, "EventButton", gdkEventAny);
     gdkevents[GDK_2BUTTON_PRESS] = gdkevents[GDK_BUTTON_PRESS];
@@ -767,12 +771,12 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_SETTERS(ev);
 
     /* GdkEventExpose */
+/* deprecated
     ev = gdkevents[GDK_EXPOSE];
     DEFINE_ACCESSOR(ev, expose, area);
     DEFINE_ACCESSOR(ev, expose, region);
     DEFINE_ACCESSOR(ev, expose, count);
     DEFINE_INIT(ev, expose);
-/* deprecated
     rb_define_singleton_method(ev, "get_graphics_expose", 
                                gdkevent_s_get_graphics_expose, 1);
 */
