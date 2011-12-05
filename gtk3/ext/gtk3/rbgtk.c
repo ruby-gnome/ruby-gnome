@@ -619,6 +619,7 @@ Init_gtk_gtk(void)
     Init_gtk_viewport(RG_TARGET_NAMESPACE);
     Init_gtk_volumebutton(RG_TARGET_NAMESPACE);
     Init_gtk_widget(RG_TARGET_NAMESPACE);
+    Init_gtk_widgetpath(RG_TARGET_NAMESPACE);
     Init_gtk_window(RG_TARGET_NAMESPACE);
     Init_gtk_windowgroup(RG_TARGET_NAMESPACE);
 }

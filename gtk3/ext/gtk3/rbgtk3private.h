@@ -240,6 +240,7 @@ G_GNUC_INTERNAL void Init_gtk_uimanager(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_viewport(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_volumebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_widget(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_widgetpath(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_window(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_windowgroup(VALUE mGtk);
 
