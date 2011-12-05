@@ -221,6 +221,7 @@ G_GNUC_INTERNAL void Init_gtk_textmark(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_texttag(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_text_tag_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_textview(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_themingengine(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toggle_action(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toggle_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toggletoolbutton(VALUE mGtk);

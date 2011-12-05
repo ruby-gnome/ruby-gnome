@@ -600,6 +600,7 @@ Init_gtk_gtk(void)
     Init_gtk_texttag(RG_TARGET_NAMESPACE);
     Init_gtk_text_tag_table(RG_TARGET_NAMESPACE);
     Init_gtk_textview(RG_TARGET_NAMESPACE);
+    Init_gtk_themingengine(RG_TARGET_NAMESPACE);
     Init_gtk_toggle_action(RG_TARGET_NAMESPACE);
     Init_gtk_toggle_button(RG_TARGET_NAMESPACE);
     Init_gtk_toggletoolbutton(RG_TARGET_NAMESPACE);
