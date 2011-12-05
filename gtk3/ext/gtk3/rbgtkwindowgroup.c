@@ -47,6 +47,26 @@ rg_remove(VALUE self, VALUE window)
     return self;
 }
 
+static VALUE
+rg_get_current_device_grab(VALUE self, VALUE device)
+{
+    return GOBJ2RVAL(gtk_window_group_get_current_device_grab(_SELF(self),
+                                                              NIL_P(device) ? NULL : RVAL2GDKDEVICE(device)));
+}
+
+static VALUE
+rg_current_grab(VALUE self)
+{
+    return GOBJ2RVAL(gtk_window_group_get_current_grab(_SELF(self)));
+}
+
+static VALUE
+rg_windows(VALUE self)
+{
+    /* TODO: need free? */
+    return GLIST2ARY(gtk_window_group_list_windows(_SELF(self)));
+}
+
 void 
 Init_gtk_windowgroup(VALUE mGtk)
 {
@@ -54,4 +74,7 @@ Init_gtk_windowgroup(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(add, 1);
     RG_DEF_METHOD(remove, 1);
+    RG_DEF_METHOD(get_current_device_grab, 1);
+    RG_DEF_METHOD(current_grab, 0);
+    RG_DEF_METHOD(windows, 0);
 }
