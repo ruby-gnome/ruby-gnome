@@ -584,6 +584,7 @@ Init_gtk_gtk(void)
     Init_gtk_statusbar(RG_TARGET_NAMESPACE);
     Init_gtk_status_icon(RG_TARGET_NAMESPACE);
     Init_gtk_stock(RG_TARGET_NAMESPACE);
+    Init_gtk_styleprovider(RG_TARGET_NAMESPACE);
     Init_gtk_table(RG_TARGET_NAMESPACE);
     Init_gtk_target_list(RG_TARGET_NAMESPACE);
     Init_gtk_tearoff_menu_item(RG_TARGET_NAMESPACE);
