@@ -40,14 +40,14 @@ rg_m_draw_rgb_image(int argc, VALUE *argv, VALUE self)
         gdk_draw_rgb_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                            NUM2INT(x), NUM2INT(y),
                            NUM2INT(w), NUM2INT(h),
-                           RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                           RVAL2GDKRGBDITHER(dither),
                            (guchar*)RVAL2CSTR(buf),
                            NUM2INT(rowstride));
     } else {
         gdk_draw_rgb_image_dithalign(RVAL2DRAW(win), RVAL2GDKGC(gc),
                                      NUM2INT(x), NUM2INT(y),
                                      NUM2INT(w), NUM2INT(h),
-                                     RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                                     RVAL2GDKRGBDITHER(dither),
                                      (guchar*)RVAL2CSTR(buf),
                                      NUM2INT(rowstride),
                                      NUM2INT(xdith), NUM2INT(ydith));
@@ -67,7 +67,7 @@ rg_m_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
     gint y = NUM2INT(rby);
     gint width = NUM2INT(rbwidth);
     gint height = NUM2INT(rbheight);
-    GdkRgbDither dither = RVAL2GENUM(rbdither, GDK_TYPE_RGB_DITHER);
+    GdkRgbDither dither = RVAL2GDKRGBDITHER(rbdither);
     const guchar *buf = (const guchar *)RVAL2CSTR(rbbuf);
     gint rowstride = NUM2INT(rbrowstride);
     long n;
@@ -97,7 +97,7 @@ rg_m_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w,
     gdk_draw_gray_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                         NUM2INT(x), NUM2INT(y),
                         NUM2INT(w), NUM2INT(h),
-                        RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                        RVAL2GDKRGBDITHER(dither),
                         (guchar*)RVAL2CSTR(buf),
                         NUM2INT(rowstride));
     return self;
@@ -115,14 +115,14 @@ rg_m_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
         gdk_draw_rgb_32_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                               NUM2INT(x), NUM2INT(y),
                               NUM2INT(w), NUM2INT(h),
-                              RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                              RVAL2GDKRGBDITHER(dither),
                               (guchar*)RVAL2CSTR(buf),
                               NUM2INT(rowstride));
     } else {
         gdk_draw_rgb_32_image_dithalign(RVAL2DRAW(win), RVAL2GDKGC(gc),
                                         NUM2INT(x), NUM2INT(y),
                                         NUM2INT(w), NUM2INT(h),
-                                        RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                                        RVAL2GDKRGBDITHER(dither),
                                         (guchar*)RVAL2CSTR(buf),
                                         NUM2INT(rowstride), NUM2INT(xdith), NUM2INT(ydith));
     }

@@ -28,7 +28,7 @@
 static VALUE
 rg_protocol(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->protocol, GDK_TYPE_DRAG_PROTOCOL);
+    return GDKDRAGPROTOCOL2RVAL(_SELF(self)->protocol);
 }
 
 static VALUE
@@ -64,19 +64,19 @@ rg_targets(VALUE self)
 static VALUE
 rg_actions(VALUE self)
 {
-    return GFLAGS2RVAL(_SELF(self)->actions, GDK_TYPE_DRAG_ACTION);
+    return GDKDRAGACTION2RVAL(_SELF(self)->actions);
 }
 
 static VALUE
 rg_suggested_action(VALUE self)
 {
-    return GFLAGS2RVAL(_SELF(self)->suggested_action, GDK_TYPE_DRAG_ACTION);
+    return GDKDRAGACTION2RVAL(_SELF(self)->suggested_action);
 }
 
 static VALUE
 rg_action(VALUE self)
 {
-    return GFLAGS2RVAL(_SELF(self)->action, GDK_TYPE_DRAG_ACTION);
+    return GDKDRAGACTION2RVAL(_SELF(self)->action);
 }
 
 static VALUE
@@ -113,7 +113,7 @@ rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                 RVAL2GDKNATIVEWINDOW(xid), &prot);
     }
 
-    return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), GDKNATIVEWINDOW2RVAL(ret));
+    return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), GDKNATIVEWINDOW2RVAL(ret));
 }
 */
 
@@ -171,7 +171,7 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
     }
 
     return rb_ary_new3(2, GOBJ2RVAL(dest_window), 
-                       GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL));
+                       GDKDRAGPROTOCOL2RVAL(prot));
 }
 
 struct rbgdk_rval2gdkatomglist_args {
@@ -234,10 +234,10 @@ rg_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE x_root, VALU
 {
     gboolean ret = gdk_drag_motion(_SELF(self), 
                                    RVAL2GDKWINDOW(dest_window), 
-                                   RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
+                                   RVAL2GDKDRAGPROTOCOL(protocol), 
                                    NUM2INT(x_root), NUM2INT(y_root), 
-                                   RVAL2GFLAGS(suggested_action, GDK_TYPE_DRAG_ACTION), 
-                                   RVAL2GFLAGS(possible_actions, GDK_TYPE_DRAG_ACTION), 
+                                   RVAL2GDKDRAGACTION(suggested_action), 
+                                   RVAL2GDKDRAGACTION(possible_actions), 
                                    NUM2UINT(time));
     return CBOOL2RVAL(ret);
 }
@@ -253,7 +253,7 @@ static VALUE
 rg_drag_status(VALUE self, VALUE action, VALUE time)
 {
     gdk_drag_status(_SELF(self), 
-                    RVAL2GFLAGS(action, GDK_TYPE_DRAG_ACTION), NUM2UINT(time));
+                    RVAL2GDKDRAGACTION(action), NUM2UINT(time));
     return self;
 }
 

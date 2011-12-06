@@ -31,7 +31,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (argc == 1){
         VALUE type;
         rb_scan_args(argc, argv, "10", &type);
-        cursor = gdk_cursor_new(RVAL2GENUM(type, GDK_TYPE_CURSOR_TYPE));
+        cursor = gdk_cursor_new(RVAL2GDKCURSORTYPE(type));
     } else if (argc == 2) {
         VALUE display, type_or_name;
         rb_scan_args(argc, argv, "20", &display, &type_or_name);
@@ -40,7 +40,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                               RVAL2CSTR(type_or_name));
         else
             cursor = gdk_cursor_new_for_display(RVAL2GDKDISPLAYOBJECT(display), 
-                                                RVAL2GENUM(type_or_name, GDK_TYPE_CURSOR_TYPE));
+                                                RVAL2GDKCURSORTYPE(type_or_name));
     } else if (argc == 4) {
         VALUE display, pixbuf, x, y;
         rb_scan_args(argc, argv, "40", &display, &pixbuf, &x, &y);
@@ -73,7 +73,7 @@ rg_display(VALUE self)
 static VALUE
 rg_cursor_type(VALUE self)
 {
-    return GENUM2RVAL((RVAL2GDKCURSOR(self))->type, GDK_TYPE_CURSOR_TYPE);
+    return GDKCURSORTYPE2RVAL((RVAL2GDKCURSOR(self))->type);
 }
 */
 

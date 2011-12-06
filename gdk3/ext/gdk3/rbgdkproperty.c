@@ -204,7 +204,7 @@ rg_m_change(int argc, VALUE *argv, VALUE self)
     rbgtk_atom2selectiondata(type, size, src, &ntype, &dat, &fmt, &len);
 
     gdk_property_change(RVAL2GDKWINDOW(win), RVAL2ATOM(property), 
-                        ntype, fmt, RVAL2GENUM(mode, GDK_TYPE_PROP_MODE), dat, len);
+                        ntype, fmt, RVAL2GDKPROPMODE(mode), dat, len);
 
     rbgtk_atom2selectiondata_free(ntype, dat);
 

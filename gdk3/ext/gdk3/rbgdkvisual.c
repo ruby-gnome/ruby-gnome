@@ -54,7 +54,7 @@ rg_s_query_visual_types(G_GNUC_UNUSED VALUE self)
     gdk_query_visual_types(&visual_types, &count);
     ary = rb_ary_new2(count);
     for (i = 0; i < count; i++) {
-        rb_ary_push(ary, GENUM2RVAL((visual_types)[i], GDK_TYPE_VISUAL_TYPE));
+        rb_ary_push(ary, GDKVISUALTYPE2RVAL((visual_types)[i]));
     }
     return ary;
 }
@@ -106,7 +106,7 @@ static VALUE
 rg_s_best_with_type(G_GNUC_UNUSED VALUE self, VALUE type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_depth(
-                                    (GdkVisualType)GENUM2RVAL(type, GDK_TYPE_VISUAL_TYPE)));
+                                    (GdkVisualType)GDKVISUALTYPE2RVAL(type)));
 }
 
 static VALUE
@@ -114,7 +114,7 @@ rg_s_best_with_both(G_GNUC_UNUSED VALUE self, VALUE depth, VALUE type)
 {
     return GOBJ2RVAL(gdk_visual_get_best_with_both(
                                     NUM2INT(depth),
-                                    (GdkVisualType)RVAL2GENUM(type, GDK_TYPE_VISUAL_TYPE)));
+                                    (GdkVisualType)RVAL2GDKVISUALTYPE(type)));
 }
 
 static VALUE
@@ -127,7 +127,7 @@ rg_screen(VALUE self)
 static VALUE
 rg_visual_type(VALUE self)
 {
-    return GENUM2RVAL(gdk_visual_get_visual_type(_SELF(self)), GDK_TYPE_VISUAL_TYPE);
+    return GDKVISUALTYPE2RVAL(gdk_visual_get_visual_type(_SELF(self)));
 }
 
 static VALUE
@@ -139,7 +139,7 @@ rg_depth(VALUE self)
 static VALUE
 rg_byte_order(VALUE self)
 {
-    return GENUM2RVAL(gdk_visual_get_byte_order(_SELF(self)), GDK_TYPE_BYTE_ORDER);
+    return GDKBYTEORDER2RVAL(gdk_visual_get_byte_order(_SELF(self)));
 }
 
 static VALUE

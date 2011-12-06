@@ -23,12 +23,11 @@
 
 #define RG_TARGET_NAMESPACE mCellLayout
 #define _SELF(s) (RVAL2GTKCELLLAYOUT(s))
-#define RVAL2RENDERER(s) (RVAL2GTKCELLRENDERER(s))
 
 static VALUE
 rg_pack_start(VALUE self, VALUE cell, VALUE expand)
 {
-    gtk_cell_layout_pack_start(_SELF(self), RVAL2RENDERER(cell),
+    gtk_cell_layout_pack_start(_SELF(self), RVAL2GTKCELLRENDERER(cell),
                                RVAL2CBOOL(expand));
     return self;
 }
@@ -36,7 +35,7 @@ rg_pack_start(VALUE self, VALUE cell, VALUE expand)
 static VALUE
 rg_pack_end(VALUE self, VALUE cell, VALUE expand)
 {
-    gtk_cell_layout_pack_end(_SELF(self), RVAL2RENDERER(cell),
+    gtk_cell_layout_pack_end(_SELF(self), RVAL2GTKCELLRENDERER(cell),
                              RVAL2CBOOL(expand));
     return self;
 }
@@ -44,7 +43,7 @@ rg_pack_end(VALUE self, VALUE cell, VALUE expand)
 static VALUE
 rg_reorder(VALUE self, VALUE cell, VALUE position)
 {
-    gtk_cell_layout_reorder(_SELF(self), RVAL2RENDERER(cell),
+    gtk_cell_layout_reorder(_SELF(self), RVAL2GTKCELLRENDERER(cell),
                             NUM2INT(position));
     return self;
 }
@@ -67,7 +66,7 @@ rg_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
         name = RVAL2CSTR(attribute);
     }
 
-    gtk_cell_layout_add_attribute(_SELF(self), RVAL2RENDERER(cell),
+    gtk_cell_layout_add_attribute(_SELF(self), RVAL2GTKCELLRENDERER(cell),
                                   name, NUM2INT(column));
     return self;
 }
@@ -86,11 +85,11 @@ rg_set_cell_data_func(VALUE self, VALUE cell)
     if (rb_block_given_p()) {
         VALUE func = rb_block_proc();
         G_RELATIVE(self, func);
-        gtk_cell_layout_set_cell_data_func(_SELF(self), RVAL2RENDERER(cell),
+        gtk_cell_layout_set_cell_data_func(_SELF(self), RVAL2GTKCELLRENDERER(cell),
                                            (GtkCellLayoutDataFunc)layout_data_func, 
                                            (gpointer)func, NULL);
     } else {
-        gtk_cell_layout_set_cell_data_func(_SELF(self), RVAL2RENDERER(cell),
+        gtk_cell_layout_set_cell_data_func(_SELF(self), RVAL2GTKCELLRENDERER(cell),
                                            NULL, (gpointer)NULL, NULL);
     }
     return self;
@@ -99,7 +98,7 @@ rg_set_cell_data_func(VALUE self, VALUE cell)
 static VALUE
 rg_clear_attributes(VALUE self, VALUE cell)
 {
-    gtk_cell_layout_clear_attributes(_SELF(self), RVAL2RENDERER(cell));
+    gtk_cell_layout_clear_attributes(_SELF(self), RVAL2GTKCELLRENDERER(cell));
     return self;
 }
 

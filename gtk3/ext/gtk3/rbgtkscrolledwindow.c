@@ -47,8 +47,8 @@ static VALUE
 rg_set_policy(VALUE self, VALUE hpolicy, VALUE vpolicy)
 {
     gtk_scrolled_window_set_policy(_SELF(self),
-                                   RVAL2GENUM(hpolicy, GTK_TYPE_POLICY_TYPE),
-                                   RVAL2GENUM(vpolicy, GTK_TYPE_POLICY_TYPE));
+                                   RVAL2GTKPOLICYTYPE(hpolicy),
+                                   RVAL2GTKPOLICYTYPE(vpolicy));
     return self;
 }
 
@@ -59,8 +59,8 @@ rg_policy(VALUE self)
 
     gtk_scrolled_window_get_policy(_SELF(self), &hpolicy, &vpolicy);
     return rb_ary_new3(2, 
-                       GENUM2RVAL(hpolicy, GTK_TYPE_POLICY_TYPE), 
-                       GENUM2RVAL(vpolicy, GTK_TYPE_POLICY_TYPE)); 
+                       GTKPOLICYTYPE2RVAL(hpolicy), 
+                       GTKPOLICYTYPE2RVAL(vpolicy)); 
 }
 
 static VALUE
@@ -88,7 +88,7 @@ static VALUE
 rg_set_placement(VALUE self, VALUE corner_type)
 {
     gtk_scrolled_window_set_placement(_SELF(self), 
-                                      RVAL2GENUM(corner_type, GTK_TYPE_CORNER_TYPE));
+                                      RVAL2GTKCORNERTYPE(corner_type));
     return self;
 }
 
@@ -102,8 +102,7 @@ rg_unset_placement(VALUE self)
 static VALUE
 rg_placement(VALUE self)
 {
-    return GENUM2RVAL(gtk_scrolled_window_get_placement(_SELF(self)), 
-                      GTK_TYPE_CORNER_TYPE);
+    return GTKCORNERTYPE2RVAL(gtk_scrolled_window_get_placement(_SELF(self)));
 }
 
 void 

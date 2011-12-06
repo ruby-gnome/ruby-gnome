@@ -86,8 +86,7 @@ rg_current_uri(VALUE self)
 static VALUE
 rg_current_item(VALUE self)
 {
-    return BOXED2RVAL(gtk_recent_chooser_get_current_item(_SELF(self)),
-                      GTK_TYPE_RECENT_INFO);
+    return GTKRECENTINFO2RVAL(gtk_recent_chooser_get_current_item(_SELF(self)));
 }
 
 static VALUE

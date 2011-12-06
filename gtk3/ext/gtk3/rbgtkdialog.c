@@ -39,7 +39,7 @@ rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
         name = RVAL2CSTR(button_text);
     }
     return GOBJ2RVAL(gtk_dialog_add_button(_SELF(self), name, 
-                                           RVAL2GENUM(response_id, GTK_TYPE_RESPONSE_TYPE)));
+                                           RVAL2GTKRESPONSETYPE(response_id)));
 }
 
 struct rbgtk_dialog_add_buttons_internal_args {
@@ -112,7 +112,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
     parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
-    flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
+    flags = NIL_P(rb_flags) ? 0 : RVAL2GTKDIALOGFLAGS(rb_flags);
 
     dialog = gtk_dialog_new_with_buttons(title, parent, flags, NULL, NULL);
     RBGTK_INITIALIZE(self, dialog);

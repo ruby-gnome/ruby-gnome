@@ -76,8 +76,8 @@ attrary2rval(GArray *attrs)
         rb_ary_push(rb_attrs, rb_funcall(rb_class, id_new, 6,
                                          LONG2NUM(attr->row),
                                          LONG2NUM(attr->column),
-                                         COLOR2RVAL(&(attr->fore)),
-                                         COLOR2RVAL(&(attr->back)),
+                                         GDKCOLOR2RVAL(&(attr->fore)),
+                                         GDKCOLOR2RVAL(&(attr->back)),
                                          CBOOL2RVAL(attr->underline),
                                          CBOOL2RVAL(attr->strikethrough)));
     }
@@ -129,7 +129,7 @@ rg_fork_command(int argc, VALUE *argv, VALUE self)
                      NULL);
     pty_flags = NIL_P(rb_pty_flags) ?
                 VTE_PTY_DEFAULT :
-                RVAL2GFLAGS(rb_pty_flags, VTE_TYPE_PTY_FLAGS);
+                RVAL2VTEPTYFLAGS(rb_pty_flags);
     working_directory = RVAL2CSTR_ACCEPT_NIL(rb_working_directory);
     command_argv = rval2cstrary(NIL_P(rb_command_argv) ? fork_command_default_argv() : rb_command_argv);
     envv = rval2cstrary(rb_envv);
@@ -283,28 +283,28 @@ rg_set_scroll_on_keystroke(VALUE self, VALUE scroll)
 static VALUE
 rg_set_color_dim(VALUE self, VALUE dim)
 {
-    vte_terminal_set_color_dim(_SELF(self), RVAL2COLOR(dim));
+    vte_terminal_set_color_dim(_SELF(self), RVAL2GDKCOLOR(dim));
     return self;
 }
 
 static VALUE
 rg_set_color_bold(VALUE self, VALUE bold)
 {
-    vte_terminal_set_color_bold(_SELF(self), RVAL2COLOR(bold));
+    vte_terminal_set_color_bold(_SELF(self), RVAL2GDKCOLOR(bold));
     return self;
 }
 
 static VALUE
 rg_set_color_foreground(VALUE self, VALUE foreground)
 {
-    vte_terminal_set_color_foreground(_SELF(self), RVAL2COLOR(foreground));
+    vte_terminal_set_color_foreground(_SELF(self), RVAL2GDKCOLOR(foreground));
     return self;
 }
 
 static VALUE
 rg_set_color_background(VALUE self, VALUE background)
 {
-    vte_terminal_set_color_background(_SELF(self), RVAL2COLOR(background));
+    vte_terminal_set_color_background(_SELF(self), RVAL2GDKCOLOR(background));
     return self;
 }
 
@@ -312,7 +312,7 @@ static VALUE
 rg_set_color_cursor(VALUE self, VALUE cursor)
 {
     vte_terminal_set_color_cursor(_SELF(self),
-                                  NIL_P(cursor) ? NULL : RVAL2COLOR(cursor));
+                                  NIL_P(cursor) ? NULL : RVAL2GDKCOLOR(cursor));
     return self;
 }
 
@@ -321,7 +321,7 @@ rg_set_color_highlight(VALUE self, VALUE highlight)
 {
     vte_terminal_set_color_highlight(_SELF(self),
                                      NIL_P(highlight) ?
-                                       NULL : RVAL2COLOR(highlight));
+                                       NULL : RVAL2GDKCOLOR(highlight));
     return self;
 }
 
@@ -344,12 +344,12 @@ rg_set_colors(VALUE self, VALUE foreground, VALUE background,
     palette = ALLOCA_N(GdkColor, len);
     for (i = 0; i < len; i++) {
         GdkColor *color;
-        color = RVAL2COLOR(RARRAY_PTR(rb_palette)[i]);
+        color = RVAL2GDKCOLOR(RARRAY_PTR(rb_palette)[i]);
         palette[i] = *color;
     }
 
-    vte_terminal_set_colors(_SELF(self), RVAL2COLOR(foreground),
-                            RVAL2COLOR(background), palette, len);
+    vte_terminal_set_colors(_SELF(self), RVAL2GDKCOLOR(foreground),
+                            RVAL2GDKCOLOR(background), palette, len);
     return self;
 }
 
@@ -377,7 +377,7 @@ rg_set_background_image(VALUE self, VALUE image_or_path)
 static VALUE
 rg_set_background_tint_color(VALUE self, VALUE color)
 {
-    vte_terminal_set_background_tint_color(_SELF(self), RVAL2COLOR(color));
+    vte_terminal_set_background_tint_color(_SELF(self), RVAL2GDKCOLOR(color));
     return self;
 }
 
@@ -412,7 +412,7 @@ rg_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 {
     VteTerminalCursorBlinkMode mode;
 
-    mode = RVAL2GENUM(rb_mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+    mode = RVAL2VTETERMINALCURSORBLINKMODE(rb_mode);
     vte_terminal_set_cursor_blink_mode(_SELF(self), mode);
     return self;
 }
@@ -423,7 +423,7 @@ rg_cursor_blink_mode(VALUE self)
     VteTerminalCursorBlinkMode mode;
 
     mode = vte_terminal_get_cursor_blink_mode(_SELF(self));
-    return GENUM2RVAL(mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+    return VTETERMINALCURSORBLINKMODE2RVAL(mode);
 }
 
 static VALUE
@@ -431,7 +431,7 @@ rg_set_cursor_shape(VALUE self, VALUE rb_shape)
 {
     VteTerminalCursorShape shape;
 
-    shape = RVAL2GENUM(rb_shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
+    shape = RVAL2VTETERMINALCURSORSHAPE(rb_shape);
     vte_terminal_set_cursor_shape(_SELF(self), shape);
     return self;
 }
@@ -442,7 +442,7 @@ rg_cursor_shape(VALUE self)
     VteTerminalCursorShape shape;
 
     shape = vte_terminal_get_cursor_shape(_SELF(self));
-    return GENUM2RVAL(shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
+    return VTETERMINALCURSORSHAPE2RVAL(shape);
 }
 
 static VALUE
@@ -471,7 +471,7 @@ rg_set_font(VALUE self, VALUE desc_or_name)
     if (rb_obj_is_kind_of(desc_or_name, rb_cString)) {
         vte_terminal_set_font_from_string(_SELF(self), RVAL2CSTR(desc_or_name));
     } else {
-        vte_terminal_set_font(_SELF(self), RVAL2PFD(desc_or_name));
+        vte_terminal_set_font(_SELF(self), RVAL2PANGOFONTDESCRIPTION(desc_or_name));
     }
 
     return self;
@@ -482,7 +482,7 @@ rg_font(VALUE self)
 {
     PangoFontDescription *font_desc;
     font_desc = (PangoFontDescription *)vte_terminal_get_font(_SELF(self));
-    return PFD2RVAL(font_desc);
+    return PANGOFONTDESCRIPTION2RVAL(font_desc);
 }
 
 static VALUE
@@ -520,14 +520,14 @@ rg_word_char_p(VALUE self, VALUE c)
 static VALUE
 rg_set_backspace_binding(VALUE self, VALUE binding)
 {
-    vte_terminal_set_backspace_binding(_SELF(self), RVAL2EB(binding));
+    vte_terminal_set_backspace_binding(_SELF(self), RVAL2VTETERMINALERASEBINDING(binding));
     return self;
 }
 
 static VALUE
 rg_set_delete_binding(VALUE self, VALUE binding)
 {
-    vte_terminal_set_delete_binding(_SELF(self), RVAL2EB(binding));
+    vte_terminal_set_delete_binding(_SELF(self), RVAL2VTETERMINALERASEBINDING(binding));
     return self;
 }
 
@@ -663,7 +663,7 @@ rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
     if (NIL_P(cursor) || RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR) {
         vte_terminal_match_set_cursor(_SELF(self), NUM2INT(tag), RVAL2GOBJ(cursor));
     } else if (RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR_TYPE) {
-        vte_terminal_match_set_cursor_type(_SELF(self), NUM2INT(tag), RVAL2CT(cursor));
+        vte_terminal_match_set_cursor_type(_SELF(self), NUM2INT(tag), RVAL2GDKCURSORTYPE(cursor));
     } else {
         vte_terminal_match_set_cursor_name(_SELF(self), NUM2INT(tag), RVAL2CSTR(cursor));
     }
@@ -756,7 +756,7 @@ rg_pty_new(VALUE self, VALUE flags)
     VtePty *result;
     GError *error = NULL;
 
-    result = vte_terminal_pty_new(_SELF(self), RVAL2GFLAGS(flags, VTE_TYPE_PTY_FLAGS), &error);
+    result = vte_terminal_pty_new(_SELF(self), RVAL2VTEPTYFLAGS(flags), &error);
     if (error)
         RAISE_GERROR(error);
 
@@ -846,7 +846,7 @@ rg_write_contents(int argc, VALUE *argv, VALUE self)
 
     result = vte_terminal_write_contents(_SELF(self),
                                         RVAL2GOBJ(stream),
-                                        RVAL2GENUM(flags, VTE_TYPE_TERMINAL_WRITE_FLAGS),
+                                        RVAL2VTETERMINALWRITEFLAGS(flags),
                                         cancellable,
                                         &error);
     if (error)

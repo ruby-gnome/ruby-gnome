@@ -352,7 +352,7 @@ rg_m_current_event_state(G_GNUC_UNUSED VALUE self)
 {
     GdkModifierType state;
     gboolean ret = gtk_get_current_event_state(&state);
-    return ret ? GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE) : Qnil;
+    return ret ? GDKMODIFIERTYPE2RVAL(state) : Qnil;
 }
 
 static VALUE

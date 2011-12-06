@@ -47,7 +47,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (!NIL_P(arg4))
         step = NUM2DBL(arg4);
 
-    widget = gtk_scale_button_new(RVAL2GENUM(arg1, GTK_TYPE_ICON_SIZE), min, max, step, NULL);
+    widget = gtk_scale_button_new(RVAL2GTKICONSIZE(arg1), min, max, step, NULL);
     RBGTK_INITIALIZE(self, widget);
 
     if (!NIL_P(arg5)) {

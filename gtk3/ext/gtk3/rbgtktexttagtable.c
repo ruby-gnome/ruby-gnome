@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cTextTagTable
 #define _SELF(self) (RVAL2GTKTEXTTAGTABLE(self))
-#define RVAL2TAG(t) (RVAL2GTKTEXTTAG(t))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -36,7 +35,7 @@ static VALUE
 rg_add(VALUE self, VALUE tag)
 {
     G_CHILD_ADD(self, tag);
-    gtk_text_tag_table_add(_SELF(self), RVAL2TAG(tag));
+    gtk_text_tag_table_add(_SELF(self), RVAL2GTKTEXTTAG(tag));
     return self;
 }
 
@@ -44,7 +43,7 @@ static VALUE
 rg_remove(VALUE self, VALUE tag)
 {
     G_CHILD_REMOVE(self, tag);
-    gtk_text_tag_table_remove(_SELF(self), RVAL2TAG(tag));
+    gtk_text_tag_table_remove(_SELF(self), RVAL2GTKTEXTTAG(tag));
     return self;
 }
 

@@ -28,7 +28,7 @@ rg_m_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     gint width, height;
 
-    if(gtk_icon_size_lookup(RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), &width, &height))
+    if(gtk_icon_size_lookup(RVAL2GTKICONSIZE(size), &width, &height))
         return rb_ary_new3(2, INT2FIX(width), INT2FIX(height));
     else
         return Qnil;
@@ -40,7 +40,7 @@ rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
     gint width, height;
 
     if(gtk_icon_size_lookup_for_settings(RVAL2GTKSETTINGS(settings),
-                                         RVAL2GENUM(size, GTK_TYPE_ICON_SIZE), 
+                                         RVAL2GTKICONSIZE(size), 
                                          &width, &height))
         return rb_ary_new3(2, INT2FIX(width), INT2FIX(height));
     else
@@ -59,7 +59,7 @@ rg_m_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
 static VALUE
 rg_m_register_alias(G_GNUC_UNUSED VALUE self, VALUE alias, VALUE target)
 {
-    gtk_icon_size_register_alias(RVAL2CSTR(alias), RVAL2GENUM(target, GTK_TYPE_ICON_SIZE));
+    gtk_icon_size_register_alias(RVAL2CSTR(alias), RVAL2GTKICONSIZE(target));
     return Qnil;
 }
 
@@ -72,7 +72,7 @@ rg_m_from_name(G_GNUC_UNUSED VALUE self, VALUE name)
 static VALUE
 rg_m_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 {
-    return CSTR2RVAL(gtk_icon_size_get_name(RVAL2GENUM(size, GTK_TYPE_ICON_SIZE)));
+    return CSTR2RVAL(gtk_icon_size_get_name(RVAL2GTKICONSIZE(size)));
 }
 
 void

@@ -24,9 +24,6 @@
 #define RG_TARGET_NAMESPACE cIconTheme
 #define _SELF(i) RVAL2GTKICONTHEME(i)
 
-#define RVAL2ICON_LOOKUP_FLAGS(flags) (RVAL2GFLAGS(flags, GTK_TYPE_ICON_LOOKUP_FLAGS))
-#define ICON_INFO2RVAL(info) (GTKICONINFO2RVAL(info))
-
 static VALUE
 rg_initialize(VALUE self)
 {
@@ -114,8 +111,8 @@ rg_lookup_icon(VALUE self, VALUE icon_name, VALUE size, VALUE flags)
     info = gtk_icon_theme_lookup_icon(_SELF(self),
                                       RVAL2CSTR(icon_name),
                                       NUM2INT(size),
-                                      RVAL2ICON_LOOKUP_FLAGS(flags));
-    return ICON_INFO2RVAL(info);
+                                      RVAL2GTKICONLOOKUPFLAGS(flags));
+    return GTKICONINFO2RVAL(info);
 }
 
 static VALUE
@@ -127,7 +124,7 @@ rg_load_icon(VALUE self, VALUE icon_name, VALUE size, VALUE flags)
     pixbuf = gtk_icon_theme_load_icon(_SELF(self),
                                       RVAL2CSTR(icon_name),
                                       NUM2INT(size),
-                                      RVAL2ICON_LOOKUP_FLAGS(flags),
+                                      RVAL2GTKICONLOOKUPFLAGS(flags),
                                       &error);
     if (!pixbuf)
     RAISE_GERROR(error);
@@ -215,13 +212,13 @@ rg_choose_icon(int argc, VALUE *argv, VALUE self)
         flags = GTK_ICON_LOOKUP_GENERIC_FALLBACK;
     }
     else {
-        flags = RVAL2ICON_LOOKUP_FLAGS(rb_flags);
+        flags = RVAL2GTKICONLOOKUPFLAGS(rb_flags);
     }
 
     info = gtk_icon_theme_choose_icon(_SELF(self),
                                       icon_names,
                                       size, flags);
-    return ICON_INFO2RVAL(info);
+    return GTKICONINFO2RVAL(info);
 }
 
 static VALUE

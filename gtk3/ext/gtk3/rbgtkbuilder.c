@@ -112,7 +112,7 @@ connect_signals(GtkBuilder *builder, GObject *object, const gchar *signal_name,
     rb_funcall(GOBJ2RVAL(builder), id___connect_signals__, 6,
                signal_connector, GOBJ2RVAL(object), CSTR2RVAL(signal_name),
                CSTR2RVAL(handler_name), GOBJ2RVAL(connect_object),
-               GFLAGS2RVAL(flags, G_TYPE_CONNECT_FLAGS));
+               GCONNECTFLAGS2RVAL(flags));
 }
 
 static VALUE

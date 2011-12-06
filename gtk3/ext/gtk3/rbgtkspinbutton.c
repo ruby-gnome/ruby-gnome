@@ -82,7 +82,7 @@ rg_value_as_int(VALUE self)
 static VALUE
 rg_spin(VALUE self, VALUE direction, VALUE increment)
 {
-    gtk_spin_button_spin(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_SPIN_TYPE), 
+    gtk_spin_button_spin(_SELF(self), RVAL2GTKSPINTYPE(direction), 
                          NUM2DBL(increment));
     return self;
 }

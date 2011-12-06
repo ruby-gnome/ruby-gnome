@@ -87,7 +87,7 @@ rg_set_gc(VALUE self, VALUE gc)
 static VALUE
 rg_set_stipple(VALUE self, VALUE part, VALUE stipple)
 {
-    gdk_pango_renderer_set_stipple(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
+    gdk_pango_renderer_set_stipple(_SELF(self), RVAL2PANGORENDERPART(part),
                                    NIL_P(stipple) ? NULL : RVAL2GDKBITMAP(stipple));
 
     return self;
@@ -109,7 +109,7 @@ static VALUE
 rg_set_override_color(VALUE self, VALUE part, VALUE color)
 {
     gdk_pango_renderer_set_override_color(_SELF(self),
-                                          RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
+                                          RVAL2PANGORENDERPART(part),
                                           RVAL2GDKCOLOR(color));
 
     return self;

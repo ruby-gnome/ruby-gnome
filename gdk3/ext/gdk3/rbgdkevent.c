@@ -89,7 +89,7 @@ gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 static VALUE \
 gdkevent ## type ## _ ## name (VALUE self)\
 {\
-    return GDKWINDOW2RVAL(get_gdkevent(self)->type.name);\
+    return GOBJ2RVAL(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
 gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
@@ -218,7 +218,7 @@ gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
     if (NIL_P(type)){\
         gtype = default_gtype;\
     } else {\
-        gtype = RVAL2GENUM(type, GDK_TYPE_EVENT_TYPE);\
+        gtype = RVAL2GDKEVENTTYPE(type);\
     }\
 \
     G_INITIALIZE(self, gdk_event_new(gtype));\
@@ -261,7 +261,7 @@ gdkevent_s_get_graphics_expose(G_GNUC_UNUSED VALUE self, VALUE window)
 static VALUE
 gdkevent_initialize(VALUE self, VALUE type)
 {
-    GdkEventType gtype = RVAL2GENUM(type, GDK_TYPE_EVENT_TYPE);
+    GdkEventType gtype = RVAL2GDKEVENTTYPE(type);
     if (RBASIC(self)->klass != gdkevents[gtype])
         rb_raise(rb_eArgError, "Wrong event type for this class.");
 
@@ -272,7 +272,7 @@ gdkevent_initialize(VALUE self, VALUE type)
 static VALUE
 gdkevent_type(VALUE self)
 {
-    return GENUM2RVAL(get_gdkevent(self)->type, GDK_TYPE_EVENT_TYPE);
+    return GDKEVENTTYPE2RVAL(get_gdkevent(self)->type);
 }
 
 static VALUE
@@ -293,7 +293,7 @@ gdkevent_get_axis(VALUE self, VALUE axis_use)
 {
     gdouble value;
     gboolean ret = gdk_event_get_axis(get_gdkevent(self), 
-                                      RVAL2GENUM(axis_use, GDK_TYPE_AXIS_USE), &value);
+                                      RVAL2GDKAXISUSE(axis_use), &value);
     return ret ? rb_float_new(value) : Qnil;
 }
 
@@ -584,7 +584,7 @@ static GdkFilterReturn
 filter_func(GdkXEvent *xevent, GdkEvent *event, gpointer func)
 {
     VALUE ret = rb_funcall((VALUE)func, id_call, 2, LONG2NUM((glong)xevent), make_gdkevent(event));
-    return RVAL2GENUM(ret, GDK_TYPE_FILTER_RETURN);
+    return RVAL2GDKFILTERRETURN(ret);
 }
 
 static VALUE

@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cBox
 #define _SELF(self) (RVAL2GTKBOX(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -35,7 +34,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &orientation, &spacing);
 
-    RBGTK_INITIALIZE(self, gtk_box_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
+    RBGTK_INITIALIZE(self, gtk_box_new(RVAL2GTKORIENTATION(orientation),
                                        NIL_P(spacing) ? 0 : NUM2INT(spacing)));
 
     return Qnil;
@@ -87,7 +86,7 @@ static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
     gtk_box_reorder_child(_SELF(self),
-                          RVAL2WIDGET(child), NUM2INT(pos));
+                          RVAL2GTKWIDGET(child), NUM2INT(pos));
     return self;
 }
 
@@ -100,14 +99,14 @@ rg_query_child_packing(VALUE self, VALUE child)
     VALUE ary;
 
     gtk_box_query_child_packing(_SELF(self), 
-                                RVAL2WIDGET(child),
+                                RVAL2GTKWIDGET(child),
                                 &expand, &fill, &padding, &pack_type);
 
     ary = rb_ary_new2(4);
     rb_ary_push(ary, expand == FALSE ? Qfalse : Qtrue);
     rb_ary_push(ary, fill == FALSE ? Qfalse : Qtrue);
     rb_ary_push(ary, INT2NUM(padding));
-    rb_ary_push(ary, GENUM2RVAL(pack_type, GTK_TYPE_PACK_TYPE));
+    rb_ary_push(ary, GTKPACKTYPE2RVAL(pack_type));
 
     return ary;
 }
@@ -116,9 +115,9 @@ static VALUE
 rg_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE padding, VALUE pack_type)
 {
     gtk_box_set_child_packing(_SELF(self), 
-                              RVAL2WIDGET(child),
+                              RVAL2GTKWIDGET(child),
                               RVAL2CBOOL(expand), RVAL2CBOOL(fill),
-                              NUM2UINT(padding), RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
+                              NUM2UINT(padding), RVAL2GTKPACKTYPE(pack_type));
     return self;
 }
 

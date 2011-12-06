@@ -85,25 +85,25 @@ rg_use_drag_window_p(VALUE self)
 static VALUE
 rg_icon_size(VALUE self)
 {
-    return GENUM2RVAL(gtk_tool_item_get_icon_size(_SELF(self)), GTK_TYPE_ICON_SIZE);
+    return GTKICONSIZE2RVAL(gtk_tool_item_get_icon_size(_SELF(self)));
 }
 
 static VALUE
 rg_orientation(VALUE self)
 {
-    return GENUM2RVAL(gtk_tool_item_get_orientation(_SELF(self)), GTK_TYPE_ORIENTATION);
+    return GTKORIENTATION2RVAL(gtk_tool_item_get_orientation(_SELF(self)));
 }
 
 static VALUE
 rg_toolbar_style(VALUE self)
 {
-    return GENUM2RVAL(gtk_tool_item_get_toolbar_style(_SELF(self)), GTK_TYPE_TOOLBAR_STYLE);
+    return GTKTOOLBARSTYLE2RVAL(gtk_tool_item_get_toolbar_style(_SELF(self)));
 }
 
 static VALUE
 rg_relief_style(VALUE self)
 {
-    return GENUM2RVAL(gtk_tool_item_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
+    return GTKRELIEFSTYLE2RVAL(gtk_tool_item_get_relief_style(_SELF(self)));
 }
 
 static VALUE

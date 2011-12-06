@@ -28,7 +28,7 @@
 static VALUE
 rg_initialize(VALUE self, VALUE mode)
 {
-    G_INITIALIZE(self, gtk_size_group_new(RVAL2GENUM(mode, GTK_TYPE_SIZE_GROUP_MODE)));
+    G_INITIALIZE(self, gtk_size_group_new(RVAL2GTKSIZEGROUPMODE(mode)));
     return Qnil;
 }
 

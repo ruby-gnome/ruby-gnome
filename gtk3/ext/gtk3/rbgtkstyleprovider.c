@@ -27,14 +27,14 @@ static VALUE
 rg_get_icon_factory(VALUE self, VALUE path)
 {
     return GOBJ2RVAL(gtk_style_provider_get_icon_factory(_SELF(self),
-                                                         RVAL2BOXED(path, GTK_TYPE_WIDGET_PATH)));
+                                                         RVAL2GTKWIDGETPATH(path)));
 }
 
 static VALUE
 rg_get_style(VALUE self, VALUE path)
 {
     return GOBJ2RVAL(gtk_style_provider_get_style(_SELF(self),
-                                                  RVAL2BOXED(path, GTK_TYPE_WIDGET_PATH)));
+                                                  RVAL2GTKWIDGETPATH(path)));
 }
 
 static VALUE
@@ -45,8 +45,8 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
     VALUE ret = Qnil;
 
     result = gtk_style_provider_get_style_property(_SELF(self),
-                                                   RVAL2BOXED(path, GTK_TYPE_WIDGET_PATH),
-                                                   RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                                   RVAL2GTKWIDGETPATH(path),
+                                                   RVAL2GTKSTATEFLAGS(state),
                                                    RVAL2GPARAMSPEC(pspec),
                                                    &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){

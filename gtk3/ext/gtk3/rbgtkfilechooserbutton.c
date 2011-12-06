@@ -34,7 +34,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (TYPE(title) == T_STRING) {
         if (NIL_P(backend)){
             widget = gtk_file_chooser_button_new(RVAL2CSTR(title),
-                                                 RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION));
+                                                 RVAL2GTKFILECHOOSERACTION(action));
 /* deprecated
         } else {
             widget = gtk_file_chooser_button_new_with_backend(RVAL2CSTR(title), 

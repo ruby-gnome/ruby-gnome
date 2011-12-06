@@ -24,8 +24,6 @@
 
 #define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) (RVAL2GTKTEXTITER(s))
-#define RVAL2TAG(t) (RVAL2GTKTEXTTAG(t))
-#define ITR2RVAL(i) (GTKTEXTITER2RVAL(i))
 
 static gboolean is_compat_240;
 static ID id_pixbuf;
@@ -139,25 +137,25 @@ rg_child_anchor(VALUE self)
 static VALUE
 rg_begins_tag_p(VALUE self, VALUE tag)
 {
-    return CBOOL2RVAL(gtk_text_iter_begins_tag(_SELF(self), RVAL2TAG(tag)));
+    return CBOOL2RVAL(gtk_text_iter_begins_tag(_SELF(self), RVAL2GTKTEXTTAG(tag)));
 }
 
 static VALUE
 rg_ends_tag_p(VALUE self, VALUE tag)
 {
-    return CBOOL2RVAL(gtk_text_iter_ends_tag(_SELF(self), RVAL2TAG(tag)));
+    return CBOOL2RVAL(gtk_text_iter_ends_tag(_SELF(self), RVAL2GTKTEXTTAG(tag)));
 }
 
 static VALUE
 rg_toggles_tag_p(VALUE self, VALUE tag)
 {
-    return CBOOL2RVAL(gtk_text_iter_toggles_tag(_SELF(self), RVAL2TAG(tag)));
+    return CBOOL2RVAL(gtk_text_iter_toggles_tag(_SELF(self), RVAL2GTKTEXTTAG(tag)));
 }
 
 static VALUE
 rg_has_tag_p(VALUE self, VALUE tag)
 {
-    return CBOOL2RVAL(gtk_text_iter_has_tag(_SELF(self), RVAL2TAG(tag)));
+    return CBOOL2RVAL(gtk_text_iter_has_tag(_SELF(self), RVAL2GTKTEXTTAG(tag)));
 }
 
 static VALUE
@@ -522,7 +520,7 @@ rg_forward_to_tag_toggle(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &tag);
     return CBOOL2RVAL(gtk_text_iter_forward_to_tag_toggle(_SELF(self),
-                                                          NIL_P(tag) ? NULL : RVAL2TAG(tag)));
+                                                          NIL_P(tag) ? NULL : RVAL2GTKTEXTTAG(tag)));
 }
 
 static VALUE
@@ -532,7 +530,7 @@ rg_backward_to_tag_toggle(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &tag);
     return CBOOL2RVAL(gtk_text_iter_backward_to_tag_toggle(_SELF(self),
-                                                           NIL_P(tag) ? NULL : RVAL2TAG(tag)));
+                                                           NIL_P(tag) ? NULL : RVAL2GTKTEXTTAG(tag)));
 }
 
 static gboolean
@@ -578,16 +576,16 @@ rg_forward_search(int argc, VALUE *argv, VALUE self)
 
     if (is_compat_240){
         ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                           RVAL2GFLAGS(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                           RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                            &m_start, &m_end,
                                            NIL_P(limit) ? NULL : _SELF(limit));
     } else {
         ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                           RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                           RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                            &m_start, &m_end,
                                            NIL_P(limit) ? NULL : _SELF(limit));
     }
-    return ret ? rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end)) : Qnil;
+    return ret ? rb_ary_new3(2, GTKTEXTITER2RVAL(&m_start), GTKTEXTITER2RVAL(&m_end)) : Qnil;
 }
 
 static VALUE
@@ -600,16 +598,16 @@ rg_backward_search(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
     if (is_compat_240){
         ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                            RVAL2GFLAGS(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                            RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                             &m_start, &m_end,
                                             NIL_P(limit) ? NULL : _SELF(limit));
     } else {
         ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                            RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                            RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                             &m_start, &m_end,
                                             NIL_P(limit) ? NULL : _SELF(limit));
     }
-    return ret ? rb_ary_new3(2, ITR2RVAL(&m_start), ITR2RVAL(&m_end)) : Qnil;
+    return ret ? rb_ary_new3(2, GTKTEXTITER2RVAL(&m_start), GTKTEXTITER2RVAL(&m_end)) : Qnil;
 }
 
 static VALUE

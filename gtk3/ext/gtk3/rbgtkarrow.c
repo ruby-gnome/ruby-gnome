@@ -29,8 +29,8 @@
 static VALUE
 rg_initialize(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
-    RBGTK_INITIALIZE(self, gtk_arrow_new(RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
-                                         RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE)));
+    RBGTK_INITIALIZE(self, gtk_arrow_new(RVAL2GTKARROWTYPE(arrow_t),
+                                         RVAL2GTKSHADOWTYPE(shadow_t)));
     return Qnil;
 }
 
@@ -38,8 +38,8 @@ static VALUE
 rg_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
 {
     gtk_arrow_set(RVAL2GTKARROW(self),
-                  RVAL2GENUM(arrow_t, GTK_TYPE_ARROW_TYPE),
-                  RVAL2GENUM(shadow_t, GTK_TYPE_SHADOW_TYPE));
+                  RVAL2GTKARROWTYPE(arrow_t),
+                  RVAL2GTKSHADOWTYPE(shadow_t));
     return self;
 }
 

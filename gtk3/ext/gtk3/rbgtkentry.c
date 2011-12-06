@@ -101,7 +101,7 @@ rg_get_icon_area(VALUE self, VALUE icon_pos)
     GdkRectangle icon_area;
 
     gtk_entry_get_icon_area(_SELF(self),
-                            RVAL2GENUM(icon_pos, GTK_TYPE_ENTRY_ICON_POSITION),
+                            RVAL2GTKENTRYICONPOSITION(icon_pos),
                             &icon_area);
 
     return GOBJ2RVAL(&icon_area);
@@ -129,7 +129,7 @@ rg_im_context_filter_keypress(VALUE self, VALUE event)
     gboolean result;
 
     result = gtk_entry_im_context_filter_keypress(_SELF(self),
-                                                  RVAL2GDKEVENT(event));
+                                                  RVAL2GDKEVENTKEY(event));
 
     return CBOOL2RVAL(result);
 }
@@ -154,9 +154,9 @@ static VALUE
 rg_set_icon_drag_source(VALUE self, VALUE icon_pos, VALUE target_list, VALUE actions)
 {
     gtk_entry_set_icon_drag_source(_SELF(self),
-                                   RVAL2GENUM(icon_pos, GTK_TYPE_ENTRY_ICON_POSITION),
+                                   RVAL2GTKENTRYICONPOSITION(icon_pos),
                                    RVAL2GTKTARGETLIST(target_list),
-                                   RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION));
+                                   RVAL2GDKDRAGACTION(actions));
 
     return self;
 }

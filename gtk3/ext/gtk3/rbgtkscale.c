@@ -36,10 +36,10 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "13", &orientation, &arg1, &arg2, &arg3);
 
    if (NIL_P(arg1) || RVAL2GTYPE(arg1) == GTK_TYPE_ADJUSTMENT) {
-        widget = gtk_scale_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
+        widget = gtk_scale_new(RVAL2GTKORIENTATION(orientation),
                                NIL_P(arg1) ? NULL : RVAL2GTKADJUSTMENT(arg1));
     } else {
-        widget = gtk_scale_new_with_range(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
+        widget = gtk_scale_new_with_range(RVAL2GTKORIENTATION(orientation),
                                           NUM2DBL(arg1), NUM2DBL(arg2), NUM2DBL(arg3));
     }
     RBGTK_INITIALIZE(self, widget);
@@ -70,7 +70,7 @@ rg_add_mark(int argc, VALUE *argv, VALUE self)
 
     gtk_scale_add_mark(_SELF(self),
                        NUM2DBL(value),
-                       RVAL2GENUM(position, GTK_TYPE_POSITION_TYPE),
+                       RVAL2GTKPOSITIONTYPE(position),
                        RVAL2CSTR_ACCEPT_NIL(markup));
 
     return self;

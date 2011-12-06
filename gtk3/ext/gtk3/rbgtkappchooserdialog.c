@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "content_type", &rb_content_type,
                      NULL);
     parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
-    flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
+    flags = NIL_P(rb_flags) ? 0 : RVAL2GTKDIALOGFLAGS(rb_flags);
 
     if (!NIL_P(rb_file))
         widget = gtk_app_chooser_dialog_new(parent, flags, RVAL2GFILE(rb_file));

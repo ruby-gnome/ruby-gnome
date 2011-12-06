@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             StringValue(arg);
             title = RVAL2CSTR(arg);
         } else {
-            tp = RVAL2GENUM(arg, GTK_TYPE_WINDOW_TYPE);
+            tp = RVAL2GTKWINDOWTYPE(arg);
         }
     }
     window = gtk_window_new(tp);
@@ -104,7 +104,7 @@ rg_set_geometry_hints(VALUE self, VALUE geometry_widget, VALUE geometry, VALUE g
     gtk_window_set_geometry_hints(_SELF(self),
                                   RVAL2GTKWIDGET(geometry_widget),
                                   RVAL2GDKGEOMETRY(geometry),
-                                  RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
+                                  RVAL2GDKWINDOWHINTS(geom_mask));
     return self;
 }
 
@@ -137,7 +137,7 @@ rg_mnemonic_activate(VALUE self, VALUE keyval, VALUE modifier)
 {
     return CBOOL2RVAL(gtk_window_mnemonic_activate(_SELF(self), 
                                         NUM2INT(keyval), 
-                                        RVAL2GFLAGS(modifier, GDK_TYPE_MODIFIER_TYPE)));
+                                        RVAL2GDKMODIFIERTYPE(modifier)));
 }
 
 static VALUE
@@ -247,7 +247,7 @@ rg_set_keep_below(VALUE self, VALUE setting)
 static VALUE
 rg_begin_resize_drag(VALUE self, VALUE edge, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
 {
-    gtk_window_begin_resize_drag(_SELF(self), RVAL2GENUM(edge, GDK_TYPE_WINDOW_EDGE),
+    gtk_window_begin_resize_drag(_SELF(self), RVAL2GDKWINDOWEDGE(edge),
                                  NUM2INT(button), NUM2INT(root_x),
                                  NUM2INT(root_y), NUM2UINT(timestamp));
     return self;
@@ -266,7 +266,7 @@ static VALUE
 rg_set_mnemonic_modifier(VALUE self, VALUE modifier)
 {
     gtk_window_set_mnemonic_modifier(_SELF(self), 
-                                     RVAL2GFLAGS(modifier, GDK_TYPE_MODIFIER_TYPE));
+                                     RVAL2GDKMODIFIERTYPE(modifier));
     return self;
 }
 
@@ -293,7 +293,7 @@ rg_icon_list(VALUE self)
 static VALUE
 rg_mnemonic_modifier(VALUE self)
 {
-    return GFLAGS2RVAL(gtk_window_get_mnemonic_modifier(_SELF(self)), GDK_TYPE_MODIFIER_TYPE);
+    return GDKMODIFIERTYPE2RVAL(gtk_window_get_mnemonic_modifier(_SELF(self)));
 }
 
 static VALUE
@@ -434,7 +434,7 @@ static VALUE
 rg_activate_key(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_window_activate_key(_SELF(self),
-                                              RVAL2GDKEVENT(event)));
+                                              RVAL2GDKEVENTKEY(event)));
 }
 
 static VALUE
@@ -464,7 +464,7 @@ static VALUE
 rg_propagate_key_event(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_window_propagate_key_event(_SELF(self),
-                                                     RVAL2GDKEVENT(event)));
+                                                     RVAL2GDKEVENTKEY(event)));
 }
 
 static VALUE
