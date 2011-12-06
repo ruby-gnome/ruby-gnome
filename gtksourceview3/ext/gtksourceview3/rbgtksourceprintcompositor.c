@@ -26,7 +26,7 @@
 
 #define RG_TARGET_NAMESPACE cPrintCompositor
 #define _SELF(self) (RVAL2GTKSOURCEPRINTCOMPOSITOR(self))
-#define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
+#define RVAL2UNIT(o) (RVAL2GTKUNIT(o))
 
 /*
  * Class method: new(buffer)
