@@ -41,5 +41,15 @@
 #define GSOURCE2RVAL(o)                    (BOXED2RVAL(o, G_TYPE_SOURCE))
 #define RVAL2GTIMER(o)                     ((GTimer*)RVAL2BOXED(o, G_TYPE_TIMER))
 #define GTIMER2RVAL(o)                     (BOXED2RVAL(o, G_TYPE_TIMER))
+#define RVAL2GVALUE(o)                     ((GValue*)RVAL2BOXED(o, G_TYPE_VALUE))
+#define GVALUE2RVAL(o)                     (BOXED2RVAL(o, G_TYPE_VALUE))
+
+#define RVAL2GNORMALIZEMODE(o)             (RVAL2GENUM(o, G_TYPE_NORMALIZE_MODE))
+#define GNORMALIZEMODE2RVAL(o)             (GENUM2RVAL(o, G_TYPE_NORMALIZE_MODE))
+
+#define RVAL2GCONNECTFLAGS(o)              (RVAL2GFLAGS(o, G_TYPE_CONNECT_FLAGS))
+#define GCONNECTFLAGS2RVAL(o)              (GFLAGS2RVAL(o, G_TYPE_CONNECT_FLAGS))
+#define RVAL2GKEYFILEFLAGS(o)              (RVAL2GFLAGS(o, G_TYPE_KEY_FILE_FLAGS))
+#define GKEYFILEFLAGS2RVAL(o)              (GFLAGS2RVAL(o, G_TYPE_KEY_FILE_FLAGS))
 
 #endif /* __GLIB2CONVERSIONS_H__ */
