@@ -34,7 +34,7 @@ setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id, 0, 26, 0) or exit(false)
 
-["glib2", "atk", "gtk3"].each do |package|
+["glib2", "atk", "pango", "gdk3", "gtk3"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",

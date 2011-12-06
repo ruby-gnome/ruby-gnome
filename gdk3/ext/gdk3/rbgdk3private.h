@@ -33,6 +33,7 @@
 
 #include <rb_cairo.h>
 #include <rbgobject.h>
+#include <rbpango.h>
 #include "rbgdk3.h"
 
 #ifndef HAVE_RB_ERRINFO
