@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cTreeView
 #define _SELF(s) (RVAL2GTKTREEVIEW(s))
-#define TREEVIEW_COL(c) (RVAL2GTKTREEVIEWCOLUMN(c))
-#define RVAL2CELLRENDERER(c) (RVAL2GTKCELLRENDERER(c))
 
 static VALUE rb_mGtk;
 static ID id_model;
@@ -68,7 +66,7 @@ rg_append_column(VALUE self, VALUE column)
 {
     G_CHILD_ADD(self, column);
     return INT2NUM(gtk_tree_view_append_column(_SELF(self), 
-                                               TREEVIEW_COL(column)));
+                                               RVAL2GTKTREEVIEWCOLUMN(column)));
 }
 
 static VALUE
@@ -76,7 +74,7 @@ rg_remove_column(VALUE self, VALUE column)
 {
     G_CHILD_REMOVE(self, column);
     return INT2NUM(gtk_tree_view_remove_column(_SELF(self), 
-                                               TREEVIEW_COL(column)));
+                                               RVAL2GTKTREEVIEWCOLUMN(column)));
 }  
 
 static void
@@ -102,7 +100,7 @@ rg_insert_column(int argc, VALUE *argv, VALUE self)
     if (argc == 2) {
         G_CHILD_ADD(self, args[0]);
         return INT2NUM(gtk_tree_view_insert_column(_SELF(self),
-                                                   TREEVIEW_COL(args[0]),
+                                                   RVAL2GTKTREEVIEWCOLUMN(args[0]),
                                                    NUM2INT(args[1])));
     } else if (argc == 3) {
         int ret;
@@ -112,7 +110,7 @@ rg_insert_column(int argc, VALUE *argv, VALUE self)
         ret = gtk_tree_view_insert_column_with_data_func(_SELF(self),
                                                          NUM2INT(args[0]),
                                                          RVAL2CSTR(args[1]),
-                                                         RVAL2CELLRENDERER(args[2]),
+                                                         RVAL2GTKCELLRENDERER(args[2]),
                                                          (GtkTreeCellDataFunc)cell_data_func,
                                                          (gpointer)func,
                                                          NULL);
@@ -123,7 +121,7 @@ rg_insert_column(int argc, VALUE *argv, VALUE self)
         int ret;
         const gchar *name;
         VALUE ary;
-        GtkCellRenderer* renderer = RVAL2CELLRENDERER(args[2]);
+        GtkCellRenderer* renderer = RVAL2GTKCELLRENDERER(args[2]);
 
         GtkTreeViewColumn* column = gtk_tree_view_column_new();
 
@@ -174,8 +172,8 @@ rg_columns(VALUE self)
 static VALUE
 rg_move_column_after(VALUE self, VALUE column, VALUE base_column)
 {
-    gtk_tree_view_move_column_after(_SELF(self), TREEVIEW_COL(column),
-                                    NIL_P(base_column) ? NULL : TREEVIEW_COL(base_column));
+    gtk_tree_view_move_column_after(_SELF(self), RVAL2GTKTREEVIEWCOLUMN(column),
+                                    NIL_P(base_column) ? NULL : RVAL2GTKTREEVIEWCOLUMN(base_column));
     return self;
 }
 
@@ -210,7 +208,7 @@ rg_scroll_to_cell(VALUE self, VALUE path, VALUE column, VALUE use_align, VALUE r
 {
     gtk_tree_view_scroll_to_cell(_SELF(self),
                                  NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
-                                 NIL_P(column) ? NULL : TREEVIEW_COL(column), 
+                                 NIL_P(column) ? NULL : RVAL2GTKTREEVIEWCOLUMN(column), 
                                  RVAL2CBOOL(use_align),
                                  NUM2DBL(row_align), NUM2DBL(col_align));
     return self;
@@ -220,7 +218,7 @@ static VALUE
 rg_set_cursor(VALUE self, VALUE path, VALUE focus_column, VALUE start_editing)
 {
     gtk_tree_view_set_cursor(_SELF(self), RVAL2GTKTREEPATH(path),
-                             NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
+                             NIL_P(focus_column) ? NULL : RVAL2GTKTREEVIEWCOLUMN(focus_column), 
                              RVAL2CBOOL(start_editing));
     return self;
 }
@@ -320,7 +318,7 @@ rg_get_cell_area(VALUE self, VALUE path, VALUE column)
     GdkRectangle rect;
     gtk_tree_view_get_cell_area(_SELF(self), 
                                 NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
-                                NIL_P(column) ? NULL : TREEVIEW_COL(column), 
+                                NIL_P(column) ? NULL : RVAL2GTKTREEVIEWCOLUMN(column), 
                                 &rect);
     return GDKRECTANGLE2RVAL(&rect);
 }
@@ -331,7 +329,7 @@ rg_get_background_area(VALUE self, VALUE path, VALUE column)
     GdkRectangle rect;
     gtk_tree_view_get_background_area(_SELF(self), 
                                       NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
-                                      NIL_P(column) ? NULL : TREEVIEW_COL(column), 
+                                      NIL_P(column) ? NULL : RVAL2GTKTREEVIEWCOLUMN(column), 
                                       &rect);
     return GDKRECTANGLE2RVAL(&rect);
 }
@@ -550,7 +548,7 @@ static VALUE
 rg_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_cell, VALUE start_editing)
 {
     gtk_tree_view_set_cursor_on_cell(_SELF(self), RVAL2GTKTREEPATH(path),
-                                     NIL_P(focus_column) ? NULL : TREEVIEW_COL(focus_column), 
+                                     NIL_P(focus_column) ? NULL : RVAL2GTKTREEVIEWCOLUMN(focus_column), 
                                      NIL_P(focus_cell) ? NULL : RVAL2GTKCELLRENDERER(focus_cell), 
                                      RVAL2CBOOL(start_editing));
     return self;

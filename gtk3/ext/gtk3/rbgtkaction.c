@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cAction
 #define _SELF(self) (RVAL2GTKACTION(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

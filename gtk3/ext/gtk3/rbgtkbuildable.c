@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cBuildable
 #define _SELF(self) (RVAL2GTKBUILDABLE(self))
-#define RVAL2BUILDER(obj) (RVAL2GTKBUILDER(obj))
 
 static VALUE
 rg_builder_name(VALUE self)
@@ -44,7 +43,7 @@ rg_add_child(int argc, VALUE *argv, VALUE self)
     VALUE builder, child, type;
 
     rb_scan_args(argc, argv, "21", &builder, &child, &type);
-    gtk_buildable_add_child(_SELF(self), RVAL2BUILDER(builder), RVAL2GOBJ(child),
+    gtk_buildable_add_child(_SELF(self), RVAL2GTKBUILDER(builder), RVAL2GOBJ(child),
                             RVAL2CSTR_ACCEPT_NIL(type));
     return self;
 }
@@ -57,7 +56,7 @@ rg_set_buildable_property(VALUE self, VALUE rb_builder,
     const gchar *name;
     GValue value = G_VALUE_INIT;
 
-    builder = RVAL2BUILDER(rb_builder);
+    builder = RVAL2GTKBUILDER(rb_builder);
     name = RVAL2CSTR(rb_name);
     rbgobj_initialize_gvalue(&value, rb_value);
     gtk_buildable_set_buildable_property(_SELF(self), builder, name, &value);
@@ -69,7 +68,7 @@ static VALUE
 rg_construct_child(VALUE self, VALUE builder, VALUE name)
 {
     return GOBJ2RVAL(gtk_buildable_construct_child(_SELF(self),
-                                                   RVAL2BUILDER(builder),
+                                                   RVAL2GTKBUILDER(builder),
                                                    RVAL2CSTR(name)));
 }
 
@@ -100,7 +99,7 @@ static VALUE
 rg_get_internal_child(VALUE self, VALUE builder, VALUE child_name)
 {
     return GOBJ2RVAL(gtk_buildable_get_internal_child(_SELF(self),
-                                                      RVAL2BUILDER(builder),
+                                                      RVAL2GTKBUILDER(builder),
                                                       RVAL2CSTR(child_name)));
 }
 

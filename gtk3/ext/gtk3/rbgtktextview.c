@@ -23,10 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cTextView
 #define _SELF(self) (RVAL2GTKTEXTVIEW(self))
-#define RVAL2BUFFER(b) (RVAL2GTKTEXTBUFFER(b))
-#define RVAL2MARK(m) (RVAL2GTKTEXTMARK(m))
-#define RVAL2ITR(i) (RVAL2GTKTEXTITER(i))
-#define ITR2RVAL(i) (GTKTEXTITER2RVAL(i))
 
 static ID id_buffer;
 
@@ -41,7 +37,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         widget = gtk_text_view_new();
     else {
         G_CHILD_SET(self, id_buffer, buffer);
-        widget = gtk_text_view_new_with_buffer(RVAL2BUFFER(buffer));
+        widget = gtk_text_view_new_with_buffer(RVAL2GTKTEXTBUFFER(buffer));
     }
 
     RBGTK_INITIALIZE(self, widget);
@@ -53,7 +49,7 @@ textview_set_buffer(VALUE self, VALUE buf)
 {
     G_CHILD_SET(self, id_buffer, buf);
     gtk_text_view_set_buffer(_SELF(self), 
-                             NIL_P(buf) ? NULL : RVAL2BUFFER(buf));
+                             NIL_P(buf) ? NULL : RVAL2GTKTEXTBUFFER(buf));
     return self;
 }
 
@@ -69,7 +65,7 @@ textview_get_buffer(VALUE self)
 static VALUE
 rg_scroll_to_mark(VALUE self, VALUE mark, VALUE within_margin, VALUE use_align, VALUE xalign, VALUE yalign)
 {
-    gtk_text_view_scroll_to_mark(_SELF(self), RVAL2MARK(mark), 
+    gtk_text_view_scroll_to_mark(_SELF(self), RVAL2GTKTEXTMARK(mark), 
                                  NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
                                  NUM2DBL(xalign), NUM2DBL(yalign));
     return self;
@@ -78,7 +74,7 @@ rg_scroll_to_mark(VALUE self, VALUE mark, VALUE within_margin, VALUE use_align, 
 static VALUE
 rg_scroll_to_iter(VALUE self, VALUE iter, VALUE within_margin, VALUE use_align, VALUE xalign, VALUE yalign)
 {
-    return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITR(iter), 
+    return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2GTKTEXTITER(iter), 
                                                    NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
                                                    NUM2DBL(xalign), NUM2DBL(yalign)));
 }
@@ -86,14 +82,14 @@ rg_scroll_to_iter(VALUE self, VALUE iter, VALUE within_margin, VALUE use_align, 
 static VALUE
 rg_scroll_mark_onscreen(VALUE self, VALUE mark)
 {
-    gtk_text_view_scroll_mark_onscreen(_SELF(self), RVAL2MARK(mark));
+    gtk_text_view_scroll_mark_onscreen(_SELF(self), RVAL2GTKTEXTMARK(mark));
     return self;
 }
 
 static VALUE
 rg_move_mark_onscreen(VALUE self, VALUE mark)
 {
-    return CBOOL2RVAL(gtk_text_view_move_mark_onscreen(_SELF(self), RVAL2MARK(mark)));
+    return CBOOL2RVAL(gtk_text_view_move_mark_onscreen(_SELF(self), RVAL2GTKTEXTMARK(mark)));
 }
 
 static VALUE
@@ -114,7 +110,7 @@ static VALUE
 rg_get_iter_location(VALUE self, VALUE iter)
 {
     GdkRectangle rect;
-    gtk_text_view_get_iter_location(_SELF(self), RVAL2ITR(iter), &rect);
+    gtk_text_view_get_iter_location(_SELF(self), RVAL2GTKTEXTITER(iter), &rect);
     return GDKRECTANGLE2RVAL(&rect);
 }
 
@@ -124,14 +120,14 @@ rg_get_line_at_y(VALUE self, VALUE y)
     GtkTextIter target_iter;
     gint line_top;
     gtk_text_view_get_line_at_y(_SELF(self), &target_iter, NUM2INT(y), &line_top);
-    return rb_ary_new3(2, ITR2RVAL(&target_iter), INT2NUM(line_top));
+    return rb_ary_new3(2, GTKTEXTITER2RVAL(&target_iter), INT2NUM(line_top));
 }
 
 static VALUE
 rg_get_line_yrange(VALUE self, VALUE iter)
 {
     int y, height;
-    gtk_text_view_get_line_yrange(_SELF(self), RVAL2ITR(iter), &y, &height);
+    gtk_text_view_get_line_yrange(_SELF(self), RVAL2GTKTEXTITER(iter), &y, &height);
 
     return rb_ary_new3(2, INT2NUM(y), INT2NUM(height));
 }
@@ -141,7 +137,7 @@ rg_get_iter_at_location(VALUE self, VALUE x, VALUE y)
 {
     GtkTextIter iter;
     gtk_text_view_get_iter_at_location(_SELF(self), &iter, NUM2INT(x), NUM2INT(y));
-    return ITR2RVAL(&iter);
+    return GTKTEXTITER2RVAL(&iter);
 }
 
 static VALUE
@@ -150,7 +146,7 @@ rg_get_iter_at_position(VALUE self, VALUE x, VALUE y)
     GtkTextIter iter;
     gint trailing;
     gtk_text_view_get_iter_at_position(_SELF(self), &iter, &trailing, NUM2INT(x), NUM2INT(y));
-    return rb_assoc_new(ITR2RVAL(&iter), INT2NUM(trailing));
+    return rb_assoc_new(GTKTEXTITER2RVAL(&iter), INT2NUM(trailing));
 }
 
 static VALUE
@@ -210,37 +206,37 @@ rg_get_border_window_size(VALUE self, VALUE wintype)
 static VALUE
 rg_forward_display_line(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_forward_display_line(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_text_view_forward_display_line(_SELF(self), RVAL2GTKTEXTITER(iter)));
 }
 
 static VALUE
 rg_backward_display_line(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_backward_display_line(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_text_view_backward_display_line(_SELF(self), RVAL2GTKTEXTITER(iter)));
 }
 
 static VALUE
 rg_forward_display_line_end(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_forward_display_line_end(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_text_view_forward_display_line_end(_SELF(self), RVAL2GTKTEXTITER(iter)));
 }
 
 static VALUE
 rg_backward_display_line_start(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_backward_display_line_start(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_text_view_backward_display_line_start(_SELF(self), RVAL2GTKTEXTITER(iter)));
 }
 
 static VALUE
 rg_starts_display_line(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_starts_display_line(_SELF(self), RVAL2ITR(iter)));
+    return CBOOL2RVAL(gtk_text_view_starts_display_line(_SELF(self), RVAL2GTKTEXTITER(iter)));
 }
 
 static VALUE
 rg_move_visually(VALUE self, VALUE iter, VALUE count)
 {
-    return CBOOL2RVAL(gtk_text_view_move_visually(_SELF(self), RVAL2ITR(iter), NUM2INT(count)));
+    return CBOOL2RVAL(gtk_text_view_move_visually(_SELF(self), RVAL2GTKTEXTITER(iter), NUM2INT(count)));
 }
 
 static VALUE

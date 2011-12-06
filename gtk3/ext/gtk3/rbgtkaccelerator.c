@@ -23,12 +23,10 @@
 
 #define RG_TARGET_NAMESPACE mAccelerator
 
-#define RVAL2MOD(mods) RVAL2GDKMODIFIERTYPE(mods)
-
 static VALUE
 rg_s_valid(G_GNUC_UNUSED VALUE self, VALUE keyval, VALUE modifiers)
 {
-    return CBOOL2RVAL(gtk_accelerator_valid(NUM2UINT(keyval), RVAL2MOD(modifiers)));
+    return CBOOL2RVAL(gtk_accelerator_valid(NUM2UINT(keyval), RVAL2GDKMODIFIERTYPE(modifiers)));
 }
 
 static VALUE
@@ -43,19 +41,19 @@ rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE accelerator)
 static VALUE
 rg_s_to_name(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
-    return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
+    return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2GDKMODIFIERTYPE(mods)));
 }
 
 static VALUE
 rg_s_get_label(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
-    return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2MOD(mods)));
+    return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2GDKMODIFIERTYPE(mods)));
 }
 
 static VALUE
 rg_s_set_default_mod_mask(VALUE self, VALUE default_mod_mask)
 {
-    gtk_accelerator_set_default_mod_mask(RVAL2MOD(default_mod_mask));
+    gtk_accelerator_set_default_mod_mask(RVAL2GDKMODIFIERTYPE(default_mod_mask));
     return self;
 }
 

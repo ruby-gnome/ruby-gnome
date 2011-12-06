@@ -24,9 +24,6 @@
 #define RG_TARGET_NAMESPACE cPageSetup
 #define _SELF(s) (RVAL2GTKPAGESETUP(s))
 
-#define RVAL2SIZE(o) (RVAL2GTKPAPERSIZE(o))
-#define RVAL2UNIT(o) (RVAL2GTKUNIT(o))
-
 static VALUE
 rg_initialize(VALUE self)
 {
@@ -63,7 +60,7 @@ rg_paper_size(VALUE self)
 static VALUE
 rg_set_paper_size(VALUE self, VALUE paper_size)
 {
-    gtk_page_setup_set_paper_size(_SELF(self), RVAL2SIZE(paper_size));
+    gtk_page_setup_set_paper_size(_SELF(self), RVAL2GTKPAPERSIZE(paper_size));
     return self;
 }
 
@@ -71,14 +68,14 @@ static VALUE
 rg_get_top_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_top_margin(_SELF(self),
-                                                      RVAL2UNIT(unit)));
+                                                      RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_top_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_top_margin(_SELF(self), NUM2DBL(margin),
-                                  RVAL2UNIT(unit));
+                                  RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -86,14 +83,14 @@ static VALUE
 rg_get_bottom_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_bottom_margin(_SELF(self),
-                                                         RVAL2UNIT(unit)));
+                                                         RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_bottom_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_bottom_margin(_SELF(self), NUM2DBL(margin),
-                                     RVAL2UNIT(unit));
+                                     RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -101,14 +98,14 @@ static VALUE
 rg_get_left_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_left_margin(_SELF(self),
-                                                       RVAL2UNIT(unit)));
+                                                       RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_left_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_left_margin(_SELF(self), NUM2DBL(margin),
-                                   RVAL2UNIT(unit));
+                                   RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -116,14 +113,14 @@ static VALUE
 rg_get_right_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_right_margin(_SELF(self),
-                                                        RVAL2UNIT(unit)));
+                                                        RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_right_margin(VALUE self, VALUE margin, VALUE unit)
 {
     gtk_page_setup_set_right_margin(_SELF(self), NUM2DBL(margin),
-                                    RVAL2UNIT(unit));
+                                    RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -131,7 +128,7 @@ static VALUE
 rg_set_paper_size_and_default_margins(VALUE self, VALUE size)
 {
     gtk_page_setup_set_paper_size_and_default_margins(_SELF(self),
-                                                      RVAL2SIZE(size));
+                                                      RVAL2GTKPAPERSIZE(size));
     return self;
 }
 
@@ -140,14 +137,14 @@ static VALUE
 rg_get_paper_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_paper_width(_SELF(self),
-                                                       RVAL2UNIT(unit)));
+                                                       RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_get_paper_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_paper_height(_SELF(self),
-                                                        RVAL2UNIT(unit)));
+                                                        RVAL2GTKUNIT(unit)));
 }
 
 /* These take orientation, and margins into consideration */
@@ -155,14 +152,14 @@ static VALUE
 rg_get_page_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_page_width(_SELF(self),
-                                                      RVAL2UNIT(unit)));
+                                                      RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_get_page_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_page_setup_get_page_height(_SELF(self),
-                                                        RVAL2UNIT(unit)));
+                                                        RVAL2GTKUNIT(unit)));
 }
 
 void

@@ -24,8 +24,6 @@
 #define RG_TARGET_NAMESPACE cPrintSettings
 #define _SELF(s) (RVAL2GTKPRINTSETTINGS(s))
 
-#define RVAL2UNIT(o) (RVAL2GTKUNIT(o))
-
 static VALUE s_string, s_bool, s_double, s_length, s_int;
 
 static VALUE
@@ -142,14 +140,14 @@ rg_get_length(VALUE self, VALUE key, VALUE unit)
 {
     return rb_float_new(gtk_print_settings_get_length(_SELF(self),
                                                       RVAL2CSTR(key),
-                                                      RVAL2UNIT(unit)));
+                                                      RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 ps_set_length(VALUE self, VALUE key, VALUE value, VALUE unit)
 {
     gtk_print_settings_set_length(_SELF(self), RVAL2CSTR(key),
-                                  NUM2DBL(value), RVAL2UNIT(unit));
+                                  NUM2DBL(value), RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -317,14 +315,14 @@ static VALUE
 rg_paper_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_print_settings_get_paper_width(_SELF(self),
-                                                           RVAL2UNIT(unit)));
+                                                           RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_paper_width(VALUE self, VALUE paper_width, VALUE unit)
 {
     gtk_print_settings_set_paper_width(_SELF(self), NUM2DBL(paper_width),
-                                       RVAL2UNIT(unit));
+                                       RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -332,14 +330,14 @@ static VALUE
 rg_paper_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_print_settings_get_paper_height(_SELF(self),
-                                                            RVAL2UNIT(unit)));
+                                                            RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_paper_height(VALUE self, VALUE paper_height, VALUE unit)
 {
     gtk_print_settings_set_paper_height(_SELF(self), NUM2DBL(paper_height),
-                                        RVAL2UNIT(unit));
+                                        RVAL2GTKUNIT(unit));
     return self;
 }
 

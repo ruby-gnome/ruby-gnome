@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cMenu
 #define _SELF(self) (RVAL2GTKMENU(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -93,10 +92,10 @@ rg_popup(VALUE self, VALUE pshell, VALUE pitem, VALUE button, VALUE activate_tim
         G_RELATIVE(self, func);
     }
     if (!NIL_P(pshell)){
-        gpshell = RVAL2WIDGET(pshell);
+        gpshell = RVAL2GTKWIDGET(pshell);
     }
     if (!NIL_P(pitem)) {
-        gpitem = RVAL2WIDGET(pitem);
+        gpitem = RVAL2GTKWIDGET(pitem);
     }
 
     gtk_menu_popup(_SELF(self), gpshell, gpitem,

@@ -21,8 +21,6 @@
 
 #include "rbgtk3private.h"
 
-#define RVAL2MOD(mods) RVAL2GDKMODIFIERTYPE(mods)
-
 /*****************************************/
 static GtkBindingSet*
 gtk_bindingset_copy(const GtkBindingSet* bin)
@@ -69,7 +67,7 @@ static VALUE
 rg_activate(VALUE self, VALUE keyval, VALUE modifiers, VALUE object)
 {
     return CBOOL2RVAL(gtk_binding_set_activate(_SELF(self), NUM2UINT(keyval),
-                                               RVAL2MOD(modifiers),
+                                               RVAL2GDKMODIFIERTYPE(modifiers),
                                                RVAL2GOBJ(object)));
 }
 
@@ -116,7 +114,7 @@ rg_add_signal(int argc, VALUE *argv, VALUE self)
         }
     }
     slist = g_slist_reverse (slist);
-    gtk_binding_entry_add_signall (_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers),
+    gtk_binding_entry_add_signall (_SELF(self), NUM2UINT(keyval), RVAL2GDKMODIFIERTYPE(modifiers),
                                    RVAL2CSTR(signame), slist);
     free_slist = slist;
     while (slist) {
@@ -140,14 +138,14 @@ rg_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority)
 static VALUE
 rg_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
 {
-    gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
+    gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval), RVAL2GDKMODIFIERTYPE(modifiers));
     return self;
 }
 
 static VALUE
 rg_entry_skip(VALUE self, VALUE keyval, VALUE modifiers)
 {
-    gtk_binding_entry_skip(_SELF(self), NUM2UINT(keyval), RVAL2MOD(modifiers));
+    gtk_binding_entry_skip(_SELF(self), NUM2UINT(keyval), RVAL2GDKMODIFIERTYPE(modifiers));
     return self;
 }
 

@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cNotebook
 #define _SELF(self) RVAL2GTKNOTEBOOK(self)
-#define RVAL2WIDGET(w) RVAL2GTKWIDGET(w)
 #define GTK_TYPE_NOTEBOOK_PAGE (gtk_notebookpage_get_type())
 
 static VALUE
@@ -43,8 +42,8 @@ rg_append_page(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &child, &label);
     gtk_notebook_append_page(_SELF(self),
-                             RVAL2WIDGET(child),
-                             NIL_P(label) ? NULL : RVAL2WIDGET(label));
+                             RVAL2GTKWIDGET(child),
+                             NIL_P(label) ? NULL : RVAL2GTKWIDGET(label));
     G_CHILD_ADD(self, child);
 
     return self;
@@ -57,10 +56,10 @@ rg_append_page_menu(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "12", &child, &tab_label, &menu_label);
     gtk_notebook_append_page_menu(_SELF(self),
-                                  RVAL2WIDGET(child),
-                                  RVAL2WIDGET(tab_label),
+                                  RVAL2GTKWIDGET(child),
+                                  RVAL2GTKWIDGET(tab_label),
                                   NIL_P(menu_label) ? NULL :
-                                  RVAL2WIDGET(menu_label));
+                                  RVAL2GTKWIDGET(menu_label));
     return self;
 }
 
@@ -71,8 +70,8 @@ rg_prepend_page(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &child, &label);
     gtk_notebook_prepend_page(_SELF(self),
-                              RVAL2WIDGET(child),
-                              NIL_P(label) ? NULL : RVAL2WIDGET(label));
+                              RVAL2GTKWIDGET(child),
+                              NIL_P(label) ? NULL : RVAL2GTKWIDGET(label));
     return self;
 }
 
@@ -83,10 +82,10 @@ rg_prepend_page_menu(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "12", &child, &tab_label, &menu_label);
     gtk_notebook_prepend_page_menu(_SELF(self),
-                                   RVAL2WIDGET(child),
-                                   RVAL2WIDGET(tab_label),
+                                   RVAL2GTKWIDGET(child),
+                                   RVAL2GTKWIDGET(tab_label),
                                    NIL_P(menu_label) ? NULL :
-                                   RVAL2WIDGET(menu_label));
+                                   RVAL2GTKWIDGET(menu_label));
     return self;
 }
 
@@ -97,8 +96,8 @@ rg_insert_page(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "21", &pos, &child, &label);
     gtk_notebook_insert_page(_SELF(self),
-                             RVAL2WIDGET(child),
-                             NIL_P(label) ? NULL : RVAL2WIDGET(label),
+                             RVAL2GTKWIDGET(child),
+                             NIL_P(label) ? NULL : RVAL2GTKWIDGET(label),
                              NUM2INT(pos));
     return self;
 }
@@ -110,9 +109,9 @@ rg_insert_page_menu(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "22", &pos, &child, &tab_label, &menu_label);
     gtk_notebook_insert_page_menu(_SELF(self),
-                                  RVAL2WIDGET(child),
-                                  RVAL2WIDGET(tab_label),
-                                  RVAL2WIDGET(menu_label),
+                                  RVAL2GTKWIDGET(child),
+                                  RVAL2GTKWIDGET(tab_label),
+                                  RVAL2GTKWIDGET(menu_label),
                                   NUM2INT(pos));
     return self;
 }
@@ -128,7 +127,7 @@ static VALUE
 rg_page_num(VALUE self, VALUE child)
 {
     return INT2FIX(gtk_notebook_page_num(_SELF(self),
-                                         RVAL2WIDGET(child)));
+                                         RVAL2GTKWIDGET(child)));
 }
 
 static VALUE
@@ -148,7 +147,7 @@ rg_prev_page(VALUE self)
 static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
-    gtk_notebook_reorder_child(_SELF(self), RVAL2WIDGET(child),
+    gtk_notebook_reorder_child(_SELF(self), RVAL2GTKWIDGET(child),
                                NUM2INT(pos));
     return self;
 }
@@ -157,7 +156,7 @@ static VALUE
 rg_get_menu_label(VALUE self, VALUE child)
 {
     return GOBJ2RVAL(gtk_notebook_get_menu_label(_SELF(self),
-                                                 RVAL2WIDGET(child)));
+                                                 RVAL2GTKWIDGET(child)));
 }
 
 static VALUE
@@ -178,15 +177,15 @@ static VALUE
 rg_get_tab_label(VALUE self, VALUE child)
 {
     return GOBJ2RVAL(gtk_notebook_get_tab_label(_SELF(self),
-                                                RVAL2WIDGET(child)));
+                                                RVAL2GTKWIDGET(child)));
 }
 
 static VALUE
 rg_set_menu_label(VALUE self, VALUE child, VALUE label)
 {
     gtk_notebook_set_menu_label(_SELF(self),
-                                RVAL2WIDGET(child),
-                                NIL_P(label)?NULL:RVAL2WIDGET(label));
+                                RVAL2GTKWIDGET(child),
+                                NIL_P(label)?NULL:RVAL2GTKWIDGET(label));
     return self;
 }
 
@@ -194,7 +193,7 @@ static VALUE
 rg_set_menu_label_text(VALUE self, VALUE child, VALUE text)
 {
     gtk_notebook_set_menu_label_text(_SELF(self),
-                                     RVAL2WIDGET(child),
+                                     RVAL2GTKWIDGET(child),
                                      RVAL2CSTR(text));
     return self;
 }
@@ -203,8 +202,8 @@ static VALUE
 rg_set_tab_label(VALUE self, VALUE child, VALUE label)
 {
     gtk_notebook_set_tab_label(_SELF(self),
-                               RVAL2WIDGET(child),
-                               NIL_P(label)?NULL:RVAL2WIDGET(label));
+                               RVAL2GTKWIDGET(child),
+                               NIL_P(label)?NULL:RVAL2GTKWIDGET(label));
     return self;
 }
 
@@ -212,7 +211,7 @@ static VALUE
 rg_set_tab_label_text(VALUE self, VALUE child, VALUE text)
 {
     gtk_notebook_set_tab_label_text(_SELF(self),
-                                    RVAL2WIDGET(child),
+                                    RVAL2GTKWIDGET(child),
                                     RVAL2CSTR(text));
     return self;
 }
@@ -221,14 +220,14 @@ static VALUE
 rg_get_menu_label_text(VALUE self, VALUE child)
 {
     return CSTR2RVAL(gtk_notebook_get_menu_label_text(_SELF(self), 
-                                                      RVAL2WIDGET(child)));
+                                                      RVAL2GTKWIDGET(child)));
 }
 
 static VALUE
 rg_get_tab_label_text(VALUE self, VALUE child)
 {
     return CSTR2RVAL(gtk_notebook_get_tab_label_text(_SELF(self), 
-                                                     RVAL2WIDGET(child)));
+                                                     RVAL2GTKWIDGET(child)));
 }
 
 static VALUE
@@ -272,7 +271,7 @@ static VALUE
 rg_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
 {
     gtk_notebook_set_action_widget(_SELF(self),
-                                   RVAL2WIDGET(widget),
+                                   RVAL2GTKWIDGET(widget),
                                    RVAL2GTKPACKTYPE(pack_type));
     return self;
 }

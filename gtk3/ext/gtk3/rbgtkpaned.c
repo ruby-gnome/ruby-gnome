@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cPaned
 #define _SELF(self) (RVAL2GTKPANED(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self, VALUE orientation)
@@ -39,21 +38,21 @@ rg_initialize(VALUE self, VALUE orientation)
 static VALUE
 rg_add1(VALUE self, VALUE child)
 {
-    gtk_paned_add1(_SELF(self), RVAL2WIDGET(child));
+    gtk_paned_add1(_SELF(self), RVAL2GTKWIDGET(child));
     return self;
 }
 
 static VALUE
 rg_add2(VALUE self, VALUE child)
 {
-    gtk_paned_add2(_SELF(self), RVAL2WIDGET(child));
+    gtk_paned_add2(_SELF(self), RVAL2GTKWIDGET(child));
     return self;
 }
 
 static VALUE
 rg_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 {
-    gtk_paned_pack1(_SELF(self), RVAL2WIDGET(child),
+    gtk_paned_pack1(_SELF(self), RVAL2GTKWIDGET(child),
                     RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
     return self;
 }
@@ -61,7 +60,7 @@ rg_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 static VALUE
 rg_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 {
-    gtk_paned_pack2(_SELF(self), RVAL2WIDGET(child),
+    gtk_paned_pack2(_SELF(self), RVAL2GTKWIDGET(child),
                     RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
     return self;
 }

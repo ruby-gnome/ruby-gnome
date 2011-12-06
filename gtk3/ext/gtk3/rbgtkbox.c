@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cBox
 #define _SELF(self) (RVAL2GTKBOX(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -87,7 +86,7 @@ static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE pos)
 {
     gtk_box_reorder_child(_SELF(self),
-                          RVAL2WIDGET(child), NUM2INT(pos));
+                          RVAL2GTKWIDGET(child), NUM2INT(pos));
     return self;
 }
 
@@ -100,7 +99,7 @@ rg_query_child_packing(VALUE self, VALUE child)
     VALUE ary;
 
     gtk_box_query_child_packing(_SELF(self), 
-                                RVAL2WIDGET(child),
+                                RVAL2GTKWIDGET(child),
                                 &expand, &fill, &padding, &pack_type);
 
     ary = rb_ary_new2(4);
@@ -116,7 +115,7 @@ static VALUE
 rg_set_child_packing(VALUE self, VALUE child, VALUE expand, VALUE fill, VALUE padding, VALUE pack_type)
 {
     gtk_box_set_child_packing(_SELF(self), 
-                              RVAL2WIDGET(child),
+                              RVAL2GTKWIDGET(child),
                               RVAL2CBOOL(expand), RVAL2CBOOL(fill),
                               NUM2UINT(padding), RVAL2GTKPACKTYPE(pack_type));
     return self;

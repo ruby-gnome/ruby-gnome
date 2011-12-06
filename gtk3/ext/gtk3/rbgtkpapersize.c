@@ -23,9 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cPaperSize
 #define _SELF(s) (RVAL2GTKPAPERSIZE(s))
-#define SIZE2RVAL(o) (GTKPAPERSIZE2RVAL(o))
-
-#define RVAL2UNIT(o) (RVAL2GTKUNIT(o))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -46,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                          RVAL2CSTR(argv[1]),
                                          NUM2DBL(argv[2]),
                                          NUM2DBL(argv[3]),
-                                         RVAL2UNIT(argv[4]));
+                                         RVAL2GTKUNIT(argv[4]));
     } else {
         rb_raise(rb_eArgError,
                  "wrong number of arguments (%d for 0, 1, 4 or 5)", argc);
@@ -85,13 +82,13 @@ rg_ppd_name(VALUE self)
 static VALUE
 rg_get_width(VALUE self, VALUE unit)
 {
-    return rb_float_new(gtk_paper_size_get_width(_SELF(self), RVAL2UNIT(unit)));
+    return rb_float_new(gtk_paper_size_get_width(_SELF(self), RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_get_height(VALUE self, VALUE unit)
 {
-    return rb_float_new(gtk_paper_size_get_height(_SELF(self), RVAL2UNIT(unit)));
+    return rb_float_new(gtk_paper_size_get_height(_SELF(self), RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
@@ -105,7 +102,7 @@ static VALUE
 rg_set_size(VALUE self, VALUE width, VALUE height, VALUE unit)
 {
     gtk_paper_size_set_size(_SELF(self), NUM2DBL(width), NUM2DBL(height),
-                            RVAL2UNIT(unit));
+                            RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -113,28 +110,28 @@ static VALUE
 rg_get_default_top_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_top_margin(_SELF(self),
-                                                              RVAL2UNIT(unit)));
+                                                              RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_get_default_bottom_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_bottom_margin(_SELF(self),
-                                                                 RVAL2UNIT(unit)));
+                                                                 RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_get_default_left_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_left_margin(_SELF(self),
-                                                               RVAL2UNIT(unit)));
+                                                               RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_get_default_right_margin(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_paper_size_get_default_right_margin(_SELF(self),
-                                                                RVAL2UNIT(unit)));
+                                                                RVAL2GTKUNIT(unit)));
 }
 
 static VALUE

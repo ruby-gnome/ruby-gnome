@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cTreeSelection
 #define _SELF(s) (RVAL2GTKTREESELECTION(s))
-#define RVAL2TREEMODEL(s) (RVAL2GTKTREEMODEL(s))
 
 static VALUE
 rg_set_mode(VALUE self, VALUE type)

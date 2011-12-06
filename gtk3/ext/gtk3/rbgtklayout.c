@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cLayout
 #define _SELF(self) (RVAL2GTKLAYOUT(self))
-#define RVAL2ADJ(a) (RVAL2GTKADJUSTMENT(a))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -36,8 +35,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "02", &hadjustment, &vadjustment);
 
     layout = gtk_layout_new(
-        NIL_P(hadjustment) ? 0 : RVAL2ADJ(hadjustment),
-        NIL_P(vadjustment) ? 0 : RVAL2ADJ(vadjustment));
+        NIL_P(hadjustment) ? 0 : RVAL2GTKADJUSTMENT(hadjustment),
+        NIL_P(vadjustment) ? 0 : RVAL2GTKADJUSTMENT(vadjustment));
 
     RBGTK_INITIALIZE(self, layout);
     return Qnil;

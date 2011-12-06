@@ -26,12 +26,11 @@
 
 #define RG_TARGET_NAMESPACE cMenuShell
 #define _SELF(self) (RVAL2GTKMENUSHELL(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_append(VALUE self, VALUE child)
 {
-    gtk_menu_shell_append(_SELF(self),RVAL2WIDGET(child));
+    gtk_menu_shell_append(_SELF(self),RVAL2GTKWIDGET(child));
     G_CHILD_ADD(self, child);
     return self;
 }
@@ -39,7 +38,7 @@ rg_append(VALUE self, VALUE child)
 static VALUE
 rg_prepend(VALUE self, VALUE child)
 {
-    gtk_menu_shell_prepend(_SELF(self), RVAL2WIDGET(child));
+    gtk_menu_shell_prepend(_SELF(self), RVAL2GTKWIDGET(child));
     G_CHILD_ADD(self, child);
     return self;
 }
@@ -47,7 +46,7 @@ rg_prepend(VALUE self, VALUE child)
 static VALUE
 rg_insert(VALUE self, VALUE child, VALUE pos)
 {
-    gtk_menu_shell_insert(_SELF(self), RVAL2WIDGET(child),
+    gtk_menu_shell_insert(_SELF(self), RVAL2GTKWIDGET(child),
                           NUM2INT(pos));
     G_CHILD_ADD(self, child);
     return self;
@@ -63,7 +62,7 @@ rg_deactivate(VALUE self)
 static VALUE
 rg_select_item(VALUE self, VALUE menu_item)
 {
-    gtk_menu_shell_select_item(_SELF(self), RVAL2WIDGET(menu_item));
+    gtk_menu_shell_select_item(_SELF(self), RVAL2GTKWIDGET(menu_item));
     return self;
 }
 
@@ -84,7 +83,7 @@ rg_deselect(VALUE self)
 static VALUE
 rg_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
 {
-    gtk_menu_shell_activate_item(_SELF(self), RVAL2WIDGET(menu_item), 
+    gtk_menu_shell_activate_item(_SELF(self), RVAL2GTKWIDGET(menu_item), 
                                  RVAL2CBOOL(force_deactivate));
     return self;
 }

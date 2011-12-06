@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cTreeViewColumn
 #define _SELF(s) (RVAL2GTKTREEVIEWCOLUMN(s))
-#define RVAL2CELLRENDERER(c) (RVAL2GTKCELLRENDERER(c))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -39,7 +38,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (argc > 0){
         gtk_tree_view_column_set_title(tvc, RVAL2CSTR(argv[0]));
         if (argc > 1) {
-            gtk_tree_view_column_pack_start(tvc, RVAL2CELLRENDERER(argv[1]), TRUE);
+            gtk_tree_view_column_pack_start(tvc, RVAL2GTKCELLRENDERER(argv[1]), TRUE);
             G_CHILD_ADD(self, argv[1]);
         }
     }
@@ -48,7 +47,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     if (argc == 3){
         ary = rb_funcall(argv[2], rb_intern("to_a"), 0);
-        renderer = RVAL2CELLRENDERER(argv[1]);
+        renderer = RVAL2GTKCELLRENDERER(argv[1]);
         for (i = 0; i < RARRAY_LEN(ary); i++) {
             val = RARRAY_PTR(RARRAY_PTR(ary)[i])[0];
             if (SYMBOL_P(val)) {
@@ -68,7 +67,7 @@ static VALUE
 rg_pack_start(VALUE self, VALUE cell, VALUE expand)
 {
     G_CHILD_ADD(self, cell);
-    gtk_tree_view_column_pack_start(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
+    gtk_tree_view_column_pack_start(_SELF(self), RVAL2GTKCELLRENDERER(cell), RVAL2CBOOL(expand));
     return self;
 }
 
@@ -76,7 +75,7 @@ static VALUE
 rg_pack_end(VALUE self, VALUE cell, VALUE expand)
 {
     G_CHILD_ADD(self, cell);
-    gtk_tree_view_column_pack_end(_SELF(self), RVAL2CELLRENDERER(cell), RVAL2CBOOL(expand));
+    gtk_tree_view_column_pack_end(_SELF(self), RVAL2GTKCELLRENDERER(cell), RVAL2CBOOL(expand));
     return self;
 }
 
@@ -97,7 +96,7 @@ rg_add_attribute(VALUE self, VALUE cell, VALUE attribute, VALUE column)
     } else {
         name = RVAL2CSTR(attribute);
     }
-    gtk_tree_view_column_add_attribute(_SELF(self), RVAL2CELLRENDERER(cell), 
+    gtk_tree_view_column_add_attribute(_SELF(self), RVAL2GTKCELLRENDERER(cell), 
                                        name, NUM2INT(column));
     return self;
 }
@@ -114,7 +113,7 @@ rg_set_attributes(VALUE self, VALUE renderer, VALUE attributes)
     Check_Type(attributes, T_HASH);
 
     tvc = _SELF(self);
-    grenderer = RVAL2CELLRENDERER(renderer);
+    grenderer = RVAL2GTKCELLRENDERER(renderer);
     gtk_tree_view_column_clear_attributes(tvc, grenderer);
 
     ary = rb_funcall(attributes, rb_intern("to_a"), 0);
@@ -146,7 +145,7 @@ rg_set_cell_data_func(VALUE self, VALUE renderer)
     volatile VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
     G_RELATIVE(renderer, func);
-    gtk_tree_view_column_set_cell_data_func(_SELF(self), RVAL2CELLRENDERER(renderer),
+    gtk_tree_view_column_set_cell_data_func(_SELF(self), RVAL2GTKCELLRENDERER(renderer),
                                             (GtkTreeCellDataFunc)cell_data_func, (gpointer)func, NULL);
     return self;
 }
@@ -154,7 +153,7 @@ rg_set_cell_data_func(VALUE self, VALUE renderer)
 static VALUE
 rg_clear_attributes(VALUE self, VALUE cell)
 {
-    gtk_tree_view_column_clear_attributes(_SELF(self), RVAL2CELLRENDERER(cell));
+    gtk_tree_view_column_clear_attributes(_SELF(self), RVAL2GTKCELLRENDERER(cell));
     return self;
 }
 
@@ -214,7 +213,7 @@ rg_cell_is_visible_p(VALUE self)
 static VALUE
 rg_focus_cell(VALUE self, VALUE renderer)
 {
-    gtk_tree_view_column_focus_cell(_SELF(self), RVAL2CELLRENDERER(renderer));
+    gtk_tree_view_column_focus_cell(_SELF(self), RVAL2GTKCELLRENDERER(renderer));
 
     return self;
 }

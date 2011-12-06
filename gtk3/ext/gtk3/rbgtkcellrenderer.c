@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cCellRenderer
 #define _SELF(s) (RVAL2GTKCELLRENDERER(s))
-#define RVAL2RECT(r) (RVAL2GDKRECTANGLE(r))
-#define RECT2RVAL(r) (GDKRECTANGLE2RVAL(r))
 
 static VALUE
 rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
@@ -32,9 +30,9 @@ rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
     GdkRectangle ret;
 
     gtk_cell_renderer_get_size(_SELF(self), RVAL2GTKWIDGET(widget),
-                               RVAL2RECT(cell_area),
+                               RVAL2GDKRECTANGLE(cell_area),
                                &ret.x, &ret.y, &ret.width, &ret.height);
-    return RECT2RVAL(&ret);
+    return GDKRECTANGLE2RVAL(&ret);
 }
 
 /* TODO
@@ -43,9 +41,9 @@ rg_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE c
 {
     gtk_cell_renderer_render(_SELF(self), RVAL2GDKWINDOW(window),
                              RVAL2GTKWIDGET(widget),
-                             RVAL2RECT(background_area),
-                             RVAL2RECT(cell_area),
-                             RVAL2RECT(expose_area),
+                             RVAL2GDKRECTANGLE(background_area),
+                             RVAL2GDKRECTANGLE(cell_area),
+                             RVAL2GDKRECTANGLE(expose_area),
                              RVAL2GTKCELLRENDERERSTATE(flags));
     return self;
 }
@@ -57,8 +55,8 @@ rg_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_
     gboolean ret =
     gtk_cell_renderer_activate(_SELF(self), (GdkEvent*)RVAL2GEV(event),
                                RVAL2GTKWIDGET(widget),
-                               RVAL2CSTR(path), RVAL2RECT(background_area),
-                               RVAL2RECT(cell_area), 
+                               RVAL2CSTR(path), RVAL2GDKRECTANGLE(background_area),
+                               RVAL2GDKRECTANGLE(cell_area), 
                                RVAL2GTKCELLRENDERERSTATE(flags));
     return CBOOL2RVAL(ret);
 }
@@ -69,8 +67,8 @@ rg_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE backgr
     GtkCellEditable* edit =
     gtk_cell_renderer_start_editing(_SELF(self), (GdkEvent*)RVAL2GEV(event),
                                RVAL2GTKWIDGET(widget),
-                               RVAL2CSTR(path), RVAL2RECT(background_area),
-                               RVAL2RECT(cell_area), 
+                               RVAL2CSTR(path), RVAL2GDKRECTANGLE(background_area),
+                               RVAL2GDKRECTANGLE(cell_area), 
                                RVAL2GTKCELLRENDERERSTATE(flags));
     return edit ? GOBJ2RVAL(edit) : Qnil;
 }
