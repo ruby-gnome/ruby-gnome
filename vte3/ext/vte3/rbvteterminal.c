@@ -129,7 +129,7 @@ rg_fork_command(int argc, VALUE *argv, VALUE self)
                      NULL);
     pty_flags = NIL_P(rb_pty_flags) ?
                 VTE_PTY_DEFAULT :
-                RVAL2GFLAGS(rb_pty_flags, VTE_TYPE_PTY_FLAGS);
+                RVAL2VTEPTYFLAGS(rb_pty_flags);
     working_directory = RVAL2CSTR_ACCEPT_NIL(rb_working_directory);
     command_argv = rval2cstrary(NIL_P(rb_command_argv) ? fork_command_default_argv() : rb_command_argv);
     envv = rval2cstrary(rb_envv);
@@ -412,7 +412,7 @@ rg_set_cursor_blink_mode(VALUE self, VALUE rb_mode)
 {
     VteTerminalCursorBlinkMode mode;
 
-    mode = RVAL2GENUM(rb_mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+    mode = RVAL2VTETERMINALCURSORBLINKMODE(rb_mode);
     vte_terminal_set_cursor_blink_mode(_SELF(self), mode);
     return self;
 }
@@ -423,7 +423,7 @@ rg_cursor_blink_mode(VALUE self)
     VteTerminalCursorBlinkMode mode;
 
     mode = vte_terminal_get_cursor_blink_mode(_SELF(self));
-    return GENUM2RVAL(mode, VTE_TYPE_TERMINAL_CURSOR_BLINK_MODE);
+    return VTETERMINALCURSORBLINKMODE2RVAL(mode);
 }
 
 static VALUE
@@ -431,7 +431,7 @@ rg_set_cursor_shape(VALUE self, VALUE rb_shape)
 {
     VteTerminalCursorShape shape;
 
-    shape = RVAL2GENUM(rb_shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
+    shape = RVAL2VTETERMINALCURSORSHAPE(rb_shape);
     vte_terminal_set_cursor_shape(_SELF(self), shape);
     return self;
 }
@@ -442,7 +442,7 @@ rg_cursor_shape(VALUE self)
     VteTerminalCursorShape shape;
 
     shape = vte_terminal_get_cursor_shape(_SELF(self));
-    return GENUM2RVAL(shape, VTE_TYPE_TERMINAL_CURSOR_SHAPE);
+    return VTETERMINALCURSORSHAPE2RVAL(shape);
 }
 
 static VALUE
@@ -756,7 +756,7 @@ rg_pty_new(VALUE self, VALUE flags)
     VtePty *result;
     GError *error = NULL;
 
-    result = vte_terminal_pty_new(_SELF(self), RVAL2GFLAGS(flags, VTE_TYPE_PTY_FLAGS), &error);
+    result = vte_terminal_pty_new(_SELF(self), RVAL2VTEPTYFLAGS(flags), &error);
     if (error)
         RAISE_GERROR(error);
 
@@ -846,7 +846,7 @@ rg_write_contents(int argc, VALUE *argv, VALUE self)
 
     result = vte_terminal_write_contents(_SELF(self),
                                         RVAL2GOBJ(stream),
-                                        RVAL2GENUM(flags, VTE_TYPE_TERMINAL_WRITE_FLAGS),
+                                        RVAL2VTETERMINALWRITEFLAGS(flags),
                                         cancellable,
                                         &error);
     if (error)
