@@ -44,7 +44,7 @@ rbgtk_rval2gtktargetentries_body(VALUE value)
         VALUE info = RARRAY_PTR(entry)[2];
 
         args->result[i].target = (gchar *)RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
-        args->result[i].flags = NIL_P(flags) ? 0 : RVAL2GFLAGS(flags, GTK_TYPE_TARGET_FLAGS);
+        args->result[i].flags = NIL_P(flags) ? 0 : RVAL2GTKTARGETFLAGS(flags);
         args->result[i].info = NIL_P(info) ? 0 : NUM2INT(info);
     }
 
@@ -99,8 +99,8 @@ static VALUE
 rg_m_dest_set(VALUE self, VALUE rbwidget, VALUE rbflags, VALUE rbtargets, VALUE rbactions)
 {
     GtkWidget *widget = RVAL2WIDGET(rbwidget);
-    GtkDestDefaults flags = RVAL2GFLAGS(rbflags, GTK_TYPE_DEST_DEFAULTS);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GtkDestDefaults flags = RVAL2GTKDESTDEFAULTS(rbflags);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(rbtargets, &n);
 
@@ -116,7 +116,7 @@ rg_m_dest_set_proxy(VALUE self, VALUE widget, VALUE proxy_window, VALUE protocol
 {
     gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
                             RVAL2GDKWINDOW(proxy_window),
-                            RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
+                            RVAL2GDKDRAGPROTOCOL(protocol), 
                             RVAL2CBOOL(use_coordinates)); 
     return self;
 }
@@ -234,7 +234,7 @@ rg_m_begin(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE target_list, VALUE acti
 {
     return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(widget),
                                     RVAL2GTKTARGETLIST(target_list),
-                                    RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION),
+                                    RVAL2GDKDRAGACTION(actions),
                                     NUM2INT(button),
                                     RVAL2GEV(event)));
 }
@@ -299,8 +299,8 @@ static VALUE
 rg_m_source_set(VALUE self, VALUE rbwidget, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
     GtkWidget *widget = RVAL2WIDGET(rbwidget);
-    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GdkModifierType start_button_mask = RVAL2GDKMODIFIERTYPE(rbstart_button_mask);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
 

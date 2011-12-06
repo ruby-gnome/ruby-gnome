@@ -28,14 +28,14 @@
 static VALUE
 rg_set_mode(VALUE self, VALUE type)
 {
-    gtk_tree_selection_set_mode(_SELF(self), RVAL2GENUM(type, GTK_TYPE_SELECTION_MODE));
+    gtk_tree_selection_set_mode(_SELF(self), RVAL2GTKSELECTIONMODE(type));
     return self;
 }
 
 static VALUE
 rg_mode(VALUE self)
 {
-    return GENUM2RVAL(gtk_tree_selection_get_mode(_SELF(self)), GTK_TYPE_SELECTION_MODE);
+    return GTKSELECTIONMODE2RVAL(gtk_tree_selection_get_mode(_SELF(self)));
 }
 
 static gboolean

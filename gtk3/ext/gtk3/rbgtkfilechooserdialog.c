@@ -42,7 +42,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      NULL);
     title = RVAL2CSTR_ACCEPT_NIL(rb_title);
     parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
-    action = NIL_P(rb_action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GENUM(rb_action, GTK_TYPE_FILE_CHOOSER_ACTION);
+    action = NIL_P(rb_action) ? GTK_FILE_CHOOSER_ACTION_OPEN : RVAL2GTKFILECHOOSERACTION(rb_action);
 
     dialog = gtk_file_chooser_dialog_new(title, parent, action, NULL, NULL);
     RBGTK_INITIALIZE(self, dialog);

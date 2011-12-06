@@ -578,12 +578,12 @@ rg_forward_search(int argc, VALUE *argv, VALUE self)
 
     if (is_compat_240){
         ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                           RVAL2GFLAGS(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                           RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                            &m_start, &m_end,
                                            NIL_P(limit) ? NULL : _SELF(limit));
     } else {
         ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                           RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                           RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                            &m_start, &m_end,
                                            NIL_P(limit) ? NULL : _SELF(limit));
     }
@@ -600,12 +600,12 @@ rg_backward_search(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
     if (is_compat_240){
         ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                            RVAL2GFLAGS(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                            RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                             &m_start, &m_end,
                                             NIL_P(limit) ? NULL : _SELF(limit));
     } else {
         ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                            RVAL2GENUM(flags, GTK_TYPE_TEXT_SEARCH_FLAGS), 
+                                            RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                             &m_start, &m_end,
                                             NIL_P(limit) ? NULL : _SELF(limit));
     }

@@ -44,9 +44,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                      "message", &rb_message,
                      NULL);
     parent = NIL_P(rb_parent) ? NULL : RVAL2GTKWINDOW(rb_parent);
-    flags = NIL_P(rb_flags) ? 0 : RVAL2GFLAGS(rb_flags, GTK_TYPE_DIALOG_FLAGS);
-    type = NIL_P(rb_type) ? GTK_MESSAGE_INFO : RVAL2GENUM(rb_type, GTK_TYPE_MESSAGE_TYPE);
-    buttons_type = NIL_P(rb_buttons_type) ? GTK_BUTTONS_OK : RVAL2GENUM(rb_buttons_type, GTK_TYPE_BUTTONS_TYPE);
+    flags = NIL_P(rb_flags) ? 0 : RVAL2GTKDIALOGFLAGS(rb_flags);
+    type = NIL_P(rb_type) ? GTK_MESSAGE_INFO : RVAL2GTKMESSAGETYPE(rb_type);
+    buttons_type = NIL_P(rb_buttons_type) ? GTK_BUTTONS_OK : RVAL2GTKBUTTONSTYPE(rb_buttons_type);
     message = NIL_P(rb_message) ? "" : RVAL2CSTR(rb_message);
 
     dialog = gtk_message_dialog_new(parent, flags, type, buttons_type, "%s", message);

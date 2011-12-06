@@ -30,7 +30,7 @@
 static VALUE
 rg_initialize(VALUE self, VALUE orientation)
 {
-    RBGTK_INITIALIZE(self, gtk_button_box_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION)));
+    RBGTK_INITIALIZE(self, gtk_button_box_new(RVAL2GTKORIENTATION(orientation)));
 
     return Qnil;
 }

@@ -25,7 +25,7 @@
 #define _SELF(s) (RVAL2GTKPAPERSIZE(s))
 #define SIZE2RVAL(o) (GTKPAPERSIZE2RVAL(o))
 
-#define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
+#define RVAL2UNIT(o) (RVAL2GTKUNIT(o))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

@@ -48,7 +48,7 @@ rg_get_property(VALUE self, VALUE property, VALUE state)
 
     result = gtk_style_properties_get_property(_SELF(self),
                                                RVAL2CSTR(property),
-                                               RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                               RVAL2GTKSTATEFLAGS(state),
                                                &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
@@ -69,7 +69,7 @@ rg_map_color(VALUE self, VALUE name, VALUE color)
 {
     gtk_style_properties_map_color(_SELF(self),
                                    RVAL2CSTR(name),
-                                   RVAL2BOXED(color, GTK_TYPE_SYMBOLIC_COLOR));
+                                   RVAL2GTKSYMBOLICCOLOR(color));
 
     return self;
 }
@@ -87,8 +87,8 @@ rg_set_property(VALUE self, VALUE property, VALUE state, VALUE value)
 {
     gtk_style_properties_set_property(_SELF(self),
                                       RVAL2CSTR(property),
-                                      RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
-                                      RVAL2BOXED(value, G_TYPE_VALUE));
+                                      RVAL2GTKSTATEFLAGS(state),
+                                      RVAL2GVALUE(value));
 
     return self;
 }
@@ -98,7 +98,7 @@ rg_unset_property(VALUE self, VALUE property, VALUE state)
 {
     gtk_style_properties_unset_property(_SELF(self),
                                         RVAL2CSTR(property),
-                                        RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS));
+                                        RVAL2GTKSTATEFLAGS(state));
 
     return self;
 }

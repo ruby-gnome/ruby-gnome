@@ -21,7 +21,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cWidgetPath
-#define _SELF(self) (RVAL2BOXED(self, GTK_TYPE_WIDGET_PATH))
+#define _SELF(self) (RVAL2GTKWIDGETPATH(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -72,7 +72,7 @@ rg_iter_add_region(VALUE self, VALUE pos, VALUE name, VALUE flags)
     gtk_widget_path_iter_add_region(_SELF(self),
                                     NUM2INT(pos),
                                     RVAL2CSTR(name),
-                                    RVAL2GFLAGS(flags, GTK_TYPE_REGION_FLAGS));
+                                    RVAL2GTKREGIONFLAGS(flags));
 
     return self;
 }
@@ -125,7 +125,7 @@ rg_iter_has_region(VALUE self, VALUE pos, VALUE name)
 
     result = gtk_widget_path_iter_has_region(_SELF(self), NUM2INT(pos), RVAL2CSTR(name), &flags);
 
-    return result ? GFLAGS2RVAL(flags, GTK_TYPE_REGION_FLAGS) : Qnil;
+    return result ? GTKREGIONFLAGS2RVAL(flags) : Qnil;
 }
 
 static VALUE

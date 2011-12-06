@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cAccelMap
 
-#define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
+#define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GDKMODIFIERTYPE(mods))
 
 static VALUE
 rg_s_add_entry(VALUE self, VALUE path, VALUE key, VALUE mods)
@@ -74,7 +74,7 @@ static void
 accel_map_foreach_func(gpointer func, const gchar *path, guint key, GdkModifierType mods, gboolean changed)
 {
     rb_funcall((VALUE)func, id_call, 4,
-               CSTR2RVAL(path), UINT2NUM(key), GFLAGS2RVAL(mods, GDK_TYPE_MODIFIER_TYPE),
+               CSTR2RVAL(path), UINT2NUM(key), GDKMODIFIERTYPE2RVAL(mods),
                CBOOL2RVAL(changed));
 }
 

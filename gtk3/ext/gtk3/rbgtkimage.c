@@ -39,10 +39,10 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         widget = gtk_image_new_from_file(RVAL2CSTR(arg1));
     } else if (TYPE(arg1) == T_SYMBOL){
         widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), 
-                                          RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+                                          RVAL2GTKICONSIZE(arg2));
     } else if (TYPE(arg1) == T_STRING){
         widget = gtk_image_new_from_icon_name(RVAL2CSTR(arg1),
-                                              RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+                                              RVAL2GTKICONSIZE(arg2));
     } else {
         gtype = RVAL2GTYPE(arg1);
 /* deprecated
@@ -57,7 +57,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                                RVAL2GDKBITMAP(arg2));
 */
         } else if (gtype == GTK_TYPE_ICON_SET){
-            widget = gtk_image_new_from_icon_set(RVAL2GTKICONSET(arg1), RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+            widget = gtk_image_new_from_icon_set(RVAL2GTKICONSET(arg1), RVAL2GTKICONSIZE(arg2));
         } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
             widget = gtk_image_new_from_animation(RVAL2GDKPIXBUFANIMATION(arg1));
         }
@@ -78,10 +78,10 @@ rg_set(int argc, VALUE *argv, VALUE self)
         gtk_image_set_from_file(_SELF(self), RVAL2CSTR(arg1));
     } else if (TYPE(arg1) == T_SYMBOL){
         gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), 
-                                 RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+                                 RVAL2GTKICONSIZE(arg2));
     } else if (TYPE(arg1) == T_STRING){
         gtk_image_set_from_icon_name(_SELF(self), RVAL2CSTR(arg1),
-                                     RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+                                     RVAL2GTKICONSIZE(arg2));
     } else {
         gtype = RVAL2GTYPE(arg1);
 /* deprecated
@@ -99,7 +99,7 @@ rg_set(int argc, VALUE *argv, VALUE self)
         } else if (gtype == GTK_TYPE_ICON_SET){
             gtk_image_set_from_icon_set(_SELF(self), 
                                         RVAL2GTKICONSET(arg1), 
-                                        RVAL2GENUM(arg2, GTK_TYPE_ICON_SIZE));
+                                        RVAL2GTKICONSIZE(arg2));
         } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
             gtk_image_set_from_animation(_SELF(self), RVAL2GDKPIXBUFANIMATION(arg1));
         } else {

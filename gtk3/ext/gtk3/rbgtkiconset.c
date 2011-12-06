@@ -59,7 +59,7 @@ rg_sizes(VALUE self)
     gtk_icon_set_get_sizes(_SELF(self), &sizes, &n_sizes);
     result = rb_ary_new();
     for(n=0; n<n_sizes; n++, sizes++)
-        rb_ary_push(result, GENUM2RVAL(*sizes, GTK_TYPE_ICON_SIZE));
+        rb_ary_push(result, GTKICONSIZE2RVAL(*sizes));
     return result;
 }
 
@@ -71,9 +71,9 @@ rg_render_icon(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "42", &style, &direction, &state, &size, &widget, &detail);
     return GOBJ2RVAL(gtk_icon_set_render_icon(_SELF(self),
                                               RVAL2GOBJ(style),
-                                              RVAL2GENUM(direction, GTK_TYPE_TEXT_DIRECTION),
-                                              RVAL2GENUM(state, GTK_TYPE_STATE_TYPE),
-                                              RVAL2GENUM(size, GTK_TYPE_ICON_SIZE),
+                                              RVAL2GTKTEXTDIRECTION(direction),
+                                              RVAL2GTKSTATETYPE(state),
+                                              RVAL2GTKICONSIZE(size),
                                               NIL_P(widget) ? NULL : RVAL2GOBJ(widget),
                                               RVAL2CSTR_ACCEPT_NIL(detail)));
 }

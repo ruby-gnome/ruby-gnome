@@ -68,7 +68,7 @@ static VALUE
 rg_create_icon(VALUE self, VALUE icon_size)
 {
     return GOBJ2RVAL(gtk_action_create_icon(_SELF(self), 
-                                            RVAL2GENUM(icon_size, GTK_TYPE_ICON_SIZE)));
+                                            RVAL2GTKICONSIZE(icon_size)));
 }
 
 static VALUE

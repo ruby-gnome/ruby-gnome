@@ -127,7 +127,7 @@ rg_add_custom(VALUE self, VALUE needed)
   G_CHILD_ADD(rb_mGtk, func);
 
   gtk_recent_filter_add_custom(_SELF(self),
-                               RVAL2GFLAGS(needed, GTK_TYPE_RECENT_FILTER_FLAGS),
+                               RVAL2GTKRECENTFILTERFLAGS(needed),
                                (GtkRecentFilterFunc)filter_func, 
                                (gpointer)func, 
                                (GDestroyNotify)remove_callback_reference);
@@ -137,7 +137,7 @@ rg_add_custom(VALUE self, VALUE needed)
 static VALUE
 rg_needed(VALUE self)
 {
-  return GFLAGS2RVAL(gtk_recent_filter_get_needed(_SELF(self)), GTK_TYPE_RECENT_FILTER_FLAGS);
+  return GTKRECENTFILTERFLAGS2RVAL(gtk_recent_filter_get_needed(_SELF(self)));
 }
 
 static VALUE

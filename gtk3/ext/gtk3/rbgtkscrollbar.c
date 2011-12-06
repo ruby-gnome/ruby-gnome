@@ -35,7 +35,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &orientation, &adjustment);
 
-    widget = gtk_scrollbar_new(RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION),
+    widget = gtk_scrollbar_new(RVAL2GTKORIENTATION(orientation),
                                NIL_P(adjustment) ? NULL : RVAL2GTKADJUSTMENT(adjustment));
 
     RBGTK_INITIALIZE(self, widget);

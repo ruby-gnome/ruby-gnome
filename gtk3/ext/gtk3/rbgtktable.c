@@ -59,8 +59,8 @@ rg_attach(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "54",
                  &child, &left, &right, &top, &bottom,
                  &arg0, &arg1, &arg2, &arg3);
-    if (!NIL_P(arg0)) xopt = RVAL2GFLAGS(arg0, GTK_TYPE_ATTACH_OPTIONS);
-    if (!NIL_P(arg1)) yopt = RVAL2GFLAGS(arg1, GTK_TYPE_ATTACH_OPTIONS);
+    if (!NIL_P(arg0)) xopt = RVAL2GTKATTACHOPTIONS(arg0);
+    if (!NIL_P(arg1)) yopt = RVAL2GTKATTACHOPTIONS(arg1);
     if (!NIL_P(arg2)) xspc = NUM2INT(arg2);
     if (!NIL_P(arg3)) yspc = NUM2INT(arg3);
 

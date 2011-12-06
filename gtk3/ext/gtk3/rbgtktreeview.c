@@ -423,7 +423,7 @@ static VALUE
 rg_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
 {
     GtkTreeView *view = _SELF(self);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
 
@@ -438,8 +438,8 @@ static VALUE
 rg_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
     GtkTreeView *view = _SELF(self);
-    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GdkModifierType start_button_mask = RVAL2GDKMODIFIERTYPE(rbstart_button_mask);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(rbtargets, &n);
 
@@ -472,7 +472,7 @@ rg_set_drag_dest_row(VALUE self, VALUE path, VALUE pos)
 {
     gtk_tree_view_set_drag_dest_row(_SELF(self), 
                                     NIL_P(path)?NULL:RVAL2GTKTREEPATH(path),
-                                    RVAL2GENUM(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION));
+                                    RVAL2GTKTREEVIEWDROPPOSITION(pos));
     return self;
 }
 
@@ -483,7 +483,7 @@ rg_drag_dest_row(VALUE self)
     GtkTreeViewDropPosition pos;
     gtk_tree_view_get_drag_dest_row(_SELF(self), &path, &pos);
     return rb_ary_new3(2, path ? GTKTREEPATH2RVAL(path) : Qnil, 
-                       GENUM2RVAL(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION));
+                       GTKTREEVIEWDROPPOSITION2RVAL(pos));
 }
 
 static VALUE
@@ -497,7 +497,7 @@ rg_get_dest_row_at_pos(VALUE self, VALUE drag_x, VALUE drag_y)
                                             NUM2INT(drag_x), NUM2INT(drag_y),
                                             &path, &pos);
     return ret ? rb_ary_new3(2, path ? GTKTREEPATH2RVAL(path) : Qnil, 
-                             GENUM2RVAL(pos, GTK_TYPE_TREE_VIEW_DROP_POSITION)) : Qnil;
+                             GTKTREEVIEWDROPPOSITION2RVAL(pos)) : Qnil;
 }
 
 static VALUE

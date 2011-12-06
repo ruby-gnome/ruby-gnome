@@ -68,13 +68,13 @@ rg_initialize(VALUE self)
 static VALUE
 rg_contains(VALUE self)
 {
-    return GFLAGS2RVAL(_SELF(self)->contains, GTK_TYPE_RECENT_FILTER_FLAGS);
+    return GTKRECENTFILTERFLAGS2RVAL(_SELF(self)->contains);
 }
 
 static VALUE
 rg_set_contains(VALUE self, VALUE contains)
 {
-    _SELF(self)->contains = RVAL2GFLAGS(contains, GTK_TYPE_RECENT_FILTER_FLAGS);
+    _SELF(self)->contains = RVAL2GTKRECENTFILTERFLAGS(contains);
     return self;
 }
 

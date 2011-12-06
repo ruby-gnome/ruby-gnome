@@ -21,7 +21,7 @@
 
 #include "rbgtk3private.h"
 
-#define RVAL2MOD(mods) RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE)
+#define RVAL2MOD(mods) RVAL2GDKMODIFIERTYPE(mods)
 
 /*****************************************/
 static GtkBindingSet*
@@ -62,8 +62,7 @@ rg_initialize(VALUE self, VALUE set_name)
 static VALUE
 rg_s_find(G_GNUC_UNUSED VALUE self, VALUE set_name)
 {
-    return BOXED2RVAL(gtk_binding_set_find(RVAL2CSTR(set_name)), 
-                      GTK_TYPE_BINDING_SET);
+    return GTKBINDINGSET2RVAL(gtk_binding_set_find(RVAL2CSTR(set_name)));
 }
 
 static VALUE
@@ -132,9 +131,9 @@ rg_add_signal(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority)
 {
-    gtk_binding_set_add_path(_SELF(self), RVAL2GENUM(path_type, GTK_TYPE_PATH_TYPE),
+    gtk_binding_set_add_path(_SELF(self), RVAL2GTKPATHTYPE(path_type),
                              RVAL2CSTR(path_pattern),
-                             RVAL2GENUM(priority, GTK_TYPE_PATH_PRIORITY_TYPE));
+                             RVAL2GTKPATHPRIORITYTYPE(priority));
     return self;
 }
 

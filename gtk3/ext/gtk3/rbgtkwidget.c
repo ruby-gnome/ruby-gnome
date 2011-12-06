@@ -127,8 +127,8 @@ rg_add_accelerator(VALUE self, VALUE sig, VALUE accel, VALUE key, VALUE mod, VAL
                                RVAL2CSTR(sig),
                                RVAL2GTKACCELGROUP(accel),
                                NUM2INT(key),
-                               RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE),
-                               RVAL2GFLAGS(flag, GTK_TYPE_ACCEL_FLAGS));
+                               RVAL2GDKMODIFIERTYPE(mod),
+                               RVAL2GTKACCELFLAGS(flag));
     return self;
 }
 
@@ -138,7 +138,7 @@ rg_remove_accelerator(VALUE self, VALUE accel, VALUE key, VALUE mod)
     return CBOOL2RVAL(gtk_widget_remove_accelerator(_SELF(self),
                                                     RVAL2GTKACCELGROUP(accel),
                                                     NUM2INT(key),
-                                                    RVAL2GFLAGS(mod, GDK_TYPE_MODIFIER_TYPE)));
+                                                    RVAL2GDKMODIFIERTYPE(mod)));
 }
 
 static VALUE
@@ -275,27 +275,27 @@ rg_hide_on_delete(VALUE self)
 static VALUE
 rg_set_direction(VALUE self, VALUE dir)
 {
-    gtk_widget_set_direction(_SELF(self), RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
+    gtk_widget_set_direction(_SELF(self), RVAL2GTKTEXTDIRECTION(dir));
     return self;
 }
 
 static VALUE
 rg_direction(VALUE self)
 {
-    return GENUM2RVAL(gtk_widget_get_direction(_SELF(self)), GTK_TYPE_TEXT_DIRECTION);
+    return GTKTEXTDIRECTION2RVAL(gtk_widget_get_direction(_SELF(self)));
 }
 
 static VALUE
 rg_s_set_default_direction(VALUE self, VALUE dir)
 {
-    gtk_widget_set_default_direction(RVAL2GENUM(dir, GTK_TYPE_TEXT_DIRECTION));
+    gtk_widget_set_default_direction(RVAL2GTKTEXTDIRECTION(dir));
     return self;
 }
 
 static VALUE
 rg_s_default_direction(G_GNUC_UNUSED VALUE self)
 {
-    return GENUM2RVAL(gtk_widget_get_default_direction(), GTK_TYPE_TEXT_DIRECTION);
+    return GTKTEXTDIRECTION2RVAL(gtk_widget_get_default_direction());
 }
 
 static VALUE
@@ -514,7 +514,7 @@ rg_accessible(VALUE self)
 static VALUE
 rg_child_focus(VALUE self, VALUE direction)
 {
-    return CBOOL2RVAL(gtk_widget_child_focus(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
+    return CBOOL2RVAL(gtk_widget_child_focus(_SELF(self), RVAL2GTKDIRECTIONTYPE(direction)));
 }
 
 static VALUE
@@ -527,7 +527,7 @@ rg_error_bell(VALUE self)
 static VALUE
 rg_keynav_failed(VALUE self, VALUE direction)
 {
-    return CBOOL2RVAL(gtk_widget_keynav_failed(_SELF(self), RVAL2GENUM(direction, GTK_TYPE_DIRECTION_TYPE)));
+    return CBOOL2RVAL(gtk_widget_keynav_failed(_SELF(self), RVAL2GTKDIRECTIONTYPE(direction)));
 }
 
 static VALUE
@@ -786,7 +786,7 @@ rg_s_binding_set(VALUE self)
 static VALUE
 rg_path(VALUE self)
 {
-    return BOXED2RVAL(gtk_widget_get_path(_SELF(self)), GTK_TYPE_WIDGET_PATH);
+    return GTKWIDGETPATH2RVAL(gtk_widget_get_path(_SELF(self)));
 }
 
 static VALUE
@@ -808,7 +808,7 @@ rg_add_device_events(VALUE self, VALUE device, VALUE events)
 {
     gtk_widget_add_device_events(_SELF(self),
                                  RVAL2GDKDEVICE(device),
-                                 RVAL2GENUM(events, GDK_TYPE_EVENT_MASK));
+                                 RVAL2GDKEVENTMASK(events));
 
     return self;
 }
@@ -819,7 +819,7 @@ rg_compute_expand(VALUE self, VALUE orientation)
     gboolean result;
 
     result = gtk_widget_compute_expand(_SELF(self),
-                                       RVAL2GENUM(orientation, GTK_TYPE_ORIENTATION));
+                                       RVAL2GTKORIENTATION(orientation));
 
     return CBOOL2RVAL(result);
 }
@@ -866,7 +866,7 @@ rg_get_device_events(VALUE self, VALUE device)
 
     mask = gtk_widget_get_device_events(_SELF(self), RVAL2GDKDEVICE(device));
 
-    return GENUM2RVAL(mask, GDK_TYPE_EVENT_MASK);
+    return GDKEVENTMASK2RVAL(mask);
 }
 
 static VALUE
@@ -926,13 +926,13 @@ rg_get_preferred_width_for_height(VALUE self, VALUE height)
 static VALUE
 rg_request_mode(VALUE self)
 {
-    return GENUM2RVAL(gtk_widget_get_request_mode(_SELF(self)), GTK_TYPE_SIZE_REQUEST_MODE);
+    return GTKSIZEREQUESTMODE2RVAL(gtk_widget_get_request_mode(_SELF(self)));
 }
 
 static VALUE
 rg_state_flags(VALUE self)
 {
-    return GFLAGS2RVAL(gtk_widget_get_state_flags(_SELF(self)), GTK_TYPE_STATE_FLAGS);
+    return GTKSTATEFLAGS2RVAL(gtk_widget_get_state_flags(_SELF(self)));
 }
 
 static VALUE
@@ -974,7 +974,7 @@ static VALUE
 rg_override_background_color(VALUE self, VALUE state, VALUE color)
 {
     gtk_widget_override_background_color(_SELF(self),
-                                         RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                         RVAL2GTKSTATEFLAGS(state),
                                          NIL_P(color) ? NULL : RVAL2GDKRGBA(color));
 
     return self;
@@ -984,7 +984,7 @@ static VALUE
 rg_override_color(VALUE self, VALUE state, VALUE color)
 {
     gtk_widget_override_color(_SELF(self),
-                              RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                              RVAL2GTKSTATEFLAGS(state),
                               NIL_P(color) ? NULL : RVAL2GDKRGBA(color));
 
     return self;
@@ -1042,7 +1042,7 @@ rg_render_icon_pixbuf(VALUE self, VALUE stock_id, VALUE size)
 
     pixbuf = gtk_widget_render_icon_pixbuf(_SELF(self),
                                            RVAL2CSTR(stock_id),
-                                           RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
+                                           RVAL2GTKICONSIZE(size));
 
     return GOBJ2RVAL(pixbuf);
 }
@@ -1080,7 +1080,7 @@ rg_set_device_events(VALUE self, VALUE device, VALUE events)
 {
     gtk_widget_set_device_events(_SELF(self),
                                  RVAL2GDKDEVICE(device),
-                                 RVAL2GENUM(events, GDK_TYPE_EVENT_MASK));
+                                 RVAL2GDKEVENTMASK(events));
 
     return self;
 }
@@ -1105,7 +1105,7 @@ static VALUE
 rg_set_state_flags(VALUE self, VALUE flags, VALUE clear)
 {
     gtk_widget_set_state_flags(_SELF(self),
-                               RVAL2GFLAGS(flags, GTK_TYPE_STATE_FLAGS),
+                               RVAL2GTKSTATEFLAGS(flags),
                                RVAL2CBOOL(clear));
 
     return self;
@@ -1140,7 +1140,7 @@ static VALUE
 rg_unset_state_flags(VALUE self, VALUE flags)
 {
     gtk_widget_unset_state_flags(_SELF(self),
-                                 RVAL2GFLAGS(flags, GTK_TYPE_STATE_FLAGS));
+                                 RVAL2GTKSTATEFLAGS(flags));
 
     return self;
 }

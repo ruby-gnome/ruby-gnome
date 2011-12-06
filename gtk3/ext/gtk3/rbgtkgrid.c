@@ -48,7 +48,7 @@ rg_attach_next_to(VALUE self, VALUE child, VALUE sibling, VALUE side, VALUE widt
     gtk_grid_attach_next_to(_SELF(self),
                             RVAL2GTKWIDGET(child),
                             NIL_P(sibling) ? NULL : RVAL2GTKWIDGET(sibling),
-                            RVAL2GENUM(side, GTK_TYPE_POSITION_TYPE),
+                            RVAL2GTKPOSITIONTYPE(side),
                             NUM2INT(width), NUM2INT(height));
 
     return self;
@@ -74,7 +74,7 @@ rg_insert_next_to(VALUE self, VALUE sibling, VALUE side)
 {
     gtk_grid_insert_next_to(_SELF(self),
                             RVAL2GTKWIDGET(sibling),
-                            RVAL2GENUM(side, GTK_TYPE_POSITION_TYPE));
+                            RVAL2GTKPOSITIONTYPE(side));
 
     return self;
 }

@@ -279,10 +279,8 @@ rg_request_rich_text(VALUE self, VALUE buffer)
 static VALUE
 rg_wait_for_contents(VALUE self, VALUE target)
 {
-    return BOXED2RVAL(gtk_clipboard_wait_for_contents(
-                          _SELF(self), 
-                          RVAL2ATOM(target)), 
-                      GTK_TYPE_SELECTION_DATA);
+    return GTKSELECTIONDATA2RVAL(gtk_clipboard_wait_for_contents(_SELF(self),
+                                                                 RVAL2ATOM(target)));
 }
 
 static VALUE

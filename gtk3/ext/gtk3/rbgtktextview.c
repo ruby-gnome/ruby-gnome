@@ -158,7 +158,7 @@ rg_buffer_to_window_coords(VALUE self, VALUE wintype, VALUE buffer_x, VALUE buff
 {
     int window_x, window_y;
     gtk_text_view_buffer_to_window_coords(_SELF(self), 
-                                          RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE),
+                                          RVAL2GTKTEXTWINDOWTYPE(wintype),
                                           NUM2INT(buffer_x), NUM2INT(buffer_y),
                                           &window_x, &window_y);
     return rb_ary_new3(2, INT2NUM(window_x), INT2NUM(window_y));
@@ -169,7 +169,7 @@ rg_window_to_buffer_coords(VALUE self, VALUE wintype, VALUE window_x, VALUE wind
 {
     int buffer_x, buffer_y;
     gtk_text_view_window_to_buffer_coords(_SELF(self),
-                                          RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE),
+                                          RVAL2GTKTEXTWINDOWTYPE(wintype),
                                           NUM2INT(window_x), NUM2INT(window_y),
                                           &buffer_x, &buffer_y);
     return rb_ary_new3(2, INT2NUM(buffer_x), INT2NUM(buffer_y));
@@ -180,22 +180,21 @@ rg_get_window(VALUE self, VALUE wintype)
 {
     GdkWindow* win = NULL;
     win = gtk_text_view_get_window(_SELF(self), 
-                                   RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE));
+                                   RVAL2GTKTEXTWINDOWTYPE(wintype));
     return win ? GOBJ2RVAL(win): Qnil;
 }
 
 static VALUE
 rg_get_window_type(VALUE self, VALUE gdkwin)
 {
-    return GENUM2RVAL(gtk_text_view_get_window_type(_SELF(self), RVAL2GOBJ(gdkwin)), 
-                      GTK_TYPE_TEXT_WINDOW_TYPE);
+    return GTKTEXTWINDOWTYPE2RVAL(gtk_text_view_get_window_type(_SELF(self), RVAL2GOBJ(gdkwin)));
 }
 
 static VALUE
 rg_set_border_window_size(VALUE self, VALUE wintype, VALUE size)
 {
     gtk_text_view_set_border_window_size(_SELF(self), 
-                                         RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE), 
+                                         RVAL2GTKTEXTWINDOWTYPE(wintype), 
                                          NUM2INT(size));
     return self;
 }
@@ -205,7 +204,7 @@ rg_get_border_window_size(VALUE self, VALUE wintype)
 {
     return INT2NUM(gtk_text_view_get_border_window_size(
                        _SELF(self), 
-                       RVAL2GENUM(wintype, GTK_TYPE_TEXT_WINDOW_TYPE)));
+                       RVAL2GTKTEXTWINDOWTYPE(wintype)));
 }
 
 static VALUE
@@ -258,7 +257,7 @@ rg_add_child_in_window(VALUE self, VALUE child, VALUE which_window, VALUE xpos, 
 {
     G_CHILD_ADD(self, child);
     gtk_text_view_add_child_in_window(_SELF(self), RVAL2GTKWIDGET(child),
-                                      RVAL2GENUM(which_window, GTK_TYPE_TEXT_WINDOW_TYPE),
+                                      RVAL2GTKTEXTWINDOWTYPE(which_window),
                                       NUM2INT(xpos), NUM2INT(ypos));
     return self;
 }
@@ -275,8 +274,7 @@ rg_move_child(VALUE self, VALUE child, VALUE xpos, VALUE ypos)
 static VALUE
 rg_default_attributes(VALUE self)
 {
-    return BOXED2RVAL(gtk_text_view_get_default_attributes(_SELF(self)), 
-                      GTK_TYPE_TEXT_ATTRIBUTES);
+    return GTKTEXTATTRIBUTES2RVAL(gtk_text_view_get_default_attributes(_SELF(self)));
 }
 
 void

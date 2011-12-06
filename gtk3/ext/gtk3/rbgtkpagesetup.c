@@ -25,7 +25,7 @@
 #define _SELF(s) (RVAL2GTKPAGESETUP(s))
 
 #define RVAL2SIZE(o) (RVAL2GTKPAPERSIZE(o))
-#define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
+#define RVAL2UNIT(o) (RVAL2GTKUNIT(o))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -43,15 +43,14 @@ rg_dup(VALUE self)
 static VALUE
 rg_orientation(VALUE self)
 {
-    return GENUM2RVAL(gtk_page_setup_get_orientation(_SELF(self)), 
-                      GTK_TYPE_PAGE_ORIENTATION);
+    return GTKPAGEORIENTATION2RVAL(gtk_page_setup_get_orientation(_SELF(self)));
 }
 
 static VALUE
 rg_set_orientation(VALUE self, VALUE orientation)
 {
     gtk_page_setup_set_orientation(_SELF(self), 
-                                   RVAL2GENUM(orientation, GTK_TYPE_PAGE_ORIENTATION));
+                                   RVAL2GTKPAGEORIENTATION(orientation));
     return self;
 }
 

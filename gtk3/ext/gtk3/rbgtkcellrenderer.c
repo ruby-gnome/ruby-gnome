@@ -46,7 +46,7 @@ rg_render(VALUE self, VALUE window, VALUE widget, VALUE background_area, VALUE c
                              RVAL2RECT(background_area),
                              RVAL2RECT(cell_area),
                              RVAL2RECT(expose_area),
-                             RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
+                             RVAL2GTKCELLRENDERERSTATE(flags));
     return self;
 }
 */
@@ -59,7 +59,7 @@ rg_activate(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE background_
                                RVAL2GTKWIDGET(widget),
                                RVAL2CSTR(path), RVAL2RECT(background_area),
                                RVAL2RECT(cell_area), 
-                               RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
+                               RVAL2GTKCELLRENDERERSTATE(flags));
     return CBOOL2RVAL(ret);
 }
 
@@ -71,7 +71,7 @@ rg_start_editing(VALUE self, VALUE event, VALUE widget, VALUE path, VALUE backgr
                                RVAL2GTKWIDGET(widget),
                                RVAL2CSTR(path), RVAL2RECT(background_area),
                                RVAL2RECT(cell_area), 
-                               RVAL2GFLAGS(flags, GTK_TYPE_CELL_RENDERER_STATE));
+                               RVAL2GTKCELLRENDERERSTATE(flags));
     return edit ? GOBJ2RVAL(edit) : Qnil;
 }
 

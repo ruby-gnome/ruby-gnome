@@ -142,13 +142,13 @@ rg_set_rise(VALUE self, VALUE val)
 static VALUE
 rg_underline(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->underline, PANGO_TYPE_UNDERLINE);
+    return PANGOUNDERLINE2RVAL(_SELF(self)->underline);
 }
 
 static VALUE
 rg_set_underline(VALUE self, VALUE val)
 {
-    _SELF(self)->underline = RVAL2GENUM(val, PANGO_TYPE_UNDERLINE);
+    _SELF(self)->underline = RVAL2PANGOUNDERLINE(val);
     return self;
 }
 

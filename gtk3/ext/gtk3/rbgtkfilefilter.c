@@ -66,7 +66,7 @@ filter_func(const GtkFileFilterInfo *info, gpointer func)
     return CBOOL2RVAL(rb_funcall((VALUE)func,
                                  id_call,
                                  5,
-                                 GFLAGS2RVAL(info->contains, GTK_TYPE_FILE_FILTER_FLAGS),
+                                 GTKFILEFILTERFLAGS2RVAL(info->contains),
                                  CSTR2RVAL(info->filename),
                                  CSTR2RVAL(info->uri),
                                  CSTR2RVAL(info->display_name),
@@ -85,7 +85,7 @@ rg_add_custom(VALUE self, VALUE needed)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
-    gtk_file_filter_add_custom(_SELF(self), RVAL2GFLAGS(needed, GTK_TYPE_FILE_FILTER_FLAGS), 
+    gtk_file_filter_add_custom(_SELF(self), RVAL2GTKFILEFILTERFLAGS(needed), 
                                (GtkFileFilterFunc)filter_func, (gpointer)func, NULL);
     return self;
 }
@@ -93,14 +93,14 @@ rg_add_custom(VALUE self, VALUE needed)
 static VALUE
 rg_needed(VALUE self)
 {
-    return GFLAGS2RVAL(gtk_file_filter_get_needed(_SELF(self)), GTK_TYPE_FILE_FILTER_FLAGS);
+    return GTKFILEFILTERFLAGS2RVAL(gtk_file_filter_get_needed(_SELF(self)));
 }
 
 static VALUE
 rg_filter_p(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display_name, VALUE mime_type)
 {
     GtkFileFilterInfo info;
-    info.contains = RVAL2GFLAGS(contains, GTK_TYPE_FILE_FILTER_FLAGS);
+    info.contains = RVAL2GTKFILEFILTERFLAGS(contains);
     info.filename = RVAL2CSTR(filename);
     info.uri = RVAL2CSTR(uri);
     info.display_name = RVAL2CSTR(display_name);

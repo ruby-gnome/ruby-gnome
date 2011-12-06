@@ -61,13 +61,13 @@ rg_append(int argc, VALUE *argv, VALUE self)
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_append_element(_SELF(self), 
-                                         RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE), 
+                                         RVAL2GTKTOOLBARCHILDTYPE(element_type), 
                                          N_RVAL2WIDGET(widget), RVAL2CSTR_ACCEPT_NIL(text),
                                          RVAL2CSTR_ACCEPT_NIL(ttext), RVAL2CSTR_ACCEPT_NIL(ptext),
                                          N_RVAL2WIDGET(icon),
                                          GTK_SIGNAL_FUNC(exec_callback),
                                          (gpointer)func);
-        if (RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE) == GTK_TOOLBAR_CHILD_SPACE) 
+        if (RVAL2GTKTOOLBARCHILDTYPE(element_type) == GTK_TOOLBAR_CHILD_SPACE) 
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
@@ -112,13 +112,13 @@ rg_prepend(int argc, VALUE *argv, VALUE self)
         if (NIL_P(func)) func = rb_block_proc();
         G_RELATIVE(self, func);
 
-        ret = gtk_toolbar_prepend_element(_SELF(self), RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE),
+        ret = gtk_toolbar_prepend_element(_SELF(self), RVAL2GTKTOOLBARCHILDTYPE(element_type),
                                          N_RVAL2WIDGET(widget), RVAL2CSTR_ACCEPT_NIL(text),
                                          RVAL2CSTR_ACCEPT_NIL(ttext), RVAL2CSTR_ACCEPT_NIL(ptext),
                                          N_RVAL2WIDGET(icon),
                                          GTK_SIGNAL_FUNC(exec_callback),
                                          (gpointer)func);
-        if (RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE) == GTK_TOOLBAR_CHILD_SPACE) 
+        if (RVAL2GTKTOOLBARCHILDTYPE(element_type) == GTK_TOOLBAR_CHILD_SPACE) 
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "13", &stock_id, &ttext, &ptext, &func);
@@ -164,14 +164,14 @@ rg_insert(int argc, VALUE *argv, VALUE self)
         G_RELATIVE(self, func);
 
         ret = gtk_toolbar_insert_element(_SELF(self),
-                                         RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE),
+                                         RVAL2GTKTOOLBARCHILDTYPE(element_type),
                                          N_RVAL2WIDGET(widget), 
                                          RVAL2CSTR_ACCEPT_NIL(text), RVAL2CSTR_ACCEPT_NIL(ttext),
                                          RVAL2CSTR_ACCEPT_NIL(ptext), N_RVAL2WIDGET(icon),
                                          GTK_SIGNAL_FUNC(exec_callback),
                                          (gpointer)func,
                                          NUM2INT(pos));
-        if (RVAL2GENUM(element_type, GTK_TYPE_TOOLBAR_CHILD_TYPE) == GTK_TOOLBAR_CHILD_SPACE) 
+        if (RVAL2GTKTOOLBARCHILDTYPE(element_type) == GTK_TOOLBAR_CHILD_SPACE) 
             ret = NULL;
     } else if (TYPE(type) == T_SYMBOL) {
         rb_scan_args(argc, argv, "14", &pos, &stock_id, &ttext, &ptext, &func);
@@ -234,7 +234,7 @@ rg_set_drop_highlight_item(VALUE self, VALUE item, VALUE index)
 static VALUE
 rg_relief_style(VALUE self)
 {
-    return GENUM2RVAL(gtk_toolbar_get_relief_style(_SELF(self)), GTK_TYPE_RELIEF_STYLE);
+    return GTKRELIEFSTYLE2RVAL(gtk_toolbar_get_relief_style(_SELF(self)));
 }
 
 static VALUE

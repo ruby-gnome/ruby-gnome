@@ -74,7 +74,7 @@ static VALUE
 rg_get_toplevels(VALUE self, VALUE types)
 {
     return GSLIST2ARYF(gtk_ui_manager_get_toplevels(_SELF(self), 
-                                                    RVAL2GFLAGS(types, GTK_TYPE_UI_MANAGER_ITEM_TYPE)));
+                                                    RVAL2GTKUIMANAGERITEMTYPE(types)));
 }
 
 static VALUE
@@ -115,7 +115,7 @@ rg_add_ui(int argc, VALUE *argv, VALUE self)
         ret = NUM2UINT(merge_id);
         gtk_ui_manager_add_ui(_SELF(self), ret, RVAL2CSTR(path),
                               RVAL2CSTR(name), RVAL2CSTR(action), 
-                              RVAL2GFLAGS(type, GTK_TYPE_UI_MANAGER_ITEM_TYPE),
+                              RVAL2GTKUIMANAGERITEMTYPE(type),
                               RVAL2CBOOL(top));
     }
 

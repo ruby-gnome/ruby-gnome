@@ -273,7 +273,7 @@ rg_set_action_widget(VALUE self, VALUE widget, VALUE pack_type)
 {
     gtk_notebook_set_action_widget(_SELF(self),
                                    RVAL2WIDGET(widget),
-                                   RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE));
+                                   RVAL2GTKPACKTYPE(pack_type));
     return self;
 }
 
@@ -281,7 +281,7 @@ static VALUE
 rg_get_action_widget(VALUE self, VALUE pack_type)
 {
     return GOBJ2RVAL(gtk_notebook_get_action_widget(_SELF(self),
-                                                    RVAL2GENUM(pack_type, GTK_TYPE_PACK_TYPE)));
+                                                    RVAL2GTKPACKTYPE(pack_type)));
 }
 
 /* deprecated

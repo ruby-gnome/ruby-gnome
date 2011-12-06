@@ -53,26 +53,26 @@ rg_set_appearance(VALUE self, VALUE val)
 static VALUE
 rg_justification(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->justification, GTK_TYPE_JUSTIFICATION);
+    return GTKJUSTIFICATION2RVAL(_SELF(self)->justification);
 }
 
 static VALUE
 rg_set_justification(VALUE self, VALUE val)
 {
-    _SELF(self)->justification = RVAL2GENUM(val, GTK_TYPE_JUSTIFICATION);
+    _SELF(self)->justification = RVAL2GTKJUSTIFICATION(val);
     return self;
 }
 
 static VALUE
 rg_direction(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->direction, GTK_TYPE_DIRECTION_TYPE);
+    return GTKDIRECTIONTYPE2RVAL(_SELF(self)->direction);
 }
 
 static VALUE
 rg_set_direction(VALUE self, VALUE val)
 {
-    _SELF(self)->direction = RVAL2GENUM(val, GTK_TYPE_DIRECTION_TYPE);
+    _SELF(self)->direction = RVAL2GTKDIRECTIONTYPE(val);
     return self;
 }
 
@@ -206,13 +206,13 @@ rg_set_tabs(VALUE self, VALUE val)
 static VALUE
 rg_wrap_mode(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->wrap_mode, GTK_TYPE_WRAP_MODE);
+    return GTKWRAPMODE2RVAL(_SELF(self)->wrap_mode);
 }
 
 static VALUE
 rg_set_wrap_mode(VALUE self, VALUE val)
 {
-    _SELF(self)->wrap_mode = RVAL2GENUM(val, GTK_TYPE_WRAP_MODE);
+    _SELF(self)->wrap_mode = RVAL2GTKWRAPMODE(val);
     return self;
 }
 
