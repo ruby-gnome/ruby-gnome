@@ -26,23 +26,14 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE title, action, backend;
+    VALUE title, action;
     GtkWidget* widget;
 
-    rb_scan_args(argc, argv, "12", &title, &action, &backend);
+    rb_scan_args(argc, argv, "11", &title, &action);
 
     if (TYPE(title) == T_STRING) {
-        if (NIL_P(backend)){
-            widget = gtk_file_chooser_button_new(RVAL2CSTR(title),
-                                                 RVAL2GTKFILECHOOSERACTION(action));
-/* deprecated
-        } else {
-            widget = gtk_file_chooser_button_new_with_backend(RVAL2CSTR(title), 
-                                                              RVAL2GENUM(action, 
-                                                                         GTK_TYPE_FILE_CHOOSER_ACTION),
-                                                              RVAL2CSTR(backend));
-*/
-        }
+        widget = gtk_file_chooser_button_new(RVAL2CSTR(title),
+                                             RVAL2GTKFILECHOOSERACTION(action));
     } else {
         widget = gtk_file_chooser_button_new_with_dialog(RVAL2GTKWIDGET(title));
     }
