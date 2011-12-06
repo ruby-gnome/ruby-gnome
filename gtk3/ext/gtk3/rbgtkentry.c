@@ -129,7 +129,7 @@ rg_im_context_filter_keypress(VALUE self, VALUE event)
     gboolean result;
 
     result = gtk_entry_im_context_filter_keypress(_SELF(self),
-                                                  RVAL2GDKEVENT(event));
+                                                  RVAL2GDKEVENTKEY(event));
 
     return CBOOL2RVAL(result);
 }

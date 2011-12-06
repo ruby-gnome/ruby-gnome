@@ -434,7 +434,7 @@ static VALUE
 rg_activate_key(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_window_activate_key(_SELF(self),
-                                              RVAL2GDKEVENT(event)));
+                                              RVAL2GDKEVENTKEY(event)));
 }
 
 static VALUE
@@ -464,7 +464,7 @@ static VALUE
 rg_propagate_key_event(VALUE self, VALUE event)
 {
     return CBOOL2RVAL(gtk_window_propagate_key_event(_SELF(self),
-                                                     RVAL2GDKEVENT(event)));
+                                                     RVAL2GDKEVENTKEY(event)));
 }
 
 static VALUE
