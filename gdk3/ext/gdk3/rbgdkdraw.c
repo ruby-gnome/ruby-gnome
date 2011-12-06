@@ -146,7 +146,7 @@ rg_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VAL
                     NUM2INT(src_x), NUM2INT(src_y), 
                     NUM2INT(dest_x), NUM2INT(dest_y),
                     NUM2INT(width), NUM2INT(height),
-                    RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                    RVAL2GDKRGBDITHER(dither),
                     NUM2INT(x_dither), NUM2INT(y_dither));
     return self;
 }

@@ -62,8 +62,7 @@ rg_s_intern(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     rb_scan_args(argc, argv, "11", &name, &exist);
 
-    return BOXED2RVAL(gdk_atom_intern(RVAL2CSTR(name), RVAL2CBOOL(exist)), 
-                      GDK_TYPE_ATOM);
+    return GDKATOM2RVAL(gdk_atom_intern(RVAL2CSTR(name), RVAL2CBOOL(exist)));
 }
 
 /* We don't need them.

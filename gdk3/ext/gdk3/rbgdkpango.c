@@ -134,8 +134,7 @@ gdkpango_attr_emboss_color_initialize(VALUE self, VALUE color)
 static VALUE
 gdkpango_attr_emboss_color_value(VALUE self)
 {
-    return BOXED2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2ATTR(self))->color),
-                      PANGO_TYPE_COLOR);
+    return PANGOCOLOR2RVAL(&(((GdkPangoAttrEmbossColor *)RVAL2ATTR(self))->color));
 }
 */
 

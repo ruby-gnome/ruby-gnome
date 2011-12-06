@@ -54,8 +54,8 @@ rg_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
     GdkWindowAttr w;
     w.width = NUM2INT(width);
     w.height = NUM2INT(height);
-    w.wclass = RVAL2GENUM(wclass, GDK_TYPE_WINDOW_WINDOW_CLASS);
-    w.window_type = RVAL2GENUM(window_type, GDK_TYPE_WINDOW_TYPE);
+    w.wclass = RVAL2GDKWINDOWWINDOWCLASS(wclass);
+    w.window_type = RVAL2GDKWINDOWTYPE(window_type);
     G_INITIALIZE(self, &w);
     return Qnil;
 }
@@ -96,12 +96,12 @@ ATTR_INT(height);
 static VALUE
 rg_wclass(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->wclass, GDK_TYPE_WINDOW_WINDOW_CLASS);
+    return GDKWINDOWWINDOWCLASS2RVAL(_SELF(self)->wclass);
 }
 static VALUE
 rg_set_wclass(VALUE self, VALUE val)
 {
-    _SELF(self)->wclass = RVAL2GENUM(val, GDK_TYPE_WINDOW_WINDOW_CLASS);
+    _SELF(self)->wclass = RVAL2GDKWINDOWWINDOWCLASS(val);
     return self;
 }
 
@@ -120,12 +120,12 @@ rg_set_visual(VALUE self, VALUE val)
 static VALUE
 rg_window_type(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->window_type, GDK_TYPE_WINDOW_TYPE);
+    return GDKWINDOWTYPE2RVAL(_SELF(self)->window_type);
 }
 static VALUE
 rg_set_window_type(VALUE self, VALUE val)
 {
-    _SELF(self)->window_type = RVAL2GENUM(val, GDK_TYPE_WINDOW_TYPE);
+    _SELF(self)->window_type = RVAL2GDKWINDOWTYPE(val);
     return self;
 }
 

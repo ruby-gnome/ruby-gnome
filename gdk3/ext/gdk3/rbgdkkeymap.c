@@ -58,13 +58,13 @@ rg_translate_keyboard_state(VALUE self, VALUE hardware_keycode, VALUE state, VAL
 
   ret = gdk_keymap_translate_keyboard_state(_SELF(self),
                                             NUM2UINT(hardware_keycode),
-                                            RVAL2GFLAGS(state, GDK_TYPE_MODIFIER_TYPE),
+                                            RVAL2GDKMODIFIERTYPE(state),
                                             NUM2INT(group),
                                             &keyval, &effective_group,
                                             &level, &consumed_modifiers);
   return ret ? rb_ary_new3(4, UINT2NUM(keyval), INT2NUM(effective_group),
                            INT2NUM(level), 
-                           GFLAGS2RVAL(consumed_modifiers, GDK_TYPE_MODIFIER_TYPE)) : Qnil;
+                           GDKMODIFIERTYPE2RVAL(consumed_modifiers)) : Qnil;
 }
 
 static VALUE
@@ -121,7 +121,7 @@ rg_get_entries_for_keycode(VALUE self, VALUE hardware_keycode)
 static VALUE
 rg_direction(VALUE self)
 {
-  return GENUM2RVAL(gdk_keymap_get_direction(_SELF(self)), PANGO_TYPE_DIRECTION);
+  return PANGODIRECTION2RVAL(gdk_keymap_get_direction(_SELF(self)));
 }
 
 static VALUE
