@@ -25,7 +25,7 @@
 static VALUE
 rg_initialize(VALUE self, VALUE terminal)
 {
-    G_INITIALIZE(self, vte_terminal_accessible_new(RVAL2TERM(terminal)));
+    G_INITIALIZE(self, vte_terminal_accessible_new(RVAL2VTETERMINAL(terminal)));
     return Qnil;
 }
 
