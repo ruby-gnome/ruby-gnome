@@ -31,11 +31,9 @@ static VALUE
 rg_initialize(VALUE self, VALUE parent, VALUE attributes, VALUE attributes_mask)
 {
     GdkWindow* win;
-    win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent), 
-                         (GdkWindowAttr*)RVAL2BOXED(attributes, 
-                                                    GDK_TYPE_WINDOW_ATTR), 
-                         RVAL2GFLAGS(attributes_mask, 
-                                    GDK_TYPE_WINDOW_ATTRIBUTES_TYPE));
+    win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent),
+                         RVAL2GDKWINDOWATTR(attributes),
+                         RVAL2GDKWINDOWATTRIBUTESTYPE(attributes_mask));
     G_INITIALIZE(self, win);
 
     return Qnil;
@@ -51,7 +49,7 @@ rg_destroy(VALUE self)
 static VALUE
 rg_window_type(VALUE self)
 {
-    return GENUM2RVAL(gdk_window_get_window_type(_SELF(self)), GDK_TYPE_WINDOW_TYPE);
+    return GDKWINDOWTYPE2RVAL(gdk_window_get_window_type(_SELF(self)));
 }
 
 static VALUE
@@ -98,7 +96,7 @@ rg_viewable_p(VALUE self)
 static VALUE
 rg_state(VALUE self)
 {
-    return GENUM2RVAL(gdk_window_get_state(_SELF(self)), GDK_TYPE_WINDOW_STATE);
+    return GDKWINDOWSTATE2RVAL(gdk_window_get_state(_SELF(self)));
 }
 
 static VALUE
@@ -255,7 +253,7 @@ static VALUE
 rg_begin_resize_drag(VALUE self, VALUE edge, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
 {
     gdk_window_begin_resize_drag(_SELF(self),
-                                 RVAL2GENUM(edge, GDK_TYPE_WINDOW_EDGE),
+                                 RVAL2GDKWINDOWEDGE(edge),
                                  NUM2INT(button),
                                  NUM2INT(root_x), NUM2INT(root_y),
                                  NUM2UINT(timestamp));
@@ -276,7 +274,7 @@ rg_s_constrain_size(G_GNUC_UNUSED VALUE self, VALUE geometry, VALUE flags, VALUE
 {
     gint new_width, new_height;
     gdk_window_constrain_size(RVAL2GDKGEOMETRY(geometry),
-                              RVAL2GFLAGS(flags, GDK_TYPE_WINDOW_HINTS),
+                              RVAL2GDKWINDOWHINTS(flags),
                               NUM2INT(w), NUM2INT(h), &new_width, &new_height);
     return rb_assoc_new(INT2NUM(new_width), INT2NUM(new_height));
 }
@@ -526,7 +524,7 @@ rg_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 {
     gdk_window_set_geometry_hints(_SELF(self), 
                                   NIL_P(geometry) ? (GdkGeometry*)NULL : RVAL2GDKGEOMETRY(geometry),
-                                  RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
+                                  RVAL2GDKWINDOWHINTS(geom_mask));
     return self;
 }
 
@@ -553,14 +551,14 @@ rg_set_modal_hint(VALUE self, VALUE modal)
 static VALUE
 rg_set_type_hint(VALUE self, VALUE hint)
 {
-    gdk_window_set_type_hint(_SELF(self), RVAL2GENUM(hint, GDK_TYPE_WINDOW_TYPE_HINT));
+    gdk_window_set_type_hint(_SELF(self), RVAL2GDKWINDOWHINT(hint));
     return self;
 }
 
 static VALUE
 rg_type_hint(VALUE self)
 {
-    return GENUM2RVAL(gdk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
+    return GDKWINDOWHINT2RVAL(gdk_window_get_type_hint(_SELF(self)));
 }
 
 static VALUE
@@ -622,7 +620,7 @@ rg_pointer(VALUE self)
     gint x, y;
     GdkModifierType state;
     GdkWindow* ret = gdk_window_get_pointer(_SELF(self), &x, &y, &state);
-    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GFLAGS2RVAL(state, GDK_TYPE_MODIFIER_TYPE));
+    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
 }
 
 static VALUE
@@ -653,13 +651,13 @@ rg_children(VALUE self)
 static VALUE
 rg_events(VALUE self)
 {
-    return GFLAGS2RVAL(gdk_window_get_events(_SELF(self)), GDK_TYPE_EVENT_MASK);
+    return GDKEVENTMASK2RVAL(gdk_window_get_events(_SELF(self)));
 }
 
 static VALUE
 rg_set_events(VALUE self, VALUE mask)
 {
-    gdk_window_set_events(_SELF(self), RVAL2GFLAGS(mask, GDK_TYPE_EVENT_MASK));
+    gdk_window_set_events(_SELF(self), RVAL2GDKEVENTMASK(mask));
     return self;
 }
 
@@ -711,7 +709,7 @@ rg_group(VALUE self)
 static VALUE
 rg_set_decorations(VALUE self, VALUE decor)
 {
-    gdk_window_set_decorations(_SELF(self), RVAL2GFLAGS(decor, GDK_TYPE_WM_DECORATION));
+    gdk_window_set_decorations(_SELF(self), RVAL2GDKWMDECORATION(decor));
     return self;
 }
 
@@ -720,13 +718,13 @@ rg_decorations(VALUE self)
 {
     GdkWMDecoration decorations;
     gboolean ret = gdk_window_get_decorations(_SELF(self), &decorations);
-    return ret ? GFLAGS2RVAL(decorations, GDK_TYPE_WM_DECORATION) : Qnil;
+    return ret ? GDKWMDECORATION2RVAL(decorations) : Qnil;
 }
 
 static VALUE
 rg_set_functions(VALUE self, VALUE func)
 {
-    gdk_window_set_functions(_SELF(self), RVAL2GFLAGS(func, GDK_TYPE_WM_FUNCTION));
+    gdk_window_set_functions(_SELF(self), RVAL2GDKWMFUNCTION(func));
     return self;
 }
 

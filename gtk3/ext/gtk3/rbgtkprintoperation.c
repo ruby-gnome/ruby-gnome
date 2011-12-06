@@ -43,10 +43,10 @@ rg_run(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &action, &parent);
 
     result = gtk_print_operation_run(_SELF(self), 
-                                     RVAL2GENUM(action, GTK_TYPE_PRINT_OPERATION_ACTION),
+                                     RVAL2GTKPRINTOPERATIONACTION(action),
                                      RVAL2GOBJ(parent), &error);
 
-    rb_result = GENUM2RVAL(result, GTK_TYPE_PRINT_OPERATION_RESULT);
+    rb_result = GTKPRINTOPERATIONRESULT2RVAL(result);
     if (rb_block_given_p()) {
         return rb_yield(rb_result);
     } else {

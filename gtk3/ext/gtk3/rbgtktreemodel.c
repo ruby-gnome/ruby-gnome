@@ -27,7 +27,7 @@
 static VALUE
 rg_flags(VALUE self)
 {
-    return GFLAGS2RVAL(gtk_tree_model_get_flags(_SELF(self)), GTK_TYPE_TREE_MODEL_FLAGS);
+    return GTKTREEMODELFLAGS2RVAL(gtk_tree_model_get_flags(_SELF(self)));
 }
 
 static VALUE

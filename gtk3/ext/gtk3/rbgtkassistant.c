@@ -92,14 +92,15 @@ rg_set_forward_page_func(VALUE self)
 static VALUE
 rg_set_page_type(VALUE self, VALUE page, VALUE type)
 {
-    gtk_assistant_set_page_type(_SELF(self), RVAL2GTKWIDGET(page), RVAL2GENUM(type, GTK_TYPE_ASSISTANT_PAGE_TYPE));
+    gtk_assistant_set_page_type(_SELF(self), RVAL2GTKWIDGET(page), RVAL2GTKASSISTANTPAGETYPE(type));
     return self;
 }
 
 static VALUE
 rg_get_page_type(VALUE self, VALUE page)
 {
-    return GENUM2RVAL(gtk_assistant_get_page_type(_SELF(self), RVAL2GTKWIDGET(page)), GTK_TYPE_ASSISTANT_PAGE_TYPE);
+    return GTKASSISTANTPAGETYPE2RVAL(gtk_assistant_get_page_type(_SELF(self),
+                                                                 RVAL2GTKWIDGET(page)));
 }
 
 static VALUE

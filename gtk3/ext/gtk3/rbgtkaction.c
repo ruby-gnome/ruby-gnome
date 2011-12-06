@@ -23,7 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cAction
 #define _SELF(self) (RVAL2GTKACTION(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -68,7 +67,7 @@ static VALUE
 rg_create_icon(VALUE self, VALUE icon_size)
 {
     return GOBJ2RVAL(gtk_action_create_icon(_SELF(self), 
-                                            RVAL2GENUM(icon_size, GTK_TYPE_ICON_SIZE)));
+                                            RVAL2GTKICONSIZE(icon_size)));
 }
 
 static VALUE

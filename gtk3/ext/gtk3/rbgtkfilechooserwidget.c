@@ -32,10 +32,10 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &action, &back);
 
     if (NIL_P(back)){
-        widget = gtk_file_chooser_widget_new(RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION));
+        widget = gtk_file_chooser_widget_new(RVAL2GTKFILECHOOSERACTION(action));
 /* deprecated
     } else {
-        widget = gtk_file_chooser_widget_new_with_backend(RVAL2GENUM(action, GTK_TYPE_FILE_CHOOSER_ACTION),
+        widget = gtk_file_chooser_widget_new_with_backend(RVAL2GTKFILECHOOSERACTION(action),
                                                           RVAL2CSTR(back));
 */
     }

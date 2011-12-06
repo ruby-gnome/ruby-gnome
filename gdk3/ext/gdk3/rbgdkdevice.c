@@ -48,7 +48,7 @@ rg_s_core_pointer(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_set_source(VALUE self, VALUE source)
 {
-    gdk_device_set_source(_SELF(self), RVAL2GENUM(source, GDK_TYPE_INPUT_SOURCE));
+    gdk_device_set_source(_SELF(self), RVAL2GDKINPUTSOURCE(source));
     return self;
 }
 */
@@ -56,14 +56,14 @@ rg_set_source(VALUE self, VALUE source)
 static VALUE
 rg_set_mode(VALUE self, VALUE mode)
 {
-    return CBOOL2RVAL(gdk_device_set_mode(_SELF(self), RVAL2GENUM(mode, GDK_TYPE_INPUT_MODE)));
+    return CBOOL2RVAL(gdk_device_set_mode(_SELF(self), RVAL2GDKINPUTMODE(mode)));
 }
 
 static VALUE
 rg_set_key(VALUE self, VALUE index, VALUE keyval, VALUE modifiers)
 {
     gdk_device_set_key(_SELF(self), NUM2UINT(index), NUM2UINT(keyval),
-                       RVAL2GFLAGS(modifiers, GDK_TYPE_MODIFIER_TYPE));
+                       RVAL2GDKMODIFIERTYPE(modifiers));
     return self;
 }
 
@@ -71,7 +71,7 @@ static VALUE
 rg_set_axis_use(VALUE self, VALUE index, VALUE use)
 {
     gdk_device_set_axis_use(_SELF(self), NUM2UINT(index), 
-                            RVAL2GENUM(use, GDK_TYPE_AXIS_USE));
+                            RVAL2GDKAXISUSE(use));
     return self;
 }
 
@@ -84,7 +84,7 @@ rg_get_state(VALUE self, VALUE window)
     gdk_device_get_state(_SELF(self), RVAL2GDKWINDOW(window),
                          axes, &mask);
     return rb_ary_new3(3, rb_float_new(axes[0]), rb_float_new(axes[1]),
-                       GFLAGS2RVAL(mask, GDK_TYPE_MODIFIER_TYPE));
+                       GDKMODIFIERTYPE2RVAL(mask));
 }
 
 static VALUE
@@ -112,7 +112,7 @@ static VALUE
 rg_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
 {
     GdkDevice *device = _SELF(self);
-    GdkAxisUse use = RVAL2GENUM(rbuse, GDK_TYPE_AXIS_USE);
+    GdkAxisUse use = RVAL2GDKAXISUSE(rbuse);
     long n;
     gdouble *axes = RVAL2GDOUBLES(rbaxes, n);
     gint device_n_axes = gdk_device_get_n_axes(device);
@@ -134,7 +134,7 @@ rg_get_axis(VALUE self, VALUE rbaxes, VALUE rbuse)
 static VALUE
 rg_mode(VALUE self)
 {
-    return GENUM2RVAL(gdk_device_get_mode(_SELF(self)), GDK_TYPE_INPUT_MODE);
+    return GDKINPUTMODE2RVAL(gdk_device_get_mode(_SELF(self)));
 }
 
 /* deprecated
@@ -146,7 +146,7 @@ rg_axes(VALUE self)
     GdkDeviceAxis* axes = _SELF(self)->axes;
 
     for (i = 0; i < _SELF(self)->num_axes; i++){
-        rb_ary_push(ary, rb_ary_new3(3, GENUM2RVAL(axes[i].use, GDK_TYPE_AXIS_USE), 
+        rb_ary_push(ary, rb_ary_new3(3, GDKAXISUSE2RVAL(axes[i].use), 
                                      rb_float_new(axes[i].min), rb_float_new(axes[i].max)));
     }
     return ary;
@@ -161,7 +161,7 @@ rg_keys(VALUE self)
 
     for (i = 0; i < _SELF(self)->num_keys; i++){
         rb_ary_push(ary, rb_ary_new3(2, UINT2NUM(keys[i].keyval),
-                                     GFLAGS2RVAL(keys[i].modifiers, GDK_TYPE_MODIFIER_TYPE)));
+                                     GDKMODIFIERTYPE2RVAL(keys[i].modifiers)));
     }
     return ary;
 }

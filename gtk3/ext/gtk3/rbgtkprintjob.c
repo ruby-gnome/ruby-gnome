@@ -54,7 +54,7 @@ rg_initialize(VALUE self, VALUE title, VALUE printer,
 static VALUE
 rg_status(VALUE self)
 {
-    return GENUM2RVAL(gtk_print_job_get_status(_SELF(self)), GTK_TYPE_PRINT_STATUS);
+    return GTKPRINTSTATUS2RVAL(gtk_print_job_get_status(_SELF(self)));
 }
 
 static VALUE

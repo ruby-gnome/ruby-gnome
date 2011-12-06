@@ -54,7 +54,7 @@ rg_add_region(VALUE self, VALUE region_name, VALUE flags)
 {
     gtk_style_context_add_region(_SELF(self),
                                  RVAL2CSTR(region_name),
-                                 RVAL2GFLAGS(flags, GTK_TYPE_REGION_FLAGS));
+                                 RVAL2GTKREGIONFLAGS(flags));
 
     return self;
 }
@@ -65,7 +65,7 @@ rg_get_background_color(VALUE self, VALUE state)
     GdkRGBA color;
 
     gtk_style_context_get_background_color(_SELF(self),
-                                           RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                           RVAL2GTKSTATEFLAGS(state),
                                            &color);
 
     return GDKRGBA2RVAL(&color);
@@ -77,7 +77,7 @@ rg_get_border(VALUE self, VALUE state)
     GtkBorder border;
 
     gtk_style_context_get_border(_SELF(self),
-                                 RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                 RVAL2GTKSTATEFLAGS(state),
                                  &border);
 
     return GTKBORDER2RVAL(&border);
@@ -89,7 +89,7 @@ rg_get_border_color(VALUE self, VALUE state)
     GdkRGBA color;
 
     gtk_style_context_get_border_color(_SELF(self),
-                                       RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                       RVAL2GTKSTATEFLAGS(state),
                                        &color);
 
     return GDKRGBA2RVAL(&color);
@@ -101,7 +101,7 @@ rg_get_color(VALUE self, VALUE state)
     GdkRGBA color;
 
     gtk_style_context_get_color(_SELF(self),
-                                RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                RVAL2GTKSTATEFLAGS(state),
                                 &color);
 
     return GDKRGBA2RVAL(&color);
@@ -113,9 +113,9 @@ rg_get_font(VALUE self, VALUE state)
     PangoFontDescription *desc;
 
     desc = gtk_style_context_get_font(_SELF(self),
-                                      RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS));
+                                      RVAL2GTKSTATEFLAGS(state));
 
-    return BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION);
+    return PANGOFONTDESCRIPTION2RVAL(desc);
 }
 
 static VALUE
@@ -125,7 +125,7 @@ rg_junction_sides(VALUE self)
 
     sides = gtk_style_context_get_junction_sides(_SELF(self));
 
-    return GENUM2RVAL(sides, GTK_TYPE_JUNCTION_SIDES);
+    return GTKJUNCTIONSIDES2RVAL(sides);
 }
 
 static VALUE
@@ -134,7 +134,7 @@ rg_get_margin(VALUE self, VALUE state)
     GtkBorder margin;
 
     gtk_style_context_get_margin(_SELF(self),
-                                 RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                 RVAL2GTKSTATEFLAGS(state),
                                  &margin);
 
     return GTKBORDER2RVAL(&margin);
@@ -146,7 +146,7 @@ rg_get_padding(VALUE self, VALUE state)
     GtkBorder padding;
 
     gtk_style_context_get_padding(_SELF(self),
-                                  RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                  RVAL2GTKSTATEFLAGS(state),
                                   &padding);
 
     return GTKBORDER2RVAL(&padding);
@@ -155,7 +155,7 @@ rg_get_padding(VALUE self, VALUE state)
 static VALUE
 rg_path(VALUE self)
 {
-    return BOXED2RVAL(gtk_style_context_get_path(_SELF(self)), GTK_TYPE_WIDGET_PATH);
+    return GTKWIDGETPATH2RVAL(gtk_style_context_get_path(_SELF(self)));
 }
 
 static VALUE
@@ -166,7 +166,7 @@ rg_get_property(VALUE self, VALUE property, VALUE state)
 
     gtk_style_context_get_property(_SELF(self),
                                    RVAL2CSTR(property),
-                                   RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                   RVAL2GTKSTATEFLAGS(state),
                                    &value);
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
@@ -183,7 +183,7 @@ rg_state(VALUE self)
 
     state = gtk_style_context_get_state(_SELF(self));
 
-    return GFLAGS2RVAL(state, GTK_TYPE_STATE_FLAGS);
+    return GTKSTATEFLAGS2RVAL(state);
 }
 
 static VALUE
@@ -219,7 +219,7 @@ rg_has_region(VALUE self, VALUE region_name)
                                           RVAL2CSTR(region_name),
                                           &flags);
 
-    return result ? GFLAGS2RVAL(flags, GTK_TYPE_REGION_FLAGS) : Qnil;
+    return result ? GTKREGIONFLAGS2RVAL(flags) : Qnil;
 }
 
 static VALUE
@@ -260,7 +260,7 @@ rg_lookup_icon_set(VALUE self, VALUE stock_id)
 
     iconset = gtk_style_context_lookup_icon_set(_SELF(self), RVAL2CSTR(stock_id));
 
-    return BOXED2RVAL(iconset, GTK_TYPE_ICON_SET);
+    return GTKICONSET2RVAL(iconset);
 }
 
 static VALUE
@@ -334,7 +334,7 @@ static VALUE
 rg_set_junction_sides(VALUE self, VALUE sides)
 {
     gtk_style_context_set_junction_sides(_SELF(self),
-                                         RVAL2GENUM(sides, GTK_TYPE_JUNCTION_SIDES));
+                                         RVAL2GTKJUNCTIONSIDES(sides));
 
     return self;
 }
@@ -342,7 +342,7 @@ rg_set_junction_sides(VALUE self, VALUE sides)
 static VALUE
 rg_set_path(VALUE self, VALUE path)
 {
-    gtk_style_context_set_path(_SELF(self), RVAL2BOXED(path, GTK_TYPE_WIDGET_PATH));
+    gtk_style_context_set_path(_SELF(self), RVAL2GTKWIDGETPATH(path));
 
     return self;
 }
@@ -350,7 +350,7 @@ rg_set_path(VALUE self, VALUE path)
 static VALUE
 rg_set_state(VALUE self, VALUE state)
 {
-    gtk_style_context_set_state(_SELF(self), RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS));
+    gtk_style_context_set_state(_SELF(self), RVAL2GTKSTATEFLAGS(state));
 
     return self;
 }
@@ -362,7 +362,7 @@ rg_state_is_running(VALUE self, VALUE state)
     gboolean result;
 
     result = gtk_style_context_state_is_running(_SELF(self),
-                                                RVAL2GFLAGS(state, GTK_TYPE_STATE_FLAGS),
+                                                RVAL2GTKSTATEFLAGS(state),
                                                 &progress);
 
     return result ? DBL2NUM(progress) : Qnil;

@@ -52,7 +52,7 @@ rg_set_icon(VALUE self, VALUE icon)
 static VALUE
 rg_set_icon_from_stock(VALUE self, VALUE stock_id, VALUE size)
 {
-    gtk_tooltip_set_icon_from_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)), RVAL2GENUM(size, GTK_TYPE_ICON_SIZE));
+    gtk_tooltip_set_icon_from_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)), RVAL2GTKICONSIZE(size));
     return self;
 }
 

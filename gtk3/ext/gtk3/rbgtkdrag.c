@@ -23,9 +23,6 @@
 
 #define RG_TARGET_NAMESPACE mDrag
 
-#define RVAL2DC(c) (RVAL2GDKDRAGCONTEXT(c))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
-
 struct rbgtk_rval2gtktargetentries_args {
     VALUE ary;
     long n;
@@ -44,7 +41,7 @@ rbgtk_rval2gtktargetentries_body(VALUE value)
         VALUE info = RARRAY_PTR(entry)[2];
 
         args->result[i].target = (gchar *)RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
-        args->result[i].flags = NIL_P(flags) ? 0 : RVAL2GFLAGS(flags, GTK_TYPE_TARGET_FLAGS);
+        args->result[i].flags = NIL_P(flags) ? 0 : RVAL2GTKTARGETFLAGS(flags);
         args->result[i].info = NIL_P(info) ? 0 : NUM2INT(info);
     }
 
@@ -98,9 +95,9 @@ rbgtk_get_target_entry(VALUE targets)
 static VALUE
 rg_m_dest_set(VALUE self, VALUE rbwidget, VALUE rbflags, VALUE rbtargets, VALUE rbactions)
 {
-    GtkWidget *widget = RVAL2WIDGET(rbwidget);
-    GtkDestDefaults flags = RVAL2GFLAGS(rbflags, GTK_TYPE_DEST_DEFAULTS);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GtkWidget *widget = RVAL2GTKWIDGET(rbwidget);
+    GtkDestDefaults flags = RVAL2GTKDESTDEFAULTS(rbflags);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(rbtargets, &n);
 
@@ -114,9 +111,9 @@ rg_m_dest_set(VALUE self, VALUE rbwidget, VALUE rbflags, VALUE rbtargets, VALUE 
 static VALUE
 rg_m_dest_set_proxy(VALUE self, VALUE widget, VALUE proxy_window, VALUE protocol, VALUE use_coordinates)
 {
-    gtk_drag_dest_set_proxy(RVAL2WIDGET(widget), 
+    gtk_drag_dest_set_proxy(RVAL2GTKWIDGET(widget), 
                             RVAL2GDKWINDOW(proxy_window),
-                            RVAL2GENUM(protocol, GDK_TYPE_DRAG_PROTOCOL), 
+                            RVAL2GDKDRAGPROTOCOL(protocol), 
                             RVAL2CBOOL(use_coordinates)); 
     return self;
 }
@@ -124,7 +121,7 @@ rg_m_dest_set_proxy(VALUE self, VALUE widget, VALUE proxy_window, VALUE protocol
 static VALUE
 rg_m_dest_unset(VALUE self, VALUE widget)
 {
-    gtk_drag_dest_unset(RVAL2WIDGET(widget));
+    gtk_drag_dest_unset(RVAL2GTKWIDGET(widget));
     return self;
 }
 
@@ -136,7 +133,7 @@ rg_m_dest_find_target(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rb_scan_args(argc, argv, "21", &widget, &context, &target_list);
 
     ret = gtk_drag_dest_find_target(
-        RVAL2WIDGET(widget), RVAL2DC(context),
+        RVAL2GTKWIDGET(widget), RVAL2GDKDRAGCONTEXT(context),
         NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
 
     return GDKATOM2RVAL(ret);
@@ -145,7 +142,7 @@ rg_m_dest_find_target(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_dest_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
-    GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2WIDGET(widget));
+    GtkTargetList* list = gtk_drag_dest_get_target_list(RVAL2GTKWIDGET(widget));
     return GTKTARGETLIST2RVAL(list);
 }
 
@@ -153,7 +150,7 @@ static VALUE
 rg_m_dest_set_target_list(VALUE self, VALUE widget, VALUE target_list)
 {
     gtk_drag_dest_set_target_list(
-        RVAL2WIDGET(widget), 
+        RVAL2GTKWIDGET(widget), 
         NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
 
     return self;
@@ -162,41 +159,41 @@ rg_m_dest_set_target_list(VALUE self, VALUE widget, VALUE target_list)
 static VALUE
 rg_m_dest_add_text_targets(VALUE self, VALUE widget)
 {
-    gtk_drag_dest_add_text_targets(RVAL2WIDGET(widget));
+    gtk_drag_dest_add_text_targets(RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
 rg_m_dest_add_image_targets(VALUE self, VALUE widget)
 {
-    gtk_drag_dest_add_image_targets(RVAL2WIDGET(widget));
+    gtk_drag_dest_add_image_targets(RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
 rg_m_dest_add_uri_targets(VALUE self, VALUE widget)
 {
-    gtk_drag_dest_add_uri_targets(RVAL2WIDGET(widget));
+    gtk_drag_dest_add_uri_targets(RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
 rg_m_dest_set_track_motion(VALUE self, VALUE widget, VALUE track_motion)
 {
-    gtk_drag_dest_set_track_motion(RVAL2WIDGET(widget), RVAL2CBOOL(track_motion));
+    gtk_drag_dest_set_track_motion(RVAL2GTKWIDGET(widget), RVAL2CBOOL(track_motion));
     return self;
 }
 
 static VALUE
 rg_m_dest_get_track_motion(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
-    return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2WIDGET(widget)));
+    return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2GTKWIDGET(widget)));
 }
 
 static VALUE
 rg_m_finish(VALUE self, VALUE context, VALUE success, VALUE del, VALUE time)
 {
-    gtk_drag_finish(RVAL2DC(context), RVAL2CBOOL(success),
+    gtk_drag_finish(RVAL2GDKDRAGCONTEXT(context), RVAL2CBOOL(success),
                     RVAL2CBOOL(del), NUM2UINT(time));
     return self;
 }
@@ -204,7 +201,7 @@ rg_m_finish(VALUE self, VALUE context, VALUE success, VALUE del, VALUE time)
 static VALUE
 rg_m_get_data(VALUE self, VALUE widget, VALUE context, VALUE target, VALUE time)
 {
-    gtk_drag_get_data(RVAL2WIDGET(widget), RVAL2DC(context), RVAL2ATOM(target),
+    gtk_drag_get_data(RVAL2GTKWIDGET(widget), RVAL2GDKDRAGCONTEXT(context), RVAL2ATOM(target),
                       NUM2UINT(time));
     return self;
 }
@@ -212,29 +209,29 @@ rg_m_get_data(VALUE self, VALUE widget, VALUE context, VALUE target, VALUE time)
 static VALUE
 rg_m_get_source_widget(G_GNUC_UNUSED VALUE self, VALUE context)
 {
-    return GOBJ2RVAL(gtk_drag_get_source_widget(RVAL2DC(context)));
+    return GOBJ2RVAL(gtk_drag_get_source_widget(RVAL2GDKDRAGCONTEXT(context)));
 }
 
 static VALUE
 rg_m_highlight(VALUE self, VALUE widget)
 {
-    gtk_drag_highlight(RVAL2WIDGET(widget));
+    gtk_drag_highlight(RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
 rg_m_unhighlight(VALUE self, VALUE widget)
 {
-    gtk_drag_unhighlight(RVAL2WIDGET(widget));
+    gtk_drag_unhighlight(RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
 rg_m_begin(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE target_list, VALUE actions, VALUE button, VALUE event)
 {
-    return GOBJ2RVAL(gtk_drag_begin(RVAL2WIDGET(widget),
+    return GOBJ2RVAL(gtk_drag_begin(RVAL2GTKWIDGET(widget),
                                     RVAL2GTKTARGETLIST(target_list),
-                                    RVAL2GFLAGS(actions, GDK_TYPE_DRAG_ACTION),
+                                    RVAL2GDKDRAGACTION(actions),
                                     NUM2INT(button),
                                     RVAL2GEV(event)));
 }
@@ -247,7 +244,7 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
     if (argc == 6) {
         rb_scan_args(argc, argv, "60", &context, &obj, &pixmap, &mask, &hot_x, &hot_y);
 /* deprecated?
-        gtk_drag_set_icon_pixmap(RVAL2DC(context),
+        gtk_drag_set_icon_pixmap(RVAL2GDKDRAGCONTEXT(context),
                                  RVAL2GDKCOLORMAP(obj), 
                                  RVAL2GDKPIXMAP(pixmap),
                                  RVAL2GDKBITMAP(mask), 
@@ -257,13 +254,13 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "40", &context, &obj, &hot_x, &hot_y);
 
         if (TYPE(obj) == T_SYMBOL){
-            gtk_drag_set_icon_stock(RVAL2DC(context), rb_id2name(SYM2ID(obj)),
+            gtk_drag_set_icon_stock(RVAL2GDKDRAGCONTEXT(context), rb_id2name(SYM2ID(obj)),
                                     NUM2INT(hot_x), NUM2INT(hot_y));
         } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))){
-            gtk_drag_set_icon_widget(RVAL2DC(context), RVAL2WIDGET(obj),
+            gtk_drag_set_icon_widget(RVAL2GDKDRAGCONTEXT(context), RVAL2GTKWIDGET(obj),
                                      NUM2INT(hot_x), NUM2INT(hot_y));
         } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
-            gtk_drag_set_icon_pixbuf(RVAL2DC(context),
+            gtk_drag_set_icon_pixbuf(RVAL2GDKDRAGCONTEXT(context),
                                      RVAL2GDKPIXBUF(obj),
                                      NUM2INT(hot_x), NUM2INT(hot_y));
         } else {
@@ -276,21 +273,21 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_m_set_icon_name(VALUE self, VALUE context, VALUE name, VALUE hot_x, VALUE hot_y)
 {
-    gtk_drag_set_icon_name(RVAL2DC(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
+    gtk_drag_set_icon_name(RVAL2GDKDRAGCONTEXT(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
     return self;
 }
 
 static VALUE
 rg_m_set_icon_default(VALUE self, VALUE context)
 {
-    gtk_drag_set_icon_default(RVAL2DC(context));
+    gtk_drag_set_icon_default(RVAL2GDKDRAGCONTEXT(context));
     return self;
 }
 
 static VALUE
 rg_m_threshold_p(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE start_x, VALUE start_y, VALUE current_x, VALUE current_y)
 {
-    return CBOOL2RVAL(gtk_drag_check_threshold(RVAL2WIDGET(widget), 
+    return CBOOL2RVAL(gtk_drag_check_threshold(RVAL2GTKWIDGET(widget), 
                                                NUM2INT(start_x), NUM2INT(start_y),
                                                NUM2INT(current_x), NUM2INT(current_y)));
 }
@@ -298,9 +295,9 @@ rg_m_threshold_p(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE start_x, VALUE st
 static VALUE
 rg_m_source_set(VALUE self, VALUE rbwidget, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
-    GtkWidget *widget = RVAL2WIDGET(rbwidget);
-    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GtkWidget *widget = RVAL2GTKWIDGET(rbwidget);
+    GdkModifierType start_button_mask = RVAL2GDKMODIFIERTYPE(rbstart_button_mask);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
 
@@ -319,15 +316,15 @@ rg_m_source_set_icon(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "22", &widget, &obj, &pixmap, &mask);
     if (argc == 4){
 /* deprecated?
-        gtk_drag_source_set_icon(RVAL2WIDGET(widget), RVAL2GDKCOLORMAP(obj),
+        gtk_drag_source_set_icon(RVAL2GTKWIDGET(widget), RVAL2GDKCOLORMAP(obj),
                                  RVAL2GDKPIXMAP(pixmap), 
                                  RVAL2GDKBITMAP(mask));
 */
     } else if (argc == 2){
         if (TYPE(obj) == T_SYMBOL){
-            gtk_drag_source_set_icon_stock(RVAL2WIDGET(widget), rb_id2name(SYM2ID(obj)));
+            gtk_drag_source_set_icon_stock(RVAL2GTKWIDGET(widget), rb_id2name(SYM2ID(obj)));
         } else {
-            gtk_drag_source_set_icon_pixbuf(RVAL2WIDGET(widget), RVAL2GDKPIXBUF(obj));
+            gtk_drag_source_set_icon_pixbuf(RVAL2GTKWIDGET(widget), RVAL2GDKPIXBUF(obj));
         }
     } else {
         rb_raise(rb_eArgError, "need 2 or 4 arguments");
@@ -338,14 +335,14 @@ rg_m_source_set_icon(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_m_source_set_icon_name(VALUE self, VALUE widget, VALUE icon_name)
 {
-    gtk_drag_source_set_icon_name(RVAL2WIDGET(widget), RVAL2CSTR(icon_name));
+    gtk_drag_source_set_icon_name(RVAL2GTKWIDGET(widget), RVAL2CSTR(icon_name));
     return self;
 }
 
 static VALUE
 rg_m_source_unset(VALUE self, VALUE widget)
 {
-    gtk_drag_source_unset(RVAL2WIDGET(widget));
+    gtk_drag_source_unset(RVAL2GTKWIDGET(widget));
     return self;
 }
 
@@ -356,33 +353,33 @@ rg_m_source_set_target_list(VALUE self, VALUE widget, VALUE targetlist)
     if (! NIL_P(targetlist))
         tlist = RVAL2GTKTARGETLIST(targetlist);
 
-    gtk_drag_source_set_target_list(RVAL2WIDGET(widget),tlist);
+    gtk_drag_source_set_target_list(RVAL2GTKWIDGET(widget),tlist);
     return self;
 }
 
 static VALUE
 rg_m_source_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
-    GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
+    GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2GTKWIDGET(widget));
     return NIL_P(ret) ? Qnil : GTKTARGETLIST2RVAL(ret);
 }
 
 static VALUE
 rg_m_source_add_text_targets(VALUE self, VALUE widget)
 {
-    gtk_drag_source_add_text_targets(RVAL2WIDGET(widget));
+    gtk_drag_source_add_text_targets(RVAL2GTKWIDGET(widget));
     return self;
 }
 static VALUE
 rg_m_source_add_image_targets(VALUE self, VALUE widget)
 {
-    gtk_drag_source_add_image_targets(RVAL2WIDGET(widget));
+    gtk_drag_source_add_image_targets(RVAL2GTKWIDGET(widget));
     return self;
 }
 static VALUE
 rg_m_source_add_uri_targets(VALUE self, VALUE widget)
 {
-    gtk_drag_source_add_uri_targets(RVAL2WIDGET(widget));
+    gtk_drag_source_add_uri_targets(RVAL2GTKWIDGET(widget));
     return self;
 }
 

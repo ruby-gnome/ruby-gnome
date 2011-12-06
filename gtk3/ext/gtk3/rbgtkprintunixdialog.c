@@ -66,7 +66,7 @@ rg_set_manual_capability(VALUE self, VALUE rb_capabilities)
 {
     GtkPrintCapabilities capabilities;
 
-    capabilities = RVAL2GFLAGS(rb_capabilities, GTK_TYPE_PRINT_CAPABILITIES);
+    capabilities = RVAL2GTKPRINTCAPABILITIES(rb_capabilities);
     gtk_print_unix_dialog_set_manual_capabilities(_SELF(self), capabilities);
     return self;
 }

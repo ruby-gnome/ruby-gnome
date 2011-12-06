@@ -26,7 +26,6 @@
 
 #define RG_TARGET_NAMESPACE cPrintCompositor
 #define _SELF(self) (RVAL2GTKSOURCEPRINTCOMPOSITOR(self))
-#define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
 
 /*
  * Class method: new(buffer)
@@ -57,52 +56,52 @@ rg_initialize(VALUE self, VALUE val)
 static VALUE
 rg_get_top_margin(VALUE self, VALUE unit)
 {
-    return DBL2NUM(gtk_source_print_compositor_get_top_margin(_SELF(self), RVAL2UNIT (unit)));
+    return DBL2NUM(gtk_source_print_compositor_get_top_margin(_SELF(self), RVAL2GTKUNIT (unit)));
 }
 
 static VALUE
 rg_set_top_margin(VALUE self, VALUE top, VALUE unit)
 {
-    gtk_source_print_compositor_set_top_margin(_SELF(self), NUM2DBL(top), RVAL2UNIT (unit));
+    gtk_source_print_compositor_set_top_margin(_SELF(self), NUM2DBL(top), RVAL2GTKUNIT (unit));
     return self;
 }
 
 static VALUE
 rg_get_bottom_margin(VALUE self, VALUE unit)
 {
-    return DBL2NUM(gtk_source_print_compositor_get_bottom_margin(_SELF(self), RVAL2UNIT (unit)));
+    return DBL2NUM(gtk_source_print_compositor_get_bottom_margin(_SELF(self), RVAL2GTKUNIT (unit)));
 }
 
 static VALUE
 rg_set_bottom_margin(VALUE self, VALUE bottom, VALUE unit)
 {
-    gtk_source_print_compositor_set_bottom_margin(_SELF(self), NUM2DBL(bottom), RVAL2UNIT (unit));
+    gtk_source_print_compositor_set_bottom_margin(_SELF(self), NUM2DBL(bottom), RVAL2GTKUNIT (unit));
     return self;
 }
 
 static VALUE
 rg_get_left_margin(VALUE self, VALUE unit)
 {
-    return DBL2NUM(gtk_source_print_compositor_get_left_margin(_SELF(self), RVAL2UNIT (unit)));
+    return DBL2NUM(gtk_source_print_compositor_get_left_margin(_SELF(self), RVAL2GTKUNIT (unit)));
 }
 
 static VALUE
 rg_set_left_margin(VALUE self, VALUE left, VALUE unit)
 {
-    gtk_source_print_compositor_set_left_margin(_SELF(self), NUM2DBL(left), RVAL2UNIT (unit));
+    gtk_source_print_compositor_set_left_margin(_SELF(self), NUM2DBL(left), RVAL2GTKUNIT (unit));
     return self;
 }
 
 static VALUE
 rg_get_right_margin(VALUE self, VALUE unit)
 {
-    return DBL2NUM(gtk_source_print_compositor_get_right_margin(_SELF(self), RVAL2UNIT (unit)));
+    return DBL2NUM(gtk_source_print_compositor_get_right_margin(_SELF(self), RVAL2GTKUNIT (unit)));
 }
 
 static VALUE
 rg_set_right_margin(VALUE self, VALUE right, VALUE unit)
 {
-    gtk_source_print_compositor_set_right_margin(_SELF(self), NUM2DBL(right), RVAL2UNIT (unit));
+    gtk_source_print_compositor_set_right_margin(_SELF(self), NUM2DBL(right), RVAL2GTKUNIT (unit));
     return self;
 }
 

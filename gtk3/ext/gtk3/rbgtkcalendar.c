@@ -88,16 +88,14 @@ rg_date(VALUE self)
 static VALUE
 rg_display_options(VALUE self)
 {
-    return GFLAGS2RVAL(gtk_calendar_get_display_options(_SELF(self)),
-                       GTK_TYPE_CALENDAR_DISPLAY_OPTIONS);
+    return GTKCALENDARDISPLAYOPTIONS2RVAL(gtk_calendar_get_display_options(_SELF(self)));
 }
 
 static VALUE
 rg_set_display_options(VALUE self, VALUE flags)
 {
     gtk_calendar_set_display_options(_SELF(self), 
-                                     RVAL2GFLAGS(flags, 
-                                                 GTK_TYPE_CALENDAR_DISPLAY_OPTIONS));
+                                     RVAL2GTKCALENDARDISPLAYOPTIONS(flags));
     return self;
 }
 

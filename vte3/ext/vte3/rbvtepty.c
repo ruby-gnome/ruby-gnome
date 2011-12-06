@@ -32,7 +32,7 @@ rg_initialize(VALUE self, VALUE flags_or_fd)
     if (TYPE(flags_or_fd) == T_FIXNUM) {
         pty = vte_pty_new_foreign(NUM2INT(flags_or_fd), &error);
     } else {
-        pty = vte_pty_new(RVAL2GFLAGS(flags_or_fd, VTE_TYPE_PTY_FLAGS), &error);
+        pty = vte_pty_new(RVAL2VTEPTYFLAGS(flags_or_fd), &error);
     }
     if (error)
         RAISE_GERROR(error);

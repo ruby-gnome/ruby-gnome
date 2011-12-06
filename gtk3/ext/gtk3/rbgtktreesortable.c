@@ -43,7 +43,7 @@ rg_sort_column_id(VALUE self)
 
         ary = rb_ary_new2(2);
         rb_ary_push(ary, INT2NUM(sort_column_id));
-        rb_ary_push(ary, GENUM2RVAL(order, GTK_TYPE_SORT_TYPE));
+        rb_ary_push(ary, GTKSORTTYPE2RVAL(order));
         return ary;
     } else {
         return Qnil;   /* XXX: or something else? exception? */
@@ -58,7 +58,7 @@ rg_set_sort_column_id(int argc, VALUE *argv, VALUE self)
 
     if (argc == 1 || argc == 2) {
         sort_column_id = NUM2INT(argv[0]);
-        order = (argc == 2) ? RVAL2GENUM(argv[1], GTK_TYPE_SORT_TYPE) : GTK_SORT_ASCENDING;
+        order = (argc == 2) ? RVAL2GTKSORTTYPE(argv[1]) : GTK_SORT_ASCENDING;
     } else {
         rb_raise(rb_eArgError, "need 1 or 2 arguments.");
     }

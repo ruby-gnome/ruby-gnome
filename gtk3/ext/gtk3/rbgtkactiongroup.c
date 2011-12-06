@@ -26,7 +26,6 @@ static ID id_toggle_action_procs;
 
 #define RG_TARGET_NAMESPACE cActionGroup
 #define _SELF(self) (RVAL2GTKACTIONGROUP(self))
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
 
 static VALUE
 rg_initialize(VALUE self, VALUE name)

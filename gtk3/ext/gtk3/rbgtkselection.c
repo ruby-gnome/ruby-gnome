@@ -26,8 +26,6 @@
 
 #define RG_TARGET_NAMESPACE mSelection
 
-#define RVAL2WIDGET(w) (RVAL2GTKWIDGET(w))
-
 static VALUE
 rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -36,13 +34,13 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (argc == 3){
         VALUE widget, selection, time;
         rb_scan_args(argc, argv, "30", &widget, &selection, &time);
-        ret = gtk_selection_owner_set(RVAL2WIDGET(widget), 
+        ret = gtk_selection_owner_set(RVAL2GTKWIDGET(widget), 
                                       RVAL2ATOM(selection), NUM2INT(time));
     } else {
         VALUE display, widget, selection, time;
         rb_scan_args(argc, argv, "40", &display, &widget, &selection, &time);
         ret = gtk_selection_owner_set_for_display(RVAL2GDKDISPLAYOBJECT(display),
-                                                  RVAL2WIDGET(widget), 
+                                                  RVAL2GTKWIDGET(widget), 
                                                   RVAL2ATOM(selection), NUM2INT(time));
     }
     return CBOOL2RVAL(ret);
@@ -51,7 +49,7 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_m_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE info)
 {
-    gtk_selection_add_target(RVAL2WIDGET(widget), RVAL2ATOM(selection),
+    gtk_selection_add_target(RVAL2GTKWIDGET(widget), RVAL2ATOM(selection),
                              RVAL2ATOM(target), NUM2INT(info));
     return self;
 }
@@ -59,7 +57,7 @@ rg_m_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE i
 static VALUE
 rg_m_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
 {
-    GtkWidget *widget = RVAL2WIDGET(rbwidget);
+    GtkWidget *widget = RVAL2GTKWIDGET(rbwidget);
     GdkAtom selection = RVAL2ATOM(rbselection);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
@@ -74,14 +72,14 @@ rg_m_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
 static VALUE
 rg_m_clear_targets(VALUE self, VALUE widget, VALUE selection)
 {
-    gtk_selection_clear_targets(RVAL2WIDGET(widget), RVAL2ATOM(selection));
+    gtk_selection_clear_targets(RVAL2GTKWIDGET(widget), RVAL2ATOM(selection));
     return self;
 }
 
 static VALUE
 rg_m_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
 {
-    gboolean ret = gtk_selection_convert(RVAL2WIDGET(widget), 
+    gboolean ret = gtk_selection_convert(RVAL2GTKWIDGET(widget), 
                                          RVAL2ATOM(selection), RVAL2ATOM(target),
                                          NUM2INT(time));
     return CBOOL2RVAL(ret);
@@ -90,7 +88,7 @@ rg_m_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE targ
 static VALUE
 rg_m_remove_all(VALUE self, VALUE widget)
 {
-    gtk_selection_remove_all(RVAL2WIDGET(widget));
+    gtk_selection_remove_all(RVAL2GTKWIDGET(widget));
     return self;
 }
 

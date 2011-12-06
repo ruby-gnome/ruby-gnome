@@ -73,7 +73,7 @@ rg_geometry(VALUE self)
     if (ret) {
         return rb_ary_new3(3, GOBJ2RVAL(screen), 
                            GDKRECTANGLE2RVAL(&area),
-                           GENUM2RVAL(orientation, GTK_TYPE_ORIENTATION));
+                           GTKORIENTATION2RVAL(orientation));
     } else {
         return rb_ary_new3(3, Qnil, Qnil, Qnil);
     }

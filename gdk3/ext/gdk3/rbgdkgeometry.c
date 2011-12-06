@@ -72,7 +72,7 @@ rg_set(VALUE self, VALUE min_width, VALUE min_height, VALUE max_width, VALUE max
     geo->height_inc = NUM2INT(height_inc);
     geo->min_aspect = NUM2DBL(min_aspect);
     geo->max_aspect = NUM2DBL(max_aspect);
-    geo->win_gravity = RVAL2GENUM(gravity, GDK_TYPE_GRAVITY);
+    geo->win_gravity = RVAL2GDKGRAVITY(gravity);
 
     return self;
 }
@@ -140,7 +140,7 @@ rg_max_aspect(VALUE self)
 static VALUE
 rg_win_gravity(VALUE self)
 {
-    return GENUM2RVAL(_SELF(self)->win_gravity, GDK_TYPE_GRAVITY);
+    return GDKGRAVITY2RVAL(_SELF(self)->win_gravity);
 }
 
 static VALUE
@@ -216,7 +216,7 @@ rg_set_max_aspect(VALUE self, VALUE max_aspect)
 static VALUE
 rg_set_win_gravity(VALUE self, VALUE gravity)
 {
-    _SELF(self)->win_gravity = RVAL2GENUM(gravity, GDK_TYPE_GRAVITY);
+    _SELF(self)->win_gravity = RVAL2GDKGRAVITY(gravity);
     return self;
 }
 

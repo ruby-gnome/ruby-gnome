@@ -72,7 +72,7 @@ rg_key(VALUE self)
 static VALUE
 rg_mods(VALUE self)
 {
-    return GFLAGS2RVAL(_SELF(self)->accel_mods, GDK_TYPE_MODIFIER_TYPE);
+    return GDKMODIFIERTYPE2RVAL(_SELF(self)->accel_mods);
 }
 
 static VALUE
@@ -91,7 +91,7 @@ rg_set_key(VALUE self, VALUE key)
 static VALUE
 rg_set_mods(VALUE self, VALUE mods)
 {
-    _SELF(self)->accel_mods = RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE);
+    _SELF(self)->accel_mods = RVAL2GDKMODIFIERTYPE(mods);
     return self;
 }
 

@@ -114,7 +114,7 @@ static VALUE
 rg_enable_model_drag_dest(VALUE self, VALUE rbtargets, VALUE rbactions)
 {
     GtkIconView *icon_view = _SELF(self);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
 
@@ -129,8 +129,8 @@ static VALUE
 rg_enable_model_drag_source(VALUE self, VALUE rbstart_button_mask, VALUE rbtargets, VALUE rbactions)
 {
     GtkIconView *icon_view = _SELF(self);
-    GdkModifierType start_button_mask = RVAL2GFLAGS(rbstart_button_mask, GDK_TYPE_MODIFIER_TYPE);
-    GdkDragAction actions = RVAL2GFLAGS(rbactions, GDK_TYPE_DRAG_ACTION);
+    GdkModifierType start_button_mask = RVAL2GDKMODIFIERTYPE(rbstart_button_mask);
+    GdkDragAction actions = RVAL2GDKDRAGACTION(rbactions);
     long n;
     GtkTargetEntry *targets = RVAL2GTKTARGETENTRIES(rbtargets, &n);
 
@@ -157,7 +157,7 @@ rg_get_dest_item(VALUE self, VALUE drag_x, VALUE drag_y)
     GtkIconViewDropPosition pos;
     gboolean item_at_pos = gtk_icon_view_get_dest_item_at_pos(_SELF(self), NUM2INT(drag_x), NUM2INT(drag_y), &path, &pos);
     return item_at_pos ? rb_assoc_new(GTKTREEPATH2RVAL(path),
-                                      GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION)) : Qnil;
+                                      GTKICONVIEWDROPPOSITION2RVAL(pos)) : Qnil;
 }
 
 static VALUE
@@ -167,7 +167,7 @@ rg_drag_dest_item(VALUE self)
     GtkIconViewDropPosition pos;
     gtk_icon_view_get_drag_dest_item(_SELF(self), &path, &pos);
     return rb_assoc_new(GTKTREEPATH2RVAL(path),
-                        GENUM2RVAL(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+                        GTKICONVIEWDROPPOSITION2RVAL(pos));
 }
 
 static VALUE
@@ -215,7 +215,7 @@ rg_set_drag_dest_item(VALUE self, VALUE path, VALUE pos)
 {
     gtk_icon_view_set_drag_dest_item(_SELF(self),
                                      NIL_P(path) ? NULL : RVAL2GTKTREEPATH(path),
-                                     RVAL2GENUM(pos, GTK_TYPE_ICON_VIEW_DROP_POSITION));
+                                     RVAL2GTKICONVIEWDROPPOSITION(pos));
     return self;
 }
 

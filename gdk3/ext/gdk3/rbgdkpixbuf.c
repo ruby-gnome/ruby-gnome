@@ -68,7 +68,7 @@ rg_render_to_drawable(int argc, VALUE *argv, VALUE self)
                                   NUM2INT(src_x), NUM2INT(src_y),
                                   NUM2INT(dest_x), NUM2INT(dest_y),
                                   NUM2INT(width), NUM2INT(height),
-                                  NIL_P(dither) ? GDK_RGB_DITHER_NONE : RVAL2GENUM(dither, GDK_TYPE_RGB_DITHER),
+                                  NIL_P(dither) ? GDK_RGB_DITHER_NONE : RVAL2GDKRGBDITHER(dither),
                                   NIL_P(x_dither) ? 0 : NUM2INT(x_dither), 
                                   NIL_P(y_dither) ? 0 : NUM2INT(y_dither));
     return self;

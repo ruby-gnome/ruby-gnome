@@ -24,8 +24,6 @@
 #define RG_TARGET_NAMESPACE cPrintSettings
 #define _SELF(s) (RVAL2GTKPRINTSETTINGS(s))
 
-#define RVAL2UNIT(o) (RVAL2GENUM(o, GTK_TYPE_UNIT))
-
 static VALUE s_string, s_bool, s_double, s_length, s_int;
 
 static VALUE
@@ -142,14 +140,14 @@ rg_get_length(VALUE self, VALUE key, VALUE unit)
 {
     return rb_float_new(gtk_print_settings_get_length(_SELF(self),
                                                       RVAL2CSTR(key),
-                                                      RVAL2UNIT(unit)));
+                                                      RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 ps_set_length(VALUE self, VALUE key, VALUE value, VALUE unit)
 {
     gtk_print_settings_set_length(_SELF(self), RVAL2CSTR(key),
-                                  NUM2DBL(value), RVAL2UNIT(unit));
+                                  NUM2DBL(value), RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -288,15 +286,14 @@ rg_set_printer(VALUE self, VALUE printer)
 static VALUE
 rg_orientation(VALUE self)
 {
-    return GENUM2RVAL(gtk_print_settings_get_orientation(_SELF(self)), 
-                      GTK_TYPE_PAGE_ORIENTATION);
+    return GTKPAGEORIENTATION2RVAL(gtk_print_settings_get_orientation(_SELF(self)));
 }
 
 static VALUE
 rg_set_orientation(VALUE self, VALUE orientation)
 {
     gtk_print_settings_set_orientation(_SELF(self),
-                                       RVAL2GENUM(orientation, GTK_TYPE_PAGE_ORIENTATION));
+                                       RVAL2GTKPAGEORIENTATION(orientation));
     return self;
 }
 
@@ -318,14 +315,14 @@ static VALUE
 rg_paper_width(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_print_settings_get_paper_width(_SELF(self),
-                                                           RVAL2UNIT(unit)));
+                                                           RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_paper_width(VALUE self, VALUE paper_width, VALUE unit)
 {
     gtk_print_settings_set_paper_width(_SELF(self), NUM2DBL(paper_width),
-                                       RVAL2UNIT(unit));
+                                       RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -333,14 +330,14 @@ static VALUE
 rg_paper_height(VALUE self, VALUE unit)
 {
     return rb_float_new(gtk_print_settings_get_paper_height(_SELF(self),
-                                                            RVAL2UNIT(unit)));
+                                                            RVAL2GTKUNIT(unit)));
 }
 
 static VALUE
 rg_set_paper_height(VALUE self, VALUE paper_height, VALUE unit)
 {
     gtk_print_settings_set_paper_height(_SELF(self), NUM2DBL(paper_height),
-                                        RVAL2UNIT(unit));
+                                        RVAL2GTKUNIT(unit));
     return self;
 }
 
@@ -386,30 +383,28 @@ rg_set_reverse(VALUE self, VALUE reverse)
 static VALUE
 rg_duplex(VALUE self)
 {
-    return GENUM2RVAL(gtk_print_settings_get_duplex(_SELF(self)), 
-                      GTK_TYPE_PRINT_DUPLEX);
+    return GTKPRINTDUPLEX2RVAL(gtk_print_settings_get_duplex(_SELF(self)));
 }
 
 static VALUE
 rg_set_duplex(VALUE self, VALUE duplex)
 {
     gtk_print_settings_set_duplex(_SELF(self), 
-                                  RVAL2GENUM(duplex, GTK_TYPE_PRINT_DUPLEX));
+                                  RVAL2GTKPRINTDUPLEX(duplex));
     return self;
 }
 
 static VALUE
 rg_quality(VALUE self)
 {
-    return GENUM2RVAL(gtk_print_settings_get_quality(_SELF(self)), 
-                      GTK_TYPE_PRINT_QUALITY);
+    return GTKPRINTQUALITY2RVAL(gtk_print_settings_get_quality(_SELF(self)));
 }
 
 static VALUE
 rg_set_quality(VALUE self, VALUE quality)
 {
     gtk_print_settings_set_quality(_SELF(self), 
-                                   RVAL2GENUM(quality, GTK_TYPE_PRINT_QUALITY));
+                                   RVAL2GTKPRINTQUALITY(quality));
     return self;
 }
 
@@ -468,14 +463,13 @@ rg_set_scale(VALUE self, VALUE scale)
 static VALUE
 rg_print_pages(VALUE self)
 {
-    return GENUM2RVAL(gtk_print_settings_get_print_pages(_SELF(self)), 
-                      GTK_TYPE_PRINT_PAGES);
+    return GTKPRINTPAGES2RVAL(gtk_print_settings_get_print_pages(_SELF(self)));
 }
 
 static VALUE
 rg_set_print_pages(VALUE self, VALUE print_pages)
 {
-    gtk_print_settings_set_print_pages(_SELF(self), RVAL2GENUM(print_pages, GTK_TYPE_PRINT_PAGES));
+    gtk_print_settings_set_print_pages(_SELF(self), RVAL2GTKPRINTPAGES(print_pages));
     return self;
 }
 
@@ -569,15 +563,14 @@ rg_set_page_ranges(VALUE self, VALUE rbpage_ranges)
 static VALUE
 rg_page_set(VALUE self)
 {
-    return GENUM2RVAL(gtk_print_settings_get_page_set(_SELF(self)), 
-                      GTK_TYPE_PAGE_SET);
+    return GTKPAGESET2RVAL(gtk_print_settings_get_page_set(_SELF(self)));
 }
 
 static VALUE
 rg_set_page_set(VALUE self, VALUE page_set)
 {
     gtk_print_settings_set_page_set(_SELF(self), 
-                                    RVAL2GENUM(page_set, GTK_TYPE_PAGE_SET));
+                                    RVAL2GTKPAGESET(page_set));
     return self;
 }
 

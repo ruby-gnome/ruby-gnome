@@ -26,7 +26,7 @@
 
 #define RG_TARGET_NAMESPACE cAccelGroup
 #define _SELF(w) RVAL2GTKACCELGROUP(w)
-#define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GFLAGS(mods, GDK_TYPE_MODIFIER_TYPE))
+#define RVAL2MOD(mods) (NIL_P(mods) ? 0 : RVAL2GDKMODIFIERTYPE(mods))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -51,7 +51,7 @@ rg_connect(int argc, VALUE *argv, VALUE self)
         g_rclosure_attach(rclosure, self);
         gtk_accel_group_connect(_SELF(self), NUM2UINT(key),
                                 RVAL2MOD(mods), 
-                                RVAL2GFLAGS(flags, GTK_TYPE_ACCEL_FLAGS),
+                                RVAL2GTKACCELFLAGS(flags),
                                 rclosure);
     } else {
         rb_scan_args(argc, argv, "11", &path, &closure);
