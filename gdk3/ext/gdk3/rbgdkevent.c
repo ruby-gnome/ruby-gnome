@@ -89,7 +89,7 @@ gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
 static VALUE \
 gdkevent ## type ## _ ## name (VALUE self)\
 {\
-    return GDKWINDOW2RVAL(get_gdkevent(self)->type.name);\
+    return GOBJ2RVAL(get_gdkevent(self)->type.name);\
 }\
 static VALUE \
 gdkevent ## type ## _set_ ## name (VALUE self, VALUE val)\
