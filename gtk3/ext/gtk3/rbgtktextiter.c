@@ -628,17 +628,6 @@ rg_operator_compare(VALUE self, VALUE rhs)
     return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
 }
 
-/*
-  The following methods don't have to be implimented.
-  Including Comparable module is enough.
-
-gboolean    gtk_text_iter_in_range          (const GtkTextIter *iter,
-                                             const GtkTextIter *start,
-                                             const GtkTextIter *end);
-void        gtk_text_iter_order             (GtkTextIter *first,
-                                             GtkTextIter *second);
-*/
-
 void
 Init_gtk_textiter(VALUE mGtk)
 {
