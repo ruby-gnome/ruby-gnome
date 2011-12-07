@@ -119,6 +119,12 @@ module Gtk
     define_deprecated_method :pack_end_defaults, :pack_end
   end
 
+  class Button
+    extend GLib::Deprecatable
+    define_deprecated_method :pressed, :warn => "Don't use this method."
+    define_deprecated_method :released, :warn => "Don't use this method."
+  end
+
   class ButtonBox
     extend GLib::Deprecatable
     define_deprecated_enums :Style

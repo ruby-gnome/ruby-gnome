@@ -55,20 +55,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_pressed(VALUE self)
-{
-    gtk_button_pressed(RVAL2GTKBUTTON(self));
-    return self;
-}
-
-static VALUE
-rg_released(VALUE self)
-{
-    gtk_button_released(_SELF(self));
-    return self;
-}
-
-static VALUE
 rg_enter(VALUE self)
 {
     gtk_button_enter(_SELF(self));
@@ -104,8 +90,6 @@ Init_gtk_button(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
-    RG_DEF_METHOD(pressed, 0);
-    RG_DEF_METHOD(released, 0);
     RG_DEF_METHOD(enter, 0);
     RG_DEF_METHOD(leave, 0);
     RG_DEF_METHOD(set_alignment, 2);
