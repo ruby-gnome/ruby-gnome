@@ -104,14 +104,23 @@ rg_has_icon_p(VALUE self, VALUE icon_name)
 }
 
 static VALUE
-rg_lookup_icon(VALUE self, VALUE icon_name, VALUE size, VALUE flags)
+rg_lookup_icon(VALUE self, VALUE icon, VALUE size, VALUE flags)
 {
     GtkIconInfo* info;
 
-    info = gtk_icon_theme_lookup_icon(_SELF(self),
-                                      RVAL2CSTR(icon_name),
-                                      NUM2INT(size),
-                                      RVAL2GTKICONLOOKUPFLAGS(flags));
+    if (TYPE(icon) == T_STRING) {
+        info = gtk_icon_theme_lookup_icon(_SELF(self),
+                                          RVAL2CSTR(icon),
+                                          NUM2INT(size),
+                                          RVAL2GTKICONLOOKUPFLAGS(flags));
+    } else {
+        info = gtk_icon_theme_lookup_by_gicon(_SELF(self),
+                                              RVAL2GICON(icon),
+                                              NUM2INT(size),
+                                              RVAL2GTKICONLOOKUPFLAGS(flags));
+    }
+
+    /* TODO: need gtk_icon_info_free? */
     return GTKICONINFO2RVAL(info);
 }
 
