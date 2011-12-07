@@ -753,7 +753,7 @@ rg_set_startup_id(VALUE self, VALUE startup_id)
 static VALUE
 rg_s_toplevels(G_GNUC_UNUSED VALUE self)
 {
-    return GLIST2ARYF(gdk_window_get_toplevels());
+    return GOBJGLIST2RVAL_FREE(gdk_window_get_toplevels(), g_list_free, NULL);
 }
 */
 

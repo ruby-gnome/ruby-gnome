@@ -33,7 +33,8 @@ rg_s_get(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_displays(VALUE self)
 {
-    return GSLIST2ARYF(gdk_display_manager_list_displays(_SELF(self)));
+    return GOBJGSLIST2RVAL_FREE(gdk_display_manager_list_displays(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 /* Move to Gdk::Display.

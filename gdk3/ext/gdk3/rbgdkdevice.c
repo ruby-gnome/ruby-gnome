@@ -28,7 +28,7 @@
 static VALUE
 rg_s_list(G_GNUC_UNUSED VALUE self)
 {
-    return GLIST2ARY(gdk_devices_list());
+    return GOBJGLIST2RVAL(gdk_devices_list());
 }
 
 static VALUE
