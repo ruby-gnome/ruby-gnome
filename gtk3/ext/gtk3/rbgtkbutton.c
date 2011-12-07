@@ -70,6 +70,12 @@ rg_alignment(VALUE self)
     return rb_assoc_new(rb_float_new(xalign), rb_float_new(yalign));
 }
 
+static VALUE
+rg_event_window(VALUE self)
+{
+    return GOBJ2RVAL(gtk_button_get_event_window(_SELF(self)));
+}
+
 void 
 Init_gtk_button(VALUE mGtk)
 {
@@ -79,4 +85,5 @@ Init_gtk_button(VALUE mGtk)
     RG_DEF_METHOD(set_alignment, 2);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "alignment");
     RG_DEF_METHOD(alignment, 0);
+    RG_DEF_METHOD(event_window, 0);
 }
