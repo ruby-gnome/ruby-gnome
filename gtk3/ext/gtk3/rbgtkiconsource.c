@@ -141,6 +141,20 @@ rg_set_state_wildcarded(VALUE self, VALUE setting)
     return self;
 }
 
+static VALUE
+rg_icon_name(VALUE self)
+{
+    return CSTR2RVAL(gtk_icon_source_get_icon_name(_SELF(self)));
+}
+
+static VALUE
+rg_set_icon_name(VALUE self, VALUE icon_name)
+{
+    gtk_icon_source_set_icon_name(_SELF(self), RVAL2CSTR_ACCEPT_NIL(icon_name));
+
+    return self;
+}
+
 void
 Init_gtk_icon_source(VALUE mGtk)
 {
@@ -165,6 +179,8 @@ Init_gtk_icon_source(VALUE mGtk)
     RG_DEF_METHOD(set_size_wildcarded, 1);
     RG_DEF_METHOD(set_state, 1);
     RG_DEF_METHOD(set_state_wildcarded, 1);
+    RG_DEF_METHOD(icon_name, 0);
+    RG_DEF_METHOD(set_icon_name, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

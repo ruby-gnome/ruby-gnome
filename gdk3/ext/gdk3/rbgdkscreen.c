@@ -139,13 +139,15 @@ rg_height_mm(VALUE self)
 static VALUE
 rg_visuals(VALUE self)
 {
-    return GLIST2ARYF(gdk_screen_list_visuals(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gdk_screen_list_visuals(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE
 rg_toplevel_windows(VALUE self)
 {
-    return GLIST2ARYF(gdk_screen_get_toplevel_windows(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gdk_screen_get_toplevel_windows(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

@@ -118,13 +118,18 @@ rg_pixbuf(VALUE self)
 static VALUE
 rg_marks(VALUE self)
 {
-    return GSLIST2ARYF(gtk_text_iter_get_marks(_SELF(self)));
+    /* need free? */
+    return GOBJGSLIST2RVAL_FREE(gtk_text_iter_get_marks(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
 rg_toggled_tags(VALUE self, VALUE toggled_on)
 {
-    return GSLIST2ARYF(gtk_text_iter_get_toggled_tags(_SELF(self), RVAL2CBOOL(toggled_on)));
+    /* need free? */
+    return GOBJGSLIST2RVAL_FREE(gtk_text_iter_get_toggled_tags(_SELF(self),
+                                                               RVAL2CBOOL(toggled_on)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
@@ -161,7 +166,8 @@ rg_has_tag_p(VALUE self, VALUE tag)
 static VALUE
 rg_tags(VALUE self)
 {
-    return GSLIST2ARYF(gtk_text_iter_get_tags(_SELF(self)));
+    return GOBJGSLIST2RVAL_FREE(gtk_text_iter_get_tags(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
@@ -622,16 +628,11 @@ rg_operator_compare(VALUE self, VALUE rhs)
     return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
 }
 
-/*
-  The following methods don't have to be implimented.
-  Including Comparable module is enough.
-
-gboolean    gtk_text_iter_in_range          (const GtkTextIter *iter,
-                                             const GtkTextIter *start,
-                                             const GtkTextIter *end);
-void        gtk_text_iter_order             (GtkTextIter *first,
-                                             GtkTextIter *second);
-*/
+static VALUE
+rg_inside_sentence(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_inside_sentence(_SELF(self)));
+}
 
 void
 Init_gtk_textiter(VALUE mGtk)
@@ -742,6 +743,7 @@ Init_gtk_textiter(VALUE mGtk)
 
     RG_DEF_METHOD_OPERATOR("==", equal, 1);
     RG_DEF_METHOD_OPERATOR("<=>", compare, 1);
+    RG_DEF_METHOD(inside_sentence, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

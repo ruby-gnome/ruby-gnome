@@ -164,7 +164,7 @@ rg_selected_rows(VALUE self)
 {
     GtkTreeModel* model;
     GList* list = gtk_tree_selection_get_selected_rows(_SELF(self), &model);
-    VALUE ret = GLIST2ARY2(list, GTK_TYPE_TREE_PATH);
+    VALUE ret = BOXEDGLIST2RVAL(list, GTK_TYPE_TREE_PATH);
     g_list_foreach(list, (GFunc)gtk_tree_path_free, (gpointer)NULL);
     g_list_free(list);
     return ret;

@@ -91,8 +91,7 @@ rg_create_tool_item(VALUE self)
 static VALUE
 rg_proxies(VALUE self)
 {
-    /* Owned by GTK+ */
-    return GSLIST2ARY(gtk_action_get_proxies(_SELF(self)));
+    return GOBJGSLIST2RVAL(gtk_action_get_proxies(_SELF(self)));
 }
 
 static VALUE

@@ -24,23 +24,10 @@
 #define RG_TARGET_NAMESPACE cFileChooserWidget
 
 static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+rg_initialize(VALUE self, VALUE action)
 {
-    VALUE action, back;
-    GtkWidget* widget;
+    RBGTK_INITIALIZE(self, gtk_file_chooser_widget_new(RVAL2GTKFILECHOOSERACTION(action)));
 
-    rb_scan_args(argc, argv, "11", &action, &back);
-
-    if (NIL_P(back)){
-        widget = gtk_file_chooser_widget_new(RVAL2GTKFILECHOOSERACTION(action));
-/* deprecated
-    } else {
-        widget = gtk_file_chooser_widget_new_with_backend(RVAL2GTKFILECHOOSERACTION(action),
-                                                          RVAL2CSTR(back));
-*/
-    }
-
-    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -49,5 +36,5 @@ Init_gtk_file_chooser_widget(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_WIDGET, "FileChooserWidget", mGtk);
 
-    RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(initialize, 1);
 }

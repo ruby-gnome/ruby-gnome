@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,37 +18,33 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk3private.h"
+#include "rbgtk3private.h"
 
-#define RG_TARGET_NAMESPACE cDisplayManager
-#define _SELF(obj) RVAL2GDKDISPLAYMANAGER(obj)
-
-static VALUE
-rg_s_get(G_GNUC_UNUSED VALUE self)
-{
-    return GOBJ2RVAL(gdk_display_manager_get());
-}
+#define RG_TARGET_NAMESPACE cNumerableIcon
+#define _SELF(self) (RVAL2GTKNUMERABLEICON(self))
 
 static VALUE
-rg_displays(VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    return GOBJGSLIST2RVAL_FREE(gdk_display_manager_list_displays(_SELF(self)),
-                                g_slist_free, NULL);
+    VALUE base_icon, context;
+    GIcon *icon;
+
+    rb_scan_args(argc, argv, "11", &base_icon, &context);
+
+    if (NIL_P(context))
+        icon = gtk_numerable_icon_new(RVAL2GICON(base_icon));
+    else
+        icon = gtk_numerable_icon_new_with_style_context(RVAL2GICON(base_icon),
+                                                         RVAL2GTKSTYLECONTEXT(context));
+    G_INITIALIZE(self, icon);
+
+    return Qnil;
 }
 
-/* Move to Gdk::Display.
-static VALUE
-gdkdisplaymanager_get_core_pointer(VALUE self)
+void
+Init_gtk_numerableicon(VALUE mGtk)
 {
-    return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
-}
-*/
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_NUMERABLE_ICON, "NumerableIcon", mGtk);
 
-void 
-Init_gtk_gdk_display_manager(VALUE mGdk)
-{
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DisplayManager", mGdk);
-
-    RG_DEF_SMETHOD(get, 0);
-    RG_DEF_METHOD(displays, 0);
+    RG_DEF_METHOD(initialize, -1);
 }

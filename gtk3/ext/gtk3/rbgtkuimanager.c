@@ -50,8 +50,7 @@ rg_remove_action_group(VALUE self, VALUE action_group)
 static VALUE
 rg_action_groups(VALUE self)
 {
-    /* Owned by GTK+ */
-    return GLIST2ARY(gtk_ui_manager_get_action_groups(_SELF(self)));
+    return GOBJGLIST2RVAL(gtk_ui_manager_get_action_groups(_SELF(self)));
 }
 
 static VALUE
@@ -73,8 +72,9 @@ rg_get_widget(VALUE self, VALUE path)
 static VALUE
 rg_get_toplevels(VALUE self, VALUE types)
 {
-    return GSLIST2ARYF(gtk_ui_manager_get_toplevels(_SELF(self), 
-                                                    RVAL2GTKUIMANAGERITEMTYPE(types)));
+    return GOBJGSLIST2RVAL_FREE(gtk_ui_manager_get_toplevels(_SELF(self), 
+                                                             RVAL2GTKUIMANAGERITEMTYPE(types)),
+                                g_slist_free, NULL);
 }
 
 static VALUE

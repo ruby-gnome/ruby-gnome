@@ -67,6 +67,7 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_SCROLL_TYPE, "ScrollType", mGtk);
     G_DEF_CLASS(GTK_TYPE_SELECTION_MODE, "SelectionMode", mGtk);
     G_DEF_CLASS(GTK_TYPE_SHADOW_TYPE, "ShadowType", mGtk);
+    G_DEF_CLASS(GTK_TYPE_STATE_FLAGS, "StateFlags", mGtk);
     G_DEF_CLASS(GTK_TYPE_STATE_TYPE, "StateType", mGtk);
 /* deprecated
     G_DEF_CLASS(GTK_TYPE_SUBMENU_DIRECTION, "SubmenuDirection", mGtk);

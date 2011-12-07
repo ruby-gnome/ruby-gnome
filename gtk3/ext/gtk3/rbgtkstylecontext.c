@@ -233,13 +233,15 @@ rg_invalidate(VALUE self)
 static VALUE
 rg_classes(VALUE self)
 {
-    return GLIST2ARY_STR_FREE(gtk_style_context_list_classes(_SELF(self)));
+    return CSTRGLIST2RVAL_FREE(gtk_style_context_list_classes(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE
 rg_regions(VALUE self)
 {
-    return GLIST2ARY_STR_FREE(gtk_style_context_list_regions(_SELF(self)));
+    return CSTRGLIST2RVAL_FREE(gtk_style_context_list_regions(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

@@ -112,7 +112,7 @@ static VALUE
 rg_s_toplevels(G_GNUC_UNUSED VALUE self)
 {
     GList* list = gtk_window_list_toplevels();
-    VALUE ret = GLIST2ARY(list);
+    VALUE ret = GOBJGLIST2RVAL(list);
     g_list_foreach(list, (GFunc)g_object_ref, NULL);
     g_list_free(list);
     return ret;
@@ -273,7 +273,8 @@ rg_set_mnemonic_modifier(VALUE self, VALUE modifier)
 static VALUE
 rg_s_default_icon_list(G_GNUC_UNUSED VALUE self)
 {
-    return GLIST2ARYF(gtk_window_get_default_icon_list());
+    return GOBJGLIST2RVAL_FREE(gtk_window_get_default_icon_list(),
+                               g_list_free, NULL);
 }
 
 static VALUE
@@ -287,7 +288,8 @@ rg_default_size(VALUE self)
 static VALUE
 rg_icon_list(VALUE self)
 {
-    return GLIST2ARYF(gtk_window_get_icon_list(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gtk_window_get_icon_list(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

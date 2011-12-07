@@ -6,6 +6,8 @@
 #include <vte/reaper.h>
 
 #include <ruby.h>
+#include <rbpango.h>
+#include <rbgdk3.h>
 #include <rbgtk3.h>
 #include "rbvte3conversions.h"
 #ifndef VTE_CHECK_VERSION
