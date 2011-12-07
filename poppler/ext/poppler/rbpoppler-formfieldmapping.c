@@ -28,7 +28,7 @@
 DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
                          RVAL2FFM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
 DEF_ACCESSOR(form_field_mapping, field, RVAL2FFM,
-             POPPLER_FORM_FIELD2RVAL, RVAL2POPPLER_FORM_FIELD)
+             POPPLERFORMFIELD2RVAL, RVAL2POPPLERFORMFIELD)
 
 void
 Init_poppler_formfieldmapping(VALUE mPoppler)

@@ -34,7 +34,7 @@ rectangle_set(PopplerRectangle *rect, VALUE rb_rect)
 DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
                          RVAL2LM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
 DEF_ACCESSOR(link_mapping, action, RVAL2LM,
-             POPPLER_ACTION2RVAL, RVAL2POPPLER_ACTION)
+             POPPLERACTION2RVAL, RVAL2POPPLERACTION)
 
 void
 Init_poppler_linkmapping(VALUE mPoppler)

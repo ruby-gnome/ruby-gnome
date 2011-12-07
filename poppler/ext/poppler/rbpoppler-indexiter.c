@@ -78,7 +78,7 @@ static VALUE
 rg_action(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
-    return POPPLER_ACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
+    return POPPLERACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
 }
 #endif
 

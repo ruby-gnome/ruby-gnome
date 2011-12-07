@@ -35,7 +35,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     mapping = poppler_annot_mapping_new();
     mapping->area = *RVAL2POPPLER_RECT(area);
-    mapping->annot = RVAL2POPPLER_ANNOT(annotation);
+    mapping->annot = RVAL2POPPLERANNOT(annotation);
     G_INITIALIZE(self, mapping);
 
     return Qnil;
@@ -43,7 +43,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
 DEF_ACCESSOR_WITH_SETTER(annot_mapping, area,
                          RVAL2AM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_READER(annot_mapping, annotation, annot, RVAL2AM, POPPLER_ANNOT2RVAL)
+DEF_READER(annot_mapping, annotation, annot, RVAL2AM, POPPLERANNOT2RVAL)
 
 static VALUE
 rg_set_annotation(VALUE self, VALUE annotation)
@@ -54,7 +54,7 @@ rg_set_annotation(VALUE self, VALUE annotation)
     if (mapping->annot)
         g_object_unref(mapping->annot);
 
-    mapping->annot = RVAL2POPPLER_ANNOT(annotation);
+    mapping->annot = RVAL2POPPLERANNOT(annotation);
     return Qnil;
 }
 

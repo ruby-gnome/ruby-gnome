@@ -22,7 +22,7 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cFormField
-#define _SELF(obj) RVAL2POPPLER_FORM_FIELD(obj)
+#define _SELF(obj) RVAL2POPPLERFORMFIELD(obj)
 
 #define FFT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_FIELD_TYPE))
 #define RVAL2FFT(obj) (RVAL2GENUM(obj, POPPLER_TYPE_FORM_FIELD_TYPE))

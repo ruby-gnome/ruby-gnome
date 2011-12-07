@@ -60,7 +60,7 @@ rg_flags(VALUE self)
 static VALUE
 rg_color(VALUE self)
 {
-    return POPPLER_COLOR2RVAL_FREE(poppler_annot_get_color(SELF(self)));
+    return POPPLERCOLOR2RVAL_FREE(poppler_annot_get_color(SELF(self)));
 }
 
 void

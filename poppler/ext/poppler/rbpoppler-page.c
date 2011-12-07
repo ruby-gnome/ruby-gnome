@@ -160,8 +160,8 @@ page_render_selection(VALUE self, VALUE cairo,
                                   RVAL2POPPLER_RECT(selection),
                                   old_selection,
                                   RVAL2SEL_STYLE(style),
-                                  RVAL2POPPLER_COLOR(glyph_color),
-                                  RVAL2POPPLER_COLOR(background_color));
+                                  RVAL2POPPLERCOLOR(glyph_color),
+                                  RVAL2POPPLERCOLOR(background_color));
     return Qnil;
 }
 #endif

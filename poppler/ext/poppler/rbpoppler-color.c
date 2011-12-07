@@ -50,7 +50,7 @@ rb_poppler_ruby_object_from_color_with_free(PopplerColor *color)
 {
     VALUE rb_color;
 
-    rb_color = POPPLER_COLOR2RVAL(color);
+    rb_color = POPPLERCOLOR2RVAL(color);
     g_free(color);
     return rb_color;
 }
@@ -68,15 +68,15 @@ rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
     return Qnil;
 }
 
-DEF_ACCESSOR(color, red, RVAL2POPPLER_COLOR, UINT2NUM, NUM2UINT)
-DEF_ACCESSOR(color, green, RVAL2POPPLER_COLOR, UINT2NUM, NUM2UINT)
-DEF_ACCESSOR(color, blue, RVAL2POPPLER_COLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, red, RVAL2POPPLERCOLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, green, RVAL2POPPLERCOLOR, UINT2NUM, NUM2UINT)
+DEF_ACCESSOR(color, blue, RVAL2POPPLERCOLOR, UINT2NUM, NUM2UINT)
 
 static VALUE
 rg_to_a(VALUE self)
 {
     PopplerColor *color;
-    color = RVAL2POPPLER_COLOR(self);
+    color = RVAL2POPPLERCOLOR(self);
     return rb_ary_new3(3,
                        UINT2NUM(color->red),
                        UINT2NUM(color->green),
@@ -90,7 +90,7 @@ rg_inspect(VALUE self)
     gchar *rgb;
     PopplerColor *color;
 
-    color = RVAL2POPPLER_COLOR(self);
+    color = RVAL2POPPLERCOLOR(self);
     inspected = rb_call_super(0, NULL);
     rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
     rgb = g_strdup_printf(": [%u, %u, %u]>",

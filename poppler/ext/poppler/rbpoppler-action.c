@@ -55,14 +55,14 @@ rb_poppler_action_from_ruby_object(VALUE action)
 static VALUE							\
 action_ ## type ## _ ## name (VALUE self)			\
 {								\
-    return CSTR2RVAL(RVAL2POPPLER_ACTION(self)->type.name);     \
+    return CSTR2RVAL(RVAL2POPPLERACTION(self)->type.name);     \
 }
 
 #define ACTION_ATTR_DEST(type, name)				\
 static VALUE							\
 action_ ## type ## _ ## name (VALUE self)			\
 {								\
-    return DEST2RVAL(RVAL2POPPLER_ACTION(self)->type.name);     \
+    return DEST2RVAL(RVAL2POPPLERACTION(self)->type.name);     \
 }
 
 #define DEFINE_ACCESSOR(prefix, target, name) \
@@ -75,7 +75,7 @@ action_ ## type ## _ ## name (VALUE self)			\
 static VALUE
 action_any_type(VALUE self)
 {
-    return ACTION_TYPE2RVAL(RVAL2POPPLER_ACTION(self)->type);
+    return ACTION_TYPE2RVAL(RVAL2POPPLERACTION(self)->type);
 }
 ACTION_ATTR_STR(any, title);
 

@@ -32,6 +32,8 @@
 #  include "rbpopplerversion.h"
 #endif
 
+#include "rbpopplerconversions.h"
+
 #ifndef POPPLER_TYPE_INDEX_ITER
 #  define POPPLER_TYPE_INDEX_ITER (poppler_index_iter_get_type ())
 #endif
@@ -56,19 +58,7 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #ifdef POPPLER_TYPE_COLOR
 extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
 extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);
-#  define RVAL2POPPLER_COLOR(obj) (rb_poppler_ruby_object_to_color(obj))
-#  define POPPLER_COLOR2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_COLOR))
-#  define POPPLER_COLOR2RVAL_FREE(obj) (rb_poppler_ruby_object_from_color_with_free(obj))
 #endif
-
-
-#define POPPLER_ANNOT2RVAL(obj) (GOBJ2RVAL(obj))
-#define RVAL2POPPLER_ANNOT(obj) (POPPLER_ANNOT(RVAL2GOBJ(obj)))
-
-#define POPPLER_ACTION2RVAL(obj) (rb_poppler_ruby_object_from_action(obj))
-#define RVAL2POPPLER_ACTION(obj) (rb_poppler_action_from_ruby_object(obj))
-#define POPPLER_FORM_FIELD2RVAL(obj) (rb_poppler_ruby_object_from_form_field(obj))
-#define RVAL2POPPLER_FORM_FIELD(obj) (POPPLER_FORM_FIELD(RVAL2GOBJ(obj)))
 
 extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
 extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
