@@ -125,6 +125,8 @@ module Gtk
     define_deprecated_method :leave, :warn => "Don't use this method."
     define_deprecated_method :pressed, :warn => "Don't use this method."
     define_deprecated_method :released, :warn => "Don't use this method."
+    define_deprecated_signal :enter, :warn => "Use 'Gtk::Widget::enter-notify-event' signal."
+    define_deprecated_signal :leave, :warn => "Use 'Gtk::Widget::leave-notify-event' signal."
   end
 
   class ButtonBox
