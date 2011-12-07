@@ -21,6 +21,8 @@
 
 #include "rbpoppler-private.h"
 
+extern void Init_poppler(void);
+
 #define RG_TARGET_NAMESPACE mPoppler
 
 static VALUE
