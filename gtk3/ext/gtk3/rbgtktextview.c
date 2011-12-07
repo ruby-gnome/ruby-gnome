@@ -273,6 +273,35 @@ rg_default_attributes(VALUE self)
     return GTKTEXTATTRIBUTES2RVAL(gtk_text_view_get_default_attributes(_SELF(self)));
 }
 
+static VALUE
+rg_get_cursor_locations(int argc, VALUE *argv, VALUE self)
+{
+    VALUE iter;
+    GdkRectangle strong, weak;
+
+    rb_scan_args(argc, argv, "01", &iter);
+    gtk_text_view_get_cursor_locations(_SELF(self),
+                                       NIL_P(iter) ? NULL : RVAL2GTKTEXTITER(iter),
+                                       &strong, &weak);
+
+    return rb_ary_new3(2, GDKRECTANGLE2RVAL(&strong), GDKRECTANGLE2RVAL(&weak));
+}
+
+static VALUE
+rg_im_context_filter_keypress(VALUE self, VALUE event)
+{
+    return CBOOL2RVAL(gtk_text_view_im_context_filter_keypress(_SELF(self),
+                                                               RVAL2GDKEVENTKEY(event)));
+}
+
+static VALUE
+rg_reset_im_context(VALUE self)
+{
+    gtk_text_view_reset_im_context(_SELF(self));
+
+    return self;
+}
+
 void
 Init_gtk_textview(VALUE mGtk)
 {
@@ -311,6 +340,9 @@ Init_gtk_textview(VALUE mGtk)
     RG_DEF_METHOD(add_child_in_window, 4);
     RG_DEF_METHOD(move_child, 3);
     RG_DEF_METHOD(default_attributes, 0);
+    RG_DEF_METHOD(get_cursor_locations, -1);
+    RG_DEF_METHOD(im_context_filter_keypress, 1);
+    RG_DEF_METHOD(reset_im_context, 0);
 
     G_DEF_CLASS(GTK_TYPE_TEXT_WINDOW_TYPE, "WindowType", RG_TARGET_NAMESPACE);
 
