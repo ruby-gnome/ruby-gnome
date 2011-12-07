@@ -91,7 +91,7 @@ static VALUE
 rg_selected_items(VALUE self)
 {
     GList* list = gtk_icon_view_get_selected_items(_SELF(self));
-    VALUE ret = GLIST2ARY2(list, GTK_TYPE_TREE_PATH);
+    VALUE ret = BOXEDGLIST2RVAL(list, GTK_TYPE_TREE_PATH);
     g_list_foreach(list, (GFunc)gtk_tree_path_free, NULL);
     g_list_free(list);
     return ret;

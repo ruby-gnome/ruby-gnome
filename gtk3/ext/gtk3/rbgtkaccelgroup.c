@@ -176,8 +176,7 @@ rg_s_activate(G_GNUC_UNUSED VALUE self, VALUE obj, VALUE key, VALUE modtype)
 static VALUE
 rg_s_from_object(G_GNUC_UNUSED VALUE self, VALUE object)
 {
-    /* Owned by GTK+ */
-    return GSLIST2ARY(gtk_accel_groups_from_object(RVAL2GOBJ(object)));
+    return GOBJGSLIST2RVAL(gtk_accel_groups_from_object(RVAL2GOBJ(object)));
 }
 
 void 

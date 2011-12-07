@@ -35,7 +35,8 @@ rg_initialize(VALUE self)
 static VALUE
 rg_widgets(VALUE self)
 {
-    return GLIST2ARYF(gtk_text_child_anchor_get_widgets(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gtk_text_child_anchor_get_widgets(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

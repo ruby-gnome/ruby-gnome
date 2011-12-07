@@ -141,7 +141,7 @@ rg_icons(int argc, VALUE *argv, VALUE self)
 
     icons = gtk_icon_theme_list_icons(_SELF(self),
                                       RVAL2CSTR_ACCEPT_NIL(context));
-    return GLIST2ARY_STR_FREE(icons);
+    return CSTRGLIST2RVAL_FREE(icons, g_list_free, g_free);
 }
 
 static VALUE
@@ -224,7 +224,8 @@ rg_choose_icon(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_contexts(VALUE self)
 {
-    return GLIST2ARY_STR_FREE(gtk_icon_theme_list_contexts(_SELF(self)));
+    return CSTRGLIST2RVAL_FREE(gtk_icon_theme_list_contexts(_SELF(self)),
+                               g_list_free, g_free);
 }
 
 void

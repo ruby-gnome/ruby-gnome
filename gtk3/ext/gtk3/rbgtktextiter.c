@@ -118,13 +118,18 @@ rg_pixbuf(VALUE self)
 static VALUE
 rg_marks(VALUE self)
 {
-    return GSLIST2ARYF(gtk_text_iter_get_marks(_SELF(self)));
+    /* need free? */
+    return GOBJGSLIST2RVAL_FREE(gtk_text_iter_get_marks(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
 rg_toggled_tags(VALUE self, VALUE toggled_on)
 {
-    return GSLIST2ARYF(gtk_text_iter_get_toggled_tags(_SELF(self), RVAL2CBOOL(toggled_on)));
+    /* need free? */
+    return GOBJGSLIST2RVAL_FREE(gtk_text_iter_get_toggled_tags(_SELF(self),
+                                                               RVAL2CBOOL(toggled_on)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
@@ -161,7 +166,8 @@ rg_has_tag_p(VALUE self, VALUE tag)
 static VALUE
 rg_tags(VALUE self)
 {
-    return GSLIST2ARYF(gtk_text_iter_get_tags(_SELF(self)));
+    return GOBJGSLIST2RVAL_FREE(gtk_text_iter_get_tags(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 static VALUE

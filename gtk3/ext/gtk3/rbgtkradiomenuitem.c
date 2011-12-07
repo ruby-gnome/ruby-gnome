@@ -118,7 +118,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rmitem_get_group(VALUE self)
 {
-    return GSLIST2ARY(gtk_radio_menu_item_get_group(RVAL2GTKRADIOMENUITEM(self)));
+    return GOBJGSLIST2RVAL(gtk_radio_menu_item_get_group(RVAL2GTKRADIOMENUITEM(self)));
 }
 
 static VALUE
@@ -133,7 +133,7 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
 
     gtk_radio_menu_item_set_group(rmitem2add, group);
 
-    return GSLIST2ARY(gtk_radio_menu_item_get_group(rmitem2add));
+    return GOBJGSLIST2RVAL(gtk_radio_menu_item_get_group(rmitem2add));
 }
 
 void 

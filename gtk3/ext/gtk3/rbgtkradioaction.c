@@ -45,8 +45,7 @@ rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id
 static VALUE
 raction_get_group(VALUE self)
 {
-    /* Owned by GTK+ */
-    return GSLIST2ARY(gtk_radio_action_get_group(_SELF(self)));
+    return GOBJGSLIST2RVAL(gtk_radio_action_get_group(_SELF(self)));
 }
 
 struct rbgtk_rval2gtkradioactiongslist_args {

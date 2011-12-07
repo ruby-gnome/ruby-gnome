@@ -98,7 +98,9 @@ rg_move_item(VALUE self, VALUE uri, VALUE new_uri)
 static VALUE
 rg_items(VALUE self)
 {
-    return GLIST2ARY2F(gtk_recent_manager_get_items(_SELF(self)), GTK_TYPE_RECENT_INFO);
+    return BOXEDGLIST2RVAL_FREE(gtk_recent_manager_get_items(_SELF(self)),
+                                GTK_TYPE_RECENT_INFO,
+                                g_list_free, gtk_recent_info_unref);
 }
 
 static VALUE

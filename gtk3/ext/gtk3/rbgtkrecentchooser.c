@@ -168,7 +168,8 @@ rg_remove_filter(VALUE self, VALUE filter)
 static VALUE
 rg_filters(VALUE self)
 {
-    return GSLIST2ARYF(gtk_recent_chooser_list_filters(_SELF(self)));
+    return GOBJGSLIST2RVAL_FREE(gtk_recent_chooser_list_filters(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 void 

@@ -152,7 +152,9 @@ rg_set_accel_path(VALUE self, VALUE accel_path, VALUE accel_group)
 static VALUE
 rg_accel_closures(VALUE self)
 {
-    return GLIST2ARY2F(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
+    return BOXEDGLIST2RVAL_FREE(gtk_widget_list_accel_closures(_SELF(self)),
+                                G_TYPE_CLOSURE,
+                                g_list_free, NULL);
 }
 
 static VALUE
@@ -618,7 +620,8 @@ rg_thaw_child_notify(VALUE self)
 static VALUE
 rg_mnemonic_labels(VALUE self)
 {
-    return GLIST2ARYF(gtk_widget_list_mnemonic_labels(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gtk_widget_list_mnemonic_labels(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

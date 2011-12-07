@@ -49,7 +49,7 @@ rg_remove_widget(VALUE self, VALUE widget)
 static VALUE
 rg_widgets(VALUE self)
 {
-    return GSLIST2ARY(gtk_size_group_get_widgets(_SELF(self)));
+    return GOBJGSLIST2RVAL(gtk_size_group_get_widgets(_SELF(self)));
 }
 
 void
