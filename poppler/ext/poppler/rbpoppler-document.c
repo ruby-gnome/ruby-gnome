@@ -137,8 +137,9 @@ rg_attachments(VALUE self)
 static VALUE
 rg_find_dest(VALUE self, VALUE link_name)
 {
-    return GOBJ2RVAL(poppler_document_find_dest(RVAL2DOC(self),
-                                                RVAL2CSTR(link_name)));
+    PopplerDest *dest;
+    dest = poppler_document_find_dest(RVAL2DOC(self), RVAL2CSTR(link_name));
+    return POPPLERDEST2RVAL(dest);
 }
 
 static VALUE
