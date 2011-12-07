@@ -121,6 +121,8 @@ module Gtk
 
   class Button
     extend GLib::Deprecatable
+    define_deprecated_method :enter, :warn => "Don't use this method."
+    define_deprecated_method :leave, :warn => "Don't use this method."
     define_deprecated_method :pressed, :warn => "Don't use this method."
     define_deprecated_method :released, :warn => "Don't use this method."
   end

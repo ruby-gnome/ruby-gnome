@@ -55,20 +55,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_enter(VALUE self)
-{
-    gtk_button_enter(_SELF(self));
-    return self;
-}
-
-static VALUE
-rg_leave(VALUE self)
-{
-    gtk_button_leave(_SELF(self));
-    return self;
-}
-
-static VALUE
 rg_set_alignment(VALUE self, VALUE xalign, VALUE yalign)
 {
     gtk_button_set_alignment(_SELF(self), NUM2DBL(xalign), NUM2DBL(yalign));
@@ -90,8 +76,6 @@ Init_gtk_button(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
-    RG_DEF_METHOD(enter, 0);
-    RG_DEF_METHOD(leave, 0);
     RG_DEF_METHOD(set_alignment, 2);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "alignment");
     RG_DEF_METHOD(alignment, 0);
