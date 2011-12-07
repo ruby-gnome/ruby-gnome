@@ -628,6 +628,12 @@ rg_operator_compare(VALUE self, VALUE rhs)
     return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
 }
 
+static VALUE
+rg_inside_sentence(VALUE self)
+{
+    return CBOOL2RVAL(gtk_text_iter_inside_sentence(_SELF(self)));
+}
+
 void
 Init_gtk_textiter(VALUE mGtk)
 {
@@ -737,6 +743,7 @@ Init_gtk_textiter(VALUE mGtk)
 
     RG_DEF_METHOD_OPERATOR("==", equal, 1);
     RG_DEF_METHOD_OPERATOR("<=>", compare, 1);
+    RG_DEF_METHOD(inside_sentence, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
