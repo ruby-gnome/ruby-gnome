@@ -43,7 +43,9 @@ rg_get_action(VALUE self, VALUE action_name)
 static VALUE
 rg_actions(VALUE self)
 {
-    return GLIST2ARYF(gtk_action_group_list_actions(_SELF(self)));
+    /* TODO: need free? */
+    return GOBJGLIST2RVAL_FREE(gtk_action_group_list_actions(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

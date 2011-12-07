@@ -85,7 +85,8 @@ rg_each_forall(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_children(VALUE self)
 {
-   return GLIST2ARYF(gtk_container_get_children(_SELF(self)));
+   return GOBJGLIST2RVAL_FREE(gtk_container_get_children(_SELF(self)),
+                              g_list_free, NULL);
 }
 
 static VALUE
@@ -349,7 +350,7 @@ rg_focus_chain(VALUE self)
     gboolean ret;
     GList *glist = NULL;
     ret = gtk_container_get_focus_chain(_SELF(self), &glist);
-    return GLIST2ARYF(glist);
+    return GOBJGLIST2RVAL_FREE(glist, g_list_free, NULL);
 }
 
 struct rval2gtkwidgetglist_args {

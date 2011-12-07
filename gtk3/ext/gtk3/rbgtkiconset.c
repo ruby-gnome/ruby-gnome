@@ -78,6 +78,14 @@ rg_render_icon(int argc, VALUE *argv, VALUE self)
                                               RVAL2CSTR_ACCEPT_NIL(detail)));
 }
 
+static VALUE
+rg_render_icon_pixbuf(VALUE self, VALUE context, VALUE size)
+{
+    return GOBJ2RVAL(gtk_icon_set_render_icon_pixbuf(_SELF(self),
+                                                     RVAL2GTKSTYLECONTEXT(context),
+                                                     RVAL2GTKICONSIZE(size)));
+}
+
 void
 Init_gtk_icon_set(VALUE mGtk)
 {
@@ -88,4 +96,5 @@ Init_gtk_icon_set(VALUE mGtk)
     RG_DEF_METHOD(add_source, 1);
     RG_DEF_METHOD(sizes, 0);
     RG_DEF_METHOD(render_icon, -1);
+    RG_DEF_METHOD(render_icon_pixbuf, 2);
 }

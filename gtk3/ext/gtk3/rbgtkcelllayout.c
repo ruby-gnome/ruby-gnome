@@ -123,7 +123,8 @@ rg_set_attributes(VALUE self, VALUE cell, VALUE attrs)
 static VALUE
 rg_cells(VALUE self)
 {
-    return GLIST2ARYF(gtk_cell_layout_get_cells(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gtk_cell_layout_get_cells(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 void

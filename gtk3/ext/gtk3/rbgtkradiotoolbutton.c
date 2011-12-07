@@ -103,8 +103,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rbtn_get_group(VALUE self)
 {
-    /* Owned by GTK+ */
-    return GSLIST2ARY(gtk_radio_tool_button_get_group(_SELF(self)));
+    return GOBJGSLIST2RVAL(gtk_radio_tool_button_get_group(_SELF(self)));
 }
 
 static VALUE

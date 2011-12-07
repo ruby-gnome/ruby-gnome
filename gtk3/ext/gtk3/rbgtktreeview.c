@@ -166,7 +166,8 @@ rg_get_column(VALUE self, VALUE num)
 static VALUE
 rg_columns(VALUE self)
 {
-    return GLIST2ARYF(gtk_tree_view_get_columns(_SELF(self)));
+    return GOBJGLIST2RVAL_FREE(gtk_tree_view_get_columns(_SELF(self)),
+                               g_list_free, NULL);
 }
 
 static VALUE

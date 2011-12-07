@@ -99,7 +99,8 @@ rg_get_object(VALUE self, VALUE name)
 static VALUE
 rg_objects(VALUE self)
 {
-    return GSLIST2ARY_FREE(gtk_builder_get_objects(_SELF(self)));
+    return GOBJGSLIST2RVAL_FREE(gtk_builder_get_objects(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 static void

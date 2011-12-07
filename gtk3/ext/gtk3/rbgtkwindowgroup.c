@@ -64,7 +64,7 @@ static VALUE
 rg_windows(VALUE self)
 {
     /* TODO: need free? */
-    return GLIST2ARY(gtk_window_group_list_windows(_SELF(self)));
+    return GOBJGLIST2RVAL(gtk_window_group_list_windows(_SELF(self)));
 }
 
 void 

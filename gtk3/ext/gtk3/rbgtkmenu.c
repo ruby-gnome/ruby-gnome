@@ -147,8 +147,7 @@ rg_detach(VALUE self)
 static VALUE
 rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
-    /* Owned by GTK+ */
-    return GLIST2ARY(gtk_menu_get_for_attach_widget(RVAL2GTKWIDGET(widget)));
+    return GOBJGLIST2RVAL(gtk_menu_get_for_attach_widget(RVAL2GTKWIDGET(widget)));
 }
 
 void 

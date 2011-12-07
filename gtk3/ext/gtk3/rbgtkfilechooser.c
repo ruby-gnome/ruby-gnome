@@ -106,7 +106,8 @@ rg_unselect_all(VALUE self)
 static VALUE
 rg_filenames(VALUE self)
 {
-    return CSTRFILENAMEARRAY2RVAL_FREE(gtk_file_chooser_get_filenames(_SELF(self)));
+    return FILENAMEGSLIST2RVAL_FREE(gtk_file_chooser_get_filenames(_SELF(self)),
+                                    g_slist_free, g_free);
 }
 
 static VALUE
@@ -199,7 +200,8 @@ rg_remove_filter(VALUE self, VALUE filter)
 static VALUE
 rg_filters(VALUE self)
 {
-    return GSLIST2ARYF(gtk_file_chooser_list_filters(_SELF(self)));
+    return GOBJGSLIST2RVAL_FREE(gtk_file_chooser_list_filters(_SELF(self)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
@@ -231,7 +233,8 @@ rg_remove_shortcut_folder(VALUE self, VALUE rbfolder)
 static VALUE
 rg_shortcut_folders(VALUE self)
 {
-    return CSTRFILENAMEARRAY2RVAL_FREE(gtk_file_chooser_list_shortcut_folders(_SELF(self)));
+    return FILENAMEGSLIST2RVAL_FREE(gtk_file_chooser_list_shortcut_folders(_SELF(self)),
+                                    g_slist_free, g_free);
 }
 
 static VALUE
