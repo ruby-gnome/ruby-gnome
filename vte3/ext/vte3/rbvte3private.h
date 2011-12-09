@@ -6,6 +6,7 @@
 #include <vte/reaper.h>
 
 #include <ruby.h>
+#include <gio2.h>
 #include <rbpango.h>
 #include <rbgdk3.h>
 #include <rbgtk3.h>
