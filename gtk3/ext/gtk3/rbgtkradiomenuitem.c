@@ -40,7 +40,7 @@ rbgtk_rval2gtkradiomenuitemgslist_body(VALUE value)
     struct rbgtk_rval2gtkradiomenuitemgslist_args *args = (struct rbgtk_rval2gtkradiomenuitemgslist_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result = g_slist_append(args->result, GTK_RADIO_MENU_ITEM(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+        args->result = g_slist_append(args->result, RVAL2GTKRADIOMENUITEM(RARRAY_PTR(args->ary)[i]));
 
     return Qnil;
 }
@@ -128,7 +128,7 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
     GSList *group;
 
     rmitem2add = RVAL2GTKRADIOMENUITEM(self);
-    rmitem_orig = GTK_RADIO_MENU_ITEM(RVAL2GOBJ(rb_ary_entry(grp_ary, 0)));
+    rmitem_orig = RVAL2GTKRADIOMENUITEM(rb_ary_entry(grp_ary, 0));
     group = gtk_radio_menu_item_get_group(rmitem_orig);
 
     gtk_radio_menu_item_set_group(rmitem2add, group);

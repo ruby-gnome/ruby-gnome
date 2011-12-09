@@ -56,14 +56,12 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         if (rb_obj_is_kind_of
         (val, GTYPE2CLASS (GTK_TYPE_TEXT_TAG_TABLE))) {
         G_INITIALIZE (self,
-                  gtk_source_buffer_new (GTK_TEXT_TAG_TABLE
-                             (RVAL2GOBJ (val))));
+                  gtk_source_buffer_new(RVAL2GTKTEXTTAGTABLE(val)));
     } else
         if (rb_obj_is_kind_of
         (val, GTYPE2CLASS (GTK_SOURCE_TYPE_LANGUAGE))) {
         G_INITIALIZE (self,
-                  gtk_source_buffer_new_with_language
-                  (GTK_SOURCE_LANGUAGE (RVAL2GOBJ (val))));
+                  gtk_source_buffer_new_with_language(RVAL2GTKSOURCELANGUAGE(val)));
     } else {
         rb_raise (rb_eArgError,
               "invalid argument %s (expect nil, Gtk::TextTagTable or Gtk::SourceLanguage)",

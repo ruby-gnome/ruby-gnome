@@ -25,12 +25,12 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cBin
+#define _SELF(self) (RVAL2GTKBIN(self))
 
 static VALUE
 rg_child(VALUE self)
 {
-    GtkWidget *child = gtk_bin_get_child(RVAL2GOBJ(self));
-    return child ? GOBJ2RVAL(child) : Qnil;
+    return GOBJ2RVAL(gtk_bin_get_child(_SELF(self)));
 }
 
 void 

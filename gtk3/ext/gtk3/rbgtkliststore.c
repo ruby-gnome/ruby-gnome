@@ -179,16 +179,6 @@ rg_set_values(VALUE self, VALUE iter, VALUE values)
     return self;
 }
 
-/*
-  void        gtk_tree_store_set (GtkTreeStore *tree_store,
-  GtkTreeIter *iter,
-  ...);
-
-  void        gtk_tree_store_set_valist       (GtkTreeStore *tree_store,
-  GtkTreeIter *iter,
-  va_list var_args);
-*/
-
 static VALUE
 rg_remove(VALUE self, VALUE iter)
 {

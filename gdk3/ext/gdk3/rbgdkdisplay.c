@@ -298,7 +298,7 @@ rg_core_pointer(VALUE self)
 static VALUE
 rg_warp_pointer(VALUE self, VALUE screen, VALUE x, VALUE y)
 {
-    gdk_display_warp_pointer(_SELF(self), RVAL2GOBJ(screen), NUM2INT(x), NUM2INT(y));
+    gdk_display_warp_pointer(_SELF(self), RVAL2GDKSCREEN(screen), NUM2INT(x), NUM2INT(y));
     return self;
 }
 

@@ -183,7 +183,8 @@ rg_get_window(VALUE self, VALUE wintype)
 static VALUE
 rg_get_window_type(VALUE self, VALUE gdkwin)
 {
-    return GTKTEXTWINDOWTYPE2RVAL(gtk_text_view_get_window_type(_SELF(self), RVAL2GOBJ(gdkwin)));
+    return GTKTEXTWINDOWTYPE2RVAL(gtk_text_view_get_window_type(_SELF(self),
+                                                                RVAL2GDKWINDOW(gdkwin)));
 }
 
 static VALUE

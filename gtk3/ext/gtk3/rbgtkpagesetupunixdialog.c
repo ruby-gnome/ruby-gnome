@@ -53,7 +53,7 @@ static VALUE
 rg_set_page_setup(VALUE self, VALUE page_setup)
 {
     gtk_page_setup_unix_dialog_set_page_setup(_SELF(self),
-                                              RVAL2GOBJ(page_setup));
+                                              RVAL2GTKPAGESETUP(page_setup));
     return self;
 }
 
@@ -67,7 +67,7 @@ static VALUE
 rg_set_print_settings(VALUE self, VALUE print_settings)
 {
     gtk_page_setup_unix_dialog_set_print_settings(_SELF(self),
-                                                  RVAL2GOBJ(print_settings));
+                                                  RVAL2GTKPRINTSETTINGS(print_settings));
     return Qnil;
 }
 

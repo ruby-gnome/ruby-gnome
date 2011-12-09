@@ -34,7 +34,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_append_menuitems(VALUE self, VALUE menushell)
 {
-    gtk_im_multicontext_append_menuitems(_SELF(self), RVAL2GOBJ(menushell));
+    gtk_im_multicontext_append_menuitems(_SELF(self), RVAL2GTKMENUSHELL(menushell));
     return self;
 }
 

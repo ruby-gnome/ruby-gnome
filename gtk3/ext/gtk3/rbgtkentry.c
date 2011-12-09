@@ -85,7 +85,7 @@ rg_cursor_hadjustment(VALUE self)
 static VALUE
 rg_set_cursor_hadjustment(VALUE self, VALUE adjustment)
 {
-    gtk_entry_set_cursor_hadjustment(_SELF(self), RVAL2GOBJ(adjustment));
+    gtk_entry_set_cursor_hadjustment(_SELF(self), RVAL2GTKADJUSTMENT(adjustment));
     return self;
 }
 

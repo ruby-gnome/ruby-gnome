@@ -119,6 +119,18 @@ module Gtk
     define_deprecated_method :pack_end_defaults, :pack_end
   end
 
+  class Button
+    extend GLib::Deprecatable
+    define_deprecated_method :enter, :warn => "Don't use this method."
+    define_deprecated_method :leave, :warn => "Don't use this method."
+    define_deprecated_method :pressed, :warn => "Don't use this method."
+    define_deprecated_method :released, :warn => "Don't use this method."
+    define_deprecated_signal :enter, :warn => "Use 'Gtk::Widget::enter-notify-event' signal."
+    define_deprecated_signal :leave, :warn => "Use 'Gtk::Widget::leave-notify-event' signal."
+    define_deprecated_signal :pressed, :warn => "Use 'Gtk::Widget::button-press-event' signal."
+    define_deprecated_signal :released, :warn => "Use 'Gtk::Widget::button-release-event' signal."
+  end
+
   class ButtonBox
     extend GLib::Deprecatable
     define_deprecated_enums :Style
@@ -259,6 +271,11 @@ module Gtk
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new'." do |_self|
       Gtk::Separator.new(:horizontal)
     end
+  end
+
+  module IconSet
+    extend GLib::Deprecatable
+    define_deprecated_method :render_icon, :raise => "Use '#{self}#render_icon_pixbuf'."
   end
 
   module IconSize

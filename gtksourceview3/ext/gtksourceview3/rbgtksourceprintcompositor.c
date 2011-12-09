@@ -40,11 +40,11 @@ rg_initialize(VALUE self, VALUE val)
 {
     if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_SOURCE_TYPE_BUFFER))) {
        G_INITIALIZE(self,
-           gtk_source_print_compositor_new (GTK_SOURCE_BUFFER (RVAL2GOBJ (val))));
+           gtk_source_print_compositor_new (RVAL2GTKSOURCEBUFFER(val)));
     } else
         if (rb_obj_is_kind_of (val, GTYPE2CLASS (GTK_SOURCE_TYPE_VIEW))) {
             G_INITIALIZE(self,
-                gtk_source_print_compositor_new_from_view (GTK_SOURCE_VIEW (RVAL2GOBJ (val))));
+                gtk_source_print_compositor_new_from_view (RVAL2GTKSOURCEVIEW(val)));
     } else {
         rb_raise (rb_eArgError,
             "invalid argument %s (expect Gtk::SourceBuffer or Gtk::SourceView)",
@@ -131,7 +131,7 @@ static VALUE
 rg_paginate(VALUE self, VALUE context)
 {
     return CBOOL2RVAL (gtk_source_print_compositor_paginate (_SELF (self),
-                                        GTK_PRINT_CONTEXT (RVAL2GOBJ (context))));
+                                                             RVAL2GTKPRINTCONTEXT(context)));
 }
 
 static VALUE
@@ -144,7 +144,7 @@ static VALUE
 rg_draw_page(VALUE self, VALUE context, VALUE page_nr)
 {
     gtk_source_print_compositor_draw_page (_SELF (self),
-                                           GTK_PRINT_CONTEXT (RVAL2GOBJ (context)),
+                                           RVAL2GTKPRINTCONTEXT(context),
                                            NUM2INT (page_nr));
     return self;
 }

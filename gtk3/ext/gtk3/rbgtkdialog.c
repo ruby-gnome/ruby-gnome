@@ -194,7 +194,7 @@ rg_action_area(VALUE self)
 static VALUE
 rg_get_response(VALUE self, VALUE widget)
 {
-    return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GOBJ(widget)));
+    return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GTKWIDGET(widget)));
 }
 
 static VALUE

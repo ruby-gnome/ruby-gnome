@@ -39,7 +39,7 @@ rbgtk_rval2gtkradiotoolbuttongslist_body(VALUE value)
     struct rbgtk_rval2gtkradiotoolbuttongslist_args *args = (struct rbgtk_rval2gtkradiotoolbuttongslist_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result = g_slist_append(args->result, GTK_RADIO_MENU_ITEM(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+        args->result = g_slist_append(args->result, RVAL2GTKRADIOMENUITEM(RARRAY_PTR(args->ary)[i]));
 
     return Qnil;
 }
