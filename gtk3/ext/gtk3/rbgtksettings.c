@@ -78,7 +78,7 @@ rg_s_install_property(VALUE self, VALUE spec)
 static VALUE
 settings_rc_property_parse(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring, GtkRcPropertyParser parser)
 {
-    GParamSpec *spec = RVAL2GOBJ(rbspec);
+    GParamSpec *spec = RVAL2GPARAMSPEC(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
     GValue property = G_VALUE_INIT;
     gboolean parsed;
@@ -113,7 +113,7 @@ rg_s_rc_property_parse_flags(VALUE self, VALUE rbspec, VALUE rbstring)
 static VALUE
 rg_s_rc_property_parse_requisition(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
 {
-    GParamSpec *spec = RVAL2GOBJ(rbspec);
+    GParamSpec *spec = RVAL2GPARAMSPEC(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
     GValue property = G_VALUE_INIT;
     gboolean parsed;
@@ -156,7 +156,7 @@ settings_rc_property_parse_border_ensure(VALUE value)
 static VALUE
 rg_s_rc_property_parse_border(G_GNUC_UNUSED VALUE self, VALUE rbspec, VALUE rbstring)
 {
-    GParamSpec *spec = RVAL2GOBJ(rbspec);
+    GParamSpec *spec = RVAL2GPARAMSPEC(rbspec);
     GString *string = g_string_new(RVAL2CSTR(rbstring));
     GValue property = G_VALUE_INIT;
     gboolean parsed;

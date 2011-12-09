@@ -61,9 +61,24 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+static VALUE
+rg_minus_button(VALUE self)
+{
+    return GOBJ2RVAL(gtk_scale_button_get_minus_button(_SELF(self)));
+}
+
+static VALUE
+rg_plus_button(VALUE self)
+{
+    return GOBJ2RVAL(gtk_scale_button_get_plus_button(_SELF(self)));
+}
+
 void 
 Init_gtk_scalebutton(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);
+
     RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(minus_button, 0);
+    RG_DEF_METHOD(plus_button, 0);
 }

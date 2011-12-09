@@ -37,6 +37,7 @@
 #define RVAL2GTKARROW(o)                   (GTK_ARROW(RVAL2GOBJ(o)))
 #define RVAL2GTKASPECTFRAME(o)             (GTK_ASPECT_FRAME(RVAL2GOBJ(o)))
 #define RVAL2GTKASSISTANT(o)               (GTK_ASSISTANT(RVAL2GOBJ(o)))
+#define RVAL2GTKBIN(o)                     (GTK_BIN(RVAL2GOBJ(o)))
 #define RVAL2GTKBOX(o)                     (GTK_BOX(RVAL2GOBJ(o)))
 #define RVAL2GTKBUILDABLE(o)               (GTK_BUILDABLE(RVAL2GOBJ(o)))
 #define RVAL2GTKBUILDER(o)                 (GTK_BUILDER(RVAL2GOBJ(o)))

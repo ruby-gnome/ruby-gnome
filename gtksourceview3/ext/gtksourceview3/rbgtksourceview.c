@@ -50,7 +50,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(buffer))
         widget = gtk_source_view_new();
     else
-        widget = gtk_source_view_new_with_buffer(RVAL2GOBJ(buffer));
+        widget = gtk_source_view_new_with_buffer(RVAL2GTKSOURCEBUFFER(buffer));
 
     RBGTK_INITIALIZE(self, widget);
     return self;

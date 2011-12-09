@@ -368,7 +368,7 @@ rg_set_background_image(VALUE self, VALUE image_or_path)
                                                RVAL2CSTR(image_or_path));
     } else {
         vte_terminal_set_background_image(_SELF(self),
-                                          RVAL2GOBJ(image_or_path));
+                                          RVAL2GDKPIXBUF(image_or_path));
     }
 
     return self;
@@ -461,7 +461,7 @@ rg_set_scrollback_lines(VALUE self, VALUE lines)
 static VALUE
 rg_im_append_menuitems(VALUE self, VALUE menushell)
 {
-    vte_terminal_im_append_menuitems(_SELF(self), RVAL2GOBJ(menushell));
+    vte_terminal_im_append_menuitems(_SELF(self), RVAL2GTKMENUSHELL(menushell));
     return self;
 }
 
@@ -661,7 +661,7 @@ static VALUE
 rg_match_set_cursor(VALUE self, VALUE tag, VALUE cursor)
 {
     if (NIL_P(cursor) || RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR) {
-        vte_terminal_match_set_cursor(_SELF(self), NUM2INT(tag), RVAL2GOBJ(cursor));
+        vte_terminal_match_set_cursor(_SELF(self), NUM2INT(tag), RVAL2GDKCURSOR(cursor));
     } else if (RVAL2GTYPE(cursor) == GDK_TYPE_CURSOR_TYPE) {
         vte_terminal_match_set_cursor_type(_SELF(self), NUM2INT(tag), RVAL2GDKCURSORTYPE(cursor));
     } else {
@@ -842,10 +842,10 @@ rg_write_contents(int argc, VALUE *argv, VALUE self)
     GError *error = NULL;
 
     rb_scan_args(argc, argv, "21", &stream, &flags, &rb_cancellable);
-    cancellable = NIL_P(rb_cancellable) ? NULL : RVAL2GOBJ(rb_cancellable);
+    cancellable = NIL_P(rb_cancellable) ? NULL : RVAL2GCANCELLABLE(rb_cancellable);
 
     result = vte_terminal_write_contents(_SELF(self),
-                                        RVAL2GOBJ(stream),
+                                        RVAL2GOUTPUTSTREAM(stream),
                                         RVAL2VTETERMINALWRITEFLAGS(flags),
                                         cancellable,
                                         &error);

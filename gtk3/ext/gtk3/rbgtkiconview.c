@@ -205,8 +205,10 @@ rg_scroll_to_path(VALUE self, VALUE path, VALUE use_align, VALUE row_align, VALU
 static VALUE
 rg_set_cursor(VALUE self, VALUE path, VALUE cell, VALUE start_editing)
 {
-    gtk_icon_view_set_cursor(_SELF(self), RVAL2GTKTREEPATH(path),
-                             NIL_P(cell) ? NULL : RVAL2GOBJ(cell), RVAL2CBOOL(start_editing));
+    gtk_icon_view_set_cursor(_SELF(self),
+                             RVAL2GTKTREEPATH(path),
+                             NIL_P(cell) ? NULL : RVAL2GTKCELLRENDERER(cell),
+                             RVAL2CBOOL(start_editing));
     return self;
 }
 

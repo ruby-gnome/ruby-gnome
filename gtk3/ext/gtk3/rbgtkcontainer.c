@@ -366,7 +366,7 @@ rbg_rval2gtkwidgetglist_body(VALUE value)
     struct rval2gtkwidgetglist_args *args = (struct rval2gtkwidgetglist_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result = g_list_append(args->result, GTK_WIDGET(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+        args->result = g_list_append(args->result, RVAL2GTKWIDGET(RARRAY_PTR(args->ary)[i]));
 
     return Qnil;
 }

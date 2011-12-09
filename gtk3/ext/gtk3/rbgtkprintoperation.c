@@ -44,7 +44,8 @@ rg_run(int argc, VALUE *argv, VALUE self)
 
     result = gtk_print_operation_run(_SELF(self), 
                                      RVAL2GTKPRINTOPERATIONACTION(action),
-                                     RVAL2GOBJ(parent), &error);
+                                     RVAL2GTKWINDOW(parent),
+                                     &error);
 
     rb_result = GTKPRINTOPERATIONRESULT2RVAL(result);
     if (rb_block_given_p()) {
@@ -113,16 +114,16 @@ rg_s_run_page_setup_dialog(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (rb_block_given_p()) {
         volatile VALUE func = rb_block_proc();
         G_CHILD_SET(RG_TARGET_NAMESPACE, rb_intern("setup_done_cb"), func);
-        gtk_print_run_page_setup_dialog_async(RVAL2GOBJ(parent),
-                                              RVAL2GOBJ(page_setup),
-                                              RVAL2GOBJ(settings),
+        gtk_print_run_page_setup_dialog_async(RVAL2GTKWINDOW(parent),
+                                              RVAL2GTKPAGESETUP(page_setup),
+                                              RVAL2GTKPRINTSETTINGS(settings),
                                               page_setup_done_cb,
                                               (gpointer)func);
         return Qnil;
     } else {
-        return GOBJ2RVALU(gtk_print_run_page_setup_dialog(RVAL2GOBJ(parent),
-                                                          RVAL2GOBJ(page_setup),
-                                                          RVAL2GOBJ(settings)));
+        return GOBJ2RVALU(gtk_print_run_page_setup_dialog(RVAL2GTKWINDOW(parent),
+                                                          RVAL2GTKPAGESETUP(page_setup),
+                                                          RVAL2GTKPRINTSETTINGS(settings)));
     }
 }
 
