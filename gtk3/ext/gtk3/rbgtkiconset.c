@@ -64,21 +64,6 @@ rg_sizes(VALUE self)
 }
 
 static VALUE
-rg_render_icon(int argc, VALUE *argv, VALUE self)
-{
-    VALUE style, direction, state, size, widget, detail;
-
-    rb_scan_args(argc, argv, "42", &style, &direction, &state, &size, &widget, &detail);
-    return GOBJ2RVAL(gtk_icon_set_render_icon(_SELF(self),
-                                              RVAL2GOBJ(style),
-                                              RVAL2GTKTEXTDIRECTION(direction),
-                                              RVAL2GTKSTATETYPE(state),
-                                              RVAL2GTKICONSIZE(size),
-                                              NIL_P(widget) ? NULL : RVAL2GOBJ(widget),
-                                              RVAL2CSTR_ACCEPT_NIL(detail)));
-}
-
-static VALUE
 rg_render_icon_pixbuf(VALUE self, VALUE context, VALUE size)
 {
     return GOBJ2RVAL(gtk_icon_set_render_icon_pixbuf(_SELF(self),
@@ -95,6 +80,5 @@ Init_gtk_icon_set(VALUE mGtk)
 
     RG_DEF_METHOD(add_source, 1);
     RG_DEF_METHOD(sizes, 0);
-    RG_DEF_METHOD(render_icon, -1);
     RG_DEF_METHOD(render_icon_pixbuf, 2);
 }
