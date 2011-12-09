@@ -118,7 +118,7 @@ rg_set_accel_path(VALUE self, VALUE accel_path)
 static VALUE
 rg_set_accel_group(VALUE self, VALUE accel_group)
 {
-    gtk_action_set_accel_group(_SELF(self), RVAL2GOBJ(accel_group));
+    gtk_action_set_accel_group(_SELF(self), RVAL2GTKACCELGROUP(accel_group));
     return self;
 }
 

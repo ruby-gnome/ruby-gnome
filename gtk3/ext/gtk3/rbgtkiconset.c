@@ -35,7 +35,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if(NIL_P(pixbuf))
         icon_set = gtk_icon_set_new();
     else
-        icon_set = gtk_icon_set_new_from_pixbuf(RVAL2GOBJ(pixbuf));
+        icon_set = gtk_icon_set_new_from_pixbuf(RVAL2GDKPIXBUF(pixbuf));
 
     G_INITIALIZE(self, icon_set);
     return Qnil;

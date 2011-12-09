@@ -34,7 +34,9 @@ rg_initialize(VALUE self)
 static VALUE
 rg_insert_action_group(VALUE self, VALUE action_group, VALUE pos)
 {
-    gtk_ui_manager_insert_action_group(_SELF(self), RVAL2GOBJ(action_group), NUM2INT(pos));
+    gtk_ui_manager_insert_action_group(_SELF(self),
+                                       RVAL2GTKACTIONGROUP(action_group),
+                                       NUM2INT(pos));
     G_CHILD_ADD(self, action_group);
     return self;
 }
@@ -42,7 +44,7 @@ rg_insert_action_group(VALUE self, VALUE action_group, VALUE pos)
 static VALUE
 rg_remove_action_group(VALUE self, VALUE action_group)
 {
-    gtk_ui_manager_remove_action_group(_SELF(self), RVAL2GOBJ(action_group));
+    gtk_ui_manager_remove_action_group(_SELF(self), RVAL2GTKACTIONGROUP(action_group));
     G_CHILD_REMOVE(self, action_group);
     return self;
 }

@@ -61,7 +61,7 @@ rbgtk_rval2gtkradioactiongslist_body(VALUE value)
     struct rbgtk_rval2gtkradioactiongslist_args *args = (struct rbgtk_rval2gtkradioactiongslist_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result = g_slist_append(args->result, GTK_RADIO_ACTION(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+        args->result = g_slist_append(args->result, RVAL2GTKRADIOACTION(RARRAY_PTR(args->ary)[i]));
 
     return Qnil;
 }

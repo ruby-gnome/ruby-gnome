@@ -56,8 +56,8 @@ static VALUE
 rg_add_custom_tab(VALUE self, VALUE child, VALUE tab_label)
 {
     gtk_print_unix_dialog_add_custom_tab(_SELF(self),
-                                         RVAL2GOBJ(child),
-                                         RVAL2GOBJ(tab_label));
+                                         RVAL2GTKWIDGET(child),
+                                         RVAL2GTKWIDGET(tab_label));
     return self;
 }
 

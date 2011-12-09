@@ -592,7 +592,7 @@ rg_search_entry(VALUE self)
 static VALUE
 rg_set_search_entry(VALUE self, VALUE entry)
 {
-    gtk_tree_view_set_search_entry(_SELF(self), RVAL2GOBJ(entry));
+    gtk_tree_view_set_search_entry(_SELF(self), RVAL2GTKENTRY(entry));
     return self;
 }
 

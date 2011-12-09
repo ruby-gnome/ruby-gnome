@@ -29,7 +29,7 @@
 static VALUE
 rg_child(VALUE self)
 {
-    GtkWidget *child = gtk_bin_get_child(RVAL2GOBJ(self));
+    GtkWidget *child = gtk_bin_get_child(RVAL2GTKBIN(self));
     return child ? GOBJ2RVAL(child) : Qnil;
 }
 
