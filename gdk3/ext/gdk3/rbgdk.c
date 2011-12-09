@@ -143,7 +143,7 @@ rbgdk_rval2gdkpixbufglist_body(VALUE value)
     struct rval2gdkpixbufglist_args *args = (struct rval2gdkpixbufglist_args *)value;
 
     for (i = 0; i < args->n; i++)
-        args->result = g_list_append(args->result, GDK_PIXBUF(RVAL2GOBJ(RARRAY_PTR(args->ary)[i])));
+        args->result = g_list_append(args->result, RVAL2GDKPIXBUF(RARRAY_PTR(args->ary)[i]));
 
     return Qnil;
 }
