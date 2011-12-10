@@ -58,11 +58,6 @@ rg_set_select_function(VALUE self)
     return self;
 }
 
-/* We don't need this(?)
-gpointer    gtk_tree_selection_get_user_data
-(GtkTreeSelection *selection);
-*/
-
 static VALUE
 rg_tree_view(VALUE self)
 {

@@ -98,19 +98,6 @@ rg_get_value(VALUE self, VALUE iter, VALUE column)
     return ret;
 }
 
-/* These methods may be neededless.
-void        gtk_tree_model_ref_node (GtkTreeModel *tree_model,
-                                             GtkTreeIter *iter);
-void        gtk_tree_model_unref_node (GtkTreeModel *tree_model,
-                                             GtkTreeIter *iter);
-*/
-
-/* XXXX
-void        gtk_tree_model_get_valist (GtkTreeModel *tree_model,
-                                             GtkTreeIter *iter,
-                                             va_list var_args);
-*/
-
 static gboolean
 treemodel_foreach_func(GtkTreeModel *model,
                        GtkTreePath *path,
