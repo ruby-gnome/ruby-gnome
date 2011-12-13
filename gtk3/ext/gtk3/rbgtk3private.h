@@ -78,6 +78,7 @@ G_GNUC_INTERNAL void Init_gtk_appchooser(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserwidget(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_application(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_arrow(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_aspect_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_assistant(VALUE mGtk);
