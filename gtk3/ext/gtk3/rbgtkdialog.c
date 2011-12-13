@@ -30,13 +30,8 @@
 static VALUE
 rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
 {
-    const gchar *name;
-    if (SYMBOL_P(button_text)) {
-        name = rb_id2name(SYM2ID(button_text));
-    } else {
-        name = RVAL2CSTR(button_text);
-    }
-    return GOBJ2RVAL(gtk_dialog_add_button(_SELF(self), name, 
+    return GOBJ2RVAL(gtk_dialog_add_button(_SELF(self),
+                                           RVAL2CSTR_ACCEPT_SYMBOL(button_text), 
                                            RVAL2GTKRESPONSETYPE(response_id)));
 }
 
