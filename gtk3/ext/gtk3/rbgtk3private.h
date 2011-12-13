@@ -148,6 +148,7 @@ G_GNUC_INTERNAL void Init_gtk_image_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_imcontext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_imcontext_simple(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_im_multicontext(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_infobar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_invisible(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_layout(VALUE mGtk);

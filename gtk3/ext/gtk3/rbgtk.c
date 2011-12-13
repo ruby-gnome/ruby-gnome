@@ -520,6 +520,7 @@ Init_gtk(void)
     Init_gtk_imcontext(RG_TARGET_NAMESPACE);
     Init_gtk_imcontext_simple(RG_TARGET_NAMESPACE);
     Init_gtk_im_multicontext(RG_TARGET_NAMESPACE);
+    Init_gtk_infobar(RG_TARGET_NAMESPACE);
     Init_gtk_invisible(RG_TARGET_NAMESPACE);
     Init_gtk_label(RG_TARGET_NAMESPACE);
     Init_gtk_layout(RG_TARGET_NAMESPACE);
