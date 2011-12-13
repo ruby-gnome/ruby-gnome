@@ -223,49 +223,29 @@ rg_create_source_mark(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_get_source_marks_at_line(int argc, VALUE *argv, VALUE self)
 {
-    GSList *list, *p;
     VALUE line, category;
-    VALUE ary;
 
     rb_scan_args (argc, argv, "11", &line, &category);
 
-    list =
-        gtk_source_buffer_get_source_marks_at_line (_SELF (self),
-                          NUM2INT (line),
-                          RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL (category));
-    ary = rb_ary_new ();
-
-    p = (GSList *) list;
-    while (p) {
-        rb_ary_push (ary, GOBJ2RVAL (p->data));
-        p = g_slist_next (p);
-    }
-
-    return ary;
+    /* TODO: need free? */
+    return GOBJGSLIST2RVAL_FREE(gtk_source_buffer_get_source_marks_at_line(_SELF(self),
+                                        NUM2INT(line),
+                                        RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(category)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
 rg_get_source_marks_at_iter(int argc, VALUE *argv, VALUE self)
 {
-    GSList *list, *p;
     VALUE iter, category;
-    VALUE ary;
 
     rb_scan_args (argc, argv, "11", &iter, &category);
 
-    list =
-        gtk_source_buffer_get_source_marks_at_iter (_SELF (self),
-                          RVAL2GTKTEXTITER (iter),
-                          RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL (category));
-    ary = rb_ary_new ();
-
-    p = (GSList *) list;
-    while (p) {
-        rb_ary_push (ary, GOBJ2RVAL (p->data));
-        p = g_slist_next (p);
-    }
-
-    return ary;
+    /* TODO: need free? */
+    return GOBJGSLIST2RVAL_FREE(gtk_source_buffer_get_source_marks_at_iter(_SELF(self),
+                                        RVAL2GTKTEXTITER(iter),
+                                        RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(category)),
+                                g_slist_free, NULL);
 }
 
 static VALUE
