@@ -23,7 +23,6 @@
  */
 
 #include "rbgtk3private.h"
-#include "gmodule.h"
 
 VALUE treeiter_set_value_table;
 
