@@ -459,7 +459,7 @@ rg_m_cairo_available_p(G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_gtk_gdk(void)
+Init_gdk(void)
 {
     id_call = rb_intern("call");
 
@@ -506,39 +506,39 @@ Init_gtk_gdk(void)
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
-    Init_gtk_gdk_atom(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_cairo();
-    Init_gtk_gdk_color(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_const(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_cursor(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_device(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_display(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_display_manager(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_dragcontext(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_event(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_geometry(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_keymap(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_keyval(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_pango(RG_TARGET_NAMESPACE);
+    Init_gdk_atom(RG_TARGET_NAMESPACE);
+    Init_gdk_cairo();
+    Init_gdk_color(RG_TARGET_NAMESPACE);
+    Init_gdk_const(RG_TARGET_NAMESPACE);
+    Init_gdk_cursor(RG_TARGET_NAMESPACE);
+    Init_gdk_device(RG_TARGET_NAMESPACE);
+    Init_gdk_display(RG_TARGET_NAMESPACE);
+    Init_gdk_display_manager(RG_TARGET_NAMESPACE);
+    Init_gdk_dragcontext(RG_TARGET_NAMESPACE);
+    Init_gdk_event(RG_TARGET_NAMESPACE);
+    Init_gdk_geometry(RG_TARGET_NAMESPACE);
+    Init_gdk_keymap(RG_TARGET_NAMESPACE);
+    Init_gdk_keyval(RG_TARGET_NAMESPACE);
+    Init_gdk_pango(RG_TARGET_NAMESPACE);
 /* deprecated
-    Init_gtk_gdk_pangorenderer(RG_TARGET_NAMESPACE);
+    Init_gdk_pangorenderer(RG_TARGET_NAMESPACE);
 */
-    Init_gtk_gdk_pixbuf(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_property(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_rectangle(RG_TARGET_NAMESPACE);
+    Init_gdk_pixbuf(RG_TARGET_NAMESPACE);
+    Init_gdk_property(RG_TARGET_NAMESPACE);
+    Init_gdk_rectangle(RG_TARGET_NAMESPACE);
 /* deprecated
-    Init_gtk_gdk_rgb(RG_TARGET_NAMESPACE);
+    Init_gdk_rgb(RG_TARGET_NAMESPACE);
 */
     Init_gdk_rgba(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_screen(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_selection(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_threads(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_timecoord(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_visual(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_window(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_windowattr(RG_TARGET_NAMESPACE);
-    Init_gtk_gdk_x11(RG_TARGET_NAMESPACE);
+    Init_gdk_screen(RG_TARGET_NAMESPACE);
+    Init_gdk_selection(RG_TARGET_NAMESPACE);
+    Init_gdk_threads(RG_TARGET_NAMESPACE);
+    Init_gdk_timecoord(RG_TARGET_NAMESPACE);
+    Init_gdk_visual(RG_TARGET_NAMESPACE);
+    Init_gdk_window(RG_TARGET_NAMESPACE);
+    Init_gdk_windowattr(RG_TARGET_NAMESPACE);
+    Init_gdk_x11(RG_TARGET_NAMESPACE);
 /* deprecated
-    Init_gtk_gdk_draw(RG_TARGET_NAMESPACE);
+    Init_gdk_draw(RG_TARGET_NAMESPACE);
 */
 }

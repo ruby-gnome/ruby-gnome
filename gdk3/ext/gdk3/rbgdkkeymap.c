@@ -131,7 +131,7 @@ rg_have_bidi_layouts_p(VALUE self)
 }
 
 void 
-Init_gtk_gdk_keymap(VALUE mGdk)
+Init_gdk_keymap(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
 

@@ -52,41 +52,41 @@
 
 extern ID id_call;
 
-G_GNUC_INTERNAL void Init_gtk_gdk(void);
-G_GNUC_INTERNAL void Init_gtk_gdk_atom(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_cairo(void);
-G_GNUC_INTERNAL void Init_gtk_gdk_color(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_const(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_cursor(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_device(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_display(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_display_manager(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_dragcontext(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_event(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_geometry(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_keymap(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_keyval(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_pango(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk(void);
+G_GNUC_INTERNAL void Init_gdk_atom(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_cairo(void);
+G_GNUC_INTERNAL void Init_gdk_color(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_const(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_cursor(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_device(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_display(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_display_manager(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_dragcontext(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_event(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_geometry(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_keymap(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_keyval(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_pango(VALUE mGdk);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_pangorenderer(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_pangorenderer(VALUE mGdk);
 */
-G_GNUC_INTERNAL void Init_gtk_gdk_pixbuf(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_property(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_rectangle(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_pixbuf(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_property(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_rectangle(VALUE mGdk);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_rgb(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_rgb(VALUE mGdk);
 */
 G_GNUC_INTERNAL void Init_gdk_rgba(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_screen(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_selection(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_threads(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_timecoord(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_visual(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_window(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_windowattr(VALUE mGdk);
-G_GNUC_INTERNAL void Init_gtk_gdk_x11(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_screen(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_selection(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_threads(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_timecoord(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_visual(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_window(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_windowattr(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_x11(VALUE mGdk);
 /* deprecated
-G_GNUC_INTERNAL void Init_gtk_gdk_draw(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_draw(VALUE mGdk);
 */
 
 #endif /* __RBGDK3PRIVATE_H__ */

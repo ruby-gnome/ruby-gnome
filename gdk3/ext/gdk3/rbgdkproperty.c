@@ -278,7 +278,7 @@ rg_m_delete(VALUE self, VALUE win, VALUE property)
 }
 
 void
-Init_gtk_gdk_property(VALUE mGdk)
+Init_gdk_property(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Property");
 

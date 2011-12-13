@@ -157,7 +157,7 @@ rg_set_override_redirect(VALUE self, VALUE val)
 }
 
 void 
-Init_gtk_gdk_windowattr(VALUE mGdk)
+Init_gdk_windowattr(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_WINDOW_ATTR, "WindowAttr", mGdk);
 

@@ -429,7 +429,7 @@ rg_trigger_tooltip_query(VALUE self)
 */
 
 void 
-Init_gtk_gdk_display(VALUE mGdk)
+Init_gdk_display(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
 

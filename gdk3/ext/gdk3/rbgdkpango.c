@@ -139,7 +139,7 @@ gdkpango_attr_emboss_color_value(VALUE self)
 */
 
 void
-Init_gtk_gdk_pango(VALUE mGdk)
+Init_gdk_pango(VALUE mGdk)
 {
 /* deprecated
     VALUE klass;
