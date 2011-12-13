@@ -23,6 +23,7 @@
 #include <glib.h>
 #include "ruby.h"
 
+#include "rbglibdeprecated.h"
 #include "rbglib2conversions.h"
 
 #ifndef __RBGLIB_H__
@@ -80,7 +81,6 @@ typedef int GPid;
 #define RVAL2CSTRFILENAME(v) (rbg_filename_from_ruby(v))
 #define CSTRFILENAME2RVAL(s) (rbg_filename_to_ruby(s))
 #define CSTRFILENAME2RVAL_FREE(s) (rbg_filename_to_ruby_free(s))
-#define CSTRFILENAMEARRAY2RVAL_FREE(s) (rbg_filename_gslist_to_array_free(s))
 
 #define RVAL2STRS(ary, n) rbg_rval2strv(&(ary), &(n))
 #define RVAL2STRS_ACCEPT_NIL(ary, n) rbg_rval2strv_accept_nil(&(ary), &(n))
@@ -148,7 +148,6 @@ extern VALUE rbg_cstr2rval_with_free(gchar *str);
 VALUE rbg_filename_to_ruby(const gchar *filename);
 extern VALUE rbg_filename_to_ruby_free(gchar *filename);
 extern gchar *rbg_filename_from_ruby(VALUE filename);
-extern VALUE rbg_filename_gslist_to_array_free(GSList *list);
 
 const gchar **rbg_rval2strv(volatile VALUE *value, long *n);
 const gchar **rbg_rval2strv_accept_nil(volatile VALUE *value, long *n);
