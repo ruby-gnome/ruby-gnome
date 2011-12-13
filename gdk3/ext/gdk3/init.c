@@ -30,5 +30,5 @@ extern void Init_gdk3(void);
 void
 Init_gdk3(void)
 {
-    Init_gtk_gdk();
+    Init_gdk();
 }

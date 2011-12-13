@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2003  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,38 +20,31 @@
 
 #include "rbgtk3private.h"
 
-#define RG_TARGET_NAMESPACE cAccessible
-#define _SELF(self) (RVAL2GTKACCESSIBLE(self))
+#if GTK_CHECK_VERSION(3, 2, 0)
+
+#define RG_TARGET_NAMESPACE cLockButton
+#define _SELF(self) (RVAL2GTKLOCKBUTTON(self))
 
 static VALUE
-rg_connect_widget_destroyed(VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    gtk_accessible_connect_widget_destroyed(RVAL2GTKACCESSIBLE(self));
-    return self;
-}
+    VALUE permission;
+    GtkWidget *widget = NULL;
 
-static VALUE
-rg_widget(VALUE self)
-{
-    return GOBJ2RVAL(gtk_accessible_get_widget(_SELF(self)));
-}
+    rb_scan_args(argc, argv, "01", &permission);
+    widget = gtk_lock_button_new(NIL_P(permission) ? NULL : RVAL2GPERMISSION(permission));
+    RBGTK_INITIALIZE(self, widget);
 
-static VALUE
-rg_set_widget(VALUE self, VALUE widget)
-{
-    gtk_accessible_set_widget(_SELF(self), RVAL2GTKWIDGET(widget));
-
-    return self;
+    return Qnil;
 }
+#endif
 
 void
-Init_gtk_accessible(VALUE mGtk)
+Init_gtk_lockbutton(VALUE mGtk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
+#if GTK_CHECK_VERSION(3, 2, 0)
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LOCK_BUTTON, "LockButton", mGtk);
 
-    RG_DEF_METHOD(connect_widget_destroyed, 0);
-    RG_DEF_METHOD(widget, 0);
-    RG_DEF_METHOD(set_widget, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD(initialize, -1);
+#endif
 }

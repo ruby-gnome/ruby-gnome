@@ -110,6 +110,8 @@ void
 Init_gtk_aboutdialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
+    G_DEF_CLASS(GTK_TYPE_LICENSE, "License", RG_TARGET_NAMESPACE);
+
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_SMETHOD(show, 2);
 }

@@ -72,29 +72,6 @@ rg_construct_child(VALUE self, VALUE builder, VALUE name)
                                                    RVAL2CSTR(name)));
 }
 
-/*
-  customized buildable is not supported yet.
-
-gboolean  gtk_buildable_custom_tag_start       (GtkBuildable        *buildable,
-                        GtkBuilder          *builder,
-                        GObject             *child,
-                        const gchar         *tagname,
-                        GMarkupParser       *parser,
-                        gpointer            *data);
-void      gtk_buildable_custom_tag_end         (GtkBuildable        *buildable,
-                        GtkBuilder          *builder,
-                        GObject             *child,
-                        const gchar         *tagname,
-                        gpointer            *data);
-void      gtk_buildable_custom_finished        (GtkBuildable        *buildable,
-                        GtkBuilder          *builder,
-                        GObject             *child,
-                        const gchar         *tagname,
-                        gpointer             data);
-void      gtk_buildable_parser_finished        (GtkBuildable        *buildable,
-                        GtkBuilder          *builder);
-*/
-
 static VALUE
 rg_get_internal_child(VALUE self, VALUE builder, VALUE child_name)
 {

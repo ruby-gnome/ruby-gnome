@@ -80,16 +80,6 @@ rg_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
     return self;
 }
 
-/*
-  void        gtk_tree_store_set (GtkTreeStore *tree_store,
-                                               GtkTreeIter *iter,
-                                                                        ...);
-
-  void        gtk_tree_store_set_valist       (GtkTreeStore *tree_store,
-  GtkTreeIter *iter,
-  va_list var_args);
-*/
-
 static VALUE
 rg_remove(VALUE self, VALUE iter)
 {
@@ -205,27 +195,6 @@ rg_insert_after(VALUE self, VALUE parent, VALUE sibling)
     G_CHILD_ADD(self, ret);
     return ret;
 }
-
-/* The 2 following functions where implemented as TreeStore#insert
-   which will use a Hash instead of pairs of parameters
-
-void        gtk_tree_store_insert_with_values
-                                            (GtkTreeStore *tree_store,
-                                             GtkTreeIter *iter,
-                                             GtkTreeIter *parent,
-                                             gint position,
-                                             ...);
-
-void        gtk_tree_store_insert_with_valuesv
-                                            (GtkTreeStore *tree_store,
-                                             GtkTreeIter *iter,
-                                             GtkTreeIter *parent,
-                                             gint position,
-                                             gint *columns,
-                                             GValue *values,
-                                             gint n_values);
-
-*/
 
 static VALUE
 rg_prepend(VALUE self, VALUE parent)

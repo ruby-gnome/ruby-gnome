@@ -273,7 +273,7 @@ module Gtk
     end
   end
 
-  module IconSet
+  class IconSet
     extend GLib::Deprecatable
     define_deprecated_method :render_icon, :raise => "Use '#{self}#render_icon_pixbuf'."
   end
@@ -493,6 +493,19 @@ module Gtk
   class TextView
     extend GLib::Deprecatable
     define_deprecated_enums :WindowType, 'WINDOW'
+  end
+
+  class Toolbar
+    extend GLib::Deprecatable
+    define_deprecated_method :append, :warn => "Don't use this method."
+    define_deprecated_method :prepend, :warn => "Don't use this method."
+    define_deprecated_method :item_index, :get_item_index
+    define_deprecated_method :nth_item, :get_nth_item
+    define_deprecated_method :drop_index, :get_drop_index
+    define_deprecated_method :append_space, :warn => "Don't use this method."
+    define_deprecated_method :prepend_space, :warn => "Don't use this method."
+    define_deprecated_method :insert_space, :warn => "Don't use this method."
+    define_deprecated_method :remove_space, :warn => "Don't use this method."
   end
 
   module TreeModel

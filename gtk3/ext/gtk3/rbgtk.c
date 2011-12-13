@@ -388,7 +388,7 @@ rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
 }
 
 void 
-Init_gtk_gtk(void)
+Init_gtk(void)
 {
     id_call = rb_intern("call");
     id__windows__ = rb_intern("__windows__");
@@ -432,7 +432,6 @@ Init_gtk_gtk(void)
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 
-    Init_gdk_screen();
     Init_gtk_aboutdialog(RG_TARGET_NAMESPACE);
     Init_gtk_accelerator(RG_TARGET_NAMESPACE);
     Init_gtk_accel_group(RG_TARGET_NAMESPACE);
@@ -443,6 +442,7 @@ Init_gtk_gtk(void)
     Init_gtk_accessible(RG_TARGET_NAMESPACE);
     Init_gtk_action(RG_TARGET_NAMESPACE);
     Init_gtk_actiongroup(RG_TARGET_NAMESPACE);
+    Init_gtk_activatable(RG_TARGET_NAMESPACE);
     Init_gtk_adjustment(RG_TARGET_NAMESPACE);
     Init_gtk_alignment(RG_TARGET_NAMESPACE);
     Init_gtk_allocation(RG_TARGET_NAMESPACE);
@@ -450,6 +450,7 @@ Init_gtk_gtk(void)
     Init_gtk_appchooserbutton(RG_TARGET_NAMESPACE);
     Init_gtk_appchooserdialog(RG_TARGET_NAMESPACE);
     Init_gtk_appchooserwidget(RG_TARGET_NAMESPACE);
+    Init_gtk_application(RG_TARGET_NAMESPACE);
     Init_gtk_arrow(RG_TARGET_NAMESPACE);
     Init_gtk_aspect_frame(RG_TARGET_NAMESPACE);
     Init_gtk_assistant(RG_TARGET_NAMESPACE);
@@ -521,11 +522,13 @@ Init_gtk_gtk(void)
     Init_gtk_imcontext(RG_TARGET_NAMESPACE);
     Init_gtk_imcontext_simple(RG_TARGET_NAMESPACE);
     Init_gtk_im_multicontext(RG_TARGET_NAMESPACE);
+    Init_gtk_infobar(RG_TARGET_NAMESPACE);
     Init_gtk_invisible(RG_TARGET_NAMESPACE);
     Init_gtk_label(RG_TARGET_NAMESPACE);
     Init_gtk_layout(RG_TARGET_NAMESPACE);
     Init_gtk_link_button(RG_TARGET_NAMESPACE);
     Init_gtk_list_store(RG_TARGET_NAMESPACE);
+    Init_gtk_lockbutton(RG_TARGET_NAMESPACE);
     Init_gtk_menu(RG_TARGET_NAMESPACE);
     Init_gtk_menu_bar(RG_TARGET_NAMESPACE);
     Init_gtk_menu_item(RG_TARGET_NAMESPACE);
@@ -567,6 +570,7 @@ Init_gtk_gtk(void)
     Init_gtk_recent_manager(RG_TARGET_NAMESPACE);
     Init_gtk_scale(RG_TARGET_NAMESPACE);
     Init_gtk_scalebutton(RG_TARGET_NAMESPACE);
+    Init_gtk_scrollable(RG_TARGET_NAMESPACE);
     Init_gtk_scrollbar(RG_TARGET_NAMESPACE);
     Init_gtk_scrolled_window(RG_TARGET_NAMESPACE);
     Init_gtk_selection(RG_TARGET_NAMESPACE);
@@ -585,6 +589,7 @@ Init_gtk_gtk(void)
     Init_gtk_stylecontext(RG_TARGET_NAMESPACE);
     Init_gtk_styleproperties(RG_TARGET_NAMESPACE);
     Init_gtk_styleprovider(RG_TARGET_NAMESPACE);
+    Init_gtk_switch(RG_TARGET_NAMESPACE);
     Init_gtk_table(RG_TARGET_NAMESPACE);
     Init_gtk_target_list(RG_TARGET_NAMESPACE);
     Init_gtk_tearoff_menu_item(RG_TARGET_NAMESPACE);
@@ -604,6 +609,8 @@ Init_gtk_gtk(void)
     Init_gtk_toolbar(RG_TARGET_NAMESPACE);
     Init_gtk_toolbutton(RG_TARGET_NAMESPACE);
     Init_gtk_toolitem(RG_TARGET_NAMESPACE);
+    Init_gtk_toolitemgroup(RG_TARGET_NAMESPACE);
+    Init_gtk_toolshell(RG_TARGET_NAMESPACE);
     Init_gtk_tooltip(RG_TARGET_NAMESPACE);
     Init_gtk_treedragdest(RG_TARGET_NAMESPACE);
     Init_gtk_treedragsource(RG_TARGET_NAMESPACE);

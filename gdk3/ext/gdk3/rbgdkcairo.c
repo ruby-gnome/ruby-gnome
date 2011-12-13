@@ -81,7 +81,7 @@ rg_gdk_region(VALUE self, VALUE region)
 #endif
 
 void
-Init_gtk_gdk_cairo(void)
+Init_gdk_cairo(void)
 {
 #if CAIRO_AVAILABLE
     RG_DEF_METHOD(set_source_gdk_color, 1);

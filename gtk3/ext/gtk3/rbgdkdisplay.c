@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2003  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,38 +20,20 @@
 
 #include "rbgtk3private.h"
 
-#define RG_TARGET_NAMESPACE cAccessible
-#define _SELF(self) (RVAL2GTKACCESSIBLE(self))
+#define RG_TARGET_NAMESPACE cDisplay
+#define _SELF(self) (RVAL2GDKDISPLAYOBJECT(self))
 
 static VALUE
-rg_connect_widget_destroyed(VALUE self)
+rg_trigger_tooltip_query(VALUE self)
 {
-    gtk_accessible_connect_widget_destroyed(RVAL2GTKACCESSIBLE(self));
+    gtk_tooltip_trigger_tooltip_query(_SELF(self));
     return self;
 }
 
-static VALUE
-rg_widget(VALUE self)
+void 
+Init_gdk_display(void)
 {
-    return GOBJ2RVAL(gtk_accessible_get_widget(_SELF(self)));
-}
+    VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_DISPLAY);
 
-static VALUE
-rg_set_widget(VALUE self, VALUE widget)
-{
-    gtk_accessible_set_widget(_SELF(self), RVAL2GTKWIDGET(widget));
-
-    return self;
-}
-
-void
-Init_gtk_accessible(VALUE mGtk)
-{
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
-
-    RG_DEF_METHOD(connect_widget_destroyed, 0);
-    RG_DEF_METHOD(widget, 0);
-    RG_DEF_METHOD(set_widget, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD(trigger_tooltip_query, 0);
 }

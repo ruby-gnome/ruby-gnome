@@ -378,7 +378,7 @@ rg_screen_number(VALUE self)
 #endif
 
 void 
-Init_gtk_gdk_screen(VALUE mGdk)
+Init_gdk_screen(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
 

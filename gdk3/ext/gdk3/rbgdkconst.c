@@ -28,7 +28,7 @@
  * Gdk module constants
  */
 void
-Init_gtk_gdk_const(VALUE mGdk)
+Init_gdk_const(VALUE mGdk)
 {
     /* GdkStatus */
     G_DEF_CLASS(GDK_TYPE_STATUS, "Status", mGdk);

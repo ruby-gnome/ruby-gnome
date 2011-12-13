@@ -51,7 +51,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     }
     RBGTK_INITIALIZE(self, dialog);
     if (!NIL_P(rb_button_ary))
-        rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
+        rb_funcall2(self, rb_intern("add_buttons"),
+                    RARRAY_LEN(rb_button_ary), RARRAY_PTR(rb_button_ary));
 
     return Qnil;
 }

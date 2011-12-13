@@ -37,6 +37,7 @@
 #include <rbgdk-pixbuf.h>
 #include <rbgdk3.h>
 #include "rbgtk3.h"
+#include "rbgtk3util.h"
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)
@@ -56,8 +57,9 @@ extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
 
+G_GNUC_INTERNAL void Init_gdk_display(void);
 G_GNUC_INTERNAL void Init_gdk_screen(void);
-G_GNUC_INTERNAL void Init_gtk_gtk(void);
+G_GNUC_INTERNAL void Init_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_aboutdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accelerator(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accel_group(VALUE mGtk);
@@ -68,6 +70,7 @@ G_GNUC_INTERNAL void Init_gtk_accel_map(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accessible(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_action(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_actiongroup(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_activatable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_adjustment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_alignment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_allocation(VALUE mGtk);
@@ -75,6 +78,7 @@ G_GNUC_INTERNAL void Init_gtk_appchooser(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_appchooserwidget(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_application(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_arrow(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_aspect_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_assistant(VALUE mGtk);
@@ -146,11 +150,13 @@ G_GNUC_INTERNAL void Init_gtk_image_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_imcontext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_imcontext_simple(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_im_multicontext(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_infobar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_invisible(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_layout(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_link_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_list_store(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_lockbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_item(VALUE mGtk);
@@ -192,6 +198,7 @@ G_GNUC_INTERNAL void Init_gtk_recent_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_manager(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scalebutton(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_scrollable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrolled_window(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_selection(VALUE mGtk);
@@ -210,6 +217,7 @@ G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stylecontext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_styleproperties(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_styleprovider(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_switch(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_target_list(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tearoff_menu_item(VALUE mGtk);
@@ -229,6 +237,8 @@ G_GNUC_INTERNAL void Init_gtk_toggletoolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_toolitem(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_toolitemgroup(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_toolshell(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tooltip(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_treedragdest(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_treedragsource(VALUE mGtk);
