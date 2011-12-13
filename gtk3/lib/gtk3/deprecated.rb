@@ -273,7 +273,7 @@ module Gtk
     end
   end
 
-  module IconSet
+  class IconSet
     extend GLib::Deprecatable
     define_deprecated_method :render_icon, :raise => "Use '#{self}#render_icon_pixbuf'."
   end
