@@ -58,7 +58,7 @@ extern VALUE treeiter_set_value_table;
 
 G_GNUC_INTERNAL void Init_gdk_display(void);
 G_GNUC_INTERNAL void Init_gdk_screen(void);
-G_GNUC_INTERNAL void Init_gtk_gtk(void);
+G_GNUC_INTERNAL void Init_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_aboutdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accelerator(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accel_group(VALUE mGtk);

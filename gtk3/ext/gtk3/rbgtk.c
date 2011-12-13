@@ -388,7 +388,7 @@ rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
 }
 
 void 
-Init_gtk_gtk(void)
+Init_gtk(void)
 {
     id_call = rb_intern("call");
     id__windows__ = rb_intern("__windows__");
