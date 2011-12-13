@@ -216,6 +216,7 @@ G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stylecontext(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_styleproperties(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_styleprovider(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_switch(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_table(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_target_list(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_tearoff_menu_item(VALUE mGtk);

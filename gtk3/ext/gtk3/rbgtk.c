@@ -588,6 +588,7 @@ Init_gtk(void)
     Init_gtk_stylecontext(RG_TARGET_NAMESPACE);
     Init_gtk_styleproperties(RG_TARGET_NAMESPACE);
     Init_gtk_styleprovider(RG_TARGET_NAMESPACE);
+    Init_gtk_switch(RG_TARGET_NAMESPACE);
     Init_gtk_table(RG_TARGET_NAMESPACE);
     Init_gtk_target_list(RG_TARGET_NAMESPACE);
     Init_gtk_tearoff_menu_item(RG_TARGET_NAMESPACE);
