@@ -103,7 +103,7 @@ rg_operator_equal(VALUE self, VALUE other)
 }
 
 void
-Init_gtk_gdk_atom(VALUE mGdk)
+Init_gdk_atom(VALUE mGdk)
 {
     VALUE none;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_ATOM, "Atom", mGdk);

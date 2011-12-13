@@ -38,7 +38,7 @@ static VALUE
 rg_initialize(VALUE self, VALUE name, VALUE category)
 {
     G_INITIALIZE (self,
-              gtk_source_mark_new (RVAL2CSTR(name), RVAL2CSTR(category)));
+              gtk_source_mark_new (RVAL2CSTR(name), RVAL2CSTR_ACCEPT_SYMBOL(category)));
     return Qnil;
 }
 
@@ -55,7 +55,7 @@ rg_next(int argc, VALUE *argv, VALUE self)
     rb_scan_args (argc, argv, "01", &category);
 
     return GOBJ2RVAL (gtk_source_mark_next (_SELF (self),
-                                RVAL2CSTR_ACCEPT_NIL(category)));
+                                RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(category)));
 }
 
 /* Method: prev(category=nil)
@@ -71,7 +71,7 @@ rg_prev(int argc, VALUE *argv, VALUE self)
     rb_scan_args (argc, argv, "01", &category);
 
     return GOBJ2RVAL (gtk_source_mark_prev (_SELF (self),
-                                RVAL2CSTR_ACCEPT_NIL(category)));
+                                RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(category)));
 }
 
 void

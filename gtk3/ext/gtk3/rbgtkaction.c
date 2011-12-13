@@ -150,6 +150,24 @@ action_mark(void *p)
     }
 }
 
+static VALUE
+rg_unblock_activate(VALUE self)
+{
+    gtk_action_unblock_activate(_SELF(self));
+
+    return self;
+}
+
+static VALUE
+rg_block_activate(VALUE self)
+{
+    gtk_action_block_activate(_SELF(self));
+    if (rb_block_given_p())
+        rb_ensure(rb_yield, self, rg_unblock_activate, self);
+
+    return self;
+}
+
 void
 Init_gtk_action(VALUE mGtk)
 {
@@ -180,8 +198,8 @@ Init_gtk_action(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_path");
     RG_DEF_METHOD(set_accel_group, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_group");
-
     RG_DEF_METHOD(accel_path, 0);
-
     RG_DEF_METHOD(accel_closure, 0);
+    RG_DEF_METHOD(block_activate, 0);
+    RG_DEF_METHOD(unblock_activate, 0);
 }

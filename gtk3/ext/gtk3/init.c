@@ -23,7 +23,6 @@
  */
 
 #include "rbgtk3private.h"
-#include "gmodule.h"
 
 VALUE treeiter_set_value_table;
 
@@ -39,5 +38,7 @@ Init_gtk3(void)
     treeiter_set_value_table = rb_hash_new();
     rb_global_variable(&treeiter_set_value_table);
 
-    Init_gtk_gtk();
+    Init_gdk_display();
+    Init_gdk_screen();
+    Init_gtk();
 }

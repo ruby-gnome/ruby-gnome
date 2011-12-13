@@ -264,7 +264,7 @@ rg_drag_drop_succeeded_p(VALUE self)
 }
 
 void
-Init_gtk_gdk_dragcontext(VALUE mGdk)
+Init_gdk_dragcontext(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 

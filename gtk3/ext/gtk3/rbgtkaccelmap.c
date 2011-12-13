@@ -96,15 +96,6 @@ rg_s_each_unfilterd(VALUE self)
     return self;
 }
 
-/*
-void        gtk_accel_map_load_scanner      (GScanner *scanner);
-*/
-
-/* We don't need them.
-void        gtk_accel_map_load_fd           (gint fd);
-void        gtk_accel_map_save_fd           (gint fd);
-*/
-
 static VALUE
 rg_s_get(G_GNUC_UNUSED VALUE self)
 {

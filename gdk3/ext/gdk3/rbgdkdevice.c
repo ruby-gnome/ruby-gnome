@@ -168,7 +168,7 @@ rg_keys(VALUE self)
 */
 
 void 
-Init_gtk_gdk_device(VALUE mGdk)
+Init_gdk_device(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
 

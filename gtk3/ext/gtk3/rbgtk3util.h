@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2003  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,40 +18,15 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgtk3private.h"
+#ifndef __RBGTK3UTIL_H__
+#define __RBGTK3UTIL_H__
 
-#define RG_TARGET_NAMESPACE cAccessible
-#define _SELF(self) (RVAL2GTKACCESSIBLE(self))
+G_BEGIN_DECLS
 
-static VALUE
-rg_connect_widget_destroyed(VALUE self)
-{
-    gtk_accessible_connect_widget_destroyed(RVAL2GTKACCESSIBLE(self));
-    return self;
-}
+typedef VALUE (*RBGTKAddButtonFunc)(VALUE self, VALUE button_text, VALUE response_id);
 
-static VALUE
-rg_widget(VALUE self)
-{
-    return GOBJ2RVAL(gtk_accessible_get_widget(_SELF(self)));
-}
+G_GNUC_INTERNAL VALUE rbgtk_add_buttons(VALUE self, VALUE buttons, RBGTKAddButtonFunc add_button);
 
-static VALUE
-rg_set_widget(VALUE self, VALUE widget)
-{
-    gtk_accessible_set_widget(_SELF(self), RVAL2GTKWIDGET(widget));
+G_END_DECLS
 
-    return self;
-}
-
-void
-Init_gtk_accessible(VALUE mGtk)
-{
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCESSIBLE, "Accessible", mGtk);
-
-    RG_DEF_METHOD(connect_widget_destroyed, 0);
-    RG_DEF_METHOD(widget, 0);
-    RG_DEF_METHOD(set_widget, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-}
+#endif /* __RBGTK3UTIL_H__ */

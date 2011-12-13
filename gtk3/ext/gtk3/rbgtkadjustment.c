@@ -60,6 +60,28 @@ rg_value_changed(VALUE self)
     return self;
 }
 
+static VALUE
+rg_configure(VALUE self, VALUE value, VALUE lower, VALUE upper, VALUE step_increment, VALUE page_increment, VALUE page_size)
+{
+    gtk_adjustment_configure(_SELF(self),
+                             NUM2DBL(value),
+                             NUM2DBL(lower),
+                             NUM2DBL(upper),
+                             NUM2DBL(step_increment),
+                             NUM2DBL(page_increment),
+                             NUM2DBL(page_size));
+
+    return self;
+}
+
+#if GTK_CHECK_VERSION(3, 2, 0)
+static VALUE
+rg_minimum_increment(VALUE self)
+{
+    return DBL2NUM(gtk_adjustment_get_minimum_increment(_SELF(self)));
+}
+#endif
+
 void 
 Init_gtk_adjustment(VALUE mGtk)
 {
@@ -69,4 +91,8 @@ Init_gtk_adjustment(VALUE mGtk)
     RG_DEF_METHOD(clamp_page, 2);
     RG_DEF_METHOD(changed, 0);
     RG_DEF_METHOD(value_changed, 0);
+    RG_DEF_METHOD(configure, 6);
+#if GTK_CHECK_VERSION(3, 2, 0)
+    RG_DEF_METHOD(minimum_increment, 0);
+#endif
 }
