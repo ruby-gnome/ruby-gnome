@@ -35,55 +35,12 @@ rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
                                            RVAL2GTKRESPONSETYPE(response_id)));
 }
 
-struct rbgtk_dialog_add_buttons_internal_args {
-    VALUE self;
-    VALUE buttons;
-};
-
-static VALUE
-rbgtk_dialog_add_buttons_internal_body(VALUE value)
-{
-    struct rbgtk_dialog_add_buttons_internal_args *args = (struct rbgtk_dialog_add_buttons_internal_args *)value;
-    long i;
-    long n = RARRAY_LEN(args->buttons);
-
-    for (i = 0; i < n; i++) {
-        VALUE button = rb_ary_to_ary(RARRAY_PTR(args->buttons)[i]);
-
-        rg_add_button(args->self, RARRAY_PTR(button)[0], RARRAY_PTR(button)[1]);
-    }
-
-    return args->self;
-}
-
-static VALUE
-rbgtk_dialog_add_buttons_internal_ensure(VALUE value)
-{
-    g_object_thaw_notify(RVAL2GOBJ(((struct rbgtk_dialog_add_buttons_internal_args *)value)->self));
-
-    return Qnil;
-}
-
-VALUE
-rbgtk_dialog_add_buttons_internal(VALUE self, VALUE buttons)
-{
-    struct rbgtk_dialog_add_buttons_internal_args args = { self, buttons };
-
-    if (NIL_P(RARRAY_PTR(buttons)[0]))
-        return self;
-
-    g_object_freeze_notify(RVAL2GOBJ(self));
-
-    return rb_ensure(rbgtk_dialog_add_buttons_internal_body, (VALUE)&args,
-                     rbgtk_dialog_add_buttons_internal_ensure, (VALUE)&args);
-}    
-
 static VALUE
 rg_add_buttons(int argc, VALUE *argv, VALUE self)
 {
     VALUE button_ary;
     rb_scan_args(argc, argv, "*", &button_ary);
-    rbgtk_dialog_add_buttons_internal(self, button_ary);
+    rbgtk_add_buttons(self, button_ary, rg_add_button);
     return self;
 }    
 
@@ -110,7 +67,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     dialog = gtk_dialog_new_with_buttons(title, parent, flags, NULL, NULL);
     RBGTK_INITIALIZE(self, dialog);
     if (!NIL_P(rb_button_ary))
-        rbgtk_dialog_add_buttons_internal(self, rb_button_ary);
+        rb_funcall2(self, rb_intern("add_buttons"),
+                    RARRAY_LEN(rb_button_ary), RARRAY_PTR(rb_button_ary));
 
     return Qnil;
 }

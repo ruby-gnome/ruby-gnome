@@ -37,6 +37,7 @@
 #include <rbgdk-pixbuf.h>
 #include <rbgdk3.h>
 #include "rbgtk3.h"
+#include "rbgtk3util.h"
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)
