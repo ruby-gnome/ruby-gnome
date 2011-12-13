@@ -75,7 +75,7 @@ rbg_rval2cstr_accept_symbol(volatile VALUE *value)
 const gchar *
 rbg_rval2cstr_accept_symbol_accept_nil(volatile VALUE *value)
 {
-    return NIL_P(value) ? NULL : rbg_rval2cstr_accept_symbol(value);
+    return NIL_P(*value) ? NULL : rbg_rval2cstr_accept_symbol(value);
 }
 
 VALUE
