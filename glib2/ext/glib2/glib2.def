@@ -89,6 +89,10 @@ EXPORTS
         rbg_rval2gdoubles
         rbg_gints2rval
         rbg_gints2rval_free
+        rbg_glist2rval
+        rbg_gslist2rval
+        rbg_glist2rval_with_type
+        rbg_gslist2rval_with_type
 	rbg_scan_options
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters

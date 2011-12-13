@@ -28,6 +28,7 @@
 #  include <ruby/encoding.h>
 #endif
 #include "rbglib.h"
+#include "rbgutil_list.h"
 #include "rbgutildeprecated.h"
 
 #ifdef __cplusplus
@@ -107,4 +108,4 @@ extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 }
 #endif /* __cplusplus */
 
-#endif /* __RBGLIB_H__ */
+#endif /* __RBGUTIL_H__ */
