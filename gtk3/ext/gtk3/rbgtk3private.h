@@ -197,6 +197,7 @@ G_GNUC_INTERNAL void Init_gtk_recent_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_manager(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scalebutton(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_scrollable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrolled_window(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_selection(VALUE mGtk);

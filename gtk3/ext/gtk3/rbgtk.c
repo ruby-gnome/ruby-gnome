@@ -569,6 +569,7 @@ Init_gtk(void)
     Init_gtk_recent_manager(RG_TARGET_NAMESPACE);
     Init_gtk_scale(RG_TARGET_NAMESPACE);
     Init_gtk_scalebutton(RG_TARGET_NAMESPACE);
+    Init_gtk_scrollable(RG_TARGET_NAMESPACE);
     Init_gtk_scrollbar(RG_TARGET_NAMESPACE);
     Init_gtk_scrolled_window(RG_TARGET_NAMESPACE);
     Init_gtk_selection(RG_TARGET_NAMESPACE);
