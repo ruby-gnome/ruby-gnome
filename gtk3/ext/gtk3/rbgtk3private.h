@@ -156,6 +156,7 @@ G_GNUC_INTERNAL void Init_gtk_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_layout(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_link_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_list_store(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_lockbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_item(VALUE mGtk);

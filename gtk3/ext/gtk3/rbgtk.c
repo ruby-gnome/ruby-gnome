@@ -528,6 +528,7 @@ Init_gtk(void)
     Init_gtk_layout(RG_TARGET_NAMESPACE);
     Init_gtk_link_button(RG_TARGET_NAMESPACE);
     Init_gtk_list_store(RG_TARGET_NAMESPACE);
+    Init_gtk_lockbutton(RG_TARGET_NAMESPACE);
     Init_gtk_menu(RG_TARGET_NAMESPACE);
     Init_gtk_menu_bar(RG_TARGET_NAMESPACE);
     Init_gtk_menu_item(RG_TARGET_NAMESPACE);
