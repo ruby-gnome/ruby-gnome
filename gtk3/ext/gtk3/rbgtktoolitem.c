@@ -55,21 +55,6 @@ rg_expand_p(VALUE self)
     return CBOOL2RVAL(gtk_tool_item_get_expand(_SELF(self)));
 }
 
-/* deprecated
-static VALUE
-rg_set_tooltip(int argc, VALUE *argv, VALUE self)
-{
-    VALUE tooltip, tip_text, tip_private;
-
-    rb_scan_args(argc, argv, "21", &tooltip, &tip_text, &tip_private);
-
-    gtk_tool_item_set_tooltip(_SELF(self), RVAL2GTKTOOLTIPS(tooltip),
-                              RVAL2CSTR(tip_text), 
-                              RVAL2CSTR_ACCEPT_NIL(tip_private));
-    return self;
-}
-*/
-
 static VALUE
 rg_set_use_drag_window(VALUE self, VALUE use_drag_window)
 {
@@ -133,6 +118,60 @@ rg_rebuild_menu(VALUE self)
     return self;
 }
 
+static VALUE
+rg_ellipsize_mode(VALUE self)
+{
+    return PANGOELLIPSIZEMODE2RVAL(gtk_tool_item_get_ellipsize_mode(_SELF(self)));
+}
+
+static VALUE
+rg_text_alignment(VALUE self)
+{
+    return DBL2NUM(gtk_tool_item_get_text_alignment(_SELF(self)));
+}
+
+static VALUE
+rg_text_orientation(VALUE self)
+{
+    return GTKORIENTATION2RVAL(gtk_tool_item_get_text_orientation(_SELF(self)));
+}
+
+static VALUE
+rg_text_size_group(VALUE self)
+{
+    return GOBJ2RVAL(gtk_tool_item_get_text_size_group(_SELF(self)));
+}
+
+static VALUE
+rg_set_tooltip(VALUE self, VALUE tooltip)
+{
+    if (TYPE(tooltip) == T_HASH) {
+        VALUE text, markup;
+        rbg_scan_options(tooltip,
+                         "text", &text,
+                         "markup", &markup,
+                         NULL);
+        if (!NIL_P(text))
+            gtk_tool_item_set_tooltip_text(_SELF(self), RVAL2CSTR(text));
+        else if (!NIL_P(markup))
+            gtk_tool_item_set_tooltip_markup(_SELF(self), RVAL2CSTR(markup));
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+    } else {
+        rb_raise(rb_eArgError, "Invalid arguments.");
+    }
+
+    return self;
+}
+
+static VALUE
+rg_toolbar_reconfigured(VALUE self)
+{
+    gtk_tool_item_toolbar_reconfigured(_SELF(self));
+
+    return self;
+}
+
 void 
 Init_gtk_toolitem(VALUE mGtk)
 {
@@ -144,9 +183,6 @@ Init_gtk_toolitem(VALUE mGtk)
     RG_DEF_METHOD(set_expand, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "expand");
     RG_DEF_METHOD_P(expand, 0);
-/* deprecated
-    RG_DEF_METHOD(set_tooltip, -1);
-*/
     RG_DEF_METHOD(set_use_drag_window, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "use_drag_window");
     RG_DEF_METHOD_P(use_drag_window, 0);
@@ -158,4 +194,10 @@ Init_gtk_toolitem(VALUE mGtk)
     RG_DEF_METHOD(get_proxy_menu_item, 1);
     RG_DEF_METHOD(set_proxy_menu_item, 2);
     RG_DEF_METHOD(rebuild_menu, 0);
+    RG_DEF_METHOD(ellipsize_mode, 0);
+    RG_DEF_METHOD(text_alignment, 0);
+    RG_DEF_METHOD(text_orientation, 0);
+    RG_DEF_METHOD(text_size_group, 0);
+    RG_DEF_METHOD(set_tooltip, 1);
+    RG_DEF_METHOD(toolbar_reconfigured, 0);
 }
