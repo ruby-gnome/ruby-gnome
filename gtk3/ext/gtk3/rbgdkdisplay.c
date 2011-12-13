@@ -1,10 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
- *  Copyright (C) 1998-2001 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,22 +19,21 @@
  */
 
 #include "rbgtk3private.h"
-#include "gmodule.h"
 
-VALUE treeiter_set_value_table;
+#define RG_TARGET_NAMESPACE cDisplay
+#define _SELF(self) (RVAL2GDKDISPLAYOBJECT(self))
 
-extern void Init_gtk3(void);
-
-void
-Init_gtk3(void)
+static VALUE
+rg_trigger_tooltip_query(VALUE self)
 {
-    /*
-     * For Gtk::TreeModel, Gtk::TreeIter. 
-     * They should be initialized on this timing.
-     */
-    treeiter_set_value_table = rb_hash_new();
-    rb_global_variable(&treeiter_set_value_table);
+    gtk_tooltip_trigger_tooltip_query(_SELF(self));
+    return self;
+}
 
-    Init_gdk_display();
-    Init_gtk_gtk();
+void 
+Init_gdk_display(void)
+{
+    VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_DISPLAY);
+
+    RG_DEF_METHOD(trigger_tooltip_query, 0);
 }

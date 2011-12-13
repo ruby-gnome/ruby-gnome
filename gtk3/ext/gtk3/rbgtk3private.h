@@ -56,6 +56,7 @@ extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
 
+G_GNUC_INTERNAL void Init_gdk_display(void);
 G_GNUC_INTERNAL void Init_gdk_screen(void);
 G_GNUC_INTERNAL void Init_gtk_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_aboutdialog(VALUE mGtk);
