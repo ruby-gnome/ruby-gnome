@@ -39,5 +39,6 @@ Init_gtk3(void)
     rb_global_variable(&treeiter_set_value_table);
 
     Init_gdk_display();
+    Init_gdk_screen();
     Init_gtk();
 }
