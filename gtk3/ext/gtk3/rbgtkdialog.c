@@ -27,8 +27,6 @@
 #define RG_TARGET_NAMESPACE cDialog
 #define _SELF(self) (RVAL2GTKDIALOG(self))
 
-static ID id_to_a;
-
 static VALUE
 rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
 {
@@ -213,8 +211,6 @@ void
 Init_gtk_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);
-
-    id_to_a = rb_intern("to_a");
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(run, 0);
