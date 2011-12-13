@@ -442,6 +442,7 @@ Init_gtk(void)
     Init_gtk_accessible(RG_TARGET_NAMESPACE);
     Init_gtk_action(RG_TARGET_NAMESPACE);
     Init_gtk_actiongroup(RG_TARGET_NAMESPACE);
+    Init_gtk_activatable(RG_TARGET_NAMESPACE);
     Init_gtk_adjustment(RG_TARGET_NAMESPACE);
     Init_gtk_alignment(RG_TARGET_NAMESPACE);
     Init_gtk_allocation(RG_TARGET_NAMESPACE);

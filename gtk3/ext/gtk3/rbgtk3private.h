@@ -70,6 +70,7 @@ G_GNUC_INTERNAL void Init_gtk_accel_map(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accessible(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_action(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_actiongroup(VALUE mGtk);
+G_GNUC_INTERNAL void Init_gtk_activatable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_adjustment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_alignment(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_allocation(VALUE mGtk);
