@@ -323,7 +323,7 @@ static VALUE
 rg_add_selection_clipboard(VALUE self, VALUE clipboard)
 {
     G_CHILD_ADD(self, clipboard);
-    gtk_text_buffer_add_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
+    gtk_text_buffer_add_selection_clipboard(_SELF(self), RVAL2GTKCLIPBOARD(clipboard));
     return self;
 }
 
@@ -331,7 +331,7 @@ static VALUE
 rg_remove_selection_clipboard(VALUE self, VALUE clipboard)
 {
     G_CHILD_REMOVE(self, clipboard);
-    gtk_text_buffer_remove_selection_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
+    gtk_text_buffer_remove_selection_clipboard(_SELF(self), RVAL2GTKCLIPBOARD(clipboard));
     return self;
 }
 
@@ -540,7 +540,7 @@ static VALUE
 rg_cut_clipboard(VALUE self, VALUE clipboard, VALUE default_editable)
 {
     G_CHILD_ADD(self, clipboard);
-    gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard), RVAL2CBOOL(default_editable));
+    gtk_text_buffer_cut_clipboard(_SELF(self), RVAL2GTKCLIPBOARD(clipboard), RVAL2CBOOL(default_editable));
     return self;
 }
 
@@ -548,7 +548,7 @@ static VALUE
 rg_copy_clipboard(VALUE self, VALUE clipboard)
 {
     G_CHILD_ADD(self, clipboard);
-    gtk_text_buffer_copy_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard));
+    gtk_text_buffer_copy_clipboard(_SELF(self), RVAL2GTKCLIPBOARD(clipboard));
     return self;
 }
 
@@ -556,7 +556,7 @@ static VALUE
 rg_paste_clipboard(VALUE self, VALUE clipboard, VALUE location, VALUE default_editable)
 {
     G_CHILD_ADD(self, clipboard);
-    gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2CLIPBOARD(clipboard),
+    gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2GTKCLIPBOARD(clipboard),
                                     NIL_P(location) ? NULL : RVAL2GTKTEXTITER(location),
                                     RVAL2CBOOL(default_editable));
     return self;

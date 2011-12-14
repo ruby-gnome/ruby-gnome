@@ -561,7 +561,7 @@ rg_settings(VALUE self)
 static VALUE
 rg_get_clipboard(VALUE self, VALUE selection)
 {
-    return CLIPBOARD2RVAL(gtk_widget_get_clipboard(_SELF(self), RVAL2ATOM(selection)));
+    return GOBJ2RVAL(gtk_widget_get_clipboard(_SELF(self), RVAL2ATOM(selection)));
 }
 
 static VALUE

@@ -46,24 +46,6 @@
 #define GTK_TYPE_RECENT_FILTER_INFO (gtk_recent_filter_info_get_type())
 #define GTK_TYPE_RECENT_DATA (gtk_recent_data_get_type())
 
-/*
- * for gtk2.0/gtk2.2
- */
-#ifndef GTK_TYPE_CLIPBOARD
-#define GTK_TYPE_CLIPBOARD (rbgtk_clipboard_get_type())
-#define RVAL2CLIPBOARD(obj) (rbgtk_get_clipboard(obj))
-#define CLIPBOARD2RVAL(val) (rbgtk_make_clipboard(val))
-extern GType rbgtk_clipboard_get_type();
-extern GtkClipboard* rbgtk_get_clipboard(VALUE obj);
-extern VALUE rbgtk_make_clipboard(GtkClipboard* gobj);
-#else
-#define RVAL2CLIPBOARD(obj) (GTK_CLIPBOARD(RVAL2GOBJ(obj)))
-#define CLIPBOARD2RVAL(val) (GOBJ2RVAL(val))
-#endif
-
-/*
- * for gtk
- */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GObject *gtkobj);
 extern GType gtk_allocation_get_type(void);
 extern GType gtk_accel_key_get_type(void);

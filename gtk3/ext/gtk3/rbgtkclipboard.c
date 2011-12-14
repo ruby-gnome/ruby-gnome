@@ -23,39 +23,7 @@
 #include "rbgtk3private.h"
 
 #define RG_TARGET_NAMESPACE cClipboard
-#define _SELF(s) RVAL2CLIPBOARD(s)
-
-#ifndef GTK_TYPE_CLIPBOARD
-static GtkClipboard*
-clipboard_copy(const GtkClipboard *clipboard)
-{
-    /* I don't know how to copy this object ... */
-    return (GtkClipboard*)clipboard;
-}
-
-GType
-rbgtk_clipboard_get_type()
-{
-    static GType our_type = 0;
-    if(our_type == 0)
-        our_type = g_boxed_type_register_static("GtkClipboard",
-                                                (GBoxedCopyFunc)clipboard_copy,
-                                                (GBoxedFreeFunc)g_free);
-    return our_type;
-}
-
-GtkClipboard*
-rbgtk_get_clipboard(VALUE obj)
-{
-    return RVAL2GTKCLIPBOARD(obj);
-}
-
-VALUE
-rbgtk_make_clipboard(GtkClipboard *gobj)
-{
-    return GOBJ2RVAL(gobj);
-}
-#endif
+#define _SELF(s) RVAL2GTKCLIPBOARD(s)
 
 static VALUE
 rg_s_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -72,7 +40,7 @@ rg_s_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         clipboard = gtk_clipboard_get_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                   RVAL2ATOM(selection));
     } 
-    return CLIPBOARD2RVAL(clipboard);
+    return GOBJ2RVAL(clipboard);
 }
 
 static VALUE
@@ -84,7 +52,7 @@ rg_display(VALUE self)
 static void
 clipboard_get_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, G_GNUC_UNUSED guint info, gpointer func)
 {
-    rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(clipboard),
                GTKSELECTIONDATA2RVAL(selection_data));
 }
 
@@ -177,7 +145,7 @@ rg_set_image(VALUE self, VALUE pixbuf)
 static void
 clipboard_received_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, gpointer func)
 {
-    rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(clipboard),
                GTKSELECTIONDATA2RVAL(selection_data));
 }
 
@@ -201,7 +169,7 @@ clipboard_text_received_func(GtkClipboard *clipboard, const gchar *text,
         vtext = CSTR2RVAL(text);
     }
 
-    rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), vtext);
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(clipboard), vtext);
 }
 
 static VALUE
@@ -218,7 +186,7 @@ rg_request_text(VALUE self)
 static void
 clipboard_image_received_func(GtkClipboard *clipboard, GdkPixbuf *pixbuf, gpointer func)
 {
-    rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard),
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(clipboard),
                GOBJ2RVAL(pixbuf));
 }
 
@@ -242,7 +210,7 @@ clipboard_target_received_func(GtkClipboard *clipboard, GdkAtom *atoms, gint n_a
         rb_ary_push(ary, GDKATOM2RVAL(atoms[i]));
     }
 
-    rb_funcall((VALUE)func, id_call, 2, CLIPBOARD2RVAL(clipboard), ary);
+    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(clipboard), ary);
 }
 
 static VALUE
@@ -260,7 +228,7 @@ rg_request_targets(VALUE self)
 static void
 clipboard_rich_text_received_func(GtkClipboard *clipboard, GdkAtom format, const guint8 *text, gsize length, gpointer func)
 {
-    rb_funcall((VALUE)func, id_call, 3, CLIPBOARD2RVAL(clipboard), 
+    rb_funcall((VALUE)func, id_call, 3, GOBJ2RVAL(clipboard), 
                GDKATOM2RVAL(format), rb_str_new((char*)text, length));
 }
 
