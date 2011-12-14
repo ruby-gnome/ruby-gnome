@@ -44,4 +44,5 @@ Init_gtksourceview3 (void)
     Init_gtksource_style (RG_TARGET_NAMESPACE);
     Init_gtksource_stylescheme (RG_TARGET_NAMESPACE);
     Init_gtksource_styleschememanager (RG_TARGET_NAMESPACE);
+    Init_gtksource_gutter(RG_TARGET_NAMESPACE);
 }
