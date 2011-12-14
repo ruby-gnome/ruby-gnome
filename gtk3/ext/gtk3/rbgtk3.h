@@ -73,9 +73,4 @@ extern GType gtk_text_appearance_get_type(void);
 extern GType gtk_recent_filter_info_get_type(void);
 extern GType gtk_recent_data_get_type(void);
 
-/*
- * Dialog
- */
-extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);
-
 #endif /* __RBGTK3_H__ */
