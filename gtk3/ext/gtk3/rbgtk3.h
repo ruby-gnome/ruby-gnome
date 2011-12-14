@@ -25,7 +25,6 @@
 #ifndef __RBGTK3_H__
 #define __RBGTK3_H__
 
-#include <signal.h>
 #include <gtk/gtk.h>
 
 #include <rbgobject.h>
@@ -38,21 +37,21 @@
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, G_OBJECT(gtkobj)))
 
-#define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
-#define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
 #define GTK_TYPE_ACCEL_GROUP_ENTRY (gtk_accel_group_entry_get_type())
+#define GTK_TYPE_ACCEL_KEY (gtk_accel_key_get_type())
+#define GTK_TYPE_ALLOCATION (gtk_allocation_get_type())
 #define GTK_TYPE_BINDING_SET (gtk_bindingset_get_type())
-#define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
-#define GTK_TYPE_RECENT_FILTER_INFO (gtk_recent_filter_info_get_type())
 #define GTK_TYPE_RECENT_DATA (gtk_recent_data_get_type())
+#define GTK_TYPE_RECENT_FILTER_INFO (gtk_recent_filter_info_get_type())
+#define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
 
 extern void rbgtk_initialize_gtkobject(VALUE obj, GObject *gtkobj);
-extern GType gtk_allocation_get_type(void);
-extern GType gtk_accel_key_get_type(void);
 extern GType gtk_accel_group_entry_get_type(void);
+extern GType gtk_accel_key_get_type(void);
+extern GType gtk_allocation_get_type(void);
 extern GType gtk_bindingset_get_type(void);
-extern GType gtk_text_appearance_get_type(void);
-extern GType gtk_recent_filter_info_get_type(void);
 extern GType gtk_recent_data_get_type(void);
+extern GType gtk_recent_filter_info_get_type(void);
+extern GType gtk_text_appearance_get_type(void);
 
 #endif /* __RBGTK3_H__ */
