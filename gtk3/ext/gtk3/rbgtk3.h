@@ -61,16 +61,6 @@ extern VALUE rbgtk_make_clipboard(GtkClipboard* gobj);
 #define CLIPBOARD2RVAL(val) (GOBJ2RVAL(val))
 #endif
 
-#ifndef GTK_TYPE_TREE_ROW_REFERENCE
-#define GTK_TYPE_TREE_ROW_REFERENCE (rbgtk_tree_row_reference_get_type())
-#define RVAL2TREEROWREFERENCE(obj) (rbgtk_get_tree_row_reference(obj))
-extern GType rbgtk_tree_row_reference_get_type();
-extern GtkTreeRowReference* rbgtk_get_tree_row_reference(VALUE obj);
-#else
-#define RVAL2TREEROWREFERENCE(obj) ((GtkTreeRowReference*)(RVAL2BOXED(obj, GTK_TYPE_TREE_ROW_REFERENCE)))
-#endif
-  
-
 /*
  * for gtk
  */
