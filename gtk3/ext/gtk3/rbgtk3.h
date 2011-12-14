@@ -45,10 +45,6 @@
 #define GTK_TYPE_TEXT_APPEARANCE (gtk_text_appearance_get_type())
 #define GTK_TYPE_RECENT_FILTER_INFO (gtk_recent_filter_info_get_type())
 #define GTK_TYPE_RECENT_DATA (gtk_recent_data_get_type())
-#ifndef GTK_TYPE_TARGET_LIST
-extern GType gtk_target_list_get_type();
-#define GTK_TYPE_TARGET_LIST (gtk_target_list_get_type())
-#endif
 
 /*
  * for gtk2.0/gtk2.2
