@@ -21,39 +21,8 @@
 
 #include "rbgtk3private.h"
 
-/*****************************************/
-
-#ifndef GTK_TYPE_TREE_ROW_REFERENCE
-static GtkTreeRowReference*
-treerowref_copy(const GtkTreeRowReference *ref)
-{
-    return (GtkTreeRowReference*)ref;
-}
-
-GType
-rbgtk_tree_row_reference_get_type()
-{
-  static GType our_type = 0;
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("GtkTreeRowReference",
-                    (GBoxedCopyFunc)treerowref_copy,
-                    (GBoxedFreeFunc)gtk_tree_row_reference_free);
-  return our_type;
-}
-
-GtkTreeRowReference *
-rbgtk_get_tree_row_reference(VALUE obj)
-{
-    return RVAL2GTKTREEROWREFERENCE(obj);
-}
-#endif
-
-/*****************************************/
-
 #define RG_TARGET_NAMESPACE cTreeRowReference
-#define _SELF(s) RVAL2TREEROWREFERENCE(s)
-
-/*****************************************/
+#define _SELF(s) RVAL2GTKTREEROWREFERENCE(s)
 
 static ID id_proxy;
 static ID id_model;

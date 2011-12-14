@@ -24,20 +24,11 @@
 
 #include "rbgtk3private.h"
 
-VALUE treeiter_set_value_table;
-
 extern void Init_gtk3(void);
 
 void
 Init_gtk3(void)
 {
-    /*
-     * For Gtk::TreeModel, Gtk::TreeIter. 
-     * They should be initialized on this timing.
-     */
-    treeiter_set_value_table = rb_hash_new();
-    rb_global_variable(&treeiter_set_value_table);
-
     Init_gdk_display();
     Init_gdk_screen();
     Init_gtk();

@@ -27,6 +27,8 @@
 #define RG_TARGET_NAMESPACE cContainer
 #define _SELF(self) (RVAL2GTKCONTAINER(self))
 
+#define RubyGtkContainerHookModule "RubyGtkContainerHook__"
+
 /*
 We don't need this.
 #define     GTK_CONTAINER_WARN_INVALID_CHILD_PROPERTY_ID(object, property_id, pspec)
@@ -157,7 +159,7 @@ void        gtk_container_child_set         (GtkContainer *container,
                                              ...);
 */
 
-void
+static void
 rbgtkcontainer_register_child_property_setter(GType gtype, const char *name, RValueToGValueFunc func)
 {
     GObjectClass* oclass;
@@ -178,7 +180,7 @@ rbgtkcontainer_register_child_property_setter(GType gtype, const char *name, RVa
     g_type_class_unref(oclass);
 }
 
-void
+static void
 rbgtkcontainer_register_child_property_getter(GType gtype, const char *name, GValueToRValueFunc func)
 {
     GObjectClass* oclass;

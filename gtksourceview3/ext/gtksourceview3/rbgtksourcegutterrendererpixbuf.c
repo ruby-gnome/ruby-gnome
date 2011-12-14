@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -21,22 +20,21 @@
 
 #include "rbgtksourceview3private.h"
 
-/* Module: Gtk::SourceStyle
- */
-
-#define RG_TARGET_NAMESPACE cStyle
-#define _SELF(self) (RVAL2GTKSOURCESTYLE(self))
+#define RG_TARGET_NAMESPACE cGutterRendererPixbuf
+#define _SELF(self) (RVAL2GTKSOURCEGUTTERRENDERERPIXBUF(self))
 
 static VALUE
-rg_copy(VALUE self)
+rg_initialize(VALUE self)
 {
-    return GOBJ2RVAL (gtk_source_style_copy (_SELF (self)));
+    G_INITIALIZE(self, gtk_source_gutter_renderer_pixbuf_new());
+
+    return Qnil;
 }
 
 void
-Init_gtksource_style (VALUE mGtkSource)
+Init_gtksource_gutterrendererpixbuf(VALUE mGtkSource)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_STYLE, "Style", mGtkSource);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_SOURCE_TYPE_GUTTER_RENDERER_PIXBUF, "GutterRendererPixbuf", mGtkSource);
 
-    RG_DEF_METHOD(copy, 0);
+    RG_DEF_METHOD(initialize, 0);
 }
