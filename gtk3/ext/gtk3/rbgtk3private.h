@@ -57,6 +57,10 @@ extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
 
+G_GNUC_INTERNAL void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom* gtype,
+                                     void** data, gint* format, gint* length);
+G_GNUC_INTERNAL void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data); 
+
 G_GNUC_INTERNAL void Init_gdk_display(void);
 G_GNUC_INTERNAL void Init_gdk_screen(void);
 G_GNUC_INTERNAL void Init_gtk(void);

@@ -96,13 +96,6 @@ typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
 extern void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set_value_func);
 
 /*
- * Gtk::SelectionData
- */
-extern void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom* gtype,
-                                     void** data, gint* format, gint* length);
-extern void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data); 
-
-/*
  * Gtk::Drag
  */
 #define RVAL2GTKTARGETENTRIES(value, n) rbgtk_rval2gtktargetentries(value, n)
