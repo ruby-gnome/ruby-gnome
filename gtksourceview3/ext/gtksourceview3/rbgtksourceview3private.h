@@ -23,15 +23,7 @@
 #ifndef __RBGTKSOURCEVIEW3PRIVATE_H__
 #define __RBGTKSOURCEVIEW3PRIVATE_H__
 
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourceprintcompositor.h>
-#include <gtksourceview/gtksourcestyle.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksource.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
 #include <ruby.h>
