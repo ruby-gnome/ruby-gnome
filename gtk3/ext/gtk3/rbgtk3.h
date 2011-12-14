@@ -79,7 +79,6 @@ extern GtkTreeRowReference* rbgtk_get_tree_row_reference(VALUE obj);
  * for gtk
  */
 extern void rbgtk_initialize_gtkobject(VALUE obj, GObject *gtkobj);
-extern void exec_callback(GtkWidget *widget, gpointer proc);
 extern GType gtk_allocation_get_type(void);
 extern GType gtk_accel_key_get_type(void);
 extern GType gtk_accel_group_entry_get_type(void);
