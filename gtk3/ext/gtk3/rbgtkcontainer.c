@@ -27,6 +27,8 @@
 #define RG_TARGET_NAMESPACE cContainer
 #define _SELF(self) (RVAL2GTKCONTAINER(self))
 
+#define RubyGtkContainerHookModule "RubyGtkContainerHook__"
+
 /*
 We don't need this.
 #define     GTK_CONTAINER_WARN_INVALID_CHILD_PROPERTY_ID(object, property_id, pspec)

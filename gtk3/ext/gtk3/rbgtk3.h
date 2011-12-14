@@ -35,8 +35,6 @@
 #define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
 #define RBGTK_MICRO_VERSION RBGLIB_MICRO_VERSION
 
-#define RubyGtkContainerHookModule "RubyGtkContainerHook__"
-
 #define RBGTK_INITIALIZE(obj,gtkobj)\
  (rbgtk_initialize_gtkobject(obj, G_OBJECT(gtkobj)))
 
