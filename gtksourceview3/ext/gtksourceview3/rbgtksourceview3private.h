@@ -55,5 +55,6 @@ G_GNUC_INTERNAL void Init_gtksource_gutterrenderer(VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtksource_gutterrendererpixbuf(VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtksource_gutterrenderertext(VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtksource_markattributes(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_undomanager(VALUE mGtkSource);
 
 #endif /* __RBGTKSOURCEVIEW3PRIVATE_H__ */
