@@ -95,9 +95,6 @@ typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
                                          gint column, GValue *value);
 extern void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set_value_func);
 
-/* Only for backwards compatibility. */
-GtkTargetEntry *rbgtk_get_target_entry(VALUE targets);
-
 /*
  * Gtk::Container
  */

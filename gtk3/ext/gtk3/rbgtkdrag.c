@@ -84,14 +84,6 @@ rbgtk_rval2gtktargetentries_accept_nil(VALUE value, long *n)
     return NULL;
 }
 
-GtkTargetEntry *
-rbgtk_get_target_entry(VALUE targets)
-{
-    long n;
-
-    return RVAL2GTKTARGETENTRIES(targets, &n);
-}
-
 static VALUE
 rg_m_dest_set(VALUE self, VALUE rbwidget, VALUE rbflags, VALUE rbtargets, VALUE rbactions)
 {
