@@ -74,13 +74,6 @@ extern GType gtk_recent_filter_info_get_type(void);
 extern GType gtk_recent_data_get_type(void);
 
 /*
- * Gtk::TreeIter callback
- */
-typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
-                                         gint column, GValue *value);
-extern void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set_value_func);
-
-/*
  * Dialog
  */
 extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);

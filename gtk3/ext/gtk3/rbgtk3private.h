@@ -55,9 +55,12 @@
 
 extern ID id_relative_callbacks;
 extern ID id_call;
-extern VALUE treeiter_set_value_table;
 
 G_GNUC_INTERNAL void exec_callback(GtkWidget *widget, gpointer proc);
+
+typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
+                                         gint column, GValue *value);
+G_GNUC_INTERNAL void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set_value_func);
 
 G_GNUC_INTERNAL void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom* gtype,
                                      void** data, gint* format, gint* length);
