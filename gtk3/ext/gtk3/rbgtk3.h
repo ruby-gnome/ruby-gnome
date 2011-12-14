@@ -95,16 +95,6 @@ typedef void (*rbgtkiter_set_value_func)(void *model, GtkTreeIter *iter,
 extern void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set_value_func);
 
 /*
- * Gtk::Container
- */
-extern void rbgtkcontainer_register_child_property_setter(GType gtype, 
-                                                          const char* prop_name, 
-                                                          RValueToGValueFunc func);
-extern void rbgtkcontainer_register_child_property_getter(GType gtype, 
-                                                          const char* prop_name, 
-                                                          GValueToRValueFunc func);
-
-/*
  * Dialog
  */
 extern VALUE rbgtk_dialog_add_buttons_internal(VALUE self, VALUE button_ary);
