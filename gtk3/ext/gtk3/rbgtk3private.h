@@ -61,6 +61,11 @@ G_GNUC_INTERNAL void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src,
                                      void** data, gint* format, gint* length);
 G_GNUC_INTERNAL void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data); 
 
+#define RVAL2GTKTARGETENTRIES(value, n) rbgtk_rval2gtktargetentries(value, n)
+G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries(VALUE value, long *n);
+#define RVAL2GTKTARGETENTRIES_ACCEPT_NIL(value, n) rbgtk_rval2gtktargetentries_accept_nil(value, n)
+G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries_accept_nil(VALUE value, long *n);
+
 G_GNUC_INTERNAL void Init_gdk_display(void);
 G_GNUC_INTERNAL void Init_gdk_screen(void);
 G_GNUC_INTERNAL void Init_gtk(void);
