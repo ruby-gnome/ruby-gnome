@@ -48,4 +48,5 @@ Init_gtksourceview3 (void)
     Init_gtksource_gutterrenderer(RG_TARGET_NAMESPACE);
     Init_gtksource_gutterrendererpixbuf(RG_TARGET_NAMESPACE);
     Init_gtksource_gutterrenderertext(RG_TARGET_NAMESPACE);
+    Init_gtksource_markattributes(RG_TARGET_NAMESPACE);
 }
