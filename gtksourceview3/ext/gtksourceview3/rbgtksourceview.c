@@ -57,7 +57,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_sourceview (VALUE mGtkSource)
+Init_gtksource_view (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "View", mGtkSource);
 

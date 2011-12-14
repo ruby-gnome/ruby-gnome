@@ -100,7 +100,7 @@ rg_guess_language(VALUE self, VALUE filename, VALUE content_type)
 }
 
 void
-Init_gtk_sourcelanguagemanager (VALUE mGtkSource)
+Init_gtksource_languagemanager (VALUE mGtkSource)
 {
     rb_mGtkSource = mGtkSource;
     VALUE RG_TARGET_NAMESPACE =

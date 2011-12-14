@@ -75,7 +75,7 @@ rg_prev(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gtk_sourcemark (VALUE mGtkSource)
+Init_gtksource_mark (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_MARK, "Mark", mGtkSource);
 

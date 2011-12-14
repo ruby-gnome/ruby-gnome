@@ -41,14 +41,14 @@
 #include "rbgtksourceview3conversions.h"
 #include "rbgtksourceview3version.h"
 
-G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_view (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_buffer (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_language (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_languagemanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_mark (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_printcompositor (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_style (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_stylescheme (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_styleschememanager (VALUE mGtkSource);
 
 #endif /* __RBGTKSOURCEVIEW3PRIVATE_H__ */
