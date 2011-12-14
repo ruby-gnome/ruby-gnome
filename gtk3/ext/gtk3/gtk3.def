@@ -1,15 +1,10 @@
 EXPORTS
     Init_gtk3
-    exec_callback
+    rbgtk_initialize_gtkobject
     gtk_accel_group_entry_get_type
     gtk_accel_key_get_type
-    gtk_target_list_get_type
+    gtk_allocation_get_type
     gtk_bindingset_get_type
-    rbgtk_atom2selectiondata
-    rbgtk_atom2selectiondata_free
-    rbgtk_rval2gtktargetentries
-    rbgtk_rval2gtktargetentries_accept_nil
-    rbgtk_get_target_entry
-    rbgtk_initialize_gtkobject
-    rbgtk_register_treeiter_set_value_func
+    gtk_recent_data_get_type
+    gtk_recent_filter_info_get_type
     gtk_text_appearance_get_type
