@@ -51,5 +51,6 @@ G_GNUC_INTERNAL void Init_gtksource_style (VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtksource_stylescheme (VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtksource_styleschememanager (VALUE mGtkSource);
 G_GNUC_INTERNAL void Init_gtksource_gutter(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_gutterrenderer(VALUE mGtkSource);
 
 #endif /* __RBGTKSOURCEVIEW3PRIVATE_H__ */
