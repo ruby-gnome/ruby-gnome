@@ -124,7 +124,7 @@ rg_force_rescan(VALUE self)
 }
 
 void
-Init_gtk_sourcestyleschememanager (VALUE mGtkSource)
+Init_gtksource_styleschememanager (VALUE mGtkSource)
 {
     rb_mGtkSource = mGtkSource;
     VALUE RG_TARGET_NAMESPACE =

@@ -25,9 +25,16 @@
 #define RG_TARGET_NAMESPACE cTreeIter
 #define _SELF(i) (RVAL2GTKTREEITER(i))
 
+static VALUE treeiter_set_value_table = Qnil;
+
 void
 rbgtk_register_treeiter_set_value_func(GType gtype, rbgtkiter_set_value_func func)
 {
+    if (NIL_P(treeiter_set_value_table)) {
+        treeiter_set_value_table = rb_hash_new();
+        rb_global_variable(&treeiter_set_value_table);
+    }
+
     rb_hash_aset(treeiter_set_value_table, INT2NUM(gtype), 
                  Data_Wrap_Struct(rb_cData, NULL, NULL, func));
 }

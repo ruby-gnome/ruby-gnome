@@ -56,12 +56,38 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
+static VALUE
+rg_get_gutter(VALUE self, VALUE window_type)
+{
+    GtkSourceGutter *gutter;
+
+    gutter = gtk_source_view_get_gutter(_SELF(self),
+                                        RVAL2GTKTEXTWINDOWTYPE(window_type));
+
+    return GOBJ2RVAL(gutter);
+}
+
+static VALUE
+rg_set_mark_attributes(VALUE self, VALUE category, VALUE attributes, VALUE priority)
+{
+    gtk_source_view_set_mark_attributes(_SELF(self),
+                                        RVAL2CSTR_ACCEPT_SYMBOL(category),
+                                        RVAL2GTKSOURCEMARKATTRIBUTES(attributes),
+                                        NUM2INT(priority));
+
+    return self;
+}
+
 void
-Init_gtk_sourceview (VALUE mGtkSource)
+Init_gtksource_view (VALUE mGtkSource)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS (GTK_SOURCE_TYPE_VIEW, "View", mGtkSource);
+    G_DEF_CLASS(GTK_SOURCE_TYPE_VIEW_GUTTER_POSITION, "GutterPosition", RG_TARGET_NAMESPACE);
 
     RG_DEF_METHOD(initialize, -1);
+    RG_DEF_METHOD(get_gutter, 1);
+    RG_DEF_METHOD(set_mark_attributes, 3);
+
     G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(GTK_SOURCE_TYPE_SMART_HOME_END_TYPE, "SmartHomeEndType", RG_TARGET_NAMESPACE);

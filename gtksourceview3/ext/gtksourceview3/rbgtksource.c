@@ -35,13 +35,19 @@ Init_gtksourceview3 (void)
                                 INT2FIX(GTKSOURCEVIEW3_MINOR_VERSION),
                                 INT2FIX(GTKSOURCEVIEW3_MICRO_VERSION)));
 
-    Init_gtk_sourceview (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcebuffer (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcelanguage (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcelanguagemanager (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcemark (RG_TARGET_NAMESPACE);
-    Init_gtk_sourceprintcompositor (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcestyle (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcestylescheme (RG_TARGET_NAMESPACE);
-    Init_gtk_sourcestyleschememanager (RG_TARGET_NAMESPACE);
+    Init_gtksource_view (RG_TARGET_NAMESPACE);
+    Init_gtksource_buffer (RG_TARGET_NAMESPACE);
+    Init_gtksource_language (RG_TARGET_NAMESPACE);
+    Init_gtksource_languagemanager (RG_TARGET_NAMESPACE);
+    Init_gtksource_mark (RG_TARGET_NAMESPACE);
+    Init_gtksource_printcompositor (RG_TARGET_NAMESPACE);
+    Init_gtksource_style (RG_TARGET_NAMESPACE);
+    Init_gtksource_stylescheme (RG_TARGET_NAMESPACE);
+    Init_gtksource_styleschememanager (RG_TARGET_NAMESPACE);
+    Init_gtksource_gutter(RG_TARGET_NAMESPACE);
+    Init_gtksource_gutterrenderer(RG_TARGET_NAMESPACE);
+    Init_gtksource_gutterrendererpixbuf(RG_TARGET_NAMESPACE);
+    Init_gtksource_gutterrenderertext(RG_TARGET_NAMESPACE);
+    Init_gtksource_markattributes(RG_TARGET_NAMESPACE);
+    Init_gtksource_undomanager(RG_TARGET_NAMESPACE);
 }

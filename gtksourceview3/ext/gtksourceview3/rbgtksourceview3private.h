@@ -23,15 +23,7 @@
 #ifndef __RBGTKSOURCEVIEW3PRIVATE_H__
 #define __RBGTKSOURCEVIEW3PRIVATE_H__
 
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourceprintcompositor.h>
-#include <gtksourceview/gtksourcestyle.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksource.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
 #include <ruby.h>
@@ -41,14 +33,20 @@
 #include "rbgtksourceview3conversions.h"
 #include "rbgtksourceview3version.h"
 
-G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtkSource);
-G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_view (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_buffer (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_language (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_languagemanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_mark (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_printcompositor (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_style (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_stylescheme (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_styleschememanager (VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_gutter(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_gutterrenderer(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_gutterrendererpixbuf(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_gutterrenderertext(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_markattributes(VALUE mGtkSource);
+G_GNUC_INTERNAL void Init_gtksource_undomanager(VALUE mGtkSource);
 
 #endif /* __RBGTKSOURCEVIEW3PRIVATE_H__ */
