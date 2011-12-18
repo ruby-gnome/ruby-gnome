@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE mIconSize
 
 static VALUE
-rg_m_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
+rg_s_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     gint width, height;
 
@@ -35,7 +35,7 @@ rg_m_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
 }
 
 static VALUE
-rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
+rg_s_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
 {
     gint width, height;
 
@@ -48,7 +48,7 @@ rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
 }
 
 static VALUE
-rg_m_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
+rg_s_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
 {
     /* XXXX FIXME This should be GENUM2RVAL */
     return INT2FIX(gtk_icon_size_register(RVAL2CSTR(name),
@@ -57,20 +57,20 @@ rg_m_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
 }
 
 static VALUE
-rg_m_register_alias(G_GNUC_UNUSED VALUE self, VALUE alias, VALUE target)
+rg_s_register_alias(G_GNUC_UNUSED VALUE self, VALUE alias, VALUE target)
 {
     gtk_icon_size_register_alias(RVAL2CSTR(alias), RVAL2GTKICONSIZE(target));
     return Qnil;
 }
 
 static VALUE
-rg_m_from_name(G_GNUC_UNUSED VALUE self, VALUE name)
+rg_s_from_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return INT2FIX(gtk_icon_size_from_name(RVAL2CSTR(name)));
 }
 
 static VALUE
-rg_m_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
+rg_s_get_name(G_GNUC_UNUSED VALUE self, VALUE size)
 {
     return CSTR2RVAL(gtk_icon_size_get_name(RVAL2GTKICONSIZE(size)));
 }
@@ -80,12 +80,12 @@ Init_gtk_icon_size(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "IconSize");
 
-    RG_DEF_MODFUNC(lookup, 1);
-    RG_DEF_MODFUNC(lookup_for_settings, 2);
-    RG_DEF_MODFUNC(register, 3);
-    RG_DEF_MODFUNC(register_alias, 2);
-    RG_DEF_MODFUNC(from_name, 1);
-    RG_DEF_MODFUNC(get_name, 1);
+    RG_DEF_SMETHOD(lookup, 1);
+    RG_DEF_SMETHOD(lookup_for_settings, 2);
+    RG_DEF_SMETHOD(register, 3);
+    RG_DEF_SMETHOD(register_alias, 2);
+    RG_DEF_SMETHOD(from_name, 1);
+    RG_DEF_SMETHOD(get_name, 1);
 
     G_DEF_CLASS(GTK_TYPE_ICON_SIZE, "IconSize", RG_TARGET_NAMESPACE);
 }

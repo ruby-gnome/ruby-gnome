@@ -28,7 +28,7 @@
 
 /* deprecated
 static VALUE
-rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num, i;
     gchar** list;
@@ -67,7 +67,7 @@ rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
 /* TODO
 static VALUE
-rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num, i;
     gchar** list;
@@ -106,7 +106,7 @@ rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
 /* deprecated
 static VALUE
-rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gint num;
     GdkAtom encoding;
@@ -143,14 +143,14 @@ rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 */
 
 static VALUE
-rg_m_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_s_utf8_to_string_target(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     return CSTR2RVAL((const char*)gdk_utf8_to_string_target(RVAL2CSTR(str)));
 }
 
 /* deprecated
 static VALUE
-rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     GdkAtom encoding;
     gint format;
@@ -189,7 +189,7 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
 /* TODO
 static VALUE
-rg_m_change(int argc, VALUE *argv, VALUE self)
+rg_s_change(int argc, VALUE *argv, VALUE self)
 {
     int        fmt, len;
     void*      dat;
@@ -213,7 +213,7 @@ rg_m_change(int argc, VALUE *argv, VALUE self)
 */
 
 static VALUE
-rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     /* for argument processing */
     GdkAtom     rtype;
@@ -271,7 +271,7 @@ rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_delete(VALUE self, VALUE win, VALUE property)
+rg_s_delete(VALUE self, VALUE win, VALUE property)
 {
     gdk_property_delete(RVAL2GDKWINDOW(win), RVAL2ATOM(property));
     return self;
@@ -283,23 +283,23 @@ Init_gdk_property(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Property");
 
 /* deprecated
-    RG_DEF_MODFUNC(text_property_to_text_list, -1);
+    RG_DEF_SMETHOD(text_property_to_text_list, -1);
 */
 /* TODO
-    RG_DEF_MODFUNC(text_property_to_utf8_list, -1);
+    RG_DEF_SMETHOD(text_property_to_utf8_list, -1);
 */
 /* deprecated
-    RG_DEF_MODFUNC(string_to_compound_text, -1);
+    RG_DEF_SMETHOD(string_to_compound_text, -1);
 */
-    RG_DEF_MODFUNC(utf8_to_string_target, 1);
+    RG_DEF_SMETHOD(utf8_to_string_target, 1);
 /* deprecated
-    RG_DEF_MODFUNC(utf8_to_compound_text, -1);
+    RG_DEF_SMETHOD(utf8_to_compound_text, -1);
 */
 /* TODO
-    RG_DEF_MODFUNC(change, -1);
+    RG_DEF_SMETHOD(change, -1);
 */
-    RG_DEF_MODFUNC(get, -1);
-    RG_DEF_MODFUNC(delete, 2);
+    RG_DEF_SMETHOD(get, -1);
+    RG_DEF_SMETHOD(delete, 2);
 
     /* GdkPropMode from GdkProperties */
     G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", RG_TARGET_NAMESPACE);

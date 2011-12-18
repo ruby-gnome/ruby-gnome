@@ -41,8 +41,6 @@
 
 #define RVAL2GDKPIXBUFGLIST(value) rbgdk_rval2gdkpixbufglist(value)
 
-#define GDK_BITMAP(b) ((GdkBitmap*)GDK_PIXMAP(b))
-
 #define GEV2RVAL(ev) (make_gdkevent(ev))
 #define RVAL2GEV(ev) (get_gdkevent(ev))
 #define RVAL2ATOM(atom) (get_gdkatom(atom))

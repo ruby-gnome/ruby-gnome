@@ -24,10 +24,8 @@
 
 #include "rbgdk3private.h"
 
-#define RG_TARGET_NAMESPACE rb_cGdkColor
+#define RG_TARGET_NAMESPACE cColor
 #define _SELF(c) (RVAL2GDKCOLOR(c))
-
-VALUE RG_TARGET_NAMESPACE = Qnil;
 
 static VALUE
 rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
@@ -122,7 +120,7 @@ rg_to_s(VALUE self)
 void
 Init_gdk_color(VALUE mGdk)
 {
-    RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_COLOR, "Color", mGdk);
 
     RG_DEF_SMETHOD(parse, 1);
     RG_DEF_METHOD(initialize, 3);
