@@ -26,7 +26,7 @@ module Vte
         |_self, command, argv, envv, directory, lastlog = true, utmp = true, wtmp = true|
       pty_flags = [!lastlog && :no_lastlog, !utmp && :no_utmp, !wtmp && :no_wtmp].select{|f| f}
       argv = command && [command, *argv]
-      {:pty_flags => pty_flags, :working_directory => directory, :argv => argv, :envv => envv}
+      [{:pty_flags => pty_flags, :working_directory => directory, :argv => argv, :envv => envv}]
     end
 
     alias :__set_font__ :set_font

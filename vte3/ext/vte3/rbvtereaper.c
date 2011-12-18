@@ -23,7 +23,7 @@
 #define RG_TARGET_NAMESPACE cReaper
 
 static VALUE
-rg_m_get(VALUE self)
+rg_s_get(VALUE self)
 {
     return GOBJ2RVAL(vte_reaper_get());
 }
@@ -35,7 +35,7 @@ Init_vte_reaper(VALUE mVte)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_REAPER, "Reaper", mVte);
 
-    RG_DEF_MODFUNC(get, 0);
+    RG_DEF_SMETHOD(get, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

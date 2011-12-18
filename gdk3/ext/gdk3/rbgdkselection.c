@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE mSelection
 
 static VALUE
-rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE owner, selection, time, send_event;
     int ret;
@@ -46,7 +46,7 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE selection;
 
@@ -62,7 +62,7 @@ rg_m_owner_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
+rg_s_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE time)
 {
     gdk_selection_convert(RVAL2GDKWINDOW(requestor), 
                           RVAL2ATOM(selection), 
@@ -71,7 +71,7 @@ rg_m_convert(VALUE self, VALUE requestor, VALUE selection, VALUE target, VALUE t
 }
 
 static VALUE
-rg_m_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
+rg_s_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 {
     guchar *data;
     GdkAtom prop_type;
@@ -88,7 +88,7 @@ rg_m_property_get(G_GNUC_UNUSED VALUE self, VALUE requestor)
 }
 
 static VALUE
-rg_m_send_notify(int argc, VALUE *argv, VALUE self)
+rg_s_send_notify(int argc, VALUE *argv, VALUE self)
 {
     VALUE requestor, selection, target, property, time;
 
@@ -115,11 +115,11 @@ Init_gdk_selection(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "Selection");
 
-    RG_DEF_MODFUNC(owner_set, -1);
-    RG_DEF_MODFUNC(owner_get, -1);
-    RG_DEF_MODFUNC(convert, 4);
-    RG_DEF_MODFUNC(property_get, 1);
-    RG_DEF_MODFUNC(send_notify, -1);
+    RG_DEF_SMETHOD(owner_set, -1);
+    RG_DEF_SMETHOD(owner_get, -1);
+    RG_DEF_SMETHOD(convert, 4);
+    RG_DEF_SMETHOD(property_get, 1);
+    RG_DEF_SMETHOD(send_notify, -1);
 
     /* Constants */
     rb_define_const(RG_TARGET_NAMESPACE, "PRIMARY", GDKATOM2RVAL(GDK_SELECTION_PRIMARY));

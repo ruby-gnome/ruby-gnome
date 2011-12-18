@@ -78,6 +78,30 @@ rbg_rval2cstr_accept_symbol_accept_nil(volatile VALUE *value)
     return NIL_P(*value) ? NULL : rbg_rval2cstr_accept_symbol(value);
 }
 
+const gchar *
+rbg_rval2glibid(volatile VALUE *value, volatile VALUE *buf, gboolean accept_nil)
+{
+    gchar *id, *p;
+
+    if (accept_nil && NIL_P(*value))
+        return NULL;
+
+    if (SYMBOL_P(*value)) {
+        *buf = rb_sym_to_s(*value);
+    } else {
+        StringValue(*value);
+        *buf = rb_str_dup(*value);
+    }
+    RB_GC_GUARD(*buf);
+
+    id = RSTRING_PTR(*buf);
+    for (p = id; *p; p++)
+        if (*p == '_')
+            *p = '-';
+
+    return id;
+}
+
 VALUE
 rbg_cstr2rval(const gchar *str)
 {

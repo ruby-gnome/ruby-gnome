@@ -29,7 +29,7 @@
 #define RVAL2DRAW(s) RVAL2GDKDRAWABLE(s)
 
 static VALUE
-rg_m_draw_rgb_image(int argc, VALUE *argv, VALUE self)
+rg_s_draw_rgb_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 
@@ -57,7 +57,7 @@ rg_m_draw_rgb_image(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_m_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
+rg_s_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
                        VALUE rbwidth, VALUE rbheight, VALUE rbdither,
                        VALUE rbbuf, VALUE rbrowstride, VALUE rbcolors)
 {
@@ -92,7 +92,7 @@ rg_m_draw_indexed_image(VALUE self, VALUE win, VALUE rbgc, VALUE rbx, VALUE rby,
 }
 
 static VALUE
-rg_m_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride)
+rg_s_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w, VALUE h, VALUE dither, VALUE buf, VALUE rowstride)
 {
     gdk_draw_gray_image(RVAL2DRAW(win), RVAL2GDKGC(gc),
                         NUM2INT(x), NUM2INT(y),
@@ -104,7 +104,7 @@ rg_m_draw_gray_image(VALUE self, VALUE win, VALUE gc, VALUE x, VALUE y, VALUE w,
 }
 
 static VALUE
-rg_m_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
+rg_s_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
 {
     VALUE win, gc, x, y, w, h, dither, buf, rowstride, xdith, ydith;
 
@@ -130,7 +130,7 @@ rg_m_draw_rgb_32_image(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_m_find_color(VALUE self, VALUE colormap, VALUE color)
+rg_s_find_color(VALUE self, VALUE colormap, VALUE color)
 {
     gdk_rgb_find_color(RVAL2GDKCOLORMAP(colormap),
                        RVAL2GDKCOLOR(color));
@@ -138,39 +138,39 @@ rg_m_find_color(VALUE self, VALUE colormap, VALUE color)
 }
 
 static VALUE
-rg_m_set_install(VALUE self, VALUE install)
+rg_s_set_install(VALUE self, VALUE install)
 {
     gdk_rgb_set_install(RVAL2CBOOL(install));
     return self;
 }
 
 static VALUE
-rg_m_set_min_colors(VALUE self, VALUE min_colors)
+rg_s_set_min_colors(VALUE self, VALUE min_colors)
 {
     gdk_rgb_set_min_colors(NUM2INT(min_colors));
     return self;
 }
 
 static VALUE
-rg_m_visual(G_GNUC_UNUSED VALUE self)
+rg_s_visual(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_visual());
 }
 
 static VALUE
-rg_m_colormap(G_GNUC_UNUSED VALUE self)
+rg_s_colormap(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(gdk_rgb_get_colormap());
 }
 
 static VALUE
-rg_m_ditherable_p(G_GNUC_UNUSED VALUE self)
+rg_s_ditherable_p(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_rgb_ditherable());
 }
 
 static VALUE
-rg_m_set_verbose(VALUE self, VALUE verbose)
+rg_s_set_verbose(VALUE self, VALUE verbose)
 {
     gdk_rgb_set_verbose(RVAL2CBOOL(verbose));
     return self;
@@ -181,17 +181,17 @@ Init_gdk_rgb(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "RGB");
 
-    RG_DEF_MODFUNC(draw_rgb_image, -1);
-    RG_DEF_MODFUNC(draw_indexed_image, 10);
-    RG_DEF_MODFUNC(draw_gray_image, 9);
-    RG_DEF_MODFUNC(draw_rgb_32_image, -1);
-    RG_DEF_MODFUNC(find_color, 2);
-    RG_DEF_MODFUNC(set_install, 1);
-    RG_DEF_MODFUNC(set_min_colors, 0);
-    RG_DEF_MODFUNC(visual, 0);
-    RG_DEF_MODFUNC(colormap, 0);
-    RG_DEF_MODFUNC_P(ditherable, 0);
-    RG_DEF_MODFUNC(set_verbose, 1);
+    RG_DEF_SMETHOD(draw_rgb_image, -1);
+    RG_DEF_SMETHOD(draw_indexed_image, 10);
+    RG_DEF_SMETHOD(draw_gray_image, 9);
+    RG_DEF_SMETHOD(draw_rgb_32_image, -1);
+    RG_DEF_SMETHOD(find_color, 2);
+    RG_DEF_SMETHOD(set_install, 1);
+    RG_DEF_SMETHOD(set_min_colors, 0);
+    RG_DEF_SMETHOD(visual, 0);
+    RG_DEF_SMETHOD(colormap, 0);
+    RG_DEF_SMETHOD_P(ditherable, 0);
+    RG_DEF_SMETHOD(set_verbose, 1);
 
     G_DEF_CLASS(GDK_TYPE_RGB_DITHER, "Dither", RG_TARGET_NAMESPACE);
 }

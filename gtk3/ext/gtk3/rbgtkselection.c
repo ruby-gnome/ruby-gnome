@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE mSelection
 
 static VALUE
-rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     gboolean ret;
 
@@ -47,7 +47,7 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE info)
+rg_s_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE info)
 {
     gtk_selection_add_target(RVAL2GTKWIDGET(widget), RVAL2ATOM(selection),
                              RVAL2ATOM(target), NUM2INT(info));
@@ -55,7 +55,7 @@ rg_m_add_target(VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE i
 }
 
 static VALUE
-rg_m_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
+rg_s_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
 {
     GtkWidget *widget = RVAL2GTKWIDGET(rbwidget);
     GdkAtom selection = RVAL2ATOM(rbselection);
@@ -70,14 +70,14 @@ rg_m_add_targets(VALUE self, VALUE rbwidget, VALUE rbselection, VALUE rbtargets)
 }
 
 static VALUE
-rg_m_clear_targets(VALUE self, VALUE widget, VALUE selection)
+rg_s_clear_targets(VALUE self, VALUE widget, VALUE selection)
 {
     gtk_selection_clear_targets(RVAL2GTKWIDGET(widget), RVAL2ATOM(selection));
     return self;
 }
 
 static VALUE
-rg_m_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
+rg_s_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE target, VALUE time)
 {
     gboolean ret = gtk_selection_convert(RVAL2GTKWIDGET(widget), 
                                          RVAL2ATOM(selection), RVAL2ATOM(target),
@@ -86,14 +86,14 @@ rg_m_convert(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE selection, VALUE targ
 }
 
 static VALUE
-rg_m_remove_all(VALUE self, VALUE widget)
+rg_s_remove_all(VALUE self, VALUE widget)
 {
     gtk_selection_remove_all(RVAL2GTKWIDGET(widget));
     return self;
 }
 
 static VALUE
-rg_m_include_image_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable)
+rg_s_include_image_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable)
 {
     gboolean writable = RVAL2CBOOL(rbwritable);
     long n;
@@ -108,7 +108,7 @@ rg_m_include_image_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbwritable
 }
 
 static VALUE
-rg_m_include_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
+rg_s_include_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 {
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
@@ -122,7 +122,7 @@ rg_m_include_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-rg_m_include_uri_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
+rg_s_include_uri_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 {
     long n;
     GdkAtom *targets = RVAL2GDKATOMS(rbtargets, &n);
@@ -136,7 +136,7 @@ rg_m_include_uri_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets)
 }
 
 static VALUE
-rg_m_include_rich_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuffer)
+rg_s_include_rich_text_p(G_GNUC_UNUSED VALUE self, VALUE rbtargets, VALUE rbbuffer)
 {
     GtkTextBuffer *buffer = RVAL2GTKTEXTBUFFER(rbbuffer);
     long n;
@@ -155,14 +155,14 @@ Init_gtk_selection(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE =  rb_define_module_under(mGtk, "Selection");
 
-    RG_DEF_MODFUNC(owner_set, 3);
-    RG_DEF_MODFUNC(add_target, 4);
-    RG_DEF_MODFUNC(add_targets, 3);
-    RG_DEF_MODFUNC(clear_targets, 2);
-    RG_DEF_MODFUNC(convert, 4);
-    RG_DEF_MODFUNC(remove_all, 1);
-    RG_DEF_MODFUNC_P(include_image, 2);
-    RG_DEF_MODFUNC_P(include_text, 1);
-    RG_DEF_MODFUNC_P(include_uri, 1);
-    RG_DEF_MODFUNC_P(include_rich_text, 2);
+    RG_DEF_SMETHOD(owner_set, 3);
+    RG_DEF_SMETHOD(add_target, 4);
+    RG_DEF_SMETHOD(add_targets, 3);
+    RG_DEF_SMETHOD(clear_targets, 2);
+    RG_DEF_SMETHOD(convert, 4);
+    RG_DEF_SMETHOD(remove_all, 1);
+    RG_DEF_SMETHOD_P(include_image, 2);
+    RG_DEF_SMETHOD_P(include_text, 1);
+    RG_DEF_SMETHOD_P(include_uri, 1);
+    RG_DEF_SMETHOD_P(include_rich_text, 2);
 }

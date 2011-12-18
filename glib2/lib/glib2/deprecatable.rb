@@ -31,21 +31,20 @@ module GLib
       __define_deprecated_method__(:instance, deprecated_method, new_method, &block)
     end
 
-    def define_deprecated_method_by_hash_args(deprecated_method, old_args, new_args, &block)
+    def define_deprecated_method_by_hash_args(deprecated_method, old_args, new_args, req_argc = 0, &block)
       klass = self
       alias_name = "__deprecatable_#{deprecated_method}__"
       alias_method alias_name, deprecated_method
       private alias_name
 
       define_method(deprecated_method) do |*margs, &mblock|
-        if margs.empty? || (margs.size == 1 && margs.first.is_a?(Hash))
-          params = margs.first
+        if (margs.size == req_argc) || (margs.size == (req_argc + 1) && margs.last.is_a?(Hash))
         else
-          params = block.call(self, *margs, &mblock)
+          margs = block.call(self, *margs, &mblock)
           msg = "#{caller[0]}: '#{klass}##{deprecated_method}(#{old_args})' style has been deprecated."
           warn "#{msg} Use '#{klass}##{deprecated_method}(#{new_args})' style."
         end
-        __send__(alias_name, params, &mblock)
+        __send__(alias_name, *margs, &mblock)
       end
     end
 
