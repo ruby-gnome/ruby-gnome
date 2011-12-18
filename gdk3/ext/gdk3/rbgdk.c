@@ -172,14 +172,14 @@ rbgdk_rval2gdkpixbufglist(VALUE value)
 }
 
 static VALUE
-rg_m_display_arg_name(G_GNUC_UNUSED VALUE self)
+rg_s_display_arg_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_display_arg_name());
 }
 
 /* deprecated
 static VALUE
-rg_m_set_locale(G_GNUC_UNUSED VALUE self)
+rg_s_set_locale(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_set_locale());
 }
@@ -187,7 +187,7 @@ rg_m_set_locale(G_GNUC_UNUSED VALUE self)
 
 /* deprecated
 static VALUE
-rg_m_set_sm_client_id(VALUE self, VALUE id)
+rg_s_set_sm_client_id(VALUE self, VALUE id)
 {
     gdk_set_sm_client_id(RVAL2CSTR_ACCEPT_NIL(id));
     return self;
@@ -195,7 +195,7 @@ rg_m_set_sm_client_id(VALUE self, VALUE id)
 */
 
 static VALUE
-rg_m_notify_startup_complete(int argc, VALUE *argv, VALUE self)
+rg_s_notify_startup_complete(int argc, VALUE *argv, VALUE self)
 {
     VALUE startup_id;
 
@@ -210,20 +210,20 @@ rg_m_notify_startup_complete(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_m_program_class(G_GNUC_UNUSED VALUE self)
+rg_s_program_class(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_program_class());
 }
 
 static VALUE
-rg_m_set_program_class(VALUE self, VALUE program_class)
+rg_s_set_program_class(VALUE self, VALUE program_class)
 {
     gdk_set_program_class(RVAL2CSTR(program_class));
     return self;
 }
 
 static VALUE
-rg_m_display(G_GNUC_UNUSED VALUE self)
+rg_s_display(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_display());
 }
@@ -270,7 +270,7 @@ rbgdk_x_io_error(Display *display)
 #endif 
 
 static VALUE
-rg_m_set_x_error_handler(VALUE self)
+rg_s_set_x_error_handler(VALUE self)
 {
 #ifdef HAVE_XGETERRORTEXT
     rb_x_error = rb_block_proc();
@@ -283,7 +283,7 @@ rg_m_set_x_error_handler(VALUE self)
 }
 
 static VALUE
-rg_m_set_x_io_error_handler(VALUE self)
+rg_s_set_x_io_error_handler(VALUE self)
 {
 #ifdef HAVE_XGETERRORTEXT
     rb_x_io_error = rb_block_proc();
@@ -296,38 +296,38 @@ rg_m_set_x_io_error_handler(VALUE self)
 }
 
 static VALUE
-rg_m_flush(VALUE self)
+rg_s_flush(VALUE self)
 {
     gdk_flush();
     return self;
 }
 
 static VALUE
-rg_m_screen_width(G_GNUC_UNUSED VALUE self)
+rg_s_screen_width(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_width());
 }
 
 static VALUE
-rg_m_screen_width_mm(G_GNUC_UNUSED VALUE self)
+rg_s_screen_width_mm(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_width_mm());
 }
 
 static VALUE
-rg_m_screen_height(G_GNUC_UNUSED VALUE self)
+rg_s_screen_height(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_height());
 }
 
 static VALUE
-rg_m_screen_height_mm(G_GNUC_UNUSED VALUE self)
+rg_s_screen_height_mm(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_height_mm());
 }
 
 static VALUE
-rg_m_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
+rg_s_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
 {
     return GDKGRABSTATUS2RVAL(gdk_pointer_grab(RVAL2GDKWINDOW(win),
                                                RVAL2CBOOL(owner_events),
@@ -338,62 +338,62 @@ rg_m_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE
 }
 
 static VALUE
-rg_m_pointer_ungrab(VALUE self, VALUE time)
+rg_s_pointer_ungrab(VALUE self, VALUE time)
 {
     gdk_pointer_ungrab(NUM2INT(time));
     return self;
 }
 
 static VALUE
-rg_m_keyboard_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE time)
+rg_s_keyboard_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE time)
 {
     return GDKGRABSTATUS2RVAL(gdk_keyboard_grab(RVAL2GDKWINDOW(win),
                                                 RVAL2CBOOL(owner_events), NUM2INT(time)));
 }
 
 static VALUE
-rg_m_keyboard_ungrab(VALUE self, VALUE time)
+rg_s_keyboard_ungrab(VALUE self, VALUE time)
 {
     gdk_keyboard_ungrab(NUM2INT(time));
     return self;
 }
 
 static VALUE
-rg_m_pointer_is_grabbed_p(G_GNUC_UNUSED VALUE self)
+rg_s_pointer_is_grabbed_p(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gdk_pointer_is_grabbed());
 }
 
 static VALUE
-rg_m_set_double_click_time(VALUE self, VALUE msec)
+rg_s_set_double_click_time(VALUE self, VALUE msec)
 {
     gdk_set_double_click_time(NUM2UINT(msec));
     return self;
 }
 
 static VALUE
-rg_m_beep(VALUE self)
+rg_s_beep(VALUE self)
 {
     gdk_beep();
     return self;
 }
 
 static VALUE
-rg_m_error_trap_push(VALUE self)
+rg_s_error_trap_push(VALUE self)
 {
     gdk_error_trap_push();
     return self;
 }
 
 static VALUE
-rg_m_error_trap_pop(VALUE self)
+rg_s_error_trap_pop(VALUE self)
 {
     gdk_error_trap_pop();
     return self;
 }
 
 static VALUE
-rg_m_windowing_x11_p(G_GNUC_UNUSED VALUE self)
+rg_s_windowing_x11_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_X11
     return Qtrue;
@@ -403,7 +403,7 @@ rg_m_windowing_x11_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_windowing_win32_p(G_GNUC_UNUSED VALUE self)
+rg_s_windowing_win32_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_WIN32
     return Qtrue;
@@ -413,7 +413,7 @@ rg_m_windowing_win32_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_windowing_fb_p(G_GNUC_UNUSED VALUE self)
+rg_s_windowing_fb_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_FB
     return Qtrue;
@@ -423,7 +423,7 @@ rg_m_windowing_fb_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_windowing_quartz_p(G_GNUC_UNUSED VALUE self)
+rg_s_windowing_quartz_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_QUARTZ
     return Qtrue;
@@ -433,7 +433,7 @@ rg_m_windowing_quartz_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_windowing_directfb_p(G_GNUC_UNUSED VALUE self)
+rg_s_windowing_directfb_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef GDK_WINDOWING_DIRECTFB
     return Qtrue;
@@ -443,13 +443,13 @@ rg_m_windowing_directfb_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_target(G_GNUC_UNUSED VALUE self)
+rg_s_target(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(RUBY_GDK3_TARGET);
 }
 
 static VALUE
-rg_m_cairo_available_p(G_GNUC_UNUSED VALUE self)
+rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
 #if CAIRO_AVAILABLE
     return Qtrue;
@@ -465,41 +465,41 @@ Init_gdk(void)
 
     VALUE RG_TARGET_NAMESPACE = rb_define_module("Gdk");
 
-    RG_DEF_MODFUNC(display_arg_name, 0);
+    RG_DEF_SMETHOD(display_arg_name, 0);
 /* deprecated
-    RG_DEF_MODFUNC(set_locale, 0);
-    RG_DEF_MODFUNC(set_sm_client_id, 1);
+    RG_DEF_SMETHOD(set_locale, 0);
+    RG_DEF_SMETHOD(set_sm_client_id, 1);
 */
-    RG_DEF_MODFUNC(notify_startup_complete, -1);
-    RG_DEF_MODFUNC(program_class, 0);
-    RG_DEF_MODFUNC(set_program_class, 1);
-    RG_DEF_MODFUNC(display, 0);
+    RG_DEF_SMETHOD(notify_startup_complete, -1);
+    RG_DEF_SMETHOD(program_class, 0);
+    RG_DEF_SMETHOD(set_program_class, 1);
+    RG_DEF_SMETHOD(display, 0);
 
-    RG_DEF_MODFUNC(set_x_error_handler, 0);
-    RG_DEF_MODFUNC(set_x_io_error_handler, 0);
-    RG_DEF_MODFUNC(screen_width, 0);
-    RG_DEF_MODFUNC(screen_width_mm, 0);
-    RG_DEF_MODFUNC(screen_height, 0);
-    RG_DEF_MODFUNC(screen_height_mm, 0);
-    RG_DEF_MODFUNC(beep, 0);
-    RG_DEF_MODFUNC(flush, 0);
-    RG_DEF_MODFUNC(set_double_click_time, 1);
-    RG_DEF_MODFUNC(pointer_grab, 6);
-    RG_DEF_MODFUNC(pointer_ungrab, 1);
-    RG_DEF_MODFUNC(keyboard_grab, 3);
-    RG_DEF_MODFUNC(keyboard_ungrab, 1);
-    RG_DEF_MODFUNC_P(pointer_is_grabbed, 0);
-    RG_DEF_MODFUNC(error_trap_push, 0);
-    RG_DEF_MODFUNC(error_trap_pop, 0);
-    RG_DEF_MODFUNC_P(windowing_x11, 0);
-    RG_DEF_MODFUNC_P(windowing_win32, 0);
-    RG_DEF_MODFUNC_P(windowing_fb, 0);
-    RG_DEF_MODFUNC_P(windowing_quartz, 0);
-    RG_DEF_MODFUNC_P(windowing_directfb, 0);
+    RG_DEF_SMETHOD(set_x_error_handler, 0);
+    RG_DEF_SMETHOD(set_x_io_error_handler, 0);
+    RG_DEF_SMETHOD(screen_width, 0);
+    RG_DEF_SMETHOD(screen_width_mm, 0);
+    RG_DEF_SMETHOD(screen_height, 0);
+    RG_DEF_SMETHOD(screen_height_mm, 0);
+    RG_DEF_SMETHOD(beep, 0);
+    RG_DEF_SMETHOD(flush, 0);
+    RG_DEF_SMETHOD(set_double_click_time, 1);
+    RG_DEF_SMETHOD(pointer_grab, 6);
+    RG_DEF_SMETHOD(pointer_ungrab, 1);
+    RG_DEF_SMETHOD(keyboard_grab, 3);
+    RG_DEF_SMETHOD(keyboard_ungrab, 1);
+    RG_DEF_SMETHOD_P(pointer_is_grabbed, 0);
+    RG_DEF_SMETHOD(error_trap_push, 0);
+    RG_DEF_SMETHOD(error_trap_pop, 0);
+    RG_DEF_SMETHOD_P(windowing_x11, 0);
+    RG_DEF_SMETHOD_P(windowing_win32, 0);
+    RG_DEF_SMETHOD_P(windowing_fb, 0);
+    RG_DEF_SMETHOD_P(windowing_quartz, 0);
+    RG_DEF_SMETHOD_P(windowing_directfb, 0);
 
-    RG_DEF_MODFUNC(target, 0);
+    RG_DEF_SMETHOD(target, 0);
 
-    RG_DEF_MODFUNC_P(cairo_available, 0);
+    RG_DEF_SMETHOD_P(cairo_available, 0);
 
     /* GdkGrabStatus */
     G_DEF_CLASS(GDK_TYPE_GRAB_STATUS, "GrabStatus", RG_TARGET_NAMESPACE);

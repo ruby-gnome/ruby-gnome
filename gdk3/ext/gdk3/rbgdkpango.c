@@ -25,7 +25,7 @@
 #define RG_TARGET_NAMESPACE mPango
 
 static VALUE
-rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE screen, ret;
     rb_scan_args(argc, argv, "01", &screen);
@@ -159,7 +159,7 @@ Init_gdk_pango(VALUE mGdk)
     VALUE pattr_color = ATTRTYPE2CLASS(CSTR2RVAL("AttrColor"));
 */
 
-    RG_DEF_MODFUNC(context, -1);
+    RG_DEF_SMETHOD(context, -1);
 
 /* deprecated
     rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
