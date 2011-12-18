@@ -298,39 +298,6 @@ rbg_filename_from_ruby(VALUE filename)
 #endif
 }
 
-static VALUE
-rbg_filename_gslist_to_array_free_body(VALUE list)
-{
-    VALUE ary = rb_ary_new();
-    GSList *p;
-
-    for (p = (GSList *)list; p != NULL; p = g_slist_next(p))
-        rb_ary_push(ary, CSTRFILENAME2RVAL(p->data));
-
-    return ary;
-}
-
-static VALUE
-rbg_filename_gslist_to_array_free_ensure(VALUE val)
-{
-    GSList *list = (GSList *)val;
-    GSList *p;
-
-    for (p = list; p != NULL; p = g_slist_next(p))
-        g_free((gchar *)p->data);
-
-    g_slist_free(list);
-
-    return Qnil;
-}
-
-VALUE
-rbg_filename_gslist_to_array_free(GSList *list)
-{
-    return rb_ensure(rbg_filename_gslist_to_array_free_body, (VALUE)list,
-                     rbg_filename_gslist_to_array_free_ensure, (VALUE)list);
-}
-
 struct rval2strv_args {
     VALUE ary;
     long n;
