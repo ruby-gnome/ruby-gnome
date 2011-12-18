@@ -23,16 +23,12 @@
 #ifndef __RBGLIBDEPRECATED_H__
 #define __RBGLIBDEPRECATED_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 #define CSTRFILENAMEARRAY2RVAL_FREE(s) (rbg_filename_gslist_to_array_free(s))
 
 extern VALUE rbg_filename_gslist_to_array_free(GSList *list);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+G_END_DECLS
 
 #endif /* __RBGLIBDEPRECATED_H__ */

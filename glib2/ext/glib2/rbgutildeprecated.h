@@ -22,9 +22,7 @@
 #ifndef __RBGUTILDEPRECATED_H__
 #define __RBGUTILDEPRECATED_H__
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
+G_BEGIN_DECLS
 
 #define GLIST2ARY(list)           (rbgutil_glist2ary(list))
 #define GLIST2ARY_FREE(list)      (rbgutil_glist2ary_and_free(list))
@@ -50,8 +48,6 @@ extern VALUE rbgutil_gslist2ary_and_free(GSList *list);
 extern VALUE rbgutil_gslist2ary_boxed(const GSList *list, GType gtype);
 extern VALUE rbgutil_gslist2ary_boxed_and_free(GSList *list, GType gtype);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+G_END_DECLS
 
 #endif /* __RBGUTILDEPRECATED_H__ */
