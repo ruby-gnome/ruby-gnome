@@ -249,7 +249,4 @@ Init_gdk_geometry(VALUE mGdk)
     RG_DEF_METHOD(set_min_aspect, 1);
     RG_DEF_METHOD(set_max_aspect, 1);
     RG_DEF_METHOD(set_win_gravity, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 }

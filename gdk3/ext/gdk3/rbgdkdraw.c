@@ -515,8 +515,6 @@ Init_gdk_draw(VALUE mGdk)
 #elif defined(GDK_WINDOWING_FB)
     G_DEF_CLASS3("GdkDrawableFB", "DrawableFB", mGdk);
 #endif
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 */
 

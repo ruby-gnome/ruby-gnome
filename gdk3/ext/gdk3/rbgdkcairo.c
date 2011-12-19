@@ -91,7 +91,5 @@ Init_gdk_cairo(void)
 */
     RG_DEF_METHOD(gdk_rectangle, 1);
     RG_DEF_METHOD(gdk_region, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
