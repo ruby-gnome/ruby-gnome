@@ -713,7 +713,7 @@ rg_s_type_register(int argc, VALUE* argv, VALUE self)
             VALUE m = rb_define_module_under(self, RubyGtkContainerHookModule);
 
             if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                rb_define_method(m, "initialize", cont_initialize, -1);
+                rbg_define_method(m, "initialize", cont_initialize, -1);
             }
 
             rb_include_module(self, m);
@@ -780,8 +780,6 @@ Init_gtk_container(VALUE mGtk)
 
     rb_global_variable(&proc_mod_eval);
     proc_mod_eval = rb_eval_string("lambda{|obj,proc| obj.module_eval(&proc)}");
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     rb_global_variable(&type_to_prop_setter_table);
     rb_global_variable(&type_to_prop_getter_table);

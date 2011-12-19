@@ -58,6 +58,4 @@ Init_gtk_fixed(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(put, 3);
     RG_DEF_METHOD(move, 3);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

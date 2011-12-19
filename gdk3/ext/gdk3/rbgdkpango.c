@@ -162,25 +162,24 @@ Init_gdk_pango(VALUE mGdk)
     RG_DEF_SMETHOD(context, -1);
 
 /* deprecated
-    rb_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
-    G_DEF_SETTER(context, "colormap");
+    rbg_define_method(context, "set_colormap", gdkpango_context_set_colormap, 1);
 */
-    rb_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
-    rb_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
+    rbg_define_method(layout, "get_clip_region", gdkpango_layout_get_clip_region, 3);
+    rbg_define_method(layoutline, "get_clip_region", gdkpango_layout_line_get_clip_region, 3);
 
 /* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossed", pattrbool);
-    rb_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
+    rbg_define_method(klass, "initialize", gdkpango_attr_embossed_initialize, 1);
     tmpattr = gdk_pango_attr_embossed_new(TRUE);
-    rb_define_method(klass, "value", gdkpango_attr_embossed_value, 0);
+    rbg_define_method(klass, "value", gdkpango_attr_embossed_value, 0);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
     pango_attribute_destroy(tmpattr);
 */
 
 /* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrStipple", pattr);
-    rb_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
-    rb_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
+    rbg_define_method(klass, "initialize", gdkpango_attr_stipple_initialize, 1);
+    rbg_define_method(klass, "value", gdkpango_attr_stipple_value, 0);
     tmpattr = gdk_pango_attr_stipple_new(NULL);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
     pango_attribute_destroy(tmpattr);
@@ -188,9 +187,9 @@ Init_gdk_pango(VALUE mGdk)
 
 /* deprecated
     klass = rb_define_class_under(mGdk, "PangoAttrEmbossColor", pattr_color);
-    rb_define_method(klass, "initialize",
+    rbg_define_method(klass, "initialize",
                      gdkpango_attr_emboss_color_initialize, 1);
-    rb_define_method(klass, "value", gdkpango_attr_emboss_color_value, 0);
+    rbg_define_method(klass, "value", gdkpango_attr_emboss_color_value, 0);
     tmpattr = gdk_pango_attr_emboss_color_new(&color);
     RBPANGO_ADD_ATTRIBUTE(tmpattr->klass->type, klass);
     pango_attribute_destroy(tmpattr);

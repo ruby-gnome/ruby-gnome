@@ -157,7 +157,6 @@ Init_gtk_menu(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_screen, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "screen");
     RG_DEF_METHOD(reorder_child, 2);
     RG_DEF_METHOD(attach, 5);
     RG_DEF_METHOD(popup, 4);

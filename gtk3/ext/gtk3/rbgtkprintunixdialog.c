@@ -85,8 +85,6 @@ Init_gtk_print_unix_dialog(VALUE mGtk)
     RG_DEF_ALIAS("settings", "print_settings");
     RG_DEF_ALIAS("set_settings", "set_print_settings");
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_TYPE_PRINT_CAPABILITIES, "Capabilities", RG_TARGET_NAMESPACE);
 #endif
 }

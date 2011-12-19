@@ -178,13 +178,11 @@ Init_gtk_entry(VALUE mGtk)
     RG_DEF_METHOD(layout, 0);
     RG_DEF_METHOD(layout_offsets, 0);
     RG_DEF_METHOD(set_completion, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "completion");
     RG_DEF_METHOD(completion, 0);
     RG_DEF_METHOD(layout_index_to_text_index, 1);
     RG_DEF_METHOD(text_index_to_layout_index, 1);
     RG_DEF_METHOD(cursor_hadjustment, 0);
     RG_DEF_METHOD(set_cursor_hadjustment, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "cursor_hadjustment");
     RG_DEF_METHOD(current_icon_drag_source, 0);
     RG_DEF_METHOD(get_icon_area, 1);
     RG_DEF_METHOD(get_icon_at_pos, 2);

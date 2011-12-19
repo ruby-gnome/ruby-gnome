@@ -1293,7 +1293,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_visual, 1);
     RG_DEF_METHOD(shape_combine_region, 1);
     RG_DEF_METHOD(unset_state_flags, 1);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
 

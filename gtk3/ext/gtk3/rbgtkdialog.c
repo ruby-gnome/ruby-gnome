@@ -172,7 +172,6 @@ Init_gtk_dialog(VALUE mGtk)
     RG_DEF_METHOD(add_buttons, -1);
     RG_DEF_METHOD(add_action_widget, 2);
     RG_DEF_METHOD(set_default_response, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "default_response");
     RG_DEF_SMETHOD_P(alternative_dialog_button_order, 1);
     RG_DEF_METHOD(set_alternative_button_order, 1);
     RG_DEF_METHOD(set_response_sensitive, 2);

@@ -88,8 +88,6 @@ Init_gtksource_view (VALUE mGtkSource)
     RG_DEF_METHOD(get_gutter, 1);
     RG_DEF_METHOD(set_mark_attributes, 3);
 
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_SOURCE_TYPE_SMART_HOME_END_TYPE, "SmartHomeEndType", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GTK_SOURCE_TYPE_DRAW_SPACES_FLAGS, "DrawSpacesFlags", RG_TARGET_NAMESPACE);
 }

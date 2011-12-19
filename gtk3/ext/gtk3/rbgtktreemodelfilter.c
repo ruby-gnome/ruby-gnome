@@ -194,5 +194,4 @@ Init_gtk_treemodelfilter(VALUE mGtk)
     RG_DEF_METHOD(convert_path_to_child_path, 1);
     RG_DEF_METHOD(refilter, 0);
     RG_DEF_METHOD(clear_cache, 0);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -111,6 +111,4 @@ Init_vte_pty(VALUE mVte)
     RG_DEF_METHOD(size, 0);
     RG_DEF_METHOD(set_size, 2);
     RG_DEF_METHOD(set_utf8, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

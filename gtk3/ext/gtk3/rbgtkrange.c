@@ -63,7 +63,6 @@ Init_gtk_range(VALUE mGtk)
     RG_DEF_METHOD(set_increments, 2);
     RG_DEF_METHOD(set_range, 2);
     RG_DEF_METHOD(set_value, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "value");
 
     G_DEF_CLASS(GTK_TYPE_SENSITIVITY_TYPE, "SensitivityType", RG_TARGET_NAMESPACE);
 }

@@ -82,6 +82,4 @@ Init_gtksource_mark (VALUE mGtkSource)
     RG_DEF_METHOD(initialize, 2);
     RG_DEF_METHOD(next, -1);
     RG_DEF_METHOD(prev, -1);
-
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

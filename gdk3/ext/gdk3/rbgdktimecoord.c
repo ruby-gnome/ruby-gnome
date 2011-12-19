@@ -129,7 +129,5 @@ Init_gdk_timecoord(VALUE mGdk)
     RG_DEF_METHOD(axes, 0);
     RG_DEF_METHOD(set_axes, 1);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     rb_define_const(RG_TARGET_NAMESPACE, "MAX_AXES", INT2NUM(GDK_MAX_TIMECOORD_AXES));
 }

@@ -122,6 +122,4 @@ Init_gtk_print_context(VALUE mGtk)
 #ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(set_cairo_context, 3);
 #endif
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

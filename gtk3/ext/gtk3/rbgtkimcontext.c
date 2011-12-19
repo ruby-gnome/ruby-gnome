@@ -130,6 +130,4 @@ Init_gtk_imcontext(VALUE mGtk)
     RG_DEF_METHOD(set_surrounding, 2);
     RG_DEF_METHOD(surrounding, 0);
     RG_DEF_METHOD(delete_surrounding, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

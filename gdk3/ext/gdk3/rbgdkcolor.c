@@ -134,6 +134,4 @@ Init_gdk_color(VALUE mGdk)
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_METHOD_OPERATOR("==", gdkcolor_equal, 1);
     RG_DEF_METHOD(to_s, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

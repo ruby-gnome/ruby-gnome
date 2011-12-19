@@ -90,7 +90,5 @@ Init_gtk_page_setup_unix_dialog(VALUE mGtk)
     RG_DEF_METHOD(page_setup, 0);
     RG_DEF_METHOD(set_print_settings, 1);
     RG_DEF_METHOD(print_settings, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

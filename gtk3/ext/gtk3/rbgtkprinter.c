@@ -151,7 +151,5 @@ Init_gtk_printer(VALUE mGtk)
     G_DEF_CLASS3("GtkPrintBackendCups", "PrintBackendCups", mGtk);
     G_DEF_CLASS3("GtkPrintBackendFile", "PrintBackendFile", mGtk);
     G_DEF_CLASS3("GtkPrintBackendLpr", "PrintBackendLpr", mGtk);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

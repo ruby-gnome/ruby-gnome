@@ -504,8 +504,6 @@ Init_gdk(void)
     /* GdkGrabStatus */
     G_DEF_CLASS(GDK_TYPE_GRAB_STATUS, "GrabStatus", RG_TARGET_NAMESPACE);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     Init_gdk_atom(RG_TARGET_NAMESPACE);
     Init_gdk_cairo();
     Init_gdk_color(RG_TARGET_NAMESPACE);

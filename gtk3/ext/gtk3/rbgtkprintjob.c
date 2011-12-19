@@ -140,7 +140,6 @@ Init_gtk_print_job(VALUE mGtk)
     RG_DEF_METHOD(initialize, 4);
     RG_DEF_METHOD(status, 0);
     RG_DEF_METHOD(set_source_file, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "source_file");
 #ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(surface, 0);
 #endif

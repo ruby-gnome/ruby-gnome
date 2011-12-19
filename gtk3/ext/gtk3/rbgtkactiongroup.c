@@ -462,6 +462,5 @@ Init_gtk_actiongroup(VALUE mGtk)
     RG_DEF_METHOD(add_radio_actions, -1);
     RG_DEF_METHOD(set_translate_func, 0);
     RG_DEF_METHOD(set_translation_domain, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "translation_domain");
     RG_DEF_METHOD(translate_string, 1);
 }

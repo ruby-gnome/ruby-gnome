@@ -317,6 +317,4 @@ Init_gtksource_buffer (VALUE mGtkSource)
     RG_DEF_METHOD(forward_iter_to_source_mark, -1);
     RG_DEF_METHOD(backward_iter_to_source_mark, -1);
     RG_DEF_METHOD(ensure_highlight, 2);
-
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

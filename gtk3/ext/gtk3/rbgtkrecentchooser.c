@@ -180,7 +180,6 @@ Init_gtk_recent_chooser(VALUE mGtk)
 
     RG_DEF_METHOD(set_sort_func, 0);
     RG_DEF_METHOD(set_current_uri, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "current_uri");
     RG_DEF_METHOD(current_uri, 0);
     RG_DEF_METHOD(current_item, 0);
     RG_DEF_METHOD(select_uri, 1);

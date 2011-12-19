@@ -56,6 +56,4 @@ Init_gtk_print_operation_preview(VALUE mGtk)
     RG_DEF_METHOD(render_page, 1);
     RG_DEF_METHOD(end_preview, 0);
     RG_DEF_METHOD_P(selected, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

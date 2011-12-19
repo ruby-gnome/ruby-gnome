@@ -137,5 +137,4 @@ Init_gtksource_styleschememanager (VALUE mGtkSource)
     RG_DEF_METHOD(get_scheme, 1);
     RG_DEF_METHOD(force_rescan, 0);
     RG_DEF_SMETHOD(default, 0);
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

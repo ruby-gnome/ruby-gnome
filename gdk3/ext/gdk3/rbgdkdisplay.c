@@ -463,8 +463,6 @@ Init_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(core_pointer, 0);
 */
     RG_DEF_METHOD(warp_pointer, 3);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(grab, 0);
     RG_DEF_METHOD(ungrab, 0);

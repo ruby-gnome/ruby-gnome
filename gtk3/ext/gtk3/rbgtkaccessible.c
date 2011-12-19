@@ -53,6 +53,4 @@ Init_gtk_accessible(VALUE mGtk)
     RG_DEF_METHOD(connect_widget_destroyed, 0);
     RG_DEF_METHOD(widget, 0);
     RG_DEF_METHOD(set_widget, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

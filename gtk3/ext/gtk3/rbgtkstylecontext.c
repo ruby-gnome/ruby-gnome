@@ -410,6 +410,4 @@ Init_gtk_stylecontext(VALUE mGtk)
     RG_DEF_METHOD(set_state, 1);
     RG_DEF_METHOD(state, 0);
     RG_DEF_METHOD(state_is_running, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -386,6 +386,4 @@ Init_gtk_clipboard(VALUE mGtk)
     RG_DEF_METHOD_P(wait_is_target_available, 1);
     RG_DEF_METHOD(set_can_store, 1);
     RG_DEF_METHOD(store, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

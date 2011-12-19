@@ -545,8 +545,6 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(resize_to_geometry, 2);
     RG_DEF_METHOD(set_default_geometry, 2);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
 

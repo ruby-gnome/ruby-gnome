@@ -65,7 +65,6 @@ Init_gtk_textmark(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);
     RG_DEF_METHOD(initialize, 2);
     RG_DEF_METHOD(set_visible, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "visible");
     RG_DEF_METHOD_P(visible, 0);
     RG_DEF_METHOD_P(deleted, 0);
     RG_DEF_METHOD(buffer, 0);

@@ -36,6 +36,4 @@ Init_vte_reaper(VALUE mVte)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(VTE_TYPE_REAPER, "Reaper", mVte);
 
     RG_DEF_SMETHOD(get, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

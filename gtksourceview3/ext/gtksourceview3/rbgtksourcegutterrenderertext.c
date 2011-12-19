@@ -61,6 +61,4 @@ Init_gtksource_gutterrenderertext(VALUE mGtkSource)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_markup, 1);
     RG_DEF_METHOD(set_text, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

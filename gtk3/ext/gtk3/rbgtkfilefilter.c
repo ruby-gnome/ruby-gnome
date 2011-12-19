@@ -124,7 +124,5 @@ Init_gtk_file_filter(VALUE mGtk)
     RG_DEF_METHOD(needed, 0);
     RG_DEF_METHOD_P(filter, 5);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
 }

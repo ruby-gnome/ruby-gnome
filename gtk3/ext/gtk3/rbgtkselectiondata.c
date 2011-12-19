@@ -285,6 +285,4 @@ Init_gtk_selectiondata(VALUE mGtk)
     RG_DEF_METHOD(targets_include_text, 0);
     RG_DEF_METHOD(targets_include_uri, 0);
     RG_DEF_METHOD(targets_include_rich_text, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 } 

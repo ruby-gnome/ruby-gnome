@@ -191,8 +191,6 @@ Init_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(keys, 0);
 */
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* GdkInputSource */
     G_DEF_CLASS(GDK_TYPE_INPUT_SOURCE, "InputSource", RG_TARGET_NAMESPACE);
 

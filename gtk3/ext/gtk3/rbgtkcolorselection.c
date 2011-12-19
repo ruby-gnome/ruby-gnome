@@ -216,6 +216,4 @@ Init_gtk_color_selection(VALUE mGtk)
     RG_DEF_SMETHOD(set_change_palette_hook, 0);
     RG_DEF_METHOD(previous_rgba, 0);
     RG_DEF_METHOD(set_previous_rgba, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

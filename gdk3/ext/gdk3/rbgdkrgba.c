@@ -139,6 +139,4 @@ Init_gdk_rgba(VALUE mGdk)
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_METHOD(to_s, 0);
     RG_DEF_METHOD_OPERATOR("==", equal, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
