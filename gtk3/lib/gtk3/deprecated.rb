@@ -92,6 +92,12 @@ module Gtk
     define_deprecated_method :disconnect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
     define_deprecated_method :block_activate_from, :warn => "Don't use this method."
     define_deprecated_method :unblock_activate_from, :warn => "Don't use this method."
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip = nil, stock_id = nil',
+        'name, :label => nil, :tooltip => nil, :stock_id => nil', 1 do
+        |_self, name, label, tooltip, stock_id|
+      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
+    end
   end
 
   class Arrow

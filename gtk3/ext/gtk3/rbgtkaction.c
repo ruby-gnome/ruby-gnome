@@ -27,20 +27,20 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE name, label, tooltip, stock_id;
-    const gchar *stock = NULL;
+    VALUE name, options, label, tooltip, stock_id, buffer;
 
-    rb_scan_args(argc, argv, "22", &name, &label, &tooltip, &stock_id);
+    rb_scan_args(argc, argv, "11", &name, &options);
+    rbg_scan_options(options,
+                     "label", &label,
+                     "tooltip", &tooltip,
+                     "stock_id", &stock_id,
+                     NULL);
 
-    if (TYPE(stock_id) == T_SYMBOL) {
-        stock = rb_id2name(SYM2ID(stock_id));
-    } else if (TYPE(stock_id) == T_STRING){
-        stock = RVAL2CSTR(stock_id);
-    }
-
-    G_INITIALIZE(self, gtk_action_new(RVAL2CSTR(name), RVAL2CSTR(label),
+    G_INITIALIZE(self, gtk_action_new(RVAL2CSTR(name),
+                                      RVAL2CSTR_ACCEPT_NIL(label),
                                       RVAL2CSTR_ACCEPT_NIL(tooltip),
-                                      stock));
+                                      RVAL2GLIBID_ACCEPT_NIL(stock_id, buffer)));
+
     return Qnil;
 }
 
