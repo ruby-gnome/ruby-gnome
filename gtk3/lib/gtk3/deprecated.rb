@@ -319,6 +319,25 @@ module Gtk
   class Image
     extend GLib::Deprecatable
     define_deprecated_enums :Type
+    define_deprecated_method_by_hash_args :initialize,
+        'image, size = nil',
+        ':label => nil, :mnemonic => nil, :stock => nil, :size => nil' do
+        |_self, image, size|
+      case image
+      when String
+        if size
+          [{:icon_name => image, :size => size}]
+        else
+          [{:file => image}]
+        end
+      when Symbol
+        [{:stock => image, :size => size}]
+      when Gtk::IconSet
+        [{:icon_set => image, :size => size}]
+      else
+        [image]
+      end
+    end
   end
 
   class LinkButton
