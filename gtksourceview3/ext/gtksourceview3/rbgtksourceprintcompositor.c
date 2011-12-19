@@ -168,6 +168,4 @@ Init_gtksource_printcompositor(VALUE mGtkSource)
     RG_DEF_METHOD(paginate, 1);
     RG_DEF_METHOD(pagination_progress, 0);
     RG_DEF_METHOD(draw_page, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

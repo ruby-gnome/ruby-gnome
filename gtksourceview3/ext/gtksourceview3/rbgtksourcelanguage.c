@@ -121,6 +121,4 @@ Init_gtksource_language (VALUE mGtkSource)
     RG_DEF_METHOD(globs, 0);
     RG_DEF_METHOD(get_style_name, 1);
     RG_DEF_METHOD(style_ids, 0);
-
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }
