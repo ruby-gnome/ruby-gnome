@@ -135,6 +135,23 @@ module Gtk
     define_deprecated_signal :leave, :warn => "Use 'Gtk::Widget::leave-notify-event' signal."
     define_deprecated_signal :pressed, :warn => "Use 'Gtk::Widget::button-press-event' signal."
     define_deprecated_signal :released, :warn => "Use 'Gtk::Widget::button-release-event' signal."
+    define_deprecated_method_by_hash_args :initialize,
+        'label_or_stock_id, use_underline = nil',
+        ':label => nil, :mnemonic => nil, :stock => nil' do
+        |_self, label_or_stock_id, use_underline|
+      case label_or_stock_id
+      when String
+        if use_underline
+          [{:mnemonic => label_or_stock_id}]
+        else
+          [{:label => label_or_stock_id}]
+        end
+      when Symbol
+        [{:stock => label_or_stock_id}]
+      else
+        [label_or_stock_id]
+      end
+    end
   end
 
   class ButtonBox

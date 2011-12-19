@@ -30,27 +30,32 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE label, use_underline;
+    VALUE button;
     GtkWidget *widget = NULL;
 
-    if (rb_scan_args(argc, argv, "02", &label, &use_underline) > 0) {
-        if (TYPE(label) == T_STRING){
-            if (NIL_P(use_underline) || RVAL2CBOOL(use_underline)){
-                widget = gtk_button_new_with_mnemonic(RVAL2CSTR(label));
-            } else {
-                widget = gtk_button_new_with_label(RVAL2CSTR(label));
-            }
-        } else if (TYPE(label) == T_SYMBOL){
-            widget = gtk_button_new_from_stock(rb_id2name(SYM2ID(label)));
-        } else {
-            rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
-                     rb_class2name(CLASS_OF(label)));
-        }
-    } else {
+    rb_scan_args(argc, argv, "01", &button);
+    if (NIL_P(button)) {
         widget = gtk_button_new();
+    } else if (TYPE(button) == T_HASH) {
+        VALUE label, mnemonic, stock, buffer;
+        rbg_scan_options(button,
+                         "label", &label,
+                         "mnemonic", &mnemonic,
+                         "stock", &stock,
+                         NULL);
+
+        if (!NIL_P(label))
+            widget = gtk_button_new_with_label(RVAL2CSTR(label));
+        else if (!NIL_P(mnemonic))
+            widget = gtk_button_new_with_mnemonic(RVAL2CSTR(mnemonic));
+        else if (!NIL_P(stock))
+            widget = gtk_button_new_from_stock(RVAL2GLIBID(stock, buffer));
     }
+    if (!widget)
+        rb_raise(rb_eArgError, "Invalid arguments.");
 
     RBGTK_INITIALIZE(self, widget); 
+
     return Qnil;
 }
 
