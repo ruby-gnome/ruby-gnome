@@ -62,7 +62,6 @@ Init_gtk_texttag(VALUE mGtk)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(priority, 0);
     RG_DEF_METHOD(set_priority, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "priority");
     RG_DEF_METHOD(event, 3);
 
     G_DEF_CLASS(GTK_TYPE_WRAP_MODE, "WrapMode", RG_TARGET_NAMESPACE);

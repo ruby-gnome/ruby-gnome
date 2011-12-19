@@ -67,6 +67,4 @@ Init_gtk_appchooserbutton(VALUE mGtk)
     RG_DEF_METHOD(append_custom_item, 3);
     RG_DEF_METHOD(append_separator, 0);
     RG_DEF_METHOD(set_active_custom_item, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

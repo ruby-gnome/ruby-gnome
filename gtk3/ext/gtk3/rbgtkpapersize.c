@@ -175,7 +175,5 @@ Init_gtk_paper_size(VALUE mGtk)
     RG_DEF_METHOD(get_default_left_margin, 1);
     RG_DEF_METHOD(get_default_right_margin, 1);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_TYPE_UNIT, "Unit", RG_TARGET_NAMESPACE);
 }

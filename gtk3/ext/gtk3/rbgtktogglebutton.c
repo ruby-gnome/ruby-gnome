@@ -82,7 +82,6 @@ Init_gtk_toggle_button(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_mode, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "mode");
     RG_DEF_METHOD_P(mode, 0);
     RG_DEF_METHOD(toggled, 0);
 }

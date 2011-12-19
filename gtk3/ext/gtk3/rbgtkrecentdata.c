@@ -184,6 +184,4 @@ Init_gtk_recent_data(VALUE mGtk)
     RG_DEF_METHOD(set_groups, 1);
     RG_DEF_METHOD_P(private, 0);
     RG_DEF_METHOD(set_private, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 }

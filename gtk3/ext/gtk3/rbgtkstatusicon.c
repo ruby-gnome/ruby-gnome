@@ -87,7 +87,6 @@ Init_gtk_status_icon(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
 /* deprecated
     RG_DEF_METHOD(set_tooltip, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "tooltip");
 */
     RG_DEF_METHOD(position_menu, 1);
     RG_DEF_METHOD(geometry, 0);

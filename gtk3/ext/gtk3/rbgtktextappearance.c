@@ -233,6 +233,4 @@ Init_gtk_text_appearance(VALUE mGtk)
     RG_DEF_METHOD(set_inside_selection, 1);
     RG_DEF_METHOD_P(text, 0);
     RG_DEF_METHOD(set_text, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

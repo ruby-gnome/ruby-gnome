@@ -116,6 +116,4 @@ Init_gtk_accel_key(VALUE mGtk)
     RG_DEF_METHOD(set_key, 1);
     RG_DEF_METHOD(set_mods, 1);
     RG_DEF_METHOD(set_flags, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

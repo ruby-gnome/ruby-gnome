@@ -83,7 +83,6 @@ Init_gtk_button(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_alignment, 2);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "alignment");
     RG_DEF_METHOD(alignment, 0);
     RG_DEF_METHOD(event_window, 0);
 }

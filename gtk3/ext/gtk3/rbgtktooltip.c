@@ -72,5 +72,4 @@ Init_gtk_tooltip(VALUE mGtk)
     RG_DEF_METHOD(set_icon, 1);
     RG_DEF_METHOD(set_icon_from_stock, 2);
     RG_DEF_METHOD(set_custom, 1);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

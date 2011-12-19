@@ -119,5 +119,4 @@ Init_gtk_scrolled_window(VALUE mGtk)
     RG_DEF_METHOD(unset_placement, 0);
     RG_DEF_METHOD(placement, 0);
     RG_DEF_METHOD(set_placement, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "placement");
 }

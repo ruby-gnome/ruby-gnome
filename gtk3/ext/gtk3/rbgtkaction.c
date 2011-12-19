@@ -195,9 +195,7 @@ Init_gtk_action(VALUE mGtk)
     RG_DEF_METHOD(connect_accelerator, 0);
     RG_DEF_METHOD(disconnect_accelerator, 0);
     RG_DEF_METHOD(set_accel_path, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_path");
     RG_DEF_METHOD(set_accel_group, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_group");
     RG_DEF_METHOD(accel_path, 0);
     RG_DEF_METHOD(accel_closure, 0);
     RG_DEF_METHOD(block_activate, 0);

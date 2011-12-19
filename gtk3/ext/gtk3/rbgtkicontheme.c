@@ -262,8 +262,6 @@ Init_gtk_icon_theme(VALUE mGtk)
     RG_DEF_METHOD(choose_icon, -1);
     RG_DEF_METHOD(contexts, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_ERROR(GTK_ICON_THEME_ERROR, "IconThemeError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_ICON_THEME_ERROR);
     G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", RG_TARGET_NAMESPACE);

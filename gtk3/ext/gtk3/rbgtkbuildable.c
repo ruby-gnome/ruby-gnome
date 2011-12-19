@@ -93,6 +93,4 @@ Init_gtk_buildable(VALUE mGtk)
     RG_DEF_METHOD(set_buildable_property, 3);
     RG_DEF_METHOD(construct_child, 2);
     RG_DEF_METHOD(get_internal_child, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

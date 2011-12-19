@@ -178,13 +178,10 @@ Init_gtk_toolitem(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_homogeneous, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "homogenous");
     RG_DEF_METHOD_P(homogeneous, 0);
     RG_DEF_METHOD(set_expand, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "expand");
     RG_DEF_METHOD_P(expand, 0);
     RG_DEF_METHOD(set_use_drag_window, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "use_drag_window");
     RG_DEF_METHOD_P(use_drag_window, 0);
     RG_DEF_METHOD(icon_size, 0);
     RG_DEF_METHOD(orientation, 0);

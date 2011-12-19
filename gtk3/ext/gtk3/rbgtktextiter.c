@@ -745,7 +745,5 @@ Init_gtk_textiter(VALUE mGtk)
     RG_DEF_METHOD_OPERATOR("<=>", compare, 1);
     RG_DEF_METHOD(inside_sentence, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_TYPE_TEXT_SEARCH_FLAGS, "SearchFlags", RG_TARGET_NAMESPACE);
 }

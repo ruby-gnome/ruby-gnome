@@ -112,6 +112,4 @@ Init_gtk_iconinfo(VALUE mGtk)
     RG_DEF_METHOD(embedded_rect, 0);
     RG_DEF_METHOD(attach_points, 0);
     RG_DEF_METHOD(display_name, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

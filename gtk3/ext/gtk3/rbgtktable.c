@@ -179,9 +179,7 @@ Init_gtk_table(VALUE mGtk)
     RG_DEF_METHOD(get_column_spacing, 1);
     rb_undef_method(RG_TARGET_NAMESPACE, "column_spacing");
     RG_DEF_METHOD(set_row_spacings, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "row_spacings");
     RG_DEF_METHOD(set_column_spacings, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "column_spacings");
 /* deprecated
     RG_DEF_METHOD(row_spacings, 0);
     RG_DEF_METHOD(column_spacings, 0);

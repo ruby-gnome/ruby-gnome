@@ -192,6 +192,4 @@ Init_gtk_page_setup(VALUE mGtk)
     /* These take orientation, and margins into consideration */
     RG_DEF_METHOD(get_page_width, 1);
     RG_DEF_METHOD(get_page_height, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

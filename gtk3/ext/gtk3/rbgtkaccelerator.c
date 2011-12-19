@@ -75,5 +75,4 @@ Init_gtk_accelerator(VALUE mGtk)
     RG_DEF_SMETHOD(get_label, 2);
     RG_DEF_SMETHOD(set_default_mod_mask, 1);
     RG_DEF_SMETHOD(default_mod_mask, 0);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
