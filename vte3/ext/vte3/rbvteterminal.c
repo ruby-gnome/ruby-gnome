@@ -961,6 +961,4 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(set_opacity, 1);
     RG_DEF_METHOD(watch_child, 1);
     RG_DEF_METHOD(write_contents, -1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
