@@ -88,6 +88,8 @@ extern "C" {
 #define RBG_STRING_SET_UTF8_ENCODING(string) \
     (rbgutil_string_set_utf8_encoding(string))
 
+extern void rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc);
+extern void rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(ANYARGS), int argc);
 extern VALUE rbgutil_def_setters(VALUE klass);
 extern void rbgutil_set_properties(VALUE self, VALUE hash);
 extern VALUE rbgutil_protect(VALUE (*proc) (VALUE), VALUE data);

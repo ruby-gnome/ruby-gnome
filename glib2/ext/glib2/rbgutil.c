@@ -29,6 +29,32 @@ static ID id_to_a;
 static ID id_allocate;
 
 void
+rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc)
+{
+    rb_define_method(klass, name, func, argc);
+    if ((argc != 1) || strncmp(name, "set_", 4))
+        return;
+
+    name += 4;
+    rb_funcall(klass, rbgutil_id_module_eval, 1,
+               CSTR2RVAL_FREE(g_strdup_printf("def %s=(val); set_%s(val); val; end\n",
+                                              name, name)));
+}
+
+void
+rbg_define_singleton_method(VALUE obj, const char *name, VALUE (*func)(ANYARGS), int argc)
+{
+    rb_define_singleton_method(obj, name, func, argc);
+    if ((argc != 1) || strncmp(name, "set_", 4))
+        return;
+
+    name += 4;
+    rb_funcall(obj, rbgutil_id_module_eval, 1,
+               CSTR2RVAL_FREE(g_strdup_printf("def self.%s=(val); set_%s(val); val; end\n",
+                                              name, name)));
+}
+
+void
 rbgutil_set_properties(VALUE self, VALUE hash)
 {
     int i;
