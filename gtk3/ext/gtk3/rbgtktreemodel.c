@@ -233,6 +233,4 @@ Init_gtk_treemodel(VALUE mGtk)
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_inserted", (GValToRValSignalFunc)signal_func);
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row_has_child_toggled", (GValToRValSignalFunc)signal_func);
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "rows_reordered", (GValToRValSignalFunc)signal_rows_reordered_func);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

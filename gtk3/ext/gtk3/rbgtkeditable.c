@@ -146,6 +146,4 @@ Init_gtk_editable(VALUE mGtk)
     RG_DEF_METHOD(copy_clipboard, 0);
     RG_DEF_METHOD(cut_clipboard, 0);
     RG_DEF_METHOD(paste_clipboard, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

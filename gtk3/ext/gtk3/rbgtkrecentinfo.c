@@ -210,6 +210,4 @@ Init_gtk_recent_info(VALUE mGtk)
     RG_DEF_METHOD_P(local, 0);
     RG_DEF_METHOD_P(exist, 0);
     RG_DEF_METHOD_OPERATOR("==", ri_match, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 }

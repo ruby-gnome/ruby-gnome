@@ -329,7 +329,6 @@ Init_gtk_textview(VALUE mGtk)
     RG_DEF_METHOD(get_window, 1);
     RG_DEF_METHOD(get_window_type, 1);
     RG_DEF_METHOD(set_border_window_size, 2);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "border_window_size");
     RG_DEF_METHOD(get_border_window_size, 1);
     RG_DEF_METHOD(forward_display_line, 1);
     RG_DEF_METHOD(backward_display_line, 1);

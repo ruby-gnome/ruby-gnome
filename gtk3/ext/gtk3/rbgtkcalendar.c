@@ -113,7 +113,6 @@ Init_gtk_calendar(VALUE mGtk)
     RG_DEF_METHOD(date, 0);
     RG_DEF_METHOD(display_options, 0);
     RG_DEF_METHOD(set_display_options, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_options");
 
     G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", RG_TARGET_NAMESPACE);
 }

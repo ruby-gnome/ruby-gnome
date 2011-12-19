@@ -202,6 +202,4 @@ Init_gtk_treeselection(VALUE mGtk)
     RG_DEF_METHOD(selected_rows, 0);
     RG_DEF_METHOD(count_selected_rows, 0);
     RG_DEF_METHOD(unselect_range, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

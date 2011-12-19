@@ -45,5 +45,4 @@ Init_gtk_cellrenderertext(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_fixed_height_from_font, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "fixed_height_from_font");
 }

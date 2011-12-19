@@ -833,7 +833,6 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(select_range, 2);
     RG_DEF_METHOD_P(modified, 0);
     RG_DEF_METHOD(set_modified, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "modified");
 
     RG_DEF_METHOD(add_selection_clipboard, 1);
     RG_DEF_METHOD(remove_selection_clipboard, 1);

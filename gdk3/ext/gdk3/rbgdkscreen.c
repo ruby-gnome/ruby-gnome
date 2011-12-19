@@ -388,7 +388,6 @@ Init_gdk_screen(VALUE mGdk)
 /* deprecated
     RG_DEF_METHOD(default_colormap, 0);
     RG_DEF_METHOD(set_default_colormap, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "default_colormap");
     RG_DEF_METHOD(system_colormap, 0);
 */
     RG_DEF_METHOD(system_visual, 0);

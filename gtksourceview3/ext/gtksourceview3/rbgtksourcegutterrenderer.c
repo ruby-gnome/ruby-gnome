@@ -140,6 +140,4 @@ Init_gtksource_gutterrenderer(VALUE mGtkSource)
     RG_DEF_METHOD(set_alignment, 2);
     RG_DEF_METHOD(set_background, 1);
     RG_DEF_METHOD(set_padding, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

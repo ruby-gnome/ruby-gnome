@@ -139,8 +139,6 @@ Init_gdk_pangorenderer(VALUE mGdk)
 
     RG_DEF_SMETHOD(get_default, -1);
     RG_DEF_SMETHOD(default, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 */
 

@@ -956,8 +956,6 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_SMETHOD(lookup, -1);
 */
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* GdkWindowType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
 

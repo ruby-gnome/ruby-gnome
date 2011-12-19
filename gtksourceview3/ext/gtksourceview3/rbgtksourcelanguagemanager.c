@@ -111,5 +111,4 @@ Init_gtksource_languagemanager (VALUE mGtkSource)
     RG_DEF_METHOD(get_language, 1);
     RG_DEF_METHOD(guess_language, 2);
     RG_DEF_SMETHOD(default, 0);
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
 }

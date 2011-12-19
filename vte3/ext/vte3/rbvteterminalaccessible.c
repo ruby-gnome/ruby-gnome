@@ -38,6 +38,4 @@ Init_vte_access(VALUE mVte)
                                       "TerminalAccessible", mVte);
 
     RG_DEF_METHOD(initialize, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

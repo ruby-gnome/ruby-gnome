@@ -410,7 +410,6 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_SMETHOD(source_add_text_targets, 1);
     RG_DEF_SMETHOD(source_add_image_targets, 1);
     RG_DEF_SMETHOD(source_add_uri_targets, 1);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
     G_DEF_CLASS(GTK_TYPE_DEST_DEFAULTS, "DestDefaults", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GTK_TYPE_TARGET_FLAGS, "TargetFlags", RG_TARGET_NAMESPACE);

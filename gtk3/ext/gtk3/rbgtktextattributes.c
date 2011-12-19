@@ -323,6 +323,4 @@ Init_gtk_text_attributes(VALUE mGtk)
     RG_DEF_METHOD(set_bg_full_height, 1);
     RG_DEF_METHOD_P(editable, 0);
     RG_DEF_METHOD(set_editable, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

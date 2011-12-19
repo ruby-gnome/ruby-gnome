@@ -197,6 +197,4 @@ Init_gtk_recent_filter_info(VALUE mGtk)
     RG_DEF_METHOD(set_groups, 1);
     RG_DEF_METHOD(age, 0);
     RG_DEF_METHOD(set_age, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
 }

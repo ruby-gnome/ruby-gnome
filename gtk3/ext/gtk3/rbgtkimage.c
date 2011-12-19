@@ -27,42 +27,52 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE arg1, arg2;
-    GType gtype;
-    GtkWidget* widget = NULL;
+    VALUE image;
+    GtkWidget *widget = NULL;
 
-    rb_scan_args(argc, argv, "02", &arg1, &arg2);
-
-    if (NIL_P(arg1)){
+    rb_scan_args(argc, argv, "01", &image);
+    if (NIL_P(image)) {
         widget = gtk_image_new();
-    } else if (TYPE(arg1) == T_STRING && argc == 1){
-        widget = gtk_image_new_from_file(RVAL2CSTR(arg1));
-    } else if (TYPE(arg1) == T_SYMBOL){
-        widget = gtk_image_new_from_stock(rb_id2name(SYM2ID(arg1)), 
-                                          RVAL2GTKICONSIZE(arg2));
-    } else if (TYPE(arg1) == T_STRING){
-        widget = gtk_image_new_from_icon_name(RVAL2CSTR(arg1),
-                                              RVAL2GTKICONSIZE(arg2));
+    } else if (TYPE(image) == T_HASH) {
+        VALUE stock, icon_name, icon_set, gicon, file, pixbuf, animation, size, buffer;
+        rbg_scan_options(image,
+                         "stock", &stock,
+                         "icon_name", &icon_name,
+                         "icon_set", &icon_set,
+                         "gicon", &gicon,
+                         "file", &file,
+                         "pixbuf", &pixbuf,
+                         "animation", &animation,
+                         "size", &size,
+                         NULL);
+
+        if (!NIL_P(stock))
+            widget = gtk_image_new_from_stock(RVAL2GLIBID(stock, buffer), RVAL2GTKICONSIZE(size));
+        else if (!NIL_P(icon_name))
+            widget = gtk_image_new_from_icon_name(RVAL2CSTR(icon_name), RVAL2GTKICONSIZE(size));
+        else if (!NIL_P(icon_set))
+            widget = gtk_image_new_from_icon_set(RVAL2GTKICONSET(icon_set), RVAL2GTKICONSIZE(size));
+        else if (!NIL_P(gicon))
+            widget = gtk_image_new_from_gicon(RVAL2GICON(gicon), RVAL2GTKICONSIZE(size));
+        else if (!NIL_P(file))
+            widget = gtk_image_new_from_file(RVAL2CSTR(file));
+        else if (!NIL_P(pixbuf))
+            widget = gtk_image_new_from_pixbuf(RVAL2GDKPIXBUF(pixbuf));
+        else if (!NIL_P(animation))
+            widget = gtk_image_new_from_animation(RVAL2GDKPIXBUFANIMATION(animation));
     } else {
-        gtype = RVAL2GTYPE(arg1);
-/* deprecated
-        if (gtype == GDK_TYPE_IMAGE){
-            widget = gtk_image_new_from_image(RVAL2GDKIMAGE(arg1),
-                                              RVAL2GDKBITMAP(arg2));
-        } else */if (gtype == GDK_TYPE_PIXBUF){
-            widget = gtk_image_new_from_pixbuf(RVAL2GDKPIXBUF(arg1));
-/* deprecated
-        } else if (gtype == GDK_TYPE_PIXMAP){
-            widget = gtk_image_new_from_pixmap(RVAL2GDKPIXMAP(arg1),
-                                               RVAL2GDKBITMAP(arg2));
-*/
-        } else if (gtype == GTK_TYPE_ICON_SET){
-            widget = gtk_image_new_from_icon_set(RVAL2GTKICONSET(arg1), RVAL2GTKICONSIZE(arg2));
-        } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
-            widget = gtk_image_new_from_animation(RVAL2GDKPIXBUFANIMATION(arg1));
-        }
+        GType gtype = RVAL2GTYPE(image);
+
+        if (gtype == GDK_TYPE_PIXBUF)
+            widget = gtk_image_new_from_pixbuf(RVAL2GDKPIXBUF(image));
+        else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION))
+            widget = gtk_image_new_from_animation(RVAL2GDKPIXBUFANIMATION(image));
     }
+    if (!widget)
+        rb_raise(rb_eArgError, "Invalid arguments.");
+
     RBGTK_INITIALIZE(self, widget);
+
     return Qnil;
 }
 

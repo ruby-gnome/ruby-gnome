@@ -117,6 +117,4 @@ Init_gtk_infobar(VALUE mGtk)
     RG_DEF_METHOD(response, 1);
     RG_DEF_METHOD(set_default_response, 1);
     RG_DEF_METHOD(set_response_sensitive, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

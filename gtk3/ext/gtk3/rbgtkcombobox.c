@@ -139,12 +139,9 @@ Init_gtk_combobox(VALUE mGtk)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(active_iter, 0);
     RG_DEF_METHOD(set_active_iter, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "active_iter");
     RG_DEF_METHOD(popup_accessible, 0);
     RG_DEF_METHOD(set_row_separator_func, 0);
     RG_DEF_METHOD(title, 0);
     RG_DEF_METHOD(popup_for_device, 1);
     RG_DEF_METHOD(set_title, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

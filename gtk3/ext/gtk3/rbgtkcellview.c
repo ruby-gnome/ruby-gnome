@@ -104,7 +104,6 @@ Init_gtk_cellview(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_displayed_row, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "displayed_row");
     RG_DEF_METHOD(displayed_row, 0);
     RG_DEF_METHOD(get_size_of_row, 1);
 }

@@ -92,6 +92,12 @@ module Gtk
     define_deprecated_method :disconnect_proxy, :warn => "Use 'Gtk::Activatable#set_related_action'."
     define_deprecated_method :block_activate_from, :warn => "Don't use this method."
     define_deprecated_method :unblock_activate_from, :warn => "Don't use this method."
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip = nil, stock_id = nil',
+        'name, :label => nil, :tooltip => nil, :stock_id => nil', 1 do
+        |_self, name, label, tooltip, stock_id|
+      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
+    end
   end
 
   class Arrow
@@ -129,6 +135,23 @@ module Gtk
     define_deprecated_signal :leave, :warn => "Use 'Gtk::Widget::leave-notify-event' signal."
     define_deprecated_signal :pressed, :warn => "Use 'Gtk::Widget::button-press-event' signal."
     define_deprecated_signal :released, :warn => "Use 'Gtk::Widget::button-release-event' signal."
+    define_deprecated_method_by_hash_args :initialize,
+        'label_or_stock_id, use_underline = nil',
+        ':label => nil, :mnemonic => nil, :stock => nil' do
+        |_self, label_or_stock_id, use_underline|
+      case label_or_stock_id
+      when String
+        if use_underline
+          [{:mnemonic => label_or_stock_id}]
+        else
+          [{:label => label_or_stock_id}]
+        end
+      when Symbol
+        [{:stock => label_or_stock_id}]
+      else
+        [label_or_stock_id]
+      end
+    end
   end
 
   class ButtonBox
@@ -296,6 +319,25 @@ module Gtk
   class Image
     extend GLib::Deprecatable
     define_deprecated_enums :Type
+    define_deprecated_method_by_hash_args :initialize,
+        'image, size = nil',
+        ':label => nil, :mnemonic => nil, :stock => nil, :size => nil' do
+        |_self, image, size|
+      case image
+      when String
+        if size
+          [{:icon_name => image, :size => size}]
+        else
+          [{:file => image}]
+        end
+      when Symbol
+        [{:stock => image, :size => size}]
+      when Gtk::IconSet
+        [{:icon_set => image, :size => size}]
+      else
+        [image]
+      end
+    end
   end
 
   class LinkButton

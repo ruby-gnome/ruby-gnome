@@ -162,18 +162,18 @@ Init_gdk_windowattr(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_WINDOW_ATTR, "WindowAttr", mGdk);
 
     RG_DEF_METHOD(initialize, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "title", attr_get_title, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_title", attr_set_title, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "event_mask", attr_get_event_mask, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_event_mask", attr_set_event_mask, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "x", attr_get_x, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x", attr_set_x, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "y", attr_get_y, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y", attr_set_y, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "width", attr_get_width, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_width", attr_set_width, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "height", attr_get_height, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_height", attr_set_height, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "title", attr_get_title, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_title", attr_set_title, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "event_mask", attr_get_event_mask, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_event_mask", attr_set_event_mask, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "x", attr_get_x, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_x", attr_set_x, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "y", attr_get_y, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_y", attr_set_y, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "width", attr_get_width, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_width", attr_set_width, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "height", attr_get_height, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_height", attr_set_height, 1);
     RG_DEF_METHOD(wclass, 0);
     RG_DEF_METHOD(set_wclass, 1);
     RG_DEF_METHOD(visual, 0);
@@ -182,13 +182,10 @@ Init_gdk_windowattr(VALUE mGdk)
     RG_DEF_METHOD(set_window_type, 1);
     RG_DEF_METHOD(cursor, 0);
     RG_DEF_METHOD(set_cursor, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "wmclass_name", attr_get_wmclass_name, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_wmclass_name", attr_set_wmclass_name, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "wmclass_class", attr_get_wmclass_class, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_wmclass_class", attr_set_wmclass_class, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "wmclass_name", attr_get_wmclass_name, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_wmclass_name", attr_set_wmclass_name, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "wmclass_class", attr_get_wmclass_class, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_wmclass_class", attr_set_wmclass_class, 1);
     RG_DEF_METHOD(override_redirect, 0);
     RG_DEF_METHOD(set_override_redirect, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 }

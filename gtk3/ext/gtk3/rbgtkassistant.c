@@ -214,7 +214,5 @@ Init_gtk_assistant(VALUE mGtk)
     RG_DEF_METHOD(remove_page, 1);
 #endif
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GTK_TYPE_ASSISTANT_PAGE_TYPE, "PageType", RG_TARGET_NAMESPACE);
 }
