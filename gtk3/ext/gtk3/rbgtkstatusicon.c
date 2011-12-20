@@ -90,4 +90,6 @@ Init_gtk_status_icon(VALUE mGtk)
 */
     RG_DEF_METHOD(position_menu, 1);
     RG_DEF_METHOD(geometry, 0);
+
+    RG_REG_GLIBID_SETTER("stock");
 }
