@@ -51,8 +51,9 @@ rg_add_action_widget(VALUE self, VALUE child, VALUE response_id)
 static VALUE
 rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
 {
+    VALUE buffer;
     return GOBJ2RVAL(gtk_info_bar_add_button(_SELF(self),
-                                             RVAL2CSTR_ACCEPT_SYMBOL(button_text),
+                                             SYMBOL_P(button_text) ? RVAL2GLIBID(button_text, buffer) : RVAL2CSTR(button_text),
                                              RVAL2GTKRESPONSETYPE(response_id)));
 }
 
