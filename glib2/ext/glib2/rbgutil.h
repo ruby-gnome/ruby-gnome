@@ -61,10 +61,10 @@ extern "C" {
         rb_attr(RG_TARGET_NAMESPACE, rb_intern(attr), read, write, ex)
 #define RG_DEF_ALIAS(new, old) rb_define_alias(RG_TARGET_NAMESPACE, new, old)
 
-#define G_DEF_SETTER(klass, name) \
-    rb_funcall(klass, rbgutil_id_module_eval, 1, rb_str_new2( \
-    "def " name "=(val); set_" name "(val); val; end\n"))
-#define G_DEF_SETTERS(klass) rbgutil_def_setters(klass)
+#define RG_REG_GLIBID_SETTER(name) \
+        rbgobj_register_property_setter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_glibid_r2g_func)
+#define RG_REG_SYMBOL_GETTER(name) \
+        rbgobj_register_property_getter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_sym_g2r_func)
 
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
@@ -81,8 +81,6 @@ extern "C" {
     rb_define_method(klass, name, function, args)
 
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
-#define G_SET_SYMBOL_PROPERTY(gtype, name) \
-     rbgobj_register_property_getter(gtype, name, rbgutil_sym_g2r_func)
 #define G_PROTECT_CALLBACK(func, data) (rbgutil_invoke_callback((VALUE(*)(VALUE))func, (VALUE)data))
 
 #define RBG_STRING_SET_UTF8_ENCODING(string) \
@@ -101,10 +99,8 @@ extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
+extern void rbgutil_glibid_r2g_func(VALUE from, GValue* to);
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
-
-/* deprecated */
-#define G_BLOCK_PROC rb_block_proc
 
 #ifdef __cplusplus
 }

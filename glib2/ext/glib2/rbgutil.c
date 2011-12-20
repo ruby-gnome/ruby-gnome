@@ -80,6 +80,13 @@ rbgutil_def_setters(VALUE klass)
     return rb_funcall(mGLib, id_add_one_arg_setter, 1, klass);
 }
 
+void
+rbgutil_glibid_r2g_func(VALUE from, GValue* to)
+{
+    VALUE buffer;
+    g_value_set_string(to, RVAL2GLIBID(from, buffer));
+}
+
 VALUE
 rbgutil_sym_g2r_func(const GValue *from)
 {

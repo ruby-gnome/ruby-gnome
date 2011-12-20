@@ -77,50 +77,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_set(int argc, VALUE *argv, VALUE self)
-{
-    VALUE arg1, arg2;
-    GType gtype;
-
-    rb_scan_args(argc, argv, "11", &arg1, &arg2);
-
-    if (TYPE(arg1) == T_STRING && argc == 1){
-        gtk_image_set_from_file(_SELF(self), RVAL2CSTR(arg1));
-    } else if (TYPE(arg1) == T_SYMBOL){
-        gtk_image_set_from_stock(_SELF(self), rb_id2name(SYM2ID(arg1)), 
-                                 RVAL2GTKICONSIZE(arg2));
-    } else if (TYPE(arg1) == T_STRING){
-        gtk_image_set_from_icon_name(_SELF(self), RVAL2CSTR(arg1),
-                                     RVAL2GTKICONSIZE(arg2));
-    } else {
-        gtype = RVAL2GTYPE(arg1);
-/* deprecated
-        if (gtype == GDK_TYPE_IMAGE){
-            gtk_image_set_from_image(_SELF(self), RVAL2GDKIMAGE(arg1),
-                                     RVAL2GDKBITMAP(arg2));
-        } else */if (gtype == GDK_TYPE_PIXBUF){
-            gtk_image_set_from_pixbuf(_SELF(self), RVAL2GDKPIXBUF(arg1));
-
-/* deprecated
-        } else if (gtype == GDK_TYPE_PIXMAP){
-            gtk_image_set_from_pixmap(_SELF(self), RVAL2GDKPIXMAP(arg1),
-                                      RVAL2GDKBITMAP(arg2));
-*/
-        } else if (gtype == GTK_TYPE_ICON_SET){
-            gtk_image_set_from_icon_set(_SELF(self), 
-                                        RVAL2GTKICONSET(arg1), 
-                                        RVAL2GTKICONSIZE(arg2));
-        } else if (g_type_is_a(gtype, GDK_TYPE_PIXBUF_ANIMATION)) {
-            gtk_image_set_from_animation(_SELF(self), RVAL2GDKPIXBUFANIMATION(arg1));
-        } else {
-            rb_raise(rb_eArgError, "invalid argument: %s", rb_class2name(arg1));
-        }
-    }
-
-    return self;
-}
-
-static VALUE
 rg_clear(VALUE self)
 {
     gtk_image_clear(_SELF(self));
@@ -132,10 +88,9 @@ Init_gtk_image(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     RG_DEF_METHOD(initialize, -1);
-    RG_DEF_METHOD(set, -1);
     RG_DEF_METHOD(clear, 0);
 
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
 
-    G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
+    RG_REG_GLIBID_SETTER("stock");
 }

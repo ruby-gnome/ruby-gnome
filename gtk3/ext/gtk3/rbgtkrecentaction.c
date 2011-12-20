@@ -29,20 +29,30 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE  name, label, tooltip, stock_id, manager;
-    rb_scan_args(argc, argv, "23", &name, &label, &tooltip, &stock_id, &manager);
-    if (NIL_P(manager)) {
-        G_INITIALIZE(self, gtk_recent_action_new(RVAL2CSTR(name),
-                                                 RVAL2CSTR(label),
-                                                 RVAL2CSTR_ACCEPT_NIL(tooltip),
-                                                 RVAL2CSTR_ACCEPT_NIL(stock_id)));
-    } else {
-        G_INITIALIZE(self, gtk_recent_action_new_for_manager(RVAL2CSTR(name),
-                                                             RVAL2CSTR(label),
-                                                             RVAL2CSTR_ACCEPT_NIL(tooltip),
-                                                             RVAL2CSTR_ACCEPT_NIL(stock_id),
-                                                             RVAL2GTKRECENTMANAGER(manager)));
-    }
+    VALUE name, options, label, tooltip, stock_id, buffer, manager;
+    GtkAction *action = NULL;
+
+    rb_scan_args(argc, argv, "11", &name, &options);
+    rbg_scan_options(options,
+                     "label", &label,
+                     "tooltip", &tooltip,
+                     "stock_id", &stock_id,
+                     "manager", &manager,
+                     NULL);
+
+    if (NIL_P(manager))
+        action = gtk_recent_action_new(RVAL2CSTR(name),
+                                       RVAL2CSTR_ACCEPT_NIL(label),
+                                       RVAL2CSTR_ACCEPT_NIL(tooltip),
+                                       RVAL2GLIBID_ACCEPT_NIL(stock_id, buffer));
+    else
+        action = gtk_recent_action_new_for_manager(RVAL2CSTR(name),
+                                                   RVAL2CSTR_ACCEPT_NIL(label),
+                                                   RVAL2CSTR_ACCEPT_NIL(tooltip),
+                                                   RVAL2GLIBID_ACCEPT_NIL(stock_id, buffer),
+                                                   RVAL2GTKRECENTMANAGER(manager));
+    G_INITIALIZE(self, action);
+
     return Qnil;
 }
 

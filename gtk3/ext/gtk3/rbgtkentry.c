@@ -192,4 +192,7 @@ Init_gtk_entry(VALUE mGtk)
     RG_DEF_METHOD(reset_im_context, 0);
     RG_DEF_METHOD(set_icon_drag_source, 3);
     RG_DEF_METHOD(unset_invisible_char, 0);
+
+    RG_REG_GLIBID_SETTER("primary-icon-stock");
+    RG_REG_GLIBID_SETTER("secondary-icon-stock");
 }

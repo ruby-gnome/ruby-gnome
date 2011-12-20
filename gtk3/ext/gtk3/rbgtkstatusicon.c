@@ -25,22 +25,49 @@
 #define _SELF(w) (RVAL2GTKSTATUSICON(w))
 
 static VALUE
-rg_initialize(VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    G_INITIALIZE(self, gtk_status_icon_new());
+    VALUE arg;
+    GtkStatusIcon *icon = NULL;
+
+    rb_scan_args(argc, argv, "01", &arg);
+    if (NIL_P(arg)) {
+        icon = gtk_status_icon_new();
+    } else if (TYPE(arg) == T_HASH) {
+        VALUE stock, icon_name, gicon, file, pixbuf, buffer;
+        rbg_scan_options(arg,
+                         "stock", &stock,
+                         "icon_name", &icon_name,
+                         "gicon", &gicon,
+                         "file", &file,
+                         "pixbuf", &pixbuf,
+                         NULL);
+
+        if (!NIL_P(stock))
+            icon = gtk_status_icon_new_from_stock(RVAL2GLIBID(stock, buffer));
+        else if (!NIL_P(icon_name))
+            icon = gtk_status_icon_new_from_icon_name(RVAL2CSTR(icon_name));
+        else if (!NIL_P(gicon))
+            icon = gtk_status_icon_new_from_gicon(RVAL2GICON(gicon));
+        else if (!NIL_P(file))
+            icon = gtk_status_icon_new_from_file(RVAL2CSTR(file));
+        else if (!NIL_P(pixbuf))
+            icon = gtk_status_icon_new_from_pixbuf(RVAL2GDKPIXBUF(pixbuf));
+    } else {
+        GType gtype = RVAL2GTYPE(arg);
+
+        if (gtype == GDK_TYPE_PIXBUF)
+            icon = gtk_status_icon_new_from_pixbuf(RVAL2GDKPIXBUF(arg));
+        else if (g_type_is_a(gtype, G_TYPE_ICON))
+            icon = gtk_status_icon_new_from_gicon(RVAL2GICON(arg));
+    }
+    if (!icon)
+        rb_raise(rb_eArgError, "Invalid arguments.");
+
+    G_INITIALIZE(self, icon);
+
     return Qnil;
 }
-
-/* Don't implement this. Use Gtk::StatusIcon.new.set_foo(v) instead.
-GtkStatusIcon* gtk_status_icon_new_from_pixbuf
-                                            (GdkPixbuf *pixbuf);
-GtkStatusIcon* gtk_status_icon_new_from_file
-                                            (const gchar *filename);
-GtkStatusIcon* gtk_status_icon_new_from_stock
-                                            (const gchar *stock_id);
-GtkStatusIcon* gtk_status_icon_new_from_icon_name
-                                            (const gchar *icon_name);
-*/
 
 /* deprecated
 static VALUE
@@ -84,10 +111,12 @@ Init_gtk_status_icon(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);
 
-    RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(initialize, -1);
 /* deprecated
     RG_DEF_METHOD(set_tooltip, 1);
 */
     RG_DEF_METHOD(position_menu, 1);
     RG_DEF_METHOD(geometry, 0);
+
+    RG_REG_GLIBID_SETTER("stock");
 }
