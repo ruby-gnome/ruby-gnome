@@ -32,9 +32,11 @@ rg_initialize(VALUE self)
 }
 
 static VALUE
-rg_add(VALUE self, VALUE id, VALUE icon_set)
+rg_add(VALUE self, VALUE stock_id, VALUE icon_set)
 {
-    gtk_icon_factory_add(_SELF(self), RVAL2CSTR(id),
+    VALUE buffer;
+    gtk_icon_factory_add(_SELF(self),
+                         RVAL2GLIBID(stock_id, buffer),
                          RVAL2GTKICONSET(icon_set));
     return self;
 }
@@ -47,21 +49,18 @@ rg_add_default(VALUE self)
 }
 
 static VALUE
-rg_lookup(VALUE self, VALUE id)
+rg_lookup(VALUE self, VALUE stock_id)
 {
-    GtkIconSet *icon_set;
-
-    icon_set = gtk_icon_factory_lookup(_SELF(self), RVAL2CSTR(id));
-    return GTKICONSET2RVAL(icon_set);
+    VALUE buffer;
+    return GTKICONSET2RVAL(gtk_icon_factory_lookup(_SELF(self),
+                                                   RVAL2GLIBID(stock_id, buffer)));
 }
 
 static VALUE
-rg_s_lookup_default(G_GNUC_UNUSED VALUE self, VALUE id)
+rg_s_lookup_default(G_GNUC_UNUSED VALUE self, VALUE stock_id)
 {
-    GtkIconSet *icon_set;
-
-    icon_set = gtk_icon_factory_lookup_default(RVAL2CSTR(id));
-    return GTKICONSET2RVAL(icon_set);
+    VALUE buffer;
+    return GTKICONSET2RVAL(gtk_icon_factory_lookup_default(RVAL2GLIBID(stock_id, buffer)));
 }
 
 static VALUE

@@ -200,4 +200,6 @@ Init_gtk_action(VALUE mGtk)
     RG_DEF_METHOD(accel_closure, 0);
     RG_DEF_METHOD(block_activate, 0);
     RG_DEF_METHOD(unblock_activate, 0);
+
+    RG_REG_GLIBID_SETTER("stock-id");
 }

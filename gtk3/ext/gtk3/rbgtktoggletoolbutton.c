@@ -27,21 +27,28 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE stock_id;
-    GtkToolItem* item;
+    VALUE arg, buffer;
+    GtkToolItem *item = NULL;
 
-    rb_scan_args(argc, argv, "01", &stock_id);
-
-    if (NIL_P(stock_id)){
+    rb_scan_args(argc, argv, "01", &arg);
+    if (NIL_P(arg)) {
         item = gtk_toggle_tool_button_new();
+    } else if (TYPE(arg) == T_HASH) {
+        VALUE stock_id;
+        rbg_scan_options(arg,
+                         "stock_id", &stock_id,
+                         NULL);
+
+        if (!NIL_P(stock_id))
+            item = gtk_toggle_tool_button_new_from_stock(RVAL2GLIBID(stock_id, buffer));
     } else {
-        if (TYPE(stock_id) == T_SYMBOL){
-            item = gtk_toggle_tool_button_new_from_stock(rb_id2name(SYM2ID(stock_id)));
-        } else {
-            item = gtk_toggle_tool_button_new_from_stock(RVAL2CSTR(stock_id));
-        }
+        item = gtk_toggle_tool_button_new_from_stock(RVAL2GLIBID(arg, buffer));
     }
+    if (!item)
+        rb_raise(rb_eArgError, "Invalid arguments.");
+
     RBGTK_INITIALIZE(self, item);
+
     return Qnil;
 }
 

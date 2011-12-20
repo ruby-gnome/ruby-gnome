@@ -24,6 +24,11 @@
 
 G_BEGIN_DECLS
 
+#define G_DEF_SETTER(klass, name) \
+    rb_funcall(klass, rbgutil_id_module_eval, 1, rb_str_new2( \
+    "def " name "=(val); set_" name "(val); val; end\n"))
+#define G_DEF_SETTERS(klass) rbgutil_def_setters(klass)
+
 #define GLIST2ARY(list)           (rbgutil_glist2ary(list))
 #define GLIST2ARY_FREE(list)      (rbgutil_glist2ary_and_free(list))
 #define GLIST2ARYF(list)          (GLIST2ARY_FREE(list))
@@ -36,6 +41,11 @@ G_BEGIN_DECLS
 #define GSLIST2ARYF(list)         (GSLIST2ARY_FREE(list))
 #define GSLIST2ARY2(list, gtype)  (rbgutil_gslist2ary_boxed(list, gtype))
 #define GSLIST2ARY2F(list, gtype) (rbgutil_gslist2ary_boxed_and_free(list, gtype))
+
+#define G_SET_SYMBOL_PROPERTY(gtype, name) \
+     rbgobj_register_property_getter(gtype, name, rbgutil_sym_g2r_func)
+
+#define G_BLOCK_PROC rb_block_proc
 
 extern VALUE rbgutil_glist2ary(const GList *list);
 extern VALUE rbgutil_glist2ary_and_free(GList* list);

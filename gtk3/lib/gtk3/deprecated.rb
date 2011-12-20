@@ -137,7 +137,7 @@ module Gtk
     define_deprecated_signal :released, :warn => "Use 'Gtk::Widget::button-release-event' signal."
     define_deprecated_method_by_hash_args :initialize,
         'label_or_stock_id, use_underline = nil',
-        ':label => nil, :mnemonic => nil, :stock => nil' do
+        ':label => nil, :mnemonic => nil, :stock_id => nil' do
         |_self, label_or_stock_id, use_underline|
       case label_or_stock_id
       when String
@@ -147,7 +147,7 @@ module Gtk
           [{:label => label_or_stock_id}]
         end
       when Symbol
-        [{:stock => label_or_stock_id}]
+        [{:stock_id => label_or_stock_id}]
       else
         [label_or_stock_id]
       end
@@ -319,6 +319,7 @@ module Gtk
   class Image
     extend GLib::Deprecatable
     define_deprecated_enums :Type
+    define_deprecated_method :set, :warn => "Use '#{self}#set_stock', '#{self}#set_icon_name', '#{self}#set_icon_set', '#{self}#set_file', '#{self}#set_pixbuf' or '#{self}#set_pixbuf_animation'."
     define_deprecated_method_by_hash_args :initialize,
         'image, size = nil',
         ':label => nil, :mnemonic => nil, :stock => nil, :size => nil' do
@@ -336,6 +337,25 @@ module Gtk
         [{:icon_set => image, :size => size}]
       else
         [image]
+      end
+    end
+  end
+
+  class ImageMenuItem
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'label_or_stock_id = nil, use_underline_or_accel_group = nil',
+        ':label => nil, :mnemonic => nil, :stock_id => nil, :accel_group => nil' do
+        |_self, label_or_stock_id, use_underline_or_accel_group|
+      case label_or_stock_id
+      when String
+        if use_underline_or_accel_group
+          [{:mnemonic => label_or_stock_id}]
+        else
+          [{:label => label_or_stock_id}]
+        end
+      when Symbol
+        [{:stock_id => label_or_stock_id, :accel_group => use_underline_or_accel_group}]
       end
     end
   end
@@ -360,6 +380,21 @@ module Gtk
   class MenuShell
     extend GLib::Deprecatable
     define_deprecated_enums :DirectionType, 'DIR'
+  end
+
+  class MenuToolButton
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'icon_widget_or_stock_id = nil, label = nil',
+        ':icon_widget => nil, :label => nil, :stock_id => nil' do
+        |_self, icon_widget_or_stock_id, label|
+      case icon_widget_or_stock_id
+      when String, Symbol
+        [{:stock_id => icon_widget_or_stock_id}]
+      when Gtk::Widget
+        [{:icon_widget => icon_widget_or_stock_id, :label => label}]
+      end
+    end
   end
 
   class MessageDialog
@@ -433,6 +468,16 @@ module Gtk
     end
   end
 
+  class RadioAction
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip, stock_id, value',
+        'name, value, :label => nil, :tooltip => nil, :stock_id => nil', 2 do
+        |_self, name, label, tooltip, stock_id, value|
+      [name, value, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
+    end
+  end
+
   class Range
     extend GLib::Deprecatable
     define_deprecated_enums :SensitivityType, 'SENSITIVITY'
@@ -445,6 +490,16 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_flags :Flags
     define_deprecated_enums :TokenType, 'TOKEN'
+  end
+
+  class RecentAction
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip = nil, stock_id = nil, manager = nil',
+        'name, :label => nil, :tooltip => nil, :stock_id => nil, :manager => nil', 1 do
+        |_self, name, label, tooltip, stock_id, manager|
+      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id, :manager => manager}]
+    end
   end
 
   module RecentChooser
@@ -537,6 +592,16 @@ module Gtk
     define_deprecated_enums :WindowType, 'WINDOW'
   end
 
+  class ToggleAction
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip = nil, stock_id = nil',
+        'name, :label => nil, :tooltip => nil, :stock_id => nil', 1 do
+        |_self, name, label, tooltip, stock_id|
+      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
+    end
+  end
+
   class Toolbar
     extend GLib::Deprecatable
     define_deprecated_method :append, :warn => "Don't use this method."
@@ -548,6 +613,21 @@ module Gtk
     define_deprecated_method :prepend_space, :warn => "Don't use this method."
     define_deprecated_method :insert_space, :warn => "Don't use this method."
     define_deprecated_method :remove_space, :warn => "Don't use this method."
+  end
+
+  class ToolButton
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'icon_widget_or_stock_id = nil, label = nil',
+        ':icon_widget => nil, :label => nil, :stock_id => nil' do
+        |_self, icon_widget_or_stock_id, label|
+      case icon_widget_or_stock_id
+      when String, Symbol
+        [{:stock_id => icon_widget_or_stock_id}]
+      when Gtk::Widget
+        [{:icon_widget => icon_widget_or_stock_id, :label => label}]
+      end
+    end
   end
 
   module TreeModel

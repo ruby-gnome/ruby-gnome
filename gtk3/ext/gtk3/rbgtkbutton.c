@@ -37,19 +37,19 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(button)) {
         widget = gtk_button_new();
     } else if (TYPE(button) == T_HASH) {
-        VALUE label, mnemonic, stock, buffer;
+        VALUE label, mnemonic, stock_id, buffer;
         rbg_scan_options(button,
                          "label", &label,
                          "mnemonic", &mnemonic,
-                         "stock", &stock,
+                         "stock_id", &stock_id,
                          NULL);
 
         if (!NIL_P(label))
             widget = gtk_button_new_with_label(RVAL2CSTR(label));
         else if (!NIL_P(mnemonic))
             widget = gtk_button_new_with_mnemonic(RVAL2CSTR(mnemonic));
-        else if (!NIL_P(stock))
-            widget = gtk_button_new_from_stock(RVAL2GLIBID(stock, buffer));
+        else if (!NIL_P(stock_id))
+            widget = gtk_button_new_from_stock(RVAL2GLIBID(stock_id, buffer));
     }
     if (!widget)
         rb_raise(rb_eArgError, "Invalid arguments.");

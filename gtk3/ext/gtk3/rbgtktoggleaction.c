@@ -25,20 +25,22 @@
 #define _SELF(self) (RVAL2GTKTOGGLEACTION(self))
 
 static VALUE
-rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    const gchar *gstockid = NULL;
+    VALUE name, options, label, tooltip, stock_id, buffer;
 
-    if (TYPE(stock_id) == T_SYMBOL){
-        gstockid = rb_id2name(SYM2ID(stock_id));
-    } else if (TYPE(stock_id) == T_STRING){
-        gstockid = RVAL2CSTR(stock_id);
-    }
+    rb_scan_args(argc, argv, "11", &name, &options);
+    rbg_scan_options(options,
+                     "label", &label,
+                     "tooltip", &tooltip,
+                     "stock_id", &stock_id,
+                     NULL);
 
     G_INITIALIZE(self, gtk_toggle_action_new(RVAL2CSTR(name),
-                                             RVAL2CSTR(label),
+                                             RVAL2CSTR_ACCEPT_NIL(label),
                                              RVAL2CSTR_ACCEPT_NIL(tooltip),
-                                             gstockid));
+                                             RVAL2GLIBID_ACCEPT_NIL(stock_id, buffer)));
+
     return Qnil;
 }
 
@@ -54,6 +56,6 @@ Init_gtk_toggle_action(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_ACTION, "ToggleAction", mGtk);
 
-    RG_DEF_METHOD(initialize, 4);
+    RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(toggled, 0);
 }

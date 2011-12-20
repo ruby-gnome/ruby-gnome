@@ -25,20 +25,23 @@
 #define _SELF(self) (RVAL2GTKRADIOACTION(self))
 
 static VALUE
-rg_initialize(VALUE self, VALUE name, VALUE label, VALUE tooltip, VALUE stock_id, VALUE value)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    const gchar *gstock = NULL;
+    VALUE name, value, options, label, tooltip, stock_id, buffer;
 
-    if (TYPE(stock_id) == T_STRING){
-        gstock = RVAL2CSTR(stock_id);
-    } else if (TYPE(stock_id) == T_SYMBOL) {
-        gstock = rb_id2name(SYM2ID(stock_id));
-    }
+    rb_scan_args(argc, argv, "21", &name, &value, &options);
+    rbg_scan_options(options,
+                     "label", &label,
+                     "tooltip", &tooltip,
+                     "stock_id", &stock_id,
+                     NULL);
+
     G_INITIALIZE(self, gtk_radio_action_new(RVAL2CSTR(name),
-                                            RVAL2CSTR(label),
+                                            RVAL2CSTR_ACCEPT_NIL(label),
                                             RVAL2CSTR_ACCEPT_NIL(tooltip),
-                                            gstock,
+                                            RVAL2GLIBID_ACCEPT_NIL(stock_id, buffer),
                                             NUM2INT(value)));
+
     return Qnil;
 }
 
@@ -113,7 +116,7 @@ Init_gtk_radio_action(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
 
-    RG_DEF_METHOD(initialize, 5);
+    RG_DEF_METHOD(initialize, -1);
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_get_group, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_set_group, 1);
 }

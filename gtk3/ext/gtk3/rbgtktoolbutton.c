@@ -27,20 +27,31 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE obj, label;
-    GtkToolItem* item;
+    VALUE arg;
+    GtkToolItem *item = NULL;
 
-    rb_scan_args(argc, argv, "02", &obj, &label);
+    rb_scan_args(argc, argv, "01", &arg);
+    if (NIL_P(arg)) {
+        item = gtk_tool_button_new(NULL, NULL);
+    } else if (TYPE(arg) == T_HASH) {
+        VALUE icon_widget, label, stock_id, buffer;
+        rbg_scan_options(arg,
+                         "icon_widget", &icon_widget,
+                         "label", &label,
+                         "stock_id", &stock_id,
+                         NULL);
 
-    if (TYPE(obj) == T_SYMBOL){
-        item = gtk_tool_button_new_from_stock(rb_id2name(SYM2ID(obj)));
-    } else if (TYPE(obj) == T_STRING){
-        item = gtk_tool_button_new_from_stock(RVAL2CSTR(obj));
-    } else {
-        item = gtk_tool_button_new(RVAL2GTKWIDGET(obj), 
-                                   RVAL2CSTR_ACCEPT_NIL(label));
+        if (!NIL_P(icon_widget))
+            item = gtk_tool_button_new(RVAL2GTKWIDGET(icon_widget),
+                                       RVAL2CSTR_ACCEPT_NIL(label));
+        else if (!NIL_P(stock_id))
+            item = gtk_tool_button_new_from_stock(RVAL2GLIBID(stock_id, buffer));
     }
+    if (!item)
+        rb_raise(rb_eArgError, "Invalid arguments.");
+
     RBGTK_INITIALIZE(self, item);
+
     return Qnil;
 }
 
@@ -50,4 +61,6 @@ Init_gtk_toolbutton(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_BUTTON, "ToolButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
+
+    RG_REG_GLIBID_SETTER("stock-id");
 }
