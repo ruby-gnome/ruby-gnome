@@ -1041,10 +1041,11 @@ rg_queue_draw_region(VALUE self, VALUE region)
 static VALUE
 rg_render_icon_pixbuf(VALUE self, VALUE stock_id, VALUE size)
 {
+    VALUE buffer;
     GdkPixbuf *pixbuf;
 
     pixbuf = gtk_widget_render_icon_pixbuf(_SELF(self),
-                                           RVAL2CSTR(stock_id),
+                                           RVAL2GLIBID(stock_id, buffer),
                                            RVAL2GTKICONSIZE(size));
 
     return GOBJ2RVAL_UNREF(pixbuf);
