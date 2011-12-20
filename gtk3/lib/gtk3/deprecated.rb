@@ -492,6 +492,16 @@ module Gtk
     define_deprecated_enums :TokenType, 'TOKEN'
   end
 
+  class RecentAction
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip = nil, stock_id = nil, manager = nil',
+        'name, :label => nil, :tooltip => nil, :stock_id => nil, :manager => nil', 1 do
+        |_self, name, label, tooltip, stock_id, manager|
+      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id, :manager => manager}]
+    end
+  end
+
   module RecentChooser
     extend GLib::Deprecatable
     define_deprecated_enums :SortType, 'SORT'
