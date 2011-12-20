@@ -137,5 +137,5 @@ Init_gtk_image(VALUE mGtk)
 
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
 
-    G_SET_SYMBOL_PROPERTY(GTK_TYPE_IMAGE, "stock");
+    RG_REG_GLIBID_SETTER("stock");
 }
