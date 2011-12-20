@@ -592,6 +592,16 @@ module Gtk
     define_deprecated_enums :WindowType, 'WINDOW'
   end
 
+  class ToggleAction
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip = nil, stock_id = nil',
+        'name, :label => nil, :tooltip => nil, :stock_id => nil', 1 do
+        |_self, name, label, tooltip, stock_id|
+      [name, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
+    end
+  end
+
   class Toolbar
     extend GLib::Deprecatable
     define_deprecated_method :append, :warn => "Don't use this method."
