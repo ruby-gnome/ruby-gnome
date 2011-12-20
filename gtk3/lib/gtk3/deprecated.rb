@@ -137,7 +137,7 @@ module Gtk
     define_deprecated_signal :released, :warn => "Use 'Gtk::Widget::button-release-event' signal."
     define_deprecated_method_by_hash_args :initialize,
         'label_or_stock_id, use_underline = nil',
-        ':label => nil, :mnemonic => nil, :stock => nil' do
+        ':label => nil, :mnemonic => nil, :stock_id => nil' do
         |_self, label_or_stock_id, use_underline|
       case label_or_stock_id
       when String
@@ -147,7 +147,7 @@ module Gtk
           [{:label => label_or_stock_id}]
         end
       when Symbol
-        [{:stock => label_or_stock_id}]
+        [{:stock_id => label_or_stock_id}]
       else
         [label_or_stock_id]
       end
