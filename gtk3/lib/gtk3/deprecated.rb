@@ -468,6 +468,16 @@ module Gtk
     end
   end
 
+  class RadioAction
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'name, label, tooltip, stock_id, value',
+        'name, value, :label => nil, :tooltip => nil, :stock_id => nil', 2 do
+        |_self, name, label, tooltip, stock_id, value|
+      [name, value, {:label => label, :tooltip => tooltip, :stock_id => stock_id}]
+    end
+  end
+
   class Range
     extend GLib::Deprecatable
     define_deprecated_enums :SensitivityType, 'SENSITIVITY'
