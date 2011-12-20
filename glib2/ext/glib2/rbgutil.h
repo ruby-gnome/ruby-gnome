@@ -98,9 +98,6 @@ extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 
-/* deprecated */
-#define G_BLOCK_PROC rb_block_proc
-
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

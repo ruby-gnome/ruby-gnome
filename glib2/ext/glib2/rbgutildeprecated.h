@@ -42,6 +42,8 @@ G_BEGIN_DECLS
 #define GSLIST2ARY2(list, gtype)  (rbgutil_gslist2ary_boxed(list, gtype))
 #define GSLIST2ARY2F(list, gtype) (rbgutil_gslist2ary_boxed_and_free(list, gtype))
 
+#define G_BLOCK_PROC rb_block_proc
+
 extern VALUE rbgutil_glist2ary(const GList *list);
 extern VALUE rbgutil_glist2ary_and_free(GList* list);
 extern VALUE rbgutil_glist2ary_boxed(const GList *list, GType gtype);
