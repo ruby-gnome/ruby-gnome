@@ -26,29 +26,35 @@
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE label, use_underline_or_accel_group;
+    VALUE image;
     GtkWidget *widget = NULL;
 
-    if (rb_scan_args(argc, argv, "02", &label, &use_underline_or_accel_group) > 0) {
-        if (TYPE(label) == T_STRING){
-            if (NIL_P(use_underline_or_accel_group) || RVAL2CBOOL(use_underline_or_accel_group)){
-                widget = gtk_image_menu_item_new_with_mnemonic(RVAL2CSTR(label));
-            } else {
-                widget = gtk_image_menu_item_new_with_label(RVAL2CSTR(label));
-            }
-        } else if (TYPE(label) == T_SYMBOL){
-            widget = gtk_image_menu_item_new_from_stock(rb_id2name(SYM2ID(label)),
-                                                        NIL_P(use_underline_or_accel_group) ? NULL :
-                                                        RVAL2GTKACCELGROUP(use_underline_or_accel_group));
-        } else {
-            rb_raise(rb_eArgError, "invalid argument %s (expect Symbol(Gtk::Stock constants) or String)", 
-                     rb_class2name(CLASS_OF(label)));
-        }
-    } else {
+    rb_scan_args(argc, argv, "01", &image);
+    if (NIL_P(image)) {
         widget = gtk_image_menu_item_new();
+    } else if (TYPE(image) == T_HASH) {
+        VALUE label, mnemonic, stock_id, accel_group, buffer;
+        rbg_scan_options(image,
+                         "label", &label,
+                         "mnemonic", &mnemonic,
+                         "stock_id", &stock_id,
+                         "accel_group", &accel_group,
+                         NULL);
+
+        if (!NIL_P(label))
+            widget = gtk_image_menu_item_new_with_label(RVAL2CSTR(label));
+        else if (!NIL_P(mnemonic))
+            widget = gtk_image_menu_item_new_with_mnemonic(RVAL2CSTR(mnemonic));
+        else if (!NIL_P(stock_id))
+            widget = gtk_image_menu_item_new_from_stock(RVAL2GLIBID(stock_id, buffer),
+                                                        NIL_P(accel_group) ? NULL :
+                                                        RVAL2GTKACCELGROUP(accel_group));
     }
+    if (!widget)
+        rb_raise(rb_eArgError, "Invalid arguments.");
 
     RBGTK_INITIALIZE(self, widget);
+
     return Qnil;
 }
 

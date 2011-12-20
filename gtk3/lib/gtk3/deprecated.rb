@@ -341,6 +341,25 @@ module Gtk
     end
   end
 
+  class ImageMenuItem
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'label_or_stock_id = nil, use_underline_or_accel_group = nil',
+        ':label => nil, :mnemonic => nil, :stock_id => nil, :accel_group => nil' do
+        |_self, label_or_stock_id, use_underline_or_accel_group|
+      case label_or_stock_id
+      when String
+        if use_underline_or_accel_group
+          [{:mnemonic => label_or_stock_id}]
+        else
+          [{:label => label_or_stock_id}]
+        end
+      when Symbol
+        [{:stock_id => label_or_stock_id, :accel_group => use_underline_or_accel_group}]
+      end
+    end
+  end
+
   class LinkButton
     extend GLib::Deprecatable
     define_deprecated_singleton_method :set_uri_hook, :warn => "Use 'clicked' signal."
