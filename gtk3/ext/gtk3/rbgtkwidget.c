@@ -1047,7 +1047,7 @@ rg_render_icon_pixbuf(VALUE self, VALUE stock_id, VALUE size)
                                            RVAL2CSTR(stock_id),
                                            RVAL2GTKICONSIZE(size));
 
-    return GOBJ2RVAL(pixbuf);
+    return GOBJ2RVAL_UNREF(pixbuf);
 }
 
 static VALUE
