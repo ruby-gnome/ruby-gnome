@@ -382,6 +382,21 @@ module Gtk
     define_deprecated_enums :DirectionType, 'DIR'
   end
 
+  class MenuToolButton
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'icon_widget_or_stock_id = nil, label = nil',
+        ':icon_widget => nil, :label => nil, :stock_id => nil' do
+        |_self, icon_widget_or_stock_id, label|
+      case icon_widget_or_stock_id
+      when String, Symbol
+        [{:stock_id => icon_widget_or_stock_id}]
+      when Gtk::Widget
+        [{:icon_widget => icon_widget_or_stock_id, :label => label}]
+      end
+    end
+  end
+
   class MessageDialog
     extend GLib::Deprecatable
     define_deprecated_enums :ButtonsType, 'BUTTONS'
