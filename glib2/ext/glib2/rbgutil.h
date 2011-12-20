@@ -76,8 +76,6 @@ extern "C" {
     rb_define_method(klass, name, function, args)
 
 #define G_SET_PROPERTIES(self, hash) (rbgutil_set_properties(self, hash))
-#define G_SET_SYMBOL_PROPERTY(gtype, name) \
-     rbgobj_register_property_getter(gtype, name, rbgutil_sym_g2r_func)
 #define G_PROTECT_CALLBACK(func, data) (rbgutil_invoke_callback((VALUE(*)(VALUE))func, (VALUE)data))
 
 #define RBG_STRING_SET_UTF8_ENCODING(string) \
