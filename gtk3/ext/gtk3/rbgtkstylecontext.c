@@ -258,11 +258,9 @@ rg_lookup_color(VALUE self, VALUE color_name)
 static VALUE
 rg_lookup_icon_set(VALUE self, VALUE stock_id)
 {
-    GtkIconSet *iconset;
-
-    iconset = gtk_style_context_lookup_icon_set(_SELF(self), RVAL2CSTR(stock_id));
-
-    return GTKICONSET2RVAL(iconset);
+    VALUE buffer;
+    return GTKICONSET2RVAL(gtk_style_context_lookup_icon_set(_SELF(self),
+                                                             RVAL2GLIBID(stock_id, buffer)));
 }
 
 static VALUE
