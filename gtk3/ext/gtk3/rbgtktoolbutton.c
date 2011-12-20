@@ -50,4 +50,6 @@ Init_gtk_toolbutton(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_BUTTON, "ToolButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
+
+    RG_REG_GLIBID_SETTER("stock-id");
 }
