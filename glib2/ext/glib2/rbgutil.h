@@ -61,11 +61,6 @@ extern "C" {
         rb_attr(RG_TARGET_NAMESPACE, rb_intern(attr), read, write, ex)
 #define RG_DEF_ALIAS(new, old) rb_define_alias(RG_TARGET_NAMESPACE, new, old)
 
-#define G_DEF_SETTER(klass, name) \
-    rb_funcall(klass, rbgutil_id_module_eval, 1, rb_str_new2( \
-    "def " name "=(val); set_" name "(val); val; end\n"))
-#define G_DEF_SETTERS(klass) rbgutil_def_setters(klass)
-
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
     rb_define_method(klass, "set_" name, function, args); \

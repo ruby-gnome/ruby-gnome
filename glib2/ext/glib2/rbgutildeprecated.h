@@ -24,6 +24,11 @@
 
 G_BEGIN_DECLS
 
+#define G_DEF_SETTER(klass, name) \
+    rb_funcall(klass, rbgutil_id_module_eval, 1, rb_str_new2( \
+    "def " name "=(val); set_" name "(val); val; end\n"))
+#define G_DEF_SETTERS(klass) rbgutil_def_setters(klass)
+
 #define GLIST2ARY(list)           (rbgutil_glist2ary(list))
 #define GLIST2ARY_FREE(list)      (rbgutil_glist2ary_and_free(list))
 #define GLIST2ARYF(list)          (GLIST2ARY_FREE(list))
