@@ -61,6 +61,11 @@ extern "C" {
         rb_attr(RG_TARGET_NAMESPACE, rb_intern(attr), read, write, ex)
 #define RG_DEF_ALIAS(new, old) rb_define_alias(RG_TARGET_NAMESPACE, new, old)
 
+#define RG_REG_GLIBID_SETTER(name) \
+        rbgobj_register_property_setter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_glibid_r2g_func)
+#define RG_REG_SYMBOL_GETTER(name) \
+        rbgobj_register_property_getter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_sym_g2r_func)
+
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
     rb_define_method(klass, "set_" name, function, args); \
@@ -94,6 +99,7 @@ extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
+extern void rbgutil_glibid_r2g_func(VALUE from, GValue* to);
 extern VALUE rbgutil_sym_g2r_func(const GValue *from);
 
 #ifdef __cplusplus
