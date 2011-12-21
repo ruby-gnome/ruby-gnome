@@ -898,6 +898,21 @@ rg_drag_begin(VALUE self, VALUE targets)
     return GOBJ2RVAL(result);
 }
 
+static VALUE
+rg_drag_protocol(VALUE self)
+{
+    GdkWindow *target;
+    GdkWindow **p;
+    GdkDragProtocol prot;
+    VALUE ary = rb_ary_new();
+
+    prot = gdk_window_get_drag_protocol(_SELF(self), &target);
+    for (p = &target; *p; p++)
+        rb_ary_push(ary, GOBJ2RVAL(*p));
+
+    return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), ary);
+}
+
 void
 Init_gdk_window(VALUE mGdk)
 {
@@ -1009,6 +1024,7 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_SMETHOD(lookup, -1);
 */
     RG_DEF_METHOD(drag_begin, 1);
+    RG_DEF_METHOD(drag_protocol, 0);
 
     /* GdkWindowType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);

@@ -74,29 +74,6 @@ rg_action(VALUE self)
 }
 */
 
-/* TODO
-static VALUE
-rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
-{
-    VALUE xid;
-    GdkDragProtocol prot;
-    GdkNativeWindow ret;
-
-    if (argc == 1) {
-        rb_scan_args(argc, argv, "10", &xid);
-        ret = gdk_drag_get_protocol(RVAL2GDKNATIVEWINDOW(xid), &prot);
-    } else {
-        VALUE display;
-        rb_scan_args(argc, argv, "20", &display, &xid);
-        ret = gdk_drag_get_protocol_for_display(RVAL2GDKDISPLAYOBJECT(display),
-                                                RVAL2GDKNATIVEWINDOW(xid), &prot);
-    }
-
-    return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), GDKNATIVEWINDOW2RVAL(ret));
-}
-*/
-
-/* Instance Methods */
 static VALUE
 rg_selection(VALUE self)
 {
@@ -192,9 +169,6 @@ Init_gdk_dragcontext(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
-/* TODO
-    RG_DEF_SMETHOD(get_protocol, -1);
-*/
 /* TODO
     RG_DEF_METHOD(protocol, 0);
     RG_DEF_METHOD(source_window, 0);
