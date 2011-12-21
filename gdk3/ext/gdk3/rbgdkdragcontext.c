@@ -72,12 +72,6 @@ rg_action(VALUE self)
 {
     return GDKDRAGACTION2RVAL(_SELF(self)->action);
 }
-
-static VALUE
-rg_start_time(VALUE self)
-{
-    return UINT2NUM(_SELF(self)->start_time);
-}
 */
 
 /* deprecated
@@ -272,14 +266,12 @@ Init_gdk_dragcontext(VALUE mGdk)
 */
 /* TODO
     RG_DEF_METHOD(protocol, 0);
-    RG_DEF_METHOD_P(source, 0);
     RG_DEF_METHOD(source_window, 0);
     RG_DEF_METHOD(dest_window, 0);
     RG_DEF_METHOD(targets, 0);
     RG_DEF_METHOD(actions, 0);
     RG_DEF_METHOD(suggested_action, 0);
     RG_DEF_METHOD(action, 0);
-    RG_DEF_METHOD(start_time, 0);
 */
 
     RG_DEF_METHOD(selection, 0);
