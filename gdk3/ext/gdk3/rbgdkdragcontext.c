@@ -24,25 +24,25 @@
 #define RG_TARGET_NAMESPACE cDragContext
 #define _SELF(self) (RVAL2GDKDRAGCONTEXT(self))
 
-/* TODO
 static VALUE
 rg_protocol(VALUE self)
 {
-    return GDKDRAGPROTOCOL2RVAL(_SELF(self)->protocol);
+    return GDKDRAGPROTOCOL2RVAL(gdk_drag_context_get_protocol(_SELF(self)));
 }
 
 static VALUE
 rg_source_window(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->source_window);
+    return GOBJ2RVAL(gdk_drag_context_get_source_window(_SELF(self)));
 }
 
 static VALUE
 rg_dest_window(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->dest_window);
+    return GOBJ2RVAL(gdk_drag_context_get_dest_window(_SELF(self)));
 }
 
+/* TODO
 static VALUE
 rg_targets(VALUE self)
 {
@@ -54,25 +54,25 @@ rg_targets(VALUE self)
     }
     return ary;
 }
+*/
 
 static VALUE
 rg_actions(VALUE self)
 {
-    return GDKDRAGACTION2RVAL(_SELF(self)->actions);
+    return GDKDRAGACTION2RVAL(gdk_drag_context_get_actions(_SELF(self)));
 }
 
 static VALUE
 rg_suggested_action(VALUE self)
 {
-    return GDKDRAGACTION2RVAL(_SELF(self)->suggested_action);
+    return GDKDRAGACTION2RVAL(gdk_drag_context_get_suggested_action(_SELF(self)));
 }
 
 static VALUE
-rg_action(VALUE self)
+rg_selected_action(VALUE self)
 {
-    return GDKDRAGACTION2RVAL(_SELF(self)->action);
+    return GDKDRAGACTION2RVAL(gdk_drag_context_get_selected_action(_SELF(self)));
 }
-*/
 
 static VALUE
 rg_selection(VALUE self)
@@ -169,15 +169,15 @@ Init_gdk_dragcontext(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
-/* TODO
     RG_DEF_METHOD(protocol, 0);
     RG_DEF_METHOD(source_window, 0);
     RG_DEF_METHOD(dest_window, 0);
+/* TODO
     RG_DEF_METHOD(targets, 0);
+*/
     RG_DEF_METHOD(actions, 0);
     RG_DEF_METHOD(suggested_action, 0);
-    RG_DEF_METHOD(action, 0);
-*/
+    RG_DEF_METHOD(selected_action, 0);
 
     RG_DEF_METHOD(selection, 0);
     RG_DEF_METHOD(drag_abort, 1);

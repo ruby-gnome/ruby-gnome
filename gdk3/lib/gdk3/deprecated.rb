@@ -43,6 +43,7 @@ module Gdk
     end
     define_deprecated_singleton_method :get_protocol, :raise => "Use 'Gdk::Window#drag_protocol'."
     define_deprecated_method :initialize, :raise => "Use 'Gdk::Window#drag_begin'."
+    define_deprecated_method :action, :selected_action
     define_deprecated_method :source?, :warn => "Don't use this method."
     define_deprecated_method :start_time, :raise => "Don't use this method."
   end
