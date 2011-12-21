@@ -74,15 +74,6 @@ rg_action(VALUE self)
 }
 */
 
-/* deprecated
-static VALUE
-rg_initialize(VALUE self)
-{   
-    G_INITIALIZE(self, gdk_drag_context_new());
-    return Qnil;
-}
-*/
-
 /* TODO
 static VALUE
 rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
@@ -261,9 +252,6 @@ Init_gdk_dragcontext(VALUE mGdk)
 */
     RG_DEF_SMETHOD(drag_begin, 1);
 
-/* deprecated
-    RG_DEF_METHOD(initialize, 0);
-*/
 /* TODO
     RG_DEF_METHOD(protocol, 0);
     RG_DEF_METHOD(source_window, 0);

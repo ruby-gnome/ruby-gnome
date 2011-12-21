@@ -38,6 +38,7 @@ module Gdk
     extend GLib::Deprecatable
     define_deprecated_flags :Action, 'ACTION'
     define_deprecated_enums :Protocol, 'PROTO'
+    define_deprecated_method :initialize, :raise => "Use 'Gdk::Window#drag_begin'."
     define_deprecated_method :source?, :warn => "Don't use this method."
     define_deprecated_method :start_time, :raise => "Don't use this method."
   end
