@@ -36,12 +36,11 @@
 static VALUE
 rg_s_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
-    VALUE stock_id, label, modifier, keyval, translation_domain;
+    VALUE stock_id, label, modifier, keyval, translation_domain, buffer;
     GtkStockItem item;
 
     rb_scan_args(argc, argv, "23", &stock_id, &label, &modifier, &keyval, &translation_domain);
-    Check_Symbol(stock_id);
-    item.stock_id = (gchar *)SYM2CSTR(stock_id);
+    item.stock_id = (gchar *)RVAL2GLIBID(stock_id, buffer);
     item.label = (gchar *)RVAL2CSTR(label);
     item.modifier = NIL_P(modifier) ? 0 : NUM2UINT(modifier);
     item.keyval = NIL_P(keyval) ? 0 : NUM2UINT(keyval);
