@@ -32,12 +32,6 @@ rg_protocol(VALUE self)
 }
 
 static VALUE
-rg_source_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->is_source);
-}
-
-static VALUE
 rg_source_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->source_window);
