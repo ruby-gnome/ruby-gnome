@@ -23,14 +23,7 @@
 
 #define RG_TARGET_NAMESPACE mStock
 
-#define Check_Symbol(sym) do { \
-    if (!SYMBOL_P(sym)) \
-        rb_raise(rb_eArgError, "invalid argument %s (expect Symbol)", \
-                 rb_class2name(CLASS_OF(sym))); \
-} while (0)
-
 /* check whether sym is a Symbol or not in advance. */
-#define SYM2CSTR(sym) rb_id2name(SYM2ID(sym))
 #define CSTR2SYM(str) ID2SYM(rb_intern(str))
 
 static VALUE
