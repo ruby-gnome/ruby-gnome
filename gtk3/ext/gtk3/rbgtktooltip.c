@@ -45,14 +45,40 @@ rg_set_text(VALUE self, VALUE text)
 static VALUE
 rg_set_icon(VALUE self, VALUE icon)
 {
-    gtk_tooltip_set_icon(_SELF(self), RVAL2GDKPIXBUF(icon));
-    return self;
-}
+    if (NIL_P(icon)) {
+        gtk_tooltip_set_icon(_SELF(self), NULL);
+    } else if (TYPE(icon) == T_HASH) {
+        VALUE stock_id, icon_name, gicon, size, buffer;
+        rbg_scan_options(icon,
+                         "stock_id", &stock_id,
+                         "icon_name", &icon_name,
+                         "gicon", &gicon,
+                         "size", &size,
+                         NULL);
 
-static VALUE
-rg_set_icon_from_stock(VALUE self, VALUE stock_id, VALUE size)
-{
-    gtk_tooltip_set_icon_from_stock(_SELF(self), rb_id2name(SYM2ID(stock_id)), RVAL2GTKICONSIZE(size));
+        if (!NIL_P(stock_id))
+            gtk_tooltip_set_icon_from_stock(_SELF(self),
+                                            RVAL2GLIBID(stock_id, buffer),
+                                            RVAL2GTKICONSIZE(size));
+        else if (!NIL_P(icon_name))
+            gtk_tooltip_set_icon_from_icon_name(_SELF(self),
+                                                RVAL2CSTR(icon_name),
+                                                RVAL2GTKICONSIZE(size));
+        else if (!NIL_P(gicon))
+            gtk_tooltip_set_icon_from_gicon(_SELF(self),
+                                            RVAL2GICON(gicon),
+                                            RVAL2GTKICONSIZE(size));
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+    } else {
+        GType gtype = RVAL2GTYPE(icon);
+
+        if (gtype == GDK_TYPE_PIXBUF)
+            gtk_tooltip_set_icon(_SELF(self), RVAL2GDKPIXBUF(icon));
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+    }
+
     return self;
 }
 
@@ -70,6 +96,5 @@ Init_gtk_tooltip(VALUE mGtk)
     RG_DEF_METHOD(set_markup, 1);
     RG_DEF_METHOD(set_text, 1);
     RG_DEF_METHOD(set_icon, 1);
-    RG_DEF_METHOD(set_icon_from_stock, 2);
     RG_DEF_METHOD(set_custom, 1);
 }

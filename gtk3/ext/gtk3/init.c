@@ -30,6 +30,7 @@ void
 Init_gtk3(void)
 {
     Init_gdk_display();
+    Init_gdk_dragcontext();
     Init_gdk_screen();
     Init_gtk();
 }

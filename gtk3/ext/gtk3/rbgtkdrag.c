@@ -183,25 +183,11 @@ rg_s_dest_get_track_motion(G_GNUC_UNUSED VALUE self, VALUE widget)
 }
 
 static VALUE
-rg_s_finish(VALUE self, VALUE context, VALUE success, VALUE del, VALUE time)
-{
-    gtk_drag_finish(RVAL2GDKDRAGCONTEXT(context), RVAL2CBOOL(success),
-                    RVAL2CBOOL(del), NUM2UINT(time));
-    return self;
-}
-
-static VALUE
 rg_s_get_data(VALUE self, VALUE widget, VALUE context, VALUE target, VALUE time)
 {
     gtk_drag_get_data(RVAL2GTKWIDGET(widget), RVAL2GDKDRAGCONTEXT(context), RVAL2ATOM(target),
                       NUM2UINT(time));
     return self;
-}
-
-static VALUE
-rg_s_get_source_widget(G_GNUC_UNUSED VALUE self, VALUE context)
-{
-    return GOBJ2RVAL(gtk_drag_get_source_widget(RVAL2GDKDRAGCONTEXT(context)));
 }
 
 static VALUE
@@ -226,54 +212,6 @@ rg_s_begin(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE target_list, VALUE acti
                                     RVAL2GDKDRAGACTION(actions),
                                     NUM2INT(button),
                                     RVAL2GEV(event)));
-}
-
-static VALUE
-rg_s_set_icon(int argc, VALUE *argv, VALUE self)
-{
-    VALUE context, obj, pixmap = Qnil, mask = Qnil, hot_x, hot_y;
-
-    if (argc == 6) {
-        rb_scan_args(argc, argv, "60", &context, &obj, &pixmap, &mask, &hot_x, &hot_y);
-/* deprecated?
-        gtk_drag_set_icon_pixmap(RVAL2GDKDRAGCONTEXT(context),
-                                 RVAL2GDKCOLORMAP(obj), 
-                                 RVAL2GDKPIXMAP(pixmap),
-                                 RVAL2GDKBITMAP(mask), 
-                                 NUM2INT(hot_x), NUM2INT(hot_y));
-*/
-    } else {
-        rb_scan_args(argc, argv, "40", &context, &obj, &hot_x, &hot_y);
-
-        if (TYPE(obj) == T_SYMBOL){
-            gtk_drag_set_icon_stock(RVAL2GDKDRAGCONTEXT(context), rb_id2name(SYM2ID(obj)),
-                                    NUM2INT(hot_x), NUM2INT(hot_y));
-        } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GTK_TYPE_WIDGET))){
-            gtk_drag_set_icon_widget(RVAL2GDKDRAGCONTEXT(context), RVAL2GTKWIDGET(obj),
-                                     NUM2INT(hot_x), NUM2INT(hot_y));
-        } else if (rb_obj_is_kind_of(obj, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
-            gtk_drag_set_icon_pixbuf(RVAL2GDKDRAGCONTEXT(context),
-                                     RVAL2GDKPIXBUF(obj),
-                                     NUM2INT(hot_x), NUM2INT(hot_y));
-        } else {
-            rb_raise(rb_eArgError, "invalid argument %s", rb_class2name(CLASS_OF(obj)));
-        }
-    }
-    return self;
-}
-
-static VALUE
-rg_s_set_icon_name(VALUE self, VALUE context, VALUE name, VALUE hot_x, VALUE hot_y)
-{
-    gtk_drag_set_icon_name(RVAL2GDKDRAGCONTEXT(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
-    return self;
-}
-
-static VALUE
-rg_s_set_icon_default(VALUE self, VALUE context)
-{
-    gtk_drag_set_icon_default(RVAL2GDKDRAGCONTEXT(context));
-    return self;
 }
 
 static VALUE
@@ -391,16 +329,11 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_SMETHOD(dest_add_uri_targets, 1);
     RG_DEF_SMETHOD(dest_set_track_motion, 2);
     RG_DEF_SMETHOD(dest_get_track_motion, 1);
-    RG_DEF_SMETHOD(finish, 4);
     RG_DEF_SMETHOD(get_data, 4);
-    RG_DEF_SMETHOD(get_source_widget, 1);
     RG_DEF_SMETHOD(highlight, 1);
     RG_DEF_SMETHOD(unhighlight, 1);
     RG_DEF_SMETHOD(begin, 5);
     RG_DEF_SMETHOD_P(threshold, 5);
-    RG_DEF_SMETHOD(set_icon, -1);
-    RG_DEF_SMETHOD(set_icon_name, 4);
-    RG_DEF_SMETHOD(set_icon_default, 1);
     RG_DEF_SMETHOD(source_set, 4);
     RG_DEF_SMETHOD(source_set_icon, -1);
     RG_DEF_SMETHOD(source_set_icon_name, 2);

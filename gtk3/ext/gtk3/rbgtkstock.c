@@ -23,29 +23,21 @@
 
 #define RG_TARGET_NAMESPACE mStock
 
-#define Check_Symbol(sym) do { \
-    if (!SYMBOL_P(sym)) \
-        rb_raise(rb_eArgError, "invalid argument %s (expect Symbol)", \
-                 rb_class2name(CLASS_OF(sym))); \
-} while (0)
-
 /* check whether sym is a Symbol or not in advance. */
-#define SYM2CSTR(sym) rb_id2name(SYM2ID(sym))
 #define CSTR2SYM(str) ID2SYM(rb_intern(str))
 
 static VALUE
 rg_s_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
-    VALUE stock_id, label, modifier, keyval, translation_domain;
+    VALUE stock_id, label, modifier, keyval, translation_domain, buffer;
     GtkStockItem item;
 
     rb_scan_args(argc, argv, "23", &stock_id, &label, &modifier, &keyval, &translation_domain);
-    Check_Symbol(stock_id);
-    item.stock_id = (gchar *)SYM2CSTR(stock_id);
+    item.stock_id = (gchar *)RVAL2GLIBID(stock_id, buffer);
     item.label = (gchar *)RVAL2CSTR(label);
     item.modifier = NIL_P(modifier) ? 0 : NUM2UINT(modifier);
     item.keyval = NIL_P(keyval) ? 0 : NUM2UINT(keyval);
-    item.translation_domain = NIL_P(translation_domain) ? NULL : (gchar *)RVAL2CSTR(translation_domain);
+    item.translation_domain = (gchar *)RVAL2CSTR_ACCEPT_NIL(translation_domain);
     gtk_stock_add(&item, 1);
     return Qnil;
 }
@@ -53,10 +45,11 @@ rg_s_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
 {
+    VALUE buffer;
+    const gchar *id = RVAL2GLIBID(stock_id, buffer);
     GtkStockItem item;
 
-    Check_Symbol(stock_id);
-    if (gtk_stock_lookup(SYM2CSTR(stock_id), &item)) {
+    if (gtk_stock_lookup(id, &item)) {
         return rb_ary_new3(5,
                            CSTR2SYM(item.stock_id),
                            CSTR2RVAL(item.label),
@@ -64,7 +57,7 @@ rg_s_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
                            UINT2NUM(item.keyval),
                            CSTR2RVAL(item.translation_domain));
     }
-    rb_raise(rb_eArgError, "no such stock-id: %s", SYM2CSTR(stock_id));
+    rb_raise(rb_eArgError, "no such stock-id: %s", id);
 }
 
 static VALUE
