@@ -45,7 +45,7 @@ rg_s_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     item.label = (gchar *)RVAL2CSTR(label);
     item.modifier = NIL_P(modifier) ? 0 : NUM2UINT(modifier);
     item.keyval = NIL_P(keyval) ? 0 : NUM2UINT(keyval);
-    item.translation_domain = NIL_P(translation_domain) ? NULL : (gchar *)RVAL2CSTR(translation_domain);
+    item.translation_domain = (gchar *)RVAL2CSTR_ACCEPT_NIL(translation_domain);
     gtk_stock_add(&item, 1);
     return Qnil;
 }
