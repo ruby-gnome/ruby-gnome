@@ -845,6 +845,59 @@ rg_move_to_current_desktop(VALUE self)
 }
 #endif
 
+struct rbgdk_rval2gdkatomglist_args {
+    VALUE ary;
+    long n;
+    GList *result;
+};
+
+static VALUE
+rbgdk_rval2gdkatomglist_body(VALUE value)
+{
+    long i;
+    struct rbgdk_rval2gdkatomglist_args *args = (struct rbgdk_rval2gdkatomglist_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result = g_list_append(args->result, GINT_TO_POINTER(RVAL2ATOM(RARRAY_PTR(args->ary)[i])));
+
+    return Qnil;
+}
+
+static G_GNUC_NORETURN VALUE
+rbgdk_rval2gdkatomglist_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdkatomglist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GList *
+rbgdk_rval2gdkatomglist(VALUE value)
+{
+    struct rbgdk_rval2gdkatomglist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgdk_rval2gdkatomglist_body, (VALUE)&args,
+              rbgdk_rval2gdkatomglist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+#define RVAL2GDKATOMGLIST(value) rbgdk_rval2gdkatomglist(value)
+
+static VALUE
+rg_drag_begin(VALUE self, VALUE targets)
+{
+    GList *list = RVAL2GDKATOMGLIST(targets);
+    GdkDragContext *result = gdk_drag_begin(_SELF(self), list);
+    g_list_free(list);
+
+    return GOBJ2RVAL(result);
+}
+
 void
 Init_gdk_window(VALUE mGdk)
 {
@@ -955,6 +1008,7 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_SMETHOD(foreign_new, -1);
     RG_DEF_SMETHOD(lookup, -1);
 */
+    RG_DEF_METHOD(drag_begin, 1);
 
     /* GdkWindowType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
