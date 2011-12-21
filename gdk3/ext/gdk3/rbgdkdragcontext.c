@@ -24,31 +24,25 @@
 #define RG_TARGET_NAMESPACE cDragContext
 #define _SELF(self) (RVAL2GDKDRAGCONTEXT(self))
 
-/* TODO
 static VALUE
 rg_protocol(VALUE self)
 {
-    return GDKDRAGPROTOCOL2RVAL(_SELF(self)->protocol);
-}
-
-static VALUE
-rg_source_p(VALUE self)
-{
-    return CBOOL2RVAL(_SELF(self)->is_source);
+    return GDKDRAGPROTOCOL2RVAL(gdk_drag_context_get_protocol(_SELF(self)));
 }
 
 static VALUE
 rg_source_window(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->source_window);
+    return GOBJ2RVAL(gdk_drag_context_get_source_window(_SELF(self)));
 }
 
 static VALUE
 rg_dest_window(VALUE self)
 {
-    return GOBJ2RVAL(_SELF(self)->dest_window);
+    return GOBJ2RVAL(gdk_drag_context_get_dest_window(_SELF(self)));
 }
 
+/* TODO
 static VALUE
 rg_targets(VALUE self)
 {
@@ -60,64 +54,26 @@ rg_targets(VALUE self)
     }
     return ary;
 }
+*/
 
 static VALUE
 rg_actions(VALUE self)
 {
-    return GDKDRAGACTION2RVAL(_SELF(self)->actions);
+    return GDKDRAGACTION2RVAL(gdk_drag_context_get_actions(_SELF(self)));
 }
 
 static VALUE
 rg_suggested_action(VALUE self)
 {
-    return GDKDRAGACTION2RVAL(_SELF(self)->suggested_action);
+    return GDKDRAGACTION2RVAL(gdk_drag_context_get_suggested_action(_SELF(self)));
 }
 
 static VALUE
-rg_action(VALUE self)
+rg_selected_action(VALUE self)
 {
-    return GDKDRAGACTION2RVAL(_SELF(self)->action);
+    return GDKDRAGACTION2RVAL(gdk_drag_context_get_selected_action(_SELF(self)));
 }
 
-static VALUE
-rg_start_time(VALUE self)
-{
-    return UINT2NUM(_SELF(self)->start_time);
-}
-*/
-
-/* deprecated
-static VALUE
-rg_initialize(VALUE self)
-{   
-    G_INITIALIZE(self, gdk_drag_context_new());
-    return Qnil;
-}
-*/
-
-/* TODO
-static VALUE
-rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
-{
-    VALUE xid;
-    GdkDragProtocol prot;
-    GdkNativeWindow ret;
-
-    if (argc == 1) {
-        rb_scan_args(argc, argv, "10", &xid);
-        ret = gdk_drag_get_protocol(RVAL2GDKNATIVEWINDOW(xid), &prot);
-    } else {
-        VALUE display;
-        rb_scan_args(argc, argv, "20", &display, &xid);
-        ret = gdk_drag_get_protocol_for_display(RVAL2GDKDISPLAYOBJECT(display),
-                                                RVAL2GDKNATIVEWINDOW(xid), &prot);
-    }
-
-    return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), GDKNATIVEWINDOW2RVAL(ret));
-}
-*/
-
-/* Instance Methods */
 static VALUE
 rg_selection(VALUE self)
 {
@@ -174,61 +130,6 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
                        GDKDRAGPROTOCOL2RVAL(prot));
 }
 
-struct rbgdk_rval2gdkatomglist_args {
-    VALUE ary;
-    long n;
-    GList *result;
-};
-
-static VALUE
-rbgdk_rval2gdkatomglist_body(VALUE value)
-{
-    long i;
-    struct rbgdk_rval2gdkatomglist_args *args = (struct rbgdk_rval2gdkatomglist_args *)value;
-
-    for (i = 0; i < args->n; i++)
-        args->result = g_list_append(args->result, GINT_TO_POINTER(RVAL2ATOM(RARRAY_PTR(args->ary)[i])));
-
-    return Qnil;
-}
-
-static G_GNUC_NORETURN VALUE
-rbgdk_rval2gdkatomglist_rescue(VALUE value)
-{
-    g_free(((struct rbgdk_rval2gdkatomglist_args *)value)->result);
-
-    rb_exc_raise(rb_errinfo());
-}
-
-static GList *
-rbgdk_rval2gdkatomglist(VALUE value)
-{
-    struct rbgdk_rval2gdkatomglist_args args;
-
-    args.ary = rb_ary_to_ary(value);
-    args.n = RARRAY_LEN(args.ary);
-    args.result = NULL;
-
-    rb_rescue(rbgdk_rval2gdkatomglist_body, (VALUE)&args,
-              rbgdk_rval2gdkatomglist_rescue, (VALUE)&args);
-
-    return args.result;
-}
-
-#define RVAL2GDKATOMGLIST(value) rbgdk_rval2gdkatomglist(value)
-
-static VALUE
-rg_s_drag_begin(G_GNUC_UNUSED VALUE self, VALUE rbwindow, VALUE rbtargets)
-{
-    GdkWindow *window = RVAL2GDKWINDOW(rbwindow);
-    GList *targets = RVAL2GDKATOMGLIST(rbtargets);
-    GdkDragContext *result = gdk_drag_begin(window, targets);
-
-    g_list_free(targets);
-
-    return GOBJ2RVAL(result);
-}
-
 static VALUE
 rg_drag_motion(VALUE self, VALUE dest_window, VALUE protocol, VALUE x_root, VALUE y_root, VALUE suggested_action, VALUE possible_actions, VALUE time)
 {
@@ -268,25 +169,15 @@ Init_gdk_dragcontext(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DRAG_CONTEXT, "DragContext", mGdk);
 
-/* TODO
-    RG_DEF_SMETHOD(get_protocol, -1);
-*/
-    RG_DEF_SMETHOD(drag_begin, 1);
-
-/* deprecated
-    RG_DEF_METHOD(initialize, 0);
-*/
-/* TODO
     RG_DEF_METHOD(protocol, 0);
-    RG_DEF_METHOD_P(source, 0);
     RG_DEF_METHOD(source_window, 0);
     RG_DEF_METHOD(dest_window, 0);
+/* TODO
     RG_DEF_METHOD(targets, 0);
+*/
     RG_DEF_METHOD(actions, 0);
     RG_DEF_METHOD(suggested_action, 0);
-    RG_DEF_METHOD(action, 0);
-    RG_DEF_METHOD(start_time, 0);
-*/
+    RG_DEF_METHOD(selected_action, 0);
 
     RG_DEF_METHOD(selection, 0);
     RG_DEF_METHOD(drag_abort, 1);
@@ -298,7 +189,6 @@ Init_gdk_dragcontext(VALUE mGdk)
     RG_DEF_METHOD(drag_status, 2);
     RG_DEF_METHOD_P(drag_drop_succeeded, 0);
 
-    /* Constants */
     G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", RG_TARGET_NAMESPACE);
 }

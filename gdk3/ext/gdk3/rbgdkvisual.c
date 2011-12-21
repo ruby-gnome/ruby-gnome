@@ -246,9 +246,6 @@ Init_gdk_visual(VALUE mGdk)
     RG_DEF_METHOD(blue_prec, 0);
 */
 
-    /* GdkVisualType */
     G_DEF_CLASS(GDK_TYPE_VISUAL_TYPE, "Type", RG_TARGET_NAMESPACE);
-
-    /* GdkByteOrder */
     G_DEF_CLASS(GDK_TYPE_BYTE_ORDER, "ByteOrder", RG_TARGET_NAMESPACE);
 }

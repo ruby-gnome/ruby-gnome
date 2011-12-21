@@ -301,6 +301,5 @@ Init_gdk_property(VALUE mGdk)
     RG_DEF_SMETHOD(get, -1);
     RG_DEF_SMETHOD(delete, 2);
 
-    /* GdkPropMode from GdkProperties */
     G_DEF_CLASS(GDK_TYPE_PROP_MODE, "PropMode", RG_TARGET_NAMESPACE);
 }

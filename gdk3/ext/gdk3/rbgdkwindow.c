@@ -845,6 +845,74 @@ rg_move_to_current_desktop(VALUE self)
 }
 #endif
 
+struct rbgdk_rval2gdkatomglist_args {
+    VALUE ary;
+    long n;
+    GList *result;
+};
+
+static VALUE
+rbgdk_rval2gdkatomglist_body(VALUE value)
+{
+    long i;
+    struct rbgdk_rval2gdkatomglist_args *args = (struct rbgdk_rval2gdkatomglist_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result = g_list_append(args->result, GINT_TO_POINTER(RVAL2ATOM(RARRAY_PTR(args->ary)[i])));
+
+    return Qnil;
+}
+
+static G_GNUC_NORETURN VALUE
+rbgdk_rval2gdkatomglist_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdkatomglist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static GList *
+rbgdk_rval2gdkatomglist(VALUE value)
+{
+    struct rbgdk_rval2gdkatomglist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgdk_rval2gdkatomglist_body, (VALUE)&args,
+              rbgdk_rval2gdkatomglist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+#define RVAL2GDKATOMGLIST(value) rbgdk_rval2gdkatomglist(value)
+
+static VALUE
+rg_drag_begin(VALUE self, VALUE targets)
+{
+    GList *list = RVAL2GDKATOMGLIST(targets);
+    GdkDragContext *result = gdk_drag_begin(_SELF(self), list);
+    g_list_free(list);
+
+    return GOBJ2RVAL(result);
+}
+
+static VALUE
+rg_drag_protocol(VALUE self)
+{
+    GdkWindow *target;
+    GdkWindow **p;
+    GdkDragProtocol prot;
+    VALUE ary = rb_ary_new();
+
+    prot = gdk_window_get_drag_protocol(_SELF(self), &target);
+    for (p = &target; *p; p++)
+        rb_ary_push(ary, GOBJ2RVAL(*p));
+
+    return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), ary);
+}
+
 void
 Init_gdk_window(VALUE mGdk)
 {
@@ -955,40 +1023,21 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_SMETHOD(foreign_new, -1);
     RG_DEF_SMETHOD(lookup, -1);
 */
+    RG_DEF_METHOD(drag_begin, 1);
+    RG_DEF_METHOD(drag_protocol, 0);
 
-    /* GdkWindowType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowClass */
 /* TODO
     G_DEF_CLASS(GDK_TYPE_WINDOW_CLASS, "Class", RG_TARGET_NAMESPACE);
 */
-
-    /* GdkWindowHints */
     G_DEF_CLASS(GDK_TYPE_WINDOW_HINTS, "Hints", RG_TARGET_NAMESPACE);
-
-    /* GdkGravity */
     G_DEF_CLASS(GDK_TYPE_GRAVITY, "Gravity", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowEdge */
     G_DEF_CLASS(GDK_TYPE_WINDOW_EDGE, "Edge", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowTypeHint */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE_HINT, "TypeHint", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowAttibutesType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_ATTRIBUTES_TYPE, "AttributesType", RG_TARGET_NAMESPACE);
-
-    /* GdkFilterReturn */
     G_DEF_CLASS(GDK_TYPE_FILTER_RETURN, "FilterReturn", RG_TARGET_NAMESPACE);
-
-    /* GdkModifierType */
     G_DEF_CLASS(GDK_TYPE_MODIFIER_TYPE, "ModifierType", RG_TARGET_NAMESPACE);
-
-    /* GdkWMDecoration */
     G_DEF_CLASS(GDK_TYPE_WM_DECORATION, "WMDecoration", RG_TARGET_NAMESPACE);
-
-    /* GdkWMFunction */
     G_DEF_CLASS(GDK_TYPE_WM_FUNCTION, "WMFunction", RG_TARGET_NAMESPACE);
 
     rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   

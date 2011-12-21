@@ -501,7 +501,6 @@ Init_gdk(void)
 
     RG_DEF_SMETHOD_P(cairo_available, 0);
 
-    /* GdkGrabStatus */
     G_DEF_CLASS(GDK_TYPE_GRAB_STATUS, "GrabStatus", RG_TARGET_NAMESPACE);
 
     Init_gdk_atom(RG_TARGET_NAMESPACE);

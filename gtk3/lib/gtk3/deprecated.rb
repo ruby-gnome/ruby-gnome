@@ -231,6 +231,25 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_flags :DestDefaults, 'DEST_DEFAULT'
     define_deprecated_flags :TargetFlags, 'TARGET'
+    define_deprecated_singleton_method :finish, :warn => "Use 'Gdk::DragContext#finish'." do |_self, context, success, del, time|
+      context.finish(success, del, time)
+    end
+    define_deprecated_singleton_method :set_icon_default, :warn => "Use 'Gdk::DragContext#set_icon_default'." do |_self, context|
+      context.set_icon_default
+    end
+    define_deprecated_singleton_method :set_icon_name, :warn => "Use 'Gdk::DragContext#set_icon'." do |_self, context, name, hot_x, hot_y|
+      context.set_icon(:name => name, :hot_x => hot_x, :hot_y => hot_y)
+    end
+    define_deprecated_singleton_method :set_icon, :warn => "Use 'Gdk::DragContext#set_icon'." do |_self, context, icon, hot_x, hot_y|
+      case icon
+      when Symbol
+        context.set_icon(:stock_id => icon, :hot_x => hot_x, :hot_y => hot_y)
+      when Gdk::Pixbuf
+        context.set_icon(:pixbuf => icon, :hot_x => hot_x, :hot_y => hot_y)
+      when Gtk::Widget
+        context.set_icon(:widget => icon, :hot_x => hot_x, :hot_y => hot_y)
+      end
+    end
   end
 
   module FileChooser
@@ -627,6 +646,13 @@ module Gtk
       when Gtk::Widget
         [{:icon_widget => icon_widget_or_stock_id, :label => label}]
       end
+    end
+  end
+
+  module Tooltip
+    extend GLib::Deprecatable
+    define_deprecated_method :set_icon_from_stock, :warn => "Use '#{self}#set_icon'." do |_self, stock_id, size|
+      _self.set_icon(:stock_id => stock_id, :size => size)
     end
   end
 
