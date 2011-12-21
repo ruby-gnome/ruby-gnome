@@ -189,7 +189,6 @@ Init_gdk_dragcontext(VALUE mGdk)
     RG_DEF_METHOD(drag_status, 2);
     RG_DEF_METHOD_P(drag_drop_succeeded, 0);
 
-    /* Constants */
     G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", RG_TARGET_NAMESPACE);
 }

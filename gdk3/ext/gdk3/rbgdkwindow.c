@@ -1026,39 +1026,18 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(drag_begin, 1);
     RG_DEF_METHOD(drag_protocol, 0);
 
-    /* GdkWindowType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowClass */
 /* TODO
     G_DEF_CLASS(GDK_TYPE_WINDOW_CLASS, "Class", RG_TARGET_NAMESPACE);
 */
-
-    /* GdkWindowHints */
     G_DEF_CLASS(GDK_TYPE_WINDOW_HINTS, "Hints", RG_TARGET_NAMESPACE);
-
-    /* GdkGravity */
     G_DEF_CLASS(GDK_TYPE_GRAVITY, "Gravity", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowEdge */
     G_DEF_CLASS(GDK_TYPE_WINDOW_EDGE, "Edge", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowTypeHint */
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE_HINT, "TypeHint", RG_TARGET_NAMESPACE);
-
-    /* GdkWindowAttibutesType */
     G_DEF_CLASS(GDK_TYPE_WINDOW_ATTRIBUTES_TYPE, "AttributesType", RG_TARGET_NAMESPACE);
-
-    /* GdkFilterReturn */
     G_DEF_CLASS(GDK_TYPE_FILTER_RETURN, "FilterReturn", RG_TARGET_NAMESPACE);
-
-    /* GdkModifierType */
     G_DEF_CLASS(GDK_TYPE_MODIFIER_TYPE, "ModifierType", RG_TARGET_NAMESPACE);
-
-    /* GdkWMDecoration */
     G_DEF_CLASS(GDK_TYPE_WM_DECORATION, "WMDecoration", RG_TARGET_NAMESPACE);
-
-    /* GdkWMFunction */
     G_DEF_CLASS(GDK_TYPE_WM_FUNCTION, "WMFunction", RG_TARGET_NAMESPACE);
 
     rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   

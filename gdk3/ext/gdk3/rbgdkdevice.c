@@ -191,15 +191,8 @@ Init_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(keys, 0);
 */
 
-    /* GdkInputSource */
     G_DEF_CLASS(GDK_TYPE_INPUT_SOURCE, "InputSource", RG_TARGET_NAMESPACE);
-
-    /* GdkInputMode */
     G_DEF_CLASS(GDK_TYPE_INPUT_MODE, "InputMode", RG_TARGET_NAMESPACE);
-
-    /* GdkAxisUse */
     G_DEF_CLASS(GDK_TYPE_AXIS_USE, "AxisUse", RG_TARGET_NAMESPACE);
-
-    /* GdkExtensionMode */
     G_DEF_CLASS(GDK_TYPE_EXTENSION_MODE, "ExtensionMode", RG_TARGET_NAMESPACE);
 }
