@@ -52,10 +52,11 @@ rg_s_add(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
 {
+    VALUE buffer;
+    const gchar *id = RVAL2GLIBID(stock_id, buffer);
     GtkStockItem item;
 
-    Check_Symbol(stock_id);
-    if (gtk_stock_lookup(SYM2CSTR(stock_id), &item)) {
+    if (gtk_stock_lookup(id, &item)) {
         return rb_ary_new3(5,
                            CSTR2SYM(item.stock_id),
                            CSTR2RVAL(item.label),
@@ -63,7 +64,7 @@ rg_s_lookup(G_GNUC_UNUSED VALUE self, VALUE stock_id)
                            UINT2NUM(item.keyval),
                            CSTR2RVAL(item.translation_domain));
     }
-    rb_raise(rb_eArgError, "no such stock-id: %s", SYM2CSTR(stock_id));
+    rb_raise(rb_eArgError, "no such stock-id: %s", id);
 }
 
 static VALUE
