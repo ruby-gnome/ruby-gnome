@@ -259,6 +259,7 @@ void rbgio_gasyncinitable_new_async(GType type,
                                     VALUE cancellable,
                                     VALUE block);
 
+G_GNUC_INTERNAL void Init_gio(void);
 G_GNUC_INTERNAL void Init_gappinfo(VALUE glib);
 G_GNUC_INTERNAL void Init_gapplaunchcontext(VALUE glib);
 G_GNUC_INTERNAL void Init_gasyncinitable(VALUE glib);

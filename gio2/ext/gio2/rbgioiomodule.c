@@ -21,11 +21,25 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cIOModule
+#define _SELF(value) G_IO_MODULE(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self, VALUE filename)
+{
+        G_INITIALIZE(self, g_io_module_new(RVAL2CSTR(filename)));
+
+        return Qnil;
+}
+
+/* NOTE: No point in implementing g_io_module_query. */
 
 void
-Init_gio2(void)
+Init_giomodule(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE;
+
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", mGio);
+
+        RG_DEF_METHOD(initialize, 1);
 }

@@ -21,11 +21,25 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cNetworkService
+#define _SELF(value) G_NETWORK_SERVICE(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self, VALUE service, VALUE protocol, VALUE domain)
+{
+        /* TODO: If these are infected, so should they be when returned.  How
+         * do we deal with that? */
+        G_INITIALIZE(self, g_network_service_new(RVAL2CSTR(service),
+                                                 RVAL2CSTR(protocol),
+                                                 RVAL2CSTR(domain)));
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gnetworkservice(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", mGio);
+
+        RG_DEF_METHOD(initialize, 3);
 }

@@ -21,11 +21,23 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cConverterOutputStream
+#define _SELF(value) G_CONVERTER_OUTPUT_STREAM(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self, VALUE base_stream, VALUE converter)
+{
+        G_INITIALIZE(self,
+                     g_converter_output_stream_new(RVAL2GOUTPUTSTREAM(base_stream),
+                                                   RVAL2GCONVERTER(converter)));
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gconverteroutputstream(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CONVERTER_OUTPUT_STREAM, "ConverterOutputStream", mGio);
+
+        RG_DEF_METHOD(initialize, 2);
 }

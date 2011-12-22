@@ -21,11 +21,32 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cZlibCompressor
+#define _SELF(value) G_ZLIB_COMPRESSOR(RVAL2GOBJ(value))
+
+#define RVAL2ZLIBCOMPRESSORLEVELDEFAULT(value) \
+        RVAL2TYPE_WITH_DEFAULT((value), FIX2INT, -1)
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+        VALUE format, level;
+
+        rb_scan_args(argc, argv, "02", &format, &level);
+        G_INITIALIZE(self,
+                     g_zlib_compressor_new(RVAL2GZLIBCOMPRESSORFORMATDEFAULT(format),
+                                           RVAL2GZLIBCOMPRESSORFORMATDEFAULT(level)));
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gzlibcompressor(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR, "ZlibCompressor", mGio);
+
+        G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR_FORMAT, "Format", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_ZLIB_COMPRESSOR_FORMAT, "G_ZLIB_");
+
+        RG_DEF_METHOD(initialize, -1);
 }

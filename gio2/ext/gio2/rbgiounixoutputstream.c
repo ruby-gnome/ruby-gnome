@@ -21,11 +21,31 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#ifdef HAVE_GIO_UNIX
+#include <gio/gunixoutputstream.h>
+
+#define RG_TARGET_NAMESPACE cUnixOutputStream
+#define _SELF(value) G_UNIX_OUTPUT_STREAM(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+        VALUE fd, close_fd;
+
+        rb_scan_args(argc, argv, "11", &fd, &close_fd);
+        G_INITIALIZE(self, g_unix_output_stream_new(RVAL2FD(fd),
+                                                    RVAL2CBOOL(close_fd)));
+
+        return Qnil;
+}
+#endif
 
 void
-Init_gio2(void)
+Init_gunixoutputstream(G_GNUC_UNUSED VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+#ifdef HAVE_GIO_UNIX
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_OUTPUT_STREAM, "UnixOutputStream", mGio);
+
+        RG_DEF_METHOD(initialize, -1);
+#endif
 }

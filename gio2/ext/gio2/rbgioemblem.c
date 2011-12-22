@@ -21,11 +21,35 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cEmblem
+
+#define RVAL2GEMBLEMORIGIN(value) \
+        RVAL2GENUM((value), G_TYPE_EMBLEM_ORIGIN)
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+        VALUE rbicon, origin;
+        GIcon *icon;
+        GEmblem *emblem;
+
+        rb_scan_args(argc, argv, "11", &rbicon, &origin);
+        icon = RVAL2GICON(rbicon);
+        emblem = NIL_P(origin) ?
+                g_emblem_new(icon) :
+                g_emblem_new_with_origin(icon, RVAL2GEMBLEMORIGIN(origin));
+        G_INITIALIZE(self, emblem);
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gemblem(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEM, "Emblem", mGio);
+
+        G_DEF_CLASS(G_TYPE_EMBLEM_ORIGIN, "Origin", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");
+
+        RG_DEF_METHOD(initialize, -1);
 }

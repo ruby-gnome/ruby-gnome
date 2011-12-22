@@ -21,11 +21,8 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
-
 void
-Init_gio2(void)
+Init_gfilteroutputstream(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        (void)G_DEF_CLASS(G_TYPE_FILTER_OUTPUT_STREAM, "FilterOutputStream", mGio);
 }
