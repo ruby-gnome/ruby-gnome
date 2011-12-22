@@ -42,19 +42,18 @@ rg_dest_window(VALUE self)
     return GOBJ2RVAL(gdk_drag_context_get_dest_window(_SELF(self)));
 }
 
-/* TODO
 static VALUE
 rg_targets(VALUE self)
 {
-    GList *list = _SELF(self)->targets, *cur;
+    GList *list, *cur;
     VALUE ary = rb_ary_new();
 
+    list = gdk_drag_context_list_targets(_SELF(self));
     for (cur = list; cur != NULL; cur = cur->next) {
         rb_ary_push(ary, GDKATOM2RVAL((GdkAtom)cur->data));
     }
     return ary;
 }
-*/
 
 static VALUE
 rg_actions(VALUE self)
@@ -172,9 +171,7 @@ Init_gdk_dragcontext(VALUE mGdk)
     RG_DEF_METHOD(protocol, 0);
     RG_DEF_METHOD(source_window, 0);
     RG_DEF_METHOD(dest_window, 0);
-/* TODO
     RG_DEF_METHOD(targets, 0);
-*/
     RG_DEF_METHOD(actions, 0);
     RG_DEF_METHOD(suggested_action, 0);
     RG_DEF_METHOD(selected_action, 0);

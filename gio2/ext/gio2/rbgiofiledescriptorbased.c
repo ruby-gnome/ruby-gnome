@@ -21,11 +21,25 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#ifdef HAVE_GIO_UNIX
+#include <gio/gfiledescriptorbased.h>
+
+#define RG_TARGET_NAMESPACE mFileDescriptorBased
+#define _SELF(value) G_FILE_DESCRIPTOR_BASED(RVAL2GOBJ(value))
+
+static VALUE
+rg_fd(VALUE self)
+{
+        return FD2RVAL(g_file_descriptor_based_get_fd(_SELF(self)));
+}
+#endif
 
 void
-Init_gio2(void)
+Init_gfiledescriptorbased(G_GNUC_UNUSED VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+#ifdef HAVE_GIO_UNIX
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE_DESCRIPTOR_BASED, "FileDescriptorBased", mGio);
+
+        RG_DEF_METHOD(fd, 0);
+#endif
 }

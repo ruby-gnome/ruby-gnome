@@ -21,11 +21,23 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cThreadedSocketService
+
+static VALUE
+rg_initialize(VALUE self, VALUE max_threads)
+{
+        G_INITIALIZE(self,
+                     g_threaded_socket_service_new(RVAL2TYPE_WITH_DEFAULT(max_threads,
+                                                                          RVAL2GINT,
+                                                                          10)));
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gthreadedsocketservice(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_THREADED_SOCKET_SERVICE, "ThreadedSocketService", mGio);
+
+        RG_DEF_METHOD(initialize, -1);
 }

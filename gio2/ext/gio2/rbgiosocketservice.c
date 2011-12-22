@@ -21,11 +21,46 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cSocketService
+#define _SELF(value) G_SOCKET_SERVICE(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self)
+{
+        G_INITIALIZE(self, g_socket_service_new());
+
+        return Qnil;
+}
+
+static VALUE
+rg_start(VALUE self)
+{
+        g_socket_service_start(_SELF(self));
+
+        return self;
+}
+
+static VALUE
+rg_stop(VALUE self)
+{
+        g_socket_service_stop(_SELF(self));
+
+        return self;
+}
+
+static VALUE
+rg_active_p(VALUE self)
+{
+        return CBOOL2RVAL(g_socket_service_is_active(_SELF(self)));
+}
 
 void
-Init_gio2(void)
+Init_gsocketservice(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_SERVICE, "SocketService", mGio);
+
+        RG_DEF_METHOD(initialize, 0);
+        RG_DEF_METHOD(start, 0);
+        RG_DEF_METHOD(stop, 0);
+        RG_DEF_METHOD_P(active, 0);
 }

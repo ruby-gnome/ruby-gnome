@@ -11,7 +11,9 @@ rescue LoadError
   require "gio2.so"
 end
 
-class GLib::DataInputStream
+require "gio2/deprecated"
+
+class Gio::DataInputStream
   include Enumerable
 
   def each
@@ -45,8 +47,8 @@ private
   # TODO: Add #each_byte?
 end
 
-if GLib.const_defined? :DesktopAppInfo
-  class GLib::DesktopAppInfo
+if Gio.const_defined? :DesktopAppInfo
+  class Gio::DesktopAppInfo
     class << self
       def desktop_env=(desktop_env)
         set_desktop_env desktop_env
@@ -56,7 +58,7 @@ if GLib.const_defined? :DesktopAppInfo
   end
 end
 
-module GLib::File
+module Gio::File
   include Enumerable
 
   def eql?(other)
@@ -75,7 +77,7 @@ module GLib::File
   end
 end
 
-class GLib::FileEnumerator
+class Gio::FileEnumerator
   include Enumerable
 
   def each(cancellable = nil)
@@ -109,25 +111,25 @@ private
   end
 end
 
-class GLib::FileInfo
+class Gio::FileInfo
   def directory?
-    file_type == GLib::File::Type::DIRECTORY
+    file_type == Gio::File::Type::DIRECTORY
   end
 end
 
-module GLib::Icon
+module Gio::Icon
   def eql?(other)
     self === other and self == other
   end
 end
 
-class GLib::InputStream
+class Gio::InputStream
   def pending=(pending)
     pending ? set_pending : clear_pending
   end
 end
 
-class GLib::Resolver
+class Gio::Resolver
   class << self
     def default=(default)
       set_default default
@@ -136,7 +138,7 @@ class GLib::Resolver
   end
 end
 
-module GLib::SocketConnectable
+module Gio::SocketConnectable
   include Enumerable
 
   def each(cancellable = nil)
@@ -147,7 +149,7 @@ module GLib::SocketConnectable
   end
 end
 
-class GLib::UnixFDList
+class Gio::UnixFDList
   include Enumerable
 
   def each

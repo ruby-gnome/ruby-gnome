@@ -21,11 +21,38 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#ifdef HAVE_GIO_UNIX
+#include <gio/gunixmounts.h>
+
+#define RG_TARGET_NAMESPACE mUnixMountPoints
+
+static VALUE
+rg_m_get(G_GNUC_UNUSED VALUE self)
+{
+        guint64 time_read;
+        GList *mount_points;
+
+        mount_points = g_unix_mount_points_get(&time_read);
+
+        return rb_assoc_new(GLIST2ARY_STR_FREE(mount_points),
+                            GUINT642RVAL(time_read));
+}
+
+static VALUE
+rg_m_changed_since_p(G_GNUC_UNUSED VALUE self, VALUE time_read)
+{
+        return CBOOL2RVAL(g_unix_mount_points_changed_since(RVAL2GUINT64(time_read)));
+}
+
+#endif
 
 void
-Init_gio2(void)
+Init_gunixmountpoints(G_GNUC_UNUSED VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+#ifdef HAVE_GIO_UNIX
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "UnixMountPoints");
+
+        RG_DEF_MODFUNC(get, 0);
+        RG_DEF_MODFUNC_P(changed_since, 1);
+#endif
 }

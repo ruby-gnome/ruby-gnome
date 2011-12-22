@@ -21,11 +21,45 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cEmblemedIcon
+#define _SELF(value) G_EMBLEMED_ICON(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self, VALUE icon, VALUE emblem)
+{
+        G_INITIALIZE(self, g_emblemed_icon_new(RVAL2GICON(icon), RVAL2GEMBLEM(emblem)));
+
+        return Qnil;
+}
+
+static VALUE
+rg_icon(VALUE self)
+{
+        return GOBJ2RVAL(g_emblemed_icon_get_icon(_SELF(self)));
+}
+
+static VALUE
+rg_emblems(VALUE self)
+{
+        return GLIST2ARY_FREE(g_emblemed_icon_get_emblems(_SELF(self)));
+}
+
+static VALUE
+rg_add_emblem(VALUE self, VALUE emblem)
+{
+        g_emblemed_icon_add_emblem(_SELF(self), RVAL2GEMBLEM(emblem));
+
+        return self;
+}
 
 void
-Init_gio2(void)
+Init_gemblemedicon(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", mGio);
+
+        RG_DEF_METHOD(initialize, 2);
+        RG_DEF_METHOD(icon, 0);
+        RG_DEF_METHOD(emblems, 0);
+        RG_DEF_METHOD(add_emblem, 1);
+        RG_DEF_ALIAS("<<", "add_emblem");
 }

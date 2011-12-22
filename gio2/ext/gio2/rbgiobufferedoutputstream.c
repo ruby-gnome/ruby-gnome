@@ -21,11 +21,30 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cBufferedOutputStream
+#define _SELF(value) G_BUFFERED_OUTPUT_STREAM(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+        VALUE rbbase_stream, size;
+        GOutputStream *base_stream, *stream;
+
+        rb_scan_args(argc, argv, "11", &rbbase_stream, &size);
+        base_stream = RVAL2GOUTPUTSTREAM(rbbase_stream);
+
+        stream = NIL_P(size) ?
+                g_buffered_output_stream_new(base_stream) :
+                g_buffered_output_stream_new_sized(base_stream, RVAL2GSIZE(size));
+        G_INITIALIZE(self, stream);
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gbufferedoutputstream(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", mGio);
+
+        RG_DEF_METHOD(initialize, -1);
 }

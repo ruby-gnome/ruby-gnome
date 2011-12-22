@@ -21,11 +21,37 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cCharsetConverter
+#define _SELF(value) G_CHARSET_CONVERTER(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self, VALUE to, VALUE from)
+{
+        GError *error = NULL;
+        GCharsetConverter *converter;
+
+        converter = g_charset_converter_new(RVAL2CSTR(to),
+                                            RVAL2CSTR(from),
+                                            &error);
+        if (converter == NULL)
+                rbgio_raise_error(error);
+
+        G_INITIALIZE(self, converter);
+
+        return Qnil;
+}
+
+static VALUE
+rg_num_fallbacks(VALUE self)
+{
+        return GUINT2RVAL(g_charset_converter_get_num_fallbacks(_SELF(self)));
+}
 
 void
-Init_gio2(void)
+Init_gcharsetconverter(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", mGio);
+
+        RG_DEF_METHOD(initialize, 2);
+        RG_DEF_METHOD(num_fallbacks, 0);
 }

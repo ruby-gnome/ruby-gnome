@@ -21,11 +21,21 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE mSocketConnectable
+#define _SELF(value) RVAL2GSOCKETCONNECTABLE(value)
+
+static VALUE
+rg_enumerate(VALUE self)
+{
+        return GOBJ2RVAL(g_socket_connectable_enumerate(_SELF(self)));
+}
 
 void
-Init_gio2(void)
+Init_gsocketconnectable(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE;
+
+        RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", mGio);
+
+        RG_DEF_METHOD(enumerate, 0);
 }

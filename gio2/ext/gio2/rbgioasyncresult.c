@@ -21,11 +21,21 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE mAsyncResult
+#define _SELF(value) RVAL2GASYNCRESULT(value)
+
+/* NOTE: g_async_result_get_user_data isn't of any use from Ruby. */
+
+static VALUE
+rg_source_object(VALUE self)
+{
+        return GOBJ2RVAL_UNREF(g_async_result_get_source_object(_SELF(self)));
+}
 
 void
-Init_gio2(void)
+Init_gasyncresult(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_RESULT, "AsyncResult", mGio);
+
+        RG_DEF_METHOD(source_object, 0);
 }

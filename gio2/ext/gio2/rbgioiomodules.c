@@ -21,11 +21,27 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE mIOModules
+
+static VALUE
+rg_m_load_all_in_directory(G_GNUC_UNUSED VALUE self, VALUE dirname)
+{
+        return GLIST2ARY_FREE(g_io_modules_load_all_in_directory(RVAL2CSTR(dirname)));
+}
+
+static VALUE
+rg_m_scan_all_in_directory(VALUE self, VALUE dirname)
+{
+        g_io_modules_scan_all_in_directory(RVAL2CSTR(dirname));
+
+        return self;
+}
 
 void
-Init_gio2(void)
+Init_giomodules(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "IOModules");
+
+        RG_DEF_MODFUNC(load_all_in_directory, 1);
+        RG_DEF_MODFUNC(scan_all_in_directory, 1);
 }

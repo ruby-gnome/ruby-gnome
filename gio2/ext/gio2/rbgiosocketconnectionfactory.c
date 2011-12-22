@@ -21,11 +21,19 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE mSocketConnectionFactory
+
+static VALUE
+rg_m_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
+{
+        return GOBJ2RVAL_UNREF(g_socket_connection_factory_create_connection(RVAL2GSOCKET(socket)));
+}
 
 void
-Init_gio2(void)
+Init_gsocketconnectionfactory(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        /* TODO: Perhaps just move this to SocketConnection? */
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "SocketConnectionFactory");
+
+        RG_DEF_MODFUNC(create_connection, 1);
 }

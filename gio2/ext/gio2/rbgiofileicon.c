@@ -21,11 +21,21 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cFileIcon
+#define _SELF(value) G_FILE_ICON(RVAL2GOBJ(value))
+
+static VALUE
+rg_initialize(VALUE self, VALUE file)
+{
+        G_INITIALIZE(self, g_file_icon_new(RVAL2GFILE(file)));
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_gfileicon(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", mGio);
+
+        RG_DEF_METHOD(initialize, 1);
 }

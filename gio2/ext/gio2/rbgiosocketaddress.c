@@ -21,11 +21,14 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+/* TODO: new_from_native? */
+
+/* TODO: to_native? */
+
+/* TODO: get_native_size? */
 
 void
-Init_gio2(void)
+Init_gsocketaddress(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        (void)G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "SocketAddress", mGio);
 }

@@ -21,11 +21,26 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cFileMonitor
+#define _SELF(value) G_FILE_MONITOR(RVAL2GOBJ(value))
+
+static VALUE
+rg_cancel(VALUE self)
+{
+        return CBOOL2RVAL(g_file_monitor_cancel(_SELF(self)));
+}
 
 void
-Init_gio2(void)
+Init_gfilemonitor(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_MONITOR, "FileMonitor", mGio);
+
+        G_DEF_CLASS(G_TYPE_FILE_MONITOR_EVENT, "Event", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_EVENT, "G_FILE_MONITOR_");
+
+        G_DEF_CLASS(G_TYPE_FILE_MONITOR_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+        G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_FLAGS, "G_FILE_MONITOR_");
+
+        RG_DEF_METHOD(cancel, 0);
+        /* TODO: Do we need #emit_event? */
 }

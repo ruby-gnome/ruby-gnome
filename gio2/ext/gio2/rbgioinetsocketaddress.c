@@ -21,11 +21,21 @@
 
 #include "gio2.h"
 
-void Init_gio2(void);
+#define RG_TARGET_NAMESPACE cInetSocketAddress
+
+static VALUE
+rg_initialize(VALUE self, VALUE address, VALUE port)
+{
+        G_INITIALIZE(self, g_inet_socket_address_new(RVAL2GINETADDRESS(address),
+                                                     RVAL2GUINT16(port)));
+
+        return Qnil;
+}
 
 void
-Init_gio2(void)
+Init_ginetsocketaddress(VALUE mGio)
 {
-    Init_util();
-    Init_gio();
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INET_SOCKET_ADDRESS, "InetSocketAddress", mGio);
+
+        RG_DEF_METHOD(initialize, 2);
 }
