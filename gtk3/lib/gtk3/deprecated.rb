@@ -654,7 +654,7 @@ module Gtk
     end
   end
 
-  module Tooltip
+  class Tooltip
     extend GLib::Deprecatable
     define_deprecated_method :set_icon_from_stock, :warn => "Use '#{self}#set_icon'." do |_self, stock_id, size|
       _self.set_icon(:stock_id => stock_id, :size => size)
