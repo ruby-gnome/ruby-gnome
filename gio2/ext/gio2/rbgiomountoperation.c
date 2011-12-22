@@ -57,12 +57,6 @@ Init_gmountoperation(VALUE mGio)
         G_DEF_CLASS(G_TYPE_MOUNT_OPERATION_RESULT, "Result", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_MOUNT_OPERATION_RESULT, "G_MOUNT_OPERATION_");
 
-        G_DEF_CLASS(G_TYPE_ASK_PASSWORD_FLAGS, "AskPasswordFlags", mGio);
-        G_DEF_CONSTANTS(mGio, G_TYPE_ASK_PASSWORD_FLAGS, "G_");
-
-        G_DEF_CLASS(G_TYPE_PASSWORD_SAVE, "PasswordSave", mGio);
-        G_DEF_CONSTANTS(mGio, G_TYPE_PASSWORD_SAVE, "G_");
-
         RG_DEF_METHOD(initialize, 0);
         RG_DEF_METHOD(reply, 1);
 }
