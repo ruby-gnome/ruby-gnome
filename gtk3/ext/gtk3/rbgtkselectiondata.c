@@ -84,47 +84,43 @@ rbgtk_atom2selectiondata_free(GdkAtom type, void *dat)
 }    
 /************************************************************************/
 
-/* TODO
 static VALUE
 rg_selection(VALUE self)
 {
-    GdkAtom selection = _SELF(self)->selection;
-    return GDKATOM2RVAL(&selection);
+    return GDKATOM2RVAL(gtk_selection_data_get_selection(_SELF(self)));
 }
 
 static VALUE
 rg_target(VALUE self)
 {
-    return GDKATOM2RVAL(_SELF(self)->target);
+    return GDKATOM2RVAL(gtk_selection_data_get_target(_SELF(self)));
 }
 
 static VALUE
-rg_type(VALUE self)
+rg_data_type(VALUE self)
 {
-    return GDKATOM2RVAL(_SELF(self)->type);
+    return GDKATOM2RVAL(gtk_selection_data_get_data_type(_SELF(self)));
 }
 
 static VALUE
 rg_format(VALUE self)
 {
-    return INT2NUM(_SELF(self)->format);
+    return INT2NUM(gtk_selection_data_get_format(_SELF(self)));
 }
 
 static VALUE
 rg_data(VALUE self)
 {
-    return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const char*)_SELF(self)->data,
-                                                   _SELF(self)->length));
+    return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((const gchar *)gtk_selection_data_get_data(_SELF(self)),
+                                                   gtk_selection_data_get_length(_SELF(self))));
 }
 
 static VALUE
 rg_display(VALUE self)
 {
-    return GDKDISPLAY2RVAL(_SELF(self)->display);
+    return GOBJ2RVAL(gtk_selection_data_get_display(_SELF(self)));
 }
-*/
 
-/* Instance Methods */
 static VALUE
 rg_set(int argc, VALUE *argv, VALUE self)
 {
@@ -265,14 +261,12 @@ Init_gtk_selectiondata(VALUE mGtk)
 
     compound_text = gdk_atom_intern("COMPOUND_TEXT", FALSE);
 
-/* TODO
     RG_DEF_METHOD(selection, 0);
     RG_DEF_METHOD(target, 0);
-    RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(data_type, 0);
     RG_DEF_METHOD(format, 0);
     RG_DEF_METHOD(data, 0);
     RG_DEF_METHOD(display, 0);
-*/
     RG_DEF_METHOD(set, -1);
     RG_DEF_METHOD(text, 0);
     RG_DEF_METHOD(set_text, 1);

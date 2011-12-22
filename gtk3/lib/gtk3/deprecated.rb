@@ -575,6 +575,11 @@ module Gtk
     end
   end
 
+  class SelectionData
+    extend GLib::Deprecatable
+    define_deprecated_method :type, :data_type
+  end
+
   class SizeGroup
     extend GLib::Deprecatable
     define_deprecated_enums :Mode
