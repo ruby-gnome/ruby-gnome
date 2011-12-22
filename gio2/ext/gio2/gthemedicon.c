@@ -73,9 +73,9 @@ rg_append_name(VALUE self, VALUE iconname)
 }
 
 void
-Init_gthemedicon(VALUE glib)
+Init_gthemedicon(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_THEMED_ICON, "ThemedIcon", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(prepend_name, 1);

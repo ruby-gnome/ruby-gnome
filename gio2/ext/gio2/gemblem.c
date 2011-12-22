@@ -44,9 +44,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gemblem(VALUE glib)
+Init_gemblem(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEM, "Emblem", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEM, "Emblem", mGio);
 
         G_DEF_CLASS(G_TYPE_EMBLEM_ORIGIN, "Origin", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_EMBLEM_ORIGIN, "G_EMBLEM_");

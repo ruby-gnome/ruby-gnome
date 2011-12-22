@@ -47,10 +47,10 @@ rg_m_changed_since_p(G_GNUC_UNUSED VALUE self, VALUE time_read)
 #endif
 
 void
-Init_gunixmountpoints(G_GNUC_UNUSED VALUE glib)
+Init_gunixmountpoints(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "UnixMountPoints");
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "UnixMountPoints");
 
         RG_DEF_MODFUNC(get, 0);
         RG_DEF_MODFUNC_P(changed_since, 1);

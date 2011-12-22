@@ -94,9 +94,9 @@ rg_s_cancel_all_jobs(VALUE self)
 }
 
 void
-Init_gioscheduler(VALUE glib)
+Init_gioscheduler(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IOScheduler");
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "IOScheduler");
         RG_DEF_SMETHOD(push_job, -1);
         RG_DEF_SMETHOD(cancel_all_jobs, 0);
 }

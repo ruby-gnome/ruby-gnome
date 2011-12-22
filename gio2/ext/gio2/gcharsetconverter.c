@@ -48,9 +48,9 @@ rg_num_fallbacks(VALUE self)
 }
 
 void
-Init_gcharsetconverter(VALUE glib)
+Init_gcharsetconverter(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CHARSET_CONVERTER, "CharsetConverter", mGio);
 
         RG_DEF_METHOD(initialize, 2);
         RG_DEF_METHOD(num_fallbacks, 0);

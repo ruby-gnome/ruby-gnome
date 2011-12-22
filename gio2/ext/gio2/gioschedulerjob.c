@@ -112,9 +112,9 @@ rg_send_to_mainloop_async(VALUE self)
 }
 
 void
-Init_gioschedulerjob(VALUE glib)
+Init_gioschedulerjob(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_SCHEDULER_JOB, "IOSchedulerJob", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_SCHEDULER_JOB, "IOSchedulerJob", mGio);
 
         RG_DEF_METHOD(send_to_mainloop, 0);
         RG_DEF_METHOD(send_to_mainloop_async, 0);

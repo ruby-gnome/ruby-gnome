@@ -33,9 +33,9 @@ rg_initialize(VALUE self, VALUE file)
 }
 
 void
-Init_gfileicon(VALUE glib)
+Init_gfileicon(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ICON, "FileIcon", mGio);
 
         RG_DEF_METHOD(initialize, 1);
 }

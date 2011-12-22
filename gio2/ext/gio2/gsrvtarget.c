@@ -67,9 +67,9 @@ rg_weight(VALUE self)
 /* TODO: srvtarget_list_sort */
 
 void
-Init_gsrvtarget(VALUE glib)
+Init_gsrvtarget(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SRV_TARGET, "SrvTarget", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SRV_TARGET, "SrvTarget", mGio);
 
         RG_DEF_METHOD(initialize, 4);
         RG_DEF_METHOD(hostname, 0);

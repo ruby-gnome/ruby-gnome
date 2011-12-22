@@ -306,9 +306,9 @@ rg_clear_pending(VALUE self)
 }
 
 void
-Init_goutputstream(VALUE glib)
+Init_goutputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_OUTPUT_STREAM, "OutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_OUTPUT_STREAM, "OutputStream", mGio);
 
         G_DEF_CLASS(G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "SpliceFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS, "G_OUTPUT_STREAM_");

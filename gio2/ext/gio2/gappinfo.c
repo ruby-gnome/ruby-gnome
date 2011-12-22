@@ -281,9 +281,9 @@ rg_can_remove_supports_type_p(VALUE self)
 }
 
 void
-Init_gappinfo(VALUE glib)
+Init_gappinfo(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_APP_INFO, "AppInfo", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_APP_INFO, "AppInfo", mGio);
 
         G_DEF_CLASS(G_TYPE_APP_INFO_CREATE_FLAGS, "CreateFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_APP_INFO_CREATE_FLAGS, "G_APP_INFO_");

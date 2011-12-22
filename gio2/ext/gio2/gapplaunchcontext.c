@@ -70,9 +70,9 @@ rg_launch_failed(VALUE self, VALUE sn_id)
 }
 
 void
-Init_gapplaunchcontext(VALUE glib)
+Init_gapplaunchcontext(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_APP_LAUNCH_CONTEXT, "AppLaunchContext", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_APP_LAUNCH_CONTEXT, "AppLaunchContext", mGio);
 
         RG_DEF_METHOD(initialize, 0);
         RG_DEF_METHOD(get_display, -1);

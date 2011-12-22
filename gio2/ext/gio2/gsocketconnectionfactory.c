@@ -30,10 +30,10 @@ rg_m_create_connection(G_GNUC_UNUSED VALUE self, VALUE socket)
 }
 
 void
-Init_gsocketconnectionfactory(VALUE glib)
+Init_gsocketconnectionfactory(VALUE mGio)
 {
         /* TODO: Perhaps just move this to SocketConnection? */
-        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "SocketConnectionFactory");
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "SocketConnectionFactory");
 
         RG_DEF_MODFUNC(create_connection, 1);
 }

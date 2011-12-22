@@ -73,9 +73,9 @@ rg_next_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gsocketaddressenumerator(VALUE glib)
+Init_gsocketaddressenumerator(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS_ENUMERATOR, "SocketAddressEnumerator", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS_ENUMERATOR, "SocketAddressEnumerator", mGio);
 
         RG_DEF_METHOD(next, -1);
         RG_DEF_METHOD(next_async, -1);

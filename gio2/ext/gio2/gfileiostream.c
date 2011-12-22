@@ -87,9 +87,9 @@ rg_query_info_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gfileiostream(VALUE glib)
+Init_gfileiostream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_IO_STREAM, "FileIOStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_IO_STREAM, "FileIOStream", mGio);
 
         RG_DEF_METHOD(etag, 0);
         RG_DEF_METHOD(query_info, -1);

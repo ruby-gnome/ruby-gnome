@@ -202,11 +202,11 @@ rg_lookup_service_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gresolver(VALUE glib)
+Init_gresolver(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE, error;
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_RESOLVER, "Resolver", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_RESOLVER, "Resolver", mGio);
 
         RG_DEF_SMETHOD(default, 0);
         RG_DEF_SMETHOD(set_default, 1);

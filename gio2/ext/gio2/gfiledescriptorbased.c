@@ -35,10 +35,10 @@ rg_fd(VALUE self)
 #endif
 
 void
-Init_gfiledescriptorbased(G_GNUC_UNUSED VALUE glib)
+Init_gfiledescriptorbased(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE_DESCRIPTOR_BASED, "FileDescriptorBased", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE_DESCRIPTOR_BASED, "FileDescriptorBased", mGio);
 
         RG_DEF_METHOD(fd, 0);
 #endif

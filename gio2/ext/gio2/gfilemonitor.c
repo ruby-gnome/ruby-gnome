@@ -31,9 +31,9 @@ rg_cancel(VALUE self)
 }
 
 void
-Init_gfilemonitor(VALUE glib)
+Init_gfilemonitor(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_MONITOR, "FileMonitor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_MONITOR, "FileMonitor", mGio);
 
         G_DEF_CLASS(G_TYPE_FILE_MONITOR_EVENT, "Event", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_MONITOR_EVENT, "G_FILE_MONITOR_");

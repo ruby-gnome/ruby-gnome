@@ -51,10 +51,10 @@ rg_s_abstract_names_supported_p(G_GNUC_UNUSED VALUE self)
 #endif
 
 void
-Init_gunixsocketaddress(G_GNUC_UNUSED VALUE glib)
+Init_gunixsocketaddress(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS, "UnixSocketAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS, "UnixSocketAddress", mGio);
 
 #  if GLIB_CHECK_VERSION(2, 26, 0)
         G_DEF_CLASS(G_TYPE_UNIX_SOCKET_ADDRESS_TYPE, "Type", RG_TARGET_NAMESPACE);

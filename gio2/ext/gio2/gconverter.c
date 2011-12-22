@@ -110,9 +110,9 @@ rg_reset(VALUE self)
 }
 
 void
-Init_gconverter(VALUE glib)
+Init_gconverter(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_CONVERTER, "Converter", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_CONVERTER, "Converter", mGio);
 
         RG_DEF_METHOD(convert, -1);
         RG_DEF_METHOD(reset, 0);

@@ -55,9 +55,9 @@ rg_active_p(VALUE self)
 }
 
 void
-Init_gsocketservice(VALUE glib)
+Init_gsocketservice(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_SERVICE, "SocketService", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_SERVICE, "SocketService", mGio);
 
         RG_DEF_METHOD(initialize, 0);
         RG_DEF_METHOD(start, 0);

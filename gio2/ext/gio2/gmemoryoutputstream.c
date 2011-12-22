@@ -36,9 +36,9 @@ rg_initialize(VALUE self)
 }
 
 void
-Init_gmemoryoutputstream(VALUE glib)
+Init_gmemoryoutputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MEMORY_OUTPUT_STREAM, "MemoryOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MEMORY_OUTPUT_STREAM, "MemoryOutputStream", mGio);
 
         RG_DEF_METHOD(initialize, 0);
 }

@@ -61,10 +61,10 @@ rg_steal_fds(VALUE self)
 #endif
 
 void
-Init_gunixfdmessage(G_GNUC_UNUSED VALUE glib)
+Init_gunixfdmessage(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_MESSAGE, "UnixFDMessage", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_MESSAGE, "UnixFDMessage", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(append_fd, 1);

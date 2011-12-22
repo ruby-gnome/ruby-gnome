@@ -37,9 +37,9 @@ rg_initialize(VALUE self, VALUE service, VALUE protocol, VALUE domain)
 }
 
 void
-Init_gnetworkservice(VALUE glib)
+Init_gnetworkservice(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", mGio);
 
         RG_DEF_METHOD(initialize, 3);
 }

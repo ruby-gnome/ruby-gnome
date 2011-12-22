@@ -112,10 +112,10 @@ rg_guess_can_eject_p(VALUE self)
 #endif
 
 void
-Init_gunixmountpoint(G_GNUC_UNUSED VALUE glib)
+Init_gunixmountpoint(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_POINT, "UnixMountPoint", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_POINT, "UnixMountPoint", mGio);
 
         rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
 

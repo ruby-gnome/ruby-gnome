@@ -226,9 +226,9 @@ rg_set_backlog(VALUE self, VALUE listen_backlog)
 }
 
 void
-Init_gsocketlistener(VALUE glib)
+Init_gsocketlistener(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_LISTENER, "SocketListener", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_LISTENER, "SocketListener", mGio);
 
         RG_DEF_METHOD(initialize, 0);
         RG_DEF_METHOD(add_socket, -1);

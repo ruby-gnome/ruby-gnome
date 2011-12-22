@@ -133,12 +133,12 @@ rg_s_mount_path_system_internal_p(G_GNUC_UNUSED VALUE self, VALUE mount_path)
 #endif
 
 void
-Init_gunixmount(G_GNUC_UNUSED VALUE glib)
+Init_gunixmount(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE;
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_ENTRY, "UnixMount", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_ENTRY, "UnixMount", mGio);
 
         rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
 

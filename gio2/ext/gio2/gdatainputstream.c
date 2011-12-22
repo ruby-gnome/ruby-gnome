@@ -289,9 +289,9 @@ rg_read_upto_finish(VALUE self, VALUE result)
 #endif
 
 void
-Init_gdatainputstream(VALUE glib)
+Init_gdatainputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_INPUT_STREAM, "DataInputStream", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(read_byte, -1);

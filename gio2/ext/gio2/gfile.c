@@ -1925,9 +1925,9 @@ rg_supports_thread_contexts_p(VALUE self)
 }
 
 void
-Init_gfile(VALUE glib)
+Init_gfile(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE, "File", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_FILE, "File", mGio);
 
         G_DEF_CLASS(G_TYPE_FILE_QUERY_INFO_FLAGS, "QueryInfoFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_QUERY_INFO_FLAGS, "G_FILE_");

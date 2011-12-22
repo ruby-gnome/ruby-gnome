@@ -74,10 +74,10 @@ rg_s_set_desktop_env(G_GNUC_UNUSED VALUE self, VALUE desktop_env)
 #endif
 
 void
-Init_gdesktopappinfo(G_GNUC_UNUSED VALUE glib)
+Init_gdesktopappinfo(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DESKTOP_APP_INFO, "DesktopAppInfo", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DESKTOP_APP_INFO, "DesktopAppInfo", mGio);
 
         RG_DEF_SMETHOD(new_from_filename, 1);
         RG_DEF_SMETHOD(new_from_keyfile, 1);

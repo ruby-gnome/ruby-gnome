@@ -24,11 +24,11 @@
 #define RG_TARGET_NAMESPACE mFileAttribute
 
 void
-Init_gfileattribute(VALUE glib)
+Init_gfileattribute(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE;
 
-        RG_TARGET_NAMESPACE = rb_define_module_under(glib, "FileAttribute");
+        RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "FileAttribute");
 
         rb_define_const(RG_TARGET_NAMESPACE, "STANDARD_TYPE", CSTR2RVAL(G_FILE_ATTRIBUTE_STANDARD_TYPE));
         rb_define_const(RG_TARGET_NAMESPACE, "STANDARD_IS_HIDDEN", CSTR2RVAL(G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN));

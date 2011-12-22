@@ -98,10 +98,10 @@ rg_append(VALUE self, VALUE fd)
 #endif
 
 void
-Init_gunixfdlist(G_GNUC_UNUSED VALUE glib)
+Init_gunixfdlist(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFDList", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_FD_LIST, "UnixFDList", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(length, 0);

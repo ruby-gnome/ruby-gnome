@@ -49,9 +49,9 @@ rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE host_and_port, VALUE default_port)
 }
 
 void
-Init_gnetworkaddress(VALUE glib)
+Init_gnetworkaddress(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_ADDRESS, "NetworkAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_ADDRESS, "NetworkAddress", mGio);
 
         RG_DEF_SMETHOD(parse, 2);
 

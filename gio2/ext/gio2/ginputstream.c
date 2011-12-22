@@ -318,9 +318,9 @@ rg_clear_pending(VALUE self)
 }
 
 void
-Init_ginputstream(VALUE glib)
+Init_ginputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INPUT_STREAM, "InputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INPUT_STREAM, "InputStream", mGio);
 
         s_cReadAsyncResult = rb_define_class_under(RG_TARGET_NAMESPACE, "ReadAsyncResult", rb_cObject);
 

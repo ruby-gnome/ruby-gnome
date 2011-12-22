@@ -35,9 +35,9 @@ rg_initialize(VALUE self, VALUE max_threads)
 }
 
 void
-Init_gthreadedsocketservice(VALUE glib)
+Init_gthreadedsocketservice(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_THREADED_SOCKET_SERVICE, "ThreadedSocketService", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_THREADED_SOCKET_SERVICE, "ThreadedSocketService", mGio);
 
         RG_DEF_METHOD(initialize, -1);
 }

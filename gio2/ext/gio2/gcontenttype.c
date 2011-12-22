@@ -111,9 +111,9 @@ rg_m_registered(G_GNUC_UNUSED VALUE self)
 }
 
 void
-Init_gcontenttype(VALUE glib)
+Init_gcontenttype(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "ContentType");
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "ContentType");
 
         /* TODO: Should wrap this in a class. */
         RG_DEF_MODFUNC_P(equals, 2);

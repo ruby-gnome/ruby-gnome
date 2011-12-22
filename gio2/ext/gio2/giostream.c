@@ -94,9 +94,9 @@ rg_clear_pending(VALUE self)
 }
 
 void
-Init_giostream(VALUE glib)
+Init_giostream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IO_STREAM, "IOStream", mGio);
 
         RG_DEF_METHOD(close, 1);
         RG_DEF_METHOD(close_async, -1);

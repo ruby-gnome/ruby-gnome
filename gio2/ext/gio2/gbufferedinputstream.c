@@ -152,9 +152,9 @@ rg_read_byte(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gbufferedinputstream(VALUE glib)
+Init_gbufferedinputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_INPUT_STREAM, "BufferedInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_INPUT_STREAM, "BufferedInputStream", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(available, 0);

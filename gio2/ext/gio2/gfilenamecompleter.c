@@ -62,9 +62,9 @@ rg_set_dirs_only(VALUE self, VALUE dirs_only)
 }
 
 void
-Init_gfilenamecompleter(VALUE glib)
+Init_gfilenamecompleter(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILENAME_COMPLETER, "FilenameCompleter", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(get_completion_suffix, 1);

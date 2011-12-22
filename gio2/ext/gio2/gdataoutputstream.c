@@ -170,9 +170,9 @@ rg_put_string(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gdataoutputstream(VALUE glib)
+Init_gdataoutputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_OUTPUT_STREAM, "DataOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_DATA_OUTPUT_STREAM, "DataOutputStream", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(put_byte, -1);

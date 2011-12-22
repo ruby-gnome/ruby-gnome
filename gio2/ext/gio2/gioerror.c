@@ -26,11 +26,11 @@
 /* NOTE: g_io_error_from_errno doesn't make sense from Ruby. */
 
 void
-Init_gioerror(VALUE glib)
+Init_gioerror(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE, error;
 
-        RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IO");
+        RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "IO");
 
         error = rbgio_define_domain_error(RG_TARGET_NAMESPACE, "Error", G_IO_ERROR, "GIOErrorEnum", rb_eIOError);
 

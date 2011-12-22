@@ -69,9 +69,9 @@ rg_serialize(VALUE self)
 }
 
 void
-Init_gsocketcontrolmessage(VALUE glib)
+Init_gsocketcontrolmessage(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONTROL_MESSAGE, "SocketControlMessage", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONTROL_MESSAGE, "SocketControlMessage", mGio);
 
         RG_DEF_SMETHOD(deserialize, 3);
 

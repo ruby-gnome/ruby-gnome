@@ -41,10 +41,10 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gunixoutputstream(G_GNUC_UNUSED VALUE glib)
+Init_gunixoutputstream(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_OUTPUT_STREAM, "UnixOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_OUTPUT_STREAM, "UnixOutputStream", mGio);
 
         RG_DEF_METHOD(initialize, -1);
 #endif

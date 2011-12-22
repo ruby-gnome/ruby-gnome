@@ -159,9 +159,9 @@ rg_cancel(VALUE self)
 }
 
 void
-Init_gcancellable(VALUE glib)
+Init_gcancellable(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CANCELLABLE, "Cancellable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CANCELLABLE, "Cancellable", mGio);
 
         RG_DEF_SMETHOD(current, 0);
 

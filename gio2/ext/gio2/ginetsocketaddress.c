@@ -33,9 +33,9 @@ rg_initialize(VALUE self, VALUE address, VALUE port)
 }
 
 void
-Init_ginetsocketaddress(VALUE glib)
+Init_ginetsocketaddress(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INET_SOCKET_ADDRESS, "InetSocketAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_INET_SOCKET_ADDRESS, "InetSocketAddress", mGio);
 
         RG_DEF_METHOD(initialize, 2);
 }

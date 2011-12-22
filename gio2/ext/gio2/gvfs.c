@@ -67,9 +67,9 @@ rg_supported_uri_schemes(VALUE self)
 }
 
 void
-Init_gvfs(VALUE glib)
+Init_gvfs(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VFS, "Vfs", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VFS, "Vfs", mGio);
 
         rb_define_const(RG_TARGET_NAMESPACE, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VFS_EXTENSION_POINT_NAME));
 

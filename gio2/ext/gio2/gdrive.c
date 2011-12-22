@@ -232,9 +232,9 @@ rg_get_identifier(VALUE self, VALUE kind)
 }
 
 void
-Init_gdrive(VALUE glib)
+Init_gdrive(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_DRIVE, "Drive", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_DRIVE, "Drive", mGio);
 
         G_DEF_CLASS(G_TYPE_DRIVE_START_FLAGS, "StartFlags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_DRIVE_START_FLAGS, "G_DRIVE_");

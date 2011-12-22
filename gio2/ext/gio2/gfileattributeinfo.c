@@ -75,11 +75,11 @@ rg_flags(VALUE self)
 }
 
 void
-Init_gfileattributeinfo(VALUE glib)
+Init_gfileattributeinfo(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE;
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO, "FileAttributeInfo", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO, "FileAttributeInfo", mGio);
 
         G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "Flags", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS, "G_FILE_ATTRIBUTE_INFO_");

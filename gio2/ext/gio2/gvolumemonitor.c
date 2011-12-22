@@ -61,9 +61,9 @@ rg_get_volume_for_uuid(VALUE self, VALUE value)
 }
 
 void
-Init_gvolumemonitor(VALUE glib)
+Init_gvolumemonitor(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VOLUME_MONITOR, "VolumeMonitor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VOLUME_MONITOR, "VolumeMonitor", mGio);
 
         rb_define_const(RG_TARGET_NAMESPACE, "EXTENSION_POINT_NAME", CSTR2RVAL(G_VOLUME_MONITOR_EXTENSION_POINT_NAME));
 

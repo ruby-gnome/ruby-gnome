@@ -82,9 +82,9 @@ rg_load_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gloadableicon(VALUE glib)
+Init_gloadableicon(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON, "LoadableIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_LOADABLE_ICON, "LoadableIcon", mGio);
 
         RG_DEF_METHOD(load, -1);
         RG_DEF_METHOD(load_async, -1);

@@ -97,9 +97,9 @@ rg_each(VALUE self)
 }
 
 void
-Init_fileattributeinfolist(VALUE glib)
+Init_fileattributeinfolist(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_LIST, "FileAttributeInfoList", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_INFO_LIST, "FileAttributeInfoList", mGio);
 
         rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 

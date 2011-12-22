@@ -41,9 +41,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gzlibcompressor(VALUE glib)
+Init_gzlibcompressor(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR, "ZlibCompressor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR, "ZlibCompressor", mGio);
 
         G_DEF_CLASS(G_TYPE_ZLIB_COMPRESSOR_FORMAT, "Format", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_ZLIB_COMPRESSOR_FORMAT, "G_ZLIB_");

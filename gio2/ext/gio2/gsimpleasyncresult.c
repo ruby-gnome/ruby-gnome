@@ -135,9 +135,9 @@ rg_complete_in_idle(VALUE self)
 /* NOTE: Can't implement g_simple_async_result_report_gerror_in_idle. */
 
 void
-Init_gsimpleasyncresult(VALUE glib)
+Init_gsimpleasyncresult(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SIMPLE_ASYNC_RESULT, "SimpleAsyncResult", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SIMPLE_ASYNC_RESULT, "SimpleAsyncResult", mGio);
 
         RG_DEF_METHOD(initialize, 1);
         RG_DEF_METHOD(set_op_res_gssize, 1);

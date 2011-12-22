@@ -60,10 +60,10 @@ rg_send_fd(int argc, VALUE *argv, VALUE self)
 #endif
 
 void
-Init_gunixconnection(G_GNUC_UNUSED VALUE glib)
+Init_gunixconnection(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_CONNECTION, "UnixConnection", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_CONNECTION, "UnixConnection", mGio);
 
         RG_DEF_METHOD(receive_fd, -1);
         RG_DEF_METHOD(send_fd, -1);

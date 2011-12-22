@@ -333,9 +333,9 @@ rg_speaks_ipv4_p(VALUE self)
 }
 
 void
-Init_gsocket(VALUE glib)
+Init_gsocket(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET, "Socket", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET, "Socket", mGio);
 
         G_DEF_CLASS(G_TYPE_SOCKET_FAMILY, "Family", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_FAMILY, "G_SOCKET_");

@@ -56,9 +56,9 @@ rg_to_string(VALUE self)
 }
 
 void
-Init_gicon(VALUE glib)
+Init_gicon(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ICON, "Icon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ICON, "Icon", mGio);
 
         RG_DEF_SMETHOD(new_for_string, 1);
 

@@ -235,9 +235,9 @@ rg_initialize_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gasyncinitable(VALUE glib)
+Init_gasyncinitable(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_INITABLE, "AsyncInitable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_INITABLE, "AsyncInitable", mGio);
 
         RG_DEF_METHOD(init_async, -1);
         RG_DEF_METHOD(init_finish, 1);

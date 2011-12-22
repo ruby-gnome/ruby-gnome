@@ -53,9 +53,9 @@ rg_add_emblem(VALUE self, VALUE emblem)
 }
 
 void
-Init_gemblemedicon(VALUE glib)
+Init_gemblemedicon(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_EMBLEMED_ICON, "EmblemedIcon", mGio);
 
         RG_DEF_METHOD(initialize, 2);
         RG_DEF_METHOD(icon, 0);

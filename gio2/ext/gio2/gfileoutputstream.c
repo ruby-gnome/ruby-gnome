@@ -87,9 +87,9 @@ rg_etag(VALUE self)
 }
 
 void
-Init_gfileoutputstream(VALUE glib)
+Init_gfileoutputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_OUTPUT_STREAM, "FileOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_OUTPUT_STREAM, "FileOutputStream", mGio);
 
         RG_DEF_METHOD(query_info, -1);
         RG_DEF_METHOD(query_info_async, -1);

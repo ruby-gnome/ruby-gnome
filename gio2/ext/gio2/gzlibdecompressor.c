@@ -37,9 +37,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gzlibdecompressor(VALUE glib)
+Init_gzlibdecompressor(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_DECOMPRESSOR, "ZlibDecompressor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ZLIB_DECOMPRESSOR, "ZlibDecompressor", mGio);
 
         RG_DEF_METHOD(initialize, -1);
 }

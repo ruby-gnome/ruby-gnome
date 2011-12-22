@@ -58,9 +58,9 @@ rg_add_data(VALUE self, VALUE data)
 }
 
 void
-Init_gmemoryinputstream(VALUE glib)
+Init_gmemoryinputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MEMORY_INPUT_STREAM, "MemoryInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_MEMORY_INPUT_STREAM, "MemoryInputStream", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(add_data, 1);

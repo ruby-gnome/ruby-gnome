@@ -35,11 +35,11 @@ rg_initialize(VALUE self, VALUE filename)
 /* NOTE: No point in implementing g_io_module_query. */
 
 void
-Init_giomodule(VALUE glib)
+Init_giomodule(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE;
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_IO_TYPE_MODULE, "IOModule", mGio);
 
         RG_DEF_METHOD(initialize, 1);
 }

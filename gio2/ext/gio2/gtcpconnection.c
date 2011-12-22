@@ -22,7 +22,7 @@
 #include "gio2.h"
 
 void
-Init_gtcpconnection(VALUE glib)
+Init_gtcpconnection(VALUE mGio)
 {
-        (void)G_DEF_CLASS(G_TYPE_TCP_CONNECTION, "TcpConnection", glib);
+        (void)G_DEF_CLASS(G_TYPE_TCP_CONNECTION, "TcpConnection", mGio);
 }

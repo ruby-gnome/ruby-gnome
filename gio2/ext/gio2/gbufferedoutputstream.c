@@ -42,9 +42,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gbufferedoutputstream(VALUE glib)
+Init_gbufferedoutputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BUFFERED_OUTPUT_STREAM, "BufferedOutputStream", mGio);
 
         RG_DEF_METHOD(initialize, -1);
 }

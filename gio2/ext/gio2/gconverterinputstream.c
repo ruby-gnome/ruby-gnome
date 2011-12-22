@@ -35,9 +35,9 @@ rg_initialize(VALUE self, VALUE base_stream, VALUE converter)
 }
 
 void
-Init_gconverterinputstream(VALUE glib)
+Init_gconverterinputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CONVERTER_INPUT_STREAM, "ConverterInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CONVERTER_INPUT_STREAM, "ConverterInputStream", mGio);
 
         RG_DEF_METHOD(initialize, 2);
 }

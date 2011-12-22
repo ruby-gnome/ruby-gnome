@@ -31,11 +31,11 @@ rg_enumerate(VALUE self)
 }
 
 void
-Init_gsocketconnectable(VALUE glib)
+Init_gsocketconnectable(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE;
 
-        RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", glib);
+        RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SOCKET_CONNECTABLE, "SocketConnectable", mGio);
 
         RG_DEF_METHOD(enumerate, 0);
 }

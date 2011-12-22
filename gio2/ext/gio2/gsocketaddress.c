@@ -28,7 +28,7 @@
 /* TODO: get_native_size? */
 
 void
-Init_gsocketaddress(VALUE glib)
+Init_gsocketaddress(VALUE mGio)
 {
-        (void)G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "SocketAddress", glib);
+        (void)G_DEF_CLASS(G_TYPE_SOCKET_ADDRESS, "SocketAddress", mGio);
 }

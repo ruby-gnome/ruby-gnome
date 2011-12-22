@@ -190,9 +190,9 @@ rg_connect_to_service_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gsocketclient(VALUE glib)
+Init_gsocketclient(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CLIENT, "SocketClient", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CLIENT, "SocketClient", mGio);
 
         RG_DEF_METHOD(initialize, 0);
         RG_DEF_METHOD(connect, -1);

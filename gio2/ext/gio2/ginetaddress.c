@@ -101,9 +101,9 @@ rg_to_string(VALUE self)
 }
 
 void
-Init_ginetaddress(VALUE glib)
+Init_ginetaddress(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INET_ADDRESS, "InetAddress", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INET_ADDRESS, "InetAddress", mGio);
 
         RG_DEF_SMETHOD(new_from_string, 1);
         RG_DEF_SMETHOD(new_from_bytes, -1);

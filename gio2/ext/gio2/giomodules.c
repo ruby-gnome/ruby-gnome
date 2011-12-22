@@ -38,9 +38,9 @@ rg_m_scan_all_in_directory(VALUE self, VALUE dirname)
 }
 
 void
-Init_giomodules(VALUE glib)
+Init_giomodules(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(glib, "IOModules");
+        VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "IOModules");
 
         RG_DEF_MODFUNC(load_all_in_directory, 1);
         RG_DEF_MODFUNC(scan_all_in_directory, 1);

@@ -189,9 +189,9 @@ rg_m_new(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_ginitable(VALUE glib)
+Init_ginitable(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", mGio);
 
         RG_DEF_MODFUNC(new, -1);
 

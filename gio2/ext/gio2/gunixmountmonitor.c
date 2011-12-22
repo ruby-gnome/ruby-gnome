@@ -54,10 +54,10 @@ rg_set_rate_limit(VALUE self, VALUE limit_msec)
 #endif
 
 void
-Init_gunixmountmonitor(G_GNUC_UNUSED VALUE glib)
+Init_gunixmountmonitor(G_GNUC_UNUSED VALUE mGio)
 {
 #ifdef HAVE_GIO_UNIX
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_MONITOR, "UnixMountMonitor", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_UNIX_MOUNT_MONITOR, "UnixMountMonitor", mGio);
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(set_rate_limit, 1);

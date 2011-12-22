@@ -78,9 +78,9 @@ rg_enumerate_next(VALUE self)
 }
 
 void
-Init_gfileattributematcher(VALUE glib)
+Init_gfileattributematcher(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_MATCHER, "FileAttributeMatcher", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ATTRIBUTE_MATCHER, "FileAttributeMatcher", mGio);
 
         RG_DEF_METHOD(initialize, 1);
         RG_DEF_METHOD_P(matches, 1);

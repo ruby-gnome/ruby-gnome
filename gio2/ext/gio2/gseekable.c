@@ -79,9 +79,9 @@ rg_truncate(int argc, VALUE *argv, VALUE self)
 }
 
 void
-Init_gseekable(VALUE glib)
+Init_gseekable(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SEEKABLE, "Seekable", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_SEEKABLE, "Seekable", mGio);
 
         RG_DEF_METHOD(tell, 0);
         RG_DEF_METHOD_P(can_seek, 0);

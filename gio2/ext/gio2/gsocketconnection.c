@@ -55,11 +55,11 @@ rg_remote_address(VALUE self)
 /* TODO: register_type */
 
 void
-Init_gsocketconnection(VALUE glib)
+Init_gsocketconnection(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE;
 
-        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONNECTION, "SocketConnection", glib);
+        RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET_CONNECTION, "SocketConnection", mGio);
 
         RG_DEF_METHOD(local_address, 0);
         RG_DEF_METHOD(remote_address, 0);

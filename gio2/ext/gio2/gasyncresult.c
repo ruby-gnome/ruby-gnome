@@ -33,9 +33,9 @@ rg_source_object(VALUE self)
 }
 
 void
-Init_gasyncresult(VALUE glib)
+Init_gasyncresult(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_RESULT, "AsyncResult", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_ASYNC_RESULT, "AsyncResult", mGio);
 
         RG_DEF_METHOD(source_object, 0);
 }

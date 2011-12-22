@@ -81,9 +81,9 @@ rg_query_info_finish(VALUE self, VALUE result)
 }
 
 void
-Init_gfileinputstream(VALUE glib)
+Init_gfileinputstream(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM, "FileInputStream", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_INPUT_STREAM, "FileInputStream", mGio);
 
         RG_DEF_METHOD(query_info, -1);
         RG_DEF_METHOD(query_info_async, -1);

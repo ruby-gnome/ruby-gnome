@@ -149,9 +149,9 @@ rg_container(VALUE self)
 }
 
 void
-Init_gfileenumerator(VALUE glib)
+Init_gfileenumerator(VALUE mGio)
 {
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ENUMERATOR, "FileEnumerator", glib);
+        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FILE_ENUMERATOR, "FileEnumerator", mGio);
 
         RG_DEF_METHOD(next_file, -1);
         RG_DEF_METHOD(close, -1);

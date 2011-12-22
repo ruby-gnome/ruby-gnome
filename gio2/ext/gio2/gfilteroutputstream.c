@@ -22,7 +22,7 @@
 #include "gio2.h"
 
 void
-Init_gfilteroutputstream(VALUE glib)
+Init_gfilteroutputstream(VALUE mGio)
 {
-        (void)G_DEF_CLASS(G_TYPE_FILTER_OUTPUT_STREAM, "FilterOutputStream", glib);
+        (void)G_DEF_CLASS(G_TYPE_FILTER_OUTPUT_STREAM, "FilterOutputStream", mGio);
 }
