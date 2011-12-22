@@ -600,6 +600,34 @@ module Gtk
     alias :realized= :set_realized
   end
 
+  class TextBuffer
+    extend GLib::Deprecatable
+    define_deprecated_method :get_iter_at_line,
+        :warn => "Use '#{self}#get_iter_at(:line => nil)'." do |_self, line|
+      _self.get_iter_at(:line => line)
+    end
+    define_deprecated_method :get_iter_at_line_offset,
+        :warn => "Use '#{self}#get_iter_at(:line => nil, :offset => nil)'." do |_self, line, offset|
+      _self.get_iter_at(:line => line, :offset => offset)
+    end
+    define_deprecated_method :get_iter_at_line_index,
+        :warn => "Use '#{self}#get_iter_at(:line => nil, :index => nil)'." do |_self, line, index|
+      _self.get_iter_at(:line => line, :index => index)
+    end
+    define_deprecated_method :get_iter_at_offset,
+        :warn => "Use '#{self}#get_iter_at(:offset => nil)'." do |_self, offset|
+      _self.get_iter_at(:offset => offset)
+    end
+    define_deprecated_method :get_iter_at_mark,
+        :warn => "Use '#{self}#get_iter_at(:mark => nil)'." do |_self, mark|
+      _self.get_iter_at(:mark => mark)
+    end
+    define_deprecated_method :get_iter_at_child_anchor,
+        :warn => "Use '#{self}#get_iter_at(:anchor => nil)'." do |_self, anchor|
+      _self.get_iter_at(:anchor => anchor)
+    end
+  end
+
   class TextIter
     extend GLib::Deprecatable
     define_deprecated_flags :SearchFlags, 'SEARCH'
