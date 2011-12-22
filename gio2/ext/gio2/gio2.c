@@ -51,6 +51,7 @@ Init_gio2(void)
 
         Init_util();
 
+        Init_gio();
         Init_gappinfo(RG_TARGET_NAMESPACE);
         Init_gapplaunchcontext(RG_TARGET_NAMESPACE);
         Init_gasyncinitable(RG_TARGET_NAMESPACE);
