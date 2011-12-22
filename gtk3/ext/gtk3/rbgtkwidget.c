@@ -1149,6 +1149,239 @@ rg_unset_state_flags(VALUE self, VALUE flags)
     return self;
 }
 
+static VALUE
+rg_drag_dest_set(VALUE self, VALUE flags, VALUE targets, VALUE actions)
+{
+    GtkDestDefaults flg = RVAL2GTKDESTDEFAULTS(flags);
+    GdkDragAction acts = RVAL2GDKDRAGACTION(actions);
+    long n;
+    GtkTargetEntry *entries = RVAL2GTKTARGETENTRIES_ACCEPT_NIL(targets, &n);
+
+    gtk_drag_dest_set(_SELF(self), flg, entries, n, acts);
+
+    g_free(entries);
+
+    return self;
+}
+
+static VALUE
+rg_drag_dest_set_proxy(VALUE self, VALUE proxy_window, VALUE protocol, VALUE use_coordinates)
+{
+    gtk_drag_dest_set_proxy(_SELF(self), 
+                            RVAL2GDKWINDOW(proxy_window),
+                            RVAL2GDKDRAGPROTOCOL(protocol), 
+                            RVAL2CBOOL(use_coordinates)); 
+    return self;
+}
+
+static VALUE
+rg_drag_dest_unset(VALUE self)
+{
+    gtk_drag_dest_unset(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_dest_find_target(int argc, VALUE *argv, VALUE self)
+{
+    VALUE context, target_list;
+    GdkAtom ret;
+    rb_scan_args(argc, argv, "11", &context, &target_list);
+
+    ret = gtk_drag_dest_find_target(_SELF(self),
+                                    RVAL2GDKDRAGCONTEXT(context),
+                                    NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
+
+    return GDKATOM2RVAL(ret);
+}
+
+static VALUE
+rg_drag_dest_get_target_list(VALUE self)
+{
+    GtkTargetList* list = gtk_drag_dest_get_target_list(_SELF(self));
+    return GTKTARGETLIST2RVAL(list);
+}
+
+static VALUE
+rg_drag_dest_set_target_list(VALUE self, VALUE target_list)
+{
+    gtk_drag_dest_set_target_list(_SELF(self), 
+                                  NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
+
+    return self;
+}
+
+static VALUE
+rg_drag_dest_add_text_targets(VALUE self)
+{
+    gtk_drag_dest_add_text_targets(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_dest_add_image_targets(VALUE self)
+{
+    gtk_drag_dest_add_image_targets(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_dest_add_uri_targets(VALUE self)
+{
+    gtk_drag_dest_add_uri_targets(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_dest_set_track_motion(VALUE self, VALUE track_motion)
+{
+    gtk_drag_dest_set_track_motion(_SELF(self), RVAL2CBOOL(track_motion));
+    return self;
+}
+
+static VALUE
+rg_drag_dest_get_track_motion(VALUE self)
+{
+    return CBOOL2RVAL(gtk_drag_dest_get_track_motion(_SELF(self)));
+}
+
+static VALUE
+rg_drag_get_data(VALUE self, VALUE context, VALUE target, VALUE time)
+{
+    gtk_drag_get_data(_SELF(self),
+                      RVAL2GDKDRAGCONTEXT(context),
+                      RVAL2ATOM(target),
+                      NUM2UINT(time));
+    return self;
+}
+
+static VALUE
+rg_drag_highlight(VALUE self)
+{
+    gtk_drag_highlight(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_unhighlight(VALUE self)
+{
+    gtk_drag_unhighlight(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_begin(VALUE self, VALUE target_list, VALUE actions, VALUE button, VALUE event)
+{
+    return GOBJ2RVAL(gtk_drag_begin(_SELF(self),
+                                    RVAL2GTKTARGETLIST(target_list),
+                                    RVAL2GDKDRAGACTION(actions),
+                                    NUM2INT(button),
+                                    RVAL2GEV(event)));
+}
+
+static VALUE
+rg_drag_threshold_p(VALUE self, VALUE start_x, VALUE start_y, VALUE current_x, VALUE current_y)
+{
+    return CBOOL2RVAL(gtk_drag_check_threshold(_SELF(self), 
+                                               NUM2INT(start_x), NUM2INT(start_y),
+                                               NUM2INT(current_x), NUM2INT(current_y)));
+}
+
+static VALUE
+rg_drag_source_set(VALUE self, VALUE start_button_mask, VALUE targets, VALUE actions)
+{
+    GdkModifierType mask = RVAL2GDKMODIFIERTYPE(start_button_mask);
+    GdkDragAction acts = RVAL2GDKDRAGACTION(actions);
+    long n;
+    GtkTargetEntry *entries = RVAL2GTKTARGETENTRIES(targets, &n);
+
+    gtk_drag_source_set(_SELF(self), mask, entries, n, acts);
+
+    g_free(entries);
+
+    return self;
+}
+
+static VALUE
+rg_drag_source_set_icon(VALUE self, VALUE icon)
+{
+    if (TYPE(icon) == T_HASH) {
+        VALUE stock_id, icon_name, gicon, pixbuf, buffer;
+        rbg_scan_options(icon,
+                         "stock_id", &stock_id,
+                         "icon_name", &icon_name,
+                         "gicon", &gicon,
+                         "pixbuf", &pixbuf,
+                         NULL);
+
+        if (!NIL_P(stock_id))
+            gtk_drag_source_set_icon_stock(_SELF(self), RVAL2GLIBID(stock_id, buffer));
+        else if (!NIL_P(icon_name))
+            gtk_drag_source_set_icon_name(_SELF(self), RVAL2CSTR(icon_name));
+#if GTK_CHECK_VERSION(3, 2, 0)
+        else if (!NIL_P(gicon))
+            gtk_drag_source_set_icon_gicon(_SELF(self), RVAL2GICON(gicon));
+#endif
+        else if (!NIL_P(pixbuf))
+            gtk_drag_source_set_icon_pixbuf(_SELF(self), RVAL2GDKPIXBUF(pixbuf));
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+    } else {
+        GType gtype = RVAL2GTYPE(icon);
+
+        if (gtype == GDK_TYPE_PIXBUF)
+            gtk_drag_source_set_icon_pixbuf(_SELF(self), RVAL2GDKPIXBUF(icon));
+#if GTK_CHECK_VERSION(3, 2, 0)
+        else if (g_type_is_a(gtype, G_TYPE_ICON))
+            gtk_drag_source_set_icon_gicon(_SELF(self), RVAL2GICON(icon));
+#endif
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+    }
+
+    return self;
+}
+
+static VALUE
+rg_drag_source_unset(VALUE self)
+{
+    gtk_drag_source_unset(_SELF(self));
+    return self;
+}
+
+static VALUE
+rg_drag_source_set_target_list(VALUE self, VALUE target_list)
+{
+    gtk_drag_source_set_target_list(_SELF(self),
+                                    NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
+    return self;
+}
+
+static VALUE
+rg_drag_source_get_target_list(VALUE self)
+{
+    return GTKTARGETLIST2RVAL(gtk_drag_source_get_target_list(_SELF(self)));
+}
+
+static VALUE
+rg_drag_source_add_text_targets(VALUE self)
+{
+    gtk_drag_source_add_text_targets(_SELF(self));
+    return self;
+}
+static VALUE
+rg_drag_source_add_image_targets(VALUE self)
+{
+    gtk_drag_source_add_image_targets(_SELF(self));
+    return self;
+}
+static VALUE
+rg_drag_source_add_uri_targets(VALUE self)
+{
+    gtk_drag_source_add_uri_targets(_SELF(self));
+    return self;
+}
+
 void 
 Init_gtk_widget(VALUE mGtk)
 {
@@ -1294,6 +1527,31 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_visual, 1);
     RG_DEF_METHOD(shape_combine_region, 1);
     RG_DEF_METHOD(unset_state_flags, 1);
+
+    RG_DEF_METHOD(drag_dest_set, 3);
+    RG_DEF_METHOD(drag_dest_set_proxy, 3);
+    RG_DEF_METHOD(drag_dest_unset, 0);
+    RG_DEF_METHOD(drag_dest_find_target, -1);
+    RG_DEF_METHOD(drag_dest_get_target_list, 0);
+    RG_DEF_METHOD(drag_dest_set_target_list, 1);
+    RG_DEF_METHOD(drag_dest_add_text_targets, 0);
+    RG_DEF_METHOD(drag_dest_add_image_targets, 0);
+    RG_DEF_METHOD(drag_dest_add_uri_targets, 0);
+    RG_DEF_METHOD(drag_dest_set_track_motion, 1);
+    RG_DEF_METHOD(drag_dest_get_track_motion, 0);
+    RG_DEF_METHOD(drag_get_data, 3);
+    RG_DEF_METHOD(drag_highlight, 0);
+    RG_DEF_METHOD(drag_unhighlight, 0);
+    RG_DEF_METHOD(drag_begin, 4);
+    RG_DEF_METHOD_P(drag_threshold, 4);
+    RG_DEF_METHOD(drag_source_set, 3);
+    RG_DEF_METHOD(drag_source_set_icon, 1);
+    RG_DEF_METHOD(drag_source_unset, 0);
+    RG_DEF_METHOD(drag_source_set_target_list, 1);
+    RG_DEF_METHOD(drag_source_get_target_list, 0);
+    RG_DEF_METHOD(drag_source_add_text_targets, 0);
+    RG_DEF_METHOD(drag_source_add_image_targets, 0);
+    RG_DEF_METHOD(drag_source_add_uri_targets, 0);
 
     G_DEF_CLASS(GTK_TYPE_WIDGET_HELP_TYPE, "HelpType", RG_TARGET_NAMESPACE);
 

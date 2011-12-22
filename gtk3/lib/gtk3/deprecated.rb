@@ -250,6 +250,111 @@ module Gtk
         context.set_icon(:widget => icon, :hot_x => hot_x, :hot_y => hot_y)
       end
     end
+    define_deprecated_singleton_method :dest_set,
+        :warn => "Use 'Gtk::Widget#drag_dest_set'." do |_self, widget, flags, targets, actions|
+      widget.drag_dest_set(flags, targets, actions)
+    end
+    define_deprecated_singleton_method :dest_set_proxy,
+        :warn => "Use 'Gtk::Widget#drag_dest_set_proxy'." do |_self, widget, proxy_window, protocol, use_coordinates|
+      widget.drag_dest_set_proxy(proxy_window, protocol, use_coordinates)
+    end
+    define_deprecated_singleton_method :dest_unset,
+        :warn => "Use 'Gtk::Widget#drag_dest_unset'." do |_self, widget|
+      widget.drag_dest_unset
+    end
+    define_deprecated_singleton_method :dest_find_target,
+        :warn => "Use 'Gtk::Widget#drag_dest_find_target'." do |_self, widget, context, target_list|
+      widget.drag_dest_find_target(context, target_list)
+    end
+    define_deprecated_singleton_method :dest_get_target_list,
+        :warn => "Use 'Gtk::Widget#drag_dest_get_target_list'." do |_self, widget|
+      widget.drag_dest_get_target_list
+    end
+    define_deprecated_singleton_method :dest_set_target_list,
+        :warn => "Use 'Gtk::Widget#drag_dest_set_target_list'." do |_self, widget, target_list|
+      widget.drag_dest_set_target_list(target_list)
+    end
+    define_deprecated_singleton_method :dest_add_text_targets,
+        :warn => "Use 'Gtk::Widget#drag_dest_add_text_targets'." do |_self, widget|
+      widget.drag_dest_add_text_targets
+    end
+    define_deprecated_singleton_method :dest_add_image_targets,
+        :warn => "Use 'Gtk::Widget#drag_dest_add_image_targets'." do |_self, widget|
+      widget.drag_dest_add_image_targets
+    end
+    define_deprecated_singleton_method :dest_add_uri_targets,
+        :warn => "Use 'Gtk::Widget#drag_dest_add_uri_targets'." do |_self, widget|
+      widget.drag_dest_add_uri_targets
+    end
+    define_deprecated_singleton_method :dest_set_track_motion,
+        :warn => "Use 'Gtk::Widget#drag_dest_set_track_motion'." do |_self, widget, track_motion|
+      widget.drag_dest_set_track_motion(track_motion)
+    end
+    define_deprecated_singleton_method :dest_get_track_motion,
+        :warn => "Use 'Gtk::Widget#drag_dest_get_track_motion'." do |_self, widget|
+      widget.drag_dest_get_track_motion
+    end
+    define_deprecated_singleton_method :get_data,
+        :warn => "Use 'Gtk::Widget#drag_get_data'." do |_self, widget, context, target, time|
+      widget.drag_get_data(context, target, time)
+    end
+    define_deprecated_singleton_method :highlight,
+        :warn => "Use 'Gtk::Widget#drag_highlight'." do |_self, widget|
+      widget.drag_highlight
+    end
+    define_deprecated_singleton_method :unhighlight,
+        :warn => "Use 'Gtk::Widget#drag_unhighlight'." do |_self, widget|
+      widget.drag_unhighlight
+    end
+    define_deprecated_singleton_method :begin,
+        :warn => "Use 'Gtk::Widget#drag_begin'." do |_self, widget, target_list, actions, button, event|
+      widget.drag_begin(target_list, actions, button, event)
+    end
+    define_deprecated_singleton_method :threshold?,
+        :warn => "Use 'Gtk::Widget#drag_threshold?'." do |_self, widget, start_x, start_y, current_x, current_y|
+      widget.drag_threshold?(start_x, start_y, current_x, current_y)
+    end
+    define_deprecated_singleton_method :source_set,
+        :warn => "Use 'Gtk::Widget#drag_source_set'." do |_self, widget, start_button_mask, targets, actions|
+      widget.drag_source_set(start_button_mask, targets, actions)
+    end
+    define_deprecated_singleton_method :source_set_icon,
+        :warn => "Use 'Gtk::Widget#drag_source_set_icon(:stock_id => nil, :pixbuf => nil)'." do |_self, widget, icon|
+      case icon
+      when Symbol
+        widget.drag_source_set_icon(:stock_id => icon)
+      else
+        widget.drag_source_set_icon(:pixbuf => icon)
+      end
+    end
+    define_deprecated_singleton_method :source_set_icon_name,
+        :warn => "Use 'Gtk::Widget#drag_source_set_icon(:icon_name => nil)'." do |_self, widget, icon|
+      widget.drag_source_set_icon(:icon_name => icon)
+    end
+    define_deprecated_singleton_method :source_unset,
+        :warn => "Use 'Gtk::Widget#drag_source_unset'." do |_self, widget|
+      widget.drag_source_unset
+    end
+    define_deprecated_singleton_method :source_set_target_list,
+        :warn => "Use 'Gtk::Widget#drag_source_set_target_list'." do |_self, widget, target_list|
+      widget.drag_source_set_target_list(target_list)
+    end
+    define_deprecated_singleton_method :source_get_target_list,
+        :warn => "Use 'Gtk::Widget#drag_source_get_target_list'." do |_self, widget|
+      widget.drag_source_get_target_list
+    end
+    define_deprecated_singleton_method :source_add_text_targets,
+        :warn => "Use 'Gtk::Widget#drag_source_add_text_targets'." do |_self, widget|
+      widget.drag_source_add_text_targets
+    end
+    define_deprecated_singleton_method :source_add_image_targets,
+        :warn => "Use 'Gtk::Widget#drag_source_add_image_targets'." do |_self, widget|
+      widget.drag_source_add_image_targets
+    end
+    define_deprecated_singleton_method :source_add_uri_targets,
+        :warn => "Use 'Gtk::Widget#drag_source_add_uri_targets'." do |_self, widget|
+      widget.drag_source_add_uri_targets
+    end
   end
 
   module FileChooser
