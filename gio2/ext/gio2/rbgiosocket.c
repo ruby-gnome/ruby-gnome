@@ -19,14 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cSocket
 #define _SELF(value) RVAL2GSOCKET(value)
-
-#define RVAL2GIOCONDITION(value) RVAL2GFLAGS((value), G_TYPE_IO_CONDITION)
-
-#define GIOCONDITION2RVAL(value) GENUM2RVAL((value), G_TYPE_IO_CONDITION)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

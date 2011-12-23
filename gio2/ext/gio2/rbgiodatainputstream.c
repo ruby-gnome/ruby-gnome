@@ -19,13 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cDataInputStream
 #define _SELF(value) G_DATA_INPUT_STREAM(RVAL2GOBJ(value))
-
-#define RVAL2GDATASTREAMNEWLINETYPE(value) \
-        GENUM2RVAL((value), G_TYPE_DATA_STREAM_NEWLINE_TYPE)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
