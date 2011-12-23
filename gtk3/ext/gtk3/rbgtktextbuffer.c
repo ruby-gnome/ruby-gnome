@@ -162,16 +162,12 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
-
-    if (NIL_P(start)) gtk_text_buffer_get_start_iter(buffer, &start_iter);
-    if (NIL_P(end)) gtk_text_buffer_get_end_iter(buffer, &end_iter);
     if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
 
-    ret = gtk_text_buffer_get_text(
-            buffer,
-            NIL_P(start) ? &start_iter : RVAL2GTKTEXTITER(start),
-            NIL_P(end) ? &end_iter : RVAL2GTKTEXTITER(end),
-            RVAL2CBOOL(include_hidden_chars));
+    ret = gtk_text_buffer_get_text(buffer,
+                                   RVAL2STARTITER(buffer, start, start_iter),
+                                   RVAL2ENDITER(buffer, end, end_iter),
+                                   RVAL2CBOOL(include_hidden_chars));
 
     return CSTR2RVAL_FREE(ret);
 }
@@ -191,16 +187,12 @@ rg_get_slice(int argc, VALUE *argv, VALUE self)
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
-
-    if (NIL_P(start)) gtk_text_buffer_get_start_iter(buffer, &start_iter);
-    if (NIL_P(end)) gtk_text_buffer_get_end_iter(buffer, &end_iter);
     if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
 
-    ret = gtk_text_buffer_get_slice(
-            buffer,
-            NIL_P(start) ? &start_iter : RVAL2GTKTEXTITER(start),
-            NIL_P(end) ? &end_iter : RVAL2GTKTEXTITER(end),
-            RVAL2CBOOL(include_hidden_chars));
+    ret = gtk_text_buffer_get_slice(buffer,
+                                    RVAL2STARTITER(buffer, start, start_iter),
+                                    RVAL2ENDITER(buffer, end, end_iter),
+                                    RVAL2CBOOL(include_hidden_chars));
 
     return CSTR2RVAL_FREE(ret);
 }
