@@ -733,6 +733,7 @@ module Gtk
     end
     define_deprecated_method :insert_pixbuf, :insert
     define_deprecated_method :insert_child_anchor, :insert
+    define_deprecated_method :insert_with_tags, :insert
   end
 
   class TextIter

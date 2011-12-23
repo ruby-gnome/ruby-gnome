@@ -678,15 +678,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_insert_with_tags(int argc, VALUE *argv, VALUE self)
-{
-    if (RVAL2CBOOL(ruby_debug))
-        rb_warning("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
-    rg_insert(argc, argv, self);
-    return self;
-}
-
-static VALUE
 rg_apply_tag(VALUE self, VALUE tag, VALUE start, VALUE end)
 {
     if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
@@ -822,7 +813,6 @@ Init_gtk_textbuffer(VALUE mGtk)
 
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "text", txt_set_text, 1);
     RG_DEF_METHOD(insert, -1);
-    RG_DEF_METHOD(insert_with_tags, -1);
     RG_DEF_METHOD(backspace, 3);
     RG_DEF_METHOD(insert_at_cursor, 1);
     RG_DEF_METHOD(insert_interactive, 3);
