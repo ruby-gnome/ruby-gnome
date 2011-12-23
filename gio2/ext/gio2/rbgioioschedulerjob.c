@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define G_TYPE_IO_SCHEDULER_JOB (g_io_scheduler_job_get_type())
 

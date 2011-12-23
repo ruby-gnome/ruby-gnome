@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileAttributeInfo
 
@@ -48,13 +48,7 @@ g_file_attribute_info_get_type(void)
         return our_type;
 }
 
-#define RVAL2GFILEATTRIBUTEINFO(object) \
-        ((GFileAttributeInfo *)(RVAL2BOXED(object, G_TYPE_FILE_ATTRIBUTE_INFO)))
-
 #define _SELF(value) RVAL2GFILEATTRIBUTEINFO(value)
-
-#define GFILEATTRIBUTEINFOFLAGS2RVAL(value) \
-        GFLAGS2RVAL((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
 
 static VALUE
 rg_name(VALUE self)

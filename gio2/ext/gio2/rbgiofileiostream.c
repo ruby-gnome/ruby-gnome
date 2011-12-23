@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileIOStream
 #define _SELF(value) G_FILE_IO_STREAM(RVAL2GOBJ(value))

@@ -19,12 +19,9 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileAttributeInfoList
-
-#define RVAL2GFILEATTRIBUTEINFOFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_FILE_ATTRIBUTE_INFO_FLAGS)
 
 #define RVAL2GFILEATTRIBUTEINFOFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \
@@ -41,9 +38,6 @@ g_file_attribute_info_list_get_type(void)
                                                         (GBoxedFreeFunc)g_file_attribute_info_list_unref);
         return our_type;
 }
-
-#define RVAL2GFILEATTRIBUTEINFOLIST(object) \
-        ((GFileAttributeInfoList *)(RVAL2BOXED(object, G_TYPE_FILE_ATTRIBUTE_INFO_LIST)))
 
 #define _SELF(value) RVAL2GFILEATTRIBUTEINFOLIST(value)
 

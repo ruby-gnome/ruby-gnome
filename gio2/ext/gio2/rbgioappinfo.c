@@ -19,13 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mAppInfo
 #define _SELF(value) RVAL2GAPPINFO(value)
-
-#define RVAL2GAPPINFOCREATEFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_APP_INFO_CREATE_FLAGS)
 
 #define RVAL2GAPPINFOCREATEFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \

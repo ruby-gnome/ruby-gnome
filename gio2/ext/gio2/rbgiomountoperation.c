@@ -19,19 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cMountOperation
 #define _SELF(value) RVAL2GMOUNTOPERATION(value)
-
-#define GPASSWORDSAVE2RVAL(value) \
-        GENUM2RVAL((value), G_TYPE_PASSWORD_SAVE)
-
-#define RVAL2GPASSWORDSAVE(value) \
-        RVAL2GENUM((value), G_TYPE_PASSWORD_SAVE)
-
-#define RVAL2GMOUNTOPERATIONRESULT(value) \
-        RVAL2GENUM((value), G_TYPE_MOUNT_OPERATION_RESULT)
 
 static VALUE
 rg_initialize(VALUE self)

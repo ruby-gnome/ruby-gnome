@@ -19,16 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileInfo
 #define _SELF(value) RVAL2GFILEINFO(value)
-
-#define GFILEATTRIBUTESTATUS2RVAL(value) \
-        GENUM2RVAL((value), G_TYPE_FILE_ATTRIBUTE_STATUS)
-
-#define RVAL2GFILEATTRIBUTESTATUS(value) \
-        GENUM2RVAL((value), G_TYPE_FILE_ATTRIBUTE_STATUS)
 
 #define RVAL2FILEINFONAMESPACEDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), RVAL2CSTR, "*")

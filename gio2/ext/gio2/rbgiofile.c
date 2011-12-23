@@ -19,35 +19,23 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mFile
 #define _SELF(value) RVAL2GFILE(value)
 
-#define RVAL2GFILECOPYFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_FILE_COPY_FLAGS)
-
 #define RVAL2GFILECOPYFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), RVAL2GFILECOPYFLAGS, G_FILE_COPY_NONE)
-
-#define RVAL2GFILECREATEFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_FILE_CREATE_FLAGS)
 
 #define RVAL2GFILECREATEFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \
                                RVAL2GFILECREATEFLAGS, \
                                G_FILE_CREATE_NONE)
 
-#define RVAL2GFILEMONITORFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_FILE_MONITOR_FLAGS)
-
 #define RVAL2GFILEMONITORFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \
                                RVAL2GFILEMONITORFLAGS, \
                                G_FILE_MONITOR_NONE)
-
-#define RVAL2GFILEQUERYINFOFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_FILE_QUERY_INFO_FLAGS)
 
 #define RVAL2GFILEQUERYINFOFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \

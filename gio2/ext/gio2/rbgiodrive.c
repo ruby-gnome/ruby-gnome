@@ -19,13 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mDrive
 #define _SELF(value) G_DRIVE(RVAL2GOBJ(value))
-
-#define GDRIVESTARTSTOPTYPE2RVAL(value) \
-        GENUM2RVAL((value), G_TYPE_DRIVE_START_STOP_TYPE)
 
 static VALUE
 rg_name(VALUE self)
