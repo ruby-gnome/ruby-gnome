@@ -164,7 +164,7 @@ rg_delete_interactive(int argc, VALUE *argv, VALUE self)
     return CBOOL2RVAL(gtk_text_buffer_delete_interactive(buffer,
                                                          RVAL2STARTITER(buffer, start, start_iter),
                                                          RVAL2ENDITER(buffer, end, end_iter),
-                                                         NIL_P(editable) ? FALSE : RVAL2CBOOL(editable)));
+                                                         RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -176,7 +176,6 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
-    if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
 
     ret = gtk_text_buffer_get_text(buffer,
                                    RVAL2STARTITER(buffer, start, start_iter),
@@ -201,7 +200,6 @@ rg_get_slice(int argc, VALUE *argv, VALUE self)
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
-    if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
 
     ret = gtk_text_buffer_get_slice(buffer,
                                     RVAL2STARTITER(buffer, start, start_iter),
