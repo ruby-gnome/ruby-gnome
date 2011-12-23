@@ -218,18 +218,6 @@ rg_slice(VALUE self)
 }
 
 static VALUE
-rg_insert_child_anchor(VALUE self, VALUE iter, VALUE anchor)
-{
-    G_CHILD_ADD(self, iter);
-    G_CHILD_ADD(iter, anchor);
-    if (RVAL2CBOOL(ruby_debug))
-        rb_warning("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
-    gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2GTKTEXTITER(iter),
-                                        RVAL2GTKTEXTCHILDANCHOR(anchor));
-    return self;
-}
-
-static VALUE
 rg_create_child_anchor(VALUE self, VALUE iter)
 {
     VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2GTKTEXTITER(iter)));
@@ -850,7 +838,6 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(get_slice, -1);
     RG_DEF_METHOD(slice, 0);
 
-    RG_DEF_METHOD(insert_child_anchor, 2);
     RG_DEF_METHOD(create_child_anchor, 1);
 
     RG_DEF_METHOD(create_mark, 3);

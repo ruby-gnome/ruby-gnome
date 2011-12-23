@@ -732,6 +732,7 @@ module Gtk
       _self.get_iter_at(:anchor => anchor)
     end
     define_deprecated_method :insert_pixbuf, :insert
+    define_deprecated_method :insert_child_anchor, :insert
   end
 
   class TextIter
