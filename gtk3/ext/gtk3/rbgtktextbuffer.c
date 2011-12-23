@@ -153,12 +153,18 @@ rg_delete(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_delete_interactive(VALUE self, VALUE start, VALUE end, VALUE editable)
+rg_delete_interactive(int argc, VALUE *argv, VALUE self)
 {
-    return CBOOL2RVAL(gtk_text_buffer_delete_interactive(_SELF(self),
-                                                         RVAL2GTKTEXTITER(start),
-                                                         RVAL2GTKTEXTITER(end),
-                                                         RVAL2CBOOL(editable)));
+    VALUE start, end, editable;
+    GtkTextIter start_iter, end_iter;
+    GtkTextBuffer *buffer = _SELF(self);
+
+    rb_scan_args(argc, argv, "03", &start, &end, &editable);
+
+    return CBOOL2RVAL(gtk_text_buffer_delete_interactive(buffer,
+                                                         RVAL2STARTITER(buffer, start, start_iter),
+                                                         RVAL2ENDITER(buffer, end, end_iter),
+                                                         NIL_P(editable) ? FALSE : RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -829,7 +835,7 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(insert_range_interactive, 4);
 
     RG_DEF_METHOD(delete, -1);
-    RG_DEF_METHOD(delete_interactive, 3);
+    RG_DEF_METHOD(delete_interactive, -1);
 
     RG_DEF_METHOD(get_text, -1);
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "text", txt_get_text_all, 0);
