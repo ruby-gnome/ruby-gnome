@@ -746,9 +746,18 @@ rg_remove_tag(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_remove_all_tags(VALUE self, VALUE start, VALUE end)
+rg_remove_all_tags(int argc, VALUE *argv, VALUE self)
 {
-    gtk_text_buffer_remove_all_tags(_SELF(self), RVAL2GTKTEXTITER(start), RVAL2GTKTEXTITER(end));
+    VALUE start, end;
+    GtkTextIter start_iter, end_iter;
+    GtkTextBuffer *buffer = _SELF(self);
+
+    rb_scan_args(argc, argv, "02", &start, &end);
+
+    gtk_text_buffer_remove_all_tags(buffer,
+                                    RVAL2STARTITER(buffer, start, start_iter),
+                                    RVAL2ENDITER(buffer, end, end_iter));
+
     return self;
 }
 
@@ -906,5 +915,5 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(create_tag, 2);
     RG_DEF_METHOD(apply_tag, 3);
     RG_DEF_METHOD(remove_tag, -1);
-    RG_DEF_METHOD(remove_all_tags, 2);
+    RG_DEF_METHOD(remove_all_tags, -1);
 }
