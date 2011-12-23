@@ -28,6 +28,23 @@
 static VALUE rb_mGtk;
 static ID id_tagtable;
 
+#define RVAL2STARTITER(buffer, iter, out) \
+        rval2iter_with_default(buffer, &(iter), &(out), gtk_text_buffer_get_start_iter)
+#define RVAL2ENDITER(buffer, iter, out) \
+        rval2iter_with_default(buffer, &(iter), &(out), gtk_text_buffer_get_end_iter)
+
+static GtkTextIter *
+rval2iter_with_default(GtkTextBuffer *buffer, VALUE *iter, GtkTextIter *out,
+                       void (*default_func)(GtkTextBuffer *, GtkTextIter *))
+{
+    if (NIL_P(*iter)) {
+        default_func(buffer, out);
+        return out;
+    } else {
+        return RVAL2GTKTEXTITER(*iter);
+    }
+}
+
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
