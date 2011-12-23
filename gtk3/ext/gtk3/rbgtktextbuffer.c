@@ -143,7 +143,6 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     GtkTextIter start_iter, end_iter;
     GtkTextBuffer* buffer = _SELF(self);
     gchar* ret;
-    VALUE result;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
 
@@ -156,10 +155,8 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
             NIL_P(start) ? &start_iter : RVAL2GTKTEXTITER(start),
             NIL_P(end) ? &end_iter : RVAL2GTKTEXTITER(end),
             RVAL2CBOOL(include_hidden_chars));
-    result = CSTR2RVAL(ret);
-    g_free(ret);
 
-    return result;
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
@@ -175,7 +172,6 @@ rg_get_slice(int argc, VALUE *argv, VALUE self)
     GtkTextIter start_iter, end_iter;
     GtkTextBuffer* buffer = _SELF(self);
     gchar* ret;
-    VALUE result;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
 
@@ -188,10 +184,8 @@ rg_get_slice(int argc, VALUE *argv, VALUE self)
             NIL_P(start) ? &start_iter : RVAL2GTKTEXTITER(start),
             NIL_P(end) ? &end_iter : RVAL2GTKTEXTITER(end),
             RVAL2CBOOL(include_hidden_chars));
-    result = CSTR2RVAL(ret);
-    g_free(ret);
 
-    return result;
+    return CSTR2RVAL_FREE(ret);
 }
 
 static VALUE
