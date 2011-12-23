@@ -783,14 +783,10 @@ static VALUE
 rg_bounds(VALUE self)
 {
     GtkTextIter start, end;
-    VALUE result;
 
     gtk_text_buffer_get_bounds(_SELF(self), &start, &end);
-    result = rb_ary_new();
-    rb_ary_push(result, GTKTEXTITER2RVAL(&start));
-    rb_ary_push(result, GTKTEXTITER2RVAL(&end));
 
-    return result;
+    return rb_ary_new3(2, GTKTEXTITER2RVAL(&start), GTKTEXTITER2RVAL(&end));
 }
 
 void 
