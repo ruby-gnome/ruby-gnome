@@ -19,13 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cOutputStream
 #define _SELF(value) RVAL2GOUTPUTSTREAM(value)
-
-#define RVAL2GOUTPUTSTREAMSPLICEFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_OUTPUT_STREAM_SPLICE_FLAGS)
 
 #define RVAL2GOUTPUTSTREAMSPLICEFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \

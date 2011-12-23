@@ -19,21 +19,15 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mConverter
 #define _SELF(value) G_CONVERTER(RVAL2GOBJ(value))
-
-#define RVAL2GCONVERTERFLAGS(value) \
-        RVAL2GFLAGS((value), G_TYPE_CONVERTER_FLAGS)
 
 #define RVAL2GCONVERTERFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \
                                RVAL2GCONVERTERFLAGS, \
                                G_CONVERTER_NO_FLAGS)
-
-#define GCONVERTERRESULT2RVAL(value) \
-        GFLAGS2RVAL((value), G_TYPE_CONVERTER_RESULT)
 
 /* TODO: Look at gconverteroutputstream for implementing this. */
 /* TODO: Actually, is there any point in implementing this? */

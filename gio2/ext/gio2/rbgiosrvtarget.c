@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RVAL2GSRVTARGET(object) \
         ((GSrvTarget *)(RVAL2BOXED(object, G_TYPE_SRV_TARGET)))

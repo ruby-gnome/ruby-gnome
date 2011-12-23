@@ -19,16 +19,13 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #ifdef HAVE_GIO_UNIX
 #include <gio/gdesktopappinfo.h>
 
 #define RG_TARGET_NAMESPACE cDesktopAppInfo
 #define _SELF(value) G_DESKTOP_APP_INFO(RVAL2GOBJ(value))
-
-#define RVAL2GKEYFILE(value) \
-        ((GKeyFile *)(RVAL2BOXED((value), G_TYPE_KEY_FILE)))
 
 static VALUE
 rg_s_new_from_filename(G_GNUC_UNUSED VALUE self, VALUE filename)

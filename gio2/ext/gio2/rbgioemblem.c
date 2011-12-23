@@ -19,12 +19,9 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cEmblem
-
-#define RVAL2GEMBLEMORIGIN(value) \
-        RVAL2GENUM((value), G_TYPE_EMBLEM_ORIGIN)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

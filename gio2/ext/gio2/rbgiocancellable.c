@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "gio2.h"
+#include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cCancellable
 #define _SELF(value) RVAL2GCANCELLABLE(value)

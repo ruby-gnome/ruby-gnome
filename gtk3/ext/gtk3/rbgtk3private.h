@@ -32,7 +32,7 @@
 #endif
 
 #include <rb_cairo.h>
-#include <gio2.h>
+#include <rbgio2.h>
 #include <rbpango.h>
 #include <rbgdk-pixbuf.h>
 #include <rbgdk3.h>
