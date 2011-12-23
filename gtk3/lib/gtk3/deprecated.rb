@@ -731,6 +731,7 @@ module Gtk
         :warn => "Use '#{self}#get_iter_at(:anchor => nil)'." do |_self, anchor|
       _self.get_iter_at(:anchor => anchor)
     end
+    define_deprecated_method :insert_pixbuf, :insert
   end
 
   class TextIter

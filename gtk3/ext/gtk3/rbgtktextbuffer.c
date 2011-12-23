@@ -218,19 +218,6 @@ rg_slice(VALUE self)
 }
 
 static VALUE
-rg_insert_pixbuf(VALUE self, VALUE iter, VALUE pixbuf)
-{
-    G_CHILD_ADD(self, iter);
-    G_CHILD_ADD(iter, pixbuf);
-
-    if (RVAL2CBOOL(ruby_debug))
-        rb_warning("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
-    gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2GTKTEXTITER(iter),
-                                  RVAL2GDKPIXBUF(pixbuf));
-    return self;
-}
-
-static VALUE
 rg_insert_child_anchor(VALUE self, VALUE iter, VALUE anchor)
 {
     G_CHILD_ADD(self, iter);
@@ -863,7 +850,6 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(get_slice, -1);
     RG_DEF_METHOD(slice, 0);
 
-    RG_DEF_METHOD(insert_pixbuf, 2);
     RG_DEF_METHOD(insert_child_anchor, 2);
     RG_DEF_METHOD(create_child_anchor, 1);
 
