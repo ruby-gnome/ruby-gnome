@@ -137,10 +137,18 @@ rg_insert_range_interactive(VALUE self, VALUE iter, VALUE start, VALUE end, VALU
 }
 
 static VALUE
-rg_delete(VALUE self, VALUE start, VALUE end)
+rg_delete(int argc, VALUE *argv, VALUE self)
 {
-    gtk_text_buffer_delete(RVAL2GTKTEXTBUFFER(self),
-                           RVAL2GTKTEXTITER(start), RVAL2GTKTEXTITER(end));
+    VALUE start, end;
+    GtkTextIter start_iter, end_iter;
+    GtkTextBuffer *buffer = _SELF(self);
+
+    rb_scan_args(argc, argv, "02", &start, &end);
+
+    gtk_text_buffer_delete(buffer,
+                           RVAL2STARTITER(buffer, start, start_iter),
+                           RVAL2ENDITER(buffer, end, end_iter));
+
     return self;
 }
 
@@ -820,7 +828,7 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(insert_range, 3);
     RG_DEF_METHOD(insert_range_interactive, 4);
 
-    RG_DEF_METHOD(delete, 2);
+    RG_DEF_METHOD(delete, -1);
     RG_DEF_METHOD(delete_interactive, 3);
 
     RG_DEF_METHOD(get_text, -1);
