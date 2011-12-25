@@ -101,7 +101,7 @@ class GNOME2Win32BinaryDownloader
     escaped_latest_version = Regexp.escape(latest_version)
     dependencies_page.links.each do |link|
       case link.href
-      when /\A#{escaped_dependency}(?:-dev)?_#{escaped_latest_version}_win32.zip/
+      when /\A#{escaped_dependency}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/
         click_zip_link(link)
       end
     end
