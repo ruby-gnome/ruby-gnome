@@ -22,5 +22,7 @@ namespace :win32 do
       gtkrc.puts('gtk-theme-name = "MS-Windows"')
     end
   end
-  task :download => :gtkrc
+  namespace :downloader do
+    task :after => "win32:gtkrc"
+  end
 end
