@@ -103,6 +103,11 @@ class GNOME2Package
   end
 
   def define_win32_tasks
+    define_win32_build_task
+    define_win32_download_task
+  end
+
+  def define_win32_build_task
     Rake::ExtensionTask.new(@name, @spec) do |ext|
       ext.cross_compile = true
       ext.cross_compiling do |spec|
@@ -123,18 +128,20 @@ class GNOME2Package
       end
     end
 
-    def define_package_tasks
-      Gem::PackageTask.new(@spec) do |pkg|
+    def define_win32_download_task
+      namespace :win32 do
+        desc "download Windows binaries"
+        task :download do
+          $LOAD_PATH.unshift("#{@glib2_root}/lib")
+          require 'gnome2-win32-binary-downloader'
+          GNOME2Win32BinaryDownloader.download(@win32_configuration.to_hash)
+        end
       end
     end
+  end
 
-    namespace :win32 do
-      desc "download Windows binaries"
-      task :download do
-        $LOAD_PATH.unshift("#{@glib2_root}/lib")
-        require 'gnome2-win32-binary-downloader'
-        GNOME2Win32BinaryDownloader.download(@win32_configuration.to_hash)
-      end
+  def define_package_tasks
+    Gem::PackageTask.new(@spec) do |pkg|
     end
   end
 
