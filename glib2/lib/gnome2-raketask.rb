@@ -130,12 +130,19 @@ class GNOME2Package
 
     def define_win32_download_task
       namespace :win32 do
-        desc "download Windows binaries"
-        task :download do
-          $LOAD_PATH.unshift("#{@glib2_root}/lib")
-          require 'gnome2-win32-binary-downloader'
-          GNOME2Win32BinaryDownloader.download(@win32_configuration.to_hash)
+        namespace :downloader do
+          task :before
+          task :download do
+            $LOAD_PATH.unshift("#{@glib2_root}/lib")
+            require 'gnome2-win32-binary-downloader'
+            GNOME2Win32BinaryDownloader.download(@win32_configuration.to_hash)
+          end
+          task :after
         end
+        desc "download Windows binaries"
+        task :download => ["win32:downloader:before",
+                           "win32:downloader:download",
+                           "win32:downloader:after"]
       end
     end
   end
