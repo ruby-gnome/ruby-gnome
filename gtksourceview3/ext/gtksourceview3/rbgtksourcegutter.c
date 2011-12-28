@@ -54,6 +54,7 @@ static VALUE
 rg_remove(VALUE self, VALUE renderer)
 {
     gtk_source_gutter_remove(_SELF(self), RVAL2GTKSOURCEGUTTERRENDERER(renderer));
+    G_CHILD_REMOVE(self, renderer);
 
     return self;
 }
