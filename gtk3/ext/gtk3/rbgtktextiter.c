@@ -481,42 +481,42 @@ static VALUE
 rg_set_offset(VALUE self, VALUE val)
 {
     gtk_text_iter_set_offset(_SELF(self), NUM2INT(val));
-    return val;
+    return self;
 }
 
 static VALUE
 rg_set_line(VALUE self, VALUE val)
 {
     gtk_text_iter_set_line(_SELF(self), NUM2INT(val));
-    return val;
+    return self;
 }
 
 static VALUE
 rg_set_line_offset(VALUE self, VALUE val)
 {
     gtk_text_iter_set_line_offset(_SELF(self), NUM2INT(val));
-    return val;
+    return self;
 }
 
 static VALUE
 rg_set_line_index(VALUE self, VALUE val)
 {
     gtk_text_iter_set_line_index(_SELF(self), NUM2INT(val));
-    return val;
+    return self;
 }
 
 static VALUE
 rg_set_visible_line_offset(VALUE self, VALUE val)
 {
     gtk_text_iter_set_visible_line_offset(_SELF(self), NUM2INT(val));
-    return val;
+    return self;
 }
 
 static VALUE
 rg_set_visible_line_index(VALUE self, VALUE val)
 {
     gtk_text_iter_set_visible_line_index(_SELF(self), NUM2INT(val));
-    return val;
+    return self;
 }
 
 static VALUE
