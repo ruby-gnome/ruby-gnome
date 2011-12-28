@@ -45,24 +45,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-textview_set_buffer(VALUE self, VALUE buf)
-{
-    G_CHILD_SET(self, id_buffer, buf);
-    gtk_text_view_set_buffer(_SELF(self), 
-                             NIL_P(buf) ? NULL : RVAL2GTKTEXTBUFFER(buf));
-    return self;
-}
-
-static VALUE
-textview_get_buffer(VALUE self)
-{
-    VALUE buf = GOBJ2RVAL(gtk_text_view_get_buffer(_SELF(self)));
-    G_CHILD_SET(self, id_buffer, buf);
-
-    return buf;
-}
-
-static VALUE
 rg_scroll_to_mark(VALUE self, VALUE mark, VALUE within_margin, VALUE use_align, VALUE xalign, VALUE yalign)
 {
     gtk_text_view_scroll_to_mark(_SELF(self), RVAL2GTKTEXTMARK(mark), 
@@ -311,8 +293,6 @@ Init_gtk_textview(VALUE mGtk)
     id_buffer = rb_intern("buffer");
 
     RG_DEF_METHOD(initialize, -1);
-    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "buffer", textview_set_buffer, 1);
-    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "buffer", textview_get_buffer, 0);
     RG_DEF_METHOD(scroll_to_mark, 5);
     RG_DEF_METHOD(scroll_to_iter, 5);
     RG_DEF_METHOD(scroll_mark_onscreen, 1);
