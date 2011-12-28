@@ -37,6 +37,7 @@ rg_insert(VALUE self, VALUE renderer, VALUE position)
     result = gtk_source_gutter_insert(_SELF(self),
                                       RVAL2GTKSOURCEGUTTERRENDERER(renderer),
                                       NUM2INT(position));
+    G_CHILD_ADD(self, renderer);
 
     return CBOOL2RVAL(result);
 }
