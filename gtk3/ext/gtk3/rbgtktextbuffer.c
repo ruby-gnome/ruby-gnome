@@ -164,7 +164,7 @@ rg_delete_interactive(int argc, VALUE *argv, VALUE self)
     return CBOOL2RVAL(gtk_text_buffer_delete_interactive(buffer,
                                                          RVAL2STARTITER(buffer, start, start_iter),
                                                          RVAL2ENDITER(buffer, end, end_iter),
-                                                         NIL_P(editable) ? FALSE : RVAL2CBOOL(editable)));
+                                                         RVAL2CBOOL(editable)));
 }
 
 static VALUE
@@ -176,7 +176,6 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
-    if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
 
     ret = gtk_text_buffer_get_text(buffer,
                                    RVAL2STARTITER(buffer, start, start_iter),
@@ -201,7 +200,6 @@ rg_get_slice(int argc, VALUE *argv, VALUE self)
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
-    if (NIL_P(include_hidden_chars)) include_hidden_chars = Qfalse;
 
     ret = gtk_text_buffer_get_slice(buffer,
                                     RVAL2STARTITER(buffer, start, start_iter),
@@ -215,31 +213,6 @@ static VALUE
 rg_slice(VALUE self)
 {
     return rg_get_slice(0, NULL, self);
-}
-
-static VALUE
-rg_insert_pixbuf(VALUE self, VALUE iter, VALUE pixbuf)
-{
-    G_CHILD_ADD(self, iter);
-    G_CHILD_ADD(iter, pixbuf);
-
-    if (RVAL2CBOOL(ruby_debug))
-        rb_warning("Gtk::TextBuffer#insert_pixbuf is deprecated. Use Gtk::TextBuffer#insert instead.");
-    gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2GTKTEXTITER(iter),
-                                  RVAL2GDKPIXBUF(pixbuf));
-    return self;
-}
-
-static VALUE
-rg_insert_child_anchor(VALUE self, VALUE iter, VALUE anchor)
-{
-    G_CHILD_ADD(self, iter);
-    G_CHILD_ADD(iter, anchor);
-    if (RVAL2CBOOL(ruby_debug))
-        rb_warning("Gtk::TextBuffer#insert_child_anchor is deprecated. Use Gtk::TextBuffer#insert instead.");
-    gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2GTKTEXTITER(iter),
-                                        RVAL2GTKTEXTCHILDANCHOR(anchor));
-    return self;
 }
 
 static VALUE
@@ -703,15 +676,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_insert_with_tags(int argc, VALUE *argv, VALUE self)
-{
-    if (RVAL2CBOOL(ruby_debug))
-        rb_warning("Gtk::TextBuffer#insert_with_tags is deprecated. Use Gtk::TextBuffer#insert instead.");
-    rg_insert(argc, argv, self);
-    return self;
-}
-
-static VALUE
 rg_apply_tag(VALUE self, VALUE tag, VALUE start, VALUE end)
 {
     if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
@@ -847,7 +811,6 @@ Init_gtk_textbuffer(VALUE mGtk)
 
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "text", txt_set_text, 1);
     RG_DEF_METHOD(insert, -1);
-    RG_DEF_METHOD(insert_with_tags, -1);
     RG_DEF_METHOD(backspace, 3);
     RG_DEF_METHOD(insert_at_cursor, 1);
     RG_DEF_METHOD(insert_interactive, 3);
@@ -863,8 +826,6 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(get_slice, -1);
     RG_DEF_METHOD(slice, 0);
 
-    RG_DEF_METHOD(insert_pixbuf, 2);
-    RG_DEF_METHOD(insert_child_anchor, 2);
     RG_DEF_METHOD(create_child_anchor, 1);
 
     RG_DEF_METHOD(create_mark, 3);

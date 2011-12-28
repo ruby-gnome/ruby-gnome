@@ -99,14 +99,117 @@ rg_get_option(VALUE self, VALUE key)
 /****************************************************/
 /* File opening */
 /* Image Data in Memory */
-static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
+static GdkPixbuf *
+pixbuf_initialize_by_hash(VALUE self, VALUE arg, GError **error)
+{
+    GdkPixbuf *buf = NULL;
+
+    VALUE rb_colorspace, rb_has_alpha, rb_bits_per_sample, rb_width, rb_height,
+          rb_data, rb_rowstride, rb_xpm, rb_inline, rb_copy_pixels,
+          rb_src_pixbuf, rb_src_x, rb_src_y,
+          rb_file, rb_scale_width, rb_scale_height, rb_preserve_aspect_ratio;
+    rbg_scan_options(arg,
+                     "colorspace", &rb_colorspace,
+                     "has_alpha", &rb_has_alpha,
+                     "bits_per_sample", &rb_bits_per_sample,
+                     "width", &rb_width,
+                     "height", &rb_height,
+                     "data", &rb_data,
+                     "rowstride", &rb_rowstride,
+                     "xpm", &rb_xpm,
+                     "inline", &rb_inline,
+                     "copy_pixels", &rb_copy_pixels,
+                     "src_pixbuf", &rb_src_pixbuf,
+                     "src_x", &rb_src_x,
+                     "src_y", &rb_src_y,
+                     "file", &rb_file,
+                     "scale_width", &rb_scale_width,
+                     "scale_height", &rb_scale_height,
+                     "preserve_aspect_ratio", &rb_preserve_aspect_ratio,
+                     NULL);
+
+    if (!NIL_P(rb_data)) {
+        buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(rb_data),
+                                       NIL_P(rb_colorspace) ? GDK_COLORSPACE_RGB : RVAL2GENUM(rb_colorspace, GDK_TYPE_COLORSPACE),
+                                       RVAL2CBOOL(rb_has_alpha),
+                                       NIL_P(rb_bits_per_sample) ? 8 : NUM2INT(rb_bits_per_sample),
+                                       NUM2INT(rb_width),
+                                       NUM2INT(rb_height),
+                                       NUM2INT(rb_rowstride),
+                                       NULL, NULL);
+        if (buf == NULL)
+            NOMEM_ERROR(error);
+        // Save a reference to the string because the pixbuf doesn't copy it.
+        G_RELATIVE(self, rb_data);
+    } else if (!NIL_P(rb_xpm)) {
+        const gchar **data = RVAL2STRV(rb_xpm);
+        buf = gdk_pixbuf_new_from_xpm_data(data);
+        g_free(data);
+        if (buf == NULL)
+            NOMEM_ERROR(error);
+    } else if (!NIL_P(rb_inline)) {
+        /* TODO: Is this really up to the caller to decide? */
+        long n;
+        guint8 *data = RVAL2GUINT8S(rb_inline, n);
+        buf = gdk_pixbuf_new_from_inline(n, data, RVAL2CBOOL(rb_copy_pixels), error);
+        /* need to manage the returned value */
+        rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, data));
+    } else if (!NIL_P(rb_src_pixbuf)) {
+        buf = gdk_pixbuf_new_subpixbuf(_SELF(rb_src_pixbuf),
+                                       NUM2INT(rb_src_x),
+                                       NUM2INT(rb_src_y),
+                                       NUM2INT(rb_width),
+                                       NUM2INT(rb_height));
+        if (buf == NULL)
+            NOMEM_ERROR(error);
+    } else if (!NIL_P(rb_file)) {
+        if (!NIL_P(rb_width)) {
+#if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
+            buf = gdk_pixbuf_new_from_file_at_size(RVAL2CSTR(rb_file),
+                                                   NUM2INT(rb_width),
+                                                   NUM2INT(rb_height),
+                                                   error);
+#else
+            rb_warning("Sizing on load not supported in GTK+ < 2.4.0");
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(rb_file), error);
+#endif
+        } else if (!NIL_P(rb_scale_width)) {
+#if RBGDK_PIXBUF_CHECK_VERSION(2,6,0)
+            int width = NUM2INT(rb_scale_width);
+            int height = NUM2INT(rb_scale_height);
+#if !RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+            if (width < 0 || height < 0)
+                rb_warning("For scaling on load, a negative value for width or height are not supported in GTK+ < 2.8.0");
+#endif
+            buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(rb_file),
+                                                    width, height,
+                                                    NIL_P(rb_preserve_aspect_ratio) ? TRUE : RVAL2CBOOL(rb_preserve_aspect_ratio),
+                                                    error);
+#else
+            rb_warning("Scaling on load not supported in GTK+ < 2.6.0");
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(rb_file), error);
+#endif
+        } else {
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(rb_file), error);
+        }
+    } else {
+        buf = gdk_pixbuf_new(NIL_P(rb_colorspace) ? GDK_COLORSPACE_RGB : RVAL2GENUM(rb_colorspace, GDK_TYPE_COLORSPACE),
+                             RVAL2CBOOL(rb_has_alpha),
+                             NIL_P(rb_bits_per_sample) ? 8 : NUM2INT(rb_bits_per_sample),
+                             NUM2INT(rb_width),
+                             NUM2INT(rb_height));
+        if (buf == NULL)
+            NOMEM_ERROR(error);
+    }
+
+    return buf;
+}
+
+/* TODO: make deprecated */
+static GdkPixbuf *
+pixbuf_initialize(VALUE self, int argc, VALUE arg1, VALUE arg2, VALUE arg3, VALUE arg4, VALUE arg5, VALUE arg6, VALUE arg7, GError **error)
 {
     GdkPixbuf* buf;
-    GError* error = NULL;
-    VALUE arg1, arg2, arg3, arg4, arg5, arg6, arg7;
-
-    rb_scan_args(argc, argv, "16", &arg1, &arg2, &arg3, &arg4, &arg5, &arg6, &arg7);
 
     if (argc == 7){
         buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
@@ -114,15 +217,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
                                        RVAL2CBOOL(arg3),   NUM2INT(arg4),
                                        NUM2INT(arg5), NUM2INT(arg6),
                                        NUM2INT(arg7), NULL, NULL);
-        if (buf == NULL){
-            rb_gc();
-            buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
-                                           RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
-                                           RVAL2CBOOL(arg3),   NUM2INT(arg4),
-                                           NUM2INT(arg5), NUM2INT(arg6),
-                                           NUM2INT(arg7), NULL, NULL);
-            if (buf == NULL) NOMEM_ERROR(&error);
-        }
+        if (buf == NULL) NOMEM_ERROR(error);
         // Save a reference to the string because the pixbuf doesn't copy it.
         G_RELATIVE(self, arg1);
     } else if (argc == 5){
@@ -130,24 +225,12 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             buf = gdk_pixbuf_new_subpixbuf(_SELF(arg1), 
                                            NUM2INT(arg2), NUM2INT(arg3), 
                                            NUM2INT(arg4), NUM2INT(arg5));
-            if (buf == NULL){
-                rb_gc();
-                buf = gdk_pixbuf_new_subpixbuf(_SELF(arg1), 
-                                               NUM2INT(arg2), NUM2INT(arg3), 
-                                               NUM2INT(arg4), NUM2INT(arg5));
-                if (buf == NULL) NOMEM_ERROR(&error);
-            }
+            if (buf == NULL) NOMEM_ERROR(error);
         } else if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_COLORSPACE))){
             buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
                                  RVAL2CBOOL(arg2), NUM2INT(arg3),
                                  NUM2INT(arg4), NUM2INT(arg5));
-            if (buf == NULL){
-                rb_gc();
-                buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
-                                     RVAL2CBOOL(arg2), NUM2INT(arg3),
-                                     NUM2INT(arg4), NUM2INT(arg5));
-                if (buf == NULL) NOMEM_ERROR(&error);
-            }
+            if (buf == NULL) NOMEM_ERROR(error);
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
         }
@@ -161,73 +244,38 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 #endif
         buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
                                                 width, height,
-                                                RVAL2CBOOL(arg4), &error);
-        if (buf == NULL){
-            rb_gc();
-            error = NULL;
-            buf = gdk_pixbuf_new_from_file_at_scale(RVAL2CSTR(arg1),
-                                                    NUM2INT(arg2), NUM2INT(arg3), 
-                                                    RVAL2CBOOL(arg4), &error);
-        }
+                                                RVAL2CBOOL(arg4), error);
 #else
         rb_warning("Scaling on load not supported in GTK+ < 2.6.0");
-        buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-        if (buf == NULL){
-            error = NULL;
-            rb_gc();
-            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-        }
+        buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), error);
 #endif
     } else if (argc == 3) {
 #if RBGDK_PIXBUF_CHECK_VERSION(2,4,0)
         buf = gdk_pixbuf_new_from_file_at_size(RVAL2CSTR(arg1),
-                                               NUM2INT(arg2), NUM2INT(arg3), &error);
-        if (buf == NULL){
-            rb_gc();
-            error = NULL;
-            buf = gdk_pixbuf_new_from_file_at_size(RVAL2CSTR(arg1),
-                                                   NUM2INT(arg2), NUM2INT(arg3), &error);
-        }
+                                               NUM2INT(arg2), NUM2INT(arg3), error);
 #else
         rb_warning("Sizing on load not supported in GTK+ < 2.4.0");
-        buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-        if (buf == NULL){
-            error = NULL;
-            rb_gc();
-            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-        }
+        buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), error);
 #endif
     } else if (argc == 2) {
         /* TODO: Is this really up to the caller to decide? */
         gboolean copy_pixels = RVAL2CBOOL(arg2);
         long n;
         guint8 *data = RVAL2GUINT8S(arg1, n);
-        buf = gdk_pixbuf_new_from_inline(n, data, copy_pixels, &error);
-        if (buf == NULL) {
-            rb_gc();
-            error = NULL;
-            buf = gdk_pixbuf_new_from_inline(n, data, copy_pixels, &error);
-        }
+        buf = gdk_pixbuf_new_from_inline(n, data, copy_pixels, error);
         /* need to manage the returned value */
         rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, data));
     } else if (argc == 1){
         if (TYPE(arg1) == T_STRING) {
-            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-            if (buf == NULL){
-                rb_gc();
-                error = NULL;
-                buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), &error);
-            }
+            buf = gdk_pixbuf_new_from_file(RVAL2CSTR(arg1), error);
         } else if (TYPE(arg1) == T_ARRAY) {
             const gchar **data = RVAL2STRV(arg1);
             buf = gdk_pixbuf_new_from_xpm_data(data);
-            if (buf == NULL) {
-                rb_gc();
-                buf = gdk_pixbuf_new_from_xpm_data(data);
-            }
             g_free(data);
             if (buf == NULL)
-                NOMEM_ERROR(&error);
+                NOMEM_ERROR(error);
+        } else if (TYPE(arg1) == T_HASH) {
+            buf = pixbuf_initialize_by_hash(self, arg1, error);
         } else {
             rb_raise(rb_eArgError, "Wrong type of 1st argument or wrong number of arguments");
         }
@@ -235,7 +283,26 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         rb_raise(rb_eArgError, "Wrong number of arguments");
     }
 
-    if (error || ! buf) RAISE_GERROR(error);
+    return buf;
+}
+
+static VALUE
+rg_initialize(int argc, VALUE *argv, VALUE self)
+{
+    VALUE arg1, arg2, arg3, arg4, arg5, arg6, arg7;
+    GdkPixbuf *buf;
+    GError *error = NULL;
+
+    rb_scan_args(argc, argv, "16", &arg1, &arg2, &arg3, &arg4, &arg5, &arg6, &arg7);
+    buf = pixbuf_initialize(self, argc, arg1, arg2, arg3, arg4, arg5, arg6, arg7, &error);
+    if (buf == NULL) {
+        rb_gc();
+        g_error_free(error);
+        error = NULL;
+        buf = pixbuf_initialize(self, argc, arg1, arg2, arg3, arg4, arg5, arg6, arg7, &error);
+    }
+    if (error || !buf)
+        RAISE_GERROR(error);
 
     G_INITIALIZE(self, buf);
     return Qnil;
