@@ -24,8 +24,6 @@
 #define RG_TARGET_NAMESPACE cTextView
 #define _SELF(self) (RVAL2GTKTEXTVIEW(self))
 
-static ID id_buffer;
-
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -36,30 +34,12 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(buffer))
         widget = gtk_text_view_new();
     else {
-        G_CHILD_SET(self, id_buffer, buffer);
+        G_CHILD_SET(self, rb_intern("buffer"), buffer);
         widget = gtk_text_view_new_with_buffer(RVAL2GTKTEXTBUFFER(buffer));
     }
 
     RBGTK_INITIALIZE(self, widget);
     return self;
-}
-
-static VALUE
-textview_set_buffer(VALUE self, VALUE buf)
-{
-    G_CHILD_SET(self, id_buffer, buf);
-    gtk_text_view_set_buffer(_SELF(self), 
-                             NIL_P(buf) ? NULL : RVAL2GTKTEXTBUFFER(buf));
-    return self;
-}
-
-static VALUE
-textview_get_buffer(VALUE self)
-{
-    VALUE buf = GOBJ2RVAL(gtk_text_view_get_buffer(_SELF(self)));
-    G_CHILD_SET(self, id_buffer, buf);
-
-    return buf;
 }
 
 static VALUE
@@ -308,11 +288,7 @@ Init_gtk_textview(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
 
-    id_buffer = rb_intern("buffer");
-
     RG_DEF_METHOD(initialize, -1);
-    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "buffer", textview_set_buffer, 1);
-    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "buffer", textview_get_buffer, 0);
     RG_DEF_METHOD(scroll_to_mark, 5);
     RG_DEF_METHOD(scroll_to_iter, 5);
     RG_DEF_METHOD(scroll_mark_onscreen, 1);

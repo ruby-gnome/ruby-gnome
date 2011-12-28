@@ -37,6 +37,7 @@ rg_insert(VALUE self, VALUE renderer, VALUE position)
     result = gtk_source_gutter_insert(_SELF(self),
                                       RVAL2GTKSOURCEGUTTERRENDERER(renderer),
                                       NUM2INT(position));
+    G_CHILD_ADD(self, renderer);
 
     return CBOOL2RVAL(result);
 }
@@ -53,6 +54,7 @@ static VALUE
 rg_remove(VALUE self, VALUE renderer)
 {
     gtk_source_gutter_remove(_SELF(self), RVAL2GTKSOURCEGUTTERRENDERER(renderer));
+    G_CHILD_REMOVE(self, renderer);
 
     return self;
 }
