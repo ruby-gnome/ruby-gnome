@@ -24,8 +24,6 @@
 #define RG_TARGET_NAMESPACE cTextView
 #define _SELF(self) (RVAL2GTKTEXTVIEW(self))
 
-static ID id_buffer;
-
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -36,7 +34,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(buffer))
         widget = gtk_text_view_new();
     else {
-        G_CHILD_SET(self, id_buffer, buffer);
+        G_CHILD_SET(self, rb_intern("buffer"), buffer);
         widget = gtk_text_view_new_with_buffer(RVAL2GTKTEXTBUFFER(buffer));
     }
 
@@ -289,8 +287,6 @@ void
 Init_gtk_textview(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_VIEW, "TextView", mGtk);
-
-    id_buffer = rb_intern("buffer");
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(scroll_to_mark, 5);
