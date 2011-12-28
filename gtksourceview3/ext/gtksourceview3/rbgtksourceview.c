@@ -59,12 +59,13 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_get_gutter(VALUE self, VALUE window_type)
 {
-    GtkSourceGutter *gutter;
+    VALUE gutter;
 
-    gutter = gtk_source_view_get_gutter(_SELF(self),
-                                        RVAL2GTKTEXTWINDOWTYPE(window_type));
+    gutter = GOBJ2RVAL(gtk_source_view_get_gutter(_SELF(self),
+                                                  RVAL2GTKTEXTWINDOWTYPE(window_type)));
+    G_CHILD_ADD(self, gutter);
 
-    return GOBJ2RVAL(gutter);
+    return gutter;
 }
 
 static VALUE
