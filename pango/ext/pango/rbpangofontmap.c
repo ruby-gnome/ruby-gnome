@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cFontMap
 #define _SELF(self) (RVAL2PANGOFONTMAP(self))
-#define RVAL2DESC(d) (RVAL2PANGOFONTDESCRIPTION(d))
-#define RVAL2LANG(l) (RVAL2PANGOLANGUAGE(l))
 
 /*
 static VALUE
@@ -40,7 +38,7 @@ rg_load_font(VALUE self, VALUE context, VALUE desc)
 {
     return GOBJ2RVAL(pango_font_map_load_font(_SELF(self), 
                                               RVAL2PANGOCONTEXT(context),
-                                              RVAL2DESC(desc)));
+                                              RVAL2PANGOFONTDESCRIPTION(desc)));
 }
 
 static VALUE
@@ -48,8 +46,8 @@ rg_load_fontset(VALUE self, VALUE context, VALUE desc, VALUE lang)
 {
     return GOBJ2RVAL(pango_font_map_load_fontset(_SELF(self),
                                                  RVAL2PANGOCONTEXT(context),
-                                                 RVAL2DESC(desc),
-                                                 RVAL2LANG(lang)));
+                                                 RVAL2PANGOFONTDESCRIPTION(desc),
+                                                 RVAL2PANGOLANGUAGE(lang)));
 }
 
 static VALUE

@@ -23,12 +23,11 @@
 
 #define RG_TARGET_NAMESPACE cLayout
 #define _SELF(self) (RVAL2PANGOLAYOUT(self))
-#define RVAL2CONTEXT(v) (RVAL2PANGOCONTEXT(v))
 
 static VALUE
 rg_initialize(VALUE self, VALUE context)
 {
-    G_INITIALIZE(self, pango_layout_new(RVAL2CONTEXT(context)));
+    G_INITIALIZE(self, pango_layout_new(RVAL2PANGOCONTEXT(context)));
     return Qnil;
 }
 

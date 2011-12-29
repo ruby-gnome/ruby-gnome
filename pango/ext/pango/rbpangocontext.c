@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cContext
 #define _SELF(self) (RVAL2PANGOCONTEXT(self))
-#define RVAL2DESC(v) (RVAL2PANGOFONTDESCRIPTION(v))
-#define RVAL2LANG(v) (RVAL2PANGOLANGUAGE(v))
 
 static VALUE
 rg_itemize(int argc, VALUE *argv, VALUE self)
@@ -101,7 +99,7 @@ rg_font_description(VALUE self)
 static VALUE
 rg_set_font_description(VALUE self, VALUE desc)
 {
-    pango_context_set_font_description(_SELF(self), RVAL2DESC(desc));
+    pango_context_set_font_description(_SELF(self), RVAL2PANGOFONTDESCRIPTION(desc));
     return self;
 }
 
@@ -116,7 +114,7 @@ static VALUE
 rg_set_language(VALUE self, VALUE lang)
 {
     pango_context_set_language(_SELF(self), 
-                               RVAL2LANG(lang));
+                               RVAL2PANGOLANGUAGE(lang));
     return self;
 }
 
@@ -181,14 +179,14 @@ rg_set_matrix(VALUE self, VALUE matrix)
 static VALUE
 rg_load_font(VALUE self, VALUE desc)
 {
-    return GOBJ2RVAL(pango_context_load_font(_SELF(self), RVAL2DESC(desc)));
+    return GOBJ2RVAL(pango_context_load_font(_SELF(self), RVAL2PANGOFONTDESCRIPTION(desc)));
 }
 
 static VALUE
 rg_load_fontset(VALUE self, VALUE desc, VALUE lang)
 {
     return GOBJ2RVAL(pango_context_load_fontset(_SELF(self),
-                                                RVAL2DESC(desc), RVAL2LANG(lang)));
+                                                RVAL2PANGOFONTDESCRIPTION(desc), RVAL2PANGOLANGUAGE(lang)));
 }
 
 static VALUE
@@ -199,8 +197,8 @@ rg_get_metrics(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &desc, &lang);
 
     return PANGOFONTMETRICS2RVAL(pango_context_get_metrics(_SELF(self), 
-                                                           RVAL2DESC(desc), 
-                                                           NIL_P(lang) ? NULL : RVAL2LANG(lang)));
+                                                           RVAL2PANGOFONTDESCRIPTION(desc), 
+                                                           NIL_P(lang) ? NULL : RVAL2PANGOLANGUAGE(lang)));
 }
 
 static VALUE

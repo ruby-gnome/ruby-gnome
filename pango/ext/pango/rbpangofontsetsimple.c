@@ -25,12 +25,11 @@
 
 #define RG_TARGET_NAMESPACE cFontsetSimple
 #define _SELF(self) (RVAL2PANGOFONTSETSIMPLE(self))
-#define RVAL2LANG(v) (RVAL2PANGOLANGUAGE(v))
 
 static VALUE
 rg_initialize(VALUE self, VALUE lang)
 {
-    G_INITIALIZE(self, pango_fontset_simple_new(RVAL2LANG(lang)));
+    G_INITIALIZE(self, pango_fontset_simple_new(RVAL2PANGOLANGUAGE(lang)));
     return Qnil;
 }
 

@@ -24,12 +24,11 @@
 
 #define RG_TARGET_NAMESPACE cLanguage
 #define _SELF(self) (RVAL2PANGOLANGUAGE(self))
-#define LANG2RVAL(lang) (PANGOLANGUAGE2RVAL(lang))
 
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE self)
 {
-    return LANG2RVAL(pango_language_get_default());
+    return PANGOLANGUAGE2RVAL(pango_language_get_default());
 }
 
 static VALUE
