@@ -23,7 +23,7 @@
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
 #define RG_TARGET_NAMESPACE cPixbufSimpleAnim
-#define _SELF(s) (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GDKPIXBUFSIMPLEANIM(s))
 
 static VALUE
 rg_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)

@@ -22,7 +22,7 @@
 #include "rbgdk-pixbuf.h"
 
 #define RG_TARGET_NAMESPACE cPixbufAnimationIter
-#define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
+#define RVAL2ITR(i) (RVAL2GDKPIXBUFANIMATIONITER(i))
 
 static VALUE
 rg_advance(int argc, VALUE *argv, VALUE self)

@@ -23,8 +23,8 @@
 
 #define GDK_TYPE_PIXDATA (gdk_pixdata_get_type())
 #define RG_TARGET_NAMESPACE cPixdata
-#define _SELF(s) ((GdkPixdata*)(RVAL2BOXED(s, GDK_TYPE_PIXDATA)))
-#define PIXDATA2RVAL(pix) (BOXED2RVAL(pix, GDK_TYPE_PIXDATA))
+#define _SELF(s) ((GdkPixdata*)(RVAL2GDKPIXDATA(s)))
+#define PIXDATA2RVAL(pix) (GDKPIXDATA2RVAL(pix))
 
 static ID id_pixdata;
 

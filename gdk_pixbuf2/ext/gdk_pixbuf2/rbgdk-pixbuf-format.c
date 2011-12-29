@@ -27,7 +27,7 @@
 #endif
 
 #define RG_TARGET_NAMESPACE cPixbufFormat
-#define _SELF(r) ((GdkPixbufFormat*)RVAL2BOXED(r, GDK_TYPE_PIXBUF_FORMAT))
+#define _SELF(r) (RVAL2GDKPIXBUFFORMAT(r))
 
 /**********************************/
 static GdkPixbufFormat*

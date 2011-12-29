@@ -29,7 +29,7 @@
 #endif
 
 #define RG_TARGET_NAMESPACE cPixbuf
-#define _SELF(s) GDK_PIXBUF(RVAL2GOBJ(s)) 
+#define _SELF(s) RVAL2GDKPIXBUF(s) 
 
 #define NOMEM_ERROR(error) g_set_error(error,\
                              GDK_PIXBUF_ERROR,\
@@ -130,7 +130,7 @@ pixbuf_initialize_by_hash(VALUE self, VALUE arg, GError **error)
 
     if (!NIL_P(rb_data)) {
         buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(rb_data),
-                                       NIL_P(rb_colorspace) ? GDK_COLORSPACE_RGB : RVAL2GENUM(rb_colorspace, GDK_TYPE_COLORSPACE),
+                                       NIL_P(rb_colorspace) ? GDK_COLORSPACE_RGB : RVAL2GDKCOLORSPACE(rb_colorspace),
                                        RVAL2CBOOL(rb_has_alpha),
                                        NIL_P(rb_bits_per_sample) ? 8 : NUM2INT(rb_bits_per_sample),
                                        NUM2INT(rb_width),
@@ -193,7 +193,7 @@ pixbuf_initialize_by_hash(VALUE self, VALUE arg, GError **error)
             buf = gdk_pixbuf_new_from_file(RVAL2CSTR(rb_file), error);
         }
     } else {
-        buf = gdk_pixbuf_new(NIL_P(rb_colorspace) ? GDK_COLORSPACE_RGB : RVAL2GENUM(rb_colorspace, GDK_TYPE_COLORSPACE),
+        buf = gdk_pixbuf_new(NIL_P(rb_colorspace) ? GDK_COLORSPACE_RGB : RVAL2GDKCOLORSPACE(rb_colorspace),
                              RVAL2CBOOL(rb_has_alpha),
                              NIL_P(rb_bits_per_sample) ? 8 : NUM2INT(rb_bits_per_sample),
                              NUM2INT(rb_width),
@@ -213,7 +213,7 @@ pixbuf_initialize(VALUE self, int argc, VALUE arg1, VALUE arg2, VALUE arg3, VALU
 
     if (argc == 7){
         buf = gdk_pixbuf_new_from_data((const guchar*)RVAL2CSTR(arg1), 
-                                       RVAL2GENUM(arg2, GDK_TYPE_COLORSPACE),
+                                       RVAL2GDKCOLORSPACE(arg2),
                                        RVAL2CBOOL(arg3),   NUM2INT(arg4),
                                        NUM2INT(arg5), NUM2INT(arg6),
                                        NUM2INT(arg7), NULL, NULL);
@@ -227,7 +227,7 @@ pixbuf_initialize(VALUE self, int argc, VALUE arg1, VALUE arg2, VALUE arg3, VALU
                                            NUM2INT(arg4), NUM2INT(arg5));
             if (buf == NULL) NOMEM_ERROR(error);
         } else if (rb_obj_is_kind_of(arg1, GTYPE2CLASS(GDK_TYPE_COLORSPACE))){
-            buf = gdk_pixbuf_new(RVAL2GENUM(arg1, GDK_TYPE_COLORSPACE),
+            buf = gdk_pixbuf_new(RVAL2GDKCOLORSPACE(arg1),
                                  RVAL2CBOOL(arg2), NUM2INT(arg3),
                                  NUM2INT(arg4), NUM2INT(arg5));
             if (buf == NULL) NOMEM_ERROR(error);
@@ -328,7 +328,7 @@ rg_s_get_file_info(G_GNUC_UNUSED VALUE self, VALUE filename)
 
     GdkPixbufFormat* format = gdk_pixbuf_get_file_info(RVAL2CSTR(filename), 
                                                        &width, &height);
-    return format ? rb_ary_new3(3, BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT), INT2NUM(width), INT2NUM(height)) : Qnil;
+    return format ? rb_ary_new3(3, GDKPIXBUFFORMAT2RVAL(format), INT2NUM(width), INT2NUM(height)) : Qnil;
 }
 
 #endif
@@ -435,7 +435,7 @@ rg_scale(int argc, VALUE *argv, VALUE self)
                  &interp_type);
 
     if (!NIL_P(interp_type))
-        type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
+        type = RVAL2GDKINTERPTYPE(interp_type);
 
     dest = gdk_pixbuf_scale_simple(_SELF(self),
                                    NUM2INT(dest_width),
@@ -462,7 +462,7 @@ rg_scale_bang(int argc, VALUE *argv, VALUE self)
                  &scale_x, &scale_y, &interp_type);
 
     if (!NIL_P(interp_type))
-        type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
+        type = RVAL2GDKINTERPTYPE(interp_type);
 
     gdk_pixbuf_scale(_SELF(src), _SELF(self), 
                      NUM2INT(src_x), NUM2INT(src_y), 
@@ -480,7 +480,7 @@ rg_composite(VALUE self, VALUE dest_width, VALUE dest_height, VALUE interp_type,
     GdkInterpType type = GDK_INTERP_BILINEAR;
 
     if (!NIL_P(interp_type))
-        type = RVAL2GENUM(interp_type, GDK_TYPE_INTERP_TYPE);
+        type = RVAL2GDKINTERPTYPE(interp_type);
 
     dest = gdk_pixbuf_composite_color_simple(
         _SELF(self), NUM2INT(dest_width), NUM2INT(dest_height), 
@@ -511,7 +511,7 @@ rg_composite_bang(int argc, VALUE *argv, VALUE self)
     switch (argc) {
       case 11:
         if (!NIL_P(args[9]))
-            interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
+            interp_type = RVAL2GDKINTERPTYPE(args[9]);
 
         gdk_pixbuf_composite(_SELF(args[0]), _SELF(self), 
                              NUM2INT(args[1]), NUM2INT(args[2]),
@@ -523,7 +523,7 @@ rg_composite_bang(int argc, VALUE *argv, VALUE self)
         break;
       case 16:
         if (!NIL_P(args[9]))
-            interp_type = RVAL2GENUM(args[9], GDK_TYPE_INTERP_TYPE);
+            interp_type = RVAL2GDKINTERPTYPE(args[9]);
 
         gdk_pixbuf_composite_color(_SELF(args[0]), _SELF(self),
                                    NUM2INT(args[1]), NUM2INT(args[2]),
@@ -548,7 +548,7 @@ static VALUE
 rg_rotate(VALUE self, VALUE angle)
 {
     VALUE ret;
-    GdkPixbuf* dest = gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GENUM(angle, GDK_TYPE_PIXBUF_ROTATION));
+    GdkPixbuf* dest = gdk_pixbuf_rotate_simple(_SELF(self), RVAL2GDKPIXBUFROTATION(angle));
     if (dest == NULL)
         return Qnil;
     ret = GOBJ2RVAL(dest);
