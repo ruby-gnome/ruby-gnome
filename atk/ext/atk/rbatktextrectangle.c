@@ -27,7 +27,7 @@
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
 #define RG_TARGET_NAMESPACE cTextRectangle
-#define _SELF(r) ((AtkTextRectangle*)RVAL2BOXED(r, ATK_TYPE_TEXT_RECTANGLE))
+#define _SELF(r) (RVAL2ATKTEXTRECTANGLE(r))
 
 /**********************************/
 static AtkTextRectangle*

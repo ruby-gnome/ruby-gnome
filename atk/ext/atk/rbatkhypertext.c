@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mHypertext
-#define _SELF(s) (ATK_HYPERTEXT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKHYPERTEXT(s))
 
 static VALUE
 rg_get_link(VALUE self, VALUE link_index)

@@ -39,7 +39,7 @@ void        atk_remove_global_event_listener
 static VALUE
 rg_s_focus_tracker_notify(VALUE self, VALUE obj)
 {
-    atk_focus_tracker_notify(ATK_OBJECT(RVAL2GOBJ(obj)));
+    atk_focus_tracker_notify(RVAL2ATKOBJECT(obj));
     return self;
 }
 

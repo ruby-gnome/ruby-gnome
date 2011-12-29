@@ -22,14 +22,14 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mImage
-#define _SELF(s) (ATK_IMAGE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKIMAGE(s))
 
 static VALUE
 rg_image_position(VALUE self, VALUE coord_type)
 {
     gint x, y;
     atk_image_get_image_position(_SELF(self), &x, &y, 
-                                 RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+                                 RVAL2ATKCOORDTYPE(coord_type));
     return rb_assoc_new(INT2NUM(x), INT2NUM(y));
 }
 

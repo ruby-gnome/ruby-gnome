@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mImplementor
-#define _SELF(s) (ATK_IMPLEMENTOR(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKIMPLEMENTOR(s))
 
 static VALUE
 rg_ref_accessible(VALUE self)

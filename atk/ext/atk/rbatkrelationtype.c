@@ -26,7 +26,7 @@
 static VALUE
 rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
+    return ATKRELATIONTYPE2RVAL(atk_relation_type_for_name(RVAL2CSTR(name)));
 }
 
 void

@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mSelection
-#define _SELF(s) (ATK_SELECTION(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKSELECTION(s))
 
 static VALUE
 rg_add_selection(VALUE self, VALUE i)

@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mStreamableContent
-#define _SELF(s) (ATK_STREAMABLE_CONTENT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKSTREAMABLECONTENT(s))
 
 static VALUE
 rg_n_mime_types(VALUE self)
@@ -43,7 +43,7 @@ rg_get_stream(VALUE self, VALUE mime_type)
     if (!io)
         rb_raise(rb_eRuntimeError, "Couldn't get the stream.");
 
-    return BOXED2RVAL(io, G_TYPE_IO_CHANNEL);
+    return GIOCHANNEL2RVAL(io);
 }
 
 void
