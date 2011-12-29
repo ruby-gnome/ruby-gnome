@@ -26,6 +26,7 @@
 #include <atk/atknoopobjectfactory.h>
 #include "rbgobject.h"
 #include "rbatkversion.h"
+#include "rbatkconversions.h"
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_ATK_STATIC_COMPILATION)
 #  ifdef RUBY_ATK_COMPILATION
@@ -36,8 +37,6 @@
 #else
 #  define RUBY_ATK_VAR extern
 #endif
-                                                                                
-#define RVAL2ATKOBJECT(s) ATK_OBJECT(RVAL2GOBJ(s))
 
 extern GType atk_text_rectangle_get_type(void);
 extern GType atk_text_range_get_type(void);
