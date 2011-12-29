@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cSimpleAsyncResult
-#define _SELF(value) G_SIMPLE_ASYNC_RESULT(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GSIMPLEASYNCRESULT(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE object)

@@ -25,7 +25,7 @@
 #include <gio/gunixconnection.h>
 
 #define RG_TARGET_NAMESPACE cUnixConnection
-#define _SELF(value) G_UNIX_CONNECTION(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GUNIXCONNECTION(value)
 
 static VALUE
 rg_receive_fd(int argc, VALUE *argv, VALUE self)

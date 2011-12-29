@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileEnumerator
-#define _SELF(value) G_FILE_ENUMERATOR(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GFILEENUMERATOR(value)
 
 static VALUE
 rg_next_file(int argc, VALUE *argv, VALUE self)

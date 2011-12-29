@@ -21,7 +21,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cSocketAddressEnumerator
-#define _SELF(value) G_SOCKET_ADDRESS_ENUMERATOR(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GSOCKETADDRESSENUMERATOR(value)
 
 static VALUE
 rg_next(int argc, VALUE *argv, VALUE self)

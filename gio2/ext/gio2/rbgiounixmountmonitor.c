@@ -25,7 +25,7 @@
 #include <gio/gunixmounts.h>
 
 #define RG_TARGET_NAMESPACE cUnixMountMonitor
-#define _SELF(value) G_UNIX_MOUNT_MONITOR(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GUNIXMOUNTMONITOR(value)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

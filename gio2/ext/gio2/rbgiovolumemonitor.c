@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cVolumeMonitor
-#define _SELF(value) G_VOLUME_MONITOR(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GVOLUMEMONITOR(value)
 
 static VALUE
 rg_s_get(G_GNUC_UNUSED VALUE self)

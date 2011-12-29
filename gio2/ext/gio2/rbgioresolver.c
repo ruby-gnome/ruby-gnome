@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cResolver
-#define _SELF(value) G_RESOLVER(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GRESOLVER(value)
 
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE self)

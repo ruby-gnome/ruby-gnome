@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cSocketConnection
-#define _SELF(value) G_SOCKET_CONNECTION(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GSOCKETCONNECTION(value)
 
 static VALUE
 rg_local_address(VALUE self)

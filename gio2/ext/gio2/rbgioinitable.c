@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mInitable
-#define _SELF(value) G_INITABLE(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GINITABLE(value)
 
 static VALUE
 rg_init(int argc, VALUE *argv, VALUE self)

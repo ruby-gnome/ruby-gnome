@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mThemedIcon
-#define _SELF(value) G_THEMED_ICON(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GTHEMEDICON(value)
 
 /* TODO: Is this unnecessarily complicated? */
 static VALUE

@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileMonitor
-#define _SELF(value) G_FILE_MONITOR(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GFILEMONITOR(value)
 
 static VALUE
 rg_cancel(VALUE self)

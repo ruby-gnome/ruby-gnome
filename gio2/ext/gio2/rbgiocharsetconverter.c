@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cCharsetConverter
-#define _SELF(value) G_CHARSET_CONVERTER(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GCHARSETCONVERTER(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE to, VALUE from)

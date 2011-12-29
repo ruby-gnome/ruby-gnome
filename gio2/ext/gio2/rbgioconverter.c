@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mConverter
-#define _SELF(value) G_CONVERTER(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GCONVERTER(value)
 
 #define RVAL2GCONVERTERFLAGSDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), \

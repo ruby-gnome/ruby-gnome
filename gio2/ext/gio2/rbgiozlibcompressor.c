@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cZlibCompressor
-#define _SELF(value) G_ZLIB_COMPRESSOR(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GZLIBCOMPRESSOR(value)
 
 #define RVAL2ZLIBCOMPRESSORLEVELDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), FIX2INT, -1)

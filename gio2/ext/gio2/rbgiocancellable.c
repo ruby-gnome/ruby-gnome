@@ -63,7 +63,7 @@ rg_make_pollfd(VALUE self)
 
         g_cancellable_make_pollfd(cancellable, gfd);
 
-        return BOXED2RVAL(gfd, G_TYPE_POLL_FD);
+        return GPOLLFD2RVAL(gfd);
 }
 
 G_GNUC_NORETURN static VALUE
