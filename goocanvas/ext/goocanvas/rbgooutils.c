@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 GooCanvasBounds *
 ruby_to_goo_canvas_bounds(VALUE rb_bounds, GooCanvasBounds *dest_bounds)

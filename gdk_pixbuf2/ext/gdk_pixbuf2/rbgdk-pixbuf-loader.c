@@ -20,10 +20,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define RG_TARGET_NAMESPACE cPixbufLoader
-#define _SELF(s) GDK_PIXBUF_LOADER(RVAL2GOBJ(s))
+#define _SELF(s) RVAL2GDKPIXBUFLOADER(s)
 
 /****************************************************/
 /* File opening */
@@ -63,7 +63,7 @@ static VALUE
 rg_format(VALUE self)
 {
     GdkPixbufFormat* format = gdk_pixbuf_loader_get_format(_SELF(self));
-    return BOXED2RVAL(format, GDK_TYPE_PIXBUF_FORMAT);
+    return GDKPIXBUFFORMAT2RVAL(format);
 }
 #endif
 

@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cSocketControlMessage
-#define _SELF(value) G_SOCKET_CONTROL_MESSAGE(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GSOCKETCONTROLMESSAGE(value)
 
 static VALUE
 rg_s_deserialize(G_GNUC_UNUSED VALUE self, VALUE level, VALUE type, VALUE data)

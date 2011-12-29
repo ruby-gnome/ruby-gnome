@@ -19,10 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define RG_TARGET_NAMESPACE cPixbufAnimation
-#define _SELF(s) (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GDKPIXBUFANIMATION(s))
 
 static VALUE
 rg_initialize(VALUE self, VALUE filename)

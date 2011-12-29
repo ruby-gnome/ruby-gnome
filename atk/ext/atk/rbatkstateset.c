@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cStateSet
-#define _SELF(s) (ATK_STATE_SET(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKSTATESET(s))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -41,7 +41,7 @@ static VALUE
 rg_add_state(VALUE self, VALUE type)
 {
     return CBOOL2RVAL(atk_state_set_add_state(_SELF(self), 
-                                              RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
+                                              RVAL2ATKSTATETYPE(type)));
 }
 
 struct rval2atkstatetype_args {
@@ -57,7 +57,7 @@ rval2atkstatetype_body(VALUE value)
     struct rval2atkstatetype_args *args = (struct rval2atkstatetype_args *)value;
 
     for (i = 0; i < args->n; i++)
-            args->result[i] = RVAL2GENUM(RARRAY_PTR(args->ary)[i], ATK_TYPE_STATE_TYPE);
+            args->result[i] = RVAL2ATKSTATETYPE(RARRAY_PTR(args->ary)[i]);
 
     return Qnil;
 }
@@ -115,7 +115,7 @@ static VALUE
 rg_contains_state(VALUE self, VALUE type)
 {
     return CBOOL2RVAL(atk_state_set_contains_state(_SELF(self), 
-                                                   RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
+                                                   RVAL2ATKSTATETYPE(type)));
 }
 
 static VALUE
@@ -137,7 +137,7 @@ static VALUE
 rg_remove_state(VALUE self, VALUE type)
 {
     return CBOOL2RVAL(atk_state_set_remove_state(_SELF(self), 
-                                                 RVAL2GENUM(type, ATK_TYPE_STATE_TYPE)));
+                                                 RVAL2ATKSTATETYPE(type)));
 }
 
 static VALUE

@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cRegistry
-#define _SELF(s) (ATK_REGISTRY(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKREGISTRY(s))
 
 static VALUE
 rg_set_factory_type(VALUE self, VALUE type, VALUE factory_type)

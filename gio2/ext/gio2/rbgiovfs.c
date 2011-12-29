@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cVfs
-#define _SELF(value) G_VFS(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GVFS(value)
 
 static VALUE
 rg_file_for_path(VALUE self, VALUE path)

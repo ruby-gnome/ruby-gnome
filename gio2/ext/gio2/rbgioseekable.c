@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mSeekable
-#define _SELF(value) G_SEEKABLE(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GSEEKABLE(value)
 
 #define RVAL2GSEEKTYPEDEFAULT(value) \
         RVAL2TYPE_WITH_DEFAULT((value), NUM2INT, G_SEEK_CUR)

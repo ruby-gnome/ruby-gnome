@@ -27,7 +27,7 @@
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
 #define RG_TARGET_NAMESPACE cTextRange
-#define _SELF(r) ((AtkTextRange*)RVAL2BOXED(r, ATK_TYPE_TEXT_RANGE))
+#define _SELF(r) (RVAL2ATKTEXTRANGE(r))
 
 /**********************************/
 static AtkTextRange*
@@ -56,7 +56,7 @@ atk_text_range_get_type(void)
 static VALUE
 rg_bounds(VALUE self)
 {
-    return BOXED2RVAL(&_SELF(self)->bounds, ATK_TYPE_TEXT_RECTANGLE);
+    return ATKTEXTRECTANGLE2RVAL(&_SELF(self)->bounds);
 }
 
 static VALUE

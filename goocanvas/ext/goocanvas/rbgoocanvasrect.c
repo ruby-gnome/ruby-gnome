@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasRect
 
@@ -28,7 +28,7 @@ rg_initialize(VALUE self, VALUE parent, VALUE x, VALUE y,
                        VALUE width, VALUE height)
 {
     GooCanvasItem *item;
-    item = goo_canvas_rect_new(RVAL2GCI(parent),
+    item = goo_canvas_rect_new(RVAL2GOOCANVASITEM(parent),
                                NUM2DBL(x),
                                NUM2DBL(y),
                                NUM2DBL(width),

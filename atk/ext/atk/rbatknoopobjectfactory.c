@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cNoOpObjectFactory
-#define _SELF(s) (ATK_NO_OP_OBJECT_FACTORY(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKNOOPOBJECTFACTORY(s))
 
 static VALUE
 rg_initialize(VALUE self)

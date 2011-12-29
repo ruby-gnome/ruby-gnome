@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cGObjectAccessible
-#define _SELF(s) (ATK_GOBJECT_ACCESSIBLE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKGOBJECTACCESSIBLE(s))
 
 static VALUE
 rg_s_for_object(G_GNUC_UNUSED VALUE self, VALUE obj)

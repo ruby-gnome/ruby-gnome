@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mAsyncInitable
-#define _SELF(value) G_ASYNC_INITABLE(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GASYNCINITABLE(value)
 
 static VALUE
 rg_init_async(int argc, VALUE *argv, VALUE self)

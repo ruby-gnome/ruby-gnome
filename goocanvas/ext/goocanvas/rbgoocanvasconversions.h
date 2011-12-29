@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2008-2009  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,27 +18,14 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgio2private.h"
+#ifndef __RBGOOCANVASCONVERSIONS_H__
+#define __RBGOOCANVASCONVERSIONS_H__
 
-#define RG_TARGET_NAMESPACE cNetworkService
-#define _SELF(value) RVAL2GNETWORKSERVICE(value)
+#define RVAL2GOOCANVAS(o)                  (GOO_CANVAS(RVAL2GOBJ(o)))
+#define RVAL2GOOCANVASITEM(o)              (GOO_CANVAS_ITEM(RVAL2GOBJ(o)))
+#define RVAL2GOOCANVASSTYLE(o)             (GOO_CANVAS_STYLE(RVAL2GOBJ(o)))
 
-static VALUE
-rg_initialize(VALUE self, VALUE service, VALUE protocol, VALUE domain)
-{
-        /* TODO: If these are infected, so should they be when returned.  How
-         * do we deal with that? */
-        G_INITIALIZE(self, g_network_service_new(RVAL2CSTR(service),
-                                                 RVAL2CSTR(protocol),
-                                                 RVAL2CSTR(domain)));
+#define RVAL2GOOCANVASPOINTS(o)            ((GooCanvasPoints*)RVAL2BOXED(o, GOO_TYPE_CANVAS_POINTS))
+#define GOOCANVASPOINTS2RVAL(o)            (BOXED2RVAL(o, GOO_TYPE_CANVAS_POINTS))
 
-        return Qnil;
-}
-
-void
-Init_gnetworkservice(VALUE mGio)
-{
-        VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_NETWORK_SERVICE, "NetworkService", mGio);
-
-        RG_DEF_METHOD(initialize, 3);
-}
+#endif /* __RBGOOCANVASCONVERSIONS_H__ */

@@ -27,7 +27,7 @@ static VALUE
 rg_localized_name(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_ATK_ROLE_GET_LOCALIZED_NAME
-    return CSTR2RVAL(atk_role_get_localized_name(RVAL2GENUM(self, ATK_TYPE_ROLE)));
+    return CSTR2RVAL(atk_role_get_localized_name(RVAL2ATKROLE(self)));
 #else
     rb_warning("not supported in this version of ATK.");
     return Qnil;
@@ -37,7 +37,7 @@ rg_localized_name(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_role_for_name(RVAL2CSTR(name)), ATK_TYPE_ROLE);
+    return ATKROLE2RVAL(atk_role_for_name(RVAL2CSTR(name)));
 }
 
 void

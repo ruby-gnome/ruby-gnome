@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileIOStream
-#define _SELF(value) G_FILE_IO_STREAM(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GFILEIOSTREAM(value)
 
 static VALUE
 rg_etag(VALUE self)

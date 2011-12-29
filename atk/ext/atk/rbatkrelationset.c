@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cRelationSet
-#define _SELF(s) (ATK_RELATION_SET(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKRELATIONSET(s))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -36,20 +36,20 @@ rg_contains_p(VALUE self, VALUE relationship)
 {
     return CBOOL2RVAL(atk_relation_set_contains(
                           _SELF(self),
-                          RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE)));
+                          RVAL2ATKRELATIONTYPE(relationship)));
 }
 
 static VALUE
 rg_remove(VALUE self, VALUE relation)
 {
-    atk_relation_set_remove(_SELF(self), ATK_RELATION(RVAL2GOBJ(relation)));
+    atk_relation_set_remove(_SELF(self), RVAL2ATKRELATION(relation));
     return self;
 }
 
 static VALUE
 rg_add(VALUE self, VALUE relation)
 {
-    atk_relation_set_add(_SELF(self), ATK_RELATION(RVAL2GOBJ(relation)));
+    atk_relation_set_add(_SELF(self), RVAL2ATKRELATION(relation));
     return self;
 }
 
@@ -65,7 +65,7 @@ rg_get_relation(VALUE self, VALUE i)
     if (rb_obj_is_kind_of(i, GTYPE2CLASS(ATK_TYPE_RELATION_TYPE))){
         return GOBJ2RVAL(atk_relation_set_get_relation_by_type(
                              _SELF(self),
-                             RVAL2GENUM(i, ATK_TYPE_RELATION_TYPE)));
+                             RVAL2ATKRELATIONTYPE(i)));
     } else {
         return GOBJ2RVAL(atk_relation_set_get_relation(_SELF(self), NUM2INT(i)));
     }
@@ -76,8 +76,8 @@ static VALUE
 rg_add_relation(VALUE self, VALUE relationship, VALUE obj)
 {
     atk_relation_set_add_relation_by_type(_SELF(self), 
-                                          RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE), 
-                                          ATK_OBJECT(RVAL2GOBJ(obj)));
+                                          RVAL2ATKRELATIONTYPE(relationship), 
+                                          RVAL2ATKOBJECT(obj));
     return self;
 }
 #endif

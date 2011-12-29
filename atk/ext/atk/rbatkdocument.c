@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mDocument
-#define _SELF(s) (ATK_DOCUMENT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKDOCUMENT(s))
 
 static VALUE
 rg_document_type(VALUE self)

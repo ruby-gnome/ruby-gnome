@@ -18,15 +18,18 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef __RBGDK_PIXBUF2CONVERSIONS_H__
-#define __RBGDK_PIXBUF2CONVERSIONS_H__
+#ifndef __RBGDK_PIXBUF2PRIVATE_H__
+#define __RBGDK_PIXBUF2PRIVATE_H__
 
-#define RVAL2GDKPIXBUF(o)                  (GDK_PIXBUF(RVAL2GOBJ(o)))
-#define RVAL2GDKPIXBUFANIMATION(o)         (GDK_PIXBUF_ANIMATION(RVAL2GOBJ(o)))
-#define RVAL2GDKPIXBUFLOADER(o)            (GDK_PIXBUF_LOADER(RVAL2GOBJ(o)))
-#define RVAL2GDKPIXBUFSIMPLEANIM(o)        (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(o)))
+#include "rbgdk-pixbuf.h"
 
-#define RVAL2GDKPIXBUFFORMAT(o)            ((GdkPixbufFormat*)RVAL2BOXED(o, GDK_TYPE_PIXBUF_FORMAT))
-#define GDKPIXBUFFORMAT2RVAL(o)            (BOXED2RVAL(o, GDK_TYPE_PIXBUF_FORMAT))
+G_GNUC_INTERNAL void Init_gdk_pixbuf_animation(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_format(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_loader(VALUE mGLib);
+#if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
+G_GNUC_INTERNAL void Init_gdk_pixbuf_simpleanim(VALUE mGLib);
+#endif
+G_GNUC_INTERNAL void Init_gdk_pixdata(VALUE mGLib);
 
-#endif /* __RBGDK_PIXBUF2CONVERSIONS_H__ */
+#endif /* __RBGDK_PIXBUF2PRIVATE_H__ */

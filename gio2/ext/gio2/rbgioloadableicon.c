@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mLoadableIcon
-#define _SELF(value) G_LOADABLE_ICON(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GLOADABLEICON(value)
 
 static VALUE
 rg_load(int argc, VALUE *argv, VALUE self)

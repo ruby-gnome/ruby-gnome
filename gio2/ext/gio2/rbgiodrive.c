@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE mDrive
-#define _SELF(value) G_DRIVE(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GDRIVE(value)
 
 static VALUE
 rg_name(VALUE self)

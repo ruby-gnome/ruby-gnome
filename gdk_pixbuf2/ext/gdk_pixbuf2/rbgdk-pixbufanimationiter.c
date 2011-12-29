@@ -19,10 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define RG_TARGET_NAMESPACE cPixbufAnimationIter
-#define RVAL2ITR(i) (GDK_PIXBUF_ANIMATION_ITER(RVAL2GOBJ(i)))
+#define _SELF(i) (RVAL2GDKPIXBUFANIMATIONITER(i))
 
 static VALUE
 rg_advance(int argc, VALUE *argv, VALUE self)
@@ -33,30 +33,30 @@ rg_advance(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "02", &current_time_sec, &current_time_usec);
 
     if (NIL_P(current_time_sec))
-        return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), NULL));
+        return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(_SELF(self), NULL));
 
     current_time.tv_sec = NUM2LONG(current_time_sec);
     current_time.tv_usec = NIL_P(current_time_usec) ? 0 : NUM2LONG(current_time_usec);
 
-    return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(RVAL2ITR(self), &current_time));
+    return CBOOL2RVAL(gdk_pixbuf_animation_iter_advance(_SELF(self), &current_time));
 }
 
 static VALUE
 rg_delay_time(VALUE self)
 {
-    return INT2NUM(gdk_pixbuf_animation_iter_get_delay_time(RVAL2ITR(self)));
+    return INT2NUM(gdk_pixbuf_animation_iter_get_delay_time(_SELF(self)));
 }
 
 static VALUE
 rg_on_currently_loading_frame_p(VALUE self)
 {
-    return CBOOL2RVAL(gdk_pixbuf_animation_iter_on_currently_loading_frame(RVAL2ITR(self)));
+    return CBOOL2RVAL(gdk_pixbuf_animation_iter_on_currently_loading_frame(_SELF(self)));
 }
 
 static VALUE
 rg_pixbuf(VALUE self)
 {
-    return GOBJ2RVAL(gdk_pixbuf_animation_iter_get_pixbuf(RVAL2ITR(self)));
+    return GOBJ2RVAL(gdk_pixbuf_animation_iter_get_pixbuf(_SELF(self)));
 }
 
 void

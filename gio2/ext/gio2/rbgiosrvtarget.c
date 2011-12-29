@@ -21,9 +21,6 @@
 
 #include "rbgio2private.h"
 
-#define RVAL2GSRVTARGET(object) \
-        ((GSrvTarget *)(RVAL2BOXED(object, G_TYPE_SRV_TARGET)))
-
 #define RG_TARGET_NAMESPACE cSrvTarget
 #define _SELF(value) RVAL2GSRVTARGET(value)
 
