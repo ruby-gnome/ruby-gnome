@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
  *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002,2003 the ruby-gnome2 project
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,35 +18,18 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf2private.h"
+#ifndef __RBGDK_PIXBUF2PRIVATE_H__
+#define __RBGDK_PIXBUF2PRIVATE_H__
 
+#include "rbgdk-pixbuf.h"
+
+G_GNUC_INTERNAL void Init_gdk_pixbuf_animation(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_format(VALUE mGLib);
+G_GNUC_INTERNAL void Init_gdk_pixbuf_loader(VALUE mGLib);
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
-#define RG_TARGET_NAMESPACE cPixbufSimpleAnim
-#define _SELF(s) (RVAL2GDKPIXBUFSIMPLEANIM(s))
-
-static VALUE
-rg_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
-{
-    GdkPixbufSimpleAnim* ret = gdk_pixbuf_simple_anim_new(NUM2INT(width), NUM2INT(height), NUM2DBL(rate));
-    G_INITIALIZE(self, ret);
-    return Qnil;
-}
-
-static VALUE
-rg_add_frame(VALUE self, VALUE pixbuf)
-{
-    gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GOBJ(pixbuf));
-    return self;
-}
+G_GNUC_INTERNAL void Init_gdk_pixbuf_simpleanim(VALUE mGLib);
 #endif
+G_GNUC_INTERNAL void Init_gdk_pixdata(VALUE mGLib);
 
-void
-Init_gdk_pixbuf_simpleanim(VALUE mGdk)
-{
-#if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PIXBUF_SIMPLE_ANIM, "PixbufSimpleAnim", mGdk);    
-
-    RG_DEF_METHOD(initialize, 3);
-    RG_DEF_METHOD(add_frame, 1);
-#endif
-}
+#endif /* __RBGDK_PIXBUF2PRIVATE_H__ */

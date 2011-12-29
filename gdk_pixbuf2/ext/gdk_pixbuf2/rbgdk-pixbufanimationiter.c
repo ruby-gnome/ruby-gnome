@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define RG_TARGET_NAMESPACE cPixbufAnimationIter
 #define RVAL2ITR(i) (RVAL2GDKPIXBUFANIMATIONITER(i))

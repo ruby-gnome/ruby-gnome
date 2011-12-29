@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 
 #ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H

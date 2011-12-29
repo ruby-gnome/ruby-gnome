@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define RG_TARGET_NAMESPACE cPixbufLoader
 #define _SELF(s) RVAL2GDKPIXBUFLOADER(s)

@@ -19,17 +19,15 @@
  *  MA  02110-1301  USA
  */
 
+#ifndef __RBGDK_PIXBUF_H__
+#define __RBGDK_PIXBUF_H__
+
 #define GDK_PIXBUF_ENABLE_BACKEND
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include "rbgobject.h"
-#include "gdk_pixbuf2conversions.h"
+#include "rbgdk-pixbuf2conversions.h"
 
-G_GNUC_INTERNAL void Init_gdk_pixbuf_animation(VALUE mGLib);
-G_GNUC_INTERNAL void Init_gdk_pixbuf_animation_iter(VALUE mGLib);
-G_GNUC_INTERNAL void Init_gdk_pixdata(VALUE mGLib);
-G_GNUC_INTERNAL void Init_gdk_pixbuf_loader(VALUE mGLib);
-G_GNUC_INTERNAL void Init_gdk_pixbuf_format(VALUE mGLib);
 extern GType gdk_pixbuf_format_get_type(void);
 
 #define RBGDK_PIXBUF_CHECK_VERSION(major,minor,micro)    \
@@ -38,8 +36,6 @@ extern GType gdk_pixbuf_format_get_type(void);
      (GDK_PIXBUF_MAJOR == (major) && GDK_PIXBUF_MINOR == (minor) && \
       GDK_PIXBUF_MICRO >= (micro)))
 
-#if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
-G_GNUC_INTERNAL void Init_gdk_pixbuf_simpleanim(VALUE mGLib);
-#endif
-
 #define GDK_TYPE_PIXBUF_FORMAT (gdk_pixbuf_format_get_type())
+
+#endif /* __RBGDK_PIXBUF_H__ */

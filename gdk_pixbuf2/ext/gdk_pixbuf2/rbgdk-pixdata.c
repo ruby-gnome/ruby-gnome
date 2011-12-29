@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define GDK_TYPE_PIXDATA (gdk_pixdata_get_type())
 #define RG_TARGET_NAMESPACE cPixdata
