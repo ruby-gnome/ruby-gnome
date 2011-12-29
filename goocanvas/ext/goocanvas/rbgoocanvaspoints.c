@@ -22,6 +22,7 @@
 #include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasPoints
+#define _SELF(self) RVAL2GOOCANVASPOINTS(self)
 
 static VALUE
 rg_initialize(VALUE self, VALUE num_points)
@@ -37,7 +38,7 @@ rg_operator_get(VALUE self, VALUE point)
     GooCanvasPoints *points;
 
     i = NUM2INT(point);
-    points = RVAL2GOOCANVASPOINTS(self);
+    points = _SELF(self);
     if ((i < 0) || (i >= points->num_points))
         rb_raise(rb_eArgError, "invalid point number %d", i);
     return rb_ary_new3(2,
@@ -52,7 +53,7 @@ rg_operator_set(VALUE self, VALUE point, VALUE new_coords)
     GooCanvasPoints *points;
 
     i = NUM2INT(point);
-    points = RVAL2GOOCANVASPOINTS(self);
+    points = _SELF(self);
     if ((i < 0) || (i >= points->num_points))
         rb_raise(rb_eArgError, "invalid point number %d", i);
     if (TYPE(new_coords) != T_ARRAY)
@@ -69,7 +70,7 @@ rg_num_points(VALUE self)
 {
     GooCanvasPoints *points;
 
-    points = RVAL2GOOCANVASPOINTS(self);
+    points = _SELF(self);
     return INT2NUM(points->num_points);
 }
 

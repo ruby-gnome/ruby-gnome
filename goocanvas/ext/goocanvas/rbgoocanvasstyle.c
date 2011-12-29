@@ -22,6 +22,7 @@
 #include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasStyle
+#define _SELF(self) RVAL2GOOCANVASSTYLE(self)
 
 static VALUE
 rg_initialize(VALUE self)
@@ -40,7 +41,7 @@ rg_set_fill_pattern(VALUE self, VALUE value)
     g_value_init(&gval, GOO_TYPE_CAIRO_PATTERN);
     pattern = RVAL2CRPATTERN(value);
     g_value_take_boxed(&gval, pattern);
-    goo_canvas_style_set_property(RVAL2GOOCANVASSTYLE(self),
+    goo_canvas_style_set_property(_SELF(self),
                                   goo_canvas_style_fill_pattern_id,
                                   &gval);
     g_value_unset(&gval);
