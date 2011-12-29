@@ -36,7 +36,7 @@ rg_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
 static VALUE
 rg_add_frame(VALUE self, VALUE pixbuf)
 {
-    gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GOBJ(pixbuf));
+    gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GDKPIXBUF(pixbuf));
     return self;
 }
 #endif

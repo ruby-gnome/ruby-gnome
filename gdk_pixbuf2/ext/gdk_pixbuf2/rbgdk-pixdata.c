@@ -53,7 +53,7 @@ static VALUE
 rg_s_from_pixbuf(G_GNUC_UNUSED VALUE self, VALUE pixbuf, VALUE use_rle)
 {
     GdkPixdata pixdata;
-    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RVAL2CBOOL(use_rle));
+    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GDKPIXBUF(pixbuf), RVAL2CBOOL(use_rle));
     VALUE ret = GDKPIXDATA2RVAL(&pixdata);
     if (use_rle){
         /* need to manage the returned value */
