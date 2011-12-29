@@ -27,7 +27,7 @@ static VALUE
 rg_initialize(VALUE self, VALUE parent)
 {
     GooCanvasItem *item;
-    item = goo_canvas_group_new(RVAL2GCI(parent), NULL);
+    item = goo_canvas_group_new(RVAL2GOOCANVASITEM(parent), NULL);
     RB_GOO_CANVAS_ITEM_INITIALIZE(self, item);
     G_CHILD_ADD(parent, self);
     return Qnil;

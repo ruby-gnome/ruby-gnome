@@ -29,7 +29,7 @@ rg_initialize(VALUE self, VALUE parent,
                           VALUE radius_x, VALUE radius_y)
 {
     GooCanvasItem *item;
-    item = goo_canvas_ellipse_new(RVAL2GCI(parent),
+    item = goo_canvas_ellipse_new(RVAL2GOOCANVASITEM(parent),
                                   NUM2DBL(center_x),
                                   NUM2DBL(center_y),
                                   NUM2DBL(radius_x),

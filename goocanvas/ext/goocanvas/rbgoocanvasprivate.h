@@ -21,6 +21,7 @@
 #ifndef __RBGOOCANVASPRIVATE_H__
 #define __RBGOOCANVASPRIVATE_H__
 
+#include <rbgdk-pixbuf.h>
 #include "rbgoocanvas.h"
 
 void Init_goocanvas(void); /* Goo::Canvas */

@@ -29,19 +29,10 @@
 #include "rbgoo_canvasversion.h"
 #include "rbgoocanvasconversions.h"
 
-#define RVAL2GC(obj) GOO_CANVAS(RVAL2GOBJ(obj))
-#define RVAL2GCI(obj) GOO_CANVAS_ITEM(RVAL2GOBJ(obj))
-#define RVAL2GCS(obj) GOO_CANVAS_STYLE(RVAL2GOBJ(obj))
-
-#define RVAL2GCPOINTS(obj) \
-    ((GooCanvasPoints *)(RVAL2BOXED(obj, GOO_TYPE_CANVAS_POINTS)))
-
 #define RVAL2GCBOUNDS(obj, bounds)              \
     (ruby_to_goo_canvas_bounds(obj, bounds))
 
-#define RVAL2GTK_WIDGET(obj) GTK_WIDGET(RVAL2GOBJ(obj))
-
-#define RVAL2GDK_PIXBUF(obj) GDK_PIXBUF(RVAL2GOBJ(obj))
+#define RVAL2GTKWIDGET(obj) GTK_WIDGET(RVAL2GOBJ(obj))
 
 #define RB_GOO_CANVAS_ITEM_INITIALIZE(obj, item) \
     (rb_goo_canvas_initialize_item_object(obj, GOO_CANVAS_ITEM(item)))

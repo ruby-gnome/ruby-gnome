@@ -28,7 +28,7 @@ rg_initialize(VALUE self, VALUE parent, VALUE string,
                        VALUE x, VALUE y, VALUE width, VALUE anchor)
 {
     GooCanvasItem *item;
-    item = goo_canvas_text_new(RVAL2GCI(parent),
+    item = goo_canvas_text_new(RVAL2GOOCANVASITEM(parent),
                                NIL_P(string) ? NULL : StringValueCStr(string),
                                NUM2DBL(x),
                                NUM2DBL(y),
