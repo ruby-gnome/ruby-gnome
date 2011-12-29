@@ -24,8 +24,8 @@
 #ifdef PANGO_ENABLE_BACKEND
 
 #define RG_TARGET_NAMESPACE cFontsetSimple
-#define _SELF(self) (PANGO_FONTSET_SIMPLE(RVAL2GOBJ(self)))
-#define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
+#define _SELF(self) (RVAL2PANGOFONTSETSIMPLE(self))
+#define RVAL2LANG(v) (RVAL2PANGOLANGUAGE(v))
 
 static VALUE
 rg_initialize(VALUE self, VALUE lang)
@@ -37,7 +37,7 @@ rg_initialize(VALUE self, VALUE lang)
 static VALUE
 rg_append(VALUE self, VALUE font)
 {
-    pango_fontset_simple_append(_SELF(self), PANGO_FONT(RVAL2GOBJ(font)));
+    pango_fontset_simple_append(_SELF(self), RVAL2PANGOFONT(font));
     return self;
 }
 

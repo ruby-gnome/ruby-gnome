@@ -51,7 +51,7 @@ pango_script_iter_get_type(void)
 /**********************************/
 
 #define RG_TARGET_NAMESPACE cScriptIter
-#define _SELF(r) ((PangoScriptIter*)RVAL2BOXED(r, PANGO_TYPE_SCRIPT_ITER))
+#define _SELF(r) (RVAL2PANGOSCRIPTITER(r))
 
 static VALUE
 rg_initialize(VALUE self, VALUE text)
@@ -74,7 +74,7 @@ rg_range(VALUE self)
     pango_script_iter_get_range(_SELF(self), &start, &end, &script);
 
     return rb_ary_new3(3, CSTR2RVAL(start), CSTR2RVAL(end), 
-                       GENUM2RVAL(script, PANGO_TYPE_SCRIPT));
+                       PANGOSCRIPT2RVAL(script));
 }
 
 static VALUE

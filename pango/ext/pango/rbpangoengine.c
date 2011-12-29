@@ -23,7 +23,7 @@
 
 #ifdef PANGO_TYPE_ENGINE
 
-#define _SELF(self) (PANGO_ENGINE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGOENGINE(self))
 
 /* FIXME
 static VALUE

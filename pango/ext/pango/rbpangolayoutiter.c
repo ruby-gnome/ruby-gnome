@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cLayoutIter
-#define _SELF(r) ((PangoLayoutIter*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_ITER))
+#define _SELF(r) (RVAL2PANGOLAYOUTITER(r))
 
 /**********************************/
 #ifndef HAVE_PANGO_LAYOUT_ITER_GET_TYPE
@@ -92,13 +92,13 @@ static VALUE
 rg_run(VALUE self)
 {
     PangoLayoutRun* run = pango_layout_iter_get_run(_SELF(self));
-    return BOXED2RVAL(run, PANGO_TYPE_GLYPH_ITEM);
+    return PANGOGLYPHITEM2RVAL(run);
 }
 
 static VALUE
 rg_line(VALUE self)
 {
-    return BOXED2RVAL(pango_layout_iter_get_line(_SELF(self)), PANGO_TYPE_LAYOUT_LINE);
+    return PANGOLAYOUTLINE2RVAL(pango_layout_iter_get_line(_SELF(self)));
 }
 
 static VALUE
@@ -107,7 +107,7 @@ rg_char_extents(VALUE self)
     PangoRectangle logical_rect;
 
     pango_layout_iter_get_char_extents(_SELF(self), &logical_rect);
-    return BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE);
+    return PANGORECTANGLE2RVAL(&logical_rect);
 }
 
 static VALUE
@@ -117,8 +117,8 @@ rg_cluster_extents(VALUE self)
 
     pango_layout_iter_get_cluster_extents(_SELF(self), &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 
 static VALUE
@@ -128,8 +128,8 @@ rg_run_extents(VALUE self)
 
     pango_layout_iter_get_run_extents(_SELF(self), &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 
 static VALUE
@@ -147,8 +147,8 @@ rg_line_extents(VALUE self)
 
     pango_layout_iter_get_line_extents(_SELF(self), &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 static VALUE
 rg_layout_extents(VALUE self)
@@ -157,8 +157,8 @@ rg_layout_extents(VALUE self)
 
     pango_layout_iter_get_layout_extents(_SELF(self), &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 
 void

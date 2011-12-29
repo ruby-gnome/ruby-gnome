@@ -23,7 +23,7 @@
 
 #if PANGO_CHECK_VERSION(1,2,0)
 #define RG_TARGET_NAMESPACE cGlyphItem
-#define _SELF(r) ((PangoGlyphItem*)RVAL2BOXED(r, PANGO_TYPE_GLYPH_ITEM))
+#define _SELF(r) (RVAL2PANGOGLYPHITEM(r))
 
 /**********************************/
 #ifndef HAVE_PANGO_GLYPH_ITEM_GET_TYPE
@@ -67,33 +67,33 @@ static VALUE
 rg_item(VALUE self)
 {
     PangoItem* item = _SELF(self)->item;
-    return BOXED2RVAL(item, PANGO_TYPE_ITEM);
+    return PANGOITEM2RVAL(item);
 }
 
 static VALUE
 rg_glyphs(VALUE self)
 {
     PangoGlyphString* glyphs = _SELF(self)->glyphs;
-    return BOXED2RVAL(glyphs, PANGO_TYPE_GLYPH_STRING);
+    return PANGOGLYPHSTRING2RVAL(glyphs);
 }
 
 static VALUE
 rg_split(VALUE self, VALUE text, VALUE split_index)
 {
-    return BOXED2RVAL(pango_glyph_item_split(_SELF(self), RVAL2CSTR(text),
-                                             NUM2INT(split_index)), PANGO_TYPE_GLYPH_ITEM);
+    return PANGOGLYPHITEM2RVAL(pango_glyph_item_split(_SELF(self), RVAL2CSTR(text),
+                                                      NUM2INT(split_index)));
 }
 
 static VALUE
 rg_appy_attrs(VALUE self, VALUE text, VALUE attrs)
 {
     GSList* list = pango_glyph_item_apply_attrs(_SELF(self), RVAL2CSTR(text),
-                                                (PangoAttrList*)RVAL2BOXED(attrs, PANGO_TYPE_ATTR_LIST));
+                                                RVAL2PANGOATTRLIST(attrs));
 
     VALUE ret = rb_ary_new();
 
     while (list) {
-        rb_ary_push(ret, BOXED2RVAL(list->data, PANGO_TYPE_GLYPH_ITEM));
+        rb_ary_push(ret, PANGOGLYPHITEM2RVAL(list->data));
         pango_glyph_item_free(list->data); 
         list = list->next;
     }
@@ -107,7 +107,7 @@ static VALUE
 rg_letter_space(VALUE self, VALUE text, VALUE log_attrs, VALUE letter_spacing)
 {
     pango_glyph_item_letter_space(_SELF(self), RVAL2CSTR(text),
-                                  (PangoLogAttr*)RVAL2BOXED(log_attrs, PANGO_TYPE_LOG_ATTR),
+                                  RVAL2PANGOLOGATTR(log_attrs),
                                   NUM2INT(letter_spacing));
     return self;
 }

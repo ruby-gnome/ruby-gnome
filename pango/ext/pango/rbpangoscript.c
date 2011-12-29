@@ -23,19 +23,19 @@
 
 #if PANGO_CHECK_VERSION(1,4,0)
 #define RG_TARGET_NAMESPACE cScript
-#define _SELF(r) (RVAL2GENUM(r, PANGO_TYPE_SCRIPT))
+#define _SELF(r) (RVAL2PANGOSCRIPT(r))
 
 static VALUE
 rg_s_for_unichar(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
-    return GENUM2RVAL(pango_script_for_unichar(NUM2UINT(ch)), PANGO_TYPE_SCRIPT);
+    return PANGOSCRIPT2RVAL(pango_script_for_unichar(NUM2UINT(ch)));
 }
 
 static VALUE
 rg_sample_language(VALUE self)
 {
     PangoLanguage* lang = pango_script_get_sample_language(_SELF(self));
-    return BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE);
+    return PANGOLANGUAGE2RVAL(lang);
 }
 
 #if PANGO_CHECK_VERSION(1,16,0)
@@ -50,20 +50,20 @@ rg_get_gravity(int argc, VALUE *argv, VALUE self)
 
     if (n == 2) {
         g = pango_gravity_get_for_script(_SELF(self),
-                                         RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY),
-                                         RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+                                         RVAL2PANGOGRAVITY(gravity),
+                                         RVAL2PANGOGRAVITYHINT(gravity_hint));
     } else {
 #  if PANGO_CHECK_VERSION(1,26,0)
         g = pango_gravity_get_for_script_and_width(_SELF(self),
                                                    RVAL2CBOOL(wide),
-                                                   RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY),
-                                                   RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+                                                   RVAL2PANGOGRAVITY(gravity),
+                                                   RVAL2PANGOGRAVITYHINT(gravity_hint));
 #  else
         rb_raise(rb_eArgError,
                  "the 3rd 'wide' argument requires Pango >= 1.26");
 #  endif
     }
-    return GENUM2RVAL(g, PANGO_TYPE_GRAVITY);
+    return PANGOGRAVITY2RVAL(g);
 }
 #endif
 

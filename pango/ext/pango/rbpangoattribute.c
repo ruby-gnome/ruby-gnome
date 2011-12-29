@@ -169,7 +169,7 @@ attr_string_value(VALUE self)
 static VALUE
 attr_language_value(VALUE self)
 {
-    return BOXED2RVAL(((PangoAttrLanguage*)RVAL2ATTR(self))->value, PANGO_TYPE_LANGUAGE);
+    return PANGOLANGUAGE2RVAL(((PangoAttrLanguage*)RVAL2ATTR(self))->value);
 }
 
 /* PangoAttrColor */
@@ -177,7 +177,7 @@ static VALUE
 attr_color_value(VALUE self)
 {
     PangoColor color = ((PangoAttrColor*)RVAL2ATTR(self))->color;
-    return BOXED2RVAL(&color, PANGO_TYPE_COLOR);
+    return PANGOCOLOR2RVAL(&color);
 }
 
 /* PangoAttrInt */
@@ -205,7 +205,7 @@ attr_bool_value(VALUE self)
 static VALUE
 attr_fontdesc_value(VALUE self)
 {
-    return BOXED2RVAL(((PangoAttrFontDesc*)RVAL2ATTR(self))->desc, PANGO_TYPE_FONT_DESCRIPTION);
+    return PANGOFONTDESCRIPTION2RVAL(((PangoAttrFontDesc*)RVAL2ATTR(self))->desc);
 }
 
 /* PangoAttrShape */
@@ -213,14 +213,14 @@ static VALUE
 attr_shape_ink_rect(VALUE self)
 {
     PangoRectangle rect = ((PangoAttrShape*)RVAL2ATTR(self))->ink_rect;
-    return BOXED2RVAL(&rect, PANGO_TYPE_RECTANGLE);
+    return PANGORECTANGLE2RVAL(&rect);
 }
 
 static VALUE
 attr_shape_logical_rect(VALUE self)
 {
     PangoRectangle rect = ((PangoAttrShape*)RVAL2ATTR(self))->logical_rect;
-    return BOXED2RVAL(&rect, PANGO_TYPE_RECTANGLE);
+    return PANGORECTANGLE2RVAL(&rect);
 }
 
 static VALUE
@@ -252,7 +252,7 @@ static VALUE
 attr_AttrLanguage_initialize(VALUE self, VALUE lang)
 {
     DATA_PTR(self) = pango_attr_language_new(
-                     (PangoLanguage*)RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE));
+                     RVAL2PANGOLANGUAGE(lang));
     return Qnil;
 }
 
@@ -287,14 +287,14 @@ attr_AttrAbsoluteSize_initialize(VALUE self, VALUE size)
 static VALUE
 attr_AttrGravity_initialize(VALUE self, VALUE gravity)
 {
-    DATA_PTR(self) = pango_attr_gravity_new(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
+    DATA_PTR(self) = pango_attr_gravity_new(RVAL2PANGOGRAVITY(gravity));
     return Qnil;
 }
 
 static VALUE
 attr_AttrGravityHint_initialize(VALUE self, VALUE gravity_hint)
 {
-    DATA_PTR(self) = pango_attr_gravity_hint_new(RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+    DATA_PTR(self) = pango_attr_gravity_hint_new(RVAL2PANGOGRAVITYHINT(gravity_hint));
     return Qnil;
 }
 #endif
@@ -302,10 +302,7 @@ attr_AttrGravityHint_initialize(VALUE self, VALUE gravity_hint)
 static VALUE
 attr_AttrFontDescription_initialize(VALUE self, VALUE fontdescription)
 {
-    DATA_PTR(self) = pango_attr_font_desc_new(
-        (PangoFontDescription*)RVAL2BOXED(fontdescription, 
-                                          PANGO_TYPE_FONT_DESCRIPTION));
-
+    DATA_PTR(self) = pango_attr_font_desc_new(RVAL2PANGOFONTDESCRIPTION(fontdescription));
     return Qnil;
 }
 
@@ -357,20 +354,20 @@ attr_AttrShape_initialize(int argc, VALUE *argv, VALUE self)
 
     if (NIL_P(data)){
         DATA_PTR(self) = pango_attr_shape_new(
-            (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
-            (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));
+            RVAL2PANGORECTANGLE(ink_rect),
+            RVAL2PANGORECTANGLE(logical_rect));
     } else {
 #if PANGO_CHECK_VERSION(1,8,0)
         G_RELATIVE(self, data);
         DATA_PTR(self) = pango_attr_shape_new_with_data(
-            (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
-            (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE),
+            RVAL2PANGORECTANGLE(ink_rect),
+            RVAL2PANGORECTANGLE(logical_rect),
             (gpointer)data, NULL, NULL);
 #else
         rb_warning("not supported in Pango-1.6.x. the 3rd parameter was ignored.");
         DATA_PTR(self) = pango_attr_shape_new(
-            (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE),
-            (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE));     
+            RVAL2PANGORECTANGLE(ink_rect),
+            RVAL2PANGORECTANGLE(logical_rect));     
 #endif
     }
 

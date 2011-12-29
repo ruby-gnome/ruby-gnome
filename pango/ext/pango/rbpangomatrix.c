@@ -24,7 +24,7 @@
 #if PANGO_CHECK_VERSION(1,6,0)
 
 #define RG_TARGET_NAMESPACE cMatrix
-#define _SELF(self) ((PangoMatrix*)(RVAL2BOXED(self, PANGO_TYPE_MATRIX)))
+#define _SELF(self) (RVAL2PANGOMATRIX(self))
 
 #define ATTR_FLOAT(name)\
 static VALUE \
@@ -88,7 +88,7 @@ rg_rotate_bang(VALUE self, VALUE degrees)
 static VALUE
 rg_gravity(VALUE self)
 {
-    return GENUM2RVAL(pango_gravity_get_for_matrix(_SELF(self)), PANGO_TYPE_GRAVITY);
+    return PANGOGRAVITY2RVAL(pango_gravity_get_for_matrix(_SELF(self)));
 }
 #endif
 

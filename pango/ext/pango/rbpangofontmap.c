@@ -22,9 +22,9 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFontMap
-#define _SELF(self) (PANGO_FONT_MAP(RVAL2GOBJ(self)))
-#define RVAL2DESC(d) ((PangoFontDescription*)RVAL2BOXED(d, PANGO_TYPE_FONT_DESCRIPTION))
-#define RVAL2LANG(l) ((PangoLanguage*)RVAL2BOXED(l, PANGO_TYPE_LANGUAGE))
+#define _SELF(self) (RVAL2PANGOFONTMAP(self))
+#define RVAL2DESC(d) (RVAL2PANGOFONTDESCRIPTION(d))
+#define RVAL2LANG(l) (RVAL2PANGOLANGUAGE(l))
 
 /*
 static VALUE
@@ -39,7 +39,7 @@ static VALUE
 rg_load_font(VALUE self, VALUE context, VALUE desc)
 {
     return GOBJ2RVAL(pango_font_map_load_font(_SELF(self), 
-                                              PANGO_CONTEXT(RVAL2GOBJ(context)),
+                                              RVAL2PANGOCONTEXT(context),
                                               RVAL2DESC(desc)));
 }
 
@@ -47,7 +47,7 @@ static VALUE
 rg_load_fontset(VALUE self, VALUE context, VALUE desc, VALUE lang)
 {
     return GOBJ2RVAL(pango_font_map_load_fontset(_SELF(self),
-                                                 PANGO_CONTEXT(RVAL2GOBJ(context)),
+                                                 RVAL2PANGOCONTEXT(context),
                                                  RVAL2DESC(desc),
                                                  RVAL2LANG(lang)));
 }

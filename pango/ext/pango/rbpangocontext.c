@@ -22,9 +22,9 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cContext
-#define _SELF(self) (PANGO_CONTEXT(RVAL2GOBJ(self)))
-#define RVAL2DESC(v) ((PangoFontDescription*)RVAL2BOXED(v, PANGO_TYPE_FONT_DESCRIPTION))
-#define RVAL2LANG(v) ((PangoLanguage*)RVAL2BOXED(v, PANGO_TYPE_LANGUAGE))
+#define _SELF(self) (RVAL2PANGOCONTEXT(self))
+#define RVAL2DESC(v) (RVAL2PANGOFONTDESCRIPTION(v))
+#define RVAL2LANG(v) (RVAL2PANGOLANGUAGE(v))
 
 static VALUE
 rg_itemize(int argc, VALUE *argv, VALUE self)
@@ -39,25 +39,25 @@ rg_itemize(int argc, VALUE *argv, VALUE self)
                              RVAL2CSTR(arg1),      /* text */ 
                              NUM2INT(arg2),        /* start_index */ 
                              NUM2INT(arg3),        /* length */
-                             (PangoAttrList*)RVAL2BOXED(arg4, PANGO_TYPE_ATTR_LIST), /* attrs */
-                             NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+                             RVAL2PANGOATTRLIST(arg4), /* attrs */
+                             NIL_P(arg5) ? NULL : RVAL2PANGOATTRITERATOR(arg5)); /* cached_iter */
     } else {
 #ifdef HAVE_PANGO_ITEMIZE_WITH_BASE_DIR
         list = pango_itemize_with_base_dir(_SELF(self), 
-                                           RVAL2GENUM(arg1, PANGO_TYPE_DIRECTION), /* base_dir */
+                                           RVAL2PANGODIRECTION(arg1), /* base_dir */
                                            RVAL2CSTR(arg2),      /* text */ 
                                            NUM2INT(arg3),        /* start_index */ 
                                            NUM2INT(arg4),        /* length */
-                                           (PangoAttrList*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_LIST), /* attrs */
-                                           NIL_P(arg6) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg6, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+                                           RVAL2PANGOATTRLIST(arg5), /* attrs */
+                                           NIL_P(arg6) ? NULL : RVAL2PANGOATTRITERATOR(arg6)); /* cached_iter */
 #else
         rb_warn("Pango::Context#itemize(base_dir, text, start_index, length, attrs, cached_iter) isn't supported on this environment.");
         list = pango_itemize(_SELF(self), 
                              RVAL2CSTR(arg1),      /* text */ 
                              NUM2INT(arg2),        /* start_index */ 
                              NUM2INT(arg3),        /* length */
-                             (PangoAttrList*)RVAL2BOXED(arg4, PANGO_TYPE_ATTR_LIST), /* attrs */
-                             NIL_P(arg5) ? NULL : (PangoAttrIterator*)RVAL2BOXED(arg5, PANGO_TYPE_ATTR_ITERATOR)); /* cached_iter */
+                             RVAL2PANGOATTRLIST(arg4), /* attrs */
+                             NIL_P(arg5) ? NULL : RVAL2PANGOATTRITERATOR(arg5)); /* cached_iter */
 #endif
     }
     return GLIST2ARY2F(list, PANGO_TYPE_ITEM);
@@ -78,7 +78,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_set_font_map(VALUE self, VALUE font_map)
 {
-    pango_context_set_font_map(_SELF(self), PANGO_FONT_MAP(RVAL2GOBJ(font_map)));
+    pango_context_set_font_map(_SELF(self), RVAL2PANGOFONTMAP(font_map));
     return self;
 }
 
@@ -95,7 +95,7 @@ static VALUE
 rg_font_description(VALUE self)
 {
     PangoFontDescription* ret = pango_context_get_font_description(_SELF(self));
-    return BOXED2RVAL(ret, PANGO_TYPE_FONT_DESCRIPTION);
+    return PANGOFONTDESCRIPTION2RVAL(ret);
 }
 
 static VALUE
@@ -109,7 +109,7 @@ static VALUE
 rg_language(VALUE self)
 {
     PangoLanguage* ret = pango_context_get_language(_SELF(self));
-    return BOXED2RVAL(ret, PANGO_TYPE_LANGUAGE);
+    return PANGOLANGUAGE2RVAL(ret);
 }
 
 static VALUE
@@ -123,13 +123,13 @@ rg_set_language(VALUE self, VALUE lang)
 static VALUE
 rg_base_dir(VALUE self)
 {
-    return GENUM2RVAL(pango_context_get_base_dir(_SELF(self)), PANGO_TYPE_DIRECTION);
+    return PANGODIRECTION2RVAL(pango_context_get_base_dir(_SELF(self)));
 }
 
 static VALUE
 rg_set_base_dir(VALUE self, VALUE direction)
 {
-    pango_context_set_base_dir(_SELF(self), RVAL2GENUM(direction, PANGO_TYPE_DIRECTION));
+    pango_context_set_base_dir(_SELF(self), RVAL2PANGODIRECTION(direction));
     return self;
 }
 
@@ -137,26 +137,26 @@ rg_set_base_dir(VALUE self, VALUE direction)
 static VALUE
 rg_base_gravity(VALUE self)
 {
-    return GENUM2RVAL(pango_context_get_base_gravity(_SELF(self)), PANGO_TYPE_GRAVITY);
+    return PANGOGRAVITY2RVAL(pango_context_get_base_gravity(_SELF(self)));
 }
 
 static VALUE
 rg_set_base_gravity(VALUE self, VALUE gravity)
 {
-    pango_context_set_base_gravity(_SELF(self), RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
+    pango_context_set_base_gravity(_SELF(self), RVAL2PANGOGRAVITY(gravity));
     return self;
 }
 
 static VALUE
 rg_gravity_hint(VALUE self)
 {
-    return GENUM2RVAL(pango_context_get_gravity_hint(_SELF(self)), PANGO_TYPE_GRAVITY_HINT);
+    return PANGOGRAVITYHINT2RVAL(pango_context_get_gravity_hint(_SELF(self)));
 }
 
 static VALUE
 rg_set_gravity_hint(VALUE self, VALUE gravity_hint)
 {
-    pango_context_set_gravity_hint(_SELF(self), RVAL2GENUM(gravity_hint, PANGO_TYPE_GRAVITY_HINT));
+    pango_context_set_gravity_hint(_SELF(self), RVAL2PANGOGRAVITYHINT(gravity_hint));
     return self;
 }
 #endif
@@ -166,14 +166,14 @@ static VALUE
 rg_matrix(VALUE self)
 {
     const PangoMatrix* matrix = pango_context_get_matrix(_SELF(self));
-    return BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX);
+    return PANGOMATRIX2RVAL((PangoMatrix*)matrix);
 }
 
 static VALUE
 rg_set_matrix(VALUE self, VALUE matrix)
 {
     pango_context_set_matrix(_SELF(self), 
-                             (PangoMatrix*)RVAL2BOXED(matrix, PANGO_TYPE_MATRIX));
+                             RVAL2PANGOMATRIX(matrix));
     return self;
 }
 #endif
@@ -198,10 +198,9 @@ rg_get_metrics(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &desc, &lang);
 
-    return BOXED2RVAL(pango_context_get_metrics(_SELF(self), 
-                                                RVAL2DESC(desc), 
-                                                NIL_P(lang) ? NULL : RVAL2LANG(lang)),
-                                                PANGO_TYPE_FONT_METRICS);
+    return PANGOFONTMETRICS2RVAL(pango_context_get_metrics(_SELF(self), 
+                                                           RVAL2DESC(desc), 
+                                                           NIL_P(lang) ? NULL : RVAL2LANG(lang)));
 }
 
 static VALUE
