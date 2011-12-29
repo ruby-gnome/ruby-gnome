@@ -19,11 +19,11 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #if RBGDK_PIXBUF_CHECK_VERSION(2,8,0)
 #define RG_TARGET_NAMESPACE cPixbufSimpleAnim
-#define _SELF(s) (GDK_PIXBUF_SIMPLE_ANIM(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2GDKPIXBUFSIMPLEANIM(s))
 
 static VALUE
 rg_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
@@ -36,7 +36,7 @@ rg_initialize(VALUE self, VALUE width, VALUE height, VALUE rate)
 static VALUE
 rg_add_frame(VALUE self, VALUE pixbuf)
 {
-    gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GOBJ(pixbuf));
+    gdk_pixbuf_simple_anim_add_frame(_SELF(self), RVAL2GDKPIXBUF(pixbuf));
     return self;
 }
 #endif

@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mText
-#define _SELF(s) (ATK_TEXT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKTEXT(s))
 
 static VALUE
 rg_get_text(VALUE self, VALUE start_offset, VALUE end_offset)
@@ -54,7 +54,7 @@ rg_get_text_after_offset(VALUE self, VALUE offset, VALUE boundary_type)
     gint start_offset, end_offset;
 
     ret = atk_text_get_text_after_offset(_SELF(self), NUM2INT(offset),
-                                         RVAL2GENUM(boundary_type, ATK_TYPE_TEXT_BOUNDARY),
+                                         RVAL2ATKTEXTBOUNDARY(boundary_type),
                                          &start_offset, &end_offset);
     result = rb_ary_new3(3, CSTR2RVAL(ret), 
                          INT2NUM(start_offset), INT2NUM(end_offset));
@@ -71,7 +71,7 @@ rg_get_text_at_offset(VALUE self, VALUE offset, VALUE boundary_type)
     gint start_offset, end_offset;
 
     ret = atk_text_get_text_at_offset(_SELF(self), NUM2INT(offset),
-                                      RVAL2GENUM(boundary_type, ATK_TYPE_TEXT_BOUNDARY),
+                                      RVAL2ATKTEXTBOUNDARY(boundary_type),
                                       &start_offset, &end_offset);
     result = rb_ary_new3(3, CSTR2RVAL(ret), 
                          INT2NUM(start_offset), INT2NUM(end_offset));
@@ -88,7 +88,7 @@ rg_get_text_before_offset(VALUE self, VALUE offset, VALUE boundary_type)
     gint start_offset, end_offset;
 
     ret = atk_text_get_text_before_offset(_SELF(self), NUM2INT(offset),
-                                          RVAL2GENUM(boundary_type, ATK_TYPE_TEXT_BOUNDARY),
+                                          RVAL2ATKTEXTBOUNDARY(boundary_type),
                                           &start_offset, &end_offset);
     result = rb_ary_new3(3, CSTR2RVAL(ret), 
                          INT2NUM(start_offset), INT2NUM(end_offset));
@@ -109,7 +109,7 @@ rg_get_character_extents(VALUE self, VALUE offset, VALUE coords)
     gint x, y, width, height;
     atk_text_get_character_extents(_SELF(self), NUM2INT(offset), 
                                    &x, &y, &width, &height, 
-                                   RVAL2GENUM(coords, ATK_TYPE_COORD_TYPE));
+                                   RVAL2ATKCOORDTYPE(coords));
     return rb_ary_new3(4, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
 }
 
@@ -165,7 +165,7 @@ rg_get_offset_at_point(VALUE self, VALUE x, VALUE y, VALUE coords)
 {
     return INT2NUM(atk_text_get_offset_at_point(_SELF(self), 
                                                 NUM2INT(x), NUM2INT(y),
-                                                RVAL2GENUM(coords, ATK_TYPE_COORD_TYPE)));
+                                                RVAL2ATKCOORDTYPE(coords)));
 }
 
 #ifdef HAVE_ATK_TEXT_GET_BOUNDED_RANGES
@@ -177,13 +177,13 @@ rg_get_bounded_ranges(VALUE self, VALUE rect, VALUE coord_type, VALUE x_clip_typ
     int i = 0;
     VALUE ary;
     ranges = atk_text_get_bounded_ranges(_SELF(self),
-                                         RVAL2BOXED(rect, ATK_TYPE_TEXT_RECTANGLE),
-                                         RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE),
-                                         RVAL2GENUM(x_clip_type, ATK_TYPE_TEXT_CLIP_TYPE),
-                                         RVAL2GENUM(y_clip_type, ATK_TYPE_TEXT_CLIP_TYPE));
+                                         RVAL2ATKTEXTRECTANGLE(rect),
+                                         RVAL2ATKCOORDTYPE(coord_type),
+                                         RVAL2ATKTEXTCLIPTYPE(x_clip_type),
+                                         RVAL2ATKTEXTCLIPTYPE(y_clip_type));
     ary = rb_ary_new();
     while(ranges[i]){
-        rb_ary_push(ary, BOXED2RVAL(ranges[i], ATK_TYPE_TEXT_RANGE));
+        rb_ary_push(ary, ATKTEXTRANGE2RVAL(ranges[i]));
         i++;
     }
 #ifdef HAVE_ATK_TEXT_FREE_RANGES
@@ -199,9 +199,9 @@ rg_get_range_extents(VALUE self, VALUE start_offset, VALUE end_offset, VALUE coo
     AtkTextRectangle rect;
     atk_text_get_range_extents(_SELF(self), NUM2INT(start_offset),
                                NUM2INT(end_offset), 
-                               RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE),
+                               RVAL2ATKCOORDTYPE(coord_type),
                                &rect);
-    return BOXED2RVAL(&rect, ATK_TYPE_TEXT_RECTANGLE);
+    return ATKTEXTRECTANGLE2RVAL(&rect);
 }
 
 /* Don't need this

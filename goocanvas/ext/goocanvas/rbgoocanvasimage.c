@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasImage
 
@@ -28,8 +28,8 @@ rg_initialize(VALUE self, VALUE parent, VALUE pixbuf,
                         VALUE x, VALUE y)
 {
     GooCanvasItem *item;
-    item = goo_canvas_image_new(RVAL2GCI(parent),
-                                RVAL2GDK_PIXBUF(pixbuf),
+    item = goo_canvas_image_new(RVAL2GOOCANVASITEM(parent),
+                                RVAL2GDKPIXBUF(pixbuf),
                                 NUM2DBL(x),
                                 NUM2DBL(y),
                                 NULL);

@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cNetworkAddress
-#define _SELF(value) G_NETWORK_ADDRESS(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GNETWORKADDRESS(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE hostname, VALUE port)

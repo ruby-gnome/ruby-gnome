@@ -19,10 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvas
-#define SELF(self) RVAL2GC(self)
+#define SELF(self) RVAL2GOOCANVAS(self)
 
 void
 rb_goo_canvas_initialize_item_object(VALUE obj, GooCanvasItem *item)
@@ -64,7 +64,7 @@ rg_grab_focus(int argc, VALUE *argv, VALUE self)
     VALUE item;
 
     if (rb_scan_args(argc, argv, "01", &item) == 1) {
-        goo_canvas_grab_focus(SELF(self), RVAL2GCI(item));
+        goo_canvas_grab_focus(SELF(self), RVAL2GOOCANVASITEM(item));
     } else {
         rb_call_super(0, 0);
     }
@@ -76,7 +76,7 @@ static VALUE
 rg_pointer_grab(VALUE self, VALUE item, VALUE event_mask, VALUE cursor, VALUE etime)
 {
     return GENUM2RVAL(
-        goo_canvas_pointer_grab(SELF(self), RVAL2GCI(item),
+        goo_canvas_pointer_grab(SELF(self), RVAL2GOOCANVASITEM(item),
                                 NUM2INT(event_mask),
                                 (GdkCursor *)RVAL2BOXED(cursor, GDK_TYPE_CURSOR),
                                 NIL_P(etime) ? 0 : NUM2UINT(etime)),
@@ -86,7 +86,7 @@ rg_pointer_grab(VALUE self, VALUE item, VALUE event_mask, VALUE cursor, VALUE et
 static VALUE
 rg_pointer_ungrab(VALUE self, VALUE item, VALUE etime)
 {
-    goo_canvas_pointer_ungrab(SELF(self), RVAL2GCI(item),
+    goo_canvas_pointer_ungrab(SELF(self), RVAL2GOOCANVASITEM(item),
                               NIL_P(etime) ? 0 : NUM2UINT(etime));
     return self;
 }

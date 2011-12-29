@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasEllipse
 
@@ -29,7 +29,7 @@ rg_initialize(VALUE self, VALUE parent,
                           VALUE radius_x, VALUE radius_y)
 {
     GooCanvasItem *item;
-    item = goo_canvas_ellipse_new(RVAL2GCI(parent),
+    item = goo_canvas_ellipse_new(RVAL2GOOCANVASITEM(parent),
                                   NUM2DBL(center_x),
                                   NUM2DBL(center_y),
                                   NUM2DBL(radius_x),

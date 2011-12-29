@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cIOModule
-#define _SELF(value) G_IO_MODULE(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GIOMODULE(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE filename)

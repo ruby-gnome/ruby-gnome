@@ -22,12 +22,12 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cState
-#define _SELF(s) (ATK_STATE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKSTATE(s))
 
 static VALUE
 rg_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_state_type_register(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
+    return ATKSTATETYPE2RVAL(atk_state_type_register(RVAL2CSTR(name)));
 }
 
 /* We don't need this.
@@ -38,7 +38,7 @@ G_CONST_RETURN gchar* atk_state_type_get_name
 static VALUE
 rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_state_type_for_name(RVAL2CSTR(name)), ATK_TYPE_STATE_TYPE);
+    return ATKSTATETYPE2RVAL(atk_state_type_for_name(RVAL2CSTR(name)));
 }
 
 void

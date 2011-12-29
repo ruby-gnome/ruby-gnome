@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFilenameCompleter
-#define _SELF(value) G_FILENAME_COMPLETER(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GFILENAMECOMPLETER(value)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

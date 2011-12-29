@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cFileIcon
-#define _SELF(value) G_FILE_ICON(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GFILEICON(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE file)

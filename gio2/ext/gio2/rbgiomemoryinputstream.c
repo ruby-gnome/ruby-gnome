@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cMemoryInputStream
-#define _SELF(value) G_MEMORY_INPUT_STREAM(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GMEMORYINPUTSTREAM(value)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

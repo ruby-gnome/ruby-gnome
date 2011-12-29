@@ -26,19 +26,19 @@
 static VALUE
 rg_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_text_attribute_register(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
+    return ATKTEXTATTRIBUTE2RVAL(atk_text_attribute_register(RVAL2CSTR(name)));
 }
 
 static VALUE
 rg_s_for_name(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_text_attribute_for_name(RVAL2CSTR(name)), ATK_TYPE_TEXT_ATTRIBUTE);
+    return ATKTEXTATTRIBUTE2RVAL(atk_text_attribute_for_name(RVAL2CSTR(name)));
 }
 
 static VALUE
 rg_get_value(VALUE self, VALUE index)
 {
-    return CSTR2RVAL(atk_text_attribute_get_value(RVAL2GENUM(self, ATK_TYPE_TEXT_ATTRIBUTE), 
+    return CSTR2RVAL(atk_text_attribute_get_value(RVAL2ATKTEXTATTRIBUTE(self), 
                                                   NUM2INT(index)));
 }
 

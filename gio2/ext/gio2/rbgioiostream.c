@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cIOStream
-#define _SELF(value) G_IO_STREAM(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GIOSTREAM(value)
 
 static VALUE
 rg_close(VALUE self, VALUE cancellable)

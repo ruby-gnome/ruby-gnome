@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mValue
-#define _SELF(s) (ATK_VALUE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKVALUE(s))
 
 static VALUE
 rg_current(VALUE self)

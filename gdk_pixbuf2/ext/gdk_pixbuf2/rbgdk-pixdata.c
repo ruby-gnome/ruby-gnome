@@ -19,12 +19,11 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 
 #define GDK_TYPE_PIXDATA (gdk_pixdata_get_type())
 #define RG_TARGET_NAMESPACE cPixdata
-#define _SELF(s) ((GdkPixdata*)(RVAL2BOXED(s, GDK_TYPE_PIXDATA)))
-#define PIXDATA2RVAL(pix) (BOXED2RVAL(pix, GDK_TYPE_PIXDATA))
+#define _SELF(s) (RVAL2GDKPIXDATA(s))
 
 static ID id_pixdata;
 
@@ -54,8 +53,8 @@ static VALUE
 rg_s_from_pixbuf(G_GNUC_UNUSED VALUE self, VALUE pixbuf, VALUE use_rle)
 {
     GdkPixdata pixdata;
-    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GOBJ(pixbuf), RVAL2CBOOL(use_rle));
-    VALUE ret = PIXDATA2RVAL(&pixdata);
+    gpointer rle_data = gdk_pixdata_from_pixbuf(&pixdata, RVAL2GDKPIXBUF(pixbuf), RVAL2CBOOL(use_rle));
+    VALUE ret = GDKPIXDATA2RVAL(&pixdata);
     if (use_rle){
         /* need to manage the returned value */
         rb_ivar_set(ret, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, rle_data));
@@ -102,7 +101,7 @@ rg_s_deserialize(VALUE self, VALUE rbstream)
     /* need to manage the returned value */
     rb_ivar_set(self, id_pixdata, Data_Wrap_Struct(rb_cData, NULL, g_free, stream));
 
-    return PIXDATA2RVAL(&pixdata);
+    return GDKPIXDATA2RVAL(&pixdata);
 }
 
 static VALUE

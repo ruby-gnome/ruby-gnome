@@ -25,7 +25,7 @@
 #include <gio/gfiledescriptorbased.h>
 
 #define RG_TARGET_NAMESPACE mFileDescriptorBased
-#define _SELF(value) G_FILE_DESCRIPTOR_BASED(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GFILEDESCRIPTORBASED(value)
 
 static VALUE
 rg_fd(VALUE self)

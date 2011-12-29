@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasPolyline
 
@@ -27,7 +27,7 @@ static VALUE
 rg_initialize(VALUE self, VALUE parent, VALUE close_path)
 {
     GooCanvasItem *item;
-    item = goo_canvas_polyline_new(RVAL2GCI(parent), RTEST(close_path), 0, NULL);
+    item = goo_canvas_polyline_new(RVAL2GOOCANVASITEM(parent), RTEST(close_path), 0, NULL);
     RB_GOO_CANVAS_ITEM_INITIALIZE(self, item);
     G_CHILD_ADD(parent, self);
     return Qnil;

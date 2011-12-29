@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mComponent
-#define _SELF(s) (ATK_COMPONENT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKCOMPONENT(s))
 
 /*
 static void
@@ -45,7 +45,7 @@ rg_contains_p(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 {
     return CBOOL2RVAL(atk_component_contains(_SELF(self),
                                              NUM2INT(x), NUM2INT(y),
-                                             RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE)));
+                                             RVAL2ATKCOORDTYPE(coord_type)));
 }
 
 static VALUE
@@ -53,7 +53,7 @@ rg_get_extents(VALUE self, VALUE coord_type)
 {
     gint x, y, width, height; 
     atk_component_get_extents(_SELF(self), &x, &y, &width, &height,
-                              RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+                              RVAL2ATKCOORDTYPE(coord_type));
     return rb_ary_new3(4, INT2NUM(x), INT2NUM(y), INT2NUM(width), INT2NUM(height));
 }
 
@@ -61,7 +61,7 @@ rg_get_extents(VALUE self, VALUE coord_type)
 static VALUE
 rg_layer(VALUE self)
 {
-    return GENUM2RVAL(atk_component_get_layer(_SELF(self)), ATK_TYPE_LAYER);
+    return ATKLAYER2RVAL(atk_component_get_layer(_SELF(self)));
 }
 #endif
 
@@ -78,7 +78,7 @@ rg_position(VALUE self, VALUE coord_type)
 {
     gint x, y;
     atk_component_get_position(_SELF(self), &x, &y,
-                               RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+                               RVAL2ATKCOORDTYPE(coord_type));
     return rb_assoc_new(INT2NUM(x), INT2NUM(y));
 }
 
@@ -102,7 +102,7 @@ rg_ref_accessible_at_point(VALUE self, VALUE x, VALUE y, VALUE coord_type)
     return GOBJ2RVAL(atk_component_ref_accessible_at_point(
                          _SELF(self),
                          NUM2INT(x), NUM2INT(y),
-                         RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE)));
+                         RVAL2ATKCOORDTYPE(coord_type)));
 }
 
 static VALUE
@@ -118,7 +118,7 @@ rg_set_extents(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height, VALUE co
     gboolean ret = atk_component_set_extents(_SELF(self),
                                              NUM2INT(x), NUM2INT(y),
                                              NUM2INT(width), NUM2INT(height),
-                                             RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+                                             RVAL2ATKCOORDTYPE(coord_type));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set extents");
     return self;
 }
@@ -128,7 +128,7 @@ rg_set_position(VALUE self, VALUE x, VALUE y, VALUE coord_type)
 {
     gboolean ret = atk_component_set_position(_SELF(self),
                                               NUM2INT(x), NUM2INT(y),
-                                              RVAL2GENUM(coord_type, ATK_TYPE_COORD_TYPE));
+                                              RVAL2ATKCOORDTYPE(coord_type));
     if (! ret) rb_raise(rb_eRuntimeError, "Can't set the position");
     return self;
 }

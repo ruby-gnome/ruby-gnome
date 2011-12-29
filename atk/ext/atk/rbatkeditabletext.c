@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mEditableText
-#define _SELF(s) (ATK_EDITABLE_TEXT(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKEDITABLETEXT(s))
 
 struct rval2atkattributegslist_args {
     VALUE ary;

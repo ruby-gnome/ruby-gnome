@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk-pixbuf.h"
+#include "rbgdk-pixbuf2private.h"
 #if RBGDK_PIXBUF_CHECK_VERSION(2,2,0)
 
 #ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
@@ -27,7 +27,7 @@
 #endif
 
 #define RG_TARGET_NAMESPACE cPixbufFormat
-#define _SELF(r) ((GdkPixbufFormat*)RVAL2BOXED(r, GDK_TYPE_PIXBUF_FORMAT))
+#define _SELF(r) (RVAL2GDKPIXBUFFORMAT(r))
 
 /**********************************/
 static GdkPixbufFormat*

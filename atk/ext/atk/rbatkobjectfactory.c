@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cObjectFactory
-#define _SELF(s) (ATK_OBJECT_FACTORY(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKOBJECTFACTORY(s))
 
 static VALUE
 rg_create_accessible(VALUE self, VALUE obj)

@@ -19,10 +19,10 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgoocanvas.h"
+#include "rbgoocanvasprivate.h"
 
 #define RG_TARGET_NAMESPACE cCanvasItem
-#define SELF(self) RVAL2GCI(self)
+#define SELF(self) RVAL2GOOCANVASITEM(self)
 
 static VALUE
 rg_rotate(VALUE self, VALUE degrees, VALUE cx, VALUE cy)
@@ -144,7 +144,7 @@ rg_stop_animation(VALUE self)
 static VALUE
 rg_set_style(VALUE self, VALUE style)
 {
-    goo_canvas_item_set_style(SELF(self), RVAL2GCS(style));
+    goo_canvas_item_set_style(SELF(self), RVAL2GOOCANVASSTYLE(style));
     return self;
 }
 

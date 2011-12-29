@@ -25,7 +25,7 @@
 #include <gio/gunixinputstream.h>
 
 #define RG_TARGET_NAMESPACE cUnixInputStream
-#define _SELF(value) G_UNIX_INPUT_STREAM(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GUNIXINPUTSTREAM(value)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

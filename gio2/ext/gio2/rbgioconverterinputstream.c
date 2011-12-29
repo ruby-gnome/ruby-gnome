@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cConverterInputStream
-#define _SELF(value) G_CONVERTER_INPUT_STREAM(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GCONVERTERINPUTSTREAM(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE base_stream, VALUE converter)

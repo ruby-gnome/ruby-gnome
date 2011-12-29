@@ -95,7 +95,7 @@ static VALUE
 rg_notify_state_change(VALUE self, VALUE state, VALUE value)
 {
     atk_object_notify_state_change(_SELF(self), 
-                                   RVAL2GENUM(state, ATK_TYPE_STATE_TYPE),
+                                   RVAL2ATKSTATETYPE(state),
                                    RVAL2CBOOL(value));
     return self;
 }
@@ -111,7 +111,7 @@ rg_add_relationship(VALUE self, VALUE relationship, VALUE target)
 {
     return CBOOL2RVAL(atk_object_add_relationship(
                           _SELF(self), 
-                          RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE),
+                          RVAL2ATKRELATIONTYPE(relationship),
                           _SELF(target)));
 }
 #endif
@@ -122,7 +122,7 @@ rg_remove_relationship(VALUE self, VALUE relationship, VALUE target)
 {
     return CBOOL2RVAL(atk_object_remove_relationship(
                           _SELF(self), 
-                          RVAL2GENUM(relationship, ATK_TYPE_RELATION_TYPE),
+                          RVAL2ATKRELATIONTYPE(relationship),
                           _SELF(target)));
 }
 #endif

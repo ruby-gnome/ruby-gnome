@@ -22,12 +22,12 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE cRelation
-#define _SELF(s) (ATK_RELATION(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKRELATION(s))
 
 static VALUE
 rg_s_type_register(G_GNUC_UNUSED VALUE self, VALUE name)
 {
-    return GENUM2RVAL(atk_relation_type_register(RVAL2CSTR(name)), ATK_TYPE_RELATION_TYPE);
+    return ATKRELATIONTYPE2RVAL(atk_relation_type_register(RVAL2CSTR(name)));
 }
 
 struct rval2atkobjects_args {
@@ -43,7 +43,7 @@ rval2atkobjects_body(VALUE value)
     struct rval2atkobjects_args *args = (struct rval2atkobjects_args *)value;
 
     for (i = 0; i < args->n; i++)
-            args->result[i] = ATK_OBJECT(RVAL2GOBJ(RARRAY_PTR(args->ary)[i]));
+            args->result[i] = RVAL2ATKOBJECT(RARRAY_PTR(args->ary)[i]);
 
     return Qnil;
 }
@@ -59,7 +59,7 @@ rval2atkobjects_rescue(VALUE value)
 static VALUE
 rg_initialize(VALUE self, VALUE targets, VALUE rbrelationship)
 {
-    AtkRelationType relationship = RVAL2GENUM(rbrelationship, ATK_TYPE_RELATION_TYPE);
+    AtkRelationType relationship = RVAL2ATKRELATIONTYPE(rbrelationship);
     struct rval2atkobjects_args args;
     AtkRelation *relation;
 
@@ -83,7 +83,7 @@ rg_initialize(VALUE self, VALUE targets, VALUE rbrelationship)
 static VALUE
 rg_add_target(VALUE self, VALUE obj)
 {
-    atk_relation_add_target(_SELF(self), ATK_OBJECT(RVAL2GOBJ(obj)));
+    atk_relation_add_target(_SELF(self), RVAL2ATKOBJECT(obj));
     return self;
 }
 #endif

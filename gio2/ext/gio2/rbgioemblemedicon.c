@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cEmblemedIcon
-#define _SELF(value) G_EMBLEMED_ICON(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GEMBLEMEDICON(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE icon, VALUE emblem)

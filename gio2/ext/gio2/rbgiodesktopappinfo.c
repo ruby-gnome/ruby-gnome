@@ -25,7 +25,7 @@
 #include <gio/gdesktopappinfo.h>
 
 #define RG_TARGET_NAMESPACE cDesktopAppInfo
-#define _SELF(value) G_DESKTOP_APP_INFO(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GDESKTOPAPPINFO(value)
 
 static VALUE
 rg_s_new_from_filename(G_GNUC_UNUSED VALUE self, VALUE filename)

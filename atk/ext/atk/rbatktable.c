@@ -22,7 +22,7 @@
 #include "rbatkprivate.h"
 
 #define RG_TARGET_NAMESPACE mTable
-#define _SELF(s) (ATK_TABLE(RVAL2GOBJ(s)))
+#define _SELF(s) (RVAL2ATKTABLE(s))
 
 static VALUE
 rg_ref_at(VALUE self, VALUE row, VALUE column)
@@ -111,7 +111,7 @@ rg_summary(VALUE self)
 static VALUE
 rg_set_caption(VALUE self, VALUE caption)
 {
-    atk_table_set_caption(_SELF(self), ATK_OBJECT(RVAL2GOBJ(caption)));
+    atk_table_set_caption(_SELF(self), RVAL2ATKOBJECT(caption));
     return self;
 }
 
@@ -132,21 +132,21 @@ rg_set_column_description(VALUE self, VALUE column, VALUE description)
 static VALUE
 rg_set_row_header(VALUE self, VALUE row, VALUE header)
 {
-    atk_table_set_row_header(_SELF(self), NUM2INT(row), ATK_OBJECT(RVAL2GOBJ(header)));
+    atk_table_set_row_header(_SELF(self), NUM2INT(row), RVAL2ATKOBJECT(header));
     return self;
 }
 
 static VALUE
 rg_set_column_header(VALUE self, VALUE column, VALUE header)
 {
-    atk_table_set_column_header(_SELF(self), NUM2INT(column), ATK_OBJECT(RVAL2GOBJ(header)));
+    atk_table_set_column_header(_SELF(self), NUM2INT(column), RVAL2ATKOBJECT(header));
     return self;
 }
 
 static VALUE
 rg_set_summary(VALUE self, VALUE accessible)
 {
-    atk_table_set_summary(_SELF(self), ATK_OBJECT(RVAL2GOBJ(accessible)));
+    atk_table_set_summary(_SELF(self), RVAL2ATKOBJECT(accessible));
     return self;
 }
 

@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cSocketListener
-#define _SELF(value) G_SOCKET_LISTENER(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GSOCKETLISTENER(value)
 
 static VALUE
 rg_initialize(VALUE self)

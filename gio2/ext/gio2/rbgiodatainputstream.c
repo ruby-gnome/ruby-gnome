@@ -22,7 +22,7 @@
 #include "rbgio2private.h"
 
 #define RG_TARGET_NAMESPACE cDataInputStream
-#define _SELF(value) G_DATA_INPUT_STREAM(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GDATAINPUTSTREAM(value)
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

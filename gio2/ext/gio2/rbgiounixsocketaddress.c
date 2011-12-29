@@ -25,7 +25,7 @@
 #include <gio/gunixsocketaddress.h>
 
 #define RG_TARGET_NAMESPACE cUnixSocketAddress
-#define _SELF(value) G_UNIX_SOCKET_ADDRESS(RVAL2GOBJ(value))
+#define _SELF(value) RVAL2GUNIXSOCKETADDRESS(value)
 
 static VALUE
 rg_initialize(VALUE self, VALUE path)
