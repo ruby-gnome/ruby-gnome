@@ -1,7 +1,6 @@
 install-so:
-	$(INSTALL_DATA) $(srcdir)/rbgtk.h $(RUBYARCHDIR)
-	$(INSTALL_DATA) $(srcdir)/rbgtkconversions.h $(RUBYARCHDIR)
-	$(INSTALL_DATA) $(srcdir)/rbgtkmacros.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) $(srcdir)/rbgtk3.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) $(srcdir)/rbgtk3conversions.h $(RUBYARCHDIR)
 
 install:
 	if test -n "$(pkgconfigdir)"; then			\
