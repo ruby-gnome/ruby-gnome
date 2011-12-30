@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFontDescription
-#define _SELF(self) ((PangoFontDescription*)RVAL2BOXED(self, PANGO_TYPE_FONT_DESCRIPTION))
+#define _SELF(self) (RVAL2PANGOFONTDESCRIPTION(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -88,54 +88,54 @@ rg_family(VALUE self)
 static VALUE
 rg_set_style(VALUE self, VALUE style)
 {
-    pango_font_description_set_style(_SELF(self), RVAL2GENUM(style, PANGO_TYPE_STYLE));
+    pango_font_description_set_style(_SELF(self), RVAL2PANGOSTYLE(style));
     return self;
 }
 
 static VALUE
 rg_style(VALUE self)
 {
-    return GENUM2RVAL(pango_font_description_get_style(_SELF(self)), PANGO_TYPE_STYLE);
+    return PANGOSTYLE2RVAL(pango_font_description_get_style(_SELF(self)));
 }
 
 static VALUE
 rg_set_variant(VALUE self, VALUE variant)
 {
-    pango_font_description_set_variant(_SELF(self), RVAL2GENUM(variant, PANGO_TYPE_VARIANT));
+    pango_font_description_set_variant(_SELF(self), RVAL2PANGOVARIANT(variant));
     return self;
 }
 
 static VALUE
 rg_variant(VALUE self)
 {
-    return GENUM2RVAL(pango_font_description_get_variant(_SELF(self)), PANGO_TYPE_VARIANT);
+    return PANGOVARIANT2RVAL(pango_font_description_get_variant(_SELF(self)));
 }
 
 static VALUE
 rg_set_weight(VALUE self, VALUE weight)
 {
     pango_font_description_set_weight(_SELF(self),
-                      RVAL2GENUM(weight, PANGO_TYPE_WEIGHT));
+                      RVAL2PANGOWEIGHT(weight));
     return self;
 }
 
 static VALUE
 rg_weight(VALUE self)
 {
-    return GENUM2RVAL(pango_font_description_get_weight(_SELF(self)), PANGO_TYPE_WEIGHT);
+    return PANGOWEIGHT2RVAL(pango_font_description_get_weight(_SELF(self)));
 }
 
 static VALUE
 rg_set_stretch(VALUE self, VALUE stretch)
 {
-    pango_font_description_set_stretch(_SELF(self), RVAL2GENUM(stretch, PANGO_TYPE_STRETCH));
+    pango_font_description_set_stretch(_SELF(self), RVAL2PANGOSTRETCH(stretch));
     return self;
 }
 
 static VALUE
 rg_stretch(VALUE self)
 {
-    return GENUM2RVAL(pango_font_description_get_stretch(_SELF(self)), PANGO_TYPE_STRETCH);
+    return PANGOSTRETCH2RVAL(pango_font_description_get_stretch(_SELF(self)));
 }
 
 static VALUE
@@ -170,13 +170,13 @@ rg_size_is_absolute_p(VALUE self)
 static VALUE
 rg_gravity(VALUE self)
 {
-    return GENUM2RVAL(pango_font_description_get_gravity(_SELF(self)), PANGO_TYPE_GRAVITY);
+    return PANGOGRAVITY2RVAL(pango_font_description_get_gravity(_SELF(self)));
 }
 
 static VALUE
 rg_set_gravity(VALUE self, VALUE gravity)
 {
-    pango_font_description_set_gravity(_SELF(self), RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY));
+    pango_font_description_set_gravity(_SELF(self), RVAL2PANGOGRAVITY(gravity));
     return self;
 }
 #endif
@@ -184,13 +184,13 @@ rg_set_gravity(VALUE self, VALUE gravity)
 static VALUE
 rg_set_fields(VALUE self)
 {
-    return GFLAGS2RVAL(pango_font_description_get_set_fields(_SELF(self)), PANGO_TYPE_FONT_MASK);
+    return PANGOFONTMASK2RVAL(pango_font_description_get_set_fields(_SELF(self)));
 }
 
 static VALUE
 rg_unset_fields(VALUE self, VALUE to_unset)
 {
-    pango_font_description_unset_fields(_SELF(self), RVAL2GFLAGS(to_unset, PANGO_TYPE_FONT_MASK));
+    pango_font_description_unset_fields(_SELF(self), RVAL2PANGOFONTMASK(to_unset));
     return self;
 }
 

@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cLogAttr
-#define _SELF(s) ((PangoLogAttr*)RVAL2BOXED(s, PANGO_TYPE_LOG_ATTR))
+#define _SELF(s) (RVAL2PANGOLOGATTR(s))
 
 /**********************************/
 static PangoLogAttr*

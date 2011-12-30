@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFontset
-#define _SELF(self) (PANGO_FONTSET(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGOFONTSET(self))
 
 static ID id_call;
 
@@ -35,7 +35,7 @@ rg_get_font(VALUE self, VALUE wc)
 static VALUE
 rg_metrics(VALUE self)
 {
-    return BOXED2RVAL(pango_fontset_get_metrics(_SELF(self)), PANGO_TYPE_FONT_METRICS);
+    return PANGOFONTMETRICS2RVAL(pango_fontset_get_metrics(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)

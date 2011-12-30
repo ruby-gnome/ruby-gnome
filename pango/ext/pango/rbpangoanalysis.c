@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cAnalysis
-#define _SELF(s) ((PangoAnalysis*)RVAL2BOXED(s, PANGO_TYPE_ANALYSIS))
+#define _SELF(s) (RVAL2PANGOANALYSIS(s))
 
 /**********************************/
 static PangoAnalysis*
@@ -60,7 +60,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_set_shape_engine(VALUE self, VALUE engine)
 {
-    _SELF(self)->shape_engine = PANGO_ENGINE_SHAPE(RVAL2GOBJ(engine));
+    _SELF(self)->shape_engine = RVAL2PANGOENGINESHAPE(engine);
     return self;
 }
 static VALUE
@@ -82,7 +82,7 @@ rg_shape_engine(VALUE self)
 static VALUE
 rg_set_lang_engine(VALUE self, VALUE engine)
 {
-    _SELF(self)->lang_engine = PANGO_ENGINE_LANG(RVAL2GOBJ(engine));
+    _SELF(self)->lang_engine = RVAL2PANGOENGINELANG(engine);
     return self;
 }
 static VALUE
@@ -105,7 +105,7 @@ rg_lang_engine(VALUE self)
 static VALUE
 rg_set_font(VALUE self, VALUE font)
 {
-    _SELF(self)->font = PANGO_FONT(RVAL2GOBJ(font));
+    _SELF(self)->font = RVAL2PANGOFONT(font);
     return self;
 }
 
@@ -131,14 +131,14 @@ rg_level(VALUE self)
 static VALUE
 rg_set_language(VALUE self, VALUE lang)
 {
-    _SELF(self)->language = RVAL2BOXED(lang, PANGO_TYPE_LANGUAGE);
+    _SELF(self)->language = RVAL2PANGOLANGUAGE(lang);
     return self;
 }
 
 static VALUE
 rg_language(VALUE self)
 {
-    return BOXED2RVAL(_SELF(self)->language, PANGO_TYPE_LANGUAGE);
+    return PANGOLANGUAGE2RVAL(_SELF(self)->language);
 }
 
 struct ana_set_extra_attrs_args {

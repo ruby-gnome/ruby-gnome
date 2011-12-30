@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cLayoutLine
-#define _SELF(r) ((PangoLayoutLine*)RVAL2BOXED(r, PANGO_TYPE_LAYOUT_LINE))
+#define _SELF(r) (RVAL2PANGOLAYOUTLINE(r))
 
 /**********************************/
 #if !PANGO_CHECK_VERSION(1,9,0)
@@ -55,8 +55,8 @@ rg_extents(VALUE self)
 
     pango_layout_line_get_extents(_SELF(self), &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 
 static VALUE
@@ -66,8 +66,8 @@ rg_pixel_extents(VALUE self)
 
     pango_layout_line_get_pixel_extents(_SELF(self), &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 
 static VALUE
@@ -118,7 +118,7 @@ rg_layout(VALUE self)
 static VALUE
 rg_set_layout(VALUE self, VALUE val)
 {
-    _SELF(self)->layout = PANGO_LAYOUT(RVAL2GOBJ(val));
+    _SELF(self)->layout = RVAL2PANGOLAYOUT(val);
     return self;
 }
 
@@ -161,7 +161,7 @@ rg_runs(VALUE self)
         new_item.item = pango_item_copy(old_item->item);
         new_item.glyphs = pango_glyph_string_copy(old_item->glyphs);
 
-        rb_ary_push(ary, BOXED2RVAL(&new_item, PANGO_TYPE_GLYPH_ITEM));
+        rb_ary_push(ary, PANGOGLYPHITEM2RVAL(&new_item));
         list = list->next;
     }
     return ary;
@@ -183,8 +183,7 @@ layout_line_set_runs_body(VALUE value)
 
     for (i = 0; i < args->n; i++)
         args->result = g_slist_append(args->result,
-                                      RVAL2BOXED(RARRAY_PTR(args->ary)[i],
-                                                 PANGO_TYPE_GLYPH_ITEM));
+                                      RVAL2PANGOGLYPHITEM(RARRAY_PTR(args->ary)[i]));
 
     g_slist_free(args->line->runs);
     args->line->runs = args->result;

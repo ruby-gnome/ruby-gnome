@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cItem
-#define _SELF(self) ((PangoItem*)RVAL2BOXED(self, PANGO_TYPE_ITEM))
+#define _SELF(self) (RVAL2PANGOITEM(self))
 
 #define ATTR_INT(name)\
 static VALUE \
@@ -67,10 +67,9 @@ rg_initialize(VALUE self)
 static VALUE
 rg_split(VALUE self, VALUE split_index, VALUE split_offset)
 {
-    return BOXED2RVAL(pango_item_split(_SELF(self), 
-                                       NUM2INT(split_index), 
-                                       NUM2INT(split_offset)), 
-                      PANGO_TYPE_ITEM);
+    return PANGOITEM2RVAL(pango_item_split(_SELF(self), 
+                                           NUM2INT(split_index), 
+                                           NUM2INT(split_offset)));
 }
 /* Move to Pango module (rbpangomain.c)
 GList*      pango_reorder_items             (GList *logical_items);
@@ -84,13 +83,13 @@ static VALUE
 rg_analysis(VALUE self)
 {
     PangoAnalysis ana = _SELF(self)->analysis;
-    return BOXED2RVAL(&ana, PANGO_TYPE_ANALYSIS);
+    return PANGOANALYSIS2RVAL(&ana);
 }
 
 static VALUE
 rg_set_analysis(VALUE self, VALUE val)
 {
-    PangoAnalysis* ana = (PangoAnalysis*)RVAL2BOXED(val, PANGO_TYPE_ANALYSIS);
+    PangoAnalysis* ana = RVAL2PANGOANALYSIS(val);
     _SELF(self)->analysis = *ana;
     return self;
 }

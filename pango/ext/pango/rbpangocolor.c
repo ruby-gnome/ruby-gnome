@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cColor
-#define _SELF(self) ((PangoColor*)RVAL2BOXED(self, PANGO_TYPE_COLOR))
+#define _SELF(self) (RVAL2PANGOCOLOR(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)

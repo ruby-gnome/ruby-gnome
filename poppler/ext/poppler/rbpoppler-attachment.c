@@ -22,7 +22,7 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAttachment
-#define SELF(self) ((PopplerAttachment *)RVAL2GOBJ(self))
+#define SELF(self) (RVAL2POPPLERATTACHMENT(self))
 
 static ID id_call;
 

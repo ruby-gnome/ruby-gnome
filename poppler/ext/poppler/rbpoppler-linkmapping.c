@@ -23,17 +23,15 @@
 
 #define RG_TARGET_NAMESPACE cLinkMapping
 
-#define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
-
 void
 rectangle_set(PopplerRectangle *rect, VALUE rb_rect)
 {
-    *rect = *(RVAL2POPPLER_RECT(rb_rect));
+    *rect = *(RVAL2POPPLERRECTANGLE(rb_rect));
 }
 
 DEF_ACCESSOR_WITH_SETTER(link_mapping, area,
-                         RVAL2LM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_ACCESSOR(link_mapping, action, RVAL2LM,
+                         RVAL2POPPLERLINKMAPPING, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
+DEF_ACCESSOR(link_mapping, action, RVAL2POPPLERLINKMAPPING,
              POPPLERACTION2RVAL, RVAL2POPPLERACTION)
 
 void

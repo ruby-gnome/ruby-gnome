@@ -24,7 +24,7 @@
 static ID id_call;
 
 #define RG_TARGET_NAMESPACE cAttrList
-#define _SELF(self) ((PangoAttrList*)RVAL2BOXED(self, PANGO_TYPE_ATTR_LIST))
+#define _SELF(self) (RVAL2PANGOATTRLIST(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -73,17 +73,16 @@ rg_filter(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
-    return BOXED2RVAL(pango_attr_list_filter(_SELF(self), 
+    return PANGOATTRLIST2RVAL(pango_attr_list_filter(_SELF(self), 
                                              (PangoAttrFilterFunc)filter_func, 
-                                             (gpointer)func),
-                      PANGO_TYPE_ATTR_LIST);
+                                             (gpointer)func));
 }
 #endif
 
 static VALUE
 rg_iterator(VALUE self)
 {
-    return BOXED2RVAL(pango_attr_list_get_iterator(_SELF(self)), PANGO_TYPE_ATTR_ITERATOR);
+    return PANGOATTRITERATOR2RVAL(pango_attr_list_get_iterator(_SELF(self)));
 }
 
 void

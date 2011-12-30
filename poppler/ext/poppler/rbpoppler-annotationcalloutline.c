@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cAnnotation
 
-#define RVAL2LINE(obj) ((PopplerAnnotCalloutLine *)RVAL2BOXED(obj, POPPLER_TYPE_ANNOT_CALLOUT_LINE))
-
 static VALUE
 rg_initialize(VALUE self, VALUE multiline, VALUE x1, VALUE y1,
                               VALUE x2, VALUE y2, VALUE x3, VALUE y3)
@@ -44,20 +42,20 @@ rg_initialize(VALUE self, VALUE multiline, VALUE x1, VALUE y1,
     return Qnil;
 }
 
-DEF_ACCESSOR(annot_callout_line, multiline, RVAL2LINE, CBOOL2RVAL, RVAL2CBOOL)
-DEF_ACCESSOR(annot_callout_line, x1, RVAL2LINE, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(annot_callout_line, y1, RVAL2LINE, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(annot_callout_line, x2, RVAL2LINE, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(annot_callout_line, y2, RVAL2LINE, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(annot_callout_line, x3, RVAL2LINE, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(annot_callout_line, y3, RVAL2LINE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(annot_callout_line, multiline, RVAL2POPPLERANNOTCALLOUTLINE, CBOOL2RVAL, RVAL2CBOOL)
+DEF_ACCESSOR(annot_callout_line, x1, RVAL2POPPLERANNOTCALLOUTLINE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(annot_callout_line, y1, RVAL2POPPLERANNOTCALLOUTLINE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(annot_callout_line, x2, RVAL2POPPLERANNOTCALLOUTLINE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(annot_callout_line, y2, RVAL2POPPLERANNOTCALLOUTLINE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(annot_callout_line, x3, RVAL2POPPLERANNOTCALLOUTLINE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(annot_callout_line, y3, RVAL2POPPLERANNOTCALLOUTLINE, rb_float_new, NUM2DBL)
 
 static VALUE
 rg_to_a(VALUE self)
 {
     PopplerAnnotCalloutLine *line;
 
-    line = RVAL2LINE(self);
+    line = RVAL2POPPLERANNOTCALLOUTLINE(self);
     return rb_ary_new3(7,
                        CBOOL2RVAL(line->multiline),
                        rb_float_new(line->x1),
@@ -75,7 +73,7 @@ rg_inspect(VALUE self)
     gchar *info;
     PopplerAnnotCalloutLine *line;
 
-    line = RVAL2LINE(self);
+    line = RVAL2POPPLERANNOTCALLOUTLINE(self);
     inspected = rb_call_super(0, NULL);
     rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
     info = g_strdup_printf(": [%s, %g, %g, %g, %g, %g, %g]>",

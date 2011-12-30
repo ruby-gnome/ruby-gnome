@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cRectangle
-#define _SELF(s) ((PangoRectangle*)RVAL2BOXED(s, PANGO_TYPE_RECTANGLE))
+#define _SELF(s) (RVAL2PANGORECTANGLE(s))
 
 /**********************************/
 static PangoRectangle*

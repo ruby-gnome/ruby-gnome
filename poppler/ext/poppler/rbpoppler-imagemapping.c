@@ -23,17 +23,15 @@
 
 #define RG_TARGET_NAMESPACE cImageMapping
 
-#define RVAL2IM(obj) ((PopplerImageMapping *)RVAL2BOXED(obj, POPPLER_TYPE_IMAGE_MAPPING))
-
 DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
-                         RVAL2IM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_ACCESSOR(image_mapping, image_id, RVAL2IM, INT2NUM, NUM2INT)
+                         RVAL2POPPLERIMAGEMAPPING, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
+DEF_ACCESSOR(image_mapping, image_id, RVAL2POPPLERIMAGEMAPPING, INT2NUM, NUM2INT)
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 rg_image(VALUE self)
 {
     return rb_funcall(rb_iv_get(self, "@page"), rb_intern("get_image"),
-                        1, INT2NUM(RVAL2IM(self)->image_id));
+                        1, INT2NUM(RVAL2POPPLERIMAGEMAPPING(self)->image_id));
 }
 #endif
 

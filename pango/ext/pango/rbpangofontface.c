@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFontFace
-#define _SELF(self) (PANGO_FONT_FACE(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGOFONTFACE(self))
 
 static VALUE
 rg_name(VALUE self)
@@ -33,7 +33,7 @@ rg_name(VALUE self)
 static VALUE
 rg_describe(VALUE self)
 {
-    return BOXED2RVAL(pango_font_face_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
+    return PANGOFONTDESCRIPTION2RVAL(pango_font_face_describe(_SELF(self)));
 }
 
 #if PANGO_CHECK_VERSION(1,4,0)

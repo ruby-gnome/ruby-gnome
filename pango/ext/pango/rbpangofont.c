@@ -22,13 +22,13 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFont
-#define _SELF(self) (PANGO_FONT(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGOFONT(self))
 
 static VALUE
 rg_find_shaper(VALUE self, VALUE language, VALUE ch)
 {
     return GOBJ2RVAL(pango_font_find_shaper(_SELF(self), 
-                                            (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE),
+                                            RVAL2PANGOLANGUAGE(language),
                                             NUM2UINT(ch)));
 }
 
@@ -39,14 +39,13 @@ rg_describe(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &absolute_size);
 
     if (NIL_P(absolute_size) || ! RVAL2CBOOL(absolute_size)){
-        desc = BOXED2RVAL(pango_font_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
+        desc = PANGOFONTDESCRIPTION2RVAL(pango_font_describe(_SELF(self)));
     } else {
 #if PANGO_CHECK_VERSION(1,14,0)
-        desc = BOXED2RVAL(pango_font_describe_with_absolute_size(_SELF(self)), 
-                          PANGO_TYPE_FONT_DESCRIPTION);
+        desc = PANGOFONTDESCRIPTION2RVAL(pango_font_describe_with_absolute_size(_SELF(self)));
 #else
         rb_warning("Pango::Font#describe(absolute) has been supported since GTK+-2.10.x. Use Pango::Font#describe() instead."); 
-        desc = BOXED2RVAL(pango_font_describe(_SELF(self)), PANGO_TYPE_FONT_DESCRIPTION);
+        desc = PANGOFONTDESCRIPTION2RVAL(pango_font_describe(_SELF(self)));
 #endif
     }
     return desc;
@@ -56,8 +55,8 @@ static VALUE
 rg_get_coverage(VALUE self, VALUE language)
 {
     PangoCoverage* c = pango_font_get_coverage(_SELF(self), 
-                                               (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE));
-    return BOXED2RVAL(c, PANGO_TYPE_COVERAGE);
+                                               RVAL2PANGOLANGUAGE(language));
+    return PANGOCOVERAGE2RVAL(c);
 }
 
 static VALUE
@@ -68,8 +67,8 @@ rg_get_glyph_extents(VALUE self, VALUE glyph)
                                  NUM2UINT(glyph),
                                  &ink_rect, &logical_rect);
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 
 }
 
@@ -82,10 +81,9 @@ rg_metrics(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &language);
 
     if (!NIL_P(language))
-        lang = (PangoLanguage*)RVAL2BOXED(language, PANGO_TYPE_LANGUAGE);
+        lang = RVAL2PANGOLANGUAGE(language);
 
-    return BOXED2RVAL(pango_font_get_metrics(_SELF(self), lang), 
-                      PANGO_TYPE_FONT_METRICS);
+    return PANGOFONTMETRICS2RVAL(pango_font_get_metrics(_SELF(self), lang));
 }
 
 #if PANGO_CHECK_VERSION(1,9,0)

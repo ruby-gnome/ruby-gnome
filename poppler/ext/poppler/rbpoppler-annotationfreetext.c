@@ -22,21 +22,18 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAnnotationFreeText
-#define SELF(self) (POPPLER_ANNOT_FREE_TEXT(RVAL2GOBJ(self)))
-
-#define LINE2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_ANNOT_CALLOUT_LINE))
-#define QUADDING2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FREE_TEXT_QUADDING))
+#define SELF(self) (RVAL2POPPLERANNOTFREETEXT(self))
 
 static VALUE
 rg_quadding(VALUE self)
 {
-    return QUADDING2RVAL(poppler_annot_free_text_get_quadding(SELF(self)));
+    return POPPLERANNOTFREETEXTQUADDING2RVAL(poppler_annot_free_text_get_quadding(SELF(self)));
 }
 
 static VALUE
 rg_callout_line(VALUE self)
 {
-    return LINE2RVAL(poppler_annot_free_text_get_callout_line(SELF(self)));
+    return POPPLERANNOTCALLOUTLINE2RVAL(poppler_annot_free_text_get_callout_line(SELF(self)));
 }
 
 void

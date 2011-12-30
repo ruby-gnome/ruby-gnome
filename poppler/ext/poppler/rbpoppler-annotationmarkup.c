@@ -22,10 +22,7 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAnnotationMarkup
-#define SELF(self) (POPPLER_ANNOT_MARKUP(RVAL2GOBJ(self)))
-
-#define REPLY_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_MARKUP_REPLY_TYPE))
-#define DATA_TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_EXTERNAL_DATA_TYPE))
+#define SELF(self) (RVAL2POPPLERANNOTMARKUP(self))
 
 static ID id_new;
 static VALUE rb_cDate;
@@ -72,13 +69,13 @@ rg_subject(VALUE self)
 static VALUE
 rg_reply_to(VALUE self)
 {
-    return REPLY_TYPE2RVAL(poppler_annot_markup_get_reply_to(SELF(self)));
+    return POPPLERANNOTMARKUPREPLYTYPE2RVAL(poppler_annot_markup_get_reply_to(SELF(self)));
 }
 
 static VALUE
 rg_external_data(VALUE self)
 {
-    return DATA_TYPE2RVAL(poppler_annot_markup_get_external_data(SELF(self)));
+    return POPPLERANNOTEXTERNALDATATYPE2RVAL(poppler_annot_markup_get_external_data(SELF(self)));
 }
 
 void

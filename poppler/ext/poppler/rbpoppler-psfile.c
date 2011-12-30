@@ -30,7 +30,7 @@ rg_initialize(VALUE self, VALUE document, VALUE filename,
 {
     PopplerPSFile *ps_file;
 
-    ps_file = poppler_ps_file_new(RVAL2GOBJ(document), RVAL2CSTR(filename),
+    ps_file = poppler_ps_file_new(RVAL2POPPLERDOCUMENT(document), RVAL2CSTR(filename),
                                   NUM2INT(first_page), NUM2INT(n_pages));
 
     if (!ps_file)
@@ -43,7 +43,7 @@ rg_initialize(VALUE self, VALUE document, VALUE filename,
 static VALUE
 rg_set_paper_size(VALUE self, VALUE width, VALUE height)
 {
-    poppler_ps_file_set_paper_size(RVAL2GOBJ(self),
+    poppler_ps_file_set_paper_size(RVAL2POPPLERPSFILE(self),
                                    NUM2DBL(width), NUM2DBL(height));
     return Qnil;
 }
@@ -51,7 +51,7 @@ rg_set_paper_size(VALUE self, VALUE width, VALUE height)
 static VALUE
 rg_set_duplex(VALUE self, VALUE duplex)
 {
-    poppler_ps_file_set_duplex(RVAL2GOBJ(self), RVAL2CBOOL(duplex));
+    poppler_ps_file_set_duplex(RVAL2POPPLERPSFILE(self), RVAL2CBOOL(duplex));
     return Qnil;
 }
 

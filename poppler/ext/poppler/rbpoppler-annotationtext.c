@@ -22,10 +22,7 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAnnotationText
-#define SELF(self) (POPPLER_ANNOT_TEXT(RVAL2GOBJ(self)))
-
-#define TEXT_ICON2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_ICON))
-#define TEXT_STATE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_STATE))
+#define SELF(self) (RVAL2POPPLERANNOTTEXT(self))
 
 static VALUE
 rg_open_p(VALUE self)
@@ -39,14 +36,14 @@ rg_icon(VALUE self)
 #if POPPLER_CHECK_VERSION(0, 9, 0)
     return CSTR2RVAL_FREE(poppler_annot_text_get_icon(SELF(self)));
 #else
-    return TEXT_ICON2RVAL(poppler_annot_text_get_icon(SELF(self)));
+    return POPPLERANNOTTEXTICON2RVAL(poppler_annot_text_get_icon(SELF(self)));
 #endif
 }
 
 static VALUE
 rg_state(VALUE self)
 {
-    return TEXT_STATE2RVAL(poppler_annot_text_get_state(SELF(self)));
+    return POPPLERANNOTTEXTSTATE2RVAL(poppler_annot_text_get_state(SELF(self)));
 }
 
 void
