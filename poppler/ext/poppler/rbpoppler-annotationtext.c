@@ -22,10 +22,10 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAnnotationText
-#define SELF(self) (POPPLER_ANNOT_TEXT(RVAL2GOBJ(self)))
+#define SELF(self) (RVAL2POPPLERANNOTTEXT(self))
 
-#define TEXT_ICON2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_ICON))
-#define TEXT_STATE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TEXT_STATE))
+#define TEXT_ICON2RVAL(obj) (POPPLERANNOTTEXTICON2RVAL(obj))
+#define TEXT_STATE2RVAL(obj) (POPPLERANNOTTEXTSTATE2RVAL(obj))
 
 static VALUE
 rg_open_p(VALUE self)

@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cImageMapping
 
-#define RVAL2IM(obj) ((PopplerImageMapping *)RVAL2BOXED(obj, POPPLER_TYPE_IMAGE_MAPPING))
+#define RVAL2IM(obj) (RVAL2POPPLERIMAGEMAPPING(obj))
 
 DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
                          RVAL2IM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)

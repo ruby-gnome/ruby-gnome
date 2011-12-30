@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cFontsIter
 
-#define RVAL2FITER(obj) (RVAL2BOXED(obj, POPPLER_TYPE_FONTS_ITER))
+#define RVAL2FITER(obj) (RVAL2POPPLERFONTSITER(obj))
 
 #define CHECK_FITER_IS_VALID(iter) do {         \
     if (!RVAL2CBOOL(rg_valid_p(iter)))       \

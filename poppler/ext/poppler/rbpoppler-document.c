@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cDocument
 
-#define RVAL2DOC(obj) (POPPLER_DOCUMENT(RVAL2GOBJ(obj)))
+#define RVAL2DOC(obj) (RVAL2POPPLERDOCUMENT(obj))
 
 static ID id_new, id_pdf_data_p, id_ensure_uri;
 static VALUE cIndexIter;

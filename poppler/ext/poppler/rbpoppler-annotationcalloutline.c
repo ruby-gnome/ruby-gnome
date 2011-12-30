@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cAnnotation
 
-#define RVAL2LINE(obj) ((PopplerAnnotCalloutLine *)RVAL2BOXED(obj, POPPLER_TYPE_ANNOT_CALLOUT_LINE))
+#define RVAL2LINE(obj) (RVAL2POPPLERANNOTCALLOUTLINE(obj))
 
 static VALUE
 rg_initialize(VALUE self, VALUE multiline, VALUE x1, VALUE y1,

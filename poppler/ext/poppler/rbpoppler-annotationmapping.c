@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cAnnotationMapping
 
-#define RVAL2AM(obj) ((PopplerAnnotMapping *)RVAL2BOXED(obj, POPPLER_TYPE_ANNOT_MAPPING))
+#define RVAL2AM(obj) (RVAL2POPPLERANNOTMAPPING(obj))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)

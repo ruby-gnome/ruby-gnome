@@ -22,10 +22,10 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAnnotation
-#define SELF(self) (POPPLER_ANNOT(RVAL2GOBJ(self)))
+#define SELF(self) (RVAL2POPPLERANNOT(self))
 
-#define TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TYPE))
-#define FLAG2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FLAG))
+#define TYPE2RVAL(obj) (POPPLERANNOTTYPE2RVAL(obj))
+#define FLAG2RVAL(obj) (POPPLERANNOTFLAG2RVAL(obj))
 
 static VALUE
 rg_type(VALUE self)

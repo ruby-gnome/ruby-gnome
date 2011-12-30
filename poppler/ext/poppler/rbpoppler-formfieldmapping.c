@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cFormFieldMapping
 
-#define RVAL2FFM(obj) ((PopplerFormFieldMapping *)RVAL2BOXED(obj, POPPLER_TYPE_FORM_FIELD_MAPPING))
+#define RVAL2FFM(obj) (RVAL2POPPLERFORMFIELDMAPPING(obj))
 
 DEF_ACCESSOR_WITH_SETTER(form_field_mapping, area,
                          RVAL2FFM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)

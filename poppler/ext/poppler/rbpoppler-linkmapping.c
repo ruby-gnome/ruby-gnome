@@ -23,7 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cLinkMapping
 
-#define RVAL2LM(obj) ((PopplerLinkMapping *)RVAL2BOXED(obj, POPPLER_TYPE_LINK_MAPPING))
+#define RVAL2LM(obj) (RVAL2POPPLERLINKMAPPING(obj))
 
 void
 rectangle_set(PopplerRectangle *rect, VALUE rb_rect)

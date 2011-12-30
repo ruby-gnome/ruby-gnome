@@ -22,20 +22,20 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cPage
-#define SELF(self) (POPPLER_PAGE(RVAL2GOBJ(self)))
+#define SELF(self) (RVAL2POPPLERPAGE(self))
 
 #ifndef GDK_TYPE_REGION
 extern GType gdk_region_get_type(void);
 #  define GDK_TYPE_REGION (gdk_region_get_type())
 #endif
 
-#define GDK_REGION2RVAL(obj) (BOXED2RVAL(obj, GDK_TYPE_REGION))
-#define RVAL2GDK_PIXBUF(pixbuf) (GDK_PIXBUF(RVAL2GOBJ(pixbuf)))
+#define GDK_REGION2RVAL(obj) (GDKREGION2RVAL(obj))
+#define RVAL2GDK_PIXBUF(pixbuf) (RVAL2GDKPIXBUF(pixbuf))
 
-#define SEL_STYLE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_SELECTION_STYLE))
-#define RVAL2SEL_STYLE(obj) (RVAL2GENUM(obj, POPPLER_TYPE_SELECTION_STYLE))
+#define SEL_STYLE2RVAL(obj) (POPPLERSELECTIONSTYLE2RVAL(obj))
+#define RVAL2SEL_STYLE(obj) (RVAL2POPPLERSELECTIONSTYLE(obj))
 
-#define TRANS2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_PAGE_TRANSITION))
+#define TRANS2RVAL(obj) (POPPLERPAGETRANSITION2RVAL(obj))
 
 static VALUE cRectangle;
 static VALUE cPSFile;
@@ -361,7 +361,7 @@ rg_image_mapping(VALUE self)
         VALUE mapping;
 
         image_mapping = node->data;
-        mapping = BOXED2RVAL(image_mapping, POPPLER_TYPE_IMAGE_MAPPING);
+        mapping = POPPLERIMAGEMAPPING2RVAL(image_mapping);
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
         rb_iv_set(mapping, "@page", self);
 #endif
