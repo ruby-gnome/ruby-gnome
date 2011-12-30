@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cTabArray
-#define _SELF(self) ((PangoTabArray*)RVAL2BOXED(self, PANGO_TYPE_TAB_ARRAY))
+#define _SELF(self) (RVAL2PANGOTABARRAY(self))
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -40,7 +40,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (! NIL_P(attr_ary)){
         for (i = 0; i < RARRAY_LEN(attr_ary); i++) {
             pango_tab_array_set_tab(array, i, 
-                                    RVAL2GENUM(RARRAY_PTR(RARRAY_PTR(attr_ary)[i])[0], PANGO_TYPE_TAB_ALIGN),
+                                    RVAL2PANGOTABALIGN(RARRAY_PTR(RARRAY_PTR(attr_ary)[i])[0]),
                                     FIX2INT(RARRAY_PTR(RARRAY_PTR(attr_ary)[i])[1]));
         }
     }
@@ -71,7 +71,7 @@ rg_resize(VALUE self, VALUE size)
 static VALUE
 rg_set_tab(VALUE self, VALUE tab_index, VALUE align, VALUE location)
 {
-    pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), RVAL2GENUM(align, PANGO_TYPE_TAB_ALIGN),
+    pango_tab_array_set_tab(_SELF(self), NUM2INT(tab_index), RVAL2PANGOTABALIGN(align),
                             NUM2INT(location));
     return self;
 }
@@ -83,7 +83,7 @@ rg_get_tab(VALUE self, VALUE tab_index)
     gint location;
     pango_tab_array_get_tab(_SELF(self), NUM2INT(tab_index),
                             &align, &location);
-    return rb_ary_new3(2, GENUM2RVAL(align, PANGO_TYPE_TAB_ALIGN), INT2NUM(location));
+    return rb_ary_new3(2, PANGOTABALIGN2RVAL(align), INT2NUM(location));
 }
 
 static VALUE
@@ -98,7 +98,7 @@ rg_tabs(VALUE self)
     pango_tab_array_get_tabs(tab_array, &aligns, &locations);
 
     for (i = 0; i < pango_tab_array_get_size(tab_array); i++){
-        rb_ary_push(ary, rb_ary_new3(2, GENUM2RVAL(aligns[i], PANGO_TYPE_TAB_ALIGN), 
+        rb_ary_push(ary, rb_ary_new3(2, PANGOTABALIGN2RVAL(aligns[i]), 
                                      INT2NUM(locations[i])));
     }
     return ary;

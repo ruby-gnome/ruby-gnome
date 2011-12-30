@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cGlyphString
-#define _SELF(self) ((PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)))
+#define _SELF(self) (RVAL2PANGOGLYPHSTRING(self))
 
 static VALUE
 rg_initialize(VALUE self)
@@ -49,17 +49,17 @@ rg_extents(int argc, VALUE *argv, VALUE self)
 
     if (NIL_P(start_index)){
         pango_glyph_string_extents(_SELF(self), 
-                                   PANGO_FONT(RVAL2GOBJ(font)),
+                                   RVAL2PANGOFONT(font),
                                    &ink_rect, &logical_rect);
     } else {
         pango_glyph_string_extents_range(_SELF(self), 
                                          NUM2INT(start_index), NUM2INT(end_index),
-                                         PANGO_FONT(RVAL2GOBJ(font)),
+                                         RVAL2PANGOFONT(font),
                                          &ink_rect, &logical_rect);
     }
 
-    return rb_assoc_new(BOXED2RVAL(&ink_rect, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&logical_rect, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&ink_rect),
+                        PANGORECTANGLE2RVAL(&logical_rect));
 }
 
 #if PANGO_CHECK_VERSION(1,14,0)
@@ -81,7 +81,7 @@ rg_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE trailin
                                    * pango_glyph_string_index_to_x */
                                   (char *)RSTRING_PTR(text),
                                   RSTRING_LEN(text),
-                                  (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
+                                  RVAL2PANGOANALYSIS(analysis),
                                   NUM2INT(index), RVAL2CBOOL(trailing),
                                   &x_pos);
     return INT2NUM(x_pos);
@@ -99,7 +99,7 @@ rg_x_to_index(VALUE self, VALUE text, VALUE analysis, VALUE x_pos)
                                    * pango_glyph_string_index_to_x */
                                   (char *)RSTRING_PTR(text),
                                   RSTRING_LEN(text),
-                                  (PangoAnalysis*)RVAL2BOXED(analysis, PANGO_TYPE_ANALYSIS),
+                                  RVAL2PANGOANALYSIS(analysis),
                                   NUM2INT(x_pos),
                                   &index, &trailing);
     return rb_assoc_new(INT2NUM(index), CBOOL2RVAL(trailing));
@@ -131,7 +131,7 @@ rg_glyphs(VALUE self)
     VALUE ret = rb_ary_new();
     for (i = 0; i < _SELF(self)->num_glyphs; i++) {
         rb_ary_push(ret, 
-                    rb_assoc_new(BOXED2RVAL(glyphs[i], PANGO_TYPE_GLYPH_INFO),
+                    rb_assoc_new(PANGOGLYPHINFO2RVAL(glyphs[i]),
                                  INT2NUM(log_clusters[i])));
     }
     return ret;

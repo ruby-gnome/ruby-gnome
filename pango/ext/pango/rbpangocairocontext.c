@@ -30,16 +30,10 @@
 
 #define RG_TARGET_NAMESPACE rb_cCairo_Context
 
-#define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
-#define RVAL2LAYOUT(v) (PANGO_LAYOUT(RVAL2GOBJ(v)))
-#define RVAL2FONT(v) (PANGO_FONT(RVAL2GOBJ(v)))
-#define RVAL2GLYPH(v) ((PangoGlyphString*)(RVAL2BOXED(self, PANGO_TYPE_GLYPH_STRING)))
-#define RVAL2LINE(v) ((PangoLayoutLine*)RVAL2BOXED(v, PANGO_TYPE_LAYOUT_LINE))
-
 static VALUE
 rg_update_pango_context(VALUE self, VALUE context)
 {
-    pango_cairo_update_context(RVAL2CRCONTEXT(self), RVAL2CONTEXT(context));
+    pango_cairo_update_context(RVAL2CRCONTEXT(self), RVAL2PANGOCONTEXT(context));
     return self;
 }
 
@@ -53,7 +47,7 @@ rg_create_pango_layout(VALUE self)
 static VALUE
 rg_update_pango_layout(VALUE self, VALUE layout)
 {
-    pango_cairo_update_layout(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
+    pango_cairo_update_layout(RVAL2CRCONTEXT(self), RVAL2PANGOLAYOUT(layout));
     return self;
 }
 
@@ -62,22 +56,22 @@ static VALUE
 rg_show_pango_glyph_string(VALUE self, VALUE font, VALUE glyphs)
 {
     pango_cairo_show_glyph_string(RVAL2CRCONTEXT(self),
-                                  RVAL2FONT(font),
-                                  RVAL2GLYPH(glyphs));
+                                  RVAL2PANGOFONT(font),
+                                  RVAL2PANGOGLYPHSTRING(glyphs));
     return self;
 }
 
 static VALUE
 rg_show_pango_layout_line(VALUE self, VALUE line)
 {
-    pango_cairo_show_layout_line(RVAL2CRCONTEXT(self), RVAL2LINE(line));
+    pango_cairo_show_layout_line(RVAL2CRCONTEXT(self), RVAL2PANGOLAYOUTLINE(line));
     return self;
 }
 
 static VALUE
 rg_show_pango_layout(VALUE self, VALUE layout)
 {
-    pango_cairo_show_layout(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
+    pango_cairo_show_layout(RVAL2CRCONTEXT(self), RVAL2PANGOLAYOUT(layout));
     return self;
 }
 
@@ -97,22 +91,22 @@ static VALUE
 rg_pango_glyph_string_path(VALUE self, VALUE font, VALUE glyphs)
 {
     pango_cairo_glyph_string_path(RVAL2CRCONTEXT(self),
-                                  RVAL2FONT(font),
-                                  RVAL2GLYPH(glyphs));
+                                  RVAL2PANGOFONT(font),
+                                  RVAL2PANGOGLYPHSTRING(glyphs));
     return self;
 }
 
 static VALUE
 rg_pango_layout_line_path(VALUE self, VALUE line)
 {
-    pango_cairo_layout_line_path(RVAL2CRCONTEXT(self), RVAL2LINE(line));
+    pango_cairo_layout_line_path(RVAL2CRCONTEXT(self), RVAL2PANGOLAYOUTLINE(line));
     return self;
 }
 
 static VALUE
 rg_pango_layout_path(VALUE self, VALUE layout)
 {
-    pango_cairo_layout_path(RVAL2CRCONTEXT(self), RVAL2LAYOUT(layout));
+    pango_cairo_layout_path(RVAL2CRCONTEXT(self), RVAL2PANGOLAYOUT(layout));
     return self;
 }
 

@@ -22,15 +22,12 @@
 #include "rbpoppler-private.h"
 
 #define RG_TARGET_NAMESPACE cAnnotation
-#define SELF(self) (POPPLER_ANNOT(RVAL2GOBJ(self)))
-
-#define TYPE2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_TYPE))
-#define FLAG2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_ANNOT_FLAG))
+#define SELF(self) (RVAL2POPPLERANNOT(self))
 
 static VALUE
 rg_type(VALUE self)
 {
-    return TYPE2RVAL(poppler_annot_get_annot_type(SELF(self)));
+    return POPPLERANNOTTYPE2RVAL(poppler_annot_get_annot_type(SELF(self)));
 }
 
 static VALUE
@@ -54,7 +51,7 @@ rg_modified(VALUE self)
 static VALUE
 rg_flags(VALUE self)
 {
-    return FLAG2RVAL(poppler_annot_get_flags(SELF(self)));
+    return POPPLERANNOTFLAG2RVAL(poppler_annot_get_flags(SELF(self)));
 }
 
 static VALUE

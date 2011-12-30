@@ -25,7 +25,7 @@
 #ifdef CAIRO_AVAILABLE
 
 #define RG_TARGET_NAMESPACE cCairoFontMap
-#define _SELF(self) (PANGO_CAIRO_FONT_MAP(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGOCAIROFONTMAP(self))
 
 static VALUE
 rg_s_create(VALUE klass)

@@ -52,9 +52,6 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  include <rb_cairo.h>
 #endif
 
-#define POPPLER_RECT2RVAL(obj) (BOXED2RVAL(obj, POPPLER_TYPE_RECTANGLE))
-#define RVAL2POPPLER_RECT(obj) ((PopplerRectangle *)RVAL2BOXED(obj, POPPLER_TYPE_RECTANGLE))
-
 #ifdef POPPLER_TYPE_COLOR
 extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
 extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);

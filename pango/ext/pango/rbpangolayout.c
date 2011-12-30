@@ -22,13 +22,12 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cLayout
-#define _SELF(self) (PANGO_LAYOUT(RVAL2GOBJ(self)))
-#define RVAL2CONTEXT(v) (PANGO_CONTEXT(RVAL2GOBJ(v)))
+#define _SELF(self) (RVAL2PANGOLAYOUT(self))
 
 static VALUE
 rg_initialize(VALUE self, VALUE context)
 {
-    G_INITIALIZE(self, pango_layout_new(RVAL2CONTEXT(context)));
+    G_INITIALIZE(self, pango_layout_new(RVAL2PANGOCONTEXT(context)));
     return Qnil;
 }
 
@@ -104,14 +103,14 @@ static VALUE
 rg_set_attributes(VALUE self, VALUE attrs)
 {
     pango_layout_set_attributes(_SELF(self), 
-                                (PangoAttrList*)(RVAL2BOXED(attrs, PANGO_TYPE_ATTR_LIST)));
+                                RVAL2PANGOATTRLIST(attrs));
     return self;
 }
 
 static VALUE
 rg_attributes(VALUE self)
 {
-    return BOXED2RVAL(pango_layout_get_attributes(_SELF(self)), PANGO_TYPE_ATTR_LIST);
+    return PANGOATTRLIST2RVAL(pango_layout_get_attributes(_SELF(self)));
 }
 
 static VALUE
@@ -124,7 +123,7 @@ rg_set_font_description(VALUE self, VALUE rb_desc)
         desc = pango_font_description_from_string(RVAL2CSTR(rb_desc));
         desc_created = TRUE;
     } else {
-        desc = RVAL2BOXED(rb_desc, PANGO_TYPE_FONT_DESCRIPTION);
+        desc = RVAL2PANGOFONTDESCRIPTION(rb_desc);
     }
 
     pango_layout_set_font_description(_SELF(self), desc);
@@ -140,7 +139,7 @@ static VALUE
 rg_font_description(VALUE self)
 {
     const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
-    return BOXED2RVAL((gpointer)desc, PANGO_TYPE_FONT_DESCRIPTION);
+    return PANGOFONTDESCRIPTION2RVAL((gpointer)desc);
 }
 #endif
 
@@ -160,28 +159,27 @@ rg_width(VALUE self)
 static VALUE
 rg_set_wrap(VALUE self, VALUE wrap)
 {
-    pango_layout_set_wrap(_SELF(self), RVAL2GENUM(wrap, PANGO_TYPE_WRAP_MODE));
+    pango_layout_set_wrap(_SELF(self), RVAL2PANGOWRAPMODE(wrap));
     return self;
 }
 
 static VALUE
 rg_wrap(VALUE self)
 {
-    return GENUM2RVAL(pango_layout_get_wrap(_SELF(self)), PANGO_TYPE_WRAP_MODE);
+    return PANGOWRAPMODE2RVAL(pango_layout_get_wrap(_SELF(self)));
 }
 
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
 static VALUE
 rg_set_ellipsize(VALUE self, VALUE ellipsize)
 {
-    pango_layout_set_ellipsize(_SELF(self), RVAL2GENUM(ellipsize, 
-                                                       PANGO_TYPE_ELLIPSIZE_MODE));
+    pango_layout_set_ellipsize(_SELF(self), RVAL2PANGOELLIPSIZEMODE(ellipsize));
     return self;
 }
 static VALUE
 rg_ellipsize(VALUE self)
 {
-    return GENUM2RVAL(pango_layout_get_ellipsize(_SELF(self)), PANGO_TYPE_ELLIPSIZE_MODE);
+    return PANGOELLIPSIZEMODE2RVAL(pango_layout_get_ellipsize(_SELF(self)));
 }
 #endif
 
@@ -240,21 +238,21 @@ rg_auto_dir_p(VALUE self)
 static VALUE
 rg_set_alignment(VALUE self, VALUE align)
 {
-    pango_layout_set_alignment(_SELF(self), RVAL2GENUM(align, PANGO_TYPE_ALIGNMENT));
+    pango_layout_set_alignment(_SELF(self), RVAL2PANGOALIGNMENT(align));
     return self;
 }
 
 static VALUE
 rg_alignment(VALUE self)
 {
-    return GENUM2RVAL(pango_layout_get_alignment(_SELF(self)), PANGO_TYPE_ALIGNMENT);
+    return PANGOALIGNMENT2RVAL(pango_layout_get_alignment(_SELF(self)));
 }
 
 static VALUE
 rg_set_tabs(VALUE self, VALUE tabs)
 {
     pango_layout_set_tabs(_SELF(self), 
-                          (PangoTabArray*)RVAL2BOXED(tabs, PANGO_TYPE_TAB_ARRAY));
+                          RVAL2PANGOTABARRAY(tabs));
     return self;
 }
 
@@ -265,7 +263,7 @@ rg_tabs(VALUE self)
     PangoTabArray* tabs = pango_layout_get_tabs(_SELF(self));
 
     if (tabs) {
-        ret = BOXED2RVAL(tabs, PANGO_TYPE_TAB_ARRAY);
+        ret = PANGOTABARRAY2RVAL(tabs);
         pango_tab_array_free(tabs);
     }
     return ret;
@@ -296,7 +294,7 @@ rg_log_attrs(VALUE self)
     ary = rb_ary_new();
 
     for (i = 0; i < n_attrs; i++) {
-        rb_ary_assoc(ary, BOXED2RVAL(&attrs[i], PANGO_TYPE_LOG_ATTR));
+        rb_ary_assoc(ary, PANGOLOGATTR2RVAL(&attrs[i]));
     }
     g_free(attrs);
 
@@ -319,7 +317,7 @@ rg_index_to_pos(VALUE self, VALUE index)
 {
     PangoRectangle pos;
     pango_layout_index_to_pos(_SELF(self), NUM2INT(index), &pos);
-    return BOXED2RVAL(&pos, PANGO_TYPE_RECTANGLE);
+    return PANGORECTANGLE2RVAL(&pos);
 }
 
 static VALUE
@@ -327,8 +325,8 @@ rg_get_cursor_pos(VALUE self, VALUE index)
 {
     PangoRectangle strong_pos, weak_pos;
     pango_layout_get_cursor_pos(_SELF(self), NUM2INT(index), &strong_pos, &weak_pos);
-    return rb_ary_new3(2, BOXED2RVAL(&strong_pos, PANGO_TYPE_RECTANGLE),
-                       BOXED2RVAL(&weak_pos, PANGO_TYPE_RECTANGLE));
+    return rb_ary_new3(2, PANGORECTANGLE2RVAL(&strong_pos),
+                       PANGORECTANGLE2RVAL(&weak_pos));
 }
 
 static VALUE
@@ -356,7 +354,7 @@ rg_get_extents(int argc, VALUE *argv, VALUE self)
         rink.width = 0;
         rink.height = 0;
     } else {
-        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE);
+        PangoRectangle* rect = RVAL2PANGORECTANGLE(ink_rect);
         rink.x = rect->x;
         rink.y = rect->y;
         rink.width = rect->width;
@@ -368,7 +366,7 @@ rg_get_extents(int argc, VALUE *argv, VALUE self)
         rlog.width = 0;
         rlog.height = 0;
     } else {
-        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE);
+        PangoRectangle* rect = RVAL2PANGORECTANGLE(logical_rect);
         rlog.x = rect->x;
         rlog.y = rect->y;
         rlog.width = rect->width;
@@ -377,8 +375,8 @@ rg_get_extents(int argc, VALUE *argv, VALUE self)
 
     pango_layout_get_extents(_SELF(self), &rink, &rlog);
 
-    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&rink),
+                        PANGORECTANGLE2RVAL(&rlog));
 }
 
 static VALUE
@@ -388,8 +386,8 @@ rg_extents(VALUE self)
     PangoRectangle rlog = {0, 0, 0, 0};
 
     pango_layout_get_extents(_SELF(self), &rink, &rlog);
-    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&rink),
+                        PANGORECTANGLE2RVAL(&rlog));
 }
 
 static VALUE
@@ -406,7 +404,7 @@ rg_get_pixel_extents(int argc, VALUE *argv, VALUE self)
         rink.width = 0;
         rink.height = 0;
     } else {
-        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(ink_rect, PANGO_TYPE_RECTANGLE);
+        PangoRectangle* rect = RVAL2PANGORECTANGLE(ink_rect);
         rink.x = rect->x;
         rink.y = rect->y;
         rink.width = rect->width;
@@ -418,7 +416,7 @@ rg_get_pixel_extents(int argc, VALUE *argv, VALUE self)
         rlog.width = 0;
         rlog.height = 0;
     } else {
-        PangoRectangle* rect = (PangoRectangle*)RVAL2BOXED(logical_rect, PANGO_TYPE_RECTANGLE);
+        PangoRectangle* rect = RVAL2PANGORECTANGLE(logical_rect);
         rlog.x = rect->x;
         rlog.y = rect->y;
         rlog.width = rect->width;
@@ -427,8 +425,8 @@ rg_get_pixel_extents(int argc, VALUE *argv, VALUE self)
 
     pango_layout_get_pixel_extents(_SELF(self), &rink, &rlog);
 
-    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&rink),
+                        PANGORECTANGLE2RVAL(&rlog));
 }
 
 static VALUE
@@ -438,8 +436,8 @@ rg_pixel_extents(VALUE self)
     PangoRectangle rlog = {0, 0, 0, 0};
 
     pango_layout_get_pixel_extents(_SELF(self), &rink, &rlog);
-    return rb_assoc_new(BOXED2RVAL(&rink, PANGO_TYPE_RECTANGLE),
-                        BOXED2RVAL(&rlog, PANGO_TYPE_RECTANGLE));
+    return rb_assoc_new(PANGORECTANGLE2RVAL(&rink),
+                        PANGORECTANGLE2RVAL(&rlog));
 }
 
 static VALUE
@@ -467,7 +465,7 @@ rg_line_count(VALUE self)
 static VALUE
 rg_get_line(VALUE self, VALUE line)
 {
-    return BOXED2RVAL(pango_layout_get_line(_SELF(self), NUM2INT(line)), PANGO_TYPE_LAYOUT_LINE);
+    return PANGOLAYOUTLINE2RVAL(pango_layout_get_line(_SELF(self), NUM2INT(line)));
 }
 
 static VALUE
@@ -479,8 +477,7 @@ rg_lines(VALUE self)
 static VALUE
 rg_iter(VALUE self)
 {
-    return BOXED2RVAL(pango_layout_get_iter(_SELF(self)), 
-                      PANGO_TYPE_LAYOUT_ITER);
+    return PANGOLAYOUTITER2RVAL(pango_layout_get_iter(_SELF(self)));
 }
 
 void

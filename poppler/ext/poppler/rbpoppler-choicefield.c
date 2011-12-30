@@ -24,14 +24,12 @@
 #define RG_TARGET_NAMESPACE cChoiceField
 #define _SELF(obj) RVAL2POPPLERFORMFIELD(obj)
 
-#define FCT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_CHOICE_TYPE))
-
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 rg_type(VALUE self)
 {
-    return FCT2RVAL(poppler_form_field_choice_get_choice_type(_SELF(self)));
+    return POPPLERFORMCHOICETYPE2RVAL(poppler_form_field_choice_get_choice_type(_SELF(self)));
 }
 
 static VALUE

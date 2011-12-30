@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cCoverage
-#define _SELF(self) ((PangoCoverage*)RVAL2BOXED(self, PANGO_TYPE_COVERAGE))
+#define _SELF(self) (RVAL2PANGOCOVERAGE(self))
 
 /**********************************/
 GType
@@ -48,8 +48,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_get_level(VALUE self, VALUE index_)
 {
-    return GENUM2RVAL(pango_coverage_get(_SELF(self), NUM2INT(index_)), 
-                      PANGO_TYPE_COVERAGE_LEVEL);
+    return PANGOCOVERAGELEVEL2RVAL(pango_coverage_get(_SELF(self), NUM2INT(index_)));
 }
 
 static VALUE
@@ -63,7 +62,7 @@ static VALUE
 rg_set(VALUE self, VALUE index_, VALUE level)
 {
     pango_coverage_set(_SELF(self), NUM2INT(index_), 
-                       RVAL2GENUM(level, PANGO_TYPE_COVERAGE_LEVEL));
+                       RVAL2PANGOCOVERAGELEVEL(level));
     return self;
 }
 
@@ -85,9 +84,8 @@ static VALUE
 rg_s_from_bytes(G_GNUC_UNUSED VALUE self, VALUE bytes)
 {
     StringValue(bytes);
-    return BOXED2RVAL(pango_coverage_from_bytes((guchar *)RSTRING_PTR(bytes), 
-                                                RSTRING_LEN(bytes)),
-                      PANGO_TYPE_COVERAGE);
+    return PANGOCOVERAGE2RVAL(pango_coverage_from_bytes((guchar *)RSTRING_PTR(bytes), 
+                                                        RSTRING_LEN(bytes)));
 }
 
 void

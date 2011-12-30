@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFontFamily
-#define _SELF(self) (PANGO_FONT_FAMILY(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGOFONTFAMILY(self))
 
 static VALUE
 rg_name(VALUE self)

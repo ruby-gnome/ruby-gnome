@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cGlyphInfo
-#define _SELF(self) ((PangoGlyphInfo*)RVAL2BOXED(self, PANGO_TYPE_GLYPH_INFO))
+#define _SELF(self) (RVAL2PANGOGLYPHINFO(self))
 
 /**********************************/
 static PangoGlyphInfo *

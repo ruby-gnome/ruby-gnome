@@ -39,15 +39,15 @@ rg_initialize(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
     return Qnil;
 }
 
-DEF_ACCESSOR(rectangle, x1, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(rectangle, y1, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(rectangle, x2, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
-DEF_ACCESSOR(rectangle, y2, RVAL2POPPLER_RECT, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, x1, RVAL2POPPLERRECTANGLE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, y1, RVAL2POPPLERRECTANGLE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, x2, RVAL2POPPLERRECTANGLE, rb_float_new, NUM2DBL)
+DEF_ACCESSOR(rectangle, y2, RVAL2POPPLERRECTANGLE, rb_float_new, NUM2DBL)
 
 static VALUE
 rg_to_a(VALUE self)
 {
-    PopplerRectangle *rectangle = RVAL2POPPLER_RECT(self);
+    PopplerRectangle *rectangle = RVAL2POPPLERRECTANGLE(self);
     return rb_ary_new3(4,
                        rb_float_new(rectangle->x1),
                        rb_float_new(rectangle->y1),
@@ -62,7 +62,7 @@ rg_inspect(VALUE self)
     gchar *points;
     PopplerRectangle *rectangle;
 
-    rectangle = RVAL2POPPLER_RECT(self);
+    rectangle = RVAL2POPPLERRECTANGLE(self);
     inspected = rb_call_super(0, NULL);
     rb_str_resize(inspected, RSTRING_LEN(inspected) - 1);
     points = g_strdup_printf(": [%g, %g, %g, %g]>",

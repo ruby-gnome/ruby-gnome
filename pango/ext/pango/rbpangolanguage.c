@@ -23,13 +23,12 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cLanguage
-#define _SELF(self) ((PangoLanguage*)RVAL2BOXED(self, PANGO_TYPE_LANGUAGE))
-#define LANG2RVAL(lang) (BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE))
+#define _SELF(self) (RVAL2PANGOLANGUAGE(self))
 
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE self)
 {
-    return LANG2RVAL(pango_language_get_default());
+    return PANGOLANGUAGE2RVAL(pango_language_get_default());
 }
 
 static VALUE
@@ -68,7 +67,7 @@ static VALUE
 rg_includes_script(VALUE self, VALUE script)
 {
     return CBOOL2RVAL(pango_language_includes_script(_SELF(self), 
-                                                     RVAL2GENUM(script, PANGO_TYPE_SCRIPT)));
+                                                     RVAL2PANGOSCRIPT(script)));
 }
 #endif
 

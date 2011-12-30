@@ -23,13 +23,13 @@
 
 #if PANGO_CHECK_VERSION(1,8,0)
 #define RG_TARGET_NAMESPACE cRenderer
-#define _SELF(self) (PANGO_RENDERER(RVAL2GOBJ(self)))
+#define _SELF(self) (RVAL2PANGORENDERER(self))
 
 static VALUE
 rg_draw_layout(VALUE self, VALUE layout, VALUE x, VALUE y)
 {
     pango_renderer_draw_layout(_SELF(self), 
-                               PANGO_LAYOUT(RVAL2GOBJ(layout)),
+                               RVAL2PANGOLAYOUT(layout),
                                NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -38,7 +38,7 @@ static VALUE
 rg_draw_layout_line(VALUE self, VALUE line, VALUE x, VALUE y)
 {
     pango_renderer_draw_layout_line(_SELF(self),  
-                                    (PangoLayoutLine*)RVAL2BOXED(line, PANGO_TYPE_LAYOUT_LINE),
+                                    RVAL2PANGOLAYOUTLINE(line),
                                     NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -47,8 +47,8 @@ static VALUE
 rg_draw_glyphs(VALUE self, VALUE font, VALUE glyphs, VALUE x, VALUE y)
 {
     pango_renderer_draw_glyphs(_SELF(self),
-                               PANGO_FONT(RVAL2GOBJ(font)),
-                               (PangoGlyphString *)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)),
+                               RVAL2PANGOFONT(font),
+                               RVAL2PANGOGLYPHSTRING(glyphs),
                                NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -57,7 +57,7 @@ static VALUE
 rg_draw_rectangle(VALUE self, VALUE part, VALUE x, VALUE y, VALUE width, VALUE height)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
-    pango_renderer_draw_rectangle(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
+    pango_renderer_draw_rectangle(_SELF(self), RVAL2PANGORENDERPART(part),
                                   NUM2INT(x), NUM2INT(y), NUM2INT(width), NUM2INT(height));
 #else
     pango_renderer_draw_rectangle(_SELF(self), NUM2INT(part),
@@ -79,7 +79,7 @@ rg_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, VALUE 
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     pango_renderer_draw_trapezoid(_SELF(self), 
-                                  RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
+                                  RVAL2PANGORENDERPART(part),
                                   NUM2DBL(y1), NUM2DBL(x11), NUM2DBL(x21),
                                   NUM2DBL(y2), NUM2DBL(x12), NUM2DBL(x22));
 #else
@@ -93,7 +93,7 @@ rg_draw_trapezoid(VALUE self, VALUE part, VALUE y1, VALUE x11, VALUE x21, VALUE 
 static VALUE
 rg_draw_glyph(VALUE self, VALUE font, VALUE glyph, VALUE x, VALUE y)
 {
-    pango_renderer_draw_glyph(_SELF(self), PANGO_FONT(RVAL2GOBJ(font)),
+    pango_renderer_draw_glyph(_SELF(self), RVAL2PANGOFONT(font),
                               NUM2INT(glyph), NUM2INT(x), NUM2INT(y));
     return self;
 }
@@ -119,7 +119,7 @@ static VALUE
 rg_part_changed(VALUE self, VALUE part)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
-    pango_renderer_part_changed(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
+    pango_renderer_part_changed(_SELF(self), RVAL2PANGORENDERPART(part));
 #else
     pango_renderer_part_changed(_SELF(self), NUM2INT(part));
 #endif
@@ -130,11 +130,11 @@ static VALUE
 rg_set_color(VALUE self, VALUE part, VALUE color)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
-    pango_renderer_set_color(_SELF(self), RVAL2GENUM(part, PANGO_TYPE_RENDER_PART),
-                             (PangoColor*)(NIL_P(color) ? NULL : RVAL2BOXED(color, PANGO_TYPE_COLOR)));
+    pango_renderer_set_color(_SELF(self), RVAL2PANGORENDERPART(part),
+                             NIL_P(color) ? NULL : RVAL2PANGOCOLOR(color));
 #else
     pango_renderer_set_color(_SELF(self), NUM2INT(part),
-                             (PangoColor*)(NIL_P(color) ? NULL : RVAL2BOXED(color, PANGO_TYPE_COLOR)));
+                             NIL_P(color) ? NULL : RVAL2PANGOCOLOR(color));
 #endif
     return self;
 }
@@ -144,18 +144,18 @@ rg_get_color(VALUE self, VALUE part)
 {
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     PangoColor* color = pango_renderer_get_color(_SELF(self),
-                                                 RVAL2GENUM(part, PANGO_TYPE_RENDER_PART));
+                                                 RVAL2PANGORENDERPART(part));
 #else
     PangoColor* color = pango_renderer_get_color(_SELF(self),NUM2INT(part));
 #endif
-    return BOXED2RVAL(color, PANGO_TYPE_COLOR);
+    return PANGOCOLOR2RVAL(color);
 }
 
 static VALUE
 rg_set_matrix(VALUE self, VALUE matrix)
 {
     pango_renderer_set_matrix(_SELF(self), 
-                              (PangoMatrix*)(NIL_P(matrix) ? NULL : RVAL2BOXED(matrix, PANGO_TYPE_MATRIX)));
+                              NIL_P(matrix) ? NULL : RVAL2PANGOMATRIX(matrix));
     return self;
 }
 
@@ -163,7 +163,7 @@ static VALUE
 rg_matrix(VALUE self)
 {
     const PangoMatrix* matrix = pango_renderer_get_matrix(_SELF(self));
-    return BOXED2RVAL((PangoMatrix*)matrix, PANGO_TYPE_MATRIX);
+    return PANGOMATRIX2RVAL((PangoMatrix*)matrix);
 }
 
 #endif

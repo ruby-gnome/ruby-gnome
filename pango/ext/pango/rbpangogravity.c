@@ -27,13 +27,13 @@
 static VALUE
 rg_s_to_rotation(G_GNUC_UNUSED VALUE self, VALUE gravity)
 {
-    return rb_float_new(pango_gravity_to_rotation(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
+    return rb_float_new(pango_gravity_to_rotation(RVAL2PANGOGRAVITY(gravity)));
 }
 
 static VALUE
 rg_s_vertical_p(G_GNUC_UNUSED VALUE self, VALUE gravity)
 {
-    return CBOOL2RVAL(PANGO_GRAVITY_IS_VERTICAL(RVAL2GENUM(gravity, PANGO_TYPE_GRAVITY)));
+    return CBOOL2RVAL(PANGO_GRAVITY_IS_VERTICAL(RVAL2PANGOGRAVITY(gravity)));
 }
 #endif
 

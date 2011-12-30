@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cAttrIterator
-#define _SELF(self) ((PangoAttrIterator*)RVAL2BOXED(self, PANGO_TYPE_ATTR_ITERATOR))
+#define _SELF(self) (RVAL2PANGOATTRITERATOR(self))
 
 /**********************************/
 GType
@@ -95,8 +95,8 @@ rg_font(VALUE self)
         extra_attrs = extra_attrs->next;
     }
 
-    ret = rb_ary_new3(3, (PangoFontDescription*)BOXED2RVAL(desc, PANGO_TYPE_FONT_DESCRIPTION),
-                      (PangoLanguage*)BOXED2RVAL(lang, PANGO_TYPE_LANGUAGE),
+    ret = rb_ary_new3(3, PANGOFONTDESCRIPTION2RVAL(desc),
+                      PANGOLANGUAGE2RVAL(lang),
                       ary);
 
     pango_font_description_free(desc);

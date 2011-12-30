@@ -22,7 +22,7 @@
 #include "rbpangoprivate.h"
 
 #define RG_TARGET_NAMESPACE cFontMetrics
-#define _SELF(self) ((PangoFontMetrics*)RVAL2BOXED(self, PANGO_TYPE_FONT_METRICS))
+#define _SELF(self) (RVAL2PANGOFONTMETRICS(self))
 
 static VALUE
 rg_ascent(VALUE self)

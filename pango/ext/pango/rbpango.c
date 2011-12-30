@@ -47,8 +47,7 @@ rpango_reorder_items_body(VALUE value)
 
     for (i = 0; i < args->n; i++)
         args->result = g_list_append(args->result,
-                                     RVAL2BOXED(RARRAY_PTR(args->ary)[i],
-                                                PANGO_TYPE_ITEM));
+                                     RVAL2PANGOITEM(RARRAY_PTR(args->ary)[i]));
 
     result = pango_reorder_items(args->result);
     g_list_free(args->result);
@@ -80,15 +79,14 @@ rg_m_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
 static VALUE
 rg_m_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
-    return GENUM2RVAL(pango_unichar_direction(NUM2UINT(ch)), PANGO_TYPE_DIRECTION);
+    return PANGODIRECTION2RVAL(pango_unichar_direction(NUM2UINT(ch)));
 }
 
 static VALUE
 rg_m_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     StringValue(text);
-    return GENUM2RVAL(pango_find_base_dir(RSTRING_PTR(text), RSTRING_LEN(text)), 
-                      PANGO_TYPE_DIRECTION);
+    return PANGODIRECTION2RVAL(pango_find_base_dir(RSTRING_PTR(text), RSTRING_LEN(text)));
 }
 #endif
 
@@ -105,7 +103,7 @@ rbg_pangologattrs2rval_free_body(VALUE value)
     VALUE ary = rb_ary_new();
 
     for (i = 0; i < args->n; i++)
-        rb_ary_push(ary, BOXED2RVAL(&args->attrs[i], PANGO_TYPE_LOG_ATTR));
+        rb_ary_push(ary, PANGOLOGATTR2RVAL(&args->attrs[i]));
 
     return ary;
 }
@@ -134,7 +132,7 @@ rg_m_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
-    PangoAnalysis *analysis = RVAL2BOXED(rbanalysis, PANGO_TYPE_ANALYSIS);
+    PangoAnalysis *analysis = RVAL2PANGOANALYSIS(rbanalysis);
     long n = g_utf8_strlen(text, length) + 1;
     PangoLogAttr *attrs = g_new(PangoLogAttr, n);
 
@@ -149,7 +147,7 @@ rg_m_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE 
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
     int level = NUM2INT(rblevel);
-    PangoLanguage *language = RVAL2BOXED(rblanguage, PANGO_TYPE_LANGUAGE);
+    PangoLanguage *language = RVAL2PANGOLANGUAGE(rblanguage);
     long n = g_utf8_strlen(text, length) + 1;
     PangoLogAttr *attrs = g_new(PangoLogAttr, n);
 
@@ -183,7 +181,7 @@ void        pango_default_break             (const gchar *text,
 static VALUE
 rpango_shape_result(VALUE value)
 {
-    return BOXED2RVAL((PangoGlyphString *)value, PANGO_TYPE_GLYPH_STRING);
+    return PANGOGLYPHSTRING2RVAL((PangoGlyphString *)value);
 }
 
 static VALUE
@@ -199,7 +197,7 @@ rg_m_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
-    PangoAnalysis *analysis = RVAL2BOXED(rbanalysis, PANGO_TYPE_ANALYSIS);
+    PangoAnalysis *analysis = RVAL2PANGOANALYSIS(rbanalysis);
     PangoGlyphString *glyphs = pango_glyph_string_new();
 
     pango_shape(text, length, analysis, glyphs);
@@ -235,7 +233,7 @@ rg_m_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (!ret) RAISE_GERROR(error);
 
     if (pattr_list){
-        attr_list = BOXED2RVAL(pattr_list, PANGO_TYPE_ATTR_LIST); 
+        attr_list = PANGOATTRLIST2RVAL(pattr_list); 
         pango_attr_list_unref(pattr_list);
     }
 

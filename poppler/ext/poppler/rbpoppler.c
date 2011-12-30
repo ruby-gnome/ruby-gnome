@@ -28,7 +28,7 @@ extern void Init_poppler(void);
 static VALUE
 rg_m_backend(VALUE self)
 {
-    return GENUM2RVAL(poppler_get_backend(), POPPLER_TYPE_BACKEND);
+    return POPPLERBACKEND2RVAL(poppler_get_backend());
 }
 
 static VALUE

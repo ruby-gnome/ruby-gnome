@@ -24,14 +24,12 @@
 #define RG_TARGET_NAMESPACE cTextField
 #define _SELF(obj) RVAL2POPPLERFORMFIELD(obj)
 
-#define FTT2RVAL(obj) (GENUM2RVAL(obj, POPPLER_TYPE_FORM_TEXT_TYPE))
-
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 rg_type(VALUE self)
 {
-    return FTT2RVAL(poppler_form_field_text_get_text_type(_SELF(self)));
+    return POPPLERFORMTEXTTYPE2RVAL(poppler_form_field_text_get_text_type(_SELF(self)));
 }
 
 static VALUE
