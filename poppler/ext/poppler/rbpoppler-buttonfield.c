@@ -24,14 +24,12 @@
 #define RG_TARGET_NAMESPACE cButtonField
 #define _SELF(obj) RVAL2POPPLERFORMFIELD(obj)
 
-#define FBT2RVAL(obj) (POPPLERFORMBUTTONTYPE2RVAL(obj))
-
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
 rg_type(VALUE self)
 {
-    return FBT2RVAL(poppler_form_field_button_get_button_type(_SELF(self)));
+    return POPPLERFORMBUTTONTYPE2RVAL(poppler_form_field_button_get_button_type(_SELF(self)));
 }
 
 static VALUE

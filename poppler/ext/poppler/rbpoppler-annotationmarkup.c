@@ -24,9 +24,6 @@
 #define RG_TARGET_NAMESPACE cAnnotationMarkup
 #define SELF(self) (RVAL2POPPLERANNOTMARKUP(self))
 
-#define REPLY_TYPE2RVAL(obj) (POPPLERANNOTMARKUPREPLYTYPE2RVAL(obj))
-#define DATA_TYPE2RVAL(obj) (POPPLERANNOTEXTERNALDATATYPE2RVAL(obj))
-
 static ID id_new;
 static VALUE rb_cDate;
 
@@ -72,13 +69,13 @@ rg_subject(VALUE self)
 static VALUE
 rg_reply_to(VALUE self)
 {
-    return REPLY_TYPE2RVAL(poppler_annot_markup_get_reply_to(SELF(self)));
+    return POPPLERANNOTMARKUPREPLYTYPE2RVAL(poppler_annot_markup_get_reply_to(SELF(self)));
 }
 
 static VALUE
 rg_external_data(VALUE self)
 {
-    return DATA_TYPE2RVAL(poppler_annot_markup_get_external_data(SELF(self)));
+    return POPPLERANNOTEXTERNALDATATYPE2RVAL(poppler_annot_markup_get_external_data(SELF(self)));
 }
 
 void

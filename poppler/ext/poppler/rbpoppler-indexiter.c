@@ -23,9 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cIndexIter
 
-#define IITER2RVAL(obj) (POPPLERINDEXITER2RVAL(obj))
-#define RVAL2IITER(obj) (RVAL2POPPLERINDEXITER(obj))
-
 static VALUE RG_TARGET_NAMESPACE;
 
 static ID id_valid;
@@ -60,8 +57,8 @@ rg_child(VALUE self)
     VALUE rb_child;
 
     CHECK_IITER_IS_VALID(self);
-    child = poppler_index_iter_get_child(RVAL2IITER(self));
-    rb_child = IITER2RVAL(child);
+    child = poppler_index_iter_get_child(RVAL2POPPLERINDEXITER(self));
+    rb_child = POPPLERINDEXITER2RVAL(child);
     poppler_index_iter_free(child);
     return rb_child;
 }
@@ -70,7 +67,7 @@ static VALUE
 rg_open_p(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
-    return CBOOL2RVAL(poppler_index_iter_is_open(RVAL2IITER(self)));
+    return CBOOL2RVAL(poppler_index_iter_is_open(RVAL2POPPLERINDEXITER(self)));
 }
 
 #ifndef HAVE_TYPE_POPPLERACTIONANY
@@ -78,14 +75,14 @@ static VALUE
 rg_action(VALUE self)
 {
     CHECK_IITER_IS_VALID(self);
-    return POPPLERACTION2RVAL(poppler_index_iter_get_action(RVAL2IITER(self)));
+    return POPPLERACTION2RVAL(poppler_index_iter_get_action(RVAL2POPPLERINDEXITER(self)));
 }
 #endif
 
 static VALUE
 rg_next(VALUE self)
 {
-    if (poppler_index_iter_next(RVAL2IITER(self))) {
+    if (poppler_index_iter_next(RVAL2POPPLERINDEXITER(self))) {
         return Qtrue;
     } else {
         rb_ivar_set(self, id_valid, Qfalse);
@@ -99,7 +96,7 @@ rg_each(VALUE self)
     PopplerIndexIter *iter;
 
     CHECK_IITER_IS_VALID(self);
-    iter = RVAL2IITER(self);
+    iter = RVAL2POPPLERINDEXITER(self);
     do {
         rb_yield(self);
     } while (poppler_index_iter_next(iter));

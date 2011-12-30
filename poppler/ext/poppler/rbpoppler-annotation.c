@@ -24,13 +24,10 @@
 #define RG_TARGET_NAMESPACE cAnnotation
 #define SELF(self) (RVAL2POPPLERANNOT(self))
 
-#define TYPE2RVAL(obj) (POPPLERANNOTTYPE2RVAL(obj))
-#define FLAG2RVAL(obj) (POPPLERANNOTFLAG2RVAL(obj))
-
 static VALUE
 rg_type(VALUE self)
 {
-    return TYPE2RVAL(poppler_annot_get_annot_type(SELF(self)));
+    return POPPLERANNOTTYPE2RVAL(poppler_annot_get_annot_type(SELF(self)));
 }
 
 static VALUE
@@ -54,7 +51,7 @@ rg_modified(VALUE self)
 static VALUE
 rg_flags(VALUE self)
 {
-    return FLAG2RVAL(poppler_annot_get_flags(SELF(self)));
+    return POPPLERANNOTFLAG2RVAL(poppler_annot_get_flags(SELF(self)));
 }
 
 static VALUE

@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cAnnotationMapping
 
-#define RVAL2AM(obj) (RVAL2POPPLERANNOTMAPPING(obj))
-
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -34,7 +32,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "02", &area, &annotation);
 
     mapping = poppler_annot_mapping_new();
-    mapping->area = *RVAL2POPPLER_RECT(area);
+    mapping->area = *RVAL2POPPLERRECTANGLE(area);
     mapping->annot = RVAL2POPPLERANNOT(annotation);
     G_INITIALIZE(self, mapping);
 
@@ -42,15 +40,15 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 DEF_ACCESSOR_WITH_SETTER(annot_mapping, area,
-                         RVAL2AM, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
-DEF_READER(annot_mapping, annotation, annot, RVAL2AM, POPPLERANNOT2RVAL)
+                         RVAL2POPPLERANNOTMAPPING, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
+DEF_READER(annot_mapping, annotation, annot, RVAL2POPPLERANNOTMAPPING, POPPLERANNOT2RVAL)
 
 static VALUE
 rg_set_annotation(VALUE self, VALUE annotation)
 {
     PopplerAnnotMapping *mapping;
 
-    mapping = RVAL2AM(self);
+    mapping = RVAL2POPPLERANNOTMAPPING(self);
     if (mapping->annot)
         g_object_unref(mapping->annot);
 

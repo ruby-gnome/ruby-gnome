@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cFontsIter
 
-#define RVAL2FITER(obj) (RVAL2POPPLERFONTSITER(obj))
-
 #define CHECK_FITER_IS_VALID(iter) do {         \
     if (!RVAL2CBOOL(rg_valid_p(iter)))       \
         return Qnil;                            \
@@ -42,28 +40,28 @@ static VALUE
 rg_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return CSTR2RVAL(poppler_fonts_iter_get_name(RVAL2FITER(self)));
+    return CSTR2RVAL(poppler_fonts_iter_get_name(RVAL2POPPLERFONTSITER(self)));
 }
 
 static VALUE
 rg_full_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return CSTR2RVAL(poppler_fonts_iter_get_full_name(RVAL2FITER(self)));
+    return CSTR2RVAL(poppler_fonts_iter_get_full_name(RVAL2POPPLERFONTSITER(self)));
 }
 
 static VALUE
 rg_file_name(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return CSTR2RVAL(poppler_fonts_iter_get_file_name(RVAL2FITER(self)));
+    return CSTR2RVAL(poppler_fonts_iter_get_file_name(RVAL2POPPLERFONTSITER(self)));
 }
 
 static VALUE
 rg_font_type(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return GENUM2RVAL(poppler_fonts_iter_get_font_type(RVAL2FITER(self)),
+    return GENUM2RVAL(poppler_fonts_iter_get_font_type(RVAL2POPPLERFONTSITER(self)),
                       POPPLER_TYPE_FONT_TYPE);
 }
 
@@ -71,20 +69,20 @@ static VALUE
 rg_embedded_p(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return CBOOL2RVAL(poppler_fonts_iter_is_embedded(RVAL2FITER(self)));
+    return CBOOL2RVAL(poppler_fonts_iter_is_embedded(RVAL2POPPLERFONTSITER(self)));
 }
 
 static VALUE
 rg_subset_p(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return CBOOL2RVAL(poppler_fonts_iter_is_subset(RVAL2FITER(self)));
+    return CBOOL2RVAL(poppler_fonts_iter_is_subset(RVAL2POPPLERFONTSITER(self)));
 }
 
 static VALUE
 rg_next(VALUE self)
 {
-    if (poppler_fonts_iter_next(RVAL2FITER(self))) {
+    if (poppler_fonts_iter_next(RVAL2POPPLERFONTSITER(self))) {
         return Qtrue;
     } else {
         rb_ivar_set(self, id_valid, Qfalse);
@@ -98,7 +96,7 @@ rg_each(VALUE self)
     PopplerFontsIter *iter;
 
     CHECK_FITER_IS_VALID(self);
-    iter = RVAL2FITER(self);
+    iter = RVAL2POPPLERFONTSITER(self);
     do {
         rb_yield(self);
     } while (poppler_fonts_iter_next(iter));

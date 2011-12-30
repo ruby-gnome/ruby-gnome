@@ -24,9 +24,6 @@
 #define RG_TARGET_NAMESPACE cFormField
 #define _SELF(obj) RVAL2POPPLERFORMFIELD(obj)
 
-#define FFT2RVAL(obj) (POPPLERFORMFIELDTYPE2RVAL(obj))
-#define RVAL2FFT(obj) (RVAL2POPPLERFORMFIELDTYPE(obj))
-
 static VALUE cButtonField, cTextField, cChoiceField;
 static VALUE cUnknownField, cSignatureField;
 

@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cFontInfo
 
-#define FITER2RVAL(obj) (POPPLERFONTSITER2RVAL(obj))
-
 static VALUE RG_TARGET_NAMESPACE;
 
 #if POPPLER_CHECK_VERSION(0, 6, 0)
@@ -45,7 +43,7 @@ rg_scan(VALUE self, VALUE n_pages)
     PopplerFontsIter *iter;
 
     if (poppler_font_info_scan(RVAL2GOBJ(self), NUM2INT(n_pages), &iter)) {
-        rb_iter = FITER2RVAL(iter);
+        rb_iter = POPPLERFONTSITER2RVAL(iter);
         rb_ivar_set(rb_iter, id_valid, Qtrue);
         poppler_fonts_iter_free(iter);
     }

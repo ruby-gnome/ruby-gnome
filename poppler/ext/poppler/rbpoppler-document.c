@@ -23,8 +23,6 @@
 
 #define RG_TARGET_NAMESPACE cDocument
 
-#define RVAL2DOC(obj) (RVAL2POPPLERDOCUMENT(obj))
-
 static ID id_new, id_pdf_data_p, id_ensure_uri;
 static VALUE cIndexIter;
 static VALUE cFontInfo;
@@ -67,7 +65,7 @@ rg_save(VALUE self, VALUE uri)
     GError *error = NULL;
 
     uri = rb_funcall(self, id_ensure_uri, 1, uri);
-    result = poppler_document_save(RVAL2DOC(self), RVAL2CSTR(uri), &error);
+    result = poppler_document_save(RVAL2POPPLERDOCUMENT(self), RVAL2CSTR(uri), &error);
 
     if (error)
         RAISE_GERROR(error);
@@ -82,7 +80,7 @@ rg_save_a_copy(VALUE self, VALUE uri)
     GError *error = NULL;
 
     uri = rb_funcall(self, id_ensure_uri, 1, uri);
-    result = poppler_document_save_a_copy(RVAL2DOC(self), RVAL2CSTR(uri),
+    result = poppler_document_save_a_copy(RVAL2POPPLERDOCUMENT(self), RVAL2CSTR(uri),
                       &error);
 
     if (error)
@@ -94,7 +92,7 @@ rg_save_a_copy(VALUE self, VALUE uri)
 static VALUE
 rg_n_pages(VALUE self)
 {
-    return INT2NUM(poppler_document_get_n_pages(RVAL2DOC(self)));
+    return INT2NUM(poppler_document_get_n_pages(RVAL2POPPLERDOCUMENT(self)));
 }
 
 static VALUE
@@ -104,10 +102,10 @@ rg_get_page(VALUE self, VALUE index_or_label)
     PopplerPage *page;
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_label, rb_cInteger))) {
-        page = poppler_document_get_page(RVAL2DOC(self),
+        page = poppler_document_get_page(RVAL2POPPLERDOCUMENT(self),
                                          NUM2INT(index_or_label));
     } else if (RVAL2CBOOL(rb_obj_is_kind_of(index_or_label, rb_cString))) {
-        page = poppler_document_get_page_by_label(RVAL2DOC(self),
+        page = poppler_document_get_page_by_label(RVAL2POPPLERDOCUMENT(self),
                                                   RVAL2CSTR(index_or_label));
     } else {
         VALUE inspect;
@@ -125,27 +123,27 @@ rg_get_page(VALUE self, VALUE index_or_label)
 static VALUE
 rg_has_attachments_p(VALUE self)
 {
-    return CBOOL2RVAL(poppler_document_has_attachments(RVAL2DOC(self)));
+    return CBOOL2RVAL(poppler_document_has_attachments(RVAL2POPPLERDOCUMENT(self)));
 }
 
 static VALUE
 rg_attachments(VALUE self)
 {
-    return GLIST2ARYF(poppler_document_get_attachments(RVAL2DOC(self)));
+    return GLIST2ARYF(poppler_document_get_attachments(RVAL2POPPLERDOCUMENT(self)));
 }
 
 static VALUE
 rg_find_dest(VALUE self, VALUE link_name)
 {
     PopplerDest *dest;
-    dest = poppler_document_find_dest(RVAL2DOC(self), RVAL2CSTR(link_name));
+    dest = poppler_document_find_dest(RVAL2POPPLERDOCUMENT(self), RVAL2CSTR(link_name));
     return POPPLERDEST2RVAL(dest);
 }
 
 static VALUE
 rg_get_form_field(VALUE self, VALUE id)
 {
-    return GOBJ2RVAL(poppler_document_get_form_field(RVAL2DOC(self),
+    return GOBJ2RVAL(poppler_document_get_form_field(RVAL2POPPLERDOCUMENT(self),
                                                      NUM2INT(id)));
 }
 
@@ -155,7 +153,7 @@ rg_each(VALUE self)
     PopplerDocument *document;
     int i, n_pages;
 
-    document = RVAL2DOC(self);
+    document = RVAL2POPPLERDOCUMENT(self);
     n_pages = poppler_document_get_n_pages(document);
     for (i = 0; i < n_pages; i++) {
         PopplerPage *page;

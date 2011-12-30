@@ -24,9 +24,6 @@
 #define RG_TARGET_NAMESPACE cAnnotationText
 #define SELF(self) (RVAL2POPPLERANNOTTEXT(self))
 
-#define TEXT_ICON2RVAL(obj) (POPPLERANNOTTEXTICON2RVAL(obj))
-#define TEXT_STATE2RVAL(obj) (POPPLERANNOTTEXTSTATE2RVAL(obj))
-
 static VALUE
 rg_open_p(VALUE self)
 {
@@ -39,14 +36,14 @@ rg_icon(VALUE self)
 #if POPPLER_CHECK_VERSION(0, 9, 0)
     return CSTR2RVAL_FREE(poppler_annot_text_get_icon(SELF(self)));
 #else
-    return TEXT_ICON2RVAL(poppler_annot_text_get_icon(SELF(self)));
+    return POPPLERANNOTTEXTICON2RVAL(poppler_annot_text_get_icon(SELF(self)));
 #endif
 }
 
 static VALUE
 rg_state(VALUE self)
 {
-    return TEXT_STATE2RVAL(poppler_annot_text_get_state(SELF(self)));
+    return POPPLERANNOTTEXTSTATE2RVAL(poppler_annot_text_get_state(SELF(self)));
 }
 
 void

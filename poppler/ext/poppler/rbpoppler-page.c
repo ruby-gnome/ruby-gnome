@@ -29,14 +29,6 @@ extern GType gdk_region_get_type(void);
 #  define GDK_TYPE_REGION (gdk_region_get_type())
 #endif
 
-#define GDK_REGION2RVAL(obj) (GDKREGION2RVAL(obj))
-#define RVAL2GDK_PIXBUF(pixbuf) (RVAL2GDKPIXBUF(pixbuf))
-
-#define SEL_STYLE2RVAL(obj) (POPPLERSELECTIONSTYLE2RVAL(obj))
-#define RVAL2SEL_STYLE(obj) (RVAL2POPPLERSELECTIONSTYLE(obj))
-
-#define TRANS2RVAL(obj) (POPPLERPAGETRANSITION2RVAL(obj))
-
 static VALUE cRectangle;
 static VALUE cPSFile;
 
@@ -155,11 +147,11 @@ page_render_selection(VALUE self, VALUE cairo,
     PopplerRectangle *old_selection = NULL;
 
     if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2POPPLER_RECT(rb_old_selection);
+        old_selection = RVAL2POPPLERRECTANGLE(rb_old_selection);
     poppler_page_render_selection(SELF(self), RVAL2CRCONTEXT(cairo),
-                                  RVAL2POPPLER_RECT(selection),
+                                  RVAL2POPPLERRECTANGLE(selection),
                                   old_selection,
-                                  RVAL2SEL_STYLE(style),
+                                  RVAL2POPPLERSELECTIONSTYLE(style),
                                   RVAL2POPPLERCOLOR(glyph_color),
                                   RVAL2POPPLERCOLOR(background_color));
     return Qnil;
@@ -177,14 +169,14 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
     PopplerRectangle *old_selection = NULL;
 
     if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2POPPLER_RECT(rb_old_selection);
+        old_selection = RVAL2POPPLERRECTANGLE(rb_old_selection);
     poppler_page_render_selection_to_pixbuf(SELF(self),
                                             NUM2DBL(scale),
                                             NUM2INT(rotation),
                                             RVAL2GOBJ(pixbuf),
-                                            RVAL2POPPLER_RECT(selection),
+                                            RVAL2POPPLERRECTANGLE(selection),
                                             old_selection,
-                                            RVAL2SEL_STYLE(style),
+                                            RVAL2POPPLERSELECTIONSTYLE(style),
                                             RVAL2GDKCOLOR(glyph_color),
                                             RVAL2GDKCOLOR(background_color));
     return Qnil;
@@ -238,7 +230,7 @@ rg_duration(VALUE self)
 static VALUE
 rg_transition(VALUE self)
 {
-    return TRANS2RVAL(poppler_page_get_transition(SELF(self)));
+    return POPPLERPAGETRANSITION2RVAL(poppler_page_get_transition(SELF(self)));
 }
 
 #if RB_POPPLER_CAIRO_AVAILABLE
@@ -294,7 +286,7 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
         } else {
             rb_rect = Qnil;
             if (!NIL_P(arg2)) {
-                style = RVAL2SEL_STYLE(arg2);
+                style = RVAL2POPPLERSELECTIONSTYLE(arg2);
             }
         }
     }
@@ -318,7 +310,7 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     } else {
         PopplerRectangle *rect;
 
-        rect = RVAL2POPPLER_RECT(rb_rect);
+        rect = RVAL2POPPLERRECTANGLE(rb_rect);
 #if POPPLER_CHECK_VERSION(0, 15, 0)
         text = poppler_page_get_selected_text(page, style, rect);
 #else
@@ -336,8 +328,8 @@ rg_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
 {
     return GLIST2ARY2F(poppler_page_get_selection_region(SELF(self),
                                                          NUM2DBL(scale),
-                                                         RVAL2SEL_STYLE(style),
-                                                         RVAL2POPPLER_RECT(selection)),
+                                                         RVAL2POPPLERSELECTIONSTYLE(style),
+                                                         RVAL2POPPLERRECTANGLE(selection)),
                                                          POPPLER_TYPE_RECTANGLE);
 }
 
@@ -400,7 +392,7 @@ rg_crop_box(VALUE self)
     PopplerRectangle rect;
 
     poppler_page_get_crop_box(SELF(self), &rect);
-    return POPPLER_RECT2RVAL(&rect);
+    return POPPLERRECTANGLE2RVAL(&rect);
 }
 
 void
