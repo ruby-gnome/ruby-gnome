@@ -7,6 +7,8 @@
 #  include <rbgdk.h>
 #endif
 
+#define RVAL2GDKPIXBUF(o) (GDK_PIXBUF(RVAL2GOBJ(o)))
+
 G_GNUC_INTERNAL void Init_poppler_indexiter(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_fontinfo(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_document(VALUE mPoppler);

@@ -32,7 +32,7 @@ static ID id_valid;
 static VALUE
 rg_initialize(VALUE self, VALUE document)
 {
-    G_INITIALIZE(self, poppler_font_info_new(RVAL2GOBJ(document)));
+    G_INITIALIZE(self, poppler_font_info_new(RVAL2POPPLERDOCUMENT(document)));
     return Qnil;
 }
 
@@ -42,7 +42,7 @@ rg_scan(VALUE self, VALUE n_pages)
     VALUE rb_iter = Qnil;
     PopplerFontsIter *iter;
 
-    if (poppler_font_info_scan(RVAL2GOBJ(self), NUM2INT(n_pages), &iter)) {
+    if (poppler_font_info_scan(RVAL2FONTINFO(self), NUM2INT(n_pages), &iter)) {
         rb_iter = POPPLERFONTSITER2RVAL(iter);
         rb_ivar_set(rb_iter, id_valid, Qtrue);
         poppler_fonts_iter_free(iter);

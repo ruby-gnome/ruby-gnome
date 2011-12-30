@@ -41,7 +41,7 @@ page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
     poppler_page_render_to_pixbuf(SELF(self), NUM2INT(src_x),
                                   NUM2INT(src_y), NUM2INT(src_width),
                                   NUM2INT(src_height), NUM2DBL(scale),
-                                  NUM2INT(rotation), RVAL2GOBJ(pixbuf));
+                                  NUM2INT(rotation), RVAL2GDKPIXBUF(pixbuf));
     return Qnil;
 }
 #endif
@@ -58,7 +58,7 @@ page_render(VALUE self, VALUE cairo)
 static VALUE
 page_render_to_ps(VALUE self, VALUE ps_file)
 {
-    poppler_page_render_to_ps(SELF(self), RVAL2GOBJ(ps_file));
+    poppler_page_render_to_ps(SELF(self), RVAL2POPPLERPSFILE(ps_file));
     return Qnil;
 }
 
@@ -101,7 +101,7 @@ page_render_to_pixbuf_for_printing(VALUE self, VALUE src_x, VALUE src_y,
                                                NUM2INT(src_height),
                                                NUM2DBL(scale),
                                                NUM2INT(rotation),
-                                               RVAL2GOBJ(pixbuf));
+                                               RVAL2GDKPIXBUF(pixbuf));
     return Qnil;
 }
 #endif
@@ -173,7 +173,7 @@ page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
     poppler_page_render_selection_to_pixbuf(SELF(self),
                                             NUM2DBL(scale),
                                             NUM2INT(rotation),
-                                            RVAL2GOBJ(pixbuf),
+                                            RVAL2GDKPIXBUF(pixbuf),
                                             RVAL2POPPLERRECTANGLE(selection),
                                             old_selection,
                                             RVAL2POPPLERSELECTIONSTYLE(style),

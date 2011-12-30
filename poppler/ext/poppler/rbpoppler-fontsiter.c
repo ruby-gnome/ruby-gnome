@@ -61,8 +61,7 @@ static VALUE
 rg_font_type(VALUE self)
 {
     CHECK_FITER_IS_VALID(self);
-    return GENUM2RVAL(poppler_fonts_iter_get_font_type(RVAL2POPPLERFONTSITER(self)),
-                      POPPLER_TYPE_FONT_TYPE);
+    return POPPLERFONTTYPE2RVAL(poppler_fonts_iter_get_font_type(RVAL2POPPLERFONTSITER(self)));
 }
 
 static VALUE
