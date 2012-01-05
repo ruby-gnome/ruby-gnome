@@ -71,17 +71,21 @@ rg_initialize (int argc, VALUE * argv, VALUE self)
 }
 
 /*
- * Method: set_any(state)
- * state: true or false.
+ * Method: set_any(set)
+ * set: true or false.
  *
  * Sets whether the caps should be compatible with any media format.
  *
  * Returns: self.
  */
 static VALUE
-rg_set_any (VALUE self, VALUE state)
+rg_set_any (VALUE self, VALUE set)
 {
-    RGST_CAPS (self)->flags = GST_CAPS_FLAGS_ANY;
+    if (RVAL2CBOOL(set)) {
+        RGST_CAPS(self)->flags |= GST_CAPS_FLAGS_ANY;
+    } else {
+        RGST_CAPS(self)->flags &= ~GST_CAPS_FLAGS_ANY;
+    }
     return self;
 }
 
