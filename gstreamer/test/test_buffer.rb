@@ -64,7 +64,10 @@ class TestBuffer < Test::Unit::TestCase
     buffer = Gst::Buffer.new
     assert_nil(buffer.caps)
 
-    caps = Gst::Caps.new
+    structure = Gst::Structure.new("caps")
+    structure["width"] = 320
+    structure["height"] = 240
+    caps = Gst::Caps.new(structure)
     buffer.caps = caps
     assert_equal(caps, buffer.caps)
   end
