@@ -22,7 +22,7 @@
 #ifndef __RBGST_PRIVATE_H_
 #define __RBGST_PRIVATE_H_
 
-#include <ruby.h>
+#include "rbgst.h"
 
 char *_rbgst_inspect(VALUE object);
 void _rbgst_define_class_if_need(VALUE klass, GType type, const gchar *prefix);
