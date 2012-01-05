@@ -28,7 +28,7 @@
  * Queries.
  */
 
-static RGConvertTable table = {0};
+static RGConvertTable table;
 
 static VALUE rb_cGstQueryPosition;
 static VALUE rb_cGstQueryDuration;
@@ -263,7 +263,9 @@ formats_parse(VALUE self)
 void
 Init_gst_query (VALUE mGst)
 {
+    memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_QUERY;
+    table.klass = Qnil;
     table.get_superclass = get_superclass;
     table.instance2robj = instance2robj;
     RG_DEF_CONVERSION(&table);
