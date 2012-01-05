@@ -97,7 +97,7 @@ task :dist_gnome2 do
   package(gnome2_base_name, base_files + gnome2_packages)
 end
 
-desc "releae Ruby-GNOME2 packages"
+desc "release Ruby-GNOME2 packages"
 task :release => [:dist] do
   sf_user_name = ENV["SVN_USER"] || ENV["USER"]
   project_id = "ruby-gnome2"
