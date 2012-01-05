@@ -15,6 +15,7 @@ Makefile.lib
 /gdk3/ext/gdk3/rbgdkkeysyms.h
 /pango/ext/pango/rbpangoversion.h
 /gtksourceview2/ext/gtksourceview2/rbgtksourceview2version.h
+/gtksourceview3/ext/gtksourceview3/rbgtksourceview3version.h
 /goocanvas/ext/goocanvas/rbgoo_canvasversion.h
 /poppler/test/tmp/
 mkmf.log
