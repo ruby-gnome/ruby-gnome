@@ -21,3 +21,4 @@ mkmf.log
 */tmp/
 */vendor/
 */pkg/
+.gdb_history
