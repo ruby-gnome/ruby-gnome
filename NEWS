@@ -2,23 +2,76 @@
 
 = NEWS
 
-== Ruby-GNOME2 1.0.4: 2011-XX-XX
+== Ruby-GNOME2 1.1.0: 2012-01-05
 
-This is a bug fix release of 1.0.3.
+This is a source cleanup release.
 
 === Changes
 
 ==== Ruby/GLib2
 
+  * Improvements
+    * [GitHub#65] Supported GLib 2.31. [Reported by mtasaka]
+    * Supported comparing between GLib::Enum/GLib::Flags and Symbol.
   * Fixes
     * [GitHub#1] Fix GLib::Spawn regression.
-      [Geoff Youngs]
+      [Patch by Geoff Youngs]
+    * Plugged memory leaks.
+    * Fixed a crash by GC on Ruby 1.9.
   * Changes
-    * don't require gettext.
+    * Remove optional Ruby-GetText-Package dependency.
+
+==== Ruby/GTK2
+
+  * Improvements
+    * [ruby-gnome2-devel-en] FileChooserDialog raising warnings on Windows:
+      Added hicolor-icon-theme into gem on Windows.
+      [Suggested by wNikolai Weibull]
+  * Fixes
+    * Fixed a crash by GC.
+    * Plugged memory leaks.
+    * Fixed Gdk::GC#colormap= uses wrong value.
+    * Fixed Gtk::TextBuffer#serialize uses wrong value.
+
+==== Ruby/Pango
+
+  * Fixes
+    * Plugged memory leaks.
+
+==== Ruby/GdkPixbuf
+
+  * Improvements
+    * Gdk::Pixbuf.new supports hash argument.
+  * Fixes
+    * Plugged memory leaks.
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Supported Windows gem.
+    * Improved memory management.
+  * Fixes
+    * [GitHub#86] Gstreamer: test_caps test fails. [Reported by mtasaka]
+    * [GitHub#87] GStreamer: test_span test fails. [Reported by mtasaka]
+    * [GitHub#87] GStreamer: test_create_clock test fails.
+      [Reported by mtasaka]
+    * [GitHub#89] GStreamer: test_fraction_range_new test fails.
+      [Reported by mtasaka]
+    * [GitHub#91] GStreamer: test_state "sometimes" fails.
+      [Reported by mtasaka]
+
+==== Ruby/Poppler
+
+  * Fixes
+    * Fixed a wrong conversion in Poppler::Document#find_dest.
+      [Reported by Chloé Desoutter]
 
 === Thanks
 
   * Geoff Youngs
+  * mtasaka
+  * Chloé Desoutter
+  * Nikolai Weibull
 
 == Ruby-GNOME2 1.0.3: 2011-09-19
 
