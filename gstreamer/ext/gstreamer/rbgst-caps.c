@@ -360,7 +360,7 @@ rg_to_s (VALUE self)
  * Returns: a newly allocated Gst::Caps.
  */
 static VALUE
-rg_s_parse (VALUE self, VALUE string)
+rg_s_parse (G_GNUC_UNUSED VALUE self, VALUE string)
 {
     return RGST_CAPS_NEW (gst_caps_from_string (RVAL2CSTR (string)));
 }
