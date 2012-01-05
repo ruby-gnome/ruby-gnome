@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons <sjoerd@luon.net>
  *  Copyright (C) 2006  Zaheer Abbas Merali <zaheerabbas at merali dot org>
@@ -22,7 +22,6 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
 #include "rbgst-private.h"
 
 /* Document-class: Gst::Query
