@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2008  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -318,7 +318,7 @@ structures
 static VALUE
 rg_simplify_bang (VALUE self)
 {
-    return CBOOL2RVAL (gst_caps_do_simplify (RGST_CAPS (self)));
+    return CBOOL2RVAL (gst_caps_do_simplify (SELF (self)));
 }
 
 /*
