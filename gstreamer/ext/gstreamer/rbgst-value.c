@@ -38,7 +38,7 @@ value_list_rvalue2gvalue(VALUE value, GValue *result)
 
     len = RARRAY_LEN(value);
     for (i = 0; i < len; i++) {
-        GValue val;
+        GValue val = G_VALUE_INIT;
         rbgobj_initialize_gvalue(&val, RARRAY_PTR(value)[i]);
         gst_value_list_append_value(result, &val);
         g_value_unset(&val);
@@ -68,7 +68,7 @@ value_array_rvalue2gvalue(VALUE value, GValue *result)
 
     len = RARRAY_LEN(value);
     for (i = 0; i < len; i++) {
-        GValue val;
+        GValue val = G_VALUE_INIT;
         rbgobj_initialize_gvalue(&val, RARRAY_PTR(value)[i]);
         gst_value_array_append_value(result, &val);
         g_value_unset(&val);
@@ -314,7 +314,7 @@ fraction_gvalue2rvalue(const GValue *value)
 static VALUE
 fraction_range_initialize(VALUE self, VALUE min, VALUE max)
 {
-    GValue min_value, max_value;
+    GValue min_value = G_VALUE_INIT, max_value = G_VALUE_INIT;
 
     rbgobj_initialize_gvalue(&min_value, min);
     rbgobj_initialize_gvalue(&max_value, max);
@@ -332,7 +332,7 @@ static VALUE
 fraction_range_set_min(VALUE self, VALUE min)
 {
     GValue *value;
-    GValue min_value;
+    GValue min_value = G_VALUE_INIT;
 
     value = RVAL2GOBJ(self);
     rbgobj_initialize_gvalue(&min_value, min);
@@ -352,7 +352,7 @@ static VALUE
 fraction_range_set_max(VALUE self, VALUE max)
 {
     GValue *value;
-    GValue max_value;
+    GValue max_value = G_VALUE_INIT;
 
     value = RVAL2GOBJ(self);
     rbgobj_initialize_gvalue(&max_value, max);
@@ -365,7 +365,7 @@ fraction_range_set_max(VALUE self, VALUE max)
 static VALUE
 fraction_range_set(VALUE self, VALUE min, VALUE max)
 {
-    GValue min_value, max_value;
+    GValue min_value = G_VALUE_INIT, max_value = G_VALUE_INIT;
 
     rbgobj_initialize_gvalue(&min_value, min);
     rbgobj_initialize_gvalue(&max_value, max);

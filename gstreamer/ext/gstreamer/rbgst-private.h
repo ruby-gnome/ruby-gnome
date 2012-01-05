@@ -24,6 +24,10 @@
 
 #include "rbgst.h"
 
+#ifndef G_VALUE_INIT
+#  define G_VALUE_INIT  { 0, { { 0 } } }
+#endif
+
 char *_rbgst_inspect(VALUE object);
 void _rbgst_define_class_if_need(VALUE klass, GType type, const gchar *prefix);
 VALUE _rbgst_collect_elements(GstIterator *iter);

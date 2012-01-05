@@ -81,7 +81,7 @@ rg_operator_get_value(VALUE self, VALUE name)
 static VALUE
 rg_operator_set_value(VALUE self, VALUE name, VALUE rb_value)
 {
-    GValue value = {0};
+    GValue value = G_VALUE_INIT;
 
     rbgobj_initialize_gvalue(&value, rb_value);
     gst_structure_set_value(SELF(self), RVAL2CSTR(name), &value);
