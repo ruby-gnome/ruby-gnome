@@ -23,12 +23,12 @@
 
 static VALUE cIntRange, cFourcc, cFractionRange;
 
-static RGConvertTable value_list_table = {0};
-static RGConvertTable value_array_table = {0};
-static RGConvertTable int_range_table = {0};
-static RGConvertTable fourcc_table = {0};
-static RGConvertTable fraction_table = {0};
-static RGConvertTable fraction_range_table = {0};
+static RGConvertTable value_list_table;
+static RGConvertTable value_array_table;
+static RGConvertTable int_range_table;
+static RGConvertTable fourcc_table;
+static RGConvertTable fraction_table;
+static RGConvertTable fraction_range_table;
 
 
 static void
@@ -38,7 +38,7 @@ value_list_rvalue2gvalue(VALUE value, GValue *result)
 
     len = RARRAY_LEN(value);
     for (i = 0; i < len; i++) {
-        GValue val = {0};
+        GValue val;
         rbgobj_initialize_gvalue(&val, RARRAY_PTR(value)[i]);
         gst_value_list_append_value(result, &val);
         g_value_unset(&val);
@@ -68,7 +68,7 @@ value_array_rvalue2gvalue(VALUE value, GValue *result)
 
     len = RARRAY_LEN(value);
     for (i = 0; i < len; i++) {
-        GValue val = {0};
+        GValue val;
         rbgobj_initialize_gvalue(&val, RARRAY_PTR(value)[i]);
         gst_value_array_append_value(result, &val);
         g_value_unset(&val);
@@ -314,7 +314,7 @@ fraction_gvalue2rvalue(const GValue *value)
 static VALUE
 fraction_range_initialize(VALUE self, VALUE min, VALUE max)
 {
-    GValue min_value = {0}, max_value = {0};
+    GValue min_value, max_value;
 
     rbgobj_initialize_gvalue(&min_value, min);
     rbgobj_initialize_gvalue(&max_value, max);
@@ -332,7 +332,7 @@ static VALUE
 fraction_range_set_min(VALUE self, VALUE min)
 {
     GValue *value;
-    GValue min_value = {0};
+    GValue min_value;
 
     value = RVAL2GOBJ(self);
     rbgobj_initialize_gvalue(&min_value, min);
@@ -352,7 +352,7 @@ static VALUE
 fraction_range_set_max(VALUE self, VALUE max)
 {
     GValue *value;
-    GValue max_value = {0};
+    GValue max_value;
 
     value = RVAL2GOBJ(self);
     rbgobj_initialize_gvalue(&max_value, max);
@@ -365,7 +365,7 @@ fraction_range_set_max(VALUE self, VALUE max)
 static VALUE
 fraction_range_set(VALUE self, VALUE min, VALUE max)
 {
-    GValue min_value = {0}, max_value = {0};
+    GValue min_value, max_value;
 
     rbgobj_initialize_gvalue(&min_value, min);
     rbgobj_initialize_gvalue(&max_value, max);
@@ -407,21 +407,27 @@ DEF_G_VALUE_CONVERTERS(fraction_range, GST_TYPE_FRACTION_RANGE, FractionRange)
 void
 Init_gst_value(VALUE mGst)
 {
+    memset(&value_list_table, 0, sizeof(value_list_table));
     value_list_table.type = GST_TYPE_LIST;
+    value_list_table.klass = Qnil;
     value_list_table.rvalue2gvalue = value_list_rvalue2gvalue;
     value_list_table.gvalue2rvalue = value_list_gvalue2rvalue;
 
     RG_DEF_CONVERSION(&value_list_table);
 
 
+    memset(&value_array_table, 0, sizeof(value_array_table));
     value_array_table.type = GST_TYPE_ARRAY;
+    value_array_table.klass = Qnil;
     value_array_table.rvalue2gvalue = value_array_rvalue2gvalue;
     value_array_table.gvalue2rvalue = value_array_gvalue2rvalue;
 
     RG_DEF_CONVERSION(&value_array_table);
 
 
+    memset(&int_range_table, 0, sizeof(int_range_table));
     int_range_table.type = GST_TYPE_INT_RANGE;
+    int_range_table.klass = Qnil;
     int_range_table.get_superclass = int_range_get_superclass;
     int_range_table.type_init_hook = NULL;
     int_range_table.rvalue2gvalue = int_range_rvalue2gvalue;
@@ -452,7 +458,9 @@ Init_gst_value(VALUE mGst)
     G_DEF_SETTERS(cIntRange);
 
 
+    memset(&fourcc_table, 0, sizeof(fourcc_table));
     fourcc_table.type = GST_TYPE_FOURCC;
+    fourcc_table.klass = Qnil;
     fourcc_table.get_superclass = fourcc_get_superclass;
     fourcc_table.type_init_hook = NULL;
     fourcc_table.rvalue2gvalue = fourcc_rvalue2gvalue;
@@ -478,6 +486,7 @@ Init_gst_value(VALUE mGst)
     G_DEF_SETTERS(cFourcc);
 
 
+    memset(&fraction_table, 0, sizeof(fraction_table));
     fraction_table.type = GST_TYPE_FRACTION;
     fraction_table.klass = rb_const_get(rb_cObject, rb_intern("Rational"));
     fraction_table.rvalue2gvalue = fraction_rvalue2gvalue;
@@ -486,7 +495,9 @@ Init_gst_value(VALUE mGst)
     RG_DEF_CONVERSION(&fraction_table);
 
 
+    memset(&fraction_range_table, 0, sizeof(fraction_range_table));
     fraction_range_table.type = GST_TYPE_FRACTION_RANGE;
+    fraction_range_table.klass = Qnil;
     fraction_range_table.get_superclass = fraction_range_get_superclass;
     fraction_range_table.type_init_hook = NULL;
     fraction_range_table.rvalue2gvalue = fraction_range_rvalue2gvalue;
