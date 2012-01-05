@@ -195,20 +195,5 @@ end
 
 desc "tag the current release"
 task :tag do
-  tagged_url = "#{repository_base_url}/tags/#{version}"
-
-  success = false
-  begin
-    sh("svn", "ls", tagged_url)
-    success = true
-  rescue RuntimeError
-  end
-  raise "#{version} is already tagged" if success
-
-  svn_commands = ["svn", "cp", "-m", "released #{version}!!!"]
-  if ENV["SVN_USER"]
-    svn_commands.concat(["--username", ENV["SVN_USER"]])
-  end
-  svn_commands.concat([guess_copy_source_repository_uri, tagged_url])
-  sh(*svn_commands)
+  sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
 end
