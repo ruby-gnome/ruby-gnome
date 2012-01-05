@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007, 2008 Ruby-GNOME2 Project Team
  *  Copyright (C) 2006, 2008 Sjoerd Simons <sjoerd@luon.net>
  *  Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
@@ -70,7 +70,10 @@ typedef struct _SendEventData {
 
 typedef struct _ThreadData {
     GstElement *element;
-    int notify_fd;
+    gint notify_write_fd;
+    gint notify_read_fd;
+    gint errno_on_write;
+    const gchar *context;
     union {
         SetStateData set_state_data;
         GetStateData get_state_data;
@@ -113,13 +116,14 @@ static void
 do_in_thread(GThreadPool *pool, ThreadData *data)
 {
     int notify_fds[2];
-    char buf[NOTIFY_MESSAGE_SIZE];
     GError *error = NULL;
 
     if (pipe(notify_fds) != 0)
         rb_sys_fail("failed to create a pipe to synchronize threaded operation");
 
-    data->notify_fd = notify_fds[1];
+    data->errno_on_write = 0;
+    data->notify_read_fd = notify_fds[0];
+    data->notify_write_fd = notify_fds[1];
     g_thread_pool_push(pool, data, &error);
     if (error) {
         close(notify_fds[0]);
@@ -129,10 +133,52 @@ do_in_thread(GThreadPool *pool, ThreadData *data)
 
     rb_thread_wait_fd(notify_fds[0]);
 
-    read(notify_fds[0], buf, NOTIFY_MESSAGE_SIZE);
+#define BUFFER_SIZE 512
+    if (data->errno_on_write == 0) {
+        char buf[NOTIFY_MESSAGE_SIZE];
+        ssize_t read_size;
+        int saved_errno = 0;
+        read_size = read(notify_fds[0], buf, NOTIFY_MESSAGE_SIZE);
+        if (read_size != NOTIFY_MESSAGE_SIZE) {
+            saved_errno = errno;
+        }
 
-    close(notify_fds[0]);
-    close(notify_fds[1]);
+        close(notify_fds[0]);
+        close(notify_fds[1]);
+
+        if (saved_errno != 0) {
+            char buffer[BUFFER_SIZE];
+            snprintf(buffer, BUFFER_SIZE - 1,
+                     "failed to read notify pipe on %s", data->context);
+            errno = saved_errno;
+            rb_sys_fail(buffer);
+        }
+    } else {
+        char buffer[BUFFER_SIZE];
+        snprintf(buffer, BUFFER_SIZE - 1,
+                 "failed to write notify pipe on %s", data->context);
+        errno = data->errno_on_write;
+        rb_sys_fail(buffer);
+    }
+#undef BUFFER_SIZE
+}
+
+static void
+notify(ThreadData *thread_data)
+{
+    ssize_t written_size;
+
+    written_size = write(thread_data->notify_write_fd,
+                         NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+    if (written_size != NOTIFY_MESSAGE_SIZE) {
+        int read_fd = thread_data->notify_read_fd;
+        int write_fd = thread_data->notify_write_fd;
+        thread_data->errno_on_write = errno;
+        thread_data->notify_read_fd = -1;
+        thread_data->notify_write_fd = -1;
+        close(write_fd);
+        close(read_fd);
+    }
 }
 
 static void
@@ -144,26 +190,24 @@ set_state_in_thread(gpointer data, gpointer user_data)
     set_state_data = &(thread_data->data.set_state_data);
     set_state_data->result = gst_element_set_state(thread_data->element,
                                                    set_state_data->state);
-    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+    notify(thread_data);
 }
 
 static VALUE
 rb_gst_element_set_state_internal(VALUE self, GstState state)
 {
     VALUE result;
-    ThreadData *thread_data;
+    ThreadData thread_data;
     SetStateData *set_state_data;
 
-    thread_data = g_slice_new(ThreadData);
-    thread_data->element = SELF(self);
-    set_state_data = &(thread_data->data.set_state_data);
+    thread_data.element = SELF(self);
+    thread_data.context = "set_state";
+    set_state_data = &(thread_data.data.set_state_data);
     set_state_data->state = state;
 
-    do_in_thread(set_state_thread_pool, thread_data);
+    do_in_thread(set_state_thread_pool, &thread_data);
 
     result = GST_STATE_CHANGE_RETURN2RVAL(set_state_data->result);
-
-    g_slice_free(ThreadData, thread_data);
 
     return result;
 }
@@ -198,7 +242,7 @@ get_state_in_thread(gpointer data, gpointer user_data)
                                                    &(get_state_data->state),
                                                    &(get_state_data->pending),
                                                    get_state_data->timeout);
-    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+    notify(thread_data);
 }
 
 /* Method: get_state(timeout=nil)
@@ -207,27 +251,25 @@ static VALUE
 rg_get_state(int argc, VALUE *argv, VALUE self)
 {
     VALUE result, timeout;
-    ThreadData *thread_data;
+    ThreadData thread_data;
     GetStateData *get_state_data;
 
     rb_scan_args(argc, argv, "01", &timeout);
 
-    thread_data = g_slice_new(ThreadData);
-    thread_data->element = SELF(self);
-    get_state_data = &(thread_data->data.get_state_data);
+    thread_data.element = SELF(self);
+    thread_data.context = "get_state";
+    get_state_data = &(thread_data.data.get_state_data);
     if (NIL_P(timeout))
         get_state_data->timeout = GST_CLOCK_TIME_NONE;
     else
         get_state_data->timeout = NUM2ULL(timeout);
 
-    do_in_thread(get_state_thread_pool, thread_data);
+    do_in_thread(get_state_thread_pool, &thread_data);
 
     result = rb_ary_new3(3,
                          GST_STATE_CHANGE_RETURN2RVAL(get_state_data->result),
                          GST_STATE2RVAL(get_state_data->state),
                          GST_STATE2RVAL(get_state_data->pending));
-
-    g_slice_free(ThreadData, thread_data);
 
     return result;
 }
@@ -573,7 +615,7 @@ query_in_thread(gpointer data, gpointer user_data)
     query_data = &(thread_data->data.query_data);
     query_data->result = gst_element_query(thread_data->element,
                                            query_data->query);
-    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+    notify(thread_data);
 }
 
 /*
@@ -588,19 +630,17 @@ static VALUE
 rg_query(VALUE self, VALUE query)
 {
     VALUE result;
-    ThreadData *thread_data;
+    ThreadData thread_data;
     QueryData *query_data;
 
-    thread_data = g_slice_new(ThreadData);
-    thread_data->element = SELF(self);
-    query_data = &(thread_data->data.query_data);
+    thread_data.element = SELF(self);
+    thread_data.context = "query";
+    query_data = &(thread_data.data.query_data);
     query_data->query = RVAL2GST_QUERY(query);
 
-    do_in_thread(query_thread_pool, thread_data);
+    do_in_thread(query_thread_pool, &thread_data);
 
     result = CBOOL2RVAL(query_data->result);
-
-    g_slice_free(ThreadData, thread_data);
 
     return result;
 }
@@ -614,7 +654,7 @@ send_event_in_thread(gpointer data, gpointer user_data)
     send_event_data = &(thread_data->data.send_event_data);
     send_event_data->result = gst_element_send_event(thread_data->element,
                                                      send_event_data->event);
-    write(thread_data->notify_fd, NOTIFY_MESSAGE, NOTIFY_MESSAGE_SIZE);
+    notify(thread_data);
 }
 /*
  * Method: send_event(event)
@@ -631,20 +671,18 @@ static VALUE
 rg_send_event(VALUE self, VALUE event)
 {
     VALUE result;
-    ThreadData *thread_data;
+    ThreadData thread_data;
     SendEventData *send_event_data;
 
-    thread_data = g_slice_new(ThreadData);
-    thread_data->element = SELF(self);
-    send_event_data = &(thread_data->data.send_event_data);
+    thread_data.element = SELF(self);
+    thread_data.context = "send_event";
+    send_event_data = &(thread_data.data.send_event_data);
     send_event_data->event = RVAL2GST_EVENT(event);
 
     gst_event_ref(send_event_data->event);
-    do_in_thread(send_event_thread_pool, thread_data);
+    do_in_thread(send_event_thread_pool, &thread_data);
 
     result = CBOOL2RVAL(send_event_data->result);
-
-    g_slice_free(ThreadData, thread_data);
 
     return result;
 }
