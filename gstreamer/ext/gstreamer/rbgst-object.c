@@ -25,7 +25,7 @@
 #define RG_TARGET_NAMESPACE cObject
 #define SELF(self) (RVAL2GST_OBJ(self))
 
-static RGConvertTable table = {0};
+static RGConvertTable table;
 
 /* Class: Gst::Object
  * Basis for the GST object hierarchy.
@@ -64,7 +64,9 @@ Init_gst_object(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 
+    memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_OBJECT;
+    table.klass = Qnil;
     table.instance2robj = rbgst_object_instance2robj;
     table.initialize = rbgst_object_initialize;
 
