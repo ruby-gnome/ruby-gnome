@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2008  Ruby-GNOME2 Project
  *
  *  This library is free software; you can redistribute it and/or
@@ -35,5 +35,6 @@ VALUE rbgst_object_instance2robj(gpointer instance);
 
 
 G_GNUC_INTERNAL void Init_gst_object(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_install_plugins_return(VALUE mGst);
 
 #endif /* __RBGST_PRIVATE_H_ */
