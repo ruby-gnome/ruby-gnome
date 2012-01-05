@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons <sjoerd@luon.net>
  *  Copyright (C) 2005  Laurent Sansonetti <lrz@gnome.org>
  *
@@ -22,7 +22,7 @@
 
 #ifdef HAVE_GST_OVERLAY
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 #include <gst/interfaces/xoverlay.h>
 
 #define RG_TARGET_NAMESPACE mXOverlay
