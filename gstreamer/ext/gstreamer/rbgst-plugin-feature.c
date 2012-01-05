@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 #define RG_TARGET_NAMESPACE cPluginFeature
 #define SELF(self) RVAL2GST_PLUGIN_FEATURE(self)

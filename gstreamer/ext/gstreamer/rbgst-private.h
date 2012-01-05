@@ -45,5 +45,6 @@ G_GNUC_INTERNAL void Init_gst_buffer(VALUE mGst);
 G_GNUC_INTERNAL void Init_gst_tag(VALUE mGst);
 G_GNUC_INTERNAL void Init_gst_child_proxy(VALUE mGst);
 G_GNUC_INTERNAL void Init_gst_pipeline(VALUE mGst);
+G_GNUC_INTERNAL void Init_gst_plugin_feature(VALUE mGst);
 
 #endif /* __RBGST_PRIVATE_H_ */
