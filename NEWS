@@ -26,7 +26,7 @@ This is a source cleanup release.
   * Improvements
     * [ruby-gnome2-devel-en] FileChooserDialog raising warnings on Windows:
       Added hicolor-icon-theme into gem on Windows.
-      [Suggested by wNikolai Weibull]
+      [Suggested by Nikolai Weibull]
   * Fixes
     * Fixed a crash by GC.
     * Plugged memory leaks.
