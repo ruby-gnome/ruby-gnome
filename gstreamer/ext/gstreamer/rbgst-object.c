@@ -72,7 +72,7 @@ Init_gst_object(VALUE mGst)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
 
-    RG_DEF_METHOD(set_name, 1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "name", rg_set_name, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
