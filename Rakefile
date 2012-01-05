@@ -79,7 +79,7 @@ end
 desc "make all packages"
 task :dist => [:dist_gtk2, :dist_gnome2]
 
-base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
+base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
               "README", "Rakefile",
               "exec_make.rb", "extconf.rb", "run-test.rb"]
 gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
@@ -99,7 +99,7 @@ end
 
 desc "release Ruby-GNOME2 packages"
 task :release => [:dist] do
-  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
+  sf_user_name = ENV["SF_USER"] || ENV["USER"]
   project_id = "ruby-gnome2"
   project_name = "Ruby-GNOME 2"
   package_name = "ruby-gnome2"
