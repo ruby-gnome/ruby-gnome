@@ -81,7 +81,7 @@ typedef struct _ThreadData {
     } data;
 } ThreadData;
 
-static RGConvertTable table = {0};
+static RGConvertTable table;
 static VALUE RG_TARGET_NAMESPACE;
 static ID id_gtype;
 static GThreadPool *set_state_thread_pool;
@@ -1008,7 +1008,9 @@ initialize_thread_pool(GThreadPool **pool, GFunc function)
 void
 Init_gst_element(VALUE mGst)
 {
+    memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_ELEMENT;
+    table.klass = Qnil;
     table.instance2robj = instance2robj;
     RG_DEF_CONVERSION(&table);
 
