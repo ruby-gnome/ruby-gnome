@@ -181,7 +181,7 @@ notify(ThreadData *thread_data)
 }
 
 static void
-set_state_in_thread(gpointer data, gpointer user_data)
+set_state_in_thread(gpointer data, G_GNUC_UNUSED gpointer user_data)
 {
     ThreadData *thread_data = (ThreadData *)data;
     SetStateData *set_state_data;
@@ -231,7 +231,7 @@ rg_set_state(VALUE self, VALUE state)
 }
 
 static void
-get_state_in_thread(gpointer data, gpointer user_data)
+get_state_in_thread(gpointer data, G_GNUC_UNUSED gpointer user_data)
 {
     ThreadData *thread_data = (ThreadData *)data;
     GetStateData *get_state_data;
@@ -606,7 +606,7 @@ rg_indexable_p(VALUE self)
 }
 
 static void
-query_in_thread(gpointer data, gpointer user_data)
+query_in_thread(gpointer data, G_GNUC_UNUSED gpointer user_data)
 {
     ThreadData *thread_data = (ThreadData *)data;
     QueryData *query_data;
@@ -645,7 +645,7 @@ rg_query(VALUE self, VALUE query)
 }
 
 static void
-send_event_in_thread(gpointer data, gpointer user_data)
+send_event_in_thread(gpointer data, G_GNUC_UNUSED gpointer user_data)
 {
     ThreadData *thread_data = (ThreadData *)data;
     SendEventData *send_event_data;
@@ -979,8 +979,8 @@ rg_no_more_pads(VALUE self)
     return self;
 }
 
-static VALUE 
-rb_gst_element_found_tag_sig(guint num, const GValue *values)
+static VALUE
+rb_gst_element_found_tag_sig(G_GNUC_UNUSED guint n, const GValue *values)
 {
     GstElement *element, *source;
     GstTagList *tag_list;
