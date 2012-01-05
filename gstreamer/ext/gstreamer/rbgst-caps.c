@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 #define RG_TARGET_NAMESPACE cCaps
 #define SELF(self) (RVAL2GST_CAPS(self))
