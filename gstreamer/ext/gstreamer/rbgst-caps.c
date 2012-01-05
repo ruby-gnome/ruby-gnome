@@ -59,9 +59,13 @@ rg_initialize (int argc, VALUE * argv, VALUE self)
 
     caps = gst_caps_new_any ();
     if (caps != NULL) {
-        for (i = 0; i < argc; i++)
-            gst_caps_append_structure (caps, RVAL2GST_STRUCT(argv[i]));
+        for (i = 0; i < argc; i++) {
+            GstStructure *structure;
+            structure = RVAL2GST_STRUCT(argv[i]);
+            gst_caps_append_structure (caps, gst_structure_copy (structure));
+        }
         G_INITIALIZE (self, caps);
+        gst_caps_unref (caps);
     }
     return Qnil;
 }
