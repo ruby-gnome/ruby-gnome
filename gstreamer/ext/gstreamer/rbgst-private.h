@@ -34,4 +34,6 @@ void _rbgst_mini_object_free(void *ptr);
 VALUE rbgst_object_instance2robj(gpointer instance);
 
 
+G_GNUC_INTERNAL void Init_gst_object(VALUE mGst);
+
 #endif /* __RBGST_PRIVATE_H_ */
