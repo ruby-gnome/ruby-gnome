@@ -42,7 +42,7 @@ rbgst_object_instance2robj(gpointer instance)
     return rbgobj_get_ruby_object_from_gobject(instance, TRUE);
 }
 
-void
+static void
 rbgst_object_initialize(VALUE obj, gpointer cobj)
 {
     if (GST_OBJECT_IS_FLOATING(cobj)) {
