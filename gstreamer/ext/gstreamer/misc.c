@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 VALUE
 rb_str_new_with_format (char *fmt, ...)

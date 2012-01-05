@@ -19,7 +19,6 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
 #include "rbgst-private.h"
 
 char *

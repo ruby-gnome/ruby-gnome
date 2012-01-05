@@ -19,7 +19,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 #define RG_TARGET_NAMESPACE cStructure
 #define SELF(obj) (RVAL2GST_STRUCT(obj))

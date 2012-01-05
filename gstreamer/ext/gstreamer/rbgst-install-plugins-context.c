@@ -19,7 +19,6 @@
  */
 
 #ifdef HAVE_GST_PBUTILS
-#include "rbgst.h"
 #include "rbgst-private.h"
 #include <gst/pbutils/pbutils-enumtypes.h>
 #include <gst/pbutils/install-plugins.h>
