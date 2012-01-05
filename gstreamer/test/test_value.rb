@@ -32,8 +32,8 @@ class TestValue < Test::Unit::TestCase
   end
 
   def test_fraction_range_new
-    assert_equal("[ 2/1, 3/4 ]",
-                 Gst::FractionRange.new(Rational(2, 1), Rational(3, 4)).to_s)
+    assert_equal("[ 1/2, 3/4 ]",
+                 Gst::FractionRange.new(Rational(1, 2), Rational(3, 4)).to_s)
   end
 
   def test_fraction_range
