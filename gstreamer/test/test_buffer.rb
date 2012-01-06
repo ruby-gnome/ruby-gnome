@@ -64,7 +64,10 @@ class TestBuffer < Test::Unit::TestCase
     buffer = Gst::Buffer.new
     assert_nil(buffer.caps)
 
-    caps = Gst::Caps.new
+    structure = Gst::Structure.new("caps")
+    structure["width"] = 320
+    structure["height"] = 240
+    caps = Gst::Caps.new(structure)
     buffer.caps = caps
     assert_equal(caps, buffer.caps)
   end
@@ -161,7 +164,7 @@ class TestBuffer < Test::Unit::TestCase
 
     length = 7
     merged_buffer = buffer1.span(2, buffer2, length)
-    assert(length, merged_buffer.length)
+    assert_equal(length, merged_buffer.length)
   end
 
   def test_span?

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,6 @@
  */
 
 #ifdef HAVE_GST_PBUTILS
-#include "rbgst.h"
 #include "rbgst-private.h"
 #include <gst/pbutils/pbutils-enumtypes.h>
 #include <gst/pbutils/install-plugins.h>

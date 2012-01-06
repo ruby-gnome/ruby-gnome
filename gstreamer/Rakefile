@@ -122,17 +122,18 @@ namespace :win32 do
   ]
 
   namespace :download do
-    packages.each do |package|
-      base = "#{package[:name]}-#{package[:version]}"
+    packages.each do |_package|
+      base = "#{_package[:name]}-#{_package[:version]}"
       tar_gz = "#{base}.tar.gz"
-      tar_gz_url = "#{package[:download_base_url]}/#{tar_gz}"
+      tar_gz_url = "#{_package[:download_base_url]}/#{tar_gz}"
       tar_gz_full_path = download_dir + tar_gz
 
-      desc "Download #{package[:label]} into #{download_dir}."
-      task package[:name] => tar_gz_full_path.to_s
+      desc "Download #{_package[:label]} into #{download_dir}."
+      task _package[:name] => tar_gz_full_path.to_s
 
-      directory tar_gz_full_path.dirname.to_s
-      file tar_gz_full_path.to_s do
+      directory_path = tar_gz_full_path.dirname
+      directory directory_path.to_s
+      file tar_gz_full_path.to_s => directory_path.to_s do
         rake_output_message "downloading... #{tar_gz_url}"
         open(tar_gz_url) do |downloaded_tar_gz|
           tar_gz_full_path.open("wb") do |tar_gz_file|
@@ -146,8 +147,8 @@ namespace :win32 do
   namespace :build do
     task :prepare do
       depended_packages = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
-      pkg_config_path = (["gstreamer"] + depended_packages).collect do |package|
-        "../#{package}/vendor/local/lib/pkgconfig"
+      pkg_config_path = (["gstreamer"] + depended_packages).collect do |_package|
+        "../#{_package}/vendor/local/lib/pkgconfig"
       end
       ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
         File.expand_path(path)
@@ -155,14 +156,14 @@ namespace :win32 do
       ENV["PKG_CONFIG_LIBDIR"] = "#{rcairo_win32_path}/vendor/local/lib/pkgconfig"
     end
 
-    packages.each do |package|
-      desc "Build #{package[:label]} and install it into #{dist_dir}."
-      task package[:name] => [:prepare, "win32:download:#{package[:name]}"] do
-        package_tmp_dir = tmp_dir + package[:name]
+    packages.each do |_package|
+      desc "Build #{_package[:label]} and install it into #{dist_dir}."
+      task _package[:name] => [:prepare, "win32:download:#{_package[:name]}"] do
+        package_tmp_dir = tmp_dir + _package[:name]
         rm_rf(package_tmp_dir)
         mkdir_p(package_tmp_dir)
 
-        base = "#{package[:name]}-#{package[:version]}"
+        base = "#{_package[:name]}-#{_package[:version]}"
         tar_gz = "#{base}.tar.gz"
         tar_gz_full_path = download_dir + tar_gz
         Dir.chdir(package_tmp_dir.to_s) do
@@ -175,7 +176,7 @@ namespace :win32 do
              "LDFLAGS=-L#{rcairo_win32_lib_path} -L#{dist_dir + 'lib'}",
              "--prefix=#{dist_dir}",
              "--host=#{host}",
-             *package[:configure_args]) or exit(false)
+             *_package[:configure_args]) or exit(false)
           common_make_args = []
           common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
           build_make_args = common_make_args.dup
@@ -186,14 +187,14 @@ namespace :win32 do
           sh("nice", "make", *build_make_args) or exit(false)
           sh("make", "install", *install_make_args) or exit(false)
 
-          package_license_dir = license_dir + package[:name]
+          package_license_dir = license_dir + _package[:name]
           mkdir_p(package_license_dir)
           package_license_files = ["AUTHORS", "COPYING", "COPYING.LIB"]
           package_license_files = package_license_files.reject do |file|
             not File.exist?(file)
           end
           cp(package_license_files, package_license_dir)
-          bundled_packages = package[:bundled_packages] || []
+          bundled_packages = _package[:bundled_packages] || []
           bundled_packages.each do |bundled_package|
             bundled_package_license_dir = license_dir + bundled_package[:name]
             mkdir_p(bundled_package_license_dir)
@@ -208,5 +209,5 @@ namespace :win32 do
   end
 
   desc "Build GStreamer binaries"
-  task :build => packages.collect {|package| "win32:build:#{package[:name]}"}
+  task :build => packages.collect {|_package| "win32:build:#{_package[:name]}"}
 end

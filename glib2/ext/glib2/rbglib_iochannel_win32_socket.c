@@ -50,7 +50,7 @@ Init_glib_io_channel_win32_socket(void)
     RG_TARGET_NAMESPACE =
         rb_define_class_under(mGLib,
                               "IOChannelWin32Socket",
-                              RG_TARGET_NAMESPACE);
+                              rb_const_get(mGLib, rb_intern("IOChannel")));
     RG_DEF_METHOD(initialize, 1);
 #endif
 }

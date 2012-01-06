@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 #define RG_TARGET_NAMESPACE cPadTemplate
 #define SELF(self) RVAL2GST_PAD_TEMPLATE(self)

@@ -42,7 +42,7 @@ static VALUE
 rbglib_m_win32_locale_deprecated(VALUE self)
 {
     rb_warn("GLib.win32_locale() is deprecated. Use GLib::Win32.locale instead");
-    return rbglib_m_win32_locale(self);
+    return rg_m_locale(self);
 }
 
 static VALUE
@@ -80,7 +80,7 @@ rbglib_m_win32_locale_filename_from_utf8_deprecated(VALUE self,
                                                     VALUE utf8_filename)
 {
     rb_warn("GLib.win32_locale_filename_from_utf8() is deprecated. Use GLib::Win32.locale_filename_from_utf8 instead");
-    return rbglib_m_win32_locale_filename_from_utf8(self, utf8_filename);
+    return rg_m_locale_filename_from_utf8(self, utf8_filename);
 }
 
 #endif

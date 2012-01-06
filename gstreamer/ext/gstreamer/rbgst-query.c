@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons <sjoerd@luon.net>
  *  Copyright (C) 2006  Zaheer Abbas Merali <zaheerabbas at merali dot org>
@@ -22,14 +22,13 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
 #include "rbgst-private.h"
 
 /* Document-class: Gst::Query
  * Queries.
  */
 
-static RGConvertTable table = {0};
+static RGConvertTable table;
 
 static VALUE rb_cGstQueryPosition;
 static VALUE rb_cGstQueryDuration;
@@ -264,7 +263,9 @@ formats_parse(VALUE self)
 void
 Init_gst_query (VALUE mGst)
 {
+    memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_QUERY;
+    table.klass = Qnil;
     table.get_superclass = get_superclass;
     table.instance2robj = instance2robj;
     RG_DEF_CONVERSION(&table);

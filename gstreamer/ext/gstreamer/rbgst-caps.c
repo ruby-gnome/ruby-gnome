@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2008  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -20,7 +20,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 #define RG_TARGET_NAMESPACE cCaps
 #define SELF(self) (RVAL2GST_CAPS(self))
@@ -59,25 +59,33 @@ rg_initialize (int argc, VALUE * argv, VALUE self)
 
     caps = gst_caps_new_any ();
     if (caps != NULL) {
-        for (i = 0; i < argc; i++)
-            gst_caps_append_structure (caps, RVAL2GST_STRUCT(argv[i]));
+        for (i = 0; i < argc; i++) {
+            GstStructure *structure;
+            structure = RVAL2GST_STRUCT(argv[i]);
+            gst_caps_append_structure (caps, gst_structure_copy (structure));
+        }
         G_INITIALIZE (self, caps);
+        gst_caps_unref (caps);
     }
     return Qnil;
 }
 
 /*
- * Method: set_any(state)
- * state: true or false.
+ * Method: set_any(set)
+ * set: true or false.
  *
  * Sets whether the caps should be compatible with any media format.
  *
  * Returns: self.
  */
 static VALUE
-rg_set_any (VALUE self, VALUE state)
+rg_set_any (VALUE self, VALUE set)
 {
-    RGST_CAPS (self)->flags = GST_CAPS_FLAGS_ANY;
+    if (RVAL2CBOOL(set)) {
+        RGST_CAPS(self)->flags |= GST_CAPS_FLAGS_ANY;
+    } else {
+        RGST_CAPS(self)->flags &= ~GST_CAPS_FLAGS_ANY;
+    }
     return self;
 }
 
@@ -314,7 +322,7 @@ structures
 static VALUE
 rg_simplify_bang (VALUE self)
 {
-    return CBOOL2RVAL (gst_caps_do_simplify (RGST_CAPS (self)));
+    return CBOOL2RVAL (gst_caps_do_simplify (SELF (self)));
 }
 
 /*
@@ -352,7 +360,7 @@ rg_to_s (VALUE self)
  * Returns: a newly allocated Gst::Caps.
  */
 static VALUE
-rg_s_parse (VALUE self, VALUE string)
+rg_s_parse (G_GNUC_UNUSED VALUE self, VALUE string)
 {
     return RGST_CAPS_NEW (gst_caps_from_string (RVAL2CSTR (string)));
 }

@@ -20,12 +20,12 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgst.h"
+#include "rbgst-private.h"
 
 #define RG_TARGET_NAMESPACE cObject
 #define SELF(self) (RVAL2GST_OBJ(self))
 
-static RGConvertTable table = {0};
+static RGConvertTable table;
 
 /* Class: Gst::Object
  * Basis for the GST object hierarchy.
@@ -42,7 +42,7 @@ rbgst_object_instance2robj(gpointer instance)
     return rbgobj_get_ruby_object_from_gobject(instance, TRUE);
 }
 
-void
+static void
 rbgst_object_initialize(VALUE obj, gpointer cobj)
 {
     if (GST_OBJECT_IS_FLOATING(cobj)) {
@@ -64,7 +64,9 @@ Init_gst_object(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
 
+    memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_OBJECT;
+    table.klass = Qnil;
     table.instance2robj = rbgst_object_instance2robj;
     table.initialize = rbgst_object_initialize;
 
@@ -72,7 +74,7 @@ Init_gst_object(VALUE mGst)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GST_TYPE_OBJECT, "Object", mGst);
 
-    RG_DEF_METHOD(set_name, 1);
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "name", rg_set_name, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 

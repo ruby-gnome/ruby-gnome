@@ -39,10 +39,10 @@ class TestElement < Test::Unit::TestCase
                  pipeline.get_state)
 
     pipeline.play
-    assert_equal([Gst::STATE_CHANGE_ASYNC,
+    assert_equal([Gst::STATE_CHANGE_FAILURE,
                   Gst::STATE_READY,
                   Gst::STATE_PLAYING],
-                 pipeline.get_state(10))
+                 pipeline.get_state(1000))
 
     pipeline.pause
     assert_equal([Gst::STATE_CHANGE_ASYNC,
@@ -54,15 +54,13 @@ class TestElement < Test::Unit::TestCase
     assert_equal([Gst::STATE_CHANGE_SUCCESS,
                   Gst::STATE_NULL,
                   Gst::STATE_VOID_PENDING],
-                 pipeline.get_state(10))
+                 pipeline.get_state(1000))
 
     pipeline.set_state(:playing)
-    pend("Async is correct behavior?") do
-      assert_equal([Gst::STATE_CHANGE_SUCCESS,
-                    Gst::STATE_PLAYING,
-                    Gst::STATE_VOID_PENDING],
-                   pipeline.get_state(10))
-    end
+    assert_equal([Gst::STATE_CHANGE_FAILURE,
+                  Gst::STATE_READY,
+                  Gst::STATE_PLAYING],
+                 pipeline.get_state(1000))
   end
 
   def test_query

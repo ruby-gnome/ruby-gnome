@@ -79,7 +79,7 @@ end
 desc "make all packages"
 task :dist => [:dist_gtk2, :dist_gnome2]
 
-base_files = ["AUTHORS", "COPYING.LIB", "ChangeLog", "NEWS",
+base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
               "README", "Rakefile",
               "exec_make.rb", "extconf.rb", "run-test.rb"]
 gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
@@ -97,9 +97,9 @@ task :dist_gnome2 do
   package(gnome2_base_name, base_files + gnome2_packages)
 end
 
-desc "releae Ruby-GNOME2 packages"
+desc "release Ruby-GNOME2 packages"
 task :release => [:dist] do
-  sf_user_name = ENV["SVN_USER"] || ENV["USER"]
+  sf_user_name = ENV["SF_USER"] || ENV["USER"]
   project_id = "ruby-gnome2"
   project_name = "Ruby-GNOME 2"
   package_name = "ruby-gnome2"
@@ -151,8 +151,9 @@ namespace :gem do
     task :build do
       win32_gnome2_packages.each do |package|
         Dir.chdir(package) do
-          ruby("-S", "rake",
-               "cross", "native", "gem", "RUBY_CC_VERSION=1.8.7:1.9.2")
+          tasks = ["cross", "native", "gem"]
+          tasks.unshift("win32:build") if package == "gstreamer"
+          ruby("-S", "rake", "RUBY_CC_VERSION=1.8.7:1.9.2", *tasks)
         end
       end
     end
@@ -194,20 +195,5 @@ end
 
 desc "tag the current release"
 task :tag do
-  tagged_url = "#{repository_base_url}/tags/#{version}"
-
-  success = false
-  begin
-    sh("svn", "ls", tagged_url)
-    success = true
-  rescue RuntimeError
-  end
-  raise "#{version} is already tagged" if success
-
-  svn_commands = ["svn", "cp", "-m", "released #{version}!!!"]
-  if ENV["SVN_USER"]
-    svn_commands.concat(["--username", ENV["SVN_USER"]])
-  end
-  svn_commands.concat([guess_copy_source_repository_uri, tagged_url])
-  sh(*svn_commands)
+  sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
 end

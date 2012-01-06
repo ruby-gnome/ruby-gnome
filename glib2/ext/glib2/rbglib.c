@@ -87,7 +87,7 @@ rbg_rval2glibid(volatile VALUE *value, volatile VALUE *buf, gboolean accept_nil)
         return NULL;
 
     if (SYMBOL_P(*value)) {
-        *buf = rb_sym_to_s(*value);
+        *buf = rb_String(*value);
     } else {
         StringValue(*value);
         *buf = rb_str_dup(*value);
