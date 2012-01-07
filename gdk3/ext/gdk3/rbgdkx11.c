@@ -96,5 +96,7 @@ Init_gdkx11(void)
     RG_DEF_SMETHOD(grab_server, 0);
 
     RG_DEF_SMETHOD(ungrab_server, 0);
+
+    Init_gdkx11_x11window(RG_TARGET_NAMESPACE);
 #endif
 }

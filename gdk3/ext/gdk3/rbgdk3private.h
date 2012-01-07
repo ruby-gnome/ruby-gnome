@@ -93,6 +93,7 @@ G_GNUC_INTERNAL void Init_gdk_visual(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_window(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_windowattr(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdkx11(void);
+G_GNUC_INTERNAL void Init_gdkx11_x11window(VALUE mGdkX11);
 /* deprecated
 G_GNUC_INTERNAL void Init_gdk_draw(VALUE mGdk);
 */
