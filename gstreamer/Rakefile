@@ -27,6 +27,7 @@ namespace :win32 do
   license_dir = dist_dir + "share" + "license"
   tmp_dir = Pathname.new("tmp").expand_path
   download_dir = tmp_dir + "download"
+  patch_dir = (Pathname.new(__FILE__).dirname + "patches").expand_path
 
   rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
   rcairo_win32_path = File.expand_path(rcairo_win32_path)
@@ -35,6 +36,8 @@ namespace :win32 do
 
   xiph_download_url_base = "http://downloads.xiph.org/releases"
   freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
+  sf_net_download_url_base = "http://downloads.sourceforge.net/project"
+  libmad_version = "0.15.1b"
   packages = [
     {
       :name => "libogg",
@@ -58,12 +61,23 @@ namespace :win32 do
       :configure_args => [],
     },
     # {
-    #   :name => "flac",
-    #   :download_base_url => "#{xiph_download_url_base}/flac",
-    #   :label => "FLAC",
-    #   :version => "1.2.1",
-    #   :configure_args => ["--disable-cpplibs"],
+    #   :name => "libmad",
+    #   :download_base_url => "#{sf_net_download_url_base}/mad/libmad/#{libmad_version}",
+    #   :label => "MAD",
+    #   :version => libmad_version,
+    #   :configure_args => ["CFLAGS=-O3 -march=i686"],
+    #   :need_autoreconf => true,
+    #   :patches => ["libmad-0.15.1b-fix-mingw-build.diff"],
     # },
+    {
+      :name => "flac",
+      :download_base_url => "#{xiph_download_url_base}/flac",
+      :label => "FLAC",
+      :version => "1.2.1",
+      :configure_args => ["--disable-cpplibs"],
+      :need_autogen => true,
+      :patches => ["flac-1.2.1-fix-mingw-build.diff"],
+    },
     {
       :name => "speex",
       :download_base_url => "#{xiph_download_url_base}/speex",
@@ -99,6 +113,13 @@ namespace :win32 do
       :version => "0.10.22",
       :configure_args => ["--disable-librfb"],
     },
+    # {
+    #   :name => "gst-plugins-ugly",
+    #   :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
+    #   :label => "GStreamer plugins (ugly)",
+    #   :version => "0.10.18",
+    #   :configure_args => [],
+    # },
     {
       :name => "gst-ffmpeg",
       :download_base_url => "#{freedesktop_download_url_base}/gst-ffmpeg",
@@ -171,6 +192,11 @@ namespace :win32 do
         end
 
         Dir.chdir((package_tmp_dir + base).to_s) do
+          (_package[:patches] || []).each do |patch|
+            sh("patch -p1 < #{patch_dir}/#{patch}")
+          end
+          sh("./autogen.sh") if _package[:need_autogen]
+          sh("autoreconf -i") if _package[:need_autoreconf]
           sh("./configure",
              "CPPFLAGS=-I#{rcairo_win32_include_path} -I#{dist_dir + 'include'}",
              "LDFLAGS=-L#{rcairo_win32_lib_path} -L#{dist_dir + 'lib'}",
