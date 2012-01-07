@@ -114,6 +114,13 @@ namespace :win32 do
       :configure_args => ["--disable-librfb"],
     },
     {
+      :name => "gst-plugins-ugly",
+      :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
+      :label => "GStreamer plugins (ugly)",
+      :version => "0.10.18",
+      :configure_args => [],
+    },
+    {
       :name => "gst-ffmpeg",
       :download_base_url => "#{freedesktop_download_url_base}/gst-ffmpeg",
       :label => "GStreamer ffmpeg",
