@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 #ifdef GDK_WINDOWING_X11
 
-#define RG_TARGET_NAMESPACE mX11
+#define RG_TARGET_NAMESPACE mGdkX11
 
 /* deprecated
 static VALUE
@@ -80,10 +80,10 @@ rg_s_ungrab_server(VALUE self)
 #endif
 
 void
-Init_gdk_x11(VALUE mGdk)
+Init_gdkx11(void)
 {
 #ifdef GDK_WINDOWING_X11
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "X11");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module("GdkX11");
 
 /* deprecated
     RG_DEF_SMETHOD(xid_table_lookup, -1);
