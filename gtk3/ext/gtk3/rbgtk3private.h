@@ -32,6 +32,7 @@
 #endif
 
 #include <rb_cairo.h>
+#include <cairo-gobject.h>
 #include <rbgio2.h>
 #include <rbpango.h>
 #include <rbgdk-pixbuf.h>
@@ -283,5 +284,6 @@ G_GNUC_INTERNAL void Init_gtk_widget(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_widgetpath(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_window(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_windowgroup(VALUE mGtk);
+G_GNUC_INTERNAL void Init_conversions(void);
 
 #endif /* __RBGTK3PRIVATE_H__ */

@@ -1,10 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
- *  Copyright (C) 1998-2001 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
+ *  Copyright (C) 2012  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -24,14 +20,15 @@
 
 #include "rbgtk3private.h"
 
-extern void Init_gtk3(void);
+static VALUE
+cairo_context_gvalue2rvalue(const GValue *value)
+{
+    return CRCONTEXT2RVAL(g_value_get_boxed(value));
+}
 
 void
-Init_gtk3(void)
+Init_conversions(void)
 {
-    Init_gdk_display();
-    Init_gdk_dragcontext();
-    Init_gdk_screen();
-    Init_gtk();
-    Init_conversions();
+    rbgobj_register_g2r_func(CAIRO_GOBJECT_TYPE_CONTEXT, cairo_context_gvalue2rvalue);
 }
+

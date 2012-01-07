@@ -31,4 +31,5 @@ void
 Init_gdk3(void)
 {
     Init_gdk();
+    Init_gdkx11();
 }
