@@ -5,6 +5,7 @@ module Gdk
   define_deprecated_const :Image, :raise => "Use 'Gdk::Pixbuf' or 'Cairo::Surface' instead."
   define_deprecated_const :Colormap, :raise => "Use 'Gdk::Visual' instead."
   define_deprecated_const :Input, :raise => "Use 'GLib::IOChannel' instead."
+  define_deprecated_const :X11, 'GdkX11'
 
   class Cursor
     extend GLib::Deprecatable

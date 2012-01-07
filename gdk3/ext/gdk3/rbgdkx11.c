@@ -22,72 +22,7 @@
 #include "rbgdk3private.h"
 #ifdef GDK_WINDOWING_X11
 
-#define RG_TARGET_NAMESPACE mX11
-
-/* Can't implement
-#define     GDK_ROOT_WINDOW                 ()
-*/
-/* Deprecated.
-#define     GDK_ROOT_PARENT                 ()
-*/
-/* Can't implement
-#define     GDK_DISPLAY                     ()
-#define     GDK_WINDOW_XDISPLAY             (win)
-*/
-/* Use Gdk::Drawable#xid
-#define     GDK_WINDOW_XID                  (win)
-*/
-/* Same as GDK_WINDOW_*
-#define     GDK_PIXMAP_XDISPLAY             (pix)
-#define     GDK_PIXMAP_XID                  (pix)
-#define     GDK_DISPLAY_XDISPLAY            (display)
-#define     GDK_DRAWABLE_XDISPLAY           (win)
-#define     GDK_DRAWABLE_XID                (win)
-*/
-/* Can't implement
-#define     GDK_IMAGE_XDISPLAY              (image)
-#define     GDK_IMAGE_XIMAGE                (image)
-#define     GDK_GC_XDISPLAY                 (gc)
-#define     GDK_COLORMAP_XDISPLAY           (cmap)
-#define     GDK_COLORMAP_XCOLORMAP          (cmap)
-#define     GDK_SCREEN_XDISPLAY             (screen)
-*/
-/* Implement at Gdk::Screen
-#define     GDK_SCREEN_XNUMBER              (screen)
-*/
-/* Can't implement
-#define     GDK_SCREEN_XSCREEN              (screen)
-#define     GDK_VISUAL_XVISUAL              (vis)
-*/
-/* Deprecated.
-#define     GDK_FONT_XDISPLAY               (font)
-#define     GDK_FONT_XFONT                  (font)
-*/
-/* Can't implement.
-#define     GDK_CURSOR_XCURSOR              (cursor)
-#define     GDK_CURSOR_XDISPLAY             (cursor)
-#define     GDK_GC_XGC                      (gc)
-#define     GDK_GC_GET_XGC                  (gc)
-*/
-/* Don't need this.
-#define     GDK_WINDOW_XWINDOW
-*/
-/* Can't implement.
-GdkVisual*  gdkx_visual_get                 (VisualID xvisualid);
-GdkColormap* gdkx_colormap_get              (Colormap xcolormap);
-*/
-/* Implement at Gdk::Pixmap.
-GdkPixmap*  gdk_pixmap_foreign_new          (GdkNativeWindow anid);
-GdkPixmap*  gdk_pixmap_foreign_new_for_display
-                                            (GdkDisplay *display,
-                                             GdkNativeWindow anid);
-*/
-/* Implement at Gdk::Window.
-GdkWindow*  gdk_window_foreign_new          (GdkNativeWindow anid);
-GdkWindow*  gdk_window_foreign_new_for_display
-                                            (GdkDisplay *display,
-                                             GdkNativeWindow anid);
-*/
+#define RG_TARGET_NAMESPACE mGdkX11
 
 /* deprecated
 static VALUE
@@ -115,27 +50,6 @@ rg_s_xid_table_lookup(int argc, VALUE *argv, VALUE self)
 }
 */
 
-/* Implement at Gdk::Window
-GdkWindow*  gdk_window_lookup               (GdkNativeWindow anid);
-GdkWindow*  gdk_window_lookup_for_display   (GdkDisplay *display,
-                                             GdkNativeWindow anid);
-*/
-/* Implement at Gdk::Pixmap
-GdkPixmap*  gdk_pixmap_lookup               (GdkNativeWindow anid);
-GdkPixmap*  gdk_pixmap_lookup_for_display   (GdkDisplay *display,
-                                             GdkNativeWindow anid);
-*/
-/* Deprecated.
-#define     gdk_font_lookup                 (xid)
-#define     gdk_font_lookup_for_display     (display, xid)
-*/
-/* Can't implement.
-GdkDisplay* gdk_x11_lookup_xdisplay         (Display *xdisplay);
-*/
-/* Implement at Gdk::Window
-guint32     gdk_x11_get_server_time         (GdkWindow *window);
-*/
-
 /* deprecated
 static VALUE
 rg_s_net_wm_supports_p(VALUE self, VALUE property)
@@ -144,59 +58,11 @@ rg_s_net_wm_supports_p(VALUE self, VALUE property)
 }
 */
 
-/* Implement at Gdk::Screen
-gboolean    gdk_x11_screen_supports_net_wm_hint
-                                            (GdkScreen *screen,
-                                             GdkAtom property);
-const char* gdk_x11_screen_get_window_manager_name
-                                            (GdkScreen *screen);
-*/
-/* Can't implement
-GdkVisual*  gdk_x11_screen_lookup_visual    (GdkScreen *screen,
-                                             VisualID xvisualid);
-GdkColormap* gdk_x11_colormap_foreign_new   (GdkVisual *visual,
-                                             Colormap xcolormap);
-Colormap    gdk_x11_colormap_get_xcolormap  (GdkColormap *colormap);
-Display*    gdk_x11_colormap_get_xdisplay   (GdkColormap *colormap);
-Cursor      gdk_x11_cursor_get_xcursor      (GdkCursor *cursor);
-Display*    gdk_x11_cursor_get_xdisplay     (GdkCursor *cursor);
-Display*    gdk_x11_display_get_xdisplay    (GdkDisplay *display);
-*/
-
-/* Implement at Gdk::Display
-void        gdk_x11_display_grab            (GdkDisplay *display);
-void        gdk_x11_display_ungrab          (GdkDisplay *display);
-void        gdk_x11_register_standard_event_type
-                                            (GdkDisplay *display,
-                                             gint event_base,
-                                             gint n_events);
-*/
-/* Can't implement
-Display*    gdk_x11_drawable_get_xdisplay   (GdkDrawable *drawable);
-*/
-/* Use Gdk::Drawable#xid instead
-XID         gdk_x11_drawable_get_xid        (GdkDrawable *drawable);
-*/
-/* Deprecated
-G_CONST_RETURN char* gdk_x11_font_get_name  (GdkFont *font);
-Display*    gdk_x11_font_get_xdisplay       (GdkFont *font);
-gpointer    gdk_x11_font_get_xfont          (GdkFont *font);
-*/
-/* Can't implement
-Display*    gdk_x11_gc_get_xdisplay         (GdkGC *gc);
-GC          gdk_x11_gc_get_xgc              (GdkGC *gc);
-Window      gdk_x11_get_default_root_xwindow
-                                            (void);
-*/
-
 static VALUE
 rg_s_default_screen(VALUE self)
 {
     return INT2NUM(gdk_x11_get_default_screen());
 }
-/* Can't implement
-Display*    gdk_x11_get_default_xdisplay    (void);
-*/
 
 static VALUE
 rg_s_grab_server(VALUE self)
@@ -204,17 +70,6 @@ rg_s_grab_server(VALUE self)
     gdk_x11_grab_server();
     return Qnil;
 }
-/* Can't implement 
-Display*    gdk_x11_image_get_xdisplay      (GdkImage *image);
-XImage*     gdk_x11_image_get_ximage        (GdkImage *image);
-*/
-/* Implement at Gdk::Screen.
-int         gdk_x11_screen_get_screen_number
-                                            (GdkScreen *screen);
-*/
-/* Can't impelement
-Screen*     gdk_x11_screen_get_xscreen      (GdkScreen *screen);
-*/
 
 static VALUE
 rg_s_ungrab_server(VALUE self)
@@ -222,33 +77,13 @@ rg_s_ungrab_server(VALUE self)
     gdk_x11_ungrab_server();
     return Qnil;
 }
-/* Can't implement
-Visual*     gdk_x11_visual_get_xvisual      (GdkVisual *visual);
-
-Atom        gdk_x11_atom_to_xatom           (GdkAtom atom);
-Atom        gdk_x11_atom_to_xatom_for_display
-                                            (GdkDisplay *display,
-                                             GdkAtom atom);
-GdkAtom     gdk_x11_xatom_to_atom           (Atom xatom);
-GdkAtom     gdk_x11_xatom_to_atom_for_display
-                                            (GdkDisplay *display,
-                                             Atom xatom);
-Atom        gdk_x11_get_xatom_by_name       (const gchar *atom_name);
-Atom        gdk_x11_get_xatom_by_name_for_display
-                                            (GdkDisplay *display,
-                                             const gchar *atom_name);
-G_CONST_RETURN gchar* gdk_x11_get_xatom_name
-                                            (Atom xatom);
-G_CONST_RETURN gchar* gdk_x11_get_xatom_name_for_display
-                                            (GdkDisplay *display,
-                                             Atom xatom);
-*/
 #endif
+
 void
-Init_gdk_x11(VALUE mGdk)
+Init_gdkx11(void)
 {
 #ifdef GDK_WINDOWING_X11
-    VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGdk, "X11");
+    VALUE RG_TARGET_NAMESPACE = rb_define_module("GdkX11");
 
 /* deprecated
     RG_DEF_SMETHOD(xid_table_lookup, -1);
@@ -261,5 +96,7 @@ Init_gdk_x11(VALUE mGdk)
     RG_DEF_SMETHOD(grab_server, 0);
 
     RG_DEF_SMETHOD(ungrab_server, 0);
+
+    Init_gdkx11_x11window(RG_TARGET_NAMESPACE);
 #endif
 }

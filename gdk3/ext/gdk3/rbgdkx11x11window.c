@@ -1,10 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
- *  Copyright (C) 1998-2001 Yukihiro Matsumoto,
- *                          Daisuke Kanda,
- *                          Hiroshi Igarashi
+ *  Copyright (C) 2012  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,16 +18,34 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgtk3private.h"
+#include "rbgdk3private.h"
 
-extern void Init_gtk3(void);
+#ifdef GDK_WINDOWING_X11
+#define RG_TARGET_NAMESPACE cX11Window
+#define _SELF(self) (RVAL2GDKX11WINDOW(self))
+
+static VALUE
+rg_xid(VALUE self)
+{
+    return ULONG2NUM(gdk_x11_window_get_xid(_SELF(self)));
+}
+
+static VALUE
+rg_move_to_current_desktop(VALUE self)
+{
+    gdk_x11_window_move_to_current_desktop(_SELF(self));
+
+    return self;
+}
+#endif
 
 void
-Init_gtk3(void)
+Init_gdkx11_x11window(VALUE mGdkX11)
 {
-    Init_gdk_display();
-    Init_gdk_dragcontext();
-    Init_gdk_screen();
-    Init_gtk();
-    Init_conversions();
+#ifdef GDK_WINDOWING_X11
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_X11_WINDOW, "X11Window", mGdkX11);
+
+    RG_DEF_METHOD(xid, 0);
+    RG_DEF_METHOD(move_to_current_desktop, 0);
+#endif
 }
