@@ -825,12 +825,6 @@ rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
-rg_server_time(VALUE self)
-{
-    return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
-}
-
-static VALUE
 rg_set_user_time(VALUE self, VALUE time)
 {
     gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
@@ -1036,8 +1030,6 @@ Init_gdk_window(VALUE mGdk)
     rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
 
 #ifdef GDK_WINDOWING_X11
-    RG_DEF_METHOD(server_time, 0);
-
     RG_DEF_METHOD(set_user_time, 1);
 
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);

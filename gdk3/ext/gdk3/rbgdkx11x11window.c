@@ -37,6 +37,12 @@ rg_move_to_current_desktop(VALUE self)
 
     return self;
 }
+
+static VALUE
+rg_server_time(VALUE self)
+{
+    return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
+}
 #endif
 
 void
@@ -47,5 +53,6 @@ Init_gdkx11_x11window(VALUE mGdkX11)
 
     RG_DEF_METHOD(xid, 0);
     RG_DEF_METHOD(move_to_current_desktop, 0);
+    RG_DEF_METHOD(server_time, 0);
 #endif
 }
