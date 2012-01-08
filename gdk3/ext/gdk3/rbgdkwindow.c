@@ -836,13 +836,6 @@ rg_set_user_time(VALUE self, VALUE time)
     gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
     return Qnil;
 }
-
-static VALUE
-rg_move_to_current_desktop(VALUE self)
-{
-    gdk_x11_window_move_to_current_desktop(_SELF(self));
-    return self;
-}
 #endif
 
 struct rbgdk_rval2gdkatomglist_args {
@@ -1046,7 +1039,6 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(server_time, 0);
 
     RG_DEF_METHOD(set_user_time, 1);
-    RG_DEF_METHOD(move_to_current_desktop, 0);
 
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
 #elif defined(GDK_WINDOWING_WIN32)
