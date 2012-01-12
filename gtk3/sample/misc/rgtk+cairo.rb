@@ -17,9 +17,7 @@ w = Gtk::Window.new.add(vb = Gtk::VBox.new)
 vb.add(da = Gtk::DrawingArea.new)
 da.set_size_request(200, 200)
 
-da.signal_connect('expose-event') { |widget, event|
-   cr = widget.window.create_cairo_context
-
+da.signal_connect('draw') { |widget, cr|
    # fill background with white
    cr.set_source_rgba(1.0, 1.0, 1.0)
    cr.paint
