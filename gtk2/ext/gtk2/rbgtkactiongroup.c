@@ -326,8 +326,10 @@ rbg_rval2gtkradioactionentries_body(VALUE value)
             args->result[i].stock_id = RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL(RARRAY_PTR(entry)[1]);
         case 1:
             args->result[i].name = RVAL2CSTR_ACCEPT_NIL(RARRAY_PTR(entry)[0]);
+            break;
         default:
             rb_raise(rb_eArgError, "entry does not contain right number of entries %ld (1..6)", n);
+            break;
         }
     }
 
