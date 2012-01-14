@@ -2,6 +2,33 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.1: 2012-01-14
+
+This is a bug fix release of 1.1.0.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * [ruby-list:48587] Re: [ANN] Ruby-GNOME2 1.1.0
+      fix wrong parent class for GLib::IOChannelWin32Socket.
+      [Reported by ashbb]
+
+==== Ruby/GTK2
+
+  * Fixes
+    * Fixed a bug that Gtk::ActionGroup#add_radio_actions always fail.
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * [win32] Supported FLAC.
+
+=== Thanks
+
+  * ashbb
+
 == Ruby-GNOME2 1.1.0: 2012-01-05
 
 This is a source cleanup release.
