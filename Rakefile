@@ -1,5 +1,6 @@
 # -*- ruby -*-
 
+require "pathname"
 require "open-uri"
 
 repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2"
@@ -49,6 +50,16 @@ ensure
   rm_rf(_dist_dir) if _dist_dir
 end
 
+def download(url, local_path=nil)
+  local_path ||= File.basename(url)
+  open(url) do |remote_file|
+    File.open(local_path, "wb") do |local_file|
+      local_file.print(remote_file.read)
+    end
+  end
+  local_path
+end
+
 desc "configure all packages"
 task :configure do
   ruby("extconf.rb")
@@ -78,6 +89,9 @@ task :test => [:build] do
   ruby("run-test.rb")
 end
 
+gtk2_base_name = "ruby-gtk2"
+gnome2_base_name = "ruby-gnome2-all"
+
 gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
 gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer",
                                    "gtksourceview2", "poppler", "rsvg2", "vte"]
@@ -85,17 +99,131 @@ namespace :dist do
   base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
                 "README", "Rakefile",
                 "exec_make.rb", "extconf.rb", "run-test.rb"]
-  gtk2_base_name = "ruby-gtk2"
   desc "make Ruby/GTK2 package"
   task :gtk2 do
     package(gtk2_base_name, base_files + gtk2_packages)
   end
 
-  gnome2_base_name = "ruby-gnome2-all"
   desc "make Ruby/GNOME2 package"
   task :gnome2 do
     package(gnome2_base_name, base_files + gnome2_packages)
   end
+
+  ruby_versions = ["1.8.7-p352", "1.9.3-p0"]
+  namespace :test do
+    ruby_base_url = "ftp://ftp.ruby-lang.org/pub/ruby"
+    ruby_versions.each do |ruby_version|
+      base_dir = "tmp/dist-test/#{ruby_version}"
+      directory base_dir
+
+      prefix = Pathname.new(base_dir) + "local"
+      ruby_tar_bz2_base = "ruby-#{ruby_version}.tar.bz2"
+      file "#{base_dir}/#{ruby_tar_bz2_base}" => base_dir do
+        generation = ruby_version.scan(/\A\d\.\d/)[0]
+        ruby_tar_bz2_url = "#{ruby_base_url}/#{generation}/#{ruby_tar_bz2_base}"
+        Dir.chdir(base_dir) do
+          download(ruby_tar_bz2_url)
+        end
+      end
+
+      ruby_path = "#{prefix}/bin/ruby"
+      expanded_ruby_path = File.expand_path(ruby_path)
+      file ruby_path => "#{base_dir}/#{ruby_tar_bz2_base}" do
+        expanded_prefix = prefix.expand_path
+        Dir.chdir(base_dir) do
+          sh("tar", "xvf", ruby_tar_bz2_base)
+          Dir.chdir(File.basename(ruby_tar_bz2_base, ".tar.bz2")) do
+            sh("./configure", "--prefix=#{expanded_prefix}")
+            sh("make", "-j8")
+            sh("make", "install-nodoc")
+          end
+        end
+      end
+
+      rubygems_tgz_base = "rubygems-1.8.15.tgz"
+      rubygems_tgz = "#{base_dir}/#{rubygems_tgz_base}"
+      file rubygems_tgz => base_dir do
+        rubygems_url_base = "http://production.cf.rubygems.org/rubygems"
+        Dir.chdir(base_dir) do
+          download("#{rubygems_url_base}/#{rubygems_tgz_base}")
+        end
+      end
+
+      gem_path = "#{prefix}/bin/gem"
+      expanded_gem_path = File.expand_path(gem_path)
+      file gem_path => [ruby_path, rubygems_tgz] do
+        Dir.chdir(base_dir) do
+          sh("tar", "xvf", rubygems_tgz_base)
+          Dir.chdir(File.basename(rubygems_tgz_base, ".tgz")) do
+            sh(expanded_ruby_path, "setup.rb")
+          end
+        end
+      end
+
+      packages = {
+        "gtk2" => {
+          :archive_name => archive_name(gtk2_base_name),
+          :packages => gtk2_packages,
+        },
+        "gnome2" => {
+          :archive_name => archive_name(gnome2_base_name),
+          :packages => gnome2_packages,
+        },
+      }
+      namespace "ruby-#{ruby_version}" do
+        packages.each do |name, attributes|
+          namespace name do
+            tar_gz = File.expand_path(attributes[:archive_name])
+            task :prepare => ["dist:#{name}", gem_path] do
+              Dir.chdir(base_dir) do
+                sh("tar", "xvf", tar_gz)
+              end
+              if /pkg-config/ !~ `#{expanded_gem_path} list pkg-config`
+                sh(expanded_gem_path, "install", "pkg-config")
+              end
+            end
+
+            attributes[:packages].each do |sub_package_name|
+              task sub_package_name => :prepare do
+                Dir.chdir(base_dir) do
+                  package_base_dir = File.basename(tar_gz, ".tar.gz")
+                  rm_rf(sub_package_name)
+                  sh("cp", "-rp",
+                     "#{package_base_dir}/#{sub_package_name}", sub_package_name)
+                  Dir.chdir(sub_package_name) do
+                    sh(expanded_ruby_path, "extconf.rb")
+                    sh("make", "-j8")
+                    sh("make", "install")
+                  end
+                  rm_rf(sub_package_name)
+                end
+              end
+            end
+          end
+        end
+
+        package_test_tasks = []
+        packages.each do |name, attributes|
+          tasks = attributes[:packages].collect do |sub_package_name|
+            "dist:test:ruby-#{ruby_version}:#{name}:#{sub_package_name}"
+          end
+          package_test_tasks.concat(tasks)
+          task name => package_test_tasks
+        end
+      end
+
+      test_tasks = packages.collect do |name, attributes|
+        "dist:test:ruby-#{ruby_version}:#{name}"
+      end
+      task "ruby-#{ruby_version}" => test_tasks
+    end
+  end
+
+  test_tasks = ruby_versions.collect do |ruby_version|
+    "dist:test:ruby-#{ruby_version}"
+  end
+  desc "run packages test"
+  task :test => test_tasks
 end
 desc "make all packages"
 task :dist => ["dist:gtk2", "dist:gnome2"]
