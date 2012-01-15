@@ -2,6 +2,34 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.2: 2012-01-15
+
+This is a bug fix release of 1.1.1.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Fixes
+    * [GitHub#94] install missing header files.
+      [Reported by mtasaka]
+
+==== Ruby/Pango
+
+  * Fixes
+    * [GitHub#94] install a missing header file.
+      [Reported by mtasaka]
+
+==== Ruby/GdkPixbuf2
+
+  * Fixes
+    * [GitHub#94] install missing header files.
+      [Reported by mtasaka]
+
+=== Thanks
+
+  * mtasaka
+
 == Ruby-GNOME2 1.1.1: 2012-01-14
 
 This is a bug fix release of 1.1.0.
