@@ -76,19 +76,19 @@ task :test => [:build] do
   ruby("run-test.rb")
 end
 
+gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
+gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer",
+                                   "gtksourceview2", "poppler", "rsvg2", "vte"]
 namespace :dist do
   base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
                 "README", "Rakefile",
                 "exec_make.rb", "extconf.rb", "run-test.rb"]
-  gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
   gtk2_base_name = "ruby-gtk2"
   desc "make Ruby/GTK2 package"
   task :gtk2 do
     package(gtk2_base_name, base_files + gtk2_packages)
   end
 
-  gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer",
-                                     "gtksourceview2", "poppler", "rsvg2", "vte"]
   gnome2_base_name = "ruby-gnome2-all"
   desc "make Ruby/GNOME2 package"
   task :gnome2 do
