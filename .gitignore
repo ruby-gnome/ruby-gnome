@@ -25,3 +25,4 @@ mkmf.log
 .gdb_history
 /dist/
 /misc/release.rb
+/*.tar.gz
