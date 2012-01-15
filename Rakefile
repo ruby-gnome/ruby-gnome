@@ -1,5 +1,7 @@
 # -*- ruby -*-
 
+require "open-uri"
+
 repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2"
 
 task :default => :build
@@ -98,8 +100,18 @@ end
 desc "make all packages"
 task :dist => ["dist:gtk2", "dist:gnome2"]
 
+directory "misc"
+file "misc/release.rb" => "misc" do |task|
+  release_rb = "https://raw.github.com/clear-code/cutter/master/misc/release.rb"
+  open(release_rb) do |remote_release_rb|
+    File.open(task.name, "w") do |local_release_rb|
+      local_release_rb.print(remote_release_rb.read)
+    end
+  end
+end
+
 desc "release Ruby-GNOME2 packages"
-task :release => [:dist] do
+task :release => ["misc/release.rb", :dist] do
   sf_user_name = ENV["SF_USER"] || ENV["USER"]
   project_id = "ruby-gnome2"
   project_name = "Ruby-GNOME 2"
