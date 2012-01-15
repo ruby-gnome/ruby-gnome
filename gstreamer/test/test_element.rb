@@ -23,7 +23,7 @@ class TestElement < Test::Unit::TestCase
 
   def test_state
     pipeline = Gst::Pipeline.new
-    src = create_element("videotestsrc")
+    src = create_element("fakesrc")
     sink = create_element("fakesink")
     pipeline.add(src, sink)
 
@@ -42,25 +42,25 @@ class TestElement < Test::Unit::TestCase
     assert_equal([Gst::STATE_CHANGE_FAILURE,
                   Gst::STATE_READY,
                   Gst::STATE_PLAYING],
-                 pipeline.get_state(1000))
+                 pipeline.get_state)
 
     pipeline.pause
     assert_equal([Gst::STATE_CHANGE_ASYNC,
                   Gst::STATE_READY,
                   Gst::STATE_PAUSED],
-                 pipeline.get_state(10))
+                 pipeline.get_state(1))
 
     pipeline.stop
     assert_equal([Gst::STATE_CHANGE_SUCCESS,
                   Gst::STATE_NULL,
                   Gst::STATE_VOID_PENDING],
-                 pipeline.get_state(1000))
+                 pipeline.get_state)
 
     pipeline.set_state(:playing)
     assert_equal([Gst::STATE_CHANGE_FAILURE,
                   Gst::STATE_READY,
                   Gst::STATE_PLAYING],
-                 pipeline.get_state(1000))
+                 pipeline.get_state)
   end
 
   def test_query
