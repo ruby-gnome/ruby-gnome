@@ -113,7 +113,7 @@ namespace :dist do
   namespace :test do
     ruby_base_url = "ftp://ftp.ruby-lang.org/pub/ruby"
     ruby_versions.each do |ruby_version|
-      base_dir = "tmp/dist-test/#{ruby_version}"
+      base_dir = "tmp/dist-test-#{version}/#{ruby_version}"
       directory base_dir
 
       prefix = Pathname.new(base_dir) + "local"
