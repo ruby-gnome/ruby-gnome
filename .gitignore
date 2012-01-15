@@ -26,3 +26,4 @@ mkmf.log
 /dist/
 /misc/release.rb
 /*.tar.gz
+/tmp/
