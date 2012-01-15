@@ -188,7 +188,7 @@ namespace :dist do
                 Dir.chdir(base_dir) do
                   package_base_dir = File.basename(tar_gz, ".tar.gz")
                   rm_rf(sub_package_name)
-                  sh("cp", "-rp",
+                  sh("cp", "-a",
                      "#{package_base_dir}/#{sub_package_name}", sub_package_name)
                   Dir.chdir(sub_package_name) do
                     sh(expanded_ruby_path, "extconf.rb")
