@@ -178,8 +178,8 @@ namespace :dist do
               Dir.chdir(base_dir) do
                 sh("tar", "xvf", tar_gz)
               end
-              if /pkg-config/ !~ `#{expanded_gem_path} list pkg-config`
-                sh(expanded_gem_path, "install", "pkg-config")
+              if /cairo/ !~ `#{expanded_gem_path} list cairo`
+                sh(expanded_gem_path, "install", "cairo")
               end
             end
 
