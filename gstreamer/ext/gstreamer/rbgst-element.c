@@ -891,6 +891,25 @@ rg_s_each_pad_template(VALUE self)
 }
 
 /*
+ * Method: seek_simple(format, flags, position)
+ * format: the format to use for seeking (see Gst::Format::Type).
+ * flags:  seek options (see Gst::Seek::FlAG_*)
+ * position: the position to seek to.
+ *
+ * Sends a seek event (Gst::EventSseek) to the element.
+ * 
+ * Returns: true if the event was handled.
+ */
+static VALUE
+rg_seek_simple(VALUE self, VALUE format, VALUE flags, VALUE position)
+{
+    return CBOOL2RVAL(gst_element_seek_simple(SELF(self),
+                                              RVAL2GENUM(format, GST_TYPE_FORMAT),
+                                              RVAL2GFLAGS(flags, GST_TYPE_SEEK_FLAGS),
+                                              NUM2LL(position)));
+}
+
+/*
  * Method: seek(seek_type, offset)
  * seek_type: the method to use for seeking (see Gst::EventSeek::Type).
  * offset: the offset to seek to.
@@ -1059,6 +1078,7 @@ Init_gst_element(VALUE mGst)
     RG_DEF_METHOD_P(indexable, 0);
     RG_DEF_METHOD(query, 1);
     RG_DEF_METHOD(send_event, 1);
+    RG_DEF_METHOD(seek_simple, 3);
     RG_DEF_METHOD(seek, 7);
     RG_DEF_METHOD(index, 0);
     RG_DEF_METHOD(set_index, 1);

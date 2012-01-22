@@ -529,6 +529,18 @@ rg_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 }
 
 static VALUE
+rg_width(VALUE self)
+{
+    return INT2NUM(gdk_window_get_width(_SELF(self)));
+}
+
+static VALUE
+rg_height(VALUE self)
+{
+    return INT2NUM(gdk_window_get_height(_SELF(self)));
+}
+
+static VALUE
 rg_set_icon_list(VALUE self, VALUE rbpixbufs)
 {
     GdkWindow *window = _SELF(self);
@@ -962,6 +974,8 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(user_data, 0);
     RG_DEF_METHOD(geometry, 0);
     RG_DEF_METHOD(set_geometry_hints, 2);
+    RG_DEF_METHOD(width, 0);
+    RG_DEF_METHOD(height, 0);
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_METHOD(set_modal_hint, 1);
     RG_DEF_METHOD(set_type_hint, 1);

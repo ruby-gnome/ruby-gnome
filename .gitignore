@@ -23,3 +23,7 @@ mkmf.log
 */vendor/
 */pkg/
 .gdb_history
+/dist/
+/misc/release.rb
+/*.tar.gz
+/tmp/

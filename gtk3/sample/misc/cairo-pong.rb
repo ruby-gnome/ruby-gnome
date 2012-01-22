@@ -187,7 +187,7 @@ module Pong
       @field = Field.new
 
       @drawing_area = Gtk::DrawingArea.new
-      set_expose_event
+      set_draw
 
       vb = Gtk::VBox.new(false, 5)
       vb.border_width = 10
@@ -201,10 +201,10 @@ module Pong
       end
     end
 
-    def set_expose_event
-      @drawing_area.signal_connect('expose_event') do |widget, event|
-        cr = widget.window.create_cairo_context
-        cr.scale(*widget.window.size)
+    def set_draw
+      @drawing_area.signal_connect('draw') do |widget, cr|
+        window = widget.window
+        cr.scale(window.width, window.height)
         @field.draw(cr)
       end
     end
