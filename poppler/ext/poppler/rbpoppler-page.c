@@ -323,6 +323,31 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     return rb_text;
 }
 
+#if POPPLER_CHECK_VERSION(0, 16, 0)
+static VALUE
+rg_text_layout(VALUE self)
+{
+    PopplerRectangle *rectangles;
+    guint n_rectangles;
+
+    if (poppler_page_get_text_layout(SELF(self), &rectangles, &n_rectangles)) {
+        VALUE *rb_list, *p;
+        VALUE ary;
+        guint i;
+        rb_list = p = ALLOC_N(VALUE, n_rectangles);
+        for (i = 0; i < n_rectangles; i++, p++) {
+            *p = POPPLERRECTANGLE2RVAL(&rectangles[i]);
+        }
+        ary = rb_ary_new4(n_rectangles, rb_list);
+        free(rb_list);
+        free(rectangles);
+        return ary;
+    } else {
+        return Qnil;
+    }
+}
+#endif
+
 static VALUE
 rg_get_selection_region(VALUE self, VALUE scale, VALUE style, VALUE selection)
 {
@@ -418,6 +443,9 @@ Init_poppler_page(VALUE mPoppler)
     RG_DEF_METHOD(thumbnail_size, 0);
     RG_DEF_METHOD(find_text, 1);
     RG_DEF_METHOD(get_text, -1);
+#if POPPLER_CHECK_VERSION(0, 16, 0)
+    RG_DEF_METHOD(text_layout, 0);
+#endif
     RG_DEF_METHOD(get_selection_region, 3);
     RG_DEF_METHOD(link_mapping, 0);
     RG_DEF_METHOD(image_mapping, 0);
