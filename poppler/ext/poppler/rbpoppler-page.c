@@ -278,16 +278,16 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "02", &arg1, &arg2);
 
     page = SELF(self);
-    if (NIL_P(arg1)) {
-        rb_rect = arg2;
-    } else {
-        if (RTEST(rb_obj_is_kind_of(arg2, cRectangle))) {
-            rb_rect = arg2;
+    rb_rect = Qnil;
+    if (!NIL_P(arg1)) {
+        if (RTEST(rb_obj_is_kind_of(arg1, cRectangle))) {
+            rb_rect = arg1;
         } else {
-            rb_rect = Qnil;
-            if (!NIL_P(arg2)) {
-                style = RVAL2POPPLERSELECTIONSTYLE(arg2);
-            }
+            rb_raise(rb_eArgError, "wrong first arrument. selection rectangle is expected.");
+        }
+
+        if (!NIL_P(arg2)) {
+            style = RVAL2POPPLERSELECTIONSTYLE(arg2);
         }
     }
 
