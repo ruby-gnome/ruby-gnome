@@ -1,0 +1,14 @@
+# -*- ruby -*-
+
+require './../glib2/lib/gnome2-raketask'
+
+package = GNOME2Package.new do |_package|
+  _package.summary = "Ruby/VLC is a Ruby binding of libVLC for Ruby/GTK."
+  _package.description = "Ruby/VLC is a Ruby binding of libVLC for Ruby/GTK."
+  _package.dependency.gem.runtime = ["glib2"]
+  _package.win32.packages = []
+  _package.win32.dependencies = []
+  _package.post_install_message = "This library is experimental."
+end
+package.define_tasks
+
