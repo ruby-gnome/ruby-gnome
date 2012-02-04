@@ -18,49 +18,46 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk3private.h"
+#include "rbvlcprivate.h"
 
-#ifdef GDK_WINDOWING_X11
-#define RG_TARGET_NAMESPACE cX11Window
-#define _SELF(self) (RVAL2GDKX11WINDOW(self))
-
-static VALUE
-rg_xid(VALUE self)
+static libvlc_event_t *
+vlc_event_copy(const libvlc_event_t *instance)
 {
-    return ULONG2NUM(gdk_x11_window_get_xid(_SELF(self)));
+    libvlc_event_t *result = g_new(libvlc_event_t, 1);
+    *result = *instance;
+    return result;
 }
 
-static VALUE
-rg_move_to_current_desktop(VALUE self)
+static void
+vlc_event_free(libvlc_event_t *instance)
 {
-    gdk_x11_window_move_to_current_desktop(_SELF(self));
-
-    return self;
+    g_free(instance);
 }
 
-static VALUE
-rg_server_time(VALUE self)
+GType
+vlc_event_get_type(void)
 {
-    return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("VLCEvent",
+                                                (GBoxedCopyFunc)vlc_event_copy,
+                                                (GBoxedFreeFunc)vlc_event_free);
+    return our_type;
 }
 
+#define RG_TARGET_NAMESPACE cEvent
+#define _SELF(self) (RVAL2VLCEVENT(self))
+
 static VALUE
-rg_set_user_time(VALUE self, VALUE time)
+rg_type(VALUE self)
 {
-    gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
-    return Qnil;
+    return VLCEVENTTYPE2RVAL(_SELF(self)->type);
 }
-#endif
 
 void
-Init_gdkx11_x11window(VALUE mGdkX11)
+Init_vlc_event(VALUE mVLC)
 {
-#ifdef GDK_WINDOWING_X11
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_X11_WINDOW, "X11Window", mGdkX11);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_EVENT, "Event", mVLC);
 
-    RG_DEF_METHOD(xid, 0);
-    RG_DEF_METHOD(move_to_current_desktop, 0);
-    RG_DEF_METHOD(server_time, 0);
-    RG_DEF_METHOD(set_user_time, 1);
-#endif
+    RG_DEF_METHOD(type, 0);
 }
