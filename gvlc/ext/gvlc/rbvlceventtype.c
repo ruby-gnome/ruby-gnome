@@ -18,49 +18,21 @@
  *  MA  02110-1301  USA
  */
 
-#include "rbgdk3private.h"
+#include "rbvlcprivate.h"
 
-#ifdef GDK_WINDOWING_X11
-#define RG_TARGET_NAMESPACE cX11Window
-#define _SELF(self) (RVAL2GDKX11WINDOW(self))
-
-static VALUE
-rg_xid(VALUE self)
-{
-    return ULONG2NUM(gdk_x11_window_get_xid(_SELF(self)));
-}
+#define RG_TARGET_NAMESPACE cEventType
+#define _SELF(self) (RVAL2VLCEVENTTYPE(self))
 
 static VALUE
-rg_move_to_current_desktop(VALUE self)
+rg_type_name(VALUE self)
 {
-    gdk_x11_window_move_to_current_desktop(_SELF(self));
-
-    return self;
+    return CSTR2RVAL(libvlc_event_type_name(_SELF(self)));
 }
-
-static VALUE
-rg_server_time(VALUE self)
-{
-    return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
-}
-
-static VALUE
-rg_set_user_time(VALUE self, VALUE time)
-{
-    gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
-    return Qnil;
-}
-#endif
 
 void
-Init_gdkx11_x11window(VALUE mGdkX11)
+Init_vlc_eventtype(VALUE mVLC)
 {
-#ifdef GDK_WINDOWING_X11
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_X11_WINDOW, "X11Window", mGdkX11);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_EVENT_TYPE, "EventType", mVLC);
 
-    RG_DEF_METHOD(xid, 0);
-    RG_DEF_METHOD(move_to_current_desktop, 0);
-    RG_DEF_METHOD(server_time, 0);
-    RG_DEF_METHOD(set_user_time, 1);
-#endif
+    RG_DEF_METHOD(type_name, 0);
 }
