@@ -19,7 +19,7 @@ label3 = Gtk::Label.new.set_markup(%Q[<markup><span size="xx-large" weight="bold
 label4 = Gtk::Label.new.set_markup(%Q[<span foreground="#999900">_Not Use Mnemonic</span>])
 label5 = Gtk::Label.new.set_markup(%Q[<span foreground="#009999">_Use Mnemonic</span>], true)
 
-box = Gtk::VBox.new
+box = Gtk::Box.new(:vertical)
 box.add(label1)
 box.add(label2)
 box.add(label3)

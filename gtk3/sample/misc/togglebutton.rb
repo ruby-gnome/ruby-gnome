@@ -13,17 +13,17 @@ require 'gtk3'
 window = Gtk::Window.new("Gtk::ToggleButton sample")
 window.border_width = 10
 
-box = Gtk::VBox.new(false, 10)
+box = Gtk::Box.new(:vertical, 10)
 window.add(box)
 
 button1 = Gtk::ToggleButton.new("_button1")
-button2 = Gtk::ToggleButton.new("_button2", false)
+button2 = Gtk::ToggleButton.new("_button2",false)
 button3 = Gtk::ToggleButton.new(Gtk::Stock::QUIT)
 box.add(button1).add(button2).add(button3)
 
-box.pack_start(Gtk::HSeparator.new)
+box.pack_start(Gtk::Separator.new(:horizontal))
 
-close = Gtk::Button.new("close")
+close = Gtk::Button.new(:label => "close")
 close.signal_connect("clicked") do
   Gtk.main_quit
 end

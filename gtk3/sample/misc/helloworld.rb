@@ -10,7 +10,7 @@
 
 require 'gtk3'
 
-button = Gtk::Button.new("Hello World")
+button = Gtk::Button.new(:label => "Hello World")
 button.signal_connect("clicked") {
   puts "Hello World"
 }

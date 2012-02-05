@@ -10,20 +10,12 @@
 
 require "gtk3"
 
-if str = Gtk.check_version(2, 4, 0)
-  puts "This sample requires GTK+ 2.4.0 or later"
-  puts str
-  exit
-end
+dialog =  Gtk::FileChooserDialog.new(:title => "Gtk::FileChooser sample", 
+				     :action => Gtk::FileChooser::Action::OPEN,                                 
+				     :buttons => [[Gtk::Stock::OPEN, Gtk::Dialog::ResponseType::ACCEPT],
+				     [Gtk::Stock::CANCEL, Gtk::Dialog::ResponseType::CANCEL]])
 
-dialog =  Gtk::FileChooserDialog.new("Gtk::FileChooser sample", nil, 
-				     Gtk::FileChooser::ACTION_OPEN,
-				     "gnome-vfs",
-				     [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT],
-				     [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL]
-				     )
-
-extra_button = Gtk::Button.new("Extra button")
+extra_button = Gtk::Button.new(:label => "Extra button")
 extra_button.signal_connect("clicked") do
   puts "extra button is clicked"
 end
@@ -43,7 +35,7 @@ dialog.add_filter(filter_c)
 
 dialog.add_shortcut_folder("/tmp")
 
-if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
+if dialog.run == Gtk::Dialog::ResponseType::ACCEPT
   puts "filename = #{dialog.filename}"
   puts "uri = #{dialog.uri}"
 end

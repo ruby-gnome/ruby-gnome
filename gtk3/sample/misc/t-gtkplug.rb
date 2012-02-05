@@ -24,17 +24,17 @@ class MyGtkPlug
     else
       @window = Gtk::Plug.new(xid.to_i)
     end
-    @window.window_position = Gtk::Window::POS_CENTER
+    @window.window_position = Gtk::Window::Position::CENTER
     @window.signal_connect("delete_event"){Gtk.main_quit}
-    @vbox = Gtk::VBox.new(true, 5)
+    @vbox = Gtk::Box.new(:vertical, 5)
     @window.add(@vbox)
-    @button1 = Gtk::Button.new(plug)
+    @button1 = Gtk::Button.new(:label => plug)
     @button1.signal_connect("clicked"){ $stderr.puts plug}
-    @button2 = Gtk::Button.new("Exit")
+    @button2 = Gtk::Button.new(:label => "Exit")
     @button2.signal_connect("clicked"){Gtk.main_quit}
     # Exit button to test an unexpected end of child process by Gtk::Socket
-    @vbox.add(@button1)
-    @vbox.add(@button2)
+    @vbox.pack_start(@button1, true, true)
+    @vbox.pack_start(@button2, true, true)
     @window.show_all
   end
 end

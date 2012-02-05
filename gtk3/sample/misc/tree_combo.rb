@@ -11,12 +11,6 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 6, 0)
-  puts "This sample requires GTK+ 2.6.0 or later"
-  puts str
-  exit
-end
-
 T_APPLICATION       = 0
 T_COMBO_TEXT_COLUMN = 1
 T_COMBO_MODEL       = 2

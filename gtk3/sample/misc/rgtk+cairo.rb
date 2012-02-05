@@ -13,7 +13,7 @@
 require 'gtk3'
 require 'cairo'
 
-w = Gtk::Window.new.add(vb = Gtk::VBox.new)
+w = Gtk::Window.new.add(vb = Gtk::Box.new(:vertical))
 vb.add(da = Gtk::DrawingArea.new)
 da.set_size_request(200, 200)
 

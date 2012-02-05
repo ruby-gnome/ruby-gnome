@@ -13,7 +13,7 @@ require 'gtk3'
 expander = Gtk::Expander.new("Expander Sample")
 expander.expanded = true
 
-button = Gtk::Button.new("Hide this button.")
+button = Gtk::Button.new(:label => "Hide this button.")
 button.signal_connect("clicked") do
   expander.expanded = false
 end

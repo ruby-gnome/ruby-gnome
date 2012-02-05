@@ -9,12 +9,6 @@
 =end
 require 'gtk3'
 
-if str = Gtk.check_version(2, 4, 0)
-  puts "This sample requires GTK+ 2.4.0 or later"
-  puts str
-  exit
-end
-
 ls = Gtk::ListStore.new(String, Integer)
 
 column1 = Gtk::TreeViewColumn.new("data1",

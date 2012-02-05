@@ -13,15 +13,15 @@ require 'gtk3'
 window = Gtk::Window.new("Gtk::ListStore sample")
 window.border_width = 0
 
-box1 = Gtk::VBox.new(false, 0)
+box1 = Gtk::Box.new(:vertical, 0)
 window.add(box1)
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.pack_start(box2, true, true, 0)
 
 scrolled_win = Gtk::ScrolledWindow.new
-scrolled_win.set_policy(Gtk::POLICY_AUTOMATIC,Gtk::POLICY_AUTOMATIC)
+scrolled_win.set_policy(:automatic,:automatic)
 box2.pack_start(scrolled_win, true, true, 0)
 
 data = [
@@ -42,7 +42,7 @@ column = Gtk::TreeViewColumn.new("Data",
                                  Gtk::CellRendererText.new, {:text => 0})
 treeview = Gtk::TreeView.new(model)
 treeview.append_column(column)
-treeview.selection.set_mode(Gtk::SELECTION_SINGLE)
+treeview.selection.set_mode(:single)
 scrolled_win.add_with_viewport(treeview)
 
 data.each do |v|
@@ -50,8 +50,8 @@ data.each do |v|
   iter[0] =  v
 end
 
-button = Gtk::Button.new("add")
-button.set_flags(Gtk::Widget::CAN_FOCUS)
+button = Gtk::Button.new(:label => "add")
+button.can_focus=true
 
 i = 0
 button.signal_connect("clicked") do
@@ -62,28 +62,28 @@ end
 
 box2.pack_start(button, false, true, 0)
 
-button = Gtk::Button.new("remove")
-button.set_flags(Gtk::Widget::CAN_FOCUS)
+button = Gtk::Button.new(:label => "remove")
+button.can_focus=true
 button.signal_connect("clicked") do
   iter = treeview.selection.selected
   model.remove(iter) if iter
 end
 box2.pack_start(button, false, true, 0)
 
-separator = Gtk::HSeparator.new
+separator = Gtk::Separator.new(:horizontal)
 box1.pack_start(separator, false, true, 0)
 separator.show
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.pack_start(box2, false, true, 0)
 
-button = Gtk::Button.new("close")
+button = Gtk::Button.new(:label => "close")
 button.signal_connect("clicked") do
   Gtk.main_quit
 end
 box2.pack_start(button, true, true, 0)
-button.set_flags(Gtk::Widget::CAN_DEFAULT)
+button.can_default=true
 button.grab_default
 
 window.set_default_size(300, 300)
