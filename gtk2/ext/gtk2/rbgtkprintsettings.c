@@ -58,7 +58,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 #else
 static VALUE
-ps_initialize(VALUE self)
+rg_initialize(VALUE self)
 {
     G_INITIALIZE(self, gtk_print_settings_new());
     return Qnil;
