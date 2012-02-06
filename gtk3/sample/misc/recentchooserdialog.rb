@@ -10,20 +10,13 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 10, 0)
-  puts "This sample requires GTK+ 2.10.0 or later"
-  puts str
-  exit
-end
-
-dialog = Gtk::RecentChooserDialog.new("Recent Chooser Dialog Sample",
-                                      nil,
-                                      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL], 
-                                      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+dialog = Gtk::RecentChooserDialog.new(:title => "Recent Chooser Dialog Sample",
+                                      :buttons => [[Gtk::Stock::CANCEL, Gtk::Dialog::ResponseType::CANCEL], 
+                                        [Gtk::Stock::OPEN, Gtk::Dialog::ResponseType::ACCEPT]])
 
 dialog.signal_connect("response") do |widget, response|
   case response
-  when Gtk::Dialog::RESPONSE_ACCEPT
+  when Gtk::Dialog::ResponseType::ACCEPT
     info = dialog.current_item
     if info
       puts "----"

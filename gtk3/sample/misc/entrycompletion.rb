@@ -12,12 +12,6 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 4, 0)
-  puts "This sample requires GTK+ 2.4.0 or later"
-  puts str
-  exit
-end
-
 window = Gtk::Window.new
 window.set_default_size(200, 200)
 

@@ -23,7 +23,7 @@ root_iter[2] = Gdk::Color.new(0, 65535, 0)
 root_iter[3] = 5.0
  
 # column 2
-root_iter[4] = window.render_icon(Gtk::Stock::NEW, Gtk::IconSize::DIALOG, "icon1")
+root_iter[4] = window.render_icon_pixbuf(Gtk::Stock::NEW, Gtk::IconSize::IconSize::DIALOG)
 
 child_iter1 = model.append(root_iter)
 child_iter1[0] = "Child_Iter1"
@@ -32,7 +32,7 @@ child_iter1[2] = Gdk::Color.new(65535, 0, 0)
 child_iter1[3] = 3.0
 
 # column 2
-child_iter1[4] = window.render_icon(Gtk::Stock::OPEN, Gtk::IconSize::MENU, "icon2")
+child_iter1[4] = window.render_icon_pixbuf(Gtk::Stock::OPEN, Gtk::IconSize::IconSize::MENU)
 
 child_iter2 = model.append(root_iter)
 child_iter2[0] = "Child_Iter2"
@@ -41,7 +41,7 @@ child_iter2[2] = Gdk::Color.new(0, 0, 65535)
 child_iter2[3] = 0.9
 
 # column 2
-child_iter2[4] = window.render_icon(Gtk::Stock::QUIT, Gtk::IconSize::BUTTON, "icon3")
+child_iter2[4] = window.render_icon_pixbuf(Gtk::Stock::QUIT, Gtk::IconSize::IconSize::BUTTON)
 
 
 # Create view

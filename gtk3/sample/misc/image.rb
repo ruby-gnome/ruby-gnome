@@ -16,22 +16,22 @@ window.signal_connect("destroy") do
 end
 window.border_width = 0
 
-box1 = Gtk::VBox.new(false, 10)
+box1 = Gtk::Box.new(:vertical, 10)
 box1.border_width = 10
 
 button = Gtk::Button.new
 box1.add(button)
 
 label = Gtk::Label.new("Gtk::Image\ntest")
-image = Gtk::Image.new("test.xpm")
+image = Gtk::Image.new(:file => "test.xpm")
 
-box2 = Gtk::HBox.new(false, 5).add(image).add(label)
+box2 = Gtk::Box.new(:horizontal, 5).add(image).add(label)
 
 button.add(box2)
 
-box1.add(Gtk::HSeparator.new)
+box1.add(Gtk::Separator.new(:horizontal))
 
-button = Gtk::Button.new("close")
+button = Gtk::Button.new(:label => "close")
 button.signal_connect("clicked") do
   Gtk.main_quit
 end

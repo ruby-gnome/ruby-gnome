@@ -13,15 +13,15 @@ require 'gtk3'
 window = Gtk::Window.new("entry")
 window.border_width = 0
 
-box1 = Gtk::VBox.new(false, 10)
+box1 = Gtk::Box.new(:vertical, 10)
 window.add(box1)
 
 entry = Gtk::Entry.new
 
 box1.add(entry)
-box1.add(Gtk::HSeparator.new)
+box1.add(Gtk::Separator.new(:horizontal))
 
-button = Gtk::Button.new("close")
+button = Gtk::Button.new(:label => "close")
 button.signal_connect("clicked") do
   Gtk.main_quit
 end

@@ -10,13 +10,7 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 4, 0)
-  puts "This sample requires GTK+ 2.4.0 or later"
-  puts str
-  exit
-end
-
-box = Gtk::VBox.new
+box = Gtk::Box.new(:vertical)
 
 #Gtk::ColorButton
 colorbutton = Gtk::ColorButton.new
@@ -33,22 +27,18 @@ fontbutton.signal_connect("font-set") do
 end
 box.add(fontbutton)
 
-#Gtk::FileChooserButton(GTK+-2.6.0 or later)
-if str = Gtk.check_version(2, 6, 0)
-  puts "Gtk::FileChooserButton requires GTK+ 2.6.0 or later"
-else
-  filebutton = Gtk::FileChooserButton.new("Gtk::FileChooserButton", 
-					  Gtk::FileChooser::ACTION_OPEN)
-  filebutton.filename = GLib.home_dir
-  filebutton.signal_connect("current-folder-changed") do |w, e|
-    p filebutton.filename
-  end
-
-  box.add(filebutton)
+#Gtk::FileChooserButton
+filebutton = Gtk::FileChooserButton.new("Gtk::FileChooserButton", 
+                                    Gtk::FileChooser::Action::OPEN)
+filebutton.filename = GLib.home_dir
+filebutton.signal_connect("current-folder-changed") do |w, e|
+  p filebutton.filename
 end
 
+box.add(filebutton)
+
 #Quit
-quitbutton = Gtk::Button.new("Quit")
+quitbutton = Gtk::Button.new(:label => "Quit")
 quitbutton.signal_connect("clicked") do
   Gtk.main_quit
 end

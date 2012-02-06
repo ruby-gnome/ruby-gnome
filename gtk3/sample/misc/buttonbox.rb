@@ -16,17 +16,17 @@ def create_bbox_window(horizontal, title, pos, spacing, layout)
     window.destroy
   end
 
-  box1 = Gtk::VBox.new(false, 0)
+  box1 = Gtk::Box.new(:vertical, 0)
   window.add(box1)
 
   if horizontal
     window.set_default_size(550, 60)
     window.move(150, pos)
-    bbox = Gtk::HButtonBox.new
+    bbox = Gtk::ButtonBox.new(:horizontal)
   else
     window.set_default_size(150, 400)
     window.move(pos, 200)
-    bbox = Gtk::VButtonBox.new
+    bbox = Gtk::ButtonBox.new(:vertical)
   end
 
   bbox.layout_style = layout
@@ -34,35 +34,35 @@ def create_bbox_window(horizontal, title, pos, spacing, layout)
   box1.border_width = 25
   box1.pack_start(bbox, true, true, 0)
 
-  button = Gtk::Button.new("OK")
+  button = Gtk::Button.new(:label => "OK")
   bbox.add(button)
   button.signal_connect("clicked") do
     window.destroy
   end
 
-  button = Gtk::Button.new("Cancel")
+  button = Gtk::Button.new(:label => "Cancel")
   bbox.add(button)
   button.signal_connect("clicked") do
     window.destroy
   end
 
-  button = Gtk::Button.new("Help")
+  button = Gtk::Button.new(:label => "Help")
   bbox.add(button)
   window.show_all
 end
 
 def test_hbbox
-  create_bbox_window(true, "Spread", 50, 40, Gtk::ButtonBox::SPREAD)
-  create_bbox_window(true, "Edge", 250, 40, Gtk::ButtonBox::EDGE)
-  create_bbox_window(true, "Start", 450, 40,  Gtk::ButtonBox::START)
-  create_bbox_window(true, "End", 650, 15, Gtk::ButtonBox::END)
+  create_bbox_window(true, "Spread", 50, 40, :spread)
+  create_bbox_window(true, "Edge", 250, 40, :edge)
+  create_bbox_window(true, "Start", 450, 40,  :start)
+  create_bbox_window(true, "End", 650, 15, :end)
 end
 
 def test_vbbox
-  create_bbox_window(false, "Spread", 50, 40, Gtk::ButtonBox::SPREAD)
-  create_bbox_window(false, "Edge", 250, 40,  Gtk::ButtonBox::EDGE)
-  create_bbox_window(false, "Start", 450, 40, Gtk::ButtonBox::START)
-  create_bbox_window(false, "End", 650, 15, Gtk::ButtonBox::END)
+  create_bbox_window(false, "Spread", 50, 40, :spread)
+  create_bbox_window(false, "Edge", 250, 40,  :edge)
+  create_bbox_window(false, "Start", 450, 40, :start)
+  create_bbox_window(false, "End", 650, 15, :end)
 end
 
 window = Gtk::Window.new("button box")
@@ -71,10 +71,10 @@ window.signal_connect("delete_event") do
 end
 window.border_width = 20
 
-bbox = Gtk::HButtonBox.new
+bbox = Gtk::ButtonBox.new(:horizontal)
 window.add(bbox)
 
-button = Gtk::Button.new("Horizontal")
+button = Gtk::Button.new(:label => "Horizontal")
 
 button.signal_connect("clicked") do
   test_hbbox
@@ -82,7 +82,7 @@ end
 
 bbox.add(button)
 
-button = Gtk::Button.new("Vertical")
+button = Gtk::Button.new(:label => "Vertical")
 button.signal_connect("clicked") do
   test_vbbox
 end

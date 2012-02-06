@@ -17,24 +17,24 @@ require 'gtk3'
 class MyGtkSocket < Gtk::Window
   def initialize
     super("Gtk::Socket Test")
-    set_window_position(Gtk::Window::POS_CENTER)
+    set_window_position(Gtk::Window::Position::CENTER)
     signal_connect("delete_event"){Gtk::main_quit}
 
     @buttons = []
     6.times {|n|
-      @buttons << Gtk::Button.new("Plug #{n}")
+      @buttons << Gtk::Button.new(:label => "Plug #{n}")
       @buttons.last.signal_connect("clicked"){ plug(n) }
     }
     
     @table = Gtk::Table.new(1, 2)
     @table.set_size_request(320, 200)
     add(@table)
-    @vbox = Gtk::VBox.new(true, 5)
+    @vbox = Gtk::Box.new(:vertical, 5)
     @buttons.each{|b| @vbox.add(b) }
     @vbox.set_size_request(150, 190)
-    @table.attach(@vbox, 0, 1, 0, 1, Gtk::FILL, Gtk::FILL, 5, 5)
+    @table.attach(@vbox, 0, 1, 0, 1, :fill, :fill, 5, 5)
     @socket = Gtk::Socket.new
-    @table.attach(@socket, 1, 2, 0, 1, Gtk::FILL, Gtk::FILL, 5, 5)
+    @table.attach(@socket, 1, 2, 0, 1, :fill, :fill, 5, 5)
     @socket.set_size_request(150, 150)
 
     show_all
@@ -52,7 +52,7 @@ class MyGtkSocket < Gtk::Window
         # socket has been destroyed because child process finished unexpectedly
       end
       @socket = Gtk::Socket.new
-      @table.attach(@socket, 1, 2, 0, 1, Gtk::FILL, Gtk::FILL, 5, 5)
+      @table.attach(@socket, 1, 2, 0, 1, :fill, :fill, 5, 5)
       @socket.set_size_request(150, 190)
       @socket.show
       @xid = @socket.id

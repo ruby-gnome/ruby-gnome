@@ -13,7 +13,7 @@ require 'gtk3'
 window = Gtk::Window.new("buttons")
 window.border_width = 0
 
-box1 = Gtk::VBox.new(false, 0)
+box1 = Gtk::Box.new(:vertical, 0)
 window.add(box1)
 
 table = Gtk::Table.new(3, 3, false)
@@ -24,7 +24,7 @@ box1.pack_start(table, true, true, 0)
 
 button = []
 0.upto(8) do |i|
-  button.push Gtk::Button.new("button"+(i+1).to_s)
+  button.push Gtk::Button.new(:label => "button"+(i+1).to_s)
 end
 0.upto(8) do |i|
   button[i].signal_connect("clicked") do |w|
@@ -48,14 +48,14 @@ table.attach(button[6], 1, 2, 0, 1, nil, nil, 0, 0)
 table.attach(button[7], 2, 3, 1, 2, nil, nil, 0, 0)
 table.attach(button[8], 0, 1, 1, 2, nil, nil, 0, 0)
 
-separator = Gtk::HSeparator.new
+separator = Gtk::Separator.new(:vertical)
 box1.pack_start(separator, false, true, 0)
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.pack_start(box2, false, true, 0)
 
-close = Gtk::Button.new("close")
+close = Gtk::Button.new(:label => "close")
 close.signal_connect("clicked") do
   Gtk.main_quit
 end

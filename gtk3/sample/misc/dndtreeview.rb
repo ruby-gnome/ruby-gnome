@@ -40,11 +40,11 @@ class TestWindow < Gtk::Window
       iter.set_value(1, v2)
     end
 
-    view.enable_model_drag_source(Gdk::Window::BUTTON1_MASK,
+    view.enable_model_drag_source(Gdk::Window::ModifierType::BUTTON1_MASK,
                                   TARGET_TABLE, 
-                                  Gdk::DragContext::ACTION_COPY|Gdk::DragContext::ACTION_MOVE)
+                                  Gdk::DragContext::Action::COPY|Gdk::DragContext::Action::MOVE)
     view.enable_model_drag_dest(TARGET_TABLE,
-                                 Gdk::DragContext::ACTION_COPY|Gdk::DragContext::ACTION_MOVE) 
+                                 Gdk::DragContext::Action::COPY|Gdk::DragContext::Action::MOVE) 
 
     add(view)
   end
