@@ -12,13 +12,13 @@ require 'gtk3'
 
 window = Gtk::Window.new("Gtk::Button sample")
 
-button1 = Gtk::Button.new("_HELLO")
-button2 = Gtk::Button.new("_HELLO", false)
-button3 = Gtk::Button.new(Gtk::Stock::QUIT)  
+button1 = Gtk::Button.new(:mnemonic => "_HELLO")
+button2 = Gtk::Button.new(:label => "_HELLO")
+button3 = Gtk::Button.new(:stock_id => Gtk::Stock::QUIT)  
 
 button3.signal_connect("clicked"){ Gtk.main_quit }
 
-box = Gtk::VBox.new
+box = Gtk::Box.new(:vertical)
 box.add(button1)
 box.add(button2)
 box.add(button3)

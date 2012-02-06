@@ -12,10 +12,10 @@ require 'gtk3'
 window = Gtk::Window.new("Gdk::Cursor sample")
 window.realize
 
-button = Gtk::Button.new("Click!")
+button = Gtk::Button.new(:label => "Click!")
 button.use_underline = false
 
-cursors = Gdk::Cursor::Type.values - [Gdk::Cursor::CURSOR_IS_PIXMAP]
+cursors = Gdk::Cursor::Type.values - [Gdk::Cursor::Type::CURSOR_IS_PIXMAP]
 
 cnt = 0
 button.signal_connect('clicked') do

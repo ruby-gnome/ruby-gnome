@@ -47,7 +47,7 @@ class Print < Gtk::PrintOperation
         # with this option disabled, the origin is the the upper left corner
         # *taking into consideration margins* !
         self.use_full_page = false
-        self.unit = Gtk::PaperSize::UNIT_POINTS
+        self.unit = Gtk::PaperSize::Unit::POINTS
 
         # set default paper size
         page_setup = Gtk::PageSetup.new
@@ -115,7 +115,7 @@ class Print < Gtk::PrintOperation
     end
 
     def run_print_dialog
-        res = run(ACTION_PRINT_DIALOG, @parent_window)
+        res = run(Action::PRINT_DIALOG, @parent_window)
         case res
             when RESULT_ERROR
                 puts "error"
@@ -129,7 +129,7 @@ class Print < Gtk::PrintOperation
     end
 
     def run_preview
-        res = run(ACTION_PREVIEW, @parent_window)
+        res = run(Action::PREVIEW, @parent_window)
     end
 
     private
@@ -137,12 +137,12 @@ class Print < Gtk::PrintOperation
     def page_height
         setup = self.default_page_setup
         # this takes margins into consideration, contrary to get_paper_height
-        setup.get_page_height(Gtk::PaperSize::UNIT_POINTS)
+        setup.get_page_height(Gtk::PaperSize::Unit::POINTS)
     end
 
     def page_width
         setup = self.default_page_setup
-        width = setup.get_page_width(Gtk::PaperSize::UNIT_POINTS)
+        width = setup.get_page_width(Gtk::PaperSize::Unit::POINTS)
     end
 
     def real_page_height
@@ -158,7 +158,7 @@ class Print < Gtk::PrintOperation
 
         layout.width_in_points = page_width
         layout.font_description = FONT
-        layout.wrap = Pango::Layout::WRAP_CHAR
+        layout.wrap = Pango::Layout::WrapMode::CHAR
         layout.ellipsize = Pango::Layout::ELLIPSIZE_NONE
         layout.single_paragraph_mode = false
 
@@ -197,9 +197,9 @@ class Window < Gtk::Window
         set_default_size(600, 600)
 
         @textview = Gtk::TextView.new
-        @textview.wrap_mode = Gtk::TextTag::WRAP_WORD
+        @textview.wrap_mode = Gtk::TextTag::WrapMode::WORD
 
-        hbox = Gtk::HBox.new
+        hbox = Gtk::Box.new(:horizontal)
 
         page_setup_button = Gtk::Button.new
         page_setup_button.label = "Page setup"
@@ -208,14 +208,14 @@ class Window < Gtk::Window
                                                        @page_setup)
         end
 
-        print_preview_button = Gtk::Button.new(Gtk::Stock::PRINT_PREVIEW)
+        print_preview_button = Gtk::Button.new(:stock_id => Gtk::Stock::PRINT_PREVIEW)
         print_preview_button.signal_connect("clicked") do
             printop = Print.new(self, @textview.buffer.text)
             printop.default_page_setup = @page_setup if @page_setup
             printop.run_preview
         end
 
-        print_button = Gtk::Button.new(Gtk::Stock::PRINT)
+        print_button = Gtk::Button.new(:stock_id => Gtk::Stock::PRINT)
         print_button.signal_connect("clicked") do
             printop = Print.new(self, @textview.buffer.text)
             printop.default_page_setup = @page_setup if @page_setup
@@ -226,11 +226,11 @@ class Window < Gtk::Window
             hbox.pack_start(b, true, true)  # expand, fill
         end
 
-        scrollbar = Gtk::VScrollbar.new
+        scrollbar = Gtk::Scrollbar.new(:vertical)
 
-        vbox = Gtk::VBox.new
+        vbox = Gtk::Box.new(:vertical)
         scroll = Gtk::ScrolledWindow.new.add(@textview)        
-        scroll.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+        scroll.set_policy(:automatic, :automatic)
         vbox.pack_start(scroll)
         vbox.pack_end(hbox, false, false)
 

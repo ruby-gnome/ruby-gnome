@@ -10,14 +10,8 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 12, 0)
-    puts "This sample requires GTK+ 2.12.0 or later"
-    puts str
-    exit
-end
-
 window = Gtk::Window.new
-window.add(scale = Gtk::ScaleButton.new(Gtk::IconSize::BUTTON))
+window.add(scale = Gtk::ScaleButton.new(Gtk::IconSize::IconSize::BUTTON))
 scale.set_icons(['gtk-goto-bottom', 'gtk-goto-top', 'gtk-execute'])
 scale.signal_connect('value-changed') { |widget, value| puts "value changed: #{value}" }
 window.show_all

@@ -13,7 +13,7 @@ require 'gtk3'
 window = Gtk::Window.new("Gtk::Window sample")
 window.signal_connect("destroy"){Gtk.main_quit}
 
-button = Gtk::Button.new("Hello World")
+button = Gtk::Button.new(:label => "Hello World")
 button.signal_connect("clicked") do
   puts "hello world"
   Gtk.main_quit

@@ -22,11 +22,15 @@ cal.select_month(date.month, date.year)
 cal.select_day(date.day)
 cal.mark_day(date.day)
 #cal.clear_marks
-cal.display_options(Gtk::Calendar::SHOW_HEADING |
-		    Gtk::Calendar::SHOW_DAY_NAMES |
-		    Gtk::Calendar::NO_MONTH_CHANGE |
-		    Gtk::Calendar::SHOW_WEEK_NUMBERS |
-		    Gtk::Calendar::WEEK_START_MONDAY)
+
+#
+# Gtk::Calendar::DisplayOptions::WEEK_START_MONDAY does not exist anymore
+#
+
+cal.set_display_options(Gtk::Calendar::DisplayOptions::SHOW_HEADING |
+                Gtk::Calendar::DisplayOptions::SHOW_DAY_NAMES |
+                Gtk::Calendar::DisplayOptions::NO_MONTH_CHANGE |
+                Gtk::Calendar::DisplayOptions::SHOW_WEEK_NUMBERS)
 year, month, day = cal.date
 puts "this is #{month} #{day}, #{year}"
 

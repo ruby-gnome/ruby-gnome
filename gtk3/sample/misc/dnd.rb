@@ -16,11 +16,11 @@ class SrcWindow < Gtk::Window
     @label = Gtk::Label.new("Drag here!")
     add(@label)
     set_default_size(100, 100)
-    Gtk::Drag.source_set(self, Gdk::Window::BUTTON1_MASK | 
-                         Gdk::Window::BUTTON2_MASK,
-                         [["test", Gtk::Drag::TARGET_SAME_APP, 12345]], 
-                         Gdk::DragContext::ACTION_COPY | 
-                         Gdk::DragContext::ACTION_MOVE)
+    drag_source_set(Gdk::Window::ModifierType::BUTTON1_MASK | 
+                Gdk::Window::ModifierType::BUTTON2_MASK,
+                [["test", Gtk::Drag::TargetFlags::SAME_APP, 12345]], 
+                Gdk::DragContext::Action::COPY | 
+                Gdk::DragContext::Action::MOVE)
     signal_connect("drag_data_get") do |widget, context, selection_data, info, time|
 #      selection_data.set("text/uri-list", 8, "hoge.txt") 
       selection_data.set(Gdk::Selection::TYPE_STRING, "hoge.txt")  
@@ -36,10 +36,9 @@ class DestWindow < Gtk::Window
     @label = Gtk::Label.new("Drop here!")
     add(@label)
     set_default_size(100, 100)
-    Gtk::Drag.dest_set(self, Gtk::Drag::DEST_DEFAULT_MOTION | 
-                       Gtk::Drag::DEST_DEFAULT_HIGHLIGHT,
-                       [["test", Gtk::Drag::TARGET_SAME_APP, 12345]], 
-                       Gdk::DragContext::ACTION_COPY|Gdk::DragContext::ACTION_MOVE)
+    drag_dest_set(Gtk::Drag::DestDefaults::MOTION | Gtk::Drag::DestDefaults::HIGHLIGHT,
+              [["test", :same_app, 12345]], 
+              Gdk::DragContext::Action::COPY|Gdk::DragContext::Action::MOVE)
     
     signal_connect("drag-data-received") do |w, dc, x, y, selectiondata, info, time|
       dc.targets.each do |target|
@@ -50,7 +49,7 @@ class DestWindow < Gtk::Window
       end
     end
     signal_connect("drag-drop") do |w, dc, x, y, time|
-      Gtk::Drag.get_data(w, dc, dc.targets[0], time)
+      w.drag_get_data(dc, dc.targets[0], time)
     end
   end
 end

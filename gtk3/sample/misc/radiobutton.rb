@@ -13,10 +13,10 @@ require 'gtk3'
 window = Gtk::Window.new("Gtk::RadioButton sample")
 window.signal_connect("destroy"){Gtk.main_quit}
 
-box1 = Gtk::VBox.new
+box1 = Gtk::Box.new(:vertical)
 window.add(box1)
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.add(box2)
 
@@ -26,13 +26,13 @@ button3 = Gtk::RadioButton.new(button1, Gtk::Stock::QUIT)
 
 box2.add(button1).add(button2).add(button3)
 
-box1.add(Gtk::HSeparator.new)
+box1.add(Gtk::Separator.new(:horizontal))
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.add(box2)
 
-close = Gtk::Button.new("close")
+close = Gtk::Button.new(:label => "close")
 close.signal_connect("clicked") do
   Gtk.main_quit
 end

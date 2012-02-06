@@ -380,42 +380,42 @@ module Gtk
 
   class HBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new'." do |_self, homogeneous, spacing|
-      Gtk::Box.new(:horizontal, spacing)
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new(:horizontal, spacing)'." do |_self, homogeneous, spacing|
+      Gtk::Box.new(:horizontal, spacing).set_homogeneous(homogeneous)
     end
   end
 
   class HButtonBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox.new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox.new(:horizontal)'." do |_self|
       Gtk::ButtonBox.new(:horizontal)
     end
   end
 
   class HPaned
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned.new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned.new(:horizontal)'." do |_self|
       Gtk::Paned.new(:horizontal)
     end
   end
 
   class HScale
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale.new'." do |_self, arg1, arg2, arg3|
-      Gtk::Scale.new(:horizontal, arg1, arg2, arg3)
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale.new(:horizontal, *args)'." do |_self, *args|
+      Gtk::Scale.new(:horizontal, *args)
     end
   end
 
   class HScrollbar
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar.new'." do |_self, adj|
-      Gtk::Scrollbar.new(:horizontal, adj)
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar.new(:horizontal, adjustment)'." do |_self, adjustment|
+      Gtk::Scrollbar.new(:horizontal, adjustment)
     end
   end
 
   class HSeparator
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new(:horizontal)'." do |_self|
       Gtk::Separator.new(:horizontal)
     end
   end
@@ -825,42 +825,42 @@ module Gtk
 
   class VBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new'." do |_self, homogeneous, spacing|
-      Gtk::Box.new(:vertical, spacing)
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new(:vertical, spacing)'." do |_self, homogeneous, spacing|
+      Gtk::Box.new(:vertical, spacing).set_homogeneous(homogeneous)
     end
   end
 
   class VButtonBox
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox.new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::ButtonBox.new(:vertical)'." do |_self|
       Gtk::ButtonBox.new(:vertical)
     end
   end
 
   class VPaned
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned.new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Paned.new(:vertical)'." do |_self|
       Gtk::Paned.new(:vertical)
     end
   end
 
   class VScale
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale.new'." do |_self, arg1, arg2, arg3|
-      Gtk::Scale.new(:vertical, arg1, arg2, arg3)
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scale.new(:vertical, *args)'." do |_self, *args|
+      Gtk::Scale.new(:vertical, *args)
     end
   end
 
   class VScrollbar
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar.new'." do |_self, adj|
-      Gtk::Scrollbar.new(:vertical, adj)
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Scrollbar.new(:vertical, adjustment)'." do |_self, adjustment|
+      Gtk::Scrollbar.new(:vertical, adjustment)
     end
   end
 
   class VSeparator
     extend GLib::Deprecatable
-    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new'." do |_self|
+    define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Separator.new(:vertical)'." do |_self|
       Gtk::Separator.new(:vertical)
     end
   end

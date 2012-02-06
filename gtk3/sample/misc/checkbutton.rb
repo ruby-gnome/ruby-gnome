@@ -13,10 +13,10 @@ require 'gtk3'
 window = Gtk::Window.new("check buttons")
 window.border_width = 0
 
-box1 = Gtk::VBox.new
+box1 = Gtk::Box.new(:vertical)
 window.add(box1)
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.pack_start(box2)
 
@@ -27,13 +27,13 @@ box2.add(button1)
 box2.add(button2)
 box2.add(button3)
 
-box1.pack_start(Gtk::HSeparator.new)
+box1.pack_start(Gtk::Separator.new(:horizontal))
 
-box2 = Gtk::VBox.new(false, 10)
+box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
 box1.pack_start(box2)
 
-close = Gtk::Button.new("close")
+close = Gtk::Button.new(:label => "close")
 close.signal_connect("clicked") do
   Gtk.main_quit
 end
