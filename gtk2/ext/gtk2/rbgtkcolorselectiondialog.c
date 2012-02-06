@@ -36,13 +36,15 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_color_selection_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 
                                         "ColorSelectionDialog", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
+#if GTK_CHECK_VERSION(2, 14, 0)
     /* NOTE: Backward compatibility */
     RG_DEF_ALIAS("colorsel", "color_selection");
+#endif
 }
