@@ -50,17 +50,30 @@ vlc_media_list_player_get_type(void)
 /*
  * Create new media_list_player.
  *
- * @param [VLC::Core] core the core instance
+ * @param [Hash] options media list player options
+ * @option options [VLC::Core] :core (nil) the core instance
+ * @option options [VLC::MediaList] :list (nil) the media list instance
+ * @option options [VLC::MediaPlayer] :player (nil) the media player instance
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
  */
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    VALUE core;
+    VALUE options, core, list, player;
     libvlc_media_list_player_t *instance;
 
-    rb_scan_args(argc, argv, "01", &core);
+    rb_scan_args(argc, argv, "01", &options);
+    rbg_scan_options(options,
+                     "core",    &core,
+                     "list",    &list,
+                     "player",  &player,
+                     NULL);
+
+    if (NIL_P(core) && !NIL_P(list))
+        core = rb_funcall(list, rb_intern("core"), 0);
+    if (NIL_P(core) && !NIL_P(player))
+        core = rb_funcall(player, rb_intern("core"), 0);
     if (NIL_P(core))
         core = rb_funcall(GTYPE2CLASS(VLC_TYPE_CORE), rb_intern("new"), 0);
 
@@ -71,6 +84,15 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     G_INITIALIZE(self, instance);
     vlc_media_list_player_free(instance);
+
+    if (NIL_P(list))
+        list = rb_funcall(GTYPE2CLASS(VLC_TYPE_MEDIA_LIST), rb_intern("new"), 1, core);
+    rb_funcall(self, rb_intern("set_media_list"), 1, list);
+
+    if (NIL_P(player))
+        player = rb_funcall(GTYPE2CLASS(VLC_TYPE_MEDIA_PLAYER), rb_intern("new"), 1, core);
+    rb_funcall(self, rb_intern("set_media_player"), 1, player);
+
     return Qnil;
 }
 
