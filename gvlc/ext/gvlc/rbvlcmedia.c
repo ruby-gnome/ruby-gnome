@@ -166,7 +166,7 @@ rg_add_option(int argc, VALUE *argv, VALUE self)
     if (NIL_P(flags))
         libvlc_media_add_option(_SELF(self), RVAL2CSTR(options));
     else
-        libvlc_media_add_option_flag(_SELF(self), RVAL2CSTR(options), NUM2INT(flags));
+        libvlc_media_add_option_flag(_SELF(self), RVAL2CSTR(options), NUM2UINT(flags));
 
     return self;
 }
@@ -342,7 +342,6 @@ rg_tracks_info(VALUE self)
     VALUE result;
 
     track_count = libvlc_media_get_tracks_info(_SELF(self), &track_info);
-    rb_warn("tracks: %d\n", track_count);
     result = rb_ary_new();
     for (i = 0, p = track_info; i < track_count; i++, p++) {
         rb_ary_push(result, VLCMEDIATRACKINFO2RVAL(p));

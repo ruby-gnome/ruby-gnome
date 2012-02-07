@@ -51,7 +51,7 @@ vlc_media_track_info_get_type(void)
 static VALUE
 rg_codec(VALUE self)
 {
-    return INT2NUM(_SELF(self)->i_codec);
+    return UINT2NUM(_SELF(self)->i_codec);
 }
 
 static VALUE
@@ -82,7 +82,7 @@ static VALUE
 rg_channels(VALUE self)
 {
     if (_SELF(self)->i_type == libvlc_track_audio)
-        return INT2NUM(_SELF(self)->u.audio.i_channels);
+        return UINT2NUM(_SELF(self)->u.audio.i_channels);
     else
         return Qnil;
 }
@@ -91,7 +91,7 @@ static VALUE
 rg_rate(VALUE self)
 {
     if (_SELF(self)->i_type == libvlc_track_audio)
-        return INT2NUM(_SELF(self)->u.audio.i_rate);
+        return UINT2NUM(_SELF(self)->u.audio.i_rate);
     else
         return Qnil;
 }
@@ -100,7 +100,7 @@ static VALUE
 rg_width(VALUE self)
 {
     if (_SELF(self)->i_type == libvlc_track_video)
-        return INT2NUM(_SELF(self)->u.video.i_width);
+        return UINT2NUM(_SELF(self)->u.video.i_width);
     else
         return Qnil;
 }
@@ -109,7 +109,7 @@ static VALUE
 rg_height(VALUE self)
 {
     if (_SELF(self)->i_type == libvlc_track_video)
-        return INT2NUM(_SELF(self)->u.video.i_height);
+        return UINT2NUM(_SELF(self)->u.video.i_height);
     else
         return Qnil;
 }
