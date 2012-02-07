@@ -166,7 +166,7 @@ rg_add_option(int argc, VALUE *argv, VALUE self)
     if (NIL_P(flags))
         libvlc_media_add_option(_SELF(self), RVAL2CSTR(options));
     else
-        libvlc_media_add_option_flag(_SELF(self), RVAL2CSTR(options), NUM2INT(flags));
+        libvlc_media_add_option_flag(_SELF(self), RVAL2CSTR(options), NUM2UINT(flags));
 
     return self;
 }

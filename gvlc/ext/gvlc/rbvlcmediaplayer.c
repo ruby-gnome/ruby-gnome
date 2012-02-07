@@ -513,7 +513,7 @@ rg_fps(VALUE self)
 static VALUE
 rg_has_vout(VALUE self)
 {
-    return INT2NUM(libvlc_media_player_has_vout(_SELF(self)));
+    return UINT2NUM(libvlc_media_player_has_vout(_SELF(self)));
 }
 
 /*
@@ -673,8 +673,8 @@ static VALUE
 rg_get_size(VALUE self, VALUE video)
 {
     unsigned int width, height;
-    int result = libvlc_video_get_size(_SELF(self), NUM2INT(video), &width, &height);
-    return result == 0 ? rb_ary_new3(2, INT2NUM(width), INT2NUM(height)) : Qnil;
+    int result = libvlc_video_get_size(_SELF(self), NUM2UINT(video), &width, &height);
+    return result == 0 ? rb_ary_new3(2, UINT2NUM(width), UINT2NUM(height)) : Qnil;
 }
 
 /*
@@ -703,7 +703,7 @@ static VALUE
 rg_get_cursor(VALUE self, VALUE video)
 {
     int x, y, result;
-    result = libvlc_video_get_cursor(_SELF(self), NUM2INT(video), &x, &y);
+    result = libvlc_video_get_cursor(_SELF(self), NUM2UINT(video), &x, &y);
     return result == 0 ? rb_ary_new3(2, INT2NUM(x), INT2NUM(y)) : Qnil;
 }
 
@@ -779,7 +779,7 @@ rg_aspect_ratio(VALUE self)
 static VALUE
 rg_set_spu(VALUE self, VALUE spu)
 {
-    return ZEROBOOL2RVAL(libvlc_video_set_spu(_SELF(self), NUM2INT(spu)));
+    return ZEROBOOL2RVAL(libvlc_video_set_spu(_SELF(self), NUM2UINT(spu)));
 }
 
 /*
@@ -992,10 +992,10 @@ rg_take_snapshot(VALUE self, VALUE options)
                     "height",   &height,
                     NULL);
     result = libvlc_video_take_snapshot(_SELF(self),
-                                        NIL_P(video) ? 0 : NUM2INT(video),
+                                        NIL_P(video) ? 0 : NUM2UINT(video),
                                         RVAL2CSTR(file),
-                                        NIL_P(width) ? 0 : NUM2INT(width),
-                                        NIL_P(height) ? 0 : NUM2INT(height));
+                                        NIL_P(width) ? 0 : NUM2UINT(width),
+                                        NIL_P(height) ? 0 : NUM2UINT(height));
     return ZEROBOOL2RVAL(result);
 }
 
