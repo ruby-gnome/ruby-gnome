@@ -193,10 +193,13 @@ rg_remove_media(VALUE self, VALUE media)
 {
     int pos;
 
-    if (TYPE(media) == T_FIXNUM)
+    if (TYPE(media) == T_FIXNUM) {
         pos = NUM2INT(media);
-    else
+        /* TODO: G_CHILD_REMOVE */
+    } else {
         pos = libvlc_media_list_index_of_item(_SELF(self), RVAL2VLCMEDIA(media));
+        G_CHILD_REMOVE(self, media);
+    }
 
     return ZEROBOOL2RVAL(libvlc_media_list_remove_index(_SELF(self), pos));
 }
