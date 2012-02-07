@@ -100,15 +100,16 @@ get_media(VALUE self, VALUE media)
  * The libvlc_media_list_lock should NOT be held upon entering this function.
  *
  * @param [VLC::Media, Hash] media the media instance or specify media Hash (see VLC::Media#initialize)
- * @return [self]
+ * @return [VLC::Media] the media instance
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
  */
 static VALUE
 rg_set_media(VALUE self, VALUE media)
 {
-    libvlc_media_list_set_media(_SELF(self), RVAL2VLCMEDIA(get_media(self, media)));
-    return self;
+    media = get_media(self, media);
+    libvlc_media_list_set_media(_SELF(self), RVAL2VLCMEDIA(media));
+    return media;
 }
 
 /*
