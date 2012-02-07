@@ -113,7 +113,14 @@ static VALUE
 rg_set_media_player(VALUE self, VALUE player)
 {
     libvlc_media_list_player_set_media_player(_SELF(self), RVAL2VLCMEDIAPLAYER(player));
+    rb_ivar_set(self, rb_intern("media_player"), player);
     return self;
+}
+
+static VALUE
+rg_media_player(VALUE self)
+{
+    return rb_ivar_get(self, rb_intern("media_player"));
 }
 
 /*
@@ -261,6 +268,7 @@ Init_vlc_medialistplayer(VALUE mVLC)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(core, 0);
     RG_DEF_METHOD(set_media_player, 1);
+    RG_DEF_METHOD(media_player, 0);
     RG_DEF_METHOD(set_media_list, 1);
     RG_DEF_METHOD_P(playing, 0);
     RG_DEF_METHOD(play, -1);
