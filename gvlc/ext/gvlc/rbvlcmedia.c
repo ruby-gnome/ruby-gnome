@@ -342,7 +342,6 @@ rg_tracks_info(VALUE self)
     VALUE result;
 
     track_count = libvlc_media_get_tracks_info(_SELF(self), &track_info);
-    rb_warn("tracks: %d\n", track_count);
     result = rb_ary_new();
     for (i = 0, p = track_info; i < track_count; i++, p++) {
         rb_ary_push(result, VLCMEDIATRACKINFO2RVAL(p));
