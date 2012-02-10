@@ -246,6 +246,21 @@ rg_tree_view(VALUE self)
 }
 #endif
 
+#if !GTK_CHECK_VERSION(2,18,0)
+static VALUE
+rg_sort_column_id(VALUE self)
+{
+    return INT2NUM(gtk_tree_view_column_get_sort_column_id(_SELF(self)));
+}
+
+static VALUE
+rg_set_sort_column_id(VALUE self, VALUE id)
+{
+    gtk_tree_view_column_set_sort_column_id(_SELF(self), NUM2INT(id));
+    return self;
+}
+#endif
+
 void
 Init_gtk_treeviewcolumn(VALUE mGtk)
 {
@@ -272,6 +287,10 @@ Init_gtk_treeviewcolumn(VALUE mGtk)
 #endif
 #if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(tree_view, 0);
+#endif
+#if !GTK_CHECK_VERSION(2,18,0)
+    RG_DEF_METHOD(sort_column_id, 0);
+    RG_DEF_METHOD(set_sort_column_id, 1);
 #endif
     /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", RG_TARGET_NAMESPACE);
