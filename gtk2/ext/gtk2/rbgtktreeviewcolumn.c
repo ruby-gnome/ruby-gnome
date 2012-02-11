@@ -291,6 +291,7 @@ Init_gtk_treeviewcolumn(VALUE mGtk)
 #if !GTK_CHECK_VERSION(2,18,0)
     RG_DEF_METHOD(sort_column_id, 0);
     RG_DEF_METHOD(set_sort_column_id, 1);
+    RG_DEF_ALIAS(sort_column_id, set_sort_column_id);
 #endif
     /* GtkTreeViewColumnSizing */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_COLUMN_SIZING, "Sizing", RG_TARGET_NAMESPACE);
