@@ -343,7 +343,7 @@ rg_tracks_info(VALUE self)
     result = rb_ary_new();
     for (i = 0, p = track_info; i < track_count; i++, p++) {
         rb_ary_push(result, VLCMEDIATRACKINFO2RVAL(p));
-        g_free(p);
+/*        g_free(p); */
     }
 
     return result;
