@@ -45,7 +45,7 @@ vlc_media_track_info_get_type(void)
     return our_type;
 }
 
-#define RG_TARGET_NAMESPACE cMediaTrackInfo
+#define RG_TARGET_NAMESPACE cTrackInfo
 #define _SELF(self) (RVAL2VLCMEDIATRACKINFO(self))
 
 /*
@@ -165,9 +165,9 @@ rg_height(VALUE self)
  * @todo fixme
  */
 void
-Init_vlc_mediatrackinfo(VALUE mVLC)
+Init_vlc_media_trackinfo(VALUE cMedia)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_MEDIA_TRACK_INFO, "MediaTrackInfo", mVLC);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_MEDIA_TRACK_INFO, "TrackInfo", cMedia);
 
     RG_DEF_METHOD(codec, 0);
     RG_DEF_METHOD(id, 0);

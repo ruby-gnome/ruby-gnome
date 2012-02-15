@@ -408,5 +408,6 @@ Init_vlc_media(VALUE mVLC)
     RG_DEF_METHOD(attach_event, 1);
     RG_DEF_METHOD(detach_event, 1);
 
+    Init_vlc_media_trackinfo(RG_TARGET_NAMESPACE);
     Init_vlc_media_stats(RG_TARGET_NAMESPACE);
 }

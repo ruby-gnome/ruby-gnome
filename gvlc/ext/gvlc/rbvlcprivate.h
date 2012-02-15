@@ -62,10 +62,10 @@ G_GNUC_INTERNAL void Init_vlc_medialistplayer(VALUE mVLC);
 G_GNUC_INTERNAL void Init_vlc_medialibrary(VALUE mVLC);
 G_GNUC_INTERNAL void Init_vlc_mediadiscoverer(VALUE mVLC);
 G_GNUC_INTERNAL void Init_vlc_event(VALUE mVLC);
-G_GNUC_INTERNAL void Init_vlc_mediatrackinfo(VALUE mVLC);
 G_GNUC_INTERNAL void Init_vlc_moduledescription(VALUE mVLC);
 G_GNUC_INTERNAL void Init_vlc_trackdescription(VALUE mVLC);
 G_GNUC_INTERNAL void Init_vlc_audiooutput(VALUE mVLC);
+G_GNUC_INTERNAL void Init_vlc_media_trackinfo(VALUE cMedia);
 G_GNUC_INTERNAL void Init_vlc_media_stats(VALUE cMedia);
 
 G_GNUC_INTERNAL void Init_vlc_event_type(VALUE cEvent);

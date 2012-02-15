@@ -132,7 +132,6 @@ Init_vlc(void)
     Init_vlc_medialibrary(RG_TARGET_NAMESPACE);
     Init_vlc_mediadiscoverer(RG_TARGET_NAMESPACE);
     Init_vlc_event(RG_TARGET_NAMESPACE);
-    Init_vlc_mediatrackinfo(RG_TARGET_NAMESPACE);
     Init_vlc_moduledescription(RG_TARGET_NAMESPACE);
     Init_vlc_trackdescription(RG_TARGET_NAMESPACE);
     Init_vlc_audiooutput(RG_TARGET_NAMESPACE);
