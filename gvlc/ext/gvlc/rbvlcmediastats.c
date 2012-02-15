@@ -223,7 +223,7 @@ rg_send_bitrate(VALUE self)
 void
 Init_vlc_media_stats(VALUE cMedia)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_MEDIA_STATS, "MediaStats", cMedia);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_MEDIA_STATS, "Stats", cMedia);
 
     RG_DEF_METHOD(read_bytes, 0);
     RG_DEF_METHOD(input_bitrate, 0);
