@@ -59,7 +59,7 @@ static ID id_core;
  * @overload initialize(media)
  *   Create a Media Player object from a Media
  *
- *   @param [VLC::Media, Hash] media the media instance or specify media Hash (see VLC::Media#initialize)
+ *   @param [VLC::Media, Hash] media the media instance or specify media Hash (see {VLC::Media#initialize})
  *   @raise [ArgumentError] Invalid or unsupported arguments
  *
  * @todo fixme
@@ -93,6 +93,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+/*
+ *
+ * @return [VLC::Core]
+ * @todo fixme
+ */
 static VALUE
 rg_core(VALUE self)
 {
@@ -102,7 +107,7 @@ rg_core(VALUE self)
 /*
  * Set the media that will be used by the media_player.
  *
- * @param [VLC::Media, Hash] media the media instance or specify media Hash (see VLC::Media#initialize)
+ * @param [VLC::Media, Hash] media the media instance or specify media Hash (see {VLC::Media#initialize})
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
  */
@@ -159,7 +164,7 @@ rg_play(VALUE self)
  * Pause or resume (no effect if there is no media)
  *
  * @param [Boolean] do_pause play/resume if false, pause if true
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -179,7 +184,7 @@ rg_pause(int argc, VALUE *argv, VALUE self)
 /*
  * Stop (no effect if there is no media)
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -201,7 +206,7 @@ rg_stop(VALUE self)
  * otherwise it will only take effect after playback stop and restart.
  *
  * @param [Integer] xid the ID of the X window
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -213,7 +218,7 @@ rg_set_xwindow(VALUE self, VALUE xid)
 
 /*
  * Get the X Window System window identifier previously set with
- * libvlc_media_player_set_xwindow(). Note that this will return the identifier
+ * {#set_xwindow}. Note that this will return the identifier
  * even if VLC is not currently using it (for instance if it is playing an
  * audio-only input).
  *
@@ -245,7 +250,7 @@ rg_length(VALUE self)
  * Not all formats and protocols support this.
  *
  * @param [Integer] time the movie time (in ms).
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -273,7 +278,7 @@ rg_time(VALUE self)
  * This might not work depending on the underlying input format and protocol.
  *
  * @param [Float] pos the position
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -300,7 +305,7 @@ rg_position(VALUE self)
  * Set movie chapter (if applicable).
  *
  * @param [Integer] chapter chapter number to play
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -375,7 +380,7 @@ rg_will_play_p(VALUE self)
  * Set movie title
  *
  * @param [Integer] title title number to play
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -426,7 +431,7 @@ rg_title_description(VALUE self)
 /*
  * Set previous chapter (if applicable)
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -439,7 +444,7 @@ rg_previous_chapter(VALUE self)
 /*
  * Set next chapter (if applicable)
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -466,7 +471,7 @@ rg_set_rate(VALUE self, VALUE rate)
 /*
  * Get the requested movie play rate.
  *
- * @warning
+ * @note
  *   Depending on the underlying media, the requested rate may be
  *   different from the real playback rate.
  *
@@ -543,7 +548,7 @@ rg_can_pause_p(VALUE self)
 /*
  * Display the next frame (if supported)
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -557,7 +562,7 @@ rg_next_frame(VALUE self)
  * Navigate through DVD Menu
  *
  * @param [VLC::NavigateMode] mode the Navigation mode
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -570,11 +575,10 @@ rg_navigate(VALUE self, VALUE mode)
 /*
  * Toggle fullscreen status on non-embedded video outputs.
  *
- * @warning
- *   The same limitations applies to this function
- *   as to libvlc_set_fullscreen().
+ * @note
+ *   The same limitations applies to this function as to {#set_fullscreen}.
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -587,16 +591,16 @@ rg_toggle_fullscreen(VALUE self)
 /*
  * Enable or disable fullscreen.
  *
- * @warning
+ * @note
  *   With most window managers, only a top-level windows can be in
  *   full-screen mode. Hence, this function will not operate properly if
- *   libvlc_media_player_set_xwindow() was used to embed the video in a
+ *   {#set_xwindow} was used to embed the video in a
  *   non-top-level window. In that case, the embedding window must be reparented
  *   to the root window <b>before</b> fullscreen mode is enabled. You will want
  *   to reparent it back to its normal parent when disabling fullscreen.
  *
  * @param [Boolean] fullscreen boolean for fullscreen status
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -629,11 +633,11 @@ rg_fullscreen(VALUE self)
  *   for the X window ID of the video widget, then LibVLC will not be able to
  *   handle key presses and mouse clicks in any case.
  *
- * @warning
+ * @note
  *   This function is only implemented for X11 and Win32 at the moment.
  *
  * @param [Boolean] on true to handle key press events, false to ignore them.
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -648,11 +652,11 @@ rg_set_key_input(VALUE self, VALUE on)
  * handled. This is needed for DVD menus to work, as well as a few video
  * filters such as "puzzle".
  *
- * @warning
+ * @note
  *   This function is only implemented for X11 and Win32 at the moment.
  *
  * @param [Boolean] on true to handle mouse click events, false to ignore them.
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -686,7 +690,7 @@ rg_get_size(VALUE self, VALUE video)
  * Either of the coordinates may be negative or larger than the corresponding
  * dimension of the video, if the cursor is outside the rendering area.
  *
- * @warning
+ * @note
  *   The coordinates may be out-of-date if the pointer is not located
  *   on the video rendering area. LibVLC does not track the pointer if it is
  *   outside of the video widget.
@@ -716,7 +720,7 @@ rg_get_cursor(VALUE self, VALUE video)
  * Note that not all video outputs support scaling.
  *
  * @param [Float] scale the scaling factor, or zero
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -728,7 +732,7 @@ rg_set_scale(VALUE self, VALUE scale)
 
 /*
  * Get the current video scaling factor.
- * See also libvlc_video_set_scale().
+ * See also {#set_scale}.
  *
  * @return [Float] the currently configured zoom factor, or 0. if the video is set
  * to fit to the output window/drawable automatically.
@@ -747,7 +751,7 @@ rg_scale(VALUE self)
  *   Invalid aspect ratios are ignored.
  *
  * @param [Float] ratio new video aspect-ratio or nil to reset to default
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -866,7 +870,7 @@ rg_spu_delay(VALUE self)
  * Set new crop filter geometry.
  *
  * @param [String] geometry new crop filter geometry (nil to unset)
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -880,7 +884,7 @@ rg_set_crop_geometry(VALUE self, VALUE geometry)
  * Set new teletext page to retrieve.
  *
  * @param [Integer] page teletex page number requested
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -905,7 +909,7 @@ rg_teletext(VALUE self)
 /*
  * Toggle teletext transparent status on video output.
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1003,7 +1007,7 @@ rg_take_snapshot(VALUE self, VALUE options)
  * Enable or disable deinterlace filter
  *
  * @param [String] mode type of deinterlace filter, nil to disable
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1016,12 +1020,12 @@ rg_set_deinterlace(VALUE self, VALUE mode)
 /*
  * Enable, disable or set an integer marquee option
  *
- * Setting libvlc_marquee_Enable has the side effect of enabling (arg !0)
+ * Setting {VLC::VideoMarqueeOption::ENABLE} has the side effect of enabling (arg !0)
  * or disabling (arg 0) the marq filter.
  *
  * @param [VLC::VideoMarqueeOption] option marq option to set
  * @param [Integer] value marq option value
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1036,7 +1040,7 @@ rg_set_marquee_int(VALUE self, VALUE option, VALUE value)
  *
  * @param [VLC::VideoMarqueeOption] option marq option to set
  * @param [String] value marq option value
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1075,12 +1079,12 @@ rg_get_marquee_string(VALUE self, VALUE option)
 /*
  * Set logo option as integer. Options that take a different type value
  * are ignored.
- * Passing libvlc_logo_enable as option value has the side effect of
+ * Passing {VLC::VideoLogoOption::ENABLE} as option value has the side effect of
  * starting (arg !0) or stopping (arg 0) the logo filter.
  *
  * @param [VLC::VideoLogoOption] option logo option to set
  * @param [Integer] value logo option value
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1096,7 +1100,7 @@ rg_set_logo_int(VALUE self, VALUE option, VALUE value)
  *
  * @param [VLC::VideoLogoOption] option logo option to set
  * @param [String] value logo option value
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1137,12 +1141,12 @@ rg_get_logo_string(VALUE self, VALUE option)
 /*
  * Set adjust option as integer. Options that take a different type value
  * are ignored.
- * Passing libvlc_adjust_enable as option value has the side effect of
+ * Passing {VLC::VideoAdjustOption::ENABLE} as option value has the side effect of
  * starting (arg !0) or stopping (arg 0) the adjust filter.
  *
  * @param [VLC::VideoAdjustOption] option adust option to set
  * @param [Integer] value adjust option value
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1158,7 +1162,7 @@ rg_set_adjust_int(VALUE self, VALUE option, VALUE value)
  *
  * @param [VLC::VideoAdjustOption] option adust option to set
  * @param [Float] value adjust option value
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1213,7 +1217,7 @@ rg_set_audio_output(VALUE self, VALUE name)
  *
  * @param [String] name name of audio output (@see VLC::AudioOutput)
  * @param [String] id id name of device
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1227,7 +1231,7 @@ rg_set_audio_output_device(VALUE self, VALUE name, VALUE id)
  * Set current audio device type.
  *
  * @param [VLC::AudioOutputDeviceTypes] type the audio device type
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1253,7 +1257,7 @@ rg_audio_output_device_type(VALUE self)
 /*
  * Toggle mute status.
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1267,7 +1271,7 @@ rg_toggle_mute(VALUE self)
  * Set mute status.
  *
  * @param [Boolean] mute If status is true then mute, otherwise unmute
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -1415,18 +1419,42 @@ rg_delay(VALUE self)
     return LONG2NUM(libvlc_audio_get_delay(_SELF(self)));
 }
 
+/*
+ * Register for an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to listen
+ * @yield call when event_type occurs
+ * @yieldparam self
+ * @yieldparam [VLC::Event] event
+ * @return [Boolean] true on success, false on error
+ * @todo fixme
+ */
 static VALUE
 rg_attach_event(VALUE self, VALUE event_type)
 {
     return em_attach_event(libvlc_media_player_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Unregister an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to unregister
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_detach_event(VALUE self, VALUE event_type)
 {
     return em_detach_event(libvlc_media_player_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Document-class: VLC::MediaPlayer
+ *
+ * A LibVLC media player plays one media (usually in a custom drawable).
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_mediaplayer(VALUE mVLC)
 {

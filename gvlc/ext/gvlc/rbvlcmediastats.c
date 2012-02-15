@@ -48,96 +48,178 @@ vlc_media_stats_get_type(void)
 #define RG_TARGET_NAMESPACE cStats
 #define _SELF(self) (RVAL2VLCMEDIASTATS(self))
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_read_bytes(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_read_bytes);
 }
 
+/*
+ *
+ * @return [Float]
+ * @todo fixme
+ */
 static VALUE
 rg_input_bitrate(VALUE self)
 {
     return DBL2NUM(_SELF(self)->f_input_bitrate);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_demux_read_bytes(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_demux_read_bytes);
 }
 
+/*
+ *
+ * @return [Float]
+ * @todo fixme
+ */
 static VALUE
 rg_demux_bitrate(VALUE self)
 {
     return DBL2NUM(_SELF(self)->f_demux_bitrate);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_demux_corrupted(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_demux_corrupted);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_demux_discontinuity(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_demux_discontinuity);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_decoded_video(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_decoded_video);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_decoded_audio(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_decoded_audio);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_displayed_pictures(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_displayed_pictures);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_lost_pictures(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_lost_pictures);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_played_abuffers(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_played_abuffers);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_lost_abuffers(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_lost_abuffers);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_sent_packets(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_sent_packets);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_sent_bytes(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_sent_bytes);
 }
 
+/*
+ *
+ * @return [Float]
+ * @todo fixme
+ */
 static VALUE
 rg_send_bitrate(VALUE self)
 {
     return DBL2NUM(_SELF(self)->f_send_bitrate);
 }
 
+/*
+ * Document-class: VLC::Media::Stats
+ *
+ * LibVLC media statistics
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_media_stats(VALUE cMedia)
 {

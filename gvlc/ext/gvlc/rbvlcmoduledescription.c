@@ -56,30 +56,57 @@ vlc_module_description_get_type(void)
 #define RG_TARGET_NAMESPACE cModuleDescription
 #define _SELF(self) (RVAL2VLCMODULEDESCRIPTION(self))
 
+/*
+ *
+ * @return [String]
+ * @todo fixme
+ */
 static VALUE
 rg_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_name);
 }
 
+/*
+ *
+ * @return [String]
+ * @todo fixme
+ */
 static VALUE
 rg_shortname(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_shortname);
 }
 
+/*
+ *
+ * @return [String]
+ * @todo fixme
+ */
 static VALUE
 rg_longname(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_longname);
 }
 
+/*
+ *
+ * @return [String]
+ * @todo fixme
+ */
 static VALUE
 rg_help(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_help);
 }
 
+/*
+ * Document-class: VLC::ModuleDescription
+ *
+ * Description of a module.
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_moduledescription(VALUE mVLC)
 {

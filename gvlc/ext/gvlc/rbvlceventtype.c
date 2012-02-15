@@ -23,12 +23,23 @@
 #define RG_TARGET_NAMESPACE cEventType
 #define _SELF(self) (RVAL2VLCEVENTTYPE(self))
 
+/*
+ * Get an event's type name.
+ *
+ * @return [String] type name
+ * @todo fixme
+ */
 static VALUE
 rg_type_name(VALUE self)
 {
     return CSTR2RVAL(libvlc_event_type_name(_SELF(self)));
 }
 
+/*
+ * Document-class: VLC::Event::Type
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_eventtype(VALUE mVLC)
 {

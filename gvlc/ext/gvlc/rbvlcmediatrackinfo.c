@@ -48,36 +48,66 @@ vlc_media_track_info_get_type(void)
 #define RG_TARGET_NAMESPACE cMediaTrackInfo
 #define _SELF(self) (RVAL2VLCMEDIATRACKINFO(self))
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_codec(VALUE self)
 {
     return UINT2NUM(_SELF(self)->i_codec);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_id(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_id);
 }
 
+/*
+ *
+ * @return [VLC::TrackType]
+ * @todo fixme
+ */
 static VALUE
 rg_type(VALUE self)
 {
     return VLCTRACKTYPE2RVAL(_SELF(self)->i_type);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_profile(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_profile);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_level(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_level);
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_channels(VALUE self)
 {
@@ -87,6 +117,11 @@ rg_channels(VALUE self)
         return Qnil;
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_rate(VALUE self)
 {
@@ -96,6 +131,11 @@ rg_rate(VALUE self)
         return Qnil;
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_width(VALUE self)
 {
@@ -105,6 +145,11 @@ rg_width(VALUE self)
         return Qnil;
 }
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_height(VALUE self)
 {
@@ -114,6 +159,11 @@ rg_height(VALUE self)
         return Qnil;
 }
 
+/*
+ * Document-class: VLC::Media::TrackInfo
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_mediatrackinfo(VALUE mVLC)
 {

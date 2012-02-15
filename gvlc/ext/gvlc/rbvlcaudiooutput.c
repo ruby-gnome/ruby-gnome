@@ -52,18 +52,37 @@ vlc_audio_output_get_type(void)
 #define RG_TARGET_NAMESPACE cAudioOutput
 #define _SELF(self) (RVAL2VLCAUDIOOUTPUT(self))
 
+/*
+ * Get name of audio output
+ *
+ * @return [String] name
+ * @todo fixme
+ */
 static VALUE
 rg_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_name);
 }
 
+/*
+ * Get description of audio output
+ *
+ * @return [String] description
+ * @todo fixme
+ */
 static VALUE
 rg_description(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_description);
 }
 
+/*
+ * Document-class: VLC::AudioOutput
+ *
+ * Description for audio output.
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_audiooutput(VALUE mVLC)
 {
