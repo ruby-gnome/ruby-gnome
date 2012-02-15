@@ -48,16 +48,29 @@ vlc_event_get_type(void)
 #define RG_TARGET_NAMESPACE cEvent
 #define _SELF(self) (RVAL2VLCEVENT(self))
 
+/*
+ * Get an event's type
+ *
+ * @return [VLC::Event::Type] event's type
+ * @todo fixme
+ */
 static VALUE
 rg_type(VALUE self)
 {
     return VLCEVENTTYPE2RVAL(_SELF(self)->type);
 }
 
+/*
+ * Document-class: VLC::Event
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_event(VALUE mVLC)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_EVENT, "Event", mVLC);
 
     RG_DEF_METHOD(type, 0);
+
+    Init_vlc_event_type(RG_TARGET_NAMESPACE);
 }

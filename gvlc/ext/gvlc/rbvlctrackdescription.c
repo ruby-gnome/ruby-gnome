@@ -50,18 +50,36 @@ vlc_track_description_get_type(void)
 #define RG_TARGET_NAMESPACE cTrackDescription
 #define _SELF(self) (RVAL2VLCTRACKDESCRIPTION(self))
 
+/*
+ *
+ * @return [Integer]
+ * @todo fixme
+ */
 static VALUE
 rg_id(VALUE self)
 {
     return INT2NUM(_SELF(self)->i_id);
 }
 
+/*
+ *
+ * @return [String]
+ * @todo fixme
+ */
 static VALUE
 rg_name(VALUE self)
 {
     return CSTR2RVAL(_SELF(self)->psz_name);
 }
 
+/*
+ * Document-class: VLC::TrackDescription
+ *
+ * Description for video, audio tracks and subtitles. It contains
+ * id and name (description string).
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_trackdescription(VALUE mVLC)
 {

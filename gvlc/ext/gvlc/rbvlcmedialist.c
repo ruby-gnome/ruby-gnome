@@ -76,6 +76,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+/*
+ *
+ * @return [VLC::Core]
+ * @todo fixme
+ */
 static VALUE
 rg_core(VALUE self)
 {
@@ -97,9 +102,9 @@ get_media(VALUE self, VALUE media)
 /*
  * Associate media instance with this media list instance.
  * If another media instance was present it will be released.
- * The libvlc_media_list_lock should NOT be held upon entering this function.
+ * The {#lock} should NOT be held upon entering this function.
  *
- * @param [VLC::Media, Hash] media the media instance or specify media Hash (see VLC::Media#initialize)
+ * @param [VLC::Media, Hash] media the media instance or specify media Hash (see {VLC::Media#initialize})
  * @return [VLC::Media] the media instance
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
@@ -115,7 +120,7 @@ rg_set_media(VALUE self, VALUE media)
 /*
  * Get media instance from this media list instance. This action will increase
  * the refcount on the media instance.
- * The libvlc_media_list_lock should NOT be held upon entering this function.
+ * The {#lock} should NOT be held upon entering this function.
  *
  * @return [VLC::Media] media instance
  * @todo fixme
@@ -128,7 +133,7 @@ rg_media(VALUE self)
 
 /*
  * List media instance in media list at a position
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
  * @param [Integer] pos position in array
  * @return [VLC::Media] media instance at position or nil
@@ -143,9 +148,9 @@ rg_get_media(VALUE self, VALUE pos)
 
 /*
  * Add media instance to media list
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
- * @param [VLC::Media, Hash] media the media instance or specify media Hash (see VLC::Media#initialize)
+ * @param [VLC::Media, Hash] media the media instance or specify media Hash (see {VLC::Media#initialize})
  * @return [VLC::Media] the media instance
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
@@ -162,9 +167,9 @@ rg_add_media(VALUE self, VALUE media)
 
 /*
  * Insert media instance in media list on a position
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
- * @param [VLC::Media, Hash] media the media instance or specify media Hash (see VLC::Media#initialize)
+ * @param [VLC::Media, Hash] media the media instance or specify media Hash (see {VLC::Media#initialize})
  * @param [Integer] pos position in array
  * @return [VLC::Media] the media instance
  * @raise [ArgumentError] Invalid or unsupported arguments
@@ -182,7 +187,7 @@ rg_insert_media(VALUE self, VALUE media, VALUE pos)
 
 /*
  * Remove media instance from media list on a position
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
  * @param [VLC::Media, Integer] media the media instance or position in array
  * @return [Boolean] true on success, false if the list is read-only or the item was not found
@@ -206,7 +211,7 @@ rg_remove_media(VALUE self, VALUE media)
 
 /*
  * Get count on media list items
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
  * @return [Integer] number of items in media list
  * @todo fixme
@@ -220,7 +225,7 @@ rg_count(VALUE self)
 /*
  * Find index position of List media instance in media list.
  * Warning: the function will return the first matched position.
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
  * @param [VLC::Media] media media instance
  * @return [Integer] position of media instance or nil if media not found
@@ -247,9 +252,9 @@ rg_readonly_p(VALUE self)
 
 /*
  * Release lock on media list items
- * The libvlc_media_list_lock should be held upon entering this function.
+ * The {#lock} should be held upon entering this function.
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -263,7 +268,7 @@ rg_unlock(VALUE self)
  * Get lock on media list items
  *
  * @yield
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -275,18 +280,42 @@ rg_lock(VALUE self)
     return self;
 }
 
+/*
+ * Register for an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to listen
+ * @yield call when event_type occurs
+ * @yieldparam self
+ * @yieldparam [VLC::Event] event
+ * @return [Boolean] true on success, false on error
+ * @todo fixme
+ */
 static VALUE
 rg_attach_event(VALUE self, VALUE event_type)
 {
     return em_attach_event(libvlc_media_list_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Unregister an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to unregister
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_detach_event(VALUE self, VALUE event_type)
 {
     return em_detach_event(libvlc_media_list_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Document-class: VLC::MediaList
+ *
+ * A LibVLC media list holds multiple {VLC::Media} media descriptors.
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_medialist(VALUE mVLC)
 {

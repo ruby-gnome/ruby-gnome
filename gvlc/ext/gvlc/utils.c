@@ -141,9 +141,7 @@ em_attach_event(libvlc_event_manager_t *event_manager, VALUE self, VALUE event_t
     VALUE callbacks = callbacks_get(self);
 
     rb_hash_aset(callbacks, INT2NUM(type), func);
-    libvlc_event_attach(event_manager, type, cb_event, (void *)self);
-
-    return self;
+    return ZEROBOOL2RVAL(libvlc_event_attach(event_manager, type, cb_event, (void *)self));
 }
 
 VALUE

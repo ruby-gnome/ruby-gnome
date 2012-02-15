@@ -83,18 +83,46 @@ rg_running_p(VALUE self)
     return CBOOL2RVAL(libvlc_media_discoverer_is_running(_SELF(self)));
 }
 
+/*
+ * Register for an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to listen
+ * @yield call when event_type occurs
+ * @yieldparam self
+ * @yieldparam [VLC::Event] event
+ * @return [Boolean] true on success, false on error
+ * @todo fixme
+ */
 static VALUE
 rg_attach_event(VALUE self, VALUE event_type)
 {
     return em_attach_event(libvlc_media_discoverer_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Unregister an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to unregister
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_detach_event(VALUE self, VALUE event_type)
 {
     return em_detach_event(libvlc_media_discoverer_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Document-class: VLC::MediaDiscoverer
+ *
+ * LibVLC media discovery finds available media via various means.
+ * This corresponds to the service discovery functionality in VLC media player.
+ * Different plugins find potential medias locally (e.g. user media directory),
+ * from peripherals (e.g. video capture device), on the local network
+ * (e.g. SAP) or on the Internet (e.g. Internet radios).
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_mediadiscoverer(VALUE mVLC)
 {

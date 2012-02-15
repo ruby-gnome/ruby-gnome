@@ -51,9 +51,9 @@ vlc_media_list_player_get_type(void)
  * Create new media_list_player.
  *
  * @param [Hash] options media list player options
- * @option options [VLC::Core] :core (nil) the core instance
- * @option options [VLC::MediaList] :list (nil) the media list instance
- * @option options [VLC::MediaPlayer] :player (nil) the media player instance
+ * @option options [VLC::Core] :core the core instance
+ * @option options [VLC::MediaList] :list the media list instance
+ * @option options [VLC::MediaPlayer] :player the media player instance
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
  */
@@ -96,6 +96,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+/*
+ *
+ * @return [VLC::Core]
+ * @todo fixme
+ */
 static VALUE
 rg_core(VALUE self)
 {
@@ -106,7 +111,7 @@ rg_core(VALUE self)
  * Replace media player in media_list_player with this instance.
  *
  * @param [VLC::MediaPlayer] player media player instance
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -117,6 +122,11 @@ rg_set_media_player(VALUE self, VALUE player)
     return self;
 }
 
+/*
+ *
+ * @return [VLC::MediaPlayer]
+ * @todo fixme
+ */
 static VALUE
 rg_media_player(VALUE self)
 {
@@ -127,7 +137,7 @@ rg_media_player(VALUE self)
  * Set the media list associated with the player
  *
  * @param [VLC::MediaList] list list of media
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -138,6 +148,11 @@ rg_set_media_list(VALUE self, VALUE list)
     return self;
 }
 
+/*
+ *
+ * @return [VLC::MediaList]
+ * @todo fixme
+ */
 static VALUE
 rg_media_list(VALUE self)
 {
@@ -182,7 +197,7 @@ rg_play(int argc, VALUE *argv, VALUE self)
 /*
  * Pause media list
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -195,7 +210,7 @@ rg_pause(VALUE self)
 /*
  * Stop playing media list
  *
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -245,7 +260,7 @@ rg_next(VALUE self)
  * Sets the playback mode for the playlist
  *
  * @param [VLC::PlaybackMode] mode playback mode specification
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -255,18 +270,46 @@ rg_set_playback_mode(VALUE self, VALUE mode)
     return self;
 }
 
+/*
+ * Register for an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to listen
+ * @yield call when event_type occurs
+ * @yieldparam self
+ * @yieldparam [VLC::Event] event
+ * @return [Boolean] true on success, false on error
+ * @todo fixme
+ */
 static VALUE
 rg_attach_event(VALUE self, VALUE event_type)
 {
     return em_attach_event(libvlc_media_list_player_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Unregister an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to unregister
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_detach_event(VALUE self, VALUE event_type)
 {
     return em_detach_event(libvlc_media_list_player_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Document-class: VLC::MediaListPlayer
+ *
+ * The LibVLC media list player plays a {VLC::MediaList} list of media,
+ * in a certain order.
+ * This is required to especially support playlist files.
+ * The normal {VLC::MediaPlayer} LibVLC media player can only play a
+ * single media, and does not handle playlist files properly.
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_medialistplayer(VALUE mVLC)
 {

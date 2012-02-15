@@ -100,7 +100,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
  *   core.add_intf("notify")
  *
  * @param [String] name interface name, or nil for default
- * @return [self]
+ * @return self
  * @raise [ArgumentError] Invalid or unsupported arguments
  * @todo fixme
  */
@@ -122,6 +122,21 @@ cb_exit_handler(void *self)
         rb_funcall(func, rb_intern("call"), 1, self);
 }
 
+/*
+ * Registers a callback for the LibVLC exit event. This is mostly useful if
+ * you have started at least one interface with {#add_intf}.
+ * Typically, this function will wake up your application main loop (from
+ * another thread).
+ *
+ * @note
+ *   This function and {#wait} cannot be used at the same time.
+ *   Use either or none of them but not both.
+ *
+ * @yield
+ * @yieldparam self
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_set_exit_handler(VALUE self)
 {
@@ -130,6 +145,13 @@ rg_set_exit_handler(VALUE self)
     return self;
 }
 
+/*
+ * Waits until an interface causes the instance to exit.
+ * You should start at least one interface first, using {#add_intf}.
+ *
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_wait(VALUE self)
 {
@@ -146,7 +168,7 @@ rg_wait(VALUE self)
  *
  * @param [String] name human-readable application name
  * @param [String] http HTTP User Agent
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -196,7 +218,7 @@ rg_audio_output_list(VALUE self)
  * Get count of devices for audio output, these devices are hardware oriented
  * like analor or digital output of sound card
  *
- * @param [String] name name of audio output (@see VLC::AudioOutput)
+ * @param [String] name name of audio output (see {VLC::AudioOutput})
  * @return [Integer] number of devices
  * @todo fixme
  */
@@ -209,7 +231,7 @@ rg_audio_output_device_count(VALUE self, VALUE name)
 /*
  * Get long name of device, if not available short name given
  *
- * @param [String] name name of audio output (@see VLC::AudioOutput)
+ * @param [String] name name of audio output (see {VLC::AudioOutput})
  * @param [Integer] index device index
  * @return [String] long name of device
  * @todo fixme
@@ -223,7 +245,7 @@ rg_audio_output_device_longname(VALUE self, VALUE name, VALUE index)
 /*
  * Get id name of device
  *
- * @param [String] name name of audio output (@see VLC::AudioOutput)
+ * @param [String] name name of audio output (see {VLC::AudioOutput})
  * @param [Integer] index device index
  * @return [String] id name of device, use for setting device
  * @todo fixme
@@ -259,6 +281,15 @@ rg_create_library(VALUE self)
     return VLCMEDIALIBRARY2RVAL(libvlc_media_library_new(_SELF(self)));
 }
 
+
+/*
+ * Document-class: VLC::Core
+ *
+ * Before it can do anything useful, {VLC::Core} must be initialized.
+ * You can create one (or more) instance(s) of {VLC::Core} in a given process.
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_core(VALUE mVLC)
 {
