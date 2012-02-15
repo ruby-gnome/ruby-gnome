@@ -71,6 +71,11 @@ rg_media_list(VALUE self)
     return VLCMEDIALIST2RVAL(libvlc_media_library_media_list(_SELF(self)));
 }
 
+/*
+ * Document-class: VLC::MediaLibrary
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_medialibrary(VALUE mVLC)
 {

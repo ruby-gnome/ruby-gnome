@@ -48,30 +48,30 @@ vlc_media_get_type(void)
 #define _SELF(self) (RVAL2VLCMEDIA(self))
 
 /*
- * @overload initialize(core: core, location: url)
+ * @overload initialize(options = {})
  *   Create a media with a certain given media resource location,
  *   for instance a valid URL.
  *
  *   @note
  *     To refer to a local file with this function,
  *     the file://... URI syntax <b>must</b> be used (see IETF RFC3986).
- *     We recommend using libvlc_media_new_path() instead when dealing with
+ *     We recommend using {#initialize}(core: core, path: file) instead when dealing with
  *     local files.
  *
  *   @param [Hash] options specify media
- *   @option options [VLC::Core] :core (nil) the core instance
+ *   @option options [VLC::Core] :core the core instance (optional)
  *   @option options [String] :location the media location URL
  *   @raise [ArgumentError] Invalid or unsupported arguments
  *
- * @overload initialize(core: core, path: file)
+ * @overload initialize(options = {})
  *   Create a media for a certain file path.
  *
  *   @param [Hash] options specify media
- *   @option options [VLC::Core] :core (nil) the core instance
+ *   @option options [VLC::Core] :core the core instance (optional)
  *   @option options [String] :path local filesystem path
  *   @raise [ArgumentError] Invalid or unsupported arguments
  *
- * @overload initialize(core: core, fd: desc)
+ * @overload initialize(options = {})
  *   Create a media for an already open file descriptor.
  *   The file descriptor shall be open for reading (or reading and writing).
  *
@@ -89,15 +89,15 @@ vlc_media_get_type(void)
  *     descriptor should probably be rewound to the beginning with lseek().
  *
  *   @param [Hash] options specify media
- *   @option options [VLC::Core] :core (nil) the core instance
+ *   @option options [VLC::Core] :core the core instance (optional)
  *   @option options [Integer] :fd open file descriptor
  *   @raise [ArgumentError] Invalid or unsupported arguments
  *
- * @overload initialize(core: core, name: name)
+ * @overload initialize(options = {})
  *   Create a media as an empty node with a given name.
  *
  *   @param [Hash] options specify media
- *   @option options [VLC::Core] :core (nil) the core instance
+ *   @option options [VLC::Core] :core the core instance (optional)
  *   @option options [String] :name the name of the node
  *   @raise [ArgumentError] Invalid or unsupported arguments
  *
@@ -136,6 +136,11 @@ rg_initialize(VALUE self, VALUE options)
     return Qnil;
 }
 
+/*
+ *
+ * @return [VLC::Core]
+ * @todo fixme
+ */
 static VALUE
 rg_core(VALUE self)
 {
@@ -153,7 +158,7 @@ rg_core(VALUE self)
  *
  * @param [String] options the options
  * @param [Integer] flags the flags for this option
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -186,18 +191,15 @@ rg_mrl(VALUE self)
 /*
  * Read the meta of the media.
  *
- * If the media has not yet been parsed this will return NULL.
+ * If the media has not yet been parsed this will return nil.
  *
- * This methods automatically calls libvlc_media_parse_async(), so after calling
- * it you may receive a libvlc_MediaMetaChanged event. If you prefer a synchronous
- * version ensure that you call libvlc_media_parse() before get_meta().
- *
- * \see libvlc_media_parse
- * \see libvlc_media_parse_async
- * \see libvlc_MediaMetaChanged
+ * This methods automatically calls {#parse}(async: true), so after calling
+ * it you may receive a :media_metachanged event. If you prefer a synchronous
+ * version ensure that you call {#parse} before {#get_meta}.
  *
  * @param [VLC::Media::MetaType, Symbol] type the meta to read
  * @return [String] the media's meta
+ * @see #parse
  * @todo fixme
  */
 static VALUE
@@ -208,11 +210,11 @@ rg_get_meta(VALUE self, VALUE type)
 
 /*
  * Set the meta of the media (this function will not save the meta, call
- * libvlc_media_save_meta in order to save the meta)
+ * {#save_meta} in order to save the meta)
  *
  * @param [VLC::Media::MetaType, Symbol] type the meta to write
  * @param [String] value the media's meta
- * @return [self]
+ * @return self
  * @todo fixme
  */
 static VALUE
@@ -280,17 +282,15 @@ rg_duration(VALUE self)
  *
  * This fetches (local) meta data and tracks information.
  *
- * To track when this is over you can listen to libvlc_MediaParsedChanged
+ * To track when this is over you can listen to :media_parsedchanged
  * event. However if the media was already parsed you will not receive this
  * event.
  *
- * \see libvlc_MediaParsedChanged
- * \see libvlc_media_get_meta
- * \see libvlc_media_get_tracks_info
- *
  * @param [Hash] options specify media
  * @option options [Boolean] :async (false) whether the operation is asynchronous or not
- * @return [self]
+ * @return self
+ * @see #get_meta
+ * @see #tracks_info
  * @todo fixme
  */
 static VALUE
@@ -312,8 +312,6 @@ rg_parse(VALUE self, VALUE options)
 /*
  * Get Parsed status for media descriptor object.
  *
- * \see libvlc_MediaParsedChanged
- *
  * @return [Boolean] true if media object has been parsed otherwise it returns false
  * @todo fixme
  */
@@ -327,11 +325,11 @@ rg_parsed_p(VALUE self)
  * Get media descriptor's elementary streams description
  *
  * @note
- *   you need to call libvlc_media_parse() or play the media at least once
+ *   you need to call {#parse} or play the media at least once
  *   before calling this function.
  *   Not doing this will result in an empty array.
  *
- * @return [Array<VLC::MediaTrackInfo>] array of Elementary Streams descriptions
+ * @return [Array<VLC::Media::TrackInfo>] array of Elementary Streams descriptions
  * @todo fixme
  */
 static VALUE
@@ -345,24 +343,49 @@ rg_tracks_info(VALUE self)
     result = rb_ary_new();
     for (i = 0, p = track_info; i < track_count; i++, p++) {
         rb_ary_push(result, VLCMEDIATRACKINFO2RVAL(p));
-        g_free(p);
+/*        g_free(p); */
     }
 
     return result;
 }
 
+/*
+ * Register for an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to listen
+ * @yield call when event_type occurs
+ * @yieldparam self
+ * @yieldparam [VLC::Event] event
+ * @return [Boolean] true on success, false on error
+ * @todo fixme
+ */
 static VALUE
 rg_attach_event(VALUE self, VALUE event_type)
 {
     return em_attach_event(libvlc_media_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Unregister an event notification.
+ *
+ * @param [VLC::Event::Type] event_type the desired event to which we want to unregister
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_detach_event(VALUE self, VALUE event_type)
 {
     return em_detach_event(libvlc_media_event_manager(_SELF(self)), self, event_type);
 }
 
+/*
+ * Document-class: VLC::Media
+ *
+ * an abstract representation of a playable media.
+ * It consists of a media location and various optional meta data.
+ *
+ * @todo fixme
+ */
 void
 Init_vlc_media(VALUE mVLC)
 {
@@ -385,5 +408,6 @@ Init_vlc_media(VALUE mVLC)
     RG_DEF_METHOD(attach_event, 1);
     RG_DEF_METHOD(detach_event, 1);
 
+    Init_vlc_media_trackinfo(RG_TARGET_NAMESPACE);
     Init_vlc_media_stats(RG_TARGET_NAMESPACE);
 }

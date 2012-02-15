@@ -26,7 +26,7 @@
  * Retrieve libvlc version.
  *
  * @example
- *   VLC::Core.version  # => "2.0.0-rc1 Twoflower"
+ *   VLC::Core.version        # => "2.0.0-rc1 Twoflower"
  *
  * @return [String] a string containing the libvlc version
  * @todo fixme
@@ -41,7 +41,7 @@ rg_s_version(G_GNUC_UNUSED VALUE self)
  * Retrieve libvlc compiler version.
  *
  * @example
- *   VLC::Core.compiler # => "gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-9ubuntu3)"
+ *   VLC::Core.compiler       # => "gcc version 4.6.1 (Ubuntu/Linaro 4.6.1-9ubuntu3)"
  *
  * @return [String] a string containing the libvlc compiler version
  * @todo fixme
@@ -56,7 +56,7 @@ rg_s_compiler(G_GNUC_UNUSED VALUE self)
  * Retrieve libvlc changeset.
  *
  * @example
- *   VLC::Core.changeset    # => "2.0.0+git20120127+r38"
+ *   VLC::Core.changeset      # => "2.0.0+git20120127+r38"
  *
  * @return [String] a string containing the libvlc changeset
  * @todo fixme
@@ -67,12 +67,31 @@ rg_s_changeset(G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL(libvlc_get_changeset());
 }
 
+/*
+ * A human-readable error message for the last LibVLC error in the calling
+ * thread. The resulting string is valid until another error occurs (at least
+ * until the next LibVLC call).
+ *
+ * @note
+ *   This will be nil if there was no error.
+ *
+ * @return [String] the last error message
+ * @todo fixme
+ */
 static VALUE
 rg_s_errmsg(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(libvlc_errmsg());
 }
 
+/*
+ * Clears the LibVLC error status for the current thread. This is optional.
+ * By default, the error status is automatically overridden when a new error
+ * occurs, and destroyed when the thread exits.
+ *
+ * @return self
+ * @todo fixme
+ */
 static VALUE
 rg_s_clearerr(VALUE self)
 {
@@ -80,6 +99,11 @@ rg_s_clearerr(VALUE self)
     return self;
 }
 
+/*
+ * Document-module: VLC
+ *
+ * @todo fixme
+ */
 void
 Init_vlc(void)
 {
@@ -100,8 +124,6 @@ Init_vlc(void)
     RG_DEF_SMETHOD(errmsg, 0);
     RG_DEF_SMETHOD(clearerr, 0);
 
-    Init_vlc_eventtype(RG_TARGET_NAMESPACE);
-
     Init_vlc_core(RG_TARGET_NAMESPACE);
     Init_vlc_media(RG_TARGET_NAMESPACE);
     Init_vlc_mediaplayer(RG_TARGET_NAMESPACE);
@@ -110,7 +132,6 @@ Init_vlc(void)
     Init_vlc_medialibrary(RG_TARGET_NAMESPACE);
     Init_vlc_mediadiscoverer(RG_TARGET_NAMESPACE);
     Init_vlc_event(RG_TARGET_NAMESPACE);
-    Init_vlc_mediatrackinfo(RG_TARGET_NAMESPACE);
     Init_vlc_moduledescription(RG_TARGET_NAMESPACE);
     Init_vlc_trackdescription(RG_TARGET_NAMESPACE);
     Init_vlc_audiooutput(RG_TARGET_NAMESPACE);
