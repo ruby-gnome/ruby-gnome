@@ -20,7 +20,7 @@
 
 #include "rbvlcprivate.h"
 
-#define RG_TARGET_NAMESPACE cEventType
+#define RG_TARGET_NAMESPACE cType
 #define _SELF(self) (RVAL2VLCEVENTTYPE(self))
 
 /*
@@ -41,9 +41,9 @@ rg_type_name(VALUE self)
  * @todo fixme
  */
 void
-Init_vlc_eventtype(VALUE mVLC)
+Init_vlc_event_type(VALUE cEvent)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_EVENT_TYPE, "EventType", mVLC);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_EVENT_TYPE, "Type", cEvent);
 
     RG_DEF_METHOD(type_name, 0);
 }

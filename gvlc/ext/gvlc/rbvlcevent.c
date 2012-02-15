@@ -71,4 +71,6 @@ Init_vlc_event(VALUE mVLC)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(VLC_TYPE_EVENT, "Event", mVLC);
 
     RG_DEF_METHOD(type, 0);
+
+    Init_vlc_event_type(RG_TARGET_NAMESPACE);
 }

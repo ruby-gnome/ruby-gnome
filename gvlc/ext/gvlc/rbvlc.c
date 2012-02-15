@@ -124,8 +124,6 @@ Init_vlc(void)
     RG_DEF_SMETHOD(errmsg, 0);
     RG_DEF_SMETHOD(clearerr, 0);
 
-    Init_vlc_eventtype(RG_TARGET_NAMESPACE);
-
     Init_vlc_core(RG_TARGET_NAMESPACE);
     Init_vlc_media(RG_TARGET_NAMESPACE);
     Init_vlc_mediaplayer(RG_TARGET_NAMESPACE);
