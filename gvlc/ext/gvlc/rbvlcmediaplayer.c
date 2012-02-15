@@ -229,7 +229,7 @@ static VALUE
 rg_xwindow(VALUE self)
 {
     uint32_t xid = libvlc_media_player_get_xwindow(_SELF(self));
-    return xid == 0 ? Qnil : INT2NUM(xid);
+    return xid == 0 ? Qnil : UINT2NUM(xid);
 }
 
 /*
