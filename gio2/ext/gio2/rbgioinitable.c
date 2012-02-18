@@ -166,7 +166,7 @@ rbgio_ginitable_new(GType type, VALUE parameters, VALUE cancellable)
 /* NOTE: We don't implement g_initable_new_valist. */
 
 static VALUE
-rg_m_new(int argc, VALUE *argv, VALUE self)
+rg_s_new(int argc, VALUE *argv, VALUE self)
 {
         const RGObjClassInfo* info;
         VALUE cancellable, parameters;
@@ -193,7 +193,7 @@ Init_ginitable(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(G_TYPE_INITABLE, "Initable", mGio);
 
-        RG_DEF_MODFUNC(new, -1);
+        RG_DEF_SMETHOD(new, -1);
 
         RG_DEF_METHOD(init, -1);
 }

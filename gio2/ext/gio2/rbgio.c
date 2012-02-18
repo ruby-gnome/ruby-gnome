@@ -23,7 +23,7 @@
 #define RG_TARGET_NAMESPACE mGio
 
 static VALUE
-rg_m_has_unix_p(G_GNUC_UNUSED VALUE self)
+rg_s_has_unix_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_GIO_UNIX
     return Qtrue;
@@ -42,7 +42,7 @@ Init_gio(void)
     G_DEF_CLASS(G_TYPE_ASK_PASSWORD_FLAGS, "AskPasswordFlags", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(G_TYPE_PASSWORD_SAVE, "PasswordSave", RG_TARGET_NAMESPACE);
 
-    RG_DEF_MODFUNC_P(has_unix, 0);
+    RG_DEF_SMETHOD_P(has_unix, 0);
 
     Init_gappinfo(RG_TARGET_NAMESPACE);
     Init_gapplaunchcontext(RG_TARGET_NAMESPACE);
