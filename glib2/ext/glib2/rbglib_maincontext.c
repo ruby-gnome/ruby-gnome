@@ -856,8 +856,6 @@ Init_glib_main_context(void)
 
     rbg_define_singleton_method(mGLib, "set_ruby_thread_priority",
                                ruby_source_set_priority, 1);
-    rbg_define_singleton_method(mGLib, "ruby_thread_priority=",
-                               ruby_source_set_priority, 1);
 
     mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
     rbg_define_singleton_method(mGLibSource, "remove", source_remove, 1);
