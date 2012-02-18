@@ -892,21 +892,21 @@ Init_glib_main_context(void)
 #ifdef HAVE_G_MAIN_DEPTH
     RG_DEF_SMETHOD(depth, 0);
 #endif
-    rb_define_module_function(timeout, "source_new", timeout_source_new, 1);
+    rb_define_singleton_method(timeout, "source_new", timeout_source_new, 1);
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_module_function(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
+    rb_define_singleton_method(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
 #endif
-    rb_define_module_function(timeout, "add", timeout_add, -1);
+    rb_define_singleton_method(timeout, "add", timeout_add, -1);
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_module_function(timeout, "add_seconds", timeout_add_seconds, -1);
+    rb_define_singleton_method(timeout, "add_seconds", timeout_add_seconds, -1);
 #endif
-    rb_define_module_function(idle, "source_new", idle_source_new, 0);
-    rb_define_module_function(idle, "add", idle_add, -1);
-    rb_define_module_function(idle, "remove", idle_remove, 1);
+    rb_define_singleton_method(idle, "source_new", idle_source_new, 0);
+    rb_define_singleton_method(idle, "add", idle_add, -1);
+    rb_define_singleton_method(idle, "remove", idle_remove, 1);
 
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_module_function(child_watch, "source_new", child_watch_source_new, 1);
-    rb_define_module_function(child_watch, "add", child_watch_add, 1);
+    rb_define_singleton_method(child_watch, "source_new", child_watch_source_new, 1);
+    rb_define_singleton_method(child_watch, "add", child_watch_add, 1);
 #endif
 
     default_poll_func = g_main_context_get_poll_func(NULL);
