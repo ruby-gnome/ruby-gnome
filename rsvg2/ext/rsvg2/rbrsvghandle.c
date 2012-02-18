@@ -94,7 +94,7 @@ rb_rsvg_handle_alloc(VALUE klass)
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
 static VALUE
-rg_m_new_from_data(VALUE self, VALUE data)
+rg_s_new_from_data(VALUE self, VALUE data)
 {
     GError *error = NULL;
     RsvgHandle *handle;
@@ -109,7 +109,7 @@ rg_m_new_from_data(VALUE self, VALUE data)
 }
 
 static VALUE
-rg_m_new_from_file(VALUE self, VALUE file)
+rg_s_new_from_file(VALUE self, VALUE file)
 {
     GError *error = NULL;
     RsvgHandle *handle;
@@ -431,8 +431,8 @@ Init_rsvg_handle(VALUE mRSVG)
 #endif
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
-    RG_DEF_MODFUNC(new_from_data, 1);
-    RG_DEF_MODFUNC(new_from_file, 1);
+    RG_DEF_SMETHOD(new_from_data, 1);
+    RG_DEF_SMETHOD(new_from_file, 1);
 #endif
 
     RG_DEF_METHOD(initialize, -1);
