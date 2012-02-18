@@ -103,6 +103,5 @@ Init_giostream(VALUE mGio)
         RG_DEF_METHOD(close_finish, 1);
         RG_DEF_METHOD_P(has_pending, 0);
         RG_DEF_METHOD(set_pending, 0);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "pending");
         RG_DEF_METHOD(clear_pending, 0);
 }

@@ -1983,7 +1983,6 @@ Init_gfile(VALUE mGio)
         RG_DEF_METHOD(enumerate_children_async, -1);
         RG_DEF_METHOD(enumerate_children_finish, 1);
         RG_DEF_METHOD(set_display_name, -1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_name");
         RG_DEF_METHOD(set_display_name_async, -1);
         RG_DEF_METHOD(set_display_name_finish, 1);
         RG_DEF_METHOD(delete, -1);
@@ -1999,7 +1998,6 @@ Init_gfile(VALUE mGio)
         RG_DEF_METHOD(query_writable_namespaces, -1);
         RG_DEF_METHOD(set_attribute, -1);
         RG_DEF_METHOD(set_attributes_from_info, -1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "attributes_from_info");
         RG_DEF_METHOD(set_attributes_async, -1);
         RG_DEF_METHOD(set_attributes_finish, 1);
         RG_DEF_METHOD(set_attribute_string, -1);

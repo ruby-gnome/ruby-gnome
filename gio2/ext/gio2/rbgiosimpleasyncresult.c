@@ -141,15 +141,12 @@ Init_gsimpleasyncresult(VALUE mGio)
 
         RG_DEF_METHOD(initialize, 1);
         RG_DEF_METHOD(set_op_res_gssize, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "op_res_gssize");
         RG_DEF_METHOD(op_res_gssize, 0);
         RG_DEF_METHOD(set_op_res_gboolean, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "op_res_gboolean");
         RG_DEF_METHOD(op_res_gboolean, 0);
         RG_DEF_METHOD(source_tag, 0);
         RG_DEF_METHOD_P(valid, 2);
         RG_DEF_METHOD(set_handle_cancellation, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "handle_cancellation");
         RG_DEF_METHOD(complete, 0);
         RG_DEF_METHOD(complete_in_idle, 0);
 }
