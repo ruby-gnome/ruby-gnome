@@ -75,6 +75,4 @@ Init_atk_value(VALUE mAtk)
     RG_DEF_METHOD(max, 0);
     RG_DEF_METHOD(min, 0);
     RG_DEF_METHOD(set_current, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -268,6 +268,4 @@ Init_atk_table(VALUE mAtk)
     RG_DEF_METHOD(add_row_selection, 1);
     RG_DEF_METHOD(remove_column_selection, 1);
     RG_DEF_METHOD(remove_row_selection, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
