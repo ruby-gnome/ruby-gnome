@@ -175,6 +175,5 @@ Init_gdk_pixbuf_format(VALUE mGdk)
     RG_DEF_METHOD(license, 0);
 
 #endif
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }
