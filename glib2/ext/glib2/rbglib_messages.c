@@ -35,7 +35,6 @@
 #define RG_TARGET_NAMESPACE mLog
 
 static VALUE rbglib_log_handler_procs;
-static ID id_call;
 static gboolean log_canceled;
 
 static const gchar *
@@ -122,7 +121,6 @@ Init_glib_messages(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Log");
 
-    id_call = rb_intern("call");
     log_canceled = FALSE;
 
     rb_global_variable(&rbglib_log_handler_procs);
