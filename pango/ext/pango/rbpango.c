@@ -64,7 +64,7 @@ rpango_reorder_items_ensure(VALUE value)
 }
 
 static VALUE
-rg_m_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
+rg_s_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
 {
     struct rpango_reorder_items_args args;
     args.ary = rb_ary_to_ary(attrs);
@@ -77,13 +77,13 @@ rg_m_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
 
 #if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
-rg_m_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
+rg_s_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
     return PANGODIRECTION2RVAL(pango_unichar_direction(NUM2UINT(ch)));
 }
 
 static VALUE
-rg_m_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
+rg_s_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     StringValue(text);
     return PANGODIRECTION2RVAL(pango_find_base_dir(RSTRING_PTR(text), RSTRING_LEN(text)));
@@ -128,7 +128,7 @@ rbg_pangologattrs2rval_free(PangoLogAttr *attrs, long n)
 #define PANGOLOGATTRS2RVAL_FREE(attrs, n) rbg_pangologattrs2rval_free(attrs, n)
 
 static VALUE
-rg_m_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
+rg_s_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -142,7 +142,7 @@ rg_m_break(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 }
 
 static VALUE
-rg_m_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
+rg_s_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE rblanguage)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -157,7 +157,7 @@ rg_m_get_log_attrs(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rblevel, VALUE 
 }
 
 static VALUE
-rg_m_find_paragraph_boundary(G_GNUC_UNUSED VALUE self, VALUE text)
+rg_s_find_paragraph_boundary(G_GNUC_UNUSED VALUE self, VALUE text)
 {
     gint paragraph_delimiter_index, next_paragraph_start;
 
@@ -193,7 +193,7 @@ rpango_shape_ensure(VALUE value)
 }
 
 static VALUE
-rg_m_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
+rg_s_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 {
     const gchar *text = RVAL2CSTR(rbtext);
     long length = RSTRING_LEN(rbtext);
@@ -208,7 +208,7 @@ rg_m_shape(G_GNUC_UNUSED VALUE self, VALUE rbtext, VALUE rbanalysis)
 
 /* This method is from rbpangoattribute.c */
 static VALUE
-rg_m_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE markup_text, accel_marker;
     PangoAttrList *pattr_list;
@@ -247,13 +247,13 @@ rg_m_parse_markup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
+rg_s_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 {
     return rb_float_new(PANGO_PIXELS(NUM2DBL(pixels)));
 }
 
 static VALUE
-rg_m_cairo_available_p(G_GNUC_UNUSED VALUE self)
+rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef CAIRO_AVAILABLE
     return Qtrue;
@@ -273,22 +273,22 @@ Init_pango(void)
                                 INT2FIX(PANGO_MINOR_VERSION), 
                                 INT2FIX(PANGO_MICRO_VERSION)));
 
-    RG_DEF_MODFUNC(reorder_items, 1);
+    RG_DEF_SMETHOD(reorder_items, 1);
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    RG_DEF_MODFUNC(unichar_direction, 1);
-    RG_DEF_MODFUNC(find_base_dir, 1);
+    RG_DEF_SMETHOD(unichar_direction, 1);
+    RG_DEF_SMETHOD(find_base_dir, 1);
 #endif
-    RG_DEF_MODFUNC(break, 2);
-    RG_DEF_MODFUNC(get_log_attrs, 3);
-    RG_DEF_MODFUNC(find_paragraph_boundary, 1);
-    RG_DEF_MODFUNC(shape, 2);
-    RG_DEF_MODFUNC(parse_markup, -1);
-    RG_DEF_MODFUNC(pixels, 1);
+    RG_DEF_SMETHOD(break, 2);
+    RG_DEF_SMETHOD(get_log_attrs, 3);
+    RG_DEF_SMETHOD(find_paragraph_boundary, 1);
+    RG_DEF_SMETHOD(shape, 2);
+    RG_DEF_SMETHOD(parse_markup, -1);
+    RG_DEF_SMETHOD(pixels, 1);
 
     rb_define_const(RG_TARGET_NAMESPACE, "SCALE", INT2FIX(PANGO_SCALE));
 
-    RG_DEF_MODFUNC_P(cairo_available, 0);
+    RG_DEF_SMETHOD_P(cairo_available, 0);
 
     Init_pango_analysis(RG_TARGET_NAMESPACE);
     Init_pango_attribute(RG_TARGET_NAMESPACE);
