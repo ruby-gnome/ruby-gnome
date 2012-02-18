@@ -238,7 +238,7 @@ Init_gobject_gboxed(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))rbgobj_boxed_s_allocate);
     rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(initialize_copy, 1);

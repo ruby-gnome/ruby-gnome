@@ -112,12 +112,12 @@ Init_gtype_pointer(void)
 {
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", mGLib);
     rb_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 1);
-    rb_define_method(cPtr, "gtype", ptr_gtype, 1);
+    rbg_define_method(cPtr, "gtype", ptr_gtype, 1);
 #ifndef RBGOBJ_USE_DLPTR
-    rb_define_method(cPtr, "inspect", ptr_inspect, 0);
-    rb_define_method(cPtr, "==", ptr_eql, 1);
-    rb_define_method(cPtr, "eql?", ptr_eql, 1);
-    rb_define_method(cPtr, "hash", ptr_hash, 0);
+    rbg_define_method(cPtr, "inspect", ptr_inspect, 0);
+    rbg_define_method(cPtr, "==", ptr_eql, 1);
+    rbg_define_method(cPtr, "eql?", ptr_eql, 1);
+    rbg_define_method(cPtr, "hash", ptr_hash, 0);
 #endif
 }
 

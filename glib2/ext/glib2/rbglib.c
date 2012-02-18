@@ -1123,7 +1123,4 @@ union       GDoubleIEEE754;
     Init_glib_unichar();
     Init_glib_keyfile();
     Init_glib_bookmark_file();
-
-    /* This is called here once. */
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

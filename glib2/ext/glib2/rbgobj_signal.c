@@ -644,7 +644,7 @@ gobj_s_method_added(VALUE klass, VALUE id)
     {
         VALUE mod = rb_define_module_under(klass, RubyGObjectHookModule);
         rb_include_module(klass, mod);
-        rb_define_method(mod, name, gobj_sig_chain_from_overridden, -1);
+        rbg_define_method(mod, name, gobj_sig_chain_from_overridden, -1);
     }
 
     return Qnil;
@@ -917,13 +917,13 @@ Init_gobject_gsignal(void)
     rb_define_const(cSignalFlags, "MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
     rb_define_const(RG_TARGET_NAMESPACE, "FLAGS_MASK", INT2NUM(G_SIGNAL_FLAGS_MASK));
 
-    rb_define_method(RG_TARGET_NAMESPACE, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "action?", query_is_G_SIGNAL_ACTION, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "run_first?", query_is_G_SIGNAL_RUN_FIRST, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "run_last?", query_is_G_SIGNAL_RUN_LAST, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "run_cleanup?", query_is_G_SIGNAL_RUN_CLEANUP, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "no_recurse?", query_is_G_SIGNAL_NO_RECURSE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "detailed?", query_is_G_SIGNAL_DETAILED, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "action?", query_is_G_SIGNAL_ACTION, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "no_hooks?", query_is_G_SIGNAL_NO_HOOKS, 0);
 
     /* GConnectFlags */
     G_DEF_CLASS(G_TYPE_CONNECT_FLAGS, "ConnectFlags", mGLib);
@@ -943,33 +943,33 @@ Init_gobject_gsignal(void)
     signal_func_table = rb_hash_new();
     rb_global_variable(&signal_func_table);
 
-    rb_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
-    rb_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
-    rb_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
+    rbg_define_method(mMetaInterface, "signal_new", gobj_s_signal_new, -1);
+    rbg_define_method(mMetaInterface, "signals", gobj_s_signals, -1);
+    rbg_define_method(mMetaInterface, "signal", gobj_s_signal, 1);
 
-    rb_define_method(cInstantiatable, "signal_has_handler_pending?",
+    rbg_define_method(cInstantiatable, "signal_has_handler_pending?",
                      gobj_sig_has_handler_pending, -1);
-    rb_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
-    rb_define_method(cInstantiatable, "signal_connect_after",
+    rbg_define_method(cInstantiatable, "signal_connect", gobj_sig_connect, -1);
+    rbg_define_method(cInstantiatable, "signal_connect_after",
                      gobj_sig_connect_after, -1);
 
 #if 0
-    rb_define_method(cInstantiatable, "signal_invocation_hint",
+    rbg_define_method(cInstantiatable, "signal_invocation_hint",
                      gobj_sig_get_invocation_hint, 0);
 #endif
 
-    rb_define_method(cInstantiatable, "signal_emit",
+    rbg_define_method(cInstantiatable, "signal_emit",
                      gobj_sig_emit, -1);
-    rb_define_method(cInstantiatable, "signal_emit_stop",
+    rbg_define_method(cInstantiatable, "signal_emit_stop",
                      gobj_sig_emit_stop, 1);
-    rb_define_method(cInstantiatable, "signal_handler_block",
+    rbg_define_method(cInstantiatable, "signal_handler_block",
                      gobj_sig_handler_block, 1);
-    rb_define_method(cInstantiatable, "signal_handler_unblock",
+    rbg_define_method(cInstantiatable, "signal_handler_unblock",
                      gobj_sig_handler_unblock, 1);
-    rb_define_method(cInstantiatable, "signal_handler_disconnect",
+    rbg_define_method(cInstantiatable, "signal_handler_disconnect",
                      gobj_sig_handler_disconnect, 1);
 
-    rb_define_method(cInstantiatable, "signal_handler_is_connected?",
+    rbg_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
     rb_define_singleton_method(cInstantiatable, "method_added",

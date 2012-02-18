@@ -184,6 +184,4 @@ Init_glib_source(void)
     RG_DEF_METHOD(current_time, 0);
 
     /* GLib::Source.remove is moved to rbglib_maincontext.c */
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
