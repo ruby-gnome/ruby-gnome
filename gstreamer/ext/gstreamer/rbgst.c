@@ -103,7 +103,7 @@ Init_gst_classes (void)
  */
 
 static VALUE
-rg_m_init (int argc, VALUE * argv, VALUE self)
+rg_s_init (int argc, VALUE * argv, VALUE self)
 {
     gint i, gargc;
     VALUE argary;
@@ -173,7 +173,7 @@ rg_m_init (int argc, VALUE * argv, VALUE self)
  * Returns: an Array of 4 fixnums (major, minor, macro and nano numbers).
  */
 static VALUE
-rg_m_version (VALUE self)
+rg_s_version (VALUE self)
 {
     guint major, minor, micro, nano;
 
@@ -184,7 +184,7 @@ rg_m_version (VALUE self)
 }
 
 static VALUE
-rg_m_check_version_p(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
+rg_s_check_version_p(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
 {
     guint major, minor, micro, nano;
 
@@ -202,8 +202,8 @@ Init_gstreamer (void)
 {
     RG_TARGET_NAMESPACE = rb_define_module ("Gst");
 
-    RG_DEF_MODFUNC(init, -1);
-    RG_DEF_MODFUNC(version, 0);
+    RG_DEF_SMETHOD(init, -1);
+    RG_DEF_SMETHOD(version, 0);
 
     /*
      * Constant: VERSION_MAJOR
@@ -233,5 +233,5 @@ Init_gstreamer (void)
                                 INT2FIX(GST_VERSION_MINOR),
                                 INT2FIX(GST_VERSION_MICRO)));
 
-    RG_DEF_MODFUNC_P(check_version, 3);
+    RG_DEF_SMETHOD_P(check_version, 3);
 }

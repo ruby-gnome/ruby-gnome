@@ -39,7 +39,7 @@
  * an exception on failure.
  */
 static VALUE
-rg_m_launch (VALUE self, VALUE command)
+rg_s_launch (VALUE self, VALUE command)
 {
 #if !defined(GST_DISABLE_PARSE)
     GError *error;
@@ -62,7 +62,7 @@ void
 Init_gst_parse (VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under (mGst, "Parse"); 
-    RG_DEF_MODFUNC(launch, 1);
+    RG_DEF_SMETHOD(launch, 1);
 
         G_DEF_ERROR(GST_PARSE_ERROR, "ParseError", mGst, rb_eRuntimeError,
                     GST_TYPE_PARSE_ERROR);
