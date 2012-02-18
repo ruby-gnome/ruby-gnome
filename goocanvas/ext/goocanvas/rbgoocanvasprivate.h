@@ -24,14 +24,6 @@
 #include <rbgdk-pixbuf.h>
 #include "rbgoocanvas.h"
 
-/* TODO: move to rbgutil.h */
-#undef RG_DEF_METHOD
-#define RG_DEF_METHOD(method, argc) \
-        rbg_define_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
-#undef RG_DEF_SMETHOD
-#define RG_DEF_SMETHOD(method, argc) \
-        rbg_define_singleton_method(RG_TARGET_NAMESPACE, #method, rg_s_ ## method, argc)
-
 void Init_goocanvas(void); /* Goo::Canvas */
 G_GNUC_INTERNAL void Init_goocanvasitem(VALUE mGoo); /* Goo::CanvasItem */
 G_GNUC_INTERNAL void Init_goocanvastext(VALUE mGoo); /* Goo::CanvasText */

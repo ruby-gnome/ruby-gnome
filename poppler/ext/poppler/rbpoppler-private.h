@@ -7,14 +7,6 @@
 #  include <rbgdk.h>
 #endif
 
-/* TODO: move to rbgutil.h */
-#undef RG_DEF_METHOD
-#define RG_DEF_METHOD(method, argc) \
-        rbg_define_method(RG_TARGET_NAMESPACE, #method, rg_ ## method, argc)
-#undef RG_DEF_SMETHOD
-#define RG_DEF_SMETHOD(method, argc) \
-        rbg_define_singleton_method(RG_TARGET_NAMESPACE, #method, rg_s_ ## method, argc)
-
 #define RVAL2GDKPIXBUF(o) (GDK_PIXBUF(RVAL2GOBJ(o)))
 
 G_GNUC_INTERNAL void Init_poppler_indexiter(VALUE mPoppler);
