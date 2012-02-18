@@ -24,7 +24,7 @@
 #define RG_TARGET_NAMESPACE mShell
 
 static VALUE
-rg_m_parse(G_GNUC_UNUSED VALUE self, VALUE command_line)
+rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE command_line)
 {
     gint argc;
     gchar **argv;
@@ -37,13 +37,13 @@ rg_m_parse(G_GNUC_UNUSED VALUE self, VALUE command_line)
 }
 
 static VALUE
-rg_m_quote(G_GNUC_UNUSED VALUE self, VALUE unquoted_string)
+rg_s_quote(G_GNUC_UNUSED VALUE self, VALUE unquoted_string)
 {
     return CSTR2RVAL_FREE(g_shell_quote(RVAL2CSTR(unquoted_string)));
 }
 
 static VALUE
-rg_m_unquote(G_GNUC_UNUSED VALUE self, VALUE quoted_string)
+rg_s_unquote(G_GNUC_UNUSED VALUE self, VALUE quoted_string)
 {
     GError *error = NULL;
     gchar *str = g_shell_unquote(RVAL2CSTR(quoted_string), &error);
@@ -58,7 +58,7 @@ Init_glib_shell(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "Shell");
 
-    RG_DEF_MODFUNC(parse, 1);
-    RG_DEF_MODFUNC(quote, 1);
-    RG_DEF_MODFUNC(unquote, 1);
+    RG_DEF_SMETHOD(parse, 1);
+    RG_DEF_SMETHOD(quote, 1);
+    RG_DEF_SMETHOD(unquote, 1);
 }

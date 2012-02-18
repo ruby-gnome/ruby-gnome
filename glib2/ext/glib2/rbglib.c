@@ -914,7 +914,7 @@ Init_mem()
 #endif
 
 static VALUE
-rg_m_os_win32_p(G_GNUC_UNUSED VALUE self)
+rg_s_os_win32_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_WIN32
     return Qtrue;
@@ -924,7 +924,7 @@ rg_m_os_win32_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_os_beos_p(G_GNUC_UNUSED VALUE self)
+rg_s_os_beos_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_BEOS
     return Qtrue;
@@ -934,7 +934,7 @@ rg_m_os_beos_p(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_os_unix_p(G_GNUC_UNUSED VALUE self)
+rg_s_os_unix_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef G_OS_UNIX
     return Qtrue;
@@ -1024,9 +1024,9 @@ Init_glib2(void)
     rb_define_const(RG_TARGET_NAMESPACE, "MAXDOUBLE", DBL2NUM(G_MAXDOUBLE));
 
     /* Standard Macros */
-    RG_DEF_MODFUNC_P(os_win32, 0);
-    RG_DEF_MODFUNC_P(os_beos, 0);
-    RG_DEF_MODFUNC_P(os_unix, 0);
+    RG_DEF_SMETHOD_P(os_win32, 0);
+    RG_DEF_SMETHOD_P(os_beos, 0);
+    RG_DEF_SMETHOD_P(os_unix, 0);
 
     rb_define_const(RG_TARGET_NAMESPACE, "DIR_SEPARATOR", CSTR2RVAL(G_DIR_SEPARATOR_S));
     rb_define_const(RG_TARGET_NAMESPACE, "SEARCHPATH_SEPARATOR", CSTR2RVAL(G_SEARCHPATH_SEPARATOR_S));
