@@ -38,8 +38,8 @@ item_int_set_ ## name (VALUE self, VALUE val)\
 }
 
 #define DEF_INT_ACCESSOR(name)                                  \
-    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), item_int_ ## name, 0);\
-    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), item_int_set_ ## name, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), item_int_ ## name, 0);\
+    rbg_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), item_int_set_ ## name, 1);
 
 /**********************************/
 #if ! PANGO_CHECK_VERSION(1,9,0)
@@ -108,6 +108,4 @@ Init_pango_item(VALUE mPango)
 
     RG_DEF_METHOD(analysis, 0);
     RG_DEF_METHOD(set_analysis, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

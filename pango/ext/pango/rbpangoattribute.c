@@ -399,7 +399,7 @@ MAKE_ATTRINT_INIT(AttrLetterSpacing, letter_spacing);
 #define MAKE_ATTR(gtype, name, parent, num)\
 tmpklass = rb_define_class_under(mPango, #name, parent);\
 rb_hash_aset(type_to_klass, INT2FIX(gtype), tmpklass);\
-rb_define_method(tmpklass, "initialize", attr_## name ## _initialize , num);
+rbg_define_method(tmpklass, "initialize", attr_## name ## _initialize , num);
 
 void
 Init_pango_attribute(VALUE mPango)
@@ -414,8 +414,6 @@ Init_pango_attribute(VALUE mPango)
     RG_DEF_METHOD(end_index, 0);
     RG_DEF_METHOD(set_end_index, 1);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 #ifndef HAVE_RB_DEFINE_ALLOC_FUNC
     RG_DEF_SMETHOD(allocate, 0);
 #else
@@ -426,25 +424,25 @@ Init_pango_attribute(VALUE mPango)
 #endif
 
     attrstring = rb_define_class_under(mPango, "AttrString", RG_TARGET_NAMESPACE);
-    rb_define_method(attrstring, "value", attr_string_value, 0);
+    rbg_define_method(attrstring, "value", attr_string_value, 0);
 
     pattrint = rb_define_class_under(mPango, "AttrInt", RG_TARGET_NAMESPACE);
-    rb_define_method(pattrint, "value", attr_int_value, 0);
+    rbg_define_method(pattrint, "value", attr_int_value, 0);
 
     pattrfloat = rb_define_class_under(mPango, "AttrFloat", RG_TARGET_NAMESPACE);
-    rb_define_method(pattrfloat, "value", attr_float_value, 0);
+    rbg_define_method(pattrfloat, "value", attr_float_value, 0);
 
     pattrcolor = rb_define_class_under(mPango, "AttrColor", RG_TARGET_NAMESPACE);
-    rb_define_method(pattrcolor, "value", attr_color_value, 0);
+    rbg_define_method(pattrcolor, "value", attr_color_value, 0);
 
     pattrbool = rb_define_class_under(mPango, "AttrBool", RG_TARGET_NAMESPACE);
-    rb_define_method(pattrbool, "value", attr_bool_value, 0);
+    rbg_define_method(pattrbool, "value", attr_bool_value, 0);
 
     rb_global_variable(&type_to_klass);
     type_to_klass = rb_hash_new();
 
     MAKE_ATTR(PANGO_ATTR_LANGUAGE, AttrLanguage, RG_TARGET_NAMESPACE, 1);
-    rb_define_method(tmpklass, "value", attr_language_value, 0);
+    rbg_define_method(tmpklass, "value", attr_language_value, 0);
 
     MAKE_ATTR(PANGO_ATTR_FAMILY, AttrFamily, attrstring, 1);
     MAKE_ATTR(PANGO_ATTR_STYLE, AttrStyle, pattrint, 1);
@@ -460,7 +458,7 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_GRAVITY_HINT, AttrGravityHint, pattrint, 1);
 #endif
     MAKE_ATTR(PANGO_ATTR_FONT_DESC, AttrFontDescription, RG_TARGET_NAMESPACE, 1);
-    rb_define_method(tmpklass, "value", attr_fontdesc_value, 0);
+    rbg_define_method(tmpklass, "value", attr_fontdesc_value, 0);
     MAKE_ATTR(PANGO_ATTR_FOREGROUND, AttrForeground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_BACKGROUND, AttrBackground, pattrcolor, 3);
     MAKE_ATTR(PANGO_ATTR_UNDERLINE, AttrUnderline, pattrint, 1);
@@ -480,9 +478,9 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_LETTER_SPACING, AttrLetterSpacing, pattrint, 1);
 #endif
     MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, RG_TARGET_NAMESPACE, -1);
-    rb_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
-    rb_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
-    rb_define_method(tmpklass, "value", attr_shape_value, 0);
+    rbg_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
+    rbg_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
+    rbg_define_method(tmpklass, "value", attr_shape_value, 0);
     MAKE_ATTR(PANGO_ATTR_SCALE, AttrScale, pattrfloat, 1);
     /* PangoScale */
     rb_define_const(tmpklass, "XX_SMALL", rb_float_new(PANGO_SCALE_XX_SMALL));
