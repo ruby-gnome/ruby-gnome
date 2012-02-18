@@ -190,7 +190,5 @@ Init_rsvg_dimensiondata(VALUE mRSVG)
     RG_DEF_METHOD(to_s, 0);
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_ALIAS("to_ary", "to_a");
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

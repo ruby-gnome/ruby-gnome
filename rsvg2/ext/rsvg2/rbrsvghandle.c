@@ -472,6 +472,4 @@ Init_rsvg_handle(VALUE mRSVG)
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     RG_DEF_METHOD(render_cairo, -1);
 #endif
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
