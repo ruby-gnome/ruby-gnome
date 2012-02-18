@@ -65,7 +65,7 @@ static void
 rbgst_mini_object_type_init_hook(VALUE klass)
 {
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
-        rb_define_method(klass, "initialize",
+        rbg_define_method(klass, "initialize",
                          initialize_with_abstract_check, -1);
 }
 
@@ -215,6 +215,4 @@ Init_gst_mini_object(VALUE mGst)
     RG_DEF_METHOD_P(flag_raised, 1);
     RG_DEF_METHOD_P(writable, 0);
     RG_DEF_METHOD_BANG(writable, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

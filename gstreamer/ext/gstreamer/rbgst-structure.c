@@ -297,6 +297,4 @@ Init_gst_structure(VALUE mGst)
     RG_DEF_ALIAS("have_field?", "has_field?");
 
     RG_DEF_METHOD(to_s, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

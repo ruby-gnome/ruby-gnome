@@ -310,8 +310,6 @@ Init_gst_index (VALUE mGst)
     G_DEF_CLASS (GST_TYPE_INDEX_FLAGS, "Flags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS (RG_TARGET_NAMESPACE, GST_TYPE_INDEX_FLAGS, "GST_INDEX_");
 
-    G_DEF_SETTERS (RG_TARGET_NAMESPACE);
-
     rb_undef_method (RG_TARGET_NAMESPACE, "resolver");
     rb_undef_method (RG_TARGET_NAMESPACE, "resolver=");
 }

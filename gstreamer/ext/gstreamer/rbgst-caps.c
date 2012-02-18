@@ -439,8 +439,6 @@ Init_gst_caps (VALUE mGst)
 
     RG_DEF_METHOD(each, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 /* TODO:
     gst_caps_structure_fixate_field_nearest_int ()
     gst_caps_structure_fixate_field_nearest_double () */
