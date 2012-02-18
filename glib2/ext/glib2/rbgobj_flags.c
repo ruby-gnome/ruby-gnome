@@ -479,7 +479,7 @@ Init_gobject_gflags(void)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", mGLib);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
+    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_gtype, 0);
 
     RG_DEF_SMETHOD(mask, 0);

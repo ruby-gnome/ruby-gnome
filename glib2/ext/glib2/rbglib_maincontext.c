@@ -854,15 +854,15 @@ Init_glib_main_context(void)
     id__callbacks__ = rb_intern("__callbacks__");
     callbacks_table = g_hash_table_new(NULL, NULL);
 
-    rb_define_singleton_method(mGLib, "set_ruby_thread_priority",
+    rbg_define_singleton_method(mGLib, "set_ruby_thread_priority",
                                ruby_source_set_priority, 1);
-    rb_define_singleton_method(mGLib, "ruby_thread_priority=",
+    rbg_define_singleton_method(mGLib, "ruby_thread_priority=",
                                ruby_source_set_priority, 1);
 
     mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
-    rb_define_singleton_method(mGLibSource, "remove", source_remove, 1);
+    rbg_define_singleton_method(mGLibSource, "remove", source_remove, 1);
 #if GLIB_CHECK_VERSION(2,12,0)
-    rb_define_singleton_method(mGLibSource, "current", source_current_source, 0);
+    rbg_define_singleton_method(mGLibSource, "current", source_current_source, 0);
 #endif
 /*
     id_poll_func = rb_intern("__poll_func__");
@@ -892,21 +892,21 @@ Init_glib_main_context(void)
 #ifdef HAVE_G_MAIN_DEPTH
     RG_DEF_SMETHOD(depth, 0);
 #endif
-    rb_define_singleton_method(timeout, "source_new", timeout_source_new, 1);
+    rbg_define_singleton_method(timeout, "source_new", timeout_source_new, 1);
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_singleton_method(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
+    rbg_define_singleton_method(timeout, "source_new_seconds", timeout_source_new_seconds, 1);
 #endif
-    rb_define_singleton_method(timeout, "add", timeout_add, -1);
+    rbg_define_singleton_method(timeout, "add", timeout_add, -1);
 #if GLIB_CHECK_VERSION(2,14,0)
-    rb_define_singleton_method(timeout, "add_seconds", timeout_add_seconds, -1);
+    rbg_define_singleton_method(timeout, "add_seconds", timeout_add_seconds, -1);
 #endif
-    rb_define_singleton_method(idle, "source_new", idle_source_new, 0);
-    rb_define_singleton_method(idle, "add", idle_add, -1);
-    rb_define_singleton_method(idle, "remove", idle_remove, 1);
+    rbg_define_singleton_method(idle, "source_new", idle_source_new, 0);
+    rbg_define_singleton_method(idle, "add", idle_add, -1);
+    rbg_define_singleton_method(idle, "remove", idle_remove, 1);
 
 #if GLIB_CHECK_VERSION(2,4,0)
-    rb_define_singleton_method(child_watch, "source_new", child_watch_source_new, 1);
-    rb_define_singleton_method(child_watch, "add", child_watch_add, 1);
+    rbg_define_singleton_method(child_watch, "source_new", child_watch_source_new, 1);
+    rbg_define_singleton_method(child_watch, "add", child_watch_add, 1);
 #endif
 
     default_poll_func = g_main_context_get_poll_func(NULL);

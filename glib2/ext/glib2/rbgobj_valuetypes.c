@@ -111,7 +111,7 @@ static void
 Init_gtype_pointer(void)
 {
     VALUE cPtr = G_DEF_CLASS(G_TYPE_POINTER, "Pointer", mGLib);
-    rb_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 1);
+    rbg_define_singleton_method(cPtr, "gtype", ptr_s_gtype, 1);
     rbg_define_method(cPtr, "gtype", ptr_gtype, 1);
 #ifndef RBGOBJ_USE_DLPTR
     rbg_define_method(cPtr, "inspect", ptr_inspect, 0);

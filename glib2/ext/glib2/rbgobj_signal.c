@@ -972,6 +972,6 @@ Init_gobject_gsignal(void)
     rbg_define_method(cInstantiatable, "signal_handler_is_connected?",
                      gobj_sig_handler_is_connected, 1);
 
-    rb_define_singleton_method(cInstantiatable, "method_added",
+    rbg_define_singleton_method(cInstantiatable, "method_added",
                                gobj_s_method_added, 1);
 }

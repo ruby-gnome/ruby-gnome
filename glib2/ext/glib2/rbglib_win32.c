@@ -120,12 +120,12 @@ Init_glib_win32(void)
     RG_DEF_SMETHOD(get_package_installation_subdirectory, 3);
     RG_DEF_SMETHOD(version, 0);
     /* Deprecated */
-    rb_define_singleton_method(mGLib, "win32_locale", rbglib_m_win32_locale_deprecated, 0);
+    rbg_define_singleton_method(mGLib, "win32_locale", rbglib_m_win32_locale_deprecated, 0);
 
 #  if GLIB_CHECK_VERSION(2,8,0)
     RG_DEF_SMETHOD(locale_filename_from_utf8, 1);
     /* Deprecated */
-    rb_define_singleton_method(mGLib, "win32_locale_filename_from_utf8",
+    rbg_define_singleton_method(mGLib, "win32_locale_filename_from_utf8",
                               rbglib_m_win32_locale_filename_from_utf8_deprecated, 1);
 #  endif
 

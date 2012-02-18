@@ -83,7 +83,7 @@ Init_glib_unicode(void)
 
     G_DEF_CLASS(G_TYPE_NORMALIZE_MODE, "NormalizeMode", mGLib);
 
-    rb_define_singleton_method(mGLib, "charset", rbglib_m_charset, 0);
+    rbg_define_singleton_method(mGLib, "charset", rbglib_m_charset, 0);
 
     RG_DEF_SMETHOD(canonical_ordering, 1);
     RG_DEF_SMETHOD(canonical_decomposition, 1);

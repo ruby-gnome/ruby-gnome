@@ -830,8 +830,8 @@ Init_gobject_gobject(void)
     rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))gobj_s_allocate);
     RG_DEF_SMETHOD_BANG(new, -1);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
+    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
+    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
     RG_DEF_SMETHOD(install_property, -1);
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
