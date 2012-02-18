@@ -64,6 +64,4 @@ Init_poppler_psfile(VALUE mPoppler)
     RG_DEF_METHOD(initialize, 4);
     RG_DEF_METHOD(set_paper_size, 2);
     RG_DEF_METHOD(set_duplex, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

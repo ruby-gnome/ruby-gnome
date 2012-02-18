@@ -53,6 +53,4 @@ Init_poppler_button_field(VALUE mPoppler, VALUE cFormField)
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD_P(active, 0);
     RG_DEF_METHOD(set_active, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

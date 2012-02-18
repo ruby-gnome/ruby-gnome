@@ -121,6 +121,4 @@ Init_poppler_attachment(VALUE mPoppler)
     RG_DEF_METHOD(mtime, 0);
     RG_DEF_METHOD(ctime, 0);
     RG_DEF_METHOD(checksum, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

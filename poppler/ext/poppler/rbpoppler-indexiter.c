@@ -126,6 +126,4 @@ Init_poppler_indexiter(VALUE mPoppler)
 
     RG_DEF_METHOD_P(valid, 0);
     RG_DEF_METHOD(each, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

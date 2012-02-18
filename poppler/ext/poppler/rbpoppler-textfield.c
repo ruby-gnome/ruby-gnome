@@ -88,6 +88,4 @@ Init_poppler_text_field(VALUE mPoppler, VALUE cFormField)
     RG_DEF_METHOD_P(scroll, 0);
     RG_DEF_METHOD_P(rich_text, 0);
     RG_DEF_METHOD_P(password, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

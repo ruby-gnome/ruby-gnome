@@ -41,15 +41,13 @@ Init_poppler_imagemapping(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_IMAGE_MAPPING,
                                 "ImageMapping", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "area", image_mapping_get_area, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "image_id", image_mapping_get_image_id, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "area", image_mapping_get_area, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "image_id", image_mapping_get_image_id, 0);
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
     RG_DEF_METHOD(image, 0);
 #endif
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_area", image_mapping_set_area, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_image_id",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_area", image_mapping_set_area, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_image_id",
                      image_mapping_set_image_id, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

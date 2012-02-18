@@ -94,37 +94,35 @@ Init_poppler_annotationcalloutline(VALUE mPoppler)
 
     RG_DEF_METHOD(initialize, 7);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "multiline?",
+    rbg_define_method(RG_TARGET_NAMESPACE, "multiline?",
                      annot_callout_line_get_multiline, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_multiline",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_multiline",
                      annot_callout_line_set_multiline, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "x1",
+    rbg_define_method(RG_TARGET_NAMESPACE, "x1",
                      annot_callout_line_get_x1, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x1",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_x1",
                      annot_callout_line_set_x1, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "y1",
+    rbg_define_method(RG_TARGET_NAMESPACE, "y1",
                      annot_callout_line_get_y1, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y1",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_y1",
                      annot_callout_line_set_y1, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "x2",
+    rbg_define_method(RG_TARGET_NAMESPACE, "x2",
                      annot_callout_line_get_x2, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x2",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_x2",
                      annot_callout_line_set_x2, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "y2",
+    rbg_define_method(RG_TARGET_NAMESPACE, "y2",
                      annot_callout_line_get_y2, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y2",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_y2",
                      annot_callout_line_set_y2, 2);
-    rb_define_method(RG_TARGET_NAMESPACE, "x3",
+    rbg_define_method(RG_TARGET_NAMESPACE, "x3",
                      annot_callout_line_get_x3, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x3",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_x3",
                      annot_callout_line_set_x3, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "y3",
+    rbg_define_method(RG_TARGET_NAMESPACE, "y3",
                      annot_callout_line_get_y3, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y3",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_y3",
                      annot_callout_line_set_y3, 3);
 
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_METHOD(inspect, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

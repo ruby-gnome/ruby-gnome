@@ -88,8 +88,6 @@ Init_poppler_form_field(VALUE mPoppler)
     RG_DEF_METHOD(font_size, 0);
     RG_DEF_METHOD_P(read_only, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     Init_poppler_button_field(mPoppler, RG_TARGET_NAMESPACE);
     Init_poppler_text_field(mPoppler, RG_TARGET_NAMESPACE);
     Init_poppler_choice_field(mPoppler, RG_TARGET_NAMESPACE);

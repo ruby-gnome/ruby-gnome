@@ -37,26 +37,24 @@ Init_poppler_pagetransition(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION,
                                   "PageTransition", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "type", page_trans_get_type, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "alignment", page_trans_get_alignment, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "direction", page_trans_get_direction, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "duration", page_trans_get_duration, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "angle", page_trans_get_angle, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "scale", page_trans_get_scale, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "rectangular",
+    rbg_define_method(RG_TARGET_NAMESPACE, "type", page_trans_get_type, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "alignment", page_trans_get_alignment, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "direction", page_trans_get_direction, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "duration", page_trans_get_duration, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "angle", page_trans_get_angle, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "scale", page_trans_get_scale, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "rectangular",
                      page_trans_get_rectangular, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_type", page_trans_set_type, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_alignment",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_type", page_trans_set_type, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_alignment",
                      page_trans_set_alignment, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_direction",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_direction",
                      page_trans_set_direction, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_duration",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_duration",
                      page_trans_set_duration, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_angle", page_trans_set_angle, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_scale", page_trans_set_scale, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_rectangular",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_angle", page_trans_set_angle, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_scale", page_trans_set_scale, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_rectangular",
                      page_trans_set_rectangular, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
