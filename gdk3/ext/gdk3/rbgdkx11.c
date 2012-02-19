@@ -59,20 +59,20 @@ rg_s_net_wm_supports_p(VALUE self, VALUE property)
 */
 
 static VALUE
-rg_s_default_screen(VALUE self)
+rg_s_default_screen(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_x11_get_default_screen());
 }
 
 static VALUE
-rg_s_grab_server(VALUE self)
+rg_s_grab_server(G_GNUC_UNUSED VALUE self)
 {
     gdk_x11_grab_server();
     return Qnil;
 }
 
 static VALUE
-rg_s_ungrab_server(VALUE self)
+rg_s_ungrab_server(G_GNUC_UNUSED VALUE self)
 {
     gdk_x11_ungrab_server();
     return Qnil;
