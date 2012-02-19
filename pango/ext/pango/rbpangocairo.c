@@ -28,13 +28,13 @@
 #define _SELF(self) (RVAL2PANGOCAIROFONTMAP(self))
 
 static VALUE
-rg_s_create(VALUE klass)
+rg_s_create(G_GNUC_UNUSED VALUE klass)
 {
     return GOBJ2RVAL(pango_cairo_font_map_new());
 }
 
 static VALUE
-rg_s_default(VALUE klass)
+rg_s_default(G_GNUC_UNUSED VALUE klass)
 {
     return GOBJ2RVAL(pango_cairo_font_map_get_default());
 }
