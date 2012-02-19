@@ -26,7 +26,7 @@
 static VALUE
 rg_to_goo(VALUE self)
 {
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     VALUE result;
 
     g_value_init(&gval, GOO_TYPE_CAIRO_MATRIX);

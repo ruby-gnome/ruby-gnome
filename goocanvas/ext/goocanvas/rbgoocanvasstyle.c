@@ -35,7 +35,7 @@ rg_initialize(VALUE self)
 static VALUE
 rg_set_fill_pattern(VALUE self, VALUE value)
 {
-    GValue gval = {0,};
+    GValue gval = G_VALUE_INIT;
     cairo_pattern_t *pattern;
 
     g_value_init(&gval, GOO_TYPE_CAIRO_PATTERN);
