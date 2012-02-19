@@ -128,6 +128,4 @@ Init_gst_plugin_feature (VALUE mGst)
     RG_DEF_METHOD(set_rank, 1);
 
     RG_DEF_METHOD(plugin_name, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

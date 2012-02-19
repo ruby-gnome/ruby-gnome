@@ -58,7 +58,7 @@ action_ ## type ## _ ## name (VALUE self)			\
 }
 
 #define DEFINE_ACCESSOR(prefix, target, name) \
-    rb_define_method(target, G_STRINGIFY(name), prefix ## _ ## name, 0);
+    rbg_define_method(target, G_STRINGIFY(name), prefix ## _ ## name, 0);
 
 #define DEFINE_ACTION_ACCESSOR(target, type, name) \
     DEFINE_ACCESSOR(action_ ## type, target, name)
@@ -165,7 +165,7 @@ Init_poppler_action(VALUE mPoppler)
     cAction = G_DEF_CLASS(POPPLER_TYPE_ACTION, "Action", mPoppler);
 
     cActionAny = rb_define_class_under(mPoppler, "ActionAny", cAction);
-    rb_define_method(cActionAny, "type", action_any_type, 0);
+    rbg_define_method(cActionAny, "type", action_any_type, 0);
     DEFINE_ACTION_ACCESSOR(cActionAny, any, title);
 
     cActionGotoDest = rb_define_class_under(mPoppler, "ActionGotoDest",
@@ -197,21 +197,12 @@ Init_poppler_action(VALUE mPoppler)
     actions[POPPLER_ACTION_NAMED] = cActionNamed;
     actions[POPPLER_ACTION_MOVIE] = cActionMovie;
 
-    G_DEF_SETTERS(cAction);
-    G_DEF_SETTERS(cActionAny);
-    G_DEF_SETTERS(cActionGotoDest);
-    G_DEF_SETTERS(cActionGotoRemote);
-    G_DEF_SETTERS(cActionLaunch);
-    G_DEF_SETTERS(cActionUri);
-    G_DEF_SETTERS(cActionNamed);
-    G_DEF_SETTERS(cActionMovie);
-
     G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
 
     cDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
 
-    rb_define_method(cDest, "type", dest_get_type, 0);
+    rbg_define_method(cDest, "type", dest_get_type, 0);
     DEFINE_DEST_ACCESSOR(cDest, page_num);
     DEFINE_DEST_ACCESSOR(cDest, left);
     DEFINE_DEST_ACCESSOR(cDest, bottom);
@@ -222,5 +213,4 @@ Init_poppler_action(VALUE mPoppler)
     DEFINE_DEST_ACCESSOR(cDest, change_left);
     DEFINE_DEST_ACCESSOR(cDest, change_top);
     DEFINE_DEST_ACCESSOR(cDest, change_zoom);
-    G_DEF_SETTERS(cDest);
 }

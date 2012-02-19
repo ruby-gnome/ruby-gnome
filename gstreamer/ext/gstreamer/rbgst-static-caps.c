@@ -46,6 +46,4 @@ Init_gst_static_caps(VALUE mGst)
     RG_DEF_METHOD(description, 0);
     RG_DEF_METHOD(get, 0);
     RG_DEF_ALIAS("to_caps", "get");
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -120,6 +120,4 @@ Init_pango_glyph_info(VALUE mPango)
     RG_DEF_METHOD(set_geometry, 3);
     RG_DEF_METHOD_P(cluster_start, 0);
     RG_DEF_METHOD(set_cluster_start, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

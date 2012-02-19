@@ -34,14 +34,12 @@ Init_poppler_formfieldmapping(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FORM_FIELD_MAPPING,
                                     "FormFieldMapping", mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "area", form_field_mapping_get_area, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "field", form_field_mapping_get_field,
+    rbg_define_method(RG_TARGET_NAMESPACE, "area", form_field_mapping_get_area, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "field", form_field_mapping_get_field,
                      0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_area",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_area",
                      form_field_mapping_set_area, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_field",
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_field",
                      form_field_mapping_set_field, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

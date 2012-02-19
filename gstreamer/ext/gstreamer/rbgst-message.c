@@ -666,122 +666,119 @@ Init_gst_message(VALUE mGst)
                                      "Type", rb_cGstMessage);
     G_DEF_CONSTANTS(rb_cGstMessage, GST_TYPE_MESSAGE_TYPE, "GST_MESSAGE_");
 
-    rb_define_method(rb_cGstMessage, "initialize", initialize, 3);
+    rbg_define_method(rb_cGstMessage, "initialize", initialize, 3);
 
-    rb_define_method(rb_cGstMessage, "type", get_type, 0);
-    rb_define_method(rb_cGstMessage, "set_type", set_type, 1);
+    rbg_define_method(rb_cGstMessage, "type", get_type, 0);
+    rbg_define_method(rb_cGstMessage, "set_type", set_type, 1);
 
-    rb_define_method(rb_cGstMessage, "have_mutex?", have_mutex_p, 0);
-    rb_define_method(rb_cGstMessage, "lock", lock, 0);
-    rb_define_method(rb_cGstMessage, "unlock", unlock, 0);
-    rb_define_method(rb_cGstMessage, "have_cond?", have_cond_p, 0);
-    rb_define_method(rb_cGstMessage, "wait", cond_wait, 0);
-    rb_define_method(rb_cGstMessage, "signal", cond_signal, 0);
+    rbg_define_method(rb_cGstMessage, "have_mutex?", have_mutex_p, 0);
+    rbg_define_method(rb_cGstMessage, "lock", lock, 0);
+    rbg_define_method(rb_cGstMessage, "unlock", unlock, 0);
+    rbg_define_method(rb_cGstMessage, "have_cond?", have_cond_p, 0);
+    rbg_define_method(rb_cGstMessage, "wait", cond_wait, 0);
+    rbg_define_method(rb_cGstMessage, "signal", cond_signal, 0);
 
-    rb_define_method(rb_cGstMessage, "timestamp", get_timestamp, 0);
-    rb_define_method(rb_cGstMessage, "set_timestamp", set_timestamp, 1);
-    rb_define_method(rb_cGstMessage, "valid_timestamp?", valid_timestamp_p, 0);
+    rbg_define_method(rb_cGstMessage, "timestamp", get_timestamp, 0);
+    rbg_define_method(rb_cGstMessage, "set_timestamp", set_timestamp, 1);
+    rbg_define_method(rb_cGstMessage, "valid_timestamp?", valid_timestamp_p, 0);
 
-    rb_define_method(rb_cGstMessage, "source", get_source, 0);
-    rb_define_method(rb_cGstMessage, "set_source", set_source, 1);
+    rbg_define_method(rb_cGstMessage, "source", get_source, 0);
+    rbg_define_method(rb_cGstMessage, "set_source", set_source, 1);
     rb_define_alias(rb_cGstMessage, "src", "source");
     rb_define_alias(rb_cGstMessage, "set_src", "set_source");
 
-    rb_define_method(rb_cGstMessage, "structure", get_structure, 0);
+    rbg_define_method(rb_cGstMessage, "structure", get_structure, 0);
 
 
-    rb_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
-
-#if 0
-    rb_define_method(rb_cGstMessageError, "initialize", error_initialize, 3);
-#endif
-    rb_define_method(rb_cGstMessageError, "parse", error_parse, 0);
+    rbg_define_method(rb_cGstMessageEos, "initialize", eos_initialize, 1);
 
 #if 0
-    rb_define_method(rb_cGstMessageWarning, "initialize", warning_initialize, 3);
+    rbg_define_method(rb_cGstMessageError, "initialize", error_initialize, 3);
 #endif
-    rb_define_method(rb_cGstMessageWarning, "parse", warning_parse, 0);
+    rbg_define_method(rb_cGstMessageError, "parse", error_parse, 0);
 
 #if 0
-    rb_define_method(rb_cGstMessageInfo, "initialize", info_initialize, 3);
+    rbg_define_method(rb_cGstMessageWarning, "initialize", warning_initialize, 3);
 #endif
-    rb_define_method(rb_cGstMessageInfo, "parse", info_parse, 0);
+    rbg_define_method(rb_cGstMessageWarning, "parse", warning_parse, 0);
 
 #if 0
-    rb_define_method(rb_cGstMessageTag, "initialize", tag_initialize, 2);
+    rbg_define_method(rb_cGstMessageInfo, "initialize", info_initialize, 3);
 #endif
-    rb_define_method(rb_cGstMessageTag, "parse", tag_parse, 0);
+    rbg_define_method(rb_cGstMessageInfo, "parse", info_parse, 0);
 
-    rb_define_method(rb_cGstMessageBuffering, "initialize",
+#if 0
+    rbg_define_method(rb_cGstMessageTag, "initialize", tag_initialize, 2);
+#endif
+    rbg_define_method(rb_cGstMessageTag, "parse", tag_parse, 0);
+
+    rbg_define_method(rb_cGstMessageBuffering, "initialize",
                      buffering_initialize, 2);
-    rb_define_method(rb_cGstMessageBuffering, "parse", buffering_parse, 0);
+    rbg_define_method(rb_cGstMessageBuffering, "parse", buffering_parse, 0);
 
-    rb_define_method(rb_cGstMessageStateChanged, "initialize",
+    rbg_define_method(rb_cGstMessageStateChanged, "initialize",
                      state_changed_initialize, 4);
-    rb_define_method(rb_cGstMessageStateChanged, "parse",
+    rbg_define_method(rb_cGstMessageStateChanged, "parse",
                      state_changed_parse, 0);
 
-    rb_define_method(rb_cGstMessageStateDirty, "initialize",
+    rbg_define_method(rb_cGstMessageStateDirty, "initialize",
                      state_dirty_initialize, 1);
 
-    rb_define_method(rb_cGstMessageClockProvide, "initialize",
+    rbg_define_method(rb_cGstMessageClockProvide, "initialize",
                      clock_provide_initialize, 3);
-    rb_define_method(rb_cGstMessageClockProvide, "parse",
+    rbg_define_method(rb_cGstMessageClockProvide, "parse",
                      clock_provide_parse, 0);
 
-    rb_define_method(rb_cGstMessageClockLost, "initialize",
+    rbg_define_method(rb_cGstMessageClockLost, "initialize",
                      clock_lost_initialize, 2);
-    rb_define_method(rb_cGstMessageClockLost, "parse", clock_lost_parse, 0);
+    rbg_define_method(rb_cGstMessageClockLost, "parse", clock_lost_parse, 0);
 
-    rb_define_method(rb_cGstMessageNewClock, "initialize",
+    rbg_define_method(rb_cGstMessageNewClock, "initialize",
                      new_clock_initialize, 2);
-    rb_define_method(rb_cGstMessageNewClock, "parse", new_clock_parse, 0);
+    rbg_define_method(rb_cGstMessageNewClock, "parse", new_clock_parse, 0);
 
-    rb_define_method(rb_cGstMessageApplication, "initialize",
+    rbg_define_method(rb_cGstMessageApplication, "initialize",
                      application_initialize, 2);
 
-    rb_define_method(rb_cGstMessageElement, "initialize",
+    rbg_define_method(rb_cGstMessageElement, "initialize",
                      element_initialize, 2);
 #ifdef HAVE_GST_PBUTILS
     rb_cGstMissingMessage =
         rb_define_class_under(mGst, "MissingMessage", rb_cGstMessageElement);
-    rb_define_method(rb_cGstMissingMessage, "installer_detail",
+    rbg_define_method(rb_cGstMissingMessage, "installer_detail",
                      missing_message_get_installer_detail, 0);
-    rb_define_method(rb_cGstMissingMessage, "description",
+    rbg_define_method(rb_cGstMissingMessage, "description",
                      missing_message_get_description, 0);
 
     rb_cGstMissingURISourceMessage =
         rb_define_class_under(mGst, "MissingURISourceMessage",
                               rb_cGstMissingMessage);
-    rb_define_method(rb_cGstMissingURISourceMessage, "initialize",
+    rbg_define_method(rb_cGstMissingURISourceMessage, "initialize",
                      missing_uri_source_message_initialize, 2);
 #endif
 
-    rb_define_method(rb_cGstMessageSegmentStart, "initialize",
+    rbg_define_method(rb_cGstMessageSegmentStart, "initialize",
                      segment_start_initialize, 3);
-    rb_define_method(rb_cGstMessageSegmentStart, "parse",
+    rbg_define_method(rb_cGstMessageSegmentStart, "parse",
                      segment_start_parse, 0);
 
-    rb_define_method(rb_cGstMessageSegmentDone, "initialize",
+    rbg_define_method(rb_cGstMessageSegmentDone, "initialize",
                      segment_done_initialize, 3);
-    rb_define_method(rb_cGstMessageSegmentDone, "parse", segment_done_parse, 0);
+    rbg_define_method(rb_cGstMessageSegmentDone, "parse", segment_done_parse, 0);
 
-    rb_define_method(rb_cGstMessageDuration, "initialize",
+    rbg_define_method(rb_cGstMessageDuration, "initialize",
                      duration_initialize, 3);
-    rb_define_method(rb_cGstMessageDuration, "parse", duration_parse, 0);
+    rbg_define_method(rb_cGstMessageDuration, "parse", duration_parse, 0);
 
-    rb_define_method(rb_cGstMessageAsyncStart, "initialize",
+    rbg_define_method(rb_cGstMessageAsyncStart, "initialize",
                      async_start_initialize, 2);
-    rb_define_method(rb_cGstMessageAsyncStart, "parse", async_start_parse, 0);
+    rbg_define_method(rb_cGstMessageAsyncStart, "parse", async_start_parse, 0);
 
-    rb_define_method(rb_cGstMessageAsyncDone, "initialize",
+    rbg_define_method(rb_cGstMessageAsyncDone, "initialize",
                      async_done_initialize, 1);
 
-    rb_define_method(rb_cGstMessageLatency, "initialize", latency_initialize, 1);
+    rbg_define_method(rb_cGstMessageLatency, "initialize", latency_initialize, 1);
 
 
-    rb_define_method(rb_cGstMessageType, "name", type_name, 0);
-
-
-    G_DEF_SETTERS(rb_cGstMessage);
+    rbg_define_method(rb_cGstMessageType, "name", type_name, 0);
 }

@@ -70,5 +70,4 @@ Init_gfilenamecompleter(VALUE mGio)
         RG_DEF_METHOD(get_completion_suffix, 1);
         RG_DEF_METHOD(get_completions, 1);
         RG_DEF_METHOD(set_dirs_only, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "dirs_only");
 }

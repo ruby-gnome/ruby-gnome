@@ -61,6 +61,5 @@ Init_gunixmountmonitor(G_GNUC_UNUSED VALUE mGio)
 
         RG_DEF_METHOD(initialize, -1);
         RG_DEF_METHOD(set_rate_limit, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "rate_limit");
 #endif
 }

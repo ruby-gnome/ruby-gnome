@@ -64,12 +64,10 @@ Init_poppler_annotationmapping(VALUE mPoppler)
 
     RG_DEF_METHOD(initialize, -1);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "area", annot_mapping_get_area, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "annotation",
+    rbg_define_method(RG_TARGET_NAMESPACE, "area", annot_mapping_get_area, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "annotation",
                      annot_mapping_get_annotation, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_area", annot_mapping_set_area, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_area", annot_mapping_set_area, 1);
     RG_DEF_METHOD(set_annotation, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -31,7 +31,7 @@
 void Init_rsvg2(void);
 
 static VALUE
-rg_m_set_default_dpi(VALUE self, VALUE dpi)
+rg_s_set_default_dpi(VALUE self, VALUE dpi)
 {
 #ifdef HAVE_RSVG_SET_DEFAULT_DPI
     rsvg_set_default_dpi(NUM2DBL(dpi));
@@ -42,7 +42,7 @@ rg_m_set_default_dpi(VALUE self, VALUE dpi)
 }
 
 static VALUE
-rg_m_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
+rg_s_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 {
 #ifdef HAVE_RSVG_SET_DEFAULT_DPI_X_Y
     rsvg_set_default_dpi_x_y(NUM2DBL(dpi_x), NUM2DBL(dpi_y));
@@ -54,7 +54,7 @@ rg_m_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 
 /* Convenience API */
 static VALUE
-rg_m_pixbuf_from_file(VALUE self, VALUE file_name)
+rg_s_pixbuf_from_file(VALUE self, VALUE file_name)
 {
     VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
@@ -70,7 +70,7 @@ rg_m_pixbuf_from_file(VALUE self, VALUE file_name)
 }
 
 static VALUE
-rg_m_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
+rg_s_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
                                  VALUE x_zoom, VALUE y_zoom)
 {
     VALUE rb_pixbuf;
@@ -90,7 +90,7 @@ rg_m_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rg_m_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
+rg_s_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
                                  VALUE width, VALUE height)
 {
     VALUE rb_pixbuf;
@@ -110,7 +110,7 @@ rg_m_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rg_m_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
+rg_s_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
                                      VALUE max_width, VALUE max_height)
 {
     VALUE rb_pixbuf;
@@ -130,7 +130,7 @@ rg_m_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rg_m_pixbuf_from_file_at_zoom_with_max(VALUE self,
+rg_s_pixbuf_from_file_at_zoom_with_max(VALUE self,
                                           VALUE file_name,
                                           VALUE x_zoom,
                                           VALUE y_zoom,
@@ -189,15 +189,15 @@ Init_rsvg2(void)
                                 INT2FIX(LIBRSVG_MINOR_VERSION),
                                 INT2FIX(LIBRSVG_MICRO_VERSION)));
 
-    RG_DEF_MODFUNC(set_default_dpi, 1);
-    RG_DEF_MODFUNC(set_default_dpi_x_y, 2);
+    RG_DEF_SMETHOD(set_default_dpi, 1);
+    RG_DEF_SMETHOD(set_default_dpi_x_y, 2);
 
     /* Convenience API */
-    RG_DEF_MODFUNC(pixbuf_from_file, 1);
-    RG_DEF_MODFUNC(pixbuf_from_file_at_zoom, 3);
-    RG_DEF_MODFUNC(pixbuf_from_file_at_size, 3);
-    RG_DEF_MODFUNC(pixbuf_from_file_at_max_size, 3);
-    RG_DEF_MODFUNC(pixbuf_from_file_at_zoom_with_max, 5);
+    RG_DEF_SMETHOD(pixbuf_from_file, 1);
+    RG_DEF_SMETHOD(pixbuf_from_file_at_zoom, 3);
+    RG_DEF_SMETHOD(pixbuf_from_file_at_size, 3);
+    RG_DEF_SMETHOD(pixbuf_from_file_at_max_size, 3);
+    RG_DEF_SMETHOD(pixbuf_from_file_at_zoom_with_max, 5);
 
     RG_DEF_SMETHOD_P(cairo_available, 0);
 

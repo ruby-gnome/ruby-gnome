@@ -126,8 +126,6 @@ Init_gst_x_overlay(VALUE mGst)
 
     RG_DEF_METHOD(got_xwindow_id, 1);
     RG_DEF_METHOD(set_xwindow_id_with_buswatch, 2);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 
 #endif /* HAVE_GST_OVERLAY */

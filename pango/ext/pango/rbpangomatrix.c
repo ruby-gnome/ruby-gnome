@@ -40,8 +40,8 @@ matrix_set_ ## name (VALUE self, VALUE val)\
 }
 
 #define DEFINE_ACCESSOR(name) \
-    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), matrix_get_ ## name, 0);\
-    rb_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), matrix_get_ ## name, 0);\
+    rbg_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), matrix_set_## name, 1);
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -149,8 +149,5 @@ Init_pango_matrix(VALUE mPango)
     DEFINE_ACCESSOR(yy);
     DEFINE_ACCESSOR(x0);
     DEFINE_ACCESSOR(y0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 #endif
 }

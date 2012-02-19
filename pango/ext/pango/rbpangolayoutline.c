@@ -269,5 +269,4 @@ Init_pango_layout_line(VALUE mPango)
     RG_DEF_METHOD(resolved_dir, 0); 
     RG_DEF_METHOD(set_resolved_dir, 1); 
 #endif
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

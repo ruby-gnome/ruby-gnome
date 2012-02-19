@@ -75,7 +75,5 @@ Init_pango_cairo(VALUE mPango)
     RG_DEF_METHOD(set_resolution, 1);
     RG_DEF_METHOD(resolution, 0);
     RG_DEF_METHOD(create_context, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

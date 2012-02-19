@@ -301,8 +301,6 @@ Init_atk_text(VALUE mAtk)
     RG_DEF_METHOD(set_selection, 3);
     RG_DEF_METHOD(set_caret_offset, 1);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* AtkTextBoundary */
 #ifdef ATK_TYPE_TEXT_BOUNDARY
     G_DEF_CLASS(ATK_TYPE_TEXT_BOUNDARY, "Boundary", RG_TARGET_NAMESPACE);

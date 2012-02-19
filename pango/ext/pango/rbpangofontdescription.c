@@ -266,8 +266,6 @@ Init_pango_font_description(VALUE mPango)
     RG_DEF_ALIAS("to_s", "to_str");
     RG_DEF_METHOD(to_filename, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* PangoStyle */
     G_DEF_CLASS(PANGO_TYPE_STYLE, "Style", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_STYLE, "PANGO_");

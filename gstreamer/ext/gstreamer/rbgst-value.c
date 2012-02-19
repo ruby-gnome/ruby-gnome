@@ -443,20 +443,17 @@ Init_gst_value(VALUE mGst)
 
     rb_define_alloc_func(cIntRange, int_range_allocate);
 
-    rb_define_method(cIntRange, "initialize", int_range_initialize, 2);
+    rbg_define_method(cIntRange, "initialize", int_range_initialize, 2);
 
-    rb_define_method(cIntRange, "min", int_range_get_min, 0);
-    rb_define_method(cIntRange, "set_min", int_range_set_min, 1);
-    rb_define_method(cIntRange, "max", int_range_get_max, 0);
-    rb_define_method(cIntRange, "set_max", int_range_set_max, 1);
+    rbg_define_method(cIntRange, "min", int_range_get_min, 0);
+    rbg_define_method(cIntRange, "set_min", int_range_set_min, 1);
+    rbg_define_method(cIntRange, "max", int_range_get_max, 0);
+    rbg_define_method(cIntRange, "set_max", int_range_set_max, 1);
 
-    rb_define_method(cIntRange, "set", int_range_set, 2);
+    rbg_define_method(cIntRange, "set", int_range_set, 2);
 
-    rb_define_method(cIntRange, "to_a", int_range_to_a, 0);
-    rb_define_method(cIntRange, "to_s", g_value_to_s, 0);
-
-    G_DEF_SETTERS(cIntRange);
-
+    rbg_define_method(cIntRange, "to_a", int_range_to_a, 0);
+    rbg_define_method(cIntRange, "to_s", g_value_to_s, 0);
 
     memset(&fourcc_table, 0, sizeof(fourcc_table));
     fourcc_table.type = GST_TYPE_FOURCC;
@@ -476,15 +473,12 @@ Init_gst_value(VALUE mGst)
 
     rb_define_alloc_func(cFourcc, fourcc_allocate);
 
-    rb_define_method(cFourcc, "initialize", fourcc_initialize, 1);
+    rbg_define_method(cFourcc, "initialize", fourcc_initialize, 1);
 
-    rb_define_method(cFourcc, "replace!", fourcc_replace_bang, 1);
+    rbg_define_method(cFourcc, "replace!", fourcc_replace_bang, 1);
 
-    rb_define_method(cFourcc, "to_i", fourcc_to_i, 0);
-    rb_define_method(cFourcc, "to_s", g_value_to_s, 0);
-
-    G_DEF_SETTERS(cFourcc);
-
+    rbg_define_method(cFourcc, "to_i", fourcc_to_i, 0);
+    rbg_define_method(cFourcc, "to_s", g_value_to_s, 0);
 
     memset(&fraction_table, 0, sizeof(fraction_table));
     fraction_table.type = GST_TYPE_FRACTION;
@@ -513,17 +507,15 @@ Init_gst_value(VALUE mGst)
 
     rb_define_alloc_func(cFractionRange, fraction_range_allocate);
 
-    rb_define_method(cFractionRange, "initialize", fraction_range_initialize, 2);
+    rbg_define_method(cFractionRange, "initialize", fraction_range_initialize, 2);
 
-    rb_define_method(cFractionRange, "min", fraction_range_get_min, 0);
-    rb_define_method(cFractionRange, "set_min", fraction_range_set_min, 1);
-    rb_define_method(cFractionRange, "max", fraction_range_get_max, 0);
-    rb_define_method(cFractionRange, "set_max", fraction_range_set_max, 1);
+    rbg_define_method(cFractionRange, "min", fraction_range_get_min, 0);
+    rbg_define_method(cFractionRange, "set_min", fraction_range_set_min, 1);
+    rbg_define_method(cFractionRange, "max", fraction_range_get_max, 0);
+    rbg_define_method(cFractionRange, "set_max", fraction_range_set_max, 1);
 
-    rb_define_method(cFractionRange, "set", fraction_range_set, 2);
+    rbg_define_method(cFractionRange, "set", fraction_range_set, 2);
 
-    rb_define_method(cFractionRange, "to_a", fraction_range_to_a, 0);
-    rb_define_method(cFractionRange, "to_s", g_value_to_s, 0);
-
-    G_DEF_SETTERS(cFractionRange);
+    rbg_define_method(cFractionRange, "to_a", fraction_range_to_a, 0);
+    rbg_define_method(cFractionRange, "to_s", g_value_to_s, 0);
 }

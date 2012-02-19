@@ -145,7 +145,5 @@ Init_atk_text_rectangle(VALUE mAtk)
     RG_DEF_METHOD(set_width, 1);
     RG_DEF_METHOD(set_height, 1);
     RG_DEF_METHOD(to_a, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

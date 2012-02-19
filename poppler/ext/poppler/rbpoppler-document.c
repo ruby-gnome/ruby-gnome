@@ -221,6 +221,4 @@ Init_poppler_document(VALUE mPoppler)
 
     RG_DEF_METHOD(index_iter, 0);
     RG_DEF_METHOD(font_info, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

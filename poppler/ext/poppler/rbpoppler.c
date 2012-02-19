@@ -26,19 +26,19 @@ extern void Init_poppler(void);
 #define RG_TARGET_NAMESPACE mPoppler
 
 static VALUE
-rg_m_backend(VALUE self)
+rg_s_backend(VALUE self)
 {
     return POPPLERBACKEND2RVAL(poppler_get_backend());
 }
 
 static VALUE
-rg_m_version(VALUE self)
+rg_s_version(VALUE self)
 {
     return CSTR2RVAL(poppler_get_version());
 }
 
 static VALUE
-rg_m_cairo_available_p(VALUE self)
+rg_s_cairo_available_p(VALUE self)
 {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
     return Qtrue;
@@ -91,9 +91,9 @@ Init_poppler(void)
 
     G_DEF_CLASS(POPPLER_TYPE_BACKEND, "Backend", RG_TARGET_NAMESPACE);
 
-    RG_DEF_MODFUNC(backend, 0);
-    RG_DEF_MODFUNC(version, 0);
-    RG_DEF_MODFUNC_P(cairo_available, 0);
+    RG_DEF_SMETHOD(backend, 0);
+    RG_DEF_SMETHOD(version, 0);
+    RG_DEF_SMETHOD_P(cairo_available, 0);
 
     Init_poppler_indexiter(RG_TARGET_NAMESPACE);
     Init_poppler_fontinfo(RG_TARGET_NAMESPACE);

@@ -787,8 +787,6 @@ Init_glib_io_channel(void)
     RG_DEF_METHOD(encoding, 0);
     RG_DEF_METHOD(set_encoding, 1);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* GSeekType */
     rb_define_const(RG_TARGET_NAMESPACE, "SEEK_CUR", INT2NUM(G_SEEK_CUR));
     rb_define_const(RG_TARGET_NAMESPACE, "SEEK_SET", INT2NUM(G_SEEK_SET));

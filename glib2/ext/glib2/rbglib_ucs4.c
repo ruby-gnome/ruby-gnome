@@ -25,7 +25,7 @@
 #define RG_TARGET_NAMESPACE mUCS4
 
 static VALUE
-rg_m_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
+rg_s_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 {
     VALUE result;
     gunichar *ucs4;
@@ -48,7 +48,7 @@ rg_m_to_utf16(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 }
 
 static VALUE
-rg_m_to_utf8(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
+rg_s_to_utf8(G_GNUC_UNUSED VALUE self, VALUE rb_ucs4)
 {
     VALUE result;
     gunichar *ucs4;
@@ -74,6 +74,6 @@ Init_glib_ucs4(void)
 {
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "UCS4");
 
-    RG_DEF_MODFUNC(to_utf16, 1);
-    RG_DEF_MODFUNC(to_utf8, 1);
+    RG_DEF_SMETHOD(to_utf16, 1);
+    RG_DEF_SMETHOD(to_utf8, 1);
 }

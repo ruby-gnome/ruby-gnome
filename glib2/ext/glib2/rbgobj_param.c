@@ -368,11 +368,11 @@ Init_gobject_gparam(void)
     /* for debugging */
     RG_DEF_METHOD(ref_count, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "readable?",       param_is_G_PARAM_READABLE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "writable?",       param_is_G_PARAM_WRITABLE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "construct?",      param_is_G_PARAM_CONSTRUCT, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "construct_only?", param_is_G_PARAM_CONSTRUCT_ONLY, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "private?",        param_is_G_PARAM_PRIVATE, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "readable?",       param_is_G_PARAM_READABLE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "writable?",       param_is_G_PARAM_WRITABLE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "construct?",      param_is_G_PARAM_CONSTRUCT, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "construct_only?", param_is_G_PARAM_CONSTRUCT_ONLY, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "lax_validation?", param_is_G_PARAM_LAX_VALIDATION, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "private?",        param_is_G_PARAM_PRIVATE, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "readwrite?",      param_is_G_PARAM_READWRITE, 0);
 }

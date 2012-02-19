@@ -24,55 +24,55 @@
 #define RG_TARGET_NAMESPACE mContentType
 
 static VALUE
-rg_m_equals_p(G_GNUC_UNUSED VALUE self, VALUE arg1, VALUE arg2)
+rg_s_equals_p(G_GNUC_UNUSED VALUE self, VALUE arg1, VALUE arg2)
 {
         return CBOOL2RVAL(g_content_type_equals(RVAL2CSTR(arg1), RVAL2CSTR(arg2)));
 }
 
 static VALUE
-rg_m_is_a_p(G_GNUC_UNUSED VALUE self, VALUE arg1, VALUE arg2)
+rg_s_is_a_p(G_GNUC_UNUSED VALUE self, VALUE arg1, VALUE arg2)
 {
         return CBOOL2RVAL(g_content_type_is_a(RVAL2CSTR(arg1), RVAL2CSTR(arg2)));
 }
 
 static VALUE
-rg_m_unknown_p(G_GNUC_UNUSED VALUE type)
+rg_s_unknown_p(G_GNUC_UNUSED VALUE type)
 {
         return CBOOL2RVAL(g_content_type_is_unknown(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_m_get_description(G_GNUC_UNUSED VALUE type)
+rg_s_get_description(G_GNUC_UNUSED VALUE type)
 {
         return CSTR2RVAL_FREE(g_content_type_get_description(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_m_get_mime_type(G_GNUC_UNUSED VALUE type)
+rg_s_get_mime_type(G_GNUC_UNUSED VALUE type)
 {
         return CSTR2RVAL_FREE(g_content_type_get_mime_type(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_m_get_icon(G_GNUC_UNUSED VALUE type)
+rg_s_get_icon(G_GNUC_UNUSED VALUE type)
 {
         return GOBJ2RVAL_UNREF(g_content_type_get_icon(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_m_can_be_executable_p(G_GNUC_UNUSED VALUE type)
+rg_s_can_be_executable_p(G_GNUC_UNUSED VALUE type)
 {
         return CBOOL2RVAL(g_content_type_can_be_executable(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_m_from_mime_type(G_GNUC_UNUSED VALUE type)
+rg_s_from_mime_type(G_GNUC_UNUSED VALUE type)
 {
         return CSTR2RVAL(g_content_type_from_mime_type(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_m_guess(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_guess(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
         VALUE rbfilename,
               rbdata;
@@ -99,13 +99,13 @@ rg_m_guess(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_guess_for_tree(G_GNUC_UNUSED VALUE self, VALUE root)
+rg_s_guess_for_tree(G_GNUC_UNUSED VALUE self, VALUE root)
 {
         return STRV2RVAL_FREE(g_content_type_guess_for_tree(RVAL2GFILE(root)));
 }
 
 static VALUE
-rg_m_registered(G_GNUC_UNUSED VALUE self)
+rg_s_registered(G_GNUC_UNUSED VALUE self)
 {
         return GLIST2ARY_STR_FREE(g_content_types_get_registered());
 }
@@ -116,16 +116,16 @@ Init_gcontenttype(VALUE mGio)
         VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "ContentType");
 
         /* TODO: Should wrap this in a class. */
-        RG_DEF_MODFUNC_P(equals, 2);
+        RG_DEF_SMETHOD_P(equals, 2);
         /* TODO: This name isn't great. */
-        RG_DEF_MODFUNC_P(is_a, 2);
-        RG_DEF_MODFUNC_P(unknown, 1);
-        RG_DEF_MODFUNC(get_description, 1);
-        RG_DEF_MODFUNC(get_mime_type, 1);
-        RG_DEF_MODFUNC(get_icon, 1);
-        RG_DEF_MODFUNC_P(can_be_executable, 1);
-        RG_DEF_MODFUNC(from_mime_type, 1);
-        RG_DEF_MODFUNC(guess, -1);
-        RG_DEF_MODFUNC(guess_for_tree, 1);
-        RG_DEF_MODFUNC(registered, 0);
+        RG_DEF_SMETHOD_P(is_a, 2);
+        RG_DEF_SMETHOD_P(unknown, 1);
+        RG_DEF_SMETHOD(get_description, 1);
+        RG_DEF_SMETHOD(get_mime_type, 1);
+        RG_DEF_SMETHOD(get_icon, 1);
+        RG_DEF_SMETHOD_P(can_be_executable, 1);
+        RG_DEF_SMETHOD(from_mime_type, 1);
+        RG_DEF_SMETHOD(guess, -1);
+        RG_DEF_SMETHOD(guess_for_tree, 1);
+        RG_DEF_SMETHOD(registered, 0);
 }

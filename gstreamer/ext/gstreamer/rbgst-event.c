@@ -320,19 +320,19 @@ Init_gst_event (VALUE mGst)
     RG_DEF_CONVERSION(&table);
 
     rb_cGstEvent = G_DEF_CLASS(GST_TYPE_EVENT, "Event", mGst);
-    rb_define_method(rb_cGstEvent, "get_type", rbgst_event_get_type, 0);
+    rbg_define_method(rb_cGstEvent, "get_type", rbgst_event_get_type, 0);
     G_DEF_CLASS(GST_TYPE_EVENT_TYPE, "EventType", mGst);
     G_DEF_CONSTANTS(rb_cGstEvent, GST_TYPE_EVENT_TYPE, "GST_EVENT_");
 
 #define DEFINE_EVENT(type, lctype, arguments) \
     rb_cGstEvent ## type =                                          \
         rb_define_class_under(mGst, "Event" #type, rb_cGstEvent);   \
-    rb_define_method(rb_cGstEvent ## type, "initialize",            \
+    rbg_define_method(rb_cGstEvent ## type, "initialize",            \
                      lctype ## _initialize, arguments)
 
 #define DEFINE_EVENT_PARSE(type, lctype, arguments)                 \
     DEFINE_EVENT(type, lctype, arguments);                          \
-    rb_define_method(rb_cGstEvent ## type, "parse",                 \
+    rbg_define_method(rb_cGstEvent ## type, "parse",                 \
                      lctype ## _parse, 0)
 
     DEFINE_EVENT(FlushStart, flush_start, 0);

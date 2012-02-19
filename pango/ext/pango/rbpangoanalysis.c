@@ -219,6 +219,4 @@ Init_pango_analysis(VALUE mPango)
 
     RG_DEF_METHOD(set_extra_attrs, 1);
     RG_DEF_METHOD(extra_attrs, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
