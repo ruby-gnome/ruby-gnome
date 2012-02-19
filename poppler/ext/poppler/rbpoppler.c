@@ -26,19 +26,19 @@ extern void Init_poppler(void);
 #define RG_TARGET_NAMESPACE mPoppler
 
 static VALUE
-rg_s_backend(VALUE self)
+rg_s_backend(G_GNUC_UNUSED VALUE self)
 {
     return POPPLERBACKEND2RVAL(poppler_get_backend());
 }
 
 static VALUE
-rg_s_version(VALUE self)
+rg_s_version(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(poppler_get_version());
 }
 
 static VALUE
-rg_s_cairo_available_p(VALUE self)
+rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
     return Qtrue;
