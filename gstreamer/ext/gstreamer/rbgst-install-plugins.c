@@ -37,13 +37,13 @@ gst_install_plugins_result_func(GstInstallPluginsReturn result, VALUE data)
 }
 
 static VALUE
-rg_s_supported_p(VALUE self)
+rg_s_supported_p(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gst_install_plugins_supported());
 }
 
 static VALUE
-rg_s_progress_p(VALUE self)
+rg_s_progress_p(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gst_install_plugins_installation_in_progress());
 }
@@ -89,7 +89,7 @@ rg_s_async(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_s_sync(int argc, VALUE *argv, VALUE self)
+rg_s_sync(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE details, context;
     int length, i;

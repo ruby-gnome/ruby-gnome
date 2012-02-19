@@ -39,7 +39,7 @@
  * an exception on failure.
  */
 static VALUE
-rg_s_launch (VALUE self, VALUE command)
+rg_s_launch (G_GNUC_UNUSED VALUE self, VALUE command)
 {
 #if !defined(GST_DISABLE_PARSE)
     GError *error;

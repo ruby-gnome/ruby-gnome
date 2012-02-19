@@ -56,7 +56,7 @@ gst_format_get_type2 (void)
  * given nick, or nil if this query was not registered.
  */
 static VALUE
-rg_s_find (VALUE self, VALUE nick)
+rg_s_find (G_GNUC_UNUSED VALUE self, VALUE nick)
 {
     GstFormat format = gst_format_get_by_nick (RVAL2CSTR (nick));
     return format != GST_FORMAT_UNDEFINED
@@ -73,7 +73,7 @@ rg_s_find (VALUE self, VALUE nick)
  * Returns: always nil.
  */
 static VALUE
-rg_s_each (VALUE self)
+rg_s_each (G_GNUC_UNUSED VALUE self)
 {
     GstIterator *iter;
     gpointer value;

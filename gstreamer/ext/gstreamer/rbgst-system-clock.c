@@ -35,7 +35,7 @@
  * to a Gst::SystemClock object.
  */
 static VALUE
-rg_s_obtain (self)
+rg_s_obtain (G_GNUC_UNUSED VALUE self)
 {
     return RGST_SYSTEM_CLOCK_NEW (gst_system_clock_obtain ());
 }

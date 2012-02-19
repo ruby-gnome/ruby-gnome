@@ -54,7 +54,7 @@ rg_initialize (VALUE self)
  * Returns: true on success, false on failure.
  */
 static VALUE
-rg_s_write_file (VALUE self, VALUE element, VALUE filename)
+rg_s_write_file (G_GNUC_UNUSED VALUE self, VALUE element, VALUE filename)
 {
     FILE *file = fopen (RVAL2CSTR (filename), "w");
     gboolean ret = FALSE;
