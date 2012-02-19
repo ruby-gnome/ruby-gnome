@@ -206,7 +206,7 @@ rg_set_child_property(VALUE self, VALUE child,
 }
 
 static VALUE
-rg_canvas(VALUE self, VALUE tx, VALUE ty)
+rg_canvas(VALUE self)
 {
     return GOBJ2RVAL(goo_canvas_item_get_canvas(SELF(self)));
 }

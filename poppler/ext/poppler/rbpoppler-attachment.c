@@ -28,7 +28,7 @@ static ID id_call;
 
 static gboolean
 attachment_save_func(const gchar *buf, gsize count, gpointer data,
-                     GError **error)
+                     G_GNUC_UNUSED GError **error)
 {
     VALUE result;
     VALUE callback = (VALUE)data;

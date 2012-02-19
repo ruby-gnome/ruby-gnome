@@ -209,7 +209,7 @@ rg_s_command_line_async(G_GNUC_UNUSED VALUE self, VALUE str)
 #define RVAL2GPID(value) ((GPid)NUM2INT(pid))
 
 static VALUE
-rg_s_close_pid(VALUE self, VALUE pid)
+rg_s_close_pid(G_GNUC_UNUSED VALUE self, VALUE pid)
 {
     g_spawn_close_pid(RVAL2GPID(pid));
     return Qnil;

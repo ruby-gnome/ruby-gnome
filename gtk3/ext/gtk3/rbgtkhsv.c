@@ -24,7 +24,7 @@
 #define _SELF(self) (RVAL2GTKHSV(self))
 
 static VALUE
-rg_s_to_rgb(VALUE self, VALUE h, VALUE s, VALUE v)
+rg_s_to_rgb(G_GNUC_UNUSED VALUE self, VALUE h, VALUE s, VALUE v)
 {
     gdouble r, g, b;
 

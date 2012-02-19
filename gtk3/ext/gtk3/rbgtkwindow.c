@@ -427,7 +427,7 @@ mark_toplevels(G_GNUC_UNUSED void *_)
 }
 
 static VALUE
-rg_s_default_icon_name(VALUE self)
+rg_s_default_icon_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gtk_window_get_default_icon_name());
 }

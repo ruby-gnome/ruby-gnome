@@ -22,6 +22,8 @@
 
 #define RG_TARGET_NAMESPACE mVte
 
+void Init_vte3(void);
+
 void
 Init_vte3(void)
 {

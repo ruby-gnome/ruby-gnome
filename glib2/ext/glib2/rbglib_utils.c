@@ -78,7 +78,7 @@ rg_s_unsetenv(VALUE self, VALUE variable)
 #if GLIB_CHECK_VERSION(2,8,0)
 #ifdef HAVE_G_LISTENV
 static VALUE
-rg_s_listenv(VALUE self)
+rg_s_listenv(G_GNUC_UNUSED VALUE self)
 {
     gchar** c_list;
     gchar** c_var;

@@ -30,7 +30,7 @@
  */
 
 static VALUE
-rg_s_find(VALUE self, VALUE name)
+rg_s_find(G_GNUC_UNUSED VALUE self, VALUE name)
 {
     return GOBJ2RVAL(gst_index_factory_find(RVAL2CSTR(name)));
 }

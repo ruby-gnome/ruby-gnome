@@ -48,7 +48,7 @@ rg_initialize(VALUE self)
  * Returns: a Gtk::SourceLanguageManager
  */
 static VALUE
-rg_s_default(VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     GtkSourceLanguageManager* slm = gtk_source_language_manager_get_default();
     GType gtype = G_TYPE_FROM_INSTANCE(slm);

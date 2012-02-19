@@ -25,7 +25,7 @@
 #define SELF(obj) (RVAL2GST_STRUCT(obj))
 
 static VALUE
-rg_s_parse(VALUE self, VALUE string)
+rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE string)
 {
     GstStructure *structure;
     gchar *end;

@@ -36,7 +36,7 @@
  * Returns: true if the tag is registered, false otherwise.
  */
 static VALUE
-rg_s_exists_p (VALUE self, VALUE tag)
+rg_s_exists_p (G_GNUC_UNUSED VALUE self, VALUE tag)
 {
     return CBOOL2RVAL (gst_tag_exists (RVAL2CSTR (tag)));
 }
@@ -51,7 +51,7 @@ rg_s_exists_p (VALUE self, VALUE tag)
  * Returns: true if the tag is fixed, false otherwise.
  */
 static VALUE
-rg_s_fixed_p (VALUE self, VALUE tag)
+rg_s_fixed_p (G_GNUC_UNUSED VALUE self, VALUE tag)
 {
     return CBOOL2RVAL (gst_tag_is_fixed (RVAL2CSTR (tag)));
 }
@@ -63,7 +63,7 @@ rg_s_fixed_p (VALUE self, VALUE tag)
  * Returns: the human-readable name of this tag.
  */
 static VALUE
-rg_s_get_nick (VALUE self, VALUE tag)
+rg_s_get_nick (G_GNUC_UNUSED VALUE self, VALUE tag)
 {
     return CSTR2RVAL (gst_tag_get_nick (RVAL2CSTR (tag)));
 }
@@ -75,7 +75,7 @@ rg_s_get_nick (VALUE self, VALUE tag)
  * Returns: the human-readable description of this tag.
  */
 static VALUE
-rg_s_get_description (VALUE self, VALUE tag)
+rg_s_get_description (G_GNUC_UNUSED VALUE self, VALUE tag)
 {
     return CSTR2RVAL (gst_tag_get_description (RVAL2CSTR (tag)));
 }
@@ -89,7 +89,7 @@ rg_s_get_description (VALUE self, VALUE tag)
  * Returns: the flag of this tag (see Gst::Tag::Flag).
  */
 static VALUE
-rg_s_get_flag (VALUE self, VALUE tag)
+rg_s_get_flag (G_GNUC_UNUSED VALUE self, VALUE tag)
 {
     return GFLAGS2RVAL (gst_tag_get_flag (RVAL2CSTR (tag)),
                         GST_TYPE_TAG_FLAG);
