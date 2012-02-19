@@ -27,7 +27,7 @@
 #define RG_TARGET_NAMESPACE mUnixMountPoints
 
 static VALUE
-rg_m_get(G_GNUC_UNUSED VALUE self)
+rg_s_get(G_GNUC_UNUSED VALUE self)
 {
         guint64 time_read;
         GList *mount_points;
@@ -39,7 +39,7 @@ rg_m_get(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_m_changed_since_p(G_GNUC_UNUSED VALUE self, VALUE time_read)
+rg_s_changed_since_p(G_GNUC_UNUSED VALUE self, VALUE time_read)
 {
         return CBOOL2RVAL(g_unix_mount_points_changed_since(RVAL2GUINT64(time_read)));
 }
@@ -52,7 +52,7 @@ Init_gunixmountpoints(G_GNUC_UNUSED VALUE mGio)
 #ifdef HAVE_GIO_UNIX
         VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "UnixMountPoints");
 
-        RG_DEF_MODFUNC(get, 0);
-        RG_DEF_MODFUNC_P(changed_since, 1);
+        RG_DEF_SMETHOD(get, 0);
+        RG_DEF_SMETHOD_P(changed_since, 1);
 #endif
 }

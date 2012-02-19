@@ -81,6 +81,5 @@ Init_gst_install_plugins_context(VALUE mGst)
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_xid, 1);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
 #endif /* HAVE_GST_PBUTILS */

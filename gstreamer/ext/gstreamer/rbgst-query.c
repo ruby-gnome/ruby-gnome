@@ -275,9 +275,9 @@ Init_gst_query (VALUE mGst)
 #define DEFINE_QUERY(type, lctype, arguments) \
     rb_cGstQuery ## type =                                          \
         rb_define_class_under(mGst, "Query" #type, rb_cGstQuery); \
-    rb_define_method(rb_cGstQuery ## type, "initialize",            \
+    rbg_define_method(rb_cGstQuery ## type, "initialize",            \
       lctype ## _initialize, arguments);                            \
-    rb_define_method(rb_cGstQuery ## type, "parse",                 \
+    rbg_define_method(rb_cGstQuery ## type, "parse",                 \
       lctype ## _parse, 0)                                          \
 
     DEFINE_QUERY(Position, position, 1);

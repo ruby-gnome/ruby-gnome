@@ -457,6 +457,4 @@ Init_poppler_page(VALUE mPoppler)
     RG_DEF_METHOD(annotation_mapping, 0);
     RG_DEF_METHOD(render_selection, -1);
     RG_DEF_METHOD(crop_box, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

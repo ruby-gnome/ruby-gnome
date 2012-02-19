@@ -189,8 +189,6 @@ Init_pangorenderer(VALUE mPango)
     RG_DEF_METHOD(set_matrix, 1);
     RG_DEF_METHOD(matrix, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* PangoRenderPart */
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     G_DEF_CLASS(PANGO_TYPE_RENDER_PART, "Part", RG_TARGET_NAMESPACE);

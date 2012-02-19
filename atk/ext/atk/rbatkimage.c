@@ -65,6 +65,4 @@ Init_atk_image(VALUE mAtk)
     RG_DEF_METHOD(image_description, 0);
     RG_DEF_METHOD(set_image_description, 1);
     RG_DEF_METHOD(image_size, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

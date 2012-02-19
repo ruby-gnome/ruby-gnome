@@ -24,13 +24,13 @@
 #define RG_TARGET_NAMESPACE mIOModules
 
 static VALUE
-rg_m_load_all_in_directory(G_GNUC_UNUSED VALUE self, VALUE dirname)
+rg_s_load_all_in_directory(G_GNUC_UNUSED VALUE self, VALUE dirname)
 {
         return GLIST2ARY_FREE(g_io_modules_load_all_in_directory(RVAL2CSTR(dirname)));
 }
 
 static VALUE
-rg_m_scan_all_in_directory(VALUE self, VALUE dirname)
+rg_s_scan_all_in_directory(VALUE self, VALUE dirname)
 {
         g_io_modules_scan_all_in_directory(RVAL2CSTR(dirname));
 
@@ -42,6 +42,6 @@ Init_giomodules(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGio, "IOModules");
 
-        RG_DEF_MODFUNC(load_all_in_directory, 1);
-        RG_DEF_MODFUNC(scan_all_in_directory, 1);
+        RG_DEF_SMETHOD(load_all_in_directory, 1);
+        RG_DEF_SMETHOD(scan_all_in_directory, 1);
 }

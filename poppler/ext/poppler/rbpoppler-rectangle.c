@@ -79,16 +79,14 @@ Init_poppler_rectangle(VALUE mPoppler)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_RECTANGLE, "Rectangle", mPoppler);
 
     RG_DEF_METHOD(initialize, 4);
-    rb_define_method(RG_TARGET_NAMESPACE, "x1", rectangle_get_x1, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "y1", rectangle_get_y1, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "x2", rectangle_get_x2, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "y2", rectangle_get_y2, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x1", rectangle_set_x1, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y1", rectangle_set_y1, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_x2", rectangle_set_x2, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_y2", rectangle_set_y2, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "x1", rectangle_get_x1, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "y1", rectangle_get_y1, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "x2", rectangle_get_x2, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "y2", rectangle_get_y2, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_x1", rectangle_set_x1, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_y1", rectangle_set_y1, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_x2", rectangle_set_x2, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_y2", rectangle_set_y2, 1);
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_METHOD(inspect, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

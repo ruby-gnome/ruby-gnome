@@ -70,8 +70,8 @@ rg_initialize(VALUE self)
 }
 
 #define DEFINE_ACCESSOR(logattr, name) \
-    rb_define_method(logattr, G_STRINGIFY(name?), log_get_is_ ## name, 0);\
-    rb_define_method(logattr, G_STRINGIFY(set_ ## name), log_set_is_ ## name, 1);
+    rbg_define_method(logattr, G_STRINGIFY(name?), log_get_is_ ## name, 0);\
+    rbg_define_method(logattr, G_STRINGIFY(set_ ## name), log_set_is_ ## name, 1);
 
 ATTR_BOOL(is_line_break);
 ATTR_BOOL(is_mandatory_break);
@@ -107,9 +107,7 @@ Init_pango_logattr(VALUE mPango)
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, sentence_end);
 
 #if PANGO_CHECK_VERSION(1,4,0)
-    rb_define_method(RG_TARGET_NAMESPACE, "backspace_deletes_character?", log_get_backspace_deletes_character, 0); 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_backspace_deletes_character", log_set_backspace_deletes_character, 1); 
+    rbg_define_method(RG_TARGET_NAMESPACE, "backspace_deletes_character?", log_get_backspace_deletes_character, 0); 
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_backspace_deletes_character", log_set_backspace_deletes_character, 1); 
 #endif
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

@@ -37,7 +37,7 @@ child_setup(gpointer func)
 }
 
 static VALUE
-rg_m_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
+rg_s_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -73,7 +73,7 @@ rg_m_async_with_pipes(VALUE self, VALUE working_directory, VALUE argv, VALUE env
 }
 
 static VALUE
-rg_m_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
+rg_s_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -102,7 +102,7 @@ rg_m_async(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE fl
 }
 
 static VALUE
-rg_m_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
+rg_s_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE flags)
 {
     GError *err = NULL;
     gboolean ret;
@@ -153,7 +153,7 @@ rg_m_sync(VALUE self, VALUE working_directory, VALUE argv, VALUE envp, VALUE fla
 }
 
 static VALUE
-rg_m_command_line_sync(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_s_command_line_sync(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     const gchar *command_line;
@@ -190,7 +190,7 @@ rg_m_command_line_sync(G_GNUC_UNUSED VALUE self, VALUE str)
 }
 
 static VALUE
-rg_m_command_line_async(G_GNUC_UNUSED VALUE self, VALUE str)
+rg_s_command_line_async(G_GNUC_UNUSED VALUE self, VALUE str)
 {
     GError *err = NULL;
     const gchar *command_line;
@@ -209,7 +209,7 @@ rg_m_command_line_async(G_GNUC_UNUSED VALUE self, VALUE str)
 #define RVAL2GPID(value) ((GPid)NUM2INT(pid))
 
 static VALUE
-rg_m_close_pid(VALUE self, VALUE pid)
+rg_s_close_pid(VALUE self, VALUE pid)
 {
     g_spawn_close_pid(RVAL2GPID(pid));
     return Qnil;
@@ -226,13 +226,13 @@ Init_glib_spawn(void)
     id_new = rb_intern("new");
 
     /* glib/gspawn.h */
-    RG_DEF_MODFUNC(async_with_pipes, 4);
-    RG_DEF_MODFUNC(async, 4);
-    RG_DEF_MODFUNC(sync, 4);
-    RG_DEF_MODFUNC(command_line_sync, 1);
-    RG_DEF_MODFUNC(command_line_async, 1);
+    RG_DEF_SMETHOD(async_with_pipes, 4);
+    RG_DEF_SMETHOD(async, 4);
+    RG_DEF_SMETHOD(sync, 4);
+    RG_DEF_SMETHOD(command_line_sync, 1);
+    RG_DEF_SMETHOD(command_line_async, 1);
 #ifdef HAVE_G_SPAWN_CLOSE_PID
-    RG_DEF_MODFUNC(close_pid, 1);
+    RG_DEF_SMETHOD(close_pid, 1);
 #endif
 
     rb_define_const(RG_TARGET_NAMESPACE, "LEAVE_DESCRIPTORS_OPEN", INT2NUM(G_SPAWN_LEAVE_DESCRIPTORS_OPEN));

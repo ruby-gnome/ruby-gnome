@@ -315,8 +315,6 @@ Init_pango_context(VALUE mPango)
     /* This will remove 2 or 3 releases later since 0.14.0. */
     RG_DEF_METHOD(list_families, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* PangoDirection */
     G_DEF_CLASS(PANGO_TYPE_DIRECTION, "Direction", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_DIRECTION, "PANGO_");

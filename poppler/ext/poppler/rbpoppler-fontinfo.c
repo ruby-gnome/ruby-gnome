@@ -61,6 +61,5 @@ Init_poppler_fontinfo(VALUE mPoppler)
 #if POPPLER_CHECK_VERSION(0, 6, 0)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(scan, 1);
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

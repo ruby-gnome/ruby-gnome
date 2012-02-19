@@ -243,5 +243,4 @@ Init_gsocketlistener(VALUE mGio)
         RG_DEF_METHOD(accept_socket_finish, 1);
         RG_DEF_METHOD(close, 0);
         RG_DEF_METHOD(set_backlog, 1);
-        G_DEF_SETTER(RG_TARGET_NAMESPACE, "backlog");
 }

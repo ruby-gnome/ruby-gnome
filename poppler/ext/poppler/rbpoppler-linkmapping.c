@@ -40,11 +40,9 @@ Init_poppler_linkmapping(VALUE mPoppler)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "area", link_mapping_get_area, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "action", link_mapping_get_action, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "area", link_mapping_get_area, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "action", link_mapping_get_action, 0);
 
-    rb_define_method(RG_TARGET_NAMESPACE, "set_area", link_mapping_set_area, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_action", link_mapping_set_action, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_area", link_mapping_set_area, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_action", link_mapping_set_action, 1);
 }

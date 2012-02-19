@@ -108,15 +108,13 @@ Init_poppler_color(VALUE mPoppler)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_COLOR, "Color", mPoppler);
 
     RG_DEF_METHOD(initialize, 3);
-    rb_define_method(RG_TARGET_NAMESPACE, "red", color_get_red, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "green", color_get_green, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "blue", color_get_blue, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_red", color_set_red, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_green", color_set_green, 1);
-    rb_define_method(RG_TARGET_NAMESPACE, "set_blue", color_set_blue, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "red", color_get_red, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "green", color_get_green, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "blue", color_get_blue, 0);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_red", color_set_red, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_green", color_set_green, 1);
+    rbg_define_method(RG_TARGET_NAMESPACE, "set_blue", color_set_blue, 1);
     RG_DEF_METHOD(to_a, 0);
     RG_DEF_METHOD(inspect, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #endif
 }

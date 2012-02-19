@@ -88,7 +88,7 @@ Init_glib_fileutils(void)
     rb_define_const(RG_TARGET_NAMESPACE, "FAILED", INT2NUM(G_FILE_ERROR_FAILED));
 
 #if GLIB_CHECK_VERSION(2, 16, 0)
-    rb_define_module_function(mGLib, "format_size_for_display",
+    rbg_define_singleton_method(mGLib, "format_size_for_display",
 			      rbglib_m_format_size_for_display, 1);
 #endif
 }

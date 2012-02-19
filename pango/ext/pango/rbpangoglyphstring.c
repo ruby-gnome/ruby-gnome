@@ -152,6 +152,4 @@ Init_pango_glyph_string(VALUE mPango)
     RG_DEF_METHOD(x_to_index, 3);
     RG_DEF_METHOD(get_logical_widths, 2);
     RG_DEF_METHOD(glyphs, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

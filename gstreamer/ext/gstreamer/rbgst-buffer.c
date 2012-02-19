@@ -360,6 +360,4 @@ Init_gst_buffer(VALUE mGst)
 
     RG_DEF_METHOD(span, 3);
     RG_DEF_METHOD_P(span, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

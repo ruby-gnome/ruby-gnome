@@ -105,6 +105,4 @@ Init_gst_clock (VALUE mGst)
     RG_DEF_METHOD(set_resolution, 1);
     RG_DEF_METHOD(time, 0);
     RG_DEF_METHOD_OPERATOR("==", equal_p, 1);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

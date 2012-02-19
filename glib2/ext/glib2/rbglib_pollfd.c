@@ -109,7 +109,4 @@ Init_glib_poll_fd(void)
     RG_DEF_METHOD(events, 0);
     RG_DEF_METHOD(set_revents, 1);
     RG_DEF_METHOD(revents, 0);
-
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
 }

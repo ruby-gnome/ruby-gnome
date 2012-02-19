@@ -174,6 +174,4 @@ Init_atk_editabletext(VALUE mAtk)
    RG_DEF_METHOD(cut_text, 2);
    RG_DEF_METHOD(delete_text, 2);
    RG_DEF_METHOD(paste_text, 1);
-
-   G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

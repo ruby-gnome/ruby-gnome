@@ -235,14 +235,14 @@ Init_gobject_gparamspecs(void)
 
 #define DEF_NUMERIC_PSPEC_METHODS(c, typename) \
   G_STMT_START {\
-    rb_define_method(c, "initialize", typename##_initialize, 7); \
-    rb_define_method(c, "minimum", typename##_minimum, 0); \
-    rb_define_method(c, "maximum", typename##_maximum, 0); \
-    rb_define_method(c, "range", typename##_range, 0); \
+    rbg_define_method(c, "initialize", typename##_initialize, 7); \
+    rbg_define_method(c, "minimum", typename##_minimum, 0); \
+    rbg_define_method(c, "maximum", typename##_maximum, 0); \
+    rbg_define_method(c, "range", typename##_range, 0); \
   } G_STMT_END
 
 #if 0
-    rb_define_method(c, "default_value", typename##_default_value, 0); \
+    rbg_define_method(c, "default_value", typename##_default_value, 0); \
     rb_define_alias(c, "default", "default_value"); \
 
 #endif
@@ -273,39 +273,39 @@ Init_gobject_gparamspecs(void)
 
     c = G_DEF_CLASS(G_TYPE_PARAM_FLOAT, "Float", cParamSpec);
     DEF_NUMERIC_PSPEC_METHODS(c, float);
-    rb_define_method(c, "epsilon", float_epsilon, 0);
+    rbg_define_method(c, "epsilon", float_epsilon, 0);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_DOUBLE, "Double", cParamSpec);
     DEF_NUMERIC_PSPEC_METHODS(c, double);
-    rb_define_method(c, "epsilon", double_epsilon, 0);
+    rbg_define_method(c, "epsilon", double_epsilon, 0);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_BOOLEAN, "Boolean", cParamSpec);
-    rb_define_method(c, "initialize", boolean_initialize, 5);
+    rbg_define_method(c, "initialize", boolean_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_UNICHAR, "UniChar", cParamSpec);
-    rb_define_method(c, "initialize", unichar_initialize, 5);
+    rbg_define_method(c, "initialize", unichar_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_ENUM, "Enum", cParamSpec);
-    rb_define_method(c, "initialize", enum_initialize, 6);
+    rbg_define_method(c, "initialize", enum_initialize, 6);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_FLAGS, "Flags", cParamSpec);
-    rb_define_method(c, "initialize", flags_initialize, 6);
+    rbg_define_method(c, "initialize", flags_initialize, 6);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_STRING, "String", cParamSpec);
-    rb_define_method(c, "initialize", string_initialize, 5);
+    rbg_define_method(c, "initialize", string_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_PARAM, "Param", cParamSpec);
-    rb_define_method(c, "initialize", param_initialize, 5);
+    rbg_define_method(c, "initialize", param_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_BOXED, "Boxed", cParamSpec);
-    rb_define_method(c, "initialize", boxed_initialize, 5);
+    rbg_define_method(c, "initialize", boxed_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_POINTER, "Pointer", cParamSpec);
-    rb_define_method(c, "initialize", pointer_initialize, 4);
+    rbg_define_method(c, "initialize", pointer_initialize, 4);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_VALUE_ARRAY, "ValueArray", cParamSpec);
-    rb_define_method(c, "initialize", value_array_initialize, 5);
+    rbg_define_method(c, "initialize", value_array_initialize, 5);
 
     c = G_DEF_CLASS(G_TYPE_PARAM_OBJECT, "Object", cParamSpec);
-    rb_define_method(c, "initialize", object_initialize, 5);
+    rbg_define_method(c, "initialize", object_initialize, 5);
 }

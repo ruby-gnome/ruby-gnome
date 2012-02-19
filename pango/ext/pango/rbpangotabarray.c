@@ -122,8 +122,6 @@ Init_pango_array(VALUE mPango)
     RG_DEF_METHOD(tabs, 0);
     RG_DEF_METHOD_P(positions_in_pixels, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     /* PangoTabAlign */
     G_DEF_CLASS(PANGO_TYPE_TAB_ALIGN, "TabAlign", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_TAB_ALIGN, "PANGO_");    

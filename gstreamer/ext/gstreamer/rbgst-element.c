@@ -1087,8 +1087,6 @@ Init_gst_element(VALUE mGst)
     RG_DEF_METHOD(sync_state_with_parent, 0);
     RG_DEF_METHOD(no_more_pads, 0);
 
-    G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-
     G_DEF_CLASS(GST_TYPE_STATE, "State", mGst);
     G_DEF_CONSTANTS(mGst, GST_TYPE_STATE, "GST_");
     G_DEF_CLASS(GST_TYPE_STATE_CHANGE_RETURN, "StateChangeReturn", mGst);

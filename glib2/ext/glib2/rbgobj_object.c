@@ -171,7 +171,7 @@ rbgobj_init_object_class(VALUE klass)
 {
     rbgobj_define_property_accessors(klass);
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
-        rb_define_method(klass, "initialize", dummy_init, -1);
+        rbg_define_method(klass, "initialize", dummy_init, -1);
 }
 
 /**********************************************************************/
@@ -803,7 +803,7 @@ rg_s_type_register(int argc, VALUE* argv, VALUE self)
             VALUE m = rb_define_module_under(self, RubyGObjectHookModule);
 
             if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                rb_define_method(m, "initialize", rg_initialize, -1);
+                rbg_define_method(m, "initialize", rg_initialize, -1);
             }
 
             rb_include_module(self, m);
@@ -830,8 +830,8 @@ Init_gobject_gobject(void)
     rb_define_alloc_func(RG_TARGET_NAMESPACE, (VALUE(*)_((VALUE)))gobj_s_allocate);
     RG_DEF_SMETHOD_BANG(new, -1);
 
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
-    rb_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
+    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "property", &gobj_s_property, 1);
+    rbg_define_singleton_method(RG_TARGET_NAMESPACE, "properties", &gobj_s_properties, -1);
     RG_DEF_SMETHOD(install_property, -1);
     q_ruby_getter = g_quark_from_static_string("__ruby_getter");
     q_ruby_setter = g_quark_from_static_string("__ruby_setter");
@@ -845,7 +845,7 @@ Init_gobject_gobject(void)
     RG_DEF_METHOD_P(destroyed, 0);
 
     RG_DEF_METHOD(initialize, -1);
-    rb_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
+    rbg_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(type_name, 0);
 
