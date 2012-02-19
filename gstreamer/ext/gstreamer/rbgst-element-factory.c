@@ -49,7 +49,7 @@
  * Returns: a newly created object based on Gst::Element.
  */
 static VALUE
-rg_s_make(int argc, VALUE *argv, VALUE self)
+rg_s_make(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     GstElement *element;
     VALUE fname, ename;
@@ -79,7 +79,7 @@ rg_s_make(int argc, VALUE *argv, VALUE self)
  * Returns: a Gst::ElementFactory object if found, nil otherwise.
  */
 static VALUE
-rg_s_find (VALUE self, VALUE factory_name)
+rg_s_find (G_GNUC_UNUSED VALUE self, VALUE factory_name)
 {
     GstElementFactory *factory = gst_element_factory_find (RVAL2CSTR (factory_name));
     return factory != NULL 

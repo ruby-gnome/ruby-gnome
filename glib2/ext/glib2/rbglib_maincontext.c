@@ -94,7 +94,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
 }
 
 static VALUE
-ruby_source_set_priority (VALUE self, VALUE priority)
+ruby_source_set_priority (G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE priority)
 {
     return Qnil;
 }
@@ -689,7 +689,7 @@ rg_remove_poll(VALUE self, VALUE fd)
 
 #ifdef HAVE_G_MAIN_DEPTH
 static VALUE
-rg_s_depth(VALUE self)
+rg_s_depth(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(g_main_depth());
 }

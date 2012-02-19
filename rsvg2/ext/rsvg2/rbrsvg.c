@@ -54,7 +54,7 @@ rg_s_set_default_dpi_x_y(VALUE self, VALUE dpi_x, VALUE dpi_y)
 
 /* Convenience API */
 static VALUE
-rg_s_pixbuf_from_file(VALUE self, VALUE file_name)
+rg_s_pixbuf_from_file(G_GNUC_UNUSED VALUE self, VALUE file_name)
 {
     VALUE rb_pixbuf;
     GdkPixbuf *pixbuf;
@@ -70,7 +70,7 @@ rg_s_pixbuf_from_file(VALUE self, VALUE file_name)
 }
 
 static VALUE
-rg_s_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
+rg_s_pixbuf_from_file_at_zoom(G_GNUC_UNUSED VALUE self, VALUE file_name,
                                  VALUE x_zoom, VALUE y_zoom)
 {
     VALUE rb_pixbuf;
@@ -90,7 +90,7 @@ rg_s_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rg_s_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
+rg_s_pixbuf_from_file_at_size(G_GNUC_UNUSED VALUE self, VALUE file_name,
                                  VALUE width, VALUE height)
 {
     VALUE rb_pixbuf;
@@ -110,7 +110,7 @@ rg_s_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rg_s_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
+rg_s_pixbuf_from_file_at_max_size(G_GNUC_UNUSED VALUE self, VALUE file_name,
                                      VALUE max_width, VALUE max_height)
 {
     VALUE rb_pixbuf;
@@ -130,7 +130,7 @@ rg_s_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
 }
 
 static VALUE
-rg_s_pixbuf_from_file_at_zoom_with_max(VALUE self,
+rg_s_pixbuf_from_file_at_zoom_with_max(G_GNUC_UNUSED VALUE self,
                                           VALUE file_name,
                                           VALUE x_zoom,
                                           VALUE y_zoom,
@@ -156,7 +156,7 @@ rg_s_pixbuf_from_file_at_zoom_with_max(VALUE self,
 }
 
 static VALUE
-rg_s_cairo_available_p(VALUE self)
+rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     return Qtrue;

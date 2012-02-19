@@ -103,7 +103,7 @@ Init_gst_classes (void)
  */
 
 static VALUE
-rg_s_init (int argc, VALUE * argv, VALUE self)
+rg_s_init (int argc, VALUE * argv, G_GNUC_UNUSED VALUE self)
 {
     gint i, gargc;
     VALUE argary;
@@ -173,7 +173,7 @@ rg_s_init (int argc, VALUE * argv, VALUE self)
  * Returns: an Array of 4 fixnums (major, minor, macro and nano numbers).
  */
 static VALUE
-rg_s_version (VALUE self)
+rg_s_version (G_GNUC_UNUSED VALUE self)
 {
     guint major, minor, micro, nano;
 
@@ -184,7 +184,7 @@ rg_s_version (VALUE self)
 }
 
 static VALUE
-rg_s_check_version_p(VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
+rg_s_check_version_p(G_GNUC_UNUSED VALUE self, VALUE rb_major, VALUE rb_minor, VALUE rb_micro)
 {
     guint major, minor, micro, nano;
 

@@ -28,13 +28,13 @@
  */
 
 static VALUE
-rg_s_default(VALUE self)
+rg_s_default(G_GNUC_UNUSED VALUE self)
 {
     return RGST_REGISTRY_NEW(gst_registry_get_default());
 }
 
 static VALUE
-rg_s_update(VALUE self)
+rg_s_update(G_GNUC_UNUSED VALUE self)
 {
     return CBOOL2RVAL(gst_update_registry());
 }

@@ -24,6 +24,10 @@
 #include <rbgdk-pixbuf.h>
 #include "rbgoocanvas.h"
 
+#ifndef G_VALUE_INIT
+#  define G_VALUE_INIT { 0, { { 0 } } }
+#endif
+
 void Init_goocanvas(void); /* Goo::Canvas */
 G_GNUC_INTERNAL void Init_goocanvasitem(VALUE mGoo); /* Goo::CanvasItem */
 G_GNUC_INTERNAL void Init_goocanvastext(VALUE mGoo); /* Goo::CanvasText */
