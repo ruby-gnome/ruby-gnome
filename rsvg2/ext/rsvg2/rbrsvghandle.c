@@ -94,7 +94,7 @@ rb_rsvg_handle_alloc(VALUE klass)
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
 static VALUE
-rg_s_new_from_data(VALUE self, VALUE data)
+rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 {
     GError *error = NULL;
     RsvgHandle *handle;
@@ -109,7 +109,7 @@ rg_s_new_from_data(VALUE self, VALUE data)
 }
 
 static VALUE
-rg_s_new_from_file(VALUE self, VALUE file)
+rg_s_new_from_file(G_GNUC_UNUSED VALUE self, VALUE file)
 {
     GError *error = NULL;
     RsvgHandle *handle;
