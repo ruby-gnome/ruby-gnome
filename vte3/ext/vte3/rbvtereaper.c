@@ -23,7 +23,7 @@
 #define RG_TARGET_NAMESPACE cReaper
 
 static VALUE
-rg_s_get(VALUE self)
+rg_s_get(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(vte_reaper_get());
 }
