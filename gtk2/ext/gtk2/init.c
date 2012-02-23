@@ -166,6 +166,7 @@ Init_gtk2(void)
     Init_gtk_imcontext(mGtk);
     Init_gtk_imcontext_simple(mGtk);
     Init_gtk_im_multicontext(mGtk);
+    Init_gtk_infobar(mGtk);
     Init_gtk_input_dialog(mGtk);
     Init_gtk_invisible(mGtk);
     Init_gtk_item(mGtk);
