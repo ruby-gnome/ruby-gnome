@@ -31,6 +31,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         RBGTK_INITIALIZE(self, gtk_info_bar_new ());
     } else if (argc > 0){
         //TODO gtk_info_bar_new_with_buttons
+        rb_raise(rb_eArgError, "method does not yet supported adding buttons");
        } else {
         rb_raise(rb_eArgError, "invalid argument number");
     }
