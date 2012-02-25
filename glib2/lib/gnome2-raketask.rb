@@ -13,7 +13,7 @@ require 'rake/extensiontask'
 class GNOME2Package
   include Rake::DSL
 
-  attr_accessor :name, :summary, :description, :author, :email, :homepage, :post_install_message
+  attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
   def initialize
     initialize_variables
     initialize_configurations
@@ -97,6 +97,7 @@ class GNOME2Package
                                          "{ext,sample,test,test-unit}/**/*"]
       files.existing!
       s.files                 = files
+      s.required_ruby_version = @required_ruby_version || ">= 1.8.5"
       s.post_install_message  = @post_install_message
       @dependency_configuration.apply(s)
     end
@@ -158,7 +159,6 @@ class GNOME2Package
     def initialize(package)
       @package = package
       @platform = Gem::Platform::RUBY
-      @ruby = ">=1.8.5"
       @gem_configuration = GemConfiguration.new(@package)
     end
 
@@ -168,7 +168,6 @@ class GNOME2Package
 
     def apply(spec)
       spec.platform = @platform
-      spec.required_ruby_version = @ruby
       @gem_configuration.apply(spec)
     end
 

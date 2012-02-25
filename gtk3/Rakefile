@@ -13,6 +13,7 @@ package = GNOME2Package.new do |_package|
                                      "gdk3"]
   _package.win32.packages = ["gtk+"]
   _package.win32.dependencies = []
+  _package.required_ruby_version = ">= 1.9.2"
   _package.post_install_message = "This library is experimental."
 end
 package.define_tasks
