@@ -117,10 +117,12 @@ rg_response(VALUE self, VALUE response_id)
     gtk_info_bar_response(_SELF(self), RVAL2GENUM(response_id, GTK_TYPE_RESPONSE_TYPE));
     return self;
 }
+#endif
 
 void 
 Init_gtk_infobar(VALUE mGtk)
 {
+#if GTK_CHECK_VERSION(2,18,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_INFO_BAR, "InfoBar", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
@@ -140,5 +142,6 @@ Init_gtk_infobar(VALUE mGtk)
 */
     RG_DEF_METHOD(set_response_sensitive, 2);
     RG_DEF_METHOD(response, 1);
-}
 #endif
+}
+
