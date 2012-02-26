@@ -89,6 +89,10 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_JUSTIFICATION, "Justification", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_JUSTIFICATION, "GTK_");
 
+    /* GtkMessageType */
+    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "MessageType", mGtk);
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_MESSAGE_TYPE, "GTK_MESSAGE_");
+
     /* GtkMetricType */
     G_DEF_CLASS(GTK_TYPE_METRIC_TYPE, "MetricType", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_METRIC_TYPE, "GTK_");
@@ -128,6 +132,10 @@ Init_gtk_const(VALUE mGtk)
     /* GtkResizeMode */
     G_DEF_CLASS(GTK_TYPE_RESIZE_MODE, "ResizeMode", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_RESIZE_MODE, "GTK_");
+
+    /* GtkResponseType */
+    G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", mGtk);
+    G_DEF_CONSTANTS(mGtk, GTK_TYPE_RESPONSE_TYPE, "GTK_");
 
     /* GtkScrollStep */
 #if GTK_CHECK_VERSION(2,4,0)

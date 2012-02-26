@@ -140,13 +140,5 @@ Init_gtk_infobar(VALUE mGtk)
 */
     RG_DEF_METHOD(set_response_sensitive, 2);
     RG_DEF_METHOD(response, 1);
-
-    /* GtkMessageType. Allready defined in rbgtkmessagedialog.c */
-    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_MESSAGE_TYPE, "GTK_MESSAGE_");
-
-    /* GtkResponseType.  Allready defined in rbgtkdialog.c */
-    G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", RG_TARGET_NAMESPACE);
-    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RESPONSE_TYPE, "GTK_");
 }
 #endif
