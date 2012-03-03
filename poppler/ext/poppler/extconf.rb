@@ -56,7 +56,6 @@ check_cairo(rcairo_options)
 setup_win32(module_name, base_dir)
 
 PKGConfig.have_package(package_id) or exit 1
-PKGConfig.have_package('poppler-cairo')
 
 unless have_macro("POPPLER_MAJOR_VERSION", ["poppler.h"])
   make_version_header("POPPLER", package_id, ".")
