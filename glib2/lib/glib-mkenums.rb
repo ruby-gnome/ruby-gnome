@@ -40,7 +40,7 @@ module GLib
       end
       constants = []
       const_lines.scan(/^\s*([^\s,]*).*\n/) do |name|
-        constants << name[0] unless name[0] =~ /(^[\/\*]|^$)/
+        constants << name[0] unless name[0] =~ /(^[\/\*]|^#|^$)/
       end
       @prefix = extract_prefix(constants)
       constants.each do |name|
