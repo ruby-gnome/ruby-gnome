@@ -294,7 +294,7 @@ static VALUE
 gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
 {
     VALUE sig, rest;
-    int i;
+    gulong handler_id;
     GClosure* rclosure;
     const char* sig_name;
     guint signal_id;
@@ -325,9 +325,10 @@ gobj_sig_connect_impl(gboolean after, int argc, VALUE *argv, VALUE self)
                           sig_name);
     g_rclosure_set_tag((GClosure *)rclosure, tag);
     g_free(tag);
-    i = g_signal_connect_closure_by_id(g_object, signal_id, detail, rclosure, after);
+    handler_id = g_signal_connect_closure_by_id(g_object, signal_id, detail,
+                                                rclosure, after);
 
-    return INT2FIX(i);
+    return ULONG2NUM(handler_id);
 }
 
 static VALUE
