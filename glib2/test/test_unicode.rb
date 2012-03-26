@@ -351,7 +351,11 @@ class TestGLibUnicode < Test::Unit::TestCase
 
   def utf8_to_utf32(string)
     if string.respond_to?(:encode)
-      string.encode("UTF-32LE")
+      if little_endian?
+        string.encode("UTF-32LE")
+      else
+        string.encode("UTF-32BE")
+      end
     else
       require_uconv
       Uconv.u8tou4(string)
@@ -360,7 +364,11 @@ class TestGLibUnicode < Test::Unit::TestCase
 
   def utf8_to_utf16(string)
     if string.respond_to?(:encode)
-      string.encode("UTF-16LE")
+      if little_endian?
+        string.encode("UTF-16LE")
+      else
+        string.encode("UTF-16BE")
+      end
     else
       require_uconv
       Uconv.u8tou16(string)
@@ -378,5 +386,9 @@ class TestGLibUnicode < Test::Unit::TestCase
       string.force_encoding("ascii-8bit")
     end
     string
+  end
+
+  def little_endian?
+    [1].pack("v") == [1].pack("S")
   end
 end
