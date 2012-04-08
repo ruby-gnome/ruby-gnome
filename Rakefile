@@ -33,7 +33,7 @@ def archive_name(base_name, _version=nil)
 end
 
 @needless_paths = [".svn", ".test-result", ".gdb_history", "mkmf.log",
-                   "*.o", "*.so", "pkg", "vendor"]
+                   "*.o", "*.so", "pkg", "vendor", "tmp"]
 def package(base_name, paths, needless_paths=nil)
   _dist_dir = dist_dir(base_name)
 
