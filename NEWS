@@ -2,6 +2,76 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.3: 2012-04-08
+
+This is a bug fix release of 1.1.2.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Added required Ruby version into gemspec.
+    * [GitHub#106] glib-mkenums.rb supported macro lines in header.
+      This change is required for building with GLib 2.31.20.
+      [Reported by mtasaka]
+    * [GitHub#107] Supported tests on PPC.
+      [Reported by mtasaka]
+  * Fixes
+    * Fixed handler_id type.
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Added Gtk::TreeViewColumn#set_sort_column_id and
+      Gtk::TreeViewColumn#sort_column_id= for GTK+ < 2.18.
+      [ruby-gnome2-devel-en] Gtk::TreeViewColumn
+      [Reported by grant schoep]
+    * Added Gtk::InfoBar.
+    * Added Gtk::MessageType.
+    * Added Gtk::ResponseType.
+  * Fixes
+    * Fixed build failure with GTK+ < 2.12.
+      [ruby-gnome2-devel-en] compile problems gtk2, ruby-gnome2-all-1.1.2
+      [Reported by grant schoep]
+    * Fixed require failure with GTK+ < 2.14.
+      [ruby-gnome2-devel-en] NameError: undefined method
+      `color_selection' for class `Gtk::ColorSelectionDialog'
+      [Reported by grant schoep]
+
+==== Ruby/Poppler
+
+  * Improvements
+    * [GitHub#97] Added Poppler::Page#text_layout.
+      [Patch by Andrey Kutejko]
+    * [SF.net#3495948] Removed needless poppler-cairo check.
+      [Reported by Pino Toscano]
+  * Fixes
+    * [GitHub#96] Fixed valid state of child index iterator.
+      [Patch by Andrey Kutejko]
+    * [GitHub#97] Fixed parameter check of Poppler::Page#get_text.
+      [Patch by Andrey Kutejko]
+
+==== Ruby/VTE
+
+  * Fixes
+    * Fixed build failure with VTE < 0.24.
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Added Gst::Element#seek_simple.
+  * Fixes
+    * [GitHub#95] Fixed async test.
+      [Reported by mtasaka]
+
+=== Thanks
+
+  * mtasaka
+  * grant schoep
+  * Andrey Kutejko
+  * Pino Toscano
+
 == Ruby-GNOME2 1.1.2: 2012-01-15
 
 This is a bug fix release of 1.1.1.
