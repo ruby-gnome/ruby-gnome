@@ -220,7 +220,8 @@ module Gtk
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_flags :Flags
-    define_deprecated_enums :ResponseType, 'RESPONSE'
+    define_deprecated_const :ResponseType, 'Gtk::ResponseType'
+    define_deprecated_enums 'Gtk::ResponseType', 'RESPONSE'
     define_deprecated_method :vbox, :child
     define_deprecated_method_by_hash_args :initialize,
         'title, parent, flags, *buttons',

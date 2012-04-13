@@ -183,5 +183,4 @@ Init_gtk_dialog(VALUE mGtk)
     RG_DEF_METHOD(get_widget_for_response, 1);
 
     G_DEF_CLASS(GTK_TYPE_DIALOG_FLAGS, "Flags", RG_TARGET_NAMESPACE);
-    G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", RG_TARGET_NAMESPACE);
 }

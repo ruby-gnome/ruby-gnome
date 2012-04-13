@@ -63,6 +63,7 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_POSITION_TYPE, "PositionType", mGtk);
     G_DEF_CLASS(GTK_TYPE_RELIEF_STYLE, "ReliefStyle", mGtk);
     G_DEF_CLASS(GTK_TYPE_RESIZE_MODE, "ResizeMode", mGtk);
+    G_DEF_CLASS(GTK_TYPE_RESPONSE_TYPE, "ResponseType", mGtk);
     G_DEF_CLASS(GTK_TYPE_SCROLL_STEP, "ScrollStep", mGtk);
     G_DEF_CLASS(GTK_TYPE_SCROLL_TYPE, "ScrollType", mGtk);
     G_DEF_CLASS(GTK_TYPE_SELECTION_MODE, "SelectionMode", mGtk);
