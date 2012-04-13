@@ -307,11 +307,9 @@ rg_add(int argc, VALUE *argv, VALUE self)
     if (gtk_widget_get_parent(child) && (! NIL_P(properties))){
         int i;
         VALUE ary;
-        GObject* obj;
 
         Check_Type(properties, T_HASH);
         ary = rb_funcall(properties, rb_intern("to_a"), 0);
-        obj = RVAL2GOBJ(self);
 
         for (i = 0; i < RARRAY_LEN(ary); i++) {
             rg_child_set_property(self, other, 
