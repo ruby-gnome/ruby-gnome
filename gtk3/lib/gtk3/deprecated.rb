@@ -138,6 +138,12 @@ module Gtk
         |_self, child, expand, fill, padding|
       [child, {:expand => expand, :fill => fill, :padding => padding}]
     end
+    define_deprecated_method_by_hash_args :set_child_packing,
+        'child, expand, fill, padding, pack_type',
+        'child, :expand => nil, :fill => nil, :padding => nil, :pack_type => nil', 1 do
+        |_self, child, expand, fill, padding, pack_type|
+      [child, {:expand => expand, :fill => fill, :padding => padding, :pack_type => pack_type}]
+    end
   end
 
   class Button
