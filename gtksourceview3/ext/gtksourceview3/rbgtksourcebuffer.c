@@ -22,13 +22,29 @@
 
 #include "rbgtksourceview3private.h"
 
-#define RG_TARGET_NAMESPACE cBuffer
-
 /* Class: Gtk::SourceBuffer
  * Text buffer object for Gtk::SourceView.
  */
 
+#define RG_TARGET_NAMESPACE cBuffer
 #define _SELF(self) (RVAL2GTKSOURCEBUFFER(self))
+
+#define RVAL2STARTITER(self, iter, out) \
+        rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_start_iter)
+#define RVAL2ENDITER(self, iter, out) \
+        rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_end_iter)
+
+static GtkTextIter *
+rval2iter_with_default(VALUE *self, VALUE *iter, GtkTextIter *out,
+                       void (*default_func)(GtkTextBuffer *, GtkTextIter *))
+{
+    if (NIL_P(*iter)) {
+        default_func(RVAL2GTKTEXTBUFFER(*self), out);
+        return out;
+    } else {
+        return RVAL2GTKTEXTITER(*self, *iter);
+    }
+}
 
 /*
  * Class method: new(obj=nil)
@@ -226,13 +242,14 @@ static VALUE
 rg_remove_source_marks(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, category;
+    GtkTextIter start_iter, end_iter;
 
-    rb_scan_args (argc, argv, "21", &start, &end, &category);
+    rb_scan_args (argc, argv, "03", &start, &end, &category);
 
     gtk_source_buffer_remove_source_marks (_SELF (self),
-                            RVAL2GTKTEXTITER (start),
-                            RVAL2GTKTEXTITER (end),
-                            RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL (category));
+                                           RVAL2STARTITER(self, start, start_iter),
+                                           RVAL2ENDITER(self, end, end_iter),
+                                           RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL (category));
 
     return self;
 }
