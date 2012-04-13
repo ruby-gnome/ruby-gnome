@@ -12,6 +12,12 @@ module Gtk
 end
 
 module GtkSource
+  class Buffer
+    extend GLib::Deprecatable
+    define_deprecated_method :not_undoable_action, :begin_not_undoable_action
+    define_deprecated_method :non_undoable_action, :begin_not_undoable_action
+  end
+
   class View
     extend GLib::Deprecatable
     define_deprecated_flags :DrawSpacesFlags, 'DRAW_SPACES'

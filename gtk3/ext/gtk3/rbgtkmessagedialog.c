@@ -70,6 +70,5 @@ Init_gtk_message_dialog(VALUE mGtk)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_markup, 1);
 
-    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GTK_TYPE_BUTTONS_TYPE, "ButtonsType", RG_TARGET_NAMESPACE);
 }

@@ -515,7 +515,7 @@ rg_geometry(VALUE self)
 {
     gint x, y, w, h;
     gdk_window_get_geometry(_SELF(self), &x, &y, &w, &h);
-    return rb_ary_new3(5, INT2NUM(x), INT2NUM(y),
+    return rb_ary_new3(4, INT2NUM(x), INT2NUM(y),
                        INT2NUM(w), INT2NUM(h));
 }
 
