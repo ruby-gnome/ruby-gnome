@@ -150,32 +150,6 @@ rg_end_not_undoable_action(VALUE self)
 }
 
 /*
- * Method: not_undoable_action { ... }
- *
- * Marks the beginning of a not undoable action on the buffer, disabling the
- * undo manager, then calls the provided block of code.
- *
- * At the end of the block, marks the end of a not undoable action on the
- * buffer. When the last not undoable block is finished, the list of undo
- * actions is cleared and the undo manager is re-enabled.
- *
- * ((*Deprecated*)). Use Gtk::SourceView#begin_not_undoable_action{ ... } instead.
- *
- * Returns: the return value of the provided block.
- */
-static VALUE
-rg_not_undoable_action(VALUE self)
-{
-    VALUE block, ret;
-
-    block = rb_block_proc ();
-    gtk_source_buffer_begin_not_undoable_action (_SELF (self));
-    ret = rb_funcall (block, rb_intern ("call"), 0);
-    gtk_source_buffer_end_not_undoable_action (_SELF (self));
-    return ret;
-}
-
-/*
  * Method: create_source_mark(name=nil, category, where)
  * name: the name of the mark.
  * type: a string defining the mark type.
@@ -308,8 +282,6 @@ Init_gtksource_buffer (VALUE mGtkSource)
     RG_DEF_METHOD_BANG(undo, 0);
     RG_DEF_METHOD(begin_not_undoable_action, 0);
     RG_DEF_METHOD(end_not_undoable_action, 0);
-    RG_DEF_METHOD(not_undoable_action, 0);
-    RG_DEF_ALIAS("non_undoable_action", "not_undoable_action");
     RG_DEF_METHOD(create_source_mark, -1);
     RG_DEF_METHOD(get_source_marks_at_line, -1);
     RG_DEF_METHOD(get_source_marks_at_iter, -1);
