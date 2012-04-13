@@ -25,8 +25,6 @@
 #define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) (RVAL2GTKTEXTITER(s))
 
-static gboolean is_compat_240;
-
 static VALUE
 rg_buffer(VALUE self)
 {
@@ -573,18 +571,10 @@ rg_forward_search(int argc, VALUE *argv, VALUE self)
     gboolean ret;
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
-
-    if (is_compat_240){
-        ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                           RVAL2GTKTEXTSEARCHFLAGS(flags), 
-                                           &m_start, &m_end,
-                                           NIL_P(limit) ? NULL : _SELF(limit));
-    } else {
-        ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
-                                           RVAL2GTKTEXTSEARCHFLAGS(flags), 
-                                           &m_start, &m_end,
-                                           NIL_P(limit) ? NULL : _SELF(limit));
-    }
+    ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
+                                       RVAL2GTKTEXTSEARCHFLAGS(flags), 
+                                       &m_start, &m_end,
+                                       NIL_P(limit) ? NULL : _SELF(limit));
     return ret ? rb_ary_new3(2, GTKTEXTITER2RVAL(&m_start), GTKTEXTITER2RVAL(&m_end)) : Qnil;
 }
 
@@ -596,17 +586,10 @@ rg_backward_search(int argc, VALUE *argv, VALUE self)
     gboolean ret;
 
     rb_scan_args(argc, argv, "21", &str, &flags, &limit);
-    if (is_compat_240){
-        ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                            RVAL2GTKTEXTSEARCHFLAGS(flags), 
-                                            &m_start, &m_end,
-                                            NIL_P(limit) ? NULL : _SELF(limit));
-    } else {
-        ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
-                                            RVAL2GTKTEXTSEARCHFLAGS(flags), 
-                                            &m_start, &m_end,
-                                            NIL_P(limit) ? NULL : _SELF(limit));
-    }
+    ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
+                                        RVAL2GTKTEXTSEARCHFLAGS(flags), 
+                                        &m_start, &m_end,
+                                        NIL_P(limit) ? NULL : _SELF(limit));
     return ret ? rb_ary_new3(2, GTKTEXTITER2RVAL(&m_start), GTKTEXTITER2RVAL(&m_end)) : Qnil;
 }
 
@@ -633,8 +616,6 @@ Init_gtk_textiter(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_ITER, "TextIter", mGtk);
     rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
-
-    is_compat_240 = gtk_check_version(2, 4, 0) ? FALSE : TRUE;
 
     RG_DEF_METHOD(buffer, 0);
     RG_DEF_METHOD(offset, 0);
