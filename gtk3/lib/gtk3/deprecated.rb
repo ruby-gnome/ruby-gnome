@@ -613,6 +613,18 @@ module Gtk
         _self.child_get_property(_self.send(child), prop)
       end
     end
+    define_deprecated_method_by_hash_args :pack1,
+        'child, resize, shrink',
+        'child, :resize => false, :shrink => true', 1 do
+        |_self, child, resize, shrink|
+      [child, {:resize => resize, :shrink => shrink}]
+    end
+    define_deprecated_method_by_hash_args :pack2,
+        'child, resize, shrink',
+        'child, :resize => true, :shrink => true', 1 do
+        |_self, child, resize, shrink|
+      [child, {:resize => resize, :shrink => shrink}]
+    end
   end
 
   class RadioAction

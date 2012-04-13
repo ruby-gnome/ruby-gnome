@@ -49,19 +49,34 @@ rg_add2(VALUE self, VALUE child)
     return self;
 }
 
-static VALUE
-rg_pack1(VALUE self, VALUE child, VALUE resize, VALUE shrink)
+static void
+paned_pack(int argc, VALUE *argv, VALUE self, void (*func)(GtkPaned *, GtkWidget *, gboolean, gboolean), gboolean resize_default)
 {
-    gtk_paned_pack1(_SELF(self), RVAL2GTKWIDGET(child),
-                    RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
+    VALUE options, child, resize, shrink;
+
+    rb_scan_args(argc, argv, "11", &child, &options);
+    rbg_scan_options(options,
+                     "resize", &resize,
+                     "shrink", &shrink,
+                     NULL);
+
+    func(_SELF(self),
+         RVAL2GTKWIDGET(child),
+         NIL_P(resize) ? resize_default : RVAL2CBOOL(resize),
+         NIL_P(shrink) ? TRUE : RVAL2CBOOL(shrink));
+}
+
+static VALUE
+rg_pack1(int argc, VALUE *argv, VALUE self)
+{
+    paned_pack(argc, argv, self, gtk_paned_pack1, FALSE);
     return self;
 }
 
 static VALUE
-rg_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
+rg_pack2(int argc, VALUE *argv, VALUE self)
 {
-    gtk_paned_pack2(_SELF(self), RVAL2GTKWIDGET(child),
-                    RVAL2CBOOL(resize), RVAL2CBOOL(shrink));
+    paned_pack(argc, argv, self, gtk_paned_pack2, TRUE);
     return self;
 }
 
@@ -91,8 +106,8 @@ Init_gtk_paned(VALUE mGtk)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(add1, 1);
     RG_DEF_METHOD(add2, 1);
-    RG_DEF_METHOD(pack1, 3);
-    RG_DEF_METHOD(pack2, 3);
+    RG_DEF_METHOD(pack1, -1);
+    RG_DEF_METHOD(pack2, -1);
     RG_DEF_METHOD(child1, 0);
     RG_DEF_METHOD(child2, 0);
     RG_DEF_METHOD(handle_window, 0);
