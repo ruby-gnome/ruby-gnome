@@ -124,15 +124,13 @@ rg_set_focus_hadjustment(VALUE self, VALUE adjustment)
 static VALUE
 rg_focus_vadjustment(VALUE self)
 {
-    GtkAdjustment* adj = gtk_container_get_focus_vadjustment(_SELF(self));
-    return adj ? GOBJ2RVAL(adj) : Qnil;
+    return GOBJ2RVAL(gtk_container_get_focus_vadjustment(_SELF(self)));
 }
 
 static VALUE
 rg_focus_hadjustment(VALUE self)
 {
-    GtkAdjustment* adj = gtk_container_get_focus_hadjustment(_SELF(self));
-    return adj ? GOBJ2RVAL(adj) : Qnil;
+    return GOBJ2RVAL(gtk_container_get_focus_hadjustment(_SELF(self)));
 }
 
 static VALUE
