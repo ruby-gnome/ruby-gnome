@@ -730,7 +730,9 @@ rg_get_iter_at(VALUE self, VALUE position)
 {
     GtkTextIter iter;
 
-    if (TYPE(position) == T_HASH) {
+    switch (TYPE(position)) {
+      case T_HASH:
+      {
         VALUE line, offset, index, mark, anchor;
         rbg_scan_options(position,
                          "line", &line,
@@ -769,7 +771,17 @@ rg_get_iter_at(VALUE self, VALUE position)
                                                      RVAL2GTKTEXTCHILDANCHOR(anchor));
         else
             rb_raise(rb_eArgError, "Invalid arguments.");
-    } else {
+        break;
+      }
+      case T_FIXNUM:
+      {
+        gtk_text_buffer_get_iter_at_offset(_SELF(self),
+                                           &iter,
+                                           NUM2INT(position));
+        break;
+      }
+      default:
+      {
         GType gtype = RVAL2GTYPE(position);
 
         if (g_type_is_a(gtype, GTK_TYPE_TEXT_MARK))
@@ -782,6 +794,8 @@ rg_get_iter_at(VALUE self, VALUE position)
                                                      RVAL2GTKTEXTCHILDANCHOR(position));
         else
             rb_raise(rb_eArgError, "Invalid arguments.");
+        break;
+      }
     }
 
     return GTKTEXTITER2RVAL(&iter);
