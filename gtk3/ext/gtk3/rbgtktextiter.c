@@ -26,7 +26,6 @@
 #define _SELF(s) (RVAL2GTKTEXTITER(s))
 
 static gboolean is_compat_240;
-static ID id_pixbuf;
 
 static VALUE
 rg_buffer(VALUE self)
@@ -106,13 +105,9 @@ rg_get_visible_text(VALUE self, VALUE rhs)
 static VALUE
 rg_pixbuf(VALUE self)
 {
-    GdkPixbuf* pixbuf = gtk_text_iter_get_pixbuf(_SELF(self));
-    VALUE ret = Qnil;
-    if (pixbuf){
-        ret = GOBJ2RVAL(pixbuf);
-        G_CHILD_SET(self, id_pixbuf, ret);
-    }
-    return ret;
+    VALUE pixbuf = GOBJ2RVAL(gtk_text_iter_get_pixbuf(_SELF(self)));
+    G_CHILD_SET(self, rb_intern("pixbuf"), pixbuf);
+    return pixbuf;
 }
 
 static VALUE
@@ -641,8 +636,6 @@ Init_gtk_textiter(VALUE mGtk)
     rb_include_module(RG_TARGET_NAMESPACE, rb_mComparable);
 
     is_compat_240 = gtk_check_version(2, 4, 0) ? FALSE : TRUE;
-
-    id_pixbuf = rb_intern("pixbuf");
 
     RG_DEF_METHOD(buffer, 0);
     RG_DEF_METHOD(offset, 0);
