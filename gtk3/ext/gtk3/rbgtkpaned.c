@@ -68,15 +68,13 @@ rg_pack2(VALUE self, VALUE child, VALUE resize, VALUE shrink)
 static VALUE
 rg_child1(VALUE self)
 {
-    GtkWidget *child = gtk_paned_get_child1(_SELF(self));
-    return (child == NULL) ? Qnil : GOBJ2RVAL(child);
+    return GOBJ2RVAL(gtk_paned_get_child1(_SELF(self)));
 }
 
 static VALUE
 rg_child2(VALUE self)
 {
-    GtkWidget *child = gtk_paned_get_child2(_SELF(self));
-    return (child == NULL) ? Qnil : GOBJ2RVAL(child);
+    return GOBJ2RVAL(gtk_paned_get_child2(_SELF(self)));
 }
 
 static VALUE
