@@ -28,17 +28,17 @@
 static VALUE rb_mGtk;
 static ID id_tagtable;
 
-#define RVAL2STARTITER(buffer, iter, out) \
-        rval2iter_with_default(buffer, &(iter), &(out), gtk_text_buffer_get_start_iter)
-#define RVAL2ENDITER(buffer, iter, out) \
-        rval2iter_with_default(buffer, &(iter), &(out), gtk_text_buffer_get_end_iter)
+#define RVAL2STARTITER(self, iter, out) \
+        rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_start_iter)
+#define RVAL2ENDITER(self, iter, out) \
+        rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_end_iter)
 
 static GtkTextIter *
-rval2iter_with_default(GtkTextBuffer *buffer, VALUE *iter, GtkTextIter *out,
+rval2iter_with_default(VALUE *self, VALUE *iter, GtkTextIter *out,
                        void (*default_func)(GtkTextBuffer *, GtkTextIter *))
 {
     if (NIL_P(*iter)) {
-        default_func(buffer, out);
+        default_func(_SELF(*self), out);
         return out;
     } else {
         return RVAL2GTKTEXTITER(*iter);
@@ -141,13 +141,12 @@ rg_delete(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end;
     GtkTextIter start_iter, end_iter;
-    GtkTextBuffer *buffer = _SELF(self);
 
     rb_scan_args(argc, argv, "02", &start, &end);
 
-    gtk_text_buffer_delete(buffer,
-                           RVAL2STARTITER(buffer, start, start_iter),
-                           RVAL2ENDITER(buffer, end, end_iter));
+    gtk_text_buffer_delete(_SELF(self),
+                           RVAL2STARTITER(self, start, start_iter),
+                           RVAL2ENDITER(self, end, end_iter));
 
     return self;
 }
@@ -157,13 +156,12 @@ rg_delete_interactive(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, editable;
     GtkTextIter start_iter, end_iter;
-    GtkTextBuffer *buffer = _SELF(self);
 
     rb_scan_args(argc, argv, "03", &start, &end, &editable);
 
-    return CBOOL2RVAL(gtk_text_buffer_delete_interactive(buffer,
-                                                         RVAL2STARTITER(buffer, start, start_iter),
-                                                         RVAL2ENDITER(buffer, end, end_iter),
+    return CBOOL2RVAL(gtk_text_buffer_delete_interactive(_SELF(self),
+                                                         RVAL2STARTITER(self, start, start_iter),
+                                                         RVAL2ENDITER(self, end, end_iter),
                                                          RVAL2CBOOL(editable)));
 }
 
@@ -172,14 +170,13 @@ rg_get_text(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, include_hidden_chars;
     GtkTextIter start_iter, end_iter;
-    GtkTextBuffer* buffer = _SELF(self);
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
 
-    ret = gtk_text_buffer_get_text(buffer,
-                                   RVAL2STARTITER(buffer, start, start_iter),
-                                   RVAL2ENDITER(buffer, end, end_iter),
+    ret = gtk_text_buffer_get_text(_SELF(self),
+                                   RVAL2STARTITER(self, start, start_iter),
+                                   RVAL2ENDITER(self, end, end_iter),
                                    RVAL2CBOOL(include_hidden_chars));
 
     return CSTR2RVAL_FREE(ret);
@@ -196,14 +193,13 @@ rg_get_slice(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, include_hidden_chars;
     GtkTextIter start_iter, end_iter;
-    GtkTextBuffer* buffer = _SELF(self);
     gchar* ret;
 
     rb_scan_args(argc, argv, "03", &start, &end, &include_hidden_chars);
 
-    ret = gtk_text_buffer_get_slice(buffer,
-                                    RVAL2STARTITER(buffer, start, start_iter),
-                                    RVAL2ENDITER(buffer, end, end_iter),
+    ret = gtk_text_buffer_get_slice(_SELF(self),
+                                    RVAL2STARTITER(self, start, start_iter),
+                                    RVAL2ENDITER(self, end, end_iter),
                                     RVAL2CBOOL(include_hidden_chars));
 
     return CSTR2RVAL_FREE(ret);
@@ -691,20 +687,19 @@ rg_remove_tag(int argc, VALUE *argv, VALUE self)
 {
     VALUE tag, start, end;
     GtkTextIter start_iter, end_iter;
-    GtkTextBuffer *buffer = _SELF(self);
 
     rb_scan_args(argc, argv, "12", &tag, &start, &end);
 
     if (rb_obj_is_kind_of(tag, GTYPE2CLASS(GTK_TYPE_TEXT_TAG)))
-        gtk_text_buffer_remove_tag(buffer,
+        gtk_text_buffer_remove_tag(_SELF(self),
                                    RVAL2GTKTEXTTAG(tag),
-                                   RVAL2STARTITER(buffer, start, start_iter),
-                                   RVAL2ENDITER(buffer, end, end_iter));
+                                   RVAL2STARTITER(self, start, start_iter),
+                                   RVAL2ENDITER(self, end, end_iter));
     else
-        gtk_text_buffer_remove_tag_by_name(buffer,
+        gtk_text_buffer_remove_tag_by_name(_SELF(self),
                                            RVAL2CSTR(tag),
-                                           RVAL2STARTITER(buffer, start, start_iter),
-                                           RVAL2ENDITER(buffer, end, end_iter));
+                                           RVAL2STARTITER(self, start, start_iter),
+                                           RVAL2ENDITER(self, end, end_iter));
 
     return self;
 }
@@ -714,13 +709,12 @@ rg_remove_all_tags(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end;
     GtkTextIter start_iter, end_iter;
-    GtkTextBuffer *buffer = _SELF(self);
 
     rb_scan_args(argc, argv, "02", &start, &end);
 
-    gtk_text_buffer_remove_all_tags(buffer,
-                                    RVAL2STARTITER(buffer, start, start_iter),
-                                    RVAL2ENDITER(buffer, end, end_iter));
+    gtk_text_buffer_remove_all_tags(_SELF(self),
+                                    RVAL2STARTITER(self, start, start_iter),
+                                    RVAL2ENDITER(self, end, end_iter));
 
     return self;
 }
