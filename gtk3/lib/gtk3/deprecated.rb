@@ -64,6 +64,9 @@ module Gtk
   define_deprecated_singleton_method :init_add, :warn => "Don't use this method."
   define_deprecated_singleton_method :quit_add, :warn => "Don't use this method."
   define_deprecated_singleton_method :quit_remove, :warn => "Don't use this method."
+  define_deprecated_singleton_method :get_event_widget, :warn => "Use 'Gdk::Event#event_widget'." do |_self, event|
+    event && event.event_widget
+  end
   define_deprecated_singleton_method :timeout_add, :warn => "Use 'GLib::Timeout.add'." do |_self, interval, &block|
     GLib::Timeout.add(interval, &block)
   end

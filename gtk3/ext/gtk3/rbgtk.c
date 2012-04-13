@@ -356,15 +356,6 @@ rg_s_current_event_state(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_s_get_event_widget(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
-{
-    VALUE event;
-    rb_scan_args(argc, argv, "01", &event);
-
-    return GOBJ2RVAL(gtk_get_event_widget(NIL_P(event) ? NULL :RVAL2GEV(event)));
-}
-
-static VALUE
 rg_s_propagate_event(G_GNUC_UNUSED VALUE self, VALUE widget, VALUE event)
 {
     gtk_propagate_event(RVAL2GTKWIDGET(widget), RVAL2GEV(event));
@@ -425,7 +416,6 @@ Init_gtk(void)
     RG_DEF_SMETHOD(current_event, 0);
     RG_DEF_SMETHOD(current_event_time, 0);
     RG_DEF_SMETHOD(current_event_state, 0);
-    RG_DEF_SMETHOD(get_event_widget, -1);
     RG_DEF_SMETHOD(propagate_event, 2);
     RG_DEF_SMETHOD(check_version, 3);
     RG_DEF_SMETHOD_P(check_version, 3);
