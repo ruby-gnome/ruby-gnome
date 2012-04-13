@@ -54,6 +54,7 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_DIRECTION_TYPE, "DirectionType", mGtk);
     G_DEF_CLASS(GTK_TYPE_EXPANDER_STYLE, "ExpanderStyle", mGtk);
     G_DEF_CLASS(GTK_TYPE_JUSTIFICATION, "Justification", mGtk);
+    G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "MessageType", mGtk);
     G_DEF_CLASS(GTK_TYPE_MOVEMENT_STEP, "MovementStep", mGtk);
     G_DEF_CLASS(GTK_TYPE_ORIENTATION, "Orientation", mGtk);
     G_DEF_CLASS(GTK_TYPE_PACK_TYPE, "PackType", mGtk);
