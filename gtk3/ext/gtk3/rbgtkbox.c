@@ -41,44 +41,36 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 }
 
 static void
-box_pack_start_or_end(int argc, VALUE *argv, VALUE self, int start)
+box_pack_start_or_end(int argc, VALUE *argv, VALUE self, void (*func)(GtkBox *, GtkWidget *, gboolean, gboolean, guint))
 {
-    VALUE arg0, arg1, arg2, arg3;
-    gint expand, fill, padding;
-    GtkWidget *widget, *child;
+    VALUE options, child, expand, fill, padding;
 
-    expand = fill = Qtrue; padding = 0;
-    switch (rb_scan_args(argc, argv, "13", &arg0, &arg1, &arg2, &arg3)) {
-      case 4:
-        padding = NUM2INT(arg3);
-      case 3:
-        fill = RVAL2CBOOL(arg2);
-      case 2:
-        expand = RVAL2CBOOL(arg1);
-      default:
-        child = RVAL2GTKWIDGET(arg0);
-        G_CHILD_ADD(self, arg0);
-        break;
-    }
-    widget = RVAL2GTKWIDGET(self);
+    rb_scan_args(argc, argv, "11", &child, &options);
+    rbg_scan_options(options,
+                     "expand", &expand,
+                     "fill", &fill,
+                     "padding", &padding,
+                     NULL);
 
-    if (start)
-        gtk_box_pack_start(_SELF(self), child, expand, fill, padding);
-    else
-        gtk_box_pack_end(_SELF(self), child, expand, fill, padding);
+    func(_SELF(self),
+         RVAL2GTKWIDGET(child),
+         NIL_P(expand) ? TRUE : RVAL2CBOOL(expand),
+         NIL_P(fill) ? TRUE : RVAL2CBOOL(fill),
+         NIL_P(padding) ? 0 : NUM2UINT(padding));
+    G_CHILD_ADD(self, child);
 }
 
 static VALUE
 rg_pack_start(int argc, VALUE *argv, VALUE self)
 {
-    box_pack_start_or_end(argc, argv, self, 1);
+    box_pack_start_or_end(argc, argv, self, gtk_box_pack_start);
     return self;
 }
 
 static VALUE
 rg_pack_end(int argc, VALUE *argv, VALUE self)
 {
-    box_pack_start_or_end(argc, argv, self, 0);
+    box_pack_start_or_end(argc, argv, self, gtk_box_pack_end);
     return self;
 }
 

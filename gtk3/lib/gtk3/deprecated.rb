@@ -126,6 +126,18 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method :pack_start_defaults, :pack_start
     define_deprecated_method :pack_end_defaults, :pack_end
+    define_deprecated_method_by_hash_args :pack_start,
+        'child, expand = true, fill = true, padding = 0',
+        'child, :expand => true, :fill => true, :padding => 0', 1 do
+        |_self, child, expand, fill, padding|
+      [child, {:expand => expand, :fill => fill, :padding => padding}]
+    end
+    define_deprecated_method_by_hash_args :pack_end,
+        'child, expand = true, fill = true, padding = 0',
+        'child, :expand => true, :fill => true, :padding => 0', 1 do
+        |_self, child, expand, fill, padding|
+      [child, {:expand => expand, :fill => fill, :padding => padding}]
+    end
   end
 
   class Button
