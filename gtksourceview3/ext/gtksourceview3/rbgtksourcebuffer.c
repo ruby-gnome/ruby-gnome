@@ -22,13 +22,29 @@
 
 #include "rbgtksourceview3private.h"
 
-#define RG_TARGET_NAMESPACE cBuffer
-
 /* Class: Gtk::SourceBuffer
  * Text buffer object for Gtk::SourceView.
  */
 
+#define RG_TARGET_NAMESPACE cBuffer
 #define _SELF(self) (RVAL2GTKSOURCEBUFFER(self))
+
+#define RVAL2STARTITER(self, iter, out) \
+        rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_start_iter)
+#define RVAL2ENDITER(self, iter, out) \
+        rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_end_iter)
+
+static GtkTextIter *
+rval2iter_with_default(VALUE *self, VALUE *iter, GtkTextIter *out,
+                       void (*default_func)(GtkTextBuffer *, GtkTextIter *))
+{
+    if (NIL_P(*iter)) {
+        default_func(RVAL2GTKTEXTBUFFER(*self), out);
+        return out;
+    } else {
+        return RVAL2GTKTEXTITER(*self, *iter);
+    }
+}
 
 /*
  * Class method: new(obj=nil)
@@ -150,32 +166,6 @@ rg_end_not_undoable_action(VALUE self)
 }
 
 /*
- * Method: not_undoable_action { ... }
- *
- * Marks the beginning of a not undoable action on the buffer, disabling the
- * undo manager, then calls the provided block of code.
- *
- * At the end of the block, marks the end of a not undoable action on the
- * buffer. When the last not undoable block is finished, the list of undo
- * actions is cleared and the undo manager is re-enabled.
- *
- * ((*Deprecated*)). Use Gtk::SourceView#begin_not_undoable_action{ ... } instead.
- *
- * Returns: the return value of the provided block.
- */
-static VALUE
-rg_not_undoable_action(VALUE self)
-{
-    VALUE block, ret;
-
-    block = rb_block_proc ();
-    gtk_source_buffer_begin_not_undoable_action (_SELF (self));
-    ret = rb_funcall (block, rb_intern ("call"), 0);
-    gtk_source_buffer_end_not_undoable_action (_SELF (self));
-    return ret;
-}
-
-/*
  * Method: create_source_mark(name=nil, category, where)
  * name: the name of the mark.
  * type: a string defining the mark type.
@@ -252,13 +242,14 @@ static VALUE
 rg_remove_source_marks(int argc, VALUE *argv, VALUE self)
 {
     VALUE start, end, category;
+    GtkTextIter start_iter, end_iter;
 
-    rb_scan_args (argc, argv, "21", &start, &end, &category);
+    rb_scan_args (argc, argv, "03", &start, &end, &category);
 
     gtk_source_buffer_remove_source_marks (_SELF (self),
-                            RVAL2GTKTEXTITER (start),
-                            RVAL2GTKTEXTITER (end),
-                            RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL (category));
+                                           RVAL2STARTITER(self, start, start_iter),
+                                           RVAL2ENDITER(self, end, end_iter),
+                                           RVAL2CSTR_ACCEPT_SYMBOL_ACCEPT_NIL (category));
 
     return self;
 }
@@ -308,8 +299,6 @@ Init_gtksource_buffer (VALUE mGtkSource)
     RG_DEF_METHOD_BANG(undo, 0);
     RG_DEF_METHOD(begin_not_undoable_action, 0);
     RG_DEF_METHOD(end_not_undoable_action, 0);
-    RG_DEF_METHOD(not_undoable_action, 0);
-    RG_DEF_ALIAS("non_undoable_action", "not_undoable_action");
     RG_DEF_METHOD(create_source_mark, -1);
     RG_DEF_METHOD(get_source_marks_at_line, -1);
     RG_DEF_METHOD(get_source_marks_at_iter, -1);

@@ -74,6 +74,7 @@ G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries_accept_nil(VALUE val
 
 G_GNUC_INTERNAL void Init_gdk_display(void);
 G_GNUC_INTERNAL void Init_gdk_dragcontext(void);
+G_GNUC_INTERNAL void Init_gdk_event(void);
 G_GNUC_INTERNAL void Init_gdk_screen(void);
 G_GNUC_INTERNAL void Init_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_aboutdialog(VALUE mGtk);

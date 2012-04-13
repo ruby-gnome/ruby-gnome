@@ -64,6 +64,9 @@ module Gtk
   define_deprecated_singleton_method :init_add, :warn => "Don't use this method."
   define_deprecated_singleton_method :quit_add, :warn => "Don't use this method."
   define_deprecated_singleton_method :quit_remove, :warn => "Don't use this method."
+  define_deprecated_singleton_method :get_event_widget, :warn => "Use 'Gdk::Event#event_widget'." do |_self, event|
+    event && event.event_widget
+  end
   define_deprecated_singleton_method :timeout_add, :warn => "Use 'GLib::Timeout.add'." do |_self, interval, &block|
     GLib::Timeout.add(interval, &block)
   end
@@ -123,6 +126,24 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method :pack_start_defaults, :pack_start
     define_deprecated_method :pack_end_defaults, :pack_end
+    define_deprecated_method_by_hash_args :pack_start,
+        'child, expand = true, fill = true, padding = 0',
+        'child, :expand => true, :fill => true, :padding => 0', 1 do
+        |_self, child, expand, fill, padding|
+      [child, {:expand => expand, :fill => fill, :padding => padding}]
+    end
+    define_deprecated_method_by_hash_args :pack_end,
+        'child, expand = true, fill = true, padding = 0',
+        'child, :expand => true, :fill => true, :padding => 0', 1 do
+        |_self, child, expand, fill, padding|
+      [child, {:expand => expand, :fill => fill, :padding => padding}]
+    end
+    define_deprecated_method_by_hash_args :set_child_packing,
+        'child, expand, fill, padding, pack_type',
+        'child, :expand => nil, :fill => nil, :padding => nil, :pack_type => nil', 1 do
+        |_self, child, expand, fill, padding, pack_type|
+      [child, {:expand => expand, :fill => fill, :padding => padding, :pack_type => pack_type}]
+    end
   end
 
   class Button
@@ -217,7 +238,8 @@ module Gtk
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_flags :Flags
-    define_deprecated_enums :ResponseType, 'RESPONSE'
+    define_deprecated_const :ResponseType, 'Gtk::ResponseType'
+    define_deprecated_enums 'Gtk::ResponseType', 'RESPONSE'
     define_deprecated_method :vbox, :child
     define_deprecated_method_by_hash_args :initialize,
         'title, parent, flags, *buttons',
@@ -524,7 +546,8 @@ module Gtk
   class MessageDialog
     extend GLib::Deprecatable
     define_deprecated_enums :ButtonsType, 'BUTTONS'
-    define_deprecated_enums :Type
+    define_deprecated_const :Type, 'Gtk::MessageType'
+    define_deprecated_enums 'Gtk::MessageType'
     define_deprecated_method_by_hash_args :initialize,
         'parent, flags, type, buttons_type, message',
         ':parent => nil, :flags => 0, :type => :info, :buttons_type => :ok, :message => ""' do
@@ -589,6 +612,18 @@ module Gtk
       define_deprecated_method "#{child}_#{prop}?", :warn => "Use '#{prop}' child property." do |_self|
         _self.child_get_property(_self.send(child), prop)
       end
+    end
+    define_deprecated_method_by_hash_args :pack1,
+        'child, resize, shrink',
+        'child, :resize => false, :shrink => true', 1 do
+        |_self, child, resize, shrink|
+      [child, {:resize => resize, :shrink => shrink}]
+    end
+    define_deprecated_method_by_hash_args :pack2,
+        'child, resize, shrink',
+        'child, :resize => true, :shrink => true', 1 do
+        |_self, child, resize, shrink|
+      [child, {:resize => resize, :shrink => shrink}]
     end
   end
 

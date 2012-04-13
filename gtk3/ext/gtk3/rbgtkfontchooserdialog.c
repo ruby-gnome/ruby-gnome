@@ -20,6 +20,8 @@
 
 #include "rbgtk3private.h"
 
+#if GTK_CHECK_VERSION(3, 2, 0)
+
 #define RG_TARGET_NAMESPACE cFontChooserDialog
 #define _SELF(self) (RVAL2GTKFONTCHOOSERDIALOG(self))
 
@@ -41,11 +43,14 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     return Qnil;
 }
+#endif
 
 void
 Init_gtk_fontchooserdialog(VALUE mGtk)
 {
+#if GTK_CHECK_VERSION(3, 2, 0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FONT_CHOOSER_DIALOG, "FontChooserDialog", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
+#endif
 }

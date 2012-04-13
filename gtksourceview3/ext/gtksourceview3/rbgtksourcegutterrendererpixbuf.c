@@ -37,4 +37,6 @@ Init_gtksource_gutterrendererpixbuf(VALUE mGtkSource)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_SOURCE_TYPE_GUTTER_RENDERER_PIXBUF, "GutterRendererPixbuf", mGtkSource);
 
     RG_DEF_METHOD(initialize, 0);
+
+    RG_REG_GLIBID_SETTER("stock-id");
 }
