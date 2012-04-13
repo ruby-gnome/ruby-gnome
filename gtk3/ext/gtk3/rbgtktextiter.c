@@ -130,8 +130,7 @@ rg_toggled_tags(VALUE self, VALUE toggled_on)
 static VALUE
 rg_child_anchor(VALUE self)
 {
-    GtkTextChildAnchor* anchor = gtk_text_iter_get_child_anchor(_SELF(self));
-    return anchor ? GOBJ2RVAL(anchor) : Qnil;
+    return GOBJ2RVAL(gtk_text_iter_get_child_anchor(_SELF(self)));
 }
 
 static VALUE
