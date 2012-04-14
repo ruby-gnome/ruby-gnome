@@ -25,6 +25,16 @@
 #define RG_TARGET_NAMESPACE cTextIter
 #define _SELF(s) (RVAL2GTKTEXTITER(s))
 
+#define RVAL2ITER(self, position) rval2iter(self, position)
+
+static GtkTextIter *
+rval2iter(VALUE self, VALUE position)
+{
+    if (!g_type_is_a(RVAL2GTYPE(position), GTK_TYPE_TEXT_ITER))
+        position = rb_funcall(rb_funcall(self, rb_intern("buffer"), 0), rb_intern("get_iter_at"), 1, position);
+    return RVAL2GTKTEXTITER(position);
+}
+
 static VALUE
 rg_buffer(VALUE self)
 {
@@ -79,25 +89,25 @@ rg_char(VALUE self)
 static VALUE
 rg_get_slice(VALUE self, VALUE rhs)
 {
-    return CSTR2RVAL(gtk_text_iter_get_slice(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_slice(_SELF(self), RVAL2ITER(self, rhs)));
 }
 
 static VALUE
 rg_get_text(VALUE self, VALUE rhs)
 {
-    return CSTR2RVAL(gtk_text_iter_get_text(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_text(_SELF(self), RVAL2ITER(self, rhs)));
 }
 
 static VALUE
 rg_get_visible_slice(VALUE self, VALUE rhs)
 {
-    return CSTR2RVAL(gtk_text_iter_get_visible_slice(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_visible_slice(_SELF(self), RVAL2ITER(self, rhs)));
 }
 
 static VALUE
 rg_get_visible_text(VALUE self, VALUE rhs)
 {
-    return CSTR2RVAL(gtk_text_iter_get_visible_text(_SELF(self), _SELF(rhs)));
+    return CSTR2RVAL(gtk_text_iter_get_visible_text(_SELF(self), RVAL2ITER(self, rhs)));
 }
 
 static VALUE
@@ -547,7 +557,7 @@ rg_forward_find_char(int argc, VALUE *argv, VALUE self)
     return CBOOL2RVAL(gtk_text_iter_forward_find_char(_SELF(self),
                                                       (GtkTextCharPredicate)char_predicate_func, 
                                                       (gpointer)func,
-                                                      NIL_P(limit) ? NULL : _SELF(limit)));
+                                                      NIL_P(limit) ? NULL : RVAL2ITER(self, limit)));
 }
 
 static VALUE
@@ -560,7 +570,7 @@ rg_backward_find_char(int argc, VALUE *argv, VALUE self)
     return CBOOL2RVAL(gtk_text_iter_backward_find_char(_SELF(self),
                                                        (GtkTextCharPredicate)char_predicate_func,
                                                        (gpointer)func,
-                                                       NIL_P(limit) ? NULL : _SELF(limit)));
+                                                       NIL_P(limit) ? NULL : RVAL2ITER(self, limit)));
 }
 
 static VALUE
@@ -574,7 +584,7 @@ rg_forward_search(int argc, VALUE *argv, VALUE self)
     ret = gtk_text_iter_forward_search(_SELF(self), RVAL2CSTR(str),
                                        RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                        &m_start, &m_end,
-                                       NIL_P(limit) ? NULL : _SELF(limit));
+                                       NIL_P(limit) ? NULL : RVAL2ITER(self, limit));
     return ret ? rb_ary_new3(2, GTKTEXTITER2RVAL(&m_start), GTKTEXTITER2RVAL(&m_end)) : Qnil;
 }
 
@@ -589,20 +599,20 @@ rg_backward_search(int argc, VALUE *argv, VALUE self)
     ret = gtk_text_iter_backward_search(_SELF(self), RVAL2CSTR(str),
                                         RVAL2GTKTEXTSEARCHFLAGS(flags), 
                                         &m_start, &m_end,
-                                        NIL_P(limit) ? NULL : _SELF(limit));
+                                        NIL_P(limit) ? NULL : RVAL2ITER(self, limit));
     return ret ? rb_ary_new3(2, GTKTEXTITER2RVAL(&m_start), GTKTEXTITER2RVAL(&m_end)) : Qnil;
 }
 
 static VALUE
 rg_operator_equal(VALUE self, VALUE other)
 {
-    return CBOOL2RVAL(gtk_text_iter_equal(_SELF(self), _SELF(other)));
+    return CBOOL2RVAL(gtk_text_iter_equal(_SELF(self), RVAL2ITER(self, other)));
 }
 
 static VALUE
 rg_operator_compare(VALUE self, VALUE rhs)
 {
-    return INT2NUM(gtk_text_iter_compare(_SELF(self), _SELF(rhs)));
+    return INT2NUM(gtk_text_iter_compare(_SELF(self), RVAL2ITER(self, rhs)));
 }
 
 static VALUE

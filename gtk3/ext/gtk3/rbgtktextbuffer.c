@@ -26,12 +26,90 @@
 #define _SELF(s) (RVAL2GTKTEXTBUFFER(s))
 
 static VALUE rb_mGtk;
-static ID id_tagtable;
 
+#define RVAL2ITER(self, position) RVAL2GTKTEXTITER(rg_get_iter_at(self, position))
 #define RVAL2STARTITER(self, iter, out) \
         rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_start_iter)
 #define RVAL2ENDITER(self, iter, out) \
         rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_end_iter)
+
+static VALUE
+rg_get_iter_at(VALUE self, VALUE position)
+{
+    GtkTextIter iter;
+
+    switch (TYPE(position)) {
+      case T_HASH:
+      {
+        VALUE line, offset, index, mark, anchor;
+        rbg_scan_options(position,
+                         "line", &line,
+                         "offset", &offset,
+                         "index", &index,
+                         "mark", &mark,
+                         "anchor", &anchor,
+                         NULL);
+
+        if (!NIL_P(line))
+            if (!NIL_P(offset))
+                gtk_text_buffer_get_iter_at_line_offset(_SELF(self),
+                                                        &iter,
+                                                        NUM2INT(line),
+                                                        NUM2INT(offset));
+            else if (!NIL_P(index))
+                gtk_text_buffer_get_iter_at_line_index(_SELF(self),
+                                                       &iter,
+                                                       NUM2INT(line),
+                                                       NUM2INT(index));
+            else
+                gtk_text_buffer_get_iter_at_line(_SELF(self),
+                                                 &iter,
+                                                 NUM2INT(line));
+        else if (!NIL_P(offset))
+            gtk_text_buffer_get_iter_at_offset(_SELF(self),
+                                               &iter,
+                                               NUM2INT(offset));
+        else if (!NIL_P(mark))
+            gtk_text_buffer_get_iter_at_mark(_SELF(self),
+                                             &iter,
+                                             RVAL2GTKTEXTMARK(mark));
+        else if (!NIL_P(anchor))
+            gtk_text_buffer_get_iter_at_child_anchor(_SELF(self),
+                                                     &iter,
+                                                     RVAL2GTKTEXTCHILDANCHOR(anchor));
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+        break;
+      }
+      case T_FIXNUM:
+      {
+        gtk_text_buffer_get_iter_at_offset(_SELF(self),
+                                           &iter,
+                                           NUM2INT(position));
+        break;
+      }
+      default:
+      {
+        GType gtype = RVAL2GTYPE(position);
+
+        if (g_type_is_a(gtype, GTK_TYPE_TEXT_ITER))
+            return position;
+        else if (g_type_is_a(gtype, GTK_TYPE_TEXT_MARK))
+            gtk_text_buffer_get_iter_at_mark(_SELF(self),
+                                             &iter,
+                                             RVAL2GTKTEXTMARK(position));
+        else if (g_type_is_a(gtype, GTK_TYPE_TEXT_CHILD_ANCHOR))
+            gtk_text_buffer_get_iter_at_child_anchor(_SELF(self),
+                                                     &iter,
+                                                     RVAL2GTKTEXTCHILDANCHOR(position));
+        else
+            rb_raise(rb_eArgError, "Invalid arguments.");
+        break;
+      }
+    }
+
+    return GTKTEXTITER2RVAL(&iter);
+}
 
 static GtkTextIter *
 rval2iter_with_default(VALUE *self, VALUE *iter, GtkTextIter *out,
@@ -41,7 +119,7 @@ rval2iter_with_default(VALUE *self, VALUE *iter, GtkTextIter *out,
         default_func(_SELF(*self), out);
         return out;
     } else {
-        return RVAL2GTKTEXTITER(*iter);
+        return RVAL2ITER(*self, *iter);
     }
 }
 
@@ -53,7 +131,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(table))
         G_INITIALIZE(self, gtk_text_buffer_new(NULL));
     else {
-        G_CHILD_SET(self, id_tagtable, table);
+        G_CHILD_SET(self, rb_intern("tagtable"), table);
         G_INITIALIZE(self, gtk_text_buffer_new(RVAL2GTKTEXTTAGTABLE(table)));
     }
     return Qnil;
@@ -82,7 +160,7 @@ txt_set_text(VALUE self, VALUE text)
 static VALUE
 rg_backspace(VALUE self, VALUE iter, VALUE interactive, VALUE default_editable)
 {
-    return CBOOL2RVAL(gtk_text_buffer_backspace(_SELF(self), RVAL2GTKTEXTITER(iter),
+    return CBOOL2RVAL(gtk_text_buffer_backspace(_SELF(self), RVAL2ITER(self, iter),
                                                 RVAL2CBOOL(interactive),
                                                 RVAL2CBOOL(default_editable)));
 }
@@ -101,7 +179,7 @@ rg_insert_interactive(VALUE self, VALUE iter, VALUE text, VALUE editable)
     StringValue(text);
 
     return CBOOL2RVAL(gtk_text_buffer_insert_interactive(_SELF(self),
-                                                         RVAL2GTKTEXTITER(iter),
+                                                         RVAL2ITER(self, iter),
                                                          RSTRING_PTR(text),
                                                          RSTRING_LEN(text),
                                                          RVAL2CBOOL(editable)));
@@ -121,8 +199,8 @@ rg_insert_interactive_at_cursor(VALUE self, VALUE text, VALUE editable)
 static VALUE
 rg_insert_range(VALUE self, VALUE iter, VALUE start, VALUE end)
 {
-    gtk_text_buffer_insert_range(_SELF(self), RVAL2GTKTEXTITER(iter),
-                                 RVAL2GTKTEXTITER(start), RVAL2GTKTEXTITER(end));
+    gtk_text_buffer_insert_range(_SELF(self), RVAL2ITER(self, iter),
+                                 RVAL2ITER(self, start), RVAL2ITER(self, end));
     return self;
 }
 
@@ -130,9 +208,9 @@ static VALUE
 rg_insert_range_interactive(VALUE self, VALUE iter, VALUE start, VALUE end, VALUE editable)
 {
     return CBOOL2RVAL(gtk_text_buffer_insert_range_interactive(_SELF(self),
-                                                               RVAL2GTKTEXTITER(iter),
-                                                               RVAL2GTKTEXTITER(start),
-                                                               RVAL2GTKTEXTITER(end),
+                                                               RVAL2ITER(self, iter),
+                                                               RVAL2ITER(self, start),
+                                                               RVAL2ITER(self, end),
                                                                RVAL2CBOOL(editable)));
 }
 
@@ -214,7 +292,7 @@ rg_slice(VALUE self)
 static VALUE
 rg_create_child_anchor(VALUE self, VALUE iter)
 {
-    VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2GTKTEXTITER(iter)));
+    VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_child_anchor(_SELF(self), RVAL2ITER(self, iter)));
     G_CHILD_ADD(self, ret);
     return ret;
 }
@@ -224,7 +302,7 @@ rg_create_mark(VALUE self, VALUE name, VALUE where, VALUE left_gravity)
 {
     VALUE ret = GOBJ2RVAL(gtk_text_buffer_create_mark(_SELF(self),
                                                       RVAL2CSTR_ACCEPT_NIL(name),
-                                                      RVAL2GTKTEXTITER(where),
+                                                      RVAL2ITER(self, where),
                                                       RVAL2CBOOL(left_gravity)));
     G_CHILD_ADD(self, ret);
     return ret;
@@ -233,7 +311,7 @@ rg_create_mark(VALUE self, VALUE name, VALUE where, VALUE left_gravity)
 static VALUE
 rg_add_mark(VALUE self, VALUE mark, VALUE where)
 {
-    gtk_text_buffer_add_mark(_SELF(self), RVAL2GTKTEXTMARK(mark), RVAL2GTKTEXTITER(where));
+    gtk_text_buffer_add_mark(_SELF(self), RVAL2GTKTEXTMARK(mark), RVAL2ITER(self, where));
     return self;
 }
 
@@ -273,14 +351,14 @@ rg_selection_bound(VALUE self)
 static VALUE
 rg_place_cursor(VALUE self, VALUE where)
 {
-    gtk_text_buffer_place_cursor(_SELF(self), RVAL2GTKTEXTITER(where));
+    gtk_text_buffer_place_cursor(_SELF(self), RVAL2ITER(self, where));
     return self;
 }
 
 static VALUE
 rg_select_range(VALUE self, VALUE ins, VALUE bound)
 {
-    gtk_text_buffer_select_range(_SELF(self), RVAL2GTKTEXTITER(ins), RVAL2GTKTEXTITER(bound));
+    gtk_text_buffer_select_range(_SELF(self), RVAL2ITER(self, ins), RVAL2ITER(self, bound));
     return self;
 }
 
@@ -322,7 +400,7 @@ rg_deserialize(VALUE self, VALUE content_buffer, VALUE format, VALUE iter, VALUE
     StringValue(data);
     ret = gtk_text_buffer_deserialize(_SELF(self), _SELF(content_buffer),
                                       RVAL2ATOM(format),
-                                      RVAL2GTKTEXTITER(iter),
+                                      RVAL2ITER(self, iter),
                                       (const guint8*)RSTRING_PTR(data),
                                       (gsize)RSTRING_LEN(data),
                                       &error);
@@ -495,7 +573,7 @@ rg_serialize(VALUE self, VALUE content_buffer, VALUE format, VALUE start, VALUE 
     gsize length;
     guint8* ret = gtk_text_buffer_serialize(_SELF(self), _SELF(content_buffer),
                                             RVAL2ATOM(format),
-                                            RVAL2GTKTEXTITER(start), RVAL2GTKTEXTITER(end),
+                                            RVAL2ITER(self, start), RVAL2ITER(self, end),
                                             &length);
     return RBG_STRING_SET_UTF8_ENCODING(rb_str_new((char*)ret, length));
 }
@@ -535,7 +613,7 @@ rg_paste_clipboard(VALUE self, VALUE clipboard, VALUE location, VALUE default_ed
 {
     G_CHILD_ADD(self, clipboard);
     gtk_text_buffer_paste_clipboard(_SELF(self), RVAL2GTKCLIPBOARD(clipboard),
-                                    NIL_P(location) ? NULL : RVAL2GTKTEXTITER(location),
+                                    NIL_P(location) ? NULL : RVAL2ITER(self, location),
                                     RVAL2CBOOL(default_editable));
     return self;
 }
@@ -594,9 +672,9 @@ static VALUE
 rg_move_mark(VALUE self, VALUE mark, VALUE where)
 {
     if (rb_obj_is_kind_of(mark, GTYPE2CLASS(GTK_TYPE_TEXT_MARK)))
-        gtk_text_buffer_move_mark(_SELF(self), RVAL2GTKTEXTMARK(mark), RVAL2GTKTEXTITER(where));
+        gtk_text_buffer_move_mark(_SELF(self), RVAL2GTKTEXTMARK(mark), RVAL2ITER(self, where));
     else
-        gtk_text_buffer_move_mark_by_name(_SELF(self), RVAL2CSTR(mark), RVAL2GTKTEXTITER(where));
+        gtk_text_buffer_move_mark_by_name(_SELF(self), RVAL2CSTR(mark), RVAL2ITER(self, where));
     return self;
 }
 
@@ -631,15 +709,15 @@ rg_insert(int argc, VALUE *argv, VALUE self)
     G_CHILD_ADD(self, where);
     G_CHILD_ADD(self, value);
     if (rb_obj_is_kind_of(value, GTYPE2CLASS(GDK_TYPE_PIXBUF))){
-        gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2GTKTEXTITER(where),
+        gtk_text_buffer_insert_pixbuf(_SELF(self), RVAL2ITER(self, where),
                                       RVAL2GDKPIXBUF(value));
     } else if (rb_obj_is_kind_of(value, GTYPE2CLASS(GTK_TYPE_TEXT_CHILD_ANCHOR))){
-        gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2GTKTEXTITER(where),
+        gtk_text_buffer_insert_child_anchor(_SELF(self), RVAL2ITER(self, where),
                                             RVAL2GTKTEXTCHILDANCHOR(value));
     } else {
-        start_offset = gtk_text_iter_get_offset(RVAL2GTKTEXTITER(where));
+        start_offset = gtk_text_iter_get_offset(RVAL2ITER(self, where));
         StringValue(value);
-        gtk_text_buffer_insert(_SELF(self), RVAL2GTKTEXTITER(where),
+        gtk_text_buffer_insert(_SELF(self), RVAL2ITER(self, where),
                                RSTRING_PTR(value), RSTRING_LEN(value));
 
         if (RARRAY_LEN(tags) == 0)
@@ -665,7 +743,7 @@ rg_insert(int argc, VALUE *argv, VALUE self)
                     return self;
                 }
             }
-            gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2GTKTEXTITER(where));
+            gtk_text_buffer_apply_tag(_SELF(self), tag, &start, RVAL2ITER(self, where));
         }
     }
     return self;
@@ -731,82 +809,6 @@ rg_remove_all_tags(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_get_iter_at(VALUE self, VALUE position)
-{
-    GtkTextIter iter;
-
-    switch (TYPE(position)) {
-      case T_HASH:
-      {
-        VALUE line, offset, index, mark, anchor;
-        rbg_scan_options(position,
-                         "line", &line,
-                         "offset", &offset,
-                         "index", &index,
-                         "mark", &mark,
-                         "anchor", &anchor,
-                         NULL);
-
-        if (!NIL_P(line))
-            if (!NIL_P(offset))
-                gtk_text_buffer_get_iter_at_line_offset(_SELF(self),
-                                                        &iter,
-                                                        NUM2INT(line),
-                                                        NUM2INT(offset));
-            else if (!NIL_P(index))
-                gtk_text_buffer_get_iter_at_line_index(_SELF(self),
-                                                       &iter,
-                                                       NUM2INT(line),
-                                                       NUM2INT(index));
-            else
-                gtk_text_buffer_get_iter_at_line(_SELF(self),
-                                                 &iter,
-                                                 NUM2INT(line));
-        else if (!NIL_P(offset))
-            gtk_text_buffer_get_iter_at_offset(_SELF(self),
-                                               &iter,
-                                               NUM2INT(offset));
-        else if (!NIL_P(mark))
-            gtk_text_buffer_get_iter_at_mark(_SELF(self),
-                                             &iter,
-                                             RVAL2GTKTEXTMARK(mark));
-        else if (!NIL_P(anchor))
-            gtk_text_buffer_get_iter_at_child_anchor(_SELF(self),
-                                                     &iter,
-                                                     RVAL2GTKTEXTCHILDANCHOR(anchor));
-        else
-            rb_raise(rb_eArgError, "Invalid arguments.");
-        break;
-      }
-      case T_FIXNUM:
-      {
-        gtk_text_buffer_get_iter_at_offset(_SELF(self),
-                                           &iter,
-                                           NUM2INT(position));
-        break;
-      }
-      default:
-      {
-        GType gtype = RVAL2GTYPE(position);
-
-        if (g_type_is_a(gtype, GTK_TYPE_TEXT_MARK))
-            gtk_text_buffer_get_iter_at_mark(_SELF(self),
-                                             &iter,
-                                             RVAL2GTKTEXTMARK(position));
-        else if (g_type_is_a(gtype, GTK_TYPE_TEXT_CHILD_ANCHOR))
-            gtk_text_buffer_get_iter_at_child_anchor(_SELF(self),
-                                                     &iter,
-                                                     RVAL2GTKTEXTCHILDANCHOR(position));
-        else
-            rb_raise(rb_eArgError, "Invalid arguments.");
-        break;
-      }
-    }
-
-    return GTKTEXTITER2RVAL(&iter);
-}
-
-static VALUE
 rg_bounds(VALUE self)
 {
     GtkTextIter start, end;
@@ -821,8 +823,6 @@ Init_gtk_textbuffer(VALUE mGtk)
 {
     rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
-
-    id_tagtable = rb_intern("tagtable");
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(line_count, 0);

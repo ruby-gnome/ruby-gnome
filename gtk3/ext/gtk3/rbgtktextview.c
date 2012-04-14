@@ -24,6 +24,16 @@
 #define RG_TARGET_NAMESPACE cTextView
 #define _SELF(self) (RVAL2GTKTEXTVIEW(self))
 
+#define RVAL2ITER(self, position) rval2iter(self, position)
+
+static GtkTextIter *
+rval2iter(VALUE self, VALUE position)
+{
+    if (!g_type_is_a(RVAL2GTYPE(position), GTK_TYPE_TEXT_ITER))
+        position = rb_funcall(rb_funcall(self, rb_intern("buffer"), 0), rb_intern("get_iter_at"), 1, position);
+    return RVAL2GTKTEXTITER(position);
+}
+
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -54,7 +64,7 @@ rg_scroll_to_mark(VALUE self, VALUE mark, VALUE within_margin, VALUE use_align, 
 static VALUE
 rg_scroll_to_iter(VALUE self, VALUE iter, VALUE within_margin, VALUE use_align, VALUE xalign, VALUE yalign)
 {
-    return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2GTKTEXTITER(iter), 
+    return CBOOL2RVAL(gtk_text_view_scroll_to_iter(_SELF(self), RVAL2ITER(self, iter), 
                                                    NUM2DBL(within_margin), RVAL2CBOOL(use_align), 
                                                    NUM2DBL(xalign), NUM2DBL(yalign)));
 }
@@ -90,7 +100,7 @@ static VALUE
 rg_get_iter_location(VALUE self, VALUE iter)
 {
     GdkRectangle rect;
-    gtk_text_view_get_iter_location(_SELF(self), RVAL2GTKTEXTITER(iter), &rect);
+    gtk_text_view_get_iter_location(_SELF(self), RVAL2ITER(self, iter), &rect);
     return GDKRECTANGLE2RVAL(&rect);
 }
 
@@ -107,7 +117,7 @@ static VALUE
 rg_get_line_yrange(VALUE self, VALUE iter)
 {
     int y, height;
-    gtk_text_view_get_line_yrange(_SELF(self), RVAL2GTKTEXTITER(iter), &y, &height);
+    gtk_text_view_get_line_yrange(_SELF(self), RVAL2ITER(self, iter), &y, &height);
 
     return rb_ary_new3(2, INT2NUM(y), INT2NUM(height));
 }
@@ -187,37 +197,37 @@ rg_get_border_window_size(VALUE self, VALUE wintype)
 static VALUE
 rg_forward_display_line(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_forward_display_line(_SELF(self), RVAL2GTKTEXTITER(iter)));
+    return CBOOL2RVAL(gtk_text_view_forward_display_line(_SELF(self), RVAL2ITER(self, iter)));
 }
 
 static VALUE
 rg_backward_display_line(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_backward_display_line(_SELF(self), RVAL2GTKTEXTITER(iter)));
+    return CBOOL2RVAL(gtk_text_view_backward_display_line(_SELF(self), RVAL2ITER(self, iter)));
 }
 
 static VALUE
 rg_forward_display_line_end(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_forward_display_line_end(_SELF(self), RVAL2GTKTEXTITER(iter)));
+    return CBOOL2RVAL(gtk_text_view_forward_display_line_end(_SELF(self), RVAL2ITER(self, iter)));
 }
 
 static VALUE
 rg_backward_display_line_start(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_backward_display_line_start(_SELF(self), RVAL2GTKTEXTITER(iter)));
+    return CBOOL2RVAL(gtk_text_view_backward_display_line_start(_SELF(self), RVAL2ITER(self, iter)));
 }
 
 static VALUE
 rg_starts_display_line(VALUE self, VALUE iter)
 {
-    return CBOOL2RVAL(gtk_text_view_starts_display_line(_SELF(self), RVAL2GTKTEXTITER(iter)));
+    return CBOOL2RVAL(gtk_text_view_starts_display_line(_SELF(self), RVAL2ITER(self, iter)));
 }
 
 static VALUE
 rg_move_visually(VALUE self, VALUE iter, VALUE count)
 {
-    return CBOOL2RVAL(gtk_text_view_move_visually(_SELF(self), RVAL2GTKTEXTITER(iter), NUM2INT(count)));
+    return CBOOL2RVAL(gtk_text_view_move_visually(_SELF(self), RVAL2ITER(self, iter), NUM2INT(count)));
 }
 
 static VALUE
@@ -262,7 +272,7 @@ rg_get_cursor_locations(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &iter);
     gtk_text_view_get_cursor_locations(_SELF(self),
-                                       NIL_P(iter) ? NULL : RVAL2GTKTEXTITER(iter),
+                                       NIL_P(iter) ? NULL : RVAL2ITER(self, iter),
                                        &strong, &weak);
 
     return rb_ary_new3(2, GDKRECTANGLE2RVAL(&strong), GDKRECTANGLE2RVAL(&weak));
