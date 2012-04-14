@@ -11,7 +11,7 @@ gtk_base = File.join(ruby_gnome2_base, "gtk2")
 
 [[glib_base, "glib2"],
  [atk_base, "atk"],
- [pango_base, "pangp"],
+ [pango_base, "pango"],
  [gdk_pixbuf_base, "gdk_pixbuf2"],
  [gtk_base, "gtk2"]].each do |target, module_name|
   if system("which make > /dev/null")
