@@ -788,7 +788,9 @@ rg_get_iter_at(VALUE self, VALUE position)
       {
         GType gtype = RVAL2GTYPE(position);
 
-        if (g_type_is_a(gtype, GTK_TYPE_TEXT_MARK))
+        if (g_type_is_a(gtype, GTK_TYPE_TEXT_ITER))
+            return position;
+        else if (g_type_is_a(gtype, GTK_TYPE_TEXT_MARK))
             gtk_text_buffer_get_iter_at_mark(_SELF(self),
                                              &iter,
                                              RVAL2GTKTEXTMARK(position));
