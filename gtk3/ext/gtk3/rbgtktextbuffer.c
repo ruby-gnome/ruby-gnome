@@ -26,7 +26,6 @@
 #define _SELF(s) (RVAL2GTKTEXTBUFFER(s))
 
 static VALUE rb_mGtk;
-static ID id_tagtable;
 
 #define RVAL2STARTITER(self, iter, out) \
         rval2iter_with_default(&(self), &(iter), &(out), gtk_text_buffer_get_start_iter)
@@ -53,7 +52,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(table))
         G_INITIALIZE(self, gtk_text_buffer_new(NULL));
     else {
-        G_CHILD_SET(self, id_tagtable, table);
+        G_CHILD_SET(self, rb_intern("tagtable"), table);
         G_INITIALIZE(self, gtk_text_buffer_new(RVAL2GTKTEXTTAGTABLE(table)));
     }
     return Qnil;
@@ -821,8 +820,6 @@ Init_gtk_textbuffer(VALUE mGtk)
 {
     rb_mGtk = mGtk;
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_BUFFER, "TextBuffer", mGtk);
-
-    id_tagtable = rb_intern("tagtable");
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(line_count, 0);
