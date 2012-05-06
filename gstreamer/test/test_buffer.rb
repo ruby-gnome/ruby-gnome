@@ -103,14 +103,22 @@ class TestBuffer < Test::Unit::TestCase
   end
 
   def test_copy_flags
-    assert_equal(Gst::Buffer::CopyFlags::FLAGS |
-                 Gst::Buffer::CopyFlags::TIMESTAMPS |
-                 Gst::Buffer::CopyFlags::CAPS,
-                 Gst::Buffer::CopyFlags::ALL)
+    all_flags =
+      Gst::Buffer::CopyFlags::FLAGS |
+      Gst::Buffer::CopyFlags::TIMESTAMPS |
+      Gst::Buffer::CopyFlags::CAPS
+    all_flags_shortcut =
+      Gst::Buffer::COPY_FLAGS |
+      Gst::Buffer::COPY_TIMESTAMPS |
+      Gst::Buffer::COPY_CAPS
+    if Gst::Buffer::CopyFlags.const_defined?(:QDATA)
+      all_flags |= Gst::Buffer::CopyFlags::QDATA
+      all_flags_shortcut |= Gst::Buffer::COPY_QDATA
+    end
 
-    assert_equal(Gst::Buffer::COPY_FLAGS |
-                 Gst::Buffer::COPY_TIMESTAMPS |
-                 Gst::Buffer::COPY_CAPS,
+    assert_equal(all_flags,
+                 Gst::Buffer::CopyFlags::ALL)
+    assert_equal(all_flags_shortcut,
                  Gst::Buffer::COPY_ALL)
   end
 
