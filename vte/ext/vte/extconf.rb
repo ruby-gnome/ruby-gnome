@@ -32,7 +32,11 @@ end
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id, 0, 12, 1) or exit(false)
+unless required_pkg_config_package(package_id,
+                                   :debian => "libvte-dev",
+                                   :redhat => "vte-devel")
+  exit(false)
+end
 
 ["glib2", "atk", "gtk2"].each do |package|
   directory = "#{package}#{version_suffix}"
