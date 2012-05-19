@@ -55,7 +55,11 @@ check_cairo(rcairo_options)
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "librsvg2-dev",
+                                   :redhat => "librsvg2-devel")
+  exit(false)
+end
 
 rsvg_header = "librsvg/rsvg.h"
 have_func("rsvg_set_default_dpi", rsvg_header)
