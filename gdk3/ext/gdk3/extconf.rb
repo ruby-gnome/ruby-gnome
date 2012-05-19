@@ -58,7 +58,6 @@ check_cairo(rcairo_options)
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package('gthread-2.0')
 PKGConfig.have_package(package_id) or exit 1
 
 have_header("st.h")
