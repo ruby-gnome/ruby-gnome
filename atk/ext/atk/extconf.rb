@@ -44,7 +44,11 @@ end
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "libatk1.0-dev",
+                                   :redhat => "atk-devel")
+  exit(false)
+end
 
 atk_header = "atk/atk.h"
 have_func('atk_action_get_localized_name', atk_header)
