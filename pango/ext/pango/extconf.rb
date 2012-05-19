@@ -58,7 +58,11 @@ check_cairo(rcairo_options)
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "libpango1.0-dev",
+                                   :redhat => "pango-devel")
+  exit(false)
+end
 PKGConfig.have_package('pangocairo')
 
 pango_header = "pango/pango.h"
