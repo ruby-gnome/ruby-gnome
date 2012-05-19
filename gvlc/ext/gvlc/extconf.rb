@@ -39,7 +39,10 @@ end
                      :target_build_dir => build_dir)
 end
 
-PKGConfig.have_package(package_id, 2, 0, 0) or exit(false)
+unless required_pkg_config_package([package_id, 2, 0, 0],
+                                   :debian => "libvlc-dev")
+  exit(false)
+end
 
 have_library('vlc')
 have_header('vlc/vlc.h')
