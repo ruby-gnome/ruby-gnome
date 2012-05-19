@@ -519,13 +519,18 @@ EOM
   succeeded
 end
 
-def required_pkg_config_package(package_id, native_package_info=nil)
-  return true if PKGConfig.have_package(package_id)
+def required_pkg_config_package(package_info, native_package_info=nil)
+  if package_info.is_a?(Array)
+    required_package_info = package_info
+  else
+    required_package_info = [package_info]
+  end
+  return true if PKGConfig.have_package(*required_package_info)
 
   native_package_info ||= {}
   return false unless install_missing_native_package(native_package_info)
 
-  PKGConfig.have_package(package_id)
+  PKGConfig.have_package(*required_package_info)
 end
 
 add_include_path = Proc.new do |dir_variable|
