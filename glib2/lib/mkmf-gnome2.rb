@@ -523,7 +523,7 @@ def required_pkg_config_package(package_id, native_package_info=nil)
   return true if PKGConfig.have_package(package_id)
 
   native_package_info ||= {}
-  return false install_missing_native_package(native_package_info)
+  return false unless install_missing_native_package(native_package_info)
 
   PKGConfig.have_package(package_id)
 end
