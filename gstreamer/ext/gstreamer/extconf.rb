@@ -41,8 +41,16 @@ end
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
-PKGConfig.have_package('gstreamer-plugins-base-0.10') or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "libgstreamer0.10-dev",
+                                   :redhat => "gstreamer-devel")
+  exit(false)
+end
+unless required_pkg_config_package("gstreamer-plugins-base-0.10",
+                                   :debian => "libgstreamer-plugins-base0.10-dev",
+                                   :redhat => "gstreamer-plugins-base-devel")
+  exit(false)
+end
 
 have_header("unistd.h")
 have_header("io.h")
