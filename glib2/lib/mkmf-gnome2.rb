@@ -468,7 +468,7 @@ def install_missing_native_package(native_package_info)
   end
 
   unless super_user?
-    sudo = find_executable("sudox")
+    sudo = find_executable("sudo")
   end
 
   installing_message = "installing '#{package}' native package... "
