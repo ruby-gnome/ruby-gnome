@@ -55,7 +55,11 @@ check_cairo(rcairo_options) or exit(false)
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "libgoocanvas-dev",
+                                   :fedora => "goocanvas-devel")
+  exit(false)
+end
 
 make_version_header("GOO_CANVAS", package_id, ".")
 
