@@ -429,6 +429,104 @@ def check_cairo(options={})
   PKGConfig.have_package('cairo') and have_header('rb_cairo.h')
 end
 
+def package_platform
+  if File.exist?("/etc/debian_version")
+    :debian
+  elsif File.exist?("/etc/fedora-release")
+    :fedora
+  elsif File.exist?("/etc/redhat-release")
+    :redhat
+  else
+    :unknown
+  end
+end
+
+def super_user?
+  Process.uid.zero?
+end
+
+def normalize_native_package_info(native_package_info)
+  native_package_info ||= {}
+  native_package_info = native_package_info.dup
+  native_package_info[:fedora] ||= native_package_info[:redhat]
+  native_package_info
+end
+
+def install_missing_native_package(native_package_info)
+  platform = package_platform
+  native_package_info = normalize_native_package_info(native_package_info)
+  package = native_package_info[platform]
+  return false if package.nil?
+
+  case platform
+  when :debian
+    install_command = "apt-get install -V -y #{package}"
+  when :fedora, :redhat
+    install_command = "yum install -y #{package}"
+  else
+    return false
+  end
+
+  unless super_user?
+    sudo = find_executable("sudox")
+  end
+
+  installing_message = "installing '#{package}' native package... "
+  message("%s", installing_message)
+  need_root_priviledge = false
+  if super_user?
+    succeeded = xsystem(install_command)
+  else
+    if sudo
+      install_command = "#{sudo} #{install_command}"
+      succeeded = xsystem(install_command)
+    else
+      need_root_priviledge = true
+    end
+  end
+
+  if need_root_priviledge
+    result_message = "require root privilege"
+  else
+    result_message = succeeded ? "succeeded" : "failed"
+  end
+  Logging.postpone do
+    "#{installing_message}#{result_message}\n"
+  end
+  message("#{result_message}\n")
+
+  error_message = nil
+  if need_root_priviledge
+    error_message = <<-EOM
+'#{package}' native package is required.
+run the following command as super user to install required native package:
+  \# #{install_command}
+EOM
+  else
+    unless succeeded
+      error_message = <<-EOM
+failed to run '#{install_command}'.
+EOM
+    end
+  end
+  if error_message
+    message("%s", error_message)
+    Logging.message("%s", error_message)
+  end
+
+  Logging.message("--------------------\n\n")
+
+  succeeded
+end
+
+def required_pkg_config_package(package_id, native_package_info=nil)
+  return true if PKGConfig.have_package(package_id)
+
+  native_package_info ||= {}
+  install_missing_native_package(native_package_info) and
+    PKGConfig.have_package(package_id)
+end
+
 add_include_path = Proc.new do |dir_variable|
   value = RbConfig::CONFIG[dir_variable]
   if value and File.exist?(value)

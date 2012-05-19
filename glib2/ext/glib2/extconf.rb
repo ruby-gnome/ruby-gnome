@@ -16,7 +16,11 @@ require 'mkmf-gnome2'
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "libglib2.0-dev",
+                                   :redhat => "glib2-devel")
+  exit(false)
+end
 PKGConfig.have_package('gthread-2.0')
 
 have_header("unistd.h")
