@@ -41,7 +41,12 @@ end
 
 setup_win32(module_name, base_dir)
 
-PKGConfig.have_package(package_id) or exit 1
+unless required_pkg_config_package(package_id,
+                                   :debian => "libgdk-pixbuf2.0-dev",
+                                   :redhat => "gtk2-devel",
+                                   :fedora => "gdk-pixbuf2-devel")
+  exit(false)
+end
 
 have_func("gdk_pixbuf_set_option", "gdk-pixbuf/gdk-pixbuf.h") do |src|
   "#define GDK_PIXBUF_ENABLE_BACKEND\n#{src}"
