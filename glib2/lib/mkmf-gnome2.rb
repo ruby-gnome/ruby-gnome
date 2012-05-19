@@ -523,8 +523,9 @@ def required_pkg_config_package(package_id, native_package_info=nil)
   return true if PKGConfig.have_package(package_id)
 
   native_package_info ||= {}
-  install_missing_native_package(native_package_info) and
-    PKGConfig.have_package(package_id)
+  return false install_missing_native_package(native_package_info)
+
+  PKGConfig.have_package(package_id)
 end
 
 add_include_path = Proc.new do |dir_variable|
