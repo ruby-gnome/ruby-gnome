@@ -602,7 +602,7 @@ static VALUE
 rg_set_cursor(VALUE self, VALUE cursor)
 {
     gdk_window_set_cursor(_SELF(self),
-                          (GdkCursor*)(NIL_P(cursor) ? NULL : RVAL2BOXED(cursor, GDK_TYPE_CURSOR)));
+                          RVAL2BOXED(cursor, GDK_TYPE_CURSOR));
     return self;
 }
 #endif
