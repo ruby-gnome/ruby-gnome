@@ -963,6 +963,12 @@ rg_composited_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_is_composited(_SELF(self)));
 }
+
+static VALUE
+rg_window(VALUE self)
+{
+    return GOBJ2RVAL(_SELF(self)->window);
+}
 #endif
 
 static VALUE
@@ -1184,6 +1190,7 @@ Init_gtk_widget(VALUE mGtk)
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(action, 0);
     RG_DEF_METHOD_P(composited, 0);
+    RG_DEF_METHOD(window, 0);
 #endif
     RG_DEF_METHOD(set_window, 1);
     RG_DEF_METHOD(allocation, 0);
