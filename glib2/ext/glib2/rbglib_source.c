@@ -54,9 +54,12 @@ GSource*    g_source_new                    (GSourceFuncs *source_funcs,
 */
 
 static VALUE
-rg_attach(VALUE self, VALUE context)
+rg_attach(int argc, VALUE *argv, VALUE self)
 {
-    return UINT2NUM(g_source_attach(_SELF(self), 
+    VALUE context;
+
+    rb_scan_args(argc, argv, "01", &context);
+    return UINT2NUM(g_source_attach(_SELF(self),
                                     RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT)));
 }
 
@@ -168,7 +171,7 @@ Init_glib_source(void)
 
     id_call = rb_intern("call");
 
-    RG_DEF_METHOD(attach, 1);
+    RG_DEF_METHOD(attach, -1);
 #if GLIB_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD_P(destroyed, 0);
 #endif
