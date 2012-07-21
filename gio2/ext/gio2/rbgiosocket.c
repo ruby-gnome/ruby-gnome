@@ -357,7 +357,7 @@ Init_gsocket(VALUE mGio)
         RG_DEF_METHOD(receive_from, -1);
         RG_DEF_METHOD(send, -1);
         RG_DEF_METHOD(send_to, -1);
-        RG_DEF_METHOD(close, -1);
+        RG_DEF_METHOD(close, 0);
         RG_DEF_METHOD_P(closed, 0);
         RG_DEF_METHOD(shutdown, 2);
         RG_DEF_METHOD_P(connected, 0);
