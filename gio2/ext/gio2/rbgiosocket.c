@@ -268,9 +268,9 @@ rg_create_source(int argc, VALUE *argv, VALUE self)
 
         rb_scan_args(argc, argv, "11", &condition, &cancellable);
 
-        return GOBJ2RVAL_UNREF(g_socket_create_source(_SELF(self),
-                                                      RVAL2GIOCONDITION(condition),
-                                                      RVAL2GCANCELLABLE(cancellable)));
+        return GSOURCE2RVAL(g_socket_create_source(_SELF(self),
+                                                   RVAL2GIOCONDITION(condition),
+                                                   RVAL2GCANCELLABLE(cancellable)));
 }
 
 static VALUE
