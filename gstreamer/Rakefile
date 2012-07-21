@@ -104,7 +104,7 @@ namespace :win32 do
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
       :label => "GStreamer plugins (good)",
       :version => "0.10.30",
-      :configure_args => ["--disable-gconf"],
+      :configure_args => ["--disable-gconf", "--disable-shout2"],
     },
     {
       :name => "gst-plugins-bad",
