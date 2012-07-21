@@ -1109,6 +1109,7 @@ union       GDoubleIEEE754;
     Init_glib_source();
     Init_glib_main_context();
     Init_glib_poll_fd();
+    Init_glib_io_constants();
     Init_glib_io_channel();
     Init_glib_io_channelerror();
     Init_glib_io_channel_win32_socket();

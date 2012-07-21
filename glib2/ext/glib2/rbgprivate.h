@@ -131,6 +131,7 @@ G_GNUC_INTERNAL void Init_glib_main_loop(void);
 G_GNUC_INTERNAL void Init_glib_main_context(void);
 G_GNUC_INTERNAL void Init_glib_source(void);
 G_GNUC_INTERNAL void Init_glib_poll_fd(void);
+G_GNUC_INTERNAL void Init_glib_io_constants(void);
 G_GNUC_INTERNAL void Init_glib_io_channel(void);
 G_GNUC_INTERNAL void Init_glib_io_channelerror(void);
 G_GNUC_INTERNAL void Init_glib_io_channel_win32_socket(void);

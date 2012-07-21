@@ -799,12 +799,9 @@ Init_glib_io_channel(void)
     rb_define_const(RG_TARGET_NAMESPACE, "STATUS_AGAIN", INT2NUM(G_IO_STATUS_AGAIN));
 
     /* GIOCondition */
-    rb_define_const(RG_TARGET_NAMESPACE, "IN", INT2NUM(G_IO_IN));
-    rb_define_const(RG_TARGET_NAMESPACE, "OUT", INT2NUM(G_IO_OUT));
-    rb_define_const(RG_TARGET_NAMESPACE, "PRI", INT2NUM(G_IO_PRI));
-    rb_define_const(RG_TARGET_NAMESPACE, "ERR", INT2NUM(G_IO_ERR));
-    rb_define_const(RG_TARGET_NAMESPACE, "HUP", INT2NUM(G_IO_HUP));
-    rb_define_const(RG_TARGET_NAMESPACE, "NVAL", INT2NUM(G_IO_NVAL));
+    /* Deprecated. Just for bacakward compatibility. Use
+     * GLib::IOCondition::* instead. */
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_IO_CONDITION, "G_IO_");
 
     /* GIOFlags */
     rb_define_const(RG_TARGET_NAMESPACE, "FLAG_APPEND", INT2NUM(G_IO_FLAG_APPEND));
