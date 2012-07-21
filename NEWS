@@ -2,6 +2,60 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.4: 2012-07-21
+
+This is a easy to install release!
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Supported automatic required native packages install.
+
+==== Ruby/GLib2
+
+  * Improvements
+    * mkenums: Supported "/* < flags > */" tag.
+    * mkenums: Supported two or more upper case characters such as "IO".
+      * Before: GIOStatus -> g_iostatus
+      * After:  GIOStatus -> g_io_status
+    * GIOCondition: Changed to GLib::Boxed object from integer.
+    * GLib::Source#attach doesn't require context.
+
+  * Fixes
+    * Fixed wrong type conversion for GIOCondition.
+
+==== Ruby/GIO2
+
+  * Improvements
+    * Gio::Socket#create_source: Supported callback.
+
+  * Fixes
+    * Fixed return values.
+    * Fixed wrong type conversions.
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Re-supported GTK+ 2.10.0. [GitHub:115] [Patch by Grant Schoep]
+
+  * Fixes
+    * Fixed a typo in test script.
+      [GitHub:109] [Reported by kimura wataru]
+
+==== Ruby/GStreamer
+
+  * Fixes
+    * Fixed a test failure with GStreamer 0.10.36.
+      [GitHub:111] [Reported by mtasaka]
+
+=== Thanks
+
+  * kimura wataru
+  * mtasaka
+  * Grant Schoep
+
 == Ruby-GNOME2 1.1.3: 2012-04-08
 
 This is a bug fix release of 1.1.2.
