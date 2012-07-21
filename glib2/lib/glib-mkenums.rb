@@ -21,7 +21,7 @@ module GLib
       @EnumName = name
       @g_type_prefix = g_type_prefix
       @constants = []
-      @enum_name = @EnumName.sub(/^[A-Z]/){|v| v.downcase}.gsub(/[A-Z]+/){|v| "_" + v.downcase}.sub(/(^_|_$)/, "")
+      @enum_name = to_snail_case(@EnumName)
       @ENUM_NAME = @enum_name.upcase
       @ENUM_SHORT = @ENUM_NAME.sub(/^#{@g_type_prefix.sub(/_TYPE.*$/, "")}/, "").sub(/^_/, "")
 
@@ -92,6 +92,21 @@ GType #{@enum_name}_get_type (void);
 #define #{@g_type_prefix}#{@ENUM_SHORT} (#{@enum_name}_get_type())]
     end
 
+    private
+    def to_snail_case(name)
+      prefix_processed_name = name.sub(/^[A-Z]/) do |prefix|
+        prefix.downcase
+      end
+      snail_cased_name = prefix_processed_name.gsub(/[A-Z]+/) do |upper_case|
+        down_case = upper_case.downcase
+        if down_case.size == 1
+          "_#{down_case}"
+        else
+          "_#{down_case[0..-2]}_#{down_case[-1..-1]}"
+        end
+      end
+      snail_cased_name.sub(/(^_|_$)/, "")
+    end
 
     def self.parse(data, g_type_prefix, options={})
       options ||= {}
