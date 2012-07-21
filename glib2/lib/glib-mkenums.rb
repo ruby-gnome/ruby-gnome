@@ -97,17 +97,18 @@ GType #{@enum_name}_get_type (void);
       options ||= {}
       enums = []
       data.force_encoding("utf-8") if data.respond_to?(:force_encoding)
-      data.scan(/^\s*typedef\s+enum\s*
+      data.scan(/^\s*typedef\s+enum\s*(\/\*<\s*flags\s*>\*\/)?\s*
                 \{?\s*(.*?)
-                \}\s*(\w+);/mx){|constants, name|
+                \}\s*(\w+);/mx) do |force_flags, constants, name|
         enum_options = {}
+        enum_options[:force_flags] = !force_flags.nil?
         force_flags_patterns = [(options[:force_flags] || [])].flatten
         if force_flags_patterns.any? {|pattern| pattern === name}
           enum_options[:force_flags] = true
         end
         enum = new(name, constants, g_type_prefix, enum_options)
         enums << enum
-      }
+      end
       enums
     end
   end
