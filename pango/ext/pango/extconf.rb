@@ -60,7 +60,9 @@ setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libpango1.0-dev",
-                                   :redhat => "pango-devel")
+                                   :redhat => "pango-devel",
+                                   :homebrew => "pango",
+                                   :macports => "pango")
   exit(false)
 end
 PKGConfig.have_package('pangocairo')

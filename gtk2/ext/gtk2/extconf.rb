@@ -60,7 +60,9 @@ setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libgtk2.0-dev",
-                                   :redhat => "gtk2-devel")
+                                   :redhat => "gtk2-devel",
+                                   :homebrew => "gtk+",
+                                   :macports => "gtk2")
   exit(false)
 end
 

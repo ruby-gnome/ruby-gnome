@@ -57,7 +57,9 @@ setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "librsvg2-dev",
-                                   :redhat => "librsvg2-devel")
+                                   :redhat => "librsvg2-devel",
+                                   :homebrew => "librsvg",
+                                   :macports => "librsvg")
   exit(false)
 end
 

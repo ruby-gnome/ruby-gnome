@@ -43,12 +43,16 @@ setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libgstreamer0.10-dev",
-                                   :redhat => "gstreamer-devel")
+                                   :redhat => "gstreamer-devel",
+                                   :homebrew => "gstreamer",
+                                   :macports => "gstreamer")
   exit(false)
 end
 unless required_pkg_config_package("gstreamer-plugins-base-0.10",
                                    :debian => "libgstreamer-plugins-base0.10-dev",
-                                   :redhat => "gstreamer-plugins-base-devel")
+                                   :redhat => "gstreamer-plugins-base-devel",
+                                   :homebrew => "gst-plugins-base",
+                                   :macports => "gst-plugins-base")
   exit(false)
 end
 

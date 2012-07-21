@@ -46,7 +46,9 @@ setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libatk1.0-dev",
-                                   :redhat => "atk-devel")
+                                   :redhat => "atk-devel",
+                                   :homebrew => "atk",
+                                   :macports => "atk")
   exit(false)
 end
 
