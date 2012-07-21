@@ -24,6 +24,8 @@
 #define RG_TARGET_NAMESPACE cSocket
 #define _SELF(value) RVAL2GSOCKET(value)
 
+static ID id_call;
+
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
@@ -261,16 +263,32 @@ rg_connected_p(VALUE self)
         return (g_socket_is_connected(_SELF(self)));
 }
 
+static gboolean
+source_func(GSocket *socket, GIOCondition condition, gpointer user_data)
+{
+        VALUE callback = GPOINTER_TO_UINT(user_data);
+        return RVAL2CBOOL(rb_funcall(callback, id_call, 2,
+                                     GOBJ2RVAL(socket),
+                                     GIOCONDITION2RVAL(condition)));
+}
+
 static VALUE
 rg_create_source(int argc, VALUE *argv, VALUE self)
 {
-        VALUE condition, cancellable;
+        VALUE condition, cancellable, callback;
+        GSource *source;
 
-        rb_scan_args(argc, argv, "11", &condition, &cancellable);
+        rb_scan_args(argc, argv, "11&", &condition, &cancellable, &callback);
 
-        return GSOURCE2RVAL(g_socket_create_source(_SELF(self),
-                                                   RVAL2GIOCONDITION(condition),
-                                                   RVAL2GCANCELLABLE(cancellable)));
+        source = g_socket_create_source(_SELF(self),
+                                        RVAL2GIOCONDITION(condition),
+                                        RVAL2GCANCELLABLE(cancellable));
+        G_RELATIVE(self, callback);
+        g_source_set_callback(source,
+                              (GSourceFunc)source_func,
+                              GUINT_TO_POINTER(callback),
+                              NULL);
+        return GSOURCE2RVAL(source);
 }
 
 static VALUE
@@ -332,6 +350,8 @@ void
 Init_gsocket(VALUE mGio)
 {
         VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOCKET, "Socket", mGio);
+
+        id_call = rb_intern("call");
 
         G_DEF_CLASS(G_TYPE_SOCKET_FAMILY, "Family", RG_TARGET_NAMESPACE);
         G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_SOCKET_FAMILY, "G_SOCKET_");
