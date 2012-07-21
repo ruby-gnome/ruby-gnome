@@ -294,7 +294,7 @@ namespace :gem do
         Dir.chdir(package) do
           tasks = ["cross", "native", "gem"]
           tasks.unshift("win32:build") if package == "gstreamer"
-          ruby("-S", "rake", "RUBY_CC_VERSION=1.8.7:1.9.2", *tasks)
+          ruby("-S", "rake", "RUBY_CC_VERSION=1.8.7:1.9.3", *tasks)
         end
       end
     end
