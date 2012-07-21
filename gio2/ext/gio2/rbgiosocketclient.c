@@ -109,7 +109,7 @@ rg_connect_to_host(int argc, VALUE *argv, VALUE self)
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return self;
+        return GOBJ2RVAL_UNREF(connection);
 }
 
 static VALUE
@@ -157,7 +157,7 @@ rg_connect_to_service(int argc, VALUE *argv, VALUE self)
         if (connection == NULL)
                 rbgio_raise_error(error);
 
-        return self;
+        return GOBJ2RVAL_UNREF(connection);
 }
 
 static VALUE
