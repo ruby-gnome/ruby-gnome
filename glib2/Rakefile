@@ -8,7 +8,20 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = [["pkg-config", ">= 0"]]
   _package.dependency.gem.development = [["test-unit", ">= 2"]]
   _package.win32.packages = ["glib"]
-  _package.win32.dependencies = ["gettext-runtime"]
+  _package.win32.dependencies = ["gettext-runtime", "gnutls"]
+  _package.win32.build_packages = [
+    {
+      :name => "glib-networking",
+      :download_site => :gnome,
+      :label => "glib-networking",
+      :version => "2.28.7",
+      :configure_args => ["--without-libproxy",
+                          "--without-gnome-proxy",
+                          "--without-ca-certificates"],
+      :patches => ["glib-networking-2.28.7-fix-with-gnome-proxy.diff",
+                   "glib-networking-2.28.7-support-gnutls-2.4.2.diff"],
+      :need_autoreconf => true,
+    },
+  ]
 end
 package.define_tasks
-
