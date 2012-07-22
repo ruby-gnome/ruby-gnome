@@ -9,7 +9,8 @@ require 'find'
 require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/extensiontask'
-require 'gnome2-win32-binary-builder'
+require 'gnome2-win32-binary-download-task'
+require 'gnome2-win32-binary-build-task'
 
 class GNOME2Package
   include Rake::DSL
@@ -133,22 +134,7 @@ class GNOME2Package
     end
 
     def define_win32_download_task
-      namespace :win32 do
-        namespace :downloader do
-          task :before do
-            $LOAD_PATH.unshift("#{@glib2_root_dir}/lib")
-            require 'gnome2-win32-binary-downloader'
-          end
-          task :download do
-            GNOME2Win32BinaryDownloader.download(@win32_configuration.to_hash)
-          end
-          task :after
-        end
-        desc "download Windows binaries"
-        task :download => ["win32:downloader:before",
-                           "win32:downloader:download",
-                           "win32:downloader:after"]
-      end
+      GNOME2Win32BinaryDownloadTask.new(@win32_configuration)
     end
 
     def define_win32_build_task

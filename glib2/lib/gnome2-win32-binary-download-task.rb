@@ -1,4 +1,4 @@
-# Copyright(C) 2010 Ruby-GNOME2 Project.
+# Copyright(C) 2010-2012 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 
@@ -6,25 +6,69 @@ require 'open-uri'
 require 'rubygems'
 require 'mechanize'
 
-class GNOME2Win32BinaryDownloader
-  class << self
-    def download(options)
-      downloader = new(options)
-      packages = options[:packages] || [options[:package]]
-      packages.compact.each do |package|
-        downloader.download_package(package)
+class GNOME2Win32BinaryDownloadTask
+  include Rake::DSL
+
+  URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries/win32"
+  def initialize(configuration)
+    @configuration = configuration
+    define
+  end
+
+  private
+  def define
+    namespace :win32 do
+      namespace :downloader do
+        task :before
+
+        download_tasks = []
+        namespace :download do
+          directory dist_dir
+          task :prepare => [dist_dir]
+
+          packages.each do |package|
+            desc "download #{package}"
+            task package => [:prepare] do
+              download_package(package)
+            end
+            download_tasks << package
+          end
+
+          dependencies.each do |dependency|
+            name, version = dependency
+            desc "download #{name}"
+            task name => [:prepare] do
+              download_dependency(dependency)
+            end
+            download_tasks << name
+          end
+        end
+
+        download_tasks = download_tasks.collect do |task|
+          "win32:downloader:download:#{task}"
+        end
+        desc "download Windows binaries into #{dist_dir}"
+        task :download => download_tasks
+
+        task :after
       end
-      dependencies = options[:dependencies] || [options[:dependency]]
-      dependencies.compact.each do |dependency|
-        downloader.download_dependency(dependency)
-      end
+      desc "download Windows binaries"
+      task :download => ["win32:downloader:before",
+                         "win32:downloader:download",
+                         "win32:downloader:after"]
     end
   end
 
-  URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries/win32"
-  def initialize(options={})
-    output_dir = options[:relative_binary_dir] || File.join("vendor", "local")
-    @output_dir = File.expand_path(output_dir)
+  def dist_dir
+    @configuration.absolute_binary_dir
+  end
+
+  def packages
+    @configuration.packages
+  end
+
+  def dependencies
+    @configuration.dependencies
   end
 
   def download_package(package)
@@ -114,8 +158,7 @@ class GNOME2Win32BinaryDownloader
 
   def click_zip_link(link)
     zip = link.click
-    FileUtils.mkdir_p(@output_dir)
-    Dir.chdir(@output_dir) do
+    Dir.chdir(dist_dir) do
       open(zip.filename, "wb") do |file|
         file.print(zip.body)
       end
