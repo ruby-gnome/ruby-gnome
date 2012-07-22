@@ -70,6 +70,7 @@ class GNOME2Win32BinaryBuildTask
         ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
           File.expand_path(path)
         end.join(":")
+        ENV["PKG_CONFIG_LIBDIR"] = rcairo_win32_pkgconfig_path
       end
 
       build_packages.each do |package|
@@ -161,6 +162,10 @@ class GNOME2Win32BinaryBuildTask
 
   def rcairo_win32_dir
     package_root_dir.parent.parent + "rcairo.win32"
+  end
+
+  def rcairo_win32_pkgconfig_path
+    "#{rcairo_win32_dir}/vendor/local/lib/pkgconfig"
   end
 
   def rcairo_win32_include_path

@@ -9,36 +9,11 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = ["glib2"]
   _package.win32.packages = ["libsoup"]
   _package.win32.dependencies = ["jpeg", "libxml2"]
-  _package.post_install_message = "This library is experimental."
-  _package.cross_compiling do |spec|
-    if /mingw|mswin/ =~ spec.platform.to_s
-      spec.add_runtime_dependency("cairo", ">= 1.10.1")
-      spec.add_runtime_dependency("pango", ">= #{_package.version}")
-      spec.add_runtime_dependency("gdk_pixbuf2", ">= #{_package.version}")
-    end
-  end
-end
-package.define_tasks
-
-namespace :win32 do
-  host = "i686-w64-mingw32"
-
-  dist_dir = Pathname.new("vendor/local").expand_path
-  license_dir = dist_dir + "share" + "license"
-  tmp_dir = Pathname.new("tmp").expand_path
-  download_dir = tmp_dir + "download"
-  patch_dir = (Pathname.new(__FILE__).dirname + "patches").expand_path
-
-  rcairo_win32_path = ENV["RCAIRO_WIN32_PATH"] || "../../rcairo.win32"
-  rcairo_win32_path = File.expand_path(rcairo_win32_path)
-  rcairo_win32_include_path = "#{rcairo_win32_path}/vendor/local/include"
-  rcairo_win32_lib_path = "#{rcairo_win32_path}/vendor/local/lib"
-
   xiph_download_url_base = "http://downloads.xiph.org/releases"
   freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
   sf_net_download_url_base = "http://downloads.sourceforge.net/project"
   libmad_version = "0.15.1b"
-  packages = [
+  _package.win32.build_packages = [
     {
       :name => "libogg",
       :download_base_url => "#{xiph_download_url_base}/ogg",
@@ -126,7 +101,7 @@ namespace :win32 do
       :label => "GStreamer ffmpeg",
       :version => "0.10.12",
       :configure_args => ["--with-ffmpeg-extra-configure=" +
-                            "--cross-prefix=#{host}- " +
+                            "--cross-prefix=#{_package.win32.build_host}- " +
                             "--target-os=mingw32 " +
                             "--arch=i686 " +
                             "--pkg-config=pkg-config"],
@@ -141,99 +116,16 @@ namespace :win32 do
       ],
     },
   ]
-
-  namespace :download do
-    packages.each do |_package|
-      base = "#{_package[:name]}-#{_package[:version]}"
-      tar_gz = "#{base}.tar.gz"
-      tar_gz_url = "#{_package[:download_base_url]}/#{tar_gz}"
-      tar_gz_full_path = download_dir + tar_gz
-
-      desc "Download #{_package[:label]} into #{download_dir}."
-      task _package[:name] => tar_gz_full_path.to_s
-
-      directory_path = tar_gz_full_path.dirname
-      directory directory_path.to_s
-      file tar_gz_full_path.to_s => directory_path.to_s do
-        rake_output_message "downloading... #{tar_gz_url}"
-        open(tar_gz_url) do |downloaded_tar_gz|
-          tar_gz_full_path.open("wb") do |tar_gz_file|
-            tar_gz_file.print(downloaded_tar_gz.read)
-          end
-        end
-      end
+  _package.win32.build_dependencies = [
+    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2",
+  ]
+  _package.post_install_message = "This library is experimental."
+  _package.cross_compiling do |spec|
+    if /mingw|mswin/ =~ spec.platform.to_s
+      spec.add_runtime_dependency("cairo", ">= 1.10.1")
+      spec.add_runtime_dependency("pango", ">= #{_package.version}")
+      spec.add_runtime_dependency("gdk_pixbuf2", ">= #{_package.version}")
     end
   end
-
-  namespace :build do
-    task :prepare do
-      depended_packages = ["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
-      pkg_config_path = (["gstreamer"] + depended_packages).collect do |_package|
-        "../#{_package}/vendor/local/lib/pkgconfig"
-      end
-      ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
-        File.expand_path(path)
-      end.join(":")
-      ENV["PKG_CONFIG_LIBDIR"] = "#{rcairo_win32_path}/vendor/local/lib/pkgconfig"
-    end
-
-    packages.each do |_package|
-      desc "Build #{_package[:label]} and install it into #{dist_dir}."
-      task _package[:name] => [:prepare, "win32:download:#{_package[:name]}"] do
-        package_tmp_dir = tmp_dir + _package[:name]
-        rm_rf(package_tmp_dir)
-        mkdir_p(package_tmp_dir)
-
-        base = "#{_package[:name]}-#{_package[:version]}"
-        tar_gz = "#{base}.tar.gz"
-        tar_gz_full_path = download_dir + tar_gz
-        Dir.chdir(package_tmp_dir.to_s) do
-          sh("tar", "xzf", tar_gz_full_path.to_s) or exit(false)
-        end
-
-        Dir.chdir((package_tmp_dir + base).to_s) do
-          (_package[:patches] || []).each do |patch|
-            sh("patch -p1 < #{patch_dir}/#{patch}")
-          end
-          sh("./autogen.sh") if _package[:need_autogen]
-          sh("autoreconf -i") if _package[:need_autoreconf]
-          sh("./configure",
-             "CPPFLAGS=-I#{rcairo_win32_include_path} -I#{dist_dir + 'include'}",
-             "LDFLAGS=-L#{rcairo_win32_lib_path} -L#{dist_dir + 'lib'}",
-             "--prefix=#{dist_dir}",
-             "--host=#{host}",
-             *_package[:configure_args]) or exit(false)
-          common_make_args = []
-          common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
-          build_make_args = common_make_args.dup
-          install_make_args = common_make_args.dup
-          make_n_jobs = ENV["MAKE_N_JOBS"]
-          build_make_args << "-j#{make_n_jobs}" if make_n_jobs
-          ENV["GREP_OPTIONS"] = "--text"
-          sh("nice", "make", *build_make_args) or exit(false)
-          sh("make", "install", *install_make_args) or exit(false)
-
-          package_license_dir = license_dir + _package[:name]
-          mkdir_p(package_license_dir)
-          package_license_files = ["AUTHORS", "COPYING", "COPYING.LIB"]
-          package_license_files = package_license_files.reject do |file|
-            not File.exist?(file)
-          end
-          cp(package_license_files, package_license_dir)
-          bundled_packages = _package[:bundled_packages] || []
-          bundled_packages.each do |bundled_package|
-            bundled_package_license_dir = license_dir + bundled_package[:name]
-            mkdir_p(bundled_package_license_dir)
-            license_files = bundled_package[:license_files].collect do |file|
-              File.join(bundled_package[:path], file)
-            end
-            cp(license_files, bundled_package_license_dir)
-          end
-        end
-      end
-    end
-  end
-
-  desc "Build GStreamer binaries"
-  task :build => packages.collect {|_package| "win32:build:#{_package[:name]}"}
 end
+package.define_tasks
