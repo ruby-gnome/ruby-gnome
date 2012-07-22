@@ -113,6 +113,7 @@ Init_gio(void)
     Init_gtcpconnection(RG_TARGET_NAMESPACE);
     Init_gthemedicon(RG_TARGET_NAMESPACE);
     Init_gthreadedsocketservice(RG_TARGET_NAMESPACE);
+    Init_gtlscertificate(RG_TARGET_NAMESPACE);
     Init_gunixconnection(RG_TARGET_NAMESPACE);
     Init_gunixfdlist(RG_TARGET_NAMESPACE);
     Init_gunixfdmessage(RG_TARGET_NAMESPACE);

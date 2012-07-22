@@ -126,6 +126,7 @@ G_GNUC_INTERNAL void Init_gsrvtarget(VALUE glib);
 G_GNUC_INTERNAL void Init_gtcpconnection(VALUE glib);
 G_GNUC_INTERNAL void Init_gthreadedsocketservice(VALUE glib);
 G_GNUC_INTERNAL void Init_gthemedicon(VALUE glib);
+G_GNUC_INTERNAL void Init_gtlscertificate(VALUE glib);
 G_GNUC_INTERNAL void Init_gunixconnection(VALUE glib);
 G_GNUC_INTERNAL void Init_gunixfdlist(VALUE glib);
 G_GNUC_INTERNAL void Init_gunixfdmessage(VALUE glib);
