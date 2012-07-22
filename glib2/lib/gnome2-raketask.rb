@@ -9,19 +9,21 @@ require 'find'
 require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/extensiontask'
+require 'gnome2-win32-binary-builder'
 
 class GNOME2Package
   include Rake::DSL
 
   attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
+  attr_reader :root_dir
   def initialize
     initialize_variables
     initialize_configurations
     file, line, method = caller[1].scan(/^(.*):(\d+)(?::.*`(.*)')?\Z/).first
-    @package_root = File.dirname(file)
-    @glib2_root = File.expand_path("#{@package_root}/../glib2")
-    @packages = FileList["#{File.dirname(@package_root)}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
-    @name = File.basename(@package_root)
+    @root_dir = File.dirname(file)
+    @glib2_root_dir = File.expand_path("#{@root_dir}/../glib2")
+    @packages = FileList["#{File.dirname(@root_dir)}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
+    @name = File.basename(@root_dir)
     @cross_compiling_hooks = []
     yield(self) if block_given?
   end
@@ -55,7 +57,7 @@ class GNOME2Package
 
   def guess_version
     versions = {}
-    File.open("#{@glib2_root}/ext/glib2/rbglib.h") do |rbglib_h|
+    File.open("#{@glib2_root_dir}/ext/glib2/rbglib.h") do |rbglib_h|
       rbglib_h.each_line do |line|
         if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
           versions[$1.downcase] = $2.to_i
@@ -104,19 +106,20 @@ class GNOME2Package
   end
 
   def define_win32_tasks
-    define_win32_build_task
+    define_win32_extension_task
     define_win32_download_task
+    define_win32_build_task
   end
 
-  def define_win32_build_task
+  def define_win32_extension_task
     Rake::ExtensionTask.new(@name, @spec) do |ext|
       ext.cross_compile = true
       ext.cross_compiling do |spec|
         if /mingw|mswin/ =~ spec.platform.to_s
-          win32_dir = File.join("vendor", "local")
+          win32_binary_dir = @win32_configuration.relative_binary_dir
           win32_files = []
-          if File.exist?(win32_dir)
-            Find.find(win32_dir) do |file|
+          if File.exist?(win32_binary_dir)
+            Find.find(win32_binary_dir) do |file|
               next if /\.zip\z/ =~ file
               win32_files << file
             end
@@ -133,7 +136,7 @@ class GNOME2Package
       namespace :win32 do
         namespace :downloader do
           task :before do
-            $LOAD_PATH.unshift("#{@glib2_root}/lib")
+            $LOAD_PATH.unshift("#{@glib2_root_dir}/lib")
             require 'gnome2-win32-binary-downloader'
           end
           task :download do
@@ -146,6 +149,10 @@ class GNOME2Package
                            "win32:downloader:download",
                            "win32:downloader:after"]
       end
+    end
+
+    def define_win32_build_task
+      GNOME2Win32BinaryBuildTask.new(@win32_configuration)
     end
   end
 
@@ -198,19 +205,30 @@ class GNOME2Package
   end
 
   class Win32Configuration
-    attr_accessor :packages, :dependencies
+    attr_reader :package
+    attr_accessor :packages, :dependencies, :build_packages, :build_dependencies
+    attr_accessor :build_host
+    attr_accessor :relative_binary_dir, :absolute_binary_dir
     def initialize(package)
       @package = package
       @packages = []
       @dependencies = []
+      @build_packages = []
+      @build_dependencies = []
+      @build_host = "i686-w64-mingw32"
+      @relative_binary_dir = File.join("vendor", "local")
+      @absolute_binary_dir = File.expand_path(@relative_binary_dir)
     end
 
     def to_hash
       {
         :packages => @packages,
         :dependencies => @dependencies,
+        :build_packages => @build_packages,
+        :build_host => @build_host,
+        :relative_binary_dir => @relative_binary_dir,
+        :absolute_binary_dir => @absolute_binary_dir,
       }
     end
   end
 end
-

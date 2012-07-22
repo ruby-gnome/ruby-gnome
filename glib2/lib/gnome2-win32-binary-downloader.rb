@@ -23,7 +23,7 @@ class GNOME2Win32BinaryDownloader
 
   URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries/win32"
   def initialize(options={})
-    output_dir = options[:output_dir] || File.join("vendor", "local")
+    output_dir = options[:relative_binary_dir] || File.join("vendor", "local")
     @output_dir = File.expand_path(output_dir)
   end
 
