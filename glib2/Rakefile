@@ -1,6 +1,7 @@
 # -*- ruby -*-
 
-require './lib/gnome2-raketask'
+$LOAD_PATH.unshift("./lib")
+require 'gnome2-raketask'
 
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
