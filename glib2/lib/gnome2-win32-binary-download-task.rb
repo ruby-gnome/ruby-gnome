@@ -165,7 +165,7 @@ class GNOME2Win32BinaryDownloadTask
       system("unzip", "-o", zip.filename)
       Dir.glob("lib/pkgconfig/*.pc") do |pc_path|
         pc = File.read(pc_path)
-        pc = pc.gsub(/\Aprefix=.+$/) {"prefix=#{@output_dir}"}
+        pc = pc.gsub(/\Aprefix=.+$/) {"prefix=#{dist_dir}"}
         File.open(pc_path, "w") do |pc_file|
           pc_file.print(pc)
         end
