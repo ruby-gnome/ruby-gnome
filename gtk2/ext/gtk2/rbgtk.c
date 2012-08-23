@@ -514,6 +514,42 @@ rg_m_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
     return CBOOL2RVAL(ret == NULL);
 }
 
+#if GTK_CHECK_VERSION(2,14,0)
+static VALUE
+rg_m_show_uri(G_GNUC_UNUSED VALUE self, VALUE rb_uri_or_options)
+{
+    VALUE rb_screen = Qnil;
+    VALUE rb_uri = Qnil;
+    VALUE rb_timestamp = Qnil;
+    GdkScreen *screen = NULL;
+    const gchar *uri = NULL;
+    guint32 timestamp = GDK_CURRENT_TIME;
+    GError *error = NULL;
+
+    if (TYPE(rb_uri_or_options) == T_HASH) {
+        rbg_scan_options(rb_uri_or_options,
+                         "screen", &rb_screen,
+                         "uri", &rb_uri,
+                         "timestamp", &rb_timestamp,
+                         NULL);
+    } else {
+        rb_uri = rb_uri_or_options;
+    }
+
+    screen = RVAL2GOBJ(rb_screen);
+    uri = StringValueCStr(rb_uri);
+    if (!NIL_P(rb_timestamp)) {
+        timestamp = NUM2UINT(rb_timestamp);
+    }
+
+    if (!gtk_show_uri(screen, uri, timestamp, &error)) {
+        RAISE_GERROR(error);
+    }
+
+    return self;
+}
+#endif
+
 /*
  * Init
  */
@@ -566,6 +602,10 @@ Init_gtk_gtk(void)
     RG_DEF_MODFUNC(propagate_event, 2);
     RG_DEF_MODFUNC(check_version, 3);
     RG_DEF_MODFUNC_P(check_version, 3);
+
+#if GTK_CHECK_VERSION(2,14,0)
+    RG_DEF_MODFUNC(show_uri, 1);
+#endif
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 }
