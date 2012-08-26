@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2006 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -306,16 +306,17 @@ rg_reorder(VALUE self, VALUE rbparent, VALUE rbnew_order)
 {
     GtkTreeStore *store = _SELF(self);
     GtkTreeIter *parent = RVAL2GTKTREEITER(rbparent);
-    gint columns = gtk_tree_model_get_n_columns(GTK_TREE_MODEL(store));
+    gint n_children = gtk_tree_model_iter_n_children(GTK_TREE_MODEL(store),
+                                                     parent);
     long n;
     gint *new_order = RVAL2GINTS(rbnew_order, n);
 
-    if (n != columns) {
+    if (n != n_children) {
         g_free(new_order);
 
         rb_raise(rb_eArgError,
-                 "new order array must contain same number of elements as the number of columns in the store: %ld != %d",
-                 n, columns);
+                 "new order array must contain the same number of elements as the number of children in the parent: %ld != %d",
+                 n, n_children);
     }
 
     gtk_tree_store_reorder(store, parent, new_order);
