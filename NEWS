@@ -2,6 +2,37 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.5: 2012-08-29
+
+This is a network support improvement release!
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * windows: Bundled glib-networking.
+
+==== Ruby/GIO2
+
+  * Improvements
+    * Added Gio::TlsCertificate.
+    * Added Gio::TlsCertificateFlags.
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Added Gtk.show_uri.
+
+  * Fixes
+    * Gtk::TreeStore#reorder:
+      Fixed wrong the number of reorder values check.
+      [SF.net#3561748] [Reported by Nounou]
+
+=== Thanks
+
+  * Nounou
+
 == Ruby-GNOME2 1.1.4: 2012-07-21
 
 This is a easy to install release!
