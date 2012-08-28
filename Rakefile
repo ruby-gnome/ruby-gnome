@@ -287,7 +287,7 @@ namespace :gem do
   end
 
   namespace :win32 do
-    win32_gnome2_packages = gnome2_packages - ["vte"]
+    win32_gnome2_packages = gnome2_packages - ["goocanvas", "vte"]
     desc "build all Windows gems"
     task :build do
       win32_gnome2_packages.each do |package|
