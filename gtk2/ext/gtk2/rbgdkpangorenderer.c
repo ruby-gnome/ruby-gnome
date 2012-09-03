@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -95,9 +95,9 @@ rg_set_stipple(VALUE self, VALUE part, VALUE stipple)
 }
 #else
 static VALUE
-prenderer_set_stipple(G_GNUC_UNUSED VALUE self,
-                      G_GNUC_UNUSED VALUE part,
-                      G_GNUC_UNUSED VALUE stipple)
+rg_set_stipple(G_GNUC_UNUSED VALUE self,
+               G_GNUC_UNUSED VALUE part,
+               G_GNUC_UNUSED VALUE stipple)
 {
     rb_warning("Gdk::PangoRender#set_tipple is not supported (Require pango-1.8.1 or later");
 
@@ -117,9 +117,9 @@ rg_set_override_color(VALUE self, VALUE part, VALUE color)
 }
 #else
 static VALUE
-prenderer_set_override_color(G_GNUC_UNUSED VALUE self,
-                             G_GNUC_UNUSED VALUE part,
-                             G_GNUC_UNUSED VALUE color)
+rg_set_override_color(G_GNUC_UNUSED VALUE self,
+                      G_GNUC_UNUSED VALUE part,
+                      G_GNUC_UNUSED VALUE color)
 {
     rb_warning("Gdk::PangoRender#set_override_color is not supported (Require pango-1.8.1 or later");
 
