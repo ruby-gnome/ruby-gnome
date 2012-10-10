@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
  *  Copyright (C) 2008-2009  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
@@ -266,7 +266,7 @@ rg_connected_p(VALUE self)
 static gboolean
 source_func(GSocket *socket, GIOCondition condition, gpointer user_data)
 {
-        VALUE callback = GPOINTER_TO_UINT(user_data);
+        VALUE callback = (VALUE)user_data;
         return RVAL2CBOOL(rb_funcall(callback, id_call, 2,
                                      GOBJ2RVAL(socket),
                                      GIOCONDITION2RVAL(condition)));
@@ -286,7 +286,7 @@ rg_create_source(int argc, VALUE *argv, VALUE self)
         G_RELATIVE(self, callback);
         g_source_set_callback(source,
                               (GSourceFunc)source_func,
-                              GUINT_TO_POINTER(callback),
+                              (gpointer)callback,
                               NULL);
         return GSOURCE2RVAL(source);
 }
