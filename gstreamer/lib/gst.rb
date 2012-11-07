@@ -16,8 +16,6 @@ rescue LoadError
   require "gstreamer.so"
 end
 
-Gst.init
-
 module Gst
   class Plugin
     def each_feature(&block)
