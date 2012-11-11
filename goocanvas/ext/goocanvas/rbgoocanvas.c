@@ -109,6 +109,21 @@ rg_scroll_to(VALUE self, VALUE left, VALUE top)
     return self;
 }
 
+static VALUE
+rg_update(VALUE self)
+{
+    goo_canvas_update(SELF(self));
+    return self;
+}
+
+static VALUE
+rg_request_update(VALUE self)
+{
+    goo_canvas_request_update(SELF(self));
+    return self;
+}
+
+
 void
 Init_goocanvas(void)
 {
@@ -127,6 +142,8 @@ Init_goocanvas(void)
     RG_DEF_METHOD(pointer_ungrab, 2);
     RG_DEF_METHOD(render, 3);
     RG_DEF_METHOD(scroll_to, 2);
+    RG_DEF_METHOD(update, 0);
+    RG_DEF_METHOD(request_update, 0);
 
     Init_goocanvasitem(mGoo); /* Goo::CanvasItem */
     Init_goocanvastext(mGoo); /* Goo::CanvasText */
