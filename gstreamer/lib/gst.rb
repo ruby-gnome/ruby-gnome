@@ -16,7 +16,10 @@ rescue LoadError
   require "gstreamer.so"
 end
 
-Gst.init
+argv_without_help_options = ARGV.reject do |option|
+  /\A-h|--help\z/ =~ option
+end
+Gst.init(argv_without_help_options)
 
 module Gst
   class Plugin
