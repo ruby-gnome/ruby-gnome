@@ -1,4 +1,5 @@
-install-so:
+install-so: install-headers
+install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbpango.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) $(srcdir)/rbpangoconversions.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) rbpangoversion.h $(RUBYARCHDIR)

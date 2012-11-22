@@ -1,4 +1,5 @@
-install-so:
+install-so: install-headers
+install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbatk.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) rbatkversion.h $(RUBYARCHDIR)
 

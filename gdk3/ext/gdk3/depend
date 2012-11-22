@@ -1,4 +1,5 @@
-install-so:
+install-so: install-headers
+install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbgdk3.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) $(srcdir)/rbgdk3conversions.h $(RUBYARCHDIR)
 
