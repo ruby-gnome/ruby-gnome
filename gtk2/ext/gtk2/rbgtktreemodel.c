@@ -61,6 +61,37 @@ rg_iter_first(VALUE self)
 }
 
 static VALUE
+rg_iter_root(VALUE self)
+{
+    VALUE val = Qnil;
+    GtkTreeIter iter;
+    GtkTreeModel* model = _SELF(self);
+    gboolean ret = (gtk_tree_model_get_iter_root(model, &iter));
+    iter.user_data3 = model;
+
+    if (ret) {
+        val = GTKTREEITER2RVAL(&iter);
+        G_CHILD_ADD(self, val);
+    }
+
+    return val;
+}
+
+static VALUE
+rg_iter_next(VALUE self, VALUE iter)
+{
+    VALUE val = Qnil;
+    gboolean ret = (gtk_tree_model_iter_next(_SELF(self), RVAL2GTKTREEITER(iter)));
+
+    if (ret) {
+        val = GTKTREEITER2RVAL(&iter);
+        G_CHILD_ADD(self, val);
+    }
+
+    return val;
+}
+
+static VALUE
 rg_get_iter(VALUE self, VALUE path)
 {
     VALUE val = Qnil;
@@ -230,6 +261,8 @@ Init_gtk_treemodel(VALUE mGtk)
     RG_DEF_METHOD(n_columns, 0);
     RG_DEF_METHOD(get_column_type, 1);
     RG_DEF_METHOD(iter_first, 0);
+    RG_DEF_METHOD(iter_root, 0);
+    RG_DEF_METHOD(iter_next, 1);
     RG_DEF_METHOD(get_iter, 1);
     RG_DEF_METHOD(get_value, 2);
     RG_DEF_METHOD(each, 0);
