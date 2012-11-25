@@ -717,6 +717,7 @@ rg_print(int argc, VALUE *argv, VALUE out)
 {
     int i;
     VALUE line;
+    VALUE output_field_separator;
 
     /* if no argument given, print `$_' */
     if (argc == 0) {
@@ -724,9 +725,11 @@ rg_print(int argc, VALUE *argv, VALUE out)
         line = rb_lastline_get();
         argv = &line;
     }
+
+    output_field_separator = rb_gv_get("$,");
     for (i=0; i<argc; i++) {
-        if (!NIL_P(rb_output_fs) && i>0) {
-            rg_write(out, rb_output_fs);
+        if (!NIL_P(output_field_separator) && i>0) {
+            rg_write(out, output_field_separator);
         }
         switch (TYPE(argv[i])) {
           case T_NIL:
@@ -737,8 +740,8 @@ rg_print(int argc, VALUE *argv, VALUE out)
             break;
         }
     }
-    if (!NIL_P(rb_output_rs)) {
-        rg_write(out, rb_output_rs);
+    if (!NIL_P(output_field_separator)) {
+        rg_write(out, output_field_separator);
     }
 
     return Qnil;
