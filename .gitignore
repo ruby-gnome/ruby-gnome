@@ -8,6 +8,7 @@
 Makefile
 Makefile.lib
 *.pc
+.rbx/
 /atk/ext/atk/rbatkversion.h
 /glib2/ext/glib2/glib-enum-types.c
 /glib2/ext/glib2/glib-enum-types.h
