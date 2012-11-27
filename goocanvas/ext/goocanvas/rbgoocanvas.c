@@ -124,19 +124,19 @@ rg_request_update(VALUE self)
 }
 
 static VALUE
-rg_convert_from_pixel(VALUE self, VALUE x, VALUE y)
+rg_convert_from_pixel(VALUE self, VALUE rb_x, VALUE rb_y)
 {
-    double x = NUM2DBL(x);
-    double y = NUM2DBL(y);
+    double x = NUM2DBL(rb_x);
+    double y = NUM2DBL(rb_y);
     goo_canvas_convert_from_pixels(SELF(self),&x, &y);
     return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
 static VALUE
-rg_convert_to_pixel(VALUE self, VALUE x, VALUE y)
+rg_convert_to_pixel(VALUE self, VALUE rb_x, VALUE rb_y)
 {
-    double x = NUM2DBL(x);
-    double y = NUM2DBL(y);
+    double x = NUM2DBL(rb_x);
+    double y = NUM2DBL(rb_y);
     goo_canvas_convert_to_pixels(SELF(self), &x, &y);
     return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
