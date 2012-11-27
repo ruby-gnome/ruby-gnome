@@ -40,7 +40,7 @@ rg_initialize(VALUE self)
 
 static VALUE
 rg_set_bounds(VALUE self, VALUE left, VALUE top,
-                         VALUE right, VALUE bottom)
+              VALUE right, VALUE bottom)
 {
     goo_canvas_set_bounds(SELF(self), NUM2DBL(left), NUM2DBL(top),
                           NUM2DBL(right), NUM2DBL(bottom));
@@ -146,9 +146,9 @@ rg_get_item_at(VALUE self, VALUE x, VALUE y, VALUE b)
 {
     GooCanvasItem *item;
     item = goo_canvas_get_item_at(SELF(self),
-                                    NUM2DBL(x),
-                                    NUM2DBL(y),
-                                    RVAL2CBOOL(b));
+                                  NUM2DBL(x),
+                                  NUM2DBL(y),
+                                  RVAL2CBOOL(b));
     return GOBJ2RVAL(item);
 }
 
@@ -157,10 +157,10 @@ rg_bounds(VALUE self)
 {
     double left, top, right, bottom;
     goo_canvas_get_bounds(SELF(self),
-                                    &left,
-                                    &top,
-                                    &right,
-                                    &bottom);
+                          &left,
+                          &top,
+                          &right,
+                          &bottom);
      return rb_ary_new3(4, INT2NUM(left), INT2NUM(top), INT2NUM(right), INT2NUM(bottom));
 }
 
