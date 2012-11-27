@@ -124,18 +124,19 @@ rg_request_update(VALUE self)
 }
 
 static VALUE
-rg_convert_from_pixel(VALUE self)
+rg_convert_from_pixel(VALUE self, VALUE x, VALUE y)
 {
-    double x, y;
+    double x = NUM2DBL(x);
+    double y = NUM2DBL(y);
     goo_canvas_convert_from_pixels(SELF(self),&x, &y);
     return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
 static VALUE
-rg_convert_to_pixel(VALUE self)
+rg_convert_to_pixel(VALUE self, VALUE x, VALUE y)
 {
-
-    double x, y;
+    double x = NUM2DBL(x);
+    double y = NUM2DBL(y);
     goo_canvas_convert_to_pixels(SELF(self), &x, &y);
     return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
@@ -184,8 +185,8 @@ Init_goocanvas(void)
     RG_DEF_METHOD(scroll_to, 2);
     RG_DEF_METHOD(update, 0);
     RG_DEF_METHOD(request_update, 0);
-    RG_DEF_METHOD(convert_from_pixel, 0);
-    RG_DEF_METHOD(convert_to_pixel, 0);
+    RG_DEF_METHOD(convert_from_pixel, 2);
+    RG_DEF_METHOD(convert_to_pixel, 2);
     RG_DEF_METHOD(get_item_at, 3);
 
     Init_goocanvasitem(mGoo); /* Goo::CanvasItem */
