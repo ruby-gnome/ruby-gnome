@@ -144,7 +144,7 @@ rg_convert_to_pixel(VALUE self, VALUE rb_x, VALUE rb_y)
 static VALUE
 rg_get_item_at(VALUE self, VALUE x, VALUE y, VALUE b)
 {
-    GooCanvasItem* item;
+    GooCanvasItem *item;
     item = goo_canvas_get_item_at(SELF(self),
                                     NUM2DBL(x),
                                     NUM2DBL(y),
