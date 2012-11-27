@@ -123,6 +123,46 @@ rg_request_update(VALUE self)
     return self;
 }
 
+static VALUE
+rg_convert_from_pixel(VALUE self, VALUE rb_x, VALUE rb_y)
+{
+    double x = NUM2DBL(rb_x);
+    double y = NUM2DBL(rb_y);
+    goo_canvas_convert_from_pixels(SELF(self),&x, &y);
+    return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+}
+
+static VALUE
+rg_convert_to_pixel(VALUE self, VALUE rb_x, VALUE rb_y)
+{
+    double x = NUM2DBL(rb_x);
+    double y = NUM2DBL(rb_y);
+    goo_canvas_convert_to_pixels(SELF(self), &x, &y);
+    return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
+}
+
+static VALUE
+rg_get_item_at(VALUE self, VALUE x, VALUE y, VALUE b)
+{
+    GooCanvasItem* item;
+    item = goo_canvas_get_item_at(SELF(self),
+                                    NUM2DBL(x),
+                                    NUM2DBL(y),
+                                    RVAL2CBOOL(b));
+    return GOBJ2RVAL(item);
+}
+
+static VALUE
+rg_bounds(VALUE self)
+{
+    double left, top, right, bottom;
+    goo_canvas_get_bounds(SELF(self),
+                                    &left,
+                                    &top,
+                                    &right,
+                                    &bottom);
+     return rb_ary_new3(4, INT2NUM(left), INT2NUM(top), INT2NUM(right), INT2NUM(bottom));
+}
 
 void
 Init_goocanvas(void)
@@ -136,6 +176,7 @@ Init_goocanvas(void)
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_bounds, 4);
+    RG_DEF_METHOD(bounds, 0);
     RG_DEF_METHOD(root_item, 0);
     RG_DEF_METHOD(grab_focus, -1);
     RG_DEF_METHOD(pointer_grab, 4);
@@ -144,6 +185,9 @@ Init_goocanvas(void)
     RG_DEF_METHOD(scroll_to, 2);
     RG_DEF_METHOD(update, 0);
     RG_DEF_METHOD(request_update, 0);
+    RG_DEF_METHOD(convert_from_pixel, 2);
+    RG_DEF_METHOD(convert_to_pixel, 2);
+    RG_DEF_METHOD(get_item_at, 3);
 
     Init_goocanvasitem(mGoo); /* Goo::CanvasItem */
     Init_goocanvastext(mGoo); /* Goo::CanvasText */
