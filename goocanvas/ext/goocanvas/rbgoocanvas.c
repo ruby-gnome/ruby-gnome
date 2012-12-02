@@ -128,7 +128,7 @@ rg_convert_from_pixels(VALUE self, VALUE rb_x, VALUE rb_y)
 {
     double x = NUM2DBL(rb_x);
     double y = NUM2DBL(rb_y);
-    goo_canvas_convert_from_pixels(SELF(self),&x, &y);
+    goo_canvas_convert_from_pixels(SELF(self), &x, &y);
     return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
