@@ -32,7 +32,7 @@ This is Ruby 2.0.0 support release!
     * Added Gtk::TreeModel#iter_root. [GitHub:121] [Patch by dmaciejak]
     * Added Gtk::TreeModel#iter_next. [GitHub:121] [Patch by dmaciejak]
 
-==== Ruby/GdkPixbufs
+==== Ruby/GdkPixbuf2
 
   * Fixes
     * Fixed build errors with old gdk-pixbuf.
