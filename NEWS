@@ -2,6 +2,84 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.6: 2012-12-02
+
+This is Ruby 2.0.0 support release!
+
+=== Changes
+
+==== All
+
+  * Fixes
+    * Fixed install error on Ruby 2.0.0.
+      [ruby-gnome2-devel-en] Recent Ruby: 'depend' files must be changed
+      [Reported by Carlo E. Prelz]
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Improved portability a bit. '$,' is used instead of rb_output_fs.
+      [GktHub:#117] [Reported by Marvin Gülker]
+
+==== Ruby/GIO2
+
+  * Fixes
+    * Fixed a crash bug on i386. [Reported by TAKATSU Tomonari]
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Added Gtk::TreeModel#iter_root. [GitHub:121] [Patch by dmaciejak]
+    * Added Gtk::TreeModel#iter_next. [GitHub:121] [Patch by dmaciejak]
+
+==== Ruby/GdkPixbufs
+
+  * Fixes
+    * Fixed build errors with old gdk-pixbuf.
+
+==== Ruby/Poppler
+
+  * Improvements
+    * Added missing required Poppler version.
+      [Suggested by Grant Schoep]
+      [ruby-gnome2-devel-en] poppler, build fails, incorrect
+      required_pkg_config_package?
+
+  * Fixes
+    * Fixed a wrong package name on Red Hat and Fedora.
+      [Reported by Grant Schoep]
+      [ruby-gnome2-devel-en] poppler, build fails, incorrect
+      required_pkg_config_package?
+
+  * Changes
+    * Disabled auto Poppler install for Homebrew. It requires
+      --with-glib option but auto install with --with-glib option
+      isn't supported yet.
+
+==== Ruby/GooCanvas
+
+  * Improvements
+    * Added Goo::Canvas#update. [GitHub:119] [Patch by dmaciejak]
+    * Added Goo::Canvas#request_update. [GitHub:119] [Patch by dmaciejak]
+    * Added Goo::Canvas#convert_from_pixels. [GitHub:123] [Patch by dmaciejak]
+    * Added Goo::Canvas#convert_to_pixels. [GitHub:123] [Patch by dmaciejak]
+    * Added Goo::Canvas#get_item_at. [GitHub:123] [Patch by dmaciejak]
+    * Added Goo::Canvas#bounds. [GitHub:123] [Patch by dmaciejak]
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Don't pass -h and --help to GStreamer.
+      [GitHub:#118] [Reported by dmaciejak]
+
+=== Thanks
+
+  * TAKATSU Tomonari
+  * dmaciejak
+  * Grant Schoep
+  * Carlo E. Prelz
+  * Marvin Gülker
+
 == Ruby-GNOME2 1.1.5: 2012-08-29
 
 This is a network support improvement release!
