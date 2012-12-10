@@ -2,6 +2,22 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.7: 2012-12-10
+
+This is a package for Windows fix release.
+
+=== Changes
+
+==== Ruby/GTK2
+
+  * Fixes
+    * Bundled GTK+ 2.24.8-1 instead of GTK+ 2.24.10-1.
+      [Reported by Mahoro Shimura]
+
+=== Thanks
+
+  * Mahoro Shimura
+
 == Ruby-GNOME2 1.1.6: 2012-12-02
 
 This is Ruby 2.0.0 support release!
