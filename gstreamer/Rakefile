@@ -51,7 +51,10 @@ package = GNOME2Package.new do |_package|
       :version => "1.2.1",
       :configure_args => ["--disable-cpplibs"],
       :need_autogen => true,
-      :patches => ["flac-1.2.1-fix-mingw-build.diff"],
+      :patches => [
+        "flac-1.2.1-fix-mingw-build.diff",
+        "flac-1.2.1-fix-doc-install.diff",
+      ],
     },
     {
       :name => "speex",
