@@ -2,6 +2,17 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.8: 2012-12-19
+
+This is a bug fix release for Ruby 2.0.0.
+
+=== Changes
+
+==== All
+
+  * Fixes
+    * Fixed a bug that *.so isn't installed with Ruby 2.0.0.
+
 == Ruby-GNOME2 1.1.7: 2012-12-10
 
 This is a package for Windows fix release.
