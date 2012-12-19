@@ -10,7 +10,8 @@ install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbgcompat.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) glib-enum-types.h $(RUBYARCHDIR)
 
-install:
+install: install-pc
+install-pc:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
 	  $(INSTALL_DATA) ruby-glib2.pc $(pkgconfigdir);	\

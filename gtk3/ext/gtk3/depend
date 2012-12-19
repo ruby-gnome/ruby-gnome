@@ -3,7 +3,8 @@ install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbgtk3.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) $(srcdir)/rbgtk3conversions.h $(RUBYARCHDIR)
 
-install:
+install: install-pc
+install-pc:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
 	  $(INSTALL_DATA) ruby-gtk3.pc $(pkgconfigdir);		\

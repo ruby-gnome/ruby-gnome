@@ -4,7 +4,8 @@ install-headers:
 	$(INSTALL_DATA) $(srcdir)/rbpangoconversions.h $(RUBYARCHDIR)
 	$(INSTALL_DATA) rbpangoversion.h $(RUBYARCHDIR)
 
-install:
+install: install-pc
+install-pc:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
 	  $(INSTALL_DATA) ruby-pango.pc $(pkgconfigdir);	\

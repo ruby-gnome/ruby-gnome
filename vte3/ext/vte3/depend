@@ -1,4 +1,5 @@
-install:
+install: install-pc
+install-pc:
 	if test -n "$(pkgconfigdir)"; then			\
 	  $(MAKEDIRS) $(pkgconfigdir);				\
 	  $(INSTALL_DATA) ruby-vte3.pc $(pkgconfigdir);		\
