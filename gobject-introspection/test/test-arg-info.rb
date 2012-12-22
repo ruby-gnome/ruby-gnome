@@ -42,4 +42,9 @@ class TestArgInfo < Test::Unit::TestCase
   def test_may_be_null?
     assert_false(@info.may_be_null?)
   end
+
+  def test_ownership_transfer
+    assert_equal(GObjectIntrospection::Transfer::NOTHING,
+                 @info.ownership_transfer)
+  end
 end
