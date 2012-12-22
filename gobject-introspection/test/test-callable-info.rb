@@ -24,4 +24,8 @@ class TestCallableInfo < Test::Unit::TestCase
   def test_may_return_null?
     assert_false(@info.may_return_null?)
   end
+
+  def test_n_args
+    assert_equal(1, @info.n_args)
+  end
 end
