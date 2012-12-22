@@ -19,3 +19,4 @@ source :rubygems
 gem "rake"
 gem "pkg-config"
 gem "cairo"
+gem "test-unit-notify"
