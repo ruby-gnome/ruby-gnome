@@ -23,4 +23,11 @@ class TestRepository < Test::Unit::TestCase
   def test_get_n_infos
     assert_kind_of(Integer, @repository.get_n_infos("GObject"))
   end
+
+  def test_enumerable
+    namespaces = @repository.collect do |namespace, info|
+      namespace
+    end
+    assert_equal(["GObject"], namespaces.uniq)
+  end
 end

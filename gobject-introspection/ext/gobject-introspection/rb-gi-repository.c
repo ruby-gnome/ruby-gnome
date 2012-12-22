@@ -65,6 +65,60 @@ rg_get_n_infos(VALUE self, VALUE rb_namespace)
     return INT2NUM(n_infos);
 }
 
+typedef struct {
+    VALUE self;
+    GIRepository *repository;
+    gchar **namespaces;
+} EachData;
+
+static VALUE
+rg_each_body(VALUE arg)
+{
+    EachData *data = (EachData *)arg;
+    gint i;
+
+    for (i = 0; data->namespaces[i]; i++) {
+	VALUE rb_namespace;
+	const gchar *namespace_;
+	gint j, n_infos;
+
+	namespace_ = data->namespaces[i];
+	rb_namespace = CSTR2RVAL(namespace_);
+	n_infos = g_irepository_get_n_infos(data->repository, namespace_);
+	for (j = 0; j < n_infos; j++) {
+	    GIBaseInfo *info;
+	    info = g_irepository_get_info(data->repository, namespace_, j);
+	    rb_yield(rb_ary_new3(2, rb_namespace, GI_BASE_INFO2RVAL(info)));
+	}
+    }
+
+    return Qnil;
+}
+
+static VALUE
+rg_each_ensure(VALUE arg)
+{
+    EachData *data = (EachData *)arg;
+
+    g_strfreev(data->namespaces);
+
+    return Qnil;
+}
+
+static VALUE
+rg_each(VALUE self)
+{
+    EachData data;
+
+    RETURN_ENUMERATOR(self, 0, NULL);
+
+    data.self = self;
+    data.repository = SELF(self);
+    data.namespaces = g_irepository_get_loaded_namespaces(data.repository);
+    return rb_ensure(rg_each_body,  (VALUE)(&data),
+		     rg_each_ensure, (VALUE)(&data));
+}
+
 void
 rb_gi_repository_init(VALUE rb_mGI)
 {
@@ -72,10 +126,13 @@ rb_gi_repository_init(VALUE rb_mGI)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_IREPOSITORY, "Repository", rb_mGI);
 
-    G_DEF_CLASS(G_TYPE_I_REPOSITORY_LOAD_FLAGS, "RepositoryLoadFlags", rb_mGI);
-    G_DEF_CLASS(G_TYPE_I_REPOSITORY_ERROR, "RepositoryError", rb_mGI);
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
     RG_DEF_SMETHOD(default, 0);
     RG_DEF_METHOD(require, -1);
     RG_DEF_METHOD(get_n_infos, 1);
+    RG_DEF_METHOD(each, 0);
+
+    G_DEF_CLASS(G_TYPE_I_REPOSITORY_LOAD_FLAGS, "RepositoryLoadFlags", rb_mGI);
+    G_DEF_CLASS(G_TYPE_I_REPOSITORY_ERROR, "RepositoryError", rb_mGI);
 }

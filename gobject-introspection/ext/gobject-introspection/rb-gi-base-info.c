@@ -20,14 +20,13 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_mGObjectIntrospection
+#define RG_TARGET_NAMESPACE rb_cGIBaseInfo
+#define SELF(self) RVAL2GI_BASE_IFNO(self)
 
 void
-Init_gobject_introspection(void)
+rb_gi_base_info_init(VALUE rb_mGI)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
-    rb_gi_base_info_init(RG_TARGET_NAMESPACE);
-    rb_gi_repository_init(RG_TARGET_NAMESPACE);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(GI_TYPE_BASE_INFO, "BaseInfo", rb_mGI);
 }
