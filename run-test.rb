@@ -27,6 +27,7 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
   targets << dir
 end
 
+succeeded = true
 targets.each do |target|
   Dir.chdir(target.to_s) do
     puts "#{Time.now} running test for #{target}"
@@ -34,9 +35,11 @@ targets.each do |target|
 
     args = includes + ["test/run-test.rb"]
     command = [ruby, *args]
-    system(command.collect {|arg| "'#{arg.gsub(/'/, '\\\'')}'"}.join(' '))
+    unless system(command.collect {|arg| "'#{arg.gsub(/'/, '\\\'')}'"}.join(' '))
+      succeeded = false
+    end
 
     puts separator
   end
 end
-
+exit(succeeded)
