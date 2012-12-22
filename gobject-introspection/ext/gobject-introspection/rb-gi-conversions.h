@@ -28,6 +28,9 @@
 #define GI_BASE_INFO2RVAL(info)      (rb_gi_base_info_to_ruby(info))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
 
+#define GI_TYPE_INFO2RVAL(info)      (GI_BASE_INFO2RVAL((GIBaseInfo *)(info)))
+#define RVAL2GI_TYPE_INFO(rb_object) ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+
 VALUE       rb_gi_base_info_to_ruby  (GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby(VALUE rb_info);
 

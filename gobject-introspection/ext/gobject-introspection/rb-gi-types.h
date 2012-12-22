@@ -23,9 +23,11 @@
 
 #define GI_TYPE_CALLABLE_INFO   (gi_callable_info_get_type())
 #define GI_TYPE_FUNCTION_INFO   (gi_function_info_get_type())
+#define GI_TYPE_TYPE_INFO       (gi_type_info_get_type())
 
 GType gi_callable_info_get_type(void);
 GType gi_function_info_get_type(void);
+GType gi_type_info_get_type(void);
 
 
 #endif

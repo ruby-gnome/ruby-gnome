@@ -38,6 +38,9 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
       case GI_INFO_TYPE_FUNCTION:
 	g_type = GI_TYPE_FUNCTION_INFO;
 	break;
+      case GI_INFO_TYPE_TYPE:
+	g_type = GI_TYPE_TYPE_INFO;
+	break;
       default:
 	g_type = GI_TYPE_BASE_INFO;
 	break;
@@ -114,4 +117,5 @@ rb_gi_base_info_init(VALUE rb_mGI)
     RG_DEF_METHOD(each, 0);
 
     rb_gi_callable_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_type_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

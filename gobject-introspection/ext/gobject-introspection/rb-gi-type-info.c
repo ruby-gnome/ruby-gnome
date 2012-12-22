@@ -20,15 +20,15 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_cGICallableInfo
-#define SELF(self) ((GICallableInfo *)(RVAL2GI_BASE_INFO(self)))
+#define RG_TARGET_NAMESPACE rb_cGITypeInfo
+#define SELF(self) (RVAL2GI_TYPE_INFO(self))
 
 GType
-gi_callable_info_get_type(void)
+gi_type_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GICallableInfo",
+	type = g_boxed_type_register_static("GITypeInfo",
 					    (GBoxedCopyFunc)g_base_info_ref,
 					    (GBoxedFreeFunc)g_base_info_unref);
     }
@@ -36,24 +36,22 @@ gi_callable_info_get_type(void)
 }
 
 static VALUE
-rg_return_type(VALUE self)
+rg_pointer_p(VALUE self)
 {
-    GICallableInfo *info;
+    GITypeInfo *info;
 
     info = SELF(self);
-    return GI_TYPE_INFO2RVAL(g_callable_info_get_return_type(info));
+    return CBOOL2RVAL(g_type_info_is_pointer(info));
 }
 
 void
-rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
+rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
-	G_DEF_CLASS_WITH_PARENT(GI_TYPE_CALLABLE_INFO, "CallableInfo", rb_mGI,
+	G_DEF_CLASS_WITH_PARENT(GI_TYPE_TYPE_INFO, "TypeInfo", rb_mGI,
 				rb_cGIBaseInfo);
 
-    RG_DEF_METHOD(return_type, 0);
-
-    rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    RG_DEF_METHOD_P(pointer, 0);
 }
