@@ -21,6 +21,11 @@ class TestCallableInfo < Test::Unit::TestCase
     @info = @repository.find("GObject", "signal_name")
   end
 
+  def test_return_type
+    assert_kind_of(GObjectIntrospection::TypeInfo,
+                   @info.return_type)
+  end
+
   def test_caller_owns
     assert_equal(GObjectIntrospection::Transfer::NOTHING,
                  @info.caller_owns)
