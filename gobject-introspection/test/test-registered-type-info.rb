@@ -25,6 +25,10 @@ class TestRegisteredTypeInfo < Test::Unit::TestCase
     assert_equal("GTypePlugin", @info.type_name)
   end
 
+  def test_type_init
+    assert_equal("g_type_plugin_get_type", @info.type_init)
+  end
+
   def test_gtype
     assert_equal(GLib::Type.new("GTypePlugin"), @info.gtype)
   end

@@ -29,8 +29,8 @@ gi_registered_type_info_get_type(void)
     static GType type = 0;
     if (type == 0) {
 	type = g_boxed_type_register_static("GIRegisteredTypeInfo",
-					    (GBoxedCopyFunc)g_base_info_ref,
-					    (GBoxedFreeFunc)g_base_info_unref);
+                                            (GBoxedCopyFunc)g_base_info_ref,
+                                            (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
@@ -42,6 +42,15 @@ rg_type_name(VALUE self)
 
     info = SELF(self);
     return CSTR2RVAL(g_registered_type_info_get_type_name(info));
+}
+
+static VALUE
+rg_type_init(VALUE self)
+{
+    GIRegisteredTypeInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_registered_type_info_get_type_init(info));
 }
 
 static VALUE
@@ -65,6 +74,7 @@ rb_gi_registered_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 				rb_cGIBaseInfo);
 
     RG_DEF_METHOD(type_name, 0);
+    RG_DEF_METHOD(type_init, 0);
     RG_DEF_METHOD(gtype, 0);
 
     rb_gi_struct_info_init(rb_mGI, RG_TARGET_NAMESPACE);
