@@ -50,8 +50,8 @@ end
 #
 # generate sub-directory Makefiles
 #
-targets = []
-ignore = []
+target_modules = []
+ignore_modules = []
 
 ruby, *ruby_args = Shellwords.shellwords($ruby)
 if ARGV.grep(/\A--ruby=/)
@@ -73,49 +73,28 @@ subdirs.each do |subdir|
   ret = system(ruby, *args)
   STDERR.puts("#{$0}: Leaving directory '#{subdir}'")
   if ret
-    targets << subdir
+    target_modules << subdir
   else
-    ignore << subdir
+    ignore_modules << subdir
   end
 end
 puts "\n-----"
-puts "Target libraries: #{targets.join(', ')}" if targets.size > 0
-puts "Ignored libraries: #{ignore.join(', ')}" if ignore.size > 0
+unless target_modules.empty?
+  puts "Target libraries: #{target_modules.join(', ')}"
+end
+unless ignore_modules.empty?
+  puts "Ignored libraries: #{ignore_modules.join(', ')}"
+end
 
 #
 # generate top-level Makefile
 #
 
-def run_make_in_sub_dirs(command)
+def run_make_in_sub_dir(sub_dir, target)
   if /mswin32/ =~ RUBY_PLATFORM
-    "	$(COMMAND) '$(SUBDIRS)' $(MAKE) #{command}"
+    "	$(COMMAND) '#{sub_dir}' $(MAKE) #{target}"
   else
-    <<-EOS.chomp
-	@(					\\
-	  succeeded='';				\\
-	  failed='';				\\
-	  for dir in $(SUBDIRS); do		\\
-	    (cd $$dir; $(MAKE) #{command});	\\
-	    if [ $$? -eq 0 ]; then		\\
-	      succeeded="$$succeeded $$dir";	\\
-	    else				\\
-	      failed="$$failed $$dir";		\\
-	    fi;					\\
-	  done;					\\
-	  if [ "$$succeeded" = "" ]; then	\\
-	    succeeded="NONE";			\\
-	  fi;					\\
-	  if [ "$$failed" = "" ]; then		\\
-	    failed="NONE";			\\
-	  fi;					\\
-	  echo;					\\
-	  echo "-----";				\\
-	  echo "SUCCEEDED: $$succeeded";	\\
-	  echo "FAILED: $$failed";		\\
-	  echo "-----";				\\
-	  echo "Done.";				\\
-	)
-    EOS
+    "	(cd '#{sub_dir}' && $(MAKE) #{target})"
   end
 end
 
@@ -123,24 +102,28 @@ end
 File.open("Makefile", "w") do |makefile|
   makefile.print(<<-EOM)
 TOPSRCDIR = #{$topsrcdir}
-SUBDIRS = #{targets.join(' ')}
 COMMAND = #{$ruby} #{$topsrcdir}/exec_make.rb #{$strict}
 RM = #{rm}
+EOM
 
-all:
-#{run_make_in_sub_dirs('all')}
+  ["all", "install", "site-install", "clean", "distclean"].each do |target|
+    makefile.print(<<-EOM)
+#{target}:
+EOM
+    target_modules.each do |target_module|
+      sub_target = "#{target}-#{target_module}"
+      makefile.print(<<-EOM)
+#{target}: #{sub_target}
+#{sub_target}:
+	#{run_make_in_sub_dir(target_module, target)}
 
-install:
-#{run_make_in_sub_dirs('install')}
+EOM
+    end
+  end
 
-site-install:
-#{run_make_in_sub_dirs('site-install')}
-
-clean:
-#{run_make_in_sub_dirs('clean')}
-
-distclean:
-#{run_make_in_sub_dirs('distclean')}
+  makefile.print(<<-EOM)
+distclean: distclean-toplevel
+distclean-toplevel:
 	$(RM) Makefile mkmf.log
 EOM
 end
