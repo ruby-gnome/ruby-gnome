@@ -113,5 +113,5 @@ rb_gi_base_info_init(VALUE rb_mGI)
     RG_DEF_METHOD_OPERATOR("[]", aref, 1);
     RG_DEF_METHOD(each, 0);
 
-    rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_callable_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

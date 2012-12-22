@@ -45,13 +45,13 @@ rg_symbol(VALUE self)
 }
 
 void
-rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
+rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
-				rb_cGIBaseInfo);
+				rb_cGICallableInfo);
 
     RG_DEF_METHOD(symbol, 0);
 }
