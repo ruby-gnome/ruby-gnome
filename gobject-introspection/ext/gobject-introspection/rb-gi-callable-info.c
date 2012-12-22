@@ -45,6 +45,15 @@ rg_return_type(VALUE self)
 }
 
 static VALUE
+rg_caller_owns(VALUE self)
+{
+    GICallableInfo *info;
+
+    info = SELF(self);
+    return GI_TRANSFER2RVAL(g_callable_info_get_caller_owns(info));
+}
+
+static VALUE
 rg_may_return_null_p(VALUE self)
 {
     GICallableInfo *info;
@@ -102,6 +111,7 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
                                 rb_cGIBaseInfo);
 
     RG_DEF_METHOD(return_type, 0);
+    RG_DEF_METHOD(caller_owns, 0);
     RG_DEF_METHOD_P(may_return_null, 0);
     RG_DEF_METHOD(n_args, 0);
     RG_DEF_METHOD_OPERATOR("[]", aref, 1);

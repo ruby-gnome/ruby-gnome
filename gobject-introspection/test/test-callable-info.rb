@@ -21,6 +21,11 @@ class TestCallableInfo < Test::Unit::TestCase
     @info = @repository.find("GObject", "signal_name")
   end
 
+  def test_caller_owns
+    assert_equal(GObjectIntrospection::Transfer::NOTHING,
+                 @info.caller_owns)
+  end
+
   def test_may_return_null?
     assert_false(@info.may_return_null?)
   end
