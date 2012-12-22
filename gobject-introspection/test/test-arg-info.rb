@@ -56,4 +56,8 @@ class TestArgInfo < Test::Unit::TestCase
   def test_closure
     assert_equal(-1, @info.closure)
   end
+
+  def test_destroy
+    assert_equal(-1, @info.destroy)
+  end
 end
