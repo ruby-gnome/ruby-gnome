@@ -47,4 +47,9 @@ class TestArgInfo < Test::Unit::TestCase
     assert_equal(GObjectIntrospection::Transfer::NOTHING,
                  @info.ownership_transfer)
   end
+
+  def test_scope
+    assert_equal(GObjectIntrospection::ScopeType::INVALID,
+                 @info.scope)
+  end
 end
