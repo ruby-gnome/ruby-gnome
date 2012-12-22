@@ -38,4 +38,8 @@ class TestArgInfo < Test::Unit::TestCase
   def test_optional?
     assert_false(@info.optional?)
   end
+
+  def test_may_be_null?
+    assert_false(@info.may_be_null?)
+  end
 end
