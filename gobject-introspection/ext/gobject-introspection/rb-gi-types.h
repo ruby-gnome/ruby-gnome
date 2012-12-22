@@ -21,13 +21,25 @@
 #ifndef RB_GI_TYPES_H
 #define RB_GI_TYPES_H
 
-#define GI_TYPE_CALLABLE_INFO   (gi_callable_info_get_type())
-#define GI_TYPE_FUNCTION_INFO   (gi_function_info_get_type())
-#define GI_TYPE_ARG_INFO        (gi_arg_info_get_type())
-#define GI_TYPE_TYPE_INFO       (gi_type_info_get_type())
+#define GI_TYPE_CALLABLE_INFO        (gi_callable_info_get_type())
+#define GI_TYPE_FUNCTION_INFO        (gi_function_info_get_type())
+#define GI_TYPE_REGISTERED_TYPE_INFO (gi_registered_type_info_get_type())
+#define GI_TYPE_STRUCT_INFO          (gi_struct_info_get_type())
+#define GI_TYPE_ENUM_INFO            (gi_enum_info_get_type())
+#define GI_TYPE_FLAGS_INFO           (gi_flags_info_get_type())
+#define GI_TYPE_OBJECT_INFO          (gi_object_info_get_type())
+#define GI_TYPE_INTERFACE_INFO       (gi_interface_info_get_type())
+#define GI_TYPE_ARG_INFO             (gi_arg_info_get_type())
+#define GI_TYPE_TYPE_INFO            (gi_type_info_get_type())
 
 GType gi_callable_info_get_type(void);
 GType gi_function_info_get_type(void);
+GType gi_registered_type_info_get_type(void);
+GType gi_struct_info_get_type(void);
+GType gi_enum_info_get_type(void);
+GType gi_flags_info_get_type(void);
+GType gi_object_info_get_type(void);
+GType gi_interface_info_get_type(void);
 GType gi_arg_info_get_type(void);
 GType gi_type_info_get_type(void);
 

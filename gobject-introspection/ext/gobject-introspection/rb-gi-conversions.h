@@ -31,9 +31,20 @@
     (rb_gi_base_info_to_ruby_with_unref((GIBaseInfo *)(info)))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
 
-#define RVAL2GI_ARG_INFO(rb_object)  ((GIArgInfo *)RVAL2GI_BASE_INFO(rb_object))
-
-#define RVAL2GI_TYPE_INFO(rb_object) ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
+    ((GIRegisteredTypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_STRUCT_INFO(rb_object)			\
+    ((GIStructInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_ENUM_INFO(rb_object)			\
+    ((GIEnumInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_OBJECT_INFO(rb_object)			\
+    ((GIObjectInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_INTERFACE_INFO(rb_object)		\
+    ((GIInterfaceInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_ARG_INFO(rb_object)		\
+    ((GIArgInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_TYPE_INFO(rb_object)			\
+    ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
 
 #define GI_INFO_TYPE2RVAL(type)      (GENUM2RVAL(type, G_TYPE_I_INFO_TYPE))
 #define GI_TRANSFER2RVAL(transfer)   (GENUM2RVAL(transfer, G_TYPE_I_TRANSFER))

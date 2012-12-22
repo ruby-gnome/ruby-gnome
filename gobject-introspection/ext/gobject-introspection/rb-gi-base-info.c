@@ -38,6 +38,21 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
       case GI_INFO_TYPE_FUNCTION:
 	g_type = GI_TYPE_FUNCTION_INFO;
 	break;
+      case GI_INFO_TYPE_STRUCT:
+	g_type = GI_TYPE_STRUCT_INFO;
+	break;
+      case GI_INFO_TYPE_ENUM:
+	g_type = GI_TYPE_ENUM_INFO;
+	break;
+      case GI_INFO_TYPE_FLAGS:
+	g_type = GI_TYPE_FLAGS_INFO;
+	break;
+      case GI_INFO_TYPE_OBJECT:
+	g_type = GI_TYPE_OBJECT_INFO;
+	break;
+      case GI_INFO_TYPE_INTERFACE:
+	g_type = GI_TYPE_INTERFACE_INFO;
+	break;
       case GI_INFO_TYPE_ARG:
 	g_type = GI_TYPE_ARG_INFO;
 	break;
@@ -145,6 +160,7 @@ rb_gi_base_info_init(VALUE rb_mGI)
     G_DEF_CLASS(G_TYPE_I_INFO_TYPE, "InfoType", rb_mGI);
 
     rb_gi_callable_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_registered_type_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_arg_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_type_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

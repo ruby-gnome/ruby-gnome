@@ -14,32 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestTypeInfo < Test::Unit::TestCase
+class TestRegisteredTypeInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
-    @function_info = @repository.find("GObject", "signal_list_ids")
-    @info = @function_info.return_type
+    @info = @repository.find("GObject", "TypePlugin")
   end
 
-  def test_pointer?
-    assert_true(@info.pointer?)
+  def test_type_name
+    assert_equal("GTypePlugin", @info.type_name)
   end
 
-  def test_tag
-    assert_kind_of(GObjectIntrospection::TypeTag,
-                   @info.tag)
-  end
-
-  def test_aref
-    assert_kind_of(GObjectIntrospection::TypeInfo,
-                   @info[0])
-  end
-
-  def test_interface
-    function_info = @repository.find("GObject", "type_class_ref")
-    info = function_info.return_type
-    assert_kind_of(GObjectIntrospection::StructInfo,
-                   info.interface)
+  def test_gtype
+    assert_equal(GLib::Type.new("GTypePlugin"), @info.gtype)
   end
 end

@@ -20,15 +20,15 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_cGITypeInfo
-#define SELF(self) (RVAL2GI_TYPE_INFO(self))
+#define RG_TARGET_NAMESPACE rb_cGIStructInfo
+#define SELF(self) (RVAL2GI_STRUCT_INFO(self))
 
 GType
-gi_type_info_get_type(void)
+gi_struct_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GITypeInfo",
+	type = g_boxed_type_register_static("GIStructInfo",
 					    (GBoxedCopyFunc)g_base_info_ref,
 					    (GBoxedFreeFunc)g_base_info_unref);
     }
@@ -36,56 +36,22 @@ gi_type_info_get_type(void)
 }
 
 static VALUE
-rg_pointer_p(VALUE self)
+rg_n_fields(VALUE self)
 {
-    GITypeInfo *info;
+    GIStructInfo *info;
 
     info = SELF(self);
-    return CBOOL2RVAL(g_type_info_is_pointer(info));
-}
-
-static VALUE
-rg_tag(VALUE self)
-{
-    GITypeInfo *info;
-
-    info = SELF(self);
-    return GI_TYPE_TAG2RVAL(g_type_info_get_tag(info));
-}
-
-static VALUE
-rg_operator_aref(VALUE self, VALUE rb_n)
-{
-    GITypeInfo *info;
-    gint n;
-
-    info = SELF(self);
-    n = NUM2INT(rb_n);
-    return GI_BASE_INFO2RVAL_WITH_UNREF(g_type_info_get_param_type(info, n));
-}
-
-static VALUE
-rg_interface(VALUE self)
-{
-    GITypeInfo *info;
-
-    info = SELF(self);
-    return GI_BASE_INFO2RVAL_WITH_UNREF(g_type_info_get_interface(info));
+    return INT2NUM(g_struct_info_get_n_fields(info));
 }
 
 void
-rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
+rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
-	G_DEF_CLASS_WITH_PARENT(GI_TYPE_TYPE_INFO, "TypeInfo", rb_mGI,
-				rb_cGIBaseInfo);
+	G_DEF_CLASS_WITH_PARENT(GI_TYPE_STRUCT_INFO, "StructInfo", rb_mGI,
+				rb_cGIRegisteredTypeInfo);
 
-    RG_DEF_METHOD_P(pointer, 0);
-    RG_DEF_METHOD(tag, 0);
-    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
-    RG_DEF_METHOD(interface, 0);
-
-    G_DEF_CLASS(G_TYPE_I_TYPE_TAG, "TypeTag", rb_mGI);
+    RG_DEF_METHOD(n_fields, 0);
 }

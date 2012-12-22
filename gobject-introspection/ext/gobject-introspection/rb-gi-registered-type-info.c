@@ -20,15 +20,15 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_cGITypeInfo
-#define SELF(self) (RVAL2GI_TYPE_INFO(self))
+#define RG_TARGET_NAMESPACE rb_cGIRegisteredTypeInfo
+#define SELF(self) (RVAL2GI_REGISTERED_TYPE_INFO(self))
 
 GType
-gi_type_info_get_type(void)
+gi_registered_type_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GITypeInfo",
+	type = g_boxed_type_register_static("GIRegisteredTypeInfo",
 					    (GBoxedCopyFunc)g_base_info_ref,
 					    (GBoxedFreeFunc)g_base_info_unref);
     }
@@ -36,56 +36,39 @@ gi_type_info_get_type(void)
 }
 
 static VALUE
-rg_pointer_p(VALUE self)
+rg_type_name(VALUE self)
 {
-    GITypeInfo *info;
+    GIRegisteredTypeInfo *info;
 
     info = SELF(self);
-    return CBOOL2RVAL(g_type_info_is_pointer(info));
+    return CSTR2RVAL(g_registered_type_info_get_type_name(info));
 }
 
 static VALUE
-rg_tag(VALUE self)
+rg_gtype(VALUE self)
 {
-    GITypeInfo *info;
+    GIRegisteredTypeInfo *info;
 
     info = SELF(self);
-    return GI_TYPE_TAG2RVAL(g_type_info_get_tag(info));
-}
-
-static VALUE
-rg_operator_aref(VALUE self, VALUE rb_n)
-{
-    GITypeInfo *info;
-    gint n;
-
-    info = SELF(self);
-    n = NUM2INT(rb_n);
-    return GI_BASE_INFO2RVAL_WITH_UNREF(g_type_info_get_param_type(info, n));
-}
-
-static VALUE
-rg_interface(VALUE self)
-{
-    GITypeInfo *info;
-
-    info = SELF(self);
-    return GI_BASE_INFO2RVAL_WITH_UNREF(g_type_info_get_interface(info));
+    return rbgobj_gtype_new(g_registered_type_info_get_g_type(info));
 }
 
 void
-rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
+rb_gi_registered_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
-	G_DEF_CLASS_WITH_PARENT(GI_TYPE_TYPE_INFO, "TypeInfo", rb_mGI,
+	G_DEF_CLASS_WITH_PARENT(GI_TYPE_REGISTERED_TYPE_INFO,
+				"RegisteredTypeInfo",
+				rb_mGI,
 				rb_cGIBaseInfo);
 
-    RG_DEF_METHOD_P(pointer, 0);
-    RG_DEF_METHOD(tag, 0);
-    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
-    RG_DEF_METHOD(interface, 0);
+    RG_DEF_METHOD(type_name, 0);
+    RG_DEF_METHOD(gtype, 0);
 
-    G_DEF_CLASS(G_TYPE_I_TYPE_TAG, "TypeTag", rb_mGI);
+    rb_gi_struct_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_enum_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_object_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_interface_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }
