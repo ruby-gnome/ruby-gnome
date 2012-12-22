@@ -18,24 +18,40 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef RB_GI_CONVERSIONS_H
-#define RB_GI_CONVERSIONS_H
+#include "rb-gobject-introspection.h"
 
-#define RVAL2GI_REPOSITORY(rb_object) (G_IREPOSITORY(RVAL2GOBJ(rb_object)))
-#define RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags) \
-    (RVAL2GFLAGS(rb_flags, G_TYPE_I_REPOSITORY_LOAD_FLAGS))
+#define RG_TARGET_NAMESPACE rb_cGIArgInfo
+#define SELF(self) (RVAL2GI_ARG_INFO(self))
 
-#define GI_BASE_INFO2RVAL(info)				\
-    (rb_gi_base_info_to_ruby((GIBaseInfo *)(info)))
-#define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
+GType
+gi_arg_info_get_type(void)
+{
+    static GType type = 0;
+    if (type == 0) {
+	type = g_boxed_type_register_static("GIArgInfo",
+					    (GBoxedCopyFunc)g_base_info_ref,
+					    (GBoxedFreeFunc)g_base_info_unref);
+    }
+    return type;
+}
 
-#define GI_ARG_INFO2RVAL(info)       GI_BASE_INFO2RVAL(info)
-#define RVAL2GI_ARG_INFO(rb_object)  ((GIArgInfo *)RVAL2GI_BASE_INFO(rb_object))
+static VALUE
+rg_caller_allocates_p(VALUE self)
+{
+    GIArgInfo *info;
 
-#define GI_TYPE_INFO2RVAL(info)      GI_BASE_INFO2RVAL(info)
-#define RVAL2GI_TYPE_INFO(rb_object) ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+    info = SELF(self);
+    return CBOOL2RVAL(g_arg_info_is_caller_allocates(info));
+}
 
-VALUE       rb_gi_base_info_to_ruby  (GIBaseInfo *info);
-GIBaseInfo *rb_gi_base_info_from_ruby(VALUE rb_info);
+void
+rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
+{
+    VALUE RG_TARGET_NAMESPACE;
 
-#endif
+    RG_TARGET_NAMESPACE =
+	G_DEF_CLASS_WITH_PARENT(GI_TYPE_ARG_INFO, "ArgInfo", rb_mGI,
+				rb_cGIBaseInfo);
+
+    RG_DEF_METHOD_P(caller_allocates, 0);
+}

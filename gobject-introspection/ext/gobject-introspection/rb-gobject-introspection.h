@@ -35,6 +35,7 @@ extern void Init_gobject_introspection(void);
 void rb_gi_base_info_init(VALUE rb_mGI);
 void rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo);
+void rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_repository_init(VALUE rb_mGI);
 

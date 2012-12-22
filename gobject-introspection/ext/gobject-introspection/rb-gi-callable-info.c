@@ -62,6 +62,17 @@ rg_n_args(VALUE self)
     return INT2NUM(g_callable_info_get_n_args(info));
 }
 
+static VALUE
+rg_operator_aref(VALUE self, VALUE rb_n)
+{
+    GICallableInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_ARG_INFO2RVAL(g_callable_info_get_arg(info, n));
+}
+
 void
 rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -74,6 +85,7 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(return_type, 0);
     RG_DEF_METHOD_P(may_return_null, 0);
     RG_DEF_METHOD(n_args, 0);
+    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }
