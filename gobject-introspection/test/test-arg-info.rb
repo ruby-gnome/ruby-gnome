@@ -30,4 +30,8 @@ class TestArgInfo < Test::Unit::TestCase
   def test_caller_allocate?
     assert_false(@info.caller_allocates?)
   end
+
+  def test_return_value?
+    assert_false(@info.return_value?)
+  end
 end

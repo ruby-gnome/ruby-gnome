@@ -53,6 +53,15 @@ rg_caller_allocates_p(VALUE self)
     return CBOOL2RVAL(g_arg_info_is_caller_allocates(info));
 }
 
+static VALUE
+rg_return_value_p(VALUE self)
+{
+    GIArgInfo *info;
+
+    info = SELF(self);
+    return CBOOL2RVAL(g_arg_info_is_return_value(info));
+}
+
 void
 rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -64,6 +73,7 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 
     RG_DEF_METHOD(direction, 0);
     RG_DEF_METHOD_P(caller_allocates, 0);
+    RG_DEF_METHOD_P(return_value, 0);
 
     G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);
     G_DEF_CLASS(G_TYPE_I_SCOPE_TYPE, "ScopeType", rb_mGI);
