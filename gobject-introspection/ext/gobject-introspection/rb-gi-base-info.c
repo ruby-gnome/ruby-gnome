@@ -26,8 +26,12 @@
 VALUE
 rb_gi_base_info_to_ruby(GIBaseInfo *info)
 {
-    GType g_type = GI_TYPE_BASE_INFO;
+    GType g_type;
     GIInfoType info_type;
+
+    if (!info) {
+	return Qnil;
+    }
 
     info_type = g_base_info_get_type(info);
     switch (info_type) {
@@ -35,6 +39,7 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
 	g_type = GI_TYPE_FUNCTION_INFO;
 	break;
       default:
+	g_type = GI_TYPE_BASE_INFO;
 	break;
     }
 
