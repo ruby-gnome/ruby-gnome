@@ -53,6 +53,17 @@ rg_tag(VALUE self)
     return GI_TYPE_TAG2RVAL(g_type_info_get_tag(info));
 }
 
+static VALUE
+rg_operator_aref(VALUE self, VALUE rb_n)
+{
+    GITypeInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_type_info_get_param_type(info, n));
+}
+
 void
 rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -64,6 +75,7 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 
     RG_DEF_METHOD_P(pointer, 0);
     RG_DEF_METHOD(tag, 0);
+    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
 
     G_DEF_CLASS(G_TYPE_I_TYPE_TAG, "TypeTag", rb_mGI);
 }

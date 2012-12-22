@@ -18,7 +18,7 @@ class TestTypeInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
-    @function_info = @repository.find("GObject", "signal_name")
+    @function_info = @repository.find("GObject", "signal_list_ids")
     @info = @function_info.return_type
   end
 
@@ -29,5 +29,10 @@ class TestTypeInfo < Test::Unit::TestCase
   def test_tag
     assert_kind_of(GObjectIntrospection::TypeTag,
                    @info.tag)
+  end
+
+  def test_aref
+    assert_kind_of(GObjectIntrospection::TypeInfo,
+                   @info[0])
   end
 end
