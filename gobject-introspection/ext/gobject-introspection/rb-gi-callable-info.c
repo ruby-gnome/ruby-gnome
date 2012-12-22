@@ -29,8 +29,8 @@ gi_callable_info_get_type(void)
     static GType type = 0;
     if (type == 0) {
 	type = g_boxed_type_register_static("GICallableInfo",
-					    (GBoxedCopyFunc)g_base_info_ref,
-					    (GBoxedFreeFunc)g_base_info_unref);
+                                            (GBoxedCopyFunc)g_base_info_ref,
+                                            (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
@@ -79,8 +79,8 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
-	G_DEF_CLASS_WITH_PARENT(GI_TYPE_CALLABLE_INFO, "CallableInfo", rb_mGI,
-				rb_cGIBaseInfo);
+        G_DEF_CLASS_WITH_PARENT(GI_TYPE_CALLABLE_INFO, "CallableInfo", rb_mGI,
+                                rb_cGIBaseInfo);
 
     RG_DEF_METHOD(return_type, 0);
     RG_DEF_METHOD_P(may_return_null, 0);
