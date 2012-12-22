@@ -25,4 +25,9 @@ class TestTypeInfo < Test::Unit::TestCase
   def test_pointer?
     assert_true(@info.pointer?)
   end
+
+  def test_tag
+    assert_kind_of(GObjectIntrospection::TypeTag,
+                   @info.tag)
+  end
 end

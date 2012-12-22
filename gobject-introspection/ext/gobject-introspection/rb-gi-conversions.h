@@ -38,6 +38,7 @@
 #define GI_TRANSFER2RVAL(transfer)   (GENUM2RVAL(transfer, G_TYPE_I_TRANSFER))
 #define GI_DIRECTION2RVAL(direction) (GENUM2RVAL(direction, G_TYPE_I_DIRECTION))
 #define GI_SCOPE_TYPE2RVAL(scope)    (GENUM2RVAL(scope, G_TYPE_I_SCOPE_TYPE))
+#define GI_TYPE_TAG2RVAL(tag)        (GENUM2RVAL(tag, G_TYPE_I_TYPE_TAG))
 
 VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
