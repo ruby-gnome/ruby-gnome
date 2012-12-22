@@ -16,4 +16,5 @@
 
 source :rubygems
 
+gem "rake"
 gem "pkg-config"
