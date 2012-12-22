@@ -48,12 +48,30 @@ rb_gi_base_info_from_ruby(VALUE rb_info)
 }
 
 static VALUE
+rg_name(VALUE self)
+{
+    GIBaseInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_base_info_get_name(info));
+}
+
+static VALUE
 rg_namespace(VALUE self)
 {
     GIBaseInfo *info;
 
     info = SELF(self);
     return CSTR2RVAL(g_base_info_get_namespace(info));
+}
+
+static VALUE
+rg_operator_aref(VALUE self, VALUE name)
+{
+    GIBaseInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_base_info_get_attribute(info, RVAL2CSTR(name)));
 }
 
 void
@@ -63,7 +81,9 @@ rb_gi_base_info_init(VALUE rb_mGI)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GI_TYPE_BASE_INFO, "BaseInfo", rb_mGI);
 
+    RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(namespace, 0);
+    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

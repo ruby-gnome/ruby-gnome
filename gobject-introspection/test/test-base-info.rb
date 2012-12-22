@@ -14,30 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestRepository < Test::Unit::TestCase
+class TestBaseInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
+    @info = @repository.find("GObject", "Object")
   end
 
-  def test_get_n_infos
-    assert_kind_of(Integer, @repository.get_n_infos("GObject"))
+  def test_name
+    assert_equal("Object", @info.name)
   end
 
-  def test_enumerable
-    namespaces = @repository.collect do |info|
-      info.namespace
-    end
-    assert_equal(["GObject"], namespaces.uniq)
-  end
-
-  def test_find_by_gtype
-    info = @repository.find(GLib::Object.gtype)
-    assert_equal("Object", info.name)
-  end
-
-  def test_find_by_name
-    info = @repository.find("GObject", "Object")
-    assert_equal("Object", info.name)
+  def test_namespace
+    assert_equal("GObject", @info.namespace)
   end
 end

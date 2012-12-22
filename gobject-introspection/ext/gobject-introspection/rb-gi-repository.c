@@ -117,6 +117,30 @@ rg_each(VALUE self)
 		     rg_each_ensure, (VALUE)(&data));
 }
 
+static VALUE
+rg_find(int argc, VALUE *argv, VALUE self)
+{
+    GIBaseInfo *info;
+
+    if (argc == 1) {
+	VALUE rb_gtype;
+	GType gtype;
+	rb_gtype = argv[0];
+	gtype = NUM2UINT(rb_gtype);
+	info = g_irepository_find_by_gtype(SELF(self), gtype);
+    } else {
+	VALUE rb_namespace, rb_name;
+	const gchar *namespace_, *name;
+
+	rb_scan_args(argc, argv, "2", &rb_namespace, &rb_name);
+	namespace_ = RVAL2CSTR(rb_namespace);
+	name = RVAL2CSTR(rb_name);
+	info = g_irepository_find_by_name(SELF(self), namespace_, name);
+    }
+
+    return GI_BASE_INFO2RVAL(info);
+}
+
 void
 rb_gi_repository_init(VALUE rb_mGI)
 {
@@ -130,6 +154,7 @@ rb_gi_repository_init(VALUE rb_mGI)
     RG_DEF_METHOD(require, -1);
     RG_DEF_METHOD(get_n_infos, 1);
     RG_DEF_METHOD(each, 0);
+    RG_DEF_METHOD(find, -1);
 
     G_DEF_CLASS(G_TYPE_I_REPOSITORY_LOAD_FLAGS, "RepositoryLoadFlags", rb_mGI);
     G_DEF_CLASS(G_TYPE_I_REPOSITORY_ERROR, "RepositoryError", rb_mGI);
