@@ -21,7 +21,7 @@
 #include "rb-gobject-introspection.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
-#define SELF(self) RVAL2GI_FUNCTION_INFO(self)
+#define SELF(self) RVAL2GI_BASE_INFO(self)
 
 GType
 gi_function_info_get_type(void)
@@ -35,6 +35,15 @@ gi_function_info_get_type(void)
     return type;
 }
 
+static VALUE
+rg_symbol(VALUE self)
+{
+    GIFunctionInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_function_info_get_symbol(info));
+}
+
 void
 rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -43,4 +52,6 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_TARGET_NAMESPACE =
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
 				rb_cGIBaseInfo);
+
+    RG_DEF_METHOD(symbol, 0);
 }
