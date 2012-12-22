@@ -17,4 +17,3 @@
 source :rubygems
 
 gem "pkg-config"
-V
