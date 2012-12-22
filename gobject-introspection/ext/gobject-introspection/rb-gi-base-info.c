@@ -21,7 +21,7 @@
 #include "rb-gobject-introspection.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIBaseInfo
-#define SELF(self) RVAL2GI_BASE_IFNO(self)
+#define SELF(self) RVAL2GI_BASE_INFO(self)
 
 VALUE
 rb_gi_base_info_to_ruby(GIBaseInfo *info)
@@ -41,12 +41,29 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
     return BOXED2RVAL(info, g_type);
 }
 
+GIBaseInfo *
+rb_gi_base_info_from_ruby(VALUE rb_info)
+{
+    return RVAL2BOXED(rb_info, GI_TYPE_BASE_INFO);
+}
+
+static VALUE
+rg_namespace(VALUE self)
+{
+    GIBaseInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_base_info_get_namespace(info));
+}
+
 void
 rb_gi_base_info_init(VALUE rb_mGI)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GI_TYPE_BASE_INFO, "BaseInfo", rb_mGI);
+
+    RG_DEF_METHOD(namespace, 0);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

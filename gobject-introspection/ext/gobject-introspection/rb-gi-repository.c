@@ -78,17 +78,15 @@ rg_each_body(VALUE arg)
     gint i;
 
     for (i = 0; data->namespaces[i]; i++) {
-	VALUE rb_namespace;
 	const gchar *namespace_;
 	gint j, n_infos;
 
 	namespace_ = data->namespaces[i];
-	rb_namespace = CSTR2RVAL(namespace_);
 	n_infos = g_irepository_get_n_infos(data->repository, namespace_);
 	for (j = 0; j < n_infos; j++) {
 	    GIBaseInfo *info;
 	    info = g_irepository_get_info(data->repository, namespace_, j);
-	    rb_yield(rb_ary_new3(2, rb_namespace, GI_BASE_INFO2RVAL(info)));
+	    rb_yield(GI_BASE_INFO2RVAL(info));
 	}
     }
 

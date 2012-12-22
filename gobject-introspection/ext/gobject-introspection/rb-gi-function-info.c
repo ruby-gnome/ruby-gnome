@@ -21,7 +21,7 @@
 #include "rb-gobject-introspection.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
-#define SELF(self) RVAL2GI_FUNCTION_IFNO(self)
+#define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
 GType
 gi_function_info_get_type(void)

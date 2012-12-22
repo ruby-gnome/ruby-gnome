@@ -25,8 +25,8 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_enumerable
-    namespaces = @repository.collect do |namespace, info|
-      namespace
+    namespaces = @repository.collect do |info|
+      info.namespace
     end
     assert_equal(["GObject"], namespaces.uniq)
   end
