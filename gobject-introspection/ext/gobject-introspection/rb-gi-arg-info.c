@@ -116,6 +116,15 @@ rg_destroy(VALUE self)
     return INT2NUM(g_arg_info_get_destroy(info));
 }
 
+static VALUE
+rg_type(VALUE self)
+{
+    GIArgInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_arg_info_get_type(info));
+}
+
 void
 rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -134,6 +143,7 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(scope, 0);
     RG_DEF_METHOD(closure, 0);
     RG_DEF_METHOD(destroy, 0);
+    RG_DEF_METHOD(type, 0);
 
     G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);
     G_DEF_CLASS(G_TYPE_I_SCOPE_TYPE, "ScopeType", rb_mGI);

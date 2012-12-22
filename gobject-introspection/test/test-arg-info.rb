@@ -60,4 +60,9 @@ class TestArgInfo < Test::Unit::TestCase
   def test_destroy
     assert_equal(-1, @info.destroy)
   end
+
+  def test_type
+    assert_kind_of(GObjectIntrospection::TypeInfo,
+                   @info.type)
+  end
 end
