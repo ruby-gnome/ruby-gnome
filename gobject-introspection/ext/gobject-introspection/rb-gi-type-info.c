@@ -86,6 +86,4 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(tag, 0);
     RG_DEF_METHOD_OPERATOR("[]", aref, 1);
     RG_DEF_METHOD(interface, 0);
-
-    G_DEF_CLASS(G_TYPE_I_TYPE_TAG, "TypeTag", rb_mGI);
 }

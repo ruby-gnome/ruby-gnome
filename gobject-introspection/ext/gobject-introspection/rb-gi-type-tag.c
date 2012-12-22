@@ -20,15 +20,24 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_mGObjectIntrospection
+#define RG_TARGET_NAMESPACE rb_cGITypeTag
+#define SELF(self) (RVAL2GI_TYPE_TAG(self))
+
+static VALUE
+rg_to_s(VALUE self)
+{
+    GITypeTag tag;
+
+    tag = SELF(self);
+    return CSTR2RVAL(g_type_tag_to_string(tag));
+}
 
 void
-Init_gobject_introspection(void)
+rb_gi_type_tag_init(VALUE rb_mGI)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
-    rb_gi_type_tag_init(RG_TARGET_NAMESPACE);
-    rb_gi_base_info_init(RG_TARGET_NAMESPACE);
-    rb_gi_repository_init(RG_TARGET_NAMESPACE);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_I_TYPE_TAG, "TypeTag", rb_mGI);
+
+    RG_DEF_METHOD(to_s, 0);
 }
