@@ -35,4 +35,12 @@ class TestTypeInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::TypeInfo,
                    @info[0])
   end
+
+  def test_interface
+    function_info = @repository.find("GObject", "type_class_ref")
+    info = function_info.return_type
+    p info.interface.type
+    assert_kind_of(GObjectIntrospection::TypeInfo,
+                   info.interface)
+  end
 end

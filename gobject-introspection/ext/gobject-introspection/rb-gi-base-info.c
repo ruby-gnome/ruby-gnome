@@ -72,6 +72,15 @@ rb_gi_base_info_from_ruby(VALUE rb_info)
 }
 
 static VALUE
+rg_type(VALUE self)
+{
+    GIBaseInfo *info;
+
+    info = SELF(self);
+    return GI_INFO_TYPE2RVAL(g_base_info_get_type(info));
+}
+
+static VALUE
 rg_name(VALUE self)
 {
     GIBaseInfo *info;
@@ -127,10 +136,13 @@ rb_gi_base_info_init(VALUE rb_mGI)
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
+    RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(namespace, 0);
     RG_DEF_METHOD_OPERATOR("[]", aref, 1);
     RG_DEF_METHOD(each, 0);
+
+    G_DEF_CLASS(G_TYPE_I_INFO_TYPE, "InfoType", rb_mGI);
 
     rb_gi_callable_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_arg_info_init(rb_mGI, RG_TARGET_NAMESPACE);
