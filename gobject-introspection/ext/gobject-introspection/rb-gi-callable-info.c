@@ -44,6 +44,15 @@ rg_return_type(VALUE self)
     return GI_TYPE_INFO2RVAL(g_callable_info_get_return_type(info));
 }
 
+static VALUE
+rg_may_return_null_p(VALUE self)
+{
+    GICallableInfo *info;
+
+    info = SELF(self);
+    return CBOOL2RVAL(g_callable_info_may_return_null(info));
+}
+
 void
 rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -54,6 +63,7 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 				rb_cGIBaseInfo);
 
     RG_DEF_METHOD(return_type, 0);
+    RG_DEF_METHOD_P(may_return_null, 0);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }
