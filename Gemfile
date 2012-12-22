@@ -18,3 +18,4 @@ source :rubygems
 
 gem "rake"
 gem "pkg-config"
+gem "cairo"
