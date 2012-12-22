@@ -25,7 +25,4 @@
 #define RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags) \
     (RVAL2GFLAGS(rb_flags, G_TYPE_I_REPOSITORY_LOAD_FLAGS))
 
-#define GI_TYPELIB2RVAL(g_object)      (BOXED2RVAL(g_object, G_TYPE_ITYPELIB))
-#define RVAL2GI_TYPELIB(rb_object)     (RVAL2BOXED(rb_object, G_TYPE_ITYPELIB))
-
 #endif

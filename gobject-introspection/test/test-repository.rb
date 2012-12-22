@@ -17,16 +17,10 @@
 class TestRepository < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
-  end
-
-  def test_require
-    namespace = "GObject"
-    typelib = @repository.require("GObject")
-    assert_equal(namespace, typelib.namespace)
+    @repository.require("GObject")
   end
 
   def test_get_n_infos
-    @repository.require("GObject")
     assert_kind_of(Integer, @repository.get_n_infos("GObject"))
   end
 end

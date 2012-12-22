@@ -28,6 +28,5 @@ Init_gobject_introspection(void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
-    rb_gi_typelib_init(RG_TARGET_NAMESPACE);
     rb_gi_repository_init(RG_TARGET_NAMESPACE);
 }

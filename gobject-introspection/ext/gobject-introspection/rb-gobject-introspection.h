@@ -32,7 +32,6 @@
 
 extern void Init_gobject_introspection(void);
 
-void rb_gi_typelib_init(VALUE rb_mGI);
 void rb_gi_repository_init(VALUE rb_mGI);
 
 #endif

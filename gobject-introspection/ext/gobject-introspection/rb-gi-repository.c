@@ -35,7 +35,6 @@ rg_require(int argc, VALUE *argv, VALUE self)
     VALUE rb_namespace, rb_version, rb_flags;
     const gchar *namespace_, *version;
     GIRepositoryLoadFlags flags = G_IREPOSITORY_LOAD_FLAG_LAZY;
-    GITypelib *typelib;
     GError *error = NULL;
 
     rb_scan_args(argc, argv, "12", &rb_namespace, &rb_version, &rb_flags);
@@ -46,16 +45,12 @@ rg_require(int argc, VALUE *argv, VALUE self)
 	flags = RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags);
     }
 
-    typelib = g_irepository_require(SELF(self),
-				    namespace_,
-				    version,
-				    flags,
-				    &error);
+    g_irepository_require(SELF(self), namespace_, version, flags, &error);
     if (error) {
 	RAISE_GERROR(error);
     }
 
-    return GI_TYPELIB2RVAL(typelib);
+    return Qnil;
 }
 
 static VALUE

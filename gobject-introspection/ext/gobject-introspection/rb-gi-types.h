@@ -21,8 +21,4 @@
 #ifndef RB_GI_TYPES_H
 #define RB_GI_TYPES_H
 
-#define G_TYPE_ITYPELIB (g_itypelib_get_type())
-
-GType g_itypelib_get_type(void);
-
 #endif
