@@ -27,15 +27,16 @@
 
 #define GI_BASE_INFO2RVAL(info)				\
     (rb_gi_base_info_to_ruby((GIBaseInfo *)(info)))
+#define GI_BASE_INFO2RVAL_WITH_UNREF(info)		\
+    (rb_gi_base_info_to_ruby_with_unref((GIBaseInfo *)(info)))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
 
-#define GI_ARG_INFO2RVAL(info)       GI_BASE_INFO2RVAL(info)
 #define RVAL2GI_ARG_INFO(rb_object)  ((GIArgInfo *)RVAL2GI_BASE_INFO(rb_object))
 
-#define GI_TYPE_INFO2RVAL(info)      GI_BASE_INFO2RVAL(info)
 #define RVAL2GI_TYPE_INFO(rb_object) ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
 
-VALUE       rb_gi_base_info_to_ruby  (GIBaseInfo *info);
-GIBaseInfo *rb_gi_base_info_from_ruby(VALUE rb_info);
+VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
+VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
+GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
 
 #endif

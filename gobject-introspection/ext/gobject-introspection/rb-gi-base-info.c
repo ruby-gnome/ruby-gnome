@@ -52,6 +52,19 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
     return BOXED2RVAL(info, g_type);
 }
 
+VALUE
+rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info)
+{
+    VALUE rb_info;
+
+    rb_info = rb_gi_base_info_to_ruby(info);
+    if (!NIL_P(rb_info)) {
+	g_base_info_unref(info);
+    }
+
+    return rb_info;
+}
+
 GIBaseInfo *
 rb_gi_base_info_from_ruby(VALUE rb_info)
 {

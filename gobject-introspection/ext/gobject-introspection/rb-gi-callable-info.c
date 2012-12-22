@@ -41,7 +41,7 @@ rg_return_type(VALUE self)
     GICallableInfo *info;
 
     info = SELF(self);
-    return GI_TYPE_INFO2RVAL(g_callable_info_get_return_type(info));
+    return GI_BASE_INFO2RVAL(g_callable_info_get_return_type(info));
 }
 
 static VALUE
@@ -70,7 +70,7 @@ rg_operator_aref(VALUE self, VALUE rb_n)
 
     info = SELF(self);
     n = NUM2INT(rb_n);
-    return GI_ARG_INFO2RVAL(g_callable_info_get_arg(info, n));
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_callable_info_get_arg(info, n));
 }
 
 void
