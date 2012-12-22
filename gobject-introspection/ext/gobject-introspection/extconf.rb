@@ -67,7 +67,7 @@ end
 enum_type_prefix = "gobject-introspection-enum-types"
 include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject([]) do |result, path|
-  result + Dir.glob(File.join(path.sub(/^-I/, ""), "girepository.h"))
+  result + Dir.glob(File.join(path.sub(/^-I/, ""), "gi{repository,types}.h"))
 end
 glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["girepository.h"])
 

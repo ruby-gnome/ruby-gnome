@@ -54,4 +54,8 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 				rb_cGIBaseInfo);
 
     RG_DEF_METHOD_P(caller_allocates, 0);
+
+    G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);
+    G_DEF_CLASS(G_TYPE_I_SCOPE_TYPE, "ScopeType", rb_mGI);
+    G_DEF_CLASS(G_TYPE_I_TRANSFER, "Transfer", rb_mGI);
 }
