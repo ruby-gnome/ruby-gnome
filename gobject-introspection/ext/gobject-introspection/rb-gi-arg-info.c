@@ -98,6 +98,15 @@ rg_scope(VALUE self)
     return GI_SCOPE_TYPE2RVAL(g_arg_info_get_scope(info));
 }
 
+static VALUE
+rg_closure(VALUE self)
+{
+    GIArgInfo *info;
+
+    info = SELF(self);
+    return INT2NUM(g_arg_info_get_closure(info));
+}
+
 void
 rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -114,6 +123,7 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD_P(may_be_null, 0);
     RG_DEF_METHOD(ownership_transfer, 0);
     RG_DEF_METHOD(scope, 0);
+    RG_DEF_METHOD(closure, 0);
 
     G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);
     G_DEF_CLASS(G_TYPE_I_SCOPE_TYPE, "ScopeType", rb_mGI);

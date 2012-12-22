@@ -52,4 +52,8 @@ class TestArgInfo < Test::Unit::TestCase
     assert_equal(GObjectIntrospection::ScopeType::INVALID,
                  @info.scope)
   end
+
+  def test_closure
+    assert_equal(-1, @info.closure)
+  end
 end
