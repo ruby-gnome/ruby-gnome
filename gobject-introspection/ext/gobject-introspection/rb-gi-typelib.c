@@ -26,7 +26,7 @@
 static GITypelib *
 g_itypelib_copy(GITypelib *typelib)
 {
-    return typelib;
+    return NULL;
 }
 
 static void
