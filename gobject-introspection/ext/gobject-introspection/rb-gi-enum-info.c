@@ -52,7 +52,7 @@ rg_get_value(VALUE self, VALUE rb_n)
 
     info = SELF(self);
     n = NUM2INT(rb_n);
-    return GI_BASE_INFO2RVAL(g_enum_info_get_value(info, n));
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_enum_info_get_value(info, n));
 }
 
 static VALUE
@@ -69,10 +69,50 @@ rg_values(VALUE self)
     for (i = 0; i < n; i++) {
         GIValueInfo *value_info;
         value_info = g_enum_info_get_value(info, i);
-        rb_ary_push(rb_values, GI_BASE_INFO2RVAL(value_info));
+        rb_ary_push(rb_values, GI_BASE_INFO2RVAL_WITH_UNREF(value_info));
     }
 
     return rb_values;
+}
+
+static VALUE
+rg_n_methods(VALUE self)
+{
+    GIEnumInfo *info;
+
+    info = SELF(self);
+    return INT2NUM(g_enum_info_get_n_methods(info));
+}
+
+static VALUE
+rg_get_method(VALUE self, VALUE rb_n)
+{
+    GIEnumInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_enum_info_get_method(info, n));
+}
+
+static VALUE
+rg_methods(VALUE self)
+{
+    GIEnumInfo *info;
+    gint i, n;
+    VALUE rb_methods;
+
+    info = SELF(self);
+
+    rb_methods = rb_ary_new();
+    n = g_enum_info_get_n_methods(info);
+    for (i = 0; i < n; i++) {
+        GIFunctionInfo *function_info;
+        function_info = g_enum_info_get_method(info, i);
+        rb_ary_push(rb_methods, GI_BASE_INFO2RVAL_WITH_UNREF(function_info));
+    }
+
+    return rb_methods;
 }
 
 void
@@ -87,6 +127,9 @@ rb_gi_enum_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(n_values, 0);
     RG_DEF_METHOD(get_value, 1);
     RG_DEF_METHOD(values, 0);
+    RG_DEF_METHOD(n_methods, 0);
+    RG_DEF_METHOD(get_method, 1);
+    RG_DEF_METHOD(methods, 0);
 
     rb_gi_flags_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

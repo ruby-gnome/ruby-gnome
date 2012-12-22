@@ -18,6 +18,7 @@ class TestRepository < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
+    @repository.require("Gio")
   end
 
   def test_get_n_infos
@@ -28,7 +29,7 @@ class TestRepository < Test::Unit::TestCase
     namespaces = @repository.collect do |info|
       info.namespace
     end
-    assert_equal(["GObject"], namespaces.uniq)
+    assert_equal(["GObject", "Gio"].sort, namespaces.uniq.sort)
   end
 
   def test_find_by_gtype

@@ -18,20 +18,10 @@ class TestFlagsInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
-    @info = @repository.find("GObject", "SignalFlags")
   end
 
-  def test_n_values
-    assert_equal(9, @info.n_values)
-  end
-
-  def test_value
-    assert_kind_of(GObjectIntrospection::ValueInfo,
-                   @info.get_value(0))
-  end
-
-  def test_values
-    assert_equal([GObjectIntrospection::ValueInfo] * @info.n_values,
-                 @info.values.collect(&:class))
+  def test_class
+    assert_kind_of(GObjectIntrospection::FlagsInfo,
+                   @repository.find("GObject", "SignalFlags"))
   end
 end
