@@ -74,6 +74,26 @@ rg_operator_aref(VALUE self, VALUE name)
     return CSTR2RVAL(g_base_info_get_attribute(info, RVAL2CSTR(name)));
 }
 
+static VALUE
+rg_each(VALUE self)
+{
+    GIAttributeIter iter = {0, };
+    GIBaseInfo *info;
+    gchar *name, *value;
+
+    RETURN_ENUMERATOR(self, 0, NULL);
+
+    info = SELF(self);
+    while (g_base_info_iterate_attributes(info, &iter, &name, &value)) {
+	VALUE rb_name, rb_value;
+	rb_name  = CSTR2RVAL(name);
+	rb_value = CSTR2RVAL(value);
+	rb_yield(rb_ary_new3(2, rb_name, rb_value));
+    }
+
+    return Qnil;
+}
+
 void
 rb_gi_base_info_init(VALUE rb_mGI)
 {
@@ -81,9 +101,12 @@ rb_gi_base_info_init(VALUE rb_mGI)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GI_TYPE_BASE_INFO, "BaseInfo", rb_mGI);
 
+    rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
+
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(namespace, 0);
     RG_DEF_METHOD_OPERATOR("[]", aref, 1);
+    RG_DEF_METHOD(each, 0);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }
