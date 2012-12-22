@@ -58,6 +58,18 @@ rg_require(int argc, VALUE *argv, VALUE self)
     return GI_TYPELIB2RVAL(typelib);
 }
 
+static VALUE
+rg_get_n_infos(VALUE self, VALUE rb_namespace)
+{
+    const gchar *namespace_;
+    gint n_infos;
+
+    namespace_ = RVAL2CSTR(rb_namespace);
+    n_infos = g_irepository_get_n_infos(SELF(self), namespace_);
+
+    return INT2NUM(n_infos);
+}
+
 void
 rb_gi_repository_init(VALUE rb_mGI)
 {
@@ -70,4 +82,5 @@ rb_gi_repository_init(VALUE rb_mGI)
 
     RG_DEF_SMETHOD(default, 0);
     RG_DEF_METHOD(require, -1);
+    RG_DEF_METHOD(get_n_infos, 1);
 }

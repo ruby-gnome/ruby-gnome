@@ -24,4 +24,9 @@ class TestRepository < Test::Unit::TestCase
     typelib = @repository.require("GObject")
     assert_equal(namespace, typelib.namespace)
   end
+
+  def test_get_n_infos
+    @repository.require("GObject")
+    assert_kind_of(Integer, @repository.get_n_infos("GObject"))
+  end
 end
