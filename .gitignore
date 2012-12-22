@@ -30,3 +30,4 @@ mkmf.log
 /misc/release.rb
 /*.tar.gz
 /tmp/
+/Gemfile.lock
