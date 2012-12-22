@@ -34,4 +34,8 @@ class TestArgInfo < Test::Unit::TestCase
   def test_return_value?
     assert_false(@info.return_value?)
   end
+
+  def test_optional?
+    assert_false(@info.optional?)
+  end
 end
