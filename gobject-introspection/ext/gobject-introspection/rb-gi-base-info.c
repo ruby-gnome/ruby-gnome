@@ -23,10 +23,30 @@
 #define RG_TARGET_NAMESPACE rb_cGIBaseInfo
 #define SELF(self) RVAL2GI_BASE_IFNO(self)
 
+VALUE
+rb_gi_base_info_to_ruby(GIBaseInfo *info)
+{
+    GType g_type = GI_TYPE_BASE_INFO;
+    GIInfoType info_type;
+
+    info_type = g_base_info_get_type(info);
+    switch (info_type) {
+      case GI_INFO_TYPE_FUNCTION:
+	g_type = GI_TYPE_FUNCTION_INFO;
+	break;
+      default:
+	break;
+    }
+
+    return BOXED2RVAL(info, g_type);
+}
+
 void
 rb_gi_base_info_init(VALUE rb_mGI)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GI_TYPE_BASE_INFO, "BaseInfo", rb_mGI);
+
+    rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

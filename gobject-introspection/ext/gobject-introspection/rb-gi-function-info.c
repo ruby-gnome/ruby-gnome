@@ -18,22 +18,29 @@
  *  MA  02110-1301  USA
  */
 
-#ifndef RB_GOBJECT_INTROSPECTION_H
-#define RB_GOBJECT_INTROSPECTION_H
+#include "rb-gobject-introspection.h"
 
-#include <ruby.h>
-#include <rbgobject.h>
+#define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
+#define SELF(self) RVAL2GI_FUNCTION_IFNO(self)
 
-#include <girffi.h>
-#include "gobject-introspection-enum-types.h"
+GType
+gi_function_info_get_type(void)
+{
+    static GType type = 0;
+    if (type == 0) {
+	type = g_boxed_type_register_static("GIFunctionInfo",
+					    (GBoxedCopyFunc)g_base_info_ref,
+					    (GBoxedFreeFunc)g_base_info_unref);
+    }
+    return type;
+}
 
-#include "rb-gi-types.h"
-#include "rb-gi-conversions.h"
+void
+rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
+{
+    VALUE RG_TARGET_NAMESPACE;
 
-extern void Init_gobject_introspection(void);
-
-void rb_gi_base_info_init(VALUE rb_mGI);
-void rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_repository_init(VALUE rb_mGI);
-
-#endif
+    RG_TARGET_NAMESPACE =
+	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
+				rb_cGIBaseInfo);
+}
