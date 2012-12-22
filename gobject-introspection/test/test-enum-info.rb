@@ -48,4 +48,9 @@ class TestEnumInfo < Test::Unit::TestCase
     assert_equal([GObjectIntrospection::FunctionInfo] * @info.n_methods,
                  @info.methods.collect(&:class))
   end
+
+  def test_storage_type
+    assert_equal(GObjectIntrospection::TypeTag::UINT32,
+                 @info.storage_type)
+  end
 end
