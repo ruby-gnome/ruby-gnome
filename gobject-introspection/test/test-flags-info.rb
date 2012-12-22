@@ -29,4 +29,9 @@ class TestFlagsInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::ValueInfo,
                    @info.get_value(0))
   end
+
+  def test_values
+    assert_equal([GObjectIntrospection::ValueInfo] * @info.n_values,
+                 @info.values.collect(&:class))
+  end
 end
