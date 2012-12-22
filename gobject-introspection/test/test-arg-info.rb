@@ -22,6 +22,11 @@ class TestArgInfo < Test::Unit::TestCase
     @info = @callable_info[0]
   end
 
+  def test_direction
+    assert_equal(GObjectIntrospection::Direction::IN,
+                 @info.direction)
+  end
+
   def test_caller_allocate?
     assert_false(@info.caller_allocates?)
   end

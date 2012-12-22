@@ -36,6 +36,15 @@ gi_arg_info_get_type(void)
 }
 
 static VALUE
+rg_direction(VALUE self)
+{
+    GIArgInfo *info;
+
+    info = SELF(self);
+    return GI_DIRECTION2RVAL(g_arg_info_get_direction(info));
+}
+
+static VALUE
 rg_caller_allocates_p(VALUE self)
 {
     GIArgInfo *info;
@@ -53,6 +62,7 @@ rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_ARG_INFO, "ArgInfo", rb_mGI,
 				rb_cGIBaseInfo);
 
+    RG_DEF_METHOD(direction, 0);
     RG_DEF_METHOD_P(caller_allocates, 0);
 
     G_DEF_CLASS(G_TYPE_I_DIRECTION, "Direction", rb_mGI);
