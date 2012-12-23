@@ -47,7 +47,7 @@ rg_require(int argc, VALUE *argv, VALUE self)
 
     g_irepository_require(SELF(self), namespace_, version, flags, &error);
     if (error) {
-	RAISE_GERROR(error);
+	RG_RAISE_ERROR(error);
     }
 
     return Qnil;
