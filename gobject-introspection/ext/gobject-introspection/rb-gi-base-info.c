@@ -56,6 +56,9 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
       case GI_INFO_TYPE_VALUE:
 	g_type = GI_TYPE_VALUE_INFO;
 	break;
+      case GI_INFO_TYPE_PROPERTY:
+	g_type = GI_TYPE_PROPERTY_INFO;
+	break;
       case GI_INFO_TYPE_ARG:
 	g_type = GI_TYPE_ARG_INFO;
 	break;
@@ -165,6 +168,7 @@ rb_gi_base_info_init(VALUE rb_mGI)
     rb_gi_callable_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_registered_type_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_value_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_property_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_arg_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_type_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

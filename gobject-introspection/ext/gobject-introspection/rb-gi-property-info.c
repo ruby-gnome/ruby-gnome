@@ -20,15 +20,15 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
+#define RG_TARGET_NAMESPACE rb_cGIPropertyInfo
 #define SELF(self) RVAL2GI_BASE_INFO(self)
 
 GType
-gi_function_info_get_type(void)
+gi_property_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GIFunctionInfo",
+	type = g_boxed_type_register_static("GIPropertyInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
@@ -36,44 +36,22 @@ gi_function_info_get_type(void)
 }
 
 static VALUE
-rg_symbol(VALUE self)
-{
-    GIFunctionInfo *info;
-
-    info = SELF(self);
-    return CSTR2RVAL(g_function_info_get_symbol(info));
-}
-
-static VALUE
 rg_flags(VALUE self)
 {
-    GIFunctionInfo *info;
+    GIPropertyInfo *info;
 
     info = SELF(self);
-    return GI_FUNCTION_INFO_FLAGS2RVAL(g_function_info_get_flags(info));
-}
-
-static VALUE
-rg_property(VALUE self)
-{
-    GIFunctionInfo *info;
-
-    info = SELF(self);
-    return GI_BASE_INFO2RVAL(g_function_info_get_property(info));
+    return INT2NUM(g_property_info_get_flags(info));
 }
 
 void
-rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
+rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE =
-	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
+	G_DEF_CLASS_WITH_PARENT(GI_TYPE_PROPERTY_INFO, "PropertyInfo", rb_mGI,
 				rb_cGICallableInfo);
 
-    RG_DEF_METHOD(symbol, 0);
     RG_DEF_METHOD(flags, 0);
-    RG_DEF_METHOD(property, 0);
-
-    G_DEF_CLASS(G_TYPE_I_FUNCTION_INFO_FLAGS, "FunctionInfoFlags", rb_mGI);
 }
