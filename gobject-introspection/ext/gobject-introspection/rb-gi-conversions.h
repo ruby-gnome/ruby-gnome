@@ -57,6 +57,8 @@
 
 #define GI_FUNCTION_INFO_FLAGS2RVAL(tag) \
     (GFLAGS2RVAL(tag, G_TYPE_I_FUNCTION_INFO_FLAGS))
+#define GI_VFUNC_INFO_FLAGS2RVAL(tag) \
+    (GFLAGS2RVAL(tag, G_TYPE_IV_FUNC_INFO_FLAGS))
 
 VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
