@@ -29,8 +29,8 @@ gi_function_info_get_type(void)
     static GType type = 0;
     if (type == 0) {
 	type = g_boxed_type_register_static("GIFunctionInfo",
-					    (GBoxedCopyFunc)g_base_info_ref,
-					    (GBoxedFreeFunc)g_base_info_unref);
+                                            (GBoxedCopyFunc)g_base_info_ref,
+                                            (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
@@ -44,6 +44,15 @@ rg_symbol(VALUE self)
     return CSTR2RVAL(g_function_info_get_symbol(info));
 }
 
+static VALUE
+rg_flags(VALUE self)
+{
+    GIFunctionInfo *info;
+
+    info = SELF(self);
+    return GI_FUNCTION_INFO_FLAGS2RVAL(g_function_info_get_flags(info));
+}
+
 void
 rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -54,4 +63,7 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 				rb_cGICallableInfo);
 
     RG_DEF_METHOD(symbol, 0);
+    RG_DEF_METHOD(flags, 0);
+
+    G_DEF_CLASS(G_TYPE_I_FUNCTION_INFO_FLAGS, "FunctionInfoFlags", rb_mGI);
 }

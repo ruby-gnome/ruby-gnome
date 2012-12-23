@@ -55,6 +55,9 @@
 #define RVAL2GI_TYPE_TAG(rb_tag)     (RVAL2GENUM(rb_tag, G_TYPE_I_TYPE_TAG))
 #define GI_TYPE_TAG2RVAL(tag)        (GENUM2RVAL(tag, G_TYPE_I_TYPE_TAG))
 
+#define GI_FUNCTION_INFO_FLAGS2RVAL(tag) \
+    (GFLAGS2RVAL(tag, G_TYPE_I_FUNCTION_INFO_FLAGS))
+
 VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);

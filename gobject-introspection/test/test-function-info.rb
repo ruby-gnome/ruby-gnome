@@ -24,4 +24,9 @@ class TestFunctionInfo < Test::Unit::TestCase
   def test_symbol
     assert_equal("g_signal_name", @info.symbol)
   end
+
+  def test_flags
+    assert_equal(GObjectIntrospection::FunctionInfoFlags.new(0),
+                 @info.flags)
+  end
 end
