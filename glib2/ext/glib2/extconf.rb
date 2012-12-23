@@ -50,7 +50,7 @@ have_var("rb_curr_thread", [ruby_header, "node.h"])
 
 create_pkg_config_file("Ruby/GLib2", package_id)
 
-enum_type_prefix = "glib-enum-types"
+enum_types_prefix = "glib-enum-types"
 include_paths = PKGConfig.cflags_only_I("glib-2.0")
 headers = include_paths.split.inject([]) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
@@ -61,7 +61,7 @@ include_paths = PKGConfig.cflags_only_I("gobject-2.0")
 headers = include_paths.split.inject(headers) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "gobject", "gsignal.h"))
 end
-glib_mkenums(enum_type_prefix, headers, "G_TYPE_", ["glib-object.h"])
+glib_mkenums(enum_types_prefix, headers, "G_TYPE_", ["glib-object.h"])
 
 $defs << "-DRUBY_GLIB2_COMPILATION"
 create_makefile(module_name)
