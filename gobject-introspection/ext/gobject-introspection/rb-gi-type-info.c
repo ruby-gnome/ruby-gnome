@@ -91,6 +91,15 @@ rg_array_fixed_size(VALUE self)
     return INT2NUM(g_type_info_get_array_fixed_size(info));
 }
 
+static VALUE
+rg_zero_terminated_p(VALUE self)
+{
+    GITypeInfo *info;
+
+    info = SELF(self);
+    return CBOOL2RVAL(g_type_info_is_zero_terminated(info));
+}
+
 void
 rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -106,4 +115,5 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(interface, 0);
     RG_DEF_METHOD(array_length, 0);
     RG_DEF_METHOD(array_fixed_size, 0);
+    RG_DEF_METHOD_P(zero_terminated, 0);
 }

@@ -50,4 +50,8 @@ class TestTypeInfo < Test::Unit::TestCase
   def test_array_fixed_size
     assert_equal(-1, @info.array_fixed_size)
   end
+
+  def test_zero_terminated?
+    assert_false(@info.zero_terminated?)
+  end
 end
