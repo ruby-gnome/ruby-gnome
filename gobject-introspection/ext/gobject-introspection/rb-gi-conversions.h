@@ -47,6 +47,8 @@
     ((GIObjectInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_INTERFACE_INFO(rb_object)		\
     ((GIInterfaceInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_CONSTANT_INFO(rb_object)		\
+    ((GIConstantInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_VALUE_INFO(rb_object)			\
     ((GIValueInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_ARG_INFO(rb_object)		\
