@@ -33,28 +33,48 @@
 
 extern void Init_gobject_introspection(void);
 
-void rb_gi_type_tag_init(VALUE rb_mGI);
-void rb_gi_base_info_init(VALUE rb_mGI);
-void rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo);
-void rb_gi_callback_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo);
-void rb_gi_registered_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_boxed_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_enum_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_flags_info_init(VALUE rb_mGI, VALUE rb_cGIEnumInfo);
-void rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_interface_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_constant_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_union_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_value_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_signal_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo);
-void rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo);
-void rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_unresolved_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
-void rb_gi_repository_init(VALUE rb_mGI);
+void rb_gi_type_tag_init             (VALUE rb_mGI);
+void rb_gi_base_info_init            (VALUE rb_mGI);
+void rb_gi_callable_info_init        (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_function_info_init        (VALUE rb_mGI,
+                                      VALUE rb_cGICallableInfo);
+void rb_gi_callback_info_init        (VALUE rb_mGI,
+                                      VALUE rb_cGICallableInfo);
+void rb_gi_registered_type_info_init (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_struct_info_init          (VALUE rb_mGI,
+                                      VALUE rb_cGIRegisteredTypeInfo);
+void rb_gi_boxed_info_init           (VALUE rb_mGI,
+                                      VALUE rb_cGIRegisteredTypeInfo);
+void rb_gi_enum_info_init            (VALUE rb_mGI,
+                                      VALUE rb_cGIRegisteredTypeInfo);
+void rb_gi_flags_info_init           (VALUE rb_mGI,
+                                      VALUE rb_cGIEnumInfo);
+void rb_gi_object_info_init          (VALUE rb_mGI,
+                                      VALUE rb_cGIRegisteredTypeInfo);
+void rb_gi_interface_info_init       (VALUE rb_mGI,
+                                      VALUE rb_cGIRegisteredTypeInfo);
+void rb_gi_constant_info_init        (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_union_info_init           (VALUE rb_mGI,
+                                      VALUE rb_cGIRegisteredTypeInfo);
+void rb_gi_value_info_init           (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_signal_info_init          (VALUE rb_mGI,
+                                      VALUE rb_cGICallableInfo);
+void rb_gi_vfunc_info_init           (VALUE rb_mGI,
+                                      VALUE rb_cGICallableInfo);
+void rb_gi_property_info_init        (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_field_info_init           (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_arg_info_init             (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_type_info_init            (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_unresolved_info_init      (VALUE rb_mGI,
+                                      VALUE rb_cGIBaseInfo);
+void rb_gi_repository_init           (VALUE rb_mGI);
 
 #endif
