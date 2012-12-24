@@ -26,4 +26,8 @@ class TestFieldInfo < Test::Unit::TestCase
     assert_equal(GObjectIntrospection::FieldInfoFlags::READABLE,
                  @info.flags)
   end
+
+  def test_size
+    assert_equal(0, @info.size)
+  end
 end

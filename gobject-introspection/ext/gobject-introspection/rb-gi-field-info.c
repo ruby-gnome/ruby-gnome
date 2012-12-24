@@ -44,6 +44,15 @@ rg_flags(VALUE self)
     return GI_FIELD_INFO_FLAGS2RVAL(g_field_info_get_flags(info));
 }
 
+static VALUE
+rg_size(VALUE self)
+{
+    GIFieldInfo *info;
+
+    info = SELF(self);
+    return INT2NUM(g_field_info_get_size(info));
+}
+
 void
 rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -54,6 +63,7 @@ rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 				rb_cGIBaseInfo);
 
     RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(size, 0);
 
     G_DEF_CLASS(G_TYPE_I_FIELD_INFO_FLAGS, "FieldInfoFlags", rb_mGI);
 }
