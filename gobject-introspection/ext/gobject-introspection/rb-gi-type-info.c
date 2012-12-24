@@ -54,7 +54,7 @@ rg_tag(VALUE self)
 }
 
 static VALUE
-rg_operator_aref(VALUE self, VALUE rb_n)
+rg_get_param_type(VALUE self, VALUE rb_n)
 {
     GITypeInfo *info;
     gint n;
@@ -84,6 +84,6 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 
     RG_DEF_METHOD_P(pointer, 0);
     RG_DEF_METHOD(tag, 0);
-    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
+    RG_DEF_METHOD(get_param_type, 1);
     RG_DEF_METHOD(interface, 0);
 }

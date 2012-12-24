@@ -31,9 +31,9 @@ class TestTypeInfo < Test::Unit::TestCase
                    @info.tag)
   end
 
-  def test_aref
+  def test_param_type
     assert_kind_of(GObjectIntrospection::TypeInfo,
-                   @info[0])
+                   @info.get_param_type(0))
   end
 
   def test_interface
