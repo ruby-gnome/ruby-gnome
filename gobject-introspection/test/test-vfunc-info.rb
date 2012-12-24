@@ -35,4 +35,8 @@ class TestVFuncInfo < Test::Unit::TestCase
   def test_signal
     assert_nil(@info.signal)
   end
+
+  def test_invoker
+    assert_nil(@info.invoker)
+  end
 end
