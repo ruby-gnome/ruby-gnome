@@ -78,6 +78,7 @@ rb_gi_registered_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(gtype, 0);
 
     rb_gi_struct_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_boxed_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_enum_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_object_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_interface_info_init(rb_mGI, RG_TARGET_NAMESPACE);

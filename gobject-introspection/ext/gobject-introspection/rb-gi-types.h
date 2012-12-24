@@ -26,6 +26,7 @@
 #define GI_TYPE_CALLBACK_INFO        (gi_callback_info_get_type())
 #define GI_TYPE_REGISTERED_TYPE_INFO (gi_registered_type_info_get_type())
 #define GI_TYPE_STRUCT_INFO          (gi_struct_info_get_type())
+#define GI_TYPE_BOXED_INFO           (gi_boxed_info_get_type())
 #define GI_TYPE_ENUM_INFO            (gi_enum_info_get_type())
 #define GI_TYPE_FLAGS_INFO           (gi_flags_info_get_type())
 #define GI_TYPE_OBJECT_INFO          (gi_object_info_get_type())
@@ -44,6 +45,7 @@ GType gi_function_info_get_type(void);
 GType gi_callback_info_get_type(void);
 GType gi_registered_type_info_get_type(void);
 GType gi_struct_info_get_type(void);
+GType gi_boxed_info_get_type(void);
 GType gi_enum_info_get_type(void);
 GType gi_flags_info_get_type(void);
 GType gi_object_info_get_type(void);

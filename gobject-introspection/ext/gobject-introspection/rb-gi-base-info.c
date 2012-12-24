@@ -47,6 +47,9 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
       case GI_INFO_TYPE_STRUCT:
 	g_type = GI_TYPE_STRUCT_INFO;
 	break;
+      case GI_INFO_TYPE_BOXED:
+	g_type = GI_TYPE_BOXED_INFO;
+	break;
       case GI_INFO_TYPE_ENUM:
 	g_type = GI_TYPE_ENUM_INFO;
 	break;
