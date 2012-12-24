@@ -30,4 +30,8 @@ class TestFieldInfo < Test::Unit::TestCase
   def test_size
     assert_equal(0, @info.size)
   end
+
+  def test_offset
+    assert_equal(0, @info.offset)
+  end
 end
