@@ -73,6 +73,15 @@ rg_interface(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_type_info_get_interface(info));
 }
 
+static VALUE
+rg_array_length(VALUE self)
+{
+    GITypeInfo *info;
+
+    info = SELF(self);
+    return INT2NUM(g_type_info_get_array_length(info));
+}
+
 void
 rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -86,4 +95,5 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(tag, 0);
     RG_DEF_METHOD(get_param_type, 1);
     RG_DEF_METHOD(interface, 0);
+    RG_DEF_METHOD(array_length, 0);
 }

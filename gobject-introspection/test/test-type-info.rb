@@ -42,4 +42,8 @@ class TestTypeInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::StructInfo,
                    info.interface)
   end
+
+  def test_array_length
+    assert_equal(1, @info.array_length)
+  end
 end
