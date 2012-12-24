@@ -103,4 +103,8 @@ class TestObjectInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::VFuncInfo,
                    @info.get_vfunc(0))
   end
+
+  def test_n_constants
+    assert_equal(0, @info.n_constants)
+  end
 end
