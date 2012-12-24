@@ -23,7 +23,7 @@ class TestSignalInfo < Test::Unit::TestCase
   end
 
   def test_flags
-    assert_equal(GLib::SignalFlags.new("run-cleanup"),
+    assert_equal(GLib::SignalFlags::RUN_CLEANUP,
                  @info.flags)
   end
 
