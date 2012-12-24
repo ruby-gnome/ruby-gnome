@@ -58,4 +58,15 @@ class TestObjectInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::FieldInfo,
                    @info.get_field(0))
   end
+
+  def test_n_properties
+    info = @repository.find("Gio", "BufferedOutputStream")
+    assert_equal(2, info.n_properties)
+  end
+
+  def test_get_property
+    info = @repository.find("Gio", "BufferedOutputStream")
+    assert_kind_of(GObjectIntrospection::PropertyInfo,
+                   info.get_property(0))
+  end
 end
