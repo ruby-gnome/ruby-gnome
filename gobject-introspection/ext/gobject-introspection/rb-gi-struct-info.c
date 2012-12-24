@@ -29,8 +29,8 @@ gi_struct_info_get_type(void)
     static GType type = 0;
     if (type == 0) {
 	type = g_boxed_type_register_static("GIStructInfo",
-					    (GBoxedCopyFunc)g_base_info_ref,
-					    (GBoxedFreeFunc)g_base_info_unref);
+                                            (GBoxedCopyFunc)g_base_info_ref,
+                                            (GBoxedFreeFunc)g_base_info_unref);
     }
     return type;
 }
