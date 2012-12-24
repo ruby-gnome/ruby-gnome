@@ -53,6 +53,15 @@ rg_offset(VALUE self)
     return INT2NUM(g_vfunc_info_get_offset(info));
 }
 
+static VALUE
+rg_signal(VALUE self)
+{
+    GIVFuncInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_vfunc_info_get_signal(info));
+}
+
 void
 rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -66,6 +75,7 @@ rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 
     RG_DEF_METHOD(flags, 0);
     RG_DEF_METHOD(offset, 0);
+    RG_DEF_METHOD(signal, 0);
 
     G_DEF_CLASS(G_TYPE_IV_FUNC_INFO_FLAGS, "VFuncInfoFlags", rb_mGI);
 }

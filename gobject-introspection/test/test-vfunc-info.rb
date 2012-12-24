@@ -31,4 +31,8 @@ class TestVFuncInfo < Test::Unit::TestCase
     assert_equal(GObjectIntrospection::VFuncInfo::UNKNOWN_OFFSET,
                  @info.offset)
   end
+
+  def test_signal
+    assert_nil(@info.signal)
+  end
 end
