@@ -199,14 +199,23 @@ rg_n_vfuncs(VALUE self)
 }
 
 static VALUE
-rg_get_vfunc(VALUE self, VALUE rb_n)
+rg_get_vfunc(VALUE self, VALUE rb_n_or_name)
 {
     GIObjectInfo *info;
-    gint n;
+    GIVFuncInfo *vfunc_info;
 
     info = SELF(self);
-    n = NUM2INT(rb_n);
-    return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_vfunc(info, n));
+    if (RB_TYPE_P(rb_n_or_name, T_FIXNUM)) {
+        gint n;
+        n = NUM2INT(rb_n_or_name);
+        vfunc_info = g_object_info_get_vfunc(info, n);
+    } else {
+        const gchar *name;
+        name = RVAL2CSTR(rb_n_or_name);
+        vfunc_info = g_object_info_find_vfunc(info, name);
+    }
+
+    return GI_BASE_INFO2RVAL_WITH_UNREF(vfunc_info);
 }
 
 static VALUE

@@ -99,9 +99,14 @@ class TestObjectInfo < Test::Unit::TestCase
     assert_equal(9, @info.n_vfuncs)
   end
 
-  def test_get_vfunc
+  def test_get_vfunc_n
     assert_kind_of(GObjectIntrospection::VFuncInfo,
                    @info.get_vfunc(0))
+  end
+
+  def test_get_vfunc_name
+    assert_kind_of(GObjectIntrospection::VFuncInfo,
+                   @info.get_vfunc("can_seek"))
   end
 
   def test_n_constants
