@@ -140,6 +140,26 @@ rg_get_property(VALUE self, VALUE rb_n)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_property(info, n));
 }
 
+static VALUE
+rg_n_methods(VALUE self)
+{
+    GIObjectInfo *info;
+
+    info = SELF(self);
+    return INT2NUM(g_object_info_get_n_methods(info));
+}
+
+static VALUE
+rg_get_method(VALUE self, VALUE rb_n)
+{
+    GIObjectInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_method(info, n));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -160,4 +180,6 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(get_field, 1);
     RG_DEF_METHOD(n_properties, 0);
     RG_DEF_METHOD(get_property, 1);
+    RG_DEF_METHOD(n_methods, 0);
+    RG_DEF_METHOD(get_method, 1);
 }
