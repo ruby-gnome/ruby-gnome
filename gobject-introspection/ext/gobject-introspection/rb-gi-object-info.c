@@ -44,6 +44,15 @@ rg_type_name(VALUE self)
     return CSTR2RVAL(g_object_info_get_type_name(info));
 }
 
+static VALUE
+rg_type_init(VALUE self)
+{
+    GIObjectInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_object_info_get_type_init(info));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -54,4 +63,5 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 				rb_cGIRegisteredTypeInfo);
 
     RG_DEF_METHOD(type_name, 0);
+    RG_DEF_METHOD(type_init, 0);
 }
