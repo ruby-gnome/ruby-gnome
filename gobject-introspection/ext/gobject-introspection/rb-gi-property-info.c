@@ -44,6 +44,15 @@ rg_flags(VALUE self)
     return INT2NUM(g_property_info_get_flags(info));
 }
 
+static VALUE
+rg_type(VALUE self)
+{
+    GIPropertyInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_property_info_get_type(info));
+}
+
 void
 rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -54,4 +63,5 @@ rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 				rb_cGICallableInfo);
 
     RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(type, 0);
 }
