@@ -112,4 +112,8 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_n_constants
     assert_equal(0, @info.n_constants)
   end
+
+  def test_unref_function
+    assert_nil(@info.unref_function)
+  end
 end

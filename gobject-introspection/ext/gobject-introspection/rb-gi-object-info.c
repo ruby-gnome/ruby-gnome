@@ -238,6 +238,15 @@ rg_get_constant(VALUE self, VALUE rb_n)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_constant(info, n));
 }
 
+static VALUE
+rg_unref_function(VALUE self)
+{
+    GIObjectInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_object_info_get_unref_function(info));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -266,4 +275,5 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(get_vfunc, 1);
     RG_DEF_METHOD(n_constants, 0);
     RG_DEF_METHOD(get_constant, 1);
+    RG_DEF_METHOD(unref_function, 0);
 }
