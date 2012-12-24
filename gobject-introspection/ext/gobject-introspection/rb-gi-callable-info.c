@@ -118,6 +118,7 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(args, 0);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_callback_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_signal_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_vfunc_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

@@ -35,8 +35,14 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
 
     info_type = g_base_info_get_type(info);
     switch (info_type) {
+      case GI_INFO_TYPE_INVALID:
+	g_type = GI_TYPE_BASE_INFO;
+	break;
       case GI_INFO_TYPE_FUNCTION:
 	g_type = GI_TYPE_FUNCTION_INFO;
+	break;
+      case GI_INFO_TYPE_CALLBACK:
+	g_type = GI_TYPE_CALLBACK_INFO;
 	break;
       case GI_INFO_TYPE_STRUCT:
 	g_type = GI_TYPE_STRUCT_INFO;
