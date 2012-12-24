@@ -124,4 +124,8 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_set_value_function
     assert_nil(@info.set_value_function)
   end
+
+  def test_get_value_function
+    assert_nil(@info.get_value_function)
+  end
 end
