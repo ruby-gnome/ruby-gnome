@@ -45,6 +45,7 @@ void rb_gi_interface_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo);
 void rb_gi_value_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo);
 void rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
+void rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_repository_init(VALUE rb_mGI);

@@ -45,6 +45,8 @@
     ((GIValueInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_ARG_INFO(rb_object)		\
     ((GIArgInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_FIELD_INFO(rb_object)                   \
+    ((GIFieldInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_TYPE_INFO(rb_object)			\
     ((GITypeInfo *)RVAL2GI_BASE_INFO(rb_object))
 
@@ -59,6 +61,8 @@
     (GFLAGS2RVAL(tag, G_TYPE_I_FUNCTION_INFO_FLAGS))
 #define GI_VFUNC_INFO_FLAGS2RVAL(tag) \
     (GFLAGS2RVAL(tag, G_TYPE_IV_FUNC_INFO_FLAGS))
+#define GI_FIELD_INFO_FLAGS2RVAL(tag)                   \
+    (GFLAGS2RVAL(tag, G_TYPE_I_FIELD_INFO_FLAGS))
 
 VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
