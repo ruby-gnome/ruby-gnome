@@ -44,5 +44,5 @@ rb_gi_callback_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_CALLBACK_INFO, "CallbackInfo", rb_mGI,
 				rb_cGICallableInfo);
 
-    (void)RG_TARGET_NAMESPACE; /* suppress a warning */
+    (void)RG_TARGET_NAMESPACE; /* suppress a warning. */
 }
