@@ -109,6 +109,17 @@ rg_n_fields(VALUE self)
     return INT2NUM(g_object_info_get_n_fields(info));
 }
 
+static VALUE
+rg_get_field(VALUE self, VALUE rb_n)
+{
+    GIObjectInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_field(info, n));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -126,4 +137,5 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(n_interfaces, 0);
     RG_DEF_METHOD(get_interface, 1);
     RG_DEF_METHOD(n_fields, 0);
+    RG_DEF_METHOD(get_field, 1);
 }
