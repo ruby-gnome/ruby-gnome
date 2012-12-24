@@ -26,4 +26,8 @@ class TestSignalInfo < Test::Unit::TestCase
     assert_equal(GLib::SignalFlags.new("run-cleanup"),
                  @info.flags)
   end
+
+  def test_class_closure
+    assert_nil(@info.class_closure)
+  end
 end

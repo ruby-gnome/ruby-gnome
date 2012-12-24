@@ -44,6 +44,15 @@ rg_flags(VALUE self)
     return GI_SIGNAL_FLAGS2RVAL(g_signal_info_get_flags(info));
 }
 
+static VALUE
+rg_class_closure(VALUE self)
+{
+    GISignalInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_signal_info_get_class_closure(info));
+}
+
 void
 rb_gi_signal_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -54,4 +63,5 @@ rb_gi_signal_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 				rb_cGICallableInfo);
 
     RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(class_closure, 0);
 }
