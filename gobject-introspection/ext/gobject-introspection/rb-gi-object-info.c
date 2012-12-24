@@ -97,7 +97,7 @@ rg_get_interface(VALUE self, VALUE rb_n)
 
     info = SELF(self);
     n = NUM2INT(rb_n);
-    return GI_BASE_INFO2RVAL(g_object_info_get_interface(info, n));
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_interface(info, n));
 }
 
 static VALUE
