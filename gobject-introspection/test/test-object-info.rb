@@ -116,4 +116,8 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_unref_function
     assert_nil(@info.unref_function)
   end
+
+  def test_ref_function
+    assert_nil(@info.ref_function)
+  end
 end
