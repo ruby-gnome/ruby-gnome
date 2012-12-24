@@ -46,4 +46,8 @@ class TestTypeInfo < Test::Unit::TestCase
   def test_array_length
     assert_equal(1, @info.array_length)
   end
+
+  def test_array_fixed_size
+    assert_equal(-1, @info.array_fixed_size)
+  end
 end
