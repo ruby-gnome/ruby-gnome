@@ -71,6 +71,49 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_field_info_get_type(info));
 }
 
+static VALUE
+rg_get_field(VALUE self, VALUE rb_memory)
+{
+    GIFieldInfo *info;
+    gpointer memory;
+    GIArgument argument;
+    GITypeInfo *type_info;
+    VALUE rb_field_value;
+
+    info = SELF(self);
+    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
+    if (!g_field_info_get_field(info, memory, &argument)) {
+        rb_raise(rb_eArgError, "failed to get field value");
+    }
+
+    type_info = g_field_info_get_type(info);
+    rb_field_value = GI_ARGUMENT2RVAL(&argument, type_info);
+    g_base_info_unref(type_info);
+
+    return rb_field_value;
+}
+
+static VALUE
+rg_set_field(VALUE self, VALUE rb_memory, VALUE rb_field_value)
+{
+    GIFieldInfo *info;
+    gpointer memory;
+    GIArgument field_value;
+    GITypeInfo *type_info;
+
+    info = SELF(self);
+    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
+    type_info = g_field_info_get_type(info);
+    RVAL2GI_ARGUMENT(&field_value, type_info, rb_field_value);
+    g_base_info_unref(type_info);
+
+    if (!g_field_info_set_field(info, memory, &field_value)) {
+        rb_raise(rb_eArgError, "failed to set field value");
+    }
+
+    return Qnil;
+}
+
 void
 rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -84,6 +127,8 @@ rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(size, 0);
     RG_DEF_METHOD(offset, 0);
     RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(get_field, 1);
+    RG_DEF_METHOD(set_field, 2);
 
     G_DEF_CLASS(G_TYPE_I_FIELD_INFO_FLAGS, "FieldInfoFlags", rb_mGI);
 }
