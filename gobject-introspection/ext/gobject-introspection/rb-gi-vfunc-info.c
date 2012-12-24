@@ -44,6 +44,15 @@ rg_flags(VALUE self)
     return GI_VFUNC_INFO_FLAGS2RVAL(g_vfunc_info_get_flags(info));
 }
 
+static VALUE
+rg_offset(VALUE self)
+{
+    GIVFuncInfo *info;
+
+    info = SELF(self);
+    return INT2NUM(g_vfunc_info_get_offset(info));
+}
+
 void
 rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -53,7 +62,10 @@ rb_gi_vfunc_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_VFUNC_INFO, "VFuncInfo", rb_mGI,
 				rb_cGICallableInfo);
 
+    rb_define_const(RG_TARGET_NAMESPACE, "UNKNOWN_OFFSET", INT2NUM(0xFFFF));
+
     RG_DEF_METHOD(flags, 0);
+    RG_DEF_METHOD(offset, 0);
 
     G_DEF_CLASS(G_TYPE_IV_FUNC_INFO_FLAGS, "VFuncInfoFlags", rb_mGI);
 }
