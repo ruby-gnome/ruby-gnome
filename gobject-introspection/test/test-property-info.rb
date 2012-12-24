@@ -30,4 +30,9 @@ class TestPropertyInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::TypeInfo,
                    @info.type)
   end
+
+  def test_ownership_transfer
+    assert_equal(GObjectIntrospection::Transfer::NOTHING,
+                 @info.ownership_transfer)
+  end
 end

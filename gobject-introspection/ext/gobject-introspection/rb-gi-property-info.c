@@ -53,6 +53,15 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_property_info_get_type(info));
 }
 
+static VALUE
+rg_ownership_transfer(VALUE self)
+{
+    GIPropertyInfo *info;
+
+    info = SELF(self);
+    return GI_TRANSFER2RVAL(g_property_info_get_ownership_transfer(info));
+}
+
 void
 rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
@@ -64,4 +73,5 @@ rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 
     RG_DEF_METHOD(flags, 0);
     RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(ownership_transfer, 0);
 }
