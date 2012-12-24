@@ -89,6 +89,17 @@ rg_n_interfaces(VALUE self)
     return INT2NUM(g_object_info_get_n_interfaces(info));
 }
 
+static VALUE
+rg_get_interface(VALUE self, VALUE rb_n)
+{
+    GIObjectInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_BASE_INFO2RVAL(g_object_info_get_interface(info, n));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -104,4 +115,5 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD_P(fundamental, 0);
     RG_DEF_METHOD(parent, 0);
     RG_DEF_METHOD(n_interfaces, 0);
+    RG_DEF_METHOD(get_interface, 1);
 }

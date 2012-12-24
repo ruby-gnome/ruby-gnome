@@ -44,4 +44,9 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_n_interfaces
     assert_equal(1, @info.n_interfaces)
   end
+
+  def test_get_interface
+    assert_kind_of(GObjectIntrospection::InterfaceInfo,
+                   @info.get_interface(0))
+  end
 end
