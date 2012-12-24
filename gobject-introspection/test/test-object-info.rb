@@ -28,4 +28,8 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_type_init
     assert_equal("g_object_get_type", @info.type_init)
   end
+
+  def test_abstract?
+    assert_false(@info.abstract?)
+  end
 end

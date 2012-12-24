@@ -53,6 +53,15 @@ rg_type_init(VALUE self)
     return CSTR2RVAL(g_object_info_get_type_init(info));
 }
 
+static VALUE
+rg_abstract_p(VALUE self)
+{
+    GIObjectInfo *info;
+
+    info = SELF(self);
+    return CBOOL2RVAL(g_object_info_get_abstract(info));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -64,4 +73,5 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 
     RG_DEF_METHOD(type_name, 0);
     RG_DEF_METHOD(type_init, 0);
+    RG_DEF_METHOD_P(abstract, 0);
 }
