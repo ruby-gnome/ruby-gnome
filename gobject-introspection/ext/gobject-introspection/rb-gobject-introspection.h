@@ -54,6 +54,7 @@ void rb_gi_property_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_field_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_arg_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
+void rb_gi_unresolved_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo);
 void rb_gi_repository_init(VALUE rb_mGI);
 
 #endif

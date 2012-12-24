@@ -93,7 +93,7 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
 	g_type = GI_TYPE_TYPE_INFO;
 	break;
       case GI_INFO_TYPE_UNRESOLVED:
-	g_type = GI_TYPE_BASE_INFO;
+	g_type = GI_TYPE_UNRESOLVED_INFO;
 	break;
       default:
 	g_type = GI_TYPE_BASE_INFO;
@@ -203,4 +203,5 @@ rb_gi_base_info_init(VALUE rb_mGI)
     rb_gi_field_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_arg_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_type_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_unresolved_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }
