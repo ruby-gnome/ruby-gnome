@@ -31,6 +31,12 @@
     (rb_gi_base_info_to_ruby_with_unref((GIBaseInfo *)(info)))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
 
+#define GI_ARGUMENT2RVAL(argument, type_info)           \
+    (rb_gi_argument_to_ruby((argument), (type_info)))
+#define RVAL2GI_ARGUMENT(argument, type_info, rb_argument) \
+    (rb_gi_argument_from_ruby((argument), (type_info), (rb_argument)))
+
+
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
     ((GIRegisteredTypeInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_STRUCT_INFO(rb_object)			\
@@ -68,4 +74,11 @@ VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
 
+VALUE       rb_gi_argument_to_ruby            (GIArgument *argument,
+                                               GITypeInfo *type_info);
+GIArgument *rb_gi_argument_from_ruby          (GIArgument *argument,
+                                               GITypeInfo *type_info,
+                                               VALUE       rb_argument);
+
 #endif
+
