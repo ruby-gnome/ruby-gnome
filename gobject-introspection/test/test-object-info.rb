@@ -18,6 +18,7 @@ class TestObjectInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
+    @repository.require("Gio")
     @info = @repository.find("GObject", "Object")
   end
 
@@ -35,5 +36,10 @@ class TestObjectInfo < Test::Unit::TestCase
 
   def test_fundamental?
     assert_false(@info.fundamental?)
+  end
+
+  def test_parent
+    info = @repository.find("Gio", "FileOutputStream")
+    assert_equal("OutputStream", info.parent.name)
   end
 end

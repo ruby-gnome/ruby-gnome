@@ -71,6 +71,15 @@ rg_fundamental_p(VALUE self)
     return CBOOL2RVAL(g_object_info_get_fundamental(info));
 }
 
+static VALUE
+rg_parent(VALUE self)
+{
+    GIObjectInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_object_info_get_parent(info));
+}
+
 void
 rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -84,4 +93,5 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(type_init, 0);
     RG_DEF_METHOD_P(abstract, 0);
     RG_DEF_METHOD_P(fundamental, 0);
+    RG_DEF_METHOD(parent, 0);
 }
