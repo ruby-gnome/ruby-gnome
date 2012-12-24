@@ -56,6 +56,12 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
       case GI_INFO_TYPE_VALUE:
 	g_type = GI_TYPE_VALUE_INFO;
 	break;
+      case GI_INFO_TYPE_SIGNAL:
+	g_type = GI_TYPE_SIGNAL_INFO;
+	break;
+      case GI_INFO_TYPE_VFUNC:
+	g_type = GI_TYPE_VFUNC_INFO;
+	break;
       case GI_INFO_TYPE_PROPERTY:
 	g_type = GI_TYPE_PROPERTY_INFO;
 	break;
