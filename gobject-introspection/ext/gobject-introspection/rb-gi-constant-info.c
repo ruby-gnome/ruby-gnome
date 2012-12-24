@@ -44,6 +44,23 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_constant_info_get_type(info));
 }
 
+static VALUE
+rg_value(VALUE self)
+{
+    GIConstantInfo *info;
+    GIArgument value;
+    GITypeInfo *type_info;
+    VALUE rb_value;
+
+    info = SELF(self);
+    type_info = g_constant_info_get_type(info);
+    rb_value = GI_ARGUMENT2RVAL(&value, type_info);
+    g_base_info_unref(type_info);
+    g_constant_info_free_value(info, &value);
+
+    return rb_value;
+}
+
 void
 rb_gi_constant_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -54,4 +71,5 @@ rb_gi_constant_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 				rb_cGIBaseInfo);
 
     RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(value, 0);
 }
