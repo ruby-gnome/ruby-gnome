@@ -29,4 +29,9 @@ class TestFunctionInfo < Test::Unit::TestCase
     assert_equal(GObjectIntrospection::FunctionInfoFlags.new(0),
                  @info.flags)
   end
+
+  def test_invoke
+    assert_equal("notify", @info.invoke(1))
+  end
 end
+
