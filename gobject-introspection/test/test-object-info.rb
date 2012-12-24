@@ -32,4 +32,8 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_abstract?
     assert_false(@info.abstract?)
   end
+
+  def test_fundamental?
+    assert_false(@info.fundamental?)
+  end
 end
