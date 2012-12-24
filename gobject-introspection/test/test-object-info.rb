@@ -17,17 +17,16 @@
 class TestObjectInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
-    @repository.require("GObject")
     @repository.require("Gio")
-    @info = @repository.find("GObject", "Object")
+    @info = @repository.find("Gio", "FileOutputStream")
   end
 
   def test_type_name
-    assert_equal("GObject", @info.type_name)
+    assert_equal("GFileOutputStream", @info.type_name)
   end
 
   def test_type_init
-    assert_equal("g_object_get_type", @info.type_init)
+    assert_equal("g_file_output_stream_get_type", @info.type_init)
   end
 
   def test_abstract?
@@ -39,7 +38,10 @@ class TestObjectInfo < Test::Unit::TestCase
   end
 
   def test_parent
-    info = @repository.find("Gio", "FileOutputStream")
-    assert_equal("OutputStream", info.parent.name)
+    assert_equal("OutputStream", @info.parent.name)
+  end
+
+  def test_n_interfaces
+    assert_equal(1, @info.n_interfaces)
   end
 end
