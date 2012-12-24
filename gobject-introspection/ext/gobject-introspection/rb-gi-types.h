@@ -42,26 +42,26 @@
 #define GI_TYPE_TYPE_INFO            (gi_type_info_get_type())
 #define GI_TYPE_UNRESOLVED_INFO      (gi_unresolved_info_get_type())
 
-GType gi_callable_info_get_type(void);
-GType gi_function_info_get_type(void);
-GType gi_callback_info_get_type(void);
-GType gi_registered_type_info_get_type(void);
-GType gi_struct_info_get_type(void);
-GType gi_boxed_info_get_type(void);
-GType gi_enum_info_get_type(void);
-GType gi_flags_info_get_type(void);
-GType gi_object_info_get_type(void);
-GType gi_interface_info_get_type(void);
-GType gi_constant_info_get_type(void);
-GType gi_union_info_get_type(void);
-GType gi_value_info_get_type(void);
-GType gi_signal_info_get_type(void);
-GType gi_vfunc_info_get_type(void);
-GType gi_property_info_get_type(void);
-GType gi_field_info_get_type(void);
-GType gi_arg_info_get_type(void);
-GType gi_type_info_get_type(void);
-GType gi_unresolved_info_get_type(void);
+GType gi_callable_info_get_type        (void);
+GType gi_function_info_get_type        (void);
+GType gi_callback_info_get_type        (void);
+GType gi_registered_type_info_get_type (void);
+GType gi_struct_info_get_type          (void);
+GType gi_boxed_info_get_type           (void);
+GType gi_enum_info_get_type            (void);
+GType gi_flags_info_get_type           (void);
+GType gi_object_info_get_type          (void);
+GType gi_interface_info_get_type       (void);
+GType gi_constant_info_get_type        (void);
+GType gi_union_info_get_type           (void);
+GType gi_value_info_get_type           (void);
+GType gi_signal_info_get_type          (void);
+GType gi_vfunc_info_get_type           (void);
+GType gi_property_info_get_type        (void);
+GType gi_field_info_get_type           (void);
+GType gi_arg_info_get_type             (void);
+GType gi_type_info_get_type            (void);
+GType gi_unresolved_info_get_type      (void);
 
 
 #endif
