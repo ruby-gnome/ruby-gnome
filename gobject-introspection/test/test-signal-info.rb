@@ -30,4 +30,8 @@ class TestSignalInfo < Test::Unit::TestCase
   def test_class_closure
     assert_nil(@info.class_closure)
   end
+
+  def test_true_stops_emit?
+    assert_false(@info.true_stops_emit?)
+  end
 end
