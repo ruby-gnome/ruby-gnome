@@ -94,4 +94,13 @@ class TestObjectInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::SignalInfo,
                    info.get_signal(0))
   end
+
+  def test_n_vfuncs
+    assert_equal(9, @info.n_vfuncs)
+  end
+
+  def test_get_vfunc
+    assert_kind_of(GObjectIntrospection::VFuncInfo,
+                   @info.get_vfunc(0))
+  end
 end
