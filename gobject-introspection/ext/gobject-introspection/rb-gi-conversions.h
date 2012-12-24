@@ -64,6 +64,7 @@
 #define GI_SCOPE_TYPE2RVAL(scope)    (GENUM2RVAL(scope, G_TYPE_I_SCOPE_TYPE))
 #define RVAL2GI_TYPE_TAG(rb_tag)     (RVAL2GENUM(rb_tag, G_TYPE_I_TYPE_TAG))
 #define GI_TYPE_TAG2RVAL(tag)        (GENUM2RVAL(tag, G_TYPE_I_TYPE_TAG))
+#define GI_ARRAY_TYPE2RVAL(type)     (rb_gi_array_type_to_ruby(type))
 
 #define GI_FUNCTION_INFO_FLAGS2RVAL(tag) \
     (GFLAGS2RVAL(tag, G_TYPE_I_FUNCTION_INFO_FLAGS))
@@ -83,6 +84,8 @@ VALUE       rb_gi_argument_to_ruby            (GIArgument *argument,
 GIArgument *rb_gi_argument_from_ruby          (GIArgument *argument,
                                                GITypeInfo *type_info,
                                                VALUE       rb_argument);
+
+VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);
 
 #endif
 

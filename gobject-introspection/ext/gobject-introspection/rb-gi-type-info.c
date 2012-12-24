@@ -35,6 +35,16 @@ gi_type_info_get_type(void)
     return type;
 }
 
+VALUE
+rb_gi_array_type_to_ruby(GIArrayType type)
+{
+    if (type == (GIArrayType)-1) {
+        return Qnil;
+    } else {
+        return GENUM2RVAL(type, G_TYPE_I_ARRAY_TYPE);
+    }
+}
+
 static VALUE
 rg_pointer_p(VALUE self)
 {
@@ -100,6 +110,15 @@ rg_zero_terminated_p(VALUE self)
     return CBOOL2RVAL(g_type_info_is_zero_terminated(info));
 }
 
+static VALUE
+rg_array_type(VALUE self)
+{
+    GITypeInfo *info;
+
+    info = SELF(self);
+    return GI_ARRAY_TYPE2RVAL(g_type_info_get_array_type(info));
+}
+
 void
 rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
 {
@@ -116,4 +135,7 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(array_length, 0);
     RG_DEF_METHOD(array_fixed_size, 0);
     RG_DEF_METHOD_P(zero_terminated, 0);
+    RG_DEF_METHOD(array_type, 0);
+
+    G_DEF_CLASS(G_TYPE_I_ARRAY_TYPE, "ArrayType", rb_mGI);
 }

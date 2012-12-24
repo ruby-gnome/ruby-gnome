@@ -54,4 +54,9 @@ class TestTypeInfo < Test::Unit::TestCase
   def test_zero_terminated?
     assert_false(@info.zero_terminated?)
   end
+
+  def test_array_type
+    assert_equal(GObjectIntrospection::ArrayType::C,
+                 @info.array_type)
+  end
 end
