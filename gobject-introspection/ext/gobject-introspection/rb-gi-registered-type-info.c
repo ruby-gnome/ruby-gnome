@@ -82,4 +82,5 @@ rb_gi_registered_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     rb_gi_enum_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_object_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_interface_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_union_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

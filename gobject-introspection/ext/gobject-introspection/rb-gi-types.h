@@ -32,6 +32,7 @@
 #define GI_TYPE_OBJECT_INFO          (gi_object_info_get_type())
 #define GI_TYPE_INTERFACE_INFO       (gi_interface_info_get_type())
 #define GI_TYPE_CONSTANT_INFO        (gi_constant_info_get_type())
+#define GI_TYPE_UNION_INFO           (gi_union_info_get_type())
 #define GI_TYPE_VALUE_INFO           (gi_value_info_get_type())
 #define GI_TYPE_SIGNAL_INFO          (gi_signal_info_get_type())
 #define GI_TYPE_VFUNC_INFO           (gi_vfunc_info_get_type())
@@ -51,6 +52,7 @@ GType gi_flags_info_get_type(void);
 GType gi_object_info_get_type(void);
 GType gi_interface_info_get_type(void);
 GType gi_constant_info_get_type(void);
+GType gi_union_info_get_type(void);
 GType gi_value_info_get_type(void);
 GType gi_signal_info_get_type(void);
 GType gi_vfunc_info_get_type(void);

@@ -65,6 +65,12 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
       case GI_INFO_TYPE_CONSTANT:
 	g_type = GI_TYPE_CONSTANT_INFO;
 	break;
+      case GI_INFO_TYPE_INVALID_0:
+	g_type = GI_TYPE_BASE_INFO;
+	break;
+      case GI_INFO_TYPE_UNION:
+	g_type = GI_TYPE_UNION_INFO;
+	break;
       case GI_INFO_TYPE_VALUE:
 	g_type = GI_TYPE_VALUE_INFO;
 	break;
@@ -85,6 +91,9 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
 	break;
       case GI_INFO_TYPE_TYPE:
 	g_type = GI_TYPE_TYPE_INFO;
+	break;
+      case GI_INFO_TYPE_UNRESOLVED:
+	g_type = GI_TYPE_BASE_INFO;
 	break;
       default:
 	g_type = GI_TYPE_BASE_INFO;
