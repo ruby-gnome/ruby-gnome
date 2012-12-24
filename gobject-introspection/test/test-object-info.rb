@@ -120,4 +120,8 @@ class TestObjectInfo < Test::Unit::TestCase
   def test_ref_function
     assert_nil(@info.ref_function)
   end
+
+  def test_set_value_function
+    assert_nil(@info.set_value_function)
+  end
 end
