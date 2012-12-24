@@ -74,8 +74,24 @@ class TestObjectInfo < Test::Unit::TestCase
     assert_equal(4, @info.n_methods)
   end
 
-  def test_get_method
+  def test_get_method_n
     assert_kind_of(GObjectIntrospection::FunctionInfo,
                    @info.get_method(0))
+  end
+
+  def test_get_method_name
+    assert_kind_of(GObjectIntrospection::FunctionInfo,
+                   @info.get_method("get_etag"))
+  end
+
+  def test_n_signals
+    info = @repository.find("Gio", "Application")
+    assert_equal(5, info.n_signals)
+  end
+
+  def test_get_signal
+    info = @repository.find("Gio", "Application")
+    assert_kind_of(GObjectIntrospection::SignalInfo,
+                   info.get_signal(0))
   end
 end
