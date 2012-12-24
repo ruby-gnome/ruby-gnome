@@ -34,4 +34,9 @@ class TestFieldInfo < Test::Unit::TestCase
   def test_offset
     assert_equal(0, @info.offset)
   end
+
+  def test_type
+    assert_kind_of(GObjectIntrospection::TypeInfo,
+                   @info.type)
+  end
 end
