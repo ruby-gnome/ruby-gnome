@@ -64,6 +64,8 @@ unless required_pkg_config_package(package_id,
   exit(false)
 end
 
+make_version_header("GI", package_id, ".")
+
 enum_type_prefix = "gobject-introspection-enum-types"
 include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject([]) do |result, path|

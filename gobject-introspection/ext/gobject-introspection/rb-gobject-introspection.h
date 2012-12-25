@@ -28,6 +28,8 @@
 #include <girffi.h>
 #include "gobject-introspection-enum-types.h"
 
+#include "rbgiversion.h"
+
 #include "rb-gi-types.h"
 #include "rb-gi-conversions.h"
 

@@ -28,6 +28,13 @@ Init_gobject_introspection(void)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
+
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(GI_MAJOR_VERSION),
+                                INT2FIX(GI_MINOR_VERSION),
+                                INT2FIX(GI_MICRO_VERSION)));
+
     rb_gi_type_tag_init(RG_TARGET_NAMESPACE);
     rb_gi_base_info_init(RG_TARGET_NAMESPACE);
     rb_gi_repository_init(RG_TARGET_NAMESPACE);

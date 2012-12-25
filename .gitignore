@@ -21,6 +21,7 @@ Makefile.lib
 /poppler/test/tmp/
 /gobject-introspection/ext/gobject-introspection/gobject-introspection-enum-types.c
 /gobject-introspection/ext/gobject-introspection/gobject-introspection-enum-types.h
+/gobject-introspection/ext/gobject-introspection/rbgiversion.h
 mkmf.log
 */tmp/
 */vendor/
