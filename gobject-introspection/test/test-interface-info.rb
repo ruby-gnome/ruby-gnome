@@ -72,4 +72,15 @@ class TestInterfaceInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::FunctionInfo,
                    info.get_signal("changed"))
   end
+
+  def test_n_vfuncs
+    info = @repository.find("Gio", "Volume")
+    assert_equal(20, info.n_vfuncs)
+  end
+
+  def test_get_vfunc
+    info = @repository.find("Gio", "Volume")
+    assert_kind_of(GObjectIntrospection::VFuncInfo,
+                   info.get_vfunc(0))
+  end
 end
