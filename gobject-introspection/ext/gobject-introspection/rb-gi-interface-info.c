@@ -188,6 +188,15 @@ rg_get_constant(VALUE self, VALUE rb_n)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_interface_info_get_constant(info, n));
 }
 
+static VALUE
+rg_iface_struct(VALUE self)
+{
+    GIInterfaceInfo *info;
+
+    info = SELF(self);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_interface_info_get_iface_struct(info));
+}
+
 void
 rb_gi_interface_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -209,4 +218,5 @@ rb_gi_interface_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(get_vfunc, 1);
     RG_DEF_METHOD(n_constants, 0);
     RG_DEF_METHOD(get_constant, 1);
+    RG_DEF_METHOD(iface_struct, 0);
 }

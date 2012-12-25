@@ -89,4 +89,9 @@ class TestInterfaceInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::VFuncInfo,
                    info.get_vfunc("can_eject"))
   end
+
+  def test_iface_struct
+    assert_kind_of(GObjectIntrospection::StructInfo,
+                   @info.iface_struct)
+  end
 end
