@@ -114,14 +114,19 @@ get_superclass(GType gtype)
         return rb_cObject;
       default:
       {
-          const RGObjClassInfo *cinfo_super;
           GType parent_type;
 
           parent_type = g_type_parent(gtype);
-          cinfo_super = rbgobj_lookup_class_by_gtype_without_lock(parent_type,
-                                                                  Qnil,
-                                                                  TRUE);
-          return cinfo_super->klass;
+          if (parent_type == G_TYPE_INVALID) {
+              return cInstantiatable;
+          } else {
+              const RGObjClassInfo *cinfo_super;
+              cinfo_super =
+                  rbgobj_lookup_class_by_gtype_without_lock(parent_type,
+                                                            Qnil,
+                                                            TRUE);
+              return cinfo_super->klass;
+          }
       }
     }
 }
