@@ -14,23 +14,11 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "glib2"
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_environment_path(vendor_bin_dir)
-begin
-  major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/gobject_introspection.so"
-rescue LoadError
-  require "gobject_introspection.so"
-end
-
 module GObjectIntrospection
-  LOG_DOMAIN = "GObjectIntrospection"
+  class Loader
+    class << self
+      def load(namespace)
+      end
+    end
+  end
 end
-
-GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
-
-require "gobject-introspection/loader"

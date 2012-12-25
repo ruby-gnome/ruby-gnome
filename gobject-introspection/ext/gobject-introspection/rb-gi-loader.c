@@ -20,23 +20,31 @@
 
 #include "rb-gobject-introspection.h"
 
-#define RG_TARGET_NAMESPACE rb_mGObjectIntrospection
+#define RG_TARGET_NAMESPACE rb_cGILoader
+
+static VALUE
+rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
+{
+    VALUE rb_gtype, rb_name, rb_module;
+    VALUE rb_options, rb_parent;
+    GType gtype;
+
+    rb_scan_args(argc, argv, "31", &rb_gtype, &rb_name, &rb_module, &rb_options);
+    rbg_scan_options(rb_options,
+		     "parent", &rb_parent,
+		     NULL);
+
+    gtype = NUM2ULONG(rb_to_int(rb_gtype));
+    return G_DEF_CLASS_WITH_PARENT(gtype, RVAL2CSTR(rb_name),
+				   rb_module, rb_parent);
+}
 
 void
-Init_gobject_introspection(void)
+rb_gi_loader_init(VALUE rb_mGI)
 {
     VALUE RG_TARGET_NAMESPACE;
 
-    RG_TARGET_NAMESPACE = rb_define_module("GObjectIntrospection");
+    RG_TARGET_NAMESPACE = rb_define_class_under(rb_mGI, "Loader", rb_cObject);
 
-    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
-                    rb_ary_new3(3,
-                                INT2FIX(GI_MAJOR_VERSION),
-                                INT2FIX(GI_MINOR_VERSION),
-                                INT2FIX(GI_MICRO_VERSION)));
-
-    rb_gi_type_tag_init(RG_TARGET_NAMESPACE);
-    rb_gi_base_info_init(RG_TARGET_NAMESPACE);
-    rb_gi_repository_init(RG_TARGET_NAMESPACE);
-    rb_gi_loader_init(RG_TARGET_NAMESPACE);
+    RG_DEF_SMETHOD(define_class, -1);
 }
