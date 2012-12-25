@@ -18,7 +18,7 @@ class TestInterfaceInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("Gio")
-    @info = @repository.find("Gio", "ActionMap")
+    @info = @repository.find("Gio", "TlsServerConnection")
   end
 
   def test_n_prerequisites
@@ -26,7 +26,16 @@ class TestInterfaceInfo < Test::Unit::TestCase
   end
 
   def test_prerequisite
-    assert_kind_of(GObjectIntrospection::InterfaceInfo,
+    assert_kind_of(GObjectIntrospection::ObjectInfo,
                    @info.get_prerequisite(0))
+  end
+
+  def test_n_properties
+    assert_equal(1, @info.n_properties)
+  end
+
+  def test_propertiy
+    assert_kind_of(GObjectIntrospection::PropertyInfo,
+                   @info.get_property(0))
   end
 end
