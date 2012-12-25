@@ -54,13 +54,36 @@ rg_require(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
+rg_get_dependencies(VALUE self, VALUE rb_namespace)
+{
+    GIRepository *repository;
+    const gchar *namespace_;
+    VALUE rb_dependencies;
+    gchar **dependencies;
+    gint i;
+
+    repository = SELF(self);
+    namespace_ = RVAL2CSTR(rb_namespace);
+    dependencies = g_irepository_get_dependencies(repository, namespace_);
+    rb_dependencies = rb_ary_new();
+    for (i = 0; dependencies[i]; i++) {
+        rb_ary_push(rb_dependencies, CSTR2RVAL(dependencies[i]));
+    }
+    g_strfreev(dependencies);
+
+    return rb_dependencies;
+}
+
+static VALUE
 rg_loaded_namespaces(VALUE self)
 {
+    GIRepository *repository;
     VALUE rb_namespaces;
     gchar **namespaces;
     gint i;
 
-    namespaces = g_irepository_get_loaded_namespaces(SELF(self));
+    repository = SELF(self);
+    namespaces = g_irepository_get_loaded_namespaces(repository);
     rb_namespaces = rb_ary_new();
     for (i = 0; namespaces[i]; i++) {
         rb_ary_push(rb_namespaces, CSTR2RVAL(namespaces[i]));
@@ -130,6 +153,7 @@ rb_gi_repository_init(VALUE rb_mGI)
 
     RG_DEF_SMETHOD(default, 0);
     RG_DEF_METHOD(require, -1);
+    RG_DEF_METHOD(get_dependencies, 1);
     RG_DEF_METHOD(loaded_namespaces, 0);
     RG_DEF_METHOD(get_n_infos, 1);
     RG_DEF_METHOD(get_info, 2);

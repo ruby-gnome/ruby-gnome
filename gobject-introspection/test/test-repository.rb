@@ -30,6 +30,11 @@ class TestRepository < Test::Unit::TestCase
                    @repository.get_info("GObject", 0))
   end
 
+  def test_get_dependencies
+    assert_equal(["GLib-2.0", "GObject-2.0"].sort,
+                 @repository.get_dependencies("Gio").sort)
+  end
+
   def test_loaded_namespaces
     assert_equal(["GObject", "Gio"].sort,
                  @repository.loaded_namespaces.sort)
