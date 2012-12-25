@@ -38,4 +38,18 @@ class TestInterfaceInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::PropertyInfo,
                    @info.get_property(0))
   end
+
+  def test_n_methods
+    assert_equal(1, @info.n_methods)
+  end
+
+  def test_get_method_n
+    assert_kind_of(GObjectIntrospection::FunctionInfo,
+                   @info.get_method(0))
+  end
+
+  def test_get_method_name
+    assert_kind_of(GObjectIntrospection::FunctionInfo,
+                   @info.get_method("new"))
+  end
 end
