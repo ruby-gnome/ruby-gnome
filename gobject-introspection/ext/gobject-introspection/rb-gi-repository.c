@@ -84,9 +84,9 @@ rg_each_body(VALUE arg)
 	namespace_ = data->namespaces[i];
 	n_infos = g_irepository_get_n_infos(data->repository, namespace_);
 	for (j = 0; j < n_infos; j++) {
-	    GIBaseInfo *info;
-	    info = g_irepository_get_info(data->repository, namespace_, j);
-	    rb_yield(GI_BASE_INFO2RVAL(info));
+            GIBaseInfo *info;
+            info = g_irepository_get_info(data->repository, namespace_, j);
+            rb_yield(GI_BASE_INFO2RVAL(info));
 	}
     }
 
@@ -114,7 +114,7 @@ rg_each(VALUE self)
     data.repository = SELF(self);
     data.namespaces = g_irepository_get_loaded_namespaces(data.repository);
     return rb_ensure(rg_each_body,  (VALUE)(&data),
-		     rg_each_ensure, (VALUE)(&data));
+                     rg_each_ensure, (VALUE)(&data));
 }
 
 static VALUE
