@@ -44,6 +44,17 @@ rg_n_prerequisites(VALUE self)
     return INT2NUM(g_interface_info_get_n_prerequisites(info));
 }
 
+static VALUE
+rg_get_prerequisite(VALUE self, VALUE rb_n)
+{
+    GIInterfaceInfo *info;
+    gint n;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    return GI_BASE_INFO2RVAL_WITH_UNREF(g_interface_info_get_prerequisite(info, n));
+}
+
 void
 rb_gi_interface_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -54,4 +65,5 @@ rb_gi_interface_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 				rb_cGIRegisteredTypeInfo);
 
     RG_DEF_METHOD(n_prerequisites, 0);
+    RG_DEF_METHOD(get_prerequisite, 1);
 }

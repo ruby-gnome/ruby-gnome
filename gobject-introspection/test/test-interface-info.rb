@@ -17,11 +17,16 @@
 class TestInterfaceInfo < Test::Unit::TestCase
   def setup
     @repository = GObjectIntrospection::Repository.default
-    @repository.require("GObject")
-    @info = @repository.find("GObject", "TypePlugin")
+    @repository.require("Gio")
+    @info = @repository.find("Gio", "ActionMap")
   end
 
   def test_n_prerequisites
-    assert_equal(0, @info.n_prerequisites)
+    assert_equal(1, @info.n_prerequisites)
+  end
+
+  def test_prerequisite
+    assert_kind_of(GObjectIntrospection::InterfaceInfo,
+                   @info.get_prerequisite(0))
   end
 end
