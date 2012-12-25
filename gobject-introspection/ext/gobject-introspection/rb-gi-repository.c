@@ -34,7 +34,7 @@ rg_require(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_namespace, rb_version, rb_flags;
     const gchar *namespace_, *version;
-    GIRepositoryLoadFlags flags = G_IREPOSITORY_LOAD_FLAG_LAZY;
+    GIRepositoryLoadFlags flags = 0;
     GError *error = NULL;
 
     rb_scan_args(argc, argv, "12", &rb_namespace, &rb_version, &rb_flags);
