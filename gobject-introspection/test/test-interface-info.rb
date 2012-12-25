@@ -78,9 +78,15 @@ class TestInterfaceInfo < Test::Unit::TestCase
     assert_equal(20, info.n_vfuncs)
   end
 
-  def test_get_vfunc
+  def test_get_vfunc_n
     info = @repository.find("Gio", "Volume")
     assert_kind_of(GObjectIntrospection::VFuncInfo,
                    info.get_vfunc(0))
+  end
+
+  def test_get_vfunc_name
+    info = @repository.find("Gio", "Volume")
+    assert_kind_of(GObjectIntrospection::VFuncInfo,
+                   info.get_vfunc("can_eject"))
   end
 end
