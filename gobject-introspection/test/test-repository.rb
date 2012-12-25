@@ -25,6 +25,16 @@ class TestRepository < Test::Unit::TestCase
     assert_kind_of(Integer, @repository.get_n_infos("GObject"))
   end
 
+  def test_get_info
+    assert_kind_of(GObjectIntrospection::BaseInfo,
+                   @repository.get_info("GObject", 0))
+  end
+
+  def test_loaded_namespaces
+    assert_equal(["GObject", "Gio"].sort,
+                 @repository.loaded_namespaces.sort)
+  end
+
   def test_enumerable
     namespaces = @repository.collect do |info|
       info.namespace
