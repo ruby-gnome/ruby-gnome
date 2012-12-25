@@ -18,4 +18,9 @@ require "test-unit"
 require "test/unit/notify"
 
 module GObjectIntrospectionTestUtils
+  def require_version(major, minor, micro)
+    if (GObjectIntrospection::BUILD_VERSION <=> [major, minor, micro]) < 0
+      omit("require GObjectIntrospection #{major}.#{minor}.#{micro} or later.")
+    end
+  end
 end

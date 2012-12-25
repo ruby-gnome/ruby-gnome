@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestInterfaceInfo < Test::Unit::TestCase
+  include GObjectIntrospectionTestUtils
+
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("Gio")
@@ -51,5 +53,23 @@ class TestInterfaceInfo < Test::Unit::TestCase
   def test_get_method_name
     assert_kind_of(GObjectIntrospection::FunctionInfo,
                    @info.get_method("new"))
+  end
+
+  def test_n_signals
+    info = @repository.find("Gio", "Volume")
+    assert_equal(2, info.n_signals)
+  end
+
+  def test_get_signal_n
+    info = @repository.find("Gio", "Volume")
+    assert_kind_of(GObjectIntrospection::SignalInfo,
+                   info.get_signal(0))
+  end
+
+  def test_get_signal_name
+    require_version(1, 34, 0)
+    info = @repository.find("Gio", "Volume")
+    assert_kind_of(GObjectIntrospection::FunctionInfo,
+                   info.get_signal("changed"))
   end
 end

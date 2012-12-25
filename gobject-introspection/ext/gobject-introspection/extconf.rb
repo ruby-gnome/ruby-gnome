@@ -66,6 +66,9 @@ end
 
 make_version_header("GI", package_id, ".")
 
+gi_headers = ["girepository.h"]
+have_func("g_interface_info_find_signal", gi_headers)
+
 enum_type_prefix = "gobject-introspection-enum-types"
 include_paths = PKGConfig.cflags_only_I(package_id)
 headers = include_paths.split.inject([]) do |result, path|
