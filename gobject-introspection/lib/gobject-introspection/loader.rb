@@ -48,10 +48,13 @@ module GObjectIntrospection
         load_interface_info(info)
       when ConstantInfo
         load_constant_info(info)
+      when UnionInfo
+        load_union_info(info)
       end
     end
 
     def load_struct_info(info)
+      # TODO
     end
 
     def load_enum_info(info)
@@ -68,6 +71,10 @@ module GObjectIntrospection
 
     def load_constant_info(info)
       @base_module.const_set(info.name, info.value)
+    end
+
+    def load_union_info(info)
+      # TODO
     end
   end
 end
