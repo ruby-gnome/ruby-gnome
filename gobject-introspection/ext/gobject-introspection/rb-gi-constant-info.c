@@ -49,11 +49,13 @@ rg_value(VALUE self)
 {
     GIConstantInfo *info;
     GIArgument value;
+    gint value_size;
     GITypeInfo *type_info;
     VALUE rb_value;
 
     info = SELF(self);
     type_info = g_constant_info_get_type(info);
+    value_size = g_constant_info_get_value(info, &value);
     rb_value = GI_ARGUMENT2RVAL(&value, type_info);
     g_base_info_unref(type_info);
     g_constant_info_free_value(info, &value);
