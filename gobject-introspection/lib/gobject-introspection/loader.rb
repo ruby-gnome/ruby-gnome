@@ -39,8 +39,18 @@ module GObjectIntrospection
     def load_info(info)
       case info
       when ObjectInfo
-        self.class.define_class(info.gtype, info.name, @base_module)
+        load_object_info(info)
+      when ConstantInfo
+        load_constant_info(info)
       end
+    end
+
+    def load_object_info(info)
+      self.class.define_class(info.gtype, info.name, @base_module)
+    end
+
+    def load_constant_info(info)
+      @base_module.const_set(info.name, info.value)
     end
   end
 end
