@@ -38,11 +38,17 @@ module GObjectIntrospection
     private
     def load_info(info)
       case info
+      when EnumInfo
+        load_enum_info(info)
       when ObjectInfo
         load_object_info(info)
       when ConstantInfo
         load_constant_info(info)
       end
+    end
+
+    def load_enum_info(info)
+      self.class.define_class(info.gtype, info.name, @base_module)
     end
 
     def load_object_info(info)
