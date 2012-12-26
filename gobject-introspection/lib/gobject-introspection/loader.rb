@@ -17,7 +17,29 @@
 module GObjectIntrospection
   class Loader
     class << self
-      def load(namespace)
+      def load(namespace, base_module)
+        loader = new(base_module)
+        loader.load(namespace)
+      end
+    end
+
+    def initialize(base_module)
+      @base_module = base_module
+    end
+
+    def load(namespace)
+      repository = Repository.default
+      repository.require(namespace)
+      repository.each(namespace) do |info|
+        load_info(info)
+      end
+    end
+
+    private
+    def load_info(info)
+      case info
+      when ObjectInfo
+        self.class.define_class(info.gtype, info.name, @base_module)
       end
     end
   end
