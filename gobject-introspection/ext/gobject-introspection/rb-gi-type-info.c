@@ -137,5 +137,7 @@ rb_gi_type_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD_P(zero_terminated, 0);
     RG_DEF_METHOD(array_type, 0);
 
+    rb_undef_method(RG_TARGET_NAMESPACE, "name");
+
     G_DEF_CLASS(G_TYPE_I_ARRAY_TYPE, "ArrayType", rb_mGI);
 }
