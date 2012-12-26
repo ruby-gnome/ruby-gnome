@@ -38,6 +38,8 @@ module GObjectIntrospection
     private
     def load_info(info)
       case info
+      when StructInfo
+        load_struct_info(info)
       when EnumInfo
         load_enum_info(info)
       when ObjectInfo
@@ -45,6 +47,9 @@ module GObjectIntrospection
       when ConstantInfo
         load_constant_info(info)
       end
+    end
+
+    def load_struct_info(info)
     end
 
     def load_enum_info(info)
