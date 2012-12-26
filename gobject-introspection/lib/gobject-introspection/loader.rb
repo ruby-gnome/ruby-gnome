@@ -38,6 +38,8 @@ module GObjectIntrospection
     private
     def load_info(info)
       case info
+      when FunctionInfo
+        load_function_info(info)
       when StructInfo
         load_struct_info(info)
       when EnumInfo
@@ -50,6 +52,15 @@ module GObjectIntrospection
         load_constant_info(info)
       when UnionInfo
         load_union_info(info)
+      end
+    end
+
+    def load_function_info(info)
+      @base_module.module_eval do
+        define_method(info.name) do |*arguments|
+          info.invoke(*arguments)
+        end
+        module_function(info.name)
       end
     end
 
