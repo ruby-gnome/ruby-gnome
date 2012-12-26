@@ -44,6 +44,8 @@ module GObjectIntrospection
         load_enum_info(info)
       when ObjectInfo
         load_object_info(info)
+      when InterfaceInfo
+        load_interface_info(info)
       when ConstantInfo
         load_constant_info(info)
       end
@@ -58,6 +60,10 @@ module GObjectIntrospection
 
     def load_object_info(info)
       self.class.define_class(info.gtype, info.name, @base_module)
+    end
+
+    def load_interface_info(info)
+      self.class.define_interface(info.gtype, info.name, @base_module)
     end
 
     def load_constant_info(info)
