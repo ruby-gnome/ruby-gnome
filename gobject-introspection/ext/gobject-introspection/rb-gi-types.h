@@ -23,6 +23,8 @@
 
 #define GI_TYPE_CALLABLE_INFO        (gi_callable_info_get_type())
 #define GI_TYPE_FUNCTION_INFO        (gi_function_info_get_type())
+#define GI_TYPE_METHOD_INFO          (gi_method_info_get_type())
+#define GI_TYPE_CONSTRUCTOR_INFO     (gi_constructor_info_get_type())
 #define GI_TYPE_CALLBACK_INFO        (gi_callback_info_get_type())
 #define GI_TYPE_REGISTERED_TYPE_INFO (gi_registered_type_info_get_type())
 #define GI_TYPE_STRUCT_INFO          (gi_struct_info_get_type())
@@ -44,6 +46,8 @@
 
 GType gi_callable_info_get_type        (void);
 GType gi_function_info_get_type        (void);
+GType gi_method_info_get_type          (void);
+GType gi_constructor_info_get_type     (void);
 GType gi_callback_info_get_type        (void);
 GType gi_registered_type_info_get_type (void);
 GType gi_struct_info_get_type          (void);

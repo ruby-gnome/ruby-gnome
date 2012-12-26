@@ -176,4 +176,7 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
     RG_DEF_METHOD(invoke, -1);
 
     G_DEF_CLASS(G_TYPE_I_FUNCTION_INFO_FLAGS, "FunctionInfoFlags", rb_mGI);
+
+    rb_gi_method_info_init(rb_mGI, RG_TARGET_NAMESPACE);
+    rb_gi_constructor_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }

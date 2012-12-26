@@ -41,6 +41,10 @@ void rb_gi_callable_info_init        (VALUE rb_mGI,
                                       VALUE rb_cGIBaseInfo);
 void rb_gi_function_info_init        (VALUE rb_mGI,
                                       VALUE rb_cGICallableInfo);
+void rb_gi_method_info_init          (VALUE rb_mGI,
+                                      VALUE rb_cGIFunctionInfo);
+void rb_gi_constructor_info_init     (VALUE rb_mGI,
+                                      VALUE rb_cGIFunctionInfo);
 void rb_gi_callback_info_init        (VALUE rb_mGI,
                                       VALUE rb_cGICallableInfo);
 void rb_gi_registered_type_info_init (VALUE rb_mGI,

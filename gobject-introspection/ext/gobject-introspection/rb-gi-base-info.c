@@ -39,7 +39,18 @@ rb_gi_base_info_to_ruby(GIBaseInfo *info)
 	g_type = GI_TYPE_BASE_INFO;
 	break;
       case GI_INFO_TYPE_FUNCTION:
-	g_type = GI_TYPE_FUNCTION_INFO;
+        {
+            GIFunctionInfoFlags flags;
+
+            flags = g_function_info_get_flags((GIFunctionInfo *)info);
+            if (flags & GI_FUNCTION_IS_METHOD) {
+                g_type = GI_TYPE_METHOD_INFO;
+            } else if (flags & GI_FUNCTION_IS_CONSTRUCTOR) {
+                g_type = GI_TYPE_CONSTRUCTOR_INFO;
+            } else {
+                g_type = GI_TYPE_FUNCTION_INFO;
+            }
+        }
 	break;
       case GI_INFO_TYPE_CALLBACK:
 	g_type = GI_TYPE_CALLBACK_INFO;
