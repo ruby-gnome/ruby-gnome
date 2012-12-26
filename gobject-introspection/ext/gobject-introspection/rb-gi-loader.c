@@ -31,12 +31,12 @@ rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 
     rb_scan_args(argc, argv, "31", &rb_gtype, &rb_name, &rb_module, &rb_options);
     rbg_scan_options(rb_options,
-		     "parent", &rb_parent,
-		     NULL);
+                     "parent", &rb_parent,
+                     NULL);
 
     gtype = NUM2ULONG(rb_to_int(rb_gtype));
     return G_DEF_CLASS_WITH_PARENT(gtype, RVAL2CSTR(rb_name),
-				   rb_module, rb_parent);
+                                   rb_module, rb_parent);
 }
 
 void
