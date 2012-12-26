@@ -84,4 +84,8 @@ void rb_gi_unresolved_info_init      (VALUE rb_mGI,
 void rb_gi_repository_init           (VALUE rb_mGI);
 void rb_gi_loader_init               (VALUE rb_mGI);
 
+void rb_gi_function_info_invoke_raw  (GIFunctionInfo *info,
+                                      int argc, VALUE *argv,
+                                      GIArgument *return_value);
+
 #endif

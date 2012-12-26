@@ -21,7 +21,7 @@
 #include "rb-gobject-introspection.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
-#define SELF(self) RVAL2GI_BASE_INFO(self)
+#define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
 GType
 gi_function_info_get_type(void)
@@ -94,7 +94,7 @@ fill_in_argument(GIArgInfo *arg_info, GArray *in_args, int argc, VALUE *argv)
 }
 
 static void
-fill_out_argument(GIArgInfo *arg_info, GArray *out_args)
+fill_out_argument(G_GNUC_UNUSED GIArgInfo *arg_info, GArray *out_args)
 {
     GIArgument argument;
     g_array_append_val(out_args, argument);
@@ -121,19 +121,16 @@ fill_argument(GIArgInfo *arg_info, GArray *in_args, GArray *out_args,
     }
 }
 
-static VALUE
-rg_invoke(int argc, VALUE *argv, VALUE self)
+void
+rb_gi_function_info_invoke_raw(GIFunctionInfo *info, int argc, VALUE *argv,
+                               GIArgument *return_value)
 {
-    GIFunctionInfo *info;
     GICallableInfo *callable_info;
     gint i, n_args;
     GArray *in_args, *out_args;
-    GIArgument return_value;
-    GITypeInfo return_value_info;
     gboolean succeeded;
     GError *error = NULL;
 
-    info = SELF(self);
     callable_info = (GICallableInfo *)info;
     n_args = g_callable_info_get_n_args(callable_info);
     in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
@@ -148,13 +145,27 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
                                        in_args->len,
                                        (GIArgument *)(out_args->data),
                                        out_args->len,
-                                       &return_value,
+                                       return_value,
                                        &error);
     g_array_unref(in_args);
     g_array_unref(out_args);
     if (!succeeded) {
         RG_RAISE_ERROR(error);
     }
+}
+
+static VALUE
+rg_invoke(int argc, VALUE *argv, VALUE self)
+{
+    GIFunctionInfo *info;
+    GICallableInfo *callable_info;
+    GIArgument return_value;
+    GITypeInfo return_value_info;
+
+    info = SELF(self);
+    callable_info = (GICallableInfo *)info;
+
+    rb_gi_function_info_invoke_raw(info, argc, argv, &return_value);
     g_callable_info_load_return_type(callable_info, &return_value_info);
 
     return GI_ARGUMENT2RVAL(&return_value, &return_value_info);

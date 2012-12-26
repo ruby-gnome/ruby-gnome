@@ -73,7 +73,26 @@ module GObjectIntrospection
     end
 
     def load_object_info(info)
-      self.class.define_class(info.gtype, info.name, @base_module)
+      klass = self.class.define_class(info.gtype, info.name, @base_module)
+      info.methods.each do |method_info|
+        name = method_info.name
+        case method_info
+        when ConstructorInfo
+          if name == "new"
+            klass.__send__(:define_method, "initialize") do |*arguments|
+              method_info.invoke(self, *arguments)
+            end
+          else
+            # TODO
+          end
+        when MethodInfo
+          klass.__send__(:define_method, name) do |*arguments|
+            method_info.invoke(self, *arguments)
+          end
+        else
+          # TODO: raise?
+        end
+      end
     end
 
     def load_interface_info(info)

@@ -21,7 +21,7 @@
 #include "rb-gobject-introspection.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIMethodInfo
-#define SELF(self) RVAL2GI_BASE_INFO(self)
+#define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
 GType
 gi_method_info_get_type(void)

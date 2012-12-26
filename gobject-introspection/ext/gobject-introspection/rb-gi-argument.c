@@ -73,7 +73,33 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = CSTR2RVAL(argument->v_string);
         break;
       case GI_TYPE_TAG_ARRAY:
+        /* TODO */
+        break;
       case GI_TYPE_TAG_INTERFACE:
+        {
+            GIBaseInfo *interface_info;
+            GIInfoType interface_type;
+            GType gtype;
+
+            interface_info = g_type_info_get_interface(type_info);
+            interface_type = g_base_info_get_type(interface_info);
+
+            gtype = g_registered_type_info_get_g_type(interface_info);
+            switch (interface_type) {
+              case GI_INFO_TYPE_ENUM:
+                rb_argument = GENUM2RVAL(argument->v_int32, gtype);
+                break;
+              case GI_INFO_TYPE_FLAGS:
+                rb_argument = GFLAGS2RVAL(argument->v_int32, gtype);
+                break;
+              default:
+                rb_argument = GOBJ2RVAL(argument->v_pointer);
+                break;
+            }
+
+            g_base_info_unref(interface_info);
+        }
+        break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:

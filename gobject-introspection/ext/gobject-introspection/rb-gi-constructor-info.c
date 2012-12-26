@@ -21,7 +21,7 @@
 #include "rb-gobject-introspection.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIConstructorInfo
-#define SELF(self) RVAL2GI_BASE_INFO(self)
+#define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
 GType
 gi_constructor_info_get_type(void)
@@ -35,6 +35,38 @@ gi_constructor_info_get_type(void)
     return type;
 }
 
+static VALUE
+rg_invoke(int argc, VALUE *argv, VALUE self)
+{
+    GIFunctionInfo *info;
+    GICallableInfo *callable_info;
+    VALUE receiver;
+    GIArgument return_value;
+    GITypeInfo return_value_info;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    info = SELF(self);
+    callable_info = (GICallableInfo *)info;
+
+    /* TODO: check argc. */
+    receiver = argv[0];
+    rb_gi_function_info_invoke_raw(info, argc - 1, argv + 1, &return_value);
+    g_callable_info_load_return_type(callable_info, &return_value_info);
+
+    if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_INTERFACE) {
+        rb_raise(rb_eRuntimeError, "TODO: returned value isn't interface");
+    }
+    interface_info = g_type_info_get_interface(&return_value_info);
+    interface_type = g_base_info_get_type(interface_info);
+    if (interface_type != GI_INFO_TYPE_OBJECT) {
+        rb_raise(rb_eRuntimeError, "TODO: returned value isn't object");
+    }
+    G_INITIALIZE(receiver, return_value.v_pointer);
+
+    return receiver;
+}
+
 void
 rb_gi_constructor_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
 {
@@ -44,4 +76,6 @@ rb_gi_constructor_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_CONSTRUCTOR_INFO,
                                 "ConstructorInfo", rb_mGI,
 				rb_cGIFunctionInfo);
+
+    RG_DEF_METHOD(invoke, -1);
 }

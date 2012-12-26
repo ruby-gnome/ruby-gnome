@@ -39,6 +39,8 @@
 
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
     ((GIRegisteredTypeInfo *)RVAL2GI_BASE_INFO(rb_object))
+#define RVAL2GI_FUNCTION_INFO(rb_object)			\
+    ((GIFunctionInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_STRUCT_INFO(rb_object)			\
     ((GIStructInfo *)RVAL2GI_BASE_INFO(rb_object))
 #define RVAL2GI_ENUM_INFO(rb_object)			\
