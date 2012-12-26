@@ -14,25 +14,32 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "glib2"
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_environment_path(vendor_bin_dir)
-begin
-  major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/gobject_introspection.so"
-rescue LoadError
-  require "gobject_introspection.so"
-end
-
 module GObjectIntrospection
-  LOG_DOMAIN = "GObjectIntrospection"
+  class ObjectInfo
+    alias_method :__methods__, :methods
+
+    collections = [
+      "interfaces",
+      "fields",
+      "properties",
+      "methods",
+      "signals",
+      "vfuncs",
+      "constants",
+    ]
+    collections.each do |collection|
+      n_getter = "n_#{collection}"
+      if collection.end_with?("ies")
+        singular = collection.sub(/ies\z/, "y")
+      else
+        singular = collection.sub(/s\z/, "")
+      end
+      getter = "get_#{singular}"
+      define_method(collection) do
+        send(n_getter).times.collect do |i|
+          send(getter, i)
+        end
+      end
+    end
+  end
 end
-
-GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
-
-require "gobject-introspection/repository"
-require "gobject-introspection/object-info"
-require "gobject-introspection/loader"
