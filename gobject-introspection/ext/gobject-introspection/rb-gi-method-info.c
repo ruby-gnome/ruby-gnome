@@ -35,6 +35,24 @@ gi_method_info_get_type(void)
     return type;
 }
 
+static VALUE
+rg_invoke(int argc, VALUE *argv, VALUE self)
+{
+    GIFunctionInfo *info;
+    GICallableInfo *callable_info;
+    GIArgument return_value;
+    GITypeInfo return_value_info;
+
+    info = SELF(self);
+    callable_info = (GICallableInfo *)info;
+
+    /* TODO: check argc >= 1 */
+    rb_gi_function_info_invoke_raw(info, argc, argv, &return_value);
+    g_callable_info_load_return_type(callable_info, &return_value_info);
+
+    return GI_ARGUMENT2RVAL(&return_value, &return_value_info);
+}
+
 void
 rb_gi_method_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
 {
@@ -43,4 +61,6 @@ rb_gi_method_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
     RG_TARGET_NAMESPACE =
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_METHOD_INFO, "MethodInfo", rb_mGI,
 				rb_cGIFunctionInfo);
+
+    RG_DEF_METHOD(invoke, -1);
 }

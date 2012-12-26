@@ -135,6 +135,14 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, int argc, VALUE *argv,
     n_args = g_callable_info_get_n_args(callable_info);
     in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
     out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
+    if (g_function_info_get_flags(callable_info) & GI_FUNCTION_IS_METHOD) {
+        GIArgument argument;
+        /* TODO: check argc */
+        argument.v_pointer = RVAL2GOBJ(argv[0]);
+        g_array_append_val(in_args, argument);
+        argc--;
+        argv++;
+    }
     for (i = 0; i < n_args; i++) {
         GIArgInfo arg_info;
         g_callable_info_load_arg(callable_info, i, &arg_info);
