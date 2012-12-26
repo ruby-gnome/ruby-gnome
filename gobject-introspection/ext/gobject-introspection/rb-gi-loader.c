@@ -39,6 +39,16 @@ rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
                                    rb_module, rb_parent);
 }
 
+static VALUE
+rg_s_define_interface(G_GNUC_UNUSED VALUE klass,
+                      VALUE rb_gtype, VALUE rb_name, VALUE rb_module)
+{
+    GType gtype;
+
+    gtype = NUM2ULONG(rb_to_int(rb_gtype));
+    return G_DEF_INTERFACE(gtype, RVAL2CSTR(rb_name), rb_module);
+}
+
 void
 rb_gi_loader_init(VALUE rb_mGI)
 {
@@ -47,4 +57,5 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_TARGET_NAMESPACE = rb_define_class_under(rb_mGI, "Loader", rb_cObject);
 
     RG_DEF_SMETHOD(define_class, -1);
+    RG_DEF_SMETHOD(define_interface, 3);
 }
