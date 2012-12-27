@@ -92,8 +92,11 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
               case GI_INFO_TYPE_FLAGS:
                 rb_argument = GFLAGS2RVAL(argument->v_int32, gtype);
                 break;
-              default:
+              case GI_INFO_TYPE_OBJECT:
                 rb_argument = GOBJ2RVAL(argument->v_pointer);
+                break;
+              case GI_INFO_TYPE_STRUCT:
+                rb_argument = BOXED2RVAL(argument->v_pointer, gtype);
                 break;
             }
 
@@ -192,8 +195,12 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
               case GI_INFO_TYPE_FLAGS:
                 argument->v_int32 = RVAL2GFLAGS(rb_argument, gtype);
                 break;
-              default:
+              case GI_INFO_TYPE_OBJECT:
                 argument->v_pointer = RVAL2GOBJ(rb_argument);
+                break;
+              case GI_INFO_TYPE_STRUCT:
+                argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
+              default:
                 break;
             }
 
