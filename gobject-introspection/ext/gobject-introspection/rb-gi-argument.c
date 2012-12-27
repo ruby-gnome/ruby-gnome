@@ -123,6 +123,8 @@ GIArgument *
 rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                          VALUE rb_argument)
 {
+    memset(argument, 0, sizeof(GIArgument));
+
     switch (g_type_info_get_tag(type_info)) {
       case GI_TYPE_TAG_VOID:
         break;
