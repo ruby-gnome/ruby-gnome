@@ -38,4 +38,8 @@ class TestStructInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::FunctionInfo,
                    @info.get_method(0))
   end
+
+  def test_size
+    assert_equal(24, @info.size)
+  end
 end
