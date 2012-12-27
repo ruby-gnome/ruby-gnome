@@ -93,6 +93,15 @@ rg_size(VALUE self)
     return UINT2NUM(g_struct_info_get_size(info));
 }
 
+static VALUE
+rg_alignment(VALUE self)
+{
+    GIStructInfo *info;
+
+    info = SELF(self);
+    return UINT2NUM(g_struct_info_get_alignment(info));
+}
+
 void
 rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -107,4 +116,5 @@ rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(n_methods, 0);
     RG_DEF_METHOD(get_method, 1);
     RG_DEF_METHOD(size, 0);
+    RG_DEF_METHOD(alignment, 0);
 }

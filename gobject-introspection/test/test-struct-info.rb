@@ -42,4 +42,8 @@ class TestStructInfo < Test::Unit::TestCase
   def test_size
     assert_equal(24, @info.size)
   end
+
+  def test_alignment
+    assert_equal(8, @info.alignment)
+  end
 end
