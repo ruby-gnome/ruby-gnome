@@ -75,7 +75,7 @@ class TestInterfaceInfo < Test::Unit::TestCase
 
   def test_n_vfuncs
     info = @repository.find("Gio", "Volume")
-    assert_equal(20, info.n_vfuncs)
+    assert_operator(0, :<, info.n_vfuncs)
   end
 
   def test_get_vfunc_n
