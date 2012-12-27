@@ -71,17 +71,13 @@ rg_type(VALUE self)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_field_info_get_type(info));
 }
 
-static VALUE
-rg_get_field(VALUE self, VALUE rb_memory)
+VALUE
+rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
 {
-    GIFieldInfo *info;
-    gpointer memory;
     GIArgument argument;
     GITypeInfo *type_info;
     VALUE rb_field_value;
 
-    info = SELF(self);
-    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
     if (!g_field_info_get_field(info, memory, &argument)) {
         rb_raise(rb_eArgError, "failed to get field value");
     }
@@ -93,16 +89,13 @@ rg_get_field(VALUE self, VALUE rb_memory)
     return rb_field_value;
 }
 
-static VALUE
-rg_set_field(VALUE self, VALUE rb_memory, VALUE rb_field_value)
+void
+rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
+                               VALUE rb_field_value)
 {
-    GIFieldInfo *info;
-    gpointer memory;
     GIArgument field_value;
     GITypeInfo *type_info;
 
-    info = SELF(self);
-    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
     type_info = g_field_info_get_type(info);
     RVAL2GI_ARGUMENT(&field_value, type_info, rb_field_value);
     g_base_info_unref(type_info);
@@ -110,6 +103,28 @@ rg_set_field(VALUE self, VALUE rb_memory, VALUE rb_field_value)
     if (!g_field_info_set_field(info, memory, &field_value)) {
         rb_raise(rb_eArgError, "failed to set field value");
     }
+}
+
+static VALUE
+rg_get_field(VALUE self, VALUE rb_memory)
+{
+    GIFieldInfo *info;
+    gpointer memory;
+
+    info = SELF(self);
+    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
+    return rb_gi_field_info_get_field_raw(info, memory);
+}
+
+static VALUE
+rg_set_field(VALUE self, VALUE rb_memory, VALUE rb_field_value)
+{
+    GIFieldInfo *info;
+    gpointer memory;
+
+    info = SELF(self);
+    memory = GUINT_TO_POINTER(NUM2ULONG(rb_memory));
+    rb_gi_field_info_set_field_raw(info, memory, rb_field_value);
 
     return Qnil;
 }

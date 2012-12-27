@@ -69,6 +69,7 @@ module GObjectIntrospection
       return if info.gtype == GLib::Type::NONE
 
       klass = self.class.define_class(info.gtype, info.name, @base_module)
+      load_field_infos(info, klass)
       info.methods.each do |method_info|
         load_method_info(method_info, klass)
       end
@@ -80,8 +81,29 @@ module GObjectIntrospection
 
     def load_object_info(info)
       klass = self.class.define_class(info.gtype, info.name, @base_module)
+      load_field_infos(info, klass)
       info.methods.each do |method_info|
         load_method_info(method_info, klass)
+      end
+    end
+
+    def load_field_infos(info, klass)
+      info.n_fields.times do |i|
+        field_info = info.get_field(i)
+        name = field_info.name
+        flags = field_info.flags
+
+        if flags.readable?
+          klass.__send__(:define_method, name) do
+            info.get_field_value(self, i)
+          end
+        end
+
+        if flags.writable?
+          klass.__send__(:define_method, "#{name}=") do |value|
+            info.set_field_value(self, i, value)
+          end
+        end
       end
     end
 

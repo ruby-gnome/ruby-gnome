@@ -88,4 +88,10 @@ void rb_gi_function_info_invoke_raw  (GIFunctionInfo *info,
                                       int argc, VALUE *argv,
                                       GIArgument *return_value);
 
+VALUE rb_gi_field_info_get_field_raw (GIFieldInfo *info,
+                                      gpointer     memory);
+void  rb_gi_field_info_set_field_raw (GIFieldInfo *info,
+                                      gpointer     memory,
+                                      VALUE        rb_field_value);
+
 #endif

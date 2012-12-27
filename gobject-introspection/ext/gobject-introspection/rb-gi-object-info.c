@@ -121,6 +121,40 @@ rg_get_field(VALUE self, VALUE rb_n)
 }
 
 static VALUE
+rg_get_field_value(VALUE self, VALUE rb_object, VALUE rb_n)
+{
+    GIObjectInfo *info;
+    gint n;
+    GIFieldInfo *field_info;
+    VALUE rb_value;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    field_info = g_object_info_get_field(info, n);
+    rb_value = rb_gi_field_info_get_field_raw(field_info, RVAL2GOBJ(rb_object));
+    g_base_info_unref(field_info);
+
+    return rb_value;
+}
+
+static VALUE
+rg_set_field_value(VALUE self, VALUE rb_object, VALUE rb_n, VALUE rb_value)
+{
+    GIObjectInfo *info;
+    gint n;
+    GIFieldInfo *field_info;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    field_info = g_object_info_get_field(info, n);
+    rb_gi_field_info_set_field_raw(field_info, RVAL2GOBJ(rb_object), rb_value);
+    /* TODO: use rb_ensure() to unref field_info. */
+    g_base_info_unref(field_info);
+
+    return Qnil;
+}
+
+static VALUE
 rg_n_properties(VALUE self)
 {
     GIObjectInfo *info;
@@ -292,6 +326,8 @@ rb_gi_object_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(get_interface, 1);
     RG_DEF_METHOD(n_fields, 0);
     RG_DEF_METHOD(get_field, 1);
+    RG_DEF_METHOD(get_field_value, 2);
+    RG_DEF_METHOD(set_field_value, 3);
     RG_DEF_METHOD(n_properties, 0);
     RG_DEF_METHOD(get_property, 1);
     RG_DEF_METHOD(n_methods, 0);
