@@ -62,6 +62,7 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     if (interface_type != GI_INFO_TYPE_OBJECT) {
         rb_raise(rb_eRuntimeError, "TODO: returned value isn't object");
     }
+    g_object_ref_sink(return_value.v_pointer);
     G_INITIALIZE(receiver, return_value.v_pointer);
 
     return receiver;
