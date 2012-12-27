@@ -141,7 +141,8 @@ module GObjectIntrospection
     end
 
     def load_union_info(info)
-      # TODO
+      klass = self.class.define_class(info.gtype, info.name, @base_module)
+      load_field_infos(info, klass)
     end
   end
 end

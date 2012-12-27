@@ -56,6 +56,47 @@ rg_get_field(VALUE self, VALUE rb_n)
 }
 
 static VALUE
+rg_get_field_value(VALUE self, VALUE rb_union, VALUE rb_n)
+{
+    GIUnionInfo *info;
+    gint n;
+    GIFieldInfo *field_info;
+    GType gtype;
+    VALUE rb_value;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    field_info = g_union_info_get_field(info, n);
+    gtype = g_registered_type_info_get_g_type(info);
+    rb_value = rb_gi_field_info_get_field_raw(field_info,
+                                              RVAL2BOXED(rb_union, gtype));
+    g_base_info_unref(field_info);
+
+    return rb_value;
+}
+
+static VALUE
+rg_set_field_value(VALUE self, VALUE rb_union, VALUE rb_n, VALUE rb_value)
+{
+    GIUnionInfo *info;
+    gint n;
+    GIFieldInfo *field_info;
+    GType gtype;
+
+    info = SELF(self);
+    n = NUM2INT(rb_n);
+    field_info = g_union_info_get_field(info, n);
+    gtype = g_registered_type_info_get_g_type(info);
+    rb_gi_field_info_set_field_raw(field_info,
+                                   RVAL2BOXED(rb_union, gtype),
+                                   rb_value);
+    /* TODO: use rb_ensure() to unref field_info. */
+    g_base_info_unref(field_info);
+
+    return Qnil;
+}
+
+static VALUE
 rg_n_methods(VALUE self)
 {
     GIUnionInfo *info;
@@ -152,6 +193,8 @@ rb_gi_union_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 
     RG_DEF_METHOD(n_fields, 0);
     RG_DEF_METHOD(get_field, 1);
+    RG_DEF_METHOD(get_field_value, 2);
+    RG_DEF_METHOD(set_field_value, 3);
     RG_DEF_METHOD(n_methods, 0);
     RG_DEF_METHOD(get_method, 1);
     RG_DEF_METHOD_P(discriminated, 0);
