@@ -29,4 +29,13 @@ class TestStructInfo < Test::Unit::TestCase
     assert_kind_of(GObjectIntrospection::FieldInfo,
                    @info.get_field(0))
   end
+
+  def test_n_methods
+    assert_equal(62, @info.n_methods)
+  end
+
+  def test_get_method
+    assert_kind_of(GObjectIntrospection::FunctionInfo,
+                   @info.get_method(0))
+  end
 end
