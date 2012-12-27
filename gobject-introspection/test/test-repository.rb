@@ -36,7 +36,7 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_loaded_namespaces
-    assert_equal(["GObject", "Gio"].sort,
+    assert_equal(["GLib", "GObject", "Gio"].sort,
                  @repository.loaded_namespaces.sort)
   end
 
@@ -44,7 +44,7 @@ class TestRepository < Test::Unit::TestCase
     namespaces = @repository.collect do |info|
       info.namespace
     end
-    assert_equal(["GObject", "Gio"].sort, namespaces.uniq.sort)
+    assert_equal(["GLib", "GObject", "Gio"].sort, namespaces.uniq.sort)
   end
 
   def test_find_by_gtype
