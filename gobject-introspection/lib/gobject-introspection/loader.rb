@@ -65,7 +65,13 @@ module GObjectIntrospection
     end
 
     def load_struct_info(info)
-      # TODO
+      return if info.gtype_struct?
+      return if info.gtype == GLib::Type::NONE
+
+      klass = self.class.define_class(info.gtype, info.name, @base_module)
+      info.methods.each do |method_info|
+        load_method_info(method_info, klass)
+      end
     end
 
     def load_enum_info(info)
@@ -75,22 +81,31 @@ module GObjectIntrospection
     def load_object_info(info)
       klass = self.class.define_class(info.gtype, info.name, @base_module)
       info.methods.each do |method_info|
-        name = method_info.name
-        case method_info
-        when ConstructorInfo
-          if name == "new"
-            klass.__send__(:define_method, "initialize") do |*arguments|
-              method_info.invoke(self, *arguments)
-            end
-          else
-            # TODO
-          end
-        when MethodInfo
-          klass.__send__(:define_method, name) do |*arguments|
-            method_info.invoke(self, *arguments)
+        load_method_info(method_info, klass)
+      end
+    end
+
+    def load_method_info(info, klass)
+      name = info.name
+      case info
+      when ConstructorInfo
+        if name == "new"
+          klass.__send__(:define_method, "initialize") do |*arguments|
+            info.invoke(self, *arguments)
           end
         else
-          # TODO: raise?
+          # TODO
+        end
+      when MethodInfo
+        klass.__send__(:define_method, name) do |*arguments|
+          info.invoke(self, *arguments)
+        end
+      else
+        return if name == "new"
+        return if name == "alloc"
+        singleton_class = (class << klass; self; end)
+        singleton_class.__send__(:define_method, name) do |*arguments|
+          info.invoke(*arguments)
         end
       end
     end
