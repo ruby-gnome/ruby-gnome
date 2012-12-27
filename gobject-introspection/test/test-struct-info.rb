@@ -24,4 +24,9 @@ class TestStructInfo < Test::Unit::TestCase
   def test_n_fields
     assert_equal(2, @info.n_fields)
   end
+
+  def test_get_field
+    assert_kind_of(GObjectIntrospection::FieldInfo,
+                   @info.get_field(0))
+  end
 end
