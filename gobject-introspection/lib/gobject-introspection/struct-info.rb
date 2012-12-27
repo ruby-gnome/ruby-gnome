@@ -17,17 +17,12 @@
 require "gobject-introspection/collection-accessor"
 
 module GObjectIntrospection
-  class ObjectInfo
+  class StructInfo
     extend CollectionAccessor
 
     alias_method :__methods__, :methods
 
-    collection("interfaces")
     collection("fields")
-    collection("properties")
     collection("methods")
-    collection("signals")
-    collection("vfuncs")
-    collection("constants")
   end
 end

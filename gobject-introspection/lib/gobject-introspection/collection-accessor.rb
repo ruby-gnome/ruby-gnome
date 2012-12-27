@@ -14,20 +14,21 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection/collection-accessor"
-
 module GObjectIntrospection
-  class ObjectInfo
-    extend CollectionAccessor
-
-    alias_method :__methods__, :methods
-
-    collection("interfaces")
-    collection("fields")
-    collection("properties")
-    collection("methods")
-    collection("signals")
-    collection("vfuncs")
-    collection("constants")
+  module CollectionAccessor
+    def collection(name)
+      n_getter = "n_#{name}"
+      if name.end_with?("ies")
+        singular = name.sub(/ies\z/, "y")
+      else
+        singular = name.sub(/s\z/, "")
+      end
+      getter = "get_#{singular}"
+      define_method(name) do
+        send(n_getter).times.collect do |i|
+          send(getter, i)
+        end
+      end
+    end
   end
 end
