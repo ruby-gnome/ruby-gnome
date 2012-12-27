@@ -46,4 +46,8 @@ class TestStructInfo < Test::Unit::TestCase
   def test_alignment
     assert_equal(8, @info.alignment)
   end
+
+  def test_gtype_struct?
+    assert_false(@info.gtype_struct?)
+  end
 end
