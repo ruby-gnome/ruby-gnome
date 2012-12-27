@@ -111,6 +111,15 @@ rg_gtype_struct_p(VALUE self)
     return CBOOL2RVAL(g_struct_info_is_gtype_struct(info));
 }
 
+static VALUE
+rg_foreign_p(VALUE self)
+{
+    GIStructInfo *info;
+
+    info = SELF(self);
+    return CBOOL2RVAL(g_struct_info_is_foreign(info));
+}
+
 void
 rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -127,4 +136,5 @@ rb_gi_struct_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(size, 0);
     RG_DEF_METHOD(alignment, 0);
     RG_DEF_METHOD_P(gtype_struct, 0);
+    RG_DEF_METHOD_P(foreign, 0);
 }

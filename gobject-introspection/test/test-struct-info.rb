@@ -50,4 +50,8 @@ class TestStructInfo < Test::Unit::TestCase
   def test_gtype_struct?
     assert_false(@info.gtype_struct?)
   end
+
+  def test_foreign?
+    assert_false(@info.foreign?)
+  end
 end
