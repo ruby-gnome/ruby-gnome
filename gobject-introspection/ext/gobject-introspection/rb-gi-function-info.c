@@ -140,8 +140,6 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, int argc, VALUE *argv,
         /* TODO: check argc */
         argument.v_pointer = RVAL2GOBJ(argv[0]);
         g_array_append_val(in_args, argument);
-        argc--;
-        argv++;
     }
     for (i = 0; i < n_args; i++) {
         GIArgInfo arg_info;
