@@ -15,8 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module GObjectIntrospection
-  module CollectionAccessor
-    def collection(name)
+  module CollectionReader
+    def collection_reader(name)
       n_getter = "n_#{name}"
       if name.end_with?("ies")
         singular = name.sub(/ies\z/, "y")

@@ -14,20 +14,20 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection/collection-accessor"
+require "gobject-introspection/collection-reader"
 
 module GObjectIntrospection
   class ObjectInfo
-    extend CollectionAccessor
+    extend CollectionReader
 
     alias_method :__methods__, :methods
 
-    collection("interfaces")
-    collection("fields")
-    collection("properties")
-    collection("methods")
-    collection("signals")
-    collection("vfuncs")
-    collection("constants")
+    collection_reader("interfaces")
+    collection_reader("fields")
+    collection_reader("properties")
+    collection_reader("methods")
+    collection_reader("signals")
+    collection_reader("vfuncs")
+    collection_reader("constants")
   end
 end
