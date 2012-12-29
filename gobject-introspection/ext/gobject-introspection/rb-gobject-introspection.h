@@ -33,6 +33,14 @@
 #include "rb-gi-types.h"
 #include "rb-gi-conversions.h"
 
+#ifndef RB_TYPE_P
+#  define RB_TYPE_P(object, type) (TYPE(object) == type)
+#endif
+
+#ifndef RUBY_T_FIXNUM
+#  define RUBY_T_FIXNUM T_FIXNUM
+#endif
+
 extern void Init_gobject_introspection(void);
 
 void rb_gi_type_tag_init             (VALUE rb_mGI);
