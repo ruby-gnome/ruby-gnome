@@ -98,8 +98,8 @@ class GNOME2Win32BinaryBuildTask
             sh("./autogen.sh") if package[:need_autogen]
             sh("autoreconf -i") if package[:need_autoreconf]
             sh("./configure",
-               "CPPFLAGS=-I#{rcairo_win32_include_path} -I#{dist_dir + 'include'}",
-               "LDFLAGS=-L#{rcairo_win32_lib_path} -L#{dist_dir + 'lib'}",
+               "CPPFLAGS=#{cppflags(package)}",
+               "LDFLAGS=#{ldflags(package)}",
                "--prefix=#{dist_dir}",
                "--host=#{@configuration.build_host}",
                *package[:configure_args]) or exit(false)
@@ -190,5 +190,29 @@ class GNOME2Win32BinaryBuildTask
       download_base_url << "/#{package[:name]}/#{release_series}"
     end
     download_base_url
+  end
+
+  def cppflags(package)
+    include_paths = package[:include_paths] || []
+    include_paths += [
+      rcairo_win32_include_path,
+      dist_dir + 'lib',
+    ]
+    cppflags = include_paths.collect do |path|
+      "-I#{path}"
+    end
+    cppflags.join(" ")
+  end
+
+  def ldflags(package)
+    library_paths = package[:library_paths] || []
+    library_paths += [
+      rcairo_win32_lib_path,
+      dist_dir + 'lib',
+    ]
+    ldflags = library_paths.collect do |path|
+      "-L#{path}"
+    end
+    ldflags.join(" ")
   end
 end
