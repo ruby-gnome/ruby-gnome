@@ -93,7 +93,8 @@ gtk2_base_name = "ruby-gtk2"
 gnome2_base_name = "ruby-gnome2-all"
 
 gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
-gnome2_packages = gtk2_packages + ["goocanvas", "gstreamer",
+gnome2_packages = gtk2_packages + ["gobject-introspection",
+                                   "goocanvas", "gstreamer",
                                    "gtksourceview2", "poppler", "rsvg2", "vte"]
 namespace :dist do
   base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
