@@ -28,10 +28,17 @@ base_dir = Pathname(__FILE__).dirname.expand_path
 ext_dir = base_dir + "ext" + package
 mkmf_gnome2_dir = base_dir + 'lib'
 
+if RbConfig.respond_to?(:ruby)
+  ruby = RbConfig.ruby
+else
+  ruby = File.join(RbConfig::CONFIG['bindir'],
+                   RbConfig::CONFIG['ruby_install_name'] +
+                   RbConfig::CONFIG["EXEEXT"])
+end
 build_dir = Pathname("ext") + package
 FileUtils.mkdir_p(build_dir.to_s) unless build_dir.exist?
 extconf_rb_path = ext_dir + "extconf.rb"
-unless system(RbConfig.ruby, "-C", build_dir.to_s, extconf_rb_path.to_s, *ARGV)
+unless system(ruby, "-C", build_dir.to_s, extconf_rb_path.to_s, *ARGV)
   exit(false)
 end
 
