@@ -10,6 +10,9 @@ class GNOME2Win32BinaryBuildTask
 
   def initialize(configuration)
     @configuration = configuration
+    @configuration.build_packages.each do |package|
+      package[:compression_method] ||= "gz"
+    end
     define
   end
 
@@ -38,20 +41,20 @@ class GNOME2Win32BinaryBuildTask
     namespace :download do
       build_packages.each do |package|
         base = "#{package[:name]}-#{package[:version]}"
-        tar_gz = "#{base}.tar.gz"
-        tar_gz_url = "#{download_base_url(package)}/#{tar_gz}"
-        tar_gz_full_path = download_dir + tar_gz
+        tar = "#{base}.tar.#{package[:compression_method]}"
+        tar_url = "#{download_base_url(package)}/#{tar}"
+        tar_full_path = download_dir + tar
 
         desc "Download #{package[:label]} into #{download_dir}."
-        task package[:name] => tar_gz_full_path.to_s
+        task package[:name] => tar_full_path.to_s
 
-        directory_path = tar_gz_full_path.dirname
+        directory_path = tar_full_path.dirname
         directory directory_path.to_s
-        file tar_gz_full_path.to_s => directory_path.to_s do
-          rake_output_message "downloading... #{tar_gz_url}"
-          open(tar_gz_url) do |downloaded_tar_gz|
-            tar_gz_full_path.open("wb") do |tar_gz_file|
-              tar_gz_file.print(downloaded_tar_gz.read)
+        file tar_full_path.to_s => directory_path.to_s do
+          rake_output_message "downloading... #{tar_url}"
+          open(tar_url) do |downloaded_tar|
+            tar_full_path.open("wb") do |tar_file|
+              tar_file.print(downloaded_tar.read)
             end
           end
         end
@@ -82,10 +85,10 @@ class GNOME2Win32BinaryBuildTask
           mkdir_p(package_tmp_dir)
 
           base = "#{package[:name]}-#{package[:version]}"
-          tar_gz = "#{base}.tar.gz"
-          tar_gz_full_path = download_dir + tar_gz
+          tar = "#{base}.tar.#{package[:compression_method]}"
+          tar_full_path = download_dir + tar
           Dir.chdir(package_tmp_dir.to_s) do
-            sh("tar", "xzf", tar_gz_full_path.to_s) or exit(false)
+            sh("tar", "xf", tar_full_path.to_s) or exit(false)
           end
 
           Dir.chdir((package_tmp_dir + base).to_s) do

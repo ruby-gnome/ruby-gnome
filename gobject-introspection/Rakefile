@@ -31,8 +31,9 @@ package = GNOME2Package.new do |_package|
       :name => "gobject-introspection",
       :download_site => :gnome,
       :label => "gobject-introspection",
-      :version => "1.35",
+      :version => "1.35.3",
       :configure_args => [],
+      :compression_method => "xz",
     },
   ]
 end
