@@ -8,20 +8,62 @@ package = GNOME2Package.new do |_package|
   _package.description = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
   _package.dependency.gem.runtime = [["pkg-config", ">= 0"]]
   _package.dependency.gem.development = [["test-unit", ">= 2"]]
-  _package.win32.packages = ["glib"]
-  _package.win32.dependencies = ["gettext-runtime", "gnutls"]
+  _package.win32.packages = []
+  _package.win32.dependencies = ["zlib", "libffi", "gettext-runtime"]
+  libffi_lib_dir     = File.join(_package.win32.absolute_binary_dir, "lib")
+  libffi_include_dir = File.join(libffi_lib_dir, "libffi-3.0.6", "include")
   _package.win32.build_packages = [
+    {
+      :name => "glib",
+      :download_site => :gnome,
+      :label => "GLib",
+      :version => "2.35.3",
+      :configure_args => [
+        "LIBFFI_CFLAGS=-I#{libffi_include_dir}",
+        "LIBFFI_LIBS=-L#{libffi_lib_dir} -lffi",
+        "--disable-modular-tests",
+      ],
+      :compression_method => "xz",
+    },
+    {
+      :name => "gmp",
+      :download_base_url => "ftp://ftp.gmplib.org/pub/gmp-5.1.0",
+      :label => "GNU MP",
+      :version => "5.1.0",
+      :configure_args => [
+        "--disable-static",
+        "--enable-shared",
+      ],
+      :compression_method => "bz2",
+    },
+    {
+      :name => "nettle",
+      :download_base_url => "http://www.lysator.liu.se/~nisse/archive",
+      :label => "Nettle",
+      :version => "2.5",
+      :configure_args => [],
+    },
+    {
+      :name => "gnutls",
+      :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.1",
+      :label => "GnuTLS",
+      :version => "3.1.5",
+      :configure_args => [
+        "--with-libnettle-prefix=#{_package.win32.absolute_binary_dir}"
+      ],
+      :compression_method => "xz",
+    },
     {
       :name => "glib-networking",
       :download_site => :gnome,
       :label => "glib-networking",
-      :version => "2.28.7",
-      :configure_args => ["--without-libproxy",
-                          "--without-gnome-proxy",
-                          "--without-ca-certificates"],
-      :patches => ["glib-networking-2.28.7-fix-with-gnome-proxy.diff",
-                   "glib-networking-2.28.7-support-gnutls-2.4.2.diff"],
-      :need_autoreconf => true,
+      :version => "2.35.3",
+      :configure_args => [
+        "--without-libproxy",
+        "--without-gnome-proxy",
+        "--without-ca-certificates",
+      ],
+      :compression_method => "xz",
     },
   ]
 end
