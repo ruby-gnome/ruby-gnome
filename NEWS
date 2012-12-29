@@ -2,6 +2,22 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.1.9: 2012-12-29
+
+This is a experimental GObjectIntrospection support release.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Renamed G_DEF_CLASS4 to G_DEF_CLASS_WITH_PARENT.
+      G_DEF_CLASS4 is still usable but it is deprecated.
+
+==== Ruby/GObjectIntrospection
+
+  * Added. It is still experimental.
+
 == Ruby-GNOME2 1.1.8: 2012-12-19
 
 This is a bug fix release for Ruby 2.0.0.
