@@ -196,7 +196,7 @@ class GNOME2Win32BinaryBuildTask
     include_paths = package[:include_paths] || []
     include_paths += [
       rcairo_win32_include_path,
-      dist_dir + 'lib',
+      dist_dir + 'include',
     ]
     cppflags = include_paths.collect do |path|
       "-I#{path}"
