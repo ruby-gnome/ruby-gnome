@@ -288,7 +288,8 @@ namespace :gem do
   end
 
   namespace :win32 do
-    win32_gnome2_packages = gnome2_packages - ["goocanvas", "vte"]
+    win32_unsupported_packages = ["gobject-introspection", "goocanvas", "vte"]
+    win32_gnome2_packages = gnome2_packages - win32_unsupported_packages
     desc "build all Windows gems"
     task :build do
       win32_gnome2_packages.each do |package|
