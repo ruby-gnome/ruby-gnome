@@ -37,7 +37,7 @@
 #  define RB_TYPE_P(object, type) (TYPE(object) == type)
 #endif
 
-#ifndef RUBY_T_FIXNUM
+#ifndef HAVE_TYPE_ENUM_RUBY_VALUE_TYPE
 #  define RUBY_T_FIXNUM T_FIXNUM
 #endif
 
