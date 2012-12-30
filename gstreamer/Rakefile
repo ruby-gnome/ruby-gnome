@@ -53,7 +53,7 @@ package = GNOME2Package.new do |_package|
       :need_autogen => true,
       :patches => [
         "flac-1.2.1-fix-mingw-build.diff",
-        "flac-1.2.1-fix-doc-install.diff",
+        # "flac-1.2.1-fix-doc-install.diff",
       ],
     },
     {
