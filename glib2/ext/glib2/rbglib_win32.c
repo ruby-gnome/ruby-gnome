@@ -45,21 +45,6 @@ rbglib_m_win32_locale_deprecated(VALUE self)
     return rg_s_locale(self);
 }
 
-static VALUE
-rg_s_get_package_installation_directory(VALUE self, VALUE package, VALUE dll_name)
-{
-    return CSTR2RVAL_FREE(g_win32_get_package_installation_directory(RVAL2CSTR(package), 
-                                                                RVAL2CSTR(dll_name)));
-}
-
-static VALUE
-rg_s_get_package_installation_subdirectory(VALUE self, VALUE package, VALUE dll_name, VALUE subdir)
-{
-    return CSTR2RVAL_FREE(g_win32_get_package_installation_subdirectory(RVAL2CSTR(package), 
-                                                                    RVAL2CSTR(dll_name),
-                                                                    RVAL2CSTR(subdir)));
-}
-
 #if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_version(VALUE self)
@@ -116,8 +101,6 @@ Init_glib_win32(void)
 
     RG_DEF_SMETHOD(error_message, 1);
     RG_DEF_SMETHOD(locale, 0);
-    RG_DEF_SMETHOD(get_package_installation_directory, 2);
-    RG_DEF_SMETHOD(get_package_installation_subdirectory, 3);
     RG_DEF_SMETHOD(version, 0);
     /* Deprecated */
     rbg_define_singleton_method(mGLib, "win32_locale", rbglib_m_win32_locale_deprecated, 0);
