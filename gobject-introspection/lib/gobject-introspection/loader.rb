@@ -112,10 +112,9 @@ module GObjectIntrospection
     end
 
     def load_method_info(info, klass)
-      name = info.name
       case info
       when ConstructorInfo
-        if name == "new"
+        if info.name == "new"
           klass.__send__(:define_method, "initialize") do |*arguments|
             info.invoke(self, *arguments)
           end
@@ -123,10 +122,19 @@ module GObjectIntrospection
           # TODO
         end
       when MethodInfo
-        klass.__send__(:define_method, name) do |*arguments|
+        if /\Aget_/ =~ info.name and info.n_args.zero?
+          method_name = $POSTMATCH
+        else
+          method_name = info.name
+        end
+        klass.__send__(:define_method, method_name) do |*arguments|
           info.invoke(self, *arguments)
         end
+        if /\Aset_/ =~ method_name and info.n_args == 1
+          klass.__send__(:alias_method, "#{$POSTMATCH}=", method_name)
+        end
       else
+        name = info.name
         return if name == "new"
         return if name == "alloc"
         singleton_class = (class << klass; self; end)
