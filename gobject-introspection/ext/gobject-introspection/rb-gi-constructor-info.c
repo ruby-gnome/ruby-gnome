@@ -35,6 +35,52 @@ gi_constructor_info_get_type(void)
     return type;
 }
 
+static void
+initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    if (g_type_info_get_tag(info) != GI_TYPE_TAG_INTERFACE) {
+        rb_raise(rb_eRuntimeError, "TODO: returned value isn't interface");
+    }
+
+    interface_info = g_type_info_get_interface(info);
+    interface_type = g_base_info_get_type(interface_info);
+    g_base_info_unref(interface_info);
+    switch (interface_type) {
+      case GI_INFO_TYPE_OBJECT:
+        g_object_ref_sink(value->v_pointer);
+        G_INITIALIZE(receiver, value->v_pointer);
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        G_INITIALIZE(receiver, value->v_pointer);
+        break;
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
+      case GI_INFO_TYPE_BOXED:
+      case GI_INFO_TYPE_ENUM:
+      case GI_INFO_TYPE_FLAGS:
+      case GI_INFO_TYPE_INTERFACE:
+      case GI_INFO_TYPE_CONSTANT:
+      case GI_INFO_TYPE_INVALID_0:
+      case GI_INFO_TYPE_UNION:
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+      default:
+        rb_raise(rb_eRuntimeError,
+                 "TODO: returned value isn't object or struct");
+        break;
+    }
+}
+
 static VALUE
 rg_invoke(int argc, VALUE *argv, VALUE self)
 {
@@ -43,8 +89,6 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     VALUE receiver;
     GIArgument return_value;
     GITypeInfo return_value_info;
-    GIBaseInfo *interface_info;
-    GIInfoType interface_type;
 
     info = SELF(self);
     callable_info = (GICallableInfo *)info;
@@ -52,18 +96,9 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     /* TODO: check argc. */
     receiver = argv[0];
     rb_gi_function_info_invoke_raw(info, argc - 1, argv + 1, &return_value);
-    g_callable_info_load_return_type(callable_info, &return_value_info);
 
-    if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_INTERFACE) {
-        rb_raise(rb_eRuntimeError, "TODO: returned value isn't interface");
-    }
-    interface_info = g_type_info_get_interface(&return_value_info);
-    interface_type = g_base_info_get_type(interface_info);
-    if (interface_type != GI_INFO_TYPE_OBJECT) {
-        rb_raise(rb_eRuntimeError, "TODO: returned value isn't object");
-    }
-    g_object_ref_sink(return_value.v_pointer);
-    G_INITIALIZE(receiver, return_value.v_pointer);
+    g_callable_info_load_return_type(callable_info, &return_value_info);
+    initialize_receiver(receiver, &return_value_info, &return_value);
 
     return receiver;
 }
