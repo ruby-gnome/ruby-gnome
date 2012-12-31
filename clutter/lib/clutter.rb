@@ -23,7 +23,7 @@ GLib.prepend_environment_path(vendor_bin_dir)
 
 module Clutter
   LOG_DOMAIN = "Clutter"
-  GLib::Log.set_log_domain(Clutter::LOG_DOMAIN)
+  GLib::Log.set_log_domain(LOG_DOMAIN)
 
   class << self
     @initialized = false
