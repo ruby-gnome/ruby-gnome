@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,12 +23,12 @@ base_dir = source_dir.parent.parent.expand_path
 top_dir = base_dir.parent.expand_path
 top_build_dir = Pathname(".").parent.parent.parent.expand_path
 
-mkmf_gnome2_dir = top_dir + "glib2" + 'lib'
+mkmf_gnome2_dir = top_dir + "glib2" + "lib"
 version_suffix = ""
 unless mkmf_gnome2_dir.exist?
   if /(-\d+\.\d+\.\d+)(?:\.\d+)?\z/ =~ base_dir.basename.to_s
     version_suffix = $1
-    mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + 'lib'
+    mkmf_gnome2_dir = top_dir + "glib2#{version_suffix}" + "lib"
   end
 end
 
