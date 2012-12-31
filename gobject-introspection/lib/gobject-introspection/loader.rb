@@ -157,8 +157,8 @@ module GObjectIntrospection
     def load_function_infos(infos, klass)
       infos.each do |info|
         name = info.name
-        return if name == "new"
-        return if name == "alloc"
+        next if name == "new"
+        next if name == "alloc"
         singleton_class = (class << klass; self; end)
         singleton_class.__send__(:define_method, name) do |*arguments|
           info.invoke(*arguments)
