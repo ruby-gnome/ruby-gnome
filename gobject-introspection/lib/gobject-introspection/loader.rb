@@ -30,12 +30,16 @@ module GObjectIntrospection
     def load(namespace)
       repository = Repository.default
       repository.require(namespace)
+      prepare(repository, namespace)
       repository.each(namespace) do |info|
         load_info(info)
       end
     end
 
     private
+    def prepare(repository, namespace)
+    end
+
     def load_info(info)
       case info
       when FunctionInfo
