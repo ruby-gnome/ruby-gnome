@@ -145,12 +145,16 @@ module GObjectIntrospection
         else
           method_name = info.name
         end
-        klass.__send__(:define_method, method_name) do |*arguments|
-          info.invoke(self, *arguments)
-        end
+        load_method_info(info, klass, method_name)
         if /\Aset_/ =~ method_name and info.n_args == 1
           klass.__send__(:alias_method, "#{$POSTMATCH}=", method_name)
         end
+      end
+    end
+
+    def load_method_info(info, klass, method_name)
+      klass.__send__(:define_method, method_name) do |*arguments|
+        info.invoke(self, *arguments)
       end
     end
 
