@@ -73,10 +73,8 @@ module GObjectIntrospection
       return if info.gtype == GLib::Type::NONE
 
       klass = self.class.define_class(info.gtype, info.name, @base_module)
-      load_field_infos(info, klass)
-      info.methods.each do |method_info|
-        load_method_info(method_info, klass)
-      end
+      load_fields(info, klass)
+      load_methods(info, klass)
     end
 
     def load_enum_info(info)
@@ -85,13 +83,11 @@ module GObjectIntrospection
 
     def load_object_info(info)
       klass = self.class.define_class(info.gtype, info.name, @base_module)
-      load_field_infos(info, klass)
-      info.methods.each do |method_info|
-        load_method_info(method_info, klass)
-      end
+      load_fields(info, klass)
+      load_methods(info, klass)
     end
 
-    def load_field_infos(info, klass)
+    def load_fields(info, klass)
       info.n_fields.times do |i|
         field_info = info.get_field(i)
         name = field_info.name
@@ -111,9 +107,27 @@ module GObjectIntrospection
       end
     end
 
-    def load_method_info(info, klass)
-      case info
-      when ConstructorInfo
+    def load_methods(info, klass)
+      grouped_methods = info.methods.group_by do |method_info|
+        method_info.class
+      end
+      grouped_methods.each do |method_info_class, method_infos|
+        next if method_infos.empty?
+        case method_infos.first
+        when ConstructorInfo
+          load_constructor_infos(method_infos, klass)
+        when MethodInfo
+          load_method_infos(method_infos, klass)
+        when FunctionInfo
+          load_function_infos(method_infos, klass)
+        else
+          raise "TODO: #{method_info_class}"
+        end
+      end
+    end
+
+    def load_constructor_infos(infos, klass)
+      infos.each do |info|
         if info.name == "new"
           klass.__send__(:define_method, "initialize") do |*arguments|
             info.invoke(self, *arguments)
@@ -121,7 +135,11 @@ module GObjectIntrospection
         else
           # TODO
         end
-      when MethodInfo
+      end
+    end
+
+    def load_method_infos(infos, klass)
+      infos.each do |info|
         if /\Aget_/ =~ info.name and info.n_args.zero?
           method_name = $POSTMATCH
         else
@@ -133,7 +151,11 @@ module GObjectIntrospection
         if /\Aset_/ =~ method_name and info.n_args == 1
           klass.__send__(:alias_method, "#{$POSTMATCH}=", method_name)
         end
-      else
+      end
+    end
+
+    def load_function_infos(infos, klass)
+      infos.each do |info|
         name = info.name
         return if name == "new"
         return if name == "alloc"
@@ -154,7 +176,7 @@ module GObjectIntrospection
 
     def load_union_info(info)
       klass = self.class.define_class(info.gtype, info.name, @base_module)
-      load_field_infos(info, klass)
+      load_fields(info, klass)
     end
   end
 end
