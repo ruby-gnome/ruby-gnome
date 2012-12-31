@@ -27,21 +27,12 @@ package = GNOME2Package.new do |_package|
   _package.win32.packages = []
   _package.win32.dependencies = []
   _package.win32.build_dependencies = ["glib2"]
-  libffi_lib_dir     = File.join(_package.win32.package.root_dir, "..",
-                                 "glib2", "vendor", "local", "lib")
-  libffi_include_dir = File.join(libffi_lib_dir, "libffi-3.0.6", "include")
   _package.win32.build_packages = [
     {
       :name => "gobject-introspection",
       :download_site => :gnome,
       :label => "gobject-introspection",
       :version => "1.35.3",
-      :include_paths => [
-        libffi_include_dir,
-      ],
-      :library_paths => [
-        libffi_lib_dir,
-      ],
       :configure_args => [],
       :compression_method => "xz",
     },
