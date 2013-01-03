@@ -176,7 +176,30 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
         argument->v_string = (gchar *)RVAL2CSTR(rb_argument);
         break;
       case GI_TYPE_TAG_ARRAY:
-        /* TODO */
+        {
+            GIArrayType array_type;
+            gboolean zero_terminated_p;
+
+            array_type = g_type_info_get_array_type(type_info);
+            zero_terminated_p = g_type_info_is_zero_terminated(type_info);
+            switch (array_type) {
+              case GI_ARRAY_TYPE_C:
+                if (zero_terminated_p) {
+                    argument->v_pointer = (gchar *)RVAL2CSTR(rb_argument);
+                } else {
+                    argument->v_pointer = RSTRING_PTR(rb_argument);
+                }
+                break;
+              case GI_ARRAY_TYPE_ARRAY:
+              case GI_ARRAY_TYPE_PTR_ARRAY:
+              case GI_ARRAY_TYPE_BYTE_ARRAY:
+                /* TODO */
+                break;
+              default:
+                g_assert_not_reached();
+                break;
+            }
+        }
         break;
       case GI_TYPE_TAG_INTERFACE:
         {
