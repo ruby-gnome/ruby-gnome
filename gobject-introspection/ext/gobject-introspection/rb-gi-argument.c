@@ -219,11 +219,19 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                 argument->v_int32 = RVAL2GFLAGS(rb_argument, gtype);
                 break;
               case GI_INFO_TYPE_OBJECT:
+              case GI_INFO_TYPE_INTERFACE:
                 argument->v_pointer = RVAL2GOBJ(rb_argument);
                 break;
               case GI_INFO_TYPE_STRUCT:
                 argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
+                break;
               default:
+                /* TODO */
+                rb_raise(rb_eNotImpError,
+                         "not implemented Ruby -> GIArgument conversion: "
+                         "<%s>: <%s>",
+                         g_base_info_get_name(interface_info),
+                         g_info_type_to_string(interface_type));
                 break;
             }
 
