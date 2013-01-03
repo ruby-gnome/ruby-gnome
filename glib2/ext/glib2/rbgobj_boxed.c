@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -55,8 +55,8 @@ boxed_free(boxed_holder *holder)
 static VALUE
 rbgobj_boxed_s_allocate(VALUE klass)
 {
-    const RGObjClassInfo* cinfo = rbgobj_lookup_class(klass);
-    boxed_holder* holder;
+    const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
+    boxed_holder *holder;
     VALUE result;
 
     if (cinfo->gtype == G_TYPE_BOXED)
@@ -81,8 +81,8 @@ rg_initialize(VALUE self)
 static VALUE
 rg_inspect(VALUE self)
 {
-    boxed_holder* holder;
-    gchar* s;
+    boxed_holder *holder;
+    gchar *s;
     VALUE result;
 
     Data_Get_Struct(self, boxed_holder, holder);
@@ -102,8 +102,8 @@ rg_inspect(VALUE self)
 static VALUE
 rg_initialize_copy(VALUE self, VALUE orig)
 {
-    boxed_holder* holder1;
-    boxed_holder* holder2;
+    boxed_holder *holder1;
+    boxed_holder *holder2;
 
     if (self == orig) return self;
 
@@ -135,7 +135,7 @@ rbgobj_boxed_create(VALUE klass)
 void
 rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 { 
-    boxed_holder* holder;
+    boxed_holder *holder;
     Data_Get_Struct(obj, boxed_holder, holder);
     holder->boxed = g_boxed_copy(holder->type, boxed);
     holder->own   = TRUE;
@@ -144,7 +144,7 @@ rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 gpointer
 rbgobj_boxed_get(VALUE obj, GType gtype)
 {
-    boxed_holder* holder;
+    boxed_holder *holder;
 
     if (NIL_P(obj))
         return NULL;
@@ -164,9 +164,9 @@ rbgobj_boxed_get(VALUE obj, GType gtype)
 VALUE
 rbgobj_make_boxed(gpointer p, GType gtype)
 {
-    const RGObjClassInfo* cinfo;
+    const RGObjClassInfo *cinfo;
     VALUE result;
-    boxed_holder* holder;
+    boxed_holder *holder;
 
     if (!p)
         return Qnil;
@@ -190,14 +190,14 @@ rbgobj_make_boxed(gpointer p, GType gtype)
 void
 rbgobj_boxed_not_copy_obj(GType gtype)
 {
-    RGObjClassInfo* cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
+    RGObjClassInfo *cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
     cinfo->flags |= RBGOBJ_BOXED_NOT_COPY;
 }
 
 /**********************************************************************/
 
 static VALUE
-boxed_to_ruby(const GValue* from)
+boxed_to_ruby(const GValue *from)
 {
     gpointer boxed = g_value_get_boxed(from);
     if (!boxed)
@@ -207,9 +207,9 @@ boxed_to_ruby(const GValue* from)
 }
 
 static void
-boxed_from_ruby(VALUE from, GValue* to)
+boxed_from_ruby(VALUE from, GValue *to)
 {
-    boxed_holder* holder;
+    boxed_holder *holder;
 
     if (NIL_P(from)) {
         g_value_set_boxed(to, NULL);
