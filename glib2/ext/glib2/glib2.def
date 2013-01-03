@@ -21,8 +21,10 @@ EXPORTS
 	rbgobj_gobject_initialize
 	rbgobj_boxed_create
 	rbgobj_boxed_get
+	rbgobj_boxed_get_default
 	rbgobj_boxed_not_copy_obj
 	rbgobj_make_boxed
+	rbgobj_make_boxed_default
 	rbgobj_add_abstract_but_create_instance_class
 	rbgobj_gtype_get
 	rbgobj_gtype_new

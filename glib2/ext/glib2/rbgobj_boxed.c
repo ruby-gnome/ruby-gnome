@@ -142,12 +142,9 @@ rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 }
 
 gpointer
-rbgobj_boxed_get(VALUE obj, GType gtype)
+rbgobj_boxed_get_default(VALUE obj, GType gtype)
 {
     boxed_holder *holder;
-
-    if (NIL_P(obj))
-        return NULL;
 
     if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
         rb_raise(rb_eArgError, "invalid argument %s (expect %s)",
@@ -161,15 +158,27 @@ rbgobj_boxed_get(VALUE obj, GType gtype)
     return holder->boxed;
 }
 
+gpointer
+rbgobj_boxed_get(VALUE obj, GType gtype)
+{
+    gpointer boxed = NULL;
+
+    if (NIL_P(obj))
+        return NULL;
+
+    if (rbgobj_convert_robj2instance(gtype, obj, &boxed)) {
+        return boxed;
+    }
+
+    return rbgobj_boxed_get_default(obj, gtype);
+}
+
 VALUE
-rbgobj_make_boxed(gpointer p, GType gtype)
+rbgobj_make_boxed_default(gpointer p, GType gtype)
 {
     const RGObjClassInfo *cinfo;
     VALUE result;
     boxed_holder *holder;
-
-    if (!p)
-        return Qnil;
 
     cinfo = GTYPE2CINFO(gtype);
     result = rbgobj_boxed_s_allocate(cinfo->klass);
@@ -185,6 +194,21 @@ rbgobj_make_boxed(gpointer p, GType gtype)
     }
 
     return result;
+}
+
+VALUE
+rbgobj_make_boxed(gpointer p, GType gtype)
+{
+    VALUE result;
+
+    if (!p)
+        return Qnil;
+
+    if (rbgobj_convert_instance2robj(gtype, p, &result)) {
+        return result;
+    }
+
+    return rbgobj_make_boxed_default(p, gtype);
 }
 
 void

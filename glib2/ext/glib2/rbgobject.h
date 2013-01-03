@@ -227,7 +227,9 @@ extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, 
 /* rbgobj_boxed.c */
 extern VALUE rbgobj_boxed_create(VALUE klass); /* deprecated */
 extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
+extern gpointer rbgobj_boxed_get_default(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
+extern VALUE rbgobj_make_boxed_default(gpointer data, GType gtype);
 extern void rbgobj_boxed_not_copy_obj(GType gtype);
 
 /* rbgobj_enums.c */
