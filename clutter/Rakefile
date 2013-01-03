@@ -22,7 +22,7 @@ require "gnome2-raketask"
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/Clutter is a Ruby binding of Clutter."
   _package.description = "Ruby/Clutter is a Ruby binding of Clutter."
-  _package.dependency.gem.runtime = ["gobject-introspection"]
+  _package.dependency.gem.runtime = ["cairo-gobject", "gobject-introspection"]
   _package.dependency.gem.development = ["test-unit-notify"]
   _package.win32.packages = []
   _package.win32.dependencies = []
