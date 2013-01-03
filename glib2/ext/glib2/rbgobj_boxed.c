@@ -62,7 +62,7 @@ rbgobj_boxed_s_allocate(VALUE klass)
     if (cinfo->gtype == G_TYPE_BOXED)
         rb_raise(rb_eTypeError, "abstract class");
 
-    result = Data_Make_Struct(klass, boxed_holder, 
+    result = Data_Make_Struct(klass, boxed_holder,
                               boxed_mark, boxed_free, holder);
     holder->type  = cinfo->gtype;
     holder->boxed = NULL;
@@ -134,7 +134,7 @@ rbgobj_boxed_create(VALUE klass)
 
 void
 rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
-{ 
+{
     boxed_holder *holder;
     Data_Get_Struct(obj, boxed_holder, holder);
     holder->boxed = g_boxed_copy(holder->type, boxed);
@@ -151,7 +151,7 @@ rbgobj_boxed_get(VALUE obj, GType gtype)
 
     if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, GTYPE2CLASS(gtype))))
         rb_raise(rb_eArgError, "invalid argument %s (expect %s)",
-                 rb_class2name(CLASS_OF(obj)), 
+                 rb_class2name(CLASS_OF(obj)),
                  rb_class2name(GTYPE2CLASS(gtype)));
 
     Data_Get_Struct(obj, boxed_holder, holder);
