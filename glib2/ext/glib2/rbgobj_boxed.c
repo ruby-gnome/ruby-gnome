@@ -190,7 +190,7 @@ rbgobj_make_boxed(gpointer p, GType gtype)
 void
 rbgobj_boxed_not_copy_obj(GType gtype)
 {
-    RGObjClassInfo *cinfo = (RGObjClassInfo*)GTYPE2CINFO(gtype);
+    RGObjClassInfo *cinfo = (RGObjClassInfo *)GTYPE2CINFO(gtype);
     cinfo->flags |= RBGOBJ_BOXED_NOT_COPY;
 }
 
