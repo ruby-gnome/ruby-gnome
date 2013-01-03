@@ -209,21 +209,9 @@ boxed_to_ruby(const GValue *from)
 static void
 boxed_from_ruby(VALUE from, GValue *to)
 {
-    boxed_holder *holder;
-
-    if (NIL_P(from)) {
-        g_value_set_boxed(to, NULL);
-        return;
-    }
-
-    Data_Get_Struct(from, boxed_holder, holder);
-
-    if (g_type_is_a(holder->type, G_VALUE_TYPE(to)))
-        g_value_set_boxed(to, holder->boxed);
-    else
-        rb_raise(rb_eRuntimeError, "%s is not a subtype of %s",
-                 g_type_name(holder->type),
-                 g_type_name(G_VALUE_TYPE(to)));
+    gpointer boxed;
+    boxed = rbgobj_boxed_get(from, G_VALUE_TYPE(to));
+    g_value_set_boxed(to, boxed);
 }
 
 /**********************************************************************/
