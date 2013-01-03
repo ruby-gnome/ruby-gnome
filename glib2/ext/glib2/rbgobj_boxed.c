@@ -176,7 +176,7 @@ rbgobj_make_boxed(gpointer p, GType gtype)
 
     Data_Get_Struct(result, boxed_holder, holder);
 
-    if (cinfo->flags & RBGOBJ_BOXED_NOT_COPY){
+    if (cinfo->flags & RBGOBJ_BOXED_NOT_COPY) {
         holder->boxed = p;
         holder->own   = FALSE;
     } else {
