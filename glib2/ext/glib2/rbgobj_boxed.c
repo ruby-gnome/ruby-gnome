@@ -199,11 +199,9 @@ rbgobj_boxed_not_copy_obj(GType gtype)
 static VALUE
 boxed_to_ruby(const GValue *from)
 {
-    gpointer boxed = g_value_get_boxed(from);
-    if (!boxed)
-        return Qnil;
-    else
-        return rbgobj_make_boxed(boxed, G_VALUE_TYPE(from));
+    gpointer boxed;
+    boxed = g_value_get_boxed(from);
+    return rbgobj_make_boxed(boxed, G_VALUE_TYPE(from));
 }
 
 static void
