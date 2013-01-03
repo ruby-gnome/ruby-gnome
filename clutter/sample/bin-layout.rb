@@ -27,8 +27,6 @@ require "gdk_pixbuf2"
 
 Clutter.init
 
-bg_color = Clutter::Color.new(0xcc, 0xcc, 0xcc, 0x99)
-
 stage = Clutter::Stage.new
 stage.title = "BinLayout"
 stage.background_color = Clutter::Color.get_static(:aluminium_2)
@@ -74,13 +72,14 @@ canvas.signal_connect("draw") do |_canvas, cairo_context, width, height|
 
   cairo_context.close_path
 
+  bg_color = Clutter::Color.new(0xcc, 0xcc, 0xcc, 0x99)
   cairo_context.set_source_clutter_color(bg_color)
   cairo_context.stroke
 
-  x += 4;
-  y += 4;
-  width -= 4;
-  height -= 4;
+  x += 4
+  y += 4
+  width -= 4
+  height -= 4
 
   cairo_context.move_to(bg_round_radius, y)
   cairo_context.line_to(width - bg_round_radius, y)
@@ -148,8 +147,8 @@ emblem.set_size(48, 48)
 emblem.background_color = color
 emblem.x_expand = true
 emblem.y_expand = true
-emblem.x_align :end
-emblem.y_align :end
+emblem.x_align = :end
+emblem.y_align = :end
 emblem.reactive = true
 emblem.opacity = 0
 box.add_child(emblem)
@@ -168,7 +167,7 @@ action.signal_connect("clicked") do |_action, _emblem|
       box.set_size(400, 400)
     end
   end
-  expanded_p = !expanded_p;
+  expanded_p = !expanded_p
 end
 action.signal_connect("long-press") do |_action, _emblem, state|
   case state
@@ -196,7 +195,7 @@ box.signal_connect("enter-event") do |_box, event|
   stop = true
   stop
 end
-box.signal_connect("leave-event") do
+box.signal_connect("leave-event") do |_box, event|
   emblem.save_easing_state do
     emblem.easing_mode = :linear
     emblem.opacity = 0
