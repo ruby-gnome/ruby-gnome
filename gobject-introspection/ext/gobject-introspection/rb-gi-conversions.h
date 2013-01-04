@@ -33,8 +33,12 @@
 
 #define GI_ARGUMENT2RVAL(argument, type_info)           \
     (rb_gi_argument_to_ruby((argument), (type_info)))
-#define RVAL2GI_ARGUMENT(argument, type_info, rb_argument) \
+#define GI_RETURN_ARGUMENT2RVAL(argument, callable_info)                \
+    (rb_gi_return_argument_to_ruby((argument), (callable_info)))
+#define RVAL2GI_ARGUMENT(argument, type_info, rb_argument)              \
     (rb_gi_argument_from_ruby((argument), (type_info), (rb_argument)))
+#define RVAL2GI_CALL_ARGUMENT(argument, arg_info, rb_argument)          \
+    (rb_gi_call_argument_from_ruby((argument), (arg_info), (rb_argument)))
 
 
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
@@ -83,11 +87,16 @@ VALUE       rb_gi_base_info_to_ruby           (GIBaseInfo *info);
 VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
 
-VALUE       rb_gi_argument_to_ruby            (GIArgument *argument,
-                                               GITypeInfo *type_info);
-GIArgument *rb_gi_argument_from_ruby          (GIArgument *argument,
-                                               GITypeInfo *type_info,
-                                               VALUE       rb_argument);
+VALUE       rb_gi_argument_to_ruby            (GIArgument     *argument,
+                                               GITypeInfo     *type_info);
+VALUE       rb_gi_return_argument_to_ruby     (GIArgument     *argument,
+                                               GICallableInfo *callable_info);
+GIArgument *rb_gi_argument_from_ruby          (GIArgument     *argument,
+                                               GITypeInfo     *type_info,
+                                               VALUE           rb_argument);
+GIArgument *rb_gi_call_argument_from_ruby     (GIArgument     *argument,
+                                               GIArgInfo      *arg_info,
+                                               VALUE           rb_argument);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);
 

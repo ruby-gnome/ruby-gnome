@@ -122,6 +122,22 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
     return rb_argument;
 }
 
+VALUE
+rb_gi_return_argument_to_ruby(GIArgument *argument,
+                              GICallableInfo *callable_info)
+{
+    gboolean may_return_null;
+    GITypeInfo return_value_info;
+
+    may_return_null = g_callable_info_may_return_null(callable_info);
+    if (may_return_null && !argument->v_pointer) {
+        return Qnil;
+    }
+
+    g_callable_info_load_return_type(callable_info, &return_value_info);
+    return rb_gi_argument_to_ruby(argument, &return_value_info);
+}
+
 GIArgument *
 rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                          VALUE rb_argument)
@@ -248,6 +264,22 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
       default:
         g_assert_not_reached();
         break;
+    }
+
+    return argument;
+}
+
+GIArgument *
+rb_gi_call_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
+                              VALUE rb_argument)
+{
+    if (g_arg_info_may_be_null(arg_info) && NIL_P(rb_argument)) {
+        memset(argument, 0, sizeof(GIArgument));
+    } else {
+        GITypeInfo type_info;
+
+        g_arg_info_load_type(arg_info, &type_info);
+        rb_gi_argument_from_ruby(argument, &type_info, rb_argument);
     }
 
     return argument;

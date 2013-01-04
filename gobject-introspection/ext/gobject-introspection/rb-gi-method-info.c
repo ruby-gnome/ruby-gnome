@@ -41,16 +41,13 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
     GIArgument return_value;
-    GITypeInfo return_value_info;
 
     info = SELF(self);
-    callable_info = (GICallableInfo *)info;
-
     /* TODO: check argc >= 1 */
     rb_gi_function_info_invoke_raw(info, argc, argv, &return_value);
-    g_callable_info_load_return_type(callable_info, &return_value_info);
 
-    return GI_ARGUMENT2RVAL(&return_value, &return_value_info);
+    callable_info = (GICallableInfo *)info;
+    return GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
 }
 
 void

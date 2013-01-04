@@ -72,16 +72,6 @@ rg_vfunc(VALUE self)
 }
 
 static void
-fill_gi_argument_by_ruby(GIArgument *argument, GIArgInfo *arg_info,
-                         VALUE rb_argument)
-{
-    GITypeInfo type_info;
-
-    g_arg_info_load_type(arg_info, &type_info);
-    RVAL2GI_ARGUMENT(argument, &type_info, rb_argument);
-}
-
-static void
 fill_in_argument(GIArgInfo *arg_info, GArray *in_args, int argc, VALUE *argv)
 {
     VALUE rb_argument;
@@ -89,7 +79,7 @@ fill_in_argument(GIArgInfo *arg_info, GArray *in_args, int argc, VALUE *argv)
 
     /* TODO: check argc */
     rb_argument = argv[in_args->len];
-    fill_gi_argument_by_ruby(&argument, arg_info, rb_argument);
+    RVAL2GI_CALL_ARGUMENT(&argument, arg_info, rb_argument);
     g_array_append_val(in_args, argument);
 }
 
@@ -166,15 +156,12 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
     GIArgument return_value;
-    GITypeInfo return_value_info;
 
     info = SELF(self);
-    callable_info = (GICallableInfo *)info;
-
     rb_gi_function_info_invoke_raw(info, argc, argv, &return_value);
-    g_callable_info_load_return_type(callable_info, &return_value_info);
 
-    return GI_ARGUMENT2RVAL(&return_value, &return_value_info);
+    callable_info = (GICallableInfo *)info;
+    return GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
 }
 
 void
