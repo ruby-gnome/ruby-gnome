@@ -19,7 +19,7 @@ class TestArgInfo < Test::Unit::TestCase
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
     @callable_info = @repository.find("GObject", "signal_name")
-    @info = @callable_info[0]
+    @info = @callable_info.get_arg(0)
   end
 
   def test_direction

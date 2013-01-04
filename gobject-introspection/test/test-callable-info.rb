@@ -39,8 +39,8 @@ class TestCallableInfo < Test::Unit::TestCase
     assert_equal(1, @info.n_args)
   end
 
-  def test_aref
-    assert_equal("signal_id", @info[0].name)
+  def test_get_arg
+    assert_equal("signal_id", @info.get_arg(0).name)
   end
 
   def test_args

@@ -72,7 +72,7 @@ rg_n_args(VALUE self)
 }
 
 static VALUE
-rg_operator_aref(VALUE self, VALUE rb_n)
+rg_get_arg(VALUE self, VALUE rb_n)
 {
     GICallableInfo *info;
     gint n;
@@ -80,25 +80,6 @@ rg_operator_aref(VALUE self, VALUE rb_n)
     info = SELF(self);
     n = NUM2INT(rb_n);
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_callable_info_get_arg(info, n));
-}
-
-static VALUE
-rg_args(VALUE self)
-{
-    GICallableInfo *info;
-    gint i, n;
-    VALUE rb_args;
-
-    info = SELF(self);
-    rb_args = rb_ary_new();
-    n = g_callable_info_get_n_args(info);
-    for (i = 0; i < n; i++) {
-        GIArgInfo *arg_info;
-        arg_info = g_callable_info_get_arg(info, i);
-        rb_ary_push(rb_args, GI_BASE_INFO2RVAL_WITH_UNREF(arg_info));
-    }
-
-    return rb_args;
 }
 
 void
@@ -114,8 +95,7 @@ rb_gi_callable_info_init(VALUE rb_mGI, VALUE rb_cGIBaseInfo)
     RG_DEF_METHOD(caller_owns, 0);
     RG_DEF_METHOD_P(may_return_null, 0);
     RG_DEF_METHOD(n_args, 0);
-    RG_DEF_METHOD_OPERATOR("[]", aref, 1);
-    RG_DEF_METHOD(args, 0);
+    RG_DEF_METHOD(get_arg, 1);
 
     rb_gi_function_info_init(rb_mGI, RG_TARGET_NAMESPACE);
     rb_gi_callback_info_init(rb_mGI, RG_TARGET_NAMESPACE);
