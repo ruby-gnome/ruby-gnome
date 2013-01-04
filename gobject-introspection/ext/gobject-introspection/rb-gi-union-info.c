@@ -112,7 +112,7 @@ rg_get_method(VALUE self, VALUE rb_n_or_name)
     GIFunctionInfo *function_info;
 
     info = SELF(self);
-    if (RB_TYPE_P(self, T_FIXNUM)) {
+    if (RB_TYPE_P(rb_n_or_name, T_FIXNUM)) {
         gint n;
         n = NUM2INT(rb_n_or_name);
         function_info = g_union_info_get_method(info, n);
