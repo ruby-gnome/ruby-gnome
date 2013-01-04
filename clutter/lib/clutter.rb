@@ -43,17 +43,34 @@ module Clutter
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
+      @key_constants = {}
+      @other_constant_infos = []
     end
 
     private
-    def prepare(repository, namespace)
+    def pre_load(repository, namespace)
       init = repository.find(namespace, "init")
       init.invoke(@init_arguments.size, @init_arguments)
+      @keys_module = Module.new
+      @base_module.const_set("Keys", @keys_module)
+    end
+
+    def post_load(repository, namespace)
+      @other_constant_infos.each do |constant_info|
+        name = constant_info.name
+        next if @key_constants.has_key?("KEY_#{name}")
+        @base_module.const_set(name, constant_info.value)
+      end
     end
 
     def load_constant_info(info)
-      return unless /\A(?:KEY_|COLOR_)/ =~ info.name
-      super
+      case info.name
+      when /\AKEY_/
+        @key_constants[info.name] = true
+        @keys_module.const_set(info.name, info.value)
+      else
+        @other_constant_infos << info
+      end
     end
   end
 end
