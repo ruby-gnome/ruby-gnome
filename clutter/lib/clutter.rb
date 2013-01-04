@@ -35,6 +35,7 @@ module Clutter
       loader.load("Clutter")
       require "clutter/actor"
       require "clutter/cairo"
+      require "clutter/color"
     end
   end
 
