@@ -77,9 +77,10 @@ gpointer
 rbgobj_instance_from_ruby_object(VALUE obj)
 {
     GType type;
+    GType fundamental_type;
 
     if (NIL_P(obj))
-    	return NULL;
+        return NULL;
 
     type = RVAL2GTYPE(obj);
     if (rbgobj_convert_has_type(type)) {
@@ -88,16 +89,18 @@ rbgobj_instance_from_ruby_object(VALUE obj)
             return instance;
     }
 
-    type = G_TYPE_FUNDAMENTAL(type);
-    switch (type){
+    fundamental_type = G_TYPE_FUNDAMENTAL(type);
+    switch (fundamental_type) {
     case G_TYPE_OBJECT:
         return rbgobj_get_gobject(obj);
+    case G_TYPE_BOXED:
+        return rbgobj_boxed_get(obj, type);
     case G_TYPE_PARAM:
         return rbgobj_get_param_spec(obj);
     default:
       {
         gpointer instance;
-        if (!rbgobj_convert_robj2instance(type, obj, &instance)) {
+        if (!rbgobj_convert_robj2instance(fundamental_type, obj, &instance)) {
             rb_raise(rb_eTypeError, "%s isn't supported",
                      rb_class2name(CLASS_OF(obj)));
         }
