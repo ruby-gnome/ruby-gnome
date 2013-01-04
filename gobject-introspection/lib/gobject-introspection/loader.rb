@@ -127,15 +127,50 @@ module GObjectIntrospection
     end
 
     def load_constructor_infos(infos, klass)
+      return if infos.empty?
+
+      validate = lambda do |info, arguments|
+        validate_arguments(info, arguments)
+      end
       infos.each do |info|
-        if info.name == "new"
-          klass.__send__(:define_method, "initialize") do |*arguments|
-            info.invoke(self, *arguments)
-          end
-        else
-          # TODO
+        klass.__send__(:define_method, "initialize_#{info.name}") do |*arguments|
+          validate.call(info, arguments)
+          info.invoke(self, *arguments)
         end
       end
+
+      find_info = lambda do |arguments|
+        find_suitable_callable_info(infos, arguments)
+      end
+      klass.__send__(:define_method, "initialize") do |*arguments|
+        info = find_info.call(arguments)
+        __send__("initialize_#{info.name}", *arguments)
+      end
+    end
+
+    def validate_arguments(info, arguments)
+      if arguments.size != info.n_in_args
+        details = "#{arguments.size} for #{info.n_in_args}"
+        raise ArgumentError, "wrong number of arguments (#{detail})"
+      end
+    end
+
+    def find_suitable_callable_info(infos, arguments)
+      min_n_args = nil
+      max_n_args = nil
+      infos.each do |info|
+        if arguments.size == info.n_in_args
+          return info
+        end
+        n_in_args = info.n_in_args
+        min_n_args = [min_n_args || n_in_args, n_in_args].min
+        max_n_args = [max_n_args || n_in_args, n_in_args].max
+      end
+      detail = "#{arguments.size} for #{min_n_args}"
+      if min_n_args < max_n_args
+        detail << "..#{max_n_args}"
+      end
+      raise ArgumentError, "wrong number of arguments (#{detail})"
     end
 
     def load_method_infos(infos, klass)
