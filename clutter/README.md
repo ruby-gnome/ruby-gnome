@@ -9,7 +9,7 @@ Ruby/Clutter is a Ruby binding of Clutter.
 
 ## Install
 
-  gem install clutter
+    gem install clutter
 
 ## License
 
