@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -220,6 +220,7 @@ module GObjectIntrospection
     def load_union_info(info)
       klass = self.class.define_class(info.gtype, info.name, @base_module)
       load_fields(info, klass)
+      load_methods(info, klass)
     end
   end
 end

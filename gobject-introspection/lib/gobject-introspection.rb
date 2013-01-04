@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -37,4 +37,5 @@ require "gobject-introspection/repository"
 require "gobject-introspection/callable-info"
 require "gobject-introspection/object-info"
 require "gobject-introspection/struct-info"
+require "gobject-introspection/union-info"
 require "gobject-introspection/loader"
