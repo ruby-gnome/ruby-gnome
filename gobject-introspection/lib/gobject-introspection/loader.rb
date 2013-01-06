@@ -180,13 +180,28 @@ module GObjectIntrospection
       raise ArgumentError, "wrong number of arguments (#{detail})"
     end
 
+    def rubyish_method_name(method_info)
+      name = method_info.name
+      return_type = method_info.return_type
+      if return_type.tag == GObjectIntrospection::TypeTag::BOOLEAN
+        case name
+        when /\A(?:is|get_is|get)_/
+          "#{$POSTMATCH}?"
+        when /\A(?:has|use)_/
+          "#{name}?"
+        else
+          name
+        end
+      elsif /\Aget_/ =~ name and method_info.n_args.zero?
+        $POSTMATCH
+      else
+        name
+      end
+    end
+
     def load_method_infos(infos, klass)
       infos.each do |info|
-        if /\Aget_/ =~ info.name and info.n_args.zero?
-          method_name = $POSTMATCH
-        else
-          method_name = info.name
-        end
+        method_name = rubyish_method_name(info)
         load_method_info(info, klass, method_name)
         if /\Aset_/ =~ method_name and info.n_args == 1
           klass.__send__(:alias_method, "#{$POSTMATCH}=", method_name)
