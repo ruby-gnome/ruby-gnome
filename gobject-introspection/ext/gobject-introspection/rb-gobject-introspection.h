@@ -94,6 +94,7 @@ void rb_gi_loader_init               (VALUE rb_mGI);
 
 void rb_gi_function_info_invoke_raw  (GIFunctionInfo *info,
                                       int argc, VALUE *argv,
+                                      GArray *in_args, GArray *out_args,
                                       GIArgument *return_value);
 
 VALUE rb_gi_field_info_get_field_raw (GIFieldInfo *info,

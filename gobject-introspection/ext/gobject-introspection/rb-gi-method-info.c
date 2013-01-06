@@ -35,16 +35,50 @@ gi_method_info_get_type(void)
     return type;
 }
 
+static gboolean
+gobject_based_p(GIFunctionInfo *info)
+{
+    GIBaseInfo *container_info;
+    GIRegisteredTypeInfo *registered_type_info;
+
+    container_info = g_base_info_get_container((GIBaseInfo *)info);
+    if (g_base_info_get_type(container_info) != GI_INFO_TYPE_STRUCT) {
+        return TRUE;
+    }
+
+    registered_type_info = (GIRegisteredTypeInfo *)container_info;
+    if (g_registered_type_info_get_type_init(registered_type_info)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 static VALUE
 rg_invoke(int argc, VALUE *argv, VALUE self)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
+    GArray *in_args, *out_args;
+    GIArgument receiver;
     GIArgument return_value;
 
     info = SELF(self);
+    in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
+    out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
+
     /* TODO: check argc >= 1 */
-    rb_gi_function_info_invoke_raw(info, argc, argv, &return_value);
+    if (gobject_based_p(info)) {
+        receiver.v_pointer = RVAL2GOBJ(argv[0]);
+    } else {
+        receiver.v_pointer = DATA_PTR(argv[0]);
+    }
+    g_array_append_val(in_args, receiver);
+    /* TODO: use rb_protect */
+    rb_gi_function_info_invoke_raw(info, argc, argv,
+                                   in_args, out_args, &return_value);
+    g_array_unref(in_args);
+    g_array_unref(out_args);
 
     callable_info = (GICallableInfo *)info;
     return GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);

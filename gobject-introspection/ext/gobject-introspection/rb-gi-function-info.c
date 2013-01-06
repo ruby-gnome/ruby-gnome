@@ -87,6 +87,7 @@ static void
 fill_out_argument(G_GNUC_UNUSED GIArgInfo *arg_info, GArray *out_args)
 {
     GIArgument argument;
+    memset(&argument, 0, sizeof(argument));
     g_array_append_val(out_args, argument);
 }
 
@@ -113,31 +114,16 @@ fill_argument(GIArgInfo *arg_info, GArray *in_args, GArray *out_args,
 
 void
 rb_gi_function_info_invoke_raw(GIFunctionInfo *info, int argc, VALUE *argv,
+                               GArray *in_args, GArray *out_args,
                                GIArgument *return_value)
 {
     GICallableInfo *callable_info;
     gint i, n_args;
-    GArray *in_args, *out_args;
     gboolean succeeded;
     GError *error = NULL;
 
     callable_info = (GICallableInfo *)info;
     n_args = g_callable_info_get_n_args(callable_info);
-    in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
-    out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
-    if (g_function_info_get_flags(callable_info) & GI_FUNCTION_IS_METHOD) {
-        GIBaseInfo *container;
-        GIArgument argument;
-        /* TODO: check argc */
-        container = g_base_info_get_container((GIBaseInfo *)info);
-        if (g_base_info_get_type(container) == GI_INFO_TYPE_STRUCT &&
-            !g_registered_type_info_get_type_init((GIRegisteredTypeInfo *)container)) {
-            argument.v_pointer = DATA_PTR(argv[0]);
-        } else {
-            argument.v_pointer = RVAL2GOBJ(argv[0]);
-        }
-        g_array_append_val(in_args, argument);
-    }
     for (i = 0; i < n_args; i++) {
         GIArgInfo arg_info;
         g_callable_info_load_arg(callable_info, i, &arg_info);
@@ -150,8 +136,6 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, int argc, VALUE *argv,
                                        out_args->len,
                                        return_value,
                                        &error);
-    g_array_unref(in_args);
-    g_array_unref(out_args);
     if (!succeeded) {
         RG_RAISE_ERROR(error);
     }
@@ -162,10 +146,17 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
+    GArray *in_args, *out_args;
     GIArgument return_value;
 
     info = SELF(self);
-    rb_gi_function_info_invoke_raw(info, argc, argv, &return_value);
+    in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
+    out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
+    /* TODO: use rb_protect() */
+    rb_gi_function_info_invoke_raw(info, argc, argv,
+                                   in_args, out_args, &return_value);
+    g_array_unref(in_args);
+    g_array_unref(out_args);
 
     callable_info = (GICallableInfo *)info;
     return GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
