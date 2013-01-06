@@ -121,10 +121,18 @@ retrieve_out_argument(GIArgInfo *arg_info, GIArgument *out_arg,
                       VALUE rb_out_args)
 {
     GITypeInfo type_info;
+    GIArgument normalized_out_arg;
+    gboolean caller_allocates_p;
 
     g_arg_info_load_type(arg_info, &type_info);
-    rb_ary_push(rb_out_args, GI_ARGUMENT2RVAL(out_arg, &type_info));
-    if (g_arg_info_is_caller_allocates(arg_info)) {
+    caller_allocates_p = g_arg_info_is_caller_allocates(arg_info);
+    if (caller_allocates_p) {
+        normalized_out_arg.v_pointer = *((gpointer *)(out_arg->v_pointer));
+    } else {
+        memcpy(&normalized_out_arg, out_arg, sizeof(GIArgument));
+    }
+    rb_ary_push(rb_out_args, GI_ARGUMENT2RVAL(&normalized_out_arg, &type_info));
+    if (caller_allocates_p) {
         xfree(out_arg->v_pointer);
     }
 }
