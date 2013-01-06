@@ -86,6 +86,105 @@ array_to_ruby(gpointer array, GITypeInfo *type_info)
     return rb_array;
 }
 
+static VALUE
+interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
+{
+    VALUE rb_interface;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+
+    gtype = g_registered_type_info_get_g_type(interface_info);
+    switch (interface_type) {
+      case GI_INFO_TYPE_INVALID:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[invalid] -> Ruby");
+        break;
+      case GI_INFO_TYPE_FUNCTION:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[function] -> Ruby");
+        break;
+      case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[callback] -> Ruby");
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[struct] -> Ruby");
+        break;
+      case GI_INFO_TYPE_BOXED:
+        rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
+        break;
+      case GI_INFO_TYPE_ENUM:
+        rb_interface = GENUM2RVAL(argument->v_int32, gtype);
+        break;
+      case GI_INFO_TYPE_FLAGS:
+        rb_interface = GFLAGS2RVAL(argument->v_int32, gtype);
+        break;
+      case GI_INFO_TYPE_OBJECT:
+        rb_interface = GOBJ2RVAL(argument->v_pointer);
+        break;
+      case GI_INFO_TYPE_INTERFACE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[interface] -> Ruby");
+        break;
+      case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[constant] -> Ruby");
+        break;
+      case GI_INFO_TYPE_INVALID_0:
+        g_assert_not_reached();
+        break;
+      case GI_INFO_TYPE_UNION:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[union] -> Ruby");
+        break;
+      case GI_INFO_TYPE_VALUE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[value] -> Ruby");
+        break;
+      case GI_INFO_TYPE_SIGNAL:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[signal] -> Ruby");
+        break;
+      case GI_INFO_TYPE_VFUNC:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[vfunc] -> Ruby");
+        break;
+      case GI_INFO_TYPE_PROPERTY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[property] -> Ruby");
+        break;
+      case GI_INFO_TYPE_FIELD:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[field] -> Ruby");
+        break;
+      case GI_INFO_TYPE_ARG:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[arg] -> Ruby");
+        break;
+      case GI_INFO_TYPE_TYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[type] -> Ruby");
+        break;
+      case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[unresolved] -> Ruby");
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(interface_info);
+
+    return rb_interface;
+}
+
+
 VALUE
 rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
@@ -144,32 +243,7 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = array_to_ruby(argument->v_pointer, type_info);
         break;
       case GI_TYPE_TAG_INTERFACE:
-        {
-            GIBaseInfo *interface_info;
-            GIInfoType interface_type;
-            GType gtype;
-
-            interface_info = g_type_info_get_interface(type_info);
-            interface_type = g_base_info_get_type(interface_info);
-
-            gtype = g_registered_type_info_get_g_type(interface_info);
-            switch (interface_type) {
-              case GI_INFO_TYPE_ENUM:
-                rb_argument = GENUM2RVAL(argument->v_int32, gtype);
-                break;
-              case GI_INFO_TYPE_FLAGS:
-                rb_argument = GFLAGS2RVAL(argument->v_int32, gtype);
-                break;
-              case GI_INFO_TYPE_OBJECT:
-                rb_argument = GOBJ2RVAL(argument->v_pointer);
-                break;
-              case GI_INFO_TYPE_STRUCT:
-                rb_argument = BOXED2RVAL(argument->v_pointer, gtype);
-                break;
-            }
-
-            g_base_info_unref(interface_info);
-        }
+        rb_argument = interface_to_ruby(argument->v_pointer, type_info);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
