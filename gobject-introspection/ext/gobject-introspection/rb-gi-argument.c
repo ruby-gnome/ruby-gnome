@@ -174,14 +174,14 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        rb_raise(rb_eNotImpError, "TODO: GIArgubyment(unichar) -> Ruby");
+        rb_raise(rb_eNotImpError, "TODO: GIArgument(unichar) -> Ruby");
         break;
       case GI_TYPE_TAG_ERROR:
         RG_RAISE_ERROR(argument->v_pointer);
         break;
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
-                 "TODO: GIArgubyment(%s) -> Ruby",
+                 "TODO: GIArgument(%s) -> Ruby",
                  g_type_tag_to_string(type_tag));
         break;
       default:
@@ -333,7 +333,7 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
       case GI_TYPE_TAG_ERROR:
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
-                 "TODO: Ruby -> GIArgubyment(%s)",
+                 "TODO: Ruby -> GIArgument(%s)",
                  g_type_tag_to_string(type_tag));
         break;
       default:
