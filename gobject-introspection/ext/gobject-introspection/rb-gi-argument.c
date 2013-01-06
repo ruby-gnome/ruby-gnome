@@ -24,8 +24,10 @@ VALUE
 rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
     VALUE rb_argument = Qnil;
+    GITypeTag type_tag;
 
-    switch (g_type_info_get_tag(type_info)) {
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
       case GI_TYPE_TAG_VOID:
         rb_argument = Qnil;
         break;
@@ -73,7 +75,9 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = CSTR2RVAL(argument->v_string);
         break;
       case GI_TYPE_TAG_ARRAY:
-        /* TODO */
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgubyment(%s) -> Ruby",
+                 g_type_tag_to_string(type_tag));
         break;
       case GI_TYPE_TAG_INTERFACE:
         {
@@ -106,13 +110,15 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        /* TODO */
+        rb_raise(rb_eNotImpError, "TODO: GIArgubyment(unichar) -> Ruby");
         break;
       case GI_TYPE_TAG_ERROR:
         RG_RAISE_ERROR(argument->v_pointer);
         break;
       case GI_TYPE_TAG_UNICHAR:
-        /* TODO */
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgubyment(%s) -> Ruby",
+                 g_type_tag_to_string(type_tag));
         break;
       default:
         g_assert_not_reached();
@@ -142,9 +148,12 @@ GIArgument *
 rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                          VALUE rb_argument)
 {
+    GITypeTag type_tag;
+
     memset(argument, 0, sizeof(GIArgument));
 
-    switch (g_type_info_get_tag(type_info)) {
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
       case GI_TYPE_TAG_VOID:
         break;
       case GI_TYPE_TAG_BOOLEAN:
@@ -259,7 +268,9 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
       case GI_TYPE_TAG_GHASH:
       case GI_TYPE_TAG_ERROR:
       case GI_TYPE_TAG_UNICHAR:
-        /* TODO */
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgubyment(%s)",
+                 g_type_tag_to_string(type_tag));
         break;
       default:
         g_assert_not_reached();
