@@ -243,7 +243,7 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = array_to_ruby(argument->v_pointer, type_info);
         break;
       case GI_TYPE_TAG_INTERFACE:
-        rb_argument = interface_to_ruby(argument->v_pointer, type_info);
+        rb_argument = interface_to_ruby(argument, type_info);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
