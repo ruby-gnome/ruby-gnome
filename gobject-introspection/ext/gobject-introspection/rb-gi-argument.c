@@ -57,8 +57,6 @@ array_to_ruby(gpointer array, GITypeInfo *type_info)
     VALUE rb_array;
     GIArrayType array_type;
     gint n_elements;
-    gboolean fixed_size_p;
-    gboolean zero_terminated_p;
 
     array_type = g_type_info_get_array_type(type_info);
     n_elements = g_type_info_get_array_length(type_info);
