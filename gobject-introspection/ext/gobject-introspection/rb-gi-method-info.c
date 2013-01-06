@@ -62,6 +62,8 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     GArray *in_args, *out_args;
     GIArgument receiver;
     GIArgument return_value;
+    VALUE rb_out_args;
+    VALUE rb_return_value;
 
     info = SELF(self);
     in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
@@ -75,13 +77,20 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     }
     g_array_append_val(in_args, receiver);
     /* TODO: use rb_protect */
-    rb_gi_function_info_invoke_raw(info, argc, argv,
-                                   in_args, out_args, &return_value);
+    rb_out_args = rb_gi_function_info_invoke_raw(info, argc, argv,
+                                                 in_args, out_args,
+                                                 &return_value);
     g_array_unref(in_args);
     g_array_unref(out_args);
 
     callable_info = (GICallableInfo *)info;
-    return GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
+    rb_return_value = GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
+
+    if (NIL_P(rb_out_args)) {
+        return rb_return_value;
+    } else {
+        return rb_ary_new3(2, rb_return_value, rb_out_args);
+    }
 }
 
 void
