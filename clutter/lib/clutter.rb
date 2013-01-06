@@ -34,6 +34,7 @@ module Clutter
       loader = Loader.new(self, argv)
       loader.load("Clutter")
       require "clutter/actor"
+      require "clutter/actor-iter"
       require "clutter/cairo"
       require "clutter/color"
     end
