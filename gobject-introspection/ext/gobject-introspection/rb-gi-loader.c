@@ -49,6 +49,37 @@ rg_s_define_interface(G_GNUC_UNUSED VALUE klass,
     return G_DEF_INTERFACE(gtype, RVAL2CSTR(rb_name), rb_module);
 }
 
+static VALUE
+struct_alloc(VALUE klass)
+{
+    VALUE rb_size;
+
+    rb_size = rb_iv_get(klass, "@size");
+    return Data_Wrap_Struct(klass, NULL, xfree, xmalloc(NUM2ULONG(rb_size)));
+}
+
+static VALUE
+rg_s_define_struct(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
+{
+    VALUE rb_size, rb_name, rb_module;
+    VALUE rb_options, rb_parent;
+    VALUE rb_class;
+
+    rb_scan_args(argc, argv, "31", &rb_size, &rb_name, &rb_module, &rb_options);
+    rbg_scan_options(rb_options,
+                     "parent", &rb_parent,
+                     NULL);
+
+    rb_size = rb_to_int(rb_size);
+    if (NIL_P(rb_parent)) {
+        rb_parent = rb_cObject;
+    }
+    rb_class = rb_define_class_under(rb_module, RVAL2CSTR(rb_name), rb_parent);
+    rb_iv_set(rb_class, "@size", rb_size);
+    rb_define_alloc_func(rb_class, struct_alloc);
+    return rb_class;
+}
+
 void
 rb_gi_loader_init(VALUE rb_mGI)
 {
@@ -58,4 +89,5 @@ rb_gi_loader_init(VALUE rb_mGI)
 
     RG_DEF_SMETHOD(define_class, -1);
     RG_DEF_SMETHOD(define_interface, 3);
+    RG_DEF_SMETHOD(define_struct, -1);
 }

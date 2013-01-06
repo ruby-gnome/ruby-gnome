@@ -126,9 +126,16 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, int argc, VALUE *argv,
     in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
     out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
     if (g_function_info_get_flags(callable_info) & GI_FUNCTION_IS_METHOD) {
+        GIBaseInfo *container;
         GIArgument argument;
         /* TODO: check argc */
-        argument.v_pointer = RVAL2GOBJ(argv[0]);
+        container = g_base_info_get_container((GIBaseInfo *)info);
+        if (g_base_info_get_type(container) == GI_INFO_TYPE_STRUCT &&
+            !g_registered_type_info_get_type_init((GIRegisteredTypeInfo *)container)) {
+            argument.v_pointer = DATA_PTR(argv[0]);
+        } else {
+            argument.v_pointer = RVAL2GOBJ(argv[0]);
+        }
         g_array_append_val(in_args, argument);
     }
     for (i = 0; i < n_args; i++) {

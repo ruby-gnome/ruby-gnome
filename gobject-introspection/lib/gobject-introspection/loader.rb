@@ -74,9 +74,12 @@ module GObjectIntrospection
 
     def load_struct_info(info)
       return if info.gtype_struct?
-      return if info.gtype == GLib::Type::NONE
 
-      klass = self.class.define_class(info.gtype, info.name, @base_module)
+      if info.gtype == GLib::Type::NONE
+        klass = self.class.define_struct(info.size, info.name, @base_module)
+      else
+        klass = self.class.define_class(info.gtype, info.name, @base_module)
+      end
       load_fields(info, klass)
       load_methods(info, klass)
     end
