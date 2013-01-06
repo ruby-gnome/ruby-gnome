@@ -112,11 +112,11 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
                  "TODO: GIArgument(interface)[callback] -> Ruby");
         break;
       case GI_INFO_TYPE_STRUCT:
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(interface)[struct] -> Ruby");
+        rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
         break;
       case GI_INFO_TYPE_BOXED:
-        rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(interface)[boxed] -> Ruby");
         break;
       case GI_INFO_TYPE_ENUM:
         rb_interface = GENUM2RVAL(argument->v_int32, gtype);
