@@ -20,6 +20,74 @@
 
 #include "rb-gobject-introspection.h"
 
+static void
+array_c_to_ruby(const gchar **elements, GITypeInfo *type_info, VALUE rb_array)
+{
+    gint n_elements;
+    gboolean fixed_size_p;
+    gboolean zero_terminated_p;
+
+    n_elements = g_type_info_get_array_length(type_info);
+    fixed_size_p = g_type_info_get_array_fixed_size(type_info);
+    zero_terminated_p = g_type_info_is_zero_terminated(type_info);
+    if (n_elements != -1) {
+        gint i;
+        for (i = 0; i < n_elements; i++) {
+            rb_ary_push(rb_array, CSTR2RVAL(elements[i]));
+        }
+    } else if (zero_terminated_p) {
+        for (; *elements; elements++) {
+            rb_ary_push(rb_array, CSTR2RVAL(*elements));
+        }
+    } else {
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c] -> Ruby: "
+                 "zero-terminated: %s "
+                 "fixed-size: %s "
+                 "length: %d",
+                 zero_terminated_p ? "true" : "false",
+                 fixed_size_p ? "true" : "false",
+                 n_elements);
+    }
+}
+
+static VALUE
+array_to_ruby(gpointer array, GITypeInfo *type_info)
+{
+    VALUE rb_array;
+    GIArrayType array_type;
+    gint n_elements;
+    gboolean fixed_size_p;
+    gboolean zero_terminated_p;
+
+    array_type = g_type_info_get_array_type(type_info);
+    n_elements = g_type_info_get_array_length(type_info);
+    if (n_elements == -1) {
+        rb_array = rb_ary_new();
+    } else {
+        rb_array = rb_ary_new2(n_elements);
+    }
+    switch (array_type) {
+      case GI_ARRAY_TYPE_C:
+        array_c_to_ruby(array, type_info, rb_array);
+        break;
+      case GI_ARRAY_TYPE_ARRAY:
+        rb_raise(rb_eNotImpError, "TODO: GIArgument(array)[array] -> Ruby");
+        break;
+      case GI_ARRAY_TYPE_PTR_ARRAY:
+        rb_raise(rb_eNotImpError, "TODO: GIArgument(array)[ptr-array] -> Ruby");
+        break;
+      case GI_ARRAY_TYPE_BYTE_ARRAY:
+        rb_raise(rb_eNotImpError, "TODO: GIArgument(array)[byte-array] -> Ruby");
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    return rb_array;
+}
+
 VALUE
 rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
@@ -75,9 +143,7 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = CSTR2RVAL(argument->v_string);
         break;
       case GI_TYPE_TAG_ARRAY:
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgubyment(%s) -> Ruby",
-                 g_type_tag_to_string(type_tag));
+        rb_argument = array_to_ruby(argument->v_pointer, type_info);
         break;
       case GI_TYPE_TAG_INTERFACE:
         {
