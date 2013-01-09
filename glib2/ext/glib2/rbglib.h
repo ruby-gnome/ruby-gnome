@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005  Ruby-GNOME2 Project
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -53,6 +53,14 @@ extern "C" {
 
 #if ! GLIB_CHECK_VERSION(2,4,0)
 typedef int GPid;
+#endif
+
+#ifndef G_SOURCE_REMOVE
+#  define G_SOURCE_REMOVE FALSE
+#endif
+
+#ifndef G_SOURCE_CONTINUE
+#  define G_SOURCE_CONTINUE TRUE
 #endif
 
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))

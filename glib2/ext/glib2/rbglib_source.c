@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -170,6 +170,11 @@ Init_glib_source(void)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib); 
 
     id_call = rb_intern("call");
+
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "REMOVE", CBOOL2RVAL(G_SOURCE_REMOVE));
+    rb_define_const(RG_TARGET_NAMESPACE,
+                    "CONTINUE", CBOOL2RVAL(G_SOURCE_CONTINUE));
 
     RG_DEF_METHOD(attach, -1);
 #if GLIB_CHECK_VERSION(2,12,0)
