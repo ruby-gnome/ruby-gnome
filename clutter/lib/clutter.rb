@@ -54,6 +54,8 @@ module Clutter
       init.invoke(@init_arguments.size, @init_arguments)
       @keys_module = Module.new
       @base_module.const_set("Keys", @keys_module)
+      @threads_module = Module.new
+      @base_module.const_set("Threads", @threads_module)
     end
 
     def post_load(repository, namespace)
@@ -61,6 +63,16 @@ module Clutter
         name = constant_info.name
         next if @key_constants.has_key?("KEY_#{name}")
         @base_module.const_set(name, constant_info.value)
+      end
+    end
+
+    def load_function_info(info)
+      name = info.name
+      case name
+      when /\Athreads_/
+        define_module_function(@threads_module, $POSTMATCH, info)
+      else
+        super
       end
     end
 
