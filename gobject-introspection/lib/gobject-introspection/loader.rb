@@ -64,11 +64,15 @@ module GObjectIntrospection
     end
 
     def load_function_info(info)
-      @base_module.module_eval do
-        define_method(info.name) do |*arguments|
-          info.invoke(*arguments)
+      define_module_function(@base_module, info.name, info)
+    end
+
+    def define_module_function(target_module, name, function_info)
+      target_module.module_eval do
+        define_method(name) do |*arguments|
+          function_info.invoke(*arguments)
         end
-        module_function(info.name)
+        module_function(name)
       end
     end
 
@@ -228,7 +232,9 @@ module GObjectIntrospection
     end
 
     def load_interface_info(info)
-      self.class.define_interface(info.gtype, info.name, @base_module)
+      interface_module =
+        self.class.define_interface(info.gtype, info.name, @base_module)
+      load_methods(info, interface_module)
     end
 
     def load_constant_info(info)
