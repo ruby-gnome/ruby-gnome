@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -184,7 +184,6 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
     return rb_interface;
 }
 
-
 VALUE
 rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
@@ -264,6 +263,60 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
     }
 
     return rb_argument;
+}
+
+static gboolean
+rb_gi_out_argument_need_pointer_allocated(GIArgInfo *arg_info)
+{
+    GITypeInfo type_info;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    g_arg_info_load_type(arg_info, &type_info);
+    if (g_type_info_get_tag(&type_info) != GI_TYPE_TAG_INTERFACE) {
+        return FALSE;
+    }
+
+    interface_info = g_type_info_get_interface(&type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    g_base_info_unref(interface_info);
+
+    if (interface_type != GI_INFO_TYPE_OBJECT) {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void
+rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
+{
+    if (rb_gi_out_argument_need_pointer_allocated(arg_info)) {
+        argument->v_pointer = xmalloc(sizeof(gpointer));
+    } else {
+        memset(argument, 0, sizeof(GIArgument));
+    }
+}
+
+VALUE
+rb_gi_out_argument_to_ruby(GIArgument *argument, GIArgInfo *arg_info)
+{
+    GITypeInfo type_info;
+
+    g_arg_info_load_type(arg_info, &type_info);
+    if (rb_gi_out_argument_need_pointer_allocated(arg_info)) {
+        return GOBJ2RVAL(*((gpointer *)(argument->v_pointer)));
+    } else {
+        return rb_gi_argument_to_ruby(argument, &type_info);
+    }
+}
+
+void
+rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
+{
+    if (rb_gi_out_argument_need_pointer_allocated(arg_info)) {
+        xfree(argument->v_pointer);
+    }
 }
 
 VALUE
