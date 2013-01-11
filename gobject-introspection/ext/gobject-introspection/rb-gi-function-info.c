@@ -23,6 +23,9 @@
 #define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
 #define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
+static VALUE RG_TARGET_NAMESPACE;
+static const char *callbacks_key = "gi_callbacks";
+
 GType
 gi_function_info_get_type(void)
 {
@@ -247,8 +250,38 @@ source_callback_p(GIArgInfo *info)
 
 typedef struct {
     ArgMetadata *metadata;
+    VALUE rb_gc_guard_key;
     VALUE rb_callback;
 } CallbackData;
+
+static void
+callback_data_guard_from_gc(CallbackData *callback_data)
+{
+    VALUE rb_callbacks;
+
+    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
+    callback_data->rb_gc_guard_key = rb_class_new_instance(0, NULL, rb_cObject);
+    rb_hash_aset(rb_callbacks,
+                 callback_data->rb_gc_guard_key,
+                 callback_data->rb_callback);
+}
+
+static void
+callback_data_unguard_from_gc(CallbackData *callback_data)
+{
+    VALUE rb_callbacks;
+
+    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
+    rb_hash_delete(rb_callbacks, callback_data->rb_gc_guard_key);
+}
+
+static void
+callback_data_free(CallbackData *callback_data)
+{
+    callback_data_unguard_from_gc(callback_data);
+    xfree(callback_data->metadata);
+    xfree(callback_data);
+}
 
 static gboolean
 source_callback(gpointer user_data)
@@ -260,18 +293,16 @@ source_callback(gpointer user_data)
     CONST_ID(id_call, "call");
     rb_keep = rb_funcall(callback_data->rb_callback, id_call, 0);
     if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
-        xfree(callback_data->metadata);
-        xfree(callback_data);
+        callback_data_free(callback_data);
     }
     return RVAL2CBOOL(rb_keep);
 }
 
 static void
-destroy_notify(G_GNUC_UNUSED gpointer data)
+destroy_notify(gpointer data)
 {
     CallbackData *callback_data = data;
-    xfree(callback_data->metadata);
-    xfree(callback_data);
+    callback_data_free(callback_data);
 }
 
 static void
@@ -297,6 +328,7 @@ in_callback_argument_from_ruby(ArgMetadata *metadata, VALUE *argv,
         callback_data = ALLOC(CallbackData);
         callback_data->metadata = metadata;
         callback_data->rb_callback = rb_block_proc();
+        callback_data_guard_from_gc(callback_data);
         closure_argument = &(g_array_index(in_args,
                                            GIArgument,
                                            metadata->closure_in_arg_index));
@@ -437,11 +469,11 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
 void
 rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
-    VALUE RG_TARGET_NAMESPACE;
-
     RG_TARGET_NAMESPACE =
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
 				rb_cGICallableInfo);
+
+    rb_iv_set(RG_TARGET_NAMESPACE, callbacks_key, rb_hash_new());
 
     RG_DEF_METHOD(symbol, 0);
     RG_DEF_METHOD(flags, 0);
