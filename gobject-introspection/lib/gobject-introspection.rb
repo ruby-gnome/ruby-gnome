@@ -36,6 +36,7 @@ GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 require "gobject-introspection/repository"
 require "gobject-introspection/callable-info"
 require "gobject-introspection/object-info"
+require "gobject-introspection/interface-info"
 require "gobject-introspection/struct-info"
 require "gobject-introspection/union-info"
 require "gobject-introspection/loader"
