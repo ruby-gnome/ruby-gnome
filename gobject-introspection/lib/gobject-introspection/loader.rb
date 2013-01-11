@@ -69,8 +69,8 @@ module GObjectIntrospection
 
     def define_module_function(target_module, name, function_info)
       target_module.module_eval do
-        define_method(name) do |*arguments|
-          function_info.invoke(*arguments)
+        define_method(name) do |*arguments, &block|
+          function_info.invoke(*arguments, &block)
         end
         module_function(name)
       end
@@ -144,18 +144,19 @@ module GObjectIntrospection
         validate_arguments(info, arguments)
       end
       infos.each do |info|
-        klass.__send__(:define_method, "initialize_#{info.name}") do |*arguments|
-          validate.call(info, arguments)
-          info.invoke(self, *arguments)
+        name = "initialize_#{info.name}"
+        klass.__send__(:define_method, name) do |*arguments, &block|
+          validate.call(info, arguments, &block)
+          info.invoke(self, *arguments, &block)
         end
       end
 
       find_info = lambda do |arguments|
         find_suitable_callable_info(infos, arguments)
       end
-      klass.__send__(:define_method, "initialize") do |*arguments|
-        info = find_info.call(arguments)
-        __send__("initialize_#{info.name}", *arguments)
+      klass.__send__(:define_method, "initialize") do |*arguments, &block|
+        info = find_info.call(arguments, &block)
+        __send__("initialize_#{info.name}", *arguments, &block)
       end
     end
 
@@ -214,8 +215,8 @@ module GObjectIntrospection
     end
 
     def load_method_info(info, klass, method_name)
-      klass.__send__(:define_method, method_name) do |*arguments|
-        info.invoke(self, *arguments)
+      klass.__send__(:define_method, method_name) do |*arguments, &block|
+        info.invoke(self, *arguments, &block)
       end
     end
 
@@ -225,8 +226,8 @@ module GObjectIntrospection
         next if name == "new"
         next if name == "alloc"
         singleton_class = (class << klass; self; end)
-        singleton_class.__send__(:define_method, name) do |*arguments|
-          info.invoke(*arguments)
+        singleton_class.__send__(:define_method, name) do |*arguments, &block|
+          info.invoke(*arguments, &block)
         end
       end
     end
