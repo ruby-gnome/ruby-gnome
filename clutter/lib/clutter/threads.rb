@@ -27,6 +27,12 @@ module Clutter
           add_timeout_full(priority, interval, &block)
         end
       end
+
+      alias_method :add_idle_full, :add_idle
+      def add_idle(priority=nil, &block)
+        priority ||= GLib::PRIORITY_DEFAULT_IDLE
+        add_idle_full(priority, &block)
+      end
     end
   end
 end
