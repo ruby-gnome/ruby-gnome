@@ -128,8 +128,7 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_interface = GOBJ2RVAL(argument->v_pointer);
         break;
       case GI_INFO_TYPE_INTERFACE:
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(interface)[interface] -> Ruby");
+        rb_interface = GOBJ2RVAL(argument->v_pointer);
         break;
       case GI_INFO_TYPE_CONSTANT:
         rb_raise(rb_eNotImpError,
