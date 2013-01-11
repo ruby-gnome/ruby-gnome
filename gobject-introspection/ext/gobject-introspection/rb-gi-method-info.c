@@ -77,7 +77,7 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     }
     g_array_append_val(in_args, receiver);
     /* TODO: use rb_protect */
-    rb_out_args = rb_gi_function_info_invoke_raw(info, argc, argv,
+    rb_out_args = rb_gi_function_info_invoke_raw(info, argc - 1, argv + 1,
                                                  in_args, out_args,
                                                  &return_value);
     g_array_unref(in_args);
