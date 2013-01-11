@@ -291,7 +291,7 @@ void
 rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
 {
     if (rb_gi_out_argument_need_pointer_allocated(arg_info)) {
-        argument->v_pointer = xmalloc(sizeof(gpointer));
+        argument->v_pointer = ALLOC(gpointer);
     } else {
         memset(argument, 0, sizeof(GIArgument));
     }
