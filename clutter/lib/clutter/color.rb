@@ -17,6 +17,15 @@
 module Clutter
   class Color
     class << self
+      def new(*args)
+        if [Symbol] == args.collect(&:class)
+          name = args[0]
+          get_static(name)
+        else
+          super
+        end
+      end
+
       def rgb(red, green, blue, alpha=255)
         rgba(red, green, blue, alpha)
       end
