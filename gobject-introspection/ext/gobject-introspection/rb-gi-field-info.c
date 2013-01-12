@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -95,12 +95,16 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
 {
     GIArgument field_value;
     GITypeInfo *type_info;
+    gboolean succeeded;
 
     type_info = g_field_info_get_type(info);
     RVAL2GI_ARGUMENT(&field_value, type_info, rb_field_value);
+
+    succeeded = g_field_info_set_field(info, memory, &field_value);
+    rb_gi_argument_free(&field_value, type_info);
     g_base_info_unref(type_info);
 
-    if (!g_field_info_set_field(info, memory, &field_value)) {
+    if (!succeeded) {
         rb_raise(rb_eArgError, "failed to set field value");
     }
 }

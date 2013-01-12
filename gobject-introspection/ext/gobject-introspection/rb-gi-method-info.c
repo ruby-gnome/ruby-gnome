@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -59,15 +59,12 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
-    GArray *in_args, *out_args;
     GIArgument receiver;
     GIArgument return_value;
     VALUE rb_out_args;
     VALUE rb_return_value;
 
     info = SELF(self);
-    in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
-    out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
 
     /* TODO: check argc >= 1 */
     if (gobject_based_p(info)) {
@@ -75,13 +72,10 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     } else {
         receiver.v_pointer = DATA_PTR(argv[0]);
     }
-    g_array_append_val(in_args, receiver);
     /* TODO: use rb_protect */
-    rb_out_args = rb_gi_function_info_invoke_raw(info, argc - 1, argv + 1,
-                                                 in_args, out_args,
+    rb_out_args = rb_gi_function_info_invoke_raw(info, &receiver,
+                                                 argc - 1, argv + 1,
                                                  &return_value);
-    g_array_unref(in_args);
-    g_array_unref(out_args);
 
     callable_info = (GICallableInfo *)info;
     rb_return_value = GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);

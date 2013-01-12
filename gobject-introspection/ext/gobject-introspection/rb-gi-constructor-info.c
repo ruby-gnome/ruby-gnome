@@ -87,22 +87,18 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
     VALUE receiver;
-    GArray *in_args, *out_args;
     GIArgument return_value;
     GITypeInfo return_value_info;
 
     info = SELF(self);
     callable_info = (GICallableInfo *)info;
 
-    in_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
-    out_args = g_array_new(FALSE, FALSE, sizeof(GIArgument));
     /* TODO: check argc. */
     receiver = argv[0];
     /* TODO: use rb_protect */
-    rb_gi_function_info_invoke_raw(info, argc - 1, argv + 1,
-                                   in_args, out_args, &return_value);
-    g_array_unref(in_args);
-    g_array_unref(out_args);
+    rb_gi_function_info_invoke_raw(info, NULL,
+                                   argc - 1, argv + 1,
+                                   &return_value);
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
     initialize_receiver(receiver, &return_value_info, &return_value);

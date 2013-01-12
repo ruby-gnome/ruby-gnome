@@ -386,7 +386,15 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
         argument->v_pointer = RVAL2GOBJ(rb_argument);
         break;
       case GI_INFO_TYPE_STRUCT:
-        argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
+        if (gtype == G_TYPE_VALUE) {
+            GValue *gvalue;
+            gvalue = ALLOC(GValue);
+            memset(gvalue, 0, sizeof(GValue));
+            rbgobj_initialize_gvalue(gvalue, rb_argument);
+            argument->v_pointer = gvalue;
+        } else {
+            argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
+        }
         break;
       default:
         /* TODO */
@@ -495,4 +503,36 @@ rb_gi_call_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
     }
 
     return argument;
+}
+
+static void
+rb_gi_in_argument_free_interface(GIArgument *argument, GITypeInfo *type_info)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+
+    gtype = g_registered_type_info_get_g_type(interface_info);
+
+    if (interface_type == GI_INFO_TYPE_STRUCT && gtype == G_TYPE_VALUE) {
+        GValue *gvalue = argument->v_pointer;
+        g_value_unset(gvalue);
+        xfree(argument->v_pointer);
+    }
+
+    g_base_info_unref(interface_info);
+}
+
+void
+rb_gi_in_argument_free(GIArgument *argument, GITypeInfo *type_info)
+{
+    GITypeTag type_tag;
+
+    type_tag = g_type_info_get_tag(type_info);
+    if (type_tag == GI_TYPE_TAG_INTERFACE) {
+        rb_gi_in_argument_free_interface(argument, type_info);
+    }
 }
