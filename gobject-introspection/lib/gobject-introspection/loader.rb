@@ -76,16 +76,22 @@ module GObjectIntrospection
       end
     end
 
-    def load_struct_info(info)
-      return if info.gtype_struct?
-
+    def define_struct(info, options={})
       if info.gtype == GLib::Type::NONE
-        klass = self.class.define_struct(info.size, info.name, @base_module)
+        klass = self.class.define_struct(info.size, info.name, @base_module,
+                                         :parent => options[:parent])
       else
-        klass = self.class.define_class(info.gtype, info.name, @base_module)
+        klass = self.class.define_class(info.gtype, info.name, @base_module,
+                                         :parent => options[:parent])
       end
       load_fields(info, klass)
       load_methods(info, klass)
+    end
+
+    def load_struct_info(info)
+      return if info.gtype_struct?
+
+      define_struct(info)
     end
 
     def load_enum_info(info)
