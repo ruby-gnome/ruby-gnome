@@ -37,6 +37,7 @@ module Clutter
       require "clutter/actor-iter"
       require "clutter/cairo"
       require "clutter/color"
+      require "clutter/event"
       require "clutter/threads"
     end
   end
