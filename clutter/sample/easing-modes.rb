@@ -36,9 +36,6 @@ parser.on("--duration=SECONDS", Integer,
 end
 parser.parse!
 
-HELP_TEXT = <<-EOT
-EOT
-
 current_mode_index = 0
 easing_modes = Clutter::AnimationMode.values.reject do |mode|
   mode == Clutter::AnimationMode::CUSTOM_MODE
