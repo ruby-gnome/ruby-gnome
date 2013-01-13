@@ -502,13 +502,45 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
             argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
         }
         break;
-      default:
-        /* TODO */
+      case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
-                 "not implemented Ruby -> GIArgument conversion: "
-                 "<%s>: <%s>",
-                 g_base_info_get_name(interface_info),
-                 g_info_type_to_string(interface_type));
+                 "TODO: Ruby -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+      case GI_INFO_TYPE_ENUM:
+        argument->v_int32 = RVAL2GENUM(rb_argument, gtype);
+        break;
+      case GI_INFO_TYPE_FLAGS:
+        argument->v_int32 = RVAL2GFLAGS(rb_argument, gtype);
+        break;
+      case GI_INFO_TYPE_OBJECT:
+      case GI_INFO_TYPE_INTERFACE:
+        argument->v_pointer = RVAL2GOBJ(rb_argument);
+        break;
+      case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
+        break;
+      case GI_INFO_TYPE_INVALID_0:
+        g_assert_not_reached();
+        break;
+      case GI_INFO_TYPE_UNION:
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+      default:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
         break;
     }
 
