@@ -50,7 +50,7 @@ rbgobj_convert_define(const RGConvertTable *table)
     RGConvertTable *copied_table;
     copied_table = g_memdup(table, sizeof(RGConvertTable));
     g_hash_table_insert(tables, &(copied_table->type), copied_table);
-    if (copied_table->klass && !NIL_P(copied_table->klass)) {
+    if (copied_table->klass != Qfalse && !NIL_P(copied_table->klass)) {
         g_hash_table_insert(class_to_g_type_map,
                             &(copied_table->klass), &(copied_table->type));
     }
