@@ -48,6 +48,7 @@ module Clutter
       @init_arguments = init_arguments
       @key_constants = {}
       @other_constant_infos = []
+      @event_infos = []
     end
 
     private
@@ -65,6 +66,38 @@ module Clutter
         name = constant_info.name
         next if @key_constants.has_key?("KEY_#{name}")
         @base_module.const_set(name, constant_info.value)
+      end
+      load_events
+    end
+
+    def load_events
+      @event_infos.each do |event_info|
+        define_struct(event_info, :parent => Event)
+      end
+      event_map = {
+        EventType::KEY_PRESS      => KeyEvent,
+        EventType::KEY_RELEASE    => KeyEvent,
+        EventType::MOTION         => MotionEvent,
+        EventType::ENTER          => CrossingEvent,
+        EventType::LEAVE          => CrossingEvent,
+        EventType::BUTTON_PRESS   => ButtonEvent,
+        EventType::BUTTON_RELEASE => ButtonEvent,
+        EventType::SCROLL         => ScrollEvent,
+        EventType::STAGE_STATE    => StageStateEvent,
+        EventType::TOUCH_UPDATE   => TouchEvent,
+        EventType::TOUCH_END      => TouchEvent,
+        EventType::TOUCH_CANCEL   => TouchEvent,
+      }
+      self.class.register_boxed_converter(Event.gtype) do |event|
+        event_map[event.type] || Event
+      end
+    end
+
+    def load_struct_info(info)
+      if info.name.end_with?("Event")
+        @event_infos << info
+      else
+        super
       end
     end
 
