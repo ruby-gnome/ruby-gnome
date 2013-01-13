@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
  *
@@ -25,14 +25,12 @@
 #define RG_TARGET_NAMESPACE cObject
 #define SELF(self) (RVAL2GST_OBJ(self))
 
-static RGConvertTable table;
-
 /* Class: Gst::Object
  * Basis for the GST object hierarchy.
  */
 
 VALUE
-rbgst_object_instance2robj(gpointer instance)
+rbgst_object_instance2robj(gpointer instance, G_GNUC_UNUSED gpointer user_data)
 {
     if (GST_OBJECT_IS_FLOATING(instance)) {
         gst_object_ref(instance);
@@ -43,7 +41,8 @@ rbgst_object_instance2robj(gpointer instance)
 }
 
 static void
-rbgst_object_initialize(VALUE obj, gpointer cobj)
+rbgst_object_initialize(VALUE obj, gpointer cobj,
+                        G_GNUC_UNUSED gpointer user_data)
 {
     if (GST_OBJECT_IS_FLOATING(cobj)) {
         gst_object_ref(cobj);
@@ -63,6 +62,7 @@ void
 Init_gst_object(VALUE mGst)
 {
     VALUE RG_TARGET_NAMESPACE;
+    RGConvertTable table;
 
     memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_OBJECT;

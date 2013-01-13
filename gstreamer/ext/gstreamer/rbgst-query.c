@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons <sjoerd@luon.net>
  *  Copyright (C) 2006  Zaheer Abbas Merali <zaheerabbas at merali dot org>
@@ -28,8 +28,6 @@
  * Queries.
  */
 
-static RGConvertTable table;
-
 static VALUE rb_cGstQueryPosition;
 static VALUE rb_cGstQueryDuration;
 static VALUE rb_cGstQueryLatency;
@@ -40,13 +38,13 @@ static VALUE rb_cGstQueryFormats;
 static VALUE rb_cGstQuery;
 
 static VALUE
-get_superclass(void)
+get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cGstMiniObject;
 }
 
 static VALUE
-instance2robj(gpointer instance)
+instance2robj(gpointer instance, G_GNUC_UNUSED gpointer user_data)
 {
     VALUE klass;
     GstQuery *query;
@@ -263,6 +261,8 @@ formats_parse(VALUE self)
 void
 Init_gst_query (VALUE mGst)
 {
+    RGConvertTable table;
+
     memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_QUERY;
     table.klass = Qnil;

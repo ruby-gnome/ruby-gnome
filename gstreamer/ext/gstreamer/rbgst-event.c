@@ -27,8 +27,6 @@
  * Events.
  */
 
-static RGConvertTable table = {0};
-
 static VALUE rb_cGstEvent;
 static VALUE rb_cGstEventFlushStart;
 static VALUE rb_cGstEventFlushStop;
@@ -42,13 +40,13 @@ static VALUE rb_cGstEventNavigation;
 static VALUE rb_cGstEventLatency;
 
 static VALUE
-get_superclass(void)
+get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cGstMiniObject;
 }
 
 static VALUE
-instance2robj(gpointer instance)
+instance2robj(gpointer instance, G_GNUC_UNUSED gpointer user_data)
 {
     VALUE klass;
     GstEvent *event;
@@ -314,6 +312,9 @@ rbgst_event_get_type(VALUE self)
 void
 Init_gst_event (VALUE mGst)
 {
+    RGConvertTable table;
+
+    memset(&table, 0, sizeof(RGConvertTable));
     table.type = GST_TYPE_EVENT;
     table.get_superclass = get_superclass;
     table.instance2robj = instance2robj;

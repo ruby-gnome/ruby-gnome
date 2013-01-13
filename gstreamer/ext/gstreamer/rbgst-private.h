@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2008  Ruby-GNOME2 Project
  *
  *  This library is free software; you can redistribute it and/or
@@ -35,7 +35,7 @@ VALUE _rbgst_collect_elements(GstIterator *iter);
 void _rbgst_mini_object_free(void *ptr);
 
 /* implemented in rbgst-object.c */
-VALUE rbgst_object_instance2robj(gpointer instance);
+VALUE rbgst_object_instance2robj(gpointer instance, gpointer user_data);
 
 
 G_GNUC_INTERNAL void Init_gst_bin (VALUE mGst);

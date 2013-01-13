@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2008  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
@@ -23,16 +23,9 @@
 
 static VALUE cIntRange, cFourcc, cFractionRange;
 
-static RGConvertTable value_list_table;
-static RGConvertTable value_array_table;
-static RGConvertTable int_range_table;
-static RGConvertTable fourcc_table;
-static RGConvertTable fraction_table;
-static RGConvertTable fraction_range_table;
-
-
 static void
-value_list_rvalue2gvalue(VALUE value, GValue *result)
+value_list_rvalue2gvalue(VALUE value, GValue *result,
+                         G_GNUC_UNUSED gpointer user_data)
 {
     guint i, len;
 
@@ -46,7 +39,7 @@ value_list_rvalue2gvalue(VALUE value, GValue *result)
 }
 
 static VALUE
-value_list_gvalue2rvalue(const GValue *value)
+value_list_gvalue2rvalue(const GValue *value, G_GNUC_UNUSED gpointer user_data)
 {
     guint i, len;
     VALUE result;
@@ -62,7 +55,8 @@ value_list_gvalue2rvalue(const GValue *value)
 
 
 static void
-value_array_rvalue2gvalue(VALUE value, GValue *result)
+value_array_rvalue2gvalue(VALUE value, GValue *result,
+                          G_GNUC_UNUSED gpointer user_data)
 {
     guint i, len;
 
@@ -76,7 +70,7 @@ value_array_rvalue2gvalue(VALUE value, GValue *result)
 }
 
 static VALUE
-value_array_gvalue2rvalue(const GValue *value)
+value_array_gvalue2rvalue(const GValue *value, G_GNUC_UNUSED gpointer user_data)
 {
     guint i, len;
     VALUE result;
@@ -113,7 +107,7 @@ g_value_free(gpointer instance)
 }
 
 static VALUE
-g_value_to_ruby_value(const GValue *value)
+g_value_to_ruby_value(const GValue *value, G_GNUC_UNUSED gpointer user_data)
 {
     VALUE klass;
     GType type;
@@ -127,20 +121,21 @@ g_value_to_ruby_value(const GValue *value)
 }
 
 static VALUE
-g_value_type_instance_to_ruby_object(gpointer instance)
+g_value_type_instance_to_ruby_object(gpointer instance, gpointer user_data)
 {
-    return g_value_to_ruby_value(instance);
+    return g_value_to_ruby_value(instance, user_data);
 }
 
 static void
-g_value_type_unref(gpointer instance)
+g_value_type_unref(gpointer instance, G_GNUC_UNUSED gpointer user_data)
 {
     g_value_unset(instance);
 }
 
 #define DEF_G_VALUE_CONVERTERS(prefix, g_type, type)            \
 static gpointer                                                 \
-prefix ## _robj2instance(VALUE object)                          \
+prefix ## _robj2instance(VALUE object,                          \
+                         G_GNUC_UNUSED gpointer user_data)      \
 {                                                               \
     gpointer instance;                                          \
                                                                 \
@@ -228,13 +223,14 @@ int_range_to_a(VALUE self)
 }
 
 static VALUE
-int_range_get_superclass(void)
+int_range_get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cObject;
 }
 
 static void
-int_range_rvalue2gvalue(VALUE value, GValue *result)
+int_range_rvalue2gvalue(VALUE value, GValue *result,
+                        G_GNUC_UNUSED gpointer user_data)
 {
     GValue *val;
 
@@ -248,13 +244,14 @@ DEF_G_VALUE_CONVERTERS(int_range, GST_TYPE_INT_RANGE, IntRange)
 
 
 static VALUE
-fourcc_get_superclass(void)
+fourcc_get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cObject;
 }
 
 static void
-fourcc_rvalue2gvalue(VALUE value, GValue *result)
+fourcc_rvalue2gvalue(VALUE value, GValue *result,
+                     G_GNUC_UNUSED gpointer user_data)
 {
     gst_value_set_fourcc(result,
                          gst_value_get_fourcc(RVAL2GOBJ(value)));
@@ -294,7 +291,8 @@ fourcc_to_i(VALUE self)
 
 
 static void
-fraction_rvalue2gvalue(VALUE value, GValue *result)
+fraction_rvalue2gvalue(VALUE value, GValue *result,
+                       G_GNUC_UNUSED gpointer user_data)
 {
     gst_value_set_fraction(result,
                            NUM2INT(rb_funcall(value, rb_intern("numerator"), 0)),
@@ -303,7 +301,7 @@ fraction_rvalue2gvalue(VALUE value, GValue *result)
 }
 
 static VALUE
-fraction_gvalue2rvalue(const GValue *value)
+fraction_gvalue2rvalue(const GValue *value, G_GNUC_UNUSED gpointer user_data)
 {
     return rb_funcall(Qnil, rb_intern("Rational"), 2,
                       INT2NUM(gst_value_get_fraction_numerator(value)),
@@ -385,13 +383,14 @@ fraction_range_to_a(VALUE self)
 }
 
 static VALUE
-fraction_range_get_superclass(void)
+fraction_range_get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cObject;
 }
 
 static void
-fraction_range_rvalue2gvalue(VALUE value, GValue *result)
+fraction_range_rvalue2gvalue(VALUE value, GValue *result,
+                             G_GNUC_UNUSED gpointer user_data)
 {
     GValue *val;
 
@@ -407,6 +406,13 @@ DEF_G_VALUE_CONVERTERS(fraction_range, GST_TYPE_FRACTION_RANGE, FractionRange)
 void
 Init_gst_value(VALUE mGst)
 {
+    RGConvertTable value_list_table;
+    RGConvertTable value_array_table;
+    RGConvertTable int_range_table;
+    RGConvertTable fourcc_table;
+    RGConvertTable fraction_table;
+    RGConvertTable fraction_range_table;
+
     memset(&value_list_table, 0, sizeof(value_list_table));
     value_list_table.type = GST_TYPE_LIST;
     value_list_table.klass = Qnil;

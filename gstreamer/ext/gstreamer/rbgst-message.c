@@ -32,7 +32,6 @@
 #define RVAL2GST_MSG_TYPE(type) RVAL2GFLAGS(type, GST_TYPE_MESSAGE_TYPE)
 #define GST_MSG_TYPE2RVAL(type) GFLAGS2RVAL(type, GST_TYPE_MESSAGE_TYPE)
 
-static RGConvertTable table = {0};
 static VALUE rb_cGstMessage;
 static VALUE rb_cGstMessageUnknown;
 static VALUE rb_cGstMessageEos;
@@ -64,13 +63,13 @@ static VALUE rb_cGstMissingURISourceMessage;
 #endif
 
 static VALUE
-get_superclass(void)
+get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cGstMiniObject;
 }
 
 static VALUE
-instance2robj(gpointer instance)
+instance2robj(gpointer instance, G_GNUC_UNUSED gpointer user_data)
 {
     VALUE klass;
     GstMessage *message;
@@ -623,7 +622,9 @@ void
 Init_gst_message(VALUE mGst)
 {
     VALUE rb_cGstMessageType;
+    RGConvertTable table;
 
+    memset(&table, 0, sizeof(RGConvertTable));
     table.type = GST_TYPE_MESSAGE;
     table.get_superclass = get_superclass;
     table.instance2robj = instance2robj;

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
@@ -34,8 +34,6 @@
 
 VALUE RG_TARGET_NAMESPACE;
 
-static RGConvertTable table = {0};
-
 void
 _rbgst_mini_object_free(void *ptr)
 {
@@ -45,7 +43,7 @@ _rbgst_mini_object_free(void *ptr)
 }
 
 static VALUE
-rbgst_mini_object_get_superclass(void)
+rbgst_mini_object_get_superclass(G_GNUC_UNUSED gpointer user_data)
 {
     return rb_cObject;
 }
@@ -62,7 +60,7 @@ initialize_with_abstract_check(int argc, VALUE *argv, VALUE self)
 }
 
 static void
-rbgst_mini_object_type_init_hook(VALUE klass)
+rbgst_mini_object_type_init_hook(VALUE klass, G_GNUC_UNUSED gpointer user_data)
 {
     if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
         rbg_define_method(klass, "initialize",
@@ -70,7 +68,7 @@ rbgst_mini_object_type_init_hook(VALUE klass)
 }
 
 static VALUE
-gvalue2rvalue(const GValue *value)
+gvalue2rvalue(const GValue *value, G_GNUC_UNUSED gpointer user_data)
 {
     GstMiniObject* obj;
     obj = gst_value_get_mini_object(value);
@@ -78,19 +76,20 @@ gvalue2rvalue(const GValue *value)
 }
 
 static void
-rvalue2gvalue(VALUE value, GValue *result)
+rvalue2gvalue(VALUE value, GValue *result, G_GNUC_UNUSED gpointer user_data)
 {
     gst_value_set_mini_object(result, NIL_P(value) ? NULL : RVAL2GOBJ(value));
 }
 
 static void
-rbgst_mini_object_initialize(VALUE object, gpointer instance)
+rbgst_mini_object_initialize(VALUE object, gpointer instance,
+                             G_GNUC_UNUSED gpointer user_data)
 {
     DATA_PTR(object) = instance;
 }
 
 static gpointer
-rbgst_mini_object_robj2instance(VALUE object)
+rbgst_mini_object_robj2instance(VALUE object, G_GNUC_UNUSED gpointer user_data)
 {
     gpointer instance;
 
@@ -108,7 +107,8 @@ rbgst_mini_object_define_class_if_need(VALUE klass, GType type)
 }
 
 static VALUE
-rbgst_mini_object_instance2robj(gpointer instance)
+rbgst_mini_object_instance2robj(gpointer instance,
+                                G_GNUC_UNUSED gpointer user_data)
 {
     VALUE klass;
     GType type;
@@ -121,7 +121,7 @@ rbgst_mini_object_instance2robj(gpointer instance)
 }
 
 static void
-rbgst_mini_object_unref(gpointer instance)
+rbgst_mini_object_unref(gpointer instance, G_GNUC_UNUSED gpointer user_data)
 {
     gst_mini_object_unref(instance);
 }
@@ -188,6 +188,9 @@ rg_writable_bang(VALUE self)
 void
 Init_gst_mini_object(VALUE mGst)
 {
+    RGConvertTable table;
+
+    memset(&table, 0, sizeof(RGConvertTable));
     table.type = GST_TYPE_MINI_OBJECT;
     table.get_superclass = rbgst_mini_object_get_superclass;
     table.type_init_hook = rbgst_mini_object_type_init_hook;

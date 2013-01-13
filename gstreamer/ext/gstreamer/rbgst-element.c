@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007, 2008 Ruby-GNOME2 Project Team
  *  Copyright (C) 2006, 2008 Sjoerd Simons <sjoerd@luon.net>
  *  Copyright (C) 2003, 2004 Laurent Sansonetti <lrz@gnome.org>
@@ -81,7 +81,6 @@ typedef struct _ThreadData {
     } data;
 } ThreadData;
 
-static RGConvertTable table;
 static VALUE RG_TARGET_NAMESPACE;
 static ID id_gtype;
 static GThreadPool *set_state_thread_pool;
@@ -96,7 +95,7 @@ define_class_if_need(VALUE klass, GType type)
 }
 
 static VALUE
-instance2robj(gpointer instance)
+instance2robj(gpointer instance, gpointer user_data)
 {
     VALUE klass;
     GType type;
@@ -104,7 +103,7 @@ instance2robj(gpointer instance)
     type = G_TYPE_FROM_INSTANCE(instance);
     klass = GTYPE2CLASS(type);
     define_class_if_need(klass, type);
-    return rbgst_object_instance2robj(instance);
+    return rbgst_object_instance2robj(instance, user_data);
 }
 
 /* Class: Gst::Element
@@ -1027,6 +1026,7 @@ initialize_thread_pool(GThreadPool **pool, GFunc function)
 void
 Init_gst_element(VALUE mGst)
 {
+    RGConvertTable table;
     memset(&table, 0, sizeof(table));
     table.type = GST_TYPE_ELEMENT;
     table.klass = Qnil;

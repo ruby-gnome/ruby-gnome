@@ -25,11 +25,10 @@
 
 #define RG_TARGET_NAMESPACE cInstallPluginsContext
 
-static RGConvertTable context_table = {0};
 static VALUE RG_TARGET_NAMESPACE;
 
 static VALUE
-context2robj(gpointer context)
+context2robj(gpointer context, G_GNUC_UNUSED gpointer user_data)
 {
     return Data_Wrap_Struct(RG_TARGET_NAMESPACE, NULL,
                             gst_install_plugins_context_free,
@@ -37,7 +36,7 @@ context2robj(gpointer context)
 }
 
 static gpointer
-robj2context(VALUE object)
+robj2context(VALUE object, G_GNUC_UNUSED gpointer user_data)
 {
     gpointer instance;
 
@@ -71,6 +70,9 @@ rg_set_xid(VALUE self, VALUE xid)
 void
 Init_gst_install_plugins_context(VALUE mGst)
 {
+    RGConvertTable context_table;
+
+    memset(&context_table, 0, sizeof(RGConvertTable));
     context_table.type = GST_TYPE_INSTALL_PLUGINS_CONTEXT;
     context_table.instance2robj = context2robj;
     context_table.robj2instance = robj2context;
