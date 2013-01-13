@@ -24,7 +24,8 @@
 
 #define DEFINE_CONVERSION(prefix, gtype, rb_klass, RVAL2CR, CR2RVAL)    \
 static gpointer                                                         \
-prefix ## _robj2instance(VALUE rb_object)                               \
+prefix ## _robj2instance(VALUE rb_object,                               \
+                         G_GNUC_UNUSED gpointer user_data)              \
 {                                                                       \
     VALUE rb_boxed;                                                     \
                                                                         \
@@ -39,7 +40,8 @@ prefix ## _robj2instance(VALUE rb_object)                               \
 }                                                                       \
                                                                         \
 static VALUE                                                            \
-prefix ## _instance2robj(gpointer cr_object)                            \
+prefix ## _instance2robj(gpointer cr_object,                            \
+                         G_GNUC_UNUSED gpointer user_data)              \
 {                                                                       \
     return CR2RVAL(cr_object);                                          \
 }                                                                       \
@@ -47,7 +49,7 @@ prefix ## _instance2robj(gpointer cr_object)                            \
 static void                                                             \
 define_ ## prefix ## _conversion(void)                                  \
 {                                                                       \
-    static RGConvertTable table;                                        \
+    RGConvertTable table;                                               \
                                                                         \
     memset(&table, 0, sizeof(RGConvertTable));                          \
     table.type          = gtype;                                        \
