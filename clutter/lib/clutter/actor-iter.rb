@@ -24,10 +24,8 @@ module Clutter
 
     def each
       loop do
-        have_next, return_values = self.next
+        have_next, child = self.next
         break unless have_next
-
-        child, = return_values
         yield(child)
       end
     end
