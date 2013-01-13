@@ -281,7 +281,7 @@ typedef struct {
     void (*unref)(gpointer instance, gpointer user_data);
 } RGConvertTable;
 
-extern void rbgobj_convert_define(RGConvertTable *table);
+extern void rbgobj_convert_define(const RGConvertTable *table);
 
 #ifdef __cplusplus
 }

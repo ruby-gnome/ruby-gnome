@@ -32,6 +32,7 @@ rg_convert_table_free(gpointer data)
     if (table->notify) {
         table->notify(table->user_data);
     }
+    g_free(table);
 }
 
 void
@@ -44,12 +45,14 @@ Init_gobject_convert(void)
 }
 
 void
-rbgobj_convert_define(RGConvertTable *table)
+rbgobj_convert_define(const RGConvertTable *table)
 {
-    g_hash_table_insert(tables, &(table->type), table);
-    if (table->klass && !NIL_P(table->klass)) {
+    RGConvertTable *copied_table;
+    copied_table = g_memdup(table, sizeof(RGConvertTable));
+    g_hash_table_insert(tables, &(copied_table->type), copied_table);
+    if (copied_table->klass && !NIL_P(copied_table->klass)) {
         g_hash_table_insert(class_to_g_type_map,
-                            &(table->klass), &(table->type));
+                            &(copied_table->klass), &(copied_table->type));
     }
 }
 
