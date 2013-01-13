@@ -229,6 +229,8 @@ extern VALUE rbgobj_boxed_create(VALUE klass); /* deprecated */
 extern gpointer rbgobj_boxed_get(VALUE obj, GType gtype);
 extern gpointer rbgobj_boxed_get_default(VALUE obj, GType gtype);
 extern VALUE rbgobj_make_boxed(gpointer data, GType gtype);
+extern VALUE rbgobj_make_boxed_raw(gpointer p, GType gtype,
+                                   VALUE klass, gint flags);
 extern VALUE rbgobj_make_boxed_default(gpointer data, GType gtype);
 extern void rbgobj_boxed_not_copy_obj(GType gtype);
 

@@ -174,18 +174,16 @@ rbgobj_boxed_get(VALUE obj, GType gtype)
 }
 
 VALUE
-rbgobj_make_boxed_default(gpointer p, GType gtype)
+rbgobj_make_boxed_raw(gpointer p, GType gtype, VALUE klass, gint flags)
 {
-    const RGObjClassInfo *cinfo;
     VALUE result;
     boxed_holder *holder;
 
-    cinfo = GTYPE2CINFO(gtype);
-    result = rbgobj_boxed_s_allocate(cinfo->klass);
+    result = rbgobj_boxed_s_allocate(klass);
 
     Data_Get_Struct(result, boxed_holder, holder);
 
-    if (cinfo->flags & RBGOBJ_BOXED_NOT_COPY) {
+    if (flags & RBGOBJ_BOXED_NOT_COPY) {
         holder->boxed = p;
         holder->own   = FALSE;
     } else {
@@ -194,6 +192,15 @@ rbgobj_make_boxed_default(gpointer p, GType gtype)
     }
 
     return result;
+}
+
+VALUE
+rbgobj_make_boxed_default(gpointer p, GType gtype)
+{
+    const RGObjClassInfo *cinfo;
+
+    cinfo = GTYPE2CINFO(gtype);
+    return rbgobj_make_boxed_raw(p, gtype, cinfo->klass, cinfo->flags);
 }
 
 VALUE
