@@ -269,14 +269,16 @@ extern GType g_poll_fd_get_type(void);
 typedef struct {
     GType type;
     VALUE klass;
-    VALUE (*get_superclass)(void);
-    void (*type_init_hook)(VALUE);
-    void (*rvalue2gvalue)(VALUE val, GValue *result);
-    VALUE (*gvalue2rvalue)(const GValue *);
-    void (*initialize)(VALUE, gpointer);
-    gpointer (*robj2instance)(VALUE);
-    VALUE (*instance2robj)(gpointer);
-    void (*unref)(gpointer instance);
+    gpointer user_data;
+    GDestroyNotify notify;
+    VALUE (*get_superclass)(gpointer user_data);
+    void (*type_init_hook)(VALUE klass, gpointer user_data);
+    void (*rvalue2gvalue)(VALUE value, GValue *result, gpointer user_data);
+    VALUE (*gvalue2rvalue)(const GValue *value, gpointer user_data);
+    void (*initialize)(VALUE rb_instance, gpointer insntance, gpointer user_data);
+    gpointer (*robj2instance)(VALUE rb_instance, gpointer user_data);
+    VALUE (*instance2robj)(gpointer instance, gpointer user_data);
+    void (*unref)(gpointer instance, gpointer user_data);
 } RGConvertTable;
 
 extern void rbgobj_convert_define(RGConvertTable *table);

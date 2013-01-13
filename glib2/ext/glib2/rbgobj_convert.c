@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons, Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -24,10 +24,22 @@
 
 static GHashTable *tables, *class_to_g_type_map;
 
+static void
+rg_convert_table_free(gpointer data)
+{
+    RGConvertTable *table = data;
+
+    if (table->notify) {
+        table->notify(table->user_data);
+    }
+}
+
 void
 Init_gobject_convert(void)
 {
-    tables = g_hash_table_new(g_int_hash, g_int_equal);
+    /* TODO: unref the below tables on exit. */
+    tables = g_hash_table_new_full(g_int_hash, g_int_equal, NULL,
+                                   rg_convert_table_free);
     class_to_g_type_map = g_hash_table_new(g_int_hash, g_int_equal);
 }
 
@@ -60,7 +72,7 @@ rbgobj_convert_get_superclass(GType type, VALUE *result)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->get_superclass) {
-        *result = table->get_superclass();
+        *result = table->get_superclass(table->user_data);
         return TRUE;
     }
 
@@ -74,7 +86,7 @@ rbgobj_convert_type_init_hook(GType type, VALUE klass)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->type_init_hook) {
-        table->type_init_hook(klass);
+        table->type_init_hook(klass, table->user_data);
         return TRUE;
     }
 
@@ -88,7 +100,7 @@ rbgobj_convert_rvalue2gvalue(GType type, VALUE value, GValue *result)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->rvalue2gvalue) {
-        table->rvalue2gvalue(value, result);
+        table->rvalue2gvalue(value, result, table->user_data);
         return TRUE;
     }
 
@@ -102,7 +114,7 @@ rbgobj_convert_gvalue2rvalue(GType type, const GValue *value, VALUE *result)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->gvalue2rvalue) {
-        *result = table->gvalue2rvalue(value);
+        *result = table->gvalue2rvalue(value, table->user_data);
         return TRUE;
     }
 
@@ -127,7 +139,7 @@ rbgobj_convert_initialize(GType type, VALUE obj, gpointer cobj)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->initialize) {
-        table->initialize(obj, cobj);
+        table->initialize(obj, cobj, table->user_data);
         return TRUE;
     }
 
@@ -141,7 +153,7 @@ rbgobj_convert_robj2instance(GType type, VALUE obj, gpointer *result)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->robj2instance) {
-        *result = table->robj2instance(obj);
+        *result = table->robj2instance(obj, table->user_data);
         return TRUE;
     }
 
@@ -155,7 +167,7 @@ rbgobj_convert_instance2robj(GType type, gpointer instance, VALUE *result)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->instance2robj) {
-        *result = table->instance2robj(instance);
+        *result = table->instance2robj(instance, table->user_data);
         return TRUE;
     }
 
@@ -169,7 +181,7 @@ rbgobj_convert_unref(GType type, gpointer instance)
 
     table = rbgobj_convert_lookup(type);
     if (table && table->unref) {
-        table->unref(instance);
+        table->unref(instance, table->user_data);
         return TRUE;
     }
 
