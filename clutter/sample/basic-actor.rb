@@ -62,8 +62,7 @@ flower.signal_connect("button-press-event") do |actor, event|
 
   toggled = !toggled
 
-  stop = true
-  stop
+  Clutter::Event::STOP
 end
 
 flower = Clutter::Actor.new
@@ -90,8 +89,7 @@ on_crossing = lambda do |actor, event|
     actor.z_position = zpos
   end
 
-  stop = true
-  stop
+  Clutter::Event::STOP
 end
 flower.signal_connect("enter-event", &on_crossing)
 flower.signal_connect("leave-event", &on_crossing)
@@ -119,8 +117,7 @@ flower.signal_connect("button-press-event") do |actor, event|
     actor.signal_handler_disconnect(id)
   end
 
-  stop = true
-  stop
+  Clutter::Event::STOP
 end
 
 stage.show

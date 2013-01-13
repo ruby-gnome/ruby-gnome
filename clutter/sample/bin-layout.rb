@@ -192,8 +192,7 @@ box.signal_connect("enter-event") do |_box, event|
     emblem.opacity = 255
   end
 
-  stop = true
-  stop
+  Clutter::Event::STOP
 end
 box.signal_connect("leave-event") do |_box, event|
   emblem.save_easing_state do
@@ -201,8 +200,7 @@ box.signal_connect("leave-event") do |_box, event|
     emblem.opacity = 0
   end
 
-  stop = true
-  stop
+  Clutter::Event::STOP
 end
 
 label = Clutter::Text.new
