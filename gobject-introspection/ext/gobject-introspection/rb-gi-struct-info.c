@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -61,15 +61,22 @@ rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
     GIStructInfo *info;
     gint n;
     GIFieldInfo *field_info;
-    GType gtype;
     VALUE rb_value;
+    gpointer instance;
 
     info = SELF(self);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
-    gtype = g_registered_type_info_get_g_type(info);
-    rb_value = rb_gi_field_info_get_field_raw(field_info,
-                                              RVAL2BOXED(rb_struct, gtype));
+    if (rb_respond_to(rb_struct, rb_intern("gtype"))) {
+        VALUE rb_gtype;
+        GType gtype;
+        rb_gtype = rb_funcall(rb_struct, rb_intern("gtype"), 0);
+        gtype = NUM2UINT(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        instance = RVAL2BOXED(rb_struct, gtype);
+    } else {
+        Data_Get_Struct(rb_struct, void, instance);
+    }
+    rb_value = rb_gi_field_info_get_field_raw(field_info, instance);
     g_base_info_unref(field_info);
 
     return rb_value;
