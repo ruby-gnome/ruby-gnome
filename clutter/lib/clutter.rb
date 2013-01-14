@@ -43,6 +43,9 @@ module Clutter
   end
 
   class Loader < GObjectIntrospection::Loader
+    class InitError < StandardError
+    end
+
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
@@ -54,7 +57,12 @@ module Clutter
     private
     def pre_load(repository, namespace)
       init = repository.find(namespace, "init")
-      init.invoke(@init_arguments.size, @init_arguments)
+      error, argc, argv = init.invoke(1 + @init_arguments.size,
+                                      [$0] + @init_arguments)
+      @init_arguments.replace(argv)
+      if error.to_i <= 0
+        raise InitError, "failed to initialize Clutter: #{error.name}"
+      end
       @keys_module = Module.new
       @base_module.const_set("Keys", @keys_module)
       @threads_module = Module.new
