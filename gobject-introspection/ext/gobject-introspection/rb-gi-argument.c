@@ -445,15 +445,75 @@ rb_gi_return_argument_to_ruby(GIArgument *argument,
 }
 
 static void
+rb_gi_argument_from_ruby_array_c(GIArgument *argument,
+                                 G_GNUC_UNUSED GITypeInfo *type_info,
+                                 GITypeInfo *element_type_info,
+                                 VALUE rb_argument)
+{
+    GITypeTag element_type_tag;
+
+    element_type_tag = g_type_info_get_tag(element_type_info);
+    switch (element_type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(array)[%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      case GI_TYPE_TAG_INT8:
+        argument->v_pointer = StringValueCStr(rb_argument);
+        break;
+      case GI_TYPE_TAG_UINT8:
+        argument->v_pointer = RSTRING_PTR(rb_argument);
+        break;
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(array)[%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        argument->v_pointer = RVAL2STRV(rb_argument);
+        break;
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(array)[%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_argument_from_ruby_array(GIArgument *argument, GITypeInfo *type_info,
                                VALUE rb_argument)
 {
     GIArrayType array_type;
+    GITypeInfo *element_type_info;
 
     array_type = g_type_info_get_array_type(type_info);
+    element_type_info = g_type_info_get_param_type(type_info, 0);
     switch (array_type) {
       case GI_ARRAY_TYPE_C:
-        argument->v_pointer = RVAL2STRV(rb_argument);
+        rb_gi_argument_from_ruby_array_c(argument,
+                                         type_info, element_type_info,
+                                         rb_argument);
         break;
       case GI_ARRAY_TYPE_ARRAY:
       case GI_ARRAY_TYPE_PTR_ARRAY:
@@ -464,6 +524,7 @@ rb_gi_argument_from_ruby_array(GIArgument *argument, GITypeInfo *type_info,
         g_assert_not_reached();
         break;
     }
+    g_base_info_unref(element_type_info);
 }
 
 static void
