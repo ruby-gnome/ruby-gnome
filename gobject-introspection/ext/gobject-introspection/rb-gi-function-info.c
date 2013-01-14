@@ -74,54 +74,21 @@ rg_vfunc(VALUE self)
     return GI_BASE_INFO2RVAL(g_function_info_get_vfunc(info));
 }
 
-static void
-retrieve_out_argument(GIArgInfo *arg_info, GIArgument *out_arg,
-                      VALUE rb_out_args)
-{
-    rb_ary_push(rb_out_args, GI_OUT_ARGUMENT2RVAL(out_arg, arg_info));
-    rb_gi_out_argument_fin(out_arg, arg_info);
-}
-
-static VALUE
-retrieve_out_arguments(GICallableInfo *callable_info, GArray *out_args)
-{
-    gint i, n_args;
-    gint out_arg_index = 0;
-    VALUE rb_out_args;
-
-    if (out_args->len == 0) {
-        return Qnil;
-    }
-
-    rb_out_args = rb_ary_new();
-    n_args = g_callable_info_get_n_args(callable_info);
-    for (i = 0; i < n_args; i++) {
-        GIArgInfo arg_info;
-        GIArgument *out_arg;
-        g_callable_info_load_arg(callable_info, i, &arg_info);
-        if (g_arg_info_get_direction(&arg_info) != GI_DIRECTION_OUT) {
-            continue;
-        }
-        out_arg = &g_array_index(out_args, GIArgument, out_arg_index);
-        retrieve_out_argument(&arg_info, out_arg, rb_out_args);
-        out_arg_index++;
-    }
-
-    return rb_out_args;
-}
-
 typedef struct
 {
     GIArgInfo arg_info;
     GIScopeType scope_type;
+    GIDirection direction;
     gboolean callback_p;
     gboolean closure_p;
     gboolean destroy_p;
+    gboolean inout_argv_p;
     gint in_arg_index;
     gint closure_in_arg_index;
     gint destroy_in_arg_index;
     gint rb_arg_index;
     gint out_arg_index;
+    gint inout_argc_arg_index;
 } ArgMetadata;
 
 static void
@@ -145,16 +112,19 @@ allocate_arguments(GICallableInfo *info,
         arg_info = &(metadata->arg_info);
         g_callable_info_load_arg(info, i, arg_info);
         metadata->scope_type = g_arg_info_get_scope(arg_info);
+        metadata->direction = g_arg_info_get_direction(arg_info);
         metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
         metadata->closure_p = FALSE;
         metadata->destroy_p = FALSE;
+        metadata->inout_argv_p = FALSE;
         metadata->in_arg_index = -1;
         metadata->closure_in_arg_index = -1;
         metadata->destroy_in_arg_index = -1;
         metadata->rb_arg_index = -1;
         metadata->out_arg_index = -1;
+        metadata->inout_argc_arg_index = -1;
 
-        direction = g_arg_info_get_direction(arg_info);
+        direction = metadata->direction;
         if (direction == GI_DIRECTION_IN || direction == GI_DIRECTION_INOUT) {
             metadata->in_arg_index = in_args->len;
             g_array_append_val(in_args, argument);
@@ -170,7 +140,33 @@ allocate_arguments(GICallableInfo *info,
 }
 
 static void
-fill_metadata(GPtrArray *args_metadata)
+fill_metadata_inout_argv(GPtrArray *args_metadata)
+{
+    guint i;
+    gint inout_argc_arg_index = -1;
+
+    for (i = 0; i < args_metadata->len; i++) {
+        ArgMetadata *metadata;
+        GIArgInfo *arg_info;
+        const gchar *name;
+
+        metadata = g_ptr_array_index(args_metadata, i);
+        if (metadata->direction != GI_DIRECTION_INOUT) {
+            continue;
+        }
+        arg_info = &(metadata->arg_info);
+        name = g_base_info_get_name(arg_info);
+        if (strcmp(name, "argc") == 0) {
+            inout_argc_arg_index = i;
+        } else if (strcmp(name, "argv") == 0) {
+            metadata->inout_argv_p = TRUE;
+            metadata->inout_argc_arg_index = inout_argc_arg_index;
+        }
+    }
+}
+
+static void
+fill_metadata_callback(GPtrArray *args_metadata)
 {
     guint i;
 
@@ -204,6 +200,13 @@ fill_metadata(GPtrArray *args_metadata)
             destroy_metadata->rb_arg_index = -1;
         }
     }
+}
+
+static void
+fill_metadata(GPtrArray *args_metadata)
+{
+    fill_metadata_inout_argv(args_metadata);
+    fill_metadata_callback(args_metadata);
 }
 
 static gboolean
@@ -411,6 +414,79 @@ arguments_from_ruby(GICallableInfo *info,
     }
 }
 
+static VALUE
+inout_argv_argument_to_ruby(GArray *in_args, ArgMetadata *metadata)
+{
+    GIArgument *inout_argc_argument;
+    GIArgument *inout_argv_argument;
+    gint i, argc;
+    gchar **argv;
+    VALUE rb_argv_argument;
+
+    inout_argc_argument = &g_array_index(in_args, GIArgument,
+                                         metadata->inout_argc_arg_index);
+    inout_argv_argument = &g_array_index(in_args, GIArgument,
+                                         metadata->in_arg_index);
+    argc = *((gint *)(inout_argc_argument->v_pointer));
+    argv = *((gchar ***)(inout_argv_argument->v_pointer));
+    rb_argv_argument = rb_ary_new2(argc);
+    for (i = 0; i < argc; i++) {
+        rb_ary_push(rb_argv_argument, CSTR2RVAL(argv[i]));
+    }
+    return rb_argv_argument;
+}
+
+static VALUE
+out_arguments_to_ruby(GICallableInfo *callable_info,
+                      GArray *in_args, GArray *out_args,
+                      GPtrArray *args_metadata)
+{
+    gint i, n_args;
+    VALUE rb_out_args;
+
+    rb_out_args = rb_ary_new();
+    n_args = g_callable_info_get_n_args(callable_info);
+    for (i = 0; i < n_args; i++) {
+        ArgMetadata *metadata;
+        GIArgument *argument = NULL;
+        VALUE rb_argument;
+
+        metadata = g_ptr_array_index(args_metadata, i);
+        switch (metadata->direction) {
+          case GI_DIRECTION_IN:
+            break;
+          case GI_DIRECTION_OUT:
+            argument = &g_array_index(out_args, GIArgument,
+                                      metadata->out_arg_index);
+            break;
+          case GI_DIRECTION_INOUT:
+            argument = &g_array_index(in_args, GIArgument,
+                                      metadata->in_arg_index);
+            break;
+          default:
+            g_assert_not_reached();
+            break;
+        }
+
+        if (!argument) {
+            continue;
+        }
+
+        if (metadata->inout_argv_p) {
+            rb_argument = inout_argv_argument_to_ruby(in_args, metadata);
+        } else {
+            rb_argument = GI_OUT_ARGUMENT2RVAL(argument, &(metadata->arg_info));
+        }
+        rb_ary_push(rb_out_args, rb_argument);
+    }
+
+    if (RARRAY_LEN(rb_out_args) == 0) {
+        return Qnil;
+    } else {
+        return rb_out_args;
+    }
+}
+
 static void
 arguments_init(GArray **in_args, GArray **out_args, GPtrArray **args_metadata)
 {
@@ -429,11 +505,19 @@ arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
         gint in_arg_index;
 
         metadata = g_ptr_array_index(args_metadata, i);
-        in_arg_index = metadata->in_arg_index;
-        if (in_arg_index != -1) {
+        if (metadata->direction == GI_DIRECTION_IN ||
+            metadata->direction == GI_DIRECTION_INOUT) {
+            in_arg_index = metadata->in_arg_index;
+            if (in_arg_index != -1) {
+                GIArgument *argument;
+                argument = &(g_array_index(in_args, GIArgument, in_arg_index));
+                rb_gi_call_argument_free(argument, &(metadata->arg_info));
+            }
+        } else {
             GIArgument *argument;
-            argument = &(g_array_index(in_args, GIArgument, in_arg_index));
-            rb_gi_call_argument_free(argument, &(metadata->arg_info));
+            argument = &(g_array_index(out_args, GIArgument,
+                                       metadata->out_arg_index));
+            rb_gi_out_argument_fin(argument, &(metadata->arg_info));
         }
     }
 
@@ -470,7 +554,9 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, GIArgument *receiver,
                                        return_value,
                                        &error);
     if (succeeded) {
-        rb_out_args = retrieve_out_arguments(callable_info, out_args);
+        rb_out_args = out_arguments_to_ruby(callable_info,
+                                            in_args, out_args,
+                                            args_metadata);
     }
     arguments_free(in_args, out_args, args_metadata);
     if (!succeeded) {
@@ -500,7 +586,8 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     if (NIL_P(rb_out_args)) {
         return rb_return_value;
     } else {
-        return rb_ary_new3(2, rb_return_value, rb_out_args);
+        rb_ary_unshift(rb_out_args, rb_return_value);
+        return rb_out_args;
     }
 }
 
