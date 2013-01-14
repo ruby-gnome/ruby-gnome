@@ -138,8 +138,7 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         g_assert_not_reached();
         break;
       case GI_INFO_TYPE_UNION:
-        rb_raise(rb_eNotImpError,
-                 "TODO: GIArgument(interface)[union] -> Ruby");
+        rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
         break;
       case GI_INFO_TYPE_VALUE:
         rb_raise(rb_eNotImpError,
