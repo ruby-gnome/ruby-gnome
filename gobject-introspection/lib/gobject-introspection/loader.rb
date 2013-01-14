@@ -203,7 +203,7 @@ module GObjectIntrospection
         else
           name
         end
-      elsif /\Aget_/ =~ name and method_info.n_args.zero?
+      elsif /\Aget_/ =~ name and method_info.n_in_args.zero?
         $POSTMATCH
       else
         name
