@@ -420,6 +420,10 @@ rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
 {
     GITypeInfo type_info;
 
+    if (g_arg_info_get_direction(arg_info) != GI_DIRECTION_OUT) {
+        return;
+    }
+
     g_arg_info_load_type(arg_info, &type_info);
     xfree(argument->v_pointer);
 }
@@ -445,17 +449,11 @@ rb_gi_argument_from_ruby_array(GIArgument *argument, GITypeInfo *type_info,
                                VALUE rb_argument)
 {
     GIArrayType array_type;
-    gboolean zero_terminated_p;
 
     array_type = g_type_info_get_array_type(type_info);
-    zero_terminated_p = g_type_info_is_zero_terminated(type_info);
     switch (array_type) {
       case GI_ARRAY_TYPE_C:
-        if (zero_terminated_p) {
-            argument->v_pointer = (gchar *)RVAL2CSTR(rb_argument);
-        } else {
-            argument->v_pointer = RSTRING_PTR(rb_argument);
-        }
+        argument->v_pointer = RVAL2STRV(rb_argument);
         break;
       case GI_ARRAY_TYPE_ARRAY:
       case GI_ARRAY_TYPE_PTR_ARRAY:
@@ -481,15 +479,13 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
 
     gtype = g_registered_type_info_get_g_type(interface_info);
     switch (interface_type) {
-      case GI_INFO_TYPE_ENUM:
-        argument->v_int32 = RVAL2GENUM(rb_argument, gtype);
-        break;
-      case GI_INFO_TYPE_FLAGS:
-        argument->v_int32 = RVAL2GFLAGS(rb_argument, gtype);
-        break;
-      case GI_INFO_TYPE_OBJECT:
-      case GI_INFO_TYPE_INTERFACE:
-        argument->v_pointer = RVAL2GOBJ(rb_argument);
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(interface)[%s]: <%s>",
+                 g_info_type_to_string(interface_type),
+                 g_base_info_get_name(interface_info));
         break;
       case GI_INFO_TYPE_STRUCT:
         if (gtype == G_TYPE_VALUE) {
@@ -549,8 +545,8 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
 
 
 GIArgument *
-rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
-                         VALUE rb_argument)
+rb_gi_in_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
+                            VALUE rb_argument)
 {
     GITypeTag type_tag;
 
@@ -627,20 +623,135 @@ rb_gi_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
     return argument;
 }
 
+static void
+rb_gi_inout_argument_from_ruby(GIArgument *argument,
+                               G_GNUC_UNUSED GIArgInfo *arg_info,
+                               GITypeInfo *type_info, VALUE rb_argument)
+{
+    GIArgument in_argument;
+    GITypeTag type_tag;
+
+    rb_gi_in_argument_from_ruby(&in_argument, type_info, rb_argument);
+
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        argument->v_pointer = ALLOC(gboolean);
+        *((gboolean *)argument->v_pointer) = in_argument.v_boolean;
+        break;
+      case GI_TYPE_TAG_INT8:
+        argument->v_pointer = ALLOC(gint8);
+        *((gint8 *)argument->v_pointer) = in_argument.v_int8;
+        break;
+      case GI_TYPE_TAG_UINT8:
+        argument->v_pointer = ALLOC(guint8);
+        *((guint8 *)argument->v_pointer) = in_argument.v_uint8;
+        break;
+      case GI_TYPE_TAG_INT16:
+        argument->v_pointer = ALLOC(gint16);
+        *((gint16 *)argument->v_pointer) = in_argument.v_int16;
+        break;
+      case GI_TYPE_TAG_UINT16:
+        argument->v_pointer = ALLOC(guint16);
+        *((guint16 *)argument->v_pointer) = in_argument.v_uint16;
+        break;
+      case GI_TYPE_TAG_INT32:
+        argument->v_pointer = ALLOC(gint32);
+        *((gint32 *)argument->v_pointer) = in_argument.v_int32;
+        break;
+      case GI_TYPE_TAG_UINT32:
+        argument->v_pointer = ALLOC(guint32);
+        *((guint32 *)argument->v_pointer) = in_argument.v_uint32;
+        break;
+      case GI_TYPE_TAG_INT64:
+        argument->v_pointer = ALLOC(gint64);
+        *((gint64 *)argument->v_pointer) = in_argument.v_int64;
+        break;
+      case GI_TYPE_TAG_UINT64:
+        argument->v_pointer = ALLOC(guint64);
+        *((guint64 *)argument->v_pointer) = in_argument.v_uint64;
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        argument->v_pointer = ALLOC(gfloat);
+        *((gfloat *)argument->v_pointer) = in_argument.v_float;
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        argument->v_pointer = ALLOC(gdouble);
+        *((gdouble *)argument->v_pointer) = in_argument.v_double;
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        argument->v_pointer = ALLOC(gsize);
+        *((gsize *)argument->v_pointer) = in_argument.v_size;
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        argument->v_pointer = ALLOC(gchar *);
+        *((gchar **)argument->v_pointer) = in_argument.v_string;
+        break;
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+        argument->v_pointer = ALLOC(gpointer);
+        *((gpointer *)argument->v_pointer) = in_argument.v_pointer;
+        break;
+      case GI_TYPE_TAG_ERROR:
+        argument->v_pointer = ALLOC(GError *);
+        *((GError **)argument->v_pointer) = in_argument.v_pointer;
+        break;
+      case GI_TYPE_TAG_UNICHAR:
+        argument->v_pointer = ALLOC(gunichar);
+        *((gunichar *)argument->v_pointer) = in_argument.v_uint32;
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
 GIArgument *
 rb_gi_call_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
-                              VALUE rb_argument)
+                            VALUE rb_argument)
 {
+    GITypeInfo type_info;
+
     if (g_arg_info_may_be_null(arg_info) && NIL_P(rb_argument)) {
         memset(argument, 0, sizeof(GIArgument));
-    } else {
-        GITypeInfo type_info;
+        return argument;
+    }
 
-        g_arg_info_load_type(arg_info, &type_info);
-        rb_gi_argument_from_ruby(argument, &type_info, rb_argument);
+    g_arg_info_load_type(arg_info, &type_info);
+    if (g_arg_info_get_direction(arg_info) == GI_DIRECTION_INOUT) {
+        rb_gi_inout_argument_from_ruby(argument, arg_info, &type_info,
+                                       rb_argument);
+    } else {
+        rb_gi_in_argument_from_ruby(argument, &type_info, rb_argument);
     }
 
     return argument;
+}
+
+static void
+rb_gi_in_argument_free_array(GIArgument *argument, GITypeInfo *type_info)
+{
+    GIArrayType array_type;
+
+    array_type = g_type_info_get_array_type(type_info);
+    switch (array_type) {
+      case GI_ARRAY_TYPE_C:
+        g_free(argument->v_pointer);
+        break;
+      case GI_ARRAY_TYPE_ARRAY:
+      case GI_ARRAY_TYPE_PTR_ARRAY:
+      case GI_ARRAY_TYPE_BYTE_ARRAY:
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
 }
 
 static void
@@ -670,7 +781,142 @@ rb_gi_in_argument_free(GIArgument *argument, GITypeInfo *type_info)
     GITypeTag type_tag;
 
     type_tag = g_type_info_get_tag(type_info);
-    if (type_tag == GI_TYPE_TAG_INTERFACE) {
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        break;
+      case GI_TYPE_TAG_ARRAY:
+        rb_gi_in_argument_free_array(argument, type_info);
+        break;
+      case GI_TYPE_TAG_INTERFACE:
         rb_gi_in_argument_free_interface(argument, type_info);
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
+rb_gi_inout_argument_free(GIArgument *argument, GITypeInfo *type_info)
+{
+    GIArgument in_argument;
+    GITypeTag type_tag;
+
+    memset(&in_argument, 0, sizeof(GIArgument));
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+        break;
+      case GI_TYPE_TAG_BOOLEAN:
+        in_argument.v_boolean = *((gboolean *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_INT8:
+        in_argument.v_int8 = *((gint8 *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UINT8:
+        /* TODO!!! */
+        in_argument.v_uint8 = *((guint8 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(guint8);
+        *((guint8 *)argument->v_pointer) = in_argument.v_uint8;
+        break;
+      case GI_TYPE_TAG_INT16:
+        in_argument.v_int16 = *((gint16 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(gint16);
+        *((gint16 *)argument->v_pointer) = in_argument.v_int16;
+        break;
+      case GI_TYPE_TAG_UINT16:
+        in_argument.v_uint16 = *((guint16 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(guint16);
+        *((guint16 *)argument->v_pointer) = in_argument.v_uint16;
+        break;
+      case GI_TYPE_TAG_INT32:
+        in_argument.v_int32 = *((gint32 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(gint32);
+        *((gint32 *)argument->v_pointer) = in_argument.v_int32;
+        break;
+      case GI_TYPE_TAG_UINT32:
+        in_argument.v_uint32 = *((guint32 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(guint32);
+        *((guint32 *)argument->v_pointer) = in_argument.v_uint32;
+        break;
+      case GI_TYPE_TAG_INT64:
+        in_argument.v_int64 = *((gint64 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(gint64);
+        *((gint64 *)argument->v_pointer) = in_argument.v_int64;
+        break;
+      case GI_TYPE_TAG_UINT64:
+        in_argument.v_uint64 = *((guint64 *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(guint64);
+        *((guint64 *)argument->v_pointer) = in_argument.v_uint64;
+        break;
+      case GI_TYPE_TAG_FLOAT:
+        in_argument.v_float = *((gfloat *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(gfloat);
+        *((gfloat *)argument->v_pointer) = in_argument.v_float;
+        break;
+      case GI_TYPE_TAG_DOUBLE:
+        in_argument.v_double = *((gdouble *)(argument->v_pointer));
+        argument->v_pointer = ALLOC(gdouble);
+        *((gdouble *)argument->v_pointer) = in_argument.v_double;
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        in_argument.v_size = *((gsize *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+        in_argument.v_string = *((gchar **)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+        in_argument.v_pointer = *((gpointer *)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_ERROR:
+        in_argument.v_pointer = *((GError **)(argument->v_pointer));
+        break;
+      case GI_TYPE_TAG_UNICHAR:
+        in_argument.v_uint32 = *((gunichar *)(argument->v_pointer));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    rb_gi_in_argument_free(&in_argument, type_info);
+    xfree(argument->v_pointer);
+}
+
+void
+rb_gi_call_argument_free(GIArgument *argument, GIArgInfo *arg_info)
+{
+    GITypeInfo type_info;
+
+    g_arg_info_load_type(arg_info, &type_info);
+    if (g_arg_info_get_direction(arg_info) == GI_DIRECTION_INOUT) {
+        rb_gi_inout_argument_free(argument, &type_info);
+    } else {
+        rb_gi_in_argument_free(argument, &type_info);
     }
 }

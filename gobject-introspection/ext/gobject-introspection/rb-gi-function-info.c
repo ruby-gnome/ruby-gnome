@@ -99,7 +99,7 @@ retrieve_out_arguments(GICallableInfo *callable_info, GArray *out_args)
         GIArgInfo arg_info;
         GIArgument *out_arg;
         g_callable_info_load_arg(callable_info, i, &arg_info);
-        if (g_arg_info_get_direction(&arg_info) == GI_DIRECTION_IN) {
+        if (g_arg_info_get_direction(&arg_info) != GI_DIRECTION_OUT) {
             continue;
         }
         out_arg = &g_array_index(out_args, GIArgument, out_arg_index);
@@ -138,6 +138,8 @@ allocate_arguments(GICallableInfo *info,
         ArgMetadata *metadata;
         GIArgInfo *arg_info;
         GIDirection direction;
+
+        memset(&argument, 0, sizeof(GIArgument));
 
         metadata = ALLOC(ArgMetadata);
         arg_info = &(metadata->arg_info);
@@ -347,6 +349,10 @@ in_callback_argument_from_ruby(ArgMetadata *metadata, VALUE *argv,
 static void
 in_argument_from_ruby(ArgMetadata *metadata, VALUE *argv, GArray *in_args)
 {
+    if (metadata->rb_arg_index == -1) {
+        return;
+    }
+
     if (metadata->callback_p) {
         in_callback_argument_from_ruby(metadata, argv, in_args);
     } else {
@@ -397,10 +403,9 @@ arguments_from_ruby(GICallableInfo *info,
         ArgMetadata *metadata;
 
         metadata = g_ptr_array_index(args_metadata, i);
-        if (metadata->rb_arg_index != -1) {
+        if (metadata->in_arg_index != -1) {
             in_argument_from_ruby(metadata, argv, in_args);
-        }
-        if (metadata->out_arg_index != -1) {
+        } else {
             out_argument_from_ruby(metadata, out_args);
         }
     }
@@ -426,11 +431,9 @@ arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
         metadata = g_ptr_array_index(args_metadata, i);
         in_arg_index = metadata->in_arg_index;
         if (in_arg_index != -1) {
-            GITypeInfo type_info;
             GIArgument *argument;
-            g_arg_info_load_type(&(metadata->arg_info), &type_info);
             argument = &(g_array_index(in_args, GIArgument, in_arg_index));
-            rb_gi_in_argument_free(argument, &type_info);
+            rb_gi_call_argument_free(argument, &(metadata->arg_info));
         }
     }
 

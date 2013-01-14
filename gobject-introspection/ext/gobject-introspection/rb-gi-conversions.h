@@ -37,8 +37,8 @@
     (rb_gi_out_argument_to_ruby((argument), (arg_info)))
 #define GI_RETURN_ARGUMENT2RVAL(argument, callable_info)                \
     (rb_gi_return_argument_to_ruby((argument), (callable_info)))
-#define RVAL2GI_ARGUMENT(argument, type_info, rb_argument)              \
-    (rb_gi_argument_from_ruby((argument), (type_info), (rb_argument)))
+#define RVAL2GI_IN_ARGUMENT(argument, type_info, rb_argument)           \
+    (rb_gi_in_argument_from_ruby((argument), (type_info), (rb_argument)))
 #define RVAL2GI_CALL_ARGUMENT(argument, arg_info, rb_argument)          \
     (rb_gi_call_argument_from_ruby((argument), (arg_info), (rb_argument)))
 
@@ -99,7 +99,7 @@ void        rb_gi_out_argument_fin            (GIArgument     *argument,
                                                GIArgInfo      *arg_info);
 VALUE       rb_gi_return_argument_to_ruby     (GIArgument     *argument,
                                                GICallableInfo *callable_info);
-GIArgument *rb_gi_argument_from_ruby          (GIArgument     *argument,
+GIArgument *rb_gi_in_argument_from_ruby       (GIArgument     *argument,
                                                GITypeInfo     *type_info,
                                                VALUE           rb_argument);
 GIArgument *rb_gi_call_argument_from_ruby     (GIArgument     *argument,
@@ -107,6 +107,8 @@ GIArgument *rb_gi_call_argument_from_ruby     (GIArgument     *argument,
                                                VALUE           rb_argument);
 void        rb_gi_in_argument_free            (GIArgument     *argument,
                                                GITypeInfo     *type_info);
+void        rb_gi_call_argument_free          (GIArgument     *argument,
+                                               GIArgInfo      *arg_info);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);
 
