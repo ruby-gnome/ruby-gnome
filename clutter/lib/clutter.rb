@@ -38,6 +38,7 @@ module Clutter
       require "clutter/cairo"
       require "clutter/color"
       require "clutter/event"
+      require "clutter/point"
       require "clutter/text"
       require "clutter/threads"
     end
