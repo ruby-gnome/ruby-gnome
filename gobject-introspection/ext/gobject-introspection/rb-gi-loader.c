@@ -86,12 +86,12 @@ typedef struct {
     GType type;
     VALUE rb_converters;
     VALUE rb_converter;
-} BoxedInstanec2RObjData;
+} BoxedInstance2RObjData;
 
 static void
 boxed_class_converter_free(gpointer user_data)
 {
-    BoxedInstanec2RObjData *data = user_data;
+    BoxedInstance2RObjData *data = user_data;
     rb_ary_delete(data->rb_converters, data->rb_converter);
     g_free(data);
 }
@@ -99,7 +99,7 @@ boxed_class_converter_free(gpointer user_data)
 static VALUE
 boxed_instance2robj(gpointer instance, gpointer user_data)
 {
-    BoxedInstanec2RObjData *data = user_data;
+    BoxedInstance2RObjData *data = user_data;
     VALUE default_rb_instance;
     VALUE klass;
     gint flags = 0;
@@ -115,7 +115,7 @@ static VALUE
 rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 {
     RGConvertTable table;
-    BoxedInstanec2RObjData *data;
+    BoxedInstance2RObjData *data;
     ID id_to_i;
     VALUE boxed_class_converters;
 
@@ -125,7 +125,7 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
     table.klass = Qnil;
     table.instance2robj = boxed_instance2robj;
 
-    data = g_new(BoxedInstanec2RObjData, 1);
+    data = g_new(BoxedInstance2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
     boxed_class_converters = rb_cv_get(klass, boxed_class_converters_name);
