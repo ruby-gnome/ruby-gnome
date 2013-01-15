@@ -83,7 +83,11 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     if (NIL_P(rb_out_args)) {
         return rb_return_value;
     } else {
-        rb_ary_unshift(rb_out_args, rb_return_value);
+        GITypeInfo return_value_info;
+        g_callable_info_load_return_type(callable_info, &return_value_info);
+        if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_VOID) {
+            rb_ary_unshift(rb_out_args, rb_return_value);
+        }
         return rb_out_args;
     }
 }
