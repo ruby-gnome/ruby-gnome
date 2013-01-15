@@ -98,7 +98,7 @@ module Clutter
         EventType::TOUCH_END      => TouchEvent,
         EventType::TOUCH_CANCEL   => TouchEvent,
       }
-      self.class.register_boxed_converter(Event.gtype) do |event|
+      self.class.register_boxed_class_converter(Event.gtype) do |event|
         event_map[event.type] || Event
       end
     end
