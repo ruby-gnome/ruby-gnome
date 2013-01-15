@@ -22,7 +22,7 @@
 
 #define RG_TARGET_NAMESPACE rb_cGILoader
 
-static const gchar *boxed_converters_name = "@@boxed_converters";
+static const gchar *boxed_class_converters_name = "@@boxed_class_converters";
 
 static VALUE
 rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
@@ -89,7 +89,7 @@ typedef struct {
 } BoxedInstanec2RObjData;
 
 static void
-boxed_converter_free(gpointer user_data)
+boxed_class_converter_free(gpointer user_data)
 {
     BoxedInstanec2RObjData *data = user_data;
     rb_ary_delete(data->rb_converters, data->rb_converter);
@@ -112,12 +112,12 @@ boxed_instance2robj(gpointer instance, gpointer user_data)
 }
 
 static VALUE
-rg_s_register_boxed_converter(VALUE klass, VALUE rb_gtype)
+rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 {
     RGConvertTable table;
     BoxedInstanec2RObjData *data;
     ID id_to_i;
-    VALUE boxed_converters;
+    VALUE boxed_class_converters;
 
     memset(&table, 0, sizeof(RGConvertTable));
     CONST_ID(id_to_i, "to_i");
@@ -128,10 +128,10 @@ rg_s_register_boxed_converter(VALUE klass, VALUE rb_gtype)
     data = g_new(BoxedInstanec2RObjData, 1);
     data->type = table.type;
     data->rb_converter = rb_block_proc();
-    boxed_converters = rb_cv_get(klass, boxed_converters_name);
-    rb_ary_push(boxed_converters, data->rb_converter);
+    boxed_class_converters = rb_cv_get(klass, boxed_class_converters_name);
+    rb_ary_push(boxed_class_converters, data->rb_converter);
     table.user_data = data;
-    table.notify = boxed_converter_free;
+    table.notify = boxed_class_converter_free;
 
     rbgobj_convert_define(&table);
 
@@ -145,10 +145,10 @@ rb_gi_loader_init(VALUE rb_mGI)
 
     RG_TARGET_NAMESPACE = rb_define_class_under(rb_mGI, "Loader", rb_cObject);
 
-    rb_cv_set(RG_TARGET_NAMESPACE, boxed_converters_name, rb_ary_new());
+    rb_cv_set(RG_TARGET_NAMESPACE, boxed_class_converters_name, rb_ary_new());
 
     RG_DEF_SMETHOD(define_class, -1);
     RG_DEF_SMETHOD(define_interface, 3);
     RG_DEF_SMETHOD(define_struct, -1);
-    RG_DEF_SMETHOD(register_boxed_converter, 1);
+    RG_DEF_SMETHOD(register_boxed_class_converter, 1);
 }
