@@ -176,5 +176,3 @@ window.show_all
 stage.show
 
 Gtk.main
-
-__END__
