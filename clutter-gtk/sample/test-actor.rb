@@ -21,7 +21,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 require "clutter-gtk"
-require "gdk_pixbuf2"
 
 ClutterGtk.init
 
