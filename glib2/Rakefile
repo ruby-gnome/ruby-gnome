@@ -61,7 +61,7 @@ package = GNOME2Package.new do |_package|
       :name => "glib-networking",
       :download_site => :gnome,
       :label => "glib-networking",
-      :version => "2.34.3",
+      :version => "2.34.2",
       :configure_args => [
         "--without-libproxy",
         "--without-gnome-proxy",
