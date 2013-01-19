@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -34,6 +34,8 @@ Init_gobject_introspection(void)
                                 INT2FIX(GI_MAJOR_VERSION),
                                 INT2FIX(GI_MINOR_VERSION),
                                 INT2FIX(GI_MICRO_VERSION)));
+
+    rb_gi_argument_init();
 
     rb_gi_type_tag_init(RG_TARGET_NAMESPACE);
     rb_gi_base_info_init(RG_TARGET_NAMESPACE);

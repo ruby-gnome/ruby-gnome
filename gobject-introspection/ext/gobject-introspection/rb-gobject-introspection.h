@@ -43,6 +43,8 @@
 
 extern void Init_gobject_introspection(void);
 
+void rb_gi_argument_init             (void);
+
 void rb_gi_type_tag_init             (VALUE rb_mGI);
 void rb_gi_base_info_init            (VALUE rb_mGI);
 void rb_gi_callable_info_init        (VALUE rb_mGI,

@@ -20,6 +20,8 @@
 
 #include "rb-gobject-introspection.h"
 
+static VALUE rb_cGLibValue = Qnil;
+
 static void
 array_c_to_ruby(const gchar **elements, GITypeInfo *type_info, VALUE rb_array)
 {
@@ -552,7 +554,14 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
             GValue *gvalue;
             gvalue = ALLOC(GValue);
             memset(gvalue, 0, sizeof(GValue));
-            rbgobj_initialize_gvalue(gvalue, rb_argument);
+            if (rb_obj_is_kind_of(rb_argument, rb_cGLibValue)) {
+                GValue *source_gvalue;
+                source_gvalue = RVAL2BOXED(rb_argument, G_TYPE_VALUE);
+                g_value_init(gvalue, source_gvalue->g_type);
+                g_value_copy(source_gvalue, gvalue);
+            } else {
+                rbgobj_initialize_gvalue(gvalue, rb_argument);
+            }
             argument->v_pointer = gvalue;
         } else {
             argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
@@ -979,4 +988,10 @@ rb_gi_call_argument_free(GIArgument *argument, GIArgInfo *arg_info)
     } else {
         rb_gi_in_argument_free(argument, &type_info);
     }
+}
+
+void
+rb_gi_argument_init(void)
+{
+    rb_cGLibValue = rb_const_get(mGLib, rb_intern("Value"));
 }
