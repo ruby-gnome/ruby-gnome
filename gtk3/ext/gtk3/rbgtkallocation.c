@@ -147,7 +147,6 @@ Init_gtk_allocation(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ALLOCATION, "Allocation", mGtk);
-    rbgobj_boxed_not_copy_obj(GTK_TYPE_ALLOCATION);
 
     RG_DEF_METHOD(initialize, 4);
     RG_DEF_METHOD(intersect, 1);
