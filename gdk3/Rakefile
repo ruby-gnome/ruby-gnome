@@ -6,23 +6,28 @@ require 'gnome2-raketask'
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
   _package.description = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
-  _package.dependency.gem.runtime = ["pango",
-                                     "gdk_pixbuf2"]
+  _package.dependency.gem.runtime = ["atk", "pango", "gdk_pixbuf2"]
   _package.win32.packages = []
   _package.win32.dependencies = []
+  _package.win32.build_dependencies = [
+    "glib2", "atk", "pango", "gdk_pixbuf2",
+  ]
+  _package.win32.build_packages = [
+    {
+      :name => "gtk+",
+      :download_site => :gnome,
+      :label => "gtk+",
+      :version => "3.6.4",
+      :configure_args => [],
+      :compression_method => "xz",
+      :need_autoreconf => true,
+      :patches => [
+        "gtk+-3.6.4-add-missing-exeext.diff",
+        "gtk+-3.6.4-backport-gtk-launch-build-error.diff",
+      ],
+    }
+  ]
   _package.required_ruby_version = ">= 1.9.2"
   _package.post_install_message = "This library is experimental."
 end
 package.define_tasks
-
-namespace :win32 do
-  desc "create default gtkrc"
-  task :gtkrc do
-    gtkrc_path = File.join("vendor", "local", "etc", "gtk-2.0", "gtkrc")
-    mkdir_p(File.dirname(gtkrc_path))
-    File.open(gtkrc_path, "w") do |gtkrc|
-      gtkrc.puts('gtk-theme-name = "MS-Windows"')
-    end
-  end
-  task :download => :gtkrc
-end
