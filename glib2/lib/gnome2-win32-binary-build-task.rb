@@ -163,6 +163,18 @@ class GNOME2Win32BinaryBuildTask
     package_root_dir + "patches"
   end
 
+  def glib2_dir
+    package_root_dir.parent + "glib2"
+  end
+
+  def glib2_include_path
+    "#{glib2_dir}/vendor/local/include"
+  end
+
+  def glib2_lib_path
+    "#{glib2_dir}/vendor/local/lib"
+  end
+
   def rcairo_win32_dir
     package_root_dir.parent.parent + "rcairo.win32"
   end
@@ -194,6 +206,9 @@ class GNOME2Win32BinaryBuildTask
 
   def cppflags(package)
     include_paths = package[:include_paths] || []
+    if @configuration.build_dependencies.include?("glib2")
+      include_paths += [glib2_include_path]
+    end
     include_paths += [
       rcairo_win32_include_path,
       dist_dir + 'include',
@@ -206,6 +221,9 @@ class GNOME2Win32BinaryBuildTask
 
   def ldflags(package)
     library_paths = package[:library_paths] || []
+    if @configuration.build_dependencies.include?("glib2")
+      library_paths += [glib2_lib_path]
+    end
     library_paths += [
       rcairo_win32_lib_path,
       dist_dir + 'lib',
