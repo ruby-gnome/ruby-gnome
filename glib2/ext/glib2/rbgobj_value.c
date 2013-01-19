@@ -22,6 +22,8 @@
 #include "rbgprivate.h"
 
 /**********************************************************************/
+#define RG_TARGET_NAMESPACE rbgobj_cValue
+#define _SELF(self) RVAL2GVALUE(self)
 
 static ID id_to_s;
 static GQuark qRValueToGValueFunc;
@@ -332,10 +334,50 @@ rbgobj_gc_mark_gvalue(GValue* value)
 
 /**********************************************************************/
 
+static VALUE
+rg_initialize(VALUE self, VALUE rb_gtype, VALUE rb_value)
+{
+    GValue value = G_VALUE_INIT;
+
+    g_value_init(&value, NUM2INT(rb_to_int(rb_gtype)));
+    rbgobj_rvalue_to_gvalue(rb_value, &value);
+    G_INITIALIZE(self, &value);
+    g_value_unset(&value);
+
+    return Qnil;
+}
+
+static VALUE
+rg_type(VALUE self)
+{
+    GValue *value;
+
+    value = _SELF(self);
+
+    return rbgobj_gtype_new(value->g_type);
+}
+
+static VALUE
+rg_value(VALUE self)
+{
+    GValue *value;
+
+    value = _SELF(self);
+
+    return GVAL2RVAL(value);
+}
+
 void
 Init_gobject_gvalue(void)
 {
+    VALUE RG_TARGET_NAMESPACE;
+
     id_to_s = rb_intern("to_s");
     qRValueToGValueFunc = g_quark_from_static_string("__ruby_r2g_func__");
     qGValueToRValueFunc = g_quark_from_static_string("__ruby_g2r_func__");
+
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VALUE, "Value", mGLib);
+    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(type, 0);
+    RG_DEF_METHOD(value, 0);
 }
