@@ -21,7 +21,7 @@ package = GNOME2Package.new do |_package|
       :name => "glib",
       :download_site => :gnome,
       :label => "GLib",
-      :version => "2.35.3",
+      :version => "2.34.3",
       :configure_args => [
         "LIBFFI_CFLAGS=-I#{libffi_include_dir}",
         "LIBFFI_LIBS=-L#{libffi_lib_dir} -lffi",
@@ -61,7 +61,7 @@ package = GNOME2Package.new do |_package|
       :name => "glib-networking",
       :download_site => :gnome,
       :label => "glib-networking",
-      :version => "2.35.3",
+      :version => "2.34.3",
       :configure_args => [
         "--without-libproxy",
         "--without-gnome-proxy",
