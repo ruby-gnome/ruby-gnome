@@ -64,17 +64,26 @@ class GNOME2Win32BinaryBuildTask
 
   def define_build_tasks
     namespace :build do
-      task :prepare do
-        depended_packages = @configuration.build_dependencies
-        use_packages = [@configuration.package.name] + depended_packages
-        pkg_config_path = use_packages.collect do |package|
-          "../#{package}/#{@configuration.relative_binary_dir}/lib/pkgconfig"
+      prepare_task_names = []
+      namespace :prepare do
+        prepare_task_names << "pkg_config"
+        task :pkg_config do
+          depended_packages = @configuration.build_dependencies
+          use_packages = [@configuration.package.name] + depended_packages
+          pkg_config_path = use_packages.collect do |package|
+            "../#{package}/#{@configuration.relative_binary_dir}/lib/pkgconfig"
+          end
+          ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
+            File.expand_path(path)
+          end.join(":")
+          ENV["PKG_CONFIG_LIBDIR"] = rcairo_win32_pkgconfig_path
         end
-        ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
-          File.expand_path(path)
-        end.join(":")
-        ENV["PKG_CONFIG_LIBDIR"] = rcairo_win32_pkgconfig_path
       end
+
+      full_prepare_task_names = prepare_task_names.collect do |name|
+        "win32:builder:build:prepare:#{name}"
+      end
+      task :prepare => full_prepare_task_names
 
       build_packages.each do |package|
         download_task = "win32:builder:download:#{package[:name]}"
