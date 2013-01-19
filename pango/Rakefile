@@ -7,8 +7,19 @@ package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/Pango is a Ruby binding of pango-1.x."
   _package.description = "Ruby/Pango is a Ruby binding of pango-1.x."
   _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "glib2"]
-  _package.win32.packages = ["pango"]
+  _package.win32.packages = []
   _package.win32.dependencies = []
+  _package.win32.build_dependencies = ["glib2"]
+  _package.win32.build_packages = [
+    {
+      :name => "pango",
+      :download_site => :gnome,
+      :label => "pango",
+      :version => "1.32.6",
+      :configure_args => [],
+      :compression_method => "xz",
+    }
+  ]
 end
 package.define_tasks
 
