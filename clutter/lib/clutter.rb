@@ -35,6 +35,7 @@ module Clutter
       loader.load("Clutter")
       require "clutter/actor"
       require "clutter/actor-iter"
+      require "clutter/animatable"
       require "clutter/cairo"
       require "clutter/color"
       require "clutter/event"
