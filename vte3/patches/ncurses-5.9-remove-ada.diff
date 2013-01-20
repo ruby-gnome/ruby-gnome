@@ -1,0 +1,187 @@
+--- ncurses-5.9/configure.in.orig	2011-03-28 09:22:26.000000000 +0900
++++ ncurses-5.9/configure.in	2013-01-20 10:22:18.652343063 +0900
+@@ -45,7 +45,7 @@
+ CF_WITH_REL_VERSION(NCURSES)
+ CF_WITH_ABI_VERSION
+ 
+-CF_CHECK_CACHE([AC_CANONICAL_SYSTEM])
++AC_CANONICAL_BUILD
+ AC_ARG_WITH(system-type,
+ [  --with-system-type=XXX  test: override derived host system-type],
+ [AC_MSG_WARN(overriding system type to $withval)
+@@ -115,13 +115,6 @@
+ 	[cf_with_cxx_binding=$cf_with_cxx])
+ AC_MSG_RESULT($cf_with_cxx_binding)
+ 
+-AC_MSG_CHECKING(if you want to build with Ada95)
+-AC_ARG_WITH(ada,
+-	[  --without-ada           suppress check for Ada95, don't build demo],
+-	[cf_with_ada=$withval],
+-	[cf_with_ada=yes])
+-AC_MSG_RESULT($cf_with_ada)
+-
+ AC_MSG_CHECKING(if you want to install manpages)
+ AC_ARG_WITH(manpages,
+ 	[  --without-manpages      suppress install of manpages],
+@@ -1234,7 +1227,6 @@
+ AC_MSG_RESULT($with_warnings)
+ 
+ if test "x$with_warnings" = "xyes"; then
+- 	CF_ADD_ADAFLAGS(-gnatg)
+ 	CF_GCC_WARNINGS(Wdeclaration-after-statement Wextra Wno-unknown-pragmas Wswitch-enum)
+ 	if test "$cf_with_cxx" = yes ; then
+ 		CF_GXX_WARNINGS(Wno-unused)
+@@ -1255,8 +1247,6 @@
+ 	then
+ 		AC_DEFINE(NDEBUG)
+ 		CPPFLAGS="$CPPFLAGS -DNDEBUG"
+-	else
+-		CF_ADD_ADAFLAGS(-gnata)
+ 	fi
+ fi
+ 
+@@ -1292,15 +1282,11 @@
+ 
+ if test "$cf_with_trace" = yes ; then
+ 	LIB_TRACING=all
+-	ADA_TRACE=TRUE
+ 	CF_ADD_CFLAGS(-DTRACE)
+ else
+ 	LIB_TRACING=DEBUG
+-	ADA_TRACE=FALSE
+ fi
+ 
+-AC_SUBST(ADA_TRACE)
+-
+ ###	Checks for libraries.
+ case $cf_cv_system_name in #(vi
+ *mingw32*) #(vi
+@@ -1573,60 +1559,6 @@
+ fi
+ AC_SUBST(USE_CXX_BOOL)
+ 
+-CF_HELP_MESSAGE(Ada95 Binding Options:)
+-
+-dnl If the Ada95 source-tree is present, add that to the build unless it will
+-dnl not work, or was not requested.
+-if test -f "${srcdir}/Ada95/Makefile.in" ; then
+-
+-dnl libtool does not know anything about GNAT, though a change made in 1998
+-dnl provided for it "someday".  Disable the ada subtree if we are using
+-dnl libtool -TD 20070714
+-	if test "$cf_with_ada" != "no" ; then
+-		if test "$with_libtool" != "no"; then
+-			AC_MSG_WARN(libtool does not support Ada - disabling feature)
+-			cf_with_ada=no
+-		fi
+-	fi
+-
+-dnl Check for availability of GNU Ada Translator (GNAT).
+-dnl At the moment we support no other Ada95 compiler.
+-	if test "$cf_with_ada" != "no" ; then
+-		CF_PROG_GNAT
+-		if test	"$cf_cv_prog_gnat_correct" = yes; then
+-			CF_ADD_ADAFLAGS(-gnatpn)
+-
+-			# make ADAFLAGS consistent with CFLAGS
+-			case "$CFLAGS" in
+-			*-g*)
+-				CF_ADD_ADAFLAGS(-g)
+-				;;
+-			esac
+-			case "$CFLAGS" in
+-			*-O*)
+-				CF_ADD_ADAFLAGS(-O3)
+-				;;
+-			esac
+-
+-			CF_GNAT_GENERICS
+-			CF_GNAT_SIGINT
+-			CF_GNAT_PRAGMA_UNREF
+-			CF_GNAT_PROJECTS
+-
+-			CF_WITH_ADA_COMPILER
+-
+-			cf_ada_package=terminal_interface
+-			AC_SUBST(cf_ada_package)
+-
+-			CF_WITH_ADA_INCLUDE
+-			CF_WITH_ADA_OBJECTS
+-			CF_WITH_ADA_SHAREDLIB
+-		fi
+-	fi
+-else
+-	cf_with_ada=no
+-fi
+-
+ ### Construct the ncurses library-subsets, if any, from this set of keywords:
+ ###	none, base, ext_funcs, ext_tinfo, ticlib, termlib, widechar
+ ###
+@@ -1681,7 +1613,6 @@
+ 
+ ### Construct the list of include-directories to be generated
+ CF_INCLUDE_DIRS
+-CF_ADA_INCLUDE_DIRS
+ 
+ ### Build up pieces for makefile rules
+ AC_MSG_CHECKING(default library suffix)
+@@ -1814,10 +1745,6 @@
+     OBJEXT=lo
+ fi
+ 
+-# needed for Ada95
+-TINFO_ARGS2=`echo "$TINFO_ARGS" | sed -e 's,-L\.\./,-L../../,'`
+-AC_SUBST(TINFO_ARGS2)
+-
+ case $DFT_LWR_MODEL in
+ normal|debug|profile)
+ 	CF_LDFLAGS_STATIC
+@@ -1857,17 +1784,8 @@
+ 
+ CF_SRC_MODULES($modules_to_build)
+ 
+-if test "$cf_with_ada" != "no" && test "$cf_cv_prog_gnat_correct" != "no"; then
+-   SUB_MAKEFILES="$SUB_MAKEFILES Ada95/gen/adacurses${DFT_ARG_SUFFIX}-config:Ada95/gen/adacurses-config.in"
+-   SUB_MAKEFILES="$SUB_MAKEFILES man/adacurses${DFT_ARG_SUFFIX}-config.1:man/MKada_config.in"
+-fi
+-
+ CF_DIRS_TO_MAKE
+ 
+-# symbols that differ when compiling Ada95 by itself.
+-NCURSES_SHLIB2='sh $(top_srcdir)/misc/shlib'
+-AC_SUBST(NCURSES_SHLIB2)
+-
+ # values to use as strings
+ AC_DEFINE_UNQUOTED(NCURSES_PATHSEP,'$PATH_SEPARATOR')
+ 
+@@ -1914,9 +1832,6 @@
+ fi
+ AC_SUBST(MAKE_TESTS)
+ 
+-ADAHTML_DIR=../../doc/html/ada
+-AC_SUBST(ADAHTML_DIR)
+-
+ SUB_SCRIPTS=
+ case $cf_cv_system_name in #(vi
+ *mingw32*) #(vi
+@@ -1937,12 +1852,6 @@
+ 	CF_PRG_RULES([$srcdir/test/mk-test.awk INSTALL=no ECHO_LINK="$ECHO_LINK"], test)
+ fi
+ CF_LIB_RULES($SRC_SUBDIRS)
+-
+-if test "x$cf_with_ada" != xno ; then
+-if test -z "$USE_OLD_MAKERULES" ; then
+-	$AWK -f $srcdir/Ada95/mk-1st.awk <$srcdir/Ada95/src/modules >>Ada95/src/Makefile
+-fi
+-fi
+ ],[
+ ### Special initialization commands, used to pass information from the
+ ### configuration-run into config.status
+@@ -1991,7 +1900,6 @@
+ cf_cv_shlib_version="$cf_cv_shlib_version"
+ cf_cv_shlib_version_infix="$cf_cv_shlib_version_infix"
+ cf_cv_system_name="$cf_cv_system_name"
+-cf_with_ada="$cf_with_ada"
+ cf_with_cxx_binding="$cf_with_cxx_binding"
+ cf_with_manpages="$cf_with_manpages"
+ cf_with_tests="$cf_with_tests"

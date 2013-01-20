@@ -1,0 +1,13 @@
+--- ncurses-5.9/ncurses/tinfo/MKcaptab.sh.orig	2010-12-26 08:43:58.000000000 +0900
++++ ncurses-5.9/ncurses/tinfo/MKcaptab.sh	2013-01-20 10:20:20.799215399 +0900
+@@ -52,8 +52,8 @@
+ 
+ EOF
+ 
+-./make_hash 1 info $OPT1 <$DATA
+-./make_hash 3 cap  $OPT1 <$DATA
++./make_hash.exe 1 info $OPT1 <$DATA
++./make_hash.exe 3 cap  $OPT1 <$DATA
+ 
+ $AWK -f $OPT2 bigstrings=$OPT1 tablename=capalias <$DATA
+ 
