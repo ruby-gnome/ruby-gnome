@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -32,7 +32,7 @@ package = GNOME2Package.new do |_package|
       :name => "gobject-introspection",
       :download_site => :gnome,
       :label => "gobject-introspection",
-      :version => "1.35.3",
+      :version => "1.35.4",
       :configure_args => [],
       :compression_method => "xz",
     },
