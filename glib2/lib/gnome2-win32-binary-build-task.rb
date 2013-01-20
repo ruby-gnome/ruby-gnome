@@ -104,11 +104,16 @@ class GNOME2Win32BinaryBuildTask
             (package[:patches] || []).each do |patch|
               sh("patch -p1 < #{patches_dir}/#{patch}")
             end
-            sh("./autogen.sh") if package[:need_autogen]
-            sh("autoreconf -i") if package[:need_autoreconf]
             (package[:remove_paths] || []).each do |path|
               rm_rf(path)
             end
+            if package[:need_autogen]
+              unless File.executable?("autogen.sh")
+                chmod(0755, "autogen.sh")
+              end
+              sh("./autogen.sh")
+            end
+            sh("autoreconf --install") if package[:need_autoreconf]
             sh("./configure",
                "CPPFLAGS=#{cppflags(package)}",
                "LDFLAGS=#{ldflags(package)}",
