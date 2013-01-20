@@ -1,0 +1,33 @@
+--- gtk+-2.24.14/gtk/Makefile.am.orig	2012-08-25 08:38:09.000000000 +0900
++++ gtk+-2.24.14/gtk/Makefile.am	2013-01-20 09:46:54.304458544 +0900
+@@ -1386,7 +1386,7 @@
+ gtk_update_icon_cache_program = $(GTK_UPDATE_ICON_CACHE)
+ else
+ gtk_update_icon_cache_program =							\
+-	   ./gtk-update-icon-cache
++	   ./gtk-update-icon-cache$(EXEEXT)
+ endif
+ 
+ gtkbuiltincache.h: @REBUILD@ stamp-icons
+--- gtk+-2.24.14/modules/input/Makefile.am.orig	2011-08-16 11:30:52.000000000 +0900
++++ gtk+-2.24.14/modules/input/Makefile.am	2013-01-20 09:47:21.819837211 +0900
+@@ -189,8 +189,8 @@
+ 	@if $(RUN_QUERY_IMMODULES_TEST) ; then \
+ 	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0 ; \
+ 	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0 ; \
+-	  echo "$(top_builddir)/gtk/gtk-query-immodules-2.0 > $(DESTDIR)$(sysconfdir)/gtk-2.0/gtk.immodules" ; \
+-	  $(top_builddir)/gtk/gtk-query-immodules-2.0 > $(DESTDIR)$(sysconfdir)/gtk-2.0/gtk.immodules ; \
++	  echo "$(top_builddir)/gtk/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(sysconfdir)/gtk-2.0/gtk.immodules" ; \
++	  $(top_builddir)/gtk/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(sysconfdir)/gtk-2.0/gtk.immodules ; \
+ 	else \
+ 	  echo "***" ; \
+ 	  echo "*** Warning: gtk.immodules not built" ; \
+@@ -238,7 +238,7 @@
+ included-modules: $(noinst_LTLIBRARIES)
+ 
+ gtk.immodules: Makefile.am $(module_LTLIBRARIES)
+-	$(top_builddir)/gtk/gtk-query-immodules-2.0 $(module_LTLIBRARIES) > gtk.immodules
++	$(top_builddir)/gtk/gtk-query-immodules-2.0$(EXEEXT) $(module_LTLIBRARIES) > gtk.immodules
+ 
+ CLEANFILES = gtk.immodules
+ 

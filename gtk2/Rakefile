@@ -6,70 +6,35 @@ require 'gnome2-raketask'
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
   _package.description = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
-  _package.dependency.gem.runtime = ["atk",
-                                     "pango",
-                                     "gdk_pixbuf2"]
-  _package.win32.packages = ["gtk+"]
+  _package.dependency.gem.runtime = ["atk", "pango", "gdk_pixbuf2"]
+  _package.win32.packages = []
   _package.win32.dependencies = []
+  _package.win32.build_dependencies = [
+    "glib2", "atk", "pango", "gdk_pixbuf2",
+  ]
+  _package.win32.build_packages = [
+    {
+      :name => "gtk+",
+      :download_site => :gnome,
+      :label => "gtk+",
+      :version => "2.24.14",
+      :configure_args => [],
+      :compression_method => "xz",
+      :need_autoreconf => true,
+      :patches => [
+        "gtk+-2.24.14-add-missing-exeext.diff",
+      ],
+    },
+    {
+      :name => "hicolor-icon-theme",
+      :download_base_url => "http://icon-theme.freedesktop.org/releases",
+      :label => "gtk-hi-color-icon-theme",
+      :version => "0.12",
+      :configure_args => [],
+    },
+  ]
 end
 package.define_tasks
-
-class Win32HiColorIconThemeDownloader
-  include Rake::DSL
-
-  def initialize(options={})
-    @base_name = "hicolor-icon-theme"
-    @icon_theme_releases_url = "http://icon-theme.freedesktop.org/releases/"
-    output_dir = options[:output_dir] || File.join("vendor", "local")
-    @output_dir = File.expand_path(output_dir)
-  end
-
-  def download
-    escaped_base_name = Regexp.escape(@base_name)
-    agent = Mechanize.new
-    releases_page = agent.get(@icon_theme_releases_url)
-    latest_release_link = detect_latest_release_link(releases_page)
-
-    if latest_release_link.nil?
-      message = "can't find #{@base_name}: <#{@icon_theme_releases_url}>"
-      raise message
-    end
-    click_tar_gz(latest_release_link)
-  end
-
-  private
-  def detect_latest_release_link(releases_page)
-    escaped_base_name = Regexp.escape(@base_name)
-    releases_page.links.collect do |link|
-      case link.href
-      when /\A#{escaped_base_name}-([\d.]+)\.tar.gz\z/
-        version = $1
-        [version.split(/[\.\-]/).collect {|component| component.to_i}, link]
-      else
-        [[-1], nil]
-      end
-    end.sort_by do |normalized_version, link|
-      normalized_version
-    end.last[1]
-  end
-
-  def click_tar_gz(link)
-    tar_gz = link.click
-    tmp_dir = "tmp"
-    mkdir_p(tmp_dir)
-    Dir.chdir(tmp_dir) do
-      open(tar_gz.filename, "wb") do |file|
-        file.print(tar_gz.body)
-      end
-      sh("tar", "xzf", tar_gz.filename)
-      Dir.chdir(File.basename(tar_gz.filename, ".tar.gz")) do
-        sh("./configure", "--prefix=#{@output_dir}")
-        sh("make", "install")
-      end
-    end
-    rm_rf(tmp_dir)
-  end
-end
 
 namespace :win32 do
   desc "create default gtkrc"
@@ -81,12 +46,7 @@ namespace :win32 do
     end
   end
 
-  namespace :downloader do
-    task :download_hicolor_icon_theme do
-      downloader = Win32HiColorIconThemeDownloader.new
-      downloader.download
-    end
-
-    task :after => [:download_hicolor_icon_theme, "win32:gtkrc"]
+  namespace :builder do
+    task :after => ["win32:gtkrc"]
   end
 end
