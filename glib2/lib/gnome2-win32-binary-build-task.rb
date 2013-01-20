@@ -106,6 +106,9 @@ class GNOME2Win32BinaryBuildTask
             end
             sh("./autogen.sh") if package[:need_autogen]
             sh("autoreconf -i") if package[:need_autoreconf]
+            (package[:remove_paths] || []).each do |path|
+              rm_rf(path)
+            end
             sh("./configure",
                "CPPFLAGS=#{cppflags(package)}",
                "LDFLAGS=#{ldflags(package)}",
