@@ -18,22 +18,18 @@ package = GNOME2Package.new do |_package|
       :download_base_url => "http://ftp.gnu.org/pub/gnu/ncurses",
       :label => "ncurses",
       :version => "5.9",
-      :need_autogen => true,
       :configure_args => [
         "--enable-sp-funcs",
         "--enable-term-driver",
         "--with-shared",
         "--without-normal",
+        "--without-progs",
+        "--without-tests",
       ],
       :patches => [
-        "ncurses-5.9-remove-ada.diff",
-        "ncurses-5.9-remove-ada-aclocal.diff",
+        "ncurses-5.9-support-mingw32.diff",
         "ncurses-5.9-add-missing-exe.diff",
-        "ncurses-5.9-add-autogen.diff",
       ],
-      :remove_paths => [
-        "aclocal.m4",
-      ]
     },
     {
       :name => "vte",

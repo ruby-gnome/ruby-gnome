@@ -1,0 +1,20 @@
+--- ncurses-5.9/configure.orig	2011-04-01 08:35:51.000000000 +0900
++++ ncurses-5.9/configure	2013-01-20 16:03:44.730515836 +0900
+@@ -5662,7 +5662,7 @@
+ 		fi
+ 		cf_cv_rm_so_locs=yes
+ 		;;
+-	linux*|gnu*|k*bsd*-gnu) #(vi
++	linux*|gnu*|k*bsd*-gnu|mingw32) #(vi
+ 		if test "$DFT_LWR_MODEL" = "shared" ; then
+ 			LOCAL_LDFLAGS="${LD_RPATH_OPT}\$(LOCAL_LIBDIR)"
+ 			LOCAL_LDFLAGS2="$LOCAL_LDFLAGS"
+@@ -5678,7 +5678,7 @@
+ 		cf_cv_shared_soname='`basename $@`'
+ 	fi
+ 
+-		MK_SHARED_LIB='${CC} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname',-stats,-lc -o $@'
++		MK_SHARED_LIB='${CC} ${CFLAGS} -shared -Wl,-soname,'$cf_cv_shared_soname',-stats -o $@'
+ 		;;
+ 	openbsd[2-9].*) #(vi
+ 		if test "$DFT_LWR_MODEL" = "shared" ; then
