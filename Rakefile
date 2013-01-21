@@ -349,15 +349,6 @@ namespace :gem do
   end
 end
 
-def guess_copy_source_repository_uri
-  info_xml = `svn info --xml`
-  if /<url>(.+?)<\/url>/ =~ info_xml
-    $1
-  else
-    raise "can't find repository URI from:\n#{info_xml}"
-  end
-end
-
 desc "tag the current release"
 task :tag do
   sh("git", "tag", "-a", version, "-m", "release #{version}!!!")
