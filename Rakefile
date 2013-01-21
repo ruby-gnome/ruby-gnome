@@ -193,9 +193,6 @@ namespace :dist do
           :packages => gnome2_packages,
         },
       }
-      if ruby_version.start_with?("1.8.")
-        packages.delete("gtk3")
-      end
       namespace "ruby-#{ruby_version}" do
         packages.each do |name, attributes|
           namespace name do
