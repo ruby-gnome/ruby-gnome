@@ -2,6 +2,107 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.2.0: 2013-01-22
+
+GTK+ 3 support release!
+
+=== Changes
+
+==== All
+
+  * Added ruby-gtk3 package. Here is a list:
+    * Ruby/GLib2
+    * Ruby/ATK
+    * Ruby/Pango
+    * Ruby/GdkPixbuf2
+    * Ruby/GDK3
+    * Ruby/GTK3
+
+==== Ruby/GLib2
+
+  * Imrpovements
+    * Supported custom VALUE <-> GBoxed conversion
+    * Supported VALUE <-> GBoxed conversion by RVAL2GOBJ
+    * Added GLib::Source::REMOVE
+    * Added GLib::Source::CONTINUE
+    * Added rbgobj_make_boxed_raw()
+    * Added GLib::Value for internal use
+    * [windows] Updated to the latest GLib: 2.28.8-1 -> 2.34.3
+  * Changes
+    * Removed deprecated GLib::Win32.get_package_installation_directory
+    * Removed deprecated GLib::Win32.get_package_installation_subdirectory
+    * Added user_data to RGConvertTable callbacks
+    * rbgobj_convert_define() copies passed RGConvertTable
+    * Removed deprecated G_DEF_FUNDAMENTAL. Use RG_DEF_CONVERSION instead
+
+==== Ruby/ATK
+
+  * Improvements
+    * [windows] Updated to the latest ATK: 1.32.0 -> 2.6.0
+
+==== Ruby/Pango
+
+  * Improvements
+    * [windows] Updated to the latest Pango: 1.28.3 -> 1.32.6
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+    * [windows] Updated to the latest gdk-pixbuf: 2.24.0 -> 2.26.5
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Removed needless not copy flag from Allocation
+    * [windows] Updated to the latest GTK+ 2: 2.24.8 -> 2.24.14
+
+==== Ruby/GDK3
+
+  * Improvements
+    * [windows] Supported: 3.6.4
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Removed needless not copy flag from Allocation
+    * [windows] Supported: 3.6.4
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported over loaded method
+    * Supported over loaded constructor
+    * Supported GBoxed object
+    * Supported char *
+    * Supported GInterface
+    * Supported CallableInfo
+    * Supported may be null
+    * Supported union object
+    * Supported not GBoxed struct
+    * Supported out parameter
+    * Supported C array
+    * Added "?" suffix to predicate method name
+    * Supported SourceFunc callback
+    * Supported GValue
+    * Added GObjectIntrospection::Loader.register_boxed_class_converter
+    * Supported inout parameter
+    * Supported binary data array
+    * [windows] Updated to the latest GObject Introspection: 1.35.3 -> 1.35.4
+  * Changes
+    * ArgInfo#[] -> ArgInfo#get_arg
+
+==== Ruby/CairoGObject
+
+  * Added
+
+==== Ruby/Clutter
+
+  * Added
+
+==== Ruby/ClutterGtk
+
+  * Added
+
 == Ruby-GNOME2 1.1.9: 2012-12-29
 
 This is a experimental GObjectIntrospection support release.
