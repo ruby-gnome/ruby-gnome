@@ -90,12 +90,25 @@ task :test => [:build] do
 end
 
 gtk2_base_name = "ruby-gtk2"
+gtk3_base_name = "ruby-gtk3"
 gnome2_base_name = "ruby-gnome2-all"
 
 gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
-gnome2_packages = gtk2_packages + ["cairo-gobject", "gobject-introspection",
-                                   "goocanvas", "gstreamer",
-                                   "gtksourceview2", "poppler", "rsvg2", "vte"]
+gtk3_packages = gtk2_pacakges - ["gtk2"] + ["gdk3", "gtk3"]
+gnome2_packages = gtk2_packages + gtk3_pacakges + [
+  "goocanvas",
+  "gstreamer",
+  "gtksourceview2",
+  "poppler",
+  "rsvg2",
+  "vte",
+  "vte3",
+  "cairo-gobject",
+  "gobject-introspection",
+  "gtksourceview3",
+]
+gnome2_packages = gnome2_packages.uniq
+
 namespace :dist do
   base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
                 "README", "Rakefile",
@@ -103,6 +116,11 @@ namespace :dist do
   desc "make Ruby/GTK2 package"
   task :gtk2 do
     package(gtk2_base_name, base_files + gtk2_packages)
+  end
+
+  desc "make Ruby/GTK3 package"
+  task :gtk3 do
+    package(gtk3_base_name, base_files + gtk3_packages)
   end
 
   desc "make Ruby/GNOME2 package"
@@ -166,6 +184,10 @@ namespace :dist do
           :archive_name => archive_name(gtk2_base_name),
           :packages => gtk2_packages,
         },
+        "gtk3" => {
+          :archive_name => archive_name(gtk3_base_name),
+          :packages => gtk3_packages,
+        },
         "gnome2" => {
           :archive_name => archive_name(gnome2_base_name),
           :packages => gnome2_packages,
@@ -227,7 +249,7 @@ namespace :dist do
   task :test => test_tasks
 end
 desc "make all packages"
-task :dist => ["dist:gtk2", "dist:gnome2"]
+task :dist => ["dist:gtk2", "dist:gtk3", "dist:gnome2"]
 
 directory "misc"
 file "misc/release.rb" => "misc" do |task|
@@ -246,7 +268,8 @@ task :release => ["misc/release.rb", :dist] do
   project_name = "Ruby-GNOME 2"
   package_name = "ruby-gnome2"
   release_name = "ruby-gnome2-#{version}"
-  archive_names = [gtk2_base_name, gnome2_base_name].collect do |base_name|
+  package_base_names = [gtk2_base_name, gtk3_base_name, gnome2_base_name]
+  archive_names = package_base_names.collect do |base_name|
     archive_name(base_name)
   end
   ruby("misc/release.rb", sf_user_name, project_id, project_name,
