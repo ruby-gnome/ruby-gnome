@@ -6,6 +6,7 @@ Ruby/CairoGObject is a Ruby binding of cairo-gobject.
 
 * Ruby/GLib2 in
   [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
+* [rcairo](https://github.com/rcairo/rcairo)
 * [cairo](http://cairographics.org/) GObject binding
 
 ## Install
