@@ -13,32 +13,32 @@ package = GNOME2Package.new do |_package|
     "glib2", "atk", "pango", "gdk_pixbuf2", "gdk3",
   ]
   _package.win32.build_packages = [
-    {
-      :name => "ncurses",
-      :download_base_url => "http://ftp.gnu.org/pub/gnu/ncurses",
-      :label => "ncurses",
-      :version => "5.9",
-      :configure_args => [
-        "--enable-sp-funcs",
-        "--enable-term-driver",
-        "--with-shared",
-        "--without-normal",
-        "--without-progs",
-        "--without-tests",
-      ],
-      :patches => [
-        "ncurses-5.9-support-mingw32.diff",
-        "ncurses-5.9-add-missing-exe.diff",
-      ],
-    },
-    {
-      :name => "vte",
-      :download_site => :gnome,
-      :label => "vte",
-      :version => "0.34.2",
-      :configure_args => [],
-      :compression_method => "xz",
-    }
+    # {
+    #   :name => "ncurses",
+    #   :download_base_url => "http://ftp.gnu.org/pub/gnu/ncurses",
+    #   :label => "ncurses",
+    #   :version => "5.9",
+    #   :configure_args => [
+    #     "--enable-sp-funcs",
+    #     "--enable-term-driver",
+    #     "--with-shared",
+    #     "--without-normal",
+    #     "--without-progs",
+    #     "--without-tests",
+    #   ],
+    #   :patches => [
+    #     "ncurses-5.9-support-mingw32.diff",
+    #     "ncurses-5.9-add-missing-exe.diff",
+    #   ],
+    # },
+    # {
+    #   :name => "vte",
+    #   :download_site => :gnome,
+    #   :label => "vte",
+    #   :version => "0.34.2",
+    #   :configure_args => [],
+    #   :compression_method => "xz",
+    # }
   ]
   _package.required_ruby_version = ">= 1.9.2"
   _package.post_install_message = "This library is experimental."
