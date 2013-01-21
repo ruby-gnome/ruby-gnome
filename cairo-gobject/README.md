@@ -15,7 +15,7 @@ Ruby/CairoGObject is a Ruby binding of cairo-gobject.
 
 ## License
 
-Copyright (c) 2013 Ruby-GNOME2 Project Team
+Copyright (c) 2012-2013 Ruby-GNOME2 Project Team
 
 This program is free software. You can distribute/modify this program
 under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
