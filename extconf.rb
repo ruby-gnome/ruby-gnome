@@ -11,7 +11,16 @@ require 'mkmf'
 require 'fileutils'
 require 'pathname'
 
-priorlibs = ["glib2", "gio2", "gdk_pixbuf2", "pango", "atk", "gtk2"]
+priorlibs = [
+  "glib2",
+  "gio2",
+  "gdk_pixbuf2",
+  "pango",
+  "atk",
+  "gtk2",
+  "gdk3",
+  "gtk3",
+]
 
 #
 # detect sub-directories
