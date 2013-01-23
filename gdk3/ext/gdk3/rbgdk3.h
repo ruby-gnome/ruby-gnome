@@ -46,7 +46,6 @@
 #define RVAL2ATOM(atom) (get_gdkatom(atom))
 
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
-#define GDK_TYPE_REGION (gdk_region_get_type())
 #define GDK_TYPE_ATOM (gdk_atom_get_type())
 #define GDK_TYPE_WINDOW_ATTR (gdk_windowattr_get_type())
 #define GDK_TYPE_TIME_COORD (gdk_timecoord_get_type())
@@ -63,7 +62,6 @@ GList *rbgdk_rval2gdkpixbufglist(VALUE value);
 extern GType gdk_windowattr_get_type(void);
 extern GType gdk_atom_get_type(void);
 extern GType gdk_geometry_get_type(void);
-extern GType gdk_region_get_type(void);
 extern GType gdk_timecoord_get_type(void);
 
 extern GdkAtom get_gdkatom(VALUE atom);
