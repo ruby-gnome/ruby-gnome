@@ -225,13 +225,11 @@ namespace :dist do
           end
         end
 
-        package_test_tasks = []
         packages.each do |name, attributes|
-          tasks = attributes[:packages].collect do |sub_package_name|
+          test_tasks = attributes[:packages].collect do |sub_package_name|
             "dist:test:ruby-#{ruby_version}:#{name}:#{sub_package_name}"
           end
-          package_test_tasks.concat(tasks)
-          task name => package_test_tasks
+          task name => test_tasks
         end
       end
 
