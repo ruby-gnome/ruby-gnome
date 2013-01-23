@@ -1,3 +1,8 @@
+install-so: install-headers
+install-headers:
+	$(INSTALL_DATA) $(srcdir)/rbgio2.h $(RUBYARCHDIR)
+	$(INSTALL_DATA) $(srcdir)/rbgio2conversions.h $(RUBYARCHDIR)
+
 install: install-pc
 install-pc:
 	if test -n "$(pkgconfigdir)"; then			\
