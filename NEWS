@@ -92,7 +92,6 @@ GTK+ 3 support release!
     * Added GObjectIntrospection::Loader.register_boxed_class_converter
     * Supported inout parameter
     * Supported binary data array
-    * [windows] Updated to the latest GObject Introspection: 1.35.3 -> 1.35.4
   * Changes
     * ArgInfo#[] -> ArgInfo#get_arg
 
