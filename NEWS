@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 1.2.0: 2013-01-22
+== Ruby-GNOME2 1.2.0: 2013-01-24
 
 GTK+ 3 support release!
 
@@ -34,6 +34,11 @@ GTK+ 3 support release!
     * Added user_data to RGConvertTable callbacks
     * rbgobj_convert_define() copies passed RGConvertTable
     * Removed deprecated G_DEF_FUNDAMENTAL. Use RG_DEF_CONVERSION instead
+
+==== Ruby/GIO2
+
+  * Imrpovements
+    * Installed headers
 
 ==== Ruby/ATK
 
