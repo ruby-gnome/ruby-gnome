@@ -314,6 +314,7 @@ namespace :gem do
       "goocanvas",
       "vte",
       "vte3",
+      "gtksourceview3",
     ]
     win32_gnome2_packages = gnome2_packages - win32_unsupported_packages
     desc "build all Windows gems"
