@@ -20,7 +20,7 @@ GTK+ 3 support release!
 
 ==== Ruby/GLib2
 
-  * Imrpovements
+  * Improvements
     * Supported custom VALUE <-> GBoxed conversion
     * Supported VALUE <-> GBoxed conversion by RVAL2GOBJ
     * Added GLib::Source::REMOVE
@@ -37,7 +37,7 @@ GTK+ 3 support release!
 
 ==== Ruby/GIO2
 
-  * Imrpovements
+  * Improvements
     * Installed headers
 
 ==== Ruby/ATK
