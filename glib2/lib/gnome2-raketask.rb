@@ -112,8 +112,13 @@ class GNOME2Package
     define_win32_build_task
   end
 
+  def so_base_name
+    @name.gsub(/-/, "_")
+  end
+
   def define_win32_extension_task
-    Rake::ExtensionTask.new(@name, @spec) do |ext|
+    Rake::ExtensionTask.new(so_base_name, @spec) do |ext|
+      ext.ext_dir = "ext/#{@name}"
       ext.cross_compile = true
       ext.cross_compiling do |spec|
         if /mingw|mswin/ =~ spec.platform.to_s
