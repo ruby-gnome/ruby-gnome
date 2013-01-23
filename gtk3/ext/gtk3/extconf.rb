@@ -69,11 +69,10 @@ end
 have_header("st.h")
 have_header("ruby/st.h")
 
-STDOUT.print("checking for target... ")
+STDOUT.print("checking for targets... ")
 STDOUT.flush
-target = PKGConfig.variable(package_id, "target")
-$defs << "-DRUBY_GTK3_TARGET=\\\"#{target}\\\""
-STDOUT.print(target, "\n")
+targets = PKGConfig.variable(package_id, "targets").split(/\s+/)
+STDOUT.print(targets.join(" "), "\n")
 
 gtk_header = "gtk/gtk.h"
 have_func('gtk_plug_get_type', gtk_header)
@@ -84,12 +83,12 @@ have_header('gtk/gtkfilesystem.h') do |src|
 end
 
 xlib_header = "X11/Xlib.h"
-if target == "x11" and have_header('X11/Xlib.h') and have_library("X11")
+if targets.include?("x11") and have_header('X11/Xlib.h') and have_library("X11")
   have_func("XReadBitmapFileData", xlib_header)
   have_func("XGetErrorText", xlib_header)
 end
 
-if target != "win32" and PKGConfig.have_package('gtk+-unix-print-3.0')
+if !targets.include?("win32") and PKGConfig.have_package('gtk+-unix-print-3.0')
   $defs.push("-DHAVE_GTK_UNIX_PRINT")
 end
 
