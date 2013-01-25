@@ -23,6 +23,7 @@
 
 static ID id_call;
 static ID id_puts;
+static ID id_unpack;
 
 #define RG_TARGET_NAMESPACE cIOChannel
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
@@ -415,8 +416,6 @@ rg_write(VALUE self, VALUE buf)
     ioc_error(status, err);
     return UINT2NUM(bytes_written);
 }
-
-static ID id_unpack;
 
 static VALUE
 rg_putc(VALUE self, VALUE thechar)
