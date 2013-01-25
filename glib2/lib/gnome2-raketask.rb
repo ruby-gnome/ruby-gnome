@@ -92,7 +92,9 @@ class GNOME2Package
       s.email                 = @email
       s.homepage              = @homepage
       s.version               = version
-      s.extensions            = FileList["ext/#{@name}/extconf.rb"]
+      extensions              = FileList["ext/#{@name}/extconf.rb"]
+      extensions.existing!
+      s.extensions            = extensions
       s.require_paths         = ["lib"]
       files                   = FileList["ChangeLog", "README",
                                          "Rakefile", "extconf.rb",
