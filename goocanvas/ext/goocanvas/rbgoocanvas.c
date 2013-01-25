@@ -153,6 +153,15 @@ rg_get_item_at(VALUE self, VALUE x, VALUE y, VALUE b)
 }
 
 static VALUE
+rg_get_items_at(VALUE self, VALUE x, VALUE y, VALUE b)
+{
+    return GLIST2ARYF(goo_canvas_get_items_at(SELF(self),
+                                  NUM2DBL(x),
+                                  NUM2DBL(y),
+                                  RVAL2CBOOL(b)));
+}
+
+static VALUE
 rg_bounds(VALUE self)
 {
     double left, top, right, bottom;
@@ -188,6 +197,7 @@ Init_goocanvas(void)
     RG_DEF_METHOD(convert_from_pixels, 2);
     RG_DEF_METHOD(convert_to_pixels, 2);
     RG_DEF_METHOD(get_item_at, 3);
+    RG_DEF_METHOD(get_items_at, 3);
 
     Init_goocanvasitem(mGoo); /* Goo::CanvasItem */
     Init_goocanvastext(mGoo); /* Goo::CanvasText */
