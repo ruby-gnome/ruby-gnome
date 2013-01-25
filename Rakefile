@@ -106,6 +106,8 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "cairo-gobject",
   "gobject-introspection",
   "gtksourceview3",
+  "clutter",
+  "clutter-gtk",
 ]
 gnome2_packages = gnome2_packages.uniq
 
