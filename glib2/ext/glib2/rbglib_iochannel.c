@@ -22,6 +22,7 @@
 #include "rbgprivate.h"
 
 static ID id_call;
+static ID id_puts;
 
 #define RG_TARGET_NAMESPACE cIOChannel
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
@@ -666,7 +667,7 @@ ioc_puts_ary(VALUE ary, VALUE out, int recur)
         if (recur) {
             tmp = rb_str_new2("[...]");
         }
-        rb_io_puts(1, &tmp, out);
+        rb_funcall(out, id_puts, 1, tmp);
     }
     return Qnil;
 }
@@ -755,6 +756,7 @@ Init_glib_io_channel(void)
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
     id_call = rb_intern("call");
+    id_puts = rb_intern("puts");
     id_unpack = rb_intern("unpack");
 
     RG_DEF_METHOD(initialize, -1);
