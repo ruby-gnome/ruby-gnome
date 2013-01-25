@@ -25,6 +25,8 @@ static ID id_call;
 static ID id_puts;
 static ID id_unpack;
 
+static VALUE default_rs;
+
 #define RG_TARGET_NAMESPACE cIOChannel
 #define _SELF(s) ((GIOChannel*)RVAL2BOXED(s, G_TYPE_IO_CHANNEL))
 
@@ -679,7 +681,7 @@ rg_puts(int argc, VALUE *argv, VALUE self)
 
     /* if no argument given, print newline. */
     if (argc == 0) {
-        rg_write(self, rb_default_rs);
+        rg_write(self, default_rs);
         return Qnil;
     }
     for (i=0; i<argc; i++) {
@@ -705,7 +707,7 @@ rg_puts(int argc, VALUE *argv, VALUE self)
         rg_write(self, line);
         if (RSTRING_LEN(line) == 0 ||
             RSTRING_PTR(line)[RSTRING_LEN(line)-1] != '\n') {
-            rg_write(self, rb_default_rs);
+            rg_write(self, default_rs);
         }
     }
 
@@ -757,6 +759,9 @@ Init_glib_io_channel(void)
     id_call = rb_intern("call");
     id_puts = rb_intern("puts");
     id_unpack = rb_intern("unpack");
+
+    default_rs = rb_str_new_cstr("\n");
+    rb_gc_register_mark_object(default_rs);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_SMETHOD(open, -1);
