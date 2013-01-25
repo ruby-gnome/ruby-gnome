@@ -489,7 +489,9 @@ def install_missing_native_package(native_package_info)
     succeeded = xsystem(install_command)
   else
     if sudo
-      install_command = "#{sudo} #{install_command}"
+      prompt = "[sudo] password for %u to install <#{package}>: "
+      sudo_options = "-p #{Shellwords.escape(prompt)}"
+      install_command = "#{sudo} #{sudo_options} #{install_command}"
       succeeded = xsystem(install_command)
     else
       succeeded = false
