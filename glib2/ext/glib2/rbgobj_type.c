@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2009  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -434,8 +433,7 @@ rg_initialize(VALUE self, VALUE type)
     GType gtype;
 
     if (RVAL2CBOOL(rb_obj_is_kind_of(type, rb_cInteger))) {
-        gtype = NUM2UINT(type);
-        // XXX
+        gtype = NUM2ULONG(type);
         if (!g_type_name(gtype))
             gtype = G_TYPE_INVALID;
     } else {
@@ -445,7 +443,7 @@ rg_initialize(VALUE self, VALUE type)
     if (G_TYPE_INVALID == gtype)
         rb_raise(rb_eArgError, "invalid type");
 
-    rb_ivar_set(self, id_gtype, UINT2NUM(gtype));
+    rb_ivar_set(self, id_gtype, ULONG2NUM(gtype));
 
     return Qnil;
 }
