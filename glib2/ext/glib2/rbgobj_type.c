@@ -26,10 +26,6 @@
 /**********************************************************************/
 /* Type Mapping */
 
-#ifdef RBGOBJ_USE_DLPTR
-#include "dl.h"
-#endif
-
 static VALUE rb_cMutex;
 static VALUE lookup_class_mutex;
 
@@ -103,11 +99,7 @@ get_superclass(GType gtype)
       case G_TYPE_BOXED:
         return rb_cObject;
       case G_TYPE_POINTER:
-#ifdef RBGOBJ_USE_DLPTR
-        return rb_cDLPtrData;
-#else
         return rb_cData;
-#endif
       case G_TYPE_ENUM:
       case G_TYPE_FLAGS:
         return rb_cObject;
