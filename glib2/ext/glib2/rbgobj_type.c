@@ -724,7 +724,10 @@ _def_fundamental_type(VALUE ary, GType gtype, const char* name)
 void
 Init_gobject_gtype(void)
 {
+#if !GLIB_CHECK_VERSION(2, 35, 1)
     g_type_init();
+#endif
+
     init_typemap();
 
     /* type */
