@@ -62,4 +62,23 @@ class TestGtkListStore < Test::Unit::TestCase
     end
     assert_equal([2, 'she'], [iter[ID], iter[NAME]])
   end
+
+  def test_iter_gc
+    iterator_count = ObjectSpace.to_enum(:each_object, Gtk::TreeIter).to_a.size
+    50.times{ |i|
+      iter = @store.append
+      iter[ID] = i
+      iter[NAME] = i.to_s
+    }
+    100.times{
+      @store.iter_first
+    }
+    iter = @store.iter_first
+    while @store.remove(iter); end
+    iter = nil
+    assert_equal(0, @store.to_enum(:each).to_a.size)
+    ObjectSpace.garbage_collect
+    assert_equal(iterator_count, ObjectSpace.to_enum(:each_object, Gtk::TreeIter).to_a.size)
+  end
 end
+
