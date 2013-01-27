@@ -65,14 +65,14 @@ class TestGtkListStore < Test::Unit::TestCase
 
   def test_iter_gc
     iterator_count = ObjectSpace.to_enum(:each_object, Gtk::TreeIter).to_a.size
-    50.times{ |i|
+    50.times do |i|
       iter = @store.append
       iter[ID] = i
       iter[NAME] = i.to_s
-    }
-    100.times{
+    end
+    100.times do
       @store.iter_first
-    }
+    end
     iter = @store.iter_first
     while @store.remove(iter); end
     iter = nil
