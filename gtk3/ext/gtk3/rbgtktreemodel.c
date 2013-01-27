@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -69,12 +69,12 @@ rg_get_iter(VALUE self, VALUE path)
     GtkTreeModel* model = _SELF(self);
 
     if (TYPE(path) == T_STRING){
-        ret = gtk_tree_model_get_iter_from_string(model, &iter, 
+        ret = gtk_tree_model_get_iter_from_string(model, &iter,
                                                   RVAL2CSTR(path));
     } else {
-        ret = gtk_tree_model_get_iter(model, &iter, 
+        ret = gtk_tree_model_get_iter(model, &iter,
                                       RVAL2GTKTREEPATH(path));
-    } 
+    }
     iter.user_data3 = model;
 
     if (ret) {
@@ -94,7 +94,7 @@ rg_get_value(VALUE self, VALUE iter, VALUE column)
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
         g_value_unset(&value);
-    } 
+    }
     return ret;
 }
 
@@ -112,8 +112,8 @@ treemodel_foreach_func(GtkTreeModel *model,
 static VALUE
 rg_each(VALUE self)
 {
-    gtk_tree_model_foreach(_SELF(self), 
-                           (GtkTreeModelForeachFunc)treemodel_foreach_func, 
+    gtk_tree_model_foreach(_SELF(self),
+                           (GtkTreeModelForeachFunc)treemodel_foreach_func,
                            (gpointer)NULL);
     return self;
 }
@@ -208,7 +208,7 @@ signal_rows_reordered_func(G_GNUC_UNUSED guint num, const GValue *values)
     return rb_ary_new3(4, GOBJ2RVAL(model), GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter), orders);
 }
 
-void 
+void
 Init_gtk_treemodel(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_TREE_MODEL, "TreeModel", mGtk);
