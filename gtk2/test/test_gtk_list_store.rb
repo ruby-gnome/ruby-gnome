@@ -77,7 +77,7 @@ class TestGtkListStore < Test::Unit::TestCase
     while @store.remove(iter); end
     iter = nil
     assert_equal(0, @store.to_enum(:each).to_a.size)
-    ObjectSpace.garbage_collect
+    GC.start
     assert_equal(iterator_count, ObjectSpace.to_enum(:each_object, Gtk::TreeIter).to_a.size)
   end
 end
