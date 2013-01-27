@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -287,7 +287,7 @@ rg_insert_before(VALUE self, VALUE sibling)
 
 static VALUE
 rg_insert_after(VALUE self, VALUE sibling)
-{ 
+{
     VALUE ret;
     GtkTreeIter iter;
     GtkListStore* model = _SELF(self);
