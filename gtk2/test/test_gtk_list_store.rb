@@ -64,7 +64,7 @@ class TestGtkListStore < Test::Unit::TestCase
   end
 
   def test_iter_gc
-    iterator_count = ObjectSpace.to_enum(:each_object, Gtk::TreeIter).to_a.size
+    iterator_count = count_objects(Gtk::TreeIter)
     50.times do |i|
       iter = @store.append
       iter[ID] = i
@@ -78,7 +78,15 @@ class TestGtkListStore < Test::Unit::TestCase
     iter = nil
     assert_equal(0, @store.to_enum(:each).to_a.size)
     GC.start
-    assert_equal(iterator_count, ObjectSpace.to_enum(:each_object, Gtk::TreeIter).to_a.size)
+    assert_equal(iterator_count, count_objects(Gtk::TreeIter))
+  end
+
+  private
+  def count_objects(klass)
+    n_objects = ObjectSpace.each_object(Gtk::TreeIter) do
+      # do nothing
+    end
+    n_objects
   end
 end
 
