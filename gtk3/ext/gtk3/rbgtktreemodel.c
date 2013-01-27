@@ -54,7 +54,6 @@ rg_iter_first(VALUE self)
 
     if (ret) {
         val = GTKTREEITER2RVAL(&iter);
-        G_CHILD_ADD(self, val);
     }
 
     return val;
@@ -79,7 +78,6 @@ rg_get_iter(VALUE self, VALUE path)
 
     if (ret) {
         val = GTKTREEITER2RVAL(&iter);
-        G_CHILD_ADD(self, val);
     }
 
     return val;
