@@ -73,7 +73,6 @@ rg_set_value(VALUE self, VALUE iter, VALUE column, VALUE value)
 
     rbgobj_rvalue_to_gvalue(value, &gval);
 
-    G_CHILD_ADD(self, iter);
     G_CHILD_ADD(iter, value);
 
     gtk_list_store_set_value(_SELF(self), RVAL2GTKTREEITER(iter), NUM2INT(column), &gval);
@@ -156,8 +155,6 @@ rg_set_values(VALUE self, VALUE iter, VALUE values)
     g_columns = ALLOCA_N(gint, length);
     g_values = ALLOCA_N(GValue, length);
     MEMZERO(g_values, GValue, length);
-
-    G_CHILD_ADD(self, iter);
 
     store = _SELF(self);
     model = GTK_TREE_MODEL(store);
@@ -288,8 +285,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
 
     result = GTKTREEITER2RVAL(&args.iter);
 
-    G_CHILD_ADD(self, result);
-
     return result;
 }
 
@@ -303,7 +298,6 @@ rg_insert_before(VALUE self, VALUE sibling)
     iter.user_data3 = model;
 
     ret = GTKTREEITER2RVAL(&iter);
-    G_CHILD_ADD(self, ret);
     return ret;
 }
 
@@ -317,7 +311,6 @@ rg_insert_after(VALUE self, VALUE sibling)
     iter.user_data3 = model;
 
     ret = GTKTREEITER2RVAL(&iter);
-    G_CHILD_ADD(self, ret);
     return ret;
 }
 
@@ -331,7 +324,6 @@ rg_prepend(VALUE self)
     iter.user_data3 = model;
 
     ret = GTKTREEITER2RVAL(&iter);
-    G_CHILD_ADD(self, ret);
     return ret;
 }
 
@@ -345,7 +337,6 @@ rg_append(VALUE self)
     iter.user_data3 = model;
 
     ret = GTKTREEITER2RVAL(&iter);
-    G_CHILD_ADD(self, ret);
     return ret;
 }
 
