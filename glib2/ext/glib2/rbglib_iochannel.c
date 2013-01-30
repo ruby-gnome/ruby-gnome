@@ -761,7 +761,11 @@ Init_glib_io_channel(void)
     id_unpack = rb_intern("unpack");
 
     default_rs = rb_str_new_cstr("\n");
+#ifdef HAVE_RB_GC_REGISTER_MARK_OBJECT
     rb_gc_register_mark_object(default_rs);
+#else
+    rb_global_variable(&default_rs);
+#endif
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_SMETHOD(open, -1);
