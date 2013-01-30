@@ -217,9 +217,11 @@ namespace :dist do
                   sh("cp", "-a",
                      "#{package_base_dir}/#{sub_package_name}", sub_package_name)
                   Dir.chdir(sub_package_name) do
-                    sh(expanded_ruby_path, "extconf.rb")
-                    sh("make", "-j8")
-                    sh("make", "install")
+                    if File.exist?("extconf.rb")
+                      sh(expanded_ruby_path, "extconf.rb")
+                      sh("make", "-j8")
+                      sh("make", "install")
+                    end
                   end
                   rm_rf(sub_package_name)
                 end
