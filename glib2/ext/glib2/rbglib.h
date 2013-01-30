@@ -63,6 +63,10 @@ typedef int GPid;
 #  define G_SOURCE_CONTINUE TRUE
 #endif
 
+#ifndef HAVE_RB_STR_NEW_CSTR
+#  define rb_str_new_cstr(c_string) rb_str_new2(c_string)
+#endif
+
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))
 
 #define RVAL2CSTR(v) (rbg_rval2cstr(&(v)))
