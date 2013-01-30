@@ -422,6 +422,11 @@ Init_gtk(void)
 
     rb_define_const(RG_TARGET_NAMESPACE, "PRIORITY_RESIZE", INT2FIX(GTK_PRIORITY_RESIZE));
 
+    Init_gtk_gdk_event();
+    Init_gtk_drag_gdk_drag_context();
+    Init_gtk_style_context_gdk_screen();
+    Init_gtk_tooltip_gdk_display();
+
     Init_gtk_aboutdialog(RG_TARGET_NAMESPACE);
     Init_gtk_accelerator(RG_TARGET_NAMESPACE);
     Init_gtk_accel_group(RG_TARGET_NAMESPACE);

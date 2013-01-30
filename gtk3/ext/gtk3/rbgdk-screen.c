@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -51,7 +51,7 @@ rg_reset_widgets(VALUE self)
 }
 
 void 
-Init_gdk_screen(void)
+Init_gtk_style_context_gdk_screen(void)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_SCREEN);
 

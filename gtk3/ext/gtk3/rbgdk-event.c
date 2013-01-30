@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@ rg_event_widget(VALUE self)
 }
 
 void 
-Init_gdk_event(void)
+Init_gtk_gdk_event(void)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_EVENT);
 

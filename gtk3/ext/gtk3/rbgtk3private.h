@@ -72,10 +72,11 @@ G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries(VALUE value, long *n
 #define RVAL2GTKTARGETENTRIES_ACCEPT_NIL(value, n) rbgtk_rval2gtktargetentries_accept_nil(value, n)
 G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries_accept_nil(VALUE value, long *n);
 
-G_GNUC_INTERNAL void Init_gdk_display(void);
-G_GNUC_INTERNAL void Init_gdk_dragcontext(void);
-G_GNUC_INTERNAL void Init_gdk_event(void);
-G_GNUC_INTERNAL void Init_gdk_screen(void);
+G_GNUC_INTERNAL void Init_gtk_gdk_event(void);
+G_GNUC_INTERNAL void Init_gtk_drag_gdk_drag_context(void);
+G_GNUC_INTERNAL void Init_gtk_style_context_gdk_screen(void);
+G_GNUC_INTERNAL void Init_gtk_tooltip_gdk_display(void);
+
 G_GNUC_INTERNAL void Init_gtk(void);
 G_GNUC_INTERNAL void Init_gtk_aboutdialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accelerator(VALUE mGtk);
