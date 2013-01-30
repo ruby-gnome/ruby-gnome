@@ -30,7 +30,8 @@ GTK+ 3 support on Mac OS X release!
   * Fixes
     * Fixed a memory leak related Gtk::TreeIter.
       [GitHub:128] [Patch by Toshiaki Asai]
-    * Fixed a crash bug caused by symbol conflict with Ruby/GDK3.
+    * Fixed a crash bug caused by symbol conflict with Ruby/GDK3 on
+      Mac OS X.
       [GitHub:127] [Reported by Sergio Campama] [Helped by Watson]
 
 ==== Ruby/GDK3
