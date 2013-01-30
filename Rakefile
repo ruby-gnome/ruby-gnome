@@ -108,6 +108,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "gtksourceview3",
   "clutter",
   "clutter-gtk",
+  "webkit-gtk",
 ]
 gnome2_packages = gnome2_packages.uniq
 

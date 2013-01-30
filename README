@@ -37,6 +37,7 @@ use from Ruby 1.8.6, 1.8.7, 1.9.x and 2.0.0.
   * Ruby/ClutterGTK:      Clutter-GTK 1.2.0 or later
   * Ruby/GtkSourceView3:  GtkSourceView 3.4.2 or later
   * Ruby/VTE3:            VTE 0.32.2 or later
+  * Ruby/WebKitGTK:       WebKitGTK+ 1.8.1 or later
 
 === Experimental / Incomplete:
 
