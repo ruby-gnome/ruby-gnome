@@ -818,7 +818,7 @@ rg_bounds(VALUE self)
     return rb_ary_new3(2, GTKTEXTITER2RVAL(&start), GTKTEXTITER2RVAL(&end));
 }
 
-void 
+void
 Init_gtk_textbuffer(VALUE mGtk)
 {
     rb_mGtk = mGtk;

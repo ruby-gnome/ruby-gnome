@@ -113,7 +113,7 @@ rg_delete_surrounding(VALUE self, VALUE offset, VALUE n_chars)
                                                         NUM2INT(n_chars)));
 }
 
-void 
+void
 Init_gtk_imcontext(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IM_CONTEXT, "IMContext", mGtk);

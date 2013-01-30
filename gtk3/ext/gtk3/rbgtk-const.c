@@ -24,7 +24,7 @@
 
 #include "rbgtk3private.h"
 
-void 
+void
 Init_gtk_const(VALUE mGtk)
 {
     rb_define_const(mGtk, "BINDING_VERSION",

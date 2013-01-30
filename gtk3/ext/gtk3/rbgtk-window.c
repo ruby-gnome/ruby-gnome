@@ -485,7 +485,7 @@ rg_set_default_geometry(VALUE self, VALUE width, VALUE height)
     return self;
 }
 
-void 
+void
 Init_gtk_window(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WINDOW, "Window", mGtk);

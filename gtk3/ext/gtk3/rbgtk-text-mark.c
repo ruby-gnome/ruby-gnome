@@ -59,7 +59,7 @@ rg_buffer(VALUE self)
     return GOBJ2RVAL(gtk_text_mark_get_buffer(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_textmark(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEXT_MARK, "TextMark", mGtk);

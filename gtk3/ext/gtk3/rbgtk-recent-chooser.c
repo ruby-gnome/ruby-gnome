@@ -172,7 +172,7 @@ rg_filters(VALUE self)
                                 g_slist_free, NULL);
 }
 
-void 
+void
 Init_gtk_recent_chooser(VALUE mGtk)
 {
     rb_mGtk = mGtk;

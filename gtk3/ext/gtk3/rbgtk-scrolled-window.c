@@ -105,7 +105,7 @@ rg_placement(VALUE self)
     return GTKCORNERTYPE2RVAL(gtk_scrolled_window_get_placement(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_scrolled_window(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCROLLED_WINDOW, "ScrolledWindow", mGtk);

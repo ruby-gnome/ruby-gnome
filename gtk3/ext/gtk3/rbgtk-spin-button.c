@@ -112,7 +112,7 @@ rg_range(VALUE self)
     return rb_ary_new3(2, rb_float_new(min), rb_float_new(max));
 }
 
-void 
+void
 Init_gtk_spin_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SPIN_BUTTON, "SpinButton", mGtk);

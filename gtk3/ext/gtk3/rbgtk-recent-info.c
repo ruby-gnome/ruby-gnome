@@ -185,7 +185,7 @@ rg_operator_ri_match(VALUE self, VALUE other)
     return CBOOL2RVAL(gtk_recent_info_match(_SELF(self), _SELF(other)));
 }
 
-void 
+void
 Init_gtk_recent_info(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);

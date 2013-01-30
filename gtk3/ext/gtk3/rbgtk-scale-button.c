@@ -73,7 +73,7 @@ rg_plus_button(VALUE self)
     return GOBJ2RVAL(gtk_scale_button_get_plus_button(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_scalebutton(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE_BUTTON, "ScaleButton", mGtk);

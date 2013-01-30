@@ -84,7 +84,7 @@ rg_clear_marks(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_scale(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);

@@ -114,7 +114,7 @@ rg_purge_items(VALUE self)
     return INT2NUM(ret);
 }
 
-void 
+void
 Init_gtk_recent_manager(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_MANAGER, "RecentManager", mGtk);

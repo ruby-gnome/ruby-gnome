@@ -93,7 +93,7 @@ rg_iter_is_valid_p(VALUE self, VALUE iter)
     return CBOOL2RVAL(gtk_tree_model_sort_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
 
-void 
+void
 Init_gtk_tmodelsort(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_SORT, "TreeModelSort", mGtk);

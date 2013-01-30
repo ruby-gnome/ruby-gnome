@@ -98,7 +98,7 @@ rg_handle_window(VALUE self)
     return GOBJ2RVAL(gtk_paned_get_handle_window(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_paned(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PANED, "Paned", mGtk);

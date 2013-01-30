@@ -179,7 +179,7 @@ rg_s_from_object(G_GNUC_UNUSED VALUE self, VALUE object)
     return GOBJGSLIST2RVAL(gtk_accel_groups_from_object(RVAL2GOBJ(object)));
 }
 
-void 
+void
 Init_gtk_accel_group(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_GROUP, "AccelGroup", mGtk);

@@ -172,7 +172,7 @@ rg_toolbar_reconfigured(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_toolitem(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOOL_ITEM, "ToolItem", mGtk);

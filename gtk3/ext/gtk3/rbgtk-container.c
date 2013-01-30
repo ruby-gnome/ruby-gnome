@@ -734,7 +734,7 @@ cont_mark(void* p)
 
 /**********************************************************************/
 
-void 
+void
 Init_gtk_container(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE;

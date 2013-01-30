@@ -67,7 +67,7 @@ rg_windows(VALUE self)
     return GOBJGLIST2RVAL(gtk_window_group_list_windows(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_windowgroup(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WINDOW_GROUP, "WindowGroup", mGtk);

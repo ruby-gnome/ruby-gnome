@@ -68,7 +68,7 @@ rg_id(VALUE self)
 
 #endif
 
-void 
+void
 Init_gtk_socket(VALUE mGtk)
 {
 #ifdef HAVE_GTK_SOCKET_GET_TYPE

@@ -46,7 +46,7 @@ link_func(GtkLinkButton *button, const gchar *link, gpointer func)
     rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(button), CSTR2RVAL(link));
 }
 
-void 
+void
 Init_gtk_link_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LINK_BUTTON, "LinkButton", mGtk);

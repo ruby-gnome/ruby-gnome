@@ -57,7 +57,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_recent_chooser_dialog(VALUE mGtk)
 {
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_DIALOG, "RecentChooserDialog", mGtk);

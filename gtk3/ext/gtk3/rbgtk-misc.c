@@ -58,7 +58,7 @@ rg_padding(VALUE self)
 
     return rb_ary_new3(2, INT2NUM(xpad), INT2NUM(ypad));
 }
-void 
+void
 Init_gtk_misc(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MISC, "Misc", mGtk);

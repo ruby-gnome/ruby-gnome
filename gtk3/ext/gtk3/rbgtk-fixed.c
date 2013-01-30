@@ -50,7 +50,7 @@ rg_move(VALUE self, VALUE win, VALUE x, VALUE y)
     return self;
 }
 
-void 
+void
 Init_gtk_fixed(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FIXED, "Fixed", mGtk);

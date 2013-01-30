@@ -82,7 +82,7 @@ rg_minimum_increment(VALUE self)
 }
 #endif
 
-void 
+void
 Init_gtk_adjustment(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ADJUSTMENT, "Adjustment", mGtk);

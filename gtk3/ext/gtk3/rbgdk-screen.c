@@ -50,7 +50,7 @@ rg_reset_widgets(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_style_context_gdk_screen(void)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_SCREEN);

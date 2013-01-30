@@ -111,7 +111,7 @@ raction_set_group(VALUE self, VALUE rbgroup)
     return self;
 }
 
-void 
+void
 Init_gtk_radio_action(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);

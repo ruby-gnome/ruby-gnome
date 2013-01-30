@@ -175,7 +175,7 @@ rg_clear_cache(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_treemodelfilter(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FILTER, "TreeModelFilter", mGtk);

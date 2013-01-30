@@ -104,7 +104,7 @@ rg_completion_prefix(VALUE self)
     return CSTR2RVAL(gtk_entry_completion_get_completion_prefix(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_entry_completion(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY_COMPLETION, "EntryCompletion", mGtk);

@@ -645,7 +645,7 @@ rg_set_search_position_func(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_treeview(VALUE mGtk)
 {
     rb_mGtk = mGtk;

@@ -46,7 +46,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_color_selection_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION_DIALOG, 

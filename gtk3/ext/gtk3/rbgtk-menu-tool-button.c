@@ -69,7 +69,7 @@ rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
 }
 */
 
-void 
+void
 Init_gtk_menutoolbutton(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);

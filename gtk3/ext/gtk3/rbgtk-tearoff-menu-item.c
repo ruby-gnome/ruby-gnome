@@ -33,7 +33,7 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_tearoff_menu_item(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TEAROFF_MENU_ITEM, "TearoffMenuItem", mGtk);

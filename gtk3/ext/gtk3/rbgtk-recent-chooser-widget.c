@@ -39,7 +39,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_recent_chooser_widget(VALUE mGtk)
 {
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_WIDGET, "RecentChooserWidget", mGtk);

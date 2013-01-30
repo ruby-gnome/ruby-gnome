@@ -29,7 +29,7 @@ rg_event_widget(VALUE self)
     return GOBJ2RVAL(gtk_get_event_widget(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_gdk_event(void)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_EVENT);

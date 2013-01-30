@@ -131,7 +131,7 @@ rg_set_title(VALUE self, VALUE title)
     return self;
 }
 
-void 
+void
 Init_gtk_combobox(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX, "ComboBox", mGtk);

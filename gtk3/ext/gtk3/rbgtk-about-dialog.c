@@ -106,7 +106,7 @@ rg_s_show(VALUE self, VALUE parent, VALUE props)
     return self;
 }
 
-void 
+void
 Init_gtk_aboutdialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);

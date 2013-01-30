@@ -72,7 +72,7 @@ rg_id(VALUE self)
 
 #endif
 
-void 
+void
 Init_gtk_plug(VALUE mGtk)
 {
 #ifdef HAVE_GTK_PLUG_GET_TYPE

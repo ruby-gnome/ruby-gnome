@@ -81,7 +81,7 @@ rg_event_window(VALUE self)
     return GOBJ2RVAL(gtk_button_get_event_window(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON, "Button", mGtk);

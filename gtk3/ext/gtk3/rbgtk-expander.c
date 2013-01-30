@@ -41,7 +41,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_expander(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_EXPANDER, "Expander", mGtk);

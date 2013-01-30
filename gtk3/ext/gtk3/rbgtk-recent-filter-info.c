@@ -177,7 +177,7 @@ rg_set_age(VALUE self, VALUE age)
     return self;
 }
 
-void 
+void
 Init_gtk_recent_filter_info(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);

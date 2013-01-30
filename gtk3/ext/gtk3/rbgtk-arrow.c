@@ -43,7 +43,7 @@ rg_set(VALUE self, VALUE arrow_t, VALUE shadow_t)
     return self;
 }
 
-void 
+void
 Init_gtk_arrow(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ARROW, "Arrow", mGtk);

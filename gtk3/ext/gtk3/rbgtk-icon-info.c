@@ -99,7 +99,7 @@ rg_display_name(VALUE self)
     return CSTR2RVAL(gtk_icon_info_get_display_name(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_iconinfo(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_INFO, "IconInfo", mGtk);

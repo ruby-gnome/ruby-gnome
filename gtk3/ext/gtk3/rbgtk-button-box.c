@@ -70,7 +70,7 @@ rg_set_child_non_homogeneous(VALUE self, VALUE child, VALUE non_homogeneous)
 }
 #endif
 
-void 
+void
 Init_gtk_button_box(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BUTTON_BOX, "ButtonBox", mGtk);

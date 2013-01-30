@@ -55,7 +55,7 @@ rg_label_align(VALUE self)
     return rb_ary_new3(2, rb_float_new(xalign), rb_float_new(yalign));
 }
 
-void 
+void
 Init_gtk_frame(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FRAME, "Frame", mGtk);

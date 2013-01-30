@@ -31,7 +31,7 @@ rg_initialize(VALUE self, VALUE action)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_file_chooser_widget(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_WIDGET, "FileChooserWidget", mGtk);

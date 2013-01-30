@@ -99,7 +99,7 @@ rg_set_display_options(VALUE self, VALUE flags)
     return self;
 }
 
-void 
+void
 Init_gtk_calendar(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CALENDAR, "Calendar", mGtk);

@@ -166,7 +166,7 @@ rg_descendant_p(VALUE self, VALUE ancestor)
     return CBOOL2RVAL(gtk_tree_path_is_descendant(_SELF(self), _SELF(ancestor)));
 }
 
-void 
+void
 Init_gtk_treepath(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_PATH, "TreePath", mGtk);

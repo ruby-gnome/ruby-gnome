@@ -161,7 +161,7 @@ rg_get_widget_for_response(VALUE self, VALUE response_id)
     return GOBJ2RVAL(gtk_dialog_get_widget_for_response(_SELF(self), NUM2INT(response_id)));
 }
 
-void 
+void
 Init_gtk_dialog(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_DIALOG, "Dialog", mGtk);

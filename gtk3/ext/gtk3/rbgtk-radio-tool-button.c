@@ -120,7 +120,7 @@ rbtn_set_group(VALUE self, VALUE rbgroup)
     return self;
 }
 
-void 
+void
 Init_gtk_radiotoolbutton(VALUE mGtk)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);

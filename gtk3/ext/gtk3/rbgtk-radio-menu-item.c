@@ -136,7 +136,7 @@ rmitem_set_group(VALUE self, VALUE grp_ary)
     return GOBJGSLIST2RVAL(gtk_radio_menu_item_get_group(rmitem2add));
 }
 
-void 
+void
 Init_gtk_radio_menu_item(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_MENU_ITEM, "RadioMenuItem", mGtk);

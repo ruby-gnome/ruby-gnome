@@ -109,7 +109,7 @@ rg_filter_p(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display
     return CBOOL2RVAL(gtk_file_filter_filter(_SELF(self), &info));
 }
 
-void 
+void
 Init_gtk_file_filter(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);

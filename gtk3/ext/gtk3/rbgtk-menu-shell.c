@@ -88,7 +88,7 @@ rg_activate_item(VALUE self, VALUE menu_item, VALUE force_deactivate)
     return self;
 }
 
-void 
+void
 Init_gtk_menu_shell(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_SHELL, "MenuShell", mGtk);

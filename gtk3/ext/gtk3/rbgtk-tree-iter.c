@@ -235,7 +235,7 @@ rg_to_str(VALUE self)
     return result;
 }
 
-void 
+void
 Init_gtk_treeiter(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ITER, "TreeIter", mGtk);

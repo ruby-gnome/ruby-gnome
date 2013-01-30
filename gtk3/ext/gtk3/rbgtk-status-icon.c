@@ -106,7 +106,7 @@ rg_geometry(VALUE self)
     }
 }
 
-void 
+void
 Init_gtk_status_icon(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_STATUS_ICON, "StatusIcon", mGtk);

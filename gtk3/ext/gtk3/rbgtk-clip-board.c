@@ -356,7 +356,7 @@ rg_store(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_clipboard(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CLIPBOARD, "Clipboard", mGtk);

@@ -147,7 +147,7 @@ rg_filter(VALUE self, VALUE filter_info)
                                                RVAL2GTKRECENTFILTERINFO(filter_info)));
 }
 
-void 
+void
 Init_gtk_recent_filter(VALUE mGtk)
 {
     rb_mGtk = mGtk;

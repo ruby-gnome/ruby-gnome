@@ -79,7 +79,7 @@ rg_group(VALUE self)
     return GOBJGSLIST2RVAL(gtk_radio_button_get_group(RVAL2GTKRADIOBUTTON(self)));
 }
 
-void 
+void
 Init_gtk_radio_button(VALUE mGtk)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_BUTTON, "RadioButton", mGtk);

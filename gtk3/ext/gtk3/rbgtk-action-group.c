@@ -441,7 +441,7 @@ action_group_mark(void *p)
     g_list_free(actions);
 }
 
-void 
+void
 Init_gtk_actiongroup(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE;

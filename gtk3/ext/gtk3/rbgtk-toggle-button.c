@@ -75,7 +75,7 @@ rg_toggled(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_toggle_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TOGGLE_BUTTON, "ToggleButton", mGtk);

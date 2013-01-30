@@ -333,7 +333,7 @@ rg_unselect_file(VALUE self, VALUE file)
     return self;
 }
 
-void 
+void
 Init_gtk_file_chooser(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);

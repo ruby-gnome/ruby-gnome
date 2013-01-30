@@ -378,7 +378,7 @@ rg_s_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE m
     return CBOOL2RVAL(ret == NULL);
 }
 
-void 
+void
 Init_gtk(void)
 {
     id_call = rb_intern("call");

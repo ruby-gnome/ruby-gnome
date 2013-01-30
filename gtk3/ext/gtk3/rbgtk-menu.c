@@ -150,7 +150,7 @@ rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
     return GOBJGLIST2RVAL(gtk_menu_get_for_attach_widget(RVAL2GTKWIDGET(widget)));
 }
 
-void 
+void
 Init_gtk_menu(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);

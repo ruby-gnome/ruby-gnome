@@ -30,7 +30,7 @@ rg_trigger_tooltip_query(VALUE self)
     return self;
 }
 
-void 
+void
 Init_gtk_tooltip_gdk_display(void)
 {
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_DISPLAY);

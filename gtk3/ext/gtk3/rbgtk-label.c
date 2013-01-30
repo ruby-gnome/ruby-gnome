@@ -121,7 +121,7 @@ rg_selection_bounds(VALUE self)
     return ret ? rb_ary_new3(2, INT2NUM(start), INT2NUM(end)) : Qnil;
 }
 
-void 
+void
 Init_gtk_label(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LABEL, "Label", mGtk);

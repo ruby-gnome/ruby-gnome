@@ -36,7 +36,7 @@ rg_initialize(VALUE self, VALUE hadj, VALUE vadj)
     return Qnil;
 }
 
-void 
+void
 Init_gtk_viewport(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_VIEWPORT, "Viewport", mGtk);

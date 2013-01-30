@@ -120,7 +120,7 @@ rg_s_reordered(VALUE self, VALUE rbproxy, VALUE rbpath, VALUE rbiter, VALUE rbne
     return self;
 }
 
-void 
+void
 Init_gtk_treerowreference(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_ROW_REFERENCE, "TreeRowReference", mGtk);

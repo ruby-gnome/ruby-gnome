@@ -199,7 +199,7 @@ rg_set_previous_rgba(VALUE self, VALUE rgba)
     return self;
 }
 
-void 
+void
 Init_gtk_color_selection(VALUE mGtk)
 {
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COLOR_SELECTION, "ColorSelection", mGtk);

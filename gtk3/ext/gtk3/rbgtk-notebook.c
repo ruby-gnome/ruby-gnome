@@ -333,7 +333,7 @@ rg_tab_vborder(VALUE self)
     return UINT2NUM(gtk_notebook_get_tab_vborder(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_notebook(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_NOTEBOOK, "Notebook", mGtk);

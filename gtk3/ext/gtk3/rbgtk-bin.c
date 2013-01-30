@@ -33,7 +33,7 @@ rg_child(VALUE self)
     return GOBJ2RVAL(gtk_bin_get_child(_SELF(self)));
 }
 
-void 
+void
 Init_gtk_bin(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_BIN, "Bin", mGtk);

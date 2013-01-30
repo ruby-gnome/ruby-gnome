@@ -161,7 +161,7 @@ rg_size(VALUE self)
     return rb_ary_new3(2, UINT2NUM(rows), UINT2NUM(columns));
 }
 
-void 
+void
 Init_gtk_table(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TABLE, "Table", mGtk);
