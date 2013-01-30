@@ -34,7 +34,24 @@ package.define_tasks
 
 
 namespace :win32 do
-  desc "create default settings.ini"
+  namespace :theme do
+    desc "Install Greybird theme"
+    task :greybird do
+      themes_dir = File.join("vendor", "local", "share", "themes")
+      mkdir_p(themes_dir)
+      theme_dir = File.join(themes_dir, "Greybird")
+      rm_rf(theme_dir)
+      sh("git", "clone", "--depth", "1",
+         "https://github.com/shimmerproject/Greybird",
+         theme_dir)
+      rm_rf(File.join(theme_dir, ".git"))
+    end
+  end
+
+  desc "Install all themes"
+  task :theme => ["win32:theme:greybird"]
+
+  desc "Create default settings.ini"
   task :settings do
     config_dir = File.join("vendor", "local", "etc", "gtk-3.0")
     mkdir_p(config_dir)
@@ -42,12 +59,12 @@ namespace :win32 do
     File.open(settings_ini_path, "w") do |settings_ini|
       settings_ini.puts(<<-EOS)
 [Settings]
-# gtk-theme-name = MS-Windows
+gtk-theme-name = Greybird
 EOS
     end
   end
 
   namespace :builder do
-    task :after => ["win32:settings"]
+    task :after => ["win32:theme", "win32:settings"]
   end
 end
