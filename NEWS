@@ -33,6 +33,12 @@ GTK+ 3 support on Mac OS X release!
     * Fixed a crash bug caused by symbol conflict with Ruby/GDK3.
       [GitHub:127] [Reported by Sergio Campama] [Helped by Watson]
 
+==== Ruby/GDK3
+
+  * Improvements
+    * [windows] Bundled Greybird theme.
+      [Suggested by Regis d'Aubarede]
+
 ==== Ruby/GooCanvas
 
   * Improvements
@@ -55,6 +61,7 @@ GTK+ 3 support on Mac OS X release!
   * Toshiaki Asai
   * Sergio Campama
   * Watson
+  * Regis d'Aubarede
 
 == Ruby-GNOME2 1.2.0: 2013-01-24
 
