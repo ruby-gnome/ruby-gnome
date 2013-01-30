@@ -2,6 +2,60 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.2.1: 2013-01-30
+
+GTK+ 3 support on Mac OS X release!
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Supported custom sudo prompt on auto native package install.
+      [GitHub:126] [Suggested by Yorick Peterse]
+    * Started to support JRuby. (It is not completed yet.)
+      [GitHub:125] [Reported by vpereira]
+    * Accepted unsigned long int size GType.
+    * Removed DL support.
+    * Don't call deprecated g_type_init() for GLib >= 2.35.1.
+
+==== Ruby/GTK2
+
+  * Fixes
+    * Fixed a memory leak related Gtk::TreeIter.
+      [GitHub:128] [Patch by Toshiaki Asai]
+
+==== Ruby/GTK3
+
+  * Fixes
+    * Fixed a memory leak related Gtk::TreeIter.
+      [GitHub:128] [Patch by Toshiaki Asai]
+    * Fixed a crash bug caused by symbol conflict with Ruby/GDK3.
+      [GitHub:127] [Reported by Sergio Campama] [Helped by Watson]
+
+==== Ruby/GooCanvas
+
+  * Improvements
+    * Added Goo::Canvas#get_items_at [GitHub:124] [Patch by David Maciejak]
+
+==== Ruby/WebKitGTK
+
+  * Added
+
+==== Ruby/GtkSourceView3
+
+  * Improvements
+    * Supported Windows.
+
+=== Thanks
+
+  * David Maciejak
+  * Yorick Peterse
+  * vpereira
+  * Toshiaki Asai
+  * Sergio Campama
+  * Watson
+
 == Ruby-GNOME2 1.2.0: 2013-01-24
 
 GTK+ 3 support release!
