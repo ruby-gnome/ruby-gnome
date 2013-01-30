@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2001 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -97,36 +97,6 @@ static VALUE
 rg_s_events_pending_p(G_GNUC_UNUSED VALUE self)
 {
    return CBOOL2RVAL(gtk_events_pending());
-}
-
-static VALUE
-gtk_m_function_body(VALUE data)
-{
-    callback_info_t *info = (callback_info_t *)data;
-    VALUE ret = rb_funcall(info->callback, id_call, 0);
-
-    if (info->key && !ret)
-        G_REMOVE_RELATIVE(RG_TARGET_NAMESPACE, info->key, UINT2NUM(info->id));
-    return ret;
-}
-
-static gboolean
-gtk_m_function(gpointer data)
-{ 
-    return RVAL2CBOOL(G_PROTECT_CALLBACK(gtk_m_function_body, data));
-}
-
-static VALUE
-gtk_m_function2_body(gpointer proc)
-{
-    rb_funcall((VALUE)proc, id_call, 0);
-    return Qnil;
-}
-
-static void
-gtk_m_function2(gpointer proc)
-{
-    G_PROTECT_CALLBACK(gtk_m_function2_body, proc);
 }
 
 /* deprecated
