@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2007  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
@@ -27,6 +27,10 @@
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)
+#endif
+
+#ifndef HAVE_RB_STR_NEW_CSTR
+#  define rb_str_new_cstr(c_string) rb_str_new2(c_string)
 #endif
 
 #ifndef G_VALUE_INIT
