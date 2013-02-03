@@ -124,7 +124,11 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_interface = GENUM2RVAL(argument->v_int32, gtype);
         break;
       case GI_INFO_TYPE_FLAGS:
-        rb_interface = GFLAGS2RVAL(argument->v_int32, gtype);
+        if (gtype == G_TYPE_NONE) {
+            rb_interface = INT2NUM(argument->v_int32);
+        } else {
+            rb_interface = GFLAGS2RVAL(argument->v_int32, gtype);
+        }
         break;
       case GI_INFO_TYPE_OBJECT:
         rb_interface = GOBJ2RVAL(argument->v_pointer);
