@@ -50,6 +50,8 @@ module GObjectIntrospection
         load_function_info(info)
       when StructInfo
         load_struct_info(info)
+      when FlagsInfo
+        load_flags_info(info)
       when EnumInfo
         load_enum_info(info)
       when ObjectInfo
@@ -96,6 +98,22 @@ module GObjectIntrospection
 
     def load_enum_info(info)
       self.class.define_class(info.gtype, info.name, @base_module)
+    end
+
+    def load_flag_value(value_info, flags_module)
+      flags_module.const_set(value_info.name.upcase, value_info.value)
+    end
+
+    def load_flags_info(info)
+      if info.gtype == GLib::Type::NONE
+        flags_module = Module.new
+        info.values.each do |value_info|
+          load_flag_value(value_info, flags_module)
+        end
+        @base_module.const_set(info.name, flags_module)
+      else
+        self.class.define_class(info.gtype, info.name, @base_module)
+      end
     end
 
     def load_object_info(info)
