@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -32,6 +32,34 @@
 
 #include "rb-gi-types.h"
 #include "rb-gi-conversions.h"
+
+typedef gpointer (*RBGICallbackFinderFunc)(GIArgInfo *info);
+
+typedef struct
+{
+    GIArgInfo arg_info;
+    GIScopeType scope_type;
+    GIDirection direction;
+    gboolean callback_p;
+    gboolean closure_p;
+    gboolean destroy_p;
+    gboolean inout_argv_p;
+    gint in_arg_index;
+    gint closure_in_arg_index;
+    gint destroy_in_arg_index;
+    gint rb_arg_index;
+    gint out_arg_index;
+    gint inout_argc_arg_index;
+} RBGIArgMetadata;
+
+typedef struct {
+    RBGIArgMetadata *metadata;
+    VALUE rb_gc_guard_key;
+    VALUE rb_callback;
+} RBGICallbackData;
+
+void rb_gi_callback_register_finder (RBGICallbackFinderFunc  finder);
+void rb_gi_callback_data_free       (RBGICallbackData       *callback_data);
 
 #ifndef RB_TYPE_P
 #  define RB_TYPE_P(object, type) (TYPE(object) == type)

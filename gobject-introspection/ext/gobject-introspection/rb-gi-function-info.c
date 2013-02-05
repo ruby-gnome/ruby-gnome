@@ -25,6 +25,7 @@
 
 static VALUE RG_TARGET_NAMESPACE;
 static const char *callbacks_key = "gi_callbacks";
+static GPtrArray *callback_finders;
 
 GType
 gi_function_info_get_type(void)
@@ -74,23 +75,6 @@ rg_vfunc(VALUE self)
     return GI_BASE_INFO2RVAL(g_function_info_get_vfunc(info));
 }
 
-typedef struct
-{
-    GIArgInfo arg_info;
-    GIScopeType scope_type;
-    GIDirection direction;
-    gboolean callback_p;
-    gboolean closure_p;
-    gboolean destroy_p;
-    gboolean inout_argv_p;
-    gint in_arg_index;
-    gint closure_in_arg_index;
-    gint destroy_in_arg_index;
-    gint rb_arg_index;
-    gint out_arg_index;
-    gint inout_argc_arg_index;
-} ArgMetadata;
-
 static void
 allocate_arguments(GICallableInfo *info,
                    GArray *in_args, GArray *out_args,
@@ -102,13 +86,13 @@ allocate_arguments(GICallableInfo *info,
     n_args = g_callable_info_get_n_args(info);
     for (i = 0; i < n_args; i++) {
         GIArgument argument;
-        ArgMetadata *metadata;
+        RBGIArgMetadata *metadata;
         GIArgInfo *arg_info;
         GIDirection direction;
 
         memset(&argument, 0, sizeof(GIArgument));
 
-        metadata = ALLOC(ArgMetadata);
+        metadata = ALLOC(RBGIArgMetadata);
         arg_info = &(metadata->arg_info);
         g_callable_info_load_arg(info, i, arg_info);
         metadata->scope_type = g_arg_info_get_scope(arg_info);
@@ -146,7 +130,7 @@ fill_metadata_inout_argv(GPtrArray *args_metadata)
     gint inout_argc_arg_index = -1;
 
     for (i = 0; i < args_metadata->len; i++) {
-        ArgMetadata *metadata;
+        RBGIArgMetadata *metadata;
         GIArgInfo *arg_info;
         const gchar *name;
 
@@ -171,7 +155,7 @@ fill_metadata_callback(GPtrArray *args_metadata)
     guint i;
 
     for (i = 0; i < args_metadata->len; i++) {
-        ArgMetadata *metadata;
+        RBGIArgMetadata *metadata;
         GIArgInfo *arg_info;
         gint closure_index;
         gint destroy_index;
@@ -184,7 +168,7 @@ fill_metadata_callback(GPtrArray *args_metadata)
         arg_info = &(metadata->arg_info);
         closure_index = g_arg_info_get_closure(arg_info);
         if (closure_index != -1) {
-            ArgMetadata *closure_metadata;
+            RBGIArgMetadata *closure_metadata;
             closure_metadata = g_ptr_array_index(args_metadata, closure_index);
             closure_metadata->closure_p = TRUE;
             metadata->closure_in_arg_index = closure_metadata->in_arg_index;
@@ -193,7 +177,7 @@ fill_metadata_callback(GPtrArray *args_metadata)
 
         destroy_index = g_arg_info_get_destroy(arg_info);
         if (destroy_index != -1) {
-            ArgMetadata *destroy_metadata;
+            RBGIArgMetadata *destroy_metadata;
             destroy_metadata = g_ptr_array_index(args_metadata, destroy_index);
             destroy_metadata->destroy_p = TRUE;
             metadata->destroy_in_arg_index = destroy_metadata->in_arg_index;
@@ -207,6 +191,65 @@ fill_metadata(GPtrArray *args_metadata)
 {
     fill_metadata_inout_argv(args_metadata);
     fill_metadata_callback(args_metadata);
+}
+
+static void
+callback_data_guard_from_gc(RBGICallbackData *callback_data)
+{
+    VALUE rb_callbacks;
+
+    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
+    callback_data->rb_gc_guard_key = rb_class_new_instance(0, NULL, rb_cObject);
+    rb_hash_aset(rb_callbacks,
+                 callback_data->rb_gc_guard_key,
+                 callback_data->rb_callback);
+}
+
+static void
+callback_data_unguard_from_gc(RBGICallbackData *callback_data)
+{
+    VALUE rb_callbacks;
+
+    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
+    rb_hash_delete(rb_callbacks, callback_data->rb_gc_guard_key);
+}
+
+void
+rb_gi_callback_data_free(RBGICallbackData *callback_data)
+{
+    callback_data_unguard_from_gc(callback_data);
+    xfree(callback_data->metadata);
+    xfree(callback_data);
+}
+
+static void
+destroy_notify(gpointer data)
+{
+    RBGICallbackData *callback_data = data;
+    rb_gi_callback_data_free(callback_data);
+}
+
+static gpointer
+find_callback_function(GIArgInfo *info)
+{
+    guint i;
+    gpointer callback = NULL;
+
+    for (i = 0; i < callback_finders->len; i++) {
+        RBGICallbackFinderFunc finder = g_ptr_array_index(callback_finders, i);
+        callback = finder(info);
+        if (callback) {
+            break;
+        }
+    }
+
+    return callback;
+}
+
+void
+rb_gi_callback_register_finder(RBGICallbackFinderFunc finder)
+{
+    g_ptr_array_add(callback_finders, finder);
 }
 
 static gboolean
@@ -253,84 +296,56 @@ source_callback_p(GIArgInfo *info)
     return TRUE;
 }
 
-typedef struct {
-    ArgMetadata *metadata;
-    VALUE rb_gc_guard_key;
-    VALUE rb_callback;
-} CallbackData;
-
-static void
-callback_data_guard_from_gc(CallbackData *callback_data)
-{
-    VALUE rb_callbacks;
-
-    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
-    callback_data->rb_gc_guard_key = rb_class_new_instance(0, NULL, rb_cObject);
-    rb_hash_aset(rb_callbacks,
-                 callback_data->rb_gc_guard_key,
-                 callback_data->rb_callback);
-}
-
-static void
-callback_data_unguard_from_gc(CallbackData *callback_data)
-{
-    VALUE rb_callbacks;
-
-    rb_callbacks = rb_iv_get(RG_TARGET_NAMESPACE, callbacks_key);
-    rb_hash_delete(rb_callbacks, callback_data->rb_gc_guard_key);
-}
-
-static void
-callback_data_free(CallbackData *callback_data)
-{
-    callback_data_unguard_from_gc(callback_data);
-    xfree(callback_data->metadata);
-    xfree(callback_data);
-}
-
 static gboolean
 source_callback(gpointer user_data)
 {
-    CallbackData *callback_data = user_data;
+    RBGICallbackData *callback_data = user_data;
     VALUE rb_keep;
     ID id_call;
 
     CONST_ID(id_call, "call");
     rb_keep = rb_funcall(callback_data->rb_callback, id_call, 0);
     if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
-        callback_data_free(callback_data);
+        rb_gi_callback_data_free(callback_data);
     }
     return RVAL2CBOOL(rb_keep);
 }
 
-static void
-destroy_notify(gpointer data)
+static gpointer
+source_func_finder(GIArgInfo *arg_info)
 {
-    CallbackData *callback_data = data;
-    callback_data_free(callback_data);
+    if (!source_callback_p(arg_info)) {
+        return NULL;
+    }
+    return source_callback;
 }
 
 static void
-in_callback_argument_from_ruby(ArgMetadata *metadata, VALUE *argv,
+in_callback_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv,
                                GArray *in_args)
 {
+    gpointer callback;
+    GIArgInfo *arg_info;
     GIArgument *callback_argument;
 
-    if (!source_callback_p(&(metadata->arg_info))) {
+    arg_info = &(metadata->arg_info);
+    callback = find_callback_function(arg_info);
+    if (!callback) {
         rb_raise(rb_eNotImpError,
-                 "TODO: GSourceFunc callback is only supported.");
+                 "TODO: %s callback is not supported yet.",
+                 g_base_info_get_name(arg_info));
     }
 
     callback_argument = &(g_array_index(in_args,
                                         GIArgument,
                                         metadata->in_arg_index));
-    callback_argument->v_pointer = source_callback;
+    callback_argument->v_pointer = callback;
 
     if (metadata->closure_in_arg_index != -1) {
-        CallbackData *callback_data;
+        RBGICallbackData *callback_data;
         GIArgument *closure_argument;
 
-        callback_data = ALLOC(CallbackData);
+        callback_data = ALLOC(RBGICallbackData);
         callback_data->metadata = metadata;
         callback_data->rb_callback = rb_block_proc();
         callback_data_guard_from_gc(callback_data);
@@ -350,7 +365,7 @@ in_callback_argument_from_ruby(ArgMetadata *metadata, VALUE *argv,
 }
 
 static void
-in_argument_from_ruby(ArgMetadata *metadata, VALUE *argv, GArray *in_args)
+in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv, GArray *in_args)
 {
     if (metadata->rb_arg_index == -1) {
         return;
@@ -369,7 +384,7 @@ in_argument_from_ruby(ArgMetadata *metadata, VALUE *argv, GArray *in_args)
 }
 
 static void
-out_argument_from_ruby(ArgMetadata *metadata, GArray *out_args)
+out_argument_from_ruby(RBGIArgMetadata *metadata, GArray *out_args)
 {
     GIArgument *argument;
 
@@ -380,7 +395,7 @@ out_argument_from_ruby(ArgMetadata *metadata, GArray *out_args)
 static void
 arg_metadata_free(gpointer data)
 {
-    ArgMetadata *metadata = data;
+    RBGIArgMetadata *metadata = data;
     if (metadata->scope_type == GI_SCOPE_TYPE_ASYNC ||
         metadata->scope_type == GI_SCOPE_TYPE_NOTIFIED) {
         return;
@@ -403,7 +418,7 @@ arguments_from_ruby(GICallableInfo *info,
 
     n_args = g_callable_info_get_n_args(info);
     for (i = 0; i < n_args; i++) {
-        ArgMetadata *metadata;
+        RBGIArgMetadata *metadata;
 
         metadata = g_ptr_array_index(args_metadata, i);
         if (metadata->in_arg_index != -1) {
@@ -415,7 +430,7 @@ arguments_from_ruby(GICallableInfo *info,
 }
 
 static VALUE
-inout_argv_argument_to_ruby(GArray *in_args, ArgMetadata *metadata)
+inout_argv_argument_to_ruby(GArray *in_args, RBGIArgMetadata *metadata)
 {
     GIArgument *inout_argc_argument;
     GIArgument *inout_argv_argument;
@@ -447,7 +462,7 @@ out_arguments_to_ruby(GICallableInfo *callable_info,
     rb_out_args = rb_ary_new();
     n_args = g_callable_info_get_n_args(callable_info);
     for (i = 0; i < n_args; i++) {
-        ArgMetadata *metadata;
+        RBGIArgMetadata *metadata;
         GIArgument *argument = NULL;
         VALUE rb_argument;
 
@@ -501,7 +516,7 @@ arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
     guint i;
 
     for (i = 0; i < args_metadata->len; i++) {
-        ArgMetadata *metadata;
+        RBGIArgMetadata *metadata;
         gint in_arg_index;
 
         metadata = g_ptr_array_index(args_metadata, i);
@@ -603,6 +618,9 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 				rb_cGICallableInfo);
 
     rb_iv_set(RG_TARGET_NAMESPACE, callbacks_key, rb_hash_new());
+
+    callback_finders = g_ptr_array_new();
+    rb_gi_callback_register_finder(source_func_finder);
 
     RG_DEF_METHOD(symbol, 0);
     RG_DEF_METHOD(flags, 0);
