@@ -253,7 +253,7 @@ rb_gi_callback_register_finder(RBGICallbackFinderFunc finder)
 }
 
 static gboolean
-source_func_callback_p(GIArgInfo *info)
+source_func_p(GIArgInfo *info)
 {
     GITypeInfo type_info;
     GIBaseInfo *interface_info;
@@ -314,7 +314,7 @@ source_func_callback(gpointer user_data)
 static gpointer
 source_func_callback_finder(GIArgInfo *arg_info)
 {
-    if (!source_func_callback_p(arg_info)) {
+    if (!source_func_p(arg_info)) {
         return NULL;
     }
     return source_func_callback;
