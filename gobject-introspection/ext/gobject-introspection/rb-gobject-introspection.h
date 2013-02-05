@@ -23,15 +23,8 @@
 
 #include <ruby.h>
 #include <rbgobject.h>
-#include <glib-enum-types.h>
 
-#include <girffi.h>
-#include "gobject-introspection-enum-types.h"
-
-#include "rbgiversion.h"
-
-#include "rb-gi-types.h"
-#include "rb-gi-conversions.h"
+#include <girepository.h>
 
 typedef gpointer (*RBGICallbackFinderFunc)(GIArgInfo *info);
 
@@ -60,77 +53,5 @@ typedef struct {
 
 void rb_gi_callback_register_finder (RBGICallbackFinderFunc  finder);
 void rb_gi_callback_data_free       (RBGICallbackData       *callback_data);
-
-#ifndef RB_TYPE_P
-#  define RB_TYPE_P(object, type) (TYPE(object) == type)
-#endif
-
-#ifndef HAVE_TYPE_ENUM_RUBY_VALUE_TYPE
-#  define RUBY_T_FIXNUM T_FIXNUM
-#endif
-
-extern void Init_gobject_introspection(void);
-
-void rb_gi_argument_init             (void);
-
-void rb_gi_type_tag_init             (VALUE rb_mGI);
-void rb_gi_base_info_init            (VALUE rb_mGI);
-void rb_gi_callable_info_init        (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_function_info_init        (VALUE rb_mGI,
-                                      VALUE rb_cGICallableInfo);
-void rb_gi_method_info_init          (VALUE rb_mGI,
-                                      VALUE rb_cGIFunctionInfo);
-void rb_gi_constructor_info_init     (VALUE rb_mGI,
-                                      VALUE rb_cGIFunctionInfo);
-void rb_gi_callback_info_init        (VALUE rb_mGI,
-                                      VALUE rb_cGICallableInfo);
-void rb_gi_registered_type_info_init (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_struct_info_init          (VALUE rb_mGI,
-                                      VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_boxed_info_init           (VALUE rb_mGI,
-                                      VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_enum_info_init            (VALUE rb_mGI,
-                                      VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_flags_info_init           (VALUE rb_mGI,
-                                      VALUE rb_cGIEnumInfo);
-void rb_gi_object_info_init          (VALUE rb_mGI,
-                                      VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_interface_info_init       (VALUE rb_mGI,
-                                      VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_constant_info_init        (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_union_info_init           (VALUE rb_mGI,
-                                      VALUE rb_cGIRegisteredTypeInfo);
-void rb_gi_value_info_init           (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_signal_info_init          (VALUE rb_mGI,
-                                      VALUE rb_cGICallableInfo);
-void rb_gi_vfunc_info_init           (VALUE rb_mGI,
-                                      VALUE rb_cGICallableInfo);
-void rb_gi_property_info_init        (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_field_info_init           (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_arg_info_init             (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_type_info_init            (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_unresolved_info_init      (VALUE rb_mGI,
-                                      VALUE rb_cGIBaseInfo);
-void rb_gi_repository_init           (VALUE rb_mGI);
-void rb_gi_loader_init               (VALUE rb_mGI);
-
-VALUE rb_gi_function_info_invoke_raw (GIFunctionInfo *info,
-                                      GIArgument *receiver,
-                                      int argc, VALUE *argv,
-                                      GIArgument *return_value);
-
-VALUE rb_gi_field_info_get_field_raw (GIFieldInfo *info,
-                                      gpointer     memory);
-void  rb_gi_field_info_set_field_raw (GIFieldInfo *info,
-                                      gpointer     memory,
-                                      VALUE        rb_field_value);
 
 #endif

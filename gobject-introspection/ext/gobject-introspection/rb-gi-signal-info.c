@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rb-gobject-introspection.h"
+#include "rb-gi-private.h"
 
 #define RG_TARGET_NAMESPACE rb_cGISignalInfo
 #define SELF(self) RVAL2GI_BASE_INFO(self)

@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rb-gobject-introspection.h"
+#include "rb-gi-private.h"
 
 static VALUE rb_cGLibValue = Qnil;
 
