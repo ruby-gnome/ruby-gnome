@@ -1,0 +1,10 @@
+install-so: install-headers
+install-headers:
+	$(INSTALL_DATA) $(srcdir)/rb-gobject-introspection.h $(RUBYARCHDIR)
+
+install: install-pc
+install-pc:
+	if test -n "$(pkgconfigdir)"; then				\
+	  $(MAKEDIRS) $(pkgconfigdir);					\
+	  $(INSTALL_DATA) ruby-gobject-introspection.pc $(pkgconfigdir);\
+	fi
