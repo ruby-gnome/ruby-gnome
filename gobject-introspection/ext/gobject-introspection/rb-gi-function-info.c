@@ -312,7 +312,7 @@ source_callback(gpointer user_data)
 }
 
 static gpointer
-source_func_finder(GIArgInfo *arg_info)
+source_func_callback_finder(GIArgInfo *arg_info)
 {
     if (!source_callback_p(arg_info)) {
         return NULL;
@@ -620,7 +620,7 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
     rb_iv_set(RG_TARGET_NAMESPACE, callbacks_key, rb_hash_new());
 
     callback_finders = g_ptr_array_new();
-    rb_gi_callback_register_finder(source_func_finder);
+    rb_gi_callback_register_finder(source_func_callback_finder);
 
     RG_DEF_METHOD(symbol, 0);
     RG_DEF_METHOD(flags, 0);
