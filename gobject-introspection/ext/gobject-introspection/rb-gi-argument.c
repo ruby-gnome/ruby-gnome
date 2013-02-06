@@ -832,17 +832,19 @@ rb_gi_in_argument_free_interface(GIArgument *argument, GITypeInfo *type_info)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
-    GType gtype;
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
 
-    gtype = g_registered_type_info_get_g_type(interface_info);
+    if (interface_type == GI_INFO_TYPE_STRUCT) {
+        GType gtype;
+        gtype = g_registered_type_info_get_g_type(interface_info);
 
-    if (interface_type == GI_INFO_TYPE_STRUCT && gtype == G_TYPE_VALUE) {
-        GValue *gvalue = argument->v_pointer;
-        g_value_unset(gvalue);
-        xfree(argument->v_pointer);
+        if (gtype == G_TYPE_VALUE) {
+            GValue *gvalue = argument->v_pointer;
+            g_value_unset(gvalue);
+            xfree(argument->v_pointer);
+        }
     }
 
     g_base_info_unref(interface_info);
