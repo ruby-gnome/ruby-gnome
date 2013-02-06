@@ -54,7 +54,8 @@ rg_gst_bus_func_callback(GstBus *bus, GstMessage *message, gpointer user_data)
 
     CONST_ID(id_call, "call");
     rb_keep = rb_funcall(callback_data->rb_callback, id_call, 2,
-                         GOBJ2RVAL(bus), GOBJ2RVAL(message));
+                         GOBJ2RVAL(bus),
+                         BOXED2RVAL(message, GST_MINI_OBJECT_TYPE(message)));
     if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
         rb_gi_callback_data_free(callback_data);
     }
