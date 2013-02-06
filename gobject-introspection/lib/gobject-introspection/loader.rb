@@ -96,8 +96,20 @@ module GObjectIntrospection
       define_struct(info)
     end
 
+    def load_enum_value(value_info, enum_module)
+      enum_module.const_set(value_info.name.upcase, value_info.value)
+    end
+
     def load_enum_info(info)
-      self.class.define_class(info.gtype, info.name, @base_module)
+      if info.gtype == GLib::Type::NONE
+        enum_module = Module.new
+        info.values.each do |value_info|
+          load_enum_value(value_info, enum_module)
+        end
+        @base_module.const_set(info.name, enum_module)
+      else
+        self.class.define_class(info.gtype, info.name, @base_module)
+      end
     end
 
     def load_flag_value(value_info, flags_module)

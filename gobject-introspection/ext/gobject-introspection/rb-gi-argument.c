@@ -121,7 +121,11 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
                  "TODO: GIArgument(interface)[boxed] -> Ruby");
         break;
       case GI_INFO_TYPE_ENUM:
-        rb_interface = GENUM2RVAL(argument->v_int32, gtype);
+        if (gtype == G_TYPE_NONE) {
+            rb_interface = INT2NUM(argument->v_int32);
+        } else {
+            rb_interface = GENUM2RVAL(argument->v_int32, gtype);
+        }
         break;
       case GI_INFO_TYPE_FLAGS:
         if (gtype == G_TYPE_NONE) {
@@ -578,10 +582,18 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
                  g_base_info_get_name(interface_info));
         break;
       case GI_INFO_TYPE_ENUM:
-        argument->v_int32 = RVAL2GENUM(rb_argument, gtype);
+        if (gtype == G_TYPE_NONE) {
+            argument->v_int32 = NUM2INT(rb_argument);
+        } else {
+            argument->v_int32 = RVAL2GENUM(rb_argument, gtype);
+        }
         break;
       case GI_INFO_TYPE_FLAGS:
-        argument->v_int32 = RVAL2GFLAGS(rb_argument, gtype);
+        if (gtype == G_TYPE_NONE) {
+            argument->v_int32 = NUM2INT(rb_argument);
+        } else {
+            argument->v_int32 = RVAL2GFLAGS(rb_argument, gtype);
+        }
         break;
       case GI_INFO_TYPE_OBJECT:
       case GI_INFO_TYPE_INTERFACE:
