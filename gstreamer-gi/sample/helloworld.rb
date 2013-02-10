@@ -58,7 +58,7 @@ bus.add_watch do |bus, message|
 end
 
 # start play back and listed to events
-playbin.state = Gst::State::PLAYING
+playbin.play
 begin
   loop.run
 rescue Interrupt
@@ -66,5 +66,5 @@ rescue Interrupt
 rescue => error
   puts "Error: #{error.message}"
 ensure
-  playbin.state = Gst::State::NULL
+  playbin.stop
 end
