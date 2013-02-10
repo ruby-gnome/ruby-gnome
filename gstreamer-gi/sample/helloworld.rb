@@ -40,7 +40,7 @@ end
 playbin.uri = uri
 
 # create and event loop feed gstreamer bus messages to it
-loop = GLib::MainLoop.new(nil, false)
+loop = GLib::MainLoop.new
 
 bus = playbin.bus
 bus.add_watch do |bus, message|
