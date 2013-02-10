@@ -24,6 +24,7 @@
 #define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
 static VALUE RG_TARGET_NAMESPACE;
+static VALUE rb_cGLibError;
 static const char *callbacks_key = "gi_callbacks";
 static GPtrArray *callback_finders;
 
@@ -578,6 +579,14 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, GIArgument *receiver,
         RG_RAISE_ERROR(error);
     }
 
+    if (!NIL_P(rb_out_args) && RARRAY_LEN(rb_out_args) == 1) {
+        VALUE rb_out_arg;
+        rb_out_arg = RARRAY_PTR(rb_out_args)[0];
+        if (rb_obj_is_kind_of(rb_out_arg, rb_cGLibError)) {
+            rb_exc_raise(rb_out_arg);
+        }
+    }
+
     return rb_out_args;
 }
 
@@ -613,6 +622,8 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
 void
 rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
 {
+    rb_cGLibError = rb_const_get(mGLib, rb_intern("Error"));
+
     RG_TARGET_NAMESPACE =
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_FUNCTION_INFO, "FunctionInfo", rb_mGI,
 				rb_cGICallableInfo);

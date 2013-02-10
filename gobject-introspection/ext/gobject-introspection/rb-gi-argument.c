@@ -258,7 +258,7 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_raise(rb_eNotImpError, "TODO: GIArgument(unichar) -> Ruby");
         break;
       case GI_TYPE_TAG_ERROR:
-        RG_RAISE_ERROR(argument->v_pointer);
+        rb_argument = GERROR2RVAL(argument->v_pointer);
         break;
       case GI_TYPE_TAG_UNICHAR:
         rb_raise(rb_eNotImpError,
