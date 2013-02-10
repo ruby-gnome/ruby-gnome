@@ -32,6 +32,7 @@ module Gst
       @initialized = true
       loader = Loader.new(self, argv)
       loader.load("Gst")
+      require "gst/bus"
     end
   end
 
