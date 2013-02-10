@@ -66,5 +66,15 @@ module Gst
       return if info.name == "init"
       super
     end
+
+    RENAME_MAP = {
+      "uri_protocol_is_valid"     => "valid_uri_protocol?",
+      "uri_protocol_is_supported" => "supported_uri_protocol?",
+      "uri_is_valid"              => "valid_uri?",
+      "uri_has_protocol"          => "uri_has_protocol?",
+    }
+    def rubyish_method_name(function_info)
+      RENAME_MAP[function_info.name] || super
+    end
   end
 end
