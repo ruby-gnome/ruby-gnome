@@ -105,7 +105,7 @@ rg_display_options(int argc, VALUE *argv, VALUE self)
     VALUE flags;
     rb_scan_args(argc, argv, "01", &flags);
 
-    if NIL_P(flags){
+    if (NIL_P(flags)){
 #if GTK_CHECK_VERSION(2,4,0)
         return GFLAGS2RVAL(gtk_calendar_get_display_options(_SELF(self)),
                            GTK_TYPE_CALENDAR_DISPLAY_OPTIONS);

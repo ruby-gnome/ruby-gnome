@@ -387,7 +387,7 @@ gdkevent_s_setting_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     VALUE value;
 
     rb_scan_args(argc, argv, "11", &name, &type);
-    if NIL_P(type) 
+    if (NIL_P(type))
         gtype = G_TYPE_STRING;
     else
         gtype = CLASS2GTYPE(type);
