@@ -26,8 +26,8 @@ module ClutterGtk
   LOG_DOMAIN = "Clutter-Gtk"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
+  @initialized = false
   class << self
-    @initialized = false
     def init(argv=ARGV)
       return if @initialized
       @initialized = true
