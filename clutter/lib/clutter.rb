@@ -115,6 +115,8 @@ module Clutter
     def load_function_info(info)
       name = info.name
       case name
+      when "init"
+        # ignore
       when /\Athreads_/
         define_module_function(@threads_module, $POSTMATCH, info)
       else
