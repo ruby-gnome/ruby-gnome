@@ -46,7 +46,7 @@ module Gst
       init = repository.find(namespace, "init")
       argc, argv = init.invoke(1 + @init_arguments.size,
                                [$0] + @init_arguments)
-      @init_arguments.replace(argv)
+      @init_arguments.replace(argv[1..-1])
     end
 
     def post_load(repository, namespace)
