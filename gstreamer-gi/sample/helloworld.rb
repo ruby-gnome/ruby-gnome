@@ -32,10 +32,10 @@ if playbin.nil?
 end
 
 # take the commandline argument and ensure that it is a uri
-if Gst::valid_uri?(ARGV.first)
+if Gst.valid_uri?(ARGV.first)
   uri = ARGV.first
 else
-  uri = Gst::filename_to_uri(ARGV.first)
+  uri = Gst.filename_to_uri(ARGV.first)
 end
 playbin.uri = uri
 
