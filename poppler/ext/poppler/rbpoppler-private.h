@@ -3,10 +3,6 @@
 
 #include "rbpoppler.h"
 
-#ifdef POPPLER_WITH_GDK
-#  include <rbgdk.h>
-#endif
-
 #define RVAL2GDKPIXBUF(o) (GDK_PIXBUF(RVAL2GOBJ(o)))
 
 G_GNUC_INTERNAL void Init_poppler_indexiter(VALUE mPoppler);

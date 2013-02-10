@@ -24,27 +24,8 @@
 #define RG_TARGET_NAMESPACE cPage
 #define SELF(self) (RVAL2POPPLERPAGE(self))
 
-#ifndef GDK_TYPE_REGION
-extern GType gdk_region_get_type(void);
-#  define GDK_TYPE_REGION (gdk_region_get_type())
-#endif
-
 static VALUE cRectangle;
 static VALUE cPSFile;
-
-#ifdef POPPLER_WITH_GDK
-static VALUE
-page_render_to_pixbuf(VALUE self, VALUE src_x, VALUE src_y, VALUE src_width,
-                      VALUE src_height, VALUE scale, VALUE rotation,
-                      VALUE pixbuf)
-{
-    poppler_page_render_to_pixbuf(SELF(self), NUM2INT(src_x),
-                                  NUM2INT(src_y), NUM2INT(src_width),
-                                  NUM2INT(src_height), NUM2DBL(scale),
-                                  NUM2INT(rotation), RVAL2GDKPIXBUF(pixbuf));
-    return Qnil;
-}
-#endif
 
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
@@ -63,48 +44,18 @@ page_render_to_ps(VALUE self, VALUE ps_file)
 }
 
 static VALUE
-rg_render(int argc, VALUE *argv, VALUE self)
+rg_render(VALUE ps_file_or_cairo, VALUE self)
 {
-    if (argc == 1) {
-        if (RVAL2CBOOL(rb_obj_is_kind_of(argv[0], cPSFile))) {
-            return page_render_to_ps(self, argv[0]);
-        } else {
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
-            return page_render(self, argv[0]);
-#else
-            rb_raise(rb_eArgError, "cairo is not available");
-#endif
-        }
-    } else if (argc == 7) {
-#ifdef POPPLER_WITH_GDK
-        return page_render_to_pixbuf(self, argv[0], argv[1], argv[2], argv[3],
-                                     argv[4], argv[5], argv[6]);
-#else
-        rb_raise(rb_eArgError, "GDK is not available");
-#endif
+    if (RVAL2CBOOL(rb_obj_is_kind_of(ps_file_or_cairo, cPSFile))) {
+        return page_render_to_ps(self, ps_file_or_cairo);
     } else {
-        rb_raise(rb_eArgError,
-                 "wrong number of arguments (%d for 1 or 7)",
-                 argc);
+#ifdef RB_POPPLER_CAIRO_AVAILABLE
+        return page_render(self, ps_file_or_cairo);
+#else
+        rb_raise(rb_eArgError, "cairo is not available");
+#endif
     }
 }
-
-#ifdef POPPLER_WITH_GDK
-static VALUE
-page_render_to_pixbuf_for_printing(VALUE self, VALUE src_x, VALUE src_y,
-                                   VALUE src_width, VALUE src_height,
-                                   VALUE scale, VALUE rotation, VALUE pixbuf)
-{
-    poppler_page_render_to_pixbuf_for_printing(SELF(self), NUM2INT(src_x),
-                                               NUM2INT(src_y),
-                                               NUM2INT(src_width),
-                                               NUM2INT(src_height),
-                                               NUM2DBL(scale),
-                                               NUM2INT(rotation),
-                                               RVAL2GDKPIXBUF(pixbuf));
-    return Qnil;
-}
-#endif
 
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
@@ -116,26 +67,13 @@ page_render_for_printing(VALUE self, VALUE cairo)
 #endif
 
 static VALUE
-rg_render_for_printing(int argc, VALUE *argv, VALUE self)
+rg_render_for_printing(VALUE self, VALUE cairo)
 {
-    if (argc == 1) {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
-        return page_render_for_printing(self, argv[0]);
+    return page_render_for_printing(self, cairo);
 #else
-        rb_raise(rb_eArgError, "cairo is not available");
+    rb_raise(rb_eArgError, "cairo is not available");
 #endif
-    } else if (argc == 7) {
-#ifdef POPPLER_WITH_GDK
-        return page_render_to_pixbuf_for_printing(self, argv[0], argv[1],
-                                                  argv[2], argv[3],
-                                                  argv[4], argv[5], argv[6]);
-#else
-        rb_raise(rb_eArgError, "GDK is not available");
-#endif
-    } else {
-        rb_raise(rb_eArgError,
-                 "wrong number of arguments (%d for 1 or 7)", argc);
-    }
 }
 
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
@@ -158,53 +96,17 @@ page_render_selection(VALUE self, VALUE cairo,
 }
 #endif
 
-#ifdef POPPLER_WITH_GDK
 static VALUE
-page_render_selection_to_pixbuf(VALUE self, VALUE scale, VALUE rotation,
-                                VALUE pixbuf, VALUE selection,
-                                VALUE rb_old_selection,
-                                VALUE style,
-                                VALUE glyph_color, VALUE background_color)
+rg_render_selection(VALUE self,
+                    VALUE cairo, VALUE selection, VALUE old_selection,
+                    VALUE style, VALUE glyph_color, VALUE background_color)
 {
-    PopplerRectangle *old_selection = NULL;
-
-    if (!NIL_P(rb_old_selection))
-        old_selection = RVAL2POPPLERRECTANGLE(rb_old_selection);
-    poppler_page_render_selection_to_pixbuf(SELF(self),
-                                            NUM2DBL(scale),
-                                            NUM2INT(rotation),
-                                            RVAL2GDKPIXBUF(pixbuf),
-                                            RVAL2POPPLERRECTANGLE(selection),
-                                            old_selection,
-                                            RVAL2POPPLERSELECTIONSTYLE(style),
-                                            RVAL2GDKCOLOR(glyph_color),
-                                            RVAL2GDKCOLOR(background_color));
-    return Qnil;
-}
-#endif
-
-static VALUE
-rg_render_selection(int argc, VALUE *argv, VALUE self)
-{
-    if (argc == 6) {
 #ifdef RB_POPPLER_CAIRO_AVAILABLE
-        return page_render_selection(self, argv[0], argv[1], argv[2],
-                                     argv[3], argv[4], argv[5]);
+    return page_render_selection(self, cairo, selection, old_selection,
+                                 style, glyph_color, background_color);
 #else
-        rb_raise(rb_eArgError, "cairo is not available");
+    rb_raise(rb_eArgError, "cairo is not available");
 #endif
-    } else if (argc == 8) {
-#ifdef POPPLER_WITH_GDK
-        return page_render_selection_to_pixbuf(self, argv[0], argv[1],
-                                               argv[2], argv[3], argv[4],
-                                               argv[5], argv[6], argv[7]);
-#else
-        rb_raise(rb_eArgError, "GDK is not available");
-#endif
-    } else {
-        rb_raise(rb_eArgError,
-                 "wrong number of arguments (%d for 5 or 8)", argc);
-    }
 }
 
 static VALUE
@@ -238,14 +140,6 @@ static VALUE
 rg_thumbnail(VALUE self)
 {
     return CRSURFACE2RVAL(poppler_page_get_thumbnail(SELF(self)));
-}
-#endif
-
-#ifdef POPPLER_WITH_GDK
-static VALUE
-rg_thumbnail_pixbuf(VALUE self)
-{
-    return GOBJ2RVAL(poppler_page_get_thumbnail_pixbuf(SELF(self)));
 }
 #endif
 
@@ -427,8 +321,8 @@ Init_poppler_page(VALUE mPoppler)
     cRectangle = rb_const_get(mPoppler, rb_intern("Rectangle"));
     cPSFile = rb_const_get(mPoppler, rb_intern("PSFile"));
 
-    RG_DEF_METHOD(render, -1);
-    RG_DEF_METHOD(render_for_printing, -1);
+    RG_DEF_METHOD(render, 1);
+    RG_DEF_METHOD(render_for_printing, 1);
     RG_DEF_METHOD(size, 0);
     RG_DEF_METHOD(index, 0);
     RG_DEF_METHOD(duration, 0);
@@ -436,9 +330,6 @@ Init_poppler_page(VALUE mPoppler)
 
 #if RB_POPPLER_CAIRO_AVAILABLE
     RG_DEF_METHOD(thumbnail, 0);
-#endif
-#if POPPLER_WITH_GDK
-    RG_DEF_METHOD(thumbnail_pixbuf, 0);
 #endif
     RG_DEF_METHOD(thumbnail_size, 0);
     RG_DEF_METHOD(find_text, 1);
@@ -455,6 +346,6 @@ Init_poppler_page(VALUE mPoppler)
 
     RG_DEF_METHOD(form_field_mapping, 0);
     RG_DEF_METHOD(annotation_mapping, 0);
-    RG_DEF_METHOD(render_selection, -1);
+    RG_DEF_METHOD(render_selection, 6);
     RG_DEF_METHOD(crop_box, 0);
 }

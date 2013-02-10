@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
@@ -29,19 +29,6 @@ VALUE RG_TARGET_NAMESPACE;
 PopplerColor *
 rb_poppler_ruby_object_to_color(VALUE color)
 {
-#ifdef POPPLER_WITH_GDK
-    if (RTEST(rb_obj_is_kind_of(color, rb_cGdkColor))) {
-        GdkColor *gdk_color;
-
-        gdk_color = RVAL2GDKCOLOR(color);
-        color = rb_funcall(RG_TARGET_NAMESPACE, rb_intern("new"),
-                           3,
-                           UINT2NUM(gdk_color->red),
-                           UINT2NUM(gdk_color->green),
-                           UINT2NUM(gdk_color->blue));
-    }
-#endif
-
     return RVAL2BOXED(color, POPPLER_TYPE_COLOR);
 }
 

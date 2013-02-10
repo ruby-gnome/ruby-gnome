@@ -2,6 +2,7 @@
 
 require 'tempfile'
 require "poppler"
+require "gdk_pixbuf2"
 
 if ARGV.size < 2
   puts "usage: #{$0} input.pdf output [scale_ratio] [rotate_angle]"
@@ -81,23 +82,11 @@ def to_pixbuf_with_cairo(input, scale, rotate)
   Gdk::Pixbuf.new(temp.path)
 end
 
-def to_pixbuf(input, scale, rotate)
-  doc = Poppler::Document.new(input)
-  page = doc[0]
-  width, height = page.size.collect {|x| x * scale}
-  pixbuf_width, pixbuf_height = compute_size(width, height, rotate)
-  pixbuf = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB, true, 8,
-                           pixbuf_width, pixbuf_height)
-  page.render(0, 0, width, height, scale, rotate, pixbuf)
-  pixbuf
+unless Poppler.cairo_available?
+  puts "cairo isn't available."
+  exit(false)
 end
-
-if Poppler.cairo_available?
-  puts "using cairo..."
-  pixbuf = to_pixbuf_with_cairo(input, scale, rotate)
-else
-  pixbuf = to_pixbuf(input, scale, rotate)
-end
+pixbuf = to_pixbuf_with_cairo(input, scale, rotate)
 
 if pixbuf.nil?
   puts "Is it a PDF file?: #{input}"
