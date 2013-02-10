@@ -66,7 +66,8 @@ module GObjectIntrospection
     end
 
     def load_function_info(info)
-      define_module_function(@base_module, info.name, info)
+      name = rubyish_method_name(info)
+      define_module_function(@base_module, name, info)
     end
 
     def define_module_function(target_module, name, function_info)
@@ -221,9 +222,9 @@ module GObjectIntrospection
       raise ArgumentError, "wrong number of arguments (#{detail})"
     end
 
-    def rubyish_method_name(method_info)
-      name = method_info.name
-      return_type = method_info.return_type
+    def rubyish_method_name(function_info)
+      name = function_info.name
+      return_type = function_info.return_type
       if return_type.tag == GObjectIntrospection::TypeTag::BOOLEAN
         case name
         when /\A(?:is|get_is|get)_/
@@ -233,7 +234,7 @@ module GObjectIntrospection
         else
           name
         end
-      elsif /\Aget_/ =~ name and method_info.n_in_args.zero?
+      elsif /\Aget_/ =~ name and function_info.n_in_args.zero?
         $POSTMATCH
       else
         name
@@ -258,7 +259,7 @@ module GObjectIntrospection
 
     def load_function_infos(infos, klass)
       infos.each do |info|
-        name = info.name
+        name = rubyish_method_name(info)
         next if name == "new"
         next if name == "alloc"
         singleton_class = (class << klass; self; end)
