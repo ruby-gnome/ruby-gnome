@@ -26,8 +26,8 @@ module Goo
   LOG_DOMAIN = "GooCanvas"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
+  @initialized = false
   class << self
-    @initialized = false
     def init
       return if @initialized
       @initialized = true
