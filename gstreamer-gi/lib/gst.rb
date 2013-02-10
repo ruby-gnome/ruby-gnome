@@ -61,5 +61,10 @@ module Gst
         require "gstreamer.so"
       end
     end
+
+    def load_function_info(info)
+      return if info.name == "init"
+      super
+    end
   end
 end
