@@ -43,7 +43,7 @@ playbin.uri = uri
 loop = GLib::MainLoop.new(nil, false)
 
 bus = playbin.bus
-bus.add_watch(GLib::PRIORITY_DEFAULT) do |bus, message|
+bus.add_watch do |bus, message|
   case message.type
   when Gst::MessageType::EOS
     puts "End-of-stream"
