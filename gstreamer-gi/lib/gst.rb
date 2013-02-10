@@ -33,6 +33,7 @@ module Gst
       loader = Loader.new(self, argv)
       loader.load("Gst")
       require "gst/bus"
+      require "gst/element"
     end
   end
 
