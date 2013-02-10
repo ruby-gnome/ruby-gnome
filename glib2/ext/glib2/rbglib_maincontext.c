@@ -652,7 +652,7 @@ static gint
 poll_func(GPollFD *ufds, guint nfsd, gint timeout_)
 {
     VALUE func = rb_ivar_get(self, id_poll_func);
-    if NIL_P(func) return -1;
+    if (NIL_P(func)) return -1;
 
     return INT2NUM(rb_funcall(func, 3, BOXED2RVAL(ufds, G_TYPE_POLL_FD),
                               UINT2NUM(nfsd), INT2NUM(timeout_)));
