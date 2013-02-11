@@ -25,7 +25,7 @@ module Gst
     end
 
     def pause
-      set_state(State::PAUSE)
+      set_state(State::PAUSED)
     end
 
     def play
