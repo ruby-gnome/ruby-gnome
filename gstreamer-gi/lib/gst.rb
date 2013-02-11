@@ -27,7 +27,7 @@ module Gst
 
   @initialized = false
   class << self
-    def init(argv=[])
+    def init(*argv)
       return if @initialized
       @initialized = true
       loader = Loader.new(self, argv)
