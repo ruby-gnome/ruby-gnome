@@ -31,5 +31,13 @@ module Gst
     def play
       set_state(State::PLAYING)
     end
+
+    alias_method :link_element, :link
+    def link_elements(*elements)
+      elements.each do |element|
+        link_element(element)
+      end
+    end
+    alias_method :link, :link_elements
   end
 end
