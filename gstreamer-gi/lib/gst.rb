@@ -45,10 +45,11 @@ module Gst
 
     private
     def pre_load(repository, namespace)
-      init = repository.find(namespace, "init")
-      argc, argv = init.invoke(1 + @init_arguments.size,
-                               [$0] + @init_arguments)
+      init_check = repository.find(namespace, "init_check")
+      succeeded, argc, argv, error = init_check.invoke(1 + @init_arguments.size,
+                                                       [$0] + @init_arguments)
       @init_arguments.replace(argv[1..-1])
+      raise error unless succeeded
     end
 
     def post_load(repository, namespace)
