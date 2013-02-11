@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
 #
+# This sample code is a port of
+# gstreamer/tests/examples/helloworld/helloworld.c. It is licensed
+# under the terms of the GNU Library General Public License, version
+# 2 or (at your option) later.
+#
 # Copyright (C) 2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
