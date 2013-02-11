@@ -39,5 +39,10 @@ module Gst
       end
     end
     alias_method :link, :link_elements
+
+    def >>(element)
+      link_element(element)
+      element
+    end
   end
 end
