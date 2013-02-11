@@ -23,5 +23,10 @@ module Gst
       end
     end
     alias_method :add, :add_elements
+
+    def <<(element)
+      add_element(element)
+      self
+    end
   end
 end
