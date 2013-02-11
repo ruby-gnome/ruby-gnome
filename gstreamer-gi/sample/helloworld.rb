@@ -25,7 +25,7 @@ require "gst"
 
 if ARGV.length < 1
   puts "usage: #{$0} <media file or uri>"
-  exit 1
+  exit(false)
 end
 
 Gst.init
@@ -33,7 +33,7 @@ Gst.init
 playbin = Gst::ElementFactory.make("playbin")
 if playbin.nil?
   puts "'playbin' gstreamer plugin missing"
-  exit 1
+  exit(false)
 end
 
 # take the commandline argument and ensure that it is a uri
