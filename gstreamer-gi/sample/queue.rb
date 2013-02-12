@@ -87,6 +87,6 @@ filesrc >> decode >> queue >> audiosink
 pipeline.play
 
 # listen for EOS
-event_loop pipeline
+event_loop(pipeline)
 
 pipeline.stop
