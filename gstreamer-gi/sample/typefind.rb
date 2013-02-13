@@ -78,7 +78,7 @@ raise "'fakesink' gstreamer plugin missing" if sink.nil?
 pipeline << filesrc << typefind << sink
 
 typefind.signal_connect("have-type") do |element, probability, caps|
-  caps_str = caps.to_string
+  caps_str = caps.to_s
   xml = REXML::Document.new
   xml << REXML::XMLDecl.new
   capabilities = xml.add_element("Capabilities")
