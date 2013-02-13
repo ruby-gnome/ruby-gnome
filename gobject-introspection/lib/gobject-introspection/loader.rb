@@ -237,7 +237,12 @@ module GObjectIntrospection
       elsif /\Aget_/ =~ name and function_info.n_in_args.zero?
         $POSTMATCH
       else
-        name
+        case name
+        when "to_string"
+          "to_s"
+        else
+          name
+        end
       end
     end
 
