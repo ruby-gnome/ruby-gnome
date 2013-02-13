@@ -1,15 +1,16 @@
 #!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 #
-# GStreamer typefind element example
-# Copyright (C) <2005> Stefan Kost
-# Copyright (C) <2006> Tim-Philipp Müller
-# Copyright (C) <2013> Ruby-GNOME2 Project Team
-#
 # This sample code is a port of
 # gstreamer/tests/examples/typefind/typefind.c. It is licensed
 # under the terms of the GNU Library General Public License, version
 # 2 or (at your option) later.
+#
+# Here is the original copyright header:
+#   Copyright (C) <2005> Stefan Kost
+#   Copyright (C) <2006> Tim-Philipp Müller
+#
+# Copyright (C) 2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
