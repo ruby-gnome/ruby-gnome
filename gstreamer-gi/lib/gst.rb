@@ -55,6 +55,7 @@ module Gst
 
     def post_load(repository, namespace)
       require_extension
+      self.class.start_callback_dispatch_thread
     end
 
     def require_extension
