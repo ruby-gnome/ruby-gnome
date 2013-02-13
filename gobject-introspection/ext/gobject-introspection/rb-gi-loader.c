@@ -138,6 +138,13 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
     return Qnil;
 }
 
+static VALUE
+rg_s_start_callback_dispatch_thread(G_GNUC_UNUSED VALUE klass)
+{
+    rbgutil_start_callback_dispatch_thread();
+    return Qnil;
+}
+
 void
 rb_gi_loader_init(VALUE rb_mGI)
 {
@@ -151,4 +158,5 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(define_interface, 3);
     RG_DEF_SMETHOD(define_struct, -1);
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
+    RG_DEF_SMETHOD(start_callback_dispatch_thread, 0);
 }
