@@ -76,7 +76,7 @@ module GObjectIntrospection
       end
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
-          validate.call(*arguments, &block)
+          validate.call(arguments, &block)
           function_info.invoke(*arguments, &block)
         end
         module_function(name)
