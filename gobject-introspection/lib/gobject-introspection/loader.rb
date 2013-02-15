@@ -199,7 +199,7 @@ module GObjectIntrospection
 
     def validate_arguments(info, arguments)
       if arguments.size != info.n_in_args
-        details = "#{arguments.size} for #{info.n_in_args}"
+        detail = "#{arguments.size} for #{info.n_in_args}"
         raise ArgumentError, "wrong number of arguments (#{detail})"
       end
     end
