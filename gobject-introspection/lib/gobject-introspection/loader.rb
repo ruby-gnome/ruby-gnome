@@ -71,8 +71,12 @@ module GObjectIntrospection
     end
 
     def define_module_function(target_module, name, function_info)
+      validate = lambda do |arguments|
+        validate_arguments(function_info, arguments)
+      end
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
+          validate.call(*arguments, &block)
           function_info.invoke(*arguments, &block)
         end
         module_function(name)
@@ -142,7 +146,7 @@ module GObjectIntrospection
         flags = field_info.flags
 
         if flags.readable?
-          klass.__send__(:define_method, name) do
+          klass.__send__(:define_method, name) do ||
             info.get_field_value(self, i)
           end
         end
@@ -257,7 +261,11 @@ module GObjectIntrospection
     end
 
     def load_method_info(info, klass, method_name)
+      validate = lambda do |arguments|
+        validate_arguments(info, arguments)
+      end
       klass.__send__(:define_method, method_name) do |*arguments, &block|
+        validate.call(arguments, &block)
         info.invoke(self, *arguments, &block)
       end
     end
@@ -267,8 +275,12 @@ module GObjectIntrospection
         name = rubyish_method_name(info)
         next if name == "new"
         next if name == "alloc"
+        validate = lambda do |arguments|
+          validate_arguments(info, arguments)
+        end
         singleton_class = (class << klass; self; end)
         singleton_class.__send__(:define_method, name) do |*arguments, &block|
+          validate.call(arguments, &block)
           info.invoke(*arguments, &block)
         end
       end
