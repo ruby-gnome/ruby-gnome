@@ -71,8 +71,55 @@ rg_gst_bus_func_callback_finder(GIArgInfo *info)
     return rg_gst_bus_func_callback;
 }
 
+static gboolean
+rg_gst_tag_foreach_func_p(GIArgInfo *info)
+{
+    GITypeInfo type_info;
+    GIBaseInfo *interface_info;
+    const gchar *namespace;
+    const gchar *name;
+    gboolean gst_tag_foreach_func_p = FALSE;
+
+    g_arg_info_load_type(info, &type_info);
+    interface_info = g_type_info_get_interface(&type_info);
+    namespace = g_base_info_get_namespace(interface_info);
+    name = g_base_info_get_name(interface_info);
+    if (strcmp(namespace, "Gst") == 0 && strcmp(name, "TagForeachFunc") == 0) {
+        gst_tag_foreach_func_p = TRUE;
+    }
+    g_base_info_unref(interface_info);
+
+    return gst_tag_foreach_func_p;
+}
+
+static void
+rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
+                                 gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_call;
+
+    CONST_ID(id_call, "call");
+    rb_funcall(callback_data->rb_callback, id_call, 2,
+               BOXED2RVAL(list, GST_MINI_OBJECT_TYPE(list)),
+               CSTR2RVAL(tag));
+    if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+        rb_gi_callback_data_free(callback_data);
+    }
+}
+
+static gpointer
+rg_gst_tag_foreach_func_callback_finder(GIArgInfo *info)
+{
+    if (!rg_gst_tag_foreach_func_p(info)) {
+        return NULL;
+    }
+    return rg_gst_tag_foreach_func_callback;
+}
+
 void
 Init_gstreamer (void)
 {
     rb_gi_callback_register_finder(rg_gst_bus_func_callback_finder);
+    rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
 }
