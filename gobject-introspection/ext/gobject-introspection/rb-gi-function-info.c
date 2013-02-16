@@ -332,8 +332,16 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv,
     arg_info = &(metadata->arg_info);
     callback = find_callback_function(arg_info);
     if (!callback) {
+        GITypeInfo type_info;
+        GIBaseInfo *interface_info;
+        VALUE rb_type_name;
+        g_arg_info_load_type(arg_info, &type_info);
+        interface_info = g_type_info_get_interface(&type_info);
+        rb_type_name = CSTR2RVAL(g_base_info_get_name(interface_info));
+        g_base_info_unref(interface_info);
         rb_raise(rb_eNotImpError,
-                 "TODO: %s callback is not supported yet.",
+                 "TODO: <%s>(%s) callback is not supported yet.",
+                 RVAL2CSTR(rb_type_name),
                  g_base_info_get_name(arg_info));
     }
 
