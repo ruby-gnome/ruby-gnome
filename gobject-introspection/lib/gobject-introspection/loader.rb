@@ -251,6 +251,8 @@ module GObjectIntrospection
         case name
         when "to_string"
           "to_s"
+        when "foreach"
+          "each"
         else
           name
         end
