@@ -23,18 +23,48 @@ module GObjectIntrospection
     collection_reader("args")
 
     def in_args
-      args.find_all do |arg|
+      callback_indexes = []
+      closure_indexes = []
+      destroy_indexes = []
+      args.each_with_index do |arg, i|
+        next if arg.scope == ScopeType::INVALID
+        callback_indexes << i
+        closure_index = arg.closure
+        closure_indexes << closure_index if closure_index != -1
+        destroy_index = arg.destroy
+        destroy_indexes << destroy_index if destroy_index != -1
+      end
+
+      args.find_all.with_index do |arg, i|
         case arg.direction
         when Direction::IN, Direction::INOUT
-          true
+          if callback_indexes.include?(i)
+            false
+          elsif closure_indexes.include?(i)
+            false
+          elsif destroy_indexes.include?(i)
+            false
+          else
+            true
+          end
         else
           false
         end
       end
     end
 
+    def required_in_args
+      in_args.reject do |arg|
+        arg.may_be_null?
+      end
+    end
+
     def n_in_args
       in_args.size
+    end
+
+    def n_required_in_args
+      required_in_args.size
     end
 
     def out_args

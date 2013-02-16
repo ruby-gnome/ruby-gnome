@@ -202,10 +202,17 @@ module GObjectIntrospection
     end
 
     def validate_arguments(info, arguments)
-      if arguments.size != info.n_in_args
-        detail = "#{arguments.size} for #{info.n_in_args}"
-        raise ArgumentError, "wrong number of arguments (#{detail})"
+      n_in_args = info.n_in_args
+      n_required_in_args = info.n_required_in_args
+      return if (n_required_in_args..n_in_args).cover?(arguments.size)
+
+      detail = "#{arguments.size} for "
+      if n_in_args == n_required_in_args
+        detail << "#{info.n_in_args}"
+      else
+        detail << "#{info.n_required_in_args}..#{info.n_in_args}"
       end
+      raise ArgumentError, "wrong number of arguments (#{detail})"
     end
 
     def find_suitable_callable_info(infos, arguments)
