@@ -623,7 +623,11 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
         if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_VOID) {
             rb_ary_unshift(rb_out_args, rb_return_value);
         }
-        return rb_out_args;
+        if (RARRAY_LEN(rb_out_args) == 1) {
+            return RARRAY_PTR(rb_out_args)[0];
+        } else {
+            return rb_out_args;
+        }
     }
 }
 
