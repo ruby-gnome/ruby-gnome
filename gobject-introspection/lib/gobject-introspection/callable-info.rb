@@ -67,6 +67,12 @@ module GObjectIntrospection
       required_in_args.size
     end
 
+    def require_callback?
+      args.any? do |arg|
+        arg.direction == Direction::IN and arg.scope != ScopeType::INVALID
+      end
+    end
+
     def out_args
       args.find_all do |arg|
         case arg.direction

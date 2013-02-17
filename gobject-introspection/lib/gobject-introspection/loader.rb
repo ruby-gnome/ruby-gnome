@@ -275,7 +275,11 @@ module GObjectIntrospection
       end
       klass.__send__(:define_method, method_name) do |*arguments, &block|
         validate.call(arguments, &block)
-        info.invoke(self, *arguments, &block)
+        if block.nil? and info.require_callback?
+          Enumerator.new(self, method_name, *arguments)
+        else
+          info.invoke(self, *arguments, &block)
+        end
       end
     end
 
@@ -290,7 +294,11 @@ module GObjectIntrospection
         singleton_class = (class << klass; self; end)
         singleton_class.__send__(:define_method, name) do |*arguments, &block|
           validate.call(arguments, &block)
-          info.invoke(*arguments, &block)
+          if block.nil? and info.require_callback?
+            Enumerator.new(self, name, *arguments)
+          else
+            info.invoke(*arguments, &block)
+          end
         end
       end
     end
