@@ -28,7 +28,7 @@ def event_loop(pipe)
   running = true
   bus = pipe.bus
 
-  while running do
+  while running
     message = bus.poll(Gst::MessageType::ANY, Gst::CLOCK_TIME_NONE)
     raise "message nil" if message.nil?
 
