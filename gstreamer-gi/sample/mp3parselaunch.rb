@@ -55,7 +55,7 @@ if ARGV.length < 1
   exit(false)
 end
 
-bin, error = Gst::parse_launch("filesrc name=my_filesrc ! mad ! autoaudiosink")
+bin, error = Gst.parse_launch("filesrc name=my_filesrc ! mad ! autoaudiosink")
 if bin.nil?
   $stderr.puts "Parse error: #{error.message}"
   exit(false)
