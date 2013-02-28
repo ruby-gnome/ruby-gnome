@@ -1,3 +1,5 @@
+# coding: binary
+
 require 'test/unit'
 require 'glib2'
 
