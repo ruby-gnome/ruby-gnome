@@ -35,6 +35,14 @@ module Gst
       require "gst/bin"
       require "gst/bus"
       require "gst/element"
+      init_base
+    end
+
+    private
+    def init_base
+      require "gst/base_loader"
+      base_loader = BaseLoader.new(self)
+      base_loader.load("GstBase")
     end
   end
 
