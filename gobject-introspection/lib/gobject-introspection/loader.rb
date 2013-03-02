@@ -190,6 +190,7 @@ module GObjectIntrospection
           validate.call(info, arguments, &block)
           info.invoke(self, *arguments, &block)
         end
+        klass.__send__(:private, name)
       end
 
       find_info = lambda do |arguments|
