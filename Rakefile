@@ -326,7 +326,7 @@ namespace :gem do
       win32_gnome2_packages.each do |package|
         Dir.chdir(package) do
           tasks = ["win32:build", "cross", "native", "gem"]
-          ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3", *tasks)
+          ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
         end
       end
     end
