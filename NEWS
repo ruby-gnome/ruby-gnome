@@ -42,6 +42,11 @@ Ruby 2.0.0 support release!
     * Supported Enumerator.
     * Hide constructor methods.
 
+==== Ruby/GtkSourceView3
+
+  * Fixes
+    * Fixed wrong deb package name.
+
 ==== Ruby/Clutter
 
   * Fixes
