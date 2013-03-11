@@ -321,15 +321,33 @@ namespace :gem do
       "vte3",
     ]
     win32_gnome2_packages = gnome2_packages - win32_unsupported_packages
-    desc "build all Windows gems"
-    task :build do
-      win32_gnome2_packages.each do |package|
-        Dir.chdir(package) do
-          tasks = ["win32:build", "cross", "native", "gem"]
-          ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
+
+    namespace :build do
+      desc "build all Windows binaries"
+      task :vendor do
+        win32_gnome2_packages.each do |package|
+          Dir.chdir(package) do
+            ruby("-S", "rake", "win32:build")
+          end
+        end
+      end
+
+      desc "build all Windows bindings"
+      task :ext do
+        win32_gnome2_packages.each do |package|
+          Dir.chdir(package) do
+            tasks = ["cross", "native", "gem"]
+            ruby_cc_versions = ["1.9.3", "2.0.0"]
+            ruby_cc_versions.each do |ruby_cc_version|
+              ruby("-S", "rake", "RUBY_CC_VERSION=#{ruby_cc_version}", *tasks)
+            end
+          end
         end
       end
     end
+
+    desc "build all Windows gems"
+    task :build => ["gem:win32:build:vendor", "gem:win32:build:ext"]
 
     desc "clean all Windows gems build"
     task :clean do
