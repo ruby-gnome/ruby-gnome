@@ -2,6 +2,71 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.2.2: 2013-03-11
+
+Ruby 2.0.0 support release!
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Supported test on Ruby 2.0.0.
+      [GitHub #134] [Reported by mtasaka]
+
+==== Ruby/Poppler
+
+  * Improvements
+    * Removed deprecated GDK support.
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Supported Ruby 2.0.0.
+      [GitHub#129] [Reported by TOMITA Masahiro]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported not GType based flags.
+    * Supported not GType based enum.
+    * Supported custom callback function.
+    * Supported .h install.
+    * Supported .pc install.
+    * More Rubyish method names are used.
+    * Stopped to raise exception when there are two or more out
+      parameters.
+    * Added Loader.start_callback_dispatch_thread().
+    * Supported arguments validation.
+    * Stopped to use array for just one return value.
+    * Supported Enumerator.
+    * Hide constructor methods.
+
+==== Ruby/Clutter
+
+  * Fixes
+    * Fixed wrong initialized check.
+    * Stopped to override Clutter.init unexpectedly.
+
+==== Ruby/ClutterGTK
+
+  * Fixes
+    * Fixed wrong initialized check.
+
+==== Ruby/WebKitGTK
+
+  * Fixes
+    * Fixed wrong initialized check.
+
+=== Thanks
+
+  * Vincent Carmona
+    (for unreleased GObjectIntrospection based GStreamer bindings)
+  * TOMITA Masahiro
+  * NAKAJIMA Takashi
+    (for unreleased GObjectIntrospection based GStreamer bindings)
+  * mtasaka
+
 == Ruby-GNOME2 1.2.1: 2013-01-30
 
 GTK+ 3 support on Mac OS X release!
