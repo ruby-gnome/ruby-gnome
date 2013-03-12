@@ -319,6 +319,9 @@ namespace :gem do
       "goocanvas",
       "vte",
       "vte3",
+      "clutter",
+      "clutter-gtk",
+      "webkit-gtk",
     ]
     win32_gnome2_packages = gnome2_packages - win32_unsupported_packages
 
