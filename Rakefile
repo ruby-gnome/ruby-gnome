@@ -340,10 +340,7 @@ namespace :gem do
         win32_gnome2_packages.each do |package|
           Dir.chdir(package) do
             tasks = ["cross", "native", "gem"]
-            ruby_cc_versions = ["1.9.3", "2.0.0"]
-            ruby_cc_versions.each do |ruby_cc_version|
-              ruby("-S", "rake", "RUBY_CC_VERSION=#{ruby_cc_version}", *tasks)
-            end
+            ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
           end
         end
       end
