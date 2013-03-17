@@ -2,6 +2,20 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.2.3: 2013-03-17
+
+Clean up release!
+
+=== Changes
+
+==== Ruby/GTK2
+
+  * Remove needless signale handlers restore.
+
+==== Ruby/GTK3
+
+  * Remove needless signale handlers restore.
+
 == Ruby-GNOME2 1.2.2: 2013-03-11
 
 Ruby 2.0.0 support release!
