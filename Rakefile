@@ -60,6 +60,23 @@ def download(url, local_path=nil)
   local_path
 end
 
+def change_environment_variable(variables)
+  original_variables = {}
+  variables.each do |key, value|
+    next if ENV[key]
+    original_variables[key] = ENV[key]
+    ENV[key] = value
+  end
+
+  begin
+    yield
+  ensure
+    original_variables.each do |key, value|
+      ENV[key] = value
+    end
+  end
+end
+
 desc "configure all packages"
 task :configure do
   ruby("extconf.rb")
@@ -337,10 +354,12 @@ namespace :gem do
 
       desc "build all Windows bindings"
       task :ext do
-        win32_gnome2_packages.each do |package|
-          Dir.chdir(package) do
-            tasks = ["cross", "native", "gem"]
-            ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
+        change_environment_variable("MAKE" => "make debugflags=") do
+          win32_gnome2_packages.each do |package|
+            Dir.chdir(package) do
+              tasks = ["cross", "native", "gem"]
+              ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
+            end
           end
         end
       end
