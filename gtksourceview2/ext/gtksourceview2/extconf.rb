@@ -57,7 +57,7 @@ setup_win32(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libgtksourceview2.0-dev",
-                                   :fedora => "gtksourceview2-devel",
+                                   :redhat => "gtksourceview2-devel",
                                    :homebrew => "gtksourceview",
                                    :macports => "gtksourceview2")
   exit(false)
