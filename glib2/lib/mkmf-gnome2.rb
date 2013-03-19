@@ -75,7 +75,7 @@ end
 def setup_win32(target_name, base_dir=nil)
   checking_for(checking_message("Win32 OS")) do
     case RUBY_PLATFORM
-    when /cygwin|mingw|mswin32/
+    when /cygwin|mingw|mswin/
       import_library_name = "libruby-#{target_name}.a"
       $DLDFLAGS << " -Wl,--out-implib=#{import_library_name}"
       $cleanfiles << import_library_name
