@@ -29,7 +29,7 @@ $ruby = File.join(RbConfig::CONFIG['bindir'], RbConfig::CONFIG['RUBY_INSTALL_NAM
 $ruby = arg_config("--ruby", $ruby)
 
 rm = "rm -f"
-if /mswin32/ =~ RUBY_PLATFORM
+if /mswin/ =~ RUBY_PLATFORM
   rm = "del"
 end
 
@@ -100,7 +100,7 @@ end
 #
 
 def run_make_in_sub_dir(sub_dir, target)
-  if /mswin32/ =~ RUBY_PLATFORM
+  if /mswin/ =~ RUBY_PLATFORM
     "	$(COMMAND) '#{sub_dir}' $(MAKE) #{target}"
   else
     "	(cd '#{sub_dir}' && $(MAKE) #{target})"

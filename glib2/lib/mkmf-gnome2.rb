@@ -154,12 +154,12 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
   end
 
   case RUBY_PLATFORM
-  when /cygwin|mingw|mswin32/
+  when /cygwin|mingw|mswin/
     case RUBY_PLATFORM
     when /cygwin|mingw/
       $LDFLAGS << " -L#{target_build_dir}"
       $libs << " -lruby-#{target_name}"
-    when /mswin32/
+    when /mswin/
       $DLDFLAGS << " /libpath:#{target_build_dir}"
       $libs << " libruby-#{target_name}.lib"
     end
@@ -257,7 +257,7 @@ def create_makefile_at_srcdir(pkg_name, srcdir, defs = nil)
 end
 
 def run_make_in_sub_dirs_command(command, sub_dirs)
-  if /mswin32/ =~ RUBY_PLATFORM
+  if /mswin/ =~ RUBY_PLATFORM
     sub_dirs.collect do |dir|
       <<-EOM.chmop
 	@cd #{dir}
@@ -288,7 +288,7 @@ clean:
 #{run_make_in_sub_dirs_command("clean", sub_dirs)}
     EOM
 
-    if /mswin32/ =~ RUBY_PLATFORM
+    if /mswin/ =~ RUBY_PLATFORM
       makefile.print(<<-EOM)
 	@if exist extconf.h del extconf.h
 	@if exist conftest.* del conftest.*
@@ -414,7 +414,7 @@ def check_cairo(options={})
   end
 
   unless rcairo_source_dir.nil?
-    if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+    if /mingw|cygwin|mswin/ =~ RUBY_PLATFORM
       options = {}
       build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
       if File.exist?(File.join(rcairo_source_dir, build_dir))

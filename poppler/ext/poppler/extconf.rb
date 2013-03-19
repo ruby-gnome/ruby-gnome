@@ -41,7 +41,7 @@ end
 
 rcairo_options = {}
 rcairo_source_dir_names = ["rcairo"]
-if /mingw|cygwin|mswin32/ =~ RUBY_PLATFORM
+if /mingw|cygwin|mswin/ =~ RUBY_PLATFORM
   rcairo_source_dir_names.unshift("rcairo.win32")
 end
 rcairo_source_dir_names.each do |rcairo_source_dir_name|
