@@ -23,11 +23,6 @@
 #include "rbgdk-pixbuf2private.h"
 #include <string.h>
 
-#ifdef HAVE_GDK_PIXBUF_GDK_PIXBUF_IO_H
-#define GDK_PIXBUF_ENABLE_BACKEND
-#include <gdk-pixbuf/gdk-pixbuf-io.h>
-#endif
-
 #define RG_TARGET_NAMESPACE cPixbuf
 #define _SELF(s) RVAL2GDKPIXBUF(s) 
 

@@ -53,7 +53,6 @@ end
 have_func("gdk_pixbuf_set_option", "gdk-pixbuf/gdk-pixbuf.h") do |src|
   "#define GDK_PIXBUF_ENABLE_BACKEND\n#{src}"
 end
-have_header("gdk-pixbuf/gdk-pixbuf-io.h")
 
 create_pkg_config_file("Ruby/GdkPixbuf2", package_id, nil, "ruby-gdk-pixbuf2.pc")
 create_makefile(module_name)
