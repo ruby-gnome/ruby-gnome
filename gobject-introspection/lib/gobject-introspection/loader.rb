@@ -72,7 +72,8 @@ module GObjectIntrospection
 
     def define_module_function(target_module, name, function_info)
       validate = lambda do |arguments|
-        validate_arguments(function_info, arguments)
+        method_name = "#{target_module}\#.#{name}"
+        validate_arguments(function_info, method_name, arguments)
       end
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
@@ -181,13 +182,13 @@ module GObjectIntrospection
     def load_constructor_infos(infos, klass)
       return if infos.empty?
 
-      validate = lambda do |info, arguments|
-        validate_arguments(info, arguments)
+      validate = lambda do |info, method_name, arguments|
+        validate_arguments(info, "#{klass}\##{method_name}", arguments)
       end
       infos.each do |info|
         name = "initialize_#{info.name}"
         klass.__send__(:define_method, name) do |*arguments, &block|
-          validate.call(info, arguments, &block)
+          validate.call(info, name, arguments, &block)
           info.invoke(self, *arguments, &block)
         end
         klass.__send__(:private, name)
@@ -202,7 +203,7 @@ module GObjectIntrospection
       end
     end
 
-    def validate_arguments(info, arguments)
+    def validate_arguments(info, method_name, arguments)
       n_in_args = info.n_in_args
       n_required_in_args = info.n_required_in_args
       return if (n_required_in_args..n_in_args).cover?(arguments.size)
@@ -213,7 +214,8 @@ module GObjectIntrospection
       else
         detail << "#{info.n_required_in_args}..#{info.n_in_args}"
       end
-      raise ArgumentError, "wrong number of arguments (#{detail})"
+      message = "#{method_name}: wrong number of arguments (#{detail})"
+      raise ArgumentError, message
     end
 
     def find_suitable_callable_info(infos, arguments)
@@ -272,7 +274,7 @@ module GObjectIntrospection
 
     def load_method_info(info, klass, method_name)
       validate = lambda do |arguments|
-        validate_arguments(info, arguments)
+        validate_arguments(info, "#{klass}\##{method_name}", arguments)
       end
       klass.__send__(:define_method, method_name) do |*arguments, &block|
         validate.call(arguments, &block)
@@ -290,7 +292,7 @@ module GObjectIntrospection
         next if name == "new"
         next if name == "alloc"
         validate = lambda do |arguments|
-          validate_arguments(info, arguments)
+          validate_arguments(info, "#{klass}.#{name}", arguments)
         end
         singleton_class = (class << klass; self; end)
         singleton_class.__send__(:define_method, name) do |*arguments, &block|
