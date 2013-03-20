@@ -625,7 +625,7 @@ rg_set_option(VALUE self, VALUE key, VALUE value)
 }
 #else
 static VALUE
-rb_set_option(G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE key, G_GNUC_UNUSED VALUE value)
+rg_set_option(G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE key, G_GNUC_UNUSED VALUE value)
 {
     rb_warning("not supported in this version of GTK+");
     return Qfalse;
