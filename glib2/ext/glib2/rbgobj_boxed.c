@@ -137,7 +137,7 @@ rbgobj_boxed_initialize(VALUE obj, gpointer boxed)
 {
     boxed_holder *holder;
     Data_Get_Struct(obj, boxed_holder, holder);
-    holder->boxed = g_boxed_copy(holder->type, boxed);
+    holder->boxed = boxed;
     holder->own   = TRUE;
 }
 
