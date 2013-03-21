@@ -1,6 +1,7 @@
 # -*- ruby -*-
 
 require "pathname"
+require "tmpdir"
 require "open-uri"
 
 repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2"
@@ -363,10 +364,30 @@ namespace :gem do
           end
         end
       end
+
+      desc "build GSettings schemas for all Windows binaries"
+      task :schema do
+        Dir.mktmpdir do |dir|
+          win32_gnome2_packages.each do |package|
+            gschema_xml_glob = File.join(package, "vendor", "local", "share",
+                                         "glib-2.0", "schemas", "*.gschema.xml")
+            Dir.glob(gschema_xml_glob).each do |schema|
+              cp(schema, dir)
+            end
+          end
+          sh("glib-compile-schemas",
+             "--targetdir", "glib2/vendor/local/share/glib-2.0/schemas",
+             dir)
+        end
+      end
     end
 
     desc "build all Windows gems"
-    task :build => ["gem:win32:build:vendor", "gem:win32:build:ext"]
+    task :build => [
+      "gem:win32:build:vendor",
+      "gem:win32:build:schema",
+      "gem:win32:build:ext",
+    ]
 
     desc "clean all Windows gems build"
     task :clean do
