@@ -1,0 +1,25 @@
+$LOAD_PATH.unshift("./../glib2/lib")
+require 'gnome2-raketask'
+
+
+package = GNOME2Package.new do |_package|
+	_package.summary = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
+	_package.description = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
+	_package.dependency.gem.runtime = ["gobject-introspection","gtk2"]
+	_package.dependency.gem.development = ["test-unit-notify"]
+	_package.win32.packages = []
+	_package.win32.dependencies = []
+	_package.win32.build_dependencies = ["glib2", "gobject-introspection"]
+	_package.win32.build_packages = []
+end
+package.define_tasks
+
+
+namespace :dependency do
+	desc "Install dependencies"
+	task :install do
+		# TODO: Install gir1.2-webkit-1.0 on Debian.
+	end
+end
+
+task :build => "dependency:install"
