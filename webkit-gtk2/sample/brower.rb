@@ -24,13 +24,13 @@ window.signal_connect("destroy") do
 end
 
 
-sw = Gtk::ScrolledWindow.new
+scrolled_window = Gtk::ScrolledWindow.new
 
 view = WebKitGtk2::WebView.new
 view.load_uri("http://webkitgtk.org/")
 
-sw.add(view)
-window.add(sw)
+scrolled_window.add(view)
+window.add(scrolled_window)
 window.show_all
 
 Gtk.main
