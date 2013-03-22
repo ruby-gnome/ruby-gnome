@@ -23,7 +23,7 @@ require "gnome2-raketask"
 package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
   _package.description = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
-  _package.dependency.gem.runtime = ["gobject-introspection","gtk2"]
+  _package.dependency.gem.runtime = ["gobject-introspection", "gtk2"]
   _package.dependency.gem.development = ["test-unit-notify"]
   _package.win32.packages = []
   _package.win32.dependencies = []
