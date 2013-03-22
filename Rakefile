@@ -127,6 +127,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "clutter",
   "clutter-gtk",
   "webkit-gtk",
+  "webkit-gtk2",
 ]
 gnome2_packages = gnome2_packages.uniq
 
@@ -340,6 +341,7 @@ namespace :gem do
       "clutter",
       "clutter-gtk",
       "webkit-gtk",
+      "webkit-gtk2",
     ]
     win32_gnome2_packages = gnome2_packages - win32_unsupported_packages
 
