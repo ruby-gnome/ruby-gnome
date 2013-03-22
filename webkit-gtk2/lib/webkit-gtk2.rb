@@ -14,8 +14,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require 'gobject-introspection'
-require 'gtk2'
+require "gobject-introspection"
+require "gtk2"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
