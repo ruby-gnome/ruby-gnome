@@ -17,19 +17,22 @@
 module GObjectIntrospection
   class Loader
     class << self
-      def load(namespace, base_module)
+      def load(namespace, base_module, options={})
         loader = new(base_module)
+        loader.version = options[:version]
         loader.load(namespace)
       end
     end
 
+    attr_accessor :version
     def initialize(base_module)
       @base_module = base_module
+      @version = nil
     end
 
     def load(namespace)
       repository = Repository.default
-      repository.require(namespace)
+      repository.require(namespace, @version)
       pre_load(repository, namespace)
       repository.each(namespace) do |info|
         load_info(info)
