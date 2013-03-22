@@ -28,20 +28,10 @@ module WebKitGtk2
     def init
       return if @initialized
       @initialized = true
-      loader = Loader.new(self)
-      loader.load("WebKit","1.0")
+      Loader.load("WebKit", self, :version => "1.0")
     end
   end
 
   class Loader < GObjectIntrospection::Loader
-    def load(namespace,version=nil)
-      repository = GObjectIntrospection::Repository.default
-      repository.require(namespace,version)
-      pre_load(repository,namespace)
-      repository.each(namespace) do |info|
-        load_info(info)
-      end
-      post_load(repository,namespace)
-    end
   end
 end
