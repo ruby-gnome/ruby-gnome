@@ -20,7 +20,7 @@ WebKitGtk2.init
 
 window = Gtk::Window.new
 window.signal_connect("destroy") do
-	Gtk.main_quit
+  Gtk.main_quit
 end
 
 
