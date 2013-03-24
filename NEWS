@@ -2,6 +2,56 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.2.4: 2013-03-24
+
+Ruby/WebKitGtk2 addition release!
+
+=== Changes
+
+==== All
+
+  * Improvments
+    * Start mswin64 support. (But it is not completed yet.)
+      [GitHub #135] [Patch by usa]
+
+==== Ruby/GLib2
+
+  * Imrpvoments
+    * Reduce needless GBoxed object copy.
+
+==== Ruby/GdkPixbuf2
+
+  * Fixes
+    * Fix build error by a typo.
+
+==== Ruby/GtkSourceView2
+
+  * Improvements
+    * Support auto RPM install on CentOS 6.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Add method name to arguments validation failure message.
+    * Support specific version loading.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * [windows] Add gschemas.compiled.
+      [ruby-talk:406026] [Reported by Regis d'Aubarede]
+
+==== Ruby/WebKitGtk2
+
+  * New!
+    [GitHub #136] [Patch by eumario]
+
+=== Thanks
+
+  * usa
+  * Regis d'Aubarede
+  * eumario
+
 == Ruby-GNOME2 1.2.3: 2013-03-17
 
 Clean up release!
