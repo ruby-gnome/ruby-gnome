@@ -10,13 +10,13 @@ Ruby/WebKitGtk2 addition release!
 
 ==== All
 
-  * Improvments
+  * Improvements
     * Start mswin64 support. (But it is not completed yet.)
       [GitHub #135] [Patch by usa]
 
 ==== Ruby/GLib2
 
-  * Imrpvoments
+  * Improvements
     * Reduce needless GBoxed object copy.
 
 ==== Ruby/GdkPixbuf2
