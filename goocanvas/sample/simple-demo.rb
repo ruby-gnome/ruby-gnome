@@ -56,7 +56,7 @@ rect_item = Goo::CanvasRect.new(:parent       => root,
                                 :fill_color   => 'red')
 
 rect_item.signal_connect('button_press_event') do
-  puts "rect item received button press event\n"
+  puts "rect item received button press event"
 end
 
 text_item = Goo::CanvasText.new(:parent => root,
