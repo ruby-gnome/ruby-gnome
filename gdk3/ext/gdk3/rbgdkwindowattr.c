@@ -51,12 +51,12 @@ static VALUE
 rg_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
         VALUE window_type)
 {
-    GdkWindowAttr w;
-    w.width = NUM2INT(width);
-    w.height = NUM2INT(height);
-    w.wclass = RVAL2GDKWINDOWWINDOWCLASS(wclass);
-    w.window_type = RVAL2GDKWINDOWTYPE(window_type);
-    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_WINDOW_ATTR, &w));
+    GdkWindowAttr attribute;
+    attribute.width = NUM2INT(width);
+    attribute.height = NUM2INT(height);
+    attribute.wclass = RVAL2GDKWINDOWWINDOWCLASS(wclass);
+    attribute.window_type = RVAL2GDKWINDOWTYPE(window_type);
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_WINDOW_ATTR, &attribute));
     return Qnil;
 }
 
