@@ -47,14 +47,14 @@ gtk_allocation_get_type(void)
 static VALUE
 rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-    GtkAllocation new;
+    GtkAllocation allocation;
 
-    new.x = NUM2INT(x);
-    new.y = NUM2INT(y);
-    new.width = NUM2INT(width);
-    new.height = NUM2INT(height);
+    allocation.x = NUM2INT(x);
+    allocation.y = NUM2INT(y);
+    allocation.width = NUM2INT(width);
+    allocation.height = NUM2INT(height);
 
-    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_ALLOCATION, &new));
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_ALLOCATION, &allocation));
     return Qnil;
 }
 
