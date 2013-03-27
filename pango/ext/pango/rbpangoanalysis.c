@@ -51,8 +51,8 @@ pango_analysis_get_type(void)
 static VALUE
 rg_initialize(VALUE self)
 {
-    PangoAnalysis ana = { NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL };
-    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_ANALYSIS, &ana));
+    PangoAnalysis analysis = { NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL };
+    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_ANALYSIS, &analysis));
     return Qnil;
 }
 
