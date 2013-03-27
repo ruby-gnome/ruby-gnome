@@ -59,7 +59,8 @@ static VALUE
 rg_initialize(VALUE self)
 {
     GtkAccelKey key;
-    G_INITIALIZE(self, &key);
+    memset(&key, 0, sizeof(GtkAccelKey));
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_ACCEL_KEY, &key));
     return Qnil;
 }
 
