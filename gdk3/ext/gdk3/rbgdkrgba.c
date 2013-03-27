@@ -42,7 +42,7 @@ rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue, VALUE alpha)
     color.blue = NUM2DBL(blue);
     color.alpha = NUM2DBL(alpha);
 
-    G_INITIALIZE(self, &color);
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_RGBA, &color));
 
     return Qnil;
 }
