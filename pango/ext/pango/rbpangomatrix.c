@@ -59,7 +59,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         matrix.x0 = NUM2DBL(x0);
         matrix.y0 = NUM2DBL(y0);
     }
-    G_INITIALIZE(self, &matrix);
+    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_MATRIX, &matrix));
     return Qnil;
 }
 
