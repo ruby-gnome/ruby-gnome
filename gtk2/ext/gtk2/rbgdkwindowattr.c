@@ -56,7 +56,7 @@ rg_initialize(VALUE self, VALUE width, VALUE height, VALUE wclass,
     w.height = NUM2INT(height);
     w.wclass = RVAL2GENUM(wclass, GDK_TYPE_WINDOW_CLASS);
     w.window_type = RVAL2GENUM(window_type, GDK_TYPE_WINDOW_TYPE);
-    G_INITIALIZE(self, &w);
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_WINDOW_ATTR, &w));
     return Qnil;
 }
 
