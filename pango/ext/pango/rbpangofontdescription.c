@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -39,7 +39,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     }
 
     G_INITIALIZE(self, description);
-    pango_font_description_free(description);
 
     return Qnil;
 }
