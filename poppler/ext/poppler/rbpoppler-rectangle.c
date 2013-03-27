@@ -35,7 +35,7 @@ rg_initialize(VALUE self, VALUE x1, VALUE y1, VALUE x2, VALUE y2)
     rectangle.x2 = NUM2DBL(x2);
     rectangle.y2 = NUM2DBL(y2);
 
-    G_INITIALIZE(self, &rectangle);
+    G_INITIALIZE(self, g_boxed_copy(POPPLER_TYPE_RECTANGLE, &rectangle));
     return Qnil;
 }
 

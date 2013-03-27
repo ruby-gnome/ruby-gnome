@@ -51,7 +51,7 @@ rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
     color.green = NUM2UINT(green);
     color.blue = NUM2UINT(blue);
 
-    G_INITIALIZE(self, &color);
+    G_INITIALIZE(self, g_boxed_copy(POPPLER_TYPE_COLOR, &color));
     return Qnil;
 }
 
