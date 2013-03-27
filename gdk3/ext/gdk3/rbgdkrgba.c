@@ -35,14 +35,14 @@ rg_s_parse(G_GNUC_UNUSED VALUE self, VALUE spec)
 static VALUE
 rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue, VALUE alpha)
 {
-    GdkRGBA color;
+    GdkRGBA rgba;
 
-    color.red = NUM2DBL(red);
-    color.green = NUM2DBL(green);
-    color.blue = NUM2DBL(blue);
-    color.alpha = NUM2DBL(alpha);
+    rgba.red = NUM2DBL(red);
+    rgba.green = NUM2DBL(green);
+    rgba.blue = NUM2DBL(blue);
+    rgba.alpha = NUM2DBL(alpha);
 
-    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_RGBA, &color));
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_RGBA, &rgba));
 
     return Qnil;
 }
@@ -102,11 +102,11 @@ rg_set_alpha(VALUE self, VALUE alpha)
 static VALUE
 rg_to_a(VALUE self)
 {
-    GdkRGBA *color = _SELF(self);
-    return rb_ary_new3(4, DBL2NUM(color->red), 
-                          DBL2NUM(color->green),
-                          DBL2NUM(color->blue),
-                          DBL2NUM(color->alpha));
+    GdkRGBA *rgba = _SELF(self);
+    return rb_ary_new3(4, DBL2NUM(rgba->red), 
+                          DBL2NUM(rgba->green),
+                          DBL2NUM(rgba->blue),
+                          DBL2NUM(rgba->alpha));
 }
 
 static VALUE
