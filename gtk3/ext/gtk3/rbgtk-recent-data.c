@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -60,7 +60,8 @@ static VALUE
 rg_initialize(VALUE self)
 {   
     GtkRecentData data;
-    G_INITIALIZE(self, &data);
+    memset(&data, 0, sizeof(GtkRecentData));
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_RECENT_DATA, &data));
     return Qnil;
 }
 
