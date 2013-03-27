@@ -1,3 +1,6 @@
+env:
+  global:
+    - DISPLAY=":99.0"
 notifications:
   recipients:
     - kou@cozmixng.org
@@ -5,3 +8,7 @@ rvm:
   - 1.8.7
   - 1.9.3
   - 2.0.0
+before_script:
+  - sh -e /etc/init.d/xvfb start
+after_script:
+  - sh -e /ext/init.d/xvfb stop
