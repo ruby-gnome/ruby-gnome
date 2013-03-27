@@ -341,7 +341,7 @@ rg_initialize(VALUE self, VALUE rb_gtype, VALUE rb_value)
 
     g_value_init(&value, NUM2INT(rb_to_int(rb_gtype)));
     rbgobj_rvalue_to_gvalue(rb_value, &value);
-    G_INITIALIZE(self, &value);
+    G_INITIALIZE(self, g_boxed_copy(G_TYPE_VALUE, &value));
     g_value_unset(&value);
 
     return Qnil;
