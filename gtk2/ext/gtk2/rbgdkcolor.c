@@ -32,13 +32,14 @@ VALUE RG_TARGET_NAMESPACE = Qnil;
 static VALUE
 rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
-    GdkColor c;
-    c.pixel = 0;
-    c.red = NUM2INT(red);
-    c.green = NUM2INT(green);
-    c.blue = NUM2INT(blue);
+    GdkColor color;
 
-    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_COLOR, &c));
+    color.pixel = 0;
+    color.red = NUM2INT(red);
+    color.green = NUM2INT(green);
+    color.blue = NUM2INT(blue);
+
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_COLOR, &color));
 
     return Qnil;
 }
