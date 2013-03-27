@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -61,7 +61,8 @@ static VALUE
 rg_initialize(VALUE self)
 {   
     GtkRecentFilterInfo finfo;
-    G_INITIALIZE(self, &finfo);
+    memset(&finfo, 0, sizeof(GtkRecentFilterInfo));
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_RECENT_FILTER_INFO, &finfo));
     return Qnil;
 }
 
