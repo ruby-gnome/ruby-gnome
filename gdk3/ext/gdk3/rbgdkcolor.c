@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -30,13 +30,13 @@
 static VALUE
 rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
-    GdkColor c;
-    c.pixel = 0;
-    c.red = NUM2INT(red);
-    c.green = NUM2INT(green);
-    c.blue = NUM2INT(blue);
+    GdkColor color;
+    color.pixel = 0;
+    color.red = NUM2INT(red);
+    color.green = NUM2INT(green);
+    color.blue = NUM2INT(blue);
 
-    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_COLOR, &c));
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_COLOR, &color));
 
     return Qnil;
 }
