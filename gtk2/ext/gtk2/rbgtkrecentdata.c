@@ -62,7 +62,8 @@ static VALUE
 rg_initialize(VALUE self)
 {
     GtkRecentData data;
-    G_INITIALIZE(self, &data);
+    memset(&data, 0, sizeof(GtkRecentData));
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_RECENT_DATA, &data));
     return Qnil;
 }
 
