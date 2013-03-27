@@ -61,7 +61,7 @@ gtk_recent_filter_info_get_type(void)
 
 static VALUE
 rg_initialize(VALUE self)
-{   
+{
     GtkRecentFilterInfo finfo;
     G_INITIALIZE(self, &finfo);
     return Qnil;
