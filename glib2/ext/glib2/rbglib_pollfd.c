@@ -56,7 +56,7 @@ rg_initialize(VALUE self, VALUE fd, VALUE events, VALUE revents)
     gfd.events = NUM2INT(events);
     gfd.revents = NUM2INT(revents);
 
-    G_INITIALIZE(self, &gfd);
+    G_INITIALIZE(self, g_boxed_copy(G_TYPE_POLL_FD, &gfd));
     return Qnil;
 }
 
