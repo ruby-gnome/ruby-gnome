@@ -1,6 +1,3 @@
-require 'test/unit'
-require 'gtk2'
-
 class TestGC < Test::Unit::TestCase
   priority :must
   def test_closure
