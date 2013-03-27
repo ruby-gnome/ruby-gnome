@@ -53,9 +53,9 @@ gdk_geometry_get_type(void)
 static VALUE
 rg_initialize(VALUE self)
 {
-    GdkGeometry g;
-    memset(&g, 0, sizeof(GdkGeometry));
-    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_GEOMETRY, &g));
+    GdkGeometry geometry;
+    memset(&geometry, 0, sizeof(GdkGeometry));
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_GEOMETRY, &geometry));
     return Qnil;
 }
 
