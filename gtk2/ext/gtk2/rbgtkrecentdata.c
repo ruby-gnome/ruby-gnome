@@ -60,7 +60,7 @@ gtk_recent_data_get_type(void)
 
 static VALUE
 rg_initialize(VALUE self)
-{   
+{
     GtkRecentData data;
     G_INITIALIZE(self, &data);
     return Qnil;
