@@ -75,7 +75,7 @@ static VALUE
 rg_initialize(VALUE self, VALUE num)
 {
     guint atom = FIX2INT(num);
-    if (atom == 0){
+    if (atom == 0) {
         /* This is a trick for passing 0(NULL) */
         G_INITIALIZE(self, GUINT_TO_POINTER(1));
         _SELF(self) = GUINT_TO_POINTER(GDK_NONE);
