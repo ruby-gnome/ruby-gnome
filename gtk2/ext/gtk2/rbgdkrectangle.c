@@ -37,7 +37,7 @@ rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
     new.width = NUM2INT(width);
     new.height = NUM2INT(height);
 
-    G_INITIALIZE(self, &new);
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_RECTANGLE, &new));
     return Qnil;
 }
 
