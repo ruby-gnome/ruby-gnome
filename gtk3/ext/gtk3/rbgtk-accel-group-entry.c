@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 OGASAWARA, Takeshi
  *
  *  This library is free software; you can redistribute it and/or
@@ -57,7 +57,8 @@ static VALUE
 rg_initialize(VALUE self)
 {
     GtkAccelGroupEntry key;
-    G_INITIALIZE(self, &key);
+    memset(&key, 0, sizeof(GtkAccelGroupEntry));
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_ACCEL_GROUP_ENTRY, &key));
     return Qnil;
 }
 
