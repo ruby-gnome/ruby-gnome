@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGtkAccelGroupEntry < Test::Unit::TestCase
-  def test_accel_apth
+  def test_accel_path
     entry = Gtk::AccelGroupEntry.new
     assert_nil(entry.accel_path)
   end
