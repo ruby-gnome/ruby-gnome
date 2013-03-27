@@ -64,9 +64,9 @@ log_set_ ## name (VALUE self, VALUE val)\
 static VALUE
 rg_initialize(VALUE self)
 {
-    PangoLogAttr log;
-    memset(&log, 0, sizeof(PangoLogAttr));
-    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_LOG_ATTR, &log));
+    PangoLogAttr attribute;
+    memset(&attribute, 0, sizeof(PangoLogAttr));
+    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_LOG_ATTR, &attribute));
     return Qnil;
 }
 
