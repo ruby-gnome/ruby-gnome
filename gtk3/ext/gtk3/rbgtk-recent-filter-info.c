@@ -35,7 +35,7 @@ rf_copy(const GtkRecentFilterInfo* info)
 static void
 rf_free(GtkRecentFilterInfo* boxed)
 {
-    if (boxed){
+    if (boxed) {
         g_free(boxed->applications);
         g_free(boxed->groups);
         g_free(boxed);
