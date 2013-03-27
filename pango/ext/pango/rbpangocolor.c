@@ -28,9 +28,9 @@ static VALUE
 rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
 {
     PangoColor c;
-    c.red = NUM2INT(red);
-    c.green = NUM2INT(green);
-    c.blue = NUM2INT(blue);
+    c.red = NUM2UINT(red);
+    c.green = NUM2UINT(green);
+    c.blue = NUM2UINT(blue);
 
     G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_COLOR, &c));
     return Qnil;
