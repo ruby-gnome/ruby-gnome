@@ -65,7 +65,7 @@ static VALUE
 rg_initialize(VALUE self)
 {
     PangoLogAttr log;
-    G_INITIALIZE(self, &log);
+    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_LOG_ATTR, &log));
     return Qnil;
 }
 
