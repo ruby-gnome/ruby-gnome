@@ -59,7 +59,7 @@ gtk_recent_filter_info_get_type(void)
 
 static VALUE
 rg_initialize(VALUE self)
-{   
+{
     GtkRecentFilterInfo finfo;
     memset(&finfo, 0, sizeof(GtkRecentFilterInfo));
     G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_RECENT_FILTER_INFO, &finfo));
