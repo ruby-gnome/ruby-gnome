@@ -2,6 +2,22 @@
 
 = NEWS
 
+== Ruby-GNOME2 1.2.5: 2013-03-28
+
+Crash bug fix release!
+
+=== Changes
+
+==== All
+
+  * Fixes
+    * Fixed crash bugs.
+      [GitHub #138] [Reported by Takuma Nakajima]
+
+=== Thanks
+
+  * Takuma Nakajima
+
 == Ruby-GNOME2 1.2.4: 2013-03-24
 
 Ruby/WebKitGtk2 addition release!
