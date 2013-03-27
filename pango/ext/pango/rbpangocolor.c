@@ -85,8 +85,10 @@ static VALUE
 rg_to_a(VALUE self)
 {
     PangoColor *c = _SELF(self);
-    return rb_ary_new3(3, INT2FIX(c->red), 
-                       INT2FIX(c->green), INT2FIX(c->blue));
+    return rb_ary_new3(3,
+                       UINT2NUM(c->red),
+                       UINT2NUM(c->green),
+                       UINT2NUM(c->blue));
 }
 
 static VALUE
