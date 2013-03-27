@@ -45,39 +45,39 @@ rg_parse(VALUE self, VALUE spec)
 static VALUE
 rg_red(VALUE self)
 {
-    return INT2FIX(_SELF(self)->red);
+    return UINT2NUM(_SELF(self)->red);
 }
 
 static VALUE
 rg_set_red(VALUE self, VALUE red)
 {
-    _SELF(self)->red = NUM2INT(red);
+    _SELF(self)->red = NUM2UINT(red);
     return self;
 }
 
 static VALUE
 rg_green(VALUE self)
 {
-    return INT2FIX(_SELF(self)->green);
+    return UINT2NUM(_SELF(self)->green);
 }
 
 static VALUE
 rg_set_green(VALUE self, VALUE green)
 {
-    _SELF(self)->green = NUM2INT(green);
+    _SELF(self)->green = NUM2UINT(green);
     return self;
 }
 
 static VALUE
 rg_blue(VALUE self)
 {
-    return INT2FIX(_SELF(self)->blue);
+    return UINT2NUM(_SELF(self)->blue);
 }
 
 static VALUE
 rg_set_blue(VALUE self, VALUE blue)
 {
-    _SELF(self)->blue = NUM2INT(blue);
+    _SELF(self)->blue = NUM2UINT(blue);
     return self;
 }
 
