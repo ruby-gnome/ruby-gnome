@@ -19,6 +19,6 @@
 class TestGdkRectangle < Test::Unit::TestCase
   def test_width
     rectangle = Gdk::Rectangle.new(0, 10, 20, 30)
-    assert_equal(20, rectngle.width)
+    assert_equal(20, rectangle.width)
   end
 end
