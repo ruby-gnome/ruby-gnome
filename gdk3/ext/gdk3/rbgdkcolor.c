@@ -36,7 +36,7 @@ rg_initialize(VALUE self, VALUE red, VALUE green, VALUE blue)
     c.green = NUM2INT(green);
     c.blue = NUM2INT(blue);
 
-    G_INITIALIZE(self, &c);
+    G_INITIALIZE(self, g_boxed_copy(GDK_TYPE_COLOR, &c));
 
     return Qnil;
 }
