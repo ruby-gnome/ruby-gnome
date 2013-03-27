@@ -51,14 +51,14 @@ pango_rectangle_get_type(void)
 static VALUE
 rg_initialize(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-    PangoRectangle new;
+    PangoRectangle rectangle;
 
-    new.x = NUM2INT(x);
-    new.y = NUM2INT(y);
-    new.width = NUM2INT(width);
-    new.height = NUM2INT(height);
+    rectangle.x = NUM2INT(x);
+    rectangle.y = NUM2INT(y);
+    rectangle.width = NUM2INT(width);
+    rectangle.height = NUM2INT(height);
 
-    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_RECTANGLE, &new));
+    G_INITIALIZE(self, g_boxed_copy(PANGO_TYPE_RECTANGLE, &rectangle));
     return Qnil;
 }
 
