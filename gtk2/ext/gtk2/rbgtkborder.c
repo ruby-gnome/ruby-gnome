@@ -58,7 +58,7 @@ rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
     border.top = NUM2INT(top);
     border.bottom = NUM2INT(bottom);
 
-    G_INITIALIZE(self, &border);
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_BORDER, &border));
     return Qnil;
 }
 
