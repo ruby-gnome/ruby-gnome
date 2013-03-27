@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -36,7 +36,7 @@ rg_initialize(VALUE self, VALUE left, VALUE right, VALUE top, VALUE bottom)
     border.top = NUM2INT(top);
     border.bottom = NUM2INT(bottom);
 
-    G_INITIALIZE(self, &border);
+    G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_BORDER, &border));
     return Qnil;
 }
 
