@@ -58,7 +58,7 @@ gtk_recent_data_get_type(void)
 
 static VALUE
 rg_initialize(VALUE self)
-{   
+{
     GtkRecentData data;
     memset(&data, 0, sizeof(GtkRecentData));
     G_INITIALIZE(self, g_boxed_copy(GTK_TYPE_RECENT_DATA, &data));
