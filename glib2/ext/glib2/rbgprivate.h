@@ -141,7 +141,6 @@ G_GNUC_INTERNAL void Init_glib_io_channelerror(void);
 G_GNUC_INTERNAL void Init_glib_io_channel_win32_socket(void);
 G_GNUC_INTERNAL void Init_glib_shell(void);
 G_GNUC_INTERNAL void Init_glib_shellerror(void);
-G_GNUC_INTERNAL void Init_glib_completion(void);
 G_GNUC_INTERNAL void Init_glib_timer(void);
 G_GNUC_INTERNAL void Init_glib_unicode(void);
 G_GNUC_INTERNAL void Init_glib_utf8(void);

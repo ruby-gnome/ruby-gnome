@@ -1115,7 +1115,6 @@ union       GDoubleIEEE754;
     Init_glib_io_channel_win32_socket();
     Init_glib_shell();
     Init_glib_shellerror();
-    Init_glib_completion();
     Init_glib_timer();
     Init_glib_unicode();
     Init_glib_utf8();
