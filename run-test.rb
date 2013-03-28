@@ -27,8 +27,11 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
   targets << dir
 end
 
+ignored_modules = ["gstreamer"]
+
 succeeded = true
 targets.each do |target|
+  next if ignored_modules.include?(target.basename.to_s)
   Dir.chdir(target.to_s) do
     puts "#{Time.now} running test for #{target}"
     puts separator
