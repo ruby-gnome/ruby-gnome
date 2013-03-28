@@ -27,7 +27,7 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
   targets << dir
 end
 
-ignored_modules = ["gstreamer"]
+ignored_modules = ["gstreamer", "webkit-gtk", "webkit-gtk2"]
 
 succeeded = true
 targets.each do |target|
