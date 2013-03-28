@@ -9,6 +9,7 @@ rvm:
   - 1.9.3
   - 2.0.0
 before_script:
+  - sudo apt-get install -qq -y libgirepository1.0-dev
   - sh -e /etc/init.d/xvfb start
 after_script:
   - sh -e /ext/init.d/xvfb stop
