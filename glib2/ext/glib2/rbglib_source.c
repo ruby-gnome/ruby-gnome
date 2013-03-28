@@ -148,14 +148,15 @@ rg_remove_poll(VALUE self, VALUE fd)
     return self;
 }
 
+#if GLIB_CHECK_VERSION(2, 28, 0)
 static VALUE
-rg_current_time(VALUE self)
+rg_time(VALUE self)
 {
-    GTimeVal timeval;
-    g_source_get_current_time(_SELF(self), &timeval);
-
-    return rb_assoc_new(LONG2NUM(timeval.tv_sec), LONG2NUM(timeval.tv_usec));
+    gint64 time;
+    time = g_source_get_time(_SELF(self));
+    return LL2NUM(time);
 }
+#endif
 
 /* How can I implement them ?
 gboolean    g_source_remove_by_funcs_user_data
@@ -189,7 +190,9 @@ Init_glib_source(void)
     RG_DEF_METHOD(set_callback, 0);
     RG_DEF_METHOD(add_poll, 1);
     RG_DEF_METHOD(remove_poll, 1);
-    RG_DEF_METHOD(current_time, 0);
+#if GLIB_CHECK_VERSION(2, 28, 0)
+    RG_DEF_METHOD(time, 0);
+#endif
 
     /* GLib::Source.remove is moved to rbglib_maincontext.c */
 }
