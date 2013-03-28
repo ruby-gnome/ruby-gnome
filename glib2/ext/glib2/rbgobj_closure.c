@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2006  Ruby-GNOME2 Project
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -332,9 +332,11 @@ rg_invalidate(VALUE self)
 void
 Init_gobject_gclosure(void)
 {
+    VALUE RG_TARGET_NAMESPACE;
+
     init_rclosure();
 
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_CLOSURE, "Closure", mGLib);
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD_P(in_marshal, 0);
