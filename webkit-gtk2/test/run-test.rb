@@ -23,21 +23,21 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 gio_base = File.join(ruby_gnome2_base, "gio2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
-gdk2_base = File.join(ruby_gnome2_base, "gdk2")
 gtk2_base = File.join(ruby_gnome2_base, "gtk2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+webkit_gtk2_base = File.join(ruby_gnome2_base, "webkit-gtk2")
 
 modules = [
   [glib_base, "glib2"],
   [gio_base, "gio2"],
   [atk_base, "atk"],
   [pango_base, "pango"],
-  [gdk3_base, "gdk2"],
-  [gtk3_base, "gtk2"],
+  [gtk2_base, "gtk2"],
   [gobject_introspection_base, "gobject-introspection"],
+  [webkit_gtk2_base, "webkit-gtk2"],
 ]
 modules.each do |target, module_name|
-  if system("which make > /dev/null")
+  if File.exist?("Makefile") and system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
@@ -50,9 +50,9 @@ require "glib-test-init"
 $LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
 require "gobject-introspection-test-utils"
 
-$LOAD_PATH.unshift(File.join(clutter_base, "test"))
+$LOAD_PATH.unshift(File.join(webkit_gtk2_base, "test"))
 require "webkit-gtk-test-utils"
 
-require "webkit-gtk"
+require "webkit-gtk2"
 
 exit Test::Unit::AutoRunner.run(true)
