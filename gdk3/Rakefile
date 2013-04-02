@@ -17,14 +17,9 @@ package = GNOME2Package.new do |_package|
       :name => "gtk+",
       :download_site => :gnome,
       :label => "gtk+",
-      :version => "3.6.4",
+      :version => "3.8.0",
       :configure_args => [],
       :compression_method => "xz",
-      :need_autoreconf => true,
-      :patches => [
-        "gtk+-3.6.4-add-missing-exeext.diff",
-        "gtk+-3.6.4-backport-gtk-launch-build-error.diff",
-      ],
     }
   ]
   _package.required_ruby_version = ">= 1.9.2"
