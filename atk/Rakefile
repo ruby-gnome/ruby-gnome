@@ -15,7 +15,7 @@ package = GNOME2Package.new do |_package|
       :name => "atk",
       :download_site => :gnome,
       :label => "atk",
-      :version => "2.6.0",
+      :version => "2.8.0",
       :configure_args => [],
       :compression_method => "xz",
     }
