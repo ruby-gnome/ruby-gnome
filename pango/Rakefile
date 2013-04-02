@@ -15,7 +15,7 @@ package = GNOME2Package.new do |_package|
       :name => "pango",
       :download_site => :gnome,
       :label => "pango",
-      :version => "1.32.6",
+      :version => "1.34.0",
       :configure_args => [],
       :compression_method => "xz",
     }
