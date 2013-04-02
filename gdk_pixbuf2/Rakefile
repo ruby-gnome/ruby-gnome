@@ -15,13 +15,9 @@ package = GNOME2Package.new do |_package|
       :name => "gdk-pixbuf",
       :download_site => :gnome,
       :label => "gdk-pixbuf",
-      :version => "2.26.5",
+      :version => "2.28.0",
       :configure_args => [],
       :compression_method => "xz",
-      :need_autoreconf => true,
-      :patches => [
-        "gdk-pixbuf-2.26.5-add-missing-exeext.diff",
-      ],
     }
   ]
 end
