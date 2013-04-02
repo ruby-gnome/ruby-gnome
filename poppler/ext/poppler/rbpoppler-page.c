@@ -44,7 +44,7 @@ page_render_to_ps(VALUE self, VALUE ps_file)
 }
 
 static VALUE
-rg_render(VALUE ps_file_or_cairo, VALUE self)
+rg_render(VALUE self, VALUE ps_file_or_cairo)
 {
     if (RVAL2CBOOL(rb_obj_is_kind_of(ps_file_or_cairo, cPSFile))) {
         return page_render_to_ps(self, ps_file_or_cairo);

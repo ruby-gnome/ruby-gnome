@@ -30,6 +30,23 @@ class TestPage < Test::Unit::TestCase
     assert_kind_of(Poppler::Annotation, mapping.annotation)
   end
 
+  def test_render
+    document = Poppler::Document.new(image_pdf)
+    page = document[0]
+    png = StringIO.new
+    png.set_encoding("ASCII-8BIT")
+    Cairo::ImageSurface.new(:argb32, *page.size) do |surface|
+      Cairo::Context.new(surface) do |context|
+        page.render(context)
+      end
+      surface.write_to_png(png)
+    end
+    File.open(image_png, "rb") do |image|
+      # TODO: support image diff
+      assert_equal(image.read, png.string)
+    end
+  end
+
   private
   def find_first_image_mapping(document)
     document.each do |page|
