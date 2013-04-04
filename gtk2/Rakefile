@@ -33,6 +33,7 @@ package = GNOME2Package.new do |_package|
       :configure_args => [],
     },
   ]
+  _package.win32.support_concurrent_build = false
 end
 package.define_tasks
 
