@@ -20,6 +20,7 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
     }
   ]
+  _package.win32.support_concurrent_build = false
 end
 package.define_tasks
 
