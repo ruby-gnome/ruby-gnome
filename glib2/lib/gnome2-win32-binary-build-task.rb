@@ -119,8 +119,10 @@ class GNOME2Win32BinaryBuildTask
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
             build_make_args = common_make_args.dup
             install_make_args = common_make_args.dup
-            make_n_jobs = ENV["MAKE_N_JOBS"]
-            build_make_args << "-j#{make_n_jobs}" if make_n_jobs
+            if package[:support_concurrent_build]
+              make_n_jobs = ENV["MAKE_N_JOBS"]
+              build_make_args << "-j#{make_n_jobs}" if make_n_jobs
+            end
             ENV["GREP_OPTIONS"] = "--text"
             sh("nice", "make", *build_make_args) or exit(false)
             sh("make", "install", *install_make_args) or exit(false)

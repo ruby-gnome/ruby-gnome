@@ -202,6 +202,7 @@ class GNOME2Package
     attr_accessor :packages, :dependencies, :build_packages, :build_dependencies
     attr_accessor :build_host
     attr_accessor :relative_binary_dir, :absolute_binary_dir
+    attr_accessor :support_concurrent_build
     def initialize(package)
       @package = package
       @packages = []
@@ -211,6 +212,7 @@ class GNOME2Package
       @build_host = "i686-w64-mingw32"
       @relative_binary_dir = File.join("vendor", "local")
       @absolute_binary_dir = File.expand_path(@relative_binary_dir)
+      @support_concurrent_build = true
     end
 
     def to_hash
@@ -221,6 +223,7 @@ class GNOME2Package
         :build_host => @build_host,
         :relative_binary_dir => @relative_binary_dir,
         :absolute_binary_dir => @absolute_binary_dir,
+        :support_concurrent_build => @support_concurrent_build,
       }
     end
   end
