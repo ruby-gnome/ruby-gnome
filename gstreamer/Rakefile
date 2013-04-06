@@ -122,7 +122,7 @@ package = GNOME2Package.new do |_package|
   _package.win32.build_dependencies = [
     "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2",
   ]
-  _package.win32.support_concurrent_build = false
+  _package.win32.build_concurrently = false
   _package.post_install_message = "This library is experimental."
   _package.cross_compiling do |spec|
     if /mingw|mswin/ =~ spec.platform.to_s
