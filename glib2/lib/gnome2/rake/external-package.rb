@@ -96,7 +96,7 @@ module GNOME2
         when :gnome
           base_url = "http://ftp.gnome.org/pub/gnome/sources"
           release_series = version.gsub(/\A(\d+\.\d+).+\z/, '\1')
-          base_url << "/#{package[:name]}/#{release_series}"
+          base_url << "/#{name}/#{release_series}"
         else
           base_url = nil
         end
