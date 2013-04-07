@@ -57,7 +57,7 @@ include_paths = PKGConfig.cflags_only_I("glib-2.0")
 headers = include_paths.split.inject([]) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
 end.reject do |file|
-  /g(iochannel|scanner)\.h/ =~ file
+  /g(iochannel|main|scanner)\.h/ =~ file
 end
 include_paths = PKGConfig.cflags_only_I("gobject-2.0")
 headers = include_paths.split.inject(headers) do |result, path|
