@@ -32,9 +32,16 @@ package = GNOME2Package.new do |_package|
       :name => "gobject-introspection",
       :download_site => :gnome,
       :label => "gobject-introspection",
-      :version => "1.35.4",
-      :configure_args => [],
+      :version => "1.36.0",
+      :configure_args => [
+        "--with-g-ir-scanner=/tmp/local/bin/g-ir-scanner",
+        "--disable-tests",
+      ],
       :compression_method => "xz",
+      :patches => [
+        "0001-Support-external-g-ir-scanner.patch",
+      ],
+      :need_autoreconf => true,
     },
   ]
 end

@@ -1,0 +1,413 @@
+From a70841044cab23595eb124615e3659585f41fc4a Mon Sep 17 00:00:00 2001
+From: Kouhei Sutou <kou@clear-code.com>
+Date: Sun, 7 Apr 2013 18:51:45 +0900
+Subject: [PATCH] Support external g-ir-scanner
+
+With this change, you can build binaries for Windows on Debian
+GNU/Linux.
+
+Run configure with the following options:
+
+    % ./configure \
+        --host=i686-w64-mingw32 \
+        --with-g-ir-scanner=/usr/bin/g-ir-scanner \
+        --disable-tests
+---
+ Makefile-gir.am              |   45 +++++++++++++----------------------
+ Makefile-giscanner.am        |    6 +++++
+ Makefile-tools.am            |   15 +++++++++++-
+ Makefile.am                  |    5 +++-
+ common.mk                    |    9 ++++---
+ configure.ac                 |   54 ++++++++++++++++++++++++++++++++----------
+ tests/Makefile.am            |    2 ++
+ tests/offsets/Makefile.am    |    6 +++++
+ tests/repository/Makefile.am |    2 ++
+ tests/scanner/Makefile.am    |    4 ++++
+ 10 files changed, 103 insertions(+), 45 deletions(-)
+
+diff --git a/Makefile-gir.am b/Makefile-gir.am
+index 2b39e54..97c0d02 100644
+--- a/Makefile-gir.am
++++ b/Makefile-gir.am
+@@ -26,17 +26,17 @@ CLEANFILES += gir/cairo-1.0.gir
+ EXTRA_DIST += gir/cairo-1.0.gir.in
+ 
+ # Doesn't seem to work to do gir/%.typelib =(
+-gir/cairo-1.0.typelib: g-ir-compiler
+-gir/DBus-1.0.typelib: g-ir-compiler
+-gir/DBusGLib-1.0.typelib: g-ir-compiler
+-gir/fontconfig-2.0.typelib: g-ir-compiler
+-gir/freetype2-2.0.typelib: g-ir-compiler
+-gir/GL-1.0.typelib: g-ir-compiler
+-gir/libxml2-2.0.typelib: g-ir-compiler
+-gir/xft-2.0.typelib: g-ir-compiler
+-gir/xlib-2.0.typelib: g-ir-compiler
+-gir/xfixes-4.0.typelib: g-ir-compiler
+-gir/xrandr-1.3.typelib: g-ir-compiler
++gir/cairo-1.0.typelib: g-ir-compiler$(EXEEXT)
++gir/DBus-1.0.typelib: g-ir-compiler$(EXEEXT)
++gir/DBusGLib-1.0.typelib: g-ir-compiler$(EXEEXT)
++gir/fontconfig-2.0.typelib: g-ir-compiler$(EXEEXT)
++gir/freetype2-2.0.typelib: g-ir-compiler$(EXEEXT)
++gir/GL-1.0.typelib: g-ir-compiler$(EXEEXT)
++gir/libxml2-2.0.typelib: g-ir-compiler$(EXEEXT)
++gir/xft-2.0.typelib: g-ir-compiler$(EXEEXT)
++gir/xlib-2.0.typelib: g-ir-compiler$(EXEEXT)
++gir/xfixes-4.0.typelib: g-ir-compiler$(EXEEXT)
++gir/xrandr-1.3.typelib: g-ir-compiler$(EXEEXT)
+ 
+ # glib with source (to enable documentation)
+ if WITH_GLIBSRC
+@@ -56,11 +56,7 @@ endif
+ GLIB_INCLUDEDIR=$(shell pkg-config --variable=includedir glib-2.0)/glib-2.0
+ GLIB_LIBDIR=$(shell pkg-config --variable=libdir glib-2.0)
+ 
+-if OS_WIN32
+-GLIB_LIBRARY=libglib-2.0-0
+-else
+ GLIB_LIBRARY=glib-2.0
+-endif
+ 
+ GLib_2_0_gir_LIBS = $(GLIB_LIBRARY) $(GOBJECT_LIBRARY)
+ GLib_2_0_gir_SCANNERFLAGS = \
+@@ -89,7 +85,12 @@ endif
+ 
+ BUILT_GIRSOURCES += GLib-2.0.gir
+ 
+-GLib-2.0.gir: g-ir-scanner g-ir-compiler$(EXEEXT)
++if BUILD_SCANNER
++G_IR_SCANNER_DEPENDENCY = g-ir-scanner
++else
++G_IR_SCANNER_DEPENDENCY =
++endif
++GLib-2.0.gir: $(G_IR_SCANNER_DEPENDENCY) g-ir-compiler$(EXEEXT)
+ 
+ gir/DBusGLib-1.0.typelib: GObject-2.0.gir
+ 
+@@ -97,11 +98,7 @@ gir/DBusGLib-1.0.typelib: GObject-2.0.gir
+ GOBJECT_INCLUDEDIR=$(shell pkg-config --variable=includedir gobject-2.0)/glib-2.0
+ GOBJECT_LIBDIR=$(shell pkg-config --variable=libdir gobject-2.0)
+ 
+-if OS_WIN32
+-GOBJECT_LIBRARY=libgobject-2.0-0
+-else
+ GOBJECT_LIBRARY=gobject-2.0
+-endif
+ 
+ GObject-2.0.gir: GLib-2.0.gir
+ GObject_2_0_gir_LIBS = $(GOBJECT_LIBRARY)
+@@ -129,11 +126,7 @@ BUILT_GIRSOURCES += GObject-2.0.gir
+ GMODULE_INCLUDEDIR=$(shell pkg-config --variable=includedir gmodule-2.0)/glib-2.0
+ GMODULE_LIBDIR=$(shell pkg-config --variable=libdir gmodule-2.0)
+ 
+-if OS_WIN32
+-GMODULE_LIBRARY=libgmodule-2.0-0
+-else
+ GMODULE_LIBRARY=gmodule-2.0
+-endif
+ 
+ GModule-2.0.gir: GLib-2.0.gir
+ 
+@@ -158,11 +151,7 @@ BUILT_GIRSOURCES += GModule-2.0.gir
+ GIO_INCLUDEDIR=$(shell pkg-config --variable=includedir gio-2.0)/glib-2.0
+ GIO_LIBDIR=$(shell pkg-config --variable=libdir gio-2.0)
+ 
+-if OS_WIN32
+-GIO_LIBRARY=libgio-2.0-0
+-else
+ GIO_LIBRARY=gio-2.0
+-endif
+ 
+ if HAVE_GIO_UNIX
+ GIO_UNIX_HDRS=$(shell pkg-config --variable=includedir gio-unix-2.0)/gio-unix-2.0/gio/*.h
+diff --git a/Makefile-giscanner.am b/Makefile-giscanner.am
+index e8def0e..4c1d21e 100644
+--- a/Makefile-giscanner.am
++++ b/Makefile-giscanner.am
+@@ -1,17 +1,21 @@
+ ## Process this file with automake to produce Makefile.in
+ 
++if BUILD_SCANNER
+ BUILT_SOURCES += 		\
+ 	scannerparser.c		\
+ 	scannerparser.h 	\
+ 	scannerlexer.c 		\
+ 	scannerlexer.h
++endif
+ 
+ AM_YFLAGS = -d -t
+ 
+ # Why do I have to do this automake?
+ scannerlexer.h: scannerlexer.c
+ 
++if BUILD_SCANNER
+ noinst_LTLIBRARIES += libgiscanner.la
++endif
+ 
+ libgiscanner_la_SOURCES = \
+ 	giscanner/sourcescanner.c				\
+@@ -25,7 +29,9 @@ libgiscanner_la_CFLAGS = $(GOBJECT_CFLAGS) $(GIO_CFLAGS)
+ 
+ # Python module
+ pkgpyexecdir = $(pkglibdir)/giscanner
++if BUILD_SCANNER
+ pkgpyexec_LTLIBRARIES = _giscanner.la
++endif
+ pkgpyexec_PYTHON =		\
+ 	giscanner/__init__.py		\
+ 	giscanner/annotationmain.py	\
+diff --git a/Makefile-tools.am b/Makefile-tools.am
+index 34d2a25..87c3a1f 100644
+--- a/Makefile-tools.am
++++ b/Makefile-tools.am
+@@ -1,5 +1,8 @@
+ bin_PROGRAMS += g-ir-compiler g-ir-generate
++
++if BUILD_SCANNER
+ bin_SCRIPTS += g-ir-scanner g-ir-annotation-tool
++endif
+ 
+ if BUILD_DOCTOOL
+ bin_SCRIPTS += g-ir-doc-tool
+@@ -12,6 +15,7 @@ EXTRA_DIST += 				\
+ 
+ TOOL_SUBSTITUTIONS = sed -e s,@libdir\@,$(libdir), -e s,@datarootdir\@,$(datarootdir), -e s,@PYTHON\@,$(PYTHON),
+ 
++if BUILD_SCANNER
+ g-ir-scanner: tools/g-ir-scanner.in _giscanner.la Makefile
+ 	$(AM_V_GEN) $(TOOL_SUBSTITUTIONS) $< > $@.tmp && mv $@.tmp $@
+ 	@chmod a+x $@
+@@ -19,10 +23,13 @@ g-ir-scanner: tools/g-ir-scanner.in _giscanner.la Makefile
+ g-ir-annotation-tool: tools/g-ir-annotation-tool.in _giscanner.la Makefile
+ 	$(AM_V_GEN) $(TOOL_SUBSTITUTIONS) $< > $@.tmp && mv $@.tmp $@
+ 	@chmod a+x $@
++endif
+ 
++if BUILD_DOCTOOL
+ g-ir-doc-tool: tools/g-ir-doc-tool.in _giscanner.la Makefile
+ 	$(AM_V_GEN) $(TOOL_SUBSTITUTIONS) $< > $@.tmp && mv $@.tmp $@
+ 	@chmod a+x $@
++endif
+ 
+ g_ir_compiler_SOURCES = tools/compiler.c
+ g_ir_compiler_CPPFLAGS = -DGIREPO_DEFAULT_SEARCH_PATH="\"$(libdir)\"" \
+@@ -46,4 +53,10 @@ GCOVSOURCES =					\
+ 	$(g_ir_compiler_SOURCES)		\
+ 	$(g_ir_generate_SOURCES)
+ 
+-CLEANFILES += g-ir-scanner g-ir-annotation-tool g-ir-doc-tool
++if BUILD_SCANNER
++CLEANFILES += g-ir-scanner g-ir-annotation-tool
++endif
++
++if BUILD_DOCTOOL
++CLEANFILES += g-ir-doc-tool
++endif
+diff --git a/Makefile.am b/Makefile.am
+index 736f3ad..08014bc 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -33,8 +33,11 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+ 
+ man_MANS += 			\
+ 	docs/g-ir-compiler.1	\
+-	docs/g-ir-generate.1	\
++	docs/g-ir-generate.1
++if BUILD_SCANNER
++man_MANS +=			\
+ 	docs/g-ir-scanner.1
++endif
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = gobject-introspection-1.0.pc gobject-introspection-no-export-1.0.pc
+diff --git a/common.mk b/common.mk
+index 28b73c7..15552fa 100644
+--- a/common.mk
++++ b/common.mk
+@@ -9,11 +9,14 @@
+ INTROSPECTION_SCANNER = \
+     env PATH=.libs:$(PATH) \
+         LPATH=.libs \
+-        CC="$(CC)" \
++        CC="$(CC)"
++if BUILD_SCANNER
++INTROSPECTION_SCANNER += \
+         PYTHONPATH=$(top_builddir):$(top_srcdir) \
+         UNINSTALLED_INTROSPECTION_SRCDIR=$(top_srcdir) \
+-        UNINSTALLED_INTROSPECTION_BUILDDIR=$(top_builddir) \
+-        $(top_builddir)/g-ir-scanner
++        UNINSTALLED_INTROSPECTION_BUILDDIR=$(top_builddir)
++endif
++INTROSPECTION_SCANNER += $(G_IR_SCANNER)
+ 
+ INTROSPECTION_SCANNER_ARGS = \
+     --verbose \
+diff --git a/configure.ac b/configure.ac
+index 3537af1..604b164 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -246,19 +246,42 @@ AC_FUNC_STRTOD
+ AC_CHECK_FUNCS([memchr strchr strspn strstr strtol strtoull])
+ AC_CHECK_FUNCS([backtrace backtrace_symbols])
+ 
+-# Python
+-AM_PATH_PYTHON([2.5])
+-case "$host" in
+-*-*-mingw*)
+-	# Change backslashes to forward slashes in pyexecdir to avoid
+-	# quoting issues
+-	pyexecdir=`echo $pyexecdir | tr '\\\\' '/'`
+-	;;
++AC_ARG_WITH(g_ir_scanner,
++            AS_HELP_STRING([--with-g-ir-scanner],
++                           [Use existing g-ir-scanner instead of building. @<:@default=no@:>@]),
++            [],
++            [with_g_ir_scanner=no])
++case "x${with_g_ir_scanner}" in
++xyes)
++        AC_PATH_PROG(G_IR_SCANNER,
++                     [g-ir-scanner],
++                     [AC_MSG_ERROR([g-ir-scanner not found.])])
++        build_g_ir_scanner=no
++        ;;
++xno)
++        # Python
++        AM_PATH_PYTHON([2.5])
++        case "$host" in
++        *-*-mingw*)
++                # Change backslashes to forward slashes in pyexecdir to avoid
++                # quoting issues
++                pyexecdir=`echo $pyexecdir | tr '\\\\' '/'`
++                ;;
++        esac
++        AM_CHECK_PYTHON_HEADERS(, AC_MSG_ERROR([Python headers not found]))
++        if test "x$os_win32" = "xyes"; then
++          AM_CHECK_PYTHON_LIBS(, AC_MSG_ERROR([Python libs not found. Windows requires Python modules to be explicitly linked to libpython.]))
++        fi
++        G_IR_SCANNER="\$(top_builddir)/g-ir-scanner"
++        build_g_ir_scanner=yes
++        ;;
++*)
++        G_IR_SCANNER="${with_g_ir_scanner}"
++        build_g_ir_scanner=no
++        ;;
+ esac
+-AM_CHECK_PYTHON_HEADERS(, AC_MSG_ERROR([Python headers not found]))
+-if test "x$os_win32" = "xyes"; then
+-  AM_CHECK_PYTHON_LIBS(, AC_MSG_ERROR([Python libs not found. Windows requires Python modules to be explicitly linked to libpython.]))
+-fi
++AC_SUBST(G_IR_SCANNER)
++AM_CONDITIONAL(BUILD_SCANNER, test x${build_g_ir_scanner} = xyes)
+ 
+ dnl Not enabled by default until 3.6 cycle when we can propose mako as
+ dnl an external dependency
+@@ -310,6 +333,13 @@ fi
+ 
+ AC_SUBST(EXTRA_LINK_FLAGS)
+ 
++AC_ARG_ENABLE(tests,
++              [AS_HELP_STRING([--disable-tests],
++                              [disable tests])],
++              [],
++              [enable_tests=yes])
++AM_CONDITIONAL(ENABLE_TESTS, test x"$enable_tests" = xyes)
++
+ AC_CONFIG_FILES([
+ Makefile
+ m4/Makefile
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index b4985b9..5c9db00 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -16,7 +16,9 @@ tests_DATA =		    \
+     gimarshallingtests.c    \
+     gimarshallingtests.h
+ 
++if ENABLE_TESTS
+ check_LTLIBRARIES = libeverything-1.0.la libgimarshallingtests-1.0.la
++endif
+ 
+ libeverything_1_0_la_SOURCES = everything.c
+ libgimarshallingtests_1_0_la_SOURCES = gimarshallingtests.c
+diff --git a/tests/offsets/Makefile.am b/tests/offsets/Makefile.am
+index 4f03830..053bd93 100644
+--- a/tests/offsets/Makefile.am
++++ b/tests/offsets/Makefile.am
+@@ -11,7 +11,9 @@ check_PROGRAMS =
+ 
+ ############################################################
+ 
++if ENABLE_TESTS
+ check_LTLIBRARIES += liboffsets.la
++endif
+ 
+ liboffsets_la_SOURCES = \
+ 	offsets.h	\
+@@ -32,7 +34,9 @@ CLEANFILES += Offsets-1.0.gir Offsets-1.0.typelib
+ 
+ ############################################################
+ 
++if ENABLE_TESTS
+ check_PROGRAMS += gitestoffsets
++endif
+ 
+ nodist_gitestoffsets_SOURCES = gitestoffsets.c
+ gitestoffsets_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository
+@@ -42,8 +46,10 @@ gitestoffsets.c: gen-gitestoffsets offsets.h
+ 	$(AM_V_GEN) $(PYTHON) $(srcdir)/gen-gitestoffsets $(srcdir)/offsets.h > $@ || ( rm -f $@ && false )
+ 
+ EXTRA_DIST += gen-gitestoffsets
++if ENABLE_TESTS
+ BUILT_SOURCES += gitestoffsets.c
+ CLEANFILES += gitestoffsets.c
++endif
+ 
+ ############################################################
+ 
+diff --git a/tests/repository/Makefile.am b/tests/repository/Makefile.am
+index 96afb89..0553a8b 100644
+--- a/tests/repository/Makefile.am
++++ b/tests/repository/Makefile.am
+@@ -2,7 +2,9 @@ AM_CFLAGS = $(GOBJECT_CFLAGS)
+ AM_LDFLAGS = -module -avoid-version
+ LIBS = $(GOBJECT_LIBS)
+ 
++if ENABLE_TESTS
+ check_PROGRAMS = gitestrepo gitestthrows gitypelibtest
++endif
+ 
+ gitestrepo_SOURCES = $(srcdir)/gitestrepo.c
+ gitestrepo_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository
+diff --git a/tests/scanner/Makefile.am b/tests/scanner/Makefile.am
+index 31487a6..65c02fa 100644
+--- a/tests/scanner/Makefile.am
++++ b/tests/scanner/Makefile.am
+@@ -5,6 +5,7 @@ include $(top_srcdir)/Makefile.introspection
+ 
+ INTROSPECTION_SCANNER_ARGS += --warn-all
+ 
++if ENABLE_TESTS
+ check_LTLIBRARIES = \
+ 	libsletter.la \
+ 	libutility.la \
+@@ -13,6 +14,7 @@ check_LTLIBRARIES = \
+ 	libregress.la \
+ 	libwarnlib.la \
+ 	$(NULL)
++endif
+ 
+ AM_CPPFLAGS = -I$(top_srcdir)/girepository
+ AM_CFLAGS = $(GIO_CFLAGS) $(GOBJECT_CFLAGS) $(GTHREAD_CFLAGS)
+@@ -126,7 +128,9 @@ GetType_1_0_gir_SCANNERFLAGS = --c-include="gettype.h" --identifier-prefix=GetTy
+ GIRS += GetType-1.0.gir
+ 
+ if !OS_WIN32
++if ENABLE_TESTS
+ check_PROGRAMS = barapp
++endif
+ 
+ barapp_SOURCES = $(srcdir)/barapp.c $(srcdir)/barapp.h
+ barapp_LDADD = $(top_builddir)/libgirepository-1.0.la
+-- 
+1.7.10.4
+

@@ -334,7 +334,6 @@ namespace :gem do
 
   namespace :win32 do
     win32_unsupported_packages = [
-      "gobject-introspection",
       "goocanvas",
       "vte",
       "vte3",
