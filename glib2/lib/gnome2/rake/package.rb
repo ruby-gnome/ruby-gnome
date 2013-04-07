@@ -4,14 +4,14 @@
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 
-require 'find'
+require "find"
 
-require 'rubygems'
-require 'rubygems/package_task'
-require 'rake/extensiontask'
-require 'gnome2/rake/external-package'
-require 'gnome2/rake/win32-binary-download-task'
-require 'gnome2/rake/win32-binary-build-task'
+require "rubygems"
+require "rubygems/package_task"
+require "rake/extensiontask"
+require "gnome2/rake/external-package"
+require "gnome2/rake/win32-binary-download-task"
+require "gnome2/rake/win32-binary-build-task"
 
 module GNOME2
   module Rake
