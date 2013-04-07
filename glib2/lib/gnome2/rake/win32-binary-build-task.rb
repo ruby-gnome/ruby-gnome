@@ -59,18 +59,18 @@ class GNOME2Win32BinaryBuildTask
         download_task = "source:downloader:download:#{package.name}"
         desc "Build #{package.label} and install it into #{dist_dir}."
         task package.name => [:prepare, download_task] do
-          package_tmp_dir = tmp_dir + package.name
+          package_tmp_dir = @package.tmp_dir + package.name
           rm_rf(package_tmp_dir)
           mkdir_p(package_tmp_dir)
 
-          tar_full_path = download_dir + package.archive_base_name
+          tar_full_path = @package.download_dir + package.archive_base_name
           Dir.chdir(package_tmp_dir.to_s) do
             sh("tar", "xf", tar_full_path.to_s) or exit(false)
           end
 
           Dir.chdir((package_tmp_dir + package.base_name).to_s) do
             package.patches.each do |patch|
-              sh("patch -p1 < #{patches_dir}/#{patch}")
+              sh("patch -p1 < #{@packages.patches_dir}/#{patch}")
             end
             package.remove_paths.each do |path|
               rm_rf(path)
@@ -133,36 +133,16 @@ class GNOME2Win32BinaryBuildTask
     dist_dir + "share" + "license"
   end
 
-  def package_root_dir
-    @package.root_dir
-  end
-
-  def tmp_dir
-    package_root_dir + "tmp"
-  end
-
-  def download_dir
-    tmp_dir + "download"
-  end
-
-  def patches_dir
-    package_root_dir + "patches"
-  end
-
-  def glib2_dir
-    package_root_dir.parent + "glib2"
-  end
-
   def glib2_include_path
-    "#{glib2_dir}/vendor/local/include"
+    "#{@package.glib2_root_dir}/vendor/local/include"
   end
 
   def glib2_lib_path
-    "#{glib2_dir}/vendor/local/lib"
+    "#{@package.glib2_root_dir}/vendor/local/lib"
   end
 
   def rcairo_win32_dir
-    package_root_dir.parent.parent + "rcairo.win32"
+    @package.project_root_dir.parent + "rcairo.win32"
   end
 
   def rcairo_win32_pkgconfig_path
