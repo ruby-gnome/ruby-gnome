@@ -88,9 +88,12 @@ module GNOME2
           (super || []).collect do |package|
             package = package.dup
             package[:windows] = {
-              :include_paths  => package.delete(:include_paths),
-              :library_paths  => package.delete(:library_paths),
-              :configure_args => package.delete(:configure_args),
+              :include_paths   => package.delete(:include_paths),
+              :library_paths   => package.delete(:library_paths),
+              :configure_args  => package.delete(:configure_args),
+              :patches         => package.delete(:patches),
+              :need_autogen    => package.delete(:need_autogen),
+              :need_autoreconf => package.delete(:need_autoreconf),
             }
             ExternalPackage.new(package)
           end

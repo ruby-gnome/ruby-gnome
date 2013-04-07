@@ -69,14 +69,14 @@ class GNOME2Win32BinaryBuildTask
           end
 
           Dir.chdir((package_tmp_dir + package.base_name).to_s) do
-            package.patches.each do |patch|
+            package.windows.patches.each do |patch|
               sh("patch -p1 < #{@packages.patches_dir}/#{patch}")
             end
             package.remove_paths.each do |path|
               rm_rf(path)
             end
-            sh("./autogen.sh") if package.need_autogen?
-            sh("autoreconf --install") if package.need_autoreconf?
+            sh("./autogen.sh") if package.windows.need_autogen?
+            sh("autoreconf --install") if package.windows.need_autoreconf?
             sh("./configure",
                "CPPFLAGS=#{cppflags(package)}",
                "LDFLAGS=#{ldflags(package)}",
