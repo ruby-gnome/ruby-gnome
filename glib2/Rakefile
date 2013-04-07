@@ -76,16 +76,6 @@ end
 package.define_tasks
 
 namespace :win32 do
-  namespace :gettext do
-    namespace :header do
-      desc "Move gettext headers to include/glib-2.0/"
-      task :fix do
-        mv(File.join(include_dir, "libintl.h"),
-           glib2_include_dir)
-      end
-    end
-  end
-
   namespace :libffi do
     namespace :header do
       desc "Move libffi headers to include/"
@@ -100,8 +90,23 @@ namespace :win32 do
 
   namespace :downloader do
     task :after => [
-      "win32:gettext:header:fix",
       "win32:libffi:header:fix",
+    ]
+  end
+
+  namespace :gettext do
+    namespace :header do
+      desc "Copy gettext headers to include/glib-2.0/"
+      task :fix do
+        cp(File.join(include_dir, "libintl.h"),
+           glib2_include_dir)
+      end
+    end
+  end
+
+  namespace :buildler do
+    task :after => [
+      "win32:gettext:header:fix",
     ]
   end
 end
