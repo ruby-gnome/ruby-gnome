@@ -8,9 +8,9 @@ glib2_include_dir  = nil
 libffi_lib_dir     = nil
 
 package = GNOME2Package.new do |_package|
-  include_dir        = File.join(_package.win32.absolute_binary_dir, "include")
+  include_dir        = (_package.windows.absolute_binary_dir + "include").to_s
   glib2_include_dir  = File.join(include_dir, "glib-2.0")
-  libffi_lib_dir     = File.join(_package.win32.absolute_binary_dir, "lib")
+  libffi_lib_dir     = (_package.windows.absolute_binary_dir + "lib").to_s
 
   _package.summary = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
   _package.description = "Ruby/GLib2 is a Ruby binding of GLib-2.x."

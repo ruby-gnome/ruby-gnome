@@ -10,8 +10,8 @@ class GNOME2Win32BinaryDownloadTask
   include Rake::DSL
 
   URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries/win32"
-  def initialize(configuration)
-    @configuration = configuration
+  def initialize(package)
+    @package = package
     define
   end
 
@@ -23,8 +23,8 @@ class GNOME2Win32BinaryDownloadTask
 
         download_tasks = []
         namespace :download do
-          directory dist_dir
-          task :prepare => [dist_dir]
+          directory dist_dir.to_s
+          task :prepare => [dist_dir.to_s]
 
           packages.each do |package|
             desc "download #{package}"
@@ -60,15 +60,15 @@ class GNOME2Win32BinaryDownloadTask
   end
 
   def dist_dir
-    @configuration.absolute_binary_dir
+    @package.windows.absolute_binary_dir
   end
 
   def packages
-    @configuration.packages
+    @package.windows.packages
   end
 
   def dependencies
-    @configuration.dependencies
+    @package.windows.dependencies
   end
 
   def download_package(package)

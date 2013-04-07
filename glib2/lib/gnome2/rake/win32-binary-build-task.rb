@@ -8,8 +8,8 @@ require "pathname"
 class GNOME2Win32BinaryBuildTask
   include Rake::DSL
 
-  def initialize(configuration)
-    @configuration = configuration
+  def initialize(package)
+    @package = package
     define
   end
 
@@ -63,10 +63,10 @@ class GNOME2Win32BinaryBuildTask
       namespace :prepare do
         prepare_task_names << "pkg_config"
         task :pkg_config do
-          depended_packages = @configuration.build_dependencies
-          use_packages = [@configuration.package.name] + depended_packages
+          depended_packages = @package.windows.build_dependencies
+          use_packages = [@package.name] + depended_packages
           pkg_config_path = use_packages.collect do |package|
-            "../#{package}/#{@configuration.relative_binary_dir}/lib/pkgconfig"
+            "../#{package}/#{@package.windows.relative_binary_dir}/lib/pkgconfig"
           end
           ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
             File.expand_path(path)
@@ -106,7 +106,7 @@ class GNOME2Win32BinaryBuildTask
                "CPPFLAGS=#{cppflags(package)}",
                "LDFLAGS=#{ldflags(package)}",
                "--prefix=#{dist_dir}",
-               "--host=#{@configuration.build_host}",
+               "--host=#{@package.windows.build_host}",
                *package.windows.configure_args) or exit(false)
             common_make_args = []
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
@@ -143,11 +143,15 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def build_packages
-    @configuration.build_packages
+    packages = @package.external_packages.select do |package|
+      package.windows.build?
+    end
+    # For backward compatibility
+    packages + @package.windows.build_packages
   end
 
   def dist_dir
-    Pathname.new(@configuration.absolute_binary_dir)
+    @package.windows.absolute_binary_dir
   end
 
   def license_dir
@@ -155,7 +159,7 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def package_root_dir
-    Pathname.new(@configuration.package.root_dir)
+    @package.root_dir
   end
 
   def tmp_dir
@@ -200,7 +204,7 @@ class GNOME2Win32BinaryBuildTask
 
   def cppflags(package)
     include_paths = package.windows.include_paths
-    if @configuration.build_dependencies.include?("glib2")
+    if @package.windows.build_dependencies.include?("glib2")
       include_paths += [glib2_include_path]
     end
     include_paths += [
@@ -215,7 +219,7 @@ class GNOME2Win32BinaryBuildTask
 
   def ldflags(package)
     library_paths = package.windows.library_paths
-    if @configuration.build_dependencies.include?("glib2")
+    if @package.windows.build_dependencies.include?("glib2")
       library_paths += [glib2_lib_path]
     end
     library_paths += [

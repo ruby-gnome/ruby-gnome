@@ -5,10 +5,12 @@
 # This program is licenced under the same license of Ruby-GNOME2.
 
 require "find"
+require "pathname"
 
 require "rubygems"
 require "rubygems/package_task"
 require "rake/extensiontask"
+require "gnome2/rake/package"
 require "gnome2/rake/external-package"
 require "gnome2/rake/win32-binary-download-task"
 require "gnome2/rake/win32-binary-build-task"
@@ -20,15 +22,13 @@ module GNOME2
 
       attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
       attr_reader :root_dir
-      attr_writer :external_packages
       def initialize
         initialize_variables
         initialize_configurations
         file, line, method = caller[1].scan(/^(.*):(\d+)(?::.*`(.*)')?\Z/).first
-        @root_dir = File.dirname(file)
-        @glib2_root_dir = File.expand_path("#{@root_dir}/../glib2")
-        @packages = FileList["#{File.dirname(@root_dir)}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
-        @name = File.basename(@root_dir)
+        @package = Package.new(File.dirname(file))
+        @packages = FileList["#{@package.root_dir.parent}/*"].map{|f| File.directory?(f) ? File.basename(f) : nil}.compact
+        @name = @package.name
         @cross_compiling_hooks = []
         yield(self) if block_given?
       end
@@ -52,8 +52,13 @@ module GNOME2
         @dependency_configuration
       end
 
+      def windows
+        @package.windows
+      end
+
+      # For backward compatibility
       def win32
-        @win32_configuration
+        windows
       end
 
       def version
@@ -62,7 +67,7 @@ module GNOME2
 
       def guess_version
         versions = {}
-        File.open("#{@glib2_root_dir}/ext/glib2/rbglib.h") do |rbglib_h|
+        File.open("#{@package.glib2_root_dir}/ext/glib2/rbglib.h") do |rbglib_h|
           rbglib_h.each_line do |line|
             if /#define\s+RBGLIB_([A-Z]+)_VERSION\s+(\d+)/ =~ line
               versions[$1.downcase] = $2.to_i
@@ -72,15 +77,12 @@ module GNOME2
         ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
       end
 
-      def external_packages
-        @external_packages.collect do |package|
-          ExternalPackage.new(package)
-        end
+      def external_packages=(packages)
+        @package.external_packages = packages
       end
 
       private
       def initialize_variables
-        @name = ""
         @summary = ""
         @description = ""
         @author = "The Ruby-GNOME2 Project Team"
@@ -91,7 +93,6 @@ module GNOME2
 
       def initialize_configurations
         @dependency_configuration = DependencyConfiguration.new(self)
-        @win32_configuration = Win32Configuration.new(self)
       end
 
       def define_spec
@@ -135,7 +136,7 @@ module GNOME2
           ext.cross_compile = true
           ext.cross_compiling do |spec|
             if /mingw|mswin/ =~ spec.platform.to_s
-              win32_binary_dir = @win32_configuration.relative_binary_dir
+              win32_binary_dir = @package.relative_binary_dir
               win32_files = []
               if File.exist?(win32_binary_dir)
                 Find.find(win32_binary_dir) do |file|
@@ -152,11 +153,11 @@ module GNOME2
         end
 
         def define_win32_download_task
-          GNOME2Win32BinaryDownloadTask.new(@win32_configuration)
+          GNOME2Win32BinaryDownloadTask.new(@package)
         end
 
         def define_win32_build_task
-          GNOME2Win32BinaryBuildTask.new(@win32_configuration)
+          GNOME2Win32BinaryBuildTask.new(@package)
         end
       end
 
@@ -205,55 +206,6 @@ module GNOME2
             ver << ">= #{@package.version}" if @package.ruby_gnome2_package?(name)
             [name, *ver]
           end
-        end
-      end
-
-      class Win32Configuration
-        attr_reader :package
-        attr_writer :build_packages
-        attr_accessor :packages, :dependencies, :build_dependencies
-        attr_accessor :build_host
-        attr_accessor :relative_binary_dir, :absolute_binary_dir
-        attr_accessor :build_concurrently
-        def initialize(package)
-          @package = package
-          @packages = []
-          @dependencies = []
-          @build_packages = []
-          @build_dependencies = []
-          @build_host = "i686-w64-mingw32"
-          @relative_binary_dir = File.join("vendor", "local")
-          @absolute_binary_dir = File.expand_path(@relative_binary_dir)
-          @build_concurrently = true
-        end
-
-        def to_hash
-          {
-            :packages => @packages,
-            :dependencies => @dependencies,
-            :build_packages => @build_packages,
-            :build_host => @build_host,
-            :relative_binary_dir => @relative_binary_dir,
-            :absolute_binary_dir => @absolute_binary_dir,
-            :build_concurrently => @build_concurrently,
-          }
-        end
-
-        def build_packages
-          packages = @package.external_packages.select do |package|
-            package.windows.build?
-          end
-          # For backward compatibility
-          packages += @build_packages.collect do |package|
-            package = package.dup
-            package[:windows] = {
-              :include_paths  => package.delete(:include_paths),
-              :library_paths  => package.delete(:library_paths),
-              :configure_args => package.delete(:configure_args),
-            }
-            ExternalPackage.new(package)
-          end
-          packages
         end
       end
     end
