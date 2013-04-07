@@ -18,42 +18,17 @@ class GNOME2Win32BinaryBuildTask
     namespace :win32 do
       namespace :builder do
         task :before
-        define_download_tasks
         define_build_tasks
         build_tasks = build_packages.collect do |package|
           "win32:builder:build:#{package.name}"
         end
-        desc "Build Windows binaries"
         task :build => build_tasks
         task :after
       end
-      desc "download source and build Windows binaries"
+      desc "Build Windows binaries"
       task :build => ["win32:builder:before",
                       "win32:builder:build",
                       "win32:builder:after"]
-    end
-  end
-
-  def define_download_tasks
-    namespace :download do
-      build_packages.each do |package|
-        tar_full_path = download_dir + package.archive_base_name
-
-        desc "Download #{package.label} into #{download_dir}."
-        task package[:name] => tar_full_path.to_s
-
-        directory_path = tar_full_path.dirname
-        directory directory_path.to_s
-        file tar_full_path.to_s => directory_path.to_s do
-          archive_url = package.archive_url
-          rake_output_message "downloading... #{archive_url}"
-          open(archive_url) do |downloaded_tar|
-            tar_full_path.open("wb") do |tar_file|
-              tar_file.print(downloaded_tar.read)
-            end
-          end
-        end
-      end
     end
   end
 
@@ -81,7 +56,7 @@ class GNOME2Win32BinaryBuildTask
       task :prepare => full_prepare_task_names
 
       build_packages.each do |package|
-        download_task = "win32:builder:download:#{package.name}"
+        download_task = "source:downloader:download:#{package.name}"
         desc "Build #{package.label} and install it into #{dist_dir}."
         task package.name => [:prepare, download_task] do
           package_tmp_dir = tmp_dir + package.name

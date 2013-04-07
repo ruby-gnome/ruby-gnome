@@ -12,6 +12,7 @@ require "rubygems/package_task"
 require "rake/extensiontask"
 require "gnome2/rake/package"
 require "gnome2/rake/external-package"
+require "gnome2/rake/source-download-task"
 require "gnome2/rake/win32-binary-download-task"
 require "gnome2/rake/win32-binary-build-task"
 
@@ -40,6 +41,7 @@ module GNOME2
       def define_tasks
         task :default => :build
         define_spec
+        define_source_download_tasks
         define_win32_tasks
         define_package_tasks
       end
@@ -118,6 +120,11 @@ module GNOME2
           s.post_install_message  = @post_install_message
           @dependency_configuration.apply(s)
         end
+      end
+
+      def define_source_download_tasks
+        task = SourceDownloadTask.new(@package)
+        task.define
       end
 
       def define_win32_tasks
