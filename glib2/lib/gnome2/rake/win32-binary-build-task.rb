@@ -10,9 +10,6 @@ class GNOME2Win32BinaryBuildTask
 
   def initialize(configuration)
     @configuration = configuration
-    @configuration.build_packages.each do |package|
-      package[:compression_method] ||= "gz"
-    end
     define
   end
 
@@ -24,7 +21,7 @@ class GNOME2Win32BinaryBuildTask
         define_download_tasks
         define_build_tasks
         build_tasks = build_packages.collect do |package|
-          "win32:builder:build:#{package[:name]}"
+          "win32:builder:build:#{package.name}"
         end
         desc "Build Windows binaries"
         task :build => build_tasks
@@ -40,19 +37,17 @@ class GNOME2Win32BinaryBuildTask
   def define_download_tasks
     namespace :download do
       build_packages.each do |package|
-        base = "#{package[:name]}-#{package[:version]}"
-        tar = "#{base}.tar.#{package[:compression_method]}"
-        tar_url = "#{download_base_url(package)}/#{tar}"
-        tar_full_path = download_dir + tar
+        tar_full_path = download_dir + package.archive_base_name
 
-        desc "Download #{package[:label]} into #{download_dir}."
+        desc "Download #{package.label} into #{download_dir}."
         task package[:name] => tar_full_path.to_s
 
         directory_path = tar_full_path.dirname
         directory directory_path.to_s
         file tar_full_path.to_s => directory_path.to_s do
-          rake_output_message "downloading... #{tar_url}"
-          open(tar_url) do |downloaded_tar|
+          archive_url = package.archive_url
+          rake_output_message "downloading... #{archive_url}"
+          open(archive_url) do |downloaded_tar|
             tar_full_path.open("wb") do |tar_file|
               tar_file.print(downloaded_tar.read)
             end
@@ -86,40 +81,38 @@ class GNOME2Win32BinaryBuildTask
       task :prepare => full_prepare_task_names
 
       build_packages.each do |package|
-        download_task = "win32:builder:download:#{package[:name]}"
-        desc "Build #{package[:label]} and install it into #{dist_dir}."
-        task package[:name] => [:prepare, download_task] do
-          package_tmp_dir = tmp_dir + package[:name]
+        download_task = "win32:builder:download:#{package.name}"
+        desc "Build #{package.label} and install it into #{dist_dir}."
+        task package.name => [:prepare, download_task] do
+          package_tmp_dir = tmp_dir + package.name
           rm_rf(package_tmp_dir)
           mkdir_p(package_tmp_dir)
 
-          base = "#{package[:name]}-#{package[:version]}"
-          tar = "#{base}.tar.#{package[:compression_method]}"
-          tar_full_path = download_dir + tar
+          tar_full_path = download_dir + package.archive_base_name
           Dir.chdir(package_tmp_dir.to_s) do
             sh("tar", "xf", tar_full_path.to_s) or exit(false)
           end
 
-          Dir.chdir((package_tmp_dir + base).to_s) do
-            (package[:patches] || []).each do |patch|
+          Dir.chdir((package_tmp_dir + package.base_name).to_s) do
+            package.patches.each do |patch|
               sh("patch -p1 < #{patches_dir}/#{patch}")
             end
-            (package[:remove_paths] || []).each do |path|
+            package.remove_paths.each do |path|
               rm_rf(path)
             end
-            sh("./autogen.sh") if package[:need_autogen]
-            sh("autoreconf --install") if package[:need_autoreconf]
+            sh("./autogen.sh") if package.need_autogen?
+            sh("autoreconf --install") if package.need_autoreconf?
             sh("./configure",
                "CPPFLAGS=#{cppflags(package)}",
                "LDFLAGS=#{ldflags(package)}",
                "--prefix=#{dist_dir}",
                "--host=#{@configuration.build_host}",
-               *package[:configure_args]) or exit(false)
+               *package.windows_configure_args) or exit(false)
             common_make_args = []
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
             build_make_args = common_make_args.dup
             install_make_args = common_make_args.dup
-            if package[:build_concurrently]
+            if package.build_concurrently?
               make_n_jobs = ENV["MAKE_N_JOBS"]
               build_make_args << "-j#{make_n_jobs}" if make_n_jobs
             end
@@ -127,14 +120,14 @@ class GNOME2Win32BinaryBuildTask
             sh("nice", "make", *build_make_args) or exit(false)
             sh("make", "install", *install_make_args) or exit(false)
 
-            package_license_dir = license_dir + package[:name]
+            package_license_dir = license_dir + package.name
             mkdir_p(package_license_dir)
             package_license_files = ["AUTHORS", "COPYING", "COPYING.LIB"]
             package_license_files = package_license_files.reject do |file|
               not File.exist?(file)
             end
             cp(package_license_files, package_license_dir)
-            bundled_packages = package[:bundled_packages] || []
+            bundled_packages = package.bundled_packages
             bundled_packages.each do |bundled_package|
               bundled_package_license_dir = license_dir + bundled_package[:name]
               mkdir_p(bundled_package_license_dir)
@@ -205,21 +198,8 @@ class GNOME2Win32BinaryBuildTask
     "#{rcairo_win32_dir}/vendor/local/lib"
   end
 
-  def download_base_url(package)
-    download_base_url = package[:download_base_url]
-    return download_base_url if download_base_url
-
-    case package[:download_site]
-    when :gnome
-      download_base_url = "http://ftp.gnome.org/pub/gnome/sources"
-      release_series = package[:version].gsub(/\A(\d+\.\d+).+\z/, '\1')
-      download_base_url << "/#{package[:name]}/#{release_series}"
-    end
-    download_base_url
-  end
-
   def cppflags(package)
-    include_paths = package[:include_paths] || []
+    include_paths = package.windows_include_paths
     if @configuration.build_dependencies.include?("glib2")
       include_paths += [glib2_include_path]
     end
@@ -234,7 +214,7 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def ldflags(package)
-    library_paths = package[:library_paths] || []
+    library_paths = package.windows_library_paths
     if @configuration.build_dependencies.include?("glib2")
       library_paths += [glib2_lib_path]
     end

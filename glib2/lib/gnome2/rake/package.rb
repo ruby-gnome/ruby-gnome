@@ -9,10 +9,11 @@ require 'find'
 require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/extensiontask'
+require 'gnome2/rake/external-package'
 require 'gnome2/rake/win32-binary-download-task'
 require 'gnome2/rake/win32-binary-build-task'
 
-class GNOME2
+module GNOME2
   module Rake
     class Package
       include ::Rake::DSL
@@ -201,7 +202,8 @@ class GNOME2
 
       class Win32Configuration
         attr_reader :package
-        attr_accessor :packages, :dependencies, :build_packages, :build_dependencies
+        attr_writer :build_packages
+        attr_accessor :packages, :dependencies, :build_dependencies
         attr_accessor :build_host
         attr_accessor :relative_binary_dir, :absolute_binary_dir
         attr_accessor :build_concurrently
@@ -227,6 +229,12 @@ class GNOME2
             :absolute_binary_dir => @absolute_binary_dir,
             :build_concurrently => @build_concurrently,
           }
+        end
+
+        def build_packages
+          @build_packages.collect do |package|
+            ExternalPackage.new(package)
+          end
         end
       end
     end
