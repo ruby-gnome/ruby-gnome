@@ -107,7 +107,7 @@ class GNOME2Win32BinaryBuildTask
                "LDFLAGS=#{ldflags(package)}",
                "--prefix=#{dist_dir}",
                "--host=#{@configuration.build_host}",
-               *package.windows_configure_args) or exit(false)
+               *package.windows.configure_args) or exit(false)
             common_make_args = []
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
             build_make_args = common_make_args.dup
@@ -199,7 +199,7 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def cppflags(package)
-    include_paths = package.windows_include_paths
+    include_paths = package.windows.include_paths
     if @configuration.build_dependencies.include?("glib2")
       include_paths += [glib2_include_path]
     end
@@ -214,7 +214,7 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def ldflags(package)
-    library_paths = package.windows_library_paths
+    library_paths = package.windows.library_paths
     if @configuration.build_dependencies.include?("glib2")
       library_paths += [glib2_lib_path]
     end

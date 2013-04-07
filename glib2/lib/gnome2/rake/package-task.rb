@@ -20,6 +20,7 @@ module GNOME2
 
       attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
       attr_reader :root_dir
+      attr_writer :external_packages
       def initialize
         initialize_variables
         initialize_configurations
@@ -71,6 +72,12 @@ module GNOME2
         ["major", "minor", "micro"].collect {|type| versions[type]}.compact.join(".")
       end
 
+      def external_packages
+        @external_packages.collect do |package|
+          ExternalPackage.new(package)
+        end
+      end
+
       private
       def initialize_variables
         @name = ""
@@ -79,6 +86,7 @@ module GNOME2
         @author = "The Ruby-GNOME2 Project Team"
         @email = "ruby-gnome2-devel-en@lists.sourceforge.net"
         @homepage = "http://ruby-gnome2.sourceforge.jp/"
+        @external_packages = []
       end
 
       def initialize_configurations
@@ -232,9 +240,20 @@ module GNOME2
         end
 
         def build_packages
-          @build_packages.collect do |package|
+          packages = @package.external_packages.select do |package|
+            package.windows.build?
+          end
+          # For backward compatibility
+          packages += @build_packages.collect do |package|
+            package = package.dup
+            package[:windows] = {
+              :include_paths  => package.delete(:include_paths),
+              :library_paths  => package.delete(:library_paths),
+              :configure_args => package.delete(:configure_args),
+            }
             ExternalPackage.new(package)
           end
+          packages
         end
       end
     end

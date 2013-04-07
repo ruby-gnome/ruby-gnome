@@ -24,9 +24,7 @@ module GNOME2
                                        :download_site,
                                        :download_base_url,
                                        :compression_method,
-                                       :include_paths,
-                                       :library_paths,
-                                       :configure_args,
+                                       :windows,
                                        :patches,
                                        :remove_paths,
                                        :need_autogen,
@@ -76,16 +74,12 @@ module GNOME2
         need_autoreconf
       end
 
-      def windows_include_paths
-        include_paths || []
+      def windows
+        super || WindowsConfiguration.new({})
       end
 
-      def windows_library_paths
-        library_paths || []
-      end
-
-      def windows_configure_args
-        configure_args || []
+      def windows=(properties)
+        super(WindowsConfiguration.new(properties))
       end
 
       def build_concurrently?
@@ -107,6 +101,34 @@ module GNOME2
           base_url = nil
         end
         base_url
+      end
+
+      class WindowsConfiguration < Struct.new(:build,
+                                              :include_paths,
+                                              :library_paths,
+                                              :configure_args)
+        def initialize(properties)
+          super()
+          properties.each do |key, value|
+            send("#{key}=", value)
+          end
+        end
+
+        def build?
+          build.nil? ? true : build
+        end
+
+        def include_paths
+          super || []
+        end
+
+        def library_paths
+          super || []
+        end
+
+        def configure_args
+          super || []
+        end
       end
     end
   end
