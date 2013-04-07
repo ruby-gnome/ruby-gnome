@@ -3,12 +3,14 @@
 $LOAD_PATH.unshift("./lib")
 require 'gnome2-raketask'
 
+include_dir        = nil
+glib2_include_dir  = nil
 libffi_lib_dir     = nil
-libffi_include_dir = nil
 
 package = GNOME2Package.new do |_package|
+  include_dir        = File.join(_package.win32.absolute_binary_dir, "include")
+  glib2_include_dir  = File.join(include_dir, "glib-2.0")
   libffi_lib_dir     = File.join(_package.win32.absolute_binary_dir, "lib")
-  libffi_include_dir = File.join(_package.win32.absolute_binary_dir, "include")
 
   _package.summary = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
   _package.description = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
@@ -23,7 +25,7 @@ package = GNOME2Package.new do |_package|
       :label => "GLib",
       :version => "2.36.0",
       :configure_args => [
-        "LIBFFI_CFLAGS=-I#{libffi_include_dir}",
+        "LIBFFI_CFLAGS=-I#{include_dir}",
         "LIBFFI_LIBS=-L#{libffi_lib_dir} -lffi",
         "--disable-modular-tests",
       ],
@@ -74,19 +76,32 @@ end
 package.define_tasks
 
 namespace :win32 do
+  namespace :gettext do
+    namespace :header do
+      desc "Move gettext headers to include/glib-2.0/"
+      task :fix do
+        mv(File.join(include_dir, "libintl.h"),
+           glib2_include_dir)
+      end
+    end
+  end
+
   namespace :libffi do
     namespace :header do
       desc "Move libffi headers to include/"
       task :fix do
         libffi_version = "libffi-3.0.6"
         mv(Dir.glob(File.join(libffi_lib_dir, libffi_version, "include", "*.h")),
-           libffi_include_dir)
+           include_dir)
         rm_rf(File.join(libffi_lib_dir, libffi_version))
       end
     end
   end
 
   namespace :downloader do
-    task :after => ["win32:libffi:header:fix"]
+    task :after => [
+      "win32:gettext:header:fix",
+      "win32:libffi:header:fix",
+    ]
   end
 end
