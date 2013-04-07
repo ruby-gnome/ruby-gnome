@@ -9,11 +9,13 @@ require 'find'
 require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/extensiontask'
-require 'gnome2/win32-binary-download-task'
-require 'gnome2/win32-binary-build-task'
+require 'gnome2/rake/win32-binary-download-task'
+require 'gnome2/rake/win32-binary-build-task'
 
-class GNOME2Package
-  include Rake::DSL
+class GNOME2
+  module Rake
+    class Package
+  include ::Rake::DSL
 
   attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
   attr_reader :root_dir
@@ -119,7 +121,7 @@ class GNOME2Package
   end
 
   def define_win32_extension_task
-    Rake::ExtensionTask.new(so_base_name, @spec) do |ext|
+    ::Rake::ExtensionTask.new(so_base_name, @spec) do |ext|
       ext.ext_dir = "ext/#{@name}"
       ext.cross_compile = true
       ext.cross_compiling do |spec|
@@ -226,5 +228,7 @@ class GNOME2Package
         :build_concurrently => @build_concurrently,
       }
     end
+  end
+end
   end
 end
