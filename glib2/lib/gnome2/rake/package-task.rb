@@ -15,7 +15,7 @@ require "gnome2/rake/win32-binary-build-task"
 
 module GNOME2
   module Rake
-    class Package
+    class PackageTask
       include ::Rake::DSL
 
       attr_accessor :name, :summary, :description, :author, :email, :homepage, :required_ruby_version, :post_install_message
