@@ -133,3 +133,4 @@ EXPORTS
 	g_source_get_type
 	g_connect_flags_get_type
 	g_poll_fd_get_type
+	g_signal_flags_get_type
