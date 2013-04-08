@@ -70,7 +70,7 @@ class GNOME2Win32BinaryBuildTask
 
           Dir.chdir((package_tmp_dir + package.base_name).to_s) do
             package.windows.patches.each do |patch|
-              sh("patch -p1 < #{@packages.patches_dir}/#{patch}")
+              sh("patch -p1 < #{@package.patches_dir}/#{patch}")
             end
             sh("./autogen.sh") if package.windows.need_autogen?
             sh("autoreconf --install") if package.windows.need_autoreconf?
