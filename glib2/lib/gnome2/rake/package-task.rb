@@ -41,7 +41,7 @@ module GNOME2
       def define_tasks
         task :default => :build
         define_spec
-        define_source_download_tasks
+        define_source_tasks
         define_win32_tasks
         define_package_tasks
       end
@@ -120,6 +120,10 @@ module GNOME2
           s.post_install_message  = @post_install_message
           @dependency_configuration.apply(s)
         end
+      end
+
+      def define_source_tasks
+        define_source_download_tasks
       end
 
       def define_source_download_tasks
