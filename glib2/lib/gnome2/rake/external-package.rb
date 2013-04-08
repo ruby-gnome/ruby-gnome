@@ -98,6 +98,9 @@ module GNOME2
                                               :include_paths,
                                               :library_paths,
                                               :configure_args,
+                                              :patches,
+                                              :need_autogen,
+                                              :need_autoreconf,
                                               :build_concurrently)
         def initialize(properties)
           super()
@@ -120,6 +123,18 @@ module GNOME2
 
         def configure_args
           super || []
+        end
+
+        def patches
+          super || []
+        end
+
+        def need_autogen?
+          need_autogen.nil? ? false : need_autogen
+        end
+
+        def need_autoreconf?
+          need_autoreconf.nil? ? false : need_autoreconf
         end
 
         def build_concurrently?
