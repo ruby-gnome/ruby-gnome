@@ -94,6 +94,7 @@ package = GNOME2Package.new do |_package|
       :version => "0.10.35",
       :windows => {
         :configure_args => ["--disable-gnome_vfs"],
+        :build_concurrently => false,
       },
     },
     {
