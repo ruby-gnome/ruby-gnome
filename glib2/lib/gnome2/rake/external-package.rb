@@ -101,7 +101,8 @@ module GNOME2
       class WindowsConfiguration < Struct.new(:build,
                                               :include_paths,
                                               :library_paths,
-                                              :configure_args)
+                                              :configure_args,
+                                              :build_concurrently)
         def initialize(properties)
           super()
           properties.each do |key, value|
@@ -123,6 +124,10 @@ module GNOME2
 
         def configure_args
           super || []
+        end
+
+        def build_concurrently?
+          build_concurrently.nil? ? true : build_concurrently
         end
       end
     end

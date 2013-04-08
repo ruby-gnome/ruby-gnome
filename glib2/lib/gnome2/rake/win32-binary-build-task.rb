@@ -84,7 +84,7 @@ class GNOME2Win32BinaryBuildTask
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
             build_make_args = common_make_args.dup
             install_make_args = common_make_args.dup
-            if package.build_concurrently?
+            if package.windows.build_concurrently?
               make_n_jobs = ENV["MAKE_N_JOBS"]
               build_make_args << "-j#{make_n_jobs}" if make_n_jobs
             end

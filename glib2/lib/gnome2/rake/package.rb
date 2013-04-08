@@ -62,8 +62,7 @@ module GNOME2
                                               :dependencies,
                                               :build_dependencies,
                                               :build_packages,
-                                              :build_host,
-                                              :build_concurrently)
+                                              :build_host)
 
         attr_reader :relative_binary_dir, :absolute_binary_dir
         def initialize
@@ -101,10 +100,6 @@ module GNOME2
 
         def build_host
           super || "i686-w64-mingw32"
-        end
-
-        def build_concurrently?
-          build_concurrently.nil? ? true : build_concurrently
         end
       end
     end
