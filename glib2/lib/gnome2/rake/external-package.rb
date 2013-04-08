@@ -26,7 +26,6 @@ module GNOME2
                                        :compression_method,
                                        :windows,
                                        :patches,
-                                       :remove_paths,
                                        :need_autogen,
                                        :need_autoreconf,
                                        :build_concurrently,
@@ -59,10 +58,6 @@ module GNOME2
       end
 
       def patches
-        super || []
-      end
-
-      def remove_paths
         super || []
       end
 

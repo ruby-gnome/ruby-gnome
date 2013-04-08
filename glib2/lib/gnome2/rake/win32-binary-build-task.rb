@@ -72,9 +72,6 @@ class GNOME2Win32BinaryBuildTask
             package.windows.patches.each do |patch|
               sh("patch -p1 < #{@packages.patches_dir}/#{patch}")
             end
-            package.remove_paths.each do |path|
-              rm_rf(path)
-            end
             sh("./autogen.sh") if package.windows.need_autogen?
             sh("autoreconf --install") if package.windows.need_autoreconf?
             sh("./configure",
