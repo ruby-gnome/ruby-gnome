@@ -29,6 +29,19 @@ package = GNOME2Package.new do |_package|
   _package.win32.build_dependencies = ["glib2"]
   _package.external_packages = [
     {
+      :name => "glib",
+      :download_site => :gnome,
+      :label => "GLib",
+      :version => "2.36.0",
+      :compression_method => "xz",
+      :windows => {
+        :build => false,
+      },
+      :native => {
+        :build => true,
+      },
+    },
+    {
       :name => "gobject-introspection",
       :download_site => :gnome,
       :label => "gobject-introspection",
@@ -36,7 +49,7 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => [
-          "--with-g-ir-scanner=/tmp/local/bin/g-ir-scanner",
+          "--with-g-ir-scanner=#{_package.native.absolute_binary_dir}/bin/g-ir-scanner",
           "--disable-tests",
         ],
         :patches => [
@@ -44,6 +57,9 @@ package = GNOME2Package.new do |_package|
         ],
         :need_autoreconf => true,
       },
+      :native => {
+        :build => true,
+      }
     },
   ]
 end
