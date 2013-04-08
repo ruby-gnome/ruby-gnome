@@ -77,10 +77,6 @@ module GNOME2
         super(WindowsConfiguration.new(properties))
       end
 
-      def build_concurrently?
-        build_concurrently
-      end
-
       def bundled_packages
         super || []
       end
