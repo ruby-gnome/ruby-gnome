@@ -12,28 +12,32 @@ package = GNOME2Package.new do |_package|
   _package.win32.build_dependencies = [
     "glib2", "atk", "pango", "gdk_pixbuf2",
   ]
-  _package.win32.build_packages = [
+  _package.external_packages = [
     {
       :name => "gtk+",
       :download_site => :gnome,
       :label => "gtk+",
       :version => "2.24.14",
-      :configure_args => [],
       :compression_method => "xz",
-      :need_autoreconf => true,
-      :patches => [
-        "gtk+-2.24.14-add-missing-exeext.diff",
-      ],
+      :windows => {
+        :configure_args => [],
+        :need_autoreconf => true,
+        :patches => [
+          "gtk+-2.24.14-add-missing-exeext.diff",
+        ],
+      },
     },
     {
       :name => "hicolor-icon-theme",
       :download_base_url => "http://icon-theme.freedesktop.org/releases",
       :label => "gtk-hi-color-icon-theme",
       :version => "0.12",
-      :configure_args => [],
+      :windows => {
+        :configure_args => [],
+        :build_concurrently => false,
+      }
     },
   ]
-  _package.win32.build_concurrently = false
 end
 package.define_tasks
 
