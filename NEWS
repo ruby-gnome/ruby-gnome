@@ -12,7 +12,7 @@ Broken Ruby/Poppler fix release!
 
   * Improvements
     * Removed deprecated GLib::Completion.
-    * Removed deprecated g_suorce_get_current_time() use.
+    * Removed deprecated g_source_get_current_time() use.
     * [windows] Updated bundled GLib to 3.8.0.
     * [windows] Updated bundled glib-networking to 3.8.0.
     * [windows] Updated bundled GnuTLS to 3.1.10.
