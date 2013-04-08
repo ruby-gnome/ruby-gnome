@@ -13,6 +13,7 @@ require "rake/extensiontask"
 require "gnome2/rake/package"
 require "gnome2/rake/external-package"
 require "gnome2/rake/source-download-task"
+require "gnome2/rake/native-binary-build-task"
 require "gnome2/rake/win32-binary-download-task"
 require "gnome2/rake/win32-binary-build-task"
 
@@ -42,6 +43,7 @@ module GNOME2
         task :default => :build
         define_spec
         define_source_tasks
+        define_native_tasks
         define_win32_tasks
         define_package_tasks
       end
@@ -61,6 +63,10 @@ module GNOME2
       # For backward compatibility
       def win32
         windows
+      end
+
+      def native
+        @package.native
       end
 
       def version
@@ -128,6 +134,15 @@ module GNOME2
 
       def define_source_download_tasks
         task = SourceDownloadTask.new(@package)
+        task.define
+      end
+
+      def define_native_tasks
+        define_native_build_tasks
+      end
+
+      def define_native_build_tasks
+        task = NativeBinaryBuildTask.new(@package)
         task.define
       end
 

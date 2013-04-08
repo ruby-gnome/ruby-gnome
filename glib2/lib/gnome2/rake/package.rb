@@ -24,11 +24,13 @@ module GNOME2
       attr_reader :name
       attr_reader :root_dir
       attr_reader :windows
+      attr_reader :native
       attr_writer :external_packages
       def initialize(root_dir)
         @root_dir = Pathname.new(root_dir).expand_path
         @name = @root_dir.basename.to_s
         @windows = WindowsConfiguration.new
+        @native = NativeConfiguration.new
         @external_packages = []
       end
 
@@ -100,6 +102,14 @@ module GNOME2
 
         def build_host
           super || "i686-w64-mingw32"
+        end
+      end
+
+      class NativeConfiguration
+        attr_reader :relative_binary_dir, :absolute_binary_dir
+        def initialize
+          @relative_binary_dir = Pathname.new("tmp/native/local")
+          @absolute_binary_dir = @relative_binary_dir.expand_path
         end
       end
     end

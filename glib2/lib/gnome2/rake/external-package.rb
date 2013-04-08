@@ -25,6 +25,7 @@ module GNOME2
                                        :download_base_url,
                                        :compression_method,
                                        :windows,
+                                       :native,
                                        :patches,
                                        :need_autogen,
                                        :need_autoreconf,
@@ -77,6 +78,14 @@ module GNOME2
         super(WindowsConfiguration.new(properties))
       end
 
+      def native
+        super || NativeConfiguration.new({})
+      end
+
+      def native=(properties)
+        super(NativeConfiguration.new(properties))
+      end
+
       def bundled_packages
         super || []
       end
@@ -119,6 +128,44 @@ module GNOME2
 
         def library_paths
           super || []
+        end
+
+        def configure_args
+          super || []
+        end
+
+        def patches
+          super || []
+        end
+
+        def need_autogen?
+          need_autogen.nil? ? false : need_autogen
+        end
+
+        def need_autoreconf?
+          need_autoreconf.nil? ? false : need_autoreconf
+        end
+
+        def build_concurrently?
+          build_concurrently.nil? ? true : build_concurrently
+        end
+      end
+
+      class NativeConfiguration < Struct.new(:build,
+                                             :configure_args,
+                                             :patches,
+                                             :need_autogen,
+                                             :need_autoreconf,
+                                             :build_concurrently)
+        def initialize(properties)
+          super()
+          properties.each do |key, value|
+            send("#{key}=", value)
+          end
+        end
+
+        def build?
+          build.nil? ? false : build
         end
 
         def configure_args
