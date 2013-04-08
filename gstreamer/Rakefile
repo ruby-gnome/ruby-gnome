@@ -9,6 +9,9 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = ["glib2"]
   _package.win32.packages = ["libsoup"]
   _package.win32.dependencies = ["jpeg", "libxml2"]
+  _package.win32.build_dependencies = [
+    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2",
+  ]
   xiph_download_url_base = "http://downloads.xiph.org/releases"
   freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
   sf_net_download_url_base = "http://downloads.sourceforge.net/project"
@@ -118,9 +121,6 @@ package = GNOME2Package.new do |_package|
         }
       ],
     },
-  ]
-  _package.win32.build_dependencies = [
-    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2",
   ]
   _package.win32.build_concurrently = false
   _package.post_install_message = "This library is experimental."
