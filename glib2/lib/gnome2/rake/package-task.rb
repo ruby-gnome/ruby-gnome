@@ -162,7 +162,7 @@ module GNOME2
           ext.cross_compile = true
           ext.cross_compiling do |spec|
             if /mingw|mswin/ =~ spec.platform.to_s
-              win32_binary_dir = @package.relative_binary_dir
+              win32_binary_dir = @package.windows.relative_binary_dir
               win32_files = []
               if File.exist?(win32_binary_dir)
                 Find.find(win32_binary_dir) do |file|
