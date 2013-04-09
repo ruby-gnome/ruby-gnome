@@ -1,0 +1,36 @@
+diff --git a/giscanner/dumper.py b/giscanner/dumper.py
+index d95ea6b..84a7afc 100644
+--- a/giscanner/dumper.py
++++ b/giscanner/dumper.py
+@@ -157,8 +157,9 @@ class DumpCompiler(object):
+         else:
+             o_path = self._generate_tempfile(tmpdir, '.o')
+ 
++        os.name = 'nt'
+         if os.name == 'nt':
+-            ext = 'exe'
++            ext = '.exe'
+         else:
+             ext = ''
+ 
+@@ -257,10 +258,7 @@ class DumpCompiler(object):
+         else:
+             args.extend(['-o', output])
+         if libtool:
+-            if os.name == 'nt':
+-                args.append('-export-all-symbols')
+-            else:
+-                args.append('-export-dynamic')
++            args.append('-export-dynamic')
+ 
+         cflags = os.environ.get('CFLAGS', '')
+         for cflag in cflags.split():
+@@ -354,6 +352,8 @@ class DumpCompiler(object):
+             if self._pkgconfig_msvc_flags == '':
+                 if library.endswith(".la"): # explicitly specified libtool library
+                     args.append(library)
++                elif library.startswith("lib") and library.endswith("-0"):
++                    args.append('-l' + library[3:-2])
+                 else:
+                     args.append('-l' + library)
+ 

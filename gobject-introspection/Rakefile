@@ -59,6 +59,9 @@ package = GNOME2Package.new do |_package|
       },
       :native => {
         :build => true,
+        :patches => [
+          # "cross-compilable-g-ir-scanner.diff",
+        ],
       }
     },
   ]
