@@ -40,7 +40,6 @@ module GNOME2
       end
 
       def define
-        define_tasks
         task :default => :build
         define_spec
         define_source_tasks
