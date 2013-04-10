@@ -39,13 +39,19 @@ module GNOME2
         @cross_compiling_hooks << block
       end
 
-      def define_tasks
+      def define
+        define_tasks
         task :default => :build
         define_spec
         define_source_tasks
         define_native_tasks
         define_win32_tasks
         define_package_tasks
+      end
+
+      # Deprecated. Use #define instead.
+      def define_tasks
+        define
       end
 
       def ruby_gnome2_package?(name)
