@@ -9,105 +9,133 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
   _package.win32.packages = ["libsoup"]
   _package.win32.dependencies = ["jpeg", "libxml2"]
+  _package.win32.build_dependencies = [
+    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2",
+  ]
   xiph_download_url_base = "http://downloads.xiph.org/releases"
   freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
   sf_net_download_url_base = "http://downloads.sourceforge.net/project"
   libmad_version = "0.15.1b"
-  _package.win32.build_packages = [
+  _package.external_packages = [
     {
       :name => "libogg",
       :download_base_url => "#{xiph_download_url_base}/ogg",
       :label => "Ogg",
       :version => "1.3.0",
-      :configure_args => [],
+      :windows => {
+        :configure_args => [],
+      },
     },
     {
       :name => "libvorbis",
       :download_base_url => "#{xiph_download_url_base}/vorbis",
       :label => "Vorbis",
       :version => "1.3.2",
-      :configure_args => [],
+      :windows => {
+        :configure_args => [],
+      },
     },
     {
       :name => "libtheora",
       :download_base_url => "#{xiph_download_url_base}/theora",
       :label => "Theora",
       :version => "1.1.1",
-      :configure_args => [],
+      :windows => {
+        :configure_args => [],
+      },
     },
     # {
     #   :name => "libmad",
     #   :download_base_url => "#{sf_net_download_url_base}/mad/libmad/#{libmad_version}",
     #   :label => "MAD",
     #   :version => libmad_version,
-    #   :configure_args => ["CFLAGS=-O3 -march=i686"],
-    #   :need_autoreconf => true,
-    #   :patches => ["libmad-0.15.1b-fix-mingw-build.diff"],
+    #   :windows => {
+    #     :configure_args => ["CFLAGS=-O3 -march=i686"],
+    #     :need_autoreconf => true,
+    #     :patches => ["libmad-0.15.1b-fix-mingw-build.diff"],
+    #   },
     # },
     {
       :name => "flac",
       :download_base_url => "#{xiph_download_url_base}/flac",
       :label => "FLAC",
       :version => "1.2.1",
-      :configure_args => ["--disable-cpplibs"],
-      :need_autogen => true,
-      :patches => [
-        "flac-1.2.1-fix-mingw-build.diff",
-        # "flac-1.2.1-fix-doc-install.diff",
-      ],
+      :windows => {
+        :configure_args => ["--disable-cpplibs"],
+        :need_autogen => true,
+        :patches => [
+          "flac-1.2.1-fix-mingw-build.diff",
+          # "flac-1.2.1-fix-doc-install.diff",
+        ],
+      },
     },
     {
       :name => "speex",
       :download_base_url => "#{xiph_download_url_base}/speex",
       :label => "Speex",
       :version => "1.2rc1",
-      :configure_args => [],
+      :windows => {
+        :configure_args => [],
+      },
     },
     {
       :name => "gstreamer",
       :download_base_url => "#{freedesktop_download_url_base}/gstreamer",
       :label => "GStreamer",
       :version => "0.10.35",
-      :configure_args => ["--enable-check"],
+      :windows => {
+        :configure_args => ["--enable-check"],
+      },
     },
     {
       :name => "gst-plugins-base",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-base",
       :label => "GStreamer plugins (base)",
       :version => "0.10.35",
-      :configure_args => ["--disable-gnome_vfs"],
+      :windows => {
+        :configure_args => ["--disable-gnome_vfs"],
+        :build_concurrently => false,
+      },
     },
     {
       :name => "gst-plugins-good",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
       :label => "GStreamer plugins (good)",
       :version => "0.10.30",
-      :configure_args => ["--disable-gconf", "--disable-shout2"],
+      :windows => {
+        :configure_args => ["--disable-gconf", "--disable-shout2"],
+      },
     },
     {
       :name => "gst-plugins-bad",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-bad",
       :label => "GStreamer plugins (bad)",
       :version => "0.10.22",
-      :configure_args => ["--disable-librfb"],
+      :windows => {
+        :configure_args => ["--disable-librfb"],
+      },
     },
     # {
     #   :name => "gst-plugins-ugly",
     #   :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
     #   :label => "GStreamer plugins (ugly)",
     #   :version => "0.10.18",
-    #   :configure_args => [],
+    #   :windows => {
+    #     :configure_args => [],
+    #   },
     # },
     {
       :name => "gst-ffmpeg",
       :download_base_url => "#{freedesktop_download_url_base}/gst-ffmpeg",
       :label => "GStreamer ffmpeg",
       :version => "0.10.12",
-      :configure_args => ["--with-ffmpeg-extra-configure=" +
-                            "--cross-prefix=#{_package.win32.build_host}- " +
-                            "--target-os=mingw32 " +
-                            "--arch=i686 " +
-                            "--pkg-config=pkg-config"],
+      :windows => {
+        :configure_args => ["--with-ffmpeg-extra-configure=" +
+                              "--cross-prefix=#{_package.win32.build_host}- " +
+                              "--target-os=mingw32 " +
+                              "--arch=i686 " +
+                              "--pkg-config=pkg-config"],
+      },
       :bundled_packages => [
         {
           :name => "libav",
@@ -118,9 +146,6 @@ package = GNOME2Package.new do |_package|
         }
       ],
     },
-  ]
-  _package.win32.build_dependencies = [
-    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2", "gobject-introspection",
   ]
   _package.post_install_message = "This library is experimental."
   _package.cross_compiling do |spec|
