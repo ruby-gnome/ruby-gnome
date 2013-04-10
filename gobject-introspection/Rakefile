@@ -17,9 +17,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2-raketask"
+require "gnome2/rake/package-task"
 
-package = GNOME2Package.new do |_package|
+package = nil
+package_task = GNOME2::Rake::PackageTask.new do |_package|
+  package = _package.instance_eval("@package")
   _package.summary = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
   _package.description = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
   _package.dependency.gem.runtime = ["glib2"]
@@ -66,4 +68,22 @@ package = GNOME2Package.new do |_package|
     },
   ]
 end
-package.define_tasks
+package_task.define
+
+namespace :native do
+  namespace :"gobject-introspection" do
+    desc "Make g-ir-scanner workable for Windows on non Windows"
+    task :cross do
+      g_ir_scanner_dir = package.native.absolute_binary_dir
+      g_ir_scanner_dir += "lib/gobject-introspection/giscanner"
+      Dir.chdir(g_ir_scanner_dir.to_s) do
+        patch = "#{package.patches_dir}/cross-g-ir-scanner.diff"
+        sh("patch -p2 < #{patch}")
+      end
+    end
+  end
+
+  namespace :builder do
+    task :after => "native:gobject-introspection:cross"
+  end
+end
