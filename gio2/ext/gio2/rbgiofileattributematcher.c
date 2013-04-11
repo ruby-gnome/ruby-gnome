@@ -23,6 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cFileAttributeMatcher
 
+#if !GLIB_CHECK_VERSION(2, 34, 0)
 GType
 g_file_attribute_matcher_get_type(void)
 {
@@ -33,6 +34,7 @@ g_file_attribute_matcher_get_type(void)
                                                         (GBoxedFreeFunc)g_file_attribute_matcher_unref);
         return our_type;
 }
+#endif
 
 #define _SELF(value) RVAL2GFILEATTRIBUTEMATCHER(value)
 

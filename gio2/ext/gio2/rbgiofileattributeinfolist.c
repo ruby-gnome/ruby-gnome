@@ -28,6 +28,7 @@
                                RVAL2GFILEATTRIBUTEINFOFLAGS, \
                                G_FILE_ATTRIBUTE_INFO_NONE)
 
+#if !GLIB_CHECK_VERSION(2, 34, 0)
 GType
 g_file_attribute_info_list_get_type(void)
 {
@@ -38,6 +39,7 @@ g_file_attribute_info_list_get_type(void)
                                                         (GBoxedFreeFunc)g_file_attribute_info_list_unref);
         return our_type;
 }
+#endif
 
 #define _SELF(value) RVAL2GFILEATTRIBUTEINFOLIST(value)
 

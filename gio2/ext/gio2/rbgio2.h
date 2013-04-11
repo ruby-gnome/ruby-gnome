@@ -39,14 +39,16 @@ G_BEGIN_DECLS
 
 #define USE_BLOCK_AND_SAVE(data) ((VALUE)data)
 
+#if !GLIB_CHECK_VERSION(2, 34, 0)
 #define G_TYPE_FILE_ATTRIBUTE_MATCHER (g_file_attribute_matcher_get_type())
 GType g_file_attribute_matcher_get_type(void);
 
-#define G_TYPE_FILE_ATTRIBUTE_INFO (g_file_attribute_info_get_type())
-GType g_file_attribute_info_get_type(void);
-
 #define G_TYPE_FILE_ATTRIBUTE_INFO_LIST (g_file_attribute_info_list_get_type())
 GType g_file_attribute_info_list_get_type(void);
+#endif
+
+#define G_TYPE_FILE_ATTRIBUTE_INFO (g_file_attribute_info_get_type())
+GType g_file_attribute_info_get_type(void);
 
 /* Conversion Macros */
 #define RVAL2TYPE_WITH_DEFAULT(value, type, default_value) \
