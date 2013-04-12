@@ -16,7 +16,7 @@ package = GNOME2Package.new do |_package|
     {
       :name => "gtk+",
       :download_site => :gnome,
-      :label => "gtk+",
+      :label => "GTK+",
       :version => "3.8.0",
       :configure_args => [],
       :compression_method => "xz",
