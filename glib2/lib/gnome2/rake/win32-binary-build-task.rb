@@ -74,7 +74,9 @@ class GNOME2Win32BinaryBuildTask
             end
             sh("./autogen.sh") if package.windows.need_autogen?
             sh("autoreconf --install") if package.windows.need_autoreconf?
+            cc_env = "CC=#{@package.windows.build_host}-gcc"
             sh("./configure",
+               cc_env,
                "CPPFLAGS=#{cppflags(package)}",
                "LDFLAGS=#{ldflags(package)}",
                "--prefix=#{dist_dir}",
@@ -82,6 +84,7 @@ class GNOME2Win32BinaryBuildTask
                *package.windows.configure_args) or exit(false)
             common_make_args = []
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
+            common_make_args << cc_env
             build_make_args = common_make_args.dup
             install_make_args = common_make_args.dup
             if package.windows.build_concurrently?
