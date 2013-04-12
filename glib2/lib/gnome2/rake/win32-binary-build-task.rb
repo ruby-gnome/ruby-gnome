@@ -85,6 +85,7 @@ class GNOME2Win32BinaryBuildTask
             common_make_args = []
             common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
             common_make_args << cc_env
+            add_gobject_introspection_make_args(common_make_args)
             build_make_args = common_make_args.dup
             install_make_args = common_make_args.dup
             if package.windows.build_concurrently?
@@ -141,6 +142,10 @@ class GNOME2Win32BinaryBuildTask
     "#{@package.glib2_root_dir}/vendor/local/lib"
   end
 
+  def gobject_introspection_data_path
+    "#{@package.root_dir}/gobject-introspection/vendor/local/share"
+  end
+
   def rcairo_win32_dir
     @package.project_root_dir.parent + "rcairo.win32"
   end
@@ -185,5 +190,12 @@ class GNOME2Win32BinaryBuildTask
       "-L#{path}"
     end
     ldflags.join(" ")
+  end
+
+  def add_gobject_introspection_make_args(common_make_args)
+    unless @package.windows.build_dependencies.include?("gobject-introspection")
+      return
+    end
+    common_make_args << "XDG_DATA_DIRS=#{gobject_introspection_data_path}"
   end
 end
