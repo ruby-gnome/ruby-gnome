@@ -78,7 +78,7 @@ module GLib
       environment_name = "PATH"
       separator = ::File::PATH_SEPARATOR
 
-      paths = (ENV[environment_name] || '').split(/#{separator}/)
+      paths = (ENV[environment_name] || '').split(/#{Regexp.escape(separator)}/)
       dir = path.to_s
       dir = dir.gsub(/\//, ::File::ALT_SEPARATOR) if ::File::ALT_SEPARATOR
       unless paths.include?(dir)
