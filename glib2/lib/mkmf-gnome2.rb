@@ -155,13 +155,14 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
 
   case RUBY_PLATFORM
   when /cygwin|mingw|mswin/
+    library_base_name = "ruby-#{target_name.gsub(/-/, '_')}"
     case RUBY_PLATFORM
     when /cygwin|mingw/
       $LDFLAGS << " -L#{target_build_dir}"
-      $libs << " -lruby-#{target_name}"
+      $libs << " -l#{library_base_name}"
     when /mswin/
       $DLDFLAGS << " /libpath:#{target_build_dir}"
-      $libs << " libruby-#{target_name}.lib"
+      $libs << " lib#{library_base_name}.lib"
     end
     target_base_dir = Pathname.new(target_source_dir).parent.parent
     target_binary_base_dir = target_base_dir + "vendor" + "local"
