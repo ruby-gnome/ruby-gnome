@@ -32,7 +32,9 @@ end
 
 ["glib2", "gobject-introspection"].each do |package|
   directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  build_base_path = "#{directory}/tmp/#{RUBY_PLATFORM}"
+  package_library_name = package.gsub(/-/, "_")
+  build_dir = "#{build_base_path}/#{package_library_name}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
                      top_dir.to_s,
                      :top_build_dir => top_build_dir.to_s,
