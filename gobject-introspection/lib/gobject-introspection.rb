@@ -28,8 +28,17 @@ rescue LoadError
 end
 
 module GObjectIntrospection
+  class << self
+    def prepend_environment_path(path)
+      GLib.prepend_environment_path(path, "GI_TYPELIB_PATH")
+    end
+  end
+
   LOG_DOMAIN = "GObjectIntrospection"
 end
+
+vendor_lib_dir = vendor_dir + "lib"
+GObjectIntrospection.prepend_environment_path(vendor_lib_dir)
 
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
