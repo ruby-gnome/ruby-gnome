@@ -142,10 +142,6 @@ class GNOME2Win32BinaryBuildTask
     "#{@package.glib2_root_dir}/vendor/local/lib"
   end
 
-  def gobject_introspection_data_path
-    "#{@package.root_dir}/gobject-introspection/vendor/local/share"
-  end
-
   def rcairo_win32_dir
     @package.project_root_dir.parent + "rcairo.win32"
   end
@@ -196,6 +192,15 @@ class GNOME2Win32BinaryBuildTask
     unless @package.windows.build_dependencies.include?("gobject-introspection")
       return
     end
-    common_make_args << "XDG_DATA_DIRS=#{gobject_introspection_data_path}"
+
+    dependencies = [
+      "gobject-introspection",
+      @package.name,
+    ]
+    dependencies += @package.windows.gobject_introspection_dependencies
+    data_dirs = dependencies.collect do |package|
+      "#{@package.project_root_dir}/#{package}/vendor/local/share"
+    end
+    common_make_args << "XDG_DATA_DIRS=#{data_dirs.join(File::PATH_SEPARATOR)}"
   end
 end

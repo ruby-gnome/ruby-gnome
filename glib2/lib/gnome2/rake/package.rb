@@ -63,6 +63,7 @@ module GNOME2
       class WindowsConfiguration < Struct.new(:packages,
                                               :dependencies,
                                               :build_dependencies,
+                                              :gobject_introspection_dependencies,
                                               :build_packages,
                                               :build_host)
 
@@ -82,6 +83,10 @@ module GNOME2
         end
 
         def build_dependencies
+          super || []
+        end
+
+        def gobject_introspection_dependencies
           super || []
         end
 
