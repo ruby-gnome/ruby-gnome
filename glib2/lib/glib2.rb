@@ -72,10 +72,9 @@ module GLib
     end
   end
 
-  def prepend_environment_path(path)
+  def prepend_environment_path(path, environment_name="PATH")
     path = Pathname(path) unless path.is_a?(Pathname)
     if path.exist?
-      environment_name = "PATH"
       separator = ::File::PATH_SEPARATOR
 
       paths = (ENV[environment_name] || '').split(/#{Regexp.escape(separator)}/)
