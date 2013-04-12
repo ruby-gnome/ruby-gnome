@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2-raketask"
+require "gnome2/rake/package-task"
 
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
