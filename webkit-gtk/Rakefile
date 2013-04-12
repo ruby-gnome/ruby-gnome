@@ -19,17 +19,30 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2-raketask"
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
-  _package.description = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
-  _package.dependency.gem.runtime = ["gobject-introspection", "gtk3"]
-  _package.dependency.gem.development = ["test-unit-notify"]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.win32.build_dependencies = ["glib2", "gobject-introspection"]
-  _package.win32.build_packages = []
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
+  package.description = "Ruby/WebKitGTK is a Ruby binding of WebKitGTK+."
+  package.dependency.gem.runtime = ["gobject-introspection", "gtk3"]
+  package.dependency.gem.development = ["test-unit-notify"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
+  package.external_packages = [
+    {
+      :name => "webkitgtk",
+      :download_base_url => "http://webkitgtk.org/releases",
+      :label => "WebKitGTK+",
+      :version => "2.0.0",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+      },
+    },
+  ]
 end
-package.define_tasks
+package_task.define
 
 namespace :dependency do
   desc "Install depenencies"
