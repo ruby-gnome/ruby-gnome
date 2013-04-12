@@ -10,7 +10,7 @@ package = GNOME2Package.new do |_package|
   _package.win32.packages = ["libsoup"]
   _package.win32.dependencies = ["jpeg", "libxml2"]
   _package.win32.build_dependencies = [
-    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2",
+    "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2", "gobject-introspection",
   ]
   xiph_download_url_base = "http://downloads.xiph.org/releases"
   freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
@@ -83,18 +83,26 @@ package = GNOME2Package.new do |_package|
       :name => "gstreamer",
       :download_base_url => "#{freedesktop_download_url_base}/gstreamer",
       :label => "GStreamer",
-      :version => "0.10.35",
+      :version => "1.0.6",
+      :compression_method => "xz",
       :windows => {
-        :configure_args => ["--enable-check"],
+        :configure_args => [
+          "--enable-check",
+          "--enable-introspection",
+        ],
+        :build_concurrently => false,
       },
     },
     {
       :name => "gst-plugins-base",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-base",
       :label => "GStreamer plugins (base)",
-      :version => "0.10.35",
+      :version => "1.0.6",
+      :compression_method => "xz",
       :windows => {
-        :configure_args => ["--disable-gnome_vfs"],
+        :configure_args => [
+          "--enable-introspection",
+        ],
         :build_concurrently => false,
       },
     },
@@ -102,16 +110,20 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-good",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
       :label => "GStreamer plugins (good)",
-      :version => "0.10.30",
+      :version => "1.0.6",
+      :compression_method => "xz",
       :windows => {
-        :configure_args => ["--disable-gconf", "--disable-shout2"],
+        :configure_args => [
+          "--disable-shout2",
+        ],
       },
     },
     {
       :name => "gst-plugins-bad",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-bad",
       :label => "GStreamer plugins (bad)",
-      :version => "0.10.22",
+      :version => "1.0.6",
+      :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-librfb"],
       },
@@ -120,22 +132,25 @@ package = GNOME2Package.new do |_package|
     #   :name => "gst-plugins-ugly",
     #   :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
     #   :label => "GStreamer plugins (ugly)",
-    #   :version => "0.10.18",
+    #   :version => "1.0.6",
+    #   :compression_method => "xz",
     #   :windows => {
     #     :configure_args => [],
     #   },
     # },
     {
-      :name => "gst-ffmpeg",
-      :download_base_url => "#{freedesktop_download_url_base}/gst-ffmpeg",
-      :label => "GStreamer ffmpeg",
-      :version => "0.10.12",
+      :name => "gst-libav",
+      :download_base_url => "#{freedesktop_download_url_base}/gst-libav",
+      :label => "GStreamer libav",
+      :version => "1.0.6",
+      :compression_method => "xz",
       :windows => {
-        :configure_args => ["--with-ffmpeg-extra-configure=" +
+        :configure_args => ["--with-libav-extra-configure=" +
                               "--cross-prefix=#{_package.win32.build_host}- " +
                               "--target-os=mingw32 " +
                               "--arch=i686 " +
-                              "--pkg-config=pkg-config"],
+                              "--pkg-config=pkg-config " +
+                              "--disable-gpl"],
       },
       :bundled_packages => [
         {
@@ -148,7 +163,6 @@ package = GNOME2Package.new do |_package|
       ],
     },
   ]
-  _package.post_install_message = "This library is experimental."
   _package.cross_compiling do |spec|
     if /mingw|mswin/ =~ spec.platform.to_s
       spec.add_runtime_dependency("cairo", ">= 1.10.1")
