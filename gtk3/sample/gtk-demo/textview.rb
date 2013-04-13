@@ -203,7 +203,7 @@ module Demo
       #  iterator to point to just after the inserted text.
       #  
 
-      iter = buffer.get_iter_at_offset(0)
+      iter = buffer.get_iter_at(:offset => 0)
 
       buffer.insert(iter, "The text widget can display text with all kinds of nifty attributes. It also supports multiple views of the same buffer; this demo is showing the same buffer in two places.\n\n")
 

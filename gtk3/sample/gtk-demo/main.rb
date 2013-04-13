@@ -258,8 +258,8 @@ module Demo
       tokenizer = RubyTokonizer.new
       tokenizer.tokenize(str, start_iter.offset) do |tag, start, last|
 	@source_buffer.apply_tag(tag.to_s,
-				 @source_buffer.get_iter_at_offset(start),
-				 @source_buffer.get_iter_at_offset(last))
+				 @source_buffer.get_iter_at(:offset => start),
+				 @source_buffer.get_iter_at(:offset => last))
       end
     end
 
@@ -279,7 +279,7 @@ module Demo
 	       $stderr.puts "Cannot open: #{$!}" if $DEBUG
 	       return
 	     end
-      start = @info_buffer.get_iter_at_offset(0)
+      start = @info_buffer.get_iter_at(:offset => 0)
       state = :before_header
 
       file.each do |line|
@@ -291,7 +291,7 @@ module Demo
 	when :in_header
 	  if line =~ /^=end$/
 	    state = :body
-	    start = @source_buffer.get_iter_at_offset(0)
+	    start = @source_buffer.get_iter_at(:offset => 0)
 	  elsif line =~ /^=\s+(.*)$/
 	    title = $1
             title.gsub!(/\s*\(.*\)$/, '') # Delete depend field
