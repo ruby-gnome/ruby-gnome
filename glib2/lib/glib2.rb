@@ -13,11 +13,11 @@ module GLib
   module_function
   def check_binding_version?(major, minor, micro)
     BINDING_VERSION[0] > major ||
-      (BINDING_VERSION[0] == major && 
+      (BINDING_VERSION[0] == major &&
        BINDING_VERSION[1] > minor) ||
-      (BINDING_VERSION[0] == major && 
+      (BINDING_VERSION[0] == major &&
        BINDING_VERSION[1] == minor &&
-       BINDING_VERSION[2] >= micro)  
+       BINDING_VERSION[2] >= micro)
   end
 
   def exit_application(exception, status)
