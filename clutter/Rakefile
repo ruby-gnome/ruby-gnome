@@ -38,6 +38,43 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "pango",
   ]
   package.external_packages = [
+    # Build note:
+    #   We need to modify /usr/i686-w64-mingw32/include/GL/ directory because
+    #   MinGW w64 bundles old OpenGL headers. Here are changes to build Cogl:
+    #
+    #   (1) Put the latest glext.h that can be downloaded from
+    #       http://www.opengl.org/registry/api/glext.h into
+    #       /usr/i686-w64-mingw32/include/GL/ directory:
+    #
+    #         % wget http://www.opengl.org/registry/api/glext.h
+    #         % sudo cp glext.h /usr/i686-w64-mingw32/include/GL/
+    #         % sudo chown root:root /usr/i686-w64-mingw32/include/GL/glext.h
+    #
+    #   (2) Add missing declarations and includes to
+    #       /usr/i686-w64-mingw32/include/GL/gl.h:
+    #
+    #       Before:
+    #         ...
+    #         typedef double GLdouble;
+    #         typedef double GLclampd;
+    #         typedef void GLvoid;
+    #
+    #         #define GL_VERSION_1_1 1
+    #         ...
+    #
+    #       After
+    #         ...
+    #         typedef double GLdouble;
+    #         typedef double GLclampd;
+    #         typedef void GLvoid;
+    #
+    #         typedef ptrdiff_t GLintptr;
+    #         typedef ptrdiff_t GLsizeiptr;
+    #         typedef char GLchar;
+    #         #include <GL/glext.h>
+    #
+    #         #define GL_VERSION_1_1 1
+    #         ...
     {
       :name => "cogl",
       :download_site => :gnome,
