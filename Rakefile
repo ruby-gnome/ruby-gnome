@@ -337,7 +337,6 @@ namespace :gem do
       "goocanvas",
       "vte",
       "vte3",
-      "clutter-gtk",
       "webkit-gtk",
       "webkit-gtk2",
     ]

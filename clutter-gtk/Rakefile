@@ -62,6 +62,8 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
 end
 package_task.define
 
+Rake::Task["native:clutter:i386-mingw32"].prerequisites.clear
+
 namespace :dependency do
   desc "Install depenencies"
   task :install do
