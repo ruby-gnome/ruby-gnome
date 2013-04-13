@@ -70,7 +70,7 @@ module GLib
     end
   end
 
-  def prepend_environment_path(path, environment_name)
+  def prepend_path_to_environment_variable(path, environment_name)
     path = Pathname(path) unless path.is_a?(Pathname)
     if path.exist?
       separator = ::File::PATH_SEPARATOR
@@ -86,7 +86,7 @@ module GLib
   end
 
   def prepend_dll_path(path)
-    prepend_dll_path(path, "PATH")
+    prepend_path_to_environment_variable(path, "PATH")
   end
 end
 
