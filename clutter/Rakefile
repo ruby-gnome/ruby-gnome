@@ -17,19 +17,68 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2-raketask"
+require "gnome2/rake/package-task"
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/Clutter is a Ruby binding of Clutter."
-  _package.description = "Ruby/Clutter is a Ruby binding of Clutter."
-  _package.dependency.gem.runtime = ["cairo-gobject", "gobject-introspection"]
-  _package.dependency.gem.development = ["test-unit-notify"]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.win32.build_dependencies = ["glib2", "gobject-introspection"]
-  _package.win32.build_packages = []
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/Clutter is a Ruby binding of Clutter."
+  package.description = "Ruby/Clutter is a Ruby binding of Clutter."
+  package.dependency.gem.runtime = ["cairo-gobject", "gobject-introspection"]
+  package.dependency.gem.development = ["test-unit-notify"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = [
+    "glib2",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gobject-introspection",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "pango",
+  ]
+  package.external_packages = [
+    {
+      :name => "cogl",
+      :download_site => :gnome,
+      :label => "Cogl",
+      :version => "1.14.0",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--disable-glibtest",
+          "--enable-introspection",
+        ],
+      },
+    },
+    {
+      :name => "json-glib",
+      :download_site => :gnome,
+      :label => "JSON-GLib",
+      :version => "0.14.2",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+      },
+    },
+    {
+      :name => "clutter",
+      :download_site => :gnome,
+      :label => "Clutter",
+      :version => "1.14.0",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+        :build_concurrently => false,
+      },
+    }
+  ]
 end
-package.define_tasks
+package_task.define
 
 namespace :dependency do
   desc "Install depenencies"
