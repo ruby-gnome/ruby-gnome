@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/pakcage-task"
+require "gnome2/rake/package-task"
 
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/ClutterGTK is a Ruby binding of Clutter-GTK."
@@ -26,7 +26,39 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
-  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
+  package.windows.build_dependencies = [
+    "glib2",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gobject-introspection",
+    "clutter",
+    "gdk3",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "clutter",
+    "gdk3",
+  ]
+  package.external_packages = [
+    {
+      :name => "clutter-gtk",
+      :download_site => :gnome,
+      :label => "Clutter-GTK",
+      :version => "1.4.4",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+        :patches => [
+          "0001-actor-fix-clutter-win32.h-include-path.patch",
+        ]
+      },
+    }
+  ]
 end
 package_task.define
 
