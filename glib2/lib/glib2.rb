@@ -2,9 +2,7 @@
 # glib2.rb
 # Copyright(C) 2005-2010 Ruby-GNOME2 Project.
 #
-# This program is licenced under the same 
-# license of Ruby-GNOME2.
-#
+# This program is licenced under the same license of Ruby-GNOME2.
 
 require 'pathname'
 require 'English'
