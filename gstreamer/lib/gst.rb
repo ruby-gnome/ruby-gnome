@@ -23,6 +23,12 @@ GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
+if vendor_dir.exist?
+  require "cairo"
+  require "gdk_pixbuf2"
+  require "pango"
+end
+
 module Gst
   LOG_DOMAIN = "GStreamer"
   GLib::Log.set_log_domain(LOG_DOMAIN)
