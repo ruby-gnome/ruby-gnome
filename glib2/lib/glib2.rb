@@ -70,7 +70,7 @@ module GLib
     end
   end
 
-  def prepend_environment_path(path, environment_name="PATH")
+  def prepend_dll_path(path, dll_name)
     path = Pathname(path) unless path.is_a?(Pathname)
     if path.exist?
       separator = ::File::PATH_SEPARATOR
@@ -84,12 +84,16 @@ module GLib
       end
     end
   end
+
+  def prepend_dll_path(path)
+    prepend_dll_path(path, "PATH")
+  end
 end
 
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
-GLib.prepend_environment_path(vendor_dir + "bin")
+GLib.prepend_dll_path(vendor_dir + "bin")
 begin
   major, minor, _ = RUBY_VERSION.split(/\./)
   require "#{major}.#{minor}/glib2.so"
