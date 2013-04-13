@@ -10,7 +10,16 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
-    "glib2", "atk", "pango", "gdk_pixbuf2",
+    "glib2",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gobject-introspection",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
   ]
   package.external_packages = [
     {
@@ -20,7 +29,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "3.8.0",
       :compression_method => "xz",
       :windows => {
-        :configure_args => [],
+        :configure_args => [
+          "--enable-introspection",
+        ],
       },
     }
   ]
