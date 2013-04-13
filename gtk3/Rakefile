@@ -6,12 +6,14 @@ require 'gnome2/rake/package-task'
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/GTK3 is a Ruby binding of GTK+-3.x."
   package.description = "Ruby/GTK3 is a Ruby binding of GTK+-3.x."
-  package.dependency.gem.runtime = ["glib2",
-                                     "gio2",
-                                     "atk",
-                                     "pango",
-                                     "gdk_pixbuf2",
-                                     "gdk3"]
+  package.dependency.gem.runtime = [
+    "glib2",
+    "gio2",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gdk3",
+  ]
   package.windows.packages = ["gtk+"]
   package.windows.dependencies = []
   package.required_ruby_version = ">= 1.9.2"
