@@ -1,3 +1,5 @@
 EXPORTS
+	Init_gobject_introspection
+
 	rb_gi_callback_data_free
 	rb_gi_callback_register_finder
