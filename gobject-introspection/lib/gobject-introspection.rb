@@ -30,7 +30,7 @@ end
 module GObjectIntrospection
   class << self
     def prepend_typelib_path(path)
-      GLib.prepend_environment_path(path, "GI_TYPELIB_PATH")
+      GLib.prepend_path_to_environment_variable(path, "GI_TYPELIB_PATH")
     end
   end
 
