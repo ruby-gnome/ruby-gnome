@@ -21,7 +21,7 @@ vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_environment_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-GObjectIntrospection.prepend_environment_path(vendor_girepository_dir)
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 module Gst
   LOG_DOMAIN = "GStreamer"

@@ -29,7 +29,7 @@ end
 
 module GObjectIntrospection
   class << self
-    def prepend_environment_path(path)
+    def prepend_typelib_path(path)
       GLib.prepend_environment_path(path, "GI_TYPELIB_PATH")
     end
   end
@@ -38,7 +38,7 @@ module GObjectIntrospection
 end
 
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
-GObjectIntrospection.prepend_environment_path(vendor_girepository_dir)
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
