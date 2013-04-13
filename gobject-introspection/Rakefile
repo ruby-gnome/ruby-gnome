@@ -20,16 +20,15 @@ $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
 package = nil
-package_task = GNOME2::Rake::PackageTask.new do |_package|
-  package = _package.instance_eval("@package")
-  _package.summary = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
-  _package.description = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
-  _package.dependency.gem.runtime = ["glib2"]
-  _package.dependency.gem.development = [["test-unit", ">= 2"]]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.win32.build_dependencies = ["glib2"]
-  _package.external_packages = [
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
+  package.description = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
+  package.dependency.gem.runtime = ["glib2"]
+  package.dependency.gem.development = [["test-unit", ">= 2"]]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = ["glib2"]
+  package.external_packages = [
     {
       :name => "glib",
       :download_site => :gnome,
@@ -51,7 +50,7 @@ package_task = GNOME2::Rake::PackageTask.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => [
-          "--with-g-ir-scanner=#{_package.native.absolute_binary_dir}/bin/g-ir-scanner",
+          "--with-g-ir-scanner=#{package.native.absolute_binary_dir}/bin/g-ir-scanner",
           "--disable-tests",
         ],
         :patches => [
