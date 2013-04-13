@@ -9,7 +9,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "glib2"]
   package.windows.packages = []
   package.windows.dependencies = []
-  package.windows.build_dependencies = ["glib2"]
+  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
   package.external_packages = [
     {
       :name => "pango",
@@ -18,7 +18,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "1.34.0",
       :compression_method => "xz",
       :windows => {
-        :configure_args => [],
+        :configure_args => [
+          "--enable-introspection",
+        ],
       },
     }
   ]
