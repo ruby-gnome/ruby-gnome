@@ -21,6 +21,13 @@ base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
+begin
+  major, minor, _ = RUBY_VERSION.split(/\./)
+  require "#{major}.#{minor}/pango.so"
+rescue LoadError
+  require "pango.so"
+end
+
 if vendor_dir.exist?
   begin
     require "gobject-introspection"
@@ -28,12 +35,6 @@ if vendor_dir.exist?
     GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
   rescue LoadError
   end
-end
-begin
-  major, minor, _ = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/pango.so"
-rescue LoadError
-  require "pango.so"
 end
 
 module Pango
