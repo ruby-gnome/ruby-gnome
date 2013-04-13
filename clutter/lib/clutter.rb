@@ -24,6 +24,12 @@ GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
+if vendor_dir.exist?
+  require "atk"
+  require "pango"
+  require "gdk_pixbuf2"
+end
+
 module Clutter
   LOG_DOMAIN = "Clutter"
   GLib::Log.set_log_domain(LOG_DOMAIN)
