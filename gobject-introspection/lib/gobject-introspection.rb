@@ -16,6 +16,14 @@
 
 require "glib2"
 
+module GObjectIntrospection
+  class << self
+    def prepend_typelib_path(path)
+      GLib.prepend_path_to_environment_variable(path, "GI_TYPELIB_PATH")
+    end
+  end
+end
+
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
@@ -27,19 +35,12 @@ rescue LoadError
   require "gobject_introspection.so"
 end
 
-module GObjectIntrospection
-  class << self
-    def prepend_typelib_path(path)
-      GLib.prepend_path_to_environment_variable(path, "GI_TYPELIB_PATH")
-    end
-  end
-
-  LOG_DOMAIN = "GObjectIntrospection"
-end
-
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
+module GObjectIntrospection
+  LOG_DOMAIN = "GObjectIntrospection"
+end
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
 require "gobject-introspection/repository"
