@@ -6,7 +6,7 @@ require "gnome2/rake/package-task"
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
   package.description = "Ruby/GDK3 is a Ruby binding of GDK-3.x."
-  package.dependency.gem.runtime = ["atk", "pango", "gdk_pixbuf2"]
+  package.dependency.gem.runtime = ["pango", "gdk_pixbuf2"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
