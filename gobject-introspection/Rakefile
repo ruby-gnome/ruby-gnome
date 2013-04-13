@@ -20,7 +20,8 @@ $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
 package = nil
-package_task = GNOME2::Rake::PackageTask.new do |package|
+package_task = GNOME2::Rake::PackageTask.new do |_package|
+  package = _package
   package.summary = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
   package.description = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
   package.dependency.gem.runtime = ["glib2"]
