@@ -77,7 +77,7 @@ module Demo
       puts
 
       buffer.text = ''
-      iter = buffer.get_iter_at_offset(0)
+      iter = buffer.get_iter_at(:offset => 0)
 
       case page
       when 1
