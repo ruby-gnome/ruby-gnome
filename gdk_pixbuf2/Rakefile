@@ -1,24 +1,26 @@
 # -*- ruby -*-
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2-raketask'
+require "gnome2/rake/package-task"
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
-  _package.description = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
-  _package.dependency.gem.runtime = ["glib2"]
-  _package.win32.packages = []
-  _package.win32.dependencies = ["zlib", "libpng"]
-  _package.win32.build_dependencies = ["glib2"]
-  _package.win32.build_packages = [
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
+  package.description = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
+  package.dependency.gem.runtime = ["glib2"]
+  package.windows.packages = []
+  package.windows.dependencies = ["zlib", "libpng"]
+  package.windows.build_dependencies = ["glib2"]
+  package.external_packages = [
     {
       :name => "gdk-pixbuf",
       :download_site => :gnome,
       :label => "gdk-pixbuf",
       :version => "2.28.0",
-      :configure_args => ["--with-included-loaders"],
       :compression_method => "xz",
+      :windows => {
+        :configure_args => ["--with-included-loaders"],
+      },
     }
   ]
 end
-package.define_tasks
+package_task.define
