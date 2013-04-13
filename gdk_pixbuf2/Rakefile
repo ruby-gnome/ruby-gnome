@@ -9,7 +9,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.dependency.gem.runtime = ["glib2"]
   package.windows.packages = []
   package.windows.dependencies = ["zlib", "libpng"]
-  package.windows.build_dependencies = ["glib2"]
+  package.windows.build_dependencies = [
+    "glib2",
+    "gobject-introspection",
+  ]
   package.external_packages = [
     {
       :name => "gdk-pixbuf",
@@ -18,7 +21,10 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "2.28.0",
       :compression_method => "xz",
       :windows => {
-        :configure_args => ["--with-included-loaders"],
+        :configure_args => [
+          "--with-included-loaders",
+          "--enable-introspection",
+        ],
       },
     }
   ]
