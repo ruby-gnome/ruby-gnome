@@ -37,8 +37,8 @@ module GObjectIntrospection
   LOG_DOMAIN = "GObjectIntrospection"
 end
 
-vendor_lib_dir = vendor_dir + "lib"
-GObjectIntrospection.prepend_environment_path(vendor_lib_dir)
+vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+GObjectIntrospection.prepend_environment_path(vendor_girepository_dir)
 
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
