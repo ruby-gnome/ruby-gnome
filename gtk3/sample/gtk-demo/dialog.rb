@@ -26,32 +26,32 @@ module Demo
       frame.add(vbox)
       
       # Standard message dialog
-      hbox = Gtk::HBox.new(false, 0)
-      vbox.pack_start(hbox, false, false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
+      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
       button = Gtk::Button.new('_Message Dialog', true)
       button.signal_connect('clicked') do
 	message_dialog_clicked
       end
-      hbox.pack_start(button, false, false, 0)
+      hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
-      vbox.pack_start(Gtk::HSeparator.new, false, false, 0)
+      vbox.pack_start(Gtk::HSeparator.new, :expand => false, :fill => false, :padding => 0)
 
       # Interactive dialog
-      hbox = Gtk::HBox.new(false, 8)
-      vbox.pack_start(hbox, false, false, 0)
+      hbox = Gtk::Box.new(:horizontal, 8)
+      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
       vbox2 = Gtk::VBox.new(false, 0)
 
       button = Gtk::Button.new('_Interactive Dialog')
       button.signal_connect('clicked') do
 	interactive_dialog_clicked
       end
-      hbox.pack_start(vbox2, false, false, 0)
-      vbox2.pack_start(button, false, false, 0)
+      hbox.pack_start(vbox2, :expand => false, :fill => false, :padding => 0)
+      vbox2.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
       table = Gtk::Table.new(2, 2, false)
       table.set_row_spacings(4)
       table.set_column_spacings(4)
-      hbox.pack_start(table, false, false, 0)
+      hbox.pack_start(table, :expand => false, :fill => false, :padding => 0)
 
       label = Gtk::Label.new('_Entry 1', true)
       table.attach_defaults(label, 0, 1, 0, 1)
@@ -95,17 +95,17 @@ EOS
 			       ["_Non-stock Button", Gtk::Dialog::RESPONSE_CANCEL]
 			       )
 
-      hbox = Gtk::HBox.new(false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
       hbox.set_border_width(8)
-      dialog.vbox.pack_start(hbox, false, false, 0)
+      dialog.vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
 
       stock = Gtk::Image.new(Gtk::Stock::DIALOG_QUESTION, Gtk::IconSize::DIALOG)
-      hbox.pack_start(stock, false, false, 0)
+      hbox.pack_start(stock, :expand => false, :fill => false, :padding => 0)
 
       table = Gtk::Table.new(2, 2, false)
       table.set_row_spacings(4)
       table.set_column_spacings(4)
-      hbox.pack_start(table, true, true, 0)
+      hbox.pack_start(table, :expand => true, :fill => true, :padding => 0)
       label = Gtk::Label.new('_Entry 1', true)
       table.attach_defaults(label,
 			    0, 1, 0, 1)

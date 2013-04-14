@@ -24,12 +24,12 @@ module Demo
       add(vbox)
 
       vbox.pack_start(Gtk::Label.new('Shopping list (you can edit the cells!)'),
-		      false, false, 0)
+		      :expand => false, :fill => false, :padding => 0)
 
       sw = Gtk::ScrolledWindow.new
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-      vbox.pack_start(sw, true, true, 0)
+      sw.set_policy(:automatic, :automatic)
+      vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
       # create model
       model = create_model
@@ -44,20 +44,21 @@ module Demo
       sw.add(treeview)
 
       # some buttons
-      hbox = Gtk::HBox.new(true, 4)
-      vbox.pack_start(hbox, false, false, 0)
+      hbox = Gtk::Box.new(:horizontal, 4)
+      hbox.homogeneous = true
+      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
 
       button = Gtk::Button.new('Add item')
       button.signal_connect('clicked') do
 	add_item(model)
       end
-      hbox.pack_start(button, true, true, 0)
+      hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
 
       button = Gtk::Button.new('Remove item')
       button.signal_connect('clicked') do
 	remove_item(treeview)
       end
-      hbox.pack_start(button, true, true, 0)
+      hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
 
       set_default_size(320, 200)
     end

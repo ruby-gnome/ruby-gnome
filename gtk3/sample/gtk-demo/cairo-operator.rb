@@ -32,8 +32,8 @@ module Demo
       remove(@drawing_area)
       
       vbox = Gtk::VBox.new
-      vbox.pack_start(@drawing_area, true, true)
-      vbox.pack_start(operator_selector, false, false)
+      vbox.pack_start(@drawing_area, :expand => true, :fill => true)
+      vbox.pack_start(operator_selector, :expand => false, :fill => false)
       add(vbox)
     end
 

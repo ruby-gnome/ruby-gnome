@@ -27,7 +27,7 @@ module Demo
 
       view = Gtk::TextView.new
 
-      view.wrap_mode = Gtk::TextTag::WRAP_WORD
+      view.wrap_mode = :word
 
       view.signal_connect('key-press-event') do |*args|
         key_press_event(*args)
@@ -45,8 +45,8 @@ module Demo
       buffer = view.buffer
 
       sw = Gtk::ScrolledWindow.new
-      sw.set_policy(Gtk::POLICY_AUTOMATIC,
-                    Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(:automatic,
+                    :automatic)
 
       add(sw)
       sw.add(view)

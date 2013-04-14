@@ -63,7 +63,7 @@ puts path
       add(vbox)
 
       toolbar = Gtk::Toolbar.new
-      vbox.pack_start(toolbar, false, false, 0)
+      vbox.pack_start(toolbar, :expand => false, :fill => false, :padding => 0)
 
       up_button = Gtk::ToolButton.new(Gtk::Stock::GO_UP)
       up_button.important = true
@@ -86,8 +86,8 @@ puts path
 
       sw = Gtk::ScrolledWindow.new
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-      vbox.pack_start(sw, true, true, 0)
+      sw.set_policy(:automatic, :automatic)
+      vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
       iconview = Gtk::IconView.new(@store)
       iconview.selection_mode = Gtk::SELECTION_MULTIPLE

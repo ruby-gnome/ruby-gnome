@@ -27,14 +27,14 @@ module Demo
       add(vbox)
 
       vpaned = Gtk::VPaned.new
-      vbox.pack_start(vpaned, true, true, 0)
+      vbox.pack_start(vpaned, :expand => true, :fill => true, :padding => 0)
       vpaned.border_width = 5
 
       hpaned = Gtk::HPaned.new
       vpaned.add1(hpaned)
 
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       frame.set_size_request(60, 60)
       hpaned.add1(frame)
 
@@ -42,12 +42,12 @@ module Demo
       frame.add(button)
 
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       frame.set_size_request(80, 60)
       hpaned.add2(frame)
 
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       frame.set_size_request(60, 80)
       vpaned.add2(frame)
 
@@ -55,11 +55,11 @@ module Demo
 
       vbox.pack_start(create_pane_options(hpaned,
 					  'Horizontal', 'Left', 'Right'),
-		      false, false, 0)
+		      :expand => false, :fill => false, :padding => 0)
 
       vbox.pack_start(create_pane_options(vpaned,
 					  'Vertical', 'Top', 'Bottom'),
-		      false, false, 0)
+		      :expand => false, :fill => false, :padding => 0)
     end
 
     def create_pane_options(paned, frame_label, label1, label2)

@@ -143,13 +143,13 @@ module Demo
       add(vbox)
 
       vbox.pack_start(Gtk::Label.new("Jonathan's Holiday Card Planning Sheet"),
-		      false, false, 0)
+		      :expand => false, :fill => false, :padding => 0)
 
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(Gtk::POLICY_AUTOMATIC,
-		    Gtk::POLICY_AUTOMATIC)
-      vbox.pack_start(sw, true, true, 0)
+      sw.set_policy(:automatic,
+		    :automatic)
+      vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
       # create model
       model = create_model

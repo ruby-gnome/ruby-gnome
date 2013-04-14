@@ -66,12 +66,12 @@ module Demo
       box1 = Gtk::VBox.new(false, 0)
       add(box1)
 
-      box1.pack_start(item_factory.get_widget('<main>'), false, false, 0)
+      box1.pack_start(item_factory.get_widget('<main>'), :expand => false, :fill => false, :padding => 0)
 
       label = Gtk::Label.new("Type\n<alt>\nto start")
       label.set_size_request(200, 200)
       label.set_alignment(0.5, 0.5)
-      box1.pack_start(label, true, true, 0)
+      box1.pack_start(label, :expand => true, :fill => true, :padding => 0)
 
       separator = Gtk::HSeparator.new
       box1.pack_start(separator)
@@ -79,14 +79,14 @@ module Demo
       
       box2 = Gtk::VBox.new(false, 10)
       box2.set_border_width(10)
-      box1.pack_start(box2, false, true, 0)
+      box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
 
       button = Gtk::Button.new('close')
       # TODO: Need signal_connect_swapped?
       button.signal_connect('clicked') do
 	quit
       end
-      box2.pack_start(button, true, true, 0)
+      box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
       button.set_flags(Gtk::Widget::CAN_DEFAULT)
       button.grab_default
     end

@@ -47,7 +47,7 @@ module Demo
       add(box1)
 
       menubar = Gtk::MenuBar.new
-      box1.pack_start(menubar, false, true, 0)
+      box1.pack_start(menubar, :expand => false, :fill => true, :padding => 0)
 
       menu = create_menu(2, true)
 
@@ -69,7 +69,7 @@ module Demo
 
       box2 = Gtk::VBox.new(false, 10)
       box2.border_width = 10
-      box1.pack_start(box2, true, true, 0)
+      box1.pack_start(box2, :expand => true, :fill => true, :padding => 0)
       box2.show
 
       menu = create_menu(1, false)
@@ -112,23 +112,23 @@ module Demo
       optionmenu = Gtk::OptionMenu.new
       optionmenu.menu = menu
       optionmenu.history = 3
-      box2.pack_start(optionmenu, true, true, 0)
+      box2.pack_start(optionmenu, :expand => true, :fill => true, :padding => 0)
       optionmenu.show
 
       separator = Gtk::HSeparator.new
-      box1.pack_start(separator, false, true, 0)
+      box1.pack_start(separator, :expand => false, :fill => true, :padding => 0)
       separator.show
 
       box2 = Gtk::VBox.new(false, 10)
       box2.border_width = 10
-      box1.pack_start(box2, false, true, 0)
+      box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
       box2.show
 
       button = Gtk::Button.new('close')
       button.signal_connect('clicked') do
 	quit
       end
-      box2.pack_start(button, true, true, 0)
+      box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
       button.flags = Gtk::Widget::CAN_DEFAULT
       button.grab_default
       button.show

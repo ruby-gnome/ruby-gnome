@@ -24,15 +24,15 @@ module Demo
       end
 
       vbox = Gtk::VBox.new(false, 5)
-      self.vbox.pack_start(vbox, true, true)
+      self.vbox.pack_start(vbox, :expand => true, :fill => true)
       vbox.border_width = 5
 
       label = Gtk::Label.new('Expander demo. CLick on the triangle for details.')
-      vbox.pack_start(label, false, false)
+      vbox.pack_start(label, :expand => false, :fill => false)
 
       # Create the expander
       expander = Gtk::Expander.new('Details')
-      vbox.pack_start(expander, false, false)
+      vbox.pack_start(expander, :expand => false, :fill => false)
 
       expander.add(Gtk::Label.new('Details can be shown or hidden.'))
     end

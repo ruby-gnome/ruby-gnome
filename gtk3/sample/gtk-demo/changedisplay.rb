@@ -84,15 +84,15 @@ module Demo
       vbox = Gtk::VBox.new(false, 5)
       vbox.set_border_width(8)
 
-      self.vbox.pack_start(vbox, true, true)
+      self.vbox.pack_start(vbox, :expand => true, :fill => true)
 
       @size_group = Gtk::SizeGroup.new(Gtk::SizeGroup::HORIZONTAL)
 
       frame = create_display_frame
-      vbox.pack_start(frame, true, true)
+      vbox.pack_start(frame, :expand => true, :fill => true)
 
       frame = create_screen_frame
-      vbox.pack_start(frame, true, true)
+      vbox.pack_start(frame, :expand => true, :fill => true)
 
       initialize_displays
     end
@@ -142,7 +142,7 @@ module Demo
       button.signal_connect('clicked') do
 	open_display_cb
       end
-      button_vbox.pack_start(button, false, false, 0)
+      button_vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
       button = left_align_button_new('_Close')
       button.signal_connect('clicked') do
@@ -150,7 +150,7 @@ module Demo
 	  @current_display.close
 	end
       end
-      button_vbox.pack_start(button, false, false, 0)
+      button_vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
       @display_model = Gtk::ListStore.new(String, Gdk::Display)
       tree_view.model = @display_model
@@ -199,24 +199,24 @@ module Demo
     def create_frame(title)
       frame = Gtk::Frame.new(title)
 
-      hbox = Gtk::HBox.new(false, 8)
+      hbox = Gtk::Box.new(:horizontal, 8)
       hbox.set_border_width(8)
       frame.add(hbox)
 
       scrollwin = Gtk::ScrolledWindow.new
-      scrollwin.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
-      scrollwin.shadow_type = Gtk::SHADOW_IN
-      hbox.pack_start(scrollwin, true, true)
+      scrollwin.set_policy(Gtk::POLICY_NEVER, :automatic)
+      scrollwin.shadow_type = :in
+      hbox.pack_start(scrollwin, :expand => true, :fill => true)
 
       tree_view = Gtk::TreeView.new
       tree_view.headers_visible = false
       scrollwin.add(tree_view)
 
       selection = tree_view.selection
-      selection.mode = Gtk::SELECTION_BROWSE
+      selection.mode = :browse
 
       button_vbox = Gtk::VBox.new(false, 5)
-      hbox.pack_start(button_vbox, false, false)
+      hbox.pack_start(button_vbox, :expand => false, :fill => false)
 
       @size_group.add_widget(button_vbox)
 

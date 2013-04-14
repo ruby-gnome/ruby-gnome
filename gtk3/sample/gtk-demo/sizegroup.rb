@@ -36,14 +36,14 @@ module Demo
       end
 
       vbox = Gtk::VBox.new(false, 5)
-      self.vbox.pack_start(vbox, true, true, 0)
+      self.vbox.pack_start(vbox, :expand => true, :fill => true, :padding => 0)
       vbox.set_border_width(5)
 
       size_group = Gtk::SizeGroup.new(Gtk::SizeGroup::HORIZONTAL)
 
       ## Create one frame holding color options
       frame = Gtk::Frame.new('Color Options')
-      vbox.pack_start(frame, true, true, 0)
+      vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
 
       table = Gtk::Table.new(2, 2, false)
       table.set_border_width(5)
@@ -56,7 +56,7 @@ module Demo
 
       ## And another frame holding line style options
       frame = Gtk::Frame.new('Line Options')
-      vbox.pack_start(frame, false, false, 0)
+      vbox.pack_start(frame, :expand => false, :fill => false, :padding => 0)
 
       table = Gtk::Table.new(2, 2, false)
       table.set_border_width(5)
@@ -69,7 +69,7 @@ module Demo
 
       # And a check button to turn grouping on and off
       check_button = Gtk::CheckButton.new('_Enable grouping', true)
-      vbox.pack_start(check_button, false, false, 0)
+      vbox.pack_start(check_button, :expand => false, :fill => false, :padding => 0)
 
       check_button.set_active(true)
       check_button.signal_connect('toggled', size_group) do |check_button, size_group|
