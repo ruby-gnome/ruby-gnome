@@ -142,7 +142,7 @@ module Demo
 			"wrap_mode" => Gtk::TextTag::WRAP_CHAR)
 
       buffer.create_tag("no_wrap",
-			"wrap_mode" => Gtk::TextTag::WRAP_NONE)
+			"wrap_mode" => :none)
       
       buffer.create_tag("center",
 			"justification" => Gtk::JUSTIFY_CENTER)

@@ -241,7 +241,7 @@ module Demo
 	font_desc = Pango::FontDescription.new('Monospace 12')
 	text_view.modify_font(font_desc)
 
-	text_view.set_wrap_mode(Gtk::TextTag::WRAP_NONE)
+	text_view.set_wrap_mode(:none)
       else
 	text_view.set_wrap_mode(Gtk::TextTag::WRAP_WORD)
 	text_view.set_pixels_above_lines(2)
