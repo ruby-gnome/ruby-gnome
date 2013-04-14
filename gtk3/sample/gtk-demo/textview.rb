@@ -136,7 +136,7 @@ module Demo
 			 "editable" => false)
       
       buffer.create_tag("word_wrap",
-			"wrap_mode" => Gtk::TextTag::WRAP_WORD)
+			"wrap_mode" => :word)
 
       buffer.create_tag("char_wrap",
 			"wrap_mode" => Gtk::TextTag::WRAP_CHAR)
@@ -172,7 +172,7 @@ module Demo
 			"size" => 8 * Pango::SCALE) #  8 points 
 
       buffer.create_tag("rtl_quote",
-			"wrap_mode" => Gtk::TextTag::WRAP_WORD,
+			"wrap_mode" => :word,
 			"direction" => Gtk::Widget::TEXT_DIR_RTL,
 			"indent" => 30,
 			"left_margin" => 20,

@@ -27,7 +27,7 @@ module Demo
 
       view = Gtk::TextView.new
 
-      view.wrap_mode = Gtk::TextTag::WRAP_WORD
+      view.wrap_mode = :word
 
       view.signal_connect('key-press-event') do |*args|
         key_press_event(*args)

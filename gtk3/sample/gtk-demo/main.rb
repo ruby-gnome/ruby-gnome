@@ -243,7 +243,7 @@ module Demo
 
 	text_view.set_wrap_mode(:none)
       else
-	text_view.set_wrap_mode(Gtk::TextTag::WRAP_WORD)
+	text_view.set_wrap_mode(:word)
 	text_view.set_pixels_above_lines(2)
 	text_view.set_pixels_below_lines(2)
       end
