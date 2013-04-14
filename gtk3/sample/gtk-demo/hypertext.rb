@@ -45,8 +45,8 @@ module Demo
       buffer = view.buffer
 
       sw = Gtk::ScrolledWindow.new
-      sw.set_policy(Gtk::POLICY_AUTOMATIC,
-                    Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(:automatic,
+                    :automatic)
 
       add(sw)
       sw.add(view)

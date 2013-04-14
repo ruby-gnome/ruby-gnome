@@ -34,7 +34,7 @@ module Demo
       add(hbox)
 
       sw = Gtk::ScrolledWindow.new
-      sw.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(Gtk::POLICY_NEVER, :automatic)
       hbox.pack_start(sw, false, false, 0)
 
       model = create_model

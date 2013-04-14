@@ -28,7 +28,7 @@ module Demo
 
       sw = Gtk::ScrolledWindow.new
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(:automatic, :automatic)
       vbox.pack_start(sw, true, true, 0)
 
       # create model

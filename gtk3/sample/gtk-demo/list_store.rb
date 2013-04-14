@@ -47,7 +47,7 @@ module Demo
 
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(Gtk::POLICY_NEVER, :automatic)
       vbox.pack_start(sw, true, true, 0)
 
       # create tree model

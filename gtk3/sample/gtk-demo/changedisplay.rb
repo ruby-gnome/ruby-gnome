@@ -204,7 +204,7 @@ module Demo
       frame.add(hbox)
 
       scrollwin = Gtk::ScrolledWindow.new
-      scrollwin.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
+      scrollwin.set_policy(Gtk::POLICY_NEVER, :automatic)
       scrollwin.shadow_type = :in
       hbox.pack_start(scrollwin, true, true)
 
