@@ -227,7 +227,7 @@ module Demo
       scrolled_window = Gtk::ScrolledWindow.new
       scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC,
 				 Gtk::POLICY_AUTOMATIC)
-      scrolled_window.set_shadow_type(Gtk::SHADOW_IN)
+      scrolled_window.set_shadow_type(:in)
 
       text_view = Gtk::TextView.new
 

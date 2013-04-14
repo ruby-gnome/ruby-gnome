@@ -34,7 +34,7 @@ module Demo
       vpaned.add1(hpaned)
 
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       frame.set_size_request(60, 60)
       hpaned.add1(frame)
 
@@ -42,12 +42,12 @@ module Demo
       frame.add(button)
 
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       frame.set_size_request(80, 60)
       hpaned.add2(frame)
 
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       frame.set_size_request(60, 80)
       vpaned.add2(frame)
 

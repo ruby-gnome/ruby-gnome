@@ -205,7 +205,7 @@ module Demo
 
       scrollwin = Gtk::ScrolledWindow.new
       scrollwin.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC)
-      scrollwin.shadow_type = Gtk::SHADOW_IN
+      scrollwin.shadow_type = :in
       hbox.pack_start(scrollwin, true, true)
 
       tree_view = Gtk::TreeView.new

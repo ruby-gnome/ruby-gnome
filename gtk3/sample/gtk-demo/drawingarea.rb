@@ -40,7 +40,7 @@ module Demo
       vbox.pack_start(label, false, false, 0)
       
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       vbox.pack_start(frame, true, true, 0)
       
       da = Gtk::DrawingArea.new
@@ -59,7 +59,7 @@ module Demo
       vbox.pack_start(label, false, false, 0)
       
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       vbox.pack_start(frame, true, true, 0)
       
       da = Gtk::DrawingArea.new

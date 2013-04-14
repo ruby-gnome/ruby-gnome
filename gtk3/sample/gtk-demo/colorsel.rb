@@ -25,7 +25,7 @@ module Demo
 
       ## Create the color swatch area
       @frame = Gtk::Frame.new
-      @frame.set_shadow_type(Gtk::SHADOW_IN)
+      @frame.set_shadow_type(:in)
       vbox.pack_start(@frame, true, true, 0)
 
       @da = Gtk::DrawingArea.new

@@ -41,7 +41,7 @@ module Demo
       vbox.pack_start(label, false, false, 0)
       
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       
       # The alignment keeps the frame from growing when users resize
       # the window
@@ -84,7 +84,7 @@ module Demo
       vbox.pack_start(label, false, false, 0)
       
       frame = Gtk::Frame.new
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       
       # The alignment keeps the frame from growing when users resize
       # the window
@@ -103,7 +103,7 @@ module Demo
       vbox.pack_start(label, false, false, 0)
       
       frame = Gtk::Frame.new(nil)
-      frame.shadow_type = Gtk::SHADOW_IN
+      frame.shadow_type = :in
       
       # The alignment keeps the frame from growing when users resize
       # the window
