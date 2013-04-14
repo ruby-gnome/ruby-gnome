@@ -43,12 +43,12 @@ module Demo
       add(vbox)
 
       label = Gtk::Label.new('This is the bug list (note: not based on real data, it would be nice to have a nice ODBC interface to bugzilla or so, though).')
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
       sw.set_policy(Gtk::POLICY_NEVER, :automatic)
-      vbox.pack_start(sw, true, true, 0)
+      vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
       # create tree model
       model = create_model

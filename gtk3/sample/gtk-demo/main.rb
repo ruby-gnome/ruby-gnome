@@ -45,10 +45,10 @@ module Demo
       tree = create_tree
       scrolled_window = Gtk::ScrolledWindow.new
       scrolled_window.add(tree)
-      hbox.pack_start(scrolled_window, false, false, 0)
+      hbox.pack_start(scrolled_window, :expand => false, :fill => false, :padding => 0)
 
       notebook = Gtk::Notebook.new
-      hbox.pack_start(notebook, true, true, 0)
+      hbox.pack_start(notebook, :expand => true, :fill => true, :padding => 0)
 
       notebook.append_page(create_text(@info_buffer, false),
 			   Gtk::Label.new('_Info', true))

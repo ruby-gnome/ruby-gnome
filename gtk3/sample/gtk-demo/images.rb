@@ -38,7 +38,7 @@ module Demo
 
       label = Gtk::Label.new
       label.set_markup('<u>Image loaded from a file</u>')
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
       
       frame = Gtk::Frame.new
       frame.shadow_type = :in
@@ -47,7 +47,7 @@ module Demo
       # the window
       align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
       align.add(frame)
-      vbox.pack_start(align, false, false, 0)
+      vbox.pack_start(align, :expand => false, :fill => false, :padding => 0)
 
       # demo_find_file looks in the the current directory first,
       # so you can run gtk-demo without installing GTK, then looks
@@ -81,7 +81,7 @@ module Demo
       # Animation
       label = Gtk::Label.new
       label.set_markup('<u>Animation loaded from a file</u>')
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
       
       frame = Gtk::Frame.new
       frame.shadow_type = :in
@@ -90,7 +90,7 @@ module Demo
       # the window
       align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
       align.add(frame)
-      vbox.pack_start(align, false, false, 0)
+      vbox.pack_start(align, :expand => false, :fill => false, :padding => 0)
 
       filename = Demo.find_file('floppybuddy.gif')
       image = Gtk::Image.new(filename)
@@ -100,7 +100,7 @@ module Demo
       # Progressive
       label = Gtk::Label.new
       label.set_markup('<u>Progressive image loading</u>')
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
       
       frame = Gtk::Frame.new(nil)
       frame.shadow_type = :in
@@ -109,7 +109,7 @@ module Demo
       # the window
       align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
       align.add(frame)
-      vbox.pack_start(align, false, false, 0)
+      vbox.pack_start(align, :expand => false, :fill => false, :padding => 0)
 
       # Create an empty image for now; the progressive loader
       # will create the pixbuf and fill it in.
@@ -120,7 +120,7 @@ module Demo
 
       # Sensitivity control
       button = Gtk::ToggleButton.new('_Insensitive', true)
-      vbox.pack_start(button, false, false, 0)
+      vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
       button.signal_connect('toggled') do |widget|
 	vbox.children.each do |widget|

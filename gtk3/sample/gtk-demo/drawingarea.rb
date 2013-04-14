@@ -37,11 +37,11 @@ module Demo
       ## Create the checkerboard area
       label = Gtk::Label.new
       label.set_markup('<u>Checkerboard pattern</u>')
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
       
       frame = Gtk::Frame.new
       frame.shadow_type = :in
-      vbox.pack_start(frame, true, true, 0)
+      vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
       
       da = Gtk::DrawingArea.new
       # set a minimum size
@@ -56,11 +56,11 @@ module Demo
       ## Create the scribble area
       label = Gtk::Label.new
       label.set_markup('<u>Scribble area</u>')
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
       
       frame = Gtk::Frame.new
       frame.shadow_type = :in
-      vbox.pack_start(frame, true, true, 0)
+      vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
       
       da = Gtk::DrawingArea.new
       # set a minimum size

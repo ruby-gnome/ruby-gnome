@@ -35,7 +35,7 @@ module Demo
 
       sw = Gtk::ScrolledWindow.new
       sw.set_policy(Gtk::POLICY_NEVER, :automatic)
-      hbox.pack_start(sw, false, false, 0)
+      hbox.pack_start(sw, :expand => false, :fill => false, :padding => 0)
 
       model = create_model
 
@@ -46,11 +46,11 @@ module Demo
       column.title = 'Const'
 
       cell_renderer = Gtk::CellRendererPixbuf.new
-      column.pack_start(cell_renderer, false)
+      column.pack_start(cell_renderer, :expand => false)
       column.set_attributes(cell_renderer, "stock_id" => 1)
 
       cell_renderer = Gtk::CellRendererText.new
-      column.pack_start(cell_renderer, true)
+      column.pack_start(cell_renderer, :expand => true)
       column.set_cell_data_func(cell_renderer) do |column, cell, model, iter|
 	cell.text = iter[0].const
       end
@@ -98,13 +98,13 @@ module Demo
       display.label_accel_label = Gtk::Label.new
       display.icon_image = Gtk::Image.new # empty image
 
-      vbox.pack_start(display.type_label, false, false, 0)
+      vbox.pack_start(display.type_label, :expand => false, :fill => false, :padding => 0)
 
-      vbox.pack_start(display.icon_image, false, false, 0)
+      vbox.pack_start(display.icon_image, :expand => false, :fill => false, :padding => 0)
 
-      vbox.pack_start(display.label_accel_label, false, false, 0)
-      vbox.pack_start(display.const_label, false, false, 0)
-      vbox.pack_start(display.id_label, false, false, 0)
+      vbox.pack_start(display.label_accel_label, :expand => false, :fill => false, :padding => 0)
+      vbox.pack_start(display.const_label, :expand => false, :fill => false, :padding => 0)
+      vbox.pack_start(display.id_label, :expand => false, :fill => false, :padding => 0)
 
       selection = treeview.selection
       selection.mode = Gtk::SELECTION_SINGLE

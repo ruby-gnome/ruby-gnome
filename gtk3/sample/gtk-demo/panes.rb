@@ -27,7 +27,7 @@ module Demo
       add(vbox)
 
       vpaned = Gtk::VPaned.new
-      vbox.pack_start(vpaned, true, true, 0)
+      vbox.pack_start(vpaned, :expand => true, :fill => true, :padding => 0)
       vpaned.border_width = 5
 
       hpaned = Gtk::HPaned.new
@@ -55,11 +55,11 @@ module Demo
 
       vbox.pack_start(create_pane_options(hpaned,
 					  'Horizontal', 'Left', 'Right'),
-		      false, false, 0)
+		      :expand => false, :fill => false, :padding => 0)
 
       vbox.pack_start(create_pane_options(vpaned,
 					  'Vertical', 'Top', 'Bottom'),
-		      false, false, 0)
+		      :expand => false, :fill => false, :padding => 0)
     end
 
     def create_pane_options(paned, frame_label, label1, label2)
