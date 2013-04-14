@@ -44,7 +44,8 @@ module Demo
       sw.add(treeview)
 
       # some buttons
-      hbox = Gtk::HBox.new(true, 4)
+      hbox = Gtk::Box.new(:horizontal, 4)
+      hbox.homogeneous = true
       vbox.pack_start(hbox, false, false, 0)
 
       button = Gtk::Button.new('Add item')

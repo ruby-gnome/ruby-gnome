@@ -30,7 +30,7 @@ module Demo
 
       self.border_width = 8
 
-      hbox = Gtk::HBox.new(false, 8)
+      hbox = Gtk::Box.new(:horizontal, 8)
       add(hbox)
 
       sw = Gtk::ScrolledWindow.new

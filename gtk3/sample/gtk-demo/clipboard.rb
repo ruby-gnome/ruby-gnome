@@ -29,7 +29,7 @@ module Demo
 
       vbox.pack_start(label, false, false, 0)
 
-      hbox = Gtk::HBox.new(false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
       hbox.border_width = 8
       vbox.pack_start(hbox, false, false, 0)
 
@@ -48,7 +48,7 @@ module Demo
       label = Gtk::Label.new(%Q["Paste" will paste the text from the clipboard to the entry])
       vbox.pack_start(label, false, false, 0)
 
-      hbox = Gtk::HBox.new(false, 4)
+      hbox = Gtk::Box.new(:horizontal, 4)
       hbox.border_width = 8
       vbox.pack_start(hbox, false, false, 0)
 

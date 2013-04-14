@@ -26,7 +26,7 @@ module Demo
       frame.add(vbox)
       
       # Standard message dialog
-      hbox = Gtk::HBox.new(false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
       vbox.pack_start(hbox, false, false, 0)
       button = Gtk::Button.new('_Message Dialog', true)
       button.signal_connect('clicked') do
@@ -37,7 +37,7 @@ module Demo
       vbox.pack_start(Gtk::HSeparator.new, false, false, 0)
 
       # Interactive dialog
-      hbox = Gtk::HBox.new(false, 8)
+      hbox = Gtk::Box.new(:horizontal, 8)
       vbox.pack_start(hbox, false, false, 0)
       vbox2 = Gtk::VBox.new(false, 0)
 
@@ -95,7 +95,7 @@ EOS
 			       ["_Non-stock Button", Gtk::Dialog::RESPONSE_CANCEL]
 			       )
 
-      hbox = Gtk::HBox.new(false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
       hbox.set_border_width(8)
       dialog.vbox.pack_start(hbox, false, false, 0)
 

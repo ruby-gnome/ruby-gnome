@@ -39,7 +39,7 @@ module Demo
         end
       end
 
-      hbox = Gtk::HBox.new
+      hbox = Gtk::Box.new(:horizontal)
       add(hbox)
 
       tree = create_tree

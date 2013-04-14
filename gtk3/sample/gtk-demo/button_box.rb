@@ -40,7 +40,7 @@ module Demo
       frame_vert = Gtk::Frame.new('Vertical Button Boxes')
       main_vbox.pack_start(frame_vert, true, true, 10)
 
-      hbox = Gtk::HBox.new(false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
       hbox.set_border_width(10)
       frame_vert.add(hbox)
 

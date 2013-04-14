@@ -199,7 +199,7 @@ module Demo
     def create_frame(title)
       frame = Gtk::Frame.new(title)
 
-      hbox = Gtk::HBox.new(false, 8)
+      hbox = Gtk::Box.new(:horizontal, 8)
       hbox.set_border_width(8)
       frame.add(hbox)
 
