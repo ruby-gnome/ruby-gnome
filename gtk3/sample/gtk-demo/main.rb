@@ -239,7 +239,7 @@ module Demo
 
       if is_source
 	font_desc = Pango::FontDescription.new('Monospace 12')
-	text_view.modify_font(font_desc)
+	text_view.override_font(font_desc)
 
 	text_view.set_wrap_mode(:none)
       else
