@@ -161,7 +161,7 @@ module Demo
       tree_view.set_model(model)
       selection = tree_view.selection
 
-      selection.set_mode(Gtk::SELECTION_BROWSE)
+      selection.set_mode(:browse)
       tree_view.set_size_request(200, -1)
 
       append_children(model, generate_index)

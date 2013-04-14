@@ -213,7 +213,7 @@ module Demo
       scrollwin.add(tree_view)
 
       selection = tree_view.selection
-      selection.mode = Gtk::SELECTION_BROWSE
+      selection.mode = :browse
 
       button_vbox = Gtk::VBox.new(false, 5)
       hbox.pack_start(button_vbox, false, false)
