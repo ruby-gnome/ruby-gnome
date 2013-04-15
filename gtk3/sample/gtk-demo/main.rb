@@ -39,16 +39,16 @@ module Demo
         end
       end
 
-      hbox = Gtk::HBox.new
+      hbox = Gtk::Box.new(:horizontal)
       add(hbox)
 
       tree = create_tree
       scrolled_window = Gtk::ScrolledWindow.new
       scrolled_window.add(tree)
-      hbox.pack_start(scrolled_window, false, false, 0)
+      hbox.pack_start(scrolled_window, :expand => false, :fill => false, :padding => 0)
 
       notebook = Gtk::Notebook.new
-      hbox.pack_start(notebook, true, true, 0)
+      hbox.pack_start(notebook, :expand => true, :fill => true, :padding => 0)
 
       notebook.append_page(create_text(@info_buffer, false),
 			   Gtk::Label.new('_Info', true))
@@ -161,7 +161,7 @@ module Demo
       tree_view.set_model(model)
       selection = tree_view.selection
 
-      selection.set_mode(Gtk::SELECTION_BROWSE)
+      selection.set_mode(:browse)
       tree_view.set_size_request(200, -1)
 
       append_children(model, generate_index)
@@ -225,9 +225,9 @@ module Demo
 
     def create_text(buffer, is_source)
       scrolled_window = Gtk::ScrolledWindow.new
-      scrolled_window.set_policy(Gtk::POLICY_AUTOMATIC,
-				 Gtk::POLICY_AUTOMATIC)
-      scrolled_window.set_shadow_type(Gtk::SHADOW_IN)
+      scrolled_window.set_policy(:automatic,
+				 :automatic)
+      scrolled_window.set_shadow_type(:in)
 
       text_view = Gtk::TextView.new
 
@@ -239,11 +239,11 @@ module Demo
 
       if is_source
 	font_desc = Pango::FontDescription.new('Monospace 12')
-	text_view.modify_font(font_desc)
+	text_view.override_font(font_desc)
 
-	text_view.set_wrap_mode(Gtk::TextTag::WRAP_NONE)
+	text_view.set_wrap_mode(:none)
       else
-	text_view.set_wrap_mode(Gtk::TextTag::WRAP_WORD)
+	text_view.set_wrap_mode(:word)
 	text_view.set_pixels_above_lines(2)
 	text_view.set_pixels_below_lines(2)
       end

@@ -25,16 +25,16 @@ module Demo
       end
 
       vbox = Gtk::VBox.new(false, 5)
-      self.vbox.pack_start(vbox, true, true)
+      self.vbox.pack_start(vbox, :expand => true, :fill => true)
       vbox.border_width = 5
 
       label = Gtk::Label.new
       label.markup = 'Completion demo, try writing <b>total</b> or <b>gnome</b> for example'
-      vbox.pack_start(label, false, false)
+      vbox.pack_start(label, :expand => false, :fill => false)
 
       # Create our entry
       entry = Gtk::Entry.new
-      vbox.pack_start(entry, false, false)
+      vbox.pack_start(entry, :expand => false, :fill => false)
 
       # Create the completion object
       completion = Gtk::EntryCompletion.new

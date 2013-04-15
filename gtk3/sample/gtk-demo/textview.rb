@@ -43,15 +43,15 @@ module Demo
       view2 = Gtk::TextView.new(buffer)
       
       sw = Gtk::ScrolledWindow.new(nil, nil)
-      sw.set_policy(Gtk::POLICY_AUTOMATIC,
-		    Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(:automatic,
+		    :automatic)
       vpaned.add1(sw)
 
       sw.add(view1)
 
       sw = Gtk::ScrolledWindow.new(nil, nil)
-      sw.set_policy(Gtk::POLICY_AUTOMATIC,
-		    Gtk::POLICY_AUTOMATIC)
+      sw.set_policy(:automatic,
+		    :automatic)
       vpaned.add2(sw)
 
       sw.add(view2)
@@ -136,13 +136,13 @@ module Demo
 			 "editable" => false)
       
       buffer.create_tag("word_wrap",
-			"wrap_mode" => Gtk::TextTag::WRAP_WORD)
+			"wrap_mode" => :word)
 
       buffer.create_tag("char_wrap",
 			"wrap_mode" => Gtk::TextTag::WRAP_CHAR)
 
       buffer.create_tag("no_wrap",
-			"wrap_mode" => Gtk::TextTag::WRAP_NONE)
+			"wrap_mode" => :none)
       
       buffer.create_tag("center",
 			"justification" => Gtk::JUSTIFY_CENTER)
@@ -172,7 +172,7 @@ module Demo
 			"size" => 8 * Pango::SCALE) #  8 points 
 
       buffer.create_tag("rtl_quote",
-			"wrap_mode" => Gtk::TextTag::WRAP_WORD,
+			"wrap_mode" => :word,
 			"direction" => Gtk::Widget::TEXT_DIR_RTL,
 			"indent" => 30,
 			"left_margin" => 20,
@@ -362,8 +362,8 @@ module Demo
 	    
 	    @@nest_window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
 	    sw = Gtk::ScrolledWindow.new(nil, nil)
-	    sw.set_policy(Gtk::POLICY_AUTOMATIC,
-			  Gtk::POLICY_AUTOMATIC)
+	    sw.set_policy(:automatic,
+			  :automatic)
 
 	    @@nest_window.add(sw)
 	    sw.add(view)

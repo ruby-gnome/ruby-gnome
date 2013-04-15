@@ -25,8 +25,8 @@ module Demo
 
       ## Create the color swatch area
       @frame = Gtk::Frame.new
-      @frame.set_shadow_type(Gtk::SHADOW_IN)
-      vbox.pack_start(@frame, true, true, 0)
+      @frame.set_shadow_type(:in)
+      vbox.pack_start(@frame, :expand => true, :fill => true, :padding => 0)
 
       @da = Gtk::DrawingArea.new
       
@@ -53,7 +53,7 @@ module Demo
       button = Gtk::Button.new('_Change the above color', true)
       alignment.add(button)
 
-      vbox.pack_start(alignment, false, false, 0)
+      vbox.pack_start(alignment, :expand => false, :fill => false, :padding => 0)
 
       button.signal_connect('clicked') do
 	change_color_callback
