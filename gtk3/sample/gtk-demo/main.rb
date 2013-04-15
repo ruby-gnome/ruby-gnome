@@ -31,7 +31,7 @@ module Demo
       end
 
       signal_connect("key_press_event") do |widget, event|
-        if event.state.control_mask? and event.keyval == Gdk::Keyval::GDK_q
+        if event.state.control_mask? and event.keyval == Gdk::Keyval::GDK_KEY_q
           destroy
           true
         else
@@ -44,6 +44,7 @@ module Demo
 
       tree = create_tree
       scrolled_window = Gtk::ScrolledWindow.new
+      scrolled_window.set_policy :never, :automatic
       scrolled_window.add(tree)
       hbox.pack_start(scrolled_window, :expand => false, :fill => false, :padding => 0)
 
