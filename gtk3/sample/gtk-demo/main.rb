@@ -39,7 +39,7 @@ module Demo
         end
       end
 
-      hbox = Gtk::Box.new :horizontal
+      hbox = Gtk::Box.new(:horizontal)
       add(hbox)
 
       tree = create_tree
@@ -227,7 +227,7 @@ module Demo
     def create_text(buffer, is_source)
       scrolled_window = Gtk::ScrolledWindow.new
       scrolled_window.set_policy(:automatic,
-                                 :automatic)
+				 :automatic)
       scrolled_window.set_shadow_type(:in)
 
       text_view = Gtk::TextView.new

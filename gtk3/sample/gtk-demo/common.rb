@@ -23,7 +23,7 @@ module Demo
 
   class BasicWindow < Gtk::Window
     def initialize(title = nil)
-      super(Gtk::Window::TOPLEVEL)
+      super(:toplevel)
       if title
 	set_title("#{title} in Ruby/GTK")
       end

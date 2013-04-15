@@ -111,8 +111,8 @@ module Demo
 
       ## Create document
       sw = Gtk::ScrolledWindow.new
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-      sw.shadow_type = Gtk::SHADOW_IN
+      sw.set_policy(:automatic, :automatic)
+      sw.shadow_type = :in
       table.attach(sw,
 		   # X direction            # Y direction
 		   0, 1,                    2, 3,

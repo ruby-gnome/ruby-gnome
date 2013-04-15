@@ -27,38 +27,38 @@ module Demo
 
       label = Gtk::Label.new(%Q["Copy" will copy the text\nin the entry to the clipboard])
 
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
-      hbox = Gtk::HBox.new(false, 0)
+      hbox = Gtk::Box.new(:horizontal, 0)
       hbox.border_width = 8
-      vbox.pack_start(hbox, false, false, 0)
+      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
 
       # Create the first entry
       entry = Gtk::Entry.new
-      hbox.pack_start(entry, true, true, 0)
+      hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
 
       # Create the button
       button = Gtk::Button.new(Gtk::Stock::COPY)
-      hbox.pack_start(button, false, false, 0)
+      hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
       button.signal_connect('clicked', entry) do |w, e|
         clipboard = e.get_clipboard(Gdk::Selection::CLIPBOARD)
         clipboard.text = e.text
       end
 
       label = Gtk::Label.new(%Q["Paste" will paste the text from the clipboard to the entry])
-      vbox.pack_start(label, false, false, 0)
+      vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
-      hbox = Gtk::HBox.new(false, 4)
+      hbox = Gtk::Box.new(:horizontal, 4)
       hbox.border_width = 8
-      vbox.pack_start(hbox, false, false, 0)
+      vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
 
       # Create the second entry
       entry = Gtk::Entry.new
-      hbox.pack_start(entry, true, true, 0)
+      hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
 
       # Create the button
       button = Gtk::Button.new(Gtk::Stock::PASTE)
-      hbox.pack_start(button, false, false, 0)
+      hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
       button.signal_connect('clicked', entry) do |w, e|
         clipboard = e.get_clipboard(Gdk::Selection::CLIPBOARD)
         clipboard.request_text do |board, text, data|

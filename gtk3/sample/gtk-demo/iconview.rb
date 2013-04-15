@@ -70,7 +70,7 @@ module Demo
       add(vbox)
 
       toolbar = Gtk::Toolbar.new
-      vbox.pack_start(toolbar, :expand =>false, :fill => false, :padding => 0)
+      vbox.pack_start(toolbar, :expand => false, :fill => false, :padding => 0)
 
       up_button = Gtk::ToolButton.new(:stock_id => :go_up)
       up_button.important = true
@@ -92,7 +92,7 @@ module Demo
       end
 
       sw = Gtk::ScrolledWindow.new
-      sw.shadow_type = :in
+      sw.shadow_type = Gtk::ShadowType::ETCHED_IN
       sw.set_policy(:automatic, :automatic)
       vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
