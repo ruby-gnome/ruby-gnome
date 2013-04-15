@@ -9,7 +9,14 @@ The Gtk::IconView widget is used to display and manipulate icons.
 It uses a Gtk::TreeModel for data storage, so the list store example
 might be helpful.
 =end
-$KCODE="u"
+
+
+# FIXME requires Ruby/GTK3 at least Ruby 1.9?
+rv = Object::RUBY_VERSION.split('.')
+if(rv[0].to_i == 1 and rv[1].to_i <= 8) or rv[0].to_i == 0
+  $KCODE="u"
+end
+
 require 'common'
 
 module Demo
@@ -24,7 +31,7 @@ module Demo
         # set COL_DISPLAY_NAME first because changing an iter will trigger the
         # sort function; if we set something else first, the value of
         # COL_DISPLAY_NAME for this row will be "nil" and the sort function will fail
-puts path
+#puts path
 #puts GLib.convert(GLib.filename_to_utf8(path), "Shift_JIS", "UTF-8")
 #puts File.basename(GLib.convert(GLib.filename_to_utf8(path), "Shift_JIS", "UTF-8"))
 #        iter[COL_DISPLAY_NAME] = File.basename(GLib.filename_to_utf8(path))
@@ -53,31 +60,31 @@ puts path
         end
       end
       @store.set_sort_column_id(Gtk::TreeSortable::DEFAULT_SORT_COLUMN_ID,
-				Gtk::SORT_ASCENDING)
+				Gtk::SortType::ASCENDING)
 
       fill_store
       set_default_size(650, 400)
       set_border_width(8)
 
-      vbox = Gtk::VBox.new(false, 0)
+      vbox = Gtk::Box.new(:vertical)
       add(vbox)
 
       toolbar = Gtk::Toolbar.new
-      vbox.pack_start(toolbar, false, false, 0)
+      vbox.pack_start(toolbar, :expand =>false, :fill => false, :padding => 0)
 
-      up_button = Gtk::ToolButton.new(Gtk::Stock::GO_UP)
+      up_button = Gtk::ToolButton.new(:stock_id => :go_up)
       up_button.important = true
       up_button.sensitive = false
-      toolbar.insert(-1, up_button)
+      toolbar.insert(up_button, -1)
       up_button.signal_connect("clicked") do
 	@parent = File.dirname(@parent)
 	fill_store
 	up_button.sensitive = @parent != "/"
       end
 
-      home_button = Gtk::ToolButton.new(Gtk::Stock::HOME)
+      home_button = Gtk::ToolButton.new(:stock_id => :home)
       home_button.important = true
-      toolbar.insert(-1, home_button)
+      toolbar.insert(home_button, -1)
       home_button.signal_connect("clicked") do
 	@parent = GLib.home_dir
 	fill_store
@@ -85,12 +92,12 @@ puts path
       end
 
       sw = Gtk::ScrolledWindow.new
-      sw.shadow_type = Gtk::SHADOW_ETCHED_IN
-      sw.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC)
-      vbox.pack_start(sw, true, true, 0)
+      sw.shadow_type = :in
+      sw.set_policy(:automatic, :automatic)
+      vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
       iconview = Gtk::IconView.new(@store)
-      iconview.selection_mode = Gtk::SELECTION_MULTIPLE
+      iconview.selection_mode = :multiple
       iconview.text_column = COL_DISPLAY_NAME
       iconview.pixbuf_column = COL_PIXBUF
       iconview.signal_connect("item_activated") do |iview, path|
