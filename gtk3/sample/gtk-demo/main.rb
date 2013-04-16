@@ -104,13 +104,14 @@ module Demo
 
     def generate_index
       # Target scripts
-      scripts = Dir.glob('*.rb') - %w(common.rb main.rb)
+      scripts = Dir.glob(File.join(File.dirname(__FILE__), '*.rb'))
 
       # Generate index tree
       children = {}
       index = []
 
       scripts.each do |fn|
+        next if ["common.rb", "main.rb"].include?(File.basename(fn))
         title, klass, depend = script_info(fn)
 
         if depend and not Gtk.const_defined?(depend)
