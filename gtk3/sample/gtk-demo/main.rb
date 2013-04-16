@@ -171,7 +171,7 @@ module Demo
       cell = Gtk::CellRendererText.new
       cell.style = Pango::FontDescription::STYLE_ITALIC
       column = Gtk::TreeViewColumn.new("Widget (double click for demo)", cell,
-                                      {
+                                       {
                                          'text' => TITLE_COLUMN,
                                          'style_set' => ITALIC_COLUMN,
                                        })
