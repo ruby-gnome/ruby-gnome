@@ -16,9 +16,9 @@ module Demo
       # as opposed to the GTK2 dialog, the buttons have to be enclodes by brackeds
       # together with their ResponseType AND all groups have to bracketed together
       super(:title => 'GtkExpander',
-	    :parent => nil,
-	    :flags => 0,
-	    :buttons => [[Gtk::Stock::CLOSE, Gtk::ResponseType::NONE]])
+            :parent => nil,
+            :flags => 0,
+            :buttons => [[Gtk::Stock::CLOSE, Gtk::ResponseType::NONE]])
       self.resizable = false
 
       signal_connect('response') do
