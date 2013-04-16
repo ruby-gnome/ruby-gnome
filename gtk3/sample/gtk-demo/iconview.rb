@@ -86,7 +86,7 @@ module Demo
       end
 
       sw = Gtk::ScrolledWindow.new
-      sw.shadow_type = Gtk::ShadowType::ETCHED_IN
+      sw.shadow_type = :etched_in
       sw.set_policy(:automatic, :automatic)
       vbox.pack_start(sw, :expand => true, :fill => true, :padding => 0)
 
