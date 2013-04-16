@@ -11,12 +11,6 @@ might be helpful.
 =end
 
 
-# FIXME requires Ruby/GTK3 at least Ruby 1.9?
-rv = Object::RUBY_VERSION.split('.')
-if(rv[0].to_i == 1 and rv[1].to_i <= 8) or rv[0].to_i == 0
-  $KCODE="u"
-end
-
 require 'common'
 
 module Demo
