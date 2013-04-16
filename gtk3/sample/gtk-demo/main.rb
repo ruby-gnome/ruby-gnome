@@ -110,9 +110,9 @@ module Demo
       children = {}
       index = []
 
-      scripts.each do |fn|
-        next if ["common.rb", "main.rb"].include?(File.basename(fn))
-        title, klass, depend = script_info(fn)
+      scripts.each do |script|
+        next if ["common.rb", "main.rb"].include?(File.basename(script))
+        title, klass, depend = script_info(script)
 
         if depend and not Gtk.const_defined?(depend)
           next
@@ -127,9 +127,9 @@ module Demo
             index += [[parent, nil, nil, []]]
           end
 
-          children[parent] += [[child, fn, klass]]
+          children[parent] += [[child, script, klass]]
         else
-          index += [[title, fn, klass]]
+          index += [[title, script, klass]]
         end
       end
 
