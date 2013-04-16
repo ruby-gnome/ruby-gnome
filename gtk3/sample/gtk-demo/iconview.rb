@@ -97,9 +97,9 @@ module Demo
       iconview.signal_connect("item_activated") do |iview, path|
 	iter = @store.get_iter(path)
 	if iter[COL_DISPLAY_NAME]
-	  @parent = iter[COL_PATH]
-	  fill_store
-	  up_button.sensitive = true
+          @parent = iter[COL_PATH]
+          fill_store
+          up_button.sensitive = true
 	end
       end
       sw.add(iconview)
