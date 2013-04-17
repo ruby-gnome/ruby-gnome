@@ -20,8 +20,8 @@ module Demo
     def fill_store
       @store.clear
       Dir.glob(File.join(@parent, "*")).each do |path|
-	is_dir = FileTest.directory?(path)
-	iter = @store.append
+        is_dir = FileTest.directory?(path)
+        iter = @store.append
         # set COL_DISPLAY_NAME first because changing an iter will trigger the
         # sort function; if we set something else first, the value of
         # COL_DISPLAY_NAME for this row will be "nil" and the sort function will fail
@@ -30,9 +30,9 @@ module Demo
 #puts File.basename(GLib.convert(GLib.filename_to_utf8(path), "Shift_JIS", "UTF-8"))
 #        iter[COL_DISPLAY_NAME] = File.basename(GLib.filename_to_utf8(path))
         iter[COL_DISPLAY_NAME] = GLib.filename_to_utf8(path)
-	iter[COL_PATH] = path
-	iter[COL_IS_DIR] = is_dir
-	iter[COL_PIXBUF] = is_dir ? @folder_pixbuf : @file_pixbuf
+        iter[COL_PATH] = path
+        iter[COL_IS_DIR] = is_dir
+        iter[COL_PIXBUF] = is_dir ? @folder_pixbuf : @file_pixbuf
       end
     end
 
@@ -54,7 +54,7 @@ module Demo
         end
       end
       @store.set_sort_column_id(Gtk::TreeSortable::DEFAULT_SORT_COLUMN_ID,
-				Gtk::SortType::ASCENDING)
+                                Gtk::SortType::ASCENDING)
 
       fill_store
       set_default_size(650, 400)
@@ -71,18 +71,18 @@ module Demo
       up_button.sensitive = false
       toolbar.insert(up_button, -1)
       up_button.signal_connect("clicked") do
-	@parent = File.dirname(@parent)
-	fill_store
-	up_button.sensitive = @parent != "/"
+        @parent = File.dirname(@parent)
+        fill_store
+        up_button.sensitive = @parent != "/"
       end
 
       home_button = Gtk::ToolButton.new(:stock_id => :home)
       home_button.important = true
       toolbar.insert(home_button, -1)
       home_button.signal_connect("clicked") do
-	@parent = GLib.home_dir
-	fill_store
-	up_button.sensitive = true
+        @parent = GLib.home_dir
+        fill_store
+        up_button.sensitive = true
       end
 
       sw = Gtk::ScrolledWindow.new
@@ -95,12 +95,12 @@ module Demo
       iconview.text_column = COL_DISPLAY_NAME
       iconview.pixbuf_column = COL_PIXBUF
       iconview.signal_connect("item_activated") do |iview, path|
-	iter = @store.get_iter(path)
-	if iter[COL_DISPLAY_NAME]
+        iter = @store.get_iter(path)
+        if iter[COL_DISPLAY_NAME]
           @parent = iter[COL_PATH]
           fill_store
           up_button.sensitive = true
-	end
+        end
       end
       sw.add(iconview)
       iconview.grab_focus
