@@ -1,3 +1,4 @@
+# Encoding: UTF-8
 # Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
@@ -54,39 +55,29 @@ module Demo
       @current_display = nil
       @current_screen = nil
 
-      super('Change Screen or display',
-	    nil, # parent
-	    Gtk::Dialog::NO_SEPARATOR,
-	    [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_CLOSE],
-	    ['Change', Gtk::Dialog::RESPONSE_OK])
+      super(
+        :title => 'Change Screen or display',
+        :buttons => [
+          [:close, :close],
+          ['Change', :ok]
+        ]
+      )
 
       set_default_size(300, 400)
       signal_connect('response') do |dialog, response_id|
-	if response_id == Gtk::Dialog::RESPONSE_OK
-          if Gtk.check_version?(2, 2, 0)
-            query_change_display
-          else
-            puts "This sample requires GTK+ 2.2.0 or later"
-          end
-	else
-	  destroy # Gtk.main_quit?
-	end
-      end
-      signal_connect('destroy') do
-
+        if response_id == Gtk::ResponseType::OK
+          query_change_display
+        else
+          destroy
+        end
       end
 
-      unless Gtk.check_version?(2, 2, 0)
-         vbox.add(Gtk::Label.new("This sample requires GTK+ 2.2.0 or later"))
-         return
-      end
-
-      vbox = Gtk::VBox.new(false, 5)
+      vbox = Gtk::Box.new(:vertical, 5)
       vbox.set_border_width(8)
 
-      self.vbox.pack_start(vbox, :expand => true, :fill => true)
+      self.child.pack_start(vbox, :expand => true, :fill => true)
 
-      @size_group = Gtk::SizeGroup.new(Gtk::SizeGroup::HORIZONTAL)
+      @size_group = Gtk::SizeGroup.new(:horizontal)
 
       frame = create_display_frame
       vbox.pack_start(frame, :expand => true, :fill => true)
@@ -138,7 +129,7 @@ module Demo
     def create_display_frame
       frame, tree_view, button_vbox = create_frame('Display')
 
-      button = left_align_button_new('_Open...')
+      button = left_align_button_new('_Open…')
       button.signal_connect('clicked') do
 	open_display_cb
       end
@@ -204,7 +195,7 @@ module Demo
       frame.add(hbox)
 
       scrollwin = Gtk::ScrolledWindow.new
-      scrollwin.set_policy(Gtk::POLICY_NEVER, :automatic)
+      scrollwin.set_policy(:never, :automatic)
       scrollwin.shadow_type = :in
       hbox.pack_start(scrollwin, :expand => true, :fill => true)
 
@@ -215,7 +206,7 @@ module Demo
       selection = tree_view.selection
       selection.mode = :browse
 
-      button_vbox = Gtk::VBox.new(false, 5)
+      button_vbox = Gtk::Box.new(:vertical, 5)
       hbox.pack_start(button_vbox, :expand => false, :fill => false)
 
       @size_group.add_widget(button_vbox)
@@ -227,7 +218,7 @@ module Demo
     # are left-aligned, rather than centered. This function creates a button
     # and left-aligns it contents.
     def left_align_button_new(label)
-      button = Gtk::Button.new(label, true)
+      button = Gtk::Button.new(:mnemonic => label)
       button.child.set_alignment(0.0, 0.5)
 
       return button
@@ -237,7 +228,7 @@ module Demo
     # Prompts the user for a toplevel window to move, and then moves
     # that window to the currently selected display
     def query_change_display
-      screen = self.window.screen
+      screen = self.screen
 
       toplevel = query_for_toplevel(screen,
                                     "Please select the toplevel\n"+
@@ -258,13 +249,13 @@ module Demo
 
       display = screen.display
 
-      popup = Gtk::Window.new(Gtk::Window::POPUP)
+      popup = Gtk::Window.new(:popup)
       popup.screen = screen
       popup.modal = true
-      popup.window_position = Gtk::Window::POS_CENTER
+      popup.window_position = :center
 
       frame = Gtk::Frame.new
-      frame.set_shadow_type(Gtk::SHADOW_OUT)
+      frame.set_shadow_type(:out)
       popup.add(frame)
 
       label = Gtk::Label.new(prompt)
@@ -274,14 +265,17 @@ module Demo
       popup.show_all
 
       # TODO: Gdk::Cursor.new(screen.display, Gdk::Cursor::CROSSHAIR)
-      cursor = Gdk::Cursor.new(Gdk::Cursor::CROSSHAIR)
+      cursor = Gdk::Cursor.new(:crosshair)
 
-      if Gdk::pointer_grab(popup.window, false,
-			   Gdk::Event::BUTTON_RELEASE_MASK,
-			   nil,
-			   cursor,
-			   Gdk::Event::CURRENT_TIME) == Gdk::GRAB_SUCCESS
-	clicked = false
+      if Gdk::pointer_grab(
+        popup.window,
+        false,
+        :button_release_mask,
+        nil,
+        cursor,
+        Gdk::Event::CURRENT_TIME
+      ) == Gdk::GRAB_SUCCESS
+      clicked = false
 
 	popup.signal_connect('button-release-event') do
 	  clicked = true
@@ -327,28 +321,32 @@ module Demo
     # frame. Prompts for a new display, and then opens a connection
     # to that display.
     def open_display_cb
-      dialog = Gtk::Dialog.new('Open Display',
-			       self,
-			       Gtk::Dialog::MODAL,
-			       [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-			       [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_OK])
+      dialog = Gtk::Dialog.new(
+        :title => 'Open Display',
+        :parent => self,
+        :flags => :modal,
+        :buttons => [
+          [:cancel, :cancel],
+          [:ok, :ok]
+         ]
+      )
 
-      dialog.default_response = Gtk::Dialog::RESPONSE_OK
+      dialog.default_response = Gtk::ResponseType::OK
       display_entry = Gtk::Entry.new
       display_entry.activates_default = true
       dialog_label =
 	Gtk::Label.new("Please enter the name of\nthe new display\n")
 
-      dialog.vbox.add(dialog_label)
-      dialog.vbox.add(display_entry)
+      dialog.child.add(dialog_label)
+      dialog.child.add(display_entry)
 
       display_entry.grab_focus
-      dialog.vbox.show_all
+      dialog.child.show_all
 
       result = nil
       until result
 	response_id = dialog.run
-	break if response_id != Gtk::Dialog::RESPONSE_OK
+	break if response_id != Gtk::ResponseType::OK
 
 	new_screen_name = display_entry.text
 
