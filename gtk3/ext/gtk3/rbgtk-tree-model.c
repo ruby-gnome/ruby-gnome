@@ -84,6 +84,17 @@ rg_get_iter(VALUE self, VALUE path)
 }
 
 static VALUE
+rg_get_path(VALUE self, VALUE iter)
+{
+    GtkTreePath *path;
+    VALUE ret;
+    path = gtk_tree_model_get_path(_SELF(self), RVAL2GTKTREEITER(iter));
+    ret = GTKTREEPATH2RVAL(path);
+    gtk_tree_path_free(path);
+    return ret;
+}
+
+static VALUE
 rg_get_value(VALUE self, VALUE iter, VALUE column)
 {
     GValue value = G_VALUE_INIT;
@@ -216,6 +227,7 @@ Init_gtk_treemodel(VALUE mGtk)
     RG_DEF_METHOD(get_column_type, 1);
     RG_DEF_METHOD(iter_first, 0);
     RG_DEF_METHOD(get_iter, 1);
+    RG_DEF_METHOD(get_path, 1);
     RG_DEF_METHOD(get_value, 2);
     RG_DEF_METHOD(each, 0);
     RG_DEF_METHOD(row_changed, 2);
