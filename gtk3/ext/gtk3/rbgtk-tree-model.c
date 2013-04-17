@@ -87,11 +87,11 @@ static VALUE
 rg_get_path(VALUE self, VALUE iter)
 {
     GtkTreePath *path;
-    VALUE ret;
+    VALUE rb_path;
     path = gtk_tree_model_get_path(_SELF(self), RVAL2GTKTREEITER(iter));
-    ret = GTKTREEPATH2RVAL(path);
+    rb_path = GTKTREEPATH2RVAL(path);
     gtk_tree_path_free(path);
-    return ret;
+    return rb_path;
 }
 
 static VALUE
