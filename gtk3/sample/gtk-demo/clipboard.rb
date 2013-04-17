@@ -15,12 +15,7 @@ module Demo
     def initialize
       super('Clipboard')
 
-      unless Gtk.check_version?(2, 2, 0)
-         add(Gtk::Label.new("This sample requires GTK+ 2.2.0 or later"))
-         return
-      end
-
-      vbox = Gtk::VBox.new(false, 0)
+      vbox = Gtk::Box.new(:vertical)
       vbox.border_width = 8
 
       add(vbox)
@@ -38,7 +33,7 @@ module Demo
       hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
 
       # Create the button
-      button = Gtk::Button.new(Gtk::Stock::COPY)
+      button = Gtk::Button.new(:stock_id => :copy)
       hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
       button.signal_connect('clicked', entry) do |w, e|
         clipboard = e.get_clipboard(Gdk::Selection::CLIPBOARD)
@@ -57,7 +52,7 @@ module Demo
       hbox.pack_start(entry, :expand => true, :fill => true, :padding => 0)
 
       # Create the button
-      button = Gtk::Button.new(Gtk::Stock::PASTE)
+      button = Gtk::Button.new(:stock_id => :paste)
       hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
       button.signal_connect('clicked', entry) do |w, e|
         clipboard = e.get_clipboard(Gdk::Selection::CLIPBOARD)
