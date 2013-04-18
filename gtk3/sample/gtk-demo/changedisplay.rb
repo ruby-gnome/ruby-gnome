@@ -96,14 +96,14 @@ module Demo
       manager = Gdk::DisplayManager.get
 
       manager.displays.each do |display|
-	add_display(display)
+        add_display(display)
       end
 
       handler_id = manager.signal_connect('display_opened') do |display|
-	add_display(display)
+        add_display(display)
       end
       signal_connect('destroy') do
-	manager.signal_handler_disconnect(handler_id)
+        manager.signal_handler_disconnect(handler_id)
       end
     end
 
@@ -112,17 +112,17 @@ module Demo
       @screen_model.clear
 
       if @current_display
-	n_screens = @current_display.n_screens
+        n_screens = @current_display.n_screens
 
-	n_screens.times do |i|
-	  iter = @screen_model.append
-	  iter.set_value(SCREEN_COLUMN_NUMBER, i)
-	  iter.set_value(SCREEN_COLUMN_SCREEN, @current_display.get_screen(i))
+        n_screens.times do |i|
+          iter = @screen_model.append
+          iter.set_value(SCREEN_COLUMN_NUMBER, i)
+          iter.set_value(SCREEN_COLUMN_SCREEN, @current_display.get_screen(i))
 
-	  if i == 0
-	    @screen_selection.select_iter(iter)
-	  end
-	end
+          if i == 0
+            @screen_selection.select_iter(iter)
+          end
+        end
       end
     end
 
@@ -132,15 +132,15 @@ module Demo
 
       button = left_align_button_new('_Open…')
       button.signal_connect('clicked') do
-	open_display_cb
+        open_display_cb
       end
       button_vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
       button = left_align_button_new('_Close')
       button.signal_connect('clicked') do
-	if @current_display
-	  @current_display.close
-	end
+        if @current_display
+          @current_display.close
+        end
       end
       button_vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
@@ -148,13 +148,13 @@ module Demo
       tree_view.model = @display_model
 
       column = Gtk::TreeViewColumn.new('Name',
-				       Gtk::CellRendererText.new,
-				       {'text' => DISPLAY_COLUMN_NAME})
+                                       Gtk::CellRendererText.new,
+                                       {'text' => DISPLAY_COLUMN_NAME})
       tree_view.append_column(column)
 
       selection = tree_view.selection
       selection.signal_connect('changed') do
-	display_changed_cb(selection)
+        display_changed_cb(selection)
       end
 
       return frame
@@ -168,17 +168,17 @@ module Demo
       tree_view.model = @screen_model
 
       column = Gtk::TreeViewColumn.new('Number',
-				       Gtk::CellRendererText.new,
-				       {'text' => SCREEN_COLUMN_NUMBER})
+                                       Gtk::CellRendererText.new,
+                                       {'text' => SCREEN_COLUMN_NUMBER})
       tree_view.append_column(column)
 
       @screen_selection = tree_view.selection
       @screen_selection.signal_connect('changed') do |selection|
-	@current_screen = if iter = selection.selected
-			    iter.get_value(SCREEN_COLUMN_SCREEN)
-			  else
-			    nil
-			  end
+        @current_screen = if iter = selection.selected
+                            iter.get_value(SCREEN_COLUMN_SCREEN)
+                          else
+                            nil
+                          end
       end
 
       return frame
@@ -236,9 +236,9 @@ module Demo
                                     "to move to the new screen")
 
       if toplevel
-	toplevel.screen = @current_screen
+        toplevel.screen = @current_screen
       else
-	screen.display.beep
+        screen.display.beep
       end
     end
 
@@ -278,26 +278,26 @@ module Demo
       ) == Gdk::GRAB_SUCCESS
       clicked = false
 
-	popup.signal_connect('button-release-event') do
-	  clicked = true
-	end
+        popup.signal_connect('button-release-event') do
+          clicked = true
+        end
 
-	# Process events until clicked is set by button_release_event_cb.
-	# We pass in may_block = true since we want to wait if there
-	# are no events currently.
-	until clicked
-	  Gtk.main_iteration # TODO: GLib::main_context_iteration(nil, true)
+        # Process events until clicked is set by button_release_event_cb.
+        # We pass in may_block = true since we want to wait if there
+        # are no events currently.
+        until clicked
+          Gtk.main_iteration # TODO: GLib::main_context_iteration(nil, true)
 
-	  toplevel = find_toplevel_at_pointer(screen.display)
-	  if toplevel == popup
-	    toplevel = nil
-	  end
-	end
+          toplevel = find_toplevel_at_pointer(screen.display)
+          if toplevel == popup
+            toplevel = nil
+          end
+        end
 
-	popup.destroy
-	Gdk.flush # Really release the grab
+        popup.destroy
+        Gdk.flush # Really release the grab
 
-	return toplevel
+        return toplevel
       end
     end
 
@@ -308,14 +308,14 @@ module Demo
       # The user data field of a GdkWindow is used to store a pointer
       # to the widget that created it.
       if pointer_window
-	widget = pointer_window.user_data
+        widget = pointer_window.user_data
       end
 
       return (if widget
-		widget.toplevel
-	      else
-		nil
-	      end)
+                widget.toplevel
+              else
+                nil
+              end)
     end
 
     # Called when the user clicks on 'Open...' in the display
@@ -336,7 +336,7 @@ module Demo
       display_entry = Gtk::Entry.new
       display_entry.activates_default = true
       dialog_label =
-	Gtk::Label.new("Please enter the name of\nthe new display\n")
+        Gtk::Label.new("Please enter the name of\nthe new display\n")
 
       dialog.child.add(dialog_label)
       dialog.child.add(display_entry)
@@ -346,18 +346,18 @@ module Demo
 
       result = nil
       until result
-	response_id = dialog.run
-	break if response_id != Gtk::ResponseType::OK
+        response_id = dialog.run
+        break if response_id != Gtk::ResponseType::OK
 
-	new_screen_name = display_entry.text
+        new_screen_name = display_entry.text
 
-	unless new_screen_name.empty?
-	  begin
-	    result = Gdk::Dispaly.open(new_screen_name)
-	  rescue
-	    dialog_label.text = "Can't open display :\n\t%s\nplease try another one\n" % [new_screen_name]
-	  end
-	end
+        unless new_screen_name.empty?
+          begin
+            result = Gdk::Dispaly.open(new_screen_name)
+          rescue
+            dialog_label.text = "Can't open display :\n\t%s\nplease try another one\n" % [new_screen_name]
+          end
+        end
       end
       dialog.destroy
     end
@@ -367,11 +367,11 @@ module Demo
     # screens.
     def display_changed_cb(selection)
       @current_display =
-	if iter = selection.selected
-	  iter.get_value(DISPLAY_COLUMN_DISPLAY)
-	else
-	  nil
-	end
+        if iter = selection.selected
+          iter.get_value(DISPLAY_COLUMN_DISPLAY)
+        else
+          nil
+        end
       fill_screens
     end
 
@@ -384,11 +384,11 @@ module Demo
       iter.set_value(DISPLAY_COLUMN_DISPLAY, display)
 
       handler_id = display.signal_connect('closed') do
-	display_closed_cb(display)
+        display_closed_cb(display)
       end
 
       signal_connect('destroy') do
-	display.signal_handler_disconnect(handler_id)
+        display.signal_handler_disconnect(handler_id)
       end
     end
 
@@ -396,11 +396,11 @@ module Demo
     # Remove it from our list of displays.
     def display_closed_cb(display)
       @display_model.each do |model, path, iter|
-	tmp_display = iter.get_value( DISPLAY_COLUMN_DISPLAY)
-	if tmp_display == display
-	  @display_model.remove(iter)
-	  break
-	end
+        tmp_display = iter.get_value( DISPLAY_COLUMN_DISPLAY)
+        if tmp_display == display
+          @display_model.remove(iter)
+          break
+        end
       end
     end
   end
