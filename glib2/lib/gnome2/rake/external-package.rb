@@ -110,7 +110,8 @@ module GNOME2
                                               :patches,
                                               :need_autogen,
                                               :need_autoreconf,
-                                              :build_concurrently)
+                                              :build_concurrently,
+                                              :use_cc_environment_variable)
         def initialize(properties)
           super()
           properties.each do |key, value|
@@ -148,6 +149,10 @@ module GNOME2
 
         def build_concurrently?
           build_concurrently.nil? ? true : build_concurrently
+        end
+
+        def use_cc_environment_variable?
+          use_cc_environment_variable.nil? ? true : use_cc_environment_variable
         end
       end
 

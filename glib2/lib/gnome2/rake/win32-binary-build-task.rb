@@ -102,7 +102,9 @@ class GNOME2Win32BinaryBuildTask
          *package.windows.configure_args) or exit(false)
       common_make_args = []
       common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
-      common_make_args << cc_env
+      if package.windows.use_cc_environment_variable?
+        common_make_args << cc_env
+      end
       add_gobject_introspection_make_args(common_make_args)
       build_make_args = common_make_args.dup
       install_make_args = common_make_args.dup
