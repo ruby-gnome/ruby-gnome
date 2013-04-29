@@ -56,11 +56,22 @@ class GNOME2Win32BinaryBuildTask
       task :prepare => full_prepare_task_names
 
       build_packages.each do |package|
+        namespace package.name do
+        task :before
         download_task = "source:downloader:download:#{package.name}"
-        desc "Build #{package.label} and install it into #{dist_dir}."
-        task package.name => [:prepare, download_task] do
+        task :build => [:prepare, download_task] do
           build_package_task_body(package)
         end
+        task :after
+        end
+
+        prefix = "win32:builder:build:#{package.name}"
+        desc "Build #{package.label} and install it into #{dist_dir}."
+        task package.name => [
+          "#{prefix}:before",
+          "#{prefix}:build",
+          "#{prefix}:after",
+        ]
       end
     end
   end
