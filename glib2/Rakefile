@@ -115,8 +115,12 @@ namespace :win32 do
   end
 
   namespace :buildler do
-    task :after => [
-      "win32:gettext:header:fix",
-    ]
+    namespace :build do
+      namespace :glib do
+        task :after => [
+          "win32:gettext:header:fix",
+        ]
+      end
+    end
   end
 end
