@@ -66,60 +66,60 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def build_package_task_body(package)
-          package_tmp_dir = @package.tmp_dir + package.name
-          rm_rf(package_tmp_dir)
-          mkdir_p(package_tmp_dir)
+    package_tmp_dir = @package.tmp_dir + package.name
+    rm_rf(package_tmp_dir)
+    mkdir_p(package_tmp_dir)
 
-          tar_full_path = @package.download_dir + package.archive_base_name
-          Dir.chdir(package_tmp_dir.to_s) do
-            sh("tar", "xf", tar_full_path.to_s) or exit(false)
-          end
+    tar_full_path = @package.download_dir + package.archive_base_name
+    Dir.chdir(package_tmp_dir.to_s) do
+      sh("tar", "xf", tar_full_path.to_s) or exit(false)
+    end
 
-          Dir.chdir((package_tmp_dir + package.base_name).to_s) do
-            package.windows.patches.each do |patch|
-              sh("patch -p1 < #{@package.patches_dir}/#{patch}")
-            end
-            sh("./autogen.sh") if package.windows.need_autogen?
-            sh("autoreconf --install") if package.windows.need_autoreconf?
-            cc_env = "CC=#{@package.windows.build_host}-gcc"
-            sh("./configure",
-               cc_env,
-               "CPPFLAGS=#{cppflags(package)}",
-               "LDFLAGS=#{ldflags(package)}",
-               "--prefix=#{dist_dir}",
-               "--host=#{@package.windows.build_host}",
-               *package.windows.configure_args) or exit(false)
-            common_make_args = []
-            common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
-            common_make_args << cc_env
-            add_gobject_introspection_make_args(common_make_args)
-            build_make_args = common_make_args.dup
-            install_make_args = common_make_args.dup
-            if package.windows.build_concurrently?
-              make_n_jobs = ENV["MAKE_N_JOBS"]
-              build_make_args << "-j#{make_n_jobs}" if make_n_jobs
-            end
-            ENV["GREP_OPTIONS"] = "--text"
-            sh("nice", "make", *build_make_args) or exit(false)
-            sh("make", "install", *install_make_args) or exit(false)
+    Dir.chdir((package_tmp_dir + package.base_name).to_s) do
+      package.windows.patches.each do |patch|
+        sh("patch -p1 < #{@package.patches_dir}/#{patch}")
+      end
+      sh("./autogen.sh") if package.windows.need_autogen?
+      sh("autoreconf --install") if package.windows.need_autoreconf?
+      cc_env = "CC=#{@package.windows.build_host}-gcc"
+      sh("./configure",
+         cc_env,
+         "CPPFLAGS=#{cppflags(package)}",
+         "LDFLAGS=#{ldflags(package)}",
+         "--prefix=#{dist_dir}",
+         "--host=#{@package.windows.build_host}",
+         *package.windows.configure_args) or exit(false)
+      common_make_args = []
+      common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
+      common_make_args << cc_env
+      add_gobject_introspection_make_args(common_make_args)
+      build_make_args = common_make_args.dup
+      install_make_args = common_make_args.dup
+      if package.windows.build_concurrently?
+        make_n_jobs = ENV["MAKE_N_JOBS"]
+        build_make_args << "-j#{make_n_jobs}" if make_n_jobs
+      end
+      ENV["GREP_OPTIONS"] = "--text"
+      sh("nice", "make", *build_make_args) or exit(false)
+      sh("make", "install", *install_make_args) or exit(false)
 
-            package_license_dir = license_dir + package.name
-            mkdir_p(package_license_dir)
-            package_license_files = ["AUTHORS", "COPYING", "COPYING.LIB"]
-            package_license_files = package_license_files.reject do |file|
-              not File.exist?(file)
-            end
-            cp(package_license_files, package_license_dir)
-            bundled_packages = package.bundled_packages
-            bundled_packages.each do |bundled_package|
-              bundled_package_license_dir = license_dir + bundled_package[:name]
-              mkdir_p(bundled_package_license_dir)
-              license_files = bundled_package[:license_files].collect do |file|
-                File.join(bundled_package[:path], file)
-              end
-              cp(license_files, bundled_package_license_dir)
-            end
-          end
+      package_license_dir = license_dir + package.name
+      mkdir_p(package_license_dir)
+      package_license_files = ["AUTHORS", "COPYING", "COPYING.LIB"]
+      package_license_files = package_license_files.reject do |file|
+        not File.exist?(file)
+      end
+      cp(package_license_files, package_license_dir)
+      bundled_packages = package.bundled_packages
+      bundled_packages.each do |bundled_package|
+        bundled_package_license_dir = license_dir + bundled_package[:name]
+        mkdir_p(bundled_package_license_dir)
+        license_files = bundled_package[:license_files].collect do |file|
+          File.join(bundled_package[:path], file)
+        end
+        cp(license_files, bundled_package_license_dir)
+      end
+    end
   end
 
   def build_packages
