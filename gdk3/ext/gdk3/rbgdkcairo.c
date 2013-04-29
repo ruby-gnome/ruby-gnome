@@ -65,7 +65,7 @@ rg_set_source_pixmap(VALUE self, VALUE pixmap, VALUE pixmap_x, VALUE pixmap_y)
 static VALUE
 rg_gdk_rectangle(VALUE self, VALUE rectangle)
 {
-    gdk_cairo_rectangle(_SELF(self), 
+    gdk_cairo_rectangle(_SELF(self),
                         RVAL2GDKRECTANGLE(rectangle));
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
