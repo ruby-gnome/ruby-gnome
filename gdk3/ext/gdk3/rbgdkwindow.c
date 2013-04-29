@@ -24,6 +24,10 @@
 
 #include "rbgdk3private.h"
 
+#ifdef HAVE_RB_CAIRO_H
+#include <rb_cairo.h>
+#endif
+
 #define RG_TARGET_NAMESPACE cWindow
 #define _SELF(s) RVAL2GDKWINDOW(s)
 
@@ -903,6 +907,20 @@ rg_drag_protocol(VALUE self)
     return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), ary);
 }
 
+#ifdef HAVE_RB_CAIRO_H
+static VALUE
+rg_create_cairo_context(VALUE self)
+{
+    VALUE rb_cr;
+    cairo_t *cr;
+    cr = gdk_cairo_create(_SELF(self));
+    rb_cairo_check_status(cairo_status(cr));
+    rb_cr = CRCONTEXT2RVAL(cr);
+    cairo_destroy (cr);
+    return rb_cr;
+}
+#endif
+
 void
 Init_gdk_window(VALUE mGdk)
 {
@@ -1017,6 +1035,10 @@ Init_gdk_window(VALUE mGdk)
 */
     RG_DEF_METHOD(drag_begin, 1);
     RG_DEF_METHOD(drag_protocol, 0);
+
+#ifdef HAVE_RB_CAIRO_H
+    RG_DEF_METHOD(create_cairo_context, 0);
+#endif
 
     G_DEF_CLASS(GDK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GDK_TYPE_WINDOW_WINDOW_CLASS, "WindowClass",
