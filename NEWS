@@ -2,6 +2,78 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.0.0: 2013-04-29
+
+GObject Introspection based bindings on Windows support release!
+
+=== Changes
+
+==== NEWS
+
+  * Fixes
+    * Fixed a typo. [Reported by Masafumi Yokoyama]
+    * FIxed a typo. [Reported by Toyo Abe]
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Moved lib/gnome2-*.rb files to lib/gnome2/ directory.
+    * Supported GLib 2.34. [Reported by OBATA Akio]
+
+==== Ruby/GdkPixbuf2
+
+  * Fixes
+    * [windows] Fixed PNG can't be handled problem.
+      [ruby-gnoem2-devel-ja] [Reported by Masafumi Yokoyama]
+
+==== Ruby/GDK3
+
+  * Improvements
+    * [windows] Removed needless Greybird theme.
+      [ruby-gnome2-devel-en] [Reported by Regis d'Aubarede]
+    * Added Gdk::Window#create_cairo_context
+      [ruby-gnome2-devel-en] [Reported by Detlef Reichl]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Updated samples.
+      [GitHub #140][GitHub #141][GitHub #144]
+      [Patch by Simon Arnaud]
+      [GitHub #142][GitHub #143][GitHub #145][GitHub #146][GitHub #148]
+      [Patch by Detlef Reichl]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * [windows] Supported!
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Supported GStreamer 1.0!
+    * Migrated to GObject Introspection bindings!
+    * Dropped GStreamer 0.10 support.
+
+==== Ruby/Clutter
+
+  * Improvements
+    * [windows] Supported!
+
+==== Ruby/ClutterGTK
+
+  * Improvements
+    * [windows] Supported!
+
+=== Thanks
+
+  * Masafumi Yokoyama
+  * Toyo Abe
+  * OBATA Akio
+  * Regis d'Aubarede
+  * Detlef Reichl
+  * Simon Arnaud
+
 == Ruby-GNOME2 1.2.6: 2013-04-02
 
 Broken Ruby/Poppler fix release!
