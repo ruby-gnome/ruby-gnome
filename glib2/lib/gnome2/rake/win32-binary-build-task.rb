@@ -72,7 +72,7 @@ class GNOME2Win32BinaryBuildTask
 
     tar_full_path = @package.download_dir + package.archive_base_name
     Dir.chdir(package_tmp_dir.to_s) do
-      sh("tar", "xf", tar_full_path.to_s) or exit(false)
+      sh("tar", "xf", tar_full_path.to_s)
     end
 
     Dir.chdir((package_tmp_dir + package.base_name).to_s) do
