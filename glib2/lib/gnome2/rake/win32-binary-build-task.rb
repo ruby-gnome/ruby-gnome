@@ -59,6 +59,13 @@ class GNOME2Win32BinaryBuildTask
         download_task = "source:downloader:download:#{package.name}"
         desc "Build #{package.label} and install it into #{dist_dir}."
         task package.name => [:prepare, download_task] do
+          build_package_task_body(package)
+        end
+      end
+    end
+  end
+
+  def build_package_task_body(package)
           package_tmp_dir = @package.tmp_dir + package.name
           rm_rf(package_tmp_dir)
           mkdir_p(package_tmp_dir)
@@ -113,9 +120,6 @@ class GNOME2Win32BinaryBuildTask
               cp(license_files, bundled_package_license_dir)
             end
           end
-        end
-      end
-    end
   end
 
   def build_packages
