@@ -111,7 +111,7 @@ gtk2_base_name = "ruby-gtk2"
 gtk3_base_name = "ruby-gtk3"
 gnome2_base_name = "ruby-gnome2-all"
 
-gtk2_packages = ["glib2", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
+gtk2_packages = ["glib2", "gobject-introspection", "gio2", "atk", "pango", "gdk_pixbuf2", "gtk2"]
 gtk3_packages = gtk2_packages - ["gtk2"] + ["gdk3", "gtk3"]
 gnome2_packages = gtk2_packages + gtk3_packages + [
   "goocanvas",
@@ -122,7 +122,6 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "vte",
   "vte3",
   "cairo-gobject",
-  "gobject-introspection",
   "gtksourceview3",
   "clutter",
   "clutter-gtk",
