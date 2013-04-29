@@ -65,6 +65,7 @@ package = GNOME2Package.new do |_package|
         :configure_args => [
           "--with-libnettle-prefix=#{_package.win32.absolute_binary_dir}"
         ],
+        :build_concurrently => false,
       },
     },
     {
