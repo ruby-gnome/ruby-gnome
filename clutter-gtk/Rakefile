@@ -55,7 +55,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :patches => [
           "0001-actor-fix-clutter-win32.h-include-path.patch",
-        ]
+          "0001-Use-no-undefined-ld-flag.patch",
+        ],
+        :need_autoreconf => true,
       },
     }
   ]

@@ -1,0 +1,40 @@
+From c42a07c632ef64d34e57723b5effd643ea0a7c86 Mon Sep 17 00:00:00 2001
+From: Kouhei Sutou <kou@clear-code.com>
+Date: Mon, 29 Apr 2013 18:08:59 +0900
+Subject: [PATCH] Use -no-undefined ld flag
+
+It fixes DLL generation by cross compile.
+---
+ clutter-gtk/Makefile.am |    2 +-
+ configure.ac            |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/clutter-gtk/Makefile.am b/clutter-gtk/Makefile.am
+index 9a35919..3963ac0 100644
+--- a/clutter-gtk/Makefile.am
++++ b/clutter-gtk/Makefile.am
+@@ -47,7 +47,7 @@ source_h_private = \
+ libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_SOURCES = $(source_c) $(source_h) $(source_h_private)
+ libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LIBADD  = $(CLUTTER_GTK_DEPS_LIBS) $(LIBM)
+ libclutter_gtk_@CLUTTER_GTK_API_VERSION@_la_LDFLAGS = \
+-	$(CLUTTER_LT_LDFLAGS) \
++	$(CLUTTER_GTK_LT_LDFLAGS) \
+ 	-export-symbols-regex "^gtk_clutter.*"
+ 
+ cluttergtkheadersdir = $(includedir)/clutter-gtk-@CLUTTER_GTK_API_VERSION@/clutter-gtk
+diff --git a/configure.ac b/configure.ac
+index 7d381e2..8db163b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -56,7 +56,7 @@ AC_MSG_CHECKING([if building for some Win32 platform])
+ AS_CASE([$host],
+         [*-*-mingw*|*-*-cygwin*],
+         [
+-          CLUTTER_LT_LDFLAGS="$CLUTTER_GTK_LT_LDFLAGS -no-undefined"
++          CLUTTER_GTK_LT_LDFLAGS="$CLUTTER_GTK_LT_LDFLAGS -no-undefined"
+           platform_win32=yes
+         ],
+ 
+-- 
+1.7.10.4
+
