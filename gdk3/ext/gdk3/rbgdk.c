@@ -534,7 +534,4 @@ Init_gdk(void)
     Init_gdk_visual(RG_TARGET_NAMESPACE);
     Init_gdk_window(RG_TARGET_NAMESPACE);
     Init_gdk_windowattr(RG_TARGET_NAMESPACE);
-/* deprecated
-    Init_gdk_draw(RG_TARGET_NAMESPACE);
-*/
 }
