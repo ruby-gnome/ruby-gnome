@@ -13,6 +13,7 @@ require 'pathname'
 
 priorlibs = [
   "glib2",
+  "gobject-introspection",
   "gio2",
   "gdk_pixbuf2",
   "pango",
