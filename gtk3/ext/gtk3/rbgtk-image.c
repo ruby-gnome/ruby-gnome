@@ -83,12 +83,44 @@ rg_clear(VALUE self)
     return self;
 }
 
+static VALUE
+rg_set_from_icon_set(VALUE self, VALUE icon_set, VALUE size)
+{
+  gtk_image_set_from_icon_set (RVAL2GTKIMAGE(self),
+                               RVAL2GTKICONSET(icon_set),
+                               RVAL2GTKICONSIZE(size));
+  return self;
+}
+
+static VALUE
+rg_set_from_stock(VALUE self, VALUE stock, VALUE size)
+{
+  VALUE buffer;
+
+  gtk_image_set_from_stock(RVAL2GTKIMAGE(self),
+                           RVAL2GLIBID(stock, buffer),
+                           RVAL2GTKICONSIZE(size));
+  return self;
+}
+
+static VALUE
+rg_set_from_gicon(VALUE self, VALUE gicon, VALUE size)
+{
+  gtk_image_set_from_gicon(RVAL2GTKIMAGE(self),
+                           RVAL2GICON(gicon),
+                           RVAL2GTKICONSIZE(size));
+  return self;
+}
+
 void
 Init_gtk_image(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(clear, 0);
+    RG_DEF_METHOD(set_from_icon_set, 2);
+    RG_DEF_METHOD(set_from_stock, 2);
+    RG_DEF_METHOD(set_from_gicon, 2);
 
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
 
