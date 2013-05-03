@@ -74,6 +74,7 @@ module GObjectIntrospection
     end
 
     def define_module_function(target_module, name, function_info)
+      unlock_gvl = should_unlock_gvl?(function_info, target_module)
       validate = lambda do |arguments|
         method_name = "#{target_module}\#.#{name}"
         validate_arguments(function_info, method_name, arguments)
@@ -83,6 +84,7 @@ module GObjectIntrospection
           validate.call(arguments, &block)
           function_info.invoke({
                                  :arguments => arguments,
+                                 :unlock_gvl => unlock_gvl,
                                },
                                &block)
         end
@@ -193,11 +195,13 @@ module GObjectIntrospection
       end
       infos.each do |info|
         name = "initialize_#{info.name}"
+        unlock_gvl = should_unlock_gvl?(info, klass)
         klass.__send__(:define_method, name) do |*arguments, &block|
           validate.call(info, name, arguments, &block)
           info.invoke({
                         :receiver  => self,
                         :arguments => arguments,
+                        :unlock_gvl => unlock_gvl,
                       },
                       &block)
         end
@@ -272,6 +276,10 @@ module GObjectIntrospection
       end
     end
 
+    def should_unlock_gvl?(function_info, klass)
+      false
+    end
+
     def load_method_infos(infos, klass)
       infos.each do |info|
         method_name = rubyish_method_name(info)
@@ -283,6 +291,7 @@ module GObjectIntrospection
     end
 
     def load_method_info(info, klass, method_name)
+      unlock_gvl = should_unlock_gvl?(info, klass)
       validate = lambda do |arguments|
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
       end
@@ -294,6 +303,7 @@ module GObjectIntrospection
           info.invoke({
                         :receiver  => self,
                         :arguments => arguments,
+                        :unlock_gvl => unlock_gvl,
                       },
                       &block)
         end
@@ -305,6 +315,7 @@ module GObjectIntrospection
         name = rubyish_method_name(info)
         next if name == "new"
         next if name == "alloc"
+        unlock_gvl = should_unlock_gvl?(info, klass)
         validate = lambda do |arguments|
           validate_arguments(info, "#{klass}.#{name}", arguments)
         end
@@ -316,6 +327,7 @@ module GObjectIntrospection
           else
             info.invoke({
                           :arguments => arguments,
+                          :unlock_gvl => unlock_gvl,
                         },
                         &block)
           end
