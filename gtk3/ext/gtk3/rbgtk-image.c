@@ -86,30 +86,30 @@ rg_clear(VALUE self)
 static VALUE
 rg_set_from_icon_set(VALUE self, VALUE icon_set, VALUE size)
 {
-  gtk_image_set_from_icon_set(RVAL2GTKIMAGE(self),
-                               RVAL2GTKICONSET(icon_set),
-                               RVAL2GTKICONSIZE(size));
-  return self;
+    gtk_image_set_from_icon_set(RVAL2GTKIMAGE(self),
+                                RVAL2GTKICONSET(icon_set),
+                                RVAL2GTKICONSIZE(size));
+    return self;
 }
 
 static VALUE
 rg_set_from_stock(VALUE self, VALUE stock, VALUE size)
 {
-  VALUE buffer;
+    VALUE buffer;
 
-  gtk_image_set_from_stock(RVAL2GTKIMAGE(self),
-                           RVAL2GLIBID(stock, buffer),
-                           RVAL2GTKICONSIZE(size));
-  return self;
+    gtk_image_set_from_stock(RVAL2GTKIMAGE(self),
+                             RVAL2GLIBID(stock, buffer),
+                             RVAL2GTKICONSIZE(size));
+    return self;
 }
 
 static VALUE
 rg_set_from_gicon(VALUE self, VALUE gicon, VALUE size)
 {
-  gtk_image_set_from_gicon(RVAL2GTKIMAGE(self),
-                           RVAL2GICON(gicon),
-                           RVAL2GTKICONSIZE(size));
-  return self;
+    gtk_image_set_from_gicon(RVAL2GTKIMAGE(self),
+                             RVAL2GICON(gicon),
+                             RVAL2GTKICONSIZE(size));
+    return self;
 }
 
 void
