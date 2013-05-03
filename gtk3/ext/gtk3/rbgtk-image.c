@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -86,7 +86,7 @@ rg_clear(VALUE self)
 static VALUE
 rg_set_from_icon_set(VALUE self, VALUE icon_set, VALUE size)
 {
-  gtk_image_set_from_icon_set (RVAL2GTKIMAGE(self),
+  gtk_image_set_from_icon_set(RVAL2GTKIMAGE(self),
                                RVAL2GTKICONSET(icon_set),
                                RVAL2GTKICONSIZE(size));
   return self;
