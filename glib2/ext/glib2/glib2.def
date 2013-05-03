@@ -99,6 +99,7 @@ EXPORTS
         rbg_gslist2rval_with_type
 	rbg_define_method
 	rbg_define_singleton_method
+	rbg_to_array
 	rbg_check_array_type
 	rbg_check_hash_type
 	rbg_scan_options

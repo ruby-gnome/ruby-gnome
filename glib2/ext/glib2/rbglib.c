@@ -826,6 +826,12 @@ rbg_inspect (VALUE object)
 }
 
 VALUE
+rbg_to_array (VALUE object)
+{
+    return rb_convert_type(object, RUBY_T_ARRAY, "Array", "to_ary");
+}
+
+VALUE
 rbg_check_array_type (VALUE object)
 {
 #ifdef HAVE_RB_CHECK_ARRAY_TYPE
