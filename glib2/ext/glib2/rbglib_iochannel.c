@@ -689,11 +689,7 @@ rg_puts(int argc, VALUE *argv, VALUE self)
             line = rb_str_new2("nil");
         }
         else {
-#ifdef HAVE_RB_CHECK_ARRAY_TYPE
-          line = rb_check_array_type(argv[i]);
-#else
-          line = rb_check_convert_type(argv[i], T_ARRAY, "Array", "to_ary");
-#endif
+          line = rbg_check_array_type(argv[i]);
           if (!NIL_P(line)) {
 #ifdef HAVE_RB_EXEC_RECURSIVE
             rb_exec_recursive(ioc_puts_ary, line, self);

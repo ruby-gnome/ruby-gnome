@@ -826,6 +826,16 @@ rbg_inspect (VALUE object)
 }
 
 VALUE
+rbg_check_array_type (VALUE object)
+{
+#ifdef HAVE_RB_CHECK_ARRAY_TYPE
+    return rb_check_array_type(object);
+#else
+    return rb_check_convert_type(object, RUBY_T_ARRAY, "Array", "to_array");
+#endif
+}
+
+VALUE
 rbg_check_hash_type (VALUE object)
 {
 #ifdef HAVE_RB_CHECK_HASH_TYPE
