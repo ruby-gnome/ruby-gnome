@@ -36,6 +36,7 @@ have_func("g_listenv", glib_header)
 
 ruby_header = "ruby.h"
 have_func("rb_check_array_type", ruby_header)
+have_func("rb_check_hash_type", ruby_header)
 have_func("rb_exec_recursive", ruby_header)
 have_func("rb_errinfo", ruby_header)
 have_func("rb_sourcefile", ruby_header)

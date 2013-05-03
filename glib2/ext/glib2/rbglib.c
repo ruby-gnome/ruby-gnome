@@ -825,6 +825,15 @@ rbg_inspect (VALUE object)
     return StringValueCStr(inspected);
 }
 
+VALUE
+rbg_check_hash_type (VALUE object)
+{
+#ifdef HAVE_RB_CHECK_HASH_TYPE
+    return rb_check_hash_type(object);
+#else
+    return rb_check_convert_type(object, T_HASH, "Hash", "to_hash");
+#endif
+}
 
 void
 rbg_scan_options (VALUE options, ...)
@@ -835,7 +844,7 @@ rbg_scan_options (VALUE options, ...)
     VALUE *value;
     va_list args;
 
-    options = rb_check_convert_type(options, T_HASH, "Hash", "to_hash");
+    options = rbg_check_hash_type(options);
     if (NIL_P(options)) {
         options = rb_hash_new();
     } else if (options == original_options) {
