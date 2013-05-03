@@ -255,7 +255,7 @@ rg_s_parse_debug_string(G_GNUC_UNUSED VALUE self, VALUE string, VALUE keys)
     VALUE ary;
     GDebugKey* gkeys;
 
-    Check_Type(keys, T_HASH);
+    Check_Type(keys, RUBY_T_HASH);
     ary = rb_funcall(keys, rb_intern("to_a"), 0);
     nkeys = RARRAY_LEN(ary);
     gkeys = ALLOCA_N(GDebugKey, nkeys);

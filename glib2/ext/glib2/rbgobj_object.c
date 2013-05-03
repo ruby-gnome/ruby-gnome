@@ -225,7 +225,7 @@ rg_s_new_bang(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &params_hash);
 
     if (!NIL_P(params_hash))
-        Check_Type(params_hash, T_HASH);
+        Check_Type(params_hash, RUBY_T_HASH);
 
     if (cinfo->klass != self)
         rb_raise(rb_eTypeError, "%s isn't registered class",
@@ -635,7 +635,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &params_hash);
 
     if (!NIL_P(params_hash))
-        Check_Type(params_hash, T_HASH);
+        Check_Type(params_hash, RUBY_T_HASH);
 
     gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
 

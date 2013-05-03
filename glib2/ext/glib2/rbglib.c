@@ -831,7 +831,7 @@ rbg_check_hash_type (VALUE object)
 #ifdef HAVE_RB_CHECK_HASH_TYPE
     return rb_check_hash_type(object);
 #else
-    return rb_check_convert_type(object, T_HASH, "Hash", "to_hash");
+    return rb_check_convert_type(object, RUBY_T_HASH, "Hash", "to_hash");
 #endif
 }
 

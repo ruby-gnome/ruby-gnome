@@ -61,7 +61,7 @@ rbgutil_set_properties(VALUE self, VALUE hash)
     VALUE ary;
     GObject* obj;
 
-    Check_Type(hash, T_HASH);
+    Check_Type(hash, RUBY_T_HASH);
     ary = rb_funcall(hash, id_to_a, 0);
     obj = RVAL2GOBJ(self);
 
