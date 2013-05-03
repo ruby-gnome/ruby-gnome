@@ -35,46 +35,20 @@ gi_method_info_get_type(void)
     return type;
 }
 
-static gboolean
-gobject_based_p(GIFunctionInfo *info)
-{
-    GIBaseInfo *container_info;
-    GIRegisteredTypeInfo *registered_type_info;
-
-    container_info = g_base_info_get_container((GIBaseInfo *)info);
-    if (g_base_info_get_type(container_info) != GI_INFO_TYPE_STRUCT) {
-        return TRUE;
-    }
-
-    registered_type_info = (GIRegisteredTypeInfo *)container_info;
-    if (g_registered_type_info_get_type_init(registered_type_info)) {
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
 static VALUE
-rg_invoke(int argc, VALUE *argv, VALUE self)
+rg_invoke(VALUE self, VALUE rb_options)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
-    GIArgument receiver;
     GIArgument return_value;
     VALUE rb_out_args;
     VALUE rb_return_value;
 
     info = SELF(self);
 
-    /* TODO: check argc >= 1 */
-    if (gobject_based_p(info)) {
-        receiver.v_pointer = RVAL2GOBJ(argv[0]);
-    } else {
-        receiver.v_pointer = DATA_PTR(argv[0]);
-    }
     /* TODO: use rb_protect */
-    rb_out_args = rb_gi_function_info_invoke_raw(info, &receiver,
-                                                 argc - 1, argv + 1,
+    rb_out_args = rb_gi_function_info_invoke_raw(info,
+                                                 rb_options,
                                                  &return_value);
 
     callable_info = (GICallableInfo *)info;
@@ -105,5 +79,5 @@ rb_gi_method_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
 	G_DEF_CLASS_WITH_PARENT(GI_TYPE_METHOD_INFO, "MethodInfo", rb_mGI,
 				rb_cGIFunctionInfo);
 
-    RG_DEF_METHOD(invoke, -1);
+    RG_DEF_METHOD(invoke, 1);
 }

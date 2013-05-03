@@ -82,7 +82,7 @@ initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
 }
 
 static VALUE
-rg_invoke(int argc, VALUE *argv, VALUE self)
+rg_invoke(VALUE self, VALUE rb_options)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
@@ -93,11 +93,19 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
     info = SELF(self);
     callable_info = (GICallableInfo *)info;
 
-    /* TODO: check argc. */
-    receiver = argv[0];
+    rb_options = rbg_to_hash(rb_options);
+    receiver = rb_hash_delete(rb_options, ID2SYM(rb_intern("receiver")));
+    if (NIL_P(receiver)) {
+        receiver = rb_hash_delete(rb_options, rb_str_new_cstr("receiver"));
+    }
+    if (NIL_P(receiver)) {
+        rb_raise(rb_eArgError,
+                 "receiver is missing: %s",
+                 RBG_INSPECT(rb_options));
+    }
     /* TODO: use rb_protect */
-    rb_gi_function_info_invoke_raw(info, NULL,
-                                   argc - 1, argv + 1,
+    rb_gi_function_info_invoke_raw(info,
+                                   rb_options,
                                    &return_value);
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
@@ -116,5 +124,5 @@ rb_gi_constructor_info_init(VALUE rb_mGI, VALUE rb_cGIFunctionInfo)
                                 "ConstructorInfo", rb_mGI,
 				rb_cGIFunctionInfo);
 
-    RG_DEF_METHOD(invoke, -1);
+    RG_DEF_METHOD(invoke, 1);
 }

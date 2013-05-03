@@ -20,6 +20,17 @@
 
 #include "rb-gi-private.h"
 
+#ifdef HAVE_RUBY_THREAD_H
+#  include <ruby/thread.h>
+#  define RB_THREAD_CALL_WITHOUT_GVL_FUNC_RETURN_TYPE void *
+#  define RB_THREAD_CALL_WITHOUT_GVL_FUNC_RETURN_VALUE NULL
+#else
+#  define rb_thread_call_without_gvl(func, func_data, ubf, ubf_data) \
+    rb_thread_blocking_region(func, func_data, ubf, ubf_data)
+#  define RB_THREAD_CALL_WITHOUT_GVL_FUNC_RETURN_TYPE VALUE
+#  define RB_THREAD_CALL_WITHOUT_GVL_FUNC_RETURN_VALUE Qnil
+#endif
+
 #define RG_TARGET_NAMESPACE rb_cGIFunctionInfo
 #define SELF(self) RVAL2GI_FUNCTION_INFO(self)
 
@@ -413,17 +424,19 @@ arg_metadata_free(gpointer data)
 }
 
 static void
-arguments_from_ruby(GICallableInfo *info,
-                    int argc, VALUE *argv,
+arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
                     GArray *in_args, GArray *out_args,
                     GPtrArray *args_metadata)
 {
     gint i, n_args;
+    VALUE *argv;
 
     allocate_arguments(info, in_args, out_args, args_metadata);
     fill_metadata(args_metadata);
 
     /* TODO: validate_rb_args(args_metadata); */
+
+    argv = RARRAY_PTR(rb_arguments);
 
     n_args = g_callable_info_get_n_args(info);
     for (i = 0; i < n_args; i++) {
@@ -550,33 +563,126 @@ arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
     g_ptr_array_unref(args_metadata);
 }
 
+typedef struct {
+    GIFunctionInfo *info;
+    GArray *in_args;
+    GArray *out_args;
+    GIArgument *return_value;
+    GError **error;
+    gboolean succeeded;
+} InvokeData;
+
+static void
+rb_gi_function_info_invoke_raw_call(InvokeData *data)
+{
+    data->succeeded =
+        g_function_info_invoke(data->info,
+                               (GIArgument *)(data->in_args->data),
+                               data->in_args->len,
+                               (GIArgument *)(data->out_args->data),
+                               data->out_args->len,
+                               data->return_value,
+                               data->error);
+}
+
+static RB_THREAD_CALL_WITHOUT_GVL_FUNC_RETURN_TYPE
+rb_gi_function_info_invoke_raw_call_without_gvl_body(void *user_data)
+{
+    InvokeData *data = (InvokeData *)user_data;
+
+    rb_gi_function_info_invoke_raw_call(data);
+
+    return RB_THREAD_CALL_WITHOUT_GVL_FUNC_RETURN_VALUE;
+}
+
+static gboolean
+gobject_based_p(GIBaseInfo *info)
+{
+    GIBaseInfo *container_info;
+    GIRegisteredTypeInfo *registered_type_info;
+
+    container_info = g_base_info_get_container(info);
+    if (g_base_info_get_type(container_info) != GI_INFO_TYPE_STRUCT) {
+        return TRUE;
+    }
+
+    registered_type_info = (GIRegisteredTypeInfo *)container_info;
+    if (g_registered_type_info_get_type_init(registered_type_info)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 VALUE
-rb_gi_function_info_invoke_raw(GIFunctionInfo *info, GIArgument *receiver,
-                               int argc, VALUE *argv,
+rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
                                GIArgument *return_value)
 {
     GICallableInfo *callable_info;
+    GIArgument receiver;
     GArray *in_args, *out_args;
     GPtrArray *args_metadata;
     VALUE rb_out_args = Qnil;
     gboolean succeeded;
     GError *error = NULL;
+    gboolean unlock_gvl = FALSE;
+    VALUE rb_receiver, rb_arguments, rb_unlock_gvl;
+
+    if (RB_TYPE_P(rb_options, RUBY_T_ARRAY)) {
+        rb_receiver = Qnil;
+        rb_arguments = rb_options;
+        rb_unlock_gvl = Qnil;
+    } else if (NIL_P(rb_options)) {
+        rb_receiver = Qnil;
+        rb_arguments = rb_ary_new();
+        rb_unlock_gvl = Qnil;
+    } else {
+        rb_options = rbg_check_hash_type(rb_options);
+        rbg_scan_options(rb_options,
+                         "receiver", &rb_receiver,
+                         "arguments", &rb_arguments,
+                         "unlock_gvl", &rb_unlock_gvl,
+                         NULL);
+    }
+
+    if (NIL_P(rb_receiver)) {
+        receiver.v_pointer = NULL;
+    } else {
+        if (gobject_based_p((GIBaseInfo *)info)) {
+            receiver.v_pointer = RVAL2GOBJ(rb_receiver);
+        } else {
+            receiver.v_pointer = DATA_PTR(rb_receiver);
+        }
+    }
+    rb_arguments = rbg_to_array(rb_arguments);
+    if (!NIL_P(rb_unlock_gvl) && RVAL2CBOOL(rb_unlock_gvl)) {
+        unlock_gvl = TRUE;
+    }
 
     callable_info = (GICallableInfo *)info;
     arguments_init(&in_args, &out_args, &args_metadata);
-    if (receiver) {
-        g_array_append_val(in_args, *receiver);
+    if (receiver.v_pointer) {
+        g_array_append_val(in_args, receiver);
     }
-    arguments_from_ruby(callable_info,
-                        argc, argv,
+    arguments_from_ruby(callable_info, rb_arguments,
                         in_args, out_args, args_metadata);
-    succeeded = g_function_info_invoke(info,
-                                       (GIArgument *)(in_args->data),
-                                       in_args->len,
-                                       (GIArgument *)(out_args->data),
-                                       out_args->len,
-                                       return_value,
-                                       &error);
+    {
+        InvokeData data;
+        data.info = info;
+        data.in_args = in_args;
+        data.out_args = out_args;
+        data.return_value = return_value;
+        data.error = &error;
+        if (unlock_gvl) {
+            rb_thread_call_without_gvl(
+                rb_gi_function_info_invoke_raw_call_without_gvl_body, &data,
+                NULL, NULL);
+        } else {
+            rb_gi_function_info_invoke_raw_call(&data);
+        }
+        succeeded = data.succeeded;
+    }
+
     if (succeeded) {
         rb_out_args = out_arguments_to_ruby(callable_info,
                                             in_args, out_args,
@@ -599,7 +705,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, GIArgument *receiver,
 }
 
 static VALUE
-rg_invoke(int argc, VALUE *argv, VALUE self)
+rg_invoke(VALUE self, VALUE rb_options)
 {
     GIFunctionInfo *info;
     GICallableInfo *callable_info;
@@ -609,7 +715,8 @@ rg_invoke(int argc, VALUE *argv, VALUE self)
 
     info = SELF(self);
     /* TODO: use rb_protect() */
-    rb_out_args = rb_gi_function_info_invoke_raw(info, NULL, argc, argv,
+    rb_out_args = rb_gi_function_info_invoke_raw(info,
+                                                 rb_options,
                                                  &return_value);
 
     callable_info = (GICallableInfo *)info;
@@ -649,7 +756,7 @@ rb_gi_function_info_init(VALUE rb_mGI, VALUE rb_cGICallableInfo)
     RG_DEF_METHOD(flags, 0);
     RG_DEF_METHOD(property, 0);
     RG_DEF_METHOD(vfunc, 0);
-    RG_DEF_METHOD(invoke, -1);
+    RG_DEF_METHOD(invoke, 1);
 
     G_DEF_CLASS(G_TYPE_I_FUNCTION_INFO_FLAGS, "FunctionInfoFlags", rb_mGI);
 

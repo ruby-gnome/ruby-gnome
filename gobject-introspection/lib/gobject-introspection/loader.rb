@@ -81,7 +81,10 @@ module GObjectIntrospection
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
           validate.call(arguments, &block)
-          function_info.invoke(*arguments, &block)
+          function_info.invoke({
+                                 :arguments => arguments,
+                               },
+                               &block)
         end
         module_function(name)
       end
@@ -192,7 +195,11 @@ module GObjectIntrospection
         name = "initialize_#{info.name}"
         klass.__send__(:define_method, name) do |*arguments, &block|
           validate.call(info, name, arguments, &block)
-          info.invoke(self, *arguments, &block)
+          info.invoke({
+                        :receiver  => self,
+                        :arguments => arguments,
+                      },
+                      &block)
         end
         klass.__send__(:private, name)
       end
@@ -284,7 +291,11 @@ module GObjectIntrospection
         if block.nil? and info.require_callback?
           Enumerator.new(self, method_name, *arguments)
         else
-          info.invoke(self, *arguments, &block)
+          info.invoke({
+                        :receiver  => self,
+                        :arguments => arguments,
+                      },
+                      &block)
         end
       end
     end
@@ -303,7 +314,10 @@ module GObjectIntrospection
           if block.nil? and info.require_callback?
             Enumerator.new(self, name, *arguments)
           else
-            info.invoke(*arguments, &block)
+            info.invoke({
+                          :arguments => arguments,
+                        },
+                        &block)
           end
         end
       end
