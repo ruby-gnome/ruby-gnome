@@ -100,5 +100,15 @@ module Gst
     def rubyish_method_name(function_info)
       RENAME_MAP[function_info.name] || super
     end
+
+    UNLOCK_GVL_METHODS = {
+      "Gst::Element#set_state"   => true,
+      "Gst::Element#get_state"   => true,
+      "Gst::Element#query_state" => true,
+      "Gst::Element#send_event"  => true,
+    }
+    def should_unlock_gvl?(function_info, klass)
+      UNLOCK_GVL_METHODS["#{klass}\##{function_info.name}"] || super
+    end
   end
 end
