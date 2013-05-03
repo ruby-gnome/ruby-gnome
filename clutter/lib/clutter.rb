@@ -68,8 +68,11 @@ module Clutter
     private
     def pre_load(repository, namespace)
       init = repository.find(namespace, "init")
-      error, argc, argv = init.invoke(1 + @init_arguments.size,
-                                      [$0] + @init_arguments)
+      arguments = [
+        1 + @init_arguments.size,
+        [$0] + @init_arguments,
+      ]
+      error, argc, argv = init.invoke(arguments)
       @init_arguments.replace(argv)
       if error.to_i <= 0
         raise InitError, "failed to initialize Clutter: #{error.name}"
