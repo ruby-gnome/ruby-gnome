@@ -66,9 +66,6 @@ end
 
 make_version_header("GI", package_id, ".")
 
-ruby_headers = ["ruby.h"]
-have_type("enum ruby_value_type", ruby_headers)
-
 gi_headers = ["girepository.h"]
 have_func("g_interface_info_find_signal", gi_headers)
 

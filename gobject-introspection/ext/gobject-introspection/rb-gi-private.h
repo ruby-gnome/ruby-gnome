@@ -39,10 +39,6 @@
 #  define RB_TYPE_P(object, type) (TYPE(object) == type)
 #endif
 
-#ifndef HAVE_TYPE_ENUM_RUBY_VALUE_TYPE
-#  define RUBY_T_FIXNUM T_FIXNUM
-#endif
-
 extern void Init_gobject_introspection(void);
 
 void rb_gi_argument_init             (void);
