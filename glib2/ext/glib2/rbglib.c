@@ -832,6 +832,12 @@ rbg_to_array (VALUE object)
 }
 
 VALUE
+rbg_to_hash (VALUE object)
+{
+    return rb_convert_type(object, RUBY_T_HASH, "Hash", "to_hash");
+}
+
+VALUE
 rbg_check_array_type (VALUE object)
 {
 #ifdef HAVE_RB_CHECK_ARRAY_TYPE

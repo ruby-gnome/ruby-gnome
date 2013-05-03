@@ -180,6 +180,7 @@ VALUE rbg_gints2rval(const gint *gints, long n);
 VALUE rbg_gints2rval_free(gint *gints, long n);
 
 extern VALUE rbg_to_array(VALUE object);
+extern VALUE rbg_to_hash(VALUE object);
 extern VALUE rbg_check_array_type(VALUE object);
 extern VALUE rbg_check_hash_type(VALUE object);
 extern void rbg_scan_options(VALUE options, ...);
