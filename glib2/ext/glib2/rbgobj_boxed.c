@@ -225,6 +225,22 @@ rbgobj_boxed_not_copy_obj(GType gtype)
     cinfo->flags |= RBGOBJ_BOXED_NOT_COPY;
 }
 
+void
+rbgobj_boxed_unown(VALUE boxed)
+{
+    boxed_holder *holder;
+
+    Data_Get_Struct(boxed, boxed_holder, holder);
+
+    if (!holder->own) {
+        rb_raise(rb_eArgError,
+                 "The boxed is already unowned: %p",
+                 boxed);
+    }
+
+    holder->own = FALSE;
+}
+
 /**********************************************************************/
 
 static VALUE

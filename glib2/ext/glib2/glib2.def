@@ -23,6 +23,7 @@ EXPORTS
 	rbgobj_boxed_get
 	rbgobj_boxed_get_default
 	rbgobj_boxed_not_copy_obj
+	rbgobj_boxed_unown
 	rbgobj_make_boxed
 	rbgobj_make_boxed_raw
 	rbgobj_make_boxed_default

@@ -233,6 +233,7 @@ extern VALUE rbgobj_make_boxed_raw(gpointer p, GType gtype,
                                    VALUE klass, gint flags);
 extern VALUE rbgobj_make_boxed_default(gpointer data, GType gtype);
 extern void rbgobj_boxed_not_copy_obj(GType gtype);
+extern void rbgobj_boxed_unown(VALUE boxed);
 
 /* rbgobj_enums.c */
 extern void rbgobj_constant_remap(const char *original, const char *replacement);
