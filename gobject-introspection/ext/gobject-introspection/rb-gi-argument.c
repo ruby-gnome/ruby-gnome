@@ -797,6 +797,121 @@ rb_gi_inout_argument_from_ruby(GIArgument *argument,
     }
 }
 
+static void
+rb_gi_in_argument_transfer_interface(GIArgument *argument,
+                                     G_GNUC_UNUSED GITransfer transfer,
+                                     GITypeInfo *type_info,
+                                     G_GNUC_UNUSED VALUE rb_argument)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    G_GNUC_UNUSED GType gtype;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+    g_base_info_unref(interface_info);
+
+    switch (interface_type) {
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: in transfer (interface) [%s]",
+                 g_info_type_to_string(interface_type));
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        rbgobj_boxed_unown(rb_argument);
+        break;
+      case GI_INFO_TYPE_BOXED:
+      case GI_INFO_TYPE_ENUM:
+      case GI_INFO_TYPE_FLAGS:
+        rb_raise(rb_eNotImpError,
+                 "TODO: in transfer (interface) [%s]",
+                 g_info_type_to_string(interface_type));
+        break;
+      case GI_INFO_TYPE_OBJECT:
+        g_object_ref(argument->v_pointer);
+        break;
+      case GI_INFO_TYPE_INTERFACE:
+      case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: in transfer (interface) [%s]",
+                 g_info_type_to_string(interface_type));
+        break;
+      case GI_INFO_TYPE_INVALID_0:
+        g_assert_not_reached();
+        break;
+      case GI_INFO_TYPE_UNION:
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: in transfer (interface) [%s]",
+                 g_info_type_to_string(interface_type));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
+rb_gi_in_argument_transfer(GIArgument *argument, GITransfer transfer,
+                           GITypeInfo *type_info, VALUE rb_argument)
+{
+    GITypeTag type_tag;
+
+    if (transfer == GI_TRANSFER_NOTHING) {
+        return;
+    }
+
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+        break;
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: in transfer (%s)",
+                 g_type_tag_to_string(type_tag));
+        break;
+      case GI_TYPE_TAG_INTERFACE:
+        rb_gi_in_argument_transfer_interface(argument, transfer,
+                                             type_info, rb_argument);
+        break;
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: in transfer (%s)",
+                 g_type_tag_to_string(type_tag));
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
 GIArgument *
 rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
                             VALUE rb_argument)
@@ -814,6 +929,10 @@ rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
                                        rb_argument);
     } else {
         rb_gi_value_argument_from_ruby(argument, &type_info, rb_argument);
+        rb_gi_in_argument_transfer(argument,
+                                   g_arg_info_get_ownership_transfer(arg_info),
+                                   &type_info,
+                                   rb_argument);
     }
 
     return argument;
