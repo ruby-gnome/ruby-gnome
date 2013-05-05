@@ -798,7 +798,7 @@ rb_gi_inout_argument_from_ruby(GIArgument *argument,
 }
 
 GIArgument *
-rb_gi_call_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
+rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
                             VALUE rb_argument)
 {
     GITypeInfo type_info;
@@ -996,7 +996,7 @@ rb_gi_inout_argument_free(GIArgument *argument, GITypeInfo *type_info)
 }
 
 void
-rb_gi_call_argument_free(GIArgument *argument, GIArgInfo *arg_info)
+rb_gi_in_argument_free(GIArgument *argument, GIArgInfo *arg_info)
 {
     GITypeInfo type_info;
 

@@ -397,9 +397,9 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv, GArray *in_args)
         GIArgument *argument;
 
         argument = &(g_array_index(in_args, GIArgument, metadata->in_arg_index));
-        RVAL2GI_CALL_ARGUMENT(argument,
-                              &(metadata->arg_info),
-                              argv[metadata->rb_arg_index]);
+        RVAL2GI_IN_ARGUMENT(argument,
+                            &(metadata->arg_info),
+                            argv[metadata->rb_arg_index]);
     }
 }
 
@@ -548,7 +548,7 @@ arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
             if (in_arg_index != -1) {
                 GIArgument *argument;
                 argument = &(g_array_index(in_args, GIArgument, in_arg_index));
-                rb_gi_call_argument_free(argument, &(metadata->arg_info));
+                rb_gi_in_argument_free(argument, &(metadata->arg_info));
             }
         } else {
             GIArgument *argument;
