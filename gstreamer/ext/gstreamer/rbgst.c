@@ -101,7 +101,13 @@ rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
 
     CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback, id_call, 2,
-               BOXED2RVAL(list, GST_MINI_OBJECT_TYPE(list)),
+               /*
+                * XXX: Use gst_tag_list_copy() instead if we don't trust
+                * users. Users should not use destructive methods such as
+                * #insert. If many users use these methods, we shuold use
+                * gst_tag_list_copy().
+                */
+               BOXED2RVAL((GstTagList *)list, GST_MINI_OBJECT_TYPE(list)),
                CSTR2RVAL(tag));
     if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
         rb_gi_callback_data_free(callback_data);
