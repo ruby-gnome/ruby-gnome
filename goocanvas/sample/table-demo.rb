@@ -1,5 +1,30 @@
 #!/usr/bin/env ruby
-require 'goocanvas'
+#
+# This sample code is a port of
+# goocanvas/demo/table-demo.c. It is licensed
+# under the terms of the GNU Library General Public License, version
+# 2 or (at your option) later.
+#
+# Copyright (C) 2013  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+require "goocanvas-gi"
+
+Goo.init
+
 DEMO_RECT_ITEM = 0
 DEMO_TEXT_ITEM = 1
 DEMO_WIDGET_ITEM = 2
@@ -7,16 +32,37 @@ DEMO_WIDGET_ITEM = 2
 def create_demo_item(table, demo_item_type, row, column, rows, columns, text)
   case demo_item_type
   when DEMO_RECT_ITEM
-    item = Goo::CanvasRect.new(table, 0, 0, 38, 19, :fill_color => 'red')
+    item = Goo::CanvasRect.new(:parent     => table,
+                               :x          => 0,
+                               :y          => 0,
+                               :width      => 38,
+                               :height     => 19,
+                               :fill_color => "red")
   when DEMO_TEXT_ITEM
-    item = Goo::CanvasText.new(table, text, 0, 0, -1, Gtk::ANCHOR_NW, nil)
+    item = Goo::CanvasText.new(:parent => table,
+                               :text   => text,
+                               :x      => 0,
+                               :y      => 0,
+                               :width  => -1,
+                               :anchor => :nw)
   when DEMO_WIDGET_ITEM
-    widget = Gtk::Button.new(text)
-    item = Goo::CanvasWidget.new(table, widget, 0, 0, -1, -1)
+    widget = Gtk::Button.new(:label => text)
+    item = Goo::CanvasWidget.new(:parent => table,
+                                 :widget => widget,
+                                 :x      => 0,
+                                 :y      => 0,
+                                 :width  => -1,
+                                 :height => -1)
   end
 
-  table.set_child_properties(item, :row => row, :column => column, :rows => rows, :columns => columns,
-    :x_expand => true, :x_fill => true, :y_expand => true, :y_fill => true)
+  table.set_child_property(item, "row", row)
+  table.set_child_property(item, "column", column)
+  table.set_child_property(item, "rows", rows)
+  table.set_child_property(item, "columns", columns)
+  table.set_child_property(item, "x-expand", true)
+  table.set_child_property(item, "x-fill", true)
+  table.set_child_property(item, "y-expand", true)
+  table.set_child_property(item, "y-fill", true)
 
   item.signal_connect('button_press_event') do |item, target, event|
     puts "#{text} received 'button-press' signal at #{event.x}, #{event.y} (root:  #{event.x_root}, #{event.y_root})"
@@ -26,13 +72,20 @@ end
 
 def create_table(parent, row, column, embedding_level, x, y, rotation, scale, demo_item_type)
   # Add a few simple items.
-  table = Goo::CanvasTable.new(parent, :row_spacing => 4.0, :column_spacing => 4.0)
+  table = Goo::CanvasTable.new(:parent         => parent,
+                               :row_spacing    => 4.0,
+                               :column_spacing => 4.0)
 
   table.translate(x, y)
   table.rotate(rotation, 0, 0)
   table.scale(scale, scale)
 
-  parent.set_child_properties(table, :row => row, :column => column, :x_expand => true, :x_fill => true) if row
+  if row
+    parent.set_child_property(table, "row", row)
+    parent.set_child_property(table, "column", column)
+    parent.set_child_property(table, "x-expand", true)
+    parent.set_child_property(table, "x_fill", true)
+  end
 
   if embedding_level > 0
     level = embedding_level - 1
@@ -60,51 +113,83 @@ def create_table(parent, row, column, embedding_level, x, y, rotation, scale, de
 end
 
 def create_demo_table(root, x, y, width, height)
-  table = Goo::CanvasTable.new(root, :row_spacing => 4.0, :column_spacing => 4.0, :width => width, :height => height)
+  table = Goo::CanvasTable.new(:parent         => root,
+                               :row_spacing    => 4.0,
+                               :column_spacing => 4.0,
+                               :width          => width,
+                               :height         => height)
   table.translate(x, y)
 
-  square = Goo::CanvasRect.new(table, 0.0, 0.0, 50.0, 50.0, :fill_color => 'red')
-  table.set_child_properties(square, :row => 0, :column => 0, :x_shrink => true)
+  square = Goo::CanvasRect.new(:parent     => table,
+                               :x          => 0.0,
+                               :y          => 0.0,
+                               :width      => 50.0,
+                               :height     => 50.0,
+                               :fill_color => "red")
+  table.set_child_property(square, "row", 0)
+  table.set_child_property(square, "column", 0)
+  table.set_child_property(square, "x_shrink", true)
   square.signal_connect('button_press_event') do |item, target, event|
     puts "Red square received 'button-press' signal at #{event.x}, #{event.y} (root:  #{event.x_root}, #{event.y_root})"
     true
   end
 
-  circle = Goo::CanvasEllipse.new(table, 0.0, 0.0, 25.0, 25.0, :fill_color => 'blue')
-  table.set_child_properties(circle, :row => 0, :column => 1, :x_shrink => true)
+  circle = Goo::CanvasEllipse.new(:parent     => table,
+                                  :x          => 0.0,
+                                  :y          => 0.0,
+                                  :radius_x   => 25.0,
+                                  :radius_y   => 25.0,
+                                  :fill_color => "blue")
+  table.set_child_property(circle, "row", 0)
+  table.set_child_property(circle, "column", 1)
+  table.set_child_property(circle, "x_shrink", true)
   circle.signal_connect('button_press_event') do |item, target, event|
     puts "Blue circle received 'button-press' signal at #{event.x}, #{event.y} (root:  #{event.x_root}, #{event.y_root})"
     true
   end
 
-  triangle = Goo::CanvasPolyline.new(table, true, [ [ 25.0, 0.0], [ 0.0, 50.0 ], [ 50.0, 50.0 ] ], :fill_color => "yellow")
-  table.set_child_properties(triangle, :row => 0, :column => 2, :x_shrink => true)
+  points = Goo::CanvasPoints.new(3)
+  points.set_point(0, 25.0,  0.0)
+  points.set_point(1,  0.0, 50.0)
+  points.set_point(2, 50.0, 50.0)
+  triangle = Goo::CanvasPolyline.new(:parent     => table,
+                                     :close_path => true,
+                                     :points     => points,
+                                     :fill_color => "yellow")
+  table.set_child_property(triangle, "row", 0)
+  table.set_child_property(triangle, "column", 2)
+  table.set_child_property(triangle, "x_shrink", true)
   triangle.signal_connect('button_press_event') do |item, target, event|
     puts "Yellow triangle received 'button-press' signal at #{event.x}, #{event.y} (root:  #{event.x_root}, #{event.y_root})"
     true
   end
 end
 
-window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
+GC.disable
+
+window = Gtk::Window.new(:toplevel)
 window.set_default_size(640, 600)
 window.signal_connect('delete_event') { Gtk.main_quit }
 
-vbox = Gtk::VBox.new(false, 4)
+vbox = Gtk::Box.new(:vertical, 4)
 vbox.border_width = 4
 vbox.show
 window.add(vbox)
 
-hbox = Gtk::HBox.new(false, 4)
-vbox.pack_start(hbox, false, false, 0)
+hbox = Gtk::Box.new(:horizontal, 4)
+vbox.pack_start(hbox, :expand  => false,
+                      :fill    => false,
+                      :padding => 0)
 hbox.show
 
 scrolled_win = Gtk::ScrolledWindow.new
-scrolled_win.shadow_type = Gtk::SHADOW_IN
+scrolled_win.shadow_type = :in
 scrolled_win.show
-vbox.pack_start(scrolled_win, true, true, 0)
+vbox.pack_start(scrolled_win, :expand  => true,
+                              :fill    => true,
+                              :padding => 0)
 
 canvas = Goo::Canvas.new
-canvas.flags = Gtk::Widget::CAN_FOCUS
 canvas.set_size_request(600, 450)
 canvas.set_bounds(0, 0, 1000, 1000)
 scrolled_win.add(canvas)
@@ -132,6 +217,8 @@ table.height = 200.0
 canvas.show
 
 window.show
+
+GC.enable
 
 Gtk.main
 
