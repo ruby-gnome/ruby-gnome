@@ -630,8 +630,8 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
 
 
 GIArgument *
-rb_gi_in_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
-                            VALUE rb_argument)
+rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
+                               VALUE rb_argument)
 {
     GITypeTag type_tag;
 
@@ -716,7 +716,7 @@ rb_gi_inout_argument_from_ruby(GIArgument *argument,
     GIArgument in_argument;
     GITypeTag type_tag;
 
-    rb_gi_in_argument_from_ruby(&in_argument, type_info, rb_argument);
+    rb_gi_value_argument_from_ruby(&in_argument, type_info, rb_argument);
 
     type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
@@ -813,14 +813,14 @@ rb_gi_call_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
         rb_gi_inout_argument_from_ruby(argument, arg_info, &type_info,
                                        rb_argument);
     } else {
-        rb_gi_in_argument_from_ruby(argument, &type_info, rb_argument);
+        rb_gi_value_argument_from_ruby(argument, &type_info, rb_argument);
     }
 
     return argument;
 }
 
 static void
-rb_gi_in_argument_free_array(GIArgument *argument, GITypeInfo *type_info)
+rb_gi_value_argument_free_array(GIArgument *argument, GITypeInfo *type_info)
 {
     GIArrayType array_type;
 
@@ -840,7 +840,7 @@ rb_gi_in_argument_free_array(GIArgument *argument, GITypeInfo *type_info)
 }
 
 static void
-rb_gi_in_argument_free_interface(GIArgument *argument, GITypeInfo *type_info)
+rb_gi_value_argument_free_interface(GIArgument *argument, GITypeInfo *type_info)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
@@ -863,7 +863,7 @@ rb_gi_in_argument_free_interface(GIArgument *argument, GITypeInfo *type_info)
 }
 
 void
-rb_gi_in_argument_free(GIArgument *argument, GITypeInfo *type_info)
+rb_gi_value_argument_free(GIArgument *argument, GITypeInfo *type_info)
 {
     GITypeTag type_tag;
 
@@ -886,10 +886,10 @@ rb_gi_in_argument_free(GIArgument *argument, GITypeInfo *type_info)
       case GI_TYPE_TAG_FILENAME:
         break;
       case GI_TYPE_TAG_ARRAY:
-        rb_gi_in_argument_free_array(argument, type_info);
+        rb_gi_value_argument_free_array(argument, type_info);
         break;
       case GI_TYPE_TAG_INTERFACE:
-        rb_gi_in_argument_free_interface(argument, type_info);
+        rb_gi_value_argument_free_interface(argument, type_info);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
@@ -991,7 +991,7 @@ rb_gi_inout_argument_free(GIArgument *argument, GITypeInfo *type_info)
         break;
     }
 
-    rb_gi_in_argument_free(&in_argument, type_info);
+    rb_gi_value_argument_free(&in_argument, type_info);
     xfree(argument->v_pointer);
 }
 
@@ -1004,7 +1004,7 @@ rb_gi_call_argument_free(GIArgument *argument, GIArgInfo *arg_info)
     if (g_arg_info_get_direction(arg_info) == GI_DIRECTION_INOUT) {
         rb_gi_inout_argument_free(argument, &type_info);
     } else {
-        rb_gi_in_argument_free(argument, &type_info);
+        rb_gi_value_argument_free(argument, &type_info);
     }
 }
 
