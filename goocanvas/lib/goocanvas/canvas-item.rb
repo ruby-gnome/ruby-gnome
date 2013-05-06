@@ -31,8 +31,15 @@ module Goo
 
     alias_method :remove_child_raw, :remove_child
     private :remove_child_raw
-    def remove_child(child)
-      result = remove_child_raw(child)
+    def remove_child(child_or_position)
+      if child_or_position.is_a?(CanvasItem)
+        child = child_or_position
+        position = find_child(child)
+      else
+        position = child_or_position
+        child = get_child(position)
+      end
+      result = remove_child_raw(position)
       remove_child_reference(child)
       result
     end

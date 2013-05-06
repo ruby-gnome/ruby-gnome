@@ -119,8 +119,7 @@ add_button(hbox, 'Remove Widget') do
   root = canvas.root_item
   witem = added_widget_items.pop
   if witem
-    child_num = root.find_child(witem)
-    root.remove_child(child_num)
+    root.remove_child(witem)
     num_added_widgets -= 1
   end
 end
