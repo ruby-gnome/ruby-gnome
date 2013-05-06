@@ -151,6 +151,11 @@ module GObjectIntrospection
     def load_fields(info, klass)
       info.n_fields.times do |i|
         field_info = info.get_field(i)
+        load_field(info, field_info, klass)
+      end
+    end
+
+    def load_field(info, field_info, klass)
         name = field_info.name
         flags = field_info.flags
 
@@ -165,7 +170,6 @@ module GObjectIntrospection
             info.set_field_value(self, i, value)
           end
         end
-      end
     end
 
     def load_methods(info, klass)
