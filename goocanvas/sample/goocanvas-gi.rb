@@ -39,7 +39,7 @@ module Goo
 
   class Loader < GObjectIntrospection::Loader
     private
-    def load_field(info, field_info, klass)
+    def load_field(info, i, field_info, klass)
       return if field_info.name == "parent"
       super
     end
