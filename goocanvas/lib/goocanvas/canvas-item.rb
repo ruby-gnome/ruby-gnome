@@ -14,34 +14,38 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gtk3"
-require "gobject-introspection"
-
-base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_dll_path(vendor_bin_dir)
-
 module Goo
-  LOG_DOMAIN = "GooCanvas"
-  GLib::Log.set_log_domain(LOG_DOMAIN)
-
-  @initialized = false
-  class << self
-    def init
-      return if @initialized
-      @initialized = true
-      loader = Loader.new(self)
-      loader.load("GooCanvas")
-      require "goocanvas/canvas-item"
-    end
-  end
-
-  class Loader < GObjectIntrospection::Loader
-    private
-    def load_field(info, field_info, klass)
-      return if field_info.name == "parent"
+  module CanvasItem
+    def initialize(*args, &block)
       super
+      parent.__send__(:add_child_reference, self) if parent
+    end
+
+    alias_method :add_child_raw, :add_child
+    private :add_child_raw
+    def add_child(child)
+      result = add_child_raw(child)
+      add_child_reference(child)
+      result
+    end
+
+    alias_method :remove_child_raw, :remove_child
+    private :remove_child_raw
+    def remove_child(child)
+      result = remove_child_raw(child)
+      remove_child_reference(child)
+      result
+    end
+
+    private
+    def add_child_reference(child)
+      @children ||= []
+      @children << child
+    end
+
+    def remove_child_reference(child)
+      @children ||= []
+      @children.delete(child)
     end
   end
 end
