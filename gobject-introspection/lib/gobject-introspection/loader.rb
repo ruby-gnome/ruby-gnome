@@ -156,20 +156,20 @@ module GObjectIntrospection
     end
 
     def load_field(info, field_info, klass)
-        name = field_info.name
-        flags = field_info.flags
+      name = field_info.name
+      flags = field_info.flags
 
-        if flags.readable?
-          klass.__send__(:define_method, name) do ||
-            info.get_field_value(self, i)
-          end
+      if flags.readable?
+        klass.__send__(:define_method, name) do ||
+          info.get_field_value(self, i)
         end
+      end
 
-        if flags.writable?
-          klass.__send__(:define_method, "#{name}=") do |value|
-            info.set_field_value(self, i, value)
-          end
+      if flags.writable?
+        klass.__send__(:define_method, "#{name}=") do |value|
+          info.set_field_value(self, i, value)
         end
+      end
     end
 
     def load_methods(info, klass)
