@@ -63,6 +63,19 @@ typedef int GPid;
 #  define G_SOURCE_CONTINUE TRUE
 #endif
 
+/* For suppressing a warning:
+ *   warning: format '%p' expects argument of type 'void *', but argument 3 has type 'VALUE' [-Wformat]
+ *
+ * Ruby's printf format that is used in rb_raise() uses '%p" for
+ * argument.inspect instead of formatting pointer address that is used
+ * in printf(3).
+*/
+#ifdef __GNUC__
+#  define RBG_PRINTF_INSPECT_VALUE(rb_object) GUINT_TO_POINTER(rb_object)
+#else
+#  define RBG_PRINTF_INSPECT_VALUE(rb_object) (rb_object)
+#endif
+
 #define RBG_INSPECT(object) (rbg_rval_inspect(object))
 
 #define RVAL2CSTR(v) (rbg_rval2cstr(&(v)))
