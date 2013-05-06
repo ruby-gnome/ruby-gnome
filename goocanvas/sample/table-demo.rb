@@ -165,8 +165,6 @@ def create_demo_table(root, x, y, width, height)
   end
 end
 
-GC.disable
-
 window = Gtk::Window.new(:toplevel)
 window.set_default_size(640, 600)
 window.signal_connect('delete_event') { Gtk.main_quit }
@@ -217,8 +215,6 @@ table.height = 200.0
 canvas.show
 
 window.show
-
-GC.enable
 
 Gtk.main
 
