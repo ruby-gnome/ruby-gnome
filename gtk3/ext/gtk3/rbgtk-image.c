@@ -83,32 +83,65 @@ rg_clear(VALUE self)
     return self;
 }
 
-static VALUE
-rg_set_from_icon_set(VALUE self, VALUE icon_set, VALUE size)
+static GtkIconSize
+icon_size_from_ruby(GtkImage *image, VALUE rb_size)
 {
-    gtk_image_set_from_icon_set(RVAL2GTKIMAGE(self),
-                                RVAL2GTKICONSET(icon_set),
-                                RVAL2GTKICONSIZE(size));
+    GtkIconSize size;
+
+    if (NIL_P(rb_size)) {
+        g_object_get(image,
+                     "icon-size", &size,
+                     NULL);
+        if (size == GTK_ICON_SIZE_INVALID) {
+            size = GTK_ICON_SIZE_BUTTON;
+        }
+    } else {
+        size = RVAL2GTKICONSIZE(rb_size);
+    }
+
+    return size;
+}
+
+static VALUE
+rg_set_from_icon_set(int argc, VALUE *argv, VALUE self)
+{
+    GtkImage *image;
+    VALUE rb_icon_set, rb_size;
+
+    image = RVAL2GTKIMAGE(self);
+    rb_scan_args(argc, argv, "11", &rb_icon_set, &rb_size);
+    gtk_image_set_from_icon_set(image,
+                                RVAL2GTKICONSET(rb_icon_set),
+                                icon_size_from_ruby(image, rb_size));
     return self;
 }
 
 static VALUE
-rg_set_from_stock(VALUE self, VALUE stock, VALUE size)
+rg_set_from_stock(int argc, VALUE *argv, VALUE self)
 {
-    VALUE buffer;
+    GtkImage *image;
+    VALUE rb_stock, rb_size;
+    VALUE rb_buffer;
 
-    gtk_image_set_from_stock(RVAL2GTKIMAGE(self),
-                             RVAL2GLIBID(stock, buffer),
-                             RVAL2GTKICONSIZE(size));
+    image = RVAL2GTKIMAGE(self);
+    rb_scan_args(argc, argv, "11", &rb_stock, &rb_size);
+    gtk_image_set_from_stock(image,
+                             RVAL2GLIBID(rb_stock, rb_buffer),
+                             icon_size_from_ruby(image, rb_size));
     return self;
 }
 
 static VALUE
-rg_set_from_gicon(VALUE self, VALUE gicon, VALUE size)
+rg_set_from_gicon(int argc, VALUE *argv, VALUE self)
 {
-    gtk_image_set_from_gicon(RVAL2GTKIMAGE(self),
-                             RVAL2GICON(gicon),
-                             RVAL2GTKICONSIZE(size));
+    GtkImage *image;
+    VALUE rb_gicon, rb_size;
+
+    image = RVAL2GTKIMAGE(self);
+    rb_scan_args(argc, argv, "11", &rb_gicon, &rb_size);
+    gtk_image_set_from_gicon(image,
+                             RVAL2GICON(rb_gicon),
+                             icon_size_from_ruby(image, rb_size));
     return self;
 }
 
@@ -118,9 +151,9 @@ Init_gtk_image(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(clear, 0);
-    RG_DEF_METHOD(set_from_icon_set, 2);
-    RG_DEF_METHOD(set_from_stock, 2);
-    RG_DEF_METHOD(set_from_gicon, 2);
+    RG_DEF_METHOD(set_from_icon_set, -1);
+    RG_DEF_METHOD(set_from_stock, -1);
+    RG_DEF_METHOD(set_from_gicon, -1);
 
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
 
