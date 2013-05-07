@@ -106,6 +106,7 @@ rg_insert_column(int argc, VALUE *argv, VALUE self)
         int ret;
         VALUE func = rb_block_proc();
 
+        G_RELATIVE(self, argv[2]);
         G_RELATIVE(self, func);
         ret = gtk_tree_view_insert_column_with_data_func(_SELF(self),
                                                          NUM2INT(args[0]),
