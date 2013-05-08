@@ -25,24 +25,24 @@
 extern void Init_gstreamer (void);
 
 static gboolean
-rg_gst_bus_func_p(GIArgInfo *info)
+name_equal(GIArgInfo *info, const gchar *target_name)
 {
     GITypeInfo type_info;
     GIBaseInfo *interface_info;
     const gchar *namespace;
     const gchar *name;
-    gboolean gst_bus_func_p = FALSE;
+    gboolean equal_name_p = FALSE;
 
     g_arg_info_load_type(info, &type_info);
     interface_info = g_type_info_get_interface(&type_info);
     namespace = g_base_info_get_namespace(interface_info);
     name = g_base_info_get_name(interface_info);
-    if (strcmp(namespace, "Gst") == 0 && strcmp(name, "BusFunc") == 0) {
-        gst_bus_func_p = TRUE;
+    if (strcmp(namespace, "Gst") == 0 && strcmp(name, target_name) == 0) {
+        equal_name_p = TRUE;
     }
     g_base_info_unref(interface_info);
 
-    return gst_bus_func_p;
+    return equal_name_p;
 }
 
 static gboolean
@@ -65,31 +65,10 @@ rg_gst_bus_func_callback(GstBus *bus, GstMessage *message, gpointer user_data)
 static gpointer
 rg_gst_bus_func_callback_finder(GIArgInfo *info)
 {
-    if (!rg_gst_bus_func_p(info)) {
+    if (!name_equal(info, "BusFunc")) {
         return NULL;
     }
     return rg_gst_bus_func_callback;
-}
-
-static gboolean
-rg_gst_bus_sync_handler_p(GIArgInfo *info)
-{
-    GITypeInfo type_info;
-    GIBaseInfo *interface_info;
-    const gchar *namespace;
-    const gchar *name;
-    gboolean gst_bus_sync_handler_p = FALSE;
-
-    g_arg_info_load_type(info, &type_info);
-    interface_info = g_type_info_get_interface(&type_info);
-    namespace = g_base_info_get_namespace(interface_info);
-    name = g_base_info_get_name(interface_info);
-    if (strcmp(namespace, "Gst") == 0 && strcmp(name, "BusSyncHandler") == 0) {
-        gst_bus_sync_handler_p = TRUE;
-    }
-    g_base_info_unref(interface_info);
-
-    return gst_bus_sync_handler_p;
 }
 
 static gboolean
@@ -114,31 +93,10 @@ rg_gst_bus_sync_handler_callback(GstBus *bus, GstMessage *message,
 static gpointer
 rg_gst_bus_sync_handler_callback_finder(GIArgInfo *info)
 {
-    if (!rg_gst_bus_sync_handler_p(info)) {
+    if (!name_equal(info, "BusSyncHandler")) {
         return NULL;
     }
     return rg_gst_bus_sync_handler_callback;
-}
-
-static gboolean
-rg_gst_tag_foreach_func_p(GIArgInfo *info)
-{
-    GITypeInfo type_info;
-    GIBaseInfo *interface_info;
-    const gchar *namespace;
-    const gchar *name;
-    gboolean gst_tag_foreach_func_p = FALSE;
-
-    g_arg_info_load_type(info, &type_info);
-    interface_info = g_type_info_get_interface(&type_info);
-    namespace = g_base_info_get_namespace(interface_info);
-    name = g_base_info_get_name(interface_info);
-    if (strcmp(namespace, "Gst") == 0 && strcmp(name, "TagForeachFunc") == 0) {
-        gst_tag_foreach_func_p = TRUE;
-    }
-    g_base_info_unref(interface_info);
-
-    return gst_tag_foreach_func_p;
 }
 
 static void
@@ -166,7 +124,7 @@ rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
 static gpointer
 rg_gst_tag_foreach_func_callback_finder(GIArgInfo *info)
 {
-    if (!rg_gst_tag_foreach_func_p(info)) {
+    if (!name_equal(info, "TagForeachFunc")) {
         return NULL;
     }
     return rg_gst_tag_foreach_func_callback;
