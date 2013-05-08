@@ -72,6 +72,55 @@ rg_gst_bus_func_callback_finder(GIArgInfo *info)
 }
 
 static gboolean
+rg_gst_bus_sync_handler_p(GIArgInfo *info)
+{
+    GITypeInfo type_info;
+    GIBaseInfo *interface_info;
+    const gchar *namespace;
+    const gchar *name;
+    gboolean gst_bus_sync_handler_p = FALSE;
+
+    g_arg_info_load_type(info, &type_info);
+    interface_info = g_type_info_get_interface(&type_info);
+    namespace = g_base_info_get_namespace(interface_info);
+    name = g_base_info_get_name(interface_info);
+    if (strcmp(namespace, "Gst") == 0 && strcmp(name, "BusSyncHandler") == 0) {
+        gst_bus_sync_handler_p = TRUE;
+    }
+    g_base_info_unref(interface_info);
+
+    return gst_bus_sync_handler_p;
+}
+
+static gboolean
+rg_gst_bus_sync_handler_callback(GstBus *bus, GstMessage *message,
+                                 gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    VALUE rb_bus_sync_reply;
+    ID id_call;
+
+    CONST_ID(id_call, "call");
+    rb_bus_sync_reply =
+        rb_funcall(callback_data->rb_callback, id_call, 2,
+                   GOBJ2RVAL(bus),
+                   BOXED2RVAL(message, GST_MINI_OBJECT_TYPE(message)));
+    if (callback_data->metadata->scope_type == GI_SCOPE_TYPE_ASYNC) {
+        rb_gi_callback_data_free(callback_data);
+    }
+    return RVAL2GENUM(rb_bus_sync_reply, GST_TYPE_BUS_SYNC_REPLY);
+}
+
+static gpointer
+rg_gst_bus_sync_handler_callback_finder(GIArgInfo *info)
+{
+    if (!rg_gst_bus_sync_handler_p(info)) {
+        return NULL;
+    }
+    return rg_gst_bus_sync_handler_callback;
+}
+
+static gboolean
 rg_gst_tag_foreach_func_p(GIArgInfo *info)
 {
     GITypeInfo type_info;
@@ -127,5 +176,6 @@ void
 Init_gstreamer (void)
 {
     rb_gi_callback_register_finder(rg_gst_bus_func_callback_finder);
+    rb_gi_callback_register_finder(rg_gst_bus_sync_handler_callback_finder);
     rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
 }

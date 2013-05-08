@@ -20,5 +20,21 @@ module Gst
     def add_watch(priority=GLib::PRIORITY_DEFAULT, &block)
       add_watch_full(priority, &block)
     end
+
+    def sync_handler(&block)
+      @sync_handler = lambda do |bus, message|
+        begin
+          block.call(bus, message)
+        rescue Exception
+          $stderr.puts("An exception is raised in " +
+                         "#{self.class}\##{__method__} callback: #{block}")
+          $stderr.puts("#{$!.class}: #{$!.message}")
+          $stderr.puts($@)
+          BusSyncReply::DROP
+        end
+      end
+      set_sync_handler(&@sync_handler)
+    end
+    private :set_sync_handler
   end
 end
