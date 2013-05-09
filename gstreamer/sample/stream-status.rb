@@ -67,8 +67,7 @@ bin << fakesrc << fakesink
 fakesrc >> fakesink
 
 # get the bus, we need to install a sync handler
-bus = bin.bus
-bus.set_sync_handler do |message, bin|
+bin.bus.sync_handler do |bus, message|
 
   case message.type
   when Gst::MessageType::STREAM_STATUS
@@ -79,11 +78,11 @@ bus.set_sync_handler do |message, bin|
     puts "type:   #{type}"
     puts "source: #{message.src.path_string}"
     puts "owner:  #{owner.path_string}"
-    puts "object: type #{val.type_name}, value #{val.object}"
+    puts "object: type #{val.type.name}, value #{val.value}"
 
     # see if we know how to deal with this object
-    if val.type == Gst::Type::TASK
-      task = val.object
+    if val.type == Gst::Task
+      task = val.value
     end
 
     case type
@@ -96,7 +95,7 @@ bus.set_sync_handler do |message, bin|
     end
   end
 
-  Gst::Bus::PASS
+  Gst::BusSyncReply::PASS
 end
 
 # start playing
