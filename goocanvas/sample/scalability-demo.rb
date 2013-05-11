@@ -143,7 +143,6 @@ def create_canvas
   canvas.show
 
   first_time = true
-  # NOTE: "expose_event" was removed.
   canvas.signal_connect("draw") do
     if first_time
       puts "Update Canvas Time Used: #{Time.new - start}"
