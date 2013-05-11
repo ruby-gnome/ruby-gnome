@@ -53,6 +53,8 @@ module GObjectIntrospection
         load_function_info(info)
       when StructInfo
         load_struct_info(info)
+      when BoxedInfo
+        load_boxed_info(info)
       when FlagsInfo
         load_flags_info(info)
       when EnumInfo
@@ -108,6 +110,17 @@ module GObjectIntrospection
       return if info.gtype_struct?
 
       define_struct(info)
+    end
+
+    def define_boxed(info)
+      klass = self.class.define_class(info.gtype, info.name, @base_module)
+      # TODO
+      # load_fields(info, klass)
+      # load_methods(info, klass)
+    end
+
+    def load_boxed_info(info)
+      define_boxed(info)
     end
 
     def load_enum_value(value_info, enum_module)
