@@ -48,7 +48,7 @@ module Goo
       rescue LoadError
         require "goocanvas.so"
       end
-      require "goocanvas/canvas-item"
+      require "goo/canvas-item"
     end
   end
 
