@@ -1,155 +1,62 @@
-require 'gtk2'
-require 'cairo'
+# Copyright (C) 2013  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
+require "gtk3"
+require "gobject-introspection"
+
+base_dir = Pathname.new(__FILE__).dirname.dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
-begin
-  major, minor, micro, = RUBY_VERSION.split(/\./)
-  require "#{major}.#{minor}/goocanvas.so"
-rescue LoadError
-  require 'goocanvas.so'
+
+if vendor_dir.exist?
+  begin
+    require "gobject-introspection"
+    vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+    GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
+  rescue LoadError
+  end
 end
 
 module Goo
-  LOG_DOMAIN="Goo"
-  
-  def self.args_to_hash(args)
-    hash = args.pop if args.last.respond_to?(:to_hash)
-    hash ||= Hash.new
-    (args.length/2).times do |i|
-      key_index, value_index = i*2, i*2+1
-      hash[args[key_index]] = args[value_index]
-    end
-    hash
-  end
-  
-  module PropsInit
-    def init_props(*args)
-      hash = Goo.args_to_hash(args)
-      hash.each_pair { |key, value| set_property(key.to_s.gsub(/-/, '_').to_sym, value) }
-    end
-    
-    def self.append_features(klass)
-      super
-      arity = klass.instance_method(:initialize).arity
-      raise 'the initialize method of a class including PropsInit must have a fixed arity' if arity < 0
-      args_list = (1..arity).collect { |i| "param#{i}" }.join(", ")
-      klass.module_eval <<-END
-        alias :_initialize :initialize
-        def initialize(#{args_list}, *args)
-          _initialize(#{args_list})
-          init_props(*args)
-        end
-        
-        alias :_set_property :set_property
-        def set_property(prop_name, value)
-          pspec = self.class.property(prop_name)
-          value = value.to_goo if pspec.value_type.name =~ /^GooCairo/ and value.respond_to?(:to_goo)
-          _set_property(prop_name, value)
-        end        
-      END
-    end
-  end
+  LOG_DOMAIN = "GooCanvas"
+  GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  module CanvasItem
-    def set_child_properties(child, *args)
-      hash = Goo.args_to_hash(args)
-      hash.each_pair { |key, value| set_child_property(child, key, value) }
-    end
-    
-    def bounds
-      [x1, x2, y1, y2]
-    end
-    
-    def width
-      x2 - x1
-    end
-    
-    def height
-      y2 - y1
-    end
-    
-    def x
-      x1
-    end
-    
-    def y
-      y1
-    end
-  end
-
-  class CanvasText
-    include PropsInit
-  end
-
-  class CanvasRect
-    include PropsInit
-  end
-
-  class CanvasEllipse
-    include PropsInit
-  end
-
-  class CanvasPolyline
-    include PropsInit
-    def initialize(parent, close_path, points, *args)
-      _initialize(parent, close_path)
-      set_points(points)
-      init_props(*args)
-    end
-    
-    def set_points(points)
-      points = CanvasPoints.new(points) unless points.instance_of?(CanvasPoints)
-      set_property(:points, points)
-    end
-    alias :points= :set_points
-    
-    def self.new_line(parent, x1, y1, x2, y2, *args)
-      self.new(parent, false, [ x1, y1, x2, y2 ], *args)
-    end
-  end
-  
-  class CanvasPoints
-    alias :_initialize :initialize
-    def initialize(arg)
-      if arg.respond_to?(:to_ary)
-        points = arg.flatten
-        num_points = points.length / 2
-        _initialize(num_points)
-        num_points.times { |i| self[i] = [ points[i*2], points[i*2+1] ] }
-      else
-        _initialize(arg)
+  @initialized = false
+  class << self
+    def init
+      return if @initialized
+      @initialized = true
+      loader = Loader.new(self)
+      loader.load("GooCanvas")
+      begin
+        major, minor, _ = RUBY_VERSION.split(/\./)
+        require "#{major}.#{minor}/goocanvas.so"
+      rescue LoadError
+        require "goocanvas.so"
       end
-    end
-    
-    def each
-      num_points.times { |i| yield self[i] }
-    end
-
-    def to_a
-      a = []
-      each { |e| a.push(e) }
-      a
+      require "goocanvas/canvas-item"
     end
   end
 
-  class CanvasTable
-    include PropsInit
-  end
-
-  class CanvasGroup
-    include PropsInit
-  end
-
-  class CanvasWidget
-    include PropsInit
-  end
-
-  class CanvasImage
-    include PropsInit
+  class Loader < GObjectIntrospection::Loader
+    private
+    def load_field(info, i, field_info, klass)
+      return if field_info.name == "parent"
+      super
+    end
   end
 end
-
-GLib::Log.set_log_domain(Goo::LOG_DOMAIN)
