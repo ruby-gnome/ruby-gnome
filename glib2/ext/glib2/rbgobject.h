@@ -124,12 +124,15 @@ typedef enum
     RBGOBJ_BOXED_NOT_COPY         = 1 << 1,
     RBGOBJ_DEFINED_BY_RUBY        = 1 << 2,
 } RGObjClassFlag;
-    
+
+typedef void (*RGMarkFunc)(gpointer object);
+typedef void (*RGFreeFunc)(gpointer object);
+
 typedef struct {
     VALUE klass;
     GType gtype;
-    void (*mark)(gpointer);
-    void (*free)(gpointer);
+    RGMarkFunc mark;
+    RGFreeFunc free;
     int flags; /* RGObjClassFlag */
 } RGObjClassInfo;
 
@@ -173,10 +176,10 @@ extern const RGObjClassInfo *rbgobj_lookup_class_by_gtype_full(GType gtype,
 							       gboolean create_object);
 extern VALUE rbgobj_gtype_to_ruby_class(GType gtype);
 extern VALUE rbgobj_define_class(GType gtype, const gchar* name, VALUE module,
-                                 void* mark, void* free, VALUE parent); 
+                                 RGMarkFunc mark, RGFreeFunc free, VALUE parent); 
 extern VALUE rbgobj_define_class_dynamic(const gchar* gtype_name, 
                                          const gchar* name, VALUE module, 
-                                         void* mark, void* free); 
+                                         RGMarkFunc mark, RGFreeFunc free); 
 extern void rbgobj_register_class(VALUE klass,
                                   GType gtype,
                                   gboolean klass2gtype,

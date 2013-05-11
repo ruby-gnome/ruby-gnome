@@ -40,8 +40,8 @@ static GHashTable* dynamic_gtype_list;
 typedef struct {
     const gchar* name;
     VALUE module;
-    void (*mark)(gpointer);
-    void (*free)(gpointer);
+    RGMarkFunc mark;
+    RGFreeFunc free;
     int flags; /* RGObjClassFlag */
 } RGObjClassInfoDynamic;
 
@@ -294,7 +294,8 @@ rbgobj_gtype_to_ruby_class(GType gtype)
 }
 
 VALUE
-rbgobj_define_class(GType gtype, const gchar *name, VALUE module, void *mark, void *free, VALUE parent)
+rbgobj_define_class(GType gtype, const gchar *name, VALUE module,
+                    RGMarkFunc mark, RGFreeFunc free, VALUE parent)
 {
     RGObjClassInfo* cinfo;
     if (gtype == 0)
@@ -308,7 +309,8 @@ rbgobj_define_class(GType gtype, const gchar *name, VALUE module, void *mark, vo
 }
 
 VALUE
-rbgobj_define_class_dynamic(const gchar *gtype_name, const gchar *name, VALUE module, void *mark, void *free)
+rbgobj_define_class_dynamic(const gchar *gtype_name, const gchar *name,
+                            VALUE module, RGMarkFunc mark, RGFreeFunc free)
 {
     RGObjClassInfoDynamic* cinfo;
     cinfo = (RGObjClassInfoDynamic*)g_new(RGObjClassInfoDynamic, 1);
