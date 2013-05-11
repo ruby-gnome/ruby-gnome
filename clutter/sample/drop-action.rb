@@ -77,7 +77,7 @@ add_drag_object = lambda do |target|
       handle = Clutter::Actor.new
       handle.background_color = Clutter::Color.new(:sky_blue_dark)
       handle.set_size(128, 128)
-      handle.set_position(event_x - position.x, event_y - position.y)
+      handle.set_position(event_x - _actor.x, event_y - _actor.y)
       stage.add_child(handle)
 
       _action.drag_handle = handle
@@ -138,14 +138,14 @@ add_drag_object = lambda do |target|
     parent.remove_child(drag)
 
     parent.save_easing_state do
-      parent.easing_mode :linear
+      parent.easing_mode = :linear
       parent.opacity = 64
     end
   end
   target.add_child(drag)
 
   target.save_easing_state do
-    target.easing_mode :linear
+    target.easing_mode = :linear
     target.opacity = 255
   end
 end
