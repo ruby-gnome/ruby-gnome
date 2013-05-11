@@ -20,7 +20,7 @@ end
 $LOAD_PATH.unshift(mkmf_gnome2_dir.to_s)
 
 module_name = "goocanvas"
-package_id = "goocanvas"
+package_id = "goocanvas-2.0"
 
 begin
   require 'mkmf-gnome2'
@@ -30,9 +30,19 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
-["glib2", "atk", "pango", "gdk_pixbuf2", "gtk2"].each do |package|
+[
+  "glib2",
+  "atk",
+  "pango",
+  "gdk_pixbuf2",
+  "gdk3",
+  "gtk3",
+  "gobject-introspection",
+].each do |package|
   directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
+  build_base_path = "#{directory}/tmp/#{RUBY_PLATFORM}"
+  package_library_name = package.gsub(/-/, "_")
+  build_dir = "#{build_base_path}/#{package_library_name}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
                      top_dir.to_s,
                      :top_build_dir => top_build_dir.to_s,
@@ -55,14 +65,9 @@ check_cairo(rcairo_options) or exit(false)
 
 setup_win32(module_name, base_dir)
 
-unless required_pkg_config_package(package_id,
-                                   :debian => "libgoocanvas-dev",
-                                   :fedora => "goocanvas-devel",
-                                   :macports => "goocanvas")
+unless required_pkg_config_package(package_id)
   exit(false)
 end
-
-make_version_header("GOO_CANVAS", package_id, ".")
 
 create_pkg_config_file("Ruby/GooCanvas", package_id)
 $defs << "-DRUBY_GOO_CANVAS_COMPILATION"

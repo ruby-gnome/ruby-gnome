@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2007  Vincent Isambart <vincent.isambart@gmail.com>
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -22,24 +21,9 @@
 #ifndef __RBGOOCANVAS_H__
 #define __RBGOOCANVAS_H__
 
-#include <rb_cairo.h>
-#include <rbgtk.h>
+#include <rbgobject.h>
 #include <goocanvas.h>
 
-#include "rbgoo_canvasversion.h"
-#include "rbgoocanvasconversions.h"
-
-#define RVAL2GCBOUNDS(obj, bounds)              \
-    (ruby_to_goo_canvas_bounds(obj, bounds))
-
-#define RVAL2GTKWIDGET(obj) GTK_WIDGET(RVAL2GOBJ(obj))
-
-#define RB_GOO_CANVAS_ITEM_INITIALIZE(obj, item) \
-    (rb_goo_canvas_initialize_item_object(obj, GOO_CANVAS_ITEM(item)))
-
-void rb_goo_canvas_initialize_item_object(VALUE obj, GooCanvasItem *item);
-GooCanvasBounds *ruby_to_goo_canvas_bounds(VALUE rb_bounds, GooCanvasBounds *dest_bounds);
-
-extern VALUE mGoo;
+extern void Init_goocanvas(void);
 
 #endif /* __RBGOOCANVAS_H__ */

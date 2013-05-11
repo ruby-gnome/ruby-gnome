@@ -42,6 +42,12 @@ module Goo
       @initialized = true
       loader = Loader.new(self)
       loader.load("GooCanvas")
+      begin
+        major, minor, _ = RUBY_VERSION.split(/\./)
+        require "#{major}.#{minor}/goocanvas.so"
+      rescue LoadError
+        require "goocanvas.so"
+      end
       require "goocanvas/canvas-item"
     end
   end
