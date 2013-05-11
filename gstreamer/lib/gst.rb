@@ -44,6 +44,7 @@ module Gst
       require "gst/bus"
       require "gst/element"
       init_base
+      init_controller
     end
 
     private
@@ -51,6 +52,12 @@ module Gst
       require "gst/base_loader"
       base_loader = BaseLoader.new(self)
       base_loader.load("GstBase")
+    end
+
+    def init_controller
+      require "gst/controller_loader"
+      controller_loader = ControllerLoader.new(self)
+      controller_loader.load("GstController")
     end
   end
 
