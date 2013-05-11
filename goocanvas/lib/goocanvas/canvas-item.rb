@@ -16,19 +16,6 @@
 
 module Goo
   module CanvasItem
-    def initialize(*args, &block)
-      super
-      parent.add_child_reference(self) if parent
-    end
-
-    alias_method :add_child_raw, :add_child
-    private :add_child_raw
-    def add_child(child)
-      result = add_child_raw(child)
-      add_child_reference(child)
-      result
-    end
-
     alias_method :remove_child_raw, :remove_child
     private :remove_child_raw
     def remove_child(child_or_position)
@@ -39,20 +26,7 @@ module Goo
         position = child_or_position
         child = get_child(position)
       end
-      result = remove_child_raw(position)
-      remove_child_reference(child)
-      result
-    end
-
-    protected
-    def add_child_reference(child)
-      @children ||= []
-      @children << child
-    end
-
-    def remove_child_reference(child)
-      @children ||= []
-      @children.delete(child)
+      remove_child_raw(position)
     end
   end
 end

@@ -34,8 +34,25 @@ rgoo_canvas_mark(gpointer object)
     }
 }
 
+static void
+rgoo_canvas_item_mark(gpointer object)
+{
+    GooCanvasItem *item = object;
+    gint i, n_children;
+
+    rbgobj_gc_mark_instance(object);
+
+    n_children = goo_canvas_item_get_n_children(item);
+    for (i = 0; i < n_children; i++) {
+        GooCanvasItem *child;
+        child = goo_canvas_item_get_child(item, i);
+        rbgobj_gc_mark_instance(child);
+    }
+}
+
 void
 Init_goocanvas(void)
 {
     rbgobj_register_mark_func(GOO_TYPE_CANVAS, rgoo_canvas_mark);
+    rbgobj_register_mark_func(GOO_TYPE_CANVAS_ITEM, rgoo_canvas_item_mark);
 }
