@@ -28,11 +28,8 @@ Goo.init
 # the values behind the comments are the ones used in the C version
 # but as with them it takes more than 20 sec on my computer for the window
 # to show upm I decreased them a little
-# NOTE: Because it was slow, I lowered it.
-#N_GROUP_COLS = 15 #25
-N_GROUP_COLS = 10 #25
-#N_GROUP_ROWS = 10 #20
-N_GROUP_ROWS = 5 #20
+N_GROUP_COLS = 15 #25
+N_GROUP_ROWS = 10 #20
 N_COLS = 10
 N_ROWS = 10
 
