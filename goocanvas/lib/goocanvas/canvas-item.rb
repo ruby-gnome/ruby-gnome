@@ -18,7 +18,7 @@ module Goo
   module CanvasItem
     def initialize(*args, &block)
       super
-      parent.__send__(:add_child_reference, self) if parent
+      parent.add_child_reference(self) if parent
     end
 
     alias_method :add_child_raw, :add_child
@@ -44,7 +44,7 @@ module Goo
       result
     end
 
-    private
+    protected
     def add_child_reference(child)
       @children ||= []
       @children << child
