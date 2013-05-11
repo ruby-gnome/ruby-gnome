@@ -308,6 +308,36 @@ rbgobj_define_class(GType gtype, const gchar *name, VALUE module,
     return cinfo->klass;
 }
 
+void
+rbgobj_register_mark_func(GType gtype, RGMarkFunc mark)
+{
+    RGObjClassInfo *cinfo;
+
+    cinfo =
+        (RGObjClassInfo *)rbgobj_lookup_class_by_gtype_full(gtype, Qnil, FALSE);
+    if (!cinfo) {
+        rb_raise(rb_eArgError,
+                 "rbgobj_register_free_func(): no class is defined: <%s>",
+                 g_type_name(gtype));
+    }
+    cinfo->mark = mark;
+}
+
+void
+rbgobj_register_free_func(GType gtype, RGFreeFunc free)
+{
+    RGObjClassInfo *cinfo;
+
+    cinfo =
+        (RGObjClassInfo *)rbgobj_lookup_class_by_gtype_full(gtype, Qnil, FALSE);
+    if (!cinfo) {
+        rb_raise(rb_eArgError,
+                 "rbgobj_register_free_func(): no class is defined: <%s>",
+                 g_type_name(gtype));
+    }
+    cinfo->free = free;
+}
+
 VALUE
 rbgobj_define_class_dynamic(const gchar *gtype_name, const gchar *name,
                             VALUE module, RGMarkFunc mark, RGFreeFunc free)

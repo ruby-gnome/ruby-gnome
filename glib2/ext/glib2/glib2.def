@@ -11,6 +11,8 @@ EXPORTS
 	rbgobj_remove_relative_all
 	rbgobj_define_class
 	rbgobj_define_class_dynamic
+	rbgobj_register_mark_func
+	rbgobj_register_free_func
 	rbgobj_instance_from_ruby_object
 	rbgobj_ruby_object_from_instance
 	rbgobj_ruby_object_from_instance2

@@ -184,6 +184,8 @@ extern void rbgobj_register_class(VALUE klass,
                                   GType gtype,
                                   gboolean klass2gtype,
                                   gboolean gtype2klass);
+extern void rbgobj_register_mark_func(GType gtype, RGMarkFunc mark);
+extern void rbgobj_register_free_func(GType gtype, RGFreeFunc free);
 extern VALUE rbgobj_cType;
 extern VALUE rbgobj_gtype_new(GType gtype);
 extern GType rbgobj_gtype_get(VALUE obj);
