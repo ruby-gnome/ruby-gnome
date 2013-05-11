@@ -22,6 +22,15 @@ vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
 
+if vendor_dir.exist?
+  begin
+    require "gobject-introspection"
+    vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+    GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
+  rescue LoadError
+  end
+end
+
 module Goo
   LOG_DOMAIN = "GooCanvas"
   GLib::Log.set_log_domain(LOG_DOMAIN)
