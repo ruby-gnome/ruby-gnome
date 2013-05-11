@@ -167,7 +167,9 @@ scrolled_win = Gtk::ScrolledWindow.new
 scrolled_win.show
 window.add(scrolled_win)
 
+GC.disable
 canvas = create_canvas
 scrolled_win.add(canvas)
+GC.enable
 
 Gtk.main
