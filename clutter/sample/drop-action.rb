@@ -73,11 +73,11 @@ add_drag_object = lambda do |target|
 
     action = Clutter::DragAction.new
     action.signal_connect("drag-begin") do |_action, _actor, event_x, event_y, modifiers|
-      position = _actor.position
+      x, y = _actor.position
       handle = Clutter::Actor.new
       handle.background_color = Clutter::Color.new(:sky_blue_dark)
       handle.set_size(128, 128)
-      handle.set_position(event_x - position.x, event_y - position.y)
+      handle.set_position(event_x - x, event_y - y)
       stage.add_child(handle)
 
       _action.drag_handle = handle
