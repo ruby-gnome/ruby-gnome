@@ -22,7 +22,10 @@ module Clutter
           name = args[0]
           get_static(name)
         else
-          super
+          if args.empty?
+            args = [0, 0, 0, 1] unless private_method_defined?(:initialize_alloc)
+          end
+          super(*args)
         end
       end
 
