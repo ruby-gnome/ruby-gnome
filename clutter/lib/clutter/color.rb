@@ -16,6 +16,10 @@
 
 module Clutter
   class Color
+    private_class_method(:from_hls)    if respond_to?(:from_hls)
+    private_class_method(:from_pixel)  if respond_to?(:from_pixel)
+    private_class_method(:from_string) if respond_to?(:from_string)
+
     class << self
       def new(*args)
         if [Symbol] == args.collect(&:class)
@@ -42,21 +46,36 @@ module Clutter
       end
 
       def hlsa(hue, luminance, saturation, alpha)
-        color = new
-        color.from_hls(hue, luminance, saturation)
+        if respond_to?(:from_hls, true)
+          color = from_hls(hue, luminance, saturation)
+        else
+          color = new
+          color.from_hls(hue, luminance, saturation)
+        end
         color.alpha = alpha
         color
       end
 
       def pixel(pixel)
-        color = new
-        color.from_pixel(pixel)
+        if respond_to?(:from_pixel, true)
+          color = from_pixel(pixel)
+        else
+          color = new
+          color.from_pixel(pixel)
+        end
         color
       end
 
       def parse(string)
-        color = new
-        color.from_string(string)
+        if respond_to?(:from_string, true)
+          succeeded, color = from_string(string)
+        else
+          color = new
+          succeeded = color.from_string(string)
+        end
+        unless succeeded
+          raise ArgumentError, "invalid color string: <#{string}>"
+        end
         color
       end
     end
