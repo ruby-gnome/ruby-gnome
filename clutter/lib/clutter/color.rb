@@ -53,6 +53,12 @@ module Clutter
         color.from_pixel(pixel)
         color
       end
+
+      def parse(string)
+        color = new
+        color.from_string(string)
+        color
+      end
     end
   end
 end
