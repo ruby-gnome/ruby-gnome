@@ -273,6 +273,66 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
     return rb_argument;
 }
 
+static void
+rb_gi_out_argument_init_interface(GIArgument *argument, GIArgInfo *arg_info,
+                                  GITypeInfo *type_info)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    if (!g_arg_info_is_caller_allocates(arg_info)) {
+        argument->v_pointer = ALLOC(gpointer);
+        return;
+    }
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+
+    switch (interface_type) {
+      case GI_INFO_TYPE_INVALID:
+      case GI_INFO_TYPE_FUNCTION:
+      case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(interface)[%s] for output",
+                 g_info_type_to_string(interface_type));
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        {
+            gsize struct_size;
+
+            struct_size = g_struct_info_get_size(interface_info);
+            argument->v_pointer = xmalloc(struct_size);
+            memset(argument->v_pointer, 0, struct_size);
+        }
+        break;
+      case GI_INFO_TYPE_BOXED:
+      case GI_INFO_TYPE_ENUM:
+      case GI_INFO_TYPE_FLAGS:
+      case GI_INFO_TYPE_OBJECT:
+      case GI_INFO_TYPE_INTERFACE:
+      case GI_INFO_TYPE_CONSTANT:
+      case GI_INFO_TYPE_INVALID_0:
+      case GI_INFO_TYPE_UNION:
+      case GI_INFO_TYPE_VALUE:
+      case GI_INFO_TYPE_SIGNAL:
+      case GI_INFO_TYPE_VFUNC:
+      case GI_INFO_TYPE_PROPERTY:
+      case GI_INFO_TYPE_FIELD:
+      case GI_INFO_TYPE_ARG:
+      case GI_INFO_TYPE_TYPE:
+      case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: allocates GIArgument(interface)[%s] for output",
+                 g_info_type_to_string(interface_type));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    g_base_info_unref(interface_info);
+}
+
 void
 rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
 {
@@ -330,7 +390,7 @@ rb_gi_out_argument_init(GIArgument *argument, GIArgInfo *arg_info)
         argument->v_pointer = ALLOC(gpointer);
         break;
       case GI_TYPE_TAG_INTERFACE:
-        argument->v_pointer = ALLOC(gpointer);
+        rb_gi_out_argument_init_interface(argument, arg_info, &type_info);
         break;
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
@@ -408,7 +468,11 @@ rb_gi_out_argument_to_ruby(GIArgument *argument, GIArgInfo *arg_info)
       case GI_TYPE_TAG_GLIST:
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
-        normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
+        if (g_arg_info_is_caller_allocates(arg_info)) {
+            normalized_argument.v_pointer = argument->v_pointer;
+        } else {
+            normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
+        }
         break;
       case GI_TYPE_TAG_ERROR:
         normalized_argument.v_pointer = *((GError **)(argument->v_pointer));

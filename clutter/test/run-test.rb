@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -29,7 +29,7 @@ modules = [
   [clutter_base, "clutter"],
 ]
 modules.each do |target, module_name|
-  if system("which make > /dev/null")
+  if File.exist?("Makefile") and system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
@@ -39,6 +39,8 @@ end
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
 
+$VERBOSE = false # TODO: remove me
+
 $LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
 require "gobject-introspection-test-utils"
 
@@ -47,4 +49,6 @@ require "clutter-test-utils"
 
 require "clutter"
 
-exit Test::Unit::AutoRunner.run(true)
+Clutter.init([])
+
+exit Test::Unit::AutoRunner.run(true, clutter_base)

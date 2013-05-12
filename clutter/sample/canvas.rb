@@ -43,7 +43,8 @@ actor.add_constraint(Clutter::BindConstraint.new(stage, :size, 0))
 idle_resize_id = nil
 actor.signal_connect("allocation-changed") do |_actor, allocation, flags|
   idle_resize_id ||= Clutter::Threads.add_timeout(1000) do
-    _actor.content.set_size(_actor.width.ceil, _actor.height.ceil)
+    width, height = _actor.size
+    _actor.content.set_size(width.ceil, height.ceil)
     idle_resize_id = nil
     GLib::Source::REMOVE
   end
