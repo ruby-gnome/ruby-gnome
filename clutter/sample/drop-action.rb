@@ -138,14 +138,14 @@ add_drag_object = lambda do |target|
     parent.remove_child(drag)
 
     parent.save_easing_state do
-      parent.easing_mode :linear
+      parent.easing_mode = :linear
       parent.opacity = 64
     end
   end
   target.add_child(drag)
 
   target.save_easing_state do
-    target.easing_mode :linear
+    target.easing_mode = :linear
     target.opacity = 255
   end
 end
