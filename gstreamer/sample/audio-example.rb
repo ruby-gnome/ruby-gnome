@@ -64,7 +64,6 @@ cs2.set(6 * Gst::SECOND,  440.0 / 20000.0)
 
 # run for 7 seconds
 clock_id = clock.new_single_shot_id(clock.time + (7 * Gst::SECOND))
-raise "single shot clock id: nil" if clock_id.nil?
 bin.play
 wait_ret, jitter = Gst::Clock.id_wait(clock_id)
 $stderr.puts "Clock::id_wait returned: #{wait_ret}" if wait_ret != Gst::ClockReturn::OK
