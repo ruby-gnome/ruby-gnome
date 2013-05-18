@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -23,6 +23,18 @@
 
 #define RG_TARGET_NAMESPACE cFontMap
 #define _SELF(self) (RVAL2PANGOFONTMAP(self))
+
+#ifdef CAIRO_AVAILABLE
+#  ifdef HAVE_PANGO_FT2
+#    define PANGO_TYPE_CAIRO_FC_FONT_MAP \
+    (pango_cairo_fc_font_map_get_type())
+#  endif
+
+#  ifdef HAVE_PANGO_WIN32
+#    define PANGO_TYPE_CAIRO_WIN32_FONT_MAP \
+      (pango_cairo_win32_font_map_get_type())
+#  endif
+#endif
 
 /*
 static VALUE
@@ -100,7 +112,15 @@ Init_pango_font_map(VALUE mPango)
     G_DEF_CLASS3("PangoXFontMap", "XFontMap", mPango);
     G_DEF_CLASS3("PangoWin32FontMap", "Win32FontMap", mPango);
     G_DEF_CLASS3("PangoCoreTextFontMap", "CoreTextFontMap", mPango);
+#ifdef PANGO_TYPE_CAIRO_FC_FONT_MAP
+    G_DEF_CLASS(PANGO_TYPE_CAIRO_FC_FONT_MAP, "CairoFcFontMap", mPango);
+#else
     G_DEF_CLASS3("PangoCairoFcFontMap", "CairoFcFontMap", mPango);
+#endif
+#ifdef PANGO_TYPE_CAIRO_WIN32_FONT_MAP
+    G_DEF_CLASS(PANGO_TYPE_CAIRO_WIN32_FONT_MAP, "CairoWin32FontMap", mPango);
+#else
     G_DEF_CLASS3("PangoCairoWin32FontMap", "CairoWin32FontMap", mPango);
+#endif
     G_DEF_CLASS3("PangoCairoCoreTextFontMap", "CairoCoreTextFontMap", mPango);
 }

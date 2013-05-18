@@ -67,6 +67,13 @@ unless required_pkg_config_package(package_id,
 end
 PKGConfig.have_package('pangocairo')
 
+if PKGConfig.have_package("pangowin32")
+  $defs << " -DHAVE_PANGO_WIN32"
+end
+if PKGConfig.have_package("pangoft2")
+  $defs << " -DHAVE_PANGO_FT2"
+end
+
 pango_header = "pango/pango.h"
 have_func("pango_layout_iter_get_type", pango_header)
 have_func("pango_layout_set_ellipsize", pango_header)
