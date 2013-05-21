@@ -31,8 +31,6 @@
 
 require "gst"
 
-Gst.init
-
 bin = Gst::Pipeline.new("pipeline")
 clock = bin.clock
 src = Gst::ElementFactory.make("videotestsrc", nil)

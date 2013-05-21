@@ -63,8 +63,6 @@ def gst_time(time)
   Time.at(time / 1000000000.0).utc.strftime("%H:%M:%S.%N")
 end
 
-Gst.init
-
 # create a new bin to hold the elements
 bin = Gst::Pipeline.new("pipeline")
 raise "'pipeline' gstreamer plugin missing" if bin.nil?

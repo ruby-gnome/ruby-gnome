@@ -35,6 +35,15 @@ module Gst
 
   @initialized = false
   class << self
+    def const_missing(name)
+      init()
+      if const_defined?(name)
+        const_get(name)
+      else
+        super
+      end
+    end
+
     def init(*argv)
       return if @initialized
       @initialized = true
@@ -45,6 +54,9 @@ module Gst
       require "gst/element"
       init_base
       init_controller
+      singleton_class = class << self; self; end
+      singleton_class.send(:remove_method, :init)
+      singleton_class.send(:remove_method, :const_missing)
     end
 
     private

@@ -46,8 +46,6 @@ def event_loop(bus, pipe)
 
 end
 
-Gst.init
-
 # create a new bin to hold the elements
 bin = Gst::Pipeline.new("pipeline")
 raise "'pipeline' gstreamer plugin missing" if bin.nil?
