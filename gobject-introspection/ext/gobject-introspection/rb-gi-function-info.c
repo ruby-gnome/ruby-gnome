@@ -333,8 +333,7 @@ source_func_callback_finder(GIArgInfo *arg_info)
 }
 
 static void
-in_callback_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv,
-                               GArray *in_args)
+in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
 {
     gpointer callback;
     GIArgInfo *arg_info;
@@ -385,21 +384,26 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv,
 }
 
 static void
-in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE *argv, GArray *in_args)
+in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
+                      GArray *in_args)
 {
     if (metadata->rb_arg_index == -1) {
         return;
     }
 
     if (metadata->callback_p) {
-        in_callback_argument_from_ruby(metadata, argv, in_args);
+        in_callback_argument_from_ruby(metadata, in_args);
     } else {
         GIArgument *argument;
+        VALUE rb_argument = Qnil;
 
+        if (RARRAY_LEN(rb_arguments) > metadata->rb_arg_index) {
+            rb_argument = RARRAY_PTR(rb_arguments)[metadata->rb_arg_index];
+        }
         argument = &(g_array_index(in_args, GIArgument, metadata->in_arg_index));
         RVAL2GI_IN_ARGUMENT(argument,
                             &(metadata->arg_info),
-                            argv[metadata->rb_arg_index]);
+                            rb_argument);
     }
 }
 
@@ -429,14 +433,9 @@ arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
                     GPtrArray *args_metadata)
 {
     gint i, n_args;
-    VALUE *argv;
 
     allocate_arguments(info, in_args, out_args, args_metadata);
     fill_metadata(args_metadata);
-
-    /* TODO: validate_rb_args(args_metadata); */
-
-    argv = RARRAY_PTR(rb_arguments);
 
     n_args = g_callable_info_get_n_args(info);
     for (i = 0; i < n_args; i++) {
@@ -444,7 +443,7 @@ arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
 
         metadata = g_ptr_array_index(args_metadata, i);
         if (metadata->in_arg_index != -1) {
-            in_argument_from_ruby(metadata, argv, in_args);
+            in_argument_from_ruby(metadata, rb_arguments, in_args);
         } else {
             out_argument_from_ruby(metadata, out_args);
         }
