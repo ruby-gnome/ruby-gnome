@@ -54,9 +54,10 @@ module Gst
       require "gst/element"
       init_base
       init_controller
-      singleton_class = class << self; self; end
-      singleton_class.send(:remove_method, :init)
-      singleton_class.send(:remove_method, :const_missing)
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
     end
 
     private
