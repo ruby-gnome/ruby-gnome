@@ -114,6 +114,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     }
   ]
+  package.cross_compiling do |spec|
+    if /mingw|mswin/ =~ spec.platform.to_s
+      spec.add_runtime_dependency("atk", "= #{package.version}")
+      spec.add_runtime_dependency("pango", "= #{package.version}")
+      spec.add_runtime_dependency("gdk_pixbuf2", "= #{package.version}")
+    end
+  end
 end
 package_task.define
 
