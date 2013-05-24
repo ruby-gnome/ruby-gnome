@@ -34,11 +34,17 @@ module Clutter
   LOG_DOMAIN = "Clutter"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  @initialized = false
   class << self
+    def const_missing(name)
+      init()
+      if const_defined?(name)
+        const_get(name)
+      else
+        super
+      end
+    end
+
     def init(argv=ARGV)
-      return if @initialized
-      @initialized = true
       loader = Loader.new(self, argv)
       loader.load("Clutter")
       require "clutter/actor"
@@ -50,6 +56,10 @@ module Clutter
       require "clutter/point"
       require "clutter/text"
       require "clutter/threads"
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
     end
   end
 
