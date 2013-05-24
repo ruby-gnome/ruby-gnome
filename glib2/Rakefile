@@ -51,7 +51,7 @@ package = GNOME2Package.new do |_package|
       :name => "nettle",
       :download_base_url => "http://www.lysator.liu.se/~nisse/archive",
       :label => "Nettle",
-      :version => "2.5",
+      :version => "2.7",
       :windows => {
         :configure_args => [],
       },
