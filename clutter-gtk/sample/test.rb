@@ -26,8 +26,6 @@
 require "clutter-gtk"
 require "gdk_pixbuf2"
 
-ClutterGtk.init
-
 N_HANDS       = 4
 WINDOW_WIDTH  = 400
 WINDOW_HEIGHT = 400

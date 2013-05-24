@@ -28,8 +28,6 @@
 require "clutter-gtk"
 require "gdk_pixbuf2"
 
-ClutterGtk.init
-
 window = ClutterGtk::Window.new
 window.signal_connect("destroy") do
   Gtk.main_quit

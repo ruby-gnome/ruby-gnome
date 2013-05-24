@@ -28,8 +28,6 @@
 require "clutter-gtk"
 require "gdk_pixbuf2"
 
-ClutterGtk.init
-
 window = ClutterGtk::Window.new
 
 table = Gtk::Grid.new

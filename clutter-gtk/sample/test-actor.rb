@@ -22,8 +22,6 @@
 
 require "clutter-gtk"
 
-ClutterGtk.init
-
 MAX_N_WIDGETS = 4
 WINDOW_WIDTH  = 400
 WINDOW_HEIGHT = 400

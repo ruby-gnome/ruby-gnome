@@ -23,8 +23,6 @@
 require "clutter-gtk"
 require "gdk_pixbuf2"
 
-ClutterGtk.init
-
 window = Gtk::Window.new
 window.set_default_size(600, 400)
 window.title = "Multiple GtkClutterEmbed"
