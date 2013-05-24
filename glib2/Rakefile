@@ -31,6 +31,7 @@ package = GNOME2Package.new do |_package|
           "LIBFFI_LIBS=-L#{libffi_lib_dir} -lffi",
           "--disable-modular-tests",
         ],
+        :need_autoreconf => true,
       },
     },
     {

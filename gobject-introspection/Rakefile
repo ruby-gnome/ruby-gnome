@@ -42,6 +42,7 @@ package_task = GNOME2::Rake::PackageTask.new do |_package|
       :native => {
         :build => true,
       },
+      :need_autoreconf => true,
     },
     {
       :name => "gobject-introspection",
