@@ -133,6 +133,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "gtksourceview3",
   "clutter",
   "clutter-gtk",
+  "clutter-gstreamer",
   "webkit-gtk",
   "webkit-gtk2",
 ]
