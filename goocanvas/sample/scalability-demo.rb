@@ -23,8 +23,6 @@
 
 require "goocanvas"
 
-Goo.init
-
 # the values behind the comments are the ones used in the C version
 # but as with them it takes more than 20 sec on my computer for the window
 # to show upm I decreased them a little

@@ -23,8 +23,6 @@
 
 require "goocanvas"
 
-Goo.init
-
 num_added_widgets = 0
 added_widget_items = []
 canvas = nil

@@ -23,8 +23,6 @@
 
 require 'goocanvas'
 
-Goo.init
-
 # Create the window and widgets.
 window = Gtk::Window.new(:toplevel)
 window.set_default_size(640, 600)

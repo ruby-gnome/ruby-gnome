@@ -23,8 +23,6 @@
 
 require "goocanvas"
 
-Goo.init
-
 DEMO_RECT_ITEM = 0
 DEMO_TEXT_ITEM = 1
 DEMO_WIDGET_ITEM = 2
