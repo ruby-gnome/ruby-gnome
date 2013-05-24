@@ -2,6 +2,113 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.0.1: 2013-05-25
+
+Ruby 1.8 support is dropped release!
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Dropped Ruby 1.8 support.
+    * Updated bundled binaries versions for Windows.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Added Pango::CairoFontMap.set_default.
+    * Enabled fontconfig font on Windows.
+    * Defined Pango::CairoFcFontMap on init if it is available.
+    * Defined Pango::CairoWin32FontMap on init if it is available.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Added Gtk::Image#set_from_icon_set.
+      [GitHub#150] [Patch by Detlef Reichl]
+    * Added Gtk::Image#set_from_stock.
+      [GitHub#150] [Patch by Detlef Reichl]
+    * Added Gtk::Image#set_from_gicon.
+      [GitHub#150] [Patch by Detlef Reichl]
+    * Updated samples.
+      [GitHUb#151] [Patch by Detlef Reichl]
+  * Fixes
+    * Fixed a GC related crash bug.
+      [ruby-gnome2-devel-en] [Reported by Detlef Reichl]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported ownership transfer for some input argument types.
+      (Struct and Object)
+    * Supported "(out caller-allocates)" for boxed object.
+      [ruby-gnome2-devel-ja] [Reported by Kentaro Fukuchi]
+    * Supported gpointer in/out.
+      [ruby-gnome2-devel-ja] [Reported by NAKAJIMA Takashi]
+  * Fixes
+    * Fixed missing argument.
+      [GitHub#154] [Reported by Masafumi Yokoyama]
+
+==== RubyGStreamer
+
+  * Improvements
+    * Supported methods that call callback
+      [ruby-gnome2-devel-ja] [Reported by NAKAJIMA Takashi]
+    * Updated samples.
+      [GitHub#156][GitHub#159][GitHub#160][GitHub#161]
+      [Patch by NAKAJIMA Takashi]
+    * Supported Gst::Bus#set_handler.
+      [ruby-gnome2-devel-ja] [Reported by NAKAJIMA Takashi]
+    * Supported Gst::Controller
+      [ruby-gnome2-devel-ja] [Suggested by NAKAJIMA Takashi]
+    * Stopped to require Gst.init.
+  * Fixes
+    * Fixed out of index access bug.
+
+==== Ruby/GooCanvas
+
+  * Improvements
+    * Migrated to Ruby/GObjectIntrospection based bindings.
+    * Stopped to require Goo.init.
+  * Fixes
+    * Updated samples.
+      [GitHub#152][GitHub#153][GitHub#155][GitHub#157]
+      [Patch by Masafumi Yokoyama]
+
+==== Ruby/Clutter
+
+  * Improvements
+    * Stopped to require Clutter.init.
+  * Fixes
+    * Fixed broken samples.
+      [ruby-gnome2-devel-ja] [Patch by Kentaro Fukuchi]
+
+==== Ruby/ClutterGtk
+
+  * Improvements
+    * Stopped to require ClutterGtk.init.
+
+==== Ruby/ClutterGStreamer
+
+  * Added.
+
+==== Ruby/WebKitGtk
+
+  * Improvements
+    * Stopped to require WebKitGtk.init.
+
+==== Ruby/WebKitGtk2
+
+  * Improvements
+    * Stopped to require WebKitGtk2.init.
+
+=== Thanks
+
+  * Detlef Reichl
+  * NAKAJIMA Takashi
+  * Masafumi Yokoyama
+
 == Ruby-GNOME2 2.0.0: 2013-04-29
 
 GObject Introspection based bindings on Windows support release!
