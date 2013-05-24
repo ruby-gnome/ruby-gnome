@@ -22,8 +22,6 @@
 
 require "clutter"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.title = "2D Clock"
 stage.user_resizable = true

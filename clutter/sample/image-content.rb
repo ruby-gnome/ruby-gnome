@@ -25,8 +25,6 @@
 require "clutter"
 require "gdk_pixbuf2"
 
-Clutter.init
-
 gravities = Clutter::ContentGravity.values
 current_gravity_index = gravities.size - 1
 

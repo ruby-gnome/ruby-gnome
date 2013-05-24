@@ -22,8 +22,6 @@
 
 require "clutter"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.name = "stage"
 stage.title = "Snap Constraint"

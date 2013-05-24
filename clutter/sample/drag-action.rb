@@ -24,8 +24,6 @@ require "optparse"
 
 require "clutter"
 
-Clutter.init
-
 drag_axis = :none
 x_drag_threshold = 0
 y_drag_threshold = 0

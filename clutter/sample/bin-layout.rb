@@ -25,8 +25,6 @@
 require "clutter"
 require "gdk_pixbuf2"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.title = "BinLayout"
 stage.background_color = Clutter::Color.get_static(:aluminium_2)

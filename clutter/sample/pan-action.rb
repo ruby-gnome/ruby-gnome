@@ -25,8 +25,6 @@
 require "clutter"
 require "gdk_pixbuf2"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.name = "Pan Action"
 stage.user_resizable = true
