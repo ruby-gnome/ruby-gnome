@@ -37,7 +37,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "gtksourceview",
       :download_site => :gnome,
       :label => "GtkSourceView",
-      :version => "3.6.3",
+      :version => "3.8.1",
       :compression_method => "xz",
     }
   ]
