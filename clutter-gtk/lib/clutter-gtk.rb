@@ -38,7 +38,7 @@ module ClutterGtk
       end
     end
 
-    def init(argv=ARGV)
+    def init(argv=[])
       loader = Loader.new(self, argv)
       loader.load("GtkClutter")
       Clutter.init(argv)
