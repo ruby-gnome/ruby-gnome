@@ -58,9 +58,9 @@ package = GNOME2Package.new do |_package|
     },
     {
       :name => "gnutls",
-      :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2",
+      :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.1",
       :label => "GnuTLS",
-      :version => "3.2.0",
+      :version => "3.1.11",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
