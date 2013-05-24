@@ -28,11 +28,16 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
+    "gdk_pixbuf2",
+    "atk",
+    "pango",
     "gobject-introspection",
     "clutter",
     "gstreamer",
   ]
   package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "pango",
     "clutter",
     "gstreamer",
   ]
