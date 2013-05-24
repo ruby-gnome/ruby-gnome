@@ -41,7 +41,9 @@ package = GNOME2Package.new do |_package|
       :label => "Theora",
       :version => "1.1.1",
       :windows => {
-        :configure_args => [],
+        :configure_args => [
+          "--disable-examples"
+        ],
         :build_concurrently => false,
       },
     },
