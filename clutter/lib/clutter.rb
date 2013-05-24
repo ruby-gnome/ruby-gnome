@@ -44,7 +44,7 @@ module Clutter
       end
     end
 
-    def init(argv=ARGV)
+    def init(argv=[])
       loader = Loader.new(self, argv)
       loader.load("Clutter")
       require "clutter/actor"
