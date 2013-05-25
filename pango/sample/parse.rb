@@ -10,7 +10,7 @@
 
 require 'pango'
 
-str = File.readlines("sample.txt").to_s
+str = File.read("sample.txt")
 puts str
 puts "------"
 
