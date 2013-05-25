@@ -31,7 +31,7 @@ items.each do |v|
   ana = v.analysis
   puts "shape_engine = #{ana.shape_engine}, lang_engine = #{ana.lang_engine}, font = #{ana.font}, level = #{ana.level}"
   puts "language = #{ana.language}"
-  p ana.font.get_glyph_extents("a".codepoints.to_a[0])[0].to_a
+  p ana.font.get_glyph_extents("a".codepoints.first)[0].to_a
   ana.set_extra_attrs(attrs)
   p ana.extra_attrs
 end
