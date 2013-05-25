@@ -234,7 +234,7 @@ module GNOME2
 
           def append_version(dependency)
             name, *ver = dependency.is_a?(Array) ? dependency : [dependency]
-            ver << ">= #{@package.version}" if @package.ruby_gnome2_package?(name)
+            ver << "= #{@package.version}" if @package.ruby_gnome2_package?(name)
             [name, *ver]
           end
         end

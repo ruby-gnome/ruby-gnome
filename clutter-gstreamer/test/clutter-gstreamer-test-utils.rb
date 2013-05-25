@@ -14,35 +14,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
-require "gtk3"
+require "test-unit"
+require "test/unit/notify"
 
-base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
-vendor_dir = base_dir + "vendor" + "local"
-vendor_bin_dir = vendor_dir + "bin"
-GLib.prepend_dll_path(vendor_bin_dir)
-
-module WebKitGtk
-  class << self
-    def const_missing(name)
-      init
-      if const_defined?(name)
-        const_get(name)
-      else
-        super
-      end
-    end
-
-    def init
-      loader = Loader.new(self)
-      loader.load("WebKit")
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
-      end
-    end
-  end
-
-  class Loader < GObjectIntrospection::Loader
-  end
+module ClutterGStreamerTestUtils
 end

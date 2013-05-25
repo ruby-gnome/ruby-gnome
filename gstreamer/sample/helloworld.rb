@@ -28,8 +28,6 @@ if ARGV.length < 1
   exit(false)
 end
 
-Gst.init
-
 playbin = Gst::ElementFactory.make("playbin")
 if playbin.nil?
   puts "'playbin' gstreamer plugin missing"

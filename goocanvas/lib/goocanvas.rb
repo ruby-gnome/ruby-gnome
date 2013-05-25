@@ -35,11 +35,17 @@ module Goo
   LOG_DOMAIN = "GooCanvas"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  @initialized = false
   class << self
+    def const_missing(name)
+      init
+      if const_defined?(name)
+        const_get(name)
+      else
+        super
+      end
+    end
+
     def init
-      return if @initialized
-      @initialized = true
       loader = Loader.new(self)
       loader.load("GooCanvas")
       begin
@@ -49,6 +55,10 @@ module Goo
         require "goocanvas.so"
       end
       require "goo/canvas-item"
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
     end
   end
 

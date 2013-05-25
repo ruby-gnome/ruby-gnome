@@ -38,8 +38,6 @@ require "optparse"
 
 require "clutter"
 
-Clutter.init
-
 random_size_p    = false
 random_align_p   = false
 default_expand_p = true

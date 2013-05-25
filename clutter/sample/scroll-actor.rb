@@ -22,8 +22,6 @@
 
 require "clutter"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.title = "Scroll Actor"
 stage.user_resizable = true

@@ -6,24 +6,50 @@ require "gnome2/rake/package-task"
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/Pango is a Ruby binding of pango-1.x."
   package.description = "Ruby/Pango is a Ruby binding of pango-1.x."
-  package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "glib2"]
+  package.dependency.gem.runtime = [["cairo", ">= 1.12.5"], "glib2"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = ["glib2", "gobject-introspection"]
   package.external_packages = [
     {
+      :name => "harfbuzz",
+      :download_base_url => "http://www.freedesktop.org/software/harfbuzz/release",
+      :label => "HarfBuzz",
+      :version => "0.9.17",
+      :compression_method => "bz2",
+    },
+    {
       :name => "pango",
       :download_site => :gnome,
       :label => "pango",
-      :version => "1.34.0",
+      :version => "1.34.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
           "--enable-introspection",
         ],
+        :patches => [
+          "pango-1.34.0-enable-fc-font.diff",
+        ],
       },
-    }
+    },
   ]
 end
 package_task.define
 
+namespace :gcc do
+  namespace :dll do
+    desc "Bundle GCC related DLLs"
+    task(:bundle) do
+      dlls = ["libgcc_s_sjlj-1.dll", "libstdc++-6.dll"]
+      dlls.each do |dll|
+        host = package_task.windows.build_host
+        binary_dir = package_task.windows.absolute_binary_dir
+        full_path = `#{host}-g++ -print-file-name=#{dll}`.strip
+        cp(full_path, (binary_dir + "bin").to_s)
+      end
+    end
+  end
+end
+
+task "win32:builder:build:harfbuzz:after" => "gcc:dll:bundle"

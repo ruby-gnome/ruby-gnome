@@ -92,7 +92,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "json-glib",
       :download_site => :gnome,
       :label => "JSON-GLib",
-      :version => "0.14.2",
+      :version => "0.16.0",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -104,7 +104,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "clutter",
       :download_site => :gnome,
       :label => "Clutter",
-      :version => "1.14.0",
+      :version => "1.14.4",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -114,6 +114,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     }
   ]
+  package.cross_compiling do |spec|
+    if /mingw|mswin/ =~ spec.platform.to_s
+      spec.add_runtime_dependency("atk", "= #{package.version}")
+      spec.add_runtime_dependency("pango", "= #{package.version}")
+      spec.add_runtime_dependency("gdk_pixbuf2", "= #{package.version}")
+    end
+  end
 end
 package_task.define
 

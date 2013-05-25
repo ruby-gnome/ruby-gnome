@@ -22,8 +22,6 @@
 
 require "clutter"
 
-Clutter.init
-
 TARGET_SIZE = 200
 HANDLE_SIZE = 128
 

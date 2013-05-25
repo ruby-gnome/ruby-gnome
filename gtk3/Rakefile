@@ -17,6 +17,5 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.packages = []
   package.windows.dependencies = []
   package.required_ruby_version = ">= 1.9.2"
-  package.post_install_message = "This library is experimental."
 end
 package_task.define

@@ -35,8 +35,6 @@
 
 require "clutter"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.title = "Box Layout"
 stage.user_resizable = true

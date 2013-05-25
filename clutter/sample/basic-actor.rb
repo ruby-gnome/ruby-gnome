@@ -22,8 +22,6 @@
 
 require "clutter"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.signal_connect("destroy") do |*args|
   Clutter.main_quit

@@ -26,8 +26,6 @@
 require "clutter-gtk"
 require "gdk_pixbuf2"
 
-ClutterGtk.init
-
 window = Gtk::Window.new
 window.title = "Gtk-Clutter Interaction demo"
 window.set_default_size(800, 600)

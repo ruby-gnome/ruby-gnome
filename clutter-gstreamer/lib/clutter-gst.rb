@@ -14,15 +14,20 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "gobject-introspection"
-require "gtk3"
+require "clutter"
+require "gst"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
+vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
+GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
-module WebKitGtk
+module ClutterGst
+  LOG_DOMAIN = "Clutter-GStreamer"
+  GLib::Log.set_log_domain(LOG_DOMAIN)
+
   class << self
     def const_missing(name)
       init
@@ -33,9 +38,9 @@ module WebKitGtk
       end
     end
 
-    def init
-      loader = Loader.new(self)
-      loader.load("WebKit")
+    def init(argv=[])
+      loader = Loader.new(self, argv)
+      loader.load("ClutterGst")
       class << self
         remove_method(:init)
         remove_method(:const_missing)
@@ -44,5 +49,29 @@ module WebKitGtk
   end
 
   class Loader < GObjectIntrospection::Loader
+    class InitError < StandardError
+    end
+
+    def initialize(base_module, init_arguments)
+      super(base_module)
+      @init_arguments = init_arguments
+    end
+
+    private
+    def pre_load(repository, namespace)
+      init = repository.find(namespace, "init")
+      arguments = [
+        1 + @init_arguments.size,
+        [$0] + @init_arguments,
+      ]
+      error, argc, argv = init.invoke(arguments)
+      @init_arguments.replace(argv)
+      if error.to_i <= 0
+        raise InitError, "failed to initialize Clutter-GStreamer: #{error.name}"
+      end
+    end
+
+    def post_load(repository, namespace)
+    end
   end
 end

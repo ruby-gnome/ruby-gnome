@@ -33,11 +33,17 @@ module Gst
   LOG_DOMAIN = "GStreamer"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
-  @initialized = false
   class << self
+    def const_missing(name)
+      init()
+      if const_defined?(name)
+        const_get(name)
+      else
+        super
+      end
+    end
+
     def init(*argv)
-      return if @initialized
-      @initialized = true
       loader = Loader.new(self, argv)
       loader.load("Gst")
       require "gst/bin"
@@ -45,6 +51,10 @@ module Gst
       require "gst/element"
       init_base
       init_controller
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
     end
 
     private

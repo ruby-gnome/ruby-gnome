@@ -133,6 +133,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "gtksourceview3",
   "clutter",
   "clutter-gtk",
+  "clutter-gstreamer",
   "webkit-gtk",
   "webkit-gtk2",
 ]
@@ -364,7 +365,12 @@ namespace :gem do
         change_environment_variable("MAKE" => "make debugflags=") do
           win32_gnome2_packages.each do |package|
             Dir.chdir(package) do
-              tasks = ["cross", "native", "gem"]
+              tasks = [
+                "cross",
+                "win32:builder:build:prepare:pkg_config",
+                "native",
+                "gem",
+              ]
               ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
             end
           end

@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,27 +20,51 @@ $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
 package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/GtkSourceView3 is a Ruby binding of gtksourceview-3.x."
-  package.description = "Ruby/GtkSourceView3 is a Ruby binding of gtksourceview-3.x."
-  package.dependency.gem.runtime = ["gtk3"]
+  package.summary = "Ruby/ClutterGStreamer is a Ruby binding of Clutter-GStreamer."
+  package.description = "Ruby/ClutterGStreamer is a Ruby binding of Clutter-GStreamer."
+  package.dependency.gem.runtime = ["clutter", "gstreamer"]
+  package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
-  package.windows.dependencies = ["libxml2"]
+  package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
+    "gdk_pixbuf2",
     "atk",
     "pango",
-    "gdk_pixbuf2",
-    "gdk3",
+    "gobject-introspection",
+    "clutter",
+    "gstreamer",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "pango",
+    "clutter",
+    "gstreamer",
   ]
   package.external_packages = [
     {
-      :name => "gtksourceview",
+      :name => "clutter-gst",
       :download_site => :gnome,
-      :label => "GtkSourceView",
-      :version => "3.8.1",
+      :label => "Clutter-GStreamer",
+      :version => "2.0.2",
       :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+      },
     }
   ]
 end
 package_task.define
 
+Rake::Task["native:clutter-gstreamer:i386-mingw32"].prerequisites.clear
+
+namespace :dependency do
+  desc "Install depenencies"
+  task :install do
+    # TODO: Install gir1.2-clutter-gst-1.0 on Debian.
+  end
+end
+
+task :build => "dependency:install"

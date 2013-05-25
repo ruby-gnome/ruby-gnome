@@ -23,12 +23,22 @@ vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
 
 module WebKitGtk2
-  @initialized = false
   class << self
+    def const_missing(name)
+      init
+      if const_defined?(name)
+        const_get(name)
+      else
+        super
+      end
+    end
+
     def init
-      return if @initialized
-      @initialized = true
       Loader.load("WebKit", self, :version => "1.0")
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
     end
   end
 

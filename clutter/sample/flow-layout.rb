@@ -24,8 +24,6 @@ require "optparse"
 
 require "clutter"
 
-Clutter.init
-
 random_size_p = false
 n_rects       = 20
 vertical_p    = false

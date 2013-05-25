@@ -16,8 +16,6 @@
 
 require "webkit-gtk2"
 
-WebKitGtk2.init
-
 window = Gtk::Window.new
 window.signal_connect("destroy") do
   Gtk.main_quit

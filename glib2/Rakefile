@@ -23,7 +23,7 @@ package = GNOME2Package.new do |_package|
       :name => "glib",
       :download_site => :gnome,
       :label => "GLib",
-      :version => "2.36.0",
+      :version => "2.36.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -31,14 +31,15 @@ package = GNOME2Package.new do |_package|
           "LIBFFI_LIBS=-L#{libffi_lib_dir} -lffi",
           "--disable-modular-tests",
         ],
+        :need_autoreconf => true,
       },
     },
     {
       :name => "gmp",
-      :download_base_url => "ftp://ftp.gmplib.org/pub/gmp-5.1.0",
+      :download_base_url => "ftp://ftp.gmplib.org/pub/gmp-5.1.2",
       :label => "GNU MP",
-      :version => "5.1.0",
-      :compression_method => "bz2",
+      :version => "5.1.2",
+      :compression_method => "xz",
       :windows => {
         :configure_args => [
           "--disable-static",
@@ -50,7 +51,7 @@ package = GNOME2Package.new do |_package|
       :name => "nettle",
       :download_base_url => "http://www.lysator.liu.se/~nisse/archive",
       :label => "Nettle",
-      :version => "2.5",
+      :version => "2.7",
       :windows => {
         :configure_args => [],
       },
@@ -59,7 +60,7 @@ package = GNOME2Package.new do |_package|
       :name => "gnutls",
       :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.1",
       :label => "GnuTLS",
-      :version => "3.1.10",
+      :version => "3.1.11",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -72,7 +73,7 @@ package = GNOME2Package.new do |_package|
       :name => "glib-networking",
       :download_site => :gnome,
       :label => "glib-networking",
-      :version => "2.36.0",
+      :version => "2.36.2",
       :compression_method => "xz",
       :windows => {
         :configure_args => [

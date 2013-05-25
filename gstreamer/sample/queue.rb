@@ -34,7 +34,7 @@ def event_loop(pipe)
   running = true
   bus = pipe.bus
 
-  while running do
+  while running
     message = bus.poll(Gst::MessageType::ANY, -1)
 
     case message.type
@@ -52,8 +52,6 @@ def event_loop(pipe)
     end
   end
 end
-
-Gst.init
 
 if ARGV.length < 1
   puts "usage: #{$0} <filename>"

@@ -39,6 +39,15 @@ rg_s_default(G_GNUC_UNUSED VALUE klass)
     return GOBJ2RVAL(pango_cairo_font_map_get_default());
 }
 
+#  if PANGO_CHECK_VERSION(1, 22, 0)
+static VALUE
+rg_s_set_default(VALUE klass, VALUE font_map)
+{
+    pango_cairo_font_map_set_default(RVAL2GOBJ(font_map));
+    return klass;
+}
+#  endif
+
 static VALUE
 rg_set_resolution(VALUE self, VALUE dpi)
 {
@@ -71,6 +80,9 @@ Init_pango_cairo(VALUE mPango)
 
     RG_DEF_SMETHOD(create, 0);
     RG_DEF_SMETHOD(default, 0);
+#  if PANGO_CHECK_VERSION(1, 22, 0)
+    RG_DEF_SMETHOD(set_default, 1);
+#  endif
 
     RG_DEF_METHOD(set_resolution, 1);
     RG_DEF_METHOD(resolution, 0);

@@ -53,8 +53,6 @@ def event_loop(pipe)
   end
 end
 
-Gst.init
-
 if ARGV.length < 1
   puts "usage: #{$0} <filename>"
   exit(false)

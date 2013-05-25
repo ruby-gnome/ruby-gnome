@@ -22,8 +22,6 @@
 
 require "clutter"
 
-Clutter.init
-
 stage = Clutter::Stage.new
 stage.title = "Rectangle with rounded corners"
 stage.background_color = Clutter::Color.new(:black)

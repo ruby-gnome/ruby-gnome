@@ -24,8 +24,6 @@ require "optparse"
 
 require "clutter"
 
-Clutter.init
-
 duration = 1
 
 parser = OptionParser.new
