@@ -42,7 +42,7 @@ p logical_rect.to_a
 
 item = Pango::Item.new
 item.analysis.font = font
-item.analysis.shape_engine = font.find_shaper(lang, str[0])
+item.analysis.shape_engine = font.find_shaper(lang, str.codepoints.first)
 
 gs = Pango.shape(str, item.analysis)
 
