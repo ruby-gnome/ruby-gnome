@@ -125,13 +125,13 @@ static VALUE
 rg_glyphs(VALUE self)
 {
     int i;
-    PangoGlyphInfo** glyphs = &_SELF(self)->glyphs;
+    PangoGlyphInfo *glyphs = _SELF(self)->glyphs;
     gint* log_clusters = _SELF(self)->log_clusters;
 
     VALUE ret = rb_ary_new();
     for (i = 0; i < _SELF(self)->num_glyphs; i++) {
         rb_ary_push(ret, 
-                    rb_assoc_new(PANGOGLYPHINFO2RVAL(glyphs[i]),
+                    rb_assoc_new(PANGOGLYPHINFO2RVAL(glyphs + i),
                                  INT2NUM(log_clusters[i])));
     }
     return ret;
