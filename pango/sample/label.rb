@@ -9,7 +9,7 @@
 
 require 'gtk2'
 
-str = File.readlines("sample.txt").to_s
+str = File.read("sample.txt")
 attrs, text, accel_char = Pango.parse_markup(str, '$')
 
 #This is same as Gtk::Label#set_markup()
