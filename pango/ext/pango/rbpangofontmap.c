@@ -26,11 +26,13 @@
 
 #ifdef CAIRO_AVAILABLE
 #  ifdef HAVE_PANGO_FT2
+GType pango_cairo_fc_font_map_get_type (void) G_GNUC_CONST;
 #    define PANGO_TYPE_CAIRO_FC_FONT_MAP \
     (pango_cairo_fc_font_map_get_type())
 #  endif
 
 #  ifdef HAVE_PANGO_WIN32
+GType pango_cairo_win32_font_map_get_type (void) G_GNUC_CONST;
 #    define PANGO_TYPE_CAIRO_WIN32_FONT_MAP \
       (pango_cairo_win32_font_map_get_type())
 #  endif
