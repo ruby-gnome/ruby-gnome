@@ -28,9 +28,33 @@
 #define _SELF(self) (RVAL2PANGOCAIROFONTMAP(self))
 
 static VALUE
-rg_s_create(G_GNUC_UNUSED VALUE klass)
+rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 {
-    return GOBJ2RVAL(pango_cairo_font_map_new());
+    VALUE rb_font_type;
+    PangoFontMap *font_map = NULL;
+
+    rb_scan_args(argc, argv, "01", &rb_font_type);
+    if (NIL_P(rb_font_type)) {
+        font_map = pango_cairo_font_map_new();
+    } else {
+        cairo_font_type_t font_type = CAIRO_FONT_TYPE_USER;
+        if (rbgutil_key_equal(rb_font_type, "ft") ||
+            rbgutil_key_equal(rb_font_type, "freetype")) {
+            font_type = CAIRO_FONT_TYPE_FT;
+        } else if (rbgutil_key_equal(rb_font_type, "win32")) {
+            font_type = CAIRO_FONT_TYPE_WIN32;
+        } else if (rbgutil_key_equal(rb_font_type, "quartz")) {
+            font_type = CAIRO_FONT_TYPE_QUARTZ;
+        } else {
+            rb_raise(rb_eArgError,
+                     "font type must be one of "
+                     ":ft, :freetype, :win32 or :quarts: %p",
+                     RBG_PRINTF_INSPECT_VALUE(rb_font_type));
+        }
+        font_map = pango_cairo_font_map_new_for_font_type(font_type);
+    }
+
+    return GOBJ2RVAL(font_map);
 }
 
 static VALUE
