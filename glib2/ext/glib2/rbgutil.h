@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -96,6 +96,7 @@ extern void rbgutil_start_callback_dispatch_thread(void);
 extern void rbgutil_stop_callback_dispatch_thread(void);
 
 extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
+extern gboolean rbgutil_key_equal(VALUE rb_string, const char *key);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;

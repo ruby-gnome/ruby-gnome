@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -27,6 +27,7 @@ static ID id_add_one_arg_setter;
 static ID id_set_property;
 static ID id_to_a;
 static ID id_allocate;
+static ID id_equal;
 
 void
 rbg_define_method(VALUE klass, const char *name, VALUE (*func)(ANYARGS), int argc)
@@ -116,6 +117,22 @@ rbgutil_string_set_utf8_encoding(VALUE string)
     return string;
 }
 
+gboolean
+rbgutil_key_equal(VALUE rb_key, const char *key)
+{
+    switch (TYPE(rb_key)) {
+      case RUBY_T_STRING:
+        return RVAL2CBOOL(rb_funcall(rb_key, id_equal, 1, rb_str_new_cstr(key)));
+        break;
+      case RUBY_T_SYMBOL:
+        return SYM2ID(rb_key) == rb_intern(key);
+        break;
+      default:
+        return FALSE;
+        break;
+    }
+}
+
 void
 Init_gutil(void)
 {
@@ -124,4 +141,5 @@ Init_gutil(void)
     id_to_a = rb_intern("to_a");
     id_add_one_arg_setter = rb_intern("__add_one_arg_setter");
     id_allocate = rb_intern("allocate");
+    id_equal = rb_intern("==");
 }
