@@ -19,9 +19,7 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require "gnome2/rake/package-task"
 
-package = nil
-package_task = GNOME2::Rake::PackageTask.new do |_package|
-  package = _package
+package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
   package.description = "Ruby/GObjectIntrospection is a Ruby binding of GObjectIntrospection."
   package.dependency.gem.runtime = ["glib2"]
@@ -75,10 +73,10 @@ namespace :native do
   namespace :"gobject-introspection" do
     desc "Make g-ir-scanner workable for Windows on non Windows"
     task :cross do
-      g_ir_scanner_dir = package.native.absolute_binary_dir
+      g_ir_scanner_dir = package_task.native.absolute_binary_dir
       g_ir_scanner_dir += "lib/gobject-introspection/giscanner"
       Dir.chdir(g_ir_scanner_dir.to_s) do
-        patch = "#{package.patches_dir}/cross-g-ir-scanner.diff"
+        patch = "#{package_task.package.patches_dir}/cross-g-ir-scanner.diff"
         sh("patch -p2 < #{patch}")
       end
     end
@@ -93,7 +91,7 @@ namespace :win32 do
   namespace :"gobject-introspection" do
     desc "Use native tools"
     task :cross do
-      pkg_config_dir = package.windows.absolute_binary_dir + "lib/pkgconfig"
+      pkg_config_dir = package_task.windows.absolute_binary_dir + "lib/pkgconfig"
       pc_path = pkg_config_dir + "gobject-introspection-1.0.pc"
       original_pc = pc_path.read
       new_pc = ""
