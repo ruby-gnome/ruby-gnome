@@ -48,8 +48,8 @@ rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
         } else {
             rb_raise(rb_eArgError,
                      "font type must be one of "
-                     ":ft, :freetype, :win32 or :quarts: %p",
-                     RBG_PRINTF_INSPECT_VALUE(rb_font_type));
+                     ":ft, :freetype, :win32 or :quarts: %s",
+                     RBG_INSPECT(rb_font_type));
         }
         font_map = pango_cairo_font_map_new_for_font_type(font_type);
     }
