@@ -95,7 +95,7 @@ namespace :win32 do
       pc_path = pkg_config_dir + "gobject-introspection-1.0.pc"
       original_pc = pc_path.read
       new_pc = ""
-      new_pc << "native_prefix=#{package.native.absolute_binary_dir}\n"
+      new_pc << "native_prefix=#{package_task.native.absolute_binary_dir}\n"
       new_pc << "native_bindir=${native_prefix}/bin\n"
       original_pc.each_line do |line|
         case line
