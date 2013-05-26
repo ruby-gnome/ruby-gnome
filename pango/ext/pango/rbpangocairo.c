@@ -102,7 +102,7 @@ Init_pango_cairo(VALUE mPango)
     /* Pango::CairoFontMap */
     RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
 
-    RG_DEF_SMETHOD(create, 0);
+    RG_DEF_SMETHOD(create, -1);
     RG_DEF_SMETHOD(default, 0);
 #  if PANGO_CHECK_VERSION(1, 22, 0)
     RG_DEF_SMETHOD(set_default, 1);
