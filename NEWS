@@ -8,11 +8,20 @@ Windows XP re-supportted release!
 
 === Changes
 
+==== Ruby/GLib2
+
+  * Improvements
+    * Added rbgutil_key_equal() convenient function.
+      It is used for comparing key that may be String or Symbol.
+
 ==== Ruby/Pango
 
   * Improvements
     * [windows] Forced to disable uniscribe backend of HarfBuzz.
       [ruby-list:49412] [Reported by Masafumi Yokoyama]
+    * Don't define Pango::CairoFcFontMap and Pango::CairoWin32FontMap
+      because they may cause crash on OS X.
+      [shocker-ja:1119] [Reported by znz]
     * Updated samples.
       [GitHub#164] [Patch by Kentaro Fukuchi]
   * Fixes
@@ -23,6 +32,7 @@ Windows XP re-supportted release!
 
   * Kentaro Fukuchi
   * Masafumi Yokoyama
+  * znz
 
 == Ruby-GNOME2 2.0.1: 2013-05-25
 
