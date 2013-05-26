@@ -61,6 +61,10 @@ module GNOME2
         @dependency_configuration
       end
 
+      def package
+        @package
+      end
+
       def windows
         @package.windows
       end
