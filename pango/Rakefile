@@ -17,6 +17,12 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "HarfBuzz",
       :version => "0.9.17",
       :compression_method => "bz2",
+      :windows => {
+        :patches => [
+          "harfbuzz-0.9.17-disable-uniscribe.diff",
+        ],
+        :need_autoreconf => true,
+      },
     },
     {
       :name => "pango",
