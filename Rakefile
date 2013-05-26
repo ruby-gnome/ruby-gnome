@@ -355,7 +355,7 @@ namespace :gem do
       task :vendor do
         win32_gnome2_packages.each do |package|
           Dir.chdir(package) do
-            ruby("-S", "rake", "win32:build")
+            ruby("-S", "rake", "native:build", "win32:build")
           end
         end
       end
