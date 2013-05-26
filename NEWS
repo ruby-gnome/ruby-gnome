@@ -2,6 +2,25 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.0.2: 2013-05-26
+
+Windows XP re-supportted release!
+
+=== Changes
+
+==== Ruby/Pango
+
+  * Improvements
+    * [windows] Forced to disable uniscribe backend of HarfBuzz.
+      [ruby-list:49412] [Reported by Masafumi Yokoyama]
+    * Updated samples.
+      [GitHub#164] [Patch by Kentaro Fukuchi]
+
+=== Thanks
+
+  * Kentaro Fukuchi
+  * Masafumi Yokoyama
+
 == Ruby-GNOME2 2.0.1: 2013-05-25
 
 Ruby 1.8 support is dropped release!
