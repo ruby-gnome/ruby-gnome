@@ -15,6 +15,9 @@ Windows XP re-supportted release!
       [ruby-list:49412] [Reported by Masafumi Yokoyama]
     * Updated samples.
       [GitHub#164] [Patch by Kentaro Fukuchi]
+  * Fixes
+    * Fixed wrong index access in Pango::GlyphString#glyphs.
+      [ruby-gnome2-devel-ja] [Reported by Kentaro Fukuchi]
 
 === Thanks
 
