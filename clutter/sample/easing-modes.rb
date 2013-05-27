@@ -59,9 +59,7 @@ end
 
 main_stage = stage
 
-stage_size = stage.size
-stage_width = stage_size.width
-stage_height = stage_size.height
+stage_width, stage_height = stage.size
 
 bouncer_width = 50
 bouncer_height = 50
