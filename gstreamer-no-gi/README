@@ -12,7 +12,7 @@ Requirements
 Install
 -------
 
-    0. install Ruby (>= 1.8.x) and GStreamer (>= 0.10.x).
+    0. install Ruby (>= 1.9.x) and GStreamer (>= 0.10.x).
     1. ruby extconf.rb
     2. make
     3. su
