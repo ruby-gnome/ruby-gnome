@@ -9,7 +9,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.8.x or later and GooCanvas.
+   0. install ruby-1.9.x or later and GooCanvas.
    1. ruby extconf.rb
    2. make
    3. su
