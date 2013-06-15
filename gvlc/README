@@ -6,7 +6,7 @@ Ruby/VLC is a Ruby binding of libVLC for Ruby/GTK.
 Requirements
 ------------
 
-  Ruby >= 1.8.5: http://www.ruby-lang.org/
+  Ruby >= 1.9.x: http://www.ruby-lang.org/
   libVLC >= 2.0: http://www.videolan.org/
 
 Install (RubyGems)
@@ -17,7 +17,7 @@ Install (RubyGems)
 Install (traditional)
 ---------------------
 
-Install ruby-1.8.5 or later and libVLC >= 2.0.
+Install ruby-1.9.x or later and libVLC >= 2.0.
 
   % ruby extconf.rb
   % make
