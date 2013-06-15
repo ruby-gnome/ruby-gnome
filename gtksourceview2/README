@@ -10,7 +10,7 @@ Requirements
 
 Install
 -------
-   0. install ruby 1.8.0 or newer, GtkSourceView 2.0.0 or newer, Ruby/GTK2.
+   0. install ruby 1.9.x or newer, GtkSourceView 2.0.0 or newer, Ruby/GTK2.
    1. ruby extconf.rb
    2. make
    3. su
