@@ -39,10 +39,9 @@ rbgerr_gerror2exception(GError *error)
 
     klass = rb_hash_aref(gerror_table, UINT2NUM(error->domain));
     if (NIL_P(klass)) {
-        exc = rb_exc_new2(generic_error, error->message);
-    } else {
-        exc = rb_exc_new2(klass, error->message);
+        klass = generic_error;
     }
+    exc = rb_exc_new2(klass, error->message);
     rb_ivar_set(exc, id_domain, CSTR2RVAL(g_quark_to_string(error->domain)));
     rb_ivar_set(exc, id_code, INT2NUM(error->code));
     g_error_free(error);
