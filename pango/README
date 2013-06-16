@@ -12,7 +12,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.6.x or later, GLib, Pango, Ruby/GLib2, Ruby/GTK2
+   0. install ruby-1.9.x or later, GLib, Pango, Ruby/GLib2, Ruby/GTK2
       (and cairo/rcairo).
    1. ruby extconf.rb
       (To use rcairo on Win32, set CAIRO_PATH as a environment variable first)
