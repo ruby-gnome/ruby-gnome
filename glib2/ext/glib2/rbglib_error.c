@@ -41,7 +41,7 @@ rbgerr_gerror2exception(GError *error)
     if (NIL_P(exception_klass)) {
         exception_klass = generic_error;
     }
-    exc = rb_exc_new2(exception_klass, error->message);
+    exc = rb_exc_new_str(exception_klass, CSTR2RVAL(error->message));
     rb_ivar_set(exc, id_domain, CSTR2RVAL(g_quark_to_string(error->domain)));
     rb_ivar_set(exc, id_code, INT2NUM(error->code));
     g_error_free(error);

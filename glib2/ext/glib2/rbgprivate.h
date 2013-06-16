@@ -33,6 +33,10 @@
 #  define rb_str_new_cstr(c_string) rb_str_new2(c_string)
 #endif
 
+#ifndef HAVE_RB_EXC_NEW_STR
+#  define rb_exc_new_str(klass, message) rb_exc_new3(klass, message)
+#endif
+
 #ifndef G_VALUE_INIT
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif

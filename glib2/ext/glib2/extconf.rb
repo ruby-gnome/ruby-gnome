@@ -47,6 +47,7 @@ have_func("ruby_native_thread_p", ruby_header)
 have_func("rb_thread_call_with_gvl", ruby_header)
 have_func("rb_str_new_cstr", ruby_header)
 have_func("rb_gc_register_mark_object", ruby_header)
+have_func("rb_exc_new_str", ruby_header)
 
 have_var("curr_thread", [ruby_header, "node.h"])
 have_var("rb_curr_thread", [ruby_header, "node.h"])
