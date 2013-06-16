@@ -31,17 +31,17 @@ VALUE
 rbgerr_gerror2exception(GError *error)
 {
     VALUE exc = Qnil;
-    VALUE klass = Qnil;
+    VALUE exception_klass = Qnil;
 
     if (!error) {
         return rb_exc_new2(rb_eRuntimeError, "GError parameter doesn't have a value.");
     }
 
-    klass = rb_hash_aref(gerror_table, UINT2NUM(error->domain));
-    if (NIL_P(klass)) {
-        klass = generic_error;
+    exception_klass = rb_hash_aref(gerror_table, UINT2NUM(error->domain));
+    if (NIL_P(exception_klass)) {
+        exception_klass = generic_error;
     }
-    exc = rb_exc_new2(klass, error->message);
+    exc = rb_exc_new2(exception_klass, error->message);
     rb_ivar_set(exc, id_domain, CSTR2RVAL(g_quark_to_string(error->domain)));
     rb_ivar_set(exc, id_code, INT2NUM(error->code));
     g_error_free(error);
