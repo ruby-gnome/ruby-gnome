@@ -33,7 +33,7 @@ rbgerr_gerror2exception(GError *error)
     VALUE exc = Qnil;
     VALUE klass = Qnil;
 
-    if (! error){
+    if (!error) {
         return rb_exc_new2(rb_eRuntimeError, "GError parameter doesn't have a value.");
     }
 
