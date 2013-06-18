@@ -131,7 +131,7 @@ module GNOME2
                                              "{ext,sample,test,test-unit}/**/*"]
           files.existing!
           s.files                 = files
-          s.required_ruby_version = @required_ruby_version || ">= 1.8.5"
+          s.required_ruby_version = @required_ruby_version || ">= 1.9.3"
           s.post_install_message  = @post_install_message
           @dependency_configuration.apply(s)
         end

@@ -16,6 +16,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   ]
   package.windows.packages = []
   package.windows.dependencies = []
-  package.required_ruby_version = ">= 1.9.2"
+  package.required_ruby_version = ">= 1.9.3"
 end
 package_task.define
