@@ -7,7 +7,7 @@ Ruby/GTK3 is a Ruby binding of GTK 3.
 * Ruby/GLib2, Ruby/ATK, Ruby/Pango, Ruby/GdkPixbuf2 and Ruby/GTK3 in
   [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/)
 * [rcairo](https://github.com/rcairo/rcairo)
-* [GTK+](http://cairographics.org/) 3.4.2 or later
+* [GTK+](http://www.gtk.org/) 3.4.2 or later
 
 ## Install
 
