@@ -1,17 +1,45 @@
 #!/usr/bin/env ruby
 
 require "tempfile"
+require "optparse"
 require "poppler"
 require "gdk_pixbuf2"
 
-if ARGV.size < 2
-  puts "usage: #{$0} input.pdf output [scale_ratio] [rotate_angle]"
-  exit(-1)
+scale = 1.0
+rotate = 0
+
+parser = OptionParser.new
+parser.banner = <<-BANNER
+Usage: #{parser.program_name} INPUT.PDF OUTPUT [options]
+
+#{parser.program_name} coverts the target page in INPUT.PDF to an image file.
+Many popular image formats such as PNG and JPEG are supported.
+You can specify output image format by OUTPUT file extension.
+For example, the following comand generates PNG file:
+
+  % #{$0} INPUT.PDF OUTPUT.png
+
+BANNER
+
+parser.on("--scale=RATIO", Float,
+          "Scale the target page in INPUT.PDF RATIO times larger in OUTPUT",
+          "[#{scale}]") do |value|
+  scale = value.to_f
 end
 
-input, output, scale, rotate = ARGV
-scale = (scale || 1.0).to_f
-rotate = (rotate || 0).to_i % 360
+parser.on("--rotate=DEGREE", Integer,
+          "Rotate the target page in INPUT.PDF DEGREE degrees clockwise in OUTPUT",
+          "(available values: 0...360)",
+          "[#{rotate}]") do |value|
+  rotate = value.to_i % 360
+end
+
+rest_args = parser.parse!
+if rest_args.size != 2
+  puts(parser.help)
+  exit(false)
+end
+input, output = rest_args
 
 ext_name = File.extname(output)[1..-1]
 if ext_name
