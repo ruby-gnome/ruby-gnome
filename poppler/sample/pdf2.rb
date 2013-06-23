@@ -5,6 +5,7 @@ require "optparse"
 require "poppler"
 require "gdk_pixbuf2"
 
+page = 0
 scale = 1.0
 rotate = 0
 
@@ -20,6 +21,13 @@ For example, the following comand generates PNG file:
   % #{$0} INPUT.PDF OUTPUT.png
 
 BANNER
+
+parser.on("--page=PAGE", Integer,
+          "Use PAGE as the target page",
+          "(0-origin)",
+          "[#{page}]") do |value|
+  page = value.to_i
+end
 
 parser.on("--scale=RATIO", Float,
           "Scale the target page in INPUT.PDF RATIO times larger in OUTPUT",
@@ -80,9 +88,9 @@ def compute_size(width, height, rotate)
   end
 end
 
-def to_pixbuf_with_cairo(input, scale, rotate)
+def to_pixbuf_with_cairo(input, page_number, scale, rotate)
   doc = Poppler::Document.new(input)
-  page = doc[0]
+  page = doc[page_number]
   width, height = page.size.collect {|x| x * scale}
   surface_width, surface_height = compute_size(width, height, rotate)
 
@@ -114,7 +122,7 @@ unless Poppler.cairo_available?
   puts "cairo isn't available."
   exit(false)
 end
-pixbuf = to_pixbuf_with_cairo(input, scale, rotate)
+pixbuf = to_pixbuf_with_cairo(input, page, scale, rotate)
 
 if pixbuf.nil?
   puts "Is it a PDF file?: #{input}"
