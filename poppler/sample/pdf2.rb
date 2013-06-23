@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'tempfile'
+require "tempfile"
 require "poppler"
 require "gdk_pixbuf2"
 
