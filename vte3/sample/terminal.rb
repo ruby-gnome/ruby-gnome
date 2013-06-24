@@ -14,7 +14,7 @@ window = Gtk::Window.new("Terminal sample")
 window.signal_connect("destroy"){Gtk.main_quit}
 
 terminal = Vte::Terminal.new
-terminal.set_font("Monospace 16", Vte::TerminalAntiAlias::FORCE_ENABLE)
+terminal.set_font("Monospace 16")
 terminal.signal_connect("child-exited") do |widget|
   Gtk.main_quit
 end
