@@ -8,7 +8,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.description = "Ruby/GdkPixbuf2 is a Ruby binding of GdkPixbuf-2.x."
   package.dependency.gem.runtime = ["glib2"]
   package.windows.packages = []
-  package.windows.dependencies = ["zlib", "libpng"]
+  package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
     "gobject-introspection",
