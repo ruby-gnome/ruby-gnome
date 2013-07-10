@@ -27,6 +27,7 @@
 #define RG_TARGET_NAMESPACE cCairoFontMap
 #define _SELF(self) (RVAL2PANGOCAIROFONTMAP(self))
 
+#  if CAIRO_CHECK_VERSION(1, 8, 0)
 static VALUE
 rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 {
@@ -56,6 +57,7 @@ rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 
     return GOBJ2RVAL(font_map);
 }
+#  endif
 
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE klass)
@@ -102,7 +104,9 @@ Init_pango_cairo(VALUE mPango)
     /* Pango::CairoFontMap */
     RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
 
+#  if CAIRO_CHECK_VERSION(1, 8, 0)
     RG_DEF_SMETHOD(create, -1);
+#  endif
     RG_DEF_SMETHOD(default, 0);
 #  if PANGO_CHECK_VERSION(1, 22, 0)
     RG_DEF_SMETHOD(set_default, 1);
