@@ -143,6 +143,7 @@ class CanvasSampleFifteen < Gtk::VBox
 		end
 		# "Move the blank spot" around in order to scramble the pieces
 
+    catch :retry_scramble do
 		0.upto(SCRAMBLE_MOVES) do
 			dir = rand(4).to_i
 			x = y = 0
@@ -156,7 +157,7 @@ class CanvasSampleFifteen < Gtk::VBox
 			elsif (dir == 3) && ((pos % 4) != 3) # right
 				x = 1
 			else
-				retry
+				throw :retry_scramble
 			end
 	
 			oldpos = pos + y * 4 + x;
@@ -166,6 +167,7 @@ class CanvasSampleFifteen < Gtk::VBox
 			@board[pos].translate(-x * PIECE_SIZE, -y * PIECE_SIZE)
 			pos = oldpos
 		end
+    end
 	end
 
  	class Piece < Goo::CanvasGroup
