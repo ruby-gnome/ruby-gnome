@@ -44,7 +44,7 @@ require 'demo-fifteen'
 
 class GooCanvasSample < Gtk::Window
   def initialize
-    super(Gtk::Window::TOPLEVEL)
+    super(:toplevel)
 
     signal_connect("destroy") do |widget, event|
       Gtk::main_quit()
