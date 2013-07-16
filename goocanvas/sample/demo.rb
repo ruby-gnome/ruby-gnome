@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 #  -*- indent-tabs-mode: nil -*-
 =begin header
 
