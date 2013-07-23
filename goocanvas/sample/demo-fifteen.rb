@@ -28,21 +28,21 @@ Original Copyright:
 
 =end
 
-class CanvasSampleFifteen < Gtk::VBox
+class CanvasSampleFifteen < Gtk::Box
 	PIECE_SIZE = 50
 	SCRAMBLE_MOVES = 32
 
 	def initialize
-		super(false, 4)
+		super(:vertical, 4)
 		border_width = 4
 		show()
 
 		alignment = Gtk::Alignment.new(0.5, 0.5, 0.0, 0.0)
-		pack_start(alignment, true, true, 0)
+		pack_start(alignment, :expand => true, :fill => true, :padding => 0)
 		alignment.show()
 
 		frame = Gtk::Frame.new
-		frame.set_shadow_type(Gtk::SHADOW_IN);
+		frame.set_shadow_type(:in);
 		alignment.add(frame)
 		frame.show()
 
@@ -57,14 +57,14 @@ class CanvasSampleFifteen < Gtk::VBox
 		@board = Array.new(16)
 		
 		0.upto(14) do |i|
-			@board[i] = Piece.new(@canvas.root_item)
+			@board[i] = Piece.new(:parent => @canvas.root_item)
 			@board[i].setup(self, i)
 		end
 		@board[15] = nil;
 
 		# Scramble button
-		button = Gtk::Button.new("Scramble")
-		pack_start(button, false, false, 0)
+		button = Gtk::Button.new(:label => "Scramble")
+		pack_start(button, :expand => false, :fill => false, :padding => 0)
 		button.signal_connect("clicked") do |button|
 	  	scramble()
 		end
@@ -77,13 +77,14 @@ class CanvasSampleFifteen < Gtk::VBox
 	  		return
 			end
 		end
-	  dialog = Gtk::MessageDialog.new(parent_window,
-                         Gtk::Dialog::DESTROY_WITH_PARENT,
-                         Gtk::MessageDialog::INFO,
-                         Gtk::MessageDialog::BUTTONS_OK,
-                         "You stud, you win!")
+	  dialog = Gtk::MessageDialog.new(:parent => parent.parent,
+                         :flags => :destroy_with_parent,
+                         :type => :info,
+                         :buttons_type => :ok,
+                         :message => "You stud, you win!")
 		dialog.set_modal(true)
-		dialog.run_and_close()
+		dialog.run
+		dialog.hide
 	end
 
 	def piece_enter_notify(item)
@@ -181,14 +182,22 @@ class CanvasSampleFifteen < Gtk::VBox
 			x = i % 4
 			translate( x * PIECE_SIZE,y * PIECE_SIZE)
 
-			Goo::CanvasRect.new(self, 0, 0, PIECE_SIZE, PIECE_SIZE,
+			Goo::CanvasRect.new(:parent => self,
+													:x => 0,
+													:y => 0,
+													:width => PIECE_SIZE,
+													:height => PIECE_SIZE,
 													:line_width => 1.0,
 													:fill_color => get_piece_color(x, y),
 													:stroke_color => "black")
 
   
-			@text = Goo::CanvasText.new(self,i.to_s, PIECE_SIZE / 2.0, 
-																	PIECE_SIZE / 2.0, -1, Gtk::ANCHOR_CENTER,
+			@text = Goo::CanvasText.new(:parent => self,
+																	:text => i.to_s,
+																	:x => PIECE_SIZE / 2.0,
+																	:y => PIECE_SIZE / 2.0,
+																	:width => -1,
+																	:anchor => :center,
 																	:font=>"Sans bold 24",
 																	:fill_color => "black")
 			@num = i
