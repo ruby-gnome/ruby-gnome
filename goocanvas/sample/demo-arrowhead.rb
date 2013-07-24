@@ -1,4 +1,4 @@
-class CanvasSampleArrowhead < Gtk::VBox
+class CanvasSampleArrowhead < Gtk::Box
         LEFT = 50.0
         RIGHT = 350.0
         MIDDLE = 150.0
@@ -8,7 +8,7 @@ class CanvasSampleArrowhead < Gtk::VBox
         DEFAULT_SHAPE_C = 4
 
         def initialize()
-                super(false, 4)
+                super(:vertical, 4)
                 border_width = 4
                 show()
 
@@ -17,15 +17,15 @@ class CanvasSampleArrowhead < Gtk::VBox
                         to change the shape of the line and its arrowhead.  You can see the
                         arrows at their normal scale on the right hand side of the window.
             END
-            pack_start(w, false, false, 0)
+            pack_start(w, :expand => false, :fill => false, :padding => 0)
             w.show
 
             w = Gtk::Alignment.new(0.5, 0.5, 0.0, 0.0)
-            pack_start(w, true, true, 0)
+            pack_start(w, :expand => true, :fill => true, :padding => 0)
             w.show
 
             frame = Gtk::Frame.new
-            frame.shadow_type = Gtk::SHADOW_IN
+            frame.shadow_type = :in
             w.add(frame)
             frame.show
 
@@ -44,16 +44,21 @@ class CanvasSampleArrowhead < Gtk::VBox
 
         # Big arrow
 
-            item = Goo::CanvasPolyline.new_line(root,
-                         LEFT, MIDDLE, RIGHT, MIDDLE,
+            points = Goo::CanvasPoints.new(2)
+            points.set_point(0, LEFT, MIDDLE)
+            points.set_point(1, RIGHT, MIDDLE)
+            item = Goo::CanvasPolyline.new(:parent => root,
+                         :points => points,
                          :stroke_color => "mediumseagreen",
                          :end_arrow => true)
             canvas.instance_variable_set(:@big_arrow, item)
 
             # Arrow outline
 
-            item = Goo::CanvasPolyline.new(root, true, [],
-                    :stroke_color, "black",
+            item = Goo::CanvasPolyline.new(:parent => root,
+                    :close_path => true,
+                    :points => Goo::CanvasPoints.new(0),
+                    :stroke_color => "black",
                     :line_width => 2.0,
                     :line_cap => Cairo::LINE_CAP_ROUND,
                     :line_join => Cairo::LINE_JOIN_ROUND)
@@ -67,10 +72,10 @@ class CanvasSampleArrowhead < Gtk::VBox
 
             # Dimensions
 
-            create_dimension(canvas, root, "width_arrow", "width_text", Gtk::ANCHOR_E)
-            create_dimension(canvas, root, "shape_a_arrow", "shape_a_text", Gtk::ANCHOR_N)
-            create_dimension(canvas, root, "shape_b_arrow", "shape_b_text", Gtk::ANCHOR_N)
-            create_dimension(canvas, root, "shape_c_arrow", "shape_c_text", Gtk::ANCHOR_W)
+            create_dimension(canvas, root, "width_arrow", "width_text", :e)
+            create_dimension(canvas, root, "shape_a_arrow", "shape_a_text", :n)
+            create_dimension(canvas, root, "shape_b_arrow", "shape_b_text", :n)
+            create_dimension(canvas, root, "shape_c_arrow", "shape_c_text", :w)
 
             # Info
 
@@ -81,7 +86,11 @@ class CanvasSampleArrowhead < Gtk::VBox
 
             # Division line
 
-            Goo::CanvasPolyline.new_line(root, RIGHT + 50, 0, RIGHT + 50, 1000,
+            points = Goo::CanvasPoints.new(2)
+            points.set_point(0, RIGHT + 50, 0)
+            points.set_point(1, RIGHT + 50, 1000)
+            Goo::CanvasPolyline.new(:parent => root,
+                                    :points => points,
                         :fill_color => "black", :line_width => 2.0)
 
             # Sample arrows
@@ -98,7 +107,9 @@ class CanvasSampleArrowhead < Gtk::VBox
         end
 
         def set_dimension(canvas, arrow_name, text_name, x1, y1, x2, y2, tx, ty, dim)
-                points = [ x1, y1, x2, y2 ]
+                points = Goo::CanvasPoints.new(2)
+                points.set_point(0, x1, y1)
+                points.set_point(1, x2, y2)
 
         arrow = canvas.instance_variable_get("@#{arrow_name}")
                 arrow.points = points
@@ -130,17 +141,23 @@ class CanvasSampleArrowhead < Gtk::VBox
 
             # Outline
 
-            points = []
-            points[0] = RIGHT - 10 * shape_a * width
-            points[1] = MIDDLE - 10 * width / 2
-            points[2] = RIGHT - 10 * shape_b * width
-            points[3] = MIDDLE - 10 * (shape_c * width / 2.0)
-            points[4] = RIGHT
-            points[5] = MIDDLE
-            points[6] = points[2]
-            points[7] = MIDDLE + 10 * (shape_c * width / 2.0)
-            points[8] = points[0]
-            points[9] = MIDDLE + 10 * width / 2
+            points0 = RIGHT - 10 * shape_a * width
+            points1 = MIDDLE - 10 * width / 2
+            points2 = RIGHT - 10 * shape_b * width
+            points3 = MIDDLE - 10 * (shape_c * width / 2.0)
+            points4 = RIGHT
+            points5 = MIDDLE
+            points6 = points2
+            points7 = MIDDLE + 10 * (shape_c * width / 2.0)
+            points8 = points0
+            points9 = MIDDLE + 10 * width / 2
+
+            points = Goo::CanvasPoints.new(5)
+            points.set_point(0, points0, points1)
+            points.set_point(1, points2, points3)
+            points.set_point(2, points4, points5)
+            points.set_point(3, points6, points7)
+            points.set_point(4, points8, points9)
 
             outline = canvas.instance_variable_get(:@outline)
             outline.points = points
@@ -222,34 +239,54 @@ class CanvasSampleArrowhead < Gtk::VBox
         end
 
         def create_dimension(canvas, root, arrow_name, text_name, anchor)
-                item = Goo::CanvasPolyline.new(root, false, 0,
+                item = Goo::CanvasPolyline.new(:parent => root,
+                                               :close_path => false,
+                                               :points => Goo::CanvasPoints.new(0),
                       :fill_color => "black",
                       :start_arrow => true,
                       :end_arrow => true)
             canvas.instance_variable_set("@#{arrow_name}", item)
 
-            item = Goo::CanvasText.new(root, nil, 0, 0, -1, anchor,
+            item = Goo::CanvasText.new(:parent => root,
+                                       :text => nil,
+                                       :x => 0,
+                                       :y => 0,
+                                       :width => -1,
+                                       :anchor => anchor,
                     :fill_color => "black",
                     :font => "Sans 12")
             canvas.instance_variable_set("@#{text_name}", item)
         end
 
         def create_info(canvas, root, info_name, x, y)
-            item = Goo::CanvasText.new(root, nil, x, y, -1, Gtk::ANCHOR_NW,
+            item = Goo::CanvasText.new(:parent => root,
+                                       :text => nil,
+                                       :x => x,
+                                       :y => y,
+                                       :width => -1,
+                                       :anchor => :nw,
                     :fill_color => "black",
                     :font => "Sans 14")
             canvas.instance_variable_set("@#{info_name}", item)
         end
 
         def create_sample_arrow(canvas, root, sample_name, x1, y1, x2, y2)
-        item = Goo::CanvasPolyline.new_line(root, x1, y1, x2, y2,
+        points = Goo::CanvasPoints.new(2)
+        points.set_point(0, x1, y1)
+        points.set_point(1, x2, y2)
+        item = Goo::CanvasPolyline.new(:parent => root,
+                                       :points => points,
                :start_arrow => true,
                :end_arrow => true)
         canvas.instance_variable_set("@#{sample_name}", item)
         end
 
         def create_drag_box(canvas, root, box_name)
-            item = Goo::CanvasRect.new(root, 0, 0, 10, 10,
+            item = Goo::CanvasRect.new(:parent => root,
+                                       :x => 0,
+                                       :y => 0,
+                                       :width => 10,
+                                       :height => 10,
                     :fill_color => 'black',
                     :stroke_color => 'black',
                     :line_width => 1.0)
@@ -264,8 +301,10 @@ class CanvasSampleArrowhead < Gtk::VBox
               true
             end
             item.signal_connect('button_press_event') do |item, target, event|
-              fleur = Gdk::Cursor.new(Gdk::Cursor::FLEUR)
-              canvas.pointer_grab(item, Gdk::Event::POINTER_MOTION_MASK | Gdk::Event::BUTTON_RELEASE_MASK, fleur, event.time)
+              # fixed "`initialize': ruby wrapper for this GObject* already exists."
+              fleur = @fleur ||= Gdk::Cursor.new(:fleur)
+              # Symbol is not allowed. Because "undefined method `|' for :pointer_motion_mask:Symbol"
+              canvas.pointer_grab(item, Gdk::Event::Mask::POINTER_MOTION_MASK | Gdk::Event::Mask::BUTTON_RELEASE_MASK, fleur, event.time)
               true
             end
             item.signal_connect('button_release_event') do |item, target, event|
@@ -274,18 +313,18 @@ class CanvasSampleArrowhead < Gtk::VBox
             end
             item.signal_connect('motion_notify_event') do |item, target, event|
               catch :done do
-                throw :done, false unless event.state & Gdk::Window::BUTTON1_MASK == Gdk::Window::BUTTON1_MASK
+                throw :done, false unless event.state & :button1_mask == :button1_mask
 
                 if item == canvas.instance_variable_get(:@width_drag_box)
                   y = event.y
-                  width = (MIDDLE - y) / 5
+                  width = ((MIDDLE - y) / 5).round
                   throw :done, false if width < 0
                   canvas.instance_variable_set(:@width, width)
                   set_arrow_shape(canvas)
                 elsif item == canvas.instance_variable_get(:@shape_a_drag_box)
                   x = event.x
                   width = canvas.instance_variable_get(:@width)
-                  shape_a = (RIGHT - x) / 10 / width
+                  shape_a = ((RIGHT - x) / 10 / width).round
                   throw :done, false if (shape_a < 0) || (shape_a > 30)
                   width = canvas.instance_variable_set(:@shape_a, shape_a)
                   set_arrow_shape(canvas)
@@ -293,14 +332,14 @@ class CanvasSampleArrowhead < Gtk::VBox
                   change = false
                   width = canvas.instance_variable_get(:@width)
                   x = event.x
-                  shape_b = (RIGHT - x) / 10 / width
+                  shape_b = ((RIGHT - x) / 10 / width).round
                   if (shape_b >= 0) && (shape_b <= 30)
                     canvas.instance_variable_set(:@shape_b, shape_b)
                     change = true
                   end
 
                   y = event.y
-                  shape_c = (MIDDLE - y) * 2 / 10 / width
+                  shape_c = ((MIDDLE - y) * 2 / 10 / width).round
                   if shape_c >= 0
                     canvas.instance_variable_set(:@shape_c, shape_c)
                     change = true
