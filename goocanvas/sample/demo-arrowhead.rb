@@ -23,15 +23,15 @@ class CanvasSampleArrowhead < Gtk::VBox
             w = Gtk::Alignment.new(0.5, 0.5, 0.0, 0.0)
             pack_start(w, true, true, 0)
             w.show
-        
+
             frame = Gtk::Frame.new
             frame.shadow_type = Gtk::SHADOW_IN
             w.add(frame)
             frame.show
-        
+
             canvas = Goo::Canvas.new
             root = canvas.root_item
-        
+
             canvas.set_size_request(500, 350)
             canvas.set_bounds(0, 0, 500, 350)
             frame.add(canvas)
@@ -51,52 +51,52 @@ class CanvasSampleArrowhead < Gtk::VBox
             canvas.instance_variable_set(:@big_arrow, item)
 
             # Arrow outline
-        
+
             item = Goo::CanvasPolyline.new(root, true, [],
                     :stroke_color, "black",
                     :line_width => 2.0,
                     :line_cap => Cairo::LINE_CAP_ROUND,
                     :line_join => Cairo::LINE_JOIN_ROUND)
             canvas.instance_variable_set(:@outline, item)
-        
+
             # Drag boxes
-        
+
             create_drag_box(canvas, root, "width_drag_box")
             create_drag_box(canvas, root, "shape_a_drag_box")
             create_drag_box(canvas, root, "shape_b_c_drag_box")
-        
+
             # Dimensions
-        
+
             create_dimension(canvas, root, "width_arrow", "width_text", Gtk::ANCHOR_E)
             create_dimension(canvas, root, "shape_a_arrow", "shape_a_text", Gtk::ANCHOR_N)
             create_dimension(canvas, root, "shape_b_arrow", "shape_b_text", Gtk::ANCHOR_N)
             create_dimension(canvas, root, "shape_c_arrow", "shape_c_text", Gtk::ANCHOR_W)
-        
+
             # Info
 
             create_info(canvas, root, "width_info", LEFT, 260)
             create_info(canvas, root, "shape_a_info", LEFT, 280)
             create_info(canvas, root, "shape_b_info", LEFT, 300)
             create_info(canvas, root, "shape_c_info", LEFT, 320)
-        
+
             # Division line
-        
+
             Goo::CanvasPolyline.new_line(root, RIGHT + 50, 0, RIGHT + 50, 1000,
                         :fill_color => "black", :line_width => 2.0)
-        
+
             # Sample arrows
-        
+
             create_sample_arrow(canvas, root, "sample_1",
                      RIGHT + 100, 30, RIGHT + 100, MIDDLE - 30)
             create_sample_arrow(canvas, root, "sample_2",
                      RIGHT + 70, MIDDLE, RIGHT + 130, MIDDLE)
             create_sample_arrow(canvas, root, "sample_3",
                      RIGHT + 70, MIDDLE + 30, RIGHT + 130, MIDDLE + 120)
-        
+
             # Done!
                 set_arrow_shape(canvas)
         end
-  
+
         def set_dimension(canvas, arrow_name, text_name, x1, y1, x2, y2, tx, ty, dim)
                 points = [ x1, y1, x2, y2 ]
 
@@ -119,9 +119,9 @@ class CanvasSampleArrowhead < Gtk::VBox
             shape_a = canvas.instance_variable_get(:@shape_a)
             shape_b = canvas.instance_variable_get(:@shape_b)
             shape_c = canvas.instance_variable_get(:@shape_c)
-        
+
             # Big arrow
-        
+
             big_arrow = canvas.instance_variable_get(:@big_arrow)
             big_arrow.line_width = 10.0 * width
             big_arrow.arrow_tip_length = shape_a
@@ -129,7 +129,7 @@ class CanvasSampleArrowhead < Gtk::VBox
             big_arrow.arrow_width = shape_c
 
             # Outline
-            
+
             points = []
             points[0] = RIGHT - 10 * shape_a * width
             points[1] = MIDDLE - 10 * width / 2
@@ -141,17 +141,17 @@ class CanvasSampleArrowhead < Gtk::VBox
             points[7] = MIDDLE + 10 * (shape_c * width / 2.0)
             points[8] = points[0]
             points[9] = MIDDLE + 10 * width / 2
-    
+
             outline = canvas.instance_variable_get(:@outline)
             outline.points = points
-        
+
             # Drag boxes
             move_drag_box(canvas.instance_variable_get(:@width_drag_box), LEFT, MIDDLE - 10 * width / 2.0)
             move_drag_box(canvas.instance_variable_get(:@shape_a_drag_box), RIGHT - 10 * shape_a * width, MIDDLE)
             move_drag_box(canvas.instance_variable_get(:@shape_b_c_drag_box), RIGHT - 10 * shape_b * width, MIDDLE - 10 * (shape_c * width / 2.0))
 
             # Dimensions
-        
+
             set_dimension(canvas, "width_arrow", "width_text",
                    LEFT - 10,
                    MIDDLE - 10 * width / 2.0,
@@ -160,7 +160,7 @@ class CanvasSampleArrowhead < Gtk::VBox
                    LEFT - 15,
                    MIDDLE,
                    width)
-        
+
             set_dimension(canvas, "shape_a_arrow", "shape_a_text",
                    RIGHT - 10 * shape_a * width,
                    MIDDLE + 10 * (shape_c * width / 2.0) + 10,
@@ -169,7 +169,7 @@ class CanvasSampleArrowhead < Gtk::VBox
                    RIGHT - 10 * shape_a * width / 2.0,
                    MIDDLE + 10 * (shape_c * width / 2.0) + 15,
                    shape_a)
-        
+
             set_dimension(canvas, "shape_b_arrow", "shape_b_text",
                    RIGHT - 10 * shape_b * width,
                    MIDDLE + 10 * (shape_c * width / 2.0) + 35,
@@ -178,7 +178,7 @@ class CanvasSampleArrowhead < Gtk::VBox
                    RIGHT - 10 * shape_b * width / 2.0,
                    MIDDLE + 10 * (shape_c * width / 2.0) + 40,
                    shape_b)
-        
+
             set_dimension(canvas, "shape_c_arrow", "shape_c_text",
                    RIGHT + 10,
                    MIDDLE - 10 * shape_c * width / 2.0,
@@ -189,21 +189,21 @@ class CanvasSampleArrowhead < Gtk::VBox
                    shape_c)
 
             # Info
-        
+
             width_info = canvas.instance_variable_get(:@width_info)
             width_info.text = "line-width: #{width}"
-        
+
             shape_a_info = canvas.instance_variable_get(:@shape_a_info)
             shape_a_info.text = "arrow-tip-length: #{shape_a} (* line-width)"
-        
+
             shape_b_info = canvas.instance_variable_get(:@shape_b_info)
             shape_b_info.text = "arrow-length: #{shape_b} (* line-width)"
-        
+
             shape_c_info = canvas.instance_variable_get(:@shape_c_info)
             shape_c_info.text = "arrow-length: #{shape_c} (* line-width)"
-        
+
             # Sample arrows
-        
+
             sample_1 = canvas.instance_variable_get(:@sample_1)
             sample_1.line_width = width
             sample_1.arrow_tip_length = shape_a
@@ -227,20 +227,20 @@ class CanvasSampleArrowhead < Gtk::VBox
                       :start_arrow => true,
                       :end_arrow => true)
             canvas.instance_variable_set("@#{arrow_name}", item)
-        
+
             item = Goo::CanvasText.new(root, nil, 0, 0, -1, anchor,
                     :fill_color => "black",
                     :font => "Sans 12")
             canvas.instance_variable_set("@#{text_name}", item)
         end
-  
+
         def create_info(canvas, root, info_name, x, y)
             item = Goo::CanvasText.new(root, nil, x, y, -1, Gtk::ANCHOR_NW,
                     :fill_color => "black",
                     :font => "Sans 14")
             canvas.instance_variable_set("@#{info_name}", item)
         end
-  
+
         def create_sample_arrow(canvas, root, sample_name, x1, y1, x2, y2)
         item = Goo::CanvasPolyline.new_line(root, x1, y1, x2, y2,
                :start_arrow => true,
@@ -254,7 +254,7 @@ class CanvasSampleArrowhead < Gtk::VBox
                     :stroke_color => 'black',
                     :line_width => 1.0)
             canvas.instance_variable_set("@#{box_name}", item)
-          
+
             item.signal_connect('enter_notify_event') do
               item.fill_color = 'red'
               true
@@ -275,7 +275,7 @@ class CanvasSampleArrowhead < Gtk::VBox
             item.signal_connect('motion_notify_event') do |item, target, event|
               catch :done do
                 throw :done, false unless event.state & Gdk::Window::BUTTON1_MASK == Gdk::Window::BUTTON1_MASK
-          
+
                 if item == canvas.instance_variable_get(:@width_drag_box)
                   y = event.y
                   width = (MIDDLE - y) / 5
@@ -298,18 +298,18 @@ class CanvasSampleArrowhead < Gtk::VBox
                     canvas.instance_variable_set(:@shape_b, shape_b)
                     change = true
                   end
-          
+
                   y = event.y
                   shape_c = (MIDDLE - y) * 2 / 10 / width
                   if shape_c >= 0
                     canvas.instance_variable_set(:@shape_c, shape_c)
                     change = true
                   end
-          
+
                   set_arrow_shape(canvas) if change
                 end
                 true
               end
             end
-        end 
+        end
 end
