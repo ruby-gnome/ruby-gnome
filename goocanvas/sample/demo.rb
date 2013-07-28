@@ -42,6 +42,7 @@ require 'demo-primitives'
 require 'demo-arrowhead'
 require 'demo-fifteen'
 require 'demo-features'
+require 'demo-focus'
 require 'demo-animation'
 
 class GooCanvasSample < Gtk::Window
@@ -74,6 +75,8 @@ class GooCanvasSample < Gtk::Window
                          Gtk::Label.new("Fifteen"))
     notebook.append_page(CanvasSampleFeatures.new,
                          Gtk::Label.new("Reparent"))
+    notebook.append_page(CanvasSampleFocus.new,
+                         Gtk::Label.new("Focus"))
     notebook.append_page(CanvasSampleAnimation.new,
                          Gtk::Label.new("Animation"))
 #     notebook.append_page(CanvasSampleRichText.new,
