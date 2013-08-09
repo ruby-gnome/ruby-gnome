@@ -31,14 +31,14 @@ module Demo
       @da = Gtk::DrawingArea.new
       
       @da.signal_connect('expose_event') do |widget, event|
-	if widget.window
-	  style = widget.style
+        if widget.window
+          style = widget.style
 
-	  widget.window.draw_rectangle(style.bg_gc(Gtk::STATE_NORMAL),
-				       true,
-				       event.area.x, event.area.y,
-				       event.area.width, event.area.height)
-	end
+          widget.window.draw_rectangle(style.bg_gc(Gtk::STATE_NORMAL),
+                                       true,
+                                       event.area.x, event.area.y,
+                                       event.area.width, event.area.height)
+        end
       end
 
       # set a minimum size
@@ -56,7 +56,7 @@ module Demo
       vbox.pack_start(alignment, :expand => false, :fill => false, :padding => 0)
 
       button.signal_connect('clicked') do
-	change_color_callback
+        change_color_callback
       end
     end
 
@@ -74,8 +74,8 @@ module Demo
       response = dialog.run
       
       if response == Gtk::Dialog::RESPONSE_OK
-	@color = colorsel.current_color
-	@da.modify_bg(Gtk::STATE_NORMAL, @color)
+        @color = colorsel.current_color
+        @da.modify_bg(Gtk::STATE_NORMAL, @color)
       end
 
       dialog.destroy
