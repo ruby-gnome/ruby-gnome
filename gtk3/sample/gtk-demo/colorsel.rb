@@ -15,11 +15,11 @@ module Demo
     def initialize
       super('Color Selection')
 
-      @color = Gdk::Color.new(0, 0, 65535)
+      @color = Gdk::RGBA.new(0, 0, 1, 1)
 
       set_border_width(8)
 
-      vbox = Gtk::VBox.new(false, 0)
+      vbox = Gtk::Box.new(:vertical, 0)
       vbox.set_border_width(8)
       add(vbox)
 
@@ -30,27 +30,25 @@ module Demo
 
       @da = Gtk::DrawingArea.new
 
-      @da.signal_connect('expose_event') do |widget, event|
+      @da.signal_connect('draw') do |widget, event|
         if widget.window
-          style = widget.style
-
-          widget.window.draw_rectangle(style.bg_gc(Gtk::STATE_NORMAL),
-                                       true,
-                                       event.area.x, event.area.y,
-                                       event.area.width, event.area.height)
+          context = widget.style_context
+          background_color = context.get_background_color(:normal)
+          event.set_source_rgba(background_color.to_a)
+          event.paint
         end
       end
 
       # set a minimum size
       @da.set_size_request(200, 200)
       # set the color
-      @da.modify_bg(Gtk::STATE_NORMAL, @color)
+      @da.override_background_color(:normal, @color)
 
       @frame.add(@da)
 
       alignment = Gtk::Alignment.new(1.0, 0.5, 0.0, 0.0)
 
-      button = Gtk::Button.new('_Change the above color', true)
+      button = Gtk::Button.new(:mnemonic => '_Change the above color')
       alignment.add(button)
 
       vbox.pack_start(alignment, :expand => false, :fill => false, :padding => 0)
@@ -61,21 +59,21 @@ module Demo
     end
 
     def change_color_callback
-      dialog = Gtk::ColorSelectionDialog.new('Changing color')
+      dialog = Gtk::ColorSelectionDialog.new(:title => 'Changing color')
 
       dialog.set_transient_for(self)
 
-      colorsel = dialog.colorsel
+      colorsel = dialog.color_selection
 
-      colorsel.set_previous_color(@color)
-      colorsel.set_current_color(@color)
+      colorsel.set_previous_rgba(@color)
+      colorsel.set_current_rgba(@color)
       colorsel.set_has_palette(true)
 
       response = dialog.run
 
-      if response == Gtk::Dialog::RESPONSE_OK
-        @color = colorsel.current_color
-        @da.modify_bg(Gtk::STATE_NORMAL, @color)
+      if response == Gtk::ResponseType::OK
+        @color = colorsel.current_rgba
+        @da.override_background_color(:normal, @color)
       end
 
       dialog.destroy
