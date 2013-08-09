@@ -3,7 +3,7 @@
 #
 # $Id: colorsel.rb,v 1.4 2005/02/12 23:02:43 kzys Exp $
 =begin
-= Color Selector 
+= Color Selector
 
 Gtk::ColorSelection lets the user choose a color. Gtk::ColorSelectionDialog
 is a prebuilt dialog containing a Gtk::ColorSelection.
@@ -18,7 +18,7 @@ module Demo
       @color = Gdk::Color.new(0, 0, 65535)
 
       set_border_width(8)
-      
+
       vbox = Gtk::VBox.new(false, 0)
       vbox.set_border_width(8)
       add(vbox)
@@ -29,7 +29,7 @@ module Demo
       vbox.pack_start(@frame, :expand => true, :fill => true, :padding => 0)
 
       @da = Gtk::DrawingArea.new
-      
+
       @da.signal_connect('expose_event') do |widget, event|
         if widget.window
           style = widget.style
@@ -72,7 +72,7 @@ module Demo
       colorsel.set_has_palette(true)
 
       response = dialog.run
-      
+
       if response == Gtk::Dialog::RESPONSE_OK
         @color = colorsel.current_color
         @da.modify_bg(Gtk::STATE_NORMAL, @color)
