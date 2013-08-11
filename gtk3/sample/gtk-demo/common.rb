@@ -52,7 +52,7 @@ module Demo
 
     def initialize(title=nil)
       super
-      
+
       unless Gdk.cairo_available?
         add_cairo_require_label
         return
@@ -71,11 +71,11 @@ module Demo
           cr.gdk_rectangle(Gdk::Rectangle.new(0, 0, 1, 1))
           cr.fill
         end
-        
+
         draw(cr)
       end
     end
-    
+
     def add_cairo_require_label
       message = "This sample requires GTK+ 2.8.0 or later and cairo support"
       add(Gtk::Label.new(message))
