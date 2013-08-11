@@ -61,7 +61,7 @@ module Demo
       drawing_area = Gtk::DrawingArea.new
       add(drawing_area)
 
-      drawing_area.signal_connect("expose_event") do |widget, event|
+      drawing_area.signal_connect("draw") do |widget, event|
         cr = widget.window.create_cairo_context
         cr.scale(*widget.window.size)
         cr.set_line_width(0.04)
