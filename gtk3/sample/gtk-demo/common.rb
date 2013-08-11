@@ -14,7 +14,7 @@ module Demo
     %w(. /usr/share/gtk-3.0/demo /usr/local/share/gtk-3.0/demo/).each do |dirname|
       path = File.join(dirname, basename)
       if File.exist?(path)
-	return path
+        return path
       end
     end
 
@@ -25,7 +25,7 @@ module Demo
     def initialize(title = nil)
       super(:toplevel)
       if title
-	set_title("#{title} in Ruby/GTK")
+        set_title("#{title} in Ruby/GTK")
       end
 
       signal_connect("key_press_event") do |widget, event|
@@ -38,7 +38,7 @@ module Demo
       end
 
       signal_connect("delete_event") do |widget, event|
-	quit
+        quit
       end
     end
 
