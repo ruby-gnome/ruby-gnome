@@ -63,7 +63,7 @@ module Demo
 
       drawing_area.signal_connect("draw") do |widget, event|
         cr = widget.window.create_cairo_context
-        cr.scale(*widget.window.size)
+        cr.scale(widget.window.width, widget.window.height)
         cr.set_line_width(0.04)
 
         cr.save do
