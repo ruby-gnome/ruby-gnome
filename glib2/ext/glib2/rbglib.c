@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -1121,6 +1121,8 @@ union       GDoubleIEEE754;
 /*    Init_mem(); */
     Init_gutil();
     Init_gutil_callback();
+
+    Init_glib_gettext();
     Init_glib_int64();
     Init_glib_error();
     Init_glib_threads();
