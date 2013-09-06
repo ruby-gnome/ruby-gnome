@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 # This sample code is a port of clutter-gst/examples/video-player.c. The
-# image files used in this sample code is copied from clutter-gst/examples.
+# image files used in this sample code are copied from clutter-gst/examples.
 # They are licensed under the terms of the GNU Lesser General Public
 # License, version 2.1 or (at your option) later.
 #
