@@ -39,7 +39,7 @@ timeline = Clutter::Timeline.new(1000)
 timeline.loop = true
 
 # We need to set certain props on the target texture currently for
-# efficient/corrent playback onto the texture (which sucks a bit)
+# efficient/correct playback onto the texture (which sucks a bit)
 texture = Clutter::Texture.new
 # NOTE: Because warning is given, I comment out.
 #texture.set_property("disable-slicing", true)
