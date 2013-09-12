@@ -18,7 +18,7 @@
 
 class TestGdkRGBA < Test::Unit::TestCase
   def test_to_s
-    rgba = Gdk::RGBA.new(0.1, 0.2, 0.3, 0.5)
-    assert_equal("rgba(26,51,77,0.5)", rgba.to_s)
+    rgba = Gdk::RGBA.new(0.2, 0.4, 0.6, 0.5)
+    assert_equal("rgba(51,102,153,0.5)", rgba.to_s)
   end
 end
