@@ -70,13 +70,13 @@ module Gst
 
     private
     def init_base
-      require "gst/base_loader"
+      require "gst/base-loader"
       base_loader = BaseLoader.new(self)
       base_loader.load("GstBase")
     end
 
     def init_controller
-      require "gst/controller_loader"
+      require "gst/controller-loader"
       controller_loader = ControllerLoader.new(self)
       controller_loader.load("GstController")
     end
