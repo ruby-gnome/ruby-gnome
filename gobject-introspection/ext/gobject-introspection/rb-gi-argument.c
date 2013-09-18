@@ -550,6 +550,102 @@ rb_gi_return_argument_free_everything_array(GIArgument *argument,
 }
 
 static void
+rb_gi_return_argument_free_everything_interface(GIArgument *argument,
+                                                GITypeInfo *type_info)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+
+    interface_info = g_type_info_get_interface(type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    g_base_info_unref(interface_info);
+
+    switch (interface_type) {
+      case GI_INFO_TYPE_INVALID:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[invalid] everything");
+        break;
+      case GI_INFO_TYPE_FUNCTION:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[function] everything");
+        break;
+      case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[callback] everything");
+        break;
+      case GI_INFO_TYPE_STRUCT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[struct] everything");
+        break;
+      case GI_INFO_TYPE_BOXED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[boxed] everything");
+        break;
+      case GI_INFO_TYPE_ENUM:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[enum] everything");
+        break;
+      case GI_INFO_TYPE_FLAGS:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[flags] everything");
+        break;
+      case GI_INFO_TYPE_OBJECT:
+        g_object_unref(argument->v_pointer);
+        break;
+      case GI_INFO_TYPE_INTERFACE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[interface] everything");
+        break;
+      case GI_INFO_TYPE_CONSTANT:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[constant] everything");
+        break;
+      case GI_INFO_TYPE_INVALID_0:
+        g_assert_not_reached();
+        break;
+      case GI_INFO_TYPE_UNION:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[union] everything");
+        break;
+      case GI_INFO_TYPE_VALUE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[value] everything");
+        break;
+      case GI_INFO_TYPE_SIGNAL:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[signal] everything");
+        break;
+      case GI_INFO_TYPE_VFUNC:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[vfunc] everything");
+        break;
+      case GI_INFO_TYPE_PROPERTY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[property] everything");
+        break;
+      case GI_INFO_TYPE_FIELD:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[field] everything");
+        break;
+      case GI_INFO_TYPE_ARG:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[arg] everything");
+        break;
+      case GI_INFO_TYPE_TYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[type] everything");
+        break;
+      case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(interface)[unresolved] everything");
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_return_argument_free_everything(GIArgument *argument,
                                       GITypeInfo *type_info)
 {
@@ -586,9 +682,7 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
         rb_gi_return_argument_free_everything_array(argument, type_info);
         break;
       case GI_TYPE_TAG_INTERFACE:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free GIArgument(%s) everything",
-                 g_type_tag_to_string(type_tag));
+        rb_gi_return_argument_free_everything_interface(argument, type_info);
         break;
       case GI_TYPE_TAG_GLIST:
         g_list_foreach(argument->v_pointer, (GFunc)g_object_unref, NULL);
