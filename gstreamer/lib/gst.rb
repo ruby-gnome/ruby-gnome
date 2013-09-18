@@ -57,6 +57,7 @@ module Gst
       loader.load("Gst")
       require "gst/bin"
       require "gst/bus"
+      require "gst/caps"
       require "gst/element"
       require "gst/element-factory"
       require "gst/registry"
