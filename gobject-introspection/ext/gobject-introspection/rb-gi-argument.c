@@ -527,6 +527,29 @@ rb_gi_return_argument_free_container(GIArgument *argument,
 }
 
 static void
+rb_gi_return_argument_free_everything_array(GIArgument *argument,
+                                            GITypeInfo *type_info)
+{
+    switch (g_type_info_get_array_type(type_info)) {
+      case GI_ARRAY_TYPE_C:
+        g_strfreev(argument->v_pointer);
+        break;
+      case GI_ARRAY_TYPE_ARRAY:
+        g_array_free(argument->v_pointer, TRUE);
+        break;
+      case GI_ARRAY_TYPE_PTR_ARRAY:
+        g_ptr_array_free(argument->v_pointer, TRUE);
+        break;
+      case GI_ARRAY_TYPE_BYTE_ARRAY:
+        g_ptr_array_free(argument->v_pointer, TRUE);
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_return_argument_free_everything(GIArgument *argument,
                                       GITypeInfo *type_info)
 {
@@ -560,23 +583,7 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
                  g_type_tag_to_string(type_tag));
         break;
       case GI_TYPE_TAG_ARRAY:
-        switch (g_type_info_get_array_type(type_info)) {
-          case GI_ARRAY_TYPE_C:
-            g_strfreev(argument->v_pointer);
-            break;
-          case GI_ARRAY_TYPE_ARRAY:
-            g_array_free(argument->v_pointer, TRUE);
-            break;
-          case GI_ARRAY_TYPE_PTR_ARRAY:
-            g_ptr_array_free(argument->v_pointer, TRUE);
-            break;
-          case GI_ARRAY_TYPE_BYTE_ARRAY:
-            g_ptr_array_free(argument->v_pointer, TRUE);
-            break;
-          default:
-            g_assert_not_reached();
-            break;
-        }
+        rb_gi_return_argument_free_everything_array(argument, type_info);
         break;
       case GI_TYPE_TAG_INTERFACE:
         rb_raise(rb_eNotImpError,
