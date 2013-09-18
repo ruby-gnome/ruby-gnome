@@ -58,6 +58,7 @@ module Gst
       require "gst/bin"
       require "gst/bus"
       require "gst/element"
+      require "gst/registry"
       init_base
       init_controller
       class << self
