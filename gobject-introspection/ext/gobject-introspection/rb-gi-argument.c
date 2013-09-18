@@ -257,6 +257,8 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = interface_to_ruby(argument, type_info);
         break;
       case GI_TYPE_TAG_GLIST:
+        rb_argument = GOBJGLIST2RVAL(argument->v_pointer);
+        break;
       case GI_TYPE_TAG_GSLIST:
       case GI_TYPE_TAG_GHASH:
         rb_raise(rb_eNotImpError,
@@ -507,10 +509,71 @@ rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
     xfree(argument->v_pointer);
 }
 
+static void
+rb_gi_return_argument_free_container(GIArgument *argument,
+                                     GITypeInfo *type_info)
+{
+    GITypeTag type_tag;
+
+    type_tag = g_type_info_get_tag(type_info);
+
+    rb_raise(rb_eNotImpError,
+             "TODO: free GIArgument(%s) as container",
+             g_type_tag_to_string(type_tag));
+}
+
+static void
+rb_gi_return_argument_free_everything(GIArgument *argument,
+                                     GITypeInfo *type_info)
+{
+    GITypeTag type_tag;
+
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+      case GI_TYPE_TAG_INT8:
+      case GI_TYPE_TAG_UINT8:
+      case GI_TYPE_TAG_INT16:
+      case GI_TYPE_TAG_UINT16:
+      case GI_TYPE_TAG_INT32:
+      case GI_TYPE_TAG_UINT32:
+      case GI_TYPE_TAG_INT64:
+      case GI_TYPE_TAG_UINT64:
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(%s) everything",
+                 g_type_tag_to_string(type_tag));
+        break;
+      case GI_TYPE_TAG_GLIST:
+        g_list_foreach(argument->v_pointer, (GFunc)g_object_unref, NULL);
+        g_list_free(argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(%s) everything",
+                 g_type_tag_to_string(type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
 VALUE
 rb_gi_return_argument_to_ruby(GIArgument *argument,
                               GICallableInfo *callable_info)
 {
+    VALUE rb_argument;
     gboolean may_return_null;
     GITypeInfo return_value_info;
 
@@ -520,7 +583,21 @@ rb_gi_return_argument_to_ruby(GIArgument *argument,
     }
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
-    return rb_gi_argument_to_ruby(argument, &return_value_info);
+    rb_argument = rb_gi_argument_to_ruby(argument, &return_value_info);
+    switch (g_callable_info_get_caller_owns(callable_info)) {
+      case GI_TRANSFER_NOTHING:
+        break;
+      case GI_TRANSFER_CONTAINER:
+        rb_gi_return_argument_free_container(argument, &return_value_info);
+        break;
+      case GI_TRANSFER_EVERYTHING:
+        rb_gi_return_argument_free_everything(argument, &return_value_info);
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+    return rb_argument;
 }
 
 static void
