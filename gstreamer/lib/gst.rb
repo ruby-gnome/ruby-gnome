@@ -61,6 +61,7 @@ module Gst
       require "gst/element"
       require "gst/element-factory"
       require "gst/registry"
+      require "gst/structure"
       init_base
       init_controller
       class << self
