@@ -18,11 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include <gst/gst.h>
-
-#include <rb-gobject-introspection.h>
-
-extern void Init_gstreamer (void);
+#include "rbgst.h"
 
 static gboolean
 name_equal(GIArgInfo *info, const gchar *target_name)
@@ -136,4 +132,6 @@ Init_gstreamer (void)
     rb_gi_callback_register_finder(rg_gst_bus_func_callback_finder);
     rb_gi_callback_register_finder(rg_gst_bus_sync_handler_callback_finder);
     rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
+
+    rb_gst_init_element_factory();
 }
