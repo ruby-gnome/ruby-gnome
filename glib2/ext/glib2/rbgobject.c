@@ -149,25 +149,31 @@ rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc)
     }
 }
 
+void
+rbgobj_instance_unref(gpointer instance)
+{
+    GType type;
+
+    type = G_TYPE_FROM_INSTANCE(instance);
+    if (!rbgobj_convert_unref(type, instance)) {
+        type = G_TYPE_FUNDAMENTAL(type);
+        switch (type) {
+          case G_TYPE_OBJECT:
+            g_object_unref(instance);
+            break;
+          default:
+            rbgobj_convert_unref(type, instance);
+            break;
+        }
+    }
+}
+
 VALUE
 rbgobj_ruby_object_from_instance_with_unref(gpointer instance)
 {
     VALUE result = rbgobj_ruby_object_from_instance(instance);
     if (!NIL_P(result)) {
-        GType type;
-
-        type = G_TYPE_FROM_INSTANCE(instance);
-        if (!rbgobj_convert_unref(type, instance)) {
-            type = G_TYPE_FUNDAMENTAL(type);
-            switch (type) {
-              case G_TYPE_OBJECT:
-                g_object_unref(instance);
-                break;
-              default:
-                rbgobj_convert_unref(type, instance);
-                break;
-            }
-        }
+        rbgobj_instance_unref(instance);
     }
     return result;
 }

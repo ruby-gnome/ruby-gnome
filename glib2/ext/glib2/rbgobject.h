@@ -143,6 +143,7 @@ extern gpointer rbgobj_instance_from_ruby_object(VALUE obj);
 extern VALUE rbgobj_ruby_object_from_instance(gpointer instance);
 extern VALUE rbgobj_ruby_object_from_instance2(gpointer instance, gboolean alloc);
 extern VALUE rbgobj_ruby_object_from_instance_with_unref(gpointer instance);
+extern void rbgobj_instance_unref(gpointer instance);
 
 extern void rbgobj_add_relative(VALUE obj, VALUE relative);
 extern void rbgobj_invalidate_relatives(VALUE obj);
