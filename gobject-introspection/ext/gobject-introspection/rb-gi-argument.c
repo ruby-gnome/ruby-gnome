@@ -574,8 +574,7 @@ rb_gi_return_argument_free_everything_interface(GIArgument *argument,
                  "TODO: free GIArgument(interface)[callback] everything");
         break;
       case GI_INFO_TYPE_STRUCT:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free GIArgument(interface)[struct] everything");
+        rbgobj_instance_unref(argument->v_pointer);
         break;
       case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
