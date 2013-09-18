@@ -43,6 +43,15 @@ module Gst
       end
     end
 
+    def method_missing(name, *args, &block)
+      init()
+      if respond_to?(name)
+        __send__(name, *args, &block)
+      else
+        super
+      end
+    end
+
     def init(*argv)
       loader = Loader.new(self, argv)
       loader.load("Gst")
@@ -54,6 +63,7 @@ module Gst
       class << self
         remove_method(:init)
         remove_method(:const_missing)
+        remove_method(:method_missing)
       end
     end
 
