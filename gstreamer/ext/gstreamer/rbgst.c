@@ -18,11 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include <gst/gst.h>
-
-#include <rb-gobject-introspection.h>
-
-extern void Init_gstreamer (void);
+#include "rbgst.h"
 
 static gboolean
 name_equal(GIArgInfo *info, const gchar *target_name)
@@ -72,15 +68,15 @@ rg_gst_bus_func_callback_finder(GIArgInfo *info)
 }
 
 static gboolean
-rg_gst_bus_sync_handler_callback(GstBus *bus, GstMessage *message,
-                                 gpointer user_data)
+rg_gst_bus_sync_handler_callback(GstBus   *bus, GstMessage *message,
+                                 gpointer  user_data)
 {
     RBGICallbackData *callback_data = user_data;
-    VALUE rb_bus_sync_reply;
-    ID id_call;
+    VALUE             rb_bus_sync_reply;
+    ID                id_call;
 
     CONST_ID(id_call, "call");
-    rb_bus_sync_reply =
+    rb_bus_sync_reply = 
         rb_funcall(callback_data->rb_callback, id_call, 2,
                    GOBJ2RVAL(bus),
                    BOXED2RVAL(message, GST_MINI_OBJECT_TYPE(message)));
@@ -101,10 +97,10 @@ rg_gst_bus_sync_handler_callback_finder(GIArgInfo *info)
 
 static void
 rg_gst_tag_foreach_func_callback(const GstTagList *list, const gchar *tag,
-                                 gpointer user_data)
+                                 gpointer          user_data)
 {
     RBGICallbackData *callback_data = user_data;
-    ID id_call;
+    ID                id_call;
 
     CONST_ID(id_call, "call");
     rb_funcall(callback_data->rb_callback, id_call, 2,
@@ -131,9 +127,11 @@ rg_gst_tag_foreach_func_callback_finder(GIArgInfo *info)
 }
 
 void
-Init_gstreamer (void)
+Init_gstreamer(void)
 {
     rb_gi_callback_register_finder(rg_gst_bus_func_callback_finder);
     rb_gi_callback_register_finder(rg_gst_bus_sync_handler_callback_finder);
     rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
+
+    rb_gst_init_static_pad_template();
 }
