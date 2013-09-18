@@ -29,6 +29,10 @@ array_c_to_ruby(const gchar **elements, GITypeInfo *type_info, VALUE rb_array)
     gboolean fixed_size_p;
     gboolean zero_terminated_p;
 
+    if (!elements) {
+        return;
+    }
+
     n_elements = g_type_info_get_array_length(type_info);
     fixed_size_p = g_type_info_get_array_fixed_size(type_info);
     zero_terminated_p = g_type_info_is_zero_terminated(type_info);
