@@ -543,7 +543,13 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
       case GI_TYPE_TAG_FLOAT:
       case GI_TYPE_TAG_DOUBLE:
       case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(%s) everything",
+                 g_type_tag_to_string(type_tag));
+        break;
       case GI_TYPE_TAG_UTF8:
+        g_free(argument->v_string);
+        break;
       case GI_TYPE_TAG_FILENAME:
       case GI_TYPE_TAG_ARRAY:
       case GI_TYPE_TAG_INTERFACE:
