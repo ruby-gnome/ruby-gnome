@@ -114,17 +114,12 @@ class Inspector
   end
 
   def print_factory_details_info(factory)
-    rank = Gst::Rank.new(factory.rank)
-    rank_name = rank.name
-    rank_name ||= "unknown"
-    rank_name = rank_name.gsub(/GST_RANK_/, '').downcase
-
     puts("Factory Details:",
+         "  Rank:\t\t#{factory.rank.nick} (#{factory.rank.to_i})",
          "  Long name:\t#{factory.long_name}",
          "  Class:\t#{factory.klass}",
          "  Description:\t#{factory.description}",
          "  Author(s):\t#{factory.author}",
-         "  Rank:\t\t#{rank_name} (#{factory.rank.to_i})",
          "")
   end
 
