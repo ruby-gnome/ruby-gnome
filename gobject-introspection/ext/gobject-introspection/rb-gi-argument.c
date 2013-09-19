@@ -589,7 +589,9 @@ rb_gi_return_argument_free_everything_interface(GIArgument *argument,
                  "TODO: free GIArgument(interface)[flags] everything");
         break;
       case GI_INFO_TYPE_OBJECT:
-        g_object_unref(argument->v_pointer);
+        if (argument->v_pointer) {
+            g_object_unref(argument->v_pointer);
+        }
         break;
       case GI_INFO_TYPE_INTERFACE:
         rb_raise(rb_eNotImpError,
