@@ -248,8 +248,8 @@ class Inspector
   end
 
   def print_clocking_info(element)
-    if !element.require_clock? and
-        !element.provide_clock? and
+    if !element.flags.require_clock? and
+        !element.flags.provide_clock? and
         element.clock.nil?
       puts("Element has no clocking capabilities.")
       puts
@@ -257,8 +257,8 @@ class Inspector
     end
 
     puts("Clocking Interaction:")
-    puts("  element requires a clock") if element.require_clock?
-    if element.provide_clock?
+    puts("  element requires a clock") if element.flags.require_clock?
+    if element.flags.provide_clock?
       clock = element.clock
       if clock.nil?
         puts("  element is supported tot provide a clock but returned nil")
@@ -270,7 +270,7 @@ class Inspector
   end
 
   def print_index_info(element)
-    if element.indexable?
+    if element.flags.indexable?
       puts("Indexing capabilities:")
       puts("  element can do indexing")
     else
