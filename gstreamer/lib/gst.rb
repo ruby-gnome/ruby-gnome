@@ -60,6 +60,7 @@ module Gst
       require "gst/caps"
       require "gst/element"
       require "gst/element-factory"
+      require "gst/plugin-feature"
       require "gst/registry"
       require "gst/structure"
       init_base
