@@ -135,8 +135,12 @@ class Inspector
          "  Filename:\t\t#{plugin.filename || '(null)'}",
          "  Version:\t\t#{plugin.version}",
          "  License:\t\t#{plugin.license}",
-         "  Source module:\t#{plugin.source}",
-         "  Binary package:\t#{plugin.package}",
+         "  Source module:\t#{plugin.source}")
+    release_date = plugin.release_date_string
+    if release_date
+      puts("  Source release date:\t#{release_date}")
+    end
+    puts("  Binary package:\t#{plugin.package}",
          "  Origin URL:\t\t#{plugin.origin}",
          "")
   end
