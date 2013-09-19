@@ -44,5 +44,10 @@ module Gst
       link_element(element)
       element
     end
+
+    alias_method :flags_raw, :flags
+    def flags
+      ElementFlags.new(flags_raw)
+    end
   end
 end
