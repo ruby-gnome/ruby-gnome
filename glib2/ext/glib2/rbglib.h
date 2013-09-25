@@ -51,6 +51,10 @@ extern "C" {
 #  define DBL2NUM(v)      (rb_float_new(v))
 #endif
 
+#ifndef RBASIC_CLASS
+#  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
+#endif
+
 #if ! GLIB_CHECK_VERSION(2,4,0)
 typedef int GPid;
 #endif

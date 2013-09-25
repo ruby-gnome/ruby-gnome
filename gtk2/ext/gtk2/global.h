@@ -53,10 +53,6 @@
 #  define CAIRO_AVAILABLE 0
 #endif
 
-#ifndef RBASIC_CLASS
-#  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
-#endif
-
 extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
