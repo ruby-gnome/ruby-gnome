@@ -35,7 +35,7 @@ make_gdkevent(GdkEvent *ev)
     if (ev == NULL) return Qnil;
 
     obj = GDKEVENT2RVAL(ev);
-    RBASIC(obj)->klass = gdkevents[ev->type]; /* hack */
+    RBASIC_CLASS(obj) = gdkevents[ev->type]; /* hack */
     return obj;
 }
 

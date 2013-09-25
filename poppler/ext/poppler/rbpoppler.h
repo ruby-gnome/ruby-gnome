@@ -41,6 +41,10 @@
 #  define POPPLER_TYPE_FONTS_ITER (poppler_fonts_iter_get_type ())
 #endif
 
+#ifndef RBASIC_CLASS
+#  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
+#endif
+
 #ifndef POPPLER_TYPE_DEST
 extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  define POPPLER_TYPE_DEST (poppler_dest_get_type ())

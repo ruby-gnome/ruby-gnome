@@ -33,7 +33,7 @@ rb_poppler_ruby_object_from_action(PopplerAction *action)
         return Qnil;
 
     obj = BOXED2RVAL(action, POPPLER_TYPE_ACTION);
-    RBASIC(obj)->klass = actions[action->type];
+    RBASIC_CLASS(obj) = actions[action->type];
     return obj;
 }
 
