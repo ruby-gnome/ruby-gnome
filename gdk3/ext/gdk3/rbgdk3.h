@@ -50,6 +50,10 @@
 #define GDK_TYPE_WINDOW_ATTR (gdk_windowattr_get_type())
 #define GDK_TYPE_TIME_COORD (gdk_timecoord_get_type())
 
+#ifndef RBASIC_CLASS
+#  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
+#endif
+
 typedef struct {
     GdkAtom atom;
 } GdkAtomData;
