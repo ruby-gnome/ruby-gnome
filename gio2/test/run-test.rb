@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # -*- coding: utf-8 -*-
 
 base = File.dirname(File.expand_path(__FILE__))
