@@ -47,6 +47,6 @@ require "gobject-introspection-test-utils"
 $LOAD_PATH.unshift(File.join(clutter_base, "test"))
 require "clutter-test-utils"
 
-require "clutter-gstreamer"
+require "clutter-gst"
 
 exit Test::Unit::AutoRunner.run(true)
