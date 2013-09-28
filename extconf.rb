@@ -23,6 +23,10 @@ priorlibs = [
   "gtk3",
 ]
 
+unsupported_libraries = [
+  "gstreamer-no-gi"
+]
+
 #
 # detect sub-directories
 #
@@ -56,6 +60,7 @@ if subdirs.size == 0
   subdirs -= priorlibs
   subdirs = priorlibs + subdirs #Change the order
 end
+subdirs -= unsupported_libraries
 
 #
 # generate sub-directory Makefiles
