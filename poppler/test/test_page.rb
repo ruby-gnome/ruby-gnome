@@ -43,7 +43,7 @@ class TestPage < Test::Unit::TestCase
     end
     File.open(image_png, "rb") do |image|
       # TODO: support image diff
-      #assert_equal(image.read, png.string)
+      assert_equal(image.read, png.string)
     end
   end
 
