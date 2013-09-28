@@ -22,6 +22,7 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 glib_base = File.join(ruby_gnome2_base, "glib2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
+clutter_gtk_base = File.join(ruby_gnome2_base, "clutter-gtk")
 
 modules = [
   [glib_base, "glib2"],
@@ -45,6 +46,9 @@ require "gobject-introspection-test-utils"
 $LOAD_PATH.unshift(File.join(clutter_base, "test"))
 require "clutter-test-utils"
 
-require "clutter"
+$LOAD_PATH.unshift(File.join(clutter_gtk_base, "test"))
+require "clutter-gtk-test-utils"
+
+require "clutter-gtk"
 
 exit Test::Unit::AutoRunner.run(true)
