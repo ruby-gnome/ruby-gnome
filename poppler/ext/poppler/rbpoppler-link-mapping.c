@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -35,7 +34,7 @@ DEF_ACCESSOR(link_mapping, action, RVAL2POPPLERLINKMAPPING,
              POPPLERACTION2RVAL, RVAL2POPPLERACTION)
 
 void
-Init_poppler_linkmapping(VALUE mPoppler)
+Init_poppler_link_mapping(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_LINK_MAPPING, "LinkMapping",
                                mPoppler);

@@ -5,26 +5,26 @@
 
 #define RVAL2GDKPIXBUF(o) (GDK_PIXBUF(RVAL2GOBJ(o)))
 
-G_GNUC_INTERNAL void Init_poppler_indexiter(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_fontinfo(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_index_iter(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_font_info(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_document(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_fontsiter(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_psfile(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_fonts_iter(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_ps_file(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_rectangle(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_page(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_color(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_linkmapping(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_pagetransition(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_imagemapping(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_formfieldmapping(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_annotationmapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_link_mapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_page_transition(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_image_mapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_form_field_mapping(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotation_mapping(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_attachment(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_action(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_annotation(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_annotationmarkup(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_annotationtext(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_annotationfreetext(VALUE mPoppler);
-G_GNUC_INTERNAL void Init_poppler_annotationcalloutline(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotation_markup(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotation_text(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotation_free_text(VALUE mPoppler);
+G_GNUC_INTERNAL void Init_poppler_annotation_callout_line(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_form_field(VALUE mPoppler);
 G_GNUC_INTERNAL void Init_poppler_button_field(VALUE mPoppler, VALUE cFormField);
 G_GNUC_INTERNAL void Init_poppler_text_field(VALUE mPoppler, VALUE cFormField);

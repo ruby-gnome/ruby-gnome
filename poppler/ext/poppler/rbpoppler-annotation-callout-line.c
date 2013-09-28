@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2008  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2008-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -87,7 +86,7 @@ rg_inspect(VALUE self)
 }
 
 void
-Init_poppler_annotationcalloutline(VALUE mPoppler)
+Init_poppler_annotation_callout_line(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT_CALLOUT_LINE,
                                          "AnnotationCalloutLine", mPoppler);

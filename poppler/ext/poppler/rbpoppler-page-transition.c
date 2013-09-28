@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -32,7 +31,7 @@ DEF_ACCESSOR(page_trans, scale, RVAL2POPPLERPAGETRANSITION, NUM2DBL, rb_float_ne
 DEF_ACCESSOR(page_trans, rectangular, RVAL2POPPLERPAGETRANSITION, RVAL2CBOOL, CBOOL2RVAL)
 
 void
-Init_poppler_pagetransition(VALUE mPoppler)
+Init_poppler_page_transition(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_PAGE_TRANSITION,
                                   "PageTransition", mPoppler);

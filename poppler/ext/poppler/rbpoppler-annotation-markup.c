@@ -78,7 +78,7 @@ rg_external_data(VALUE self)
 }
 
 void
-Init_poppler_annotationmarkup(VALUE mPoppler)
+Init_poppler_annotation_markup(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE;
 

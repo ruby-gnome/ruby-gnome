@@ -104,7 +104,7 @@ rg_each(VALUE self)
 }
 
 void
-Init_poppler_fontsiter(VALUE mPoppler)
+Init_poppler_fonts_iter(VALUE mPoppler)
 {
     VALUE RG_TARGET_NAMESPACE;
 

@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -95,25 +94,25 @@ Init_poppler(void)
     RG_DEF_SMETHOD(version, 0);
     RG_DEF_SMETHOD_P(cairo_available, 0);
 
-    Init_poppler_indexiter(RG_TARGET_NAMESPACE);
-    Init_poppler_fontinfo(RG_TARGET_NAMESPACE);
+    Init_poppler_index_iter(RG_TARGET_NAMESPACE);
+    Init_poppler_font_info(RG_TARGET_NAMESPACE);
     Init_poppler_document(RG_TARGET_NAMESPACE);
-    Init_poppler_fontsiter(RG_TARGET_NAMESPACE);
-    Init_poppler_psfile(RG_TARGET_NAMESPACE);
+    Init_poppler_fonts_iter(RG_TARGET_NAMESPACE);
+    Init_poppler_ps_file(RG_TARGET_NAMESPACE);
     Init_poppler_rectangle(RG_TARGET_NAMESPACE);
     Init_poppler_page(RG_TARGET_NAMESPACE);
     Init_poppler_color(RG_TARGET_NAMESPACE);
-    Init_poppler_linkmapping(RG_TARGET_NAMESPACE);
-    Init_poppler_pagetransition(RG_TARGET_NAMESPACE);
-    Init_poppler_imagemapping(RG_TARGET_NAMESPACE);
-    Init_poppler_formfieldmapping(RG_TARGET_NAMESPACE);
-    Init_poppler_annotationmapping(RG_TARGET_NAMESPACE);
+    Init_poppler_link_mapping(RG_TARGET_NAMESPACE);
+    Init_poppler_page_transition(RG_TARGET_NAMESPACE);
+    Init_poppler_image_mapping(RG_TARGET_NAMESPACE);
+    Init_poppler_form_field_mapping(RG_TARGET_NAMESPACE);
+    Init_poppler_annotation_mapping(RG_TARGET_NAMESPACE);
     Init_poppler_attachment(RG_TARGET_NAMESPACE);
     Init_poppler_action(RG_TARGET_NAMESPACE);
     Init_poppler_annotation(RG_TARGET_NAMESPACE);
-    Init_poppler_annotationmarkup(RG_TARGET_NAMESPACE);
-    Init_poppler_annotationtext(RG_TARGET_NAMESPACE);
-    Init_poppler_annotationfreetext(RG_TARGET_NAMESPACE);
-    Init_poppler_annotationcalloutline(RG_TARGET_NAMESPACE);
+    Init_poppler_annotation_markup(RG_TARGET_NAMESPACE);
+    Init_poppler_annotation_text(RG_TARGET_NAMESPACE);
+    Init_poppler_annotation_free_text(RG_TARGET_NAMESPACE);
+    Init_poppler_annotation_callout_line(RG_TARGET_NAMESPACE);
     Init_poppler_form_field(RG_TARGET_NAMESPACE);
 }
