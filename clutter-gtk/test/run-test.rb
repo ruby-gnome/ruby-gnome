@@ -51,4 +51,6 @@ require "clutter-gtk-test-utils"
 
 require "clutter-gtk"
 
-exit Test::Unit::AutoRunner.run(true)
+# exclude sample/test-*
+clutter_gtk_test_base = File.join(clutter_gtk_base, "test")
+exit Test::Unit::AutoRunner.run(true, clutter_gtk_test_base)
