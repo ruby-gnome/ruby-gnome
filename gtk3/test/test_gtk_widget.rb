@@ -6,7 +6,7 @@ class TestGtkWidget < Test::Unit::TestCase
   end
 
   def test_set_window
-    attrs = Gdk::WindowAttr.new(100, 100, :only, :temp)
+    attrs = Gdk::WindowAttr.new(100, 100, :input_only, :temp)
     window = Gdk::Window.new(nil, attrs, 0)
     @widget.window = window
     assert_equal(window, @widget.window)
