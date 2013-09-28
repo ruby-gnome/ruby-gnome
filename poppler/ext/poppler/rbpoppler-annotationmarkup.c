@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2008  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2008-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -81,10 +80,12 @@ rg_external_data(VALUE self)
 void
 Init_poppler_annotationmarkup(VALUE mPoppler)
 {
+    VALUE RG_TARGET_NAMESPACE;
+
     id_new = rb_intern("new");
     rb_cDate = rb_const_get(rb_cObject, rb_intern("Date"));
 
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_ANNOT_MARKUP,
+    RG_TARGET_NAMESPACE= G_DEF_CLASS(POPPLER_TYPE_ANNOT_MARKUP,
                                     "AnnotationMarkup", mPoppler);
 
     RG_DEF_METHOD(label, 0);

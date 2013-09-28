@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -107,9 +106,11 @@ rg_each(VALUE self)
 void
 Init_poppler_fontsiter(VALUE mPoppler)
 {
+    VALUE RG_TARGET_NAMESPACE;
+
     id_valid = rb_intern("valid?");
 
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
+    RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FONTS_ITER, "FontsIter", mPoppler);
 
     rb_include_module(RG_TARGET_NAMESPACE, rb_mEnumerable);
 
