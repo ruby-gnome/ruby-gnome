@@ -3,8 +3,7 @@ env:
     - DISPLAY=":99.0"
 notifications:
   recipients:
-    - kou@cozmixng.org
-    - myokoym@gmail.com
+    - ruby-gnome2-cvs@lists.sourceforge.net
 rvm:
   - 1.8.7
   - 1.9.3
