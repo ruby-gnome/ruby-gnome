@@ -87,13 +87,11 @@ rg_clear_cache(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_iter_is_valid_p(VALUE self, VALUE iter)
 {
     return CBOOL2RVAL(gtk_tree_model_sort_iter_is_valid(_SELF(self), RVAL2GTKTREEITER(iter)));
 }
-#endif
 
 void 
 Init_gtk_tmodelsort(VALUE mGtk)
@@ -109,8 +107,6 @@ Init_gtk_tmodelsort(VALUE mGtk)
     RG_DEF_METHOD(convert_iter_to_child_iter, 1);
     RG_DEF_METHOD(reset_default_sort_func, 0);
     RG_DEF_METHOD(clear_cache, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD_P(iter_is_valid, 1);
-#endif
 
 }
