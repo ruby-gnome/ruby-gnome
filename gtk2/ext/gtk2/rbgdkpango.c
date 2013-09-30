@@ -32,12 +32,7 @@ rg_m_context(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (NIL_P(screen)){
         ret = GOBJ2RVAL(gdk_pango_context_get());
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         ret = GOBJ2RVAL(gdk_pango_context_get_for_screen(GDK_SCREEN(RVAL2GOBJ(screen))));
-#else
-        rb_warn("Gdk::Pango.context_get: Not supported arguments in GTK+-2.0.x.");
-        ret = GOBJ2RVAL(gdk_pango_context_get());
-#endif
     }
     return ret;
 }
