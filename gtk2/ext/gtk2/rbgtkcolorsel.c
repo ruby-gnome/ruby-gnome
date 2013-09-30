@@ -157,7 +157,6 @@ rg_s_palette_to_string(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL_FREE(palette);
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static void
 screen_func(GdkScreen *screen, const GdkColor *colors, gint n_colors)
 {
@@ -181,7 +180,6 @@ rg_s_set_change_palette_hook(VALUE self)
         (GtkColorSelectionChangePaletteWithScreenFunc)screen_func);
     return self;
 }
-#endif
 
 /* Don't implement them.
 GtkColorSelectionChangePaletteFunc gtk_color_selection_set_change_palette_hook
@@ -207,9 +205,7 @@ Init_gtk_color_selection(VALUE mGtk)
     RG_DEF_SMETHOD(palette_to_string, -1);
     RG_DEF_SMETHOD(palette_from_string, 1);
 
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(set_change_palette_hook, 0);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
