@@ -216,7 +216,6 @@ rg_operator_treeiter_eql(VALUE self, VALUE other)
     return Qtrue;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_to_str(VALUE self)
 {
@@ -228,7 +227,6 @@ rg_to_str(VALUE self)
     g_free(s);
     return result;
 }
-#endif
 
 void 
 Init_gtk_treeiter(VALUE mGtk)
@@ -248,8 +246,6 @@ Init_gtk_treeiter(VALUE mGtk)
     RG_DEF_METHOD(set_value, 2);
     RG_DEF_METHOD_OPERATOR("[]=", treeiter_set_value_eql, 2);
     RG_DEF_METHOD_OPERATOR("==", treeiter_eql, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(to_str, 0);
     RG_DEF_ALIAS("to_s", "to_str");
-#endif
 }
