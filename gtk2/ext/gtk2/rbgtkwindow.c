@@ -241,7 +241,6 @@ rg_unmaximize(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0) 
 static VALUE
 rg_fullscreen(VALUE self)
 {
@@ -254,7 +253,6 @@ rg_unfullscreen(VALUE self)
     gtk_window_unfullscreen(_SELF(self));
     return self;
 }
-#endif
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_keep_above(VALUE self, VALUE setting)
@@ -419,7 +417,6 @@ rg_s_set_default_icon_list(G_GNUC_UNUSED VALUE self, VALUE rblist)
     return rblist;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
 {
@@ -438,7 +435,6 @@ rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
     }
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
@@ -453,16 +449,12 @@ static VALUE
 gwin_set_icon(VALUE self, VALUE icon_or_filename)
 {
     if (TYPE(icon_or_filename) == T_STRING){
-#if GTK_CHECK_VERSION(2,2,0)
         GError* err;
         gboolean ret = gtk_window_set_icon_from_file(_SELF(self),
                                                      RVAL2CSTR(icon_or_filename), &err);
         if (! ret)
             RAISE_GERROR(err);
-#else
-        rb_raise(rb_eArgError, "Invalid argument: %s, or you may need to use GTK+-2.4.x", 
-                 rb_class2name(CLASS_OF(icon_or_filename)));
-#endif
+
     } else {
         gtk_window_set_icon(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
     }
@@ -483,14 +475,12 @@ rg_set_icon_list(VALUE self, VALUE rblist)
     return rblist;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_set_auto_startup_notification(VALUE self, VALUE setting)
 {
     gtk_window_set_auto_startup_notification(RVAL2CBOOL(setting));
     return self;
 }
-#endif
 
 /* They are not public methods.
 static VALUE
@@ -567,10 +557,8 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(unstick, 0);
     RG_DEF_METHOD(maximize, 0);
     RG_DEF_METHOD(unmaximize, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(fullscreen, 0);
     RG_DEF_METHOD(unfullscreen, 0);
-#endif
 #if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_keep_above, 1);
     RG_DEF_METHOD(set_keep_below, 1);
@@ -596,17 +584,13 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(reshow_with_initial_size, 0);
     RG_DEF_METHOD(resize, 2);
     RG_DEF_SMETHOD(set_default_icon_list, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(set_default_icon, 1);
-#endif
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(set_default_icon_name, 1);
 #endif
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "icon", gwin_set_icon, 1);
     RG_DEF_METHOD(set_icon_list, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(set_auto_startup_notification, 1);
-#endif
 
 /*
     RG_DEF_METHOD(decorated_window_init, 0);
