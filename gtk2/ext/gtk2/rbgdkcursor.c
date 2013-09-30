@@ -33,7 +33,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         rb_scan_args(argc, argv, "10", &type);
         cursor = gdk_cursor_new(RVAL2GENUM(type, GDK_TYPE_CURSOR_TYPE));
     } else if (argc == 2) {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, type_or_name;
         rb_scan_args(argc, argv, "20", &display, &type_or_name);
 #if GTK_CHECK_VERSION(2,8,0)
@@ -44,9 +43,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 #endif
             cursor = gdk_cursor_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
                                                 RVAL2GENUM(type_or_name, GDK_TYPE_CURSOR_TYPE));
-#else
-        rb_raise(rb_eRuntimeError, "Gdk::Cursor.new(display, cursor_type) has been supported since GTK+-2.2.");
-#endif
     } else if (argc == 4) {
 #if GTK_CHECK_VERSION(2,4,0)
         VALUE display, pixbuf, x, y;
@@ -71,13 +67,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_display(VALUE self)
 {
     return GOBJ2RVAL(gdk_cursor_get_display((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
-#endif
 
 static VALUE
 rg_pixmap_p(VALUE self)
@@ -106,9 +100,7 @@ Init_gtk_gdk_cursor(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
     RG_DEF_METHOD(initialize, -1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(display, 0);
-#endif
     RG_DEF_METHOD_P(pixmap, 0);
     RG_DEF_METHOD(cursor_type, 0);
 #if GTK_CHECK_VERSION(2,8,0)
