@@ -103,12 +103,7 @@ rg_m_xid_table_lookup(int argc, VALUE *argv, VALUE self)
         win = gdk_xid_table_lookup(NUM2UINT(arg[0]));
         break;
       case 2:
-#if GTK_CHECK_VERSION(2,2,0)
-        win = gdk_xid_table_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1])); 
-#else
-        win = gdk_xid_table_lookup(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif
+        win = gdk_xid_table_lookup_for_display(RVAL2GOBJ(arg[0]), NUM2UINT(arg[1]));
         break;
     }
     if (win == NULL)
