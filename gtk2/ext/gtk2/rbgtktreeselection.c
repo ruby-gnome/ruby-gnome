@@ -160,7 +160,6 @@ rg_select_range(VALUE self, VALUE start_path, VALUE end_path)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_selected_rows(VALUE self)
 {
@@ -185,7 +184,6 @@ rg_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
                                       RVAL2GTKTREEPATH(end_path));
     return self;
 }
-#endif
 
 void
 Init_gtk_treeselection(VALUE mGtk)
@@ -207,11 +205,9 @@ Init_gtk_treeselection(VALUE mGtk)
     RG_DEF_METHOD(select_all, 0);
     RG_DEF_METHOD(unselect_all, 0);
     RG_DEF_METHOD(select_range, 2);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(selected_rows, 0);
     RG_DEF_METHOD(count_selected_rows, 0);
     RG_DEF_METHOD(unselect_range, 2);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }
