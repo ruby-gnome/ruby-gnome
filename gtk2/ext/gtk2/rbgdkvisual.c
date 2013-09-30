@@ -117,13 +117,11 @@ rg_s_best_with_both(G_GNUC_UNUSED VALUE self, VALUE depth, VALUE type)
                                     (GdkVisualType)RVAL2GENUM(type, GDK_TYPE_VISUAL_TYPE)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_visual_get_screen(_SELF(self)));
 }
-#endif
 
 /* Structure accessors */
 static VALUE
@@ -228,9 +226,7 @@ Init_gtk_gdk_visual(VALUE mGdk)
     RG_DEF_SMETHOD(best_with_both, 2);
 
     /* instance methods */
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(screen, 0);
-#endif
     RG_DEF_METHOD(visual_type, 0);
     RG_DEF_METHOD(depth, 0);
     RG_DEF_METHOD(byte_order, 0);
