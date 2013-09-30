@@ -108,7 +108,6 @@ rg_s_from_accel_closure(G_GNUC_UNUSED VALUE self, VALUE closure)
                          (GClosure*)RVAL2BOXED(closure, G_TYPE_CLOSURE)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static gboolean
 gaccelgrp_find_func(GtkAccelKey *key, GClosure *closure, gpointer func)
 {
@@ -128,7 +127,6 @@ rg_find(VALUE self)
                                   (gpointer)func);
     return BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY);
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
@@ -202,7 +200,5 @@ Init_gtk_accel_group(VALUE mGtk)
     RG_DEF_METHOD(disconnect, 1);
     RG_DEF_METHOD(disconnect_key, 2);
     RG_DEF_METHOD(query, 2);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(find, 0);
-#endif
 }
