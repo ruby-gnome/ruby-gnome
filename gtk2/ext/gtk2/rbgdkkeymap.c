@@ -29,13 +29,13 @@ rg_s_default(G_GNUC_UNUSED VALUE self)
 {
   return GOBJ2RVAL(gdk_keymap_get_default());
 }
-#if GTK_CHECK_VERSION(2,2,0)
+
 static VALUE
 rg_s_for_display(G_GNUC_UNUSED VALUE self, VALUE display)
 {
   return GOBJ2RVAL(gdk_keymap_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display))));
 }
-#endif
+
 static VALUE
 rg_lookup_key(VALUE self, VALUE keycode, VALUE group, VALUE level)
 {
@@ -138,9 +138,7 @@ Init_gtk_gdk_keymap(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_KEYMAP, "Keymap", mGdk);
 
     RG_DEF_SMETHOD(default, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(for_display, 0);
-#endif
     RG_DEF_METHOD(lookup_key, 3);
     RG_DEF_METHOD(translate_keyboard_state, 3);
     RG_DEF_METHOD(get_entries_for_keyval, 1);

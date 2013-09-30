@@ -213,7 +213,6 @@ gdkevent ## type ## _set_axes(VALUE self, VALUE x, VALUE y)\
 
 
 /* initialize */
-#if GTK_CHECK_VERSION(2,2,0)
 #define GDKEVENT_INIT(type, default_gtype) \
 static VALUE \
 gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
@@ -231,15 +230,6 @@ gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
     G_INITIALIZE(self, gdk_event_new(gtype));\
     return Qnil;\
 }
-#else
-#define GDKEVENT_INIT(type, default_gtype) \
-static VALUE \
-gdkevent ## type ## _initialize(int argc, VALUE *argv, VALUE self)\
-{\
-    rb_raise(rb_eRuntimeError, "Gdk::Event.new is not supported in this environment.");\
-    return Qnil;\
-}
-#endif
 
 #define DEFINE_INIT(event, type)                                         \
   rb_define_method(event, "initialize", gdkevent ## type ## _initialize, -1);
@@ -272,7 +262,6 @@ gdkevent_s_get_graphics_expose(G_GNUC_UNUSED VALUE self, VALUE window)
 }
 
 /* GdkEvent */
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkevent_initialize(VALUE self, VALUE type)
 {
@@ -283,7 +272,6 @@ gdkevent_initialize(VALUE self, VALUE type)
     G_INITIALIZE(self, gdk_event_new(gtype));
     return Qnil;
 }
-#endif
 
 static VALUE
 gdkevent_type(VALUE self)
@@ -359,7 +347,6 @@ gdkevent_s_set_show_events(VALUE self, VALUE show_events)
     gdk_set_show_events(RVAL2CBOOL(show_events));
     return self;
 }
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 gdkevent_set_screen(VALUE self, VALUE screen)
 {
@@ -372,7 +359,6 @@ gdkevent_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_event_get_screen(get_gdkevent(self)));
 }
-#endif
 
 /*
   type: String, Integer, Gdk::Color.
@@ -582,15 +568,10 @@ gdkeventclient_send_client_message(int argc, VALUE *argv, VALUE self)
         return CBOOL2RVAL(gdk_event_send_client_message(
                               get_gdkevent(self), RVAL2GDKNATIVEWINDOW(xid)));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         return CBOOL2RVAL(gdk_event_send_client_message_for_display(
                               GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                               get_gdkevent(self),
                               RVAL2GDKNATIVEWINDOW(xid)));
-#else
-        rb_warn("this arguments number has been supported since 2.2");
-        return Qfalse;
-#endif
     }
 }
 
@@ -708,9 +689,7 @@ Init_gtk_gdk_event(VALUE mGdk)
 #endif
 
     /* GdkEvent */
-#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkEvent, "initialize", gdkevent_initialize, 1);
-#endif
     rb_define_method(gdkEvent, "event_type", gdkevent_type, 0);
 
     rb_define_singleton_method(gdkEvent, "events_pending?", gdkevent_s_events_pending, 0);
@@ -726,10 +705,8 @@ Init_gtk_gdk_event(VALUE mGdk)
     rb_define_singleton_method(gdkEvent, "set_show_events", gdkevent_s_set_show_events, 1);
     rb_define_singleton_method(gdkEvent, "setting_get", gdkevent_s_setting_get, -1);
     rb_define_singleton_method(gdkEvent, "add_client_message_filter", gdkevent_s_add_client_message_filter, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     rb_define_method(gdkEvent, "screen", gdkevent_screen, 0);
     rb_define_method(gdkEvent, "set_screen", gdkevent_set_screen, 1);
-#endif
     G_DEF_SETTERS(gdkEvent);
 
     /* GdkEventAny */

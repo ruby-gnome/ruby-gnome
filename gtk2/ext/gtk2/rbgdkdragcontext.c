@@ -102,15 +102,10 @@ rg_s_get_protocol(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_scan_args(argc, argv, "10", &xid);
         ret = gdk_drag_get_protocol(RVAL2GDKNATIVEWINDOW(xid), &prot);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display;
         rb_scan_args(argc, argv, "20", &display, &xid);
         ret = gdk_drag_get_protocol_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                 RVAL2GDKNATIVEWINDOW(xid), &prot);
-#else
-        rb_warn("Not supported arguments for Gdk::Display in GTK+-2.0.x.");
-        ret = gdk_drag_get_protocol(NUM2UINT(xid), &prot);
-#endif
     }
 
     return rb_ary_new3(2, GENUM2RVAL(prot, GDK_TYPE_DRAG_PROTOCOL), GDKNATIVEWINDOW2RVAL(ret));
@@ -158,7 +153,6 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
                              NUM2INT(x_root), NUM2INT(y_root),
                              &dest_window, &prot);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE screen;
         rb_scan_args(argc, argv, "40", &drag_window, &screen, &x_root, &y_root);
         gdk_drag_find_window_for_screen(_SELF(self),
@@ -166,9 +160,6 @@ rg_find_window(int argc, VALUE *argv, VALUE self)
                                         GDK_SCREEN(RVAL2GOBJ(screen)),
                                         NUM2INT(x_root), NUM2INT(y_root),
                                         &dest_window, &prot);
-#else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     }
 
     return rb_ary_new3(2, GOBJ2RVAL(dest_window), 

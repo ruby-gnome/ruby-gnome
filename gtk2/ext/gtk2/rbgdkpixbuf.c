@@ -40,10 +40,7 @@ rg_render_to_drawable(int argc, VALUE *argv, VALUE self)
 {
     VALUE gc, src_x, src_y, dest_x, dest_y, width, height,
         dither, x_dither, y_dither;
-
-#if GTK_CHECK_VERSION(2,2,0)
     rb_warn("Gdk::Pixbuf#render_to_drawable is obsolete. Use Gdk::Drawable#draw_pixbuf instead.");
-#endif
 
     rb_scan_args(argc, argv, "73", &gc, &src_x, &src_y, &dest_x, &dest_y,
                  &width, &height, &dither, &x_dither, &y_dither);
