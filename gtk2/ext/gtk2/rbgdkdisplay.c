@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,2,0)
-
 #define RG_TARGET_NAMESPACE cDisplay
 #define _SELF(i) GDK_DISPLAY_OBJECT(RVAL2GOBJ(i))
 
@@ -129,7 +127,6 @@ rg_flush(VALUE self)
     gdk_display_flush(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_devices(VALUE self)
@@ -501,7 +498,6 @@ rg_trigger_tooltip_query(VALUE self)
 void 
 Init_gtk_gdk_display(VALUE mGdk)
 {
-#if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
 
     RG_DEF_SMETHOD(open, 1);
@@ -577,7 +573,6 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(startup_notification_id, 0);
 #  endif
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
-#endif
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
