@@ -35,14 +35,12 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_set_screen(VALUE self, VALUE screen)
 {
     gtk_menu_set_screen(_SELF(self), GDK_SCREEN(RVAL2GOBJ(screen)));
     return self;
 }
-#endif
 
 static VALUE
 rg_reorder_child(VALUE self, VALUE child, VALUE position)
@@ -164,10 +162,8 @@ Init_gtk_menu(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU, "Menu", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(set_screen, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "screen");
-#endif
     RG_DEF_METHOD(reorder_child, 2);
 #if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(attach, 5);
