@@ -329,13 +329,11 @@ rg_offset(VALUE self, VALUE x, VALUE y)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_gc_get_screen(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_gdk_gc(VALUE mGdk)
@@ -381,10 +379,7 @@ Init_gtk_gdk_gc(VALUE mGdk)
 
     RG_DEF_METHOD(colormap, 0);
     RG_DEF_METHOD(offset, 2);
-
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(screen, 0);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
