@@ -75,7 +75,6 @@ rg_force_window(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_s_get_info(G_GNUC_UNUSED VALUE self, VALUE window)
 {
@@ -89,7 +88,6 @@ rg_s_get_info(G_GNUC_UNUSED VALUE self, VALUE window)
     else
         return Qnil;
 }
-#endif
 
 void 
 Init_gtk_tooltips(VALUE mGtk)
@@ -101,8 +99,6 @@ Init_gtk_tooltips(VALUE mGtk)
     RG_DEF_METHOD(enable, 0);
     RG_DEF_METHOD(disable, 0);
     RG_DEF_METHOD(force_window, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_SMETHOD(get_info, 1);
-#endif
     RG_DEF_SMETHOD(get_data, 1);
 }
