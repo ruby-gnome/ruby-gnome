@@ -301,14 +301,12 @@ rg_place_cursor(VALUE self, VALUE where)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_select_range(VALUE self, VALUE ins, VALUE bound)
 {
     gtk_text_buffer_select_range(_SELF(self), RVAL2ITR(ins), RVAL2ITR(bound));
     return self;
 }
-#endif
 
 static VALUE
 rg_get_iter_at_child_anchor(VALUE self, VALUE anchor)
@@ -847,9 +845,7 @@ Init_gtk_textbuffer(VALUE mGtk)
 */
     RG_DEF_METHOD(selection_bound, 0);
     RG_DEF_METHOD(place_cursor, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(select_range, 2);
-#endif
     RG_DEF_METHOD_P(modified, 0);
     RG_DEF_METHOD(set_modified, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "modified");
