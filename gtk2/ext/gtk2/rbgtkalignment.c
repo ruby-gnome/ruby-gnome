@@ -44,7 +44,6 @@ rg_set(VALUE self, VALUE xalign, VALUE yalign, VALUE xscale, VALUE yscale)
                       NUM2DBL(xscale), NUM2DBL(yscale));
     return self;
 }
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_padding(VALUE self)
 {
@@ -62,7 +61,6 @@ rg_set_padding(VALUE self, VALUE top, VALUE bottom, VALUE left, VALUE right)
                               NUM2UINT(left), NUM2UINT(right));
     return self;
 }
-#endif
 
 void 
 Init_gtk_alignment(VALUE mGtk)
@@ -71,9 +69,7 @@ Init_gtk_alignment(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, 4);
     RG_DEF_METHOD(set, 4);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(padding, 0);
     RG_DEF_METHOD(set_padding, 4);
-#endif
 
 }
