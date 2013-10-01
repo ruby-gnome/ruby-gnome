@@ -351,7 +351,6 @@ rg_m_source_unset(VALUE self, VALUE widget)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_m_source_set_target_list(VALUE self, VALUE widget, VALUE targetlist)
 {
@@ -369,7 +368,6 @@ rg_m_source_get_target_list(G_GNUC_UNUSED VALUE self, VALUE widget)
     GtkTargetList* ret = gtk_drag_source_get_target_list(RVAL2WIDGET(widget));
     return NIL_P(ret) ? Qnil : BOXED2RVAL(ret, GTK_TYPE_TARGET_LIST);
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
@@ -430,10 +428,8 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_MODFUNC(source_set_icon_name, 2);
 #endif
     RG_DEF_MODFUNC(source_unset, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_MODFUNC(source_set_target_list, 2);
     RG_DEF_MODFUNC(source_get_target_list, 1);
-#endif
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_MODFUNC(source_add_text_targets, 1);
     RG_DEF_MODFUNC(source_add_image_targets, 1);
