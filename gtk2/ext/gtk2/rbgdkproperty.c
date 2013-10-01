@@ -43,7 +43,6 @@ rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                              (const guchar*)RVAL2CSTR(text), 
                                              RSTRING_LEN(text), &list);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, encoding, format, text;
         rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
         StringValue(text);
@@ -54,15 +53,6 @@ rg_m_text_property_to_text_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                          (const guchar*)RVAL2CSTR(text),
                                                          RSTRING_LEN(text),
                                                          &list);
-#else
-        VALUE encoding, format, text;
-        rb_scan_args(argc, argv, "30", &encoding, &format, &text);
-        rb_warn("Gdk::Property.text_property_to_text_list: Not supported arguments in GTK+-2.0.x.");
-        num = gdk_text_property_to_text_list(RVAL2ATOM(encoding),
-                                             NUM2INT(format),
-                                             (const guchar*)RVAL2CSTR(text),
-                                             RSTRING_LEN(text), &list);
-#endif
     }
 
     ret = rb_ary_new2(num);
@@ -90,7 +80,6 @@ rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                              (const guchar*)RVAL2CSTR(text),
                                              RSTRING_LEN(text), &list);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, encoding, format, text;
         rb_scan_args(argc, argv, "40", &display, &encoding, &format, &text);
         StringValue(text);
@@ -101,17 +90,6 @@ rg_m_text_property_to_utf8_list(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                          (const guchar*)RVAL2CSTR(text),
                                                          RSTRING_LEN(text),
                                                          &list);
-#else
-        VALUE encoding, format, text;
-        rb_scan_args(argc, argv, "30", &encoding, &format, &text);
-        StringValue(text);
-
-        rb_warn("Gdk::Property.text_property_to_utf8_list: Not supported arguments in GTK+-2.0.x.");
-        num = gdk_text_property_to_utf8_list(RVAL2ATOM(encoding),
-                                             NUM2INT(format),
-                                             (const guchar*)RVAL2CSTR(text),
-                                             RSTRING_LEN(text), &list);
-#endif
     }
 
     ret = rb_ary_new2(num);
@@ -138,7 +116,6 @@ rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                           &encoding, &format,
                                           &ctext, &length);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, str;
 
         rb_scan_args(argc, argv, "20", &display, &str);
@@ -146,14 +123,6 @@ rg_m_string_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                       RVAL2CSTR(str),
                                                       &encoding, &format,
                                                       &ctext, &length);
-#else
-        VALUE str;
-        rb_scan_args(argc, argv, "10", &str);
-        rb_warn("Gdk::Property.string_to_compound_text: Not supported arguments in GTK+-2.0.x.");
-        num = gdk_string_to_compound_text(RVAL2CSTR(str),
-                                          &encoding, &format,
-                                          &ctext, &length);
-#endif
     }
 
     if (num == 0){
@@ -190,7 +159,6 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                         &encoding, &format,
                                         &ctext, &length);
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, str;
 
         rb_scan_args(argc, argv, "20", &display, &str);
@@ -198,15 +166,6 @@ rg_m_utf8_to_compound_text(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                     RVAL2CSTR(str),
                                                     &encoding, &format,
                                                     &ctext, &length);
-#else
-        VALUE str;
-        rb_scan_args(argc, argv, "10", &str);
-
-        rb_warn("Gdk::Property.utf8_to_compound_text: Not supported arguments in GTK+-2.0.x.");
-        ret = gdk_utf8_to_compound_text(RVAL2CSTR(str),
-                                        &encoding, &format,
-                                        &ctext, &length);
-#endif
     }
 
     if (ret){

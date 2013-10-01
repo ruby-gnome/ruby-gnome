@@ -25,8 +25,6 @@
 #include <rb_cairo.h>
 #endif
 
-#if GTK_CHECK_VERSION(2,2,0)
-
 #define RG_TARGET_NAMESPACE cScreen
 #define _SELF(i) GDK_SCREEN(RVAL2GOBJ(i))
 
@@ -88,7 +86,6 @@ rg_rgba_visual(VALUE self)
 {
     return GOBJ2RVAL(gdk_screen_get_rgba_visual(_SELF(self)));
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
@@ -380,7 +377,6 @@ rg_screen_number(VALUE self)
 void 
 Init_gtk_gdk_screen(VALUE mGdk)
 {
-#if GTK_CHECK_VERSION(2,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_SCREEN, "Screen", mGdk);
 
     id_new = rb_intern("new");
@@ -439,6 +435,5 @@ Init_gtk_gdk_screen(VALUE mGdk)
 
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkScreenX11", "ScreenX11", mGdk);
-#endif
 #endif
 }

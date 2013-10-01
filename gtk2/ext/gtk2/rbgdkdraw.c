@@ -136,7 +136,6 @@ rg_draw_lines(VALUE self, VALUE rbgc, VALUE rbpoints)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VALUE dest_x, VALUE dest_y, VALUE width, VALUE height, VALUE dither, VALUE x_dither, VALUE y_dither)
 {
@@ -150,7 +149,6 @@ rg_draw_pixbuf(VALUE self, VALUE gc, VALUE pixbuf, VALUE src_x, VALUE src_y, VAL
                     NUM2INT(x_dither), NUM2INT(y_dither));
     return self;
 }
-#endif
 
 struct rbgdk_rval2gdksegments_args {
     VALUE ary;
@@ -448,7 +446,6 @@ rg_handle(VALUE self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_display(VALUE self)
 {
@@ -460,7 +457,6 @@ rg_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
 #  ifdef HAVE_RB_CAIRO_H
@@ -494,9 +490,7 @@ Init_gtk_gdk_draw(VALUE mGdk)
     RG_DEF_METHOD(draw_points, 2);
     RG_DEF_METHOD(draw_line, 5);
     RG_DEF_METHOD(draw_lines, 2);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(draw_pixbuf, 11);
-#endif
     RG_DEF_METHOD(draw_segments, 2);
     RG_DEF_METHOD(draw_rectangle, 6);
     RG_DEF_METHOD(draw_arc, 8);
@@ -523,10 +517,8 @@ Init_gtk_gdk_draw(VALUE mGdk)
 #ifdef GDK_WINDOWING_WIN32
     RG_DEF_METHOD(handle, 0);
 #endif
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD(screen, 0);
-#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
 #  ifdef HAVE_RB_CAIRO_H

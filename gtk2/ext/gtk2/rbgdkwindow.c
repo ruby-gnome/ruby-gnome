@@ -149,7 +149,6 @@ rg_unmaximize(VALUE self)
     gdk_window_unmaximize(_SELF(self));
     return self;
 }
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_fullscreen(VALUE self)
 {
@@ -163,7 +162,6 @@ rg_unfullscreen(VALUE self)
     gdk_window_unfullscreen(_SELF(self));
     return self;
 }
-#endif
 #if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_keep_above(VALUE self, VALUE setting)
@@ -668,7 +666,6 @@ rg_type_hint(VALUE self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_set_skip_taskbar_hint(VALUE self, VALUE hint)
 {
@@ -682,7 +679,6 @@ rg_set_skip_pager_hint(VALUE self, VALUE hint)
     gdk_window_set_skip_pager_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
@@ -893,13 +889,8 @@ rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         win = gdk_window_foreign_new(RVAL2GDKNATIVEWINDOW(arg[0]));
         break;
       case 2:
-#if GTK_CHECK_VERSION(2,2,0)
         win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]),
-                                                 RVAL2GDKNATIVEWINDOW(arg[1])); 
-#else
-        win = gdk_window_foreign_new(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif 
+                                                 RVAL2GDKNATIVEWINDOW(arg[1]));
         break;
     default:
         break;
@@ -925,12 +916,7 @@ rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         win = gdk_window_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
         break;
       case 2:
-#if GTK_CHECK_VERSION(2,2,0)
-        win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
-#else
-        win = gdk_window_lookup(NUM2UINT(arg[1])); 
-        rb_warn("Not supported in GTK+-2.0.x.");
-#endif
+        win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1]));
         break;
     default:
         break;
@@ -997,10 +983,8 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(unstick, 0);
     RG_DEF_METHOD(maximize, 0);
     RG_DEF_METHOD(unmaximize, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(fullscreen, 0);
     RG_DEF_METHOD(unfullscreen, 0);
-#endif
 #if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_keep_above, 1);
     RG_DEF_METHOD(set_keep_below, 1);
@@ -1072,10 +1056,8 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(type_hint, 0);
 #endif
 
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(set_skip_taskbar_hint, 1);
     RG_DEF_METHOD(set_skip_pager_hint, 1);
-#endif
 #if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(set_urgency_hint, 1);
 #endif
