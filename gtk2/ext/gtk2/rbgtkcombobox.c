@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cComboBox
 #define _SELF(self) (GTK_COMBO_BOX(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
@@ -137,12 +135,10 @@ rg_set_row_separator_func(VALUE self)
 }
 
 #endif
-#endif
 
 void 
 Init_gtk_combobox(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_COMBO_BOX, "ComboBox", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
@@ -158,6 +154,5 @@ Init_gtk_combobox(VALUE mGtk)
     RG_DEF_METHOD(active_text, 0);
     RG_DEF_METHOD(popup_accessible, 0);
     RG_DEF_METHOD(set_row_separator_func, 0);
-#endif
 #endif
 }
