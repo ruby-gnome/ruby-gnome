@@ -138,10 +138,8 @@ Init_gtk_const(VALUE mGtk)
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_RESPONSE_TYPE, "GTK_");
 
     /* GtkScrollStep */
-#if GTK_CHECK_VERSION(2,4,0)
     G_DEF_CLASS(GTK_TYPE_SCROLL_STEP, "ScrollStep", mGtk);
     G_DEF_CONSTANTS(mGtk, GTK_TYPE_SCROLL_STEP, "GTK_");
-#endif
 
     /* GtkScrollType */
     G_DEF_CLASS(GTK_TYPE_SCROLL_TYPE, "ScrollType", mGtk);
