@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cAction
 #define _SELF(self) (GTK_ACTION(RVAL2GOBJ(self)))
 #define RVAL2WIDGET(w) (GTK_WIDGET(RVAL2GOBJ(w)))
@@ -186,12 +184,10 @@ action_mark(void *p)
         rbgobj_gc_mark_instance(proxy);
     }
 }
-#endif
 
 void
 Init_gtk_action(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION, "Action", mGtk,
@@ -232,6 +228,5 @@ Init_gtk_action(VALUE mGtk)
 
 #if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(accel_closure, 0);
-#endif
 #endif
 }
