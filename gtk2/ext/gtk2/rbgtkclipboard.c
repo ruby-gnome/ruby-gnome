@@ -67,14 +67,10 @@ rg_s_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         rb_scan_args(argc, argv, "10", &selection);
         clipboard = gtk_clipboard_get(RVAL2ATOM(selection));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, selection;
         rb_scan_args(argc, argv, "20", &display, &selection);
         clipboard = gtk_clipboard_get_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                   RVAL2ATOM(selection));
-#else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     } 
     return CLIPBOARD2RVAL(clipboard);
 }
@@ -82,11 +78,7 @@ rg_s_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_display(VALUE self)
 {
-#if GTK_CHECK_VERSION(2,2,0)
     return GOBJ2RVAL(gtk_clipboard_get_display(_SELF(self)));
-#else
-    return Qnil;
-#endif
 }
 
 static void

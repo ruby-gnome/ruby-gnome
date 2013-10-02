@@ -681,7 +681,6 @@ rg_s_install_style_property(VALUE self, VALUE spec)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_style_property(VALUE self, VALUE property_name)
 {
@@ -735,7 +734,6 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
     g_type_class_unref(oclass);
     return ary;
 }
-#endif
 
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
@@ -771,9 +769,8 @@ rg_style_get_property(VALUE self, VALUE prop_name)
     } else {
         name = RVAL2CSTR(prop_name);
     }
-#if GTK_CHECK_VERSION(2,2,0)
     pspec = gtk_widget_class_find_style_property((GtkWidgetClass*)g_type_class_ref(RVAL2GTYPE(self)), name);
-#endif
+
     if (!pspec)
         rb_raise(rb_eval_string("GLib::NoPropertyError"), "No such property: %s", name);
     else {
@@ -841,7 +838,6 @@ rg_settings(VALUE self)
     return GOBJ2RVAL(gtk_widget_get_settings(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_get_clipboard(VALUE self, VALUE selection)
 {
@@ -871,7 +867,6 @@ rg_has_screen_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_widget_has_screen(_SELF(self)));
 }
-#endif
 
 /*
   Note this method is not gtk_widget_size_request()
@@ -1101,10 +1096,8 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(activate, 0);
     RG_DEF_METHOD(reparent, 1);
     RG_DEF_SMETHOD(install_style_property, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(style_property, 1);
     RG_DEF_SMETHOD(style_properties, -1);
-#endif
     RG_DEF_METHOD(intersect, 1);
     RG_DEF_METHOD(grab_default, 0);
     RG_DEF_METHOD(set_state, 1);
@@ -1166,13 +1159,11 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(freeze_child_notify, 0);
     RG_DEF_METHOD_P(child_visible, 0);
     RG_DEF_METHOD(settings, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(get_clipboard, 1);
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD(root_window, 0);
     RG_DEF_METHOD(screen, 0);
     RG_DEF_METHOD_P(has_screen, 0);
-#endif
     RG_DEF_METHOD(set_child_visible, 1);
     RG_DEF_METHOD(get_size_request, 0);
     RG_DEF_METHOD(set_size_request, 2);

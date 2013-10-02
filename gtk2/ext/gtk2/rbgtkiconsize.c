@@ -34,7 +34,6 @@ rg_m_lookup(G_GNUC_UNUSED VALUE self, VALUE size)
         return Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
 {
@@ -47,7 +46,6 @@ rg_m_lookup_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE size)
     else
         return Qnil;
 }
-#endif
 
 static VALUE
 rg_m_register(G_GNUC_UNUSED VALUE self, VALUE name, VALUE width, VALUE height)
@@ -83,9 +81,7 @@ Init_gtk_icon_size(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mGtk, "IconSize");
 
     RG_DEF_MODFUNC(lookup, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_MODFUNC(lookup_for_settings, 2);
-#endif
     RG_DEF_MODFUNC(register, 3);
     RG_DEF_MODFUNC(register_alias, 2);
     RG_DEF_MODFUNC(from_name, 1);

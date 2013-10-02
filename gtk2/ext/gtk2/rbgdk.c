@@ -171,13 +171,11 @@ rbgdk_rval2gdkpixbufglist(VALUE value)
     return args.result;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_m_display_arg_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(gdk_get_display_arg_name());
 }
-#endif
 
 static VALUE
 rg_m_set_locale(G_GNUC_UNUSED VALUE self)
@@ -192,7 +190,6 @@ rg_m_set_sm_client_id(VALUE self, VALUE id)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_m_notify_startup_complete(int argc, VALUE *argv, VALUE self)
 {
@@ -213,7 +210,6 @@ rg_m_notify_startup_complete(int argc, VALUE *argv, VALUE self)
     }
     return self;
 }
-#endif
 
 static VALUE
 rg_m_program_class(G_GNUC_UNUSED VALUE self)
@@ -262,11 +258,8 @@ rbgdk_x_io_error(Display *display)
     const gchar* disp;
     const gchar* error;
 
-#if GTK_CHECK_VERSION(2,2,0)
     disp = display ? DisplayString(display) : gdk_get_display_arg_name();
-#else
-    disp = DisplayString(display);
-#endif
+
     if (! disp)
         disp = "(none)";
 
@@ -474,14 +467,10 @@ Init_gtk_gdk(void)
 {
     RG_TARGET_NAMESPACE = rb_define_module("Gdk");
 
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_MODFUNC(display_arg_name, 0);
-#endif
     RG_DEF_MODFUNC(set_locale, 0);
     RG_DEF_MODFUNC(set_sm_client_id, 1);
-#if GTK_CHECK_VERSION(2, 2, 0)
     RG_DEF_MODFUNC(notify_startup_complete, -1);
-#endif
     RG_DEF_MODFUNC(program_class, 0);
     RG_DEF_MODFUNC(set_program_class, 1);
     RG_DEF_MODFUNC(display, 0);
