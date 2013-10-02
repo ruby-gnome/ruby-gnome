@@ -67,14 +67,12 @@ rg_select_item(VALUE self, VALUE menu_item)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_select_first(VALUE self, VALUE search_sensitive)
 {
     gtk_menu_shell_select_first(_SELF(self), RVAL2CBOOL(search_sensitive));
     return self;
 }
-#endif
 
 static VALUE
 rg_deselect(VALUE self)
@@ -101,9 +99,7 @@ Init_gtk_menu_shell(VALUE mGtk)
     RG_DEF_METHOD(insert, 2);
     RG_DEF_METHOD(deactivate, 0);
     RG_DEF_METHOD(select_item, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(select_first, 1);
-#endif
     RG_DEF_METHOD(deselect, 0);
     RG_DEF_METHOD(activate_item, 2);
     /* GtkMenuDirectionType */

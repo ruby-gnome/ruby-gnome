@@ -39,15 +39,11 @@ rg_m_owner_set(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         ret = gtk_selection_owner_set(RVAL2WIDGET(widget), 
                                       RVAL2ATOM(selection), NUM2INT(time));
     } else {
-#if GTK_CHECK_VERSION(2,2,0)
         VALUE display, widget, selection, time;
         rb_scan_args(argc, argv, "40", &display, &widget, &selection, &time);
         ret = gtk_selection_owner_set_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                                   RVAL2WIDGET(widget), 
                                                   RVAL2ATOM(selection), NUM2INT(time));
-#else
-        rb_raise(rb_eArgError, "Wrong number of arguments: %d", argc);
-#endif
     }
     return CBOOL2RVAL(ret);
 }

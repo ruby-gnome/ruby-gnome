@@ -257,14 +257,12 @@ rg_expand_row(VALUE self, VALUE path, VALUE open_all)
                                                RVAL2CBOOL(open_all)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_expand_to_path(VALUE self, VALUE path)
 {
     gtk_tree_view_expand_to_path(_SELF(self), RVAL2GTKTREEPATH(path));
     return self;
 }
-#endif
 
 static VALUE
 rg_collapse_row(VALUE self, VALUE path)
@@ -571,7 +569,6 @@ treeview_signal_func(G_GNUC_UNUSED guint num, const GValue *values)
     return rb_ary_new3(3, GOBJ2RVAL(view), GTKTREEITER2RVAL(iter), GVAL2RVAL(&values[2]));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_cell, VALUE start_editing)
 {
@@ -581,7 +578,6 @@ rg_set_cursor_on_cell(VALUE self, VALUE path, VALUE focus_column, VALUE focus_ce
                                      RVAL2CBOOL(start_editing));
     return self;
 }
-#endif
 
 /* How can I implement this?
 GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
@@ -704,9 +700,7 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(collapse_all, 0);
     RG_DEF_METHOD(expand_row, 2);
     RG_DEF_METHOD(collapse_row, 1);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(expand_to_path, 1);
-#endif
     RG_DEF_METHOD(map_expanded_rows, 0);
     RG_DEF_METHOD_P(row_expanded, 1);
     RG_DEF_METHOD(get_path_at_pos, 2);
@@ -739,9 +733,7 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_ALIAS("get_dest_row", "get_dest_row_at_pos");
     RG_DEF_METHOD(create_row_drag_icon, 1);
     RG_DEF_METHOD(set_search_equal_func, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(set_cursor_on_cell, 4);
-#endif
 
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_row_separator_func, 0);

@@ -86,13 +86,11 @@ rg_visual(VALUE self)
     return GOBJ2RVAL(gdk_colormap_get_visual(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_screen(VALUE self)
 {
     return GOBJ2RVAL(gdk_colormap_get_screen(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_colors(VALUE self)
@@ -132,8 +130,6 @@ Init_gtk_gdk_colormap(VALUE mGdk)
     RG_DEF_METHOD(free_color, 1);
     RG_DEF_METHOD(query_color, 1);
     RG_DEF_METHOD(visual, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(screen, 0);
-#endif
     RG_DEF_METHOD(colors, 0);
 }

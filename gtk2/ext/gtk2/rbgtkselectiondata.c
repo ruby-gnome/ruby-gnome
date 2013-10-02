@@ -112,13 +112,11 @@ rg_data(VALUE self)
                                                    _SELF(self)->length));
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_display(VALUE self)
 {
     return BOXED2RVAL(_SELF(self)->display, GDK_TYPE_DISPLAY);
 }
-#endif
 
 /* Instance Methods */
 static VALUE
@@ -270,9 +268,7 @@ Init_gtk_selectiondata(VALUE mGtk)
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(format, 0);
     RG_DEF_METHOD(data, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD(display, 0);
-#endif 
 
     RG_DEF_METHOD(set, -1);
     RG_DEF_METHOD(text, 0);

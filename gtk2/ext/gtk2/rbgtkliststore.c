@@ -192,12 +192,7 @@ static VALUE
 rg_remove(VALUE self, VALUE iter)
 {
     G_CHILD_REMOVE(self, iter);
-#if GTK_CHECK_VERSION(2,2,0)
     return CBOOL2RVAL(gtk_list_store_remove(_SELF(self), RVAL2GTKTREEITER(iter)));
-#else
-    gtk_list_store_remove(_SELF(self), RVAL2GTKTREEITER(iter));
-    return Qtrue;
-#endif
 }
 
 struct lstore_insert_args {
@@ -348,7 +343,6 @@ rg_clear(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,2,0)
 static VALUE
 rg_iter_is_valid_p(VALUE self, VALUE iter)
 {
@@ -389,7 +383,6 @@ rg_move_after(VALUE self, VALUE iter, VALUE position)
                                NIL_P(position) ? NULL : RVAL2GTKTREEITER(position));
     return self;
 }
-#endif
 
 void
 Init_gtk_list_store(VALUE mGtk)
@@ -411,13 +404,11 @@ Init_gtk_list_store(VALUE mGtk)
     RG_DEF_METHOD(prepend, 0);
     RG_DEF_METHOD(append, 0);
     RG_DEF_METHOD(clear, 0);
-#if GTK_CHECK_VERSION(2,2,0)
     RG_DEF_METHOD_P(iter_is_valid, 1);
     RG_DEF_METHOD(reorder, 1);
     RG_DEF_METHOD(swap, 2);
     RG_DEF_METHOD(move_before, 2);
     RG_DEF_METHOD(move_after, 2);
-#endif
 #if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD(set_values, 2);
 #endif
