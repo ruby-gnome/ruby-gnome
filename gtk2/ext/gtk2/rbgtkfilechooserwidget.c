@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cFileChooserWidget
 
 static VALUE
@@ -43,16 +41,12 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-#endif
 
 void 
 Init_gtk_file_chooser_widget(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
 
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_WIDGET, "FileChooserWidget", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
-
-#endif
 }
