@@ -257,7 +257,6 @@ rg_window_stack(VALUE self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,4,0)
 static void
 child_setup(gpointer func)
 {
@@ -343,7 +342,6 @@ rg_spawn_command_line_on_screen(G_GNUC_UNUSED VALUE self, VALUE command_line)
 
     return ret;   
 }
-#endif
 
 /* From X Window System Interaction */
 #ifdef GDK_WINDOWING_X11
@@ -420,11 +418,9 @@ Init_gtk_gdk_screen(VALUE mGdk)
     RG_DEF_METHOD(window_stack, 0);
 #endif
 
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(spawn_on_screen, 4);
     RG_DEF_METHOD(spawn_on_screen_with_pipes, 4);
     RG_DEF_METHOD(spawn_command_line_on_screen, 1);
-#endif
 
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(xnumber, 0);
