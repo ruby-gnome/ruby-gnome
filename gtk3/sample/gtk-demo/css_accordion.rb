@@ -31,7 +31,7 @@ require "common"
 module Demo
   class CssAccordion < BasicWindow
     def initialize
-      super("CssAccordion")
+      super("CSS Accordion")
       set_default_size(600, 300)
 
       container = Gtk::Box.new(:horizontal, 0)
