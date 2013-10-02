@@ -68,7 +68,6 @@ txt_set_text(VALUE self, VALUE text)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_backspace(VALUE self, VALUE iter, VALUE interactive, VALUE default_editable)
 {
@@ -76,7 +75,6 @@ rg_backspace(VALUE self, VALUE iter, VALUE interactive, VALUE default_editable)
                                                 RVAL2CBOOL(interactive),
                                                 RVAL2CBOOL(default_editable)));
 }
-#endif
 
 static VALUE
 rg_insert_at_cursor(VALUE self, VALUE text)
@@ -811,9 +809,7 @@ Init_gtk_textbuffer(VALUE mGtk)
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "text", txt_set_text, 1);
     RG_DEF_METHOD(insert, -1);
     RG_DEF_METHOD(insert_with_tags, -1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(backspace, 3);
-#endif
     RG_DEF_METHOD(insert_at_cursor, 1);
     RG_DEF_METHOD(insert_interactive, 3);
     RG_DEF_METHOD(insert_interactive_at_cursor, 2);
