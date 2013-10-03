@@ -121,7 +121,7 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 
     memset(&table, 0, sizeof(RGConvertTable));
     CONST_ID(id_to_i, "to_i");
-    table.type = NUM2UINT(rb_funcall(rb_gtype, id_to_i, 0));
+    table.type = NUM2ULONG(rb_funcall(rb_gtype, id_to_i, 0));
     table.klass = Qnil;
     table.instance2robj = boxed_instance2robj;
 

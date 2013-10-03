@@ -71,7 +71,7 @@ rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
         VALUE rb_gtype;
         GType gtype;
         rb_gtype = rb_funcall(rb_struct, rb_intern("gtype"), 0);
-        gtype = NUM2UINT(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
         instance = RVAL2BOXED(rb_struct, gtype);
     } else {
         Data_Get_Struct(rb_struct, void, instance);
