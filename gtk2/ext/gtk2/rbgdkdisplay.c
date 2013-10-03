@@ -339,6 +339,7 @@ rg_store_clipboard(VALUE self, VALUE rbclipboard_window, VALUE rbtime_, VALUE rb
 
     return self;
 }
+#endif
 
 static VALUE
 rg_core_pointer(VALUE self)
@@ -455,8 +456,6 @@ rg_startup_notification_id(VALUE self)
     return CSTR2RVAL(gdk_x11_display_get_startup_notification_id(_SELF(self)));
 }
 #  endif
-
-#endif
 #endif
 
 #if GTK_CHECK_VERSION(2,10,0)
