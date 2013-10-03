@@ -375,7 +375,8 @@ rg_register_standard_event_type(VALUE self, VALUE event_base, VALUE n_events)
                                          NUM2INT(event_base), NUM2INT(n_events));
     return self;
 }
-#if GTK_CHECK_VERSION(2,8,0)
+
+#  if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_user_time(VALUE self)
 {
@@ -388,7 +389,7 @@ rg_set_cursor_theme(VALUE self, VALUE theme, VALUE size)
     gdk_x11_display_set_cursor_theme(_SELF(self), RVAL2CSTR(theme), NUM2INT(size));
     return self;
 }
-#endif
+#  endif
 
 #  if GTK_CHECK_VERSION(2, 12, 0)
 /*
