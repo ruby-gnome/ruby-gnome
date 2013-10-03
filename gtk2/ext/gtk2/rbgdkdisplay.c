@@ -546,10 +546,10 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(grab, 0);
     RG_DEF_METHOD(ungrab, 0);
     RG_DEF_METHOD(register_standard_event_type, 2);
-#if GTK_CHECK_VERSION(2,8,0)
+#  if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(user_time, 0);
     RG_DEF_METHOD(set_cursor_theme, 2);
-#endif
+#  endif
 #  if GTK_CHECK_VERSION(2, 12, 0)
 /*
     RG_DEF_METHOD(broadcast_startup_message, -1);
