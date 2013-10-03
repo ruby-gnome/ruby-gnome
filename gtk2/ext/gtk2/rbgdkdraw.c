@@ -416,7 +416,6 @@ rg_get_image(VALUE self, VALUE x, VALUE y, VALUE w, VALUE h)
                                             NUM2INT(w), NUM2INT(h)));
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_copy_to_image(VALUE self, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VALUE ydst, VALUE w, VALUE h)
 {
@@ -426,7 +425,6 @@ rg_copy_to_image(VALUE self, VALUE image, VALUE xsrc, VALUE ysrc, VALUE xdst, VA
                                                 NUM2INT(xdst), NUM2INT(ydst),
                                                 NUM2INT(w), NUM2INT(h)));
 }
-#endif
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
@@ -507,9 +505,7 @@ Init_gtk_gdk_draw(VALUE mGdk)
     RG_DEF_METHOD(draw_drawable, 8);
     RG_DEF_METHOD(draw_image, 8);
     RG_DEF_METHOD(get_image, 4);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(copy_to_image, 7);
-#endif
 
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(xid, 0);

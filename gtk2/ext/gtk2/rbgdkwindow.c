@@ -162,7 +162,6 @@ rg_unfullscreen(VALUE self)
     gdk_window_unfullscreen(_SELF(self));
     return self;
 }
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_keep_above(VALUE self, VALUE setting)
 {
@@ -176,7 +175,6 @@ rg_set_keep_below(VALUE self, VALUE setting)
     gdk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
-#endif
 
 static VALUE
 rg_move(VALUE self, VALUE x, VALUE y)
@@ -463,14 +461,12 @@ rg_set_override_redirect(VALUE self, VALUE override_redirect)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_accept_focus(VALUE self, VALUE accept_focus)
 {
     gdk_window_set_accept_focus(_SELF(self), RVAL2CBOOL(accept_focus));
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
@@ -805,13 +801,11 @@ rg_set_group(VALUE self, VALUE leader)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_group(VALUE self)
 {
     return GOBJ2RVAL(gdk_window_get_group(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_set_decorations(VALUE self, VALUE decor)
@@ -985,10 +979,8 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(unmaximize, 0);
     RG_DEF_METHOD(fullscreen, 0);
     RG_DEF_METHOD(unfullscreen, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_keep_above, 1);
     RG_DEF_METHOD(set_keep_below, 1);
-#endif
     RG_DEF_METHOD(move, 2);
     RG_DEF_METHOD(resize, 2);
     RG_DEF_METHOD(move_resize, 4);
@@ -1023,9 +1015,7 @@ Init_gtk_gdk_window(VALUE mGdk)
 #endif
     RG_DEF_METHOD(set_user_data, 1);
     RG_DEF_METHOD(set_override_redirect, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_accept_focus, 1);
-#endif
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_focus_on_map, 1);
 #endif
@@ -1077,9 +1067,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_transient_for, 1);
     RG_DEF_METHOD(set_role, 1);
     RG_DEF_METHOD(set_group, 1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(group, 0);
-#endif
     RG_DEF_METHOD(set_decorations, 1);
     RG_DEF_METHOD(decorations, 0);
     RG_DEF_METHOD(set_functions, 1);

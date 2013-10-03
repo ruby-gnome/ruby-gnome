@@ -44,15 +44,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             cursor = gdk_cursor_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
                                                 RVAL2GENUM(type_or_name, GDK_TYPE_CURSOR_TYPE));
     } else if (argc == 4) {
-#if GTK_CHECK_VERSION(2,4,0)
         VALUE display, pixbuf, x, y;
         rb_scan_args(argc, argv, "40", &display, &pixbuf, &x, &y);
         cursor = gdk_cursor_new_from_pixbuf(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
                                             GDK_PIXBUF(RVAL2GOBJ(pixbuf)), 
                                             NUM2INT(x), NUM2INT(y));
-#else
-        rb_raise(rb_eRuntimeError, "Gdk::Cursor.new(pixbuf) has been supported since GTK+-2.4.");
-#endif
     } else if (argc == 6) {
         VALUE pixmap, mask, fg, bg, x, y;
         rb_scan_args(argc, argv, "60", &pixmap, &mask, &fg, &bg, &x, &y);
