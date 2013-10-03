@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,6,0)
-
 #define RG_TARGET_NAMESPACE cCellView
 #define _SELF(self) (GTK_CELL_VIEW(RVAL2GOBJ(self)))
 
@@ -101,12 +99,10 @@ rg_cell_renderers(VALUE self)
 {
     return GLIST2ARYF(gtk_cell_view_get_cell_renderers(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_cellview(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_VIEW, "CellView", mGtk);
 
     id_model = rb_intern("model");
@@ -118,5 +114,4 @@ Init_gtk_cellview(VALUE mGtk)
     RG_DEF_METHOD(displayed_row, 0);
     RG_DEF_METHOD(get_size_of_row, 1);
     RG_DEF_METHOD(cell_renderers, 0);
-#endif
 }
