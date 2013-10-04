@@ -160,13 +160,11 @@ rg_accel_path(VALUE self)
     return CSTR2RVAL(gtk_action_get_accel_path(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_accel_closure(VALUE self)
 {
     return BOXED2RVAL(gtk_action_get_accel_closure(_SELF(self)), G_TYPE_CLOSURE);
 }
-#endif
 
 static void
 action_mark(void *p)
@@ -221,7 +219,5 @@ Init_gtk_action(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "accel_group");
 
     RG_DEF_METHOD(accel_path, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(accel_closure, 0);
-#endif
 }
