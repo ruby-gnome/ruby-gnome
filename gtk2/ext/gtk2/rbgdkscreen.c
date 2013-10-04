@@ -74,7 +74,6 @@ rg_rgb_visual(VALUE self)
     return GOBJ2RVAL(gdk_screen_get_rgb_visual(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_rgba_colormap(VALUE self)
 {
@@ -370,8 +369,6 @@ rg_screen_number(VALUE self)
 }
 #endif
 
-#endif
-
 void 
 Init_gtk_gdk_screen(VALUE mGdk)
 {
@@ -387,10 +384,8 @@ Init_gtk_gdk_screen(VALUE mGdk)
     RG_DEF_METHOD(system_visual, 0);
     RG_DEF_METHOD(rgb_colormap, 0);
     RG_DEF_METHOD(rgb_visual, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(rgba_colormap, 0);
     RG_DEF_METHOD(rgba_visual, 0);
-#endif
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(composited, 0);
 #endif
