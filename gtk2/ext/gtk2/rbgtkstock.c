@@ -81,7 +81,6 @@ rg_s_ids(G_GNUC_UNUSED VALUE self)
     return ary;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static gchar *
 translate_func(const gchar *path, gpointer func)
 {
@@ -100,7 +99,6 @@ rg_s_set_translate_func(VALUE klass, VALUE domain)
                                  NULL);
     return Qnil;
 }
-#endif
 
 void
 Init_gtk_stock(VALUE mGtk)
@@ -111,9 +109,7 @@ Init_gtk_stock(VALUE mGtk)
     RG_DEF_SMETHOD(add, -1);
     RG_DEF_SMETHOD(lookup, 1);
     RG_DEF_SMETHOD(ids, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_SMETHOD(set_translate_func, 1);
-#endif
 
     /* Stock IDs (not all are stock items; some are images only) */
     rb_define_const(RG_TARGET_NAMESPACE, "ABOUT", CSTR2SYM(GTK_STOCK_ABOUT));
@@ -151,9 +147,7 @@ Init_gtk_stock(VALUE mGtk)
     rb_define_const(RG_TARGET_NAMESPACE, "FIND", CSTR2SYM(GTK_STOCK_FIND));
     rb_define_const(RG_TARGET_NAMESPACE, "FIND_AND_REPLACE", CSTR2SYM(GTK_STOCK_FIND_AND_REPLACE));
     rb_define_const(RG_TARGET_NAMESPACE, "FLOPPY", CSTR2SYM(GTK_STOCK_FLOPPY));
-#if GTK_CHECK_VERSION(2,8,0)
     rb_define_const(RG_TARGET_NAMESPACE, "FULLSCREEN", CSTR2SYM(GTK_STOCK_FULLSCREEN));
-#endif
     rb_define_const(RG_TARGET_NAMESPACE, "GOTO_BOTTOM", CSTR2SYM(GTK_STOCK_GOTO_BOTTOM));
     rb_define_const(RG_TARGET_NAMESPACE, "GOTO_FIRST", CSTR2SYM(GTK_STOCK_GOTO_FIRST));
     rb_define_const(RG_TARGET_NAMESPACE, "GOTO_LAST", CSTR2SYM(GTK_STOCK_GOTO_LAST));
@@ -166,9 +160,7 @@ Init_gtk_stock(VALUE mGtk)
     rb_define_const(RG_TARGET_NAMESPACE, "HELP", CSTR2SYM(GTK_STOCK_HELP));
     rb_define_const(RG_TARGET_NAMESPACE, "HOME", CSTR2SYM(GTK_STOCK_HOME));
     rb_define_const(RG_TARGET_NAMESPACE, "INDENT", CSTR2SYM(GTK_STOCK_INDENT));
-#if GTK_CHECK_VERSION(2,8,0)
     rb_define_const(RG_TARGET_NAMESPACE, "INFO", CSTR2SYM(GTK_STOCK_INFO));
-#endif
     rb_define_const(RG_TARGET_NAMESPACE, "INDEX", CSTR2SYM(GTK_STOCK_INDEX));
     rb_define_const(RG_TARGET_NAMESPACE, "ITALIC", CSTR2SYM(GTK_STOCK_ITALIC));
     rb_define_const(RG_TARGET_NAMESPACE, "JUMP_TO", CSTR2SYM(GTK_STOCK_JUMP_TO));
@@ -176,9 +168,7 @@ Init_gtk_stock(VALUE mGtk)
     rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_FILL", CSTR2SYM(GTK_STOCK_JUSTIFY_FILL));
     rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_LEFT", CSTR2SYM(GTK_STOCK_JUSTIFY_LEFT));
     rb_define_const(RG_TARGET_NAMESPACE, "JUSTIFY_RIGHT", CSTR2SYM(GTK_STOCK_JUSTIFY_RIGHT));
-#if GTK_CHECK_VERSION(2,8,0)
     rb_define_const(RG_TARGET_NAMESPACE, "LEAVE_FULLSCREEN", CSTR2SYM(GTK_STOCK_LEAVE_FULLSCREEN));
-#endif
     rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_FORWARD", CSTR2SYM(GTK_STOCK_MEDIA_FORWARD));
     rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_NEXT", CSTR2SYM(GTK_STOCK_MEDIA_NEXT));
     rb_define_const(RG_TARGET_NAMESPACE, "MEDIA_PAUSE", CSTR2SYM(GTK_STOCK_MEDIA_PAUSE));
