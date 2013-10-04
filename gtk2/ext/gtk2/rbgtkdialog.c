@@ -208,13 +208,11 @@ rg_action_area(VALUE self)
     return GOBJ2RVAL(_SELF(self)->action_area);
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_get_response(VALUE self, VALUE widget)
 {
     return INT2NUM(gtk_dialog_get_response_for_widget(_SELF(self), RVAL2GOBJ(widget)));
 }
-#endif
 
 void 
 Init_gtk_dialog(VALUE mGtk)
@@ -238,10 +236,8 @@ Init_gtk_dialog(VALUE mGtk)
     RG_DEF_METHOD(vbox, 0);
     RG_DEF_METHOD(action_area, 0);
 
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(get_response, 1);
     RG_DEF_ALIAS("get_response_for_widget", "get_response");
-#endif
 
     /* GtkDialogFlags */
     G_DEF_CLASS(GTK_TYPE_DIALOG_FLAGS, "Flags", RG_TARGET_NAMESPACE);
