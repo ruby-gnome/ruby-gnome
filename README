@@ -15,7 +15,7 @@ use from Ruby 1.9.x and 2.0.0.
   * Ruby/ATK:             ATK 1.0.x or later
   * Ruby/Pango:           Pango 1.1.x or later
   * Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
-  * Ruby/GTK2:            GTK+ 2.6.x or later
+  * Ruby/GTK2:            GTK+ 2.8.x or later
   * Ruby/GObjectIntrospection: GObject Introspection 1.32.1 or later
 
 === ruby-gtk3
