@@ -35,12 +35,10 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     } else if (argc == 2) {
         VALUE display, type_or_name;
         rb_scan_args(argc, argv, "20", &display, &type_or_name);
-#if GTK_CHECK_VERSION(2,8,0)
         if (TYPE(type_or_name) == T_STRING)
             cursor = gdk_cursor_new_from_name(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)),
                                               RVAL2CSTR(type_or_name));
         else
-#endif
             cursor = gdk_cursor_new_for_display(GDK_DISPLAY_OBJECT(RVAL2GOBJ(display)), 
                                                 RVAL2GENUM(type_or_name, GDK_TYPE_CURSOR_TYPE));
     } else if (argc == 4) {
@@ -82,13 +80,11 @@ rg_cursor_type(VALUE self)
     return GENUM2RVAL(((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR))->type, GDK_TYPE_CURSOR_TYPE);
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_image(VALUE self)
 {
     return GOBJ2RVAL(gdk_cursor_get_image((GdkCursor*)RVAL2BOXED(self, GDK_TYPE_CURSOR)));
 }
-#endif
 
 void
 Init_gtk_gdk_cursor(VALUE mGdk)
@@ -99,9 +95,7 @@ Init_gtk_gdk_cursor(VALUE mGdk)
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD_P(pixmap, 0);
     RG_DEF_METHOD(cursor_type, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(image, 0);
-#endif
 
     G_DEF_CLASS(GDK_TYPE_CURSOR_TYPE, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_CURSOR_TYPE, "GDK_");
