@@ -104,14 +104,12 @@ rg_set(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_clear(VALUE self)
 {
     gtk_image_clear(_SELF(self));
     return self;
 }
-#endif
 
 void 
 Init_gtk_image(VALUE mGtk)
@@ -119,9 +117,7 @@ Init_gtk_image(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_IMAGE, "Image", mGtk);
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set, -1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(clear, 0);
-#endif
 
     /* GtkImageType */
     G_DEF_CLASS(GTK_TYPE_IMAGE_TYPE, "Type", RG_TARGET_NAMESPACE);
