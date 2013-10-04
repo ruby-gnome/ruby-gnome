@@ -225,14 +225,12 @@ rg_focus_cell(VALUE self, VALUE renderer)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_queue_resize(VALUE self)
 {
     gtk_tree_view_column_queue_resize(_SELF(self));
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
@@ -276,9 +274,7 @@ Init_gtk_treeviewcolumn(VALUE mGtk)
     RG_DEF_METHOD(cell_size, 0);
     RG_DEF_METHOD_P(cell_is_visible, 0);
     RG_DEF_METHOD(focus_cell, 1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(queue_resize, 0);
-#endif
 #if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(tree_view, 0);
 #endif
