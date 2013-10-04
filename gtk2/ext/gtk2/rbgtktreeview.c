@@ -343,7 +343,6 @@ rg_visible_rect(VALUE self)
     return BOXED2RVAL(&rect, GDK_TYPE_RECTANGLE);
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_visible_range(VALUE self)
 {
@@ -355,7 +354,6 @@ rg_visible_range(VALUE self)
     return valid_paths ? rb_assoc_new(GTKTREEPATH2RVAL(start_path),
                                       GTKTREEPATH2RVAL(end_path)) : Qnil;
 }
-#endif
 
 static VALUE
 rg_bin_window(VALUE self)
@@ -706,10 +704,7 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(get_cell_area, 2);
     RG_DEF_METHOD(get_background_area, 2);
     RG_DEF_METHOD(visible_rect, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(visible_range, 0);
-#endif
-
     RG_DEF_METHOD(bin_window, 0);
     RG_DEF_METHOD(widget_to_tree_coords, 2);
     RG_DEF_METHOD(tree_to_widget_coords, 2);
