@@ -27,7 +27,6 @@
 #define RG_TARGET_NAMESPACE cScale
 #define _SELF(self) (GTK_SCALE(RVAL2GOBJ(self)))
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_layout(VALUE self)
 {
@@ -41,16 +40,11 @@ rg_layout_offsets(VALUE self)
     gtk_scale_get_layout_offsets(_SELF(self), &x, &y);
     return rb_assoc_new(INT2NUM(x), INT2NUM(y));
 }
-#endif
 
 void 
 Init_gtk_scale(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
     RG_DEF_METHOD(layout, 0);
     RG_DEF_METHOD(layout_offsets, 0);
-#else
-    G_DEF_CLASS(GTK_TYPE_SCALE, "Scale", mGtk);
-#endif
 }

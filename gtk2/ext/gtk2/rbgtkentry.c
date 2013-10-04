@@ -48,7 +48,6 @@ rg_layout_offsets(VALUE self)
     return rb_ary_new3(2, INT2NUM(x), INT2NUM(y));
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_completion(VALUE self, VALUE completion)
 {
@@ -64,7 +63,6 @@ rg_completion(VALUE self)
 {
     return GOBJ2RVAL(gtk_entry_get_completion(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_layout_index_to_text_index(VALUE self, VALUE layout_index)
@@ -101,11 +99,9 @@ Init_gtk_entry(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(layout, 0);
     RG_DEF_METHOD(layout_offsets, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_completion, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "completion");
     RG_DEF_METHOD(completion, 0);
-#endif
     RG_DEF_METHOD(layout_index_to_text_index, 1);
     RG_DEF_METHOD(text_index_to_layout_index, 1);
 

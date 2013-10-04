@@ -227,7 +227,6 @@ def_move(backward_sentence_start)
 def_move_gint(forward_sentence_ends)
 def_move_gint(backward_sentence_starts)
 
-#if GTK_CHECK_VERSION(2,4,0)
 def_move_gint(forward_visible_word_ends)
 def_move_gint(backward_visible_word_starts)
 def_move(forward_visible_word_end)
@@ -236,7 +235,6 @@ def_move(forward_visible_cursor_position)
 def_move(backward_visible_cursor_position)
 def_move_gint(forward_visible_cursor_positions)
 def_move_gint(backward_visible_cursor_positions)
-#endif
 #if GTK_CHECK_VERSION(2,8,0)
 def_move(forward_visible_line)
 def_move(backward_visible_line)
@@ -465,7 +463,6 @@ Init_gtk_textiter(VALUE mGtk)
     rb_define_method(RG_TARGET_NAMESPACE, "forward_sentence_ends", forward_sentence_ends, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "backward_sentence_starts", backward_sentence_starts, 1);
 
-#if GTK_CHECK_VERSION(2,4,0)
     rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_word_ends", forward_visible_word_ends, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_word_starts", backward_visible_word_starts, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_word_end", forward_visible_word_end, 0);
@@ -474,7 +471,6 @@ Init_gtk_textiter(VALUE mGtk)
     rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_cursor_position", backward_visible_cursor_position, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_cursor_positions", forward_visible_cursor_positions, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_cursor_positions", backward_visible_cursor_positions, 1); 
-#endif
 #if GTK_CHECK_VERSION(2,8,0)
     rb_define_method(RG_TARGET_NAMESPACE, "forward_visible_line", forward_visible_line, 0); 
     rb_define_method(RG_TARGET_NAMESPACE, "backward_visible_line", backward_visible_line, 0); 

@@ -128,7 +128,6 @@ rg_find(VALUE self)
     return BOXED2RVAL(result, GTK_TYPE_ACCEL_KEY);
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_activate(VALUE self, VALUE accel_quark, VALUE acceleratable, VALUE accel_key, VALUE accel_mods)
 {
@@ -141,7 +140,6 @@ rg_activate(VALUE self, VALUE accel_quark, VALUE acceleratable, VALUE accel_key,
     return CBOOL2RVAL(gtk_accel_group_activate(_SELF(self), quark, RVAL2GOBJ(acceleratable),
                                                NUM2UINT(accel_key), RVAL2MOD(accel_mods)));
 }
-#endif
 
 static VALUE
 _gaccelgrp_lock_ensure(VALUE self)
@@ -191,9 +189,7 @@ Init_gtk_accel_group(VALUE mGtk)
     RG_DEF_SMETHOD(from_object, 1);
     RG_DEF_SMETHOD(from_accel_closure, 1);
     RG_DEF_METHOD(initialize, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(activate, 4);
-#endif
     RG_DEF_METHOD(lock, 0);
     RG_DEF_METHOD(unlock, 0);
     RG_DEF_METHOD(connect, -1);

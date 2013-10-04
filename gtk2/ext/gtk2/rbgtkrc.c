@@ -99,14 +99,12 @@ rg_m_reparse_all_for_settings(G_GNUC_UNUSED VALUE self, VALUE settings, VALUE fo
                                                       RVAL2CBOOL(force_load)));
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_m_reset_styles(G_GNUC_UNUSED VALUE self, VALUE settings)
 {
     gtk_rc_reset_styles(GTK_SETTINGS(RVAL2GOBJ(settings)));
     return settings;
 }
-#endif
 
 static VALUE
 rg_m_add_default_file(G_GNUC_UNUSED VALUE self, VALUE filename)
@@ -197,9 +195,7 @@ Init_gtk_rc(VALUE mGtk)
     RG_DEF_MODFUNC(parse_string, 1);
     RG_DEF_MODFUNC(reparse_all, 0);
     RG_DEF_MODFUNC(reparse_all_for_settings, 2);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_MODFUNC(reset_styles, 1);
-#endif
     RG_DEF_MODFUNC(add_default_file, 1);
     RG_DEF_MODFUNC(default_files, 0);
     RG_DEF_MODFUNC(set_default_files, 1);

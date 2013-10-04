@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cIconTheme
 #define _SELF(i) GTK_ICON_THEME(RVAL2GOBJ(i))
 
@@ -236,12 +234,9 @@ rg_contexts(VALUE self)
 }
 #endif
 
-#endif
-
 void
 Init_gtk_icon_theme(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_THEME, "IconTheme", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -279,6 +274,4 @@ Init_gtk_icon_theme(VALUE mGtk)
     /* GtkIconLookupFlags */
     G_DEF_CLASS(GTK_TYPE_ICON_LOOKUP_FLAGS, "LookupFlags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_LOOKUP_FLAGS, "GTK_ICON_");
-
-#endif
 }

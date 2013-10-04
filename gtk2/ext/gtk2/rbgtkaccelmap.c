@@ -105,7 +105,6 @@ void        gtk_accel_map_load_fd           (gint fd);
 void        gtk_accel_map_save_fd           (gint fd);
 */
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_s_get(G_GNUC_UNUSED VALUE self)
 {
@@ -125,12 +124,10 @@ rg_s_unlock_path(VALUE self, VALUE accel_path)
     gtk_accel_map_unlock_path(RVAL2CSTR(accel_path));
     return self;
 }
-#endif
 
 void
 Init_gtk_accel_map(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ACCEL_MAP, "AccelMap", mGtk);
 
     RG_DEF_SMETHOD(add_entry, 3);
@@ -144,16 +141,4 @@ Init_gtk_accel_map(VALUE mGtk)
     RG_DEF_SMETHOD(get, 0);
     RG_DEF_SMETHOD(lock_path, 1);
     RG_DEF_SMETHOD(unlock_path, 1);
-#else
-    VALUE mAccelMap = rb_define_module_under(mGtk, "AccelMap");
-
-    rb_define_module_function(mAccelMap, "add_entry", rg_s_add_entry, 3);
-    rb_define_module_function(mAccelMap, "lookup_entry", rg_s_lookup_entry, 1);
-    rb_define_module_function(mAccelMap, "change_entry", rg_s_change_entry, 4);
-    rb_define_module_function(mAccelMap, "load", rg_s_load, 1);
-    rb_define_module_function(mAccelMap, "save", rg_s_save, 1);
-    rb_define_module_function(mAccelMap, "add_filter", rg_s_add_filter, 1);
-    rb_define_module_function(mAccelMap, "each", rg_s_each, 0);
-    rb_define_module_function(mAccelMap, "each_unfilterd", rg_s_each_unfilterd, 0);
-#endif
 }

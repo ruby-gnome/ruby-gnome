@@ -27,7 +27,6 @@
 void 
 Init_gtk_filesystemerror(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
 #ifdef GTK_FILE_SYSTEM_ERROR
     VALUE RG_TARGET_NAMESPACE;
 
@@ -46,6 +45,5 @@ Init_gtk_filesystemerror(VALUE mGtk)
                     INT2NUM(GTK_FILE_SYSTEM_ERROR_FAILED));
     rb_define_const(RG_TARGET_NAMESPACE, "ALREADY_EXSITS",
                     INT2NUM(GTK_FILE_SYSTEM_ERROR_ALREADY_EXISTS));
-#endif
 #endif
 }

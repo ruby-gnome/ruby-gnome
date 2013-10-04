@@ -22,8 +22,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE mFileChooser
 #define _SELF(self) GTK_FILE_CHOOSER(RVAL2GOBJ(self))
 
@@ -259,14 +257,10 @@ rg_shortcut_folder_uris(VALUE self)
 {
     return gslist2ary_free(gtk_file_chooser_list_shortcut_folder_uris(_SELF(self)));
 }
-#endif
 
 void 
 Init_gtk_file_chooser(VALUE mGtk)
 {
-
-#if GTK_CHECK_VERSION(2,4,0)
-
     VALUE RG_TARGET_NAMESPACE = G_DEF_INTERFACE(GTK_TYPE_FILE_CHOOSER, "FileChooser", mGtk);
 
     RG_DEF_METHOD(set_current_name, 1);
@@ -316,6 +310,4 @@ Init_gtk_file_chooser(VALUE mGtk)
 #endif
 
     G_DEF_CLASS3("GtkFileChooserEmbed", "FileChooserEmbed", mGtk);
-
-#endif
 }

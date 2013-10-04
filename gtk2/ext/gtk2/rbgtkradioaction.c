@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cRadioAction
 #define _SELF(self) (GTK_RADIO_ACTION(RVAL2GOBJ(self)))
 
@@ -119,12 +117,9 @@ rg_current_value(VALUE self)
 }
 #endif
 
-#endif
-
 void 
 Init_gtk_radio_action(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_ACTION, "RadioAction", mGtk);
 
     RG_DEF_METHOD(initialize, 5);
@@ -134,5 +129,4 @@ Init_gtk_radio_action(VALUE mGtk)
 #endif
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_get_group, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", raction_set_group, 1);
-#endif
 }

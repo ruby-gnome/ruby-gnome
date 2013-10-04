@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 static ID id_action_procs;
 static ID id_toggle_action_procs;
 
@@ -445,12 +443,10 @@ action_group_mark(void *p)
     }
     g_list_free(actions);
 }
-#endif
 
 void 
 Init_gtk_actiongroup(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE;
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS_WITH_GC_FUNC(GTK_TYPE_ACTION_GROUP, "ActionGroup",
@@ -472,6 +468,5 @@ Init_gtk_actiongroup(VALUE mGtk)
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "translation_domain");
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(translate_string, 1);
-#endif
 #endif
 }

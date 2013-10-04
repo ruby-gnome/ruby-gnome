@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cRadioToolButton
 #define _SELF(self) (GTK_RADIO_TOOL_BUTTON(RVAL2GOBJ(self)))
 
@@ -123,16 +121,12 @@ rbtn_set_group(VALUE self, VALUE rbgroup)
     return self;
 }
 
-#endif
-
 void 
 Init_gtk_radiotoolbutton(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RADIO_TOOL_BUTTON, "RadioToolButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "group", rbtn_get_group, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "group", rbtn_set_group, 1);
-#endif
 }
