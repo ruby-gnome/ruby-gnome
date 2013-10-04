@@ -178,7 +178,6 @@ rg_set_default(VALUE self, VALUE win)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_present(int argc, VALUE *argv, VALUE self)
 {
@@ -190,14 +189,6 @@ rg_present(int argc, VALUE *argv, VALUE self)
     }
     return self;
 }
-#else
-static VALUE
-gwin_present(VALUE self)
-{
-    gtk_window_present(_SELF(self));
-    return self;
-}
-#endif
 
 static VALUE
 rg_iconify(VALUE self)
@@ -538,11 +529,7 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(focus, 0);
     RG_DEF_METHOD(set_focus, 1);
     RG_DEF_METHOD(set_default, 1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(present, -1);
-#else
-    RG_DEF_METHOD(present, 0);
-#endif
     RG_DEF_METHOD(iconify, 0);
     RG_DEF_METHOD(deiconify, 0);
     RG_DEF_METHOD(stick, 0);
