@@ -271,14 +271,12 @@ rg_m_set_icon(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_m_set_icon_name(VALUE self, VALUE context, VALUE name, VALUE hot_x, VALUE hot_y)
 {
     gtk_drag_set_icon_name(RVAL2DC(context), RVAL2CSTR(name), NUM2INT(hot_x), NUM2INT(hot_y));
     return self;
 }
-#endif
 
 static VALUE
 rg_m_set_icon_default(VALUE self, VALUE context)
@@ -333,14 +331,12 @@ rg_m_source_set_icon(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_m_source_set_icon_name(VALUE self, VALUE widget, VALUE icon_name)
 {
     gtk_drag_source_set_icon_name(RVAL2WIDGET(widget), RVAL2CSTR(icon_name));
     return self;
 }
-#endif
 
 static VALUE
 rg_m_source_unset(VALUE self, VALUE widget)
@@ -412,15 +408,11 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_MODFUNC(begin, 5);
     RG_DEF_MODFUNC_P(threshold, 5);
     RG_DEF_MODFUNC(set_icon, -1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_MODFUNC(set_icon_name, 4);
-#endif
     RG_DEF_MODFUNC(set_icon_default, 1);
     RG_DEF_MODFUNC(source_set, 4);
     RG_DEF_MODFUNC(source_set_icon, -1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_MODFUNC(source_set_icon_name, 2);
-#endif
     RG_DEF_MODFUNC(source_unset, 1);
     RG_DEF_MODFUNC(source_set_target_list, 2);
     RG_DEF_MODFUNC(source_get_target_list, 1);
