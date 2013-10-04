@@ -204,7 +204,6 @@ rg_scroll(VALUE self, VALUE dx, VALUE dy)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_move_region(VALUE self, VALUE region, VALUE dx, VALUE dy)
 {
@@ -214,7 +213,6 @@ rg_move_region(VALUE self, VALUE region, VALUE dx, VALUE dy)
                            NUM2INT(dy));
     return self;
 }
-#endif
 
 static VALUE
 rg_reparent(VALUE self, VALUE new_parent, VALUE x, VALUE y)
@@ -672,14 +670,12 @@ rg_set_skip_pager_hint(VALUE self, VALUE hint)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_set_urgency_hint(VALUE self, VALUE hint)
 {
     gdk_window_set_urgency_hint(_SELF(self), RVAL2CBOOL(hint));
     return self;
 }
-#endif
 
 static VALUE
 rg_position(VALUE self)
@@ -932,15 +928,12 @@ rg_set_user_time(VALUE self, VALUE time)
     return Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_move_to_current_desktop(VALUE self)
 {
     gdk_x11_window_move_to_current_desktop(_SELF(self));
     return self;
 }
-#endif
-
 #endif
 
 void
@@ -979,9 +972,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(resize, 2);
     RG_DEF_METHOD(move_resize, 4);
     RG_DEF_METHOD(scroll, 2);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(move_region, 3);
-#endif
     RG_DEF_METHOD(reparent, 3);
     RG_DEF_METHOD(clear, 0);
     RG_DEF_METHOD(clear_area, -1);
@@ -1038,9 +1029,7 @@ Init_gtk_gdk_window(VALUE mGdk)
 
     RG_DEF_METHOD(set_skip_taskbar_hint, 1);
     RG_DEF_METHOD(set_skip_pager_hint, 1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(set_urgency_hint, 1);
-#endif
     RG_DEF_METHOD(position, 0);
     RG_DEF_METHOD(root_origin, 0);
     RG_DEF_METHOD(frame_extents, 0);
@@ -1123,9 +1112,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(server_time, 0);
 
     RG_DEF_METHOD(set_user_time, 1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(move_to_current_desktop, 0);
-#endif
 
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
 #elif defined(GDK_WINDOWING_WIN32)
