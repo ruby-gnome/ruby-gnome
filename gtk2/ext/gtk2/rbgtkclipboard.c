@@ -237,7 +237,6 @@ rg_request_image(VALUE self)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,4,0)
 static void
 clipboard_target_received_func(GtkClipboard *clipboard, GdkAtom *atoms, gint n_atoms, gpointer func)
 {
@@ -261,7 +260,6 @@ rg_request_targets(VALUE self)
                                   (gpointer)func);
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static void
@@ -352,7 +350,6 @@ rg_wait_is_rich_text_available_p(VALUE self, VALUE buffer)
 }
 #endif
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_wait_for_targets(VALUE self)
 {
@@ -378,7 +375,6 @@ rg_wait_for_targets(VALUE self)
     }
     return ary;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,6,0)
 static VALUE
@@ -431,9 +427,7 @@ Init_gtk_clipboard(VALUE mGtk)
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(request_image, 0);
 #endif
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(request_targets, 0);
-#endif
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(request_rich_text, 1);
 #endif
@@ -452,9 +446,7 @@ Init_gtk_clipboard(VALUE mGtk)
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(wait_is_rich_text_available, 1);
 #endif
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(wait_for_targets, 0);
-#endif
 #if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(wait_is_target_available, 1);
     RG_DEF_METHOD(set_can_store, 1);

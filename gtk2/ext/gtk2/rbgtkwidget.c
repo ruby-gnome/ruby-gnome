@@ -133,14 +133,12 @@ rg_queue_resize(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_queue_resize_no_redraw(VALUE self)
 {
     gtk_widget_queue_resize_no_redraw(_SELF(self));
     return self;
 }
-#endif
 
 /* Note this method is not
    gtk_widget_get_size_request */
@@ -203,13 +201,11 @@ rg_accel_closures(VALUE self)
     return GLIST2ARY2F(gtk_widget_list_accel_closures(_SELF(self)), G_TYPE_CLOSURE);
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_can_activate_accel_p(VALUE self, VALUE signal_id)
 {
     return CBOOL2RVAL(gtk_widget_can_activate_accel(_SELF(self), NUM2UINT(signal_id)));
 }
-#endif
 
 static VALUE
 rg_event(VALUE self, VALUE event)
@@ -900,8 +896,6 @@ rg_thaw_child_notify(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 static VALUE
 rg_mnemonic_labels(VALUE self)
 {
@@ -921,7 +915,6 @@ rg_remove_mnemonic_label(VALUE self, VALUE label)
     gtk_widget_remove_mnemonic_label(_SELF(self), GTK_WIDGET(RVAL2GOBJ(label)));
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
@@ -1079,9 +1072,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(unrealize, 0);
     RG_DEF_METHOD(queue_draw, 0);
     RG_DEF_METHOD(queue_resize, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(queue_resize_no_redraw, 0);
-#endif
     RG_DEF_METHOD(size_request, 0);
     RG_DEF_METHOD(child_requisition, 0);
     RG_DEF_METHOD(size_allocate, 1);
@@ -1089,9 +1080,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(remove_accelerator, 3);
     RG_DEF_METHOD(set_accel_path, 2);
     RG_DEF_METHOD(accel_closures, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD_P(can_activate_accel, 1);
-#endif
     RG_DEF_METHOD(event, 1);
     RG_DEF_METHOD(activate, 0);
     RG_DEF_METHOD(reparent, 1);
@@ -1168,11 +1157,9 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(get_size_request, 0);
     RG_DEF_METHOD(set_size_request, 2);
     RG_DEF_METHOD(thaw_child_notify, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(mnemonic_labels, 0);
     RG_DEF_METHOD(add_mnemonic_label, 1);
     RG_DEF_METHOD(remove_mnemonic_label, 1);
-#endif
 #if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(set_tooltip_window, 1);
     RG_DEF_METHOD(tooltip_window, 0);

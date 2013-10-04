@@ -52,14 +52,12 @@ GtkWidget*  gtk_message_dialog_new_with_markup
                                              const gchar *message_format,
                                              ...);
 */
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_markup(VALUE self, VALUE str)
 {
     gtk_message_dialog_set_markup(_SELF(self), RVAL2CSTR(str));
     return self;
 }
-#endif
 
 /* Not needed in Ruby
 void                gtk_message_dialog_format_secondary_text
@@ -78,10 +76,8 @@ Init_gtk_message_dialog(VALUE mGtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MESSAGE_DIALOG, "MessageDialog", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_markup, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "markup");
-#endif
 
     /* GtkMessageType */
     G_DEF_CLASS(GTK_TYPE_MESSAGE_TYPE, "Type", RG_TARGET_NAMESPACE);

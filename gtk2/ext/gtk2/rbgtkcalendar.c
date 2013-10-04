@@ -106,12 +106,8 @@ rg_display_options(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "01", &flags);
 
     if (NIL_P(flags)){
-#if GTK_CHECK_VERSION(2,4,0)
         return GFLAGS2RVAL(gtk_calendar_get_display_options(_SELF(self)),
                            GTK_TYPE_CALENDAR_DISPLAY_OPTIONS);
-#else
-        rb_warn("Gtk::Calendar#display_options has supported since GTK+-2.4.");
-#endif
     } else {
         /* This is for backward compatibility. */
         rb_warning("Gtk::Calendar#display_options(flags) has been deprecated. Use Gtk::Calendar#set_display_options(flags).");
@@ -121,7 +117,6 @@ rg_display_options(int argc, VALUE *argv, VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_display_options(VALUE self, VALUE flags)
 {
@@ -130,7 +125,6 @@ rg_set_display_options(VALUE self, VALUE flags)
                                                  GTK_TYPE_CALENDAR_DISPLAY_OPTIONS));
     return self;
 }
-#endif
 
 void 
 Init_gtk_calendar(VALUE mGtk)
@@ -147,10 +141,8 @@ Init_gtk_calendar(VALUE mGtk)
     RG_DEF_METHOD(freeze, 0);
     RG_DEF_METHOD(thaw, 0);
     RG_DEF_METHOD(display_options, -1);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_display_options, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "display_options");
-#endif
 
     G_DEF_CLASS(GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "DisplayOptions", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_CALENDAR_DISPLAY_OPTIONS, "GTK_CALENDAR_");

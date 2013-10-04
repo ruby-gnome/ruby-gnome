@@ -355,7 +355,6 @@ rg_paint_resize_grip(VALUE self, VALUE gdkwindow, VALUE state_type, VALUE area, 
                           NUM2INT(width), NUM2INT(height));
     return self;
 }
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_s_draw_insertion_cursor(VALUE self, VALUE widget, VALUE drawable, VALUE area, VALUE location, VALUE is_primary, VALUE direction, VALUE draw_arrow)
 {
@@ -367,7 +366,6 @@ rg_s_draw_insertion_cursor(VALUE self, VALUE widget, VALUE drawable, VALUE area,
                               RVAL2CBOOL(draw_arrow));
     return self;
 }
-#endif
 
 #define DEFINE_STYLE_COLOR(type) \
 static VALUE \
@@ -592,9 +590,7 @@ Init_gtk_style(VALUE mGtk)
     RG_DEF_METHOD(paint_expander, 8);
     RG_DEF_METHOD(paint_layout, 9);
     RG_DEF_METHOD(paint_resize_grip, 10);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_SMETHOD(draw_insertion_cursor, 7);
-#endif
     rb_define_method(RG_TARGET_NAMESPACE, "fg", style_fg, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "bg", style_bg, 1);
     rb_define_method(RG_TARGET_NAMESPACE, "light", style_light, 1);

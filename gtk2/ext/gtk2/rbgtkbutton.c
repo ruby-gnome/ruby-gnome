@@ -82,7 +82,6 @@ rg_leave(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_set_alignment(VALUE self, VALUE xalign, VALUE yalign)
 {
@@ -98,7 +97,6 @@ rg_alignment(VALUE self)
 
     return rb_assoc_new(rb_float_new(xalign), rb_float_new(yalign));
 }
-#endif
 
 void 
 Init_gtk_button(VALUE mGtk)
@@ -111,9 +109,7 @@ Init_gtk_button(VALUE mGtk)
     RG_DEF_METHOD(enter, 0);
     RG_DEF_METHOD(leave, 0);
 
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_alignment, 2);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "alignment");
     RG_DEF_METHOD(alignment, 0);
-#endif
 }

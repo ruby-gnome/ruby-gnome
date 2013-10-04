@@ -50,7 +50,6 @@ rg_reorder_child(VALUE self, VALUE child, VALUE position)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,4,0)
 static VALUE
 rg_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE top_attach, VALUE bottom_attach)
 {
@@ -59,7 +58,6 @@ rg_attach(VALUE self, VALUE child, VALUE left_attach, VALUE right_attach, VALUE 
                     NUM2UINT(top_attach), NUM2UINT(bottom_attach));
     return self;
 }
-#endif
 
 static void
 menu_pos_func(GtkMenu *menu, gint *px, gint *py, gboolean *push_in, gpointer data)
@@ -165,9 +163,7 @@ Init_gtk_menu(VALUE mGtk)
     RG_DEF_METHOD(set_screen, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "screen");
     RG_DEF_METHOD(reorder_child, 2);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(attach, 5);
-#endif
     RG_DEF_METHOD(popup, 4);
     RG_DEF_METHOD(popdown, 0);
     RG_DEF_METHOD(reposition, 0);

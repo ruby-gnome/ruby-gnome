@@ -22,8 +22,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cFileFilter
 #define _SELF(self) GTK_FILE_FILTER(RVAL2GOBJ(self))
 
@@ -112,13 +110,10 @@ rg_filter_p(VALUE self, VALUE contains, VALUE filename, VALUE uri, VALUE display
 
     return CBOOL2RVAL(gtk_file_filter_filter(_SELF(self), &info));
 }
-#endif
 
 void 
 Init_gtk_file_filter(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
-
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_FILE_FILTER, "FileFilter", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -137,6 +132,4 @@ Init_gtk_file_filter(VALUE mGtk)
 
     G_DEF_CLASS(GTK_TYPE_FILE_FILTER_FLAGS, "Flags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_FILE_FILTER_FLAGS, "GTK_FILE_FILTER_");
-
-#endif
 }

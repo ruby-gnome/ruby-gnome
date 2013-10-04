@@ -253,7 +253,7 @@ rg_unfullscreen(VALUE self)
     gtk_window_unfullscreen(_SELF(self));
     return self;
 }
-#if GTK_CHECK_VERSION(2,4,0)
+
 static VALUE
 rg_set_keep_above(VALUE self, VALUE setting)
 {
@@ -266,7 +266,6 @@ rg_set_keep_below(VALUE self, VALUE setting)
     gtk_window_set_keep_below(_SELF(self), RVAL2CBOOL(setting));
     return self;
 }
-#endif
 
 static VALUE
 rg_begin_resize_drag(VALUE self, VALUE edge, VALUE button, VALUE root_x, VALUE root_y, VALUE timestamp)
@@ -426,12 +425,7 @@ rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
         if (! ret)
             RAISE_GERROR(err);
     } else {
-#if GTK_CHECK_VERSION(2,4,0)
         gtk_window_set_default_icon(GDK_PIXBUF(RVAL2GOBJ(icon_or_filename)));
-#else
-        rb_raise(rb_eArgError, "Invalid argument: %s, or you may need to use GTK+-2.4.x", 
-                 rb_class2name(CLASS_OF(icon_or_filename)));
-#endif
     }
     return self;
 }
@@ -559,10 +553,8 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(unmaximize, 0);
     RG_DEF_METHOD(fullscreen, 0);
     RG_DEF_METHOD(unfullscreen, 0);
-#if GTK_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(set_keep_above, 1);
     RG_DEF_METHOD(set_keep_below, 1);
-#endif
     RG_DEF_METHOD(begin_resize_drag, 5);
     RG_DEF_METHOD(begin_move_drag, 4);
     RG_DEF_METHOD(set_frame_dimensions, 4);

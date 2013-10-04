@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,4,0)
-
 #define RG_TARGET_NAMESPACE cTreeModelFilter
 #define _SELF(s) (GTK_TREE_MODEL_FILTER(RVAL2GOBJ(s)))
 
@@ -176,12 +174,10 @@ rg_clear_cache(VALUE self)
     gtk_tree_model_filter_clear_cache(_SELF(self));
     return self;
 }
-#endif
 
 void 
 Init_gtk_treemodelfilter(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_MODEL_FILTER, "TreeModelFilter", mGtk);
 
     id_child_model = rb_intern("child_model");
@@ -199,5 +195,4 @@ Init_gtk_treemodelfilter(VALUE mGtk)
     RG_DEF_METHOD(refilter, 0);
     RG_DEF_METHOD(clear_cache, 0);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }
