@@ -47,7 +47,7 @@
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
-#if GTK_CHECK_VERSION(2,8,0) && defined(HAVE_RB_CAIRO_H)
+#if defined(HAVE_RB_CAIRO_H)
 #  define CAIRO_AVAILABLE 1
 #else
 #  define CAIRO_AVAILABLE 0
