@@ -452,8 +452,7 @@ rg_screen(VALUE self)
     return GOBJ2RVAL(gdk_drawable_get_screen(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
 static VALUE
 rg_create_cairo_context(VALUE self)
 {
@@ -465,7 +464,6 @@ rg_create_cairo_context(VALUE self)
     cairo_destroy (cr);
     return rb_cr;
 }
-#  endif
 #endif
 
 void
@@ -508,10 +506,8 @@ Init_gtk_gdk_draw(VALUE mGdk)
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD(screen, 0);
 
-#if GTK_CHECK_VERSION(2,8,0)
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(create_cairo_context, 0);
-#  endif
 #endif
 
 #ifdef GDK_WINDOWING_X11
