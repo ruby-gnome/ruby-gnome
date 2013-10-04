@@ -94,7 +94,6 @@ rg_path(VALUE self)
     return ret;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_model(VALUE self)
 {
@@ -102,7 +101,6 @@ rg_model(VALUE self)
     G_CHILD_SET(self, id_model, ret);
     return ret;
 }
-#endif
 
 static VALUE
 rg_valid_p(VALUE self)
@@ -160,9 +158,7 @@ Init_gtk_treerowreference(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(path, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(model, 0);
-#endif
     RG_DEF_METHOD_P(valid, 0);
 
     RG_DEF_SMETHOD(inserted, 2);
