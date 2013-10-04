@@ -104,7 +104,6 @@ rg_item_activated(VALUE self, VALUE path)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_create_drag_icon(VALUE self, VALUE path)
 {
@@ -233,7 +232,6 @@ rg_unset_model_drag_source(VALUE self)
     gtk_icon_view_unset_model_drag_source(_SELF(self));
     return self;
 }
-#endif
 
 void
 Init_gtk_iconview(VALUE mGtk)
@@ -252,7 +250,6 @@ Init_gtk_iconview(VALUE mGtk)
     RG_DEF_METHOD_P(path_is_selected, 1);
     RG_DEF_METHOD(selected_items, 0);
     RG_DEF_METHOD(item_activated, 1);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(create_drag_icon, 1);
     RG_DEF_METHOD(enable_model_drag_dest, 2);
     RG_DEF_METHOD(enable_model_drag_source, 3);
@@ -270,5 +267,4 @@ Init_gtk_iconview(VALUE mGtk)
     /* GtkIconViewDropPosition */
     G_DEF_CLASS(GTK_TYPE_ICON_VIEW_DROP_POSITION, "Type", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ICON_VIEW_DROP_POSITION, "GTK_ICON_VIEW_");
-#endif
 }
