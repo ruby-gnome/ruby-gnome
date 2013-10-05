@@ -606,8 +606,8 @@ gdkevent_initialize(VALUE self, VALUE type)
     event_type = RVAL2GENUM(type, GDK_TYPE_EVENT_TYPE);
     klass = rb_gdk_event_type_to_class(event_type);
     if (!RVAL2CBOOL(rb_obj_is_kind_of(self, klass))) {
-        /* TODO: add klass name to error message. */
-        rb_raise(rb_eArgError, "Wrong event type for this class.");
+        rb_raise(rb_eArgError, "Wrong event type for this class: %s: %s",
+                 RBG_INSPECT(type), RBG_INSPECT(klass));
     }
 
     G_INITIALIZE(self, gdk_event_new(event_type));
