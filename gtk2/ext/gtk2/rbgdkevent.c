@@ -211,55 +211,53 @@ rb_gdk_event_type_to_gtype(GdkEventType event_type)
 static VALUE
 rb_gdk_event_type_to_class(GdkEventType event_type)
 {
-    VALUE mGdk;
     VALUE klass = Qnil;
 
-    mGdk = rb_const_get(rb_cObject, rb_intern("Gdk"));
     switch (event_type) {
       case GDK_NOTHING:
       case GDK_DELETE:
       case GDK_DESTROY:
         break;
       case GDK_EXPOSE:
-        klass = rb_const_get(mGdk, rb_intern("EventExpose"));
+        klass = rb_cGdkEventExpose;
         break;
       case GDK_MOTION_NOTIFY:
-        klass = rb_const_get(mGdk, rb_intern("EventMotion"));
+        klass = rb_cGdkEventMotion;
         break;
       case GDK_BUTTON_PRESS:
       case GDK_2BUTTON_PRESS:
       case GDK_3BUTTON_PRESS:
       case GDK_BUTTON_RELEASE:
-        klass = rb_const_get(mGdk, rb_intern("EventButton"));
+        klass = rb_cGdkEventButton;
         break;
       case GDK_KEY_PRESS:
       case GDK_KEY_RELEASE:
-        klass = rb_const_get(mGdk, rb_intern("EventKey"));
+        klass = rb_cGdkEventKey;
         break;
       case GDK_ENTER_NOTIFY:
       case GDK_LEAVE_NOTIFY:
-        klass = rb_const_get(mGdk, rb_intern("EventCrossing"));
+        klass = rb_cGdkEventCrossing;
         break;
       case GDK_FOCUS_CHANGE:
-        klass = rb_const_get(mGdk, rb_intern("EventFocus"));
+        klass = rb_cGdkEventFocus;
         break;
       case GDK_CONFIGURE:
-        klass = rb_const_get(mGdk, rb_intern("EventConfigure"));
+        klass = rb_cGdkEventConfigure;
         break;
       case GDK_MAP:
       case GDK_UNMAP:
         break;
       case GDK_PROPERTY_NOTIFY:
-        klass = rb_const_get(mGdk, rb_intern("EventProperty"));
+        klass = rb_cGdkEventProperty;
         break;
       case GDK_SELECTION_CLEAR:
       case GDK_SELECTION_REQUEST:
       case GDK_SELECTION_NOTIFY:
-        klass = rb_const_get(mGdk, rb_intern("EventSelection"));
+        klass = rb_cGdkEventSelection;
         break;
       case GDK_PROXIMITY_IN:
       case GDK_PROXIMITY_OUT:
-        klass = rb_const_get(mGdk, rb_intern("EventProximity"));
+        klass = rb_cGdkEventProximity;
         break;
       case GDK_DRAG_ENTER:
       case GDK_DRAG_LEAVE:
@@ -267,35 +265,35 @@ rb_gdk_event_type_to_class(GdkEventType event_type)
       case GDK_DRAG_STATUS:
       case GDK_DROP_START:
       case GDK_DROP_FINISHED:
-        klass = rb_const_get(mGdk, rb_intern("EventDND"));
+        klass = rb_cGdkEventDND;
         break;
       case GDK_CLIENT_EVENT:
-        klass = rb_const_get(mGdk, rb_intern("EventClient"));
+        klass = rb_cGdkEventClient;
         break;
       case GDK_VISIBILITY_NOTIFY:
-        klass = rb_const_get(mGdk, rb_intern("EventVisibility"));
+        klass = rb_cGdkEventVisibility;
         break;
       case GDK_NO_EXPOSE:
-        klass = rb_const_get(mGdk, rb_intern("EventNoExpose"));
+        klass = rb_cGdkEventNoExpose;
         break;
       case GDK_SCROLL:
-        klass = rb_const_get(mGdk, rb_intern("EventScroll"));
+        klass = rb_cGdkEventScroll;
         break;
       case GDK_WINDOW_STATE:
-        klass = rb_const_get(mGdk, rb_intern("EventWindowState"));
+        klass = rb_cGdkEventWindowState;
         break;
       case GDK_SETTING:
-        klass = rb_const_get(mGdk, rb_intern("EventSetting"));
+        klass = rb_cGdkEventSetting;
         break;
       case GDK_OWNER_CHANGE:
-        klass = rb_const_get(mGdk, rb_intern("EventOwnerChange"));
+        klass = rb_cGdkEventOwnerChange;
         break;
       case GDK_GRAB_BROKEN:
-        klass = rb_const_get(mGdk, rb_intern("EventGrabBroken"));
+        klass = rb_cGdkEventGrabBroken;
         break;
 #if GTK_CHECK_VERSION(2, 14, 0)
       case GDK_DAMAGE:
-        klass = rb_const_get(mGdk, rb_intern("EventExpose"));
+        klass = rb_cGdkEventExpose;
         break;
 #endif
 #if GTK_CHECK_VERSION(2, 18, 0)
@@ -307,7 +305,7 @@ rb_gdk_event_type_to_class(GdkEventType event_type)
     }
 
     if (NIL_P(klass)) {
-        klass = rb_const_get(mGdk, rb_intern("EventAny"));
+        klass = rb_cGdkEventAny;
     }
 
     return klass;
