@@ -46,13 +46,11 @@ rg_s_to_name(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
     return CSTR2RVAL(gtk_accelerator_name(NUM2UINT(key), RVAL2MOD(mods)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_get_label(G_GNUC_UNUSED VALUE self, VALUE key, VALUE mods)
 {
     return CSTR2RVAL(gtk_accelerator_get_label(NUM2UINT(key), RVAL2MOD(mods)));
 }
-#endif
 
 static VALUE
 rg_s_set_default_mod_mask(VALUE self, VALUE default_mod_mask)
@@ -76,9 +74,7 @@ Init_gtk_accelerator(VALUE mGtk)
     RG_DEF_SMETHOD(parse, 1);
     /* name is reserved by Ruby */
     RG_DEF_SMETHOD(to_name, 2);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(get_label, 2);
-#endif
     RG_DEF_SMETHOD(set_default_mod_mask, 1);
     RG_DEF_SMETHOD(default_mod_mask, 0);
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);

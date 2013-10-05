@@ -145,14 +145,12 @@ rg_detach(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_get_for_attach_widget(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     /* Owned by GTK+ */
     return GLIST2ARY(gtk_menu_get_for_attach_widget(GTK_WIDGET(RVAL2GOBJ(widget))));
 }
-#endif
 
 void 
 Init_gtk_menu(VALUE mGtk)
@@ -168,8 +166,6 @@ Init_gtk_menu(VALUE mGtk)
     RG_DEF_METHOD(popdown, 0);
     RG_DEF_METHOD(reposition, 0);
     RG_DEF_METHOD(detach, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(get_for_attach_widget, 1);
-#endif
     RG_DEF_METHOD(attach_to_widget, 1);
 }

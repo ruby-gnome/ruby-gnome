@@ -63,14 +63,12 @@ rg_complete(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_insert_prefix(VALUE self)
 {
     gtk_entry_completion_insert_prefix(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_insert_action_text(VALUE self, VALUE index, VALUE text)
@@ -117,9 +115,7 @@ Init_gtk_entry_completion(VALUE mGtk)
     RG_DEF_METHOD(entry, 0);
     RG_DEF_METHOD(set_match_func, 0);
     RG_DEF_METHOD(complete, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(insert_prefix, 0);
-#endif
     RG_DEF_METHOD(insert_action_text, 2);
     RG_DEF_METHOD(insert_action_markup, 2);
     RG_DEF_METHOD(delete_action, 1);

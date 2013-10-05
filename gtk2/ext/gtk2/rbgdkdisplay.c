@@ -304,7 +304,6 @@ rg_default_group(VALUE self)
     return GOBJ2RVAL(gdk_display_get_default_group(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_supports_selection_notification_p(VALUE self)
 {
@@ -339,7 +338,6 @@ rg_store_clipboard(VALUE self, VALUE rbclipboard_window, VALUE rbtime_, VALUE rb
 
     return self;
 }
-#endif
 
 static VALUE
 rg_core_pointer(VALUE self)
@@ -530,12 +528,10 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(default_cursor_size, 0);
     RG_DEF_METHOD(maximal_cursor_size, 0);
     RG_DEF_METHOD(default_group, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(supports_selection_notification, 0);
     RG_DEF_METHOD_P(request_selection_notification, 1);
     RG_DEF_METHOD_P(supports_clipboard_persistence, 0);
     RG_DEF_METHOD(store_clipboard, 3);
-#endif
     RG_DEF_METHOD(core_pointer, 0);
 #if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(warp_pointer, 3);

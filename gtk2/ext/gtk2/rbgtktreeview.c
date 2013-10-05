@@ -584,7 +584,6 @@ GtkTreeViewRowSeparatorFunc gtk_tree_view_get_row_separator_func
                                             (GtkTreeView *tree_view);
 */
 
-#if GTK_CHECK_VERSION(2,6,0)
 static gboolean
 row_separator_func(GtkTreeModel *model, GtkTreeIter *iter, gpointer func)
 {
@@ -607,7 +606,6 @@ rg_set_row_separator_func(VALUE self)
                                          (GtkDestroyNotify)NULL);
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
@@ -735,9 +733,7 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(set_search_equal_func, 0);
     RG_DEF_METHOD(set_cursor_on_cell, 4);
 
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_row_separator_func, 0);
-#endif
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(search_entry, 0);
     RG_DEF_METHOD(set_search_entry, 1);

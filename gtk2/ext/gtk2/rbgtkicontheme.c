@@ -147,7 +147,6 @@ rg_icons(int argc, VALUE *argv, VALUE self)
     return GLIST2ARY_STR_FREE(icons);
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_get_icon_sizes(VALUE self, VALUE icon_name)
 {
@@ -162,7 +161,6 @@ rg_get_icon_sizes(VALUE self, VALUE icon_name)
     g_free(sizes);
     return ary;
 }
-#endif
 
 static VALUE
 rg_example_icon_name(VALUE self)
@@ -252,9 +250,7 @@ Init_gtk_icon_theme(VALUE mGtk)
     RG_DEF_METHOD(lookup_icon, 3);
     RG_DEF_METHOD(load_icon, 3);
     RG_DEF_METHOD(icons, -1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(get_icon_sizes, 1);
-#endif
     RG_DEF_METHOD(example_icon_name, 0);
     RG_DEF_METHOD(rescan_if_needed, 0);
 
