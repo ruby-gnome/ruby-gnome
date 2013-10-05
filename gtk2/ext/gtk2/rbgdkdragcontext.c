@@ -249,13 +249,11 @@ rg_drag_status(VALUE self, VALUE action, VALUE time)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_drag_drop_succeeded_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_drag_drop_succeeded(_SELF(self)));
 }
-#endif
 
 void
 Init_gtk_gdk_dragcontext(VALUE mGdk)
@@ -284,9 +282,7 @@ Init_gtk_gdk_dragcontext(VALUE mGdk)
     RG_DEF_METHOD(drag_motion, 7);
     RG_DEF_METHOD(drop_finish, 2);
     RG_DEF_METHOD(drag_status, 2);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(drag_drop_succeeded, 0);
-#endif
     /* Constants */
     G_DEF_CLASS(GDK_TYPE_DRAG_PROTOCOL, "Protocol", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GDK_TYPE_DRAG_ACTION, "Action", RG_TARGET_NAMESPACE);

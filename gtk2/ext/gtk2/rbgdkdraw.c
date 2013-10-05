@@ -257,7 +257,6 @@ rg_draw_polygon(VALUE self, VALUE rbgc, VALUE rbfilled, VALUE rbpoints)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 /*
   trapezoids = [[y1, x11, x21, y2, x12, x22], ...]
  */
@@ -332,7 +331,6 @@ rg_draw_trapezoids(VALUE self, VALUE rbgc, VALUE rbtrapezoids)
 
     return self;
 }
-#endif
 
 static VALUE
 rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
@@ -343,7 +341,6 @@ rg_draw_glyphs(VALUE self, VALUE gc, VALUE font, VALUE x, VALUE y, VALUE glyphs)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_draw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE x, VALUE y, VALUE glyphs)
 {
@@ -354,7 +351,6 @@ rg_draw_glyphs_transformed(VALUE self, VALUE gc, VALUE matrix, VALUE font, VALUE
                                 (PangoGlyphString*)(RVAL2BOXED(glyphs, PANGO_TYPE_GLYPH_STRING)));
     return self;
 }
-#endif
 
 static VALUE
 rg_draw_layout_line(int argc, VALUE *argv, VALUE self)
@@ -493,13 +489,9 @@ Init_gtk_gdk_draw(VALUE mGdk)
     RG_DEF_METHOD(draw_rectangle, 6);
     RG_DEF_METHOD(draw_arc, 8);
     RG_DEF_METHOD(draw_polygon, 3);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(draw_trapezoids, 2);
-#endif
     RG_DEF_METHOD(draw_glyphs, 5);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(draw_glyphs_transformed, 6);
-#endif
     RG_DEF_METHOD(draw_layout_line, -1);
     RG_DEF_METHOD(draw_layout, -1);
     RG_DEF_METHOD(draw_drawable, 8);
