@@ -637,7 +637,7 @@ static VALUE
 gdkevent_get_axis(VALUE self, VALUE axis_use)
 {
     gdouble value;
-    gboolean ret = gdk_event_get_axis(get_gdkevent(self), 
+    gboolean ret = gdk_event_get_axis(get_gdkevent(self),
                                       RVAL2GENUM(axis_use, GDK_TYPE_AXIS_USE), &value);
     return ret ? rb_float_new(value) : Qnil;
 }
@@ -788,7 +788,7 @@ gdkeventexpose_area(VALUE self)
 {
     return BOXED2RVAL(&get_gdkevent(self)->expose.area, GDK_TYPE_RECTANGLE);
 }
- 
+
 static VALUE
 gdkeventexpose_set_area(VALUE self, VALUE rect)
 {
@@ -884,7 +884,7 @@ gdkeventclient_data(VALUE self)
     gushort format = get_gdkevent(self)->client.data_format;
 
     if (format == 8) {
-        ary = rb_ary_new2(20);        
+        ary = rb_ary_new2(20);
         for (i = 0; i < 20; i++)
             rb_ary_push(ary, INT2FIX(get_gdkevent(self)->client.data.b[i]));
     } else if (format == 16) {
