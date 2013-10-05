@@ -178,7 +178,6 @@ rg_m_dest_add_uri_targets(VALUE self, VALUE widget)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_m_dest_set_track_motion(VALUE self, VALUE widget, VALUE track_motion)
 {
@@ -191,7 +190,6 @@ rg_m_dest_get_track_motion(G_GNUC_UNUSED VALUE self, VALUE widget)
 {
     return CBOOL2RVAL(gtk_drag_dest_get_track_motion(RVAL2WIDGET(widget)));
 }
-#endif
 
 static VALUE
 rg_m_finish(VALUE self, VALUE context, VALUE success, VALUE del, VALUE time)
@@ -396,10 +394,8 @@ Init_gtk_drag(VALUE mGtk)
     RG_DEF_MODFUNC(dest_add_text_targets, 1);
     RG_DEF_MODFUNC(dest_add_image_targets, 1);
     RG_DEF_MODFUNC(dest_add_uri_targets, 1);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_MODFUNC(dest_set_track_motion, 2);
     RG_DEF_MODFUNC(dest_get_track_motion, 1);
-#endif
     RG_DEF_MODFUNC(finish, 4);
     RG_DEF_MODFUNC(get_data, 4);
     RG_DEF_MODFUNC(get_source_widget, 1);
