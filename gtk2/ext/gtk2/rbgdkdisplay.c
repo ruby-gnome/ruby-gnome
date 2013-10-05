@@ -385,7 +385,7 @@ rg_set_cursor_theme(VALUE self, VALUE theme, VALUE size)
     gdk_x11_display_set_cursor_theme(_SELF(self), RVAL2CSTR(theme), NUM2INT(size));
     return self;
 }
-#  endif
+#endif
 
 #  if GTK_CHECK_VERSION(2, 12, 0)
 /*
