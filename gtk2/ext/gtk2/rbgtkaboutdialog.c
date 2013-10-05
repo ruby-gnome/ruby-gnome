@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,6,0)
-
 #define RG_TARGET_NAMESPACE cAboutDialog
 #define _SELF(self) (GTK_ABOUT_DIALOG(RVAL2GOBJ(self)))
 
@@ -125,17 +123,14 @@ rg_s_show(VALUE self, VALUE parent, VALUE props)
                           NULL);
     return self;
 }
-#endif
 
 void 
 Init_gtk_aboutdialog(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ABOUT_DIALOG, "AboutDialog", mGtk);
     RG_DEF_METHOD(initialize, 0);
 
     RG_DEF_SMETHOD(set_email_hook, 0);
     RG_DEF_SMETHOD(set_url_hook, 0);
     RG_DEF_SMETHOD(show, 2);
-#endif
 }

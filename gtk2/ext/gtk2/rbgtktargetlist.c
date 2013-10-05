@@ -86,7 +86,6 @@ rg_add_table(VALUE self, VALUE rbtargets)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_add_text_targets(VALUE self, VALUE info)
 {
@@ -107,7 +106,6 @@ rg_add_uri_targets(VALUE self, VALUE info)
     gtk_target_list_add_uri_targets(_SELF(self), NUM2UINT(info));
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
@@ -146,11 +144,9 @@ Init_gtk_target_list(VALUE mGtk)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(add, 3);
     RG_DEF_METHOD(add_table, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(add_text_targets, 1);
     RG_DEF_METHOD(add_image_targets, 2);
     RG_DEF_METHOD(add_uri_targets, 1);
-#endif
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(add_rich_text_targets, 3);
 #endif

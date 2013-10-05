@@ -430,14 +430,12 @@ rg_s_set_default_icon(VALUE self, VALUE icon_or_filename)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_set_default_icon_name(VALUE self, VALUE name)
 {
     gtk_window_set_default_icon_name(RVAL2CSTR(name));
     return self;
 }
-#endif
 
 static VALUE
 gwin_set_icon(VALUE self, VALUE icon_or_filename)
@@ -577,9 +575,7 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(resize, 2);
     RG_DEF_SMETHOD(set_default_icon_list, 1);
     RG_DEF_SMETHOD(set_default_icon, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(set_default_icon_name, 1);
-#endif
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "icon", gwin_set_icon, 1);
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_SMETHOD(set_auto_startup_notification, 1);

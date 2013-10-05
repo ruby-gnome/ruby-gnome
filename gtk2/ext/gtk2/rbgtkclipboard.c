@@ -167,14 +167,12 @@ rg_set_text(VALUE self, VALUE text)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_set_image(VALUE self, VALUE pixbuf)
 {
     gtk_clipboard_set_image(_SELF(self), GDK_PIXBUF(RVAL2GOBJ(pixbuf)));
     return self;
 }
-#endif
 
 static void
 clipboard_received_func(GtkClipboard *clipboard, GtkSelectionData *selection_data, gpointer func)
@@ -217,7 +215,6 @@ rg_request_text(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static void
 clipboard_image_received_func(GtkClipboard *clipboard, GdkPixbuf *pixbuf, gpointer func)
 {
@@ -235,7 +232,6 @@ rg_request_image(VALUE self)
                                (gpointer)func);
     return self;
 }
-#endif
 
 static void
 clipboard_target_received_func(GtkClipboard *clipboard, GdkAtom *atoms, gint n_atoms, gpointer func)
@@ -299,14 +295,12 @@ rg_wait_for_text(VALUE self)
     return str ? CSTR2RVAL(str) : Qnil;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_wait_for_image(VALUE self)
 {
     GdkPixbuf* pixbuf = gtk_clipboard_wait_for_image(_SELF(self));
     return GOBJ2RVAL(pixbuf);
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
@@ -334,13 +328,11 @@ rg_wait_is_text_available_p(VALUE self)
     return CBOOL2RVAL(gtk_clipboard_wait_is_text_available(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_wait_is_image_available_p(VALUE self)
 {
     return CBOOL2RVAL(gtk_clipboard_wait_is_image_available(_SELF(self)));
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
@@ -376,7 +368,6 @@ rg_wait_for_targets(VALUE self)
     return ary;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_wait_is_target_available_p(VALUE self, VALUE target)
 {
@@ -404,7 +395,6 @@ rg_store(VALUE self)
 
     return self;
 }
-#endif
 
 void 
 Init_gtk_clipboard(VALUE mGtk)
@@ -419,39 +409,29 @@ Init_gtk_clipboard(VALUE mGtk)
 */
     RG_DEF_METHOD(clear, 0);
     RG_DEF_METHOD(set_text, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_image, 1);
-#endif
     RG_DEF_METHOD(request_contents, 1);
     RG_DEF_METHOD(request_text, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(request_image, 0);
-#endif
     RG_DEF_METHOD(request_targets, 0);
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(request_rich_text, 1);
 #endif
     RG_DEF_METHOD(wait_for_contents, 1);
     RG_DEF_METHOD(wait_for_text, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(wait_for_image, 0);
-#endif
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(wait_for_rich_text, 1);
 #endif
     RG_DEF_METHOD_P(wait_is_text_available, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(wait_is_image_available, 0);
-#endif
 #if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(wait_is_rich_text_available, 1);
 #endif
     RG_DEF_METHOD(wait_for_targets, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD_P(wait_is_target_available, 1);
     RG_DEF_METHOD(set_can_store, 1);
     RG_DEF_METHOD(store, 0);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 }

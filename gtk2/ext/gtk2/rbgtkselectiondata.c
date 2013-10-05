@@ -159,7 +159,6 @@ rg_text(VALUE self)
     return CSTR2RVAL_FREE((gchar *)gtk_selection_data_get_text(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_set_pixbuf(VALUE self, VALUE pixbuf)
 {
@@ -206,7 +205,6 @@ rg_uris(VALUE self)
     }
     return ary;
 }
-#endif
 
 static VALUE
 rg_targets(VALUE self)
@@ -226,13 +224,12 @@ rg_targets(VALUE self)
     g_free(targets);
     return result;
 }
-#if GTK_CHECK_VERSION(2,6,0)
+
 static VALUE
 rg_targets_include_image(VALUE self, VALUE writable)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_image(_SELF(self), RVAL2CBOOL(writable)));
 }
-#endif
 
 static VALUE
 rg_targets_include_text(VALUE self)
@@ -274,13 +271,11 @@ Init_gtk_selectiondata(VALUE mGtk)
     RG_DEF_METHOD(text, 0);
     RG_DEF_METHOD(set_text, 1);
 
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(pixbuf, 0);
     RG_DEF_METHOD(set_pixbuf, 1);
     RG_DEF_METHOD(uris, 0);
     RG_DEF_METHOD(set_uris, 1);
     RG_DEF_METHOD(targets_include_image, 1);
-#endif
     RG_DEF_METHOD(targets, 0);
     RG_DEF_METHOD(targets_include_text, 0);
 #if GTK_CHECK_VERSION(2,10,0)

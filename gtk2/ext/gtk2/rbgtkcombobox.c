@@ -96,8 +96,6 @@ rg_remove_text(VALUE self, VALUE position)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
-
 static VALUE
 rg_active_text(VALUE self)
 {
@@ -134,8 +132,6 @@ rg_set_row_separator_func(VALUE self)
     return self;
 }
 
-#endif
-
 void 
 Init_gtk_combobox(VALUE mGtk)
 {
@@ -149,10 +145,7 @@ Init_gtk_combobox(VALUE mGtk)
     RG_DEF_METHOD(insert_text, 2);
     RG_DEF_METHOD(prepend_text, 1);
     RG_DEF_METHOD(remove_text, 1);
-
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(active_text, 0);
     RG_DEF_METHOD(popup_accessible, 0);
     RG_DEF_METHOD(set_row_separator_func, 0);
-#endif
 }

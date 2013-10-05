@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,6,0)
-
 #define RG_TARGET_NAMESPACE cMenuToolButton
 #define _SELF(self) (GTK_MENU_TOOL_BUTTON(RVAL2GOBJ(self)))
 
@@ -65,15 +63,12 @@ rg_set_arrow_tooltip(int argc, VALUE *argv, VALUE self)
                                            NIL_P(tip_private) ? NULL : RVAL2CSTR(tip_private));
     return self;
 }
-#endif
 
 void 
 Init_gtk_menutoolbutton(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_TOOL_BUTTON, "MenuToolButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_arrow_tooltip, -1);
-#endif
 }

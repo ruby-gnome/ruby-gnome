@@ -124,14 +124,12 @@ rg_set_proxy_menu_item(VALUE self, VALUE menu_item_id, VALUE menu_item)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_rebuild_menu(VALUE self)
 {
     gtk_tool_item_rebuild_menu(_SELF(self));
     return self;
 }
-#endif
 
 void 
 Init_gtk_toolitem(VALUE mGtk)
@@ -155,7 +153,5 @@ Init_gtk_toolitem(VALUE mGtk)
     RG_DEF_METHOD(retrieve_proxy_menu_item, 0);
     RG_DEF_METHOD(get_proxy_menu_item, 1);
     RG_DEF_METHOD(set_proxy_menu_item, 2);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(rebuild_menu, 0);
-#endif
 }

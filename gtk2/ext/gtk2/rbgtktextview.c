@@ -144,7 +144,6 @@ rg_get_iter_at_location(VALUE self, VALUE x, VALUE y)
     return ITR2RVAL(&iter);
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_get_iter_at_position(VALUE self, VALUE x, VALUE y)
 {
@@ -153,7 +152,6 @@ rg_get_iter_at_position(VALUE self, VALUE x, VALUE y)
     gtk_text_view_get_iter_at_position(_SELF(self), &iter, &trailing, NUM2INT(x), NUM2INT(y));
     return rb_assoc_new(ITR2RVAL(&iter), INT2NUM(trailing));
 }
-#endif
 
 static VALUE
 rg_buffer_to_window_coords(VALUE self, VALUE wintype, VALUE buffer_x, VALUE buffer_y)
@@ -301,9 +299,7 @@ Init_gtk_textview(VALUE mGtk)
     RG_DEF_METHOD(get_line_at_y, 1);
     RG_DEF_METHOD(get_line_yrange, 1);
     RG_DEF_METHOD(get_iter_at_location, 2);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(get_iter_at_position, 2);
-#endif
     RG_DEF_METHOD(buffer_to_window_coords, 3);
     RG_DEF_METHOD(window_to_buffer_coords, 3);
     RG_DEF_METHOD(get_window, 1);

@@ -73,14 +73,12 @@ filter_func(const GtkFileFilterInfo *info, gpointer func)
                                  CSTR2RVAL(info->mime_type)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_add_pixbuf_formats(VALUE self)
 {
     gtk_file_filter_add_pixbuf_formats(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_add_custom(VALUE self, VALUE needed)
@@ -121,9 +119,7 @@ Init_gtk_file_filter(VALUE mGtk)
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(add_mime_type, 1);
     RG_DEF_METHOD(add_pattern, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(add_pixbuf_formats, 0);
-#endif
     RG_DEF_METHOD(add_custom, 1);
     RG_DEF_METHOD(needed, 0);
     RG_DEF_METHOD_P(filter, 5);

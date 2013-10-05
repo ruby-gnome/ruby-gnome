@@ -262,7 +262,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
     if (NIL_P(values)){
         gtk_list_store_insert(args.store, &args.iter, args.position);
     } else {
-#if GTK_CHECK_VERSION(2,6,0)
         args.ary = rb_funcall(values, id_to_a, 0);
         args.n = RARRAY_LEN(args.ary);
         args.columns = g_new(gint, args.n);
@@ -270,10 +269,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
 
         rb_ensure(lstore_insert_body, (VALUE)&args,
                   lstore_insert_ensure, (VALUE)&args);
-#else
-        gtk_list_store_insert(args.store, &args.iter, args.position);
-        rb_warn("Ignored 2nd argument under this environment, as it has been supported since GTK+-2.6.");
-#endif
     }
 
     args.iter.user_data3 = args.store;
