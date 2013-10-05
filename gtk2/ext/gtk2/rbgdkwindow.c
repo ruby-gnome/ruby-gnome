@@ -426,7 +426,6 @@ rg_internal_paint_info(VALUE self)
                        INT2NUM(x_offset), INT2NUM(y_offset));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_configure_finished(VALUE self)
 {
@@ -444,7 +443,6 @@ rg_enable_synchronized_configure(VALUE self)
     }
     return self;
 }
-#endif
 
 static VALUE
 rg_set_user_data(VALUE self, VALUE user_data)
@@ -468,14 +466,12 @@ rg_set_accept_focus(VALUE self, VALUE accept_focus)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_set_focus_on_map(VALUE self, VALUE focus_on_map)
 {
     gdk_window_set_focus_on_map(_SELF(self), RVAL2CBOOL(focus_on_map));
     return self;
 }
-#endif
 
 /* GdkXEvent is not implemented.
   void        gdk_window_add_filter           (GdkWindow *window,
@@ -929,14 +925,12 @@ rg_server_time(VALUE self)
     return UINT2NUM(gdk_x11_get_server_time(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,6,0)
 static VALUE
 rg_set_user_time(VALUE self, VALUE time)
 {
     gdk_x11_window_set_user_time(_SELF(self), NUM2UINT(time));
     return Qnil;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE
@@ -1009,16 +1003,12 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(thaw_updates, 0);
     RG_DEF_METHOD(process_updates, 1);
     RG_DEF_METHOD(internal_paint_info, 0);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(configure_finished, 0);
     RG_DEF_METHOD(enable_synchronized_configure, 0);
-#endif
     RG_DEF_METHOD(set_user_data, 1);
     RG_DEF_METHOD(set_override_redirect, 1);
     RG_DEF_METHOD(set_accept_focus, 1);
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_focus_on_map, 1);
-#endif
     RG_DEF_METHOD(shape_combine_mask, 3);
     RG_DEF_METHOD(shape_combine_region, 3);
     RG_DEF_METHOD(set_child_shapes, 0);
@@ -1132,9 +1122,7 @@ Init_gtk_gdk_window(VALUE mGdk)
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(server_time, 0);
 
-#if GTK_CHECK_VERSION(2,6,0)
     RG_DEF_METHOD(set_user_time, 1);
-#endif
 #if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(move_to_current_desktop, 0);
 #endif

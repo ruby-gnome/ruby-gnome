@@ -26,10 +26,8 @@
 
 #if GTK_CHECK_VERSION(2,8,0)
 static VALUE gdkevents[36];
-#elif GTK_CHECK_VERSION(2,6,0)
-static VALUE gdkevents[35];
 #else
-static VALUE gdkevents[34];
+static VALUE gdkevents[35];
 #endif
 
 /***********************************************/
@@ -613,14 +611,12 @@ ATTR_STR(setting, name);
 GDKEVENT_INIT(setting, GDK_SETTING);
 
 /* GdkEventOwnerChange */
-#if GTK_CHECK_VERSION(2,6,0)
 ATTR_GDKNATIVEWINDOW(owner_change, owner);
 ATTR_ENUM(owner_change, reason, GDK_TYPE_OWNER_CHANGE);
 ATTR_ATOM(owner_change, selection);
 ATTR_UINT(owner_change, time);
 ATTR_UINT(owner_change, selection_time);
 GDKEVENT_INIT(owner_change, GDK_OWNER_CHANGE);
-#endif
 
 /* GdkEventGrabBroken */
 #if GTK_CHECK_VERSION(2,8,0)
@@ -681,9 +677,7 @@ Init_gtk_gdk_event(VALUE mGdk)
     gdkevents[GDK_SCROLL]        = rb_define_class_under(mGdk, "EventScroll", gdkEventAny);
     gdkevents[GDK_WINDOW_STATE]  = rb_define_class_under(mGdk, "EventWindowState", gdkEventAny);
     gdkevents[GDK_SETTING]       = rb_define_class_under(mGdk, "EventSetting", gdkEventAny);
-#if GTK_CHECK_VERSION(2,6,0)
     gdkevents[GDK_OWNER_CHANGE]  = rb_define_class_under(mGdk, "EventOwnerChange", gdkEventAny);
-#endif
 #if GTK_CHECK_VERSION(2,8,0)
     gdkevents[GDK_GRAB_BROKEN]   = rb_define_class_under(mGdk, "EventGrabBroken", gdkEventAny);
 #endif
@@ -905,7 +899,6 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_CLASS(GDK_TYPE_SETTING_ACTION, "Action", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_SETTING_ACTION, "GDK_SETTING_");
 
-#if GTK_CHECK_VERSION(2,6,0)
     /* GdkEventOwnerChange */
     ev = gdkevents[GDK_OWNER_CHANGE];
     DEFINE_ACCESSOR(ev, owner_change, owner);
@@ -919,7 +912,6 @@ Init_gtk_gdk_event(VALUE mGdk)
     /* GdkOwnerChange */
     G_DEF_CLASS(GDK_TYPE_OWNER_CHANGE, "OwnerChange", ev);
     G_DEF_CONSTANTS(ev, GDK_TYPE_OWNER_CHANGE, "GDK_OWNER_CHANGE_");
-#endif
 
 #if GTK_CHECK_VERSION(2,8,0)
     /* GdkEventGrabBroken */

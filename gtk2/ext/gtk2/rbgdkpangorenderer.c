@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,6,0)
-
 #define RG_TARGET_NAMESPACE cPangoRenderer
 #define _SELF(s) (GDK_PANGO_RENDERER(RVAL2GOBJ(s)))
 
@@ -127,12 +125,9 @@ rg_set_override_color(G_GNUC_UNUSED VALUE self,
 }
 #endif
 
-#endif
-
 void
 Init_gtk_gdk_pangorenderer(VALUE mGdk)
 {
-#if GTK_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_PANGO_RENDERER, "PangoRenderer", mGdk);
 
     RG_DEF_METHOD(initialize, -1);
@@ -145,5 +140,4 @@ Init_gtk_gdk_pangorenderer(VALUE mGdk)
     RG_DEF_SMETHOD(default, 0);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }
