@@ -96,7 +96,7 @@ module Demo
       end
 
       if not klass
-          raise "File not found: #{path}."
+        raise "File not found: #{path}."
       end
 
       return title, klass.intern, depend
