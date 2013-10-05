@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cCellRendererSpin
 #define _SELF(s) (GTK_CELL_RENDERER_SPIN(RVAL2GOBJ(s)))
 
@@ -33,13 +31,9 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#endif
-
 void
 Init_gtk_cellrendererspin(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER_SPIN, "CellRendererSpin", mGtk);
     RG_DEF_METHOD(initialize, 0);
-#endif
 }
