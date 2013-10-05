@@ -2,7 +2,7 @@
 =begin
   main.rb - Main class of gtk-demo.
 
-  Copyright (c) 2003-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2003-2013 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: main.rb,v 1.20 2007/07/09 13:21:54 ggc Exp $
@@ -27,7 +27,7 @@ module Demo
 
       set_title('Ruby/GTK+ Code Demos')
       signal_connect('destroy') do
-	Gtk.main_quit
+        Gtk.main_quit
       end
 
       signal_connect("key_press_event") do |widget, event|
@@ -52,10 +52,10 @@ module Demo
       hbox.pack_start(notebook, :expand => true, :fill => true, :padding => 0)
 
       notebook.append_page(create_text(@info_buffer, false),
-			   Gtk::Label.new('_Info', true))
+                           Gtk::Label.new('_Info', true))
 
       notebook.append_page(create_text(@source_buffer, true),
-			   Gtk::Label.new('_Source', true))
+                           Gtk::Label.new('_Source', true))
 
       @info_buffer.create_tag('title',
                              {'font' => 'Sans 18'})
@@ -66,9 +66,9 @@ module Demo
                                {'foreground' => 'ForestGreen'})
       @source_buffer.create_tag('string',
                                {
-				  'foreground' => 'RosyBrown',
+                                  'foreground' => 'RosyBrown',
                                   'weight' => Pango::FontDescription::WEIGHT_BOLD
-				})
+                                })
       @source_buffer.create_tag('reserved',
                                {'foreground' => 'purple'})
     end
@@ -179,8 +179,8 @@ module Demo
       tree_view.append_column(column)
 
       selection.signal_connect('changed') do |selection|
-	iter = selection.selected
-	load_file(iter.get_value(FILENAME_COLUMN)) if iter
+        iter = selection.selected
+        load_file(iter.get_value(FILENAME_COLUMN)) if iter
       end
       tree_view.signal_connect('row_activated') do |tree_view, path, column|
         row_activated_cb(tree_view.model, path)
@@ -192,13 +192,13 @@ module Demo
 
     def append_children(model, source, parent = nil)
       source.each do |title, filename, klass, children|
-	iter = model.append(parent)
+        iter = model.append(parent)
 
-	[title, filename, klass].each_with_index do |value, i|
-	  if value
-	    iter.set_value(i, value)
-	  end
-	end
+        [title, filename, klass].each_with_index do |value, i|
+          if value
+            iter.set_value(i, value)
+          end
+        end
         iter.set_value(ITALIC_COLUMN, false)
 
         if children
@@ -221,14 +221,14 @@ module Demo
           iter.set_value(ITALIC_COLUMN, false)
         end
         window.show_all
-	@window = window
+        @window = window
       end
     end
 
     def create_text(buffer, is_source)
       scrolled_window = Gtk::ScrolledWindow.new
       scrolled_window.set_policy(:automatic,
-				 :automatic)
+                                 :automatic)
       scrolled_window.set_shadow_type(:in)
 
       text_view = Gtk::TextView.new
@@ -240,35 +240,35 @@ module Demo
       scrolled_window.add(text_view)
 
       if is_source
-	font_desc = Pango::FontDescription.new('Monospace 12')
-	text_view.override_font(font_desc)
+        font_desc = Pango::FontDescription.new('Monospace 12')
+        text_view.override_font(font_desc)
 
-	text_view.set_wrap_mode(:none)
+        text_view.set_wrap_mode(:none)
       else
-	text_view.set_wrap_mode(:word)
-	text_view.set_pixels_above_lines(2)
-	text_view.set_pixels_below_lines(2)
+        text_view.set_wrap_mode(:word)
+        text_view.set_pixels_above_lines(2)
+        text_view.set_pixels_below_lines(2)
       end
 
       return scrolled_window
     end
 
     def fontify(start_iter = @source_buffer.start_iter,
-		end_iter = @source_buffer.end_iter)
+                end_iter = @source_buffer.end_iter)
       str = @source_buffer.get_text(start_iter, end_iter, true)
 
       tokenizer = RubyTokonizer.new
       tokenizer.tokenize(str, start_iter.offset) do |tag, start, last|
-	@source_buffer.apply_tag(tag.to_s,
-				 @source_buffer.get_iter_at(:offset => start),
-				 @source_buffer.get_iter_at(:offset => last))
+        @source_buffer.apply_tag(tag.to_s,
+                                 @source_buffer.get_iter_at(:offset => start),
+                                 @source_buffer.get_iter_at(:offset => last))
       end
     end
 
 
     def load_file(filename)
       if filename == @current_file
-	return
+        return
       end
 
       @info_buffer.delete(*@info_buffer.bounds)
@@ -276,43 +276,43 @@ module Demo
       @source_buffer.delete(*@source_buffer.bounds)
 
       file = begin
-	       File.open(filename)
-	     rescue
-	       $stderr.puts "Cannot open: #{$!}" if $DEBUG
-	       return
-	     end
+               File.open(filename)
+             rescue
+               $stderr.puts "Cannot open: #{$!}" if $DEBUG
+               return
+             end
       start = @info_buffer.get_iter_at(:offset => 0)
       state = :before_header
 
       file.each do |line|
-	case state
-	when :before_header
-	  if line =~ /^=begin$/
-	    state = :in_header
-	  end
-	when :in_header
-	  if line =~ /^=end$/
-	    state = :body
-	    start = @source_buffer.get_iter_at(:offset => 0)
-	  elsif line =~ /^=\s+(.*)$/
-	    title = $1
+        case state
+        when :before_header
+          if line =~ /^=begin$/
+            state = :in_header
+          end
+        when :in_header
+          if line =~ /^=end$/
+            state = :body
+            start = @source_buffer.get_iter_at(:offset => 0)
+          elsif line =~ /^=\s+(.*)$/
+            title = $1
             title.gsub!(/\s*\(.*\)$/, '') # Delete depend field
 
-	    last = start
+            last = start
 
-	    @info_buffer.insert(last, title)
-	    start = last.clone
+            @info_buffer.insert(last, title)
+            start = last.clone
 
-	    start.backward_chars(title.length)
-	    @info_buffer.apply_tag('title', start, last)
+            start.backward_chars(title.length)
+            @info_buffer.apply_tag('title', start, last)
 
-	    start = last
-	  else
-	    @info_buffer.insert(start, line)
-	  end
-	when :body  # Reading program body
-	  @source_buffer.insert(start, line)
-	end
+            start = last
+          else
+            @info_buffer.insert(start, line)
+          end
+        when :body  # Reading program body
+          @source_buffer.insert(start, line)
+        end
       end
 
       fontify
@@ -327,30 +327,30 @@ module Demo
 
     def tokenize(str, index = 0)
       until str.empty?
-	tag = nil
+        tag = nil
 
-	case str
-	when /".+?"/, /'.+?'/
-	  tag = :string
-	when /#.*$/
-	  tag = :comment
-	when RESERVED_WORDS_PATTERN
-	  tag = :reserved
-	when /[A-Z][A-Za-z0-9_]+/
-	  tag = :const
-	end
+        case str
+        when /".+?"/, /'.+?'/
+          tag = :string
+        when /#.*$/
+          tag = :comment
+        when RESERVED_WORDS_PATTERN
+          tag = :reserved
+        when /[A-Z][A-Za-z0-9_]+/
+          tag = :const
+        end
 
-	if tag
-	  tokenize($~.pre_match, index) do |*args|
+        if tag
+          tokenize($~.pre_match, index) do |*args|
             yield(*args)
-	  end
-	  yield(tag, index + $~.begin(0), index + $~.end(0))
-	  index += (str.length - $~.post_match.length)
-	  str = $~.post_match
-	else
-	  index += str.length
-	  str = ''
-	end
+          end
+          yield(tag, index + $~.begin(0), index + $~.end(0))
+          index += (str.length - $~.post_match.length)
+          str = $~.post_match
+        else
+          index += str.length
+          str = ''
+        end
       end
     end
   end
@@ -367,9 +367,9 @@ if target
       window.show_all
 
       class << window
-	def quit
-	  Gtk.main_quit
-	end
+        def quit
+          Gtk.main_quit
+        end
       end
 
       break
