@@ -372,11 +372,11 @@ rb_gdk_event_to_gtype(VALUE event)
 }
 
 VALUE
-make_gdkevent(GdkEvent *ev)
+make_gdkevent(GdkEvent *event)
 {
-    if (ev == NULL) return Qnil;
+    if (event == NULL) return Qnil;
 
-    return BOXED2RVAL(ev, rb_gdk_event_type_to_gtype(ev->any.type));
+    return BOXED2RVAL(event, rb_gdk_event_type_to_gtype(event->any.type));
 }
 
 GdkEvent*
