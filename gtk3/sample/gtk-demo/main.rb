@@ -96,7 +96,7 @@ module Demo
       end
 
       if not klass
-          raise "File not found: #{path}. This script should be run from its directory."
+          raise "File not found: #{path}."
       end
 
       return title, klass.intern, depend
