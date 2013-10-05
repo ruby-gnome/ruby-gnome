@@ -383,7 +383,7 @@ make_gdkevent(GdkEvent *event)
 GdkEvent*
 get_gdkevent(VALUE event)
 {
-    return NIL_P(event) ? NULL : RVAL2BOXED(event, rb_gdk_event_to_gtype(event));
+    return RVAL2BOXED(event, rb_gdk_event_to_gtype(event));
 }
 
 /***********************************************/
