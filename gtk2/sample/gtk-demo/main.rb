@@ -95,21 +95,25 @@ module Demo
       end
 
       if not klass
-          raise "File not found: #{path}. This script should be run from its directory."
+          raise "File not found: #{path}."
       end
 
       return title, klass.intern, depend
     end
 
     def generate_index
+      base_dir = File.dirname(__FILE__)
       # Target scripts
-      scripts = Dir.glob('*.rb') - %w(common.rb main.rb)
+      scripts = Dir.glob(File.join(base_dir, '*.rb'))
 
       # Generate index tree
       children = {}
       index = []
 
+      not_script_base_names = %w(common.rb main.rb)
       scripts.each do |fn|
+        base_name = File.basename(fn)
+        next if not_script_base_names.include?(base_name)
         title, klass, depend = script_info(fn)
 
         if depend and not Gtk.const_defined?(depend)
