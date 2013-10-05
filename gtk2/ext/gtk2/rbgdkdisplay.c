@@ -345,14 +345,12 @@ rg_core_pointer(VALUE self)
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_warp_pointer(VALUE self, VALUE screen, VALUE x, VALUE y)
 {
     gdk_display_warp_pointer(_SELF(self), RVAL2GOBJ(screen), NUM2INT(x), NUM2INT(y));
     return self;
 }
-#endif
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
@@ -375,7 +373,6 @@ rg_register_standard_event_type(VALUE self, VALUE event_base, VALUE n_events)
     return self;
 }
 
-#  if GTK_CHECK_VERSION(2,8,0)
 static VALUE
 rg_user_time(VALUE self)
 {
@@ -454,7 +451,6 @@ rg_startup_notification_id(VALUE self)
     return CSTR2RVAL(gdk_x11_display_get_startup_notification_id(_SELF(self)));
 }
 #  endif
-#endif
 
 #if GTK_CHECK_VERSION(2,10,0)
 static VALUE
@@ -533,19 +529,15 @@ Init_gtk_gdk_display(VALUE mGdk)
     RG_DEF_METHOD_P(supports_clipboard_persistence, 0);
     RG_DEF_METHOD(store_clipboard, 3);
     RG_DEF_METHOD(core_pointer, 0);
-#if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(warp_pointer, 3);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(grab, 0);
     RG_DEF_METHOD(ungrab, 0);
     RG_DEF_METHOD(register_standard_event_type, 2);
-#  if GTK_CHECK_VERSION(2,8,0)
     RG_DEF_METHOD(user_time, 0);
     RG_DEF_METHOD(set_cursor_theme, 2);
-#  endif
 #  if GTK_CHECK_VERSION(2, 12, 0)
 /*
     RG_DEF_METHOD(broadcast_startup_message, -1);
