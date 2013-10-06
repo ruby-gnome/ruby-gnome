@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cAssistant
 #define _SELF(s) (GTK_ASSISTANT(RVAL2GOBJ(s)))
 
@@ -185,12 +183,9 @@ rg_commit(VALUE self)
     return self;
 }
 
-#endif
-
 void
 Init_gtk_assistant(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ASSISTANT, "Assistant", mGtk);
     RG_DEF_METHOD(initialize, 0);
 
@@ -222,5 +217,4 @@ Init_gtk_assistant(VALUE mGtk)
     /* GtkAssistantPageType */
     G_DEF_CLASS(GTK_TYPE_ASSISTANT_PAGE_TYPE, "PageType", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_ASSISTANT_PAGE_TYPE, "GTK_ASSISTANT_");
-#endif
 }
