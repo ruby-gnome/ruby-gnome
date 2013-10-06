@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cLinkButton
 #define _SELF(self) (GTK_LINK_BUTTON(RVAL2GOBJ(self)))
 
@@ -56,15 +54,12 @@ rg_s_set_uri_hook(VALUE self)
     gtk_link_button_set_uri_hook((GtkLinkButtonUriFunc)link_func, (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }
-#endif 
 
 void 
 Init_gtk_link_button(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_LINK_BUTTON, "LinkButton", mGtk);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_SMETHOD(set_uri_hook, 0);
-#endif
 }
