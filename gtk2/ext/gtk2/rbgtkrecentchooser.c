@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cRecentChooser
 #define _SELF(self) (GTK_RECENT_CHOOSER(RVAL2GOBJ(self)))
 
@@ -184,12 +182,10 @@ rg_filters(VALUE self)
 {
     return GSLIST2ARYF(gtk_recent_chooser_list_filters(_SELF(self)));
 }
-#endif
 
 void 
 Init_gtk_recent_chooser(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER, "RecentChooser", mGtk);
 
   RG_DEF_METHOD(set_show_numbers, 1);
@@ -217,6 +213,4 @@ Init_gtk_recent_chooser(VALUE mGtk)
   /* GtkRecentSortType */
   G_DEF_CLASS(GTK_TYPE_RECENT_SORT_TYPE, "SortType", RG_TARGET_NAMESPACE);
   G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_RECENT_SORT_TYPE, "GTK_RECENT_");
-#endif
-
 }
