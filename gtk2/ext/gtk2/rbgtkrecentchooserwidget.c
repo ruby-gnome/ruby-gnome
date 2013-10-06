@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cRecentChooserWidget
 #define _SELF(self) (GTK_RECENT_CHOOSER_WIDGET(RVAL2GOBJ(self)))
 
@@ -40,14 +38,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
-#endif
 
 void 
 Init_gtk_recent_chooser_widget(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
   VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_CHOOSER_WIDGET, "RecentChooserWidget", mGtk);
 
   RG_DEF_METHOD(initialize, -1);
-#endif
 }
