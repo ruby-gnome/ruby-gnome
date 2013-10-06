@@ -86,13 +86,11 @@ rg_rgba_visual(VALUE self)
     return GOBJ2RVAL(gdk_screen_get_rgba_visual(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_composited_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_screen_is_composited(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_root_window(VALUE self)
@@ -218,7 +216,6 @@ rg_get_setting(int argc, VALUE *argv, VALUE self)
     return value;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 #ifdef HAVE_RB_CAIRO_H
 static VALUE
 gdkscreen_get_font_options(VALUE self)
@@ -254,7 +251,6 @@ rg_window_stack(VALUE self)
     g_list_free(list);
     return ary;
 }
-#endif
 
 static void
 child_setup(gpointer func)
@@ -386,9 +382,7 @@ Init_gtk_gdk_screen(VALUE mGdk)
     RG_DEF_METHOD(rgb_visual, 0);
     RG_DEF_METHOD(rgba_colormap, 0);
     RG_DEF_METHOD(rgba_visual, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(composited, 0);
-#endif
     RG_DEF_METHOD(root_window, 0);
     RG_DEF_METHOD(display, 0);
     RG_DEF_METHOD(number, 0);
@@ -404,14 +398,12 @@ Init_gtk_gdk_screen(VALUE mGdk)
     RG_DEF_METHOD(get_monitor, -1);
     RG_DEF_METHOD(broadcast_client_message, 1);
     RG_DEF_METHOD(get_setting, -1);
-#if GTK_CHECK_VERSION(2,10,0)
 #ifdef HAVE_RB_CAIRO_H
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, "font_options", gdkscreen_get_font_options, 0);
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, "font_options", gdkscreen_set_font_options, 1);
 #endif
     RG_DEF_METHOD(active_window, 0);
     RG_DEF_METHOD(window_stack, 0);
-#endif
 
     RG_DEF_METHOD(spawn_on_screen, 4);
     RG_DEF_METHOD(spawn_on_screen_with_pipes, 4);
