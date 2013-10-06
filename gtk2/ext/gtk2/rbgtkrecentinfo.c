@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cRecentInfo
 #define _SELF(self) ((GtkRecentInfo*)RVAL2BOXED(self, GTK_TYPE_RECENT_INFO))
 
@@ -187,12 +185,10 @@ rg_operator_ri_match(VALUE self, VALUE other)
     return CBOOL2RVAL(gtk_recent_info_match(_SELF(self), _SELF(other)));
 }
 
-#endif
 
 void 
 Init_gtk_recent_info(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_INFO, "RecentInfo", mGtk);
     RG_DEF_METHOD(uri, 0);
     RG_DEF_METHOD(display_name, 0);
@@ -217,5 +213,4 @@ Init_gtk_recent_info(VALUE mGtk)
     RG_DEF_METHOD_OPERATOR("==", ri_match, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
-#endif
 }
