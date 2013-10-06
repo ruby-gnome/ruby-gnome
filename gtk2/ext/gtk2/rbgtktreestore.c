@@ -114,7 +114,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
         ret = GTKTREEITER2RVAL(&iter);
         G_CHILD_ADD(self, ret);
     } else {
-#if GTK_CHECK_VERSION(2,10,0)
         gint *c_columns;
         GValue *c_values;
         long size, i;
@@ -171,15 +170,6 @@ rg_insert(int argc, VALUE *argv, VALUE self)
             G_CHILD_ADD(ret, rbgobj_gvalue_to_rvalue(&(c_values[i])));
             g_value_unset(&(c_values[i]));
         }
-#else
-        rb_warn("Gtk::TreeStore#insert(parent, position, values) requires GTK+-2.10.0 or later");
-        gtk_tree_store_insert(model, &iter, 
-                              NIL_P(parent) ? NULL : RVAL2GTKTREEITER(parent), 
-                              NUM2INT(position));
-        iter.user_data3 = model;
-        ret = GTKTREEITER2RVAL(&iter);
-        G_CHILD_ADD(self, ret);
-#endif
     }
 
     return ret;
