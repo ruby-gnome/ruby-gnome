@@ -427,7 +427,6 @@ rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
@@ -437,7 +436,6 @@ rg_input_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE 
                                         NUM2INT(offset_y));
     return self;
 }
-#endif
 
 static VALUE
 rg_path(VALUE self)
@@ -939,7 +937,6 @@ rg_trigger_tooltip_query(VALUE self)
 
 #endif
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_action(VALUE self)
 {
@@ -957,7 +954,6 @@ rg_window(VALUE self)
 {
     return GOBJ2RVAL(_SELF(self)->window);
 }
-#endif
 
 static VALUE
 rg_set_window(VALUE self, VALUE window)
@@ -1107,9 +1103,7 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(set_direction, 1);
     RG_DEF_METHOD(direction, 0);
     RG_DEF_METHOD(shape_combine_mask, 3);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(input_shape_combine_mask, 3);
-#endif
     RG_DEF_METHOD(path, 0);
     RG_DEF_METHOD(class_path, 0);
     RG_DEF_METHOD(composite_name, 0);
@@ -1165,11 +1159,9 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(tooltip_window, 0);
     RG_DEF_METHOD(trigger_tooltip_query, 0);
 #endif
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(action, 0);
     RG_DEF_METHOD_P(composited, 0);
     RG_DEF_METHOD(window, 0);
-#endif
     RG_DEF_METHOD(set_window, 1);
     RG_DEF_METHOD(allocation, 0);
     RG_DEF_METHOD(set_allocation, 4);
