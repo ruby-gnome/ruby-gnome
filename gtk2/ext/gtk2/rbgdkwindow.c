@@ -515,7 +515,6 @@ rg_merge_child_shapes(VALUE self)
     return self;
 }   
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_input_shape_combine_mask(VALUE self, VALUE mask, VALUE x, VALUE y)
 {
@@ -548,8 +547,6 @@ rg_merge_child_input_shapes(VALUE self)
     gdk_window_merge_child_input_shapes(_SELF(self));
     return self;
 }
-
-#endif
 
 static VALUE
 rg_set_static_gravities(VALUE self, VALUE use_static)
@@ -585,7 +582,6 @@ rg_set_back_pixmap(VALUE self, VALUE pixmap, VALUE parent_relative)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_set_cursor(VALUE self, VALUE cursor)
 {
@@ -593,7 +589,6 @@ rg_set_cursor(VALUE self, VALUE cursor)
                           RVAL2BOXED(cursor, GDK_TYPE_CURSOR));
     return self;
 }
-#endif
 
 static VALUE
 rg_user_data(VALUE self)
@@ -648,13 +643,11 @@ rg_set_type_hint(VALUE self, VALUE hint)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_type_hint(VALUE self)
 {
     return GENUM2RVAL(gdk_window_get_type_hint(_SELF(self)), GDK_TYPE_WINDOW_TYPE_HINT);
 }
-#endif
 
 static VALUE
 rg_set_skip_taskbar_hint(VALUE self, VALUE hint)
@@ -1004,29 +997,22 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(shape_combine_region, 3);
     RG_DEF_METHOD(set_child_shapes, 0);
     RG_DEF_METHOD(merge_child_shapes, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(input_shape_combine_mask, 3);
     RG_DEF_METHOD(input_shape_combine_region, 3);
     RG_DEF_METHOD(set_child_input_shapes, 0);
     RG_DEF_METHOD(merge_child_input_shapes, 0);
-#endif
     RG_DEF_METHOD(set_static_gravities, 1);
     RG_DEF_METHOD(set_title, 1);
     RG_DEF_METHOD(set_background, 1);
     RG_DEF_METHOD(set_back_pixmap, 2);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(set_cursor, 1);
-#endif
     RG_DEF_METHOD(user_data, 0);
     RG_DEF_METHOD(geometry, 0);
     RG_DEF_METHOD(set_geometry_hints, 2);
     RG_DEF_METHOD(set_icon_list, 1);
     RG_DEF_METHOD(set_modal_hint, 1);
     RG_DEF_METHOD(set_type_hint, 1);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(type_hint, 0);
-#endif
-
     RG_DEF_METHOD(set_skip_taskbar_hint, 1);
     RG_DEF_METHOD(set_skip_pager_hint, 1);
     RG_DEF_METHOD(set_urgency_hint, 1);
