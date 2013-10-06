@@ -237,19 +237,18 @@ rg_targets_include_text(VALUE self)
     return CBOOL2RVAL(gtk_selection_data_targets_include_text(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_targets_include_uri(VALUE self)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_uri(_SELF(self)));
 }
+
 static VALUE
 rg_targets_include_rich_text(VALUE self, VALUE buffer)
 {
     return CBOOL2RVAL(gtk_selection_data_targets_include_rich_text(_SELF(self),
                                                                    GTK_TEXT_BUFFER(RVAL2GOBJ(buffer))));
 }
-#endif
 
 void
 Init_gtk_selectiondata(VALUE mGtk)
@@ -278,10 +277,8 @@ Init_gtk_selectiondata(VALUE mGtk)
     RG_DEF_METHOD(targets_include_image, 1);
     RG_DEF_METHOD(targets, 0);
     RG_DEF_METHOD(targets_include_text, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(targets_include_uri, 0);
     RG_DEF_METHOD(targets_include_rich_text, 1);
-#endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
 
