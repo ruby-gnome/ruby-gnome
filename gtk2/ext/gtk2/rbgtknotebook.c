@@ -258,7 +258,6 @@ rg_get_tab_label_text(VALUE self, VALUE child)
                                                      RVAL2WIDGET(child)));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_get_tab_reorderable(VALUE self, VALUE child)
 {
@@ -305,7 +304,6 @@ rg_s_set_window_creation_hook(VALUE self)
                                           (gpointer)func, (GDestroyNotify)NULL);
     return self;
 }    
-#endif
 
 #if GTK_CHECK_VERSION(2,20,0)
 static VALUE
@@ -397,14 +395,11 @@ Init_gtk_notebook(VALUE mGtk)
     RG_DEF_METHOD(set_tab_label_text, 2);
     RG_DEF_METHOD(get_menu_label_text, 1);
     RG_DEF_METHOD(get_tab_label_text, 1);
-
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(get_tab_reorderable, 1);
     RG_DEF_METHOD(set_tab_reorderable, 2);
     RG_DEF_METHOD(get_tab_detachable, 1);
     RG_DEF_METHOD(set_tab_detachable, 2);
     RG_DEF_SMETHOD(set_window_creation_hook, 0);
-#endif
 #if GTK_CHECK_VERSION(2,20,0)
     RG_DEF_METHOD(set_action_widget, 2);
     RG_DEF_METHOD(get_action_widget, 1);
