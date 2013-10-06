@@ -170,16 +170,11 @@ rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
                                                      RVAL2GDKNATIVEWINDOW(arg[1]));
             break;
         case 5:
-#if GTK_CHECK_VERSION(2,10,0)
             win = gdk_pixmap_foreign_new_for_screen(GDK_SCREEN(RVAL2GOBJ(arg[0])), 
                                                     RVAL2GDKNATIVEWINDOW(arg[1]), /* anid */
                                                     NUM2INT(arg[2]),  /* width */
                                                     NUM2INT(arg[3]),  /* height */
                                                     NUM2INT(arg[4])); /* depth */
-#else
-            win = gdk_pixmap_foreign_new(NUM2UINT(arg[1])); 
-            rb_warn("Not supported. GTK+-2.10.0 or later.");
-#endif
             break;
         default:
             break;
