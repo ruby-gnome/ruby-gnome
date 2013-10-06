@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cPrintContext
 #define _SELF(s) (GTK_PRINT_CONTEXT(RVAL2GOBJ(s)))
 
@@ -98,12 +96,10 @@ rg_set_cairo_context(VALUE self, VALUE cr, VALUE dpi_x, VALUE dpi_y)
     return self;
 }
 #  endif
-#endif
 
 void
 Init_gtk_print_context(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_PRINT_CONTEXT,
                                       "PrintContext", mGtk);
 
@@ -128,5 +124,4 @@ Init_gtk_print_context(VALUE mGtk)
 #  endif
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);
-#endif
 }
