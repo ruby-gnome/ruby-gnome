@@ -360,13 +360,11 @@ rg_size(VALUE self)
     return rb_ary_new3(2, INT2NUM(width), INT2NUM(height));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_group(VALUE self)
 {
     return GOBJ2RVAL(gtk_window_get_group(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_move(VALUE self, VALUE x, VALUE y)
@@ -553,9 +551,7 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(mnemonic_modifier, 0);
     RG_DEF_METHOD(position, 0);
     RG_DEF_METHOD(size, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(group, 0);
-#endif
     RG_DEF_METHOD(move, 2);
     RG_DEF_METHOD(parse_geometry, 1);
     RG_DEF_METHOD(reshow_with_initial_size, 0);
