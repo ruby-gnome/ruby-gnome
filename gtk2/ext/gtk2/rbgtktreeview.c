@@ -605,7 +605,6 @@ rg_set_row_separator_func(VALUE self)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_search_entry(VALUE self)
 {
@@ -668,8 +667,6 @@ rg_set_search_position_func(VALUE self)
     return self;
 }
 
-#endif
-
 void 
 Init_gtk_treeview(VALUE mGtk)
 {
@@ -729,21 +726,17 @@ Init_gtk_treeview(VALUE mGtk)
     RG_DEF_METHOD(set_cursor_on_cell, 4);
 
     RG_DEF_METHOD(set_row_separator_func, 0);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(search_entry, 0);
     RG_DEF_METHOD(set_search_entry, 1);
     RG_DEF_METHOD(set_search_position_func, 0);
-#endif
 
     /* Constants */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_DROP_POSITION, "DropPosition", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_DROP_POSITION, "GTK_TREE_VIEW_");
 
-#if GTK_CHECK_VERSION(2,10,0)
     /* GtkTreeViewGridLines */
     G_DEF_CLASS(GTK_TYPE_TREE_VIEW_GRID_LINES, "GridLines", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_TREE_VIEW_GRID_LINES, "GTK_TREE_VIEW_");
-#endif
 
     /* Option Signals */
     G_DEF_SIGNAL_FUNC(RG_TARGET_NAMESPACE, "row-collapsed", (GValToRValSignalFunc)treeview_signal_func);
