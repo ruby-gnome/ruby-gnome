@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 /*****************************************/
 static GtkRecentFilterInfo*
 rf_copy(const GtkRecentFilterInfo* info)
@@ -158,12 +156,9 @@ rg_set_age(VALUE self, VALUE age)
     return self;
 }
 
-#endif
-
 void 
 Init_gtk_recent_filter_info(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_RECENT_FILTER_INFO, "RecentFilterInfo", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
@@ -183,5 +178,4 @@ Init_gtk_recent_filter_info(VALUE mGtk)
     RG_DEF_METHOD(set_age, 1);
 
     G_DEF_SETTERS(RG_TARGET_NAMESPACE);   
-#endif
 }
