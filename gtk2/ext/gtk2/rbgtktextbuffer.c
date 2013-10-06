@@ -343,7 +343,6 @@ rg_remove_selection_clipboard(VALUE self, VALUE clipboard)
     return self;
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_deserialize(VALUE self, VALUE content_buffer, VALUE format, VALUE iter, VALUE data)
 {
@@ -544,7 +543,6 @@ rg_unregister_serialize_format(VALUE self, VALUE format)
     gtk_text_buffer_unregister_serialize_format(_SELF(self), RVAL2ATOM(format));
     return self;
 }
-#endif
 
 static VALUE
 rg_cut_clipboard(VALUE self, VALUE clipboard, VALUE default_editable)
@@ -848,7 +846,6 @@ Init_gtk_textbuffer(VALUE mGtk)
 
     RG_DEF_METHOD(add_selection_clipboard, 1);
     RG_DEF_METHOD(remove_selection_clipboard, 1);
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(deserialize, 4);
     RG_DEF_METHOD_P(deserialize_can_create_tags, 1);
     RG_DEF_METHOD(deserialize_set_can_create_tags, 2);
@@ -861,7 +858,6 @@ Init_gtk_textbuffer(VALUE mGtk)
     RG_DEF_METHOD(serialize, 4);
     RG_DEF_METHOD(unregister_deserialize_format, 1);
     RG_DEF_METHOD(unregister_serialize_format, 1);
-#endif
     RG_DEF_METHOD(cut_clipboard, 2);
     RG_DEF_METHOD(copy_clipboard, 1);
     RG_DEF_METHOD(paste_clipboard, 3);
