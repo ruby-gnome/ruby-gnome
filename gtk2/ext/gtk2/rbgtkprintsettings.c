@@ -21,8 +21,6 @@
 
 #include "global.h"
 
-#if GTK_CHECK_VERSION(2,10,0)
-
 #define RG_TARGET_NAMESPACE cPrintSettings
 #define _SELF(s) (GTK_PRINT_SETTINGS(RVAL2GOBJ(s)))
 
@@ -657,7 +655,6 @@ rg_set_output_bin(VALUE self, VALUE output_bin)
     gtk_print_settings_set_output_bin(_SELF(self), RVAL2CSTR_ACCEPT_NIL(output_bin));
     return self;
 }
-#endif
 
 #if GTK_CHECK_VERSION(2,12,0)
 static VALUE
@@ -684,7 +681,6 @@ rg_to_key_file(int argc, VALUE *argv, VALUE self)
 void
 Init_gtk_print_settings(VALUE mGtk)
 {
-#if GTK_CHECK_VERSION(2,10,0)
     VALUE RG_TARGET_NAMESPACE;
 
     s_string = ID2SYM(rb_intern("string"));
@@ -839,7 +835,6 @@ Init_gtk_print_settings(VALUE mGtk)
     /* GtkPageSet */
     G_DEF_CLASS(GTK_TYPE_PAGE_SET, "PageSet", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_PAGE_SET, "GTK_");
-#endif
 #if GTK_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(to_file, 1);
     RG_DEF_METHOD(to_key_file, -1);
