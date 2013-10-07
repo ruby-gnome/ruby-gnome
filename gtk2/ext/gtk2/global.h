@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2013 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
  *                          Hiroshi Igarashi
@@ -47,7 +46,7 @@
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
-#if defined(HAVE_RB_CAIRO_H)
+#ifdef HAVE_RB_CAIRO_H
 #  define CAIRO_AVAILABLE 1
 #else
 #  define CAIRO_AVAILABLE 0
