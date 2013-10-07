@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2013 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -36,7 +35,7 @@ rg_s_open(G_GNUC_UNUSED VALUE self, VALUE display_name)
 {
     GdkDisplay* gdisplay = gdk_display_open(RVAL2CSTR(display_name));
     if (! gdisplay) {
-        rb_raise(rb_eRuntimeError, "The display `%s' could not be opened.", 
+        rb_raise(rb_eRuntimeError, "The display `%s' could not be opened.",
                  RVAL2CSTR(display_name));
     } else {
         VALUE display;
@@ -156,8 +155,8 @@ rg_put_event(VALUE self, VALUE event)
 static GdkFilterReturn
 filter_func(GdkXEvent xevent, GdkEvent event, gpointer func)
 {
-    return GENUM2RVAL(rb_funcall((VALUE)func, id_call, 2, 
-                                 ????, GEV2RVAL(event)), 
+    return GENUM2RVAL(rb_funcall((VALUE)func, id_call, 2,
+                                 ????, GEV2RVAL(event)),
                       GDK_TYPE_FILTER_RETURN);
 }
 
@@ -313,7 +312,7 @@ rg_supports_selection_notification_p(VALUE self)
 static VALUE
 rg_request_selection_notification_p(VALUE self, VALUE selection)
 {
-    return CBOOL2RVAL(gdk_display_request_selection_notification(_SELF(self), 
+    return CBOOL2RVAL(gdk_display_request_selection_notification(_SELF(self),
                                                                  RVAL2ATOM(selection)));
 }
 
