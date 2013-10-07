@@ -1,6 +1,6 @@
 Ruby/GTK2
 =========
-Ruby/GTK2 is a Ruby binding of GTK+-2.8.x.
+Ruby/GTK2 is a Ruby binding of GTK+-2.10.x.
 
 Requirements
 ------------
@@ -12,7 +12,7 @@ Requirements
 
 Install
 -------
-   0. install ruby-1.9.x or later, GTK+-2.8.x, Ruby/GLib2, Ruby/Pango
+   0. install ruby-1.9.x or later, GTK+-2.10.x, Ruby/GLib2, Ruby/Pango
       (and cairo/rcairo).
    1. ruby extconf.rb
       (To use rcairo on Win32, set CAIRO_PATH as a environment variable first)
