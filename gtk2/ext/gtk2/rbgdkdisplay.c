@@ -451,7 +451,6 @@ rg_startup_notification_id(VALUE self)
 }
 #  endif
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_supports_shapes_p(VALUE self)
 {
@@ -463,7 +462,6 @@ rg_supports_input_shapes_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_display_supports_input_shapes(_SELF(self)));
 }
-#endif
 
 #if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
@@ -546,10 +544,8 @@ Init_gtk_gdk_display(VALUE mGdk)
     G_DEF_CLASS3("GdkDisplayX11", "DisplayX11", mGdk);
 #endif
 
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(supports_shapes, 0);
     RG_DEF_METHOD_P(supports_input_shapes, 0);
-#endif
 #if GTK_CHECK_VERSION(2, 12, 0)
     RG_DEF_METHOD_P(supports_composite, 0);
     RG_DEF_METHOD(trigger_tooltip_query, 0);
