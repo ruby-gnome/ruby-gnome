@@ -84,7 +84,6 @@ rg_vscrollbar(VALUE self)
     return GOBJ2RVAL(gtk_scrolled_window_get_vscrollbar(_SELF(self)));
 }
 
-#if GTK_CHECK_VERSION(2,10,0)
 static VALUE
 rg_set_placement(VALUE self, VALUE corner_type)
 {
@@ -106,7 +105,6 @@ rg_placement(VALUE self)
     return GENUM2RVAL(gtk_scrolled_window_get_placement(_SELF(self)), 
                       GTK_TYPE_CORNER_TYPE);
 }
-#endif
 
 void 
 Init_gtk_scrolled_window(VALUE mGtk)
@@ -119,11 +117,8 @@ Init_gtk_scrolled_window(VALUE mGtk)
     RG_DEF_METHOD(add_with_viewport, 1);
     RG_DEF_METHOD(hscrollbar, 0);
     RG_DEF_METHOD(vscrollbar, 0);
-
-#if GTK_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD(unset_placement, 0);
     RG_DEF_METHOD(placement, 0);
     RG_DEF_METHOD(set_placement, 1);
     G_DEF_SETTER(RG_TARGET_NAMESPACE, "placement");
-#endif
 }
