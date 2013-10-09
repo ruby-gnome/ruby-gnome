@@ -71,7 +71,6 @@ rg_get_relation(VALUE self, VALUE i)
     }
 }
 
-#if ATK_CHECK_VERSION(1,9,0)
 static VALUE
 rg_add_relation(VALUE self, VALUE relationship, VALUE obj)
 {
@@ -80,7 +79,6 @@ rg_add_relation(VALUE self, VALUE relationship, VALUE obj)
                                           RVAL2ATKOBJECT(obj));
     return self;
 }
-#endif
 
 void
 Init_atk_relation_set(VALUE mAtk)
@@ -93,7 +91,5 @@ Init_atk_relation_set(VALUE mAtk)
     RG_DEF_METHOD(add, 1);
     RG_DEF_METHOD(n_relations, 0);
     RG_DEF_METHOD(get_relation, 1);
-#if ATK_CHECK_VERSION(1,9,0)
     RG_DEF_METHOD(add_relation, 2);
-#endif
 }
