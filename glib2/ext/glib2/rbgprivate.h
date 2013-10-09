@@ -162,9 +162,7 @@ G_GNUC_INTERNAL void Init_gobject_typeinstance(void);
 G_GNUC_INTERNAL void Init_gobject_gvalue(void);
 G_GNUC_INTERNAL void Init_gobject_gvaluetypes(void);
 G_GNUC_INTERNAL void Init_gobject_gboxed(void);
-#if GLIB_CHECK_VERSION(2,6,0)
 G_GNUC_INTERNAL void Init_gobject_gstrv(void);
-#endif
 G_GNUC_INTERNAL void Init_gobject_value_array(void);
 G_GNUC_INTERNAL void Init_gobject_genumflags(void);
 G_GNUC_INTERNAL void Init_gobject_genums(void);
