@@ -39,7 +39,6 @@ rg_document(VALUE self)
 }
 */
 
-#if ATK_CHECK_VERSION(1,12,0)
 static VALUE
 rg_get_attribute_value(VALUE self, VALUE name)
 {
@@ -78,7 +77,6 @@ rg_locale(VALUE self)
 {
     return CSTR2RVAL(atk_document_get_locale(_SELF(self)));
 }
-#endif
 
 void
 Init_atk_document(VALUE mAtk)
@@ -89,12 +87,10 @@ Init_atk_document(VALUE mAtk)
 /*
     RG_DEF_METHOD(document, 0);
 */
-#if ATK_CHECK_VERSION(1,12,0)
     RG_DEF_METHOD(get_attribute_value, 1);
     RG_DEF_ALIAS("[]", "get_attribute_value");
     RG_DEF_METHOD(set_attribute_value, 2);
     RG_DEF_ALIAS("[]=", "set_attribute_value");
     RG_DEF_METHOD(attributes, 0);
     RG_DEF_METHOD(locale, 0);
-#endif
 }
