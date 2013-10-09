@@ -1,6 +1,6 @@
 Ruby/ATK
 ===============
-Ruby/ATK is a Ruby binding of ATK-1.0.x or later.
+Ruby/ATK is a Ruby binding of ATK-1.12.x or later.
 
 Requirements
 ------------
