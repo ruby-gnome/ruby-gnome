@@ -45,15 +45,12 @@ rbglib_m_win32_locale_deprecated(VALUE self)
     return rg_s_locale(self);
 }
 
-#if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_version(VALUE self)
 {
     return UINT2NUM(g_win32_get_windows_version());
 }
-#endif
 
-#if GLIB_CHECK_VERSION(2,8,0)
 static VALUE
 rg_s_locale_filename_from_utf8(VALUE self, VALUE utf8_filename)
 {
@@ -67,8 +64,6 @@ rbglib_m_win32_locale_filename_from_utf8_deprecated(VALUE self,
     rb_warn("GLib.win32_locale_filename_from_utf8() is deprecated. Use GLib::Win32.locale_filename_from_utf8 instead");
     return rg_s_locale_filename_from_utf8(self, utf8_filename);
 }
-
-#endif
 
 #  if GLIB_CHECK_VERSION(2, 16, 0)
 static VALUE
@@ -105,12 +100,10 @@ Init_glib_win32(void)
     /* Deprecated */
     rbg_define_singleton_method(mGLib, "win32_locale", rbglib_m_win32_locale_deprecated, 0);
 
-#  if GLIB_CHECK_VERSION(2,8,0)
     RG_DEF_SMETHOD(locale_filename_from_utf8, 1);
     /* Deprecated */
     rbg_define_singleton_method(mGLib, "win32_locale_filename_from_utf8",
                               rbglib_m_win32_locale_filename_from_utf8_deprecated, 1);
-#  endif
 
 #  if GLIB_CHECK_VERSION(2, 16, 0)
     RG_DEF_SMETHOD(get_package_installation_directory_of_module, -1);
