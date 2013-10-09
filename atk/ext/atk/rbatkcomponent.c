@@ -142,13 +142,11 @@ rg_set_size(VALUE self, VALUE width, VALUE height)
     return self;
 }
 
-#if ATK_CHECK_VERSION(1,12,0)
 static VALUE
 rg_alpha(VALUE self)
 {
     return rb_float_new(atk_component_get_alpha(_SELF(self)));
 }
-#endif
 
 void
 Init_atk_component(VALUE mAtk)
@@ -173,7 +171,5 @@ Init_atk_component(VALUE mAtk)
     RG_DEF_METHOD(set_extents, 5);
     RG_DEF_METHOD(set_position, 2);
     RG_DEF_METHOD(set_size, 2);
-#if ATK_CHECK_VERSION(1,12,0)
     RG_DEF_METHOD(alpha, 0);
-#endif
 }
