@@ -95,7 +95,6 @@ rg_s_break_type(G_GNUC_UNUSED VALUE self, VALUE unichar)
                       G_TYPE_UNICODE_BREAK_TYPE);
 }
 
-#if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
 rg_s_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
 {
@@ -107,7 +106,6 @@ rg_s_get_mirror_char(G_GNUC_UNUSED VALUE self, VALUE unichar)
         return unichar;
     }
 }
-#endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
 static VALUE
@@ -194,9 +192,7 @@ Init_glib_unichar(void)
     RG_DEF_SMETHOD(type, 1);
     RG_DEF_SMETHOD(break_type, 1);
 
-#if GLIB_CHECK_VERSION(2,4,0)
     RG_DEF_SMETHOD(get_mirror_char, 1);
-#endif
 
 #if GLIB_CHECK_VERSION(2,14,0)
     RG_DEF_SMETHOD(combining_class, 1);
