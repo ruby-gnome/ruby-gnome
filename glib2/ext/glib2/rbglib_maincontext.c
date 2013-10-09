@@ -533,13 +533,11 @@ rg_release(VALUE self)
     return self;
 }
 
-#if GLIB_CHECK_VERSION(2,10,0)
 static VALUE
 rg_owner_p(VALUE self)
 {
     return CBOOL2RVAL(g_main_context_is_owner(_SELF(self)));
 }
-#endif
 
 /*
 gboolean    g_main_context_wait             (GMainContext *context,
@@ -805,7 +803,6 @@ idle_remove(G_GNUC_UNUSED VALUE self, VALUE func)
     return CBOOL2RVAL(g_idle_remove_by_data((gpointer)info));
 }
 
-#if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
 child_watch_source_new(G_GNUC_UNUSED VALUE self, VALUE pid)
 {
@@ -826,7 +823,6 @@ child_watch_add(VALUE self, VALUE pid)
     return UINT2NUM(g_child_watch_add((GPid)NUM2INT(pid), 
                                       (GChildWatchFunc)child_watch_func, (gpointer)func));
 }
-#endif
 
 #ifndef HAVE_RB_THREAD_BLOCKING_REGION
 static void
@@ -846,9 +842,7 @@ Init_glib_main_context(void)
 
     VALUE timeout = rb_define_module_under(mGLib, "Timeout");
     VALUE idle = rb_define_module_under(mGLib, "Idle");
-#if GLIB_CHECK_VERSION(2,4,0)
     VALUE child_watch = rb_define_module_under(mGLib, "ChildWatch");
-#endif
 
     id_call = rb_intern("call");
     id__callbacks__ = rb_intern("__callbacks__");
@@ -873,9 +867,7 @@ Init_glib_main_context(void)
     RG_DEF_METHOD(wakeup, 0);
     RG_DEF_METHOD(acquire, 0);
     RG_DEF_METHOD(release, 0);
-#if GLIB_CHECK_VERSION(2,10,0)
     RG_DEF_METHOD_P(owner, 0);
-#endif
     RG_DEF_METHOD(prepare, 0);
     RG_DEF_METHOD(query, 1);
 /*
@@ -902,10 +894,8 @@ Init_glib_main_context(void)
     rbg_define_singleton_method(idle, "add", idle_add, -1);
     rbg_define_singleton_method(idle, "remove", idle_remove, 1);
 
-#if GLIB_CHECK_VERSION(2,4,0)
     rbg_define_singleton_method(child_watch, "source_new", child_watch_source_new, 1);
     rbg_define_singleton_method(child_watch, "add", child_watch_add, 1);
-#endif
 
     default_poll_func = g_main_context_get_poll_func(NULL);
     g_main_context_set_poll_func(NULL, rg_poll);
