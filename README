@@ -12,7 +12,7 @@ use from Ruby 1.9.x and 2.0.0.
 === ruby-gtk2
 
   * Ruby/GLib2:           GLib 2.0.x or later
-  * Ruby/ATK:             ATK 1.0.x or later
+  * Ruby/ATK:             ATK 1.12.x or later
   * Ruby/Pango:           Pango 1.1.x or later
   * Ruby/GdkPixbuf2:      GTK+ 2.0.x or later
   * Ruby/GTK2:            GTK+ 2.10.x or later
@@ -203,4 +203,3 @@ the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 == Project Website
 
 ((<URL:http://ruby-gnome2.sourceforge.jp/>))
-
