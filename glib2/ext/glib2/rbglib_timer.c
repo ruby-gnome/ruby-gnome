@@ -90,14 +90,12 @@ rg_stop(VALUE self)
     return self;
 }
 
-#if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
 rg_continue(VALUE self)
 {
     g_timer_continue(_SELF(self));
     return self;
 }
-#endif
 
 static VALUE
 rg_elapsed(VALUE self)
@@ -123,9 +121,7 @@ Init_glib_timer(void)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(start, 0);
     RG_DEF_METHOD(stop, 0);
-#if GLIB_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(continue, 0);
-#endif
     RG_DEF_METHOD(elapsed, 0);
     RG_DEF_METHOD(reset, 0);
 }
