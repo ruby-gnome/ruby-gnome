@@ -21,7 +21,6 @@
 
 #include "rbgprivate.h"
 
-#if GLIB_CHECK_VERSION(2,6,0)
 #if !GLIB_CHECK_VERSION(2,31,2)
 /************************************************/
 static GKeyFile*
@@ -657,12 +656,10 @@ rg_remove_comment(VALUE self, VALUE group_name, VALUE key)
 
     return self;
 }
-#endif
 
 void
 Init_glib_keyfile(void)
 {
-#if GLIB_CHECK_VERSION(2,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_KEY_FILE, "KeyFile", mGLib);   
     G_DEF_ERROR(G_KEY_FILE_ERROR, "KeyFileError", mGLib, 
                 rb_eRuntimeError, G_TYPE_KEY_FILE_ERROR);
@@ -770,6 +767,5 @@ Init_glib_keyfile(void)
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_LINK));
     rb_define_const(RG_TARGET_NAMESPACE, "DESKTOP_TYPE_DIRECTORY",
                     CSTR2RVAL(G_KEY_FILE_DESKTOP_TYPE_DIRECTORY));
-#endif
 #endif
 }
