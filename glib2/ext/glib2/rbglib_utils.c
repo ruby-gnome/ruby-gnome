@@ -24,7 +24,6 @@
 
 #define RG_TARGET_NAMESPACE mGLib
 
-#if GLIB_CHECK_VERSION(2,2,0)
 static VALUE
 rg_s_application_name(G_GNUC_UNUSED VALUE self)
 {
@@ -37,7 +36,6 @@ rg_s_set_application_name(VALUE self, VALUE application_name)
     g_set_prgname(RVAL2CSTR_ACCEPT_NIL(application_name));
     return self;
 }
-#endif
 
 static VALUE
 rg_s_prgname(G_GNUC_UNUSED VALUE self)
@@ -58,7 +56,6 @@ rg_s_getenv(G_GNUC_UNUSED VALUE self, VALUE variable)
     return CSTR2RVAL(g_getenv(RVAL2CSTR(variable)));
 }
 
-#if GLIB_CHECK_VERSION(2,4,0)
 static VALUE
 rg_s_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
 {
@@ -73,9 +70,7 @@ rg_s_unsetenv(VALUE self, VALUE variable)
     g_unsetenv(RVAL2CSTR(variable));
     return self;
 }
-#endif
 
-#if GLIB_CHECK_VERSION(2,8,0)
 #ifdef HAVE_G_LISTENV
 static VALUE
 rg_s_listenv(G_GNUC_UNUSED VALUE self)
@@ -98,7 +93,6 @@ rg_s_host_name(G_GNUC_UNUSED VALUE self)
 {
     return CSTR2RVAL(g_get_host_name());
 }
-#endif
 
 static VALUE
 rg_s_user_name(G_GNUC_UNUSED VALUE self)
@@ -112,7 +106,6 @@ rg_s_real_name(G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL(g_get_real_name());
 }
 
-#if GLIB_CHECK_VERSION(2, 6, 0)
 static VALUE
 rg_s_user_cache_dir(G_GNUC_UNUSED VALUE self)
 {
@@ -142,7 +135,6 @@ rg_s_system_config_dirs(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_system_config_dirs());
 }
-#endif
 
 #if GLIB_CHECK_VERSION(2, 14, 0)
 static VALUE
@@ -301,33 +293,25 @@ Init_glib_utils(void)
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_USER_DIRECTORY, "G_");
 #endif
 
-#if GLIB_CHECK_VERSION(2,2,0)
     RG_DEF_SMETHOD(application_name, 0);
     RG_DEF_SMETHOD(set_application_name, 1);
-#endif
     RG_DEF_SMETHOD(prgname, 0);
     RG_DEF_SMETHOD(set_prgname, 1);
     RG_DEF_SMETHOD(getenv, 1);
-#if GLIB_CHECK_VERSION(2,4,0)
     RG_DEF_SMETHOD(setenv, 2);
     RG_DEF_SMETHOD(unsetenv, 1);
-#endif
-#if GLIB_CHECK_VERSION(2,8,0)
 #ifdef HAVE_G_LISTENV
     RG_DEF_SMETHOD(listenv, 0);
 #endif
     RG_DEF_SMETHOD(host_name, 0);
-#endif
     RG_DEF_SMETHOD(user_name, 0);
     RG_DEF_SMETHOD(real_name, 0);
 
-#if GLIB_CHECK_VERSION(2, 6, 0)
     RG_DEF_SMETHOD(user_cache_dir, 0);
     RG_DEF_SMETHOD(user_data_dir, 0);
     RG_DEF_SMETHOD(user_config_dir, 0);
     RG_DEF_SMETHOD(system_data_dirs, 0);
     RG_DEF_SMETHOD(system_config_dirs, 0);
-#endif
 #if GLIB_CHECK_VERSION(2, 14, 0)
     RG_DEF_SMETHOD(get_user_special_dir, 1);
 #endif
