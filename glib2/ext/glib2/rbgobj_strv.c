@@ -21,8 +21,6 @@
 
 #include "rbgprivate.h"
 
-#if GLIB_CHECK_VERSION(2,6,0)
-
 static VALUE
 strv_to_ruby(const GValue *from)
 {
@@ -44,5 +42,3 @@ Init_gobject_gstrv(void)
     rbgobj_register_g2r_func(G_TYPE_STRV, strv_to_ruby);
     rbgobj_register_r2g_func(G_TYPE_STRV, strv_from_ruby);
 }
-
-#endif
