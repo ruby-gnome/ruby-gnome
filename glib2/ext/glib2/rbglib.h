@@ -55,10 +55,6 @@ extern "C" {
 #  define RBASIC_CLASS(obj) (RBASIC(obj)->klass)
 #endif
 
-#if ! GLIB_CHECK_VERSION(2,4,0)
-typedef int GPid;
-#endif
-
 #ifndef G_SOURCE_REMOVE
 #  define G_SOURCE_REMOVE FALSE
 #endif
