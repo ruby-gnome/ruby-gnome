@@ -79,14 +79,12 @@ rg_initialize(VALUE self, VALUE targets, VALUE rbrelationship)
     return Qnil;
 }
 
-#if ATK_CHECK_VERSION(1,9,0)
 static VALUE
 rg_add_target(VALUE self, VALUE obj)
 {
     atk_relation_add_target(_SELF(self), RVAL2ATKOBJECT(obj));
     return self;
 }
-#endif
 
 void
 Init_atk_relation(VALUE mAtk)
@@ -94,9 +92,7 @@ Init_atk_relation(VALUE mAtk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(ATK_TYPE_RELATION, "Relation", mAtk);
     RG_DEF_SMETHOD(type_register, 1);
     RG_DEF_METHOD(initialize, 2);
-#if ATK_CHECK_VERSION(1,9,0)
     RG_DEF_METHOD(add_target, 1);
-#endif
 
     Init_atk_relation_type(RG_TARGET_NAMESPACE);
 }
