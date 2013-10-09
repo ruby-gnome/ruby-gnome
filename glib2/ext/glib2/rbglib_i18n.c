@@ -26,19 +26,15 @@
 
 #define RG_TARGET_NAMESPACE mGLib
 
-#if GLIB_CHECK_VERSION(2,6,0)
 static VALUE
 rg_s_language_names(G_GNUC_UNUSED VALUE self)
 {
     return STRV2RVAL((const gchar **)g_get_language_names());
 }
-#endif
 
 void
 Init_glib_i18n(void)
 {
     /* glib/gi18n.h */
-#if GLIB_CHECK_VERSION(2,6,0)
     RG_DEF_SMETHOD(language_names, 0);
-#endif
 }
