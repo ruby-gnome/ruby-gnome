@@ -77,13 +77,11 @@ rg_s_root(G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL(atk_get_root());
 }
 
-#if ATK_CHECK_VERSION(1,6,0)
 static VALUE
 rg_s_focus_object(G_GNUC_UNUSED VALUE self)
 {
     return GOBJ2RVAL(atk_get_focus_object());
 }
-#endif
 
 static VALUE
 rg_s_toolkit_name(G_GNUC_UNUSED VALUE self)
@@ -109,9 +107,7 @@ Init_atk_util(VALUE mAtk)
     RG_DEF_SMETHOD(remove_key_event_listener, 1);
 
     RG_DEF_SMETHOD(root, 0);
-#if ATK_CHECK_VERSION(1,6,0)
     RG_DEF_SMETHOD(focus_object, 0);
-#endif
     RG_DEF_SMETHOD(toolkit_name, 0);
     RG_DEF_SMETHOD(toolkit_version, 0);
 
