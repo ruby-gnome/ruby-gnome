@@ -271,11 +271,9 @@ rbgobj_define_property_accessors(VALUE klass)
     gtype = CLASS2GTYPE(klass);
 
     if (G_TYPE_IS_INTERFACE(gtype)){
-#if GLIB_CHECK_VERSION(2,4,0)
         gpointer iface = g_type_default_interface_ref(gtype);
         pspecs = g_object_interface_list_properties(iface, &n_properties);
         g_type_default_interface_unref(iface);
-#endif
     } else {
         GObjectClass* oclass = G_OBJECT_CLASS(g_type_class_ref(gtype));
         pspecs = g_object_class_list_properties(oclass, &n_properties);
@@ -375,9 +373,7 @@ Init_gobject(void)
     Init_gobject_gvalue();
     Init_gobject_gvaluetypes();
     Init_gobject_gboxed();
-#if GLIB_CHECK_VERSION(2,6,0)
     Init_gobject_gstrv();
-#endif
     Init_gobject_value_array();
     Init_gobject_genumflags();
     Init_gobject_gparam();
