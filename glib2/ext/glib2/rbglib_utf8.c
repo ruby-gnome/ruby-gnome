@@ -154,11 +154,9 @@ rg_s_collate_key(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     utf8 = StringValueCStr(rb_utf8);
     len = RSTRING_LEN(rb_utf8);
-#if GLIB_CHECK_VERSION(2,8,0)
     if (RVAL2CBOOL(for_filename))
         key = g_utf8_collate_key_for_filename(utf8, len);
     else
-#endif
         key = g_utf8_collate_key(utf8, len);
 
     result = CSTR2RVAL(key);
