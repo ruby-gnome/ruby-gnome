@@ -35,8 +35,6 @@ rg_append_features(G_GNUC_UNUSED VALUE self, VALUE klass)
     return rb_call_super(1, &klass);
 }
 
-#if GLIB_CHECK_VERSION(2,4,0)
-
 static VALUE
 rg_install_property(VALUE self, VALUE pspec_obj)
 {
@@ -122,8 +120,6 @@ rg_properties(int argc, VALUE* argv, VALUE self)
     return ary;
 }
 
-#endif
-
 void
 rbgobj_init_interface(VALUE interf)
 {
@@ -145,11 +141,9 @@ Init_gobject_typeinterface(void)
     RG_TARGET_NAMESPACE = rb_define_module_under(mGLib, "MetaInterface");
     rbg_define_method(RG_TARGET_NAMESPACE, "gtype", generic_s_gtype, 0);
     RG_DEF_METHOD(append_features, 1);
-#if GLIB_CHECK_VERSION(2,4,0)
     RG_DEF_METHOD(install_property, 1);
     RG_DEF_METHOD(property, 1);
     RG_DEF_METHOD(properties, -1);
-#endif
 
     rbgobj_mInterface = G_DEF_INTERFACE(G_TYPE_INTERFACE, "Interface", mGLib);
 }
