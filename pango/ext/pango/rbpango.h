@@ -31,12 +31,10 @@
 #include "rbgobject.h"
 #include "rbpangoversion.h"
 #include "rbpangoconversions.h"
-
-#if PANGO_CHECK_VERSION(1,10,0)
 #include <pango/pangocairo.h>
-#  ifdef HAVE_RB_CAIRO_H
+
+#ifdef HAVE_RB_CAIRO_H
 #include <rb_cairo.h>
-#  endif
 #endif
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_PANGO_STATIC_COMPILATION)
@@ -70,10 +68,7 @@ RUBY_PANGO_VAR VALUE mPango;
 #ifndef PANGO_TYPE_GLYPH_ITEM
 #  define PANGO_TYPE_GLYPH_ITEM (pango_glyph_item_get_type())
 #endif
-
-#if PANGO_CHECK_VERSION(1,4,0)
 #define PANGO_TYPE_SCRIPT_ITER (pango_script_iter_get_type())
-#endif
 
 #define ATTR2RVAL(attr) (pango_make_attribute(attr))
 #define RVAL2ATTR(attr) (pango_get_attribute(attr))
@@ -95,10 +90,7 @@ extern GType pango_glyph_info_get_type(void);
 #ifndef HAVE_PANGO_GLYPH_ITEM_GET_TYPE
 extern GType pango_glyph_item_get_type(void);
 #endif
-
-#if PANGO_CHECK_VERSION(1,4,0)
 extern GType pango_script_iter_get_type(void);
-#endif
 
 extern VALUE pango_get_attribute_klass(VALUE attr_type);
 extern void pango_add_attribute(int attr_type, VALUE klass);
