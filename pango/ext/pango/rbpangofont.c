@@ -41,12 +41,7 @@ rg_describe(int argc, VALUE *argv, VALUE self)
     if (NIL_P(absolute_size) || ! RVAL2CBOOL(absolute_size)){
         desc = PANGOFONTDESCRIPTION2RVAL(pango_font_describe(_SELF(self)));
     } else {
-#if PANGO_CHECK_VERSION(1,14,0)
         desc = PANGOFONTDESCRIPTION2RVAL(pango_font_describe_with_absolute_size(_SELF(self)));
-#else
-        rb_warning("Pango::Font#describe(absolute) has been supported since GTK+-2.10.x. Use Pango::Font#describe() instead."); 
-        desc = PANGOFONTDESCRIPTION2RVAL(pango_font_describe(_SELF(self)));
-#endif
     }
     return desc;
 }
@@ -86,13 +81,11 @@ rg_metrics(int argc, VALUE *argv, VALUE self)
     return PANGOFONTMETRICS2RVAL(pango_font_get_metrics(_SELF(self), lang));
 }
 
-#if PANGO_CHECK_VERSION(1,9,0)
 static VALUE
 rg_font_map(VALUE self)
 {
     return GOBJ2RVAL(pango_font_get_font_map(_SELF(self)));
 }
-#endif
 
 void
 Init_pango_font(VALUE mPango)
@@ -104,10 +97,7 @@ Init_pango_font(VALUE mPango)
     RG_DEF_METHOD(get_coverage, 1);
     RG_DEF_METHOD(get_glyph_extents, 1);
     RG_DEF_METHOD(metrics, -1);
-
-#if PANGO_CHECK_VERSION(1,9,0)
     RG_DEF_METHOD(font_map, 0);
-#endif
 
     G_DEF_CLASS3("PangoXFont", "XFont", mPango);
     G_DEF_CLASS3("PangoFT2Font", "FT2Font", mPango);
@@ -116,7 +106,5 @@ Init_pango_font(VALUE mPango)
     G_DEF_CLASS3("PangoCairoFcFont", "CairoFcFont", mPango);
     G_DEF_CLASS3("PangoCairoFont", "CairoFont", mPango);
     G_DEF_CLASS3("PangoCairoWin32Font", "CairoWin32Font", mPango);
-#if PANGO_CHECK_VERSION(1,12,0)
     G_DEF_CLASS3("PangoATSUIFont", "ATSUIFont", mPango);
-#endif
 }
