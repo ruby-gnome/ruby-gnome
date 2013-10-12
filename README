@@ -11,7 +11,7 @@ use from Ruby 1.9.x and 2.0.0.
 
 === ruby-gtk2
 
-  * Ruby/GLib2:           GLib 2.0.x or later
+  * Ruby/GLib2:           GLib 2.12.x or later
   * Ruby/ATK:             ATK 1.12.x or later
   * Ruby/Pango:           Pango 1.1.x or later
   * Ruby/GdkPixbuf2:      GTK+ 2.0.x or later

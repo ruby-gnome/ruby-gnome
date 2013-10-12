@@ -1,13 +1,13 @@
 Ruby/GLib2
 ==========
-Ruby/GLib2 is a Ruby binding of GLib-2.x.
+Ruby/GLib2 is a Ruby binding of GLib-2.12.x.
 
 Requirements
 ------------
 
   Ruby >= 1.9.x: http://www.ruby-lang.org/
   pkg-config.rb: http://github.com/rcairo/pkg-config
-  GLib >= 2.x: http://www.gtk.org/
+  GLib >= 2.12.x: http://www.gtk.org/
 
 Install (RubyGems)
 ------------------
@@ -21,7 +21,7 @@ Windows:
 Install (traditional)
 ---------------------
 
-Install ruby-1.9.x or later, pkg-config.rb and GLib-2.x.
+Install ruby-1.9.x or later, pkg-config.rb and GLib-2.12.x.
 
   % ruby extconf.rb
   % make
