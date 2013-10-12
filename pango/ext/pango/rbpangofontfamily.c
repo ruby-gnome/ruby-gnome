@@ -75,8 +75,5 @@ Init_pango_font_family(VALUE mPango)
     G_DEF_CLASS3("PangoXftFamily", "XftFamily", mPango);
     G_DEF_CLASS3("PangoXFamily", "XFamily", mPango);
     G_DEF_CLASS3("PangoWin32Family", "Win32Family", mPango);
-#if PANGO_CHECK_VERSION(1,12,0)
     G_DEF_CLASS3("PangoATSUIFamily", "ATSUIFamily", mPango);
-#endif
-
 }
