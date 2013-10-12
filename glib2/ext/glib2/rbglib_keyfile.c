@@ -311,7 +311,6 @@ rg_get_integer(VALUE self, VALUE group_name, VALUE key)
     return INT2NUM(ret);
 }
 
-#if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
 rg_get_double(VALUE self, VALUE group_name, VALUE key)
 {
@@ -325,7 +324,6 @@ rg_get_double(VALUE self, VALUE group_name, VALUE key)
 
     return rb_float_new(ret);
 }
-#endif
 
 static VALUE
 rg_get_string_list(VALUE self, VALUE group_name, VALUE key)
@@ -421,7 +419,6 @@ rg_get_integer_list(VALUE self, VALUE group_name, VALUE key)
     return ary;
 }
 
-#if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
 rg_get_double_list(VALUE self, VALUE group_name, VALUE key)
 {
@@ -442,7 +439,6 @@ rg_get_double_list(VALUE self, VALUE group_name, VALUE key)
     }
     return ary;
 }
-#endif
 
 static VALUE
 rg_get_comment(VALUE self, VALUE group_name, VALUE key)
@@ -504,7 +500,6 @@ rg_set_integer(VALUE self, VALUE group_name, VALUE key, VALUE value)
     return self;
 }
 
-#if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
 rg_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
 {
@@ -513,7 +508,6 @@ rg_set_double(VALUE self, VALUE group_name, VALUE key, VALUE value)
                           NUM2DBL(value));
     return self;
 }
-#endif
 
 static VALUE
 rg_set_string_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
@@ -580,7 +574,6 @@ rg_set_integer_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
     return self;
 }
 
-#if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
 rg_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 {
@@ -594,7 +587,6 @@ rg_set_double_list(VALUE self, VALUE rbgroup_name, VALUE rbkey, VALUE rblist)
 
     return self;
 }
-#endif
 
 static VALUE
 rg_set_comment(VALUE self, VALUE group_name, VALUE key, VALUE comment)
@@ -683,32 +675,24 @@ Init_glib_keyfile(void)
     RG_DEF_METHOD(get_locale_string, -1);
     RG_DEF_METHOD(get_boolean, 2);
     RG_DEF_METHOD(get_integer, 2);
-#if GLIB_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(get_double, 2);
-#endif
     RG_DEF_METHOD(get_string_list, 2);
     RG_DEF_METHOD(get_locale_string_list, -1);
     RG_DEF_METHOD(get_boolean_list, 2);
     RG_DEF_METHOD(get_integer_list, 2);
-#if GLIB_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(get_double_list, 2);
-#endif
     RG_DEF_METHOD(get_comment, 2);
     RG_DEF_METHOD(set_value, 3);
     RG_DEF_METHOD(set_string, 3);
     RG_DEF_METHOD(set_locale_string, 4);
     RG_DEF_METHOD(set_boolean, 3);
     RG_DEF_METHOD(set_integer, 3);
-#if GLIB_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(set_double, 3);
-#endif
     RG_DEF_METHOD(set_string_list, 3);
     RG_DEF_METHOD(set_locale_string_list, 4);
     RG_DEF_METHOD(set_boolean_list, 3);
     RG_DEF_METHOD(set_integer_list, 3);
-#if GLIB_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD(set_double_list, 3);
-#endif
     RG_DEF_METHOD(set_comment, 3);
     RG_DEF_METHOD(remove_group, 1);
     RG_DEF_METHOD(remove_key, 2);
