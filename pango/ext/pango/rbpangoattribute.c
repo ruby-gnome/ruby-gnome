@@ -274,14 +274,13 @@ attr_AttrSize_initialize(VALUE self, VALUE size)
     DATA_PTR(self) = pango_attr_size_new(NUM2INT(size));
     return Qnil;
 }
-#if PANGO_CHECK_VERSION(1,8,1)
+
 static VALUE
 attr_AttrAbsoluteSize_initialize(VALUE self, VALUE size)
 {
     DATA_PTR(self) = pango_attr_size_new_absolute(NUM2INT(size));
     return Qnil;
 }
-#endif
 
 #if PANGO_CHECK_VERSION(1,16,0)
 static VALUE
@@ -357,18 +356,11 @@ attr_AttrShape_initialize(int argc, VALUE *argv, VALUE self)
             RVAL2PANGORECTANGLE(ink_rect),
             RVAL2PANGORECTANGLE(logical_rect));
     } else {
-#if PANGO_CHECK_VERSION(1,8,0)
         G_RELATIVE(self, data);
         DATA_PTR(self) = pango_attr_shape_new_with_data(
             RVAL2PANGORECTANGLE(ink_rect),
             RVAL2PANGORECTANGLE(logical_rect),
             (gpointer)data, NULL, NULL);
-#else
-        rb_warning("not supported in Pango-1.6.x. the 3rd parameter was ignored.");
-        DATA_PTR(self) = pango_attr_shape_new(
-            RVAL2PANGORECTANGLE(ink_rect),
-            RVAL2PANGORECTANGLE(logical_rect));     
-#endif
     }
 
     return Qnil;
@@ -381,20 +373,15 @@ attr_AttrScale_initialize(VALUE self, VALUE scale)
     return Qnil;
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 attr_AttrFallback_initialize(VALUE self, VALUE enable_fallback)
 {
     DATA_PTR(self) = pango_attr_fallback_new(RVAL2CBOOL(enable_fallback));
     return Qnil;
 }
-#endif
 
 MAKE_ATTRINT_INIT(AttrRise, rise);
-
-#if PANGO_CHECK_VERSION(1,6,0)
 MAKE_ATTRINT_INIT(AttrLetterSpacing, letter_spacing);
-#endif
 
 #define MAKE_ATTR(gtype, name, parent, num)\
 tmpklass = rb_define_class_under(mPango, #name, parent);\
@@ -450,9 +437,7 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_VARIANT, AttrVariant, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_STRETCH, AttrStretch, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, 1);
-#if PANGO_CHECK_VERSION(1,8,1)
     MAKE_ATTR(PANGO_ATTR_ABSOLUTE_SIZE, AttrAbsoluteSize, pattrint, 1);
-#endif
 #if PANGO_CHECK_VERSION(1,16,0)
     MAKE_ATTR(PANGO_ATTR_GRAVITY, AttrGravity, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_GRAVITY_HINT, AttrGravityHint, pattrint, 1);
@@ -474,9 +459,7 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_STRIKETHROUGH_COLOR, AttrStrikethroughColor, pattrcolor, 3);
 #endif
     MAKE_ATTR(PANGO_ATTR_RISE, AttrRise, pattrint, 1);
-#if PANGO_CHECK_VERSION(1,6,0)
     MAKE_ATTR(PANGO_ATTR_LETTER_SPACING, AttrLetterSpacing, pattrint, 1);
-#endif
     MAKE_ATTR(PANGO_ATTR_SHAPE, AttrShape, RG_TARGET_NAMESPACE, -1);
     rbg_define_method(tmpklass, "ink_rect", attr_shape_ink_rect, 0);
     rbg_define_method(tmpklass, "logical_rect", attr_shape_logical_rect, 0);
@@ -490,9 +473,7 @@ Init_pango_attribute(VALUE mPango)
     rb_define_const(tmpklass, "LARGE", rb_float_new(PANGO_SCALE_LARGE));
     rb_define_const(tmpklass, "X_LARGE", rb_float_new(PANGO_SCALE_X_LARGE));
     rb_define_const(tmpklass, "XX_LARGE", rb_float_new(PANGO_SCALE_XX_LARGE));
-#if PANGO_CHECK_VERSION(1,4,0)
     MAKE_ATTR(PANGO_ATTR_FALLBACK, AttrFallback, pattrbool, 1);
-#endif
     /* PangoAttrType */
     G_DEF_CLASS(PANGO_TYPE_ATTR_TYPE, "Type", RG_TARGET_NAMESPACE);
 #define INT2ATTRTYPE(x) rbgobj_make_enum((x), PANGO_TYPE_ATTR_TYPE)
@@ -509,16 +490,10 @@ Init_pango_attribute(VALUE mPango)
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_BACKGROUND", INT2ATTRTYPE(PANGO_ATTR_BACKGROUND));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_UNDERLINE", INT2ATTRTYPE(PANGO_ATTR_UNDERLINE));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRIKETHROUGH", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH));
-#if PANGO_CHECK_VERSION(1,8,0)
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_STRIKETHROUGH_COLOR", INT2ATTRTYPE(PANGO_ATTR_STRIKETHROUGH_COLOR));
-#endif
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_RISE", INT2ATTRTYPE(PANGO_ATTR_RISE));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_SHAPE", INT2ATTRTYPE(PANGO_ATTR_SHAPE));
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_SCALE", INT2ATTRTYPE(PANGO_ATTR_SCALE));
-#if PANGO_CHECK_VERSION(1,8,0)
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_FALLBACK", INT2ATTRTYPE(PANGO_ATTR_FALLBACK));
-#endif
-#if PANGO_CHECK_VERSION(1,6,0)
     rb_define_const(RG_TARGET_NAMESPACE, "TYPE_LETTER_SPACING", INT2ATTRTYPE(PANGO_ATTR_LETTER_SPACING));
-#endif
 }
