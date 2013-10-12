@@ -75,7 +75,6 @@ rg_s_reorder_items(G_GNUC_UNUSED VALUE self, VALUE attrs)
                      rpango_reorder_items_ensure, (VALUE)&args);
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rg_s_unichar_direction(G_GNUC_UNUSED VALUE self, VALUE ch)
 {
@@ -88,7 +87,6 @@ rg_s_find_base_dir(G_GNUC_UNUSED VALUE self, VALUE text)
     StringValue(text);
     return PANGODIRECTION2RVAL(pango_find_base_dir(RSTRING_PTR(text), RSTRING_LEN(text)));
 }
-#endif
 
 struct rbg_pangologattrs2rval_free_args {
     PangoLogAttr *attrs;
@@ -274,11 +272,8 @@ Init_pango(void)
                                 INT2FIX(PANGO_MICRO_VERSION)));
 
     RG_DEF_SMETHOD(reorder_items, 1);
-
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_SMETHOD(unichar_direction, 1);
     RG_DEF_SMETHOD(find_base_dir, 1);
-#endif
     RG_DEF_SMETHOD(break, 2);
     RG_DEF_SMETHOD(get_log_attrs, 3);
     RG_DEF_SMETHOD(find_paragraph_boundary, 1);
