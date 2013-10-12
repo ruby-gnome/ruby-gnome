@@ -21,7 +21,6 @@
 
 #include "rbgprivate.h"
 
-#if GLIB_CHECK_VERSION(2,12,0)
 /************************************************/
 static GBookmarkFile*
 bookmarkfile_copy(const GBookmarkFile* file)
@@ -498,12 +497,9 @@ rg_move_item(VALUE self, VALUE old_uri, VALUE new_uri)
     return self;
 }
 
-#endif
-
 void
 Init_glib_bookmark_file(void)
 {
-#if GLIB_CHECK_VERSION(2,12,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_BOOKMARK_FILE, "BookmarkFile", mGLib);
 
     G_DEF_ERROR(G_BOOKMARK_FILE_ERROR, "BookmarkFileError", mGLib, 
@@ -547,5 +543,4 @@ Init_glib_bookmark_file(void)
     RG_DEF_METHOD(remove_application, 2);
     RG_DEF_METHOD(remove_item, 1);
     RG_DEF_METHOD(move_item, 2);
-#endif
 }
