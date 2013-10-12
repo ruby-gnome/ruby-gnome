@@ -61,7 +61,6 @@ rg_splice(VALUE self, VALUE other, VALUE pos, VALUE len)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static gboolean
 filter_func(PangoAttribute *attr, gpointer data)
 {
@@ -77,7 +76,6 @@ rg_filter(VALUE self)
                                              (PangoAttrFilterFunc)filter_func, 
                                              (gpointer)func));
 }
-#endif
 
 static VALUE
 rg_iterator(VALUE self)
@@ -97,9 +95,7 @@ Init_pango_attrlist(VALUE mPango)
     RG_DEF_METHOD(insert_before, 1);
     RG_DEF_METHOD(change, 1);
     RG_DEF_METHOD(splice, 3);
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(filter, 0);
-#endif
     RG_DEF_METHOD(iterator, 0);
 
 }
