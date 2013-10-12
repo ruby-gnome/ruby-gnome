@@ -21,7 +21,6 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,8,0)
 #define RG_TARGET_NAMESPACE cRenderer
 #define _SELF(self) (RVAL2PANGORENDERER(self))
 
@@ -166,12 +165,9 @@ rg_matrix(VALUE self)
     return PANGOMATRIX2RVAL((PangoMatrix*)matrix);
 }
 
-#endif
-
 void
 Init_pangorenderer(VALUE mPango)
 {
-#if PANGO_CHECK_VERSION(1,8,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_RENDERER, "Renderer", mPango);
 
     RG_DEF_METHOD(draw_layout, 3);
@@ -193,7 +189,5 @@ Init_pangorenderer(VALUE mPango)
 #ifdef HAVE_PANGO_RENDER_PART_GET_TYPE
     G_DEF_CLASS(PANGO_TYPE_RENDER_PART, "Part", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_RENDER_PART, "PANGO_RENDER_");
-#endif
-
 #endif
 }
