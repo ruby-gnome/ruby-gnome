@@ -61,7 +61,6 @@ rg_to_str(VALUE self)
     return CSTR2RVAL(pango_language_to_string(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 /* Moved from Pango::Script */
 static VALUE
 rg_includes_script(VALUE self, VALUE script)
@@ -69,7 +68,6 @@ rg_includes_script(VALUE self, VALUE script)
     return CBOOL2RVAL(pango_language_includes_script(_SELF(self), 
                                                      RVAL2PANGOSCRIPT(script)));
 }
-#endif
 
 void
 Init_pango_language(VALUE mPango)
@@ -84,8 +82,5 @@ Init_pango_language(VALUE mPango)
     RG_DEF_METHOD(to_str, 0);
     RG_DEF_ALIAS("to_s", "to_str");
 
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(includes_script, 1);
-#endif
-
 }
