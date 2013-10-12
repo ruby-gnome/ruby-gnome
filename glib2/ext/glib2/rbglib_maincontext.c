@@ -419,13 +419,11 @@ source_remove(G_GNUC_UNUSED VALUE self, VALUE tag)
     return CBOOL2RVAL(g_source_remove(NUM2UINT(tag)));
 }
 
-#if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
 source_current_source(G_GNUC_UNUSED VALUE self)
 {
     return BOXED2RVAL(g_main_current_source, G_TYPE_SOURCE);
 }
-#endif
 
 static gboolean
 invoke_source_func(gpointer data)
@@ -853,9 +851,7 @@ Init_glib_main_context(void)
 
     mGLibSource = rb_const_get(mGLib, rb_intern("Source"));
     rbg_define_singleton_method(mGLibSource, "remove", source_remove, 1);
-#if GLIB_CHECK_VERSION(2,12,0)
     rbg_define_singleton_method(mGLibSource, "current", source_current_source, 0);
-#endif
 /*
     id_poll_func = rb_intern("__poll_func__");
 */
