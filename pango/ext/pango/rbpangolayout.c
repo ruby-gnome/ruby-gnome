@@ -221,7 +221,6 @@ rg_justify_p(VALUE self)
     return CBOOL2RVAL(pango_layout_get_justify(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rg_set_auto_dir(VALUE self, VALUE auto_dir)
 {
@@ -233,7 +232,6 @@ rg_auto_dir_p(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_get_auto_dir(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_set_alignment(VALUE self, VALUE align)
@@ -513,10 +511,8 @@ Init_pango_layout(VALUE mPango)
     RG_DEF_METHOD(set_spacing, 1);
     RG_DEF_METHOD(set_justify, 1);
     RG_DEF_METHOD_P(justify, 0);
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(set_auto_dir, 1);
     RG_DEF_METHOD_P(auto_dir, 0);
-#endif
     RG_DEF_METHOD(set_alignment, 1);
     RG_DEF_METHOD(alignment, 0);
     RG_DEF_METHOD(set_tabs, 1);
