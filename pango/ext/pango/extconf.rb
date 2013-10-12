@@ -58,7 +58,7 @@ check_cairo(rcairo_options)
 
 setup_win32(module_name, base_dir)
 
-unless required_pkg_config_package(package_id,
+unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :debian => "libpango1.0-dev",
                                    :redhat => "pango-devel",
                                    :homebrew => "pango",
