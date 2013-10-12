@@ -24,30 +24,6 @@
 #define RG_TARGET_NAMESPACE cLayoutLine
 #define _SELF(r) (RVAL2PANGOLAYOUTLINE(r))
 
-/**********************************/
-#if !PANGO_CHECK_VERSION(1,9,0)
-static PangoLayoutLine*
-layout_line_copy(PangoLayoutLine *ref)
-{
-  g_return_val_if_fail (ref != NULL, NULL);
-  pango_layout_line_ref(ref);
-  return ref;
-}
-
-GType
-pango_layout_line_get_type(void)
-{
-    static GType our_type = 0;
-
-    if (our_type == 0)
-        our_type = g_boxed_type_register_static ("PangoLayoutLine",
-                    (GBoxedCopyFunc)layout_line_copy,
-                    (GBoxedFreeFunc)pango_layout_line_unref);
-    return our_type;
-}
-#endif
-/**********************************/
-
 static VALUE
 rg_extents(VALUE self)
 {
@@ -148,7 +124,6 @@ rg_set_length(VALUE self, VALUE val)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,2,0)
 static VALUE
 rg_runs(VALUE self)
 {
@@ -166,7 +141,6 @@ rg_runs(VALUE self)
     }
     return ary;
 }
-#endif
 
 struct layout_line_set_runs_args {
     PangoLayoutLine *line;
@@ -214,7 +188,6 @@ rg_set_runs(VALUE self, VALUE attrs)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rg_paragraph_start_p(VALUE self)
 {
@@ -240,7 +213,6 @@ rg_set_resolved_dir(VALUE self, VALUE val)
     _SELF(self)->resolved_dir = NUM2UINT(val);
     return self;
 }
-#endif
 
 void
 Init_pango_layout_line(VALUE mPango)
@@ -258,15 +230,10 @@ Init_pango_layout_line(VALUE mPango)
     RG_DEF_METHOD(set_start_index, 1); 
     RG_DEF_METHOD(length, 0); 
     RG_DEF_METHOD(set_length, 1); 
-#if PANGO_CHECK_VERSION(1,2,0)
     RG_DEF_METHOD(runs, 0); 
-#endif
     RG_DEF_METHOD(set_runs, 1); 
-
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD_P(paragraph_start, 0); 
     RG_DEF_METHOD(set_paragraph_start, 1); 
     RG_DEF_METHOD(resolved_dir, 0); 
     RG_DEF_METHOD(set_resolved_dir, 1); 
-#endif
 }
