@@ -80,13 +80,11 @@ rg_set_font_map(VALUE self, VALUE font_map)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
 rg_font_map(VALUE self)
 {
     return GOBJ2RVAL(pango_context_get_font_map(_SELF(self)));
 }
-#endif
 #endif /* PANGO_ENABLE_BACKEND */
 
 static VALUE
@@ -159,7 +157,6 @@ rg_set_gravity_hint(VALUE self, VALUE gravity_hint)
 }
 #endif
 
-#if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
 rg_matrix(VALUE self)
 {
@@ -174,7 +171,6 @@ rg_set_matrix(VALUE self, VALUE matrix)
                              RVAL2PANGOMATRIX(matrix));
     return self;
 }
-#endif
 
 static VALUE
 rg_load_font(VALUE self, VALUE desc)
@@ -222,8 +218,7 @@ rg_families(VALUE self)
     return result;
 }
 
-#if PANGO_CHECK_VERSION(1,10,0)
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
 static VALUE
 rg_set_font_options(VALUE self, VALUE options)
 {
@@ -258,7 +253,6 @@ rg_resolution(VALUE self)
 {
     return rb_float_new(pango_cairo_context_get_resolution(_SELF(self)));
 }
-#  endif
 #endif
 
 static VALUE
@@ -278,9 +272,7 @@ Init_pango_context(VALUE mPango)
 #ifdef PANGO_ENABLE_BACKEND
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_font_map, 1);
-#if PANGO_CHECK_VERSION(1,6,0)
     RG_DEF_METHOD(font_map, 0);
-#endif
 #endif /* PANGO_ENABLE_BACKEND */
     RG_DEF_METHOD(font_description, 0);
     RG_DEF_METHOD(set_font_description, 1);
@@ -294,22 +286,18 @@ Init_pango_context(VALUE mPango)
     RG_DEF_METHOD(gravity_hint, 0);
     RG_DEF_METHOD(set_gravity_hint, 1);
 #endif
-#if PANGO_CHECK_VERSION(1,6,0)
     RG_DEF_METHOD(matrix, 0);
     RG_DEF_METHOD(set_matrix, 1);
-#endif
     RG_DEF_METHOD(load_font, 1);
     RG_DEF_METHOD(load_fontset, 2);
     RG_DEF_METHOD(get_metrics, -1);
     RG_DEF_METHOD(families, 0);
 
-#if PANGO_CHECK_VERSION(1,10,0)
-#  ifdef HAVE_RB_CAIRO_H
+#ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(set_font_options, 1);
     RG_DEF_METHOD(font_options, 0);
     RG_DEF_METHOD(set_resolution, 1);
     RG_DEF_METHOD(resolution, 0);
-#  endif
 #endif
 
     /* This will remove 2 or 3 releases later since 0.14.0. */
