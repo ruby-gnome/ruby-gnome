@@ -21,7 +21,6 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,4,0)
 #define RG_TARGET_NAMESPACE cScript
 #define _SELF(r) (RVAL2PANGOSCRIPT(r))
 
@@ -71,17 +70,14 @@ rg_get_gravity(int argc, VALUE *argv, VALUE self)
 gboolean    pango_language_includes_script  (PangoLanguage *language,
                                              PangoScript script);
 */
-#endif
 
 void
 Init_pango_script(VALUE mPango)
 {
-#if PANGO_CHECK_VERSION(1,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_SCRIPT, "Script", mPango);
 
     RG_DEF_SMETHOD(for_unichar, 1);
     RG_DEF_METHOD(sample_language, 0);
-#endif
 #if PANGO_CHECK_VERSION(1,16,0)
     RG_DEF_METHOD(get_gravity, -1);
 #endif
