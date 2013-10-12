@@ -7,7 +7,7 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
-#if PANGO_CHECK_VERSION(1,10,0) && defined(HAVE_RB_CAIRO_H)
+#if defined(HAVE_RB_CAIRO_H)
 #  define CAIRO_AVAILABLE 1
 #endif
 
