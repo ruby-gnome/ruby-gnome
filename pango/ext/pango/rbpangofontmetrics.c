@@ -48,7 +48,6 @@ rg_approximate_digit_width(VALUE self)
     return INT2NUM(pango_font_metrics_get_approximate_digit_width(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
 rg_underline_thickness(VALUE self)
 {
@@ -69,7 +68,7 @@ rg_strikethrough_position(VALUE self)
 {
     return INT2NUM(pango_font_metrics_get_strikethrough_position(_SELF(self)));
 }
-#endif
+
 void
 Init_pango_font_metrics(VALUE mPango)
 {
@@ -79,10 +78,8 @@ Init_pango_font_metrics(VALUE mPango)
     RG_DEF_METHOD(descent, 0);
     RG_DEF_METHOD(approximate_char_width, 0);
     RG_DEF_METHOD(approximate_digit_width, 0);
-#if PANGO_CHECK_VERSION(1,6,0)
     RG_DEF_METHOD(underline_thickness, 0);
     RG_DEF_METHOD(underline_position, 0);
     RG_DEF_METHOD(strikethrough_thickness, 0);
     RG_DEF_METHOD(strikethrough_position, 0);
-#endif
 }
