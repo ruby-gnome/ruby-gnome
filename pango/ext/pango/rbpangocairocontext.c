@@ -22,7 +22,7 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,10,0) && defined(HAVE_RB_CAIRO_H)
+#if defined(HAVE_RB_CAIRO_H)
 #  define CAIRO_AVAILABLE 1
 #endif
 
@@ -75,7 +75,6 @@ rg_show_pango_layout(VALUE self, VALUE layout)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
 rg_show_pango_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
@@ -84,7 +83,6 @@ rg_show_pango_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE h
                                      NUM2DBL(width), NUM2DBL(height));
     return self;
 }
-#endif
 
 /* Rendering to a path */
 static VALUE
@@ -110,7 +108,6 @@ rg_pango_layout_path(VALUE self, VALUE layout)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
 rg_pango_error_underline_path(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
@@ -119,7 +116,6 @@ rg_pango_error_underline_path(VALUE self, VALUE x, VALUE y, VALUE width, VALUE h
                                      NUM2DBL(width), NUM2DBL(height));
     return self;
 }
-#endif
 
 #endif
 
@@ -136,16 +132,11 @@ Init_pango_cairo_context(VALUE mPango)
     RG_DEF_METHOD(show_pango_glyph_string, 2);
     RG_DEF_METHOD(show_pango_layout_line, 1);
     RG_DEF_METHOD(show_pango_layout, 1);
-#if PANGO_CHECK_VERSION(1,14,0)
     RG_DEF_METHOD(show_pango_error_underline, 4);
-#endif
     /* Rendering to a path */
     RG_DEF_METHOD(pango_glyph_string_path, 2);
     RG_DEF_METHOD(pango_layout_line_path, 1);
     RG_DEF_METHOD(pango_layout_path, 1);
-
-#if PANGO_CHECK_VERSION(1,14,0)
     RG_DEF_METHOD(pango_error_underline_path, 4);
-#endif
 #endif
 }
