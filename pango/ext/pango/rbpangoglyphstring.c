@@ -62,13 +62,11 @@ rg_extents(int argc, VALUE *argv, VALUE self)
                         PANGORECTANGLE2RVAL(&logical_rect));
 }
 
-#if PANGO_CHECK_VERSION(1,14,0)
 static VALUE
 rg_width(VALUE self)
 {
     return INT2NUM(pango_glyph_string_get_width(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_index_to_x(VALUE self, VALUE text, VALUE analysis, VALUE index, VALUE trailing)
@@ -145,9 +143,7 @@ Init_pango_glyph_string(VALUE mPango)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(set_size, 1);
     RG_DEF_METHOD(extents, -1);
-#if PANGO_CHECK_VERSION(1,14,0)
     RG_DEF_METHOD(width, 0);
-#endif
     RG_DEF_METHOD(index_to_x, 4);
     RG_DEF_METHOD(x_to_index, 3);
     RG_DEF_METHOD(get_logical_widths, 2);
