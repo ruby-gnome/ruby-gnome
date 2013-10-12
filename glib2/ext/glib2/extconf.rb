@@ -16,7 +16,7 @@ require 'mkmf-gnome2'
 
 setup_win32(module_name, base_dir)
 
-unless required_pkg_config_package(package_id,
+unless required_pkg_config_package([package_id, 2, 12, 0],
                                    :debian => "libglib2.0-dev",
                                    :redhat => "glib2-devel",
                                    :homebrew => "glib",
