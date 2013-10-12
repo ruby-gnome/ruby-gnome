@@ -84,10 +84,7 @@ ATTR_BOOL(is_word_end);
 ATTR_BOOL(is_sentence_boundary);
 ATTR_BOOL(is_sentence_start);
 ATTR_BOOL(is_sentence_end);
-
-#if PANGO_CHECK_VERSION(1,4,0)
 ATTR_BOOL(backspace_deletes_character);
-#endif
 
 void
 Init_pango_logattr(VALUE mPango)
@@ -107,8 +104,6 @@ Init_pango_logattr(VALUE mPango)
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, sentence_start);
     DEFINE_ACCESSOR(RG_TARGET_NAMESPACE, sentence_end);
 
-#if PANGO_CHECK_VERSION(1,4,0)
     rbg_define_method(RG_TARGET_NAMESPACE, "backspace_deletes_character?", log_get_backspace_deletes_character, 0); 
     rbg_define_method(RG_TARGET_NAMESPACE, "set_backspace_deletes_character", log_set_backspace_deletes_character, 1); 
-#endif
 }
