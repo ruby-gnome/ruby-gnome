@@ -41,22 +41,6 @@ item_int_set_ ## name (VALUE self, VALUE val)\
     rbg_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(name), item_int_ ## name, 0);\
     rbg_define_method(RG_TARGET_NAMESPACE, G_STRINGIFY(set_ ## name), item_int_set_ ## name, 1);
 
-/**********************************/
-#if ! PANGO_CHECK_VERSION(1,9,0)
-GType
-pango_item_get_type(void)
-{
-    static GType our_type = 0;
-
-    if (our_type == 0)
-        our_type = g_boxed_type_register_static ("PangoItem",
-                    (GBoxedCopyFunc)pango_item_copy,
-                    (GBoxedFreeFunc)pango_item_free);
-    return our_type;
-}
-#endif
-/**********************************/
-
 static VALUE
 rg_initialize(VALUE self)
 {
