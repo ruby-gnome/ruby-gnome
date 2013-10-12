@@ -21,7 +21,6 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,2,0)
 #define RG_TARGET_NAMESPACE cGlyphItem
 #define _SELF(r) (RVAL2PANGOGLYPHITEM(r))
 
@@ -102,7 +101,6 @@ rg_appy_attrs(VALUE self, VALUE text, VALUE attrs)
     return ret;
 }
 
-#if PANGO_CHECK_VERSION(1,6,0)
 static VALUE
 rg_letter_space(VALUE self, VALUE text, VALUE log_attrs, VALUE letter_spacing)
 {
@@ -111,13 +109,10 @@ rg_letter_space(VALUE self, VALUE text, VALUE log_attrs, VALUE letter_spacing)
                                   NUM2INT(letter_spacing));
     return self;
 }
-#endif
-#endif
 
 void
 Init_pango_glyph_item(VALUE mPango)
 {
-#if PANGO_CHECK_VERSION(1,2,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_GLYPH_ITEM, "GlyphItem", mPango);
 
     RG_DEF_METHOD(item, 0);
@@ -126,8 +121,5 @@ Init_pango_glyph_item(VALUE mPango)
     RG_DEF_METHOD(split, 2);
     RG_DEF_METHOD(appy_attrs, 2);
 
-#if PANGO_CHECK_VERSION(1,6,0)
     RG_DEF_METHOD(letter_space, 3);
-#endif
-#endif
 }
