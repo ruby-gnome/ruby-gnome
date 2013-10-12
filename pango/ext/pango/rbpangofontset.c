@@ -38,7 +38,6 @@ rg_metrics(VALUE self)
     return PANGOFONTMETRICS2RVAL(pango_fontset_get_metrics(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static gboolean
 fontset_each(PangoFontset *fontset, PangoFont *font, gpointer func)
 {
@@ -56,7 +55,6 @@ rg_each(VALUE self)
                           (gpointer)func);
     return self;
 }
-#endif
 
 void
 Init_pango_fontset(VALUE mPango)
@@ -67,7 +65,5 @@ Init_pango_fontset(VALUE mPango)
 
     RG_DEF_METHOD(get_font, 1);
     RG_DEF_METHOD(metrics, 0);
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(each, 0);
-#endif
 }
