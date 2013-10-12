@@ -71,13 +71,11 @@ rg_families(VALUE self)
     return result;
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rg_shape_engine_type(VALUE self)
 {
     return CSTR2RVAL(pango_font_map_get_shape_engine_type(_SELF(self)));
 }
-#endif
 
 void
 Init_pango_font_map(VALUE mPango)
@@ -90,9 +88,7 @@ Init_pango_font_map(VALUE mPango)
     RG_DEF_METHOD(load_font, 2);
     RG_DEF_METHOD(load_fontset, 3);
     RG_DEF_METHOD(families, 0);
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(shape_engine_type, 0);
-#endif
 
     G_DEF_CLASS3("PangoFcFontMap", "FcFontMap", mPango);
     G_DEF_CLASS3("PangoXftFontMap", "XftFontMap", mPango);
