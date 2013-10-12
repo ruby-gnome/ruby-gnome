@@ -21,8 +21,6 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,6,0)
-
 #define RG_TARGET_NAMESPACE cMatrix
 #define _SELF(self) (RVAL2PANGOMATRIX(self))
 
@@ -99,13 +97,11 @@ rg_concat_bang(VALUE self, VALUE new_matrix)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,12,0)
 static VALUE
 rg_font_scale_factor(VALUE self)
 {
     return rb_float_new(pango_matrix_get_font_scale_factor(_SELF(self)));
 }
-#endif
 
 ATTR_FLOAT(xx);
 ATTR_FLOAT(xy);
@@ -122,12 +118,9 @@ rg_to_a(VALUE self)
                        INT2NUM(matrix->yy), INT2NUM(matrix->x0), INT2NUM(matrix->y0));
 }
 
-#endif
-
 void
 Init_pango_matrix(VALUE mPango)
 {
-#if PANGO_CHECK_VERSION(1,6,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_MATRIX, "Matrix", mPango);
 
     RG_DEF_METHOD(initialize, -1);
@@ -135,9 +128,7 @@ Init_pango_matrix(VALUE mPango)
     RG_DEF_METHOD_BANG(scale, 2);
     RG_DEF_METHOD_BANG(rotate, 1);
     RG_DEF_METHOD_BANG(concat, 1);
-#if PANGO_CHECK_VERSION(1,12,0)
     RG_DEF_METHOD(font_scale_factor, 0);
-#endif
 #if PANGO_CHECK_VERSION(1,16,0)
     RG_DEF_METHOD(gravity, 0);
 #endif
@@ -149,5 +140,4 @@ Init_pango_matrix(VALUE mPango)
     DEFINE_ACCESSOR(yy);
     DEFINE_ACCESSOR(x0);
     DEFINE_ACCESSOR(y0);
-#endif
 }
