@@ -63,13 +63,11 @@ rg_attach(int argc, VALUE *argv, VALUE self)
                                     RVAL2BOXED(context, G_TYPE_MAIN_CONTEXT)));
 }
 
-#if GLIB_CHECK_VERSION(2,12,0)
 static VALUE
 rg_destroyed_p(VALUE self)
 {
     return CBOOL2RVAL(g_source_is_destroyed(_SELF(self)));
 }
-#endif
 
 static VALUE
 rg_set_priority(VALUE self, VALUE priority)
@@ -178,9 +176,7 @@ Init_glib_source(void)
                     "CONTINUE", CBOOL2RVAL(G_SOURCE_CONTINUE));
 
     RG_DEF_METHOD(attach, -1);
-#if GLIB_CHECK_VERSION(2,12,0)
     RG_DEF_METHOD_P(destroyed, 0);
-#endif
     RG_DEF_METHOD(set_priority, 1);
     RG_DEF_METHOD(priority, 0);
     RG_DEF_METHOD(set_can_recurse, 1);
