@@ -21,8 +21,6 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,4,0)
-
 /**********************************/
 static PangoScriptIter*
 rbpango_script_iter_copy(PangoScriptIter *ref)
@@ -82,16 +80,13 @@ rg_next_bang(VALUE self)
 {
     return CBOOL2RVAL(pango_script_iter_next(_SELF(self)));
 }
-#endif
 
 void
 Init_pango_script_iter(VALUE mPango)
 {
-#if PANGO_CHECK_VERSION(1,4,0)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_SCRIPT_ITER, "ScriptIter", mPango);
 
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(range, 0);
     RG_DEF_METHOD_BANG(next, 0);
-#endif
 }
