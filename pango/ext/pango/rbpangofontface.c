@@ -36,7 +36,6 @@ rg_describe(VALUE self)
     return PANGOFONTDESCRIPTION2RVAL(pango_font_face_describe(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rg_sizes(VALUE self)
 {
@@ -56,7 +55,6 @@ rg_sizes(VALUE self)
     g_free(sizes);
     return result;
 }
-#endif
 
 void
 Init_pango_font_face(VALUE mPango)
@@ -65,15 +63,11 @@ Init_pango_font_face(VALUE mPango)
 
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(describe, 0);
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(sizes, 0);
-#endif
     G_DEF_CLASS3("PangoFcFace", "FcFace", mPango);
     G_DEF_CLASS3("PangoFT2Face", "FT2Face", mPango);
     G_DEF_CLASS3("PangoXftFace", "XftFace", mPango);
     G_DEF_CLASS3("PangoXFace", "XFace", mPango);
     G_DEF_CLASS3("PangoWin32Face", "Win32Face", mPango);
-#if PANGO_CHECK_VERSION(1,12,0)
     G_DEF_CLASS3("PangoATSUIFace", "ATSUIFace", mPango);
-#endif
 }
