@@ -45,9 +45,7 @@ DEF_IS_UNICHAR(xdigit)
 DEF_IS_UNICHAR(title)
 DEF_IS_UNICHAR(defined)
 DEF_IS_UNICHAR(wide)
-#if GLIB_CHECK_VERSION(2,12,0)
 DEF_IS_UNICHAR(wide_cjk)
-#endif
 
 #undef DEF_IS_UNICHAR
 
@@ -177,10 +175,8 @@ Init_glib_unichar(void)
                               rbglib_m_unichar_isdefined, 1);
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "wide?",
                               rbglib_m_unichar_iswide, 1);
-#if GLIB_CHECK_VERSION(2,12,0)
     rbg_define_singleton_method(RG_TARGET_NAMESPACE, "wide_cjk?",
                               rbglib_m_unichar_iswide_cjk, 1);
-#endif
 
     RG_DEF_SMETHOD(to_upper, 1);
     RG_DEF_SMETHOD(to_lower, 1);
