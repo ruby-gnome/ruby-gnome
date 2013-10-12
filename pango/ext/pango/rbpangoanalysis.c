@@ -56,7 +56,6 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-#if PANGO_CHECK_VERSION(1,4,0)
 static VALUE
 rg_set_shape_engine(VALUE self, VALUE engine)
 {
@@ -100,7 +99,6 @@ rg_lang_engine(VALUE self)
     }
     return ret;
 }
-#endif
 
 static VALUE
 rg_set_font(VALUE self, VALUE font)
@@ -204,12 +202,10 @@ Init_pango_analysis(VALUE mPango)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_ANALYSIS, "Analysis", mPango);
 
     RG_DEF_METHOD(initialize, 0);
-#if PANGO_CHECK_VERSION(1,4,0)
     RG_DEF_METHOD(set_shape_engine, 1);
     RG_DEF_METHOD(shape_engine, 0);
     RG_DEF_METHOD(set_lang_engine, 1);
     RG_DEF_METHOD(lang_engine, 0);
-#endif
     RG_DEF_METHOD(set_font, 1);
     RG_DEF_METHOD(font, 0);
     RG_DEF_METHOD(set_level, 1);
