@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -25,7 +24,6 @@
 #define RG_TARGET_NAMESPACE cCairoFontMap
 #define _SELF(self) (RVAL2PANGOCAIROFONTMAP(self))
 
-#if CAIRO_CHECK_VERSION(1, 8, 0)
 static VALUE
 rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 {
@@ -55,7 +53,6 @@ rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 
     return GOBJ2RVAL(font_map);
 }
-#endif
 
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE klass)
