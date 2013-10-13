@@ -22,10 +22,6 @@
 
 #include "rbpangoprivate.h"
 
-#ifdef HAVE_RB_CAIRO_H
-#  define CAIRO_AVAILABLE 1
-#endif
-
 #ifdef CAIRO_AVAILABLE
 
 #define RG_TARGET_NAMESPACE rb_cCairo_Context
