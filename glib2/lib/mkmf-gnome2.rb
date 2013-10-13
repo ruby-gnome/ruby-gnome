@@ -3,7 +3,7 @@
 #
 # Extended mkmf for Ruby-GNOME2 and Ruby/GLib based libraries.
 #
-# Copyright(C) 2003-2011 Ruby-GNOME2 Project.
+# Copyright(C) 2003-2013 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same
 # license of Ruby-GNOME2.
@@ -11,13 +11,7 @@
 
 require 'English'
 require 'mkmf'
-begin
-  require 'pkg-config'
-rescue LoadError
-  require 'rubygems'
-  gem 'pkg-config'
-  require 'pkg-config'
-end
+require 'pkg-config'
 require 'glib-mkenums'
 
 $CFLAGS += " #{ENV['CFLAGS']}" if ENV['CFLAGS']
