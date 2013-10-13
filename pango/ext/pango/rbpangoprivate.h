@@ -7,10 +7,6 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
-#ifdef HAVE_RB_CAIRO_H
-#  define CAIRO_AVAILABLE 1
-#endif
-
 G_BEGIN_DECLS
 
 G_GNUC_INTERNAL void Init_pango_analysis(VALUE mPango);

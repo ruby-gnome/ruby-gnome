@@ -54,7 +54,9 @@ rcairo_source_dir_names.each do |rcairo_source_dir_name|
     break
   end
 end
-check_cairo(rcairo_options)
+unless check_cairo(rcairo_options)
+  exit(false)
+end
 
 setup_win32(module_name, base_dir)
 

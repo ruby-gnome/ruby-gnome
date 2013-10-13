@@ -253,11 +253,7 @@ rg_s_pixels(G_GNUC_UNUSED VALUE self, VALUE pixels)
 static VALUE
 rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
-#ifdef CAIRO_AVAILABLE
     return Qtrue;
-#else
-    return Qfalse;
-#endif
 }
 
 void

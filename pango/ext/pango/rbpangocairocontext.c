@@ -22,8 +22,6 @@
 
 #include "rbpangoprivate.h"
 
-#ifdef CAIRO_AVAILABLE
-
 #define RG_TARGET_NAMESPACE rb_cCairo_Context
 
 static VALUE
@@ -113,12 +111,9 @@ rg_pango_error_underline_path(VALUE self, VALUE x, VALUE y, VALUE width, VALUE h
     return self;
 }
 
-#endif
-
 void
-Init_pango_cairo_context(VALUE mPango)
+Init_pango_cairo_context(G_GNUC_UNUSED VALUE mPango)
 {
-#ifdef CAIRO_AVAILABLE
     /* Cairo::Context */
     RG_DEF_METHOD(update_pango_context, 1);
     /* Convenience */
@@ -134,5 +129,4 @@ Init_pango_cairo_context(VALUE mPango)
     RG_DEF_METHOD(pango_layout_line_path, 1);
     RG_DEF_METHOD(pango_layout_path, 1);
     RG_DEF_METHOD(pango_error_underline_path, 4);
-#endif
 }
