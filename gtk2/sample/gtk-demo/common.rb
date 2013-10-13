@@ -11,7 +11,12 @@ require 'gtk2'
 
 module Demo
   def self.find_file(basename)
-    %w(. /usr/share/gtk-2.0/demo /usr/local/share/gtk-2.0/demo/).each do |dirname|
+    file_load_paths = [
+      File.dirname(__FILE__),
+      "/usr/share/gtk-2.0/demo",
+      "/usr/local/share/gtk-2.0/demo",
+    ]
+    file_load_paths.each do |dirname|
       path = File.join(dirname, basename)
       if File.exist?(path)
 	return path
