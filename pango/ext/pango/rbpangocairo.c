@@ -88,7 +88,15 @@ rg_resolution(VALUE self)
 static VALUE
 rg_create_context(VALUE self)
 {
-    return GOBJ2RVAL_UNREF(pango_cairo_font_map_create_context(_SELF(self)));
+    PangoContext *pango_context;
+
+#if PANGO_CHECK_VERSION(1, 22, 0)
+    pango_context = pango_font_map_create_context(PANGO_FONT_MAP(_SELF(self)));
+#else
+    pango_context = pango_cairo_font_map_create_context(_SELF(self));
+#endif
+
+    return GOBJ2RVAL_UNREF(pango_context);
 }
 
 void
@@ -99,9 +107,7 @@ Init_pango_cairo(VALUE mPango)
     /* Pango::CairoFontMap */
     RG_TARGET_NAMESPACE = G_DEF_CLASS(PANGO_TYPE_CAIRO_FONT_MAP, "CairoFontMap", mPango);
 
-#if CAIRO_CHECK_VERSION(1, 8, 0)
     RG_DEF_SMETHOD(create, -1);
-#endif
     RG_DEF_SMETHOD(default, 0);
 #if PANGO_CHECK_VERSION(1, 22, 0)
     RG_DEF_SMETHOD(set_default, 1);
