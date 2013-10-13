@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -72,8 +71,8 @@ rg_show_pango_layout(VALUE self, VALUE layout)
 static VALUE
 rg_show_pango_error_underline(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-    pango_cairo_show_error_underline(RVAL2CRCONTEXT(self), 
-                                     NUM2DBL(x), NUM2DBL(y), 
+    pango_cairo_show_error_underline(RVAL2CRCONTEXT(self),
+                                     NUM2DBL(x), NUM2DBL(y),
                                      NUM2DBL(width), NUM2DBL(height));
     return self;
 }
@@ -105,8 +104,8 @@ rg_pango_layout_path(VALUE self, VALUE layout)
 static VALUE
 rg_pango_error_underline_path(VALUE self, VALUE x, VALUE y, VALUE width, VALUE height)
 {
-    pango_cairo_error_underline_path(RVAL2CRCONTEXT(self), 
-                                     NUM2DBL(x), NUM2DBL(y), 
+    pango_cairo_error_underline_path(RVAL2CRCONTEXT(self),
+                                     NUM2DBL(x), NUM2DBL(y),
                                      NUM2DBL(width), NUM2DBL(height));
     return self;
 }
