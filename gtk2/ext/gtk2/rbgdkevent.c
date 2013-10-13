@@ -44,9 +44,6 @@ static VALUE rb_cGdkEventDND;
 static VALUE rb_cGdkEventWindowState;
 static VALUE rb_cGdkEventSetting;
 static VALUE rb_cGdkEventGrabBroken;
-#if GTK_CHECK_VERSION(2, 14, 0)
-static VALUE rb_cGdkEventDamage;
-#endif
 
 #define DEFINE_EVENT_TYPE(type_lower_case, type_upper_case)             \
 static GType                                                            \
@@ -81,9 +78,6 @@ DEFINE_EVENT_TYPE(dnd, DND)
 DEFINE_EVENT_TYPE(window_state, WindowState)
 DEFINE_EVENT_TYPE(setting, Setting)
 DEFINE_EVENT_TYPE(grab_broken, GrabBroken)
-#if GTK_CHECK_VERSION(2, 14, 0)
-DEFINE_EVENT_TYPE(damage, Damage)
-#endif
 
 #define GDK_TYPE_EVENT_ANY          (rb_gdk_event_any_get_type())
 #define GDK_TYPE_EVENT_EXPOSE       (rb_gdk_event_expose_get_type())
@@ -105,7 +99,6 @@ DEFINE_EVENT_TYPE(damage, Damage)
 #define GDK_TYPE_EVENT_WINDOW_STATE (rb_gdk_event_window_state_get_type())
 #define GDK_TYPE_EVENT_SETTING      (rb_gdk_event_setting_get_type())
 #define GDK_TYPE_EVENT_GRAB_BROKEN  (rb_gdk_event_grab_broken_get_type())
-#define GDK_TYPE_EVENT_DAMAGE       (rb_gdk_event_damage_get_type())
 
 /***********************************************/
 
@@ -360,10 +353,6 @@ rb_gdk_event_to_gtype(VALUE event)
         type = GDK_TYPE_EVENT_SETTING;
     } else if (klass == rb_cGdkEventGrabBroken) {
         type = GDK_TYPE_EVENT_GRAB_BROKEN;
-#if GTK_CHECK_VERSION(2, 14, 0)
-    } else if (klass == rb_cGdkEventDamage) {
-        type = GDK_TYPE_EVENT_DAMAGE;
-#endif
     } else {
         rb_raise(rb_eArgError, "Not event object: %s", RBG_INSPECT(event));
     }
@@ -1266,11 +1255,6 @@ Init_gtk_gdk_event(VALUE mGdk)
     DEFINE_ACCESSOR(rb_cGdkEventGrabBroken, grab_broken, grab_window);
     DEFINE_INIT(rb_cGdkEventGrabBroken, grab_broken);
     G_DEF_SETTERS(rb_cGdkEventGrabBroken);
-
-#if GTK_CHECK_VERSION(2, 14, 0)
-    rb_cGdkEventDamage =
-        G_DEF_CLASS(GDK_TYPE_EVENT_DAMAGE, "EventDamage", mGdk);
-#endif
 
     rbgobj_register_g2r_func(GDK_TYPE_EVENT, &gdkevent_g2r);
 }
