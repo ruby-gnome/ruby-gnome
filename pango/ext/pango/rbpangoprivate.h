@@ -7,7 +7,7 @@
 #  define rb_errinfo() (ruby_errinfo)
 #endif
 
-#if defined(HAVE_RB_CAIRO_H)
+#ifdef HAVE_RB_CAIRO_H
 #  define CAIRO_AVAILABLE 1
 #endif
 
