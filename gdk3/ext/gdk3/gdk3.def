@@ -7,6 +7,6 @@ EXPORTS
     gdk_geometry_get_type
     gdk_windowattr_get_type
     get_gdkatom
-    get_gdkevent
-    make_gdkevent
+    rbgdk_gdkevent2rval
+    rbgdk_rval2gdkevent
 

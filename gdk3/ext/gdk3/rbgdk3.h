@@ -41,8 +41,10 @@
 
 #define RVAL2GDKPIXBUFGLIST(value) rbgdk_rval2gdkpixbufglist(value)
 
-#define GEV2RVAL(ev) (make_gdkevent(ev))
-#define RVAL2GEV(ev) (get_gdkevent(ev))
+/* for bcakword compatibility. TODO: remove me. */
+#define GEV2RVAL(ev) GDKEVENT2RVAL(ev)
+#define RVAL2GEV(ev) RVAL2GDKEVENT(ev)
+
 #define RVAL2ATOM(atom) (get_gdkatom(atom))
 
 #define GDK_TYPE_GEOMETRY (gdk_geometry_get_type())
@@ -65,7 +67,7 @@ extern GType gdk_geometry_get_type(void);
 extern GType gdk_timecoord_get_type(void);
 
 extern GdkAtom get_gdkatom(VALUE atom);
-extern VALUE make_gdkevent(GdkEvent* event);
-extern GdkEvent* get_gdkevent(VALUE event);
+extern VALUE rbgdk_gdkevent2rval(GdkEvent *event);
+extern GdkEvent *rbgdk_rval2gdkevent(VALUE event);
 
 #endif /* __RBGDK3_H__ */
