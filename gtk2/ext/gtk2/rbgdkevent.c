@@ -1010,14 +1010,18 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_CONSTANTS(rb_cGdkEvent, GDK_TYPE_EVENT_MASK, "GDK_");
 
     /* GdkEventAny */
-    rb_cGdkEventAny = G_DEF_CLASS(GDK_TYPE_EVENT_ANY, "EventAny", mGdk);
+    rb_cGdkEventAny =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_ANY, "EventAny",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventAny, any, window);
     rb_define_method(rb_cGdkEventAny, "send_event?", gdkeventany_send_event, 0);
     rb_define_method(rb_cGdkEventAny, "set_send_event", gdkeventany_set_send_event, 1);
     G_DEF_SETTERS(rb_cGdkEventAny);
 
     /* GdkEventExpose */
-    rb_cGdkEventExpose = G_DEF_CLASS(GDK_TYPE_EVENT_EXPOSE, "EventExpose", mGdk);
+    rb_cGdkEventExpose =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_EXPOSE, "EventExpose",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventExpose, expose, area);
     DEFINE_ACCESSOR(rb_cGdkEventExpose, expose, region);
     DEFINE_ACCESSOR(rb_cGdkEventExpose, expose, count);
@@ -1028,12 +1032,14 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventNoExpose */
     rb_cGdkEventNoExpose =
-        G_DEF_CLASS(GDK_TYPE_EVENT_NO_EXPOSE, "EventNoExpose", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_NO_EXPOSE, "EventNoExpose",
+                                mGdk, rb_cGdkEvent);
     DEFINE_INIT(rb_cGdkEventNoExpose, noexpose);
 
     /* GdkEventVisibility */
     rb_cGdkEventVisibility =
-        G_DEF_CLASS(GDK_TYPE_EVENT_VISIBILITY, "EventVisibility", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_VISIBILITY, "EventVisibility",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventVisibility, visibility, state);
     DEFINE_INIT(rb_cGdkEventVisibility, visibility);
     G_DEF_SETTERS(rb_cGdkEventVisibility);
@@ -1045,7 +1051,9 @@ Init_gtk_gdk_event(VALUE mGdk)
 
 
     /* GdkEventMotion */
-    rb_cGdkEventMotion = G_DEF_CLASS(GDK_TYPE_EVENT_MOTION, "EventMotion", mGdk);
+    rb_cGdkEventMotion =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_MOTION, "EventMotion",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventMotion, motion, time);
     DEFINE_ACCESSOR(rb_cGdkEventMotion, motion, x);
     DEFINE_ACCESSOR(rb_cGdkEventMotion, motion, y);
@@ -1064,7 +1072,9 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_SETTERS(rb_cGdkEventMotion);
 
     /* GdkEventButton */
-    rb_cGdkEventButton = G_DEF_CLASS(GDK_TYPE_EVENT_BUTTON, "EventButton", mGdk);
+    rb_cGdkEventButton =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_BUTTON, "EventButton",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventButton, button, time);
     DEFINE_ACCESSOR(rb_cGdkEventButton, button, x);
     DEFINE_ACCESSOR(rb_cGdkEventButton, button, y);
@@ -1078,7 +1088,9 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_SETTERS(rb_cGdkEventButton);
 
     /* GdkEventScroll */
-    rb_cGdkEventScroll = G_DEF_CLASS(GDK_TYPE_EVENT_SCROLL, "EventScroll", mGdk);
+    rb_cGdkEventScroll =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_SCROLL, "EventScroll",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventScroll, scroll, time);
     DEFINE_ACCESSOR(rb_cGdkEventScroll, scroll, x);
     DEFINE_ACCESSOR(rb_cGdkEventScroll, scroll, y);
@@ -1096,7 +1108,9 @@ Init_gtk_gdk_event(VALUE mGdk)
                     GDK_TYPE_SCROLL_DIRECTION, "GDK_SCROLL_");
 
     /* GdkEventKey */
-    rb_cGdkEventKey = G_DEF_CLASS(GDK_TYPE_EVENT_KEY, "EventKey", mGdk);
+    rb_cGdkEventKey =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_KEY, "EventKey",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventKey, key, time);
     DEFINE_ACCESSOR(rb_cGdkEventKey, key, state);
     DEFINE_ACCESSOR(rb_cGdkEventKey, key, keyval);
@@ -1106,7 +1120,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventCrossing */
     rb_cGdkEventCrossing =
-        G_DEF_CLASS(GDK_TYPE_EVENT_CROSSING, "EventCrossing", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_CROSSING, "EventCrossing",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventCrossing, crossing, subwindow);
     DEFINE_ACCESSOR(rb_cGdkEventCrossing, crossing, time);
     DEFINE_ACCESSOR(rb_cGdkEventCrossing, crossing, x);
@@ -1130,7 +1145,9 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_CONSTANTS(rb_cGdkEventScroll, GDK_TYPE_NOTIFY_TYPE, "GDK_");
 
     /* GdkEventFocus */
-    rb_cGdkEventFocus = G_DEF_CLASS(GDK_TYPE_EVENT_FOCUS, "EventFocus", mGdk);
+    rb_cGdkEventFocus =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_FOCUS, "EventFocus",
+                                mGdk, rb_cGdkEvent);
     rb_define_method(rb_cGdkEventFocus, "in?", gdkeventfocus_change_in, 0);
     rb_define_method(rb_cGdkEventFocus, "set_in",
                      gdkeventfocus_change_set_in, 1);
@@ -1139,7 +1156,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventConfigure */
     rb_cGdkEventConfigure =
-        G_DEF_CLASS(GDK_TYPE_EVENT_CONFIGURE, "EventConfigure", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_CONFIGURE, "EventConfigure",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventConfigure, configure, x);
     DEFINE_ACCESSOR(rb_cGdkEventConfigure, configure, y);
     DEFINE_ACCESSOR(rb_cGdkEventConfigure, configure, width);
@@ -1149,7 +1167,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventProperty */
     rb_cGdkEventProperty =
-        G_DEF_CLASS(GDK_TYPE_EVENT_PROPERTY, "EventProperty", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_PROPERTY, "EventProperty",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventProperty, property, atom);
     DEFINE_ACCESSOR(rb_cGdkEventProperty, property, time);
     DEFINE_ACCESSOR(rb_cGdkEventProperty, property, state);
@@ -1162,7 +1181,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventSelection */
     rb_cGdkEventSelection =
-        G_DEF_CLASS(GDK_TYPE_EVENT_SELECTION, "EventSelection", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_SELECTION, "EventSelection",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventSelection, selection, selection);
     DEFINE_ACCESSOR(rb_cGdkEventSelection, selection, target);
     DEFINE_ACCESSOR(rb_cGdkEventSelection, selection, property);
@@ -1172,7 +1192,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventOwnerChange */
     rb_cGdkEventOwnerChange =
-        G_DEF_CLASS(GDK_TYPE_EVENT_OWNER_CHANGE, "EventOwnerChange", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_OWNER_CHANGE, "EventOwnerChange",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventOwnerChange, owner_change, owner);
     DEFINE_ACCESSOR(rb_cGdkEventOwnerChange, owner_change, reason);
     DEFINE_ACCESSOR(rb_cGdkEventOwnerChange, owner_change, selection);
@@ -1188,14 +1209,16 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventProximity */
     rb_cGdkEventProximity =
-        G_DEF_CLASS(GDK_TYPE_EVENT_PROXIMITY, "EventProximity", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_PROXIMITY, "EventProximity",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventProximity, proximity, time);
     DEFINE_ACCESSOR(rb_cGdkEventProximity, proximity, device);
     G_DEF_SETTERS(rb_cGdkEventProximity);
 
     /* GdkEventClient */
     rb_cGdkEventClient =
-        G_DEF_CLASS(GDK_TYPE_EVENT_CLIENT, "EventClient", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_CLIENT, "EventClient",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventClient, client, message_type);
     rb_define_method(rb_cGdkEventClient,
                      "data_format", gdkeventclient_data_format, 0);
@@ -1208,7 +1231,9 @@ Init_gtk_gdk_event(VALUE mGdk)
     G_DEF_SETTERS(rb_cGdkEventClient);
 
     /* GdkEventDND */
-    rb_cGdkEventDND = G_DEF_CLASS(GDK_TYPE_EVENT_DND, "EventDND", mGdk);
+    rb_cGdkEventDND =
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_DND, "EventDND",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventDND, dnd, context);
     DEFINE_ACCESSOR(rb_cGdkEventDND, dnd, time);
     DEFINE_ACCESSOR(rb_cGdkEventDND, dnd, x_root);
@@ -1217,7 +1242,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventWindowState */
     rb_cGdkEventWindowState =
-        G_DEF_CLASS(GDK_TYPE_EVENT_WINDOW_STATE, "EventWindowState", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_WINDOW_STATE, "EventWindowState",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventWindowState, window_state, changed_mask);
     DEFINE_ACCESSOR(rb_cGdkEventWindowState, window_state, new_window_state);
     DEFINE_INIT(rb_cGdkEventWindowState, window_state);
@@ -1230,7 +1256,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventSetting */
     rb_cGdkEventSetting =
-        G_DEF_CLASS(GDK_TYPE_EVENT_SETTING, "EventSetting", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_SETTING, "EventSetting",
+                                mGdk, rb_cGdkEvent);
     DEFINE_ACCESSOR(rb_cGdkEventSetting, setting, action);
     DEFINE_ACCESSOR(rb_cGdkEventSetting, setting, name);
     DEFINE_INIT(rb_cGdkEventSetting, setting);
@@ -1243,7 +1270,8 @@ Init_gtk_gdk_event(VALUE mGdk)
 
     /* GdkEventGrabBroken */
     rb_cGdkEventGrabBroken =
-        G_DEF_CLASS(GDK_TYPE_EVENT_GRAB_BROKEN, "EventGrabBroken", mGdk);
+        G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_GRAB_BROKEN, "EventGrabBroken",
+                                mGdk, rb_cGdkEvent);
     rb_define_method(rb_cGdkEventGrabBroken,
                      "keyboard?", gdkeventgrab_broken_keyboard, 0);
     rb_define_method(rb_cGdkEventGrabBroken,
