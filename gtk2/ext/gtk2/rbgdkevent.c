@@ -342,7 +342,7 @@ rb_gdk_event_to_gtype(VALUE event)
     } else if (klass == rb_cGdkEventOwnerChange) {
         type = GDK_TYPE_EVENT_OWNER_CHANGE;
     } else if (klass == rb_cGdkEventProximity) {
-        type = GDK_TYPE_EVENT_PROPERTY;
+        type = GDK_TYPE_EVENT_PROXIMITY;
     } else if (klass == rb_cGdkEventClient) {
         type = GDK_TYPE_EVENT_CLIENT;
     } else if (klass == rb_cGdkEventDND) {
