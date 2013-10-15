@@ -25,14 +25,12 @@
 DEF_ACCESSOR_WITH_SETTER(image_mapping, area,
                          RVAL2POPPLERIMAGEMAPPING, RECT_ENTITY2RVAL, RECT_ENTITY_SET)
 DEF_ACCESSOR(image_mapping, image_id, RVAL2POPPLERIMAGEMAPPING, INT2NUM, NUM2INT)
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 rg_image(VALUE self)
 {
     return rb_funcall(rb_iv_get(self, "@page"), rb_intern("get_image"),
                         1, INT2NUM(RVAL2POPPLERIMAGEMAPPING(self)->image_id));
 }
-#endif
 
 void
 Init_poppler_image_mapping(VALUE mPoppler)
@@ -42,9 +40,7 @@ Init_poppler_image_mapping(VALUE mPoppler)
 
     rbg_define_method(RG_TARGET_NAMESPACE, "area", image_mapping_get_area, 0);
     rbg_define_method(RG_TARGET_NAMESPACE, "image_id", image_mapping_get_image_id, 0);
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
     RG_DEF_METHOD(image, 0);
-#endif
 
     rbg_define_method(RG_TARGET_NAMESPACE, "set_area", image_mapping_set_area, 1);
     rbg_define_method(RG_TARGET_NAMESPACE, "set_image_id",

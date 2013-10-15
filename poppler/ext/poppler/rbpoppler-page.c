@@ -27,14 +27,12 @@
 static VALUE cRectangle;
 static VALUE cPSFile;
 
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 page_render(VALUE self, VALUE cairo)
 {
     poppler_page_render(SELF(self), RVAL2CRCONTEXT(cairo));
     return Qnil;
 }
-#endif
 
 static VALUE
 page_render_to_ps(VALUE self, VALUE ps_file)
@@ -49,34 +47,23 @@ rg_render(VALUE self, VALUE ps_file_or_cairo)
     if (RVAL2CBOOL(rb_obj_is_kind_of(ps_file_or_cairo, cPSFile))) {
         return page_render_to_ps(self, ps_file_or_cairo);
     } else {
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
         return page_render(self, ps_file_or_cairo);
-#else
-        rb_raise(rb_eArgError, "cairo is not available");
-#endif
     }
 }
 
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 page_render_for_printing(VALUE self, VALUE cairo)
 {
     poppler_page_render_for_printing(SELF(self), RVAL2CRCONTEXT(cairo));
     return Qnil;
 }
-#endif
 
 static VALUE
 rg_render_for_printing(VALUE self, VALUE cairo)
 {
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
     return page_render_for_printing(self, cairo);
-#else
-    rb_raise(rb_eArgError, "cairo is not available");
-#endif
 }
 
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 page_render_selection(VALUE self, VALUE cairo,
                       VALUE selection, VALUE rb_old_selection,
@@ -94,19 +81,14 @@ page_render_selection(VALUE self, VALUE cairo,
                                   RVAL2POPPLERCOLOR(background_color));
     return Qnil;
 }
-#endif
 
 static VALUE
 rg_render_selection(VALUE self,
                     VALUE cairo, VALUE selection, VALUE old_selection,
                     VALUE style, VALUE glyph_color, VALUE background_color)
 {
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
     return page_render_selection(self, cairo, selection, old_selection,
                                  style, glyph_color, background_color);
-#else
-    rb_raise(rb_eArgError, "cairo is not available");
-#endif
 }
 
 static VALUE
@@ -135,13 +117,11 @@ rg_transition(VALUE self)
     return POPPLERPAGETRANSITION2RVAL(poppler_page_get_transition(SELF(self)));
 }
 
-#if RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 rg_thumbnail(VALUE self)
 {
     return CRSURFACE2RVAL(poppler_page_get_thumbnail(SELF(self)));
 }
-#endif
 
 static VALUE
 rg_thumbnail_size(VALUE self)
@@ -273,23 +253,18 @@ rg_image_mapping(VALUE self)
 
         image_mapping = node->data;
         mapping = POPPLERIMAGEMAPPING2RVAL(image_mapping);
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
         rb_iv_set(mapping, "@page", self);
-#endif
-        rb_ary_push(mappings, mapping);
     }
     poppler_page_free_image_mapping(image_mapping);
 
     return mappings;
 }
 
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
 static VALUE
 rg_get_image(VALUE self, VALUE image_id)
 {
     return CRSURFACE2RVAL(poppler_page_get_image(SELF(self), NUM2INT(image_id)));
 }
-#endif
 
 static VALUE
 rg_form_field_mapping(VALUE self)
@@ -328,9 +303,7 @@ Init_poppler_page(VALUE mPoppler)
     RG_DEF_METHOD(duration, 0);
     RG_DEF_METHOD(transition, 0);
 
-#if RB_POPPLER_CAIRO_AVAILABLE
     RG_DEF_METHOD(thumbnail, 0);
-#endif
     RG_DEF_METHOD(thumbnail_size, 0);
     RG_DEF_METHOD(find_text, 1);
     RG_DEF_METHOD(get_text, -1);
@@ -340,9 +313,7 @@ Init_poppler_page(VALUE mPoppler)
     RG_DEF_METHOD(get_selection_region, 3);
     RG_DEF_METHOD(link_mapping, 0);
     RG_DEF_METHOD(image_mapping, 0);
-#if RB_POPPLER_CAIRO_AVAILABLE
     RG_DEF_METHOD(get_image, 1);
-#endif
 
     RG_DEF_METHOD(form_field_mapping, 0);
     RG_DEF_METHOD(annotation_mapping, 0);

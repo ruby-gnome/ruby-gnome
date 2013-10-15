@@ -39,11 +39,7 @@ rg_s_version(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
-#ifdef RB_POPPLER_CAIRO_AVAILABLE
     return Qtrue;
-#else
-    return Qfalse;
-#endif
 }
 
 void

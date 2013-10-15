@@ -47,8 +47,7 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  define RB_POPPLER_TYPE_DEST_NOT_DEFINED
 #endif
 
-#if defined(HAVE_RB_CAIRO_H) && defined(POPPLER_HAS_CAIRO)
-#  define RB_POPPLER_CAIRO_AVAILABLE 1
+#if efined(POPPLER_HAS_CAIRO)
 #  include <rb_cairo.h>
 #endif
 
