@@ -46,12 +46,6 @@
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
-#ifdef HAVE_RB_CAIRO_H
-#  define CAIRO_AVAILABLE 1
-#else
-#  define CAIRO_AVAILABLE 0
-#endif
-
 extern ID id_relative_callbacks;
 extern ID id_call;
 extern VALUE treeiter_set_value_table;
