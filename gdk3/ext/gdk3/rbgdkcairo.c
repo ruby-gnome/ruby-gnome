@@ -21,7 +21,6 @@
 
 #include "rbgdk3private.h"
 
-#if CAIRO_AVAILABLE
 #include <gdk/gdk.h>
 #include <rb_cairo.h>
 
@@ -78,12 +77,10 @@ rg_gdk_region(VALUE self, VALUE region)
     rb_cairo_check_status(cairo_status(_SELF(self)));
     return self;
 }
-#endif
 
 void
 Init_gdk_cairo(void)
 {
-#if CAIRO_AVAILABLE
     RG_DEF_METHOD(set_source_gdk_color, 1);
     RG_DEF_METHOD(set_source_pixbuf, -1);
 /* deprecated
@@ -91,5 +88,4 @@ Init_gdk_cairo(void)
 */
     RG_DEF_METHOD(gdk_rectangle, 1);
     RG_DEF_METHOD(gdk_region, 1);
-#endif
 }

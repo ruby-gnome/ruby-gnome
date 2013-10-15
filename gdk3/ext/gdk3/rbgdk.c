@@ -451,11 +451,7 @@ rg_s_target(G_GNUC_UNUSED VALUE self)
 static VALUE
 rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
 {
-#if CAIRO_AVAILABLE
     return Qtrue;
-#else
-    return Qfalse;
-#endif
 }
 
 void

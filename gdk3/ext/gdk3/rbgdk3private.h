@@ -44,12 +44,6 @@
 #  define G_VALUE_INIT { 0, { { 0 } } }
 #endif
 
-#if defined(HAVE_RB_CAIRO_H)
-#  define CAIRO_AVAILABLE 1
-#else
-#  define CAIRO_AVAILABLE 0
-#endif
-
 extern ID id_call;
 
 G_GNUC_INTERNAL void Init_gdk(void);
