@@ -47,9 +47,7 @@ extern GType poppler_dest_get_type (void) G_GNUC_CONST;
 #  define RB_POPPLER_TYPE_DEST_NOT_DEFINED
 #endif
 
-#if defined(POPPLER_HAS_CAIRO)
-#  include <rb_cairo.h>
-#endif
+#include <rb_cairo.h>
 
 #ifdef POPPLER_TYPE_COLOR
 extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
