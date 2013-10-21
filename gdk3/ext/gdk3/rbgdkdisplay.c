@@ -204,7 +204,7 @@ rg_pointer(VALUE self)
 
     gdk_device_get_position(device, &screen, &x, &y);
 
-    return rb_ary_new3(4, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y), INT2NUM(mask));
+    return rb_ary_new3(3, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y));
 }
 static VALUE
 rg_window_at_pointer(VALUE self)
