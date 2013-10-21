@@ -30,6 +30,7 @@
 
 #define RG_TARGET_NAMESPACE cWindow
 #define _SELF(s) RVAL2GDKWINDOW(s)
+#define _DEVICE(s) (RVAL2GDKDEVICE(s))
 
 static VALUE
 rg_initialize(VALUE self, VALUE parent, VALUE attributes, VALUE attributes_mask)

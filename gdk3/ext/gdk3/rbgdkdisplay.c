@@ -23,6 +23,7 @@
 
 #define RG_TARGET_NAMESPACE cDisplay
 #define _SELF(i) RVAL2GDKDISPLAYOBJECT(i)
+#define _DEVICE(i) (RVAL2GDKDEVICE(i))
 
 static VALUE
 rg_close(VALUE self)
