@@ -36,7 +36,7 @@ rg_s_open(G_GNUC_UNUSED VALUE self, VALUE display_name)
 {
     GdkDisplay* gdisplay = gdk_display_open(RVAL2CSTR(display_name));
     if (! gdisplay) {
-        rb_raise(rb_eRuntimeError, "The display `%s' could not be opened.", 
+        rb_raise(rb_eRuntimeError, "The display `%s' could not be opened.",
                  RVAL2CSTR(display_name));
     } else {
         VALUE display;
@@ -159,8 +159,8 @@ rg_put_event(VALUE self, VALUE event)
 static GdkFilterReturn
 filter_func(GdkXEvent xevent, GdkEvent event, gpointer func)
 {
-    return GENUM2RVAL(rb_funcall((VALUE)func, id_call, 2, 
-                                 ????, GEV2RVAL(event)), 
+    return GENUM2RVAL(rb_funcall((VALUE)func, id_call, 2,
+                                 ????, GEV2RVAL(event)),
                       GDK_TYPE_FILTER_RETURN);
 }
 
@@ -265,7 +265,7 @@ rg_supports_selection_notification_p(VALUE self)
 static VALUE
 rg_request_selection_notification_p(VALUE self, VALUE selection)
 {
-    return CBOOL2RVAL(gdk_display_request_selection_notification(_SELF(self), 
+    return CBOOL2RVAL(gdk_display_request_selection_notification(_SELF(self),
                                                                  RVAL2ATOM(selection)));
 }
 
@@ -424,7 +424,7 @@ rg_supports_composite_p(VALUE self)
     return CBOOL2RVAL(gdk_display_supports_composite(_SELF(self)));
 }
 
-void 
+void
 Init_gdk_display(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY, "Display", mGdk);
