@@ -286,7 +286,7 @@ rg_s_constrain_size(G_GNUC_UNUSED VALUE self, VALUE geometry, VALUE flags, VALUE
 }
 
 static VALUE
-rg_beep(VALUE self) 
+rg_beep(VALUE self)
 {
     gdk_window_beep(_SELF(self));
     return self;
@@ -296,7 +296,7 @@ static VALUE
 rg_begin_paint(VALUE self, VALUE area)
 {
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
-        gdk_window_begin_paint_rect(_SELF(self), 
+        gdk_window_begin_paint_rect(_SELF(self),
                                     RVAL2GDKRECTANGLE(area));
     } else {
         gdk_window_begin_paint_region(_SELF(self), RVAL2CRREGION(area));
@@ -351,7 +351,7 @@ rg_invalidate_maybe_recurse(VALUE self, VALUE region)
 static VALUE
 rg_update_area(VALUE self)
 {
-    return CRREGION2RVAL(gdk_window_get_update_area(_SELF(self))); 
+    return CRREGION2RVAL(gdk_window_get_update_area(_SELF(self)));
 }
 
 static VALUE
@@ -417,7 +417,7 @@ rg_set_user_data(VALUE self, VALUE user_data)
 static VALUE
 rg_set_override_redirect(VALUE self, VALUE override_redirect)
 {
-    gdk_window_set_override_redirect(_SELF(self), 
+    gdk_window_set_override_redirect(_SELF(self),
                                      RVAL2CBOOL(override_redirect));
     return self;
 }
@@ -457,7 +457,7 @@ rg_merge_child_shapes(VALUE self)
 {
     gdk_window_merge_child_shapes(_SELF(self));
     return self;
-}   
+}
 
 static VALUE
 rg_input_shape_combine_region(VALUE self, VALUE shape_region, VALUE offset_x, VALUE offset_y)
@@ -528,7 +528,7 @@ rg_geometry(VALUE self)
 static VALUE
 rg_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 {
-    gdk_window_set_geometry_hints(_SELF(self), 
+    gdk_window_set_geometry_hints(_SELF(self),
                                   NIL_P(geometry) ? (GdkGeometry*)NULL : RVAL2GDKGEOMETRY(geometry),
                                   RVAL2GDKWINDOWHINTS(geom_mask));
     return self;
@@ -803,7 +803,7 @@ rg_s_foreign_new(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         break;
       case 2:
         win = gdk_window_foreign_new_for_display(RVAL2GOBJ(arg[0]),
-                                                 RVAL2GDKNATIVEWINDOW(arg[1])); 
+                                                 RVAL2GDKNATIVEWINDOW(arg[1]));
         break;
     default:
         break;
@@ -829,7 +829,7 @@ rg_s_lookup(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
         win = gdk_window_lookup(RVAL2GDKNATIVEWINDOW(arg[0]));
         break;
       case 2:
-        win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1])); 
+        win = gdk_window_lookup_for_display(RVAL2GOBJ(arg[0]), RVAL2GDKNATIVEWINDOW(arg[1]));
         break;
     default:
         break;
@@ -1056,7 +1056,7 @@ Init_gdk_window(VALUE mGdk)
     G_DEF_CLASS(GDK_TYPE_WM_DECORATION, "WMDecoration", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GDK_TYPE_WM_FUNCTION, "WMFunction", RG_TARGET_NAMESPACE);
 
-    rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
+    rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));
 
 #ifdef GDK_WINDOWING_X11
     G_DEF_CLASS3("GdkWindowImplX11", "WindowImplX11", mGdk);
