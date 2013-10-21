@@ -61,7 +61,7 @@ static VALUE
 rg_s_at_pointer(G_GNUC_UNUSED VALUE self)
 {
     gint x, y;
-    GdkDevice *device = _SELF(self);
+    GdkDevice*device = _DEVICE(self);
     GdkWindow* win = gdk_device_get_window_at_position(device, &x ,&y);
     return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
 }
@@ -637,7 +637,7 @@ rg_pointer(VALUE self)
 {
     gint x, y;
     GdkModifierType state;
-    GdkDevice *device = _SELF(self);
+    GdkDevice *device = _DEVICE(self);
     GdkWindow* ret = gdk_window_get_device_position(_SELF(self), device, &x, &y, &state);
     return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
 }
