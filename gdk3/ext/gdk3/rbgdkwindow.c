@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2006 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2013 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
  *                          Hiroshi Igarashi
@@ -35,7 +34,7 @@
 static VALUE
 rg_initialize(VALUE self, VALUE parent, VALUE attributes, VALUE attributes_mask)
 {
-    GdkWindow* win;
+    GdkWindow *win;
     win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent),
                          RVAL2GDKWINDOWATTR(attributes),
                          RVAL2GDKWINDOWATTRIBUTESTYPE(attributes_mask));
@@ -61,8 +60,8 @@ static VALUE
 rg_s_at_pointer(G_GNUC_UNUSED VALUE self)
 {
     gint x, y;
-    GdkDevice* device = _DEVICE(self);
-    GdkWindow* win = gdk_device_get_window_at_position(device, &x ,&y);
+    GdkDevice *device = _DEVICE(self);
+    GdkWindow *win = gdk_device_get_window_at_position(device, &x ,&y);
     return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
 }
 
@@ -638,7 +637,7 @@ rg_pointer(VALUE self)
     gint x, y;
     GdkModifierType state;
     GdkDevice *device = _DEVICE(self);
-    GdkWindow* ret = gdk_window_get_device_position(_SELF(self), device, &x, &y, &state);
+    GdkWindow *ret = gdk_window_get_device_position(_SELF(self), device, &x, &y, &state);
     return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
 }
 
@@ -658,7 +657,7 @@ static VALUE
 rg_children(VALUE self)
 {
     /* Don't use gdk_window_get_children() here */
-    GList* list = gdk_window_peek_children(_SELF(self));
+    GList *list = gdk_window_peek_children(_SELF(self));
     VALUE ary = rb_ary_new();
     while (list) {
         rb_ary_push(ary, GOBJ2RVAL(list->data));
