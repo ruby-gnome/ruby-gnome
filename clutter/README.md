@@ -22,7 +22,7 @@ under the terms of the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 ### Exceptions
 
 Ruby scripts and image files in sample/ are ported and copied from
-Clutter. Headers in samples/*.rb describes that the location of the
+Clutter. Headers in sample/*.rb describes that the location of the
 original file of the Ruby script and image files. The original files
 are licensed under the LGPL v2.1 or later.
 
