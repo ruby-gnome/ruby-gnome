@@ -89,24 +89,21 @@ rg_default_screen(VALUE self)
 static VALUE
 rg_pointer_ungrab(VALUE self, VALUE time)
 {
-    GdkDevice *device = _DEVICE(self);
-    gdk_device_ungrab(device, NUM2ULONG(time));
+    gdk_display_pointer_ungrab(_SELF(self), NUM2ULONG(time));
     return self;
 }
 
 static VALUE
 rg_keyboard_ungrab(VALUE self, VALUE time)
 {
-    GdkDevice *device = _DEVICE(self);
-    gdk_device_ungrab(device, NUM2ULONG(time));
+    gdk_display_keyboard_ungrab(_SELF(self), NUM2ULONG(time));
     return self;
 }
 
 static VALUE
 rg_pointer_grabbed_p(VALUE self)
 {
-    GdkDevice *device = _DEVICE(self);
-    return CBOOL2RVAL(gdk_display_device_is_grabbed(_SELF(self), device));
+    return CBOOL2RVAL(gdk_display_pointer_is_grabbed(_SELF(self)));
 }
 
 static VALUE
@@ -200,9 +197,9 @@ rg_pointer(VALUE self)
 {
     GdkScreen *screen;
     int x,y;
-    GdkDevice *device = _DEVICE(self);
+    GdkModifierType mask;
 
-    gdk_device_get_position(device, &screen, &x, &y);
+    gdk_display_get_pointer(_SELF(self), &screen, &x, &y, &mask);
 
     return rb_ary_new3(3, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y));
 }
@@ -211,9 +208,8 @@ rg_window_at_pointer(VALUE self)
 {
     GdkWindow *window;
     int x,y;
-    GdkDevice *device = _DEVICE(self);
 
-    window = gdk_device_get_window_at_position(device, &x, &y);
+    window = gdk_display_get_window_at_pointer(_SELF(self), &x, &y);
 
     return rb_ary_new3(3, GOBJ2RVAL(window), INT2NUM(x), INT2NUM(y));
 }
@@ -302,8 +298,7 @@ rg_core_pointer(VALUE self)
 static VALUE
 rg_warp_pointer(VALUE self, VALUE screen, VALUE x, VALUE y)
 {
-    GdkDevice *device = _DEVICE(self);
-    gdk_device_warp(device, RVAL2GDKSCREEN(screen), NUM2INT(x), NUM2INT(y));
+    gdk_display_warp_pointer(_SELF(self), RVAL2GDKSCREEN(screen), NUM2INT(x), NUM2INT(y));
     return self;
 }
 
