@@ -33,6 +33,7 @@ module Gdk
     define_deprecated_method :button_number, :raise => "Don't use this method."
     define_deprecated_method :button_x, :raise => "Don't use this method."
     define_deprecated_method :button_y, :raise => "Don't use this method."
+    define_deprecated_method :pointer_ungrab, :warn => "Use 'Gdk::Device#ungrab'."
   end
 
   class DragContext

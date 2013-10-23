@@ -155,6 +155,13 @@ rg_get_device_position(G_GNUC_UNUSED VALUE self)
     return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
 }
 
+static VALUE
+rg_ungrab(VALUE self, VALUE time)
+{
+    gdk_device_ungrab(_SELF(self), NUM2ULONG(time));
+    return self;
+}
+
 /* deprecated
 static VALUE
 rg_axes(VALUE self)
@@ -206,6 +213,7 @@ Init_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(mode, 0);
     RG_DEF_METHOD(get_window_at_position, 0);
     RG_DEF_METHOD(get_device_position, 0);
+    RG_DEF_METHOD(ungrab, 1);
 /* deprecated
     RG_DEF_METHOD(axes, 0);
     RG_DEF_METHOD(keys, 0);
