@@ -100,10 +100,17 @@ rg_keyboard_ungrab(VALUE self, VALUE time)
     return self;
 }
 
+
 static VALUE
 rg_pointer_grabbed_p(VALUE self)
 {
     return CBOOL2RVAL(gdk_display_pointer_is_grabbed(_SELF(self)));
+}
+
+static VALUE
+rg_device_is_grabbed_p(VALUE self, VALUE device)
+{
+    return CBOOL2RVAL(gdk_display_device_is_grabbed(_SELF(self), RVAL2GDKDEVICE(device)));
 }
 
 static VALUE
@@ -435,6 +442,7 @@ Init_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(pointer_ungrab, 1);
     RG_DEF_METHOD(keyboard_ungrab, 1);
     RG_DEF_METHOD_P(pointer_grabbed, 0);
+    RG_DEF_METHOD_P(device_is_grabbed, 1);
 
     RG_DEF_METHOD(beep, 0);
     RG_DEF_METHOD(sync, 0);
