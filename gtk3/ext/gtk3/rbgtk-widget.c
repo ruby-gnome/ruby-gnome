@@ -144,7 +144,7 @@ rg_remove_accelerator(VALUE self, VALUE accel, VALUE key, VALUE mod)
 static VALUE
 rg_set_accel_path(VALUE self, VALUE accel_path, VALUE accel_group)
 {
-    gtk_widget_set_accel_path(_SELF(self), RVAL2CSTR(accel_path), 
+    gtk_widget_set_accel_path(_SELF(self), RVAL2CSTR(accel_path),
                               RVAL2GTKACCELGROUP(accel_group));
     return self;
 }
@@ -202,7 +202,7 @@ rg_grab_default(VALUE self)
 static VALUE
 rg_set_parent_window(VALUE self, VALUE parent_window)
 {
-    gtk_widget_set_parent_window(_SELF(self), 
+    gtk_widget_set_parent_window(_SELF(self),
                                  RVAL2GDKWINDOW(parent_window));
     return self;
 }
@@ -397,10 +397,10 @@ rg_s_install_style_property(VALUE self, VALUE spec)
     if (rb_block_given_p()){
         VALUE func = rb_block_proc();
         rb_hash_aset(style_prop_func_table, spec, func);
-        gtk_widget_class_install_style_property_parser(gclass, pspec, 
+        gtk_widget_class_install_style_property_parser(gclass, pspec,
                                                        (GtkRcPropertyParser)rc_property_parser);
     } else {
-        gtk_widget_class_install_style_property(gclass, pspec); 
+        gtk_widget_class_install_style_property(gclass, pspec);
     }
     return self;
 }
@@ -462,7 +462,7 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
 {
-    return CRREGION2RVAL(gtk_widget_region_intersect(_SELF(self), 
+    return CRREGION2RVAL(gtk_widget_region_intersect(_SELF(self),
                                                      RVAL2CRREGION(region)));
 }
 
@@ -787,7 +787,7 @@ static VALUE
 widget_signal_size_request(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
-    return rb_ary_new3(2, GVAL2RVAL(&values[0]), 
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]),
                        rb_ary_new3(2, INT2NUM(req->width), INT2NUM(req->height)));
 }
 static VALUE
@@ -1158,10 +1158,10 @@ rg_drag_dest_set(VALUE self, VALUE flags, VALUE targets, VALUE actions)
 static VALUE
 rg_drag_dest_set_proxy(VALUE self, VALUE proxy_window, VALUE protocol, VALUE use_coordinates)
 {
-    gtk_drag_dest_set_proxy(_SELF(self), 
+    gtk_drag_dest_set_proxy(_SELF(self),
                             RVAL2GDKWINDOW(proxy_window),
-                            RVAL2GDKDRAGPROTOCOL(protocol), 
-                            RVAL2CBOOL(use_coordinates)); 
+                            RVAL2GDKDRAGPROTOCOL(protocol),
+                            RVAL2CBOOL(use_coordinates));
     return self;
 }
 
@@ -1196,7 +1196,7 @@ rg_drag_dest_get_target_list(VALUE self)
 static VALUE
 rg_drag_dest_set_target_list(VALUE self, VALUE target_list)
 {
-    gtk_drag_dest_set_target_list(_SELF(self), 
+    gtk_drag_dest_set_target_list(_SELF(self),
                                   NIL_P(target_list) ? NULL : RVAL2GTKTARGETLIST(target_list));
 
     return self;
@@ -1273,7 +1273,7 @@ rg_drag_begin(VALUE self, VALUE target_list, VALUE actions, VALUE button, VALUE 
 static VALUE
 rg_drag_threshold_p(VALUE self, VALUE start_x, VALUE start_y, VALUE current_x, VALUE current_y)
 {
-    return CBOOL2RVAL(gtk_drag_check_threshold(_SELF(self), 
+    return CBOOL2RVAL(gtk_drag_check_threshold(_SELF(self),
                                                NUM2INT(start_x), NUM2INT(start_y),
                                                NUM2INT(current_x), NUM2INT(current_y)));
 }

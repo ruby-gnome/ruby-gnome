@@ -998,4 +998,3 @@ module Gtk
     define_deprecated_method :active_default, :activate_default
   end
 end
-
