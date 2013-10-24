@@ -228,7 +228,7 @@ rg_s_display(G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL(gdk_get_display());
 }
 
-#ifdef HAVE_X11_XLIB_H 
+#ifdef HAVE_X11_XLIB_H
 #ifdef HAVE_XGETERRORTEXT
 #include <X11/Xlib.h>
 #include <errno.h>
@@ -262,12 +262,12 @@ rbgdk_x_io_error(Display *display)
 
     error = g_strerror(errno_saved);
 
-    rb_funcall((VALUE)rb_x_io_error, id_call, 3, CSTR2RVAL(disp), 
+    rb_funcall((VALUE)rb_x_io_error, id_call, 3, CSTR2RVAL(disp),
                INT2NUM(errno), CSTR2RVAL(error));
     return 0;
 }
-#endif 
-#endif 
+#endif
+#endif
 
 static VALUE
 rg_s_set_x_error_handler(VALUE self)
