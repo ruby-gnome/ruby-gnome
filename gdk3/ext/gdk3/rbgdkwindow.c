@@ -906,6 +906,15 @@ rg_drag_protocol(VALUE self)
     return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), ary);
 }
 
+static VALUE
+rg_get_device_position(VALUE self, VALUE device)
+{
+    gint x,y;
+    GdkModifierType state;
+    GdkWindow *ret = gdk_window_get_device_position(_SELF(self), RVAL2GDKDEVICE(device), &x, &y, &state);
+    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
+}
+
 #ifdef HAVE_RB_CAIRO_H
 static VALUE
 rg_create_cairo_context(VALUE self)
@@ -1034,6 +1043,7 @@ Init_gdk_window(VALUE mGdk)
 */
     RG_DEF_METHOD(drag_begin, 1);
     RG_DEF_METHOD(drag_protocol, 0);
+    RG_DEF_METHOD(get_device_position, 1);
 
 #ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(create_cairo_context, 0);
