@@ -53,6 +53,7 @@ G_GNUC_INTERNAL void Init_gdk_color(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_const(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_cursor(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_device(VALUE mGdk);
+G_GNUC_INTERNAL void Init_gdk_device_manager(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_display(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_display_manager(VALUE mGdk);
 G_GNUC_INTERNAL void Init_gdk_dragcontext(VALUE mGdk);
