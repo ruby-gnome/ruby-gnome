@@ -26,7 +26,8 @@
 static VALUE
 rg_devices(VALUE self)
 {
-    return rbgutil_glist2ary(gdk_device_manager_list_devices(_SELF(self), GDK_TYPE_DEVICE));
+    return GOBJGLIST2RVAL_FREE(gdk_device_manager_list_devices(_SELF(self), GDK_TYPE_DEVICE),
+                               g_list_free, NULL);
 }
 
 void
