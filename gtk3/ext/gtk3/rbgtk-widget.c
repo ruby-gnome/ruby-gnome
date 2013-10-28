@@ -239,15 +239,6 @@ rg_visual(VALUE self)
 }
 
 static VALUE
-rg_pointer(VALUE self)
-{
-    int x, y;
-
-    gtk_widget_get_pointer(_SELF(self), &x, &y);
-    return rb_assoc_new(INT2FIX(x), INT2FIX(y));
-}
-
-static VALUE
 rg_ancestor_p(VALUE self, VALUE ancestor)
 {
     return CBOOL2RVAL(gtk_widget_is_ancestor(_SELF(self), _SELF(ancestor)));
@@ -1422,7 +1413,6 @@ Init_gtk_widget(VALUE mGtk)
     RG_DEF_METHOD(toplevel, 0);
     RG_DEF_METHOD(get_ancestor, 1);
     RG_DEF_METHOD(visual, 0);
-    RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD_P(ancestor, 1);
     RG_DEF_METHOD(translate_coordinates, 3);
     RG_DEF_METHOD(hide_on_delete, 0);
