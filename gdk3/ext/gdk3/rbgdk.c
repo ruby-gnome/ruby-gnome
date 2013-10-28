@@ -505,6 +505,7 @@ Init_gdk(void)
     Init_gdk_const(RG_TARGET_NAMESPACE);
     Init_gdk_cursor(RG_TARGET_NAMESPACE);
     Init_gdk_device(RG_TARGET_NAMESPACE);
+    Init_gdk_device_manager(RG_TARGET_NAMESPACE);
     Init_gdk_display(RG_TARGET_NAMESPACE);
     Init_gdk_display_manager(RG_TARGET_NAMESPACE);
     Init_gdk_dragcontext(RG_TARGET_NAMESPACE);
