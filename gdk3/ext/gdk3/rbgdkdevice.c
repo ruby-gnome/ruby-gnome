@@ -146,16 +146,6 @@ rg_get_window_at_position(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_get_device_position(G_GNUC_UNUSED VALUE self)
-{
-    gint x, y;
-    GdkModifierType state;
-    GdkWindow *win = gdk_device_get_window_at_position(_SELF(self), &x ,&y);
-    GdkWindow *ret = gdk_window_get_device_position(win, _SELF(self), &x, &y, &state);
-    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
-}
-
-static VALUE
 rg_ungrab(VALUE self, VALUE time)
 {
     gdk_device_ungrab(_SELF(self), NUM2ULONG(time));
@@ -240,7 +230,6 @@ Init_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_axis, 2);
     RG_DEF_METHOD(mode, 0);
     RG_DEF_METHOD(get_window_at_position, 0);
-    RG_DEF_METHOD(get_device_position, 0);
     RG_DEF_METHOD(ungrab, 1);
     RG_DEF_METHOD(get_position, 0);
     RG_DEF_METHOD(warp, 3);
