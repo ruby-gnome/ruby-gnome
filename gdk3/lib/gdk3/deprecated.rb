@@ -6,6 +6,11 @@ module Gdk
   define_deprecated_const :Colormap, :raise => "Use 'Gdk::Visual' instead."
   define_deprecated_const :Input, :raise => "Use 'GLib::IOChannel' instead."
   define_deprecated_const :X11, 'GdkX11'
+  define_deprecated_singleton_method :pointer_grab, :raise => "Use 'Gdk::Device#grab'."
+  define_deprecated_singleton_method :pointer_ungrab, :raise => "Use 'Gdk::Device#ungrab'."
+  define_deprecated_singleton_method :keyboard_grab, :raise => "Use 'Gdk::Device#grab'."
+  define_deprecated_singleton_method :keyboard_ungrab, :raise => "Use 'Gdk::Device#ungrab'."
+  define_deprecated_singleton_method :pointer_is_grabbed?, :raise => "Use 'Gdk::Display#device_is_grabbed?'."
 
   class Cursor
     extend GLib::Deprecatable
@@ -33,6 +38,12 @@ module Gdk
     define_deprecated_method :button_number, :raise => "Don't use this method."
     define_deprecated_method :button_x, :raise => "Don't use this method."
     define_deprecated_method :button_y, :raise => "Don't use this method."
+    define_deprecated_method :pointer, :raise => "Use 'Gdk::Device#get_position'."
+    define_deprecated_method :pointer_ungrab, :raise => "Use 'Gdk::Device#ungrab'."
+    define_deprecated_method :pointer_grabbed_p, :raise => "Use 'Gdk::Display#device_is_grabbed?'."
+    define_deprecated_method :window_at_pointer, :raise => "Use 'Gdk::Device#get_window_at_position'."
+    define_deprecated_method :warp_pointer, :raise => "Use 'Gdk::Device#warp'."
+    define_deprecated_method :devices, :raise => "Use 'Gdk::DeviceManager#devices'."
   end
 
   class DragContext
@@ -141,6 +152,8 @@ module Gdk
     define_deprecated_method :shape_combine_mask, :warn => "Don't use this method."
     define_deprecated_method :input_shape_combine_mask, :warn => "Don't use this method."
     define_deprecated_method :set_back_pixmap, :warn => "Don't use this method."
+    define_deprecated_singleton_method :at_pointer, :raise => "Use 'Gdk::Device#get_window_at_position'."
+    define_deprecated_method :pointer, :raise => "Use 'Gdk::Device#get_device_position'."
   end
 
   class WindowAttr
@@ -150,4 +163,3 @@ module Gdk
     alias :colormap= :set_colormap
   end
 end
-

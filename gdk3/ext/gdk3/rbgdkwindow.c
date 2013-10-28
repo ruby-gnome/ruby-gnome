@@ -56,14 +56,6 @@ rg_window_type(VALUE self)
 }
 
 static VALUE
-rg_s_at_pointer(G_GNUC_UNUSED VALUE self)
-{
-    gint x, y;
-    GdkWindow* win = gdk_window_at_pointer(&x, &y);
-    return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
-}
-
-static VALUE
 rg_show(VALUE self)
 {
     gdk_window_show(_SELF(self));
@@ -630,15 +622,6 @@ rg_origin(VALUE self)
 }
 
 static VALUE
-rg_pointer(VALUE self)
-{
-    gint x, y;
-    GdkModifierType state;
-    GdkWindow* ret = gdk_window_get_pointer(_SELF(self), &x, &y, &state);
-    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
-}
-
-static VALUE
 rg_parent(VALUE self)
 {
     return GOBJ2RVAL(gdk_window_get_parent(_SELF(self)));
@@ -906,6 +889,15 @@ rg_drag_protocol(VALUE self)
     return rb_ary_new3(2, GDKDRAGPROTOCOL2RVAL(prot), ary);
 }
 
+static VALUE
+rg_get_device_position(VALUE self, VALUE device)
+{
+    gint x,y;
+    GdkModifierType state;
+    GdkWindow *ret = gdk_window_get_device_position(_SELF(self), RVAL2GDKDEVICE(device), &x, &y, &state);
+    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
+}
+
 #ifdef HAVE_RB_CAIRO_H
 static VALUE
 rg_create_cairo_context(VALUE self)
@@ -931,7 +923,6 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(initialize, 3);
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(window_type, 0);
-    RG_DEF_SMETHOD(at_pointer, 0);
     RG_DEF_SMETHOD(constrain_size, 4);
     RG_DEF_SMETHOD(process_all_updates, 0);
     RG_DEF_SMETHOD(set_debug_updates, 1);
@@ -1005,7 +996,6 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(root_origin, 0);
     RG_DEF_METHOD(frame_extents, 0);
     RG_DEF_METHOD(origin, 0);
-    RG_DEF_METHOD(pointer, 0);
     RG_DEF_METHOD(parent, 0);
     RG_DEF_METHOD(toplevel, 0);
     RG_DEF_SMETHOD(default_root_window, 0);
@@ -1034,6 +1024,7 @@ Init_gdk_window(VALUE mGdk)
 */
     RG_DEF_METHOD(drag_begin, 1);
     RG_DEF_METHOD(drag_protocol, 0);
+    RG_DEF_METHOD(get_device_position, 1);
 
 #ifdef HAVE_RB_CAIRO_H
     RG_DEF_METHOD(create_cairo_context, 0);

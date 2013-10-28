@@ -70,7 +70,7 @@ rg_set_key(VALUE self, VALUE index, VALUE keyval, VALUE modifiers)
 static VALUE
 rg_set_axis_use(VALUE self, VALUE index, VALUE use)
 {
-    gdk_device_set_axis_use(_SELF(self), NUM2UINT(index), 
+    gdk_device_set_axis_use(_SELF(self), NUM2UINT(index),
                             RVAL2GDKAXISUSE(use));
     return self;
 }
@@ -137,6 +137,56 @@ rg_mode(VALUE self)
     return GDKINPUTMODE2RVAL(gdk_device_get_mode(_SELF(self)));
 }
 
+static VALUE
+rg_get_window_at_position(G_GNUC_UNUSED VALUE self)
+{
+    gint x, y;
+    GdkWindow *win = gdk_device_get_window_at_position(_SELF(self), &x ,&y);
+    return rb_ary_new3(3, GOBJ2RVAL(win), INT2FIX(x), INT2FIX(y));
+}
+
+static VALUE
+rg_ungrab(int argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_time;
+    guint32 time = GDK_CURRENT_TIME;
+
+    rb_scan_args(argc, argv, "01", &rb_time);
+    if (!NIL_P(rb_time)) {
+        time = NUM2ULONG(GDK_CURRENT_TIME);
+    }
+    gdk_device_ungrab(_SELF(self), time);
+    return self;
+}
+
+static VALUE
+rg_get_position(VALUE self)
+{
+    GdkScreen *screen;
+    int x,y;
+    gdk_device_get_position(_SELF(self),  &screen, &x, &y);
+    return rb_ary_new3(3, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y));
+}
+
+static VALUE
+rg_warp(VALUE self, VALUE screen, VALUE x, VALUE y)
+{
+    gdk_device_warp(_SELF(self), RVAL2GDKSCREEN(screen), NUM2INT(x), NUM2INT(y));
+    return self;
+}
+
+static VALUE
+rg_grab(VALUE self, VALUE win, VALUE grab_ownership, VALUE owner_events, VALUE event_mask, VALUE cursor, VALUE time)
+{
+    return GDKGRABSTATUS2RVAL(gdk_device_grab(_SELF(self),
+                                              RVAL2GDKWINDOW(win),
+                                              RVAL2GDKGRABOWNERSHIP(grab_ownership),
+                                              RVAL2CBOOL(owner_events),
+                                              RVAL2GDKEVENTMASK(event_mask),
+                                              NIL_P(cursor) ? NULL : RVAL2GDKCURSOR(cursor),
+                                              NUM2INT(time)));
+}
+
 /* deprecated
 static VALUE
 rg_axes(VALUE self)
@@ -146,7 +196,7 @@ rg_axes(VALUE self)
     GdkDeviceAxis* axes = _SELF(self)->axes;
 
     for (i = 0; i < _SELF(self)->num_axes; i++){
-        rb_ary_push(ary, rb_ary_new3(3, GDKAXISUSE2RVAL(axes[i].use), 
+        rb_ary_push(ary, rb_ary_new3(3, GDKAXISUSE2RVAL(axes[i].use),
                                      rb_float_new(axes[i].min), rb_float_new(axes[i].max)));
     }
     return ary;
@@ -167,7 +217,7 @@ rg_keys(VALUE self)
 }
 */
 
-void 
+void
 Init_gdk_device(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
@@ -186,6 +236,12 @@ Init_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_history, 3);
     RG_DEF_METHOD(get_axis, 2);
     RG_DEF_METHOD(mode, 0);
+    RG_DEF_METHOD(get_window_at_position, 0);
+    RG_DEF_METHOD(ungrab, 1);
+    RG_DEF_METHOD(get_position, 0);
+    RG_DEF_METHOD(warp, 3);
+    RG_DEF_METHOD(grab, 6);
+
 /* deprecated
     RG_DEF_METHOD(axes, 0);
     RG_DEF_METHOD(keys, 0);

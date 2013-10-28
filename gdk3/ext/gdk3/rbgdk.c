@@ -228,7 +228,7 @@ rg_s_display(G_GNUC_UNUSED VALUE self)
     return CSTR2RVAL(gdk_get_display());
 }
 
-#ifdef HAVE_X11_XLIB_H 
+#ifdef HAVE_X11_XLIB_H
 #ifdef HAVE_XGETERRORTEXT
 #include <X11/Xlib.h>
 #include <errno.h>
@@ -262,12 +262,12 @@ rbgdk_x_io_error(Display *display)
 
     error = g_strerror(errno_saved);
 
-    rb_funcall((VALUE)rb_x_io_error, id_call, 3, CSTR2RVAL(disp), 
+    rb_funcall((VALUE)rb_x_io_error, id_call, 3, CSTR2RVAL(disp),
                INT2NUM(errno), CSTR2RVAL(error));
     return 0;
 }
-#endif 
-#endif 
+#endif
+#endif
 
 static VALUE
 rg_s_set_x_error_handler(VALUE self)
@@ -324,44 +324,6 @@ static VALUE
 rg_s_screen_height_mm(G_GNUC_UNUSED VALUE self)
 {
     return INT2NUM(gdk_screen_height_mm());
-}
-
-static VALUE
-rg_s_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
-{
-    return GDKGRABSTATUS2RVAL(gdk_pointer_grab(RVAL2GDKWINDOW(win),
-                                               RVAL2CBOOL(owner_events),
-                                               RVAL2GDKEVENTMASK(event_mask),
-                                               NIL_P(confine_to) ? NULL : RVAL2GDKWINDOW(confine_to),
-                                               NIL_P(cursor) ? NULL : RVAL2GDKCURSOR(cursor),
-                                               NUM2INT(time)));
-}
-
-static VALUE
-rg_s_pointer_ungrab(VALUE self, VALUE time)
-{
-    gdk_pointer_ungrab(NUM2INT(time));
-    return self;
-}
-
-static VALUE
-rg_s_keyboard_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE time)
-{
-    return GDKGRABSTATUS2RVAL(gdk_keyboard_grab(RVAL2GDKWINDOW(win),
-                                                RVAL2CBOOL(owner_events), NUM2INT(time)));
-}
-
-static VALUE
-rg_s_keyboard_ungrab(VALUE self, VALUE time)
-{
-    gdk_keyboard_ungrab(NUM2INT(time));
-    return self;
-}
-
-static VALUE
-rg_s_pointer_is_grabbed_p(G_GNUC_UNUSED VALUE self)
-{
-    return CBOOL2RVAL(gdk_pointer_is_grabbed());
 }
 
 static VALUE
@@ -480,11 +442,6 @@ Init_gdk(void)
     RG_DEF_SMETHOD(beep, 0);
     RG_DEF_SMETHOD(flush, 0);
     RG_DEF_SMETHOD(set_double_click_time, 1);
-    RG_DEF_SMETHOD(pointer_grab, 6);
-    RG_DEF_SMETHOD(pointer_ungrab, 1);
-    RG_DEF_SMETHOD(keyboard_grab, 3);
-    RG_DEF_SMETHOD(keyboard_ungrab, 1);
-    RG_DEF_SMETHOD_P(pointer_is_grabbed, 0);
     RG_DEF_SMETHOD(error_trap_push, 0);
     RG_DEF_SMETHOD(error_trap_pop, 0);
     RG_DEF_SMETHOD_P(windowing_x11, 0);
@@ -505,6 +462,7 @@ Init_gdk(void)
     Init_gdk_const(RG_TARGET_NAMESPACE);
     Init_gdk_cursor(RG_TARGET_NAMESPACE);
     Init_gdk_device(RG_TARGET_NAMESPACE);
+    Init_gdk_device_manager(RG_TARGET_NAMESPACE);
     Init_gdk_display(RG_TARGET_NAMESPACE);
     Init_gdk_display_manager(RG_TARGET_NAMESPACE);
     Init_gdk_dragcontext(RG_TARGET_NAMESPACE);
