@@ -153,7 +153,7 @@ rg_ungrab(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "01", &rb_time);
     if (!NIL_P(rb_time)) {
-        time = NUM2ULONG(GDK_CURRENT_TIME);
+        time = NUM2UINT(GDK_CURRENT_TIME);
     }
     gdk_device_ungrab(_SELF(self), time);
     return self;
