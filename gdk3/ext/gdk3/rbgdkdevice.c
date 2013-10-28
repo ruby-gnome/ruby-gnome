@@ -146,8 +146,13 @@ rg_get_window_at_position(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_ungrab(VALUE self, VALUE time)
+rg_ungrab(int argc, VALUE *argv, VALUE self)
 {
+    VALUE time;
+    rb_scan_args(argc, argv, "01", &time);
+    if (NIL_P(time)) {
+        time = GDK_CURRENT_TIME;
+    }
     gdk_device_ungrab(_SELF(self), NUM2ULONG(time));
     return self;
 }
