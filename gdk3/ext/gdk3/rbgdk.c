@@ -327,44 +327,6 @@ rg_s_screen_height_mm(G_GNUC_UNUSED VALUE self)
 }
 
 static VALUE
-rg_s_pointer_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE event_mask, VALUE confine_to, VALUE cursor, VALUE time)
-{
-    return GDKGRABSTATUS2RVAL(gdk_pointer_grab(RVAL2GDKWINDOW(win),
-                                               RVAL2CBOOL(owner_events),
-                                               RVAL2GDKEVENTMASK(event_mask),
-                                               NIL_P(confine_to) ? NULL : RVAL2GDKWINDOW(confine_to),
-                                               NIL_P(cursor) ? NULL : RVAL2GDKCURSOR(cursor),
-                                               NUM2INT(time)));
-}
-
-static VALUE
-rg_s_pointer_ungrab(VALUE self, VALUE time)
-{
-    gdk_pointer_ungrab(NUM2INT(time));
-    return self;
-}
-
-static VALUE
-rg_s_keyboard_grab(G_GNUC_UNUSED VALUE self, VALUE win, VALUE owner_events, VALUE time)
-{
-    return GDKGRABSTATUS2RVAL(gdk_keyboard_grab(RVAL2GDKWINDOW(win),
-                                                RVAL2CBOOL(owner_events), NUM2INT(time)));
-}
-
-static VALUE
-rg_s_keyboard_ungrab(VALUE self, VALUE time)
-{
-    gdk_keyboard_ungrab(NUM2INT(time));
-    return self;
-}
-
-static VALUE
-rg_s_pointer_is_grabbed_p(G_GNUC_UNUSED VALUE self)
-{
-    return CBOOL2RVAL(gdk_pointer_is_grabbed());
-}
-
-static VALUE
 rg_s_set_double_click_time(VALUE self, VALUE msec)
 {
     gdk_set_double_click_time(NUM2UINT(msec));
@@ -480,11 +442,6 @@ Init_gdk(void)
     RG_DEF_SMETHOD(beep, 0);
     RG_DEF_SMETHOD(flush, 0);
     RG_DEF_SMETHOD(set_double_click_time, 1);
-    RG_DEF_SMETHOD(pointer_grab, 6);
-    RG_DEF_SMETHOD(pointer_ungrab, 1);
-    RG_DEF_SMETHOD(keyboard_grab, 3);
-    RG_DEF_SMETHOD(keyboard_ungrab, 1);
-    RG_DEF_SMETHOD_P(pointer_is_grabbed, 0);
     RG_DEF_SMETHOD(error_trap_push, 0);
     RG_DEF_SMETHOD(error_trap_pop, 0);
     RG_DEF_SMETHOD_P(windowing_x11, 0);

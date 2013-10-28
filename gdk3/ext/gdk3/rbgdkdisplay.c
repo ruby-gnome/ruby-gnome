@@ -87,27 +87,6 @@ rg_default_screen(VALUE self)
 }
 
 static VALUE
-rg_pointer_ungrab(VALUE self, VALUE time)
-{
-    gdk_display_pointer_ungrab(_SELF(self), NUM2ULONG(time));
-    return self;
-}
-
-static VALUE
-rg_keyboard_ungrab(VALUE self, VALUE time)
-{
-    gdk_display_keyboard_ungrab(_SELF(self), NUM2ULONG(time));
-    return self;
-}
-
-
-static VALUE
-rg_pointer_grabbed_p(VALUE self)
-{
-    return CBOOL2RVAL(gdk_display_pointer_is_grabbed(_SELF(self)));
-}
-
-static VALUE
 rg_device_is_grabbed_p(VALUE self, VALUE device)
 {
     return CBOOL2RVAL(gdk_display_device_is_grabbed(_SELF(self), RVAL2GDKDEVICE(device)));
@@ -132,12 +111,6 @@ rg_flush(VALUE self)
 {
     gdk_display_flush(_SELF(self));
     return self;
-}
-
-static VALUE
-rg_devices(VALUE self)
-{
-    return rbgutil_glist2ary(gdk_display_list_devices(_SELF(self)));
 }
 
 static VALUE
@@ -197,28 +170,6 @@ rg_set_double_click_distance(VALUE self, VALUE distance)
 {
     gdk_display_set_double_click_distance(_SELF(self), NUM2UINT(distance));
     return self;
-}
-
-static VALUE
-rg_pointer(VALUE self)
-{
-    GdkScreen *screen;
-    int x,y;
-    GdkModifierType mask;
-
-    gdk_display_get_pointer(_SELF(self), &screen, &x, &y, &mask);
-
-    return rb_ary_new3(3, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y));
-}
-static VALUE
-rg_window_at_pointer(VALUE self)
-{
-    GdkWindow *window;
-    int x,y;
-
-    window = gdk_display_get_window_at_pointer(_SELF(self), &x, &y);
-
-    return rb_ary_new3(3, GOBJ2RVAL(window), INT2NUM(x), INT2NUM(y));
 }
 
 /* Don't implement this.
@@ -301,13 +252,6 @@ rg_core_pointer(VALUE self)
     return GOBJ2RVAL(gdk_display_get_core_pointer(_SELF(self)));
 }
 */
-
-static VALUE
-rg_warp_pointer(VALUE self, VALUE screen, VALUE x, VALUE y)
-{
-    gdk_display_warp_pointer(_SELF(self), RVAL2GDKSCREEN(screen), NUM2INT(x), NUM2INT(y));
-    return self;
-}
 
 #ifdef GDK_WINDOWING_X11
 static VALUE
@@ -439,9 +383,6 @@ Init_gdk_display(VALUE mGdk)
     RG_DEF_ALIAS("[]", "get_screen");
     RG_DEF_METHOD(default_screen, 0);
 
-    RG_DEF_METHOD(pointer_ungrab, 1);
-    RG_DEF_METHOD(keyboard_ungrab, 1);
-    RG_DEF_METHOD_P(pointer_grabbed, 0);
     RG_DEF_METHOD_P(device_is_grabbed, 1);
 
     RG_DEF_METHOD(beep, 0);
@@ -449,15 +390,12 @@ Init_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(flush, 0);
     RG_DEF_METHOD(close, 0);
 
-    RG_DEF_METHOD(devices, 0);
     RG_DEF_METHOD(event, 0);
     RG_DEF_METHOD(peek_event, 0);
     RG_DEF_METHOD(put_event, 1);
     RG_DEF_METHOD(set_double_click_time, 1);
     RG_DEF_METHOD_P(closed, 0);
     RG_DEF_METHOD(set_double_click_distance, 1);
-    RG_DEF_METHOD(pointer, 0);
-    RG_DEF_METHOD(window_at_pointer, 0);
     RG_DEF_METHOD_P(supports_cursor_color, 0);
     RG_DEF_METHOD_P(supports_cursor_alpha, 0);
     RG_DEF_METHOD(default_cursor_size, 0);
@@ -470,7 +408,6 @@ Init_gdk_display(VALUE mGdk)
 /* deprecated
     RG_DEF_METHOD(core_pointer, 0);
 */
-    RG_DEF_METHOD(warp_pointer, 3);
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(grab, 0);
     RG_DEF_METHOD(ungrab, 0);
