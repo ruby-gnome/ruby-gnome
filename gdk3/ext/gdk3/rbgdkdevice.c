@@ -237,7 +237,7 @@ Init_gdk_device(VALUE mGdk)
     RG_DEF_METHOD(get_axis, 2);
     RG_DEF_METHOD(mode, 0);
     RG_DEF_METHOD(get_window_at_position, 0);
-    RG_DEF_METHOD(ungrab, 1);
+    RG_DEF_METHOD(ungrab, -1);
     RG_DEF_METHOD(get_position, 0);
     RG_DEF_METHOD(warp, 3);
     RG_DEF_METHOD(grab, 6);
