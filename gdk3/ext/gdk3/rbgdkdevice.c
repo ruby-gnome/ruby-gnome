@@ -70,7 +70,7 @@ rg_set_key(VALUE self, VALUE index, VALUE keyval, VALUE modifiers)
 static VALUE
 rg_set_axis_use(VALUE self, VALUE index, VALUE use)
 {
-    gdk_device_set_axis_use(_SELF(self), NUM2UINT(index), 
+    gdk_device_set_axis_use(_SELF(self), NUM2UINT(index),
                             RVAL2GDKAXISUSE(use));
     return self;
 }
@@ -189,7 +189,7 @@ rg_axes(VALUE self)
     GdkDeviceAxis* axes = _SELF(self)->axes;
 
     for (i = 0; i < _SELF(self)->num_axes; i++){
-        rb_ary_push(ary, rb_ary_new3(3, GDKAXISUSE2RVAL(axes[i].use), 
+        rb_ary_push(ary, rb_ary_new3(3, GDKAXISUSE2RVAL(axes[i].use),
                                      rb_float_new(axes[i].min), rb_float_new(axes[i].max)));
     }
     return ary;
@@ -210,7 +210,7 @@ rg_keys(VALUE self)
 }
 */
 
-void 
+void
 Init_gdk_device(VALUE mGdk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DEVICE, "Device", mGdk);
