@@ -164,7 +164,7 @@ rg_get_position(VALUE self)
 {
     GdkScreen *screen;
     gint x, y;
-    gdk_device_get_position(_SELF(self),  &screen, &x, &y);
+    gdk_device_get_position(_SELF(self), &screen, &x, &y);
     return rb_ary_new3(3, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y));
 }
 
