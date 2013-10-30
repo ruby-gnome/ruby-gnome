@@ -19,7 +19,7 @@ module Gst
     def fields
       n_fields.times.collect do |i|
         field_name = nth_field_name(i)
-        [field_name, get_value(field_name).value]
+        [field_name, get_value(field_name)]
       end
     end
   end
