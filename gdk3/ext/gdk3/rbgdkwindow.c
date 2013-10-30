@@ -892,7 +892,7 @@ rg_drag_protocol(VALUE self)
 static VALUE
 rg_get_device_position(VALUE self, VALUE device)
 {
-    gint x,y;
+    gint x, y;
     GdkModifierType state;
     GdkWindow *underneath_window;
 
