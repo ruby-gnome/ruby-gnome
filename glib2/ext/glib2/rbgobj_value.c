@@ -367,6 +367,17 @@ rg_value(VALUE self)
     return GVAL2RVAL(value);
 }
 
+static VALUE
+rg_to_s(VALUE self)
+{
+    GValue *value;
+    gchar *string_value;
+
+    value = _SELF(self);
+    string_value = g_strdup_value_contents(value);
+    return CSTR2RVAL_FREE(string_value);
+}
+
 void
 Init_gobject_gvalue(void)
 {
@@ -380,4 +391,5 @@ Init_gobject_gvalue(void)
     RG_DEF_METHOD(initialize, 2);
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(value, 0);
+    RG_DEF_METHOD(to_s, 0);
 }
