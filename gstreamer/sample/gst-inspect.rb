@@ -277,6 +277,36 @@ class Inspector
     puts
   end
 
+  def uri_type(element)
+    case element.uri_type
+    when Gst::URIType::SRC
+      "source"
+    when Gst::URIType::SINK
+      "sink"
+    else
+      "unknown"
+    end
+  end
+
+  def print_uri_handler_info(element)
+    if element.is_a?(Gst::URIHandler)
+      puts("URI handling capabilities:")
+      puts("  Element can act as #{uri_type(element)}.")
+      protocols = element.protocols
+      if protocols.empty?
+        puts("  No supported URI protocols")
+      else
+        puts("  Supported URI protocols:")
+        protocols.each do |protocol|
+          puts("    #{protocol}")
+        end
+      end
+    else
+      puts("Element has no URI handling capabilities.")
+    end
+    puts
+  end
+
   def print_pad_info(element)
     puts("Pads:")
     pads = element.pads
@@ -405,6 +435,7 @@ class Inspector
       print_implementation_info(element)
       print_clocking_info(element)
       print_index_info(element)
+      print_uri_handler_info(element)
       print_pad_info(element)
       print_element_properties_info(element)
       print_signals_info(element)
