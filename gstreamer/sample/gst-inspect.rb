@@ -400,6 +400,8 @@ class Inspector
       print_interfaces(element)
 
       print_pad_templates_info(element, factory)
+      puts
+
       print_element_flag_info(element)
       print_implementation_info(element)
       print_clocking_info(element)
