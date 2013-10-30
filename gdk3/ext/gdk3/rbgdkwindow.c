@@ -894,8 +894,10 @@ rg_get_device_position(VALUE self, VALUE device)
 {
     gint x,y;
     GdkModifierType state;
-    GdkWindow *ret = gdk_window_get_device_position(_SELF(self), RVAL2GDKDEVICE(device), &x, &y, &state);
-    return rb_ary_new3(4, GOBJ2RVAL(ret), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
+    GdkWindow *underneath_window;
+
+    underneath_window = gdk_window_get_device_position(_SELF(self), RVAL2GDKDEVICE(device), &x, &y, &state);
+    return rb_ary_new3(4, GOBJ2RVAL(underneath_window), INT2NUM(x), INT2NUM(y), GDKMODIFIERTYPE2RVAL(state));
 }
 
 #ifdef HAVE_RB_CAIRO_H
