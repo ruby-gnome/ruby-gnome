@@ -187,7 +187,7 @@ class Inspector
     caps.structures.each do |structure|
       puts(structure.name)
       structure.fields.each do |name, value|
-        puts("  %15s: %s" % [name, value.inspect])
+        puts("  %15s: %s" % [name, value])
       end
     end
   end
