@@ -14,6 +14,8 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+require "English"
+
 require "gobject-introspection"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
@@ -94,6 +96,11 @@ module Gst
 
     private
     def pre_load(repository, namespace)
+      call_init_function(repository, namespace)
+      define_value_modules
+    end
+
+    def call_init_function(repository, namespace)
       init_check = repository.find(namespace, "init_check")
       arguments = [
         1 + @init_arguments.size,
@@ -102,6 +109,13 @@ module Gst
       succeeded, argc, argv, error = init_check.invoke(:arguments => arguments)
       @init_arguments.replace(argv[1..-1])
       raise error unless succeeded
+    end
+
+    def define_value_modules
+      @value_functions_module = Module.new
+      @value_methods_module   = Module.new
+      @base_module.const_set("ValueFunctions", @value_functions_module)
+      @base_module.const_set("ValueMethods",   @value_methods_module)
     end
 
     def post_load(repository, namespace)
@@ -119,8 +133,25 @@ module Gst
     end
 
     def load_function_info(info)
-      return if info.name == "init"
-      super
+      case info.name
+      when "init"
+        # ignore
+      when /\Avalue_/
+        method_name = $POSTMATCH
+        load_value_function_info(info, method_name)
+      else
+        super
+      end
+    end
+
+    def load_value_function_info(info, method_name)
+      value_functions_module = @value_functions_module
+      define_module_function(value_functions_module, method_name, info)
+      @value_methods_module.module_eval do
+        define_method(method_name) do |*arguments, &block|
+          value_functions_module.send(method_name, self, *arguments, &block)
+        end
+      end
     end
 
     RENAME_MAP = {
