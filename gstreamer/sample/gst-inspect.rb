@@ -230,7 +230,7 @@ class Inspector
   end
 
   def print_element_flag_info(element)
-    puts("Element Flags")
+    puts("Element Flags:")
     puts("  no flags set")
     puts
 
