@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2003-2006 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -163,7 +163,7 @@ static VALUE
 rg_get_position(VALUE self)
 {
     GdkScreen *screen;
-    int x,y;
+    int x, y;
     gdk_device_get_position(_SELF(self),  &screen, &x, &y);
     return rb_ary_new3(3, GOBJ2RVAL(screen), INT2NUM(x), INT2NUM(y));
 }
