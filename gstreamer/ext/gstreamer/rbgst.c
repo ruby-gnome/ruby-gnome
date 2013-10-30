@@ -126,12 +126,59 @@ rg_gst_tag_foreach_func_callback_finder(GIArgInfo *info)
     return rg_gst_tag_foreach_func_callback;
 }
 
+static void
+rg_gst_value_list_r2g(VALUE from, GValue *to)
+{
+    int i, n;
+
+    if (NIL_P(from)) {
+        return;
+    }
+
+    from = rbg_to_array(from);
+    n = RARRAY_LEN(from);
+    for (i = 0; i < n; i++) {
+        VALUE rb_element;
+        const RGObjClassInfo *class_info;
+        GValue element = G_VALUE_INIT;
+
+        rb_element = rb_ary_entry(from, i);
+        class_info = RVAL2CINFO(rb_element);
+        g_value_init(&element, class_info->gtype);
+        rbgobj_rvalue_to_gvalue(rb_element, &element);
+        gst_value_list_append_value(to, &element);
+    }
+}
+
+static VALUE
+rg_gst_value_list_g2r(const GValue *from)
+{
+    guint i, n;
+    VALUE rb_values;
+
+    n = gst_value_list_get_size(from);
+    rb_values = rb_ary_new();
+    for (i = 0; i < n; i++) {
+        const GValue *value;
+        VALUE rb_value;
+
+        value = gst_value_list_get_value(from, i);
+        rb_value = rbgobj_gvalue_to_rvalue(value);
+        rb_ary_push(rb_values, rb_value);
+    }
+
+    return rb_values;
+}
+
 void
 Init_gstreamer (void)
 {
     rb_gi_callback_register_finder(rg_gst_bus_func_callback_finder);
     rb_gi_callback_register_finder(rg_gst_bus_sync_handler_callback_finder);
     rb_gi_callback_register_finder(rg_gst_tag_foreach_func_callback_finder);
+
+    rbgobj_register_r2g_func(GST_TYPE_LIST, rg_gst_value_list_r2g);
+    rbgobj_register_g2r_func(GST_TYPE_LIST, rg_gst_value_list_g2r);
 
     rb_gst_init_element_factory();
 }
