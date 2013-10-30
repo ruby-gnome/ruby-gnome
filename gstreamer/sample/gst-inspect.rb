@@ -251,7 +251,6 @@ class Inspector
         !element.flags.provide_clock? and
         element.clock.nil?
       puts("Element has no clocking capabilities.")
-      puts
       return
     end
 
