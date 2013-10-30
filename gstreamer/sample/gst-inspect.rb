@@ -353,14 +353,21 @@ class Inspector
 
       prefix("#{@prefix}#{' ' * 23} ") do
         puts("flags: #{flags.join(', ')}")
+        description = ""
         type_name = param.value_type.name
+        description << "#{type_name}."
         if param.readable?
-          current_value = element.get_property(name)
-          value = "Default: #{param.default.inspect} "
-          value << "Current: #{current_value.inspect}"
+          case param.gtype
+          when GLib::Type["GParamObject"]
+            # do nothing
+          else
+            default_value = element.get_property(name)
+            description << " Default: #{default_value.inspect}"
+          end
+        else
+          description << " Write only"
         end
-        write_only = param.readable? ? "" : " Write only"
-        puts("#{type_name}. #{value}#{write_only}")
+        puts(description)
       end
     end
     puts
