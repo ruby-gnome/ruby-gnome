@@ -183,7 +183,7 @@ rg_grab(VALUE self, VALUE win, VALUE grab_ownership, VALUE owner_events, VALUE e
                                               RVAL2GDKGRABOWNERSHIP(grab_ownership),
                                               RVAL2CBOOL(owner_events),
                                               RVAL2GDKEVENTMASK(event_mask),
-                                              NIL_P(cursor) ? NULL : RVAL2GDKCURSOR(cursor),
+                                              RVAL2GDKCURSOR(cursor),
                                               NUM2INT(time)));
 }
 
