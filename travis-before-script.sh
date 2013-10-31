@@ -23,4 +23,5 @@ sudo apt-get install -qq -y \
     libgirepository1.0-dev \
     gir1.2-clutter-1.0 \
     gir1.2-clutter-gst-1.0 \
-    gir1.2-gtkclutter-1.0
+    gir1.2-gtkclutter-1.0 \
+    hicolor-icon-theme
