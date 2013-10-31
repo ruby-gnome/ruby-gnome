@@ -6,8 +6,6 @@ class TestGtkBuildable < Test::Unit::TestCase
   end
 
   def test_name
-    only_gtk_version(2, 12, 0)
-
     assert_equal("", @buildable.name)
     @buildable.name = "YYY"
     assert_equal("YYY", @buildable.name)
@@ -17,8 +15,6 @@ class TestGtkBuildable < Test::Unit::TestCase
   end
 
   def test_add_child
-    only_gtk_version(2, 12, 0)
-
     assert_equal([], @buildable.children)
 
     builder = Gtk::Builder.new
@@ -28,8 +24,6 @@ class TestGtkBuildable < Test::Unit::TestCase
   end
 
   def test_set_buildable_property
-    only_gtk_version(2, 12, 0)
-
     assert_nil(@buildable.parent)
 
     builder = Gtk::Builder.new
@@ -39,8 +33,6 @@ class TestGtkBuildable < Test::Unit::TestCase
   end
 
   def test_construct_child
-    only_gtk_version(2, 12, 0)
-
     assert_nil(@buildable.parent)
 
     @buildable = Gtk::UIManager.new
@@ -55,8 +47,6 @@ EOU
   end
 
   def test_get_internal_child
-    only_gtk_version(2, 12, 0)
-
     assert_nil(@buildable.parent)
 
     @buildable = Gtk::Dialog.new

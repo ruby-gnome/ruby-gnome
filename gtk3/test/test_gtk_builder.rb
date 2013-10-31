@@ -2,20 +2,16 @@ class TestGtkBuilder < Test::Unit::TestCase
   include GtkTestUtils
 
   def test_constants
-    only_gtk_version(2, 12, 0)
     assert_kind_of(Gtk::BuilderError, Gtk::BuilderError::INVALID_TAG)
   end
 
   def test_new
-    only_gtk_version(2, 12, 0)
     assert_nothing_raised do
       Gtk::Builder.new
     end
   end
 
   def test_add_from_file
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nothing_raised do
       builder.add_from_file(ui_definition_file.path)
@@ -24,8 +20,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_from_string
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nothing_raised do
       builder.add_from_string(ui_definition)
@@ -34,8 +28,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_with_file
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nothing_raised do
       builder.add(ui_definition_file.path)
@@ -44,8 +36,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_with_string
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nothing_raised do
       builder.add(ui_definition)
@@ -54,8 +44,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_add_chain
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nothing_raised do
       builder << ui_definition_file.path << ui_definition_simple
@@ -65,8 +53,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_objects
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nothing_raised do
       builder << ui_definition_file.path << ui_definition_simple
@@ -77,8 +63,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_translation_domain
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nil(builder.translation_domain)
     builder.translation_domain = "ruby-gnome2"
@@ -86,8 +70,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_connect_signals
-    only_gtk_version(2, 12, 0)
-
     handler_names = []
 
     builder = Gtk::Builder.new
@@ -107,8 +89,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_connect_signals_with_no_signal_ui_definition
-    only_gtk_version(2, 12, 0)
-
     handler_names = []
 
     builder = Gtk::Builder.new
@@ -127,8 +107,6 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   def test_get_type_from_name
-    only_gtk_version(2, 12, 0)
-
     builder = Gtk::Builder.new
     assert_nil(builder.get_type("XXX"))
     assert_equal(Gtk::VBox, builder.get_type("GtkVBox"))

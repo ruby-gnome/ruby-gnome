@@ -34,8 +34,6 @@ class TestGtkListStore < Test::Unit::TestCase
   end
 
   def test_set_values
-    only_gtk_version(2, 12)
-
     iter = @store.append
     assert_nothing_raised do
       @store.set_values(iter, [0, '1'])
@@ -55,8 +53,6 @@ class TestGtkListStore < Test::Unit::TestCase
   end
 
   def test_set_values_with_hash
-    only_gtk_version(2, 12)
-
     iter = @store.append
     assert_nothing_raised do
       @store.set_values(iter, {ID => 0, NAME => 'me'})

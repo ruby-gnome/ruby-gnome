@@ -6,8 +6,6 @@ class TestGtkIconTheme < Test::Unit::TestCase
   end
 
   def test_choose_icon
-    only_gtk_version(2, 12)
-
     assert_nil(@theme.choose_icon("non-existent", 100))
 
     icon = @theme.choose_icon("undo", 10)
@@ -18,8 +16,6 @@ class TestGtkIconTheme < Test::Unit::TestCase
   end
 
   def test_contexts
-    only_gtk_version(2, 12)
-
     assert_operator(@theme.contexts, :include?, "MimeTypes")
   end
 
