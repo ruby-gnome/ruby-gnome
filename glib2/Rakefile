@@ -17,7 +17,7 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = [["pkg-config", ">= 0"]]
   _package.dependency.gem.development = [["test-unit", ">= 2"]]
   _package.win32.packages = []
-  _package.win32.dependencies = ["zlib", "libffi", "gettext-runtime"]
+  _package.win32.dependencies = ["libffi", "gettext-runtime"]
   _package.external_packages = [
     {
       :name => "glib",
