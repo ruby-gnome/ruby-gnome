@@ -1,0 +1,11 @@
+--- glib-2.38.1/tests/gobject/Makefile.am.orig	2013-09-23 23:02:08.000000000 +0900
++++ glib-2.38.1/tests/gobject/Makefile.am	2013-11-03 01:08:52.083862955 +0900
+@@ -51,7 +51,7 @@
+ if CROSS_COMPILING
+   glib_genmarshal=$(GLIB_GENMARSHAL)
+ else
+-  glib_genmarshal=$(top_builddir)/gobject/glib-genmarshal
++  glib_genmarshal=$(top_builddir)/gobject/glib-genmarshal$(EXEEXT)
+ endif
+ 
+ testmarshal.h: stamp-testmarshal.h

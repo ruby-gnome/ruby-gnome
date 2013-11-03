@@ -23,7 +23,7 @@ package = GNOME2Package.new do |_package|
       :name => "glib",
       :download_site => :gnome,
       :label => "GLib",
-      :version => "2.36.2",
+      :version => "2.38.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -32,13 +32,16 @@ package = GNOME2Package.new do |_package|
           "--disable-modular-tests",
         ],
         :need_autoreconf => true,
+        :patches => [
+          "glib-2.38.1-add-missing-exeext.diff",
+        ],
       },
     },
     {
       :name => "gmp",
-      :download_base_url => "ftp://ftp.gmplib.org/pub/gmp-5.1.2",
+      :download_base_url => "ftp://ftp.gmplib.org/pub/gmp-5.1.3",
       :label => "GNU MP",
-      :version => "5.1.2",
+      :version => "5.1.3",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -51,16 +54,16 @@ package = GNOME2Package.new do |_package|
       :name => "nettle",
       :download_base_url => "http://www.lysator.liu.se/~nisse/archive",
       :label => "Nettle",
-      :version => "2.7",
+      :version => "2.7.1",
       :windows => {
         :configure_args => [],
       },
     },
     {
       :name => "gnutls",
-      :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.1",
+      :download_base_url => "ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2",
       :label => "GnuTLS",
-      :version => "3.1.11",
+      :version => "3.2.5",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
