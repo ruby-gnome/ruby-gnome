@@ -125,6 +125,84 @@ class TestGdkEvent < Test::Unit::TestCase
     end
   end
 
+  class TestTouch < self
+    def setup
+      @touch = Gdk::EventTouch.new(:touch_begin)
+    end
+
+    def test_window
+      assert_nothing_raised do
+        @touch.window
+      end
+    end
+
+    def test_send_event
+      assert_false(@touch.send_event?)
+    end
+
+    def test_time
+      assert_kind_of(Integer, @touch.time)
+    end
+
+    def test_x
+      assert_kind_of(Float, @touch.x)
+    end
+
+    def test_y
+      assert_kind_of(Float, @touch.y)
+    end
+
+    def test_axes
+      assert_nothing_raised do
+        @touch.axes
+      end
+    end
+
+    def test_state
+      assert_not_nil(@touch.state)
+    end
+
+    def test_touch_begin
+      assert_equal("GDK_TOUCH_BEGIN",
+                   Gdk::EventTouch.new(:touch_begin).event_type.name)
+    end
+
+    def test_touch_update
+      assert_equal("GDK_TOUCH_UPDATE",
+                   Gdk::EventTouch.new(:touch_update).event_type.name)
+    end
+
+    def test_touch_cancel
+      assert_equal("GDK_TOUCH_CANCEL",
+                   Gdk::EventTouch.new(:touch_cancel).event_type.name)
+    end
+
+    def test_touch_end
+      assert_equal("GDK_TOUCH_END",
+                   Gdk::EventTouch.new(:touch_end).event_type.name)
+    end
+
+    def test_emulating_pointer
+      assert_nothing_raised do
+        @touch.emulating_pointer
+      end
+    end
+
+    def test_device
+      assert_nothing_raised do
+        @touch.device
+      end
+    end
+
+    def test_x_root
+      assert_kind_of(Float, @touch.x_root)
+    end
+
+    def test_y_root
+      assert_kind_of(Float, @touch.y_root)
+    end
+  end
+
   class TestScroll < self
     def setup
       @scroll = Gdk::EventScroll.new

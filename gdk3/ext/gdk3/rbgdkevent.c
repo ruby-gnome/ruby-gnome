@@ -720,6 +720,19 @@ ATTR_GOBJ(button, device);
 ATTR_FLOAT(button, x_root);
 ATTR_FLOAT(button, y_root);
 
+/* GdkEventTouch */
+ATTR_GOBJ(touch, window);
+ATTR_BOOL(touch, send_event);
+ATTR_UINT(touch, time);
+ATTR_FLOAT(touch, x);
+ATTR_FLOAT(touch, y);
+ATTR_AXES(touch, GdkEventTouch);
+ATTR_FLAGS(touch, state, GDK_TYPE_MODIFIER_TYPE);
+ATTR_BOOL(touch, emulating_pointer);
+ATTR_GOBJ(touch, device);
+ATTR_FLOAT(touch, x_root);
+ATTR_FLOAT(touch, y_root);
+
 /* GdkEventScroll */
 ATTR_UINT(scroll, time);
 ATTR_FLOAT(scroll, x);
@@ -975,21 +988,19 @@ Init_gdk_event(VALUE mGdk)
     rb_cGdkEventTouch =
         G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_TOUCH, "EventTouch",
                                 mGdk, rb_cGdkEvent);
-/* TODO: implement me.
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, window);
-    DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, send_event);
+    rbg_define_method(rb_cGdkEventTouch, "send_event?", gdkeventtouch_send_event, 0);
+    rbg_define_method(rb_cGdkEventTouch, "set_send_event", gdkeventtouch_set_send_event, 1);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, time);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, x);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, y);
     rbg_define_method(rb_cGdkEventTouch, "axes", gdkeventtouch_axes, 0);
     rbg_define_method(rb_cGdkEventTouch, "set_axes", gdkeventtouch_set_axes, 2);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, state);
-    DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, sequence);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, emulating_pointer);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, device);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, x_root);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, y_root);
-*/
 
     /* GdkEventScroll */
     rb_cGdkEventScroll =
