@@ -127,15 +127,6 @@ rg_add_signal(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_add_path(VALUE self, VALUE path_type, VALUE path_pattern, VALUE priority)
-{
-    gtk_binding_set_add_path(_SELF(self), RVAL2GTKPATHTYPE(path_type),
-                             RVAL2CSTR(path_pattern),
-                             RVAL2GTKPATHPRIORITYTYPE(priority));
-    return self;
-}
-
-static VALUE
 rg_entry_remove(VALUE self, VALUE keyval, VALUE modifiers)
 {
     gtk_binding_entry_remove(_SELF(self), NUM2UINT(keyval), RVAL2GDKMODIFIERTYPE(modifiers));
@@ -158,7 +149,6 @@ Init_gtk_bindings(VALUE mGtk)
     RG_DEF_METHOD(activate, 3);
     RG_DEF_METHOD(add_signal, -1);
     RG_DEF_ALIAS("entry_add_signal", "add_signal");
-    RG_DEF_METHOD(add_path, 3);
     RG_DEF_METHOD(entry_remove, 2);
     RG_DEF_METHOD(entry_skip, 2);
 }
