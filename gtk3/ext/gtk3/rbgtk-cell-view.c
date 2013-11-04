@@ -75,19 +75,6 @@ rg_displayed_row(VALUE self)
     return GTKTREEPATH2RVAL(gtk_cell_view_get_displayed_row(_SELF(self)));
 }
 
-static VALUE
-rg_get_size_of_row(VALUE self, VALUE path)
-{
-    GtkRequisition req;
-    gboolean ret = gtk_cell_view_get_size_of_row(_SELF(self),  
-                                                 RVAL2GTKTREEPATH(path),
-                                                 &req);
-    if (! ret)
-        rb_raise(rb_eRuntimeError, "Can't get the value");
-
-    return rb_ary_assoc(INT2NUM(req.width), INT2NUM(req.height));
-}
-
 /* Use Gtk::CellView#background_gdk(Gdk::Color) instead.
 void        gtk_cell_view_set_background_color
                                             (GtkCellView *cell_view,
@@ -105,5 +92,4 @@ Init_gtk_cellview(VALUE mGtk)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_displayed_row, 1);
     RG_DEF_METHOD(displayed_row, 0);
-    RG_DEF_METHOD(get_size_of_row, 1);
 }
