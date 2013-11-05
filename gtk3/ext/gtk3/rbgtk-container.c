@@ -146,7 +146,7 @@ rg_child_type(VALUE self)
     return GTYPE2CLASS(gtk_container_child_type(_SELF(self)));
 }
 
-/* 
+/*
 void        gtk_container_child_get         (GtkContainer *container,
                                              GtkWidget *child,
                                              const gchar *first_prop_name,
@@ -229,7 +229,7 @@ rg_child_get_property(VALUE self, VALUE child, VALUE prop_name)
             }
         }
         g_value_init(&gval, G_PARAM_SPEC_VALUE_TYPE(pspec));
-        gtk_container_child_get_property(RVAL2GTKCONTAINER(self), 
+        gtk_container_child_get_property(RVAL2GTKCONTAINER(self),
                                          RVAL2GTKWIDGET(child),
                                          name , &gval);
         ret = getter ? getter(&gval) : GVAL2RVAL(&gval);
@@ -282,7 +282,7 @@ rg_child_set_property(VALUE self, VALUE child, VALUE prop_name, VALUE val)
 
         G_CHILD_ADD(child, val);
 
-        gtk_container_child_set_property(RVAL2GTKCONTAINER(self), 
+        gtk_container_child_set_property(RVAL2GTKCONTAINER(self),
                                          RVAL2GTKWIDGET(child), name, &gval);
 
         g_value_unset(&gval);
@@ -312,7 +312,7 @@ rg_add(int argc, VALUE *argv, VALUE self)
         ary = rb_funcall(properties, rb_intern("to_a"), 0);
 
         for (i = 0; i < RARRAY_LEN(ary); i++) {
-            rg_child_set_property(self, other, 
+            rg_child_set_property(self, other,
                        RARRAY_PTR(RARRAY_PTR(ary)[i])[0],
                        RARRAY_PTR(RARRAY_PTR(ary)[i])[1]);
         }
@@ -458,7 +458,7 @@ rg_s_install_child_property(int argc, VALUE *argv, VALUE self)
                  rb_class2name(self));
 
     gclass = GTK_CONTAINER_CLASS(g_type_class_ref(cinfo->gtype));
-    gtk_container_class_install_child_property(gclass, 
+    gtk_container_class_install_child_property(gclass,
                                                NIL_P(prop_id) ? 1 : NUM2UINT(prop_id),
                                                pspec);
 
@@ -663,7 +663,7 @@ rg_s_type_register(int argc, VALUE* argv, VALUE self)
         VALUE s = rb_funcall(self, rb_intern("name"), 0);
 
         if (strlen(StringValuePtr(s)) == 0)
-            rb_raise(rb_eTypeError, "can't determine type name");        
+            rb_raise(rb_eTypeError, "can't determine type name");
 
         type_name = rb_funcall(
             rb_eval_string("lambda{|x| x.gsub(/::/,'') }"),

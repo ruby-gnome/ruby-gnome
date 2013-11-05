@@ -376,7 +376,7 @@ Init_gtk_file_chooser(VALUE mGtk)
     RG_DEF_METHOD(unselect_file, 1);
 
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
-    G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
+    G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_FILE_CHOOSER_ERROR);
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
 

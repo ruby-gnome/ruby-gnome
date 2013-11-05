@@ -52,7 +52,7 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
         g_value_unset(&value); /* TODO: needless? */
-    } 
+    }
 
     return ret;
 }

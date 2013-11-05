@@ -53,7 +53,7 @@ rg_get_property(VALUE self, VALUE property, VALUE state)
     if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
         ret = GVAL2RVAL(&value);
         g_value_unset(&value);
-    } 
+    }
 
     return ret;
 }
