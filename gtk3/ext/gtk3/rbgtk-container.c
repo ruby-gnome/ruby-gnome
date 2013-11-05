@@ -345,7 +345,7 @@ rg_propagate_expose(VALUE self, VALUE child, VALUE event)
 static VALUE
 rg_focus_chain(VALUE self)
 {
-    gboolean ret;
+    G_GNUC_UNUSED gboolean ret;
     GList *glist = NULL;
     ret = gtk_container_get_focus_chain(_SELF(self), &glist);
     return GOBJGLIST2RVAL_FREE(glist, g_list_free, NULL);

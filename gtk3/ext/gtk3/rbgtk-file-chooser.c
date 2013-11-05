@@ -289,7 +289,7 @@ rg_preview_file(VALUE self)
 static VALUE
 rg_select_file(VALUE self, VALUE file)
 {
-    gboolean result;
+    G_GNUC_UNUSED gboolean result;
     GError *error = NULL;
 
     result = gtk_file_chooser_select_file(_SELF(self), RVAL2GFILE(file), &error);
@@ -315,7 +315,7 @@ rg_set_current_folder_file(VALUE self, VALUE file)
 static VALUE
 rg_set_file(VALUE self, VALUE file)
 {
-    gboolean result;
+    G_GNUC_UNUSED gboolean result;
     GError *error = NULL;
 
     result = gtk_file_chooser_set_file(_SELF(self), RVAL2GFILE(file), &error);

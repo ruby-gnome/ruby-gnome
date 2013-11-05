@@ -41,7 +41,7 @@ static VALUE
 rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
 {
     GValue value = G_VALUE_INIT;
-    gboolean result;
+    G_GNUC_UNUSED gboolean result;
     VALUE ret = Qnil;
 
     result = gtk_style_provider_get_style_property(_SELF(self),

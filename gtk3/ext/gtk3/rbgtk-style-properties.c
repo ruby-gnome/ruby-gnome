@@ -43,7 +43,7 @@ static VALUE
 rg_get_property(VALUE self, VALUE property, VALUE state)
 {
     GValue value = G_VALUE_INIT;
-    gboolean result;
+    G_GNUC_UNUSED gboolean result;
     VALUE ret = Qnil;
 
     result = gtk_style_properties_get_property(_SELF(self),
