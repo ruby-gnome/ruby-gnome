@@ -2,7 +2,7 @@
 
 class TestInetAddress < Test::Unit::TestCase
   def test_responds_to_properties
-    a = GLib::InetAddress.new_any(GLib::Socket::FAMILY_IPV4)
+    a = Gio::InetAddress.new_any(Gio::Socket::FAMILY_IPV4)
     assert a.respond_to?(:any?)
   end
 end
