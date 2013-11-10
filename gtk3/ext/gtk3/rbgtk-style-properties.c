@@ -51,8 +51,7 @@ rg_get_property(VALUE self, VALUE property, VALUE state)
                                               RVAL2GTKSTATEFLAGS(state),
                                               &value);
     if (exist) {
-        rb_value = GVAL2RVAL(&value);
-        g_value_unset(&value);
+        rb_value = GVAL2RVAL_UNSET(&value);
     }
 
     return rb_value;
