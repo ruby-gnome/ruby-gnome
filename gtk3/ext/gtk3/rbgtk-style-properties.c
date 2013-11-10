@@ -44,18 +44,18 @@ rg_get_property(VALUE self, VALUE property, VALUE state)
 {
     GValue value = G_VALUE_INIT;
     gboolean exist;
-    VALUE ret = Qnil;
+    VALUE rb_value = Qnil;
 
     exist = gtk_style_properties_get_property(_SELF(self),
                                               RVAL2CSTR(property),
                                               RVAL2GTKSTATEFLAGS(state),
                                               &value);
     if (exist) {
-        ret = GVAL2RVAL(&value);
+        rb_value = GVAL2RVAL(&value);
         g_value_unset(&value);
     }
 
-    return ret;
+    return rb_value;
 }
 
 static VALUE
