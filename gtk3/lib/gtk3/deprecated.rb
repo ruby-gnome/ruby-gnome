@@ -195,6 +195,7 @@ module Gtk
     define_deprecated_method :editing_canceled, :warn => "Use '#{self}#stop_editing'." do |_self|
       _self.stop_editing(true)
     end
+    define_deprecated_method :get_size, :raise => "Use Gtk::Renderer#get_preferred_size."
   end
 
   class CellRendererAccel
@@ -207,6 +208,7 @@ module Gtk
     define_deprecated_method :cell_renderers, :warn => "Use 'Gtk::CellLayout#cells'." do |_self|
       _self.cells
     end
+    define_deprecated_method :get_size_of_row, :raise => "Use Gtk::Renderer#get_preferred_size."
   end
 
   class ColorSelectionDialog

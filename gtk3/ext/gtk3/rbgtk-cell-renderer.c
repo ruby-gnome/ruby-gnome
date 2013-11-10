@@ -25,14 +25,16 @@
 #define _SELF(s) (RVAL2GTKCELLRENDERER(s))
 
 static VALUE
-rg_get_size(VALUE self, VALUE widget, VALUE cell_area)
+rg_get_preferred_size(VALUE self, VALUE widget)
 {
-    GdkRectangle ret;
+    GtkRequisition minimum_size, natural_size;
 
-    gtk_cell_renderer_get_size(_SELF(self), RVAL2GTKWIDGET(widget),
-                               RVAL2GDKRECTANGLE(cell_area),
-                               &ret.x, &ret.y, &ret.width, &ret.height);
-    return GDKRECTANGLE2RVAL(&ret);
+    gtk_cell_renderer_get_preferred_size(_SELF(self),
+                                         RVAL2GTKWIDGET(widget),
+                                         &minimum_size, &natural_size);
+
+    return rb_assoc_new(NIL_P(&minimum_size) ? Qnil : GTKREQUISITION2RVAL(&minimum_size),
+                        NIL_P(&natural_size) ? Qnil : GTKREQUISITION2RVAL(&natural_size));
 }
 
 /* TODO
@@ -101,7 +103,7 @@ Init_gtk_cellrenderer(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_CELL_RENDERER, "CellRenderer", mGtk);
 
-    RG_DEF_METHOD(get_size, 2);
+    RG_DEF_METHOD(get_preferred_size, 1);
 /* TODO
     RG_DEF_METHOD(render, 6);
 */

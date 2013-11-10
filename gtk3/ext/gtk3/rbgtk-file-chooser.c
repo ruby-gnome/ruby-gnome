@@ -289,7 +289,7 @@ rg_preview_file(VALUE self)
 static VALUE
 rg_select_file(VALUE self, VALUE file)
 {
-    gboolean result;
+    G_GNUC_UNUSED gboolean result;
     GError *error = NULL;
 
     result = gtk_file_chooser_select_file(_SELF(self), RVAL2GFILE(file), &error);
@@ -315,7 +315,7 @@ rg_set_current_folder_file(VALUE self, VALUE file)
 static VALUE
 rg_set_file(VALUE self, VALUE file)
 {
-    gboolean result;
+    G_GNUC_UNUSED gboolean result;
     GError *error = NULL;
 
     result = gtk_file_chooser_set_file(_SELF(self), RVAL2GFILE(file), &error);
@@ -376,7 +376,7 @@ Init_gtk_file_chooser(VALUE mGtk)
     RG_DEF_METHOD(unselect_file, 1);
 
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_ACTION, "Action", RG_TARGET_NAMESPACE);
-    G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError, 
+    G_DEF_ERROR(GTK_FILE_CHOOSER_ERROR, "FileChooserError", mGtk, rb_eRuntimeError,
                 GTK_TYPE_FILE_CHOOSER_ERROR);
     G_DEF_CLASS(GTK_TYPE_FILE_CHOOSER_CONFIRMATION, "Confirmation", RG_TARGET_NAMESPACE);
 
