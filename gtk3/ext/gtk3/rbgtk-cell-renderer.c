@@ -33,8 +33,9 @@ rg_get_preferred_size(VALUE self, VALUE widget)
                                          RVAL2GTKWIDGET(widget),
                                          &minimum_size, &natural_size);
 
-    return rb_assoc_new(NIL_P(&minimum_size) ? Qnil : GTKREQUISITION2RVAL(&minimum_size),
-                        NIL_P(&natural_size) ? Qnil : GTKREQUISITION2RVAL(&natural_size));
+    return rb_ary_new3(2,
+                       NIL_P(&minimum_size) ? Qnil : GTKREQUISITION2RVAL(&minimum_size),
+                       NIL_P(&natural_size) ? Qnil : GTKREQUISITION2RVAL(&natural_size));
 }
 
 /* TODO
