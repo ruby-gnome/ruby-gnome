@@ -49,7 +49,7 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
                                                   RVAL2GTKSTATEFLAGS(state),
                                                   RVAL2GPARAMSPEC(pspec),
                                                   &value);
-    if (exist){
+    if (exist) {
         ret = GVAL2RVAL(&value);
         g_value_unset(&value); /* TODO: needless? */
     }
