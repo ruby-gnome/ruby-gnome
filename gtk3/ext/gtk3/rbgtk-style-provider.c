@@ -50,8 +50,7 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
                                                   RVAL2GPARAMSPEC(pspec),
                                                   &value);
     if (exist) {
-        ret = GVAL2RVAL(&value);
-        g_value_unset(&value); /* TODO: needless? */
+        ret = GVAL2RVAL_UNSET(&value);
     }
 
     return ret;
