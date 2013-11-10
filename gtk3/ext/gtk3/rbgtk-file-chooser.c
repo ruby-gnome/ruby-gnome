@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2005,2006 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2005-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004  Seiya Nishizawa, Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -289,10 +288,9 @@ rg_preview_file(VALUE self)
 static VALUE
 rg_select_file(VALUE self, VALUE file)
 {
-    G_GNUC_UNUSED gboolean result;
     GError *error = NULL;
 
-    result = gtk_file_chooser_select_file(_SELF(self), RVAL2GFILE(file), &error);
+    gtk_file_chooser_select_file(_SELF(self), RVAL2GFILE(file), &error);
     if (error)
         RAISE_GERROR(error);
 
@@ -315,10 +313,9 @@ rg_set_current_folder_file(VALUE self, VALUE file)
 static VALUE
 rg_set_file(VALUE self, VALUE file)
 {
-    G_GNUC_UNUSED gboolean result;
     GError *error = NULL;
 
-    result = gtk_file_chooser_set_file(_SELF(self), RVAL2GFILE(file), &error);
+    gtk_file_chooser_set_file(_SELF(self), RVAL2GFILE(file), &error);
     if (error)
         RAISE_GERROR(error);
 
