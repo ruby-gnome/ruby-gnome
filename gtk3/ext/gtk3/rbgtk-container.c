@@ -345,9 +345,13 @@ rg_propagate_expose(VALUE self, VALUE child, VALUE event)
 static VALUE
 rg_focus_chain(VALUE self)
 {
-    G_GNUC_UNUSED gboolean ret;
+    gboolean set_explicitly;
     GList *glist = NULL;
-    ret = gtk_container_get_focus_chain(_SELF(self), &glist);
+
+    set_explicitly = gtk_container_get_focus_chain(_SELF(self), &glist);
+    if (!set_explicitly) {
+        return Qnil;
+    }
     return GOBJGLIST2RVAL_FREE(glist, g_list_free, NULL);
 }
 
