@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -41,15 +41,15 @@ static VALUE
 rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
 {
     GValue value = G_VALUE_INIT;
-    G_GNUC_UNUSED gboolean result;
+    gboolean exist;
     VALUE ret = Qnil;
 
-    result = gtk_style_provider_get_style_property(_SELF(self),
+    exist = gtk_style_provider_get_style_property(_SELF(self),
                                                    RVAL2GTKWIDGETPATH(path),
                                                    RVAL2GTKSTATEFLAGS(state),
                                                    RVAL2GPARAMSPEC(pspec),
                                                    &value);
-    if (G_VALUE_TYPE(&value) != G_TYPE_INVALID){
+    if (exist){
         ret = GVAL2RVAL(&value);
         g_value_unset(&value); /* TODO: needless? */
     }
