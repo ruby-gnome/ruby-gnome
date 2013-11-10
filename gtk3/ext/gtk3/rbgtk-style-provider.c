@@ -45,10 +45,10 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
     VALUE ret = Qnil;
 
     exist = gtk_style_provider_get_style_property(_SELF(self),
-                                                   RVAL2GTKWIDGETPATH(path),
-                                                   RVAL2GTKSTATEFLAGS(state),
-                                                   RVAL2GPARAMSPEC(pspec),
-                                                   &value);
+                                                  RVAL2GTKWIDGETPATH(path),
+                                                  RVAL2GTKSTATEFLAGS(state),
+                                                  RVAL2GPARAMSPEC(pspec),
+                                                  &value);
     if (exist){
         ret = GVAL2RVAL(&value);
         g_value_unset(&value); /* TODO: needless? */
