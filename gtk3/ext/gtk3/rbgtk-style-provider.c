@@ -42,7 +42,7 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
 {
     GValue value = G_VALUE_INIT;
     gboolean exist;
-    VALUE ret = Qnil;
+    VALUE property = Qnil;
 
     exist = gtk_style_provider_get_style_property(_SELF(self),
                                                   RVAL2GTKWIDGETPATH(path),
@@ -50,10 +50,10 @@ rg_get_style_property(VALUE self, VALUE path, VALUE state, VALUE pspec)
                                                   RVAL2GPARAMSPEC(pspec),
                                                   &value);
     if (exist) {
-        ret = GVAL2RVAL_UNSET(&value);
+        property = GVAL2RVAL_UNSET(&value);
     }
 
-    return ret;
+    return property;
 }
 
 void
