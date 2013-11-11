@@ -31,6 +31,7 @@ class TestPage < Test::Unit::TestCase
   end
 
   def test_render
+    only_poppler_version(0, 20, 0)
     document = Poppler::Document.new(image_pdf)
     page = document[0]
     png = StringIO.new
