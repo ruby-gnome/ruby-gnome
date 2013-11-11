@@ -31,6 +31,9 @@ modules = [
   [gstreamer_base, "gstreamer"],
 ]
 modules.each do |target, module_name|
+  if system("which make > /dev/null")
+    `make -C #{target.dump} > /dev/null` or exit(false)
+  end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
