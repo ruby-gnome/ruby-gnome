@@ -180,6 +180,16 @@ module GNOME2
                 end
               end
               spec.files += win32_files
+              stage_path = "#{ext.tmp_dir}/#{ext.cross_platform}/stage"
+              win32_files.each do |win32_file|
+                next unless File.file?(win32_file)
+                stage_win32_file = "#{stage_path}/#{win32_file}"
+                stage_win32_binary_dir = File.dirname(stage_win32_file)
+                directory stage_win32_binary_dir
+                file stage_win32_file => [stage_win32_binary_dir, win32_file] do
+                  cp win32_file, stage_win32_file
+                end
+              end
             end
             @cross_compiling_hooks.each do |hook|
               hook.call(spec)
