@@ -10,7 +10,7 @@ class TestGC < Test::Unit::TestCase
 
   def test_inheritance_and_gc
     button = Class.new(Gtk::Button)
-    box = Gtk::HBox.new
+    box = Gtk::Box.new(:horizontal)
     n = 10
     n.times do
       box.add(button.new)

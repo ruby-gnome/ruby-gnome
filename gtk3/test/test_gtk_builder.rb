@@ -24,7 +24,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     assert_nothing_raised do
       builder.add_from_string(ui_definition)
     end
-    assert_kind_of(Gtk::VBox, builder["vbox1"])
+    assert_kind_of(Gtk::Box, builder["vbox1"])
   end
 
   def test_add_with_file
@@ -32,7 +32,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     assert_nothing_raised do
       builder.add(ui_definition_file.path)
     end
-    assert_kind_of(Gtk::HButtonBox, builder["hbuttonbox1"])
+    assert_kind_of(Gtk::ButtonBox, builder["hbuttonbox1"])
   end
 
   def test_add_with_string
@@ -109,7 +109,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   def test_get_type_from_name
     builder = Gtk::Builder.new
     assert_nil(builder.get_type("XXX"))
-    assert_equal(Gtk::VBox, builder.get_type("GtkVBox"))
+    assert_equal(Gtk::Box, builder.get_type("GtkBox"))
   end
 
   private

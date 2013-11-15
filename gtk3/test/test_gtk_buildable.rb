@@ -2,7 +2,7 @@ class TestGtkBuildable < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    @buildable = Gtk::HBox.new
+    @buildable = Gtk::Box.new(:horizontal)
   end
 
   def test_name
@@ -27,7 +27,7 @@ class TestGtkBuildable < Test::Unit::TestCase
     assert_nil(@buildable.parent)
 
     builder = Gtk::Builder.new
-    parent = Gtk::HBox.new
+    parent = Gtk::Box.new(:horizontal)
     @buildable.set_buildable_property(builder, "parent", parent)
     assert_equal(parent, @buildable.parent)
   end
@@ -51,6 +51,6 @@ EOU
 
     @buildable = Gtk::Dialog.new
     builder = Gtk::Builder.new
-    assert_kind_of(Gtk::VBox, @buildable.get_internal_child(builder, "vbox"))
+    assert_kind_of(Gtk::Box, @buildable.get_internal_child(builder, "vbox"))
   end
 end

@@ -14,19 +14,11 @@ class TestGtkWidget < Test::Unit::TestCase
 
   def test_modify_color_component_with_nil_color
     assert_nothing_raised do
-      @widget.modify_base(:normal, nil)
+      @widget.override_color(:normal, nil)
     end
 
     assert_nothing_raised do
-      @widget.modify_text(:normal, nil)
-    end
-
-    assert_nothing_raised do
-      @widget.modify_fg(:normal, nil)
-    end
-
-    assert_nothing_raised do
-      @widget.modify_bg(:normal, nil)
+      @widget.override_background_color(:normal, nil)
     end
   end
 end
