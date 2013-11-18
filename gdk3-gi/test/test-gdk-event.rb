@@ -512,9 +512,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_grab_window
-      assert_nothing_raised do
-        @grab_broken.grab_window
-      end
+      assert_nil(@grab_broken.grab_window)
     end
   end
 end
