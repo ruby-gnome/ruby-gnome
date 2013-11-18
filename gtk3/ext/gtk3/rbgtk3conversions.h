@@ -185,8 +185,13 @@
 #define GTKBORDER2RVAL(o)                  (BOXED2RVAL(o, GTK_TYPE_BORDER))
 #define RVAL2GTKCSSSECTION(o)              ((GtkCssSection*)RVAL2BOXED(o, GTK_TYPE_CSS_SECTION))
 #define GTKCSSSECTION2RVAL(o)              (BOXED2RVAL(o, GTK_TYPE_CSS_SECTION))
-#define RVAL2GTKICONINFO(o)                (GTK_ICON_INFO(RVAL2GOBJ(o)))
-#define GTKICONINFO2RVAL(o)                (GOBJ2RVAL(o))
+#if GTK_CHECK_VERSION(3, 8, 0)
+#  define RVAL2GTKICONINFO(o)              (GTK_ICON_INFO(RVAL2GOBJ(o)))
+#  define GTKICONINFO2RVAL(o)              (GOBJ2RVAL(o))
+#else
+#  define RVAL2GTKICONINFO(o)              ((GtkIconInfo *)RVAL2BOXED(o, GTK_TYPE_ICON_INFO))
+#  define GTKICONINFO2RVAL(o)              (BOXED2RVAL(o, GTK_TYPE_ICON_INFO))
+#endif
 #define RVAL2GTKICONSET(o)                 ((GtkIconSet*)RVAL2BOXED(o, GTK_TYPE_ICON_SET))
 #define GTKICONSET2RVAL(o)                 (BOXED2RVAL(o, GTK_TYPE_ICON_SET))
 #define RVAL2GTKICONSOURCE(o)              ((GtkIconSource*)RVAL2BOXED(o, GTK_TYPE_ICON_SOURCE))
