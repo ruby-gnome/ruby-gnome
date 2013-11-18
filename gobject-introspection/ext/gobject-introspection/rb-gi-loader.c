@@ -55,9 +55,14 @@ static VALUE
 struct_alloc(VALUE klass)
 {
     VALUE rb_size;
+    size_t size;
+    gpointer instance;
 
     rb_size = rb_iv_get(klass, "@size");
-    return Data_Wrap_Struct(klass, NULL, xfree, xmalloc(NUM2ULONG(rb_size)));
+    size = NUM2ULONG(rb_size);
+    instance = xmalloc(size);
+    memset(instance, 0, size);
+    return Data_Wrap_Struct(klass, NULL, xfree, instance);
 }
 
 static VALUE
