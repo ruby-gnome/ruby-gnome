@@ -23,14 +23,15 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
-gdk3_base = File.join(ruby_gnome2_base, "gdk3-gi")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+gdk3_base = File.join(ruby_gnome2_base, "gdk3-gi")
 
 [
   [glib_base, "glib2"],
   [atk_base, "atk"],
   [pango_base, "pango"],
-  [gdk_pixbuf_base, "gdk_pixbuf2"]
+  [gdk_pixbuf_base, "gdk_pixbuf2"],
+  [gobject_introspection_base, "gobject-introspection"]
 ].each do |target, module_name|
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
@@ -39,7 +40,6 @@ gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection"
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(gobject_introspection_base, "lib"))
 $LOAD_PATH.unshift(File.join(gdk3_base, "lib"))
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
