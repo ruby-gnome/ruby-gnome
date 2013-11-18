@@ -156,22 +156,10 @@ rbgobj_get_gobject(VALUE obj)
     return holder->gobj;
 }
 
-static VALUE
-dummy_init(int argc, VALUE *argv, VALUE self)
-{
-    GType gtype = CLASS2GTYPE(CLASS_OF(self));
-    if (G_TYPE_IS_ABSTRACT(gtype))
-        rb_raise(rb_eTypeError, "initializing abstract class");
-    else
-        return rb_call_super(argc, argv);
-}
-
 void
 rbgobj_init_object_class(VALUE klass)
 {
     rbgobj_define_property_accessors(klass);
-    if (G_TYPE_IS_ABSTRACT(CLASS2GTYPE(klass)))
-        rbg_define_method(klass, "initialize", dummy_init, -1);
 }
 
 /**********************************************************************/
@@ -629,8 +617,16 @@ rg_type_name(VALUE self)
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
 {
+    GType gtype;
     VALUE params_hash;
     GObject* gobj;
+
+    gtype = CLASS2GTYPE(CLASS_OF(self));
+    if (G_TYPE_IS_ABSTRACT(gtype)) {
+        rb_raise(rb_eTypeError,
+                 "initializing abstract class: %s",
+                 RBG_INSPECT(CLASS_OF(self)));
+    }
 
     rb_scan_args(argc, argv, "01", &params_hash);
 
