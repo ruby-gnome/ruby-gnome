@@ -442,7 +442,7 @@ Init_gtk(void)
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);
     Init_gtk_hsv(RG_TARGET_NAMESPACE);
     Init_gtk_icon_factory(RG_TARGET_NAMESPACE);
-    Init_gtk_iconinfo(RG_TARGET_NAMESPACE);
+    Init_gtk_icon_info(RG_TARGET_NAMESPACE);
     Init_gtk_icon_set(RG_TARGET_NAMESPACE);
     Init_gtk_icon_size(RG_TARGET_NAMESPACE);
     Init_gtk_icon_source(RG_TARGET_NAMESPACE);

@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -100,7 +100,7 @@ rg_display_name(VALUE self)
 }
 
 void
-Init_gtk_iconinfo(VALUE mGtk)
+Init_gtk_icon_info(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ICON_INFO, "IconInfo", mGtk);
 
