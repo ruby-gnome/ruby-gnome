@@ -21,11 +21,11 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
   class TestIcons < self
     def test_no_argument
-    assert_operator(@theme.icons, :include?, "face-cool")
+      assert_operator(@theme.icons, :include?, "face-cool")
     end
 
     def test_context
-    assert_operator(@theme.icons("Actions"), :include?, "find")
+      assert_operator(@theme.icons("Actions"), :include?, "find")
     end
   end
 end
