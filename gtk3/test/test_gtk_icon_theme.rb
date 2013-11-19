@@ -21,6 +21,6 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
   def test_icons
     assert_operator(@theme.icons, :include?, "face-cool")
-    assert_operator(@theme.icons("Actions"), :include?, "remove")
+    assert_operator(@theme.icons("Actions"), :include?, "find")
   end
 end
