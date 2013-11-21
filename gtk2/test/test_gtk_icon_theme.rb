@@ -10,13 +10,11 @@ class TestGtkIconTheme < Test::Unit::TestCase
 
     assert_nil(@theme.choose_icon("non-existent", 100))
 
-    # TODO: may not work depending on the environment.
-    #       For example, it doesn't work on Travis-CI.
-    #icon = @theme.choose_icon("undo", 10)
-    #assert_not_nil(icon)
-    #assert_match(/undo/, icon.filename)
-    #
-    #assert_not_nil(@theme.choose_icon("undo", 29, [:use_builtin, :no_svg]))
+    icon = @theme.choose_icon("face-cool", 10)
+    assert_not_nil(icon)
+    assert_match(/face-cool/, icon.filename)
+
+    assert_not_nil(@theme.choose_icon("face-cool", 29, [:use_builtin, :no_svg]))
   end
 
   def test_contexts
@@ -25,10 +23,8 @@ class TestGtkIconTheme < Test::Unit::TestCase
     assert_operator(@theme.contexts, :include?, "MimeTypes")
   end
 
-  # TODO: may not work depending on the environment.
-  #       For example, it doesn't work on Travis-CI.
-  #def test_icons
-  #  assert_operator(@theme.icons, :include?, "undo")
-  #  assert_operator(@theme.icons("Actions"), :include?, "remove")
-  #end
+  def test_icons
+    assert_operator(@theme.icons, :include?, "face-cool")
+    assert_operator(@theme.icons("Actions"), :include?, "remove")
+  end
 end
