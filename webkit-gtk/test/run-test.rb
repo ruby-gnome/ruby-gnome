@@ -23,6 +23,7 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 gio_base = File.join(ruby_gnome2_base, "gio2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
+gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
@@ -33,6 +34,7 @@ modules = [
   [gio_base, "gio2"],
   [atk_base, "atk"],
   [pango_base, "pango"],
+  [gdk_pixbuf_base, "gdk_pixbuf2"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
   [gobject_introspection_base, "gobject-introspection"],
