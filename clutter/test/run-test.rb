@@ -20,11 +20,13 @@ ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 glib_base = File.join(ruby_gnome2_base, "glib2")
+cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
 
 modules = [
   [glib_base, "glib2"],
+  [cairo_gobject_base, "cairo-gobject"],
   [gobject_introspection_base, "gobject-introspection"],
   [clutter_base, "clutter"],
 ]
