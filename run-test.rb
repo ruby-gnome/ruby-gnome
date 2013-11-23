@@ -29,6 +29,7 @@ end
 
 ignored_modules = [
   "gstreamer",
+  "gstreamer-no-gi",
   "webkit-gtk",
   "webkit-gtk2",
 ]
