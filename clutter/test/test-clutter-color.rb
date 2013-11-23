@@ -15,27 +15,35 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class ClutterColorTest < Test::Unit::TestCase
+  include ClutterTestUtils
+
   def test_rgb
+    omit_if_clutter_color_hash_expect_arguments
     assert_equal("#ff0000ff", Clutter::Color.rgb(255, 0, 0).to_s)
   end
 
   def test_rgba
+    omit_if_clutter_color_hash_expect_arguments
     assert_equal("#ff00007f", Clutter::Color.rgb(255, 0, 0, 127).to_s)
   end
 
   def test_hls
+    omit_if_clutter_color_hash_expect_arguments
     assert_equal("#20dfdfff", Clutter::Color.hls(180, 0.5, 0.75).to_s)
   end
 
   def test_hlsa
+    omit_if_clutter_color_hash_expect_arguments
     assert_equal("#20dfdf7f", Clutter::Color.hls(180, 0.5, 0.75, 127).to_s)
   end
 
   def test_pixel
+    omit_if_clutter_color_hash_expect_arguments
     assert_equal("#20dfdf7f", Clutter::Color.pixel(0x20dfdf7f).to_s)
   end
 
   def test_parse
+    omit_if_clutter_color_hash_expect_arguments
     assert_equal("#20dfdf7f",
                  Clutter::Color.parse("rgba(32, 223, 223, 0.5)").to_s)
   end

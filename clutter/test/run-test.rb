@@ -53,6 +53,4 @@ require "clutter"
 
 Clutter.init([])
 
-# TODO: workaround for Travis-CI
-#exit Test::Unit::AutoRunner.run(true, clutter_base)
-exit true
+exit Test::Unit::AutoRunner.run(true, clutter_base)

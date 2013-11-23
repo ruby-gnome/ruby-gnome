@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,4 +18,9 @@ require "test-unit"
 require "test/unit/notify"
 
 module ClutterTestUtils
+  def omit_if_clutter_color_hash_expect_arguments
+    unless Clutter::Color.method(:hash).parameters.empty?
+      omit("This test can't be run on this environment.")
+    end
+  end
 end
