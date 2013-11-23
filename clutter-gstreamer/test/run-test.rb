@@ -23,16 +23,16 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
-clutter_gstreamer_base = File.join(ruby_gnome2_base, "clutter-gstreamer")
 gstreamer_base = File.join(ruby_gnome2_base, "gstreamer")
+clutter_gstreamer_base = File.join(ruby_gnome2_base, "clutter-gstreamer")
 
 modules = [
   [glib_base, "glib2"],
   [cairo_gobject_base, "cairo-gobject"],
   [gobject_introspection_base, "gobject-introspection"],
   [clutter_base, "clutter"],
-  [clutter_gstreamer_base, "clutter-gst"],
   [gstreamer_base, "gstreamer"],
+  [clutter_gstreamer_base, "clutter-gst"],
 ]
 modules.each do |target, module_name|
   if system("which make > /dev/null")
