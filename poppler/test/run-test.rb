@@ -8,7 +8,7 @@ end
 
 glib_dir = File.expand_path(File.join(base_dir, "..", "glib2"))
 gdk_pixbuf_dir = File.expand_path(File.join(base_dir, "..", "gdk_pixbuf2"))
-pango_base = File.join(File.join(base_dir, ".." , "pango"))
+pango_dir = File.join(File.join(base_dir, ".." , "pango"))
 gtk_dir = File.expand_path(File.join(base_dir, "..", "gtk2"))
 
 $LOAD_PATH.unshift(File.join(glib_dir, "test"))
@@ -16,7 +16,7 @@ require 'glib-test-init'
 
 [[gtk_dir, "gtk2"],
  [gdk_pixbuf_dir, "gdk_pibuf2"],
- [pango_base, "pango"],
+ [pango_dir, "pango"],
  [glib_dir, "glib2"],
  [base_dir, "poppler"]].each do |dir, module_name|
   $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
