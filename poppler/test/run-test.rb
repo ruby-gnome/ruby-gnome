@@ -18,7 +18,7 @@ require 'glib-test-init'
  [glib_dir, "glib2"],
  [base_dir, "poppler"]].each do |dir, module_name|
   if have_make
-    system("cd #{dir.dump} && make > /dev/null") or exit(1)
+    system("cd #{dir.dump} && make > /dev/null") or exit(false)
   end
   $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
   $LOAD_PATH.unshift(File.join(dir, "lib"))
