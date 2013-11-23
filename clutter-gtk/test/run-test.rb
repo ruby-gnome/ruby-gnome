@@ -26,9 +26,9 @@ gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
-clutter_gtk_base = File.join(ruby_gnome2_base, "clutter-gtk")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
+clutter_gtk_base = File.join(ruby_gnome2_base, "clutter-gtk")
 
 modules = [
   [glib_base, "glib2"],
@@ -38,9 +38,9 @@ modules = [
   [cairo_gobject_base, "cairo-gobject"],
   [gobject_introspection_base, "gobject-introspection"],
   [clutter_base, "clutter"],
-  [clutter_gtk_base, "clutter-gtk"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
+  [clutter_gtk_base, "clutter-gtk"],
 ]
 modules.each do |target, module_name|
   if system("which make > /dev/null")
