@@ -2,9 +2,7 @@
 
 base_dir = File.expand_path(File.join(File.dirname(__FILE__), ".."))
 
-if system("which make > /dev/null")
-  system("cd #{base_dir.dump} && make > /dev/null") or exit(1)
-end
+have_make = system("which make > /dev/null")
 
 glib_dir = File.expand_path(File.join(base_dir, "..", "glib2"))
 gdk_pixbuf_dir = File.expand_path(File.join(base_dir, "..", "gdk_pixbuf2"))
@@ -19,6 +17,9 @@ require 'glib-test-init'
  [pango_dir, "pango"],
  [glib_dir, "glib2"],
  [base_dir, "poppler"]].each do |dir, module_name|
+  if have_make
+    system("cd #{dir.dump} && make > /dev/null") or exit(1)
+  end
   $LOAD_PATH.unshift(File.join(dir, "ext", module_name))
   $LOAD_PATH.unshift(File.join(dir, "lib"))
 end
