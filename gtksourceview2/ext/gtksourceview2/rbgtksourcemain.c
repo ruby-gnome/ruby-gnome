@@ -22,17 +22,6 @@
 
 #include "rbgtksourcemain.h"
 
-G_GNUC_INTERNAL void Init_gtk_sourceview (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcebuffer (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourceiter (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguage (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcelanguagemanager (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcemark (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourceprintcompositor (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcestyle (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcestylescheme (VALUE mGtk);
-G_GNUC_INTERNAL void Init_gtk_sourcestyleschememanager (VALUE mGtk);
-
 void
 Init_gtksourceview2 (void)
 {
