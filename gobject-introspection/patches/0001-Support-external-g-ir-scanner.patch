@@ -29,7 +29,7 @@ diff --git a/Makefile-gir.am b/Makefile-gir.am
 index 2b39e54..63b2f2b 100644
 --- a/Makefile-gir.am
 +++ b/Makefile-gir.am
-@@ -26,17 +26,17 @@ CLEANFILES += gir/cairo-1.0.gir
+@@ -27,18 +27,18 @@ CLEANFILES += gir/cairo-1.0.gir
  EXTRA_DIST += gir/cairo-1.0.gir.in
  
  # Doesn't seem to work to do gir/%.typelib =(
@@ -44,6 +44,7 @@ index 2b39e54..63b2f2b 100644
 -gir/xlib-2.0.typelib: g-ir-compiler
 -gir/xfixes-4.0.typelib: g-ir-compiler
 -gir/xrandr-1.3.typelib: g-ir-compiler
+-gir/win32-1.0.typelib: g-ir-compiler
 +gir/cairo-1.0.typelib: g-ir-compiler$(EXEEXT)
 +gir/DBus-1.0.typelib: g-ir-compiler$(EXEEXT)
 +gir/DBusGLib-1.0.typelib: g-ir-compiler$(EXEEXT)
@@ -55,10 +56,11 @@ index 2b39e54..63b2f2b 100644
 +gir/xlib-2.0.typelib: g-ir-compiler$(EXEEXT)
 +gir/xfixes-4.0.typelib: g-ir-compiler$(EXEEXT)
 +gir/xrandr-1.3.typelib: g-ir-compiler$(EXEEXT)
++gir/win32-1.0.typelib: g-ir-compiler$(EXEEXT)
  
  # glib with source (to enable documentation)
  if WITH_GLIBSRC
-@@ -89,7 +89,12 @@ endif
+@@ -91,7 +91,12 @@ endif
  
  BUILT_GIRSOURCES += GLib-2.0.gir
  
@@ -105,7 +107,7 @@ index e8def0e..4c1d21e 100644
 +if BUILD_SCANNER
  pkgpyexec_LTLIBRARIES = _giscanner.la
 +endif
- pkgpyexec_PYTHON =		\
+ pkgpyexec_PYTHON = 			\
  	giscanner/__init__.py		\
  	giscanner/annotationmain.py	\
 diff --git a/Makefile-tools.am b/Makefile-tools.am
@@ -203,7 +205,7 @@ index 3537af1..604b164 100644
  AC_CHECK_FUNCS([backtrace backtrace_symbols])
  
 -# Python
--AM_PATH_PYTHON([2.5])
+-AM_PATH_PYTHON([2.6])
 -case "$host" in
 -*-*-mingw*)
 -	# Change backslashes to forward slashes in pyexecdir to avoid
@@ -224,7 +226,7 @@ index 3537af1..604b164 100644
 +        ;;
 +xno)
 +        # Python
-+        AM_PATH_PYTHON([2.5])
++        AM_PATH_PYTHON([2.6])
 +        case "$host" in
 +        *-*-mingw*)
 +                # Change backslashes to forward slashes in pyexecdir to avoid
