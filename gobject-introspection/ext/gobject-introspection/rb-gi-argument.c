@@ -751,8 +751,6 @@ rb_gi_argument_from_ruby_array_c(GIArgument *argument,
                  g_type_tag_to_string(element_type_tag));
         break;
       case GI_TYPE_TAG_INT8:
-        argument->v_pointer = StringValueCStr(rb_argument);
-        break;
       case GI_TYPE_TAG_UINT8:
         argument->v_pointer = RSTRING_PTR(rb_argument);
         break;
