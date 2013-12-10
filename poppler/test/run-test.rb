@@ -13,7 +13,7 @@ $LOAD_PATH.unshift(File.join(glib_dir, "test"))
 require 'glib-test-init'
 
 [[gtk_dir, "gtk2"],
- [gdk_pixbuf_dir, "gdk_pibuf2"],
+ [gdk_pixbuf_dir, "gdk_pixbuf2"],
  [pango_dir, "pango"],
  [glib_dir, "glib2"],
  [base_dir, "poppler"]].each do |dir, module_name|
