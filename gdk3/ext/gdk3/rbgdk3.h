@@ -41,7 +41,7 @@
 
 #define RVAL2GDKPIXBUFGLIST(value) rbgdk_rval2gdkpixbufglist(value)
 
-/* for bcakword compatibility. TODO: remove me. */
+/* for backword compatibility. TODO: remove me. */
 #define GEV2RVAL(ev) GDKEVENT2RVAL(ev)
 #define RVAL2GEV(ev) RVAL2GDKEVENT(ev)
 
