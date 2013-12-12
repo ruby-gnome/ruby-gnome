@@ -196,6 +196,11 @@ rg_ellipsize(VALUE self)
 {
     return PANGOELLIPSIZEMODE2RVAL(pango_layout_get_ellipsize(_SELF(self)));
 }
+static VALUE
+rg_is_ellipsized_p(VALUE self)
+{
+    return CBOOL2RVAL(pango_layout_is_ellipsized(_SELF(self)));
+}
 #endif
 
 static VALUE
@@ -523,6 +528,7 @@ Init_pango_layout(VALUE mPango)
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
     RG_DEF_METHOD(set_ellipsize, 1);
     RG_DEF_METHOD(ellipsize, 0);
+    RG_DEF_METHOD_P(is_ellipsized, 0);
 #endif
     RG_DEF_METHOD(set_indent, 1);
     RG_DEF_METHOD(indent, 0);
