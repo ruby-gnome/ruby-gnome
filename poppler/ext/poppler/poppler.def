@@ -1,2 +1,4 @@
 EXPORTS
     Init_poppler
+    rb_poppler_action2rval
+    rb_poppler_rval2poppler_action_event
