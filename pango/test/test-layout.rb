@@ -27,4 +27,8 @@ class TestLayout < Test::Unit::TestCase
     @layout.height = new_height
     assert_equal(new_height, @layout.height)
   end
+
+  def test_ellipsized?
+    assert_false(@layout.ellipsized?)
+  end
 end

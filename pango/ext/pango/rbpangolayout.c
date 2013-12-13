@@ -197,7 +197,7 @@ rg_ellipsize(VALUE self)
 
 #if PANGO_CHECK_VERSION(1, 16, 0)
 static VALUE
-rg_is_ellipsized_p(VALUE self)
+rg_ellipsized_p(VALUE self)
 {
     return CBOOL2RVAL(pango_layout_is_ellipsized(_SELF(self)));
 }
@@ -526,7 +526,7 @@ Init_pango_layout(VALUE mPango)
     RG_DEF_METHOD(set_ellipsize, 1);
     RG_DEF_METHOD(ellipsize, 0);
 #if PANGO_CHECK_VERSION(1, 16, 0)
-    RG_DEF_METHOD_P(is_ellipsized, 0);
+    RG_DEF_METHOD_P(ellipsized, 0);
 #endif
     RG_DEF_METHOD(set_indent, 1);
     RG_DEF_METHOD(indent, 0);
