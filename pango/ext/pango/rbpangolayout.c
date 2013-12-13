@@ -156,6 +156,21 @@ rg_width(VALUE self)
     return INT2NUM(pango_layout_get_width(_SELF(self)));
 }
 
+#ifdef HAVE_PANGO_LAYOUT_SET_HEIGHT
+static VALUE
+rg_set_height(VALUE self, VALUE width)
+{
+    pango_layout_set_height(_SELF(self), NUM2INT(width));
+    return self;
+}
+
+static VALUE
+rg_height(VALUE self)
+{
+    return INT2NUM(pango_layout_get_height(_SELF(self)));
+}
+#endif
+
 static VALUE
 rg_set_wrap(VALUE self, VALUE wrap)
 {
@@ -180,6 +195,11 @@ static VALUE
 rg_ellipsize(VALUE self)
 {
     return PANGOELLIPSIZEMODE2RVAL(pango_layout_get_ellipsize(_SELF(self)));
+}
+static VALUE
+rg_is_ellipsized_p(VALUE self)
+{
+    return CBOOL2RVAL(pango_layout_is_ellipsized(_SELF(self)));
 }
 #endif
 
@@ -499,11 +519,16 @@ Init_pango_layout(VALUE mPango)
 #endif
     RG_DEF_METHOD(set_width, 1);
     RG_DEF_METHOD(width, 0);
+#ifdef HAVE_PANGO_LAYOUT_SET_HEIGHT
+    RG_DEF_METHOD(set_height, 1);
+    RG_DEF_METHOD(height, 0);
+#endif
     RG_DEF_METHOD(set_wrap, 1);
     RG_DEF_METHOD(wrap, 0);
 #ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
     RG_DEF_METHOD(set_ellipsize, 1);
     RG_DEF_METHOD(ellipsize, 0);
+    RG_DEF_METHOD_P(is_ellipsized, 0);
 #endif
     RG_DEF_METHOD(set_indent, 1);
     RG_DEF_METHOD(indent, 0);
