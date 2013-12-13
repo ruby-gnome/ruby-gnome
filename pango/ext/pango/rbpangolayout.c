@@ -184,18 +184,20 @@ rg_wrap(VALUE self)
     return PANGOWRAPMODE2RVAL(pango_layout_get_wrap(_SELF(self)));
 }
 
-#ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
 static VALUE
 rg_set_ellipsize(VALUE self, VALUE ellipsize)
 {
     pango_layout_set_ellipsize(_SELF(self), RVAL2PANGOELLIPSIZEMODE(ellipsize));
     return self;
 }
+
 static VALUE
 rg_ellipsize(VALUE self)
 {
     return PANGOELLIPSIZEMODE2RVAL(pango_layout_get_ellipsize(_SELF(self)));
 }
+
+#if PANGO_CHECK_VERSION(1, 16, 0)
 static VALUE
 rg_is_ellipsized_p(VALUE self)
 {
@@ -525,9 +527,9 @@ Init_pango_layout(VALUE mPango)
 #endif
     RG_DEF_METHOD(set_wrap, 1);
     RG_DEF_METHOD(wrap, 0);
-#ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
     RG_DEF_METHOD(set_ellipsize, 1);
     RG_DEF_METHOD(ellipsize, 0);
+#if PANGO_CHECK_VERSION(1, 16, 0)
     RG_DEF_METHOD_P(is_ellipsized, 0);
 #endif
     RG_DEF_METHOD(set_indent, 1);
@@ -568,9 +570,7 @@ Init_pango_layout(VALUE mPango)
     G_DEF_CLASS(PANGO_TYPE_ALIGNMENT, "Alignment", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_ALIGNMENT, "PANGO_");
 
-#ifdef HAVE_PANGO_LAYOUT_SET_ELLIPSIZE
     /* PangoEllipsizeMode */
     G_DEF_CLASS(PANGO_TYPE_ELLIPSIZE_MODE, "EllipsizeMode", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, PANGO_TYPE_ELLIPSIZE_MODE, "PANGO_");
-#endif
 }
