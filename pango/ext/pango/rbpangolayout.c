@@ -134,14 +134,12 @@ rg_set_font_description(VALUE self, VALUE rb_desc)
     return self;
 }
 
-#ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
 static VALUE
 rg_font_description(VALUE self)
 {
     const PangoFontDescription* desc = pango_layout_get_font_description(_SELF(self));
     return PANGOFONTDESCRIPTION2RVAL((gpointer)desc);
 }
-#endif
 
 static VALUE
 rg_set_width(VALUE self, VALUE width)
@@ -516,9 +514,7 @@ Init_pango_layout(VALUE mPango)
     RG_DEF_METHOD(set_attributes, 1);
     RG_DEF_METHOD(attributes, 0);
     RG_DEF_METHOD(set_font_description, 1);
-#ifdef HAVE_PANGO_LAYOUT_GET_FONT_DESCRIPTION
     RG_DEF_METHOD(font_description, 0);
-#endif
     RG_DEF_METHOD(set_width, 1);
     RG_DEF_METHOD(width, 0);
 #if PANGO_CHECK_VERSION(1, 20, 0)
