@@ -269,7 +269,7 @@ rg_alignment(VALUE self)
 static VALUE
 rg_set_tabs(VALUE self, VALUE tabs)
 {
-    pango_layout_set_tabs(_SELF(self), 
+    pango_layout_set_tabs(_SELF(self),
                           RVAL2PANGOTABARRAY(tabs));
     return self;
 }
@@ -323,8 +323,8 @@ static VALUE
 rg_xy_to_index(VALUE self, VALUE x, VALUE y)
 {
     int index, trailing;
-    gboolean ret = pango_layout_xy_to_index(_SELF(self), 
-                                            NUM2INT(x), NUM2INT(y), 
+    gboolean ret = pango_layout_xy_to_index(_SELF(self),
+                                            NUM2INT(x), NUM2INT(y),
                                             &index, &trailing);
 
     return rb_ary_new3(3, CBOOL2RVAL(ret), INT2NUM(index), INT2NUM(trailing));
@@ -389,7 +389,7 @@ rg_get_extents(int argc, VALUE *argv, VALUE self)
         rlog.y = rect->y;
         rlog.width = rect->width;
         rlog.height = rect->height;
-    }   
+    }
 
     pango_layout_get_extents(_SELF(self), &rink, &rlog);
 
@@ -439,7 +439,7 @@ rg_get_pixel_extents(int argc, VALUE *argv, VALUE self)
         rlog.y = rect->y;
         rlog.width = rect->width;
         rlog.height = rect->height;
-    }   
+    }
 
     pango_layout_get_pixel_extents(_SELF(self), &rink, &rlog);
 
