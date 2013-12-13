@@ -17,4 +17,14 @@ class TestLayout < Test::Unit::TestCase
     @layout.font_description = description
     assert_equal("monospace 10", @layout.font_description.to_s)
   end
+
+  def test_height
+    assert_equal(-1, @layout.height)
+  end
+
+  def test_set_height
+    new_height = 29 * Pango::SCALE
+    @layout.height = new_height
+    assert_equal(new_height, @layout.height)
+  end
 end
