@@ -156,7 +156,7 @@ rg_width(VALUE self)
     return INT2NUM(pango_layout_get_width(_SELF(self)));
 }
 
-#ifdef HAVE_PANGO_LAYOUT_SET_HEIGHT
+#if PANGO_CHECK_VERSION(1, 20, 0)
 static VALUE
 rg_set_height(VALUE self, VALUE width)
 {
@@ -519,7 +519,7 @@ Init_pango_layout(VALUE mPango)
 #endif
     RG_DEF_METHOD(set_width, 1);
     RG_DEF_METHOD(width, 0);
-#ifdef HAVE_PANGO_LAYOUT_SET_HEIGHT
+#if PANGO_CHECK_VERSION(1, 20, 0)
     RG_DEF_METHOD(set_height, 1);
     RG_DEF_METHOD(height, 0);
 #endif

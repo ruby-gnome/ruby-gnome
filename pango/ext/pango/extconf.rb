@@ -80,7 +80,6 @@ pango_header = "pango/pango.h"
 have_func("pango_layout_iter_get_type", pango_header)
 have_func("pango_layout_set_ellipsize", pango_header)
 have_func("pango_layout_get_font_description", pango_header)
-have_func("pango_layout_set_height", pango_header)
 have_func("pango_render_part_get_type", pango_header)
 have_func("pango_attr_strikethrough_color_new", pango_header)
 have_func("pango_attr_underline_color_new", pango_header)
