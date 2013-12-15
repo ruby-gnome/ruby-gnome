@@ -31,7 +31,7 @@ static VALUE rb_cPopplerActionLaunch;
 static VALUE rb_cPopplerActionUri;
 static VALUE rb_cPopplerActionNamed;
 static VALUE rb_cPopplerActionMovie;
-static VALUE rb_cPopplerActionRendtion;
+static VALUE rb_cPopplerActionRendition;
 static VALUE rb_cPopplerActionOCGState;
 static VALUE rb_cPopplerActionJavascript;
 
@@ -140,7 +140,7 @@ rb_poppler_action_to_gtype(VALUE action)
         type = POPPLER_ACTION_TYPE_NAMED;
     } else if (klass == rb_cPopplerActionMovie) {
         type = POPPLER_ACTION_TYPE_MOVIE;
-    } else if (klass == rb_cPopplerActionRendtion) {
+    } else if (klass == rb_cPopplerActionRendition) {
         type = POPPLER_ACTION_TYPE_RENDITION;
     } else if (klass == rb_cPopplerActionOCGState) {
         type = POPPLER_ACTION_TYPE_OCG_STATE;
