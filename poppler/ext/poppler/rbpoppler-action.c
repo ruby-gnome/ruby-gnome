@@ -28,7 +28,7 @@ static VALUE rb_cPopplerActionUnknown;
 static VALUE rb_cPopplerActionGotoDest;
 static VALUE rb_cPopplerActionGotoRemote;
 static VALUE rb_cPopplerActionLaunch;
-static VALUE rb_cPopplerActionUri;
+static VALUE rb_cPopplerActionURI;
 static VALUE rb_cPopplerActionNamed;
 static VALUE rb_cPopplerActionMovie;
 static VALUE rb_cPopplerActionRendition;
@@ -53,7 +53,7 @@ DEFINE_ACTION_TYPE(unknown, Unknown)
 DEFINE_ACTION_TYPE(goto_dest, GotoDest)
 DEFINE_ACTION_TYPE(goto_remote, GotoRemote)
 DEFINE_ACTION_TYPE(launch, Launch)
-DEFINE_ACTION_TYPE(uri, Uri)
+DEFINE_ACTION_TYPE(uri, URI)
 DEFINE_ACTION_TYPE(named, Named)
 DEFINE_ACTION_TYPE(movie, Movie)
 DEFINE_ACTION_TYPE(rendition, Rendition)
@@ -134,7 +134,7 @@ rb_poppler_action_to_gtype(VALUE action)
         type = POPPLER_ACTION_TYPE_GOTO_REMOTE;
     } else if (klass == rb_cPopplerActionLaunch) {
         type = POPPLER_ACTION_TYPE_LAUNCH;
-    } else if (klass == rb_cPopplerActionUri) {
+    } else if (klass == rb_cPopplerActionURI) {
         type = POPPLER_ACTION_TYPE_URI;
     } else if (klass == rb_cPopplerActionNamed) {
         type = POPPLER_ACTION_TYPE_NAMED;
@@ -204,7 +204,7 @@ ACTION_ATTR_DEST(goto_remote, dest);
 ACTION_ATTR_STR(launch, file_name);
 ACTION_ATTR_STR(launch, params);
 
-/* PopplerActionUri */
+/* PopplerActionURI */
 ACTION_ATTR_STR(uri, uri);
 
 /* PopplerActionNamed */
@@ -304,8 +304,8 @@ Init_poppler_action(VALUE mPoppler)
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionLaunch, launch, file_name);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionLaunch, launch, params);
 
-    rb_cPopplerActionUri = rb_define_class_under(mPoppler, "ActionUri", rb_cPopplerActionAny);
-    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionUri, uri, uri);
+    rb_cPopplerActionURI = rb_define_class_under(mPoppler, "ActionURI", rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionURI, uri, uri);
 
     rb_cPopplerActionNamed = rb_define_class_under(mPoppler, "ActionNamed",
                                                    rb_cPopplerActionAny);
