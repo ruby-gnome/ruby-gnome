@@ -22,25 +22,148 @@
 #include "rbpoppler-private.h"
 
 /* PopplerAction */
-static VALUE actions[POPPLER_ACTION_MOVIE + 1];
+static VALUE rb_cPopplerAction;
+static VALUE rb_cPopplerActionDest;
+static VALUE rb_cPopplerActionAny;
+static VALUE rb_cPopplerActionUnknown;
+static VALUE rb_cPopplerActionGotoDest;
+static VALUE rb_cPopplerActionGotoRemote;
+static VALUE rb_cPopplerActionLaunch;
+static VALUE rb_cPopplerActionUri;
+static VALUE rb_cPopplerActionNamed;
+static VALUE rb_cPopplerActionMovie;
+static VALUE rb_cPopplerActionRendtion;
+static VALUE rb_cPopplerActionOCGState;
+static VALUE rb_cPopplerActionJavascript;
+
+#define DEFINE_EVENT_TYPE(type_lower_case, type_upper_case)				\
+static GType															\
+rb_poppler_action_ ## type_lower_case ## _get_type(void)						\
+{																		\
+	static GType type = 0;												\
+	if (type == 0) {													\
+		type = g_boxed_type_register_static("PopplerAction" # type_upper_case, \
+											(GBoxedCopyFunc)poppler_action_copy, \
+											(GBoxedFreeFunc)poppler_action_free); \
+	}																	\
+	return type;														\
+}
+
+DEFINE_EVENT_TYPE(any, Any)
+DEFINE_EVENT_TYPE(unknown, Unknown)
+DEFINE_EVENT_TYPE(goto_dest, GotoDest)
+DEFINE_EVENT_TYPE(goto_remote, GotoRemote)
+DEFINE_EVENT_TYPE(launch, Launch)
+DEFINE_EVENT_TYPE(uri, Uri)
+DEFINE_EVENT_TYPE(named, Named)
+DEFINE_EVENT_TYPE(movie, Movie)
+DEFINE_EVENT_TYPE(rendition, Rendition)
+DEFINE_EVENT_TYPE(ocg_state, OCGState)
+DEFINE_EVENT_TYPE(javascript, Javascript)
+
+#define POPPLER_ACTION_TYPE_EVENT_ANY         (rb_poppler_action_any_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_UNKNOWN     (rb_poppler_action_unknown_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_GOTO_DEST   (rb_poppler_action_goto_dest_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_GOTO_REMOTE (rb_poppler_action_goto_remote_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_LAUNCH      (rb_poppler_action_launch_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_URI         (rb_poppler_action_uri_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_NAMED       (rb_poppler_action_named_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_MOVIE       (rb_poppler_action_movie_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_RENDITION   (rb_poppler_action_rendition_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_OCG_STATE   (rb_poppler_action_ocg_state_get_type())
+#define POPPLER_ACTION_TYPE_EVENT_JAVASCRIPT  (rb_poppler_action_javascript_get_type())
+
+static GType
+rb_poppler_action_type_to_gtype(PopplerActionType event_type)
+{
+    GType gtype = POPPLER_ACTION_TYPE_EVENT_ANY;
+
+    switch (event_type) {
+      case POPPLER_ACTION_NONE:
+        break;
+      case POPPLER_ACTION_UNKNOWN:
+        gtype = POPPLER_ACTION_TYPE_EVENT_UNKNOWN;
+        break;
+      case POPPLER_ACTION_GOTO_DEST:
+        gtype = POPPLER_ACTION_TYPE_EVENT_GOTO_DEST;
+        break;
+      case POPPLER_ACTION_GOTO_REMOTE:
+        gtype = POPPLER_ACTION_TYPE_EVENT_GOTO_REMOTE;
+        break;
+      case POPPLER_ACTION_LAUNCH:
+        gtype = POPPLER_ACTION_TYPE_EVENT_LAUNCH;
+        break;
+      case POPPLER_ACTION_URI:
+        gtype = POPPLER_ACTION_TYPE_EVENT_URI;
+        break;
+      case POPPLER_ACTION_NAMED:
+        gtype = POPPLER_ACTION_TYPE_EVENT_NAMED;
+        break;
+      case POPPLER_ACTION_MOVIE:
+        gtype = POPPLER_ACTION_TYPE_EVENT_MOVIE;
+        break;
+      case POPPLER_ACTION_RENDITION:
+        gtype = POPPLER_ACTION_TYPE_EVENT_RENDITION;
+        break;
+      case POPPLER_ACTION_OCG_STATE:
+        gtype = POPPLER_ACTION_TYPE_EVENT_OCG_STATE;
+        break;
+      case POPPLER_ACTION_JAVASCRIPT:
+        gtype = POPPLER_ACTION_TYPE_EVENT_JAVASCRIPT;
+        break;
+      default:
+        break;
+    }
+
+    return gtype;
+}
+
+static GType
+rb_poppler_action_to_gtype(VALUE event)
+{
+    VALUE klass;
+    GType type = POPPLER_ACTION_TYPE_EVENT_ANY;
+
+    klass = rb_obj_class(event);
+    if (klass == rb_cPopplerActionAny) {
+        type = POPPLER_ACTION_TYPE_EVENT_ANY;
+    } else if (klass == rb_cPopplerActionUnknown) {
+        type = POPPLER_ACTION_TYPE_EVENT_UNKNOWN;
+    } else if (klass == rb_cPopplerActionGotoDest) {
+        type = POPPLER_ACTION_TYPE_EVENT_GOTO_DEST;
+    } else if (klass == rb_cPopplerActionGotoRemote) {
+        type = POPPLER_ACTION_TYPE_EVENT_GOTO_REMOTE;
+    } else if (klass == rb_cPopplerActionLaunch) {
+        type = POPPLER_ACTION_TYPE_EVENT_LAUNCH;
+    } else if (klass == rb_cPopplerActionUri) {
+        type = POPPLER_ACTION_TYPE_EVENT_URI;
+    } else if (klass == rb_cPopplerActionNamed) {
+        type = POPPLER_ACTION_TYPE_EVENT_NAMED;
+    } else if (klass == rb_cPopplerActionMovie) {
+        type = POPPLER_ACTION_TYPE_EVENT_MOVIE;
+    } else if (klass == rb_cPopplerActionRendtion) {
+        type = POPPLER_ACTION_TYPE_EVENT_RENDITION;
+    } else if (klass == rb_cPopplerActionOCGState) {
+        type = POPPLER_ACTION_TYPE_EVENT_OCG_STATE;
+    } else if (klass == rb_cPopplerActionJavascript) {
+        type = POPPLER_ACTION_TYPE_EVENT_JAVASCRIPT;
+    } else {
+        rb_raise(rb_eArgError, "Not event object: %s", RBG_INSPECT(event));
+    }
+
+    return type;
+}
 
 VALUE
-rb_poppler_ruby_object_from_action(PopplerAction *action)
+rb_poppler_action2rval(PopplerAction *event)
 {
-    VALUE obj;
-
-    if (!action)
-        return Qnil;
-
-    obj = BOXED2RVAL(action, POPPLER_TYPE_ACTION);
-    RBASIC_CLASS(obj) = actions[action->type];
-    return obj;
+    return BOXED2RVAL(event, rb_poppler_action_type_to_gtype(event->any.type));
 }
 
 PopplerAction *
-rb_poppler_action_from_ruby_object(VALUE action)
+rb_poppler_rval2poppler_action_event(VALUE event)
 {
-    return NIL_P(action) ? NULL : RVAL2BOXED(action, POPPLER_TYPE_ACTION);
+    return RVAL2BOXED(event, rb_poppler_action_to_gtype(event));
 }
 
 #define ACTION_ATTR_STR(type, name)				\
@@ -159,58 +282,52 @@ DEST_ATTR_UINT(change_zoom)
 void
 Init_poppler_action(VALUE mPoppler)
 {
-    VALUE cDest,  cAction, cActionAny, cActionGotoDest, cActionGotoRemote;
-    VALUE cActionLaunch, cActionUri, cActionNamed, cActionMovie;
+    rb_cPopplerAction = G_DEF_CLASS(POPPLER_TYPE_ACTION, "Action", mPoppler);
 
-    cAction = G_DEF_CLASS(POPPLER_TYPE_ACTION, "Action", mPoppler);
+    rb_cPopplerActionAny = rb_define_class_under(mPoppler, "ActionAny", rb_cPopplerAction);
+    rbg_define_method(rb_cPopplerActionAny, "type", action_any_type, 0);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionAny, any, title);
 
-    cActionAny = rb_define_class_under(mPoppler, "ActionAny", cAction);
-    rbg_define_method(cActionAny, "type", action_any_type, 0);
-    DEFINE_ACTION_ACCESSOR(cActionAny, any, title);
+    rb_cPopplerActionUnknown = rb_define_class_under(mPoppler, "ActionUnknown",
+                                                     rb_cPopplerAction);
 
-    cActionGotoDest = rb_define_class_under(mPoppler, "ActionGotoDest",
-                                            cActionAny);
-    DEFINE_ACTION_ACCESSOR(cActionGotoDest, goto_dest, dest);
+    rb_cPopplerActionGotoDest = rb_define_class_under(mPoppler, "ActionGotoDest",
+                                                      rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionGotoDest, goto_dest, dest);
 
-    cActionGotoRemote = rb_define_class_under(mPoppler, "ActionGotoRemote",
-                                              cActionAny);
-    DEFINE_ACTION_ACCESSOR(cActionGotoRemote, goto_remote, file_name);
-    DEFINE_ACTION_ACCESSOR(cActionGotoRemote, goto_remote, dest);
+    rb_cPopplerActionGotoRemote = rb_define_class_under(mPoppler, "ActionGotoRemote",
+                                                        rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionGotoRemote, goto_remote, file_name);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionGotoRemote, goto_remote, dest);
 
-    cActionLaunch = rb_define_class_under(mPoppler, "ActionLaunch", cActionAny);
-    DEFINE_ACTION_ACCESSOR(cActionLaunch, launch, file_name);
-    DEFINE_ACTION_ACCESSOR(cActionLaunch, launch, params);
+    rb_cPopplerActionLaunch = rb_define_class_under(mPoppler, "ActionLaunch",
+                                                    rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionLaunch, launch, file_name);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionLaunch, launch, params);
 
-    cActionUri = rb_define_class_under(mPoppler, "ActionUri", cActionAny);
-    DEFINE_ACTION_ACCESSOR(cActionUri, uri, uri);
+    rb_cPopplerActionUri = rb_define_class_under(mPoppler, "ActionUri", rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionUri, uri, uri);
 
-    cActionNamed = rb_define_class_under(mPoppler, "ActionNamed", cActionAny);
-    DEFINE_ACTION_ACCESSOR(cActionNamed, named, named_dest);
+    rb_cPopplerActionNamed = rb_define_class_under(mPoppler, "ActionNamed",
+                                                   rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionNamed, named, named_dest);
 
-    cActionMovie = rb_define_class_under(mPoppler, "ActionMovie", cActionAny);
-
-    actions[POPPLER_ACTION_UNKNOWN] = cActionAny;
-    actions[POPPLER_ACTION_GOTO_DEST] = cActionGotoDest;
-    actions[POPPLER_ACTION_GOTO_REMOTE] = cActionGotoRemote;
-    actions[POPPLER_ACTION_LAUNCH] = cActionLaunch;
-    actions[POPPLER_ACTION_URI] = cActionUri;
-    actions[POPPLER_ACTION_NAMED] = cActionNamed;
-    actions[POPPLER_ACTION_MOVIE] = cActionMovie;
-
+    rb_cPopplerActionMovie = rb_define_class_under(mPoppler, "ActionMovie",
+                                                   rb_cPopplerActionAny);
     G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
 
-    cDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
+    rb_cPopplerActionDest = G_DEF_CLASS(POPPLER_TYPE_DEST, "Dest", mPoppler);
 
-    rbg_define_method(cDest, "type", dest_get_type, 0);
-    DEFINE_DEST_ACCESSOR(cDest, page_num);
-    DEFINE_DEST_ACCESSOR(cDest, left);
-    DEFINE_DEST_ACCESSOR(cDest, bottom);
-    DEFINE_DEST_ACCESSOR(cDest, right);
-    DEFINE_DEST_ACCESSOR(cDest, top);
-    DEFINE_DEST_ACCESSOR(cDest, zoom);
-    DEFINE_DEST_ACCESSOR(cDest, named_dest);
-    DEFINE_DEST_ACCESSOR(cDest, change_left);
-    DEFINE_DEST_ACCESSOR(cDest, change_top);
-    DEFINE_DEST_ACCESSOR(cDest, change_zoom);
+    rbg_define_method(rb_cPopplerActionDest, "type", dest_get_type, 0);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, page_num);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, left);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, bottom);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, right);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, top);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, zoom);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, named_dest);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, change_left);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, change_top);
+    DEFINE_DEST_ACCESSOR(rb_cPopplerActionDest, change_zoom);
 }

@@ -54,8 +54,8 @@ extern PopplerColor *rb_poppler_ruby_object_to_color(VALUE color);
 extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);
 #endif
 
-extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
-extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
 extern VALUE rb_poppler_ruby_object_from_form_field(PopplerFormField *field);
+extern VALUE rb_poppler_action2rval(PopplerAction *event);
+extern PopplerAction *rb_poppler_rval2poppler_action_event(VALUE event);
 
 #endif

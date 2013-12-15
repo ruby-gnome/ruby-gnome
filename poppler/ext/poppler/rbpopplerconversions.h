@@ -23,8 +23,8 @@
 
 #define POPPLERANNOT2RVAL(o)                    (GOBJ2RVAL(o))
 #define POPPLERFORMFIELD2RVAL(o)                (rb_poppler_ruby_object_from_form_field(o))
-#define RVAL2POPPLERACTION(o)                   (rb_poppler_action_from_ruby_object(o))
-#define POPPLERACTION2RVAL(o)                   (rb_poppler_ruby_object_from_action(o))
+#define RVAL2POPPLERACTION(o)                   (rb_poppler_rval2poppler_action_event(o))
+#define POPPLERACTION2RVAL(o)                   (rb_poppler_action2rval(o))
 #define RVAL2POPPLERCOLOR(o)                    (rb_poppler_ruby_object_to_color(o))
 #define POPPLERCOLOR2RVAL(o)                    (BOXED2RVAL(o, POPPLER_TYPE_COLOR))
 #define POPPLERCOLOR2RVAL_FREE(o)               (rb_poppler_ruby_object_from_color_with_free(o))
