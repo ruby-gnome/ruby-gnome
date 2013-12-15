@@ -35,7 +35,7 @@ static VALUE rb_cPopplerActionRendtion;
 static VALUE rb_cPopplerActionOCGState;
 static VALUE rb_cPopplerActionJavascript;
 
-#define DEFINE_EVENT_TYPE(type_lower_case, type_upper_case)				\
+#define DEFINE_ACTION_TYPE(type_lower_case, type_upper_case)				\
 static GType															\
 rb_poppler_action_ ## type_lower_case ## _get_type(void)						\
 {																		\
@@ -48,67 +48,67 @@ rb_poppler_action_ ## type_lower_case ## _get_type(void)						\
 	return type;														\
 }
 
-DEFINE_EVENT_TYPE(any, Any)
-DEFINE_EVENT_TYPE(unknown, Unknown)
-DEFINE_EVENT_TYPE(goto_dest, GotoDest)
-DEFINE_EVENT_TYPE(goto_remote, GotoRemote)
-DEFINE_EVENT_TYPE(launch, Launch)
-DEFINE_EVENT_TYPE(uri, Uri)
-DEFINE_EVENT_TYPE(named, Named)
-DEFINE_EVENT_TYPE(movie, Movie)
-DEFINE_EVENT_TYPE(rendition, Rendition)
-DEFINE_EVENT_TYPE(ocg_state, OCGState)
-DEFINE_EVENT_TYPE(javascript, Javascript)
+DEFINE_ACTION_TYPE(any, Any)
+DEFINE_ACTION_TYPE(unknown, Unknown)
+DEFINE_ACTION_TYPE(goto_dest, GotoDest)
+DEFINE_ACTION_TYPE(goto_remote, GotoRemote)
+DEFINE_ACTION_TYPE(launch, Launch)
+DEFINE_ACTION_TYPE(uri, Uri)
+DEFINE_ACTION_TYPE(named, Named)
+DEFINE_ACTION_TYPE(movie, Movie)
+DEFINE_ACTION_TYPE(rendition, Rendition)
+DEFINE_ACTION_TYPE(ocg_state, OCGState)
+DEFINE_ACTION_TYPE(javascript, Javascript)
 
-#define POPPLER_ACTION_TYPE_EVENT_ANY         (rb_poppler_action_any_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_UNKNOWN     (rb_poppler_action_unknown_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_GOTO_DEST   (rb_poppler_action_goto_dest_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_GOTO_REMOTE (rb_poppler_action_goto_remote_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_LAUNCH      (rb_poppler_action_launch_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_URI         (rb_poppler_action_uri_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_NAMED       (rb_poppler_action_named_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_MOVIE       (rb_poppler_action_movie_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_RENDITION   (rb_poppler_action_rendition_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_OCG_STATE   (rb_poppler_action_ocg_state_get_type())
-#define POPPLER_ACTION_TYPE_EVENT_JAVASCRIPT  (rb_poppler_action_javascript_get_type())
+#define POPPLER_ACTION_TYPE_ANY         (rb_poppler_action_any_get_type())
+#define POPPLER_ACTION_TYPE_UNKNOWN     (rb_poppler_action_unknown_get_type())
+#define POPPLER_ACTION_TYPE_GOTO_DEST   (rb_poppler_action_goto_dest_get_type())
+#define POPPLER_ACTION_TYPE_GOTO_REMOTE (rb_poppler_action_goto_remote_get_type())
+#define POPPLER_ACTION_TYPE_LAUNCH      (rb_poppler_action_launch_get_type())
+#define POPPLER_ACTION_TYPE_URI         (rb_poppler_action_uri_get_type())
+#define POPPLER_ACTION_TYPE_NAMED       (rb_poppler_action_named_get_type())
+#define POPPLER_ACTION_TYPE_MOVIE       (rb_poppler_action_movie_get_type())
+#define POPPLER_ACTION_TYPE_RENDITION   (rb_poppler_action_rendition_get_type())
+#define POPPLER_ACTION_TYPE_OCG_STATE   (rb_poppler_action_ocg_state_get_type())
+#define POPPLER_ACTION_TYPE_JAVASCRIPT  (rb_poppler_action_javascript_get_type())
 
 static GType
-rb_poppler_action_type_to_gtype(PopplerActionType event_type)
+rb_poppler_action_type_to_gtype(PopplerActionType action_type)
 {
-    GType gtype = POPPLER_ACTION_TYPE_EVENT_ANY;
+    GType gtype = POPPLER_ACTION_TYPE_ANY;
 
-    switch (event_type) {
+    switch (action_type) {
       case POPPLER_ACTION_NONE:
         break;
       case POPPLER_ACTION_UNKNOWN:
-        gtype = POPPLER_ACTION_TYPE_EVENT_UNKNOWN;
+        gtype = POPPLER_ACTION_TYPE_UNKNOWN;
         break;
       case POPPLER_ACTION_GOTO_DEST:
-        gtype = POPPLER_ACTION_TYPE_EVENT_GOTO_DEST;
+        gtype = POPPLER_ACTION_TYPE_GOTO_DEST;
         break;
       case POPPLER_ACTION_GOTO_REMOTE:
-        gtype = POPPLER_ACTION_TYPE_EVENT_GOTO_REMOTE;
+        gtype = POPPLER_ACTION_TYPE_GOTO_REMOTE;
         break;
       case POPPLER_ACTION_LAUNCH:
-        gtype = POPPLER_ACTION_TYPE_EVENT_LAUNCH;
+        gtype = POPPLER_ACTION_TYPE_LAUNCH;
         break;
       case POPPLER_ACTION_URI:
-        gtype = POPPLER_ACTION_TYPE_EVENT_URI;
+        gtype = POPPLER_ACTION_TYPE_URI;
         break;
       case POPPLER_ACTION_NAMED:
-        gtype = POPPLER_ACTION_TYPE_EVENT_NAMED;
+        gtype = POPPLER_ACTION_TYPE_NAMED;
         break;
       case POPPLER_ACTION_MOVIE:
-        gtype = POPPLER_ACTION_TYPE_EVENT_MOVIE;
+        gtype = POPPLER_ACTION_TYPE_MOVIE;
         break;
       case POPPLER_ACTION_RENDITION:
-        gtype = POPPLER_ACTION_TYPE_EVENT_RENDITION;
+        gtype = POPPLER_ACTION_TYPE_RENDITION;
         break;
       case POPPLER_ACTION_OCG_STATE:
-        gtype = POPPLER_ACTION_TYPE_EVENT_OCG_STATE;
+        gtype = POPPLER_ACTION_TYPE_OCG_STATE;
         break;
       case POPPLER_ACTION_JAVASCRIPT:
-        gtype = POPPLER_ACTION_TYPE_EVENT_JAVASCRIPT;
+        gtype = POPPLER_ACTION_TYPE_JAVASCRIPT;
         break;
       default:
         break;
@@ -118,36 +118,36 @@ rb_poppler_action_type_to_gtype(PopplerActionType event_type)
 }
 
 static GType
-rb_poppler_action_to_gtype(VALUE event)
+rb_poppler_action_to_gtype(VALUE action)
 {
     VALUE klass;
-    GType type = POPPLER_ACTION_TYPE_EVENT_ANY;
+    GType type = POPPLER_ACTION_TYPE_ANY;
 
-    klass = rb_obj_class(event);
+    klass = rb_obj_class(action);
     if (klass == rb_cPopplerActionAny) {
-        type = POPPLER_ACTION_TYPE_EVENT_ANY;
+        type = POPPLER_ACTION_TYPE_ANY;
     } else if (klass == rb_cPopplerActionUnknown) {
-        type = POPPLER_ACTION_TYPE_EVENT_UNKNOWN;
+        type = POPPLER_ACTION_TYPE_UNKNOWN;
     } else if (klass == rb_cPopplerActionGotoDest) {
-        type = POPPLER_ACTION_TYPE_EVENT_GOTO_DEST;
+        type = POPPLER_ACTION_TYPE_GOTO_DEST;
     } else if (klass == rb_cPopplerActionGotoRemote) {
-        type = POPPLER_ACTION_TYPE_EVENT_GOTO_REMOTE;
+        type = POPPLER_ACTION_TYPE_GOTO_REMOTE;
     } else if (klass == rb_cPopplerActionLaunch) {
-        type = POPPLER_ACTION_TYPE_EVENT_LAUNCH;
+        type = POPPLER_ACTION_TYPE_LAUNCH;
     } else if (klass == rb_cPopplerActionUri) {
-        type = POPPLER_ACTION_TYPE_EVENT_URI;
+        type = POPPLER_ACTION_TYPE_URI;
     } else if (klass == rb_cPopplerActionNamed) {
-        type = POPPLER_ACTION_TYPE_EVENT_NAMED;
+        type = POPPLER_ACTION_TYPE_NAMED;
     } else if (klass == rb_cPopplerActionMovie) {
-        type = POPPLER_ACTION_TYPE_EVENT_MOVIE;
+        type = POPPLER_ACTION_TYPE_MOVIE;
     } else if (klass == rb_cPopplerActionRendtion) {
-        type = POPPLER_ACTION_TYPE_EVENT_RENDITION;
+        type = POPPLER_ACTION_TYPE_RENDITION;
     } else if (klass == rb_cPopplerActionOCGState) {
-        type = POPPLER_ACTION_TYPE_EVENT_OCG_STATE;
+        type = POPPLER_ACTION_TYPE_OCG_STATE;
     } else if (klass == rb_cPopplerActionJavascript) {
-        type = POPPLER_ACTION_TYPE_EVENT_JAVASCRIPT;
+        type = POPPLER_ACTION_TYPE_JAVASCRIPT;
     } else {
-        rb_raise(rb_eArgError, "Not event object: %s", RBG_INSPECT(event));
+        rb_raise(rb_eArgError, "Not action object: %s", RBG_INSPECT(action));
     }
 
     return type;
