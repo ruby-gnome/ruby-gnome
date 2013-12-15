@@ -9,10 +9,6 @@ rvm:
   - 2.0.0
   - 2.1.0
   - ruby-head
-matrix:
-  allow_failures:
-    - rvm: 2.1.0
-    - rvm: ruby-head
 before_script:
   - ./travis-before-script.sh
   - sh -e /etc/init.d/xvfb start
