@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2006-2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -55,7 +55,7 @@ extern VALUE rb_poppler_ruby_object_from_color_with_free(PopplerColor *color);
 #endif
 
 extern VALUE rb_poppler_ruby_object_from_form_field(PopplerFormField *field);
-extern VALUE rb_poppler_action2rval(PopplerAction *event);
-extern PopplerAction *rb_poppler_rval2poppler_action_event(VALUE event);
+extern VALUE rb_poppler_ruby_object_from_action(PopplerAction *action);
+extern PopplerAction *rb_poppler_action_from_ruby_object(VALUE action);
 
 #endif

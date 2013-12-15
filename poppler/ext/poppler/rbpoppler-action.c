@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2006-2008 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2013 Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -155,13 +154,13 @@ rb_poppler_action_to_gtype(VALUE event)
 }
 
 VALUE
-rb_poppler_action2rval(PopplerAction *action)
+rb_poppler_ruby_object_from_action(PopplerAction *action)
 {
     return BOXED2RVAL(action, rb_poppler_action_type_to_gtype(action->any.type));
 }
 
 PopplerAction *
-rb_poppler_rval2poppler_action_event(VALUE action)
+rb_poppler_action_from_ruby_object(VALUE action)
 {
     return RVAL2BOXED(action, rb_poppler_action_to_gtype(action));
 }
