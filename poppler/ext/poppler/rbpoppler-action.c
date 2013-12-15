@@ -169,14 +169,14 @@ rb_poppler_action_from_ruby_object(VALUE action)
 static VALUE							\
 action_ ## type ## _ ## name (VALUE self)			\
 {								\
-    return CSTR2RVAL(RVAL2POPPLERACTION(self)->type.name);     \
+    return CSTR2RVAL(RVAL2POPPLERACTION(self)->type.name);      \
 }
 
-#define ACTION_ATTR_DEST(type, name)				\
-static VALUE							\
-action_ ## type ## _ ## name (VALUE self)			\
-{								\
-    return POPPLERDEST2RVAL(RVAL2POPPLERACTION(self)->type.name);     \
+#define ACTION_ATTR_DEST(type, name)                                    \
+static VALUE                                                            \
+action_ ## type ## _ ## name (VALUE self)                               \
+{                                                                       \
+    return POPPLERDEST2RVAL(RVAL2POPPLERACTION(self)->type.name);       \
 }
 
 #define DEFINE_ACCESSOR(prefix, target, name) \
