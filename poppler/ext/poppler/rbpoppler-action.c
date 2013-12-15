@@ -35,17 +35,17 @@ static VALUE rb_cPopplerActionRendtion;
 static VALUE rb_cPopplerActionOCGState;
 static VALUE rb_cPopplerActionJavascript;
 
-#define DEFINE_ACTION_TYPE(type_lower_case, type_upper_case)				\
-static GType															\
-rb_poppler_action_ ## type_lower_case ## _get_type(void)						\
-{																		\
-	static GType type = 0;												\
-	if (type == 0) {													\
-		type = g_boxed_type_register_static("PopplerAction" # type_upper_case, \
-											(GBoxedCopyFunc)poppler_action_copy, \
-											(GBoxedFreeFunc)poppler_action_free); \
-	}																	\
-	return type;														\
+#define DEFINE_ACTION_TYPE(type_lower_case, type_upper_case)            \
+static GType                                                            \
+rb_poppler_action_ ## type_lower_case ## _get_type(void)                \
+{                                                                       \
+    static GType type = 0;                                              \
+    if (type == 0) {                                                    \
+        type = g_boxed_type_register_static("PopplerAction" # type_upper_case, \
+                                            (GBoxedCopyFunc)poppler_action_copy, \
+                                            (GBoxedFreeFunc)poppler_action_free); \
+    }                                                                   \
+    return type;                                                        \
 }
 
 DEFINE_ACTION_TYPE(any, Any)
