@@ -218,14 +218,14 @@ ACTION_ATTR_STR(named, named_dest);
 GType
 poppler_dest_get_type (void)
 {
-  static GType our_type = 0;
+    static GType our_type = 0;
 
-  if (our_type == 0)
-    our_type = g_boxed_type_register_static ("PopplerDest",
-					     (GBoxedCopyFunc) poppler_dest_copy,
-					     (GBoxedFreeFunc) poppler_dest_free);
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("PopplerDest",
+                                                (GBoxedCopyFunc)poppler_dest_copy,
+                                                (GBoxedFreeFunc)poppler_dest_free);
 
-  return our_type;
+    return our_type;
 }
 #endif
 
