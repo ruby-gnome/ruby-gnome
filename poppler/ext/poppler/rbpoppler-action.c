@@ -235,32 +235,32 @@ dest_get_type(VALUE self)
     return POPPLERDESTTYPE2RVAL(RVAL2POPPLERDEST(self)->type);
 }
 
-#define DEST_ATTR_INT(name)                     \
-static VALUE                                    \
-dest_ ## name (VALUE self)                      \
-{                                               \
-    return INT2NUM(RVAL2POPPLERDEST(self)->name);      \
+#define DEST_ATTR_INT(name)                             \
+static VALUE                                            \
+dest_ ## name (VALUE self)                              \
+{                                                       \
+    return INT2NUM(RVAL2POPPLERDEST(self)->name);       \
 }
 
-#define DEST_ATTR_UINT(name)                    \
-static VALUE                                    \
-dest_ ## name (VALUE self)                      \
-{                                               \
-    return UINT2NUM(RVAL2POPPLERDEST(self)->name);     \
+#define DEST_ATTR_UINT(name)                            \
+static VALUE                                            \
+dest_ ## name (VALUE self)                              \
+{                                                       \
+    return UINT2NUM(RVAL2POPPLERDEST(self)->name);      \
 }
 
-#define DEST_ATTR_DOUBLE(name)                  \
-static VALUE                                    \
-dest_ ## name (VALUE self)                      \
-{                                               \
-    return rb_float_new(RVAL2POPPLERDEST(self)->name); \
+#define DEST_ATTR_DOUBLE(name)                          \
+static VALUE                                            \
+dest_ ## name (VALUE self)                              \
+{                                                       \
+    return rb_float_new(RVAL2POPPLERDEST(self)->name);  \
 }
 
-#define DEST_ATTR_STR(name)                     \
-static VALUE                                    \
-dest_ ## name (VALUE self)                      \
-{                                               \
-    return CSTR2RVAL(RVAL2POPPLERDEST(self)->name);    \
+#define DEST_ATTR_STR(name)                             \
+static VALUE                                            \
+dest_ ## name (VALUE self)                              \
+{                                                       \
+    return CSTR2RVAL(RVAL2POPPLERDEST(self)->name);     \
 }
 
 #define DEFINE_DEST_ACCESSOR(target, name) \
