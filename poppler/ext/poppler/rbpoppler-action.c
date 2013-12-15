@@ -155,15 +155,15 @@ rb_poppler_action_to_gtype(VALUE event)
 }
 
 VALUE
-rb_poppler_action2rval(PopplerAction *event)
+rb_poppler_action2rval(PopplerAction *action)
 {
-    return BOXED2RVAL(event, rb_poppler_action_type_to_gtype(event->any.type));
+    return BOXED2RVAL(action, rb_poppler_action_type_to_gtype(action->any.type));
 }
 
 PopplerAction *
-rb_poppler_rval2poppler_action_event(VALUE event)
+rb_poppler_rval2poppler_action_event(VALUE action)
 {
-    return RVAL2BOXED(event, rb_poppler_action_to_gtype(event));
+    return RVAL2BOXED(action, rb_poppler_action_to_gtype(action));
 }
 
 #define ACTION_ATTR_STR(type, name)				\
