@@ -211,7 +211,13 @@ ACTION_ATTR_STR(uri, uri);
 ACTION_ATTR_STR(named, named_dest);
 
 /* PopplerActionMovie */
+ACTION_ATTR_DEST(movie, movie);
 
+/* PopplerActionRendition */
+ACTION_ATTR_DEST(rendition, media);
+
+/* PopplerActionOCGState */
+ACTION_ATTR_DEST(ocg_state, state_list);
 
 /* PopplerDest */
 #ifdef RB_POPPLER_TYPE_DEST_NOT_DEFINED
@@ -313,6 +319,16 @@ Init_poppler_action(VALUE mPoppler)
 
     rb_cPopplerActionMovie = rb_define_class_under(mPoppler, "ActionMovie",
                                                    rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionMovie, movie, movie);
+
+    rb_cPopplerActionRendition = rb_define_class_under(mPoppler, "ActionRendtion",
+                                                       rb_cPopplerActionRendition);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionRendition, rendition, media);
+
+    rb_cPopplerActionOCGState = rb_define_class_under(mPoppler, "ActionOCGState",
+                                                      rb_cPopplerActionOCGState);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionOCGState, ocg_state, state_list);
+
     G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
 
