@@ -98,6 +98,7 @@ rb_poppler_action_type_to_gtype(PopplerActionType action_type)
       case POPPLER_ACTION_NAMED:
         gtype = POPPLER_ACTION_TYPE_NAMED;
         break;
+#if POPPLER_CHECK_VERSION(0, 14, 0)
       case POPPLER_ACTION_MOVIE:
         gtype = POPPLER_ACTION_TYPE_MOVIE;
         break;
@@ -107,9 +108,12 @@ rb_poppler_action_type_to_gtype(PopplerActionType action_type)
       case POPPLER_ACTION_OCG_STATE:
         gtype = POPPLER_ACTION_TYPE_OCG_STATE;
         break;
+#endif
+#if POPPLER_CHECK_VERSION(0, 18, 0)
       case POPPLER_ACTION_JAVASCRIPT:
         gtype = POPPLER_ACTION_TYPE_JAVASCRIPT;
         break;
+#endif
       default:
         break;
     }
@@ -138,14 +142,18 @@ rb_poppler_action_to_gtype(VALUE action)
         type = POPPLER_ACTION_TYPE_URI;
     } else if (klass == rb_cPopplerActionNamed) {
         type = POPPLER_ACTION_TYPE_NAMED;
+#if POPPLER_CHECK_VERSION(0, 14, 0)
     } else if (klass == rb_cPopplerActionMovie) {
         type = POPPLER_ACTION_TYPE_MOVIE;
     } else if (klass == rb_cPopplerActionRendition) {
         type = POPPLER_ACTION_TYPE_RENDITION;
     } else if (klass == rb_cPopplerActionOCGState) {
         type = POPPLER_ACTION_TYPE_OCG_STATE;
+#endif
+#if POPPLER_CHECK_VERSION(0, 18, 0)
     } else if (klass == rb_cPopplerActionJavascript) {
         type = POPPLER_ACTION_TYPE_JAVASCRIPT;
+#endif
     } else {
         rb_raise(rb_eArgError, "Not action object: %s", RBG_INSPECT(action));
     }
@@ -210,6 +218,7 @@ ACTION_ATTR_STR(uri, uri);
 /* PopplerActionNamed */
 ACTION_ATTR_STR(named, named_dest);
 
+#if POPPLER_CHECK_VERSION(0, 14, 0)
 /* PopplerActionMovie */
 ACTION_ATTR_DEST(movie, movie);
 
@@ -218,6 +227,7 @@ ACTION_ATTR_DEST(rendition, media);
 
 /* PopplerActionOCGState */
 ACTION_ATTR_DEST(ocg_state, state_list);
+#endif
 
 /* PopplerDest */
 #ifdef RB_POPPLER_TYPE_DEST_NOT_DEFINED
@@ -317,6 +327,7 @@ Init_poppler_action(VALUE mPoppler)
                                                    rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionNamed, named, named_dest);
 
+#if POPPLER_CHECK_VERSION(0, 14, 0)
     rb_cPopplerActionMovie = rb_define_class_under(mPoppler, "ActionMovie",
                                                    rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionMovie, movie, movie);
@@ -328,6 +339,7 @@ Init_poppler_action(VALUE mPoppler)
     rb_cPopplerActionOCGState = rb_define_class_under(mPoppler, "ActionOCGState",
                                                       rb_cPopplerActionOCGState);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionOCGState, ocg_state, state_list);
+#endif
 
     G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
     G_DEF_CLASS(POPPLER_TYPE_DEST_TYPE, "DestType", mPoppler);
