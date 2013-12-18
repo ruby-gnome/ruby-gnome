@@ -338,11 +338,11 @@ Init_poppler_action(VALUE mPoppler)
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionMovie, movie, movie);
 
     rb_cPopplerActionRendition = rb_define_class_under(mPoppler, "ActionRendtion",
-                                                       rb_cPopplerActionRendition);
+                                                       rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionRendition, rendition, media);
 
     rb_cPopplerActionOCGState = rb_define_class_under(mPoppler, "ActionOCGState",
-                                                      rb_cPopplerActionOCGState);
+                                                      rb_cPopplerActionAny);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionOCGState, ocg_state, state_list);
 #endif
 
