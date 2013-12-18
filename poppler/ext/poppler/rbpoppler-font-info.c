@@ -24,8 +24,6 @@
 
 static VALUE RG_TARGET_NAMESPACE;
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
-
 static ID id_valid;
 
 static VALUE
@@ -48,7 +46,6 @@ rg_scan(VALUE self, VALUE n_pages)
     }
     return rb_iter;
 }
-#endif
 
 void
 Init_poppler_font_info(VALUE mPoppler)
@@ -57,8 +54,6 @@ Init_poppler_font_info(VALUE mPoppler)
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(POPPLER_TYPE_FONT_INFO, "FontInfo", mPoppler);
 
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     RG_DEF_METHOD(initialize, 1);
     RG_DEF_METHOD(scan, 1);
-#endif
 }
