@@ -116,9 +116,7 @@ Init_poppler_fonts_iter(VALUE mPoppler)
 
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(full_name, 0);
-#if POPPLER_CHECK_VERSION(0, 6, 0)
     RG_DEF_METHOD(file_name, 0);
-#endif
     RG_DEF_METHOD(font_type, 0);
     RG_DEF_METHOD_P(embedded, 0);
     RG_DEF_METHOD_P(subset, 0);
