@@ -229,6 +229,11 @@ ACTION_ATTR_DEST(rendition, media);
 ACTION_ATTR_DEST(ocg_state, state_list);
 #endif
 
+#if POPPLER_CHECK_VERSION(0, 18, 0)
+/* PopplerActionJavascript */
+ACTION_ATTR_STR(javascript, script);
+#endif
+
 /* PopplerDest */
 #ifdef RB_POPPLER_TYPE_DEST_NOT_DEFINED
 GType
@@ -339,6 +344,13 @@ Init_poppler_action(VALUE mPoppler)
     rb_cPopplerActionOCGState = rb_define_class_under(mPoppler, "ActionOCGState",
                                                       rb_cPopplerActionOCGState);
     DEFINE_ACTION_ACCESSOR(rb_cPopplerActionOCGState, ocg_state, state_list);
+#endif
+
+#if POPPLER_CHECK_VERSION(0, 18, 0)
+    rb_cPopplerActionJavaScript =
+        rb_define_class_under(mPoppler, "ActionJavaScript",
+                              rb_cPopplerActionAny);
+    DEFINE_ACTION_ACCESSOR(rb_cPopplerActionJavaScript, javascript, script);
 #endif
 
     G_DEF_CLASS(POPPLER_TYPE_ACTION_TYPE, "ActionType", mPoppler);
