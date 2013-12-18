@@ -33,7 +33,7 @@ static VALUE rb_cPopplerActionNamed;
 static VALUE rb_cPopplerActionMovie;
 static VALUE rb_cPopplerActionRendition;
 static VALUE rb_cPopplerActionOCGState;
-static VALUE rb_cPopplerActionJavascript;
+static VALUE rb_cPopplerActionJavaScript;
 
 #define DEFINE_ACTION_TYPE(type_lower_case, type_upper_case)            \
 static GType                                                            \
@@ -58,7 +58,7 @@ DEFINE_ACTION_TYPE(named, Named)
 DEFINE_ACTION_TYPE(movie, Movie)
 DEFINE_ACTION_TYPE(rendition, Rendition)
 DEFINE_ACTION_TYPE(ocg_state, OCGState)
-DEFINE_ACTION_TYPE(javascript, Javascript)
+DEFINE_ACTION_TYPE(javascript, JavaScript)
 
 #define POPPLER_ACTION_TYPE_ANY         (rb_poppler_action_any_get_type())
 #define POPPLER_ACTION_TYPE_UNKNOWN     (rb_poppler_action_unknown_get_type())
@@ -151,7 +151,7 @@ rb_poppler_action_to_gtype(VALUE action)
         type = POPPLER_ACTION_TYPE_OCG_STATE;
 #endif
 #if POPPLER_CHECK_VERSION(0, 18, 0)
-    } else if (klass == rb_cPopplerActionJavascript) {
+    } else if (klass == rb_cPopplerActionJavaScript) {
         type = POPPLER_ACTION_TYPE_JAVASCRIPT;
 #endif
     } else {
