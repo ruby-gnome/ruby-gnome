@@ -11,7 +11,7 @@ Requirements
     Ruby/GLib2:         http://ruby-gnome2.sourceforge.net/
     cairo/rcairo: http://cairographics.org/ (optional)
 
-    [*]: 0.8.0 or later is requried.
+    [*]: 0.12.0 or later is requried.
 
 Install
 -------
