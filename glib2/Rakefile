@@ -140,7 +140,7 @@ namespace :win32 do
     end
   end
 
-  namespace :buildler do
+  namespace :builder do
     namespace :build do
       namespace :glib do
         task :before => [
