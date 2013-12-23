@@ -33,7 +33,7 @@ package = GNOME2Package.new do |_package|
         ],
         :need_autoreconf => true,
         :patches => [
-          "glib-2.38.1-add-missing-exeext.diff",
+          "glib-2.38.2-add-missing-exeext.diff",
         ],
       },
     },
