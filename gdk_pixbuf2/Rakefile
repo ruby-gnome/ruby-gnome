@@ -25,6 +25,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--with-included-loaders",
           "--enable-introspection",
         ],
+        :build_concurrently => false,
       },
     }
   ]
