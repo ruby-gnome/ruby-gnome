@@ -95,23 +95,15 @@ package = GNOME2Package.new do |_package|
       },
     },
   ]
+  _package.cross_compiling do |spec|
+    if /mingw|mswin/ =~ spec.platform.to_s
+      spec.add_runtime_dependency("cairo", ">= 1.12.8")
+    end
+  end
 end
 package.define_tasks
 
 namespace :win32 do
-  namespace :gcc do
-    namespace :dll do
-      desc "Bundle GCC related DLLs"
-      task :bundle do
-        dll_names = ["libgcc_s_sjlj-1.dll", "libwinpthread-1.dll"]
-        dll_names.each do |dll_name|
-          full_dll_path = `#{build_host}-gcc -print-file-name=#{dll_name}`.strip
-          cp(full_dll_path, bin_dir)
-        end
-      end
-    end
-  end
-
   namespace :libffi do
     namespace :header do
       desc "Move libffi headers to include/"
@@ -143,10 +135,6 @@ namespace :win32 do
   namespace :builder do
     namespace :build do
       namespace :glib do
-        task :before => [
-          "win32:gcc:dll:bundle",
-        ]
-
         task :after => [
           "win32:gettext:header:fix",
         ]

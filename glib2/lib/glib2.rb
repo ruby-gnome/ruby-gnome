@@ -93,6 +93,10 @@ end
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
+if vendor_dir.exist?
+  require "cairo"
+end
+
 GLib.prepend_dll_path(vendor_dir + "bin")
 begin
   major, minor, _ = RUBY_VERSION.split(/\./)
