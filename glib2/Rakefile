@@ -67,7 +67,6 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => [
-          "--with-libnettle-prefix=#{_package.win32.absolute_binary_dir}"
         ],
         :use_cc_environment_variable => false,
         :patches => [
