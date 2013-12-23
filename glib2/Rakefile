@@ -67,10 +67,10 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => [
+          "--disable-cxx",
         ],
         :use_cc_environment_variable => false,
         :patches => [
-          "gnutls-3.2.7-fix-unqualified-id.diff",
         ],
       },
     },
