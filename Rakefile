@@ -4,8 +4,6 @@ require "pathname"
 require "tmpdir"
 require "open-uri"
 
-repository_base_url = "https://ruby-gnome2.svn.sourceforge.net/svnroot/ruby-gnome2/ruby-gnome2"
-
 task :default => :test
 
 def version
