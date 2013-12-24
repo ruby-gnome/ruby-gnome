@@ -17,13 +17,13 @@ package = GNOME2Package.new do |_package|
       :name => "gtk+",
       :download_site => :gnome,
       :label => "gtk+",
-      :version => "2.24.18",
+      :version => "2.24.22",
       :compression_method => "xz",
       :windows => {
         :configure_args => [],
         :need_autoreconf => true,
         :patches => [
-          "gtk+-2.24.14-add-missing-exeext.diff",
+          "gtk+-2.24.22-add-missing-exeext.diff",
         ],
       },
     },
@@ -31,7 +31,7 @@ package = GNOME2Package.new do |_package|
       :name => "hicolor-icon-theme",
       :download_base_url => "http://icon-theme.freedesktop.org/releases",
       :label => "gtk-hi-color-icon-theme",
-      :version => "0.12",
+      :version => "0.13",
       :windows => {
         :configure_args => [],
         :build_concurrently => false,
