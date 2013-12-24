@@ -154,7 +154,7 @@ module GNOME2
         end
 
         def use_cc_environment_variable?
-          use_cc_environment_variable.nil? ? true : use_cc_environment_variable
+          use_cc_environment_variable.nil? ? false : use_cc_environment_variable
         end
       end
 
