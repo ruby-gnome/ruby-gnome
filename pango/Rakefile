@@ -47,7 +47,7 @@ namespace :gcc do
   namespace :dll do
     desc "Bundle GCC related DLLs"
     task(:bundle) do
-      dlls = ["libgcc_s_sjlj-1.dll", "libstdc++-6.dll"]
+      dlls = ["libstdc++-6.dll"]
       dlls.each do |dll|
         host = package_task.windows.build_host
         binary_dir = package_task.windows.absolute_binary_dir
