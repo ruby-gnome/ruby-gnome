@@ -160,7 +160,9 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-librfb"],
-        :build_concurrently => false,
+        :cc_args => [
+          "-std=c99",
+        ],
       },
     },
     # {

@@ -109,6 +109,7 @@ module GNOME2
                                               :include_paths,
                                               :library_paths,
                                               :configure_args,
+                                              :cc_args,
                                               :patches,
                                               :need_autogen,
                                               :need_autoreconf,
@@ -134,6 +135,10 @@ module GNOME2
         end
 
         def configure_args
+          super || []
+        end
+
+        def cc_args
           super || []
         end
 

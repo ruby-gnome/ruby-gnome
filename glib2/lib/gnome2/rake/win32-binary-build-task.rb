@@ -92,7 +92,7 @@ class GNOME2Win32BinaryBuildTask
       end
       sh("./autogen.sh") if package.windows.need_autogen?
       sh("autoreconf --install") if package.windows.need_autoreconf?
-      cc_env = "CC=#{@package.windows.build_host}-gcc"
+      cc_env = "CC=#{cc(package)}"
       sh("./configure",
          cc_env,
          "CPPFLAGS=#{cppflags(package)}",
@@ -173,6 +173,15 @@ class GNOME2Win32BinaryBuildTask
 
   def rcairo_win32_lib_path
     "#{rcairo_win32_dir}/vendor/local/lib"
+  end
+
+  def cc(package)
+    cc_command_line = [
+      "#{@package.windows.build_host}-gcc",
+      *package.windows.cc_args,
+    ]
+    p package.windows.cc_args
+    cc_command_line.compact.join(" ")
   end
 
   def cppflags(package)
