@@ -19,6 +19,8 @@
 module GNOME2
   module Rake
     class ExternalPackage < Struct.new(:name,
+                                       :base_name,
+                                       :archive_base_name,
                                        :label,
                                        :version,
                                        :download_site,
@@ -43,11 +45,11 @@ module GNOME2
       end
 
       def base_name
-        "#{name}-#{version}"
+        super || "#{name}-#{version}"
       end
 
       def archive_base_name
-        "#{base_name}.tar.#{compression_method}"
+        super || "#{base_name}.tar.#{compression_method}"
       end
 
       def archive_url
