@@ -1,16 +1,73 @@
 # -*- ruby -*-
+#
+# Copyright (C) 2010-2013  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
 require 'gnome2-raketask'
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/Poppler is a Ruby binding of poppler-glib."
-  _package.description = "Ruby/Poppler is a Ruby binding of poppler-glib."
-  _package.dependency.gem.runtime = []
-  _package.win32.packages = []
-  _package.win32.dependencies = ["poppler",
-                                 ["libpng", "1.2.40-1"],
-                                 ["jpeg", "7-1"]]
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/Poppler is a Ruby binding of poppler-glib."
+  package.description = "Ruby/Poppler is a Ruby binding of poppler-glib."
+  package.dependency.gem.runtime = [["cairo", ">= 1.12.8"], "gdk_pixbuf2"]
+  package.win32.packages = []
+  package.win32.dependencies = []
+  package.windows.build_dependencies = [
+    "glib2",
+    "gobject-introspection",
+    "pango",
+    "gdk_pixbuf2",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "gdk_pixbuf2",
+  ]
+  package.external_packages = [
+    {
+      :name => "libjpeg",
+      :base_name => "jpeg-9",
+      :archive_base_name => "jpegsrc.v9.tar.gz",
+      :download_base_url => "http://www.ijg.org/files",
+      :label => "libjpeg",
+      :windows => {
+        :configure_args => [],
+      },
+    },
+    {
+      :name => "sqlite-autoconf",
+      :download_base_url => "http://www.sqlite.org/2013",
+      :label => "SQLite",
+      :version => "3080200",
+      :compression_method => "gz",
+      :windows => {
+        :configure_args => [],
+      },
+    },
+    {
+      :name => "poppler",
+      :download_base_url => "http://poppler.freedesktop.org",
+      :label => "Poppler",
+      :version => "0.24.4",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+      },
+    },
+  ]
 end
-package.define_tasks
+package_task.define
 
