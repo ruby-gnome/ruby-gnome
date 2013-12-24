@@ -7,8 +7,8 @@ package = GNOME2Package.new do |_package|
   _package.summary = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
   _package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
-  _package.win32.packages = ["libsoup"]
-  _package.win32.dependencies = ["jpeg"]
+  _package.win32.packages = []
+  _package.win32.dependencies = []
   _package.win32.build_dependencies = [
     "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2", "gobject-introspection",
   ]
@@ -18,10 +18,43 @@ package = GNOME2Package.new do |_package|
   libmad_version = "0.15.1b"
   _package.external_packages = [
     {
+      :name => "libjpeg",
+      :base_name => "jpeg-9",
+      :archive_base_name => "jpegsrc.v9.tar.gz",
+      :download_base_url => "http://www.ijg.org/files",
+      :label => "libjpeg",
+      :windows => {
+        :configure_args => [],
+      },
+    },
+    {
+      :name => "sqlite-autoconf",
+      :download_base_url => "http://www.sqlite.org/2013",
+      :label => "SQLite",
+      :version => "3080200",
+      :compression_method => "gz",
+      :windows => {
+        :configure_args => [],
+      },
+    },
+    {
+      :name => "libsoup",
+      :download_site => :gnome,
+      :label => "libsoup",
+      :version => "2.45.3",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--without-apache-httpd",
+        ],
+        :build_concurrently => false,
+      },
+    },
+    {
       :name => "libogg",
       :download_base_url => "#{xiph_download_url_base}/ogg",
       :label => "Ogg",
-      :version => "1.3.0",
+      :version => "1.3.1",
       :windows => {
         :configure_args => [],
       },
@@ -30,7 +63,7 @@ package = GNOME2Package.new do |_package|
       :name => "libvorbis",
       :download_base_url => "#{xiph_download_url_base}/vorbis",
       :label => "Vorbis",
-      :version => "1.3.2",
+      :version => "1.3.3",
       :windows => {
         :configure_args => [],
       },
@@ -45,6 +78,9 @@ package = GNOME2Package.new do |_package|
           "--disable-examples"
         ],
         :build_concurrently => false,
+        :patches => [
+          "libtheora-1.1.1-use-lf-in-def.diff",
+        ],
       },
     },
     # {
@@ -62,14 +98,10 @@ package = GNOME2Package.new do |_package|
       :name => "flac",
       :download_base_url => "#{xiph_download_url_base}/flac",
       :label => "FLAC",
-      :version => "1.2.1",
+      :version => "1.3.0",
+      :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-cpplibs"],
-        :need_autogen => true,
-        :patches => [
-          "flac-1.2.1-fix-mingw-build.diff",
-          # "flac-1.2.1-fix-doc-install.diff",
-        ],
       },
     },
     {
@@ -85,7 +117,7 @@ package = GNOME2Package.new do |_package|
       :name => "gstreamer",
       :download_base_url => "#{freedesktop_download_url_base}/gstreamer",
       :label => "GStreamer",
-      :version => "1.0.7",
+      :version => "1.2.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -99,7 +131,7 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-base",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-base",
       :label => "GStreamer plugins (base)",
-      :version => "1.0.7",
+      :version => "1.2.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -112,7 +144,7 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-good",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
       :label => "GStreamer plugins (good)",
-      :version => "1.0.7",
+      :version => "1.2.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -124,17 +156,18 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-bad",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-bad",
       :label => "GStreamer plugins (bad)",
-      :version => "1.0.7",
+      :version => "1.2.1",
       :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-librfb"],
+        :build_concurrently => false,
       },
     },
     # {
     #   :name => "gst-plugins-ugly",
     #   :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
     #   :label => "GStreamer plugins (ugly)",
-    #   :version => "1.0.7",
+    #   :version => "1.2.1",
     #   :compression_method => "xz",
     #   :windows => {
     #     :configure_args => [],
@@ -144,23 +177,30 @@ package = GNOME2Package.new do |_package|
       :name => "gst-libav",
       :download_base_url => "#{freedesktop_download_url_base}/gst-libav",
       :label => "GStreamer libav",
-      :version => "1.0.7",
+      :version => "1.2.1",
       :compression_method => "xz",
       :windows => {
-        :configure_args => ["--with-libav-extra-configure=" +
-                              "--cross-prefix=#{_package.win32.build_host}- " +
-                              "--target-os=mingw32 " +
-                              "--arch=i686 " +
-                              "--pkg-config=pkg-config " +
-                              "--disable-gpl"],
+        :configure_args => [
+          "--with-libav-extra-configure=" +
+            "--cross-prefix=#{_package.win32.build_host}- " +
+            "--target-os=mingw32 " +
+            "--arch=i686 " +
+            "--pkg-config=pkg-config " +
+            "--disable-gpl",
+        ],
       },
       :bundled_packages => [
         {
           :name => "libav",
           :path => "gst-libs/ext/libav",
-          :license_files => ["LICENSE", "CREDITS",
-                             "COPYING.GPLv2", "COPYING.GPLv3",
-                             "COPYING.LGPLv2.1", "COPYING.LGPLv3"],
+          :license_files => [
+            "LICENSE",
+            "CREDITS",
+            "COPYING.GPLv2",
+            "COPYING.GPLv3",
+            "COPYING.LGPLv2.1",
+            "COPYING.LGPLv3",
+          ],
         }
       ],
     },
