@@ -3,12 +3,50 @@
 $LOAD_PATH.unshift("./../glib2/lib")
 require 'gnome2-raketask'
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/RSVG is a Ruby binding of librsvg-2.x."
-  _package.description = "Ruby/RSVG is a Ruby binding of librsvg-2.x."
-  _package.dependency.gem.runtime = [["cairo", ">= 1.10.0"], "gdk_pixbuf2"]
-  _package.win32.packages = ["librsvg", "libcroco"]
-  _package.win32.dependencies = ["libxml2"]
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/RSVG is a Ruby binding of librsvg-2.x."
+  package.description = "Ruby/RSVG is a Ruby binding of librsvg-2.x."
+  package.dependency.gem.runtime = [["cairo", ">= 1.12.8"], "gdk_pixbuf2"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = [
+    "glib2",
+    "gobject-introspection",
+    "pango",
+    "gdk_pixbuf2",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "gdk_pixbuf2",
+  ]
+  package.external_packages = [
+    {
+      :name => "libcroco",
+      :download_site => :gnome,
+      :label => "libcroco",
+      :version => "0.6.8",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+      },
+    },
+    {
+      :name => "librsvg",
+      :download_site => :gnome,
+      :label => "librsvg",
+      :version => "2.40.1",
+      :compression_method => "xz",
+      :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
+        :patches => [
+          "librsvg-2.40.1-replace-canonicalize-file-name.diff",
+        ],
+      },
+    },
+  ]
 end
-package.define_tasks
+package_task.define
 
