@@ -58,7 +58,7 @@ module GNOME2
               if built_file
                 built_file = dist_dir + built_file
                 file built_file.to_s do
-                  Rake::Task[download_task].invoke
+                  ::Rake::Task[download_task].invoke
                   build_package_task_body(package)
                 end
                 task :build => built_file.to_s
