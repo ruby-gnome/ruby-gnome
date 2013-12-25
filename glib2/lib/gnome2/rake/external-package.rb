@@ -111,6 +111,7 @@ module GNOME2
                                               :configure_args,
                                               :cc_args,
                                               :patches,
+                                              :built_file,
                                               :need_autogen,
                                               :need_autoreconf,
                                               :build_concurrently,
@@ -146,6 +147,10 @@ module GNOME2
           super || []
         end
 
+        def built_file
+          super || nil
+        end
+
         def need_autogen?
           need_autogen.nil? ? false : need_autogen
         end
@@ -166,6 +171,7 @@ module GNOME2
       class NativeConfiguration < Struct.new(:build,
                                              :configure_args,
                                              :patches,
+                                             :built_file,
                                              :need_autogen,
                                              :need_autoreconf,
                                              :build_concurrently)
@@ -186,6 +192,10 @@ module GNOME2
 
         def patches
           super || []
+        end
+
+        def built_file
+          super || nil
         end
 
         def need_autogen?

@@ -59,8 +59,19 @@ class GNOME2Win32BinaryBuildTask
         namespace package.name do
           task :before
           download_task = "source:downloader:download:#{package.name}"
-          task :build => [:prepare, download_task] do
-            build_package_task_body(package)
+          built_file = package.windows.built_file
+          if built_file
+            built_file = dist_dir + built_file
+            file built_file.to_s do
+              Rake::Task["win32:builder:build:prepare"].invoke
+              Rake::Task[download_task].invoke
+              build_package_task_body(package)
+            end
+            task :build => built_file.to_s
+          else
+            task :build => [:prepare, download_task] do
+              build_package_task_body(package)
+            end
           end
           task :after
         end

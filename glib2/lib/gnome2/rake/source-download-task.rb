@@ -60,7 +60,8 @@ module GNOME2
             task :before
             task :after
             desc "Download #{package.label} into #{download_dir}."
-            task package[:name] => [:before, tar_full_path.to_s, :after]
+            # task package[:name] => [:before, tar_full_path.to_s, :after]
+            task package[:name] => tar_full_path.to_s
 
             directory_path = tar_full_path.dirname
             directory directory_path.to_s
