@@ -52,6 +52,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
+        :built_file => "bin/libclutter-gst-2.0-0.dll",
       },
     }
   ]
