@@ -26,12 +26,16 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "gtk+",
       :download_site => :gnome,
       :label => "GTK+",
-      :version => "3.8.2",
+      :version => "3.10.6",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
           "--enable-introspection",
         ],
+        :patches => [
+          "gdk+-3.10.6-remove-def-use.diff",
+        ],
+        :need_autoreconf => true,
       },
     }
   ]
