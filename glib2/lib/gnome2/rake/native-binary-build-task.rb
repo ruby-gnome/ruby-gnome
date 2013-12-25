@@ -52,9 +52,29 @@ module GNOME2
       def define_build_tasks
         namespace :build do
           build_packages.each do |package|
-            download_task = "source:downloader:download:#{package.name}"
+            namespace package.name do
+              download_task = "source:downloader:download:#{package.name}"
+              built_file = package.native.built_file
+              if built_file
+                built_file = dist_dir + built_file
+                file built_file.to_s do
+                  Rake::Task[download_task].invoke
+                  build_package_task_body(package)
+                end
+                task :build => built_file.to_s
+              else
+                task :build => [download_task] do
+                  build_patckage_task_body(package)
+                end
+              end
+            end
             desc "Build #{package.label} and install it into #{dist_dir}."
-            task package.name => [download_task] do
+            task package.name => "native:builder:build:#{package.name}:build"
+          end
+        end
+      end
+
+      def build_package_task_body(package)
               package_tmp_dir = @package.tmp_dir + package.name
               rm_rf(package_tmp_dir)
               mkdir_p(package_tmp_dir)
@@ -85,9 +105,6 @@ module GNOME2
                 sh("nice", "make", *build_make_args) or exit(false)
                 sh("make", "install", *install_make_args) or exit(false)
               end
-            end
-          end
-        end
       end
 
       def build_packages
