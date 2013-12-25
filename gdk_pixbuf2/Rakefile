@@ -26,6 +26,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--enable-introspection",
         ],
         :build_concurrently => false,
+        :built_file => "bin/libgdk_pixbuf-2.0-0.dll",
       },
     }
   ]
