@@ -48,6 +48,11 @@ class GNOME2Win32BinaryBuildTask
           end.join(":")
           ENV["PKG_CONFIG_LIBDIR"] = rcairo_win32_pkgconfig_path
         end
+
+        prepare_task_names << "pkg_config_for_build"
+        task :pkg_config_for_build do
+          ENV["PKG_CONFIG_FOR_BUILD"] = "env - pkg-config"
+        end
       end
 
       full_prepare_task_names = prepare_task_names.collect do |name|
