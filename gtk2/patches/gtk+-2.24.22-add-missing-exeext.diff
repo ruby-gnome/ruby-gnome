@@ -12,7 +12,7 @@ diff -ru gtk+-2.24.22.orig/gtk/Makefile.am gtk+-2.24.22/gtk/Makefile.am
  gtkbuiltincache.h: @REBUILD@ stamp-icons
 diff -ru gtk+-2.24.22.orig/modules/input/Makefile.am gtk+-2.24.22/modules/input/Makefile.am
 --- gtk+-2.24.22.orig/modules/input/Makefile.am	2013-10-05 07:02:29.000000000 +0900
-+++ gtk+-2.24.22/modules/input/Makefile.am	2013-12-25 00:40:00.596200387 +0900
++++ gtk+-2.24.22/modules/input/Makefile.am	2013-12-25 00:55:21.430362022 +0900
 @@ -202,8 +202,8 @@
  	@if $(RUN_QUERY_IMMODULES_TEST) ; then \
  	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0 ; \
@@ -20,7 +20,7 @@ diff -ru gtk+-2.24.22.orig/modules/input/Makefile.am gtk+-2.24.22/modules/input/
 -	  echo "$(DESTDOR)$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache" ; \
 -	  $(DESTDIR)/$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
 +	  echo "$(DESTDOR)$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache" ; \
-+	  $(DESTDIR)/$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
++	  $(DESTDIR)$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
  	else \
  	  echo "***" ; \
  	  echo "*** Warning: immodules.cache not built" ; \
