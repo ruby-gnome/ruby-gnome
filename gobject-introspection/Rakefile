@@ -40,6 +40,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :native => {
         :build => true,
         :need_autoreconf => true,
+        :built_file => "lib/libglib-2.0.so",
       },
     },
     {
@@ -57,12 +58,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "0001-Support-external-g-ir-scanner.patch",
         ],
         :need_autoreconf => true,
+        :built_file => "bin/libgirepository-1.0-1.dll",
       },
       :native => {
         :build => true,
         :patches => [
           # "cross-compilable-g-ir-scanner.diff",
         ],
+        :built_file => "bin/g-ir-scanner",
       }
     },
   ]
