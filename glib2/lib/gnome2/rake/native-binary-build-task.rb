@@ -75,36 +75,36 @@ module GNOME2
       end
 
       def build_package_task_body(package)
-              package_tmp_dir = @package.tmp_dir + package.name
-              rm_rf(package_tmp_dir)
-              mkdir_p(package_tmp_dir)
+        package_tmp_dir = @package.tmp_dir + package.name
+        rm_rf(package_tmp_dir)
+        mkdir_p(package_tmp_dir)
 
-              tar_full_path = @package.download_dir + package.archive_base_name
-              Dir.chdir(package_tmp_dir.to_s) do
-                sh("tar", "xf", tar_full_path.to_s) or exit(false)
-              end
+        tar_full_path = @package.download_dir + package.archive_base_name
+        Dir.chdir(package_tmp_dir.to_s) do
+          sh("tar", "xf", tar_full_path.to_s) or exit(false)
+        end
 
-              Dir.chdir((package_tmp_dir + package.base_name).to_s) do
-                package.native.patches.each do |patch|
-                  sh("patch -p1 < #{@package.patches_dir}/#{patch}")
-                end
-                sh("./autogen.sh") if package.native.need_autogen?
-                sh("autoreconf --install") if package.native.need_autoreconf?
-                sh("./configure",
-                   "PKG_CONFIG_PATH=#{pkg_config_path}",
-                   "--prefix=#{dist_dir}",
-                   *package.native.configure_args) or exit(false)
-                common_make_args = []
-                common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
-                build_make_args = common_make_args.dup
-                install_make_args = common_make_args.dup
-                if package.native.build_concurrently?
-                  make_n_jobs = ENV["MAKE_N_JOBS"]
-                  build_make_args << "-j#{make_n_jobs}" if make_n_jobs
-                end
-                sh("nice", "make", *build_make_args) or exit(false)
-                sh("make", "install", *install_make_args) or exit(false)
-              end
+        Dir.chdir((package_tmp_dir + package.base_name).to_s) do
+          package.native.patches.each do |patch|
+            sh("patch -p1 < #{@package.patches_dir}/#{patch}")
+          end
+          sh("./autogen.sh") if package.native.need_autogen?
+          sh("autoreconf --install") if package.native.need_autoreconf?
+          sh("./configure",
+             "PKG_CONFIG_PATH=#{pkg_config_path}",
+             "--prefix=#{dist_dir}",
+             *package.native.configure_args) or exit(false)
+          common_make_args = []
+          common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
+          build_make_args = common_make_args.dup
+          install_make_args = common_make_args.dup
+          if package.native.build_concurrently?
+            make_n_jobs = ENV["MAKE_N_JOBS"]
+            build_make_args << "-j#{make_n_jobs}" if make_n_jobs
+          end
+          sh("nice", "make", *build_make_args) or exit(false)
+          sh("make", "install", *install_make_args) or exit(false)
+        end
       end
 
       def build_packages
