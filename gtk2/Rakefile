@@ -25,6 +25,7 @@ package = GNOME2Package.new do |_package|
         :patches => [
           "gtk+-2.24.22-add-missing-exeext.diff",
         ],
+        :built_file => "bin/libgtk-win32-2.0-0.dll",
       },
     },
     {
@@ -35,6 +36,7 @@ package = GNOME2Package.new do |_package|
       :windows => {
         :configure_args => [],
         :build_concurrently => false,
+        :built_file => "share/icons/hicolor/index.theme",
       }
     },
   ]
