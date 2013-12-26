@@ -43,6 +43,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :label => "libjpeg",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libjpeg-9.dll",
       },
     },
     {
@@ -53,6 +54,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :compression_method => "gz",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libsqlite3-0.dll",
       },
     },
     {
@@ -65,6 +67,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
+        :built_file => "bin/libpoppler-glib-8.dll",
       },
     },
   ]
