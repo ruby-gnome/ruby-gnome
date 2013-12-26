@@ -45,6 +45,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :configure_args => [
           "--enable-introspection",
         ],
+        :built_file => "bin/libcroco-0.6-3.dll",
       },
     },
     {
@@ -60,6 +61,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :patches => [
           "librsvg-2.40.1-replace-canonicalize-file-name.diff",
         ],
+        :built_file => "bin/librsvg-2-2.dll",
       },
     },
   ]
