@@ -22,6 +22,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :patches => [
         ],
+        :built_file => "bin/libharfbuzz-0.dll",
       },
     },
     {
@@ -37,6 +38,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :patches => [
           "pango-1.34.0-enable-fc-font.diff",
         ],
+        :built_file => "bin/libpango-1.0-0.dll",
       },
     },
   ]
