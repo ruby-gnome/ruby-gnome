@@ -24,7 +24,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.description = "Ruby/GtkSourceView3 is a Ruby binding of gtksourceview-3.x."
   package.dependency.gem.runtime = ["gtk3"]
   package.windows.packages = []
-  package.windows.dependencies = ["libxml2"]
+  package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
     "atk",
@@ -37,8 +37,11 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "gtksourceview",
       :download_site => :gnome,
       :label => "GtkSourceView",
-      :version => "3.8.1",
+      :version => "3.10.1",
       :compression_method => "xz",
+      :windows => {
+        :built_file => "bin/libgtksourceview-3.0-1.dll",
+      },
     }
   ]
 end
