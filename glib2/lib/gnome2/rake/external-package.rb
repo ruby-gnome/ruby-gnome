@@ -97,7 +97,7 @@ module GNOME2
         case download_site
         when :gnome
           base_url = "http://ftp.gnome.org/pub/gnome/sources"
-          release_series = version.gsub(/\A(\d+\.\d+).+\z/, '\1')
+          release_series = version.gsub(/\A(\d+\.\d+)(?:[^\d.*])?\z/, '\1')
           base_url << "/#{name}/#{release_series}"
         else
           base_url = nil
