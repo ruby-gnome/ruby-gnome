@@ -196,7 +196,6 @@ class GNOME2Win32BinaryBuildTask
       "#{@package.windows.build_host}-gcc",
       *package.windows.cc_args,
     ]
-    p package.windows.cc_args
     cc_command_line.compact.join(" ")
   end
 
