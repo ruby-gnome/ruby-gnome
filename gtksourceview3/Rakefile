@@ -31,6 +31,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     "pango",
     "gdk_pixbuf2",
     "gdk3",
+    "gobject-introspection",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gdk3",
   ]
   package.external_packages = [
     {
@@ -40,6 +47,9 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :version => "3.10.1",
       :compression_method => "xz",
       :windows => {
+        :configure_args => [
+          "--enable-introspection",
+        ],
         :built_file => "bin/libgtksourceview-3.0-1.dll",
       },
     }
