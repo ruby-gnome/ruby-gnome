@@ -26,20 +26,115 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
-  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
+  package.windows.build_dependencies = [
+    "glib2",
+    "gobject-introspection",
+    "atk",
+    "pango",
+    "gdk_pixbuf2",
+    "gtk2",
+    "gdk3",
+    "gstreamer",
+  ]
+  package.windows.gobject_introspection_dependencies = [
+    "atk",
+    "gdk_pixbuf2",
+    "pango",
+    "gdk3",
+    "gstreamer",
+  ]
   package.external_packages = [
-    {
-      :name => "webkitgtk",
-      :download_base_url => "http://webkitgtk.org/releases",
-      :label => "WebKitGTK+",
-      :version => "2.0.0",
-      :compression_method => "xz",
-      :windows => {
-        :configure_args => [
-          "--enable-introspection",
-        ],
-      },
-    },
+    # {
+    #   :name => "libjpeg",
+    #   :base_name => "jpeg-9",
+    #   :archive_base_name => "jpegsrc.v9.tar.gz",
+    #   :download_base_url => "http://www.ijg.org/files",
+    #   :label => "libjpeg",
+    #   :windows => {
+    #     :configure_args => [],
+    #     :built_file => "bin/libjpeg-9.dll",
+    #   },
+    # },
+    # {
+    #   :name => "libwebp",
+    #   :download_base_url => "https://webp.googlecode.com/files",
+    #   :label => "WebP",
+    #   :version => "0.3.1",
+    #   :windows => {
+    #     :built_file => "bin/libwebp-4.dll",
+    #   },
+    # },
+    # {
+    #   :name => "sqlite-autoconf",
+    #   :download_base_url => "http://www.sqlite.org/2013",
+    #   :label => "SQLite",
+    #   :version => "3080200",
+    #   :compression_method => "gz",
+    #   :windows => {
+    #     :configure_args => [],
+    #     :built_file => "bin/libsqlite3-0.dll",
+    #   },
+    # },
+    # {
+    #   :name => "libsoup",
+    #   :download_site => :gnome,
+    #   :label => "libsoup",
+    #   :version => "2.45.3",
+    #   :compression_method => "xz",
+    #   :windows => {
+    #     :configure_args => [
+    #       "--enable-introspection",
+    #       "--without-apache-httpd",
+    #     ],
+    #     :build_concurrently => false,
+    #     :built_file => "bin/libsoup-2.4-1.dll",
+    #   },
+    # },
+    # {
+    #   :name => "libiconv",
+    #   :label => "iconv",
+    #   :version => "1.14",
+    #   :download_base_url => "http://ftp.gnu.org/pub/gnu/libiconv",
+    #   :compression_method => "gz",
+    #   :windows => {
+    #     :built_file => "bin/libiconv-2.dll",
+    #   },
+    # },
+    # {
+    #   :name => "libxslt",
+    #   :version => "1.1.28",
+    #   :download_base_url => "ftp://xmlsoft.org/libxslt",
+    #   :compression_method => "gz",
+    #   :windows => {
+    #     :built_file => "bin/libxslt-1.dll",
+    #     :configure_args => [
+    #       "--without-python",
+    #     ],
+    #     :patches => [
+    #       "libxslt-1.1.28-add-mkdir-fallback.diff",
+    #     ],
+    #   },
+    # },
+    # {
+    #   :name => "webkitgtk",
+    #   :download_base_url => "http://webkitgtk.org/releases",
+    #   :label => "WebKitGTK+",
+    #   :version => "2.2.3",
+    #   :compression_method => "xz",
+    #   :windows => {
+    #     :configure_args => [
+    #       "--enable-introspection",
+    #       "--with-target=win32",
+    #       "--disable-credential-storage",
+    #       "--disable-geolocation",
+    #       "--disable-webkit2",
+    #     ],
+    #     :patches => [
+    #       "webkitgtk-2.2.3-buildable.diff",
+    #     ],
+    #     :need_autoreconf => true,
+    #   },
+    # },
   ]
 end
 package_task.define

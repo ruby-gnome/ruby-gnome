@@ -1,0 +1,63 @@
+diff -ru webkitgtk-2.2.3.orig/Source/WTF/wtf/Atomics.h webkitgtk-2.2.3/Source/WTF/wtf/Atomics.h
+--- webkitgtk-2.2.3.orig/Source/WTF/wtf/Atomics.h	2013-12-02 17:11:56.000000000 +0900
++++ webkitgtk-2.2.3/Source/WTF/wtf/Atomics.h	2013-12-28 21:57:07.695695396 +0900
+@@ -66,7 +66,7 @@
+ #if OS(WINCE)
+ #include <cmnintrin.h>
+ #else
+-extern "C" void _ReadWriteBarrier(void);
++#include <intrin.h>
+ #pragma intrinsic(_ReadWriteBarrier)
+ #endif
+ #include <windows.h>
+@@ -288,7 +288,7 @@
+         : "memory"
+         );
+     return result;
+-#elif OS(WINDOWS) && CPU(X86)
++#elif OS(WINDOWS) && CPU(X86) && 0
+     // FIXME: We need a 64-bit ASM implementation, but this cannot be inline due to
+     // Microsoft's decision to exclude it from the compiler.
+     bool result = false;
+diff -ru webkitgtk-2.2.3.orig/Source/WTF/wtf/Platform.h webkitgtk-2.2.3/Source/WTF/wtf/Platform.h
+--- webkitgtk-2.2.3.orig/Source/WTF/wtf/Platform.h	2013-12-02 17:11:56.000000000 +0900
++++ webkitgtk-2.2.3/Source/WTF/wtf/Platform.h	2013-12-28 19:43:58.588605855 +0900
+@@ -629,7 +629,7 @@
+ #define HAVE_ISDEBUGGERPRESENT 1
+ 
+ #if !PLATFORM(QT)
+-#include <WTF/WTFHeaderDetection.h>
++/* #include <WTF/WTFHeaderDetection.h> */
+ #endif
+ 
+ #endif
+diff -ru webkitgtk-2.2.3.orig/Source/WTF/wtf/threads/BinarySemaphore.cpp webkitgtk-2.2.3/Source/WTF/wtf/threads/BinarySemaphore.cpp
+--- webkitgtk-2.2.3.orig/Source/WTF/wtf/threads/BinarySemaphore.cpp	2013-08-04 01:10:38.000000000 +0900
++++ webkitgtk-2.2.3/Source/WTF/wtf/threads/BinarySemaphore.cpp	2013-12-28 21:59:06.784816965 +0900
+@@ -26,7 +26,7 @@
+ #include "config.h"
+ #include "BinarySemaphore.h"
+ 
+-#if !PLATFORM(WIN)
++#if !OS(WINDOWS)
+ 
+ namespace WTF {
+ 
+@@ -65,4 +65,4 @@
+ 
+ } // namespace WTF
+ 
+-#endif // !PLATFORM(WIN)
++#endif // !OS(WINDOWS)
+diff -ru webkitgtk-2.2.3.orig/Source/autotools/FindDependencies.m4 webkitgtk-2.2.3/Source/autotools/FindDependencies.m4
+--- webkitgtk-2.2.3.orig/Source/autotools/FindDependencies.m4	2013-12-02 17:11:58.000000000 +0900
++++ webkitgtk-2.2.3/Source/autotools/FindDependencies.m4	2013-12-28 22:17:46.537935727 +0900
+@@ -110,7 +110,7 @@
+         ;;
+     *-*-mingw*)
+         UNICODE_CFLAGS=""
+-        UNICODE_LIBS="-licui18n -licuuc"
++        UNICODE_LIBS="-licuuc"
+         AC_CHECK_HEADERS([unicode/uchar.h], [], [AC_MSG_ERROR([Could not find ICU headers.])])
+         ;;
+     *)
