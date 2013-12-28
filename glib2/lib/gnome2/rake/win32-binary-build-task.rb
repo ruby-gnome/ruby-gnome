@@ -117,6 +117,7 @@ class GNOME2Win32BinaryBuildTask
          "--host=#{@package.windows.build_host}",
          *package.windows.configure_args) or exit(false)
       common_make_args = []
+      common_make_args << "MAKE=make"
       common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
       if package.windows.use_cc_environment_variable?
         common_make_args << cc_env
