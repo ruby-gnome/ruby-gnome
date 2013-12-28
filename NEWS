@@ -2,6 +2,186 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.0.3: 2013-12-29
+
+Ruby 2.1.0 support release!
+
+=== Changes
+
+==== All
+
+  * Improvements
+    * Removed Ruby 1.8 from supported Ruby in READMEs.
+      [GitHub#166] [Reported by Markus Heiler] [Patch by Masafumi Yokoyama]
+    * Supported Ruby 2.1.0. [GitHub#181] [cosmo0920][Masafumi Yokoyama]
+    * Made rcairo optional to required because we dropped old GTK+ that
+      doesn't use cairo. (Cairo isn't used library such as GLib doesn't
+      require rcairo. But Ruby/GLib2 requires rcairo on Windows because
+      it uses zlib bundled in rcairo.) [GitHub#193] [cosmo0920]
+    * Updated LGPL 2.1 files. [GitHub#196] [Reported by ktdreyer]
+    * Supported tests on Travis CI. [Masafumi Yokoyama][cosmo0920]
+    * Supported rake-compiler 0.9.1.
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Set UTF-8 encoding to exception message.
+    * Added GLib::GetText.bindtextdomain.
+    * Dropped GLib < 2.12 because CentOS 5 has GLib 2.12.3.
+      [GitHub#190] [cosmo0920]
+    * Added GValue#to_s.
+    * [windows] Updated bundled GLib to 2.38.2 from 2.36.2.
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported GList return type.
+    * Supported freeing UTF-8 return type.
+    * Supported freeing array return type.
+    * Supported NULL as array return value.
+    * Supported freeing GObject return value.
+    * Supported freeing structure return value.
+    * Supported NULL character for gint8 array.
+  * Fixes
+    * Fixed type conversion from VALUE to GType.
+      [GitHub#186] [Patch by Hiroyuki Tanaka]
+
+==== Ruby/ATK
+
+  * Improvements
+    * Dropped ATK < 1.12 support because CentOS 5 has GTK+ 1.12.2.
+      [GitHub#191] [cosmo0920]
+    * [windows] Updated bundled ATK to 2.10.0 from 2.8.0.
+
+==== Ruby/Pango
+
+  * Improvements
+    * Supported cairo 1.6.
+      [GitHub#172] [Patch by Grant Schoep]
+    * Dropped Pango < 1.14 support because CentOS 5 has GTK+ 1.14.9.
+      [GitHub#192] [cosmo0920]
+    * Added Pango::Layout#height=.
+      [GitHub#210] [Patch by Vasily Fedoseyev]
+    * Added Pango::Layout#ellipsized?.
+      [GitHub#210] [Patch by Vasily Fedoseyev]
+    * [windows] Updated bundled Pango to 1.36.1 from 1.34.1.
+
+==== Ruby/GdkPixbuf2
+
+  * Improvements
+    * [windows] Added rcairo dependency on Windows for using libpng and zlib
+      bundled in rcairo.
+    * [windows] Updated bundled gdk-pixbuf to 2.30.2 from 2.28.1.
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Dropped GTK+ < 2.10 support because CentOS 5 has GTK+ 2.10.4.
+      [GitHub#182] [Patch by cosmo0920]
+    * [windows] Updated bundled GTK+ to 2.24.22 from 2.24.18.
+
+==== Ruby/GDK3
+
+  * Improvements
+    * [test] Made more stable. [GitHub#178] [Reported by mtasaka]
+    * Added Gdk::Device#ungrab. [cosmo0920]
+    * Added Gdk::DeviceManager. [cosmo0920]
+    * Added Gdk::Device#get_position. [cosmo0920]
+    * Added Gdk::Device#warp. [cosmo0920]
+    * Added Gdk::Device#grab. [cosmo0920]
+    * Added Gdk::Window#get_device_position. [cosmo0920]
+    * [windows] Updated bundled GTK+ to 3.10.6 from 3.8.2.
+
+==== Ruby/GTK3
+
+  * Improvements
+    * [sample] Updated for GTK+ 3. [Masafumi Yokoyama]
+    * Removed Gtk::BindingSet#add_path.
+    * Added Gtk.show_uri.
+  * Fixes
+    * Fixed a bug that Gtk::ActionGroup#add_radio_actions always fails.
+      [ruby-gnome2-devel-ja] [Reported by S. Kitagawa]
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Supported calling module functions of Gst module such as
+      Gst.version before calling Gst.init.
+    * Added Gst::Registry#plugins.
+    * Added Gst::Registry#get_features.
+    * Added Gst::ElementFactory#long_name.
+    * Added Gst::ElementFactory#klass.
+    * Added Gst::ElementFactory#author.
+    * Added Gst::ElementFactory#static_pad_templates.
+    * Added Gst::Caps#structures.
+    * Added Gst::Structure#fields.
+    * Gst::Element#flags returns flag object instead of raw integer value.
+      Use Gst::Element#flags_raw for raw integer value.
+    * Gst::PluginFeature#rank returns Gst::Rank instead of raw integer value.
+      Use Gst::PluginFeature#rank for raw integer value.
+    * Supported GstValueList.
+    * [windows] Updated bundled GStreamer to 1.2.1 from 1.0.7.
+
+==== Ruby/Clutter
+
+  * Improvements
+    * [sample] Updated for Clutter 1.12 or later.
+      [Patch by Kentaro Fukuchi]
+    * [windows] Updated bundled Clutter to 1.16.2 from 1.14.4.
+
+==== Ruby/ClutterGStreamer
+
+  * Improvements
+    * [sample] Added.
+      [Masafumi Yokoyama]
+    * Fixed a typo in sample.
+      [Reported by Toyo Abe]
+    * [windows] Updated bundled Clutter-GStreamer to 2.0.8 from 2.0.2.
+
+==== Ruby/Poppler
+
+  * Improvements
+    * Dropped Popper < 0.12 because CentOS has Poppler 0.12.4.
+      [GitHub#212] [cosmo0920]
+    * [windows] Bundled Poppler 0.24.4.
+
+==== Ruby/RSVG
+
+  * Improvements
+    * [windows] Bundled librsvg 2.40.1.
+
+==== Ruby/GtkSourceView3
+
+  * Improvements
+    * Supported auto GtkSourceView install on OS X.
+      [GitHub#177] [Masafumi Yokoyama]
+    * [windows] Updated bundled GtkSourceView to 3.10.1 from 3.8.1.
+
+==== Ruby/GooCanvas
+
+  * Improvements
+    * [sample] Followed changes caused by migrating to
+      Ruby/GObjectIntrospection.
+      [Masafumi Yokoyama]
+    * Updated FSF address.
+      [GitHub#201] [Reported by ktdreyer]
+  * Fixes
+    * Fixed wrong dependency.
+      [ruby-gnomde2-devel-ja] [Reported by Masafumi Yokoyama]
+
+=== Thanks
+
+  * Kentaro Fukuchi
+  * S. Kitagawa
+  * Markus Heiler
+  * Masafumi Yokoyama
+  * Grant Schoep
+  * Toyo Abe
+  * mtasaka
+  * cosmo0920
+  * Hiroyuki Tanaka
+  * ktdreyer
+
 == Ruby-GNOME2 2.0.2: 2013-05-26
 
 Windows XP re-supportted release!
