@@ -369,7 +369,7 @@ namespace :gem do
                 "native",
                 "gem",
               ]
-              ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0", *tasks)
+              ruby("-S", "rake", "RUBY_CC_VERSION=1.9.3:2.0.0:2.1.0", *tasks)
             end
           end
         end
