@@ -174,15 +174,15 @@ module GNOME2
               win32_binary_dir = @package.windows.relative_binary_dir
               win32_files = []
               if win32_binary_dir.exist?
-                Find.find(win32_binary_dir.to_s) do |file|
-                  next if /\.zip\z/ =~ file
-                  win32_files << file
+                Find.find(win32_binary_dir.to_s) do |path|
+                  next unless File.file?(path)
+                  next if /\.zip\z/ =~ path
+                  win32_files << path
                 end
               end
               spec.files += win32_files
               stage_path = "#{ext.tmp_dir}/#{ext.cross_platform}/stage"
               win32_files.each do |win32_file|
-                next unless File.file?(win32_file)
                 stage_win32_file = "#{stage_path}/#{win32_file}"
                 stage_win32_binary_dir = File.dirname(stage_win32_file)
                 directory stage_win32_binary_dir
