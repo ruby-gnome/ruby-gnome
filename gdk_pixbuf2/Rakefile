@@ -30,10 +30,5 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     }
   ]
-  package.cross_compiling do |spec|
-    if /mingw|mswin/ =~ spec.platform.to_s
-      spec.add_runtime_dependency("cairo", ">= 1.12.6")
-    end
-  end
 end
 package_task.define

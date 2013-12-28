@@ -223,7 +223,6 @@ package = GNOME2Package.new do |_package|
   ]
   _package.cross_compiling do |spec|
     if /mingw|mswin/ =~ spec.platform.to_s
-      spec.add_runtime_dependency("cairo", ">= 1.10.1")
       spec.add_runtime_dependency("pango", ">= #{_package.version}")
       spec.add_runtime_dependency("gdk_pixbuf2", ">= #{_package.version}")
     end
