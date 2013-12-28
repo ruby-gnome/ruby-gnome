@@ -25,8 +25,8 @@ package = GNOME2Package.new do |_package|
       :label => "libjpeg",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libjpeg-9.dll",
       },
-      :built_file => "bin/libjpeg-9.dll",
     },
     {
       :name => "sqlite-autoconf",
