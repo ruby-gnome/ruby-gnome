@@ -187,7 +187,7 @@ namespace :dist do
         end
       end
 
-      rubygems_tgz_base = "rubygems-1.8.24.tgz"
+      rubygems_tgz_base = "rubygems-2.1.11.tgz"
       rubygems_tgz = "#{base_dir}/#{rubygems_tgz_base}"
       file rubygems_tgz => base_dir do
         rubygems_url_base = "http://production.cf.rubygems.org/rubygems"
