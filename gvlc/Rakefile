@@ -9,7 +9,6 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = ["glib2"]
   _package.win32.packages = []
   _package.win32.dependencies = []
-  _package.required_ruby_version = ">= 1.9.3"
   _package.post_install_message = "This library is experimental."
 end
 package.define_tasks

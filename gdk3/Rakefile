@@ -40,6 +40,5 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     }
   ]
-  package.required_ruby_version = ">= 1.9.3"
 end
 package_task.define
