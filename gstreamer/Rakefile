@@ -26,6 +26,7 @@ package = GNOME2Package.new do |_package|
       :windows => {
         :configure_args => [],
       },
+      :built_file => "bin/libjpeg-9.dll",
     },
     {
       :name => "sqlite-autoconf",
@@ -35,6 +36,7 @@ package = GNOME2Package.new do |_package|
       :compression_method => "gz",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libsqlite3-0.dll",
       },
     },
     {
@@ -45,9 +47,11 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => [
+          "--enable-introspection",
           "--without-apache-httpd",
         ],
         :build_concurrently => false,
+        :built_file => "bin/libsoup-2.4-1.dll",
       },
     },
     {
@@ -57,6 +61,7 @@ package = GNOME2Package.new do |_package|
       :version => "1.3.1",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libogg-0.dll",
       },
     },
     {
@@ -66,6 +71,7 @@ package = GNOME2Package.new do |_package|
       :version => "1.3.3",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libvorbis-0.dll",
       },
     },
     {
@@ -81,6 +87,7 @@ package = GNOME2Package.new do |_package|
         :patches => [
           "libtheora-1.1.1-use-lf-in-def.diff",
         ],
+        :built_file => "bin/libtheora-0.dll",
       },
     },
     # {
@@ -102,6 +109,7 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-cpplibs"],
+        :built_file => "bin/libFLAC-8.dll",
       },
     },
     {
@@ -111,6 +119,7 @@ package = GNOME2Package.new do |_package|
       :version => "1.2rc1",
       :windows => {
         :configure_args => [],
+        :built_file => "bin/libspeex-1.dll",
       },
     },
     {
@@ -125,6 +134,7 @@ package = GNOME2Package.new do |_package|
           "--enable-introspection",
         ],
         :build_concurrently => false,
+        :built_file => "bin/libgstreamer-1.0-0.dll",
       },
     },
     {
@@ -138,6 +148,7 @@ package = GNOME2Package.new do |_package|
           "--enable-introspection",
         ],
         :build_concurrently => false,
+        :built_file => "lib/gstreamer-1.0/libgstgio.dll",
       },
     },
     {
@@ -150,6 +161,7 @@ package = GNOME2Package.new do |_package|
         :configure_args => [
           "--disable-shout2",
         ],
+        :built_file => "lib/gstreamer-1.0/libgstcairo.dll",
       },
     },
     {
@@ -163,6 +175,7 @@ package = GNOME2Package.new do |_package|
         :cc_args => [
           "-std=c99",
         ],
+        :built_file => "lib/gstreamer-1.0/libgstfaac.dll",
       },
     },
     # {
@@ -190,6 +203,7 @@ package = GNOME2Package.new do |_package|
             "--pkg-config=pkg-config " +
             "--disable-gpl",
         ],
+        :built_file => "lib/gstreamer-1.0/libgstlibav.dll",
       },
       :bundled_packages => [
         {
