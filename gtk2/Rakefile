@@ -21,7 +21,7 @@ package = GNOME2Package.new do |_package|
       :compression_method => "xz",
       :windows => {
         :configure_args => [
-          "--with-included-immodules=ime",
+          "--with-included-immodules",
         ],
         :need_autoreconf => true,
         :patches => [
