@@ -31,7 +31,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :windows => {
         :configure_args => [
           "--enable-introspection",
-          "--with-included-immodules=ime",
+          "--with-included-immodules",
         ],
         :patches => [
           "gdk+-3.10.6-remove-def-use.diff",
