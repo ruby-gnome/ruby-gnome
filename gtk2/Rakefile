@@ -20,7 +20,9 @@ package = GNOME2Package.new do |_package|
       :version => "2.24.22",
       :compression_method => "xz",
       :windows => {
-        :configure_args => [],
+        :configure_args => [
+          "--with-included-immodules=ime",
+        ],
         :need_autoreconf => true,
         :patches => [
           "gtk+-2.24.22-add-missing-exeext.diff",
