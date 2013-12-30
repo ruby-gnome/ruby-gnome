@@ -25,7 +25,7 @@ package = GNOME2Package.new do |_package|
         ],
         :need_autoreconf => true,
         :patches => [
-          "gtk+-2.24.22-add-missing-exeext.diff",
+          "gtk+-2.24.22-add-missing-exeext-and-fix-directory.diff",
         ],
         :built_file => "bin/libgtk-win32-2.0-0.dll",
       },
