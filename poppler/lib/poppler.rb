@@ -17,16 +17,6 @@ require "date"
 require "glib2"
 require "gdk_pixbuf2"
 begin
-  require "gtk2"
-rescue LoadError
-rescue
-  if defined?(Gtk::InitError) and $!.class == Gtk::InitError
-    # ignore
-  else
-    raise
-  end
-end
-begin
   require "cairo"
 rescue LoadError
 end
