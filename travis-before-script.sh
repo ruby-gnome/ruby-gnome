@@ -19,6 +19,7 @@
 set -e
 set -u
 
+sudo apt-get update -qq
 sudo apt-get install -qq -y \
     libgirepository1.0-dev \
     gir1.2-clutter-1.0 \
