@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,11 +40,15 @@ class TestStructInfo < Test::Unit::TestCase
   end
 
   def test_size
-    assert_equal(24, @info.size)
+    need_ruby_2_0
+    need_fiddle
+    assert_equal(16 + Fiddle::SIZEOF_SIZE_T, @info.size)
   end
 
   def test_alignment
-    assert_equal(8, @info.alignment)
+    need_ruby_2_0
+    need_fiddle
+    assert_equal(Fiddle::ALIGN_SIZE_T, @info.alignment)
   end
 
   def test_gtype_struct?
@@ -53,5 +57,20 @@ class TestStructInfo < Test::Unit::TestCase
 
   def test_foreign?
     assert_false(@info.foreign?)
+  end
+
+  private
+  def need_ruby_2_0
+    if RUBY_VERSION < "2.0.0"
+      omit("need Ruby 2.0.0 or later")
+    end
+  end
+
+  def need_fiddle
+    begin
+      require "fiddle"
+    rescue LoadError
+      omit("need fiddle")
+    end
   end
 end
