@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -67,9 +67,9 @@ class TestInterfaceInfo < Test::Unit::TestCase
   end
 
   def test_get_signal_name
-    require_version(1, 34, 0)
+    require_version(1, 36, 0)
     info = @repository.find("Gio", "Volume")
-    assert_kind_of(GObjectIntrospection::FunctionInfo,
+    assert_kind_of(GObjectIntrospection::SignalInfo,
                    info.get_signal("changed"))
   end
 

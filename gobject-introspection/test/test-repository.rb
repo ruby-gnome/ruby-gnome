@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestRepository < Test::Unit::TestCase
+  include GObjectIntrospectionTestUtils
+
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("GObject")
@@ -31,7 +33,8 @@ class TestRepository < Test::Unit::TestCase
   end
 
   def test_get_dependencies
-    assert_equal(["GLib-2.0", "GObject-2.0"].sort,
+    require_version(1, 36, 0)
+    assert_equal(["GObject-2.0"].sort,
                  @repository.get_dependencies("Gio").sort)
   end
 
