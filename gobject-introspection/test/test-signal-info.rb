@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestSignalInfo < Test::Unit::TestCase
+  include GObjectIntrospectionTestUtils
+
   def setup
     @repository = GObjectIntrospection::Repository.default
     @repository.require("Gio")
@@ -23,7 +25,8 @@ class TestSignalInfo < Test::Unit::TestCase
   end
 
   def test_flags
-    assert_equal(GLib::SignalFlags::RUN_CLEANUP,
+    require_version(1, 38, 0)
+    assert_equal(GLib::SignalFlags::RUN_LAST,
                  @info.flags)
   end
 
