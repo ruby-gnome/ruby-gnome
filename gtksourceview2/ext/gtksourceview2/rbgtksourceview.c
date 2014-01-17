@@ -143,10 +143,15 @@ static VALUE
 rg_get_mark_category_background(VALUE self, VALUE category)
 {
     GdkColor color;
-    gtk_source_view_get_mark_category_background(_SELF (self),
-                         RVAL2CSTR(category),
-                         &color);
-    return GDKCOLOR2RVAL(&color);
+    gboolean found;
+    found = gtk_source_view_get_mark_category_background(_SELF (self),
+                                                         RVAL2CSTR(category),
+                                                         &color);
+    if (found) {
+        return GDKCOLOR2RVAL(&color);
+    } else {
+        return Qnil;
+    }
 }
 
 /*
