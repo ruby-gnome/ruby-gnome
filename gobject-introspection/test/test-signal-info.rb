@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@ class TestSignalInfo < Test::Unit::TestCase
     @repository = GObjectIntrospection::Repository.default
     @repository.require("Gio")
     @object_info = @repository.find("Gio", "Application")
-    @info = @object_info.get_signal(0)
+    @info = @object_info.signals.find {|info| info.name == "startup"}
   end
 
   def test_flags
