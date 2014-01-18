@@ -87,6 +87,12 @@ rg_default_screen(VALUE self)
 }
 
 static VALUE
+rg_device_manager(VALUE self)
+{
+    return GOBJ2RVAL(gdk_display_get_device_manager(_SELF(self)));
+}
+
+static VALUE
 rg_device_is_grabbed_p(VALUE self, VALUE device)
 {
     return CBOOL2RVAL(gdk_display_device_is_grabbed(_SELF(self), RVAL2GDKDEVICE(device)));
@@ -382,6 +388,7 @@ Init_gdk_display(VALUE mGdk)
     RG_DEF_METHOD(get_screen, 1);
     RG_DEF_ALIAS("[]", "get_screen");
     RG_DEF_METHOD(default_screen, 0);
+    RG_DEF_METHOD(device_manager, 0);
 
     RG_DEF_METHOD_P(device_is_grabbed, 1);
 
