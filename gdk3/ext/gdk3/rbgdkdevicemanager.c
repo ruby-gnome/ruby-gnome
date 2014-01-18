@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -33,7 +33,7 @@ rg_devices(VALUE self)
 void
 Init_gdk_device_manager(VALUE mGdk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DISPLAY_MANAGER, "DeviceManager", mGdk);
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_DEVICE_MANAGER, "DeviceManager", mGdk);
 
     RG_DEF_METHOD(devices, 0);
 }
