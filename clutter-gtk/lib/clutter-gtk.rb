@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -41,7 +41,7 @@ module ClutterGtk
     def init(argv=[])
       loader = Loader.new(self, argv)
       loader.load("GtkClutter")
-      Clutter.init(argv)
+      Clutter.init(argv) if Clutter.respond_to?(:init)
       class << self
         remove_method(:init)
         remove_method(:const_missing)
