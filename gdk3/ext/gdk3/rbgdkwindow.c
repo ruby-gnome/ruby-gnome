@@ -56,6 +56,12 @@ rg_window_type(VALUE self)
 }
 
 static VALUE
+rg_display(VALUE self)
+{
+    return GOBJ2RVAL(gdk_window_get_display(_SELF(self)));
+}
+
+static VALUE
 rg_show(VALUE self)
 {
     gdk_window_show(_SELF(self));
@@ -930,6 +936,7 @@ Init_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(initialize, 3);
     RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD(window_type, 0);
+    RG_DEF_METHOD(display, 0);
     RG_DEF_SMETHOD(constrain_size, 4);
     RG_DEF_SMETHOD(process_all_updates, 0);
     RG_DEF_SMETHOD(set_debug_updates, 1);
