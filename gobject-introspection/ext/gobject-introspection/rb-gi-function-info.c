@@ -576,9 +576,9 @@ rb_gi_function_info_invoke_raw_call(InvokeData *data)
 {
     data->succeeded =
         g_function_info_invoke(data->info,
-                               (GIArgument *)(data->in_args->data),
+                               (GIArgument *)((void *)(data->in_args->data)),
                                data->in_args->len,
-                               (GIArgument *)(data->out_args->data),
+                               (GIArgument *)((void *)(data->out_args->data)),
                                data->out_args->len,
                                data->return_value,
                                data->error);
