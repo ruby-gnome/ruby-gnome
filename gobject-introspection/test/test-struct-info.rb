@@ -40,15 +40,11 @@ class TestStructInfo < Test::Unit::TestCase
   end
 
   def test_size
-    need_ruby_2_0
-    need_fiddle
-    assert_equal(16 + Fiddle::SIZEOF_SIZE_T, @info.size)
+    assert_operator(@info.size, :>=, 20)
   end
 
   def test_alignment
-    need_ruby_2_0
-    need_fiddle
-    assert_equal(Fiddle::ALIGN_SIZE_T, @info.alignment)
+    assert_operator(@info.alignment, :>=, 4)
   end
 
   def test_gtype_struct?
@@ -57,20 +53,5 @@ class TestStructInfo < Test::Unit::TestCase
 
   def test_foreign?
     assert_false(@info.foreign?)
-  end
-
-  private
-  def need_ruby_2_0
-    if RUBY_VERSION < "2.0.0"
-      omit("need Ruby 2.0.0 or later")
-    end
-  end
-
-  def need_fiddle
-    begin
-      require "fiddle"
-    rescue LoadError
-      omit("need fiddle")
-    end
   end
 end
