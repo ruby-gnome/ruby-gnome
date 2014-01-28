@@ -40,12 +40,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static void
-link_func(GtkLinkButton *button, const gchar *link, gpointer func)
-{
-    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(button), CSTR2RVAL(link));
-}
-
 void
 Init_gtk_link_button(VALUE mGtk)
 {

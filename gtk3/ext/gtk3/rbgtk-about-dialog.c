@@ -31,12 +31,6 @@ rg_initialize(VALUE self)
     return Qnil;
 }
 
-static void
-activate_link_func(GtkAboutDialog *about, const gchar *link, gpointer func)
-{
-    rb_funcall((VALUE)func, id_call, 2, GOBJ2RVAL(about), CSTR2RVAL(link));
-}
-
 typedef struct {
     const char *name;
     gpointer value;
