@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014 Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -173,6 +173,9 @@ G_GNUC_INTERNAL void Init_gtk_menu(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_shell(VALUE mGtk);
+#if GTK_CHECK_VERSION(3,6,0)
+   G_GNUC_INTERNAL void Init_gtk_menubutton(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_menutoolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_message_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_misc(VALUE mGtk);
