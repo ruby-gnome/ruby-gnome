@@ -492,6 +492,9 @@ Init_gtk(void)
     Init_gtk_invisible(RG_TARGET_NAMESPACE);
     Init_gtk_label(RG_TARGET_NAMESPACE);
     Init_gtk_layout(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3, 6, 0)
+    Init_gtk_level_bar(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_link_button(RG_TARGET_NAMESPACE);
     Init_gtk_list_store(RG_TARGET_NAMESPACE);
     Init_gtk_lockbutton(RG_TARGET_NAMESPACE);

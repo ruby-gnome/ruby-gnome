@@ -196,6 +196,10 @@
 #define GTKICONSET2RVAL(o)                 (BOXED2RVAL(o, GTK_TYPE_ICON_SET))
 #define RVAL2GTKICONSOURCE(o)              ((GtkIconSource*)RVAL2BOXED(o, GTK_TYPE_ICON_SOURCE))
 #define GTKICONSOURCE2RVAL(o)              (BOXED2RVAL(o, GTK_TYPE_ICON_SOURCE))
+#if GTK_CHECK_VERSION(3, 6, 0)
+# define RVAL2GTKLEVELBAR(o)                ((GtkLevelBar *)RVAL2BOXED(o, GTK_TYPE_LEVEL_BAR))
+# define GTKLEVELBAR2RVAL(o)                (BOXED2RVAL(o, GTK_TYPE_LEVEL_BAR))
+#endif
 #define RVAL2GTKPAPERSIZE(o)               ((GtkPaperSize*)RVAL2BOXED(o, GTK_TYPE_PAPER_SIZE))
 #define GTKPAPERSIZE2RVAL(o)               (BOXED2RVAL(o, GTK_TYPE_PAPER_SIZE))
 #define RVAL2GTKRECENTDATA(o)              ((GtkRecentData*)RVAL2BOXED(o, GTK_TYPE_RECENT_DATA))
