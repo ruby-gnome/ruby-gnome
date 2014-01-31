@@ -59,7 +59,7 @@ G_GNUC_INTERNAL void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set
 
 G_GNUC_INTERNAL void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom* gtype,
                                      void** data, gint* format, gint* length);
-G_GNUC_INTERNAL void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data); 
+G_GNUC_INTERNAL void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data);
 
 #define RVAL2GTKTARGETENTRIES(value, n) rbgtk_rval2gtktargetentries(value, n)
 G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries(VALUE value, long *n);

@@ -246,8 +246,8 @@ rg_s_grab_remove(G_GNUC_UNUSED VALUE self, VALUE widget)
 static gint
 gtk_m_key_snoop_func(GtkWidget *grab_widget, GdkEventKey *event, gpointer func)
 {
-    VALUE ret = rb_funcall((VALUE)func, id_call, 2, 
-                           GOBJ2RVAL(grab_widget), 
+    VALUE ret = rb_funcall((VALUE)func, id_call, 2,
+                           GOBJ2RVAL(grab_widget),
                            GEV2RVAL((GdkEvent*)event));
     return RVAL2CBOOL(ret);
 }
@@ -257,7 +257,7 @@ rg_s_key_snooper_install(VALUE self)
 {
     VALUE func = rb_block_proc();
     VALUE id = INT2FIX(gtk_key_snooper_install(
-                           (GtkKeySnoopFunc)gtk_m_key_snoop_func, 
+                           (GtkKeySnoopFunc)gtk_m_key_snoop_func,
                            (gpointer)func));
     G_RELATIVE2(self, func, id__snooper_callbacks__, id);
     return id;
