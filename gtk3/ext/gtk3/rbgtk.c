@@ -497,11 +497,11 @@ Init_gtk(void)
     Init_gtk_lockbutton(RG_TARGET_NAMESPACE);
     Init_gtk_menu(RG_TARGET_NAMESPACE);
     Init_gtk_menu_bar(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3,6,0)
+    Init_gtk_menu_button(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_menu_item(RG_TARGET_NAMESPACE);
     Init_gtk_menu_shell(RG_TARGET_NAMESPACE);
-#if GTK_CHECK_VERSION(3,6,0)
-    Init_gtk_menubutton(RG_TARGET_NAMESPACE);
-#endif
     Init_gtk_menutoolbutton(RG_TARGET_NAMESPACE);
     Init_gtk_message_dialog(RG_TARGET_NAMESPACE);
     Init_gtk_misc(RG_TARGET_NAMESPACE);

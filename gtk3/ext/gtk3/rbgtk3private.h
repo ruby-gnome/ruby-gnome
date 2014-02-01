@@ -171,11 +171,11 @@ G_GNUC_INTERNAL void Init_gtk_list_store(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_lockbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(VALUE mGtk);
+#if GTK_CHECK_VERSION(3,6,0)
+   G_GNUC_INTERNAL void Init_gtk_menu_button(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_shell(VALUE mGtk);
-#if GTK_CHECK_VERSION(3,6,0)
-   G_GNUC_INTERNAL void Init_gtk_menubutton(VALUE mGtk);
-#endif
 G_GNUC_INTERNAL void Init_gtk_menutoolbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_message_dialog(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_misc(VALUE mGtk);

@@ -36,7 +36,7 @@ rg_initialize(VALUE self)
 }
 
 void
-Init_gtk_menubutton(VALUE mGtk)
+Init_gtk_menu_button(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_MENU_BUTTON, "MenuButton", mGtk);
 
