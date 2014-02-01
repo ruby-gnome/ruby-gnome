@@ -42,4 +42,8 @@ class TestGtkLevelBar < Test::Unit::TestCase
     @level_bar.value = 1.0
     assert_equal(1.0, @level_bar.value)
   end
+
+  def test_offset_value
+    assert_nil(@level_bar.offset_value("my_offset"))
+  end
 end

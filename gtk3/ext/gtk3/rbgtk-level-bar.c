@@ -56,13 +56,18 @@ rg_remove_offset_value(VALUE self, VALUE name)
 }
 
 static VALUE
-rg_has_offset_value_p(VALUE self, VALUE name, VALUE value)
+rg_offset_value(VALUE self, VALUE name)
 {
-    long n;
-    gdouble *gvalue = RVAL2GDOUBLES(value, n);
-    return CBOOL2RVAL(gtk_level_bar_get_offset_value(_SELF(self),
-                                                     RVAL2CSTR(name),
-                                                     gvalue));
+    gdouble value;
+    gboolean found;
+    found = gtk_level_bar_get_offset_value(_SELF(self),
+                                           RVAL2CSTR_ACCEPT_NIL(name),
+                                           &value);
+    if (found) {
+        return DBL2RVAL(value);
+    } else {
+        return Qnil;
+    }
 }
 
 void
@@ -78,6 +83,6 @@ Init_gtk_level_bar(VALUE mGtk)
     RG_DEF_METHOD(for_interval, 2);
     RG_DEF_METHOD(add_offset_value, 2);
     RG_DEF_METHOD(remove_offset_value, 1);
-    RG_DEF_METHOD_P(has_offset_value, 2);
+    RG_DEF_METHOD(offset_value, 1);
 }
 #endif
