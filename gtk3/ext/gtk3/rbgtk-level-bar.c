@@ -33,6 +33,14 @@ rg_initialize(VALUE self)
 }
 
 static VALUE
+rg_for_interval(VALUE self, VALUE min_value, VALUE max_value)
+{
+    RBGTK_INITIALIZE(self, gtk_level_bar_new_for_interval(NUM2DBL(min_value),
+                                                          NUM2DBL(max_value)));
+    return Qnil;
+}
+
+static VALUE
 rg_add_offset_value(VALUE self, VALUE name, VALUE value)
 {
     gtk_level_bar_add_offset_value(_SELF(self),
@@ -67,6 +75,7 @@ Init_gtk_level_bar(VALUE mGtk)
     rb_define_const(RG_TARGET_NAMESPACE, "OFFSET_LOW", CSTR2RVAL(GTK_LEVEL_BAR_OFFSET_LOW));
     rb_define_const(RG_TARGET_NAMESPACE, "OFFSET_HIGH", CSTR2RVAL(GTK_LEVEL_BAR_OFFSET_HIGH));
     RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(for_interval, 2);
     RG_DEF_METHOD(add_offset_value, 2);
     RG_DEF_METHOD(remove_offset_value, 1);
     RG_DEF_METHOD_P(has_offset_value, 2);
