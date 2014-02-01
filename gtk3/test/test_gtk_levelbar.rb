@@ -18,7 +18,7 @@ class TestGtkLevelBar < Test::Unit::TestCase
   include GtkTestUtils
 
   def test_level_bar_new
-    only_gtk_version(3,6,0)
+    only_gtk_version(3, 6, 0)
     assert_nothing_raised do
       level_bar = Gtk::LevelBar.new
     end

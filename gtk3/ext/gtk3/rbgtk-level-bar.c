@@ -20,7 +20,7 @@
 
 #include "rbgtk3private.h"
 
-#if GTK_CHECK_VERSION(3,6,0)
+#if GTK_CHECK_VERSION(3, 6, 0)
 
 #define RG_TARGET_NAMESPACE cLevelBar
 #define _SELF(self) (RVAL2GTKLEVELBAR(self))
