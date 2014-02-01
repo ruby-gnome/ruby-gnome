@@ -22,10 +22,10 @@ class TestGtkLevelBar < Test::Unit::TestCase
     @level_bar = Gtk::LevelBar.new
   end
 
-  def test_for_interval
-    @level_bar.for_interval(0.0, 20.0)
-    assert_equal(0.0, @level_bar.min_value)
-    assert_equal(20.0, @level_bar.max_value)
+  def test_new_with_min_max_value
+    level_bar_new_with_min_max = Gtk::LevelBar.new(1.0, 20.0)
+    assert_equal(1.0, level_bar_new_with_min_max.min_value)
+    assert_equal(20.0, level_bar_new_with_min_max.max_value)
   end
 
   def test_min_value_accessors

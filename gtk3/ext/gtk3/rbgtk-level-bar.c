@@ -26,17 +26,20 @@
 #define _SELF(self) (RVAL2GTKLEVELBAR(self))
 
 static VALUE
-rg_initialize(VALUE self)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    RBGTK_INITIALIZE(self, gtk_level_bar_new());
-    return Qnil;
-}
+    VALUE min_value, max_value;
+    GtkWidget* widget = NULL;
 
-static VALUE
-rg_for_interval(VALUE self, VALUE min_value, VALUE max_value)
-{
-    RBGTK_INITIALIZE(self, gtk_level_bar_new_for_interval(NUM2DBL(min_value),
-                                                          NUM2DBL(max_value)));
+    rb_scan_args(argc, argv, "02", &min_value, &max_value);
+    if (NIL_P(min_value) || NIL_P(max_value)) {
+        widget = gtk_level_bar_new();
+    } else {
+        widget = gtk_level_bar_new_for_interval(NUM2DBL(min_value),
+                                                NUM2DBL(max_value));
+    }
+
+    RBGTK_INITIALIZE(self, widget);
     return Qnil;
 }
 
@@ -77,8 +80,7 @@ Init_gtk_level_bar(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_LEVEL_BAR_MODE, "Mode", RG_TARGET_NAMESPACE);
     rb_define_const(RG_TARGET_NAMESPACE, "OFFSET_LOW", CSTR2RVAL(GTK_LEVEL_BAR_OFFSET_LOW));
     rb_define_const(RG_TARGET_NAMESPACE, "OFFSET_HIGH", CSTR2RVAL(GTK_LEVEL_BAR_OFFSET_HIGH));
-    RG_DEF_METHOD(initialize, 0);
-    RG_DEF_METHOD(for_interval, 2);
+    RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(add_offset_value, 2);
     RG_DEF_METHOD(remove_offset_value, 1);
     RG_DEF_METHOD(offset_value, 1);
