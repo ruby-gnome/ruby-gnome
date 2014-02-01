@@ -20,6 +20,8 @@
 
 #include "rbgtk3private.h"
 
+#if GTK_CHECK_VERSION(3,6,0)
+
 #define RG_TARGET_NAMESPACE cLevelBar
 #define _SELF(self) (RVAL2GTKLEVELBAR(self))
 
@@ -69,3 +71,4 @@ Init_gtk_level_bar(VALUE mGtk)
     RG_DEF_METHOD(remove_offset_value, 1);
     RG_DEF_METHOD_P(has_offset_value, 2);
 }
+#endif
