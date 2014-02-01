@@ -29,17 +29,17 @@ class TestGtkLevelBar < Test::Unit::TestCase
   end
 
   def test_min_value_accessors
-    @level_bar.set_min_value(1.0)
+    @level_bar.min_value = 1.0
     assert_equal(1.0, @level_bar.min_value)
   end
 
   def test_max_value_accessors
-    @level_bar.set_max_value(20.0)
+    @level_bar.max_value = 20.0
     assert_equal(20.0, @level_bar.max_value)
   end
 
   def test_value_accessors
-    @level_bar.set_value(1.0)
+    @level_bar.value = 1.0
     assert_equal(1.0, @level_bar.value)
   end
 end
