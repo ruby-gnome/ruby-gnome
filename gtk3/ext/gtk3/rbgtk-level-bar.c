@@ -64,7 +64,7 @@ rg_offset_value(VALUE self, VALUE name)
                                            RVAL2CSTR_ACCEPT_NIL(name),
                                            &value);
     if (found) {
-        return DBL2RVAL(value);
+        return DBL2NUM(value);
     } else {
         return Qnil;
     }
