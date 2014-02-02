@@ -17,10 +17,33 @@
 class TestGtkMenuButton < Test::Unit::TestCase
   include GtkTestUtils
 
-  def test_menu_button_new
+  def setup
     only_gtk_version(3, 6, 0)
-    assert_nothing_raised do
-      Gtk::MenuButton.new
-    end
+    @menu_button = Gtk::MenuButton.new
+  end
+
+  def test_popup
+    assert_nil(@menu_button.popup)
+    popup = Gtk::Menu.new
+    @menu_button.popup = popup
+    assert_equal(popup, @menu_button.popup)
+  end
+
+  def test_menu_model
+    assert_nil(@menu_button.menu_model)
+  end
+
+  def test_direction
+    assert_equal(Gtk::Arrow::Type::DOWN, @menu_button.direction)
+    @menu_button.direction = :up
+    assert_equal(Gtk::Arrow::Type::UP, @menu_button.direction)
+  end
+
+  def test_align_widget
+    assert_nil(@menu_button.align_widget)
+    align_widget = Gtk::Box.new(:horizontal)
+    align_widget.add(@menu_button)
+    @menu_button.align_widget = align_widget
+    assert_equal(align_widget, @menu_button.align_widget)
   end
 end
