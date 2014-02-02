@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014 Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -59,7 +59,7 @@ G_GNUC_INTERNAL void rbgtk_register_treeiter_set_value_func(GType, rbgtkiter_set
 
 G_GNUC_INTERNAL void rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom* gtype,
                                      void** data, gint* format, gint* length);
-G_GNUC_INTERNAL void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data); 
+G_GNUC_INTERNAL void rbgtk_atom2selectiondata_free(GdkAtom gtype, void* data);
 
 #define RVAL2GTKTARGETENTRIES(value, n) rbgtk_rval2gtktargetentries(value, n)
 G_GNUC_INTERNAL GtkTargetEntry *rbgtk_rval2gtktargetentries(VALUE value, long *n);
@@ -171,6 +171,9 @@ G_GNUC_INTERNAL void Init_gtk_list_store(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_lockbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(VALUE mGtk);
+#if GTK_CHECK_VERSION(3,6,0)
+   G_GNUC_INTERNAL void Init_gtk_menu_button(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_menu_item(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_shell(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menutoolbutton(VALUE mGtk);
