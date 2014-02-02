@@ -20,7 +20,7 @@ class TestGtkMenuButton < Test::Unit::TestCase
   def test_menu_button_new
     only_gtk_version(3, 6, 0)
     assert_nothing_raised do
-      menu_button = Gtk::MenuButton.new
+      Gtk::MenuButton.new
     end
   end
 end
