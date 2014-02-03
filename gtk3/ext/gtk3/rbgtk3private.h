@@ -166,12 +166,15 @@ G_GNUC_INTERNAL void Init_gtk_infobar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_invisible(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_layout(VALUE mGtk);
+#if GTK_CHECK_VERSION(3, 6, 0)
+   G_GNUC_INTERNAL void Init_gtk_level_bar(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_link_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_list_store(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_lockbutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_menu_bar(VALUE mGtk);
-#if GTK_CHECK_VERSION(3,6,0)
+#if GTK_CHECK_VERSION(3, 6, 0)
    G_GNUC_INTERNAL void Init_gtk_menu_button(VALUE mGtk);
 #endif
 G_GNUC_INTERNAL void Init_gtk_menu_item(VALUE mGtk);

@@ -91,6 +91,9 @@
 #define RVAL2GTKINVISIBLE(o)               (GTK_INVISIBLE(RVAL2GOBJ(o)))
 #define RVAL2GTKLABEL(o)                   (GTK_LABEL(RVAL2GOBJ(o)))
 #define RVAL2GTKLAYOUT(o)                  (GTK_LAYOUT(RVAL2GOBJ(o)))
+#if GTK_CHECK_VERSION(3, 6, 0)
+#  define RVAL2GTKLEVELBAR(o)                (GTK_LEVEL_BAR(RVAL2GOBJ(o)))
+#endif
 #define RVAL2GTKLINKBUTTON(o)              (GTK_LINK_BUTTON(RVAL2GOBJ(o)))
 #define RVAL2GTKLISTSTORE(o)               (GTK_LIST_STORE(RVAL2GOBJ(o)))
 #define RVAL2GTKMENU(o)                    (GTK_MENU(RVAL2GOBJ(o)))
