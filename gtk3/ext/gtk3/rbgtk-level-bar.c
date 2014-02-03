@@ -32,7 +32,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     GtkWidget* widget = NULL;
 
     rb_scan_args(argc, argv, "02", &min_value, &max_value);
-    if (NIL_P(min_value) || NIL_P(max_value)) {
+    if (argc == 0) {
         widget = gtk_level_bar_new();
     } else {
         widget = gtk_level_bar_new_for_interval(NUM2DBL(min_value),
