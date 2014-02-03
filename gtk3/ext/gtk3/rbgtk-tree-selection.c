@@ -24,19 +24,6 @@
 #define RG_TARGET_NAMESPACE cTreeSelection
 #define _SELF(s) (RVAL2GTKTREESELECTION(s))
 
-static VALUE
-rg_set_mode(VALUE self, VALUE type)
-{
-    gtk_tree_selection_set_mode(_SELF(self), RVAL2GTKSELECTIONMODE(type));
-    return self;
-}
-
-static VALUE
-rg_mode(VALUE self)
-{
-    return GTKSELECTIONMODE2RVAL(gtk_tree_selection_get_mode(_SELF(self)));
-}
-
 static gboolean
 selection_func(GtkTreeSelection *selection, GtkTreeModel *model, GtkTreePath *path, gboolean path_currently_selected, gpointer func)
 {
@@ -184,8 +171,6 @@ Init_gtk_treeselection(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
 
-    RG_DEF_METHOD(set_mode, 1);
-    RG_DEF_METHOD(mode, 0);
     RG_DEF_METHOD(set_select_function, 0);
     RG_DEF_METHOD(tree_view, 0);
     RG_DEF_METHOD(selected, 0);
