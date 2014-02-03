@@ -49,22 +49,6 @@ rg_layout_offsets(VALUE self)
 }
 
 static VALUE
-rg_set_completion(VALUE self, VALUE completion)
-{
-    gtk_entry_set_completion(_SELF(self), RVAL2GTKENTRYCOMPLETION(completion));
-
-    G_CHILD_SET(self, rb_intern("completion"), completion);
-
-    return self;
-}
-
-static VALUE
-rg_completion(VALUE self)
-{
-    return GOBJ2RVAL(gtk_entry_get_completion(_SELF(self)));
-}
-
-static VALUE
 rg_layout_index_to_text_index(VALUE self, VALUE layout_index)
 {
     return INT2NUM(gtk_entry_layout_index_to_text_index(_SELF(self), NUM2INT(layout_index)));
@@ -177,8 +161,6 @@ Init_gtk_entry(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(layout, 0);
     RG_DEF_METHOD(layout_offsets, 0);
-    RG_DEF_METHOD(set_completion, 1);
-    RG_DEF_METHOD(completion, 0);
     RG_DEF_METHOD(layout_index_to_text_index, 1);
     RG_DEF_METHOD(text_index_to_layout_index, 1);
     RG_DEF_METHOD(cursor_hadjustment, 0);
