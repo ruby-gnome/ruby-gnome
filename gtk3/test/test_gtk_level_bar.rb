@@ -22,11 +22,11 @@ class TestGtkLevelBar < Test::Unit::TestCase
   end
 
   class TestConstructor < self
-  def test_new_with_min_max_value
-    level_bar_new_with_min_max = Gtk::LevelBar.new(1.0, 20.0)
-    assert_equal(1.0, level_bar_new_with_min_max.min_value)
-    assert_equal(20.0, level_bar_new_with_min_max.max_value)
-  end
+    def test_new_with_min_max_value
+      level_bar_new_with_min_max = Gtk::LevelBar.new(1.0, 20.0)
+      assert_equal(1.0, level_bar_new_with_min_max.min_value)
+      assert_equal(20.0, level_bar_new_with_min_max.max_value)
+    end
   end
 
   class TestAccessor < self
@@ -35,28 +35,28 @@ class TestGtkLevelBar < Test::Unit::TestCase
       @level_bar = Gtk::LevelBar.new
     end
 
-  def test_min_value_accessors
-    @level_bar.min_value = 1.0
-    assert_equal(1.0, @level_bar.min_value)
-  end
+    def test_min_value_accessors
+      @level_bar.min_value = 1.0
+      assert_equal(1.0, @level_bar.min_value)
+    end
 
-  def test_max_value_accessors
-    @level_bar.max_value = 20.0
-    assert_equal(20.0, @level_bar.max_value)
-  end
+    def test_max_value_accessors
+      @level_bar.max_value = 20.0
+      assert_equal(20.0, @level_bar.max_value)
+    end
 
-  def test_value_accessors
-    @level_bar.value = 1.0
-    assert_equal(1.0, @level_bar.value)
-  end
+    def test_value_accessors
+      @level_bar.value = 1.0
+      assert_equal(1.0, @level_bar.value)
+    end
 
-  def test_offset_value_accsessors
-    @level_bar.add_offset_value(Gtk::LevelBar::OFFSET_LOW, 0.10)
-    assert_equal(0.10, @level_bar.get_offset_value(Gtk::LevelBar::OFFSET_LOW))
-  end
+    def test_offset_value_accsessors
+      @level_bar.add_offset_value(Gtk::LevelBar::OFFSET_LOW, 0.10)
+      assert_equal(0.10, @level_bar.get_offset_value(Gtk::LevelBar::OFFSET_LOW))
+    end
 
-  def test_get_offset_value
-    assert_nil(@level_bar.get_offset_value("my_offset"))
-  end
+    def test_get_offset_value
+      assert_nil(@level_bar.get_offset_value("my_offset"))
+    end
   end
 end
