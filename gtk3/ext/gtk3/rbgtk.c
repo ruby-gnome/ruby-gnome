@@ -545,6 +545,9 @@ Init_gtk(void)
     Init_gtk_scrollable(RG_TARGET_NAMESPACE);
     Init_gtk_scrollbar(RG_TARGET_NAMESPACE);
     Init_gtk_scrolled_window(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3, 6, 0)
+    Init_gtk_search_entry(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_selection(RG_TARGET_NAMESPACE);
     Init_gtk_selectiondata(RG_TARGET_NAMESPACE);
     Init_gtk_separator(RG_TARGET_NAMESPACE);
