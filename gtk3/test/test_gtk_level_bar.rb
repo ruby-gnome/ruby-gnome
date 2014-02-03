@@ -23,9 +23,9 @@ class TestGtkLevelBar < Test::Unit::TestCase
 
   class TestConstructor < self
     def test_min_max_value
-      level_bar_new_with_min_max = Gtk::LevelBar.new(1.0, 20.0)
-      assert_equal(1.0, level_bar_new_with_min_max.min_value)
-      assert_equal(20.0, level_bar_new_with_min_max.max_value)
+      level_bar = Gtk::LevelBar.new(1.0, 20.0)
+      assert_equal(1.0, level_bar.min_value)
+      assert_equal(20.0, level_bar.max_value)
     end
   end
 
