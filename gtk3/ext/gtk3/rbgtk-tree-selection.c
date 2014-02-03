@@ -27,7 +27,7 @@
 static gboolean
 selection_func(GtkTreeSelection *selection, GtkTreeModel *model, GtkTreePath *path, gboolean path_currently_selected, gpointer func)
 {
-    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4, 
+    return RVAL2CBOOL(rb_funcall((VALUE)func, id_call, 4,
                             GOBJ2RVAL(selection),
                             GOBJ2RVAL(model),
                             GTKTREEPATH2RVAL(path),
@@ -65,7 +65,7 @@ static void
 foreach_func(GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
     iter->user_data3 = model;
-    rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(model), 
+    rb_funcall((VALUE)data, id_call, 3, GOBJ2RVAL(model),
                GTKTREEPATH2RVAL(path), GTKTREEITER2RVAL(iter));
 }
 
@@ -73,8 +73,8 @@ static VALUE
 rg_selected_each(VALUE self)
 {
     volatile VALUE func = rb_block_proc();
-    gtk_tree_selection_selected_foreach(_SELF(self), 
-                                        (GtkTreeSelectionForeachFunc)foreach_func, 
+    gtk_tree_selection_selected_foreach(_SELF(self),
+                                        (GtkTreeSelectionForeachFunc)foreach_func,
                                         (gpointer)func);
     return self;
 }
@@ -136,7 +136,7 @@ rg_unselect_all(VALUE self)
 static VALUE
 rg_select_range(VALUE self, VALUE start_path, VALUE end_path)
 {
-    gtk_tree_selection_select_range(_SELF(self), RVAL2GTKTREEPATH(start_path), 
+    gtk_tree_selection_select_range(_SELF(self), RVAL2GTKTREEPATH(start_path),
                                     RVAL2GTKTREEPATH(end_path));
     return self;
 }
@@ -161,7 +161,7 @@ rg_count_selected_rows(VALUE self)
 static VALUE
 rg_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
 {
-    gtk_tree_selection_unselect_range(_SELF(self), RVAL2GTKTREEPATH(start_path), 
+    gtk_tree_selection_unselect_range(_SELF(self), RVAL2GTKTREEPATH(start_path),
                                       RVAL2GTKTREEPATH(end_path));
     return self;
 }
@@ -169,7 +169,7 @@ rg_unselect_range(VALUE self, VALUE start_path, VALUE end_path)
 void
 Init_gtk_treeselection(VALUE mGtk)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_TREE_SELECTION, "TreeSelection", mGtk);
 
     RG_DEF_METHOD(set_select_function, 0);
     RG_DEF_METHOD(tree_view, 0);
