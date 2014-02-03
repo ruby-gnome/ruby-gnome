@@ -37,4 +37,16 @@ class TestGtkEntry < Test::Unit::TestCase
     @entry.completion = entry_completion
     assert_equal(Gtk::EntryCompletion, @entry.completion.class)
   end
+
+  class TestGtkEntryOnlyGtkVersion < self
+    def test_input_purpose_enum
+      only_gtk_version(3, 6, 0)
+      assert_const_defined(Gtk::InputPurpose, :ALPHA)
+    end
+
+    def test_input_hints_enum
+      only_gtk_version(3, 6, 0)
+      assert_const_defined(Gtk::InputHints, :SPELLCHECK)
+    end
+  end
 end

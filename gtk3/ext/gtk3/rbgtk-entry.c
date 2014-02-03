@@ -158,6 +158,10 @@ Init_gtk_entry(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_ENTRY, "Entry", mGtk);
 
+#if GTK_CHECK_VERSION(3, 6, 0)
+    G_DEF_CLASS(GTK_TYPE_INPUT_PURPOSE, "InputPurpose", mGtk);
+    G_DEF_CLASS(GTK_TYPE_INPUT_HINTS, "InputHints", mGtk);
+#endif
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(layout, 0);
     RG_DEF_METHOD(layout_offsets, 0);
