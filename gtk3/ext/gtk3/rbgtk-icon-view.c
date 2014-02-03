@@ -36,7 +36,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         RBGTK_INITIALIZE(self, gtk_icon_view_new());
     } else {
         G_CHILD_SET(self, id_model, model);
-        RBGTK_INITIALIZE(self, 
+        RBGTK_INITIALIZE(self,
                          gtk_icon_view_new_with_model(RVAL2GTKTREEMODEL(model)));
     }
     return Qnil;
@@ -59,8 +59,8 @@ rg_selected_each(VALUE self)
 {
     VALUE func = rb_block_proc();
     G_RELATIVE(self, func);
-    gtk_icon_view_selected_foreach(_SELF(self), 
-                                   (GtkIconViewForeachFunc)iview_foreach_func, 
+    gtk_icon_view_selected_foreach(_SELF(self),
+                                   (GtkIconViewForeachFunc)iview_foreach_func,
                                    (gpointer)func);
     return self;
 }
@@ -275,7 +275,7 @@ Init_gtk_iconview(VALUE mGtk)
     RG_DEF_METHOD(enable_model_drag_dest, 2);
     RG_DEF_METHOD(enable_model_drag_source, 3);
     RG_DEF_METHOD(cursor, 0);
-    RG_DEF_METHOD(get_dest_item, 2); 
+    RG_DEF_METHOD(get_dest_item, 2);
     RG_DEF_METHOD(drag_dest_item, 0);
     RG_DEF_METHOD(get_item, 2);
     RG_DEF_METHOD(visible_range, 0);
