@@ -59,7 +59,7 @@ rg_remove_offset_value(VALUE self, VALUE name)
 }
 
 static VALUE
-rg_offset_value(VALUE self, VALUE name)
+rg_get_offset_value(VALUE self, VALUE name)
 {
     gdouble value;
     gboolean found;
@@ -83,6 +83,6 @@ Init_gtk_level_bar(VALUE mGtk)
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(add_offset_value, 2);
     RG_DEF_METHOD(remove_offset_value, 1);
-    RG_DEF_METHOD(offset_value, 1);
+    RG_DEF_METHOD(get_offset_value, 1);
 }
 #endif
