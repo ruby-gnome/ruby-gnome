@@ -75,8 +75,8 @@ class TestGtkLevelBar < Test::Unit::TestCase
       assert_equal(0.10, @level_bar.get_offset_value(Gtk::LevelBar::OFFSET_LOW))
     end
 
-    def test_get_offset_value
-      assert_nil(@level_bar.get_offset_value("my_offset"))
+    def test_get_nonexistent_offset_value
+      assert_nil(@level_bar.get_offset_value("nonexistent"))
     end
   end
 end
