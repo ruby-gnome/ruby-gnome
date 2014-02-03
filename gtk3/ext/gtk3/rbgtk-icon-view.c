@@ -65,6 +65,22 @@ rg_selected_each(VALUE self)
     return self;
 }
 
+#if GTK_CHECK_VERSION(3, 6, 0)
+static VALUE
+rg_get_cell_rect(VALUE self, VALUE path, VALUE cell, VALUE rect)
+{
+    gboolean cell_rect = gtk_icon_view_get_cell_rect(_SELF(self),
+                                                     RVAL2GTKTREEPATH(path),
+                                                     NIL_P(cell) ? NULL : RVAL2GTKCELLRENDERER(cell),
+                                                     RVAL2GDKRECTANGLE(rect));
+    if (cell_rect) {
+        return GDKRECTANGLE2RVAL(&rect);
+    } else {
+        return Qnil;
+    }
+}
+#endif
+
 static VALUE
 rg_select_path(VALUE self, VALUE path)
 {
@@ -247,6 +263,9 @@ Init_gtk_iconview(VALUE mGtk)
     RG_DEF_METHOD(get_path_at_pos, 2);
     RG_DEF_ALIAS("get_path", "get_path_at_pos");
     RG_DEF_METHOD(selected_each, 0);
+#if GTK_CHECK_VERSION(3, 6, 0)
+    RG_DEF_METHOD(get_cell_rect, 3);
+#endif
     RG_DEF_METHOD(select_path, 1);
     RG_DEF_METHOD(unselect_path, 1);
     RG_DEF_METHOD_P(path_is_selected, 1);
