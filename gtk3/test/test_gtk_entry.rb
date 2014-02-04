@@ -35,7 +35,7 @@ class TestGtkEntry < Test::Unit::TestCase
   def test_completion_accsessors
     entry_completion = Gtk::EntryCompletion.new
     @entry.completion = entry_completion
-    assert_equal(Gtk::EntryCompletion, @entry.completion.class)
+    assert_equal(entry_completion, @entry.completion)
   end
 
   class TestEnum < self
