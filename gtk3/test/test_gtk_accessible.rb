@@ -25,9 +25,7 @@ class TestGtkAccessible < Test::Unit::TestCase
 
   def test_widget_accessors
     widget = Gtk::Box.new(:horizontal)
-    assert_nothing_raised do
-      @accessible.widget = widget
-      @accessible.widget
-    end
+    @accessible.widget = widget
+    assert_equal(widget, @accessible.widget)
   end
 end
