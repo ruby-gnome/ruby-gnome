@@ -22,10 +22,13 @@ class TestGtkSearchEntry < Test::Unit::TestCase
     @search_entry = Gtk::SearchEntry.new
   end
 
-  def test_search_entry_add_window
-    window = Gtk::Window.new
-    assert_nothing_raised do
-      window.add(@search_entry)
+  def test_search_changed_signal
+    only_gtk_version(3, 10, 0)
+    called = false
+    @search_entry.signal_connect("search-changed") do
+      called = true
     end
+    @search_entry.signal_emit("search-changed")
+    assert_true(called)
   end
 end
