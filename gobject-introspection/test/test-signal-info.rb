@@ -25,7 +25,7 @@ class TestSignalInfo < Test::Unit::TestCase
   end
 
   def test_flags
-    require_version(1, 38, 0)
+    require_version(1, 39, 0)
     assert_equal(GLib::SignalFlags::RUN_LAST,
                  @info.flags)
   end
