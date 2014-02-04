@@ -20,12 +20,12 @@ class TestGtkSearchEntry < Test::Unit::TestCase
   def setup
     only_gtk_version(3, 6, 0)
     @search_entry = Gtk::SearchEntry.new
-    @window = Gtk::Window.new
   end
 
   def test_search_entry_add_window
+    window = Gtk::Window.new
     assert_nothing_raised do
-      @window.add(@search_entry)
+      window.add(@search_entry)
     end
   end
 end
