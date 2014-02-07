@@ -39,20 +39,20 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
             cursor = gdk_cursor_new_from_name(RVAL2GDKDISPLAYOBJECT(display),
                                               RVAL2CSTR(type_or_name));
         else
-            cursor = gdk_cursor_new_for_display(RVAL2GDKDISPLAYOBJECT(display), 
+            cursor = gdk_cursor_new_for_display(RVAL2GDKDISPLAYOBJECT(display),
                                                 RVAL2GDKCURSORTYPE(type_or_name));
     } else if (argc == 4) {
         VALUE display, pixbuf, x, y;
         rb_scan_args(argc, argv, "40", &display, &pixbuf, &x, &y);
-        cursor = gdk_cursor_new_from_pixbuf(RVAL2GDKDISPLAYOBJECT(display), 
-                                            RVAL2GDKPIXBUF(pixbuf), 
+        cursor = gdk_cursor_new_from_pixbuf(RVAL2GDKDISPLAYOBJECT(display),
+                                            RVAL2GDKPIXBUF(pixbuf),
                                             NUM2INT(x), NUM2INT(y));
 /* deprecated
     } else if (argc == 6) {
         VALUE pixmap, mask, fg, bg, x, y;
         rb_scan_args(argc, argv, "60", &pixmap, &mask, &fg, &bg, &x, &y);
-        cursor = gdk_cursor_new_from_pixmap(RVAL2GDKPIXMAP(pixmap), 
-                                            NIL_P(mask)?NULL:RVAL2GDKPIXMAP(mask), 
+        cursor = gdk_cursor_new_from_pixmap(RVAL2GDKPIXMAP(pixmap),
+                                            NIL_P(mask)?NULL:RVAL2GDKPIXMAP(mask),
                                             RVAL2GDKCOLOR(fg),
                                             RVAL2GDKCOLOR(bg),
                                             NUM2INT(x), NUM2INT(y));
