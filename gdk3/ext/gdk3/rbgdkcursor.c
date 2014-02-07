@@ -63,12 +63,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
-static VALUE
-rg_display(VALUE self)
-{
-    return GOBJ2RVAL(gdk_cursor_get_display(RVAL2GDKCURSOR(self)));
-}
-
 /* TODO
 static VALUE
 rg_cursor_type(VALUE self)
@@ -89,7 +83,6 @@ Init_gdk_cursor(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GDK_TYPE_CURSOR, "Cursor", mGdk);
 
     RG_DEF_METHOD(initialize, -1);
-    RG_DEF_METHOD(display, 0);
 /* TODO
     RG_DEF_METHOD(cursor_type, 0);
 */
