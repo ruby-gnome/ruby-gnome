@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2006-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2006-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Kouhei Sutou
  *
  *  This library is free software; you can redistribute it and/or
@@ -34,6 +34,7 @@ rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     if (NIL_P(rb_font_type)) {
         font_map = pango_cairo_font_map_new();
     } else {
+#if PANGO_CHECK_VERSION(1, 18, 0)
         cairo_font_type_t font_type = CAIRO_FONT_TYPE_USER;
         if (rbgutil_key_equal(rb_font_type, "ft") ||
             rbgutil_key_equal(rb_font_type, "freetype")) {
@@ -49,6 +50,11 @@ rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
                      RBG_INSPECT(rb_font_type));
         }
         font_map = pango_cairo_font_map_new_for_font_type(font_type);
+#else
+        rb_raise(rb_eArgError,
+                 "Pango::CairoFontMap.create with font type "
+                 "requires Pango 1.18.0 or later");
+#endif
     }
 
     return GOBJ2RVAL(font_map);
