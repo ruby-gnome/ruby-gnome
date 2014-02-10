@@ -60,38 +60,6 @@ rg_s_default(VALUE self)
     return GOBJ2RVAL(sssm);
 }
 
-/* Method: set_search_path(dirs)
- * dirs: style scheme file directory path
- *
- * Sets the style scheme files directories for the given style scheme manager.
- *
- * Returns: self.
- */
-static VALUE
-rg_set_search_path(VALUE self, VALUE dirs)
-{
-    gchar** gdirs = (gchar**)NULL;
-    gint i;
-
-    if (! NIL_P(dirs)){
-        Check_Type(dirs, T_ARRAY);
-        i = RARRAY_LEN(dirs);
-        gdirs = ALLOCA_N(gchar*, i + 1);
-        for (i = 0; i < i; i++) {
-            if (TYPE(RARRAY_PTR(dirs)[i]) == T_STRING) {
-                gdirs[i] = RVAL2CSTR(RARRAY_PTR(dirs)[i]);
-            }
-            else {
-                gdirs[i] = "";
-            }
-        }
-        gdirs[i] = (gchar*)NULL;
-    }
-
-    gtk_source_style_scheme_manager_set_search_path (_SELF (self), gdirs);
-    return self;
-}
-
 /* Method: append_search_path(path)
  * path: additional style scheme file directory path (string)
  *
@@ -118,47 +86,6 @@ rg_prepend_search_path(VALUE self, VALUE path)
 {
     gtk_source_style_scheme_manager_prepend_search_path (_SELF (self), RVAL2CSTR(path));
     return self;
-}
-
-/* Method: get_search_path
- * Returns: a list of style scheme files directories (strings) for the given
- * style scheme manager.
- */
-static VALUE
-rg_search_path(VALUE self)
-{
-    VALUE ary;
-    const gchar * const * dirs =
-            gtk_source_style_scheme_manager_get_search_path (_SELF (self));
-    if (!dirs)
-        return Qnil;
-
-    ary = rb_ary_new();
-    while (*dirs){
-        rb_ary_push(ary, CSTR2RVAL(*dirs));
-        dirs++;
-    }
-    return ary;
-}
-
-/* Method: scheme_ids
- * Returns: a list of style scheme ids for the given style scheme manager
- */
-static VALUE
-rg_scheme_ids(VALUE self)
-{
-    VALUE ary;
-    const gchar * const * ids =
-            gtk_source_style_scheme_manager_get_scheme_ids (_SELF (self));
-    if (!ids)
-        return Qnil;
-
-    ary = rb_ary_new();
-    while (*ids){
-        rb_ary_push(ary, CSTR2RVAL(*ids));
-        ids++;
-    }
-    return ary;
 }
 
 /*
@@ -202,11 +129,8 @@ Init_gtk_sourcestyleschememanager (VALUE mGtk)
              "SourceStyleSchemeManager", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
-    RG_DEF_METHOD(set_search_path, 1);
     RG_DEF_METHOD(append_search_path, 1);
     RG_DEF_METHOD(prepend_search_path, 1);
-    RG_DEF_METHOD(search_path, 0);
-    RG_DEF_METHOD(scheme_ids, 0);
     RG_DEF_METHOD(get_scheme, 1);
     RG_DEF_METHOD(force_rescan, 0);
     RG_DEF_SMETHOD(default, 0);
