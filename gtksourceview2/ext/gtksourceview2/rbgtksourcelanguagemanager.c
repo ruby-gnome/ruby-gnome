@@ -60,80 +60,6 @@ rg_s_default(VALUE self)
     return GOBJ2RVAL(slm);
 }
 
-/* Method: set_search_path(dirs)
- * dirs: language file directory path
- *
- * Sets the language files directories for the given language manager.
- *
- * Returns: self.
- */
-static VALUE
-rg_set_search_path(VALUE self, VALUE dirs)
-{
-    gchar** gdirs = (gchar**)NULL;
-    gint i;
-
-    if (! NIL_P(dirs)){
-        Check_Type(dirs, T_ARRAY);
-        i = RARRAY_LEN(dirs);
-        gdirs = ALLOCA_N(gchar*, i + 1);
-        for (i = 0; i < i; i++) {
-            if (TYPE(RARRAY_PTR(dirs)[i]) == T_STRING) {
-                gdirs[i] = RVAL2CSTR(RARRAY_PTR(dirs)[i]);
-            }
-            else {
-                gdirs[i] = "";
-            }
-        }
-        gdirs[i] = (gchar*)NULL;
-    }
-
-    gtk_source_language_manager_set_search_path (_SELF (self), gdirs);
-
-    return self;
-}
-
-/* Method: search_path
- * Returns: a list of language files directories (strings) for the given
- * language manager.
- */
-static VALUE
-rg_search_path(VALUE self)
-{
-    VALUE ary;
-    const gchar * const * dirs =
-            gtk_source_language_manager_get_search_path (_SELF (self));
-    if (!dirs)
-        return Qnil;
-
-    ary = rb_ary_new();
-    while (*dirs){
-        rb_ary_push(ary, CSTR2RVAL(*dirs));
-        dirs++;
-    }
-    return ary;
-}
-
-/* Method: language_ids
- * Returns: a list of languages ids for the given language manager
- */
-static VALUE
-rg_language_ids(VALUE self)
-{
-    VALUE ary;
-    const gchar * const * ids =
-            gtk_source_language_manager_get_language_ids (_SELF (self));
-    if (!ids)
-        return Qnil;
-
-    ary = rb_ary_new();
-    while (*ids){
-        rb_ary_push(ary, CSTR2RVAL(*ids));
-        ids++;
-    }
-    return ary;
-}
-
 /*
  * Method: get_language(id)
  * id: a language id (as a string).
@@ -181,9 +107,6 @@ Init_gtk_sourcelanguagemanager (VALUE mGtk)
              "SourceLanguageManager", mGtk);
 
     RG_DEF_METHOD(initialize, 0);
-    RG_DEF_METHOD(set_search_path, 1);
-    RG_DEF_METHOD(search_path, 0);
-    RG_DEF_METHOD(language_ids, 0);
     RG_DEF_METHOD(get_language, 1);
 #ifdef HAVE_GTK_SOURCE_LANGUAGE_MANAGER_GUESS_LANGUAGE
     RG_DEF_METHOD(guess_language, 2);
