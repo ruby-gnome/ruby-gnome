@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2002-2013 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2002-2014 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
  *                          Hiroshi Igarashi
@@ -721,8 +721,6 @@ ATTR_FLOAT(button, x_root);
 ATTR_FLOAT(button, y_root);
 
 /* GdkEventTouch */
-ATTR_GOBJ(touch, window);
-ATTR_BOOL(touch, send_event);
 ATTR_UINT(touch, time);
 ATTR_FLOAT(touch, x);
 ATTR_FLOAT(touch, y);
@@ -902,6 +900,11 @@ Init_gdk_event(VALUE mGdk)
     rbg_define_method(rb_cGdkEvent, "screen", gdkevent_screen, 0);
     rbg_define_method(rb_cGdkEvent, "set_screen", gdkevent_set_screen, 1);
 
+    /* GdkEventAny's fields */
+    DEFINE_ACCESSOR(rb_cGdkEvent, any, window);
+    rbg_define_method(rb_cGdkEvent, "send_event?", gdkeventany_send_event, 0);
+    rbg_define_method(rb_cGdkEvent, "set_send_event", gdkeventany_set_send_event, 1);
+
     /*
      * GdkEvent's Constants
      */
@@ -926,9 +929,6 @@ Init_gdk_event(VALUE mGdk)
     rb_cGdkEventAny =
         G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_ANY, "EventAny",
                                 mGdk, rb_cGdkEvent);
-    DEFINE_ACCESSOR(rb_cGdkEventAny, any, window);
-    rbg_define_method(rb_cGdkEventAny, "send_event?", gdkeventany_send_event, 0);
-    rbg_define_method(rb_cGdkEventAny, "set_send_event", gdkeventany_set_send_event, 1);
 
     /* GdkEventExpose */
     rb_cGdkEventExpose =
@@ -988,9 +988,6 @@ Init_gdk_event(VALUE mGdk)
     rb_cGdkEventTouch =
         G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_TOUCH, "EventTouch",
                                 mGdk, rb_cGdkEvent);
-    DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, window);
-    rbg_define_method(rb_cGdkEventTouch, "send_event?", gdkeventtouch_send_event, 0);
-    rbg_define_method(rb_cGdkEventTouch, "set_send_event", gdkeventtouch_set_send_event, 1);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, time);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, x);
     DEFINE_ACCESSOR(rb_cGdkEventTouch, touch, y);
