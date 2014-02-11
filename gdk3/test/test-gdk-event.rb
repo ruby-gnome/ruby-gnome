@@ -381,7 +381,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_state
-      assert_not_nil(Integer, @property.state)
+      assert_equal(Gdk::EventProperty::State::NEW_VALUE, @property.state)
     end
   end
 
