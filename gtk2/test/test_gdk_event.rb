@@ -10,4 +10,14 @@ class TestGdkEvent < Test::Unit::TestCase
       end
     end
   end
+
+  class TestButton < self
+    def setup
+      @button = Gdk::EventButton.new(:button_press)
+    end
+
+    def test_window
+      assert_nil(@button.window)
+    end
+  end
 end

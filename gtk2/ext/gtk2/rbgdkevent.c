@@ -987,6 +987,12 @@ Init_gtk_gdk_event(VALUE mGdk)
     rb_define_singleton_method(rb_cGdkEvent, "add_client_message_filter", gdkevent_s_add_client_message_filter, 1);
     rb_define_method(rb_cGdkEvent, "screen", gdkevent_screen, 0);
     rb_define_method(rb_cGdkEvent, "set_screen", gdkevent_set_screen, 1);
+
+    /* GdkEventAny fields */
+    DEFINE_ACCESSOR(rb_cGdkEvent, any, window);
+    rb_define_method(rb_cGdkEvent, "send_event?", gdkeventany_send_event, 0);
+    rb_define_method(rb_cGdkEvent, "set_send_event", gdkeventany_set_send_event, 1);
+
     G_DEF_SETTERS(rb_cGdkEvent);
 
     /*
@@ -1013,9 +1019,6 @@ Init_gtk_gdk_event(VALUE mGdk)
     rb_cGdkEventAny =
         G_DEF_CLASS_WITH_PARENT(GDK_TYPE_EVENT_ANY, "EventAny",
                                 mGdk, rb_cGdkEvent);
-    DEFINE_ACCESSOR(rb_cGdkEventAny, any, window);
-    rb_define_method(rb_cGdkEventAny, "send_event?", gdkeventany_send_event, 0);
-    rb_define_method(rb_cGdkEventAny, "set_send_event", gdkeventany_set_send_event, 1);
     G_DEF_SETTERS(rb_cGdkEventAny);
 
     /* GdkEventExpose */
