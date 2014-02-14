@@ -18,15 +18,24 @@
 
 class TestGtkIconView < Test::Unit::TestCase
   include GtkTestUtils
-  def setup
-    only_gtk_version(3, 6, 0)
-    model = Gtk::ListStore.new(String, Gdk::Pixbuf)
-    @icon_view = Gtk::IconView.new(model)
-  end
 
-  def test_get_cell_rect
-    tree_path = Gtk::TreePath.new("0")
-    rect = Gdk::Rectangle.new(0, 10, 20, 30)
-    assert_nil(@icon_view.get_cell_rect(tree_path, nil, rect))
+  class TestGetCellRect < self
+    def setup
+      only_gtk_version(3, 6, 0)
+      model = Gtk::ListStore.new(String, Gdk::Pixbuf)
+      iter = model.append
+      model.set_values(iter, ["label", nil])
+      @path = iter.path
+      @icon_view = Gtk::IconView.new(model)
+    end
+
+    def test_found
+      assert_kind_of(Gdk::Rectangle, @icon_view.get_cell_rect(@path))
+    end
+
+    def test_not_found
+      not_found_path = Gtk::TreePath.new(@path.indices.first + 1)
+      assert_nil(@icon_view.get_cell_rect(not_found_path))
+    end
   end
 end

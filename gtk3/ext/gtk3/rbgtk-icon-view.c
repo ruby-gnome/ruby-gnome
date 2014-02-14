@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -67,17 +67,23 @@ rg_selected_each(VALUE self)
 
 #if GTK_CHECK_VERSION(3, 6, 0)
 static VALUE
-rg_get_cell_rect(VALUE self, VALUE path, VALUE cell, VALUE rect)
+rg_get_cell_rect(int argc, VALUE *argv, VALUE self)
 {
-    gboolean cell_rect = gtk_icon_view_get_cell_rect(_SELF(self),
-                                                     RVAL2GTKTREEPATH(path),
-                                                     NIL_P(cell) ? NULL : RVAL2GTKCELLRENDERER(cell),
-                                                     RVAL2GDKRECTANGLE(rect));
-    if (cell_rect) {
-        return GDKRECTANGLE2RVAL(&rect);
-    } else {
+    VALUE path, cell;
+    GdkRectangle rectangle;
+    gboolean found;
+
+    rb_scan_args(argc, argv, "11", &path, &cell);
+
+    found = gtk_icon_view_get_cell_rect(_SELF(self),
+                                        RVAL2GTKTREEPATH(path),
+                                        RVAL2GTKCELLRENDERER(cell),
+                                        &rectangle);
+    if (!found) {
         return Qnil;
     }
+
+    return GDKRECTANGLE2RVAL(&rectangle);
 }
 #endif
 
@@ -264,7 +270,7 @@ Init_gtk_iconview(VALUE mGtk)
     RG_DEF_ALIAS("get_path", "get_path_at_pos");
     RG_DEF_METHOD(selected_each, 0);
 #if GTK_CHECK_VERSION(3, 6, 0)
-    RG_DEF_METHOD(get_cell_rect, 3);
+    RG_DEF_METHOD(get_cell_rect, -1);
 #endif
     RG_DEF_METHOD(select_path, 1);
     RG_DEF_METHOD(unselect_path, 1);
