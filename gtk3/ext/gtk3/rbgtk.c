@@ -475,6 +475,9 @@ Init_gtk(void)
     Init_gtk_frame(RG_TARGET_NAMESPACE);
     Init_gtk_grid(RG_TARGET_NAMESPACE);
     Init_gtk_handle_box(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3, 10, 0)
+    Init_gtk_header_bar(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_hsv(RG_TARGET_NAMESPACE);
     Init_gtk_icon_factory(RG_TARGET_NAMESPACE);
     Init_gtk_icon_info(RG_TARGET_NAMESPACE);

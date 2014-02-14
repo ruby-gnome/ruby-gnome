@@ -79,6 +79,9 @@
 #define RVAL2GTKFONTCHOOSERWIDGET(o)       (GTK_FONT_CHOOSER_WIDGET(RVAL2GOBJ(o)))
 #define RVAL2GTKFRAME(o)                   (GTK_FRAME(RVAL2GOBJ(o)))
 #define RVAL2GTKGRID(o)                    (GTK_GRID(RVAL2GOBJ(o)))
+#if GTK_CHECK_VERSION(3, 10, 0)
+#  define RVAL2GTKHEADERBAR(o)               (GTK_HEADER_BAR(RVAL2GOBJ(o)))
+#endif
 #define RVAL2GTKHSV(o)                     (GTK_HSV(RVAL2GOBJ(o)))
 #define RVAL2GTKICONFACTORY(o)             (GTK_ICON_FACTORY(RVAL2GOBJ(o)))
 #define RVAL2GTKICONTHEME(o)               (GTK_ICON_THEME(RVAL2GOBJ(o)))

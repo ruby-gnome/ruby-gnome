@@ -149,6 +149,9 @@ G_GNUC_INTERNAL void Init_gtk_fontchooserwidget(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_frame(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_grid(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_handle_box(VALUE mGtk);
+#if GTK_CHECK_VERSION(3, 10, 0)
+   G_GNUC_INTERNAL void Init_gtk_header_bar(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_hsv(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_icon_factory(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_icon_info(VALUE mGtk);

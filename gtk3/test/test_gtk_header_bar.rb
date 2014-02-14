@@ -1,0 +1,59 @@
+# Copyright (C) 2014 Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+
+class TestGtkHeaderBar < Test::Unit::TestCase
+  include GtkTestUtils
+
+  def setup
+    only_gtk_version(3, 10, 0)
+    @header_bar = Gtk::HeaderBar.new
+  end
+
+  def test_custom_title_accessros
+    widget = Gtk::Invisible.new
+    @header_bar.custom_title = widget
+    assert_equal(widget, @header_bar.custom_title)
+  end
+
+  def test_title_accessors
+    header_bar_title = "no titile"
+    @header_bar.title = header_bar_title
+    assert_equal(header_bar_title, @header_bar.title)
+  end
+
+  def test_subtitle_accessors
+    header_bar_subtitle = "sub titile"
+    @header_bar.subtitle = header_bar_subtitle
+    assert_equal(header_bar_subtitle, @header_bar.subtitle)
+  end
+
+  def test_show_close_button_accessors
+    @header_bar.show_close_button = true
+    assert_equal(true, @header_bar.show_close_button?)
+  end
+
+  def test_spacing_accessors
+    spacing_size = 10
+    @header_bar.spacing = spacing_size
+    assert_equal(spacing_size, @header_bar.spacing)
+  end
+
+  def test_pack_accessors
+    hbox = Gtk::HBox::new(false, 5)
+    @header_bar.pack_start(hbox)
+    @header_bar.pack_end(hbox)
+  end
+end
