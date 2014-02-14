@@ -19,6 +19,7 @@
 class TestGtkIconView < Test::Unit::TestCase
   include GtkTestUtils
   def setup
+    only_gtk_version(3, 6, 0)
     model = Gtk::ListStore.new(String, Gdk::Pixbuf)
     @icon_view = Gtk::IconView.new(model)
   end
