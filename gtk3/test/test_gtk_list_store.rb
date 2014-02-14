@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -77,6 +77,7 @@ class TestGtkListStore < Test::Unit::TestCase
   end
 
   def test_iter_gc
+    GC.start
     n_iterators = count_objects(Gtk::TreeIter)
     50.times do |i|
       iter = @store.append
