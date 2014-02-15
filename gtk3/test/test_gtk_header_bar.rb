@@ -51,9 +51,16 @@ class TestGtkHeaderBar < Test::Unit::TestCase
     assert_equal(spacing_size, @header_bar.spacing)
   end
 
-  def test_pack_accessors
-    hbox = Gtk::HBox::new(false, 5)
-    @header_bar.pack_start(hbox)
-    @header_bar.pack_end(hbox)
+  def test_pack
+    start1 = Gtk::EventBox.new
+    start2 = Gtk::EventBox.new
+    end1 = Gtk::EventBox.new
+    end2 = Gtk::EventBox.new
+    @header_bar.pack_start(start1)
+    @header_bar.pack_start(start2)
+    @header_bar.pack_end(end1)
+    @header_bar.pack_end(end2)
+    assert_equal([start1, start2, end1, end2],
+                 @header_bar.children)
   end
 end
