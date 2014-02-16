@@ -22,6 +22,11 @@ class TestGtkStack < Test::Unit::TestCase
     @stack = Gtk::Stack.new
   end
 
+  def test_add
+    widget = Gtk::EventBox.new
+    assert_kind_of(Gtk::Stack, @stack.add(widget))
+  end
+
   def test_add_named
     widget = Gtk::EventBox.new
     widget_name = "set widget name"

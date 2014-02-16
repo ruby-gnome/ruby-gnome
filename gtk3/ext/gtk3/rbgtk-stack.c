@@ -33,6 +33,35 @@ rg_initialize(VALUE self)
 }
 
 static VALUE
+rg_add(int argc, VALUE *argv, VALUE self)
+{
+    VALUE rb_widget, rb_name, rb_title;
+    GtkWidget* child_widget;
+    const gchar *name = NULL, *title = NULL;
+
+    rb_scan_args(argc, argv, "12", &rb_widget, &rb_name, &rb_title);
+
+    child_widget = RVAL2GTKWIDGET(rb_widget);
+
+    if(!NIL_P(rb_name))
+      name = RVAL2CSTR(rb_name);
+    if(!NIL_P(rb_title))
+      title = RVAL2CSTR(rb_title);
+
+    if (argc == 1) {
+        rb_call_super(argc, argv);
+    } else if (argc == 2) {
+        gtk_stack_add_named(_SELF(self), child_widget,
+                            name);
+    } else if (argc == 3) {
+        gtk_stack_add_titled(_SELF(self), child_widget,
+                             name, title);
+    }
+
+    return self;
+}
+
+static VALUE
 rg_add_named(VALUE self, VALUE child_widget, VALUE name)
 {
     gtk_stack_add_named(_SELF(self),
@@ -79,6 +108,7 @@ Init_gtk_stack(VALUE mGtk)
 
     G_DEF_CLASS(GTK_TYPE_STACK_TRANSITION_TYPE, "TransitionType", RG_TARGET_NAMESPACE);
     RG_DEF_METHOD(initialize, 0);
+    RG_DEF_METHOD(add, -1);
     RG_DEF_METHOD(add_named, 2);
     RG_DEF_METHOD(add_titled, 3);
     RG_DEF_METHOD(set_visible_child, -1);
