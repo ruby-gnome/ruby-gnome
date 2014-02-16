@@ -217,6 +217,9 @@ G_GNUC_INTERNAL void Init_gtk_recent_filter(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_filter_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_info(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_recent_manager(VALUE mGtk);
+#if GTK_CHECK_VERSION(3, 10, 0)
+   G_GNUC_INTERNAL void Init_gtk_revealer(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_scale(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scalebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollable(VALUE mGtk);

@@ -543,6 +543,9 @@ Init_gtk(void)
     Init_gtk_recent_filter_info(RG_TARGET_NAMESPACE);
     Init_gtk_recent_info(RG_TARGET_NAMESPACE);
     Init_gtk_recent_manager(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3, 10, 0)
+    Init_gtk_revealer(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_scale(RG_TARGET_NAMESPACE);
     Init_gtk_scalebutton(RG_TARGET_NAMESPACE);
     Init_gtk_scrollable(RG_TARGET_NAMESPACE);
