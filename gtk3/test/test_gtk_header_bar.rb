@@ -29,13 +29,13 @@ class TestGtkHeaderBar < Test::Unit::TestCase
   end
 
   def test_title_accessors
-    header_bar_title = "no titile"
+    header_bar_title = "no title"
     @header_bar.title = header_bar_title
     assert_equal(header_bar_title, @header_bar.title)
   end
 
   def test_subtitle_accessors
-    header_bar_subtitle = "sub titile"
+    header_bar_subtitle = "sub title"
     @header_bar.subtitle = header_bar_subtitle
     assert_equal(header_bar_subtitle, @header_bar.subtitle)
   end
