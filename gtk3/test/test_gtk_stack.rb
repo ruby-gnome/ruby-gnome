@@ -31,7 +31,7 @@ class TestGtkStack < Test::Unit::TestCase
     widget = Gtk::EventBox.new
     widget_name = "set widget name"
     name_is_set = false
-    @stack.signal_connect("child-notify") do |*args|
+    @stack.signal_connect("child-notify") do
       name_is_set = true
     end
 
@@ -46,7 +46,7 @@ class TestGtkStack < Test::Unit::TestCase
     widget_title = "set widget title"
     name_is_set = false
     title_is_set = false
-    @stack.signal_connect("child-notify") do |*args|
+    @stack.signal_connect("child-notify") do
       name_is_set = true
       title_is_set = true
     end
