@@ -25,18 +25,30 @@ class TestGtkStack < Test::Unit::TestCase
   def test_add_named
     widget = Gtk::EventBox.new
     widget_name = "set widget name"
-    assert_nothing_raised do
-      @stack.add_named(widget, widget_name)
+    name_is_set = false
+    @stack.signal_connect("child-notify") do |*args|
+      name_is_set = true
     end
+
+    @stack.signal_emit("child-notify", nil)
+    @stack.add_named(widget, widget_name)
+    assert_true(name_is_set)
   end
 
   def test_add_titled
     widget = Gtk::EventBox.new
     widget_name = "set widget name"
     widget_title = "set widget title"
-    assert_nothing_raised do
-      @stack.add_titled(widget, widget_name, widget_title)
+    name_is_set = false
+    title_is_set = false
+    @stack.signal_connect("child-notify") do |*args|
+      name_is_set = true
+      title_is_set = true
     end
+
+    @stack.signal_emit("child-notify", nil)
+    @stack.add_titled(widget, widget_name, widget_title)
+    assert_true(name_is_set, title_is_set)
   end
 
   def test_homogeneous_accessors
