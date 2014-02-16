@@ -22,20 +22,20 @@ class TestGtkStack < Test::Unit::TestCase
     @stack = Gtk::Stack.new
   end
 
-  def test_set_add_named
+  def test_add_named
     widget = Gtk::EventBox.new
     widget_name = "set widget name"
     assert_nothing_raised do
-      @stack.set_add_named(widget, widget_name)
+      @stack.add_named(widget, widget_name)
     end
   end
 
-  def test_set_add_titled
+  def test_add_titled
     widget = Gtk::EventBox.new
     widget_name = "set widget name"
     widget_title = "set widget title"
     assert_nothing_raised do
-      @stack.set_add_titled(widget, widget_name, widget_title)
+      @stack.add_titled(widget, widget_name, widget_title)
     end
   end
 
