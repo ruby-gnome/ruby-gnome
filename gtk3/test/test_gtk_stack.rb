@@ -36,7 +36,7 @@ class TestGtkStack < Test::Unit::TestCase
     end
 
     @stack.signal_emit("child-notify", nil)
-    @stack.add_named(widget, widget_name)
+    @stack.add(widget, widget_name)
     assert_true(name_is_set)
   end
 
@@ -52,7 +52,7 @@ class TestGtkStack < Test::Unit::TestCase
     end
 
     @stack.signal_emit("child-notify", nil)
-    @stack.add_titled(widget, widget_name, widget_title)
+    @stack.add(widget, widget_name, widget_title)
     assert_true(name_is_set, title_is_set)
   end
 
