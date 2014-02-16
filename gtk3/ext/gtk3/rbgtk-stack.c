@@ -51,11 +51,24 @@ rg_add_titled(VALUE self, VALUE child_widget, VALUE name, VALUE title)
 }
 
 static VALUE
-rg_set_visible_child_full(VALUE self, VALUE name, VALUE transition_type)
+rg_set_visible_child(int argc, VALUE *argv, VALUE self)
 {
-    gtk_stack_set_visible_child_full(_SELF(self),
-                                     RVAL2CSTR(name),
-                                     RVAL2GTKSTACKTRANSITIONTYPE(transition_type));
+    VALUE rb_name, rb_transition_type;
+    GtkStackTransitionType transition_type;
+    const gchar *name = NULL;
+
+    rb_scan_args(argc, argv, "11", &rb_name, &rb_transition_type);
+    name = RVAL2CSTR(rb_name);
+
+    if(!NIL_P(rb_transition_type))
+      transition_type = RVAL2GTKSTACKTRANSITIONTYPE(rb_transition_type);
+
+    if (!NIL_P(rb_transition_type)) {
+        gtk_stack_set_visible_child_full(_SELF(self), name, transition_type);
+    } else {
+        gtk_stack_set_visible_child_name(_SELF(self), name);
+    }
+
     return self;
 }
 
@@ -68,6 +81,6 @@ Init_gtk_stack(VALUE mGtk)
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(add_named, 2);
     RG_DEF_METHOD(add_titled, 3);
-    RG_DEF_METHOD(set_visible_child_full, 2);
+    RG_DEF_METHOD(set_visible_child, -1);
 }
 #endif
