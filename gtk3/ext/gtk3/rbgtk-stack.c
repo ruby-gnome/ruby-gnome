@@ -37,7 +37,7 @@ rg_set_add_named(VALUE self, VALUE child_widget, VALUE name)
 {
     gtk_stack_add_named(_SELF(self),
                         RVAL2GTKWIDGET(child_widget), RVAL2CSTR(name));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -47,7 +47,7 @@ rg_set_add_titled(VALUE self, VALUE child_widget, VALUE name, VALUE title)
                         RVAL2GTKWIDGET(child_widget),
                         RVAL2CSTR(name),
                         RVAL2CSTR(title));
-    return Qnil;
+    return self;
 }
 
 static VALUE
@@ -56,7 +56,7 @@ rg_set_visible_child_full(VALUE self, VALUE name, VALUE transition_type)
     gtk_stack_set_visible_child_full(_SELF(self),
                                      RVAL2CSTR(name),
                                      RVAL2GTKSTACKTRANSITIONTYPE(transition_type));
-    return Qnil;
+    return self;
 }
 
 void
