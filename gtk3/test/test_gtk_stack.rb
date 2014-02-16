@@ -58,7 +58,7 @@ class TestGtkStack < Test::Unit::TestCase
 
   def test_homogeneous_accessors
     @stack.homogeneous = false
-    assert_equal(false, @stack.homogeneous?)
+    assert_false(@stack.homogeneous?)
   end
 
   def test_transition_duration_accessors
