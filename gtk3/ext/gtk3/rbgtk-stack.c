@@ -62,24 +62,6 @@ rg_add(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
-rg_add_named(VALUE self, VALUE child_widget, VALUE name)
-{
-    gtk_stack_add_named(_SELF(self),
-                        RVAL2GTKWIDGET(child_widget), RVAL2CSTR(name));
-    return self;
-}
-
-static VALUE
-rg_add_titled(VALUE self, VALUE child_widget, VALUE name, VALUE title)
-{
-    gtk_stack_add_titled(_SELF(self),
-                        RVAL2GTKWIDGET(child_widget),
-                        RVAL2CSTR(name),
-                        RVAL2CSTR(title));
-    return self;
-}
-
-static VALUE
 rg_set_visible_child(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_name, rb_transition_type;
@@ -109,8 +91,6 @@ Init_gtk_stack(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_STACK_TRANSITION_TYPE, "TransitionType", RG_TARGET_NAMESPACE);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(add, -1);
-    RG_DEF_METHOD(add_named, 2);
-    RG_DEF_METHOD(add_titled, 3);
     RG_DEF_METHOD(set_visible_child, -1);
 }
 #endif
