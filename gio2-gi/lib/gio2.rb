@@ -62,8 +62,8 @@ module Gio
       if @content_type_guess_for_tree_info
         content_type_class = @content_type_class
         info = @content_type_guess_for_tree_info
-        file_class = @base_module.const_get("File")
-        file_class.__send__(:define_method, "guess_content_types") do
+        file_module = @base_module.const_get("File")
+        file_module.__send__(:define_method, "guess_content_types") do
           info.invoke(:arguments => [self]).collect do |type|
             content_type_class.new(type)
           end
