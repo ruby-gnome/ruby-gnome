@@ -73,11 +73,12 @@ module Gio
 
     def define_content_type_class
       @content_type_class = Class.new do
-        attr_reader :type
-        protected :type
-
         def initialize(type)
           @type = type
+        end
+
+        def to_s
+          @type
         end
       end
       @base_module.const_set("ContentType", @content_type_class)
@@ -87,6 +88,10 @@ module Gio
       @mime_type_class = Class.new do
         def initialize(type)
           @type = type
+        end
+
+        def to_s
+          @type
         end
       end
       @base_module.const_set("MimeType", @mime_type_class)
@@ -122,22 +127,22 @@ module Gio
         end
         @content_type_class.__send__(:define_method, method_name) do |other|
           if other.is_a?(self.class)
-            other = other.type
+            other = other.to_s
           end
           if other.is_a?(String)
-            info.invoke(:arguments => [@type, other])
+            info.invoke(:arguments => [to_s, other])
           else
             false
           end
         end
       when "from_mime_type"
         @mime_type_class.__send__(:define_method, "content_type") do
-          info.invoke(:arguments => [@type])
+          info.invoke(:arguments => [to_s])
         end
       when "get_mime_type"
         mime_type_class = @mime_type_class
         @content_type_class.__send__(:define_method, "mime_type") do
-          mime_type = info.invoke(:arguments => [@type])
+          mime_type = info.invoke(:arguments => [to_s])
           if mime_type
             mime_type_class.new(mime_type)
           else
@@ -167,7 +172,7 @@ module Gio
           method_name = name
         end
         @content_type_class.__send__(:define_method, method_name) do
-          info.invoke(:arguments => [@type])
+          info.invoke(:arguments => [to_s])
         end
       end
     end
