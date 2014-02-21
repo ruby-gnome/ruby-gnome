@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,10 @@
 class TestFileEnumerator < Test::Unit::TestCase
   include GioGITestUtils
 
-  def test_responds_to_properties
-    omit_not_implemented
-    a = Gio::File.new_for_path('/').enumerate_children
-    assert a.respond_to?(:container)
+  def test_container
+    path = File.dirname(__FILE__)
+    dir = Gio::File.path(path)
+    enumerator = dir.enumerate_children("*", :none)
+    assert_equal(path, enumerator.container.path)
   end
 end

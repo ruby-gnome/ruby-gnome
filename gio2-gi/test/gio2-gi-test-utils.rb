@@ -18,10 +18,6 @@ require "test-unit"
 require "test/unit/notify"
 
 module GioGITestUtils
-  def omit_not_implemented
-    omit("NotImplemented: free GIArgument")
-  end
-
   def fixture_path(*components)
     base_dir = File.join(File.dirname(__FILE__), "fixture")
     File.expand_path(File.join(base_dir, *components))
