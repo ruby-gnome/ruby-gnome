@@ -36,37 +36,37 @@ rg_s_is_a_p(G_GNUC_UNUSED VALUE self, VALUE arg1, VALUE arg2)
 }
 
 static VALUE
-rg_s_unknown_p(G_GNUC_UNUSED VALUE type)
+rg_s_unknown_p(G_GNUC_UNUSED VALUE self, VALUE type)
 {
         return CBOOL2RVAL(g_content_type_is_unknown(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_s_get_description(G_GNUC_UNUSED VALUE type)
+rg_s_get_description(G_GNUC_UNUSED VALUE self, VALUE type)
 {
         return CSTR2RVAL_FREE(g_content_type_get_description(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_s_get_mime_type(G_GNUC_UNUSED VALUE type)
+rg_s_get_mime_type(G_GNUC_UNUSED VALUE self, VALUE type)
 {
         return CSTR2RVAL_FREE(g_content_type_get_mime_type(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_s_get_icon(G_GNUC_UNUSED VALUE type)
+rg_s_get_icon(G_GNUC_UNUSED VALUE self, VALUE type)
 {
         return GOBJ2RVAL_UNREF(g_content_type_get_icon(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_s_can_be_executable_p(G_GNUC_UNUSED VALUE type)
+rg_s_can_be_executable_p(G_GNUC_UNUSED VALUE self, VALUE type)
 {
         return CBOOL2RVAL(g_content_type_can_be_executable(RVAL2CSTR(type)));
 }
 
 static VALUE
-rg_s_from_mime_type(G_GNUC_UNUSED VALUE type)
+rg_s_from_mime_type(G_GNUC_UNUSED VALUE self, VALUE type)
 {
         return CSTR2RVAL(g_content_type_from_mime_type(RVAL2CSTR(type)));
 }
