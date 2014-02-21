@@ -94,6 +94,26 @@ module GObjectIntrospection
       end
     end
 
+    def define_singleton_method(klass, name, info)
+      unlock_gvl = should_unlock_gvl?(info, klass)
+      validate = lambda do |arguments|
+        validate_arguments(info, "#{klass}.#{name}", arguments)
+      end
+      singleton_class = (class << klass; self; end)
+      singleton_class.__send__(:define_method, name) do |*arguments, &block|
+        validate.call(arguments, &block)
+        if block.nil? and info.require_callback?
+          Enumerator.new(self, name, *arguments)
+        else
+          info.invoke({
+                        :arguments => arguments,
+                        :unlock_gvl => unlock_gvl,
+                      },
+                      &block)
+        end
+      end
+    end
+
     def define_struct(info, options={})
       if info.gtype == GLib::Type::NONE
         klass = self.class.define_struct(info.size, info.name, @base_module,
@@ -332,23 +352,7 @@ module GObjectIntrospection
         name = rubyish_method_name(info)
         next if name == "new"
         next if name == "alloc"
-        unlock_gvl = should_unlock_gvl?(info, klass)
-        validate = lambda do |arguments|
-          validate_arguments(info, "#{klass}.#{name}", arguments)
-        end
-        singleton_class = (class << klass; self; end)
-        singleton_class.__send__(:define_method, name) do |*arguments, &block|
-          validate.call(arguments, &block)
-          if block.nil? and info.require_callback?
-            Enumerator.new(self, name, *arguments)
-          else
-            info.invoke({
-                          :arguments => arguments,
-                          :unlock_gvl => unlock_gvl,
-                        },
-                        &block)
-          end
-        end
+        define_singleton_method(klass, name, info)
       end
     end
 
