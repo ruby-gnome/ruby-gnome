@@ -16,7 +16,7 @@
 
 class TestContentType < Test::Unit::TestCase
   def test_get_icon
-    assert_equal(["image-jpeg", "image-x-generic"],
-                 Gio::ContentType.get_icon("image/jpeg").names)
+    assert_equal("image-jpeg",
+                 Gio::ContentType.get_icon("image/jpeg").names.first)
   end
 end
