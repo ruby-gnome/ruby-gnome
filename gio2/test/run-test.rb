@@ -26,7 +26,8 @@ modules = [
 
 modules.each do |name|
   base = File.join(ruby_gnome2_base, name)
-  if File.exist?("Makefile") and system("which make > /dev/null")
+  makefile = File.join(base, "Makefile")
+  if File.exist?(makefile) and system("which make > /dev/null")
     `make -C #{base.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(base, "ext", name))
