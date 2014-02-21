@@ -45,6 +45,6 @@ $VERBOSE = false # TODO: remove me
 $LOAD_PATH.unshift(File.join(gio2_base, "test"))
 require "gio2-gi-test-utils"
 
-require 'gio2'
+require "gio2"
 
 exit Test::Unit::AutoRunner.run(true)
