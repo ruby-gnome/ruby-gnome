@@ -77,12 +77,16 @@ class TestGtkStack < Test::Unit::TestCase
   end
 
   class TestVisibleChild < self
-    def test_visible_child_accessors
-      visible_widget = Gtk::EventBox.new
-      visible_widget.show
-      @stack.add(visible_widget)
-      @stack.visible_child = visible_widget
-      assert_equal(visible_widget, @stack.visible_child)
+    def setup
+      super
+      @visible_widget = Gtk::EventBox.new
+      @visible_widget.show
+      @stack.add(@visible_widget)
+    end
+
+    def test_plain
+      @stack.visible_child = @visible_widget
+      assert_equal(@visible_widget, @stack.visible_child)
     end
   end
 
