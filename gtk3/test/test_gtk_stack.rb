@@ -28,18 +28,18 @@ class TestGtkStack < Test::Unit::TestCase
       @child = Gtk::EventBox.new
     end
 
-    def test_add
+    def test_return_value
       assert_equal(@stack, @stack.add(@child))
     end
 
-    def test_add_named
+    def test_name
       widget_name = "set widget name"
       @stack.add(@child, widget_name)
       assert_equal(widget_name,
                    @stack.child_get_property(@child, "name"))
     end
 
-    def test_add_titled
+    def test_name_add_title
       widget_name = "set widget name"
       widget_title = "set widget title"
       @stack.add(@child, widget_name, widget_title)
