@@ -23,31 +23,33 @@ class TestGtkStack < Test::Unit::TestCase
   end
 
   class TestAdd < self
+    def setup
+      super
+      @child = Gtk::EventBox.new
+    end
+
     def test_add
-      widget = Gtk::EventBox.new
-      assert_equal(@stack, @stack.add(widget))
+      assert_equal(@stack, @stack.add(@child))
     end
 
     def test_add_named
-      widget = Gtk::EventBox.new
       widget_name = "set widget name"
-      @stack.add(widget, widget_name)
+      @stack.add(@child, widget_name)
       assert_equal(widget_name,
-                   @stack.child_get_property(widget, "name"))
+                   @stack.child_get_property(@child, "name"))
     end
 
     def test_add_titled
-      widget = Gtk::EventBox.new
       widget_name = "set widget name"
       widget_title = "set widget title"
-      @stack.add(widget, widget_name, widget_title)
+      @stack.add(@child, widget_name, widget_title)
       assert_equal([
                      widget_name,
                      widget_title,
                    ],
                    [
-                     @stack.child_get_property(widget, "name"),
-                     @stack.child_get_property(widget, "title"),
+                     @stack.child_get_property(@child, "name"),
+                     @stack.child_get_property(@child, "title"),
                    ])
     end
   end
