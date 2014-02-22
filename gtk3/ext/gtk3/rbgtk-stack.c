@@ -43,9 +43,9 @@ rg_add(int argc, VALUE *argv, VALUE self)
 
     child_widget = RVAL2GTKWIDGET(rb_widget);
 
-    if(!NIL_P(rb_name))
+    if (!NIL_P(rb_name))
       name = RVAL2CSTR(rb_name);
-    if(!NIL_P(rb_title))
+    if (!NIL_P(rb_title))
       title = RVAL2CSTR(rb_title);
 
     if (argc == 1) {
@@ -71,7 +71,7 @@ rg_set_visible_child(int argc, VALUE *argv, VALUE self)
     rb_scan_args(argc, argv, "11", &rb_name, &rb_transition_type);
     name = RVAL2CSTR(rb_name);
 
-    if(!NIL_P(rb_transition_type))
+    if (!NIL_P(rb_transition_type))
       transition_type = RVAL2GTKSTACKTRANSITIONTYPE(rb_transition_type);
 
     if (!NIL_P(rb_transition_type)) {
