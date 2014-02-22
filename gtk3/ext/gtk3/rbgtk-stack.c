@@ -36,7 +36,7 @@ static VALUE
 rg_add(int argc, VALUE *argv, VALUE self)
 {
     VALUE rb_widget, rb_name, rb_title;
-    GtkWidget* child_widget;
+    GtkWidget *child_widget;
     const gchar *name = NULL, *title = NULL;
 
     rb_scan_args(argc, argv, "12", &rb_widget, &rb_name, &rb_title);
