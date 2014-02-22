@@ -23,33 +23,33 @@ class TestGtkStack < Test::Unit::TestCase
   end
 
   class TestAdd < self
-  def test_add
-    widget = Gtk::EventBox.new
-    assert_equal(@stack, @stack.add(widget))
-  end
+    def test_add
+      widget = Gtk::EventBox.new
+      assert_equal(@stack, @stack.add(widget))
+    end
 
-  def test_add_named
-    widget = Gtk::EventBox.new
-    widget_name = "set widget name"
-    @stack.add(widget, widget_name)
-    assert_equal(widget_name,
-                 @stack.child_get_property(widget, "name"))
-  end
+    def test_add_named
+      widget = Gtk::EventBox.new
+      widget_name = "set widget name"
+      @stack.add(widget, widget_name)
+      assert_equal(widget_name,
+                   @stack.child_get_property(widget, "name"))
+    end
 
-  def test_add_titled
-    widget = Gtk::EventBox.new
-    widget_name = "set widget name"
-    widget_title = "set widget title"
-    @stack.add(widget, widget_name, widget_title)
-    assert_equal([
-                   widget_name,
-                   widget_title,
-                 ],
-                 [
-                   @stack.child_get_property(widget, "name"),
-                   @stack.child_get_property(widget, "title"),
-                 ])
-  end
+    def test_add_titled
+      widget = Gtk::EventBox.new
+      widget_name = "set widget name"
+      widget_title = "set widget title"
+      @stack.add(widget, widget_name, widget_title)
+      assert_equal([
+                     widget_name,
+                     widget_title,
+                   ],
+                   [
+                     @stack.child_get_property(widget, "name"),
+                     @stack.child_get_property(widget, "title"),
+                   ])
+    end
   end
 
   def test_homogeneous_accessors
