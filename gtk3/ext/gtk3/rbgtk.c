@@ -561,6 +561,9 @@ Init_gtk(void)
     Init_gtk_socket(RG_TARGET_NAMESPACE);
     Init_gtk_spin_button(RG_TARGET_NAMESPACE);
     Init_gtk_spinner(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3, 10, 0)
+    Init_gtk_stack(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_statusbar(RG_TARGET_NAMESPACE);
     Init_gtk_status_icon(RG_TARGET_NAMESPACE);
     Init_gtk_stock(RG_TARGET_NAMESPACE);

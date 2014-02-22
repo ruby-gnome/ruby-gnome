@@ -235,6 +235,9 @@ G_GNUC_INTERNAL void Init_gtk_size_group(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_socket(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_spin_button(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_spinner(VALUE mGtk);
+#if GTK_CHECK_VERSION(3, 10, 0)
+   G_GNUC_INTERNAL void Init_gtk_stack(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_statusbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_status_icon(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_stock(VALUE mGtk);
