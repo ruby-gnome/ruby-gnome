@@ -32,6 +32,11 @@ class TestGtkStack < Test::Unit::TestCase
       assert_equal(@stack, @stack.add(@child))
     end
 
+    def test_added
+      @stack.add(@child)
+      assert_equal([@child], @stack.children)
+    end
+
     def test_name
       widget_name = "set widget name"
       @stack.add(@child, widget_name)
