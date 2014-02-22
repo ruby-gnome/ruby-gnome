@@ -68,9 +68,11 @@ class TestGtkStack < Test::Unit::TestCase
   end
 
   def test_visible_child_accessors
-    widget = Gtk::EventBox.new
-    @stack.visible_child = widget
-    assert_nil(@stack.visible_child)
+    visible_widget = Gtk::EventBox.new
+    visible_widget.show
+    @stack.add(visible_widget)
+    @stack.visible_child = visible_widget
+    assert_equal(visible_widget, @stack.visible_child)
   end
 
   class TestEnum < self
