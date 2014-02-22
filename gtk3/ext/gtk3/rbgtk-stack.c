@@ -49,7 +49,7 @@ rg_add(int argc, VALUE *argv, VALUE self)
         title = RVAL2CSTR(rb_title);
 
     if (argc == 1) {
-        rb_call_super(argc, argv);
+        return rb_call_super(argc, argv);
     } else if (argc == 2) {
         gtk_stack_add_named(_SELF(self), child_widget,
                             name);
