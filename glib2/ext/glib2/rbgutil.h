@@ -68,9 +68,8 @@ extern "C" {
 
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
-    rb_define_method(klass, "set_" name, function, args); \
     rb_undef_method(klass, name "="); \
-    G_DEF_SETTER(klass, name)
+    rbg_define_method(klass, "set_" name, function, args)
 
 #define G_REPLACE_GET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, name); \
