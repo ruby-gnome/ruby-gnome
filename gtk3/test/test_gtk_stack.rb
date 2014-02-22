@@ -22,6 +22,7 @@ class TestGtkStack < Test::Unit::TestCase
     @stack = Gtk::Stack.new
   end
 
+  class TestAdd < self
   def test_add
     widget = Gtk::EventBox.new
     assert_equal(@stack, @stack.add(widget))
@@ -48,6 +49,7 @@ class TestGtkStack < Test::Unit::TestCase
                    @stack.child_get_property(widget, "name"),
                    @stack.child_get_property(widget, "title"),
                  ])
+  end
   end
 
   def test_homogeneous_accessors
