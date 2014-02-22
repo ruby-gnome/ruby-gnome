@@ -76,12 +76,14 @@ class TestGtkStack < Test::Unit::TestCase
     assert_equal(stack_transition_type, @stack.transition_type)
   end
 
+  class TestVisibleChild < self
   def test_visible_child_accessors
     visible_widget = Gtk::EventBox.new
     visible_widget.show
     @stack.add(visible_widget)
     @stack.visible_child = visible_widget
     assert_equal(visible_widget, @stack.visible_child)
+  end
   end
 
   class TestEnum < self
