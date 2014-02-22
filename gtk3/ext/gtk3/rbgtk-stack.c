@@ -64,20 +64,30 @@ rg_add(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_set_visible_child(int argc, VALUE *argv, VALUE self)
 {
-    VALUE rb_name, rb_transition_type;
+    VALUE rb_widget_or_name, rb_transition_type;
     GtkStackTransitionType transition_type;
+    GtkWidget *widget = NULL;
     const gchar *name = NULL;
 
-    rb_scan_args(argc, argv, "11", &rb_name, &rb_transition_type);
-    name = RVAL2CSTR(rb_name);
+    rb_scan_args(argc, argv, "11", &rb_widget_or_name, &rb_transition_type);
 
-    if (!NIL_P(rb_transition_type))
-        transition_type = RVAL2GTKSTACKTRANSITIONTYPE(rb_transition_type);
-
-    if (!NIL_P(rb_transition_type)) {
-        gtk_stack_set_visible_child_full(_SELF(self), name, transition_type);
+    if (RVAL2CBOOL(rb_obj_is_kind_of(rb_widget_or_name, rb_cString))) {
+        name = RVAL2CSTR(rb_widget_or_name);
     } else {
-        gtk_stack_set_visible_child_name(_SELF(self), name);
+        widget = RVAL2GOBJ(rb_widget_or_name);
+    }
+
+    if (widget) {
+        gtk_stack_set_visible_child(_SELF(self), widget);
+    } else {
+      if (!NIL_P(rb_transition_type))
+          transition_type = RVAL2GTKSTACKTRANSITIONTYPE(rb_transition_type);
+
+      if (!NIL_P(rb_transition_type)) {
+          gtk_stack_set_visible_child_full(_SELF(self), name, transition_type);
+      } else {
+          gtk_stack_set_visible_child_name(_SELF(self), name);
+      }
     }
 
     return self;
@@ -91,6 +101,6 @@ Init_gtk_stack(VALUE mGtk)
     G_DEF_CLASS(GTK_TYPE_STACK_TRANSITION_TYPE, "TransitionType", RG_TARGET_NAMESPACE);
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(add, -1);
-    RG_DEF_METHOD(set_visible_child, -1);
+    RG_REPLACE_SET_PROPERTY(visible_child, -1);
 }
 #endif

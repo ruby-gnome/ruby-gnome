@@ -81,12 +81,29 @@ class TestGtkStack < Test::Unit::TestCase
       super
       @visible_widget = Gtk::EventBox.new
       @visible_widget.show
-      @stack.add(@visible_widget)
+      @visible_widget_name = "visible widget"
+      @stack.add(@visible_widget, @visible_widget_name)
     end
 
-    def test_plain
-      @stack.visible_child = @visible_widget
+    def test_assign
+      assert_not_respond_to(@stack, :visible_child=)
+    end
+
+    def test_widget
+      @stack.set_visible_child(@visible_widget)
       assert_equal(@visible_widget, @stack.visible_child)
+    end
+
+    def test_name
+      @stack.set_visible_child(@visible_widget_name)
+      assert_equal(@visible_widget_name,
+                   @stack.visible_child_name)
+    end
+
+    def test_name_and_transition_type
+      @stack.set_visible_child(@visible_widget_name, :crossfade)
+      assert_equal(@visible_widget_name,
+                   @stack.visible_child_name)
     end
   end
 
