@@ -44,9 +44,9 @@ rg_add(int argc, VALUE *argv, VALUE self)
     child_widget = RVAL2GTKWIDGET(rb_widget);
 
     if (!NIL_P(rb_name))
-      name = RVAL2CSTR(rb_name);
+        name = RVAL2CSTR(rb_name);
     if (!NIL_P(rb_title))
-      title = RVAL2CSTR(rb_title);
+        title = RVAL2CSTR(rb_title);
 
     if (argc == 1) {
         rb_call_super(argc, argv);
@@ -72,7 +72,7 @@ rg_set_visible_child(int argc, VALUE *argv, VALUE self)
     name = RVAL2CSTR(rb_name);
 
     if (!NIL_P(rb_transition_type))
-      transition_type = RVAL2GTKSTACKTRANSITIONTYPE(rb_transition_type);
+        transition_type = RVAL2GTKSTACKTRANSITIONTYPE(rb_transition_type);
 
     if (!NIL_P(rb_transition_type)) {
         gtk_stack_set_visible_child_full(_SELF(self), name, transition_type);
