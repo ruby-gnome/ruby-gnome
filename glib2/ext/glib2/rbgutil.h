@@ -66,6 +66,11 @@ extern "C" {
 #define RG_REG_SYMBOL_GETTER(name) \
         rbgobj_register_property_getter(CLASS2GTYPE(RG_TARGET_NAMESPACE), name, rbgutil_sym_g2r_func)
 
+#define RG_REPLACE_SET_PROPERTY(name, args)   \
+    G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, #name, rg_set_ ## name, args)
+#define RG_REPLACE_GET_PROPERTY(name, args)   \
+    G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, #name, rg_get_ ## name, args)
+
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
     rb_undef_method(klass, name "="); \
