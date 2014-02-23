@@ -51,7 +51,7 @@ class TestGtkRevealer < Test::Unit::TestCase
 
   class TestEnum < self
     def test_transition_type
-      assert_const_defined(Gtk::Stack::TransitionType, :CROSSFADE)
+      assert_const_defined(Gtk::Revealer::TransitionType, :CROSSFADE)
     end
   end
 end
