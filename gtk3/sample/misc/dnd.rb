@@ -21,7 +21,7 @@ class SrcWindow < Gtk::Window
                     [["test", Gtk::Drag::TargetFlags::SAME_APP, 12345]],
                     Gdk::DragContext::Action::COPY |
                     Gdk::DragContext::Action::MOVE)
-    signal_connect("drag_data_get") do |widget, context, selection_data, info, time|
+    signal_connect("drag-data-get") do |widget, context, selection_data, info, time|
 #      selection_data.set("text/uri-list", 8, "hoge.txt")
       selection_data.set(Gdk::Selection::TYPE_STRING, "hoge.txt")
     end
