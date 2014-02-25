@@ -35,9 +35,11 @@ class DestWindow < Gtk::Window
     @label = Gtk::Label.new("Drop here!")
     add(@label)
     set_default_size(100, 100)
-    drag_dest_set(Gtk::Drag::DestDefaults::MOTION | Gtk::Drag::DestDefaults::HIGHLIGHT,
+    drag_dest_set(Gtk::Drag::DestDefaults::MOTION |
+                  Gtk::Drag::DestDefaults::HIGHLIGHT,
                   [["test", :same_app, 12345]],
-                  Gdk::DragContext::Action::COPY | Gdk::DragContext::Action::MOVE)
+                  Gdk::DragContext::Action::COPY |
+                  Gdk::DragContext::Action::MOVE)
 
     signal_connect("drag-data-received") do |w, dc, x, y, selectiondata, info, time|
       dc.targets.each do |target|
