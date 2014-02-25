@@ -28,7 +28,6 @@ class SrcWindow < Gtk::Window
  end
 end
 
-
 class DestWindow < Gtk::Window
   def initialize
     super("Dest Window")
@@ -61,4 +60,3 @@ win1.show_all.signal_connect("destroy"){Gtk.main_quit}
 win2.show_all.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main
-
