@@ -37,7 +37,7 @@ class DestWindow < Gtk::Window
     set_default_size(100, 100)
     drag_dest_set(Gtk::Drag::DestDefaults::MOTION | Gtk::Drag::DestDefaults::HIGHLIGHT,
                   [["test", :same_app, 12345]],
-                  Gdk::DragContext::Action::COPY|Gdk::DragContext::Action::MOVE)
+                  Gdk::DragContext::Action::COPY | Gdk::DragContext::Action::MOVE)
 
     signal_connect("drag-data-received") do |w, dc, x, y, selectiondata, info, time|
       dc.targets.each do |target|
@@ -56,7 +56,7 @@ end
 win1 = SrcWindow.new
 win2 = DestWindow.new
 
-win1.show_all.signal_connect("destroy"){Gtk.main_quit}
-win2.show_all.signal_connect("destroy"){Gtk.main_quit}
+win1.show_all.signal_connect("destroy") {Gtk.main_quit}
+win2.show_all.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main
