@@ -41,16 +41,16 @@ class DestWindow < Gtk::Window
                   Gdk::DragContext::Action::COPY |
                   Gdk::DragContext::Action::MOVE)
 
-    signal_connect("drag-data-received") do |w, dc, x, y, selectiondata, info, time|
-      dc.targets.each do |target|
+    signal_connect("drag-data-received") do |widget, context, x, y, selection_data, info, time|
+      context.targets.each do |target|
         if target.name == "test" ||
-           selectiondata.type == Gdk::Selection::TYPE_STRING
-          puts selectiondata.data
+           selection_data.type == Gdk::Selection::TYPE_STRING
+          puts selection_data.data
         end
       end
     end
-    signal_connect("drag-drop") do |w, dc, x, y, time|
-      w.drag_get_data(dc, dc.targets[0], time)
+    signal_connect("drag-drop") do |widget, context, x, y, time|
+      widget.drag_get_data(context, context.targets[0], time)
     end
   end
 end
