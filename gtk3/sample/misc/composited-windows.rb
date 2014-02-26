@@ -38,7 +38,7 @@ event.colormap = event.screen.rgba_colormap
 # that "transparency" is the background colour for a widget.
 event.app_paintable = true
 
-event.signal_connect('expose-event') do |widget, event|
+event.signal_connect('draw') do |widget, event|
   # This function simply draws a transparency onto a widget on the area
   # for which it receives expose events.  This is intended to give the
   # event box a "transparent" background.
@@ -72,7 +72,7 @@ event.window.composited = true
 # Note that we do _after_ so that the normal (red) background is drawn
 # by gtk before our compositing occurs.
 #
-window.signal_connect_after('expose-event') do |widget, event|
+window.signal_connect_after('draw') do |widget, event|
   # This function performs the actual compositing of the event box onto
   # the already-existing background of the window at 50% normal opacity.
   #

@@ -31,7 +31,7 @@ class AlphaDemo < Gtk::Window
     end
     set_double_buffered(false)
 
-    signal_connect('expose-event') do |widget, event|
+    signal_connect('draw') do |widget, event|
       cr = widget.window.create_cairo_context
 
       rgba = [1.0, 1.0, 1.0]

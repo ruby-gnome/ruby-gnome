@@ -26,7 +26,7 @@ end
 
 d = Gtk::DrawingArea.new
 gc = Gdk::GC.new(w.window)
-d.signal_connect('expose-event') do |w, e|
+d.signal_connect('draw') do |w, e|
   unless e.count > 0
     width = w.allocation.width
     height = w.allocation.height

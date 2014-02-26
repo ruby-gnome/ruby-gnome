@@ -214,7 +214,7 @@ class Gesture < Gtk::EventBox
   end
     
   def set_expose_event
-    signal_connect("expose_event") do |widget, event|
+    signal_connect("draw") do |widget, event|
       if @processor.started?
         cr = widget.window.create_cairo_context
 
@@ -372,7 +372,7 @@ layout = Layout.new
 
 gestured_widget = GesturedWidget.new
 gestured_widget.set_size_request(50, 50)
-gestured_widget.signal_connect("expose_event") do |widget, event|
+gestured_widget.signal_connect("draw") do |widget, event|
   x, y, w, h = widget.allocation.to_a
   cr = widget.window.create_cairo_context
   cr.set_source_rgba([0.8, 0.8, 0.3, 1])
@@ -388,7 +388,7 @@ layout.put(gestured_widget, 75, 75)
 
 gestured_widget2 = GesturedWidget.new
 gestured_widget2.set_size_request(100, 50)
-gestured_widget2.signal_connect("expose_event") do |widget, event|
+gestured_widget2.signal_connect("draw") do |widget, event|
   x, y, w, h = widget.allocation.to_a
   cr = widget.window.create_cairo_context
   cr.set_source_rgba([0.3, 0.3, 0.8, 1])

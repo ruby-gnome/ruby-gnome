@@ -46,7 +46,7 @@ background = Gdk::Color.new(65535, 65535, 65535)
 Gdk::Colormap.system.alloc_color(background, false, true)
 win.window.background = background
 
-win.signal_connect("expose_event") do
+win.signal_connect("draw") do
   (0...N_WORDS).each do |i|
     rotated_matrix = matrix.dup
     angle = 360 * i / N_WORDS.to_f

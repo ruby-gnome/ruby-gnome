@@ -117,7 +117,7 @@ draggable_widget = DraggableWidget.new
 draggable_widget.set_size_request(50, 50)
 layout.put(draggable_widget, 75, 75)
 
-draggable_widget.signal_connect("expose_event") do |widget, event|
+draggable_widget.signal_connect("draw") do |widget, event|
   x, y, w, h = widget.allocation.to_a
   fg = Gdk::GC.new(widget.window)
   widget.window.draw_arc(fg, true, x, y, w, h, 0 * 64, 360 * 64)

@@ -178,7 +178,7 @@ if Gdk.cairo_available?
     drawingarea = Gtk::DrawingArea.new
     drawingarea.set_size_request(320, 240)
     drawingarea.has_tooltip = true
-    drawingarea.signal_connect('expose_event') {
+    drawingarea.signal_connect('draw') {
         cr = drawingarea.window.create_cairo_context
         cr.rectangle(0, 0, drawingarea.allocation.width, drawingarea.allocation.height)
         cr.set_source_rgb(1.0, 1.0, 1.0)
