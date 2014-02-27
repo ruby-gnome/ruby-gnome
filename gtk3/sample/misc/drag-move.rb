@@ -9,7 +9,7 @@
   $Id: drag-move.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 class DraggableWidget < Gtk::EventBox
   def initialize
@@ -41,7 +41,7 @@ class DraggableWidget < Gtk::EventBox
 
   private
   def set_button_press_event
-    signal_connect("button_press_event") do |widget, event|
+    signal_connect("button-press-event") do |widget, event|
       if event.button == @drag_button
         Gtk.grab_add(widget)
         x, y, w, h = widget.allocation.to_a
@@ -53,7 +53,7 @@ class DraggableWidget < Gtk::EventBox
   end
 
   def set_motion_notify_event
-    signal_connect("motion_notify_event") do |widget, event|
+    signal_connect("motion-notify-event") do |widget, event|
       if dragging?
         drag_motion(event.x_root, event.y_root)
       else
@@ -63,7 +63,7 @@ class DraggableWidget < Gtk::EventBox
   end
 
   def set_button_release_event
-    signal_connect("button_release_event") do |widget, event|
+    signal_connect("button-release-event") do |widget, event|
       if event.button == @drag_button
         Gtk.grab_remove(widget)
         drag_end
@@ -74,7 +74,7 @@ class DraggableWidget < Gtk::EventBox
   end
 
   def set_drag_move_position_event
-    signal_connect("drag_move_position") do |widget, x, y|
+    signal_connect("drag-move-position") do |widget, x, y|
       if layout
         layout.move(widget, x, y)
         true
@@ -102,7 +102,7 @@ class DraggableWidget < Gtk::EventBox
       false
     end
   end
-    
+
   def drag_end
     @dragging = false
     true
@@ -110,7 +110,7 @@ class DraggableWidget < Gtk::EventBox
 end
 
 window = Gtk::Window.new("Draggable Widget sample")
-window.signal_connect("destroy"){Gtk.main_quit}
+window.signal_connect("destroy") {Gtk.main_quit}
 
 layout = Gtk::Layout.new
 
