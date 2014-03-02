@@ -2,6 +2,104 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.1.1: 2014-03-29
+
+(memo: 2.1.0..e6aa43c98d76de0ba4f5250c6f25acbb7a45f7a4 are listed.)
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Stopped to use deprecated API internally in G_REPLACE_SET_PROPERTY.
+    * Added RG_REPLACE_SET_PROPERTY.
+
+==== Ruby/GTK2
+
+  * Fixes
+    * [windows] Suppressed IME related warnings.
+      [Reported by OBATA Akio]
+    * [GitHub#222] Fixed a bug that Gdk::EventAny related methods
+      aren't used by other Gdk::Event classes.
+      [Reported by mtasaka]
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Added Gdk::Display#device_manager.
+    * Added Gdk::Window#display.
+    * Suppressed warnings on startup.
+
+  * Fixes
+    * [windows] Suppressed IME related warnings.
+    * Fixed a bug that Gdk::DeviceManager is wrong object.
+    * [GitHub#222] Fixed a bug that Gdk::EventAny related methods
+      aren't used by other Gdk::Event classes.
+      [Reported by mtasaka]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Added Gtk::MenuButton.
+    * [GitHub#219] Added Gtk::LevelBar. [Patch by cosmo0920]
+    * Added Gtk::IconView.
+    * [GitHub#206] Added Gtk::HeaderBar. [Reported by dark-yux]
+    * [GitHub#223] Added Gtk::Stack. [Patch by cosmo0920]
+    * Suppressed warnings on startup.
+
+==== Ruby/GIO2
+
+  * Fixes
+    * [SF.net#186] Fixed a bug that Gio::ContentType module functions
+      raises "no implicit conversion" error.
+      [Reported by neversleep1911]
+
+==== Ruby/Pango
+
+  * Improvements
+    * [ruby-gnome2-devel-en] Re-supported build on CentOS 5.
+      [Reported by Grant Schoep]
+
+==== Ruby/Poppler
+
+  * Improvements
+    * Suppressed a warning on startup.
+
+==== Ruby/GtkSourceView2
+
+  * Improvements
+    * Suppressed warnings on startup.
+
+  * Fixes
+    * [GitHub#215] Fixed a return value for
+      GtkSource#get_mark_category_background.
+      [Reported by mtasaka]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * [GitHub#216] Suppressed warnings on armv7hl.
+      [Reported by mtasaka]
+    * Supported freeing interface.
+
+  * Fixes
+    * [GitHub#216] Fixed test failures on i686 environment.
+      [Reported by mtasaka]
+
+==== Ruby/ClutterGTK
+
+  * Improvements
+    * Added duplicated Clutter.init check.
+
+=== Thanks
+
+  * OBATA Akio
+  * mtasaka
+  * cosmo0920
+  * Grant Schoep
+  * dark-yux
+  * neversleep1911
+
 == Ruby-GNOME2 2.1.0: 2013-12-29
 
 Ruby 2.1.0 support release!
