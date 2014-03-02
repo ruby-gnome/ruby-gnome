@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2013  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,23 +19,32 @@
 ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
 ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
+glib_base = File.join(ruby_gnome2_base, "glib2")
+gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+gio2_base = File.join(ruby_gnome2_base, "gio2-gi")
+
 modules = [
-  "glib2",
-  "gio2",
+  [glib_base, "glib2"],
+  [gobject_introspection_base, "gobject-introspection"],
+  [gio2_base, "gio2-gi"],
 ]
 
-modules.each do |name|
-  base = File.join(ruby_gnome2_base, name)
-  makefile = File.join(base, "Makefile")
+modules.each do |target, module_name|
+  makefile = File.join(target, "Makefile")
   if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{base.dump} > /dev/null` or exit(false)
+    `make -C #{target.dump} > /dev/null` or exit(false)
   end
-  $LOAD_PATH.unshift(File.join(base, "ext", name))
-  $LOAD_PATH.unshift(File.join(base, "lib"))
+  $LOAD_PATH.unshift(File.join(target, "ext", module_name))
+  $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
-$LOAD_PATH.unshift(File.join(ruby_gnome2_base, "glib2", "test"))
+$LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
+
+$VERBOSE = false # TODO: remove me
+
+$LOAD_PATH.unshift(File.join(gio2_base, "test"))
+require "gio2-gi-test-utils"
 
 require "gio2"
 

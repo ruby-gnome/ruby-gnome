@@ -15,8 +15,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestContentType < Test::Unit::TestCase
-  def test_get_icon
+  def setup
+    @content_type = Gio::ContentType.new("image/jpeg")
+  end
+
+  def test_icon
     assert_equal("image-jpeg",
-                 Gio::ContentType.get_icon("image/jpeg").names.first)
+                 @content_type.icon.names.first)
   end
 end

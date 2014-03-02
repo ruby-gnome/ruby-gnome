@@ -1,6 +1,6 @@
-# -*- ruby -*-
+#!/usr/bin/env ruby
 #
-# Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,16 +16,27 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/package-task"
+ruby_gnome2_base = File.join(File.dirname(__FILE__), "..", "..")
+ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/GIO2 is a Ruby binding of gio-2.x."
-  package.description = "Ruby/GIO2 is a Ruby binding of gio-2.x."
-  package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
-  package.windows.gobject_introspection_dependencies = ["glib2"]
+modules = [
+  "glib2",
+  "gio2",
+]
+
+modules.each do |name|
+  base = File.join(ruby_gnome2_base, name)
+  makefile = File.join(base, "Makefile")
+  if File.exist?(makefile) and system("which make > /dev/null")
+    `make -C #{base.dump} > /dev/null` or exit(false)
+  end
+  $LOAD_PATH.unshift(File.join(base, "ext", name))
+  $LOAD_PATH.unshift(File.join(base, "lib"))
 end
-package_task.define
+
+$LOAD_PATH.unshift(File.join(ruby_gnome2_base, "glib2", "test"))
+require "glib-test-init"
+
+require "gio2"
+
+exit Test::Unit::AutoRunner.run(true)
