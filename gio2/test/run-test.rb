@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,12 +21,12 @@ ruby_gnome2_base = File.expand_path(ruby_gnome2_base)
 
 glib_base = File.join(ruby_gnome2_base, "glib2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-gio2_base = File.join(ruby_gnome2_base, "gio2-gi")
+gio2_base = File.join(ruby_gnome2_base, "gio2")
 
 modules = [
   [glib_base, "glib2"],
   [gobject_introspection_base, "gobject-introspection"],
-  [gio2_base, "gio2-gi"],
+  [gio2_base, "gio2"],
 ]
 
 modules.each do |target, module_name|
@@ -44,7 +44,7 @@ require "glib-test-init"
 $VERBOSE = false # TODO: remove me
 
 $LOAD_PATH.unshift(File.join(gio2_base, "test"))
-require "gio2-gi-test-utils"
+require "gio2-test-utils"
 
 require "gio2"
 
