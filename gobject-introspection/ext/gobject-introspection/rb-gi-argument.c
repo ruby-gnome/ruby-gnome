@@ -550,14 +550,35 @@ rb_gi_return_argument_free_everything_array(GIArgument *argument,
 }
 
 static void
+rb_gi_return_argument_free_everything_interface_struct(GIArgument *argument,
+                                                       GType       gtype)
+{
+    if (!argument->v_pointer) {
+        return;
+    }
+
+    if (!gtype) {
+        xfree(argument->v_pointer);
+    }
+
+    if (G_TYPE_IS_BOXED(gtype)) {
+        g_boxed_free(gtype, argument->v_pointer);
+    } else {
+        rbgobj_instance_unref(argument->v_pointer);
+    }
+}
+
+static void
 rb_gi_return_argument_free_everything_interface(GIArgument *argument,
                                                 GITypeInfo *type_info)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
+    GType gtype;
 
     interface_info = g_type_info_get_interface(type_info);
     interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
     g_base_info_unref(interface_info);
 
     switch (interface_type) {
@@ -574,7 +595,7 @@ rb_gi_return_argument_free_everything_interface(GIArgument *argument,
                  "TODO: free GIArgument(interface)[callback] everything");
         break;
       case GI_INFO_TYPE_STRUCT:
-        rbgobj_instance_unref(argument->v_pointer);
+        rb_gi_return_argument_free_everything_interface_struct(argument, gtype);
         break;
       case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
