@@ -33,7 +33,6 @@
 
 #include <rb_cairo.h>
 #include <cairo-gobject.h>
-#include <rbgio2.h>
 #include <rbpango.h>
 #include <rbgdk-pixbuf.h>
 #include <rbgdk3.h>
