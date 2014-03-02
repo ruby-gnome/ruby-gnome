@@ -70,6 +70,8 @@ extern "C" {
     G_REPLACE_SET_PROPERTY(RG_TARGET_NAMESPACE, #name, rg_set_ ## name, args)
 #define RG_REPLACE_GET_PROPERTY(name, args)   \
     G_REPLACE_GET_PROPERTY(RG_TARGET_NAMESPACE, #name, rg_get_ ## name, args)
+#define RG_REPLACE_ACTION(name, args)                               \
+    G_REPLACE_ACTION(RG_TARGET_NAMESPACE, #name, rg_ ## name, args)
 
 #define G_REPLACE_SET_PROPERTY(klass, name, function, args) \
     rb_undef_method(klass, "set_" name); \
