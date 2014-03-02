@@ -108,8 +108,8 @@ Init_gtk_sourceiter (VALUE mGtk)
     /*
      * They are override original Gtk::TextIter#[for|back]ward_search
      */
-    RG_DEF_METHOD(forward_search, -1);
-    RG_DEF_METHOD(backward_search, -1);
+    RG_REPLACE_ACTION(forward_search, -1);
+    RG_REPLACE_ACTION(backward_search, -1);
 
     G_DEF_CLASS(GTK_TYPE_SOURCE_SEARCH_FLAGS, "SourceSearchFlags", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GTK_TYPE_SOURCE_SEARCH_FLAGS, "GTK_");
