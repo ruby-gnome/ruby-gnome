@@ -23,5 +23,10 @@ module Gio
       source.set_callback(&block)
       source
     end
+
+    alias_method :write_nonblocking_raw, :write_nonblocking
+    def write_nonblocking(data)
+      write_nonblocking_raw(data, data.bytesize)
+    end
   end
 end

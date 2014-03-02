@@ -39,4 +39,15 @@ class TestPollableOutputStream < Test::Unit::TestCase
     @loop.run
     assert_true(called)
   end
+
+  def test_write_nonblocking
+    data = "Hello\n"
+    assert_equal(data.bytesize, @stream.write_nonblocking(data))
+    client = @server.accept
+    begin
+      assert_equal(data, client.gets)
+    ensure
+      client.close
+    end
+  end
 end
