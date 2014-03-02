@@ -929,6 +929,20 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
     g_base_info_unref(interface_info);
 }
 
+static void
+rb_gi_value_argument_from_ruby_void(GIArgument *argument, GITypeInfo *type_info,
+                                    VALUE rb_argument)
+{
+    if (!g_type_info_is_pointer(type_info)) {
+        return;
+    }
+
+    if (RB_TYPE_P(rb_argument, RUBY_T_STRING)) {
+        argument->v_pointer = RSTRING_PTR(rb_argument);
+    } else {
+        argument->v_pointer = GUINT_TO_POINTER(NUM2ULONG(rb_argument));
+    }
+}
 
 GIArgument *
 rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
@@ -941,9 +955,7 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
     type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
       case GI_TYPE_TAG_VOID:
-        if (g_type_info_is_pointer(type_info)) {
-            argument->v_pointer = GUINT_TO_POINTER(NUM2ULONG(rb_argument));
-        }
+        rb_gi_value_argument_from_ruby_void(argument, type_info, rb_argument);
         break;
       case GI_TYPE_TAG_BOOLEAN:
         argument->v_boolean = RVAL2CBOOL(rb_argument);
