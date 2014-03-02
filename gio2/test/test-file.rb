@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestFile < Test::Unit::TestCase
-  include GioGITestUtils
+  include GioTestUtils::Fixture
 
   class TestContentType < self
     def test_guess_content_type

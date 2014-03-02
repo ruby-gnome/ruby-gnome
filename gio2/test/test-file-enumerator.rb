@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestFileEnumerator < Test::Unit::TestCase
-  include GioGITestUtils
+  include GioTestUtils::Fixture
 
   def test_container
     path = File.dirname(__FILE__)
