@@ -31,7 +31,12 @@ module Gio
         buffer_size = 8192
         buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
         loop do
-          read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
+          begin
+            read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
+          rescue GLib::Error
+            break if $!.code == IOErrorEnum::WOULD_BLOCK
+            raise
+          end
           all << buffer.byteslice(0, read_bytes)
           break if read_bytes != buffer_size
         end
