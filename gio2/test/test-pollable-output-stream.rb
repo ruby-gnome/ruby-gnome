@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,8 +14,29 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "test-unit"
-require "test/unit/notify"
+class TestPollableOutputStream < Test::Unit::TestCase
+  include GioTestUtils::SocketClient
 
-require "gio2-test-utils/fixture"
-require "gio2-test-utils/socket-client"
+  def setup
+    setup_socket_client
+    @stream = @connection.output_stream
+  end
+
+  def teardown
+    teardown_socket_client
+  end
+
+  def test_create_socket
+    called = false
+    source = @stream.create_source do |stream|
+      called = true
+      false
+    end
+    source.attach
+    GLib::Idle.add do
+      @loop.quit
+    end
+    @loop.run
+    assert_true(called)
+  end
+end
