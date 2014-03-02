@@ -34,6 +34,22 @@ module Gio
           end
         end
       end
+      require_extension
+      require_libraries
+    end
+
+    def require_extension
+      begin
+        major, minor, _ = RUBY_VERSION.split(/\./)
+        require "#{major}.#{minor}/gio2.so"
+      rescue LoadError
+        require "gio2.so"
+      end
+    end
+
+    def require_libraries
+      require "gio2/pollable-input-stream"
+      require "gio2/pollable-output-stream"
     end
 
     def define_content_type_class
