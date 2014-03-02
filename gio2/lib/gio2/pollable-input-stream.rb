@@ -23,5 +23,25 @@ module Gio
       source.set_callback(&block)
       source
     end
+
+    alias_method :read_nonblocking_raw, :read_nonblocking
+    def read_nonblocking(size=nil)
+      if size.nil?
+        all = "".force_encoding("ASCII-8BIT")
+        buffer_size = 8192
+        buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
+        loop do
+          read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
+          all << buffer.byteslice(0, read_bytes)
+          break if read_bytes != buffer_size
+        end
+        all
+      else
+        buffer = " " * size
+        read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
+        buffer.replace(buffer.byteslice(0, read_bytes))
+        buffer
+      end
+    end
   end
 end

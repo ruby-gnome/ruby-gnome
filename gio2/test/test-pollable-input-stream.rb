@@ -43,4 +43,12 @@ class TestPollableInputStream < Test::Unit::TestCase
     @loop.run
     assert_true(called)
   end
+
+  def test_read_nonblocking
+    data = "Hello\n"
+    client = @server.accept
+    client.write(data)
+    client.flush
+    assert_equal(data, @stream.read_nonblocking)
+  end
 end
