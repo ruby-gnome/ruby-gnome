@@ -51,21 +51,6 @@ rg_get_content_area(VALUE self)
 }
 
 static VALUE
-rg_get_message_type(VALUE self)
-{
-    return GENUM2RVAL(gtk_info_bar_get_message_type(_SELF(self)),
-                      GTK_TYPE_MESSAGE_TYPE);
-}
-
-static VALUE
-rg_set_message_type(VALUE self, VALUE type)
-{
-    gtk_info_bar_set_message_type(_SELF(self),
-                                  RVAL2GENUM(type, GTK_TYPE_MESSAGE_TYPE));
-    return self;
-}
-
-static VALUE
 rg_set_default_response(VALUE self, VALUE response_id)
 {
     gtk_info_bar_set_default_response(_SELF(self),
@@ -130,10 +115,6 @@ Init_gtk_infobar(VALUE mGtk)
     RG_DEF_ALIAS("action_area", "get_action_area");
     RG_DEF_METHOD(get_content_area, 0);
     RG_DEF_ALIAS("content_area", "get_content_area");
-    RG_DEF_METHOD(get_message_type, 0);
-    RG_DEF_ALIAS("message_type", "get_message_type");
-    RG_DEF_METHOD(set_message_type, 1);
-    G_DEF_SETTER(RG_TARGET_NAMESPACE, "message_type");
     RG_DEF_METHOD(set_default_response, 1);
     RG_DEF_METHOD(add_action_widget, 2);
     RG_DEF_METHOD(add_button, 2);
