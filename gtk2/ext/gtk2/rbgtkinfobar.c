@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "global.h" 
+#include "global.h"
 
 #if GTK_CHECK_VERSION(2,18,0)
 #define RG_TARGET_NAMESPACE cInfoBar
@@ -62,7 +62,7 @@ static VALUE
 rg_add_action_widget(VALUE self, VALUE widget, VALUE response_id)
 {
     gtk_info_bar_add_action_widget(_SELF(self),
-                                   GTK_WIDGET(RVAL2GOBJ(widget)), 
+                                   GTK_WIDGET(RVAL2GOBJ(widget)),
                                    RVAL2GENUM(response_id, GTK_TYPE_RESPONSE_TYPE));
     return self;
 }
@@ -76,7 +76,7 @@ rg_add_button(VALUE self, VALUE button_text, VALUE response_id)
     } else {
         name = RVAL2CSTR(button_text);
     }
-    return GOBJ2RVAL(gtk_info_bar_add_button(_SELF(self), name, 
+    return GOBJ2RVAL(gtk_info_bar_add_button(_SELF(self), name,
                                              RVAL2GENUM(response_id, GTK_TYPE_RESPONSE_TYPE)));
 }
 
@@ -104,7 +104,7 @@ rg_response(VALUE self, VALUE response_id)
 }
 #endif
 
-void 
+void
 Init_gtk_infobar(VALUE mGtk)
 {
 #if GTK_CHECK_VERSION(2,18,0)
@@ -125,4 +125,3 @@ Init_gtk_infobar(VALUE mGtk)
     RG_DEF_METHOD(response, 1);
 #endif
 }
-
