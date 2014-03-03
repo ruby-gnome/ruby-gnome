@@ -133,7 +133,7 @@ module Gio
       when "guess_for_tree"
         @content_type_guess_for_tree_info = info
       when "guess"
-        vlaidate = lambda do |arguments|
+        validate = lambda do |arguments|
           method_name = "#{@content_type_class}.#{name}"
           validate_arguments(info, method_name, arguments)
         end
