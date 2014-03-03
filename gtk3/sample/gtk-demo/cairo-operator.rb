@@ -31,7 +31,7 @@ module Demo
       @drawing_area = child
       remove(@drawing_area)
       
-      vbox = Gtk::VBox.new
+      vbox = Gtk::Box.new(:vertical)
       vbox.pack_start(@drawing_area, :expand => true, :fill => true)
       vbox.pack_start(operator_selector, :expand => false, :fill => false)
       add(vbox)
@@ -62,7 +62,7 @@ module Demo
     end
 
     def operator_selector
-      combo = Gtk::ComboBox.new
+      combo = Gtk::ComboBoxText.new
       operators = []
       Cairo.constants.each do |name|
         operators << name if /^OPERATOR_/ =~ name
