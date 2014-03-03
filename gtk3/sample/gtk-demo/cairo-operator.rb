@@ -18,12 +18,12 @@ From http://cairographics.org/samples/operator_add.html,
      http://cairographics.org/samples/operator_saturate.html and
      http://cairographics.org/samples/operator_xor.html
 =end
-require 'common'
+require "common"
 
 module Demo
   class CairoOperator < CairoWindow
     def initialize
-      super('cairo operator')
+      super("cairo operator")
       @operator = Cairo::OPERATOR_ADD
 
       set_default_size(400, 400)
