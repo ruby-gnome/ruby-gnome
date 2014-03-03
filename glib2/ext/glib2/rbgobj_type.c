@@ -266,22 +266,27 @@ const RGObjClassInfo *
 rbgobj_lookup_class_by_gtype_full(GType gtype, VALUE parent,
                                   gboolean create_class)
 {
+    const RGObjClassInfo *info;
     RGObjClassByGtypeData data;
+
+    info = rbgobj_lookup_class_by_gtype_without_lock(gtype, parent, FALSE);
+    if (info) {
+        return info;
+    }
+
+    if (!create_class) {
+        return NULL;
+    }
 
     data.gtype = gtype;
     data.parent = parent;
     data.create_class = create_class;
 
-    if (create_class) {
-        rb_funcall(lookup_class_mutex, id_lock, 0);
-        return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
-                                           (VALUE)&data,
-                                           rbgobj_lookup_class_by_gtype_ensure,
-                                           (VALUE)&data);
-    } else {
-        return rbgobj_lookup_class_by_gtype_without_lock(gtype, parent,
-                                                         create_class);
-    }
+    rb_funcall(lookup_class_mutex, id_lock, 0);
+    return (RGObjClassInfo *)rb_ensure(rbgobj_lookup_class_by_gtype_body,
+                                       (VALUE)&data,
+                                       rbgobj_lookup_class_by_gtype_ensure,
+                                       (VALUE)&data);
 }
 
 VALUE
