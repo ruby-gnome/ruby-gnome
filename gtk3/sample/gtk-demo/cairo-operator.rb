@@ -27,10 +27,10 @@ module Demo
       @operator = Cairo::OPERATOR_ADD
 
       set_default_size(400, 400)
-      
+
       @drawing_area = child
       remove(@drawing_area)
-      
+
       vbox = Gtk::Box.new(:vertical)
       vbox.pack_start(@drawing_area, :expand => true, :fill => true)
       vbox.pack_start(operator_selector, :expand => false, :fill => false)
@@ -47,9 +47,9 @@ module Demo
         cr.set_source(image, 0.0, 0.0)
         cr.paint
       end
-      
+
       cr.set_operator(@operator)
-      
+
       cr.set_source_rgba(1, 0, 0, 0.5)
       cr.rectangle(0.2, 0.2, 0.5, 0.5)
       cr.fill
