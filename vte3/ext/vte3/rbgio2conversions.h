@@ -24,4 +24,4 @@
 #define RVAL2GCANCELLABLE(o)               (G_CANCELLABLE(RVAL2GOBJ(o)))
 #define RVAL2GOUTPUTSTREAM(o)              (G_OUTPUT_STREAM(RVAL2GOBJ(o)))
 
-#endif /* __RBGIO2CONVERSIONS_H__ */
+#endif /* __VTE3_RBGIO2CONVERSIONS_H__ */
