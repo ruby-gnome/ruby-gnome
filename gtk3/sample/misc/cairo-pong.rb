@@ -171,8 +171,8 @@ module Pong
       super()
       @speed = speed
 
-      self.title = 'Pong Demonstration'
-      signal_connect('destroy') { Gtk.main_quit }
+      self.title = "Pong Demonstration"
+      signal_connect("destroy") { Gtk.main_quit }
       signal_connect("key_press_event") do |widget, event|
         if event.state.control_mask? and event.keyval == Gdk::Keyval::GDK_q
           destroy
@@ -202,7 +202,7 @@ module Pong
     end
 
     def set_draw
-      @drawing_area.signal_connect('draw') do |widget, cr|
+      @drawing_area.signal_connect("draw") do |widget, cr|
         window = widget.window
         cr.scale(window.width, window.height)
         @field.draw(cr)
