@@ -190,7 +190,7 @@ rg_remove_accelerator(VALUE self, VALUE accel, VALUE key, VALUE mod)
 static VALUE
 rg_set_accel_path(VALUE self, VALUE accel_path, VALUE accel_group)
 {
-    gtk_widget_set_accel_path(_SELF(self), RVAL2CSTR(accel_path), 
+    gtk_widget_set_accel_path(_SELF(self), RVAL2CSTR(accel_path),
                               GTK_ACCEL_GROUP(RVAL2GOBJ(accel_group)));
     return self;
 }
@@ -253,7 +253,7 @@ rg_set_state(VALUE self, VALUE state)
 static VALUE
 rg_set_parent_window(VALUE self, VALUE parent_window)
 {
-    gtk_widget_set_parent_window(_SELF(self), 
+    gtk_widget_set_parent_window(_SELF(self),
                                  GDK_WINDOW(RVAL2GOBJ(parent_window)));
     return self;
 }
@@ -526,7 +526,7 @@ rg_modify_base(VALUE self, VALUE state, VALUE color)
 static VALUE
 rg_modify_font(VALUE self, VALUE font_desc)
 {
-    gtk_widget_modify_font(_SELF(self), 
+    gtk_widget_modify_font(_SELF(self),
                            (PangoFontDescription*)RVAL2BOXED(font_desc, PANGO_TYPE_FONT_DESCRIPTION));
     return self;
 }
@@ -535,7 +535,7 @@ rg_modify_font(VALUE self, VALUE font_desc)
 static VALUE
 rg_modify_cursor(VALUE self, VALUE primary, VALUE seconday)
 {
-    gtk_widget_modify_cursor(_SELF(self), 
+    gtk_widget_modify_cursor(_SELF(self),
                              RVAL2BOXED(primary, GDK_TYPE_COLOR),
                              RVAL2BOXED(seconday, GDK_TYPE_COLOR));
     return self;
@@ -667,10 +667,10 @@ rg_s_install_style_property(VALUE self, VALUE spec)
     if (rb_block_given_p()){
         VALUE func = rb_block_proc();
         rb_hash_aset(style_prop_func_table, spec, func);
-        gtk_widget_class_install_style_property_parser(gclass, pspec, 
+        gtk_widget_class_install_style_property_parser(gclass, pspec,
                                                        (GtkRcPropertyParser)rc_property_parser);
     } else {
-        gtk_widget_class_install_style_property(gclass, pspec); 
+        gtk_widget_class_install_style_property(gclass, pspec);
     }
     return self;
 }
@@ -732,8 +732,8 @@ rg_s_style_properties(int argc, VALUE *argv, VALUE self)
 static VALUE
 rg_region_intersect(VALUE self, VALUE region)
 {
-    return BOXED2RVAL(gtk_widget_region_intersect(_SELF(self), 
-                                                  (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)), 
+    return BOXED2RVAL(gtk_widget_region_intersect(_SELF(self),
+                                                  (GdkRegion*)RVAL2BOXED(region, GDK_TYPE_REGION)),
                       GDK_TYPE_REGION);
 }
 
@@ -1015,7 +1015,7 @@ rg_set_requisition(VALUE self, VALUE w, VALUE h)
     GtkRequisition *r = &(_SELF(self)->requisition);
     r->width  = NUM2INT(w);
     r->height = NUM2INT(h);
-    return self;    
+    return self;
 }
 
 static VALUE
@@ -1034,7 +1034,7 @@ static VALUE
 widget_signal_size_request(G_GNUC_UNUSED guint num, const GValue *values)
 {
     GtkRequisition* req = (GtkRequisition*)g_value_get_boxed(&values[1]);
-    return rb_ary_new3(2, GVAL2RVAL(&values[0]), 
+    return rb_ary_new3(2, GVAL2RVAL(&values[0]),
                        rb_ary_new3(2, INT2NUM(req->width), INT2NUM(req->height)));
 }
 static VALUE
@@ -1044,7 +1044,7 @@ widget_signal_size_allocate(G_GNUC_UNUSED guint num, const GValue *values)
     return rb_ary_new3(2, GVAL2RVAL(&values[0]), BOXED2RVAL(alloc, GTK_TYPE_ALLOCATION));
 }
 
-void 
+void
 Init_gtk_widget(VALUE mGtk)
 {
     VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(GTK_TYPE_WIDGET, "Widget", mGtk);
@@ -1177,7 +1177,7 @@ Init_gtk_widget(VALUE mGtk)
     rb_define_method(RG_TARGET_NAMESPACE, "toplevel?",  widget_TOPLEVEL, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "no_window?", widget_NO_WINDOW, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "realized?",  widget_REALIZED, 0);
-    rb_define_method(RG_TARGET_NAMESPACE, "mapped?",    widget_MAPPED, 0); 
+    rb_define_method(RG_TARGET_NAMESPACE, "mapped?",    widget_MAPPED, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "drawable?",  widget_DRAWABLE, 0);
     rb_define_method(RG_TARGET_NAMESPACE, "parent_sensitive?", widget_PARENT_SENSITIVE, 0);
     /* This method's name avoid to sensitive? of a property variables. */
