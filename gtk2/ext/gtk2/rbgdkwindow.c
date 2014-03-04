@@ -576,17 +576,9 @@ rg_set_background(VALUE self, VALUE color)
 static VALUE
 rg_set_back_pixmap(VALUE self, VALUE pixmap, VALUE parent_relative)
 {
-    gdk_window_set_back_pixmap(_SELF(self), 
+    gdk_window_set_back_pixmap(_SELF(self),
                                GDK_PIXMAP(RVAL2GOBJ(pixmap)),
                                RVAL2CBOOL(parent_relative));
-    return self;
-}
-
-static VALUE
-rg_set_cursor(VALUE self, VALUE cursor)
-{
-    gdk_window_set_cursor(_SELF(self),
-                          RVAL2BOXED(cursor, GDK_TYPE_CURSOR));
     return self;
 }
 
@@ -1005,7 +997,6 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_title, 1);
     RG_DEF_METHOD(set_background, 1);
     RG_DEF_METHOD(set_back_pixmap, 2);
-    RG_DEF_METHOD(set_cursor, 1);
     RG_DEF_METHOD(user_data, 0);
     RG_DEF_METHOD(geometry, 0);
     RG_DEF_METHOD(set_geometry_hints, 2);
