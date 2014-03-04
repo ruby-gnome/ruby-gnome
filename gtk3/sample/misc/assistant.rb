@@ -12,12 +12,6 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 10, 0)
-  puts "This sample requires GTK+ 2.10.0 or later"
-  puts str
-  exit
-end
-
 class AssistantRunner
   def initialize
     @simple_assistant = nil
