@@ -54,7 +54,7 @@ class AssistantRunner
   end
 
   def add_completion_test_page(assistant, text, visible, complete)
-    page = Gtk::VBox.new(0, 0)
+    page = Gtk::Box.new(:vertical, 0)
     check = Gtk::CheckButton.new("Complete")
     page.add(Gtk::Label.new(text))
     page.add(check)
@@ -77,11 +77,11 @@ class AssistantRunner
   def prepare_cb(assistant, page)
     if page.is_a?(Gtk::Label)
       puts "prepare: #{page.text}"
-    elsif assistant.get_page_type(page) == Gtk::Assistant::PAGE_PROGRESS
+    elsif assistant.get_page_type(page) == :progress
       progress = page.child
       assistant.set_page_complete(page, false)
       progress.fraction = 0.0
-      Gtk.timeout_add(300) do
+      GLib::Timeout.add(300) do
         page = assistant.get_nth_page(assistant.current_page)
         progress = page.child
         value = progress.fraction = progress.fraction + 0.1
@@ -220,15 +220,15 @@ class AssistantRunner
       retval
     end
 
-    page = Gtk::VBox.new(false, 6)
+    page = Gtk::Box.new(:vertical, 6)
     button = Gtk::RadioButton.new("branch A")
-    page.pack_start(button, false, false, 0)
+    page.pack_start(button, :expand => false, :fill => false, :padding => 0)
     button.signal_connect("toggled") do
       @selected_branch = "A"
     end
     button.active = true
     button = Gtk::RadioButton.new(button, "branch B")
-    page.pack_start(button, false, false, 0)
+    page.pack_start(button, :expand => false, :fill => false, :padding => 0)
     button.signal_connect("toggled") do
       @selected_branch = "B"
     end
@@ -275,7 +275,7 @@ class AssistantRunner
       prepare_cb(_assistant, page)
     end
 
-    button = Gtk::Button.new(Gtk::Stock::STOP)
+    button = Gtk::Button.new(:stock_id => Gtk::Stock::STOP)
     button.show
     assistant.add_action_widget(button)
 
@@ -323,19 +323,19 @@ if ENV["RTL"]
   Gtk::Widget.default_direction = Gtk::Widget::TEXT_DIR_RTL
 end
 
-window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
+window = Gtk::Window.new(:toplevel)
 window.signal_connect("destroy") { Gtk.main_quit }
 window.signal_connect("delete-event") { false }
 
-box = Gtk::VBox.new(false, 6)
+box = Gtk::Box.new(:vertical, 6)
 window.add(box)
 
 buttons.each do |label, callback|
-  button = Gtk::Button.new(label)
+  button = Gtk::Button.new(:label => label)
   button.signal_connect("clicked") do
     callback.call
   end
-  box.pack_start(button, true, true, 0)
+  box.pack_start(button, :expand => true, :fill => true, :padding => 0)
 end
 window.show_all
 Gtk.main
