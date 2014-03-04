@@ -191,7 +191,9 @@ module Pong
 
       vb = Gtk::Box.new(:vertical, 5)
       vb.border_width = 10
-      vb.pack_start(@drawing_area, :expand => true, :fill => true, :padding => 0)
+      vb.pack_start(@drawing_area, :expand  => true,
+                                   :fill    => true,
+                                   :padding => 0)
       vb.show_all
       add(vb)
 
