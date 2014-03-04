@@ -189,13 +189,13 @@ module Pong
       @drawing_area = Gtk::DrawingArea.new
       set_draw
 
-      vb = Gtk::VBox.new(false, 5)
+      vb = Gtk::Box.new(:vertical, 5)
       vb.border_width = 10
-      vb.pack_start(@drawing_area, true, true, 0)
+      vb.pack_start(@drawing_area, :expand => true, :fill => true, :padding => 0)
       vb.show_all
       add(vb)
 
-      Gtk.timeout_add(@speed) do
+      GLib::Timeout.add(@speed) do
         @field.update
         @drawing_area.queue_draw unless @drawing_area.destroyed?
       end
