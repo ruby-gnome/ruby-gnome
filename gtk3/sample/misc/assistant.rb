@@ -10,7 +10,7 @@
   $Id: assistant.rb,v 1.1 2006/11/23 08:39:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 class AssistantRunner
   def initialize
@@ -59,7 +59,7 @@ class AssistantRunner
     page.add(Gtk::Label.new(text))
     page.add(check)
     check.active = complete
-    check.signal_connect('toggled') do
+    check.signal_connect("toggled") do
       complete = check.active?
       assistant.set_page_complete(page, complete)
     end
@@ -97,18 +97,18 @@ class AssistantRunner
   def create_simple_assistant
     assistant = Gtk::Assistant.new
     assistant.set_default_size(400, 300)
-    assistant.signal_connect('cancel') do
+    assistant.signal_connect("cancel") do
       puts "cancel"
       assistant.hide
     end
-    assistant.signal_connect('close') do
+    assistant.signal_connect("close") do
       puts "close"
       assistant.hide
     end
-    assistant.signal_connect('apply') do
+    assistant.signal_connect("apply") do
       puts "apply"
     end
-    assistant.signal_connect('prepare') do |_assistant, page|
+    assistant.signal_connect("prepare") do |_assistant, page|
       prepare_cb(_assistant, page)
     end
 
@@ -129,18 +129,18 @@ class AssistantRunner
   def create_generous_assistant
     assistant = Gtk::Assistant.new
     assistant.set_default_size(400, 300)
-    assistant.signal_connect('cancel') do
+    assistant.signal_connect("cancel") do
       puts "cancel"
       assistant.hide
     end
-    assistant.signal_connect('close') do
+    assistant.signal_connect("close") do
       puts "close"
       assistant.hide
     end
-    assistant.signal_connect('apply') do
+    assistant.signal_connect("apply") do
       puts "apply"
     end
-    assistant.signal_connect('prepare') do|_assistant, page|
+    assistant.signal_connect("prepare") do|_assistant, page|
       prepare_cb(_assistant, page)
     end
 
@@ -156,7 +156,7 @@ class AssistantRunner
 
     check = Gtk::CheckButton.new("Next page visible");
     check.active = true
-    check.signal_connect('toggled') do
+    check.signal_connect("toggled") do
       puts "beuh"
       next_page.visible = check.active?
     end
@@ -191,25 +191,25 @@ class AssistantRunner
   def create_nonlinear_assistant
     assistant = Gtk::Assistant.new
     assistant.set_default_size(400, 300)
-    assistant.signal_connect('cancel') do
+    assistant.signal_connect("cancel") do
       puts "cancel"
       assistant.hide
     end
-    assistant.signal_connect('close') do
+    assistant.signal_connect("close") do
       puts "close"
       assistant.hide
     end
-    assistant.signal_connect('apply') do
+    assistant.signal_connect("apply") do
       puts "apply"
     end
-    assistant.signal_connect('prepare') do |_assistant, page|
+    assistant.signal_connect("prepare") do |_assistant, page|
       prepare_cb(_assistant, page)
     end
 
     assistant.set_forward_page_func do |current_page|
       retval = -1
       if current_page == 0
-        if @selected_branch == 'A'
+        if @selected_branch == "A"
           retval = 1
         else
           retval = 2
@@ -221,16 +221,16 @@ class AssistantRunner
     end
 
     page = Gtk::VBox.new(false, 6)
-    button = Gtk::RadioButton.new('branch A')
+    button = Gtk::RadioButton.new("branch A")
     page.pack_start(button, false, false, 0)
-    button.signal_connect('toggled') do
-      @selected_branch = 'A'
+    button.signal_connect("toggled") do
+      @selected_branch = "A"
     end
     button.active = true
-    button = Gtk::RadioButton.new(button, 'branch B')
+    button = Gtk::RadioButton.new(button, "branch B")
     page.pack_start(button, false, false, 0)
-    button.signal_connect('toggled') do
-      @selected_branch = 'B'
+    button.signal_connect("toggled") do
+      @selected_branch = "B"
     end
     page.show_all
     assistant.append_page(page)
@@ -260,18 +260,18 @@ class AssistantRunner
   def create_full_featured_assistant
     assistant = Gtk::Assistant.new
     assistant.set_default_size(400, 300)
-    assistant.signal_connect('cancel') do
+    assistant.signal_connect("cancel") do
       puts "cancel"
       assistant.hide
     end
-    assistant.signal_connect('close') do
+    assistant.signal_connect("close") do
       puts "close"
       assistant.hide
     end
-    assistant.signal_connect('apply') do
+    assistant.signal_connect("apply") do
       puts "apply"
     end
-    assistant.signal_connect('prepare') do |_assistant, page|
+    assistant.signal_connect("prepare") do |_assistant, page|
       prepare_cb(_assistant, page)
     end
 
@@ -313,26 +313,26 @@ end
 
 runner = AssistantRunner.new
 buttons = [
-    [ 'simple assistant', proc { runner.run_simple_assistant } ],
-    [ 'generous assistant', proc { runner.run_generous_assistant } ],
-    [ 'nonlinear assistant', proc { runner.run_nonlinear_assistant } ],
-    [ 'full featured assistant', proc { runner.run_full_featured_assistant } ],
+    [ "simple assistant", proc { runner.run_simple_assistant } ],
+    [ "generous assistant", proc { runner.run_generous_assistant } ],
+    [ "nonlinear assistant", proc { runner.run_nonlinear_assistant } ],
+    [ "full featured assistant", proc { runner.run_full_featured_assistant } ],
 ]
 
-if ENV['RTL']
+if ENV["RTL"]
   Gtk::Widget.default_direction = Gtk::Widget::TEXT_DIR_RTL
 end
 
 window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
-window.signal_connect('destroy') { Gtk.main_quit }
-window.signal_connect('delete-event') { false }
+window.signal_connect("destroy") { Gtk.main_quit }
+window.signal_connect("delete-event") { false }
 
 box = Gtk::VBox.new(false, 6)
 window.add(box)
 
 buttons.each do |label, callback|
   button = Gtk::Button.new(label)
-  button.signal_connect('clicked') do
+  button.signal_connect("clicked") do
     callback.call
   end
   box.pack_start(button, true, true, 0)
