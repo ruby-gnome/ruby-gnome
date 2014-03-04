@@ -26,4 +26,12 @@ class TestGdkWindow < Test::Unit::TestCase
       @window.startup_id = nil
     end
   end
+
+  def test_cursor_accessors
+    only_gtk_version(2, 18, 0)
+    arrow_type = Gdk::Cursor::Type::ARROW
+    cursor = Gdk::Cursor.new(arrow_type)
+    @window.cursor = cursor
+    assert_kind_of(Gdk::Cursor, @window.cursor)
+  end
 end
