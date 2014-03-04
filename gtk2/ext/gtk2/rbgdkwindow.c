@@ -31,10 +31,10 @@ static VALUE
 rg_initialize(VALUE self, VALUE parent, VALUE attributes, VALUE attributes_mask)
 {
     GdkWindow* win;
-    win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent), 
-                         (GdkWindowAttr*)RVAL2BOXED(attributes, 
-                                                    GDK_TYPE_WINDOW_ATTR), 
-                         RVAL2GFLAGS(attributes_mask, 
+    win = gdk_window_new(NIL_P(parent) ? NULL : _SELF(parent),
+                         (GdkWindowAttr*)RVAL2BOXED(attributes,
+                                                    GDK_TYPE_WINDOW_ATTR),
+                         RVAL2GFLAGS(attributes_mask,
                                     GDK_TYPE_WINDOW_ATTRIBUTES_TYPE));
     G_INITIALIZE(self, win);
 
@@ -304,7 +304,7 @@ rg_s_constrain_size(G_GNUC_UNUSED VALUE self, VALUE geometry, VALUE flags, VALUE
 
 #if GTK_CHECK_VERSION(2, 12, 0)
 static VALUE
-rg_beep(VALUE self) 
+rg_beep(VALUE self)
 {
     gdk_window_beep(_SELF(self));
     return self;
@@ -315,7 +315,7 @@ static VALUE
 rg_begin_paint(VALUE self, VALUE area)
 {
     if (rb_obj_is_kind_of(area, GTYPE2CLASS(GDK_TYPE_RECTANGLE))){
-        gdk_window_begin_paint_rect(_SELF(self), 
+        gdk_window_begin_paint_rect(_SELF(self),
                                     (GdkRectangle*)RVAL2BOXED(area, GDK_TYPE_RECTANGLE));
     } else {
         gdk_window_begin_paint_region(_SELF(self),
@@ -374,7 +374,7 @@ static VALUE
 rg_update_area(VALUE self)
 {
     GdkRegion* ret = gdk_window_get_update_area(_SELF(self));
-    return BOXED2RVAL(ret, GDK_TYPE_REGION); 
+    return BOXED2RVAL(ret, GDK_TYPE_REGION);
 }
 
 static VALUE
@@ -452,7 +452,7 @@ rg_set_user_data(VALUE self, VALUE user_data)
 static VALUE
 rg_set_override_redirect(VALUE self, VALUE override_redirect)
 {
-    gdk_window_set_override_redirect(_SELF(self), 
+    gdk_window_set_override_redirect(_SELF(self),
                                      RVAL2CBOOL(override_redirect));
     return self;
 }
@@ -486,8 +486,8 @@ rg_set_focus_on_map(VALUE self, VALUE focus_on_map)
 static VALUE
 rg_shape_combine_mask(VALUE self, VALUE shape_mask, VALUE offset_x, VALUE offset_y)
 {
-    gdk_window_shape_combine_mask(_SELF(self), 
-                                  GDK_BITMAP(RVAL2GOBJ(shape_mask)), 
+    gdk_window_shape_combine_mask(_SELF(self),
+                                  GDK_BITMAP(RVAL2GOBJ(shape_mask)),
                                   NUM2INT(offset_x), NUM2INT(offset_y));
     return self;
 }
@@ -513,7 +513,7 @@ rg_merge_child_shapes(VALUE self)
 {
     gdk_window_merge_child_shapes(_SELF(self));
     return self;
-}   
+}
 
 static VALUE
 rg_input_shape_combine_mask(VALUE self, VALUE mask, VALUE x, VALUE y)
@@ -602,7 +602,7 @@ rg_geometry(VALUE self)
 static VALUE
 rg_set_geometry_hints(VALUE self, VALUE geometry, VALUE geom_mask)
 {
-    gdk_window_set_geometry_hints(_SELF(self), 
+    gdk_window_set_geometry_hints(_SELF(self),
                                   NIL_P(geometry) ? (GdkGeometry*)NULL : (GdkGeometry*)RVAL2BOXED(geometry, GDK_TYPE_GEOMETRY),
                                   RVAL2GFLAGS(geom_mask, GDK_TYPE_WINDOW_HINTS));
     return self;
@@ -1083,7 +1083,7 @@ Init_gtk_gdk_window(VALUE mGdk)
     G_DEF_CLASS(GDK_TYPE_WM_FUNCTION, "WMFunction", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, GDK_TYPE_WM_FUNCTION, "GDK_");
 
-    rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));   
+    rb_define_const(RG_TARGET_NAMESPACE, "PARENT_RELATIVE", INT2FIX(GDK_PARENT_RELATIVE));
 
 #ifdef GDK_WINDOWING_X11
     RG_DEF_METHOD(server_time, 0);
