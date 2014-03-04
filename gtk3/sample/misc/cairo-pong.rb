@@ -4,7 +4,7 @@
 
   Original: gtkcairo sample by Evan Martins.
 
-  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team 
+  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: cairo-pong.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
@@ -20,7 +20,7 @@ module Pong
   class CenteredItem
     attr_accessor :x, :y
     attr_reader :width, :height
-    
+
     def initialize(x, y, width, height)
       @x = x
       @y = y
@@ -31,15 +31,15 @@ module Pong
     def min_x
       @x - @width / 2
     end
-  
+
     def max_x
       @x + @width / 2
     end
-  
+
     def min_y
       @y - @height / 2
     end
-  
+
     def max_y
       @y + @height / 2
     end
@@ -53,7 +53,7 @@ module Pong
       cr.fill
     end
   end
-  
+
   class CenteredRect < CenteredItem
     def draw(cr)
       cr.translate(min_x, min_y)
@@ -62,7 +62,7 @@ module Pong
       cr.fill
     end
   end
-  
+
   class Ball < CenteredCircle
     attr_accessor :dx, :dy
     def initialize(dx=0.02, dy=0.02)
@@ -70,7 +70,7 @@ module Pong
       @dx = dx
       @dy = dy
     end
-    
+
     def update
       @x += @dx
       @y += @dy
@@ -83,7 +83,7 @@ module Pong
         @y -= min_y
         @dy *= -1
       end
-      
+
       if max_x > 1
         @x = 1 - (max_x - 1)
         @dx *= -1
@@ -93,13 +93,13 @@ module Pong
       end
     end
   end
-  
+
   class Paddle < CenteredRect
     def initialize(field, x, y)
       super(x, y, 0.05, 0.3)
       @field = field
     end
-    
+
     def update(ball)
       # is the ball coming towards us?
       if (ball.x < @x and ball.dx > 0) or
@@ -112,7 +112,7 @@ module Pong
     def ball_hit?(ball)
       ball.y > min_y and ball.y < max_y
     end
-    
+
     def update_ball(ball)
       if ball_hit?(ball)
         if ball.min_x < @x and ball.max_x > min_x # hit our left side
@@ -128,16 +128,16 @@ module Pong
 
   class Field
     attr_accessor :width, :height
-    
+
     def initialize(margin=0.05)
       @margin = margin
-      
+
       @left_paddle = Paddle.new(self, @margin, 0.5)
       @right_paddle = Paddle.new(self, 1 - @margin, 0.7)
       @paddles = [@left_paddle, @right_paddle]
       @ball = Ball.new
     end
-    
+
     def update
       @paddles.each do |paddle|
         paddle.update(@ball)
@@ -147,7 +147,7 @@ module Pong
         paddle.update_ball(@ball)
       end
     end
-    
+
     def draw(cr)
       cr.set_source_rgba(1, 1, 1)
       cr.rectangle(0, 0, 1, 1)
@@ -160,7 +160,7 @@ module Pong
           cr.save {paddle.draw(cr)}
         end
       end
-      
+
       cr.set_source_rgba(0, 0, 0)
       cr.save {@ball.draw(cr)}
     end
@@ -170,7 +170,7 @@ module Pong
     def initialize(speed=30)
       super()
       @speed = speed
-      
+
       self.title = 'Pong Demonstration'
       signal_connect('destroy') { Gtk.main_quit }
       signal_connect("key_press_event") do |widget, event|
