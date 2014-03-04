@@ -582,6 +582,7 @@ rg_set_back_pixmap(VALUE self, VALUE pixmap, VALUE parent_relative)
     return self;
 }
 
+#if !GTK_CHECK_VERSION(2,18, 0)
 static VALUE
 rg_set_cursor(VALUE self, VALUE cursor)
 {
@@ -589,6 +590,7 @@ rg_set_cursor(VALUE self, VALUE cursor)
                           RVAL2BOXED(cursor, GDK_TYPE_CURSOR));
     return self;
 }
+#endif
 
 static VALUE
 rg_user_data(VALUE self)
@@ -1005,7 +1007,9 @@ Init_gtk_gdk_window(VALUE mGdk)
     RG_DEF_METHOD(set_title, 1);
     RG_DEF_METHOD(set_background, 1);
     RG_DEF_METHOD(set_back_pixmap, 2);
+#if !GTK_CHECK_VERSION(2, 18, 0)
     RG_DEF_METHOD(set_cursor, 1);
+#endif
     RG_DEF_METHOD(user_data, 0);
     RG_DEF_METHOD(geometry, 0);
     RG_DEF_METHOD(set_geometry_hints, 2);
