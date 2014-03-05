@@ -302,19 +302,42 @@ module GObjectIntrospection
     def find_suitable_callable_info(infos, arguments)
       min_n_args = nil
       max_n_args = nil
+      candidate_infos = []
       infos.each do |info|
         if arguments.size == info.n_in_args
-          return info
+          candidate_infos << info
         end
         n_in_args = info.n_in_args
         min_n_args = [min_n_args || n_in_args, n_in_args].min
         max_n_args = [max_n_args || n_in_args, n_in_args].max
       end
+
+      if candidate_infos.size == 1
+        return candidate_infos.first
+      elsif candidate_infos.size > 1
+        candidate_info = candidate_infos.find do |info|
+          info.in_args.each.with_index.all? do |arg_info, i|
+            match_argument?(arg_info, arguments[i])
+          end
+        end
+        return candidate_info || candidate_infos.first
+      end
+
       detail = "#{arguments.size} for #{min_n_args}"
       if min_n_args < max_n_args
         detail << "..#{max_n_args}"
       end
       raise ArgumentError, "wrong number of arguments (#{detail})"
+    end
+
+    def match_argument?(arg_info, argument)
+      case arg_info.type.tag
+      when TypeTag::UTF8
+        argument.is_a?(String)
+      else
+        # TODO
+        false
+      end
     end
 
     def rubyish_method_name(function_info)
