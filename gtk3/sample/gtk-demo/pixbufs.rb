@@ -63,18 +63,19 @@ module Demo
 
         add(@da)
 
-        timeout_id = Gtk.timeout_add(FRAME_DELAY) do
+        timeout_id = GLib::Timeout.add(FRAME_DELAY) do
           timeout
         end
         signal_connect("destroy") do
-          Gtk.timeout_remove(timeout_id)
+          GLib::Source.remove(timeout_id)
         end
       rescue
-        dialog = Gtk::MessageDialog.new(self,
-                                        Gtk::Dialog::DESTROY_WITH_PARENT,
-                                        Gtk::MessageDialog::ERROR,
-                                        Gtk::MessageDialog::BUTTONS_CLOSE,
-                                        "Failed to load an image: #{$!.message}")
+        message = "Failed to load an image: #{$!.message}"
+        dialog = Gtk::MessageDialog.new(:parent       => self,
+                                        :flags        => :destroy_with_parent,
+                                        :type         => :error,
+                                        :buttons_type => :close,
+                                        :message      => message)
 
         dialog.signal_connect("response") do
           dialog.destroy
