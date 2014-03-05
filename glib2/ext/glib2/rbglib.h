@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005  Ruby-GNOME2 Project
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -20,7 +20,8 @@
  *  MA  02110-1301  USA
  */
 
-#include <glib.h>
+#include <glib-object.h>
+
 #include "ruby.h"
 
 #include "rbglibdeprecated.h"
