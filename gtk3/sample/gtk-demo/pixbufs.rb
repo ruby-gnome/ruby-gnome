@@ -33,7 +33,7 @@ module Demo
       "gnome-gimp.png",
       "gnome-gsame.png",
       "gnu-keys.png",
-      "ruby-gnome2-logo.png"
+      "ruby-gnome2-logo.png",
     ]
 
     CYCLE_LEN = 60
@@ -148,12 +148,12 @@ module Demo
                             if (i & 1) == 1
                               [
                                 127,
-                                (255 * Math.sin(f * 2.0 * Math::PI)).abs
+                                (255 * Math.sin(f * 2.0 * Math::PI)).abs,
                               ].max
                             else
                               [
                                 127,
-                                (255 * Math.cos(f * 2.0 * Math::PI)).abs
+                                (255 * Math.cos(f * 2.0 * Math::PI)).abs,
                               ].max
                             end)
         end
