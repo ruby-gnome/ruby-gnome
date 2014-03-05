@@ -147,6 +147,32 @@ module GObjectIntrospection
       enum_module.const_set(value_info.name.upcase, value_info.value)
     end
 
+    def define_enum(info)
+      self.class.define_class(info.gtype,
+                              enum_class_name(info),
+                              @base_module)
+    end
+
+    def enum_class_name(info)
+      info.name
+    end
+
+    def define_error(info)
+      self.class.define_error(info.error_domain,
+                              error_class_name(info),
+                              @base_module,
+                              :parent => error_parent_class(info),
+                              :gtype => info.gtype)
+    end
+
+    def error_class_name(info)
+      info.name
+    end
+
+    def error_parent_class(info)
+      nil
+    end
+
     def load_enum_info(info)
       if info.gtype == GLib::Type::NONE
         enum_module = Module.new
@@ -155,7 +181,11 @@ module GObjectIntrospection
         end
         @base_module.const_set(info.name, enum_module)
       else
-        self.class.define_class(info.gtype, info.name, @base_module)
+        if info.error_domain
+          define_error(info)
+        else
+          define_enum(info)
+        end
       end
     end
 

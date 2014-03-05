@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -87,6 +87,46 @@ rg_s_define_struct(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     return rb_class;
 }
 
+static VALUE
+rg_s_define_error(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
+{
+    VALUE rb_domain, rb_name, rb_module;
+    VALUE rb_options, rb_parent, rb_gtype;
+    GQuark domain;
+    const gchar *name;
+    GType gtype = G_TYPE_INVALID;
+
+    rb_scan_args(argc, argv, "31",
+                 &rb_domain, &rb_name, &rb_module, &rb_options);
+    rbg_scan_options(rb_options,
+                     "parent", &rb_parent,
+                     "gtype", &rb_gtype,
+                     NULL);
+
+    if (RB_TYPE_P(rb_domain, RUBY_T_STRING)) {
+        domain = g_quark_from_string(RVAL2CSTR(rb_domain));
+        if (domain == 0) {
+            rb_raise(rb_eArgError,
+                     "invalid domain name: <%s>",
+                     rbg_inspect(rb_domain));
+        }
+    } else {
+        domain = NUM2UINT(rb_domain);
+    }
+
+    name = RVAL2CSTR(rb_name);
+
+    if (NIL_P(rb_parent)) {
+        rb_parent = rb_eStandardError;
+    }
+
+    if (!NIL_P(rb_gtype)) {
+        gtype = NUM2UINT(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+    }
+
+    return G_DEF_ERROR(domain, name, rb_module, rb_parent, gtype);
+}
+
 typedef struct {
     GType type;
     VALUE rb_converters;
@@ -162,6 +202,7 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(define_class, -1);
     RG_DEF_SMETHOD(define_interface, 3);
     RG_DEF_SMETHOD(define_struct, -1);
+    RG_DEF_SMETHOD(define_error, -1);
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
     RG_DEF_SMETHOD(start_callback_dispatch_thread, 0);
 }
