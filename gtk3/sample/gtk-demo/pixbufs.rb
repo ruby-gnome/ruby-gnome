@@ -1,4 +1,4 @@
-# Copyright (c) 2003-2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2003-2014 Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 # $Id: pixbufs.rb,v 1.5 2005/02/12 23:02:43 kzys Exp $
@@ -47,40 +47,40 @@ module Demo
       @images = []
 
       begin
-	load_pixbufs
+        load_pixbufs
 
-	set_size_request(@background.width, @background.height)
+        set_size_request(@background.width, @background.height)
 
-	@frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,
-				 false, 8,
-				 @background.width, @background.height)
+        @frame = Gdk::Pixbuf.new(Gdk::Pixbuf::COLORSPACE_RGB,
+                                 false, 8,
+                                 @background.width, @background.height)
 
-	@da = Gtk::DrawingArea.new
+        @da = Gtk::DrawingArea.new
 
-	@da.signal_connect('expose_event') do |w, e|
-	  expose_cb(w, e)
-	end
+        @da.signal_connect('expose_event') do |w, e|
+          expose_cb(w, e)
+        end
 
-	add(@da)
+        add(@da)
 
-	timeout_id = Gtk.timeout_add(FRAME_DELAY) do
+        timeout_id = Gtk.timeout_add(FRAME_DELAY) do
           timeout
-	end
+        end
         signal_connect('destroy') do
           Gtk.timeout_remove(timeout_id)
         end
       rescue
-	dialog = Gtk::MessageDialog.new(self,
-					Gtk::Dialog::DESTROY_WITH_PARENT,
-					Gtk::MessageDialog::ERROR,
-					Gtk::MessageDialog::BUTTONS_CLOSE,
-					"Failed to load an image: #{$!.message}")
+        dialog = Gtk::MessageDialog.new(self,
+                                        Gtk::Dialog::DESTROY_WITH_PARENT,
+                                        Gtk::MessageDialog::ERROR,
+                                        Gtk::MessageDialog::BUTTONS_CLOSE,
+                                        "Failed to load an image: #{$!.message}")
 
-	dialog.signal_connect('response') do
-	  dialog.destroy
-	end
+        dialog.signal_connect('response') do
+          dialog.destroy
+        end
 
-	dialog.show
+        dialog.show
       end
     end
 
@@ -88,7 +88,7 @@ module Demo
       # Loads the images for the demo
 
       if @background
-	return # already loaded earlier
+        return # already loaded earlier
       end
 
       # demo_find_file() looks in the the current directory first,
@@ -99,9 +99,9 @@ module Demo
       @background = Gdk::Pixbuf.new(filename)
 
       IMAGE_NAMES.each_with_index do |basename, i|
-	filename = Demo.find_file(basename)
+        filename = Demo.find_file(basename)
 
-	@images[i] = Gdk::Pixbuf.new(filename)
+        @images[i] = Gdk::Pixbuf.new(filename)
       end
     end
 
