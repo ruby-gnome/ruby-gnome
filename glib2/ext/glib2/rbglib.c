@@ -816,7 +816,7 @@ rbg_gints2rval_free(gint *gints, long n)
                      rbg_gints2rval_free_ensure, (VALUE)&args);
 }
 
-static const char *
+const gchar *
 rbg_inspect (VALUE object)
 {
     VALUE inspected;

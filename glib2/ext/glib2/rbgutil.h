@@ -104,6 +104,8 @@ extern void rbgutil_stop_callback_dispatch_thread(void);
 extern VALUE rbgutil_string_set_utf8_encoding(VALUE string);
 extern gboolean rbgutil_key_equal(VALUE rb_string, const char *key);
 
+extern const gchar *rbg_inspect(VALUE object);
+
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;
 extern void rbgutil_glibid_r2g_func(VALUE from, GValue* to);
