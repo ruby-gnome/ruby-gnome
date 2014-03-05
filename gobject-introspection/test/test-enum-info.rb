@@ -1,4 +1,4 @@
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -52,5 +52,10 @@ class TestEnumInfo < Test::Unit::TestCase
   def test_storage_type
     assert_equal(GObjectIntrospection::TypeTag::UINT32,
                  @info.storage_type)
+  end
+
+  def test_error_domain
+    assert_equal("g-resource-error-quark",
+                 @info.error_domain)
   end
 end

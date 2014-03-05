@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -124,6 +124,15 @@ rg_storage_type(VALUE self)
     return GI_TYPE_TAG2RVAL(g_enum_info_get_storage_type(info));
 }
 
+static VALUE
+rg_error_domain(VALUE self)
+{
+    GIEnumInfo *info;
+
+    info = SELF(self);
+    return CSTR2RVAL(g_enum_info_get_error_domain(info));
+}
+
 void
 rb_gi_enum_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
 {
@@ -140,6 +149,7 @@ rb_gi_enum_info_init(VALUE rb_mGI, VALUE rb_cGIRegisteredTypeInfo)
     RG_DEF_METHOD(get_method, 1);
     RG_DEF_METHOD(methods, 0);
     RG_DEF_METHOD(storage_type, 0);
+    RG_DEF_METHOD(error_domain, 0);
 
     rb_gi_flags_info_init(rb_mGI, RG_TARGET_NAMESPACE);
 }
