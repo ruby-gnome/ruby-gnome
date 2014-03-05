@@ -16,29 +16,29 @@ off how to use Gtk::DrawingArea to do a simple animation.
 Look at the Image demo for additional pixbuf usage examples.
 =end
 
-require 'common'
+require "common"
 
 module Demo
   class Pixbufs < BasicWindow
     FRAME_DELAY = 50
 
-    BACKGROUND_NAME = 'background.jpg'
+    BACKGROUND_NAME = "background.jpg"
 
     IMAGE_NAMES = [
-      'apple-red.png',
-      'gnome-applets.png',
-      'gnome-calendar.png',
-      'gnome-foot.png',
-      'gnome-gmush.png',
-      'gnome-gimp.png',
-      'gnome-gsame.png',
-      'gnu-keys.png',
-      'ruby-gnome2-logo.png'
+      "apple-red.png",
+      "gnome-applets.png",
+      "gnome-calendar.png",
+      "gnome-foot.png",
+      "gnome-gmush.png",
+      "gnome-gimp.png",
+      "gnome-gsame.png",
+      "gnu-keys.png",
+      "ruby-gnome2-logo.png"
     ]
 
     CYCLE_LEN = 60
     def initialize
-      super('Pixbufs')
+      super("Pixbufs")
       set_resizable(false)
 
       @background = nil
@@ -57,7 +57,7 @@ module Demo
 
         @da = Gtk::DrawingArea.new
 
-        @da.signal_connect('draw') do |w, e|
+        @da.signal_connect("draw") do |w, e|
           draw_cb(w, e)
         end
 
@@ -66,7 +66,7 @@ module Demo
         timeout_id = Gtk.timeout_add(FRAME_DELAY) do
           timeout
         end
-        signal_connect('destroy') do
+        signal_connect("destroy") do
           Gtk.timeout_remove(timeout_id)
         end
       rescue
@@ -76,7 +76,7 @@ module Demo
                                         Gtk::MessageDialog::BUTTONS_CLOSE,
                                         "Failed to load an image: #{$!.message}")
 
-        dialog.signal_connect('response') do
+        dialog.signal_connect("response") do
           dialog.destroy
         end
 
