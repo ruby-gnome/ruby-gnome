@@ -57,8 +57,8 @@ module Demo
 
         @da = Gtk::DrawingArea.new
 
-        @da.signal_connect('expose_event') do |w, e|
-          expose_cb(w, e)
+        @da.signal_connect('draw') do |w, e|
+          draw_cb(w, e)
         end
 
         add(@da)
@@ -105,19 +105,9 @@ module Demo
       end
     end
 
-    def expose_cb(widget, event)
-      rowstride = @frame.rowstride
-
-      pixels = @frame.pixels
-      pixels[0, rowstride * event.area.y + event.area.x * 3] = ''
-
-      Gdk::RGB.draw_rgb_image(widget.window,
-                              widget.style.black_gc,
-                              event.area.x, event.area.y,
-                              event.area.width, event.area.height,
-                              Gdk::RGB::Dither::NORMAL,
-                              pixels, rowstride,
-                              event.area.x, event.area.y)
+    def draw_cb(widget, cairo_context)
+      cairo_context.set_source_pixbuf(@frame)
+      cairo_context.paint
       true
     end
 
