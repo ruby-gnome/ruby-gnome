@@ -24,6 +24,7 @@
 
 static ID id_code;
 static ID id_domain;
+static ID id_code_classes;
 static VALUE gerror_table;
 static VALUE generic_error;
 static VALUE error_info;
@@ -41,6 +42,16 @@ rbgerr_gerror2exception(GError *error)
     exception_klass = rb_hash_aref(gerror_table, UINT2NUM(error->domain));
     if (NIL_P(exception_klass)) {
         exception_klass = generic_error;
+    } else {
+        VALUE code_class = Qnil;
+        VALUE code_classes;
+        code_classes = rb_ivar_get(exception_klass, id_code_classes);
+        if (!NIL_P(code_classes)) {
+            code_class = rb_hash_aref(code_classes, INT2NUM(error->code));
+        }
+        if (!NIL_P(code_class)) {
+            exception_klass = code_class;
+        }
     }
     exc = rb_exc_new_str(exception_klass, CSTR2RVAL(error->message));
     rb_ivar_set(exc, id_domain, CSTR2RVAL(g_quark_to_string(error->domain)));
@@ -49,37 +60,88 @@ rbgerr_gerror2exception(GError *error)
     return exc;
 }
 
+static gchar *
+nick_to_constant_name(const gchar *nick)
+{
+    GString *constant_name;
+    const gchar *current;
+
+    constant_name = g_string_new(NULL);
+
+    for (current = nick; *current; current++) {
+        if (*current == '-') {
+            g_string_append_c(constant_name, '_');
+        } else {
+            g_string_append_c(constant_name, g_ascii_toupper(*current));
+        }
+    }
+
+    return g_string_free(constant_name, FALSE);
+}
+
+static gchar *
+nick_to_class_name(const gchar *nick)
+{
+    GString *class_name;
+    const gchar *current;
+    gboolean to_upper = TRUE;
+
+    class_name = g_string_new(NULL);
+
+    for (current = nick; *current; current++) {
+        if (to_upper) {
+            g_string_append_c(class_name, g_ascii_toupper(*current));
+            to_upper = FALSE;
+        } else if (*current == '-') {
+            to_upper = TRUE;
+        } else {
+            g_string_append_c(class_name, *current);
+        }
+    }
+
+    return g_string_free(class_name, FALSE);
+}
+
 VALUE
 rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE parent, GType gtype)
 {
-    VALUE klass = rb_define_class_under(module, name, parent);
-    rb_include_module(klass, error_info);
+    VALUE error_class;
+    VALUE code_classes;
 
-    rb_hash_aset(gerror_table, UINT2NUM(domain), klass);
+    error_class = rb_define_class_under(module, name, parent);
+    rb_include_module(error_class, error_info);
+
+    rb_hash_aset(gerror_table, UINT2NUM(domain), error_class);
+
+    code_classes = rb_hash_new();
+    rb_ivar_set(error_class, id_code_classes, code_classes);
 
     if (gtype != G_TYPE_INVALID) {
         GEnumClass* gclass = g_type_class_ref(gtype);
         guint i;
 
         for (i = 0; i < gclass->n_values; i++) {
+            VALUE code_class;
             GEnumValue* entry = &(gclass->values[i]);
-            gchar* nick = g_strdup(entry->value_nick);
-            gchar* p;
+            gchar *code_constant_name;
+            gchar *code_class_name;
 
-            for (p = nick; *p; p++) {
-                if (*p == '-')
-                    *p = '_';
-                else
-                    *p = g_ascii_toupper(*p);
-            }
-            rbgobj_define_const(klass, nick, INT2NUM(i));
-            g_free(nick);
+            code_constant_name = nick_to_constant_name(entry->value_nick);
+            rbgobj_define_const(error_class, code_constant_name, INT2NUM(i));
+            g_free(code_constant_name);
+
+            code_class_name = nick_to_class_name(entry->value_nick);
+            code_class = rb_define_class_under(error_class,
+                                               code_class_name,
+                                               error_class);
+            g_free(code_class_name);
+            rb_hash_aset(code_classes, INT2NUM(entry->value), code_class);
         }
 
         g_type_class_unref(gclass);
     }
 
-    return klass;
+    return error_class;
 }
 
 void
@@ -87,6 +149,7 @@ Init_glib_error(void)
 {
     id_code = rb_intern("@code");
     id_domain = rb_intern("@domain");
+    id_code_classes = rb_intern("@code_classes");
     gerror_table = rb_hash_new();
     rb_global_variable(&gerror_table);
 
