@@ -201,5 +201,19 @@ module Gio
         info.invoke(:arguments => arguments)
       end
     end
+
+    def error_class_name(info)
+      name = info.name
+      case name
+      when /Enum\z/
+        $PREMATCH
+      else
+        name
+      end
+    end
+
+    def error_parent_class(info)
+      Error
+    end
   end
 end

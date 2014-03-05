@@ -33,9 +33,8 @@ module Gio
         loop do
           begin
             read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
-          rescue GLib::Error
-            break if $!.code == IOErrorEnum::WOULD_BLOCK
-            raise
+          rescue IOError::WouldBlock
+            break
           end
           all << buffer.byteslice(0, read_bytes)
           break if read_bytes != buffer_size

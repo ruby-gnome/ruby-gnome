@@ -31,6 +31,9 @@ module Gio
   LOG_DOMAIN = "Gio"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
+  class Error < StandardError
+  end
+
   class << self
     def const_missing(name)
       init
