@@ -119,7 +119,7 @@ module Demo
 
       f = Float(@frame_num % CYCLE_LEN) / CYCLE_LEN;
 
-      xmid = @background.width / 2.0
+      xmid = @background.width  / 2.0
       ymid = @background.height / 2.0
 
       radius = [xmid, ymid].min / 2.0
@@ -129,7 +129,7 @@ module Demo
 
         r = radius + (radius / 3.0) * Math.sin(f * 2.0 * Math::PI)
 
-        xpos = (xmid + r * Math.cos(ang) - image.width / 2.0 + 0.5).floor
+        xpos = (xmid + r * Math.cos(ang) - image.width  / 2.0 + 0.5).floor
         ypos = (ymid + r * Math.sin(ang) - image.height / 2.0 + 0.5).floor
 
         k = if (i & 1) == 1
