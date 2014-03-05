@@ -123,7 +123,7 @@ extern "C" {
 #define G_DEF_ERROR(domain, name, module, parent, gtype)         \
     rbgerr_define_gerror(domain, name, module, parent, gtype)
 #define G_DEF_ERROR2(domain, name, module, parent) \
-    rbgerr_define_gerror(domain, name, module, parent, Qnil)
+    rbgerr_define_gerror(domain, name, module, parent, G_TYPE_INVALID)
 
 #if defined(G_PLATFORM_WIN32) && !defined(RUBY_GLIB2_STATIC_COMPILATION)
 #  ifdef RUBY_GLIB2_COMPILATION
@@ -187,7 +187,7 @@ extern void rbg_scan_options(VALUE options, ...);
 
 /* rbgerror.h */
 extern VALUE rbgerr_gerror2exception(GError *error);
-extern VALUE rbgerr_define_gerror(GQuark domain, const gchar* name, VALUE module, VALUE parent, VALUE gtype);
+extern VALUE rbgerr_define_gerror(GQuark domain, const gchar* name, VALUE module, VALUE parent, GType gtype);
 
 extern VALUE rbglib_int64_to_num(guint64 val);
 extern VALUE rbglib_uint64_to_num(guint64 val);

@@ -49,7 +49,7 @@ rbgerr_gerror2exception(GError *error)
 }
 
 VALUE
-rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE parent, VALUE gtype)
+rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE parent, GType gtype)
 {
     VALUE klass = rb_define_class_under(module, name, parent);
     rb_funcall(klass, rbgutil_id_module_eval, 1, CSTR2RVAL("def code; @code; end\n"));
@@ -57,7 +57,7 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
 
     rb_hash_aset(gerror_table, UINT2NUM(domain), klass);
 
-    if (! NIL_P(gtype)){
+    if (gtype != G_TYPE_INVALID) {
         GEnumClass* gclass = g_type_class_ref(gtype);
         guint i;
 
