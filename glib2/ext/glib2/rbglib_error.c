@@ -26,6 +26,7 @@ static ID id_code;
 static ID id_domain;
 static VALUE gerror_table;
 static VALUE generic_error;
+static VALUE error_info;
 
 VALUE
 rbgerr_gerror2exception(GError *error)
@@ -52,8 +53,7 @@ VALUE
 rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE parent, GType gtype)
 {
     VALUE klass = rb_define_class_under(module, name, parent);
-    rb_funcall(klass, rbgutil_id_module_eval, 1, CSTR2RVAL("def code; @code; end\n"));
-    rb_funcall(klass, rbgutil_id_module_eval, 1, CSTR2RVAL("def domain; @domain; end\n"));
+    rb_include_module(klass, error_info);
 
     rb_hash_aset(gerror_table, UINT2NUM(domain), klass);
 
@@ -90,7 +90,10 @@ Init_glib_error(void)
     gerror_table = rb_hash_new();
     rb_global_variable(&gerror_table);
 
+    error_info = rb_define_module_under(mGLib, "ErrorInfo");
+    rb_define_attr(error_info, "code", TRUE, FALSE);
+    rb_define_attr(error_info, "domain", TRUE, FALSE);
+
     generic_error = rb_define_class_under(mGLib, "Error", rb_eRuntimeError);
-    rb_funcall(generic_error, rbgutil_id_module_eval, 1, CSTR2RVAL("def code; @code; end\n"));
-    rb_funcall(generic_error, rbgutil_id_module_eval, 1, CSTR2RVAL("def domain; @domain; end\n"));
+    rb_include_module(generic_error, error_info);
 }
