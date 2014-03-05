@@ -65,7 +65,7 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
             GEnumValue* entry = &(gclass->values[i]);
             gchar* nick = g_strdup(entry->value_nick);
             gchar* p;
-            
+
             for (p = nick; *p; p++) {
                 if (*p == '-')
                     *p = '_';
@@ -75,8 +75,8 @@ rbgerr_define_gerror(GQuark domain, const gchar *name, VALUE module, VALUE paren
             rbgobj_define_const(klass, nick, INT2NUM(i));
             g_free(nick);
         }
-        
-        g_type_class_unref(gclass);        
+
+        g_type_class_unref(gclass);
     }
 
     return klass;
