@@ -19,4 +19,11 @@ class TestInetAddress < Test::Unit::TestCase
     a = Gio::InetAddress.new(Gio::SocketFamily::IPV4)
     assert a.respond_to?(:any?)
   end
+
+  class TestNew < self
+    def test_string
+      address = Gio::InetAddress.new("127.0.0.1")
+      assert_equal("127.0.0.1", address.to_s)
+    end
+  end
 end
