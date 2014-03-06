@@ -48,6 +48,7 @@ module Gio
     end
 
     def require_libraries
+      require "gio2/input-stream"
       require "gio2/output-stream"
       require "gio2/pollable-input-stream"
       require "gio2/pollable-output-stream"
