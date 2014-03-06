@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,26 +14,20 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestInetAddress < Test::Unit::TestCase
-  def test_responds_to_properties
-    a = Gio::InetAddress.new(Gio::SocketFamily::IPV4)
-    assert a.respond_to?(:any?)
-  end
+module Gio
+  class InetAddress
+    class << self
+      def any(family)
+        address = allocate
+        address.__send__(:initialize_new_any, family)
+        address
+      end
 
-  class TestConstructor < self
-    def test_string
-      address = Gio::InetAddress.new("127.0.0.1")
-      assert_equal("127.0.0.1", address.to_s)
-    end
-
-    def test_any
-      address = Gio::InetAddress.any(:ipv4)
-      assert_predicate(address, :any?)
-    end
-
-    def test_loopback
-      address = Gio::InetAddress.loopback(:ipv4)
-      assert_predicate(address, :loopback?)
+      def loopback(family)
+        address = allocate
+        address.__send__(:initialize_new_loopback, family)
+        address
+      end
     end
   end
 end
