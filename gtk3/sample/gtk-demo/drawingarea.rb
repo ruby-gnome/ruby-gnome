@@ -24,7 +24,7 @@ module Demo
   class DrawingArea < BasicWindow
     def initialize
       # Pixmap for scribble area, to store current scribbles
-      @pixmap = nil
+      @cairo_context = nil
       super("Drawing Area")
 
       self.border_width = 8
@@ -48,8 +48,8 @@ module Demo
 
       frame.add(da)
 
-      da.signal_connect("expose_event") do |widget, event|
-        checkerboard_expose(widget)
+      da.signal_connect("draw") do |widget, event|
+        checkerboard_draw(widget, event)
       end
 
       ## Create the scribble area
@@ -68,8 +68,8 @@ module Demo
       frame.add(da)
 
       # Signals used to handle backing pixmap
-      da.signal_connect("expose_event") do |*args|
-        scribble_expose_event(*args)
+      da.signal_connect("draw") do |*args|
+        scribble_draw(*args)
       end
       da.signal_connect("configure_event") do |widget, event|
         scribble_configure_event(widget)
@@ -91,19 +91,11 @@ module Demo
                     Gdk::Event::POINTER_MOTION_HINT_MASK)
     end
 
-    # Create a new pixmap of the appropriate size to store our scribbles
+    # Create a new surface of the appropriate size to store our scribbles
     def scribble_configure_event(widget)
-      @pixmap = Gdk::Pixmap.new(self.window,
-                                widget.allocation.width,
-                                widget.allocation.height,
-                                -1)
-
-      # Initialize the pixmap to white
-      @pixmap.draw_rectangle(widget.style.white_gc,
-                             true,
-                             0, 0,
-                             widget.allocation.width,
-                             widget.allocation.height)
+      @cairo_context = widget.window.create_cairo_context
+      @cairo_context.set_source_rgb(1, 1, 1)
+      @cairo_context.paint
 
       # We've handled the configure event, no need for further processing.
       return true
@@ -111,38 +103,29 @@ module Demo
 
     CHECK_SIZE = 10
     SPACING = 2
-    def checkerboard_expose(da)
-      # At the start of an expose handler, a clip region of event.area
+    def checkerboard_draw(da, cairo_context)
+      # At the start of a draw handler, a clip region of event.area
       # is set on the window, and event.area has been cleared to the
       # widget's background color. The docs for
       # gdk_window_begin_paint_region give more details on how this
       # works.
 
-
-      # It would be a bit more efficient to keep these
-      # GC's around instead of recreating on each expose, but
-      # this is the lazy/slow way.
-      gc1 = Gdk::GC.new(da.window)
-      gc1.rgb_fg_color = Gdk::Color.new(30000, 0, 30000)
-
-      gc2 = Gdk::GC.new(da.window)
-      gc2.rgb_fg_color = Gdk::Color.new(65535, 65535, 65535)
-
       xcount = 0
+      width  = da.allocated_width
+      height = da.allocated_height
       SPACING.step(da.allocation.width, CHECK_SIZE + SPACING) do |i|
         ycount = xcount % 2; # start with even/odd depending on row
         SPACING.step(da.allocation.height, CHECK_SIZE + SPACING) do |j|
-          gc = if ycount % 2 == 1
-                 gc1
-               else
-                 gc2
-               end
+          if ycount % 2 == 1
+            cairo_context.set_source_rgb(0.45777, 0, 0.45777)
+          else
+            cairo_context.set_source_rgb(1, 1, 1)
+          end
 
-          # If we're outside event.area, this will do nothing.
-          # It might be mildly more efficient if we handled
-          # the clipping ourselves, but again we're feeling lazy.
-
-          da.window.draw_rectangle(gc, true, i, j, CHECK_SIZE, CHECK_SIZE)
+          # If we're outside the clip, this will do nothing.
+          cairo_context.fill do
+            cairo_context.rectangle(i, j, CHECK_SIZE, CHECK_SIZE)
+          end
           ycount += 1
         end
         xcount += 1
@@ -153,38 +136,33 @@ module Demo
       return true
     end
 
-    # Redraw the screen from the pixmap
-    def scribble_expose_event(widget, event)
-      # We use the 'foreground GC' for the widget since it already exists,
-      # but honestly any GC would work. The only thing to worry about
-      # is whether the GC has an inappropriate clip region set.
-      widget.window.draw_drawable(widget.style.fg_gc(widget.state),
-                                  @pixmap,
-                                  # Only copy the area that was exposed.
-                                  event.area.x, event.area.y,
-                                  event.area.x, event.area.y,
-                                  event.area.width, event.area.height)
+    # Redraw the screen from the surface
+    def scribble_draw(widget, event)
+      event.set_source(@cairo_context.target)
+      event.paint
       return false
     end
 
+    # Draw a rectangle on the screen
     def draw_brush(widget, x, y)
       update_rect = Gdk::Rectangle.new(x - 3, y - 3, 6, 6)
 
-      # Paint to the pixmap, where we store our state
-      @pixmap.draw_rectangle(widget.style.black_gc,
-                            true,
-                            update_rect.x, update_rect.y,
-                            update_rect.width, update_rect.height)
+      # Paint to the surface, where we store our state
+      @cairo_context.fill do
+        @cairo_context.set_source_rgb(0, 0, 0)
+        @cairo_context.rectangle(update_rect.x,
+                                 update_rect.y,
+                                 update_rect.width,
+                                 update_rect.height)
+      end
 
       # Now invalidate the affected region of the drawing area.
       widget.window.invalidate(update_rect, false)
     end
 
     def scribble_button_press_event(widget, event)
-      unless @pixmap
-        # paranoia check, in case we haven't gotten a configure event
-        return false
-      end
+      # paranoia check, in case we haven't gotten a configure event
+      return false unless @cairo_context
 
       if event.button == 1
         draw_brush(widget, event.x, event.y)
@@ -195,10 +173,8 @@ module Demo
     end
 
     def scribble_motion_notify_event(widget, event)
-      unless @pixmap
-        # paranoia check, in case we haven't gotten a configure event
-        return false
-      end
+      # paranoia check, in case we haven't gotten a configure event
+      return false unless @cairo_context
 
       # This call is very important; it requests the next motion event.
       # If you don't call Gdk::Window#pointer you'll only get
@@ -210,7 +186,9 @@ module Demo
       # we avoid getting a huge number of events faster than we
       # can cope.
 
-      win, x, y, state = event.window.pointer
+      # NOTE: Gdk::EventMotion#window will be restored from Ruby/GDK3 2.1.1.
+      # win, x, y, state = event.window.get_device_position(event.device)
+      win, x, y, state = widget.window.get_device_position(event.device)
 
       if (state & Gdk::Window::BUTTON1_MASK) != 0
         draw_brush(widget, x, y)
