@@ -37,11 +37,6 @@ class TestGtkSearchBar < Test::Unit::TestCase
     assert_true(@search_bar.show_close_button?)
   end
 
-  def test_search_mode_accessors
-    @search_bar.search_mode = true
-    assert_true(@search_bar.search_mode?)
-  end
-
   def test_handle_event
     event = Gdk::EventAny.new(:delete)
     entry = Gtk::Entry.new

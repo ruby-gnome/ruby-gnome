@@ -40,20 +40,6 @@ rg_connect_entry(VALUE self, VALUE entry)
 }
 
 static VALUE
-rg_search_mode_p(VALUE self)
-{
-    gboolean mode = gtk_search_bar_get_search_mode(_SELF(self));
-    return CBOOL2RVAL(mode);
-}
-
-static VALUE
-rg_set_search_mode(VALUE self, VALUE search_mode)
-{
-    gtk_search_bar_set_search_mode(_SELF(self), RVAL2CBOOL(search_mode));
-    return self;
-}
-
-static VALUE
 rg_handle_event_p(VALUE self, VALUE event)
 {
     gboolean handle = gtk_search_bar_handle_event(_SELF(self),
@@ -68,8 +54,6 @@ Init_gtk_search_bar(VALUE mGtk)
 
     RG_DEF_METHOD(initialize, 0);
     RG_DEF_METHOD(connect_entry, 1);
-    RG_DEF_METHOD_P(search_mode, 0);
-    RG_REPLACE_SET_PROPERTY(search_mode, 1);
     RG_DEF_METHOD_P(handle_event, 1);
 }
 #endif
