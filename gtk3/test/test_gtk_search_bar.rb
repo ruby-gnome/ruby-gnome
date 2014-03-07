@@ -24,7 +24,7 @@ class TestGtkSearchBar < Test::Unit::TestCase
 
   def test_connect_entry
     entry = Gtk::Entry.new
-    assert_kind_of(Gtk::SearchBar, @search_bar.connect_entry(entry))
+    assert_equal(@search_bar, @search_bar.connect_entry(entry))
   end
 
   def test_search_mode_enabled_accessors
