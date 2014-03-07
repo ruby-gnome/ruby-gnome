@@ -18,14 +18,14 @@ and drag in the scribble area to draw squiggles. Resize the window
 to clear the area.
 =end
 
-require 'common'
+require "common"
 
 module Demo
   class DrawingArea < BasicWindow
     def initialize
       # Pixmap for scribble area, to store current scribbles
       @pixmap = nil
-      super('Drawing Area')
+      super("Drawing Area")
 
       self.border_width = 8
 
@@ -35,7 +35,7 @@ module Demo
 
       ## Create the checkerboard area
       label = Gtk::Label.new
-      label.set_markup('<u>Checkerboard pattern</u>')
+      label.set_markup("<u>Checkerboard pattern</u>")
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
       frame = Gtk::Frame.new
@@ -48,13 +48,13 @@ module Demo
 
       frame.add(da)
 
-      da.signal_connect('expose_event') do |widget, event|
+      da.signal_connect("expose_event") do |widget, event|
         checkerboard_expose(widget)
       end
 
       ## Create the scribble area
       label = Gtk::Label.new
-      label.set_markup('<u>Scribble area</u>')
+      label.set_markup("<u>Scribble area</u>")
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
       frame = Gtk::Frame.new
@@ -68,18 +68,18 @@ module Demo
       frame.add(da)
 
       # Signals used to handle backing pixmap
-      da.signal_connect('expose_event') do |*args|
+      da.signal_connect("expose_event") do |*args|
         scribble_expose_event(*args)
       end
-      da.signal_connect('configure_event') do |widget, event|
+      da.signal_connect("configure_event") do |widget, event|
         scribble_configure_event(widget)
       end
 
       # Event signals
-      da.signal_connect('motion_notify_event') do |*args|
+      da.signal_connect("motion_notify_event") do |*args|
         scribble_motion_notify_event(*args)
       end
-      da.signal_connect('button_press_event') do |*args|
+      da.signal_connect("button_press_event") do |*args|
         scribble_button_press_event(*args)
       end
 
