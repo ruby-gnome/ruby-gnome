@@ -23,7 +23,7 @@ class TestGtkSearchBar < Test::Unit::TestCase
   end
 
   def test_connect_entry
-    entry = Gtk::Entry.new
+    entry = Gtk::SearchEntry.new
     assert_equal(@search_bar, @search_bar.connect_entry(entry))
   end
 
