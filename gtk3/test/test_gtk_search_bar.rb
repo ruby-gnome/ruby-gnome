@@ -28,6 +28,8 @@ class TestGtkSearchBar < Test::Unit::TestCase
   end
 
   def test_search_mode_enabled_accessors
+    entry = Gtk::SearchEntry.new
+    @search_bar.connect_entry(entry)
     @search_bar.search_mode_enabled = true
     assert_true(@search_bar.search_mode_enabled?)
   end
