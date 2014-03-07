@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ gi_function_info_get_type(void)
 {
     static GType type = 0;
     if (type == 0) {
-	type = g_boxed_type_register_static("GIFunctionInfo",
+        type = g_boxed_type_register_static("GIFunctionInfo",
                                             (GBoxedCopyFunc)g_base_info_ref,
                                             (GBoxedFreeFunc)g_base_info_unref);
     }
@@ -112,10 +112,14 @@ allocate_arguments(GICallableInfo *info,
         metadata->callback_p = (metadata->scope_type != GI_SCOPE_TYPE_INVALID);
         metadata->closure_p = FALSE;
         metadata->destroy_p = FALSE;
+        metadata->array_p = FALSE;
+        metadata->array_length_p = FALSE;
         metadata->inout_argv_p = FALSE;
         metadata->in_arg_index = -1;
         metadata->closure_in_arg_index = -1;
         metadata->destroy_in_arg_index = -1;
+        metadata->array_in_arg_index = -1;
+        metadata->array_length_in_arg_index = -1;
         metadata->rb_arg_index = -1;
         metadata->out_arg_index = -1;
         metadata->inout_argc_arg_index = -1;
@@ -199,10 +203,48 @@ fill_metadata_callback(GPtrArray *args_metadata)
 }
 
 static void
+fill_metadata_array(GPtrArray *args_metadata)
+{
+    guint i;
+
+    for (i = 0; i < args_metadata->len; i++) {
+        RBGIArgMetadata *metadata;
+        RBGIArgMetadata *array_length_metadata;
+        GIArgInfo *arg_info;
+        GITypeInfo type_info;
+        gint array_length_index = -1;
+
+        metadata = g_ptr_array_index(args_metadata, i);
+        arg_info = &(metadata->arg_info);
+
+        g_arg_info_load_type(arg_info, &type_info);
+        if (g_type_info_get_tag(&type_info) != GI_TYPE_TAG_ARRAY) {
+            continue;
+        }
+        metadata->array_p = TRUE;
+
+        array_length_index = g_type_info_get_array_length(&type_info);
+        if (array_length_index == -1) {
+            continue;
+        }
+
+        array_length_metadata = g_ptr_array_index(args_metadata,
+                                                  array_length_index);
+        array_length_metadata->array_length_p = TRUE;
+        array_length_metadata->rb_arg_index = -1;
+        array_length_metadata->array_in_arg_index =
+            metadata->in_arg_index;
+        metadata->array_length_in_arg_index =
+            array_length_metadata->in_arg_index;
+    }
+}
+
+static void
 fill_metadata(GPtrArray *args_metadata)
 {
     fill_metadata_inout_argv(args_metadata);
     fill_metadata_callback(args_metadata);
+    fill_metadata_array(args_metadata);
 }
 
 static void
@@ -385,7 +427,7 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
 
 static void
 in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
-                      GArray *in_args)
+                      GArray *in_args, GPtrArray *args_metadata)
 {
     if (metadata->rb_arg_index == -1) {
         return;
@@ -393,6 +435,34 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
 
     if (metadata->callback_p) {
         in_callback_argument_from_ruby(metadata, in_args);
+    } else if (metadata->array_p) {
+        GIArgument *array_argument;
+        GIArgument *length_argument = NULL;
+        GIArgInfo *length_arg_info = NULL;
+        VALUE rb_argument = Qnil;
+
+        if (RARRAY_LEN(rb_arguments) > metadata->rb_arg_index) {
+            rb_argument = RARRAY_PTR(rb_arguments)[metadata->rb_arg_index];
+        }
+        array_argument = &(g_array_index(in_args,
+                                         GIArgument,
+                                         metadata->in_arg_index));
+        if (metadata->array_length_in_arg_index != -1) {
+            RBGIArgMetadata *length_metadata;
+            length_argument =
+                &(g_array_index(in_args,
+                                GIArgument,
+                                metadata->array_length_in_arg_index));
+            length_metadata =
+                g_ptr_array_index(args_metadata,
+                                  metadata->array_length_in_arg_index);
+            length_arg_info = &(length_metadata->arg_info);
+        }
+        RVAL2GI_IN_ARRAY_ARGUMENT(array_argument,
+                                  length_argument,
+                                  &(metadata->arg_info),
+                                  length_arg_info,
+                                  rb_argument);
     } else {
         GIArgument *argument;
         VALUE rb_argument = Qnil;
@@ -443,7 +513,8 @@ arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
 
         metadata = g_ptr_array_index(args_metadata, i);
         if (metadata->in_arg_index != -1) {
-            in_argument_from_ruby(metadata, rb_arguments, in_args);
+            in_argument_from_ruby(metadata, rb_arguments,
+                                  in_args, args_metadata);
         } else {
             out_argument_from_ruby(metadata, out_args);
         }

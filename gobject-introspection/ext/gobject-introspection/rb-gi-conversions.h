@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -41,6 +41,12 @@
     (rb_gi_value_argument_from_ruby((argument), (type_info), (rb_argument)))
 #define RVAL2GI_IN_ARGUMENT(argument, arg_info, rb_argument)            \
     (rb_gi_in_argument_from_ruby((argument), (arg_info), (rb_argument)))
+#define RVAL2GI_IN_ARRAY_ARGUMENT(array_argument, length_argument,      \
+                                  array_arg_info, length_arg_info,      \
+                                  rb_argument)                          \
+    (rb_gi_in_array_argument_from_ruby((array_argument), (length_argument), \
+                                       (array_arg_info), (length_arg_info), \
+                                       (rb_argument)))
 
 
 #define RVAL2GI_REGISTERED_TYPE_INFO(rb_object)			\
@@ -104,6 +110,11 @@ GIArgument *rb_gi_value_argument_from_ruby    (GIArgument     *argument,
                                                VALUE           rb_argument);
 GIArgument *rb_gi_in_argument_from_ruby       (GIArgument     *argument,
                                                GIArgInfo      *arg_info,
+                                               VALUE           rb_argument);
+GIArgument *rb_gi_in_array_argument_from_ruby (GIArgument     *array_argument,
+                                               GIArgument     *length_argument,
+                                               GIArgInfo      *array_arg_info,
+                                               GIArgInfo      *length_arg_info,
                                                VALUE           rb_argument);
 void        rb_gi_value_argument_free         (GIArgument     *argument,
                                                GITypeInfo     *type_info);
