@@ -40,10 +40,16 @@ class TestGtkSearchBar < Test::Unit::TestCase
   end
 
   def test_handle_event
-    event = Gdk::EventAny.new(:delete)
-    entry = Gtk::Entry.new
+    window = Gtk::Window.new
+    key_press_event = Gdk::EventKey.new(:key_press)
+    key_press_event.keyval = Gdk::Keyval::GDK_KEY_a
+    entry = Gtk::SearchEntry.new
+    @search_bar.add(entry)
     @search_bar.connect_entry(entry)
-    @search_bar.signal_connect("key-press-event") {}
-    assert_false(@search_bar.handle_event?(event))
+    window.add(@search_bar)
+    window.show_all
+    key_press_event.window = window.window
+    assert_equal(Gdk::Event::STOP,
+                 @search_bar.handle_event?(key_press_event))
   end
 end
