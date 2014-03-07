@@ -71,15 +71,15 @@ module Demo
       da.signal_connect("draw") do |*args|
         scribble_draw(*args)
       end
-      da.signal_connect("configure_event") do |widget, event|
+      da.signal_connect("configure-event") do |widget, event|
         scribble_configure_event(widget)
       end
 
       # Event signals
-      da.signal_connect("motion_notify_event") do |*args|
+      da.signal_connect("motion-notify-event") do |*args|
         scribble_motion_notify_event(*args)
       end
-      da.signal_connect("button_press_event") do |*args|
+      da.signal_connect("button-press-event") do |*args|
         scribble_button_press_event(*args)
       end
 
