@@ -909,6 +909,8 @@ Init_gdk_event(VALUE mGdk)
      * GdkEvent's Constants
      */
     rb_define_const(rb_cGdkEvent, "CURRENT_TIME", INT2FIX(GDK_CURRENT_TIME));
+    rb_define_const(rb_cGdkEvent, "PROPAGATE", CBOOL2RVAL(GDK_EVENT_PROPAGATE));
+    rb_define_const(rb_cGdkEvent, "STOP", CBOOL2RVAL(GDK_EVENT_STOP));
     rb_define_const(rb_cGdkEvent, "PRIORITY_EVENTS", INT2FIX(GDK_PRIORITY_EVENTS));
     rb_define_const(rb_cGdkEvent, "PRIORITY_REDRAW", INT2FIX(GDK_PRIORITY_REDRAW));
 

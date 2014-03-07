@@ -17,6 +17,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkEvent < Test::Unit::TestCase
+  class TestConstant < self
+    def test_propagate
+      assert_false(Gdk::Event::PROPAGATE)
+    end
+
+    def test_stop
+      assert_true(Gdk::Event::STOP)
+    end
+  end
+
   module TestAnyMethods
     def test_window
       assert_nil(event.window)
