@@ -33,7 +33,6 @@ module Demo
       vbox.border_width = 8
       add(vbox)
 
-
       ## Create the checkerboard area
       label = Gtk::Label.new
       label.set_markup('<u>Checkerboard pattern</u>')
@@ -167,8 +166,6 @@ module Demo
                                   event.area.width, event.area.height)
       return false
     end
-
-
 
     def draw_brush(widget, x, y)
       update_rect = Gdk::Rectangle.new(x - 3, y - 3, 6, 6)
