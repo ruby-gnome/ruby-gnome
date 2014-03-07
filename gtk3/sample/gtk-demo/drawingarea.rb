@@ -29,7 +29,7 @@ module Demo
 
       self.border_width = 8
 
-      vbox = Gtk::VBox.new(false, 8)
+      vbox = Gtk::Box.new(:vertical, 8)
       vbox.border_width = 8
       add(vbox)
 
@@ -190,7 +190,7 @@ module Demo
       # win, x, y, state = event.window.get_device_position(event.device)
       win, x, y, state = widget.window.get_device_position(event.device)
 
-      if (state & Gdk::Window::BUTTON1_MASK) != 0
+      if (state & :button1_mask) != 0
         draw_brush(widget, x, y)
       end
 
