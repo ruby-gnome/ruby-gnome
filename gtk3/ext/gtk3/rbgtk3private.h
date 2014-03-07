@@ -224,6 +224,9 @@ G_GNUC_INTERNAL void Init_gtk_scalebutton(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrollbar(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_scrolled_window(VALUE mGtk);
+#if GTK_CHECK_VERSION(3, 10, 0)
+   G_GNUC_INTERNAL void Init_gtk_search_bar(VALUE mGtk);
+#endif
 #if GTK_CHECK_VERSION(3, 6, 0)
    G_GNUC_INTERNAL void Init_gtk_search_entry(VALUE mGtk);
 #endif
