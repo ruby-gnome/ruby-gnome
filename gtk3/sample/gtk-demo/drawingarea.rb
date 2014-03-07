@@ -33,16 +33,16 @@ module Demo
       vbox.border_width = 8
       add(vbox)
 
-      
+
       ## Create the checkerboard area
       label = Gtk::Label.new
       label.set_markup('<u>Checkerboard pattern</u>')
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
-      
+
       frame = Gtk::Frame.new
       frame.shadow_type = :in
       vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
-      
+
       da = Gtk::DrawingArea.new
       # set a minimum size
       da.set_size_request(100, 100)
@@ -57,11 +57,11 @@ module Demo
       label = Gtk::Label.new
       label.set_markup('<u>Scribble area</u>')
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
-      
+
       frame = Gtk::Frame.new
       frame.shadow_type = :in
       vbox.pack_start(frame, :expand => true, :fill => true, :padding => 0)
-      
+
       da = Gtk::DrawingArea.new
       # set a minimum size
       da.set_size_request(100, 100)
@@ -75,7 +75,7 @@ module Demo
       da.signal_connect('configure_event') do |widget, event|
         scribble_configure_event(widget)
       end
-      
+
       # Event signals
       da.signal_connect('motion_notify_event') do |*args|
         scribble_motion_notify_event(*args)
@@ -83,7 +83,7 @@ module Demo
       da.signal_connect('button_press_event') do |*args|
         scribble_button_press_event(*args)
       end
-      
+
       # Ask to receive events the drawing area doesn't normally
       # subscribe to
       da.events |= (Gdk::Event::LEAVE_NOTIFY_MASK |
@@ -118,14 +118,14 @@ module Demo
       # widget's background color. The docs for
       # gdk_window_begin_paint_region give more details on how this
       # works.
-  
+
 
       # It would be a bit more efficient to keep these
       # GC's around instead of recreating on each expose, but
       # this is the lazy/slow way.
       gc1 = Gdk::GC.new(da.window)
       gc1.rgb_fg_color = Gdk::Color.new(30000, 0, 30000)
-      
+
       gc2 = Gdk::GC.new(da.window)
       gc2.rgb_fg_color = Gdk::Color.new(65535, 65535, 65535)
 
@@ -138,7 +138,7 @@ module Demo
                else
                  gc2
                end
-          
+
           # If we're outside event.area, this will do nothing.
           # It might be mildly more efficient if we handled
           # the clipping ourselves, but again we're feeling lazy.
@@ -168,7 +168,7 @@ module Demo
       return false
     end
 
-  
+
 
     def draw_brush(widget, x, y)
       update_rect = Gdk::Rectangle.new(x - 3, y - 3, 6, 6)
@@ -188,7 +188,7 @@ module Demo
         # paranoia check, in case we haven't gotten a configure event
         return false
       end
-  
+
       if event.button == 1
         draw_brush(widget, event.x, event.y)
       end
@@ -212,7 +212,7 @@ module Demo
       # By requesting the next event as we handle the current one,
       # we avoid getting a huge number of events faster than we
       # can cope.
-      
+
       win, x, y, state = event.window.pointer
 
       if (state & Gdk::Window::BUTTON1_MASK) != 0
