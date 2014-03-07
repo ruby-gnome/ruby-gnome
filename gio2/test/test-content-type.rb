@@ -23,4 +23,9 @@ class TestContentType < Test::Unit::TestCase
     assert_equal("image-jpeg",
                  @content_type.icon.names.first)
   end
+
+  def test_guess
+    assert_equal(["audio/mpeg", false],
+                 Gio::ContentType.guess("filename.mp3"))
+  end
 end
