@@ -514,7 +514,7 @@ rb_gi_out_argument_fin(GIArgument *argument, GIArgInfo *arg_info)
 }
 
 static void
-rb_gi_return_argument_free_container(GIArgument *argument,
+rb_gi_return_argument_free_container(G_GNUC_UNUSED GIArgument *argument,
                                      GITypeInfo *type_info)
 {
     GITypeTag type_tag;
