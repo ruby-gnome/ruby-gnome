@@ -236,6 +236,7 @@ fill_metadata_array(GPtrArray *args_metadata)
             metadata->in_arg_index;
         metadata->array_length_in_arg_index =
             array_length_metadata->in_arg_index;
+        metadata->array_length_arg_index = array_length_index;
     }
 }
 
@@ -455,7 +456,7 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
                                 metadata->array_length_in_arg_index));
             length_metadata =
                 g_ptr_array_index(args_metadata,
-                                  metadata->array_length_in_arg_index);
+                                  metadata->array_length_arg_index);
             length_arg_info = &(length_metadata->arg_info);
         }
         RVAL2GI_IN_ARRAY_ARGUMENT(array_argument,

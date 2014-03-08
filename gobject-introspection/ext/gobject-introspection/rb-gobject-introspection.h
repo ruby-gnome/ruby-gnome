@@ -44,6 +44,7 @@ typedef struct
     gint destroy_in_arg_index;
     gint array_in_arg_index;
     gint array_length_in_arg_index;
+    gint array_length_arg_index;
     gint rb_arg_index;
     gint out_arg_index;
     gint inout_argc_arg_index;
