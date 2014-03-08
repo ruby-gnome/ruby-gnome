@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,11 +15,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestInetAddress < Test::Unit::TestCase
-  def test_responds_to_properties
-    a = Gio::InetAddress.new(Gio::SocketFamily::IPV4)
-    assert a.respond_to?(:any?)
-  end
-
   class TestConstructor < self
     def test_string
       address = Gio::InetAddress.new("127.0.0.1")
