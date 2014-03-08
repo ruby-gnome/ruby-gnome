@@ -121,7 +121,7 @@ rg_s_define_error(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     }
 
     if (!NIL_P(rb_gtype)) {
-        gtype = NUM2UINT(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
     }
 
     return G_DEF_ERROR(domain, name, rb_module, rb_parent, gtype);
