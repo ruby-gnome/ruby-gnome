@@ -38,7 +38,6 @@ typedef struct
     gboolean destroy_p;
     gboolean array_p;
     gboolean array_length_p;
-    gboolean inout_argv_p;
     gint in_arg_index;
     gint closure_in_arg_index;
     gint destroy_in_arg_index;
@@ -47,7 +46,6 @@ typedef struct
     gint array_length_arg_index;
     gint rb_arg_index;
     gint out_arg_index;
-    gint inout_argc_arg_index;
 } RBGIArgMetadata;
 
 typedef struct {

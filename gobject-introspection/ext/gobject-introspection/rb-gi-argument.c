@@ -23,21 +23,22 @@
 static VALUE rb_cGLibValue = Qnil;
 
 static void
-array_c_to_ruby(const gchar **elements, GITypeInfo *type_info, VALUE rb_array)
+array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
+                VALUE rb_array)
 {
-    gint n_elements;
+    const gchar **elements;
     gboolean fixed_size_p;
     gboolean zero_terminated_p;
 
+    elements = array->v_pointer;
     if (!elements) {
         return;
     }
 
-    n_elements = g_type_info_get_array_length(type_info);
     fixed_size_p = g_type_info_get_array_fixed_size(type_info);
     zero_terminated_p = g_type_info_is_zero_terminated(type_info);
     if (n_elements != -1) {
-        gint i;
+        gint64 i;
         for (i = 0; i < n_elements; i++) {
             rb_ary_push(rb_array, CSTR2RVAL(elements[i]));
         }
@@ -50,22 +51,91 @@ array_c_to_ruby(const gchar **elements, GITypeInfo *type_info, VALUE rb_array)
                  "TODO: GIArgument(array)[c] -> Ruby: "
                  "zero-terminated: %s "
                  "fixed-size: %s "
-                 "length: %d",
+                 "length: %" G_GINT64_FORMAT,
                  zero_terminated_p ? "true" : "false",
                  fixed_size_p ? "true" : "false",
                  n_elements);
     }
 }
 
-static VALUE
-array_to_ruby(gpointer array, GITypeInfo *type_info)
+static gint64
+get_array_length(GIArgument *argument, GITypeInfo *type_info)
+{
+    GITypeTag type_tag;
+    gint64 length = -1;
+
+    if (!argument) {
+        return length;
+    }
+
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid array length argument?: <%s>",
+                 g_type_tag_to_string(type_tag));
+        break;
+      case GI_TYPE_TAG_INT8:
+        length = argument->v_int8;
+        break;
+      case GI_TYPE_TAG_UINT8:
+        length = argument->v_uint8;
+        break;
+      case GI_TYPE_TAG_INT16:
+        length = argument->v_int16;
+        break;
+      case GI_TYPE_TAG_UINT16:
+        length = argument->v_uint16;
+        break;
+      case GI_TYPE_TAG_INT32:
+        length = argument->v_int32;
+        break;
+      case GI_TYPE_TAG_UINT32:
+        length = argument->v_uint32;
+        break;
+      case GI_TYPE_TAG_INT64:
+        length = argument->v_int64;
+        break;
+      case GI_TYPE_TAG_UINT64:
+        length = argument->v_uint64;
+        break;
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid array length argument?: <%s>",
+                 g_type_tag_to_string(type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+
+    return length;
+}
+
+VALUE
+rb_gi_array_argument_to_ruby(GIArgument *array_argument,
+                             GIArgument *length_argument,
+                             GITypeInfo *array_type_info,
+                             GITypeInfo *length_type_info)
 {
     VALUE rb_array;
     GIArrayType array_type;
     gint n_elements;
 
-    array_type = g_type_info_get_array_type(type_info);
-    n_elements = g_type_info_get_array_length(type_info);
+    array_type = g_type_info_get_array_type(array_type_info);
+    n_elements = get_array_length(length_argument, length_type_info);
     if (n_elements == -1) {
         rb_array = rb_ary_new();
     } else {
@@ -73,7 +143,7 @@ array_to_ruby(gpointer array, GITypeInfo *type_info)
     }
     switch (array_type) {
       case GI_ARRAY_TYPE_C:
-        array_c_to_ruby(array, type_info, rb_array);
+        array_c_to_ruby(array_argument, array_type_info, n_elements, rb_array);
         break;
       case GI_ARRAY_TYPE_ARRAY:
         rb_raise(rb_eNotImpError, "TODO: GIArgument(array)[array] -> Ruby");
@@ -255,7 +325,8 @@ rb_gi_argument_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         rb_argument = CSTR2RVAL(argument->v_string);
         break;
       case GI_TYPE_TAG_ARRAY:
-        rb_argument = array_to_ruby(argument->v_pointer, type_info);
+        rb_argument = rb_gi_array_argument_to_ruby(argument, NULL,
+                                                   type_info, NULL);
         break;
       case GI_TYPE_TAG_INTERFACE:
         rb_argument = interface_to_ruby(argument, type_info);
@@ -498,6 +569,102 @@ rb_gi_out_argument_to_ruby(GIArgument *argument, GIArgInfo *arg_info)
     }
 
     return rb_gi_argument_to_ruby(&normalized_argument, &type_info);
+}
+
+static void
+normalize_out_array_length(GIArgument *normalized_argument,
+                           GIArgument *argument,
+                           GITypeInfo *type_info)
+{
+    GITypeTag type_tag;
+
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid out array length argument?: <%s>",
+                 g_type_tag_to_string(type_tag));
+        break;
+      case GI_TYPE_TAG_INT8:
+        normalized_argument->v_int8 = *((gint8 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_UINT8:
+        normalized_argument->v_uint8 = *((guint8 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_INT16:
+        normalized_argument->v_int16 = *((gint16 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_UINT16:
+        normalized_argument->v_uint16 = *((guint16 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_INT32:
+        normalized_argument->v_int32 = *((gint32 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_UINT32:
+        normalized_argument->v_uint32 = *((guint32 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_INT64:
+        normalized_argument->v_int64 = *((gint64 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_UINT64:
+        normalized_argument->v_uint64 = *((guint64 *)argument->v_pointer);
+        break;
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid out array length argument?: <%s>",
+                 g_type_tag_to_string(type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+VALUE
+rb_gi_out_array_argument_to_ruby(GIArgument *array_argument,
+                                 GIArgument *length_argument,
+                                 GIArgInfo *array_arg_info,
+                                 GIArgInfo *length_arg_info)
+{
+    VALUE rb_array;
+    GIArgument normalized_array_argument;
+    GITypeInfo array_type_info;
+
+    normalized_array_argument.v_pointer =
+        *((gpointer *)(array_argument->v_pointer));
+    g_arg_info_load_type(array_arg_info, &array_type_info);
+    if (length_argument) {
+        GITypeInfo length_type_info;
+        GIArgument normalized_length_argument;
+
+        g_arg_info_load_type(length_arg_info, &length_type_info);
+        normalize_out_array_length(&normalized_length_argument,
+                                   length_argument,
+                                   &length_type_info);
+        rb_array = rb_gi_array_argument_to_ruby(&normalized_array_argument,
+                                                &normalized_length_argument,
+                                                &array_type_info,
+                                                &length_type_info);
+    } else {
+        rb_array = rb_gi_array_argument_to_ruby(&normalized_array_argument,
+                                                NULL,
+                                                &array_type_info,
+                                                NULL);
+    }
+
+    return rb_array;
 }
 
 void
@@ -1180,9 +1347,9 @@ rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
 }
 
 static void
-set_array_length_argument(GIArgument *argument,
-                          GITypeInfo *type_info,
-                          gint64 length)
+set_in_array_length_argument(GIArgument *argument,
+                             GITypeInfo *type_info,
+                             gint64 length)
 {
     GITypeTag type_tag;
 
@@ -1245,12 +1412,12 @@ set_array_length_argument(GIArgument *argument,
 }
 
 static void
-array_c_argument_from_ruby(GIArgument *array_argument,
-                           GIArgument *length_argument,
-                           G_GNUC_UNUSED GITypeInfo *array_type_info,
-                           GITypeInfo *length_type_info,
-                           GITypeInfo *element_type_info,
-                           VALUE rb_argument)
+in_array_c_argument_from_ruby(GIArgument *array_argument,
+                              GIArgument *length_argument,
+                              G_GNUC_UNUSED GITypeInfo *array_type_info,
+                              GITypeInfo *length_type_info,
+                              GITypeInfo *element_type_info,
+                              VALUE rb_argument)
 {
     GITypeTag element_type_tag;
 
@@ -1265,8 +1432,8 @@ array_c_argument_from_ruby(GIArgument *array_argument,
       case GI_TYPE_TAG_INT8:
       case GI_TYPE_TAG_UINT8:
         array_argument->v_pointer = RSTRING_PTR(rb_argument);
-        set_array_length_argument(length_argument, length_type_info,
-                                  RSTRING_LEN(rb_argument));
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RSTRING_LEN(rb_argument));
         break;
       case GI_TYPE_TAG_INT16:
       case GI_TYPE_TAG_UINT16:
@@ -1284,8 +1451,8 @@ array_c_argument_from_ruby(GIArgument *array_argument,
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
         array_argument->v_pointer = RVAL2STRV(rb_argument);
-        set_array_length_argument(length_argument, length_type_info,
-                                  RARRAY_LEN(rb_argument));
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
         break;
       case GI_TYPE_TAG_ARRAY:
       case GI_TYPE_TAG_INTERFACE:
@@ -1305,11 +1472,11 @@ array_c_argument_from_ruby(GIArgument *array_argument,
 }
 
 static void
-array_argument_from_ruby(GIArgument *array_argument,
-                         GIArgument *length_argument,
-                         GITypeInfo *array_type_info,
-                         GITypeInfo *length_type_info,
-                         VALUE rb_argument)
+in_array_argument_from_ruby(GIArgument *array_argument,
+                            GIArgument *length_argument,
+                            GITypeInfo *array_type_info,
+                            GITypeInfo *length_type_info,
+                            VALUE rb_argument)
 {
     GIArrayType array_type;
     GITypeInfo *element_type_info;
@@ -1318,12 +1485,12 @@ array_argument_from_ruby(GIArgument *array_argument,
     element_type_info = g_type_info_get_param_type(array_type_info, 0);
     switch (array_type) {
       case GI_ARRAY_TYPE_C:
-        array_c_argument_from_ruby(array_argument,
-                                   length_argument,
-                                   array_type_info,
-                                   length_type_info,
-                                   element_type_info,
-                                   rb_argument);
+        in_array_c_argument_from_ruby(array_argument,
+                                      length_argument,
+                                      array_type_info,
+                                      length_type_info,
+                                      element_type_info,
+                                      rb_argument);
         break;
       case GI_ARRAY_TYPE_ARRAY:
       case GI_ARRAY_TYPE_PTR_ARRAY:
@@ -1339,6 +1506,102 @@ array_argument_from_ruby(GIArgument *array_argument,
     g_base_info_unref(element_type_info);
 }
 
+static void
+set_inout_array_length_argument(GIArgument *argument,
+                                GITypeInfo *type_info,
+                                GIArgument *length)
+{
+    GITypeTag type_tag;
+
+    if (!argument) {
+        return;
+    }
+
+    type_tag = g_type_info_get_tag(type_info);
+    switch (type_tag) {
+      case GI_TYPE_TAG_VOID:
+      case GI_TYPE_TAG_BOOLEAN:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid argument?: length[%s]",
+                 g_type_tag_to_string(type_tag));
+        break;
+      case GI_TYPE_TAG_INT8:
+        argument->v_pointer = ALLOC(gint8);
+        *((gint8 *)argument->v_pointer) = length->v_int8;
+        break;
+      case GI_TYPE_TAG_UINT8:
+        argument->v_pointer = ALLOC(guint8);
+        *((guint8 *)argument->v_pointer) = length->v_uint8;
+        break;
+      case GI_TYPE_TAG_INT16:
+        argument->v_pointer = ALLOC(gint16);
+        *((gint16 *)argument->v_pointer) = length->v_int16;
+        break;
+      case GI_TYPE_TAG_UINT16:
+        argument->v_pointer = ALLOC(guint16);
+        *((guint16 *)argument->v_pointer) = length->v_uint16;
+        break;
+      case GI_TYPE_TAG_INT32:
+        argument->v_pointer = ALLOC(gint32);
+        *((gint32 *)argument->v_pointer) = length->v_int32;
+        break;
+      case GI_TYPE_TAG_UINT32:
+        argument->v_pointer = ALLOC(guint32);
+        *((guint32 *)argument->v_pointer) = length->v_uint32;
+        break;
+      case GI_TYPE_TAG_INT64:
+        argument->v_pointer = ALLOC(gint64);
+        *((gint64 *)argument->v_pointer) = length->v_int64;
+        break;
+      case GI_TYPE_TAG_UINT64:
+        argument->v_pointer = ALLOC(guint64);
+        *((guint64 *)argument->v_pointer) = length->v_uint64;
+        break;
+      case GI_TYPE_TAG_FLOAT:
+      case GI_TYPE_TAG_DOUBLE:
+      case GI_TYPE_TAG_GTYPE:
+      case GI_TYPE_TAG_UTF8:
+      case GI_TYPE_TAG_FILENAME:
+      case GI_TYPE_TAG_ARRAY:
+      case GI_TYPE_TAG_INTERFACE:
+      case GI_TYPE_TAG_GLIST:
+      case GI_TYPE_TAG_GSLIST:
+      case GI_TYPE_TAG_GHASH:
+      case GI_TYPE_TAG_ERROR:
+      case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: invalid argument?: length[%s]",
+                 g_type_tag_to_string(type_tag));
+        break;
+      default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
+inout_array_argument_from_ruby(GIArgument *array_argument,
+                               GIArgument *length_argument,
+                               GITypeInfo *array_type_info,
+                               GITypeInfo *length_type_info,
+                               VALUE rb_argument)
+{
+    GIArgument in_array_argument;
+    GIArgument in_length_argument;
+
+    in_array_argument_from_ruby(&in_array_argument,
+                                &in_length_argument,
+                                array_type_info,
+                                length_type_info,
+                                rb_argument);
+
+    array_argument->v_pointer = ALLOC(gpointer);
+    *((gpointer *)array_argument->v_pointer) = in_array_argument.v_pointer;
+    set_inout_array_length_argument(length_argument,
+                                    length_type_info,
+                                    &in_length_argument);
+}
+
 GIArgument *
 rb_gi_in_array_argument_from_ruby(GIArgument *array_argument,
                                   GIArgument *length_argument,
@@ -1346,6 +1609,10 @@ rb_gi_in_array_argument_from_ruby(GIArgument *array_argument,
                                   GIArgInfo *length_arg_info,
                                   VALUE rb_argument)
 {
+    GITypeInfo array_type_info;
+    GITypeInfo length_type_info;
+    GITypeInfo *length_type_info_arg = NULL;
+
     if (g_arg_info_may_be_null(array_arg_info) && NIL_P(rb_argument)) {
         memset(array_argument, 0, sizeof(GIArgument));
         if (length_argument) {
@@ -1354,23 +1621,26 @@ rb_gi_in_array_argument_from_ruby(GIArgument *array_argument,
         return array_argument;
     }
 
+    g_arg_info_load_type(array_arg_info, &array_type_info);
+    if (length_arg_info) {
+        g_arg_info_load_type(length_arg_info, &length_type_info);
+        length_type_info_arg = &length_type_info;
+    }
     if (g_arg_info_get_direction(array_arg_info) == GI_DIRECTION_INOUT) {
-        rb_raise(rb_eNotImpError, "TODO: inout array");
+        inout_array_argument_from_ruby(array_argument,
+                                       length_argument,
+                                       &array_type_info,
+                                       length_type_info_arg,
+                                       rb_argument);
     } else {
-        GITypeInfo array_type_info;
-        GITypeInfo length_type_info;
         GITransfer transfer;
 
-        g_arg_info_load_type(array_arg_info, &array_type_info);
-        if (length_arg_info) {
-            g_arg_info_load_type(length_arg_info, &length_type_info);
-        }
+        in_array_argument_from_ruby(array_argument,
+                                    length_argument,
+                                    &array_type_info,
+                                    length_type_info_arg,
+                                    rb_argument);
         transfer = g_arg_info_get_ownership_transfer(array_arg_info);
-        array_argument_from_ruby(array_argument,
-                                 length_argument,
-                                 &array_type_info,
-                                 length_arg_info ? &length_type_info : NULL,
-                                 rb_argument);
         rb_gi_in_argument_transfer(array_argument,
                                    transfer,
                                    &array_type_info,

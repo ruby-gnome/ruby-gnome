@@ -114,15 +114,14 @@ allocate_arguments(GICallableInfo *info,
         metadata->destroy_p = FALSE;
         metadata->array_p = FALSE;
         metadata->array_length_p = FALSE;
-        metadata->inout_argv_p = FALSE;
         metadata->in_arg_index = -1;
         metadata->closure_in_arg_index = -1;
         metadata->destroy_in_arg_index = -1;
         metadata->array_in_arg_index = -1;
         metadata->array_length_in_arg_index = -1;
+        metadata->array_length_arg_index = -1;
         metadata->rb_arg_index = -1;
         metadata->out_arg_index = -1;
-        metadata->inout_argc_arg_index = -1;
 
         direction = metadata->direction;
         if (direction == GI_DIRECTION_IN || direction == GI_DIRECTION_INOUT) {
@@ -136,32 +135,6 @@ allocate_arguments(GICallableInfo *info,
         }
 
         g_ptr_array_add(args_metadata, metadata);
-    }
-}
-
-static void
-fill_metadata_inout_argv(GPtrArray *args_metadata)
-{
-    guint i;
-    gint inout_argc_arg_index = -1;
-
-    for (i = 0; i < args_metadata->len; i++) {
-        RBGIArgMetadata *metadata;
-        GIArgInfo *arg_info;
-        const gchar *name;
-
-        metadata = g_ptr_array_index(args_metadata, i);
-        if (metadata->direction != GI_DIRECTION_INOUT) {
-            continue;
-        }
-        arg_info = &(metadata->arg_info);
-        name = g_base_info_get_name(arg_info);
-        if (strcmp(name, "argc") == 0) {
-            inout_argc_arg_index = i;
-        } else if (strcmp(name, "argv") == 0) {
-            metadata->inout_argv_p = TRUE;
-            metadata->inout_argc_arg_index = inout_argc_arg_index;
-        }
     }
 }
 
@@ -243,7 +216,6 @@ fill_metadata_array(GPtrArray *args_metadata)
 static void
 fill_metadata(GPtrArray *args_metadata)
 {
-    fill_metadata_inout_argv(args_metadata);
     fill_metadata_callback(args_metadata);
     fill_metadata_array(args_metadata);
 }
@@ -523,28 +495,6 @@ arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
 }
 
 static VALUE
-inout_argv_argument_to_ruby(GArray *in_args, RBGIArgMetadata *metadata)
-{
-    GIArgument *inout_argc_argument;
-    GIArgument *inout_argv_argument;
-    gint i, argc;
-    gchar **argv;
-    VALUE rb_argv_argument;
-
-    inout_argc_argument = &g_array_index(in_args, GIArgument,
-                                         metadata->inout_argc_arg_index);
-    inout_argv_argument = &g_array_index(in_args, GIArgument,
-                                         metadata->in_arg_index);
-    argc = *((gint *)(inout_argc_argument->v_pointer));
-    argv = *((gchar ***)(inout_argv_argument->v_pointer));
-    rb_argv_argument = rb_ary_new2(argc);
-    for (i = 0; i < argc; i++) {
-        rb_ary_push(rb_argv_argument, CSTR2RVAL(argv[i]));
-    }
-    return rb_argv_argument;
-}
-
-static VALUE
 out_arguments_to_ruby(GICallableInfo *callable_info,
                       GArray *in_args, GArray *out_args,
                       GPtrArray *args_metadata)
@@ -560,6 +510,10 @@ out_arguments_to_ruby(GICallableInfo *callable_info,
         VALUE rb_argument;
 
         metadata = g_ptr_array_index(args_metadata, i);
+        if (metadata->array_length_p) {
+            continue;
+        }
+
         switch (metadata->direction) {
           case GI_DIRECTION_IN:
             break;
@@ -580,8 +534,30 @@ out_arguments_to_ruby(GICallableInfo *callable_info,
             continue;
         }
 
-        if (metadata->inout_argv_p) {
-            rb_argument = inout_argv_argument_to_ruby(in_args, metadata);
+        if (metadata->array_p) {
+            GIArgument *length_argument = NULL;
+            GIArgInfo *length_arg_info = NULL;
+
+            if (metadata->array_length_in_arg_index != -1) {
+                RBGIArgMetadata *length_metadata;
+                length_metadata =
+                    g_ptr_array_index(args_metadata,
+                                      metadata->array_length_arg_index);
+                if (length_metadata->direction == GI_DIRECTION_OUT) {
+                    length_argument =
+                        &g_array_index(in_args, GIArgument,
+                                       length_metadata->out_arg_index);
+                } else {
+                    length_argument =
+                        &g_array_index(in_args, GIArgument,
+                                       length_metadata->in_arg_index);
+                }
+                length_arg_info = &(length_metadata->arg_info);
+            }
+            rb_argument = GI_OUT_ARRAY_ARGUMENT2RVAL(argument,
+                                                     length_argument,
+                                                     &(metadata->arg_info),
+                                                     length_arg_info);
         } else {
             rb_argument = GI_OUT_ARGUMENT2RVAL(argument, &(metadata->arg_info));
         }
