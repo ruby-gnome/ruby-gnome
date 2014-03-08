@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -64,8 +64,8 @@ module ClutterGst
         1 + @init_arguments.size,
         [$0] + @init_arguments,
       ]
-      error, argc, argv = init.invoke(:arguments => arguments)
-      @init_arguments.replace(argv)
+      error, returned_arguments = init.invoke(:arguments => arguments)
+      @init_arguments.replace(returned_arguments)
       if error.to_i <= 0
         raise InitError, "failed to initialize Clutter-GStreamer: #{error.name}"
       end
