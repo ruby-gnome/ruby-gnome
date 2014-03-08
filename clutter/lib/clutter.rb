@@ -82,8 +82,8 @@ module Clutter
         1 + @init_arguments.size,
         [$0] + @init_arguments,
       ]
-      error, arguments = init.invoke(:arguments => arguments)
-      @init_arguments.replace(arguments)
+      error, returned_arguments = init.invoke(:arguments => arguments)
+      @init_arguments.replace(returned_arguments)
       if error.to_i <= 0
         raise InitError, "failed to initialize Clutter: #{error.name}"
       end
