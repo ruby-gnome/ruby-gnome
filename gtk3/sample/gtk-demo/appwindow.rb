@@ -35,12 +35,12 @@ module Demo
                                         Gtk::MessageDialog::INFO,
                                         Gtk::MessageDialog::BUTTONS_CLOSE,
                                         "You selected or toggled the menu item \"#{Gtk::ItemFactory.path_from_widget(widget)}\"")
-        
+
         # Close dialog on user response
         dialog.signal_connect('response') do |widget, data|
           widget.destroy
         end
-        
+
         dialog.show
       end
 
@@ -67,7 +67,7 @@ module Demo
           "/Preferences/Color/Red", nil, nil, menuitem_cb],
         ["/_Preferences/Color/_Blue",
           "/Preferences/Color/Red", nil, nil, menuitem_cb],
-        
+
         ["/Preferences/_Shape"],
         ["/Preferences/Shape/_Square",
           "<RadioItem>",                 nil, nil, menuitem_cb],
@@ -165,7 +165,7 @@ module Demo
       end
 
       authors = ["Peter Mattis", "Spencer Kimball", "Josh MacDonald", "and many more..."]
-      documentors = ["Owen Taylor", "Tony Gale", "Mattias Clasen <mclasen@redhat.com>",  
+      documentors = ["Owen Taylor", "Tony Gale", "Mattias Clasen <mclasen@redhat.com>",
         "and many more..."]
       license = %Q[
 This library is free software; you can redistribute it and/or
@@ -185,7 +185,7 @@ Boston, MA 02111-1307, USA.
 ]
 
       transparent = Gdk::Pixbuf.new(Demo.find_file("gtk-logo-rgb.gif")).add_alpha(true, 0xff, 0xff, 0xff)
-      
+
       Gtk::AboutDialog.set_email_hook {|about, link|
         puts "send mail to #{link}"
       }
