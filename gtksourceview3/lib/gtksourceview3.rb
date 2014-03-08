@@ -10,7 +10,7 @@ vendor_dir = base_dir + "vendor" + "local"
 vendor_bin_dir = vendor_dir + "bin"
 GLib.prepend_dll_path(vendor_bin_dir)
 begin
-  major, minor, micro, = RUBY_VERSION.split(/\./)
+  major, minor, = RUBY_VERSION.split(/\./)
   require "#{major}.#{minor}/gtksourceview3.so"
 rescue LoadError
   require "gtksourceview3.so"
