@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005  Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -21,16 +21,6 @@
 
 #include "rbgprivate.h"
 
-#ifndef HAVE_RB_THREAD_BLOCKING_REGION
-#  include <version.h>
-#  include <rubysig.h>
-#  include <node.h>
-#  include <time.h>
-#  ifdef HAVE_CURR_THREAD
-#    define rb_curr_thread curr_thread
-#  endif
-#endif
-
 GStaticPrivate rg_polling_key = G_STATIC_PRIVATE_INIT;
 
 /*
@@ -50,13 +40,6 @@ typedef struct _callback_info_t
 
 /*****************************************/
 static GPollFunc default_poll_func;
-
-#ifdef HAVE_RB_THREAD_BLOCKING_REGION
-
-/* just for ruby-1.9.0. */
-#if !defined(RUBY_UBF_IO) && defined(RB_UBF_DFL)
-#  define RUBY_UBF_IO RB_UBF_DFL
-#endif
 
 typedef struct _PollInfo
 {
@@ -87,7 +70,11 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     info.result = 0;
 
     g_static_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE), NULL);
+#ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL2
+    rb_thread_call_without_gvl2(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
+#else
     rb_thread_blocking_region(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
+#endif
     g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
 
     return info.result;
@@ -99,20 +86,6 @@ ruby_source_set_priority (G_GNUC_UNUSED VALUE self, G_GNUC_UNUSED VALUE priority
     return Qnil;
 }
 
-#else
-static gint
-rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
-{
-    gint result;
-
-    TRAP_BEG;
-    result = default_poll_func(ufds, nfsd, timeout);
-    TRAP_END;
-
-    return result;
-}
-#endif
-
 static void
 restore_poll_func(G_GNUC_UNUSED VALUE data)
 {
@@ -120,294 +93,6 @@ restore_poll_func(G_GNUC_UNUSED VALUE data)
         g_main_context_set_poll_func(NULL, default_poll_func);
     }
 }
-
-#ifndef HAVE_RB_THREAD_BLOCKING_REGION
-static guint ruby_source_id = 0;
-
-/* from eval.c */
-#define WAIT_FD     (1<<0)
-#define WAIT_SELECT (1<<1)
-#define WAIT_TIME   (1<<2)
-#define WAIT_JOIN   (1<<3)
-#define WAIT_PID    (1<<4)
-
-#define DELAY_INFTY 1E30
-
-#ifdef RUBY_RELEASE_YEAR
-#  define CHECK_RUBY_RELEASE_DATE(year, month, day)     \
-    (RUBY_RELEASE_YEAR >= (year) &&                     \
-     RUBY_RELEASE_MONTH >= (month) &&                   \
-     RUBY_RELEASE_DAY >= (day))
-#else
-#  define CHECK_RUBY_RELEASE_DATE(year, month, day) 0
-#endif
-
-static double
-timeofday(void)
-{
-    struct timeval tv;
-#if CHECK_RUBY_RELEASE_DATE(2009, 1, 7)
-/* The following CLOCK_MONOTONIC change was introduced into
- * Ruby 1.8.6 and 1.8.7 at 2009-01-07.
- *
- * 1.8.6:
- * Wed Jan  7 10:06:12 2009  Nobuyoshi Nakada  <nobu@ruby-lang.org>
- *
- *        * eval.c (timeofday): use monotonic clock.  based on a patch
- *          from zimbatm <zimbatm@oree.ch> in [ruby-core:16627].
- *
- * 1.8.7:
- * Wed Jan  7 10:09:46 2009  Nobuyoshi Nakada  <nobu@ruby-lang.org>
- *
- *        * eval.c (timeofday): use monotonic clock.  based on a patch
- *          from zimbatm <zimbatm@oree.ch> in [ruby-core:16627].
- */
-#  ifdef CLOCK_MONOTONIC
-    struct timespec tp;
-
-    if (clock_gettime(CLOCK_MONOTONIC, &tp) == 0) {
-        return (double)tp.tv_sec + (double)tp.tv_nsec * 1e-9;
-    }
-#  endif
-#endif
-    gettimeofday(&tv, NULL);
-    return (double)tv.tv_sec + (double)tv.tv_usec * 1e-6;
-}
-
-/*****************************************/
-typedef struct _RGSource
-{
-    GSource source;
-
-    GList *poll_fds;
-    GList *old_poll_fds;
-    gboolean ready;
-} RGSource;
-
-static void
-source_cleanup_poll_fds(GSource *source)
-{
-    RGSource *rg_source = (RGSource *)source;
-    GList *node;
-
-    for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
-        GPollFD *poll_fd = node->data;
-
-        g_source_remove_poll(source, poll_fd);
-        g_slice_free(GPollFD, poll_fd);
-    }
-    g_list_free(rg_source->old_poll_fds);
-    rg_source->old_poll_fds = NULL;
-}
-
-static inline void
-source_prepare_add_poll_fd(GSource *source, gint fd, guchar events)
-{
-    GPollFD *poll_fd;
-    GList *node;
-    RGSource *rg_source = (RGSource *)source;
-
-    for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
-        poll_fd = node->data;
-        if (poll_fd->fd == fd && poll_fd->events == events) {
-            rg_source->old_poll_fds =
-                g_list_remove_link(rg_source->old_poll_fds, node);
-            rg_source->poll_fds = g_list_concat(rg_source->poll_fds, node);
-            return;
-        }
-    }
-
-    poll_fd = g_slice_new0(GPollFD);
-    poll_fd->fd = fd;
-    poll_fd->events = events;
-
-    g_source_add_poll(source, poll_fd);
-    rg_source->poll_fds = g_list_prepend(rg_source->poll_fds, poll_fd);
-}
-
-static inline void
-source_prepare_add_poll(GSource *source, rb_thread_t thread)
-{
-    if (thread->wait_for == WAIT_FD) {
-        /* The thread is blocked on thread->fd for read. */
-        source_prepare_add_poll_fd(source, thread->fd, G_IO_IN);
-        return;
-    }
-
-    if (thread->wait_for & WAIT_SELECT) {
-        /* thread->fd is the maximum fd of the fds in the various sets. Need to
-         * check the sets to see which fd's to wait for */
-        int fd;
-
-        for (fd = 0; fd < thread->fd; fd++) {
-            gushort events = 0;
-
-            if (FD_ISSET(fd, &thread->readfds))
-                events |= G_IO_IN;
-            if (FD_ISSET(fd, &thread->writefds))
-                events |= G_IO_OUT;
-            if (FD_ISSET(fd, &thread->exceptfds))
-                events |= G_IO_PRI | G_IO_ERR | G_IO_HUP;
-
-            if (events != 0)
-              source_prepare_add_poll_fd(source, fd, events);
-        }
-    }
-}
-
-static inline gboolean
-source_prepare_setup_poll_fd(GSource *source, gint *timeout)
-{
-    RGSource *rg_source = (RGSource *)source;
-    rb_thread_t thread;
-    gdouble now;
-
-    g_assert(rg_source->old_poll_fds == NULL);
-    rg_source->old_poll_fds = rg_source->poll_fds;
-    rg_source->poll_fds = NULL;
-
-    now = timeofday();
-    thread = rb_curr_thread;
-    do {
-        thread = thread->next;
-
-        if ((thread->wait_for == 0 && thread->status == THREAD_RUNNABLE &&
-             thread != rb_curr_thread) ||
-            (thread->wait_for & WAIT_JOIN &&
-             thread->join->status == THREAD_KILLED)) {
-            rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
-                                                rg_source->old_poll_fds);
-            rg_source->old_poll_fds = NULL;
-            return TRUE;
-        }
-
-        if (thread->wait_for & WAIT_TIME && thread->delay != DELAY_INFTY) {
-            gint delay;
-
-            delay = (thread->delay - now) * 1000;
-            if (delay <= 0) {
-                rg_source->poll_fds = g_list_concat(rg_source->poll_fds,
-                                                    rg_source->old_poll_fds);
-                rg_source->old_poll_fds = NULL;
-                return TRUE;
-            }
-            if (*timeout == -1 || delay < *timeout)
-                *timeout = delay;
-        }
-
-        if (thread->wait_for == WAIT_FD || thread->wait_for & WAIT_SELECT)
-            source_prepare_add_poll(source, thread);
-    } while (thread != rb_curr_thread);
-
-    source_cleanup_poll_fds(source);
-
-    return FALSE;
-}
-
-static gboolean
-source_prepare(GSource *source, gint *timeout)
-{
-    RGSource *rg_source = (RGSource *)source;
-
-    *timeout = -1;
-    rg_source->ready = source_prepare_setup_poll_fd(source, timeout);
-
-    return rg_source->ready;
-}
-
-static gboolean
-source_check(GSource *source)
-{
-    RGSource *rg_source = (RGSource *)source;
-    GList *node;
-
-    if (rg_source->ready)
-        return TRUE;
-
-    for (node = rg_source->poll_fds; node; node = g_list_next(node)) {
-        GPollFD *poll_fd = node->data;
-
-        if (poll_fd->revents)
-            return TRUE;
-    }
-
-    return FALSE;
-}
-
-static gboolean
-source_dispatch(G_GNUC_UNUSED GSource *source,
-                G_GNUC_UNUSED GSourceFunc callback,
-                G_GNUC_UNUSED gpointer user_data)
-{
-    TRAP_BEG;
-    rb_thread_schedule();
-    TRAP_END;
-
-    return TRUE;
-}
-
-static void
-source_finalize(GSource *source)
-{
-    RGSource *rg_source = (RGSource *)source;
-    GList *node;
-
-    for (node = rg_source->old_poll_fds; node; node = g_list_next(node)) {
-        GPollFD *poll_fd = node->data;
-        g_slice_free(GPollFD, poll_fd);
-    }
-
-    for (node = rg_source->poll_fds; node; node = g_list_next(node)) {
-        GPollFD *poll_fd = node->data;
-        g_slice_free(GPollFD, poll_fd);
-    }
-
-    g_list_free(rg_source->old_poll_fds);
-    rg_source->old_poll_fds = NULL;
-
-    g_list_free(rg_source->poll_fds);
-    rg_source->poll_fds = NULL;
-}
-
-static GSourceFuncs source_funcs = {
-    source_prepare,
-    source_check,
-    source_dispatch,
-    source_finalize,
-    NULL,
-    NULL
-};
-
-static GSource *
-ruby_source_new(void)
-{
-    GSource *source;
-    RGSource *rg_source;
-
-    source = g_source_new(&source_funcs, sizeof(RGSource));
-    g_source_set_can_recurse(source, TRUE);
-
-    rg_source = (RGSource *)source;
-    rg_source->poll_fds = NULL;
-    rg_source->old_poll_fds = NULL;
-
-    return source;
-}
-
-static VALUE
-ruby_source_set_priority(G_GNUC_UNUSED VALUE self, VALUE priority)
-{
-    GSource *ruby_source = NULL;
-
-    if (ruby_source_id != 0)
-        ruby_source = g_main_context_find_source_by_id(NULL, ruby_source_id);
-
-    if (ruby_source)
-        g_source_set_priority(ruby_source, NUM2INT(priority));
-
-    return Qnil;
-}
-#endif
 
 static VALUE
 source_remove(G_GNUC_UNUSED VALUE self, VALUE tag)
@@ -463,14 +148,6 @@ rg_initialize(VALUE self)
     context = g_main_context_new();
 
     g_main_context_set_poll_func(context, rg_poll);
-#ifndef HAVE_RB_THREAD_BLOCKING_REGION
-    {
-        GSource *source;
-        source = ruby_source_new();
-        g_source_attach(source, context);
-        g_source_unref(source);
-    }
-#endif
 
     G_INITIALIZE(self, context);
     return Qnil;
@@ -822,17 +499,6 @@ child_watch_add(VALUE self, VALUE pid)
                                       (GChildWatchFunc)child_watch_func, (gpointer)func));
 }
 
-#ifndef HAVE_RB_THREAD_BLOCKING_REGION
-static void
-ruby_source_remove(G_GNUC_UNUSED VALUE data)
-{
-    if (ruby_source_id != 0) {
-        g_source_remove(ruby_source_id);
-        ruby_source_id = 0;
-    }
-}
-#endif
-
 void
 Init_glib_main_context(void)
 {
@@ -896,16 +562,4 @@ Init_glib_main_context(void)
     default_poll_func = g_main_context_get_poll_func(NULL);
     g_main_context_set_poll_func(NULL, rg_poll);
     rb_set_end_proc(restore_poll_func, Qnil);
-
-#ifndef HAVE_RB_THREAD_BLOCKING_REGION
-    {
-        GSource *source;
-
-        source = ruby_source_new();
-        g_source_set_priority(source, G_PRIORITY_DEFAULT_IDLE);
-        ruby_source_id = g_source_attach(source, NULL);
-        g_source_unref(source);
-        rb_set_end_proc(ruby_source_remove, Qnil);
-    }
-#endif
 }
