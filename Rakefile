@@ -189,7 +189,9 @@ namespace :dist do
         Dir.chdir(base_dir) do
           sh("tar", "xvf", ruby_tar_bz2_base)
           Dir.chdir(File.basename(ruby_tar_bz2_base, ".tar.bz2")) do
-            sh("./configure", "--prefix=#{expanded_prefix}")
+            sh("./configure",
+               "--prefix=#{expanded_prefix}",
+               "--with-out-ext=readline")
             sh("make", "-j8")
             sh("make", "install-nodoc")
           end
