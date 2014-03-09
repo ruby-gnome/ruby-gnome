@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -35,5 +35,11 @@
 
 #define RVAL2VTEPTYFLAGS(o)                (RVAL2GFLAGS(o, VTE_TYPE_PTY_FLAGS))
 #define VTEPTYFLAGS2RVAL(o)                (GFLAGS2RVAL(o, VTE_TYPE_PTY_FLAGS))
+
+/* For GIO. They are temporary. They will be needless after Ruby/GDK3
+ * is based on Ruby/GObjectIntrospection.
+ */
+#define RVAL2GCANCELLABLE(o)               (G_CANCELLABLE(RVAL2GOBJ(o)))
+#define RVAL2GOUTPUTSTREAM(o)              (G_OUTPUT_STREAM(RVAL2GOBJ(o)))
 
 #endif /* __RBVTE3CONVERSIONS_H__ */
