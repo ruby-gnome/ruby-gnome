@@ -26,7 +26,7 @@ view.buffer.language = lang
 view.buffer.highlight_syntax = true
 view.buffer.highlight_matching_brackets = true
 
-window.set_default_size(450,300)
+window.set_default_size(450, 300)
 window.show_all
 
 Gtk.main
