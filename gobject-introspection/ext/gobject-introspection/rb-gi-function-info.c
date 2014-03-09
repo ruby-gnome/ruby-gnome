@@ -743,7 +743,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
     if (!NIL_P(rb_out_args) && RARRAY_LEN(rb_out_args) == 1) {
         VALUE rb_out_arg;
         rb_out_arg = RARRAY_PTR(rb_out_args)[0];
-        if (rb_obj_is_kind_of(rb_out_arg, rb_cGLibError)) {
+        if (rb_obj_is_kind_of(rb_out_arg, rb_eException)) {
             rb_exc_raise(rb_out_arg);
         }
     }
