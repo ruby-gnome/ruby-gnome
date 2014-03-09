@@ -10,11 +10,11 @@
 
 require 'gtksourceview3'
 
-w = Gtk::Window.new
-w.signal_connect("delete-event"){Gtk::main_quit}
+window = Gtk::Window.new
+window.signal_connect("delete-event") {Gtk::main_quit}
 
 view = GtkSource::View.new
-w.add(Gtk::ScrolledWindow.new.add(view))
+window.add(Gtk::ScrolledWindow.new.add(view))
 view.show_line_numbers = true
 view.insert_spaces_instead_of_tabs = true
 view.indent_width = 4
@@ -26,7 +26,7 @@ view.buffer.language = lang
 view.buffer.highlight_syntax = true
 view.buffer.highlight_matching_brackets = true
 
-w.set_default_size(450,300)
-w.show_all
+window.set_default_size(450,300)
+window.show_all
 
 Gtk.main
