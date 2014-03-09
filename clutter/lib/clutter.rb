@@ -45,6 +45,10 @@ module Clutter
     end
 
     def init(argv=[])
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
       loader = Loader.new(self, argv)
       loader.load("Clutter")
       require "clutter/actor"
@@ -56,10 +60,6 @@ module Clutter
       require "clutter/point"
       require "clutter/text"
       require "clutter/threads"
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
-      end
     end
   end
 
