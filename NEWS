@@ -2,9 +2,14 @@
 
 = NEWS
 
-== Ruby-GNOME2 2.1.1: 2014-03-29
+== Ruby-GNOME2 2.2.0: 2014-03-09
 
-(memo: 2.1.0..e6aa43c98d76de0ba4f5250c6f25acbb7a45f7a4 are listed.)
+It is a release that Ruby/GIO2 is migrated to
+Ruby/GObjectIntrospection based bindings.
+
+Some API changes in Ruby/GIO2 are expected but unexpected API changes
+may exist. If you find API change, please report it. If the API change
+provides non Rubyish API, it will be a bug.
 
 === Changes
 
@@ -13,8 +18,18 @@
   * Improvements
     * Stopped to use deprecated API internally in G_REPLACE_SET_PROPERTY.
     * Added RG_REPLACE_SET_PROPERTY.
+    * Reduced locking on object creation.
+    * Exported rbg_inspect().
+    * Created code level error.
+    * Raised code level error instead of domain level error.
+
+  * Fixes
+    * Fixed a bug that wrong error code may be used.
 
 ==== Ruby/GTK2
+
+  * Improvements
+    * Suppressed warnings on startup.
 
   * Fixes
     * [windows] Suppressed IME related warnings.
@@ -29,6 +44,8 @@
     * Added Gdk::Display#device_manager.
     * Added Gdk::Window#display.
     * Suppressed warnings on startup.
+    * Added Gdk::Event::PROPAGATE.
+    * Added Gdk::Event::STOP.
 
   * Fixes
     * [windows] Suppressed IME related warnings.
@@ -46,8 +63,33 @@
     * [GitHub#206] Added Gtk::HeaderBar. [Reported by dark-yux]
     * [GitHub#223] Added Gtk::Stack. [Patch by cosmo0920]
     * Suppressed warnings on startup.
+    * Added Gtk::Revealer.
+    * Updated sample scripts.
+    * [GitHub#227] Added Gtk::SearchBar. [patch by cosmo0920]
 
 ==== Ruby/GIO2
+
+  * Improvements
+    * Migrated to Ruby/GObjectIntrospection based bindings.
+    * [SF.net#187] Supported Gio::ContentType.guess.
+      [Reported by neversleep1911]
+    * Added Gio::Resources.lookup_data.
+    * Added Gio::Resources.open_stream.
+    * Added Gio::Resources.enumerate_children.
+    * Added Gio::Resources.get_info.
+    * Added Gio::Resources.register.
+    * Added Gio::Resources.unregister.
+
+  * Changes
+    * Removed Gio::Socket#create_source. Use
+      Gio::InputStream#create_source or
+      Gio::OutputStream#create_source instead.
+    * Removed Gio::InetAddress.new_from_string. Use
+      Gio::InetAddress.new instead.
+    * Removed Gio::InetAddress.new_any. Use
+      Gio::InetAddress.any instead.
+    * Removed Gio::InetAddress.new_l. Use
+      Gio::InetAddress.any instead.
 
   * Fixes
     * [SF.net#186] Fixed a bug that Gio::ContentType module functions
@@ -68,7 +110,8 @@
 ==== Ruby/GtkSourceView2
 
   * Improvements
-    * Suppressed warnings on startup.
+    * [GitHub#226] Suppressed warnings.
+      [Patch by cosmo0920]
 
   * Fixes
     * [GitHub#215] Fixed a return value for
@@ -81,6 +124,20 @@
     * [GitHub#216] Suppressed warnings on armv7hl.
       [Reported by mtasaka]
     * Supported freeing interface.
+    * Supported freeing struct.
+    * Supported String as void * value for value.
+    * Supported freeing array of int8.
+    * Supported freeing array of uint8.
+    * Supported defining errors.
+    * Improved guessing target method for overloaded method.
+    * Supported array length.
+    * Supported inout array.
+    * Converted GBytes to String instead of wrapped GBytes.
+    * Supported all exception types rather than GLib::Error.
+
+  * Changes
+    * Changed returned value of inout array to an array from an array
+      and array length.
 
   * Fixes
     * [GitHub#216] Fixed test failures on i686 environment.
