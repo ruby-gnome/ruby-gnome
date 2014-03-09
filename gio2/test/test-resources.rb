@@ -45,9 +45,9 @@ class TestResources < Test::Unit::TestCase
     end
   end
 
-  def test_children
+  def test_enumerate_children
     assert_equal(["logo.png"],
-                 Gio::Resources.children("/org/ruby-gnome2/test"))
+                 Gio::Resources.enumerate_children("/org/ruby-gnome2/test"))
   end
 
   def test_get_info
