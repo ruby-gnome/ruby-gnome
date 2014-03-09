@@ -39,12 +39,12 @@ module ClutterGst
     end
 
     def init(argv=[])
-      loader = Loader.new(self, argv)
-      loader.load("ClutterGst")
       class << self
         remove_method(:init)
         remove_method(:const_missing)
       end
+      loader = Loader.new(self, argv)
+      loader.load("ClutterGst")
     end
   end
 
