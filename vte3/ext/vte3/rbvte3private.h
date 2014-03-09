@@ -10,7 +10,6 @@
 #include <rbgdk3.h>
 #include <rbgtk3.h>
 #include "rbvte3conversions.h"
-#include "rbgio2conversions.h"
 #ifndef VTE_CHECK_VERSION
 #  include "rbvteversion.h"
 #endif
