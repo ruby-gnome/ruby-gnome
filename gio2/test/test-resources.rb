@@ -49,4 +49,10 @@ class TestResources < Test::Unit::TestCase
     assert_equal(["logo.png"],
                  Gio::Resources.children("/org/ruby-gnome2/test"))
   end
+
+  def test_get_info
+    data = File.open(fixture_path("logo.png"), "rb", &:read)
+    assert_equal([true, data.bytesize, 0],
+                 Gio::Resources.get_info("/org/ruby-gnome2/test/logo.png"))
+  end
 end

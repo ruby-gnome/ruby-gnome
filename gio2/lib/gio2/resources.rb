@@ -50,6 +50,12 @@ module Gio
         flags ||= ResourceLookupFlags::NONE
         enumerate_children(path, flags)
       end
+
+      alias_method :get_info_raw, :get_info
+      def get_info(path, flags=nil)
+        flags ||= ResourceLookupFlags::NONE
+        get_info_raw(path, flags)
+      end
     end
   end
 end
