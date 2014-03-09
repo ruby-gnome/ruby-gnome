@@ -29,7 +29,6 @@
 
 #include <rbgobject.h>
 #include "rbgtk3conversions.h"
-#include "rbgio2conversions.h"
 
 #define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
 #define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
