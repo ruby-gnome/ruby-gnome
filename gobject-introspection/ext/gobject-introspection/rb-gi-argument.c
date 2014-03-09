@@ -188,7 +188,15 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
                  "TODO: GIArgument(interface)[callback] -> Ruby");
         break;
       case GI_INFO_TYPE_STRUCT:
-        rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
+        if (gtype == G_TYPE_BYTES) {
+            GBytes *bytes = argument->v_pointer;
+            gconstpointer data;
+            gsize size;
+            data = g_bytes_get_data(bytes, &size);
+            rb_interface = rb_enc_str_new(data, size, rb_ascii8bit_encoding());
+        } else {
+            rb_interface = BOXED2RVAL(argument->v_pointer, gtype);
+        }
         break;
       case GI_INFO_TYPE_BOXED:
         rb_raise(rb_eNotImpError,
