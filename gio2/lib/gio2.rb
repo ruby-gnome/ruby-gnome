@@ -45,12 +45,12 @@ module Gio
     end
 
     def init
-      loader = Loader.new(self)
-      loader.load("Gio")
       class << self
         remove_method(:init)
         remove_method(:const_missing)
       end
+      loader = Loader.new(self)
+      loader.load("Gio")
     end
   end
 end
