@@ -30,6 +30,21 @@ module Gio
         flags ||= ResourceLookupFlags::NONE
         lookup_data_raw(path, flags)
       end
+
+      alias_method :open_stream_raw, :open_stream
+      def open_stream(path, flags=nil)
+        flags ||= ResourceLookupFlags::NONE
+        input_stream = open_stream_raw(path, flags)
+        if block_given?
+          begin
+            yield(input_stream)
+          ensure
+            input_stream.close
+          end
+        else
+          input_stream
+        end
+      end
     end
   end
 end

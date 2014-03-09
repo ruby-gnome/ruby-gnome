@@ -37,4 +37,11 @@ class TestResources < Test::Unit::TestCase
     assert_equal(File.open(fixture_path("logo.png"), "rb", &:read),
                  data)
   end
+
+  def test_open_stream
+    Gio::Resources.open_stream("/org/ruby-gnome2/test/logo.png") do |input|
+      assert_equal(File.open(fixture_path("logo.png"), "rb", &:read),
+                   input.read)
+    end
+  end
 end
