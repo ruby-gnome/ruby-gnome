@@ -55,6 +55,11 @@ module Gst
     end
 
     def init(*argv)
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+        remove_method(:method_missing)
+      end
       loader = Loader.new(self, argv)
       loader.load("Gst")
       require "gst/bin"
@@ -67,11 +72,6 @@ module Gst
       require "gst/structure"
       init_base
       init_controller
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
-        remove_method(:method_missing)
-      end
     end
 
     private
