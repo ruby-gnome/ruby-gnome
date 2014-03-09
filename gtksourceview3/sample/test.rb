@@ -8,7 +8,7 @@
   $Id: test.rb,v 1.4 2007/06/03 02:11:07 mutoh Exp $
 =end
 
-require 'gtksourceview3'
+require "gtksourceview3"
 
 window = Gtk::Window.new
 window.signal_connect("delete-event") {Gtk::main_quit}
@@ -21,7 +21,7 @@ view.indent_width = 4
 view.show_right_margin = true
 view.right_margin_position = 80
 
-lang = GtkSource::LanguageManager.new.get_language('ruby')
+lang = GtkSource::LanguageManager.new.get_language("ruby")
 view.buffer.language = lang
 view.buffer.highlight_syntax = true
 view.buffer.highlight_matching_brackets = true
