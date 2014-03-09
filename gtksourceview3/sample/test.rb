@@ -11,7 +11,7 @@
 require "gtksourceview3"
 
 window = Gtk::Window.new
-window.signal_connect("delete-event") {Gtk::main_quit}
+window.signal_connect("delete-event") {Gtk.main_quit}
 
 view = GtkSource::View.new
 window.add(Gtk::ScrolledWindow.new.add(view))
