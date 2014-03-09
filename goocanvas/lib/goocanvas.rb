@@ -46,6 +46,10 @@ module Goo
     end
 
     def init
+      class << self
+        remove_method(:init)
+        remove_method(:const_missing)
+      end
       loader = Loader.new(self)
       loader.load("GooCanvas")
       begin
@@ -55,10 +59,6 @@ module Goo
         require "goocanvas.so"
       end
       require "goo/canvas-item"
-      class << self
-        remove_method(:init)
-        remove_method(:const_missing)
-      end
     end
   end
 
