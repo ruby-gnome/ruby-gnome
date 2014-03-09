@@ -34,11 +34,11 @@ module WebKitGtk2
     end
 
     def init
-      Loader.load("WebKit", self, :version => "1.0")
       class << self
         remove_method(:init)
         remove_method(:const_missing)
       end
+      Loader.load("WebKit", self, :version => "1.0")
     end
   end
 
