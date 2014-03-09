@@ -108,6 +108,7 @@ EXPORTS
 	rbg_check_array_type
 	rbg_check_hash_type
 	rbg_scan_options
+	rbg_inspect
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
 	rbgutil_glist2ary
