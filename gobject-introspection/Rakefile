@@ -81,7 +81,7 @@ namespace :native do
       Dir.chdir(g_ir_scanner_dir.to_s) do
         patch = "#{package_task.package.patches_dir}/cross-g-ir-scanner.diff"
         sh("patch -p2 < #{patch}")
-        rm_f(*Dir.glob("*.{pyc,pyo"))
+        rm_f(Dir.glob("*.{pyc,pyo"))
       end
     end
   end
