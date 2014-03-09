@@ -42,12 +42,12 @@ module Gdk
     end
 
     def init
-      loader = Loader.new(self)
-      loader.load("Gdk")
       class << self
         remove_method(:init)
         remove_method(:const_missing)
       end
+      loader = Loader.new(self)
+      loader.load("Gdk")
     end
   end
 
