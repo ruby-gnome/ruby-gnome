@@ -37,6 +37,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "gdk+-3.10.6-remove-def-use.diff",
         ],
         :need_autoreconf => true,
+        :build_concurrently => false,
         :built_file => "bin/libgdk-3-0.dll",
       },
     },
