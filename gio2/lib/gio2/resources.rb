@@ -45,6 +45,11 @@ module Gio
           input_stream
         end
       end
+
+      def children(path, flags=nil)
+        flags ||= ResourceLookupFlags::NONE
+        enumerate_children(path, flags)
+      end
     end
   end
 end
