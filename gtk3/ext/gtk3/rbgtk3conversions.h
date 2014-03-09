@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2008  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2008-2014  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -366,5 +365,13 @@
 #define GTKTREEMODELFLAGS2RVAL(o)          (GFLAGS2RVAL(o, GTK_TYPE_TREE_MODEL_FLAGS))
 #define RVAL2GTKUIMANAGERITEMTYPE(o)       (RVAL2GFLAGS(o, GTK_TYPE_UI_MANAGER_ITEM_TYPE))
 #define GTKUIMANAGERITEMTYPE2RVAL(o)       (GFLAGS2RVAL(o, GTK_TYPE_UI_MANAGER_ITEM_TYPE))
+
+/* For GIO. They are temporary. They will be needless after Ruby/GDK3
+ * is based on Ruby/GObjectIntrospection.
+ */
+#define RVAL2GFILE(o)                      (G_FILE(RVAL2GOBJ(o)))
+#define RVAL2GICON(o)                      (G_ICON(RVAL2GOBJ(o)))
+#define RVAL2GPERMISSION(o)                (G_PERMISSION(RVAL2GOBJ(o)))
+#define RVAL2GAPPLICATIONFLAGS(o)          (RVAL2GFLAGS(o, G_TYPE_APPLICATION_FLAGS))
 
 #endif /* __RBGTK3CONVERSIONS_H__ */
