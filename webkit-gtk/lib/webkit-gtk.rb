@@ -34,12 +34,12 @@ module WebKitGtk
     end
 
     def init
-      loader = Loader.new(self)
-      loader.load("WebKit")
       class << self
         remove_method(:init)
         remove_method(:const_missing)
       end
+      loader = Loader.new(self)
+      loader.load("WebKit")
     end
   end
 
