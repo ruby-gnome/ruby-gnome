@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/ruby-gnome2/test">
+    <file>logo.png</file>
+  </gresource>
+</gresources>
