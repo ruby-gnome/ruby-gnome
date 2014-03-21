@@ -195,11 +195,9 @@ rbgutil_invoke_callback(VALUE (*func)(VALUE), VALUE arg)
 {
 #ifdef HAVE_NATIVETHREAD
     if (ruby_native_thread_p()) {
-#  ifdef HAVE_RB_THREAD_BLOCKING_REGION
         if (!GPOINTER_TO_INT(g_static_private_get(&rg_polling_key))) {
             return rbgutil_protect(func, arg);
         }
-#  endif
 #  ifdef HAVE_RB_THREAD_CALL_WITH_GVL
         {
             CallbackRequest req;
