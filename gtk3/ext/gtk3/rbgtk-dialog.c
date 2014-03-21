@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Ruby-GNOME2 Project Team
  *  Copyright (C) 1998-2000 Yukihiro Matsumoto,
  *                          Daisuke Kanda,
@@ -74,15 +74,35 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+static gboolean
+destroy_dialog(gpointer user_data)
+{
+    GtkWidget *dialog = user_data;
+    gtk_widget_destroy(dialog);
+    return G_SOURCE_REMOVE;
+}
+
 static VALUE
 rg_run(VALUE self)
 {
-    if (rb_block_given_p()){
-        VALUE ret = INT2NUM(gtk_dialog_run(_SELF(self)));
-        rb_yield(ret);
-        return ret;
+    GtkDialog *dialog;
+    GSource *interrupt_source;
+    VALUE response;
+
+    dialog = _SELF(self);
+    interrupt_source = rbg_interrupt_source_new();
+    g_source_set_callback(interrupt_source, destroy_dialog, dialog, NULL);
+    g_source_attach(interrupt_source, NULL);
+    response = INT2NUM(gtk_dialog_run(dialog));
+    g_source_destroy(interrupt_source);
+    g_source_unref(interrupt_source);
+
+    rb_thread_check_ints();
+
+    if (rb_block_given_p()) {
+        return rb_yield(response);
     } else {
-        return INT2NUM(gtk_dialog_run(_SELF(self)));
+        return response;
     }
 }
 
