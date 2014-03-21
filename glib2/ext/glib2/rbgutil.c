@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -131,6 +131,44 @@ rbgutil_key_equal(VALUE rb_key, const char *key)
         return FALSE;
         break;
     }
+}
+
+static gboolean
+rbg_interrupt_prepare (G_GNUC_UNUSED GSource *soruce,
+                      G_GNUC_UNUSED gint *timouet)
+{
+    return rb_thread_interrupted(rb_thread_current());
+}
+
+static gboolean
+rbg_interrupt_check (G_GNUC_UNUSED GSource *soruce)
+{
+    return rb_thread_interrupted(rb_thread_current());
+}
+
+static gboolean
+rbg_interrupt_dispatch (G_GNUC_UNUSED GSource *soruce,
+                       GSourceFunc callback,
+                       gpointer user_data)
+{
+    if (callback) {
+        return callback(user_data);
+    } else {
+        return G_SOURCE_REMOVE;
+    }
+}
+
+static GSourceFuncs rbg_interrupt_funcs = {
+    rbg_interrupt_prepare,
+    rbg_interrupt_check,
+    rbg_interrupt_dispatch,
+    NULL
+};
+
+GSource *
+rbg_interrupt_source_new(void)
+{
+    return g_source_new(&rbg_interrupt_funcs, sizeof(GSource));
 }
 
 void

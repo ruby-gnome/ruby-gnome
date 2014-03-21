@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2005,2006 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -57,10 +57,35 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+static gboolean
+quit_loop(gpointer user_data)
+{
+    GMainLoop *loop = user_data;
+    g_main_loop_quit(loop);
+    return G_SOURCE_REMOVE;
+}
+
 static VALUE
 rg_run(VALUE self)
 {
-    g_main_loop_run(_SELF(self));
+    GMainLoop *loop;
+    GSource *interrupt_source;
+
+    loop = _SELF(self);
+
+    interrupt_source = rbg_interrupt_source_new();
+    g_source_set_callback(interrupt_source,
+                          quit_loop,
+                          loop,
+                          NULL);
+    g_source_attach(interrupt_source,
+                    g_main_loop_get_context(loop));
+    g_main_loop_run(loop);
+    g_source_destroy(interrupt_source);
+    g_source_unref(interrupt_source);
+
+    rb_thread_check_ints();
+
     return self;
 }
 
