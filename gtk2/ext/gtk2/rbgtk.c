@@ -208,10 +208,27 @@ gtk_init()
 gtk_exit()
 */
 
+static gboolean
+quit_loop(G_GNUC_UNUSED gpointer user_data)
+{
+    gtk_main_quit();
+    return G_SOURCE_REMOVE;
+}
+
 static VALUE
 rg_m_main(G_GNUC_UNUSED VALUE self)
 {
+    GSource *interrupt_source;
+
+    interrupt_source = rbg_interrupt_source_new();
+    g_source_set_callback(interrupt_source, quit_loop, NULL, NULL);
+    g_source_attach(interrupt_source, NULL);
     gtk_main();
+    g_source_destroy(interrupt_source);
+    g_source_unref(interrupt_source);
+
+    rb_thread_check_ints();
+
     return Qnil;
 }
 
