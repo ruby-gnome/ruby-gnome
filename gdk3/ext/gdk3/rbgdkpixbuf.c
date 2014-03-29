@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -101,34 +101,23 @@ rg_render_pixmap_and_mask(int argc, VALUE *argv, VALUE self)
                        pixmap ? GOBJ2RVAL(pixmap) : Qnil,
                        mask ? GOBJ2RVAL(mask) : Qnil);
 }
+*/
 
 static VALUE
-rg_s_from_drawable(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+rg_s_from_window(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
-    VALUE cmap, src, src_x, src_y, width, height, dest, dest_x, dest_y;
-    GdkPixbuf* buf;
+    VALUE window, src_x, src_y, width, height;
+    GdkPixbuf *pixbuf;
 
-    rb_scan_args(argc, argv, "63", &cmap, &src, &src_x, &src_y, &width, &height, 
-                 &dest, &dest_x, &dest_y);
+    rb_scan_args(argc, argv, "50", &window, &src_x, &src_y, &width, &height);
 
-    buf = gdk_pixbuf_get_from_drawable(RVAL2GDKPIXBUF(dest),
-                                       RVAL2GDKDRAWABLE(src),
-                                       RVAL2GDKCOLORMAP(cmap),
-                                       NUM2INT(src_x), NUM2INT(src_y),
-                                       NIL_P(dest_x) ? 0 : NUM2INT(dest_x),
-                                       NIL_P(dest_y) ? 0 : NUM2INT(dest_y),
-                                       NUM2INT(width), NUM2INT(height));
-    if (NIL_P(dest)) {
-        if (buf) {
-            return GOBJ2RVALU(buf);
-        } else {
-            return Qnil;
-        }
-    } else {
-        return dest;
-    }
+    pixbuf = gdk_pixbuf_get_from_window(RVAL2GDKWINDOW(window),
+                                        NUM2INT(src_x), NUM2INT(src_y),
+                                        NUM2INT(width), NUM2INT(height));
+    return GOBJ2RVAL_UNREF(pixbuf);
 }
 
+/* deprecated
 static VALUE
 rg_s_from_image(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
@@ -169,8 +158,10 @@ Init_gdk_pixbuf(VALUE mGdk)
     RG_DEF_METHOD(render_threshold_alpha, 8);
     RG_DEF_METHOD(render_to_drawable, -1);
     RG_DEF_METHOD(render_pixmap_and_mask, -1);
+*/
 
-    RG_DEF_SMETHOD(from_drawable, -1);
+    RG_DEF_SMETHOD(from_window, -1);
+/* deprecated
     RG_DEF_SMETHOD(from_image, -1);
 */
 }
