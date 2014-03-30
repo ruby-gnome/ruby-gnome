@@ -17,11 +17,10 @@
 class TestGdkPixbuf < Test::Unit::TestCase
   def test_from_drawable
     colormap = nil
-    gdk_window = Gtk::Invisible.new.window
-    src_x  = 0
-    src_y  = 0
-    width  = 0
-    height = 0
+    gdk_window = Gdk::Window.default_root_window
+    src_x = 0
+    src_y = 0
+    width, height = gdk_window.size
 
     assert_nothing_raised do
       Gdk::Pixbuf.from_drawable(colormap,
