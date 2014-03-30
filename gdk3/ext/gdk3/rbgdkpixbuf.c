@@ -22,7 +22,7 @@
 #include "rbgdk3private.h"
 
 #define RG_TARGET_NAMESPACE cPixbuf
-#define _SELF(s) RVAL2GDKPIXBUF(s) 
+#define _SELF(s) RVAL2GDKPIXBUF(s)
 
 static VALUE
 rg_s_from_window(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
