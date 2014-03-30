@@ -38,6 +38,20 @@ rg_s_from_window(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     return GOBJ2RVAL_UNREF(pixbuf);
 }
 
+static VALUE
+rg_s_from_surface(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+{
+    VALUE surface, src_x, src_y, width, height;
+    GdkPixbuf *pixbuf;
+
+    rb_scan_args(argc, argv, "50", &surface, &src_x, &src_y, &width, &height);
+
+    pixbuf = gdk_pixbuf_get_from_surface(RVAL2CRSURFACE(surface),
+                                         NUM2INT(src_x), NUM2INT(src_y),
+                                         NUM2INT(width), NUM2INT(height));
+    return GOBJ2RVAL_UNREF(pixbuf);
+}
+
 void
 Init_gdk_pixbuf(VALUE mGdk)
 {
@@ -47,4 +61,5 @@ Init_gdk_pixbuf(VALUE mGdk)
     VALUE RG_TARGET_NAMESPACE = GTYPE2CLASS(GDK_TYPE_PIXBUF);
 
     RG_DEF_SMETHOD(from_window, -1);
+    RG_DEF_SMETHOD(from_surface, -1);
 }

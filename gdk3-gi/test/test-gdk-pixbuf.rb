@@ -32,4 +32,20 @@ class TestGdkPixbuf < Test::Unit::TestCase
                               height)
     end
   end
+
+  def test_from_surface
+    surface = Cairo::ImageSurface.new(:argb32, 290, 200)
+    src_x = 0
+    src_y = 0
+    width = 290
+    height = 200
+
+    pixbuf = Gdk::Pixbuf.from_surface(surface,
+                                      src_x,
+                                      src_y,
+                                      width,
+                                      height)
+
+    assert_kind_of(Gdk::Pixbuf, pixbuf)
+  end
 end
