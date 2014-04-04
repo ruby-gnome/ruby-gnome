@@ -37,6 +37,7 @@ module Gdk
 
     def require_libraries
       require "gdk3/color"
+      require "gdk3/event"
     end
 
     def load_function_info(info)
@@ -47,6 +48,18 @@ module Gdk
       else
         super
       end
+    end
+
+    def load_struct_info(info)
+      return if info.gtype_struct?
+
+      options = {}
+      case info.name
+      when /\AEvent/
+        options[:parent] = Gdk::Event
+      end
+
+      define_struct(info, options)
     end
 
     def load_constant_info(info)
