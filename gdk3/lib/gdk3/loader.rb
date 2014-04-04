@@ -17,8 +17,22 @@
 module Gdk
   class Loader < GObjectIntrospection::Loader
     private
+    def pre_load(repository, namespace)
+      @pending_constants = []
+    end
+
     def post_load(repository, namespace)
+      apply_constants
       require_libraries
+    end
+
+    def apply_constants
+      @pending_constants.each do |info|
+        case info.name
+        when /\AEVENT_/
+          Gdk::Event.const_set($POSTMATCH, info.value)
+        end
+      end
     end
 
     def require_libraries
@@ -30,6 +44,15 @@ module Gdk
       case name
       when "init"
         # ignore
+      else
+        super
+      end
+    end
+
+    def load_constant_info(info)
+      case info.name
+      when /\AEVENT_/
+        @pending_constants << info
       else
         super
       end
