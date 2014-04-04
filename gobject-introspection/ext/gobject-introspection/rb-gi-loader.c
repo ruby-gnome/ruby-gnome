@@ -27,18 +27,24 @@ static const gchar *boxed_class_converters_name = "@@boxed_class_converters";
 static VALUE
 rg_s_define_class(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
 {
+    VALUE rb_class;
     VALUE rb_gtype, rb_name, rb_module;
-    VALUE rb_options, rb_parent;
+    VALUE rb_options, rb_parent, rb_size;
     GType gtype;
 
     rb_scan_args(argc, argv, "31", &rb_gtype, &rb_name, &rb_module, &rb_options);
     rbg_scan_options(rb_options,
                      "parent", &rb_parent,
+                     "size", &rb_size,
                      NULL);
 
     gtype = NUM2ULONG(rb_to_int(rb_gtype));
-    return G_DEF_CLASS_WITH_PARENT(gtype, RVAL2CSTR(rb_name),
-                                   rb_module, rb_parent);
+    rb_class = G_DEF_CLASS_WITH_PARENT(gtype, RVAL2CSTR(rb_name),
+                                       rb_module, rb_parent);
+    if (!NIL_P(rb_size)) {
+        rb_iv_set(rb_class, "@size", rb_size);
+    }
+    return rb_class;
 }
 
 static VALUE

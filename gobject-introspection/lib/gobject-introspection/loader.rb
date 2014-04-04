@@ -120,7 +120,8 @@ module GObjectIntrospection
                                          :parent => options[:parent])
       else
         klass = self.class.define_class(info.gtype, info.name, @base_module,
-                                        :parent => options[:parent])
+                                        :parent => options[:parent],
+                                        :size   => info.size)
       end
       load_fields(info, klass)
       load_methods(info, klass)

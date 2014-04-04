@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,24 +15,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gdk
-  class Loader < GObjectIntrospection::Loader
-    private
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "gdk3/color"
-    end
-
-    def load_function_info(info)
-      name = info.name
-      case name
-      when "init"
-        # ignore
-      else
-        super
-      end
+  class Color
+    alias_method :initialize_raw, :initialize
+    def initialize(red, green, blue)
+      initialize_raw
+      self.red = red
+      self.green = green
+      self.blue = blue
     end
   end
 end

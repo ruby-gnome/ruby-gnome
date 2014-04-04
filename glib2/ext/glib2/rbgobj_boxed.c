@@ -71,11 +71,24 @@ rbgobj_boxed_s_allocate(VALUE klass)
     return result;
 }
 
-static G_GNUC_NORETURN VALUE
+static VALUE
 rg_initialize(VALUE self)
 {
-    rb_raise(rb_eTypeError, "can't initialize %s",
-             rb_class2name(CLASS_OF(self)));
+    VALUE rb_class;
+
+    rb_class = CLASS_OF(self);
+    if (RVAL2CBOOL(rb_ivar_defined(rb_class, rb_intern("@size")))) {
+        const RGObjClassInfo *cinfo;
+        gpointer instance;
+        cinfo = rbgobj_lookup_class(rb_class);
+        instance = alloca(NUM2UINT(rb_iv_get(rb_class, "@size")));
+        G_INITIALIZE(self, g_boxed_copy(cinfo->gtype, instance));
+    } else {
+        rb_raise(rb_eTypeError, "can't initialize %s",
+                 rb_class2name(rb_class));
+    }
+
+    return Qnil;
 }
 
 static VALUE
