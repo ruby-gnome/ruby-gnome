@@ -24,8 +24,7 @@ priorlibs = [
 ]
 
 unsupported_libraries = [
-  "gstreamer-no-gi",
-  "gio2-no-gi"
+  "gdk3-no-gi"
 ]
 
 #
