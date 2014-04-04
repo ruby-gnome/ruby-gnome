@@ -89,14 +89,18 @@ rg_set_field_value(VALUE self, VALUE rb_struct, VALUE rb_n, VALUE rb_value)
     gint n;
     GIFieldInfo *field_info;
     GType gtype;
+    gpointer raw_struct;
 
     info = SELF(self);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
     gtype = g_registered_type_info_get_g_type(info);
-    rb_gi_field_info_set_field_raw(field_info,
-                                   RVAL2BOXED(rb_struct, gtype),
-                                   rb_value);
+    if (gtype == G_TYPE_NONE) {
+        raw_struct = DATA_PTR(rb_struct);
+    } else {
+        raw_struct = RVAL2BOXED(rb_struct, gtype);
+    }
+    rb_gi_field_info_set_field_raw(field_info, raw_struct, rb_value);
     /* TODO: use rb_ensure() to unref field_info. */
     g_base_info_unref(field_info);
 

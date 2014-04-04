@@ -65,7 +65,12 @@ initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
       case GI_INFO_TYPE_INTERFACE:
       case GI_INFO_TYPE_CONSTANT:
       case GI_INFO_TYPE_INVALID_0:
+        rb_raise(rb_eRuntimeError,
+                 "TODO: returned value isn't object, struct or union");
+        break;
       case GI_INFO_TYPE_UNION:
+        G_INITIALIZE(receiver, value->v_pointer);
+        break;
       case GI_INFO_TYPE_VALUE:
       case GI_INFO_TYPE_SIGNAL:
       case GI_INFO_TYPE_VFUNC:
@@ -76,7 +81,7 @@ initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
       case GI_INFO_TYPE_UNRESOLVED:
       default:
         rb_raise(rb_eRuntimeError,
-                 "TODO: returned value isn't object or struct");
+                 "TODO: returned value isn't object, struct or union");
         break;
     }
 }
