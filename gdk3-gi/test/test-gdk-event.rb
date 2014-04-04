@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,35 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkEvent < Test::Unit::TestCase
+  class TestConstant < self
+    def test_propagate
+      assert_false(Gdk::Event::PROPAGATE)
+    end
+
+    def test_stop
+      assert_true(Gdk::Event::STOP)
+    end
+  end
+
+  module TestAnyMethods
+    def test_window
+      assert_nil(event.window)
+    end
+
+    def test_send_event
+      assert_false(event.send_event?)
+    end
+  end
+
   class TestAny < self
+    include TestAnyMethods
+
     def setup
       @event = Gdk::EventAny.new(:delete)
+    end
+
+    def event
+      @event
     end
 
     def test_delete
@@ -31,21 +57,17 @@ class TestGdkEvent < Test::Unit::TestCase
       assert_equal("GDK_DESTROY",
                    Gdk::EventAny.new(:destroy).event_type.name)
     end
-
-    def test_window
-      assert_nothing_raised do
-        @event.window
-      end
-    end
-
-    def test_send_event
-      assert_false(@event.send_event?)
-    end
   end
 
   class TestKey < self
+    include TestAnyMethods
+
     def setup
       @key = Gdk::EventKey.new(:key_press)
+    end
+
+    def event
+      @key
     end
 
     def test_key_press
@@ -72,8 +94,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestButton < self
+    include TestAnyMethods
+
     def setup
       @button = Gdk::EventButton.new(:button_press)
+    end
+
+    def event
+      @button
     end
 
     def test_button_press
@@ -125,9 +153,89 @@ class TestGdkEvent < Test::Unit::TestCase
     end
   end
 
+  class TestTouch < self
+    include TestAnyMethods
+
+    def setup
+      @touch = Gdk::EventTouch.new(:touch_begin)
+    end
+
+    def event
+      @touch
+    end
+
+    def test_time
+      assert_kind_of(Integer, @touch.time)
+    end
+
+    def test_x
+      assert_kind_of(Float, @touch.x)
+    end
+
+    def test_y
+      assert_kind_of(Float, @touch.y)
+    end
+
+    def test_axes
+      assert_nothing_raised do
+        @touch.axes
+      end
+    end
+
+    def test_state
+      assert_not_nil(@touch.state)
+    end
+
+    def test_touch_begin
+      assert_equal("GDK_TOUCH_BEGIN",
+                   Gdk::EventTouch.new(:touch_begin).event_type.name)
+    end
+
+    def test_touch_update
+      assert_equal("GDK_TOUCH_UPDATE",
+                   Gdk::EventTouch.new(:touch_update).event_type.name)
+    end
+
+    def test_touch_cancel
+      assert_equal("GDK_TOUCH_CANCEL",
+                   Gdk::EventTouch.new(:touch_cancel).event_type.name)
+    end
+
+    def test_touch_end
+      assert_equal("GDK_TOUCH_END",
+                   Gdk::EventTouch.new(:touch_end).event_type.name)
+    end
+
+    def test_emulating_pointer
+      assert_nothing_raised do
+        @touch.emulating_pointer
+      end
+    end
+
+    def test_device
+      assert_nothing_raised do
+        @touch.device
+      end
+    end
+
+    def test_x_root
+      assert_kind_of(Float, @touch.x_root)
+    end
+
+    def test_y_root
+      assert_kind_of(Float, @touch.y_root)
+    end
+  end
+
   class TestScroll < self
+    include TestAnyMethods
+
     def setup
       @scroll = Gdk::EventScroll.new
+    end
+
+    def event
+      @scroll
     end
 
     def test_time
@@ -160,8 +268,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestMotion < self
+    include TestAnyMethods
+
     def setup
       @motion = Gdk::EventMotion.new
+    end
+
+    def event
+      @motion
     end
 
     def test_time
@@ -196,8 +310,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestVisibility < self
+    include TestAnyMethods
+
     def setup
       @visibility = Gdk::EventVisibility.new(:visibility_notify)
+    end
+
+    def event
+      @visibility
     end
 
     def test_state
@@ -206,8 +326,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestCrossing < self
+    include TestAnyMethods
+
     def setup
       @crossing = Gdk::EventCrossing.new(:enter_notify)
+    end
+
+    def event
+      @crossing
     end
 
     def test_enter_notify
@@ -256,8 +382,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestFocus < self
+    include TestAnyMethods
+
     def setup
       @focus = Gdk::EventFocus.new
+    end
+
+    def event
+      @focus
     end
 
     def test_in
@@ -266,8 +398,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestConfigure < self
+    include TestAnyMethods
+
     def setup
       @configure = Gdk::EventConfigure.new
+    end
+
+    def event
+      @configure
     end
 
     def test_x
@@ -288,8 +426,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestProperty < self
+    include TestAnyMethods
+
     def setup
       @property = Gdk::EventProperty.new
+    end
+
+    def event
+      @property
     end
 
     def test_atom
@@ -303,13 +447,19 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_state
-      assert_not_nil(Integer, @property.state)
+      assert_equal(Gdk::EventProperty::State::NEW_VALUE, @property.state)
     end
   end
 
   class TestSelection < self
+    include TestAnyMethods
+
     def setup
       @selection = Gdk::EventSelection.new(:selection_clear)
+    end
+
+    def event
+      @selection
     end
 
     def test_selection_clear
@@ -351,8 +501,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestDND < self
+    include TestAnyMethods
+
     def setup
       @dnd = Gdk::EventDND.new(:drag_enter)
+    end
+
+    def event
+      @dnd
     end
 
     def test_drag_enter
@@ -405,8 +561,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestProximity < self
+    include TestAnyMethods
+
     def setup
       @proximity = Gdk::EventProximity.new(:proximity_in)
+    end
+
+    def event
+      @proximity
     end
 
     def test_proximity_in
@@ -431,8 +593,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestWindowState < self
+    include TestAnyMethods
+
     def setup
       @window_state = Gdk::EventWindowState.new
+    end
+
+    def event
+      @window_state
     end
 
     def test_changed_mask
@@ -449,8 +617,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestSetting < self
+    include TestAnyMethods
+
     def setup
       @setting = Gdk::EventSetting.new
+    end
+
+    def event
+      @setting
     end
 
     def test_action
@@ -469,6 +643,10 @@ class TestGdkEvent < Test::Unit::TestCase
   class TestOwnerChange < self
     def setup
       @owner_change = Gdk::EventOwnerChange.new
+    end
+
+    def event
+      @owner_change
     end
 
     def test_owner
@@ -499,8 +677,14 @@ class TestGdkEvent < Test::Unit::TestCase
   end
 
   class TestGrabBroken < self
+    include TestAnyMethods
+
     def setup
       @grab_broken = Gdk::EventGrabBroken.new
+    end
+
+    def event
+      @grab_broken
     end
 
     def test_keyboard

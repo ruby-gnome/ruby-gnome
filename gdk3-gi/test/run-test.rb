@@ -25,7 +25,7 @@ cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
-gdk3_base = File.join(ruby_gnome2_base, "gdk3-gi")
+gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 
 [
   [glib_base, "glib2"],
@@ -52,6 +52,4 @@ require "gdk-test-utils"
 
 require "gdk3"
 
-# TODO: workaround
-#exit Test::Unit::AutoRunner.run(true)
-exit true
+exit Test::Unit::AutoRunner.run(true)
