@@ -47,7 +47,7 @@ boxed_free(boxed_holder *holder)
     if (holder->own && holder->boxed)
         g_boxed_free(holder->type, holder->boxed);
 
-    free(holder);
+    xfree(holder);
 }
 
 /**********************************************************************/
