@@ -38,6 +38,7 @@ module Gdk
     def require_libraries
       require "gdk3/color"
       require "gdk3/event"
+      require "gdk3/rgba"
     end
 
     def load_function_info(info)
