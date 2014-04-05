@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,8 +17,41 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkRectangle < Test::Unit::TestCase
-  def test_width
-    rectangle = Gdk::Rectangle.new(0, 10, 20, 30)
-    assert_equal(20, rectangle.width)
+  def test_intersect
+    rectangle1 = Gdk::Rectangle.new(0, 10, 20, 30)
+    rectangle2 = Gdk::Rectangle.new(5, 15, 10, 20)
+    intersected, intersected_rectangle = rectangle1.intersect(rectangle2)
+    assert_equal([
+                   true,
+                   5,
+                   15,
+                   10,
+                   20,
+                 ],
+                 [
+                   intersected,
+                   intersected_rectangle.x,
+                   intersected_rectangle.y,
+                   intersected_rectangle.width,
+                   intersected_rectangle.height,
+                 ])
+  end
+
+  def test_union
+    rectangle1 = Gdk::Rectangle.new(0, 10, 20, 30)
+    rectangle2 = Gdk::Rectangle.new(5, 15, 40, 20)
+    unioned_rectangle = rectangle1.union(rectangle2)
+    assert_equal([
+                   0,
+                   10,
+                   45,
+                   30,
+                 ],
+                 [
+                   unioned_rectangle.x,
+                   unioned_rectangle.y,
+                   unioned_rectangle.width,
+                   unioned_rectangle.height,
+                 ])
   end
 end

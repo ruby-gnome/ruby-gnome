@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -51,5 +51,6 @@ $LOAD_PATH.unshift(File.join(gdk3_base, "test"))
 require "gdk-test-utils"
 
 require "gdk3"
+Gdk.init
 
 exit Test::Unit::AutoRunner.run(true)

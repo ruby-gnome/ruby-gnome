@@ -19,6 +19,27 @@ module Gdk
     private
     def pre_load(repository, namespace)
       @pending_constants = []
+      load_cairo_rectangle_int
+    end
+
+    def load_cairo_rectangle_int
+      info = find_cairo_rectangle_int_info
+      klass = self.class.define_class(info.gtype,
+                                      "Rectangle",
+                                      @base_module,
+                                      :size => info.size)
+      load_fields(info, klass)
+      load_methods(info, klass)
+    end
+
+    def find_cairo_rectangle_int_info
+      repository = GObjectIntrospection::Repository.default
+      repository.each("cairo") do |info|
+        if info.name == "RectangleInt"
+          return info
+        end
+      end
+      nil
     end
 
     def post_load(repository, namespace)
@@ -38,6 +59,7 @@ module Gdk
     def require_libraries
       require "gdk3/color"
       require "gdk3/event"
+      require "gdk3/rectangle"
       require "gdk3/rgba"
       require "gdk3/window-attr"
 
@@ -47,10 +69,32 @@ module Gdk
     def load_function_info(info)
       name = info.name
       case name
-      when "init"
+      when "init", /_get_type\z/
         # ignore
+      when /\Arectangle_/
+        define_rectangle_method(info, $POSTMATCH)
       else
         super
+      end
+    end
+
+    def define_rectangle_method(function_info, name)
+      target_module = Gdk::Rectangle
+      unlock_gvl = should_unlock_gvl?(function_info, target_module)
+      validate = lambda do |arguments|
+        method_name = "#{target_module}\##{name}"
+        validate_arguments(function_info, method_name, arguments)
+      end
+      target_module.module_eval do
+        define_method(name) do |*arguments, &block|
+          arguments = [self] + arguments
+          validate.call(arguments, &block)
+          function_info.invoke({
+                                 :arguments => arguments,
+                                 :unlock_gvl => unlock_gvl,
+                               },
+                               &block)
+        end
       end
     end
 
