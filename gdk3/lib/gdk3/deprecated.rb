@@ -132,7 +132,7 @@ module Gdk
     define_deprecated_flags :ModifierType
     define_deprecated_enums :Type
     define_deprecated_enums :TypeHint, 'TYPE_HINT'
-    define_deprecated_enums :WindowClass
+    define_deprecated_const :WindowClass, 'Gdk::Window::Class'
     define_deprecated_flags :WMDecoration, 'DECOR'
     define_deprecated_flags :WMFunction, 'FUNC'
     define_deprecated_method :clear, :warn => "Don't use this method."

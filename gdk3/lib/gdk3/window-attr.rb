@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,17 +14,15 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestGdkWindowAttr < Test::Unit::TestCase
-  include GdkTestUtils
-
-  def test_initialize
-    attrs = Gdk::WindowAttr.new(100, 100, :input_only, :temp)
-    assert_equal([
-                   100,
-                   100,
-                   Gdk::Window::Class::INPUT_ONLY,
-                   Gdk::Window::Type::TEMP,
-                 ],
-                 [attrs.width, attrs.height, attrs.wclass, attrs.window_type])
+module Gdk
+  class WindowAttr
+    alias_method :initialize_raw, :initialize
+    def initialize(width, height, window_class, window_type)
+      initialize_raw
+      self.width = width
+      self.height = height
+      self.wclass = window_class
+      self.window_type = window_type
+    end
   end
 end

@@ -39,6 +39,9 @@ module Gdk
       require "gdk3/color"
       require "gdk3/event"
       require "gdk3/rgba"
+      require "gdk3/window-attr"
+
+      require "gdk3/deprecated"
     end
 
     def load_function_info(info)
@@ -61,6 +64,17 @@ module Gdk
       end
 
       define_struct(info, options)
+    end
+
+    def define_enum(info)
+      case info.name
+      when /\AWindowWindow/
+        self.class.define_class(info.gtype, $POSTMATCH, Gdk::Window)
+      when /\AWindow/
+        self.class.define_class(info.gtype, $POSTMATCH, Gdk::Window)
+      else
+        super
+      end
     end
 
     def load_constant_info(info)
