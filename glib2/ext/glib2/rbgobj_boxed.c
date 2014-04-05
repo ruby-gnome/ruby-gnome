@@ -80,8 +80,11 @@ rg_initialize(VALUE self)
     if (RVAL2CBOOL(rb_ivar_defined(rb_class, rb_intern("@size")))) {
         const RGObjClassInfo *cinfo;
         gpointer instance;
+        gsize instance_size;
         cinfo = rbgobj_lookup_class(rb_class);
-        instance = alloca(NUM2UINT(rb_iv_get(rb_class, "@size")));
+        instance_size = NUM2UINT(rb_iv_get(rb_class, "@size"));
+        instance = alloca(instance_size);
+        memset(instance, 0, instance_size);
         G_INITIALIZE(self, g_boxed_copy(cinfo->gtype, instance));
     } else {
         rb_raise(rb_eTypeError, "can't initialize %s",
