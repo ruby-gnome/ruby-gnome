@@ -50,12 +50,12 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_delete
       assert_equal("GDK_DELETE",
-                   Gdk::EventAny.new(:delete).event_type.name)
+                   Gdk::EventAny.new(:delete).type.name)
     end
 
     def test_destroy
       assert_equal("GDK_DESTROY",
-                   Gdk::EventAny.new(:destroy).event_type.name)
+                   Gdk::EventAny.new(:destroy).type.name)
     end
   end
 
@@ -72,12 +72,12 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_key_press
       assert_equal("GDK_KEY_PRESS",
-                   Gdk::EventKey.new(:key_press).event_type.name)
+                   Gdk::EventKey.new(:key_press).type.name)
     end
 
     def test_key_release
       assert_equal("GDK_KEY_RELEASE",
-                   Gdk::EventKey.new(:key_release).event_type.name)
+                   Gdk::EventKey.new(:key_release).type.name)
     end
 
     def test_time
@@ -106,22 +106,22 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_button_press
       assert_equal("GDK_BUTTON_PRESS",
-                   Gdk::EventButton.new(:button_press).event_type.name)
+                   Gdk::EventButton.new(:button_press).type.name)
     end
 
     def test_button2_press
       assert_equal("GDK_2BUTTON_PRESS",
-                   Gdk::EventButton.new(:button2_press).event_type.name)
+                   Gdk::EventButton.new(:button2_press).type.name)
     end
 
     def test_button3_press
       assert_equal("GDK_3BUTTON_PRESS",
-                   Gdk::EventButton.new(:button3_press).event_type.name)
+                   Gdk::EventButton.new(:button3_press).type.name)
     end
 
     def test_button_release
       assert_equal("GDK_BUTTON_RELEASE",
-                   Gdk::EventButton.new(:button_release).event_type.name)
+                   Gdk::EventButton.new(:button_release).type.name)
     end
 
     def test_time
@@ -188,22 +188,22 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_touch_begin
       assert_equal("GDK_TOUCH_BEGIN",
-                   Gdk::EventTouch.new(:touch_begin).event_type.name)
+                   Gdk::EventTouch.new(:touch_begin).type.name)
     end
 
     def test_touch_update
       assert_equal("GDK_TOUCH_UPDATE",
-                   Gdk::EventTouch.new(:touch_update).event_type.name)
+                   Gdk::EventTouch.new(:touch_update).type.name)
     end
 
     def test_touch_cancel
       assert_equal("GDK_TOUCH_CANCEL",
-                   Gdk::EventTouch.new(:touch_cancel).event_type.name)
+                   Gdk::EventTouch.new(:touch_cancel).type.name)
     end
 
     def test_touch_end
       assert_equal("GDK_TOUCH_END",
-                   Gdk::EventTouch.new(:touch_end).event_type.name)
+                   Gdk::EventTouch.new(:touch_end).type.name)
     end
 
     def test_emulating_pointer
@@ -338,12 +338,12 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_enter_notify
       assert_equal("GDK_ENTER_NOTIFY",
-                   Gdk::EventCrossing.new(:enter_notify).event_type.name)
+                   Gdk::EventCrossing.new(:enter_notify).type.name)
     end
 
     def test_leave_notify
       assert_equal("GDK_LEAVE_NOTIFY",
-                   Gdk::EventCrossing.new(:leave_notify).event_type.name)
+                   Gdk::EventCrossing.new(:leave_notify).type.name)
     end
 
     def test_time
@@ -462,17 +462,17 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_selection_clear
       assert_equal("GDK_SELECTION_CLEAR",
-                   Gdk::EventSelection.new(:selection_clear).event_type.name)
+                   Gdk::EventSelection.new(:selection_clear).type.name)
     end
 
     def test_selection_notify
       assert_equal("GDK_SELECTION_NOTIFY",
-                   Gdk::EventSelection.new(:selection_notify).event_type.name)
+                   Gdk::EventSelection.new(:selection_notify).type.name)
     end
 
     def test_selection_request
       assert_equal("GDK_SELECTION_REQUEST",
-                   Gdk::EventSelection.new(:selection_request).event_type.name)
+                   Gdk::EventSelection.new(:selection_request).type.name)
     end
 
     def test_selection
@@ -511,32 +511,32 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_drag_enter
       assert_equal("GDK_DRAG_ENTER",
-                   Gdk::EventDND.new(:drag_enter).event_type.name)
+                   Gdk::EventDND.new(:drag_enter).type.name)
     end
 
     def test_drag_leave
       assert_equal("GDK_DRAG_LEAVE",
-                   Gdk::EventDND.new(:drag_leave).event_type.name)
+                   Gdk::EventDND.new(:drag_leave).type.name)
     end
 
     def test_drag_motion
       assert_equal("GDK_DRAG_MOTION",
-                   Gdk::EventDND.new(:drag_motion).event_type.name)
+                   Gdk::EventDND.new(:drag_motion).type.name)
     end
 
     def test_drag_status
       assert_equal("GDK_DRAG_STATUS",
-                   Gdk::EventDND.new(:drag_status).event_type.name)
+                   Gdk::EventDND.new(:drag_status).type.name)
     end
 
     def test_drop_start
       assert_equal("GDK_DROP_START",
-                   Gdk::EventDND.new(:drop_start).event_type.name)
+                   Gdk::EventDND.new(:drop_start).type.name)
     end
 
     def test_drop_finished
       assert_equal("GDK_DROP_FINISHED",
-                   Gdk::EventDND.new(:drop_finished).event_type.name)
+                   Gdk::EventDND.new(:drop_finished).type.name)
     end
 
     def test_context
@@ -571,12 +571,12 @@ class TestGdkEvent < Test::Unit::TestCase
 
     def test_proximity_in
       assert_equal("GDK_PROXIMITY_IN",
-                   Gdk::EventProximity.new(:proximity_in).event_type.name)
+                   Gdk::EventProximity.new(:proximity_in).type.name)
     end
 
     def test_proximity_out
       assert_equal("GDK_PROXIMITY_OUT",
-                   Gdk::EventProximity.new(:proximity_out).event_type.name)
+                   Gdk::EventProximity.new(:proximity_out).type.name)
     end
 
     def test_time
