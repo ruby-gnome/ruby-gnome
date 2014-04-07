@@ -42,4 +42,13 @@
 #define RVAL2GCANCELLABLE(o)               (G_CANCELLABLE(RVAL2GOBJ(o)))
 #define RVAL2GOUTPUTSTREAM(o)              (G_OUTPUT_STREAM(RVAL2GOBJ(o)))
 
+/* For GDK3. They are temporary. They will be needless after Ruby/GDK3
+ * is based on Ruby/GObjectIntrospection.
+ */
+#define RVAL2GDKPIXBUF(o)                  (GDK_PIXBUF(RVAL2GOBJ(o)))
+#define RVAL2GDKCOLOR(o)                   ((GdkColor*)RVAL2BOXED(o, GDK_TYPE_COLOR))
+#define GDKCOLOR2RVAL(o)                   (BOXED2RVAL(o, GDK_TYPE_COLOR))
+#define RVAL2GDKCURSOR(o)                  ((GdkCursor*)RVAL2BOXED(o, GDK_TYPE_CURSOR))
+#define RVAL2GDKCURSORTYPE(o)              (RVAL2GENUM(o, GDK_TYPE_CURSOR_TYPE))
+
 #endif /* __RBVTE3CONVERSIONS_H__ */
