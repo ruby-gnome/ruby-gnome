@@ -23,13 +23,13 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
-gdk3_base = File.join(ruby_gnome2_base, "gdk3")
+gdk3_no_gi_base = File.join(ruby_gnome2_base, "gdk3-no-gi")
 
 [[glib_base, "glib2"],
  [atk_base, "atk"],
  [pango_base, "pango"],
  [gdk_pixbuf_base, "gdk_pixbuf2"],
- [gdk3_base, "gdk3"]].each do |target, module_name|
+ [gdk3_no_gi_base, "gdk3-no-gi"]].each do |target, module_name|
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
@@ -40,7 +40,7 @@ end
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
 
-$LOAD_PATH.unshift(File.join(gdk3_base, "test"))
+$LOAD_PATH.unshift(File.join(gdk3_no_gi_base, "test"))
 require "gdk-test-utils"
 
 require "gdk3"
