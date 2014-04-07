@@ -30,7 +30,7 @@ rescue LoadError
   require 'mkmf-gnome2'
 end
 
-["glib2", "atk", "pango", "gdk_pixbuf2", "gdk3", "gtk3"].each do |package|
+["glib2", "atk", "pango", "gdk_pixbuf2", "gdk3-no-gi", "gtk3"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
@@ -78,4 +78,3 @@ if pkg_config_dir.is_a?(String)
     makefile.puts("pkgconfigdir=#{pkg_config_dir}")
   end
 end
-
