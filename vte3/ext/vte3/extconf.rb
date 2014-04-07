@@ -38,7 +38,7 @@ unless required_pkg_config_package([package_id, 0, 26, 0],
   exit(false)
 end
 
-["glib2", "atk", "pango", "gdk3", "gtk3"].each do |package|
+["glib2", "atk", "pango", "gdk3-no-gi", "gtk3"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
@@ -64,4 +64,3 @@ if pkg_config_dir.is_a?(String)
     makefile.puts("pkgconfigdir=#{pkg_config_dir}")
   end
 end
-
