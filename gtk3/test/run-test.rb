@@ -23,14 +23,14 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 atk_base = File.join(ruby_gnome2_base, "atk")
 pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
-gdk3_base = File.join(ruby_gnome2_base, "gdk3")
+gdk3_no_gi_base = File.join(ruby_gnome2_base, "gdk3-no-gi")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 
 [[glib_base, "glib2"],
  [atk_base, "atk"],
  [pango_base, "pango"],
  [gdk_pixbuf_base, "gdk_pixbuf2"],
- [gdk3_base, "gdk3"],
+ [gdk3_no_gi_base, "gdk3"],
  [gtk3_base, "gtk3"]].each do |target, module_name|
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(false)
