@@ -16,6 +16,6 @@
 
 class TestTerminal < Test::Unit::TestCase
   def test_initialize
-    assert_kind_of(Vte::Terminal, @terminal = Vte::Terminal.new)
+    assert_kind_of(Vte::Terminal, Vte::Terminal.new)
   end
 end
