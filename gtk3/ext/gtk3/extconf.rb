@@ -33,7 +33,7 @@ end
 
 have_func("rb_errinfo")
 
-["glib2", "atk", "pango", "gdk_pixbuf2", "gdk3"].each do |package|
+["glib2", "atk", "pango", "gdk_pixbuf2", "gdk3-no-gi"].each do |package|
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{package}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
