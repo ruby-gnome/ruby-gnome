@@ -40,4 +40,11 @@
 #define RVAL2GTKSOURCEGUTTERRENDERERSTATE(o)    (RVAL2GFLAGS(o, GTK_SOURCE_TYPE_GUTTER_RENDERER_STATE))
 #define GTKSOURCEGUTTERRENDERERSTATE2RVAL(o)    (GFLAGS2RVAL(o, GTK_SOURCE_TYPE_GUTTER_RENDERER_STATE))
 
+/* For GDK3. They are temporary. They will be needless after Ruby/SourceView3
+ * is based on Ruby/GObjectIntrospection.
+ */
+#define RVAL2GDKRECTANGLE(o)                    ((GdkRectangle*)RVAL2BOXED(o, GDK_TYPE_RECTANGLE))
+#define RVAL2GDKRGBA(o)                         ((GdkRGBA*)RVAL2BOXED(o, GDK_TYPE_RGBA))
+#define GDKRGBA2RVAL(o)                         (BOXED2RVAL(o, GDK_TYPE_RGBA))
+
 #endif /* __RBGTKSOURCEVIEW3CONVERSIONS_H__ */

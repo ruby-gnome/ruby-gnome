@@ -28,7 +28,6 @@
 
 #include <ruby.h>
 #include <rb_cairo.h>
-#include <rbgdk3.h>
 #include <rbgtk3.h>
 #include "rbgtksourceview3conversions.h"
 #include "rbgtksourceview3version.h"
