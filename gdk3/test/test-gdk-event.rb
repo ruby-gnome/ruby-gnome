@@ -255,7 +255,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_direction
-      assert_kind_of(Gdk::EventScroll::Direction, @scroll.direction)
+      assert_kind_of(Gdk::ScrollDirection, @scroll.direction)
     end
 
     def test_x_root
@@ -321,7 +321,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_state
-      assert_kind_of(Gdk::EventVisibility::State, @visibility.state)
+      assert_kind_of(Gdk::VisibilityState, @visibility.state)
     end
   end
 
@@ -367,7 +367,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_mode
-      assert_kind_of(Gdk::EventCrossing::Mode, @crossing.mode)
+      assert_kind_of(Gdk::CrossingMode, @crossing.mode)
     end
 
     def test_detail
@@ -445,7 +445,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_state
-      assert_equal(Gdk::EventProperty::State::NEW_VALUE, @property.state)
+      assert_equal(Gdk::PropertyState::NEW_VALUE, @property.state)
     end
   end
 
