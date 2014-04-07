@@ -351,13 +351,11 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_x
-      # TODO: Is Float better?
-      assert_kind_of(Integer, @crossing.x)
+      assert_kind_of(Float, @crossing.x)
     end
 
     def test_y
-      # TODO: Is Float better?
-      assert_kind_of(Integer, @crossing.y)
+      assert_kind_of(Float, @crossing.y)
     end
 
     def test_x_root
