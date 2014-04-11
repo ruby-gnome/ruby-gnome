@@ -35,7 +35,6 @@
 #include <cairo-gobject.h>
 #include <rbpango.h>
 #include <rbgdk-pixbuf.h>
-#include <rbgdk3.h>
 #include "rbgtk3.h"
 #include "rbgtk3util.h"
 

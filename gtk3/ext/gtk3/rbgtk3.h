@@ -29,6 +29,10 @@
 
 #include <rbgobject.h>
 #include "rbgtk3conversions.h"
+/* For GDK3. They are temporary. They will be needless after Ruby/GTK3
+ * is based on Ruby/GObjectIntrospection.
+ */
+#include "rbgdk3.h"
 
 #define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
 #define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION
