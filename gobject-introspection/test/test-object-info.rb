@@ -86,7 +86,7 @@ class TestObjectInfo < Test::Unit::TestCase
 
   def test_n_signals
     info = @repository.find("Gio", "Application")
-    assert_equal(5, info.n_signals)
+    assert_operator(5, :<=, info.n_signals)
   end
 
   def test_get_signal
