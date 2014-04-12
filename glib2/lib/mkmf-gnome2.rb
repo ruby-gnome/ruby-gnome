@@ -22,6 +22,12 @@ def try_compiler_option(opt, &block)
   end
 end
 
+def try_compiler_option_strictly(opt, &block)
+  checking_for "#{opt} option to compiler" do
+    $CFLAGS += " #{opt}" if try_compile '', opt + " -Werror", &block
+  end
+end
+
 try_compiler_option '-Wall'
 try_compiler_option '-Waggregate-return'
 try_compiler_option '-Wcast-align'
@@ -52,7 +58,8 @@ try_compiler_option '-Wswitch-enum'
 try_compiler_option '-Wundef'
 # NOTE: Incredible amounts of false positives.
 #try_compiler_option '-Wunreachable-code'
-try_compiler_option '-Wunsafe-loop-optimizations'
+try_compiler_option_strictly '-Wout-of-line-declaration'
+try_compiler_option_strictly '-Wunsafe-loop-optimizations'
 try_compiler_option '-Wwrite-strings'
 
 if /-Wl,--no-undefined/ =~ $LDFLAGS.to_s
