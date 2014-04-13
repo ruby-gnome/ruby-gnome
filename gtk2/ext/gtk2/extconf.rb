@@ -65,7 +65,7 @@ unless required_pkg_config_package([package_id, 2, 10, 0],
                                    :debian => "libgtk2.0-dev",
                                    :redhat => "gtk2-devel",
                                    :homebrew => "gtk+",
-                                   :macports => "gtk2")
+                                   :macports => "gtk+")
   exit(false)
 end
 
