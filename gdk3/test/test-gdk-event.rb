@@ -30,6 +30,10 @@ class TestGdkEvent < Test::Unit::TestCase
   module TestAnyMethods
     def test_window
       assert_nil(event.window)
+      attributes = Gdk::WindowAttr.new(100, 100, :input_only, :temp)
+      window = Gdk::Window.new(nil, attributes, 0)
+      event.window = window
+      assert_equal(window, event.window)
     end
 
     def test_send_event
