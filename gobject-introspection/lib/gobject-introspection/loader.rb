@@ -387,6 +387,10 @@ module GObjectIntrospection
       validate = lambda do |arguments|
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
       end
+      if klass.method_defined?(method_name) and
+          klass.instance_method(method_name).owner == klass
+        klass.__send__(:remove_method, method_name)
+      end
       klass.__send__(:define_method, method_name) do |*arguments, &block|
         validate.call(arguments, &block)
         if block.nil? and info.require_callback?
