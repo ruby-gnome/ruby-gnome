@@ -55,28 +55,42 @@ rg_get_field(VALUE self, VALUE rb_n)
     return GI_BASE_INFO2RVAL_WITH_UNREF(g_struct_info_get_field(info, n));
 }
 
+static gpointer
+extract_raw_struct(VALUE rb_struct,
+                   GIStructInfo *struct_info)
+{
+    GType gtype;
+    gpointer raw_struct;
+
+    gtype = g_registered_type_info_get_g_type(struct_info);
+    if (gtype == G_TYPE_NONE && rb_respond_to(rb_struct, rb_intern("gtype"))) {
+        VALUE rb_gtype;
+        rb_gtype = rb_funcall(rb_struct, rb_intern("gtype"), 0);
+        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
+    }
+    if (gtype == G_TYPE_NONE) {
+        raw_struct = DATA_PTR(rb_struct);
+    } else {
+        raw_struct = RVAL2BOXED(rb_struct, gtype);
+    }
+
+    return raw_struct;
+}
+
 static VALUE
 rg_get_field_value(VALUE self, VALUE rb_struct, VALUE rb_n)
 {
     GIStructInfo *info;
+    gpointer raw_struct;
     gint n;
     GIFieldInfo *field_info;
     VALUE rb_value;
-    gpointer instance;
 
     info = SELF(self);
+    raw_struct = extract_raw_struct(rb_struct, info);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
-    if (rb_respond_to(rb_struct, rb_intern("gtype"))) {
-        VALUE rb_gtype;
-        GType gtype;
-        rb_gtype = rb_funcall(rb_struct, rb_intern("gtype"), 0);
-        gtype = NUM2ULONG(rb_funcall(rb_gtype, rb_intern("to_i"), 0));
-        instance = RVAL2BOXED(rb_struct, gtype);
-    } else {
-        Data_Get_Struct(rb_struct, void, instance);
-    }
-    rb_value = rb_gi_field_info_get_field_raw(field_info, instance);
+    rb_value = rb_gi_field_info_get_field_raw(field_info, raw_struct);
     g_base_info_unref(field_info);
 
     return rb_value;
@@ -86,20 +100,14 @@ static VALUE
 rg_set_field_value(VALUE self, VALUE rb_struct, VALUE rb_n, VALUE rb_value)
 {
     GIStructInfo *info;
+    gpointer raw_struct;
     gint n;
     GIFieldInfo *field_info;
-    GType gtype;
-    gpointer raw_struct;
 
     info = SELF(self);
+    raw_struct = extract_raw_struct(rb_struct, info);
     n = NUM2INT(rb_n);
     field_info = g_struct_info_get_field(info, n);
-    gtype = g_registered_type_info_get_g_type(info);
-    if (gtype == G_TYPE_NONE) {
-        raw_struct = DATA_PTR(rb_struct);
-    } else {
-        raw_struct = RVAL2BOXED(rb_struct, gtype);
-    }
     rb_gi_field_info_set_field_raw(field_info, raw_struct, rb_value);
     /* TODO: use rb_ensure() to unref field_info. */
     g_base_info_unref(field_info);
