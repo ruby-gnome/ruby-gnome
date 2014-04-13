@@ -19,7 +19,13 @@ module Gdk
     private
     def pre_load(repository, namespace)
       setup_pending_constants
+      define_keyval_module
       load_cairo_rectangle_int
+    end
+
+    def define_keyval_module
+      @keyval_module = Module.new
+      @base_module.const_set("Keyval", @keyval_module)
     end
 
     def load_cairo_rectangle_int
@@ -129,6 +135,8 @@ module Gdk
       case info.name
       when /\AEVENT_/
         @pending_constants << info
+      when /\AKEY_/
+        @keyval_module.const_set(info.name, info.value)
       else
         super
       end

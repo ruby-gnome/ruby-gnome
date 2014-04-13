@@ -94,7 +94,12 @@ module Gdk
   module Keyval
     extend GLib::Deprecatable
     constants.each do |key|
-      define_deprecated_const key.to_s.sub(/^GDK_KEY_/, 'GDK_'), [self, key].join('::')
+      old_names = []
+      old_names << key.to_s.sub(/^KEY_/, 'GDK_KEY_')
+      old_names << key.to_s.sub(/^KEY_/, 'GDK_')
+      old_names.each do |old_name|
+        define_deprecated_const old_name, [self, key].join('::')
+      end
     end
   end
 
