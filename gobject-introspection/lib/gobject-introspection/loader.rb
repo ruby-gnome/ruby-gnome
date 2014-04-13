@@ -376,18 +376,15 @@ module GObjectIntrospection
       infos.each do |info|
         method_name = rubyish_method_name(info)
         load_method_info(info, klass, method_name)
-        if /\Aset_/ =~ method_name and info.n_args == 1
-          setter_method_name = "#{$POSTMATCH}="
-          if klass.method_defined?(setter_method_name) and
-              klass.instance_method(setter_method_name).owner == klass
-            klass.__send__(:remove_method, setter_method_name)
-          end
-          klass.__send__(:alias_method, setter_method_name, method_name)
-        end
       end
     end
 
     def load_method_info(info, klass, method_name)
+      define_method(info, klass, method_name)
+      define_equal_style_setter(info, klass, method_name)
+    end
+
+    def define_method(info, klass, method_name)
       unlock_gvl = should_unlock_gvl?(info, klass)
       validate = lambda do |arguments|
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
@@ -408,6 +405,17 @@ module GObjectIntrospection
                       },
                       &block)
         end
+      end
+    end
+
+    def define_equal_style_setter(info, klass, method_name)
+      if /\Aset_/ =~ method_name and info.n_args == 1
+        setter_method_name = "#{$POSTMATCH}="
+        if klass.method_defined?(setter_method_name) and
+            klass.instance_method(setter_method_name).owner == klass
+          klass.__send__(:remove_method, setter_method_name)
+        end
+        klass.__send__(:alias_method, setter_method_name, method_name)
       end
     end
 
