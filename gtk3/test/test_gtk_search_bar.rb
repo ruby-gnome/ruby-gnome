@@ -42,7 +42,7 @@ class TestGtkSearchBar < Test::Unit::TestCase
   def test_handle_event
     window = Gtk::Window.new
     key_press_event = Gdk::EventKey.new(:key_press)
-    key_press_event.keyval = Gdk::KEY_a
+    key_press_event.keyval = Gdk::Keyval::KEY_a
     entry = Gtk::SearchEntry.new
     @search_bar.add(entry)
     @search_bar.connect_entry(entry)
