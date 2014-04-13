@@ -953,7 +953,9 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
                  g_base_info_get_name(interface_info));
         break;
       case GI_INFO_TYPE_STRUCT:
-        if (gtype == G_TYPE_VALUE) {
+        if (gtype == G_TYPE_NONE) {
+            argument->v_pointer = DATA_PTR(rb_argument);
+        } else if (gtype == G_TYPE_VALUE) {
             GValue *gvalue;
             gvalue = ALLOC(GValue);
             memset(gvalue, 0, sizeof(GValue));
