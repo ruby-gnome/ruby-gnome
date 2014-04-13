@@ -30,6 +30,8 @@
 #  include <gdk/gdkwin32.h>
 #endif
 
+#include <cairo-gobject.h>
+
 #include "rbgdk3conversions.h"
 
 #define RBGDK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
