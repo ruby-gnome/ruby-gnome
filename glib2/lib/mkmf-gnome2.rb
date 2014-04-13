@@ -18,7 +18,7 @@ $CFLAGS += " #{ENV['CFLAGS']}" if ENV['CFLAGS']
 
 def try_compiler_option(opt, &block)
   checking_for "#{opt} option to compiler" do
-    $CFLAGS += " #{opt}" if try_compile '', opt, &block
+    $CFLAGS += " #{opt}" if try_compile '', opt + " -Werror", &block
   end
 end
 
