@@ -190,6 +190,15 @@ rg_s_register_boxed_class_converter(VALUE klass, VALUE rb_gtype)
 }
 
 static VALUE
+rg_s_register_constant_rename_map(G_GNUC_UNUSED VALUE klass,
+                                  VALUE rb_original,
+                                  VALUE rb_renamed)
+{
+    G_RENAME_CONSTANT(RVAL2CSTR(rb_original), RVAL2CSTR(rb_renamed));
+    return Qnil;
+}
+
+static VALUE
 rg_s_start_callback_dispatch_thread(G_GNUC_UNUSED VALUE klass)
 {
     rbgutil_start_callback_dispatch_thread();
@@ -210,5 +219,6 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(define_struct, -1);
     RG_DEF_SMETHOD(define_error, -1);
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
+    RG_DEF_SMETHOD(register_constant_rename_map, 2);
     RG_DEF_SMETHOD(start_callback_dispatch_thread, 0);
 }
