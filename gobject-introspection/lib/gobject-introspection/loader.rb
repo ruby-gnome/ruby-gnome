@@ -377,7 +377,12 @@ module GObjectIntrospection
         method_name = rubyish_method_name(info)
         load_method_info(info, klass, method_name)
         if /\Aset_/ =~ method_name and info.n_args == 1
-          klass.__send__(:alias_method, "#{$POSTMATCH}=", method_name)
+          setter_method_name = "#{$POSTMATCH}="
+          if klass.method_defined?(setter_method_name) and
+              klass.instance_method(setter_method_name).owner == klass
+            klass.__send__(:remove_method, setter_method_name)
+          end
+          klass.__send__(:alias_method, setter_method_name, method_name)
         end
       end
     end
