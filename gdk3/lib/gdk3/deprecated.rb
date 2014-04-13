@@ -21,7 +21,6 @@ module Gdk
     define_deprecated_enums :ExtensionMode, 'EXTENSION_EVENTS'
     define_deprecated_enums :InputMode, 'MODE'
     define_deprecated_enums :InputSource, 'SOURCE'
-    define_deprecated_method :source, :input_source
   end
 
   class Display
