@@ -125,6 +125,12 @@ module Gdk
         self.class.define_class(info.gtype, $POSTMATCH, Gdk::Window)
       when /\AWindow/
         self.class.define_class(info.gtype, $POSTMATCH, Gdk::Window)
+      when "EventType"
+        self.class.register_constant_rename_map("2BUTTON_PRESS",
+                                                "BUTTON2_PRESS")
+        self.class.register_constant_rename_map("3BUTTON_PRESS",
+                                                "BUTTON3_PRESS")
+        super
       else
         super
       end
