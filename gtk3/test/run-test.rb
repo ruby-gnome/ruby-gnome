@@ -28,14 +28,15 @@ gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection"
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 
-[[glib_base, "glib2"],
- [atk_base, "atk"],
- [cairo_gobject_base, "cairo-gobject"],
- [pango_base, "pango"],
- [gdk_pixbuf_base, "gdk_pixbuf2"],
- [gobject_introspection_base, "gobject-introspection"],
- [gdk3_base, "gdk3"],
- [gtk3_base, "gtk3"]
+[
+  [glib_base, "glib2"],
+  [atk_base, "atk"],
+  [cairo_gobject_base, "cairo-gobject"],
+  [pango_base, "pango"],
+  [gdk_pixbuf_base, "gdk_pixbuf2"],
+  [gobject_introspection_base, "gobject-introspection"],
+  [gdk3_base, "gdk3"],
+  [gtk3_base, "gtk3"]
 ].each do |target, module_name|
   if File.exist?(File.join(target, "Makefile"))
     if system("which make > /dev/null")
