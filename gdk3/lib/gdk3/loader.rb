@@ -18,7 +18,7 @@ module Gdk
   class Loader < GObjectIntrospection::Loader
     private
     def pre_load(repository, namespace)
-      @pending_constants = []
+      setup_pending_constants
       load_cairo_rectangle_int
     end
 
@@ -43,11 +43,15 @@ module Gdk
     end
 
     def post_load(repository, namespace)
-      apply_constants
+      apply_pending_constants
       require_libraries
     end
 
-    def apply_constants
+    def setup_pending_constants
+      @pending_constants = []
+    end
+
+    def apply_pending_constants
       @pending_constants.each do |info|
         case info.name
         when /\AEVENT_/
