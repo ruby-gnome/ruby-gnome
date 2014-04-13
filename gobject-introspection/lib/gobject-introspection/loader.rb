@@ -135,6 +135,7 @@ module GObjectIntrospection
 
     def define_boxed(info)
       klass = self.class.define_class(info.gtype, info.name, @base_module)
+      _ = klass # TODO: Remove me. It is just for suppressing a warning.
       # TODO
       # load_fields(info, klass)
       # load_methods(info, klass)
