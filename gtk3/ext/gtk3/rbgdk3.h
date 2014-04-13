@@ -67,7 +67,5 @@ extern GType gdk_geometry_get_type(void);
 extern GType gdk_timecoord_get_type(void);
 
 extern GdkAtom get_gdkatom(VALUE atom);
-extern VALUE rbgdk_gdkevent2rval(GdkEvent *event);
-extern GdkEvent *rbgdk_rval2gdkevent(VALUE event);
 
 #endif /* __RBGDK3_H__ */
