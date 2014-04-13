@@ -34,7 +34,11 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     if (NIL_P(color)){
         widget = gtk_color_button_new();
     } else {
-        widget = gtk_color_button_new_with_color(RVAL2GDKCOLOR(color));
+        if (TYPE(color) == GDK_TYPE_COLOR) {
+            widget = gtk_color_button_new_with_color(RVAL2GDKCOLOR(color));
+        } else {
+            widget = gtk_color_button_new_with_rgba(RVAL2GDKRGBA(color));
+        }
     }
 
     RBGTK_INITIALIZE(self, widget);
