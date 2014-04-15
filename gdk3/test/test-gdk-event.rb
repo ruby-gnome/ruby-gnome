@@ -235,7 +235,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @scroll = Gdk::EventScroll.new
+      @scroll = Gdk::EventScroll.new(:scroll)
     end
 
     def event
@@ -275,7 +275,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @motion = Gdk::EventMotion.new
+      @motion = Gdk::EventMotion.new(:motion_notify)
     end
 
     def event
@@ -387,7 +387,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @focus = Gdk::EventFocus.new
+      @focus = Gdk::EventFocus.new(:focus_change)
     end
 
     def event
@@ -403,7 +403,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @configure = Gdk::EventConfigure.new
+      @configure = Gdk::EventConfigure.new(:configure)
     end
 
     def event
@@ -431,7 +431,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @property = Gdk::EventProperty.new
+      @property = Gdk::EventProperty.new(:property_notify)
     end
 
     def event
@@ -598,7 +598,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @window_state = Gdk::EventWindowState.new
+      @window_state = Gdk::EventWindowState.new(:window_state)
     end
 
     def event
@@ -622,7 +622,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @setting = Gdk::EventSetting.new
+      @setting = Gdk::EventSetting.new(:setting)
     end
 
     def event
@@ -644,7 +644,7 @@ class TestGdkEvent < Test::Unit::TestCase
 
   class TestOwnerChange < self
     def setup
-      @owner_change = Gdk::EventOwnerChange.new
+      @owner_change = Gdk::EventOwnerChange.new(:owner_change)
     end
 
     def event
@@ -682,7 +682,7 @@ class TestGdkEvent < Test::Unit::TestCase
     include TestAnyMethods
 
     def setup
-      @grab_broken = Gdk::EventGrabBroken.new
+      @grab_broken = Gdk::EventGrabBroken.new(:grab_broken)
     end
 
     def event
