@@ -39,6 +39,7 @@ class TestGdkPixbuf < Test::Unit::TestCase
     src_y = 0
     width = 290
     height = 200
+
     pixbuf = Gdk::Pixbuf.get_from_surface(surface,
                                           src_x,
                                           src_y,
