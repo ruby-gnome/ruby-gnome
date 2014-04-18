@@ -15,7 +15,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestTerminal < Test::Unit::TestCase
+  def setup
+    @terminal = Vte::Terminal.new
+  end
+
   def test_initialize
-    assert_kind_of(Vte::Terminal, Vte::Terminal.new)
+    assert_kind_of(Vte::Terminal, @terminal)
   end
 end
