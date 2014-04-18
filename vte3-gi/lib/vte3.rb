@@ -24,7 +24,6 @@ GLib.prepend_dll_path(vendor_bin_dir)
 vendor_girepository_dir = vendor_dir + "lib" + "girepository-1.0"
 GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
-require "vte3/deprecated"
 require "vte3/loader"
 
 module Vte

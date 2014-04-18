@@ -25,5 +25,13 @@ module Vte
         super
       end
     end
+
+    def post_load(repository, namespace)
+      require_libraries
+    end
+
+    def require_libraries
+      require "vte3/deprecated"
+    end
   end
 end
