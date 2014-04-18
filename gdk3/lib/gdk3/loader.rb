@@ -82,8 +82,31 @@ module Gdk
         # ignore
       when /\Arectangle_/
         define_rectangle_method(info, $POSTMATCH)
+      when /\Apixbuf_/
+        define_pixbuf_singleton_method(info, $POSTMATCH)
       else
         super
+      end
+    end
+
+    def define_pixbuf_singleton_method(function_info, name)
+      target_module = Gdk::Pixbuf
+      unlock_gvl = should_unlock_gvl?(function_info, target_module)
+      validate = lambda do |arguments|
+        validate_arguments(function_info, "#{target_module}.#{name}", arguments)
+      end
+      singleton_class = (class << target_module; self; end)
+      singleton_class.__send__(:define_method, name) do |*arguments, &block|
+        validate.call(arguments, &block)
+        if block.nil? and function_info.require_callback?
+          Enumerator.new(self, name, *arguments)
+        else
+          function_info.invoke({
+                                 :arguments => arguments,
+                                 :unlock_gvl => unlock_gvl,
+                               },
+                               &block)
+        end
       end
     end
 
