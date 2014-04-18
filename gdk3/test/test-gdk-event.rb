@@ -37,7 +37,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_send_event
-      assert_false(event.send_event?)
+      assert_equal(0, event.send_event)
     end
   end
 
@@ -395,7 +395,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_in
-      assert_false(@focus.in?)
+      assert_equal(0, @focus.in)
     end
   end
 
@@ -690,11 +690,11 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_keyboard
-      assert_boolean(@grab_broken.keyboard?)
+      assert_boolean(@grab_broken.keyboard)
     end
 
     def test_implicit
-      assert_boolean(@grab_broken.implicit?)
+      assert_boolean(@grab_broken.implicit)
     end
 
     def test_grab_window
