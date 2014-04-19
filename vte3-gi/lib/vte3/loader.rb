@@ -16,6 +16,7 @@
 
 module Vte
   class Loader < GObjectIntrospection::Loader
+    private
     def load_function_info(info)
       name = info.name
       case name
