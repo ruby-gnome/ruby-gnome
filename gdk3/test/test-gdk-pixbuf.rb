@@ -25,11 +25,11 @@ class TestGdkPixbuf < Test::Unit::TestCase
     height = 0
 
     assert_nothing_raised do
-      Gdk::Pixbuf.get_from_window(gdk_window,
-                                  src_x,
-                                  src_y,
-                                  width,
-                                  height)
+      Gdk::Pixbuf.from_window(gdk_window,
+                              src_x,
+                              src_y,
+                              width,
+                              height)
     end
   end
 
@@ -40,11 +40,11 @@ class TestGdkPixbuf < Test::Unit::TestCase
     width = 290
     height = 200
 
-    pixbuf = Gdk::Pixbuf.get_from_surface(surface,
-                                          src_x,
-                                          src_y,
-                                          width,
-                                          height)
+    pixbuf = Gdk::Pixbuf.from_surface(surface,
+                                      src_x,
+                                      src_y,
+                                      width,
+                                      height)
 
     assert_kind_of(Gdk::Pixbuf, pixbuf)
   end
