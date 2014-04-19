@@ -26,7 +26,7 @@ class TestTerminal < Test::Unit::TestCase
   end
 
   def test_fork_command_full
-    flags = 0
+    flags = Vte::PtyFlags::DEFAULT
     assert_nothing_raised do
       @terminal.fork_command_full(flags, nil, nil)
     end

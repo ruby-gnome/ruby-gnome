@@ -16,7 +16,7 @@
 
 class TestPty < Test::Unit::TestCase
   def setup
-    flag = 0
+    flag = Vte::PtyFlags::DEFAULT
     @pty = Vte::Pty.new(flag)
   end
 
