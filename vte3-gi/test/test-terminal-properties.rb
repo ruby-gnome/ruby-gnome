@@ -82,6 +82,12 @@ class TestTerminalProperties < Test::Unit::TestCase
     assert_true(@terminal.pointer_autohide?)
   end
 
+  def test_scroll_background
+    scroll = true
+    @terminal.scroll_background = scroll
+    assert_true(@terminal.scroll_background?)
+  end
+
   def test_scroll_on_keystroke
     scroll = true
     @terminal.scroll_on_keystroke = scroll
