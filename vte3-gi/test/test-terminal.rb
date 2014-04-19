@@ -19,10 +19,6 @@ class TestTerminal < Test::Unit::TestCase
     @terminal = Vte::Terminal.new
   end
 
-  def test_initialize
-    assert_kind_of(Vte::Terminal, @terminal)
-  end
-
   def test_allow_bold
     @terminal.allow_bold = false
     assert_false(@terminal.allow_bold?)
