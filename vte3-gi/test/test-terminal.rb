@@ -19,7 +19,7 @@ class TestTerminal < Test::Unit::TestCase
     @terminal = Vte::Terminal.new
   end
 
-  def test_set_font
+  def test_font
     font = Pango::FontDescription.new("Monospace 16")
     @terminal.font = font
     assert_equal(font, @terminal.font)
