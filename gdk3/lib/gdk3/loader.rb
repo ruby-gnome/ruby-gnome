@@ -17,6 +17,18 @@
 module Gdk
   class Loader < GObjectIntrospection::Loader
     private
+    def window_class
+      @window_class ||= @base_module.const_get(:Window)
+    end
+
+    def event_class
+      @event_class ||= @base_module.const_get(:Event)
+    end
+
+    def rectangle_class
+      @rectangle_class ||= @base_module.const_get(:Rectangle)
+    end
+
     def pre_load(repository, namespace)
       setup_pending_constants
       define_keyval_module
@@ -61,7 +73,7 @@ module Gdk
       @pending_constants.each do |info|
         case info.name
         when /\AEVENT_/
-          Gdk::Event.const_set($POSTMATCH, info.value)
+          event_class.const_set($POSTMATCH, info.value)
         end
       end
     end
@@ -86,7 +98,7 @@ module Gdk
         target_class = nil
         case $POSTMATCH
         when "get_from_window"
-          target_class = @base_module.const_get(:Window)
+          target_class = window_class
         when "get_from_surface"
           target_class = Cairo::Surface
         end
@@ -118,7 +130,7 @@ module Gdk
     end
 
     def define_rectangle_method(function_info, name)
-      target_module = Gdk::Rectangle
+      target_module = rectangle_class
       unlock_gvl = should_unlock_gvl?(function_info, target_module)
       validate = lambda do |arguments|
         method_name = "#{target_module}\##{name}"
@@ -143,7 +155,7 @@ module Gdk
       options = {}
       case info.name
       when /\AEvent/
-        options[:parent] = Gdk::Event
+        options[:parent] = event_class
       end
 
       define_struct(info, options)
@@ -152,9 +164,9 @@ module Gdk
     def define_enum(info)
       case info.name
       when /\AWindowWindow/
-        self.class.define_class(info.gtype, $POSTMATCH, Gdk::Window)
+        self.class.define_class(info.gtype, $POSTMATCH, window_class)
       when /\AWindow/
-        self.class.define_class(info.gtype, $POSTMATCH, Gdk::Window)
+        self.class.define_class(info.gtype, $POSTMATCH, window_class)
       when "EventType"
         self.class.register_constant_rename_map("2BUTTON_PRESS",
                                                 "BUTTON2_PRESS")
