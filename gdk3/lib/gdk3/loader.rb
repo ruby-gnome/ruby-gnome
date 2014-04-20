@@ -83,11 +83,7 @@ module Gdk
       when /\Arectangle_/
         define_rectangle_method(info, $POSTMATCH)
       when /\Apixbuf_/
-        name = $POSTMATCH
-        case name
-        when /\Aget_(from_\w+)/
-          name = $LAST_PAREN_MATCH
-        end
+        name = $POSTMATCH.gsub(/\Aget_/, "")
         define_pixbuf_singleton_method(info, name)
       else
         super
