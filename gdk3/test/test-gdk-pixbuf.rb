@@ -24,13 +24,13 @@ class TestGdkPixbuf < Test::Unit::TestCase
     width = 290
     height = 200
 
-    assert_nothing_raised do
-      Gdk::Pixbuf.from_window(gdk_window,
-                              src_x,
-                              src_y,
-                              width,
-                              height)
-    end
+    pixbuf = Gdk::Pixbuf.from_window(gdk_window,
+                                     src_x,
+                                     src_y,
+                                     width,
+                                     height)
+    assert_equal([width, height],
+                 [pixbuf.width, pixbuf.height])
   end
 
   def test_from_surface
