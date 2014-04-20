@@ -83,31 +83,37 @@ module Gdk
       when /\Arectangle_/
         define_rectangle_method(info, $POSTMATCH)
       when /\Apixbuf_/
-        name = $POSTMATCH.gsub(/\Aget_/, "")
-        define_pixbuf_singleton_method(info, name)
+        target_class = nil
+        case $POSTMATCH
+        when "get_from_window"
+          target_class = @base_module.const_get(:Window)
+        when "get_from_surface"
+          target_class = Cairo::Surface
+        end
+        if target_class
+          define_to_pixbuf_method(info, target_class)
+        else
+          super
+        end
       else
         super
       end
     end
 
-    def define_pixbuf_singleton_method(function_info, name)
-      target_module = Gdk::Pixbuf
-      unlock_gvl = should_unlock_gvl?(function_info, target_module)
+    def define_to_pixbuf_method(function_info, target_class)
+      name = "to_pixbuf"
+      unlock_gvl = should_unlock_gvl?(function_info, target_class)
       validate = lambda do |arguments|
-        validate_arguments(function_info, "#{target_module}.#{name}", arguments)
+        validate_arguments(function_info, "#{target_class}.#{name}", arguments)
       end
-      singleton_class = (class << target_module; self; end)
-      singleton_class.__send__(:define_method, name) do |*arguments, &block|
+      target_class.__send__(:define_method, name) do |*arguments, &block|
+        arguments = [self] + arguments
         validate.call(arguments, &block)
-        if block.nil? and function_info.require_callback?
-          Enumerator.new(self, name, *arguments)
-        else
-          function_info.invoke({
-                                 :arguments => arguments,
-                                 :unlock_gvl => unlock_gvl,
-                               },
-                               &block)
-        end
+        function_info.invoke({
+                               :arguments => arguments,
+                               :unlock_gvl => unlock_gvl,
+                             },
+                             &block)
       end
     end
 

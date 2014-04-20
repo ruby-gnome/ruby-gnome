@@ -17,34 +17,32 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkPixbuf < Test::Unit::TestCase
-  def test_from_window
+  def test_window
     gdk_window = Gdk.default_root_window
     src_x = 0
     src_y = 0
     width = 290
     height = 200
 
-    pixbuf = Gdk::Pixbuf.from_window(gdk_window,
-                                     src_x,
-                                     src_y,
-                                     width,
-                                     height)
+    pixbuf = gdk_window.to_pixbuf(src_x,
+                                  src_y,
+                                  width,
+                                  height)
     assert_equal([width, height],
                  [pixbuf.width, pixbuf.height])
   end
 
-  def test_from_surface
+  def test_surface
     surface = Cairo::ImageSurface.new(:argb32, 290, 200)
     src_x = 0
     src_y = 0
     width = 290
     height = 200
 
-    pixbuf = Gdk::Pixbuf.from_surface(surface,
-                                      src_x,
-                                      src_y,
-                                      width,
-                                      height)
+    pixbuf = surface.to_pixbuf(src_x,
+                               src_y,
+                               width,
+                               height)
     assert_equal([width, height],
                  [pixbuf.width, pixbuf.height])
   end
