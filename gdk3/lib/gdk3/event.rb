@@ -20,4 +20,12 @@ module Gdk
       not send_event.zero?
     end
   end
+
+  class EventFocus
+    alias_method :in_raw, :in
+    remove_method :in
+    def in?
+      not in_raw.zero?
+    end
+  end
 end

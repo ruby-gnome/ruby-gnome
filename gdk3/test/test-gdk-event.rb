@@ -395,7 +395,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_in
-      assert_equal(0, @focus.in)
+      assert_false(@focus.in?)
     end
   end
 
