@@ -32,4 +32,16 @@ class TestLanguageManager < Test::Unit::TestCase
     @view.buffer.highlight_matching_brackets = highlight
     assert_true(@view.buffer.highlight_matching_brackets?)
   end
+
+  def test_language_ids
+    ids = @lang.language_ids
+    assert_include(ids, "ruby")
+  end
+
+  def test_search_path
+    custom_path = "/path/to/search"
+    @lang.search_path = custom_path
+    path = @lang.search_path
+    assert_equal([custom_path], @lang.search_path)
+  end
 end
