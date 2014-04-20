@@ -45,7 +45,7 @@ class TestGdkPixbuf < Test::Unit::TestCase
                                       src_y,
                                       width,
                                       height)
-
-    assert_kind_of(Gdk::Pixbuf, pixbuf)
+    assert_equal([width, height],
+                 [pixbuf.width, pixbuf.height])
   end
 end
