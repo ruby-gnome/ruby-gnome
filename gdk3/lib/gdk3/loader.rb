@@ -25,6 +25,10 @@ module Gdk
       @event_class ||= @base_module.const_get(:Event)
     end
 
+    def event_motion_class
+      @event_motion_class ||= @base_module.const_get(:EventMotion)
+    end
+
     def rectangle_class
       @rectangle_class ||= @base_module.const_get(:Rectangle)
     end
@@ -107,6 +111,14 @@ module Gdk
           define_to_pixbuf_method(info, target_class)
         else
           super
+        end
+      when /\Aevent_/
+        name = $POSTMATCH
+        case name
+        when "request_motions"
+          define_method(info, event_motion_class, "request")
+        else
+          super # TODO
         end
       else
         super
