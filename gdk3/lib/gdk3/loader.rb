@@ -108,7 +108,7 @@ module Gdk
           target_class = Cairo::Surface
         end
         if target_class
-          define_to_pixbuf_method(info, target_class)
+          define_method(info, target_class, "to_pixbuf")
         else
           super
         end
@@ -122,23 +122,6 @@ module Gdk
         end
       else
         super
-      end
-    end
-
-    def define_to_pixbuf_method(function_info, target_class)
-      name = "to_pixbuf"
-      unlock_gvl = should_unlock_gvl?(function_info, target_class)
-      validate = lambda do |arguments|
-        validate_arguments(function_info, "#{target_class}.#{name}", arguments)
-      end
-      target_class.__send__(:define_method, name) do |*arguments, &block|
-        arguments = [self] + arguments
-        validate.call(arguments, &block)
-        function_info.invoke({
-                               :arguments => arguments,
-                               :unlock_gvl => unlock_gvl,
-                             },
-                             &block)
       end
     end
 
