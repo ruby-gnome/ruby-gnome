@@ -398,7 +398,7 @@ module GObjectIntrospection
           klass.instance_method(method_name).owner == klass
         klass.__send__(:remove_method, method_name)
       end
-      function_info_p = info.is_a?(FunctionInfo)
+      function_info_p = (info.class == FunctionInfo)
       klass.__send__(:define_method, method_name) do |*arguments, &block|
         arguments = [self] + arguments if function_info_p
         validate.call(arguments, &block)
