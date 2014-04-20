@@ -21,8 +21,8 @@ class TestGdkPixbuf < Test::Unit::TestCase
     gdk_window = Gdk.default_root_window
     src_x = 0
     src_y = 0
-    width = 0
-    height = 0
+    width = 290
+    height = 200
 
     assert_nothing_raised do
       Gdk::Pixbuf.from_window(gdk_window,
