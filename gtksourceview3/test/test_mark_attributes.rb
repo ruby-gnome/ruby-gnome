@@ -21,6 +21,6 @@ class TestMarkAttributes < Test::Unit::TestCase
 
   def test_background
     @mark_attributes.background = Gdk::RGBA.new(1, 0, 0, 0)
-    assert_equal(Gdk::RGBA.new(1, 0, 0, 0), @mark_attributes.background)
+    assert_equal("rgba(255,0,0,0)", @mark_attributes.background.to_s)
   end
 end
