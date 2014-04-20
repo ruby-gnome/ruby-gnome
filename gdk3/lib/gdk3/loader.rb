@@ -80,6 +80,7 @@ module Gdk
 
     def require_libraries
       require "gdk3/color"
+      require "gdk3/event"
       require "gdk3/rectangle"
       require "gdk3/rgba"
       require "gdk3/window-attr"

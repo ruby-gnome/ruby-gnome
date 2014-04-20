@@ -36,8 +36,8 @@ class TestGdkEvent < Test::Unit::TestCase
       assert_equal(window, event.window)
     end
 
-    def test_send_event
-      assert_equal(0, event.send_event)
+    def test_send_event?
+      assert_false(event.send_event?)
     end
   end
 
