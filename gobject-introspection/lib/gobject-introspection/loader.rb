@@ -398,17 +398,19 @@ module GObjectIntrospection
           klass.instance_method(method_name).owner == klass
         klass.__send__(:remove_method, method_name)
       end
+      function_info_p = info.is_a?(FunctionInfo)
       klass.__send__(:define_method, method_name) do |*arguments, &block|
+        arguments = [self] + arguments if function_info_p
         validate.call(arguments, &block)
         if block.nil? and info.require_callback?
           Enumerator.new(self, method_name, *arguments)
         else
-          info.invoke({
-                        :receiver  => self,
-                        :arguments => arguments,
-                        :unlock_gvl => unlock_gvl,
-                      },
-                      &block)
+          options = {
+            :arguments => arguments,
+            :unlock_gvl => unlock_gvl,
+          }
+          options[:receiver] = self unless function_info_p
+          info.invoke(options, &block)
         end
       end
     end
