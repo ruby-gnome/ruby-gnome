@@ -225,7 +225,12 @@ module GObjectIntrospection
       flags = field_info.flags
 
       if flags.readable?
-        klass.__send__(:define_method, name) do ||
+        if field_info.type.tag == TypeTag::BOOLEAN
+          reader_method_name = "#{name}?"
+        else
+          reader_method_name = name
+        end
+        klass.__send__(:define_method, reader_method_name) do ||
           info.get_field_value(self, i)
         end
       end
