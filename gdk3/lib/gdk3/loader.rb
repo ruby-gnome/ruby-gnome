@@ -98,7 +98,7 @@ module Gdk
       when "init", /_get_type\z/
         # ignore
       when /\Arectangle_/
-        define_rectangle_method(info, $POSTMATCH)
+        define_method(info, rectangle_class, $POSTMATCH)
       when /\Apixbuf_/
         target_class = nil
         case $POSTMATCH
@@ -122,26 +122,6 @@ module Gdk
         end
       else
         super
-      end
-    end
-
-    def define_rectangle_method(function_info, name)
-      target_module = rectangle_class
-      unlock_gvl = should_unlock_gvl?(function_info, target_module)
-      validate = lambda do |arguments|
-        method_name = "#{target_module}\##{name}"
-        validate_arguments(function_info, method_name, arguments)
-      end
-      target_module.module_eval do
-        define_method(name) do |*arguments, &block|
-          arguments = [self] + arguments
-          validate.call(arguments, &block)
-          function_info.invoke({
-                                 :arguments => arguments,
-                                 :unlock_gvl => unlock_gvl,
-                               },
-                               &block)
-        end
       end
     end
 
