@@ -211,9 +211,7 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_emulating_pointer
-      assert_nothing_raised do
-        @touch.emulating_pointer
-      end
+      assert_boolean(@touch.emulating_pointer?)
     end
 
     def test_device
@@ -690,11 +688,11 @@ class TestGdkEvent < Test::Unit::TestCase
     end
 
     def test_keyboard
-      assert_boolean(@grab_broken.keyboard)
+      assert_boolean(@grab_broken.keyboard?)
     end
 
     def test_implicit
-      assert_boolean(@grab_broken.implicit)
+      assert_boolean(@grab_broken.implicit?)
     end
 
     def test_grab_window
