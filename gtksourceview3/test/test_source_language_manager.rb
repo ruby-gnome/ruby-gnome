@@ -41,7 +41,6 @@ class TestLanguageManager < Test::Unit::TestCase
   def test_search_path
     custom_path = "/path/to/search"
     @lang.search_path = custom_path
-    path = @lang.search_path
     assert_equal([custom_path], @lang.search_path)
   end
 end
