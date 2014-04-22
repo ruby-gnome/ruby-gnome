@@ -33,9 +33,6 @@ dependencies.each do |target|
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", File.basename(target)))
-  $LOAD_PATH.unshift(File.join(target, "src"))
-  $LOAD_PATH.unshift(File.join(target, "src", "lib"))
-  $LOAD_PATH.unshift(File.join(target))
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
