@@ -30,7 +30,7 @@ dependencies = [
 dependencies.each do |target|
   makefile = File.join(target, "Makefile")
   if File.exist?(makefile) and system("which make > /dev/null")
-    `make -C #{target.dump} > /dev/null` or exit(1)
+    `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", File.basename(target)))
   $LOAD_PATH.unshift(File.join(target, "src"))
