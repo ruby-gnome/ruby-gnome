@@ -25,10 +25,10 @@ class TestTerminal < Test::Unit::TestCase
     assert_equal(font, @terminal.font)
   end
 
-  def test_fork_command_full
+  def test_fork_command
     flags = Vte::PtyFlags::DEFAULT
     assert_nothing_raised do
-      @terminal.fork_command_full(flags, nil, nil)
+      @terminal.fork_command(flags, nil, nil)
     end
   end
 end

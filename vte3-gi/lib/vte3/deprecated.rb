@@ -20,7 +20,6 @@ module Vte
   class Terminal
     extend GLib::Deprecatable
     define_deprecated_method :match_set_cursor_type, :match_set_cursor
-    define_deprecated_method :fork_command, :raise => "Use 'Vte::Terminal#fork_command_full'."
     define_deprecated_method :fork_pty, :raise => "Use 'Vte::Pty#fork'."
     define_deprecated_method :using_xft?, :warn => "Don't use this method." do |_self|
       false
