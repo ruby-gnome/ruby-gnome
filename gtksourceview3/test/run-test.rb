@@ -16,9 +16,18 @@ gtk_source_view3_base = File.join(ruby_gnome2_base, "gtksourceview3")
 $LOAD_PATH.unshift(glib_base)
 require 'test/glib-test-init'
 
-[glib_base, atk_base, cairo_gobject_base, pango_base, gdk_pixbuf_base,
- gobject_introspection_base, gdk3_base, gtk3_base,
- gtk_source_view3_base].each do |target|
+dependencies = [
+  glib_base,
+  atk_base,
+  cairo_gobject_base,
+  pango_base,
+  gdk_pixbuf_base,
+  gobject_introspection_base,
+  gdk3_base,
+  gtk3_base,
+  gtk_source_view3_base,
+]
+dependencies.each do |target|
   if system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(1)
   end
