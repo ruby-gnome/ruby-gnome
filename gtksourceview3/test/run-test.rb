@@ -28,7 +28,8 @@ dependencies = [
   gtk_source_view3_base,
 ]
 dependencies.each do |target|
-  if system("which make > /dev/null")
+  makefile = File.join(target, "Makefile")
+  if File.exist?(makefile) and system("which make > /dev/null")
     `make -C #{target.dump} > /dev/null` or exit(1)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", File.basename(target)))
