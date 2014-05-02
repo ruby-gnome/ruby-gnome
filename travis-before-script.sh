@@ -19,6 +19,7 @@
 set -e
 set -u
 
+sudo add-apt-repository ppa:gstreamer-developers/ppa
 sudo apt-get update -qq
 sudo apt-get install -qq -y \
     libgirepository1.0-dev \
