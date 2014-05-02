@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
 set -e
 set -u
 
-echo 'yes' | sudo add-apt-repository ppa:gstreamer-developers/ppa
+sudo add-apt-repository --yes ppa:gstreamer-developers/ppa
 sudo apt-get update -qq
 sudo apt-get install -qq -y \
     libgirepository1.0-dev \
