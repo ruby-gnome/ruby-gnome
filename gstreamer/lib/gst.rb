@@ -106,7 +106,7 @@ module Gst
         1 + @init_arguments.size,
         [$0] + @init_arguments,
       ]
-      succeeded, argc, argv, error = init_check.invoke(:arguments => arguments)
+      succeeded, argv, error = init_check.invoke(:arguments => arguments)
       @init_arguments.replace(argv[1..-1])
       raise error unless succeeded
     end
