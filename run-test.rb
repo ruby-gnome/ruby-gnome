@@ -28,7 +28,6 @@ Pathname.glob((base_dir + "*").to_s) do |dir|
 end
 
 ignored_modules = [
-  "gstreamer",
   "gstreamer-no-gi",
   "webkit-gtk",
   "webkit-gtk2",
