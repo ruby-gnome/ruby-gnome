@@ -66,7 +66,7 @@ module ClutterGtk
         [$0] + @init_arguments,
       ]
       error, returned_arguments = init.invoke(:arguments => arguments)
-      @init_arguments.replace(returned_arguments)
+      @init_arguments.replace(returned_arguments[1..-1])
       if error.to_i <= 0
         raise InitError, "failed to initialize Clutter: #{error.name}"
       end
