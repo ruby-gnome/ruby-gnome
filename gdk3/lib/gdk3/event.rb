@@ -16,6 +16,13 @@
 
 module Gdk
   class Event
+    unless const_defined?(:PROPAGATE)
+      PROPAGATE = false
+    end
+    unless const_defined?(:STOP)
+      STOP = true
+    end
+
     def send_event?
       not send_event.zero?
     end
