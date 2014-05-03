@@ -19,7 +19,9 @@
 set -e
 set -u
 
-sudo add-apt-repository --yes ppa:gstreamer-developers/ppa
+if ! apt-cache show gir1.2-gstreamer-1.0 > /dev/null 2>&1; then
+    sudo add-apt-repository --yes ppa:gstreamer-developers/ppa
+fi
 sudo apt-get update -qq
 sudo apt-get install -qq -y \
     libgirepository1.0-dev \
