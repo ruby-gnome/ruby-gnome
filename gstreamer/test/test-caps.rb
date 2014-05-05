@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,26 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-module Gst
-  class Caps
-    class << self
-      def any
-        caps = allocate
-        caps.__send__(:initialize_new_any)
-        caps
-      end
-
-      def empty
-        caps = allocate
-        caps.__send__(:initialize_new_empty)
-        caps
-      end
+class TestCaps < Test::Unit::TestCase
+  class TestConstructor < self
+    def test_any
+      assert_equal("ANY", Gst::Caps.any.to_s)
     end
 
-    def structures
-      size.times.collect do |i|
-        get_structure(i)
-      end
+    def test_empty
+      assert_equal("EMPTY", Gst::Caps.empty.to_s)
+    end
+
+    def test_media_type
+      assert_equal("audio/ogg", Gst::Caps.new("audio/ogg").to_s)
     end
   end
 end
