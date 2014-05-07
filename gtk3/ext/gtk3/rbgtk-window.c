@@ -485,6 +485,13 @@ rg_set_default_geometry(VALUE self, VALUE width, VALUE height)
     return self;
 }
 
+static VALUE
+rg_set_titlebar(VALUE self, VALUE titlebar)
+{
+    gtk_window_set_titlebar(_SELF(self), RVAL2GTKWIDGET(titlebar));
+    return self;
+}
+
 void
 Init_gtk_window(VALUE mGtk)
 {
@@ -544,6 +551,7 @@ Init_gtk_window(VALUE mGtk)
     RG_DEF_METHOD(propagate_key_event, 1);
     RG_DEF_METHOD(resize_to_geometry, 2);
     RG_DEF_METHOD(set_default_geometry, 2);
+    RG_DEF_METHOD(set_titlebar, 1);
 
     G_DEF_CLASS(GTK_TYPE_WINDOW_POSITION, "Position", RG_TARGET_NAMESPACE);
     G_DEF_CLASS(GTK_TYPE_WINDOW_TYPE, "Type", RG_TARGET_NAMESPACE);
