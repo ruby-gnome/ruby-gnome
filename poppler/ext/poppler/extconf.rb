@@ -61,7 +61,7 @@ setup_win32(module_name, base_dir)
 unless required_pkg_config_package([package_id, 0, 12, 0],
                                    :debian => "libpoppler-glib-dev",
                                    :redhat => "poppler-glib-devel",
-#                                   :homebrew => "poppler", # need --with-glib option
+                                   :homebrew => ["poppler", "--with-glib"],
                                    :macports => "poppler")
   exit(false)
 end

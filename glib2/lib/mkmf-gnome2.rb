@@ -463,17 +463,19 @@ def install_missing_native_package(native_package_info)
   package = native_package_info[platform]
   return false if package.nil?
 
+  package_name, *options = package
+  package_command_line = [package_name, *options].join(" ")
   need_super_user_priviledge = true
   case platform
   when :debian
-    install_command = "apt-get install -V -y #{package}"
+    install_command = "apt-get install -V -y #{package_command_line}"
   when :fedora, :redhat
-    install_command = "yum install -y #{package}"
+    install_command = "yum install -y #{package_command_line}"
   when :homebrew
     need_super_user_priviledge = false
-    install_command = "brew install #{package}"
+    install_command = "brew install #{package_command_line}"
   when :macports
-    install_command = "port install -y #{package}"
+    install_command = "port install -y #{package_command_line}"
   else
     return false
   end
@@ -483,14 +485,14 @@ def install_missing_native_package(native_package_info)
     sudo = find_executable("sudo")
   end
 
-  installing_message = "installing '#{package}' native package... "
+  installing_message = "installing '#{package_name}' native package... "
   message("%s", installing_message)
   failed_to_get_super_user_priviledge = false
   if have_priviledge
     succeeded = xsystem(install_command)
   else
     if sudo
-      prompt = "[sudo] password for %u to install <#{package}>: "
+      prompt = "[sudo] password for %u to install <#{package_name}>: "
       sudo_options = "-p #{Shellwords.escape(prompt)}"
       install_command = "#{sudo} #{sudo_options} #{install_command}"
       succeeded = xsystem(install_command)
@@ -514,7 +516,7 @@ def install_missing_native_package(native_package_info)
   unless succeeded
     if failed_to_get_super_user_priviledge
       error_message = <<-EOM
-'#{package}' native package is required.
+'#{package_name}' native package is required.
 run the following command as super user to install required native package:
   \# #{install_command}
 EOM
