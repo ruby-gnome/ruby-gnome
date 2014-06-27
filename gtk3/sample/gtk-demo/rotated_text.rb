@@ -18,8 +18,6 @@ module Demo
     def initialize
       super("Rotated Text")
 
-      set_default_size(RADIUS * 2, RADIUS * 2)
-
       drawing_area = Gtk::DrawingArea.new
       add(drawing_area)
       drawing_area.override_background_color(:normal, Gdk::RGBA.new(1.0,
@@ -30,7 +28,12 @@ module Demo
       drawing_area.signal_connect("draw") do |_drawing_area, cairo_context|
         cairo_context.set_source_rgb(1.0, 1.0, 1.0)
         cairo_context.paint
+        cairo_context.save do
+          width, height = size
+          cairo_context.scale(width.to_f / (RADIUS * 2),
+                              height.to_f / (RADIUS * 2))
         draw_text(cairo_context)
+        end
       end
     end
 
