@@ -32,7 +32,7 @@ module Demo
           width, height = size
           cairo_context.scale(width.to_f / (RADIUS * 2),
                               height.to_f / (RADIUS * 2))
-        draw_text(cairo_context)
+          draw_text(cairo_context)
         end
       end
     end
