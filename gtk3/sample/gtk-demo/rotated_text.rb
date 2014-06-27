@@ -1,4 +1,4 @@
-# Copyright (c) 2005 Ruby-GNOME2 Project Team
+# Copyright (c) 2005-2014  Ruby-GNOME2 Project Team
 # This program is licenced under the same licence as Ruby-GNOME2.
 #
 # $Id: rotated_text.rb,v 1.2 2005/03/05 15:01:16 mutoh Exp $
@@ -11,7 +11,7 @@ We use it here mostly because that allows us to work in user coordinates - that 
 As of GTK+-2.6, the ability to draw transformed and anti-aliased graphics as shown in this example is only present for text.
 With GTK+-2.8, a new graphics system called "Cairo" will be introduced that provides these capabilities and many more for all types of graphics.
 =end
-require 'common'
+require "common"
 
 module Demo
   class RotatedText < BasicWindow
@@ -20,7 +20,7 @@ module Demo
     FONT = "Sans Bold 27"
 
     def initialize
-      super('Rotated Text')
+      super("Rotated Text")
 
       unless Gtk.check_version?(2, 6, 0)
          add(Gtk::Label.new("This sample requires GTK+ 2.6.0 or later"))
