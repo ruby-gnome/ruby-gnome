@@ -45,6 +45,7 @@ module ClutterGst
       end
       loader = Loader.new(self, argv)
       loader.load("ClutterGst")
+      Gst.init if Gst.respond_to?(:init)
     end
   end
 

@@ -11,7 +11,7 @@
 #   Copyright (C) 2007,2008 OpenedHand
 #   Copyright (C) 2013 Collabora
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -217,10 +217,6 @@ app.vtexture.filename = ARGV[0]
 # Set up things so that a visualisation is played if there's no video
 pipe = app.vtexture.pipeline
 raise "Unable to get gstreamer pipeline!" unless pipe
-
-# TODO: want to not require Gst.init
-# prepare Gst's methods (e.g. iterate_sinks)
-Gst.init
 
 iter = pipe.iterate_sinks
 raise "Unable to iterate over sinks!" unless iter
