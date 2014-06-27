@@ -14,9 +14,9 @@ module Demo
   class EntryCompletion < Gtk::Dialog
     def initialize
       super('GtkEntryCompletion',
-	    nil, # parent
-	    0,
-	    [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_NONE])
+            nil, # parent
+            0,
+            [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_NONE])
 
       self.resizable = false
 

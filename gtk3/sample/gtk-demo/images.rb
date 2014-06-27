@@ -27,7 +27,7 @@ module Demo
 
       super('Images')
       signal_connect('destroy') do
-	cleanup_callback
+        cleanup_callback
       end
       
       self.border_width = 8
@@ -54,24 +54,24 @@ module Demo
       # in the location where the file is installed.
       pixbuf = nil
       begin
-	filename = Demo.find_file('gtk-logo-rgb.gif')
-	pixbuf = Gdk::Pixbuf.new(filename)
+        filename = Demo.find_file('gtk-logo-rgb.gif')
+        pixbuf = Gdk::Pixbuf.new(filename)
       rescue
-	# This code shows off error handling. You can just use
-	# Gtk::Image.new instead if you don't want to report
-	# errors to the user. If the file doesn't load when using
-	# Gtk::Image.new, a 'missing image' icon will
-	# be displayed instead.
-	dialog = Gtk::MessageDialog.new(self,
-					Gtk::Dialog::DESTROY_WITH_PARENT,
-					Gtk::MessageDialog::ERROR,
-					Gtk::MessageDialog::BUTTONS_CLOSE,
-					"Unable to open image file 'gtk-logo-rgb.gif': #{$1}")
-	
-	dialog.signal_connect('response') do |widget, data|
-	  widget.destroy
-	end
-	dialog.show
+        # This code shows off error handling. You can just use
+        # Gtk::Image.new instead if you don't want to report
+        # errors to the user. If the file doesn't load when using
+        # Gtk::Image.new, a 'missing image' icon will
+        # be displayed instead.
+        dialog = Gtk::MessageDialog.new(self,
+                                        Gtk::Dialog::DESTROY_WITH_PARENT,
+                                        Gtk::MessageDialog::ERROR,
+                                        Gtk::MessageDialog::BUTTONS_CLOSE,
+                                        "Unable to open image file 'gtk-logo-rgb.gif': #{$1}")
+        
+        dialog.signal_connect('response') do |widget, data|
+          widget.destroy
+        end
+        dialog.show
       end
       
       image = Gtk::Image.new(pixbuf)
@@ -123,63 +123,63 @@ module Demo
       vbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
       button.signal_connect('toggled') do |widget|
-	vbox.children.each do |widget|
-	  if widget != button
-	    widget.sensitive = ! button.active?
-	  end
-	end
+        vbox.children.each do |widget|
+          if widget != button
+            widget.sensitive = ! button.active?
+          end
+        end
       end
     end
 
     def start_progressive_loading(image)
       @load_timeout = Gtk.timeout_add(150) do
-	progressive_timeout(image)
+        progressive_timeout(image)
       end
     end
 
     def progressive_timeout(image)
       if @image_stream
-	buf = @image_stream.read(256)
-	
-	@pixbuf_loader.write(buf)
-	
-	if @image_stream.eof?
-	  @image_stream.close
-	  @image_stream = nil
-	  
-	  @pixbuf_loader.close
-	  @pixbuf_loader = nil
-	end
+        buf = @image_stream.read(256)
+        
+        @pixbuf_loader.write(buf)
+        
+        if @image_stream.eof?
+          @image_stream.close
+          @image_stream = nil
+          
+          @pixbuf_loader.close
+          @pixbuf_loader = nil
+        end
       else
-	filename = Demo.find_file('alphatest.png')
-	@image_stream = File.open(filename, 'rb')
+        filename = Demo.find_file('alphatest.png')
+        @image_stream = File.open(filename, 'rb')
 
-	if @pixbuf_loader != nil
-	  @pixbuf_loader.close
-	  @pixbuf_loader = nil
-	end
-	
-	@pixbuf_loader = Gdk::PixbufLoader.new
-	
-	@pixbuf_loader.signal_connect('area_prepared') do |loader|
-	  pixbuf = loader.pixbuf
+        if @pixbuf_loader != nil
+          @pixbuf_loader.close
+          @pixbuf_loader = nil
+        end
+        
+        @pixbuf_loader = Gdk::PixbufLoader.new
+        
+        @pixbuf_loader.signal_connect('area_prepared') do |loader|
+          pixbuf = loader.pixbuf
 
-	  # Avoid displaying random memory contents, since the pixbuf
-	  # isn't filled in yet.
-	  pixbuf.fill!(0xaaaaaaff)
-	  
-	  image.pixbuf = pixbuf
-	end
-	
-	@pixbuf_loader.signal_connect('area_updated') do
-	  # We know the pixbuf inside the Gtk::Image has changed, but the image
-	  # itself doesn't know this; so queue a redraw.  If we wanted to be
-	  # really efficient, we could use a drawing area or something
-	  # instead of a Gtk::Image, so we could control the exact position of
-	  # the pixbuf on the display, then we could queue a draw for only
-	  # the updated area of the image.
-	  image.queue_draw
-	end
+          # Avoid displaying random memory contents, since the pixbuf
+          # isn't filled in yet.
+          pixbuf.fill!(0xaaaaaaff)
+          
+          image.pixbuf = pixbuf
+        end
+        
+        @pixbuf_loader.signal_connect('area_updated') do
+          # We know the pixbuf inside the Gtk::Image has changed, but the image
+          # itself doesn't know this; so queue a redraw.  If we wanted to be
+          # really efficient, we could use a drawing area or something
+          # instead of a Gtk::Image, so we could control the exact position of
+          # the pixbuf on the display, then we could queue a draw for only
+          # the updated area of the image.
+          image.queue_draw
+        end
       end
       
       # leave timeout installed
@@ -190,7 +190,7 @@ module Demo
       @pixbuf_loader.close if @pixbuf_loader
       @pixbuf_loader = nil
       if @load_timeout != 0
-	Gtk.timeout_remove(@load_timeout)
+        Gtk.timeout_remove(@load_timeout)
       end
     end
   end

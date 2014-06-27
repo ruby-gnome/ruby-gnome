@@ -32,52 +32,52 @@ module Demo
       drawing_area.modify_bg(Gtk::STATE_NORMAL, Gdk::Color.new(65535, 65535, 65535))
 
       drawing_area.signal_connect("expose_event") do
-	matrix = Pango::Matrix.new
+        matrix = Pango::Matrix.new
 
-	# Get the default renderer for the screen, and set it up for drawing
-	renderer = Gdk::PangoRenderer.get_default(drawing_area.screen)
-	renderer.drawable = drawing_area.window
-	renderer.gc = style.black_gc
-	width = drawing_area.allocation.width
-	height = drawing_area.allocation.height
+        # Get the default renderer for the screen, and set it up for drawing
+        renderer = Gdk::PangoRenderer.get_default(drawing_area.screen)
+        renderer.drawable = drawing_area.window
+        renderer.gc = style.black_gc
+        width = drawing_area.allocation.width
+        height = drawing_area.allocation.height
 
-	# Set up a transformation matrix so that the user space coordinates for
-	# the centered square where we draw are [-RADIUS, RADIUS], [-RADIUS, RADIUS]
-	# We first center, then change the scale
-	device_radius = [width, height].min / 2.0
+        # Set up a transformation matrix so that the user space coordinates for
+        # the centered square where we draw are [-RADIUS, RADIUS], [-RADIUS, RADIUS]
+        # We first center, then change the scale
+        device_radius = [width, height].min / 2.0
 
-	matrix.translate!(device_radius + (width - 2 * device_radius) / 2.0,
-			  device_radius + (height - 2 * device_radius) / 2.0)
-	matrix.scale!(device_radius / RADIUS, device_radius / RADIUS)
+        matrix.translate!(device_radius + (width - 2 * device_radius) / 2.0,
+                          device_radius + (height - 2 * device_radius) / 2.0)
+        matrix.scale!(device_radius / RADIUS, device_radius / RADIUS)
 
-	# Create a PangoLayout, set the font and text
-	context = Gdk::Pango.context
-	layout = Pango::Layout.new(context)
-	layout.text = "Text"
-	layout.font_description = Pango::FontDescription.new(FONT)
+        # Create a PangoLayout, set the font and text
+        context = Gdk::Pango.context
+        layout = Pango::Layout.new(context)
+        layout.text = "Text"
+        layout.font_description = Pango::FontDescription.new(FONT)
 
-	# Draw the layout N_WORDS times in a circle
-	(0...N_WORDS).each do |i|
-	  rotated_matrix = matrix.dup
-	  angle = 360 * i / N_WORDS.to_f
+        # Draw the layout N_WORDS times in a circle
+        (0...N_WORDS).each do |i|
+          rotated_matrix = matrix.dup
+          angle = 360 * i / N_WORDS.to_f
 
-	  # Gradient from red at angle == 60 to blue at angle == 300
-	  red = 65535 * (1 + Math.cos((angle - 60) * Math::PI / 180.0)) / 2
-	  color = Gdk::Color.new(red, 0, 65535 - red) 
-	  renderer.set_override_color(Pango::Renderer::PART_FOREGROUND, color)
+          # Gradient from red at angle == 60 to blue at angle == 300
+          red = 65535 * (1 + Math.cos((angle - 60) * Math::PI / 180.0)) / 2
+          color = Gdk::Color.new(red, 0, 65535 - red) 
+          renderer.set_override_color(Pango::Renderer::PART_FOREGROUND, color)
 
-	  rotated_matrix.rotate!(angle)
-	  context.matrix = rotated_matrix
+          rotated_matrix.rotate!(angle)
+          context.matrix = rotated_matrix
 
-	  # Inform Pango to re-layout the text with the new transformation matrix
-	  layout.context_changed
-	  width, height = layout.size
-	  renderer.draw_layout(layout, - width / 2, - RADIUS * Pango::SCALE)
-	end
-	# Clean up default renderer, since it is shared
-	renderer.set_override_color(Gdk::PangoRenderer::PART_FOREGROUND, nil)
-	renderer.drawable = nil
-	renderer.gc = nil
+          # Inform Pango to re-layout the text with the new transformation matrix
+          layout.context_changed
+          width, height = layout.size
+          renderer.draw_layout(layout, - width / 2, - RADIUS * Pango::SCALE)
+        end
+        # Clean up default renderer, since it is shared
+        renderer.set_override_color(Gdk::PangoRenderer::PART_FOREGROUND, nil)
+        renderer.drawable = nil
+        renderer.gc = nil
       end
     end
   end

@@ -24,7 +24,7 @@ module Demo
       add(vbox)
 
       vbox.pack_start(Gtk::Label.new('Shopping list (you can edit the cells!)'),
-		      :expand => false, :fill => false, :padding => 0)
+                      :expand => false, :fill => false, :padding => 0)
 
       sw = Gtk::ScrolledWindow.new
       sw.shadow_type = Gtk::SHADOW_ETCHED_IN
@@ -50,13 +50,13 @@ module Demo
 
       button = Gtk::Button.new('Add item')
       button.signal_connect('clicked') do
-	add_item(model)
+        add_item(model)
       end
       hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
 
       button = Gtk::Button.new('Remove item')
       button.signal_connect('clicked') do
-	remove_item(treeview)
+        remove_item(treeview)
       end
       hbox.pack_start(button, :expand => true, :fill => true, :padding => 0)
 
@@ -74,11 +74,11 @@ module Demo
 
       # add items
       @articles.each do |article|
-	iter = model.append
+        iter = model.append
 
-	article.each_with_index do |value, index|
-	  iter.set_value(index, value)
-	end
+        article.each_with_index do |value, index|
+          iter.set_value(index, value)
+        end
       end
       return model
     end
@@ -106,30 +106,30 @@ module Demo
       # number column
       renderer = Gtk::CellRendererText.new
       renderer.signal_connect('edited') do |*args|
-	cell_edited(*args.push(model))
+        cell_edited(*args.push(model))
       end
       treeview.insert_column(-1, 'Number', renderer,
-			     {
-			       :text => COLUMN_NUMBER,
-			       :editable => COLUMN_EDITABLE,
-			     })
+                             {
+                               :text => COLUMN_NUMBER,
+                               :editable => COLUMN_EDITABLE,
+                             })
       def renderer.column
-	COLUMN_NUMBER
+        COLUMN_NUMBER
       end
 
       # product column
       renderer = Gtk::CellRendererText.new
       renderer.signal_connect('edited') do |*args|
-	cell_edited(*args.push(model))
+        cell_edited(*args.push(model))
       end
       def renderer.column
-	COLUMN_PRODUCT
+        COLUMN_PRODUCT
       end
       treeview.insert_column(-1, 'Product', renderer,
-			     {
-			       :text => COLUMN_PRODUCT,
-			       :editable => COLUMN_EDITABLE,
-			     })
+                             {
+                               :text => COLUMN_PRODUCT,
+                               :editable => COLUMN_EDITABLE,
+                             })
     end
 
     def cell_edited(cell, path_string, new_text, model)
@@ -140,13 +140,13 @@ module Demo
       iter = model.get_iter(path)
       case column
       when COLUMN_NUMBER
-	i = iter.path.indices[0]
-	@articles[i].number = new_text.to_i
-	iter.set_value(column, @articles[i].number)
+        i = iter.path.indices[0]
+        @articles[i].number = new_text.to_i
+        iter.set_value(column, @articles[i].number)
       when COLUMN_PRODUCT
-	i = iter.path.indices[0]
-	@articles[i].product = new_text
-	iter.set_value(column, @articles[i].product)
+        i = iter.path.indices[0]
+        @articles[i].product = new_text
+        iter.set_value(column, @articles[i].product)
       end
     end
 
@@ -156,7 +156,7 @@ module Demo
 
       iter = model.append
       foo.each_with_index do |value, index|
-	iter.set_value(index, value)
+        iter.set_value(index, value)
       end
     end
 
@@ -165,8 +165,8 @@ module Demo
       selection = treeview.selection
 
       if iter = selection.selected
-	@articles.delete_at(iter.path.indices[0])
-	model.remove(iter)
+        @articles.delete_at(iter.path.indices[0])
+        model.remove(iter)
       end
     end
   end

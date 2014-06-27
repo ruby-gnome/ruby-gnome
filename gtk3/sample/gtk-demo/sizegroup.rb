@@ -23,7 +23,7 @@ module Demo
   class SizeGroup < Gtk::Dialog
     def initialize
       super('GtkSizeGroup', nil, 0,
-	    [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_NONE])
+            [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_NONE])
 
       color_options = %w(Red Green Blue)
       dash_options = %w(Solid Dashed Dotted)
@@ -32,7 +32,7 @@ module Demo
       set_resizable(false)
 
       signal_connect('response') do
-	destroy
+        destroy
       end
 
       vbox = Gtk::VBox.new(false, 5)
@@ -73,12 +73,12 @@ module Demo
 
       check_button.set_active(true)
       check_button.signal_connect('toggled', size_group) do |check_button, size_group|
-	new_mode = if check_button.active?
-		     Gtk::SizeGroup::HORIZONTAL
-		   else
-		     Gtk::SizeGroup::VERTICAL
-		   end
-	size_group.set_mode(new_mode)
+        new_mode = if check_button.active?
+                     Gtk::SizeGroup::HORIZONTAL
+                   else
+                     Gtk::SizeGroup::VERTICAL
+                   end
+        size_group.set_mode(new_mode)
       end
     end
 
@@ -86,27 +86,27 @@ module Demo
       label = Gtk::Label.new(label_text, true)
       label.set_alignment(0, 1)
       table.attach(label,
-		   0, 1,                    row, row + 1,
-		   Gtk::EXPAND | Gtk::FILL, 0,
-		   0,                       0)
+                   0, 1,                    row, row + 1,
+                   Gtk::EXPAND | Gtk::FILL, 0,
+                   0,                       0)
 
       option_menu = create_option_menu(options)
       label.set_mnemonic_widget(option_menu)
       size_group.add_widget(option_menu)
       table.attach(option_menu,
-		   1, 2,                    row, row + 1,
-		   0,                       0,
-		   0,                       0)
+                   1, 2,                    row, row + 1,
+                   0,                       0,
+                   0,                       0)
     end
 
     def create_option_menu(strings)
       menu = Gtk::Menu.new
 
       strings.each do |str|
-	menu_item = Gtk::MenuItem.new(str)
-	menu_item.show
+        menu_item = Gtk::MenuItem.new(str)
+        menu_item.show
 
-	menu.append(menu_item)
+        menu.append(menu_item)
       end
 
       option_menu = Gtk::OptionMenu.new

@@ -72,10 +72,10 @@ module Demo
 
       # add data to the list store
       DATA.each do |bug|
-	iter = store.append
-	bug.each_with_index do |value, index|
-	  iter[index] = value
-	end
+        iter = store.append
+        bug.each_with_index do |value, index|
+          iter[index] = value
+        end
       end
       return store
     end
@@ -84,12 +84,12 @@ module Demo
       # column for fixed toggles
       renderer = Gtk::CellRendererToggle.new
       renderer.signal_connect('toggled') do |cell, path|
-	fixed_toggled(treeview.model, path)
+        fixed_toggled(treeview.model, path)
       end
 
       column = Gtk::TreeViewColumn.new('Fixed?',
-				       renderer,
-				       'active' => COLUMN_FIXED)
+                                       renderer,
+                                       'active' => COLUMN_FIXED)
 
       # set this column to a fixed sizing (of 50 pixels)
       column.sizing = Gtk::TreeViewColumn::FIXED
@@ -99,24 +99,24 @@ module Demo
       # column for bug numbers
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new('Bug number',
-				       renderer,
-				       'text' => COLUMN_NUMBER)
+                                       renderer,
+                                       'text' => COLUMN_NUMBER)
       column.set_sort_column_id(COLUMN_NUMBER)
       treeview.append_column(column)
 
       # column for severities
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new('Severity',
-				       renderer,
-				       'text' => COLUMN_SEVERITY)
+                                       renderer,
+                                       'text' => COLUMN_SEVERITY)
       column.set_sort_column_id(COLUMN_SEVERITY)
       treeview.append_column(column)
 
       # column for description
       renderer = Gtk::CellRendererText.new
       column = Gtk::TreeViewColumn.new('Description',
-				       renderer,
-				       'text' => COLUMN_DESCRIPTION)
+                                       renderer,
+                                       'text' => COLUMN_DESCRIPTION)
       column.set_sort_column_id(COLUMN_DESCRIPTION)
       treeview.append_column(column)
     end

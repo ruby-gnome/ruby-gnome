@@ -83,31 +83,31 @@ module Demo
       menu.append(menuitem)
       menuitem.show
       menuitem.add_accelerator('activate',
-			       accel_group,
-			       Gdk::Keyval::GDK_F1,
-			       0,
-			       Gtk::ACCEL_VISIBLE)
+                               accel_group,
+                               Gdk::Keyval::GDK_F1,
+                               0,
+                               Gtk::ACCEL_VISIBLE)
       menuitem = Gtk::CheckMenuItem.new('Accelerator Locked')
       menu.append(menuitem)
       menuitem.show
       menuitem.add_accelerator('activate',
-			       accel_group,
-			       Gdk::Keyval::GDK_F2,
-			       0,
-			       Gtk::ACCEL_VISIBLE | Gtk::ACCEL_LOCKED)
+                               accel_group,
+                               Gdk::Keyval::GDK_F2,
+                               0,
+                               Gtk::ACCEL_VISIBLE | Gtk::ACCEL_LOCKED)
       menuitem = Gtk::CheckMenuItem.new('Accelerators Frozen')
       menu.append(menuitem)
       menuitem.show
       menuitem.add_accelerator('activate',
-			       accel_group,
-			       Gdk::Keyval::GDK_F2,
-			       0,
-			       Gtk::ACCEL_VISIBLE)
+                               accel_group,
+                               Gdk::Keyval::GDK_F2,
+                               0,
+                               Gtk::ACCEL_VISIBLE)
       menuitem.add_accelerator('activate',
-			       accel_group,
-			       Gdk::Keyval::GDK_F3,
-			       0,
-			       Gtk::ACCEL_VISIBLE)
+                               accel_group,
+                               Gdk::Keyval::GDK_F3,
+                               0,
+                               Gtk::ACCEL_VISIBLE)
 
       optionmenu = Gtk::OptionMenu.new
       optionmenu.menu = menu
@@ -126,7 +126,7 @@ module Demo
 
       button = Gtk::Button.new('close')
       button.signal_connect('clicked') do
-	quit
+        quit
       end
       box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
       button.flags = Gtk::Widget::CAN_DEFAULT
@@ -137,32 +137,32 @@ module Demo
 
     def create_menu (depth, tearoff)
       if depth < 1
-	return nil
+        return nil
       end
 
       menu = Gtk::Menu.new
       group = nil
 
       if tearoff
-	menuitem = Gtk::TearoffMenuItem.new
-	menu.append(menuitem)
-	menuitem.show
+        menuitem = Gtk::TearoffMenuItem.new
+        menu.append(menuitem)
+        menuitem.show
       end
 
       5.times do |i|
-	buf = sprintf('item %2d - %d', depth, i + 1)
-	menuitem = Gtk::RadioMenuItem.new(buf)
-	group = menuitem.group
+        buf = sprintf('item %2d - %d', depth, i + 1)
+        menuitem = Gtk::RadioMenuItem.new(buf)
+        group = menuitem.group
 
-	menu.append(menuitem)
-	menuitem.show
-	if i == 3
-	  menuitem.sensitive = false
-	end
+        menu.append(menuitem)
+        menuitem.show
+        if i == 3
+          menuitem.sensitive = false
+        end
 
-	if submenu = create_menu(depth - 1, true)
-	  menuitem.submenu = submenu
-	end
+        if submenu = create_menu(depth - 1, true)
+          menuitem.submenu = submenu
+        end
       end
 
       menu.show

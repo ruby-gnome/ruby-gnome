@@ -17,47 +17,47 @@ module Demo
       
       accel_group = Gtk::AccelGroup.new
       item_factory = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR,
-					  '<main>', accel_group)
+                                          '<main>', accel_group)
       
       add_accel_group(accel_group)
       set_border_width(0)
       ifactory_cb = proc do |data, widget|
-	puts "ItemFactory: activated \"#{Gtk::ItemFactory.path_from_widget(widget)}\""
+        puts "ItemFactory: activated \"#{Gtk::ItemFactory.path_from_widget(widget)}\""
       end
       menu_items = [
-	['/_File'],
-	['/File/tearoff1',
-	  '<Tearoff>', nil, nil, ifactory_cb],
-	['/File/_New',
-	  '<Item>', '<control>N', nil, ifactory_cb],
-	['/File/_Open',
-	  '<Item>', '<control>O', nil, ifactory_cb],
-	['/File/_Save',
-	  '<Item>', '<control>S', nil, ifactory_cb],
-	['/File/Save _As...',
-	  '<Item>', nil, nil, ifactory_cb],
-	['/File/sep1', '<Separator>'],
-	['/File/_Quit',
-	  '<Item>', '<control>Q', nil, ifactory_cb],
-	
-	['/_Preferences'],
-	['/_Preferences/_Color'],
-	[ '/_Preferences/Color/_Red',
-	  '<RadioItem>', nil, nil, ifactory_cb],
-	['/_Preferences/Color/_Green',
-	  '/Preferences/Color/Red', nil, nil, ifactory_cb],
-	['/_Preferences/Color/_Blue',
-	  '/Preferences/Color/Red', nil, nil, ifactory_cb],
-	['/_Preferences/_Shape'],
-	['/_Preferences/Shape/_Square',
-	  '<RadioItem>', nil, nil, ifactory_cb],
-	[ '/_Preferences/Shape/_Rectangle',
-	  '/Preferences/Shape/Square', nil, nil, ifactory_cb],
-	[ '/_Preferences/Shape/_Oval',
-	  '/Preferences/Shape/Rectangle', nil, nil, ifactory_cb],
-	
-	[ '/_Help', '<LastBranch>'],
-	[ '/Help/_About', '<Item>', nil, nil, ifactory_cb],
+        ['/_File'],
+        ['/File/tearoff1',
+          '<Tearoff>', nil, nil, ifactory_cb],
+        ['/File/_New',
+          '<Item>', '<control>N', nil, ifactory_cb],
+        ['/File/_Open',
+          '<Item>', '<control>O', nil, ifactory_cb],
+        ['/File/_Save',
+          '<Item>', '<control>S', nil, ifactory_cb],
+        ['/File/Save _As...',
+          '<Item>', nil, nil, ifactory_cb],
+        ['/File/sep1', '<Separator>'],
+        ['/File/_Quit',
+          '<Item>', '<control>Q', nil, ifactory_cb],
+        
+        ['/_Preferences'],
+        ['/_Preferences/_Color'],
+        [ '/_Preferences/Color/_Red',
+          '<RadioItem>', nil, nil, ifactory_cb],
+        ['/_Preferences/Color/_Green',
+          '/Preferences/Color/Red', nil, nil, ifactory_cb],
+        ['/_Preferences/Color/_Blue',
+          '/Preferences/Color/Red', nil, nil, ifactory_cb],
+        ['/_Preferences/_Shape'],
+        ['/_Preferences/Shape/_Square',
+          '<RadioItem>', nil, nil, ifactory_cb],
+        [ '/_Preferences/Shape/_Rectangle',
+          '/Preferences/Shape/Square', nil, nil, ifactory_cb],
+        [ '/_Preferences/Shape/_Oval',
+          '/Preferences/Shape/Rectangle', nil, nil, ifactory_cb],
+        
+        [ '/_Help', '<LastBranch>'],
+        [ '/Help/_About', '<Item>', nil, nil, ifactory_cb],
       ]
       item_factory.create_items(menu_items)
 
@@ -84,7 +84,7 @@ module Demo
       button = Gtk::Button.new('close')
       # TODO: Need signal_connect_swapped?
       button.signal_connect('clicked') do
-	quit
+        quit
       end
       box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
       button.set_flags(Gtk::Widget::CAN_DEFAULT)

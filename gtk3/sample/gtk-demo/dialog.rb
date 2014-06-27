@@ -30,7 +30,7 @@ module Demo
       vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
       button = Gtk::Button.new('_Message Dialog', true)
       button.signal_connect('clicked') do
-	message_dialog_clicked
+        message_dialog_clicked
       end
       hbox.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
@@ -43,7 +43,7 @@ module Demo
 
       button = Gtk::Button.new('_Interactive Dialog')
       button.signal_connect('clicked') do
-	interactive_dialog_clicked
+        interactive_dialog_clicked
       end
       hbox.pack_start(vbox2, :expand => false, :fill => false, :padding => 0)
       vbox2.pack_start(button, :expand => false, :fill => false, :padding => 0)
@@ -71,11 +71,11 @@ module Demo
 
     def message_dialog_clicked
       dialog = Gtk::MessageDialog.new(self,
-				      Gtk::Dialog::MODAL |
-				      Gtk::Dialog::DESTROY_WITH_PARENT,
-				      Gtk::MessageDialog::INFO,
-				      Gtk::MessageDialog::BUTTONS_OK,
-				      <<EOS)
+                                      Gtk::Dialog::MODAL |
+                                      Gtk::Dialog::DESTROY_WITH_PARENT,
+                                      Gtk::MessageDialog::INFO,
+                                      Gtk::MessageDialog::BUTTONS_OK,
+                                      <<EOS)
 This message box has been popped up the following
 number of times:
 
@@ -88,12 +88,12 @@ EOS
 
     def interactive_dialog_clicked
       dialog = Gtk::Dialog.new('Interactive Dialog',
-			       self,
-			       Gtk::Dialog::MODAL |
-			       Gtk::Dialog::DESTROY_WITH_PARENT,
-			       [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_OK],
-			       ["_Non-stock Button", Gtk::Dialog::RESPONSE_CANCEL]
-			       )
+                               self,
+                               Gtk::Dialog::MODAL |
+                               Gtk::Dialog::DESTROY_WITH_PARENT,
+                               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_OK],
+                               ["_Non-stock Button", Gtk::Dialog::RESPONSE_CANCEL]
+                               )
 
       hbox = Gtk::Box.new(:horizontal, 0)
       hbox.set_border_width(8)
@@ -108,7 +108,7 @@ EOS
       hbox.pack_start(table, :expand => true, :fill => true, :padding => 0)
       label = Gtk::Label.new('_Entry 1', true)
       table.attach_defaults(label,
-			    0, 1, 0, 1)
+                            0, 1, 0, 1)
       local_entry1 = Gtk::Entry.new
       local_entry1.text = @entry1.text
       table.attach_defaults(local_entry1, 1, 2, 0, 1)
@@ -116,7 +116,7 @@ EOS
 
       label = Gtk::Label.new('E_ntry 2', true)
       table.attach_defaults(label,
-			    0, 1, 1, 2)
+                            0, 1, 1, 2)
 
       local_entry2 = Gtk::Entry.new
       local_entry2.text = @entry2.text
@@ -127,8 +127,8 @@ EOS
       response = dialog.run
       
       if response == Gtk::Dialog::RESPONSE_OK 
-	@entry1.text = local_entry1.text
-	@entry2.text = local_entry2.text
+        @entry1.text = local_entry1.text
+        @entry2.text = local_entry2.text
       end
       dialog.destroy
     end

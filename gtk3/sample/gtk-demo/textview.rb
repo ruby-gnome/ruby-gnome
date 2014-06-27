@@ -44,14 +44,14 @@ module Demo
       
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.set_policy(:automatic,
-		    :automatic)
+                    :automatic)
       vpaned.add1(sw)
 
       sw.add(view1)
 
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.set_policy(:automatic,
-		    :automatic)
+                    :automatic)
       vpaned.add2(sw)
 
       sw.add(view2)
@@ -82,31 +82,31 @@ module Demo
       #  new copies of the same tags for every buffer.
       # 
       #  Tags are assigned default priorities in order of addition to the
-      #  tag table.	 That is, tags created later that affect the same text
+      #  tag table.         That is, tags created later that affect the same text
       #  property affected by an earlier tag will override the earlier
       #  tag.  You can modify tag priorities with
       #  Gtk::TextTag#set_priority.
       #
 
       buffer.create_tag('heading',
-			'weight' => Pango::FontDescription::WEIGHT_BOLD,
-			'size' => 15 * Pango::SCALE)
+                        'weight' => Pango::FontDescription::WEIGHT_BOLD,
+                        'size' => 15 * Pango::SCALE)
       
       buffer.create_tag("italic",
-			"style" => Pango::FontDescription::STYLE_ITALIC)
+                        "style" => Pango::FontDescription::STYLE_ITALIC)
 
       buffer.create_tag("bold",
-			"weight" => Pango::FontDescription::WEIGHT_BOLD)
+                        "weight" => Pango::FontDescription::WEIGHT_BOLD)
       
       buffer.create_tag("big",
-			# points times the PANGO_SCALE factor 
-			"size" => 20 * Pango::SCALE)
+                        # points times the PANGO_SCALE factor 
+                        "size" => 20 * Pango::SCALE)
 
       buffer.create_tag("xx-small",
-			"scale" => Pango::AttrScale::XX_SMALL)
+                        "scale" => Pango::AttrScale::XX_SMALL)
 
       buffer.create_tag("x-large",
-			"scale" => Pango::AttrScale::X_LARGE)
+                        "scale" => Pango::AttrScale::X_LARGE)
       
       buffer.create_tag("monospace", "family" => "monospace")
       
@@ -115,68 +115,68 @@ module Demo
       buffer.create_tag("red_background", "background" => "red")
 
       stipple = Gdk::Pixmap.create_from_data(nil, GRAY50_BITS, GRAY50_WIDTH,
-					     GRAY50_HEIGHT)
+                                             GRAY50_HEIGHT)
       
       buffer.create_tag("background_stipple",
-			"background_stipple" => stipple)
+                        "background_stipple" => stipple)
 
       buffer.create_tag("foreground_stipple",
-			"foreground_stipple" => stipple)
+                        "foreground_stipple" => stipple)
 
       buffer.create_tag("big_gap_before_line",
-			"pixels_above_lines" => 30)
+                        "pixels_above_lines" => 30)
 
       buffer.create_tag("big_gap_after_line",
-			"pixels_below_lines" => 30)
+                        "pixels_below_lines" => 30)
 
       buffer.create_tag("double_spaced_line",
-			"pixels_inside_wrap" => 10)
+                        "pixels_inside_wrap" => 10)
 
       buffer.create_tag("not_editable",
-			 "editable" => false)
+                         "editable" => false)
       
       buffer.create_tag("word_wrap",
-			"wrap_mode" => :word)
+                        "wrap_mode" => :word)
 
       buffer.create_tag("char_wrap",
-			"wrap_mode" => Gtk::TextTag::WRAP_CHAR)
+                        "wrap_mode" => Gtk::TextTag::WRAP_CHAR)
 
       buffer.create_tag("no_wrap",
-			"wrap_mode" => :none)
+                        "wrap_mode" => :none)
       
       buffer.create_tag("center",
-			"justification" => Gtk::JUSTIFY_CENTER)
+                        "justification" => Gtk::JUSTIFY_CENTER)
 
       buffer.create_tag("right_justify",
-			"justification" => Gtk::JUSTIFY_RIGHT)
+                        "justification" => Gtk::JUSTIFY_RIGHT)
 
       buffer.create_tag("wide_margins",
-			"left_margin" => 50,
-			  "right_margin" => 50)
+                        "left_margin" => 50,
+                          "right_margin" => 50)
       
       buffer.create_tag("strikethrough",
-			"strikethrough" => true)
+                        "strikethrough" => true)
       
       buffer.create_tag("underline",
-			"underline" => Pango::AttrUnderline::SINGLE)
+                        "underline" => Pango::AttrUnderline::SINGLE)
 
       buffer.create_tag("double_underline",
-			"underline" => Pango::AttrUnderline::DOUBLE)
+                        "underline" => Pango::AttrUnderline::DOUBLE)
 
       buffer.create_tag("superscript",
-			"rise" => 10 * Pango::SCALE, #  10 pixels 
-			"size" => 8 * Pango::SCALE)  #  8 points 
+                        "rise" => 10 * Pango::SCALE, #  10 pixels 
+                        "size" => 8 * Pango::SCALE)  #  8 points 
       
       buffer.create_tag("subscript",
-			"rise" => -10 * Pango::SCALE, #  10 pixels 
-			"size" => 8 * Pango::SCALE) #  8 points 
+                        "rise" => -10 * Pango::SCALE, #  10 pixels 
+                        "size" => 8 * Pango::SCALE) #  8 points 
 
       buffer.create_tag("rtl_quote",
-			"wrap_mode" => :word,
-			"direction" => Gtk::Widget::TEXT_DIR_RTL,
-			"indent" => 30,
-			"left_margin" => 20,
-			"right_margin" => 20)
+                        "wrap_mode" => :word,
+                        "direction" => Gtk::Widget::TEXT_DIR_RTL,
+                        "indent" => 30,
+                        "left_margin" => 20,
+                        "right_margin" => 20)
     end
 
     def insert_text(buffer)
@@ -191,8 +191,8 @@ module Demo
       pixbuf = Gdk::Pixbuf.new(filename) if filename
 
       unless pixbuf
-	$stderr.print "Failed to load image file gtk-logo-rgb.gif\n"
-	exit 1
+        $stderr.print "Failed to load image file gtk-logo-rgb.gif\n"
+        exit 1
       end
 
       scaled = pixbuf.scale(32, 32, Gdk::Pixbuf::INTERP_BILINEAR)
@@ -232,11 +232,11 @@ module Demo
       buffer.insert(iter, "a red background", "red_background")
       buffer.insert(iter, " or even ")
       buffer.insert(iter, "a stippled red background",
-		    "red_background", "background_stipple")
+                    "red_background", "background_stipple")
 
       buffer.insert(iter, " or ")
       buffer.insert(iter, "a stippled blue foreground on solid red background",
-		    "blue_foreground", "red_background", "foreground_stipple")
+                    "blue_foreground", "red_background", "foreground_stipple")
 
       buffer.insert(iter, "(select that to read it) can be used.\n\n")
 
@@ -266,19 +266,19 @@ module Demo
       buffer.insert(iter, "You can adjust the amount of space before each line.\n")
       
       buffer.insert(iter, "This line has a whole lot of space before it.\n",
-		    "big_gap_before_line", "wide_margins")
+                    "big_gap_before_line", "wide_margins")
       buffer.insert(iter, "You can also adjust the amount of space after each line; this line has a whole lot of space after it.\n",
-		    "big_gap_after_line", "wide_margins")
+                    "big_gap_after_line", "wide_margins")
       
       buffer.insert(iter, "You can also adjust the amount of space between wrapped lines; this line has extra space between each wrapped line in the same paragraph. To show off wrapping, some filler text: the quick brown fox jumped over the lazy dog. Blah blah blah blah blah blah blah blah blah.\n",
-		    "double_spaced_line", "wide_margins")
+                    "double_spaced_line", "wide_margins")
 
       buffer.insert(iter, "Also note that those lines have extra-wide margins.\n\n")
 
       buffer.insert(iter, "Editability. ", "heading")
       
       buffer.insert(iter, "This line is 'locked down' and can't be edited by the user - just try it! You can't delete this line.\n\n",
-		    "not_editable")
+                    "not_editable")
 
       buffer.insert(iter, "Wrapping. ", "heading")
 
@@ -293,13 +293,13 @@ module Demo
       buffer.insert(iter, "\nThis line has center justification.\n", "center")
 
       buffer.insert(iter, "This line has right justification.\n",
-		    "right_justify")
+                    "right_justify")
 
       buffer.insert(iter, "\nThis line has big wide margins. Text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text.\n", "wide_margins")
 
       buffer.insert(iter, "Internationalization. ", "heading")
 
-      buffer.insert(iter, "You can put all sorts of Unicode text in the buffer.\n\nGerman(Deutsch Süd) Grüß Gott\nGreek(Ελληνικά) Γειά σας\nHebrew	שלום\nJapanese(日本語)\n\nThe widget properly handles bidirectional text, word wrapping, DOS/UNIX/Unicode paragraph separators, grapheme boundaries, and so on using the Pango internationalization framework.\n")
+      buffer.insert(iter, "You can put all sorts of Unicode text in the buffer.\n\nGerman(Deutsch Süd) Grüß Gott\nGreek(Ελληνικά) Γειά σας\nHebrew        שלום\nJapanese(日本語)\n\nThe widget properly handles bidirectional text, word wrapping, DOS/UNIX/Unicode paragraph separators, grapheme boundaries, and so on using the Pango internationalization framework.\n")
 
       buffer.insert(iter, "Here's a word-wrapped quote in a right-to-left language:\n")
       buffer.insert(iter, "??? ??? ???? ?? ???? ???????? ????? ?? ???? ?????? ??????? ??????? ?? ???? ?????? ?? ????? ?? ??????? ????? ??????? ??? ?????? ????? ?????? ????? ???? ?? ?????? ?????? ?? ???????? ?????? ????? ?? ???? ???? ????????? ???????. ???? ???? ??? ???????? ????? ?? »????????« ?? ???????.\n\n", "rtl_quote")
@@ -339,40 +339,40 @@ module Demo
 
       i = 0;
       while find_anchor(iter) do
-	anchor = iter.child_anchor
+        anchor = iter.child_anchor
 
-	if  i == 0 
-	  widget = Gtk::Button.new("Click Me")
-	  widget.signal_connect('clicked') { |button|
-	    if @@nest_window and ! @@nest_window.destroyed?
-	      @@nest_window.present
-	      break
-	    end
-	    
-	    buffer = Gtk::TextBuffer.new
-	    iter = buffer.start_iter
+        if  i == 0 
+          widget = Gtk::Button.new("Click Me")
+          widget.signal_connect('clicked') { |button|
+            if @@nest_window and ! @@nest_window.destroyed?
+              @@nest_window.present
+              break
+            end
+            
+            buffer = Gtk::TextBuffer.new
+            iter = buffer.start_iter
 
-	    buffer.insert(iter, "This buffer is shared by a set of nested text views.\n Nested view:\n")
-	    anchor = buffer.create_child_anchor(iter)
-	    buffer.insert(iter, "\nDon't do this in real applications, please.\n")
+            buffer.insert(iter, "This buffer is shared by a set of nested text views.\n Nested view:\n")
+            anchor = buffer.create_child_anchor(iter)
+            buffer.insert(iter, "\nDon't do this in real applications, please.\n")
 
-	    view = Gtk::TextView.new(buffer)
-	    
-	    recursive_attach_view(0, view, anchor)
-	    
-	    @@nest_window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
-	    sw = Gtk::ScrolledWindow.new(nil, nil)
-	    sw.set_policy(:automatic,
-			  :automatic)
+            view = Gtk::TextView.new(buffer)
+            
+            recursive_attach_view(0, view, anchor)
+            
+            @@nest_window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
+            sw = Gtk::ScrolledWindow.new(nil, nil)
+            sw.set_policy(:automatic,
+                          :automatic)
 
-	    @@nest_window.add(sw)
-	    sw.add(view)
+            @@nest_window.add(sw)
+            sw.add(view)
 
-	    @@nest_window.set_default_size(300, 400)
-	    @@nest_window.show_all
-	  }
-	elsif i == 1
-	  menu = Gtk::Menu.new
+            @@nest_window.set_default_size(300, 400)
+            @@nest_window.show_all
+          }
+        elsif i == 1
+          menu = Gtk::Menu.new
           widget = Gtk::OptionMenu.new
 
           menu_item = Gtk::MenuItem.new("Option 1")
@@ -382,30 +382,30 @@ module Demo
           menu_item = Gtk::MenuItem.new("Option 3")
           menu.append(menu_item)
 
-	  widget.menu = menu
+          widget.menu = menu
 
-	elsif i == 2
-	  widget = Gtk::HScale.new
+        elsif i == 2
+          widget = Gtk::HScale.new
           widget.set_range(0, 100)
           widget.set_size_request(70, -1)
 
-	elsif i == 3
-	  filename = Demo.find_file("floppybuddy.gif")
-	  widget = Gtk::Image.new(filename)
+        elsif i == 3
+          filename = Demo.find_file("floppybuddy.gif")
+          widget = Gtk::Image.new(filename)
 
-	elsif i == 4
+        elsif i == 4
           widget = Gtk::Entry.new
 
-	else
-	  #widget = nil;  avoids a compiler warning 
-	  #g_assert_not_reached ;
-	end
+        else
+          #widget = nil;  avoids a compiler warning 
+          #g_assert_not_reached ;
+        end
 
-	text_view.add_child_at_anchor(widget,
-				      anchor)
+        text_view.add_child_at_anchor(widget,
+                                      anchor)
 
-	widget.show_all 
-	i += 1
+        widget.show_all 
+        i += 1
       end
     end
 

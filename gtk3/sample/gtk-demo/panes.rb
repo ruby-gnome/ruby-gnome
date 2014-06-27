@@ -54,12 +54,12 @@ module Demo
       # Now create toggle buttons to control sizing
 
       vbox.pack_start(create_pane_options(hpaned,
-					  'Horizontal', 'Left', 'Right'),
-		      :expand => false, :fill => false, :padding => 0)
+                                          'Horizontal', 'Left', 'Right'),
+                      :expand => false, :fill => false, :padding => 0)
 
       vbox.pack_start(create_pane_options(vpaned,
-					  'Vertical', 'Top', 'Bottom'),
-		      :expand => false, :fill => false, :padding => 0)
+                                          'Vertical', 'Top', 'Bottom'),
+                      :expand => false, :fill => false, :padding => 0)
     end
 
     def create_pane_options(paned, frame_label, label1, label2)
@@ -75,14 +75,14 @@ module Demo
       check_button = Gtk::CheckButton.new('_Resize', true)
       table.attach_defaults(check_button, 0, 1, 1, 2)
       check_button.signal_connect('toggled') do
-	toggle_resize(paned.child1)
+        toggle_resize(paned.child1)
       end
 
       check_button = Gtk::CheckButton.new('_Shrink', true)
       table.attach_defaults(check_button, 0, 1, 2, 3)
       check_button.active = true
       check_button.signal_connect('toggled') do
-	toggle_shrink(paned.child1)
+        toggle_shrink(paned.child1)
       end
 
       label = Gtk::Label.new(label2)
@@ -92,14 +92,14 @@ module Demo
       table.attach_defaults(check_button, 1, 2, 1, 2)
       check_button.active = true
       check_button.signal_connect('toggled') do
-	toggle_resize(paned.child2)
+        toggle_resize(paned.child2)
       end
 
       check_button = Gtk::CheckButton.new('_Shrink')
       table.attach_defaults(check_button, 1, 2, 2, 3)
       check_button.active = true
       check_button.signal_connect('toggled') do
-	toggle_shrink(paned.child2)
+        toggle_shrink(paned.child2)
       end
 
       return frame
@@ -110,22 +110,22 @@ module Demo
       is_child1 = (child == paned.child1)
 
       resize = if is_child1
-		 paned.child1_resize?
-	       else
-		 paned.child2_resize?
-	       end
+                 paned.child1_resize?
+               else
+                 paned.child2_resize?
+               end
 
       shrink = if is_child1
-		 paned.child1_shrink?
-	       else
-		 paned.child2_shrink?
-	       end
+                 paned.child1_shrink?
+               else
+                 paned.child2_shrink?
+               end
 
       child.parent.remove(child)
       if is_child1
-	paned.pack1(child, !resize, shrink)
+        paned.pack1(child, !resize, shrink)
       else
-	paned.pack2(child, !resize, shrink)
+        paned.pack2(child, !resize, shrink)
       end
     end
 
@@ -134,22 +134,22 @@ module Demo
       is_child1 = (child == paned.child1)
 
       resize = if is_child1
-		 paned.child1_resize?
-	       else
-		 paned.child2_resize?
-	       end
+                 paned.child1_resize?
+               else
+                 paned.child2_resize?
+               end
 
       shrink = if is_child1
-		 paned.child1_shrink?
-	       else
-		 paned.child2_shrink?
-	       end
+                 paned.child1_shrink?
+               else
+                 paned.child2_shrink?
+               end
 
       child.parent.remove(child)
       if is_child1
-	paned.pack1(child, resize, !shrink)
+        paned.pack1(child, resize, !shrink)
       else
-	paned.pack2(child, resize, !shrink)
+        paned.pack2(child, resize, !shrink)
       end
     end
   end
