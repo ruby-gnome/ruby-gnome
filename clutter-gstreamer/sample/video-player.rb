@@ -257,8 +257,7 @@ app.control_seekbar.opacity = 0x99
 
 app.control_label = Clutter::Text.new
 app.control_label.font_name = "Sans Bold 14"
-# TODO: segfault
-#app.control_label.text = File.basename(ARGV[0])
+app.control_label.text = File.basename(ARGV[0])
 stage.title = File.basename(ARGV[0])  # substitutes for label text
 app.control_label.color = control_color1
 
