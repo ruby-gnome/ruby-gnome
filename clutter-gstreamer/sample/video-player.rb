@@ -27,8 +27,6 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-# NOTE: This sample code is for libclutter-gst (a library by C) 2.0.2.
-
 require "optparse"
 
 require "clutter-gst"
