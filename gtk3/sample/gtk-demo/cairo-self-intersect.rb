@@ -19,10 +19,10 @@ module Demo
     def draw(cr)
       cr.move_to(0.3, 0.3)
       cr.line_to(0.7, 0.3)
-      
+
       cr.line_to(0.5, 0.3)
       cr.line_to(0.5, 0.7)
-      
+
       cr.set_line_width(0.22)
       cr.set_line_cap(Cairo::LINE_CAP_ROUND)
       cr.set_line_join(Cairo::LINE_JOIN_ROUND)

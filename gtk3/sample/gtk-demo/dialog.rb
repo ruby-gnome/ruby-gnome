@@ -14,17 +14,17 @@ module Demo
   class Dialog < Demo::BasicWindow
     def initialize
       @count = 1
-      
+
       super('Dialogs')
       set_border_width(8)
-      
+
       frame = Gtk::Frame.new('Dialogs')
       add(frame)
-      
+
       vbox = Gtk::VBox.new(false, 8)
       vbox.set_border_width(8)
       frame.add(vbox)
-      
+
       # Standard message dialog
       hbox = Gtk::Box.new(:horizontal, 0)
       vbox.pack_start(hbox, :expand => false, :fill => false, :padding => 0)
@@ -125,8 +125,8 @@ EOS
 
       hbox.show_all
       response = dialog.run
-      
-      if response == Gtk::Dialog::RESPONSE_OK 
+
+      if response == Gtk::Dialog::RESPONSE_OK
         @entry1.text = local_entry1.text
         @entry2.text = local_entry2.text
       end

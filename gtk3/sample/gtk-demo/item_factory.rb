@@ -14,11 +14,11 @@ module Demo
   class ItemFactory < BasicWindow
     def initialize
       super('Item Factory')
-      
+
       accel_group = Gtk::AccelGroup.new
       item_factory = Gtk::ItemFactory.new(Gtk::ItemFactory::TYPE_MENU_BAR,
                                           '<main>', accel_group)
-      
+
       add_accel_group(accel_group)
       set_border_width(0)
       ifactory_cb = proc do |data, widget|
@@ -39,7 +39,7 @@ module Demo
         ['/File/sep1', '<Separator>'],
         ['/File/_Quit',
           '<Item>', '<control>Q', nil, ifactory_cb],
-        
+
         ['/_Preferences'],
         ['/_Preferences/_Color'],
         [ '/_Preferences/Color/_Red',
@@ -55,14 +55,14 @@ module Demo
           '/Preferences/Shape/Square', nil, nil, ifactory_cb],
         [ '/_Preferences/Shape/_Oval',
           '/Preferences/Shape/Rectangle', nil, nil, ifactory_cb],
-        
+
         [ '/_Help', '<LastBranch>'],
         [ '/Help/_About', '<Item>', nil, nil, ifactory_cb],
       ]
       item_factory.create_items(menu_items)
 
       item_factory.get_item('/Preferences/Shape/Oval').set_active(true)
-      
+
       box1 = Gtk::VBox.new(false, 0)
       add(box1)
 
@@ -76,7 +76,7 @@ module Demo
       separator = Gtk::HSeparator.new
       box1.pack_start(separator)
 
-      
+
       box2 = Gtk::VBox.new(false, 10)
       box2.set_border_width(10)
       box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)

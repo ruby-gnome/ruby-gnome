@@ -21,17 +21,17 @@ module Demo
       cr.line_to(0.1, 50)
       cr.set_source_rgba(1, 0, 0)
       cr.stroke
-      
+
       cr.move_to(0.2, -60)
       cr.line_to(0.2, 60)
       cr.set_source_rgba(1, 1, 0)
       cr.stroke
-      
+
       cr.move_to(0.3, -70)
       cr.line_to(0.3, 70)
       cr.set_source_rgba(0, 1, 0)
       cr.stroke
-      
+
       cr.move_to(0.4, -80)
       cr.line_to(0.4, 80)
       cr.set_source_rgba(0, 0, 1)

@@ -5,10 +5,10 @@
 =begin
 = Rotated Text
 
-This demo shows how to use GDK and Pango to draw rotated and transformed text. 
-The use of Gdk::PangoRenderer in this example is a somewhat advanced technique; most applications can simply use Gdk::Drawable#draw_layout. 
+This demo shows how to use GDK and Pango to draw rotated and transformed text.
+The use of Gdk::PangoRenderer in this example is a somewhat advanced technique; most applications can simply use Gdk::Drawable#draw_layout.
 We use it here mostly because that allows us to work in user coordinates - that is, coordinates prior to the application of the transformation matrix, rather than device coordinates.
-As of GTK+-2.6, the ability to draw transformed and anti-aliased graphics as shown in this example is only present for text. 
+As of GTK+-2.6, the ability to draw transformed and anti-aliased graphics as shown in this example is only present for text.
 With GTK+-2.8, a new graphics system called "Cairo" will be introduced that provides these capabilities and many more for all types of graphics.
 =end
 require 'common'
@@ -63,7 +63,7 @@ module Demo
 
           # Gradient from red at angle == 60 to blue at angle == 300
           red = 65535 * (1 + Math.cos((angle - 60) * Math::PI / 180.0)) / 2
-          color = Gdk::Color.new(red, 0, 65535 - red) 
+          color = Gdk::Color.new(red, 0, 65535 - red)
           renderer.set_override_color(Pango::Renderer::PART_FOREGROUND, color)
 
           rotated_matrix.rotate!(angle)

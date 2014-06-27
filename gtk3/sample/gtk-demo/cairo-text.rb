@@ -21,10 +21,10 @@ module Demo
                           Cairo::FONT_SLANT_NORMAL,
                           Cairo::FONT_WEIGHT_BOLD)
       cr.set_font_size(0.35)
-      
+
       cr.move_to(0.04, 0.53)
       cr.show_text("Hello")
-      
+
       cr.move_to(0.27, 0.65)
       cr.text_path("void")
       cr.set_source_rgba(0.5, 0.5, 1)
@@ -32,7 +32,7 @@ module Demo
       cr.set_source_rgba(0, 0, 0)
       cr.set_line_width(0.01)
       cr.stroke
-      
+
       # draw helping lines
       cr.set_source_rgba(1,0.2,0.2, 0.6)
       cr.arc(0.04, 0.53, 0.02, 0, 2 * Math::PI)

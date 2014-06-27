@@ -28,9 +28,9 @@ module Demo
     def draw(cr)
       cr.move_to(X, Y)
       cr.curve_to(X1, Y1, X2, Y2, X3, Y3)
-      
+
       cr.stroke
-      
+
       cr.set_source_rgba(1, 0.2, 0.2, 0.6)
       cr.set_line_width(0.03)
       cr.move_to(X, Y)

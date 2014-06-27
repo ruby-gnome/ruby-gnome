@@ -28,7 +28,7 @@ module Demo
 
     def draw(cr)
       return if (RECT_WIDTH <= 0 || RECT_HEIGHT <= 0)
-        
+
       if (RECT_WIDTH / 2 < RADIUS)
         if (RECT_HEIGHT / 2 < RADIUS)
           cr.move_to(X0, (Y0 + Y1) / 2)
@@ -64,7 +64,7 @@ module Demo
           cr.curve_to(X0, Y1, X0, Y1, X0, Y1- RADIUS)
         end
       end
-      
+
       cr.close_path
 
       cr.set_source_rgba(0.5,0.5,1)

@@ -22,7 +22,7 @@ module Demo
       cr.rel_line_to(-0.4, 0.0)
       cr.curve_to(0.2, 0.9, 0.2, 0.5, 0.5, 0.5)
       cr.close_path
-      
+
       cr.set_source_rgba(0, 0, 1)
       cr.fill_preserve
       cr.set_source_rgba(0, 0, 0)

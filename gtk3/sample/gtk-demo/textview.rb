@@ -6,9 +6,9 @@
 =begin
 = Text Widget/Multiple Views
 
-The Gtk::TextView widget displays a Gtk::TextBuffer. 
-One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews. 
-This demo has two views displaying a single buffer, 
+The Gtk::TextView widget displays a Gtk::TextBuffer.
+One Gtk::TextBuffer can be displayed by multiple Gtk::TextViews.
+This demo has two views displaying a single buffer,
 and shows off the widget's text formatting features.
 =end
 require 'common'
@@ -25,11 +25,11 @@ module Demo
       super("TextView Window")
 
       set_default_size(450, 450)
-      
+
       set_title("TextView")
       set_border_width(0)
 
-      vpaned = Gtk::VPaned.new 
+      vpaned = Gtk::VPaned.new
       vpaned.set_border_width(5)
       add(vpaned)
       ##
@@ -37,11 +37,11 @@ module Demo
       # the first text view; you could also create the buffer
       # by itself with Gtk::TextBuffer.new, then later create
       # a view widget.
-      # 
+      #
       view1 = Gtk::TextView.new
       buffer = view1.buffer
       view2 = Gtk::TextView.new(buffer)
-      
+
       sw = Gtk::ScrolledWindow.new(nil, nil)
       sw.set_policy(:automatic,
                     :automatic)
@@ -61,8 +61,8 @@ module Demo
 
       attach_widgets(view1)
       attach_widgets(view2)
-      
-      vpaned.show_all 
+
+      vpaned.show_all
 
       self.show
     end
@@ -75,12 +75,12 @@ module Demo
       #  just a convenience function. Also note that you don't have
       #  to give tags a name; pass NULL for the name to create an
       #  anonymous tag.
-      # 
+      #
       #  In any real app, another useful optimization would be to create
       #  a Gtk::TextTagTable in advance, and reuse the same tag table for
       #  all the buffers with the same tag set, instead of creating
       #  new copies of the same tags for every buffer.
-      # 
+      #
       #  Tags are assigned default priorities in order of addition to the
       #  tag table.         That is, tags created later that affect the same text
       #  property affected by an earlier tag will override the earlier
@@ -91,15 +91,15 @@ module Demo
       buffer.create_tag('heading',
                         'weight' => Pango::FontDescription::WEIGHT_BOLD,
                         'size' => 15 * Pango::SCALE)
-      
+
       buffer.create_tag("italic",
                         "style" => Pango::FontDescription::STYLE_ITALIC)
 
       buffer.create_tag("bold",
                         "weight" => Pango::FontDescription::WEIGHT_BOLD)
-      
+
       buffer.create_tag("big",
-                        # points times the PANGO_SCALE factor 
+                        # points times the PANGO_SCALE factor
                         "size" => 20 * Pango::SCALE)
 
       buffer.create_tag("xx-small",
@@ -107,16 +107,16 @@ module Demo
 
       buffer.create_tag("x-large",
                         "scale" => Pango::AttrScale::X_LARGE)
-      
+
       buffer.create_tag("monospace", "family" => "monospace")
-      
+
       buffer.create_tag("blue_foreground", "foreground" => "blue")
 
       buffer.create_tag("red_background", "background" => "red")
 
       stipple = Gdk::Pixmap.create_from_data(nil, GRAY50_BITS, GRAY50_WIDTH,
                                              GRAY50_HEIGHT)
-      
+
       buffer.create_tag("background_stipple",
                         "background_stipple" => stipple)
 
@@ -134,7 +134,7 @@ module Demo
 
       buffer.create_tag("not_editable",
                          "editable" => false)
-      
+
       buffer.create_tag("word_wrap",
                         "wrap_mode" => :word)
 
@@ -143,7 +143,7 @@ module Demo
 
       buffer.create_tag("no_wrap",
                         "wrap_mode" => :none)
-      
+
       buffer.create_tag("center",
                         "justification" => Gtk::JUSTIFY_CENTER)
 
@@ -153,10 +153,10 @@ module Demo
       buffer.create_tag("wide_margins",
                         "left_margin" => 50,
                           "right_margin" => 50)
-      
+
       buffer.create_tag("strikethrough",
                         "strikethrough" => true)
-      
+
       buffer.create_tag("underline",
                         "underline" => Pango::AttrUnderline::SINGLE)
 
@@ -164,12 +164,12 @@ module Demo
                         "underline" => Pango::AttrUnderline::DOUBLE)
 
       buffer.create_tag("superscript",
-                        "rise" => 10 * Pango::SCALE, #  10 pixels 
-                        "size" => 8 * Pango::SCALE)  #  8 points 
-      
+                        "rise" => 10 * Pango::SCALE, #  10 pixels
+                        "size" => 8 * Pango::SCALE)  #  8 points
+
       buffer.create_tag("subscript",
-                        "rise" => -10 * Pango::SCALE, #  10 pixels 
-                        "size" => 8 * Pango::SCALE) #  8 points 
+                        "rise" => -10 * Pango::SCALE, #  10 pixels
+                        "size" => 8 * Pango::SCALE) #  8 points
 
       buffer.create_tag("rtl_quote",
                         "wrap_mode" => :word,
@@ -185,7 +185,7 @@ module Demo
       #  Demo.find_file looks in the the current directory first,
       # so you can run gtk-demo without installing GTK, then looks
       # in the location where the file is installed.
-      # 
+      #
 
       filename = Demo.find_file("gtk-logo-rgb.gif")
       pixbuf = Gdk::Pixbuf.new(filename) if filename
@@ -201,14 +201,14 @@ module Demo
       ##
       #  get start of buffer; each insertion will revalidate the
       #  iterator to point to just after the inserted text.
-      #  
+      #
 
       iter = buffer.get_iter_at(:offset => 0)
 
       buffer.insert(iter, "The text widget can display text with all kinds of nifty attributes. It also supports multiple views of the same buffer; this demo is showing the same buffer in two places.\n\n")
 
       buffer.insert(iter, "Font styles. ", 'heading')
-      
+
       buffer.insert(iter, "For example, you can have ")
       buffer.insert(iter, "italic", "italic")
       buffer.insert(iter, ", ")
@@ -223,9 +223,9 @@ module Demo
       buffer.insert(iter, " or ")
       buffer.insert(iter, "x-large", "x-large")
       buffer.insert(iter, " to ensure that your program properly adapts if the user changes the default font size.\n\n")
-      
+
       buffer.insert(iter, "Colors. ", "heading")
-      
+
       buffer.insert(iter, "Colors such as ")
       buffer.insert(iter, "a blue foreground", "blue_foreground")
       buffer.insert(iter, " or ")
@@ -241,7 +241,7 @@ module Demo
       buffer.insert(iter, "(select that to read it) can be used.\n\n")
 
       buffer.insert(iter, "Underline, strikethrough, and rise. ", "heading")
-      
+
       buffer.insert(iter, "Strikethrough", "strikethrough")
       buffer.insert(iter, ", ")
       buffer.insert(iter, "underline", "underline")
@@ -254,7 +254,7 @@ module Demo
       buffer.insert(iter, " are all supported.\n\n")
 
       buffer.insert(iter, "Images. ", "heading")
-      
+
       buffer.insert(iter, "The buffer can have images in it: ")
       buffer.insert(iter, pixbuf)
       buffer.insert(iter, pixbuf)
@@ -264,32 +264,32 @@ module Demo
       buffer.insert(iter, "Spacing. ", "heading")
 
       buffer.insert(iter, "You can adjust the amount of space before each line.\n")
-      
+
       buffer.insert(iter, "This line has a whole lot of space before it.\n",
                     "big_gap_before_line", "wide_margins")
       buffer.insert(iter, "You can also adjust the amount of space after each line; this line has a whole lot of space after it.\n",
                     "big_gap_after_line", "wide_margins")
-      
+
       buffer.insert(iter, "You can also adjust the amount of space between wrapped lines; this line has extra space between each wrapped line in the same paragraph. To show off wrapping, some filler text: the quick brown fox jumped over the lazy dog. Blah blah blah blah blah blah blah blah blah.\n",
                     "double_spaced_line", "wide_margins")
 
       buffer.insert(iter, "Also note that those lines have extra-wide margins.\n\n")
 
       buffer.insert(iter, "Editability. ", "heading")
-      
+
       buffer.insert(iter, "This line is 'locked down' and can't be edited by the user - just try it! You can't delete this line.\n\n",
                     "not_editable")
 
       buffer.insert(iter, "Wrapping. ", "heading")
 
       buffer.insert(iter, "This line(and most of the others in this buffer) is word-wrapped, using the proper Unicode algorithm. Word wrap should work in all scripts and languages that GTK+ supports. Let's make this a long paragraph to demonstrate: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah\n\n")
-      
+
       buffer.insert(iter, "This line has character-based wrapping, and can wrap between any two character glyphs. Let's make this a long paragraph to demonstrate: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah\n\n", "char_wrap")
-      
+
       buffer.insert(iter, "This line has all wrapping turned off, so it makes the horizontal scrollbar appear.\n\n\n", "no_wrap")
 
       buffer.insert(iter, "Justification. ", "heading")
-      
+
       buffer.insert(iter, "\nThis line has center justification.\n", "center")
 
       buffer.insert(iter, "This line has right justification.\n",
@@ -303,7 +303,7 @@ module Demo
 
       buffer.insert(iter, "Here's a word-wrapped quote in a right-to-left language:\n")
       buffer.insert(iter, "??? ??? ???? ?? ???? ???????? ????? ?? ???? ?????? ??????? ??????? ?? ???? ?????? ?? ????? ?? ??????? ????? ??????? ??? ?????? ????? ?????? ????? ???? ?? ?????? ?????? ?? ???????? ?????? ????? ?? ???? ???? ????????? ???????. ???? ???? ??? ???????? ????? ?? »????????« ?? ???????.\n\n", "rtl_quote")
-      
+
       buffer.insert(iter, "You can put widgets in the buffer: Here's a button: ")
       anchor = buffer.create_child_anchor(iter)
       buffer.insert(iter, " and a menu: ")
@@ -315,10 +315,10 @@ module Demo
       buffer.insert(iter, " finally a text entry: ")
       anchor = buffer.create_child_anchor(iter)
       buffer.insert(iter, ".\n")
-      
+
       buffer.insert(iter, "\n\nThis demo doesn't demonstrate all the Gtk::TextBuffer features; it leaves out, for example: invisible/hidden text(doesn't work in GTK 2, but planned), tab stops, application-drawn areas on the sides of the widget for displaying breakpoints and such...")
 
-      #  Apply word_wrap tag to whole buffer 
+      #  Apply word_wrap tag to whole buffer
 
       buf_start, buf_end = buffer.bounds
       buffer.apply_tag("word_wrap", buf_start, buf_end)
@@ -332,7 +332,7 @@ module Demo
     end
 
     def attach_widgets(text_view)
-      
+
       buffer = text_view.buffer;
 
       iter = buffer.start_iter
@@ -341,14 +341,14 @@ module Demo
       while find_anchor(iter) do
         anchor = iter.child_anchor
 
-        if  i == 0 
+        if  i == 0
           widget = Gtk::Button.new("Click Me")
           widget.signal_connect('clicked') { |button|
             if @@nest_window and ! @@nest_window.destroyed?
               @@nest_window.present
               break
             end
-            
+
             buffer = Gtk::TextBuffer.new
             iter = buffer.start_iter
 
@@ -357,9 +357,9 @@ module Demo
             buffer.insert(iter, "\nDon't do this in real applications, please.\n")
 
             view = Gtk::TextView.new(buffer)
-            
+
             recursive_attach_view(0, view, anchor)
-            
+
             @@nest_window = Gtk::Window.new(Gtk::Window::TOPLEVEL)
             sw = Gtk::ScrolledWindow.new(nil, nil)
             sw.set_policy(:automatic,
@@ -397,14 +397,14 @@ module Demo
           widget = Gtk::Entry.new
 
         else
-          #widget = nil;  avoids a compiler warning 
+          #widget = nil;  avoids a compiler warning
           #g_assert_not_reached ;
         end
 
         text_view.add_child_at_anchor(widget,
                                       anchor)
 
-        widget.show_all 
+        widget.show_all
         i += 1
       end
     end
@@ -415,17 +415,17 @@ module Demo
 
       child_view = Gtk::TextView.new(view.buffer)
 
-      #  Event box is to add a black border around each child view 
+      #  Event box is to add a black border around each child view
       event_box = Gtk::EventBox.new
       color = Gdk::Color.parse("black")
       event_box.modify_bg(Gtk::STATE_NORMAL, color)
 
       align = Gtk::Alignment.new(0.5, 0.5, 1.0, 1.0)
       align.set_border_width(1)
-      
+
       event_box.add(align)
       align.add(child_view)
-      
+
       view.add_child_at_anchor(event_box, anchor)
 
       recursive_attach_view(depth + 1, child_view, anchor)

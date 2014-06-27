@@ -20,16 +20,16 @@ module Demo
       cr.save do
         cr.arc(0.5, 0.5, 0.4, 0, 2 * Math::PI)
         cr.clip
-        
+
         cr.new_path
-        
+
         loader = Gdk::PixbufLoader.new
         File.open("background.jpg", "rb") do |f|
           loader.last_write(f.read)
         end
         pixbuf = loader.pixbuf
         cr.scale(1.0 / pixbuf.width, 1.0 / pixbuf.height)
-        
+
         cr.set_source_pixbuf(pixbuf, 0, 0)
         cr.paint
       end
@@ -37,12 +37,12 @@ module Demo
       cr.save do
         cr.arc(0.5, 0.5, 0.3, 0, 2 * Math::PI)
         cr.clip
-        
+
         cr.new_path
-        
+
         image = Cairo::ImageSurface.from_png("ruby-gnome2-logo.png")
         cr.scale(1.0 / image.width, 1.0 / image.height)
-        
+
         cr.set_source(image, 0, 0)
         cr.paint
       end

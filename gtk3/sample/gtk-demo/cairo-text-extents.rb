@@ -13,7 +13,7 @@ require 'common'
 module Demo
   class CairoTextExtents < CairoWindow
     TEXT = "Ruby"
-    
+
     def initialize
       super('cairo text')
     end
@@ -22,16 +22,16 @@ module Demo
       cr.select_font_face("Sans",
                               Cairo::FONT_SLANT_NORMAL,
                               Cairo::FONT_WEIGHT_NORMAL)
-      
+
       cr.set_font_size(0.3)
       extents = cr.text_extents(TEXT)
-      
+
       x = 0.1
       y = 0.6
-      
+
       cr.move_to(x, y)
       cr.show_text(TEXT)
-      
+
       # draw helping lines
       cr.set_source_rgba(1, 0.2, 0.2, 0.6)
       cr.arc(x, y, 0.05, 0, 2 * Math::PI)

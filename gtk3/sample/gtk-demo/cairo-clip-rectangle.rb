@@ -24,9 +24,9 @@ module Demo
       cr.line_to(0.75, 0.25)
       cr.line_to(0.25, 0.25)
       cr.close_path
-      
+
       cr.clip
-      
+
       cr.move_to(0, 0)
       cr.line_to(1, 1)
       cr.stroke

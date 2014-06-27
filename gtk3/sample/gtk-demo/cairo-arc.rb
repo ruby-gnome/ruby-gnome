@@ -25,7 +25,7 @@ module Demo
     def draw(cr)
       cr.arc(CENTER_X, CENTER_Y, RADIUS, ANGLE1, ANGLE2)
       cr.stroke
-      
+
       # draw helping lines
       cr.set_source_rgba(1, 0.2, 0.2, 0.6)
       cr.arc(CENTER_X, CENTER_Y, 0.05, 0, 2 * Math::PI)

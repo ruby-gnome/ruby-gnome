@@ -23,7 +23,7 @@ module Demo
       cr.rectangle(0, 0, 1, 1)
       cr.set_source(pat)
       cr.fill
-      
+
       pat = Cairo::RadialPattern.new(0.45, 0.4, 0.1, 0.4, 0.4, 0.5)
       pat.add_color_stop_rgba(0, 1, 1, 1, 0.8)
       pat.add_color_stop_rgba(1, 0, 0, 0)

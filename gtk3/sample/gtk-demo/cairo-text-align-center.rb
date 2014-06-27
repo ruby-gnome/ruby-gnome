@@ -13,7 +13,7 @@ require 'common'
 module Demo
   class CairoTextAlignCenter < CairoWindow
     TEXT = "Ruby"
-    
+
     def initialize
       super('cairo text align center')
     end
@@ -22,15 +22,15 @@ module Demo
       cr.select_font_face("Sans",
                           Cairo::FONT_SLANT_NORMAL,
                           Cairo::FONT_WEIGHT_NORMAL)
-      
+
       cr.set_font_size(0.2)
       extents = cr.text_extents(TEXT)
       x = 0.5 - (extents.width / 2 + extents.x_bearing)
       y = 0.5 - (extents.height / 2 + extents.y_bearing)
-      
+
       cr.move_to(x, y)
       cr.show_text(TEXT)
-      
+
       # draw helping lines
       cr.set_source_rgba(1, 0.2, 0.2, 0.6)
       cr.arc(x, y, 0.05, 0, 2 * Math::PI)

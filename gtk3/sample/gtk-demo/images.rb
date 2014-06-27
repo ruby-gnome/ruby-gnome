@@ -29,7 +29,7 @@ module Demo
       signal_connect('destroy') do
         cleanup_callback
       end
-      
+
       self.border_width = 8
 
       vbox = Gtk::VBox.new(false, 8)
@@ -39,10 +39,10 @@ module Demo
       label = Gtk::Label.new
       label.set_markup('<u>Image loaded from a file</u>')
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
-      
+
       frame = Gtk::Frame.new
       frame.shadow_type = :in
-      
+
       # The alignment keeps the frame from growing when users resize
       # the window
       align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
@@ -67,13 +67,13 @@ module Demo
                                         Gtk::MessageDialog::ERROR,
                                         Gtk::MessageDialog::BUTTONS_CLOSE,
                                         "Unable to open image file 'gtk-logo-rgb.gif': #{$1}")
-        
+
         dialog.signal_connect('response') do |widget, data|
           widget.destroy
         end
         dialog.show
       end
-      
+
       image = Gtk::Image.new(pixbuf)
       frame.add(image)
 
@@ -82,10 +82,10 @@ module Demo
       label = Gtk::Label.new
       label.set_markup('<u>Animation loaded from a file</u>')
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
-      
+
       frame = Gtk::Frame.new
       frame.shadow_type = :in
-      
+
       # The alignment keeps the frame from growing when users resize
       # the window
       align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
@@ -95,16 +95,16 @@ module Demo
       filename = Demo.find_file('floppybuddy.gif')
       image = Gtk::Image.new(filename)
       frame.add(image)
-      
+
 
       # Progressive
       label = Gtk::Label.new
       label.set_markup('<u>Progressive image loading</u>')
       vbox.pack_start(label, :expand => false, :fill => false, :padding => 0)
-      
+
       frame = Gtk::Frame.new(nil)
       frame.shadow_type = :in
-      
+
       # The alignment keeps the frame from growing when users resize
       # the window
       align = Gtk::Alignment.new(0.5, 0.5, 0, 0)
@@ -140,13 +140,13 @@ module Demo
     def progressive_timeout(image)
       if @image_stream
         buf = @image_stream.read(256)
-        
+
         @pixbuf_loader.write(buf)
-        
+
         if @image_stream.eof?
           @image_stream.close
           @image_stream = nil
-          
+
           @pixbuf_loader.close
           @pixbuf_loader = nil
         end
@@ -158,19 +158,19 @@ module Demo
           @pixbuf_loader.close
           @pixbuf_loader = nil
         end
-        
+
         @pixbuf_loader = Gdk::PixbufLoader.new
-        
+
         @pixbuf_loader.signal_connect('area_prepared') do |loader|
           pixbuf = loader.pixbuf
 
           # Avoid displaying random memory contents, since the pixbuf
           # isn't filled in yet.
           pixbuf.fill!(0xaaaaaaff)
-          
+
           image.pixbuf = pixbuf
         end
-        
+
         @pixbuf_loader.signal_connect('area_updated') do
           # We know the pixbuf inside the Gtk::Image has changed, but the image
           # itself doesn't know this; so queue a redraw.  If we wanted to be
@@ -181,7 +181,7 @@ module Demo
           image.queue_draw
         end
       end
-      
+
       # leave timeout installed
       return true
     end

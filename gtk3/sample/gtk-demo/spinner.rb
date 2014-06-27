@@ -20,7 +20,7 @@ module Demo
       signal_connect(:destroy) {self.destroy}
 
       self.resizable = false
-      
+
       vbox = Gtk::Box.new :vertical, 5
 
       self.content_area.pack_start vbox, :expand => true, :fill => true, :padding => 0

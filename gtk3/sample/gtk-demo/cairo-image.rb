@@ -23,24 +23,24 @@ module Demo
           loader.last_write(f.read)
         end
         pixbuf = loader.pixbuf
-        
+
         cr.translate(0.5, 0.5)
         cr.rotate(45 * Math::PI / 180)
         cr.scale(1.0 / pixbuf.width, 1.0 / pixbuf.height)
         cr.translate(-0.5 * pixbuf.width, -0.5 * pixbuf.height)
-        
+
         cr.set_source_pixbuf(pixbuf, 0, 0)
         cr.paint
       end
 
       cr.save do
         image = Cairo::ImageSurface.from_png("ruby-gnome2-logo.png")
-        
+
         cr.translate(0.5, 0.5)
         cr.rotate(60 * Math::PI / 180)
         cr.scale(0.8 / image.width, 0.8 / image.height)
         cr.translate(-0.5 * image.width, -0.5 * image.height)
-        
+
         cr.set_source(image, 0, 0)
         cr.paint
       end
