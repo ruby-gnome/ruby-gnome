@@ -72,7 +72,7 @@ module Gdk
     def post_load(repository, namespace)
       apply_pending_constants
       require_libraries
-      load_events
+      convert_event_classes
     end
 
     def setup_pending_constants
@@ -98,7 +98,7 @@ module Gdk
       require "gdk3/deprecated"
     end
 
-    def load_events
+    def convert_event_classes
       event_map = {
         EventType::EXPOSE              => EventExpose,
         EventType::MOTION_NOTIFY       => EventMotion,
