@@ -24,5 +24,9 @@ module Gdk
       self.blue = blue
       self.alpha = alpha
     end
+
+    def to_a
+      [red, green, blue, alpha]
+    end
   end
 end

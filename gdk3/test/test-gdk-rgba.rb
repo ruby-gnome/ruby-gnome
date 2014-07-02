@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,5 +20,10 @@ class TestGdkRGBA < Test::Unit::TestCase
   def test_to_s
     rgba = Gdk::RGBA.new(0.2, 0.4, 0.6, 0.5)
     assert_equal("rgba(51,102,153,0.5)", rgba.to_s)
+  end
+
+  def test_to_a
+    rgba = Gdk::RGBA.new(0.2, 0.4, 0.6, 0.5)
+    assert_equal([0.2, 0.4, 0.6, 0.5], rgba.to_a)
   end
 end
