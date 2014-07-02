@@ -7,4 +7,5 @@
 require 'gtk3/base'
 require 'gtk3/deprecated'
 
+Gdk.init if Gdk.respond_to?(:init)
 Gtk.init

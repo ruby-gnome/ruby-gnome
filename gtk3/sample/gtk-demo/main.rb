@@ -10,9 +10,6 @@
 
 require 'gtk3'
 
-# TODO: remove it when it is no longer needed.
-Gdk.init if Gdk.respond_to?(:init)
-
 $:.unshift(File.dirname(__FILE__))
 
 module Demo
