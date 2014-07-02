@@ -16,6 +16,11 @@
 
 module Gdk
   class Loader < GObjectIntrospection::Loader
+    def initialize(*arguments)
+      super
+      @event_infos = []
+    end
+
     private
     def window_class
       @window_class ||= @base_module.const_get(:Window)
@@ -67,6 +72,7 @@ module Gdk
     def post_load(repository, namespace)
       apply_pending_constants
       require_libraries
+      load_events
     end
 
     def setup_pending_constants
@@ -90,6 +96,51 @@ module Gdk
       require "gdk3/window-attr"
 
       require "gdk3/deprecated"
+    end
+
+    def load_events
+      event_map = {
+        EventType::EXPOSE              => EventExpose,
+        EventType::MOTION_NOTIFY       => EventMotion,
+        EventType::BUTTON_PRESS        => EventButton,
+        EventType::BUTTON2_PRESS       => EventButton,
+        EventType::DOUBLE_BUTTON_PRESS => EventButton,
+        EventType::BUTTON3_PRESS       => EventButton,
+        EventType::TRIPLE_BUTTON_PRESS => EventButton,
+        EventType::BUTTON_RELEASE      => EventButton,
+        EventType::KEY_PRESS           => EventKey,
+        EventType::KEY_RELEASE         => EventKey,
+        EventType::ENTER_NOTIFY        => EventCrossing,
+        EventType::LEAVE_NOTIFY        => EventCrossing,
+        EventType::FOCUS_CHANGE        => EventFocus,
+        EventType::CONFIGURE           => EventConfigure,
+        EventType::PROPERTY_NOTIFY     => EventProperty,
+        EventType::SELECTION_CLEAR     => EventSelection,
+        EventType::SELECTION_REQUEST   => EventSelection,
+        EventType::SELECTION_NOTIFY    => EventSelection,
+        EventType::PROXIMITY_IN        => EventProximity,
+        EventType::PROXIMITY_OUT       => EventProximity,
+        EventType::DRAG_ENTER          => EventDND,
+        EventType::DRAG_LEAVE          => EventDND,
+        EventType::DRAG_MOTION         => EventDND,
+        EventType::DRAG_STATUS         => EventDND,
+        EventType::DROP_START          => EventDND,
+        EventType::DROP_FINISHED       => EventDND,
+        EventType::VISIBILITY_NOTIFY   => EventVisibility,
+        EventType::SCROLL              => EventScroll,
+        EventType::WINDOW_STATE        => EventWindowState,
+        EventType::SETTING             => EventSetting,
+        EventType::OWNER_CHANGE        => EventOwnerChange,
+        EventType::GRAB_BROKEN         => EventGrabBroken,
+        EventType::DAMAGE              => EventExpose,
+        EventType::TOUCH_BEGIN         => EventTouch,
+        EventType::TOUCH_UPDATE        => EventTouch,
+        EventType::TOUCH_END           => EventTouch,
+        EventType::TOUCH_CANCEL        => EventTouch,
+      }
+      self.class.register_boxed_class_converter(Event.gtype) do |event|
+        event_map[event.type] || Event
+      end
     end
 
     def load_function_info(info)
@@ -132,6 +183,7 @@ module Gdk
       case info.name
       when /\AEvent/
         options[:parent] = event_class
+        @event_infos << info
       end
 
       define_struct(info, options)
