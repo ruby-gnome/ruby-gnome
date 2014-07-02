@@ -16,11 +16,6 @@
 
 module Gdk
   class Loader < GObjectIntrospection::Loader
-    def initialize(*arguments)
-      super
-      @event_infos = []
-    end
-
     private
     def window_class
       @window_class ||= @base_module.const_get(:Window)
@@ -183,7 +178,6 @@ module Gdk
       case info.name
       when /\AEvent/
         options[:parent] = event_class
-        @event_infos << info
       end
 
       define_struct(info, options)
