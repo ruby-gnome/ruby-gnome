@@ -54,5 +54,9 @@ module Gdk
       loader = Loader.new(self)
       loader.load("Gdk")
     end
+
+    def cairo_available?
+      true
+    end
   end
 end
