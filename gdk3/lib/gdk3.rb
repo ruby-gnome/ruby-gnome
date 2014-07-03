@@ -89,6 +89,10 @@ if Gdk.cairo_available?
       def gdk_rectangle(rectangle)
         Gdk.cairo_rectangle(self, rectangle)
       end
+
+      def set_source_pixbuf(pixbuf, pixbuf_x=0, pixbuf_y=0)
+        Gdk.cairo_set_source_pixbuf(self, pixbuf, pixbuf_x, pixbuf_y)
+      end
     end
   end
 end
