@@ -24,5 +24,15 @@ module Gdk
       self.width = width
       self.height = height
     end
+
+    alias_method :intersect_raw, :intersect
+    def intersect(other)
+      ret, dest = intersect_raw(other)
+      if ret
+        dest
+      else
+        nil
+      end
+    end
   end
 end
