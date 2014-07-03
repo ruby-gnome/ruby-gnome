@@ -85,6 +85,10 @@ if Gdk.cairo_available?
         set_source_color(color)
         color
       end
+
+      def gdk_rectangle(rectangle)
+        Gdk.cairo_rectangle(self, rectangle)
+      end
     end
   end
 end
