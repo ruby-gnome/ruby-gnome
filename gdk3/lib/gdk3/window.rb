@@ -16,10 +16,6 @@
 
 module Gdk
   class Window
-    def create_cairo_context
-      Gdk.cairo_create(self)
-    end
-
     alias_method :invalidate, :invalidate_rect
   end
 end

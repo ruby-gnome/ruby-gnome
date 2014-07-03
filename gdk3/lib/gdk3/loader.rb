@@ -169,6 +169,24 @@ module Gdk
         else
           super # TODO
         end
+      when /\Acairo_/
+        name = $POSTMATCH
+        case name
+        when "create"
+          define_method(info, window_class, "create_cairo_context")
+        when "set_source_color"
+          define_method(info, Cairo::Context, "set_source_gdk_color")
+        when "set_source_rgba"
+          # TODO
+        when "rectangle"
+          define_method(info, Cairo::Context, "gdk_rectangle")
+        when "region_create_from_surface"
+          # TODO
+        when "surface_create_from_pixbuf"
+          # TODO
+        else
+          define_method(info, Cairo::Context, name)
+        end
       else
         super
       end
