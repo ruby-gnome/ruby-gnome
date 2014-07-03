@@ -60,39 +60,3 @@ module Gdk
     end
   end
 end
-
-if Gdk.cairo_available?
-  module Cairo
-    class Context
-      def set_source_gdk_color(color)
-        Gdk.cairo_set_source_color(self, color)
-      end
-
-      if method_defined?(:set_source_color)
-        alias_method :set_source_not_gdk_color, :set_source_color
-        def set_source_color(color)
-          if color.is_a?(Gdk::Color)
-            set_source_gdk_color(color)
-          else
-            set_source_not_gdk_color(color)
-          end
-        end
-      else
-        alias_method :set_source_color, :set_source_gdk_color
-      end
-
-      def source_color=(color)
-        set_source_color(color)
-        color
-      end
-
-      def gdk_rectangle(rectangle)
-        Gdk.cairo_rectangle(self, rectangle)
-      end
-
-      def set_source_pixbuf(pixbuf, pixbuf_x=0, pixbuf_y=0)
-        Gdk.cairo_set_source_pixbuf(self, pixbuf, pixbuf_x, pixbuf_y)
-      end
-    end
-  end
-end

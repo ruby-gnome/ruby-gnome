@@ -91,6 +91,8 @@ module Gdk
       require "gdk3/window"
       require "gdk3/window-attr"
 
+      require "gdk3/cairo"
+
       require "gdk3/deprecated"
     end
 
