@@ -88,6 +88,7 @@ module Gdk
       require "gdk3/event"
       require "gdk3/rectangle"
       require "gdk3/rgba"
+      require "gdk3/window"
       require "gdk3/window-attr"
 
       require "gdk3/deprecated"
