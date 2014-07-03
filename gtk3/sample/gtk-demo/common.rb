@@ -49,7 +49,6 @@ module Demo
   end
 
   class CairoWindow < BasicWindow
-
     def initialize(title=nil)
       super
 
