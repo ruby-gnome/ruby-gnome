@@ -138,7 +138,7 @@ module Demo
 
     # Redraw the screen from the surface
     def scribble_draw(widget, event)
-      event.set_source(@cairo_context.target)
+      event.set_source(@cairo_context.source)
       event.paint
       return false
     end
