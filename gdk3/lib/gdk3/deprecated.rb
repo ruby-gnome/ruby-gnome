@@ -13,6 +13,9 @@ module Gdk
     define_deprecated_method :pixmap?, :warn => "Don't use this method." do |_self|
       false
     end
+    Gdk::CursorType.constants.each do |cursor_type|
+      define_deprecated_const cursor_type, ['Gdk::CursorType', cursor_type].join('::')
+    end
   end
 
   class Device
