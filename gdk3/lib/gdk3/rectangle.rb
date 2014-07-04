@@ -27,8 +27,8 @@ module Gdk
 
     alias_method :intersect_raw, :intersect
     def intersect(other)
-      ret, dest = intersect_raw(other)
-      if ret
+      intersected, dest = intersect_raw(other)
+      if intersected
         dest
       else
         nil
