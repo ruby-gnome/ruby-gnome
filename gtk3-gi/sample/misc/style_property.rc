@@ -1,0 +1,19 @@
+/*
+  style_property.rc - Ruby/GTK sample rc file for style_property.rb.
+
+  Copyright (c) 2004 Ruby-GNOME2 Project Team
+  This program is licenced under the same licence as Ruby-GNOME2.
+
+  $Id: style_property.rc,v 1.1 2004/01/25 15:52:38 mutoh Exp $
+*/
+style "test-default"
+{
+	bg[NORMAL] = { 0.80, 0.80, 0.40 }
+	MyButton::focus-line-width    = 3
+	MyButton::focus-line-pattern    = "\10\2"
+	MyButton::foo = 30
+	MyButton::bar = boat
+}
+
+class "MyButton" style "test-default"
+

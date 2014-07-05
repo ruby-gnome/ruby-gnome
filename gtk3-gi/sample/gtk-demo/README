@@ -1,0 +1,7 @@
+gtk-demo for Ruby/GTK
+
+To run, do
+
+    ruby main.rb
+
+in this directory.
