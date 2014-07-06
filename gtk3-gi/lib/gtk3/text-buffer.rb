@@ -21,7 +21,7 @@ module Gtk
       initialize_raw(table)
     end
 
-    def create_tag(tag_name=nil, properties)
+    def create_tag(tag_name=nil, properties={})
       tag = Gtk::TextTag.new(tag_name)
       properties.each do |property|
         key, value = property

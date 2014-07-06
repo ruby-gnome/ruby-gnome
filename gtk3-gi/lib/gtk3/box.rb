@@ -22,7 +22,7 @@ module Gtk
     end
 
     alias_method :pack_start_raw, :pack_start
-    def pack_start(child, options)
+    def pack_start(child, options={})
       expand  = options[:expand]  || false
       fill    = options[:fill]    || false
       padding = options[:padding] || 0
