@@ -44,6 +44,7 @@ module Gtk
     def require_libraries
       require "gtk3/box"
       require "gtk3/button"
+      require "gtk3/gtk"
       require "gtk3/label"
       require "gtk3/scrolled-window"
       require "gtk3/text-buffer"
