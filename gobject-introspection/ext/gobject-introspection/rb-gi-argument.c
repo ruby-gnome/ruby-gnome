@@ -1422,6 +1422,22 @@ set_in_array_length_argument(GIArgument *argument,
 }
 
 static void
+set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
+                                       VALUE rb_class_array)
+{
+    GType *types;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_class_array);
+    types = ALLOC_N(GType, n_args);
+    for (i = 0; i < n_args; i++) {
+        types[i] = CLASS2GTYPE(RARRAY_PTR(rb_class_array)[i]);
+    }
+
+    array_argument->v_pointer = types;
+}
+
+static void
 in_array_c_argument_from_ruby(GIArgument *array_argument,
                               GIArgument *length_argument,
                               G_GNUC_UNUSED GITypeInfo *array_type_info,
@@ -1453,10 +1469,15 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
       case GI_TYPE_TAG_UINT64:
       case GI_TYPE_TAG_FLOAT:
       case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
                  "TODO: Ruby -> GIArgument(array)[%s]",
                  g_type_tag_to_string(element_type_tag));
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        set_in_array_gtype_arguments_from_ruby(array_argument,
+                                               rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
         break;
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
@@ -1687,10 +1708,12 @@ rb_gi_value_argument_free_array_c(GIArgument *argument,
       case GI_TYPE_TAG_UINT64:
       case GI_TYPE_TAG_FLOAT:
       case GI_TYPE_TAG_DOUBLE:
-      case GI_TYPE_TAG_GTYPE:
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(array)[%s]",
                  g_type_tag_to_string(element_type_tag));
+        break;
+      case GI_TYPE_TAG_GTYPE:
+        /* TODO */
         break;
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
