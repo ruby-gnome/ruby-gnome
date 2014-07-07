@@ -18,8 +18,6 @@ module Gtk
   class TreeStore
     alias_method :initialize_raw, :initialize
     def initialize(*column_types)
-      # TODO: the following error occurred:
-      # /.../gobject-introspection/lib/gobject-introspection/loader.rb:275:in `invoke': TODO: Ruby -> GIArgument(array)[GType] (NotImplementedError)
       initialize_raw(column_types.size, column_types)
     end
 
