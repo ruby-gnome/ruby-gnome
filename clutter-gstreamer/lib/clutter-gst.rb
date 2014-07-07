@@ -43,9 +43,9 @@ module ClutterGst
         remove_method(:init)
         remove_method(:const_missing)
       end
+      Gst.init if Gst.respond_to?(:init)
       loader = Loader.new(self, argv)
       loader.load("ClutterGst")
-      Gst.init if Gst.respond_to?(:init)
     end
   end
 
