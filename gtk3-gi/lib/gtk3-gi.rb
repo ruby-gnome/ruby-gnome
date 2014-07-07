@@ -62,9 +62,7 @@ module Gtk
       end
       loader = Loader.new(self, argv)
       loader.load("Gtk")
+      Gdk.init if Gdk.respond_to?(:init)
     end
   end
 end
-
-Gdk.init if Gdk.respond_to?(:init)
-Gtk.init
