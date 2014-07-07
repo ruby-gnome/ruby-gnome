@@ -58,7 +58,7 @@ holder_mark(gobj_holder *holder)
 }
 
 static void
-holder_free(gobj_holder *holder)
+holder_unref(gobj_holder *holder)
 {
     if (holder->gobj) {
         if (!holder->destroyed) {
@@ -68,6 +68,12 @@ holder_free(gobj_holder *holder)
         }
         holder->gobj = NULL;
     }
+}
+
+static void
+holder_free(gobj_holder *holder)
+{
+    holder_unref(holder);
     xfree(holder);
 }
 
@@ -609,6 +615,23 @@ rg_inspect(VALUE self)
 }
 
 static VALUE
+rg_unref(VALUE self)
+{
+    gobj_holder* holder;
+
+    Data_Get_Struct(self, gobj_holder, holder);
+
+    if (holder->destroyed)
+        rb_raise(rb_eTypeError, "destroyed GLib::Object");
+    if (!holder->gobj)
+        rb_raise(rb_eTypeError, "uninitialize GLib::Object");
+
+    holder_unref(holder);
+
+    return self;
+}
+
+static VALUE
 rg_type_name(VALUE self)
 {
     return CSTR2RVAL(G_OBJECT_TYPE_NAME(RVAL2GOBJ(self)));
@@ -842,6 +865,7 @@ Init_gobject_gobject(void)
 
     RG_DEF_METHOD(initialize, -1);
     rbg_define_method(RG_TARGET_NAMESPACE, "ref_count", gobj_ref_count, 0); /* for debugging */
+    RG_DEF_METHOD(unref, 0);
     RG_DEF_METHOD(inspect, 0);
     RG_DEF_METHOD(type_name, 0);
 
