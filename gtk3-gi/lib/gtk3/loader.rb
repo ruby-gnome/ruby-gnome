@@ -24,6 +24,7 @@ module Gtk
     private
     def pre_load(repository, namespace)
       call_init_function(repository, namespace)
+      define_stock_module
     end
 
     def call_init_function(repository, namespace)
@@ -35,6 +36,11 @@ module Gtk
       succeeded, argv, error = init_check.invoke(:arguments => arguments)
       @init_arguments.replace(argv[1..-1])
       raise error unless succeeded
+    end
+
+    def define_stock_module
+      @stock_module = Module.new
+      @base_module.const_set("Stock", @stock_module)
     end
 
     def post_load(repository, namespace)
@@ -99,6 +105,15 @@ module Gtk
             return_value
           end
         end
+      end
+    end
+
+    def load_constant_info(info)
+      case info.name
+      when /\ASTOCK_/
+        @stock_module.const_set($POSTMATCH, info.value)
+      else
+        super
       end
     end
   end
