@@ -20,7 +20,7 @@ module Gtk
     def initialize(options={})
       label    = options[:label]
       mnemonic = options[:mnemonic]
-      stock    = options[:stock]
+      stock    = options[:stock_id]
       if options.empty?
         initialize_raw
       elsif label
