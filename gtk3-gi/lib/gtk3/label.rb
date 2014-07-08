@@ -17,7 +17,7 @@
 module Gtk
   class Label
     alias_method :initialize_raw, :initialize
-    def initialize(text, mnemonic=false)
+    def initialize(text=nil, mnemonic=false)
       if mnemonic
         __send__(:initialize_new_with_mnemonic, text)
       else
