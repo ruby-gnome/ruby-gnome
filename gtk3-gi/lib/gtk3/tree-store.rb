@@ -31,10 +31,18 @@ module Gtk
       end
 
       if was_set
+        iter.model = self  # workaround
         iter
       else
         nil
       end
+    end
+
+    alias_method :append_raw, :append
+    def append(parent)
+      iter = append_raw(parent)
+      iter.model = self  # workaround
+      iter
     end
   end
 end

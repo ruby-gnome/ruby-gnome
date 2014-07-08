@@ -16,16 +16,21 @@
 
 module Gtk
   class TreeIter
-    # TODO: confirm it.
-    def get_value(column)
-      @values ||= {}
-      @values[column]
+    def model
+      @model
     end
 
-    # TODO: confirm it.
+    def model=(model)
+      @model = model
+    end
+
+    def get_value(column)
+      return nil unless @model
+      @model.get_value(self, column).value
+    end
+
     def set_value(column, value)
-      @values ||= {}
-      @values[column] = value
+      @model.set_value(self, column, value)
     end
   end
 end
