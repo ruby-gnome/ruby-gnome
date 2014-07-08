@@ -67,5 +67,10 @@ module Gtk
         raise ArgumentError, "Invalid arguments."
       end
     end
+
+    alias_method :insert_raw, :insert
+    def insert(iter, text)
+      insert_raw(iter, text, text.size)
+    end
   end
 end
