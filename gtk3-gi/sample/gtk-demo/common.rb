@@ -7,7 +7,7 @@
   $Id: common.rb,v 1.9 2005/10/15 03:41:36 mutoh Exp $
 =end
 
-require 'gtk3'
+require 'gtk3-gi'
 
 module Demo
   def self.find_file(basename)
