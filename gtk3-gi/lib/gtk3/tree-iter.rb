@@ -25,7 +25,6 @@ module Gtk
     end
 
     def get_value(column)
-      return nil unless @model
       @model.get_value(self, column).value
     end
 
