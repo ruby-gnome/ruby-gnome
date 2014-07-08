@@ -24,13 +24,13 @@ module Gtk
     def get_iter(path)
       if path.is_a?(String)
         # TODO: fix the method name "iter_from_string?".
-        was_set, iter = iter_from_string?(path)
+        got, iter = iter_from_string?(path)
       else
         # TODO: fix the method name "iter?".
-        was_set, iter = iter?(path)
+        got, iter = iter?(path)
       end
 
-      if was_set
+      if got
         iter.model = self  # workaround
         iter
       else
