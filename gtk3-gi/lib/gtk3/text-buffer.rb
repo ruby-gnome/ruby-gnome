@@ -72,5 +72,14 @@ module Gtk
     def insert(iter, text)
       insert_raw(iter, text, text.size)
     end
+
+    alias_method :apply_tag_raw, :apply_tag
+    def apply_tag(tag, start, last)
+      if tag.is_a?(String)
+        apply_tag_by_name(tag, start, last)
+      else
+        apply_tag_raw(tag, start, last)
+      end
+    end
   end
 end
