@@ -29,5 +29,43 @@ module Gtk
       end
       tag_table.add(tag)
     end
+
+    # prevent collision with deprecated methods.
+    alias_method :_get_iter_at_line_offset,  :get_iter_at_line_offset
+    alias_method :_get_iter_at_line_index,   :get_iter_at_line_index
+    alias_method :_get_iter_at_line,         :get_iter_at_line
+    alias_method :_get_iter_at_offset,       :get_iter_at_offset
+    alias_method :_get_iter_at_mark,         :get_iter_at_mark
+    alias_method :_get_iter_at_child_anchor, :get_iter_at_child_anchor
+    private :_get_iter_at_line_offset
+    private :_get_iter_at_line_index
+    private :_get_iter_at_line
+    private :_get_iter_at_offset
+    private :_get_iter_at_mark
+    private :_get_iter_at_child_anchor
+    def get_iter_at(arguments)
+      line   = arguments[:line]
+      offset = arguments[:offset]
+      index  = arguments[:index]
+      mark   = arguments[:mark]
+      anchor = arguments[:anchor]
+      if line
+        if offset
+          _get_iter_at_line_offset(line, offset)
+        elsif index
+          _get_iter_at_line_index(line, index)
+        else
+          _get_iter_at_line(line)
+        end
+      elsif offset
+        _get_iter_at_offset(offset)
+      elsif mark
+        _get_iter_at_mark(mark)
+      elsif anchor
+        _get_iter_at_child_anchor(anchor)
+      else
+        raise ArgumentError, "Invalid arguments."
+      end
+    end
   end
 end
