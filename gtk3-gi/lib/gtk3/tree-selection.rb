@@ -18,7 +18,9 @@ module Gtk
   class TreeSelection
     def selected
       # TODO: fix the method name "selected?".
-      selected?[2]
+      _selected, model, iter = selected?
+      iter.model = model
+      iter
     end
   end
 end
