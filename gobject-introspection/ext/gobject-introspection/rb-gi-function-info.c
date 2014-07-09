@@ -93,7 +93,6 @@ allocate_arguments(GICallableInfo *info,
                    GPtrArray *args_metadata)
 {
     gint i, n_args;
-    gint rb_arg_index = 0;
 
     n_args = g_callable_info_get_n_args(info);
     for (i = 0; i < n_args; i++) {
@@ -127,7 +126,6 @@ allocate_arguments(GICallableInfo *info,
         if (direction == GI_DIRECTION_IN || direction == GI_DIRECTION_INOUT) {
             metadata->in_arg_index = in_args->len;
             g_array_append_val(in_args, argument);
-            metadata->rb_arg_index = rb_arg_index++;
         }
         if (direction == GI_DIRECTION_OUT || direction == GI_DIRECTION_INOUT) {
             metadata->out_arg_index = out_args->len;
@@ -161,7 +159,6 @@ fill_metadata_callback(GPtrArray *args_metadata)
             closure_metadata = g_ptr_array_index(args_metadata, closure_index);
             closure_metadata->closure_p = TRUE;
             metadata->closure_in_arg_index = closure_metadata->in_arg_index;
-            closure_metadata->rb_arg_index = -1;
         }
 
         destroy_index = g_arg_info_get_destroy(arg_info);
@@ -170,7 +167,6 @@ fill_metadata_callback(GPtrArray *args_metadata)
             destroy_metadata = g_ptr_array_index(args_metadata, destroy_index);
             destroy_metadata->destroy_p = TRUE;
             metadata->destroy_in_arg_index = destroy_metadata->in_arg_index;
-            destroy_metadata->rb_arg_index = -1;
         }
     }
 }
@@ -214,10 +210,39 @@ fill_metadata_array(GPtrArray *args_metadata)
 }
 
 static void
+fill_metadata_rb_arg_index(GPtrArray *args_metadata)
+{
+    guint i;
+    gint rb_arg_index = 0;
+
+    for (i = 0; i < args_metadata->len; i++) {
+        RBGIArgMetadata *metadata;
+
+        metadata = g_ptr_array_index(args_metadata, i);
+
+        if (metadata->closure_p) {
+            continue;
+        }
+
+        if (metadata->destroy_p) {
+            continue;
+        }
+
+        if (metadata->array_length_p) {
+            continue;
+        }
+
+        metadata->rb_arg_index = rb_arg_index;
+        rb_arg_index++;
+    }
+}
+
+static void
 fill_metadata(GPtrArray *args_metadata)
 {
     fill_metadata_callback(args_metadata);
     fill_metadata_array(args_metadata);
+    fill_metadata_rb_arg_index(args_metadata);
 }
 
 static void
