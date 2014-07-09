@@ -405,7 +405,7 @@ module GObjectIntrospection
         arguments = [self] + arguments if function_info_p
         validate.call(arguments, &block)
         if block.nil? and info.require_callback?
-          Enumerator.new(self, method_name, *arguments)
+          to_enum(method_name, *arguments)
         else
           options = {
             :arguments => arguments,
