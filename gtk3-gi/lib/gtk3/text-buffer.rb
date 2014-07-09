@@ -31,18 +31,18 @@ module Gtk
     end
 
     # prevent collision with deprecated methods.
-    alias_method :_get_iter_at_line_offset,  :get_iter_at_line_offset
-    alias_method :_get_iter_at_line_index,   :get_iter_at_line_index
-    alias_method :_get_iter_at_line,         :get_iter_at_line
-    alias_method :_get_iter_at_offset,       :get_iter_at_offset
-    alias_method :_get_iter_at_mark,         :get_iter_at_mark
-    alias_method :_get_iter_at_child_anchor, :get_iter_at_child_anchor
-    private :_get_iter_at_line_offset
-    private :_get_iter_at_line_index
-    private :_get_iter_at_line
-    private :_get_iter_at_offset
-    private :_get_iter_at_mark
-    private :_get_iter_at_child_anchor
+    alias_method :get_iter_at_line_offset_raw,  :get_iter_at_line_offset
+    alias_method :get_iter_at_line_index_raw,   :get_iter_at_line_index
+    alias_method :get_iter_at_line_raw,         :get_iter_at_line
+    alias_method :get_iter_at_offset_raw,       :get_iter_at_offset
+    alias_method :get_iter_at_mark_raw,         :get_iter_at_mark
+    alias_method :get_iter_at_child_anchor_raw, :get_iter_at_child_anchor
+    private :get_iter_at_line_offset_raw
+    private :get_iter_at_line_index_raw
+    private :get_iter_at_line_raw
+    private :get_iter_at_offset_raw
+    private :get_iter_at_mark_raw
+    private :get_iter_at_child_anchor_raw
     def get_iter_at(arguments)
       line   = arguments[:line]
       offset = arguments[:offset]
@@ -51,18 +51,18 @@ module Gtk
       anchor = arguments[:anchor]
       if line
         if offset
-          _get_iter_at_line_offset(line, offset)
+          get_iter_at_line_offset_raw(line, offset)
         elsif index
-          _get_iter_at_line_index(line, index)
+          get_iter_at_line_index_raw(line, index)
         else
-          _get_iter_at_line(line)
+          get_iter_at_line_raw(line)
         end
       elsif offset
-        _get_iter_at_offset(offset)
+        get_iter_at_offset_raw(offset)
       elsif mark
-        _get_iter_at_mark(mark)
+        get_iter_at_mark_raw(mark)
       elsif anchor
-        _get_iter_at_child_anchor(anchor)
+        get_iter_at_child_anchor_raw(anchor)
       else
         raise ArgumentError, "Invalid arguments."
       end
