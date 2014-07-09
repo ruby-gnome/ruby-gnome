@@ -298,9 +298,9 @@ module GObjectIntrospection
 
       detail = "#{arguments.size} for "
       if n_in_args == n_required_in_args
-        detail << "#{info.n_in_args}"
+        detail << "#{n_in_args}"
       else
-        detail << "#{info.n_required_in_args}..#{info.n_in_args}"
+        detail << "#{n_required_in_args}..#{n_in_args}"
       end
       message = "#{method_name}: wrong number of arguments (#{detail})"
       raise ArgumentError, message
