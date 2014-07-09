@@ -17,7 +17,7 @@
 module Gtk
   class TextBuffer
     def create_tag(tag_name=nil, properties={})
-      tag = Gtk::TextTag.new(tag_name)
+      tag = TextTag.new(tag_name)
       properties.each do |property|
         key, value = property
         tag.set_property(key, value)
