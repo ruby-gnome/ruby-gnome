@@ -1713,7 +1713,7 @@ rb_gi_value_argument_free_array_c(GIArgument *argument,
                  g_type_tag_to_string(element_type_tag));
         break;
       case GI_TYPE_TAG_GTYPE:
-        /* TODO */
+        xfree(argument->v_pointer);
         break;
       case GI_TYPE_TAG_UTF8:
       case GI_TYPE_TAG_FILENAME:
