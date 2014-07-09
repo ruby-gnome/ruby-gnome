@@ -52,6 +52,6 @@ require "gdk-test-utils"
 
 require "gdk3"
 Gdk.init
-Gdk.init_check(1, [$0])
+Gdk.init_check([$0])
 
 exit Test::Unit::AutoRunner.run(true)
