@@ -34,11 +34,11 @@ module GObjectIntrospection
         end
 
         unless arg.scope == ScopeType::INVALID
-        callback_indexes << i
-        closure_index = arg.closure
-        closure_indexes << closure_index if closure_index != -1
-        destroy_index = arg.destroy
-        destroy_indexes << destroy_index if destroy_index != -1
+          callback_indexes << i
+          closure_index = arg.closure
+          closure_indexes << closure_index if closure_index != -1
+          destroy_index = arg.destroy
+          destroy_indexes << destroy_index if destroy_index != -1
         end
       end
 
