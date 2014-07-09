@@ -27,7 +27,9 @@ module Gtk
       elsif path
         load_from_path(path)
       else
-        raise ArgumentError, "Invalid arguments."
+        message =
+          "Must specify one of :data, :file or :path: #{arguments.inspect}"
+        raise ArgumentError, message
       end
     end
   end
