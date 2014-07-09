@@ -20,20 +20,18 @@ class TestGdkRectangle < Test::Unit::TestCase
   def test_intersect
     rectangle1 = Gdk::Rectangle.new(0, 10, 20, 30)
     rectangle2 = Gdk::Rectangle.new(5, 15, 10, 20)
-    intersected, intersected_rectangle = rectangle1.intersect(rectangle2)
+    intersected = rectangle1.intersect(rectangle2)
     assert_equal([
-                   true,
                    5,
                    15,
                    10,
                    20,
                  ],
                  [
-                   intersected,
-                   intersected_rectangle.x,
-                   intersected_rectangle.y,
-                   intersected_rectangle.width,
-                   intersected_rectangle.height,
+                   intersected.x,
+                   intersected.y,
+                   intersected.width,
+                   intersected.height,
                  ])
   end
 
