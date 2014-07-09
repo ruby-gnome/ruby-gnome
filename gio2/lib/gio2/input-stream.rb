@@ -23,14 +23,14 @@ module Gio
         buffer_size = 8192
         buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
         loop do
-          read_bytes = read_raw(buffer, buffer.bytesize)
+          read_bytes = read_raw(buffer)
           all << buffer.byteslice(0, read_bytes)
           break if read_bytes != buffer_size
         end
         all
       else
         buffer = " " * size
-        read_bytes = read_raw(buffer, buffer.bytesize)
+        read_bytes = read_raw(buffer)
         buffer.replace(buffer.byteslice(0, read_bytes))
         buffer
       end
