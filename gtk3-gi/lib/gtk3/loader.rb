@@ -49,6 +49,7 @@ module Gtk
     def require_libraries
       require "gtk3/box"
       require "gtk3/button"
+      require "gtk3/border"
       require "gtk3/css-provider"
       require "gtk3/gtk"
       require "gtk3/label"
