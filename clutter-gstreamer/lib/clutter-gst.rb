@@ -63,7 +63,6 @@ module ClutterGst
     def pre_load(repository, namespace)
       init = repository.find(namespace, "init")
       arguments = [
-        1 + @init_arguments.size,
         [$0] + @init_arguments,
       ]
       error, returned_arguments = init.invoke(:arguments => arguments)

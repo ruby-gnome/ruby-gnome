@@ -103,7 +103,6 @@ module Gst
     def call_init_function(repository, namespace)
       init_check = repository.find(namespace, "init_check")
       arguments = [
-        1 + @init_arguments.size,
         [$0] + @init_arguments,
       ]
       succeeded, argv, error = init_check.invoke(:arguments => arguments)
