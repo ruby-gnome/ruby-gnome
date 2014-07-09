@@ -311,11 +311,12 @@ module GObjectIntrospection
       max_n_args = nil
       candidate_infos = []
       infos.each do |info|
-        if arguments.size == info.n_in_args
+        n_in_args = info.n_in_args
+        n_required_in_args = info.n_required_in_args
+        if (n_required_in_args..n_in_args).cover?(arguments.size)
           candidate_infos << info
         end
-        n_in_args = info.n_in_args
-        min_n_args = [min_n_args || n_in_args, n_in_args].min
+        min_n_args = [min_n_args || n_required_in_args, n_required_in_args].min
         max_n_args = [max_n_args || n_in_args, n_in_args].max
       end
 
@@ -323,8 +324,8 @@ module GObjectIntrospection
         return candidate_infos.first
       elsif candidate_infos.size > 1
         candidate_info = candidate_infos.find do |info|
-          info.in_args.each.with_index.all? do |arg_info, i|
-            match_argument?(arg_info, arguments[i])
+          arguments.each.with_index.all? do |argument|
+            match_argument?(arg_info, argument)
           end
         end
         return candidate_info || candidate_infos.first
