@@ -70,7 +70,7 @@ module Gtk
 
     alias_method :insert_raw, :insert
     def insert(iter, text)
-      insert_raw(iter, text, text.size)
+      insert_raw(iter, text, text.bytesize)
     end
 
     alias_method :apply_tag_raw, :apply_tag
