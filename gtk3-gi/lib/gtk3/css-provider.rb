@@ -21,7 +21,7 @@ module Gtk
       file = arguments[:file]
       path = arguments[:path]
       if data
-        load_from_data(data, data.size)
+        load_from_data(data)
       elsif file
         load_from_file(file)
       elsif path
