@@ -26,7 +26,7 @@ module Gtk
       elsif label
         initialize_raw(label)
       elsif mnemonic
-        __send__(:initialize_new_with_mnemonic, mnemonic)
+        initialize_new_with_mnemonic(mnemonic)
       elsif stock
         initialize_raw(stock)
       else
