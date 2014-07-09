@@ -33,12 +33,13 @@ module GObjectIntrospection
           array_length_indexes << array_length if array_length != -1
         end
 
-        next if arg.scope == ScopeType::INVALID
+        unless arg.scope == ScopeType::INVALID
         callback_indexes << i
         closure_index = arg.closure
         closure_indexes << closure_index if closure_index != -1
         destroy_index = arg.destroy
         destroy_indexes << destroy_index if destroy_index != -1
+        end
       end
 
       args.find_all.with_index do |arg, i|
