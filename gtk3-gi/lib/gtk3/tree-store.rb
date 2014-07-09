@@ -16,11 +16,6 @@
 
 module Gtk
   class TreeStore
-    alias_method :initialize_raw, :initialize
-    def initialize(*column_types)
-      initialize_raw(column_types.size, column_types)
-    end
-
     def get_iter(path)
       if path.is_a?(String)
         # TODO: fix the method name "iter_from_string?".
