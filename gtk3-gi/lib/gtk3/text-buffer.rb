@@ -16,11 +16,6 @@
 
 module Gtk
   class TextBuffer
-    alias_method :initialize_raw, :initialize
-    def initialize(table=nil)
-      initialize_raw(table)
-    end
-
     def create_tag(tag_name=nil, properties={})
       tag = Gtk::TextTag.new(tag_name)
       properties.each do |property|
