@@ -324,8 +324,9 @@ module GObjectIntrospection
         return candidate_infos.first
       elsif candidate_infos.size > 1
         candidate_info = candidate_infos.find do |info|
-          arguments.each.with_index.all? do |argument|
-            match_argument?(arg_info, argument)
+          in_arg_infos = info.in_args
+          arguments.each.with_index.all? do |argument, i|
+            match_argument?(in_arg_infos[i], argument)
           end
         end
         return candidate_info || candidate_infos.first
