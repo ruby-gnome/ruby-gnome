@@ -23,10 +23,16 @@ module GObjectIntrospection
     collection_reader("args")
 
     def in_args
+      array_length_indexes = []
       callback_indexes = []
       closure_indexes = []
       destroy_indexes = []
       args.each_with_index do |arg, i|
+        if arg.type.tag == TypeTag::ARRAY
+          array_length = arg.type.array_length
+          array_length_indexes << array_length if array_length != -1
+        end
+
         next if arg.scope == ScopeType::INVALID
         callback_indexes << i
         closure_index = arg.closure
@@ -38,7 +44,9 @@ module GObjectIntrospection
       args.find_all.with_index do |arg, i|
         case arg.direction
         when Direction::IN, Direction::INOUT
-          if callback_indexes.include?(i)
+          if array_length_indexes.include?(i)
+            false
+          elsif callback_indexes.include?(i)
             false
           elsif closure_indexes.include?(i)
             false
