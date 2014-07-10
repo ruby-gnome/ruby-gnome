@@ -53,7 +53,9 @@ module Gtk
       elsif anchor
         get_iter_at_child_anchor_raw(anchor)
       else
-        raise ArgumentError, "Invalid arguments."
+        message =
+          "Must specify one of :line, :offset, :mark or :anchor: #{arguments.inspect}"
+        raise ArgumentError, message
       end
     end
 
