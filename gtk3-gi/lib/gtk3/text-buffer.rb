@@ -32,12 +32,6 @@ module Gtk
     alias_method :get_iter_at_offset_raw,       :get_iter_at_offset
     alias_method :get_iter_at_mark_raw,         :get_iter_at_mark
     alias_method :get_iter_at_child_anchor_raw, :get_iter_at_child_anchor
-    private :get_iter_at_line_offset_raw
-    private :get_iter_at_line_index_raw
-    private :get_iter_at_line_raw
-    private :get_iter_at_offset_raw
-    private :get_iter_at_mark_raw
-    private :get_iter_at_child_anchor_raw
     def get_iter_at(arguments)
       line   = arguments[:line]
       offset = arguments[:offset]
