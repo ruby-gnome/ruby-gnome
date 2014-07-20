@@ -203,7 +203,8 @@ current dependencies are:
 
 Please report bugs either in our bug tracker
 
-* [http://sourceforge.net/tracker/?group_id=53614&atid=470969](http://sourceforge.net/tracker/?group_id=53614&atid=470969)
+* [https://github.com/ruby-gnome2/ruby-gnome2/issues](https://github.com/ruby-gnome2/ruby-gnome2/issues) (current)
+* [http://sourceforge.net/tracker/?group_id=53614&atid=470969](http://sourceforge.net/tracker/?group_id=53614&atid=470969) (previous)
 
 or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
