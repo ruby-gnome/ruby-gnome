@@ -118,7 +118,7 @@ current dependencies are:
   <dd>depends on Ruby/GLib.</dd>
 
   <dt>Ruby/Pango</dt>
-  <dd>depends on Ruby/GLib, rcairo(optional).</dd>
+  <dd>depends on Ruby/GLib, rcairo.</dd>
 
   <dt>Ruby/GdkPixbuf</dt>
   <dd>depends on Ruby/GLib.</dd>
@@ -126,7 +126,7 @@ current dependencies are:
   <dt>Ruby/GTK</dt>
   <dd>
     depends on Ruby/GLib, Ruby/ATK, Ruby/Pango,
-    Ruby/GdkPixbuf, rcairo(optional)
+    Ruby/GdkPixbuf, rcairo
   </dd>
 
 
@@ -134,7 +134,7 @@ current dependencies are:
   <dd>depends on Ruby/GLib, Ruby/GdkPixbuf2.</dd>
 
   <dt>Ruby/Poppler</dt>
-  <dd>depends on Ruby/GLib, Ruby/GdkPixbuf(optional), rcairo(optional).</dd>
+  <dd>depends on Ruby/GLib, Ruby/GdkPixbuf(optional), rcairo.</dd>
 
   <dt>Ruby/VTE</dt>
   <dd>depends on Ruby/GTK.</dd>
