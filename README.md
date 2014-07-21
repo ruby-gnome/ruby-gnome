@@ -81,123 +81,85 @@ Or you can compile each sub-binding:
 
 ### extconf.rb options
 
-<dl>
-  <dt>--ruby</dt>
-  <dd>ruby directory</dd>
+* `--ruby`
+  * ruby directory
 
-  <dt>--topsrcdir</dt>
-  <dd>top source directory</dd>
+* `--topsrcdir`
+  * top source directory
 
-  <dt>--topdir</dt>
-  <dd>top directory</dd>
+* `--topdir`
+  * top directory
 
-  <dt>--strict</dt>
-  <dd>
-    if some libraries fail to compile/install, "make"
+* `--strict`
+  * if some libraries fail to compile/install, "make"
     command returns 1(exit 1)
-  </dd>
-</dl>
 
 ### Environment Variables
 
-<dl>
-  <dt>CAIRO_PATH</dt>
-  <dd>rcairo path (for Win32).</dd>
-</dl>
+* `CAIRO_PATH`
+  * rcairo path (for Win32).
 
 ### Dependencies
 
 You should install a sub-binding with its dependencies.  The
 current dependencies are:
 
-<dl>
-  <dt>Ruby/GLib</dt>
-  <dd>none.</dd>
-
-  <dt>Ruby/ATK</dt>
-  <dd>depends on Ruby/GLib.</dd>
-
-  <dt>Ruby/Pango</dt>
-  <dd>depends on Ruby/GLib, rcairo.</dd>
-
-  <dt>Ruby/GdkPixbuf</dt>
-  <dd>depends on Ruby/GLib.</dd>
-
-  <dt>Ruby/GTK</dt>
-  <dd>
-    depends on Ruby/GLib, Ruby/ATK, Ruby/Pango,
+* Ruby/GLib
+  * none.
+* Ruby/ATK
+  * depends on Ruby/GLib.
+* Ruby/Pango
+  * depends on Ruby/GLib, rcairo.
+* Ruby/GdkPixbuf
+  * depends on Ruby/GLib.
+* Ruby/GTK
+  * depends on Ruby/GLib, Ruby/ATK, Ruby/Pango,
     Ruby/GdkPixbuf, rcairo
-  </dd>
-
-
-  <dt>Ruby/RSVG</dt>
-  <dd>depends on Ruby/GLib, Ruby/GdkPixbuf2.</dd>
-
-  <dt>Ruby/Poppler</dt>
-  <dd>depends on Ruby/GLib, Ruby/GdkPixbuf(optional), rcairo.</dd>
-
-  <dt>Ruby/VTE</dt>
-  <dd>depends on Ruby/GTK.</dd>
-
-  <dt>Ruby/GtkSourceView2</dt>
-  <dd>depends on Ruby/GTK.</dd>
-
-  <dt>Ruby/GIO2</dt>
-  <dd>depends on Ruby/GLib.</dd>
-</dl>
+* Ruby/RSVG
+  * depends on Ruby/GLib, Ruby/GdkPixbuf2.
+* Ruby/Poppler
+  * depends on Ruby/GLib, Ruby/GdkPixbuf(optional), rcairo.
+* Ruby/VTE
+  * depends on Ruby/GTK.
+* Ruby/GtkSourceView2
+  * depends on Ruby/GTK.
+* Ruby/GIO2
+  * depends on Ruby/GLib.
 
 ### Experimental
 
-<dl>
-  <dt>Ruby/GStreamer</dt>
-  <dd>depends on Ruby/GLib.</dd>
-
-  <dt>Ruby/GooCanvas</dt>
-  <dd>depends on Ruby/GTK.</dd>
-</dl>
+* Ruby/GStreamer
+  * depends on Ruby/GLib.
+* Ruby/GooCanvas
+  * depends on Ruby/GTK.
 
 ### Deprecated
 
-<dl>
-  <dt>Ruby/PanelApplet</dt>
-  <dd>
-    depends on Ruby/GTK (since libpanel-applet 2.25) or
+* Ruby/PanelApplet
+  * depends on Ruby/GTK (since libpanel-applet 2.25) or
     Ruby/GNOME (before libpanel-applet 2.25).
-  </dd>
-
-  <dt>Ruby/Libart</dt>
-  <dd>depends on Ruby/GLib(Use mkmf-gnome2.rb only).</dd>
-
-  <dt>Ruby/GConf</dt>
-  <dd>depends on Ruby/GLib.</dd>
-
-  <dt>Ruby/GNOME</dt>
-  <dd>depends on Ruby/GnomeCanvas.</dd>
-
-  <dt>Ruby/GnomeCanvas</dt>
-  <dd>depends on Ruby/GTK, Ruby/Libart.</dd>
-
-  <dt>Ruby/GnomeVFS</dt>
-  <dd>depends on Ruby/GLib.</dd>
-
-  <dt>Ruby/GnomePrint</dt>
-  <dd>depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.</dd>
-
-  <dt>Ruby/GnomePrintUI</dt>
-  <dd>depends on Ruby/GTK, Ruby/GnomePrint.</dd>
-
-  <dt>Ruby/GtkHtml2</dt>
-  <dd>depends on Ruby/GTK.</dd>
-
-  <dt>Ruby/GtkGLExt</dt>
-  <dd>depends on Ruby/GTK, rbogl.</dd>
-
-  <dt>Ruby/GtkSourceView</dt>
-  <dd>depends on Ruby/GTK.</dd>
-
-  <dt>Ruby/Libglade</dt>
-  <dd>depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional).</dd>
-</dl>
+* Ruby/Libart
+  * depends on Ruby/GLib(Use mkmf-gnome2.rb only).
+* Ruby/GConf
+  * depends on Ruby/GLib.
+* Ruby/GNOME
+  * depends on Ruby/GnomeCanvas.
+* Ruby/GnomeCanvas
+  * depends on Ruby/GTK, Ruby/Libart.
+* Ruby/GnomeVFS
+  * depends on Ruby/GLib.
+* Ruby/GnomePrint
+  * depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.
+* Ruby/GnomePrintUI
+  * depends on Ruby/GTK, Ruby/GnomePrint.
+* Ruby/GtkHtml2
+  * depends on Ruby/GTK.
+* Ruby/GtkGLExt
+  * depends on Ruby/GTK, rbogl.
+* Ruby/GtkSourceView
+  * depends on Ruby/GTK.
+* Ruby/Libglade
+  * depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional).
 
 ## Bugs
 
