@@ -81,6 +81,9 @@ Or you can compile each sub-binding:
 
 ### extconf.rb options
 
+`--ruby`
+: ruby directory
+
 <dl>
   <dt>--ruby</dt>
   <dd>ruby directory</dd>
