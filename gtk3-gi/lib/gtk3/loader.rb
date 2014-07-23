@@ -74,6 +74,21 @@ module Gtk
       end
     end
 
+    def define_enum(info)
+       case info.name
+      when /\AArrow/
+        self.class.define_class(info.gtype, $POSTMATCH, Gtk::Arrow)
+      when /\ALevelBar/
+        self.class.define_class(info.gtype, $POSTMATCH, Gtk::LevelBar)
+      when /\ARevealer/
+        self.class.define_class(info.gtype, $POSTMATCH, Gtk::Revealer)
+      when /\AStack/
+        self.class.define_class(info.gtype, $POSTMATCH, Gtk::Stack)
+      else
+        super
+      end
+    end
+
     # patch for returning "self" from setter methods.
     # TODO: should be fixed in Ruby/GObjectIntrospection.
     def define_method(info, klass, method_name)
