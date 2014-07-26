@@ -75,7 +75,7 @@ module Gtk
     end
 
     def define_enum(info)
-       case info.name
+      case info.name
       when /\AArrow/
         self.class.define_class(info.gtype, $POSTMATCH, Gtk::Arrow)
       when /\ALevelBar/
