@@ -35,5 +35,16 @@ module Gtk
         end
       end
     end
+
+    def add(widget, name=nil, title=nil)
+      if title
+        add_titled(widget, name, title)
+      elsif name
+        add_named(widget, name)
+      else
+        super(widget)
+      end
+      self
+    end
   end
 end
