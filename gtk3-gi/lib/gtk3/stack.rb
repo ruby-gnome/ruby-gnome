@@ -31,7 +31,7 @@ module Gtk
         if transition_type
           set_visible_child_full(name, transition_type)
         else
-          set_visible_child_name(name);
+          set_visible_child_name(name)
         end
       end
     end
