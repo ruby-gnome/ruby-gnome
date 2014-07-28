@@ -16,10 +16,6 @@
 
 module Gtk
   class SearchBar
-    def handle_event?(event)
-      handle_event(event)
-    end
-
     alias_method :connect_entry_raw, :connect_entry
     def connect_entry(entry)
       connect_entry_raw(entry)

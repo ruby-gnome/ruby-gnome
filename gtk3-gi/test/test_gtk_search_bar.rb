@@ -50,6 +50,6 @@ class TestGtkSearchBar < Test::Unit::TestCase
     window.show_all
     key_press_event.window = window.window
     assert_equal(Gdk::Event::STOP,
-                 @search_bar.handle_event?(key_press_event))
+                 @search_bar.handle_event(key_press_event))
   end
 end
