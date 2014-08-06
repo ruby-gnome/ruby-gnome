@@ -32,3 +32,4 @@ mkmf.log
 /*.tar.gz
 /tmp/
 /Gemfile.lock
+/Gemfile.local
