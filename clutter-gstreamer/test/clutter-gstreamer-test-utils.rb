@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,4 +18,20 @@ require "test-unit"
 require "test/unit/notify"
 
 module ClutterGStreamerTestUtils
+  def later_version?(major, minor, micro=nil)
+    micro ||= 0
+    clutter_gstreamer_version = [
+      ClutterGst::MAJOR_VERSION,
+      ClutterGst::MINOR_VERSION,
+      ClutterGst::MICRO_VERSION,
+    ]
+    (clutter_gstreamer_version <=> [major, minor, micro]) >= 0
+  end
+
+  def only_clutter_gstreamer_version(major, minor, micro=nil)
+    micro ||= 0
+    unless later_version?(major, minor, micro)
+      omit("Require Clutter-GStreamer >= #{major}.#{minor}.#{micro}")
+    end
+  end
 end

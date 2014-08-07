@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -54,6 +54,9 @@ require "gobject-introspection-test-utils"
 
 $LOAD_PATH.unshift(File.join(clutter_base, "test"))
 require "clutter-test-utils"
+
+$LOAD_PATH.unshift(File.join(clutter_gstreamer_base, "test"))
+require "clutter-gstreamer-test-utils"
 
 require "clutter-gst"
 

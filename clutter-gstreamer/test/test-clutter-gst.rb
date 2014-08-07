@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,7 +15,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class ClutterGstTest < Test::Unit::TestCase
+  include ClutterGStreamerTestUtils
+
   def test_init
+    only_clutter_gstreamer_version(2, 0, 0)
     assert_nothing_raised do
       ClutterGst.init
     end
