@@ -32,6 +32,7 @@ ignored_modules = [
   "webkit-gtk",
   "webkit-gtk2",
   "gdk3-no-gi",
+  "gtk3-gi",
 ]
 
 succeeded = true
