@@ -18,7 +18,7 @@ class ClutterGstTest < Test::Unit::TestCase
   include ClutterGStreamerTestUtils
 
   def test_init
-    only_clutter_gstreamer_version(2, 0, 0)
+    omit_on_travis_ci
     assert_nothing_raised do
       ClutterGst.init
     end

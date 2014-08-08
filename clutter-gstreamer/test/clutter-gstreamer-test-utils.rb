@@ -34,4 +34,8 @@ module ClutterGStreamerTestUtils
       omit("Require Clutter-GStreamer >= #{major}.#{minor}.#{micro}")
     end
   end
+
+  def omit_on_travis_ci
+    omit("This test can't be run on Travis CI") if ENV["CI"]
+  end
 end
