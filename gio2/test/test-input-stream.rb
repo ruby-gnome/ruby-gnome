@@ -33,12 +33,4 @@ class TestInputStream < Test::Unit::TestCase
     client.flush
     assert_equal(data, @stream.read)
   end
-
-  def test_read_cancellable
-    data = "Hello\n"
-    client = @server.accept
-    client.write(data)
-    client.flush
-    assert_equal(data, @stream.read(cancellable: Gio::Cancellable.new))
-  end
 end
