@@ -46,16 +46,15 @@ win.show_all
 dir = 1
 thr = Thread.new do
   loop {
+    value = prog2[1] + dir
+    if value > 100
+      dir = - dir
+    end
+    if value < 0
+      dir = - dir
+    end
     prog2[1] += dir
-    if prog2[1] > 100
-      prog2[1] = 100
-      dir = - dir
-    end
-    if prog2[1] < 0
-      prog2[1] = 0
-      dir = - dir
-    end
-    sleep 0.01
+    sleep 0.1
   }
 end
 
