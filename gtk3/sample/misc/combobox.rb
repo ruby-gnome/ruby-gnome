@@ -10,8 +10,8 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 4, 0)
-  puts "This sample requires GTK+ 2.4.0 or later"
+if str = Gtk.check_version(3, 10, 7)
+  puts "This sample requires GTK+ 3.10.7 or later"
   puts str
   exit
 end
@@ -22,7 +22,7 @@ window.signal_connect("destroy"){Gtk.main_quit}
 #
 # Text only
 #
-combo1 = Gtk::ComboBox.new
+combo1 = Gtk::ComboBoxText.new
 ["foo", "bar", "fuga", "hoge"].each do |val|
   combo1.append_text(val)
 end
@@ -40,11 +40,11 @@ model = Gtk::ListStore.new(Gdk::Pixbuf, String)
  [Gtk::Stock::CANCEL, "cancel"],
  [Gtk::Stock::OK, "ok"]].each do |stock, name|
   iter = model.append
-  iter[0] = window.render_icon(stock, Gtk::IconSize::MENU, "icon")
+  iter[0] = window.render_icon_pixbuf(stock, Gtk::IconSize::IconSize::MENU)
   iter[1] = name
 end
 
-combo2 = Gtk::ComboBox.new(model)
+combo2 = Gtk::ComboBox.new(:model => model)
 
 # column 1
 renderer = Gtk::CellRendererPixbuf.new
@@ -65,7 +65,7 @@ end
 #
 # Gtk::ComboBoxEntry
 #
-combo3 = Gtk::ComboBoxEntry.new
+combo3 = Gtk::ComboBoxText.new(:entry => true)
 ["foo", "bar", "fuga", "hoge"].each do |val|
   combo3.append_text(val)
 end
@@ -76,9 +76,9 @@ combo3.signal_connect("changed") do
     p "combo3: #{combo3.active}, #{combo3.active_iter[0]}"
   end
 end
-                                                                     
+
 # Show main window
-vbox = Gtk::VBox.new
+vbox = Gtk::Box.new(:vertical)
 vbox.add(combo1).add(combo2).add(combo3)
 window.add(vbox).show_all
 
