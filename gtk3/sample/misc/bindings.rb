@@ -31,12 +31,18 @@ class Pager < Gtk::TextView
   type_register
   
   # widget's key binding can be defined like this
-  binding_set.add_signal(Gdk::Keyval::GDK_space, 0,
+  binding_set.add_signal(Gdk::Keyval::GDK_KEY_space, 0,
                          "move_cursor", 
-                         Gtk::MOVEMENT_PAGES, 1, false)
-  binding_set.add_signal(Gdk::Keyval::GDK_BackSpace, 0,
+                         Gtk::MovementStep::PAGES, 1, false)
+  binding_set.add_signal(Gdk::Keyval::GDK_KEY_BackSpace, 0,
                          "move_cursor", 
-                         Gtk::MOVEMENT_PAGES, -1, false)
+                         Gtk::MovementStep::PAGES, -1, false)
+  binding_set.add_signal(Gdk::Keyval::GDK_KEY_j, 0,
+                         "move_cursor",
+                         Gtk::MovementStep::DISPLAY_LINES, 1, false)
+  binding_set.add_signal(Gdk::Keyval::GDK_KEY_k, 0,
+                         "move_cursor",
+                         Gtk::MovementStep::DISPLAY_LINES, -1, false)
 
   def initialize(path)
     @path = path
@@ -59,38 +65,24 @@ path = ARGV[0] || __FILE__
 
 window = Gtk::Window.new
 window.name = "pager_window"
-sw = Gtk::ScrolledWindow.new
-vbox = Gtk::VBox.new
-hbox = Gtk::HBox.new
+sw = Gtk::ScrolledWindow.new.set_size_request(400, 400)
+vbox = Gtk::Box.new(:vertical)
+hbox = Gtk::Box.new(:horizontal)
 pager = Pager.new(path)
 
-hbox.add(button1 = Gtk::Button.new("space"))
-hbox.add(button2 = Gtk::Button.new("back_space"))
-hbox.add(button3 = Gtk::Button.new("cancel j/k"))
+hbox.add(button1 = Gtk::Button.new(:label=>"space"))
+hbox.add(button2 = Gtk::Button.new(:label=>"back_space"))
+hbox.add(button3 = Gtk::Button.new(:label=>"cancel j/k"))
 
 button1.signal_connect("clicked") do
-  Pager.binding_set.activate(Gdk::Keyval::GDK_space, 0, pager)
+  Pager.binding_set.activate(Gdk::Keyval::GDK_KEY_space, 0, pager)
 end
 button2.signal_connect("clicked") do
-  pager.bindings_activate(Gdk::Keyval::GDK_BackSpace, 0)
+  pager.bindings_activate(Gdk::Keyval::GDK_KEY_BackSpace, 0)
 end
-
-# Key bindings can be attached to any widget by 
-# Gtk::BindingSet#add_path
-# see RC Files section of GTK+ documentation for more detail.
-bset = Gtk::BindingSet.new("j_and_k")
-bset.add_signal(Gdk::Keyval::GDK_j, 0,
-                "move_cursor",
-                Gtk::MOVEMENT_DISPLAY_LINES, 1, false)
-bset.add_signal(Gdk::Keyval::GDK_k, 0,
-                "move_cursor",
-                Gtk::MOVEMENT_DISPLAY_LINES, -1, false)
-bset.add_path(Gtk::PathType::WIDGET, "pager_window.*.Pager", 
-                 Gtk::PathPriorityType::APPLICATION)
-
 button3.signal_connect("clicked") do
-  bset.entry_clear(Gdk::Keyval::GDK_j, 0)
-  bset.entry_clear(Gdk::Keyval::GDK_k, 0)
+  Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_j, 0)
+  Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_k, 0)
 end
 
 sw.add(pager)
@@ -99,9 +91,5 @@ window.add(vbox)
 window.show_all
 
 pager.grab_focus
-
 window.signal_connect("destroy") { Gtk.main_quit }
-
 Gtk.main
-
-
