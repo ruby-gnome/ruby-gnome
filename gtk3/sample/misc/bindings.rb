@@ -80,7 +80,6 @@ end
 button2.signal_connect("clicked") do
   pager.bindings_activate(Gdk::Keyval::GDK_KEY_BackSpace, 0)
 end
-
 button3.signal_connect("clicked") do
   Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_j, 0)
   Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_k, 0)
@@ -92,7 +91,5 @@ window.add(vbox)
 window.show_all
 
 pager.grab_focus
-
 window.signal_connect("destroy") { Gtk.main_quit }
-
 Gtk.main
