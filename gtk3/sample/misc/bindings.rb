@@ -60,8 +60,8 @@ path = ARGV[0] || __FILE__
 window = Gtk::Window.new
 window.name = "pager_window"
 sw = Gtk::ScrolledWindow.new
-vbox = Gtk::VBox.new
-hbox = Gtk::HBox.new
+vbox = Gtk::Box.new(:vertical)
+hbox = Gtk::Box.new(:horizontal)
 pager = Pager.new(path)
 
 hbox.add(button1 = Gtk::Button.new("space"))
