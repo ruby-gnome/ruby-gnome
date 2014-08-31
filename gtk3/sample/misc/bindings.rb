@@ -64,9 +64,9 @@ vbox = Gtk::Box.new(:vertical)
 hbox = Gtk::Box.new(:horizontal)
 pager = Pager.new(path)
 
-hbox.add(button1 = Gtk::Button.new("space"))
-hbox.add(button2 = Gtk::Button.new("back_space"))
-hbox.add(button3 = Gtk::Button.new("cancel j/k"))
+hbox.add(button1 = Gtk::Button.new(:label => "space"))
+hbox.add(button2 = Gtk::Button.new(:label => "back_space"))
+hbox.add(button3 = Gtk::Button.new(:label => "cancel j/k"))
 
 button1.signal_connect("clicked") do
   Pager.binding_set.activate(Gdk::Keyval::GDK_KEY_space, 0, pager)
