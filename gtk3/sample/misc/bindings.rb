@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env ruby
+#!/usr/bin/env ruby
 =begin
   bindings.rb - Ruby/GTK sample script.
 
