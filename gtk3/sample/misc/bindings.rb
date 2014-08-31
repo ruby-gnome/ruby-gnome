@@ -37,6 +37,12 @@ class Pager < Gtk::TextView
   binding_set.add_signal(Gdk::Keyval::GDK_KEY_BackSpace, 0,
                          "move_cursor", 
                          Gtk::MovementStep::PAGES, -1, false)
+  binding_set.add_signal(Gdk::Keyval::GDK_KEY_j, 0,
+                         "move_cursor",
+                         Gtk::MovementStep::DISPLAY_LINES, 1, false)
+  binding_set.add_signal(Gdk::Keyval::GDK_KEY_k, 0,
+                         "move_cursor",
+                         Gtk::MovementStep::DISPLAY_LINES, -1, false)
 
   def initialize(path)
     @path = path
@@ -74,23 +80,9 @@ end
 button2.signal_connect("clicked") do
   pager.bindings_activate(Gdk::Keyval::GDK_KEY_BackSpace, 0)
 end
-
-# Key bindings can be attached to any widget by 
-# Gtk::BindingSet#add_path
-# see RC Files section of GTK+ documentation for more detail.
-bset = Gtk::BindingSet.new("j_and_k")
-bset.add_signal(Gdk::Keyval::GDK_KEY_j, 0,
-                "move_cursor",
-                Gtk::MovementStep::DISPLAY_LINES, 1, false)
-bset.add_signal(Gdk::Keyval::GDK_KEY_k, 0,
-                "move_cursor",
-                Gtk::MovementStep::DISPLAY_LINES, -1, false)
-bset.add_path(Gtk::PathType::WIDGET, "pager_window.*.Pager", 
-                 Gtk::PathPriorityType::APPLICATION)
-
 button3.signal_connect("clicked") do
-  bset.entry_clear(Gdk::Keyval::GDK_KEY_j, 0)
-  bset.entry_clear(Gdk::Keyval::GDK_KEY_k, 0)
+  Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_j, 0)
+  Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_k, 0)
 end
 
 sw.add(pager)
