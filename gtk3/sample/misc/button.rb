@@ -12,6 +12,9 @@ require 'gtk3'
 
 window = Gtk::Window.new("buttons")
 window.border_width = 0
+window.signal_connect("delete_event") do
+  Gtk.main_quit
+end
 
 box1 = Gtk::Box.new(:vertical, 0)
 window.add(box1)
