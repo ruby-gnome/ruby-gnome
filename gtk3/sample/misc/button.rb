@@ -23,7 +23,7 @@ table = Gtk::Table.new(3, 3, false)
 table.set_row_spacings(5)
 table.set_column_spacings(5)
 table.set_border_width(10)
-box1.pack_start(table, true, true, 0)
+box1.pack_start(table, :expand => true, :fill => true, :padding => 0)
 
 button = []
 0.upto(8) do |i|
@@ -52,18 +52,18 @@ table.attach(button[7], 2, 3, 1, 2, nil, nil, 0, 0)
 table.attach(button[8], 0, 1, 1, 2, nil, nil, 0, 0)
 
 separator = Gtk::Separator.new(:vertical)
-box1.pack_start(separator, false, true, 0)
+box1.pack_start(separator, :expand => false, :fill => true, :padding => 0)
 
 box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
-box1.pack_start(box2, false, true, 0)
+box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
 
 close = Gtk::Button.new(:label => "close")
 close.signal_connect("clicked") do
   Gtk.main_quit
 end
 
-box2.pack_start(close, true, true, 0)
+box2.pack_start(close, :expand => true, :fill => true, :padding => 0)
 close.can_default = true
 close.grab_default
 
