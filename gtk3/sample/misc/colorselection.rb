@@ -9,14 +9,6 @@
 
 require 'gtk3'
 
-settings = Gtk::Settings.default
-
-# You can save the palette to use right click on the palette.
-Gtk::ColorSelection.set_change_palette_hook{|screen, colors|
-  puts strs = Gtk::ColorSelection.palette_to_string(colors)
-  settings.gtk_color_palette = strs
-}
-
 a = Gtk::ColorSelection.new
 a.has_palette = true
 
