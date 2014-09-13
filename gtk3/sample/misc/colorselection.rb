@@ -11,6 +11,11 @@ require 'gtk3'
 
 a = Gtk::ColorSelection.new
 a.has_palette = true
+a.signal_connect("color_changed") do |w|
+  unless w.adjusting?
+    p w.current_rgba.to_s
+  end
+end
 
 Gtk::Window.new.add(a).show_all.signal_connect("destroy"){Gtk.main_quit}
 
