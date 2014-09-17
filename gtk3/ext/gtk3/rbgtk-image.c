@@ -72,6 +72,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         rb_raise(rb_eArgError, "Invalid arguments.");
 
     RBGTK_INITIALIZE(self, widget);
+    g_object_unref(widget);
 
     return Qnil;
 }
