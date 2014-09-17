@@ -17,6 +17,7 @@ button = Gtk::Button.new(:label => "Click!")
 button.use_underline = false
 
 cursors = Gdk::Cursor::Type.values - [Gdk::Cursor::Type::CURSOR_IS_PIXMAP]
+cursors -= [Gdk::Cursor::Type::LAST_CURSOR]
 
 cnt = 0
 button.signal_connect('clicked') do
