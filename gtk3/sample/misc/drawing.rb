@@ -12,8 +12,8 @@ require 'gtk3'
 class Canvas < Gtk::DrawingArea
   def initialize
     super
-    signal_connect("draw") { |w,e| expose_event(w,e) }
-    signal_connect("configure_event") { |w, e| configure_event(w,e) }
+    signal_connect("draw") {|w,e| expose_event(w,e)}
+    signal_connect("configure_event") {|w, e| configure_event(w,e)}
     @buffer = nil
     @bgc = nil
   end
@@ -55,7 +55,7 @@ end
 class A < Canvas
   def initialize
     super
-    signal_connect("button_press_event") { |w,e| pressed(w,e) }
+    signal_connect("button_press_event") {|w,e| pressed(w,e)}
     set_events(Gdk::Event::BUTTON_PRESS_MASK)
   end
 
@@ -81,7 +81,7 @@ class A < Canvas
 end
 
 window = Gtk::Window.new("drawing test")
-window.signal_connect("destroy") { Gtk.main_quit }
+window.signal_connect("destroy") {Gtk.main_quit}
 
 canvas = A.new
 window.add(canvas)
