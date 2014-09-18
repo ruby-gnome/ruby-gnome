@@ -22,7 +22,7 @@ class Canvas < Gtk::DrawingArea
     unless @buffer.nil?
       rec = e.area
       w.window.draw_drawable(@bgc, @buffer, rec.x, rec.y,
-                           rec.x, rec.y, rec.width, rec.height)
+                             rec.x, rec.y, rec.width, rec.height)
     end
     false
   end
@@ -65,13 +65,13 @@ class A < Canvas
                         @last.x, @last.y, ev.x, ev.y)
 
       x1, x2 = if (@last.x < ev.x)
-              then [@last.x, ev.x]
-              else [ev.x,    @last.x]
-              end
+               then [@last.x, ev.x]
+               else [ev.x,    @last.x]
+               end
       y1, y2 = if (@last.y < ev.y)
-            then [@last.y, ev.y]
-            else [ev.y,    @last.y]
-            end
+               then [@last.y, ev.y]
+               else [ev.y,    @last.y]
+               end
       widget.queue_draw_area(x1, y1, x2 - x1 + 1, y2 - y1 + 1)
     end
     @last = nil
