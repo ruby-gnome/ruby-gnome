@@ -12,7 +12,7 @@ require 'gtk3'
 
 window = Gtk::Window.new("Gtk::Dialog sample")
 button = Gtk::Button.new(:label => "Create Dialog")
-button.signal_connect("clicked") do 
+button.signal_connect("clicked") do
   dialog = Gtk::Dialog.new
   dialog.title = "Gtk::Dialog Sample"
   dialog.transient_for = window
