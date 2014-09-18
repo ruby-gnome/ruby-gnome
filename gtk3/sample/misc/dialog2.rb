@@ -34,7 +34,3 @@ end
 window.add(button).show_all.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main
-
-
-                         
-
