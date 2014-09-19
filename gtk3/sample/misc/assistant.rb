@@ -254,9 +254,9 @@ end
 
 runner = AssistantRunner.new
 buttons = [
-    [ "simple assistant", proc { runner.run_simple_assistant } ],
-    [ "generous assistant", proc { runner.run_generous_assistant } ],
-    [ "nonlinear assistant", proc { runner.run_nonlinear_assistant } ]
+    ["simple assistant", proc {runner.run_simple_assistant}],
+    ["generous assistant", proc {runner.run_generous_assistant}],
+    ["nonlinear assistant", proc {runner.run_nonlinear_assistant}]
 ]
 
 if ENV["RTL"]
@@ -264,8 +264,8 @@ if ENV["RTL"]
 end
 
 window = Gtk::Window.new(:toplevel)
-window.signal_connect("destroy") { Gtk.main_quit }
-window.signal_connect("delete-event") { false }
+window.signal_connect("destroy") {Gtk.main_quit}
+window.signal_connect("delete-event") {false}
 
 box = Gtk::Box.new(:vertical, 6)
 window.add(box)
