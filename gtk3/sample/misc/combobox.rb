@@ -8,7 +8,7 @@
   $Id: combobox.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 if str = Gtk.check_version(3, 10, 7)
   puts "This sample requires GTK+ 3.10.7 or later"
@@ -17,7 +17,7 @@ if str = Gtk.check_version(3, 10, 7)
 end
 
 window = Gtk::Window.new("Gtk::ComboBox sample")
-window.signal_connect("destroy"){Gtk.main_quit}
+window.signal_connect("destroy") {Gtk.main_quit}
 
 #
 # Text only
@@ -83,4 +83,3 @@ vbox.add(combo1).add(combo2).add(combo3)
 window.add(vbox).show_all
 
 Gtk.main
-
