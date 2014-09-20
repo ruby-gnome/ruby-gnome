@@ -25,7 +25,7 @@ Usage:
     "back_space" : same as pressing <backspace> in text view area.
     "cancel j/k" : disable 'j' and 'k' binding
 =end
-require 'gtk3'
+require "gtk3"
 
 class Pager < Gtk::TextView
   type_register
@@ -61,7 +61,7 @@ class Pager < Gtk::TextView
   end
 end
 
-path = ARGV[0] || __FILE__ 
+path = ARGV[0] || __FILE__
 
 window = Gtk::Window.new
 window.name = "pager_window"
@@ -92,8 +92,6 @@ window.show_all
 
 pager.grab_focus
 
-window.signal_connect("destroy") { Gtk.main_quit }
+window.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main
-
-
