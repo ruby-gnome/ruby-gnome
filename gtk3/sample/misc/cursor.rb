@@ -7,10 +7,10 @@
   $Id: cursor.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gdk::Cursor sample")
-window.signal_connect('destroy') { Gtk.main_quit }
+window.signal_connect('destroy') {Gtk.main_quit}
 window.realize
 
 button = Gtk::Button.new(:label => "Click!")
