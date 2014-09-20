@@ -8,7 +8,7 @@
   $Id: button.rb,v 1.10 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("buttons")
 window.border_width = 0
