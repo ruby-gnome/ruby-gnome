@@ -7,7 +7,7 @@
   $Id: colorselection.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 a = Gtk::ColorSelection.new
 a.has_palette = true
@@ -17,6 +17,6 @@ a.signal_connect("color_changed") do |w|
   end
 end
 
-Gtk::Window.new.add(a).show_all.signal_connect("destroy"){Gtk.main_quit}
+Gtk::Window.new.add(a).show_all.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main
