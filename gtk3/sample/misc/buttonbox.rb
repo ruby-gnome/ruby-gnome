@@ -8,7 +8,7 @@
   $Id: buttonbox.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 def create_bbox_window(horizontal, title, pos, spacing, layout)
   window = Gtk::Window.new(title)
