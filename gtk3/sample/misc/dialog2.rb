@@ -8,7 +8,7 @@
   $Id: dialog2.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::Dialog sample2")
 button = Gtk::Button.new(:label => "Create Dialog")
@@ -31,6 +31,6 @@ button.signal_connect("clicked") do
   dialog.destroy
 end
 
-window.add(button).show_all.signal_connect("destroy"){Gtk.main_quit}
+window.add(button).show_all.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main
