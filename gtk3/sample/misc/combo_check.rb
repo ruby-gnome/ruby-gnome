@@ -8,7 +8,7 @@
   $Id: combo_check.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("entry")
 window.border_width = 0
