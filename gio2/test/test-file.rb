@@ -20,7 +20,7 @@ class TestFile < Test::Unit::TestCase
 
   class TestContentType < self
     def test_guess_content_type
-      omit_on_osx
+      omit_on_os_x
       path = fixture_path("content-type", "x-content", "unix-software")
       dir = Gio::File.path(path)
       assert_equal(["x-content/unix-software"],

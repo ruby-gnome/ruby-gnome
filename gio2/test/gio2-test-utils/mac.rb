@@ -16,7 +16,7 @@
 
 module GioTestUtils
   module Mac
-    def omit_on_osx
+    def omit_on_os_x
       omit("Skip this test on OS X") if RUBY_PLATFORM =~ /darwin/
     end
   end

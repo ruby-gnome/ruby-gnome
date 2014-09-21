@@ -27,7 +27,7 @@ class TestContentType < Test::Unit::TestCase
   end
 
   def test_guess
-    omit_on_osx
+    omit_on_os_x
     assert_equal(["audio/mpeg", false],
                  Gio::ContentType.guess("filename.mp3"))
   end
