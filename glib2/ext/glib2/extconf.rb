@@ -83,7 +83,12 @@ end
 
 def enable_debug_build_flag(flags)
   if gcc?
-    flags.gsub(/(^|\s)?-g\d?(\s|$)?/, '\\1-ggdb3\\2')
+    debug_option_pattern = /(^|\s)?-g\d?(\s|$)?/
+    if debug_option_pattern =~ flags
+      flags.gsub(debug_option_pattern, '\\1-g3\\2')
+    else
+      flags + " -g3"
+    end
   else
     flags
   end
