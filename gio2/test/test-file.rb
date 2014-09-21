@@ -16,7 +16,7 @@
 
 class TestFile < Test::Unit::TestCase
   include GioTestUtils::Fixture
-  include GioTestUtils::Mac
+  include GioTestUtils::Omissions
 
   class TestContentType < self
     def test_guess_content_type

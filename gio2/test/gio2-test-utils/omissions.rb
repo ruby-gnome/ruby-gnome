@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module GioTestUtils
-  module Mac
+  module Omissions
     def omit_on_os_x
       omit("Skip this test on OS X") if RUBY_PLATFORM =~ /darwin/
     end

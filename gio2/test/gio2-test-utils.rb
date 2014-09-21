@@ -18,5 +18,5 @@ require "test-unit"
 require "test/unit/notify"
 
 require "gio2-test-utils/fixture"
-require "gio2-test-utils/mac"
+require "gio2-test-utils/omissions"
 require "gio2-test-utils/socket-client"

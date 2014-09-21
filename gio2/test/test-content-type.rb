@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestContentType < Test::Unit::TestCase
-  include GioTestUtils::Mac
+  include GioTestUtils::Omissions
 
   def setup
     @content_type = Gio::ContentType.new("image/jpeg")
