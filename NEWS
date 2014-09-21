@@ -2,6 +2,43 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.2.0: 2014-09-21
+
+It is a release that Ruby/GDK3 is migrated to
+Ruby/GObjectIntrospection based bindings.
+
+Some API changes in Ruby/GDK3 are expected but unexpected API
+changes may exist. If you find API change, please report it. If the
+API change provides non Rubyish API, it will be a bug.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+  * Fixes
+    * [windows] Added a missing exported symbol. ((({rbg_inspect})))
+    * Fixed a bug that signal handler doesn't work on Ruby 2.1.
+      [ruby-gnome2-devel-en] [Reported by Carlo E. Prelz]
+
+==== Ruby/GIO2
+
+  * Fixes
+    * Fixed a bug that .pc isn't installed. [Reported by OBATA Akio]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Added Gtk::StackSwitcher.
+    * Supported interrupt in Gtk.main.
+    * Supported interrupt in Gtk::Dialog#run.
+      [Reported by Carlo E. Prelz]
+
+=== Thanks
+
+  * OBATA Akio
+  * Carlo E. Prelz
+
 == Ruby-GNOME2 2.2.0: 2014-03-09
 
 It is a release that Ruby/GIO2 is migrated to
