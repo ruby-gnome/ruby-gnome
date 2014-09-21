@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestContentType < Test::Unit::TestCase
+  include GioTestUtils::Mac
+
   def setup
     @content_type = Gio::ContentType.new("image/jpeg")
   end
@@ -25,6 +27,7 @@ class TestContentType < Test::Unit::TestCase
   end
 
   def test_guess
+    omit_on_osx
     assert_equal(["audio/mpeg", false],
                  Gio::ContentType.guess("filename.mp3"))
   end
