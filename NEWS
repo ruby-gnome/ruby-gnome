@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 2.2.0: 2014-09-21
+== Ruby-GNOME2 2.2.1: 2014-09-21
 
 It is a release that Ruby/GDK3 is migrated to
 Ruby/GObjectIntrospection based bindings.
