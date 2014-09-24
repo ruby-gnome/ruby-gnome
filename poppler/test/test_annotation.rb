@@ -79,6 +79,8 @@ class TestAnnotation < Test::Unit::TestCase
   end
 
   def assert_method_defined(object, method)
-    assert_send([object, :method_defined?, method])
+    assert do
+      object.method_defined?(method)
+    end
   end
 end
