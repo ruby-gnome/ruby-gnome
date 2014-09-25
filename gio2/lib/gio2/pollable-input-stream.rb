@@ -32,7 +32,7 @@ module Gio
         buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
         loop do
           begin
-            read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
+            read_bytes = read_nonblocking_raw_compatible(buffer)
           rescue IOError::WouldBlock
             break
           end
@@ -42,9 +42,18 @@ module Gio
         all
       else
         buffer = " " * size
-        read_bytes = read_nonblocking_raw(buffer, buffer.bytesize)
+        read_bytes = read_nonblocking_raw_compatible(buffer)
         buffer.replace(buffer.byteslice(0, read_bytes))
         buffer
+      end
+    end
+
+    private
+    def read_nonblocking_raw_compatible(buffer)
+      if (GLib::VERSION <=> [2, 42, 0]) >= 0
+        read_nonblocking_raw(buffer)
+      else
+        read_nonblocking_raw(buffer, buffer.bytesize)
       end
     end
   end
