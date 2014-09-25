@@ -23,16 +23,25 @@ module Gio
         buffer_size = 8192
         buffer = " ".force_encoding("ASCII-8BIT") * buffer_size
         loop do
-          read_bytes = read_raw(buffer)
+          read_bytes = read_raw_compatible(buffer)
           all << buffer.byteslice(0, read_bytes)
           break if read_bytes != buffer_size
         end
         all
       else
         buffer = " " * size
-        read_bytes = read_raw(buffer)
+        read_bytes = read_raw_cmopatible(buffer)
         buffer.replace(buffer.byteslice(0, read_bytes))
         buffer
+      end
+    end
+
+    private
+    def read_raw_compatible(buffer)
+      if (GLib::VERSION <=> [2, 36, 0]) >= 0
+        read_raw(buffer)
+      else
+        read_raw(buffer, buffer.bytesize)
       end
     end
   end
