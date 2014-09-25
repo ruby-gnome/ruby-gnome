@@ -36,12 +36,18 @@ module Gdk
     def pre_load(repository, namespace)
       setup_pending_constants
       define_keyval_module
+      define_selection_module
       load_cairo_rectangle_int
     end
 
     def define_keyval_module
       @keyval_module = Module.new
       @base_module.const_set("Keyval", @keyval_module)
+    end
+
+    def define_selection_module
+      @selection_module = Module.new
+      @base_module.const_set("Selection", @selection_module)
     end
 
     def load_cairo_rectangle_int
@@ -68,6 +74,7 @@ module Gdk
       apply_pending_constants
       require_libraries
       convert_event_classes
+      define_selection_constants
     end
 
     def setup_pending_constants
@@ -84,6 +91,7 @@ module Gdk
     end
 
     def require_libraries
+      require "gdk3/atom"
       require "gdk3/color"
       require "gdk3/event"
       require "gdk3/rectangle"
@@ -136,6 +144,31 @@ module Gdk
       }
       self.class.register_boxed_class_converter(Event.gtype) do |event|
         event_map[event.type] || Event
+      end
+    end
+
+    def define_selection_constants
+      selections = {
+        "PRIMARY"         => "PRIMARY",
+        "SECONDARY"       => "SECONDARY",
+        "CLIPBOARD"       => "CLIPBOARD",
+        "TARGET_BITMAP"   => "BITMAP",
+        "TARGET_COLORMAP" => "COLORMAP",
+        "TARGET_DRAWABLE" => "DRAWABLE",
+        "TARGET_PIXMAP"   => "PIXMAP",
+        "TARGET_STRING"   => "STRING",
+        "TYPE_ATOM"       => "ATOM",
+        "TYPE_BITMAP"     => "BITMAP",
+        "TYPE_COLORMAP"   => "COLORMAP",
+        "TYPE_DRAWABLE"   => "DRAWABLE",
+        "TYPE_INTEGER"    => "INTEGER",
+        "TYPE_PIXMAP"     => "PIXMAP",
+        "TYPE_WINDOW"     => "WINDOW",
+        "TYPE_STRING"     => "STRING",
+      }
+      selections.each do |key, value|
+        # TODO: Gdk::Atom.intern is not working yet.
+        #@selection_module.const_set(key, Gdk::Atom.intern(value))
       end
     end
 
