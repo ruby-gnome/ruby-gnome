@@ -16,6 +16,43 @@ require 'glib-mkenums'
 
 $CFLAGS += " #{ENV['CFLAGS']}" if ENV['CFLAGS']
 
+def gcc?
+  CONFIG["GCC"] == "yes"
+end
+
+def disable_optimization_build_flag(flags)
+  if gcc?
+    flags.gsub(/(^|\s)?-O\d(\s|$)?/, '\\1-O0\\2')
+  else
+    flags
+  end
+end
+
+def enable_debug_build_flag(flags)
+  if gcc?
+    debug_option_pattern = /(^|\s)?-g\d?(\s|$)?/
+    if debug_option_pattern =~ flags
+      flags.gsub(debug_option_pattern, '\\1-g3\\2')
+    else
+      flags + " -g3"
+    end
+  else
+    flags
+  end
+end
+
+checking_for(checking_message("--enable-debug-build option")) do
+  enable_debug_build = enable_config("debug-build", false)
+  if enable_debug_build
+    $CFLAGS = disable_optimization_build_flag($CFLAGS)
+    $CFLAGS = enable_debug_build_flag($CFLAGS)
+
+    CONFIG["CXXFLAGS"] = disable_optimization_build_flag(CONFIG["CXXFLAGS"])
+    CONFIG["CXXFLAGS"] = enable_debug_build_flag(CONFIG["CXXFLAGS"])
+  end
+  enable_debug_build
+end
+
 def try_compiler_option(opt, &block)
   checking_for "#{opt} option to compiler" do
     if try_compile '', opt + " -Werror", &block
@@ -565,4 +602,3 @@ check_ruby_func
 if /mingw/ =~ RUBY_PLATFORM
   $ruby.gsub!('\\', '/')
 end
-
