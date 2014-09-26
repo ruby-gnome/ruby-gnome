@@ -20,9 +20,9 @@ require "stringio"
 
 class TestGdkCairo < Test::Unit::TestCase
   def setup
-    @output = StringIO.new
-    @surface = Cairo::PDFSurface.new(@output, 10, 10)
-    @context = Cairo::Context.new(@surface)
+    output = StringIO.new
+    surface = Cairo::PDFSurface.new(output, 10, 10)
+    @context = Cairo::Context.new(surface)
   end
 
   def test_set_source_color
