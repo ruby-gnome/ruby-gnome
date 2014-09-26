@@ -208,7 +208,7 @@ module Gdk
         when "set_source_color"
           define_method(info, Cairo::Context, "set_source_gdk_color")
         when "set_source_rgba"
-          # TODO
+          define_method(info, Cairo::Context, "set_source_gdk_rgba")
         when "rectangle"
           define_method(info, Cairo::Context, "gdk_rectangle")
         when "region_create_from_surface"

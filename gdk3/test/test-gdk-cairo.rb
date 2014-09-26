@@ -31,4 +31,12 @@ class TestGdkCairo < Test::Unit::TestCase
     assert_equal(Cairo::Color::RGB.new(1.0, 0.0, 1.0),
                  context.source.color)
   end
+
+  def test_set_source_rgba
+    context = Cairo::Context.new(@surface)
+    rgba = Gdk::RGBA.new(0.1, 0.2, 0.3, 0.4)
+    context.set_source_rgba(rgba)
+    assert_equal(Cairo::Color::RGB.new(0.1, 0.2, 0.3, 0.4),
+                 context.source.color)
+  end
 end

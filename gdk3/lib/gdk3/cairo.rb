@@ -34,6 +34,24 @@ module Cairo
       color
     end
 
+    if method_defined?(:set_source_rgba)
+      alias_method :set_source_not_gdk_rgba, :set_source_rgba
+      def set_source_rgba(rgba)
+        if rgba.is_a?(Gdk::RGBA)
+          set_source_gdk_rgba(rgba)
+        else
+          set_source_not_gdk_rgba(rgba)
+        end
+      end
+    else
+      alias_method :set_source_rgba, :set_source_gdk_rgba
+    end
+
+    def source_rgba=(rgba)
+      set_source_rgba(rgba)
+      rgba
+    end
+
     alias_method :set_source_pixbuf_raw, :set_source_pixbuf
     def set_source_pixbuf(pixbuf, pixbuf_x=0, pixbuf_y=0)
       set_source_pixbuf_raw(pixbuf, pixbuf_x, pixbuf_y)
