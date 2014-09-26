@@ -30,7 +30,7 @@ module Gio
         all
       else
         buffer = " " * size
-        read_bytes = read_raw_cmopatible(buffer)
+        read_bytes = read_raw_compatible(buffer)
         buffer.replace(buffer.byteslice(0, read_bytes))
         buffer
       end
