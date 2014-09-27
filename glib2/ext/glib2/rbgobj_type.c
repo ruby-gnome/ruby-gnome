@@ -71,11 +71,7 @@ rbgobj_lookup_class(VALUE klass)
 
     if (TYPE(klass) == T_CLASS) {
         VALUE super;
-        if (FL_TEST(klass, FL_SINGLETON)) {
-            super = rb_class_real(klass);
-        } else {
             super = rb_funcall(klass, id_superclass, 0);
-        }
         return rbgobj_lookup_class(super);
     }
 
