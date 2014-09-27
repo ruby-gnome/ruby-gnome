@@ -26,7 +26,9 @@
 /**********************************************************************/
 /* Type Mapping */
 
+#ifndef rb_cMutex
 static VALUE rb_cMutex;
+#endif
 static VALUE lookup_class_mutex;
 
 static ID id_new;
@@ -768,7 +770,9 @@ Init_gobject_gtype(void)
     init_typemap();
 
     /* type */
+#ifndef rb_cMutex
     rb_cMutex = rb_const_get(rb_cObject, rb_intern("Mutex"));
+#endif
     id_lock = rb_intern("lock");
     id_unlock = rb_intern("unlock");
     lookup_class_mutex = rb_funcall(rb_cMutex, id_new, 0);
