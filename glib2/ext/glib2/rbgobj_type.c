@@ -71,7 +71,7 @@ rbgobj_lookup_class(VALUE klass)
 
     if (TYPE(klass) == T_CLASS) {
         VALUE super;
-            super = rb_funcall(klass, id_superclass, 0);
+        super = rb_funcall(klass, id_superclass, 0);
         return rbgobj_lookup_class(super);
     }
 
