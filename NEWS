@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 2.2.1: 2014-09-21
+== Ruby-GNOME2 2.2.1: 2014-10-xx
 
 It is a release that Ruby/GDK3 is migrated to
 Ruby/GObjectIntrospection based bindings.
@@ -16,15 +16,59 @@ API change provides non Rubyish API, it will be a bug.
 ==== Ruby/GLib2
 
   * Improvements
+    * Added GObject#unref to free large object immediately.
+
   * Fixes
     * [windows] Added a missing exported symbol. ((({rbg_inspect})))
     * Fixed a bug that signal handler doesn't work on Ruby 2.1.
       [ruby-gnome2-devel-en] [Reported by Carlo E. Prelz]
+    * Fixed free function (free -> xfree).
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported instantiating union.
+    * Accepted 5 or more the number of signals.
+      It may be increased for later GIO version.
+      [GitHub#229] [Reported by cosmo0920]
+    * Added "?" to boolean field value reader.
+    * Supported mapping function info to method.
+    * Don't handle MethodInfo as FunctionInfo.
+    * Accepted not GType struct as an input argument.
+    * Accepted getting a field value from not GType but
+      GType descendant sruct.
+    * Added Loader.register_constant_rename_map.
+    * Supported in GType array.
+    * Don't require needless array length argument.
+    * Supported finding suitable method that has optional argument.
+
+  * Fixes
+    * Fixed wrong argument index for Ruby objects.
+    * Fixed a bug that ArgInfo isn't passed.
+
+==== Ruby/CairoGObject
+
+  * Improvements
+    * Suppressed a warning that instance variable gboxed not initialized.
 
 ==== Ruby/GIO2
 
+  * Improvements
+    * Supported GLib 2.42.0. Annotation for GObject Introspection is added
+      to g_pollable_input_stream_read_nonblocking() since GLib 2.42.0.
+      See also: https://bugzilla.gnome.org/show_bug.cgi?id=730493
+    * Supported GLib <= 2.36.0.
+
   * Fixes
     * Fixed a bug that .pc isn't installed. [Reported by OBATA Akio]
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Migrated to Ruby/GObjectIntrospection based bindings.
+    * Gdk::Keyval::GDK_KEY_x style is deprecated. Use
+      Gdk::Keyval::KEY_x style instead.
+    * Accepted Gdk::RGBA for Cairo::Context#set_source_rgba.
 
 ==== Ruby/GTK3
 
@@ -33,11 +77,55 @@ API change provides non Rubyish API, it will be a bug.
     * Supported interrupt in Gtk.main.
     * Supported interrupt in Gtk::Dialog#run.
       [Reported by Carlo E. Prelz]
+    * Added initialization with Gdk::RGBA value.
+      [GitHub#231] [Patch by Detlef Reichl]
+    * Added Gtk::Window#set_titlebar (enable the use of Gtk::HeaderBar).
+      [GitHub#236] [Patch by tescorg]
+    * Updated sample scripts.
+      [Patch by kitachro]
+
+  * Fixes
+    * Fixed memory leak of Gtk::Image.
+      [GitHub#252] [Reported by Michel Boaventura]
+
+==== Ruby/GStreamer
+
+  * Improvements
+    * Added gstreamer.rb for Bundler's autoload.
+      [GitHub#232] [Reported by saepia]
+    * Added Caps.any and Caps.empty.
+    * Supported property for Gst::ChildProxy.
+      [GitHub#233] [Reported by saepia]
+
+  * Fixes
+    * Fixed a bug that Gst.init is failed.
+      [GitHub#232] [Reported by saepia]
+
+==== Ruby/Poppler
+
+  * Improvements
+    * Install Poppler with --with-glib option for Homebrew.
+      [GitHub#237] [Reported by Colin Dean]
+    * Removed needless `--with-glib` option. Now, it is the default.
+      [rabbit-shocker/rabbit#24] [Reported by Kazuhiro NISHIYAMA]
+
+==== Ruby/ClutterGStreamer
+
+  * Improvements
+    * Added clutter-gstreamer.rb to support Bundler's autoload.
 
 === Thanks
 
   * OBATA Akio
   * Carlo E. Prelz
+  * cosmo0920
+  * Detlef Reichl
+  * saepia
+  * tescorg
+  * Colin Dean
+  * Kazuhiro NISHIYAMA
+  * kitachro
+  * Michel Boaventura
 
 == Ruby-GNOME2 2.2.0: 2014-03-09
 
