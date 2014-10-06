@@ -1,0 +1,11 @@
+diff -ru libsoup-2.48.0.orig/libsoup/libsoup-2.4.sym libsoup-2.48.0/libsoup/libsoup-2.4.sym
+--- libsoup-2.48.0.orig/libsoup/libsoup-2.4.sym	2014-06-18 23:42:51.000000000 +0900
++++ libsoup-2.48.0/libsoup/libsoup-2.4.sym	2014-10-06 21:29:02.421366897 +0900
+@@ -348,7 +348,6 @@
+ soup_server_get_async_context
+ soup_server_get_listener
+ soup_server_get_listeners
+-soup_server_get_gsocket
+ soup_server_get_port
+ soup_server_get_type
+ soup_server_get_uris

@@ -19,8 +19,8 @@ package = GNOME2Package.new do |_package|
   _package.external_packages = [
     {
       :name => "libjpeg",
-      :base_name => "jpeg-9",
-      :archive_base_name => "jpegsrc.v9.tar.gz",
+      :base_name => "jpeg-9a",
+      :archive_base_name => "jpegsrc.v9a.tar.gz",
       :download_base_url => "http://www.ijg.org/files",
       :label => "libjpeg",
       :windows => {
@@ -30,9 +30,9 @@ package = GNOME2Package.new do |_package|
     },
     {
       :name => "sqlite-autoconf",
-      :download_base_url => "http://www.sqlite.org/2013",
+      :download_base_url => "http://www.sqlite.org/2014",
       :label => "SQLite",
-      :version => "3080200",
+      :version => "3080600",
       :compression_method => "gz",
       :windows => {
         :configure_args => [],
@@ -43,7 +43,7 @@ package = GNOME2Package.new do |_package|
       :name => "libsoup",
       :download_site => :gnome,
       :label => "libsoup",
-      :version => "2.45.3",
+      :version => "2.48.0",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -51,6 +51,9 @@ package = GNOME2Package.new do |_package|
           "--without-apache-httpd",
         ],
         :build_concurrently => false,
+        :patches => [
+          "libsoup-2.48.0-remove-nonexistent-symbol.diff",
+        ],
         :built_file => "bin/libsoup-2.4-1.dll",
       },
     },
@@ -126,7 +129,7 @@ package = GNOME2Package.new do |_package|
       :name => "gstreamer",
       :download_base_url => "#{freedesktop_download_url_base}/gstreamer",
       :label => "GStreamer",
-      :version => "1.2.3",
+      :version => "1.4.3",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -141,7 +144,7 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-base",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-base",
       :label => "GStreamer plugins (base)",
-      :version => "1.2.3",
+      :version => "1.4.3",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -155,7 +158,7 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-good",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-good",
       :label => "GStreamer plugins (good)",
-      :version => "1.2.3",
+      :version => "1.4.3",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -168,7 +171,7 @@ package = GNOME2Package.new do |_package|
       :name => "gst-plugins-bad",
       :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-bad",
       :label => "GStreamer plugins (bad)",
-      :version => "1.2.3",
+      :version => "1.4.3",
       :compression_method => "xz",
       :windows => {
         :configure_args => ["--disable-librfb"],
@@ -182,7 +185,7 @@ package = GNOME2Package.new do |_package|
     #   :name => "gst-plugins-ugly",
     #   :download_base_url => "#{freedesktop_download_url_base}/gst-plugins-ugly",
     #   :label => "GStreamer plugins (ugly)",
-    #   :version => "1.2.3",
+    #   :version => "1.4.3",
     #   :compression_method => "xz",
     #   :windows => {
     #     :configure_args => [],
@@ -192,7 +195,7 @@ package = GNOME2Package.new do |_package|
       :name => "gst-libav",
       :download_base_url => "#{freedesktop_download_url_base}/gst-libav",
       :label => "GStreamer libav",
-      :version => "1.2.3",
+      :version => "1.4.3",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
@@ -201,7 +204,8 @@ package = GNOME2Package.new do |_package|
             "--target-os=mingw32 " +
             "--arch=i686 " +
             "--pkg-config=pkg-config " +
-            "--disable-gpl",
+            "--disable-gpl " +
+            "--disable-yasm",
         ],
         :built_file => "lib/gstreamer-1.0/libgstlibav.dll",
       },
