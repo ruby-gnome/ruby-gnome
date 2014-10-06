@@ -48,7 +48,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     },
     {
       :name => "sqlite-autoconf",
-      :download_base_url => "http://www.sqlite.org/2013",
+      :download_base_url => "http://www.sqlite.org/2014",
       :label => "SQLite",
       :version => "3080600",
       :compression_method => "gz",
