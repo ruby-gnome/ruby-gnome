@@ -1,66 +1,18 @@
-From be397a8f143edc9808035f78c60159bb9aeedca2 Mon Sep 17 00:00:00 2001
-From: Kouhei Sutou <kou@clear-code.com>
-Date: Sun, 7 Apr 2013 18:51:45 +0900
-Subject: [PATCH] Support external g-ir-scanner
-
-With this change, you can build binaries for Windows on Debian
-GNU/Linux.
-
-Run configure with the following options:
-
-    % ./configure \
-        --host=i686-w64-mingw32 \
-        --with-g-ir-scanner=/usr/bin/g-ir-scanner \
-        --disable-tests
----
- Makefile-gir.am              |   29 +++++++++++++----------
- Makefile-giscanner.am        |    6 +++++
- Makefile-tools.am            |   15 +++++++++++-
- Makefile.am                  |    5 +++-
- common.mk                    |    9 ++++---
- configure.ac                 |   54 ++++++++++++++++++++++++++++++++----------
- tests/Makefile.am            |    2 ++
- tests/offsets/Makefile.am    |    6 +++++
- tests/repository/Makefile.am |    2 ++
- tests/scanner/Makefile.am    |    4 ++++
- 10 files changed, 103 insertions(+), 29 deletions(-)
-
 diff --git a/Makefile-gir.am b/Makefile-gir.am
-index 2b39e54..63b2f2b 100644
+index 52f7ee3..c03f4e2 100644
 --- a/Makefile-gir.am
 +++ b/Makefile-gir.am
-@@ -27,18 +27,18 @@ CLEANFILES += gir/cairo-1.0.gir
- EXTRA_DIST += gir/cairo-1.0.gir.in
- 
- # Doesn't seem to work to do gir/%.typelib =(
--gir/cairo-1.0.typelib: g-ir-compiler
--gir/DBus-1.0.typelib: g-ir-compiler
--gir/DBusGLib-1.0.typelib: g-ir-compiler
--gir/fontconfig-2.0.typelib: g-ir-compiler
--gir/freetype2-2.0.typelib: g-ir-compiler
--gir/GL-1.0.typelib: g-ir-compiler
--gir/libxml2-2.0.typelib: g-ir-compiler
--gir/xft-2.0.typelib: g-ir-compiler
--gir/xlib-2.0.typelib: g-ir-compiler
--gir/xfixes-4.0.typelib: g-ir-compiler
--gir/xrandr-1.3.typelib: g-ir-compiler
--gir/win32-1.0.typelib: g-ir-compiler
-+gir/cairo-1.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/DBus-1.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/DBusGLib-1.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/fontconfig-2.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/freetype2-2.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/GL-1.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/libxml2-2.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/xft-2.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/xlib-2.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/xfixes-4.0.typelib: g-ir-compiler$(EXEEXT)
-+gir/xrandr-1.3.typelib: g-ir-compiler$(EXEEXT)
-+gir/win32-1.0.typelib: g-ir-compiler$(EXEEXT)
- 
- # glib with source (to enable documentation)
- if WITH_GLIBSRC
-@@ -91,7 +91,12 @@ endif
+@@ -68,7 +68,8 @@ GLib_2_0_gir_SCANNERFLAGS = \
+             --symbol-prefix=g \
+             --symbol-prefix=glib \
+             --c-include="glib.h" \
+-            $(GLib_2_0_gir_DOCSRC)
++            $(GLib_2_0_gir_DOCSRC) \
++	    --library-path=$(GLIB_LIBDIR)
+ GLib_2_0_gir_PACKAGES = glib-2.0
+ GLib_2_0_gir_CFLAGS = \
+             -I$(GLIB_INCLUDEDIR) \
+@@ -87,7 +88,12 @@ endif
  
  BUILT_GIRSOURCES += GLib-2.0.gir
  
@@ -74,8 +26,38 @@ index 2b39e54..63b2f2b 100644
  
  gir/DBusGLib-1.0.typelib: GObject-2.0.gir
  
+@@ -105,7 +111,8 @@ GObject_2_0_gir_SCANNERFLAGS = \
+             --identifier-prefix=G \
+             --c-include="glib-object.h" \
+             --add-include-path=. \
+-            $(GObject_2_0_gir_DOCSRC)
++            $(GObject_2_0_gir_DOCSRC) \
++	    --library-path=$(GOBJECT_LIBDIR)
+ 
+ GObject_2_0_gir_PACKAGES = gobject-2.0
+ GObject_2_0_gir_INCLUDES = GLib-2.0
+@@ -133,7 +140,8 @@ GModule_2_0_gir_SCANNERFLAGS = \
+             --identifier-prefix=G \
+             --c-include="gmodule.h" \
+             --add-include-path=. \
+-            $(GModule_2_0_gir_DOCSRC)
++            $(GModule_2_0_gir_DOCSRC) \
++	    --library-path=$(GMODULE_LIBDIR)
+ 
+ GModule_2_0_gir_PACKAGES = gmodule-2.0
+ GModule_2_0_gir_INCLUDES = GLib-2.0
+@@ -171,7 +179,8 @@ Gio_2_0_gir_SCANNERFLAGS = \
+             --c-include="gio/gio.h" \
+             $(GIO_CINCLUDES) \
+             --add-include-path=. \
+-            $(Gio_2_0_gir_DOCSRC)
++            $(Gio_2_0_gir_DOCSRC) \
++	    --library-path=$(GIO_LIBDIR)
+ 
+ Gio_2_0_gir_PACKAGES = gio-2.0 $(GIO_UNIX_PACKAGES)
+ Gio_2_0_gir_INCLUDES = GObject-2.0
 diff --git a/Makefile-giscanner.am b/Makefile-giscanner.am
-index e8def0e..4c1d21e 100644
+index c2273cd..0f47126 100644
 --- a/Makefile-giscanner.am
 +++ b/Makefile-giscanner.am
 @@ -1,17 +1,21 @@
@@ -100,7 +82,7 @@ index e8def0e..4c1d21e 100644
  
  libgiscanner_la_SOURCES = \
  	giscanner/sourcescanner.c				\
-@@ -25,7 +29,9 @@ libgiscanner_la_CFLAGS = $(GOBJECT_CFLAGS) $(GIO_CFLAGS)
+@@ -24,7 +28,9 @@ libgiscanner_la_CFLAGS = $(GOBJECT_CFLAGS) $(GIO_CFLAGS)
  
  # Python module
  pkgpyexecdir = $(pkglibdir)/giscanner
@@ -158,10 +140,10 @@ index 34d2a25..87c3a1f 100644
 +CLEANFILES += g-ir-doc-tool
 +endif
 diff --git a/Makefile.am b/Makefile.am
-index 736f3ad..08014bc 100644
+index 1a988a5..b14b745 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -33,8 +33,11 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
+@@ -35,8 +35,11 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc --enable-doctool
  
  man_MANS += 			\
  	docs/g-ir-compiler.1	\
@@ -175,12 +157,12 @@ index 736f3ad..08014bc 100644
  pkgconfigdir = $(libdir)/pkgconfig
  pkgconfig_DATA = gobject-introspection-1.0.pc gobject-introspection-no-export-1.0.pc
 diff --git a/common.mk b/common.mk
-index 28b73c7..15552fa 100644
+index 303622f..30a011a 100644
 --- a/common.mk
 +++ b/common.mk
 @@ -9,11 +9,14 @@
  INTROSPECTION_SCANNER = \
-     env PATH=.libs:$(PATH) \
+     env PATH=".libs:$(PATH)" \
          LPATH=.libs \
 -        CC="$(CC)" \
 +        CC="$(CC)"
@@ -197,10 +179,10 @@ index 28b73c7..15552fa 100644
  INTROSPECTION_SCANNER_ARGS = \
      --verbose \
 diff --git a/configure.ac b/configure.ac
-index 3537af1..604b164 100644
+index 1fd260a..615ff18 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -246,19 +246,42 @@ AC_FUNC_STRTOD
+@@ -250,19 +250,42 @@ AC_FUNC_STRTOD
  AC_CHECK_FUNCS([memchr strchr strspn strstr strtol strtoull])
  AC_CHECK_FUNCS([backtrace backtrace_symbols])
  
@@ -255,7 +237,7 @@ index 3537af1..604b164 100644
  
  dnl Not enabled by default until 3.6 cycle when we can propose mako as
  dnl an external dependency
-@@ -310,6 +333,13 @@ fi
+@@ -347,6 +370,13 @@ fi
  
  AC_SUBST(EXTRA_LINK_FLAGS)
  
@@ -268,100 +250,108 @@ index 3537af1..604b164 100644
 +
  AC_CONFIG_FILES([
  Makefile
- m4/Makefile
+ tests/Makefile
 diff --git a/tests/Makefile.am b/tests/Makefile.am
-index b4985b9..5c9db00 100644
+index bdd0fa7..70f1825 100644
 --- a/tests/Makefile.am
 +++ b/tests/Makefile.am
-@@ -16,7 +16,9 @@ tests_DATA =		    \
-     gimarshallingtests.c    \
-     gimarshallingtests.h
+@@ -17,7 +17,9 @@ tests_DATA =		    \
+     gimarshallingtests.h    \
+     gitestmacros.h
  
 +if ENABLE_TESTS
- check_LTLIBRARIES = libeverything-1.0.la libgimarshallingtests-1.0.la
+ EXTRA_LTLIBRARIES = libeverything-1.0.la libgimarshallingtests-1.0.la
 +endif
  
  libeverything_1_0_la_SOURCES = everything.c
  libgimarshallingtests_1_0_la_SOURCES = gimarshallingtests.c
+@@ -27,7 +29,9 @@ EXTRA_DIST += \
+ 	gi-tester \
+ 	gitestmacros.h
+ 
++if ENABLE_TESTS
+ BUILT_SOURCES += everything.c everything.h
++endif
+ 
+ CLEANFILES += \
+     $(BUILT_SOURCES) \
 diff --git a/tests/offsets/Makefile.am b/tests/offsets/Makefile.am
-index 4f03830..053bd93 100644
+index 65d8773..66b00b1 100644
 --- a/tests/offsets/Makefile.am
 +++ b/tests/offsets/Makefile.am
-@@ -11,7 +11,9 @@ check_PROGRAMS =
+@@ -11,7 +11,9 @@ EXTRA_PROGRAMS =
  
  ############################################################
  
 +if ENABLE_TESTS
- check_LTLIBRARIES += liboffsets.la
+ EXTRA_LTLIBRARIES += liboffsets.la
 +endif
  
  liboffsets_la_SOURCES = \
  	offsets.h	\
-@@ -32,7 +34,9 @@ CLEANFILES += Offsets-1.0.gir Offsets-1.0.typelib
+@@ -32,7 +34,9 @@ CLEANFILES += Offsets-1.0.gir Offsets-1.0.typelib liboffsets.la
  
  ############################################################
  
 +if ENABLE_TESTS
- check_PROGRAMS += gitestoffsets
+ EXTRA_PROGRAMS += gitestoffsets
 +endif
  
  nodist_gitestoffsets_SOURCES = gitestoffsets.c
- gitestoffsets_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository
-@@ -42,8 +46,10 @@ gitestoffsets.c: gen-gitestoffsets offsets.h
+ gitestoffsets_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository -I$(top_srcdir)/tests
+@@ -41,9 +45,11 @@ gitestoffsets_LDADD = $(top_builddir)/libgirepository-1.0.la $(GIREPO_LIBS)
+ gitestoffsets.c: gen-gitestoffsets offsets.h Offsets-1.0.typelib
  	$(AM_V_GEN) $(PYTHON) $(srcdir)/gen-gitestoffsets $(srcdir)/offsets.h > $@ || ( rm -f $@ && false )
  
- EXTRA_DIST += gen-gitestoffsets
 +if ENABLE_TESTS
+ EXTRA_DIST += gen-gitestoffsets
  BUILT_SOURCES += gitestoffsets.c
- CLEANFILES += gitestoffsets.c
+ CLEANFILES += gitestoffsets.c $(EXTRA_PROGRAMS)
 +endif
  
  ############################################################
  
 diff --git a/tests/repository/Makefile.am b/tests/repository/Makefile.am
-index 96afb89..0553a8b 100644
+index 882fa9e..89c9069 100644
 --- a/tests/repository/Makefile.am
 +++ b/tests/repository/Makefile.am
-@@ -2,7 +2,9 @@ AM_CFLAGS = $(GOBJECT_CFLAGS)
+@@ -2,8 +2,10 @@ AM_CFLAGS = $(GOBJECT_CFLAGS)
  AM_LDFLAGS = -module -avoid-version
  LIBS = $(GOBJECT_LIBS)
  
 +if ENABLE_TESTS
- check_PROGRAMS = gitestrepo gitestthrows gitypelibtest
+ EXTRA_PROGRAMS = gitestrepo gitestthrows gitypelibtest
+ CLEANFILES = $(EXTRA_PROGRAMS)
 +endif
  
  gitestrepo_SOURCES = $(srcdir)/gitestrepo.c
  gitestrepo_CPPFLAGS = $(GIREPO_CFLAGS) -I$(top_srcdir)/girepository
 diff --git a/tests/scanner/Makefile.am b/tests/scanner/Makefile.am
-index 31487a6..65c02fa 100644
+index 92ab12a..41f4de8 100644
 --- a/tests/scanner/Makefile.am
 +++ b/tests/scanner/Makefile.am
-@@ -5,6 +5,7 @@ include $(top_srcdir)/Makefile.introspection
+@@ -9,6 +9,7 @@ INTROSPECTION_SCANNER_ARGS += --warn-all
  
- INTROSPECTION_SCANNER_ARGS += --warn-all
+ CLEANFILES =
  
 +if ENABLE_TESTS
- check_LTLIBRARIES = \
+ EXTRA_LTLIBRARIES = \
  	libsletter.la \
  	libutility.la \
-@@ -13,6 +14,7 @@ check_LTLIBRARIES = \
- 	libregress.la \
- 	libwarnlib.la \
+@@ -19,6 +20,7 @@ EXTRA_LTLIBRARIES = \
+ 	libtypedefs.la \
  	$(NULL)
+ CLEANFILES += $(EXTRA_LTLIBRARIES)
 +endif
  
+ GI_SCANNER_CFLAGS = -I$(top_srcdir)/tests
  AM_CPPFLAGS = -I$(top_srcdir)/girepository
- AM_CFLAGS = $(GIO_CFLAGS) $(GOBJECT_CFLAGS) $(GTHREAD_CFLAGS)
-@@ -126,7 +128,9 @@ GetType_1_0_gir_SCANNERFLAGS = --c-include="gettype.h" --identifier-prefix=GetTy
- GIRS += GetType-1.0.gir
+@@ -147,7 +149,7 @@ Typedefs_1_0_gir_FILES = $(libtypedefs_la_SOURCES)
+ Typedefs_1_0_gir_SCANNERFLAGS = --c-include="typedefs.h" --identifier-prefix=Typedefs --symbol-prefix=typedefs
+ GIRS += Typedefs-1.0.gir
  
- if !OS_WIN32
+-if !OS_WIN32
 +if ENABLE_TESTS
- check_PROGRAMS = barapp
-+endif
+ EXTRA_PROGRAMS = barapp
+ CLEANFILES += $(EXTRA_PROGRAMS)
  
- barapp_SOURCES = $(srcdir)/barapp.c $(srcdir)/barapp.h
- barapp_LDADD = $(top_builddir)/libgirepository-1.0.la
--- 
-1.7.10.4
-

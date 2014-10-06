@@ -1,36 +1,48 @@
+diff --git a/giscanner/ccompiler.py b/giscanner/ccompiler.py
+index 1c66aac..e922feb 100644
+--- a/giscanner/ccompiler.py
++++ b/giscanner/ccompiler.py
+@@ -137,17 +137,16 @@ class CCompiler(object):
+             is_msvc = False
+             libtool = utils.get_libtool_command(options)
+             if libtool:
+-                args.append(utils.which(os.environ.get('SHELL', 'sh.exe')))
+                 args.extend(libtool)
+                 args.append('--mode=execute')
+-            # FIXME: it could have prefix (i686-w64-mingw32-dlltool.exe)
+-            args.extend(['dlltool.exe', '--identify'])
++            args.extend([compiler_cmd.replace('gcc', 'dlltool'), '--identify'])
+             proc = subprocess.Popen([compiler_cmd, '-print-search-dirs'],
+                                     stdout=subprocess.PIPE)
+             o, e = proc.communicate()
+             for line in o.splitlines():
+                 if line.startswith('libraries: '):
+                     libsearch = line[len('libraries: '):].split(';')
++        libsearch = options.library_paths + libsearch
+ 
+         shlibs = []
+         not_resolved = []
 diff --git a/giscanner/dumper.py b/giscanner/dumper.py
-index d95ea6b..84a7afc 100644
+index 45a09fc..3c70be6 100644
 --- a/giscanner/dumper.py
 +++ b/giscanner/dumper.py
-@@ -157,8 +157,9 @@ class DumpCompiler(object):
+@@ -160,6 +160,7 @@ class DumpCompiler(object):
          else:
              o_path = self._generate_tempfile(tmpdir, '.o')
  
 +        os.name = 'nt'
          if os.name == 'nt':
--            ext = 'exe'
-+            ext = '.exe'
+             ext = '.exe'
          else:
-             ext = ''
- 
-@@ -257,10 +258,7 @@ class DumpCompiler(object):
+@@ -263,10 +264,7 @@ class DumpCompiler(object):
          else:
              args.extend(['-o', output])
          if libtool:
 -            if os.name == 'nt':
--                args.append('-export-all-symbols')
+-                args.append('-Wl,--export-all-symbols')
 -            else:
 -                args.append('-export-dynamic')
 +            args.append('-export-dynamic')
  
-         cflags = os.environ.get('CFLAGS', '')
-         for cflag in cflags.split():
-@@ -354,6 +352,8 @@ class DumpCompiler(object):
-             if self._pkgconfig_msvc_flags == '':
-                 if library.endswith(".la"): # explicitly specified libtool library
-                     args.append(library)
-+                elif library.startswith("lib") and library.endswith("-0"):
-+                    args.append('-l' + library[3:-2])
-                 else:
-                     args.append('-l' + library)
- 
+         cppflags = os.environ.get('CPPFLAGS', '')
+         for cppflag in cppflags.split():
