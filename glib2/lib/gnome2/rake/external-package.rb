@@ -26,6 +26,7 @@ module GNOME2
                                        :download_site,
                                        :download_base_url,
                                        :compression_method,
+                                       :base_dir_in_package,
                                        :windows,
                                        :native,
                                        :patches,
@@ -72,6 +73,10 @@ module GNOME2
         need_autoreconf
       end
 
+      def base_dir_in_package
+        super || "."
+      end
+
       def windows
         super || WindowsConfiguration.new({})
       end
@@ -99,6 +104,8 @@ module GNOME2
           base_url = "http://ftp.gnome.org/pub/gnome/sources"
           release_series = version.gsub(/\A(\d+\.\d+)(?:[^\d].*)?\z/, '\1')
           base_url << "/#{name}/#{release_series}"
+        when :gnu
+          base_url = "http://ftp.gnu.org/pub/gnu/#{name}"
         else
           base_url = nil
         end

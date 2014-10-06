@@ -23,8 +23,36 @@ package = GNOME2Package.new do |_package|
   _package.dependency.gem.runtime = [["pkg-config", ">= 0"]]
   _package.dependency.gem.development = [["test-unit", ">= 2"]]
   _package.win32.packages = []
-  _package.win32.dependencies = ["libffi", "gettext-runtime"]
+  _package.win32.dependencies = []
   _package.external_packages = [
+    {
+      :name => "libiconv",
+      :download_site => :gnu,
+      :label => "libiconv",
+      :version => "1.14",
+      :windows => {
+        :built_file => "bin/libiconv-2.dll",
+      },
+    },
+    {
+      :name => "gettext",
+      :download_site => :gnu,
+      :label => "gettext-runtime",
+      :version => "0.19.2",
+      :base_dir_in_package => "gettext-runtime",
+      :windows => {
+        :built_file => "bin/libintl-8.dll",
+      },
+    },
+    {
+      :name => "libffi",
+      :download_base_url => "ftp://sourceware.org/pub/libffi",
+      :label => "libffi",
+      :version => "3.1",
+      :windows => {
+        :built_file => "bin/libffi-6.dll",
+      },
+    },
     {
       :name => "glib",
       :download_site => :gnome,
@@ -107,43 +135,3 @@ package = GNOME2Package.new do |_package|
   end
 end
 package.define_tasks
-
-namespace :win32 do
-  namespace :libffi do
-    namespace :header do
-      desc "Move libffi headers to include/"
-      task :fix do
-        libffi_version = "libffi-3.0.6"
-        mv(Dir.glob(File.join(libffi_lib_dir, libffi_version, "include", "*.h")),
-           include_dir)
-        rm_rf(File.join(libffi_lib_dir, libffi_version))
-      end
-    end
-  end
-
-  namespace :downloader do
-    task :after => [
-      "win32:libffi:header:fix",
-    ]
-  end
-
-  namespace :gettext do
-    namespace :header do
-      desc "Copy gettext headers to include/glib-2.0/"
-      task :fix do
-        cp(File.join(include_dir, "libintl.h"),
-           glib2_include_dir)
-      end
-    end
-  end
-
-  namespace :builder do
-    namespace :build do
-      namespace :glib do
-        task :after => [
-          "win32:gettext:header:fix",
-        ]
-      end
-    end
-  end
-end
