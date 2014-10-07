@@ -171,9 +171,9 @@ SET(CMAKE_SYSTEM_PROCESSOR #{@package.windows.build_architecture})
 
 SET(CMAKE_C_COMPILER #{@package.windows.build_host}-gcc)
 SET(CMAKE_CXX_COMPILER #{@package.windows.build_host}-g++)
-SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-wind res)
+SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-windres)
 
-SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
+SET(CMAKE_FIND_ROOT_PATH /usr/#{@package.windows.build_host})
       CMAKE
     end
     sh("cmake",
