@@ -1,0 +1,20 @@
+diff -ru webkitgtk-2.6.0.orig/Source/cmake/FindFontconfig.cmake webkitgtk-2.6.0/Source/cmake/FindFontconfig.cmake
+--- webkitgtk-2.6.0.orig/Source/cmake/FindFontconfig.cmake	2013-08-04 01:10:40.000000000 +0900
++++ webkitgtk-2.6.0/Source/cmake/FindFontconfig.cmake	2014-10-07 23:40:10.515822164 +0900
+@@ -39,14 +39,14 @@
+ 
+ else (FONTCONFIG_LIBRARIES AND FONTCONFIG_INCLUDE_DIR)
+ 
+-    if (NOT WIN32)
++    # if (NOT WIN32)
+         # use pkg-config to get the directories and then use these values
+         # in the find_path() and find_library() calls
+         find_package(PkgConfig)
+         pkg_check_modules(PC_FONTCONFIG fontconfig)
+ 
+       set(FONTCONFIG_DEFINITIONS ${PC_FONTCONFIG_CFLAGS_OTHER})
+-    endif (NOT WIN32)
++    # endif (NOT WIN32)
+ 
+     find_path(FONTCONFIG_INCLUDE_DIR fontconfig/fontconfig.h
+         PATHS
