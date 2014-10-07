@@ -12,6 +12,25 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.build_dependencies = ["glib2", "gobject-introspection"]
   package.external_packages = [
     {
+      :name => "icu",
+      :download_base_url => "http://download.icu-project.org/files/icu4c/54.1",
+      :label => "gobject-introspection",
+      :base_name => "icu",
+      :archive_base_name => "icu4c-54_1-src.tgz",
+      :compression_method => "gz",
+      :base_dir_in_package => "source",
+      :windows => {
+        :configure_args => [
+          "--with-cross-build=#{package.package.tmp_dir}/native/icu/icu/source",
+        ],
+        :built_file => "bin/icu-config",
+      },
+      :native => {
+        :build => true,
+        :built_file => "bin/iuc-config",
+      },
+    },
+    {
       :name => "harfbuzz",
       :download_base_url => "http://www.freedesktop.org/software/harfbuzz/release",
       :label => "HarfBuzz",
