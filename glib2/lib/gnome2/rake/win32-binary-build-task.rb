@@ -109,34 +109,9 @@ class GNOME2Win32BinaryBuildTask
         sh("patch -p1 < #{@package.patches_dir}/#{patch}")
       end
       if File.exist?("configure")
-        sh("./autogen.sh") if package.windows.need_autogen?
-        sh("autoreconf --install") if package.windows.need_autoreconf?
-        cc_env = "CC=#{cc(package)}"
-        sh("./configure",
-           cc_env,
-           "CPPFLAGS=#{cppflags(package)}",
-           "LDFLAGS=#{ldflags(package)}",
-           "--prefix=#{dist_dir}",
-           "--host=#{@package.windows.build_host}",
-           *package.windows.configure_args) or exit(false)
+        configure(package)
       else
-        File.open("toolchain.cmake", "w") do |toolchain|
-          toolchain.puts(<<-CMAKE)
-SET(CMAKE_SYSTEM_NAME Windows)
-SET(MSVC_CXX_ARCHITECTURE_ID #{@package.windows.build_architecture})
-SET(CMAKE_SYSTEM_PROCESSOR #{@package.windows.build_architecture})
-
-SET(CMAKE_C_COMPILER #{@package.windows.build_host}-gcc)
-SET(CMAKE_CXX_COMPILER #{@package.windows.build_host}-g++)
-SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-wind res)
-
-SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
-          CMAKE
-        end
-        sh("cmake",
-           ".",
-           "-DCMAKE_TOOLCHAIN_FILE=toolchain.cmake",
-           *package.windows.cmake_args) or exit(false)
+        cmake(package)
       end
       common_make_args = []
       common_make_args << "MAKE=make"
@@ -172,6 +147,39 @@ SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
         cp(license_files, bundled_package_license_dir)
       end
     end
+  end
+
+  def configure(package)
+    sh("./autogen.sh") if package.windows.need_autogen?
+    sh("autoreconf --install") if package.windows.need_autoreconf?
+    cc_env = "CC=#{cc(package)}"
+    sh("./configure",
+       cc_env,
+       "CPPFLAGS=#{cppflags(package)}",
+       "LDFLAGS=#{ldflags(package)}",
+       "--prefix=#{dist_dir}",
+       "--host=#{@package.windows.build_host}",
+       *package.windows.configure_args) or exit(false)
+  end
+
+  def cmake(package)
+    File.open("toolchain.cmake", "w") do |toolchain|
+      toolchain.puts(<<-CMAKE)
+SET(CMAKE_SYSTEM_NAME Windows)
+SET(MSVC_CXX_ARCHITECTURE_ID #{@package.windows.build_architecture})
+SET(CMAKE_SYSTEM_PROCESSOR #{@package.windows.build_architecture})
+
+SET(CMAKE_C_COMPILER #{@package.windows.build_host}-gcc)
+SET(CMAKE_CXX_COMPILER #{@package.windows.build_host}-g++)
+SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-wind res)
+
+SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
+      CMAKE
+    end
+    sh("cmake",
+       ".",
+       "-DCMAKE_TOOLCHAIN_FILE=toolchain.cmake",
+       *package.windows.cmake_args) or exit(false)
   end
 
   def build_packages
