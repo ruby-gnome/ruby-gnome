@@ -117,7 +117,7 @@ class GNOME2Win32BinaryBuildTask
       common_make_args << "MAKE=make"
       common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
       if package.windows.use_cc_environment_variable?
-        common_make_args << cc_env
+        common_make_args << cc_env(package)
       end
       add_gobject_introspection_make_args(common_make_args)
       build_make_args = common_make_args.dup
@@ -152,9 +152,8 @@ class GNOME2Win32BinaryBuildTask
   def configure(package)
     sh("./autogen.sh") if package.windows.need_autogen?
     sh("autoreconf --install") if package.windows.need_autoreconf?
-    cc_env = "CC=#{cc(package)}"
     sh("./configure",
-       cc_env,
+       cc_env(package),
        "CPPFLAGS=#{cppflags(package)}",
        "LDFLAGS=#{ldflags(package)}",
        "--prefix=#{dist_dir}",
@@ -181,6 +180,10 @@ SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
        ".",
        "-DCMAKE_TOOLCHAIN_FILE=#{toolchain_cmake_path}",
        *package.windows.cmake_args) or exit(false)
+  end
+
+  def cc_env(package)
+    "CC=#{cc(package)}"
   end
 
   def build_packages
