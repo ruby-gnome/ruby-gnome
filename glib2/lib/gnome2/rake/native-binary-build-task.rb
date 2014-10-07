@@ -75,7 +75,7 @@ module GNOME2
       end
 
       def build_package_task_body(package)
-        package_tmp_dir = @package.tmp_dir + package.name
+        package_tmp_dir = @package.tmp_dir + "native" + package.name
         rm_rf(package_tmp_dir)
         mkdir_p(package_tmp_dir)
 

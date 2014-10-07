@@ -93,7 +93,7 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def build_package_task_body(package)
-    package_tmp_dir = @package.tmp_dir + package.name
+    package_tmp_dir = @package.tmp_dir + "windows" + package.name
     rm_rf(package_tmp_dir)
     mkdir_p(package_tmp_dir)
 
