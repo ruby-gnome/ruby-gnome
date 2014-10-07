@@ -163,7 +163,8 @@ class GNOME2Win32BinaryBuildTask
   end
 
   def cmake(package)
-    File.open("toolchain.cmake", "w") do |toolchain|
+    toolchain_cmake_path = "toolchain.cmake"
+    File.open(toolchain_cmake_path, "w") do |toolchain|
       toolchain.puts(<<-CMAKE)
 SET(CMAKE_SYSTEM_NAME Windows)
 SET(MSVC_CXX_ARCHITECTURE_ID #{@package.windows.build_architecture})
@@ -178,7 +179,7 @@ SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
     end
     sh("cmake",
        ".",
-       "-DCMAKE_TOOLCHAIN_FILE=toolchain.cmake",
+       "-DCMAKE_TOOLCHAIN_FILE=#{toolchain_cmake_path}",
        *package.windows.cmake_args) or exit(false)
   end
 
