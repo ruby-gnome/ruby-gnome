@@ -116,6 +116,7 @@ module GNOME2
                                               :include_paths,
                                               :library_paths,
                                               :configure_args,
+                                              :cmake_args,
                                               :cc_args,
                                               :patches,
                                               :built_file,
@@ -143,6 +144,10 @@ module GNOME2
         end
 
         def configure_args
+          super || []
+        end
+
+        def cmake_args
           super || []
         end
 

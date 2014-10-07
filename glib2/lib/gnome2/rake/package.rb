@@ -108,6 +108,15 @@ module GNOME2
         def build_host
           super || "i686-w64-mingw32"
         end
+
+        def build_architecture
+          case build_host
+          when /\Ai\d86-/
+            "x86_64"
+          else
+            "x64"
+          end
+        end
       end
 
       class NativeConfiguration

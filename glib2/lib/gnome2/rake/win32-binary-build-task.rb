@@ -108,16 +108,36 @@ class GNOME2Win32BinaryBuildTask
       package.windows.patches.each do |patch|
         sh("patch -p1 < #{@package.patches_dir}/#{patch}")
       end
-      sh("./autogen.sh") if package.windows.need_autogen?
-      sh("autoreconf --install") if package.windows.need_autoreconf?
-      cc_env = "CC=#{cc(package)}"
-      sh("./configure",
-         cc_env,
-         "CPPFLAGS=#{cppflags(package)}",
-         "LDFLAGS=#{ldflags(package)}",
-         "--prefix=#{dist_dir}",
-         "--host=#{@package.windows.build_host}",
-         *package.windows.configure_args) or exit(false)
+      if File.exist?("configure")
+        sh("./autogen.sh") if package.windows.need_autogen?
+        sh("autoreconf --install") if package.windows.need_autoreconf?
+        cc_env = "CC=#{cc(package)}"
+        sh("./configure",
+           cc_env,
+           "CPPFLAGS=#{cppflags(package)}",
+           "LDFLAGS=#{ldflags(package)}",
+           "--prefix=#{dist_dir}",
+           "--host=#{@package.windows.build_host}",
+           *package.windows.configure_args) or exit(false)
+      else
+        File.open("toolchain.cmake", "w") do |toolchain|
+          toolchain.puts(<<-CMAKE)
+SET(CMAKE_SYSTEM_NAME Windows)
+SET(MSVC_CXX_ARCHITECTURE_ID #{@package.windows.build_architecture})
+SET(CMAKE_SYSTEM_PROCESSOR #{@package.windows.build_architecture})
+
+SET(CMAKE_C_COMPILER #{@package.windows.build_host}-gcc)
+SET(CMAKE_CXX_COMPILER #{@package.windows.build_host}-g++)
+SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-wind res)
+
+SET(CMAKE_FIND_ROOT_PATH  /usr/#{@package.windows.build_host})
+          CMAKE
+        end
+        sh("cmake",
+           ".",
+           "-DCMAKE_TOOLCHAIN_FILE=toolchain.cmake",
+           *package.windows.cmake_args) or exit(false)
+      end
       common_make_args = []
       common_make_args << "MAKE=make"
       common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
