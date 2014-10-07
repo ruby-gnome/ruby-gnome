@@ -84,7 +84,9 @@ module GNOME2
           sh("tar", "xf", tar_full_path.to_s) or exit(false)
         end
 
-        Dir.chdir((package_tmp_dir + package.base_name).to_s) do
+        package_dir_path =
+          package_tmp_dir + package.base_name + package.base_dir_in_package
+        Dir.chdir(package_dir_path.to_s) do
           package.native.patches.each do |patch|
             sh("patch -p1 < #{@package.patches_dir}/#{patch}")
           end
