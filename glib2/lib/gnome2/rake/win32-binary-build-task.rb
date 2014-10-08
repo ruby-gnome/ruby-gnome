@@ -173,7 +173,7 @@ SET(CMAKE_C_COMPILER #{@package.windows.build_host}-gcc)
 SET(CMAKE_CXX_COMPILER #{@package.windows.build_host}-g++)
 SET(CMAKE_RC_COMPILER #{@package.windows.build_host}-windres)
 
-SET(CMAKE_FIND_ROOT_PATH /usr/#{@package.windows.build_host})
+SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
       CMAKE
     end
     sh("cmake",
@@ -202,28 +202,36 @@ SET(CMAKE_FIND_ROOT_PATH /usr/#{@package.windows.build_host})
     dist_dir + "share" + "license"
   end
 
+  def glib2_binary_base_dir
+    @package.glib2_root_dir + "vendor" + "local"
+  end
+
   def glib2_include_path
-    "#{@package.glib2_root_dir}/vendor/local/include"
+    "#{glib2_binary_base_dir}/include"
   end
 
   def glib2_lib_path
-    "#{@package.glib2_root_dir}/vendor/local/lib"
+    "#{glib2_binary_base_dir}/lib"
   end
 
   def rcairo_win32_dir
     @package.project_root_dir.parent + "rcairo.win32"
   end
 
+  def rcairo_win32_binary_base_dir
+    rcairo_win32_dir + "vendor" + "local"
+  end
+
   def rcairo_win32_pkgconfig_path
-    "#{rcairo_win32_dir}/vendor/local/lib/pkgconfig"
+    "#{rcairo_win32_binary_base_dir}/lib/pkgconfig"
   end
 
   def rcairo_win32_include_path
-    "#{rcairo_win32_dir}/vendor/local/include"
+    "#{rcairo_win32_binary_base_dir}/include"
   end
 
   def rcairo_win32_lib_path
-    "#{rcairo_win32_dir}/vendor/local/lib"
+    "#{rcairo_win32_binary_base_dir}/lib"
   end
 
   def cc(package)
@@ -262,6 +270,17 @@ SET(CMAKE_FIND_ROOT_PATH /usr/#{@package.windows.build_host})
       "-L#{path}"
     end
     ldflags.join(" ")
+  end
+
+  def cmake_root_paths
+    paths = [
+      "/usr/#{@package.windows.build_host}",
+      rcairo_win32_binary_base_dir.to_path,
+    ]
+    @package.windows.build_dependencies.each do |package|
+      paths << "#{@package.project_root_dir}/#{package}/vendor/local"
+    end
+    paths
   end
 
   def add_gobject_introspection_make_args(common_make_args)
