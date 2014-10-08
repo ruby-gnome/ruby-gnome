@@ -88,6 +88,12 @@ API change provides non Rubyish API, it will be a bug.
     * Fixed memory leak of Gtk::Image.
       [GitHub#252] [Reported by Michel Boaventura]
 
+==== Ruby/GTK2
+
+  * Improvements
+    * Fixed wrong property value on ppc64 and s390x.
+      [GitHub#256] [Reported by mtasaka]
+
 ==== Ruby/GStreamer
 
   * Improvements
@@ -126,6 +132,7 @@ API change provides non Rubyish API, it will be a bug.
   * Kazuhiro NISHIYAMA
   * kitachro
   * Michel Boaventura
+  * mtasaka
 
 == Ruby-GNOME2 2.2.0: 2014-03-09
 
