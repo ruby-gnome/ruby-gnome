@@ -245,12 +245,12 @@ rg_m_get(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
          ret = rb_ary_new();
 
          if(rtype != GDK_SELECTION_TYPE_ATOM){
-           for(j = 0; j < (rlen/sizeof(unsigned long)); j++){
-             rb_ary_push(ret, INT2FIX(((unsigned long*)rdat)[j]));
+           for(j = 0; j < (rlen/sizeof(glong)); j++){
+             rb_ary_push(ret, INT2FIX(((glong*)rdat)[j]));
            }
          } else {
-           for(j = 0; j < (rlen/sizeof(unsigned long)); j++){
-             rb_ary_push(ret, BOXED2RVAL((GdkAtom)((unsigned long*)rdat)[j], GDK_TYPE_ATOM));
+           for(j = 0; j < (rlen/sizeof(glong)); j++){
+             rb_ary_push(ret, BOXED2RVAL((GdkAtom)((glong*)rdat)[j], GDK_TYPE_ATOM));
            }
          }
         break;
