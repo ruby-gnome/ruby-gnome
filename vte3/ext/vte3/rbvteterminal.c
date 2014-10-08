@@ -280,6 +280,21 @@ rg_set_scroll_on_keystroke(VALUE self, VALUE scroll)
     return self;
 }
 
+#if VTE_CHECK_VERSION(0, 36, 0)
+static VALUE
+rg_get_rewrap_on_resize(VALUE self)
+{
+    return CBOOL2RVAL(vte_terminal_get_rewrap_on_resize(_SELF(self)));
+}
+
+static VALUE
+rg_set_rewrap_on_resize(VALUE self, VALUE rewrap)
+{
+    vte_terminal_set_rewrap_on_resize(_SELF(self), RVAL2CBOOL(rewrap));
+    return self;
+}
+#endif
+
 static VALUE
 rg_set_color_dim(VALUE self, VALUE dim)
 {
@@ -893,6 +908,11 @@ Init_vte_terminal(VALUE mVte)
     RG_DEF_METHOD(set_scroll_background, 1);
     RG_DEF_METHOD(set_scroll_on_output, 1);
     RG_DEF_METHOD(set_scroll_on_keystroke, 1);
+
+#if VTE_CHECK_VERSION(0, 36, 0)
+    RG_REPLACE_GET_PROPERTY(rewrap_on_resize, 0);
+    RG_REPLACE_SET_PROPERTY(rewrap_on_resize, 1);
+#endif
 
     RG_DEF_METHOD(set_color_dim, 1);
     RG_DEF_METHOD(set_color_bold, 1);
