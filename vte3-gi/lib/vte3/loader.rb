@@ -17,6 +17,10 @@
 module Vte
   class Loader < GObjectIntrospection::Loader
     private
+    def terminal_class
+      @terminal_class ||= @base_module.const_get(:Terminal)
+    end
+
     def load_function_info(info)
       name = info.name
       case name
@@ -29,6 +33,15 @@ module Vte
 
     def post_load(repository, namespace)
       require_libraries
+    end
+
+    def define_enum(info)
+      case info.name
+      when /\ATerminal/
+        self.class.define_class(info.gtype, $POSTMATCH, terminal_class)
+      else
+        super
+      end
     end
 
     def require_libraries
