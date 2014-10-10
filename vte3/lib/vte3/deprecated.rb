@@ -43,4 +43,3 @@ module Vte
     end
   end
 end
-
