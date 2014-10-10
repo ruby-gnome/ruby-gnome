@@ -31,7 +31,7 @@ class TestStructInfo < Test::Unit::TestCase
   end
 
   def test_n_methods
-    assert_equal(62, @info.n_methods)
+    assert_operator(@info.n_methods, :>=, 62)
   end
 
   def test_get_method
