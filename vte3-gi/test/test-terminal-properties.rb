@@ -36,25 +36,25 @@ class TestTerminalProperties < Test::Unit::TestCase
   end
 
   def test_backspace_binding
-    bind = Vte::Terminal::EraseBinding::DELETE_SEQUENCE
+    bind = Vte::TerminalEraseBinding::DELETE_SEQUENCE
     @terminal.backspace_binding = bind
     assert_equal(bind, @terminal.backspace_binding)
   end
 
   def test_cursor_blink_mode
-    cursor_mode = Vte::Terminal::CursorBlinkMode::ON
+    cursor_mode = Vte::TerminalCursorBlinkMode::ON
     @terminal.cursor_blink_mode = cursor_mode
     assert_equal(cursor_mode, @terminal.cursor_blink_mode)
   end
 
   def test_cursor_shape
-    shape = Vte::Terminal::CursorShape::IBEAM
+    shape = Vte::TerminalCursorShape::IBEAM
     @terminal.cursor_shape = shape
     assert_equal(shape, @terminal.cursor_shape)
   end
 
   def test_delete_binding
-    bind = Vte::Terminal::EraseBinding::ASCII_DELETE
+    bind = Vte::TerminalEraseBinding::ASCII_DELETE
     @terminal.delete_binding = bind
     assert_equal(bind, @terminal.delete_binding)
   end
