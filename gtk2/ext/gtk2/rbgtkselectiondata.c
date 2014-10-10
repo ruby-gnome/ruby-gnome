@@ -36,11 +36,11 @@ rbgtk_atom2selectiondata(VALUE type, VALUE size, VALUE src, GdkAtom *gtype,
     GdkAtom ntype = RVAL2ATOM(type);
 
     if(ntype == GDK_SELECTION_TYPE_INTEGER){
-        int *i;
-        i = ALLOC(int);
+        glong *i;
+        i = ALLOC(glong);
         *i = NUM2INT(src);
         dat = i;
-        fmt = sizeof(int) * 8;
+        fmt = 32;
         len = 1;
     } else if(ntype == GDK_SELECTION_TYPE_STRING) {
         dat = (void *)RVAL2CSTR(src);
