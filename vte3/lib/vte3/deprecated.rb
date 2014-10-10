@@ -1,11 +1,13 @@
 module Vte
   extend GLib::Deprecatable
-  define_deprecated_const :TerminalEraseBinding, 'Vte::Terminal::EraseBinding'
-  define_deprecated_const :TerminalCursorBlinkMode, 'Vte::Terminal::CursorBlinkMode'
-  define_deprecated_const :TerminalCursorShape, 'Vte::Terminal::CursorShape'
 
   class Terminal
     extend GLib::Deprecatable
+    define_deprecated_const :EraseBinding, 'Vte::TerminalEraseBinding'
+    define_deprecated_const :CursorBlinkMode, 'Vte::TerminalCursorBlinkMode'
+    define_deprecated_const :CursorShape, 'Vte::TerminalCursorShape'
+    define_deprecated_const :WriteFlags, 'Vte::TerminalWriteFlags'
+
     define_deprecated_method :match_set_cursor_type, :match_set_cursor
     define_deprecated_method :fork_pty, :raise => "Use 'Vte::Pty#fork'."
     define_deprecated_method :using_xft?, :warn => "Don't use this method." do |_self|
