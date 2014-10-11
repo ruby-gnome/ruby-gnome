@@ -14,7 +14,7 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 
-class TestGtkGestureSingle < Test::Unit::TestCase
+class TestGtkGesture < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
@@ -22,19 +22,9 @@ class TestGtkGestureSingle < Test::Unit::TestCase
     @gesture = Gtk::GestureSingle.new
   end
 
-  def test_exclusive
-    @gesture.exclusive = true
-    assert_true(@gesture.exclusive?)
-  end
-
-  def test_touch_only
-    @gesture.touch_only = true
-    assert_true(@gesture.touch_only?)
-  end
-
-  def test_button
-    button_number = 0
-    @gesture.button = button_number
-    assert_equal(@gesture.button, button_number)
+  def test_gesture_window
+    window = Gtk::Window.new
+    @gesture.window = window
+    assert_equal(@gesture.window, window)
   end
 end
