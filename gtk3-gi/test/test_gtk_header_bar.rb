@@ -22,7 +22,7 @@ class TestGtkHeaderBar < Test::Unit::TestCase
     @header_bar = Gtk::HeaderBar.new
   end
 
-  def test_custom_title_accessros
+  def test_custom_title_accessors
     widget = Gtk::EventBox.new
     @header_bar.custom_title = widget
     assert_equal(widget, @header_bar.custom_title)
