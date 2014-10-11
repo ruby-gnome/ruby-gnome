@@ -63,4 +63,18 @@ class TestGtkHeaderBar < Test::Unit::TestCase
     assert_equal([start1, start2, end1, end2],
                  @header_bar.children)
   end
+
+  def test_decolation_layout_accessors
+    only_gtk_version(3, 12, 0)
+    layout = "decolated"
+    @header_bar.decoration_layout = layout
+    assert_equal(@header_bar.decoration_layout, layout)
+    assert_true(@header_bar.decoration_layout_set?)
+  end
+
+  def test_has_subtitle_accessors
+    only_gtk_version(3, 12, 0)
+    @header_bar.has_subtitle = false
+    assert_false(@header_bar.has_subtitle?)
+  end
 end
