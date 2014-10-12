@@ -1,6 +1,7 @@
 # -*- ruby -*-
 
 require "pathname"
+require "find"
 require "tmpdir"
 require "open-uri"
 
@@ -52,6 +53,11 @@ def package(base_name, paths, needless_paths=nil)
   needless_paths ||= @needless_paths
   Dir.glob("#{_dist_dir}/**/{#{needless_paths.join(',')}}") do |needless_path|
     rm_rf(needless_path)
+  end
+  Dir.glob("#{_dist_dir}/**/*/") do |directory|
+    if (Dir.entries(directory) - [".", ".."]).empty?
+      rm_r(directory)
+    end
   end
   sh("tar", "cvfz", archive_name(base_name), _dist_dir)
 ensure
