@@ -68,5 +68,3 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   ]
 end
 package_task.define
-
-Rake::Task["native:gdk3:i386-mingw32"].prerequisites.clear
