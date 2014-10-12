@@ -374,4 +374,63 @@
 #define RVAL2GPERMISSION(o)                (G_PERMISSION(RVAL2GOBJ(o)))
 #define RVAL2GAPPLICATIONFLAGS(o)          (RVAL2GFLAGS(o, G_TYPE_APPLICATION_FLAGS))
 
+/* For GDK. They are temporary. They will be needless after Ruby/GTK3
+ * is based on Ruby/GObjectIntrospection.
+ */
+#define RVAL2GDKCOLOR(o)                   ((GdkColor*)RVAL2BOXED(o, GDK_TYPE_COLOR))
+#define GDKCOLOR2RVAL(o)                   (BOXED2RVAL(o, GDK_TYPE_COLOR))
+
+#define RVAL2GDKRGBA(o)                    ((GdkRGBA*)RVAL2BOXED(o, GDK_TYPE_RGBA))
+#define GDKRGBA2RVAL(o)                    (BOXED2RVAL(o, GDK_TYPE_RGBA))
+
+#define RVAL2GDKMODIFIERTYPE(o)            (RVAL2GFLAGS(o, GDK_TYPE_MODIFIER_TYPE))
+
+#define RVAL2GDKDRAGCONTEXT(o)             (GDK_DRAG_CONTEXT(RVAL2GOBJ(o)))
+
+#define RVAL2GDKSCREEN(o)                  (GDK_SCREEN(RVAL2GOBJ(o)))
+
+#define RVAL2GDKWINDOW(o)                  (GDK_WINDOW(RVAL2GOBJ(o)))
+
+#define GDKEVENT2RVAL(o)                   (BOXED2RVAL(o, GDK_TYPE_EVENT))
+#define RVAL2GDKEVENT(o)                   ((GdkEvent *)RVAL2BOXED(o, GDK_TYPE_EVENT))
+#define GEV2RVAL(ev)                       GDKEVENT2RVAL(ev)
+#define RVAL2GEV(ev)                       RVAL2GDKEVENT(ev)
+
+#define GDKMODIFIERTYPE2RVAL(o)            (GFLAGS2RVAL(o, GDK_TYPE_MODIFIER_TYPE))
+
+#define GDKRECTANGLE2RVAL(o)               (BOXED2RVAL(o, CAIRO_GOBJECT_TYPE_RECTANGLE_INT))
+#define RVAL2GDKRECTANGLE(o)               ((GdkRectangle*)RVAL2BOXED(o, CAIRO_GOBJECT_TYPE_RECTANGLE_INT))
+
+#define RVAL2GDKDISPLAYOBJECT(o)           (GDK_DISPLAY_OBJECT(RVAL2GOBJ(o)))
+
+#define GDKATOM2RVAL(o)                    (BOXED2RVAL(o, GDK_TYPE_ATOM))
+#define RVAL2GDKATOM(o)                    ((GdkAtomData*)RVAL2BOXED(o, GDK_TYPE_ATOM))
+
+#define RVAL2GDKEVENTKEY(o)                ((GdkEventKey*)RVAL2GDKEVENT(o))
+
+#define RVAL2GDKDRAGACTION(o)              (RVAL2GFLAGS(o, GDK_TYPE_DRAG_ACTION))
+
+#define RVAL2GDKGEOMETRY(o)                ((GdkGeometry*)RVAL2BOXED(o, GDK_TYPE_GEOMETRY))
+
+#define RVAL2GDKWINDOWHINTS(o)             (RVAL2GFLAGS(o, GDK_TYPE_WINDOW_HINTS))
+
+#define RVAL2GDKWINDOWEDGE(o)              (RVAL2GENUM(o, GDK_TYPE_WINDOW_EDGE))
+
+#define RVAL2GDKDEVICE(o)                  (GDK_DEVICE(RVAL2GOBJ(o)))
+
+#define RVAL2GDKEVENTMASK(o)               (RVAL2GFLAGS(o, GDK_TYPE_EVENT_MASK))
+#define GDKEVENTMASK2RVAL(o)               (GFLAGS2RVAL(o, GDK_TYPE_EVENT_MASK))
+
+#define RVAL2GDKVISUAL(o)                  (GDK_VISUAL(RVAL2GOBJ(o)))
+
+#define RVAL2GDKDRAGPROTOCOL(o)            (RVAL2GENUM(o, GDK_TYPE_DRAG_PROTOCOL))
+
 #endif /* __RBGTK3CONVERSIONS_H__ */
+
+
+
+
+
+
+
+

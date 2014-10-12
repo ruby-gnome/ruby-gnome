@@ -29,10 +29,39 @@
 
 #include <rbgobject.h>
 #include "rbgtk3conversions.h"
-/* For GDK3. They are temporary. They will be needless after Ruby/GTK3
+
+/* TODO: REMOVE ME */
+/*
+ * They are temporary. They will be needless after Ruby/GTK3
  * is based on Ruby/GObjectIntrospection.
  */
-#include "rbgdk3.h"
+/* From rbgdk3.h - start */
+#include <gdk/gdk.h>
+#ifdef GDK_WINDOWING_X11
+#  include <gdk/gdkx.h>
+#endif
+#ifdef GDK_WINDOWING_WIN32
+#  include <gdk/gdkwin32.h>
+#endif
+
+#define RVAL2GDKPIXBUFGLIST(value) rbgdk_rval2gdkpixbufglist(value)
+#define RVAL2ATOM(atom)            rbgdk_rval2gdkatom(atom)
+#define RVAL2GDKATOMS(value, n)    rbgdk_rval2gdkatoms(value, n)
+
+#define GDK_TYPE_GEOMETRY          (gdk_geometry_get_type())
+#define GDK_TYPE_ATOM              (gdk_atom_get_type())
+
+typedef struct {
+    GdkAtom atom;
+} GdkAtomData;
+
+GType gdk_atom_get_type(void);
+GType gdk_geometry_get_type(void);
+
+GList *rbgdk_rval2gdkpixbufglist(VALUE value);
+GdkAtom rbgdk_rval2gdkatom(VALUE atom);
+GdkAtom *rbgdk_rval2gdkatoms(VALUE value, long *n);
+/* From rbgdk3.h - end */
 
 #define RBGTK_MAJOR_VERSION RBGLIB_MAJOR_VERSION
 #define RBGTK_MINOR_VERSION RBGLIB_MINOR_VERSION

@@ -28,6 +28,146 @@
 #endif
 #include <locale.h>
 
+/* TODO: REMOVE ME */
+/*
+ * They are temporary. They will be needless after Ruby/GTK3
+ * is based on Ruby/GObjectIntrospection.
+ */
+/* From Ruby/GDK3 - start */
+static GdkGeometry*
+geo_copy(const GdkGeometry* geo)
+{
+  GdkGeometry* new_geo;
+  g_return_val_if_fail (geo != NULL, NULL);
+  new_geo = g_new(GdkGeometry, 1);
+  *new_geo = *geo;
+  return new_geo;
+}
+
+GType
+gdk_geometry_get_type(void)
+{
+  static GType our_type = 0;
+  if (our_type == 0)
+    our_type = g_boxed_type_register_static ("GdkGeometry",
+                    (GBoxedCopyFunc)geo_copy,
+                    (GBoxedFreeFunc)g_free);
+  return our_type;
+}
+
+static GdkAtomData *
+gdk_atom_copy(const GdkAtom atom)
+{
+    GdkAtomData* data;
+    data = g_new(GdkAtomData, 1);
+    data->atom = atom;
+    return data;
+}
+
+GType
+gdk_atom_get_type(void)
+{
+    static GType our_type = 0;
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static ("GdkAtomData",
+                                                 (GBoxedCopyFunc)gdk_atom_copy,
+                                                 (GBoxedFreeFunc)g_free);
+    return our_type;
+}
+
+struct rbgdk_rval2gdkatoms_args {
+    VALUE ary;
+    long n;
+    GdkAtom *result;
+};
+
+static VALUE
+rbgdk_rval2gdkatoms_body(VALUE value)
+{
+    long i;
+    struct rbgdk_rval2gdkatoms_args *args = (struct rbgdk_rval2gdkatoms_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result[i] = RVAL2ATOM(RARRAY_PTR(args->ary)[i]);
+
+    return Qnil;
+}
+
+static G_GNUC_NORETURN VALUE
+rbgdk_rval2gdkatoms_rescue(VALUE value)
+{
+    g_free(((struct rbgdk_rval2gdkatoms_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+GdkAtom *
+rbgdk_rval2gdkatoms(VALUE value, long *n)
+{
+    struct rbgdk_rval2gdkatoms_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = g_new(GdkAtom, args.n + 1);
+
+    rb_rescue(rbgdk_rval2gdkatoms_body, (VALUE)&args,
+              rbgdk_rval2gdkatoms_rescue, (VALUE)&args);
+
+    *n = args.n;
+
+    return args.result;
+}
+
+struct rval2gdkpixbufglist_args {
+    VALUE ary;
+    long n;
+    GList *result;
+};
+
+static VALUE
+rbgdk_rval2gdkpixbufglist_body(VALUE value)
+{
+    long i;
+    struct rval2gdkpixbufglist_args *args = (struct rval2gdkpixbufglist_args *)value;
+
+    for (i = 0; i < args->n; i++)
+        args->result = g_list_append(args->result, RVAL2GDKPIXBUF(RARRAY_PTR(args->ary)[i]));
+
+    return Qnil;
+}
+
+static G_GNUC_NORETURN VALUE
+rbgdk_rval2gdkpixbufglist_rescue(VALUE value)
+{
+    g_list_free(((struct rval2gdkpixbufglist_args *)value)->result);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+GList *
+rbgdk_rval2gdkpixbufglist(VALUE value)
+{
+    struct rval2gdkpixbufglist_args args;
+
+    args.ary = rb_ary_to_ary(value);
+    args.n = RARRAY_LEN(args.ary);
+    args.result = NULL;
+
+    rb_rescue(rbgdk_rval2gdkpixbufglist_body, (VALUE)&args,
+              rbgdk_rval2gdkpixbufglist_rescue, (VALUE)&args);
+
+    return args.result;
+}
+
+GdkAtom
+rbgdk_rval2gdkatom(VALUE atom)
+{
+    if (TYPE(atom) == T_STRING)
+        return gdk_atom_intern(RVAL2CSTR(atom), FALSE);
+    return (RVAL2GDKATOM(atom))->atom;
+}
+/* From Ruby/GDK3 - end */
+
 #define RG_TARGET_NAMESPACE mGtk
 
 static VALUE RG_TARGET_NAMESPACE;
