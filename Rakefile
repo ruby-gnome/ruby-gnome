@@ -129,7 +129,6 @@ gtk2_packages = [
 ]
 gtk3_packages = gtk2_packages - ["gtk2"] + ["gdk3", "gtk3"]
 gnome2_packages = gtk2_packages + gtk3_packages + [
-  "goocanvas",
   "gstreamer",
   "gtksourceview2",
   "poppler",
@@ -351,7 +350,6 @@ namespace :gem do
 
   namespace :win32 do
     win32_unsupported_packages = [
-      "goocanvas",
       "vte",
       "vte3",
       "webkit-gtk",
