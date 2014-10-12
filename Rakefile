@@ -133,7 +133,11 @@ gtk2_packages = [
   "gdk_pixbuf2",
   "gtk2",
 ]
-gtk3_packages = gtk2_packages - ["gtk2"] + ["gdk3", "gtk3"]
+gtk3_packages = gtk2_packages - ["gtk2"] + [
+  "cairo-gobject",
+  "gdk3",
+  "gtk3",
+]
 gnome2_packages = gtk2_packages + gtk3_packages + [
   "gstreamer",
   "gtksourceview2",
@@ -141,7 +145,6 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "rsvg2",
   "vte",
   "vte3",
-  "cairo-gobject",
   "gtksourceview3",
   "clutter",
   "clutter-gtk",
