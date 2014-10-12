@@ -27,4 +27,10 @@ class TestGtkGesture < Test::Unit::TestCase
     @gesture.window = window
     assert_equal(@gesture.window, window)
   end
+
+  class TestEnum < self
+    def test_event_sequence_state
+      assert_const_defined(Gtk::EventSequenceState, :DENIED)
+    end
+  end
 end
