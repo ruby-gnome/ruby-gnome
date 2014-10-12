@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# Copyright(C) 2011 Ruby-GNOME2 Project.
+# Copyright(C) 2011-2014 Ruby-GNOME2 Project.
 #
 # This program is licenced under the same license of Ruby-GNOME2.
 
@@ -112,6 +112,10 @@ module GNOME2
         @dependency_configuration = DependencyConfiguration.new(self)
       end
 
+      def cross_platform
+        "#{windows.build_architecture}-mingw32"
+      end
+
       def define_spec
         @spec = Gem::Specification.new do |s|
           s.name                  = @name
@@ -167,9 +171,8 @@ module GNOME2
       end
 
       def define_win32_extension_task
-        cross_platform = nil
         ::Rake::ExtensionTask.new(so_base_name, @spec) do |ext|
-          cross_platform = ext.cross_platform
+          ext.cross_platform = cross_platform
           ext.ext_dir = "ext/#{@name}"
           ext.cross_compile = true
           ext.cross_compiling do |spec|

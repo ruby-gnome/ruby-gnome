@@ -1,6 +1,6 @@
 # -*- ruby -*-
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -106,16 +106,28 @@ module GNOME2
         end
 
         def build_host
-          super || "i686-w64-mingw32"
+          super || guess_build_host
+        end
+
+        def guess_build_host
+          ENV["RUBY_GNOME2_BUILD_HOST"] ||
+            guess_build_host_from_architecture ||
+            "i686-w64-mingw32"
+        end
+
+        def guess_build_host_from_architecture
+          case build_architecture
+          when "x86"
+            "i686-w64-mingw32"
+          when "x64"
+            "x86_64-w64-mingw32"
+          else
+            nil
+          end
         end
 
         def build_architecture
-          case build_host
-          when /\Ai\d86-/
-            "x86_64"
-          else
-            "x64"
-          end
+          ENV["RUBY_GNOME2_BUILD_ARCHITECTURE"] || "x86"
         end
       end
 
