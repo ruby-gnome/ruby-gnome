@@ -197,14 +197,14 @@ module GNOME2
             end
           end
         end
+      end
 
-        def define_win32_download_task
-          GNOME2Win32BinaryDownloadTask.new(@package)
-        end
+      def define_win32_download_task
+        GNOME2Win32BinaryDownloadTask.new(@package)
+      end
 
-        def define_win32_build_task
-          GNOME2Win32BinaryBuildTask.new(@package)
-        end
+      def define_win32_build_task
+        GNOME2Win32BinaryBuildTask.new(@package)
       end
 
       def define_package_tasks
