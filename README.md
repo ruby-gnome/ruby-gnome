@@ -24,7 +24,7 @@ use from Ruby 1.9.x, 2.0.0 and 2.1.
 
 ### ruby-gnome2-all
 
-* ruby-gtk2 + ruby-gtk3 - duplicated libraries
+* ruby-gtk2 + ruby-gtk3
 * Ruby/RSVG:            librsvg 2.8.0 or later
 * Ruby/Poppler:         poppler-glib 0.8.0 or later
 * Ruby/VTE              VTE 0.12.1 or later
@@ -43,22 +43,6 @@ use from Ruby 1.9.x, 2.0.0 and 2.1.
 ### Experimental / Incomplete:
 
 * ...
-
-### Deprecated
-
-* Ruby/PanelApplet:     gnome-panel 2.6.0 or later (deprecated since 0.16.0)
-* Ruby/GConf2:          GConf 2.0.x or later
-* Ruby/GNOME2:          libgnome-2.0.x, libgnomeui-2.0.x or later
-* Ruby/GnomeCanvas2:    libgnomecanvas-2.0.x or later
-* Ruby/GnomePrint:      libgnomeprint-2.8.x or later
-* Ruby/GnomePrintUI:    libgnomeprintui-2.6.x or later
-* Ruby/GnomeVFS:        GnomeVFS 2.0.x or later
-* Ruby/GtkHtml2:        GtkHtml2 2.0.x or later
-* Ruby/GtkGLExt:        GtkGLExt 1.0.3 or later
-* Ruby/Libart2:         libart_lgpl 2.3.12 or later
-* Ruby/GtkSourceView:   GtkSourceView 1.0.1 or later
-* Ruby/Libglade2:       Libglade 2.0.x or later
-* Ruby/GtkMozEmbed:     GtkMozEmbed (Mozilla 1.7.x or FireFox-1.0.x or later)
 
 ## Install
 
@@ -124,39 +108,12 @@ current dependencies are:
   * depends on Ruby/GTK.
 * Ruby/GIO2
   * depends on Ruby/GLib.
-
-### Experimental
-
 * Ruby/GStreamer
   * depends on Ruby/GLib.
 
-### Deprecated
+### Experimental
 
-* Ruby/PanelApplet
-  * depends on Ruby/GTK (since libpanel-applet 2.25) or
-    Ruby/GNOME (before libpanel-applet 2.25).
-* Ruby/Libart
-  * depends on Ruby/GLib(Use mkmf-gnome2.rb only).
-* Ruby/GConf
-  * depends on Ruby/GLib.
-* Ruby/GNOME
-  * depends on Ruby/GnomeCanvas.
-* Ruby/GnomeCanvas
-  * depends on Ruby/GTK, Ruby/Libart.
-* Ruby/GnomeVFS
-  * depends on Ruby/GLib.
-* Ruby/GnomePrint
-  * depends on Ruby/GLib, Ruby/Pango, Ruby/Libart2.
-* Ruby/GnomePrintUI
-  * depends on Ruby/GTK, Ruby/GnomePrint.
-* Ruby/GtkHtml2
-  * depends on Ruby/GTK.
-* Ruby/GtkGLExt
-  * depends on Ruby/GTK, rbogl.
-* Ruby/GtkSourceView
-  * depends on Ruby/GTK.
-* Ruby/Libglade
-  * depends on Ruby/GTK, Ruby/GNOME(optional), REXML(optional).
+* ...
 
 ## Bugs
 
