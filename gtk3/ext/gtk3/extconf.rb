@@ -33,7 +33,7 @@ end
 
 have_func("rb_errinfo")
 
-["glib2", "cairo-gobject", "atk", "pango", "gdk_pixbuf2"].each do |package|
+["glib2", "cairo-gobject", "atk", "pango", "gdk_pixbuf2", "gdk3"].each do |package|
   depended_module_name = package.gsub(/-/, "_")
   directory = "#{package}#{version_suffix}"
   build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{depended_module_name}/#{RUBY_VERSION}"
