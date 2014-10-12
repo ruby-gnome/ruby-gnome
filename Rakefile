@@ -317,7 +317,7 @@ task :release => ["misc/release.rb", :dist] do
     archive_name(base_name)
   end
   ruby("misc/release.rb", sf_user_name, project_id, project_name,
-       package_name, release_name, "README:1", "NEWS",
+       package_name, release_name, "README.md:1", "NEWS",
        *archive_names)
 end
 
