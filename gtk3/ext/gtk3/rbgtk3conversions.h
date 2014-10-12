@@ -366,7 +366,7 @@
 #define RVAL2GTKUIMANAGERITEMTYPE(o)       (RVAL2GFLAGS(o, GTK_TYPE_UI_MANAGER_ITEM_TYPE))
 #define GTKUIMANAGERITEMTYPE2RVAL(o)       (GFLAGS2RVAL(o, GTK_TYPE_UI_MANAGER_ITEM_TYPE))
 
-/* For GIO. They are temporary. They will be needless after Ruby/GDK3
+/* For GIO. They are temporary. They will be needless after Ruby/GTK3
  * is based on Ruby/GObjectIntrospection.
  */
 #define RVAL2GFILE(o)                      (G_FILE(RVAL2GOBJ(o)))
