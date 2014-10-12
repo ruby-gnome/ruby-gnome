@@ -4,6 +4,10 @@
 
 == Ruby-GNOME2 2.2.1: 2014-10-12
 
+It is a Windows package fix release.
+
+== Ruby-GNOME2 2.2.1: 2014-10-12
+
 It is a release that Ruby/GDK3 is migrated to
 Ruby/GObjectIntrospection based bindings.
 
