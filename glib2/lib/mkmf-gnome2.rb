@@ -185,6 +185,17 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_source_dir} #{$INCFLAGS}"
   end
 
+  case RUBY_PLATFORM
+  when /cygwin|mingw|mswin/
+    target_base_dir = Pathname.new(target_source_dir).parent.parent
+    target_binary_base_dir = target_base_dir + "vendor" + "local"
+    if target_binary_base_dir.exist?
+      $INCFLAGS = "-I#{target_binary_base_dir}/include #{$INCFLAGS}"
+      target_pkg_config_dir = target_binary_base_dir + "lib" + "pkgconfig"
+      PKGConfig.add_path(target_pkg_config_dir.to_s)
+    end
+  end
+
   return unless File.exist?(target_build_dir)
   if target_source_dir != target_build_dir
     $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
@@ -200,13 +211,6 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     when /mswin/
       $DLDFLAGS << " /libpath:#{target_build_dir}"
       $libs << " lib#{library_base_name}.lib"
-    end
-    target_base_dir = Pathname.new(target_source_dir).parent.parent
-    target_binary_base_dir = target_base_dir + "vendor" + "local"
-    if target_binary_base_dir.exist?
-      $INCFLAGS = "-I#{target_binary_base_dir}/include #{$INCFLAGS}"
-      target_pkg_config_dir = target_binary_base_dir + "lib" + "pkgconfig"
-      PKGConfig.add_path(target_pkg_config_dir.to_s)
     end
   end
 end
