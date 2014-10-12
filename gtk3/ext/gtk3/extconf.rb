@@ -34,9 +34,9 @@ end
 have_func("rb_errinfo")
 
 ["glib2", "cairo-gobject", "atk", "pango", "gdk_pixbuf2"].each do |package|
-  module_name = package.gsub(/-/, "_")
+  depended_module_name = package.gsub(/-/, "_")
   directory = "#{package}#{version_suffix}"
-  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{module_name}/#{RUBY_VERSION}"
+  build_dir = "#{directory}/tmp/#{RUBY_PLATFORM}/#{depended_module_name}/#{RUBY_VERSION}"
   add_depend_package(package, "#{directory}/ext/#{package}",
                      top_dir.to_s,
                      :top_build_dir => top_build_dir.to_s,
