@@ -167,7 +167,9 @@ module GNOME2
       end
 
       def define_win32_extension_task
+        cross_platform = nil
         ::Rake::ExtensionTask.new(so_base_name, @spec) do |ext|
+          cross_platform = ext.cross_platform
           ext.ext_dir = "ext/#{@name}"
           ext.cross_compile = true
           ext.cross_compiling do |spec|
@@ -195,6 +197,14 @@ module GNOME2
             @cross_compiling_hooks.each do |hook|
               hook.call(spec)
             end
+          end
+        end
+
+        extconf_rb = "ext/#{@name}/extconf.rb"
+        unless File.exist?(extconf_rb)
+          native_task_name = "native:#{@name}:#{cross_platform}"
+          if ::Rake::Task.task_defined?(native_task_name)
+            ::Rake::Task[native_task_name].prerequisites.clear
           end
         end
       end
