@@ -39,7 +39,6 @@ use from Ruby 1.9.x, 2.0.0 and 2.1.
 * Ruby/WebKitGTK:       WebKitGTK+ 1.8.1 or later (for GTK+ 3)
 * Ruby/WebKitGTK2:      WebKitGTK+ 1.8.1 or later (for GTK+ 2)
 * Ruby/GStreamer:       GStreamer 1.0.0 or later
-* Ruby/GooCanvas:       GooCanvas 0.8.0 or later
 
 ### Experimental / Incomplete:
 
@@ -130,8 +129,6 @@ current dependencies are:
 
 * Ruby/GStreamer
   * depends on Ruby/GLib.
-* Ruby/GooCanvas
-  * depends on Ruby/GTK.
 
 ### Deprecated
 

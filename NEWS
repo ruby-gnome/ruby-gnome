@@ -2,7 +2,7 @@
 
 = NEWS
 
-== Ruby-GNOME2 2.2.1: 2014-10-xx
+== Ruby-GNOME2 2.2.1: 2014-10-12
 
 It is a release that Ruby/GDK3 is migrated to
 Ruby/GObjectIntrospection based bindings.
@@ -10,6 +10,8 @@ Ruby/GObjectIntrospection based bindings.
 Some API changes in Ruby/GDK3 are expected but unexpected API
 changes may exist. If you find API change, please report it. If the
 API change provides non Rubyish API, it will be a bug.
+
+Ruby/GooCanvas is removed because we can't maintain it.
 
 === Changes
 
@@ -119,6 +121,10 @@ API change provides non Rubyish API, it will be a bug.
 
   * Improvements
     * Added clutter-gstreamer.rb to support Bundler's autoload.
+
+==== Ruby/GooCanvas
+
+  * Removed.
 
 === Thanks
 

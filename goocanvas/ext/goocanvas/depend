@@ -1,6 +1,0 @@
-install: install-pc
-install-pc:
-	if test -n "$(pkgconfigdir)"; then			\
-	  $(MAKEDIRS) $(pkgconfigdir);				\
-	  $(INSTALL_DATA) ruby-goocanvas.pc $(pkgconfigdir);	\
-	fi
