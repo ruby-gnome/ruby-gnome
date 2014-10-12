@@ -178,7 +178,7 @@ package = GNOME2Package.new do |_package|
         :cc_args => [
           "-std=c99",
         ],
-        :built_file => "lib/gstreamer-1.0/libgstfaac.dll",
+        :built_file => "lib/gstreamer-1.0/libgstmxf.dll",
       },
     },
     # {
