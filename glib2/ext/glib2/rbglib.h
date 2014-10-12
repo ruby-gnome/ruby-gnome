@@ -36,7 +36,7 @@ extern "C" {
 
 #define RBGLIB_MAJOR_VERSION 2
 #define RBGLIB_MINOR_VERSION 2
-#define RBGLIB_MICRO_VERSION 2
+#define RBGLIB_MICRO_VERSION 3
 
 #ifndef RSTRING_PTR
 #  define RSTRING_PTR(s) (RSTRING(s)->ptr)
