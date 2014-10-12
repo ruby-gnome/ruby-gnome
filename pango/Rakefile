@@ -27,7 +27,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
       :native => {
         :build => true,
-        :built_file => "bin/iuc-config",
+        :built_file => "bin/icu-config",
       },
     },
     {
