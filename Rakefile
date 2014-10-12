@@ -148,7 +148,7 @@ gnome2_packages = gnome2_packages.uniq
 
 namespace :dist do
   base_files = ["AUTHORS", "COPYING.LIB", "NEWS",
-                "README", "Rakefile",
+                "README.md", "Rakefile",
                 "exec_make.rb", "extconf.rb", "run-test.rb"]
   desc "make Ruby/GTK2 package"
   task :gtk2 do
