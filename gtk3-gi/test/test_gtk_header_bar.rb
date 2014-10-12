@@ -68,7 +68,7 @@ class TestGtkHeaderBar < Test::Unit::TestCase
     only_gtk_version(3, 12, 0)
     layout = "decolated"
     @header_bar.decoration_layout = layout
-    assert_equal(@header_bar.decoration_layout, layout)
+    assert_equal(layout, @header_bar.decoration_layout)
     assert_true(@header_bar.decoration_layout_set?)
   end
 

@@ -27,6 +27,6 @@ class TestGtkGesturePan < Test::Unit::TestCase
   def test_orientation
     orientation_vertical = Gtk::Orientation::VERTICAL
     @pan.orientation = orientation_vertical
-    assert_equal(@pan.orientation, orientation_vertical)
+    assert_equal(orientation_vertical, @pan.orientation)
   end
 end

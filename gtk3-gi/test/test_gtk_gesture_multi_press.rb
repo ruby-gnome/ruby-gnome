@@ -30,6 +30,6 @@ class TestGtkGestureMultiPress < Test::Unit::TestCase
     # e.g.
     # <[true, #<Gdk::Rectangle:0x7fea823b3818 ptr=0x7fea859d1580 own=true>]> expected but was
     # <[true, #<Gdk::Rectangle:0x7fea823a8e90 ptr=0x7fea859d4700 own=true>]>
-    assert_equal(@press.area?, [true, rectangle])
+    assert_equal([true, rectangle], @press.area?)
   end
 end

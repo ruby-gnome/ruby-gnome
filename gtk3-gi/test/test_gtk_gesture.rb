@@ -25,7 +25,7 @@ class TestGtkGesture < Test::Unit::TestCase
   def test_gesture_window
     window = Gtk::Window.new
     @gesture.window = window
-    assert_equal(@gesture.window, window)
+    assert_equal(window, @gesture.window)
   end
 
   class TestEnum < self
