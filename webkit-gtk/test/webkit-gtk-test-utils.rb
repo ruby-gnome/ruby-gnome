@@ -17,5 +17,7 @@
 require "test-unit"
 require "test/unit/notify"
 
+require "webkit-gtk-test-utils/omissions"
+
 module WebKitGtkTestUtils
 end
