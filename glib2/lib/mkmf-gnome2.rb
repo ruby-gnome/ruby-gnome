@@ -478,6 +478,8 @@ def package_platform
     :fedora
   elsif File.exist?("/etc/redhat-release")
     :redhat
+  elsif File.exist?("/etc/SuSE-release")
+    :suse
   elsif find_executable("brew")
     :homebrew
   elsif find_executable("port")
@@ -495,6 +497,7 @@ def normalize_native_package_info(native_package_info)
   native_package_info ||= {}
   native_package_info = native_package_info.dup
   native_package_info[:fedora] ||= native_package_info[:redhat]
+  native_package_info[:suse] ||= native_package_info[:fedora]
   native_package_info
 end
 
@@ -512,6 +515,8 @@ def install_missing_native_package(native_package_info)
     install_command = "apt-get install -V -y #{package_command_line}"
   when :fedora, :redhat
     install_command = "yum install -y #{package_command_line}"
+  when :suse
+    install_command = "zypper --non-interactive install #{package_command_line}"
   when :homebrew
     need_super_user_priviledge = false
     install_command = "brew install #{package_command_line}"
