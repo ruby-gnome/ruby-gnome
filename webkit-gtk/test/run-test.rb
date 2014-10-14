@@ -27,6 +27,7 @@ gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 webkit_gtk_base = File.join(ruby_gnome2_base, "webkit-gtk")
 
 modules = [
@@ -38,6 +39,7 @@ modules = [
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
   [gobject_introspection_base, "gobject-introspection"],
+  [cairo_gobject_base, "cairo-gobject"],
   [webkit_gtk_base, "webkit-gtk"],
 ]
 modules.each do |target, module_name|
