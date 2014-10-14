@@ -18,7 +18,7 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
-    only_gtk_version(3, 12, 0)
+    only_gtk_version(3, 10, 0)
     @places_sidebar = Gtk::PlacesSidebar.new
   end
 
