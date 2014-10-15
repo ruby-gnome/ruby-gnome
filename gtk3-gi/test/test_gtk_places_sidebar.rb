@@ -56,6 +56,7 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   end
 
   def test_show_enter_location_accesssors
+    only_gtk_version(3, 14, 0)
     @places_sidebar.show_enter_location = true
     assert_true(@places_sidebar.show_enter_location?)
   end
