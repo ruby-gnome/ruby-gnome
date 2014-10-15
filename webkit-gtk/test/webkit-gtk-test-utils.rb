@@ -20,4 +20,20 @@ require "test/unit/notify"
 require "webkit-gtk-test-utils/omissions"
 
 module WebKitGtkTestUtils
+   def later_version?(major, minor, micro=nil)
+     micro ||= 0
+     webkit_gtk_version = [
+       WebKitGtk::MAJOR_VERSION,
+       WebKitGtk::MINOR_VERSION,
+       WebKitGtk::MICRO_VERSION,
+     ]
+     (webkit_gtk_version <=> [major, minor, micro]) >= 0
+   end
+
+   def only_webkit_gtk_version(major, minor, micro=nil)
+     micro ||= 0
+     unless later_version?(major, minor, micro)
+       omit("Require WebKitGtk >= #{major}.#{minor}.#{micro}")
+     end
+   end
 end
