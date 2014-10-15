@@ -23,7 +23,7 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   end
 
   def test_open_flags_accessors
-    open_flag_new_tab = Gtk::PlacesOpenFlags::NEW_TAB
+    open_flag_new_tab = Gtk::PlacesSidebarOpenFlags::NEW_TAB
     @places_sidebar.open_flags = open_flag_new_tab
     assert_equal(open_flag_new_tab, @places_sidebar.open_flags)
   end
