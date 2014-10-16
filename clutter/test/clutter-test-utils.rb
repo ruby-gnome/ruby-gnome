@@ -18,6 +18,13 @@ require "test-unit"
 require "test/unit/notify"
 
 module ClutterTestUtils
+  def only_clutter_version(major, minor, micro=nil)
+    micro ||= 0
+    unless Clutter.check_version?(major, minor, micro)
+      omit("Require Clutter >= #{major}.#{minor}.#{micro}")
+    end
+  end
+
   def omit_if_clutter_color_hash_expect_arguments
     unless Clutter::Color.method(:hash).parameters.empty?
       omit("This test can't be run on this environment.")
