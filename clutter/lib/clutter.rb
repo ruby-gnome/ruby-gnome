@@ -55,6 +55,7 @@ module Clutter
       require "clutter/actor-iter"
       require "clutter/animatable"
       require "clutter/cairo"
+      require "clutter/clutter"
       require "clutter/color"
       require "clutter/event"
       require "clutter/point"
