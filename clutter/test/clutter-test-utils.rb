@@ -18,6 +18,7 @@ require "test-unit"
 require "test/unit/notify"
 
 module ClutterTestUtils
+  private
   def only_clutter_version(major, minor, micro=nil)
     micro ||= 0
     unless Clutter.check_version?(major, minor, micro)
