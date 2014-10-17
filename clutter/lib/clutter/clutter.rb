@@ -19,11 +19,7 @@ module Clutter
     alias_method :check_version_raw, :check_version
     remove_method :check_version
     def check_version?(major, minor, micro=nil)
-      if check_version_raw(major, minor, micro)
-        true
-      else
-        false
-      end
+      check_version_raw(major, minor, micro)
     end
   end
 end
