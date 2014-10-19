@@ -18,12 +18,12 @@ class ClutterColorizeEffectTest < Test::Unit::TestCase
   include ClutterTestUtils
 
   def setup
+    omit_if_clutter_color_hash_expect_arguments
     default_color = Clutter::Color.rgb(255, 0, 0)
     @colorize_effect = Clutter::ColorizeEffect.new(default_color)
   end
 
   def test_tint_accessors
-    omit_if_clutter_color_hash_expect_arguments
     color = Clutter::Color.rgb(127, 127, 0)
     @colorize_effect.tint = color
     assert_equal(color.to_s, @colorize_effect.tint.to_s)
