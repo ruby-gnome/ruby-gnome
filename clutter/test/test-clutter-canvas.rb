@@ -22,6 +22,7 @@ class ClutterCanvasTest < Test::Unit::TestCase
   end
 
   def test_scale_factor
+    only_clutter_version(1, 18, 0)
     scale = 2
     @canvas.scale_factor = scale
     assert_equal(scale, @canvas.scale_factor)
