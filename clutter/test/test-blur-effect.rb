@@ -21,7 +21,7 @@ class ClutterBlurEffectTest < Test::Unit::TestCase
     @blur_effect = Clutter::BlurEffect.new
   end
 
-  def test_bulr_effect_new
+  def test_blur_effect_new
     assert_kind_of(Clutter::Effect, @blur_effect)
   end
 end
