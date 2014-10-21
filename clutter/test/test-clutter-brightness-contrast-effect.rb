@@ -17,9 +17,21 @@
 class ClutterBrightnessContrastEffectTest < Test::Unit::TestCase
   include ClutterTestUtils
 
-  def test_clutter_brightness_contrast_effect
-    assert_nothing_raised do
-      @effect = Clutter::BrightnessContrastEffect.new
-    end
+  def setup
+    @effect = Clutter::BrightnessContrastEffect.new
+  end
+
+  def test_brightness_accessors
+    brightness = 127
+    @effect.brightness = brightness
+    assert_equal([brightness, brightness, brightness],
+                 @effect.brightness)
+  end
+
+  def test_contrast_accessors
+    contrast = 127
+    @effect.contrast = contrast
+    assert_equal([contrast, contrast, contrast],
+                 @effect.contrast)
   end
 end
