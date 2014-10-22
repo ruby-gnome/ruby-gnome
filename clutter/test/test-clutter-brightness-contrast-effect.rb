@@ -21,7 +21,7 @@ class ClutterBrightnessContrastEffectTest < Test::Unit::TestCase
     @effect = Clutter::BrightnessContrastEffect.new
   end
 
-  def test_brightness_accessors
+  def test_brightness
     brightness = 127
     @effect.brightness = brightness
     assert_equal([brightness, brightness, brightness],
@@ -36,7 +36,7 @@ class ClutterBrightnessContrastEffectTest < Test::Unit::TestCase
                  @effect.brightness)
   end
 
-  def test_contrast_accessors
+  def test_contrast
     contrast = 127
     @effect.contrast = contrast
     assert_equal([contrast, contrast, contrast],
