@@ -16,6 +16,7 @@
 
 module Clutter
   class BrightnessContrastEffect
+    alias_method :set_contrast_raw, :set_contrast
     def set_contrast(contrast_all_or_red, contrast_green=nil, contrast_blue=nil)
       if contrast_green.nil? && contrast_blue.nil?
         contrast_all = contrast_all_or_red
@@ -27,6 +28,7 @@ module Clutter
       end
     end
 
+    alias_method :set_brightness_raw, :set_brightness
     def set_brightness(brightness_all_or_red, brightness_green=nil,
                        brightness_blue=nil)
       if brightness_green.nil? && brightness_blue.nil?
