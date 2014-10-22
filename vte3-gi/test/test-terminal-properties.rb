@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestTerminalProperties < Test::Unit::TestCase
+  include VteTestUtils
+
   def setup
     @terminal = Vte::Terminal.new
   end
