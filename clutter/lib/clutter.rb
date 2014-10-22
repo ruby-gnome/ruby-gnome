@@ -154,17 +154,5 @@ module Clutter
         @other_constant_infos << info
       end
     end
-
-    def rubyish_method_name(info)
-      name = super
-      case name
-      when "set_brightness_full"
-        "set_brightness"
-      when "set_contrast_full"
-        "set_contrast"
-      else
-        name
-      end
-    end
   end
 end
