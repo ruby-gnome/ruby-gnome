@@ -21,7 +21,7 @@ module Clutter
         contrast = contrast_all_or_red
       else
         contrast_red = contrast_all_or_red
-        set_contrast_full_raw(contrast_red, contrast_green,
+        set_contrast_full(contrast_red, contrast_green,
                               contrast_blue)
       end
     end
@@ -32,7 +32,7 @@ module Clutter
         brightness = brightness_all_or_red
       else
         brightness_red = brightness_all_or_red
-        set_brightness_full_raw(brightness_red, brightness_green,
+        set_brightness_full(brightness_red, brightness_green,
                                 brightness_blue)
       end
     end
