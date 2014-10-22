@@ -16,3 +16,12 @@
 
 require "test-unit"
 require "test/unit/notify"
+
+module VteTestUtils
+  private
+  def omit_if_not_respond(instance, method)
+    unless instance.respond_to?(method.to_sym)
+      omit("#{instance.class}##{method} is not respond.")
+    end
+  end
+end
