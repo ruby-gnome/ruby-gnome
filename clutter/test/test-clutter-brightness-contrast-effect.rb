@@ -26,7 +26,9 @@ class ClutterBrightnessContrastEffectTest < Test::Unit::TestCase
     @effect.brightness = brightness
     assert_equal([brightness, brightness, brightness],
                  @effect.brightness)
+  end
 
+  def test_brightness_rgb_params
     brightness_red = 120
     brightness_green = 200
     brightness_blue = 250
@@ -41,7 +43,9 @@ class ClutterBrightnessContrastEffectTest < Test::Unit::TestCase
     @effect.contrast = contrast
     assert_equal([contrast, contrast, contrast],
                  @effect.contrast)
+  end
 
+  def test_contrast_rgb_params
     contrast_red = 250
     contrast_green = 120
     contrast_blue = 100
