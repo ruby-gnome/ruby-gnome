@@ -82,6 +82,12 @@ class TestTerminalProperties < Test::Unit::TestCase
     assert_true(@terminal.pointer_autohide?)
   end
 
+  def test_rewrap_on_resize
+    omit_if_not_respond(@terminal, :rewrap_on_resize?)
+    @terminal.rewrap_on_resize = false
+    assert_false(@terminal.rewrap_on_resize?)
+  end
+
   def test_scroll_background
     scroll = true
     @terminal.scroll_background = scroll
