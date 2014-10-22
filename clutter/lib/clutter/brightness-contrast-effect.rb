@@ -17,7 +17,7 @@
 module Clutter
   class BrightnessContrastEffect
     def set_contrast(contrast_all_or_red, contrast_green=nil, contrast_blue=nil)
-      unless contrast_green
+      if contrast_green.nil? && contrast_blue.nil?
         contrast_all = contrast_all_or_red
         set_contrast(contrast_all)
       else
@@ -29,7 +29,7 @@ module Clutter
 
     def set_brightness(brightness_all_or_red, brightness_green=nil,
                        brightness_blue=nil)
-      unless brightness_green
+      if brightness_green.nil? && brightness_blue.nil?
         brightness_all = brightness_all_or_red
         set_brightness(brightness_all)
       else
