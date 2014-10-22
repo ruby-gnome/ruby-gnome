@@ -35,7 +35,7 @@ class TestTerminal < Test::Unit::TestCase
   end
 
   def test_rewrap_on_resize
-    omit_if_not_respond(@terminal, "rewrap_on_resize?")
+    omit_if_not_respond(@terminal, :rewrap_on_resize?)
     @terminal.rewrap_on_resize = false
     assert_false(@terminal.rewrap_on_resize?)
   end
