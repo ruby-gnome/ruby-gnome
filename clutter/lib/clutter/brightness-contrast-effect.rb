@@ -18,7 +18,8 @@ module Clutter
   class BrightnessContrastEffect
     def set_contrast(contrast_all_or_red, contrast_green=nil, contrast_blue=nil)
       unless contrast_green
-        contrast = contrast_all_or_red
+        contrast_all = contrast_all_or_red
+        set_contrast(contrast_all)
       else
         contrast_red = contrast_all_or_red
         set_contrast_full(contrast_red, contrast_green,
@@ -29,7 +30,8 @@ module Clutter
     def set_brightness(brightness_all_or_red, brightness_green=nil,
                        brightness_blue=nil)
       unless brightness_green
-        brightness = brightness_all_or_red
+        brightness_all = brightness_all_or_red
+        set_brightness(brightness_all)
       else
         brightness_red = brightness_all_or_red
         set_brightness_full(brightness_red, brightness_green,
