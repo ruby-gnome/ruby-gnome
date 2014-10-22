@@ -19,9 +19,15 @@ require "test/unit/notify"
 
 module VteTestUtils
   private
-  def omit_if_not_respond(instance, method)
-    unless instance.respond_to?(method.to_sym)
-      omit("#{instance.class}##{method} is not respond.")
+  def omit_if_not_respond(instance, method_name_or_sym)
+    case method_name_or_sym.class
+    when String
+      method_sym = method_name_or_sym.to_sym
+    else
+      method_sym = method_name_or_sym
+    end
+    unless instance.respond_to?(method_sym)
+      omit("#{instance.class}##{method_sym} is not respond.")
     end
   end
 end
