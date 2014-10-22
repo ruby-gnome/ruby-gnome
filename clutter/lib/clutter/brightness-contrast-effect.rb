@@ -20,7 +20,7 @@ module Clutter
     def set_contrast(contrast_all_or_red, contrast_green=nil, contrast_blue=nil)
       if contrast_green.nil? && contrast_blue.nil?
         contrast_all = contrast_all_or_red
-        set_contrast(contrast_all)
+        set_contrast_raw(contrast_all)
       else
         contrast_red = contrast_all_or_red
         set_contrast_full(contrast_red, contrast_green,
@@ -33,7 +33,7 @@ module Clutter
                        brightness_blue=nil)
       if brightness_green.nil? && brightness_blue.nil?
         brightness_all = brightness_all_or_red
-        set_brightness(brightness_all)
+        set_brightness_raw(brightness_all)
       else
         brightness_red = brightness_all_or_red
         set_brightness_full(brightness_red, brightness_green,
