@@ -31,7 +31,7 @@ EOS
     # TODO: use original Cogl::INVALID_HANDLE
     # original value: NULL
     # ref: https://developer.gnome.org/cogl/1.18/cogl-General-API.html#COGL-INVALID-HANDLE:CAPS
-    # It should create cogl gi based binding?
+    # It should create gi based cogl binding?
     @cogl_invalid_handle = 0
   end
 
