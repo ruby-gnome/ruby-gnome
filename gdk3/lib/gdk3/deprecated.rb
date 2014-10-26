@@ -180,6 +180,11 @@ module Gdk
       define_deprecated_enums "Gdk::WindowWindowClass"
     end
 
+    class Class
+      extend GLib::Deprecatable
+      define_deprecated_enums "Gdk::WindowWindowClass"
+    end
+
     class WMDecoration
       extend GLib::Deprecatable
       define_deprecated_flags "Gdk::WMDecoration"
