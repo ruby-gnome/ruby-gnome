@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -24,8 +24,8 @@ class TestGdkWindowAttr < Test::Unit::TestCase
     assert_equal([
                    100,
                    100,
-                   Gdk::Window::Class::INPUT_ONLY,
-                   Gdk::Window::Type::TEMP,
+                   Gdk::WindowWindowClass::INPUT_ONLY,
+                   Gdk::WindowType::TEMP,
                  ],
                  [attrs.width, attrs.height, attrs.wclass, attrs.window_type])
   end
