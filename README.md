@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/ruby-gnome2/ruby-gnome2.svg?branch=master)](https://travis-ci.org/ruby-gnome2/ruby-gnome2)
+
 ## Ruby-GNOME2 -- Ruby bindings for GNOME-2.x
 
 This is a set of bindings for the GNOME-2.x and GNOME-3.x libraries to
