@@ -7,7 +7,7 @@
 It is a bug fix release.
 
 It's recommended that you upgrade if your application uses thread and
-runs on Ruby 2.1 or later.
+runs on Ruby 2.0 or later.
 
 === Changes
 
@@ -19,7 +19,7 @@ runs on Ruby 2.1 or later.
 ==== Ruby/GLib2
 
   * Fixes
-    * Fixed infinite loop bug on Ruby 2.1 or later.
+    * Fixed infinite loop bug on Ruby 2.0 or later.
       [ruby-gnome2-devel-ja] [Reported by Toshi Hatsune]
 
 ==== Ruby/GDK3
