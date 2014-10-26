@@ -237,10 +237,6 @@ module Gdk
 
     def define_enum(info)
       case info.name
-      when /\AWindowWindow/
-        self.class.define_class(info.gtype, $POSTMATCH, window_class)
-      when /\AWindow/
-        self.class.define_class(info.gtype, $POSTMATCH, window_class)
       when "EventType"
         self.class.register_constant_rename_map("2BUTTON_PRESS",
                                                 "BUTTON2_PRESS")

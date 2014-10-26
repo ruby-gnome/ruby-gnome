@@ -134,17 +134,63 @@ module Gdk
 
   class Window
     extend GLib::Deprecatable
-    define_deprecated_flags :AttributesType, 'WA'
-    define_deprecated_enums :Edge, 'EDGE'
-    define_deprecated_enums :FilterReturn, 'FILTER'
-    define_deprecated_enums :Gravity, 'GRAVITY'
-    define_deprecated_flags :Hints, 'HINT'
-    define_deprecated_flags :ModifierType
-    define_deprecated_enums :Type
-    define_deprecated_enums :TypeHint, 'TYPE_HINT'
-    define_deprecated_const :WindowClass, 'Gdk::Window::Class'
-    define_deprecated_flags :WMDecoration, 'DECOR'
-    define_deprecated_flags :WMFunction, 'FUNC'
+
+    class AttributesType
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::WindowAttributesType"
+    end
+
+    class Edge
+      extend GLib::Deprecatable
+      define_deprecated_enums "Gdk::WindowEdge"
+    end
+
+    class FilterReturn
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::FilterReturn"
+    end
+
+    class Gravity
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::Gravity"
+    end
+
+    class Hints
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::WindowHints"
+    end
+
+    class ModifierType
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::ModifierType"
+    end
+
+    class Type
+      extend GLib::Deprecatable
+      define_deprecated_enums "Gdk::WindowType"
+    end
+
+    class TypeHint
+      extend GLib::Deprecatable
+      define_deprecated_enums "Gdk::WindowTypeHint"
+    end
+
+    class WindowClass
+      extend GLib::Deprecatable
+      define_deprecated_enums "Gdk::WindowWindowClass"
+    end
+
+    class WMDecoration
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::WMDecoration"
+    end
+
+    class WMFunction
+      extend GLib::Deprecatable
+      define_deprecated_flags "Gdk::WMFunction"
+    end
+
+    define_deprecated_const :PARENT_RELATIVE, "Gdk::PARENT_RELATIVE"
     define_deprecated_method :clear, :warn => "Don't use this method."
     define_deprecated_method :clear_area, :warn => "Don't use this method."
     define_deprecated_method :internal_paint_info, :raise => "Don't use this method."
