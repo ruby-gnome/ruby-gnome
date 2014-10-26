@@ -70,8 +70,8 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     info.result = 0;
 
     g_static_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE), NULL);
-#ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL2
-    rb_thread_call_without_gvl2(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
+#ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
+    rb_thread_call_without_gvl(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
 #else
     rb_thread_blocking_region(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
 #endif
