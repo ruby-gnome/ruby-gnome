@@ -175,6 +175,32 @@ class ClutterActorTest < Test::Unit::TestCase
     # Cogl::Matrix type is returned by Cogl::Matrix.init_identity API in clutter 1.18
   end
 
+  class TestMargin < self
+    def test_margin_top
+      margin = 3.0
+      @actor.margin_top = margin
+      assert_equal(margin, @actor.margin_top)
+    end
+
+    def test_margin_right
+      margin = 5.0
+      @actor.margin_right = margin
+      assert_equal(margin, @actor.margin_right)
+    end
+
+    def test_margin_left
+      margin = 3.5
+      @actor.margin_left = margin
+      assert_equal(margin, @actor.margin_left)
+    end
+
+    def test_margin_bottom
+      margin = 4.5
+      @actor.margin_bottom = margin
+      assert_equal(margin, @actor.margin_bottom)
+    end
+  end
+
   class TestEnum < self
     def test_allocation_flags
       assert_const_defined(Clutter::AllocationFlags, :DELEGATE_LAYOUT)
