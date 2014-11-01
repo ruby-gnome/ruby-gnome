@@ -40,6 +40,7 @@ class ClutterActorTest < Test::Unit::TestCase
   end
 
   def test_rotation_angle
+    only_clutter_version(1, 12, 0)
     rotate_angle = 0.5
     @actor.set_rotation_angle(Clutter::RotateAxis::X_AXIS, rotate_angle)
     assert_equal(rotate_angle,
@@ -88,6 +89,7 @@ class ClutterActorTest < Test::Unit::TestCase
   end
 
   def test_easing_mode
+    only_clutter_version(1, 12, 0)
     mode = Clutter::AnimationMode::EASE
     @actor.easing_mode = mode
     assert_equal(mode, @actor.easing_mode)
@@ -123,12 +125,14 @@ class ClutterActorTest < Test::Unit::TestCase
   end
 
   def test_z_position_accessors
+    only_clutter_version(1, 12, 0)
     actor_z_position = 55
     @actor.z_position = actor_z_position
     assert_equal(actor_z_position, @actor.z_position)
   end
 
   def test_pivot_point_accessors
+    only_clutter_version(1, 12, 0)
     pivot_x = 1.0
     pivot_y = 3.0
     @actor.set_pivot_point(pivot_x, pivot_y)
@@ -136,6 +140,7 @@ class ClutterActorTest < Test::Unit::TestCase
   end
 
   def test_pivot_point_z_accessors
+    only_clutter_version(1, 12, 0)
     pivot_z = 5.0
     @actor.pivot_point_z = pivot_z
     assert_equal(pivot_z, @actor.pivot_point_z)
@@ -216,6 +221,7 @@ class ClutterActorTest < Test::Unit::TestCase
     end
 
     def test_content_repeat
+      only_clutter_version(1, 12, 0)
       assert_const_defined(Clutter::ContentRepeat, :BOTH)
     end
 
