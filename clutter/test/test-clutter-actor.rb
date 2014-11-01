@@ -95,10 +95,7 @@ class ClutterActorTest < Test::Unit::TestCase
 
   def test_pango_context
     @actor.create_pango_context
-    # TODO: use assert_kind_of to assert Pango::Context
-    assert_nothing_raised do
-      @actor.pango_context
-    end
+    assert_kind_of(Pango::Context, @actor.pango_context)
   end
 
   def test_width_accessors
