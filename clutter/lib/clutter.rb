@@ -16,6 +16,7 @@
 
 require "gobject-introspection"
 require "cairo-gobject"
+require "pango"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"
@@ -26,7 +27,6 @@ GObjectIntrospection.prepend_typelib_path(vendor_girepository_dir)
 
 if vendor_dir.exist?
   require "atk"
-  require "pango"
   require "gdk_pixbuf2"
 end
 
