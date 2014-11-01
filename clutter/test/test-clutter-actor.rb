@@ -160,6 +160,7 @@ class ClutterActorTest < Test::Unit::TestCase
   end
 
   def test_scale_z_accessors
+    only_clutter_version(1, 12, 0)
     scale_z = 4.5
     @actor.scale_z = scale_z
     assert_equal(scale_z, @actor.scale_z)
