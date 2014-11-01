@@ -83,6 +83,7 @@ class ClutterActorTest < Test::Unit::TestCase
   end
 
   def test_easing_delay
+    omit_on_travis_ci
     delay_msec = 300
     @actor.easing_delay = delay_msec
     assert_equal(delay_msec, @actor.easing_delay)
