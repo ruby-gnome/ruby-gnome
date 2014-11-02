@@ -84,6 +84,7 @@ class ClutterActorTest < Test::Unit::TestCase
 
   def test_easing_delay
     delay_msec = 300
+    @actor.save_easing_state
     @actor.easing_delay = delay_msec
     assert_equal(delay_msec, @actor.easing_delay)
   end
