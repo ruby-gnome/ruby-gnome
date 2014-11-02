@@ -22,7 +22,11 @@ require "gnome2/rake/package-task"
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/Clutter is a Ruby binding of Clutter."
   package.description = "Ruby/Clutter is a Ruby binding of Clutter."
-  package.dependency.gem.runtime = ["cairo-gobject", "gobject-introspection", "pango"]
+  package.dependency.gem.runtime = [
+    "cairo-gobject",
+    "gobject-introspection",
+    "pango"
+  ]
   package.dependency.gem.development = ["test-unit-notify"]
   package.windows.packages = []
   package.windows.dependencies = []
