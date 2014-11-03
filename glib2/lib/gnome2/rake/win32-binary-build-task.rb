@@ -46,7 +46,7 @@ class GNOME2Win32BinaryBuildTask
           ENV["PKG_CONFIG_PATH"] = pkg_config_path.collect do |path|
             File.expand_path(path)
           end.join(":")
-          ENV["PKG_CONFIG_LIBDIR"] = rcairo_win32_pkgconfig_path
+          ENV["PKG_CONFIG_LIBDIR"] = rcairo_windows_pkgconfig_path
         end
 
         prepare_task_names << "pkg_config_for_build"
@@ -214,25 +214,25 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
     "#{glib2_binary_base_dir}/lib"
   end
 
-  def rcairo_win32_dir
+  def rcairo_windows_dir
     build_architecture = @package.windows.build_architecture
     @package.project_root_dir.parent + "rcairo.#{build_architecture}"
   end
 
-  def rcairo_win32_binary_base_dir
-    rcairo_win32_dir + "vendor" + "local"
+  def rcairo_windows_binary_base_dir
+    rcairo_windows_dir + "vendor" + "local"
   end
 
-  def rcairo_win32_pkgconfig_path
-    "#{rcairo_win32_binary_base_dir}/lib/pkgconfig"
+  def rcairo_windows_pkgconfig_path
+    "#{rcairo_windows_binary_base_dir}/lib/pkgconfig"
   end
 
-  def rcairo_win32_include_path
-    "#{rcairo_win32_binary_base_dir}/include"
+  def rcairo_windows_include_path
+    "#{rcairo_windows_binary_base_dir}/include"
   end
 
-  def rcairo_win32_lib_path
-    "#{rcairo_win32_binary_base_dir}/lib"
+  def rcairo_windows_lib_path
+    "#{rcairo_windows_binary_base_dir}/lib"
   end
 
   def cc(package)
@@ -249,7 +249,7 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
       include_paths += [glib2_include_path]
     end
     include_paths += [
-      rcairo_win32_include_path,
+      rcairo_windows_include_path,
       dist_dir + 'include',
     ]
     cppflags = include_paths.collect do |path|
@@ -264,7 +264,7 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
       library_paths += [glib2_lib_path]
     end
     library_paths += [
-      rcairo_win32_lib_path,
+      rcairo_windows_lib_path,
       dist_dir + 'lib',
     ]
     ldflags = library_paths.collect do |path|
@@ -276,7 +276,7 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
   def cmake_root_paths
     paths = [
       "/usr/#{@package.windows.build_host}",
-      rcairo_win32_binary_base_dir.to_path,
+      rcairo_windows_binary_base_dir.to_path,
     ]
     @package.windows.build_dependencies.each do |package|
       paths << "#{@package.project_root_dir}/#{package}/vendor/local"
