@@ -70,6 +70,7 @@ class ClutterFlowLayoutTest < Test::Unit::TestCase
   end
 
   def test_snap_to_grid_accessors
+    only_clutter_version(1, 16, 0)
     @flow_layout.snap_to_grid = false
     assert_false(@flow_layout.snap_to_grid?)
   end
