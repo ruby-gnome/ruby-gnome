@@ -216,7 +216,12 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
 
   def rcairo_windows_dir
     build_architecture = @package.windows.build_architecture
-    @package.project_root_dir.parent + "rcairo.#{build_architecture}"
+    if build_architecture == "x64"
+      suffix = "win64"
+    else
+      suffix = "win32"
+    end
+    @package.project_root_dir.parent + "rcairo.#{suffix}"
   end
 
   def rcairo_windows_binary_base_dir
