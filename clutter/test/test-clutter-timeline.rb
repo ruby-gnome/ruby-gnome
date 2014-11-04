@@ -52,7 +52,7 @@ class ClutterTimelineTest < Test::Unit::TestCase
   end
 
   def test_progress_mode_accessors
-    animation_mode = Clutter::AnimationMode::CUBIC_BEZIER
+    animation_mode = Clutter::AnimationMode::EASE_IN_QUAD
     @timeline.progress_mode = animation_mode
     assert_equal(animation_mode, @timeline.progress_mode)
   end
