@@ -92,6 +92,8 @@ module Clutter
       @base_module.const_set("Keys", @keys_module)
       @threads_module = Module.new
       @base_module.const_set("Threads", @threads_module)
+      @feature_module = Module.new
+      @base_module.const_set("Feature", @feature_module)
     end
 
     def post_load(repository, namespace)
@@ -141,6 +143,8 @@ module Clutter
         # ignore
       when /\Athreads_/
         define_module_function(@threads_module, $POSTMATCH, info)
+      when /\Afeature_/
+        define_module_function(@feature_module, $POSTMATCH, info)
       else
         super
       end
