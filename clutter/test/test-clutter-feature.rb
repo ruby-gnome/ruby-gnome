@@ -17,7 +17,6 @@
 class ClutterFeatureTest < Test::Unit::TestCase
   include ClutterTestUtils
 
-
   def test_feature_avaliable
     feature_flag = Clutter::FeatureFlags::SYNC_TO_VBLANK
     assert_boolean(Clutter::Feature.available(feature_flag))
