@@ -352,7 +352,7 @@ module GObjectIntrospection
     def rubyish_method_name(function_info, options={})
       name = function_info.name
       if options[:prefix]
-        name.gsub(/\A#{Regexp.escape(options[:prefix])}/, "")
+        name = name.gsub(/\A#{Regexp.escape(options[:prefix])}/, "")
       end
       return_type = function_info.return_type
       if return_type.tag == GObjectIntrospection::TypeTag::BOOLEAN
