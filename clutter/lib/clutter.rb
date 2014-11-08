@@ -61,6 +61,7 @@ module Clutter
       require "clutter/event"
       require "clutter/point"
       require "clutter/text"
+      require "clutter/text-buffer"
       require "clutter/threads"
     end
   end
