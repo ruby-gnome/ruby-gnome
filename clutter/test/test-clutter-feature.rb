@@ -19,12 +19,12 @@ class ClutterFeatureTest < Test::Unit::TestCase
 
   def test_feature_avaliable
     feature_flag = Clutter::FeatureFlags::SYNC_TO_VBLANK
-    assert_boolean(Clutter::Feature.available(feature_flag))
+    assert_boolean(Clutter::Feature.available?(feature_flag))
   end
 
   def test_feature_get_all
     assert_nothing_raised do
-      Clutter::Feature.get_all
+      Clutter::Feature.all
     end
   end
 
