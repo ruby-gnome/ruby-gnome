@@ -32,6 +32,5 @@ module Clutter
     def emit_inserted_text(position, string)
       emit_inserted_text_raw(position, string, string.length)
     end
-
   end
 end
