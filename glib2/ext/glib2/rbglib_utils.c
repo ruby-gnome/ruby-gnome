@@ -293,6 +293,11 @@ Init_glib_utils(void)
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_USER_DIRECTORY, "G_");
 #endif
 
+#if GLIB_CHECK_VERSION(2, 30, 0)
+    G_DEF_CLASS(G_TYPE_FORMAT_SIZE_FLAGS,
+                "FormatSizeFlags", RG_TARGET_NAMESPACE);
+#endif
+
     RG_DEF_SMETHOD(application_name, 0);
     RG_DEF_SMETHOD(set_application_name, 1);
     RG_DEF_SMETHOD(prgname, 0);

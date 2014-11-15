@@ -59,9 +59,16 @@ rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 
 #if GLIB_CHECK_VERSION(2, 30, 0)
 static VALUE
-rbglib_m_format_size(G_GNUC_UNUSED VALUE self, VALUE size)
+rbglib_m_format_size(int argc, VALUE *argv, VALUE self)
 {
-    return CSTR2RVAL_FREE(g_format_size(NUM2UINT(size)));
+    VALUE rb_size, rb_flag;
+
+    rb_scan_args(argc, argv, "11", &rb_size, &rb_flag);
+    if (NIL_P(rb_flag))
+      return CSTR2RVAL_FREE(g_format_size(NUM2UINT(rb_size)));
+    else
+      return CSTR2RVAL_FREE(g_format_size_full(NUM2UINT(rb_size),
+                                               NUM2INT(rb_flag)));
 }
 #endif
 
@@ -101,6 +108,6 @@ Init_glib_fileutils(void)
 #endif
 #if GLIB_CHECK_VERSION(2, 30, 0)
     rbg_define_singleton_method(mGLib, "format_size",
-                                rbglib_m_format_size, 1);
+                                rbglib_m_format_size, -1);
 #endif
 }
