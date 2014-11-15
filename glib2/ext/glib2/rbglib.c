@@ -912,14 +912,14 @@ So they occur "cross-thread violation".
 static gpointer
 my_malloc(gsize n_bytes)
 {
-    /* Should we rescue NoMemoryError? */ 
+    /* Should we rescue NoMemoryError? */
     return ruby_xmalloc(n_bytes);
 }
 
 static gpointer
 my_realloc(gpointer mem, gsize n_bytes)
 {
-    /* Should we rescue NoMemoryError? */ 
+    /* Should we rescue NoMemoryError? */
     return ruby_xrealloc(mem, n_bytes);
 }
 
