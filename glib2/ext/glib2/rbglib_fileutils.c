@@ -57,6 +57,14 @@ rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 }
 #endif
 
+#if GLIB_CHECK_VERSION(2, 30, 0)
+static VALUE
+rbglib_m_format_size(G_GNUC_UNUSED VALUE self, VALUE size)
+{
+    return CSTR2RVAL_FREE(g_format_size(NUM2UINT(size)));
+}
+#endif
+
 void
 Init_glib_fileutils(void)
 {
@@ -90,5 +98,9 @@ Init_glib_fileutils(void)
 #if GLIB_CHECK_VERSION(2, 16, 0)
     rbg_define_singleton_method(mGLib, "format_size_for_display",
 			      rbglib_m_format_size_for_display, 1);
+#endif
+#if GLIB_CHECK_VERSION(2, 30, 0)
+    rbg_define_singleton_method(mGLib, "format_size",
+                                rbglib_m_format_size, 1);
 #endif
 }
