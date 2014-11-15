@@ -29,7 +29,7 @@ static VALUE
 rg_s_init(VALUE self)
 {
 #ifdef HAVE_G_THREAD_INIT
-#if defined G_THREADS_ENABLED && !GLIB_CHECK_VERSION(2, 32, 0)
+#if defined(G_THREADS_ENABLED) && !GLIB_CHECK_VERSION(2, 32, 0)
     g_thread_init(NULL);
 #endif
 #endif
