@@ -61,14 +61,14 @@ rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 static VALUE
 rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
-    VALUE rb_size, rb_flag;
+    VALUE rb_size, rb_options;
 
-    rb_scan_args(argc, argv, "11", &rb_size, &rb_flag);
-    if (NIL_P(rb_flag)) {
+    rb_scan_args(argc, argv, "11", &rb_size, &rb_options);
+    if (NIL_P(rb_options)) {
       return CSTR2RVAL_FREE(g_format_size(NUM2UINT(rb_size)));
-    } else if (TYPE(rb_flag) == RUBY_T_HASH) {
+    } else if (TYPE(rb_options) == RUBY_T_HASH) {
       VALUE flags;
-      rbg_scan_options(rb_flag,
+      rbg_scan_options(rb_options,
                        "flags", &flags,
                        NULL);
 
