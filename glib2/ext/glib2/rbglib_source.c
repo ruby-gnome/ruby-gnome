@@ -147,6 +147,23 @@ void        g_source_set_callback_indirect  (GSource *source,
                                              GSourceCallbackFuncs *callback_funcs);
 */
 
+#if GLIB_CHECK_VERSION(2, 36, 0)
+static VALUE
+rg_ready_time(VALUE self)
+{
+    gint64 ready_time;
+    ready_time = g_source_get_ready_time(_SELF(self));
+    return LL2NUM(ready_time);
+}
+
+static VALUE
+rg_set_ready_time(VALUE self, VALUE ready_time)
+{
+    g_source_set_ready_time(_SELF(self), NUM2LL(ready_time));
+    return self;
+}
+#endif
+
 static VALUE
 rg_add_poll(VALUE self, VALUE fd)
 {
@@ -203,6 +220,10 @@ Init_glib_source(void)
 #endif
     RG_DEF_METHOD(context, 0);
     RG_DEF_METHOD(set_callback, 0);
+#if GLIB_CHECK_VERSION(2, 36, 0)
+    RG_DEF_METHOD(ready_time, 0);
+    RG_REPLACE_SET_PROPERTY(ready_time, 1);
+#endif
     RG_DEF_METHOD(add_poll, 1);
     RG_DEF_METHOD(remove_poll, 1);
 #if GLIB_CHECK_VERSION(2, 28, 0)

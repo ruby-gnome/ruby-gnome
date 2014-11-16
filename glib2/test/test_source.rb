@@ -38,4 +38,15 @@ class TestGLibSource < Test::Unit::TestCase
     source.name = source_name
     assert_equal(source_name, source.name)
   end
+
+  def test_ready_time
+    only_glib_version(2, 36, 0)
+    context = GLib::MainContext.default
+    source = GLib::Idle.source_new
+    source.attach(context)
+
+    ready_time = 5
+    source.ready_time = 5
+    assert_equal(ready_time, source.ready_time)
+  end
 end
