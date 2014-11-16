@@ -136,7 +136,7 @@ rg_set_callback(VALUE self)
     G_RELATIVE(self, func);
     g_source_set_callback(_SELF(self),
                           (GSourceFunc)source_func,
-                          (gpointer)func, 
+                          (gpointer)func,
                           (GDestroyNotify)NULL);
     return self;
 }
@@ -198,7 +198,7 @@ gboolean    g_source_remove_by_user_data    (gpointer user_data);
 void
 Init_glib_source(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib);
 
     id_call = rb_intern("call");
 
