@@ -32,18 +32,18 @@ class TestGLibFileUtils < Test::Unit::TestCase
 
     sub_test_case "flags" do
       sub_test_case ":iec_units" do
-    def test_format_size_with_IEC_UNITS
-      assert_equal("1.0 KiB",
-                   GLib.format_size(1024, :flags => :iec_units))
-      assert_equal("10.0 KiB",
-                   GLib.format_size(1024 * 10, :flags => :iec_units))
-      assert_equal("1.0 MiB",
-                   GLib.format_size(1024 * 1024, :flags => :iec_units))
-      assert_equal("1.5 MiB",
-                   GLib.format_size(1024 * 1024 * 1.5, :flags => :iec_units))
-      assert_equal("1.0 GiB",
-                   GLib.format_size(1024 * 1024 * 1024, :flags => :iec_units))
-    end
+        def test_format_size_with_IEC_UNITS
+          assert_equal("1.0 KiB",
+                       GLib.format_size(1024, :flags => :iec_units))
+          assert_equal("10.0 KiB",
+                       GLib.format_size(1024 * 10, :flags => :iec_units))
+          assert_equal("1.0 MiB",
+                       GLib.format_size(1024 * 1024, :flags => :iec_units))
+          assert_equal("1.5 MiB",
+                       GLib.format_size(1024 * 1024 * 1.5, :flags => :iec_units))
+          assert_equal("1.0 GiB",
+                       GLib.format_size(1024 * 1024 * 1024, :flags => :iec_units))
+        end
       end
     end
   end
