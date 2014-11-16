@@ -214,7 +214,7 @@ Init_glib_source(void)
     RG_DEF_METHOD(set_can_recurse, 1);
     RG_DEF_METHOD_P(can_recurse, 0);
     RG_DEF_METHOD(id, 0);
-#if GLIB_CHECK_VERSION(2, 26,0)
+#if GLIB_CHECK_VERSION(2, 26, 0)
     RG_DEF_METHOD(name, 0);
     RG_REPLACE_SET_PROPERTY(name, 1);
 #endif
