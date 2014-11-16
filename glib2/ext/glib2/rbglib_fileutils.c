@@ -66,7 +66,7 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     rb_scan_args(argc, argv, "11", &rb_size, &rb_options);
     if (NIL_P(rb_options)) {
       return CSTR2RVAL_FREE(g_format_size(NUM2UINT(rb_size)));
-    } else if (TYPE(rb_options) == RUBY_T_HASH) {
+    } else {
       VALUE rb_flags;
       rbg_scan_options(rb_options,
                        "flags", &rb_flags,
@@ -74,8 +74,6 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
       return CSTR2RVAL_FREE(g_format_size_full(NUM2UINT(rb_size),
                                                RVAL2GFORMATSIZEFLAGS(rb_flags)));
-    } else {
-      rb_raise(rb_eArgError, "Invalid arguments.");
     }
 }
 #endif
