@@ -29,9 +29,8 @@ class TestGLibSource < Test::Unit::TestCase
 
   def test_name
     only_glib_version(2, 26, 0)
-    context = GLib::MainContext.default
+
     source = GLib::Idle.source_new
-    source.attach(context)
     assert_nil(source.name)
 
     source_name = "glib source"
@@ -41,9 +40,8 @@ class TestGLibSource < Test::Unit::TestCase
 
   def test_ready_time
     only_glib_version(2, 36, 0)
-    context = GLib::MainContext.default
+
     source = GLib::Idle.source_new
-    source.attach(context)
 
     ready_time = 5
     source.ready_time = 5
