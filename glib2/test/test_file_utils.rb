@@ -27,20 +27,14 @@ class TestGLibFileUtils < Test::Unit::TestCase
     only_glib_version(2, 30, 0)
 
     assert_equal("1.0 KiB",
-                 GLib.format_size(1024,
-                                  GLib::FormatSizeFlags::IEC_UNITS))
-
+                 GLib.format_size(1024, :flags => :iec_units))
     assert_equal("10.0 KiB",
-                 GLib.format_size(1024 * 10,
-                                  GLib::FormatSizeFlags::IEC_UNITS))
+                 GLib.format_size(1024 * 10, :flags => :iec_units))
     assert_equal("1.0 MiB",
-                 GLib.format_size(1024 * 1024,
-                                  GLib::FormatSizeFlags::IEC_UNITS))
+                 GLib.format_size(1024 * 1024, :flags => :iec_units))
     assert_equal("1.5 MiB",
-                 GLib.format_size(1024 * 1024 * 1.5,
-                                  GLib::FormatSizeFlags::IEC_UNITS))
+                 GLib.format_size(1024 * 1024 * 1.5, :flags => :iec_units))
     assert_equal("1.0 GiB",
-                 GLib.format_size(1024 * 1024 * 1024,
-                                  GLib::FormatSizeFlags::IEC_UNITS))
+                 GLib.format_size(1024 * 1024 * 1024, :flags => :iec_units))
   end
 end
