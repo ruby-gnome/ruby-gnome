@@ -18,11 +18,17 @@ class TestGLibFileUtils < Test::Unit::TestCase
       only_glib_version(2, 30, 0)
     end
 
-    def test_format_size
+    def test_kb
       assert_equal("1.0 kB", GLib.format_size(1000))
       assert_equal("10.0 kB", GLib.format_size(1000 * 10))
+    end
+
+    def test_mb
       assert_equal("1.0 MB", GLib.format_size(1000 * 1000))
       assert_equal("1.5 MB", GLib.format_size(1000 * 1000 * 1.5))
+    end
+
+    def test_gb
       assert_equal("1.0 GB", GLib.format_size(1000 * 1000 * 1000))
     end
 
