@@ -37,7 +37,7 @@ class TestGLibFileUtils < Test::Unit::TestCase
         end
 
         def test_kib
-          assert_equal("1.0 KiB", format_size(1024)
+          assert_equal("1.0 KiB", format_size(1024))
         end
 
         def test_mib
