@@ -64,6 +64,13 @@ rg_attach(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
+rg_destroy(VALUE self)
+{
+    g_source_destroy(_SELF(self));
+    return self;
+}
+
+static VALUE
 rg_destroyed_p(VALUE self)
 {
     return CBOOL2RVAL(g_source_is_destroyed(_SELF(self)));
@@ -208,6 +215,7 @@ Init_glib_source(void)
                     "CONTINUE", CBOOL2RVAL(G_SOURCE_CONTINUE));
 
     RG_DEF_METHOD(attach, -1);
+    RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD_P(destroyed, 0);
     RG_DEF_METHOD(set_priority, 1);
     RG_DEF_METHOD(priority, 0);

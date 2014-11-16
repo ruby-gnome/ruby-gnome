@@ -31,6 +31,15 @@ class TestGLibSource < Test::Unit::TestCase
     end
   end
 
+  def test_destroy
+    context = GLib::MainContext.new
+    source = GLib::Idle.source_new
+    id = source.attach(context)
+    assert_not_nil(context.find_source(id))
+    source.destroy
+    assert_nil(context.find_source(id))
+  end
+
   def test_name
     only_glib_version(2, 26, 0)
 
