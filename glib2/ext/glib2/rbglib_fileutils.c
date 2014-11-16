@@ -67,13 +67,13 @@ rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
     if (NIL_P(rb_options)) {
       return CSTR2RVAL_FREE(g_format_size(NUM2UINT(rb_size)));
     } else if (TYPE(rb_options) == RUBY_T_HASH) {
-      VALUE flags;
+      VALUE rb_flags;
       rbg_scan_options(rb_options,
-                       "flags", &flags,
+                       "flags", &rb_flags,
                        NULL);
 
       return CSTR2RVAL_FREE(g_format_size_full(NUM2UINT(rb_size),
-                                               RVAL2GFORMATSIZEFLAGS(flags)));
+                                               RVAL2GFORMATSIZEFLAGS(rb_flags)));
     } else {
       rb_raise(rb_eArgError, "Invalid arguments.");
     }
