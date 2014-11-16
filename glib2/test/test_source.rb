@@ -22,9 +22,13 @@ class TestGLibSource < Test::Unit::TestCase
   def test_time
     context = GLib::MainContext.default
     source = GLib::Idle.source_new
-    source.attach(context)
-    time = source.time
-    assert_operator(0, :<, time)
+    id = source.attach(context)
+    begin
+      time = source.time
+      assert_operator(0, :<, time)
+    ensure
+      GLib::Source.remove(id)
+    end
   end
 
   def test_name
