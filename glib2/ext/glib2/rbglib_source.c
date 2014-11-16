@@ -101,6 +101,21 @@ rg_id(VALUE self)
     return UINT2NUM(g_source_get_id(_SELF(self)));
 }
 
+#if GLIB_CHECK_VERSION(2, 26, 0)
+static VALUE
+rg_name(VALUE self)
+{
+    return CSTR2RVAL(g_source_get_name(_SELF(self)));
+}
+
+static VALUE
+rg_set_name(VALUE self, VALUE name)
+{
+    g_source_set_name(_SELF(self), RVAL2CSTR(name));
+    return self;
+}
+#endif
+
 static VALUE
 rg_context(VALUE self)
 {
@@ -182,6 +197,10 @@ Init_glib_source(void)
     RG_DEF_METHOD(set_can_recurse, 1);
     RG_DEF_METHOD_P(can_recurse, 0);
     RG_DEF_METHOD(id, 0);
+#if GLIB_CHECK_VERSION(2, 26,0)
+    RG_DEF_METHOD(name, 0);
+    RG_REPLACE_SET_PROPERTY(name, 1);
+#endif
     RG_DEF_METHOD(context, 0);
     RG_DEF_METHOD(set_callback, 0);
     RG_DEF_METHOD(add_poll, 1);

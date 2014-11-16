@@ -26,4 +26,16 @@ class TestGLibSource < Test::Unit::TestCase
     time = source.time
     assert_operator(0, :<, time)
   end
+
+  def test_name
+    only_glib_version(2, 26, 0)
+    context = GLib::MainContext.default
+    source = GLib::Idle.source_new
+    source.attach(context)
+    assert_nil(source.name)
+
+    source_name = "glib source"
+    source.name = source_name
+    assert_equal(source_name, source.name)
+  end
 end
