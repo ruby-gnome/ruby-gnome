@@ -59,7 +59,7 @@ rg_s_getenv(G_GNUC_UNUSED VALUE self, VALUE variable)
 static VALUE
 rg_s_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
 {
-    return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable), 
+    return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable),
                                RVAL2CSTR_ACCEPT_NIL(value),
                                RVAL2CBOOL(overwrite)));
 }
@@ -277,9 +277,9 @@ static VALUE
 rg_s_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     return CBOOL2RVAL(glib_major_version > NUM2UINT(major) ||
-                      (glib_major_version == NUM2UINT(major) && 
+                      (glib_major_version == NUM2UINT(major) &&
                        glib_minor_version > NUM2UINT(minor)) ||
-                      (glib_major_version == NUM2UINT(major) && 
+                      (glib_major_version == NUM2UINT(major) &&
                        glib_minor_version == NUM2UINT(minor) &&
                        glib_micro_version >= NUM2UINT(micro)));
 }
