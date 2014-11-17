@@ -18,4 +18,32 @@ class TestGdkKeyval < Test::Unit::TestCase
   def test_consntant_name
     assert_equal("a".unpack("c")[0], Gdk::Keyval::KEY_a)
   end
+  
+  def test_is_lower
+    assert_equal(Gdk::Keyval.is_lower(Gdk::Keyval::KEY_A), false)
+    assert_equal(Gdk::Keyval.is_lower(Gdk::Keyval::KEY_a), true)
+  end
+
+  def test_is_upper
+    assert_equal(Gdk::Keyval.is_upper(Gdk::Keyval::KEY_A), true)
+    assert_equal(Gdk::Keyval.is_upper(Gdk::Keyval::KEY_a), false)
+  end
+  
+  def test_is_name
+    assert_equal(Gdk::Keyval.name(Gdk::Keyval::KEY_A), 'A')
+  end
+  
+  def test_to_lower
+    assert_equal(Gdk::Keyval.to_lower(Gdk::Keyval::KEY_A), 97)
+    assert_equal(Gdk::Keyval.to_lower(Gdk::Keyval::KEY_a), 97)
+  end
+  
+  def test_to_upper
+    assert_equal(Gdk::Keyval.to_upper(Gdk::Keyval::KEY_a), 65)
+    assert_equal(Gdk::Keyval.to_upper(Gdk::Keyval::KEY_A), 65)
+  end
+  
+  def test_to_unicode
+    assert_equal(Gdk::Keyval.to_unicode(Gdk::Keyval::KEY_Adiaeresis), 196)
+  end
 end
