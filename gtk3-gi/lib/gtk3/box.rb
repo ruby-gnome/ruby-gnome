@@ -28,13 +28,5 @@ module Gtk
       padding = options[:padding] || 0
       pack_start_raw(child, expand, fill, padding)
     end
-    
-    alias_method :pack_end_raw, :pack_end
-    def pack_end(child, options={})
-      expand  = options[:expand]  || false
-      fill    = options[:fill]    || false
-      padding = options[:padding] || 0
-      pack_end_raw(child, expand, fill, padding)
-    end
   end
 end
