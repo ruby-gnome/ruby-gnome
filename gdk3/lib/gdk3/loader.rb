@@ -218,6 +218,28 @@ module Gdk
         else
           define_method(info, Cairo::Context, name)
         end
+      when /\Akeyval_/
+        name = $POSTMATCH
+        case name
+        when "convert_case"
+          define_module_function(Gdk::Keyval, "convert_case", info)
+        when "from_name"
+          define_module_function(Gdk::Keyval, 'from_name', info)
+        when "is_lower"
+          define_module_function(Gdk::Keyval, 'is_lower', info)
+        when "is_upper"
+          define_module_function(Gdk::Keyval, 'is_upper', info)
+        when "name"
+          define_module_function(Gdk::Keyval, 'name', info)
+        when "to_lower"
+          define_module_function(Gdk::Keyval, 'to_lower', info)
+        when "to_unicode"
+          define_module_function(Gdk::Keyval, 'to_unicode', info)
+        when "to_upper"
+          define_module_function(Gdk::Keyval, 'to_upper', info)
+        when "unicode_to_keyval"
+          define_module_function(Gdk::Keyval, 'unicode_to_keyval', info)
+        end
       else
         super
       end
