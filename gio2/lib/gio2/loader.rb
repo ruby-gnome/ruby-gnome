@@ -155,7 +155,7 @@ module Gio
       else
         case name
         when /\Acan_be_/
-          method_name = "#{$1}?"
+          method_name = "#{$POSTMATCH}?"
         when /\Ais_/
           method_name = "#{$POSTMATCH}?"
         when /\Aget_/
