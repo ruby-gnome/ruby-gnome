@@ -218,6 +218,9 @@ module Gdk
         else
           define_method(info, Cairo::Context, name)
         end
+      when /\Akeyval_/
+        name = rubyish_method_name(info, :prefix => "keyval_")
+        define_module_function(@keyval_module, name, info)
       else
         super
       end

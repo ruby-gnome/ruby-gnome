@@ -18,4 +18,59 @@ class TestGdkKeyval < Test::Unit::TestCase
   def test_consntant_name
     assert_equal("a".unpack("c")[0], Gdk::Keyval::KEY_a)
   end
+
+  sub_test_case "#lower?" do
+    def test_lower
+      assert_true(Gdk::Keyval.lower?(Gdk::Keyval::KEY_a))
+    end
+
+    def test_upper
+      assert_false(Gdk::Keyval.lower?(Gdk::Keyval::KEY_A))
+    end
+  end
+
+  sub_test_case "#upper?" do
+    def test_lower
+      assert_false(Gdk::Keyval.upper?(Gdk::Keyval::KEY_a))
+    end
+
+    def test_upper
+      assert_true(Gdk::Keyval.upper?(Gdk::Keyval::KEY_A))
+    end
+  end
+
+  def test_name
+    assert_equal("A", Gdk::Keyval.name(Gdk::Keyval::KEY_A))
+  end
+
+  sub_test_case "#to_lower" do
+    def test_lower
+      assert_equal(Gdk::Keyval::KEY_a,
+                   Gdk::Keyval.to_lower(Gdk::Keyval::KEY_a))
+    end
+
+    def test_upper
+      assert_equal(Gdk::Keyval::KEY_a,
+                   Gdk::Keyval.to_lower(Gdk::Keyval::KEY_A))
+    end
+  end
+
+  sub_test_case "#to_upper" do
+    def test_lower
+      assert_equal(Gdk::Keyval::KEY_A,
+                   Gdk::Keyval.to_upper(Gdk::Keyval::KEY_a))
+    end
+
+    def test_upper
+      assert_equal(Gdk::Keyval::KEY_A,
+                   Gdk::Keyval.to_upper(Gdk::Keyval::KEY_A))
+    end
+  end
+
+  sub_test_case "#to_unicode" do
+    def test_to_unicode
+      assert_equal("\u02D8", # BREVE
+                   [Gdk::Keyval.to_unicode(Gdk::Keyval::KEY_breve)].pack("U"))
+    end
+  end
 end
