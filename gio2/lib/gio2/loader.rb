@@ -108,12 +108,9 @@ module Gio
         end
       when /\Aresources_/
         load_function_info_resources(info)
-      when "dbus_generate_guid"
-        @dbus_module.define_singleton_method(:generate_guid) do
-          info.invoke(:arguments => [to_s])
-        end
-      when /\Adbus_is/
-        load_function_info_dbus(info)
+      when /\Adbus_/
+        name = rubyish_method_name(info, :prefix => "dbus_")
+        define_module_function(@dbus_module, name, info)
       else
         super
       end
@@ -185,22 +182,6 @@ module Gio
     def load_function_info_resources(info)
       method_name = info.name.gsub(/\Aresources_/, "")
       receiver = @resources_module
-      validate = lambda do |arguments|
-        validate_arguments(info, "#{receiver}.#{method_name}", arguments)
-      end
-      receiver.define_singleton_method(method_name) do |*arguments|
-        validate.call(arguments)
-        info.invoke(:arguments => arguments)
-      end
-    end
-
-    def load_function_info_dbus(info)
-      name = info.name.gsub(/\Adbus_/, "")
-      receiver = @dbus_module
-      case name
-      when /\Ais_/
-        method_name = "#{$POSTMATCH}?"
-      end
       validate = lambda do |arguments|
         validate_arguments(info, "#{receiver}.#{method_name}", arguments)
       end
