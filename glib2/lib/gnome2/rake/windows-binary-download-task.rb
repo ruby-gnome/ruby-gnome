@@ -6,7 +6,7 @@ require 'open-uri'
 require 'rubygems'
 require 'mechanize'
 
-class GNOME2Win32BinaryDownloadTask
+class GNOME2WindowsBinaryDownloadTask
   include Rake::DSL
 
   URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries/win32"

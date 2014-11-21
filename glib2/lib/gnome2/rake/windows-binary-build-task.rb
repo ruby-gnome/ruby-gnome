@@ -5,7 +5,7 @@
 require "open-uri"
 require "pathname"
 
-class GNOME2Win32BinaryBuildTask
+class GNOME2WindowsBinaryBuildTask
   include Rake::DSL
 
   def initialize(package)
