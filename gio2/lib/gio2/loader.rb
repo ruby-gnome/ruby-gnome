@@ -107,7 +107,8 @@ module Gio
           end
         end
       when /\Aresources_/
-        load_function_info_resources(info)
+        name = rubyish_method_name(info, :prefix => "resources_")
+        define_module_function(@resources_module, name, info)
       when /\Adbus_/
         name = rubyish_method_name(info, :prefix => "dbus_")
         define_module_function(@dbus_module, name, info)
@@ -175,19 +176,6 @@ module Gio
         @content_type_class.__send__(:define_method, method_name) do
           info.invoke(:arguments => [to_s])
         end
-      end
-    end
-
-
-    def load_function_info_resources(info)
-      method_name = info.name.gsub(/\Aresources_/, "")
-      receiver = @resources_module
-      validate = lambda do |arguments|
-        validate_arguments(info, "#{receiver}.#{method_name}", arguments)
-      end
-      receiver.define_singleton_method(method_name) do |*arguments|
-        validate.call(arguments)
-        info.invoke(:arguments => arguments)
       end
     end
 
