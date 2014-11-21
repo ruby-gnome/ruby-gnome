@@ -357,8 +357,14 @@ module GObjectIntrospection
       return_type = function_info.return_type
       if return_type.tag == GObjectIntrospection::TypeTag::BOOLEAN
         case name
-        when /\A(?:is|get_is|get)_/
+        when /\A(?:is|get_is)_/
           "#{$POSTMATCH}?"
+        when /\Aget_/
+          if function_info.n_in_args.zero?
+            "#{$POSTMATCH}?"
+          else
+            name
+          end
         when /\A(?:has|use)_/
           "#{name}?"
         else
