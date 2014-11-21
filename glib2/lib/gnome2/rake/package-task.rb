@@ -14,8 +14,8 @@ require "gnome2/rake/package"
 require "gnome2/rake/external-package"
 require "gnome2/rake/source-download-task"
 require "gnome2/rake/native-binary-build-task"
-require "gnome2/rake/win32-binary-download-task"
-require "gnome2/rake/win32-binary-build-task"
+require "gnome2/rake/windows-binary-download-task"
+require "gnome2/rake/windows-binary-build-task"
 
 module GNOME2
   module Rake
