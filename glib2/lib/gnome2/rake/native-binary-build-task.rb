@@ -96,6 +96,8 @@ module GNOME2
              "PKG_CONFIG_PATH=#{pkg_config_path}",
              "--prefix=#{dist_dir}",
              *package.native.configure_args) or exit(false)
+          env = []
+          env << "PKG_CONFIG_PATH=#{pkg_config_path}"
           common_make_args = []
           common_make_args << "GLIB_COMPILE_SCHEMAS=glib-compile-schemas"
           build_make_args = common_make_args.dup
@@ -104,8 +106,8 @@ module GNOME2
             make_n_jobs = ENV["MAKE_N_JOBS"]
             build_make_args << "-j#{make_n_jobs}" if make_n_jobs
           end
-          sh("nice", "make", *build_make_args) or exit(false)
-          sh("make", "install", *install_make_args) or exit(false)
+          sh("env", *env, "nice", "make", *build_make_args) or exit(false)
+          sh("env", *env, "make", "install", *install_make_args) or exit(false)
         end
       end
 
