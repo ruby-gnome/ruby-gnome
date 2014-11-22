@@ -387,7 +387,8 @@ namespace :gem do
                 "native",
                 "gem",
               ]
-              ruby("-S", "rake", "RUBY_CC_VERSION=2.0.0:2.1.1", *tasks)
+              ruby_cc_version = ENV["RUBY_CC_VERSION"] || "2.0.0:2.1.5"
+              ruby("-S", "rake", "RUBY_CC_VERSION=#{ruby_cc_version}", *tasks)
             end
           end
         end
