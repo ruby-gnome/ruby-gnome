@@ -74,16 +74,20 @@ package_task.define
 
 namespace :native do
   namespace :"gobject-introspection" do
-    desc "Make g-ir-scanner workable for Windows on non Windows"
-    task :cross do
-      g_ir_scanner_dir = package_task.native.absolute_binary_dir
-      g_ir_scanner_dir += "lib/gobject-introspection/giscanner"
+    g_ir_scanner_dir = package_task.native.absolute_binary_dir
+    g_ir_scanner_dir += "lib/gobject-introspection/giscanner"
+    patched_path = g_ir_scanner_dir + "patched"
+    file patched_path.to_s do
       Dir.chdir(g_ir_scanner_dir.to_s) do
         patch = "#{package_task.package.patches_dir}/cross-g-ir-scanner.diff"
         sh("patch -p2 < #{patch}")
         rm_f(Dir.glob("*.{pyc,pyo}"))
       end
+      touch(patched_path)
     end
+
+    desc "Make g-ir-scanner workable for Windows on non Windows"
+    task :cross => patched_path
   end
 
   namespace :builder do
