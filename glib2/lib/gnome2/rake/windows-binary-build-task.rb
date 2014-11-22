@@ -15,20 +15,20 @@ class GNOME2WindowsBinaryBuildTask
 
   private
   def define
-    namespace :win32 do
+    namespace :windows do
       namespace :builder do
         task :before
         define_build_tasks
         build_tasks = build_packages.collect do |package|
-          "win32:builder:build:#{package.name}"
+          "windows:builder:build:#{package.name}"
         end
         task :build => build_tasks
         task :after
       end
       desc "Build Windows binaries"
-      task :build => ["win32:builder:before",
-                      "win32:builder:build",
-                      "win32:builder:after"]
+      task :build => ["windows:builder:before",
+                      "windows:builder:build",
+                      "windows:builder:after"]
     end
   end
 
@@ -56,7 +56,7 @@ class GNOME2WindowsBinaryBuildTask
       end
 
       full_prepare_task_names = prepare_task_names.collect do |name|
-        "win32:builder:build:prepare:#{name}"
+        "windows:builder:build:prepare:#{name}"
       end
       task :prepare => full_prepare_task_names
 
@@ -68,7 +68,7 @@ class GNOME2WindowsBinaryBuildTask
           if built_file
             built_file = dist_dir + built_file
             file built_file.to_s do
-              Rake::Task["win32:builder:build:prepare"].invoke
+              Rake::Task["windows:builder:build:prepare"].invoke
               Rake::Task[download_task].invoke
               build_package_task_body(package)
             end
@@ -81,7 +81,7 @@ class GNOME2WindowsBinaryBuildTask
           task :after
         end
 
-        prefix = "win32:builder:build:#{package.name}"
+        prefix = "windows:builder:build:#{package.name}"
         desc "Build #{package.label} and install it into #{dist_dir}."
         task package.name => [
           "#{prefix}:before",
@@ -215,12 +215,7 @@ SET(CMAKE_FIND_ROOT_PATH #{cmake_root_paths.join(" ")})
   end
 
   def rcairo_windows_dir
-    build_architecture = @package.windows.build_architecture
-    if build_architecture == "x64"
-      suffix = "win64"
-    else
-      suffix = "win32"
-    end
+    suffix = @package.windows.build_architecture_suffix
     @package.project_root_dir.parent + "rcairo.#{suffix}"
   end
 

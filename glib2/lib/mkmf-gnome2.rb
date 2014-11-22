@@ -109,8 +109,8 @@ if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   $CFLAGS += " -I#{include_path} "
 end
 
-def setup_win32(target_name, base_dir=nil)
-  checking_for(checking_message("Win32 OS")) do
+def setup_windows(target_name, base_dir=nil)
+  checking_for(checking_message("Windows")) do
     case RUBY_PLATFORM
     when /cygwin|mingw|mswin/
       import_library_name = "libruby-#{target_name}.a"
@@ -130,6 +130,8 @@ def setup_win32(target_name, base_dir=nil)
     end
   end
 end
+# For backward compatibility
+alias_method :setup_win32, :setup_windows
 
 def find_gem_spec(package)
   begin
@@ -446,7 +448,36 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
 end
 
 def check_cairo(options={})
+  is_windows = (/mingw|cygwin|mswin/ === RUBY_PLATFORM)
+
   rcairo_source_dir = options[:rcairo_source_dir]
+  if rcairo_source_dir.nil?
+    suffix = nil
+    if is_windows
+      case RUBY_PLATFORM
+      when /\Ai386-/
+        suffix = "win32"
+      when /\Ax64-/
+        suffix = "win64"
+      end
+    end
+    rcairo_source_base_dir = "rcairo"
+    rcairo_source_base_dir << ".#{suffix}" if suffix
+    top_dir = options[:top_dir] || Pathname.pwd
+    if top_dir
+      rcairo_source_dir = top_dir + rcairo_source_base_dir
+    else
+      top_dir_candidates = [Pathname.pwd, Pathname.pwd.parent]
+      top_dir_candidates.each do |candiate|
+        rcairo_source_dir_candidate = candidate + rcairo_source_base_dir
+        if rcairo_source_dir_candidate.exist?
+          rcairo_source_dir = rcairo_source_dir_candidate
+          break
+        end
+      end
+    end
+  end
+
   if rcairo_source_dir and !File.exist?(rcairo_source_dir)
     rcairo_source_dir = nil
   end
@@ -456,7 +487,7 @@ def check_cairo(options={})
   end
 
   unless rcairo_source_dir.nil?
-    if /mingw|cygwin|mswin/ =~ RUBY_PLATFORM
+    if is_windwos
       options = {}
       build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
       if File.exist?(File.join(rcairo_source_dir, build_dir))

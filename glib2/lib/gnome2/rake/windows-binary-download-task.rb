@@ -9,7 +9,7 @@ require 'mechanize'
 class GNOME2WindowsBinaryDownloadTask
   include Rake::DSL
 
-  URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries/win32"
+  URL_BASE = "http://ftp.gnome.org/pub/gnome/binaries"
   def initialize(package)
     @package = package
     define
@@ -17,7 +17,7 @@ class GNOME2WindowsBinaryDownloadTask
 
   private
   def define
-    namespace :win32 do
+    namespace :windows do
       namespace :downloader do
         task :before
 
@@ -45,7 +45,7 @@ class GNOME2WindowsBinaryDownloadTask
         end
 
         download_tasks = download_tasks.collect do |task|
-          "win32:downloader:download:#{task}"
+          "windows:downloader:download:#{task}"
         end
         desc "download Windows binaries into #{dist_dir}"
         task :download => download_tasks
@@ -53,9 +53,9 @@ class GNOME2WindowsBinaryDownloadTask
         task :after
       end
       desc "download Windows binaries"
-      task :download => ["win32:downloader:before",
-                         "win32:downloader:download",
-                         "win32:downloader:after"]
+      task :download => ["windows:downloader:before",
+                         "windows:downloader:download",
+                         "windows:downloader:after"]
     end
   end
 
@@ -71,8 +71,13 @@ class GNOME2WindowsBinaryDownloadTask
     @package.windows.dependencies
   end
 
+  def build_architecture_suffix
+    @package.windows.build_architecture_suffix
+  end
+
   def download_package(package)
-    version_page_url = "#{URL_BASE}/#{package}"
+    suffix = build_architecture_suffix
+    version_page_url = "#{URL_BASE}/#{suffix}/#{package}"
     version_page = agent.get(version_page_url)
     latest_version_link = version_page.links.sort_by do |link|
       if /\A(\d+\.\d+)\/\z/ =~ link.href
@@ -86,8 +91,8 @@ class GNOME2WindowsBinaryDownloadTask
     latest_version_page = latest_version_link.click
     latest_version = latest_version_page.links.collect do |link|
       case link.href
-      when /#{escaped_package}_([\d\.\-]+)_win32\.zip\z/,
-           /#{escaped_package}-([\d\.\-]+)-win32\.zip\z/, # old
+      when /#{escaped_package}_([\d\.\-]+)_#{suffix}\.zip\z/,
+           /#{escaped_package}-([\d\.\-]+)-#{suffix}\.zip\z/, # old
            /#{escaped_package}-([\d\.\-]+)\.zip\z/ # old
         version = $1
         normalized_version = version.split(/[\.\-]/).collect do |component|
@@ -107,8 +112,8 @@ class GNOME2WindowsBinaryDownloadTask
     escaped_latest_version = Regexp.escape(latest_version)
     latest_version_page.links.each do |link|
       case link.href
-      when /#{escaped_package}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/,
-           /#{escaped_package}(?:-dev)?-#{escaped_latest_version}-win32\.zip\z/, # old
+      when /#{escaped_package}(?:-dev)?_#{escaped_latest_version}_#{suffix}\.zip\z/,
+           /#{escaped_package}(?:-dev)?-#{escaped_latest_version}-#{suffix}\.zip\z/, # old
            /#{escaped_package}(?:-dev)?-#{escaped_latest_version}\.zip\z/ # old
         click_zip_link(link)
       end
@@ -116,6 +121,7 @@ class GNOME2WindowsBinaryDownloadTask
   end
 
   def download_dependency(dependency)
+    suffix = build_architecture_suffix
     dependency_version = "any"
     dependency_version_re = /[\d\.\-]+/
     if dependency.is_a?(Array)
@@ -127,7 +133,7 @@ class GNOME2WindowsBinaryDownloadTask
     dependencies_page = agent.get(dependencies_url)
     latest_version = dependencies_page.links.collect do |link|
       case link.href
-      when /\A#{escaped_dependency}_(#{dependency_version_re})_win32\.zip\z/
+      when /\A#{escaped_dependency}_(#{dependency_version_re})_#{suffix}\.zip\z/
         version = $1
         [version.split(/[\.\-]/).collect {|component| component.to_i}, version]
       else
@@ -145,7 +151,7 @@ class GNOME2WindowsBinaryDownloadTask
     escaped_latest_version = Regexp.escape(latest_version)
     dependencies_page.links.each do |link|
       case link.href
-      when /\A#{escaped_dependency}(?:-dev)?_#{escaped_latest_version}_win32\.zip\z/
+      when /\A#{escaped_dependency}(?:-dev)?_#{escaped_latest_version}_#{suffix}\.zip\z/
         click_zip_link(link)
       end
     end

@@ -1,14 +1,13 @@
 # -*- ruby -*-
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2-raketask'
+require 'gnome2/rake/package-task'
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/GtkSourceView2 is a Ruby binding of gtksourceview-2.x."
-  _package.description = "Ruby/GtkSourceView2 is a Ruby binding of gtksourceview-2.x."
-  _package.dependency.gem.runtime = ["gtk2"]
-  _package.win32.packages = ["gtksourceview"]
-  _package.win32.dependencies = ["libxml2"]
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/GtkSourceView2 is a Ruby binding of gtksourceview-2.x."
+  package.description = "Ruby/GtkSourceView2 is a Ruby binding of gtksourceview-2.x."
+  package.dependency.gem.runtime = ["gtk2"]
+  package.windows.packages = ["gtksourceview"]
+  package.windows.dependencies = ["libxml2"]
 end
-package.define_tasks
-
+package_task.define

@@ -1,22 +1,22 @@
 # -*- ruby -*-
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2-raketask'
+require 'gnome2/rake/package-task'
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/GStreamer is a Ruby binding for GStreamer."
-  _package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
-  _package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.win32.build_dependencies = [
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/GStreamer is a Ruby binding for GStreamer."
+  package.description = "Ruby/GStreamer is a Ruby binding for GStreamer."
+  package.dependency.gem.runtime = ["glib2", "gobject-introspection"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = [
     "glib2", "atk", "pango", "gdk_pixbuf2", "gtk2", "gobject-introspection",
   ]
   xiph_download_url_base = "http://downloads.xiph.org/releases"
   freedesktop_download_url_base = "http://gstreamer.freedesktop.org/src"
   sf_net_download_url_base = "http://downloads.sourceforge.net/project"
   libmad_version = "0.15.1b"
-  _package.external_packages = [
+  package.external_packages = [
     {
       :name => "libjpeg",
       :base_name => "jpeg-9a",
@@ -225,11 +225,11 @@ package = GNOME2Package.new do |_package|
       ],
     },
   ]
-  _package.cross_compiling do |spec|
+  package.cross_compiling do |spec|
     if /mingw|mswin/ =~ spec.platform.to_s
       spec.add_runtime_dependency("pango", ">= #{_package.version}")
       spec.add_runtime_dependency("gdk_pixbuf2", ">= #{_package.version}")
     end
   end
 end
-package.define_tasks
+package_task.define

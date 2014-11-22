@@ -1,7 +1,7 @@
 # -*- ruby -*-
 
 $LOAD_PATH.unshift("./lib")
-require 'gnome2-raketask'
+require 'gnome2/rake/package-task'
 
 bin_dir            = nil
 include_dir        = nil
@@ -10,21 +10,21 @@ libffi_lib_dir     = nil
 
 build_host         = nil
 
-package = GNOME2Package.new do |_package|
-  bin_dir            = (_package.windows.absolute_binary_dir + "bin").to_s
-  include_dir        = (_package.windows.absolute_binary_dir + "include").to_s
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  bin_dir            = (package.windows.absolute_binary_dir + "bin").to_s
+  include_dir        = (package.windows.absolute_binary_dir + "include").to_s
   glib2_include_dir  = File.join(include_dir, "glib-2.0")
-  libffi_lib_dir     = (_package.windows.absolute_binary_dir + "lib").to_s
+  libffi_lib_dir     = (package.windows.absolute_binary_dir + "lib").to_s
 
-  build_host         = _package.windows.build_host
+  build_host         = package.windows.build_host
 
-  _package.summary = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
-  _package.description = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
-  _package.dependency.gem.runtime = [["pkg-config", ">= 0"]]
-  _package.dependency.gem.development = [["test-unit", ">= 2"]]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.external_packages = [
+  package.summary = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
+  package.description = "Ruby/GLib2 is a Ruby binding of GLib-2.x."
+  package.dependency.gem.runtime = [["pkg-config", ">= 0"]]
+  package.dependency.gem.development = [["test-unit", ">= 2"]]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.external_packages = [
     {
       :name => "libiconv",
       :download_site => :gnu,
@@ -123,10 +123,10 @@ package = GNOME2Package.new do |_package|
       },
     },
   ]
-  _package.cross_compiling do |spec|
+  package.cross_compiling do |spec|
     if /mingw|mswin/ =~ spec.platform.to_s
       spec.add_runtime_dependency("cairo", ">= 1.12.8")
     end
   end
 end
-package.define_tasks
+package_task.define

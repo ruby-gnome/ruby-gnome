@@ -357,21 +357,21 @@ namespace :gem do
     end
   end
 
-  namespace :win32 do
-    win32_unsupported_packages = [
+  namespace :windows do
+    windows_unsupported_packages = [
       "vte",
       "vte3",
       "webkit-gtk",
       "webkit-gtk2",
     ]
-    win32_gnome2_packages = gnome2_packages - win32_unsupported_packages
+    windows_gnome2_packages = gnome2_packages - windows_unsupported_packages
 
     namespace :build do
       desc "build all Windows binaries"
       task :vendor do
-        win32_gnome2_packages.each do |package|
+        windows_gnome2_packages.each do |package|
           Dir.chdir(package) do
-            ruby("-S", "rake", "native:build", "win32:build")
+            ruby("-S", "rake", "native:build", "windows:build")
           end
         end
       end
@@ -379,11 +379,11 @@ namespace :gem do
       desc "build all Windows bindings"
       task :ext do
         change_environment_variable("MAKE" => "make debugflags=") do
-          win32_gnome2_packages.each do |package|
+          windows_gnome2_packages.each do |package|
             Dir.chdir(package) do
               tasks = [
                 "cross",
-                "win32:builder:build:prepare:pkg_config",
+                "windows:builder:build:prepare:pkg_config",
                 "native",
                 "gem",
               ]
@@ -396,7 +396,7 @@ namespace :gem do
       desc "build GSettings schemas for all Windows binaries"
       task :schema do
         Dir.mktmpdir do |dir|
-          win32_gnome2_packages.each do |package|
+          windows_gnome2_packages.each do |package|
             gschema_xml_glob = File.join(package, "vendor", "local", "share",
                                          "glib-2.0", "schemas", "*.gschema.xml")
             Dir.glob(gschema_xml_glob).each do |schema|
@@ -412,30 +412,30 @@ namespace :gem do
 
     desc "build all Windows gems"
     task :build => [
-      "gem:win32:build:vendor",
-      "gem:win32:build:schema",
-      "gem:win32:build:ext",
+      "gem:windows:build:vendor",
+      "gem:windows:build:schema",
+      "gem:windows:build:ext",
     ]
 
     desc "clean all Windows gems build"
     task :clean do
-      win32_gnome2_packages.each do |package|
+      windows_gnome2_packages.each do |package|
         rm_rf(File.join(package, "tmp"))
       end
     end
 
     desc "download DLL for Windows all gems"
     task :download do
-      win32_gnome2_packages.each do |package|
+      windows_gnome2_packages.each do |package|
         Dir.chdir(package) do
-          ruby("-S", "rake", "win32:download")
+          ruby("-S", "rake", "windows:download")
         end
       end
     end
 
     desc "push all Windows gems"
     task :push do
-      win32_gnome2_packages.each do |package|
+      windows_gnome2_packages.each do |package|
         ruby("-S", "gem", "push",
              *Dir.glob(File.join(package, "pkg", "*-#{version}-x86-mingw32.gem")))
       end

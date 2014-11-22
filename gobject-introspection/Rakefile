@@ -91,7 +91,7 @@ namespace :native do
   end
 end
 
-namespace :win32 do
+namespace :windows do
   namespace :"gobject-introspection" do
     desc "Use native tools"
     task :cross do
@@ -116,6 +116,6 @@ namespace :win32 do
   end
 
   namespace :builder do
-    task :after => "win32:gobject-introspection:cross"
+    task :after => "windows:gobject-introspection:cross"
   end
 end

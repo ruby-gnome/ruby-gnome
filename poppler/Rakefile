@@ -23,8 +23,8 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/Poppler is a Ruby binding of poppler-glib."
   package.description = "Ruby/Poppler is a Ruby binding of poppler-glib."
   package.dependency.gem.runtime = [["cairo", ">= 1.12.8"], "gdk_pixbuf2"]
-  package.win32.packages = []
-  package.win32.dependencies = []
+  package.windows.packages = []
+  package.windows.dependencies = []
   package.windows.build_dependencies = [
     "glib2",
     "gobject-introspection",

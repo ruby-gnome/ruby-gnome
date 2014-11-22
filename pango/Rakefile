@@ -79,4 +79,4 @@ namespace :gcc do
   end
 end
 
-task "win32:builder:build:harfbuzz:after" => "gcc:dll:bundle"
+task "windows:builder:build:harfbuzz:after" => "gcc:dll:bundle"
