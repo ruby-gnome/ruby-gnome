@@ -51,7 +51,8 @@ class GNOME2WindowsBinaryBuildTask
 
         prepare_task_names << "pkg_config_for_build"
         task :pkg_config_for_build do
-          ENV["PKG_CONFIG_FOR_BUILD"] = "env - pkg-config"
+          # XXX: Is it needless?
+          # ENV["PKG_CONFIG_FOR_BUILD"] = "env - pkg-config"
         end
       end
 
