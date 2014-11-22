@@ -489,7 +489,7 @@ def check_cairo(options={})
   end
 
   unless rcairo_source_dir.nil?
-    if is_windwows
+    if is_windows
       options = {}
       build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
       if File.exist?(File.join(rcairo_source_dir, build_dir))
