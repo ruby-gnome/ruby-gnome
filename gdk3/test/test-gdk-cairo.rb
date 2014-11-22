@@ -38,4 +38,24 @@ class TestGdkCairo < Test::Unit::TestCase
     assert_equal(Cairo::Color::RGB.new(0.1, 0.2, 0.3, 0.4),
                  @context.source.color)
   end
+  
+  def test_set_context_rgba_from_values
+    @context.set_source_rgba(0.1, 0.2, 0.3, 0.4)
+    assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 0.4])
+  end
+  
+  def test_set_context_rgba_from_array
+    @context.set_source_rgba([0.1, 0.2, 0.3, 0.4])
+    assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 0.4])
+  end
+  
+  def test_set_context_rgb_from_values
+    @context.set_source_rgb(0.1, 0.2, 0.3)
+    assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 1.0])
+  end
+  
+  def test_set_context_rgb_from_array
+    @context.set_source_rgb([0.1, 0.2, 0.3])
+    assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 1.0])
+  end
 end
