@@ -26,6 +26,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         :need_autoreconf => true,
         :patches => [
           "gtk+-2.24.22-add-missing-exeext-and-fix-directory.diff",
+          "gtk+-2.24.22-remove-PRIVATE-from-def.diff",
         ],
         :built_file => "bin/libgtk-win32-2.0-0.dll",
       },
