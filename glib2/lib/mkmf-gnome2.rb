@@ -131,7 +131,9 @@ def setup_windows(target_name, base_dir=nil)
   end
 end
 # For backward compatibility
-alias_method :setup_win32, :setup_windows
+def setup_win32(*args, &block)
+  setup_windows(*args, &block)
+end
 
 def find_gem_spec(package)
   begin
