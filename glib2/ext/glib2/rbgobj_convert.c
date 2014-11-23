@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
  *  Copyright (C) 2006  Sjoerd Simons, Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -39,9 +39,9 @@ void
 Init_gobject_convert(void)
 {
     /* TODO: unref the below tables on exit. */
-    tables = g_hash_table_new_full(g_int_hash, g_int_equal, NULL,
+    tables = g_hash_table_new_full(g_direct_hash, g_direct_equal, NULL,
                                    rg_convert_table_free);
-    class_to_g_type_map = g_hash_table_new(g_int_hash, g_int_equal);
+    class_to_g_type_map = g_hash_table_new(g_direct_hash, g_direct_equal);
 }
 
 void
@@ -49,17 +49,20 @@ rbgobj_convert_define(const RGConvertTable *table)
 {
     RGConvertTable *copied_table;
     copied_table = g_memdup(table, sizeof(RGConvertTable));
-    g_hash_table_insert(tables, &(copied_table->type), copied_table);
+    g_hash_table_insert(tables,
+                        GUINT_TO_POINTER(copied_table->type),
+                        copied_table);
     if (copied_table->klass != Qfalse && !NIL_P(copied_table->klass)) {
         g_hash_table_insert(class_to_g_type_map,
-                            &(copied_table->klass), &(copied_table->type));
+                            GUINT_TO_POINTER(copied_table->klass),
+                            GUINT_TO_POINTER(copied_table->type));
     }
 }
 
 RGConvertTable *
 rbgobj_convert_lookup(GType type)
 {
-    return g_hash_table_lookup(tables, &type);
+    return g_hash_table_lookup(tables, GUINT_TO_POINTER(type));
 }
 
 gboolean
@@ -128,11 +131,11 @@ GType
 rbgobj_convert_rvalue2gtype(VALUE value)
 {
     VALUE klass;
-    GType *result;
+    gpointer result;
 
     klass = rb_class_of(value);
-    result = g_hash_table_lookup(class_to_g_type_map, &klass);
-    return result ? *result : 0;
+    result = g_hash_table_lookup(class_to_g_type_map, GUINT_TO_POINTER(klass));
+    return GPOINTER_TO_UINT(result);
 }
 
 gboolean
