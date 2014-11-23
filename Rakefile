@@ -359,6 +359,7 @@ namespace :gem do
 
   namespace :windows do
     windows_unsupported_packages = [
+      "gtksourceview2",
       "vte",
       "vte3",
       "webkit-gtk",
