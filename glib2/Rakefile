@@ -130,3 +130,28 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   end
 end
 package_task.define
+
+namespace :windows do
+  namespace :glib do
+    pkg_config_dir = package_task.windows.absolute_binary_dir + "lib/pkgconfig"
+    pc_path = pkg_config_dir + "glib-2.0.pc"
+    patched_path = pkg_config_dir + "patched"
+    file patched_path.to_s do
+      original_pc = pc_path.read
+      new_pc = original_pc.gsub(/^Cflags:/) do |matched|
+        "#{matched} -I${includedir}"
+      end
+      pc_path.open("w") do |pc_file|
+        pc_file.write(new_pc)
+      end
+      touch(patched_path)
+    end
+
+    desc "Add include path for libintl.h"
+    task :cross => patched_path.to_s
+  end
+
+  namespace :builder do
+    task :after => "windows:glib:cross"
+  end
+end
