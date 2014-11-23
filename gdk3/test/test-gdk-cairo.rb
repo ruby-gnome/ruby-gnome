@@ -43,24 +43,28 @@ class TestGdkCairo < Test::Unit::TestCase
 
       def test_values
         @context.set_source_rgba(0.1, 0.2, 0.3, 0.4)
-        assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 0.4])
+        assert_equal([0.1, 0.2, 0.3, 0.4],
+                     @context.source.rgba)
       end
 
       def test_array
         @context.set_source_rgba([0.1, 0.2, 0.3, 0.4])
-        assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 0.4])
+        assert_equal([0.1, 0.2, 0.3, 0.4],
+                     @context.source.rgba)
       end
     end
 
     sub_test_case "RGB" do
       def test_values
         @context.set_source_rgb(0.1, 0.2, 0.3)
-        assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 1.0])
+        assert_equal([0.1, 0.2, 0.3, 1.0],
+                    @context.source.rgba)
       end
 
       def test_array
         @context.set_source_rgb([0.1, 0.2, 0.3])
-        assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 1.0])
+        assert_equal([0.1, 0.2, 0.3, 1.0],
+                    @context.source.rgba)
       end
     end
   end
