@@ -467,19 +467,7 @@ def check_cairo(options={})
     rcairo_source_base_dir << ".#{suffix}" if suffix
     top_dir = options[:top_dir]
     if top_dir
-      rcairo_source_dir = top_dir + rcairo_source_base_dir
-    else
-      top_dir_candidates = [
-        Pathname.pwd.parent.parent,
-        Pathname.pwd.parent.parent.parent,
-      ]
-      top_dir_candidates.each do |candidate|
-        rcairo_source_dir_candidate = candidate + rcairo_source_base_dir
-        if rcairo_source_dir_candidate.exist?
-          rcairo_source_dir = rcairo_source_dir_candidate
-          break
-        end
-      end
+      rcairo_source_dir = File.join(top_dir, "..", rcairo_source_base_dir)
     end
   end
 

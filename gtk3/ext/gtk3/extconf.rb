@@ -43,7 +43,7 @@ have_func("rb_errinfo")
                      :target_build_dir => build_dir)
 end
 
-unless check_cairo
+unless check_cairo(:top_dir => top_dir)
   exit(false)
 end
 
