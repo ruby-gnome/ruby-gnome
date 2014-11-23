@@ -457,9 +457,9 @@ def check_cairo(options={})
     suffix = nil
     if is_windows
       case RUBY_PLATFORM
-      when /\Ai386-/
+      when /\Ax86-mingw/
         suffix = "win32"
-      when /\Ax64-/
+      when /\Ax64-mingw/
         suffix = "win64"
       end
     end
