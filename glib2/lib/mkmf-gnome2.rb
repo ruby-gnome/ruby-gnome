@@ -473,7 +473,7 @@ def check_cairo(options={})
         Pathname.pwd.parent.parent,
         Pathname.pwd.parent.parent.parent,
       ]
-      top_dir_candidates.each do |candiate|
+      top_dir_candidates.each do |candidate|
         rcairo_source_dir_candidate = candidate + rcairo_source_base_dir
         if rcairo_source_dir_candidate.exist?
           rcairo_source_dir = rcairo_source_dir_candidate
