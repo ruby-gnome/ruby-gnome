@@ -33,7 +33,7 @@ module Cairo
       set_source_color(color)
       color
     end
-    
+
     if method_defined?(:set_source_rgba)
       alias_method :set_source_not_gdk_rgba, :set_source_rgba
       def set_source_rgba(rgba, g=nil, b=nil, a=nil)
