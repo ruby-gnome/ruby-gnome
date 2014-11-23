@@ -33,3 +33,4 @@ mkmf.log
 /tmp/
 /Gemfile.lock
 /Gemfile.local
+/build/.vagrant/
