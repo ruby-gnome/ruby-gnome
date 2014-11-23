@@ -43,7 +43,8 @@ module Cairo
         when Array
           set_source_not_gdk_rgba(rgba)
         else
-          set_source_not_gdk_rgba([rgba, g, b, a])
+          r = rgba
+          set_source_not_gdk_rgba([r, g, b, a])
         end
       end
     else
