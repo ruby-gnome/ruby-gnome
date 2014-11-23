@@ -32,6 +32,7 @@ class TestGdkCairo < Test::Unit::TestCase
                  @context.source.color)
   end
 
+  sub_test_case "#set_source_rgba" do
   def test_set_source_rgba
     rgba = Gdk::RGBA.new(0.1, 0.2, 0.3, 0.4)
     @context.source_rgba = rgba
@@ -57,5 +58,6 @@ class TestGdkCairo < Test::Unit::TestCase
   def test_set_context_rgb_from_array
     @context.set_source_rgb([0.1, 0.2, 0.3])
     assert_equal(@context.source.rgba, [0.1, 0.2, 0.3, 1.0])
+  end
   end
 end
