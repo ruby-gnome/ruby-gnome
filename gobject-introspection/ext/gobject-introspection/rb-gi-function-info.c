@@ -232,6 +232,10 @@ fill_metadata_rb_arg_index(GPtrArray *args_metadata)
             continue;
         }
 
+        if (metadata->in_arg_index == -1) {
+            continue;
+        }
+
         metadata->rb_arg_index = rb_arg_index;
         rb_arg_index++;
     }
