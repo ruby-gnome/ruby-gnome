@@ -74,7 +74,7 @@ rg_s_show(VALUE self, VALUE parent, VALUE props)
                    strlen(pd[i].name) == strlen("logo")){
             pd[i].value = g_object_ref(RVAL2GOBJ(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]));
         } else if (strncmp(pd[i].name, "wrap_license", strlen("wrap_license")) == 0){
-            pd[i].value = GINT_TO_POINTER(RVAL2CBOOL(RARRAY_PTR(ary)[i]));
+            pd[i].value = GINT_TO_POINTER(RVAL2CBOOL(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]));
         } else {
             pd[i].value = g_strdup(RVAL2CSTR(RARRAY_PTR(RARRAY_PTR(ary)[i])[1]));
         }
