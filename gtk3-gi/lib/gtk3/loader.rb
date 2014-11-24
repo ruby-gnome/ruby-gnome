@@ -129,6 +129,13 @@ module Gtk
       end
     end
 
+    def load_method_info(info, klass, method_name)
+      if klass.name == "Gtk::Image"
+        method_name = method_name.gsub(/\Agicon/, "icon")
+      end
+      super(info, klass, method_name)
+    end
+
     def load_constant_info(info)
       case info.name
       when /\ASTOCK_/

@@ -34,12 +34,12 @@ module Gtk
     #
     # @example Create an image from a Gio::Icon, that itself is loaded from a
     #          file.
-    #   gicon = Gio::Icon.new_for_string 'path/to/the/image.png'
-    #   image = Gtk::Image.new :gicon => gicon, :size => :dialog
+    #   icon = Gio::Icon.new_for_string 'path/to/the/image.png'
+    #   image = Gtk::Image.new :icon => icon, :size => :dialog
     #
     # @example Create an image from from a Gio::Icon that is an Gio::ThemedIcon.
-    #   gicon = Gio::ThemedIcon.new 'gtk-open'
-    #   image = Gtk::Image.new :gicon => gicon, :size => :dialog
+    #   icon = Gio::ThemedIcon.new 'gtk-open'
+    #   image = Gtk::Image.new :icon => icon, :size => :dialog
     #
     # @example Create an image from a Gdk::Pixbuf.
     #   pixbuf = Gdk::Pixbuf.new 'path/to/the/image.png'
@@ -67,7 +67,7 @@ module Gtk
       stock     = options[:stock] || nil
       icon_name = options[:icon_name] || nil
       icon_set  = options[:icon_set] || nil
-      gicon     = options[:gicon] || nil
+      icon      = options[:icon] || options[:gicon] || nil
       file      = options[:file] || nil
       pixbuf    = options[:pixbuf] || nil
       animation = options[:animation] || nil
@@ -86,8 +86,8 @@ module Gtk
         initialize_new_from_icon_name(icon_name, size)
       elsif icon_set
         initialize_new_from_icon_set(icon_set, size)
-      elsif gicon
-        initialize_new_from_gicon(gicon, size)
+      elsif icon
+        initialize_new_from_gicon(icon, size)
       elsif file
         initialize_new_from_file(file)
       elsif pixbuf
