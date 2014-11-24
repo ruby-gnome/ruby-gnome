@@ -19,11 +19,15 @@ module Gtk
     alias_method :initialize_raw, :initialize
     def initialize(arg0, arg1=nil, arg2=nil)
       if arg0.is_a?(Gtk::Adjustment)
-        arg1 = arg1 || 0.0
-        arg2 = arg2 || 0
-        initialize_raw(arg0, arg1, arg2)
+        adjustment = arg0
+        climb_rate = arg1 || 0.0
+        digits     = arg2 || 0
+        initialize_raw(adjustment, climb_rate, digits)
       else
-        initialize_new_with_range(arg0, arg1, arg2)
+        min  = arg0
+        max  = arg1
+        step = arg2
+        initialize_new_with_range(min, max, step)
       end
     end
   end
