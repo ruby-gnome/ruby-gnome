@@ -73,9 +73,12 @@ module Gtk
       animation = options[:animation] || nil
       resource  = options[:resource] ||nil
       surface   = options[:surface] || nil
-      size_sym  = options[:size] || nil
+      size      = options[:size] || nil
 
-      size = Gtk.icon_size_from_name('gtk-' + size_sym.to_s) if size_sym
+      case size
+      when String, Symbol
+        size = Gtk.icon_size_from_name("gtk-#{size}")
+      end
 
       if stock
         initialize_new_from_stock stock, size

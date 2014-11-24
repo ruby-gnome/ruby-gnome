@@ -10,4 +10,15 @@ class TestGtkImage < Test::Unit::TestCase
                  ],
                  image.stock)
   end
+
+  def test_icon_name
+    icon_name = "dialog-password"
+    image = Gtk::Image.new(:icon_name => icon_name,
+                           :size => Gtk::IconSize::DIALOG)
+    assert_equal([
+                   icon_name,
+                   Gtk::IconSize::DIALOG,
+                 ],
+                 image.icon_name)
+  end
 end
