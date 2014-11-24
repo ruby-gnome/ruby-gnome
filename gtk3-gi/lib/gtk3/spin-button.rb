@@ -21,9 +21,9 @@ module Gtk
       if arg0.is_a? Gtk::Adjustment
         arg1 = arg1 || 0.0
         arg2 = arg2 || 0
-        initialize_raw arg0, arg1, arg2
+        initialize_raw(arg0, arg1, arg2)
       else
-        initialize_new_with_range arg0, arg1, arg2
+        initialize_new_with_range(arg0, arg1, arg2)
       end
     end
   end
