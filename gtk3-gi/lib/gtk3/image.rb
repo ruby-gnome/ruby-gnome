@@ -81,24 +81,24 @@ module Gtk
       end
 
       if stock
-        initialize_new_from_stock stock, size
+        initialize_new_from_stock(stock, size)
       elsif icon_name
-        initialize_new_from_icon_name icon_name, size
+        initialize_new_from_icon_name(icon_name, size)
       elsif icon_set
-        initialize_new_from_icon_set icon_set, size
+        initialize_new_from_icon_set(icon_set, size)
       elsif gicon
-        initialize_new_from_gicon gicon, size
+        initialize_new_from_gicon(gicon, size)
       elsif file
-        initialize_new_from_file file
+        initialize_new_from_file(file)
       elsif pixbuf
-        initialize_new_from_pixbuf pixbuf
+        initialize_new_from_pixbuf(pixbuf)
       elsif animation
-        initialize_new_from_animation animation
+        initialize_new_from_animation(animation)
 #      elsif resource
 #        # ToDo: resource usage is not verified and therefor not enabled
 #        initialize_new_from_resource resource
       elsif surface
-        initialize_new_from_surface surface
+        initialize_new_from_surface(surface)
       else
         raise ArgumentError, "Invalid arguments."
       end
