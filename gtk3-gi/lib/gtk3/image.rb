@@ -22,7 +22,7 @@ module Gtk
     # @param Hash{Symbol => Gtk::Stock, String, Gtk::IconSet, Gio::Icon,
     #                       Gdk::Pixbuf, Gdk::PixbufAnimation, Cairo::Surface,
     #                       Fixnum}
-    # 
+    #
     # @example Create an image from a file.
     #   image = Gtk::Image.new :file => 'path/to/the/image.png'
     #
@@ -74,7 +74,7 @@ module Gtk
       resource  = options[:resource] ||nil
       surface   = options[:surface] || nil
       size_sym  = options[:size] || nil
-      
+
       size = Gtk.icon_size_from_name('gtk-' + size_sym.to_s) if size_sym
 
       if stock
