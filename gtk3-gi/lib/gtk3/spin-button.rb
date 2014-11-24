@@ -18,7 +18,7 @@ module Gtk
   class SpinButton
     alias_method :initialize_raw, :initialize
     def initialize(arg0, arg1=nil, arg2=nil)
-      if arg0.is_a? Gtk::Adjustment
+      if arg0.is_a?(Gtk::Adjustment)
         arg1 = arg1 || 0.0
         arg2 = arg2 || 0
         initialize_raw(arg0, arg1, arg2)
