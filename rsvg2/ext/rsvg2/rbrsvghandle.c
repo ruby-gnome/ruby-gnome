@@ -141,7 +141,7 @@ rg_s_new_from_hugefile(G_GNUC_UNUSED VALUE self, VALUE file)
     flags |= RSVG_HANDLE_FLAG_UNLIMITED;
 
     handle = rsvg_handle_new_from_gfile_sync(file_name, flags, cancellable,
-                                             error);
+                                             &error);
 
     if (error)
         RAISE_GERROR(error);
