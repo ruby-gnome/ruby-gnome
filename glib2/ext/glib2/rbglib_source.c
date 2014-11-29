@@ -64,6 +64,13 @@ rg_attach(int argc, VALUE *argv, VALUE self)
 }
 
 static VALUE
+rg_destroy(VALUE self)
+{
+    g_source_destroy(_SELF(self));
+    return self;
+}
+
+static VALUE
 rg_destroyed_p(VALUE self)
 {
     return CBOOL2RVAL(g_source_is_destroyed(_SELF(self)));
@@ -101,6 +108,21 @@ rg_id(VALUE self)
     return UINT2NUM(g_source_get_id(_SELF(self)));
 }
 
+#if GLIB_CHECK_VERSION(2, 26, 0)
+static VALUE
+rg_name(VALUE self)
+{
+    return CSTR2RVAL(g_source_get_name(_SELF(self)));
+}
+
+static VALUE
+rg_set_name(VALUE self, VALUE name)
+{
+    g_source_set_name(_SELF(self), RVAL2CSTR(name));
+    return self;
+}
+#endif
+
 static VALUE
 rg_context(VALUE self)
 {
@@ -121,7 +143,7 @@ rg_set_callback(VALUE self)
     G_RELATIVE(self, func);
     g_source_set_callback(_SELF(self),
                           (GSourceFunc)source_func,
-                          (gpointer)func, 
+                          (gpointer)func,
                           (GDestroyNotify)NULL);
     return self;
 }
@@ -131,6 +153,23 @@ void        g_source_set_callback_indirect  (GSource *source,
                                              gpointer callback_data,
                                              GSourceCallbackFuncs *callback_funcs);
 */
+
+#if GLIB_CHECK_VERSION(2, 36, 0)
+static VALUE
+rg_ready_time(VALUE self)
+{
+    gint64 ready_time;
+    ready_time = g_source_get_ready_time(_SELF(self));
+    return LL2NUM(ready_time);
+}
+
+static VALUE
+rg_set_ready_time(VALUE self, VALUE ready_time)
+{
+    g_source_set_ready_time(_SELF(self), NUM2LL(ready_time));
+    return self;
+}
+#endif
 
 static VALUE
 rg_add_poll(VALUE self, VALUE fd)
@@ -166,7 +205,7 @@ gboolean    g_source_remove_by_user_data    (gpointer user_data);
 void
 Init_glib_source(void)
 {
-    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib); 
+    VALUE RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_SOURCE, "Source", mGLib);
 
     id_call = rb_intern("call");
 
@@ -176,14 +215,23 @@ Init_glib_source(void)
                     "CONTINUE", CBOOL2RVAL(G_SOURCE_CONTINUE));
 
     RG_DEF_METHOD(attach, -1);
+    RG_DEF_METHOD(destroy, 0);
     RG_DEF_METHOD_P(destroyed, 0);
     RG_DEF_METHOD(set_priority, 1);
     RG_DEF_METHOD(priority, 0);
     RG_DEF_METHOD(set_can_recurse, 1);
     RG_DEF_METHOD_P(can_recurse, 0);
     RG_DEF_METHOD(id, 0);
+#if GLIB_CHECK_VERSION(2, 26, 0)
+    RG_DEF_METHOD(name, 0);
+    RG_REPLACE_SET_PROPERTY(name, 1);
+#endif
     RG_DEF_METHOD(context, 0);
     RG_DEF_METHOD(set_callback, 0);
+#if GLIB_CHECK_VERSION(2, 36, 0)
+    RG_DEF_METHOD(ready_time, 0);
+    RG_REPLACE_SET_PROPERTY(ready_time, 1);
+#endif
     RG_DEF_METHOD(add_poll, 1);
     RG_DEF_METHOD(remove_poll, 1);
 #if GLIB_CHECK_VERSION(2, 28, 0)

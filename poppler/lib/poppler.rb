@@ -16,10 +16,7 @@ require "tempfile"
 require "date"
 require "glib2"
 require "gdk_pixbuf2"
-begin
-  require "cairo"
-rescue LoadError
-end
+require "cairo"
 
 base_dir = Pathname.new(__FILE__).dirname.dirname.expand_path
 vendor_dir = base_dir + "vendor" + "local"

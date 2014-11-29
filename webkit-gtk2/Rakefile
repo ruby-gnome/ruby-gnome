@@ -17,20 +17,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2-raketask"
+require "gnome2/rake/package-task"
 
-
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
-  _package.description = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
-  _package.dependency.gem.runtime = ["gobject-introspection", "gtk2"]
-  _package.dependency.gem.development = ["test-unit-notify"]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.win32.build_dependencies = ["glib2", "gobject-introspection"]
-  _package.win32.build_packages = []
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
+  package.description = "Ruby/WebKitGtk2 is a Ruby binding of WebKitGTK+ for Gtk 2.0 Toolkit"
+  package.dependency.gem.runtime = ["gobject-introspection", "gtk2"]
+  package.dependency.gem.development = ["test-unit-notify"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = ["glib2", "gobject-introspection"]
+  package.windows.build_packages = []
 end
-package.define_tasks
+package_task.define
 
 
 namespace :dependency do

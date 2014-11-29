@@ -59,7 +59,7 @@ rg_s_getenv(G_GNUC_UNUSED VALUE self, VALUE variable)
 static VALUE
 rg_s_setenv(G_GNUC_UNUSED VALUE self, VALUE variable, VALUE value, VALUE overwrite)
 {
-    return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable), 
+    return CBOOL2RVAL(g_setenv(RVAL2CSTR(variable),
                                RVAL2CSTR_ACCEPT_NIL(value),
                                RVAL2CBOOL(overwrite)));
 }
@@ -277,9 +277,9 @@ static VALUE
 rg_s_check_version_p(G_GNUC_UNUSED VALUE self, VALUE major, VALUE minor, VALUE micro)
 {
     return CBOOL2RVAL(glib_major_version > NUM2UINT(major) ||
-                      (glib_major_version == NUM2UINT(major) && 
+                      (glib_major_version == NUM2UINT(major) &&
                        glib_minor_version > NUM2UINT(minor)) ||
-                      (glib_major_version == NUM2UINT(major) && 
+                      (glib_major_version == NUM2UINT(major) &&
                        glib_minor_version == NUM2UINT(minor) &&
                        glib_micro_version >= NUM2UINT(micro)));
 }
@@ -291,6 +291,11 @@ Init_glib_utils(void)
 #if GLIB_CHECK_VERSION(2, 14, 0)
     G_DEF_CLASS(G_TYPE_USER_DIRECTORY, "UserDirectory", RG_TARGET_NAMESPACE);
     G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, G_TYPE_USER_DIRECTORY, "G_");
+#endif
+
+#if GLIB_CHECK_VERSION(2, 30, 0)
+    G_DEF_CLASS(G_TYPE_FORMAT_SIZE_FLAGS,
+                "FormatSizeFlags", RG_TARGET_NAMESPACE);
 #endif
 
     RG_DEF_SMETHOD(application_name, 0);

@@ -49,7 +49,7 @@ require "mkmf-gnome2"
                      :target_build_dir => build_dir)
 end
 
-setup_win32(module_name, base_dir)
+setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libglib2.0-dev",

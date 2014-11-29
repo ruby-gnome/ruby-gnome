@@ -53,9 +53,11 @@ module Gtk
       require "gtk3/container"
       require "gtk3/css-provider"
       require "gtk3/gtk"
+      require "gtk3/image"
       require "gtk3/label"
       require "gtk3/scrolled-window"
       require "gtk3/search-bar"
+      require "gtk3/spin-button"
       require "gtk3/stack"
       require "gtk3/text-buffer"
       require "gtk3/tree-iter"
@@ -125,6 +127,13 @@ module Gtk
           end
         end
       end
+    end
+
+    def load_method_info(info, klass, method_name)
+      if klass.name == "Gtk::Image"
+        method_name = method_name.gsub(/\Agicon/, "icon")
+      end
+      super(info, klass, method_name)
     end
 
     def load_constant_info(info)

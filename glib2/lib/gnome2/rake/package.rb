@@ -129,6 +129,15 @@ module GNOME2
         def build_architecture
           ENV["RUBY_GNOME2_BUILD_ARCHITECTURE"] || "x86"
         end
+
+        def build_architecture_suffix
+          case build_architecture
+          when "x86"
+            "win32"
+          when "x64"
+            "win64"
+          end
+        end
       end
 
       class NativeConfiguration

@@ -20,6 +20,7 @@ module Gio
     def pre_load(repository, namespace)
       define_content_type_class
       define_mime_type_class
+      define_dbus_module
       define_resources_module
       @content_type_guess_for_tree_info = nil
     end
@@ -82,6 +83,11 @@ module Gio
       @base_module.const_set("MimeType", @mime_type_class)
     end
 
+    def define_dbus_module
+      @dbus_module = Module.new
+      @base_module.const_set("DBus", @dbus_module)
+    end
+
     def define_resources_module
       @resources_module = Module.new
       @base_module.const_set("Resources", @resources_module)
@@ -101,7 +107,11 @@ module Gio
           end
         end
       when /\Aresources_/
-        load_function_info_resources(info)
+        name = rubyish_method_name(info, :prefix => "resources_")
+        define_module_function(@resources_module, name, info)
+      when /\Adbus_/
+        name = rubyish_method_name(info, :prefix => "dbus_")
+        define_module_function(@dbus_module, name, info)
       else
         super
       end
@@ -155,7 +165,7 @@ module Gio
       else
         case name
         when /\Acan_be_/
-          method_name = "#{$1}?"
+          method_name = "#{$POSTMATCH}?"
         when /\Ais_/
           method_name = "#{$POSTMATCH}?"
         when /\Aget_/
@@ -166,19 +176,6 @@ module Gio
         @content_type_class.__send__(:define_method, method_name) do
           info.invoke(:arguments => [to_s])
         end
-      end
-    end
-
-
-    def load_function_info_resources(info)
-      method_name = info.name.gsub(/\Aresources_/, "")
-      receiver = @resources_module
-      validate = lambda do |arguments|
-        validate_arguments(info, "#{receiver}.#{method_name}", arguments)
-      end
-      receiver.define_singleton_method(method_name) do |*arguments|
-        validate.call(arguments)
-        info.invoke(:arguments => arguments)
       end
     end
 

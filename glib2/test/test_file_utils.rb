@@ -12,4 +12,42 @@ class TestGLibFileUtils < Test::Unit::TestCase
     assert_equal("1.5 MB", GLib.format_size_for_display(1024 * 1024 * 1.5))
     assert_equal("1.0 GB", GLib.format_size_for_display(1024 * 1024 * 1024))
   end
+
+  sub_test_case "#format_size" do
+    def setup
+      only_glib_version(2, 30, 0)
+    end
+
+    def test_kb
+      assert_equal("1.0 kB", GLib.format_size(1000))
+    end
+
+    def test_mb
+      assert_equal("1.0 MB", GLib.format_size(1000 * 1000))
+    end
+
+    def test_gb
+      assert_equal("1.0 GB", GLib.format_size(1000 * 1000 * 1000))
+    end
+
+    sub_test_case "flags" do
+      sub_test_case ":iec_units" do
+        def format_size(size)
+          GLib.format_size(size, :flags => :iec_units)
+        end
+
+        def test_kib
+          assert_equal("1.0 KiB", format_size(1024))
+        end
+
+        def test_mib
+          assert_equal("1.0 MiB", format_size(1024 * 1024))
+        end
+
+        def test_gib
+          assert_equal("1.0 GiB", format_size(1024 * 1024 * 1024))
+        end
+      end
+    end
+  end
 end

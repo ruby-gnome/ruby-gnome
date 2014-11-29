@@ -1,6 +1,4 @@
-# -*- ruby -*-
-#
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,17 +14,10 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/package-task"
-
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/CairoGObject is a Ruby binding of cairo-gobject."
-  package.description = "Ruby/CairoGObject is a Ruby binding of cairo-gobject."
-  package.dependency.gem.runtime = ["cairo", "glib2"]
-  package.dependency.gem.development = ["test-unit-notify"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = ["cairo", "glib2"]
-  package.windows.build_packages = []
+class TestMemoryOutputStream < Test::Unit::TestCase
+  def test_memory_output_stream
+    assert_nothing_raised do
+      Gio::MemoryOutputStream.new
+    end
+  end
 end
-package_task.define

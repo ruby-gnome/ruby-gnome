@@ -22,8 +22,42 @@ class TestGLibSource < Test::Unit::TestCase
   def test_time
     context = GLib::MainContext.default
     source = GLib::Idle.source_new
-    source.attach(context)
-    time = source.time
-    assert_operator(0, :<, time)
+    id = source.attach(context)
+    begin
+      time = source.time
+      assert_operator(0, :<, time)
+    ensure
+      GLib::Source.remove(id)
+    end
+  end
+
+  def test_destroy
+    context = GLib::MainContext.new
+    source = GLib::Idle.source_new
+    id = source.attach(context)
+    assert_not_nil(context.find_source(id))
+    source.destroy
+    assert_nil(context.find_source(id))
+  end
+
+  def test_name
+    only_glib_version(2, 26, 0)
+
+    source = GLib::Idle.source_new
+    assert_nil(source.name)
+
+    source_name = "glib source"
+    source.name = source_name
+    assert_equal(source_name, source.name)
+  end
+
+  def test_ready_time
+    only_glib_version(2, 36, 0)
+
+    source = GLib::Idle.source_new
+
+    ready_time = 5
+    source.ready_time = 5
+    assert_equal(ready_time, source.ready_time)
   end
 end

@@ -1,18 +1,18 @@
 # -*- ruby -*-
 
 $LOAD_PATH.unshift("./../glib2/lib")
-require 'gnome2-raketask'
+require 'gnome2/rake/package-task'
 
-package = GNOME2Package.new do |_package|
-  _package.summary = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
-  _package.description = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
-  _package.dependency.gem.runtime = ["atk", "pango", "gdk_pixbuf2"]
-  _package.win32.packages = []
-  _package.win32.dependencies = []
-  _package.win32.build_dependencies = [
+package_task = GNOME2::Rake::PackageTask.new do |package|
+  package.summary = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
+  package.description = "Ruby/GTK2 is a Ruby binding of GTK+-2.x."
+  package.dependency.gem.runtime = ["atk", "pango", "gdk_pixbuf2"]
+  package.windows.packages = []
+  package.windows.dependencies = []
+  package.windows.build_dependencies = [
     "glib2", "atk", "pango", "gdk_pixbuf2",
   ]
-  _package.external_packages = [
+  package.external_packages = [
     {
       :name => "gtk+",
       :download_site => :gnome,
@@ -26,6 +26,7 @@ package = GNOME2Package.new do |_package|
         :need_autoreconf => true,
         :patches => [
           "gtk+-2.24.22-add-missing-exeext-and-fix-directory.diff",
+          "gtk+-2.24.22-remove-PRIVATE-from-def.diff",
         ],
         :built_file => "bin/libgtk-win32-2.0-0.dll",
       },
@@ -43,9 +44,9 @@ package = GNOME2Package.new do |_package|
     },
   ]
 end
-package.define_tasks
+package_task.define
 
-namespace :win32 do
+namespace :windows do
   desc "create default gtkrc"
   task :gtkrc do
     gtkrc_path = File.join("vendor", "local", "etc", "gtk-2.0", "gtkrc")
@@ -56,6 +57,6 @@ namespace :win32 do
   end
 
   namespace :builder do
-    task :after => ["win32:gtkrc"]
+    task :after => ["windows:gtkrc"]
   end
 end

@@ -14,8 +14,8 @@ require "gnome2/rake/package"
 require "gnome2/rake/external-package"
 require "gnome2/rake/source-download-task"
 require "gnome2/rake/native-binary-build-task"
-require "gnome2/rake/win32-binary-download-task"
-require "gnome2/rake/win32-binary-build-task"
+require "gnome2/rake/windows-binary-download-task"
+require "gnome2/rake/windows-binary-build-task"
 
 module GNOME2
   module Rake
@@ -44,7 +44,7 @@ module GNOME2
         define_spec
         define_source_tasks
         define_native_tasks
-        define_win32_tasks
+        define_windows_tasks
         define_package_tasks
       end
 
@@ -67,11 +67,6 @@ module GNOME2
 
       def windows
         @package.windows
-      end
-
-      # For backward compatibility
-      def win32
-        windows
       end
 
       def native
@@ -160,40 +155,44 @@ module GNOME2
         task.define
       end
 
-      def define_win32_tasks
-        define_win32_extension_task
-        define_win32_download_task
-        define_win32_build_task
+      def define_windows_tasks
+        define_windows_extension_task
+        define_windows_download_task
+        define_windows_build_task
       end
 
       def so_base_name
         @name.gsub(/-/, "_")
       end
 
-      def define_win32_extension_task
+      def define_windows_extension_task
         ::Rake::ExtensionTask.new(so_base_name, @spec) do |ext|
           ext.cross_platform = cross_platform
           ext.ext_dir = "ext/#{@name}"
           ext.cross_compile = true
           ext.cross_compiling do |spec|
             if /mingw|mswin/ =~ spec.platform.to_s
-              win32_binary_dir = @package.windows.relative_binary_dir
-              win32_files = []
-              if win32_binary_dir.exist?
-                Find.find(win32_binary_dir.to_s) do |path|
+              windows_binary_dir = @package.windows.relative_binary_dir
+              windows_files = []
+              if windows_binary_dir.exist?
+                Find.find(windows_binary_dir.to_s) do |path|
                   next unless File.file?(path)
                   next if /\.zip\z/ =~ path
-                  win32_files << path
+                  windows_files << path
                 end
               end
-              spec.files += win32_files
+              spec.files += windows_files
               stage_path = "#{ext.tmp_dir}/#{ext.cross_platform}/stage"
-              win32_files.each do |win32_file|
-                stage_win32_file = "#{stage_path}/#{win32_file}"
-                stage_win32_binary_dir = File.dirname(stage_win32_file)
-                directory stage_win32_binary_dir
-                file stage_win32_file => [stage_win32_binary_dir, win32_file] do
-                  cp win32_file, stage_win32_file
+              windows_files.each do |windows_file|
+                stage_windows_file = "#{stage_path}/#{windows_file}"
+                stage_windows_binary_dir = File.dirname(stage_windows_file)
+                directory stage_windows_binary_dir
+                stage_windows_file_dependencies = [
+                  stage_windows_binary_dir,
+                  windows_file,
+                ]
+                file stage_windows_file => stage_windows_file_dependencies do
+                  cp windows_file, stage_windows_file
                 end
               end
             end
@@ -212,12 +211,12 @@ module GNOME2
         end
       end
 
-      def define_win32_download_task
-        GNOME2Win32BinaryDownloadTask.new(@package)
+      def define_windows_download_task
+        GNOME2WindowsBinaryDownloadTask.new(@package)
       end
 
-      def define_win32_build_task
-        GNOME2Win32BinaryBuildTask.new(@package)
+      def define_windows_build_task
+        GNOME2WindowsBinaryBuildTask.new(@package)
       end
 
       def define_package_tasks

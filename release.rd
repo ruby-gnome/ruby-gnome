@@ -84,11 +84,11 @@ The following steps are needed only the first setup:
 The following command downloads GTK+ related binaries for
 Windows:
 
-  % rake gem:win32:download
+  % rake gem:windows:download
 
 The following command rebuilds binary gems for Windows:
 
-  % rake gem:win32:clean gem:win32:build
+  % rake gem:windows:clean gem:windows:build
 
 Here are confirmation steps:
 
@@ -116,7 +116,7 @@ The following command uploads */pkg/*-X.Y.Z.gem to rubygems.org:
 
 The following command uploads */pkg/*-X.Y.Z-x86-mingw32.gem to rubygems.org:
 
-  % rake gem:win32:push
+  % rake gem:windows:push
 
 == After releasing packages
 

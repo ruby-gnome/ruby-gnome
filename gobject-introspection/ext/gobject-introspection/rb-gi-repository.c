@@ -18,17 +18,43 @@
  *  MA  02110-1301  USA
  */
 
+
+/* GObjectIntrospection::Repository is used to manage repositories of
+ * namespaces. Namespaces are represented on disk by type libraries
+ * (.typelib files).
+ */
+
 #include "rb-gi-private.h"
 
 #define RG_TARGET_NAMESPACE rb_cGIRepository
 #define SELF(self) RVAL2GI_REPOSITORY(self)
 
+
+/* Returns the singleton process-global default
+ * GObjectIntrospection::Repository. It is not currently supported to have
+ * multiple repositories in a particular process, but this function is provided
+ * in the unlikely eventuality that it would become possible, and as a
+ * convenience for higher level language bindings to conform to the GObject
+ * method call conventions.
+ *
+ * @return [GObjectIntrospection::Repository] The global singleton
+ *         GObjectIntrospection::Repository.
+ */
 static VALUE
 rg_s_default(G_GNUC_UNUSED VALUE klass)
 {
     return GOBJ2RVAL(g_irepository_get_default());
 }
 
+
+/* Force the namespace to be loaded if it isn't already. If namespace is not
+ * loaded, this function will search for a ".typelib" file using the repository
+ * search path. In addition, a version of namespace may be specified. If version
+ * is not specified, the latest will be used.
+ * 
+ * @param [String] namespace The namespace to load
+ * @param [String, nil] version An optional version
+ */
 static VALUE
 rg_require(int argc, VALUE *argv, VALUE self)
 {
@@ -53,6 +79,16 @@ rg_require(int argc, VALUE *argv, VALUE self)
     return Qnil;
 }
 
+
+/* Return an array of all (transitive) versioned dependencies for namespace.
+ * Returned strings are of the form "namespace-version".
+ * Note: namespace must have already been loaded using a function such as
+ * GObjectIntrospection::Repository.require() before calling this method.
+ * 
+ * @param [String] namespace The namespace to get the dependencies for.
+ * 
+ * @return [Array<String>] The dependencies.
+ */
 static VALUE
 rg_get_dependencies(VALUE self, VALUE rb_namespace)
 {
@@ -74,6 +110,11 @@ rg_get_dependencies(VALUE self, VALUE rb_namespace)
     return rb_dependencies;
 }
 
+
+/* Return the list of currently loaded namespaces.
+ * 
+ * @return [Array<String>] The loaded namespaces.
+ */
 static VALUE
 rg_loaded_namespaces(VALUE self)
 {
@@ -93,6 +134,14 @@ rg_loaded_namespaces(VALUE self)
     return rb_namespaces;
 }
 
+
+/* This method returns the number of metadata entries in given namespace. The
+ * namespace must have already been loaded before calling this function.
+ * 
+ * @param [String] namespace The namespace to fetch the entries from.
+ * 
+ * @return [Integer] The number of metadata entries.
+ */
 static VALUE
 rg_get_n_infos(VALUE self, VALUE rb_namespace)
 {
@@ -105,6 +154,17 @@ rg_get_n_infos(VALUE self, VALUE rb_namespace)
     return INT2NUM(n_infos);
 }
 
+
+/* This method returns a particular metadata entry in the given namespace. The
+ *  namespace must have already been loaded before calling this function. See
+ *  GObjectIntrospection::Repository#get_n_infos() to find the maximum number
+ *  of entries.
+ * 
+ * @param [String] namespace The namespace to fetch the metadata entry from.
+ * @param [Fixnum] index The index of the entry.
+ * 
+ * @return [GObjectIntrospection::BaseInfo] The metadata entry.
+ */
 static VALUE
 rg_get_info(VALUE self, VALUE rb_namespace, VALUE rb_n)
 {
@@ -119,6 +179,28 @@ rg_get_info(VALUE self, VALUE rb_namespace, VALUE rb_n)
     info = g_irepository_get_info(repository, namespace_, n);
     return GI_BASE_INFO2RVAL_WITH_UNREF(info);
 }
+
+
+/* This method searches for a particular type or name. If only one argument is
+ * given, it is interpreted as a gtype and all loaded namespaces are searched
+ * for it. If two arguments are given the first is a particular namespace and
+ * the second the name of an entry to search for.
+ * 
+ * @overload find(type)
+ *
+ * @param [String] type The type to search for.
+ * 
+ * @return [GObjectIntrospection::BaseInfo] The metadata entry.
+ * 
+ * 
+ * @overload find(namespace, type)
+ * 
+ * @param [String] namespace The namespace to search in.
+ * 
+ * @param [String] type The type to search for.
+ * 
+ * @return [GObjectIntrospection::BaseInfo] The metadata entry.
+ */
 
 static VALUE
 rg_find(int argc, VALUE *argv, VALUE self)

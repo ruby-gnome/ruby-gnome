@@ -57,6 +57,27 @@ rbglib_m_format_size_for_display(G_GNUC_UNUSED VALUE self, VALUE size)
 }
 #endif
 
+#if GLIB_CHECK_VERSION(2, 30, 0)
+static VALUE
+rbglib_m_format_size(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
+{
+    VALUE rb_size, rb_options;
+
+    rb_scan_args(argc, argv, "11", &rb_size, &rb_options);
+    if (NIL_P(rb_options)) {
+      return CSTR2RVAL_FREE(g_format_size(NUM2UINT(rb_size)));
+    } else {
+      VALUE rb_flags;
+      rbg_scan_options(rb_options,
+                       "flags", &rb_flags,
+                       NULL);
+
+      return CSTR2RVAL_FREE(g_format_size_full(NUM2UINT(rb_size),
+                                               RVAL2GFORMATSIZEFLAGS(rb_flags)));
+    }
+}
+#endif
+
 void
 Init_glib_fileutils(void)
 {
@@ -90,5 +111,9 @@ Init_glib_fileutils(void)
 #if GLIB_CHECK_VERSION(2, 16, 0)
     rbg_define_singleton_method(mGLib, "format_size_for_display",
 			      rbglib_m_format_size_for_display, 1);
+#endif
+#if GLIB_CHECK_VERSION(2, 30, 0)
+    rbg_define_singleton_method(mGLib, "format_size",
+                                rbglib_m_format_size, -1);
 #endif
 }

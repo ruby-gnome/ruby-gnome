@@ -1,0 +1,210 @@
+diff -ru gtk+-2.24.22.orig/gtk/gtk.def gtk+-2.24.22/gtk/gtk.def
+--- gtk+-2.24.22.orig/gtk/gtk.def	2013-10-11 19:17:52.000000000 +0900
++++ gtk+-2.24.22/gtk/gtk.def	2014-11-22 23:22:14.712803615 +0900
+@@ -70,13 +70,11 @@
+ 	gtk_accel_map_foreach_unfiltered
+ 	gtk_accel_map_get
+ 	gtk_accel_map_get_type 
+-	gtk_accel_map_load PRIVATE
+ 	gtk_accel_map_load_utf8
+ 	gtk_accel_map_load_fd
+ 	gtk_accel_map_load_scanner
+ 	gtk_accel_map_lock_path
+ 	gtk_accel_map_lookup_entry
+-	gtk_accel_map_save PRIVATE
+ 	gtk_accel_map_save_utf8
+ 	gtk_accel_map_save_fd
+ 	gtk_accel_map_unlock_path
+@@ -1143,26 +1141,21 @@
+ 	gtk_expander_set_use_markup
+ 	gtk_expander_set_use_underline
+ 	gtk_file_chooser_add_filter
+-	gtk_file_chooser_add_shortcut_folder PRIVATE
+ 	gtk_file_chooser_add_shortcut_folder_utf8
+ 	gtk_file_chooser_add_shortcut_folder_uri
+ 	gtk_file_chooser_error_quark
+ 	gtk_file_chooser_get_action
+-	gtk_file_chooser_get_current_folder PRIVATE
+ 	gtk_file_chooser_get_current_folder_file
+ 	gtk_file_chooser_get_current_folder_utf8
+ 	gtk_file_chooser_get_current_folder_uri
+ 	gtk_file_chooser_get_extra_widget
+ 	gtk_file_chooser_get_file
+-	gtk_file_chooser_get_filename PRIVATE
+ 	gtk_file_chooser_get_filename_utf8
+-	gtk_file_chooser_get_filenames PRIVATE
+ 	gtk_file_chooser_get_filenames_utf8
+ 	gtk_file_chooser_get_files
+ 	gtk_file_chooser_get_filter
+ 	gtk_file_chooser_get_local_only
+ 	gtk_file_chooser_get_preview_file
+-	gtk_file_chooser_get_preview_filename PRIVATE
+ 	gtk_file_chooser_get_preview_filename_utf8
+ 	gtk_file_chooser_get_preview_uri
+ 	gtk_file_chooser_get_preview_widget
+@@ -1178,27 +1171,22 @@
+ 	gtk_file_chooser_get_uris
+ 	gtk_file_chooser_get_use_preview_label
+ 	gtk_file_chooser_list_filters
+-	gtk_file_chooser_list_shortcut_folders PRIVATE
+ 	gtk_file_chooser_list_shortcut_folders_utf8
+ 	gtk_file_chooser_list_shortcut_folder_uris
+ 	gtk_file_chooser_remove_filter
+-	gtk_file_chooser_remove_shortcut_folder PRIVATE
+ 	gtk_file_chooser_remove_shortcut_folder_utf8
+ 	gtk_file_chooser_remove_shortcut_folder_uri
+ 	gtk_file_chooser_select_all
+ 	gtk_file_chooser_select_file
+-	gtk_file_chooser_select_filename PRIVATE
+ 	gtk_file_chooser_select_filename_utf8
+ 	gtk_file_chooser_select_uri
+ 	gtk_file_chooser_set_action
+-	gtk_file_chooser_set_current_folder PRIVATE
+ 	gtk_file_chooser_set_current_folder_file
+ 	gtk_file_chooser_set_current_folder_utf8
+ 	gtk_file_chooser_set_current_folder_uri
+ 	gtk_file_chooser_set_current_name
+ 	gtk_file_chooser_set_extra_widget
+ 	gtk_file_chooser_set_file
+-	gtk_file_chooser_set_filename PRIVATE
+ 	gtk_file_chooser_set_filename_utf8
+ 	gtk_file_chooser_set_filter
+ 	gtk_file_chooser_set_local_only
+@@ -1210,7 +1198,6 @@
+ 	gtk_file_chooser_set_use_preview_label
+ 	gtk_file_chooser_unselect_all
+ 	gtk_file_chooser_unselect_file
+-	gtk_file_chooser_unselect_filename PRIVATE
+ 	gtk_file_chooser_unselect_filename_utf8
+ 	gtk_file_chooser_unselect_uri
+ 	gtk_file_chooser_dialog_get_type 
+@@ -1240,15 +1227,12 @@
+ 	gtk_file_filter_new
+ 	gtk_file_filter_set_name
+ 	gtk_file_selection_complete
+-	gtk_file_selection_get_filename PRIVATE
+ 	gtk_file_selection_get_filename_utf8
+-	gtk_file_selection_get_selections PRIVATE
+ 	gtk_file_selection_get_selections_utf8
+ 	gtk_file_selection_get_select_multiple
+ 	gtk_file_selection_get_type 
+ 	gtk_file_selection_hide_fileop_buttons
+ 	gtk_file_selection_new
+-	gtk_file_selection_set_filename PRIVATE
+ 	gtk_file_selection_set_filename_utf8
+ 	gtk_file_selection_set_select_multiple
+ 	gtk_file_selection_show_fileop_buttons
+@@ -1376,7 +1360,6 @@
+ 	gtk_icon_source_free
+ 	gtk_icon_source_get_direction
+ 	gtk_icon_source_get_direction_wildcarded
+-	gtk_icon_source_get_filename PRIVATE
+ 	gtk_icon_source_get_filename_utf8
+ 	gtk_icon_source_get_icon_name
+ 	gtk_icon_source_get_pixbuf
+@@ -1388,7 +1371,6 @@
+ 	gtk_icon_source_new
+ 	gtk_icon_source_set_direction
+ 	gtk_icon_source_set_direction_wildcarded
+-	gtk_icon_source_set_filename PRIVATE
+ 	gtk_icon_source_set_filename_utf8
+ 	gtk_icon_source_set_icon_name
+ 	gtk_icon_source_set_pixbuf
+@@ -1404,20 +1386,17 @@
+ 	gtk_icon_info_get_builtin_pixbuf
+ 	gtk_icon_info_get_display_name
+ 	gtk_icon_info_get_embedded_rect
+-	gtk_icon_info_get_filename PRIVATE
+ 	gtk_icon_info_get_filename_utf8
+ 	gtk_icon_info_get_type 
+ 	gtk_icon_info_load_icon
+ 	gtk_icon_info_set_raw_coordinates
+ 	gtk_icon_theme_add_builtin_icon
+-	gtk_icon_theme_append_search_path PRIVATE
+ 	gtk_icon_theme_append_search_path_utf8
+ 	gtk_icon_theme_error_quark
+ 	gtk_icon_theme_get_default
+ 	gtk_icon_theme_get_example_icon_name
+ 	gtk_icon_theme_get_for_screen
+ 	gtk_icon_theme_get_icon_sizes
+-	gtk_icon_theme_get_search_path PRIVATE
+ 	gtk_icon_theme_get_search_path_utf8
+ 	gtk_icon_theme_get_type 
+ 	gtk_icon_theme_has_icon
+@@ -1428,12 +1407,10 @@
+ 	gtk_icon_theme_lookup_by_gicon
+ 	gtk_icon_theme_choose_icon
+ 	gtk_icon_theme_new
+-	gtk_icon_theme_prepend_search_path PRIVATE
+ 	gtk_icon_theme_prepend_search_path_utf8
+ 	gtk_icon_theme_rescan_if_needed
+ 	gtk_icon_theme_set_custom_theme
+ 	gtk_icon_theme_set_screen
+-	gtk_icon_theme_set_search_path PRIVATE
+ 	gtk_icon_theme_set_search_path_utf8
+ 	gtk_icon_view_get_column_spacing
+ 	gtk_icon_view_get_columns
+@@ -1514,7 +1491,6 @@
+ 	gtk_image_get_type 
+ 	gtk_image_new
+ 	gtk_image_new_from_animation
+-	gtk_image_new_from_file PRIVATE
+ 	gtk_image_new_from_file_utf8
+ 	gtk_image_new_from_icon_name
+ 	gtk_image_new_from_icon_set
+@@ -1524,7 +1500,6 @@
+ 	gtk_image_new_from_stock
+ 	gtk_image_new_from_gicon
+ 	gtk_image_set_from_animation
+-	gtk_image_set_from_file PRIVATE
+ 	gtk_image_set_from_file_utf8
+ 	gtk_image_set_from_icon_name
+ 	gtk_image_set_from_icon_set
+@@ -2300,7 +2275,6 @@
+ 	gtk_rc_add_class_style
+ 	gtk_rc_add_widget_class_style
+ 	gtk_rc_add_widget_name_style
+-	gtk_rc_add_default_file PRIVATE
+ 	gtk_rc_add_default_file_utf8
+ 	gtk_rc_find_module_in_path
+ 	gtk_rc_find_pixmap_in_path
+@@ -2311,7 +2285,6 @@
+ 	gtk_rc_get_style
+ 	gtk_rc_get_style_by_paths
+ 	gtk_rc_get_theme_dir
+-	gtk_rc_parse PRIVATE
+ 	gtk_rc_parse_utf8
+ 	gtk_rc_parse_color
+ 	gtk_rc_parse_color_full
+@@ -2322,7 +2295,6 @@
+ 	gtk_rc_reparse_all_for_settings
+ 	gtk_rc_reset_styles
+ 	gtk_rc_scanner_new
+-	gtk_rc_set_default_files PRIVATE
+ 	gtk_rc_set_default_files_utf8
+ 	gtk_rc_style_copy
+ 	gtk_rc_style_get_type 
+@@ -3490,7 +3462,6 @@
+ 	gtk_type_unique
+ 	gtk_type_class
+ 	gtk_ui_manager_add_ui
+-	gtk_ui_manager_add_ui_from_file PRIVATE
+ 	gtk_ui_manager_add_ui_from_file_utf8
+ 	gtk_ui_manager_add_ui_from_string
+ 	gtk_ui_manager_ensure_update
+@@ -3790,7 +3761,6 @@
+ 	gtk_window_set_deletable
+ 	gtk_window_set_default
+ 	gtk_window_set_default_icon
+-	gtk_window_set_default_icon_from_file PRIVATE
+ 	gtk_window_set_default_icon_from_file_utf8
+ 	gtk_window_set_default_icon_list
+ 	gtk_window_set_default_icon_name
+@@ -3806,7 +3776,6 @@
+ 	gtk_window_get_has_frame
+ 	gtk_window_set_has_frame
+ 	gtk_window_set_icon
+-	gtk_window_set_icon_from_file PRIVATE
+ 	gtk_window_set_icon_from_file_utf8
+ 	gtk_window_set_icon_list
+ 	gtk_window_set_icon_name

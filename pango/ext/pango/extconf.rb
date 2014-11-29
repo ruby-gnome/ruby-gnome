@@ -42,23 +42,11 @@ have_func("rb_errinfo", ruby_header)
                      :target_build_dir => build_dir)
 end
 
-rcairo_options = {}
-rcairo_source_dir_names = ["rcairo"]
-if /mingw|cygwin|mswin/ =~ RUBY_PLATFORM
-  rcairo_source_dir_names.unshift("rcairo.win32")
-end
-rcairo_source_dir_names.each do |rcairo_source_dir_name|
-  rcairo_source_dir = top_dir.parent.expand_path + rcairo_source_dir_name
-  if rcairo_source_dir.exist?
-    rcairo_options[:rcairo_source_dir] = rcairo_source_dir.to_s
-    break
-  end
-end
-unless check_cairo(rcairo_options)
+unless check_cairo(:top_dir => top_dir)
   exit(false)
 end
 
-setup_win32(module_name, base_dir)
+setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package([package_id, 1, 14, 0],
                                    :debian => "libpango1.0-dev",

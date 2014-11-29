@@ -31,4 +31,9 @@ class TestContentType < Test::Unit::TestCase
     assert_equal(["audio/mpeg", false],
                  Gio::ContentType.guess("filename.mp3"))
   end
+
+  def test_executable
+    content_type = Gio::ContentType.new("application/x-executable")
+    assert_true(content_type.executable?)
+  end
 end

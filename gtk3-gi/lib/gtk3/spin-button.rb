@@ -1,6 +1,4 @@
-# -*- ruby -*-
-#
-# Copyright (C) 2012  Ruby-GNOME2 Project Team
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,17 +14,21 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-$LOAD_PATH.unshift("./../glib2/lib")
-require "gnome2/rake/package-task"
-
-package_task = GNOME2::Rake::PackageTask.new do |package|
-  package.summary = "Ruby/CairoGObject is a Ruby binding of cairo-gobject."
-  package.description = "Ruby/CairoGObject is a Ruby binding of cairo-gobject."
-  package.dependency.gem.runtime = ["cairo", "glib2"]
-  package.dependency.gem.development = ["test-unit-notify"]
-  package.windows.packages = []
-  package.windows.dependencies = []
-  package.windows.build_dependencies = ["cairo", "glib2"]
-  package.windows.build_packages = []
+module Gtk
+  class SpinButton
+    alias_method :initialize_raw, :initialize
+    def initialize(arg0, arg1=nil, arg2=nil)
+      if arg0.is_a?(Gtk::Adjustment)
+        adjustment = arg0
+        climb_rate = arg1 || 0.0
+        digits     = arg2 || 0
+        initialize_raw(adjustment, climb_rate, digits)
+      else
+        min  = arg0
+        max  = arg1
+        step = arg2
+        initialize_new_with_range(min, max, step)
+      end
+    end
+  end
 end
-package_task.define

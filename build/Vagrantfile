@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  targets = [
+    "win32",
+    "win64",
+  ]
+
+  targets.each do |target|
+    config.vm.define(target) do |node|
+      node.vm.box = "ubuntu-14.10-x86_64"
+      node.vm.box_url = "http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.10_chef-provisionerless.box"
+
+      node.vm.synced_folder("../", "/ruby-gnome2")
+      node.vm.synced_folder("../../pkg-config", "/pkg-config")
+      node.vm.synced_folder("../../rcairo", "/rcairo")
+
+      node.vm.provision(:shell,
+                        :privileged => false,
+                        :path => "build-#{target}.sh")
+      config.vm.provider("virtualbox") do |virtual_box|
+        virtual_box.cpus = (ENV["N_CPUS"] || 1).to_i
+      end
+    end
+  end
+end

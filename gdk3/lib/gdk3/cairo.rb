@@ -36,11 +36,15 @@ module Cairo
 
     if method_defined?(:set_source_rgba)
       alias_method :set_source_not_gdk_rgba, :set_source_rgba
-      def set_source_rgba(rgba)
-        if rgba.is_a?(Gdk::RGBA)
+      def set_source_rgba(rgba, g=nil, b=nil, a=nil)
+        case rgba
+        when Gdk::RGBA
           set_source_gdk_rgba(rgba)
-        else
+        when Array
           set_source_not_gdk_rgba(rgba)
+        else
+          r = rgba
+          set_source_not_gdk_rgba([r, g, b, a])
         end
       end
     else

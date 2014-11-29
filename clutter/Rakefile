@@ -47,15 +47,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
     #   MinGW w64 bundles old OpenGL headers. Here are changes to build Cogl:
     #
     #   (1) Put the latest glext.h that can be downloaded from
-    #       http://www.opengl.org/registry/api/glext.h into
-    #       /usr/i686-w64-mingw32/include/GL/ directory:
+    #       https://www.opengl.org/registry/api/GL/glext.h into
+    #       /usr/share/mingw-w64/include/GL/ directory:
     #
-    #         % wget http://www.opengl.org/registry/api/glext.h
-    #         % sudo cp glext.h /usr/i686-w64-mingw32/include/GL/
-    #         % sudo chown root:root /usr/i686-w64-mingw32/include/GL/glext.h
+    #         % wget https://www.opengl.org/registry/api/GL/glext.h
+    #         % sudo install glext.h /usr/share/mingw-w64/include/GL/
     #
     #   (2) Add missing declarations and includes to
-    #       /usr/i686-w64-mingw32/include/GL/gl.h:
+    #       /usr/share/mingw-w64/include/GL/gl.h:
     #
     #       Before:
     #         ...
@@ -128,7 +127,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.cross_compiling do |spec|
     if /mingw|mswin/ =~ spec.platform.to_s
       spec.add_runtime_dependency("atk", "= #{package.version}")
-      spec.add_runtime_dependency("pango", "= #{package.version}")
       spec.add_runtime_dependency("gdk_pixbuf2", "= #{package.version}")
     end
   end

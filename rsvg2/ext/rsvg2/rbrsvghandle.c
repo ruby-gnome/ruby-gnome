@@ -292,6 +292,7 @@ rg_dimensions(VALUE self)
 }
 #endif
 
+#if !LIBRSVG_CHECK_VERSION(2, 36, 0)
 /* Accessibility API */
 static VALUE
 rg_title(VALUE self)
@@ -305,12 +306,13 @@ rg_desc(VALUE self)
     return CSTR2RVAL(rsvg_handle_get_desc(_SELF(self)));
 }
 
-#ifdef HAVE_RSVG_HANDLE_GET_METADATA
+#  ifdef HAVE_RSVG_HANDLE_GET_METADATA
 static VALUE
 rg_metadata(VALUE self)
 {
     return CSTR2RVAL(rsvg_handle_get_metadata(_SELF(self)));
 }
+#  endif
 #endif
 
 #if !LIBRSVG_CHECK_VERSION(2, 11, 0)
@@ -482,11 +484,13 @@ Init_rsvg_handle(VALUE mRSVG)
     RG_DEF_METHOD(dimensions, 0);
 #endif
 
+#if !LIBRSVG_CHECK_VERSION(2, 36, 0)
     /* Accessibility API */
     RG_DEF_METHOD(title, 0);
     RG_DEF_METHOD(desc, 0);
-#ifdef HAVE_RSVG_HANDLE_GET_METADATA
+#  ifdef HAVE_RSVG_HANDLE_GET_METADATA
     RG_DEF_METHOD(metadata, 0);
+#  endif
 #endif
 
 #if !LIBRSVG_CHECK_VERSION(2, 11, 0)
