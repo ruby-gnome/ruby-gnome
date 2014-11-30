@@ -136,11 +136,7 @@ module Gdk
     define_deprecated_const :AttributesType, "Gdk::WindowAttributesType"
     define_deprecated_const :Edge, "Gdk::WindowEdge"
     define_deprecated_const :FilterReturn, "Gdk::FilterReturn"
-
-    class Hints
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WindowHints"
-    end
+    define_deprecated_const :Hints, "Gdk::WindowHints"
 
     class ModifierType
       extend GLib::Deprecatable
