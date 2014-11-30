@@ -115,6 +115,8 @@ module GLib
           warn "#{msg} Don't use this constant anymore."
         end
         return
+      else
+        super
       end
     end
 
