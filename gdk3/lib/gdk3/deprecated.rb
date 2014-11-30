@@ -143,12 +143,7 @@ module Gdk
     define_deprecated_const :WindowClass, "Gdk::WindowWindowClass"
     define_deprecated_const :Class, "Gdk::WindowWindowClass"
     define_deprecated_const :WMDecoration, "Gdk::WMDecoration"
-
-    class WMFunction
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WMFunction"
-    end
-
+    define_deprecated_const :WMFunction, "Gdk::WMFunction"
     define_deprecated_const :PARENT_RELATIVE, "Gdk::PARENT_RELATIVE"
     define_deprecated_method :clear, :warn => "Don't use this method."
     define_deprecated_method :clear_area, :warn => "Don't use this method."
