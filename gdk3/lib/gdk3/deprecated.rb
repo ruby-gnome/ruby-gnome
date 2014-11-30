@@ -142,11 +142,7 @@ module Gdk
     define_deprecated_const :TypeHint, "Gdk::WindowTypeHint"
     define_deprecated_const :WindowClass, "Gdk::WindowWindowClass"
     define_deprecated_const :Class, "Gdk::WindowWindowClass"
-
-    class WMDecoration
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WMDecoration"
-    end
+    define_deprecated_const :WMDecoration, "Gdk::WMDecoration"
 
     class WMFunction
       extend GLib::Deprecatable
