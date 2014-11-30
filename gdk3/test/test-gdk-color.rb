@@ -17,6 +17,31 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkColor < Test::Unit::TestCase
+  sub_test_case ".parse" do
+    def test_invalid_spec
+      spec = "fff"
+      message = "Invalid color spec: <#{spec.inspect}>: "
+      message << "Color spec must be one of them: "
+      message << "\"\#rgb\", "
+      message << "\"\#rrggbb\", "
+      message << "\"\#rrggbb\", "
+      message << "\"\#rrrgggbbb\", "
+      message << "\"\#rrrrggggbbbb\", "
+      message << "\"\#fff\", "
+      message << "\"\#ffffff\", "
+      message << "\"\#fffffffff\", "
+      message << "\"\#fffffffffffff\""
+      assert_raise(ArgumentError.new(message)) do
+        Gdk::Color.parse(spec)
+      end
+    end
+
+    def test_valid
+      color = Gdk::Color.parse("#abc")
+      assert_equal("#aaaabbbbcccc", color.to_s)
+    end
+  end
+
   def test_to_s
     color = Gdk::Color.new(0xffff, 0x1234, 0xabcd)
     assert_equal("#ffff1234abcd", color.to_s)

@@ -16,6 +16,28 @@
 
 module Gdk
   class Color
+    class << self
+      alias_method :parse_raw, :parse
+      def parse(spec)
+        succeeded, color = parse_raw(spec)
+        unless succeeded
+          message = "Invalid color spec: <#{spec.inspect}>: "
+          message << "Color spec must be one of them: "
+          message << "\"\#rgb\", "
+          message << "\"\#rrggbb\", "
+          message << "\"\#rrggbb\", "
+          message << "\"\#rrrgggbbb\", "
+          message << "\"\#rrrrggggbbbb\", "
+          message << "\"\#fff\", "
+          message << "\"\#ffffff\", "
+          message << "\"\#fffffffff\", "
+          message << "\"\#fffffffffffff\""
+          raise ArgumentError, message
+        end
+        color
+      end
+    end
+
     alias_method :initialize_raw, :initialize
     def initialize(red, green, blue)
       initialize_raw
