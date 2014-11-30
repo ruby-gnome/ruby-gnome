@@ -133,11 +133,7 @@ module Gdk
     extend GLib::Deprecatable
 
     define_deprecated_const :Gravity, "Gdk::Gravity"
-
-    class AttributesType
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WindowAttributesType"
-    end
+    define_deprecated_const :AttributesType, "Gdk::WindowAttributesType"
 
     class Edge
       extend GLib::Deprecatable
