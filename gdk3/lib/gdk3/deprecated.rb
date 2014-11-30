@@ -139,11 +139,7 @@ module Gdk
     define_deprecated_const :Hints, "Gdk::WindowHints"
     define_deprecated_const :ModifierType, "Gdk::ModifierType"
     define_deprecated_const :Type, "Gdk::WindowType"
-
-    class TypeHint
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowTypeHint"
-    end
+    define_deprecated_const :TypeHint, "Gdk::WindowTypeHint"
 
     class WindowClass
       extend GLib::Deprecatable
