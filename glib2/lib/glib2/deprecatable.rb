@@ -91,7 +91,8 @@ module GLib
     private
 
     def const_missing(deprecated_const)
-      if new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
+      new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
+      if new_const
         msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
         case new_const
         when String, Symbol
