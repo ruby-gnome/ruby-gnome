@@ -92,7 +92,10 @@ module GLib
 
     def const_missing(deprecated_const)
       new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
-      if new_const
+      if new_const.nil?
+        return super
+      end
+
         msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
         case new_const
         when String, Symbol
@@ -113,8 +116,6 @@ module GLib
           end
           return
         end
-      end
-      super
     end
 
     def constant_get(const)
