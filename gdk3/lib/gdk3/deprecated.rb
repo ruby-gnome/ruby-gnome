@@ -132,6 +132,8 @@ module Gdk
   class Window
     extend GLib::Deprecatable
 
+    define_deprecated_const :Gravity, "Gdk::Gravity"
+
     class AttributesType
       extend GLib::Deprecatable
       define_deprecated_flags "Gdk::WindowAttributesType"
@@ -145,11 +147,6 @@ module Gdk
     class FilterReturn
       extend GLib::Deprecatable
       define_deprecated_flags "Gdk::FilterReturn"
-    end
-
-    class Gravity
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::Gravity"
     end
 
     class Hints
