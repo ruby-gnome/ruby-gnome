@@ -113,7 +113,7 @@ module GLib
           return
         end
       end
-      raise NameError.new("uninitialized constant #{[self, deprecated_const].join('::')}")
+      super
     end
 
     def constant_get(const)
