@@ -43,9 +43,9 @@ module ClutterGtk
         remove_method(:init)
         remove_method(:const_missing)
       end
-      Clutter.init(argv) if Clutter.respond_to?(:init)
       loader = Loader.new(self, argv)
       loader.load("GtkClutter")
+      Clutter.init(argv) if Clutter.respond_to?(:init)
     end
   end
 
