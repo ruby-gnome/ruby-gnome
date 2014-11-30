@@ -134,11 +134,7 @@ module Gdk
 
     define_deprecated_const :Gravity, "Gdk::Gravity"
     define_deprecated_const :AttributesType, "Gdk::WindowAttributesType"
-
-    class Edge
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowEdge"
-    end
+    define_deprecated_const :Edge, "Gdk::WindowEdge"
 
     class FilterReturn
       extend GLib::Deprecatable
