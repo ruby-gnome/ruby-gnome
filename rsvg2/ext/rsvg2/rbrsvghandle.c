@@ -109,39 +109,44 @@ rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 }
 
 static VALUE
-rg_s_new_from_file(G_GNUC_UNUSED VALUE self, VALUE file)
+rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 {
+    VALUE file, options, unlimited;
     GError *error = NULL;
     RsvgHandle *handle;
 
+    rb_scan_args(argc, argv, "11", &file, &options);
+
+#if !LIBRSVG_CHECK_VERSION(2, 40, 2)
     handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
                                        &error);
+#else
+    if (NIL_P(options) || TYPE(options) != T_HASH) {
+        handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
+                                           &error);
+    } else {
+        rbg_scan_options(options,
+                         "unlimited", &unlimited,
+                         NULL);
+        if (!NIL_P(unlimited)) {
+            GFile *file_name;
+            GCancellable *cancellable;
 
-    if (error)
-        RAISE_GERROR(error);
+            file_name = g_file_new_for_path((const char *) RVAL2CSTR(file));
+            cancellable = g_cancellable_new();
 
-    return GOBJ2RVAL(handle);
-}
+            /* Support huge file */
+            RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
+            flags |= RSVG_HANDLE_FLAG_UNLIMITED;
+
+            handle = rsvg_handle_new_from_gfile_sync(file_name, flags, cancellable,
+                                                     &error);
+        } else {
+            handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
+                                              &error);
+        }
+    }
 #endif
-
-#if LIBRSVG_CHECK_VERSION(2, 40, 5)
-static VALUE
-rg_s_new_from_hugefile(G_GNUC_UNUSED VALUE self, VALUE file)
-{
-    GError *error = NULL;
-    RsvgHandle *handle;
-    GFile *file_name;
-    GCancellable *cancellable;
-
-    file_name = g_file_new_for_path((const char *) RVAL2CSTR(file));
-    cancellable = g_cancellable_new();
-
-    /* Support huge file */
-    RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
-    flags |= RSVG_HANDLE_FLAG_UNLIMITED;
-
-    handle = rsvg_handle_new_from_gfile_sync(file_name, flags, cancellable,
-                                             &error);
 
     if (error)
         RAISE_GERROR(error);
@@ -460,10 +465,7 @@ Init_rsvg_handle(VALUE mRSVG)
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
     RG_DEF_SMETHOD(new_from_data, 1);
-    RG_DEF_SMETHOD(new_from_file, 1);
-#endif
-#if LIBRSVG_CHECK_VERSION(2, 40, 5)
-    RG_DEF_SMETHOD(new_from_hugefile, 1);
+    RG_DEF_SMETHOD(new_from_file, -1);
 #endif
 
     RG_DEF_METHOD(initialize, -1);
