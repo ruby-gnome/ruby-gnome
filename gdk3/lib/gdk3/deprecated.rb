@@ -53,11 +53,8 @@ module Gdk
 
   class Event
     extend GLib::Deprecatable
-    define_deprecated_flags :Mask
-    define_deprecated_enums :Type
-    Gdk::EventMask.constants.each do |event_mask|
-      define_deprecated_const event_mask, ['Gdk::EventMask', event_mask].join('::')
-    end
+    define_deprecated_const :Mask, "Gdk::EventMask"
+    define_deprecated_const :Type, "Gdk::EventType"
   end
 
   class EventCrossing
@@ -135,66 +132,18 @@ module Gdk
   class Window
     extend GLib::Deprecatable
 
-    class AttributesType
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WindowAttributesType"
-    end
-
-    class Edge
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowEdge"
-    end
-
-    class FilterReturn
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::FilterReturn"
-    end
-
-    class Gravity
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::Gravity"
-    end
-
-    class Hints
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WindowHints"
-    end
-
-    class ModifierType
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::ModifierType"
-    end
-
-    class Type
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowType"
-    end
-
-    class TypeHint
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowTypeHint"
-    end
-
-    class WindowClass
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowWindowClass"
-    end
-
-    class Class
-      extend GLib::Deprecatable
-      define_deprecated_enums "Gdk::WindowWindowClass"
-    end
-
-    class WMDecoration
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WMDecoration"
-    end
-
-    class WMFunction
-      extend GLib::Deprecatable
-      define_deprecated_flags "Gdk::WMFunction"
-    end
-
+    define_deprecated_const :Gravity, "Gdk::Gravity"
+    define_deprecated_const :AttributesType, "Gdk::WindowAttributesType"
+    define_deprecated_const :Edge, "Gdk::WindowEdge"
+    define_deprecated_const :FilterReturn, "Gdk::FilterReturn"
+    define_deprecated_const :Hints, "Gdk::WindowHints"
+    define_deprecated_const :ModifierType, "Gdk::ModifierType"
+    define_deprecated_const :Type, "Gdk::WindowType"
+    define_deprecated_const :TypeHint, "Gdk::WindowTypeHint"
+    define_deprecated_const :WindowClass, "Gdk::WindowWindowClass"
+    define_deprecated_const :Class, "Gdk::WindowWindowClass"
+    define_deprecated_const :WMDecoration, "Gdk::WMDecoration"
+    define_deprecated_const :WMFunction, "Gdk::WMFunction"
     define_deprecated_const :PARENT_RELATIVE, "Gdk::PARENT_RELATIVE"
     define_deprecated_method :clear, :warn => "Don't use this method."
     define_deprecated_method :clear_area, :warn => "Don't use this method."

@@ -91,29 +91,33 @@ module GLib
     private
 
     def const_missing(deprecated_const)
-      if new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
-        msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
-        case new_const
-        when String, Symbol
-          new_const_val = constant_get(new_const)
-          case new_const_val
-          when GLib::Enum, GLib::Flags
-            alt = " or ':#{new_const_val.nick.gsub('-', '_')}'"
-          end
-          warn "#{msg} Use '#{new_const}'#{alt}."
-          return const_set(deprecated_const, new_const_val)
-        when Hash
-          if new_const[:raise]
-            raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
-          elsif new_const[:warn]
-            warn "#{msg} #{new_const[:warn]}"
-          else
-            warn "#{msg} Don't use this constant anymore."
-          end
-          return
-        end
+      new_const = (@@deprecated_const[self] || {})[deprecated_const.to_sym]
+      if new_const.nil?
+        return super
       end
-      raise NameError.new("uninitialized constant #{[self, deprecated_const].join('::')}")
+
+      msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
+      case new_const
+      when String, Symbol
+        new_const_val = constant_get(new_const)
+        case new_const_val
+        when GLib::Enum, GLib::Flags
+          alt = " or ':#{new_const_val.nick.gsub('-', '_')}'"
+        end
+        warn "#{msg} Use '#{new_const}'#{alt}."
+        return const_set(deprecated_const, new_const_val)
+      when Hash
+        if new_const[:raise]
+          raise DeprecatedError.new("#{msg} #{new_const[:raise]}")
+        elsif new_const[:warn]
+          warn "#{msg} #{new_const[:warn]}"
+        else
+          warn "#{msg} Don't use this constant anymore."
+        end
+        return
+      else
+        super
+      end
     end
 
     def constant_get(const)

@@ -43,9 +43,9 @@ module ClutterGtk
         remove_method(:init)
         remove_method(:const_missing)
       end
-      Clutter.init(argv) if Clutter.respond_to?(:init)
       loader = Loader.new(self, argv)
       loader.load("GtkClutter")
+      Clutter.init(argv) if Clutter.respond_to?(:init)
     end
   end
 
@@ -67,7 +67,7 @@ module ClutterGtk
       error, returned_arguments = init.invoke(:arguments => arguments)
       @init_arguments.replace(returned_arguments[1..-1])
       if error.to_i <= 0
-        raise InitError, "failed to initialize Clutter: #{error.name}"
+        raise InitError, "failed to initialize Clutter-GTK: #{error.name}"
       end
     end
 
