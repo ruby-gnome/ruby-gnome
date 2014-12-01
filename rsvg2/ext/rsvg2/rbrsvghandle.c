@@ -117,7 +117,7 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &file, &options);
 
-#if !LIBRSVG_CHECK_VERSION(2, 40, 2)
+#if !LIBRSVG_CHECK_VERSION(2, 40, 3)
     handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
                                        &error);
 #else
