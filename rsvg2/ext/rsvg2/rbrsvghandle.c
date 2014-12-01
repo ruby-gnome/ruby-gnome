@@ -128,7 +128,7 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
         rbg_scan_options(options,
                          "unlimited", &unlimited,
                          NULL);
-        if (!NIL_P(unlimited)) {
+        if (NIL_P(unlimited) ? TRUE : RVAL2CBOOL(unlimited)) {
             GFile *file_name;
             GCancellable *cancellable;
 
