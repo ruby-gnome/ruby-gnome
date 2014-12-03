@@ -111,38 +111,48 @@ rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 static VALUE
 rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 {
-    VALUE file, options, unlimited;
+    VALUE file_path, flags;
     GError *error = NULL;
     RsvgHandle *handle;
 
-    rb_scan_args(argc, argv, "11", &file, &options);
+#if LIBRSVG_CHECK_VERSION(2, 40, 3)
+    gint i, flags_c;
+    GFile *file;
+    GCancellable *cancellable;
+    RsvgHandleFlags handle_flags = RSVG_HANDLE_FLAGS_NONE;
+    gboolean unlimited_flag = FALSE;
+#endif
+
+    rb_scan_args(argc, argv, "11", &file_path, &flags);
 
 #if !LIBRSVG_CHECK_VERSION(2, 40, 3)
-    handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
+    handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
                                        &error);
 #else
-    if (NIL_P(options) || TYPE(options) != T_HASH) {
-        handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
+    if (NIL_P(flags) || TYPE(flags) != T_ARRAY) {
+        handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
                                            &error);
     } else {
-        rbg_scan_options(options,
-                         "unlimited", &unlimited,
-                         NULL);
-        if (NIL_P(unlimited) ? TRUE : RVAL2CBOOL(unlimited)) {
-            GFile *file_name;
-            GCancellable *cancellable;
+        flags_c = RARRAY_LEN(flags);
 
-            file_name = g_file_new_for_path((const char *) RVAL2CSTR(file));
+        for (i = 0; i < flags_c; i++) {
+            if (rbgutil_key_equal(RARRAY_PTR(flags)[i], "unlimited")) {
+                unlimited_flag = TRUE;
+            }
+        }
+
+        if (unlimited_flag) {
+            file = g_file_new_for_path((const char *)RVAL2CSTR(file_path));
             cancellable = g_cancellable_new();
 
             /* Support huge file */
-            RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
-            flags |= RSVG_HANDLE_FLAG_UNLIMITED;
+            handle_flags |= RSVG_HANDLE_FLAG_UNLIMITED;
 
-            handle = rsvg_handle_new_from_gfile_sync(file_name, flags, cancellable,
+            handle = rsvg_handle_new_from_gfile_sync(file, handle_flags,
+                                                     cancellable,
                                                      &error);
         } else {
-            handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
+            handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
                                               &error);
         }
     }
