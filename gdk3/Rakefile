@@ -60,14 +60,14 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       },
     },
     {
-      :name => "hicolor-icon-theme",
-      :download_base_url => "http://icon-theme.freedesktop.org/releases",
-      :label => "gtk-hi-color-icon-theme",
-      :version => "0.13",
+      :name => "adwaita-icon-theme",
+      :download_site => :gnome,
+      :label => "adwaita-icon-theme",
+      :version => "3.14.1",
       :windows => {
         :configure_args => [],
         :build_concurrently => false,
-        :built_file => "share/icons/hicolor/index.theme",
+        :built_file => "share/icons/Adwaita/index.theme",
       }
     },
   ]
