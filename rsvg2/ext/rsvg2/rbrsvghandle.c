@@ -137,17 +137,15 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 
         flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
 
-        if (flags | RSVG_HANDLE_FLAGS_NONE) {
-            file = g_file_new_for_path((const char *)RVAL2CSTR(file_path));
-            cancellable = g_cancellable_new();
+        file = g_file_new_for_path((const char *)RVAL2CSTR(file_path));
+        cancellable = g_cancellable_new();
 
-            handle = rsvg_handle_new_from_gfile_sync(file, flags,
-                                                     cancellable,
-                                                     &error);
-        } else {
-            handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
-                                               &error);
-        }
+        handle = rsvg_handle_new_from_gfile_sync(file, flags,
+                                                 cancellable,
+                                                 &error);
+
+        g_object_unref(cancellable);
+        g_object_unref(file);
     }
 #endif
 
