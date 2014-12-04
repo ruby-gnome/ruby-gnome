@@ -111,49 +111,42 @@ rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 static VALUE
 rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 {
-    VALUE file_path, flags;
+    VALUE file_path, options, rb_flags;
     GError *error = NULL;
     RsvgHandle *handle;
 
 #if LIBRSVG_CHECK_VERSION(2, 40, 3)
-    gint i, flags_c;
     GFile *file;
     GCancellable *cancellable;
-    RsvgHandleFlags handle_flags = RSVG_HANDLE_FLAGS_NONE;
-    gboolean unlimited_flag = FALSE;
+    RsvgHandleFlags flags;
 #endif
 
-    rb_scan_args(argc, argv, "11", &file_path, &flags);
+    rb_scan_args(argc, argv, "11", &file_path, &options);
 
 #if !LIBRSVG_CHECK_VERSION(2, 40, 3)
     handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
                                        &error);
 #else
-    if (NIL_P(flags) || TYPE(flags) != T_ARRAY) {
+    if (NIL_P(options)) {
         handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
                                            &error);
     } else {
-        flags_c = RARRAY_LEN(flags);
+        rbg_scan_options(options,
+                         "flags", &rb_flags,
+                         NULL);
 
-        for (i = 0; i < flags_c; i++) {
-            if (rbgutil_key_equal(RARRAY_PTR(flags)[i], "unlimited")) {
-                unlimited_flag = TRUE;
-            }
-        }
+        flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
 
-        if (unlimited_flag) {
+        if (flags | RSVG_HANDLE_FLAGS_NONE) {
             file = g_file_new_for_path((const char *)RVAL2CSTR(file_path));
             cancellable = g_cancellable_new();
 
-            /* Support huge file */
-            handle_flags |= RSVG_HANDLE_FLAG_UNLIMITED;
-
-            handle = rsvg_handle_new_from_gfile_sync(file, handle_flags,
+            handle = rsvg_handle_new_from_gfile_sync(file, flags,
                                                      cancellable,
                                                      &error);
         } else {
             handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
-                                              &error);
+                                               &error);
         }
     }
 #endif
@@ -516,5 +509,11 @@ Init_rsvg_handle(VALUE mRSVG)
 
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     RG_DEF_METHOD(render_cairo, -1);
+#endif
+
+#if LIBRSVG_CHECK_VERSION(2, 40, 3)
+    /* RsvgHandleFlags */
+    G_DEF_CLASS(RSVG_TYPE_HANDLE_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, RSVG_TYPE_HANDLE_FLAGS, "RSVG_HANDLE_");
 #endif
 }
