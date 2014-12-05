@@ -132,11 +132,9 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
         }
 
         file = g_file_new_for_path((const char *)RVAL2CSTR(rb_file_path));
-
         handle = rsvg_handle_new_from_gfile_sync(file, flags,
                                                  cancellable,
                                                  &error);
-
         g_object_unref(file);
     }
 #else
