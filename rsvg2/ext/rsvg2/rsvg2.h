@@ -49,13 +49,15 @@ extern "C" {
 #  include "librsvg-enum-types.h"
 #endif
 
-#include <librsvg/librsvg-features.h>
-
 #define LIBRSVG_CHECK_VERSION(major, minor, micro)                            \
     (LIBRSVG_MAJOR_VERSION > (major) ||                                       \
      (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION > (minor)) || \
      (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION == (minor) && \
       LIBRSVG_MICRO_VERSION >= (micro)))
+
+#if !LIBRSVG_CHECK_VERSION(2, 36, 2)
+#  include <librsvg/librsvg-features.h>
+#endif
 
 
 G_GNUC_INTERNAL void Init_rsvg_handle(VALUE mRSVG);
