@@ -1,0 +1,58 @@
+# Copyright (C) 2014  Ruby-GNOME2 Project Team
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+class TestHandle < Test::Unit::TestCase
+  sub_test_case ".new_from_file" do
+    sub_test_case ":flags => :unlimited" do
+      def setup
+        setup_large_svg
+      end
+
+      def setup_large_svg
+        @large_svg_path = "tmp/large-file.svg"
+        return if File.exist?(@large_svg_path)
+
+        FileUtils.mkdir_p(File.dirname(@large_svg_path))
+        large_byte = (10 * 1024 * 1024).to_i
+        File.open(@large_svg_path, "w") do |svg|
+          svg.puts(<<-SVG_HEADER)
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg>
+          SVG_HEADER
+          large_byte.times do
+            svg.puts("\n")
+          end
+          svg.puts(<<-SVG_FOOTER)
+</svg>
+          SVG_FOOTER
+        end
+      end
+
+      def test_no_option
+        assert_raise(RSVG::Error::Failed) do
+          RSVG::Handle.new_from_file(@large_svg_path)
+        end
+      end
+
+      def test_unlimited
+        handle = RSVG::Handle.new_from_file(@large_svg_path,
+                                            :flags => :flag_unlimited)
+        assert_equal([0, 0, 0.0, 0.0],
+                     handle.dimensions.to_a)
+      end
+    end
+  end
+end
