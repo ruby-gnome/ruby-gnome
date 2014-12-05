@@ -135,7 +135,11 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
                          "flags", &rb_flags,
                          NULL);
 
-        flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
+        if (NIL_P(rb_flags)) {
+            flags = RSVG_HANDLE_FLAGS_NONE;
+        } else {
+            flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
+        }
 
         file = g_file_new_for_path((const char *)RVAL2CSTR(rb_file_path));
         cancellable = g_cancellable_new();

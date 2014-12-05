@@ -16,6 +16,32 @@
 
 class TestHandle < Test::Unit::TestCase
   sub_test_case ".new_from_file" do
+    sub_test_case "options" do
+      def setup
+        setup_svg
+      end
+
+      def setup_svg
+        @svg_path = "tmp/empty.svg"
+        return if File.exist?(@svg_path)
+
+        FileUtils.mkdir_p(File.dirname(@svg_path))
+        File.open(@svg_path, "w") do |svg|
+          svg.puts(<<-SVG)
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg>
+</svg>
+          SVG
+        end
+      end
+
+      def test_empty_options
+        handle = RSVG::Handle.new_from_file(@svg_path, {})
+        assert_equal([0, 0, 0.0, 0.0],
+                     handle.dimensions.to_a)
+      end
+    end
+
     sub_test_case ":flags => :unlimited" do
       def setup
         setup_large_svg
