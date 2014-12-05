@@ -79,6 +79,13 @@ class TestHandle < Test::Unit::TestCase
         assert_equal([0, 0, 0.0, 0.0],
                      handle.dimensions.to_a)
       end
+
+      def test_base_uri
+        handle = RSVG::Handle.new
+        uri_string = "test_base_uri"
+        handle.base_uri = uri_string
+        assert_match(uri_string, handle.base_uri)
+      end
     end
   end
 end

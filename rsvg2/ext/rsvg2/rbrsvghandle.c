@@ -259,21 +259,6 @@ rg_pixbuf(int argc, VALUE *argv, VALUE self)
     return rb_pixbuf;
 }
 
-#if LIBRSVG_CHECK_VERSION(2, 9, 0)
-static VALUE
-rg_base_uri(VALUE self)
-{
-    return CSTR2RVAL(rsvg_handle_get_base_uri(_SELF(self)));
-}
-
-static VALUE
-rg_set_base_uri(VALUE self, VALUE base_uri)
-{
-    rsvg_handle_set_base_uri(_SELF(self), RVAL2CSTR(base_uri));
-    return self;
-}
-#endif
-
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
 static VALUE
 rg_dimensions(VALUE self)
@@ -472,11 +457,6 @@ Init_rsvg_handle(VALUE mRSVG)
     RG_DEF_METHOD(close, 0);
     RG_DEF_METHOD_P(closed, 0);
     RG_DEF_METHOD(pixbuf, -1);
-
-#if LIBRSVG_CHECK_VERSION(2, 9, 0)
-    RG_DEF_METHOD(base_uri, 0);
-    RG_DEF_METHOD(set_base_uri, 1);
-#endif
 
 #ifdef HAVE_TYPE_RSVGDIMENSIONDATA
     RG_DEF_METHOD(dimensions, 0);
