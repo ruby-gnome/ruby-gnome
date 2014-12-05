@@ -109,13 +109,45 @@ rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 }
 
 static VALUE
-rg_s_new_from_file(G_GNUC_UNUSED VALUE self, VALUE file)
+rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 {
+    VALUE file_path, options, rb_flags;
     GError *error = NULL;
     RsvgHandle *handle;
 
-    handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file),
+#if LIBRSVG_CHECK_VERSION(2, 40, 3)
+    GFile *file;
+    GCancellable *cancellable;
+    RsvgHandleFlags flags;
+#endif
+
+    rb_scan_args(argc, argv, "11", &file_path, &options);
+
+#if !LIBRSVG_CHECK_VERSION(2, 40, 3)
+    handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
                                        &error);
+#else
+    if (NIL_P(options)) {
+        handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(file_path),
+                                           &error);
+    } else {
+        rbg_scan_options(options,
+                         "flags", &rb_flags,
+                         NULL);
+
+        flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
+
+        file = g_file_new_for_path((const char *)RVAL2CSTR(file_path));
+        cancellable = g_cancellable_new();
+
+        handle = rsvg_handle_new_from_gfile_sync(file, flags,
+                                                 cancellable,
+                                                 &error);
+
+        g_object_unref(cancellable);
+        g_object_unref(file);
+    }
+#endif
 
     if (error)
         RAISE_GERROR(error);
@@ -434,7 +466,7 @@ Init_rsvg_handle(VALUE mRSVG)
 
 #if LIBRSVG_CHECK_VERSION(2, 14, 0)
     RG_DEF_SMETHOD(new_from_data, 1);
-    RG_DEF_SMETHOD(new_from_file, 1);
+    RG_DEF_SMETHOD(new_from_file, -1);
 #endif
 
     RG_DEF_METHOD(initialize, -1);
@@ -475,5 +507,11 @@ Init_rsvg_handle(VALUE mRSVG)
 
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     RG_DEF_METHOD(render_cairo, -1);
+#endif
+
+#if LIBRSVG_CHECK_VERSION(2, 40, 3)
+    /* RsvgHandleFlags */
+    G_DEF_CLASS(RSVG_TYPE_HANDLE_FLAGS, "Flags", RG_TARGET_NAMESPACE);
+    G_DEF_CONSTANTS(RG_TARGET_NAMESPACE, RSVG_TYPE_HANDLE_FLAGS, "RSVG_HANDLE_");
 #endif
 }
