@@ -120,7 +120,7 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
 #if LIBRSVG_CHECK_VERSION(2, 40, 3)
     {
         GFile *file;
-        GCancellable *cancellable;
+        GCancellable *cancellable = NULL;
         RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
 
         rbg_scan_options(rb_options,
@@ -132,13 +132,11 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
         }
 
         file = g_file_new_for_path((const char *)RVAL2CSTR(rb_file_path));
-        cancellable = g_cancellable_new();
 
         handle = rsvg_handle_new_from_gfile_sync(file, flags,
                                                  cancellable,
                                                  &error);
 
-        g_object_unref(cancellable);
         g_object_unref(file);
     }
 #else
