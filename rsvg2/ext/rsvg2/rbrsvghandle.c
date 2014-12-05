@@ -116,16 +116,15 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
     RsvgHandle *handle;
 
     rb_scan_args(argc, argv, "11", &rb_file_path, &rb_options);
+    rbg_scan_options(rb_options,
+                     "flags", &rb_flags,
+                     NULL);
 
 #if LIBRSVG_CHECK_VERSION(2, 40, 3)
     {
         GFile *file;
         GCancellable *cancellable = NULL;
         RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
-
-        rbg_scan_options(rb_options,
-                         "flags", &rb_flags,
-                         NULL);
 
         if (!NIL_P(rb_flags)) {
             flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
@@ -138,6 +137,13 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
         g_object_unref(file);
     }
 #else
+    if (!NIL_P(rb_flags)) {
+        rb_raise(rb_eArgError,
+                 "librsvg 2.40.3 or later is required for :flags: <%d.%d.%d>",
+                 LIBRSVG_MAJOR_VERSION,
+                 LIBRSVG_MINOR_VERSION,
+                 LIBRSVG_MICRO_VERSION);
+    }
     handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(rb_file_path),
                                        &error);
 #endif
