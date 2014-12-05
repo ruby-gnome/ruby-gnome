@@ -121,15 +121,13 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
     {
         GFile *file;
         GCancellable *cancellable;
-        RsvgHandleFlags flags;
+        RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
 
         rbg_scan_options(rb_options,
                          "flags", &rb_flags,
                          NULL);
 
-        if (NIL_P(rb_flags)) {
-            flags = RSVG_HANDLE_FLAGS_NONE;
-        } else {
+        if (!NIL_P(rb_flags)) {
             flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
         }
 
