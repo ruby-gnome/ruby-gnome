@@ -23,13 +23,15 @@ glib_base = File.join(ruby_gnome2_base, "glib2")
 gdk_pixbuf2_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 rsvg2_base = File.join(ruby_gnome2_base, "rsvg2")
 
+have_make = system("which make > /dev/null")
+
 modules = [
   [glib_base, "glib2"],
   [gdk_pixbuf2_base, "gdk_pixbuf2"],
   [rsvg2_base, "rsvg2"],
 ]
 modules.each do |target, module_name|
-  if system("which make > /dev/null")
+  if File.exist?(File.join(target, "Makefile")) and have_make
     `make -C #{target.dump} > /dev/null` or exit(false)
   end
   $LOAD_PATH.unshift(File.join(target, "ext", module_name))
