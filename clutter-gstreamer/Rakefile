@@ -38,6 +38,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
   package.windows.gobject_introspection_dependencies = [
     "atk",
     "pango",
+    "gdk_pixbuf2",
     "clutter",
     "gstreamer",
   ]
