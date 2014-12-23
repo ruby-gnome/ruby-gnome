@@ -1,7 +1,7 @@
-diff -ru gtk+-2.24.22.orig/gtk/Makefile.am gtk+-2.24.22/gtk/Makefile.am
---- gtk+-2.24.22.orig/gtk/Makefile.am	2013-10-05 07:02:29.000000000 +0900
-+++ gtk+-2.24.22/gtk/Makefile.am	2013-12-30 21:55:11.866931497 +0900
-@@ -1388,7 +1388,7 @@
+diff -ru gtk+-2.24.25.orig/gtk/Makefile.am gtk+-2.24.25/gtk/Makefile.am
+--- gtk+-2.24.25.orig/gtk/Makefile.am	2014-09-30 05:02:16.000000000 +0900
++++ gtk+-2.24.25/gtk/Makefile.am	2014-12-23 17:04:30.451910604 +0900
+@@ -1394,7 +1394,7 @@
  gtk_update_icon_cache_program = $(GTK_UPDATE_ICON_CACHE)
  else
  gtk_update_icon_cache_program =							\
@@ -10,9 +10,9 @@ diff -ru gtk+-2.24.22.orig/gtk/Makefile.am gtk+-2.24.22/gtk/Makefile.am
  endif
  
  gtkbuiltincache.h: @REBUILD@ stamp-icons
-diff -ru gtk+-2.24.22.orig/modules/input/Makefile.am gtk+-2.24.22/modules/input/Makefile.am
---- gtk+-2.24.22.orig/modules/input/Makefile.am	2013-10-05 07:02:29.000000000 +0900
-+++ gtk+-2.24.22/modules/input/Makefile.am	2013-12-30 22:47:07.543702598 +0900
+diff -ru gtk+-2.24.25.orig/modules/input/Makefile.am gtk+-2.24.25/modules/input/Makefile.am
+--- gtk+-2.24.25.orig/modules/input/Makefile.am	2014-09-30 05:02:17.000000000 +0900
++++ gtk+-2.24.25/modules/input/Makefile.am	2014-12-23 17:05:40.646189376 +0900
 @@ -200,10 +200,10 @@
  # after the libraries are installed in their final locations.
  install-data-hook:
@@ -20,9 +20,9 @@ diff -ru gtk+-2.24.22.orig/modules/input/Makefile.am gtk+-2.24.22/modules/input/
 -	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0 ; \
 -	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0 ; \
 -	  echo "$(DESTDOR)$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache" ; \
--	  $(DESTDIR)/$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
-+	  echo $(mkinstalldirs) $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
-+	  $(mkinstalldirs) $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
+-	  $(DESTDIR)$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
++	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
++	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
 +	  echo "$(DESTDOR)$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache" ; \
 +	  $(DESTDIR)$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
  	else \
