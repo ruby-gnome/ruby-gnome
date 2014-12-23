@@ -79,6 +79,9 @@ G_GNUC_INTERNAL void Init_gtk_accel_label(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accel_map(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_accessible(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_action(VALUE mGtk);
+#if GTK_CHECK_VERSION(3, 12, 0)
+    G_GNUC_INTERNAL void Init_gtk_action_bar(VALUE mGtk);
+#endif
 G_GNUC_INTERNAL void Init_gtk_actiongroup(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_activatable(VALUE mGtk);
 G_GNUC_INTERNAL void Init_gtk_adjustment(VALUE mGtk);

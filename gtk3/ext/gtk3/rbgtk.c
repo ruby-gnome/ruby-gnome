@@ -564,6 +564,9 @@ Init_gtk(void)
     Init_gtk_accel_map(RG_TARGET_NAMESPACE);
     Init_gtk_accessible(RG_TARGET_NAMESPACE);
     Init_gtk_action(RG_TARGET_NAMESPACE);
+#if GTK_CHECK_VERSION(3, 12, 0)
+    Init_gtk_action_bar(RG_TARGET_NAMESPACE);
+#endif
     Init_gtk_actiongroup(RG_TARGET_NAMESPACE);
     Init_gtk_activatable(RG_TARGET_NAMESPACE);
     Init_gtk_adjustment(RG_TARGET_NAMESPACE);
