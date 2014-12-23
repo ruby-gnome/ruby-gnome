@@ -128,7 +128,7 @@ module GNOME2
           files                   = FileList["ChangeLog", "README",
                                              "Rakefile", "extconf.rb",
                                              "lib/**/*.rb",
-                                             "{ext,sample,test,test-unit}/**/*"]
+                                             "{ext,sample,test}/**/*"]
           files.existing!
           s.files                 = files
           s.required_ruby_version = @required_ruby_version || ">= 1.9.3"
