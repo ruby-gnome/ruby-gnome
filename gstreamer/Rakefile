@@ -52,7 +52,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
         ],
         :build_concurrently => false,
         :patches => [
-          "libsoup-2.48.0-remove-nonexistent-symbol.diff",
         ],
         :built_file => "bin/libsoup-2.4-1.dll",
       },
