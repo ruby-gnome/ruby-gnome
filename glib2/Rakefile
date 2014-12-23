@@ -48,7 +48,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "libffi",
       :download_base_url => "ftp://sourceware.org/pub/libffi",
       :label => "libffi",
-      :version => "3.1",
+      :version => "3.2.1",
       :windows => {
         :built_file => "bin/libffi-6.dll",
       },
