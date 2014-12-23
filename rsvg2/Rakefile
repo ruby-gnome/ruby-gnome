@@ -59,7 +59,6 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
           "--enable-introspection",
         ],
         :patches => [
-          "librsvg-2.40.1-replace-canonicalize-file-name.diff",
         ],
         :built_file => "bin/librsvg-2-2.dll",
       },
