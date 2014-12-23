@@ -46,13 +46,13 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :name => "clutter-gst",
       :download_site => :gnome,
       :label => "Clutter-GStreamer",
-      :version => "2.0.12",
+      :version => "3.0.0",
       :compression_method => "xz",
       :windows => {
         :configure_args => [
           "--enable-introspection",
         ],
-        :built_file => "bin/libclutter-gst-2.0-0.dll",
+        :built_file => "bin/libclutter-gst-3.0-0.dll",
       },
     }
   ]
