@@ -23,9 +23,7 @@ class ClutterFeatureTest < Test::Unit::TestCase
   end
 
   def test_feature_get_all
-    assert_nothing_raised do
-      Clutter::Feature.all
-    end
+    assert_kind_of(Clutter::FeatureFlags, Clutter::Feature.all)
   end
 
   class TestEnum
