@@ -108,7 +108,7 @@ end
 namespace :windows do
   desc "build all packages for Windows"
   task :build do
-    cd(build) do
+    cd("build") do
       sh("vagrant", "up")
     end
   end
