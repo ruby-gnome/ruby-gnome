@@ -21,8 +21,8 @@ diff -ru gtk+-2.24.25.orig/modules/input/Makefile.am gtk+-2.24.25/modules/input/
 -	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0 ; \
 -	  echo "$(DESTDOR)$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache" ; \
 -	  $(DESTDIR)$(bindir)/gtk-query-immodules-2.0 > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
-+	  echo $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
-+	  $(mkinstalldirs) $(DESTDIR)$(sysconfdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
++	  echo $(mkinstalldirs) $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
++	  $(mkinstalldirs) $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION) ; \
 +	  echo "$(DESTDOR)$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache" ; \
 +	  $(DESTDIR)$(bindir)/gtk-query-immodules-2.0$(EXEEXT) > $(DESTDIR)$(libdir)/gtk-2.0/$(GTK_BINARY_VERSION)/immodules.cache ; \
  	else \
