@@ -22,7 +22,7 @@ class ClutterFeatureTest < Test::Unit::TestCase
     assert_boolean(Clutter::Feature.available?(feature_flag))
   end
 
-  def test_feature_get_all
+  def test_feature_all
     assert_kind_of(Clutter::FeatureFlags, Clutter::Feature.all)
   end
 
