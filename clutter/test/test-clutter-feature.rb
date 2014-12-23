@@ -17,17 +17,17 @@
 class ClutterFeatureTest < Test::Unit::TestCase
   include ClutterTestUtils
 
-  def test_feature_avaliable
+  def test_avaliable
     feature_flag = Clutter::FeatureFlags::SYNC_TO_VBLANK
     assert_boolean(Clutter::Feature.available?(feature_flag))
   end
 
-  def test_feature_all
+  def test_all
     assert_kind_of(Clutter::FeatureFlags, Clutter::Feature.all)
   end
 
   class TestEnum
-    def test_feature_flags
+    def test_flags
       assert_const_defined(Clutter::FeatureFlags, :TEXTURE_NPOT)
     end
   end
