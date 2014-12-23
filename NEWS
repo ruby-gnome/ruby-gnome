@@ -2,6 +2,112 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.2.4: 2014-12-23
+
+It is a x64 Windows support release.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Stopped to call g_thread_init() for GLib 2.32.0 or later because
+      g_thread_init() is called automatically.
+    * Added GLib.format_size.
+    * Added GLib::Source#name.
+    * Added GLib::Source#name=.
+    * Added GLib::Source#ready_time.
+    * Added GLib::Source#ready_time=.
+    * Added GLib::Source#destroy.
+  * Fixes
+    * Fixed a bug that wrong converter is used on bigendian
+      environment.
+      [GitHub#270][Reported by mtasaka]
+
+==== Ruby/GIO2
+
+  * Improvements
+    * Added Gio::DBus.
+  * Fixes
+    * Fixed a bug that Gio::ContentType#executable? isn't defined by
+      correct name.
+
+==== Ruby/GTK2
+
+  * Improvements
+    * Gtk::AboutDialog#show: Supported license_type option.
+      [ruby-gnome2-devel-ja][Patch by Hiroyuki Ito]
+  * Fixes
+    * Gtk::AboutDialog#show: Fixed a bug that wrap_license option
+      doesn't work.
+      [ruby-gnome2-devel-ja][Patch by Hiroyuki Ito]
+
+==== Ruby/GObjectIntrospection
+
+  * Improvements
+    * Supported prefix removing from method name.
+    * Supported GList of UTF-8.
+      [ruby-gnome2-devel-en][Reported by Detlef Reichl]
+    * Added documentation.
+      [GitHub#267][Patch by Detlef Reichl]
+  * Fixes
+    * Fixed a bug that out only argument is required.
+      [GitHub#268][Reported by mtasaka]
+
+==== Ruby/GDK3
+
+  * Improvements
+    * Gdk::Window: Added deprecated constants for backward compatibility.
+    * Supported Gdk::Keyval module functions.
+      [GitHub#265][Reported by Detlef Reichl]
+    * Cairo::Context#set_source_rgba: Re-supported
+      (({set_source_rgba(r, g, b, a)})) style.
+      [GitHub#272][Patch by Detlef Reichl]
+    * [windows] Bundled the new default GNOME icon theme.
+      [GitHub#276][Reported by glurp]
+  * Fixes
+    * Gdk::Color.parse: Fixed unexpected API change.
+      [GitHub#276][Reported by glurp]
+    * Fixed a bug that Gdk::Event::Mask fallback doesn't work.
+      [GitHub#276][Reported by glurp]
+
+==== Ruby/GTK3
+
+  * Improvements
+    * Gtk::AboutDialog#show: Supported license_type option.
+      [ruby-gnome2-devel-ja][Patch by Hiroyuki Ito]
+    * Gtk::ActionBar: Added.
+      [GitHub#282][Suggested by Christopher L. Ramsey]
+  * Fixes
+    * Gtk::AboutDialog#show: Fixed a bug that wrap_license option
+      doesn't work.
+      [ruby-gnome2-devel-ja][Patch by Hiroyuki Ito]
+
+==== Ruby/RSVG2
+
+  * Improvements
+    * RSVG::Handle.new_from_file: Supported flags. You can open a
+      large file with (({:flags => :unlimited})).
+      [GitHub#263][Patch by Taro Matsuzawa]
+
+==== Ruby/Clutter
+
+  * Improvements
+    * Added Clutter::Feature.
+  * Fixes
+    * Added missing require for Ruby/Pango.
+    * Fixed initializing order.
+      [GitHub#274][Reported by mtasaka]
+
+=== Thanks
+
+  * Detlef Reichl
+  * Hiroyuki Ito
+  * mtasaka
+  * glurp
+  * Taro Matsuzawa
+  * Christopher L. Ramsey
+
 == Ruby-GNOME2 2.2.3: 2014-10-26
 
 It is a bug fix release.
