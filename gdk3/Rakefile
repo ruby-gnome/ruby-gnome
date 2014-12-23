@@ -64,6 +64,7 @@ package_task = GNOME2::Rake::PackageTask.new do |package|
       :download_site => :gnome,
       :label => "adwaita-icon-theme",
       :version => "3.14.1",
+      :compression_method => "xz",
       :windows => {
         :configure_args => [],
         :build_concurrently => false,
