@@ -44,6 +44,7 @@ run \
   libglib2.0-dev \
   libgdk-pixbuf2.0-dev \
   gobject-introspection \
+  libgtk2.0-bin \
   flex \
   bison \
   python-dev \
