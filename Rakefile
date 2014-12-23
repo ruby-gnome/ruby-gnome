@@ -105,6 +105,15 @@ task :build => ["Makefile"] do
   sh("make")
 end
 
+namespace :windows do
+  desc "build all packages for Windows"
+  task :build do
+    cd(build) do
+      sh("vagrant", "up")
+    end
+  end
+end
+
 desc "clean all packages"
 task :clean do
   sh("make", "clean") if File.exist?("Makefile")
