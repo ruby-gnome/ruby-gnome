@@ -11,7 +11,7 @@ gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
-gtk_source_view3_gi_base = File.join(ruby_gnome2_base, "gtksourceview3-gi")
+gtk_source_view3_base = File.join(ruby_gnome2_base, "gtksourceview3")
 
 $LOAD_PATH.unshift(glib_base)
 require 'test/glib-test-init'
@@ -25,7 +25,7 @@ dependencies = [
   gobject_introspection_base,
   gdk3_base,
   gtk3_base,
-  gtk_source_view3_gi_base,
+  gtk_source_view3_base,
 ]
 dependencies.each do |target|
   makefile = File.join(target, "Makefile")
