@@ -48,6 +48,7 @@ module Vte
         remove_method(:init)
         remove_method(:const_missing)
       end
+      Gtk.init if Gtk.respond_to?(:init)
       loader = Loader.new(self)
       loader.load("Vte")
     end

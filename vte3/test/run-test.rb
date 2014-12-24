@@ -27,7 +27,7 @@ cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
-vte3_gi_base = File.join(ruby_gnome2_base, "vte3-gi")
+vte3_base = File.join(ruby_gnome2_base, "vte3")
 
 modules = [
   [glib_base, "glib2"],
@@ -38,7 +38,7 @@ modules = [
   [gobject_introspection_base, "gobject-introspection"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
-  [vte3_gi_base, "vte3-gi"],
+  [vte3_base, "vte3"],
 ]
 
 modules.each do |target, module_name|
@@ -55,7 +55,7 @@ require "glib-test-init"
 
 $VERBOSE = false # TODO: remove me
 
-$LOAD_PATH.unshift(File.join(vte3_gi_base, "test"))
+$LOAD_PATH.unshift(File.join(vte3_base, "test"))
 require "vte3-test-utils"
 
 require "vte3"
