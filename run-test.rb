@@ -30,7 +30,6 @@ end
 ignored_modules = [
   "gstreamer-no-gi",
   "gdk3-no-gi",
-  "gtk3-gi",
 ]
 
 succeeded = true
