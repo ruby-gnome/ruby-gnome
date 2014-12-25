@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestHandle < Test::Unit::TestCase
+  include RSVG2TestUtils
+
   sub_test_case ".new_from_file" do
     sub_test_case "options" do
       def setup
@@ -74,6 +76,7 @@ class TestHandle < Test::Unit::TestCase
       end
 
       def test_unlimited
+        only_rsvg_version(2, 40, 3)
         handle = RSVG::Handle.new_from_file(@large_svg_path,
                                             :flags => :flag_unlimited)
         assert_equal([0, 0, 0.0, 0.0],
