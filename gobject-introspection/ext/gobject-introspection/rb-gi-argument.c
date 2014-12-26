@@ -163,6 +163,23 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
 }
 
 static VALUE
+interface_struct_to_ruby(GIArgument *argument,
+                         G_GNUC_UNUSED GITypeInfo *type_info,
+                         GIBaseInfo *interface_info)
+{
+    const char *namespace;
+    const char *name;
+    VALUE rb_module;
+    VALUE rb_class;
+
+    namespace = g_base_info_get_namespace(interface_info);
+    name = g_base_info_get_name(interface_info);
+    rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
+    rb_class = rb_const_get(rb_module, rb_intern(name));
+    return Data_Wrap_Struct(rb_class, NULL, NULL, argument->v_pointer);
+}
+
+static VALUE
 interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
     VALUE rb_interface;
@@ -188,7 +205,11 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
                  "TODO: GIArgument(interface)[callback] -> Ruby");
         break;
     case GI_INFO_TYPE_STRUCT:
-        if (gtype == G_TYPE_BYTES) {
+        if (gtype == G_TYPE_NONE) {
+            rb_interface = interface_struct_to_ruby(argument,
+                                                    type_info,
+                                                    interface_info);
+        } else if (gtype == G_TYPE_BYTES) {
             GBytes *bytes = argument->v_pointer;
             gconstpointer data;
             gsize size;
