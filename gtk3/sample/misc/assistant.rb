@@ -18,7 +18,6 @@ class AssistantRunner
     @generous_assistant = nil
     @selected_branch = "A"
     @nonlinear_assistant = nil
-    @full_featured_assistant = nil
   end
 
   def run_simple_assistant
@@ -34,11 +33,6 @@ class AssistantRunner
   def run_nonlinear_assistant
     @nonlinear_assistant = run_assistant(@nonlinear_assistant,
                                          :create_nonlinear_assistant)
-  end
-
-  def run_full_featured_assistant
-    @full_featured_assistant = run_assistant(@full_featured_assistant,
-                                             :create_full_featured_assistant)
   end
 
   private
@@ -84,7 +78,7 @@ class AssistantRunner
       GLib::Timeout.add(300) do
         page = assistant.get_nth_page(assistant.current_page)
         progress = page.child
-        value = progress.fraction = progress.fraction + 0.1
+        value = progress.fraction = (progress.fraction + 0.1).round(1)
         continue = value < 1.0
         assistant.set_page_complete(page, true) unless continue
         continue
@@ -256,67 +250,13 @@ class AssistantRunner
     assistant.set_page_type(page, :confirm)
     assistant.set_page_complete(page, true)
   end
-
-  def create_full_featured_assistant
-    assistant = Gtk::Assistant.new
-    assistant.set_default_size(400, 300)
-    assistant.signal_connect("cancel") do
-      puts "cancel"
-      assistant.hide
-    end
-    assistant.signal_connect("close") do
-      puts "close"
-      assistant.hide
-    end
-    assistant.signal_connect("apply") do
-      puts "apply"
-    end
-    assistant.signal_connect("prepare") do |_assistant, page|
-      prepare_cb(_assistant, page)
-    end
-
-    button = Gtk::Button.new(:stock_id => Gtk::Stock::STOP)
-    button.show
-    assistant.add_action_widget(button)
-
-    page = create_test_page("Page 1")
-    page.show
-    assistant.append_page(page)
-    assistant.set_page_title(page, "Page 1")
-    assistant.set_page_complete(page, true)
-
-    #- set a side image
-    pixbuf = page.render_icon(Gtk::Stock::DIALOG_WARNING, :dialog)
-    assistant.set_page_side_image(page, pixbuf)
-
-    #- set a header image
-    pixbuf = page.render_icon(Gtk::Stock::DIALOG_INFO, :dialog)
-    assistant.set_page_header_image(page, pixbuf)
-
-    page = create_test_page("Invisible page")
-    assistant.append_page(page)
-
-    page = create_test_page("Page 3")
-    page.show
-    assistant.append_page(page)
-    assistant.set_page_title(page, "Page 3")
-    assistant.set_page_type(page, :confirm)
-    assistant.set_page_complete(page, true)
-
-    #- set a header image
-    pixbuf = page.render_icon(Gtk::Stock::DIALOG_INFO, :dialog)
-    assistant.set_page_header_image(page, pixbuf)
-
-    assistant
-  end
 end
 
 runner = AssistantRunner.new
 buttons = [
-    [ "simple assistant", proc { runner.run_simple_assistant } ],
-    [ "generous assistant", proc { runner.run_generous_assistant } ],
-    [ "nonlinear assistant", proc { runner.run_nonlinear_assistant } ],
-    [ "full featured assistant", proc { runner.run_full_featured_assistant } ],
+    ["simple assistant", proc {runner.run_simple_assistant}],
+    ["generous assistant", proc {runner.run_generous_assistant}],
+    ["nonlinear assistant", proc {runner.run_nonlinear_assistant}]
 ]
 
 if ENV["RTL"]
@@ -324,9 +264,8 @@ if ENV["RTL"]
 end
 
 window = Gtk::Window.new(:toplevel)
-window.set_title("hoge")
-window.signal_connect("destroy") { Gtk.main_quit }
-window.signal_connect("delete-event") { false }
+window.signal_connect("destroy") {Gtk.main_quit}
+window.signal_connect("delete-event") {false}
 
 box = Gtk::Box.new(:vertical, 6)
 window.add(box)

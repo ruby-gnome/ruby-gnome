@@ -8,7 +8,7 @@
   $Id: buttonbox.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 def create_bbox_window(horizontal, title, pos, spacing, layout)
   window = Gtk::Window.new(title)
@@ -32,7 +32,7 @@ def create_bbox_window(horizontal, title, pos, spacing, layout)
   bbox.layout_style = layout
   bbox.spacing = spacing
   box1.border_width = 25
-  box1.pack_start(bbox, true, true, 0)
+  box1.pack_start(bbox, :expand => true, :fill => true, :padding => 0)
 
   button = Gtk::Button.new(:label => "OK")
   bbox.add(button)

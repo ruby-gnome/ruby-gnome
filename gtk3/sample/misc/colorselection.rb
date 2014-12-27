@@ -7,19 +7,16 @@
   $Id: colorselection.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
-
-settings = Gtk::Settings.default
-
-# You can save the palette to use right click on the palette.
-Gtk::ColorSelection.set_change_palette_hook{|screen, colors|
-  puts strs = Gtk::ColorSelection.palette_to_string(colors)
-  settings.gtk_color_palette = strs
-}
+require "gtk3"
 
 a = Gtk::ColorSelection.new
 a.has_palette = true
+a.signal_connect("color_changed") do |w|
+  unless w.adjusting?
+    p w.current_rgba.to_s
+  end
+end
 
-Gtk::Window.new.add(a).show_all.signal_connect("destroy"){Gtk.main_quit}
+Gtk::Window.new.add(a).show_all.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main

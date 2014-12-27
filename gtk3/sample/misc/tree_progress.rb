@@ -9,7 +9,7 @@
 =end
 
 
-require 'gtk3'
+require "gtk3"
 
 win = Gtk::Window.new("Gtk::CellRendererProgress sample")
 win.set_default_size(300, 50)
@@ -36,28 +36,26 @@ prenderer = Gtk::CellRendererProgress.new
 pcol = Gtk::TreeViewColumn.new("Progress", prenderer, :value  => 1)
 view.append_column(pcol)
 
-win.signal_connect("delete_event"){
+win.signal_connect("delete_event") do
   Gtk.main_quit
-}
+end
 
 win.add(view)
 win.show_all
 
 dir = 1
 thr = Thread.new do
-  loop {
+  loop do
+    value = prog2[1] + dir
+    if value > 100
+      dir = - dir
+    end
+    if value < 0
+      dir = - dir
+    end
     prog2[1] += dir
-    if prog2[1] > 100
-      prog2[1] = 100
-      dir = - dir
-    end
-    if prog2[1] < 0
-      prog2[1] = 0
-      dir = - dir
-    end
-    sleep 0.01
-  }
+    sleep 0.1
+  end
 end
 
 Gtk.main
-

@@ -93,7 +93,11 @@ module Demo
 
     # Create a new surface of the appropriate size to store our scribbles
     def scribble_configure_event(widget)
-      @cairo_context = widget.window.create_cairo_context
+      allocation = widget.allocation
+      surface = widget.window.create_similar_surface(:color,
+                                                     allocation.width,
+                                                     allocation.height)
+      @cairo_context = Cairo::Context.new(surface)
       @cairo_context.set_source_rgb(1, 1, 1)
       @cairo_context.paint
 
@@ -138,7 +142,7 @@ module Demo
 
     # Redraw the screen from the surface
     def scribble_draw(widget, event)
-      event.set_source(@cairo_context.source)
+      event.set_source(@cairo_context.target)
       event.paint
       return false
     end

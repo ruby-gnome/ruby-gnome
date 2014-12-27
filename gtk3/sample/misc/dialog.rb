@@ -8,30 +8,30 @@
   $Id: dialog.rb,v 1.6 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::Dialog sample")
-button = Gtk::Button.new("Create Dialog")
-button.signal_connect("clicked") do 
+button = Gtk::Button.new(:label => "Create Dialog")
+button.signal_connect("clicked") do
   dialog = Gtk::Dialog.new
   dialog.title = "Gtk::Dialog Sample"
   dialog.transient_for = window
   dialog.set_default_size(300, 300)
-  dialog.vbox.add(Gtk::Label.new("Gtk::Dialog Sample"))
+  dialog.child.add(Gtk::Label.new("Gtk::Dialog Sample"))
 
 
-  dialog.add_button("OK", Gtk::Dialog::RESPONSE_OK)
-  dialog.add_button(Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL)
-  dialog.add_button(Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_CLOSE)
-  dialog.set_default_response(Gtk::Dialog::RESPONSE_CANCEL)
+  dialog.add_button("OK", Gtk::ResponseType::OK)
+  dialog.add_button(Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL)
+  dialog.add_button(Gtk::Stock::CLOSE, Gtk::ResponseType::CLOSE)
+  dialog.set_default_response(Gtk::ResponseType::CANCEL)
 
   dialog.signal_connect("response") do |widget, response|
     case response
-    when Gtk::Dialog::RESPONSE_OK
+    when Gtk::ResponseType::OK
       p "OK"
-    when Gtk::Dialog::RESPONSE_CANCEL
+    when Gtk::ResponseType::CANCEL
       p "Cancel"
-    when Gtk::Dialog::RESPONSE_CLOSE
+    when Gtk::ResponseType::CLOSE
       p "Close"
       dialog.destroy
     end
@@ -39,6 +39,6 @@ button.signal_connect("clicked") do
   dialog.show_all
 end
 
-window.add(button).show_all.signal_connect("destroy"){Gtk.main_quit}
+window.add(button).show_all.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main
