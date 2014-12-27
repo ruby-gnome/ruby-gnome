@@ -167,8 +167,7 @@ module Gdk
         "TYPE_STRING"     => "STRING",
       }
       selections.each do |key, value|
-        # TODO: Gdk::Atom.intern is not working yet.
-        #@selection_module.const_set(key, Gdk::Atom.intern(value))
+        @selection_module.const_set(key, Gdk::Atom.intern(value))
       end
     end
 
