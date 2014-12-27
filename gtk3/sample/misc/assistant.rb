@@ -10,7 +10,7 @@
   $Id: assistant.rb,v 1.1 2006/11/23 08:39:12 mutoh Exp $
 =end
 
-require "gtk3-gi"
+require "gtk3"
 
 class AssistantRunner
   def initialize

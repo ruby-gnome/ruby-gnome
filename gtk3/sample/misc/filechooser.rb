@@ -8,7 +8,7 @@
   $Id: filechooser.rb,v 1.5 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require "gtk3-gi"
+require "gtk3"
 
 dialog =  Gtk::FileChooserDialog.new(:title => "Gtk::FileChooser sample", 
 				     :action => Gtk::FileChooser::Action::OPEN,                                 

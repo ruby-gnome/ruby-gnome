@@ -9,7 +9,7 @@
   $Id: drag-move.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require "gtk3-gi"
+require "gtk3"
 
 class DraggableWidget < Gtk::EventBox
   def initialize

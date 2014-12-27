@@ -10,7 +10,7 @@
   $Id: cairo-pong.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require "gtk3-gi"
+require "gtk3"
 
 unless Gdk.cairo_available?
   raise "GTK+ 2.8.0 or later and cairo support are required."
