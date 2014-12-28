@@ -284,7 +284,7 @@ typedef struct {
     void (*type_init_hook)(VALUE klass, gpointer user_data);
     void (*rvalue2gvalue)(VALUE value, GValue *result, gpointer user_data);
     VALUE (*gvalue2rvalue)(const GValue *value, gpointer user_data);
-    void (*initialize)(VALUE rb_instance, gpointer insntance, gpointer user_data);
+    void (*initialize)(VALUE rb_instance, gpointer instance, gpointer user_data);
     gpointer (*robj2instance)(VALUE rb_instance, gpointer user_data);
     VALUE (*instance2robj)(gpointer instance, gpointer user_data);
     void (*unref)(gpointer instance, gpointer user_data);
