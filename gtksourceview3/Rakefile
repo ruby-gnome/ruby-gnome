@@ -22,7 +22,7 @@ require "gnome2/rake/package-task"
 package_task = GNOME2::Rake::PackageTask.new do |package|
   package.summary = "Ruby/GtkSourceView3 is a Ruby binding of gtksourceview-3.x."
   package.description = "Ruby/GtkSourceView3 is a Ruby binding of gtksourceview-3.x."
-  package.dependency.gem.runtime = ["gtk3", "gobject-introspecion"]
+  package.dependency.gem.runtime = ["gtk3", "gobject-introspection"]
   package.windows.packages = []
   package.windows.dependencies = []
   package.windows.build_dependencies = [
