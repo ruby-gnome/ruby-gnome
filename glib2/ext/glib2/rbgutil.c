@@ -135,7 +135,7 @@ rbgutil_key_equal(VALUE rb_key, const char *key)
 
 static gboolean
 rbg_interrupt_prepare (G_GNUC_UNUSED GSource *soruce,
-                      G_GNUC_UNUSED gint *timouet)
+                      G_GNUC_UNUSED gint *timeout)
 {
     return rb_thread_interrupted(rb_thread_current());
 }
