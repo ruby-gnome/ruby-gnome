@@ -64,7 +64,7 @@ module GNOME2
                 task :build => built_file.to_s
               else
                 task :build => [download_task] do
-                  build_patckage_task_body(package)
+                  build_package_task_body(package)
                 end
               end
             end
