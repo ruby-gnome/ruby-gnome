@@ -79,4 +79,10 @@ class TestGtkLevelBar < Test::Unit::TestCase
       assert_nil(@level_bar.get_offset_value("nonexistent"))
     end
   end
+
+  class TestEnum < self
+    def test_level_bar_mode
+      assert_const_defined(Gtk::LevelBar::Mode, :CONTINUOUS)
+    end
+  end
 end
