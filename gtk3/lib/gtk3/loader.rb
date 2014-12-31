@@ -55,6 +55,7 @@ module Gtk
       require "gtk3/gtk"
       require "gtk3/image"
       require "gtk3/label"
+      require "gtk3/level-bar"
       require "gtk3/scrolled-window"
       require "gtk3/search-bar"
       require "gtk3/spin-button"
