@@ -24,7 +24,10 @@ priorlibs = [
 ]
 
 unsupported_libraries = [
-  "gdk3-no-gi"
+  "gdk3-no-gi",
+  "gtk3-no-gi",
+  "gtksourceview3-no-gi",
+  "vte3-no-gi",
 ]
 
 #
