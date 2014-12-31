@@ -25,6 +25,7 @@ module Gtk
     def pre_load(repository, namespace)
       call_init_function(repository, namespace)
       define_stock_module
+      setup_pending_constants
     end
 
     def call_init_function(repository, namespace)
@@ -42,7 +43,12 @@ module Gtk
       @base_module.const_set("Stock", @stock_module)
     end
 
+    def level_bar_class
+      @level_bar_class ||= @base_module.const_get(:LevelBar)
+    end
+
     def post_load(repository, namespace)
+      apply_pending_constants
       require_libraries
     end
 
@@ -141,8 +147,23 @@ module Gtk
       case info.name
       when /\ASTOCK_/
         @stock_module.const_set($POSTMATCH, info.value)
+      when /\ALEVEL_BAR_/
+        @pending_constants << info
       else
         super
+      end
+    end
+
+    def setup_pending_constants
+      @pending_constants = []
+    end
+
+    def apply_pending_constants
+      @pending_constants.each do |info|
+        case info.name
+        when /\ALEVEL_BAR_/
+          level_bar_class.const_set($POSTMATCH, info.value)
+        end
       end
     end
   end
