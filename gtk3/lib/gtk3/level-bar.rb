@@ -19,8 +19,8 @@ module Gtk
     alias_method :get_offset_value_raw, :get_offset_value
 
     def get_offset_value(name)
-      result, offset = get_offset_value_raw(name)
-      if result
+      found, offset = get_offset_value_raw(name)
+      if found
         offset
       else
         nil
