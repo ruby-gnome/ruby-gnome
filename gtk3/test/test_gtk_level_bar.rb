@@ -78,6 +78,12 @@ class TestGtkLevelBar < Test::Unit::TestCase
     def test_get_nonexistent_offset_value
       assert_nil(@level_bar.get_offset_value("nonexistent"))
     end
+
+    def test_inverted
+      only_gtk_version(3, 8, 0)
+      @level_bar.inverted = true
+      assert_true(@level_bar.inverted?)
+    end
   end
 
   class TestEnum < self
