@@ -2,7 +2,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   include GtkTestUtils
 
   def test_constants
-    assert_kind_of(Gtk::BuilderError, Gtk::BuilderError::INVALID_TAG)
+    assert_const_defined(Gtk::BuilderError, :INVALID_TAG)
   end
 
   def test_new
