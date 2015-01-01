@@ -16,9 +16,8 @@
 
 module Gtk
   class IconTheme
-    def icons(context=nil)
-      list_icons(context)
-    end
+    alias_method :icons, :list_icons
+    alias_method :contexts, :list_contexts
 
     alias_method :choose_icon_raw, :choose_icon
     def choose_icon(icon_name, size, flags=nil)
@@ -26,10 +25,6 @@ module Gtk
         flags = :generic_fallback
       end
       choose_icon_raw(icon_name, size, flags)
-    end
-
-    def contexts
-      list_contexts
     end
   end
 end
