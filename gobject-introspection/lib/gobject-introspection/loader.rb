@@ -385,7 +385,7 @@ module GObjectIntrospection
         end
       else
         case name
-        when /\Aget_/ =~ name
+        when /\Aget_/
           if function_info.n_in_args.zero?
             $POSTMATCH
           else
