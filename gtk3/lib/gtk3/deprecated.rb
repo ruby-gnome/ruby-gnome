@@ -1003,4 +1003,9 @@ module Gtk
     define_deprecated_method :active_focus, :activate_focus
     define_deprecated_method :active_default, :activate_default
   end
+
+  class RecentFilter
+    extend GLib::Deprecatable
+    define_deprecated_const :Flags, 'Gtk::RecentFilterFlags'
+  end
 end
