@@ -16,7 +16,7 @@
 
 module Gtk
   class LevelBar
-    alias_method :get_offset_value_raw, :get_offset_value if defined?(:get_offset_value)
+    alias_method :get_offset_value_raw, :get_offset_value if method_defined?(:get_offset_value)
 
     def get_offset_value(name)
       if respond_to?(:get_offset_value_raw, true)
