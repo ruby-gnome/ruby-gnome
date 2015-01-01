@@ -32,7 +32,8 @@ ignored_modules = [
   "gdk3-no-gi",
   "gtk3-no-gi",
   "gtksourceview3-no-gi",
-  "vte3-no-gi",]
+  "vte3-no-gi",
+]
 
 succeeded = true
 targets.each do |target|
