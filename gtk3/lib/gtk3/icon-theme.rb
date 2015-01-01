@@ -16,7 +16,9 @@
 
 module Gtk
   class IconTheme
-    alias_method :icons, :list_icons
+    def icons
+      list_icons(nil)
+    end
 
     alias_method :choose_icon_raw, :choose_icon
     def choose_icon(icon_name, size, flags=nil)
