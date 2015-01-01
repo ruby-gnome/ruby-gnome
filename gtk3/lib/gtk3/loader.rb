@@ -60,6 +60,7 @@ module Gtk
       require "gtk3/container"
       require "gtk3/css-provider"
       require "gtk3/gtk"
+      require "gtk3/icon-theme"
       require "gtk3/image"
       require "gtk3/label"
       require "gtk3/level-bar"
