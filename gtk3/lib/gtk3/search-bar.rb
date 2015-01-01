@@ -16,10 +16,12 @@
 
 module Gtk
   class SearchBar
-    alias_method :connect_entry_raw, :connect_entry
-    def connect_entry(entry)
-      connect_entry_raw(entry)
-      self
+    if method_defined?(:connect_entry)
+      alias_method :connect_entry_raw, :connect_entry
+      def connect_entry(entry)
+        connect_entry_raw(entry)
+        self
+      end
     end
   end
 end
