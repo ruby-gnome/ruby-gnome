@@ -20,12 +20,12 @@ module Gtk
 
     def get_offset_value(name)
       if respond_to?(:get_offset_value_raw, true)
-      found, offset = get_offset_value_raw(name)
-      if found
-        offset
-      else
-        nil
-      end
+        found, offset = get_offset_value_raw(name)
+        if found
+          offset
+        else
+          nil
+        end
       end
     end
   end
