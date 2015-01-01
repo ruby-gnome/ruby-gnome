@@ -56,6 +56,7 @@ module Gtk
       require "gtk3/box"
       require "gtk3/button"
       require "gtk3/border"
+      require "gtk3/builder"
       require "gtk3/container"
       require "gtk3/css-provider"
       require "gtk3/gtk"
