@@ -21,6 +21,6 @@ class TestGtkRecentFilterInfo < Test::Unit::TestCase
 
   def test_contains
     info = Gtk::RecentFilterInfo.new
-    assert_equal(Gtk::RecentFilter::Flags.new, info.contains)
+    assert_equal(Gtk::RecentFilterFlags.new, info.contains)
   end
 end
