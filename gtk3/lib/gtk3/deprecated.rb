@@ -11,7 +11,6 @@ module Gtk
   define_deprecated_const :InputDialog,            :raise => "Don't use this widget anymore."
   define_deprecated_const :ItemFactory,            :raise => "Use 'Gtk::UIManager' instead."
   define_deprecated_const :OptionMenu,             :raise => "Use 'Gtk::ComboBox' instead."
-  define_deprecated_const :PlacesSidebarOpenFlags, :raise => "Use 'Gtk::PlacesOpenFlags' instead."
   define_deprecated_const :RC,                     :raise => "Use 'Gtk::StyleContext' instead."
   define_deprecated_const :RcStyle,                :raise => "Use 'Gtk::CssProvider' instead."
   define_deprecated_const :Ruler,                  :raise => "Don't use this widget anymore."
