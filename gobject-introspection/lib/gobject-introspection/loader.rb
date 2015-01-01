@@ -355,7 +355,9 @@ module GObjectIntrospection
         name = name.gsub(/\A#{Regexp.escape(options[:prefix])}/, "")
       end
       return_type = function_info.return_type
-      if return_type.tag == GObjectIntrospection::TypeTag::BOOLEAN
+      return_type_tag = return_type.tag
+      case return_type_tag
+      when TypeTag::BOOLEAN
         case name
         when /\A(?:is|get_is)_/
           "#{$POSTMATCH}?"
@@ -370,10 +372,25 @@ module GObjectIntrospection
         else
           name
         end
-      elsif /\Aget_/ =~ name and function_info.n_in_args.zero?
-        $POSTMATCH
+      when TypeTag::GLIST, TypeTag::GSLIST
+        case name
+        when /\Alist_/
+          if function_info.n_in_args.zero?
+            $POSTMATCH
+          else
+            name
+          end
+        else
+          name
+        end
       else
         case name
+        when /\Aget_/ =~ name
+          if function_info.n_in_args.zero?
+            $POSTMATCH
+          else
+            name
+          end
         when "to_string"
           "to_s"
         when "foreach"
