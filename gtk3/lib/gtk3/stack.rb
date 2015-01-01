@@ -16,35 +16,39 @@
 
 module Gtk
   class Stack
-    alias_method :set_visible_child_raw, :set_visible_child
-    def set_visible_child(widget_or_name, transition_type=nil)
-      case widget_or_name
-      when String
-        name = widget_or_name
-      else
-        widget = widget_or_name
-      end
-
-      if widget
-        set_visible_child_raw(widget)
-      else
-        if transition_type
-          set_visible_child_full(name, transition_type)
+    if method_defined?(:set_visible_child)
+      alias_method :set_visible_child_raw, :set_visible_child
+      def set_visible_child(widget_or_name, transition_type=nil)
+        case widget_or_name
+        when String
+          name = widget_or_name
         else
-          set_visible_child_name(name)
+          widget = widget_or_name
+        end
+
+        if widget
+          set_visible_child_raw(widget)
+        else
+          if transition_type
+            set_visible_child_full(name, transition_type)
+          else
+            set_visible_child_name(name)
+          end
         end
       end
     end
 
-    def add(widget, name=nil, title=nil)
-      if title
-        add_titled(widget, name, title)
-      elsif name
-        add_named(widget, name)
-      else
-        super(widget)
+    if method_defined?(:add_titled) && method_defined?(:add_named)
+      def add(widget, name=nil, title=nil)
+        if title
+          add_titled(widget, name, title)
+        elsif name
+          add_named(widget, name)
+        else
+          super(widget)
+        end
+        self
       end
-      self
     end
   end
 end
