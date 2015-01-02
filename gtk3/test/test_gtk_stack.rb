@@ -108,7 +108,6 @@ class TestGtkStack < Test::Unit::TestCase
 
     def test_child_by_name
       only_gtk_version(3, 12, 0)
-      @stack.set_visible_child(@visible_widget_name, :crossfade)
       assert_kind_of(Gtk::EventBox,
                      @stack.get_child_by_name(@visible_widget_name))
     end
