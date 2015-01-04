@@ -20,5 +20,9 @@ module Gtk
     def add(widget, property=nil)
       add_raw(widget)
     end
+    
+    def <<(widget)
+      add(widget)
+    end
   end
 end
