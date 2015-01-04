@@ -16,6 +16,7 @@
 
 module Gtk
   class Container
+    alias_method :<<, :add
     alias_method :add_raw, :add
     def add(widget, property=nil)
       add_raw(widget)
