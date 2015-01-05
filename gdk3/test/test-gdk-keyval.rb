@@ -19,6 +19,14 @@ class TestGdkKeyval < Test::Unit::TestCase
     assert_equal("a".unpack("c")[0], Gdk::Keyval::KEY_a)
   end
 
+  def test_to_name
+    assert_equal("A", Gdk::Keyval.to_name(Gdk::Keyval::KEY_A))
+  end
+
+  def test_from_name
+    assert_equal("A".unpack("c")[0], Gdk::Keyval.from_name("A"))
+  end
+
   sub_test_case "#lower?" do
     def test_lower
       assert_true(Gdk::Keyval.lower?(Gdk::Keyval::KEY_a))
@@ -37,10 +45,6 @@ class TestGdkKeyval < Test::Unit::TestCase
     def test_upper
       assert_true(Gdk::Keyval.upper?(Gdk::Keyval::KEY_A))
     end
-  end
-
-  def test_name
-    assert_equal("A", Gdk::Keyval.name(Gdk::Keyval::KEY_A))
   end
 
   sub_test_case "#to_lower" do
