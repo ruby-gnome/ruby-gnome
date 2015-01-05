@@ -219,6 +219,10 @@ module Gdk
         end
       when /\Akeyval_/
         name = rubyish_method_name(info, :prefix => "keyval_")
+        case name
+        when "name"
+          name = "to_name"
+        end
         define_module_function(@keyval_module, name, info)
       else
         super
