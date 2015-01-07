@@ -53,8 +53,12 @@ module Gdk
 
   class Event
     extend GLib::Deprecatable
+
     define_deprecated_const :Mask, "Gdk::EventMask"
+    define_deprecated_enums "Gdk::EventMask"
+
     define_deprecated_const :Type, "Gdk::EventType"
+    define_deprecated_enums "Gdk::EventType"
   end
 
   class EventCrossing
