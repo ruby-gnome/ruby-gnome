@@ -28,6 +28,15 @@ module Gtk
       setup_pending_constants
     end
 
+    def require_extension
+      begin
+        major, minor, _ = RUBY_VERSION.split(/\./)
+        require "#{major}.#{minor}/gtk3.so"
+      rescue LoadError
+        require "gtk3.so"
+      end
+    end
+
     def call_init_function(repository, namespace)
       init_check = repository.find(namespace, "init_check")
       arguments = [
@@ -49,6 +58,7 @@ module Gtk
 
     def post_load(repository, namespace)
       apply_pending_constants
+      require_extension
       require_libraries
     end
 

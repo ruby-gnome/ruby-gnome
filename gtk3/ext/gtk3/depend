@@ -1,0 +1,6 @@
+install: install-pc
+install-pc:
+	if test -n "$(pkgconfigdir)"; then			\
+	  $(MAKEDIRS) $(pkgconfigdir);				\
+	  $(INSTALL_DATA) ruby-gtk3.pc $(pkgconfigdir);		\
+	fi
