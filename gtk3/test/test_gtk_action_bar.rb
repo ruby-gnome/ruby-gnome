@@ -37,7 +37,7 @@ class TestGtkActionBar < Test::Unit::TestCase
     @action_bar.pack_start(start2)
     @action_bar.pack_end(end1)
     @action_bar.pack_end(end2)
-    assert_equal([start1, start2, end1, end2],
+    assert_equal([start1, start2, end2, end1],
                  @action_bar.children)
   end
 end
