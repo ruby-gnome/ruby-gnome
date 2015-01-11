@@ -334,7 +334,7 @@ rb_gi_argument_to_ruby_glist(GIArgument *argument, GITypeInfo *type_info)
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_INTERFACE:
-        GOBJGLIST2RVAL(argument->v_pointer);
+        rb_argument = GOBJGLIST2RVAL(argument->v_pointer);
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
