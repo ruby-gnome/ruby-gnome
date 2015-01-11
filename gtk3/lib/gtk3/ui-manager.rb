@@ -17,7 +17,7 @@
 module Gtk
   class UIManager
     alias_method :add_ui_raw, :add_ui
-    def add_ui(buffer_or_filename=nil)
+    def add_ui(buffer_or_filename)
       if buffer_or_filename =~ /<ui>/
         add_ui_from_string(buffer_or_filename,
                            buffer_or_filename.length)
