@@ -103,7 +103,7 @@ module GObjectIntrospection
       singleton_class.__send__(:define_method, name) do |*arguments, &block|
         validate.call(arguments, &block)
         if block.nil? and info.require_callback?
-          Enumerator.new(self, name, *arguments)
+          to_enum(name, *arguments)
         else
           info.invoke({
                         :arguments => arguments,
