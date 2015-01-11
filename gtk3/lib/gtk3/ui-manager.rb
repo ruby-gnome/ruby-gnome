@@ -25,8 +25,6 @@ module Gtk
       else
         ret = add_ui_from_file(buffer_or_filename)
       end
-      raise(error) if ret == 0
-
       ret
     end
   end
