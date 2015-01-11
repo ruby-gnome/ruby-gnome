@@ -20,13 +20,13 @@ class TestGtkBuilder < Test::Unit::TestCase
   end
 
   sub_test_case "#add_from_string" do
-  def test_ascii_only
-    builder = Gtk::Builder.new
-    assert_nothing_raised do
-      builder.add_from_string(ui_definition)
+    def test_ascii_only
+      builder = Gtk::Builder.new
+      assert_nothing_raised do
+        builder.add_from_string(ui_definition)
+      end
+      assert_kind_of(Gtk::Box, builder["vbox1"])
     end
-    assert_kind_of(Gtk::Box, builder["vbox1"])
-  end
   end
 
   def test_add_with_file
