@@ -374,7 +374,7 @@ module GObjectIntrospection
         end
       when TypeTag::GLIST, TypeTag::GSLIST
         case name
-        when /\Alist_/
+        when /\A(?:list|get)_/
           if function_info.n_in_args.zero?
             $POSTMATCH
           else
