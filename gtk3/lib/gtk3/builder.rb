@@ -20,7 +20,7 @@ module Gtk
     alias_method :add_from_string_raw, :add_from_string
 
     def add_from_string(string)
-      add_from_string_raw(string, string.length)
+      add_from_string_raw(string, string.bytesize)
     end
   end
 end

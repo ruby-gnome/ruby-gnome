@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class TestGtkBuilder < Test::Unit::TestCase
   include GtkTestUtils
 
@@ -23,6 +25,13 @@ class TestGtkBuilder < Test::Unit::TestCase
     def test_ascii_only
       builder = Gtk::Builder.new
       builder.add_from_string(ui_definition_simple)
+      assert_kind_of(Gtk::Window, builder["main-window"])
+    end
+
+    def test_multibyte_characters
+      builder = Gtk::Builder.new
+      comment = "<!-- 日本語 -->\n" * 100
+      builder.add_from_string("#{comment}#{ui_definition_simple}")
       assert_kind_of(Gtk::Window, builder["main-window"])
     end
   end
