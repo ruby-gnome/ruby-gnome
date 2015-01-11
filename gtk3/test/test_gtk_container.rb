@@ -45,6 +45,17 @@ class TestGtkContainer < Test::Unit::TestCase
     end
   end
 
+  class TestEachAll < self
+    def setup
+      @scrolled_window = Gtk::ScrolledWindow.new
+    end
+
+    def test_enumerable
+      assert_equal([@scrolled_window.vscrollbar, @scrolled_window.hscrollbar],
+                   @scrolled_window.each_all.to_a)
+    end
+  end
+
   class TestFocusChain < self
     def setup
       @container = Gtk::Layout.new

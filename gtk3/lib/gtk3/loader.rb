@@ -89,6 +89,16 @@ module Gtk
       require "gtk3/deprecated"
     end
 
+    def rubyish_method_name(function_info, options={})
+      name = super
+      case name
+      when "forall"
+        "each_all"
+      else
+        name
+      end
+    end
+
     def load_function_info(info)
       name = info.name
       case name
