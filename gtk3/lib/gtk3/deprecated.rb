@@ -406,7 +406,9 @@ module Gtk
   class HBox
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new(:horizontal, spacing)'." do |_self, homogeneous, spacing|
-      Gtk::Box.new(:horizontal, spacing).set_homogeneous(homogeneous)
+      box = Gtk::Box.new(:horizontal, spacing)
+      box.set_homogeneous(homogeneous)
+      box
     end
   end
 
@@ -866,7 +868,9 @@ module Gtk
   class VBox
     extend GLib::Deprecatable
     define_deprecated_singleton_method :new, :warn => "Use 'Gtk::Box.new(:vertical, spacing)'." do |_self, homogeneous, spacing|
-      Gtk::Box.new(:vertical, spacing).set_homogeneous(homogeneous)
+      box = Gtk::Box.new(:vertical, spacing)
+      box.set_homogeneous(homogeneous)
+      box
     end
   end
 
