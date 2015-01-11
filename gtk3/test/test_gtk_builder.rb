@@ -22,8 +22,8 @@ class TestGtkBuilder < Test::Unit::TestCase
   sub_test_case "#add_from_string" do
     def test_ascii_only
       builder = Gtk::Builder.new
-      builder.add_from_string(ui_definition)
-      assert_kind_of(Gtk::Box, builder["vbox1"])
+      builder.add_from_string(ui_definition_simple)
+      assert_kind_of(Gtk::Window, builder["main-window"])
     end
   end
 
