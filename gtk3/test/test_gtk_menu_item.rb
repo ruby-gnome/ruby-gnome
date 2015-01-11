@@ -7,7 +7,7 @@ class TestGtkMenuItem < Test::Unit::TestCase
   end
 
   def test_new_with_nil_label
-    item = Gtk::MenuItem.new("")
+    item = Gtk::MenuItem.new(nil)
     assert_equal("", item.label)
   end
 end
