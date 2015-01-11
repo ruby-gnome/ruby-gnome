@@ -355,7 +355,7 @@ namespace :gem do
   desc "install all gems"
   task :install do
     gnome2_packages.each do |package|
-      ruby("-S", "gem", "install", "--user-install",
+      ruby("-S", "gem", "install", "--local", "--user-install",
            *Dir.glob(File.join(package, "pkg", "*-#{version}.gem")))
     end
   end
