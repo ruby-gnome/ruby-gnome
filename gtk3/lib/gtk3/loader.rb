@@ -104,41 +104,6 @@ module Gtk
       end
     end
 
-    # patch for returning "self" from setter methods.
-    # TODO: should be fixed in Ruby/GObjectIntrospection.
-    def define_method(info, klass, method_name)
-      unlock_gvl = should_unlock_gvl?(info, klass)
-      validate = lambda do |arguments|
-        validate_arguments(info, "#{klass}\##{method_name}", arguments)
-      end
-      if klass.method_defined?(method_name) and
-          klass.instance_method(method_name).owner == klass
-        klass.__send__(:remove_method, method_name)
-      end
-      function_info_p = (info.class == GObjectIntrospection::FunctionInfo)
-      klass.__send__(:define_method, method_name) do |*arguments, &block|
-        arguments = [self] + arguments if function_info_p
-        validate.call(arguments, &block)
-        if block.nil? and info.require_callback?
-          Enumerator.new(self, method_name, *arguments)
-        else
-          options = {
-            :arguments => arguments,
-            :unlock_gvl => unlock_gvl,
-          }
-          options[:receiver] = self unless function_info_p
-          # patch for returning "self" from setter methods.
-          #info.invoke(options, &block)
-          return_value = info.invoke(options, &block)
-          if /\Aset_/ =~ method_name and return_value.nil?
-            self
-          else
-            return_value
-          end
-        end
-      end
-    end
-
     def load_method_info(info, klass, method_name)
       if klass.name == "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")

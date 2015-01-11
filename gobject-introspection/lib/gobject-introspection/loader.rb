@@ -427,6 +427,8 @@ module GObjectIntrospection
         klass.__send__(:remove_method, method_name)
       end
       function_info_p = (info.class == FunctionInfo)
+      no_return_value_p = (info.return_type.tag == TypeTag::VOID)
+      setter_method_p = (/\Aset_/ === method_name and no_return_value_p)
       klass.__send__(:define_method, method_name) do |*arguments, &block|
         arguments = [self] + arguments if function_info_p
         validate.call(arguments, &block)
@@ -438,7 +440,12 @@ module GObjectIntrospection
             :unlock_gvl => unlock_gvl,
           }
           options[:receiver] = self unless function_info_p
-          info.invoke(options, &block)
+          return_value = info.invoke(options, &block)
+          if setter_method_p
+            self
+          else
+            return_value
+          end
         end
       end
     end
