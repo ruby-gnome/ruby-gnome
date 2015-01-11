@@ -10,7 +10,7 @@ class TestGtkBuildable < Test::Unit::TestCase
     @buildable.name = "YYY"
     assert_equal("YYY", @buildable.name)
 
-    @buildable.name = nil
+    @buildable.name = ""
     assert_equal("", @buildable.name)
   end
 
