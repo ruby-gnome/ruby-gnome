@@ -15,6 +15,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGtkContainer < Test::Unit::TestCase
+  class TestAdd < self
+    def setup
+      @container = Gtk::Layout.new
+    end
+
+    def test_shift
+      element1 = Gtk::EventBox.new
+      element2 = Gtk::EventBox.new
+      element3 = Gtk::EventBox.new
+      @container << element1 << element2 << element3
+      assert_equal([element1, element2, element3],
+                   @container.children)
+    end
+  end
+
   class TestFocusChain < self
     def setup
       @container = Gtk::Layout.new

@@ -23,6 +23,7 @@ module Gtk
 
     def <<(widget)
       add(widget)
+      self
     end
   end
 end
