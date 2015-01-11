@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -49,7 +49,17 @@ module Gtk
 
     def post_load(repository, namespace)
       apply_pending_constants
+      require_extension
       require_libraries
+    end
+
+    def require_extension
+      begin
+        major, minor, _ = RUBY_VERSION.split(/\./)
+        require "#{major}.#{minor}/gtk3.so"
+      rescue LoadError
+        require "gtk3.so"
+      end
     end
 
     def require_libraries
