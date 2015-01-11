@@ -30,6 +30,21 @@ class TestGtkContainer < Test::Unit::TestCase
     end
   end
 
+  class TestEach < self
+    def setup
+      @container = Gtk::Layout.new
+      @element1 = Gtk::EventBox.new
+      @element2 = Gtk::EventBox.new
+      @element3 = Gtk::EventBox.new
+      @container << @element1 << @element2 << @element3
+    end
+
+    def test_enumerable
+      assert_equal([@element1, @element2, @element3],
+                   @container.to_a)
+    end
+  end
+
   class TestFocusChain < self
     def setup
       @container = Gtk::Layout.new
