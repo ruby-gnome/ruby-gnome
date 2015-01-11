@@ -18,11 +18,6 @@ module Gtk
   class Container
     include Enumerable
 
-    alias_method :add_raw, :add
-    def add(widget, property=nil)
-      add_raw(widget)
-    end
-
     def <<(widget)
       add(widget)
       self
