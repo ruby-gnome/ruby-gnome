@@ -47,7 +47,7 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
     @places_sidebar.add_shortcut(file_location1)
     @places_sidebar.add_shortcut(file_location2)
     assert_equal([file_location1, file_location2],
-                 @places_sidebar.list_shortcuts)
+                 @places_sidebar.shortcuts)
   end
 
   def test_local_only_accesssors
