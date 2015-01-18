@@ -78,7 +78,9 @@ module GObjectIntrospection
 
     def require_callback?
       args.any? do |arg|
-        arg.direction == Direction::IN and arg.scope != ScopeType::INVALID
+        arg.direction == Direction::IN and
+          arg.scope != ScopeType::INVALID and
+          !arg.may_be_null?
       end
     end
 
