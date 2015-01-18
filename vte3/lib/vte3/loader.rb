@@ -32,17 +32,9 @@ module Vte
     end
 
     def require_libraries
-      require "vte3/deprecated"
-    end
+      require "vte3/terminal"
 
-    def rubyish_method_name(info)
-      name = super
-      case name
-      when "fork_command_full"
-        "fork_command"
-      else
-        name
-      end
+      require "vte3/deprecated"
     end
   end
 end

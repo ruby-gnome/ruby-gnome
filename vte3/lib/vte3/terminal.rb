@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,23 +14,22 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestTerminal < Test::Unit::TestCase
-  include VteTestUtils
-
-  def setup
-    @terminal = Vte::Terminal.new
-  end
-
-  def test_font
-    font = Pango::FontDescription.new("Monospace 16")
-    @terminal.font = font
-    assert_equal(font, @terminal.font)
-  end
-
-  def test_fork_command
-    pid = @terminal.fork_command(:argv => ["echo"])
-    assert do
-      pid > 0
+module Vte
+  class Terminal
+    def fork_command(options={})
+      pty_flags = options[:pty_flags] || PtyFlags::DEFAULT
+      working_directory = options[:working_directory]
+      argv = options[:argv] || [ENV["SHELL"] || "/bin/sh"]
+      envv = options[:envv]
+      default_spawn_flags =
+        GLib::Spawn::CHILD_INHERITS_STDIN | GLib::Spawn::SEARCH_PATH
+      spawn_flags = options[:spawn_flags] || default_spawn_flags
+      succeeded, pid = fork_command_full(pty_flags,
+                                         working_directory,
+                                         argv,
+                                         envv,
+                                         spawn_flags)
+      pid
     end
   end
 end
