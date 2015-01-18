@@ -16,6 +16,11 @@
 
 class TestGdkSelection < Test::Unit::TestCase
   class TestConstant < self
+    def test_primary
+      atom = Gdk::Selection::PRIMARY
+      assert_equal("PRIMARY", atom.name)
+    end
+
     def test_clipboard
       atom = Gdk::Selection::CLIPBOARD
       assert_equal("CLIPBOARD", atom.name)
