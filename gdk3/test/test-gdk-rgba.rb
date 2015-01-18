@@ -26,4 +26,16 @@ class TestGdkRGBA < Test::Unit::TestCase
     rgba = Gdk::RGBA.new(0.2, 0.4, 0.6, 0.5)
     assert_equal([0.2, 0.4, 0.6, 0.5], rgba.to_a)
   end
+
+  sub_test_case("new") do
+    def test_empty
+      rgba = Gdk::RGBA.new
+      assert_equal([0.0, 0.0, 0.0, 1.0], rgba.to_a)
+    end
+
+    def test_rgb
+      rgba = Gdk::RGBA.new(0.2, 0.4, 0.6)
+      assert_equal([0.2, 0.4, 0.6, 1.0], rgba.to_a)
+    end
+  end
 end

@@ -17,12 +17,12 @@
 module Gdk
   class RGBA
     alias_method :initialize_raw, :initialize
-    def initialize(red, green, blue, alpha)
+    def initialize(red=nil, green=nil, blue=nil, alpha=nil)
       initialize_raw
-      self.red = red
-      self.green = green
-      self.blue = blue
-      self.alpha = alpha
+      self.red = red if red
+      self.green = green if green
+      self.blue = blue if blue
+      self.alpha = alpha || 1.0
     end
 
     def to_a
