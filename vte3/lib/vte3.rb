@@ -50,6 +50,7 @@ module Vte
       end
       Gtk.init if Gtk.respond_to?(:init)
       loader = Loader.new(self)
+      loader.version = "2.90" # TODO: Remove me when 2.91 is stable.
       loader.load("Vte")
     end
   end
