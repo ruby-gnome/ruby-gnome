@@ -16,6 +16,27 @@
 
 module Gdk
   class RGBA
+    class << self
+      def parse(spec)
+        rgba = new
+        unless rgba.parse(spec)
+          available_formats = [
+            "COLOR_NAME",
+            "\#RGB",
+            "\#RRGGBB",
+            "\#RRRGGGBBB",
+            "\#RRRRGGGGBBBB",
+            "rgb(R, G, B)",
+            "rgba(R, G, B, A)",
+          ]
+          message = "invalid RGBA format: #{spec.inspect} "
+          message << "(available formats: #{available_formats.join(', ')})"
+          raise ArgumentError, message
+        end
+        rgba
+      end
+    end
+
     alias_method :initialize_raw, :initialize
     def initialize(red=nil, green=nil, blue=nil, alpha=nil)
       initialize_raw
