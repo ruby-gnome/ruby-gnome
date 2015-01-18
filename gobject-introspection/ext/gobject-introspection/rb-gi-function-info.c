@@ -382,8 +382,36 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
     gpointer callback;
     GIArgInfo *arg_info;
     GIArgument *callback_argument;
+    GIArgument *closure_argument = NULL;
+    GIArgument *destroy_argument = NULL;
 
     arg_info = &(metadata->arg_info);
+
+    callback_argument = &(g_array_index(in_args,
+                                        GIArgument,
+                                        metadata->in_arg_index));
+    if (metadata->closure_in_arg_index != -1) {
+        closure_argument = &(g_array_index(in_args,
+                                           GIArgument,
+                                           metadata->closure_in_arg_index));
+    }
+    if (metadata->destroy_in_arg_index != -1) {
+        destroy_argument = &(g_array_index(in_args,
+                                           GIArgument,
+                                           metadata->destroy_in_arg_index));
+    }
+
+    if (!rb_block_given_p() && g_arg_info_may_be_null(arg_info)) {
+        callback_argument->v_pointer = NULL;
+        if (closure_argument) {
+            closure_argument->v_pointer = NULL;
+        }
+        if (destroy_argument) {
+            destroy_argument->v_pointer = NULL;
+        }
+        return;
+    }
+
     callback = find_callback_function(arg_info);
     if (!callback) {
         GITypeInfo type_info;
@@ -398,31 +426,19 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
                  RVAL2CSTR(rb_type_name),
                  g_base_info_get_name(arg_info));
     }
-
-    callback_argument = &(g_array_index(in_args,
-                                        GIArgument,
-                                        metadata->in_arg_index));
     callback_argument->v_pointer = callback;
 
-    if (metadata->closure_in_arg_index != -1) {
+    if (closure_argument) {
         RBGICallbackData *callback_data;
-        GIArgument *closure_argument;
 
         callback_data = ALLOC(RBGICallbackData);
         callback_data->metadata = metadata;
         callback_data->rb_callback = rb_block_proc();
         callback_data_guard_from_gc(callback_data);
-        closure_argument = &(g_array_index(in_args,
-                                           GIArgument,
-                                           metadata->closure_in_arg_index));
         closure_argument->v_pointer = callback_data;
     }
 
-    if (metadata->destroy_in_arg_index != -1) {
-        GIArgument *destroy_argument;
-        destroy_argument = &(g_array_index(in_args,
-                                           GIArgument,
-                                           metadata->destroy_in_arg_index));
+    if (destroy_argument) {
         destroy_argument->v_pointer = destroy_notify;
     }
 }
