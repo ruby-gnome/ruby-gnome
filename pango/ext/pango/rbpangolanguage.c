@@ -69,6 +69,12 @@ rg_includes_script(VALUE self, VALUE script)
                                                      RVAL2PANGOSCRIPT(script)));
 }
 
+static VALUE
+rg_sample_string(VALUE self)
+{
+    return CSTR2RVAL(pango_language_get_sample_string(_SELF(self)));
+}
+
 void
 Init_pango_language(VALUE mPango)
 {
@@ -83,4 +89,6 @@ Init_pango_language(VALUE mPango)
     RG_DEF_ALIAS("to_s", "to_str");
 
     RG_DEF_METHOD(includes_script, 1);
+
+    RG_DEF_METHOD(sample_string, 0);
 }
