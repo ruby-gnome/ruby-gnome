@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,17 +15,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class TreeStore
-    alias_method :initialize_raw, :initialize
-    def initialize(*column_types)
-      initialize_raw(column_types)
-    end
+  module TreeModel
+    alias_method :get_iter_raw, :get_iter
+    def get_iter(path)
+      if path.is_a?(String)
+        got, iter = get_iter_from_string(path)
+      else
+        got, iter = get_iter_raw(path)
+      end
 
-    alias_method :append_raw, :append
-    def append(parent)
-      iter = append_raw(parent)
-      iter.model = self  # workaround
-      iter
+      if got
+        iter
+        iter.model = self  # workaround
+        iter
+      else
+        nil
+      end
     end
   end
 end
