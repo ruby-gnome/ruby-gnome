@@ -18,6 +18,7 @@ class TestGtkEventController < Test::Unit::TestCase
   include GtkTestUtils
 
   def setup
+    only_gtk_version(3, 14, 0)
     @gesture = Gtk::GestureSingle.new
   end
 
