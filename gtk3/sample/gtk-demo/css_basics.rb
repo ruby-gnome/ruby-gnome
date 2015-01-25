@@ -88,7 +88,7 @@ module Demo
         provider.load(:data => text)
       end
 
-      Gdk::Screen.default.reset_widgets
+      Gtk::StyleContext.reset_widgets
     end
 
     def apply_css(widget, provider)
