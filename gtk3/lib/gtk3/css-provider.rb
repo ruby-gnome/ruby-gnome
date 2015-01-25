@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,10 +16,10 @@
 
 module Gtk
   class CssProvider
-    def load(arguments)
-      data = arguments[:data]
-      file = arguments[:file]
-      path = arguments[:path]
+    def load(argument)
+      data = argument[:data]
+      file = argument[:file]
+      path = argument[:path]
       if data
         load_from_data(data)
       elsif file
@@ -28,7 +28,7 @@ module Gtk
         load_from_path(path)
       else
         message =
-          "Must specify one of :data, :file or :path: #{arguments.inspect}"
+          "Must specify one of :data, :file or :path: #{argument.inspect}"
         raise ArgumentError, message
       end
     end
