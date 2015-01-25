@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -30,6 +30,40 @@ extern void Init_pango(void);
 /*
  * Rendering
  */
+
+static VALUE
+rg_s_version(G_GNUC_UNUSED VALUE self)
+{
+    return INT2NUM(pango_version());
+}
+
+static VALUE
+rg_s_version_string(G_GNUC_UNUSED VALUE self)
+{
+    return CSTR2RVAL(pango_version_string());
+}
+
+static VALUE
+rg_s_check_version(G_GNUC_UNUSED VALUE self,
+                   VALUE major, VALUE minor, VALUE micro)
+{
+    const gchar *error_message;
+    error_message = pango_version_check(NUM2INT(major),
+                                        NUM2INT(minor),
+                                        NUM2INT(micro));
+    return CSTR2RVAL(error_message);
+}
+
+static VALUE
+rg_s_check_version_p(G_GNUC_UNUSED VALUE self,
+                     VALUE major, VALUE minor, VALUE micro)
+{
+    const gchar *error_message;
+    error_message = pango_version_check(NUM2INT(major),
+                                        NUM2INT(minor),
+                                        NUM2INT(micro));
+    return CBOOL2RVAL(!error_message);
+}
 
 struct rpango_reorder_items_args {
     PangoItem *item;
@@ -267,6 +301,10 @@ Init_pango(void)
                                 INT2FIX(PANGO_VERSION_MINOR),
                                 INT2FIX(PANGO_VERSION_MICRO)));
 
+    RG_DEF_SMETHOD(version, 0);
+    RG_DEF_SMETHOD(version_string, 0);
+    RG_DEF_SMETHOD(check_version, 3);
+    RG_DEF_SMETHOD_P(check_version, 3);
     RG_DEF_SMETHOD(reorder_items, 1);
     RG_DEF_SMETHOD(unichar_direction, 1);
     RG_DEF_SMETHOD(find_base_dir, 1);
