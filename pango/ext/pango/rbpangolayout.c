@@ -154,7 +154,7 @@ rg_width(VALUE self)
     return INT2NUM(pango_layout_get_width(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1, 20, 0)
+#if PANGO_VERSION_CHECK(1, 20, 0)
 static VALUE
 rg_set_height(VALUE self, VALUE width)
 {
@@ -195,7 +195,7 @@ rg_ellipsize(VALUE self)
     return PANGOELLIPSIZEMODE2RVAL(pango_layout_get_ellipsize(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1, 16, 0)
+#if PANGO_VERSION_CHECK(1, 16, 0)
 static VALUE
 rg_ellipsized_p(VALUE self)
 {
@@ -498,6 +498,14 @@ rg_iter(VALUE self)
     return PANGOLAYOUTITER2RVAL(pango_layout_get_iter(_SELF(self)));
 }
 
+#if PANGO_VERSION_CHECK(1, 22, 0)
+static VALUE
+rg_baseline(VALUE self)
+{
+    return INT2NUM(pango_layout_get_baseline(_SELF(self)));
+}
+#endif
+
 void
 Init_pango_layout(VALUE mPango)
 {
@@ -517,7 +525,7 @@ Init_pango_layout(VALUE mPango)
     RG_DEF_METHOD(font_description, 0);
     RG_DEF_METHOD(set_width, 1);
     RG_DEF_METHOD(width, 0);
-#if PANGO_CHECK_VERSION(1, 20, 0)
+#if PANGO_VERSION_CHECK(1, 20, 0)
     RG_DEF_METHOD(set_height, 1);
     RG_DEF_METHOD(height, 0);
 #endif
@@ -525,7 +533,7 @@ Init_pango_layout(VALUE mPango)
     RG_DEF_METHOD(wrap, 0);
     RG_DEF_METHOD(set_ellipsize, 1);
     RG_DEF_METHOD(ellipsize, 0);
-#if PANGO_CHECK_VERSION(1, 16, 0)
+#if PANGO_VERSION_CHECK(1, 16, 0)
     RG_DEF_METHOD_P(ellipsized, 0);
 #endif
     RG_DEF_METHOD(set_indent, 1);
@@ -557,6 +565,9 @@ Init_pango_layout(VALUE mPango)
     RG_DEF_METHOD(get_line, 1);
     RG_DEF_METHOD(lines, 0);
     RG_DEF_METHOD(iter, 0);
+#if PANGO_VERSION_CHECK(1, 22, 0)
+    RG_DEF_METHOD(baseline, 0);
+#endif
 
     /* PangoWrapMode */
     G_DEF_CLASS(PANGO_TYPE_WRAP_MODE, "WrapMode", RG_TARGET_NAMESPACE);

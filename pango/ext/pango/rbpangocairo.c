@@ -34,7 +34,7 @@ rg_s_create(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
     if (NIL_P(rb_font_type)) {
         font_map = pango_cairo_font_map_new();
     } else {
-#if PANGO_CHECK_VERSION(1, 18, 0)
+#if PANGO_VERSION_CHECK(1, 18, 0)
         cairo_font_type_t font_type = CAIRO_FONT_TYPE_USER;
         if (rbgutil_key_equal(rb_font_type, "ft") ||
             rbgutil_key_equal(rb_font_type, "freetype")) {
@@ -66,7 +66,7 @@ rg_s_default(G_GNUC_UNUSED VALUE klass)
     return GOBJ2RVAL(pango_cairo_font_map_get_default());
 }
 
-#if PANGO_CHECK_VERSION(1, 22, 0)
+#if PANGO_VERSION_CHECK(1, 22, 0)
 static VALUE
 rg_s_set_default(VALUE klass, VALUE font_map)
 {
@@ -93,7 +93,7 @@ rg_create_context(VALUE self)
 {
     PangoContext *pango_context;
 
-#if PANGO_CHECK_VERSION(1, 22, 0)
+#if PANGO_VERSION_CHECK(1, 22, 0)
     pango_context = pango_font_map_create_context(PANGO_FONT_MAP(_SELF(self)));
 #else
     pango_context = pango_cairo_font_map_create_context(_SELF(self));
@@ -112,7 +112,7 @@ Init_pango_cairo(VALUE mPango)
 
     RG_DEF_SMETHOD(create, -1);
     RG_DEF_SMETHOD(default, 0);
-#if PANGO_CHECK_VERSION(1, 22, 0)
+#if PANGO_VERSION_CHECK(1, 22, 0)
     RG_DEF_SMETHOD(set_default, 1);
 #endif
 

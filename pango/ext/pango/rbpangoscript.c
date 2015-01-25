@@ -37,7 +37,7 @@ rg_sample_language(VALUE self)
     return PANGOLANGUAGE2RVAL(lang);
 }
 
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
 static VALUE
 rg_get_gravity(int argc, VALUE *argv, VALUE self)
 {
@@ -52,7 +52,7 @@ rg_get_gravity(int argc, VALUE *argv, VALUE self)
                                          RVAL2PANGOGRAVITY(gravity),
                                          RVAL2PANGOGRAVITYHINT(gravity_hint));
     } else {
-#  if PANGO_CHECK_VERSION(1,26,0)
+#  if PANGO_VERSION_CHECK(1,26,0)
         g = pango_gravity_get_for_script_and_width(_SELF(self),
                                                    RVAL2CBOOL(wide),
                                                    RVAL2PANGOGRAVITY(gravity),
@@ -78,7 +78,7 @@ Init_pango_script(VALUE mPango)
 
     RG_DEF_SMETHOD(for_unichar, 1);
     RG_DEF_METHOD(sample_language, 0);
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
     RG_DEF_METHOD(get_gravity, -1);
 #endif
 }

@@ -20,7 +20,7 @@
 
 #include "rbpangoprivate.h"
 
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
 
 #define RG_TARGET_NAMESPACE mGravity
 
@@ -40,7 +40,7 @@ rg_s_vertical_p(G_GNUC_UNUSED VALUE self, VALUE gravity)
 void
 Init_pango_gravity(VALUE mPango)
 {
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
     VALUE RG_TARGET_NAMESPACE = rb_define_module_under(mPango, "Gravity");
 
     RG_DEF_SMETHOD(to_rotation, 1);

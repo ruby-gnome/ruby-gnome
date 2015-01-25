@@ -29,7 +29,6 @@
 #endif
 
 #include "rbgobject.h"
-#include "rbpangoversion.h"
 #include "rbpangoconversions.h"
 #include <pango/pangocairo.h>
 

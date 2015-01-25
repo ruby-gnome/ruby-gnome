@@ -263,9 +263,9 @@ Init_pango(void)
 
     rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION", 
                     rb_ary_new3(3, 
-                                INT2FIX(PANGO_MAJOR_VERSION), 
-                                INT2FIX(PANGO_MINOR_VERSION), 
-                                INT2FIX(PANGO_MICRO_VERSION)));
+                                INT2FIX(PANGO_VERSION_MAJOR), 
+                                INT2FIX(PANGO_VERSION_MINOR), 
+                                INT2FIX(PANGO_VERSION_MICRO)));
 
     RG_DEF_SMETHOD(reorder_items, 1);
     RG_DEF_SMETHOD(unichar_direction, 1);

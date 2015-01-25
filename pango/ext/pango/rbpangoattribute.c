@@ -282,7 +282,7 @@ attr_AttrAbsoluteSize_initialize(VALUE self, VALUE size)
     return Qnil;
 }
 
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
 static VALUE
 attr_AttrGravity_initialize(VALUE self, VALUE gravity)
 {
@@ -438,7 +438,7 @@ Init_pango_attribute(VALUE mPango)
     MAKE_ATTR(PANGO_ATTR_STRETCH, AttrStretch, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_SIZE, AttrSize, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_ABSOLUTE_SIZE, AttrAbsoluteSize, pattrint, 1);
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
     MAKE_ATTR(PANGO_ATTR_GRAVITY, AttrGravity, pattrint, 1);
     MAKE_ATTR(PANGO_ATTR_GRAVITY_HINT, AttrGravityHint, pattrint, 1);
 #endif

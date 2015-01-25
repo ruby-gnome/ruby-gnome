@@ -129,7 +129,7 @@ rg_set_base_dir(VALUE self, VALUE direction)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
 static VALUE
 rg_base_gravity(VALUE self)
 {
@@ -280,7 +280,7 @@ Init_pango_context(VALUE mPango)
     RG_DEF_METHOD(set_language, 1);
     RG_DEF_METHOD(base_dir, 0);
     RG_DEF_METHOD(set_base_dir, 1);
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
     RG_DEF_METHOD(base_gravity, 0);
     RG_DEF_METHOD(set_base_gravity, 1);
     RG_DEF_METHOD(gravity_hint, 0);

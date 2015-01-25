@@ -82,7 +82,7 @@ rg_rotate_bang(VALUE self, VALUE degrees)
     return self;
 }
 
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
 static VALUE
 rg_gravity(VALUE self)
 {
@@ -129,7 +129,7 @@ Init_pango_matrix(VALUE mPango)
     RG_DEF_METHOD_BANG(rotate, 1);
     RG_DEF_METHOD_BANG(concat, 1);
     RG_DEF_METHOD(font_scale_factor, 0);
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
     RG_DEF_METHOD(gravity, 0);
 #endif
     RG_DEF_METHOD(to_a, 0);

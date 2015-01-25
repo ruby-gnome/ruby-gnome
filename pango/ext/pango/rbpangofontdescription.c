@@ -163,7 +163,7 @@ rg_size_is_absolute_p(VALUE self)
     return CBOOL2RVAL(pango_font_description_get_size_is_absolute(_SELF(self)));
 }
 
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
 static VALUE
 rg_gravity(VALUE self)
 {
@@ -248,7 +248,7 @@ Init_pango_font_description(VALUE mPango)
     RG_DEF_METHOD(size, 0);
     RG_DEF_METHOD(set_absolute_size, 1);
     RG_DEF_METHOD_P(size_is_absolute, 0);
-#if PANGO_CHECK_VERSION(1,16,0)
+#if PANGO_VERSION_CHECK(1,16,0)
     RG_DEF_METHOD(set_gravity, 1);
     RG_DEF_METHOD(gravity, 0);
 #endif
