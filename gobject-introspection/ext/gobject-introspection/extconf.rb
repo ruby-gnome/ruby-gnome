@@ -58,7 +58,7 @@ setup_windows(module_name, base_dir)
 
 unless required_pkg_config_package(package_id,
                                    :debian => "libgirepository1.0-dev",
-                                   :fedora => "gobject-introspection-devel",
+                                   :redhat => "gobject-introspection-devel",
                                    :homebrew => "gobject-introspection",
                                    :macports => "gobject-introspection")
   exit(false)
