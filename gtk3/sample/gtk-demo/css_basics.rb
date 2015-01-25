@@ -94,7 +94,7 @@ module Demo
     def apply_css(widget, provider)
       widget.style_context.add_provider(provider, GLib::MAXUINT)
       if widget.is_a?(Gtk::Container)
-        widget.each_forall do |child|
+        widget.each_all do |child|
           apply_css(child, provider)
         end
       end
