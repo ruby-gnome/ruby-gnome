@@ -261,10 +261,10 @@ Init_pango(void)
 {
     RG_TARGET_NAMESPACE = rb_define_module("Pango");
 
-    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION", 
-                    rb_ary_new3(3, 
-                                INT2FIX(PANGO_VERSION_MAJOR), 
-                                INT2FIX(PANGO_VERSION_MINOR), 
+    rb_define_const(RG_TARGET_NAMESPACE, "BUILD_VERSION",
+                    rb_ary_new3(3,
+                                INT2FIX(PANGO_VERSION_MAJOR),
+                                INT2FIX(PANGO_VERSION_MINOR),
                                 INT2FIX(PANGO_VERSION_MICRO)));
 
     RG_DEF_SMETHOD(reorder_items, 1);
