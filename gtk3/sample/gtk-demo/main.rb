@@ -213,7 +213,7 @@ module Demo
 
       lib = iter.get_value(FILENAME_COLUMN)
       if lib
-        require(lib)
+        require_relative(File.basename(lib))
 
         klass = Demo.const_get(iter.get_value(CLASS_COLUMN))
         window = klass.new
