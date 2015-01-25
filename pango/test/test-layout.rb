@@ -2,7 +2,8 @@ class TestLayout < Test::Unit::TestCase
   include PangoTestUtils
 
   def setup
-    @context = Pango::Context.new
+    @font_map = Pango::CairoFontMap.default
+    @context = @font_map.create_context
     @layout = Pango::Layout.new(@context)
   end
 
@@ -30,5 +31,10 @@ class TestLayout < Test::Unit::TestCase
 
   def test_ellipsized?
     assert_false(@layout.ellipsized?)
+  end
+
+  def test_baseline
+    only_pango_version(1, 22, 0)
+    assert_kind_of(Integer, @layout.baseline)
   end
 end
