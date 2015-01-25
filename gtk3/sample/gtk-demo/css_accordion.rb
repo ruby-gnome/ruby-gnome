@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-#
 # This sample code is a port of gtk3/demos/gtk-demo/css_accordion.c. The
 # CSS files used in this sample code are copied from gtk3/demos/gtk-demo.
 # They are licensed under the terms of the GNU Lesser General Public
