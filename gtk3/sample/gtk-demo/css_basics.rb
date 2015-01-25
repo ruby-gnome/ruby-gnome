@@ -48,7 +48,7 @@ module Demo
         css_text_changed(_text, provider)
       end
 
-      text.text = File.read("css_basics.css")
+      text.text = File.read(File.join(__dir__, "css_basics.css"))
 
       provider.signal_connect("parsing-error") do |_provider, section, error|
         p section
@@ -84,7 +84,9 @@ module Demo
       buffer.remove_all_tags(start, end_)
 
       text = buffer.get_text(start, end_, false)
-      provider.load(:data => text)
+      Dir.chdir(__dir__) do
+        provider.load(:data => text)
+      end
 
       Gdk::Screen.default.reset_widgets
     end
