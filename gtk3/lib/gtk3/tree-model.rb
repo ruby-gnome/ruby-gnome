@@ -26,7 +26,7 @@ module Gtk
 
       if got
         iter
-        iter.model = self  # workaround
+        iter.model = self
         iter
       else
         nil

@@ -24,7 +24,7 @@ module Gtk
     alias_method :append_raw, :append
     def append(parent)
       iter = append_raw(parent)
-      iter.model = self  # workaround
+      iter.model = self
       iter
     end
   end
