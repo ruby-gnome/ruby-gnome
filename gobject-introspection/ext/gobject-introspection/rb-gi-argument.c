@@ -179,6 +179,12 @@ interface_struct_to_ruby(GIArgument *argument,
     return Data_Wrap_Struct(rb_class, NULL, NULL, argument->v_pointer);
 }
 
+static gpointer
+interface_struct_from_ruby(VALUE rb_argument)
+{
+    return DATA_PTR(rb_argument);
+}
+
 static VALUE
 interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
@@ -1608,6 +1614,121 @@ set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
     array_argument->v_pointer = types;
 }
 
+typedef struct {
+    GType element_gtype;
+    VALUE rb_argument;
+    gint n_args;
+    gpointer *array;
+} ArrayInterfaceStructFromRubyData;
+
+static VALUE
+set_in_array_interface_struct_arguments_from_ruby_body(VALUE value)
+{
+    ArrayInterfaceStructFromRubyData *data;
+    gint i;
+
+    data = (ArrayInterfaceStructFromRubyData *)value;
+
+    for (i = 0; i < data->n_args; i++) {
+        VALUE rb_element;
+        gpointer element;
+
+        rb_element = RARRAY_PTR(data->rb_argument)[i];
+        if (data->element_gtype == G_TYPE_NONE) {
+            element = interface_struct_from_ruby(rb_element);
+        } else {
+            element = RVAL2BOXED(rb_element, data->element_gtype);
+        }
+        data->array[i] = element;
+    }
+
+    return Qnil;
+}
+
+static G_GNUC_NORETURN VALUE
+set_in_array_interface_struct_arguments_from_ruby_rescue(VALUE value)
+{
+    ArrayInterfaceStructFromRubyData *data;
+
+    data = (ArrayInterfaceStructFromRubyData *)value;
+    xfree(data->array);
+
+    rb_exc_raise(rb_errinfo());
+}
+
+static void
+set_in_array_interface_struct_arguments_from_ruby(GIArgument *array_argument,
+                                                  GType element_gtype,
+                                                  VALUE rb_argument)
+{
+    ArrayInterfaceStructFromRubyData data;
+
+    data.element_gtype = element_gtype;
+    data.rb_argument = rb_argument;
+    data.n_args = RARRAY_LEN(rb_argument);
+    data.array = ALLOC_N(gpointer, data.n_args);
+    rb_rescue(set_in_array_interface_struct_arguments_from_ruby_body,
+              (VALUE)&data,
+              set_in_array_interface_struct_arguments_from_ruby_rescue,
+              (VALUE)&data);
+    array_argument->v_pointer = data.array;
+}
+
+static void
+set_in_array_interface_arguments_from_ruby(GIArgument *array_argument,
+                                           GITypeInfo *element_type_info,
+                                           VALUE rb_argument)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+
+    interface_info = g_type_info_get_interface(element_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+    g_base_info_unref(interface_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(array)[interface(%s)](%s)",
+                 g_info_type_to_string(interface_type),
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_STRUCT:
+        set_in_array_interface_struct_arguments_from_ruby(array_argument,
+                                                          gtype,
+                                                          rb_argument);
+        break;
+    case GI_INFO_TYPE_BOXED:
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+    case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+    case GI_INFO_TYPE_INVALID_0:
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(array)[interface(%s)](%s)",
+                 g_info_type_to_string(interface_type),
+                 g_type_name(gtype));
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
 static void
 in_array_c_argument_from_ruby(GIArgument *array_argument,
                               GIArgument *length_argument,
@@ -1657,7 +1778,17 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(array)[%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
     case GI_TYPE_TAG_INTERFACE:
+        set_in_array_interface_arguments_from_ruby(array_argument,
+                                                   element_type_info,
+                                                   rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
     case GI_TYPE_TAG_GHASH:
