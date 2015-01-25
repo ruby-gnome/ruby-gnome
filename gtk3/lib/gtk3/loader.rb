@@ -107,6 +107,10 @@ module Gtk
       case name
       when "init", /_get_type\z/
         # ignore
+      when /\Astock_/
+        stock_module = @base_module.const_get(:Stock)
+        method_name = rubyish_method_name(info, :prefix => "stock_")
+        define_singleton_method(stock_module, method_name, info)
       else
         super
       end
