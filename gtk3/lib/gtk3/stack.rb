@@ -38,7 +38,7 @@ module Gtk
       end
     end
 
-    if method_defined?(:add_titled) && method_defined?(:add_named)
+    if method_defined?(:add_titled) and method_defined?(:add_named)
       def add(widget, name=nil, title=nil)
         if title
           add_titled(widget, name, title)
