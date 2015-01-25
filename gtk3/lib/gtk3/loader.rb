@@ -79,6 +79,7 @@ module Gtk
       require "gtk3/search-bar"
       require "gtk3/spin-button"
       require "gtk3/stack"
+      require "gtk3/style-context"
       require "gtk3/style-properties"
       require "gtk3/text-buffer"
       require "gtk3/tree-iter"
