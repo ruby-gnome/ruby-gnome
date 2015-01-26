@@ -31,16 +31,16 @@ class Pager < Gtk::TextView
   type_register
   
   # widget's key binding can be defined like this
-  binding_set.add_signal(Gdk::Keyval::GDK_KEY_space, 0,
+  binding_set.add_signal(Gdk::Keyval::KEY_space, 0,
                          "move_cursor", 
                          Gtk::MovementStep::PAGES, 1, false)
-  binding_set.add_signal(Gdk::Keyval::GDK_KEY_BackSpace, 0,
+  binding_set.add_signal(Gdk::Keyval::KEY_BackSpace, 0,
                          "move_cursor", 
                          Gtk::MovementStep::PAGES, -1, false)
-  binding_set.add_signal(Gdk::Keyval::GDK_KEY_j, 0,
+  binding_set.add_signal(Gdk::Keyval::KEY_j, 0,
                          "move_cursor",
                          Gtk::MovementStep::DISPLAY_LINES, 1, false)
-  binding_set.add_signal(Gdk::Keyval::GDK_KEY_k, 0,
+  binding_set.add_signal(Gdk::Keyval::KEY_k, 0,
                          "move_cursor",
                          Gtk::MovementStep::DISPLAY_LINES, -1, false)
 
@@ -75,14 +75,14 @@ hbox.add(button2 = Gtk::Button.new(:label => "back_space"))
 hbox.add(button3 = Gtk::Button.new(:label => "cancel j/k"))
 
 button1.signal_connect("clicked") do
-  Pager.binding_set.activate(Gdk::Keyval::GDK_KEY_space, 0, pager)
+  Pager.binding_set.activate(Gdk::Keyval::KEY_space, 0, pager)
 end
 button2.signal_connect("clicked") do
-  pager.bindings_activate(Gdk::Keyval::GDK_KEY_BackSpace, 0)
+  pager.bindings_activate(Gdk::Keyval::KEY_BackSpace, 0)
 end
 button3.signal_connect("clicked") do
-  Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_j, 0)
-  Pager.binding_set.entry_remove(Gdk::Keyval::GDK_KEY_k, 0)
+  Pager.binding_set.entry_remove(Gdk::Keyval::KEY_j, 0)
+  Pager.binding_set.entry_remove(Gdk::Keyval::KEY_k, 0)
 end
 
 sw.add(pager)

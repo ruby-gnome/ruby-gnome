@@ -174,7 +174,7 @@ module Pong
       self.title = "Pong Demonstration"
       signal_connect("destroy") { Gtk.main_quit }
       signal_connect("key_press_event") do |widget, event|
-        if event.state.control_mask? and event.keyval == Gdk::Keyval::GDK_q
+        if event.state.control_mask? and event.keyval == Gdk::Keyval::KEY_q
           destroy
           true
         else
