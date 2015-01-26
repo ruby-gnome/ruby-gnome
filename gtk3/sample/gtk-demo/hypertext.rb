@@ -120,7 +120,7 @@ module Demo
     # Links can be activated by pressing Enter.
     def key_press_event(text_view, event)
       case event.keyval
-      when Gdk::Keyval::GDK_Return, Gdk::Keyval::GDK_KP_Enter
+      when Gdk::Keyval::KEY_Return, Gdk::Keyval::KEY_KP_Enter
         buffer = text_view.buffer
         iter = buffer.get_iter_at_mark(buffer.get_mark("insert"))
         follow_if_link(text_view, iter)

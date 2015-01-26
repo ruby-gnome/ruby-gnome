@@ -84,7 +84,7 @@ module Demo
       menuitem.show
       menuitem.add_accelerator('activate',
                                accel_group,
-                               Gdk::Keyval::GDK_F1,
+                               Gdk::Keyval::KEY_F1,
                                0,
                                Gtk::ACCEL_VISIBLE)
       menuitem = Gtk::CheckMenuItem.new('Accelerator Locked')
@@ -92,7 +92,7 @@ module Demo
       menuitem.show
       menuitem.add_accelerator('activate',
                                accel_group,
-                               Gdk::Keyval::GDK_F2,
+                               Gdk::Keyval::KEY_F2,
                                0,
                                Gtk::ACCEL_VISIBLE | Gtk::ACCEL_LOCKED)
       menuitem = Gtk::CheckMenuItem.new('Accelerators Frozen')
@@ -100,12 +100,12 @@ module Demo
       menuitem.show
       menuitem.add_accelerator('activate',
                                accel_group,
-                               Gdk::Keyval::GDK_F2,
+                               Gdk::Keyval::KEY_F2,
                                0,
                                Gtk::ACCEL_VISIBLE)
       menuitem.add_accelerator('activate',
                                accel_group,
-                               Gdk::Keyval::GDK_F3,
+                               Gdk::Keyval::KEY_F3,
                                0,
                                Gtk::ACCEL_VISIBLE)
 
