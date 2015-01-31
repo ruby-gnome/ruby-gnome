@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -205,6 +205,37 @@ rg_s_start_callback_dispatch_thread(G_GNUC_UNUSED VALUE klass)
     return Qnil;
 }
 
+static VALUE
+rg_s_reference_gobject(int argc, VALUE *argv, G_GNUC_UNUSED VALUE klass)
+{
+    VALUE rb_gobject;
+    VALUE rb_options, rb_sink;
+    gpointer gobject;
+    gboolean sink;
+
+    rb_scan_args(argc, argv, "11",
+                 &rb_gobject, &rb_options);
+    rbg_scan_options(rb_options,
+                     "sink", &rb_sink,
+                     NULL);
+
+    gobject = RVAL2GOBJ(rb_gobject);
+
+    if (NIL_P(rb_sink)) {
+        sink = FALSE;
+    } else {
+        sink = RVAL2CBOOL(rb_sink);
+    }
+
+    if (sink) {
+        g_object_ref_sink(gobject);
+    } else {
+        g_object_ref(gobject);
+    }
+
+    return Qnil;
+}
+
 void
 rb_gi_loader_init(VALUE rb_mGI)
 {
@@ -221,4 +252,5 @@ rb_gi_loader_init(VALUE rb_mGI)
     RG_DEF_SMETHOD(register_boxed_class_converter, 1);
     RG_DEF_SMETHOD(register_constant_rename_map, 2);
     RG_DEF_SMETHOD(start_callback_dispatch_thread, 0);
+    RG_DEF_SMETHOD(reference_gobject, -1);
 }

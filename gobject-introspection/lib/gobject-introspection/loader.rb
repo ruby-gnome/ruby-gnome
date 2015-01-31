@@ -267,6 +267,9 @@ module GObjectIntrospection
       validate = lambda do |info, method_name, arguments|
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
       end
+      call_initialize_post = lambda do |object|
+        initialize_post(object)
+      end
       infos.each do |info|
         name = "initialize_#{info.name}"
         unlock_gvl = should_unlock_gvl?(info, klass)
@@ -278,6 +281,7 @@ module GObjectIntrospection
                         :unlock_gvl => unlock_gvl,
                       },
                       &block)
+          call_initialize_post.call(self)
         end
         klass.__send__(:private, name)
       end
@@ -289,6 +293,9 @@ module GObjectIntrospection
         info = find_info.call(arguments, &block)
         __send__("initialize_#{info.name}", *arguments, &block)
       end
+    end
+
+    def initialize_post(object)
     end
 
     def validate_arguments(info, method_name, arguments)

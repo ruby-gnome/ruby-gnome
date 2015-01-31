@@ -50,7 +50,6 @@ initialize_receiver(VALUE receiver, GITypeInfo *info, GIArgument *value)
     g_base_info_unref(interface_info);
     switch (interface_type) {
       case GI_INFO_TYPE_OBJECT:
-        g_object_ref_sink(value->v_pointer);
         G_INITIALIZE(receiver, value->v_pointer);
         break;
       case GI_INFO_TYPE_STRUCT:
