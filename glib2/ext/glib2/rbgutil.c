@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2004 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -20,6 +20,8 @@
  */
 
 #include "rbgprivate.h"
+
+#include <string.h>
 
 ID rbgutil_id_module_eval;
 
@@ -158,12 +160,15 @@ rbg_interrupt_dispatch (G_GNUC_UNUSED GSource *soruce,
     }
 }
 
-static GSourceFuncs rbg_interrupt_funcs = {
-    rbg_interrupt_prepare,
-    rbg_interrupt_check,
-    rbg_interrupt_dispatch,
-    NULL
-};
+static GSourceFuncs rbg_interrupt_funcs;
+static void
+rbg_interrupt_funcs_init(void)
+{
+    memset(&rbg_interrupt_funcs, 0, sizeof(GSourceFuncs));
+    rbg_interrupt_funcs.prepare  = rbg_interrupt_prepare;
+    rbg_interrupt_funcs.check    = rbg_interrupt_check;
+    rbg_interrupt_funcs.dispatch = rbg_interrupt_dispatch;
+}
 
 GSource *
 rbg_interrupt_source_new(void)
@@ -180,4 +185,6 @@ Init_gutil(void)
     id_add_one_arg_setter = rb_intern("__add_one_arg_setter");
     id_allocate = rb_intern("allocate");
     id_equal = rb_intern("==");
+
+    rbg_interrupt_funcs_init();
 }
