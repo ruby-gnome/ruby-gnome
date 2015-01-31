@@ -374,7 +374,7 @@ module GObjectIntrospection
           else
             name
           end
-        when /\A(?:has|use)_/
+        when /\A(?:has|use|can)_/
           "#{name}?"
         else
           name
