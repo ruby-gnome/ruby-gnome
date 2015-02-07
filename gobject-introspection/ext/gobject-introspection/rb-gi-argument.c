@@ -1599,6 +1599,134 @@ set_in_array_length_argument(GIArgument *argument,
 }
 
 static void
+set_in_array_int16_arguments_from_ruby(GIArgument *array_argument,
+                                       VALUE rb_number_array)
+{
+    gint16 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(gint16, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2INT(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_uint16_arguments_from_ruby(GIArgument *array_argument,
+                                        VALUE rb_number_array)
+{
+    guint16 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(guint16, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2UINT(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_int32_arguments_from_ruby(GIArgument *array_argument,
+                                       VALUE rb_number_array)
+{
+    gint32 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(gint32, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2INT(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_uint32_arguments_from_ruby(GIArgument *array_argument,
+                                        VALUE rb_number_array)
+{
+    guint32 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(guint32, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2UINT(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_int64_arguments_from_ruby(GIArgument *array_argument,
+                                       VALUE rb_number_array)
+{
+    gint64 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(gint64, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2LONG(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_uint64_arguments_from_ruby(GIArgument *array_argument,
+                                        VALUE rb_number_array)
+{
+    guint64 *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(guint64, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2ULONG(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_float_arguments_from_ruby(GIArgument *array_argument,
+                                       VALUE rb_number_array)
+{
+    gfloat *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(gfloat, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2DBL(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
+set_in_array_double_arguments_from_ruby(GIArgument *array_argument,
+                                        VALUE rb_number_array)
+{
+    gdouble *numbers;
+    gint i, n_args;
+
+    n_args = RARRAY_LEN(rb_number_array);
+    numbers = ALLOC_N(gdouble, n_args);
+    for (i = 0; i < n_args; i++) {
+        numbers[i] = NUM2DBL(RARRAY_PTR(rb_number_array)[i]);
+    }
+
+    array_argument->v_pointer = numbers;
+}
+
+static void
 set_in_array_gtype_arguments_from_ruby(GIArgument *array_argument,
                                        VALUE rb_class_array)
 {
@@ -1754,16 +1882,44 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
                                      RSTRING_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_INT16:
+        set_in_array_int16_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_UINT16:
+        set_in_array_uint16_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_INT32:
+        set_in_array_int32_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_UINT32:
+        set_in_array_uint32_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_INT64:
+        set_in_array_int64_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_UINT64:
+        set_in_array_uint64_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_FLOAT:
+        set_in_array_float_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
+        break;
     case GI_TYPE_TAG_DOUBLE:
-        rb_raise(rb_eNotImpError,
-                 "TODO: Ruby -> GIArgument(array)[%s]",
-                 g_type_tag_to_string(element_type_tag));
+        set_in_array_double_arguments_from_ruby(array_argument, rb_argument);
+        set_in_array_length_argument(length_argument, length_type_info,
+                                     RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_GTYPE:
         set_in_array_gtype_arguments_from_ruby(array_argument,
@@ -2010,10 +2166,6 @@ rb_gi_value_argument_free_array_c(GIArgument *argument,
     case GI_TYPE_TAG_UINT64:
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free GIArgument(array)[%s]",
-                 g_type_tag_to_string(element_type_tag));
-        break;
     case GI_TYPE_TAG_GTYPE:
         xfree(argument->v_pointer);
         break;
