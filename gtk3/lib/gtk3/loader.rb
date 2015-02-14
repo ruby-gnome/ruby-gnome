@@ -63,7 +63,6 @@ module Gtk
     end
 
     def require_libraries
-      require "gtk3/accel-group-entry"
       require "gtk3/box"
       require "gtk3/button"
       require "gtk3/border"
