@@ -95,7 +95,7 @@ module Gtk
       elsif animation
         initialize_new_from_animation(animation)
 #      elsif resource
-#        # ToDo: resource usage is not verified and therefor not enabled
+#        # ToDo: resource usage is not verified and therefore not enabled
 #        initialize_new_from_resource resource
       elsif surface
         initialize_new_from_surface(surface)
