@@ -9,20 +9,11 @@
 =end
 require 'gtk3'
 
-if str = Gtk.check_version(2, 6, 0)
-  puts "This sample requires GTK+ 2.6.0 or later"
+if str = Gtk.check_version(3, 4, 2)
+  puts "This sample requires GTK+ 3.4.2 or later"
   puts str
   exit
 end
-
-Gtk::AboutDialog.set_email_hook {|about, link|
-  p "email_hook"
-  p link
-}
-Gtk::AboutDialog.set_url_hook {|about, link|
-  p "url_hook"
-  p link
-}
 
 a = Gtk::AboutDialog.new
 a.artists   = ["Artist 1 <no1@foo.bar.com>", "Artist 2 <no2@foo.bar.com>"]
@@ -38,5 +29,17 @@ a.version   = "1.0.0"
 a.website   = "http://ruby-gnome2.sourceforge.jp"
 a.website_label = "Ruby-GNOME2 Project Website"
 
-p a.run
+a.signal_connect 'activate-link' do |about_dialog, uri|
+  p widget.class
+  p uri
+end
 
+response = a.run
+case
+when Gtk::ResponseType::DELETE_EVENT == response
+  puts "Gtk::ResponseType::DELETE_EVENT" # Gtk 3.14.8
+when Gtk::ResponseType::CANCEL == response
+  puts "Gtk::ResponseType::CANCEL" # v3.4.2 >= Gtk <= v3.8.8
+else
+  puts "Another Response Type"
+end
