@@ -5,7 +5,7 @@
   Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
-require 'gtk3'
+require "gtk3"
 
 unless Gtk::Version.or_later?(3, 4, 2)
   puts "This sample requires GTK+ 3.4.2 or later: #{Gtk::Version::STRING}"
@@ -26,7 +26,7 @@ a.version   = "1.0.0"
 a.website   = "http://ruby-gnome2.sourceforge.jp"
 a.website_label = "Ruby-GNOME2 Project Website"
 
-a.signal_connect 'activate-link' do |about_dialog, uri|
+a.signal_connect("activate-link") do |about_dialog, uri|
   p widget.class
   p uri
 end
