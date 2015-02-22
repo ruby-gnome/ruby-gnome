@@ -31,12 +31,4 @@ a.signal_connect 'activate-link' do |about_dialog, uri|
   p uri
 end
 
-response = a.run
-case
-when Gtk::ResponseType::DELETE_EVENT == response
-  puts "Gtk::ResponseType::DELETE_EVENT" # Gtk 3.14.8
-when Gtk::ResponseType::CANCEL == response
-  puts "Gtk::ResponseType::CANCEL" # v3.4.2 >= Gtk <= v3.8.8
-else
-  puts "Another Response Type"
-end
+p a.run
