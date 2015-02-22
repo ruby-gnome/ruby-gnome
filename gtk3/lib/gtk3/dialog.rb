@@ -18,8 +18,12 @@ module Gtk
   class Dialog
     alias_method :run_raw, :run
     def run
-      response = run_raw
-      Gtk::ResponseType.new(response)
+      response_id = run_raw
+      if response_id < 0
+        Gtk::ResponseType.new(response_id)
+      else
+        response_id
+      end
     end
   end
 end
