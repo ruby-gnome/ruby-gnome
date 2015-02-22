@@ -25,6 +25,7 @@ module Gtk
     def pre_load(repository, namespace)
       call_init_function(repository, namespace)
       define_stock_module
+      define_version_module
       setup_pending_constants
     end
 
@@ -41,6 +42,11 @@ module Gtk
     def define_stock_module
       @stock_module = Module.new
       @base_module.const_set("Stock", @stock_module)
+    end
+
+    def define_version_module
+      @version_module = Module.new
+      @base_module.const_set("Version", @version_module)
     end
 
     def level_bar_class
@@ -133,6 +139,8 @@ module Gtk
       case info.name
       when /\ASTOCK_/
         @stock_module.const_set($POSTMATCH, info.value)
+      when /_VERSION\z/
+        @version_module.const_set($PREMATCH, info.value)
       when /\ALEVEL_BAR_/
         @pending_constants << info
       else
