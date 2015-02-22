@@ -9,9 +9,8 @@
 =end
 require 'gtk3'
 
-if str = Gtk.check_version(3, 4, 2)
-  puts "This sample requires GTK+ 3.4.2 or later"
-  puts str
+unless Gtk::Version.or_later?(3, 4, 2)
+  puts "This sample requires GTK+ 3.4.2 or later: #{Gtk::Version::STRING}"
   exit
 end
 
