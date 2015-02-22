@@ -19,11 +19,7 @@ module Gtk
     class << self
       def or_later?(major, minor, micro=nil)
         error_message = Gtk.check_version(major, minor, micro)
-        if error_message
-          false
-        else
-          true
-        end
+        error_message.nil?
       end
     end
   end
