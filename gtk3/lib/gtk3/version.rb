@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,14 +15,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class << self
-    alias_method :check_version_raw, :check_version
-    remove_method :check_version
-    def check_version?(major, minor, micro=nil)
-      if check_version_raw(major, minor, micro)
-        false
-      else
-        true
+  module Version
+    class << self
+      def or_later?(major, minor, micro=nil)
+        error_message = Gtk.check_version(major, minor, micro)
+        if error_message
+          false
+        else
+          true
+        end
       end
     end
   end

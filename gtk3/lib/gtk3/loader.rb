@@ -69,7 +69,6 @@ module Gtk
       require "gtk3/builder"
       require "gtk3/container"
       require "gtk3/css-provider"
-      require "gtk3/gtk"
       require "gtk3/icon-theme"
       require "gtk3/image"
       require "gtk3/label"
@@ -89,6 +88,7 @@ module Gtk
       require "gtk3/tree-view-column"
       require "gtk3/ui-manager"
       require "gtk3/window"
+      require "gtk3/version"
 
       require "gtk3/deprecated"
     end
