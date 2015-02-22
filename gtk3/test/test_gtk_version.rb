@@ -17,6 +17,14 @@
 class TestGtkVersion < Test::Unit::TestCase
   include GtkTestUtils
 
+  test "STRING" do
+    major = Gtk::Version::MAJOR
+    minor = Gtk::Version::MINOR
+    micro = Gtk::Version::MICRO
+    assert_equal([major, minor, micro].join("."),
+                 Gtk::Version::STRING)
+  end
+
   sub_test_case("#or_later?") do
     test "same" do
       assert_true(Gtk::Version.or_later?(Gtk::Version::MAJOR,

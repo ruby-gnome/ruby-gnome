@@ -16,6 +16,8 @@
 
 module Gtk
   module Version
+    STRING = [MAJOR, MINOR, MICRO].join(".")
+
     class << self
       def or_later?(major, minor, micro=nil)
         error_message = Gtk.check_version(major, minor, micro)
