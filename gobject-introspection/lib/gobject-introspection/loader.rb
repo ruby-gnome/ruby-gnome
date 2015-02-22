@@ -72,7 +72,7 @@ module GObjectIntrospection
 
     def load_function_info(info)
       name = rubyish_method_name(info)
-      define_module_function(@base_module, name, info)
+      define_singleton_method(@base_module, name, info)
     end
 
     def define_module_function(target_module, name, function_info)
