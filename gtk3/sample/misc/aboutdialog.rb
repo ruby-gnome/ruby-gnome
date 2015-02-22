@@ -4,8 +4,6 @@
 
   Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: aboutdialog.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 require 'gtk3'
 
