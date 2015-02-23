@@ -2,20 +2,12 @@
 =begin
   alpha-demo.rb - alpha blended window sample script. (need xcompmgr)
 
-  Original: alphademo.py by Mike Hearn (*1) and David Trowbridge (*2)
-  * (1) http://plan99.net/~mike/blog/2006/06/05/alpha-blended-windows-in-python/
-  * (2) http://david.navi.cx/blog/?p=91
-
-  Translated to Ruby by Juergen Mangler <juergen.mangler@univie.ac.at>
-
-  Copyright (c) 2006  Ruby-GNOME2 Project Team
+  Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: alpha-demo.rb,v 1.1 2007/01/06 03:55:44 ktou Exp $
 =end
 
-require 'gtk3'
-require 'cairo'
+require "gtk3"
+require "cairo"
 
 class AlphaDemo < Gtk::Window
 
@@ -31,7 +23,7 @@ class AlphaDemo < Gtk::Window
     end
     set_double_buffered(false)
 
-    signal_connect('draw') do |widget, event|
+    signal_connect("draw") do |widget, event|
       cr = widget.window.create_cairo_context
 
       rgba = [1.0, 1.0, 1.0]
@@ -49,7 +41,7 @@ class AlphaDemo < Gtk::Window
       cr.fill_preserve
       cr.stroke
     end
-    signal_connect('screen-changed') do |widget, old_screen|
+    signal_connect("screen-changed") do |widget, old_screen|
       screen_changed(widget, old_screen)
     end
 
@@ -57,10 +49,14 @@ class AlphaDemo < Gtk::Window
   end
 
   def screen_changed(widget,old_screen=nil)
-    tcolormap = widget.screen.rgba_colormap
-    @supports_alpha = !tcolormap.nil?
-    tcolormap ||= widget.screen.rgb_colormap
-    widget.set_colormap(tcolormap)
+    visual = screen.rgba_visual
+    if visual && screen.composited?
+      set_visual(visual)
+      @supports_alpha = true
+    else
+      set_visual(screen.system_visual)
+      @supports_alpha = false
+    end
   end
 end
 
