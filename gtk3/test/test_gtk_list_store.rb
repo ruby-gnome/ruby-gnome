@@ -33,7 +33,7 @@ class TestGtkListStore < Test::Unit::TestCase
     @store = Gtk::ListStore.new(*columns)
   end
 
-  sub_test_case("#new") do
+  sub_test_case(".new") do
     test "no columns" do
       assert_raise(ArgumentError.new("No column type is specified")) do
         Gtk::ListStore.new
