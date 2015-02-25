@@ -26,11 +26,28 @@ module Gtk
 
       if got
         iter
-        iter.model = self
+        setup_iter(iter)
         iter
       else
         nil
       end
+    end
+
+    alias_method :iter_first_raw, :iter_first
+    def iter_first
+      got, iter = iter_first_raw
+      if got
+        iter
+        setup_iter(iter)
+        iter
+      else
+        nil
+      end
+    end
+
+    private
+    def setup_iter(iter)
+      iter.model = self
     end
   end
 end
