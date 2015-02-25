@@ -2,13 +2,11 @@
 =begin
   listview.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: listview.rb,v 1.11 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::ListStore sample")
 window.border_width = 0
@@ -18,11 +16,11 @@ window.add(box1)
 
 box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
-box1.pack_start(box2, true, true, 0)
+box1.pack_start(box2, :expand => true, :fill => true, :padding => 0)
 
 scrolled_win = Gtk::ScrolledWindow.new
 scrolled_win.set_policy(:automatic,:automatic)
-box2.pack_start(scrolled_win, true, true, 0)
+box2.pack_start(scrolled_win, :expand => true, :fill => true, :padding => 0)
 
 data = [
     "hello",
@@ -60,7 +58,7 @@ button.signal_connect("clicked") do
   i += 1
 end
 
-box2.pack_start(button, false, true, 0)
+box2.pack_start(button, :expand => false, :fill => true, :padding => 0)
 
 button = Gtk::Button.new(:label => "remove")
 button.can_focus=true
@@ -68,21 +66,21 @@ button.signal_connect("clicked") do
   iter = treeview.selection.selected
   model.remove(iter) if iter
 end
-box2.pack_start(button, false, true, 0)
+box2.pack_start(button, :expand => false, :fill => true, :padding => 0)
 
 separator = Gtk::Separator.new(:horizontal)
-box1.pack_start(separator, false, true, 0)
+box1.pack_start(separator, :expand => false, :fill => true, :padding => 0)
 separator.show
 
 box2 = Gtk::Box.new(:vertical, 10)
 box2.border_width = 10
-box1.pack_start(box2, false, true, 0)
+box1.pack_start(box2, :expand => false, :fill => true, :padding => 0)
 
 button = Gtk::Button.new(:label => "close")
 button.signal_connect("clicked") do
   Gtk.main_quit
 end
-box2.pack_start(button, true, true, 0)
+box2.pack_start(button, :expand => true, :fill => true, :padding => 0)
 button.can_default=true
 button.grab_default
 
