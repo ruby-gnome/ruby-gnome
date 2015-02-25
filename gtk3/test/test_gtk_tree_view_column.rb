@@ -18,6 +18,11 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
   include GtkTestUtils
 
   sub_test_case(".new") do
+    test "empty" do
+      column = Gtk::TreeViewColumn.new
+      assert_equal("", column.title)
+    end
+
     test "title only" do
       column = Gtk::TreeViewColumn.new("title")
       assert_equal("title", column.title)

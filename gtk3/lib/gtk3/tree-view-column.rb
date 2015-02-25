@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,9 +17,9 @@
 module Gtk
   class TreeViewColumn
     alias_method :initialize_raw, :initialize
-    def initialize(title, cell=nil, attributes={})
+    def initialize(title=nil, cell=nil, attributes={})
       initialize_raw
-      set_title(title)
+      set_title(title) if title
       pack_start(cell, true) if cell
       attributes.each_entry do |key, value|
         add_attribute(cell, key, value)
