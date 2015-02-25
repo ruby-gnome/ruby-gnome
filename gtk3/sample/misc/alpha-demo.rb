@@ -8,7 +8,7 @@
 
   Translated to Ruby by Juergen Mangler <juergen.mangler@univie.ac.at>
 
-  Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
+  Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
