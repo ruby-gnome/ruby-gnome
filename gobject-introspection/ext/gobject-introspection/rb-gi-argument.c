@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -1882,46 +1882,55 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
                                      RSTRING_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_INT16:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_int16_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_UINT16:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_uint16_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_INT32:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_int32_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_UINT32:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_uint32_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_INT64:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_int64_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_UINT64:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_uint64_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_FLOAT:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_float_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_DOUBLE:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_double_arguments_from_ruby(array_argument, rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
         break;
     case GI_TYPE_TAG_GTYPE:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_gtype_arguments_from_ruby(array_argument,
                                                rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
@@ -1929,6 +1938,7 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
         break;
     case GI_TYPE_TAG_UTF8:
     case GI_TYPE_TAG_FILENAME:
+        rb_argument = rbg_to_array(rb_argument);
         array_argument->v_pointer = RVAL2STRV(rb_argument);
         set_in_array_length_argument(length_argument, length_type_info,
                                      RARRAY_LEN(rb_argument));
@@ -1939,6 +1949,7 @@ in_array_c_argument_from_ruby(GIArgument *array_argument,
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_INTERFACE:
+        rb_argument = rbg_to_array(rb_argument);
         set_in_array_interface_arguments_from_ruby(array_argument,
                                                    element_type_info,
                                                    rb_argument);
