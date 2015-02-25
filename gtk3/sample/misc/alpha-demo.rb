@@ -2,6 +2,12 @@
 =begin
   alpha-demo.rb - alpha blended window sample script. (need xcompmgr)
 
+  Original: alphademo.py by Mike Hearn (*1) and David Trowbridge (*2)
+  * (1) http://plan99.net/~mike/blog/2006/06/05/alpha-blended-windows-in-python/
+  * (2) http://david.navi.cx/blog/?p=91
+
+  Translated to Ruby by Juergen Mangler <juergen.mangler@univie.ac.at>
+
   Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
