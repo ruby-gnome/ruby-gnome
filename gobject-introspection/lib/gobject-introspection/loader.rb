@@ -370,7 +370,11 @@ module GObjectIntrospection
           "#{$POSTMATCH}?"
         when /\Aget_/
           if function_info.n_in_args.zero?
-            "#{$POSTMATCH}?"
+            if function_info.n_out_args.zero?
+              "#{$POSTMATCH}?"
+            else
+              $POSTMATCH
+            end
           else
             name
           end
