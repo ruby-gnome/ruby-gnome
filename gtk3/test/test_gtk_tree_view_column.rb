@@ -27,5 +27,21 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
       column = Gtk::TreeViewColumn.new("title")
       assert_equal("title", column.title)
     end
+
+    sub_test_case("attributes") do
+      test "string key" do
+        column = Gtk::TreeViewColumn.new
+        cell = Gtk::CellRendererText.new
+        column.pack_start(cell, true)
+        column.add_attribute(cell, "text", 0)
+      end
+
+      test "symbol key" do
+        column = Gtk::TreeViewColumn.new
+        cell = Gtk::CellRendererText.new
+        column.pack_start(cell, true)
+        column.add_attribute(cell, :text, 0)
+      end
+    end
   end
 end

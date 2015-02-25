@@ -25,5 +25,11 @@ module Gtk
         add_attribute(cell, key, value)
       end
     end
+
+    alias_method :add_attribute_raw, :add_attribute
+    def add_attribute(cell, key, value)
+      key = key.to_s if key.is_a?(Symbol)
+      add_attribute_raw(cell, key, value)
+    end
   end
 end
