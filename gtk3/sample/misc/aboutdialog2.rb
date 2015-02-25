@@ -2,16 +2,13 @@
 =begin
   aboutdialog2.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2005,2006 Ruby-GNOME2 Project Team 
+  Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: aboutdialog2.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
-require 'gtk3'
+require "gtk3"
 
-if str = Gtk.check_version(2, 6, 0)
-  puts "This sample requires GTK+ 2.6.0 or later"
-  puts str
+unless Gtk::Version.or_later?(3, 4, 2)
+  puts "This sample requires GTK+ 3.4.2 or later: #{Gtk::Version::STRING}"
   exit
 end
 
