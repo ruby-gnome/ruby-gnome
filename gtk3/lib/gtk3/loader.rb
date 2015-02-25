@@ -69,6 +69,7 @@ module Gtk
     end
 
     def require_libraries
+      require "gtk3/about-dialog"
       require "gtk3/box"
       require "gtk3/button"
       require "gtk3/border"
