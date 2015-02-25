@@ -27,9 +27,11 @@ module Gtk
     def get_value(column)
       @model.get_value(self, column).value
     end
+    alias_method :[], :get_value
 
     def set_value(column, value)
       @model.set_value(self, column, value)
     end
+    alias_method :[]=, :set_value
   end
 end
