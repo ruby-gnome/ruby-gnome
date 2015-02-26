@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,9 +16,11 @@
 
 module Gtk
   class TreeSelection
+    alias_method :selected_raw, :selected
     def selected
-      # TODO: fix the method name "selected?".
-      _selected, model, iter = selected?
+      selected_p, model, iter = selected_raw
+      return nil unless selected_p
+
       iter.model = model
       iter
     end
