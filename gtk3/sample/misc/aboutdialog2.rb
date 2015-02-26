@@ -12,15 +12,6 @@ unless Gtk::Version.or_later?(3, 4, 2)
   exit
 end
 
-Gtk::AboutDialog.set_email_hook {|about, link|
-  p "email_hook"
-  p link
-}
-Gtk::AboutDialog.set_url_hook {|about, link|
-  p "url_hook"
-  p link
-}
-
 Gtk::AboutDialog.show(nil,
 		      "artists" => ["Artist 1 <no1@foo.bar.com>", "Artist 2 <no2@foo.bar.com>"],
 		      "authors" => ["Author 1 <no1@foo.bar.com>", "Author 2 <no2@foo.bar.com>"],

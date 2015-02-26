@@ -2,21 +2,18 @@
 =begin
   textbuffer_serialize.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2006 Ruby-GNOME2 Project Team 
+  Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: textbuffer_serialize.rb,v 1.1 2006/11/23 08:39:13 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
-if str = Gtk.check_version(2, 10, 0)
-  puts "This sample requires GTK+ 2.10.0 or later"
-  puts str
+unless Gtk::Version.or_later?(3, 4, 2)
+  puts "This sample requires GTK+ 3.4.2 or later: #{Gtk::Version::STRING}"
   exit
 end
 
-current_folder = ENV['HOME'] || "."
+current_folder = ENV["HOME"] || "."
 file_name = "serialized.dat"
 
 textview = Gtk::TextView.new
