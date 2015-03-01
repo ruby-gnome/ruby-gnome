@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -579,33 +579,11 @@ out_arguments_to_ruby(GICallableInfo *callable_info,
             continue;
         }
 
-        if (metadata->array_p) {
-            GIArgument *length_argument = NULL;
-            GIArgInfo *length_arg_info = NULL;
-
-            if (metadata->array_length_in_arg_index != -1) {
-                RBGIArgMetadata *length_metadata;
-                length_metadata =
-                    g_ptr_array_index(args_metadata,
-                                      metadata->array_length_arg_index);
-                if (length_metadata->direction == GI_DIRECTION_OUT) {
-                    length_argument =
-                        &g_array_index(in_args, GIArgument,
-                                       length_metadata->out_arg_index);
-                } else {
-                    length_argument =
-                        &g_array_index(in_args, GIArgument,
-                                       length_metadata->in_arg_index);
-                }
-                length_arg_info = &(length_metadata->arg_info);
-            }
-            rb_argument = GI_OUT_ARRAY_ARGUMENT2RVAL(argument,
-                                                     length_argument,
-                                                     &(metadata->arg_info),
-                                                     length_arg_info);
-        } else {
-            rb_argument = GI_OUT_ARGUMENT2RVAL(argument, &(metadata->arg_info));
-        }
+        rb_argument = GI_OUT_ARGUMENT2RVAL(argument,
+                                           &(metadata->arg_info),
+                                           in_args,
+                                           out_args,
+                                           args_metadata);
         rb_ary_push(rb_out_args, rb_argument);
     }
 
@@ -659,7 +637,7 @@ typedef struct {
     GIFunctionInfo *info;
     GArray *in_args;
     GArray *out_args;
-    GIArgument *return_value;
+    GIArgument return_value;
     GError **error;
     gboolean succeeded;
 } InvokeData;
@@ -673,7 +651,7 @@ rb_gi_function_info_invoke_raw_call(InvokeData *data)
                                data->in_args->len,
                                (GIArgument *)((void *)(data->out_args->data)),
                                data->out_args->len,
-                               data->return_value,
+                               &(data->return_value),
                                data->error);
 }
 
@@ -708,7 +686,7 @@ gobject_based_p(GIBaseInfo *info)
 
 VALUE
 rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
-                               GIArgument *return_value)
+                               GIArgument *return_value, VALUE *rb_return_value)
 {
     GICallableInfo *callable_info;
     GIArgument receiver;
@@ -763,7 +741,6 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
         data.info = info;
         data.in_args = in_args;
         data.out_args = out_args;
-        data.return_value = return_value;
         data.error = &error;
         if (unlock_gvl) {
             rb_thread_call_without_gvl(
@@ -773,6 +750,21 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
             rb_gi_function_info_invoke_raw_call(&data);
         }
         succeeded = data.succeeded;
+
+        if (return_value) {
+            *return_value = data.return_value;
+        }
+        if (rb_return_value) {
+            if (succeeded) {
+                *rb_return_value = GI_RETURN_ARGUMENT2RVAL(callable_info,
+                                                           &(data.return_value),
+                                                           in_args,
+                                                           out_args,
+                                                           args_metadata);
+            } else {
+                *rb_return_value = Qnil;
+            }
+        }
     }
 
     if (succeeded) {
@@ -800,8 +792,6 @@ static VALUE
 rg_invoke(VALUE self, VALUE rb_options)
 {
     GIFunctionInfo *info;
-    GICallableInfo *callable_info;
-    GIArgument return_value;
     VALUE rb_out_args;
     VALUE rb_return_value;
 
@@ -809,14 +799,13 @@ rg_invoke(VALUE self, VALUE rb_options)
     /* TODO: use rb_protect() */
     rb_out_args = rb_gi_function_info_invoke_raw(info,
                                                  rb_options,
-                                                 &return_value);
-
-    callable_info = (GICallableInfo *)info;
-    rb_return_value = GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
+                                                 NULL,
+                                                 &rb_return_value);
 
     if (NIL_P(rb_out_args)) {
         return rb_return_value;
     } else {
+        GICallableInfo *callable_info = (GICallableInfo *)info;
         GITypeInfo return_value_info;
         g_callable_info_load_return_type(callable_info, &return_value_info);
         if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_VOID) {

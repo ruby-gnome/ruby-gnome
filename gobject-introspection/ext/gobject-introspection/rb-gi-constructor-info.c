@@ -110,7 +110,8 @@ rg_invoke(VALUE self, VALUE rb_options)
     /* TODO: use rb_protect */
     rb_gi_function_info_invoke_raw(info,
                                    rb_options,
-                                   &return_value);
+                                   &return_value,
+                                   NULL);
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
     initialize_receiver(receiver, &return_value_info, &return_value);

@@ -83,7 +83,7 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
     }
 
     type_info = g_field_info_get_type(info);
-    rb_field_value = GI_ARGUMENT2RVAL(&argument, type_info);
+    rb_field_value = GI_ARGUMENT2RVAL(&argument, type_info, NULL, NULL, NULL);
     g_base_info_unref(type_info);
 
     return rb_field_value;
