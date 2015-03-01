@@ -31,22 +31,18 @@
     (rb_gi_base_info_to_ruby_with_unref((GIBaseInfo *)(info)))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
 
-#define GI_ARGUMENT2RVAL(argument, type_info)           \
-    (rb_gi_argument_to_ruby((argument), (type_info)))
-#define GI_ARRAY_ARGUMENT2RVAL(array_argument, length_argument,         \
-                               array_type_info, length_type_info)       \
-    (rb_gi_array_argument_to_ruby((array_argument),                     \
-                                  (length_argument),                    \
-                                  (array_type_info),                    \
-                                  (length_type_info)))
-#define GI_OUT_ARGUMENT2RVAL(argument, arg_info)                \
-    (rb_gi_out_argument_to_ruby((argument), (arg_info)))
-#define GI_OUT_ARRAY_ARGUMENT2RVAL(array_argument, length_argument,     \
-                                   array_arg_info, length_arg_info)     \
-    (rb_gi_out_array_argument_to_ruby((array_argument), (length_argument), \
-                                      (array_arg_info), (length_arg_info)))
-#define GI_RETURN_ARGUMENT2RVAL(argument, callable_info)                \
-    (rb_gi_return_argument_to_ruby((argument), (callable_info)))
+#define GI_ARGUMENT2RVAL(argument, type_info,                           \
+                         in_args, out_args, args_metadata)              \
+    (rb_gi_argument_to_ruby((argument), (type_info),                    \
+                            (in_args), (out_args), (args_metadata)))
+#define GI_OUT_ARGUMENT2RVAL(argument, arg_info,                        \
+                             in_args, out_args, args_metadata)          \
+    (rb_gi_out_argument_to_ruby((argument), (arg_info),                 \
+                                (in_args), (out_args), (args_metadata)))
+#define GI_RETURN_ARGUMENT2RVAL(callable_info, argument,                \
+                                in_args, out_args, args_metadata)       \
+    (rb_gi_return_argument_to_ruby((callable_info), (argument),         \
+                                   (in_args), (out_args), (args_metadata)))
 #define RVAL2GI_VALUE_ARGUMENT(argument, type_info, rb_argument)        \
     (rb_gi_value_argument_from_ruby((argument), (type_info), (rb_argument)))
 #define RVAL2GI_IN_ARGUMENT(argument, arg_info, rb_argument)            \
@@ -106,23 +102,24 @@ VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
 
 VALUE       rb_gi_argument_to_ruby            (GIArgument     *argument,
-                                               GITypeInfo     *type_info);
-VALUE       rb_gi_array_argument_to_ruby      (GIArgument     *array_argument,
-                                               GIArgument     *length_argument,
-                                               GITypeInfo     *array_type_info,
-                                               GITypeInfo     *length_type_info);
+                                               GITypeInfo     *type_info,
+                                               GArray         *in_args,
+                                               GArray         *out_args,
+                                               GPtrArray      *args_metadata);
 void        rb_gi_out_argument_init           (GIArgument     *argument,
                                                GIArgInfo      *arg_info);
 VALUE       rb_gi_out_argument_to_ruby        (GIArgument     *argument,
-                                               GIArgInfo      *arg_info);
-VALUE       rb_gi_out_array_argument_to_ruby  (GIArgument     *array_argument,
-                                               GIArgument     *length_argument,
-                                               GIArgInfo      *array_arg_info,
-                                               GIArgInfo      *length_arg_info);
+                                               GIArgInfo      *arg_info,
+                                               GArray         *in_args,
+                                               GArray         *out_args,
+                                               GPtrArray      *args_metadata);
 void        rb_gi_out_argument_fin            (GIArgument     *argument,
                                                GIArgInfo      *arg_info);
-VALUE       rb_gi_return_argument_to_ruby     (GIArgument     *argument,
-                                               GICallableInfo *callable_info);
+VALUE       rb_gi_return_argument_to_ruby     (GICallableInfo *callable_info,
+                                               GIArgument     *argument,
+                                               GArray         *in_args,
+                                               GArray         *out_args,
+                                               GPtrArray      *args_metadata);
 GIArgument *rb_gi_value_argument_from_ruby    (GIArgument     *argument,
                                                GITypeInfo     *type_info,
                                                VALUE           rb_argument);

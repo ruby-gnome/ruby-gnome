@@ -39,8 +39,6 @@ static VALUE
 rg_invoke(VALUE self, VALUE rb_options)
 {
     GIFunctionInfo *info;
-    GICallableInfo *callable_info;
-    GIArgument return_value;
     VALUE rb_out_args;
     VALUE rb_return_value;
 
@@ -49,14 +47,13 @@ rg_invoke(VALUE self, VALUE rb_options)
     /* TODO: use rb_protect */
     rb_out_args = rb_gi_function_info_invoke_raw(info,
                                                  rb_options,
-                                                 &return_value);
-
-    callable_info = (GICallableInfo *)info;
-    rb_return_value = GI_RETURN_ARGUMENT2RVAL(&return_value, callable_info);
+                                                 NULL,
+                                                 &rb_return_value);
 
     if (NIL_P(rb_out_args)) {
         return rb_return_value;
     } else {
+        GICallableInfo *callable_info = (GICallableInfo *)info;
         GITypeInfo return_value_info;
         g_callable_info_load_return_type(callable_info, &return_value_info);
         if (g_type_info_get_tag(&return_value_info) != GI_TYPE_TAG_VOID) {
