@@ -27,7 +27,7 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
                 VALUE rb_array)
 {
     const gchar **elements;
-    gboolean fixed_size_p;
+    gint fixed_size;
     gboolean zero_terminated_p;
 
     elements = array->v_pointer;
@@ -35,7 +35,7 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
         return;
     }
 
-    fixed_size_p = g_type_info_get_array_fixed_size(type_info);
+    fixed_size = g_type_info_get_array_fixed_size(type_info);
     zero_terminated_p = g_type_info_is_zero_terminated(type_info);
     if (n_elements != -1) {
         gint64 i;
@@ -50,10 +50,10 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(array)[c] -> Ruby: "
                  "zero-terminated: %s "
-                 "fixed-size: %s "
+                 "fixed-size: %d "
                  "length: %" G_GINT64_FORMAT,
                  zero_terminated_p ? "true" : "false",
-                 fixed_size_p ? "true" : "false",
+                 fixed_size,
                  n_elements);
     }
 }
