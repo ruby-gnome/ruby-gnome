@@ -22,13 +22,121 @@
 
 static VALUE rb_cGLibValue = Qnil;
 
+static VALUE
+interface_struct_to_ruby(gpointer object,
+                         G_GNUC_UNUSED GITypeInfo *type_info,
+                         GIBaseInfo *interface_info)
+{
+    const char *namespace;
+    const char *name;
+    VALUE rb_module;
+    VALUE rb_class;
+
+    namespace = g_base_info_get_namespace(interface_info);
+    name = g_base_info_get_name(interface_info);
+    rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
+    rb_class = rb_const_get(rb_module, rb_intern(name));
+    return Data_Wrap_Struct(rb_class, NULL, NULL, object);
+}
+
+static gpointer
+interface_struct_from_ruby(VALUE rb_object)
+{
+    return DATA_PTR(rb_object);
+}
+
+static void
+array_c_to_ruby_sized_interface(gconstpointer *elements,
+                                gint64 n_elements,
+                                GITypeInfo *element_type_info,
+                                VALUE rb_array)
+{
+    gint64 i;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    GType gtype;
+    const char *interface_name;
+
+    interface_info = g_type_info_get_interface(element_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_STRUCT:
+        if (gtype == G_TYPE_NONE) {
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array,
+                            interface_struct_to_ruby((gpointer)elements[i],
+                                                     element_type_info,
+                                                     interface_info));
+            }
+            g_base_info_unref(interface_info);
+            g_base_info_unref(element_type_info);
+        } else {
+            interface_name = g_info_type_to_string(interface_type);
+            g_base_info_unref(interface_info);
+            g_base_info_unref(element_type_info);
+            rb_raise(rb_eNotImpError,
+                     "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                     interface_name,
+                     g_type_name(gtype));
+        }
+        break;
+    case GI_INFO_TYPE_BOXED:
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+    case GI_INFO_TYPE_OBJECT:
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+    case GI_INFO_TYPE_INVALID_0:
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    default:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        g_assert_not_reached();
+        break;
+    }
+}
+
 static void
 array_c_to_ruby_sized(gconstpointer *elements,
                       gint64 n_elements,
-                      GITypeTag element_type_tag,
+                      GITypeInfo *type_info,
                       VALUE rb_array)
 {
     gint64 i;
+    GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
+
+    element_type_info = g_type_info_get_param_type(type_info, 0);
+    element_type_tag = g_type_info_get_tag(element_type_info);
 
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
@@ -44,11 +152,13 @@ array_c_to_ruby_sized(gconstpointer *elements,
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
     case GI_TYPE_TAG_GTYPE:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(array)[c][%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_UTF8:
+        g_base_info_unref(element_type_info);
         {
             const gchar **strings = (const gchar **)elements;
             for (i = 0; i < n_elements; i++) {
@@ -58,17 +168,27 @@ array_c_to_ruby_sized(gconstpointer *elements,
         break;
     case GI_TYPE_TAG_FILENAME:
     case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 g_type_tag_to_string(element_type_tag));
+        break;
     case GI_TYPE_TAG_INTERFACE:
+        array_c_to_ruby_sized_interface(elements, n_elements, element_type_info,
+                                        rb_array);
+        break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
     case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(array)[c][%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     default:
+        g_base_info_unref(element_type_info);
         g_assert_not_reached();
         break;
     }
@@ -81,8 +201,6 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
     gconstpointer *elements;
     gint fixed_size;
     gboolean zero_terminated_p;
-    GITypeInfo *element_type_info;
-    GITypeTag element_type_tag;
 
     elements = array->v_pointer;
     if (!elements) {
@@ -92,12 +210,8 @@ array_c_to_ruby(GIArgument *array, GITypeInfo *type_info, gint64 n_elements,
     fixed_size = g_type_info_get_array_fixed_size(type_info);
     zero_terminated_p = g_type_info_is_zero_terminated(type_info);
 
-    element_type_info = g_type_info_get_param_type(type_info, 0);
-    element_type_tag = g_type_info_get_tag(element_type_info);
-    g_base_info_unref(element_type_info);
-
     if (n_elements != -1) {
-        array_c_to_ruby_sized(elements, n_elements, element_type_tag, rb_array);
+        array_c_to_ruby_sized(elements, n_elements, type_info, rb_array);
     } else if (zero_terminated_p) {
         const gchar **strings = (const gchar **)elements;
         for (; *strings; strings++) {
@@ -220,29 +334,6 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
 }
 
 static VALUE
-interface_struct_to_ruby(GIArgument *argument,
-                         G_GNUC_UNUSED GITypeInfo *type_info,
-                         GIBaseInfo *interface_info)
-{
-    const char *namespace;
-    const char *name;
-    VALUE rb_module;
-    VALUE rb_class;
-
-    namespace = g_base_info_get_namespace(interface_info);
-    name = g_base_info_get_name(interface_info);
-    rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
-    rb_class = rb_const_get(rb_module, rb_intern(name));
-    return Data_Wrap_Struct(rb_class, NULL, NULL, argument->v_pointer);
-}
-
-static gpointer
-interface_struct_from_ruby(VALUE rb_argument)
-{
-    return DATA_PTR(rb_argument);
-}
-
-static VALUE
 interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
 {
     VALUE rb_interface;
@@ -269,7 +360,7 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
         break;
     case GI_INFO_TYPE_STRUCT:
         if (gtype == G_TYPE_NONE) {
-            rb_interface = interface_struct_to_ruby(argument,
+            rb_interface = interface_struct_to_ruby(argument->v_pointer,
                                                     type_info,
                                                     interface_info);
         } else if (gtype == G_TYPE_BYTES) {
