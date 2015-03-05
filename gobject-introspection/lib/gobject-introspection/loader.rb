@@ -77,13 +77,15 @@ module GObjectIntrospection
 
     def define_module_function(target_module, name, function_info)
       unlock_gvl = should_unlock_gvl?(function_info, target_module)
-      validate = lambda do |arguments|
+      prepare = lambda do |argments, &block|
+        arguments, block = build_arguments(function_info, arguments, &block)
         method_name = "#{target_module}\#.#{name}"
         validate_arguments(function_info, method_name, arguments)
+        [arguments, block]
       end
       target_module.module_eval do
         define_method(name) do |*arguments, &block|
-          validate.call(arguments, &block)
+          arguments, block = prepare.call(arguments, &block)
           function_info.invoke({
                                  :arguments => arguments,
                                  :unlock_gvl => unlock_gvl,
@@ -96,12 +98,14 @@ module GObjectIntrospection
 
     def define_singleton_method(klass, name, info)
       unlock_gvl = should_unlock_gvl?(info, klass)
-      validate = lambda do |arguments|
+      prepare = lambda do |arguments|
+        arguments, block = build_arguments(info, arguments, &block)
         validate_arguments(info, "#{klass}.#{name}", arguments)
+        [arguments, block]
       end
       singleton_class = (class << klass; self; end)
       singleton_class.__send__(:define_method, name) do |*arguments, &block|
-        validate.call(arguments, &block)
+        arguments, block = prepare.call(arguments, &block)
         if block.nil? and info.require_callback?
           to_enum(name, *arguments)
         else
@@ -264,8 +268,10 @@ module GObjectIntrospection
     def load_constructor_infos(infos, klass)
       return if infos.empty?
 
-      validate = lambda do |info, method_name, arguments|
+      prepare = lambda do |info, method_name, arguments, &block|
+        arguments, block = build_arguments(info, arguments, &block)
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
+        [arguments, block]
       end
       call_initialize_post = lambda do |object|
         initialize_post(object)
@@ -274,7 +280,7 @@ module GObjectIntrospection
         name = "initialize_#{info.name}"
         unlock_gvl = should_unlock_gvl?(info, klass)
         klass.__send__(:define_method, name) do |*arguments, &block|
-          validate.call(info, name, arguments, &block)
+          arguments, block = prepare.call(info, name, arguments, &block)
           info.invoke({
                         :receiver  => self,
                         :arguments => arguments,
@@ -296,6 +302,15 @@ module GObjectIntrospection
     end
 
     def initialize_post(object)
+    end
+
+    def build_arguments(info, arguments, &block)
+      last_in_arg = info.in_args.last
+      if block and last_in_arg and last_in_arg.gclosure?
+        [arguments + [block], nil]
+      else
+        [arguments, block]
+      end
     end
 
     def validate_arguments(info, method_name, arguments)
@@ -430,9 +445,6 @@ module GObjectIntrospection
 
     def define_method(info, klass, method_name)
       unlock_gvl = should_unlock_gvl?(info, klass)
-      validate = lambda do |arguments|
-        validate_arguments(info, "#{klass}\##{method_name}", arguments)
-      end
       if klass.method_defined?(method_name) and
           klass.instance_method(method_name).owner == klass
         klass.__send__(:remove_method, method_name)
@@ -440,9 +452,14 @@ module GObjectIntrospection
       function_info_p = (info.class == FunctionInfo)
       no_return_value_p = (info.return_type.tag == TypeTag::VOID)
       setter_method_p = (/\Aset_/ === method_name and no_return_value_p)
-      klass.__send__(:define_method, method_name) do |*arguments, &block|
+      prepare = lambda do |arguments, &block|
         arguments = [self] + arguments if function_info_p
-        validate.call(arguments, &block)
+        arguments, block = build_arguments(info, arguments, &block)
+        validate_arguments(info, "#{klass}\##{method_name}", arguments)
+        [arguments, block]
+      end
+      klass.__send__(:define_method, method_name) do |*arguments, &block|
+        arguments, block = prepare.call(arguments, &block)
         if block.nil? and info.require_callback?
           to_enum(method_name, *arguments)
         else
