@@ -98,7 +98,7 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
     gboolean succeeded;
 
     type_info = g_field_info_get_type(info);
-    RVAL2GI_VALUE_ARGUMENT(&field_value, type_info, rb_field_value);
+    RVAL2GI_VALUE_ARGUMENT(&field_value, type_info, rb_field_value, Qnil);
 
     succeeded = g_field_info_set_field(info, memory, &field_value);
     rb_gi_value_argument_free(&field_value, type_info);

@@ -1295,8 +1295,10 @@ rb_gi_return_argument_to_ruby(GICallableInfo *callable_info,
 }
 
 static void
-rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
-                                   VALUE rb_argument)
+rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
+                                         GITypeInfo *type_info,
+                                         VALUE rb_argument,
+                                         VALUE self)
 {
     GIBaseInfo *interface_info;
     GIInfoType interface_type;
@@ -1331,6 +1333,12 @@ rb_gi_argument_from_ruby_interface(GIArgument *argument, GITypeInfo *type_info,
                 rbgobj_initialize_gvalue(gvalue, rb_argument);
             }
             argument->v_pointer = gvalue;
+        } else if (gtype == G_TYPE_CLOSURE) {
+            GClosure *rclosure = NULL;
+
+            rclosure = g_rclosure_new(rb_argument, Qnil, NULL);
+            g_rclosure_attach(rclosure, self);
+            argument->v_pointer = rclosure;
         } else {
             argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
         }
@@ -1405,7 +1413,7 @@ rb_gi_value_argument_from_ruby_void(GIArgument *argument, GITypeInfo *type_info,
 
 GIArgument *
 rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
-                               VALUE rb_argument)
+                               VALUE rb_argument, VALUE self)
 {
     GITypeTag type_tag;
 
@@ -1466,7 +1474,8 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                  g_type_tag_to_string(type_tag));
         break;
     case GI_TYPE_TAG_INTERFACE:
-        rb_gi_argument_from_ruby_interface(argument, type_info, rb_argument);
+        rb_gi_value_argument_from_ruby_interface(argument, type_info,
+                                                 rb_argument, self);
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
@@ -1488,12 +1497,14 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
 static void
 rb_gi_inout_argument_from_ruby(GIArgument *argument,
                                G_GNUC_UNUSED GIArgInfo *arg_info,
-                               GITypeInfo *type_info, VALUE rb_argument)
+                               GITypeInfo *type_info,
+                               VALUE rb_argument,
+                               VALUE self)
 {
     GIArgument in_argument;
     GITypeTag type_tag;
 
-    rb_gi_value_argument_from_ruby(&in_argument, type_info, rb_argument);
+    rb_gi_value_argument_from_ruby(&in_argument, type_info, rb_argument, self);
 
     type_tag = g_type_info_get_tag(type_info);
     switch (type_tag) {
@@ -1695,7 +1706,7 @@ rb_gi_in_argument_transfer(GIArgument *argument, GITransfer transfer,
 
 GIArgument *
 rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
-                            VALUE rb_argument)
+                            VALUE rb_argument, VALUE self)
 {
     GITypeInfo type_info;
 
@@ -1707,9 +1718,9 @@ rb_gi_in_argument_from_ruby(GIArgument *argument, GIArgInfo *arg_info,
     g_arg_info_load_type(arg_info, &type_info);
     if (g_arg_info_get_direction(arg_info) == GI_DIRECTION_INOUT) {
         rb_gi_inout_argument_from_ruby(argument, arg_info, &type_info,
-                                       rb_argument);
+                                       rb_argument, self);
     } else {
-        rb_gi_value_argument_from_ruby(argument, &type_info, rb_argument);
+        rb_gi_value_argument_from_ruby(argument, &type_info, rb_argument, self);
         rb_gi_in_argument_transfer(argument,
                                    g_arg_info_get_ownership_transfer(arg_info),
                                    &type_info,

@@ -44,6 +44,7 @@ end
 GLib::Log.set_log_domain(GObjectIntrospection::LOG_DOMAIN)
 
 require "gobject-introspection/repository"
+require "gobject-introspection/arg-info"
 require "gobject-introspection/callable-info"
 require "gobject-introspection/object-info"
 require "gobject-introspection/interface-info"

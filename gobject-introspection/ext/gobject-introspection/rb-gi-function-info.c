@@ -445,7 +445,8 @@ in_callback_argument_from_ruby(RBGIArgMetadata *metadata, GArray *in_args)
 
 static void
 in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
-                      GArray *in_args, GPtrArray *args_metadata)
+                      GArray *in_args, GPtrArray *args_metadata,
+                      VALUE self)
 {
     if (metadata->rb_arg_index == -1) {
         return;
@@ -491,7 +492,8 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
         argument = &(g_array_index(in_args, GIArgument, metadata->in_arg_index));
         RVAL2GI_IN_ARGUMENT(argument,
                             &(metadata->arg_info),
-                            rb_argument);
+                            rb_argument,
+                            self);
     }
 }
 
@@ -516,7 +518,7 @@ arg_metadata_free(gpointer data)
 }
 
 static void
-arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
+arguments_from_ruby(GICallableInfo *info, VALUE self, VALUE rb_arguments,
                     GArray *in_args, GArray *out_args,
                     GPtrArray *args_metadata)
 {
@@ -532,7 +534,7 @@ arguments_from_ruby(GICallableInfo *info, VALUE rb_arguments,
         metadata = g_ptr_array_index(args_metadata, i);
         if (metadata->in_arg_index != -1) {
             in_argument_from_ruby(metadata, rb_arguments,
-                                  in_args, args_metadata);
+                                  in_args, args_metadata, self);
         } else {
             out_argument_from_ruby(metadata, out_args);
         }
@@ -734,7 +736,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
     if (receiver.v_pointer) {
         g_array_append_val(in_args, receiver);
     }
-    arguments_from_ruby(callable_info, rb_arguments,
+    arguments_from_ruby(callable_info, rb_receiver, rb_arguments,
                         in_args, out_args, args_metadata);
     {
         InvokeData data;
