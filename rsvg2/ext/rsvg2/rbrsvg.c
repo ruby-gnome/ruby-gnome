@@ -154,16 +154,6 @@ rg_s_pixbuf_from_file_at_zoom_with_max(G_GNUC_UNUSED VALUE self,
     return rb_pixbuf;
 }
 
-static VALUE
-rg_s_cairo_available_p(G_GNUC_UNUSED VALUE self)
-{
-#ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
-    return Qtrue;
-#else
-    return Qfalse;
-#endif
-}
-
 void
 Init_rsvg2(void)
 {

@@ -16,6 +16,12 @@ end
 module RSVG
   LOG_DOMAIN = "librsvg"
 
+  class << self
+    def cairo_available?
+      true
+    end
+  end
+
   class Handle
     class << self
       # For backward compatibility
@@ -31,12 +37,10 @@ module RSVG
   end
 end
 
-if RSVG.cairo_available?
-  module Cairo
-    class Context
-      def render_rsvg_handle(handle, *args, &block)
-        handle.render_cairo(self, *args, &block)
-      end
+module Cairo
+  class Context
+    def render_rsvg_handle(handle, *args, &block)
+      handle.render_cairo(self, *args, &block)
     end
   end
 end

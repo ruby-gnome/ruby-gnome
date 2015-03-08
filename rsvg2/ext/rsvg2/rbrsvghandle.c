@@ -281,7 +281,6 @@ rg_metadata(VALUE self)
 #  endif
 #endif
 
-#ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
 static VALUE
 rg_render_cairo(int argc, VALUE *argv, VALUE self)
 {
@@ -297,7 +296,6 @@ rg_render_cairo(int argc, VALUE *argv, VALUE self)
 
     return Qnil;
 }
-#endif
 
 void
 Init_rsvg_handle(VALUE mRSVG)
@@ -335,9 +333,7 @@ Init_rsvg_handle(VALUE mRSVG)
 #  endif
 #endif
 
-#ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
     RG_DEF_METHOD(render_cairo, -1);
-#endif
 
 #if LIBRSVG_CHECK_VERSION(2, 40, 3)
     /* RsvgHandleFlags */
