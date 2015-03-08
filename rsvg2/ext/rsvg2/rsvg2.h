@@ -32,11 +32,7 @@ extern "C" {
 #include <rbglib.h>
 #include <rbgobject.h>
 
-#ifdef HAVE_LIBRSVG_RSVG_GZ_H
-#  include <librsvg/rsvg-gz.h>
-#else
-#  include <librsvg/rsvg.h>
-#endif
+#include <librsvg/rsvg.h>
 
 #include <rb_cairo.h>
 
