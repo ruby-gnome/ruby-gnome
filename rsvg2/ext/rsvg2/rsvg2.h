@@ -35,11 +35,13 @@ extern "C" {
 
 #include <librsvg/rsvg.h>
 
-#define LIBRSVG_CHECK_VERSION(major, minor, micro)                            \
-    (LIBRSVG_MAJOR_VERSION > (major) ||                                       \
+#ifndef LIBRSVG_CHECK_VERSION
+#  define LIBRSVG_CHECK_VERSION(major, minor, micro)                    \
+    (LIBRSVG_MAJOR_VERSION > (major) ||                                 \
      (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION > (minor)) || \
      (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION == (minor) && \
       LIBRSVG_MICRO_VERSION >= (micro)))
+#endif
 
 #if !LIBRSVG_CHECK_VERSION(2, 36, 2)
 #  include <librsvg/librsvg-features.h>
