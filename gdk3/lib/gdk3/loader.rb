@@ -29,12 +29,9 @@ module Gdk
       @event_motion_class ||= @base_module.const_get(:EventMotion)
     end
 
-    def rectangle_class
-      @rectangle_class ||= @base_module.const_get(:Rectangle)
-    end
-
     def pre_load(repository, namespace)
       setup_pending_constants
+      setup_pending_rectangle_functions
       define_keyval_module
       define_selection_module
       load_cairo_rectangle_int
@@ -56,6 +53,7 @@ module Gdk
                                       "Rectangle",
                                       @base_module,
                                       :size => info.size)
+      @rectangle_class = klass
       load_fields(info, klass)
       load_methods(info, klass)
     end
@@ -72,6 +70,7 @@ module Gdk
 
     def post_load(repository, namespace)
       apply_pending_constants
+      apply_pending_rectangle_functions
       require_libraries
       convert_event_classes
       define_selection_constants
@@ -87,6 +86,24 @@ module Gdk
         when /\AEVENT_/
           event_class.const_set($POSTMATCH, info.value)
         end
+      end
+    end
+
+    def setup_pending_rectangle_functions
+      @pending_rectangle_get_type_function = nil
+      @pending_rectangle_functions = []
+    end
+
+    def apply_pending_rectangle_functions
+      get_type_info = @pending_rectangle_get_type_function
+      gtype = get_type_info.invoke({:arguments => []})
+      self.class.register_boxed_class_converter(gtype) do |rectangle|
+        @rectangle_class
+      end
+
+      @pending_rectangle_functions.each do |info|
+        name = info.name
+        define_method(info, @rectangle_class, name.gsub(/\Arectangle_/, ""))
       end
     end
 
@@ -174,10 +191,12 @@ module Gdk
     def load_function_info(info)
       name = info.name
       case name
+      when "rectangle_get_type"
+        @pending_rectangle_get_type_function = info
+      when /\Arectangle_/
+        @pending_rectangle_functions << info
       when "init", /_get_type\z/
         # ignore
-      when /\Arectangle_/
-        define_method(info, rectangle_class, $POSTMATCH)
       when /\Apixbuf_/
         target_class = nil
         case $POSTMATCH
