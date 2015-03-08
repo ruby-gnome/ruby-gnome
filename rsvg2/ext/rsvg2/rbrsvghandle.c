@@ -92,74 +92,70 @@ rb_rsvg_handle_alloc(VALUE klass)
 #endif
 
 static VALUE
-rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
-    GError *error = NULL;
     RsvgHandle *handle;
-
-    handle = rsvg_handle_new_from_data((const guint8 *)RVAL2CSTR(data),
-                                       RSTRING_LEN(data), &error);
-
-    if (error)
-        RAISE_GERROR(error);
-
-    return GOBJ2RVAL_UNREF(handle);
-}
-
-static VALUE
-rg_s_new_from_file(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
-{
-    VALUE rb_file_path, rb_options, rb_flags;
+    VALUE rb_options;
+    const char *file_name = NULL;
+    const guint8 *data = NULL;
+    gsize data_size = 0;
     GError *error = NULL;
-    RsvgHandle *handle;
-
-    rb_scan_args(argc, argv, "11", &rb_file_path, &rb_options);
-    rbg_scan_options(rb_options,
-                     "flags", &rb_flags,
-                     NULL);
-
 #if LIBRSVG_CHECK_VERSION(2, 40, 3)
-    {
-        GFile *file;
-        GCancellable *cancellable = NULL;
-        RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
+    RsvgHandleFlags flags = RSVG_HANDLE_FLAGS_NONE;
+#endif
 
-        if (!NIL_P(rb_flags)) {
-            flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
+    rb_scan_args(argc, argv, "01", &rb_options);
+
+    if (!NIL_P(rb_options)) {
+        VALUE rb_file_name;
+        VALUE rb_data;
+        VALUE rb_flags;
+
+        rbg_scan_options(rb_options,
+                         "file_name", &rb_file_name,
+                         "data", &rb_data,
+                         "flags", &rb_flags,
+                         NULL);
+        if (!NIL_P(rb_file_name)) {
+            file_name = RVAL2CSTRFILENAME(rb_file_name);
         }
-
-        file = g_file_new_for_path((const char *)RVAL2CSTR(rb_file_path));
-        handle = rsvg_handle_new_from_gfile_sync(file, flags,
-                                                 cancellable,
-                                                 &error);
-        g_object_unref(file);
-    }
+        if (!NIL_P(rb_data)) {
+            data = (const guint8 *)RSTRING_PTR(rb_data);
+            data_size = RSTRING_LEN(rb_data);
+        }
+        if (!NIL_P(rb_flags)) {
+#if LIBRSVG_CHECK_VERSION(2, 40, 3)
+            flags = RVAL2GFLAGS(rb_flags, RSVG_TYPE_HANDLE_FLAGS);
 #else
-    if (!NIL_P(rb_flags)) {
         rb_raise(rb_eArgError,
                  "librsvg 2.40.3 or later is required for :flags: <%d.%d.%d>",
                  LIBRSVG_MAJOR_VERSION,
                  LIBRSVG_MINOR_VERSION,
                  LIBRSVG_MICRO_VERSION);
-    }
-    handle = rsvg_handle_new_from_file((const gchar *)RVAL2CSTR(rb_file_path),
-                                       &error);
 #endif
+        }
+    }
+
+    if (file_name) {
+#if LIBRSVG_CHECK_VERSION(2, 40, 3)
+        GFile *file;
+        GCancellable *cancellable = NULL;
+
+        file = g_file_new_for_path(file_name);
+        handle = rsvg_handle_new_from_gfile_sync(file, flags, cancellable,
+                                                 &error);
+        g_object_unref(file);
+#else
+        handle = rsvg_handle_new_from_file(file_name, &error);
+#endif
+    } else if (data) {
+        handle = rsvg_handle_new_from_data(data, data_size, &error);
+    } else {
+        handle = rsvg_handle_new();
+    }
 
     if (error)
         RAISE_GERROR(error);
-
-    return GOBJ2RVAL_UNREF(handle);
-}
-
-static VALUE
-rg_initialize(int argc, VALUE *argv, VALUE self)
-{
-    RsvgHandle *handle;
-    VALUE gz;
-    rb_scan_args(argc, argv, "01", &gz);
-
-    handle = rsvg_handle_new();
 
     G_INITIALIZE(self, handle);
 
@@ -316,9 +312,6 @@ Init_rsvg_handle(VALUE mRSVG)
     RG_TARGET_NAMESPACE = rb_define_class_under(mRSVG, "Handle", rb_cObject);
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rb_rsvg_handle_alloc);
 #endif
-
-    RG_DEF_SMETHOD(new_from_data, 1);
-    RG_DEF_SMETHOD(new_from_file, -1);
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_size_callback, 0);

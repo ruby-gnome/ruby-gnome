@@ -15,6 +15,20 @@ end
 
 module RSVG
   LOG_DOMAIN = "librsvg"
+
+  class Handle
+    class << self
+      # For backward compatibility
+      def new_from_data(data)
+        new(:data => data)
+      end
+
+      # For backward compatibility
+      def new_from_file(file_name, options={})
+        new(options.merge(:file_name => file_name))
+      end
+    end
+  end
 end
 
 if RSVG.cairo_available?
