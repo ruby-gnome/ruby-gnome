@@ -38,10 +38,8 @@ extern "C" {
 #  include <librsvg/rsvg.h>
 #endif
 
-#ifdef HAVE_RB_CAIRO_H
-#  include <rb_cairo.h>
-#  include <librsvg/rsvg-cairo.h>
-#endif
+#include <rb_cairo.h>
+#include <librsvg/rsvg-cairo.h>
 
 #ifdef HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H
 #  include <librsvg/librsvg-enum-types.h>
