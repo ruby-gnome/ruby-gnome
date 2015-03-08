@@ -91,7 +91,6 @@ rb_rsvg_handle_alloc(VALUE klass)
 }
 #endif
 
-#if LIBRSVG_CHECK_VERSION(2, 14, 0)
 static VALUE
 rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 {
@@ -152,7 +151,6 @@ rg_s_new_from_file(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 
     return GOBJ2RVAL_UNREF(handle);
 }
-#endif
 
 static VALUE
 rg_initialize(int argc, VALUE *argv, VALUE self)
@@ -161,26 +159,9 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
     VALUE gz;
     rb_scan_args(argc, argv, "01", &gz);
 
-#if LIBRSVG_CHECK_VERSION(2, 11, 0)
     handle = rsvg_handle_new();
-#else
-    if (RVAL2CBOOL(gz)) {
-#  ifdef HAVE_LIBRSVG_RSVG_GZ_H
-        handle = rsvg_handle_new_gz();
-#  else
-        rb_warning("gz handling is not supported in your librsvg");
-        handle = rsvg_handle_new();
-#  endif
-    } else {
-        handle = rsvg_handle_new();
-    }
-#endif
 
-#ifdef RSVG_TYPE_HANDLE
     G_INITIALIZE(self, handle);
-#else
-    DATA_PTR(self) = handle;
-#endif
 
     rb_ivar_set(self, id_closed, Qfalse);
     return Qnil;
@@ -304,117 +285,6 @@ rg_metadata(VALUE self)
 #  endif
 #endif
 
-#if !LIBRSVG_CHECK_VERSION(2, 11, 0)
-/* Extended Convenience API */
-static VALUE
-rg_pixbuf_from_file_at_size(VALUE self, VALUE file_name,
-                                    VALUE width, VALUE height)
-{
-    VALUE rb_pixbuf;
-    GdkPixbuf *pixbuf;
-    GError *error = NULL;
-
-    pixbuf = rsvg_pixbuf_from_file_at_size_ex(_SELF(self),
-                                              RVAL2CSTR(file_name),
-                                              NUM2INT(width),
-                                              NUM2INT(height),
-                                              &error);
-
-    if (error) RAISE_GERROR(error);
-
-    rb_pixbuf = GOBJ2RVAL(pixbuf);
-    g_object_unref(pixbuf);
-    return rb_pixbuf;
-}
-
-static VALUE
-rg_pixbuf_from_file(VALUE self, VALUE file_name)
-{
-    VALUE rb_pixbuf;
-    GdkPixbuf *pixbuf;
-    GError *error = NULL;
-
-    pixbuf = rsvg_pixbuf_from_file_ex(_SELF(self),
-                                      RVAL2CSTR(file_name),
-                                      &error);
-
-    if (error) RAISE_GERROR(error);
-
-    rb_pixbuf = GOBJ2RVAL(pixbuf);
-    g_object_unref(pixbuf);
-    return rb_pixbuf;
-}
-
-static VALUE
-rg_pixbuf_from_file_at_zoom(VALUE self, VALUE file_name,
-                                    VALUE x_zoom, VALUE y_zoom)
-{
-    VALUE rb_pixbuf;
-    GdkPixbuf *pixbuf;
-    GError *error = NULL;
-
-    pixbuf = rsvg_pixbuf_from_file_at_zoom_ex(_SELF(self),
-                                              RVAL2CSTR(file_name),
-                                              NUM2DBL(x_zoom),
-                                              NUM2DBL(y_zoom),
-                                              &error);
-
-    if (error) RAISE_GERROR(error);
-
-    rb_pixbuf = GOBJ2RVAL(pixbuf);
-    g_object_unref(pixbuf);
-    return rb_pixbuf;
-}
-
-static VALUE
-rg_pixbuf_from_file_at_max_size(VALUE self, VALUE file_name,
-                                        VALUE max_width, VALUE max_height)
-{
-    VALUE rb_pixbuf;
-    GdkPixbuf *pixbuf;
-    GError *error = NULL;
-
-    pixbuf = rsvg_pixbuf_from_file_at_max_size_ex(_SELF(self),
-                                                  RVAL2CSTR(file_name),
-                                                  NUM2INT(max_width),
-                                                  NUM2INT(max_height),
-                                                  &error);
-
-    if (error) RAISE_GERROR(error);
-
-    rb_pixbuf = GOBJ2RVAL(pixbuf);
-    g_object_unref(pixbuf);
-    return rb_pixbuf;
-}
-
-static VALUE
-rg_pixbuf_from_file_at_zoom_with_max(VALUE self,
-                                             VALUE file_name,
-                                             VALUE x_zoom,
-                                             VALUE y_zoom,
-                                             VALUE max_width,
-                                             VALUE max_height)
-{
-    VALUE rb_pixbuf;
-    GdkPixbuf *pixbuf;
-    GError *error = NULL;
-
-    pixbuf = rsvg_pixbuf_from_file_at_zoom_with_max_ex(_SELF(self),
-                                                       RVAL2CSTR(file_name),
-                                                       NUM2DBL(x_zoom),
-                                                       NUM2DBL(y_zoom),
-                                                       NUM2INT(max_width),
-                                                       NUM2INT(max_height),
-                                                       &error);
-
-    if (error) RAISE_GERROR(error);
-
-    rb_pixbuf = GOBJ2RVAL(pixbuf);
-    g_object_unref(pixbuf);
-    return rb_pixbuf;
-}
-#endif
-
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
 static VALUE
 rg_render_cairo(int argc, VALUE *argv, VALUE self)
@@ -447,10 +317,8 @@ Init_rsvg_handle(VALUE mRSVG)
     rb_define_alloc_func(RG_TARGET_NAMESPACE, rb_rsvg_handle_alloc);
 #endif
 
-#if LIBRSVG_CHECK_VERSION(2, 14, 0)
     RG_DEF_SMETHOD(new_from_data, 1);
     RG_DEF_SMETHOD(new_from_file, -1);
-#endif
 
     RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(set_size_callback, 0);
@@ -472,15 +340,6 @@ Init_rsvg_handle(VALUE mRSVG)
 #  ifdef HAVE_RSVG_HANDLE_GET_METADATA
     RG_DEF_METHOD(metadata, 0);
 #  endif
-#endif
-
-#if !LIBRSVG_CHECK_VERSION(2, 11, 0)
-    /* Extended Convenience API */
-    RG_DEF_METHOD(pixbuf_from_file_at_size, 3);
-    RG_DEF_METHOD(pixbuf_from_file, 1);
-    RG_DEF_METHOD(pixbuf_from_file_at_zoom, 3);
-    RG_DEF_METHOD(pixbuf_from_file_at_max_size, 3);
-    RG_DEF_METHOD(pixbuf_from_file_at_zoom_with_max, 5);
 #endif
 
 #ifdef HAVE_LIBRSVG_RSVG_CAIRO_H
