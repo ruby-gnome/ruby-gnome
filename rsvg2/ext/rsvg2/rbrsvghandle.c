@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2005-2006 Ruby-GNOME2 Project Team
+ *  Copyright (C) 2005-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2004  Kouhei Sutou <kou@cozmixng.org>
  *
  *  This library is free software; you can redistribute it and/or
@@ -109,7 +108,7 @@ rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
 }
 
 static VALUE
-rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
+rg_s_new_from_file(int argc, VALUE *argv, G_GNUC_UNUSED VALUE self)
 {
     VALUE rb_file_path, rb_options, rb_flags;
     GError *error = NULL;
