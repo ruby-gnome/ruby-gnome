@@ -39,8 +39,6 @@ extern "C" {
 #endif
 
 #include <rb_cairo.h>
-#include <librsvg/rsvg-cairo.h>
-
 #ifdef HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H
 #  include <librsvg/librsvg-enum-types.h>
 #else
@@ -55,6 +53,7 @@ extern "C" {
 
 #if !LIBRSVG_CHECK_VERSION(2, 36, 2)
 #  include <librsvg/librsvg-features.h>
+#  include <librsvg/rsvg-cairo.h>
 #endif
 
 
