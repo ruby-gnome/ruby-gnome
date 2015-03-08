@@ -2,21 +2,18 @@
 =begin
   textbuffer_serialize.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2006 Ruby-GNOME2 Project Team 
+  Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: textbuffer_serialize.rb,v 1.1 2006/11/23 08:39:13 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
-if str = Gtk.check_version(2, 10, 0)
-  puts "This sample requires GTK+ 2.10.0 or later"
-  puts str
+unless Gtk::Version.or_later?(3, 4, 2)
+  puts "This sample requires GTK+ 3.4.2 or later: #{Gtk::Version::STRING}"
   exit
 end
 
-current_folder = ENV['HOME'] || "."
+current_folder = ENV["HOME"] || "."
 file_name = "serialized.dat"
 
 textview = Gtk::TextView.new
@@ -24,16 +21,16 @@ textview.set_size_request(600, 400)
 buffer = textview.buffer
 buffer.text = DATA.read
 format = buffer.serialize_formats[0]
-buffer.register_serialize_target(nil)
-buffer.register_deserialize_target(nil)
+buffer.register_serialize_tagset(nil)
+buffer.register_deserialize_tagset(nil)
 
 window = Gtk::Window.new("Gtk::TextBuffer Serialize Demo")
-vbox = Gtk::VBox.new
+vbox = Gtk::Box.new(:vertical, 0)
 
 serialize_button = Gtk::FileChooserButton.new("Serialize to a file", 
-                                              Gtk::FileChooser::ACTION_OPEN)
+                                              Gtk::FileChooserAction::OPEN)
 deserialize_button = Gtk::FileChooserButton.new("Serialize to a file", 
-                                                Gtk::FileChooser::ACTION_OPEN)
+                                                Gtk::FileChooserAction::OPEN)
 
 serialize_button.current_folder = current_folder
 deserialize_button.current_folder = current_folder
@@ -43,7 +40,7 @@ toolbar = Gtk::Toolbar.new
 toolbar.append(Gtk::Stock::OPEN, "Deserialize from a file") do
   dialog = Gtk::FileChooserDialog.new("Deserialize from a file",
                                       window,
-                                      Gtk::FileChooser::ACTION_OPEN,
+                                      Gtk::FileChooserAction::OPEN,
                                       nil,
                                       [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
                                       [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
@@ -62,7 +59,7 @@ end
 toolbar.append(Gtk::Stock::SAVE, "Serialize to a file") do
   dialog = Gtk::FileChooserDialog.new("Serialize from a file",
                                       window,
-                                      Gtk::FileChooser::ACTION_SAVE,
+                                      Gtk::FileChooserAction::SAVE,
                                       nil,
                                       [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
                                       [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
