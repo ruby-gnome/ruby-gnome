@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -35,6 +35,12 @@ module Vte
       require "vte3/terminal"
 
       require "vte3/deprecated"
+    end
+
+    def initialize_post(object)
+      super
+      return unless object.is_a?(GLib::Object)
+      self.class.reference_gobject(object, :sink => true)
     end
   end
 end
