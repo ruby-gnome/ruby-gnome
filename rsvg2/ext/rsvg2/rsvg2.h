@@ -31,10 +31,9 @@ extern "C" {
 
 #include <rbglib.h>
 #include <rbgobject.h>
+#include <rb_cairo.h>
 
 #include <librsvg/rsvg.h>
-
-#include <rb_cairo.h>
 
 #define LIBRSVG_CHECK_VERSION(major, minor, micro)                            \
     (LIBRSVG_MAJOR_VERSION > (major) ||                                       \
