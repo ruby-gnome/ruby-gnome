@@ -105,7 +105,7 @@ rg_s_new_from_data(G_GNUC_UNUSED VALUE self, VALUE data)
     if (error)
         RAISE_GERROR(error);
 
-    return GOBJ2RVAL(handle);
+    return GOBJ2RVAL_UNREF(handle);
 }
 
 static VALUE
@@ -151,7 +151,7 @@ rg_s_new_from_file(int argc, VALUE *argv, VALUE self)
     if (error)
         RAISE_GERROR(error);
 
-    return GOBJ2RVAL(handle);
+    return GOBJ2RVAL_UNREF(handle);
 }
 #endif
 
