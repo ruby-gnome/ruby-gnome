@@ -90,6 +90,7 @@ module Gtk
       require "gtk3/style-context"
       require "gtk3/style-properties"
       require "gtk3/text-buffer"
+      require "gtk3/tool-button"
       require "gtk3/tree-iter"
       require "gtk3/tree-model"
       require "gtk3/tree-selection"
