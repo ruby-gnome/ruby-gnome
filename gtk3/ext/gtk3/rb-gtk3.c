@@ -52,15 +52,17 @@ rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
                GOBJ2RVAL(widget));
 }
 
-static void
+static gint
 rb_gtk3_assistant_page_func_callback(gint current_page, gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
     ID id_call;
+    VALUE rb_next_page;
 
     CONST_ID(id_call, "call");
-    rb_funcall(callback_data->rb_callback, id_call, 1,
-               INT2NUM(current_page));
+    rb_next_page = rb_funcall(callback_data->rb_callback, id_call, 1,
+                              INT2NUM(current_page));
+    return NUM2INT(rb_next_page);
 }
 
 static gpointer
