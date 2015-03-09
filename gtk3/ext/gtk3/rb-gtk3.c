@@ -52,13 +52,27 @@ rb_gtk3_callback_callback(GtkWidget *widget, gpointer user_data)
                GOBJ2RVAL(widget));
 }
 
+static void
+rb_gtk3_assistant_page_func_callback(gint current_page, gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_call;
+
+    CONST_ID(id_call, "call");
+    rb_funcall(callback_data->rb_callback, id_call, 1,
+               INT2NUM(current_page));
+}
+
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
-    if (!name_equal(info, "Callback")) {
+    if (name_equal(info, "Callback")) {
+        return rb_gtk3_callback_callback;
+    } else if (name_equal(info, "AssistantPageFunc")) {
+        return rb_gtk3_assistant_page_func_callback;
+    } else {
         return NULL;
     }
-    return rb_gtk3_callback_callback;
 }
 
 void
