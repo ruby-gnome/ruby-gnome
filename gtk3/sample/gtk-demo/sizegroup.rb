@@ -23,7 +23,7 @@ module Demo
   class SizeGroup < Gtk::Dialog
     def initialize
       super('GtkSizeGroup', nil, 0,
-            [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_NONE])
+            [Gtk::Stock::CLOSE, Gtk::ResponseType::NONE])
 
       color_options = %w(Red Green Blue)
       dash_options = %w(Solid Dashed Dotted)

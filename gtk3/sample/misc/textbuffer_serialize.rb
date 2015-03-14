@@ -42,11 +42,11 @@ toolbar.append(Gtk::Stock::OPEN, "Deserialize from a file") do
                                       window,
                                       Gtk::FileChooserAction::OPEN,
                                       nil,
-                                      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                                      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+                                      [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
+                                      [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT])
   
   dialog.filename = File.expand_path(file_name)
-  if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
+  if dialog.run == Gtk::ResponseType::ACCEPT
     file_name = dialog.filename
     File.open(file_name, "rb") {|io|
       buffer.delete(buffer.start_iter, buffer.end_iter)
@@ -61,10 +61,10 @@ toolbar.append(Gtk::Stock::SAVE, "Serialize to a file") do
                                       window,
                                       Gtk::FileChooserAction::SAVE,
                                       nil,
-                                      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-                                      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT])
+                                      [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
+                                      [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT])
   dialog.current_name = file_name
-  if dialog.run == Gtk::Dialog::RESPONSE_ACCEPT
+  if dialog.run == Gtk::ResponseType::ACCEPT
     file_name = dialog.filename
     File.open(file_name, "wb") {|io|
       io.write(buffer.serialize(buffer, format, buffer.start_iter, buffer.end_iter))
@@ -79,7 +79,7 @@ end
 toolbar.append_space
 toolbar.append(Gtk::Stock::SELECT_COLOR, "Color the region") do
   dialog = Gtk::ColorSelectionDialog.new("Color the region")
-  if dialog.run == Gtk::Dialog::RESPONSE_OK
+  if dialog.run == Gtk::ResponseType::OK
     bounds = buffer.selection_bounds
     color = dialog.colorsel.current_color
     tag_name = color.to_a.inspect
@@ -94,7 +94,7 @@ end
 
 toolbar.append(Gtk::Stock::SELECT_FONT, "Set a font to the region") do
   dialog = Gtk::FontSelectionDialog.new("Set font to the region")
-  if dialog.run == Gtk::Dialog::RESPONSE_OK
+  if dialog.run == Gtk::ResponseType::OK
     bounds = buffer.selection_bounds
     font = dialog.font_name
     unless tag = buffer.tag_table.lookup(font)

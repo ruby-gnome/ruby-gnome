@@ -91,8 +91,8 @@ EOS
                                self,
                                Gtk::Dialog::MODAL |
                                Gtk::Dialog::DESTROY_WITH_PARENT,
-                               [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_OK],
-                               ["_Non-stock Button", Gtk::Dialog::RESPONSE_CANCEL]
+                               [Gtk::Stock::OK, Gtk::ResponseType::OK],
+                               ["_Non-stock Button", Gtk::ResponseType::CANCEL]
                                )
 
       hbox = Gtk::Box.new(:horizontal, 0)
@@ -126,7 +126,7 @@ EOS
       hbox.show_all
       response = dialog.run
 
-      if response == Gtk::Dialog::RESPONSE_OK
+      if response == Gtk::ResponseType::OK
         @entry1.text = local_entry1.text
         @entry2.text = local_entry2.text
       end

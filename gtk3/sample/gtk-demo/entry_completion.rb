@@ -16,7 +16,7 @@ module Demo
       super('GtkEntryCompletion',
             nil, # parent
             0,
-            [Gtk::Stock::CLOSE, Gtk::Dialog::RESPONSE_NONE])
+            [Gtk::Stock::CLOSE, Gtk::ResponseType::NONE])
 
       self.resizable = false
 
