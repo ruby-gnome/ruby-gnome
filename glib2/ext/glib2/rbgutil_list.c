@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -169,5 +169,101 @@ rbg_gslist2rval_with_type(GSList *const list, RBGRValueFuncWithType conv, GType 
 
     return rb_ensure(gslist2rval_with_type_body, (VALUE)&args,
                      gslist2rval_ensure, (VALUE)&args);
+}
+
+struct rval2glist_args {
+    GList *list;
+    VALUE rb_array;
+};
+
+static VALUE
+rval2glist_body(VALUE data)
+{
+    struct rval2glist_args *args = (struct rval2glist_args *)data;
+    VALUE rb_array;
+    int i, n;
+
+    rb_array = rbg_to_array(args->rb_array);
+    n = RARRAY_LEN(rb_array);
+    for (i = 0; i < n; i++) {
+        VALUE rb_element = RARRAY_CONST_PTR(rb_array)[i];
+        args->list = g_list_append(args->list, RVAL2GOBJ(rb_element));
+    }
+
+    return Qnil;
+}
+
+static VALUE
+rval2glist_rescue(VALUE data, VALUE e)
+{
+    struct rval2glist_args *args = (struct rval2glist_args *)data;
+
+    g_list_free(args->list);
+    args->list = NULL;
+
+    rb_exc_raise(e);
+
+    return Qnil;
+}
+
+GList *
+rbg_rval2glist(VALUE rb_array)
+{
+    struct rval2glist_args args;
+    args.list = NULL;
+    args.rb_array = rb_array;
+
+    rb_rescue(rval2glist_body, (VALUE)&args,
+              rval2glist_rescue, (VALUE)&args);
+
+    return args.list;
+}
+
+struct rval2gslist_args {
+    GSList *list;
+    VALUE rb_array;
+};
+
+static VALUE
+rval2gslist_body(VALUE data)
+{
+    struct rval2gslist_args *args = (struct rval2gslist_args *)data;
+    VALUE rb_array;
+    int i, n;
+
+    rb_array = rbg_to_array(args->rb_array);
+    n = RARRAY_LEN(rb_array);
+    for (i = 0; i < n; i++) {
+        VALUE rb_element = RARRAY_CONST_PTR(rb_array)[i];
+        args->list = g_slist_append(args->list, RVAL2GOBJ(rb_element));
+    }
+
+    return Qnil;
+}
+
+static VALUE
+rval2gslist_rescue(VALUE data, VALUE e)
+{
+    struct rval2gslist_args *args = (struct rval2gslist_args *)data;
+
+    g_slist_free(args->list);
+    args->list = NULL;
+
+    rb_exc_raise(e);
+
+    return Qnil;
+}
+
+GSList *
+rbg_rval2gslist(VALUE rb_array)
+{
+    struct rval2gslist_args args;
+    args.list = NULL;
+    args.rb_array = rb_array;
+
+    rb_rescue(rval2gslist_body, (VALUE)&args,
+              rval2gslist_rescue, (VALUE)&args);
+
+    return args.list;
 }
 
