@@ -16,6 +16,26 @@
 
 module Gtk
   class Dialog
+    alias_method :initialize_raw, :initialize
+    def initialize(options={})
+      initialize_raw
+
+      title   = options[:title]
+      parent  = options[:parent]
+      flags   = options[:flags]
+      buttons = options[:buttons]
+
+      set_title(title) if title
+      set_transient_for(parent) if parent
+      if flags
+        flags = Gtk::DialogFlags.new(flags) if flags.is_a?(Integer)
+        set_modal(true) if flags.modal?
+        set_destroy_with_parent(true) if flags.destroy_with_parent?
+      end
+
+      add_buttons(*buttons) if buttons
+    end
+
     alias_method :run_raw, :run
     def run
       response_id = run_raw
@@ -23,6 +43,12 @@ module Gtk
         Gtk::ResponseType.new(response_id)
       else
         response_id
+      end
+    end
+
+    def add_buttons(*buttons)
+      buttons.each do |text, response_id|
+        add_button(text, response_id)
       end
     end
   end

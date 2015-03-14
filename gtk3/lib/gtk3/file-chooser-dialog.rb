@@ -30,9 +30,7 @@ module Gtk
       set_action(action) if action
       set_transient_for(parent) if parent
 
-      (buttons || []).each do |text, response_id|
-        add_button(text, response_id)
-      end
+      add_buttons(*buttons) if buttons
     end
   end
 end
