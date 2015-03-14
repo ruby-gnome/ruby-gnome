@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -67,6 +67,12 @@ G_BEGIN_DECLS
         rbg_gslist2rval_with_type(list, (RBGRValueFuncWithType)rbgobj_make_boxed, gtype, \
                                   (GFreeFunc)free_list, (GFreeFunc)free_elem)
 
+#define RVAL2GOBJGLIST(rb_array)                \
+    rbg_rval2glist(rb_array)
+#define RVAL2GOBJGSLIST(rb_array)               \
+    rbg_rval2gslist(rb_array)
+
+
 typedef VALUE (*RBGRValueFunc)(gpointer obj);
 typedef VALUE (*RBGRValueFuncWithType)(gpointer obj, GType gtype);
 
@@ -78,6 +84,9 @@ extern VALUE rbg_glist2rval_with_type(GList *const list, RBGRValueFuncWithType c
                                       GFreeFunc free_list, GFreeFunc free_elem);
 extern VALUE rbg_gslist2rval_with_type(GSList *const list, RBGRValueFuncWithType conv, GType gtype,
                                        GFreeFunc free_list, GFreeFunc free_elem);
+
+extern GList *rbg_rval2glist(VALUE rb_array);
+extern GSList *rbg_rval2gslist(VALUE rb_array);
 
 G_END_DECLS
 
