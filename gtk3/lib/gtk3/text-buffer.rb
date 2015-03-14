@@ -85,6 +85,12 @@ module Gtk
       end
     end
 
+    alias_method :set_text_raw, :set_text
+    def set_text(text)
+      set_text_raw(text, text.bytesize)
+    end
+    alias_method :text=, :set_text
+
     alias_method :apply_tag_raw, :apply_tag
     def apply_tag(tag, start, last)
       if tag.is_a?(String)

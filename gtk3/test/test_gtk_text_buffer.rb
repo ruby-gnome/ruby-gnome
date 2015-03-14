@@ -87,5 +87,10 @@ class TestGtkTextBuffer < Test::Unit::TestCase
         assert_equal("Hello World!", @text_buffer.text)
       end
     end
+
+    test "#text=" do
+      @text_buffer.text = "Hello Ruby World!"
+      assert_equal("Hello Ruby World!", @text_buffer.text)
+    end
   end
 end
