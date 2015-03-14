@@ -1400,7 +1400,7 @@ static void
 rb_gi_value_argument_from_ruby_gslist(GIArgument *argument,
                                       GITypeInfo *type_info,
                                       VALUE rb_argument,
-                                      VALUE self)
+                                      G_GNUC_UNUSED VALUE self)
 {
     GITypeInfo *element_type_info;
     GITypeTag element_type_tag;
