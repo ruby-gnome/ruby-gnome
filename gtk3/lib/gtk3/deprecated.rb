@@ -644,6 +644,27 @@ module Gtk
     end
   end
 
+  class RadioButton
+    extend GLib::Deprecatable
+    define_deprecated_method_by_hash_args :initialize,
+        'member_or_label, label_or_use_underline, use_underline',
+        ':label => label, :member => member, :use_underline => use_underline',
+        0 do |_self, member_or_label, label_or_use_underline, use_underline|
+      options = {}
+      if member_or_label.is_a?(Gtk::RadioButton)
+        options[:member] = member_or_label
+        if label_or_use_underline.is_a?(String)
+          options[:label] = label_or_use_underline
+          options[:use_underline] = use_underline
+        end
+      else
+        options[:label] = member_or_label
+        options[:use_underline] = label_or_use_underline
+      end
+      [options]
+    end
+  end
+
   class Range
     extend GLib::Deprecatable
     define_deprecated_enums :SensitivityType, 'SENSITIVITY'

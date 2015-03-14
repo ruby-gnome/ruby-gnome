@@ -83,6 +83,7 @@ module Gtk
       require "gtk3/level-bar"
       require "gtk3/list-store"
       require "gtk3/menu-item"
+      require "gtk3/radio-button"
       require "gtk3/scrolled-window"
       require "gtk3/search-bar"
       require "gtk3/spin-button"
