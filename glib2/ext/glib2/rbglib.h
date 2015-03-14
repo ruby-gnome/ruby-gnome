@@ -48,6 +48,10 @@ extern "C" {
 #  define RARRAY_LEN(a) (RARRAY(a)->len)
 #endif
 
+#ifndef RARRAY_CONST_PTR
+#  define RARRAY_CONST_PTR(a) RARRAY_PTR(a)
+#endif
+
 #ifndef DBL2NUM
 #  define DBL2NUM(v)      (rb_float_new(v))
 #endif
