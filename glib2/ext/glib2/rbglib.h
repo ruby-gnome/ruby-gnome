@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002-2005  Ruby-GNOME2 Project
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
@@ -44,8 +44,8 @@ extern "C" {
 #endif
 
 #ifndef RARRAY_PTR
-#  define RARRAY_PTR(s) (RARRAY(s)->ptr)
-#  define RARRAY_LEN(s) (RARRAY(s)->len)
+#  define RARRAY_PTR(a) (RARRAY(a)->ptr)
+#  define RARRAY_LEN(a) (RARRAY(a)->len)
 #endif
 
 #ifndef DBL2NUM
