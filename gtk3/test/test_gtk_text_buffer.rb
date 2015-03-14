@@ -23,10 +23,34 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       @text_buffer.text = "Hello World!"
     end
 
-    test "#insert" do
-      iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
-      @text_buffer.insert(iter, "Ruby ")
-      assert_equal("Hello Ruby World!", @text_buffer.text)
+    sub_test_case "#insert" do
+      test "no options" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert(iter, "Ruby ")
+        assert_equal("Hello Ruby World!", @text_buffer.text)
+      end
+
+      test ":interactive" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert(iter, "Ruby ", :interactive => true)
+        assert_equal("Hello Ruby World!", @text_buffer.text)
+      end
+
+      test ":default_editable => true" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert(iter, "Ruby ",
+                            :interactive => true,
+                            :default_editable => true)
+        assert_equal("Hello Ruby World!", @text_buffer.text)
+      end
+
+      test ":default_editable => false" do
+        iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+        @text_buffer.insert(iter, "Ruby ",
+                            :interactive => true,
+                            :default_editable => false)
+        assert_equal("Hello World!", @text_buffer.text)
+      end
     end
 
     test "#insert_at_cursor" do
