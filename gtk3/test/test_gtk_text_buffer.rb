@@ -28,5 +28,12 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       @text_buffer.insert(iter, "Ruby ")
       assert_equal("Hello Ruby World!", @text_buffer.text)
     end
+
+    test "#insert_at_cursor" do
+      iter = @text_buffer.get_iter_at(:offset => "Hello ".bytesize)
+      @text_buffer.place_cursor(iter)
+      @text_buffer.insert_at_cursor("Ruby ")
+      assert_equal("Hello Ruby World!", @text_buffer.text)
+    end
   end
 end

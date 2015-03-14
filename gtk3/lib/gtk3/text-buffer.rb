@@ -64,6 +64,11 @@ module Gtk
       insert_raw(iter, text, text.bytesize)
     end
 
+    alias_method :insert_at_cursor_raw, :insert_at_cursor
+    def insert_at_cursor(text)
+      insert_at_cursor_raw(text, text.bytesize)
+    end
+
     alias_method :apply_tag_raw, :apply_tag
     def apply_tag(tag, start, last)
       if tag.is_a?(String)
