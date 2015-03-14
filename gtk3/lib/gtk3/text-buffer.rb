@@ -73,8 +73,16 @@ module Gtk
     end
 
     alias_method :insert_at_cursor_raw, :insert_at_cursor
-    def insert_at_cursor(text)
-      insert_at_cursor_raw(text, text.bytesize)
+    def insert_at_cursor(text, options={})
+      interactive = options[:interactive]
+      default_editable = options[:default_editable]
+
+      if interactive
+        default_editable = true if default_editable.nil?
+        insert_interactive_at_cursor(text, default_editable)
+      else
+        insert_at_cursor_raw(text, text.bytesize)
+      end
     end
 
     alias_method :apply_tag_raw, :apply_tag
@@ -90,6 +98,11 @@ module Gtk
     alias_method :insert_interactive_raw, :insert_interactive
     def insert_interactive(iter, text, default_ediatable)
       insert_interactive_raw(iter, text, text.bytesize, default_ediatable)
+    end
+
+    alias_method :insert_interactive_at_cursor_raw, :insert_interactive_at_cursor
+    def insert_interactive_at_cursor(text, default_ediatable)
+      insert_interactive_at_cursor_raw(text, text.bytesize, default_ediatable)
     end
   end
 end
