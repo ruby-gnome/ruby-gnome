@@ -394,7 +394,13 @@ module Gtk
         'title, parent, action, back, *buttons',
         ':title => nil, :parent => nil, :action => :open, :buttons => nil' do
         |_self, title, parent, action, back, *buttons|
-      [{:title => title, :parent => parent, :action => action, :buttons => buttons}]
+      options = {
+          :title => title,
+          :parent => parent,
+          :action => action,
+          :buttons => buttons,
+      }
+      [options]
     end
   end
 
