@@ -15,40 +15,34 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class Dialog
+  class RadioButton
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      initialize_raw
+      group         = options[:group]
+      label         = options[:label]
+      member        = options[:member]
+      use_underline = options[:use_underline]
 
-      title   = options[:title]
-      parent  = options[:parent]
-      flags   = options[:flags]
-      buttons = options[:buttons]
-
-      set_title(title) if title
-      set_transient_for(parent) if parent
-      if flags
-        flags = Gtk::DialogFlags.new(flags) if flags.is_a?(Integer)
-        set_modal(true) if flags.modal?
-        set_destroy_with_parent(true) if flags.destroy_with_parent?
-      end
-
-      add_buttons(*buttons) if buttons
-    end
-
-    alias_method :run_raw, :run
-    def run
-      response_id = run_raw
-      if response_id < 0
-        Gtk::ResponseType.new(response_id)
+      if label
+        if member
+          if use_underline
+            initialize_new_with_mnemonic_from_widget(member, label)
+          else
+            initialize_new_with_label_from_widget(member, label)
+          end
+        else
+          if use_underline
+            initialize_new_with_mnemonic(group, label)
+          else
+            initialize_new_with_label(group, label)
+          end
+        end
       else
-        response_id
-      end
-    end
-
-    def add_buttons(*buttons)
-      buttons.each do |text, response_id|
-        add_button(text, response_id)
+        if member
+          initialize_new_from_widget(member)
+        else
+          initialize_raw
+        end
       end
     end
   end
