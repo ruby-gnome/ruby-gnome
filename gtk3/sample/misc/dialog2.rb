@@ -13,7 +13,7 @@ button = Gtk::Button.new(:label => "Create Dialog")
 button.signal_connect("clicked") do
   dialog = Gtk::Dialog.new(:title =>"Gtk::Dialog Sample 2",
                            :parent => window,
-                           :flags => Gtk::DialogFlags::MODAL,
+                           :flags => :modal,
                            :buttons => [[Gtk::Stock::OK, Gtk::ResponseType::OK],
                            [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL]])
   dialog.child.add(Gtk::Label.new("Gtk::Dialog Sample 2"))
