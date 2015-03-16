@@ -4,10 +4,8 @@
 
   Guillaume Cottenceau for the ruby-gnome2 project.
 
-  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team
+  Copyright (c) 2005,2015  Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: assistant.rb,v 1.1 2006/11/23 08:39:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -215,13 +213,13 @@ class AssistantRunner
     end
 
     page = Gtk::Box.new(:vertical, 6)
-    button = Gtk::RadioButton.new("branch A")
+    button = Gtk::RadioButton.new(:label => "branch A")
     page.pack_start(button, :expand => false, :fill => false, :padding => 0)
     button.signal_connect("toggled") do
       @selected_branch = "A"
     end
     button.active = true
-    button = Gtk::RadioButton.new(button, "branch B")
+    button = Gtk::RadioButton.new(:label => "branch B")
     page.pack_start(button, :expand => false, :fill => false, :padding => 0)
     button.signal_connect("toggled") do
       @selected_branch = "B"
