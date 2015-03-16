@@ -262,16 +262,21 @@ rg_initialize(int argc, VALUE* argv, VALUE self)
     if (argc == 0) {
         p->value = 0;
     } else {
-        if (rb_respond_to(arg, rb_intern("to_str"))) {
-            const char* str = StringValuePtr(arg);
-            p->info = g_flags_get_value_by_name(p->gclass, str);
-            if (!p->info)
-                p->info = g_flags_get_value_by_nick(p->gclass, str);
-            if (!p->info)
-                rb_raise(rb_eArgError, "invalid argument");
-            p->value = p->info->value;
-        } else {
+        if (FIXNUM_P(arg)) {
             p->value = NUM2UINT(arg);
+        } else {
+            const gchar *name = RVAL2CSTR_ACCEPT_SYMBOL(arg);
+            p->info = g_flags_get_value_by_name(p->gclass, name);
+            if (!p->info) {
+                p->info = g_flags_get_value_by_nick(p->gclass, name);
+            }
+            if (!p->info) {
+                rb_raise(rb_eArgError,
+                         "unknown flag name: <%s>(%s)",
+                         name,
+                         g_type_name(G_TYPE_FROM_CLASS(p->gclass)));
+            }
+            p->value = p->info->value;
         }
     }
 
