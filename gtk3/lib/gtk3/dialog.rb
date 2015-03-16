@@ -28,7 +28,9 @@ module Gtk
       set_title(title) if title
       set_transient_for(parent) if parent
       if flags
-        flags = Gtk::DialogFlags.new(flags) if flags.is_a?(Integer)
+        unless flags.is_a?(Gtk::DialogFlags)
+          flags = Gtk::DialogFlags.new(flags)
+        end
         set_modal(true) if flags.modal?
         set_destroy_with_parent(true) if flags.destroy_with_parent?
       end
