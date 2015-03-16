@@ -2,10 +2,8 @@
 =begin
   dialog2.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: dialog2.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -15,7 +13,7 @@ button = Gtk::Button.new(:label => "Create Dialog")
 button.signal_connect("clicked") do
   dialog = Gtk::Dialog.new(:title =>"Gtk::Dialog Sample 2",
                            :parent => window,
-                           :flags => Gtk::Dialog::Flags::MODAL,
+                           :flags => Gtk::DialogFlags::MODAL,
                            :buttons => [[Gtk::Stock::OK, Gtk::ResponseType::OK],
                            [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL]])
   dialog.child.add(Gtk::Label.new("Gtk::Dialog Sample 2"))
@@ -31,6 +29,7 @@ button.signal_connect("clicked") do
   dialog.destroy
 end
 
-window.add(button).show_all.signal_connect("destroy") {Gtk.main_quit}
-
+window.add(button)
+window.signal_connect("destroy") {Gtk.main_quit}
+window.show_all
 Gtk.main
