@@ -2,13 +2,11 @@
 =begin
   window.rb - Gtk::Window sample.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: window.rb,v 1.9 2006/10/21 16:58:00 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::Window sample")
 window.signal_connect("destroy"){Gtk.main_quit}
