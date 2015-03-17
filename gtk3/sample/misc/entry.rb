@@ -2,13 +2,11 @@
 =begin
   entry.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: entry.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("entry")
 window.border_width = 0
