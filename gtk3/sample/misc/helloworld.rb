@@ -2,13 +2,11 @@
 =begin
   helloworld.rb - Ruby/GTK2 first sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: helloworld.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 button = Gtk::Button.new(:label => "Hello World")
 button.signal_connect("clicked") {
@@ -18,7 +16,6 @@ button.signal_connect("clicked") {
 window = Gtk::Window.new("Hello World sample")
 window.signal_connect("delete_event") {
   puts "delete event occurred"
-  #true
   false
 }
 
