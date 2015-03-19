@@ -1,18 +1,18 @@
 =begin
   calendar.rb - Gtk::Calendar sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: calendar.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 cal = Gtk::Calendar.new
 
 w = Gtk::Window.new("Calendar sample")
-w.add(cal).show_all.signal_connect('delete_event') do
+w.add(cal)
+w.show_all
+w.signal_connect('delete_event') do
   Gtk.main_quit
 end
 
@@ -24,13 +24,13 @@ cal.mark_day(date.day)
 #cal.clear_marks
 
 #
-# Gtk::Calendar::DisplayOptions::WEEK_START_MONDAY does not exist anymore
+# Gtk::CalendarDisplayOptions::WEEK_START_MONDAY does not exist anymore
 #
 
-cal.set_display_options(Gtk::Calendar::DisplayOptions::SHOW_HEADING |
-                Gtk::Calendar::DisplayOptions::SHOW_DAY_NAMES |
-                Gtk::Calendar::DisplayOptions::NO_MONTH_CHANGE |
-                Gtk::Calendar::DisplayOptions::SHOW_WEEK_NUMBERS)
+cal.set_display_options(Gtk::CalendarDisplayOptions::SHOW_HEADING |
+                Gtk::CalendarDisplayOptions::SHOW_DAY_NAMES |
+                Gtk::CalendarDisplayOptions::NO_MONTH_CHANGE |
+                Gtk::CalendarDisplayOptions::SHOW_WEEK_NUMBERS)
 year, month, day = cal.date
 puts "this is #{month} #{day}, #{year}"
 
