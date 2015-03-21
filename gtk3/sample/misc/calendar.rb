@@ -9,10 +9,10 @@ require "gtk3"
 
 cal = Gtk::Calendar.new
 
-w = Gtk::Window.new("Calendar sample")
-w.add(cal)
-w.show_all
-w.signal_connect('delete_event') do
+window = Gtk::Window.new("Calendar sample")
+window.add(cal)
+window.show_all
+window.signal_connect('delete_event') do
   Gtk.main_quit
 end
 
