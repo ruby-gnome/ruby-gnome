@@ -28,9 +28,9 @@ cal.mark_day(date.day)
 #
 
 cal.set_display_options(Gtk::CalendarDisplayOptions::SHOW_HEADING |
-                Gtk::CalendarDisplayOptions::SHOW_DAY_NAMES |
-                Gtk::CalendarDisplayOptions::NO_MONTH_CHANGE |
-                Gtk::CalendarDisplayOptions::SHOW_WEEK_NUMBERS)
+                        Gtk::CalendarDisplayOptions::SHOW_DAY_NAMES |
+                        Gtk::CalendarDisplayOptions::NO_MONTH_CHANGE |
+                        Gtk::CalendarDisplayOptions::SHOW_WEEK_NUMBERS)
 year, month, day = cal.date
 puts "this is #{month} #{day}, #{year}"
 
