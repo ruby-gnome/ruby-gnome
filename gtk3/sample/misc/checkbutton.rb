@@ -2,10 +2,8 @@
 =begin
   checkbutton.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: checkbutton.rb,v 1.10 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -24,7 +22,8 @@ box2.border_width = 10
 box1.pack_start(box2)
 
 button1 = Gtk::CheckButton.new("_button1")
-button2 = Gtk::CheckButton.new("_button2", false)
+button1.set_use_underline(true)
+button2 = Gtk::CheckButton.new("_button2")
 button3 = Gtk::CheckButton.new(Gtk::Stock::QUIT)
 box2.add(button1)
 box2.add(button2)
