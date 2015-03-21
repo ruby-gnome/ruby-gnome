@@ -75,6 +75,7 @@ module Gtk
       require "gtk3/border"
       require "gtk3/builder"
       require "gtk3/color-chooser-dialog"
+      require "gtk3/combo-box"
       require "gtk3/container"
       require "gtk3/css-provider"
       require "gtk3/dialog"
