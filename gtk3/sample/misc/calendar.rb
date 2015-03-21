@@ -12,7 +12,7 @@ cal = Gtk::Calendar.new
 window = Gtk::Window.new("Calendar sample")
 window.add(cal)
 window.show_all
-window.signal_connect('delete_event') do
+window.signal_connect("delete_event") do
   Gtk.main_quit
 end
 
@@ -34,31 +34,31 @@ cal.set_display_options(Gtk::CalendarDisplayOptions::SHOW_HEADING |
 year, month, day = cal.date
 puts "this is #{month} #{day}, #{year}"
 
-cal.signal_connect('day_selected') do
+cal.signal_connect("day_selected") do
   year, month, day = cal.date
   puts "selected day: #{day}"
 end
-cal.signal_connect('month_changed') do
+cal.signal_connect("month_changed") do
   year, month, day = cal.date
   puts "changed month: #{month}"
 end
-cal.signal_connect('day_selected_double_click') do
+cal.signal_connect("day_selected_double_click") do
   year, month, day = cal.date
   puts "dclicked day: #{day}"
 end
-cal.signal_connect('prev_month') do
+cal.signal_connect("prev_month") do
   year, month, day = cal.date
   puts "prev month: #{month}"
 end
-cal.signal_connect('next_month') do
+cal.signal_connect("next_month") do
   year, month, day = cal.date
   puts "next_month: #{month}"
 end
-cal.signal_connect('prev_year') do
+cal.signal_connect("prev_year") do
   year, month, day = cal.date
   puts "prev_year: #{year}"
 end
-cal.signal_connect('next_year') do
+cal.signal_connect("next_year") do
   year, month, day = cal.date
   puts "next year: #{year}"
 end
