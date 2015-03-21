@@ -15,9 +15,9 @@ color_selection.signal_connect("color_changed") do |widget|
   end
 end
 
-win = Gtk::Window.new
-win.add(color_selection)
-win.show_all
-win.signal_connect("destroy") {Gtk.main_quit}
+window = Gtk::Window.new
+window.add(color_selection)
+window.show_all
+window.signal_connect("destroy") {Gtk.main_quit}
 
 Gtk.main
