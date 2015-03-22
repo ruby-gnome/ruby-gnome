@@ -18,51 +18,58 @@ class TestGtkComboBox < Test::Unit::TestCase
   include GtkTestUtils
 
   sub_test_case(".new") do
-    test "no argument" do
-      combo_box = Gtk::ComboBox.new
-      assert do
-        not combo_box.has_entry?
+    sub_test_case(":entry => true") do
+      test "no others" do
+        combo_box = Gtk::ComboBox.new(:entry => true)
+        assert do
+          combo_box.has_entry?
+        end
       end
-      assert_nil(combo_box.model)
-    end
 
-    test ":entry" do
-      entry = true
-      combo_box = Gtk::ComboBox.new(:entry => entry)
-      assert do
-        combo_box.has_entry?
+      test ":model" do
+        model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+        combo_box = Gtk::ComboBox.new(:entry => true, :model => model)
+        assert do
+          combo_box.has_entry?
+        end
+        assert_equal(model, combo_box.model)
+      end
+
+      test ":area" do
+        area = Gtk::CellAreaBox.new
+        combo_box = Gtk::ComboBox.new(:entry => true, :area => area)
+        assert do
+          combo_box.has_entry?
+        end
+        assert_equal(area, combo_box.area)
       end
     end
 
-    test ":model" do
-      model = Gtk::ListStore.new(Gdk::Pixbuf, String)
-      combo_box = Gtk::ComboBox.new(:model => model)
-      assert_equal(model, combo_box.model)
-    end
-
-    test ":entry and :model" do
-      entry = true
-      model = Gtk::ListStore.new(Gdk::Pixbuf, String)
-      combo_box = Gtk::ComboBox.new(:model => model, :entry => entry)
-      assert do
-        combo_box.has_entry?
+    sub_test_case("no :entry") do
+      test "no others" do
+        combo_box = Gtk::ComboBox.new
+        assert do
+          not combo_box.has_entry?
+        end
+        assert_nil(combo_box.model)
       end
-      assert_equal(model, combo_box.model)
-    end
 
-    test ":area" do
-      area = Gtk::CellAreaBox.new
-      combo_box = Gtk::ComboBox.new(:area => area)
-      assert_equal(area, combo_box.area)
-    end
+      test ":model" do
+        model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+        combo_box = Gtk::ComboBox.new(:model => model)
+        assert do
+          not combo_box.has_entry?
+        end
+        assert_equal(model, combo_box.model)
+      end
 
-    test ":entry and :area" do
-      entry = true
-      area = Gtk::CellAreaBox.new
-      combo_box = Gtk::ComboBox.new(:area => area, :entry => entry)
-      assert_equal(area, combo_box.area)
-      assert do
-        combo_box.has_entry?
+      test ":area" do
+        area = Gtk::CellAreaBox.new
+        combo_box = Gtk::ComboBox.new(:area => area)
+        assert do
+          not combo_box.has_entry?
+        end
+        assert_equal(area, combo_box.area)
       end
     end
   end
