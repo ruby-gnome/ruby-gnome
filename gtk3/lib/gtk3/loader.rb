@@ -77,6 +77,7 @@ module Gtk
       require "gtk3/calendar"
       require "gtk3/color-chooser-dialog"
       require "gtk3/combo-box"
+      require "gtk3/combo-box-text"
       require "gtk3/container"
       require "gtk3/css-provider"
       require "gtk3/dialog"
