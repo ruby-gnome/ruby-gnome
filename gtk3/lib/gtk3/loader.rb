@@ -156,8 +156,16 @@ module Gtk
     end
 
     def load_method_info(info, klass, method_name)
-      if klass.name == "Gtk::Image"
+      case klass.name
+      when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
+      when "Gtk::Builder"
+        case method_name
+        when "connect_signals"
+          return
+        when "connect_signals_full"
+          method_name = "connect_signals"
+        end
       end
       super(info, klass, method_name)
     end

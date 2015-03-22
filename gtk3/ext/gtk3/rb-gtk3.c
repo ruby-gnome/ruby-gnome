@@ -65,6 +65,28 @@ rb_gtk3_assistant_page_func_callback(gint current_page, gpointer user_data)
     return NUM2INT(rb_next_page);
 }
 
+static void
+rb_gtk3_builder_connect_func_callback(GtkBuilder *builder,
+                                      GObject *object,
+                                      const gchar *signal_name,
+                                      const gchar *handler_name,
+                                      GObject *connect_object,
+                                      GConnectFlags flags,
+                                      gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id___connect_signals__;
+
+    CONST_ID(id___connect_signals__, "__connect_signals__");
+    rb_funcall(GOBJ2RVAL(builder), id___connect_signals__, 6,
+               callback_data->rb_callback,
+               GOBJ2RVAL(object),
+               CSTR2RVAL(signal_name),
+               CSTR2RVAL(handler_name),
+               GOBJ2RVAL(connect_object),
+               GCONNECTFLAGS2RVAL(flags));
+}
+
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
@@ -72,6 +94,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_callback_callback;
     } else if (name_equal(info, "AssistantPageFunc")) {
         return rb_gtk3_assistant_page_func_callback;
+    } else if (name_equal(info, "BuilderConnectFunc")) {
+        return rb_gtk3_builder_connect_func_callback;
     } else {
         return NULL;
     }
