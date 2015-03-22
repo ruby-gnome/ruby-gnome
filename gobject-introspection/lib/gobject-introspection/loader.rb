@@ -207,8 +207,12 @@ module GObjectIntrospection
         end
         @base_module.const_set(info.name, flags_module)
       else
-        self.class.define_class(info.gtype, info.name, @base_module)
+        self.class.define_class(info.gtype, flags_class_name(info), @base_module)
       end
+    end
+
+    def flags_class_name(info)
+      info.name
     end
 
     def load_object_info(info)
