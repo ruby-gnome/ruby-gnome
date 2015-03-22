@@ -255,6 +255,29 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::Widget"
+        case info.name
+        when "size_request",
+             "get_child_requisition",
+             "ensure_style",
+             "reset_rc_styles",
+             "class_path",
+             "modify_style",
+             "get_modifier_style",
+             "modify_fg",
+             "modify_bg",
+             "modify_text",
+             "modify_base",
+             "modify_font",
+             "modify_cursor",
+             "render_icon",
+             "get_state",
+             "has_rc_style",
+             "get_requisition",
+             "get_pointer"
+          # Ignore deprecated method
+          return
+        end
       end
       super(info, klass, method_name)
     end
