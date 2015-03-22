@@ -17,15 +17,15 @@
 class TestGtkComboBox < Test::Unit::TestCase
   include GtkTestUtils
 
-  sub_test_case(".new") do 
+  sub_test_case(".new") do
     test "no argument" do
       combobox = Gtk::ComboBox.new()
       assert_equal(false, combobox.has_entry?)
       assert_nil(combobox.model)
-    end    
-    
+    end
+
     test ":entry" do
-      entry = true 
+      entry = true
       combobox = Gtk::ComboBox.new(:entry => entry)
       assert_equal(entry, combobox.has_entry?)
     end
@@ -35,15 +35,15 @@ class TestGtkComboBox < Test::Unit::TestCase
       combobox = Gtk::ComboBox.new(:model => model)
       assert_equal(model, combobox.model)
     end
-    
+
     test ":entry and :model" do
-      entry = true 
+      entry = true
       model = Gtk::ListStore.new(Gdk::Pixbuf, String)
       combobox = Gtk::ComboBox.new(:model => model, :entry => entry)
       assert_equal(entry, combobox.has_entry?)
       assert_equal(model, combobox.model)
-    end 
-    
+    end
+
     test ":area" do
       area = Gtk::CellAreaBox.new
       combobox = Gtk::ComboBox.new(:area => area)
@@ -57,5 +57,5 @@ class TestGtkComboBox < Test::Unit::TestCase
       assert_equal(area, combobox.area)
       assert_equal(entry, combobox.has_entry?)
     end
-  end 
+  end
 end
