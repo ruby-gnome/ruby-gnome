@@ -92,6 +92,7 @@ module Gdk
   class EventVisibility
     extend GLib::Deprecatable
     define_deprecated_enums :VisibilityState
+    define_deprecated_const :State, "Gdk::VisibilityState"
   end
 
   class EventWindowState
