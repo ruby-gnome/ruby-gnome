@@ -2,10 +2,8 @@
 =begin
   combobox.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2004-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: combobox.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -40,7 +38,7 @@ model = Gtk::ListStore.new(Gdk::Pixbuf, String)
  [Gtk::Stock::CANCEL, "cancel"],
  [Gtk::Stock::OK, "ok"]].each do |stock, name|
   iter = model.append
-  iter[0] = window.render_icon_pixbuf(stock, Gtk::IconSize::IconSize::MENU)
+  iter[0] = window.render_icon_pixbuf(stock, Gtk::IconSize::MENU)
   iter[1] = name
 end
 
@@ -49,12 +47,12 @@ combo2 = Gtk::ComboBox.new(:model => model)
 # column 1
 renderer = Gtk::CellRendererPixbuf.new
 combo2.pack_start(renderer, false)
-combo2.set_attributes(renderer, :pixbuf => 0)
+combo2.add_attribute(renderer, "pixbuf", 0)
 
 # column 2
 renderer = Gtk::CellRendererText.new
 combo2.pack_start(renderer, true)
-combo2.set_attributes(renderer, :text => 1)
+combo2.add_attribute(renderer, "text", 1)
 
 combo2.active = 2
 
@@ -79,7 +77,10 @@ end
 
 # Show main window
 vbox = Gtk::Box.new(:vertical)
-vbox.add(combo1).add(combo2).add(combo3)
-window.add(vbox).show_all
+vbox.add(combo1)
+vbox.add(combo2)
+vbox.add(combo3)
+window.add(vbox)
+window.show_all
 
 Gtk.main
