@@ -187,6 +187,12 @@ module Gtk
 
     def load_method_info(info, klass, method_name)
       case klass.name
+      when "Gtk::Assistant"
+        case method_name
+        when /\A(?:set|get)_page_(?:header|side)_image\z/
+          # Ignore deprecated methods
+          return
+        end
       when "Gtk::Buildable"
         case method_name
         when "name", "set_name"
