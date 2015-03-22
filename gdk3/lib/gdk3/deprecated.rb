@@ -79,7 +79,7 @@ module Gdk
 
   class EventScroll
     extend GLib::Deprecatable
-    define_deprecated_enums :Direction
+    define_deprecated_enums :ScrollDirection
   end
 
   class EventSetting
