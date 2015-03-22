@@ -1049,6 +1049,8 @@ rb_gi_return_argument_free_container(GIArgument *argument,
         g_list_free(argument->v_pointer);
         break;
     case GI_TYPE_TAG_GSLIST:
+        g_slist_free(argument->v_pointer);
+        break;
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
     case GI_TYPE_TAG_UNICHAR:
