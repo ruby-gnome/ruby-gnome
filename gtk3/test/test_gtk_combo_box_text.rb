@@ -28,7 +28,7 @@ class TestGtkComboBoxText < Test::Unit::TestCase
     end
     sub_test_case("no :entry") do
       test "no others" do
-        combo_box_text = Gtk::ComboBox.new
+        combo_box_text = Gtk::ComboBoxText.new
         assert do
           not combo_box_text.has_entry?
         end
