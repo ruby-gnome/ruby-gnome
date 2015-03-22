@@ -2,13 +2,11 @@
 =begin
   image.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: image.rb,v 1.9 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Image")
 window.signal_connect("destroy") do
@@ -25,7 +23,9 @@ box1.add(button)
 label = Gtk::Label.new("Gtk::Image\ntest")
 image = Gtk::Image.new(:file => "test.xpm")
 
-box2 = Gtk::Box.new(:horizontal, 5).add(image).add(label)
+box2 = Gtk::Box.new(:horizontal, 5)
+box2.add(image)
+box2.add(label)
 
 button.add(box2)
 
@@ -37,6 +37,7 @@ button.signal_connect("clicked") do
 end
 box1.add(button)
 
-window.add(box1).show_all
+window.add(box1)
+window.show_all
 
 Gtk.main
