@@ -22,18 +22,22 @@ module Gtk
       model = options[:model]
       area  = options[:area]
 
-      if !entry and !model and !area
-        initialize_new()
-      elsif entry and !model and  !area
-        initialize_new_with_entry()
-      elsif entry and model and !area
-        initialize_new_with_model_and_entry(model)
-      elsif entry  and !model and area
-        initialize_new_with_area_and_entry(area)
-      elsif !entry and model and !area
-        initialize_new_with_model(model)
-      elsif !entry and !model and area
-        initialize_new_with_area(area)
+      if entry
+        if model
+          initialize_new_with_model_and_entry(model)
+        elsif area
+          initialize_new_with_area_and_entry(area)
+        else
+          initialize_new_with_entry
+        end
+      else
+        if model
+          initialize_new_with_model(model)
+        elsif area
+          initialize_new_with_area(area)
+        else
+          initialize_new
+        end
       end
     end
   end
