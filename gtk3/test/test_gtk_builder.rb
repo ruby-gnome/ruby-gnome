@@ -89,7 +89,6 @@ class TestGtkBuilder < Test::Unit::TestCase
     assert_equal([].sort, handler_names.sort)
 
     builder << ui_definition
-    ok_button = builder["ok_button"]
     builder.connect_signals do |name|
       handler_names << name
       Proc.new {}

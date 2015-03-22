@@ -159,6 +159,11 @@ module Gtk
       case klass.name
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
+      when "Gtk::Buildable"
+        case method_name
+        when "name", "set_name"
+          method_name = "builder_#{method_name}"
+        end
       when "Gtk::Builder"
         case method_name
         when "connect_signals"
