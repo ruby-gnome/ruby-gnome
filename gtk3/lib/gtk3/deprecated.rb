@@ -479,7 +479,7 @@ module Gtk
 
   class IconView
     extend GLib::Deprecatable
-    define_deprecated_enums :Type
+    define_deprecated_enums :IconViewDropPosition
   end
 
   class Image
