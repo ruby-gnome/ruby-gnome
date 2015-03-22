@@ -225,6 +225,12 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::CellView"
+        case method_name
+        when "get_size_of_row"
+          # Ignore deprecated methods
+          return
+        end
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
       end
