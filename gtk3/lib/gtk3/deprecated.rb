@@ -183,7 +183,7 @@ module Gtk
 
   class Calendar
     extend GLib::Deprecatable
-    define_deprecated_flags :DisplayOptions
+    define_deprecated_flags "Gtk::CalendarDisplayOptions"
     define_deprecated_method :freeze, :warn => "Don't use this method."
     define_deprecated_method :thaw, :warn => "Don't use this method."
   end
