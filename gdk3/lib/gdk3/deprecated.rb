@@ -74,7 +74,7 @@ module Gdk
 
   class EventProperty
     extend GLib::Deprecatable
-    define_deprecated_enums :State, 'PROPERTY'
+    define_deprecated_enums :PropertyState, 'PROPERTY'
   end
 
   class EventScroll
