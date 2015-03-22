@@ -134,6 +134,7 @@ module Gdk
     extend GLib::Deprecatable
     define_deprecated_enums :ByteOrder
     define_deprecated_enums :VisualType
+    define_deprecated_const :Type, "Gdk::VisualType"
   end
 
   class Window
