@@ -193,6 +193,12 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::BindingSet"
+        case method_name
+        when "add_path"
+          # Ignore deprecated methods
+          return
+        end
       when "Gtk::Buildable"
         case method_name
         when "name", "set_name"
