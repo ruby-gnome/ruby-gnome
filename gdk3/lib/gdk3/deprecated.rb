@@ -21,7 +21,14 @@ module Gdk
   class Device
     extend GLib::Deprecatable
     define_deprecated_enums :AxisUse, 'AXIS'
-    define_deprecated_enums :ExtensionMode, 'EXTENSION_EVENTS'
+    define_deprecated_const "EXTENSION_EVENTS_NONE",
+                            :raise => "No longer available in GDK3."
+    define_deprecated_const "EXTENSION_EVENTS_ALL",
+                            :raise => "No longer available in GDK3."
+    define_deprecated_const "EXTENSION_EVENTS_CURSOR",
+                            :raise => "No longer available in GDK3."
+    define_deprecated_const "ExtensionMode",
+                            :raise => "No longer available in GDK3."
     define_deprecated_enums :InputMode, 'MODE'
     define_deprecated_enums :InputSource, 'SOURCE'
   end
