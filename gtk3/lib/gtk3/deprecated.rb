@@ -716,7 +716,8 @@ module Gtk
 
   class RecentFilter
     extend GLib::Deprecatable
-    define_deprecated_flags :Flags
+    define_deprecated_const :Flags, "Gtk::RecentFilterFlags"
+    define_deprecated_flags :RecentFilterFlags
   end
 
   class RecentManager
@@ -754,13 +755,16 @@ module Gtk
 
   class SizeGroup
     extend GLib::Deprecatable
-    define_deprecated_enums :Mode
+    define_deprecated_const :Mode, "Gtk::SizeGroupMode"
+    define_deprecated_enums :SizeGroupMode
   end
 
   class SpinButton
     extend GLib::Deprecatable
-    define_deprecated_enums :Type
-    define_deprecated_enums :UpdatePolicy, 'UPDATE'
+    define_deprecated_const :Type, "Gtk::SpinType"
+    define_deprecated_enums :SpinType
+    define_deprecated_const :UpdatePolicy, "Gtk::SpinButtonUpdatePolicy"
+    define_deprecated_enums :SpinButtonUpdatePolicy, 'UPDATE'
   end
 
   class TextAttributes
@@ -805,7 +809,8 @@ module Gtk
 
   class TextIter
     extend GLib::Deprecatable
-    define_deprecated_flags :SearchFlags, 'SEARCH'
+    define_deprecated_const :SearchFlags, "Gtk::TextSearchFlags"
+    define_deprecated_flags :TextSearchFlags, 'SEARCH'
     define_deprecated_method :backword_visible_word_start, :backward_visible_word_start
   end
 
@@ -866,20 +871,24 @@ module Gtk
 
   module TreeModel
     extend GLib::Deprecatable
-    define_deprecated_flags :Flags
+    define_deprecated_const :Flags, "Gtk::TreeModelFlags"
+    define_deprecated_flags :TreeModelFlags
   end
 
   class TreeView
     extend GLib::Deprecatable
-    define_deprecated_enums :DropPosition, 'DROP'
-    define_deprecated_enums :GridLines, 'GRID_LINES'
+    define_deprecated_const :DropPosition, "Gtk::TreeViewDropPosition"
+    define_deprecated_enums :TreeViewDropPosition, 'DROP'
+    define_deprecated_const :GridLines, "Gtk::TreeViewGridLines"
+    define_deprecated_enums :TreeViewGridLines, 'GRID_LINES'
     define_deprecated_method :widget_to_tree_coords, :convert_widget_to_bin_window_coords
     define_deprecated_method :tree_to_widget_coords, :convert_bin_window_to_widget_coords
   end
 
   class TreeViewColumn
     extend GLib::Deprecatable
-    define_deprecated_enums :Sizing
+    define_deprecated_const :Sizing, "Gtk::TreeViewColumnSizing"
+    define_deprecated_enums :TreeViewColumnSizing
     define_deprecated_method :cell_renderers, :warn => "Use 'Gtk::CellLayout#cells'." do |_self|
       _self.cells
     end
@@ -887,7 +896,8 @@ module Gtk
 
   class UIManager
     extend GLib::Deprecatable
-    define_deprecated_flags :ItemType
+    define_deprecated_const :ItemType, "Gtk::UIManagerItemType"
+    define_deprecated_flags :UIManagerItemType
   end
 
   class VBox
@@ -936,8 +946,10 @@ module Gtk
 
   class Widget
     extend GLib::Deprecatable
-    define_deprecated_enums :HelpType, 'HELP'
-    define_deprecated_enums :TextDirection, 'TEXT_DIR'
+    define_deprecated_const :HelpType, "Gtk::WidgetHelpType"
+    define_deprecated_enums :WidgetHelpType, 'HELP'
+    define_deprecated_const :TextDirection, "Gtk::TextDIrection"
+    define_deprecated_enums "Gtk::TextDirection", 'TEXT_DIR'
     define_deprecated_singleton_method :push_colormap, :warn => "Don't use this method."
     define_deprecated_singleton_method :pop_colormap, :warn => "Don't use this method."
     define_deprecated_singleton_method :set_default_colormap, :warn => "Don't use this method."
