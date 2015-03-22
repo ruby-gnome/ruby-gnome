@@ -155,7 +155,7 @@ module Gdk
     define_deprecated_const :Type, "Gdk::WindowType"
     define_deprecated_enums "Gdk::WindowType"
     define_deprecated_const :TypeHint, "Gdk::WindowTypeHint"
-    define_deprecated_enums "Gdk::TypeHint"
+    define_deprecated_enums "Gdk::WindowTypeHint"
     define_deprecated_const :WindowClass, "Gdk::WindowWindowClass"
     define_deprecated_enums "Gdk::WindowClass"
     define_deprecated_const :Class, "Gdk::WindowWindowClass"
