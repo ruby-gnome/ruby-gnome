@@ -25,7 +25,6 @@ module Gtk
       end
 
       if got
-        iter
         setup_iter(iter)
         iter
       else
@@ -37,7 +36,6 @@ module Gtk
     def iter_first
       got, iter = iter_first_raw
       if got
-        iter
         setup_iter(iter)
         iter
       else
