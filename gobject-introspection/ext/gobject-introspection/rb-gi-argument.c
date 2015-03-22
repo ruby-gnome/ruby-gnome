@@ -732,7 +732,11 @@ rb_gi_argument_to_ruby(GIArgument *argument,
         rb_argument = DBL2NUM(argument->v_double);
         break;
     case GI_TYPE_TAG_GTYPE:
-        rb_argument = rbgobj_gtype_new(argument->v_size);
+        if (argument->v_size == G_TYPE_INVALID) {
+            rb_argument = Qnil;
+        } else {
+            rb_argument = rbgobj_gtype_new(argument->v_size);
+        }
         break;
     case GI_TYPE_TAG_UTF8:
         rb_argument = CSTR2RVAL(argument->v_string);
