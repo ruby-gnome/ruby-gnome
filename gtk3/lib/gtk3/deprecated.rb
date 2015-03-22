@@ -193,6 +193,7 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_const :Mode, "Gtk::CellRendererMode"
     define_deprecated_enums :CellRendererMode, 'MODE'
+    define_deprecated_const :State, "Gtk::CellRendererState"
     define_deprecated_flags :CellRendererState
     define_deprecated_method :editing_canceled, :warn => "Use '#{self}#stop_editing'." do |_self|
       _self.stop_editing(true)
