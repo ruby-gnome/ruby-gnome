@@ -239,6 +239,12 @@ module Gtk
         end
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
+      when "Gtk::Tooltip"
+        case method_name
+        when "set_icon_from_stock"
+          # Ignore deprecated methods
+          return
+        end
       end
       super(info, klass, method_name)
     end
