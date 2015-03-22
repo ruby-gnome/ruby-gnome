@@ -63,7 +63,7 @@ module Gdk
 
   class EventCrossing
     extend GLib::Deprecatable
-    define_deprecated_enums :Mode
+    define_deprecated_enums :CrossingMode
     define_deprecated_enums :NotifyType, 'NOTIFY'
   end
 
