@@ -110,6 +110,7 @@ module Gtk
 
   class Assistant
     extend GLib::Deprecatable
+    define_deprecated_const :PageType, "Gtk::AssistantPageType"
     define_deprecated_enums :AssistantPageType, 'PAGE'
     define_deprecated_method :set_page_header_image, :warn => "Don't use this method."
     define_deprecated_method :get_page_header_image, :warn => "Don't use this method."
