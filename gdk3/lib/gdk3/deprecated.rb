@@ -9,7 +9,7 @@ module Gdk
 
   class Cursor
     extend GLib::Deprecatable
-    define_deprecated_enums :Type
+    define_deprecated_enums :CursorType
     define_deprecated_method :pixmap?, :warn => "Don't use this method." do |_self|
       false
     end
