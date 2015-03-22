@@ -244,6 +244,7 @@ module Gtk
 
   class Dialog
     extend GLib::Deprecatable
+    define_deprecated_const :Flags, "Gtk::DialogFlags"
     define_deprecated_flags :DialogFlags
     define_deprecated_const :ResponseType, 'Gtk::ResponseType'
     define_deprecated_enums 'Gtk::ResponseType', 'RESPONSE'
