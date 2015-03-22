@@ -389,7 +389,9 @@ module Gtk
 
   module FileChooser
     extend GLib::Deprecatable
+    define_deprecated_const :Action, "Gtk::FileChooserAction"
     define_deprecated_enums :FileChooserAction, 'ACTION'
+    define_deprecated_const :Confirmation, "Gtk::FileChooserConfirmation"
     define_deprecated_enums :FileChooserConfirmation, 'CONFIRMATION'
   end
 
