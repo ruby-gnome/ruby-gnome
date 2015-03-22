@@ -606,8 +606,11 @@ module Gtk
 
   class PrintOperation
     extend GLib::Deprecatable
+    define_deprecated_const :Action, "Gtk::PrintOperationAction"
     define_deprecated_enums :PrintOperationAction, 'ACTION'
+    define_deprecated_const :Result, "Gtk::PrintOperationResult"
     define_deprecated_enums :PrintOperationResult, 'RESULT'
+    define_deprecated_const :Status, "Gtk::PrintStatus"
     define_deprecated_enums :PrintStatus, 'STATUS'
   end
 
