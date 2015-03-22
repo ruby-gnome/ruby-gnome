@@ -677,8 +677,8 @@ module Gtk
 
   module RC
     extend GLib::Deprecatable
-    define_deprecated_flags :Flags
-    define_deprecated_enums :TokenType, 'TOKEN'
+    define_deprecated_flags :RCFlags
+    define_deprecated_enums :RCTokenType, 'TOKEN'
   end
 
   class RecentAction
