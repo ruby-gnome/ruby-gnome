@@ -231,6 +231,12 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::IconSet"
+        case method_name
+        when "render_icon"
+          # Ignore deprecated methods
+          return
+        end
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
       end
