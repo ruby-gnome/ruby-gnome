@@ -59,17 +59,38 @@ module Gtk
       end
     end
 
-    alias_method :insert_raw, :insert
-    def insert(iter, text, options={})
+    alias_method :insert_raw,              :insert
+    alias_method :insert_pixbuf_raw,       :insert_pixbuf
+    alias_method :insert_child_anchor_raw, :insert_child_anchor
+    def insert(iter, target, options={})
       interactive = options[:interactive]
       default_editable = options[:default_editable]
+      tags = options[:tags]
 
+      start_offset = iter.offset
       if interactive
         default_editable = true if default_editable.nil?
-        insert_interactive(iter, text, default_editable)
+        insert_interactive(iter, target, default_editable)
       else
-        insert_raw(iter, text, text.bytesize)
+        case target
+        when Gdk::Pixbuf
+          insert_pixbuf_raw(iter, target)
+        when TextChildAnchor
+          insert_text_child_anchor_raw(iter, target)
+        else
+          insert_raw(iter, text, text.bytesize)
+        end
       end
+
+      if tags
+        start_iter = get_iter_at(:offset => start_offset)
+        tags.each do |tag|
+          tag = tag_table.lookup(tag) if tag.is_a?(String)
+          apply_tag(tag, start_iter, iter)
+        end
+      end
+
+      self
     end
 
     alias_method :insert_at_cursor_raw, :insert_at_cursor
