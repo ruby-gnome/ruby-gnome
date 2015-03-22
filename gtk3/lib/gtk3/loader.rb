@@ -193,12 +193,6 @@ module Gtk
           # Ignore deprecated methods
           return
         end
-      when "Gtk::BindingSet"
-        case method_name
-        when "add_path"
-          # Ignore deprecated methods
-          return
-        end
       when "Gtk::Buildable"
         case method_name
         when "name", "set_name"
@@ -212,6 +206,12 @@ module Gtk
           method_name = "connect_signals"
         when "get_type_from_name"
           method_name = "get_type"
+        end
+      when "Gtk::BindingSet"
+        case method_name
+        when "add_path"
+          # Ignore deprecated methods
+          return
         end
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
