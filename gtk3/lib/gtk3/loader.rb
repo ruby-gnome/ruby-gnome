@@ -135,6 +135,24 @@ module Gtk
       end
     end
 
+    def enum_class_name(info)
+      case info.name
+      when /\ARc/
+        "RC#{$POSTMATCH}"
+      else
+        super
+      end
+    end
+
+    def flags_class_name(info)
+      case info.name
+      when /\ARc/
+        "RC#{$POSTMATCH}"
+      else
+        super
+      end
+    end
+
     def load_method_info(info, klass, method_name)
       if klass.name == "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
