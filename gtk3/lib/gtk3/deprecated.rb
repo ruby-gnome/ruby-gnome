@@ -484,7 +484,7 @@ module Gtk
 
   class Image
     extend GLib::Deprecatable
-    define_deprecated_enums :Type
+    define_deprecated_enums :ImageType
     define_deprecated_method :set, :warn => "Use '#{self}#set_stock', '#{self}#set_icon_name', '#{self}#set_icon_set', '#{self}#set_file', '#{self}#set_pixbuf' or '#{self}#set_pixbuf_animation'."
     define_deprecated_method_by_hash_args :initialize,
         'image, size = nil',
