@@ -39,8 +39,8 @@ module Gdk
 
   class DragContext
     extend GLib::Deprecatable
-    define_deprecated_flags :Action, 'ACTION'
-    define_deprecated_enums :Protocol, 'PROTO'
+    define_deprecated_flags :DragAction, 'ACTION'
+    define_deprecated_enums :DragProtocol, 'PROTO'
     define_deprecated_singleton_method :drag_begin, :warn => "Use 'Gdk::Window#drag_begin'." do |_self, window, targets|
       window.drag_begin(targets)
     end
