@@ -19,7 +19,7 @@ class TestGtkComboBox < Test::Unit::TestCase
 
   sub_test_case(".new") do
     test "no argument" do
-      combobox = Gtk::ComboBox.new()
+      combobox = Gtk::ComboBox.new
       assert_equal(false, combobox.has_entry?)
       assert_nil(combobox.model)
     end
