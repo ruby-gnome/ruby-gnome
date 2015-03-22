@@ -33,8 +33,8 @@ module Gtk
       elsif !entry and model and !area
         initialize_new_with_model(model)
       elsif !entry and !model and area
-        initialize_new_with_area(area) 
-      end  
+        initialize_new_with_area(area)
+      end
     end
   end
 end
