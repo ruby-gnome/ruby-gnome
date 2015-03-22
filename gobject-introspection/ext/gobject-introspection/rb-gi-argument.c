@@ -1291,9 +1291,7 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
         g_free(argument->v_string);
         break;
     case GI_TYPE_TAG_FILENAME:
-        rb_raise(rb_eNotImpError,
-                 "TODO: free GIArgument(%s) everything",
-                 g_type_tag_to_string(type_tag));
+        g_free(argument->v_string);
         break;
     case GI_TYPE_TAG_ARRAY:
         rb_gi_return_argument_free_everything_array(argument, type_info);
