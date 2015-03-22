@@ -14,7 +14,7 @@ module GLib
     end
 
     def define_deprecated_enums(enums, prefix = nil)
-      enums = module_eval(enums.to_s) rescue return
+      enums = resolve_constant_name(enums.to_s)
       enums.constants.each do |const|
         deprecated_const = prefix ? "#{prefix}_#{const}" : const
         new_const = [enums, const].join('::')
@@ -99,7 +99,7 @@ module GLib
       msg = "#{caller[0]}: '#{[name, deprecated_const].join('::')}' has been deprecated."
       case new_const
       when String, Symbol
-        new_const_val = constant_get(new_const)
+        new_const_val = resolve_constant_name(new_const)
         case new_const_val
         when GLib::Enum, GLib::Flags
           alt = " or ':#{new_const_val.nick.gsub('-', '_')}'"
@@ -120,8 +120,23 @@ module GLib
       end
     end
 
-    def constant_get(const)
-      const.split('::').inject(Object){|r, c| r.const_get(c)}
+    def resolve_constant_name(name)
+      name.to_s.split("::").inject(nil) do |context, local_name|
+        if context.nil?
+          candidates = []
+          candidate_context = ::Object
+          self.to_s.split("::").each do |candidate_name|
+            candidate = candidate_context.const_get(candidate_name)
+            candidates.unshift(candidate)
+            candidate_context = candidate
+          end
+          context = candidates.find do |candidate|
+            candidate.const_defined?(local_name)
+          end
+          context ||= ::Object
+        end
+        context.const_get(local_name)
+      end
     end
 
     def __define_deprecated_method__(type, deprecated_method, new_method = {}, &block)
