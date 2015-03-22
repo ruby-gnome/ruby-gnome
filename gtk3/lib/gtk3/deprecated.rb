@@ -591,14 +591,6 @@ module Gtk
     end
   end
 
-  class PageSetupUnixDialog
-    extend GLib::Deprecatable
-    define_deprecated_method_by_hash_args :initialize,
-        'title, parent', ':title => nil, :parent => nil' do |_self, title, parent|
-      [{:title => title, :parent => parent}]
-    end
-  end
-
   class PaperSize
     extend GLib::Deprecatable
     define_deprecated_enums :Unit, 'UNIT'
@@ -621,15 +613,6 @@ module Gtk
     define_deprecated_enums :PrintDuplex, 'DUPLEX'
     define_deprecated_enums :PrintPages, 'PAGES'
     define_deprecated_enums :PrintQuality, 'QUALITY'
-  end
-
-  class PrintUnixDialog
-    extend GLib::Deprecatable
-    define_deprecated_flags :Capabilities, 'CAPABILITY'
-    define_deprecated_method_by_hash_args :initialize,
-        'title, parent', ':title => nil, :parent => nil' do |_self, title, parent|
-      [{:title => title, :parent => parent}]
-    end
   end
 
   class Paned
