@@ -468,7 +468,7 @@ rg_initialize(VALUE self, VALUE type)
     }
 
     if (G_TYPE_INVALID == gtype)
-        rb_raise(rb_eArgError, "invalid type");
+        rb_raise(rb_eArgError, "invalid GType");
 
     rb_ivar_set(self, id_gtype, ULONG2NUM(gtype));
 
