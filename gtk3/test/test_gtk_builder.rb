@@ -118,7 +118,7 @@ class TestGtkBuilder < Test::Unit::TestCase
   def test_get_type_from_name
     builder = Gtk::Builder.new
     assert_nil(builder.get_type("XXX"))
-    assert_equal(Gtk::Box, builder.get_type("GtkBox"))
+    assert_equal(Gtk::Box.gtype, builder.get_type("GtkBox"))
   end
 
   private

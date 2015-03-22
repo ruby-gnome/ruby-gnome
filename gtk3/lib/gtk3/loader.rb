@@ -165,6 +165,8 @@ module Gtk
           return
         when "connect_signals_full"
           method_name = "connect_signals"
+        when "get_type_from_name"
+          method_name = "get_type"
         end
       end
       super(info, klass, method_name)
