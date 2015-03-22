@@ -213,6 +213,12 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::Button"
+        case method_name
+        when "enter", "leave", "pressed", "released"
+          # Ignore deprecated methods
+          return
+        end
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
       end
