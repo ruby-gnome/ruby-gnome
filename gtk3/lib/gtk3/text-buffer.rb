@@ -89,6 +89,7 @@ module Gtk
     def set_text(text)
       set_text_raw(text, text.bytesize)
     end
+    remove_method :text=
     alias_method :text=, :set_text
 
     alias_method :apply_tag_raw, :apply_tag
