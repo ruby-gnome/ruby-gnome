@@ -677,7 +677,9 @@ module Gtk
 
   module RC
     extend GLib::Deprecatable
+    define_deprecated_const :Flags, "Gtk::RCFlags"
     define_deprecated_flags :RCFlags
+    define_deprecated_const :TokenType, "Gtk::RCTokenType"
     define_deprecated_enums :RCTokenType, 'TOKEN'
   end
 
