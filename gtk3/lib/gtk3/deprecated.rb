@@ -390,7 +390,7 @@ module Gtk
   module FileChooser
     extend GLib::Deprecatable
     define_deprecated_enums :Action, 'ACTION'
-    define_deprecated_enums :Confirmation, 'CONFIRMATION'
+    define_deprecated_enums :FileChooserConfirmation, 'CONFIRMATION'
   end
 
   class FileChooserDialog
