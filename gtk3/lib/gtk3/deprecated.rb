@@ -413,7 +413,7 @@ module Gtk
 
   class FileFilter
     extend GLib::Deprecatable
-    define_deprecated_flags :Flags
+    define_deprecated_flags :FileFilterFlags
   end
 
   class HBox
