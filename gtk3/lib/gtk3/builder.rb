@@ -22,5 +22,22 @@ module Gtk
     def add_from_string(string)
       add_from_string_raw(string, string.bytesize)
     end
+
+    def add(target)
+      if target.respond_to?(:to_path)
+        add_from_file(target.to_path)
+      elsif target.start_with?("<") or target.start_with?(" ")
+        add_from_string(target)
+      elsif File.exist?(target)
+        add_from_file(target)
+      else
+        add_from_resource(target)
+      end
+    end
+
+    def <<(target)
+      add(target)
+      self
+    end
   end
 end
