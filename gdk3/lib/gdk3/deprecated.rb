@@ -133,7 +133,7 @@ module Gdk
   class Visual
     extend GLib::Deprecatable
     define_deprecated_enums :ByteOrder
-    define_deprecated_enums :Type
+    define_deprecated_enums :VisualType
   end
 
   class Window
