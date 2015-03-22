@@ -84,7 +84,7 @@ module Gdk
 
   class EventSetting
     extend GLib::Deprecatable
-    define_deprecated_enums :Action, 'ACTION'
+    define_deprecated_enums :SettingAction, 'ACTION'
   end
 
   class EventVisibility
