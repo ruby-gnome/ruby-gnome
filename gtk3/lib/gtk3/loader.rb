@@ -187,8 +187,6 @@ module Gtk
 
     def load_method_info(info, klass, method_name)
       case klass.name
-      when "Gtk::Image"
-        method_name = method_name.gsub(/\Agicon/, "icon")
       when "Gtk::Buildable"
         case method_name
         when "name", "set_name"
@@ -203,6 +201,8 @@ module Gtk
         when "get_type_from_name"
           method_name = "get_type"
         end
+      when "Gtk::Image"
+        method_name = method_name.gsub(/\Agicon/, "icon")
       end
       super(info, klass, method_name)
     end
