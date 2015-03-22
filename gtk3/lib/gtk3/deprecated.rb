@@ -987,9 +987,6 @@ module Gtk
     define_deprecated_method :action, :warn => "Use 'Gtk::Activatable#related_action'." do |_self|
       _self.related_action
     end
-    define_deprecated_method :size_request, :warn => "Use '#{self}#preferred_size'." do |_self|
-      _self.preferred_size.last
-    end
     define_deprecated_method :child_requisition, :warn => "Use '#{self}#preferred_size'." do |_self|
       _self.preferred_size.last
     end
