@@ -473,6 +473,7 @@ module Gtk
 
   class IconTheme
     extend GLib::Deprecatable
+    define_deprecated_const :LookupFlags, "Gtk::IconLookupFlags"
     define_deprecated_flags :IconLookupFlags, 'LOOKUP'
   end
 
