@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2013  Ruby-GNOME2 Project Team
- *  Copyright (C) 2007  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2007-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -23,7 +22,6 @@
 #define __RBGPRIVATE_H__
 
 #include "rbgobject.h"
-#include "glib-enum-types.h"
 
 #ifndef HAVE_RB_ERRINFO
 #  define rb_errinfo() (ruby_errinfo)

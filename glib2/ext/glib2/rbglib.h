@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
- *  Copyright (C) 2002-2005  Ruby-GNOME2 Project
+ *  Copyright (C) 2002-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -21,6 +20,7 @@
  */
 
 #include <glib-object.h>
+#include "glib-enum-types.h"
 
 #include "ruby.h"
 
