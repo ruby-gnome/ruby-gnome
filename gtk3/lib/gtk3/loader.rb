@@ -123,9 +123,19 @@ module Gtk
     end
 
     def define_singleton_method(klass, name, info)
-      if klass == @base_module and name == "get_event_widget"
-        define_gdk_event_widget(info)
-        return
+      case klass.name
+      when "Gtk"
+        case name
+        when "get_event_widget"
+          define_gdk_event_widget(info)
+          return
+        end
+      when "Gtk::Widget"
+        case name
+        when "default_style"
+          # Ignore deprecated method
+          return
+        end
       end
 
       super
