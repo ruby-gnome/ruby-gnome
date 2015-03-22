@@ -203,7 +203,7 @@ module Gtk
 
   class CellRendererAccel
     extend GLib::Deprecatable
-    define_deprecated_enums :Mode, 'MODE'
+    define_deprecated_enums :CellRendererAccelMode, 'MODE'
   end
 
   class CellView
