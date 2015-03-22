@@ -72,7 +72,7 @@ module Gtk
       file      = options[:file] || nil
       pixbuf    = options[:pixbuf] || nil
       animation = options[:animation] || nil
-      resource  = options[:resource] ||nil
+      # resource  = options[:resource] ||nil
       surface   = options[:surface] || nil
       size      = options[:size] || nil
 
