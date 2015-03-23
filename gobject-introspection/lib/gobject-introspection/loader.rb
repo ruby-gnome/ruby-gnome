@@ -457,12 +457,12 @@ module GObjectIntrospection
       no_return_value_p = (info.return_type.tag == TypeTag::VOID)
       setter_method_p = (/\Aset_/ === method_name and no_return_value_p)
       prepare = lambda do |arguments, &block|
-        arguments = [self] + arguments if function_info_p
         arguments, block = build_arguments(info, arguments, &block)
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
         [arguments, block]
       end
       klass.__send__(:define_method, method_name) do |*arguments, &block|
+        arguments = [self] + arguments if function_info_p
         arguments, block = prepare.call(arguments, &block)
         if block.nil? and info.require_callback?
           to_enum(method_name, *arguments)
