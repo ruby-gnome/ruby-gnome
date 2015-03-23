@@ -1440,6 +1440,16 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
         g_assert_not_reached();
         break;
     case GI_INFO_TYPE_UNION:
+        if (gtype == G_TYPE_NONE) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: Ruby -> GIArgument(interface)[%s]: <%s>"
+                     "(G_TYPE_NONE)",
+                     g_info_type_to_string(interface_type),
+                     g_base_info_get_name(interface_info));
+        } else {
+            argument->v_pointer = RVAL2BOXED(rb_argument, gtype);
+        }
+        break;
     case GI_INFO_TYPE_VALUE:
     case GI_INFO_TYPE_SIGNAL:
     case GI_INFO_TYPE_VFUNC:
