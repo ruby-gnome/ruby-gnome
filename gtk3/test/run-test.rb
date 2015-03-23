@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -56,5 +56,7 @@ $LOAD_PATH.unshift(File.join(gtk3_base, "test"))
 require 'gtk-test-utils'
 
 require 'gtk3'
+
+Gtk.init
 
 exit Test::Unit::AutoRunner.run(true)
