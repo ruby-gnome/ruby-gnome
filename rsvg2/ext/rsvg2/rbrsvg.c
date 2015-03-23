@@ -188,8 +188,6 @@ Init_rsvg2(void)
     RG_DEF_SMETHOD(pixbuf_from_file_at_max_size, 3);
     RG_DEF_SMETHOD(pixbuf_from_file_at_zoom_with_max, 5);
 
-    RG_DEF_SMETHOD_P(cairo_available, 0);
-
     Init_rsvg_handle(RG_TARGET_NAMESPACE);
     Init_rsvg_dimensiondata(RG_TARGET_NAMESPACE);
 }
