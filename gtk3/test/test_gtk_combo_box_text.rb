@@ -18,20 +18,16 @@ class TestGtkComboBoxText < Test::Unit::TestCase
   include GtkTestUtils
 
   sub_test_case(".new") do
-    sub_test_case(":entry => true") do
-      test "no others" do
-        combo_box_text = Gtk::ComboBoxText.new(:entry => true)
-        assert do
-          combo_box_text.has_entry?
-        end
+    test ":entry => true" do
+      combo_box_text = Gtk::ComboBoxText.new(:entry => true)
+      assert do
+        combo_box_text.has_entry?
       end
     end
-    sub_test_case("no :entry") do
-      test "no others" do
-        combo_box_text = Gtk::ComboBoxText.new
-        assert do
-          not combo_box_text.has_entry?
-        end
+    test ":entry => false" do
+      combo_box_text = Gtk::ComboBoxText.new
+      assert do
+        not combo_box_text.has_entry?
       end
     end
   end
