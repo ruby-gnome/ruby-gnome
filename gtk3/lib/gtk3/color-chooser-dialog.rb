@@ -23,5 +23,15 @@ module Gtk
 
       initialize_raw(title, parent)
     end
+
+    alias_method :title_raw, :title
+    def title
+      found_title = title_raw
+      if found_title
+        found_title
+      else
+        ""
+      end
+    end
   end
 end
