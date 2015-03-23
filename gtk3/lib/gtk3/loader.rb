@@ -143,24 +143,7 @@ module Gtk
     end
 
     def define_gdk_event_widget(info)
-      receiver_class = Gdk::Event
-      method_name = "widget"
-      unlock_gvl = should_unlock_gvl?(info, receiver_class)
-      prepare = lambda do |arguments|
-        arguments, = build_arguments(info, arguments)
-        validate_arguments(info,
-                           "#{receiver_class}.#{method_name}",
-                           arguments)
-        arguments
-      end
-      receiver_class.__send__(:define_method, method_name) do |*arguments|
-        arguments.unshift(self)
-        arguments = prepare.call(arguments)
-        info.invoke({
-                      :arguments => arguments,
-                      :unlock_gvl => unlock_gvl,
-                    })
-      end
+      define_method(info, Gdk::Event, "widget")
     end
 
     def define_enum(info)
