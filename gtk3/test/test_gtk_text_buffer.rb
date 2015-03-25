@@ -92,5 +92,10 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       @text_buffer.text = "Hello Ruby World!"
       assert_equal("Hello Ruby World!", @text_buffer.text)
     end
+
+    test "#serialize_formats" do
+      assert_equal([Gdk::Atom],
+                   @text_buffer.serialize_formats.collect(&:class))
+    end
   end
 end
