@@ -97,5 +97,11 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       assert_equal([Gdk::Atom],
                    @text_buffer.serialize_formats.collect(&:class))
     end
+
+    test "#deserialize_formats" do
+      @text_buffer.register_deserialize_tagset("text/plain")
+      assert_equal([Gdk::Atom],
+                   @text_buffer.deserialize_formats.collect(&:class))
+    end
   end
 end

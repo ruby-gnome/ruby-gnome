@@ -127,6 +127,11 @@ module Gtk
       serialize_formats_raw[0]
     end
 
+    alias_method :deserialize_formats_raw, :deserialize_formats
+    def deserialize_formats
+      deserialize_formats_raw[0]
+    end
+
     private
     alias_method :insert_interactive_raw, :insert_interactive
     def insert_interactive(iter, text, default_ediatable)
