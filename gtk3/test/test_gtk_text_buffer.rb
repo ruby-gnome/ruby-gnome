@@ -103,5 +103,21 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       assert_equal([Gdk::Atom],
                    @text_buffer.deserialize_formats.collect(&:class))
     end
+
+    test "#serialize and #deserialize" do
+      format = @text_buffer.serialize_formats[0]
+      serialized = @text_buffer.serialize(@text_buffer,
+                                          format,
+                                          @text_buffer.start_iter,
+                                          @text_buffer.end_iter)
+      output_text_buffer = Gtk::TextBuffer.new
+      output_format = output_text_buffer.register_deserialize_tagset(nil)
+      output_text_buffer.deserialize(output_text_buffer,
+                                     output_format,
+                                     output_text_buffer.start_iter,
+                                     serialized.pack("C*"))
+      assert_equal(@text_buffer.text,
+                   output_text_buffer.text)
+    end
   end
 end
