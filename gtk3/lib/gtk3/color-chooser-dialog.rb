@@ -18,7 +18,7 @@ module Gtk
   class ColorChooserDialog
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      title = options[:title]
+      title = options[:title] || ""
       parent = options[:parent]
 
       initialize_raw(title, parent)
