@@ -17,8 +17,16 @@
 module Gtk
   class Label
     alias_method :initialize_raw, :initialize
-    def initialize(text=nil, mnemonic=false)
-      if mnemonic
+    def initialize(text=nil, options={})
+      if options == true or options == false or options.nil?
+        mnemonic = options
+        warn "Gtk::Label.new(text, mnemonic) style has been deprecated. " +
+             "Use Gtk::Label.new(text, {:use_underline => #{mnemonic}}) style instead."
+        options = {
+          :use_underline => mnemonic,
+        }
+      end
+      if options[:use_underline]
         initialize_new_with_mnemonic(text)
       else
         initialize_raw(text)
