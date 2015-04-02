@@ -32,5 +32,23 @@ module Gtk
         initialize_raw(text)
       end
     end
+
+    private :set_markup_with_mnemonic
+    alias_method :set_markup_raw, :set_markup
+    def set_markup(text, options={})
+      if options == true or options == false or options.nil?
+        mnemonic = options
+        warn "Gtk::Label#set_markup(text, mnemonic) style has been deprecated. " +
+             "Use Gtk::Label#set_marup(text, {:use_underline => #{mnemonic}}) style instead."
+        options = {
+          :use_underline => mnemonic,
+        }
+      end
+      if options[:use_underline]
+        set_markup_with_mnemonic(text)
+      else
+        set_markup_raw(text)
+      end
+    end
   end
 end

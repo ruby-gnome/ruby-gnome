@@ -23,4 +23,17 @@ class TestGtkLabel < Test::Unit::TestCase
       assert_equal("h", [label.mnemonic_keyval].pack("U"))
     end
   end
+
+  sub_test_case "instance methods" do
+    sub_test_case "set_markup" do
+      def setup
+        @label = Gtk::Label.new
+      end
+
+      test ":use_underline => true" do
+        @label.set_markup("_Hello", :use_underline => true)
+        assert_equal("h", [@label.mnemonic_keyval].pack("U"))
+      end
+    end
+  end
 end
