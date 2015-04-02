@@ -10,12 +10,12 @@ require "gtk3"
 
 win = Gtk::Window.new("Gtk::Label sample")
 win.signal_connect("destroy"){Gtk.main_quit}
-label1 = Gtk::Label.new("_Not Use Mnemonic")
+label1 = Gtk::Label.new("_Not Use Mnemonic", :use_underline => false)
 label1.selectable = true
-label2 = Gtk::Label.new("_Use Mnemonic", true)
+label2 = Gtk::Label.new("_Use Mnemonic", :use_underline => true)
 label3 = Gtk::Label.new.set_markup(%Q[<markup><span size="xx-large" weight="bold" foreground="blue"><u>Ruby-GNOME2</u></span> is <span foreground="red" size="x-large"><i>cool</i></span>!</markup>])
-label4 = Gtk::Label.new.set_markup(%Q[<span foreground="#999900">_Not Use Mnemonic</span>])
-label5 = Gtk::Label.new.set_markup(%Q[<span foreground="#009999">_Use Mnemonic</span>])
+label4 = Gtk::Label.new.set_markup(%Q[<span foreground="#999900">_Not Use Mnemonic</span>], :use_underline => false)
+label5 = Gtk::Label.new.set_markup(%Q[<span foreground="#009999">_Use Mnemonic</span>], :use_underline => true)
 
 box = Gtk::Box.new(:vertical)
 box.add(label1)
