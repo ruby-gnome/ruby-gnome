@@ -15,8 +15,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class IconView
-    alias_method :get_cell_rect_raw, :get_cell_rect
+  class IconView 
+    alias_method :initialize_raw, :initialize, :get_cell_rect_raw, :get_cell_rect
+    def initialize(options={})
+      model = options[:model]
+      area  = options[:area]
+
+      if model
+        initialize_new_with_model(model)
+      elsif area
+        initialize_new_with_area(area)
+      else
+        initialize_new
+      end
+    end
     def get_cell_rect(path, cell=nil)
       exist, rect = get_cell_rect_raw(path, cell)
       if exist
