@@ -20,7 +20,6 @@ textview = Gtk::TextView.new
 textview.set_size_request(600, 400)
 buffer = textview.buffer
 buffer.text = DATA.read
-serialize_format = buffer.register_serialize_tagset(nil)
 deserialize_format = buffer.register_deserialize_tagset(nil)
 format = buffer.serialize_formats[0]
 
