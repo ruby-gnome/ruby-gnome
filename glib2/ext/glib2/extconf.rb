@@ -56,10 +56,18 @@ create_pkg_config_file("Ruby/GLib2", package_id)
 
 enum_types_prefix = "glib-enum-types"
 include_paths = PKGConfig.cflags_only_I("glib-2.0")
+ignore_headers = [
+  "giochannel.h",
+  "gmain.h",
+  "gscanner.h",
+]
+unless (/mingw|cygwin|mswin/ === RUBY_PLATFORM)
+  ignore_headers << "gwin32.h"
+end
 headers = include_paths.split.inject([]) do |result, path|
   result + Dir.glob(File.join(path.sub(/^-I/, ""), "glib", "*.h"))
 end.reject do |file|
-  /g(iochannel|main|scanner)\.h/ =~ file
+  ignore_headers.include?(File.basename(file))
 end
 include_paths = PKGConfig.cflags_only_I("gobject-2.0")
 headers = include_paths.split.inject(headers) do |result, path|
