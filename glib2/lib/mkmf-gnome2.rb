@@ -109,10 +109,13 @@ if ENV['GTK_BASEPATH'] and /cygwin/ !~ RUBY_PLATFORM
   $CFLAGS += " -I#{include_path} "
 end
 
+def windows_platform?
+  /cygwin|mingw|mswin/ === RUBY_PLATFORM
+end
+
 def setup_windows(target_name, base_dir=nil)
   checking_for(checking_message("Windows")) do
-    case RUBY_PLATFORM
-    when /cygwin|mingw|mswin/
+    if windows_platform?
       import_library_name = "libruby-#{target_name}.a"
       $DLDFLAGS << " -Wl,--out-implib=#{import_library_name}"
       $cleanfiles << import_library_name
@@ -189,8 +192,7 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_source_dir} #{$INCFLAGS}"
   end
 
-  case RUBY_PLATFORM
-  when /cygwin|mingw|mswin/
+  if windows_platform?
     target_base_dir = Pathname.new(target_source_dir).parent.parent
     target_binary_base_dir = target_base_dir + "vendor" + "local"
     if target_binary_base_dir.exist?
@@ -205,8 +207,7 @@ def add_depend_package_path(target_name, target_source_dir, target_build_dir)
     $INCFLAGS = "-I#{target_build_dir} #{$INCFLAGS}"
   end
 
-  case RUBY_PLATFORM
-  when /cygwin|mingw|mswin/
+  if windows_platform?
     library_base_name = "ruby-#{target_name.gsub(/-/, '_')}"
     case RUBY_PLATFORM
     when /cygwin|mingw/
@@ -450,12 +451,10 @@ def glib_mkenums(prefix, files, g_type_prefix, include_files, options={})
 end
 
 def check_cairo(options={})
-  is_windows = (/mingw|cygwin|mswin/ === RUBY_PLATFORM)
-
   rcairo_source_dir = options[:rcairo_source_dir]
   if rcairo_source_dir.nil?
     suffix = nil
-    if is_windows
+    if windows_platform?
       case RUBY_PLATFORM
       when /\Ax86-mingw/
         suffix = "win32"
@@ -480,7 +479,7 @@ def check_cairo(options={})
   end
 
   unless rcairo_source_dir.nil?
-    if is_windows
+    if windows_platform?
       options = {}
       build_dir = "tmp/#{RUBY_PLATFORM}/cairo/#{RUBY_VERSION}"
       if File.exist?(File.join(rcairo_source_dir, build_dir))

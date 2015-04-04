@@ -61,7 +61,7 @@ ignore_headers = [
   "gmain.h",
   "gscanner.h",
 ]
-unless (/mingw|cygwin|mswin/ === RUBY_PLATFORM)
+unless windows_platform?
   ignore_headers << "gwin32.h"
 end
 headers = include_paths.split.inject([]) do |result, path|
