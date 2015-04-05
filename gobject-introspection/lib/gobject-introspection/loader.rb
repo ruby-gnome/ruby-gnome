@@ -366,9 +366,20 @@ module GObjectIntrospection
     end
 
     def match_argument?(arg_info, argument)
-      case arg_info.type.tag
+      type = arg_info.type
+      case type.tag
       when TypeTag::UTF8
         argument.is_a?(String)
+      when TypeTag::INTERFACE
+        interface = type.interface
+        case interface.type
+        when InfoType::OBJECT,
+             InfoType::INTERFACE
+          argument.is_a?(interface.gtype.to_class)
+        else
+          # TODO
+          false
+        end
       else
         # TODO
         false
