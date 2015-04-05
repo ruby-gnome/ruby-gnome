@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -134,7 +134,7 @@ module Gtk
 
     alias_method :serialize_raw, :serialize
     def serialize(*arguments)
-      serialize_raw(*arguments)[0]
+      serialize_raw(*arguments)[0].pack("C*")
     end
 
     private

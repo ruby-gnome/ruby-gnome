@@ -115,7 +115,7 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       output_text_buffer.deserialize(output_text_buffer,
                                      output_format,
                                      output_text_buffer.start_iter,
-                                     serialized.pack("C*"))
+                                     serialized)
       assert_equal(@text_buffer.text,
                    output_text_buffer.text)
     end
