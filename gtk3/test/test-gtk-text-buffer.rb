@@ -119,5 +119,21 @@ class TestGtkTextBuffer < Test::Unit::TestCase
       assert_equal(@text_buffer.text,
                    output_text_buffer.text)
     end
+
+    sub_test_case "#selection_bounds" do
+      test "selected" do
+        insert_iter =
+          @text_buffer.get_iter_at(:offset => "Hel".bytesize)
+        selection_bound_iter =
+          @text_buffer.get_iter_at(:offset => "Hello Wor".bytesize)
+        @text_buffer.select_range(insert_iter, selection_bound_iter)
+        assert_equal([insert_iter.offset, selection_bound_iter.offset],
+                     @text_buffer.selection_bounds.collect(&:offset))
+      end
+
+      test "not selected" do
+        assert_nil(@text_buffer.selection_bounds)
+      end
+    end
   end
 end

@@ -137,6 +137,16 @@ module Gtk
       serialize_raw(*arguments)[0].pack("C*")
     end
 
+    alias_method :selection_bounds_raw, :selection_bounds
+    def selection_bounds
+      selected, start_iter, end_iter = selection_bounds_raw
+      if selected
+        [start_iter, end_iter]
+      else
+        nil
+      end
+    end
+
     private
     alias_method :insert_interactive_raw, :insert_interactive
     def insert_interactive(iter, text, default_ediatable)
