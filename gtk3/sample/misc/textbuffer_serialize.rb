@@ -32,7 +32,7 @@ button_open = Gtk::ToolButton.new(:icon_widget => nil, :label => "Deserialize fr
 button_open.signal_connect "clicked" do
   dialog = Gtk::FileChooserDialog.new(:title => "Deserialize from a file",
                                       :parent => window,
-                                      :actions => Gtk::FileChooserAction::OPEN, #or :open
+                                      :actions => :open,
                                       :buttons => [
                                       [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
                                       [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT]])
@@ -76,7 +76,7 @@ button_color = Gtk::ToolButton.new(:icon_widget => nil, :label => "Color the reg
 button_color.signal_connect "clicked" do 
   dialog = Gtk::ColorChooserDialog.new(:title => "Color the region", :parent => window)
   if dialog.run == Gtk::ResponseType::OK
-    bounds = buffer.selection_bounds # returns an array [test_selected(t/f)? ,Gtk::TextIter, Gtk::TextIter]
+    bounds = buffer.selection_bounds # returns an array [Gtk::TextIter, Gtk::TextIter]
     rgba = dialog.rgba
     color = Gdk::Color.new(rgba.red*65535, rgba.green*65535, rgba.blue*65535)
     tag_name = color.to_s 
@@ -85,7 +85,7 @@ button_color.signal_connect "clicked" do
       tag.set_foreground_gdk(color)
     end
     buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[1], bounds[2])
+    buffer.apply_tag(tag, bounds[0], bounds[1])
   end
   dialog.destroy  
 end
@@ -100,7 +100,7 @@ button_font.signal_connect "clicked" do
       tag = Gtk::TextTag.new(font).set_font(font)
     end
     buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[1], bounds[2])
+    buffer.apply_tag(tag, bounds[0], bounds[1])
   end
   dialog.destroy  
 end
