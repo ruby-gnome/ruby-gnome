@@ -85,6 +85,7 @@ module Gtk
       require "gtk3/file-chooser-dialog"
       require "gtk3/font-chooser-dialog"
       require "gtk3/icon-theme"
+      require "gtk3/icon-view"
       require "gtk3/image"
       require "gtk3/label"
       require "gtk3/level-bar"
