@@ -16,7 +16,8 @@
 
 module Gtk
   class IconView 
-    alias_method :initialize_raw, :initialize, :get_cell_rect_raw, :get_cell_rect
+    alias_method :get_cell_rect_raw, :get_cell_rect
+    alias_method :initialize_raw, :initialize
     def initialize(options={})
       model = options[:model]
       area  = options[:area]
