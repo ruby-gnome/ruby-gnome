@@ -62,7 +62,7 @@ button_save.signal_connect "clicked" do
     file_name = dialog.filename
     File.open(file_name, "wb") {|io|
       data = buffer.serialize(buffer, format, buffer.start_iter, buffer.end_iter)
-      io.write(data.pack("C*"))
+      io.write(data)
     }
   end
   dialog.destroy
