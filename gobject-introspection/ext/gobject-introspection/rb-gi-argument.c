@@ -158,7 +158,20 @@ array_c_to_ruby_sized(gconstpointer *elements,
         break;
     case GI_TYPE_TAG_INT16:
     case GI_TYPE_TAG_UINT16:
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][%s] -> Ruby",
+                 g_type_tag_to_string(element_type_tag));
+        break;
     case GI_TYPE_TAG_INT32:
+        g_base_info_unref(element_type_info);
+        {
+            const gint8 *numbers = (const gint8 *)elements;
+            for (i = 0; i < n_elements; i++) {
+                rb_ary_push(rb_array, INT2NUM(numbers[i]));
+            }
+        }
+        break;
     case GI_TYPE_TAG_UINT32:
     case GI_TYPE_TAG_INT64:
     case GI_TYPE_TAG_UINT64:
