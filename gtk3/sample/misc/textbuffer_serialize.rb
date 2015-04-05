@@ -20,100 +20,106 @@ textview = Gtk::TextView.new
 textview.set_size_request(600, 400)
 buffer = textview.buffer
 buffer.text = DATA.read
+deserialize_format = buffer.register_deserialize_tagset(nil)
 format = buffer.serialize_formats[0]
-buffer.register_serialize_tagset(nil)
-buffer.register_deserialize_tagset(nil)
 
 window = Gtk::Window.new("Gtk::TextBuffer Serialize Demo")
 vbox = Gtk::Box.new(:vertical, 0)
 
-serialize_button = Gtk::FileChooserButton.new("Serialize to a file", 
-                                              Gtk::FileChooserAction::OPEN)
-deserialize_button = Gtk::FileChooserButton.new("Serialize to a file", 
-                                                Gtk::FileChooserAction::OPEN)
-
-serialize_button.current_folder = current_folder
-deserialize_button.current_folder = current_folder
-
 toolbar = Gtk::Toolbar.new
-
-toolbar.append(Gtk::Stock::OPEN, "Deserialize from a file") do
-  dialog = Gtk::FileChooserDialog.new("Deserialize from a file",
-                                      window,
-                                      Gtk::FileChooserAction::OPEN,
-                                      nil,
+toolbar.set_style(Gtk::ToolbarStyle::BOTH)
+button_open = Gtk::ToolButton.new(:icon_widget => nil, :label => "Deserialize from a file",:stock_id => Gtk::Stock::OPEN)
+button_open.signal_connect "clicked" do
+  dialog = Gtk::FileChooserDialog.new(:title => "Deserialize from a file",
+                                      :parent => window,
+                                      :actions => Gtk::FileChooserAction::OPEN, #or :open
+                                      :buttons => [
                                       [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
-                                      [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT])
+                                      [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT]])
   
   dialog.filename = File.expand_path(file_name)
   if dialog.run == Gtk::ResponseType::ACCEPT
     file_name = dialog.filename
     File.open(file_name, "rb") {|io|
       buffer.delete(buffer.start_iter, buffer.end_iter)
-      buffer.deserialize(buffer, format, buffer.start_iter, io.read)
+      buffer.deserialize(buffer, deserialize_format, buffer.start_iter, io.read)
     }
   end
   dialog.destroy
 end
 
-toolbar.append(Gtk::Stock::SAVE, "Serialize to a file") do
-  dialog = Gtk::FileChooserDialog.new("Serialize from a file",
-                                      window,
-                                      Gtk::FileChooserAction::SAVE,
-                                      nil,
-                                      [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
-                                      [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT])
+button_save = Gtk::ToolButton.new(:icon_widget => nil, :label => "Serialize to a file",:stock_id => Gtk::Stock::SAVE)
+button_save.signal_connect "clicked" do 
+  dialog = Gtk::FileChooserDialog.new(:title => "Serialize to a file",
+                                      :parent => window,
+                                      :action => :save, #or Gtk::FileChooserAction::SAVE,
+                                      :buttons => [
+                                        [Gtk::Stock::CANCEL, Gtk::ResponseType::CANCEL],
+                                        [Gtk::Stock::OPEN, Gtk::ResponseType::ACCEPT]
+                                      ])
   dialog.current_name = file_name
   if dialog.run == Gtk::ResponseType::ACCEPT
     file_name = dialog.filename
     File.open(file_name, "wb") {|io|
-      io.write(buffer.serialize(buffer, format, buffer.start_iter, buffer.end_iter))
+      data = buffer.serialize(buffer, format, buffer.start_iter, buffer.end_iter)
+      io.write(data.pack("C*"))
     }
   end
   dialog.destroy
 end
 
-toolbar.append(Gtk::Stock::CLEAR, "Clear all") do
-  buffer.delete(buffer.start_iter, buffer.end_iter)
-end
-toolbar.append_space
-toolbar.append(Gtk::Stock::SELECT_COLOR, "Color the region") do
-  dialog = Gtk::ColorSelectionDialog.new("Color the region")
+button_clear = Gtk::ToolButton.new(:icon_widget => nil, :label => "Clear all",:stock_id => Gtk::Stock::CLEAR)
+button_clear.signal_connect("clicked") { buffer.delete(buffer.start_iter, buffer.end_iter) }
+toolbar.insert(button_clear, 0)
+
+button_color = Gtk::ToolButton.new(:icon_widget => nil, :label => "Color the region",:stock_id => Gtk::Stock::SELECT_COLOR)
+button_color.signal_connect "clicked" do 
+  dialog = Gtk::ColorChooserDialog.new(:title => "Color the region", :parent => window)
   if dialog.run == Gtk::ResponseType::OK
-    bounds = buffer.selection_bounds
-    color = dialog.colorsel.current_color
-    tag_name = color.to_a.inspect
+    bounds = buffer.selection_bounds # returns an array [test_selected(t/f)? ,Gtk::TextIter, Gtk::TextIter]
+    rgba = dialog.rgba
+    color = Gdk::Color.new(rgba.red*65535, rgba.green*65535, rgba.blue*65535)
+    tag_name = color.to_s 
     unless tag = buffer.tag_table.lookup(tag_name)
-      tag = Gtk::TextTag.new(tag_name).set_foreground_gdk(color)
+      tag = Gtk::TextTag.new(tag_name)
+      tag.set_foreground_gdk(color)
     end
     buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[0], bounds[1])
+    buffer.apply_tag(tag, bounds[1], bounds[2])
   end
   dialog.destroy  
 end
 
-toolbar.append(Gtk::Stock::SELECT_FONT, "Set a font to the region") do
-  dialog = Gtk::FontSelectionDialog.new("Set font to the region")
+button_font = Gtk::ToolButton.new(:label => "Set a font to the region", :stock_id => Gtk::Stock::SELECT_FONT)
+button_font.signal_connect "clicked" do
+  dialog = Gtk::FontChooserDialog.new(:label => "Set font to the region", :parent => window)
   if dialog.run == Gtk::ResponseType::OK
     bounds = buffer.selection_bounds
-    font = dialog.font_name
+    font = dialog.font
     unless tag = buffer.tag_table.lookup(font)
       tag = Gtk::TextTag.new(font).set_font(font)
     end
     buffer.tag_table.add(tag)
-    buffer.apply_tag(tag, bounds[0], bounds[1])
+    buffer.apply_tag(tag, bounds[1], bounds[2])
   end
   dialog.destroy  
 end
 
-toolbar.append_space
-toolbar.append(Gtk::Stock::QUIT, "Quit this application") do
-  Gtk.main_quit
-end
+button_quit = Gtk::ToolButton.new(:label => "Quit this application", :stock_id => Gtk::Stock::QUIT)
+button_quit.signal_connect("clicked") {Gtk.main_quit}
 
-vbox.pack_start(toolbar, false, false).add(Gtk::ScrolledWindow.new.add(textview))
+toolbar.insert(button_font, 0)
+toolbar.insert(button_color,0)
+toolbar.insert(button_open, 0)
+toolbar.insert(button_save, 0)
+toolbar.insert(button_quit, -1)
+toolbar.set_style(Gtk::ToolbarStyle::BOTH)
+vbox.pack_start(toolbar, :expand => false, :fill => false)
+vbox.pack_start(textview, :expand => true, :fill => true)
+
 window.add(vbox)
 window.show_all
+window.set_default_size 400,600
 window.signal_connect("destroy") { Gtk.main_quit }
 
 Gtk.main
