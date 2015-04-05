@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -53,7 +53,9 @@ class TestGtkIconView < Test::Unit::TestCase
     end
 
     def test_not_found
-      not_found_path = Gtk::TreePath.new(@path.indices.first + 1)
+      indices, _ = @path.indices
+      not_found_path = Gtk::TreePath.new
+      not_found_path.append_index(indices.last + 1)
       assert_nil(@icon_view.get_cell_rect(not_found_path))
     end
   end
