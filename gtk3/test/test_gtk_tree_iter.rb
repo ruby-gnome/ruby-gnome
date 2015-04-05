@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -12,30 +12,18 @@
 #
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+# MA  02110-1301  USA
 
-module Gtk
-  class TreeIter
-    def model
-      @model
-    end
+class TestGtkTreeIter < Test::Unit::TestCase
+  include GtkTestUtils
 
-    def model=(model)
-      @model = model
-    end
+  def setup
+    @model = Gtk::ListStore.new(String)
+    @iter = @model.append
+  end
 
-    def get_value(column)
-      @model.get_value(self, column).value
-    end
-    alias_method :[], :get_value
-
-    def set_value(column, value)
-      @model.set_value(self, column, value)
-    end
-    alias_method :[]=, :set_value
-
-    def path
-      @model.get_path(self)
-    end
+  def test_path
+    assert_equal("0", @iter.path.to_s)
   end
 end
