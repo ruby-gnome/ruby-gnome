@@ -76,13 +76,20 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
 {
     GIArgument argument;
     GITypeInfo *type_info;
+    GITypeTag type_tag;
     VALUE rb_field_value;
 
+    type_info = g_field_info_get_type(info);
+    type_tag = g_type_info_get_tag(type_info);
+
     if (!g_field_info_get_field(info, memory, &argument)) {
-        rb_raise(rb_eArgError, "failed to get field value");
+        g_base_info_unref(type_info);
+        rb_raise(rb_eArgError, "failed to get field value: %s[%s]",
+                 g_base_info_get_name(info),
+                 g_type_tag_to_string(type_tag));
+    }
     }
 
-    type_info = g_field_info_get_type(info);
     rb_field_value = GI_ARGUMENT2RVAL(&argument, type_info, NULL, NULL, NULL);
     g_base_info_unref(type_info);
 
