@@ -7,8 +7,8 @@ module Gtk
   define_deprecated_const :FontSelection,          :raise => "Use 'Gtk::FontChooserWidget' instead."
   define_deprecated_const :FontSelectionDialog,    :raise => "Use 'Gtk::FontChooserDialog' instead."
   remove_const(:ColorSelection)
-  define_deprecated_const :ColorSelection          :raise => "Use 'Gtk::ColorChooserWidget' instead."
-  define_deprecated_const :ColorSelectionDialog    :raise => "Use 'Gtk::ColorChooserDialog' instead."
+  define_deprecated_const :ColorSelection,         :raise => "Use 'Gtk::ColorChooserWidget' instead."
+  define_deprecated_const :ColorSelectionDialog,   :raise => "Use 'Gtk::ColorChooserDialog' instead."
   define_deprecated_const :GammaCurve,             :raise => "Don't use this widget anymore."
   define_deprecated_const :HRuler,                 :raise => "Don't use this widget anymore."
   define_deprecated_const :InputDialog,            :raise => "Don't use this widget anymore."
