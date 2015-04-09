@@ -87,6 +87,22 @@ rb_gtk3_builder_connect_func_callback(GtkBuilder *builder,
                GCONNECTFLAGS2RVAL(flags));
 }
 
+static const gchar *
+rb_gtk3_translate_func_callback(const gchar *path,
+                                gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_call;
+    VALUE rb_translated;
+
+    CONST_ID(id_call, "call");
+    rb_translated = rb_funcall(callback_data->rb_callback,
+                               id_call,
+                               1,
+                               CSTR2RVAL(path));
+    return RVAL2CSTR(rb_translated);
+}
+
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
@@ -96,6 +112,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_assistant_page_func_callback;
     } else if (name_equal(info, "BuilderConnectFunc")) {
         return rb_gtk3_builder_connect_func_callback;
+    } else if (name_equal(info, "TranslateFunc")) {
+        return rb_gtk3_translate_func_callback;
     } else {
         return NULL;
     }
