@@ -88,6 +88,11 @@ rb_gi_field_info_get_field_raw(GIFieldInfo *info, gpointer memory)
                  g_base_info_get_name(info),
                  g_type_tag_to_string(type_tag));
     }
+
+    if (type_tag == GI_TYPE_TAG_UTF8) {
+        int offset;
+        offset = g_field_info_get_offset(info);
+        argument.v_string = G_STRUCT_MEMBER(gchar *, memory, offset);
     }
 
     rb_field_value = GI_ARGUMENT2RVAL(&argument, type_info, NULL, NULL, NULL);
