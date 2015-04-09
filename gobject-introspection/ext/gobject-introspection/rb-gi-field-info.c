@@ -103,6 +103,14 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
     RVAL2GI_VALUE_ARGUMENT(&field_value, type_info, rb_field_value, Qnil);
 
     succeeded = g_field_info_set_field(info, memory, &field_value);
+    if (!succeeded) {
+        if (type_tag == GI_TYPE_TAG_UTF8) {
+            int offset;
+            offset = g_field_info_get_offset(info);
+            G_STRUCT_MEMBER(gchar *, memory, offset) = field_value.v_string;
+            succeeded = TRUE;
+        }
+    }
     rb_gi_value_argument_free(&field_value, type_info);
     g_base_info_unref(type_info);
 
