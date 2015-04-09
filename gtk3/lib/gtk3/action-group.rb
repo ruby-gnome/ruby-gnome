@@ -14,21 +14,13 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-class TestGtkActionGroup < Test::Unit::TestCase
-  def setup
-    @group = Gtk::ActionGroup.new("Ruby/GTK3")
-  end
+module Gtk
+  class ActionGroup
+    alias_method :translate_string_raw, :translate_string
+    def translate_string(string)
+      return nil if string.nil?
 
-  def test_set_translate_func
-    @group.set_translate_func do |message|
-      "#{message} (translated)"
-    end
-    assert_equal("hello (translated)", @group.translate_string("hello"))
-  end
-
-  sub_test_case("#translate_string") do
-    test("nil") do
-      assert_nil(@group.translate_string(nil))
+      translate_string_raw(string)
     end
   end
 end
