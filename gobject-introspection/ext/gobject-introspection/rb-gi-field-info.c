@@ -95,9 +95,11 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
 {
     GIArgument field_value;
     GITypeInfo *type_info;
+    GITypeTag type_tag;
     gboolean succeeded;
 
     type_info = g_field_info_get_type(info);
+    type_tag = g_type_info_get_tag(type_info);
     RVAL2GI_VALUE_ARGUMENT(&field_value, type_info, rb_field_value, Qnil);
 
     succeeded = g_field_info_set_field(info, memory, &field_value);
@@ -105,7 +107,10 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
     g_base_info_unref(type_info);
 
     if (!succeeded) {
-        rb_raise(rb_eArgError, "failed to set field value");
+        rb_raise(rb_eArgError,
+                 "failed to set field value: %s[%s]",
+                 g_base_info_get_name(info),
+                 g_type_tag_to_string(type_tag));
     }
 }
 
