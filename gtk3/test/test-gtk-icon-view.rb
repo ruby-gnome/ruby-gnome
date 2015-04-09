@@ -45,7 +45,7 @@ class TestGtkIconView < Test::Unit::TestCase
       iter = model.append
       model.set_values(iter, ["label", nil])
       @path = iter.path
-      @icon_view = Gtk::IconView.new(model)
+      @icon_view = Gtk::IconView.new(:model => model)
     end
 
     def test_found
