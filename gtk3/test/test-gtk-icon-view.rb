@@ -20,22 +20,22 @@ class TestGtkIconView < Test::Unit::TestCase
   include GtkTestUtils
 
   sub_test_case(".new") do
-      test "no arguments" do
-        icon_view = Gtk::IconView.new
-        assert_nil(icon_view.model)
-      end
+    test "no arguments" do
+      icon_view = Gtk::IconView.new
+      assert_nil(icon_view.model)
+    end
 
-      test ":model" do
-        model = Gtk::ListStore.new(Gdk::Pixbuf, String)
-        icon_view = Gtk::IconView.new(:model => model)
-        assert_equal(model, icon_view.model)
-      end
+    test ":model" do
+      model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+      icon_view = Gtk::IconView.new(:model => model)
+      assert_equal(model, icon_view.model)
+    end
 
-      test ":area" do
-        area = Gtk::CellAreaBox.new
-        icon_view = Gtk::IconView.new(:area => area)
-        assert_equal(area, icon_view.area)
-      end
+    test ":area" do
+      area = Gtk::CellAreaBox.new
+      icon_view = Gtk::IconView.new(:area => area)
+      assert_equal(area, icon_view.area)
+    end
   end
 
   class TestGetCellRect < self
