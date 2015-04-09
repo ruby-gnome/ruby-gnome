@@ -77,7 +77,7 @@ module GObjectIntrospection
 
     def define_module_function(target_module, name, function_info)
       unlock_gvl = should_unlock_gvl?(function_info, target_module)
-      prepare = lambda do |argments, &block|
+      prepare = lambda do |arguments, &block|
         arguments, block = build_arguments(function_info, arguments, &block)
         method_name = "#{target_module}\#.#{name}"
         validate_arguments(function_info, method_name, arguments)
