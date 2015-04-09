@@ -16,7 +16,6 @@
 
 module Gtk
   class IconView
-    alias_method :get_cell_rect_raw, :get_cell_rect
     alias_method :initialize_raw, :initialize
     def initialize(options={})
       model = options[:model]
@@ -30,6 +29,8 @@ module Gtk
         initialize_new
       end
     end
+
+    alias_method :get_cell_rect_raw, :get_cell_rect
     def get_cell_rect(path, cell=nil)
       exist, rect = get_cell_rect_raw(path, cell)
       if exist
