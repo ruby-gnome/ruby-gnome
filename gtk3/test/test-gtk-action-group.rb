@@ -31,4 +31,18 @@ class TestGtkActionGroup < Test::Unit::TestCase
       assert_nil(@group.translate_string(nil))
     end
   end
+
+  sub_test_case("#add_action") do
+    test("no options") do
+      action = Gtk::Action.new("run")
+      @group.add_action(action)
+      assert_nil(action.accel_path)
+    end
+
+    test(":accelerator") do
+      action = Gtk::Action.new("run")
+      @group.add_action(action, :accelerator => "<Control>a")
+      assert_equal("<Actions>/Ruby/GTK3/run", action.accel_path)
+    end
+  end
 end

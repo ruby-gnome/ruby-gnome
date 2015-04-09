@@ -16,6 +16,17 @@
 
 module Gtk
   class ActionGroup
+    alias_method :add_action_raw, :add_action
+    def add_action(action, options={})
+      accelerator = options[:accelerator]
+
+      if accelerator
+        add_action_with_accel(action, accelerator)
+      else
+        add_action_raw(action)
+      end
+    end
+
     alias_method :translate_string_raw, :translate_string
     def translate_string(string)
       return nil if string.nil?
