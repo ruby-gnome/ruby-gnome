@@ -15,7 +15,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class IconView 
+  class IconView
     alias_method :get_cell_rect_raw, :get_cell_rect
     alias_method :initialize_raw, :initialize
     def initialize(options={})
