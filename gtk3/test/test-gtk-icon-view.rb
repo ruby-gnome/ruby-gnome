@@ -26,7 +26,7 @@ class TestGtkIconView < Test::Unit::TestCase
     end
 
     test ":model" do
-      model = Gtk::ListStore.new(Gdk::Pixbuf, String)
+      model = Gtk::ListStore.new(String)
       icon_view = Gtk::IconView.new(:model => model)
       assert_equal(model, icon_view.model)
     end
