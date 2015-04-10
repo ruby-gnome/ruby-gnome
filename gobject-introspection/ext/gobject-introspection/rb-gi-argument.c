@@ -31,12 +31,17 @@ interface_struct_to_ruby(gpointer object,
     const char *name;
     VALUE rb_module;
     VALUE rb_class;
+    gpointer copied_object;
+    size_t object_size;
 
     namespace = g_base_info_get_namespace(interface_info);
     name = g_base_info_get_name(interface_info);
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
     rb_class = rb_const_get(rb_module, rb_intern(name));
-    return Data_Wrap_Struct(rb_class, NULL, NULL, object);
+    object_size = g_struct_info_get_size(interface_info);
+    copied_object = xmalloc(object_size);
+    memcpy(copied_object, object, object_size);
+    return Data_Wrap_Struct(rb_class, NULL, xfree, copied_object);
 }
 
 static gpointer
