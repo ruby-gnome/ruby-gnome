@@ -188,6 +188,15 @@ module Gtk
       end
     end
 
+    def field_name(field_info, klass)
+      case klass.name
+      when "Gtk::AccelKey"
+        super.gsub(/\Aaccel_/, "")
+      else
+        super
+      end
+    end
+
     def load_method_info(info, klass, method_name)
       case klass.name
       when "Gtk::Assistant"
