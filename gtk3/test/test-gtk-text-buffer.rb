@@ -135,5 +135,17 @@ class TestGtkTextBuffer < Test::Unit::TestCase
         assert_nil(@text_buffer.selection_bounds)
       end
     end
+
+    sub_test_case "#create_tag" do
+      test "default" do
+        tag = @text_buffer.create_tag
+        assert_nil(tag.name)
+      end
+
+      test "named" do
+        tag = @text_buffer.create_tag("new-tag")
+        assert_equal("new-tag", tag.name)
+      end
+    end
   end
 end

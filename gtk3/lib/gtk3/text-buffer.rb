@@ -18,11 +18,15 @@ module Gtk
   class TextBuffer
     def create_tag(tag_name=nil, properties={})
       tag = TextTag.new(tag_name)
+      succeeded = tag_table.add(tag)
+      return nil unless succeeded
+
       properties.each do |property|
         key, value = property
         tag.set_property(key, value)
       end
-      tag_table.add(tag)
+
+      tag
     end
 
     # prevent collision with deprecated methods.
