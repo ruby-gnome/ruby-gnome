@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,10 +27,18 @@ class TestTerminal < Test::Unit::TestCase
     assert_equal(font, @terminal.font)
   end
 
-  def test_fork_command
-    pid = @terminal.fork_command(:argv => ["echo"])
-    assert do
-      pid > 0
+  sub_test_case "#fork_command" do
+    test "success" do
+      pid = @terminal.fork_command(:argv => ["echo"])
+      assert do
+        pid > 0
+      end
+    end
+
+    test "failure" do
+      assert_raise(GLib::SpawnError) do
+        @terminal.fork_command(:argv => ["nonexistent"])
+      end
     end
   end
 end

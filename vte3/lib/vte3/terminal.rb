@@ -29,7 +29,11 @@ module Vte
                                          argv,
                                          envv,
                                          spawn_flags)
-      pid
+      if succeeded
+        pid
+      else
+        nil
+      end
     end
   end
 end
