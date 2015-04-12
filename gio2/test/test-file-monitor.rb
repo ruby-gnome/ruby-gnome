@@ -24,9 +24,8 @@ class TestFileMonitor < Test::Unit::TestCase
 
   class Event < self
     def test_file_monitor_event
-      assert_nothing_raised do
-        Gio::FileMonitorEvent.new(Gio::FileMonitorEvent::CHANGED)
-      end
+      assert_equal("changed",
+                   Gio::FileMonitorEvent::CHANGED.nick)
     end
   end
 end
