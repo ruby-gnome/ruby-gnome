@@ -30,6 +30,7 @@ module Gtk
       end
     end
 
+    if method_defined?(:get_cell_rect)
     alias_method :get_cell_rect_raw, :get_cell_rect
     def get_cell_rect(path, cell=nil)
       exist, rect = get_cell_rect_raw(path, cell)
@@ -38,6 +39,7 @@ module Gtk
       else
         nil
       end
+    end
     end
   end
 end
