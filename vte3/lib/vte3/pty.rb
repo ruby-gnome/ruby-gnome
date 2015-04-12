@@ -1,4 +1,4 @@
-# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
+# Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -15,33 +15,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Vte
-  class Loader < GObjectIntrospection::Loader
-    private
-    def load_function_info(info)
-      name = info.name
-      case name
-      when "init"
-        # ignore
+  class Pty
+    alias_method :size_raw, :size
+    def size
+      succeeded, rows, columns = size_raw
+      if succeeded
+        [rows, columns]
       else
-        super
+        nil
       end
-    end
-
-    def post_load(repository, namespace)
-      require_libraries
-    end
-
-    def require_libraries
-      require "vte3/pty"
-      require "vte3/terminal"
-
-      require "vte3/deprecated"
-    end
-
-    def initialize_post(object)
-      super
-      return unless object.is_a?(GLib::Object)
-      self.class.reference_gobject(object, :sink => true)
     end
   end
 end

@@ -30,7 +30,7 @@ class TestPty < Test::Unit::TestCase
     row = 80
     col = 24
     @pty.set_size(row, col)
-    assert_equal([true, row, col], @pty.size?)
+    assert_equal([row, col], @pty.size)
   end
 
   def test_term
