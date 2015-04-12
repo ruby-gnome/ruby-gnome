@@ -60,6 +60,7 @@ module Gtk
         remove_method(:const_missing)
         remove_method(:method_missing)
       end
+      Gio.init if Gio.respond_to?(:init)
       Gdk.init if Gdk.respond_to?(:init)
       loader = Loader.new(self, argv)
       loader.load("Gtk")
