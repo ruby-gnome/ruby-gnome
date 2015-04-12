@@ -228,8 +228,12 @@ module GObjectIntrospection
       end
     end
 
+    def field_name(field_info, klass)
+      field_info.name
+    end
+
     def load_field(info, i, field_info, klass)
-      name = field_info.name
+      name = field_name(field_info, klass)
       flags = field_info.flags
 
       if flags.readable?
