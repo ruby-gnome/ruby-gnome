@@ -57,8 +57,6 @@ end
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
 
-$VERBOSE = false # TODO: remove me
-
 $LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
 require "gobject-introspection-test-utils"
 
