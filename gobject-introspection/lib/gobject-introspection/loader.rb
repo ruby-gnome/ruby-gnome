@@ -238,6 +238,7 @@ module GObjectIntrospection
         else
           reader_method_name = name
         end
+        remove_existing_method(klass, reader_method_name)
         klass.__send__(:define_method, reader_method_name) do ||
           info.get_field_value(self, i)
         end
