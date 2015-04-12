@@ -11,7 +11,7 @@ require "gtk3"
 window = Gtk::Window.new("Gtk::LinkButton sample")
 window.signal_connect("destroy"){Gtk.main_quit}
 
-vbox = Gtk::Box.new(:vertical,0)
+vbox = Gtk::Box.new(:vertical)
 
 # URI only
 button1 = Gtk::LinkButton.new("http://ruby-gnome2.sourceforge.jp/")
