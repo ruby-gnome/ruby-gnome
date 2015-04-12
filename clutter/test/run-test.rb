@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -43,8 +43,6 @@ end
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
-
-$VERBOSE = false # TODO: remove me
 
 $LOAD_PATH.unshift(File.join(gobject_introspection_base, "test"))
 require "gobject-introspection-test-utils"
