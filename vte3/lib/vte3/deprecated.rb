@@ -31,11 +31,5 @@ module Vte
     define_deprecated_method :padding, :warn => "Use 'inner-border' style property." do |_self|
       [0, 0]
     end
-    define_deprecated_method :char_descent, :warn => "Don't use this method." do |_self|
-      0
-    end
-    define_deprecated_method :char_ascent, :warn => "Don't use this method." do |_self|
-      0
-    end
   end
 end
