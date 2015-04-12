@@ -17,9 +17,8 @@
 class TestFileMonitor < Test::Unit::TestCase
   class Flags < self
     def test_file_monitor_flags
-      assert_nothing_raised do
-        Gio::FileMonitorFlags.new(Gio::FileMonitorFlags::SEND_MOVED)
-      end
+      assert_equal("send-moved",
+                   Gio::FileMonitorFlags::SEND_MOVED.nick)
     end
   end
 
