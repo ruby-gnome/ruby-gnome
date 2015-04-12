@@ -185,7 +185,6 @@ module Gio
       case klass.name
       when "Gio::File"
         load_function_infos_file(infos, klass)
-        super
       else
         super
       end
