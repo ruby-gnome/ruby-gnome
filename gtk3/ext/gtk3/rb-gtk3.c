@@ -103,6 +103,33 @@ rb_gtk3_translate_func_callback(const gchar *path,
     return RVAL2CSTR(rb_translated);
 }
 
+static gboolean
+rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
+                                         GtkTreePath *path,
+                                         GtkTreeIter *iter,
+                                         gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_call;
+    VALUE rb_gtk_module;
+    VALUE rb_tree_iter_class;
+    VALUE rb_iter;
+    VALUE rb_stop;
+
+    CONST_ID(id_call, "call");
+    rb_gtk_module = rb_const_get(rb_cObject, rb_intern("Gtk"));
+    rb_tree_iter_class = rb_const_get(rb_gtk_module, rb_intern("TrteeIter"));
+    rb_iter = Data_Wrap_Struct(rb_tree_iter_class, NULL, NULL, iter);
+    rb_stop = rb_funcall(callback_data->rb_callback,
+                         id_call,
+                         3,
+                         BOXED2RVAL(model, GTK_TYPE_TREE_MODEL),
+                         BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+                         rb_iter);
+
+    return RVAL2CBOOL(rb_stop);
+}
+
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
@@ -114,6 +141,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_builder_connect_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
         return rb_gtk3_translate_func_callback;
+    } else if (name_equal(info, "TreeModelForeachFunc")) {
+        return rb_gtk3_tree_model_foreach_func_callback;
     } else {
         return NULL;
     }
