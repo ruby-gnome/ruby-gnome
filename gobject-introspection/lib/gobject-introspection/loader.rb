@@ -458,12 +458,15 @@ module GObjectIntrospection
       define_equal_style_setter(info, klass, method_name)
     end
 
+    def remove_existing_method(klass, method_name)
+      return unless klass.method_defined?(method_name)
+      return unless klass.instance_method(method_name).owner == klass
+      klass.__send__(:remove_method, method_name)
+    end
+
     def define_method(info, klass, method_name)
       unlock_gvl = should_unlock_gvl?(info, klass)
-      if klass.method_defined?(method_name) and
-          klass.instance_method(method_name).owner == klass
-        klass.__send__(:remove_method, method_name)
-      end
+      remove_existing_method(klass, method_name)
       function_info_p = (info.class == FunctionInfo)
       no_return_value_p = (info.return_type.tag == TypeTag::VOID)
       setter_method_p = (/\Aset_/ === method_name and no_return_value_p)
@@ -496,10 +499,7 @@ module GObjectIntrospection
     def define_equal_style_setter(info, klass, method_name)
       if /\Aset_/ =~ method_name and info.n_args == 1
         setter_method_name = "#{$POSTMATCH}="
-        if klass.method_defined?(setter_method_name) and
-            klass.instance_method(setter_method_name).owner == klass
-          klass.__send__(:remove_method, setter_method_name)
-        end
+        remove_existing_method(klass, setter_method_name)
         klass.__send__(:alias_method, setter_method_name, method_name)
       end
     end
