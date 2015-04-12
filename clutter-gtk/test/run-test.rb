@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,7 @@ pango_base = File.join(ruby_gnome2_base, "pango")
 gdk_pixbuf_base = File.join(ruby_gnome2_base, "gdk_pixbuf2")
 cairo_gobject_base = File.join(ruby_gnome2_base, "cairo-gobject")
 gobject_introspection_base = File.join(ruby_gnome2_base, "gobject-introspection")
+gio_base = File.join(ruby_gnome2_base, "gio2")
 clutter_base = File.join(ruby_gnome2_base, "clutter")
 gdk3_base = File.join(ruby_gnome2_base, "gdk3")
 gtk3_base = File.join(ruby_gnome2_base, "gtk3")
@@ -39,6 +40,7 @@ modules = [
   [gdk_pixbuf_base, "gdk_pixbuf2"],
   [cairo_gobject_base, "cairo-gobject"],
   [gobject_introspection_base, "gobject-introspection"],
+  [gio_base, "gio2"],
   [clutter_base, "clutter"],
   [gdk3_base, "gdk3"],
   [gtk3_base, "gtk3"],
