@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -54,8 +54,6 @@ end
 
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
-
-$VERBOSE = false # TODO: remove me
 
 $LOAD_PATH.unshift(File.join(vte3_base, "test"))
 require "vte3-test-utils"
