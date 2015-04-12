@@ -97,10 +97,9 @@ class TestGtkListStore < Test::Unit::TestCase
     end
     iter = @store.iter_first
     while @store.remove(iter); end
-    iter = nil
     assert_equal(0, @store.to_enum(:each).to_a.size)
     GC.start
-    assert_equal(n_iterators, count_objects(Gtk::TreeIter))
+    assert_equal(n_iterators + 1, count_objects(Gtk::TreeIter))
   end
 
   private
