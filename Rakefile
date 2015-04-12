@@ -161,6 +161,7 @@ gnome2_packages = gtk2_packages + gtk3_packages + [
   "clutter-gstreamer",
   "webkit-gtk",
   "webkit-gtk2",
+  "webkit2-gtk",
 ]
 gnome2_packages = gnome2_packages.uniq
 
