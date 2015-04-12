@@ -41,8 +41,6 @@ end
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
 
-$VERBOSE = false # TODO: remove me
-
 $LOAD_PATH.unshift(File.join(gio2_base, "test"))
 require "gio2-test-utils"
 
