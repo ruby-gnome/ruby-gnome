@@ -70,6 +70,7 @@ class TestHandle < Test::Unit::TestCase
       end
 
       def test_no_option
+        only_rsvg_version(2, 40, 3)
         assert_raise(RSVG::Error::Failed) do
           RSVG::Handle.new_from_file(@large_svg_path)
         end
