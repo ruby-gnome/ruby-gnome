@@ -31,9 +31,9 @@
     (rb_gi_base_info_to_ruby_with_unref((GIBaseInfo *)(info)))
 #define RVAL2GI_BASE_INFO(rb_object) (rb_gi_base_info_from_ruby(rb_object))
 
-#define GI_ARGUMENT2RVAL(argument, type_info,                           \
+#define GI_ARGUMENT2RVAL(argument, duplicate, type_info,                \
                          in_args, out_args, args_metadata)              \
-    (rb_gi_argument_to_ruby((argument), (type_info),                    \
+    (rb_gi_argument_to_ruby((argument), (duplicate), (type_info),       \
                             (in_args), (out_args), (args_metadata)))
 #define GI_OUT_ARGUMENT2RVAL(argument, arg_info,                        \
                              in_args, out_args, args_metadata)          \
@@ -104,6 +104,7 @@ VALUE       rb_gi_base_info_to_ruby_with_unref(GIBaseInfo *info);
 GIBaseInfo *rb_gi_base_info_from_ruby         (VALUE rb_info);
 
 VALUE       rb_gi_argument_to_ruby            (GIArgument     *argument,
+                                               gboolean        duplicate,
                                                GITypeInfo     *type_info,
                                                GArray         *in_args,
                                                GArray         *out_args,

@@ -24,6 +24,7 @@ static VALUE rb_cGLibValue = Qnil;
 
 static VALUE
 interface_struct_to_ruby(gpointer object,
+                         gboolean duplicate,
                          G_GNUC_UNUSED GITypeInfo *type_info,
                          GIBaseInfo *interface_info)
 {
@@ -31,17 +32,21 @@ interface_struct_to_ruby(gpointer object,
     const char *name;
     VALUE rb_module;
     VALUE rb_class;
-    gpointer copied_object;
-    size_t object_size;
+    gpointer target_object = object;
+    RUBY_DATA_FUNC free_func = NULL;
 
     namespace = g_base_info_get_namespace(interface_info);
     name = g_base_info_get_name(interface_info);
     rb_module = rb_const_get(rb_cObject, rb_intern(namespace));
     rb_class = rb_const_get(rb_module, rb_intern(name));
-    object_size = g_struct_info_get_size(interface_info);
-    copied_object = xmalloc(object_size);
-    memcpy(copied_object, object, object_size);
-    return Data_Wrap_Struct(rb_class, NULL, xfree, copied_object);
+    if (duplicate) {
+        size_t object_size;
+        object_size = g_struct_info_get_size(interface_info);
+        target_object = xmalloc(object_size);
+        memcpy(target_object, object, object_size);
+        free_func = xfree;
+    }
+    return Data_Wrap_Struct(rb_class, NULL, free_func, target_object);
 }
 
 static gpointer
@@ -83,6 +88,7 @@ array_c_to_ruby_sized_interface(gconstpointer *elements,
             for (i = 0; i < n_elements; i++) {
                 rb_ary_push(rb_array,
                             interface_struct_to_ruby((gpointer)elements[i],
+                                                     FALSE,
                                                      element_type_info,
                                                      interface_info));
             }
@@ -365,7 +371,9 @@ rb_gi_array_argument_to_ruby(GIArgument *array_argument,
 }
 
 static VALUE
-interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
+interface_to_ruby(GIArgument *argument,
+                  gboolean duplicate,
+                  GITypeInfo *type_info)
 {
     VALUE rb_interface;
     GIBaseInfo *interface_info;
@@ -392,6 +400,7 @@ interface_to_ruby(GIArgument *argument, GITypeInfo *type_info)
     case GI_INFO_TYPE_STRUCT:
         if (gtype == G_TYPE_NONE) {
             rb_interface = interface_struct_to_ruby(argument->v_pointer,
+                                                    duplicate,
                                                     type_info,
                                                     interface_info);
         } else if (gtype == G_TYPE_BYTES) {
@@ -712,6 +721,7 @@ rb_gi_argument_to_ruby_gslist(GIArgument *argument, GITypeInfo *type_info)
 
 VALUE
 rb_gi_argument_to_ruby(GIArgument *argument,
+                       gboolean duplicate,
                        GITypeInfo *type_info,
                        GArray *in_args,
                        GArray *out_args,
@@ -777,12 +787,14 @@ rb_gi_argument_to_ruby(GIArgument *argument,
         rb_argument = CSTR2RVAL(argument->v_string);
         break;
     case GI_TYPE_TAG_ARRAY:
-        rb_argument = rb_gi_argument_to_ruby_array(argument, type_info,
-                                                   in_args, out_args,
+        rb_argument = rb_gi_argument_to_ruby_array(argument,
+                                                   type_info,
+                                                   in_args,
+                                                   out_args,
                                                    args_metadata);
         break;
     case GI_TYPE_TAG_INTERFACE:
-        rb_argument = interface_to_ruby(argument, type_info);
+        rb_argument = interface_to_ruby(argument, duplicate, type_info);
         break;
     case GI_TYPE_TAG_GLIST:
         rb_argument = rb_gi_argument_to_ruby_glist(argument, type_info);
@@ -958,6 +970,7 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
     GIArgument normalized_argument;
     GITypeInfo type_info;
     GITypeTag type_tag;
+    gboolean duplicate = FALSE;
 
     memset(&normalized_argument, 0, sizeof(GIArgument));
     g_arg_info_load_type(arg_info, &type_info);
@@ -1011,6 +1024,7 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
     case GI_TYPE_TAG_GSLIST:
     case GI_TYPE_TAG_GHASH:
         if (g_arg_info_is_caller_allocates(arg_info)) {
+            duplicate = TRUE;
             normalized_argument.v_pointer = argument->v_pointer;
         } else {
             normalized_argument.v_pointer = *((gpointer *)(argument->v_pointer));
@@ -1027,8 +1041,12 @@ rb_gi_out_argument_to_ruby(GIArgument *argument,
         break;
     }
 
-    return rb_gi_argument_to_ruby(&normalized_argument, &type_info,
-                                  in_args, out_args, args_metadata);
+    return rb_gi_argument_to_ruby(&normalized_argument,
+                                  duplicate,
+                                  &type_info,
+                                  in_args,
+                                  out_args,
+                                  args_metadata);
 }
 
 void
@@ -1426,7 +1444,7 @@ rb_gi_return_argument_to_ruby(GICallableInfo *callable_info,
     }
 
     g_callable_info_load_return_type(callable_info, &return_value_info);
-    rb_argument = rb_gi_argument_to_ruby(argument, &return_value_info,
+    rb_argument = rb_gi_argument_to_ruby(argument, FALSE, &return_value_info,
                                          in_args, out_args, args_metadata);
     switch (g_callable_info_get_caller_owns(callable_info)) {
     case GI_TRANSFER_NOTHING:
