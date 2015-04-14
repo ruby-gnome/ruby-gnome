@@ -2,7 +2,7 @@
 =begin
   composited-windows.rb - Sample script translated from http://library.gnome.org/devel/gdk/unstable/gdk-Windows.html#composited-window-example
 
-  Copyright (c) 2008 Ruby-GNOME2 Project Team
+  Copyright (c) 2008-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 

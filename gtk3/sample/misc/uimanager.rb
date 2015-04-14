@@ -2,6 +2,7 @@
   uimanager.rb - 
 
   Copyright (C) 2004-2006 Masao Mutoh
+  Copyright (C) 2015 Ruby-GNOME2 Project Team
 
   Original version is demos/gtk-demo/ui_manager.c.
   

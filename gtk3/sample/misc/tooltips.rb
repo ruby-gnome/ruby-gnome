@@ -3,7 +3,7 @@
   tooltips.rb - Demonstrates the new tooltip API of Gtk+ 2.12;
                 rg2 translation from gtk/tests/testtooltips.c.
 
-  Copyright (c) 2007 Ruby-GNOME2 Project Team 
+  Copyright (c) 2007-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: tooltips.rb,v 1.1 2007/07/10 13:17:34 ggc Exp $

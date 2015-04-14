@@ -4,7 +4,7 @@
 
   This sample refers gtk/tests/teststatusicon.c of GTK+-2.10.x.
 
-  Copyright (c) 2006 Ruby-GNOME2 Project Team
+  Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: statusicon.rb,v 1.1 2006/11/17 18:12:41 mutoh Exp $
