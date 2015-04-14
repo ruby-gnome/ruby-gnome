@@ -14,7 +14,7 @@ module Demo
     def initialize
       super('Interface Builder')
 
-      available = Gtk.check_version?(2, 12, 0)
+      available = Gtk::Version.or_later?(2, 12, 0)
       if available
         label = Gtk::Label.new("Build an interface from XML description.")
       else

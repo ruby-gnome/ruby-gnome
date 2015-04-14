@@ -11,7 +11,7 @@
 
 require 'gtk3'
 
-if str = Gtk.check_version(2, 12, 0)
+if str = Gtk::Version.or_later?(2, 12, 0)
     puts "This sample requires GTK+ 2.12.0 or later"
     puts str
     exit
