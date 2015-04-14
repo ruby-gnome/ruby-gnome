@@ -63,6 +63,7 @@ module Clutter
       require "clutter/text"
       require "clutter/text-buffer"
       require "clutter/threads"
+      require "clutter/version"
     end
   end
 
@@ -95,6 +96,8 @@ module Clutter
       @base_module.const_set("Threads", @threads_module)
       @feature_module = Module.new
       @base_module.const_set("Feature", @feature_module)
+      @version_module = Module.new
+      @base_module.const_set("Version", @version_module)
     end
 
     def post_load(repository, namespace)
@@ -161,6 +164,8 @@ module Clutter
       when /\AKEY_/
         @key_constants[info.name] = true
         @keys_module.const_set(info.name, info.value)
+      when /_VERSION\z/
+        @version_module.const_set($PREMATCH, info.value)
       else
         @other_constant_infos << info
       end
