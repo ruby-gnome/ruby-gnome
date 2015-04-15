@@ -13,9 +13,8 @@ require 'gtk3'
 RADIUS = 80
 N_WORDS = 16
 
-if str = Gtk::Version.or_later?(2, 6, 0)
+unless Gtk::Version.or_later?(2, 6, 0)
   puts "This sample requires GTK+ 2.6.0 or later"
-  puts str
   exit
 end
 
