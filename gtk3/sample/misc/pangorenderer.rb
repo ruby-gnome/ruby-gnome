@@ -51,7 +51,7 @@ win.signal_connect("draw") do
     angle = 360 * i / N_WORDS.to_f
     color = Gdk::Color.new(65535 * rand, 65535 * rand, 65535 * rand)
     renderer.set_override_color(Pango::Renderer::PART_FOREGROUND, color)
-    
+
     rotated_matrix.rotate!(angle)
     context.set_matrix(rotated_matrix)
     layout.context_changed

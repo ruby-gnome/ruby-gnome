@@ -1,11 +1,11 @@
 =begin
-  uimanager.rb - 
+  uimanager.rb -
 
   Copyright (C) 2004-2006 Masao Mutoh
   Copyright (C) 2015 Ruby-GNOME2 Project Team
 
   Original version is demos/gtk-demo/ui_manager.c.
-  
+
   This program is licenced under the same licence as Ruby-GNOME2.
 
   $Id: uimanager.rb,v 1.6 2007/07/12 14:53:09 ggc Exp $
@@ -61,7 +61,7 @@ ui_info = %Q[
   </toolbar>
 </ui>]
 
-callback = Proc.new {|actiongroup, action| 
+callback = Proc.new {|actiongroup, action|
   puts "`#{action.name}' is clicked. "
   if action.is_a? Gtk::ToggleAction
     puts "active? = #{action.active?}"
@@ -145,4 +145,3 @@ window.set_default_size(100, 100).show_all
 window.signal_connect("destroy"){Gtk.main_quit}
 
 Gtk.main
-

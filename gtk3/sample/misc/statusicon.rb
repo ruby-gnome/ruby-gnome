@@ -29,7 +29,7 @@ class StatusIconSample < Gtk::StatusIcon
     signal_connect("activate") {icon_activated}
     signal_connect("popup-menu") do |w, button, activate_time|
       menu = Gtk::Menu.new
-      
+
       menuitem = Gtk::MenuItem.new("Quit")
       menuitem.signal_connect("activate") do
         set_visible(false)
@@ -72,10 +72,10 @@ class StatusIconSample < Gtk::StatusIcon
                                        :buttons_type => Gtk::MessageDialog::ButtonsType::CLOSE,
                                        :message => "You wanna test the status icon?")
       @dialog.window_position = Gtk::Window::Position::CENTER
-      
+
       @dialog.signal_connect("response") {@dialog.hide}
       @dialog.signal_connect("delete_event") {@dialog.hide_on_delete}
-      
+
       toggle = Gtk::ToggleButton.new("_Show the icon")
       @dialog.child.pack_end(toggle, :expand => true, :fill => true, :padding => 6)
       toggle.active = visible?
@@ -90,7 +90,7 @@ class StatusIconSample < Gtk::StatusIcon
         if @timeout and @timeout > 0
           GLib::Source.remove(@timeout)
           @timeout = 0
-        else 
+        else
           @timeout = timeout_func
         end
       end
@@ -101,5 +101,5 @@ class StatusIconSample < Gtk::StatusIcon
 end
 
 StatusIconSample.new
-  
+
 Gtk.main
