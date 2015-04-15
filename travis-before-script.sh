@@ -23,7 +23,8 @@ if ! apt-cache show gir1.2-gstreamer-1.0 > /dev/null 2>&1; then
     sudo add-apt-repository --yes ppa:gstreamer-developers/ppa
 fi
 sudo apt-get update -qq
-# TODO: we'll use gir1.2-clutter-gst-2.0 if it is supported in Travis CI.
+# TODO: we'll use gir1.2-clutter-gst-2.0 and gir1.2-webkit2-3.0
+#       if it is supported in Travis CI.
 sudo apt-get install -qq -y \
     libgirepository1.0-dev \
     gstreamer1.0-plugins-good \
