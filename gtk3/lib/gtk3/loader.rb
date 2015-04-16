@@ -243,6 +243,8 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::Container"
+        method_name = method_name.gsub("forall", "each_all")
       when "Gtk::IconSet"
         case method_name
         when "render_icon"
