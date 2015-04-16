@@ -17,6 +17,7 @@
 module Gtk
   class Container
     include Enumerable
+    alias_method :each_all, :forall
 
     def <<(widget)
       add(widget)
