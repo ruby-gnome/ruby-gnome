@@ -244,7 +244,10 @@ module Gtk
           return
         end
       when "Gtk::Container"
-        method_name = method_name.gsub("forall", "each_all")
+        case method_name
+        when "forall"
+          method_name = "each_all"
+        end
       when "Gtk::IconSet"
         case method_name
         when "render_icon"
