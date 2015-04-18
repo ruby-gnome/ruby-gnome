@@ -243,6 +243,11 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::Container"
+        case method_name
+        when "forall"
+          method_name = "each_all"
+        end
       when "Gtk::IconSet"
         case method_name
         when "render_icon"
