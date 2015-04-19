@@ -21,7 +21,7 @@
 #include "rb-gtk3.h"
 
 #if GTK_CHECK_VERSION(3, 10, 0)
-#    define GTK_ACTION_GROUP_IS_DEPRECATED
+#    define RB_GTK_ACTION_GROUP_IS_DEPRECATED
 #    define RB_GTK_UI_MANAGER_IS_DEPRECATED
 #endif
 
@@ -153,7 +153,7 @@ rb_gtk3_callback_finder(GIArgInfo *info)
     }
 }
 
-#ifndef GTK_ACTION_GROUP_IS_DEPRECATED
+#ifndef RB_GTK_ACTION_GROUP_IS_DEPRECATED
 static void
 rb_gtk3_action_group_mark(gpointer object)
 {
@@ -208,7 +208,7 @@ Init_gtk3 (void)
 {
     rb_gi_callback_register_finder(rb_gtk3_callback_finder);
 
-#ifndef GTK_ACTION_GROUP_IS_DEPRECATED
+#ifndef RB_GTK_ACTION_GROUP_IS_DEPRECATED
     rbgobj_register_mark_func(GTK_TYPE_ACTION_GROUP, rb_gtk3_action_group_mark);
 #endif
     rbgobj_register_mark_func(GTK_TYPE_CONTAINER, rb_gtk3_container_mark);
