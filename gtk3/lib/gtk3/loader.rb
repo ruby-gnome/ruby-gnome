@@ -103,6 +103,7 @@ module Gtk
       require "gtk3/style-context"
       require "gtk3/style-properties"
       require "gtk3/text-buffer"
+      require "gtk3/text-tag-table"
       require "gtk3/toggle-action"
       require "gtk3/tool-button"
       require "gtk3/tree-iter"
