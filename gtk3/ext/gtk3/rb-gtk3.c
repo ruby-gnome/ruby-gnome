@@ -148,8 +148,25 @@ rb_gtk3_callback_finder(GIArgInfo *info)
     }
 }
 
+static void
+rb_gtk3_container_mark_callback(GtkWidget *widget,
+                                G_GNUC_UNUSED gpointer data)
+{
+    rbgobj_gc_mark_instance(widget);
+}
+
+static void
+rb_gtk3_container_mark(gpointer object)
+{
+    gtk_container_forall(GTK_CONTAINER(object),
+                         rb_gtk3_container_mark_callback,
+                         NULL);
+}
+
 void
 Init_gtk3 (void)
 {
     rb_gi_callback_register_finder(rb_gtk3_callback_finder);
+
+    rbgobj_register_mark_func(GTK_TYPE_CONTAINER, rb_gtk3_container_mark);
 }
