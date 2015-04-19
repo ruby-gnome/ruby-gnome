@@ -170,6 +170,18 @@ rb_gtk3_action_mark(gpointer object)
 }
 #endif
 
+static void
+rb_gtk3_builder_mark(gpointer object)
+{
+    GtkBuilder *builder;
+    GSList *objects;
+
+    builder = GTK_BUILDER(object);
+    objects = gtk_builder_get_objects(builder);
+    g_slist_foreach(objects, (GFunc)rbgobj_gc_mark_instance, NULL);
+    g_slist_free(objects);
+}
+
 #ifndef RB_GTK_ACTION_GROUP_IS_DEPRECATED
 static void
 rb_gtk3_action_group_mark(gpointer object)
@@ -228,6 +240,7 @@ Init_gtk3 (void)
 #ifndef RB_GTK_ACTION_IS_DEPRECATED
     rbgobj_register_mark_func(GTK_TYPE_ACTION, rb_gtk3_action_mark);
 #endif
+    rbgobj_register_mark_func(GTK_TYPE_BUILDER, rb_gtk3_builder_mark);
 #ifndef RB_GTK_ACTION_GROUP_IS_DEPRECATED
     rbgobj_register_mark_func(GTK_TYPE_ACTION_GROUP, rb_gtk3_action_group_mark);
 #endif
