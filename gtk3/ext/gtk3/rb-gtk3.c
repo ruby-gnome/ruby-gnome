@@ -22,6 +22,7 @@
 
 #if GTK_CHECK_VERSION(3, 10, 0)
 #    define GTK_ACTION_GROUP_IS_DEPRECATED
+#    define RB_GTK_UI_MANAGER_IS_DEPRECATED
 #endif
 
 static gboolean
@@ -184,6 +185,24 @@ rb_gtk3_container_mark(gpointer object)
                          NULL);
 }
 
+#ifndef RB_GTK_UI_MANAGER_IS_DEPRECATED
+static void
+rb_gtk3_ui_manager_mark(gpointer object)
+{
+    GtkUIManager *manager;
+    GList *action_groups, *node;
+
+    manager = GTK_UI_MANAGER(object);
+    action_groups = gtk_ui_manager_get_action_groups(manager);
+    for (node = action_groups; node; node = g_list_next(node)) {
+        GtkWidget *action_group = node->data;
+        rbgobj_gc_mark_instance(action_group);
+    }
+
+    rbgobj_gc_mark_instance(gtk_ui_manager_get_accel_group(manager));
+}
+#endif
+
 void
 Init_gtk3 (void)
 {
@@ -193,4 +212,7 @@ Init_gtk3 (void)
     rbgobj_register_mark_func(GTK_TYPE_ACTION_GROUP, rb_gtk3_action_group_mark);
 #endif
     rbgobj_register_mark_func(GTK_TYPE_CONTAINER, rb_gtk3_container_mark);
+#ifndef RB_GTK_UI_MANAGER_IS_DEPRECATED
+    rbgobj_register_mark_func(GTK_TYPE_UI_MANAGER, rb_gtk3_ui_manager_mark);
+#endif
 }
