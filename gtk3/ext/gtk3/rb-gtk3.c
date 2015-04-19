@@ -20,6 +20,10 @@
 
 #include "rb-gtk3.h"
 
+#if GTK_CHECK_VERSION(3, 10, 0)
+#    define GTK_ACTION_GROUP_IS_DEPRECATED
+#endif
+
 static gboolean
 name_equal(GIArgInfo *info, const gchar *target_name)
 {
@@ -148,6 +152,23 @@ rb_gtk3_callback_finder(GIArgInfo *info)
     }
 }
 
+#ifndef GTK_ACTION_GROUP_IS_DEPRECATED
+static void
+rb_gtk3_action_group_mark(gpointer object)
+{
+    GtkActionGroup *group;
+    GList *actions, *node;
+
+    group = GTK_ACTION_GROUP(object);
+    actions = gtk_action_group_list_actions(group);
+    for (node = actions; node; node = g_list_next(node)) {
+        GtkWidget *action = node->data;
+        rbgobj_gc_mark_instance(action);
+    }
+    g_list_free(actions);
+}
+#endif
+
 static void
 rb_gtk3_container_mark_callback(GtkWidget *widget,
                                 G_GNUC_UNUSED gpointer data)
@@ -168,5 +189,8 @@ Init_gtk3 (void)
 {
     rb_gi_callback_register_finder(rb_gtk3_callback_finder);
 
+#ifndef GTK_ACTION_GROUP_IS_DEPRECATED
+    rbgobj_register_mark_func(GTK_TYPE_ACTION_GROUP, rb_gtk3_action_group_mark);
+#endif
     rbgobj_register_mark_func(GTK_TYPE_CONTAINER, rb_gtk3_container_mark);
 }
