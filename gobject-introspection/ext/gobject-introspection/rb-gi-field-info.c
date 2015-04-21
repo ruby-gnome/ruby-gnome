@@ -124,7 +124,7 @@ rb_gi_field_info_set_field_raw(GIFieldInfo *info, gpointer memory,
             succeeded = TRUE;
         }
     }
-    rb_gi_value_argument_free(&field_value, type_info);
+    rb_gi_value_argument_free(rb_field_value, &field_value, type_info);
     g_base_info_unref(type_info);
 
     if (!succeeded) {

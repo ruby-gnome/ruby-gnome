@@ -136,9 +136,11 @@ GIArgument *rb_gi_in_array_argument_from_ruby (GIArgument     *array_argument,
                                                GIArgInfo      *array_arg_info,
                                                GIArgInfo      *length_arg_info,
                                                VALUE           rb_argument);
-void        rb_gi_value_argument_free         (GIArgument     *argument,
+void        rb_gi_value_argument_free         (VALUE           rb_argument,
+                                               GIArgument     *argument,
                                                GITypeInfo     *type_info);
-void        rb_gi_in_argument_free            (GIArgument     *argument,
+void        rb_gi_in_argument_free            (VALUE           rb_argument,
+                                               GIArgument     *argument,
                                                GIArgInfo      *arg_info);
 
 VALUE       rb_gi_array_type_to_ruby          (GIArrayType type);

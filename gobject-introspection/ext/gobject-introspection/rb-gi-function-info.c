@@ -605,7 +605,8 @@ arguments_init(GArray **in_args, GArray **out_args, GPtrArray **args_metadata)
 }
 
 static void
-arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
+arguments_free(VALUE rb_arguments,
+               GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
 {
     guint i;
 
@@ -618,9 +619,18 @@ arguments_free(GArray *in_args, GArray *out_args, GPtrArray *args_metadata)
             metadata->direction == GI_DIRECTION_INOUT) {
             in_arg_index = metadata->in_arg_index;
             if (in_arg_index != -1) {
+                gint rb_arg_index;
+                VALUE rb_argument = Qnil;
                 GIArgument *argument;
+
+                rb_arg_index = metadata->rb_arg_index;
+                if (rb_arg_index > 0) {
+                    rb_argument = RARRAY_PTR(rb_arguments)[rb_arg_index];
+                }
                 argument = &(g_array_index(in_args, GIArgument, in_arg_index));
-                rb_gi_in_argument_free(argument, &(metadata->arg_info));
+                rb_gi_in_argument_free(rb_argument,
+                                       argument,
+                                       &(metadata->arg_info));
             }
         } else {
             GIArgument *argument;
@@ -774,7 +784,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
                                             in_args, out_args,
                                             args_metadata);
     }
-    arguments_free(in_args, out_args, args_metadata);
+    arguments_free(rb_arguments, in_args, out_args, args_metadata);
     if (!succeeded) {
         RG_RAISE_ERROR(error);
     }
