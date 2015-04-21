@@ -28,4 +28,9 @@ class TestGLibValue < Test::Unit::TestCase
     value = GLib::Value.new(GLib::Type::UINT, 29)
     assert_equal(29, value.value)
   end
+
+  def test_no_value
+    value = GLib::Value.new(GLib::Type::UINT)
+    assert_equal(0, value.value)
+  end
 end

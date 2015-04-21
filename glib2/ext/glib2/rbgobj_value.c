@@ -335,12 +335,18 @@ rbgobj_gc_mark_gvalue(GValue* value)
 /**********************************************************************/
 
 static VALUE
-rg_initialize(VALUE self, VALUE rb_gtype, VALUE rb_value)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GValue value = G_VALUE_INIT;
+    VALUE rb_gtype;
+    VALUE rb_value;
+
+    rb_scan_args(argc, argv, "11", &rb_gtype, &rb_value);
 
     g_value_init(&value, NUM2INT(rb_to_int(rb_gtype)));
-    rbgobj_rvalue_to_gvalue(rb_value, &value);
+    if (argc == 2) {
+        rbgobj_rvalue_to_gvalue(rb_value, &value);
+    }
     G_INITIALIZE(self, g_boxed_copy(G_TYPE_VALUE, &value));
     g_value_unset(&value);
 
@@ -388,7 +394,7 @@ Init_gobject_gvalue(void)
     qGValueToRValueFunc = g_quark_from_static_string("__ruby_g2r_func__");
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_VALUE, "Value", mGLib);
-    RG_DEF_METHOD(initialize, 2);
+    RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(type, 0);
     RG_DEF_METHOD(value, 0);
     RG_DEF_METHOD(to_s, 0);
