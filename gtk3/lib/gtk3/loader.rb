@@ -110,6 +110,7 @@ module Gtk
       require "gtk3/tree-model"
       require "gtk3/tree-selection"
       require "gtk3/tree-store"
+      require "gtk3/tree-view"
       require "gtk3/tree-view-column"
       require "gtk3/ui-manager"
       require "gtk3/widget"
