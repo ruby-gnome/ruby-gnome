@@ -2,6 +2,22 @@
 
 = NEWS
 
+== Ruby-GNOME2 2.2.5: 2015-04-24
+
+It is a GLib 2.44 support release.
+
+=== Changes
+
+==== Ruby/GLib2
+
+  * Improvements
+    * Supported GLib 2.44.
+      [GitHub#361][Reported by Benjamin Maisano]
+
+=== Thanks
+
+  * Benjamin Maisano
+
 == Ruby-GNOME2 2.2.4: 2014-12-23
 
 It is a x64 Windows support release.
