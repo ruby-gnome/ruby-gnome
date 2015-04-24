@@ -1,6 +1,6 @@
-= Ruby-GNOME2 gem build system for Windows gems
+# Ruby-GNOME2 gem build system for Windows gems
 
-== How to use
+## How to use
 
     % git clone git@github.com:ruby-gnome2/ruby-gnome2.git
     % git clone git@github.com:ruby-gnome2/pkg-config.git
