@@ -1572,6 +1572,58 @@ rb_gi_value_argument_from_ruby_interface(GIArgument *argument,
 }
 
 static void
+rb_gi_value_argument_from_ruby_glist(GIArgument *argument,
+                                     GITypeInfo *type_info,
+                                     VALUE rb_argument,
+                                     G_GNUC_UNUSED VALUE self)
+{
+    GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
+
+    element_type_info = g_type_info_get_param_type(type_info, 0);
+    element_type_tag = g_type_info_get_tag(element_type_info);
+    g_base_info_unref(element_type_info);
+
+    switch (element_type_tag) {
+    case GI_TYPE_TAG_VOID:
+    case GI_TYPE_TAG_BOOLEAN:
+    case GI_TYPE_TAG_INT8:
+    case GI_TYPE_TAG_UINT8:
+    case GI_TYPE_TAG_INT16:
+    case GI_TYPE_TAG_UINT16:
+    case GI_TYPE_TAG_INT32:
+    case GI_TYPE_TAG_UINT32:
+    case GI_TYPE_TAG_INT64:
+    case GI_TYPE_TAG_UINT64:
+    case GI_TYPE_TAG_FLOAT:
+    case GI_TYPE_TAG_DOUBLE:
+    case GI_TYPE_TAG_GTYPE:
+    case GI_TYPE_TAG_UTF8:
+    case GI_TYPE_TAG_FILENAME:
+    case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GList)[%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_INTERFACE:
+        argument->v_pointer = RVAL2GOBJGLIST(rb_argument);
+        break;
+    case GI_TYPE_TAG_GLIST:
+    case GI_TYPE_TAG_GSLIST:
+    case GI_TYPE_TAG_GHASH:
+    case GI_TYPE_TAG_ERROR:
+    case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: Ruby -> GIArgument(GList)[%s]",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_value_argument_from_ruby_gslist(GIArgument *argument,
                                       GITypeInfo *type_info,
                                       VALUE rb_argument,
@@ -1705,9 +1757,8 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
                                                  rb_argument, self);
         break;
     case GI_TYPE_TAG_GLIST:
-        rb_raise(rb_eNotImpError,
-                 "TODO: Ruby -> GIArgument(%s)",
-                 g_type_tag_to_string(type_tag));
+        rb_gi_value_argument_from_ruby_glist(argument, type_info,
+                                             rb_argument, self);
         break;
     case GI_TYPE_TAG_GSLIST:
         rb_gi_value_argument_from_ruby_gslist(argument, type_info,
