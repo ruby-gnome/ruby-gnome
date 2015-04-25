@@ -17,12 +17,18 @@
 module Gtk
   class UIManager
     alias_method :add_ui_raw, :add_ui
-    def add_ui(buffer_or_filename)
-      if buffer_or_filename =~ /<ui>/
-        add_ui_from_string(buffer_or_filename,
-                           buffer_or_filename.length)
+    def add_ui(buffer_or_filename, *args)
+      if args.empty?
+        if buffer_or_filename =~ /<ui>/
+          add_ui_from_string(buffer_or_filename,
+                             buffer_or_filename.length)
+        else
+          add_ui_from_file(buffer_or_filename)
+        end
       else
-        add_ui_from_file(buffer_or_filename)
+        merge_id = buffer_or_filename
+        path, name, action, type, top, = args
+        add_ui_raw(merge_id, path, name, action, type, top)
       end
     end
   end
