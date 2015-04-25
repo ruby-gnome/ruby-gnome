@@ -133,7 +133,7 @@ rbgobj_get_flags(VALUE obj, GType gtype)
 
     klass = GTYPE2CLASS(gtype);
 
-    if (!rb_obj_is_kind_of(obj, klass)) {
+    if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, klass))) {
         VALUE flags_value = Qnil;
 
         flags_value = resolve_flags_value(klass, obj);
@@ -141,7 +141,7 @@ rbgobj_get_flags(VALUE obj, GType gtype)
             obj = flags_value;
     }
 
-    if (rb_obj_is_kind_of(obj, klass))
+    if (RVAL2CBOOL(rb_obj_is_kind_of(obj, klass)))
         return flags_get_holder(obj)->value;
     else
         rb_raise(rb_eTypeError, "not a %s: %s",
