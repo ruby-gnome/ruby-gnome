@@ -576,9 +576,9 @@ module Gtk
     define_deprecated_enums 'Gtk::MessageType'
     define_deprecated_method_by_hash_args :initialize,
         'parent, flags, type, buttons_type, message',
-        ':parent => nil, :flags => 0, :type => :info, :buttons_type => :ok, :message => ""' do
-        |_self, parent, flags, type, buttons_type, message|
-      [{:parent => parent, :flags => flags, :type => type, :buttons_type => buttons_type, :message => message}]
+        ':parent => nil, :flags => 0, :type => :info, :buttons => :ok, :message => ""' do
+        |_self, parent, flags, type, buttons, message|
+      [{:parent => parent, :flags => flags, :type => type, :buttons => buttons, :message => message}]
     end
   end
 
