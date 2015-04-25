@@ -26,5 +26,15 @@ module Gdk
         nil
       end
     end
+
+    def get_monitor(window_or_x, y=nil)
+      if window_or_x.is_a?(Window)
+        window = window_or_x
+        get_monitor_at_window(window)
+      else
+        x = window_or_x
+        get_monitor_at_point(x, y)
+      end
+    end
   end
 end
