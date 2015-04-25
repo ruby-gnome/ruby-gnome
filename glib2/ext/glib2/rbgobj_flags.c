@@ -1,7 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011  Ruby-GNOME2 Project Team
- *  Copyright (C) 2004-2006  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2004-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003  Masahiro Sakai
  *
  *  This library is free software; you can redistribute it and/or
@@ -30,32 +29,9 @@ VALUE RG_TARGET_NAMESPACE;
 static ID id_new;
 static ID id_module_eval;
 static ID id_or;
+static ID id_to_i;
 
 /**********************************************************************/
-
-static VALUE
-resolve_flags_value(VALUE klass, VALUE nick_or_nicks)
-{
-    int i, len;
-    VALUE flags_value;
-
-    if (!RVAL2CBOOL(rb_obj_is_kind_of(nick_or_nicks, rb_cArray)))
-        return rg_enum_resolve_value(klass, nick_or_nicks);
-
-    len = RARRAY_LEN(nick_or_nicks);
-    flags_value = rb_funcall(klass, id_new, 0);
-    for (i = 0; i < len; i++) {
-        VALUE value;
-
-        value = rg_enum_resolve_value(klass, RARRAY_PTR(nick_or_nicks)[i]);
-        if (NIL_P(value))
-            return Qnil;
-
-        flags_value = rb_funcall(flags_value, id_or, 1, value);
-    }
-
-    return flags_value;
-}
 
 void
 rg_flags_add_constants(VALUE mod, GType flags_type, const gchar *strip_prefix)
@@ -127,25 +103,13 @@ rbgobj_get_flags(VALUE obj, GType gtype)
         rb_raise(rb_eTypeError, "%s is not a %s",
                  g_type_name(gtype), g_type_name(G_TYPE_FLAGS));
 
-    /* for compatibility */
-    if (rb_obj_is_kind_of(obj, rb_cInteger))
-        obj = rbgobj_make_flags(NUM2UINT(obj), gtype);
-
     klass = GTYPE2CLASS(gtype);
 
     if (!RVAL2CBOOL(rb_obj_is_kind_of(obj, klass))) {
-        VALUE flags_value = Qnil;
-
-        flags_value = resolve_flags_value(klass, obj);
-        if (!NIL_P(flags_value))
-            obj = flags_value;
+        obj = rb_funcall(klass, id_new, 1, obj);
     }
 
-    if (RVAL2CBOOL(rb_obj_is_kind_of(obj, klass)))
-        return flags_get_holder(obj)->value;
-    else
-        rb_raise(rb_eTypeError, "not a %s: %s",
-                 rb_class2name(klass), RBG_INSPECT(obj));
+    return flags_get_holder(obj)->value;
 }
 
 /**********************************************************************/
@@ -251,34 +215,90 @@ flags_s_allocate(VALUE self)
     }
 }
 
+static guint
+resolve_flags_value(VALUE klass, GFlagsClass *gclass, VALUE flag_or_flags)
+{
+    guint value = 0;
+
+    switch (TYPE(flag_or_flags)) {
+    case RUBY_T_NIL:
+        value = 0;
+        break;
+    case RUBY_T_FIXNUM:
+        value = NUM2UINT(flag_or_flags);
+        break;
+    case RUBY_T_STRING:
+    case RUBY_T_SYMBOL:
+    {
+        const gchar *name;
+        GFlagsValue *info;
+
+        name = RVAL2CSTR_ACCEPT_SYMBOL(flag_or_flags);
+        info = g_flags_get_value_by_name(gclass, name);
+        if (!info) {
+            gchar *nick, *current;
+
+            nick = g_strdup(name);
+            for (current = nick; *current; current++) {
+                switch (*current) {
+                case '_':
+                case ' ':
+                    *current = '-';
+                    break;
+                default:
+                    break;
+                }
+            }
+            info = g_flags_get_value_by_nick(gclass, nick);
+            g_free(nick);
+        }
+        if (!info) {
+            rb_raise(rb_eArgError,
+                     "unknown flag name: <%s>(%s)",
+                     name,
+                     g_type_name(G_TYPE_FROM_CLASS(gclass)));
+        }
+        value = info->value;
+        break;
+    }
+    case RUBY_T_ARRAY:
+    {
+        int i, n;
+        n = RARRAY_LEN(flag_or_flags);
+        for (i = 0; i < n; i++) {
+            value |= resolve_flags_value(klass,
+                                         gclass,
+                                         RARRAY_PTR(flag_or_flags)[i]);
+        }
+        break;
+    }
+    default:
+        if (RVAL2CBOOL(rb_obj_is_kind_of(flag_or_flags, klass))) {
+            value = NUM2UINT(rb_funcall(flag_or_flags, id_to_i, 0));
+        } else {
+            rb_raise(rb_eArgError,
+                     "flag value must be one of "
+                     "nil, Fixnum, String, Symbol, %s or Array of them: "
+                     "<%s>(%s)",
+                     RBG_INSPECT(klass),
+                     RBG_INSPECT(flag_or_flags),
+                     g_type_name(G_TYPE_FROM_CLASS(gclass)));
+        }
+        break;
+    }
+
+    return value;
+}
+
 static VALUE
 rg_initialize(int argc, VALUE* argv, VALUE self)
 {
     flags_holder* p = flags_get_holder(self);
-    VALUE arg;
+    VALUE flag_or_flags;
 
-    rb_scan_args(argc, argv, "01", &arg);
+    rb_scan_args(argc, argv, "01", &flag_or_flags);
 
-    if (argc == 0) {
-        p->value = 0;
-    } else {
-        if (FIXNUM_P(arg)) {
-            p->value = NUM2UINT(arg);
-        } else {
-            const gchar *name = RVAL2CSTR_ACCEPT_SYMBOL(arg);
-            p->info = g_flags_get_value_by_name(p->gclass, name);
-            if (!p->info) {
-                p->info = g_flags_get_value_by_nick(p->gclass, name);
-            }
-            if (!p->info) {
-                rb_raise(rb_eArgError,
-                         "unknown flag name: <%s>(%s)",
-                         name,
-                         g_type_name(G_TYPE_FROM_CLASS(p->gclass)));
-            }
-            p->value = p->info->value;
-        }
-    }
+    p->value = resolve_flags_value(CLASS_OF(self), p->gclass, flag_or_flags);
 
     if (!p->info) {
         guint i;
@@ -321,27 +341,56 @@ rg_nick(VALUE self)
 #define FLAGS_COMP_ELSE         -2
 #define FLAGS_COMP_INCOMPARABLE -3
 
+typedef struct {
+    GType gtype;
+    VALUE rb_value;
+    guint value;
+    gboolean compatible;
+} compare_data;
+
+static VALUE
+flags_compare_get_flags_body(VALUE user_data)
+{
+    compare_data *data = (compare_data *)user_data;
+
+    data->value = rbgobj_get_flags(data->rb_value, data->gtype);
+    data->compatible = TRUE;
+
+    return Qnil;
+}
+
+static VALUE
+flags_compare_get_flags_rescue(VALUE user_data)
+{
+    compare_data *data = (compare_data *)user_data;
+
+    data->compatible = FALSE;
+
+    return Qnil;
+}
+
 static gint
 flags_compare(VALUE self, VALUE rhs)
 {
     flags_holder* p = flags_get_holder(self);
-    GType gtype = G_TYPE_FROM_CLASS(p->gclass);
-    VALUE klass = GTYPE2CLASS(gtype);
-    guint rhs_val;
+    compare_data data;
 
-    if (!rb_obj_is_kind_of(rhs, rb_cInteger)) {
-        rhs = resolve_flags_value(klass, rhs);
-        if (CLASS_OF(rhs) != CLASS_OF(self))
-            return FLAGS_COMP_INCOMPARABLE;
+    data.gtype = G_TYPE_FROM_CLASS(p->gclass);
+    data.rb_value = rhs;
+    data.value = 0;
+    data.compatible = TRUE;
+
+    rb_rescue(flags_compare_get_flags_body, (VALUE)&data,
+              flags_compare_get_flags_rescue, (VALUE)&data);
+    if (!data.compatible) {
+        return FLAGS_COMP_INCOMPARABLE;
     }
 
-    rhs_val = rbgobj_get_flags(rhs, gtype);
-
-    if (p->value == rhs_val)
+    if (p->value == data.value)
         return FLAGS_COMP_EQUAL;
-    else if ((p->value & rhs_val) == rhs_val)
+    else if ((p->value & data.value) == data.value)
         return FLAGS_COMP_GREATER;
-    else if ((p->value & rhs_val) == p->value)
+    else if ((p->value & data.value) == p->value)
         return FLAGS_COMP_LESS;
     else
         return FLAGS_COMP_ELSE;
@@ -481,6 +530,7 @@ Init_gobject_gflags(void)
     id_module_eval = rb_intern("module_eval");
     id_new = rb_intern("new");
     id_or = rb_intern("|");
+    id_to_i = rb_intern("to_i");
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_FLAGS, "Flags", mGLib);
 
