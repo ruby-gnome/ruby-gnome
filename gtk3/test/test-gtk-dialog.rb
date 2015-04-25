@@ -58,4 +58,17 @@ class TestGtkDialog < Test::Unit::TestCase
       assert_equal("title", button.label)
     end
   end
+
+  sub_test_case "instance methods" do
+    def setup
+      @dialog = Gtk::Dialog.new
+    end
+
+    test "#use_header_bar?" do
+      only_gtk_version(3, 12, 0)
+      assert do
+        not @dialog.use_header_bar?
+      end
+    end
+  end
 end

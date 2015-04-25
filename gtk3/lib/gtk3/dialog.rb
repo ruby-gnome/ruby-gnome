@@ -53,5 +53,13 @@ module Gtk
         add_button(text, response_id)
       end
     end
+
+    if method_defined?(:use_header_bar)
+      alias_method :use_header_bar_raw, :use_header_bar
+      undef_method :use_header_bar
+      def use_header_bar?
+        use_header_bar_raw != 0
+      end
+    end
   end
 end
