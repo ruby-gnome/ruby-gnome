@@ -142,6 +142,8 @@ module Gtk
         when "get_event_widget"
           define_gdk_event_widget(info)
           return
+        when "events_pending"
+          name = "events_pending?"
         end
       when "Gtk::Widget"
         case name
@@ -151,7 +153,7 @@ module Gtk
         end
       end
 
-      super
+      super(klass, name, info)
     end
 
     def define_gdk_event_widget(info)
