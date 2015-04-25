@@ -28,8 +28,8 @@ module Gtk
       set_title(title) if title
       set_transient_for(parent) if parent
       if flags
-        unless flags.is_a?(Gtk::DialogFlags)
-          flags = Gtk::DialogFlags.new(flags)
+        unless flags.is_a?(DialogFlags)
+          flags = DialogFlags.new(flags)
         end
         set_modal(true) if flags.modal?
         set_destroy_with_parent(true) if flags.destroy_with_parent?
@@ -42,7 +42,7 @@ module Gtk
     def run
       response_id = run_raw
       if response_id < 0
-        Gtk::ResponseType.new(response_id)
+        ResponseType.new(response_id)
       else
         response_id
       end
