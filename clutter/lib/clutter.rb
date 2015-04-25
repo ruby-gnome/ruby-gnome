@@ -109,6 +109,12 @@ module Clutter
       load_events
     end
 
+    def initialize_post(object)
+      super
+      return unless object.is_a?(GLib::Object)
+      self.class.reference_gobject(object, :sink => true)
+    end
+
     def load_events
       @event_infos.each do |event_info|
         define_struct(event_info, :parent => Event)
