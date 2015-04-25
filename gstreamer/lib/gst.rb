@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -129,6 +129,12 @@ module Gst
       rescue LoadError
         require "gstreamer.so"
       end
+    end
+
+    def initialize_post(object)
+      super
+      return unless object.is_a?(GLib::Object)
+      self.class.reference_gobject(object, :sink => true)
     end
 
     def load_function_info(info)
