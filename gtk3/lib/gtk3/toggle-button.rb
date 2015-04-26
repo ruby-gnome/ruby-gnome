@@ -19,14 +19,12 @@ module Gtk
     alias_method :initialize_raw, :initialize
     def initialize(options={})
       label    = options[:label]
-      mnemonic = options[:mnemonic]
-      if options.empty?
-        initialize_raw
-      elsif label
-        mnemonic ? initialize_new_with_mnemonic(label) :
+      use_underline = options[:use_underline]
+      if label
+        use_underline ? initialize_new_with_mnemonic(label) :
                    initialize_new_with_label(label)
       else
-        raise ArgumentError, "Invalid arguments."
+        initialize_raw
       end
     end
   end

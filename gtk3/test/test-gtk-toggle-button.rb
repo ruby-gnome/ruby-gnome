@@ -29,8 +29,11 @@ class TestGtkToggleButton < Test::Unit::TestCase
     end
 
     test "label + mnemonic" do
-      button = Gtk::ToggleButton.new(:label => "_label", :mnemonic => true)
+      button = Gtk::ToggleButton.new(:label => "_label", :use_underline => true)
       assert_equal("_label", button.label)
+      assert do
+        button.use_underline?
+      end
     end
 
   end
