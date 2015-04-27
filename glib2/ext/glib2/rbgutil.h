@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2011-2014  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2011-2015  Ruby-GNOME2 Project Team
  *  Copyright (C) 2002,2003 Masao Mutoh
  *
  *  This library is free software; you can redistribute it and/or
@@ -106,6 +106,8 @@ extern gboolean rbgutil_key_equal(VALUE rb_string, const char *key);
 
 extern const gchar *rbg_inspect(VALUE object);
 extern GSource *rbg_interrupt_source_new(void);
+
+extern gchar *rbg_name_to_nick(const gchar *name);
 
 /*< protected >*/
 RUBY_GLIB2_VAR ID rbgutil_id_module_eval;

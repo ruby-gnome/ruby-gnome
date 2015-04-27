@@ -111,6 +111,7 @@ EXPORTS
 	rbg_scan_options
 	rbg_inspect
 	rbg_interrupt_source_new
+	rbg_name_to_nick
 	rbgutil_id_module_eval		DATA
 	rbgutil_def_setters
 	rbgutil_glist2ary

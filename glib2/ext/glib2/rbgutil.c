@@ -176,6 +176,26 @@ rbg_interrupt_source_new(void)
     return g_source_new(&rbg_interrupt_funcs, sizeof(GSource));
 }
 
+gchar *
+rbg_name_to_nick(const gchar *name)
+{
+    gchar *nick, *current;
+
+    nick = g_strdup(name);
+    for (current = nick; *current; current++) {
+        switch (*current) {
+        case '_':
+        case ' ':
+            *current = '-';
+            break;
+        default:
+            break;
+        }
+    }
+
+    return nick;
+}
+
 void
 Init_gutil(void)
 {

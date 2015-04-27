@@ -236,19 +236,8 @@ resolve_flags_value(VALUE klass, GFlagsClass *gclass, VALUE flag_or_flags)
         name = RVAL2CSTR_ACCEPT_SYMBOL(flag_or_flags);
         info = g_flags_get_value_by_name(gclass, name);
         if (!info) {
-            gchar *nick, *current;
-
-            nick = g_strdup(name);
-            for (current = nick; *current; current++) {
-                switch (*current) {
-                case '_':
-                case ' ':
-                    *current = '-';
-                    break;
-                default:
-                    break;
-                }
-            }
+            gchar *nick;
+            nick = rbg_name_to_nick(name);
             info = g_flags_get_value_by_nick(gclass, nick);
             g_free(nick);
         }
