@@ -29,6 +29,7 @@ VALUE RG_TARGET_NAMESPACE;
 
 static ID id_new;
 static ID id_to_s;
+static ID id_to_i;
 
 /**********************************************************************/
 
@@ -270,20 +271,61 @@ enum_s_allocate(VALUE self)
 }
 
 static VALUE
-rg_initialize(VALUE self, VALUE arg)
+rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     enum_holder* p = enum_get_holder(self);
+    VALUE rb_value;
+    VALUE klass;
 
-    if (rb_respond_to(arg, rb_intern("to_str"))) {
-        const char* str = StringValuePtr(arg);
-        p->info = g_enum_get_value_by_name(p->gclass, str);
-        if (! p->info)
-            p->info = g_enum_get_value_by_nick(p->gclass, str);
-        if (! p->info)
-            rb_raise(rb_eArgError, "invalid argument");
-    } else {
-        p->value = NUM2INT(arg);
-        p->info  = g_enum_get_value(p->gclass, p->value);
+    rb_scan_args(argc, argv, "01", &rb_value);
+
+    klass = CLASS_OF(self);
+
+    switch (TYPE(rb_value)) {
+    case RUBY_T_NIL:
+        p->value = 0;
+        break;
+    case RUBY_T_FIXNUM:
+        p->value = NUM2UINT(rb_value);
+        break;
+    case RUBY_T_STRING:
+    case RUBY_T_SYMBOL:
+    {
+        const gchar *name;
+
+        name = RVAL2CSTR_ACCEPT_SYMBOL(rb_value);
+        p->info = g_enum_get_value_by_name(p->gclass, name);
+        if (!p->info) {
+            gchar *nick;
+            nick = rbg_name_to_nick(name);
+            p->info = g_enum_get_value_by_nick(p->gclass, name);
+            g_free(nick);
+        }
+        if (!p->info) {
+            rb_raise(rb_eArgError, "unknown enum name: <%s>(%s)",
+                     name,
+                     g_type_name(G_TYPE_FROM_CLASS(p->gclass)));
+        }
+        p->value = p->info->value;
+        break;
+    }
+    default:
+        if (RVAL2CBOOL(rb_obj_is_kind_of(rb_value, klass))) {
+            p->value = NUM2INT(rb_funcall(rb_value, id_to_i, 0));
+        } else {
+            rb_raise(rb_eArgError,
+                     "enum value must be one of "
+                     "nil, Fixnum, String, Symbol o %s: "
+                     "<%s>(%s)",
+                     RBG_INSPECT(klass),
+                     RBG_INSPECT(rb_value),
+                     g_type_name(G_TYPE_FROM_CLASS(p->gclass)));
+        }
+        break;
+    }
+
+    if (!p->info) {
+        p->info = g_enum_get_value(p->gclass, p->value);
     }
 
     return Qnil;
@@ -374,6 +416,7 @@ Init_gobject_genums(void)
 {
     id_new = rb_intern("new");
     id_to_s = rb_intern("to_s");
+    id_to_i = rb_intern("to_i");
 
     RG_TARGET_NAMESPACE = G_DEF_CLASS(G_TYPE_ENUM, "Enum", mGLib);
 
@@ -385,7 +428,7 @@ Init_gobject_genums(void)
 
     rb_define_alloc_func(RG_TARGET_NAMESPACE, enum_s_allocate);
 
-    RG_DEF_METHOD(initialize, 1);
+    RG_DEF_METHOD(initialize, -1);
     RG_DEF_METHOD(to_i, 0);
     RG_DEF_METHOD(name, 0);
     RG_DEF_METHOD(nick, 0);
