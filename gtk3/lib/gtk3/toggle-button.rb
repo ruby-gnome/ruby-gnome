@@ -18,8 +18,9 @@ module Gtk
   class ToggleButton
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      label    = options[:label]
+      label = options[:label]
       use_underline = options[:use_underline]
+
       if label
         if use_underline
           initialize_new_with_mnemonic(label)
