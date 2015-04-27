@@ -21,8 +21,11 @@ module Gtk
       label    = options[:label]
       use_underline = options[:use_underline]
       if label
-        use_underline ? initialize_new_with_mnemonic(label) :
-                   initialize_new_with_label(label)
+        if use_underline
+          initialize_new_with_mnemonic(label)
+        else
+          initialize_new_with_label(label)
+        end
       else
         initialize_raw
       end
