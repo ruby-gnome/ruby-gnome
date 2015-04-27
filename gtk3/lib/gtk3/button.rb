@@ -28,6 +28,8 @@ module Gtk
         end
       end
       stock = options[:stock_id]
+      icon_name = options[:icon_name]
+      icon_size = options[:icon_size] || :button
 
       if label
         if use_underline
@@ -37,6 +39,12 @@ module Gtk
         end
       elsif stock
         initialize_new_from_stock(stock)
+      elsif icon_name
+        case icon_size
+        when Symbol, String
+          icon_size = IconSize.new(icon_size.to_s)
+        end
+        initialize_new_from_icon_name(icon_name, icon_size)
       else
         initialize_raw
       end
