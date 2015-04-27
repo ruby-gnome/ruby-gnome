@@ -35,6 +35,5 @@ class TestGtkToggleButton < Test::Unit::TestCase
         button.use_underline?
       end
     end
-
   end
 end
