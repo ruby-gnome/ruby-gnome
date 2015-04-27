@@ -53,6 +53,9 @@ module Gdk
       end
       loader = Loader.new(self)
       loader.load("Gdk")
+      if Object.const_defined?(:Gtk) and Gtk.respond_to?(:init)
+        Gtk.init
+      end
     end
 
     def cairo_available?
