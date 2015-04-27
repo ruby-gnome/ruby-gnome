@@ -18,7 +18,7 @@ module Gtk
   class Button
     alias_method :initialize_raw, :initialize
     def initialize(options={})
-      label    = options[:label]
+      label = options[:label]
       use_underline = options[:use_underline]
       if use_underline.nil?
         mnemonic = options[:mnemonic]
@@ -27,7 +27,7 @@ module Gtk
           use_underline = true
         end
       end
-      stock    = options[:stock_id]
+      stock = options[:stock_id]
 
       if label
         if use_underline
