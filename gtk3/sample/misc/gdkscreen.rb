@@ -1,7 +1,8 @@
 =begin
   gdkscreen.rb - Gdk::Screen sample script.
 
-  Copyright (C) 2004-2015  Masao Mutoh
+  Copyright (C) 2004-2006  Masao Mutoh
+  Copyright (C) 2007-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 
