@@ -1,6 +1,6 @@
 /* -*- c-file-style: "ruby"; indent-tabs-mode: nil -*- */
 /*
- *  Copyright (C) 2012  Ruby-GNOME2 Project Team
+ *  Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Lesser General Public
@@ -68,12 +68,12 @@ rg_require(int argc, VALUE *argv, VALUE self)
     namespace_ = RVAL2CSTR(rb_namespace);
     version = RVAL2CSTR_ACCEPT_NIL(rb_version);
     if (!NIL_P(rb_flags)) {
-	flags = RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags);
+        flags = RVAL2GI_REPOSITORY_LOAD_FLAGS(rb_flags);
     }
 
     g_irepository_require(SELF(self), namespace_, version, flags, &error);
     if (error) {
-	RG_RAISE_ERROR(error);
+        RG_RAISE_ERROR(error);
     }
 
     return Qnil;
@@ -208,19 +208,19 @@ rg_find(int argc, VALUE *argv, VALUE self)
     GIBaseInfo *info;
 
     if (argc == 1) {
-	VALUE rb_gtype;
-	GType gtype;
-	rb_gtype = argv[0];
-	gtype = NUM2UINT(rb_gtype);
-	info = g_irepository_find_by_gtype(SELF(self), gtype);
+        VALUE rb_gtype;
+        GType gtype;
+        rb_gtype = argv[0];
+        gtype = NUM2UINT(rb_gtype);
+        info = g_irepository_find_by_gtype(SELF(self), gtype);
     } else {
-	VALUE rb_namespace, rb_name;
-	const gchar *namespace_, *name;
+        VALUE rb_namespace, rb_name;
+        const gchar *namespace_, *name;
 
-	rb_scan_args(argc, argv, "2", &rb_namespace, &rb_name);
-	namespace_ = RVAL2CSTR(rb_namespace);
-	name = RVAL2CSTR(rb_name);
-	info = g_irepository_find_by_name(SELF(self), namespace_, name);
+        rb_scan_args(argc, argv, "2", &rb_namespace, &rb_name);
+        namespace_ = RVAL2CSTR(rb_namespace);
+        name = RVAL2CSTR(rb_name);
+        info = g_irepository_find_by_name(SELF(self), namespace_, name);
     }
 
     return GI_BASE_INFO2RVAL(info);
