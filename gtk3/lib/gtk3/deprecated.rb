@@ -1,5 +1,7 @@
 module Gtk
   extend GLib::Deprecatable
+  define_deprecated_const :Allocation, "Gdk::Rectangle"
+
   define_deprecated_const :Combo,                  :raise => "Use 'Gtk::ComboBoxText' instead."
   define_deprecated_const :ComboBoxEntry,          :raise => "Use 'Gtk::ComboBox' instead."
   define_deprecated_const :Curve,                  :raise => "Don't use this widget anymore."
