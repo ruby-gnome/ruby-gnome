@@ -44,4 +44,28 @@ class TestGtkTreeViewColumn < Test::Unit::TestCase
       end
     end
   end
+
+  sub_test_case("instance methods") do
+    def setup
+      @column = Gtk::TreeViewColumn.new
+      @cell = Gtk::CellRendererText.new
+      @column.pack_start(@cell, true)
+      @column.add_attribute(@cell, :text, 0)
+    end
+
+    test "#set_cell_data_func" do
+      values = []
+      @column.set_cell_data_func(@cell) do |column, cell, model, iter|
+        values << iter[0]
+      end
+
+      model = Gtk::TreeStore.new(String)
+      parent = model.append(nil)
+      parent[0] = "Hello"
+      child = model.append(parent)
+      child[0] = "World"
+      @column.cell_set_cell_data(model, parent, true, true)
+      assert_equal([parent[0]], values)
+    end
+  end
 end

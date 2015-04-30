@@ -109,6 +109,34 @@ rb_gtk3_translate_func_callback(const gchar *path,
     return RVAL2CSTR(rb_translated);
 }
 
+static void
+rb_gtk3_tree_cell_data_func_callback(GtkTreeViewColumn *column,
+                                     GtkCellRenderer *cell,
+                                     GtkTreeModel *model,
+                                     GtkTreeIter *iter,
+                                     gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_set_model;
+    ID id_call;
+    VALUE rb_model;
+    VALUE rb_iter;
+
+    CONST_ID(id_set_model, "model=");
+    rb_model = GOBJ2RVAL(model);
+    rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
+    rb_funcall(rb_iter, id_set_model, 1, rb_model);
+
+    CONST_ID(id_call, "call");
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               4,
+               GOBJ2RVAL(column),
+               GOBJ2RVAL(cell),
+               rb_model,
+               rb_iter);
+}
+
 static gboolean
 rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
                                          GtkTreePath *path,
@@ -165,6 +193,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_builder_connect_func_callback;
     } else if (name_equal(info, "TranslateFunc")) {
         return rb_gtk3_translate_func_callback;
+    } else if (name_equal(info, "TreeCellDataFunc")) {
+        return rb_gtk3_tree_cell_data_func_callback;
     } else if (name_equal(info, "TreeModelForeachFunc")) {
         return rb_gtk3_tree_model_foreach_func_callback;
     } else if (name_equal(info, "TreeViewMappingFunc")) {
