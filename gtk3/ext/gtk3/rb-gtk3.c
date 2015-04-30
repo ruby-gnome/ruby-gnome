@@ -116,16 +116,24 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
                                          gpointer user_data)
 {
     RBGICallbackData *callback_data = user_data;
+    ID id_set_model;
     ID id_call;
+    VALUE rb_model;
+    VALUE rb_iter;
     VALUE rb_stop;
+
+    CONST_ID(id_set_model, "model=");
+    rb_model = GOBJ2RVAL(model);
+    rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
+    rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
     CONST_ID(id_call, "call");
     rb_stop = rb_funcall(callback_data->rb_callback,
                          id_call,
                          3,
-                         GOBJ2RVAL(model),
+                         rb_model,
                          BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
-                         BOXED2RVAL(iter, GTK_TYPE_TREE_ITER));
+                         rb_iter);
 
     return RVAL2CBOOL(rb_stop);
 }
