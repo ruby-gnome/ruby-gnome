@@ -51,7 +51,7 @@ rg_s_default(G_GNUC_UNUSED VALUE klass)
  * loaded, this function will search for a ".typelib" file using the repository
  * search path. In addition, a version of namespace may be specified. If version
  * is not specified, the latest will be used.
- * 
+ *
  * @param [String] namespace The namespace to load
  * @param [String, nil] version An optional version
  */
@@ -84,9 +84,9 @@ rg_require(int argc, VALUE *argv, VALUE self)
  * Returned strings are of the form "namespace-version".
  * Note: namespace must have already been loaded using a function such as
  * GObjectIntrospection::Repository.require() before calling this method.
- * 
+ *
  * @param [String] namespace The namespace to get the dependencies for.
- * 
+ *
  * @return [Array<String>] The dependencies.
  */
 static VALUE
@@ -112,7 +112,7 @@ rg_get_dependencies(VALUE self, VALUE rb_namespace)
 
 
 /* Return the list of currently loaded namespaces.
- * 
+ *
  * @return [Array<String>] The loaded namespaces.
  */
 static VALUE
@@ -137,9 +137,9 @@ rg_loaded_namespaces(VALUE self)
 
 /* This method returns the number of metadata entries in given namespace. The
  * namespace must have already been loaded before calling this function.
- * 
+ *
  * @param [String] namespace The namespace to fetch the entries from.
- * 
+ *
  * @return [Integer] The number of metadata entries.
  */
 static VALUE
@@ -159,10 +159,10 @@ rg_get_n_infos(VALUE self, VALUE rb_namespace)
  *  namespace must have already been loaded before calling this function. See
  *  GObjectIntrospection::Repository#get_n_infos() to find the maximum number
  *  of entries.
- * 
+ *
  * @param [String] namespace The namespace to fetch the metadata entry from.
  * @param [Fixnum] index The index of the entry.
- * 
+ *
  * @return [GObjectIntrospection::BaseInfo] The metadata entry.
  */
 static VALUE
@@ -185,20 +185,20 @@ rg_get_info(VALUE self, VALUE rb_namespace, VALUE rb_n)
  * given, it is interpreted as a gtype and all loaded namespaces are searched
  * for it. If two arguments are given the first is a particular namespace and
  * the second the name of an entry to search for.
- * 
+ *
  * @overload find(type)
  *
  * @param [String] type The type to search for.
- * 
+ *
  * @return [GObjectIntrospection::BaseInfo] The metadata entry.
- * 
- * 
+ *
+ *
  * @overload find(namespace, type)
- * 
+ *
  * @param [String] namespace The namespace to search in.
- * 
+ *
  * @param [String] type The type to search for.
- * 
+ *
  * @return [GObjectIntrospection::BaseInfo] The metadata entry.
  */
 
