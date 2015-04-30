@@ -125,6 +125,7 @@ module Gtk
       require "gtk3/tool-button"
       require "gtk3/tree-iter"
       require "gtk3/tree-model"
+      require "gtk3/tree-path"
       require "gtk3/tree-selection"
       require "gtk3/tree-store"
       require "gtk3/tree-view"
@@ -282,6 +283,11 @@ module Gtk
         when "set_icon_from_stock"
           # Ignore deprecated methods
           return
+        end
+      when "Gtk::TreePath"
+        case method_name
+        when "compare"
+          method_name = "<=>"
         end
       when "Gtk::TreeView"
         case method_name
