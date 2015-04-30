@@ -49,6 +49,19 @@ module Gtk
       @base_module.const_set("Version", @version_module)
     end
 
+    def setup_tree_model(repository, namespace)
+      repository.each(namespace) do |info|
+        case info
+        when GObjectIntrospection::InterfaceInfo
+          case info.name
+          when "TreeModel"
+            info.gtype.to_class.__send__(:include, Enumerable)
+            return
+          end
+        end
+      end
+    end
+
     def level_bar_class
       @level_bar_class ||= @base_module.const_get(:LevelBar)
     end
