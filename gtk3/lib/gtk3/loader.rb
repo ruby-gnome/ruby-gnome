@@ -283,6 +283,11 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::TreeView"
+        case method_name
+        when "row_expanded"
+          method_name += "?"
+        end
       when "Gtk::Widget"
         case info.name
         when "size_request",

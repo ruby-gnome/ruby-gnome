@@ -86,5 +86,20 @@ class TestGtkTreeView < Test::Unit::TestCase
                    ],
                    normalized_data)
     end
+
+    test "#row_expanded?" do
+      parent = @store.append(nil)
+      parent[0] = "Hello"
+      child = @store.append(parent)
+      child[0] = "World"
+
+      assert do
+        not @view.row_expanded?(parent.path)
+      end
+      @view.expand_all
+      assert do
+        @view.row_expanded?(parent.path)
+      end
+    end
   end
 end
