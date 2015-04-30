@@ -229,8 +229,10 @@ module Gtk
         end
       when "Gtk::Buildable"
         case method_name
-        when "name", "set_name"
-          method_name = "builder_#{method_name}"
+        when "name"
+          method_name = "builder_name"
+        when "set_name"
+          method_name = "set_builder_name"
         end
       when "Gtk::Builder"
         case method_name

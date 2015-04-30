@@ -5,13 +5,13 @@ class TestGtkBuildable < Test::Unit::TestCase
     @buildable = Gtk::Box.new(:horizontal)
   end
 
-  def test_name
-    assert_equal("", @buildable.name)
-    @buildable.name = "YYY"
-    assert_equal("YYY", @buildable.name)
+  def test_builder_name
+    assert_nil(@buildable.builder_name)
+    @buildable.builder_name = "YYY"
+    assert_equal("YYY", @buildable.builder_name)
 
-    @buildable.name = ""
-    assert_equal("", @buildable.name)
+    @buildable.builder_name = ""
+    assert_equal("", @buildable.builder_name)
   end
 
   def test_add_child
