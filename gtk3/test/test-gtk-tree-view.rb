@@ -64,5 +64,27 @@ class TestGtkTreeView < Test::Unit::TestCase
         assert_nil(result)
       end
     end
+
+    test "#map_expanded_rows" do
+      parent = @store.append(nil)
+      parent[0] = "Hello"
+      child = @store.append(parent)
+      child[0] = "World"
+
+      @view.expand_all
+      @view.map_expanded_rows do |view, path|
+        iter = @store.get_iter(path)
+        iter[0] += " (mapped)"
+      end
+
+      normalized_data = @store.collect do |model, path, iter|
+        [model, path.to_s, iter[0]]
+      end
+      assert_equal([
+                     [@store, parent.path.to_s, "Hello (mapped)"],
+                     [@store, child.path.to_s, "World"],
+                   ],
+                   normalized_data)
+    end
   end
 end

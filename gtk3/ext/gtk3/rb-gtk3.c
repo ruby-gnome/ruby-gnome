@@ -138,6 +138,22 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
     return RVAL2CBOOL(rb_stop);
 }
 
+static void
+rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
+                                        GtkTreePath *path,
+                                        gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_call;
+
+    CONST_ID(id_call, "call");
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               2,
+               GOBJ2RVAL(tree_view),
+               BOXED2RVAL(path, GTK_TYPE_TREE_PATH));
+}
+
 static gpointer
 rb_gtk3_callback_finder(GIArgInfo *info)
 {
@@ -151,6 +167,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_translate_func_callback;
     } else if (name_equal(info, "TreeModelForeachFunc")) {
         return rb_gtk3_tree_model_foreach_func_callback;
+    } else if (name_equal(info, "TreeViewMappingFunc")) {
+        return rb_gtk3_tree_view_mapping_func_callback;
     } else {
         return NULL;
     }
