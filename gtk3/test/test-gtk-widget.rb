@@ -22,6 +22,28 @@ class TestGtkWidget < Test::Unit::TestCase
     end
   end
 
+  sub_test_case "#drag_source_set" do
+    test "targets - TargetEntry" do
+      target = "text/uri-list"
+      info = 0
+      @widget.drag_source_set([:shift_mask, :control_mask],
+                              [Gtk::TargetEntry.new(target, 0, info)],
+                              :copy)
+      list = @widget.drag_source_get_target_list
+      assert_equal(info, list.find(target))
+    end
+
+    test "targets - Array" do
+      target = "text/uri-list"
+      info = 0
+      @widget.drag_source_set([:shift_mask, :control_mask],
+                              [[target, 0, info]],
+                              :copy)
+      list = @widget.drag_source_get_target_list
+      assert_equal(info, list.find(target))
+    end
+  end
+
   sub_test_case "#drag_dest_set" do
     test "targets - TargetEntry" do
       target = "text/uri-list"

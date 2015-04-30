@@ -16,20 +16,30 @@
 
 module Gtk
   class Widget
+    alias_method :drag_source_set_raw, :drag_source_set
+    def drag_source_set(flags, targets, actions)
+      targets = ensure_drag_targets(targets)
+      drag_source_set_raw(flags, targets, actions)
+    end
+
     alias_method :drag_dest_set_raw, :drag_dest_set
     def drag_dest_set(flags, targets, actions)
-      if targets.is_a?(Array)
-        targets = targets.collect do |target|
-          case target
-          when Array
-            TargetEntry.new(*target)
-          else
-            target
-          end
+      targets = ensure_drag_targets(targets)
+      drag_dest_set_raw(flags, targets, actions)
+    end
+
+    private
+    def ensure_drag_targets(targets)
+      return targets unless targets.is_a?(Array)
+
+      targets.collect do |target|
+        case target
+        when Array
+          TargetEntry.new(*target)
+        else
+          target
         end
       end
-
-      drag_dest_set_raw(flags, targets, actions)
     end
   end
 end
