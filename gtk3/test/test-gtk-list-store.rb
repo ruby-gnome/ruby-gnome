@@ -84,6 +84,18 @@ class TestGtkListStore < Test::Unit::TestCase
     assert_equal([2, 'she'], [iter[ID], iter[NAME]])
   end
 
+  test "#each" do
+    iter = @store.append
+    iter[ID] = 0
+    iter[NAME] = "Hello"
+
+    normalized_data = @store.collect do |model, path, _iter|
+      [model, path.to_s, _iter.class]
+    end
+    assert_equal([[@store, iter.path.to_s, iter.class]],
+                 normalized_data)
+  end
+
   sub_test_case "GC" do
     test "iter" do
       GC.start
