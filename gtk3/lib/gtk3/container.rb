@@ -22,5 +22,15 @@ module Gtk
       add(widget)
       self
     end
+
+    alias_method :focus_chain_raw, :focus_chain
+    def focus_chain
+      set_explicitly, widgets = focus_chain_raw
+      if set_explicitly
+        widgets
+      else
+        nil
+      end
+    end
   end
 end
