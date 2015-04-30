@@ -26,6 +26,7 @@ module Gtk
       call_init_function(repository, namespace)
       define_stock_module
       define_version_module
+      setup_tree_model(repository, namespace)
       setup_pending_constants
     end
 
