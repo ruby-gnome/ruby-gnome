@@ -1,4 +1,4 @@
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -84,29 +84,31 @@ class TestGtkListStore < Test::Unit::TestCase
     assert_equal([2, 'she'], [iter[ID], iter[NAME]])
   end
 
-  def test_iter_gc
-    GC.start
-    n_iterators = count_objects(Gtk::TreeIter)
-    50.times do |i|
-      iter = @store.append
-      iter[ID] = i
-      iter[NAME] = i.to_s
+  sub_test_case "GC" do
+    test "iter" do
+      GC.start
+      n_iterators = count_objects(Gtk::TreeIter)
+      50.times do |i|
+        iter = @store.append
+        iter[ID] = i
+        iter[NAME] = i.to_s
+      end
+      100.times do
+        @store.iter_first
+      end
+      iter = @store.iter_first
+      while @store.remove(iter); end
+      assert_equal(0, @store.to_enum(:each).to_a.size)
+      GC.start
+      assert_equal(n_iterators + 1, count_objects(Gtk::TreeIter))
     end
-    100.times do
-      @store.iter_first
-    end
-    iter = @store.iter_first
-    while @store.remove(iter); end
-    assert_equal(0, @store.to_enum(:each).to_a.size)
-    GC.start
-    assert_equal(n_iterators + 1, count_objects(Gtk::TreeIter))
-  end
 
-  private
-  def count_objects(klass)
-    n_objects = ObjectSpace.each_object(Gtk::TreeIter) do
-      # do nothing
+    private
+    def count_objects(klass)
+      n_objects = ObjectSpace.each_object(Gtk::TreeIter) do
+        # do nothing
+      end
+      n_objects
     end
-    n_objects
   end
 end
