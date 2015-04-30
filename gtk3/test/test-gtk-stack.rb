@@ -86,7 +86,8 @@ class TestGtkStack < Test::Unit::TestCase
     end
 
     def test_assign
-      assert_not_respond_to(@stack, :visible_child=)
+      @stack.visible_child = @visible_widget
+      assert_equal(@visible_widget, @stack.visible_child)
     end
 
     def test_widget
