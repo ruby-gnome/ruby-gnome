@@ -32,5 +32,13 @@ module Gtk
         nil
       end
     end
+
+    alias_method :child_get_property_raw, :child_get_property
+    def child_get_property(child, name)
+      property = self.class.find_child_property(name)
+      value = GLib::Value.new(property.value_type)
+      child_get_property_raw(child, name, value)
+      value.value
+    end
   end
 end
