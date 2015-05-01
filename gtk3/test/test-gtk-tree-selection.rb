@@ -30,4 +30,24 @@ class TestGtkTreeSelection < Test::Unit::TestCase
       assert_equal(Gtk::SelectionMode::MULTIPLE, @selection.mode)
     end
   end
+
+  sub_test_case("selected") do
+    def setup
+      @model = Gtk::TreeStore.new(String)
+      @view = Gtk::TreeView.new(@model)
+      @column = Gtk::TreeViewColumn.new("Label",
+                                        Gtk::CellRendererText.new,
+                                        :text => 0)
+      @iter = @model.append(nil)
+      @iter[0] = "Hello"
+
+      @selection = @view.selection
+      @selection.select_path(@iter.path)
+    end
+
+    test "selected_rows" do
+      assert_equal([[@iter.path], @model],
+                   @selection.selected_rows)
+    end
+  end
 end
