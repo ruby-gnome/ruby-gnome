@@ -45,7 +45,7 @@ class TestGtkTreeSelection < Test::Unit::TestCase
       @selection.select_path(@iter.path)
     end
 
-    test "selected_rows" do
+    test "#selected_rows" do
       assert_equal([[@iter.path], @model],
                    @selection.selected_rows)
     end
