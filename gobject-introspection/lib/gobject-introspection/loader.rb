@@ -487,8 +487,8 @@ module GObjectIntrospection
       unlock_gvl = should_unlock_gvl?(info, klass)
       remove_existing_method(klass, method_name)
       function_info_p = (info.class == FunctionInfo)
-      no_return_value_p = (info.return_type.tag == TypeTag::VOID)
-      setter_method_p = (/\Aset_/ === method_name and no_return_value_p)
+      no_return_value_p =
+        (info.return_type.tag == TypeTag::VOID and info.n_out_args.zero?)
       prepare = lambda do |arguments, &block|
         arguments, block = build_arguments(info, arguments, &block)
         validate_arguments(info, "#{klass}\##{method_name}", arguments)
@@ -506,7 +506,7 @@ module GObjectIntrospection
           }
           options[:receiver] = self unless function_info_p
           return_value = info.invoke(options, &block)
-          if setter_method_p
+          if no_return_value_p
             self
           else
             return_value
