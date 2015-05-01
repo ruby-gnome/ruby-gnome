@@ -167,6 +167,32 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
 }
 
 static void
+rb_gtk3_tree_selection_foreach_func_callback(GtkTreeModel *model,
+                                             GtkTreePath *path,
+                                             GtkTreeIter *iter,
+                                             gpointer user_data)
+{
+    RBGICallbackData *callback_data = user_data;
+    ID id_set_model;
+    ID id_call;
+    VALUE rb_model;
+    VALUE rb_iter;
+
+    CONST_ID(id_set_model, "model=");
+    rb_model = GOBJ2RVAL(model);
+    rb_iter = BOXED2RVAL(iter, GTK_TYPE_TREE_ITER);
+    rb_funcall(rb_iter, id_set_model, 1, rb_model);
+
+    CONST_ID(id_call, "call");
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               3,
+               rb_model,
+               BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+               rb_iter);
+}
+
+static void
 rb_gtk3_tree_view_mapping_func_callback(GtkTreeView *tree_view,
                                         GtkTreePath *path,
                                         gpointer user_data)
@@ -197,6 +223,8 @@ rb_gtk3_callback_finder(GIArgInfo *info)
         return rb_gtk3_tree_cell_data_func_callback;
     } else if (name_equal(info, "TreeModelForeachFunc")) {
         return rb_gtk3_tree_model_foreach_func_callback;
+    } else if (name_equal(info, "TreeSelectionForeachFunc")) {
+        return rb_gtk3_tree_selection_foreach_func_callback;
     } else if (name_equal(info, "TreeViewMappingFunc")) {
         return rb_gtk3_tree_view_mapping_func_callback;
     } else {

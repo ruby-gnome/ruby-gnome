@@ -49,5 +49,13 @@ class TestGtkTreeSelection < Test::Unit::TestCase
       assert_equal([[@iter.path], @model],
                    @selection.selected_rows)
     end
+
+    test "#each" do
+      normalized_selected = @selection.collect do |model, path, iter|
+        [model, path.to_s, iter.class]
+      end
+      assert_equal([[@model, @iter.path.to_s, @iter.class]],
+                   normalized_selected)
+    end
   end
 end

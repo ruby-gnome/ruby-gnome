@@ -886,6 +886,11 @@ module Gtk
     define_deprecated_flags :TreeModelFlags
   end
 
+  class TreeSelection
+    extend GLib::Deprecatable
+    define_deprecated_method :selected_each, :each
+  end
+
   class TreeView
     extend GLib::Deprecatable
     define_deprecated_const :DropPosition, "Gtk::TreeViewDropPosition"

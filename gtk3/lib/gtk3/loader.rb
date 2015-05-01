@@ -291,6 +291,11 @@ module Gtk
         when "compare"
           method_name = "<=>"
         end
+      when "Gtk::TreeSelection"
+        case method_name
+        when "selected_foreach"
+          method_name = "each"
+        end
       when "Gtk::TreeView"
         case method_name
         when "row_expanded"
