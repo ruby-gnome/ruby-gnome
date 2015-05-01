@@ -604,6 +604,81 @@ rb_gi_argument_to_ruby_array(GIArgument *array_argument,
 }
 
 static VALUE
+rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
+                                       G_GNUC_UNUSED GITypeInfo *type_info,
+                                       GITypeInfo *element_type_info)
+{
+    VALUE rb_argument = Qnil;
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    const gchar *interface_name;
+    GType gtype;
+
+    interface_info = g_type_info_get_interface(element_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    interface_name = g_info_type_to_string(interface_type);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+    g_base_info_unref(interface_info);
+    g_base_info_unref(element_type_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_STRUCT:
+        if (gtype == G_TYPE_NONE) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
+                     interface_name,
+                     g_type_name(gtype));
+        } else {
+            rb_argument = BOXEDGLIST2RVAL(argument->v_pointer, gtype);
+        }
+        break;
+    case GI_INFO_TYPE_BOXED:
+        rb_argument = BOXEDGLIST2RVAL(argument->v_pointer, gtype);
+        break;
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_OBJECT:
+        rb_argument = GOBJGLIST2RVAL(argument->v_pointer);
+        break;
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+    case GI_INFO_TYPE_INVALID_0:
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
+
+    return rb_argument;
+}
+
+static VALUE
 rb_gi_argument_to_ruby_glist(GIArgument *argument, GITypeInfo *type_info)
 {
     VALUE rb_argument;
@@ -612,7 +687,6 @@ rb_gi_argument_to_ruby_glist(GIArgument *argument, GITypeInfo *type_info)
 
     element_type_info = g_type_info_get_param_type(type_info, 0);
     element_type_tag = g_type_info_get_tag(element_type_info);
-    g_base_info_unref(element_type_info);
 
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
@@ -628,32 +702,39 @@ rb_gi_argument_to_ruby_glist(GIArgument *argument, GITypeInfo *type_info)
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
     case GI_TYPE_TAG_GTYPE:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GList)[%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_UTF8:
+        g_base_info_unref(element_type_info);
         rb_argument = CSTRGLIST2RVAL(argument->v_pointer);
         break;
     case GI_TYPE_TAG_FILENAME:
     case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GList)[%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_INTERFACE:
-        rb_argument = GOBJGLIST2RVAL(argument->v_pointer);
+        rb_argument = rb_gi_argument_to_ruby_glist_interface(argument,
+                                                             type_info,
+                                                             element_type_info);
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
     case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GList)[%s] -> Ruby",
                  g_type_tag_to_string(element_type_tag));
         break;
     default:
+        g_base_info_unref(element_type_info);
         g_assert_not_reached();
         break;
     }
@@ -1316,6 +1397,92 @@ rb_gi_return_argument_free_everything_interface(GIArgument *argument,
 }
 
 static void
+rb_gi_boxed_free_callback(gpointer boxed, gpointer user_data)
+{
+    GType *gtype = user_data;
+
+    g_boxed_free(*gtype, boxed);
+}
+
+
+static void
+rb_gi_return_argument_free_everything_glist_interface(GIArgument *argument,
+                                                      G_GNUC_UNUSED GITypeInfo *type_info,
+                                                      GITypeInfo *element_type_info)
+{
+    GIBaseInfo *interface_info;
+    GIInfoType interface_type;
+    const gchar *interface_name;
+    GType gtype;
+
+    interface_info = g_type_info_get_interface(element_type_info);
+    interface_type = g_base_info_get_type(interface_info);
+    interface_name = g_info_type_to_string(interface_type);
+    gtype = g_registered_type_info_get_g_type(interface_info);
+    g_base_info_unref(interface_info);
+    g_base_info_unref(element_type_info);
+
+    switch (interface_type) {
+    case GI_INFO_TYPE_INVALID:
+    case GI_INFO_TYPE_FUNCTION:
+    case GI_INFO_TYPE_CALLBACK:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(GList)[interface(%s)](%s) everything",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_STRUCT:
+        if (gtype == G_TYPE_NONE) {
+            rb_raise(rb_eNotImpError,
+                     "TODO: free GIArgument(GList)[interface(%s)](%s) everything",
+                     interface_name,
+                     g_type_name(gtype));
+        } else {
+            g_list_foreach(argument->v_pointer,
+                           rb_gi_boxed_free_callback,
+                           &gtype);
+            g_list_free(argument->v_pointer);
+        }
+        break;
+    case GI_INFO_TYPE_BOXED:
+        g_list_foreach(argument->v_pointer, rb_gi_boxed_free_callback, &gtype);
+        g_list_free(argument->v_pointer);
+        break;
+    case GI_INFO_TYPE_ENUM:
+    case GI_INFO_TYPE_FLAGS:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(GList)[interface(%s)](%s) everything",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    case GI_INFO_TYPE_OBJECT:
+        g_list_foreach(argument->v_pointer, (GFunc)g_object_unref, NULL);
+        g_list_free(argument->v_pointer);
+        break;
+    case GI_INFO_TYPE_INTERFACE:
+    case GI_INFO_TYPE_CONSTANT:
+    case GI_INFO_TYPE_INVALID_0:
+    case GI_INFO_TYPE_UNION:
+    case GI_INFO_TYPE_VALUE:
+    case GI_INFO_TYPE_SIGNAL:
+    case GI_INFO_TYPE_VFUNC:
+    case GI_INFO_TYPE_PROPERTY:
+    case GI_INFO_TYPE_FIELD:
+    case GI_INFO_TYPE_ARG:
+    case GI_INFO_TYPE_TYPE:
+    case GI_INFO_TYPE_UNRESOLVED:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(GList)[interface(%s)](%s) everything",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_return_argument_free_everything_glist(GIArgument *argument,
                                             GITypeInfo *type_info)
 {
@@ -1324,7 +1491,6 @@ rb_gi_return_argument_free_everything_glist(GIArgument *argument,
 
     element_type_info = g_type_info_get_param_type(type_info, 0);
     element_type_tag = g_type_info_get_tag(element_type_info);
-    g_base_info_unref(element_type_info);
 
     switch (element_type_tag) {
     case GI_TYPE_TAG_VOID:
@@ -1340,34 +1506,40 @@ rb_gi_return_argument_free_everything_glist(GIArgument *argument,
     case GI_TYPE_TAG_FLOAT:
     case GI_TYPE_TAG_DOUBLE:
     case GI_TYPE_TAG_GTYPE:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(GList)[%s] everything",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_UTF8:
+        g_base_info_unref(element_type_info);
         g_list_foreach(argument->v_pointer, (GFunc)g_free, NULL);
         g_list_free(argument->v_pointer);
         break;
     case GI_TYPE_TAG_FILENAME:
     case GI_TYPE_TAG_ARRAY:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(GList)[%s] everything",
                  g_type_tag_to_string(element_type_tag));
         break;
     case GI_TYPE_TAG_INTERFACE:
-        g_list_foreach(argument->v_pointer, (GFunc)g_object_unref, NULL);
-        g_list_free(argument->v_pointer);
+        rb_gi_return_argument_free_everything_glist_interface(argument,
+                                                              type_info,
+                                                              element_type_info);
         break;
     case GI_TYPE_TAG_GLIST:
     case GI_TYPE_TAG_GSLIST:
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
     case GI_TYPE_TAG_UNICHAR:
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: free GIArgument(GList)[%s] everything",
                  g_type_tag_to_string(element_type_tag));
         break;
     default:
+        g_base_info_unref(element_type_info);
         g_assert_not_reached();
         break;
     }
