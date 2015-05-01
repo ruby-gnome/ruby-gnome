@@ -248,6 +248,11 @@ module Gtk
     end
   end
 
+  class Container
+    extend GLib::Deprecatable
+    define_deprecated_singleton_method :child_property, :find_child_property
+  end
+
   class Dialog
     extend GLib::Deprecatable
     define_deprecated_const :Flags, "Gtk::DialogFlags"
