@@ -42,8 +42,8 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   end
 
   def test_shortcuts
-    file_location1 = Gio::File.new_for_path("file1")
-    file_location2 = Gio::File.new_for_path("file2")
+    file_location1 = Gio::File.path("file1")
+    file_location2 = Gio::File.path("file2")
     @places_sidebar.add_shortcut(file_location1)
     @places_sidebar.add_shortcut(file_location2)
     assert_equal([file_location1, file_location2],
