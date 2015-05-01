@@ -52,4 +52,15 @@ class TestGdkRectangle < Test::Unit::TestCase
                    unioned_rectangle.height,
                  ])
   end
+
+  def test_to_a
+    rectangle = Gdk::Rectangle.new(0, 10, 20, 30)
+    assert_equal([
+                   0,
+                   10,
+                   20,
+                   30,
+                 ],
+                 rectangle.to_a)
+  end
 end

@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -33,6 +33,10 @@ module Gdk
       else
         nil
       end
+    end
+
+    def to_a
+      [x, y, width, height]
     end
   end
 end
