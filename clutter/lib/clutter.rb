@@ -34,6 +34,9 @@ module Clutter
   LOG_DOMAIN = "Clutter"
   GLib::Log.set_log_domain(LOG_DOMAIN)
 
+  class InitError < StandardError
+  end
+
   class << self
     def const_missing(name)
       init()
@@ -68,9 +71,6 @@ module Clutter
   end
 
   class Loader < GObjectIntrospection::Loader
-    class InitError < StandardError
-    end
-
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
