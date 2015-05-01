@@ -40,11 +40,17 @@ module WebKit2Gtk
       end
       Gtk.init if Gtk.respond_to?(:init)
       loader = Loader.new(self)
-      loader.load("WebKit2")
+      loader.load
     end
   end
 
   class Loader < GObjectIntrospection::Loader
+    NAMESPACE = "WebKit2"
+
+    def load
+      super(NAMESPACE)
+    end
+
     private
     def pre_load(repository, namespace)
       define_version_module

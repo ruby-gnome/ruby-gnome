@@ -61,4 +61,12 @@ require "webkit2-gtk-test-utils"
 
 require "webkit2-gtk"
 
+repository = GObjectIntrospection::Repository.default
+begin
+  repository.require(WebKit2Gtk::Loader::NAMESPACE)
+rescue GLib::Error
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
+
 exit Test::Unit::AutoRunner.run(true)
