@@ -1374,6 +1374,64 @@ rb_gi_return_argument_free_everything_glist(GIArgument *argument,
 }
 
 static void
+rb_gi_return_argument_free_everything_gslist(GIArgument *argument,
+                                             GITypeInfo *type_info)
+{
+    GITypeInfo *element_type_info;
+    GITypeTag element_type_tag;
+
+    element_type_info = g_type_info_get_param_type(type_info, 0);
+    element_type_tag = g_type_info_get_tag(element_type_info);
+    g_base_info_unref(element_type_info);
+
+    switch (element_type_tag) {
+    case GI_TYPE_TAG_VOID:
+    case GI_TYPE_TAG_BOOLEAN:
+    case GI_TYPE_TAG_INT8:
+    case GI_TYPE_TAG_UINT8:
+    case GI_TYPE_TAG_INT16:
+    case GI_TYPE_TAG_UINT16:
+    case GI_TYPE_TAG_INT32:
+    case GI_TYPE_TAG_UINT32:
+    case GI_TYPE_TAG_INT64:
+    case GI_TYPE_TAG_UINT64:
+    case GI_TYPE_TAG_FLOAT:
+    case GI_TYPE_TAG_DOUBLE:
+    case GI_TYPE_TAG_GTYPE:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(GSList)[%s] everything",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_UTF8:
+        g_slist_foreach(argument->v_pointer, (GFunc)g_free, NULL);
+        g_slist_free(argument->v_pointer);
+        break;
+    case GI_TYPE_TAG_FILENAME:
+    case GI_TYPE_TAG_ARRAY:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(GSList)[%s] everything",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    case GI_TYPE_TAG_INTERFACE:
+        g_slist_foreach(argument->v_pointer, (GFunc)g_object_unref, NULL);
+        g_slist_free(argument->v_pointer);
+        break;
+    case GI_TYPE_TAG_GLIST:
+    case GI_TYPE_TAG_GSLIST:
+    case GI_TYPE_TAG_GHASH:
+    case GI_TYPE_TAG_ERROR:
+    case GI_TYPE_TAG_UNICHAR:
+        rb_raise(rb_eNotImpError,
+                 "TODO: free GIArgument(GSList)[%s] everything",
+                 g_type_tag_to_string(element_type_tag));
+        break;
+    default:
+        g_assert_not_reached();
+        break;
+    }
+}
+
+static void
 rb_gi_return_argument_free_everything(GIArgument *argument,
                                       GITypeInfo *type_info)
 {
@@ -1414,6 +1472,8 @@ rb_gi_return_argument_free_everything(GIArgument *argument,
         rb_gi_return_argument_free_everything_glist(argument, type_info);
         break;
     case GI_TYPE_TAG_GSLIST:
+        rb_gi_return_argument_free_everything_gslist(argument, type_info);
+        break;
     case GI_TYPE_TAG_GHASH:
     case GI_TYPE_TAG_ERROR:
     case GI_TYPE_TAG_UNICHAR:
