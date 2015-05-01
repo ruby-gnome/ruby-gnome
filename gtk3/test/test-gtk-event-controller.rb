@@ -27,11 +27,6 @@ class TestGtkEventController < Test::Unit::TestCase
     assert_equal(Gtk::PropagationPhase::CAPTURE, @gesture.propagation_phase)
   end
 
-  def test_handle_event
-    touch_update_event = Gdk::EventTouch.new(:touch_update)
-    assert_true(@gesture.handle_event(touch_update_event))
-  end
-
   class TestEnum < self
     def test_enum_propergation_phase
       assert_const_defined(Gtk::PropagationPhase, :BUBBLE)
