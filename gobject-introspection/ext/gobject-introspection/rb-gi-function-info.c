@@ -709,6 +709,7 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
     GError *error = NULL;
     gboolean unlock_gvl = FALSE;
     VALUE rb_receiver, rb_arguments, rb_unlock_gvl;
+    gboolean rb_receiver_is_class = FALSE;
 
     if (RB_TYPE_P(rb_options, RUBY_T_ARRAY)) {
         rb_receiver = Qnil;
@@ -732,6 +733,12 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
     } else {
         if (gobject_based_p((GIBaseInfo *)info)) {
             receiver.v_pointer = RVAL2GOBJ(rb_receiver);
+        } else if (RVAL2CBOOL(rb_obj_is_kind_of(rb_receiver, rb_cClass)) &&
+                   rb_respond_to(rb_receiver, rb_intern("gtype"))) {
+            GObjectClass *object_class;
+            rb_receiver_is_class = TRUE;
+            object_class = g_type_class_ref(CLASS2GTYPE(rb_receiver));
+            receiver.v_pointer = object_class;
         } else {
             receiver.v_pointer = DATA_PTR(rb_receiver);
         }
@@ -762,6 +769,10 @@ rb_gi_function_info_invoke_raw(GIFunctionInfo *info, VALUE rb_options,
             rb_gi_function_info_invoke_raw_call(&data);
         }
         succeeded = data.succeeded;
+
+        if (rb_receiver_is_class) {
+            g_type_class_unref(receiver.v_pointer);
+        }
 
         if (return_value) {
             *return_value = data.return_value;

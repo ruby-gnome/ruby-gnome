@@ -1,4 +1,4 @@
-# Copyright (C) 2012-2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2012-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -13,6 +13,8 @@
 # You should have received a copy of the GNU Lesser General Public
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+require "English"
 
 module GObjectIntrospection
   class Loader
@@ -132,9 +134,21 @@ module GObjectIntrospection
     end
 
     def load_struct_info(info)
-      return if info.gtype_struct?
+      case info.name
+      when /Class\z/
+        base_class_name = $PREMATCH
+        method_infos = info.methods.find_all do |method_info|
+          method_info.is_a?(MethodInfo)
+        end
+        unless methods.empty?
+          base_class = @base_module.const_get(base_class_name)
+          load_method_infos(method_infos, base_class.singleton_class)
+        end
+      else
+        return if info.gtype_struct?
 
-      define_struct(info)
+        define_struct(info)
+      end
     end
 
     def define_boxed(info)
