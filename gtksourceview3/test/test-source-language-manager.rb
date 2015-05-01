@@ -16,12 +16,12 @@
 
 class TestLanguageManager < Test::Unit::TestCase
   def setup
-    @lang = GtkSource::LanguageManager.new
+    @manager = GtkSource::LanguageManager.new
     @view = GtkSource::View.new
   end
 
   def test_language
-    language = @lang.get_language("ruby")
+    language = @manager.get_language("ruby")
     @view.buffer.language = language
     assert_equal(language, @view.buffer.language)
 
@@ -34,13 +34,13 @@ class TestLanguageManager < Test::Unit::TestCase
   end
 
   def test_language_ids
-    ids = @lang.language_ids
+    ids = @manager.language_ids
     assert_include(ids, "ruby")
   end
 
   def test_search_path
     custom_path = "/path/to/search"
-    @lang.search_path = [custom_path]
-    assert_equal([custom_path], @lang.search_path)
+    @manager.search_path = [custom_path]
+    assert_equal([custom_path], @manager.search_path)
   end
 end
