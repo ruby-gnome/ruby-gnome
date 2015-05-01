@@ -17,6 +17,10 @@
 class TestGtkGesture < Test::Unit::TestCase
   include GtkTestUtils
 
+  def setup
+    only_gtk_version(3, 14, 0)
+  end
+
   class TestEnum < self
     def test_event_sequence_state
       assert_const_defined(Gtk::EventSequenceState, :DENIED)
