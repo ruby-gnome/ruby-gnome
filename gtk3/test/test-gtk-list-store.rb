@@ -85,14 +85,21 @@ class TestGtkListStore < Test::Unit::TestCase
   end
 
   test "#each" do
-    iter = @store.append
-    iter[ID] = 0
-    iter[NAME] = "Hello"
+    first_iter = @store.append
+    first_iter[ID] = 0
+    first_iter[NAME] = "Hello"
+    second_iter = @store.append
+    second_iter[ID] = 1
+    second_iter[NAME] = "World"
 
-    normalized_data = @store.collect do |model, path, _iter|
-      [model, path.to_s, _iter.class]
+    normalized_data = []
+    @store.each do |model, path, iter|
+      normalized_data << [model, path.to_s, iter.class]
     end
-    assert_equal([[@store, iter.path.to_s, iter.class]],
+    assert_equal([
+                   [@store, first_iter.path.to_s, first_iter.class],
+                   [@store, second_iter.path.to_s, second_iter.class],
+                 ],
                  normalized_data)
   end
 

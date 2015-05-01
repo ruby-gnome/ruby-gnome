@@ -148,7 +148,7 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
     ID id_call;
     VALUE rb_model;
     VALUE rb_iter;
-    VALUE rb_stop;
+    gboolean stop = FALSE;
 
     CONST_ID(id_set_model, "model=");
     rb_model = GOBJ2RVAL(model);
@@ -156,14 +156,14 @@ rb_gtk3_tree_model_foreach_func_callback(GtkTreeModel *model,
     rb_funcall(rb_iter, id_set_model, 1, rb_model);
 
     CONST_ID(id_call, "call");
-    rb_stop = rb_funcall(callback_data->rb_callback,
-                         id_call,
-                         3,
-                         rb_model,
-                         BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
-                         rb_iter);
+    rb_funcall(callback_data->rb_callback,
+               id_call,
+               3,
+               rb_model,
+               BOXED2RVAL(path, GTK_TYPE_TREE_PATH),
+               rb_iter);
 
-    return RVAL2CBOOL(rb_stop);
+    return stop;
 }
 
 static void
