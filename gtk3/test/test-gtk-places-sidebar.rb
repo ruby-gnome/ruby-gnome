@@ -31,9 +31,9 @@ class TestGtkPlacesSidebar < Test::Unit::TestCase
   def test_location_accessors
     assert_nil(@places_sidebar.location)
 
-    file = Gio::File.parse_name("test_file")
-    @places_sidebar.location = file
-    assert_equal(file, @places_sidebar.location)
+    home = Gio::File.path(ENV["HOME"])
+    @places_sidebar.location = home
+    assert_equal(home.path, @places_sidebar.location.path)
   end
 
   def test_show_desktop_accessors
