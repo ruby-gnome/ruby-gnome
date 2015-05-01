@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -19,13 +19,15 @@
 class TestGtkTreeSelection < Test::Unit::TestCase
   include GtkTestUtils
 
-  def setup
-    @tree = Gtk::TreeView.new
-    @selection =  @tree.selection
-  end
+  sub_test_case("accessors") do
+    def setup
+      @tree = Gtk::TreeView.new
+      @selection =  @tree.selection
+    end
 
-  def test_mode_accessors
-    @selection.mode = Gtk::SelectionMode::MULTIPLE
-    assert_equal(Gtk::SelectionMode::MULTIPLE, @selection.mode)
+    test "mode" do
+      @selection.mode = :multiple
+      assert_equal(Gtk::SelectionMode::MULTIPLE, @selection.mode)
+    end
   end
 end
