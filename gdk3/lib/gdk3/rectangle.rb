@@ -35,6 +35,13 @@ module Gdk
       end
     end
 
+    def inspect
+      super.gsub(/>\z/) do
+        " x=#{x.inspect} y=#{y.inspect} " +
+          "width=#{width.inspect} height=#{height.inspect}>"
+      end
+    end
+
     def to_a
       [x, y, width, height]
     end
