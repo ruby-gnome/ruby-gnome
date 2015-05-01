@@ -2,8 +2,9 @@ env:
   global:
     - DISPLAY=":99.0"
 notifications:
-  recipients:
-    - ruby-gnome2-cvs@lists.sourceforge.net
+  email:
+    recipients:
+      - ruby-gnome2-cvs@lists.sourceforge.net
 rvm:
   - 1.9.3
   - 2.0.0
