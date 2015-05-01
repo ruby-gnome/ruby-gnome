@@ -17,11 +17,12 @@
 module Gtk
   class IconTheme
     alias_method :choose_icon_raw, :choose_icon
-    def choose_icon(icon_name, size, flags=nil)
+    def choose_icon(icon_names, size, flags=nil)
+      icon_names = [icon_names] unless icon_names.is_a?(Array)
       if flags.nil?
         flags = :generic_fallback
       end
-      choose_icon_raw(icon_name, size, flags)
+      choose_icon_raw(icon_names, size, flags)
     end
   end
 end
