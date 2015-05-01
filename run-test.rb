@@ -35,7 +35,7 @@ ignored_modules = [
   "vte3-no-gi",
 ]
 
-failed_targets = []
+failed_target_names = []
 targets.each do |target|
   next if ignored_modules.include?(target.basename.to_s)
   Dir.chdir(target.to_s) do
@@ -45,16 +45,16 @@ targets.each do |target|
     args = includes + ["test/run-test.rb"]
     command = [ruby, *args]
     unless system(command.collect {|arg| "'#{arg.gsub(/'/, '\\\'')}'"}.join(' '))
-      failed_targets << target
+      failed_target_names << target.basename.to_s
     end
 
     puts separator
   end
 end
 
-if failed_targets.empty?
+if failed_target_names.empty?
   exit(true)
 else
-  puts "Failed tests: #{failed_targets.join(', ')}"
+  puts "Failed targets: #{failed_target_names.join(', ')}"
   exit(false)
 end
