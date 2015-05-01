@@ -36,11 +36,11 @@ class TestEnum < Test::Unit::TestCase
     assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS, "KEEP_COMMENTS")
     assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS, "keep COMMENTS")
 
-    assert_raise(TypeError) do
+    assert_raise(ArgumentError) do
       assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS, :unknown)
     end
 
-    assert_raise(TypeError) do
+    assert_raise(ArgumentError) do
       assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS, "UNKNOWN")
     end
   end
@@ -58,12 +58,9 @@ class TestEnum < Test::Unit::TestCase
     assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS |
                          GLib::KeyFile::KEEP_TRANSLATIONS,
                          [:keep_comments, GLib::KeyFile::KEEP_TRANSLATIONS])
-
-    assert_raise(TypeError) do
-      assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS |
-                           GLib::KeyFile::KEEP_TRANSLATIONS,
-                           [:keep_comments, nil, :keep_translations])
-    end
+    assert_key_file_load(GLib::KeyFile::KEEP_COMMENTS |
+                         GLib::KeyFile::KEEP_TRANSLATIONS,
+                         [:keep_comments, nil, :keep_translations])
   end
 
   def test_flags_or
