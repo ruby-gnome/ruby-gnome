@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2013-2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -62,5 +62,13 @@ class TestGdkRectangle < Test::Unit::TestCase
                    30,
                  ],
                  rectangle.to_a)
+  end
+
+  test "#==" do
+    rectangle1 = Gdk::Rectangle.new(0, 10, 20, 30)
+    rectangle2 = Gdk::Rectangle.new(0, 10, 20, 30)
+    assert do
+      rectangle1 == rectangle2
+    end
   end
 end
