@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -40,7 +40,7 @@ class TestLanguageManager < Test::Unit::TestCase
 
   def test_search_path
     custom_path = "/path/to/search"
-    @lang.search_path = custom_path
+    @lang.search_path = [custom_path]
     assert_equal([custom_path], @lang.search_path)
   end
 end
