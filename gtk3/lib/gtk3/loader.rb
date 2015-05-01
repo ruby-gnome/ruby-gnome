@@ -278,6 +278,11 @@ module Gtk
           # Ignore deprecated methods
           return
         end
+      when "Gtk::IconTheme"
+        case method_name
+        when "list_icons"
+          method_name = "icons"
+        end
       when "Gtk::Image"
         method_name = method_name.gsub(/\Agicon/, "icon")
       when "Gtk::Tooltip"

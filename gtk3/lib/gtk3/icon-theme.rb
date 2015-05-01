@@ -16,10 +16,6 @@
 
 module Gtk
   class IconTheme
-    def icons
-      list_icons(nil)
-    end
-
     alias_method :choose_icon_raw, :choose_icon
     def choose_icon(icon_name, size, flags=nil)
       if flags.nil?
