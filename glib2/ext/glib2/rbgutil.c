@@ -189,6 +189,7 @@ rbg_name_to_nick(const gchar *name)
             *current = '-';
             break;
         default:
+            *current = g_ascii_tolower(*current);
             break;
         }
     }
