@@ -15,14 +15,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 module Gtk
-  class GestureMultiPress
-    alias_method :area_raw, :area
-    def area
-      filled, rectangle = area_raw
-      if filled
-        rectangle
-      else
-        nil
+  if const_defined?(:GestureMultiPress)
+    class GestureMultiPress
+      alias_method :area_raw, :area
+      def area
+        filled, rectangle = area_raw
+        if filled
+          rectangle
+        else
+          nil
+        end
       end
     end
   end
