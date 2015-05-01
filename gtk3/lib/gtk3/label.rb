@@ -29,7 +29,7 @@ module Gtk
       if options[:use_underline]
         initialize_new_with_mnemonic(text)
       else
-        initialize_raw(text)
+        initialize_raw(text || "")
       end
     end
 
