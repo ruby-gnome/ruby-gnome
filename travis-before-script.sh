@@ -29,7 +29,6 @@ sudo apt-get install -qq -y \
     libgirepository1.0-dev \
     gstreamer1.0-plugins-good \
     gir1.2-clutter-1.0 \
-    gir1.2-clutter-gst-1.0 \
     gir1.2-gtkclutter-1.0 \
     gir1.2-gtksource-3.0 \
     gir1.2-vte-2.90 \

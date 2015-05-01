@@ -58,4 +58,12 @@ require "clutter-gstreamer-test-utils"
 
 require "clutter-gst"
 
+repository = GObjectIntrospection::Repository.default
+begin
+  repository.require(ClutterGst::Loader::NAMESPACE)
+rescue GLib::Error
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
+
 exit Test::Unit::AutoRunner.run(true)

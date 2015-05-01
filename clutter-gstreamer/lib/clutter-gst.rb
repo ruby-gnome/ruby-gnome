@@ -47,17 +47,23 @@ module ClutterGst
       Gst.init if Gst.respond_to?(:init)
       Clutter.init if Clutter.respond_to?(:init)
       loader = Loader.new(self, argv)
-      loader.load("ClutterGst")
+      loader.load
     end
   end
 
   class Loader < GObjectIntrospection::Loader
+    NAMESPACE = "ClutterGst"
+
     class InitError < StandardError
     end
 
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
+    end
+
+    def load
+      super(NAMESPACE)
     end
 
     private
