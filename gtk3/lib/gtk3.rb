@@ -35,6 +35,9 @@ module Gtk
   class Error < StandardError
   end
 
+  class InitError < Error
+  end
+
   class << self
     def const_missing(name)
       init()
