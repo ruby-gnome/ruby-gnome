@@ -23,6 +23,11 @@ class TestGtkWidget < Test::Unit::TestCase
   end
 
   sub_test_case "#drag_source_set" do
+    def setup
+      only_gtk_version(3, 9, 16)
+      super
+    end
+
     test "targets - TargetEntry" do
       target = "text/uri-list"
       info = 0
@@ -45,6 +50,11 @@ class TestGtkWidget < Test::Unit::TestCase
   end
 
   sub_test_case "#drag_dest_set" do
+    def setup
+      only_gtk_version(3, 9, 16)
+      super
+    end
+
     test "targets - TargetEntry" do
       target = "text/uri-list"
       info = 0
