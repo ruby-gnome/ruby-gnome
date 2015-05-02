@@ -24,4 +24,20 @@ module GtkTestUtils
       omit("Require GTK+ >= #{major}.#{minor}.#{micro}")
     end
   end
+
+  def window_system_type_name
+    Gdk::Screen.default.class.gtype.name
+  end
+
+  def csd_supported?
+    screen = Gdk::Screen.default
+    case window_system_type_name
+    when "GdkX11Screen"
+      screen.composited? and screen.rgba_visual
+    when "GdkWin32Screen"
+      screen.rgba_visual
+    else
+      true
+    end
+  end
 end
