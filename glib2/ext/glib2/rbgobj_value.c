@@ -343,7 +343,7 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     rb_scan_args(argc, argv, "11", &rb_gtype, &rb_value);
 
-    g_value_init(&value, NUM2INT(rb_to_int(rb_gtype)));
+    g_value_init(&value, NUM2ULONG(rb_to_int(rb_gtype)));
     if (argc == 2) {
         rbgobj_rvalue_to_gvalue(rb_value, &value);
     }
