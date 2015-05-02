@@ -21,6 +21,10 @@
 
 #include "rbgprivate.h"
 
+#ifdef HAVE_RUBY_THREAD_H
+#  include <ruby/thread.h>
+#endif
+
 GStaticPrivate rg_polling_key = G_STATIC_PRIVATE_INIT;
 
 /*
@@ -49,6 +53,17 @@ typedef struct _PollInfo
     gint result;
 } PollInfo;
 
+#ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
+static void *
+rg_poll_in_blocking(void *data)
+{
+    PollInfo *info = data;
+
+    info->result = default_poll_func(info->ufds, info->nfsd, info->timeout);
+
+    return NULL;
+}
+#else
 static VALUE
 rg_poll_in_blocking(void *data)
 {
@@ -58,6 +73,7 @@ rg_poll_in_blocking(void *data)
 
     return Qnil;
 }
+#endif
 
 static gint
 rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
