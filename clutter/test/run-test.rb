@@ -60,6 +60,6 @@ rescue GLib::Error
   exit(true)
 end
 
-Clutter.init([])
+Clutter.init
 
 exit Test::Unit::AutoRunner.run(true, clutter_base)
