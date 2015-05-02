@@ -32,4 +32,5 @@ sudo apt-get install -qq -y \
     gir1.2-vte-2.90 \
     gir1.2-webkit-1.0 \
     gir1.2-webkit-3.0 \
-    gnome-icon-theme
+    gnome-icon-theme \
+    dbus-x11
