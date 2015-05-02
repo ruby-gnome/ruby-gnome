@@ -18,7 +18,7 @@ before_script:
   - ./travis-before-script.sh
   - sh -e /etc/init.d/xvfb start
 script:
-  - bundle exec extconf.rb
+  - bundle exec ruby extconf.rb
   - bundle exec make -j3 > /dev/null
   - bundle exec ruby run-test.rb
 after_script:
