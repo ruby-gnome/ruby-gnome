@@ -19,6 +19,9 @@ class TestGdkScreen < Test::Unit::TestCase
     test "no type" do
       screen = Gdk::Screen.default
       theme_name_value = screen.get_setting("gtk-theme-name")
+      if theme_name_value.nil?
+        omit("XSETTINGS is required.") if Gdk.windowing_x11?
+      end
       assert_equal(Gtk::Settings.default.gtk_theme_name,
                    theme_name_value.value)
     end
@@ -27,6 +30,9 @@ class TestGdkScreen < Test::Unit::TestCase
       screen = Gdk::Screen.default
       double_click_time_value = screen.get_setting("gtk-double-click-time",
                                                    GLib::Type::INT)
+      if double_click_time_value.nil?
+        omit("XSETTINGS is required.") if Gdk.windowing_x11?
+      end
       assert_equal(Gtk::Settings.default.gtk_double_click_time,
                    double_click_time_value.value)
     end
