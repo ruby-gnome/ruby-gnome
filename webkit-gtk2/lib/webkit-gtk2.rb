@@ -38,11 +38,24 @@ module WebKitGtk2
         remove_method(:init)
         remove_method(:const_missing)
       end
-      Loader.load("WebKit", self, :version => "1.0")
+      loader = Loader.new(self)
+      loader.load
     end
   end
 
   class Loader < GObjectIntrospection::Loader
+    NAMESPACE = "WebKit"
+    VERSION = "1.0"
+
+    def initialize(base_module)
+      super
+      @version = VERSION
+    end
+
+    def load
+      super(NAMESPACE)
+    end
+
     private
     def initialize_post(object)
       super
