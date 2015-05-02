@@ -32,12 +32,23 @@ class TestGLibSource < Test::Unit::TestCase
   end
 
   def test_destroy
+    # only_glib_version(2, 35, 4)
+    # GMainContext may be freed before GSource by Ruby's GC.
+    # If GMainContext is freed before GSource, GLib 2.35.3 or earlier is
+    # crashed.
+    #
+    # See also:
+    #   * https://bugzilla.gnome.org/show_bug.cgi?id=661767
+    #   * https://git.gnome.org/browse/glib/commit/?id=26056558be4656ee6e891a4fae5d4198de7519cf
+
     context = GLib::MainContext.new
     source = GLib::Idle.source_new
     id = source.attach(context)
     assert_not_nil(context.find_source(id))
     source.destroy
     assert_nil(context.find_source(id))
+    source = nil
+    GC.start
   end
 
   def test_name
