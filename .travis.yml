@@ -11,8 +11,8 @@ rvm:
   - 2.2
   - ruby-head
 matrix:
-  allow_failures:
-    - rvm: 2.1
+  # allow_failures:
+  #   - rvm: 2.1
   fast_finish: true
 before_script:
   - ./travis-before-script.sh
