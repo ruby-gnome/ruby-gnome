@@ -24,8 +24,4 @@ module GtkTestUtils
       omit("Require GTK+ >= #{major}.#{minor}.#{micro}")
     end
   end
-
-  def only_x11
-    omit("Only for X11 backend") unless Gdk.windowing_x11?
-  end
 end
