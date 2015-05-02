@@ -17,5 +17,13 @@
 module Gtk
   class TreePath
     include Comparable
+
+    def <=>(other)
+      if other.is_a?(self.class)
+        compare(other)
+      else
+        nil
+      end
+    end
   end
 end
