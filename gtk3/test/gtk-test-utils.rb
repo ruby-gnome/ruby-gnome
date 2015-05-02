@@ -29,12 +29,21 @@ module GtkTestUtils
     Gdk::Screen.default.class.gtype.name
   end
 
+  module WindowSystemTypeNames
+    X11 = "GdkX11Screen"
+    WINDOWS = "GdkWin32Screen"
+  end
+
+  def x11?
+    window_system_type_name == WindowSystemTypeNames::X11
+  end
+
   def csd_supported?
     screen = Gdk::Screen.default
     case window_system_type_name
-    when "GdkX11Screen"
+    when WindowSystemTypeNames::X11
       screen.composited? and screen.rgba_visual
-    when "GdkWin32Screen"
+    when WindowSystemTypeNames::WINDOWS
       screen.rgba_visual
     else
       true

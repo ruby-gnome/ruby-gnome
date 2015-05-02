@@ -15,12 +15,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGdkScreen < Test::Unit::TestCase
+  include GtkTestUtils
+
   sub_test_case "#get_setting" do
     test "no type" do
       screen = Gdk::Screen.default
       theme_name_value = screen.get_setting("gtk-theme-name")
-      if theme_name_value.nil?
-        omit("XSETTINGS is required.") if Gdk.windowing_x11?
+      if theme_name_value.nil? and x11?
+        omit("XSETTINGS is required.")
       end
       assert_equal(Gtk::Settings.default.gtk_theme_name,
                    theme_name_value.value)
@@ -30,8 +32,8 @@ class TestGdkScreen < Test::Unit::TestCase
       screen = Gdk::Screen.default
       double_click_time_value = screen.get_setting("gtk-double-click-time",
                                                    GLib::Type::INT)
-      if double_click_time_value.nil?
-        omit("XSETTINGS is required.") if Gdk.windowing_x11?
+      if double_click_time_value.nil? and x11?
+        omit("XSETTINGS is required.")
       end
       assert_equal(Gtk::Settings.default.gtk_double_click_time,
                    double_click_time_value.value)
