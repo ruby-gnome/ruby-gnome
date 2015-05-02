@@ -68,6 +68,14 @@ require "clutter-gtk-test-utils"
 
 require "clutter-gtk"
 
+repository = GObjectIntrospection::Repository.default
+begin
+  repository.require(ClutterGtk::Loader::NAMESPACE)
+rescue GLib::Error
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
+
 # exclude sample/test-*
 clutter_gtk_test_base = File.join(clutter_gtk_base, "test")
 exit Test::Unit::AutoRunner.run(true, clutter_gtk_test_base)

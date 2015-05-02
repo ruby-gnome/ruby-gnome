@@ -45,7 +45,7 @@ module ClutterGtk
       end
       Gtk.init if Gtk.respond_to?(:init)
       loader = Loader.new(self, argv)
-      loader.load("GtkClutter")
+      loader.load
       Clutter.init(argv) if Clutter.respond_to?(:init)
     end
   end
@@ -54,9 +54,15 @@ module ClutterGtk
     class InitError < StandardError
     end
 
+    NAMESPACE = "GtkClutter"
+
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
+    end
+
+    def load
+      super(NAMESPACE)
     end
 
     private
