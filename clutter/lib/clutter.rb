@@ -50,7 +50,7 @@ module Clutter
         remove_method(:const_missing)
       end
       loader = Loader.new(self, argv)
-      loader.load("Clutter")
+      loader.load
       require "clutter/actor"
       require "clutter/actor-iter"
       require "clutter/animatable"
@@ -71,12 +71,18 @@ module Clutter
     class InitError < StandardError
     end
 
+    NAMESPACE = "Clutter"
+
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
       @key_constants = {}
       @other_constant_infos = []
       @event_infos = []
+    end
+
+    def load
+      super(NAMESPACE)
     end
 
     private
