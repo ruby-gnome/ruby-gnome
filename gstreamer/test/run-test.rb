@@ -46,6 +46,14 @@ require "gstreamer-test-utils"
 
 require "gst"
 
+repository = GObjectIntrospection::Repository.default
+begin
+  repository.require(Gst::Loader::NAMESPACE)
+rescue GLib::Error
+  puts("Omit because typelib file doesn't exist: #{$!.message}")
+  exit(true)
+end
+
 Gst.init
 
 exit Test::Unit::AutoRunner.run(true)

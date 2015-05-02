@@ -61,7 +61,7 @@ module Gst
         remove_method(:method_missing)
       end
       loader = Loader.new(self, argv)
-      loader.load("Gst")
+      loader.load
       require "gst/bin"
       require "gst/bus"
       require "gst/caps"
@@ -78,20 +78,26 @@ module Gst
     def init_base
       require "gst/base-loader"
       base_loader = BaseLoader.new(self)
-      base_loader.load("GstBase")
+      base_loader.load
     end
 
     def init_controller
       require "gst/controller-loader"
       controller_loader = ControllerLoader.new(self)
-      controller_loader.load("GstController")
+      controller_loader.load
     end
   end
 
   class Loader < GObjectIntrospection::Loader
+    NAMESPACE = "Gst"
+
     def initialize(base_module, init_arguments)
       super(base_module)
       @init_arguments = init_arguments
+    end
+
+    def load
+      super(NAMESPACE)
     end
 
     private
