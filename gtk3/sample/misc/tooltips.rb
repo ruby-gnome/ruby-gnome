@@ -16,51 +16,51 @@ end
 
 
 def treeview_query_tooltip(treeview, keyboard_tip, x, y, tooltip)
-    if keyboard_tip
-        # Keyboard mode
-        path, = treeview.cursor
-        if not path
-            return false
-        end
-    else
-        bin_x, bin_y = treeview.convert_widget_to_bin_window_coords(x, y)
-        # Mouse mode
-        path = treeview.get_path_at_pos(bin_x, bin_y)
-        if not path
-            return false
-        end
+  if keyboard_tip
+    # Keyboard mode
+    path, = treeview.cursor
+    if not path
+      return false
     end
-    data = treeview.model.get_value(treeview.model.get_iter(path), 0)
-    tooltip.markup = "<b>Path #{path}:</b> #{data}"
-    return true
+  else
+    bin_x, bin_y = treeview.convert_widget_to_bin_window_coords(x, y)
+    # Mouse mode
+    path = treeview.get_path_at_pos(bin_x, bin_y)
+    if not path
+      return false
+    end
+  end
+  data = treeview.model.get_value(treeview.model.get_iter(path), 0)
+  tooltip.markup = "<b>Path #{path}:</b> #{data}"
+  return true
 end
 
 def textview_query_tooltip(textview, keyboard_tip, x, y, tooltip, tag)
-    if keyboard_tip
-        iter = textview.buffer.get_iter_at_offset(textview.buffer.cursor_position)
-    else
-        bx, by = textview.window_to_buffer_coords(Gtk::TextWindowType::TEXT, x, y)
-        iter, = textview.get_iter_at_position(bx, by)
-    end
-    if iter.has_tag?(tag)
-        tooltip.text = 'Tooltip on text tag'
-        return true
-    else
-        return false
-    end
+  if keyboard_tip
+    iter = textview.buffer.get_iter_at_offset(textview.buffer.cursor_position)
+  else
+    bx, by = textview.window_to_buffer_coords(Gtk::TextWindowType::TEXT, x, y)
+    iter, = textview.get_iter_at_position(bx, by)
+  end
+  if iter.has_tag?(tag)
+    tooltip.text = 'Tooltip on text tag'
+    return true
+  else
+    return false
+  end
 end
 
 def drawingarea_query_tooltip(keyboard_tip, x, y, tooltip, rectangles)
-    if keyboard_tip
-        return false
-    end
-    for r in rectangles
-        if r.x < x && x < r.x + 50 && r.y < y && y < r.y + 50
-            tooltip.markup = r.tooltip
-            return true
-        end
-    end
+  if keyboard_tip
     return false
+  end
+  for r in rectangles
+    if r.x < x && x < r.x + 50 && r.y < y && y < r.y + 50
+      tooltip.markup = r.tooltip
+      return true
+    end
+  end
+  return false
 end
 
 window = Gtk::Window.new(:toplevel)
@@ -83,9 +83,9 @@ raise if button.tooltip_markup != 'Hello, I am a static tooltip.'
 button = Gtk::CheckButton.new('I use the query-tooltip signal')
 button.has_tooltip = true
 button.signal_connect 'query-tooltip' do  |widget, x, y, keyboard_tip, tooltip|
-    tooltip.markup = widget.label
-    tooltip.set_icon_from_icon_name(Gtk::Stock::DELETE, Gtk::IconSize::MENU)
-    true
+  tooltip.markup = widget.label
+  tooltip.set_icon_from_icon_name(Gtk::Stock::DELETE, Gtk::IconSize::MENU)
+  true
 end
 box.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
@@ -141,7 +141,7 @@ treeview.set_size_request(200, 240)
 treeview.append_column(Gtk::TreeViewColumn.new('Test', Gtk::CellRendererText.new, { :text => 0 }))
 treeview.has_tooltip = true
 treeview.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
-    treeview_query_tooltip(widget, keyboard_tip, x, y, tooltip)
+  treeview_query_tooltip(widget, keyboard_tip, x, y, tooltip)
 }
 treeview.selection.signal_connect('changed') { treeview.trigger_tooltip_query }
 # Set a tooltip on the column
@@ -160,7 +160,7 @@ textview = Gtk::TextView.new(buffer)
 textview.set_size_request(200, 50)
 textview.has_tooltip = true
 textview.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
-    textview_query_tooltip(widget, keyboard_tip, x, y, tooltip, tag)
+  textview_query_tooltip(widget, keyboard_tip, x, y, tooltip, tag)
 }
 box.pack_start(textview, :expand => false, :fill => false, :padding => 2)
 
