@@ -2,13 +2,13 @@
   gdkscreen.rb - Gdk::Screen sample script.
 
   Copyright (C) 2004-2006  Masao Mutoh
+  Copyright (C) 2007-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: gdkscreen.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
+Gtk.init
 screen = Gdk::Screen.default
 settings_map = [
   "gtk-double-click-time",
