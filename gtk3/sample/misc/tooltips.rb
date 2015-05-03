@@ -74,7 +74,7 @@ window.add(box)
 # A check button using the tooltip-markup property
 button = Gtk::CheckButton.new('This one uses the tooltip-markup property')
 button.tooltip_text = 'Hello, I am a static tooltip.'
-box.pack_start(button, :expand =>  false, :fill =>  false, :padding =>  0)
+box.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
 raise if button.tooltip_text != 'Hello, I am a static tooltip.'
 raise if button.tooltip_markup != 'Hello, I am a static tooltip.'
@@ -87,13 +87,13 @@ button.signal_connect 'query-tooltip' do  |widget, x, y, keyboard_tip, tooltip|
     tooltip.set_icon_from_icon_name(Gtk::Stock::DELETE, Gtk::IconSize::MENU)
     true
 end
-box.pack_start(button, :expand =>  false, :fill =>  false, :padding =>  0)
+box.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
 # A label
 label = Gtk::Label.new('I am just a label')
 label.selectable = false
 label.tooltip_text = 'Label & and tooltip'
-box.pack_start(label, :expand =>  false, :fill =>  false, :padding =>  0)
+box.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
 raise if label.tooltip_text != "Label & and tooltip"
 raise if label.tooltip_markup != "Label &amp; and tooltip"
@@ -102,14 +102,14 @@ raise if label.tooltip_markup != "Label &amp; and tooltip"
 label = Gtk::Label.new('I am a selectable label')
 label.selectable = true
 label.tooltip_markup = '<b>Another</b> Label tooltip'
-box.pack_start(label, :expand =>  false, :fill =>  false, :padding =>  0)
+box.pack_start(label, :expand => false, :fill => false, :padding => 0)
 
 raise if label.tooltip_text != 'Another Label tooltip'
 raise if label.tooltip_markup != '<b>Another</b> Label tooltip'
 
 # Another one, with a custom tooltip window
 button = Gtk::CheckButton.new('This one has a custom tooltip window!')
-box.pack_start(button, :expand =>  false, :fill =>  false, :padding =>  0)
+box.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
 tooltip_window = Gtk::Window.new(:popup)
 tooltip_button = Gtk::Label.new('blaat!')
@@ -127,7 +127,7 @@ button.has_tooltip = true
 button = Gtk::Button.new(:label => 'This one is insensitive')
 button.sensitive = false
 button.tooltip_text = 'Insensitive!'
-box.pack_start(button, :expand =>  false, :fill =>  false, :padding =>  0)
+box.pack_start(button, :expand => false, :fill => false, :padding => 0)
 
 # Tree view
 store = Gtk::TreeStore.new(String)
@@ -148,7 +148,7 @@ treeview.selection.signal_connect('changed') { treeview.trigger_tooltip_query }
 column = treeview.get_column(0)
 column.clickable = true
 #column.button.tooltip_text = 'Header'   .button not available
-box.pack_start(treeview, :expand =>  false, :fill =>  false, :padding =>  2)
+box.pack_start(treeview, :expand => false, :fill => false, :padding => 2)
 
 # Text view
 buffer = Gtk::TextBuffer.new
@@ -162,7 +162,7 @@ textview.has_tooltip = true
 textview.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
     textview_query_tooltip(widget, keyboard_tip, x, y, tooltip, tag)
 }
-box.pack_start(textview, :expand =>  false, :fill =>  false, :padding =>  2)
+box.pack_start(textview, :expand => false, :fill => false, :padding => 2)
 
 # Drawing area
 Rectangle = Struct.new("Rectangle", :x, :y, :r, :g, :b, :tooltip)
@@ -189,7 +189,7 @@ drawingarea.signal_connect('draw') {
 drawingarea.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
   drawingarea_query_tooltip(keyboard_tip, x, y, tooltip, rectangles)
 }
-box.pack_start(drawingarea, :expand =>  false, :fill =>  false, :padding =>  2)
+box.pack_start(drawingarea, :expand => false, :fill => false, :padding => 2)
 
 window.show_all
 Gtk.main
