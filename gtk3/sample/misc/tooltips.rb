@@ -165,7 +165,6 @@ textview.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
 box.pack_start(textview, :expand =>  false, :fill =>  false, :padding =>  2)
 
 # Drawing area
-if Gdk.cairo_available?
     Rectangle = Struct.new("Rectangle", :x, :y, :r, :g, :b, :tooltip)
     rectangles = [ Rectangle.new(10, 10, 0.0, 0.0, 0.9, "Blue box!"),
                    Rectangle.new(200, 170, 1.0, 0.0, 0.0, "Red thing"),
@@ -191,9 +190,6 @@ if Gdk.cairo_available?
         drawingarea_query_tooltip(keyboard_tip, x, y, tooltip, rectangles)
     }
     box.pack_start(drawingarea, :expand =>  false, :fill =>  false, :padding =>  2)
-else
-    warn "Part of this sample needs Cairo support. Make sure your ruby-gtk2 is compiled with Cairo support, and rcairo is installed."
-end
 
 window.show_all
 Gtk.main
