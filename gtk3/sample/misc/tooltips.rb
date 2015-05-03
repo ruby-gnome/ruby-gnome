@@ -165,31 +165,31 @@ textview.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
 box.pack_start(textview, :expand =>  false, :fill =>  false, :padding =>  2)
 
 # Drawing area
-    Rectangle = Struct.new("Rectangle", :x, :y, :r, :g, :b, :tooltip)
-    rectangles = [ Rectangle.new(10, 10, 0.0, 0.0, 0.9, "Blue box!"),
-                   Rectangle.new(200, 170, 1.0, 0.0, 0.0, "Red thing"),
-                   Rectangle.new(100, 50, 0.8, 0.8, 0.0, "Yellow thing") ]
-    drawingarea = Gtk::DrawingArea.new
-    drawingarea.set_size_request(320, 240)
-    drawingarea.has_tooltip = true
-    drawingarea.signal_connect('draw') {
-        cr = drawingarea.window.create_cairo_context
-        cr.rectangle(0, 0, drawingarea.allocation.width, drawingarea.allocation.height)
-        cr.set_source_rgb(1.0, 1.0, 1.0)
-        cr.fill
-        rectangles.each { |r|
-            cr.rectangle(r.x, r.y, 50, 50)
-            cr.set_source_rgb(r.r, r.g, r.b)
-            cr.stroke
-            cr.rectangle(r.x, r.y, 50, 50)
-            cr.set_source_rgba(r.r, r.g, r.b, 0.5)
-            cr.fill
-        }
-    }
-    drawingarea.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
-        drawingarea_query_tooltip(keyboard_tip, x, y, tooltip, rectangles)
-    }
-    box.pack_start(drawingarea, :expand =>  false, :fill =>  false, :padding =>  2)
+Rectangle = Struct.new("Rectangle", :x, :y, :r, :g, :b, :tooltip)
+rectangles = [ Rectangle.new(10, 10, 0.0, 0.0, 0.9, "Blue box!"),
+               Rectangle.new(200, 170, 1.0, 0.0, 0.0, "Red thing"),
+               Rectangle.new(100, 50, 0.8, 0.8, 0.0, "Yellow thing") ]
+drawingarea = Gtk::DrawingArea.new
+drawingarea.set_size_request(320, 240)
+drawingarea.has_tooltip = true
+drawingarea.signal_connect('draw') {
+  cr = drawingarea.window.create_cairo_context
+  cr.rectangle(0, 0, drawingarea.allocation.width, drawingarea.allocation.height)
+  cr.set_source_rgb(1.0, 1.0, 1.0)
+  cr.fill
+  rectangles.each { |r|
+    cr.rectangle(r.x, r.y, 50, 50)
+    cr.set_source_rgb(r.r, r.g, r.b)
+    cr.stroke
+    cr.rectangle(r.x, r.y, 50, 50)
+    cr.set_source_rgba(r.r, r.g, r.b, 0.5)
+    cr.fill
+  }
+}
+drawingarea.signal_connect('query-tooltip') { |widget, x, y, keyboard_tip, tooltip|
+  drawingarea_query_tooltip(keyboard_tip, x, y, tooltip, rectangles)
+}
+box.pack_start(drawingarea, :expand =>  false, :fill =>  false, :padding =>  2)
 
 window.show_all
 Gtk.main
