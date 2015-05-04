@@ -16,19 +16,20 @@ window.realize
 button = Gtk::Button.new(:label => "Click!")
 button.use_underline = false
 
-cursors = Gdk::Cursor::Type.values - [Gdk::Cursor::Type::CURSOR_IS_PIXMAP]
-cursors -= [Gdk::Cursor::Type::LAST_CURSOR]
+cursors = Gdk::CursorType.values - [Gdk::CursorType::CURSOR_IS_PIXMAP]
+cursors -= [Gdk::CursorType::LAST_CURSOR]
 
 cnt = 0
 button.signal_connect('clicked') do
   cursor = cursors[cnt]
 p cursor.inspect
   button.set_label(cursor.inspect)
-  window.window.set_cursor(Gdk::Cursor.new(cursor))
+  window.window.set_cursor(Gdk::Cursor.new(Gdk::Display.default, cursor))
   cnt += 1
   cnt = 0 if cnt == cursors.size
 end
 window.add(button)
-window.set_default_size(400,100).show_all
+window.set_default_size(400,100)
+window.show_all
 
 Gtk.main
