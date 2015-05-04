@@ -2,9 +2,8 @@
   cursor.rb - Gdk::Cursor sample script.
 
   Copyright (C) 2001-2006 Masao Mutoh
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: cursor.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
