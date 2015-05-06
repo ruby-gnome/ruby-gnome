@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -14,11 +14,18 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-require "test-unit"
-require "test/unit/notify"
+module Gdk
+  class Cursor
+    alias_method :initialize_raw, :initialize
+    def initialize(*args)
+      if args.last.is_a?(Hash)
+        options = args.pop
+      else
+        options = {}
+      end
+      display = options[:display] || Display.default
 
-module GdkTestUtils
-  def fixture_path(*components)
-    File.join(File.dirname(__FILE__), "fixture", *components)
+      initialize_raw(display, *args)
+    end
   end
 end

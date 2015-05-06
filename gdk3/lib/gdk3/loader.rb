@@ -116,6 +116,7 @@ module Gdk
     def require_libraries
       require "gdk3/atom"
       require "gdk3/color"
+      require "gdk3/cursor"
       require "gdk3/event"
       require "gdk3/rectangle"
       require "gdk3/rgba"
