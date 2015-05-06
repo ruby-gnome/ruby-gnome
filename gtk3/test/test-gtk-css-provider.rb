@@ -60,5 +60,42 @@ GtkWindow {
 }
       CSS
     end
+
+    test ":resource_path" do
+      only_gtk_version(3, 16, 0)
+
+      css = Tempfile.new(["ruby-gtk3", ".css"])
+      css.puts("GtkWindow {background-color: red;}")
+      css.close
+      resource_xml = Tempfile.new(["ruby-gtk3", ".gresource.xml"])
+      resource_xml.puts(<<-RESOURCE_XML)
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/style">
+    <file alias="style.css">#{css.path}</file>
+  </gresource>
+</gresources>
+      RESOURCE_XML
+      resource_xml.close
+      resource_path = resource_xml.path.gsub(/\.xml\z/, "")
+      resource = nil
+      begin
+        system("glib-compile-resources", resource_xml.path)
+        resource = Gio::Resource.load(resource_path)
+        Gio::Resources.register(resource)
+        assert do
+          @provider.load(:resource_path => "/style/style.css")
+        end
+      ensure
+        Gio::Resources.unregister(resource) if resource
+        FileUtils.rm_f(resource_path)
+      end
+
+      assert_equal(<<-CSS, @provider.to_s)
+GtkWindow {
+  background-color: rgb(255,0,0);
+}
+      CSS
+    end
   end
 end

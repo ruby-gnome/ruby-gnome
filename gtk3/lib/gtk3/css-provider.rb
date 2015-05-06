@@ -20,16 +20,18 @@ module Gtk
       data = options[:data]
       file = options[:file]
       path = options[:path]
+      resource_path = options[:resource_path]
       if data
         load_from_data(data)
       elsif file
         load_from_file(file)
       elsif path
         load_from_path(path)
+      elsif resource_path
+        load_from_resource(resource_path)
       else
-        message =
-          "Must specify one of :data, :file or :path: #{options.inspect}"
-        raise ArgumentError, message
+        message = "Must specify one of :data, :file, :path or :resource_path"
+        raise ArgumentError, "#{message}: #{options.inspect}"
       end
     end
   end
