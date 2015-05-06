@@ -16,10 +16,10 @@
 
 module Gtk
   class CssProvider
-    def load(argument)
-      data = argument[:data]
-      file = argument[:file]
-      path = argument[:path]
+    def load(options)
+      data = options[:data]
+      file = options[:file]
+      path = options[:path]
       if data
         load_from_data(data)
       elsif file
@@ -28,7 +28,7 @@ module Gtk
         load_from_path(path)
       else
         message =
-          "Must specify one of :data, :file or :path: #{argument.inspect}"
+          "Must specify one of :data, :file or :path: #{options.inspect}"
         raise ArgumentError, message
       end
     end
