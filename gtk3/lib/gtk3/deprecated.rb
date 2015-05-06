@@ -991,8 +991,8 @@ module Gtk
     define_deprecated_method :colormap, :raise => "Use '#{self}#visual'."
     define_deprecated_method :set_colormap, :warn => "Use '#{self}#set_visual'."
     alias :colormap= :set_colormap
-    define_deprecated_method :shape_combine_mask, :warn => "Don't use this method."
-    define_deprecated_method :input_shape_combine_mask, :warn => "Don't use this method."
+    define_deprecated_method :shape_combine_mask, :warn => "Use '#{self}#shape_combine_region' instead."
+    define_deprecated_method :input_shape_combine_mask, :warn => "Use '#{self}#input_shape_combine_region' instead."
     define_deprecated_method :reset_shapes, :warn => "Don't use this method."
     define_deprecated_method :set_scroll_adjustments, :warn => "Use 'Gtk::Scrollable#set_hadjustment' and 'Gtk::Scrollable#set_vadjustment'." do |_self, hadj, vadj|
       _self.set_hadjustment(hadj)
