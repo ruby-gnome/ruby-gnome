@@ -23,7 +23,7 @@ button.signal_connect('clicked') do
   cursor = cursors[cnt]
 p cursor.inspect
   button.set_label(cursor.inspect)
-  window.window.set_cursor(Gdk::Cursor.new(Gdk::Display.default, cursor))
+  window.window.set_cursor(Gdk::Cursor.new(cursor))
   cnt += 1
   cnt = 0 if cnt == cursors.size
 end
