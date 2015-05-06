@@ -136,9 +136,9 @@ module Gtk
       require "gtk3/tree-view"
       require "gtk3/tree-view-column"
       require "gtk3/ui-manager"
+      require "gtk3/version"
       require "gtk3/widget"
       require "gtk3/window"
-      require "gtk3/version"
 
       require "gtk3/deprecated"
     end
