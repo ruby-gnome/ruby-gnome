@@ -23,7 +23,14 @@ class TestGtkCssProvider < Test::Unit::TestCase
 
   sub_test_case "#load" do
     test ":data" do
-      assert_true(@provider.load(:data => "GtkWindow {background-color: red;}"))
+      assert do
+        @provider.load(:data => "GtkWindow {background-color: red;}")
+      end
+      assert_equal(<<-CSS, @provider.to_s)
+GtkWindow {
+  background-color: rgb(255,0,0);
+}
+      CSS
     end
   end
 end
