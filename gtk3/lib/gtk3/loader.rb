@@ -67,6 +67,10 @@ module Gtk
       @level_bar_class ||= @base_module.const_get(:LevelBar)
     end
 
+    def style_provider_module
+      @style_provider_module ||= @base_module.const_get(:StyleProvider)
+    end
+
     def post_load(repository, namespace)
       apply_pending_constants
       require_extension
@@ -337,6 +341,8 @@ module Gtk
         @version_module.const_set($PREMATCH, info.value)
       when /\ALEVEL_BAR_/
         @pending_constants << info
+      when /\ASTYLE_PROVIDER_/
+        @pending_constants << info
       else
         super
       end
@@ -357,6 +363,8 @@ module Gtk
         case info.name
         when /\ALEVEL_BAR_/
           level_bar_class.const_set($POSTMATCH, info.value)
+        when /\ASTYLE_PROVIDER_/
+          style_provider_module.const_set($POSTMATCH, info.value)
         end
       end
     end
