@@ -30,6 +30,7 @@ class TestGdkCursor < Test::Unit::TestCase
     end
 
     test "surface" do
+      only_gdk_version(3, 10, 0)
       surface = Cairo::ImageSurface.new(100, 100)
       cursor = Gdk::Cursor.new(surface, 0, 0)
       assert_equal(Gdk::CursorType::CURSOR_IS_PIXMAP, cursor.cursor_type)

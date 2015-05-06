@@ -18,6 +18,16 @@ require "test-unit"
 require "test/unit/notify"
 
 module GdkTestUtils
+  private
+  def only_gdk_version(major, minor, micro=nil)
+    micro ||= 0
+    gdk_version = `pkg-config --modversion gdk-3.0`
+    required_version = "#{major}.#{minor}.#{micro}"
+    unless gdk_version >= required_version
+      omit("Require GDK >= #{required_version}")
+    end
+  end
+
   def fixture_path(*components)
     File.join(File.dirname(__FILE__), "fixture", *components)
   end
