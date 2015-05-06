@@ -21,10 +21,9 @@ module GdkTestUtils
   private
   def only_gdk_version(major, minor, micro=nil)
     micro ||= 0
-    gdk_version = `pkg-config --modversion gdk-3.0`
-    required_version = "#{major}.#{minor}.#{micro}"
-    unless gdk_version >= required_version
-      omit("Require GDK >= #{required_version}")
+    gdk_version = `pkg-config --modversion gdk-3.0`.chomp.split(".")
+    unless (gdk_version <=> [major, minor, micro]) >= 0
+      omit("Require GDK >= #{major}.#{minor}.#{micro}")
     end
   end
 
