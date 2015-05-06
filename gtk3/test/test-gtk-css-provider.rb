@@ -1,4 +1,4 @@
-# Copyright (C) 2013  Ruby-GNOME2 Project Team
+# Copyright (C) 2013-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,7 +21,9 @@ class TestGtkCssProvider < Test::Unit::TestCase
     @provider = Gtk::CssProvider.new
   end
 
-  def test_load_from_data
-    assert_true(@provider.load(:data => "GtkWindow {background-color: red;}"))
+  sub_test_case "#load" do
+    test ":data" do
+      assert_true(@provider.load(:data => "GtkWindow {background-color: red;}"))
+    end
   end
 end
