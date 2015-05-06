@@ -387,8 +387,27 @@ module GObjectIntrospection
     def match_argument?(arg_info, argument)
       type = arg_info.type
       case type.tag
+      when TypeTag::BOOLEAN
+        argument == true or argument == false
+      when TypeTag::INT8,
+           TypeTag::UINT8,
+           TypeTag::INT16,
+           TypeTag::UINT16,
+           TypeTag::INT32,
+           TypeTag::UINT32,
+           TypeTag::INT64,
+           TypeTag::UINT64,
+           TypeTag::FLOAT,
+           TypeTag::DOUBLE
+        argument.is_a?(Numeric)
+      when TypeTag::GTYPE
+        argument.is_a?(GLib::Type)
       when TypeTag::UTF8
         argument.is_a?(String)
+      when TypeTag::FILENAME
+        argument.is_a?(String)
+      when TypeTag::ARRAY
+        argument.is_a?(Array)
       when TypeTag::INTERFACE
         interface = type.interface
         case interface.type
@@ -399,6 +418,9 @@ module GObjectIntrospection
           # TODO
           false
         end
+      when TypeTag::GLIST,
+           TypeTag::GSLIST
+        argument.is_a?(Array)
       else
         # TODO
         false
