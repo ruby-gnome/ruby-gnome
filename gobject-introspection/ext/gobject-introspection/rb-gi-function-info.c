@@ -220,6 +220,10 @@ fill_metadata_rb_arg_index(GPtrArray *args_metadata)
 
         metadata = g_ptr_array_index(args_metadata, i);
 
+        if (metadata->callback_p) {
+            continue;
+        }
+
         if (metadata->closure_p) {
             continue;
         }
