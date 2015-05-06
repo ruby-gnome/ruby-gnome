@@ -411,6 +411,8 @@ module GObjectIntrospection
       when TypeTag::INTERFACE
         interface = type.interface
         case interface.type
+        when InfoType::STRUCT
+          match_argument_interface_struct?(arg_info, interface, argument)
         when InfoType::OBJECT,
              InfoType::INTERFACE
           argument.is_a?(interface.gtype.to_class)
@@ -424,6 +426,23 @@ module GObjectIntrospection
       else
         # TODO
         false
+      end
+    end
+
+    def match_argument_interface_struct?(arg_info, interface, argument)
+      gtype = interface.gtype
+      case gtype.name
+      when "void"
+        # TODO
+        false
+      when "CairoSurface"
+        if Object.const_defined?(:Cairo)
+          argument.is_a?(Cairo::Surface)
+        else
+          false
+        end
+      else
+        argument.is_a?(gtype.to_class)
       end
     end
 
