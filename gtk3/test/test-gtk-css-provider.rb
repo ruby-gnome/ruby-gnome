@@ -32,5 +32,33 @@ GtkWindow {
 }
       CSS
     end
+
+    test ":file" do
+      file = Tempfile.new(["ruby-gtk3", ".css"])
+      file.puts("GtkWindow {background-color: red;}")
+      file.close
+      assert do
+        @provider.load(:file => Gio::File.path(file.path))
+      end
+      assert_equal(<<-CSS, @provider.to_s)
+GtkWindow {
+  background-color: rgb(255,0,0);
+}
+      CSS
+    end
+
+    test ":path" do
+      file = Tempfile.new(["ruby-gtk3", ".css"])
+      file.puts("GtkWindow {background-color: red;}")
+      file.close
+      assert do
+        @provider.load(:path => file.path)
+      end
+      assert_equal(<<-CSS, @provider.to_s)
+GtkWindow {
+  background-color: rgb(255,0,0);
+}
+      CSS
+    end
   end
 end
