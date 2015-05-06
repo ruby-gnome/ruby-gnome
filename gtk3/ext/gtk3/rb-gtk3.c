@@ -20,11 +20,13 @@
 
 #include "rb-gtk3.h"
 
+/*
 #if GTK_CHECK_VERSION(3, 10, 0)
 #    define RB_GTK_ACTION_IS_DEPRECATED
 #    define RB_GTK_ACTION_GROUP_IS_DEPRECATED
 #    define RB_GTK_UI_MANAGER_IS_DEPRECATED
 #endif
+*/
 
 static gboolean
 name_equal(GIArgInfo *info, const gchar *target_name)
