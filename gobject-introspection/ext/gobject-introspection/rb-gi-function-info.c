@@ -452,13 +452,16 @@ in_argument_from_ruby(RBGIArgMetadata *metadata, VALUE rb_arguments,
                       GArray *in_args, GPtrArray *args_metadata,
                       VALUE self)
 {
+    if (metadata->callback_p && !metadata->destroy_p) {
+        in_callback_argument_from_ruby(metadata, in_args);
+        return;
+    }
+
     if (metadata->rb_arg_index == -1) {
         return;
     }
 
-    if (metadata->callback_p) {
-        in_callback_argument_from_ruby(metadata, in_args);
-    } else if (metadata->array_p) {
+    if (metadata->array_p) {
         GIArgument *array_argument;
         GIArgument *length_argument = NULL;
         GIArgInfo *length_arg_info = NULL;
