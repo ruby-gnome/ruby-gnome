@@ -7,7 +7,7 @@
 =end
 
 require "gtk3"
-myapp = Gtk::Application.new("org.gtk.example", 0)
+myapp = Gtk::Application.new("org.gtk.example", :flags_none)
 
 myapp.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new(app)
