@@ -1,109 +1,99 @@
 =begin
-  drawing.rb - Gtk::Drawing sample script.
-
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team
+  drawing.rb - Ruby/GTK version of gtk+/examples/drawing.c.
+  https://git.gnome.org/browse/gtk+/tree/examples/drawing.c?h=gtk-3-16
+  Copyright (c) 2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: drawing.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
-class Canvas < Gtk::DrawingArea
-  def initialize
-    super
-    signal_connect("draw") do |w, e|
-      expose_event(w, e)
-    end
-    signal_connect("configure_event") do |w, e|
-      configure_event(w, e)
-    end
-    @buffer = nil
-    @bgc = nil
+surface = nil
+
+def clear_surface(surface)
+  cr = Cairo::Context.new(surface)
+  cr.set_source_rgb(1, 1, 1)
+  cr.paint
+  cr.destroy
+end
+
+def draw_brush(widget, surface, x, y)
+  cr = Cairo::Context.new(surface)
+  cr.rectangle(x - 3, y - 3, 6, 6)
+  cr.fill
+  cr.destroy
+  widget.queue_draw_area(x - 3, y - 3, 6, 6)
+end
+
+myapp = Gtk::Application.new "org.gtk.example", 0
+
+myapp.signal_connect "activate" do |app|
+  win = Gtk::ApplicationWindow.new app
+  win.set_title "Drawing Area"
+
+  win.signal_connect "delete-event" do
+    win.destroy
   end
 
-  def expose_event(w, e)
-    unless @buffer.nil?
-      rec = e.area
-      w.window.draw_drawable(@bgc,
-                             @buffer,
-                             rec.x, rec.y,
-                             rec.x, rec.y,
-                             rec.width, rec.height)
-    end
+  win.set_border_width 8
+
+  frame = Gtk::Frame.new
+  frame.shadow_type = Gtk::ShadowType::IN
+  win.add frame
+
+  drawing_area = Gtk::DrawingArea.new
+  # Set a minimum size
+  drawing_area.set_size_request 100, 100
+  frame.add drawing_area
+
+  # Signals used to handle the backing surface
+  drawing_area.signal_connect "draw" do |_da, cr|
+    cr.set_source(surface, 0, 0)
+    cr.paint
     false
   end
 
-  def clear(b = @buffer)
-    return if b.nil?
+  drawing_area.signal_connect "configure-event" do |da, _ev|
+    surface.destroy if surface
+    surface = win.window.create_similar_surface(Cairo::CONTENT_COLOR,
+                                                da.allocated_width,
+                                                da.allocated_height)
+    # Initialize the surface to white
+    clear_surface(surface)
 
-    g = b.size
-    @bgc = self.style.bg_gc(self.state) if @bgc.nil?
-    if (g[0] > 0 && g[1] > 0)
-      b.draw_rectangle(@bgc, true, 0, 0, g[0], g[1])
-    end
-  end
-
-  def configure_event(w, e)
-    g = w.window.geometry
-    if (g[2] > 0 && g[3] > 0)
-      b = Gdk::Pixmap::new(w.window, g[2], g[3], -1)
-      clear(b)
-      if not @buffer.nil?
-        g = @buffer.size
-        b.draw_drawable(@bgc,
-                        @buffer,
-                        0, 0,
-                        0, 0,
-                        g[0], g[1])
-      end
-      @buffer = b
-    end
+    # the configure event have been handled, no need for further
+    # processing
     true
   end
-end
 
-class A < Canvas
-  def initialize
-    super
-    signal_connect("button_press_event") do |w, e|
-      pressed(w, e)
+  # Event signals
+  drawing_area.signal_connect "motion-notify-event" do |da, ev|
+    return false unless surface
+
+    if ((ev.state & Gdk::EventMask::BUTTON_PRESS_MASK.to_i) != 0)
+      draw_brush(da, surface, ev.x, ev.y)
     end
-    set_events(Gdk::Event::BUTTON_PRESS_MASK)
   end
 
-  def pressed(widget, ev)
-    if not @last.nil?
-      @buffer.draw_line(widget.style.fg_gc(widget.state),
-                        @last.x, @last.y,
-                        ev.x, ev.y)
+  drawing_area.signal_connect "button-press-event" do |da, ev|
+    return false unless surface
 
-      x1, x2 = if (@last.x < ev.x)
-                 [@last.x, ev.x]
-               else
-                 [ev.x,    @last.x]
-               end
-      y1, y2 = if (@last.y < ev.y)
-                 [@last.y, ev.y]
-               else
-                 [ev.y,    @last.y]
-               end
-      widget.queue_draw_area(x1, y1,
-                             x2 - x1 + 1, y2 - y1 + 1)
+    if (ev.button == Gdk::BUTTON_PRIMARY)
+      draw_brush(da, surface, ev.x, ev.y)
+    elsif (ev.button == Gdk::BUTTON_SECONDARY)
+      clear_surface(surface)
+      da.queue_draw
     end
-    @last = nil
-    @last = ev
+
     true
   end
+  # Ask to receive events the drawing area doesn't normally
+  # subscribe to. In particular, we need to ask for the
+  # button press and motion notify events that we want to handle.
+  drawing_area.events = drawing_area.events |
+                        Gdk::EventMask::BUTTON_PRESS_MASK.to_i |
+                        Gdk::EventMask::POINTER_MOTION_MASK.to_i
+
+  win.show_all
 end
 
-window = Gtk::Window.new("drawing test")
-window.signal_connect("destroy") do
-  Gtk.main_quit
-end
-
-canvas = A.new
-window.add(canvas)
-
-window.show_all
-Gtk::main
+myapp.run ARGV
