@@ -152,6 +152,11 @@ module Gtk
         stock_module = @base_module.const_get(:Stock)
         method_name = rubyish_method_name(info, :prefix => "stock_")
         define_singleton_method(stock_module, method_name, info)
+      when /\Adrag_/
+        # For OS X. It may be broken. It's not tested.
+        widget_class = @base_module.const_get(:Widget)
+        method_name = rubyish_method_name(info)
+        define_method(info, widget_class, method_name)
       else
         super
       end
