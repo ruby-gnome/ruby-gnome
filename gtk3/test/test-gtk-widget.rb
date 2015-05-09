@@ -91,4 +91,35 @@ class TestGtkWidget < Test::Unit::TestCase
       assert_equal(info, list.find(target))
     end
   end
+
+  sub_test_case "events" do
+    def setup
+      @widget = Gtk::EventBox.new
+    end
+
+    test "get" do
+      assert_equal(Gdk::EventMask.new(0), @widget.events)
+    end
+
+    test "add" do
+      @widget.add_events([:exposure_mask, :pointer_motion_mask])
+      assert_equal(Gdk::EventMask::EXPOSURE_MASK |
+                   Gdk::EventMask::POINTER_MOTION_MASK,
+                   @widget.events)
+    end
+
+    test "set" do
+      @widget.set_events([:exposure_mask, :pointer_motion_mask])
+      assert_equal(Gdk::EventMask::EXPOSURE_MASK |
+                   Gdk::EventMask::POINTER_MOTION_MASK,
+                   @widget.events)
+    end
+
+    test "assign" do
+      @widget.events = [:exposure_mask, :pointer_motion_mask]
+      assert_equal(Gdk::EventMask::EXPOSURE_MASK |
+                   Gdk::EventMask::POINTER_MOTION_MASK,
+                   @widget.events)
+    end
+  end
 end
