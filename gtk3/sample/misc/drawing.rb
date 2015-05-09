@@ -24,7 +24,7 @@ def draw_brush(widget, surface, x, y)
   widget.queue_draw_area(x - 3, y - 3, 6, 6)
 end
 
-myapp = Gtk::Application.new "org.gtk.example", 0
+myapp = Gtk::Application.new "org.gtk.example", :flags_none 
 
 myapp.signal_connect "activate" do |app|
   win = Gtk::ApplicationWindow.new app
