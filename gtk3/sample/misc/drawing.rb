@@ -89,9 +89,7 @@ myapp.signal_connect "activate" do |app|
   # Ask to receive events the drawing area doesn't normally
   # subscribe to. In particular, we need to ask for the
   # button press and motion notify events that we want to handle.
-  drawing_area.events = drawing_area.events |
-                        Gdk::EventMask::BUTTON_PRESS_MASK.to_i |
-                        Gdk::EventMask::POINTER_MOTION_MASK.to_i
+  drawing_area.add_events([:button_press_mask, :pointer_motion_mask])
 
   win.show_all
 end
