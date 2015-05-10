@@ -99,7 +99,7 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
                                   RUBY_UBF_IO, NULL);
 #endif
     } else {
-        rb_poll_in_blocking_raw(&info);
+        rg_poll_in_blocking_raw(&info);
     }
     g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
 
