@@ -21,7 +21,7 @@ module Gtk
       unless flags.is_a?(Gtk::TargetFlags)
         flags = Gtk::TargetFlags.new(flags).to_i
       end
-      initialize_raw(target, flags, info) 
+      initialize_raw(target, flags, info)
     end
   end
 end
