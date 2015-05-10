@@ -19,9 +19,9 @@ module Gtk
     alias_method :initialize_raw, :initialize
     def initialize(target, flags, info)
       unless flags.is_a?(Gtk::TargetFlags)
-        flags = Gtk::TargetFlags.new(flags).to_i
+        flags = Gtk::TargetFlags.new(flags)
       end
-      initialize_raw(target, flags, info)
+      initialize_raw(target, flags.to_i, info)
     end
   end
 end
