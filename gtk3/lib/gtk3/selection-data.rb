@@ -32,5 +32,11 @@ module Gtk
       end
       set_raw(type, format, data)
     end
+
+    alias_method :set_text_raw, :set_text
+    def set_text(text)
+      set_text_raw(text, text.bytesize)
+    end
+    alias_method :text=, :set_text
   end
 end
