@@ -618,13 +618,13 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
     interface_type = g_base_info_get_type(interface_info);
     interface_name = g_info_type_to_string(interface_type);
     gtype = g_registered_type_info_get_g_type(interface_info);
-    g_base_info_unref(interface_info);
-    g_base_info_unref(element_type_info);
 
     switch (interface_type) {
     case GI_INFO_TYPE_INVALID:
     case GI_INFO_TYPE_FUNCTION:
     case GI_INFO_TYPE_CALLBACK:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
                  interface_name,
@@ -632,10 +632,15 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
         break;
     case GI_INFO_TYPE_STRUCT:
         if (gtype == G_TYPE_NONE) {
-            rb_raise(rb_eNotImpError,
-                     "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
-                     interface_name,
-                     g_type_name(gtype));
+            GList *node;
+            rb_argument = rb_ary_new();
+            for (node = argument->v_pointer; node; node = g_list_next(node)) {
+                rb_ary_push(rb_argument,
+                            interface_struct_to_ruby(node->data,
+                                                     FALSE,
+                                                     element_type_info,
+                                                     interface_info));
+            }
         } else {
             rb_argument = BOXEDGLIST2RVAL(argument->v_pointer, gtype);
         }
@@ -645,6 +650,8 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
         break;
     case GI_INFO_TYPE_ENUM:
     case GI_INFO_TYPE_FLAGS:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
                  interface_name,
@@ -665,6 +672,8 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
     case GI_INFO_TYPE_ARG:
     case GI_INFO_TYPE_TYPE:
     case GI_INFO_TYPE_UNRESOLVED:
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
         rb_raise(rb_eNotImpError,
                  "TODO: GIArgument(GList)[interface(%s)](%s) -> Ruby",
                  interface_name,
@@ -674,6 +683,9 @@ rb_gi_argument_to_ruby_glist_interface(GIArgument *argument,
         g_assert_not_reached();
         break;
     }
+
+    g_base_info_unref(interface_info);
+    g_base_info_unref(element_type_info);
 
     return rb_argument;
 }
