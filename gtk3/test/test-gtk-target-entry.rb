@@ -21,7 +21,7 @@ class TestTargetEntry < Test::Unit::TestCase
     test("Gtk::TargetFlags constant") do
       target_entry = nil
       assert_nothing_raised do
-        target_entry = Gtk::TargetEntry.new("test", Gtk::TargetFlags::SAME_APP, 12345)       
+        target_entry = Gtk::TargetEntry.new("test", Gtk::TargetFlags::SAME_APP, 12_345)
       end
       assert_instance_of(Gtk::TargetEntry, target_entry)
     end
@@ -29,7 +29,7 @@ class TestTargetEntry < Test::Unit::TestCase
     test("TargetFlags symbol") do
       target_entry = nil
       assert_nothing_raised do
-        target_entry = Gtk::TargetEntry.new("test",:same_app, 12345)
+        target_entry = Gtk::TargetEntry.new("test", :same_app, 12_345)
       end
       assert_instance_of(Gtk::TargetEntry, target_entry)
     end
