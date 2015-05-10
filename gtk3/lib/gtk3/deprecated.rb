@@ -270,8 +270,8 @@ module Gtk
 
   module Drag
     extend GLib::Deprecatable
-    define_deprecated_flags :DestDefaults, 'DEST_DEFAULT'
-    define_deprecated_flags :TargetFlags, 'TARGET'
+    define_deprecated_const :DestDefaults, "Gtk::DestDefaults"
+    define_deprecated_const :TargetFlags, "Gtk::TargetFlags"
     define_deprecated_singleton_method :finish, :warn => "Use 'Gdk::DragContext#finish'." do |_self, context, success, del, time|
       context.finish(success, del, time)
     end
