@@ -123,6 +123,7 @@ module Gtk
       require "gtk3/style-context"
       require "gtk3/style-properties"
       require "gtk3/target-list"
+      require "gtk3/target-entry"
       require "gtk3/text-buffer"
       require "gtk3/text-tag-table"
       require "gtk3/toggle-action"
