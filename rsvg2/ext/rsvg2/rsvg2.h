@@ -36,6 +36,7 @@ extern "C" {
 #include <librsvg/rsvg.h>
 
 #ifndef LIBRSVG_CHECK_VERSION
+#  include <librsvg/librsvg-features.h>
 #  define LIBRSVG_CHECK_VERSION(major, minor, micro)                    \
     (LIBRSVG_MAJOR_VERSION > (major) ||                                 \
      (LIBRSVG_MAJOR_VERSION == (major) && LIBRSVG_MINOR_VERSION > (minor)) || \
@@ -44,7 +45,6 @@ extern "C" {
 #endif
 
 #if !LIBRSVG_CHECK_VERSION(2, 36, 2)
-#  include <librsvg/librsvg-features.h>
 #  include <librsvg/rsvg-cairo.h>
 #  ifdef HAVE_LIBRSVG_LIBRSVG_ENUM_TYPES_H
 #    include <librsvg/librsvg-enum-types.h>
