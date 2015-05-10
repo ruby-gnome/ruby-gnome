@@ -36,6 +36,8 @@ static VALUE mGLibSource;
 static ID id__callbacks__;
 static GHashTable *callbacks_table;
 
+static GThread *main_thread;
+
 typedef struct _callback_info_t
 {
     VALUE callback;
@@ -53,14 +55,18 @@ typedef struct _PollInfo
     gint result;
 } PollInfo;
 
+static void
+rg_poll_in_blocking_raw(PollInfo *info)
+{
+    info->result = default_poll_func(info->ufds, info->nfsd, info->timeout);
+}
+
 #ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
 static void *
 rg_poll_in_blocking(void *data)
 {
     PollInfo *info = data;
-
-    info->result = default_poll_func(info->ufds, info->nfsd, info->timeout);
-
+    rg_poll_in_blocking_raw(info);
     return NULL;
 }
 #else
@@ -68,9 +74,7 @@ static VALUE
 rg_poll_in_blocking(void *data)
 {
     PollInfo *info = data;
-
-    info->result = default_poll_func(info->ufds, info->nfsd, info->timeout);
-
+    rg_poll_in_blocking_raw(info);
     return Qnil;
 }
 #endif
@@ -86,11 +90,17 @@ rg_poll(GPollFD *ufds, guint nfsd, gint timeout)
     info.result = 0;
 
     g_static_private_set(&rg_polling_key, GINT_TO_POINTER(TRUE), NULL);
+    if (g_thread_self() == main_thread) {
 #ifdef HAVE_RB_THREAD_CALL_WITHOUT_GVL
-    rb_thread_call_without_gvl(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
+        rb_thread_call_without_gvl(rg_poll_in_blocking, &info,
+                                   RUBY_UBF_IO, NULL);
 #else
-    rb_thread_blocking_region(rg_poll_in_blocking, &info, RUBY_UBF_IO, NULL);
+        rb_thread_blocking_region(rg_poll_in_blocking, &info,
+                                  RUBY_UBF_IO, NULL);
 #endif
+    } else {
+        rb_poll_in_blocking_raw(&info);
+    }
     g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
 
     return info.result;
@@ -527,6 +537,10 @@ Init_glib_main_context(void)
     id_call = rb_intern("call");
     id__callbacks__ = rb_intern("__callbacks__");
     callbacks_table = g_hash_table_new(NULL, NULL);
+
+    g_static_private_set(&rg_polling_key, GINT_TO_POINTER(FALSE), NULL);
+
+    main_thread = g_thread_self();
 
     rbg_define_singleton_method(mGLib, "set_ruby_thread_priority",
                                ruby_source_set_priority, 1);
