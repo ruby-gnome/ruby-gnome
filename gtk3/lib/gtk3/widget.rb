@@ -59,6 +59,9 @@ module Gtk
       targets.collect do |target|
         case target
         when Array
+          unless target[1].is_a?(Gtk::TargetFlags)
+            target[1] = Gtk::TargetFlags.new(target[1]).to_i
+          end
           TargetEntry.new(*target)
         else
           target
