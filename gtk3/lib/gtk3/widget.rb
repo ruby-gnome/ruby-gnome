@@ -59,7 +59,7 @@ module Gtk
       targets.collect do |target|
         case target
         when Array
-            TargetEntry.new(*target)
+          TargetEntry.new(*target)
         else
           target
         end
