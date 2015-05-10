@@ -75,14 +75,18 @@ static VALUE
 rg_initialize(VALUE self)
 {
     VALUE rb_class;
+    gsize instance_size = 0;
 
     rb_class = CLASS_OF(self);
     if (RVAL2CBOOL(rb_ivar_defined(rb_class, rb_intern("@size")))) {
+        instance_size = NUM2UINT(rb_iv_get(rb_class, "@size"));
+    }
+
+    if (instance_size > 0) {
         const RGObjClassInfo *cinfo;
         gpointer instance;
-        gsize instance_size;
+
         cinfo = rbgobj_lookup_class(rb_class);
-        instance_size = NUM2UINT(rb_iv_get(rb_class, "@size"));
         instance = alloca(instance_size);
         memset(instance, 0, instance_size);
         G_INITIALIZE(self, g_boxed_copy(cinfo->gtype, instance));
