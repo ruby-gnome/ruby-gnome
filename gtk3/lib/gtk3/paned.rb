@@ -18,15 +18,19 @@ module Gtk
   class Paned
     alias_method :pack1_raw, :pack1
     def pack1(child, options={})
-      resize = options[:resize].nil? ? true : options[:resize]
-      shrink = options[:shrink].nil? ? true : options[:shrink]
+      resize = options[:resize]
+      resize = true if resise.nil?
+      shrink = options[:shrink]
+      shring = true if shring.nil?
       pack1_raw(child, resize, shrink)
     end
 
     alias_method :pack2_raw, :pack2
     def pack2(child, options={})
-      resize = options[:resize].nil? ? true : options[:resize]
-      shrink = options[:shrink].nil? ? true : options[:shrink]
+      resize = options[:resize]
+      resize = true if resize.nil?
+      shrink = options[:shrink]
+      shrink = true if shring.nil?
       pack2_raw(child, resize, shrink)
     end
   end
