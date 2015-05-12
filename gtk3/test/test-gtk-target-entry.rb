@@ -19,7 +19,7 @@ class TestTargetEntry < Test::Unit::TestCase
 
   sub_test_case(".new") do
     sub_test_case("flags") do
-    test("Gtk::TargetFlags constant") do
+    test("constant") do
       target_entry = nil
       assert_nothing_raised do
         target_entry = Gtk::TargetEntry.new("test", Gtk::TargetFlags::SAME_APP, 12_345)
@@ -27,7 +27,7 @@ class TestTargetEntry < Test::Unit::TestCase
       assert_instance_of(Gtk::TargetEntry, target_entry)
     end
 
-    test("TargetFlags symbol") do
+    test("symbol") do
       target_entry = nil
       assert_nothing_raised do
         target_entry = Gtk::TargetEntry.new("test", :same_app, 12_345)
