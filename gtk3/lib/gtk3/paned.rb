@@ -21,7 +21,7 @@ module Gtk
       resize = options[:resize]
       resize = true if resize.nil?
       shrink = options[:shrink]
-      shring = true if shring.nil?
+      shrink = true if shrink.nil?
       pack1_raw(child, resize, shrink)
     end
 
