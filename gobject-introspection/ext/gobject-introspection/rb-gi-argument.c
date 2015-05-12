@@ -1986,7 +1986,7 @@ rb_gi_value_argument_from_ruby(GIArgument *argument, GITypeInfo *type_info,
         break;
     case GI_TYPE_TAG_UTF8:
         /* TODO: support UTF-8 convert like rb_argument.encode("UTF-8"). */
-        argument->v_string = (gchar *)RVAL2CSTR(rb_argument);
+        argument->v_string = (gchar *)RVAL2CSTR_ACCEPT_SYMBOL(rb_argument);
         break;
     case GI_TYPE_TAG_FILENAME:
         argument->v_string = (gchar *)RVAL2CSTR(rb_argument);
