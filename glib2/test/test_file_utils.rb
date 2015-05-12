@@ -3,7 +3,7 @@
 class TestGLibFileUtils < Test::Unit::TestCase
   include GLibTestUtils
 
-  def test_format_size_for_display
+  sub_test_case "#format_size_for_display" do
     only_glib_version(2, 16, 0)
 
     assert_equal("1.0 KB", GLib.format_size_for_display(1024))
