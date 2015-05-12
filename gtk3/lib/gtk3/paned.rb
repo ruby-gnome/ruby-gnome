@@ -19,7 +19,7 @@ module Gtk
     alias_method :pack1_raw, :pack1
     def pack1(child, options={})
       resize = options[:resize]
-      resize = true if resise.nil?
+      resize = true if resize.nil?
       shrink = options[:shrink]
       shring = true if shring.nil?
       pack1_raw(child, resize, shrink)
