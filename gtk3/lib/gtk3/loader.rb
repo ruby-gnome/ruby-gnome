@@ -114,6 +114,7 @@ module Gtk
       require "gtk3/list-store"
       require "gtk3/menu-item"
       require "gtk3/message-dialog"
+      require "gtk3/paned"
       require "gtk3/radio-action"
       require "gtk3/radio-button"
       require "gtk3/scrolled-window"
