@@ -31,7 +31,7 @@ class TestGLibFileUtils < Test::Unit::TestCase
     end
 
     def test_over_guint32_value
-      assert_equal("5.0 GB", GLib.format_size(1000 * 1000 * 1000 * 5))
+      assert_equal("4.3 GB", GLib.format_size((2**32-1) + 1))
     end
 
     sub_test_case "flags" do
