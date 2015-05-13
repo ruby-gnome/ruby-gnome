@@ -12,11 +12,11 @@ class TestGLibFileUtils < Test::Unit::TestCase
       assert_equal("1.0 KB", GLib.format_size_for_display(1024))
     end
 
-    def test_1mb
+    def test_mb
       assert_equal("1.0 MB", GLib.format_size_for_display(1024 * 1024))
     end
 
-    def test_1gb
+    def test_gb
       assert_equal("1.0 GB", GLib.format_size_for_display(1024 * 1024 * 1024))
     end
 
