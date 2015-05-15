@@ -1,12 +1,9 @@
 =begin
   drag-move.rb - Move widget by drag sample script.
 
-  Copyright (C) 2011-2014 Ruby-GNOME2 Project Team
+  Copyright (C) 2011-2015 Ruby-GNOME2 Project Team
   Copyright (C) 2006 Kouhei Sutou
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Date: 2006/06/17 13:18:12 $
-  $Id: drag-move.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -43,7 +40,7 @@ class DraggableWidget < Gtk::EventBox
   def set_button_press_event
     signal_connect("button-press-event") do |widget, event|
       if event.button == @drag_button
-        Gtk.grab_add(widget)
+        widget.grab_add
         x, y, w, h = widget.allocation.to_a
         drag_start(x, y, event.x_root, event.y_root)
       else
@@ -65,7 +62,7 @@ class DraggableWidget < Gtk::EventBox
   def set_button_release_event
     signal_connect("button-release-event") do |widget, event|
       if event.button == @drag_button
-        Gtk.grab_remove(widget)
+        widget.grab_remove
         drag_end
       else
         false
