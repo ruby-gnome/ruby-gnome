@@ -63,6 +63,8 @@ module Gdk
   class Event
     extend GLib::Deprecatable
 
+    define_deprecated_const :CURRENT_TIME, "Gdk::CURRENT_TIME"
+
     define_deprecated_const :Mask, "Gdk::EventMask"
     define_deprecated_enums "Gdk::EventMask"
 
