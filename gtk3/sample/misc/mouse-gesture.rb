@@ -1,28 +1,21 @@
 =begin
   mouse-gesture.rb - mouse gesture sample script.
 
-  Copyright (C) 2005,2006 Kouhei Sutou 
+  Copyright (C) 2005,2006 Kouhei Sutou
+  Copyright (c) 2005-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Date: 2006/06/17 13:18:12 $
-  $Id: mouse-gesture.rb,v 1.2 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
-
-unless Gdk.cairo_available?
-  STDERR.puts("need cairo and rcairo support for this sample")
-  exit 1
-end
+require "gtk3"
 
 class GestureProcessor
   DEFAULT_THRESHOLD = 16
   DEFAULT_SKEW_THRESHOLD_ANGLE = 30
-    
+
   attr_accessor :threshold, :skew_threshold_angle
   attr_reader :motions
 
-  def initialize(threshold=nil, skew_threshold_angle=nil)
+  def initialize(threshold = nil, skew_threshold_angle = nil)
     @threshold = threshold || DEFAULT_THRESHOLD
     @skew_threshold_angle = skew_threshold_angle
     @skew_threshold_angle ||= DEFAULT_SKEW_THRESHOLD_ANGLE
@@ -34,22 +27,22 @@ class GestureProcessor
   end
 
   MOTIONS = %w(L R U D UL UR LL LR)
-  
+
   def available_motion?(motion)
     MOTIONS.include?(motion)
   end
-  
+
   def start(x, y)
     @prev_x = @x = x
     @prev_y = @y = y
     @started = true
     @motions = []
   end
-    
+
   def update_position(x, y)
     mx = x - @prev_x
     my = y - @prev_y
-    
+
     motion = judge_motion(mx, my)
     if motion
       @prev_x = @x = x
@@ -64,7 +57,7 @@ class GestureProcessor
       false
     end
   end
-    
+
   def reset
     @started = false
     @x = @y = -1
@@ -135,7 +128,7 @@ class Gesture < Gtk::EventBox
   DEFAULT_LINE_RGBA = [1, 0, 0, 1]
   DEFAULT_NEXT_RGBA = [0, 1, 0, 0.8]
   DEFAULT_CURRENT_RGBA = [1, 0, 1, 0.8]
-  
+
   def initialize(conf={})
     super()
     set_visible_window(false)
@@ -152,7 +145,7 @@ class Gesture < Gtk::EventBox
     set_button_release_event
   end
 
-  def add_action(sequence, action=Proc.new)
+  def add_action(sequence, action = proc)
     invalid_motion = sequence.find do |motion|
       not @processor.available_motion?(motion)
     end
@@ -161,7 +154,7 @@ class Gesture < Gtk::EventBox
   end
 
   def start(widget, button, x, y, base_x, base_y)
-    Gtk.grab_add(self)
+    self.grab_add
     @widget = widget
     @button = button
     @processor.start(x, y)
@@ -197,7 +190,7 @@ class Gesture < Gtk::EventBox
       end
     end.compact.uniq
   end
-    
+
   def next_available_motions
     motions = @processor.motions
     @actions.collect do |sequence, act|
@@ -208,11 +201,11 @@ class Gesture < Gtk::EventBox
       end
     end.compact.uniq
   end
-    
+
   def match?
     not action.nil?
   end
-    
+
   def set_expose_event
     signal_connect("draw") do |widget, event|
       if @processor.started?
@@ -231,7 +224,7 @@ class Gesture < Gtk::EventBox
         end
 
         @cr.stroke_preserve
-        
+
         true
       else
         false
@@ -239,7 +232,7 @@ class Gesture < Gtk::EventBox
     end
   end
 
-  def draw_mark(cr, x=nil, y=nil, radius=nil)
+  def draw_mark(cr, x = nil, y = nil, radius = nil)
     x ||= @processor.position[0]
     y ||= @processor.position[1]
     radius ||= @processor.threshold
@@ -250,7 +243,7 @@ class Gesture < Gtk::EventBox
       cr.fill
     end
   end
-  
+
   def draw_available_marks(cr, motions)
     motions.each do |motion|
       adjust_x = calc_position_ratio(motion, %w(R), %w(L), %w(UR LR), %w(UL LL))
@@ -278,7 +271,7 @@ class Gesture < Gtk::EventBox
       0
     end
   end
-  
+
   def set_motion_notify_event
     signal_connect("motion_notify_event") do |widget, event|
       if @processor.started?
@@ -301,7 +294,7 @@ class Gesture < Gtk::EventBox
   def set_button_release_event
     signal_connect("button_release_event") do |widget, event|
       if event.button == @button and @processor.started?
-        Gtk.grab_remove(self)
+        self.grab_remove
         perform_action
         hide
         true
@@ -314,8 +307,8 @@ end
 
 class GesturedWidget < Gtk::EventBox
   DEFAULT_GESTURE_BUTTON = 3
-  
-  def initialize(gesture_button=nil)
+
+  def initialize(gesture_button = nil)
     super()
     set_visible_window(false)
     @gesture_button = gesture_button || DEFAULT_GESTURE_BUTTON
@@ -346,9 +339,9 @@ class GesturedWidget < Gtk::EventBox
 end
 
 class Layout < Gtk::Layout
-  def initialize()
+  def initialize
     super()
-    @gesture = Gesture.new()
+    @gesture = Gesture.new
     put(@gesture, 0, 0)
   end
 
@@ -361,7 +354,7 @@ class Layout < Gtk::Layout
     @gesture.start(widget, button, x, y, base_x, base_y)
   end
 
-  def add_gesture_action(sequence, action=Proc.new)
+  def add_gesture_action(sequence, action = proc)
     @gesture.add_action(sequence, action)
   end
 end
@@ -405,38 +398,38 @@ layout.put(gestured_widget2, 0, 25)
 # gesture handlers
 expand_size = 20
 
-expand_left = Proc.new do |widget|
+expand_left = proc do |widget|
   x = layout.child_get_property(widget, :x)
   y = layout.child_get_property(widget, :y)
   w, h = widget.size_request
   layout.move(widget, x - expand_size, y)
   widget.set_size_request(w + expand_size, h)
 end
-  
-expand_right = Proc.new do |widget|
+
+expand_right = proc do |widget|
   x = layout.child_get_property(widget, :x)
   y = layout.child_get_property(widget, :y)
   w, h = widget.size_request
   layout.move(widget, x, y)
   widget.set_size_request(w + expand_size, h)
 end
-  
-expand_top = Proc.new do |widget|
+
+expand_top = proc do |widget|
   x = layout.child_get_property(widget, :x)
   y = layout.child_get_property(widget, :y)
   w, h = widget.size_request
   layout.move(widget, x, y - expand_size)
   widget.set_size_request(w, h + expand_size)
 end
-  
-expand_bottom = Proc.new do |widget|
+
+expand_bottom = proc do |widget|
   x = layout.child_get_property(widget, :x)
   y = layout.child_get_property(widget, :y)
   w, h = widget.size_request
   layout.move(widget, x, y)
   widget.set_size_request(w, h + expand_size)
 end
-  
+
 layout.add_gesture_action(["L"]) do |widget|
   expand_left.call(widget)
 end
@@ -458,7 +451,7 @@ end
 
 
 window.add(layout)
-window.signal_connect("destroy"){Gtk.main_quit}
+window.signal_connect("destroy") { Gtk.main_quit }
 
 window.show_all
 
