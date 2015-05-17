@@ -3,14 +3,31 @@
 class TestGLibFileUtils < Test::Unit::TestCase
   include GLibTestUtils
 
-  def test_format_size_for_display
-    only_glib_version(2, 16, 0)
+  sub_test_case "#format_size_for_display" do
+    def setup
+      only_glib_version(2, 16, 0)
+    end
 
-    assert_equal("1.0 KB", GLib.format_size_for_display(1024))
-    assert_equal("10.0 KB", GLib.format_size_for_display(1024 * 10))
-    assert_equal("1.0 MB", GLib.format_size_for_display(1024 * 1024))
-    assert_equal("1.5 MB", GLib.format_size_for_display(1024 * 1024 * 1.5))
-    assert_equal("1.0 GB", GLib.format_size_for_display(1024 * 1024 * 1024))
+    def test_kb
+      assert_equal("1.0 KB", GLib.format_size_for_display(1024))
+    end
+
+    def test_10kb
+      assert_equal("10.0 KB", GLib.format_size_for_display(1024 * 10))
+    end
+
+    def test_mb
+      assert_equal("1.0 MB", GLib.format_size_for_display(1024 * 1024))
+    end
+
+    def test_gb
+      assert_equal("1.0 GB", GLib.format_size_for_display(1024 * 1024 * 1024))
+    end
+
+    def test_over_guint32_value
+      guint32_max = 2 ** 32 - 1
+      assert_equal("4.0 GB", GLib.format_size_for_display(guint32_max + 1))
+    end
   end
 
   sub_test_case "#format_size" do
@@ -28,6 +45,11 @@ class TestGLibFileUtils < Test::Unit::TestCase
 
     def test_gb
       assert_equal("1.0 GB", GLib.format_size(1000 * 1000 * 1000))
+    end
+
+    def test_over_guint32_value
+      guint32_max = 2 ** 32 - 1
+      assert_equal("4.3 GB", GLib.format_size(guint32_max + 1))
     end
 
     sub_test_case "flags" do
