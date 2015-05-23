@@ -21,8 +21,6 @@ class TestGtkBuilder < Test::Unit::TestCase
 
     test "resource" do
       only_gtk_version(3, 10, 0)
-      # TODO: Generate gresource automatically instead of adding it into
-      # repository.
       resource = Gio::Resource.load(fixture_path("simple_window.gresource"))
       Gio::Resources.register(resource)
       begin
