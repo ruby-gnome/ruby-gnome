@@ -17,7 +17,7 @@ class TestGtkBuilder < Test::Unit::TestCase
       builder = Gtk::Builder.new(:file => ui_definition_file.path)
       assert_kind_of(Gtk::Dialog, builder["dialog1"])
     end
-    
+
     test "resource" do
       path = File.expand_path(File.dirname(__FILE__))
       resource = Gio::Resource.load("#{path}/data/simple_window.gresource")
@@ -30,7 +30,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     test "string" do
       builder = Gtk::Builder.new(:string => ui_definition_simple)
       assert_kind_of(Gtk::Window, builder["main-window"])
-    end  
+    end
   end
 
   def test_add_from_file
