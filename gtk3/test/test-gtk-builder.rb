@@ -23,9 +23,13 @@ class TestGtkBuilder < Test::Unit::TestCase
       only_gtk_version(3, 10, 0)
       resource = Gio::Resource.load(fixture_path("simple_window.gresource"))
       Gio::Resources.register(resource)
-      builder = Gtk::Builder.new(:resource => "/simple_window/simple_window.ui")
-      assert_kind_of(Gtk::Window, builder["window"])
-      Gio::Resources.unregister(resource)
+      begin
+        resource_path = "/simple_window/simple_window.ui"
+        builder = Gtk::Builder.new(:resource => resource_path)
+        assert_kind_of(Gtk::Window, builder["window"])
+      ensure
+        Gio::Resources.unregister(resource)
+      end
     end
 
     test "string" do
