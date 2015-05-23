@@ -7,10 +7,30 @@ class TestGtkBuilder < Test::Unit::TestCase
     assert_const_defined(Gtk::BuilderError, :INVALID_TAG)
   end
 
-  def test_new
-    assert_nothing_raised do
-      Gtk::Builder.new
+  sub_test_case ".new" do
+    test "no argument" do
+      builder = Gtk::Builder.new
+      assert_equal([], builder.objects)
     end
+
+    test "file" do
+      builder = Gtk::Builder.new(:file => ui_definition_file.path)
+      assert_kind_of(Gtk::Dialog, builder["dialog1"])
+    end
+    
+    test "resource" do
+      path = File.expand_path(File.dirname(__FILE__))
+      resource = Gio::Resource.load("#{path}/data/simple_window.gresource")
+      Gio::Resources.register(resource)
+      builder = Gtk::Builder.new(:resource => "/simple_window/simple_window.ui")
+      assert_kind_of(Gtk::Window, builder["window"])
+      Gio::Resources.unregister(resource)
+    end
+
+    test "string" do
+      builder = Gtk::Builder.new(:string => ui_definition_simple)
+      assert_kind_of(Gtk::Window, builder["main-window"])
+    end  
   end
 
   def test_add_from_file
