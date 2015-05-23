@@ -12,6 +12,7 @@ Makefile.lib
 /atk/ext/atk/rbatkversion.h
 /glib2/ext/glib2/glib-enum-types.c
 /glib2/ext/glib2/glib-enum-types.h
+/gio2/test/fixture/resource/ruby-gio2.gresource
 /gtk2/ext/gtk2/rbgdkkeysyms.h
 /gdk3/ext/gdk3/rbgdkkeysyms.h
 /gtksourceview2/ext/gtksourceview2/rbgtksourceview2version.h

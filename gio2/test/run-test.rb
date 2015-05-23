@@ -38,6 +38,10 @@ modules.each do |target, module_name|
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
+Dir.chdir(File.join(gio2_base, "test", "fixture", "resource")) do
+  system("rake") or exit(false)
+end
+
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require "glib-test-init"
 
