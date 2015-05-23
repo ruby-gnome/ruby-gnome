@@ -14,11 +14,13 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
 
     test "file" do
+      only_gtk_version(3, 10, 0)
       builder = Gtk::Builder.new(:file => ui_definition_file.path)
       assert_kind_of(Gtk::Dialog, builder["dialog1"])
     end
 
     test "resource" do
+      only_gtk_version(3, 10, 0)
       path = File.expand_path(File.dirname(__FILE__))
       resource = Gio::Resource.load("#{path}/data/simple_window.gresource")
       Gio::Resources.register(resource)
@@ -28,6 +30,7 @@ class TestGtkBuilder < Test::Unit::TestCase
     end
 
     test "string" do
+      only_gtk_version(3, 10, 0)
       builder = Gtk::Builder.new(:string => ui_definition_simple)
       assert_kind_of(Gtk::Window, builder["main-window"])
     end
