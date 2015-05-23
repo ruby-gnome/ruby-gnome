@@ -17,7 +17,6 @@
 module Gtk
   class Builder
     alias_method :initialize_raw, :initialize
-  
     def initialize(options={})
       file      = options[:file]
       resource  = options[:resource]
@@ -33,6 +32,7 @@ module Gtk
         initialize_raw
       end
     end
+
     alias_method :[], :get_object
 
     alias_method :add_from_string_raw, :add_from_string
