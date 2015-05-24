@@ -26,6 +26,10 @@ Dir.chdir(File.dirname(gresource_xml)) do
          File.basename(gresource_xml))
 end
 
+at_exit do
+  FileUtils.rm_f(gresource_bin)
+end
+
 resource = Gio::Resource.load(gresource_bin)
 Gio::Resources.register(resource)
 
@@ -47,6 +51,3 @@ window.signal_connect "destroy" do
   Gio::Resources.unregister(resource)
 end
 Gtk.main
-
-FileUtils.rm(gresource_bin)
-
