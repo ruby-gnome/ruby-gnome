@@ -49,6 +49,10 @@ gtk3_base = File.join(ruby_gnome2_base, "gtk3")
   $LOAD_PATH.unshift(File.join(target, "lib"))
 end
 
+Dir.chdir(File.join(gtk3_base, "test", "fixture")) do
+  system("rake") or exit(false)
+end
+
 $LOAD_PATH.unshift(File.join(glib_base, "test"))
 require 'glib-test-init'
 

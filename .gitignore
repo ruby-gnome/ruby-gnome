@@ -15,6 +15,7 @@ Makefile.lib
 /gio2/test/fixture/resource/ruby-gio2.gresource
 /gtk2/ext/gtk2/rbgdkkeysyms.h
 /gdk3/ext/gdk3/rbgdkkeysyms.h
+/gtk3/test/fixture/simple_window.gresource
 /gtksourceview2/ext/gtksourceview2/rbgtksourceview2version.h
 /gtksourceview3/ext/gtksourceview3/rbgtksourceview3version.h
 /goocanvas/ext/goocanvas/rbgoo_canvasversion.h
