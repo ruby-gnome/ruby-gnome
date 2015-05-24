@@ -20,7 +20,11 @@ gresource_xml = "#{current_path}/simple_window.gresource.xml"
 
 # Generate the resource file:
 # see here https://developer.gnome.org/gio/stable/glib-compile-resources.html
-system("glib-compile-resources --target #{gresource_bin} #{gresource_xml}")
+Dir.chdir(File.dirname(gresource_xml)) do
+  system("glib-compile-resources",
+         "--target", gresource_bin,
+         File.basename(gresource_xml))
+end
 
 resource = Gio::Resource.load(gresource_bin)
 Gio::Resources.register(resource)
