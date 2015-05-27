@@ -139,7 +139,7 @@ or on the ruby-gnome2-devel-en / ruby-gnome2-devel-ja mailing list
 
 ## Copying
 
-Copyright (c) 2002-2014 Ruby-GNOME2 Project Team
+Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
 
 This program is free software.
 You can distribute/modify this program under the terms of
