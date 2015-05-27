@@ -5,7 +5,7 @@
 ## Ruby-GNOME2 -- Ruby bindings for GNOME-2.x
 
 This is a set of bindings for the GNOME-2.x and GNOME-3.x libraries to
-use from Ruby 1.9.x, 2.0.0 and 2.1.
+use from Ruby 2.0.0, 2.1 and 2.2.
 
 ## Release packages
 
