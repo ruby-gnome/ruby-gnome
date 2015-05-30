@@ -90,6 +90,7 @@ module Gtk
       require "gtk3/about-dialog"
       require "gtk3/action"
       require "gtk3/action-group"
+      require "gtk3/binding-set"
       require "gtk3/border"
       require "gtk3/box"
       require "gtk3/button"
@@ -161,6 +162,8 @@ module Gtk
         widget_class = @base_module.const_get(:Widget)
         method_name = rubyish_method_name(info)
         define_method(info, widget_class, method_name)
+      when /\Abinding_/
+        # Ignore because singleton methods are defined.
       else
         super
       end
