@@ -2,10 +2,8 @@
 =begin
   bindings.rb - Ruby/GTK sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: bindings.rb,v 1.7 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 =begin
@@ -13,85 +11,103 @@ Usage:
   bindings.rb <filename>
 
   Following key bindings are effective in the TextView area.
-  
-    <space>      : scroll down by one page
-    <backspace>  : scroll up by one page
-    j            : move cursor donw by one line
-    k            : move cursor up by one line
+
+    <Control> + l     : scroll down by one page
+    <Control> + m     : scroll up by one page
+    <Control> + j     : move cursor donw by one line
+    <Control> + k     : move cursor up by one line
 
   clicking buttons cause following effect
 
-    "space"      : same as pressing <space> in text view area.
-    "back_space" : same as pressing <backspace> in text view area.
-    "cancel j/k" : disable 'j' and 'k' binding
+    "Ctrl + l"          : same as pressing <Control> + l in text view area.
+    "Ctrl + m"          : same as pressing <Control> + m in text view area.
+    "cancel Ctrl +j/k"  : disable <Control> + j and <Control> + k bindings.
 =end
+
 require "gtk3"
 
 class Pager < Gtk::TextView
-  type_register
-  
-  # widget's key binding can be defined like this
-  binding_set.add_signal(Gdk::Keyval::KEY_space, 0,
-                         "move_cursor", 
-                         Gtk::MovementStep::PAGES, 1, false)
-  binding_set.add_signal(Gdk::Keyval::KEY_BackSpace, 0,
-                         "move_cursor", 
-                         Gtk::MovementStep::PAGES, -1, false)
-  binding_set.add_signal(Gdk::Keyval::KEY_j, 0,
-                         "move_cursor",
-                         Gtk::MovementStep::DISPLAY_LINES, 1, false)
-  binding_set.add_signal(Gdk::Keyval::KEY_k, 0,
-                         "move_cursor",
-                         Gtk::MovementStep::DISPLAY_LINES, -1, false)
-
   def initialize(path)
     @path = path
     super()
-    @buffer = self.buffer
     load
     set_editable(false)
     set_size_request(400, 400)
   end
 
+  private
   def load
     open(@path).read.each_line do |line|
-      @buffer.insert_at_cursor(line)
+      buffer.insert_at_cursor(line)
     end
-    @buffer.place_cursor(@buffer.start_iter)
+    buffer.place_cursor(buffer.start_iter)
   end
 end
 
-path = ARGV[0] || __FILE__
+file_path = ARGV[0] || __FILE__
 
 window = Gtk::Window.new
 window.name = "pager_window"
-sw = Gtk::ScrolledWindow.new
-vbox = Gtk::Box.new(:vertical)
+
+css_provider = Gtk::CssProvider.new
+css_provider.load(:data => DATA.read)
+
 hbox = Gtk::Box.new(:horizontal)
-pager = Pager.new(path)
 
-hbox.add(button1 = Gtk::Button.new(:label => "space"))
-hbox.add(button2 = Gtk::Button.new(:label => "back_space"))
-hbox.add(button3 = Gtk::Button.new(:label => "cancel j/k"))
+hbox.add(button1 = Gtk::Button.new(:label => "Ctrl + l"))
+hbox.add(button2 = Gtk::Button.new(:label => "Ctrl + m"))
+hbox.add(button3 = Gtk::Button.new(:label => "Cancel Ctrl + j/k"))
 
-button1.signal_connect("clicked") do
-  Pager.binding_set.activate(Gdk::Keyval::KEY_space, 0, pager)
-end
-button2.signal_connect("clicked") do
-  pager.bindings_activate(Gdk::Keyval::KEY_BackSpace, 0)
-end
-button3.signal_connect("clicked") do
-  Pager.binding_set.entry_remove(Gdk::Keyval::KEY_j, 0)
-  Pager.binding_set.entry_remove(Gdk::Keyval::KEY_k, 0)
-end
+vbox = Gtk::Box.new(:vertical)
+sw = Gtk::ScrolledWindow.new
+sw.set_size_request(500, 500)
 
+pager = Pager.new(file_path)
+pager.style_context.add_provider(css_provider, Gtk::StyleProvider::PRIORITY_USER)
 sw.add(pager)
-vbox.add(hbox).add(sw)
+
+vbox.add(hbox)
+vbox.add(sw)
+
 window.add(vbox)
 window.show_all
 
+window.signal_connect("destroy") { Gtk.main_quit }
+
+binding_set = Gtk::BindingSet.find("MoveCursor")
+
+button1.signal_connect "clicked" do
+  binding_set.activate(Gdk::Keyval::KEY_l, Gdk::ModifierType::CONTROL_MASK, pager)
+  pager.grab_focus
+end
+
+button2.signal_connect "clicked" do
+  binding_set.activate(Gdk::Keyval::KEY_m, Gdk::ModifierType::CONTROL_MASK, pager)
+  pager.grab_focus
+end
+
+button3.signal_connect "clicked" do
+  binding_set.remove(Gdk::Keyval::KEY_j, Gdk::ModifierType::CONTROL_MASK)
+  binding_set.remove(Gdk::Keyval::KEY_k, Gdk::ModifierType::CONTROL_MASK)
+  pager.grab_focus
+end
+
 pager.grab_focus
 
-window.signal_connect("destroy") {Gtk.main_quit}
-
 Gtk.main
+
+__END__
+@binding-set MoveCursor {
+  bind "<Control>j" { "move-cursor" (display-lines, 1, 0) };
+  bind "<Control>k" { "move-cursor" (display-lines, -1, 0) };
+  bind "<Control>l" { "move-cursor" (buffer-ends, 1, 0) };
+  bind "<Control>m" { "move-cursor" (buffer-ends, -1, 0) };
+}
+GtkTextView {
+  -GtkWidget-cursor-color: green;
+  -GtkWidget-aspect-ratio: 1.0;
+  font: 20 Sans;
+  color: #aaa;
+  background-color: #333 ;
+  gtk-key-bindings: MoveCursor;
+}
