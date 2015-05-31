@@ -87,6 +87,8 @@ module Gtk
     end
 
     def require_libraries
+      require "gtk3/gdk-drag-context"
+
       require "gtk3/about-dialog"
       require "gtk3/action"
       require "gtk3/action-group"
@@ -157,11 +159,14 @@ module Gtk
         stock_module = @base_module.const_get(:Stock)
         method_name = rubyish_method_name(info, :prefix => "stock_")
         define_singleton_method(stock_module, method_name, info)
-      when /\Adrag_/
+      when /\Adrag_(?:source_|dest_|get_data\z|(?:un)highlight\z|begin|check_threshold\z)/
         # For OS X. It may be broken. It's not tested.
         widget_class = @base_module.const_get(:Widget)
         method_name = rubyish_method_name(info)
         define_method(info, widget_class, method_name)
+      when /\Adrag_/
+        method_name = rubyish_method_name(info, :prefix => "drag_")
+        define_method(info, Gdk::DragContext, method_name)
       when /\Abinding_/
         # Ignore because singleton methods are defined.
       else

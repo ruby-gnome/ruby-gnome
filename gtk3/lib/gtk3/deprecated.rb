@@ -275,7 +275,9 @@ module Gtk
     define_deprecated_const :DestDefaults, "Gtk::DestDefaults"
     define_deprecated_const :TargetFlags, "Gtk::TargetFlags"
     define_deprecated_singleton_method :finish, :warn => "Use 'Gdk::DragContext#finish'." do |_self, context, success, del, time|
-      context.finish(success, del, time)
+      context.finish(:success => success,
+                     :delete => delete,
+                     :time => time)
     end
     define_deprecated_singleton_method :set_icon_default, :warn => "Use 'Gdk::DragContext#set_icon_default'." do |_self, context|
       context.set_icon_default
@@ -1069,6 +1071,14 @@ module Gtk
 end
 
 module Gdk
+  class DragContext
+    define_deprecated_method_by_hash_args :finish,
+        'success, delete, time',
+        ':success => true, :delete => false, :time => Gdk::CURRENT_TIME' do |_self, success, delete, time|
+      [{:success => success, :delete => delete, :time => time}]
+    end
+  end
+
   class Event
     define_deprecated_method :event_widget, :warn => "Use 'Gdk::Event#widget'." do |_self|
       _self.widget
