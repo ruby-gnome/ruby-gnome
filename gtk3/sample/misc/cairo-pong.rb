@@ -4,10 +4,8 @@
 
   Original: gtkcairo sample by Evan Martins.
 
-  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team
+  Copyright (c) 2005-2015  Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: cairo-pong.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -149,7 +147,7 @@ module Pong
     end
 
     def draw(cr)
-      cr.set_source_rgba(1, 1, 1)
+      cr.set_source_rgb(1, 1, 1)
       cr.rectangle(0, 0, 1, 1)
       cr.fill
 
@@ -161,7 +159,7 @@ module Pong
         end
       end
 
-      cr.set_source_rgba(0, 0, 0)
+      cr.set_source_rgb(0, 0, 0)
       cr.save {@ball.draw(cr)}
     end
   end
@@ -213,5 +211,7 @@ module Pong
   end
 end
 
-Pong::Window.new.show_all
+window = Pong::Window.new
+window.show_all
+
 Gtk.main
