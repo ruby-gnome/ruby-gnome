@@ -9,7 +9,7 @@
 =end
 require "gtk3"
 
-unless Gtk::Version.or_later?(3.12.1) 
+unless Gtk::Version.or_later?(3, 12, 1)
   puts "This sample requires GTK+ 3.12.1 or later: #{Gtk::Version::STRING}"
   exit
 end
