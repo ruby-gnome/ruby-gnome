@@ -4,7 +4,7 @@
 
   Adapted (or stolen) from http://python-gtk-3-tutorial.readthedocs.org/en/latest/layout.html#flowbox
 
-  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
+  Copyright (c) 2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
 =end
 require "gtk3"
