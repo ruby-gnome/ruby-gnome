@@ -9,6 +9,11 @@
 =end
 require "gtk3"
 
+unless Gtk::Version.or_later?(3.12.1) 
+  puts "This sample requires GTK+ 3.12.1 or later: #{Gtk::Version::STRING}"
+  exit
+end
+
 COLORS = %w(AliceBlue AntiqueWhite AntiqueWhite1 AntiqueWhite2 AntiqueWhite3
             AntiqueWhite4 aqua aquamarine aquamarine1 aquamarine2 aquamarine3
             aquamarine4 azure azure1 azure2 azure3 azure4 beige bisque bisque1
