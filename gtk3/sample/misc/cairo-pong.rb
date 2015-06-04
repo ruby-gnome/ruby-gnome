@@ -100,7 +100,7 @@ module Pong
 
     def update(ball)
       # is the ball coming towards us?
-      if (ball.x < @x && ball.dx > 0) || 
+      if (ball.x < @x && ball.dx > 0) ||
           (ball.x > @x && ball.dx < 0)
         # move to intercept it
         @y = ball.y
