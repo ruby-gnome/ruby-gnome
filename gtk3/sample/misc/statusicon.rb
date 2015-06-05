@@ -6,8 +6,6 @@
 
   Copyright (c) 2006-2015 Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: statusicon.rb,v 1.1 2006/11/17 18:12:41 mutoh Exp $
 =end
 
 require "gtk3"
@@ -69,21 +67,21 @@ class StatusIconSample < Gtk::StatusIcon
     unless @dialog
       @dialog = Gtk::MessageDialog.new(:parent => nil, :flags => 0,
                                        :type => Gtk::MessageType::QUESTION,
-                                       :buttons_type => Gtk::MessageDialog::ButtonsType::CLOSE,
+                                       :buttons_type => Gtk::ButtonsType::CLOSE,
                                        :message => "You wanna test the status icon?")
-      @dialog.window_position = Gtk::Window::Position::CENTER
+      @dialog.window_position = Gtk::WindowPosition::CENTER
 
       @dialog.signal_connect("response") {@dialog.hide}
       @dialog.signal_connect("delete_event") {@dialog.hide_on_delete}
 
-      toggle = Gtk::ToggleButton.new("_Show the icon")
+      toggle = Gtk::ToggleButton.new(:label => "_Show the icon", :use_underline => true)
       @dialog.child.pack_end(toggle, :expand => true, :fill => true, :padding => 6)
       toggle.active = visible?
       toggle.signal_connect("toggled") do |w|
         set_visible(w.active?)
       end
 
-      toggle = Gtk::ToggleButton.new("_Change the icon")
+      toggle = Gtk::ToggleButton.new(:label => "_Change the icon", :use_underline => true)
       @dialog.child.pack_end(toggle, :expand => true, :fill => true, :padding => 6)
       toggle.active = (@timeout != 0)
       toggle.signal_connect("toggled") do
