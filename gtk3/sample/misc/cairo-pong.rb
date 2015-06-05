@@ -4,10 +4,8 @@
 
   Original: gtkcairo sample by Evan Martins.
 
-  Copyright (c) 2005,2006  Ruby-GNOME2 Project Team
+  Copyright (c) 2005-2015  Ruby-GNOME2 Project Team
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: cairo-pong.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
 require "gtk3"
@@ -65,7 +63,7 @@ module Pong
 
   class Ball < CenteredCircle
     attr_accessor :dx, :dy
-    def initialize(dx=0.02, dy=0.02)
+    def initialize(dx = 0.02, dy = 0.02)
       super(0.8, 0.5, 0.04, 0.04)
       @dx = dx
       @dy = dy
@@ -102,23 +100,23 @@ module Pong
 
     def update(ball)
       # is the ball coming towards us?
-      if (ball.x < @x and ball.dx > 0) or
-          (ball.x > @x and ball.dx < 0)
+      if (ball.x < @x && ball.dx > 0) ||
+          (ball.x > @x && ball.dx < 0)
         # move to intercept it
         @y = ball.y
       end
     end
 
     def ball_hit?(ball)
-      ball.y > min_y and ball.y < max_y
+      ball.y > min_y && ball.y < max_y
     end
 
     def update_ball(ball)
       if ball_hit?(ball)
-        if ball.min_x < @x and ball.max_x > min_x # hit our left side
+        if ball.min_x < @x && ball.max_x > min_x # hit our left side
           ball.x -= (ball.max_x - min_x)
           ball.dx = -ball.dx
-        elsif ball.max_x > @x and ball.min_x < max_x # hit our right side
+        elsif ball.max_x > @x && ball.min_x < max_x # hit our right side
           ball.x += (max_x - ball.min_x)
           ball.dx = -ball.dx
         end
@@ -129,7 +127,7 @@ module Pong
   class Field
     attr_accessor :width, :height
 
-    def initialize(margin=0.05)
+    def initialize(margin = 0.05)
       @margin = margin
 
       @left_paddle = Paddle.new(self, @margin, 0.5)
@@ -149,7 +147,7 @@ module Pong
     end
 
     def draw(cr)
-      cr.set_source_rgba(1, 1, 1)
+      cr.set_source_rgb(1, 1, 1)
       cr.rectangle(0, 0, 1, 1)
       cr.fill
 
@@ -157,24 +155,24 @@ module Pong
         cr.set_source_rgba(0.8, 0.8, 0.8, 0.8)
         cr.set_line_join(Cairo::LINE_JOIN_ROUND)
         @paddles.each do |paddle|
-          cr.save {paddle.draw(cr)}
+          cr.save { paddle.draw(cr) }
         end
       end
 
-      cr.set_source_rgba(0, 0, 0)
-      cr.save {@ball.draw(cr)}
+      cr.set_source_rgb(0, 0, 0)
+      cr.save { @ball.draw(cr) }
     end
   end
 
   class Window < Gtk::Window
-    def initialize(speed=30)
+    def initialize(speed = 30)
       super()
       @speed = speed
 
       self.title = "Pong Demonstration"
       signal_connect("destroy") { Gtk.main_quit }
       signal_connect("key_press_event") do |widget, event|
-        if event.state.control_mask? and event.keyval == Gdk::Keyval::KEY_q
+        if event.state.control_mask? && event.keyval == Gdk::Keyval::KEY_q
           destroy
           true
         else
@@ -213,5 +211,7 @@ module Pong
   end
 end
 
-Pong::Window.new.show_all
+window = Pong::Window.new
+window.show_all
+
 Gtk.main
