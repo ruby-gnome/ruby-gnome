@@ -113,9 +113,9 @@ current dependencies are:
 * Ruby/GStreamer
   * depends on Ruby/GLib.
 
-### Install from github master branch
+### Install from GitHub master branch
 
-You can also install this gem from github master branch.
+You can also install this gem from GitHub master branch.
 
     % git clone https://github.com/ruby-gnome2/ruby-gnome2.git
     % cd ruby-gnome2
