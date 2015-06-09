@@ -735,10 +735,10 @@ set_prop_func(GObject* object,
 static void
 class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
 {
-    GObjectClass* g_class = G_OBJECT_CLASS(g_class_);
+    GObjectClass* g_object_class = G_OBJECT_CLASS(g_class);
 
-    g_class->set_property = set_prop_func;
-    g_class->get_property = get_prop_func;
+    g_object_class->set_property = set_prop_func;
+    g_object_class->get_property = get_prop_func;
 }
 
 static VALUE
