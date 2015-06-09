@@ -26,7 +26,7 @@ class Pango::Layout
   end
 
   def width_in_points=(width)
-    width *= Pango::SCALE
+    self.width = width * Pango::SCALE
   end
 end
 
