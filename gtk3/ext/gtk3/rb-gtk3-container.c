@@ -110,7 +110,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 {
     GObject *object;
 
-    rb_p(rb_str_new_cstr("initialize"));
     rb_call_super(argc, argv);
 
     object = RVAL2GOBJ(self);
