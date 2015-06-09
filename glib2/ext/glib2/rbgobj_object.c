@@ -732,7 +732,6 @@ set_prop_func(GObject* object,
     rb_funcall(GOBJ2RVAL(object), ruby_setter, 1, GVAL2RVAL(value));
 }
 
-// FIXME: use rb_protect
 static void
 class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
 {
