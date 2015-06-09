@@ -739,12 +739,6 @@ class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
 
     g_class->set_property = set_prop_func;
     g_class->get_property = get_prop_func;
-
-#if 0
-    VALUE class_init_proc = (VALUE)class_data;
-    rb_funcall(proc_mod_eval, rb_intern("call"), 2,
-               GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class)), class_init_proc);
-#endif
 }
 
 static VALUE
