@@ -18,7 +18,7 @@
  *  MA  02110-1301  USA
  */
 
-#include "rb-gtk3.h"
+#include "rb-gtk3-private.h"
 
 /*
 #if GTK_CHECK_VERSION(3, 10, 0)
@@ -279,21 +279,6 @@ rb_gtk3_action_group_mark(gpointer object)
 }
 #endif
 
-static void
-rb_gtk3_container_mark_callback(GtkWidget *widget,
-                                G_GNUC_UNUSED gpointer data)
-{
-    rbgobj_gc_mark_instance(widget);
-}
-
-static void
-rb_gtk3_container_mark(gpointer object)
-{
-    gtk_container_forall(GTK_CONTAINER(object),
-                         rb_gtk3_container_mark_callback,
-                         NULL);
-}
-
 #ifndef RB_GTK_UI_MANAGER_IS_DEPRECATED
 static void
 rb_gtk3_ui_manager_mark(gpointer object)
@@ -324,8 +309,9 @@ Init_gtk3(void)
 #ifndef RB_GTK_ACTION_GROUP_IS_DEPRECATED
     rbgobj_register_mark_func(GTK_TYPE_ACTION_GROUP, rb_gtk3_action_group_mark);
 #endif
-    rbgobj_register_mark_func(GTK_TYPE_CONTAINER, rb_gtk3_container_mark);
 #ifndef RB_GTK_UI_MANAGER_IS_DEPRECATED
     rbgobj_register_mark_func(GTK_TYPE_UI_MANAGER, rb_gtk3_ui_manager_mark);
 #endif
+
+    rb_gtk3_container_init();
 }
