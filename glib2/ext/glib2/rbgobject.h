@@ -229,6 +229,8 @@ extern void g_value_set_ruby_value(GValue* value, VALUE ruby);
 /* rbgobj_object.c */
 extern void rbgobj_register_property_setter(GType gtype, const char* prop_name, RValueToGValueFunc func);
 extern void rbgobj_register_property_getter(GType gtype, const char* prop_name, GValueToRValueFunc func);
+extern void rbgobj_class_init_func(gpointer g_class, gpointer class_data);
+extern void rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init);
 
 /* rbgobj_boxed.c */
 extern VALUE rbgobj_boxed_create(VALUE klass); /* deprecated */

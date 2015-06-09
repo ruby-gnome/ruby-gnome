@@ -732,8 +732,8 @@ set_prop_func(GObject* object,
     rb_funcall(GOBJ2RVAL(object), ruby_setter, 1, GVAL2RVAL(value));
 }
 
-static void
-class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
+void
+rbgobj_class_init_func(gpointer g_class, G_GNUC_UNUSED gpointer class_data)
 {
     GObjectClass* g_object_class = G_OBJECT_CLASS(g_class);
 
@@ -741,39 +741,42 @@ class_init_func(gpointer g_class_, G_GNUC_UNUSED gpointer class_data)
     g_object_class->get_property = get_prop_func;
 }
 
-static VALUE
-rg_s_type_register(int argc, VALUE* argv, VALUE self)
+void
+rbgobj_register_type(VALUE klass, VALUE type_name, GClassInitFunc class_init)
 {
-    VALUE type_name, flags;
-    volatile VALUE class_init_proc = Qnil;
     GType parent_type;
-    GTypeInfo* info;
-
-    rb_scan_args(argc, argv, "03", &type_name, &info, &flags);
+    GTypeInfo *info;
 
     {
-        const RGObjClassInfo* cinfo = rbgobj_lookup_class(self);
-        if (cinfo->klass == self)
-            rb_raise(rb_eTypeError, "already registered");
+        const RGObjClassInfo *cinfo = rbgobj_lookup_class(klass);
+        if (cinfo->klass == klass)
+            rb_raise(rb_eTypeError,
+                     "already registered class: <%s>",
+                     RBG_INSPECT(klass));
     }
 
     {
-        VALUE superclass = rb_funcall(self, rb_intern("superclass"), 0);
-        const RGObjClassInfo* cinfo = rbgobj_lookup_class(superclass);
+        VALUE superclass = rb_funcall(klass, rb_intern("superclass"), 0);
+        const RGObjClassInfo *cinfo = rbgobj_lookup_class(superclass);
         if (cinfo->klass != superclass)
-            rb_raise(rb_eTypeError, "super class must be registered to GLib");
+            rb_raise(rb_eTypeError,
+                     "super class must be registered to GLib: <%s>",
+                     RBG_INSPECT(superclass));
         parent_type = cinfo->gtype;
     }
 
     if (NIL_P(type_name)) {
-        VALUE s = rb_funcall(self, rb_intern("name"), 0);
+        VALUE klass_name = rb_funcall(klass, rb_intern("name"), 0);
 
-        if (strlen(StringValuePtr(s)) == 0)
-            rb_raise(rb_eTypeError, "can't determine type name");
+        if (strlen(StringValueCStr(klass_name)) == 0)
+            rb_raise(rb_eTypeError,
+                     "can't determine type name: <%s>",
+                     RBG_INSPECT(klass));
 
-        type_name = rb_funcall(
-            rb_eval_string("lambda{|x| x.gsub(/::/,'') }"),
-            rb_intern("call"), 1, s);
+        type_name = rb_funcall(klass_name, rb_intern("gsub"),
+                               2,
+                               rb_str_new_cstr("::"),
+                               rb_str_new_cstr(""));
     }
 
     {
@@ -786,9 +789,9 @@ rg_s_type_register(int argc, VALUE* argv, VALUE self)
         info->class_size     = query.class_size;
         info->base_init      = NULL;
         info->base_finalize  = NULL;
-        info->class_init     = class_init_func;
+        info->class_init     = class_init;
         info->class_finalize = NULL;
-        info->class_data     = (gpointer)class_init_proc;
+        info->class_data     = NULL;
         info->instance_size  = query.instance_size;
         info->n_preallocs    = 0;
         info->instance_init  = NULL;
@@ -797,32 +800,44 @@ rg_s_type_register(int argc, VALUE* argv, VALUE self)
 
     {
         GType type = g_type_register_static(parent_type,
-                                            StringValuePtr(type_name),
+                                            StringValueCStr(type_name),
                                             info,
-                                            NIL_P(flags) ? 0 : NUM2INT(flags));
-        G_RELATIVE(self, class_init_proc);
+                                            0);
 
-        rbgobj_register_class(self, type, TRUE, TRUE);
+        rbgobj_register_class(klass, type, TRUE, TRUE);
 
         {
-            RGObjClassInfo* cinfo = (RGObjClassInfo*)rbgobj_lookup_class(self);
+            RGObjClassInfo *cinfo = (RGObjClassInfo *)rbgobj_lookup_class(klass);
             cinfo->flags |= RBGOBJ_DEFINED_BY_RUBY;
         }
 
         {
             GType parent = g_type_parent(type);
-            const RGObjClassInfo* cinfo =  GTYPE2CINFO(parent);
-            VALUE m = rb_define_module_under(self, RubyGObjectHookModule);
+            const RGObjClassInfo *cinfo =  GTYPE2CINFO(parent);
+            VALUE initialize_module;
 
-            if (! (cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
-                rbg_define_method(m, "initialize", rg_initialize, -1);
+            initialize_module = rb_define_module_under(klass,
+                                                       RubyGObjectHookModule);
+            if (!(cinfo->flags & RBGOBJ_DEFINED_BY_RUBY)) {
+                rbg_define_method(initialize_module,
+                                  "initialize", rg_initialize, -1);
             }
 
-            rb_include_module(self, m);
+            rb_include_module(klass, initialize_module);
         }
-
-        return Qnil;
     }
+}
+
+static VALUE
+rg_s_type_register(int argc, VALUE *argv, VALUE self)
+{
+    VALUE type_name;
+
+    rb_scan_args(argc, argv, "01", &type_name);
+
+    rbgobj_register_type(self, type_name, rbgobj_class_init_func);
+
+    return Qnil;
 }
 
 /**********************************************************************/
