@@ -107,7 +107,21 @@ array_c_to_ruby_sized_interface(gconstpointer *elements,
     case GI_INFO_TYPE_BOXED:
     case GI_INFO_TYPE_ENUM:
     case GI_INFO_TYPE_FLAGS:
+        interface_name = g_info_type_to_string(interface_type);
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        rb_raise(rb_eNotImpError,
+                 "TODO: GIArgument(array)[c][interface(%s)](%s) -> Ruby",
+                 interface_name,
+                 g_type_name(gtype));
+        break;
     case GI_INFO_TYPE_OBJECT:
+        for (i = 0; i < n_elements; i++) {
+            rb_ary_push(rb_array, GOBJ2RVAL((GObject *)(elements[i])));
+        }
+        g_base_info_unref(interface_info);
+        g_base_info_unref(element_type_info);
+        break;
     case GI_INFO_TYPE_INTERFACE:
     case GI_INFO_TYPE_CONSTANT:
     case GI_INFO_TYPE_INVALID_0:
