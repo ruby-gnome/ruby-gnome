@@ -145,6 +145,18 @@ This program is free software.
 You can distribute/modify this program under the terms of
 the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1.
 
+### Exceptions
+
+Some GTK+ 3 examples are licensed under GNU Free Documentation License
+1.3 or any later version later; with no Invariant Sections, no
+Front-Cover Texts, and no Back-Cover Texts.
+
+Because they are based on scripts in
+[PyGObject-Tutorial](https://github.com/sebp/PyGObject-Tutorial).
+[PyGObject-Tutorial is licensed under GFDL 1.3](https://github.com/sebp/PyGObject-Tutorial/blob/master/COPYING).
+
+See gtk3/examples/ directory for details.
+
 ## Project Website
 
 [http://ruby-gnome2.sourceforge.jp/](http://ruby-gnome2.sourceforge.jp/)
