@@ -313,7 +313,7 @@ rb_gtk3_ui_manager_mark(gpointer object)
 #endif
 
 void
-Init_gtk3 (void)
+Init_gtk3(void)
 {
     rb_gi_callback_register_finder(rb_gtk3_callback_finder);
 
