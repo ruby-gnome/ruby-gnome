@@ -170,15 +170,6 @@ rbgobj_init_object_class(VALUE klass)
 
 /**********************************************************************/
 
-static gboolean
-is_gtkobject(GObject *gobj)
-{
-    static GType gtype_gtkobject = G_TYPE_INVALID;
-    if (!gtype_gtkobject)
-        gtype_gtkobject = g_type_from_name("GtkObject");
-    return gtype_gtkobject && g_type_is_a(G_OBJECT_TYPE(gobj), gtype_gtkobject);
-}
-
 static void
 gobj_mark(gpointer ptr)
 {
@@ -227,15 +218,7 @@ rg_s_new_bang(int argc, VALUE *argv, VALUE self)
 
     gobj = rbgobj_gobject_new(cinfo->gtype, params_hash);
     result = GOBJ2RVAL(gobj);
-
-    // XXX: Ughhhhh
-    if (is_gtkobject(gobj)){
-        // We can't call gtk_object_sink() here.
-        // But hopefully someone will call it in the future.
-        //gtk_object_sink(gobj);
-    } else {
-        g_object_unref(gobj);
-    }
+    g_object_unref(gobj);
 
     return result;
 }
@@ -657,13 +640,6 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
         Check_Type(params_hash, RUBY_T_HASH);
 
     gobj = rbgobj_gobject_new(RVAL2GTYPE(self), params_hash);
-
-    if (is_gtkobject(gobj)){
-        gobj = g_object_ref(gobj);
-        // We can't call gtk_object_sink() here.
-        // But hopefully someone will call it in the future.
-        //gtk_object_sink(gobj);
-    }
 
     G_INITIALIZE(self, gobj);
     return Qnil;
