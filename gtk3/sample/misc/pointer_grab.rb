@@ -16,12 +16,12 @@ button2 = Gtk::Button.new(:label => "Ungrab Window!")
 button1.signal_connect("clicked") do
   Gdk.pointer_grab(window.window, true, :button_press_mask,
                    window.window, cursor, Gdk::CURRENT_TIME)
-  p Gdk.pointer_is_grabbed
+  p Gdk.pointer_is_grabbed?
 end
 
 button2.signal_connect("clicked") do
   Gdk.pointer_ungrab(Gdk::CURRENT_TIME)
-  p Gdk.pointer_is_grabbed
+  p Gdk.pointer_is_grabbed?
 end
 
 vbox = Gtk::Box.new(:vertical, 0)
