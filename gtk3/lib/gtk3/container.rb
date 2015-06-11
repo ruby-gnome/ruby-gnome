@@ -1,4 +1,4 @@
-# Copyright (C) 2014  Ruby-GNOME2 Project Team
+# Copyright (C) 2014-2015  Ruby-GNOME2 Project Team
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,13 @@
 
 module Gtk
   class Container
+    class << self
+      alias_method :child_properties_raw, :child_properties
+      def child_properties
+        child_properties_raw[0]
+      end
+    end
+
     include Enumerable
 
     def <<(widget)

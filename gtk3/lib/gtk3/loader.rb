@@ -150,6 +150,16 @@ module Gtk
       require "gtk3/deprecated"
     end
 
+    def rubyish_method_name(function_info, options={})
+      name = function_info.name
+      case name
+      when /\Alist_(child_properties)\z/
+        $1
+      else
+        super
+      end
+    end
+
     def load_function_info(info)
       name = info.name
       case name
