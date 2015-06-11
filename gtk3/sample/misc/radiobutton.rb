@@ -2,46 +2,44 @@
 =begin
   radiobutton.rb - Ruby/GTK2 sample script.
 
-  Copyright (c) 2002-2006 Ruby-GNOME2 Project Team 
+  Copyright (c) 2002-2015 Ruby-GNOME2 Project Team 
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: radiobutton.rb,v 1.10 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 window = Gtk::Window.new("Gtk::RadioButton sample")
-window.signal_connect("destroy"){Gtk.main_quit}
+window.signal_connect("destroy") { Gtk.main_quit }
 
-box1 = Gtk::Box.new(:vertical)
-window.add(box1)
+main_vbox = Gtk::Box.new(:vertical)
+window.add(main_vbox)
 
-box2 = Gtk::Box.new(:vertical, 10)
-box2.border_width = 10
-box1.add(box2)
+top_box = Gtk::Box.new(:vertical, 10)
+top_box.border_width = 10
+main_vbox.add(top_box)
 
-button1 = Gtk::RadioButton.new("_button1")
-button2 = Gtk::RadioButton.new(button1, "_button2", false)
-button3 = Gtk::RadioButton.new(button1, Gtk::Stock::QUIT)
+button1 = Gtk::RadioButton.new(:label => "_button1", :use_underline => true)
+button2 = Gtk::RadioButton.new(:member => button1, :label => "_button2", :use_underline => false)
 
-box2.add(button1).add(button2).add(button3)
+top_box.add(button1)
+top_box.add(button2)
 
-box1.add(Gtk::Separator.new(:horizontal))
+main_vbox.add(Gtk::Separator.new(:horizontal))
 
-box2 = Gtk::Box.new(:vertical, 10)
-box2.border_width = 10
-box1.add(box2)
+bottom_box = Gtk::Box.new(:vertical, 10)
+bottom_box.border_width = 10
+main_vbox.add(bottom_box)
 
 close = Gtk::Button.new(:label => "close")
 close.signal_connect("clicked") do
   Gtk.main_quit
 end
-box2.add(close)
+
+bottom_box.add(close)
 
 close.can_default = true
 close.grab_default
 
-window.signal_connect("destroy"){Gtk.main_quit}
 window.show_all
 
 Gtk.main
