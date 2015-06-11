@@ -2,7 +2,7 @@
 =begin
   properties.rb -
 
-  GLib::Object#properties and Gtk::Container#list_child_properties sample script.
+  GLib::Object#properties and Gtk::Container#child_properties sample script.
 
   Copyright (C) 2004-2006 Masao Mutoh
   Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
@@ -79,7 +79,7 @@ p b.get_property("fuga")
 b.set_property("fuga", 1)
 p b.get_property("fuga")
 
-p MyButton.list_child_properties
+p MyButton.child_properties
 p child = b.child
 p b.child_get_property(child, "hoge")
 b.child_set_property(child, "hoge", 2)
