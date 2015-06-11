@@ -98,11 +98,15 @@ static void
 class_init_func(gpointer g_class, gpointer class_data)
 {
     GtkContainerClass *g_container_class = GTK_CONTAINER_CLASS(g_class);
+    VALUE rb_class;
 
     rbgobj_class_init_func(g_class, class_data);
 
     g_container_class->set_child_property = set_child_prop_func;
     g_container_class->get_child_property = get_child_prop_func;
+
+    rb_class = GTYPE2CLASS(G_TYPE_FROM_CLASS(g_class));
+    rb_funcall(rb_class, rb_intern("init"), 0);
 }
 
 static VALUE
@@ -114,6 +118,8 @@ rg_initialize(int argc, VALUE *argv, VALUE self)
 
     object = RVAL2GOBJ(self);
     g_object_ref_sink(object);
+
+    rb_funcall(self, rb_intern("initialize_post"), 0);
 
     return Qnil;
 }

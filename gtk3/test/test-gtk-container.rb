@@ -15,6 +15,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 class TestGtkContainer < Test::Unit::TestCase
+  include GtkTestUtils
+
   class TestClassMethods < self
     def test_child_properties
       assert_equal(["x", "y"],
@@ -75,6 +77,68 @@ class TestGtkContainer < Test::Unit::TestCase
 
     def test_not_set_explicitly
       assert_nil(@container.focus_chain)
+    end
+  end
+
+  class TestTemplate < self
+    def test_resource
+      only_gtk_version(3, 10, 0)
+      resource = Gio::Resource.load(fixture_path("template.gresource"))
+      Gio::Resources.register(resource)
+      begin
+        self.class.class_eval <<EOS
+        class MyWindow < Gtk::Window
+          type_register
+          class << self
+            def init
+              set_template(:resource => "/template/template.ui")
+              bind_template_child("label")
+            end
+          end
+        end
+EOS
+        window = MyWindow.new
+        assert_kind_of(Gtk::Label, window.label)
+      ensure
+        Gio::Resources.unregister(resource)
+      end
+    end
+
+    def ui_definition
+      <<-EOS
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <template class="TestGtkContainerTestTemplateMyDataWindow" parent="GtkWindow">
+    <property name="can_focus">False</property>
+    <child>
+      <object class="GtkLabel" id="label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">label</property>
+        <property name="ellipsize">end</property>
+      </object>
+    </child>
+  </template>
+</interface>
+EOS
+    end
+
+    def test_data
+      only_gtk_version(3, 10, 0)
+      self.class.class_eval <<EOS
+        class MyDataWindow < Gtk::Window
+          type_register
+          class << self
+            def init
+              set_template(:data => '#{ui_definition}')
+              bind_template_child("label")
+            end
+          end
+        end
+EOS
+      window = MyDataWindow.new
+      assert_kind_of(Gtk::Label, window.label)
     end
   end
 end
