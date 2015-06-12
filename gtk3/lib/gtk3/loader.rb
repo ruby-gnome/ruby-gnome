@@ -120,6 +120,7 @@ module Gtk
       require "gtk3/paned"
       require "gtk3/radio-action"
       require "gtk3/radio-button"
+      require "gtk3/scale-button"
       require "gtk3/scrolled-window"
       require "gtk3/search-bar"
       require "gtk3/selection-data"
