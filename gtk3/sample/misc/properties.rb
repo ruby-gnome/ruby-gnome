@@ -1,23 +1,22 @@
 #!/usr/bin/env ruby
 =begin
-  properties.rb - 
+  properties.rb -
 
   GLib::Object#properties and Gtk::Container#child_properties sample script.
 
   Copyright (C) 2004-2006 Masao Mutoh
+  Copyright (c) 2004-2015 Ruby-GNOME2 Project Team
 
   This program is licenced under the same licence as Ruby-GNOME2.
-
-  $Id: properties.rb,v 1.3 2006/06/17 13:18:12 mutoh Exp $
 =end
 
-require 'gtk3'
+require "gtk3"
 
 class MyButton < Gtk::Button
   type_register
 
   def initialize(label = nil)
-    # XXX: 
+    # XXX:
     # When type_register() is used.
     # super is equivalent to GLib::Object#initialize.
     super("label" => label)
@@ -30,26 +29,28 @@ class MyButton < Gtk::Button
                                         "Fuga", # nick
                                         "fuga fuga", # blurb
                                         0,     # min
-                                        10000, # max
+                                        10_000,# max
                                         0,     # default
                                         GLib::Param::READABLE |
                                         GLib::Param::WRITABLE))
 
   # define new property "hoge"
-  install_child_property(GLib::Param::Int.new("hoge", # name
-                                      "Hoge", # nick
-                                      "hoge hoge", # blurb
-                                      0,     # min
-                                      10000, # max
-                                      0,     # default
-                                      GLib::Param::READABLE |
-                                      GLib::Param::WRITABLE))
+  install_child_property(1,GLib::Param::Int.new("hoge", # name
+                                                "Hoge", # nick
+                                                "hoge hoge", # blurb
+                                                0,     # min
+                                                10_000,# max
+                                                0,     # default
+                                                GLib::Param::READABLE |
+                                                GLib::Param::WRITABLE)
+                        )
 
   # implementation of the property "fuga"
   def fuga
     puts "MyButton#fuga is called"
     @fuga
   end
+
   def fuga=(arg)
     puts "MyButton#fuga= is called"
     @fuga = arg
@@ -61,6 +62,7 @@ class MyButton < Gtk::Button
     puts "MyButton#get_hoge is called"
     @hoge
   end
+
   def set_hoge(child, arg)
     puts "MyButton#set_hoge is called"
     @hoge = arg
