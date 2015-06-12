@@ -10,7 +10,7 @@ require "gtk3"
 
 window = Gtk::Window.new
 window.set_size_request(300, 300)
-scale = Gtk::ScaleButton.new(Gtk::IconSize::BUTTON, 0, 100, 2, nil)
+scale = Gtk::ScaleButton.new
 scale.set_value(30)
 scale.set_valign(Gtk::Align::END)
 scale.set_halign(Gtk::Align::END)
