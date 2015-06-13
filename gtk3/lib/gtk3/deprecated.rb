@@ -722,10 +722,21 @@ module Gtk
     extend GLib::Deprecatable
     define_deprecated_method_by_hash_args :initialize,
         'title, parent, manager, *buttons',
-        ':title => nil, :parent => nil, :recent_manager => nil, :buttons => nil' do
-      |_self, title, parent, *buttons|
-      recent_manager = buttons.first.is_a?(RecentManager) ? buttons.shift : nil
-      [{:title => title, :parent => parent, :recent_manager => manager, :buttons => buttons}]
+        ':title => nil, :parent => nil, ' +
+        ':recent_manager => nil, :buttons => nil' do |_self, title, parent, *buttons|
+      if buttons.first.is_a?(RecentManager)
+        recent_manager = buttons.shift
+      else
+        recent_manager = nil
+      end
+      [
+        {
+          :title          => title,
+          :parent         => parent,
+          :recent_manager => recent_manager,
+          :buttons        => buttons,
+        },
+      ]
     end
   end
 
