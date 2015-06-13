@@ -33,7 +33,7 @@ module GLib
 
     def define_deprecated_method_by_hash_args(deprecated_method, old_args, new_args, req_argc = 0, &block)
       klass = self
-      alias_name = "__deprecatable_#{deprecated_method}__"
+      alias_name = "__deprecatable_#{object_id}_#{deprecated_method}__"
       alias_method alias_name, deprecated_method
       private alias_name
 
