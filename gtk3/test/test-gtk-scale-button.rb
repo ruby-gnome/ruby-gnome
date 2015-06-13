@@ -16,7 +16,7 @@
 
 class TestGtkScaleButton < Test::Unit::TestCase
   include GtkTestUtils
-  
+
   sub_test_case(".new") do
     test "no argument" do
       scale_button = Gtk::ScaleButton.new
@@ -26,22 +26,22 @@ class TestGtkScaleButton < Test::Unit::TestCase
       assert_equal(2.0, scale_button.adjustment.step_increment)
       assert_equal(nil, scale_button.icons)
     end
-    
+
     test ":icon_size" do
       scale_button = Gtk::ScaleButton.new(:icon_size => Gtk::IconSize::MENU)
       assert_equal(Gtk::IconSize::MENU, scale_button.get_property("size"))
     end
-    
+
     test ":min" do
       scale_button = Gtk::ScaleButton.new(:min => 4.0)
       assert_equal(4.0, scale_button.adjustment.lower)
     end
-  
+
     test ":max" do
       scale_button = Gtk::ScaleButton.new(:max => 90.0)
       assert_equal(90.0, scale_button.adjustment.upper)
     end
-    
+
     test ":step" do
       scale_button = Gtk::ScaleButton.new(:step => 5.0)
       assert_equal(5.0, scale_button.adjustment.step_increment)
