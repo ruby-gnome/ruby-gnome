@@ -23,6 +23,8 @@
 
 #include "rb-gtk3.h"
 
+G_GNUC_INTERNAL void rbgtk3_class_init_func(gpointer g_class, gpointer class_data);
+G_GNUC_INTERNAL void rbgtk3_initialize(VALUE self);
 G_GNUC_INTERNAL void rbgtk3_container_init(void);
 
 #endif
